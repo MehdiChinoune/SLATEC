@@ -41,7 +41,7 @@ SUBROUTINE SPPERM(X,N,Iperm,Ier)
   !* REVISION HISTORY  (YYMMDD)
   !   901004  DATE WRITTEN
   !   920507  Modified by M. McClain to revise prologue text.
-  
+
   INTEGER N, Iperm(*), i, Ier, indx, indx0, istrt
   REAL X(*), temp
   !* FIRST EXECUTABLE STATEMENT  SPPERM
@@ -51,7 +51,7 @@ SUBROUTINE SPPERM(X,N,Iperm,Ier)
     CALL XERMSG('SLATEC','SPPERM',&
       'The number of values to be rearranged, N, is not positive.',Ier,1)
     RETURN
-  ENDIF
+  END IF
   !
   !     CHECK WHETHER IPERM IS A VALID PERMUTATION
   !
@@ -61,13 +61,13 @@ SUBROUTINE SPPERM(X,N,Iperm,Ier)
       IF ( Iperm(indx)>0 ) THEN
         Iperm(indx) = -Iperm(indx)
         CYCLE
-      ENDIF
-    ENDIF
+      END IF
+    END IF
     Ier = 2
     CALL XERMSG('SLATEC','SPPERM',&
       'The permutation vector, IPERM, is not valid.',Ier,1)
     RETURN
-  ENDDO
+  END DO
   !
   !     REARRANGE THE VALUES OF X
   !
@@ -84,9 +84,9 @@ SUBROUTINE SPPERM(X,N,Iperm,Ier)
         indx0 = indx
         Iperm(indx) = -Iperm(indx)
         indx = Iperm(indx)
-      ENDDO
+      END DO
       X(indx0) = temp
-    ENDIF
-  ENDDO
+    END IF
+  END DO
   !
 END SUBROUTINE SPPERM

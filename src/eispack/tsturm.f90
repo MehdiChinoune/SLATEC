@@ -146,9 +146,9 @@ SUBROUTINE TSTURM(Nm,N,Eps1,D,E,E2,Lb,Ub,Mm,M,W,Z,Ierr,Rv1,Rv2,Rv3,Rv4,Rv5,Rv6)
       s1 = ABS(D(i)) + ABS(D(i-1))
       s2 = s1 + ABS(E(i))
       IF ( s2>s1 ) CYCLE
-    ENDIF
+    END IF
     E2(i) = 0.0E0
-  ENDDO
+  END DO
   !     .......... DETERMINE THE NUMBER OF EIGENVALUES
   !                IN THE INTERVAL ..........
   p = 1
@@ -172,11 +172,11 @@ SUBROUTINE TSTURM(Nm,N,Eps1,D,E,E2,Lb,Ub,Mm,M,W,Z,Ierr,Rv1,Rv2,Rv3,Rv4,Rv5,Rv6)
     IF ( q/=N ) THEN
       u = ABS(E(q+1))
       v = E2(q+1)
-    ENDIF
+    END IF
     xu = MIN(D(q)-(x1+u),xu)
     x0 = MAX(D(q)+(x1+u),x0)
     IF ( v==0.0E0 ) EXIT
-  ENDDO
+  END DO
   !
   x1 = MAX(ABS(xu),ABS(x0))*machep
   IF ( Eps1<=0.0E0 ) Eps1 = -x1
@@ -194,13 +194,13 @@ SUBROUTINE TSTURM(Nm,N,Eps1,D,E,E2,Lb,Ub,Mm,M,W,Z,Ierr,Rv1,Rv2,Rv3,Rv4,Rv5,Rv6)
       !
       DO i = 1, N
         Z(i,r) = 0.0E0
-      ENDDO
+      END DO
       !
       W(r) = D(p)
       Z(p,r) = 1.0E0
-    ENDIF
+    END IF
     GOTO 500
-  ENDIF
+  END IF
   200  xu = Lb
   !     .......... FOR I=K STEP -1 UNTIL M1 DO -- ..........
   DO ii = m1, k
@@ -208,8 +208,8 @@ SUBROUTINE TSTURM(Nm,N,Eps1,D,E,E2,Lb,Ub,Mm,M,W,Z,Ierr,Rv1,Rv2,Rv3,Rv4,Rv5,Rv6)
     IF ( xu<Rv4(i) ) THEN
       xu = Rv4(i)
       EXIT
-    ENDIF
-  ENDDO
+    END IF
+  END DO
   !
   IF ( x0>Rv5(k) ) x0 = Rv5(k)
   !     .......... NEXT BISECTION STEP ..........
@@ -227,7 +227,7 @@ SUBROUTINE TSTURM(Nm,N,Eps1,D,E,E2,Lb,Ub,Mm,M,W,Z,Ierr,Rv1,Rv2,Rv3,Rv4,Rv5,Rv6)
     !
     DO i = ip, q
       norm = MAX(norm,ABS(D(i))+ABS(E(i)))
-    ENDDO
+    END DO
     !     .......... EPS2 IS THE CRITERION FOR GROUPING,
     !                EPS3 REPLACES ZERO PIVOTS AND EQUAL
     !                ROOTS ARE MODIFIED BY EPS3,
@@ -250,7 +250,7 @@ SUBROUTINE TSTURM(Nm,N,Eps1,D,E,E2,Lb,Ub,Mm,M,W,Z,Ierr,Rv1,Rv2,Rv3,Rv4,Rv5,Rv6)
         IF ( x1-x0>=eps2 ) group = -1
         group = group + 1
         IF ( x1<=x0 ) x1 = x0 + eps3
-      ENDIF
+      END IF
       !     .......... ELIMINATION WITH INTERCHANGES AND
       !                INITIALIZATION OF VECTOR ..........
       v = 0.0E0
@@ -274,11 +274,11 @@ SUBROUTINE TSTURM(Nm,N,Eps1,D,E,E2,Lb,Ub,Mm,M,W,Z,Ierr,Rv1,Rv2,Rv3,Rv4,Rv5,Rv6)
             u = v - xu*Rv2(i-1)
             v = -xu*Rv3(i-1)
             CYCLE
-          ENDIF
-        ENDIF
+          END IF
+        END IF
         u = D(i) - x1 - xu*v
         IF ( i/=q ) v = E(i+1)
-      ENDDO
+      END DO
       !
       IF ( u==0.0E0 ) u = eps3
       Rv1(q) = u
@@ -292,7 +292,7 @@ SUBROUTINE TSTURM(Nm,N,Eps1,D,E,E2,Lb,Ub,Mm,M,W,Z,Ierr,Rv1,Rv2,Rv3,Rv4,Rv5,Rv6)
           Rv6(i) = (Rv6(i)-u*Rv2(i)-v*Rv3(i))/Rv1(i)
           v = u
           u = Rv6(i)
-        ENDDO
+        END DO
         !     .......... ORTHOGONALIZE WITH RESPECT TO PREVIOUS
         !                MEMBERS OF GROUP ..........
         IF ( group/=0 ) THEN
@@ -303,20 +303,20 @@ SUBROUTINE TSTURM(Nm,N,Eps1,D,E,E2,Lb,Ub,Mm,M,W,Z,Ierr,Rv1,Rv2,Rv3,Rv4,Rv5,Rv6)
             !
             DO i = p, q
               xu = xu + Rv6(i)*Z(i,j)
-            ENDDO
+            END DO
             !
             DO i = p, q
               Rv6(i) = Rv6(i) - xu*Z(i,j)
-            ENDDO
+            END DO
             !
-          ENDDO
-        ENDIF
+          END DO
+        END IF
         !
         norm = 0.0E0
         !
         DO i = p, q
           norm = norm + ABS(Rv6(i))
-        ENDDO
+        END DO
         !
         IF ( norm>=1.0E0 ) THEN
           !     .......... NORMALIZE SO THAT SUM OF SQUARES IS
@@ -325,17 +325,17 @@ SUBROUTINE TSTURM(Nm,N,Eps1,D,E,E2,Lb,Ub,Mm,M,W,Z,Ierr,Rv1,Rv2,Rv3,Rv4,Rv5,Rv6)
           !
           DO i = p, q
             u = u + Rv6(i)**2
-          ENDDO
+          END DO
           !
           xu = 1.0E0/SQRT(u)
           !
           DO i = 1, N
             Z(i,r) = 0.0E0
-          ENDDO
+          END DO
           !
           DO i = p, q
             Z(i,r) = Rv6(i)*xu
-          ENDDO
+          END DO
           !
           x0 = x1
           EXIT
@@ -347,12 +347,12 @@ SUBROUTINE TSTURM(Nm,N,Eps1,D,E,E2,Lb,Ub,Mm,M,W,Z,Ierr,Rv1,Rv2,Rv3,Rv4,Rv5,Rv6)
             !
             DO i = p, q
               Rv6(i) = Rv6(i)*xu
-            ENDDO
+            END DO
           ELSE
             Rv6(s) = eps4
             s = s + 1
             IF ( s>q ) s = p
-          ENDIF
+          END IF
           !     .......... ELIMINATION OPERATIONS ON NEXT VECTOR
           !                ITERATE ..........
           DO i = ip, q
@@ -363,16 +363,16 @@ SUBROUTINE TSTURM(Nm,N,Eps1,D,E,E2,Lb,Ub,Mm,M,W,Z,Ierr,Rv1,Rv2,Rv3,Rv4,Rv5,Rv6)
             IF ( Rv1(i-1)==E(i) ) THEN
               u = Rv6(i-1)
               Rv6(i-1) = Rv6(i)
-            ENDIF
+            END IF
             Rv6(i) = u - Rv4(i)*Rv6(i-1)
-          ENDDO
+          END DO
           !
           its = its + 1
-        ENDIF
-      ENDDO
-    ENDDO
+        END IF
+      END DO
+    END DO
     GOTO 500
-  ENDIF
+  END IF
   400 CONTINUE
   DO
     !     .......... IN-LINE PROCEDURE FOR STURM SEQUENCE ..........
@@ -385,10 +385,10 @@ SUBROUTINE TSTURM(Nm,N,Eps1,D,E,E2,Lb,Ub,Mm,M,W,Z,Ierr,Rv1,Rv2,Rv3,Rv4,Rv5,Rv6)
       ELSE
         v = ABS(E(i))/machep
         IF ( E2(i)==0.0E0 ) v = 0.0E0
-      ENDIF
+      END IF
       u = D(i) - x1 - v
       IF ( u<0.0E0 ) s = s + 1
-    ENDDO
+    END DO
     !
     SELECT CASE (isturm)
       CASE (1)
@@ -406,7 +406,7 @@ SUBROUTINE TSTURM(Nm,N,Eps1,D,E,E2,Lb,Ub,Mm,M,W,Z,Ierr,Rv1,Rv2,Rv3,Rv4,Rv5,Rv6)
           q = 0
           r = 0
           GOTO 100
-        ENDIF
+        END IF
       CASE (3)
         m1 = s + 1
         x1 = Ub
@@ -421,7 +421,7 @@ SUBROUTINE TSTURM(Nm,N,Eps1,D,E,E2,Lb,Ub,Mm,M,W,Z,Ierr,Rv1,Rv2,Rv3,Rv4,Rv5,Rv6)
         DO i = m1, m2
           Rv5(i) = Ub
           Rv4(i) = Lb
-        ENDDO
+        END DO
         !     .......... LOOP FOR K-TH EIGENVALUE
         !                FOR K=M2 STEP -1 UNTIL M1 DO --
         !                (-DO- NOT USED TO LEGALIZE -COMPUTED GO TO-) ..........
@@ -438,11 +438,11 @@ SUBROUTINE TSTURM(Nm,N,Eps1,D,E,E2,Lb,Ub,Mm,M,W,Z,Ierr,Rv1,Rv2,Rv3,Rv4,Rv5,Rv6)
             IF ( Rv5(s)>x1 ) Rv5(s) = x1
           ELSE
             Rv4(m1) = x1
-          ENDIF
-        ENDIF
+          END IF
+        END IF
         GOTO 300
     END SELECT
-  ENDDO
+  END DO
   !
   500 CONTINUE
   IF ( q>=N ) GOTO 700

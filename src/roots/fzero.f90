@@ -102,7 +102,7 @@ SUBROUTINE FZERO(F,B,C,R,Re,Ae,Iflag)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   REAL F, R1MACH
   REAL a, acbs, acmb, Ae, aw, B, C, cmb, er, fa, fb, fc, fx, &
     fz, p, q, R, Re, rw, t, tol, z
@@ -136,8 +136,8 @@ SUBROUTINE FZERO(F,B,C,R,Re,Ae,Iflag)
     IF ( SIGN(1.0E0,fz)/=SIGN(1.0E0,fc) ) THEN
       B = z
       fb = fz
-    ENDIF
-  ENDIF
+    END IF
+  END IF
   a = C
   fa = fc
   acbs = ABS(B-C)
@@ -154,7 +154,7 @@ SUBROUTINE FZERO(F,B,C,R,Re,Ae,Iflag)
       fb = fc
       C = a
       fc = fa
-    ENDIF
+    END IF
     !
     cmb = 0.5E0*(C-B)
     acmb = ABS(cmb)
@@ -175,7 +175,7 @@ SUBROUTINE FZERO(F,B,C,R,Re,Ae,Iflag)
       ELSE
         Iflag = 1
         RETURN
-      ENDIF
+      END IF
     ELSEIF ( fb==0.E0 ) THEN
       Iflag = 2
       RETURN
@@ -193,7 +193,7 @@ SUBROUTINE FZERO(F,B,C,R,Re,Ae,Iflag)
         IF ( p<0.E0 ) THEN
           p = -p
           q = -q
-        ENDIF
+        END IF
         !
         !   Update A and check for satisfactory reduction in the size of the
         !   bracketing interval.  If not, perform bisection.
@@ -211,8 +211,8 @@ SUBROUTINE FZERO(F,B,C,R,Re,Ae,Iflag)
           ELSE
             ic = 0
             acbs = acmb
-          ENDIF
-        ENDIF
+          END IF
+        END IF
         !
         !   Test for too small a change.
         !
@@ -231,12 +231,12 @@ SUBROUTINE FZERO(F,B,C,R,Re,Ae,Iflag)
           !   Use secant rule.
           !
           B = B + p/q
-        ENDIF
-      ENDIF
+        END IF
+      END IF
       !
       !   Have completed computation for new iterate B.
       !
-      20       t = B
+      20  t = B
       fb = F(t)
       kount = kount + 1
       !
@@ -245,7 +245,7 @@ SUBROUTINE FZERO(F,B,C,R,Re,Ae,Iflag)
       IF ( SIGN(1.0E0,fb)==SIGN(1.0E0,fc) ) THEN
         C = a
         fc = fa
-      ENDIF
-    ENDIF
-  ENDDO
+      END IF
+    END IF
+  END DO
 END SUBROUTINE FZERO

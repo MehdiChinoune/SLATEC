@@ -61,32 +61,32 @@ SUBROUTINE DFEHL(DF,Neq,T,Y,H,Yp,F1,F2,F3,F4,F5,Ys,Rpar,Ipar)
   ch = H/4.0D0
   DO k = 1, Neq
     Ys(k) = Y(k) + ch*Yp(k)
-  ENDDO
+  END DO
   CALL DF(T+ch,Ys,F1,Rpar,Ipar)
   !
   ch = 3.0D0*H/32.0D0
   DO k = 1, Neq
     Ys(k) = Y(k) + ch*(Yp(k)+3.0D0*F1(k))
-  ENDDO
+  END DO
   CALL DF(T+3.0D0*H/8.0D0,Ys,F2,Rpar,Ipar)
   !
   ch = H/2197.0D0
   DO k = 1, Neq
     Ys(k) = Y(k) + ch*(1932.0D0*Yp(k)+(7296.0D0*F2(k)-7200.0D0*F1(k)))
-  ENDDO
+  END DO
   CALL DF(T+12.0D0*H/13.0D0,Ys,F3,Rpar,Ipar)
   !
   ch = H/4104.0D0
   DO k = 1, Neq
     Ys(k) = Y(k) + ch*((8341.0D0*Yp(k)-845.0D0*F3(k))+(29440.0D0*F2(k)-32832.0D0*F1(k)))
-  ENDDO
+  END DO
   CALL DF(T+H,Ys,F4,Rpar,Ipar)
   !
   ch = H/20520.0D0
   DO k = 1, Neq
     Ys(k) = Y(k) + ch*((-6080.0D0*Yp(k)+(9295.0D0*F3(k)-5643.0D0*F4(k)))&
       +(41040.0D0*F1(k)-28352.0D0*F2(k)))
-  ENDDO
+  END DO
   CALL DF(T+H/2.0D0,Ys,F5,Rpar,Ipar)
   !
   !     COMPUTE APPROXIMATE SOLUTION AT T+H
@@ -96,6 +96,6 @@ SUBROUTINE DFEHL(DF,Neq,T,Y,H,Yp,F1,F2,F3,F4,F5,Ys,Rpar,Ipar)
     Ys(k) = Y(k)&
       + ch*((902880.0D0*Yp(k)+(3855735.0D0*F3(k)-1371249.0D0*F4(k)))&
       +(3953664.0D0*F2(k)+277020.0D0*F5(k)))
-  ENDDO
+  END DO
   !
 END SUBROUTINE DFEHL

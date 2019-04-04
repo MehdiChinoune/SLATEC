@@ -121,7 +121,7 @@ SUBROUTINE CNBFA(Abe,Lda,N,Ml,Mu,Ipvt,Info)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   INTEGER Lda, N, Ml, Mu, Ipvt(*), Info
   COMPLEX Abe(Lda,*)
   !
@@ -144,9 +144,9 @@ SUBROUTINE CNBFA(Abe,Lda,N,Ml,Mu,Ipvt,Info)
       DO j = 1, Ml
         DO i = 1, N
           Abe(i,m+j) = (0.0E0,0.0E0)
-        ENDDO
-      ENDDO
-    ENDIF
+        END DO
+      END DO
+    END IF
     !
     !     GAUSSIAN ELIMINATION WITH PARTIAL ELIMINATION
     !
@@ -180,10 +180,10 @@ SUBROUTINE CNBFA(Abe,Lda,N,Ml,Mu,Ipvt,Info)
         !
         DO j = 1, mp
           CALL CAXPY(lm,Abe(k,ml1+j),Abe(lm+k,lm2),ldb,Abe(lm+k,lm2+j),ldb)
-        ENDDO
-      ENDIF
-    ENDDO
-  ENDIF
+        END DO
+      END IF
+    END DO
+  END IF
   Ipvt(N) = N
   IF ( CABS1(Abe(N,ml1))==0.0E0 ) Info = N
 END SUBROUTINE CNBFA

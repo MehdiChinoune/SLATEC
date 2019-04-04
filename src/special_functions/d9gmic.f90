@@ -46,7 +46,7 @@ REAL(8) FUNCTION D9GMIC(A,X,Alx)
     eps = 0.5D0*D1MACH(3)
     bot = LOG(D1MACH(1))
     first = .FALSE.
-  ENDIF
+  END IF
   !
   IF ( A>0.D0 ) CALL XERMSG('SLATEC','D9GMIC',&
     'A MUST BE NEAR A NEGATIVE INTEGER',2,2)
@@ -64,7 +64,7 @@ REAL(8) FUNCTION D9GMIC(A,X,Alx)
     t = te/fkp1
     s = s + t
     IF ( ABS(t)<eps*s ) GOTO 100
-  ENDDO
+  END DO
   CALL XERMSG('SLATEC','D9GMIC',&
     'NO CONVERGENCE IN 200 TERMS OF CONTINUED FRACTION',4,2)
   !
@@ -84,11 +84,11 @@ REAL(8) FUNCTION D9GMIC(A,X,Alx)
     t = te/(fm-fk)
     s = s + t
     IF ( ABS(t)<eps*ABS(s) ) EXIT
-  ENDDO
+  END DO
   !
   DO k = 1, m
     D9GMIC = D9GMIC + 1.0D0/k
-  ENDDO
+  END DO
   !
   sgng = 1.0D0
   IF ( MOD(m,2)==1 ) sgng = -1.0D0

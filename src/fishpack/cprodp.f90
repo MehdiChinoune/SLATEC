@@ -37,14 +37,14 @@ SUBROUTINE CPRODP(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Yy,M,A,B,C,D,U,Y)
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
-  
+
   REAL A(*), Aa(*), B(*), Bm1(*), Bm2(*), C(*), rt, X(*), Yy(*)
   INTEGER ia, id, iflg, j, k, M, m1, m2, mm, mm2, Na, Nd, Nm1, Nm2
   COMPLEX Y(*), D(*), U(*), v, den, bh, ym, am, y1, y2, yh, Bd(*), crt
   !* FIRST EXECUTABLE STATEMENT  CPRODP
   DO j = 1, M
     Y(j) = CMPLX(X(j),0.)
-  ENDDO
+  END DO
   mm = M - 1
   mm2 = M - 2
   id = Nd
@@ -76,8 +76,8 @@ SUBROUTINE CPRODP(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Yy,M,A,B,C,D,U,Y)
         bh = bh - v*U(j-1)
         ym = ym - v*Y(j-1)
         v = -v*D(j-1)
-      ENDDO
-    ENDIF
+      END DO
+    END IF
     den = B(M-1) - crt - A(M-1)*D(M-2)
     D(M-1) = (C(M-1)-A(M-1)*U(M-2))/den
     Y(M-1) = (Y(M-1)-A(M-1)*Y(M-2))/den
@@ -89,13 +89,13 @@ SUBROUTINE CPRODP(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Yy,M,A,B,C,D,U,Y)
       Y(M) = (ym-am*Y(M-1))/den
     ELSE
       Y(M) = (1.,0.)
-    ENDIF
+    END IF
     Y(M-1) = Y(M-1) - D(M-1)*Y(M)
     DO j = 2, mm
       k = M - j
       Y(k) = Y(k) - D(k)*Y(k+1) - U(k)*Y(M)
-    ENDDO
-  ENDIF
+    END DO
+  END IF
   IF ( m1<=0 ) THEN
     IF ( m2<=0 ) THEN
       IF ( ia>0 ) THEN
@@ -107,17 +107,17 @@ SUBROUTINE CPRODP(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Yy,M,A,B,C,D,U,Y)
         !
         DO j = 1, M
           Y(j) = rt*Y(j)
-        ENDDO
-      ENDIF
+        END DO
+      END IF
       IF ( iflg>0 ) GOTO 100
       DO j = 1, M
         Yy(j) = REAL(Y(j))
-      ENDDO
+      END DO
       RETURN
     ELSE
       rt = Bm2(m2)
       m2 = m2 - 1
-    ENDIF
+    END IF
   ELSEIF ( m2<=0 ) THEN
     rt = Bm1(m1)
     m1 = m1 - 1
@@ -127,7 +127,7 @@ SUBROUTINE CPRODP(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Yy,M,A,B,C,D,U,Y)
   ELSE
     rt = Bm1(m1)
     m1 = m1 - 1
-  ENDIF
+  END IF
   !
   ! MATRIX MULTIPLICATION
   !
@@ -138,8 +138,8 @@ SUBROUTINE CPRODP(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Yy,M,A,B,C,D,U,Y)
       y2 = A(j)*Y(j-1) + (B(j)-rt)*Y(j) + C(j)*Y(j+1)
       Y(j-1) = y1
       y1 = y2
-    ENDDO
-  ENDIF
+    END DO
+  END IF
   Y(M) = A(M)*Y(M-1) + (B(M)-rt)*Y(M) + C(M)*yh
   Y(M-1) = y1
   iflg = 1

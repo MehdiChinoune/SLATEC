@@ -324,9 +324,9 @@ SUBROUTINE DQAGSE(F,A,B,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,Alist,&
               erro12>=0.99D+00*errmax ) THEN
             IF ( extrap ) iroff2 = iroff2 + 1
             IF ( .NOT.extrap ) iroff1 = iroff1 + 1
-          ENDIF
+          END IF
           IF ( Last>10.AND.erro12>errmax ) iroff3 = iroff3 + 1
-        ENDIF
+        END IF
         Rlist(maxerr) = area1
         Rlist(Last) = area2
         errbnd = MAX(Epsabs,Epsrel*ABS(area))
@@ -363,7 +363,7 @@ SUBROUTINE DQAGSE(F,A,B,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,Alist,&
           Blist(Last) = b2
           Elist(maxerr) = error1
           Elist(Last) = error2
-        ENDIF
+        END IF
         !
         !           CALL SUBROUTINE DQPSRT TO MAINTAIN THE DESCENDING ORDERING
         !           IN THE LIST OF ERROR ESTIMATES AND SELECT THE SUBINTERVAL
@@ -390,7 +390,7 @@ SUBROUTINE DQAGSE(F,A,B,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,Alist,&
             IF ( ABS(Blist(maxerr)-Alist(maxerr))>small ) CYCLE
             extrap = .TRUE.
             nrmax = 2
-          ENDIF
+          END IF
           IF ( ierro/=3.AND.erlarg>ertest ) THEN
             !
             !           THE SMALLEST INTERVAL HAS THE LARGEST ERROR.
@@ -406,8 +406,8 @@ SUBROUTINE DQAGSE(F,A,B,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,Alist,&
               !- **JUMP OUT OF DO-LOOP
               IF ( ABS(Blist(maxerr)-Alist(maxerr))>small ) GOTO 20
               nrmax = nrmax + 1
-            ENDDO
-          ENDIF
+            END DO
+          END IF
           !
           !           PERFORM EXTRAPOLATION.
           !
@@ -424,7 +424,7 @@ SUBROUTINE DQAGSE(F,A,B,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,Alist,&
             ertest = MAX(Epsabs,Epsrel*ABS(reseps))
             !- **JUMP OUT OF DO-LOOP
             IF ( Abserr<=ertest ) EXIT
-          ENDIF
+          END IF
           !
           !           PREPARE BISECTION OF THE SMALLEST INTERVAL.
           !
@@ -436,9 +436,9 @@ SUBROUTINE DQAGSE(F,A,B,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,Alist,&
           extrap = .FALSE.
           small = small*0.5D+00
           erlarg = errsum
-        ENDIF
+        END IF
         20 CONTINUE
-      ENDDO
+      END DO
       !
       !           SET FINAL RESULT AND ERROR ESTIMATE.
       !           ------------------------------------
@@ -453,33 +453,33 @@ SUBROUTINE DQAGSE(F,A,B,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,Alist,&
               IF ( Ier>2 ) Ier = Ier - 1
               Neval = 42*Last - 21
               RETURN
-            ENDIF
+            END IF
           ELSEIF ( Abserr/ABS(Result)>errsum/ABS(area) ) THEN
             GOTO 50
-          ENDIF
-        ENDIF
+          END IF
+        END IF
         !
         !           TEST ON DIVERGENCE.
         !
         IF ( ksgn/=(-1).OR.MAX(ABS(Result),ABS(area))>defabs*0.1D-01 ) THEN
           IF ( 0.1D-01>(Result/area).OR.(Result/area)>0.1D+03.OR.&
             errsum>ABS(area) ) Ier = 6
-        ENDIF
+        END IF
         IF ( Ier>2 ) Ier = Ier - 1
         Neval = 42*Last - 21
         RETURN
-      ENDIF
-    ENDIF
+      END IF
+    END IF
     !
     !           COMPUTE GLOBAL INTEGRAL SUM.
     !
-    50     Result = 0.0D+00
+    50  Result = 0.0D+00
     DO k = 1, Last
       Result = Result + Rlist(k)
-    ENDDO
+    END DO
     Abserr = errsum
     IF ( Ier>2 ) Ier = Ier - 1
     Neval = 42*Last - 21
-  ENDIF
+  END IF
   RETURN
 END SUBROUTINE DQAGSE

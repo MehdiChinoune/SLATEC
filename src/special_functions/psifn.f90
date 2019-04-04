@@ -171,8 +171,8 @@ SUBROUTINE PSIFN(X,N,Kode,M,Ans,Nz,Ierr)
         DO i = 2, mm
           Ans(k+1) = Ans(k)/X
           k = k + 1
-        ENDDO
-      ENDIF
+        END DO
+      END IF
       IF ( N/=0 ) RETURN
       IF ( Kode==2 ) Ans(1) = Ans(1) + xln
       RETURN
@@ -212,11 +212,11 @@ SUBROUTINE PSIFN(X,N,Kode,M,Ans,Nz,Ierr)
             den = den + 1.0E0
             trm(i) = den**(-np)
             s = s + trm(i)
-          ENDDO
+          END DO
           Ans(1) = s
           IF ( N==0 ) THEN
             IF ( Kode==2 ) Ans(1) = s + xln
-          ENDIF
+          END IF
           IF ( mm==1 ) RETURN
           !-----------------------------------------------------------------------
           !     GENERATE HIGHER DERIVATIVES, J.GT.N
@@ -232,12 +232,12 @@ SUBROUTINE PSIFN(X,N,Kode,M,Ans,Nz,Ierr)
               trm(i) = trm(i)/den
               s = s + trm(i)
               IF ( trm(i)<tols ) EXIT
-            ENDDO
+            END DO
             Ans(j) = s
-          ENDDO
+          END DO
           RETURN
-        ENDIF
-      ENDIF
+        END IF
+      END IF
       xdmy = X
       xdmln = xln
       xinc = 0.0E0
@@ -246,7 +246,7 @@ SUBROUTINE PSIFN(X,N,Kode,M,Ans,Nz,Ierr)
         xinc = xmin - nx
         xdmy = X + xinc
         xdmln = LOG(xdmy)
-      ENDIF
+      END IF
       !-----------------------------------------------------------------------
       !     GENERATE W(N+MM-1,X) BY THE ASYMPTOTIC EXPANSION
       !-----------------------------------------------------------------------
@@ -272,8 +272,8 @@ SUBROUTINE PSIFN(X,N,Kode,M,Ans,Nz,Ierr)
           IF ( ABS(trm(k))<tst ) EXIT
           s = s + trm(k)
           tk = tk + 2.0E0
-        ENDDO
-      ENDIF
+        END DO
+      END IF
       s = (s+t1)*tss
       IF ( xinc/=0.0E0 ) THEN
         !-----------------------------------------------------------------------
@@ -297,9 +297,9 @@ SUBROUTINE PSIFN(X,N,Kode,M,Ans,Nz,Ierr)
             s = s + trmr(i)
             xm = xm - 1.0E0
             fx = X + xm
-          ENDDO
-        ENDIF
-      ENDIF
+          END DO
+        END IF
+      END IF
       Ans(mm) = s
       IF ( fn==0.0E0 ) GOTO 150
       !-----------------------------------------------------------------------
@@ -321,8 +321,8 @@ SUBROUTINE PSIFN(X,N,Kode,M,Ans,Nz,Ierr)
             IF ( ABS(trm(k))<tst ) EXIT
             s = s + trm(k)
             tk = tk + 2.0E0
-          ENDDO
-        ENDIF
+          END DO
+        END IF
         s = (s+t1)*tss
         IF ( xinc/=0.0E0 ) THEN
           IF ( fn==0.0E0 ) GOTO 120
@@ -333,12 +333,12 @@ SUBROUTINE PSIFN(X,N,Kode,M,Ans,Nz,Ierr)
             s = s + trmr(i)
             xm = xm - 1.0E0
             fx = X + xm
-          ENDDO
-        ENDIF
+          END DO
+        END IF
         mx = mm - j + 1
         Ans(mx) = s
         IF ( fn==0.0E0 ) GOTO 150
-      ENDDO
+      END DO
       RETURN
       !-----------------------------------------------------------------------
       !     RECURSION FOR N = 0
@@ -346,26 +346,27 @@ SUBROUTINE PSIFN(X,N,Kode,M,Ans,Nz,Ierr)
       120 CONTINUE
       DO i = 1, nx
         s = s + 1.0E0/(X+nx-i)
-      ENDDO
-    ENDIF
-    150    IF ( Kode==2 ) THEN
-    IF ( xdmy==X ) RETURN
-    xq = xdmy/X
-    Ans(1) = s - LOG(xq)
+      END DO
+    END IF
+    150 CONTINUE
+    IF ( Kode==2 ) THEN
+      IF ( xdmy==X ) RETURN
+      xq = xdmy/X
+      Ans(1) = s - LOG(xq)
+      RETURN
+    ELSE
+      Ans(1) = s - xdmln
+      RETURN
+    END IF
+  ELSEIF ( t<=0.0E0 ) THEN
+    Nz = 0
+    Ierr = 2
     RETURN
-  ELSE
-    Ans(1) = s - xdmln
-    RETURN
-  ENDIF
-ELSEIF ( t<=0.0E0 ) THEN
-  Nz = 0
-  Ierr = 2
+  END IF
+  200  Nz = Nz + 1
+  Ans(mm) = 0.0E0
+  mm = mm - 1
+  IF ( mm==0 ) RETURN
+  GOTO 100
   RETURN
-ENDIF
-200  Nz = Nz + 1
-Ans(mm) = 0.0E0
-mm = mm - 1
-IF ( mm==0 ) RETURN
-GOTO 100
-RETURN
 END SUBROUTINE PSIFN

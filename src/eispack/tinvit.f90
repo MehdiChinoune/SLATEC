@@ -114,7 +114,7 @@ SUBROUTINE TINVIT(Nm,N,D,E,E2,M,W,Ind,Z,Ierr,Rv1,Rv2,Rv3,Rv4,Rv6)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   !
   INTEGER i, j, M, N, p, q, r, s, ii, ip, jj, Nm, its, tag, Ierr, group
   INTEGER Ind(*)
@@ -134,7 +134,7 @@ SUBROUTINE TINVIT(Nm,N,D,E,E2,M,W,Ind,Z,Ierr,Rv1,Rv2,Rv3,Rv4,Rv6)
   DO q = p, N
     IF ( q==N ) EXIT
     IF ( E2(q+1)==0.0E0 ) EXIT
-  ENDDO
+  END DO
   !     .......... FIND VECTORS BY INVERSE ITERATION ..........
   tag = tag + 1
   s = 0
@@ -152,7 +152,7 @@ SUBROUTINE TINVIT(Nm,N,D,E,E2,M,W,Ind,Z,Ierr,Rv1,Rv2,Rv3,Rv4,Rv6)
         !
         DO i = ip, q
           norm = MAX(norm,ABS(D(i))+ABS(E(i)))
-        ENDDO
+        END DO
         !     .......... EPS2 IS THE CRITERION FOR GROUPING,
         !                EPS3 REPLACES ZERO PIVOTS AND EQUAL
         !                ROOTS ARE MODIFIED BY EPS3,
@@ -169,19 +169,19 @@ SUBROUTINE TINVIT(Nm,N,D,E,E2,M,W,Ind,Z,Ierr,Rv1,Rv2,Rv3,Rv4,Rv6)
             s = p
             group = 0
             EXIT
-          ENDIF
-        ENDDO
+          END IF
+        END DO
       ELSE
         Rv6(p) = 1.0E0
         GOTO 150
-      ENDIF
+      END IF
       !     .......... LOOK FOR CLOSE OR COINCIDENT ROOTS ..........
     ELSEIF ( ABS(x1-x0)>=eps2 ) THEN
       group = 0
     ELSE
       group = group + 1
       IF ( order*(x1-x0)<=0.0E0 ) x1 = x0 + order*eps3
-    ENDIF
+    END IF
     !     .......... ELIMINATION WITH INTERCHANGES AND
     !                INITIALIZATION OF VECTOR ..........
     v = 0.0E0
@@ -207,11 +207,11 @@ SUBROUTINE TINVIT(Nm,N,D,E,E2,M,W,Ind,Z,Ierr,Rv1,Rv2,Rv3,Rv4,Rv6)
           u = v - xu*Rv2(i-1)
           v = -xu*Rv3(i-1)
           CYCLE
-        ENDIF
-      ENDIF
+        END IF
+      END IF
       u = D(i) - x1 - xu*v
       IF ( i/=q ) v = E(i+1)
-    ENDDO
+    END DO
     !
     IF ( u==0.0E0 ) u = eps3
     Rv1(q) = u
@@ -225,7 +225,7 @@ SUBROUTINE TINVIT(Nm,N,D,E,E2,M,W,Ind,Z,Ierr,Rv1,Rv2,Rv3,Rv4,Rv6)
         Rv6(i) = (Rv6(i)-u*Rv2(i)-v*Rv3(i))/Rv1(i)
         v = u
         u = Rv6(i)
-      ENDDO
+      END DO
       !     .......... ORTHOGONALIZE WITH RESPECT TO PREVIOUS
       !                MEMBERS OF GROUP ..........
       IF ( group/=0 ) THEN
@@ -239,23 +239,23 @@ SUBROUTINE TINVIT(Nm,N,D,E,E2,M,W,Ind,Z,Ierr,Rv1,Rv2,Rv3,Rv4,Rv6)
               !
               DO i = p, q
                 xu = xu + Rv6(i)*Z(i,j)
-              ENDDO
+              END DO
               !
               DO i = p, q
                 Rv6(i) = Rv6(i) - xu*Z(i,j)
-              ENDDO
+              END DO
               EXIT
-            ENDIF
-          ENDDO
+            END IF
+          END DO
           !
-        ENDDO
-      ENDIF
+        END DO
+      END IF
       !
       norm = 0.0E0
       !
       DO i = p, q
         norm = norm + ABS(Rv6(i))
-      ENDDO
+      END DO
       !
       IF ( norm>=1.0E0 ) THEN
         !     .......... NORMALIZE SO THAT SUM OF SQUARES IS
@@ -264,7 +264,7 @@ SUBROUTINE TINVIT(Nm,N,D,E,E2,M,W,Ind,Z,Ierr,Rv1,Rv2,Rv3,Rv4,Rv6)
         !
         DO i = p, q
           u = u + Rv6(i)**2
-        ENDDO
+        END DO
         !
         xu = 1.0E0/SQRT(u)
         EXIT
@@ -280,12 +280,12 @@ SUBROUTINE TINVIT(Nm,N,D,E,E2,M,W,Ind,Z,Ierr,Rv1,Rv2,Rv3,Rv4,Rv6)
           !
           DO i = p, q
             Rv6(i) = Rv6(i)*xu
-          ENDDO
+          END DO
         ELSE
           Rv6(s) = eps4
           s = s + 1
           IF ( s>q ) s = p
-        ENDIF
+        END IF
         !     .......... ELIMINATION OPERATIONS ON NEXT VECTOR
         !                ITERATE ..........
         DO i = ip, q
@@ -296,25 +296,25 @@ SUBROUTINE TINVIT(Nm,N,D,E,E2,M,W,Ind,Z,Ierr,Rv1,Rv2,Rv3,Rv4,Rv6)
           IF ( Rv1(i-1)==E(i) ) THEN
             u = Rv6(i-1)
             Rv6(i-1) = Rv6(i)
-          ENDIF
+          END IF
           Rv6(i) = u - Rv4(i)*Rv6(i-1)
-        ENDDO
+        END DO
         !
         its = its + 1
-      ENDIF
-    ENDDO
+      END IF
+    END DO
     !
     150 CONTINUE
     DO i = 1, N
       Z(i,r) = 0.0E0
-    ENDDO
+    END DO
     !
     DO i = p, q
       Z(i,r) = Rv6(i)*xu
-    ENDDO
+    END DO
     !
     x0 = x1
-  ENDDO
+  END DO
   !
   IF ( q<N ) GOTO 100
   RETURN

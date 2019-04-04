@@ -47,7 +47,7 @@ REAL FUNCTION FAC(N)
   IF ( nmax==0 ) THEN
     CALL GAMLIM(xmin,xmax)
     nmax = INT( xmax ) - 1
-  ENDIF
+  END IF
   !
   IF ( N<0 ) CALL XERMSG('SLATEC','FAC',&
     'FACTORIAL OF NEGATIVE INTEGER UNDEFINED',1,2)

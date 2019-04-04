@@ -542,8 +542,8 @@ SUBROUTINE SNLS1E(FCN,Iopt,M,N,X,Fvec,Tol,Nprint,Info,Iw,Wa,Lwa)
         epsfcn,Wa(1),mode,factor,Nprint,Info,nfev,njev,Iw,Wa(N+1),&
         Wa(2*N+1),Wa(3*N+1),Wa(4*N+1),Wa(5*N+1))
       IF ( Info==8 ) Info = 4
-    ENDIF
-  ENDIF
+    END IF
+  END IF
   IF ( Info==0 ) CALL XERMSG('SLATEC','SNLS1E','INVALID INPUT PARAMETER.',2,1)
   !
   !     LAST CARD OF SUBROUTINE SNLS1E.

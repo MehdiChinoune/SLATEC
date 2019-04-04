@@ -310,7 +310,7 @@ REAL FUNCTION ASIN(X)
     nterms = INITS(asincs,20,0.1*R1MACH(3))
     sqeps = SQRT(6.0E0*R1MACH(3))
     first = .FALSE.
-  ENDIF
+  END IF
   !
   y = ABS(X)
   IF ( y>1.0E0 ) CALL XERMSG('SLATEC','ASIN','ABS(X) GREATER THAN 1',1,2)
@@ -321,7 +321,7 @@ REAL FUNCTION ASIN(X)
     ASIN = X*(1.0E0+CSEVL(4.0E0*z-1.0E0,asincs,nterms))
   ELSE
     ASIN = pi2 - SQRT(1.0E0-z)*(1.0E0+CSEVL(3.0E0-4.0E0*z,asincs,nterms))
-  ENDIF
+  END IF
   IF ( X/=0.0E0 ) ASIN = SIGN(ASIN,X)
   !
 END FUNCTION ASIN
@@ -419,7 +419,7 @@ REAL FUNCTION ATAN(X)
     sqeps = SQRT(6.0E0*R1MACH(3))
     xbig = 1.0E0/R1MACH(3)
     first = .FALSE.
-  ENDIF
+  END IF
   !
   y = ABS(X)
   IF ( y<=xbnd1 ) THEN
@@ -442,7 +442,7 @@ REAL FUNCTION ATAN(X)
     IF ( y<xbig ) ATAN = conpi8(4)&
       + (pi8(4)-(0.75E0+CSEVL(50.0E0/y**2-1.0E0,atancs,nterms))/y)
     ATAN = SIGN(ATAN,X)
-  ENDIF
+  END IF
   !
 END FUNCTION ATAN
 !** ATAN2
@@ -516,7 +516,7 @@ REAL FUNCTION ATAN2(Sn,Cs)
   ELSE
     IF ( Sn==0.0E0 ) CALL XERMSG('SLATEC','ATAN2','BOTH ARGUMENTS ARE ZERO',1,2)
     ATAN2 = SIGN(0.5E0*pi,Sn)
-  ENDIF
+  END IF
   !
 END FUNCTION ATAN2
 !** CABS
@@ -729,7 +729,7 @@ COMPLEX FUNCTION CEXP(Z)
   ELSE
     y = AIMAG(Z)
     CEXP = CMPLX(r*COS(y),r*SIN(y))
-  ENDIF
+  END IF
   !
 END FUNCTION CEXP
 !** CLOG
@@ -889,7 +889,7 @@ REAL FUNCTION COS(X)
     xmax = 1.0E0/R1MACH(4)
     xwarn = SQRT(xmax)
     first = .FALSE.
-  ENDIF
+  END IF
   !
   y = ABS(X)
   IF ( y>xmax ) CALL XERMSG('SLATEC','COS',&
@@ -922,9 +922,9 @@ REAL FUNCTION COS(X)
       COS = 0.75E0 + CSEVL(z,coscs,ntcs)
     ELSE
       COS = y*(0.75E0+CSEVL(z,sincs,ntsn))
-    ENDIF
+    END IF
     IF ( noctnt>1.AND.noctnt<6 ) COS = -COS
-  ENDIF
+  END IF
   !
 END FUNCTION COS
 !** COSH
@@ -1137,8 +1137,8 @@ COMPLEX FUNCTION CSQRT(Z)
       CSQRT = CMPLX( 0., SQRT(r) )
     ELSE !IF ( x<0.0E0 ) THEN
       CSQRT = CMPLX(ABS(ytmp),SIGN(xtmp,y))
-    ENDIF
-  ENDIF
+    END IF
+  END IF
   !
 END FUNCTION CSQRT
 !** DACOS
@@ -1310,7 +1310,7 @@ REAL(8) FUNCTION DASIN(X)
     nterms = INITDS(asincs,39,0.1*SNGL(D1MACH(3)))
     sqeps = DSQRT(6.0D0*D1MACH(3))
     first = .FALSE.
-  ENDIF
+  END IF
   y = DABS(X)
   IF ( y>1.0D0 ) CALL XERMSG('SLATEC','DASIN','DABS(X) GREATER THAN 1',1,2)
   !
@@ -1320,7 +1320,7 @@ REAL(8) FUNCTION DASIN(X)
     DASIN = X*(1.0D0+DCSEVL(4.0D0*z-1.0D0,asincs,nterms))
   ELSE
     DASIN = pi2 - DSQRT(1.0D0-z)*(1.0D0+DCSEVL(3.0D0-4.0D0*z,asincs,nterms))
-  ENDIF
+  END IF
   IF ( X/=0.0D0 ) DASIN = DSIGN(DASIN,X)
   !
 END FUNCTION DASIN
@@ -1426,7 +1426,7 @@ REAL(8) FUNCTION DATAN(X)
     sqeps = DSQRT(6.0D0*D1MACH(3))
     xbig = 1.0D0/D1MACH(3)
     first = .FALSE.
-  ENDIF
+  END IF
   !
   y = DABS(X)
   IF ( y<=xbnd1 ) THEN
@@ -1449,7 +1449,7 @@ REAL(8) FUNCTION DATAN(X)
     IF ( y<xbig ) DATAN = conpi8(4)&
       + (pi8(4)-(0.75D0+DCSEVL(50.0D0/y**2-1.0D0,atancs,nterms))/y)
     DATAN = DSIGN(DATAN,X)
-  ENDIF
+  END IF
   !
 END FUNCTION DATAN
 !** DATAN2
@@ -1527,7 +1527,7 @@ REAL(8) FUNCTION DATAN2(Sn,Cs)
     IF ( Sn==0.0D0 ) CALL XERMSG('SLATEC','DATAN2','BOTH ARGUMENTS ARE ZERO',1,2)
     !
     DATAN2 = DSIGN(0.5D0*pi,Sn)
-  ENDIF
+  END IF
   !
 END FUNCTION DATAN2
 !** DCOS
@@ -1639,7 +1639,7 @@ REAL(8) FUNCTION DCOS(X)
     xmax = 1.0D0/D1MACH(4)
     xwarn = DSQRT(xmax)
     first = .FALSE.
-  ENDIF
+  END IF
   !
   y = DABS(X)
   IF ( y>xmax ) CALL XERMSG('SLATEC','DCOS',&
@@ -1672,9 +1672,9 @@ REAL(8) FUNCTION DCOS(X)
       DCOS = 0.75D0 + DCSEVL(z,coscs,ntcs)
     ELSE
       DCOS = y*(0.75D0+DCSEVL(z,sincs,ntsn))
-    ENDIF
+    END IF
     IF ( noctnt>1.AND.noctnt<6 ) DCOS = -DCOS
-  ENDIF
+  END IF
   !
 END FUNCTION DCOS
 !** DCOSH
@@ -1850,7 +1850,7 @@ REAL(8) FUNCTION DEXP(X)
     xmin = DLOG(D1MACH(1)) + 0.01D0
     xmax = DLOG(D1MACH(2)) - 0.01D0
     first = .FALSE.
-  ENDIF
+  END IF
   !
   IF ( X>=xmin ) THEN
     IF ( X>xmax ) CALL XERMSG('SLATEC','DEXP','X SO BIG DEXP OVERFLOWS',2,2)
@@ -1873,7 +1873,7 @@ REAL(8) FUNCTION DEXP(X)
     !
     CALL XERMSG('SLATEC','DEXP','X SO SMALL DEXP UNDERFLOWS',1,1)
     DEXP = 0.0D0
-  ENDIF
+  END IF
   !
 END FUNCTION DEXP
 !** DINT
@@ -1959,7 +1959,7 @@ REAL(8) FUNCTION DINT(X)
     npart = (ndigd+ndigi-1)/ndigi
     scale = ibase**ndigi
     first = .FALSE.
-  ENDIF
+  END IF
   !
   IF ( X>=-xbig.AND.X<=xbig ) THEN
     DINT = INT(SNGL(X))
@@ -1968,7 +1968,7 @@ REAL(8) FUNCTION DINT(X)
     IF ( xscl<=xmax ) THEN
       DO i = 1, npart
         xscl = xscl/scale
-      ENDDO
+      END DO
       DINT = 0.
       DO i = 1, npart
         xscl = xscl*scale
@@ -1976,15 +1976,15 @@ REAL(8) FUNCTION DINT(X)
         part = ipart
         xscl = xscl - part
         DINT = DINT*scale + part
-      ENDDO
+      END DO
       !
       IF ( X<0.0D0 ) DINT = -DINT
     ELSE
       CALL XERMSG('SLATEC','DINT',&
         'DABS(X) MAY BE TOO BIG TO BE REPRESENTED ASAN EXACT INTEGER',1,1)
       DINT = X
-    ENDIF
-  ENDIF
+    END IF
+  END IF
   !
 END FUNCTION DINT
 !** DLOG
@@ -2262,7 +2262,7 @@ REAL(8) FUNCTION DSIN(X)
     xmax = 1.0D0/D1MACH(4)
     xwarn = DSQRT(xmax)
     first = .FALSE.
-  ENDIF
+  END IF
   !
   y = ABS(X)
   IF ( y>xmax ) CALL XERMSG('SLATEC','DSIN',&
@@ -2295,10 +2295,10 @@ REAL(8) FUNCTION DSIN(X)
       DSIN = y*(0.75D0+DCSEVL(z,sincs,ntsn))
     ELSE
       DSIN = 0.75D0 + DCSEVL(z,coscs,ntcs)
-    ENDIF
+    END IF
     IF ( noctnt>3 ) DSIN = -DSIN
     IF ( X<0.0D0 ) DSIN = -DSIN
-  ENDIF
+  END IF
   !
 END FUNCTION DSIN
 !** DSINH
@@ -2386,7 +2386,7 @@ REAL(8) FUNCTION DSINH(X)
     sqeps = DSQRT(6.0D0*D1MACH(3))
     ymax = 1.0D0/DSQRT(D1MACH(3))
     first = .FALSE.
-  ENDIF
+  END IF
   !
   y = DABS(X)
   IF ( y<=1.0D0 ) THEN
@@ -2398,8 +2398,8 @@ REAL(8) FUNCTION DSINH(X)
       DSINH = DSIGN(0.5D0*y,X)
     ELSE
       DSINH = DSIGN(0.5D0*(y-1.0D0/y),X)
-    ENDIF
-  ENDIF
+    END IF
+  END IF
   !
 END FUNCTION DSINH
 !** DSQRT
@@ -2485,13 +2485,13 @@ REAL(8) FUNCTION DSQRT(X)
     !
     DO iter = 1, niter
       DSQRT = DSQRT + 0.5D0*(y-DSQRT*DSQRT)/DSQRT
-    ENDDO
+    END DO
     !
     DSQRT = D9PAK(sqrt2(irem)*DSQRT,ixpnt)
   ELSE
     DSQRT = 0.0D0
     IF ( X<0.0D0 ) CALL XERMSG('SLATEC','DSQRT','X IS NEGATIVE',1,1)
-  ENDIF
+  END IF
   !
 END FUNCTION DSQRT
 !** DTAN
@@ -2589,7 +2589,7 @@ REAL(8) FUNCTION DTAN(X)
     xsml = DSQRT(3.0D0*D1MACH(3))
     sqeps = DSQRT(D1MACH(4))
     first = .FALSE.
-  ENDIF
+  END IF
   !
   y = DABS(X)
   IF ( y>xmax ) CALL XERMSG('SLATEC','DTAN',&
@@ -2628,7 +2628,7 @@ REAL(8) FUNCTION DTAN(X)
     DTAN = 2.0D0*DTAN/(1.0D0-DTAN*DTAN)
     DTAN = 2.0D0*DTAN/(1.0D0-DTAN*DTAN)
     !
-  ENDIF
+  END IF
   IF ( X/=0.0D0 ) DTAN = DSIGN(DTAN,X)
   IF ( ifn==1 ) DTAN = -DTAN
   !
@@ -2726,7 +2726,7 @@ REAL(8) FUNCTION DTANH(X)
     sqeps = DSQRT(3.0D0*D1MACH(3))
     xmax = -0.5D0*DLOG(D1MACH(3))
     first = .FALSE.
-  ENDIF
+  END IF
   !
   y = DABS(X)
   IF ( y<=1.0D0 ) THEN
@@ -2737,7 +2737,7 @@ REAL(8) FUNCTION DTANH(X)
     DTANH = DSIGN((y-1.0D0/y)/(y+1.0D0/y),X)
   ELSE
     DTANH = DSIGN(1.0D0,X)
-  ENDIF
+  END IF
   !
 END FUNCTION DTANH
 !** EXP
@@ -2831,7 +2831,7 @@ REAL FUNCTION EXP(X)
     xmin = ALOG(R1MACH(1)) + 0.01E0
     xmax = ALOG(R1MACH(2)) - 0.01E0
     first = .FALSE.
-  ENDIF
+  END IF
   !
   IF ( X>=xmin ) THEN
     IF ( X>xmax ) CALL XERMSG('SLATEC','EXP','X SO BIG EXP OVERFLOWS',2,2)
@@ -2854,7 +2854,7 @@ REAL FUNCTION EXP(X)
     !
     CALL XERMSG('SLATEC','EXP','X SO SMALL EXP UNDERFLOWS',1,1)
     EXP = 0.0
-  ENDIF
+  END IF
   !
 END FUNCTION EXP
 !** SIN
@@ -2953,7 +2953,7 @@ REAL FUNCTION SIN(X)
     xmax = 1.0E0/R1MACH(4)
     xwarn = SQRT(xmax)
     first = .FALSE.
-  ENDIF
+  END IF
   !
   y = ABS(X)
   IF ( y>xmax ) CALL XERMSG('SLATEC','SIN',&
@@ -2986,10 +2986,10 @@ REAL FUNCTION SIN(X)
       SIN = y*(0.75E0+CSEVL(z,sincs,ntsn))
     ELSE
       SIN = 0.75E0 + CSEVL(z,coscs,ntcs)
-    ENDIF
+    END IF
     IF ( noctnt>3 ) SIN = -SIN
     IF ( X<0.0E0 ) SIN = -SIN
-  ENDIF
+  END IF
   !
 END FUNCTION SIN
 !** SINH
@@ -3070,7 +3070,7 @@ REAL FUNCTION SINH(X)
     sqeps = SQRT(6.0E0*R1MACH(3))
     ymax = 1.0E0/SQRT(R1MACH(3))
     first = .FALSE.
-  ENDIF
+  END IF
   !
   y = ABS(X)
   IF ( y<=1.0E0 ) THEN
@@ -3082,8 +3082,8 @@ REAL FUNCTION SINH(X)
       SINH = SIGN(0.5E0*y,X)
     ELSE
       SINH = SIGN(0.5E0*(y-1.0E0/y),X)
-    ENDIF
-  ENDIF
+    END IF
+  END IF
   !
 END FUNCTION SINH
 !** SQRT
@@ -3162,14 +3162,14 @@ REAL FUNCTION SQRT(X)
     !
     DO iter = 1, niter
       SQRT = SQRT + 0.5E0*(y-SQRT**2)/SQRT
-    ENDDO
+    END DO
     !
     SQRT = R9PAK(sqrt2(irem)*SQRT,ixpnt)
     !
   ELSE
     SQRT = 0.0E0
     IF ( X<0.0E0 ) CALL XERMSG('SLATEC','SQRT','X IS NEGATIVE',1,1)
-  ENDIF
+  END IF
   !
 END FUNCTION SQRT
 !** TAN
@@ -3259,7 +3259,7 @@ REAL FUNCTION TAN(X)
     xsml = SQRT(3.0E0*R1MACH(3))
     sqeps = SQRT(R1MACH(4))
     first = .FALSE.
-  ENDIF
+  END IF
   !
   y = ABS(X)
   IF ( y>xmax ) CALL XERMSG('SLATEC','TAN',&
@@ -3299,7 +3299,7 @@ REAL FUNCTION TAN(X)
     TAN = 2.0E0*TAN/(1.0E0-TAN**2)
     TAN = 2.0E0*TAN/(1.0E0-TAN**2)
     !
-  ENDIF
+  END IF
   IF ( X/=0.0E0 ) TAN = SIGN(TAN,X)
   IF ( ifn==1 ) TAN = -TAN
   !
@@ -3385,7 +3385,7 @@ REAL FUNCTION TANH(X)
     sqeps = SQRT(3.0E0*R1MACH(3))
     xmax = -0.5E0*ALOG(R1MACH(3))
     first = .FALSE.
-  ENDIF
+  END IF
   !
   y = ABS(X)
   IF ( y<=1.0E0 ) THEN
@@ -3396,6 +3396,6 @@ REAL FUNCTION TANH(X)
     TANH = SIGN((y-1.0E0/y)/(y+1.0E0/y),X)
   ELSE
     TANH = SIGN(1.0E0,X)
-  ENDIF
+  END IF
   !
 END FUNCTION TANH

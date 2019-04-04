@@ -84,11 +84,11 @@ REAL(8) FUNCTION DCHU(A,B,X)
             xi = i
             t = t*(A-B+xi)*X/((1.0D0-B+xi)*xi)
             sum = sum + t
-          ENDDO
-        ENDIF
+          END DO
+        END IF
         !
         sum = DGAMMA(B-1.0D0)*DGAMR(A)*X**(1-n)*xtoeps*sum
-      ENDIF
+      END IF
     ELSE
       !
       ! CONSIDER THE CASE B .LT. 1.0 FIRST.
@@ -102,11 +102,11 @@ REAL(8) FUNCTION DCHU(A,B,X)
           xi1 = i - 1
           t = t*(A+xi1)*X/((B+xi1)*(xi1+1.0D0))
           sum = sum + t
-        ENDDO
-      ENDIF
+        END DO
+      END IF
       !
       sum = DPOCH(1.0D0+A-B,-A)*sum
-    ENDIF
+    END IF
     !
     ! NEXT EVALUATE THE INFINITE SUM.     ----------------------------------
     !
@@ -147,10 +147,10 @@ REAL(8) FUNCTION DCHU(A,B,X)
         t = c0 + xeps1*b0
         DCHU = DCHU + t
         IF ( ABS(t)<eps*ABS(DCHU) ) RETURN
-      ENDDO
+      END DO
       CALL XERMSG('SLATEC','DCHU',&
         'NO CONVERGENCE IN 1000 TERMS OF THE ASCENDING SERIES',3,2)
-    ENDIF
+    END IF
     !
     ! X**(-BEPS) IS VERY DIFFERENT FROM 1.0, SO THE STRAIGHTFORWARD
     ! FORMULATION IS STABLE.
@@ -167,10 +167,10 @@ REAL(8) FUNCTION DCHU(A,B,X)
       t = a0 - b0
       DCHU = DCHU + t
       IF ( ABS(t)<eps*ABS(DCHU) ) RETURN
-    ENDDO
+    END DO
     CALL XERMSG('SLATEC','DCHU',&
       'NO CONVERGENCE IN 1000 TERMS OF THE ASCENDING SERIES',3,2)
-  ENDIF
+  END IF
   !
   ! USE LUKE-S RATIONAL APPROXIMATION IN THE ASYMPTOTIC REGION.
   !

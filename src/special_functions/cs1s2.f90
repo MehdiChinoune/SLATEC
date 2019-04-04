@@ -52,9 +52,9 @@ SUBROUTINE CS1S2(Zr,S1,S2,Nz,Ascle,Alim,Iuf)
         S1 = CEXP(c1)
         as1 = ABS(S1)
         Iuf = Iuf + 1
-      ENDIF
-    ENDIF
-  ENDIF
+      END IF
+    END IF
+  END IF
   aa = MAX(as1,as2)
   IF ( aa>Ascle ) RETURN
   S1 = czero

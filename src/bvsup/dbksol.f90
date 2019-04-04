@@ -36,7 +36,7 @@ SUBROUTINE DBKSOL(N,A,X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
-  
+
   !
   REAL(8) :: DDOT
   INTEGER j, k, m, N, nm1
@@ -51,7 +51,7 @@ SUBROUTINE DBKSOL(N,A,X)
       j = N - k
       m = m - k - 1
       X(j) = X(j)*A(m) - DDOT(k,A(m+1),1,X(j+1),1)
-    ENDDO
-  ENDIF
+    END DO
+  END IF
   !
 END SUBROUTINE DBKSOL

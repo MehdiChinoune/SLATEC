@@ -52,7 +52,7 @@ SUBROUTINE DSCAL(N,Da,Dx,Incx)
   !   900821  Modified to correct problem with a negative increment.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   REAL(8) :: Da, Dx(*)
   INTEGER i, Incx, ix, m, mp1, N
   !* FIRST EXECUTABLE STATEMENT  DSCAL
@@ -67,9 +67,9 @@ SUBROUTINE DSCAL(N,Da,Dx,Incx)
     IF ( m/=0 ) THEN
       DO i = 1, m
         Dx(i) = Da*Dx(i)
-      ENDDO
+      END DO
       IF ( N<5 ) RETURN
-    ENDIF
+    END IF
     mp1 = m + 1
     DO i = mp1, N, 5
       Dx(i) = Da*Dx(i)
@@ -77,7 +77,7 @@ SUBROUTINE DSCAL(N,Da,Dx,Incx)
       Dx(i+2) = Da*Dx(i+2)
       Dx(i+3) = Da*Dx(i+3)
       Dx(i+4) = Da*Dx(i+4)
-    ENDDO
+    END DO
   ELSE
     !
     !     Code for increment not equal to 1.
@@ -87,7 +87,7 @@ SUBROUTINE DSCAL(N,Da,Dx,Incx)
     DO i = 1, N
       Dx(ix) = Da*Dx(ix)
       ix = ix + Incx
-    ENDDO
+    END DO
     RETURN
-  ENDIF
+  END IF
 END SUBROUTINE DSCAL

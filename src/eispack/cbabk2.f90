@@ -74,7 +74,7 @@ SUBROUTINE CBABK2(Nm,N,Low,Igh,Scale,M,Zr,Zi)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   !
   INTEGER i, j, k, M, N, ii, Nm, Igh, Low
   REAL Scale(*), Zr(Nm,*), Zi(Nm,*)
@@ -92,10 +92,10 @@ SUBROUTINE CBABK2(Nm,N,Low,Igh,Scale,M,Zr,Zi)
         DO j = 1, M
           Zr(i,j) = Zr(i,j)*s
           Zi(i,j) = Zi(i,j)*s
-        ENDDO
+        END DO
         !
-      ENDDO
-    ENDIF
+      END DO
+    END IF
     !     .......... FOR I=LOW-1 STEP -1 UNTIL 1,
     !                IGH+1 STEP 1 UNTIL N DO -- ..........
     DO ii = 1, N
@@ -112,11 +112,11 @@ SUBROUTINE CBABK2(Nm,N,Low,Igh,Scale,M,Zr,Zi)
             s = Zi(i,j)
             Zi(i,j) = Zi(k,j)
             Zi(k,j) = s
-          ENDDO
-        ENDIF
-      ENDIF
+          END DO
+        END IF
+      END IF
       !
-    ENDDO
-  ENDIF
+    END DO
+  END IF
   !
 END SUBROUTINE CBABK2

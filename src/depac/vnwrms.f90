@@ -43,7 +43,7 @@ REAL FUNCTION VNWRMS(N,V,W)
   sum = 0.0E0
   DO i = 1, N
     sum = sum + (V(i)/W(i))**2
-  ENDDO
+  END DO
   VNWRMS = SQRT(sum/N)
   !----------------------- END OF FUNCTION VNWRMS ------------------------
 END FUNCTION VNWRMS

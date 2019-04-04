@@ -93,8 +93,8 @@ SUBROUTINE RWUPDT(N,R,Ldr,W,B,Alpha,Cos,Sin)
         temp = Cos(i)*R(i,j) + Sin(i)*rowj
         rowj = -Sin(i)*R(i,j) + Cos(i)*rowj
         R(i,j) = temp
-      ENDDO
-    ENDIF
+      END DO
+    END IF
     !
     !        DETERMINE A GIVENS ROTATION WHICH ELIMINATES W(J).
     !
@@ -109,7 +109,7 @@ SUBROUTINE RWUPDT(N,R,Ldr,W,B,Alpha,Cos,Sin)
         cotan = R(j,j)/rowj
         Sin(j) = p5/SQRT(p25+p25*cotan**2)
         Cos(j) = Sin(j)*cotan
-      ENDIF
+      END IF
       !
       !        APPLY THE CURRENT TRANSFORMATION TO R(J,J), B(J), AND ALPHA.
       !
@@ -117,8 +117,8 @@ SUBROUTINE RWUPDT(N,R,Ldr,W,B,Alpha,Cos,Sin)
       temp = Cos(j)*B(j) + Sin(j)*Alpha
       Alpha = -Sin(j)*B(j) + Cos(j)*Alpha
       B(j) = temp
-    ENDIF
-  ENDDO
+    END IF
+  END DO
   !
   !     LAST CARD OF SUBROUTINE RWUPDT.
   !

@@ -24,7 +24,7 @@ SUBROUTINE DUSRMT(I,J,Aij,Indcat,Prgopt,Dattrv,Iflag)
   !   811215  DATE WRITTEN
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
-  
+
   INTEGER I, Indcat, J, l
   REAL(8) :: Prgopt(*), Dattrv(*), Aij
   INTEGER Iflag(*)
@@ -44,7 +44,7 @@ SUBROUTINE DUSRMT(I,J,Aij,Indcat,Prgopt,Dattrv,Iflag)
       Iflag(2) = INT( -Dattrv(1) )
       Iflag(3) = INT( Dattrv(2) )
       Iflag(4) = 3
-    ENDIF
+    END IF
     !
     RETURN
   ELSE
@@ -62,7 +62,7 @@ SUBROUTINE DUSRMT(I,J,Aij,Indcat,Prgopt,Dattrv,Iflag)
       J = -I
       I = INT( Dattrv(l) )
       l = l + 1
-    ENDIF
+    END IF
     !
     Aij = Dattrv(l)
     !
@@ -75,5 +75,5 @@ SUBROUTINE DUSRMT(I,J,Aij,Indcat,Prgopt,Dattrv,Iflag)
     !     VALUES FROM DATTRV(*).  NO ACCUMULATION IS PERFORMED.
     Indcat = 0
     RETURN
-  ENDIF
+  END IF
 END SUBROUTINE DUSRMT

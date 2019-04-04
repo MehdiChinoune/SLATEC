@@ -56,11 +56,11 @@ SUBROUTINE ISMPL(N,M,Indx)
       !VD$ NOCONCUR
       DO j = 1, i - 1
         IF ( id==Indx(j) ) GOTO 50
-      ENDDO
+      END DO
       Indx(i) = id
       EXIT
       50 CONTINUE
-    ENDDO
-  ENDDO
+    END DO
+  END DO
   !------------- LAST LINE OF ISMPL FOLLOWS ------------------------------
 END SUBROUTINE ISMPL

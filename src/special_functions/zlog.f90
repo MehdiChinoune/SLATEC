@@ -41,7 +41,7 @@ SUBROUTINE ZLOG(Ar,Ai,Br,Bi,Ierr)
       Br = LOG(ABS(Ai))
       IF ( Ai<0.0D+0 ) Bi = -Bi
       RETURN
-    ENDIF
+    END IF
   ELSEIF ( Ai==0.0D+0 ) THEN
     IF ( Ar>0.0D+0 ) THEN
       Br = LOG(Ar)
@@ -51,15 +51,15 @@ SUBROUTINE ZLOG(Ar,Ai,Br,Bi,Ierr)
       Br = LOG(ABS(Ar))
       Bi = dpi
       RETURN
-    ENDIF
+    END IF
   ELSE
     dtheta = DATAN(Ai/Ar)
     IF ( dtheta<=0.0D+0 ) THEN
       IF ( Ar<0.0D+0 ) dtheta = dtheta + dpi
     ELSE
       IF ( Ar<0.0D+0 ) dtheta = dtheta - dpi
-    ENDIF
-  ENDIF
+    END IF
+  END IF
   zm = ZABS(Ar,Ai)
   Br = LOG(zm)
   Bi = dtheta

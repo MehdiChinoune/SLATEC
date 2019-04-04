@@ -38,6 +38,6 @@ SUBROUTINE DBDIFF(L,V)
     DO i = j, L
       V(k) = V(k-1) - V(k)
       k = k - 1
-    ENDDO
-  ENDDO
+    END DO
+  END DO
 END SUBROUTINE DBDIFF

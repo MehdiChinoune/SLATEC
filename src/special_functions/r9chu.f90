@@ -49,7 +49,7 @@ REAL FUNCTION R9CHU(A,B,Z)
     eps = 4.0*R1MACH(4)
     sqeps = SQRT(R1MACH(4))
     first = .FALSE.
-  ENDIF
+  END IF
   !
   bp = 1.0 + A - B
   ab = A*bp
@@ -92,8 +92,8 @@ REAL FUNCTION R9CHU(A,B,Z)
     DO j = 1, 3
       bb(j) = bb(j+1)
       aa(j) = aa(j+1)
-    ENDDO
-  ENDDO
+    END DO
+  END DO
   CALL XERMSG('SLATEC','R9CHU','NO CONVERGENCE IN 300 TERMS',1,2)
   !
   100  R9CHU = aa(4)/bb(4)

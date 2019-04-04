@@ -234,7 +234,7 @@ SUBROUTINE GENBUN(Nperod,N,Mperod,M,A,B,C,Idimy,Y,Ierror,W)
   !   861211  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   INTEGER i, Idimy, Ierror, ipstor, irev, iwb2, iwb3, iwba, iwbb, &
     iwbc, iwd, iwp, iwtcos, iww1, iww2, iww3, j, k, M, mh
   REAL A(*), a1, B(*), C(*), W(*), Y(Idimy,*)
@@ -253,8 +253,8 @@ SUBROUTINE GENBUN(Nperod,N,Mperod,M,A,B,C,Idimy,Y,Ierror,W)
       IF ( A(i)/=C(1) ) GOTO 100
       IF ( C(i)/=C(1) ) GOTO 100
       IF ( B(i)/=B(1) ) GOTO 100
-    ENDDO
-  ENDIF
+    END DO
+  END IF
   GOTO 200
   100  Ierror = 6
   200 CONTINUE
@@ -280,8 +280,8 @@ SUBROUTINE GENBUN(Nperod,N,Mperod,M,A,B,C,Idimy,Y,Ierror,W)
     W(k) = 2. - B(i)
     DO j = 1, N
       Y(i,j) = -Y(i,j)
-    ENDDO
-  ENDDO
+    END DO
+  END DO
   mp = Mperod + 1
   np = Nperod + 1
   IF ( mp==1 ) GOTO 600
@@ -326,13 +326,13 @@ SUBROUTINE GENBUN(Nperod,N,Mperod,M,A,B,C,Idimy,Y,Ierror,W)
       mhmi = mh - i
       W(i) = Y(mhmi,j) - Y(mhpi,j)
       W(mhpi) = Y(mhmi,j) + Y(mhpi,j)
-    ENDDO
+    END DO
     W(mh) = 2.*Y(mh,j)
     IF ( modd/=1 ) W(M) = 2.*Y(M,j)
     DO i = 1, M
       Y(i,j) = W(i)
-    ENDDO
-  ENDDO
+    END DO
+  END DO
   k = iwbc + mhm1 - 1
   i = iwba + mhm1
   W(k) = 0.
@@ -344,7 +344,7 @@ SUBROUTINE GENBUN(Nperod,N,Mperod,M,A,B,C,Idimy,Y,Ierror,W)
     k = iwbb + mhm1 - 1
     W(k) = W(k) - W(i-1)
     W(iwbc-1) = W(iwbc-1) + W(iwbb-1)
-  ENDIF
+  END IF
   GOTO 300
   700 CONTINUE
   DO j = 1, nby2
@@ -353,15 +353,15 @@ SUBROUTINE GENBUN(Nperod,N,Mperod,M,A,B,C,Idimy,Y,Ierror,W)
       a1 = Y(i,j)
       Y(i,j) = Y(i,mskip)
       Y(i,mskip) = a1
-    ENDDO
-  ENDDO
+    END DO
+  END DO
   IF ( irev==1 ) THEN
     CALL POISN2(M,N,1,2,W(iwba),W(iwbb),W(iwbc),Y,Idimy,W,W(iwb2),W(iwb3),&
       W(iww1),W(iww2),W(iww3),W(iwd),W(iwtcos),W(iwp))
     GOTO 400
   ELSEIF ( irev==2 ) THEN
     GOTO 500
-  ENDIF
+  END IF
   800 CONTINUE
   DO j = 1, N
     DO i = 1, mhm1
@@ -369,13 +369,13 @@ SUBROUTINE GENBUN(Nperod,N,Mperod,M,A,B,C,Idimy,Y,Ierror,W)
       mhpi = mh + i
       W(mhmi) = .5*(Y(mhpi,j)+Y(i,j))
       W(mhpi) = .5*(Y(mhpi,j)-Y(i,j))
-    ENDDO
+    END DO
     W(mh) = .5*Y(mh,j)
     IF ( modd/=1 ) W(M) = .5*Y(M,j)
     DO i = 1, M
       Y(i,j) = W(i)
-    ENDDO
-  ENDDO
+    END DO
+  END DO
   !
   !     RETURN STORAGE REQUIREMENTS FOR W ARRAY.
   !

@@ -53,7 +53,7 @@ REAL(8) FUNCTION DASUM(N,Dx,Incx)
   !   900821  Modified to correct problem with a negative increment.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   REAL(8) :: Dx(*)
   INTEGER i, Incx, ix, m, mp1, N
   !* FIRST EXECUTABLE STATEMENT  DASUM
@@ -70,14 +70,14 @@ REAL(8) FUNCTION DASUM(N,Dx,Incx)
     IF ( m/=0 ) THEN
       DO i = 1, m
         DASUM = DASUM + ABS(Dx(i))
-      ENDDO
+      END DO
       IF ( N<6 ) RETURN
-    ENDIF
+    END IF
     mp1 = m + 1
     DO i = mp1, N, 6
       DASUM = DASUM + ABS(Dx(i)) + ABS(Dx(i+1)) + ABS(Dx(i+2))&
         + ABS(Dx(i+3)) + ABS(Dx(i+4)) + ABS(Dx(i+5))
-    ENDDO
+    END DO
   ELSE
     !
     !     Code for increment not equal to 1.
@@ -87,7 +87,7 @@ REAL(8) FUNCTION DASUM(N,Dx,Incx)
     DO i = 1, N
       DASUM = DASUM + ABS(Dx(ix))
       ix = ix + Incx
-    ENDDO
+    END DO
     RETURN
-  ENDIF
+  END IF
 END FUNCTION DASUM

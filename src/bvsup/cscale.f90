@@ -41,20 +41,20 @@ SUBROUTINE CSCALE(A,Nrda,Nrow,Ncol,Cols,Colsav,Rows,Rowsav,Anorm,Scales,&
     IF ( Ic/=0 ) THEN
       DO k = 1, Ncol
         Cols(k) = SDOT(Nrow,A(1,k),1,A(1,k),1)
-      ENDDO
-    ENDIF
+      END DO
+    END IF
     !
     ascale = Anorm/Ncol
     DO k = 1, Ncol
       cs = Cols(k)
       IF ( (cs>ten4*ascale).OR.(ten4*cs<ascale) ) GOTO 100
       IF ( (cs<1./ten20).OR.(cs>ten20) ) GOTO 100
-    ENDDO
-  ENDIF
+    END DO
+  END IF
   !
   DO k = 1, Ncol
     Scales(k) = 1.
-  ENDDO
+  END DO
   RETURN
   !
   100  alog2 = LOG(2.)
@@ -70,14 +70,14 @@ SUBROUTINE CSCALE(A,Nrda,Nrow,Ncol,Cols,Colsav,Rows,Rowsav,Anorm,Scales,&
         Cols(k) = s*s*Cols(k)
         Anorm = Anorm + Cols(k)
         Colsav(k) = Cols(k)
-      ENDIF
+      END IF
       DO j = 1, Nrow
         A(j,k) = s*A(j,k)
-      ENDDO
+      END DO
     ELSE
       Scales(k) = 1.
-    ENDIF
-  ENDDO
+    END IF
+  END DO
   !
   IF ( Ic==0 ) RETURN
   !
@@ -85,5 +85,5 @@ SUBROUTINE CSCALE(A,Nrda,Nrow,Ncol,Cols,Colsav,Rows,Rowsav,Anorm,Scales,&
     Rows(k) = SDOT(Ncol,A(k,1),Nrda,A(k,1),Nrda)
     Rowsav(k) = Rows(k)
     Anorm = Anorm + Rows(k)
-  ENDDO
+  END DO
 END SUBROUTINE CSCALE

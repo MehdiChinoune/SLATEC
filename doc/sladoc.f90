@@ -210,7 +210,7 @@ PROGRAM SLADOC
   !       MSG = 'Failure in attempting to open ' // FIN // ' for input'
   !       NERR = 1
   !       GO TO 520
-  !     ENDIF
+  !     END IF
   !
   !     OPEN (UNIT=LU6, FILE=FOUT, STATUS='UNKNOWN', IOSTAT=INFO,
   !    +      FORM='FORMATTED')
@@ -218,7 +218,7 @@ PROGRAM SLADOC
   !       MSG = ' Failure in attempting to open ' // FOUT // ' for output'
   !       NERR = 1
   !       GO TO 520
-  !     ENDIF
+  !     END IF
   !
   !     Check to see if the input files to be used are in the user's
   !     local space.  If so, use them instead of the ones on the
@@ -231,15 +231,15 @@ PROGRAM SLADOC
       INQUIRE (FILE=temp(i+1:ilen),EXIST=lexist)
       IF ( lexist ) temp(1:ilen-i) = temp(i+1:ilen)
       EXIT
-    ENDIF
-  ENDDO
+    END IF
+  END DO
   OPEN (UNIT=LU17,FILE=temp,STATUS='OLD',ACCESS='DIRECT',FORM='FORMATTED',&
     RECL=LLN,IOSTAT=info)
   IF ( info/=0 ) THEN
     msg = ' Failure in attempting to open '//temp
     nerr = 1
     GOTO 700
-  ENDIF
+  END IF
   temp = FCAT
   ilen = LENSTR(temp)
   DO i = ilen, 1, -1
@@ -247,14 +247,14 @@ PROGRAM SLADOC
       INQUIRE (FILE=temp(i+1:ilen),EXIST=lexist)
       IF ( lexist ) temp(1:ilen-i) = temp(i+1:ilen)
       EXIT
-    ENDIF
-  ENDDO
+    END IF
+  END DO
   OPEN (UNIT=LU14,FILE=temp,STATUS='OLD',FORM='FORMATTED',IOSTAT=info)
   IF ( info/=0 ) THEN
     msg = ' Failure in attempting to open '//temp
     nerr = 1
     GOTO 700
-  ENDIF
+  END IF
   temp = FKWD
   ilen = LENSTR(temp)
   DO i = ilen, 1, -1
@@ -262,14 +262,14 @@ PROGRAM SLADOC
       INQUIRE (FILE=temp(i+1:ilen),EXIST=lexist)
       IF ( lexist ) temp(1:ilen-i) = temp(i+1:ilen)
       EXIT
-    ENDIF
-  ENDDO
+    END IF
+  END DO
   OPEN (UNIT=LU19,FILE=temp,STATUS='OLD',FORM='FORMATTED',IOSTAT=info)
   IF ( info/=0 ) THEN
     msg = ' Failure in attempting to open '//temp
     nerr = 1
     GOTO 700
-  ENDIF
+  END IF
   temp = FTBL
   ilen = LENSTR(temp)
   DO i = ilen, 1, -1
@@ -277,14 +277,14 @@ PROGRAM SLADOC
       INQUIRE (FILE=temp(i+1:ilen),EXIST=lexist)
       IF ( lexist ) temp(1:ilen-i) = temp(i+1:ilen)
       EXIT
-    ENDIF
-  ENDDO
+    END IF
+  END DO
   OPEN (UNIT=LU18,FILE=temp,STATUS='OLD',FORM='FORMATTED',IOSTAT=info)
   IF ( info/=0 ) THEN
     msg = ' Failure in attempting to open '//temp
     nerr = 1
     GOTO 700
-  ENDIF
+  END IF
   !
   !     Write welcome message.
   !
@@ -327,22 +327,22 @@ PROGRAM SLADOC
             msg = 'MXNCAT internal error.  Please contact the consulting office.'
             nerr = 3
             EXIT
-          ENDIF
+          END IF
           ncc = ncc - 1
           DO j = 1, ncc
             READ (UNIT=LU14,FMT=99040) iptr(j), jptr(j), kptr(j), tclass(j)
-          ENDDO
+          END DO
           READ (UNIT=LU14,FMT=99038) kptr(ncc+1)
           istmt = kptr(ncc+1)
           IF ( istmt>MXNCL ) THEN
             msg = 'MXNCL internal error.  Please contact the consulting office.'
             nerr = 4
             EXIT
-          ENDIF
+          END IF
           READ (UNIT=LU14,FMT=99001) (stmts(i),i=1,istmt)
           llu14 = .TRUE.
           CLOSE (LU14)
-        ENDIF
+        END IF
         ls = lt + lb
         CALL CHARIN(line(ls:ls),leng,2,lb,lt)
         IF ( lt==0 ) THEN
@@ -371,9 +371,9 @@ PROGRAM SLADOC
                   (1:LENSTR(stmts(istart)))
                 istart = istart + 1
                 tcl = ' '
-              ENDDO
+              END DO
               CYCLE
-            ENDIF
+            END IF
             !
             !           Ask the user to input a MAJOR category he/she wishes to
             !           explore.
@@ -381,8 +381,8 @@ PROGRAM SLADOC
             WRITE (UNIT=LU6,FMT=99008)
             REWIND (UNIT=LU5,ERR=505)
             EXIT
-          ENDDO
-          505          READ (UNIT=LU5,FMT=99001,END=100) line
+          END DO
+          505  READ (UNIT=LU5,FMT=99001,END=100) line
           CALL UPCASE(line,line)
           !
           !           Remove leading blanks from the input line.
@@ -414,8 +414,8 @@ PROGRAM SLADOC
                   (1:LENSTR(stmts(istart)))
                 istart = istart + 1
                 tcl = ' '
-              ENDDO
-            ENDIF
+              END DO
+            END IF
             IF ( ntry>1 ) THEN
               DO in = 2, ntry
                 tcl = CLAss(in)
@@ -427,12 +427,12 @@ PROGRAM SLADOC
                     (1:LENSTR(stmts(istart)))
                   istart = istart + 1
                   tcl = ' '
-                ENDDO
-              ENDDO
+                END DO
+              END DO
               WRITE (UNIT=LU6,FMT=99009)
               line = ' '
               REWIND (UNIT=LU5,ERR=506)
-              506              READ (UNIT=LU5,FMT=99001,END=200) line
+              506  READ (UNIT=LU5,FMT=99001,END=200) line
               IF ( LENSTR(line)==0 ) GOTO 200
               CALL RBLNKS(line,linesv)
               leng = LENSTR(linesv)
@@ -443,8 +443,8 @@ PROGRAM SLADOC
               kats = ' '
               WRITE (UNIT=LU6,FMT=99011)
               GOTO 200
-            ENDIF
-          ENDDO
+            END IF
+          END DO
         ELSE
           !
           !           CASE II.    l,cat <cr>
@@ -458,7 +458,7 @@ PROGRAM SLADOC
             forma(10:11) = form(1:2)
             WRITE (UNIT=LU6,FMT=forma) line(ll:leng)
             GOTO 200
-          ENDIF
+          END IF
           kats = line(ll:leng)
           leng = LENSTR(kats)
           kat = CVTCAT(kats(1:leng))
@@ -489,8 +489,8 @@ PROGRAM SLADOC
                   (1:LENSTR(stmts(istart)))
                 istart = istart + 1
                 tcl = ' '
-              ENDDO
-            ENDIF
+              END DO
+            END IF
             IF ( ntry>1 ) THEN
               DO in = 2, ntry
                 tcl = CLAss(in)
@@ -502,12 +502,12 @@ PROGRAM SLADOC
                     (1:LENSTR(stmts(istart)))
                   istart = istart + 1
                   tcl = ' '
-                ENDDO
-              ENDDO
+                END DO
+              END DO
               WRITE (UNIT=LU6,FMT=99009)
               line = ' '
               REWIND (UNIT=LU5,ERR=508)
-              508              READ (UNIT=LU5,FMT=99001,END=200) line
+              508  READ (UNIT=LU5,FMT=99001,END=200) line
               IF ( LENSTR(line)==0 ) GOTO 200
               CALL RBLNKS(line,linesv)
               leng = LENSTR(linesv)
@@ -518,9 +518,9 @@ PROGRAM SLADOC
               kats = ' '
               WRITE (UNIT=LU6,FMT=99011)
               GOTO 200
-            ENDIF
-          ENDDO
-        ENDIF
+            END IF
+          END DO
+        END IF
         !
       ELSEIF ( input1=='K' ) THEN
         !
@@ -536,7 +536,7 @@ PROGRAM SLADOC
             msg = 'MXKWDS internal error.  Please contact the consulting office.'
             nerr = 5
             EXIT
-          ENDIF
+          END IF
           READ (UNIT=LU19,FMT=form) (tkwd(j),j=1,ntkwd)
           !
           inext = 0
@@ -546,13 +546,13 @@ PROGRAM SLADOC
               msg = 'MXKWDS internal error.  Please contact the consulting office.'
               nerr = 6
               GOTO 700
-            ENDIF
+            END IF
             READ (UNIT=linesv,FMT=99037) iptrl(inext+1), iptrr(inext+1)
             inext = inext + 1
-          ENDDO
-          510          llu19 = .TRUE.
+          END DO
+          510  llu19 = .TRUE.
           CLOSE (LU19)
-        ENDIF
+        END IF
         IF ( .NOT.llu18 ) THEN
           !
           !           Read in the information from file FTBL.
@@ -565,14 +565,14 @@ PROGRAM SLADOC
               msg = 'MXNRN internal error.  Please contact the consulting office.'
               nerr = 2
               GOTO 700
-            ENDIF
+            END IF
             READ (UNIT=linesv,FMT=99017) cat(lftbl), rtname(lftbl), &
               is(lftbl), ie(lftbl), ips(lftbl), ipe(lftbl)
-          ENDDO
-          515          lftbl = lftbl - 1
+          END DO
+          515  lftbl = lftbl - 1
           llu18 = .TRUE.
           CLOSE (LU18)
-        ENDIF
+        END IF
         ls = lt + lb
         CALL CHARIN(line(ls:ls),leng,2,lb,lt)
         IF ( lt==0 ) THEN
@@ -582,20 +582,20 @@ PROGRAM SLADOC
           !
           WRITE (UNIT=LU6,FMT=99016)
           REWIND (UNIT=LU5,ERR=520)
-          520          READ (UNIT=LU5,FMT=99001,END=525) line
+          520  READ (UNIT=LU5,FMT=99001,END=525) line
           CALL UPCASE(line,line)
           GOTO 530
-          525          line = ' '
-          530          lb = 1
+          525  line = ' '
+          530  lb = 1
           lt = LENSTR(line)
           IF ( lt==0 ) THEN
             WRITE (UNIT=LU6,FMT=99020)
             GOTO 100
-          ENDIF
+          END IF
           kwrd = line(lb:lt)
         ELSE
           kwrd = line(ls-1+lb:leng)
-        ENDIF
+        END IF
         !
         !         The keyword phrase was found on the original command line.
         !
@@ -627,10 +627,10 @@ PROGRAM SLADOC
               ELSE
                 ij = il
                 in = in + 1
-              ENDIF
-            ENDDO
-          ENDIF
-        ENDDO
+              END IF
+            END DO
+          END IF
+        END DO
         IF ( .NOT.found ) WRITE (UNIT=LU6,FMT=99020)
         !
         !
@@ -650,14 +650,14 @@ PROGRAM SLADOC
               msg = 'MXNRN internal error.  Please contact the consulting office.'
               nerr = 2
               GOTO 700
-            ENDIF
+            END IF
             READ (UNIT=linesv,FMT=99017) cat(lftbl), rtname(lftbl), &
               is(lftbl), ie(lftbl), ips(lftbl), ipe(lftbl)
-          ENDDO
-          535          lftbl = lftbl - 1
+          END DO
+          535  lftbl = lftbl - 1
           llu18 = .TRUE.
           CLOSE (LU18)
-        ENDIF
+        END IF
         ls = lt + lb
         CALL CHARIN(line(ls:ls),leng,2,lb,lt)
         IF ( lt==0 ) THEN
@@ -667,23 +667,23 @@ PROGRAM SLADOC
           !
           WRITE (UNIT=LU6,FMT=99012)
           REWIND (UNIT=LU5,ERR=540)
-          540          READ (UNIT=LU5,FMT=99001,END=545) line
+          540  READ (UNIT=LU5,FMT=99001,END=545) line
           CALL UPCASE(line,line)
           GOTO 550
-          545          line = ' '
-          550          lb = 1
+          545  line = ' '
+          550  lb = 1
           lt = LENSTR(line)
           IF ( lt==0 ) THEN
             WRITE (UNIT=LU6,FMT=99014)
             GOTO 100
-          ENDIF
+          END IF
           kat = line(lb:lt)
         ELSE
           !
           !           The category appeared on the original input line.
           !
           kat = line(ls-1+lb:ls-1+lb+lt-1)
-        ENDIF
+        END IF
         ij = 0
         ilen = LENSTR(kat)
         DO i = 1, lftbl
@@ -694,8 +694,8 @@ PROGRAM SLADOC
             !             this category.
             !
             cname(ij) = rtname(i)
-          ENDIF
-        ENDDO
+          END IF
+        END DO
         IF ( ij==0 ) THEN
           WRITE (UNIT=LU6,FMT=99014)
         ELSE
@@ -704,7 +704,7 @@ PROGRAM SLADOC
           !           Write out the routine names, six per line.
           !
           WRITE (UNIT=LU6,FMT=99043) (cname(i),i=1,ij)
-        ENDIF
+        END IF
       ELSEIF ( input1=='V' ) THEN
         ls = lt + lb
         CALL CHARIN(line(ls:ls),leng,2,lb,lt)
@@ -715,23 +715,23 @@ PROGRAM SLADOC
           !
           WRITE (UNIT=LU6,FMT=99032)
           REWIND (UNIT=LU5,ERR=555)
-          555          READ (UNIT=LU5,FMT=99001,END=560) line
+          555  READ (UNIT=LU5,FMT=99001,END=560) line
           CALL UPCASE(line,line)
           GOTO 565
-          560          line = ' '
-          565          lb = 1
+          560  line = ' '
+          565  lb = 1
           lt = LENSTR(line)
           IF ( lt==0 ) THEN
             WRITE (UNIT=LU6,FMT=99014)
             GOTO 100
-          ENDIF
+          END IF
           kat = line(lb:lt)
         ELSE
           !
           !           The category appeared on the original input line.
           !
           kat = line(ls-1+lb:ls-1+lb+lt-1)
-        ENDIF
+        END IF
         IF ( kat(1:1)=='C' ) THEN
           IF ( .NOT.llu14 ) THEN
             !
@@ -742,22 +742,22 @@ PROGRAM SLADOC
               msg = 'MXNCAT internal error.  Please contact the consulting office.'
               nerr = 3
               EXIT
-            ENDIF
+            END IF
             ncc = ncc - 1
             DO j = 1, ncc
               READ (UNIT=LU14,FMT=99040) iptr(j), jptr(j), kptr(j), tclass(j)
-            ENDDO
+            END DO
             READ (UNIT=LU14,FMT=99038) kptr(ncc+1)
             istmt = kptr(ncc+1)
             IF ( istmt>MXNCL ) THEN
               msg = 'MXNCL internal error.  Please contact the consulting office.'
               nerr = 4
               EXIT
-            ENDIF
+            END IF
             READ (UNIT=LU14,FMT=99001) (stmts(i),i=1,istmt)
             llu14 = .TRUE.
             CLOSE (LU14)
-          ENDIF
+          END IF
         ELSEIF ( kat(1:1)=='K' ) THEN
           !
           !           The keywords are being requested.
@@ -772,7 +772,7 @@ PROGRAM SLADOC
               msg = 'MXKWDS internal error.  Please contact the consulting office.'
               nerr = 5
               EXIT
-            ENDIF
+            END IF
             READ (UNIT=LU19,FMT=form) (tkwd(j),j=1,ntkwd)
             !
             inext = 0
@@ -782,24 +782,24 @@ PROGRAM SLADOC
                 msg = 'MXKWDS internal error.  Please contact the consulting office.'
                 nerr = 6
                 GOTO 700
-              ENDIF
+              END IF
               READ (UNIT=linesv,FMT=99037) iptrl(inext+1), iptrr(inext+1)
               inext = inext + 1
-            ENDDO
-            566            llu19 = .TRUE.
+            END DO
+            566  llu19 = .TRUE.
             CLOSE (LU19)
-          ENDIF
+          END IF
         ELSE
           WRITE (UNIT=LU6,FMT=99006)
           GOTO 200
-        ENDIF
+        END IF
         IF ( kat(1:1)=='C' ) THEN
           fname = 'classlis'
           WRITE (UNIT=LU6,FMT=99033) 'Classification', ncc
         ELSE
           fname = 'keylis'
           WRITE (UNIT=LU6,FMT=99033) 'Keyword', ntkwd
-        ENDIF
+        END IF
         ilen = LENSTR(fname)
         WRITE (UNIT=LU6,FMT=99034) fname(1:ilen)
         !
@@ -816,7 +816,7 @@ PROGRAM SLADOC
           pgsz = 21
           low = 1
           high = pgsz
-          570          WRITE (UNIT=LU6,FMT=99026)
+          570  WRITE (UNIT=LU6,FMT=99026)
           DO
             READ (UNIT=LU5,FMT=99001,END=570) line
             leng = LENSTR(line)
@@ -826,7 +826,7 @@ PROGRAM SLADOC
               nlines = ncc
             ELSE
               nlines = ntkwd
-            ENDIF
+            END IF
             !
             !           'SPGSZ'   Set page size
             !
@@ -857,9 +857,9 @@ PROGRAM SLADOC
                   WRITE (form,99027) leng - ls - lb2 + 2
                   READ (line(ls+lb2-1:leng),form,ERR=575) pgsz
                   pgsz = ABS(pgsz)
-                ENDIF
+                END IF
                 WRITE (UNIT=LU6,FMT=99031) pgsz
-              ENDIF
+              END IF
               WRITE (UNIT=LU6,FMT=99028)
               !
               !           'PD'   Page forwards (downward)
@@ -885,7 +885,7 @@ PROGRAM SLADOC
                 CALL CHARIN(line(ls:ls),leng,2,lb2,lt2)
                 WRITE (form,99027) leng - ls - lb2 + 2
                 READ (line(ls+lb2-1:leng),form,ERR=575) npd
-              ENDIF
+              END IF
               low = MAX(high+(npd-1)*pgsz+1,1)
               high = MIN(low+pgsz-1,nlines)
               IF ( low>high.OR.high-low+1<pgsz ) low = MAX(high-pgsz,1)
@@ -902,11 +902,11 @@ PROGRAM SLADOC
                   DO jj = 1, itemp
                     ii = ii + 1
                     WRITE (UNIT=LU6,FMT=form) ii, stmts(ii)(1:LENSTR(stmts(ii)))
-                  ENDDO
+                  END DO
                 ELSE
                   WRITE (UNIT=LU6,FMT=99036) irec, tkwd(irec)
-                ENDIF
-              ENDDO
+                END IF
+              END DO
               WRITE (UNIT=LU6,FMT=99028)
               !
               !           'PU'   Page backwards (upward)
@@ -932,7 +932,7 @@ PROGRAM SLADOC
                 CALL CHARIN(line(ls:ls),leng,2,lb2,lt2)
                 WRITE (form,99027) leng - ls - lb2 + 2
                 READ (line(ls+lb2-1:leng),form,ERR=575) npd
-              ENDIF
+              END IF
               npd = -npd
               low = MAX(low+npd*pgsz,1)
               high = MIN(low+pgsz-1,nlines)
@@ -950,11 +950,11 @@ PROGRAM SLADOC
                   DO jj = 1, itemp
                     ii = ii + 1
                     WRITE (UNIT=LU6,FMT=form) ii, stmts(ii)(1:LENSTR(stmts(ii)))
-                  ENDDO
+                  END DO
                 ELSE
                   WRITE (UNIT=LU6,FMT=99036) irec, tkwd(irec)
-                ENDIF
-              ENDDO
+                END IF
+              END DO
               WRITE (UNIT=LU6,FMT=99028)
               !
               !           'HD'   Page half a page forward
@@ -976,11 +976,11 @@ PROGRAM SLADOC
                   DO jj = 1, itemp
                     ii = ii + 1
                     WRITE (UNIT=LU6,FMT=form) ii, stmts(ii)(1:LENSTR(stmts(ii)))
-                  ENDDO
+                  END DO
                 ELSE
                   WRITE (UNIT=LU6,FMT=99036) irec, tkwd(irec)
-                ENDIF
-              ENDDO
+                END IF
+              END DO
               WRITE (UNIT=LU6,FMT=99028)
               !
               !           'HU'   Page half a page backward
@@ -1002,11 +1002,11 @@ PROGRAM SLADOC
                   DO jj = 1, itemp
                     ii = ii + 1
                     WRITE (UNIT=LU6,FMT=form) ii, stmts(ii)(1:LENSTR(stmts(ii)))
-                  ENDDO
+                  END DO
                 ELSE
                   WRITE (UNIT=LU6,FMT=99036) irec, tkwd(irec)
-                ENDIF
-              ENDDO
+                END IF
+              END DO
               WRITE (UNIT=LU6,FMT=99028)
               !
               !           'P'   Print the current page
@@ -1027,11 +1027,11 @@ PROGRAM SLADOC
                   DO jj = 1, itemp
                     ii = ii + 1
                     WRITE (UNIT=LU6,FMT=form) ii, stmts(ii)(1:LENSTR(stmts(ii)))
-                  ENDDO
+                  END DO
                 ELSE
                   WRITE (UNIT=LU6,FMT=99036) irec, tkwd(irec)
-                ENDIF
-              ENDDO
+                END IF
+              END DO
               WRITE (UNIT=LU6,FMT=99028)
               !
               !           'E'  End the browsing mode
@@ -1052,9 +1052,9 @@ PROGRAM SLADOC
             ELSE
               WRITE (UNIT=LU6,FMT=99006)
               GOTO 570
-            ENDIF
-          ENDDO
-          575          WRITE (UNIT=LU6,FMT=99006)
+            END IF
+          END DO
+          575  WRITE (UNIT=LU6,FMT=99006)
           GOTO 570
         ELSEIF ( line(lb:lb)=='t'.OR.line(lb:lb)=='T' ) THEN
           !
@@ -1073,13 +1073,13 @@ PROGRAM SLADOC
               DO jj = 1, itemp
                 i = i + 1
                 WRITE (UNIT=LU6,FMT=form) stmts(i)(1:LENSTR(stmts(i)))
-              ENDDO
-            ENDDO
+              END DO
+            END DO
           ELSE
             DO i = 1, ntkwd
               WRITE (UNIT=LU6,FMT=99002) tkwd(i)
-            ENDDO
-          ENDIF
+            END DO
+          END IF
         ELSEIF ( line(lb:lb)=='f'.OR.line(lb:lb)=='F' ) THEN
           ls = lb + lt
           CALL CHARIN(line(ls:ls),leng,2,lb,lt)
@@ -1093,7 +1093,7 @@ PROGRAM SLADOC
             !
             !             Write it to the file he/she specified.
             !
-          ENDIF
+          END IF
           !           IF (FN .NE. FNAMSV) THEN
           !
           !             If this filename is not the one previously used for some
@@ -1104,7 +1104,7 @@ PROGRAM SLADOC
           OPEN (UNIT=LU13,FILE=fn,STATUS='UNKNOWN',FORM='FORMATTED')
           fnamsv = fn
           llu13 = .TRUE.
-          !           ENDIF
+          !           END IF
           !
           !           Write the list to the file specified by the user.
           !
@@ -1121,19 +1121,19 @@ PROGRAM SLADOC
               DO jj = 1, itemp
                 i = i + 1
                 WRITE (UNIT=LU13,FMT=form) stmts(i)(1:LENSTR(stmts(i)))
-              ENDDO
-            ENDDO
+              END DO
+            END DO
           ELSE
             DO i = 1, ntkwd
               WRITE (UNIT=LU13,FMT=99002) tkwd(i)
-            ENDDO
-          ENDIF
+            END DO
+          END IF
           CLOSE (LU13)
         ELSE
           WRITE (UNIT=LU6,FMT=99005)
           REWIND (UNIT=LU5,ERR=300)
           GOTO 300
-        ENDIF
+        END IF
         IF ( lb>0.AND.(line(lb:lb)=='Q'.OR.line(lb:lb)=='E') ) THEN
           !
           !           The command typed in is assumed to be "quit" or "end".
@@ -1150,7 +1150,7 @@ PROGRAM SLADOC
           !           Print "invalid command" and assume the command was "help".
           !
           input1 = 'H'
-        ENDIF
+        END IF
       ELSE
         !
         !         The input command was X.
@@ -1169,14 +1169,14 @@ PROGRAM SLADOC
               msg = 'MXNRN internal error.  Please contact the consulting office.'
               nerr = 2
               GOTO 700
-            ENDIF
+            END IF
             READ (UNIT=linesv,FMT=99017) cat(lftbl), rtname(lftbl), &
               is(lftbl), ie(lftbl), ips(lftbl), ipe(lftbl)
-          ENDDO
-          580          lftbl = lftbl - 1
+          END DO
+          580  lftbl = lftbl - 1
           llu18 = .TRUE.
           CLOSE (LU18)
-        ENDIF
+        END IF
         ls = lt + lb
         CALL CHARIN(line(ls:ls),leng,2,lb,lt)
         temp = ' '
@@ -1186,11 +1186,11 @@ PROGRAM SLADOC
           !
           WRITE (UNIT=LU6,FMT=99021)
           REWIND (UNIT=LU5,ERR=585)
-          585          READ (UNIT=LU5,FMT=99001,END=590) line
+          585  READ (UNIT=LU5,FMT=99001,END=590) line
           CALL UPCASE(line,line)
           GOTO 595
-          590          line = ' '
-          595          leng = LENSTR(line)
+          590  line = ' '
+          595  leng = LENSTR(line)
           IF ( leng==0 ) GOTO 600
           temp = line(1:leng)
         ELSE
@@ -1198,12 +1198,12 @@ PROGRAM SLADOC
           !           The routine name was given on the input command line.
           !
           temp = line(ls-1+lb:ls-1+lb+lt-1)
-        ENDIF
+        END IF
         rtnin = temp(1:6)
         DO i = 1, lftbl
           IF ( rtnin==rtname(i) ) GOTO 610
-        ENDDO
-        600        WRITE (UNIT=LU6,FMT=99025)
+        END DO
+        600  WRITE (UNIT=LU6,FMT=99025)
         !
         !         This routine does not exist in the library.
         !
@@ -1214,7 +1214,7 @@ PROGRAM SLADOC
         !         IPS(I) contains the starting location of the PURPOSE section.
         !         IPE(I) contains the ending location of the PURPOSE section.
         !
-        610        num = ie(i) - is(i) + 1
+        610  num = ie(i) - is(i) + 1
         !
         !         Write the name of the routine and the number of lines of
         !         documentation.
@@ -1226,7 +1226,7 @@ PROGRAM SLADOC
         DO irec = ips(i), ipe(i)
           READ (UNIT=LU17,FMT=99001,REC=irec) line
           WRITE (UNIT=LU6,FMT=99002) line
-        ENDDO
+        END DO
         fname = FLIS
         ilen = LENSTR(fname)
         WRITE (UNIT=LU6,FMT=99023) fname(1:ilen)
@@ -1245,7 +1245,7 @@ PROGRAM SLADOC
           pgsz = 21
           low = 1
           high = pgsz
-          615          WRITE (UNIT=LU6,FMT=99026)
+          615  WRITE (UNIT=LU6,FMT=99026)
           DO
             READ (UNIT=LU5,FMT=99001,END=615) line
             leng = LENSTR(line)
@@ -1281,9 +1281,9 @@ PROGRAM SLADOC
                   WRITE (form,99027) leng - ls - lb2 + 2
                   READ (line(ls+lb2-1:leng),form,ERR=620) pgsz
                   pgsz = ABS(pgsz)
-                ENDIF
+                END IF
                 WRITE (UNIT=LU6,FMT=99031) pgsz
-              ENDIF
+              END IF
               WRITE (UNIT=LU6,FMT=99028)
               !
               !           'PD'   Page forwards (downward)
@@ -1309,7 +1309,7 @@ PROGRAM SLADOC
                 CALL CHARIN(line(ls:ls),leng,2,lb2,lt2)
                 WRITE (form,99027) leng - ls - lb2 + 2
                 READ (line(ls+lb2-1:leng),form,ERR=620) npd
-              ENDIF
+              END IF
               low = MAX(high+(npd-1)*pgsz+1,1)
               nlines = ie(i) - is(i) + 1
               high = MIN(low+pgsz-1,nlines)
@@ -1317,7 +1317,7 @@ PROGRAM SLADOC
               DO irec = is(i) + low - 1, MIN(is(i)+high-1,ie(i))
                 READ (UNIT=LU17,FMT=99001,REC=irec) line
                 WRITE (UNIT=LU6,FMT=99029) irec - is(i) + 1, line
-              ENDDO
+              END DO
               WRITE (UNIT=LU6,FMT=99028)
               !
               !           'PU'   Page backwards (upward)
@@ -1343,7 +1343,7 @@ PROGRAM SLADOC
                 CALL CHARIN(line(ls:ls),leng,2,lb2,lt2)
                 WRITE (form,99027) leng - ls - lb2 + 2
                 READ (line(ls+lb2-1:leng),form,ERR=620) npd
-              ENDIF
+              END IF
               npd = -npd
               low = MAX(low+npd*pgsz,1)
               nlines = ie(i) - is(i) + 1
@@ -1352,7 +1352,7 @@ PROGRAM SLADOC
               DO irec = is(i) + low - 1, MIN(is(i)+high-1,ie(i))
                 READ (UNIT=LU17,FMT=99001,REC=irec) line
                 WRITE (UNIT=LU6,FMT=99029) irec - is(i) + 1, line
-              ENDDO
+              END DO
               WRITE (UNIT=LU6,FMT=99028)
               !
               !           'HD'   Page half a page forward
@@ -1365,7 +1365,7 @@ PROGRAM SLADOC
               DO irec = is(i) + low - 1, MIN(is(i)+high-1,ie(i))
                 READ (UNIT=LU17,FMT=99001,REC=irec) line
                 WRITE (UNIT=LU6,FMT=99029) irec - is(i) + 1, line
-              ENDDO
+              END DO
               WRITE (UNIT=LU6,FMT=99028)
               !
               !           'HU'   Page half a page backward
@@ -1378,7 +1378,7 @@ PROGRAM SLADOC
               DO irec = is(i) + low - 1, MIN(is(i)+high-1,ie(i))
                 READ (UNIT=LU17,FMT=99001,REC=irec) line
                 WRITE (UNIT=LU6,FMT=99029) irec - is(i) + 1, line
-              ENDDO
+              END DO
               WRITE (UNIT=LU6,FMT=99028)
               !
               !           'P'   Print the current page
@@ -1390,7 +1390,7 @@ PROGRAM SLADOC
               DO irec = is(i) + low - 1, MIN(is(i)+high-1,ie(i))
                 READ (UNIT=LU17,FMT=99001,REC=irec) line
                 WRITE (UNIT=LU6,FMT=99029) irec - is(i) + 1, line
-              ENDDO
+              END DO
               WRITE (UNIT=LU6,FMT=99028)
               !
               !           'E'  End the browsing mode
@@ -1411,9 +1411,9 @@ PROGRAM SLADOC
             ELSE
               WRITE (UNIT=LU6,FMT=99006)
               GOTO 615
-            ENDIF
-          ENDDO
-          620          WRITE (UNIT=LU6,FMT=99006)
+            END IF
+          END DO
+          620  WRITE (UNIT=LU6,FMT=99006)
           GOTO 615
         ELSEIF ( line(lb:lb)=='t'.OR.line(lb:lb)=='T' ) THEN
           !
@@ -1422,7 +1422,7 @@ PROGRAM SLADOC
           DO irec = is(i), ie(i)
             READ (UNIT=LU17,FMT=99001,REC=irec) line
             WRITE (UNIT=LU6,FMT=99002) line
-          ENDDO
+          END DO
         ELSEIF ( line(lb:lb)=='f'.OR.line(lb:lb)=='F' ) THEN
           ls = lb + lt
           CALL CHARIN(line(ls:ls),leng,2,lb,lt)
@@ -1436,7 +1436,7 @@ PROGRAM SLADOC
             !
             !             Write it to the file he/she specified.
             !
-          ENDIF
+          END IF
           IF ( fn/=fnamsv ) THEN
             !
             !             If this filename is not the one previously used for some
@@ -1447,20 +1447,20 @@ PROGRAM SLADOC
             OPEN (UNIT=LU13,FILE=fn,STATUS='UNKNOWN',FORM='FORMATTED')
             fnamsv = fn
             llu13 = .TRUE.
-          ENDIF
+          END IF
           !
           !           Write the documentation to the file specified by the user.
           !
           DO irec = is(i), ie(i)
             READ (UNIT=LU17,FMT=99001,REC=irec) line
             WRITE (UNIT=LU13,FMT=99002) line
-          ENDDO
+          END DO
         ELSE
           WRITE (UNIT=LU6,FMT=99005)
           REWIND (UNIT=LU5,ERR=300)
           GOTO 300
-        ENDIF
-      ENDIF
+        END IF
+      END IF
     ELSEIF ( lb>0.AND.(line(lb:lb)=='Q'.OR.line(lb:lb)=='E') ) THEN
       !
       !         The command typed in is assumed to be "quit" or "end".
@@ -1478,7 +1478,7 @@ PROGRAM SLADOC
       !
       WRITE (UNIT=LU6,FMT=99006)
       input1 = 'H'
-    ENDIF
+    END IF
     !
     !       Go back to the beginning and print the original instructions.
     !
@@ -1490,11 +1490,11 @@ PROGRAM SLADOC
       !
       WRITE (UNIT=LU6,FMT=99005)
       REWIND (UNIT=LU5,ERR=640)
-      640      READ (UNIT=LU5,FMT=99001,END=660) line
+      640  READ (UNIT=LU5,FMT=99001,END=660) line
       CALL UPCASE(line,line)
       GOTO 680
-      660      line = ' '
-      680      leng = LENSTR(line)
+      660  line = ' '
+      680  leng = LENSTR(line)
       CALL CHARIN(line,leng,2,lb,lt)
     ELSE
       !
@@ -1505,8 +1505,8 @@ PROGRAM SLADOC
       !         CLOSE (UNIT=LU6)
       CLOSE (UNIT=LU17)
       STOP
-    ENDIF
-  ENDDO
+    END IF
+  END DO
   !     OPEN (UNIT=I1MACH(4), FILE=FERR, FORM='FORMATTED',
   !    +      STATUS='UNKNOWN')
   700  CALL XERMSG(' ','SLADOC',msg,nerr,1)
@@ -1640,7 +1640,7 @@ SUBROUTINE CHARIN(Cardin,Lcard,Iopt,Lb,Lt)
     l2 = Lcard
     l3 = 1
     l9 = LAST
-  ENDIF
+  END IF
   Lb = 0
   DO i = l1, l2, l3
     match = 0
@@ -1648,19 +1648,19 @@ SUBROUTINE CHARIN(Cardin,Lcard,Iopt,Lb,Lt)
       IF ( Cardin(i:i)==specia(l:l) ) THEN
         match = l
         EXIT
-      ENDIF
-    ENDDO
+      END IF
+    END DO
     IF ( match==0 ) THEN
       Lb = i
       EXIT
-    ENDIF
-  ENDDO
+    END IF
+  END DO
   IF ( Iopt/=2 ) THEN
     IF ( Lb>0 ) THEN
       Lt = Lb
     ELSE
       Lt = 1
-    ENDIF
+    END IF
     Lb = 1
   ELSEIF ( Lb<=0 ) THEN
     Lt = 0
@@ -1676,15 +1676,15 @@ SUBROUTINE CHARIN(Cardin,Lcard,Iopt,Lb,Lt)
         IF ( Cardin(i:i)==specia(l:l) ) THEN
           match = l
           EXIT
-        ENDIF
-      ENDDO
+        END IF
+      END DO
       IF ( match/=0 ) THEN
         le = i - 1
         EXIT
-      ENDIF
-    ENDDO
+      END IF
+    END DO
     Lt = le - Lb + 1
-  ENDIF
+  END IF
 END SUBROUTINE CHARIN
 !** MINOR
 INTEGER FUNCTION MINOR(Kat,Kats,Ncc,Tclass,Iptr,Jptr,Kptr,Ntry)
@@ -1732,7 +1732,7 @@ INTEGER FUNCTION MINOR(Kat,Kats,Ncc,Tclass,Iptr,Jptr,Kptr,Ntry)
     MINOR = 1
     Ntry = 0
     RETURN
-  ENDIF
+  END IF
   !
   Ntry = 1
   CLAss(Ntry) = Kats
@@ -1748,7 +1748,7 @@ INTEGER FUNCTION MINOR(Kat,Kats,Ncc,Tclass,Iptr,Jptr,Kptr,Ntry)
     CALL UNDOCL(Tclass(ifind),CLAss(Ntry))
     LMSg(Ntry) = Kptr(ifind+1) - Kptr(ifind)
     ifind = Iptr(ifind)
-  ENDDO
+  END DO
   RETURN
 END FUNCTION MINOR
 !** RBLNKS
@@ -1786,7 +1786,7 @@ SUBROUTINE RBLNKS(L1,L2)
   leng = LENSTR(L1)
   DO i = 1, leng
     IF ( L1(i:i)/=' ' ) GOTO 100
-  ENDDO
+  END DO
   !
   !     We found a completely blank line.
   !
@@ -1800,7 +1800,7 @@ SUBROUTINE RBLNKS(L1,L2)
   DO j = i, leng
     L2(k:k) = L1(j:j)
     k = k + 1
-  ENDDO
+  END DO
 END SUBROUTINE RBLNKS
 !** UNDOCL
 SUBROUTINE UNDOCL(Kat,Cat)
@@ -1853,8 +1853,8 @@ SUBROUTINE UNDOCL(Kat,Cat)
       Cat(ic:ic+1) = Kat(ik:ik+1)
       ic = ic + 2
       ik = ik + weny
-    ENDIF
+    END IF
     weny = 3 - weny
     IF ( ik>leng ) EXIT
-  ENDDO
+  END DO
 END SUBROUTINE UNDOCL

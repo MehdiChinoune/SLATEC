@@ -56,7 +56,7 @@ REAL FUNCTION R9LGMC(X)
     xbig = 1.0/SQRT(R1MACH(3))
     xmax = EXP(MIN(LOG(R1MACH(2)/12.0),-LOG(12.0*R1MACH(1))))
     first = .FALSE.
-  ENDIF
+  END IF
   !
   IF ( X<10.0 ) CALL XERMSG('SLATEC','R9LGMC','X MUST BE GE 10',1,2)
   IF ( X>=xmax ) THEN
@@ -64,7 +64,7 @@ REAL FUNCTION R9LGMC(X)
     R9LGMC = 0.0
     CALL XERMSG('SLATEC','R9LGMC','X SO BIG R9LGMC UNDERFLOWS',2,1)
     RETURN
-  ENDIF
+  END IF
   !
   R9LGMC = 1.0/(12.0*X)
   IF ( X<xbig ) R9LGMC = CSEVL(2.0*(10./X)**2-1.,algmcs,nalgm)/X

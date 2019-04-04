@@ -135,7 +135,7 @@ SUBROUTINE SNBCO(Abe,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   INTEGER Lda, N, Ml, Mu, Ipvt(*)
   REAL Abe(Lda,*), Z(*)
   REAL Rcond
@@ -152,7 +152,7 @@ SUBROUTINE SNBCO(Abe,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
     nl = MIN(Ml,N-j)
     l = 1 + nu + nl
     anorm = MAX(anorm,SASUM(l,Abe(j+nl,ml1-nl),ldb))
-  ENDDO
+  END DO
   !
   !     FACTOR
   !
@@ -170,7 +170,7 @@ SUBROUTINE SNBCO(Abe,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
   ek = 1.0E0
   DO j = 1, N
     Z(j) = 0.0E0
-  ENDDO
+  END DO
   m = Ml + Mu + 1
   ju = 0
   DO k = 1, N
@@ -179,7 +179,7 @@ SUBROUTINE SNBCO(Abe,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
       s = ABS(Abe(k,ml1))/ABS(ek-Z(k))
       CALL SSCAL(N,s,Z,1)
       ek = s*ek
-    ENDIF
+    END IF
     wk = ek - Z(k)
     wkm = -ek - Z(k)
     s = ABS(wk)
@@ -190,7 +190,7 @@ SUBROUTINE SNBCO(Abe,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
     ELSE
       wk = wk/Abe(k,ml1)
       wkm = wkm/Abe(k,ml1)
-    ENDIF
+    END IF
     kp1 = k + 1
     ju = MIN(MAX(ju,Mu+Ipvt(k)),N)
     mm = ml1
@@ -200,7 +200,7 @@ SUBROUTINE SNBCO(Abe,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
         sm = sm + ABS(Z(i)+wkm*Abe(k,mm))
         Z(i) = Z(i) + wk*Abe(k,mm)
         s = s + ABS(Z(i))
-      ENDDO
+      END DO
       IF ( s<sm ) THEN
         t = wkm - wk
         wk = wkm
@@ -208,11 +208,11 @@ SUBROUTINE SNBCO(Abe,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
         DO i = kp1, ju
           mm = mm + 1
           Z(i) = Z(i) + t*Abe(k,mm)
-        ENDDO
-      ENDIF
-    ENDIF
+        END DO
+      END IF
+    END IF
     Z(k) = wk
-  ENDDO
+  END DO
   s = 1.0E0/SASUM(N,Z,1)
   CALL SSCAL(N,s,Z,1)
   !
@@ -225,12 +225,12 @@ SUBROUTINE SNBCO(Abe,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
     IF ( ABS(Z(k))>1.0E0 ) THEN
       s = 1.0E0/ABS(Z(k))
       CALL SSCAL(N,s,Z,1)
-    ENDIF
+    END IF
     l = Ipvt(k)
     t = Z(l)
     Z(l) = Z(k)
     Z(k) = t
-  ENDDO
+  END DO
   s = 1.0E0/SASUM(N,Z,1)
   CALL SSCAL(N,s,Z,1)
   !
@@ -249,8 +249,8 @@ SUBROUTINE SNBCO(Abe,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
       s = 1.0E0/ABS(Z(k))
       CALL SSCAL(N,s,Z,1)
       ynorm = s*ynorm
-    ENDIF
-  ENDDO
+    END IF
+  END DO
   s = 1.0E0/SASUM(N,Z,1)
   CALL SSCAL(N,s,Z,1)
   ynorm = s*ynorm
@@ -263,7 +263,7 @@ SUBROUTINE SNBCO(Abe,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
       s = ABS(Abe(k,ml1))/ABS(Z(k))
       CALL SSCAL(N,s,Z,1)
       ynorm = s*ynorm
-    ENDIF
+    END IF
     IF ( Abe(k,ml1)/=0.0E0 ) Z(k) = Z(k)/Abe(k,ml1)
     IF ( Abe(k,ml1)==0.0E0 ) Z(k) = 1.0E0
     lm = MIN(k,m) - 1
@@ -271,7 +271,7 @@ SUBROUTINE SNBCO(Abe,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
     t = -Z(k)
     IF(k<=1) CYCLE
     CALL SAXPY(lm,t,Abe(k-1,Ml+2),-ldb,Z(lz),1)
-  ENDDO
+  END DO
   !     MAKE ZNORM = 1.0E0
   s = 1.0E0/SASUM(N,Z,1)
   CALL SSCAL(N,s,Z,1)

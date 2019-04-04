@@ -73,7 +73,7 @@ SUBROUTINE STRCO(T,Ldt,N,Rcond,Z,Job)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   INTEGER Ldt, N, Job
   REAL T(Ldt,*), Z(*)
   REAL Rcond
@@ -94,7 +94,7 @@ SUBROUTINE STRCO(T,Ldt,N,Rcond,Z,Job)
     i1 = 1
     IF ( lower ) i1 = j
     tnorm = MAX(tnorm,SASUM(l,T(i1,j),1))
-  ENDDO
+  END DO
   !
   !     RCOND = 1/(NORM(T)*(ESTIMATE OF NORM(INVERSE(T)))) .
   !     ESTIMATE = NORM(Z)/NORM(Y) WHERE  T*Z = Y  AND  TRANS(T)*Y = E .
@@ -108,7 +108,7 @@ SUBROUTINE STRCO(T,Ldt,N,Rcond,Z,Job)
   ek = 1.0E0
   DO j = 1, N
     Z(j) = 0.0E0
-  ENDDO
+  END DO
   DO kk = 1, N
     k = kk
     IF ( lower ) k = N + 1 - kk
@@ -117,7 +117,7 @@ SUBROUTINE STRCO(T,Ldt,N,Rcond,Z,Job)
       s = ABS(T(k,k))/ABS(ek-Z(k))
       CALL SSCAL(N,s,Z,1)
       ek = s*ek
-    ENDIF
+    END IF
     wk = ek - Z(k)
     wkm = -ek - Z(k)
     s = ABS(wk)
@@ -128,7 +128,7 @@ SUBROUTINE STRCO(T,Ldt,N,Rcond,Z,Job)
     ELSE
       wk = wk/T(k,k)
       wkm = wkm/T(k,k)
-    ENDIF
+    END IF
     IF ( kk/=N ) THEN
       j1 = k + 1
       IF ( lower ) j1 = 1
@@ -138,17 +138,17 @@ SUBROUTINE STRCO(T,Ldt,N,Rcond,Z,Job)
         sm = sm + ABS(Z(j)+wkm*T(k,j))
         Z(j) = Z(j) + wk*T(k,j)
         s = s + ABS(Z(j))
-      ENDDO
+      END DO
       IF ( s<sm ) THEN
         w = wkm - wk
         wk = wkm
         DO j = j1, j2
           Z(j) = Z(j) + w*T(k,j)
-        ENDDO
-      ENDIF
-    ENDIF
+        END DO
+      END IF
+    END IF
     Z(k) = wk
-  ENDDO
+  END DO
   s = 1.0E0/SASUM(N,Z,1)
   CALL SSCAL(N,s,Z,1)
   !
@@ -163,7 +163,7 @@ SUBROUTINE STRCO(T,Ldt,N,Rcond,Z,Job)
       s = ABS(T(k,k))/ABS(Z(k))
       CALL SSCAL(N,s,Z,1)
       ynorm = s*ynorm
-    ENDIF
+    END IF
     IF ( T(k,k)/=0.0E0 ) Z(k) = Z(k)/T(k,k)
     IF ( T(k,k)==0.0E0 ) Z(k) = 1.0E0
     i1 = 1
@@ -171,8 +171,8 @@ SUBROUTINE STRCO(T,Ldt,N,Rcond,Z,Job)
     IF ( kk<N ) THEN
       w = -Z(k)
       CALL SAXPY(N-kk,w,T(i1,k),1,Z(i1),1)
-    ENDIF
-  ENDDO
+    END IF
+  END DO
   !     MAKE ZNORM = 1.0
   s = 1.0E0/SASUM(N,Z,1)
   CALL SSCAL(N,s,Z,1)

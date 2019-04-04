@@ -180,7 +180,7 @@ CONTAINS
         WRITE (Lout,99017) 'X1', x1, 'X2', x2
         WRITE (Lout,99017) 'F1', f1, 'F2', f2
         WRITE (Lout,99017) 'D1', d1, 'D2', d2
-      ENDIF
+      END IF
       !
       IF ( Kprint>=2 ) WRITE (Lout,99003) x1, x2
       99003 FORMAT (/10X,'INTERVAL = (',1P,D12.5,',',D12.5,' ):')
@@ -215,7 +215,7 @@ CONTAINS
           D13.5,4X,'F2:',D13.5,4X,'D1:',D13.5,4X,'D2:',D13.5)
         WRITE (Lout,99005) ref, ref2, red, red2
         99005 FORMAT (1P,4(7X,D13.5))
-      ENDIF
+      END IF
       !
       IF ( failoc.AND.(Kprint>=2) ) WRITE (Lout,99006)
       99006 FORMAT (/' ***** DCHFDV FAILED TO REPRODUCE ENDPOINT VALUES.')
@@ -238,7 +238,7 @@ CONTAINS
       dx = (x2-x1)/(Npts-10)
       DO i = 1, Npts
         Xev(i) = (x1+(i-5)*dx) + dx*RAND(0.0E0)
-      ENDDO
+      END DO
       !     --------------------------------------------------------
       CALL DCHFDV(x1,x2,f1,f2,d1,d2,Npts,Xev,Fev,Dev,next,ierr)
       !     --------------------------------------------------------
@@ -283,37 +283,37 @@ CONTAINS
             ELSEIF ( aef>aefmax ) THEN
               aefmax = aef
               xafmax = Xev(i)
-            ENDIF
+            END IF
             IF ( aed<aedmin ) THEN
               aedmin = aed
               xadmin = Xev(i)
             ELSEIF ( aed>aedmax ) THEN
               aedmax = aed
               xadmax = Xev(i)
-            ENDIF
+            END IF
             IF ( ref<refmin ) THEN
               refmin = ref
               xrfmin = Xev(i)
             ELSEIF ( ref>refmax ) THEN
               refmax = ref
               xrfmax = Xev(i)
-            ENDIF
+            END IF
             IF ( red<redmin ) THEN
               redmin = red
               xrdmin = Xev(i)
             ELSEIF ( red>redmax ) THEN
               redmax = red
               xrdmax = Xev(i)
-            ENDIF
-          ENDIF
-        ENDDO
+            END IF
+          END IF
+        END DO
         !
         fermax = MAX(ABS(refmax),ABS(refmin))
         dermax = MAX(ABS(redmax),ABS(redmin))
         !
         failnx = (next(1)+next(2))/=10
         failoc = failnx .OR. (MAX(fermax,dermax)>tol2)
-      ENDIF
+      END IF
       Fail = Fail .OR. failoc
       !
       !  PRINT SUMMARY.
@@ -328,7 +328,7 @@ CONTAINS
         WRITE (Lout,99019) xafmin, xrfmin, xadmin, xrdmin
         WRITE (Lout,99018) 'MAX', aefmax, refmax, aedmax, redmax
         WRITE (Lout,99019) xafmax, xrfmax, xadmax, xrdmax
-      ENDIF
+      END IF
       !
       IF ( Kprint>=2 ) THEN
         IF ( failoc ) THEN
@@ -339,8 +339,8 @@ CONTAINS
         ELSE
           WRITE (Lout,99011)
           99011 FORMAT (/' DCHFDV RESULTS OK.')
-        ENDIF
-      ENDIF
+        END IF
+      END IF
       !
       !  CHECK THAT DCHFEV AGREES WITH DCHFDV.
       !
@@ -359,8 +359,8 @@ CONTAINS
           IF ( aef>aefmax ) THEN
             aefmax = aef
             xafmax = Xev(i)
-          ENDIF
-        ENDDO
+          END IF
+        END DO
         failnx = (next2(1)/=next(1)) .OR. (next2(2)/=next(2))
         failoc = failnx .OR. (aefmax/=zero)
         IF ( Kprint>=2 ) THEN
@@ -375,15 +375,15 @@ CONTAINS
           ELSE
             WRITE (Lout,99016)
             99016 FORMAT (/' DCHFEV AGREES WITH DCHFDV.')
-          ENDIF
-        ENDIF
-      ENDIF
+          END IF
+        END IF
+      END IF
       !
       Fail = Fail .OR. failoc
       !
       !  GO BACK FOR ANOTHER INTERVAL.
       !
-    ENDDO
+    END DO
     !
     RETURN
     99017 FORMAT (10X,A2,' =',1P,D18.10,5X,A2,' =',D18.10)
@@ -469,7 +469,7 @@ CONTAINS
       CALL XSETF(0)
     ELSE
       CALL XSETF(1)
-    ENDIF
+    END IF
     !
     IF ( Kprint>=3 ) WRITE (Lout,99001)
     !
@@ -503,7 +503,7 @@ CONTAINS
       x(i) = i
       f(i) = i + 2
       d(i) = 1.D0
-    ENDDO
+    END DO
     !
     !  SWAP POINTS 4 AND 7, SO X-ARRAY IS OUT OF ORDER.
     !
@@ -555,7 +555,7 @@ CONTAINS
       IF ( Kprint>=2 ) WRITE (Lout,99004) nerr
       99004 FORMAT (//' ***** TROUBLE IN DEVERK *****'//5X,I5,&
         ' TESTS FAILED TO GIVE EXPECTED RESULTS.')
-    ENDIF
+    END IF
     !
     !  TERMINATE.
     !
@@ -666,7 +666,7 @@ CONTAINS
     !
     DO i = 1, nx - 1
       X(i) = 0.25D0*i
-    ENDDO
+    END DO
     X(nx) = 1.D0
     DO j = 1, ny
       Y(j) = 0.5D0*j - 1.25D0
@@ -674,8 +674,8 @@ CONTAINS
         F(i,j) = FCN(X(i),Y(j))
         Fx(i,j) = DFDX(X(i),Y(j))
         Fy(i,j) = DFDY(X(i),Y(j))
-      ENDDO
-    ENDDO
+      END DO
+    END DO
     !
     !  SET UP EVALUATION POINTS:
     !     XE =  0.(0.02)1. ;
@@ -685,7 +685,7 @@ CONTAINS
     DO k = 1, ne - 1
       Xe(k) = dx*(k-1)
       Ye(k) = 4.D0*Xe(k) - 2.D0
-    ENDDO
+    END DO
     Xe(ne) = 1.D0
     Ye(ne) = 2.D0
     !
@@ -741,19 +741,19 @@ CONTAINS
             IF ( ferr>fermax ) THEN
               fermax = ferr
               pfermx = Xe(k)
-            ENDIF
+            END IF
             derr = ABS(derr)
             IF ( derr>dermax ) THEN
               dermax = derr
               pdermx = Xe(k)
-            ENDIF
+            END IF
             fdiff = ABS(Fe2(k)-Fe(k))
             IF ( fdiff>fdifmx ) THEN
               fdifmx = fdiff
               pdifmx = Xe(k)
-            ENDIF
-          ENDIF
-        ENDDO
+            END IF
+          END IF
+        END DO
         !
         faild = (fermax>tol) .OR. (dermax>tol)
         faile = fdifmx/=zero
@@ -771,19 +771,19 @@ CONTAINS
         IF ( (ierr/=13).AND.(Kprint>=2) ) WRITE (Lout,99009) 'D', ierr, 13
         !
         IF ( (ier2/=ierr).AND.(Kprint>=2) ) WRITE (Lout,99009) 'E', ier2, ierr
-      ENDIF
+      END IF
       !
       IF ( failoc ) nerr = nerr + 1
       Fail = Fail .OR. failoc
-    ENDDO
+    END DO
     !
     IF ( Kprint>=2 ) THEN
       IF ( nerr>0 ) THEN
         WRITE (Lout,99012) nerr, 'J'
       ELSE
         WRITE (Lout,99013) 'J'
-      ENDIF
-    ENDIF
+      END IF
+    END IF
     !
     !  EVALUATE ON VERTICAL MESH LINES (X FIXED, Y RUNNING) ................
     !
@@ -829,19 +829,19 @@ CONTAINS
             IF ( ferr>fermax ) THEN
               fermax = ferr
               pfermx = Ye(k)
-            ENDIF
+            END IF
             derr = ABS(derr)
             IF ( derr>dermax ) THEN
               dermax = derr
               pdermx = Ye(k)
-            ENDIF
+            END IF
             fdiff = ABS(Fe2(k)-Fe(k))
             IF ( fdiff>fdifmx ) THEN
               fdifmx = fdiff
               pdifmx = Ye(k)
-            ENDIF
-          ENDIF
-        ENDDO
+            END IF
+          END IF
+        END DO
         !
         faild = (fermax>tol) .OR. (dermax>tol)
         faile = fdifmx/=zero
@@ -859,19 +859,19 @@ CONTAINS
         IF ( (ierr/=20).AND.(Kprint>=2) ) WRITE (Lout,99009) 'D', ierr, 20
         !
         IF ( (ier2/=ierr).AND.(Kprint>=2) ) WRITE (Lout,99009) 'E', ier2, ierr
-      ENDIF
+      END IF
       !
       IF ( failoc ) nerr = nerr + 1
       Fail = Fail .OR. failoc
-    ENDDO
+    END DO
     !
     IF ( Kprint>=2 ) THEN
       IF ( nerr>0 ) THEN
         WRITE (Lout,99012) nerr, 'I'
       ELSE
         WRITE (Lout,99013) 'I'
-      ENDIF
-    ENDIF
+      END IF
+    END IF
     !
     !  TERMINATE.
     !
@@ -1042,7 +1042,7 @@ CONTAINS
       IF ( Kprint>=1 ) WRITE (Lun,99004)
       99004 FORMAT (/' ************ DPCHIP FAILED SOME EVALUATION TESTS',&
         ' ************')
-    ENDIF
+    END IF
     !
     RETURN
     !------------- LAST LINE OF DPCHQ1 FOLLOWS -----------------------------
@@ -1149,7 +1149,7 @@ CONTAINS
     DO i = 1, n
       f(i) = FCN(x(i))
       d(i) = DERIV(x(i))
-    ENDDO
+    END DO
     !
     IF ( Kprint>=3 ) WRITE (Lun,99001)
     !
@@ -1184,8 +1184,8 @@ CONTAINS
             99005 FORMAT (2F6.1,I5,1P,2D20.10,D15.5,'  (',I1,') *****')
           ELSE
             WRITE (Lun,99010) a(i), b(i), ierr, true, calc, error
-          ENDIF
-        ENDIF
+          END IF
+        END IF
         !
         error = ABS(error)/MAX(one,ABS(true))
         IF ( fail.OR.(error>tol) ) ifail = ifail + 1
@@ -1193,12 +1193,12 @@ CONTAINS
           errmax = error
         ELSE
           errmax = MAX(errmax,error)
-        ENDIF
+        END IF
       ELSE
         IF ( Kprint>=3 ) WRITE (Lun,99010) a(i), b(i), ierr
         ifail = ifail + 1
-      ENDIF
-    ENDDO
+      END IF
+    END DO
     !
     !  PRINT SUMMARY.
     !
@@ -1208,7 +1208,7 @@ CONTAINS
         D15.5)
       IF ( ifail/=0 ) WRITE (Lun,99007) ifail
       99007 FORMAT (/' *** TROUBLE ***',I5,' INTEGRATION TESTS FAILED.')
-    ENDIF
+    END IF
     !
     !  TERMINATE.
     !
@@ -1222,7 +1222,7 @@ CONTAINS
       IF ( Kprint>=1 ) WRITE (Lun,99009)
       99009 FORMAT (/' ************ DPCHIP FAILED SOME INTEGRATION TESTS',&
         ' ************')
-    ENDIF
+    END IF
     !
     RETURN
     99010 FORMAT (2F6.1,I5,1P,2D20.10,D15.5)
@@ -1380,7 +1380,7 @@ CONTAINS
     !
     DO i = 1, N
       f(i) = EXP(-x(i)**2)
-    ENDDO
+    END DO
     !
     IF ( Kprint>=3 ) THEN
       WRITE (Lun,99003)
@@ -1388,13 +1388,13 @@ CONTAINS
         'X',9X,'F',18X,'DM',13X,'DC',13X,'DS')
       DO i = 1, 4
         WRITE (Lun,99009) x(i), f(i), dm(i), ds(i)
-      ENDDO
+      END DO
       WRITE (Lun,99010) x(5), f(5), dm(5), dc5, ds(5)
       WRITE (Lun,99010) x(6), f(6), dm(6), dc6, ds(6)
       DO i = 7, N
         WRITE (Lun,99009) x(i), f(i), dm(i), ds(i)
-      ENDDO
-    ENDIF
+      END DO
+    END IF
     !
     !  Test DPCHIM.
     !
@@ -1419,16 +1419,16 @@ CONTAINS
           IF ( err>tolz ) THEN
             nbadz = nbadz + 1
             result = '**BADZ'
-          ENDIF
+          END IF
         ELSE
           err = ABS((d(i)-dm(i))/dm(i))
           IF ( err>told ) THEN
             nbad = nbad + 1
             result = '**BAD'
-          ENDIF
-        ENDIF
+          END IF
+        END IF
         IF ( Kprint>=3 ) WRITE (Lun,99014) i, x(i), d(i), err, result
-      ENDDO
+      END DO
       IF ( (nbadz/=0).OR.(nbad/=0) ) THEN
         ifail = ifail + 1
         IF ( (nbadz/=0).AND.(Kprint>=2) ) WRITE (Lun,99004) nbad
@@ -1436,8 +1436,8 @@ CONTAINS
         IF ( (nbad/=0).AND.(Kprint>=2) ) WRITE (Lun,99015) nbad, 'IM', told
       ELSE
         IF ( Kprint>=2 ) WRITE (Lun,99016) 'IM'
-      ENDIF
-    ENDIF
+      END IF
+    END IF
     !
     !  Test DPCHIC -- options set to reproduce DPCHIM.
     !
@@ -1460,16 +1460,16 @@ CONTAINS
         IF ( err>tol ) THEN
           nbad = nbad + 1
           result = '**BAD'
-        ENDIF
+        END IF
         IF ( Kprint>=3 ) WRITE (Lun,99014) i, x(i), dc(i), err, result
-      ENDDO
+      END DO
       IF ( nbad/=0 ) THEN
         ifail = ifail + 1
         IF ( Kprint>=2 ) WRITE (Lun,99015) nbad, 'IC', tol
       ELSE
         IF ( Kprint>=2 ) WRITE (Lun,99016) 'IC'
-      ENDIF
-    ENDIF
+      END IF
+    END IF
     !
     !  Test DPCHIC -- default nonzero switch derivatives.
     !
@@ -1494,20 +1494,20 @@ CONTAINS
           IF ( err>tolz ) THEN
             nbadz = nbadz + 1
             result = '**BADA'
-          ENDIF
+          END IF
         ELSE
           IF ( i==5 ) THEN
             err = ABS((d(i)-dc5)/dc5)
           ELSE
             err = ABS((d(i)-dc6)/dc6)
-          ENDIF
+          END IF
           IF ( err>told ) THEN
             nbad = nbad + 1
             result = '**BAD'
-          ENDIF
-        ENDIF
+          END IF
+        END IF
         IF ( Kprint>=3 ) WRITE (Lun,99014) i, x(i), d(i), err, result
-      ENDDO
+      END DO
       IF ( (nbadz/=0).OR.(nbad/=0) ) THEN
         ifail = ifail + 1
         IF ( (nbadz/=0).AND.(Kprint>=2) ) WRITE (Lun,99005) nbad
@@ -1516,8 +1516,8 @@ CONTAINS
         IF ( (nbad/=0).AND.(Kprint>=2) ) WRITE (Lun,99015) nbad, 'IC', told
       ELSE
         IF ( Kprint>=2 ) WRITE (Lun,99016) 'IC'
-      ENDIF
-    ENDIF
+      END IF
+    END IF
     !
     !  Test DPCHSP.
     !
@@ -1539,16 +1539,16 @@ CONTAINS
         IF ( err>told ) THEN
           nbad = nbad + 1
           result = '**BAD'
-        ENDIF
+        END IF
         IF ( Kprint>=3 ) WRITE (Lun,99014) i, x(i), d(i), err, result
-      ENDDO
+      END DO
       IF ( nbad/=0 ) THEN
         ifail = ifail + 1
         IF ( Kprint>=2 ) WRITE (Lun,99015) nbad, 'SP', told
       ELSE
         IF ( Kprint>=2 ) WRITE (Lun,99016) 'SP'
-      ENDIF
-    ENDIF
+      END IF
+    END IF
     !
     !  PRINT SUMMARY AND TERMINATE.
     !
@@ -1565,7 +1565,7 @@ CONTAINS
       IF ( Kprint>=1 ) WRITE (Lun,99008)
       99008 FORMAT (/' ************ DPCHIP FAILED SOME INTERPOLATION TESTS',&
         ' ************')
-    ENDIF
+    END IF
     !
     RETURN
     99009 FORMAT (5X,F10.2,1P,D15.5,4X,D15.5,15X,D15.5)
@@ -1685,17 +1685,17 @@ CONTAINS
     DO i = 1, MAXN
       x(i) = i
       d(i) = 0.D0
-    ENDDO
+    END DO
     DO i = 2, MAXN, 3
       d(i) = 2.D0
-    ENDDO
+    END DO
     DO i = 1, 3
       f(i) = x(i)
       f(i+3) = f(i) + 1.D0
       f(i+6) = f(i+3) + 1.D0
       f(i+9) = f(i+6) + 1.D0
       f(i+12) = f(i+9) + 1.D0
-    ENDDO
+    END DO
     f(16) = 6.D0
     !       Define FB, DB.
     fb(1) = 0.D0
@@ -1709,7 +1709,7 @@ CONTAINS
     DO i = 1, 3
       fb(NB-i+1) = fb(i)
       db(NB-i+1) = -db(i)
-    ENDDO
+    END DO
     !
     !  INITIALIZE.
     !
@@ -1720,11 +1720,11 @@ CONTAINS
       99003 FORMAT (//5X,'DATA:'//9X,'I',4X,'X',5X,'F',5X,'D',5X,'FB',4X,'DB')
       DO i = 1, NB
         WRITE (Lun,99010) i, x(i), f(i), d(i), fb(i), db(i)
-      ENDDO
+      END DO
       DO i = NB + 1, MAXN
         WRITE (Lun,99010) i, x(i), f(i), d(i)
-      ENDDO
-    ENDIF
+      END DO
+    END IF
     !
     !  TRANSFER POINT FOR SECOND SET OF TESTS.
     !
@@ -1750,21 +1750,21 @@ CONTAINS
               ifail = ifail + 1
               IF ( Kprint>=3 ) WRITE (Lun,99012) (ismex1(k),k=1,n)
               EXIT
-            ENDIF
+            END IF
           ELSEIF ( incfd==2 ) THEN
             IF ( ismon(i)/=ismex2(i) ) THEN
               ifail = ifail + 1
               IF ( Kprint>=3 ) WRITE (Lun,99012) (ismex2(k),k=1,n)
               EXIT
-            ENDIF
+            END IF
           ELSEIF ( ismon(i)/=ismex3(i) ) THEN
             ifail = ifail + 1
             IF ( Kprint>=3 ) WRITE (Lun,99012) (ismex3(k),k=1,n)
             EXIT
-          ENDIF
-        ENDDO
-      ENDIF
-    ENDDO
+          END IF
+        END DO
+      END IF
+    END DO
     !
     !  Test for -1,3,1 bug.
     !
@@ -1783,9 +1783,9 @@ CONTAINS
           ifail = ifail + 1
           IF ( Kprint>=3 ) WRITE (Lun,99012) (ismexb(k),k=1,NB)
           EXIT
-        ENDIF
-      ENDDO
-    ENDIF
+        END IF
+      END DO
+    END IF
     !
     IF ( f(1)<0. ) THEN
       !
@@ -1804,7 +1804,7 @@ CONTAINS
         IF ( Kprint>=1 ) WRITE (Lun,99008)
         99008 FORMAT (/' ************ DPCHIP FAILED SOME MONOTONICITY TESTS',&
           ' ************')
-      ENDIF
+      END IF
       !
       RETURN
     ELSE
@@ -1817,20 +1817,20 @@ CONTAINS
         f(i) = -f(i)
         d(i) = -d(i)
         IF ( ismex1(i)/=2 ) ismex1(i) = -ismex1(i)
-      ENDDO
+      END DO
       DO i = 1, MAXN2
         IF ( ismex2(i)/=2 ) ismex2(i) = -ismex2(i)
-      ENDDO
+      END DO
       DO i = 1, MAXN3
         IF ( ismex3(i)/=2 ) ismex3(i) = -ismex3(i)
-      ENDDO
+      END DO
       DO i = 1, NB
         fb(i) = -fb(i)
         db(i) = -db(i)
         IF ( ismexb(i)/=2 ) ismexb(i) = -ismexb(i)
-      ENDDO
+      END DO
       GOTO 100
-    ENDIF
+    END IF
     99010 FORMAT (5X,I5,5F6.1)
     99011 FORMAT (' *** Failed -- bad IERR value.')
     99012 FORMAT (' *** Failed -- expect:',16I3)
@@ -1967,7 +1967,7 @@ CONTAINS
           99006 FORMAT (/15X,'X',9X,'KNOTS',10X,'F',7X,'FERR',8X,'D',7X,'DERR')
           WRITE (Lun,99013) t(1), t(2)
           j = 1
-        ENDIF
+        END IF
         DO i = 1, N
           fcalc = DBVALU(t,bcoef,ndim,k,0,x(i),inbv,work)
           ferr = f(i) - fcalc
@@ -1979,41 +1979,41 @@ CONTAINS
             j = j + 2
             WRITE (Lun,99007) x(i), t(j), t(j+1), f(i), ferr, d(i), derr
             99007 FORMAT (10X,3F8.2,F10.4,1P,D10.2,0P,F10.4,1P,D10.2)
-          ENDIF
-        ENDDO
+          END IF
+        END DO
         IF ( Kprint>=3 ) THEN
           j = j + 2
           WRITE (Lun,99013) t(j), t(j+1)
-        ENDIF
+        END IF
         fail = (fermax>tol) .OR. (dermax>tol)
         IF ( fail ) ifail = ifail + 1
         IF ( (Kprint>=3).OR.(Kprint>=2).AND.fail ) WRITE (Lun,99008) fermax, &
           dermax, tol
         99008 FORMAT (/5X,'Maximum relative errors:'/15X,'F-error =',1P,D13.5,5X,&
           'D-error =',D13.5/5X,'Both should be less than  TOL =',D13.5)
-      ENDIF
+      END IF
       !
       !          Special check for KNOTYP=-1.
       IF ( knotyp==0 ) THEN
         !             Save knot vector for next test.
         DO i = 1, nknots
           tsave(i) = t(i)
-        ENDDO
+        END DO
       ELSEIF ( knotyp==-1 ) THEN
         !             Check that knot vector is unchanged.
         termax = ZERO
         DO i = 1, nknots
           terr = ABS(t(i)-tsave(i))
           termax = MAX(termax,terr)
-        ENDDO
+        END DO
         IF ( termax>tolz ) THEN
           ifail = ifail + 1
           IF ( Kprint>=2 ) WRITE (Lun,99009) termax, tolz
           99009 FORMAT (/' *** T-ARRAY MAXIMUM CHANGE =',1P,D13.5,&
             ';  SHOULD NOT EXCEED TOLZ =',D13.5)
-        ENDIF
-      ENDIF
-    ENDDO
+        END IF
+      END IF
+    END DO
     !
     !  PRINT SUMMARY AND TERMINATE.
     !
@@ -2030,7 +2030,7 @@ CONTAINS
       IF ( Kprint>=1 ) WRITE (Lun,99012)
       99012 FORMAT (/' ************ DPCHIP FAILED SOME CONVERSION TESTS',&
         ' ************')
-    ENDIF
+    END IF
     !
     RETURN
     99013 FORMAT (18X,2F8.2)
@@ -2119,7 +2119,7 @@ PROGRAM TEST33
     CALL XSETF(0)
   ELSE
     CALL XSETF(1)
-  ENDIF
+  END IF
   !
   !     Test DPCHIP evaluators
   !
@@ -2155,6 +2155,6 @@ PROGRAM TEST33
     WRITE (lun,99002) nfail
     99002 FORMAT (/' ************* WARNING -- ',I5,&
       ' TEST(S) FAILED IN PROGRAM TEST33 *************')
-  ENDIF
+  END IF
   STOP
 END PROGRAM TEST33

@@ -29,6 +29,6 @@ SUBROUTINE DFMAT(X,Y,Yp)
     XSAve = X
     tanx = TAN(X/57.2957795130823D0)
     TERm = 3.0D0/tanx + 2.0D0*tanx
-  ENDIF
+  END IF
   Yp(2) = -TERm*Y(2) - 0.7D0*Y(1)
 END SUBROUTINE DFMAT

@@ -25,7 +25,7 @@ SUBROUTINE CHKPR4(Iorder,A,B,M,Mbdcnd,C,D,N,Nbdcnd,COFX,Idmn,Ierror)
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
-  
+
   REAL A, ai, B, bi, C, ci, D, dlx, xi
   INTEGER i, Idmn, Ierror, Iorder, M, Mbdcnd, N, Nbdcnd
   EXTERNAL :: COFX
@@ -69,8 +69,8 @@ SUBROUTINE CHKPR4(Iorder,A,B,M,Mbdcnd,C,D,N,Nbdcnd,COFX,Idmn,Ierror)
     IF ( ai<=0.0 ) THEN
       Ierror = 10
       RETURN
-    ENDIF
-  ENDDO
+    END IF
+  END DO
   !
   !     NO ERROR FOUND
   !

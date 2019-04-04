@@ -50,7 +50,7 @@ SUBROUTINE ISWAP(N,Ix,Incx,Iy,Incy)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920310  Corrected definition of LX in DESCRIPTION.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   INTEGER i, iix, iiy, Incx, Incy, m, mp1, N, ns
   INTEGER Ix(*), Iy(*), itemp1, itemp2, itemp3
   !* FIRST EXECUTABLE STATEMENT  ISWAP
@@ -69,9 +69,9 @@ SUBROUTINE ISWAP(N,Ix,Incx,Iy,Incy)
           itemp1 = Ix(i)
           Ix(i) = Iy(i)
           Iy(i) = itemp1
-        ENDDO
+        END DO
         IF ( N<3 ) RETURN
-      ENDIF
+      END IF
       GOTO 100
     ELSE
       !
@@ -82,10 +82,10 @@ SUBROUTINE ISWAP(N,Ix,Incx,Iy,Incy)
         itemp1 = Ix(i)
         Ix(i) = Iy(i)
         Iy(i) = itemp1
-      ENDDO
+      END DO
       RETURN
-    ENDIF
-  ENDIF
+    END IF
+  END IF
   !
   !     Code for unequal or nonpositive increments.
   !
@@ -99,7 +99,7 @@ SUBROUTINE ISWAP(N,Ix,Incx,Iy,Incy)
     Iy(iiy) = itemp1
     iix = iix + Incx
     iiy = iiy + Incy
-  ENDDO
+  END DO
   RETURN
   100  mp1 = m + 1
   DO i = mp1, N, 3
@@ -112,6 +112,6 @@ SUBROUTINE ISWAP(N,Ix,Incx,Iy,Incy)
     Iy(i) = itemp1
     Iy(i+1) = itemp2
     Iy(i+2) = itemp3
-  ENDDO
+  END DO
   RETURN
 END SUBROUTINE ISWAP

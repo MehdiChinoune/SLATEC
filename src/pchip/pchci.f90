@@ -134,7 +134,7 @@ SUBROUTINE PCHCI(N,H,Slope,D,Incfd)
       !        NEED DO THIS CHECK ONLY IF MONOTONICITY SWITCHES.
       dmax = three*del1
       IF ( ABS(D(1,1))>ABS(dmax) ) D(1,1) = dmax
-    ENDIF
+    END IF
     !
     !  LOOP THROUGH INTERIOR POINTS.
     !
@@ -144,7 +144,7 @@ SUBROUTINE PCHCI(N,H,Slope,D,Incfd)
         hsum = H(i-1) + H(i)
         del1 = del2
         del2 = Slope(i)
-      ENDIF
+      END IF
       !
       !        SET D(I)=0 UNLESS DATA ARE STRICTLY MONOTONIC.
       !
@@ -161,9 +161,9 @@ SUBROUTINE PCHCI(N,H,Slope,D,Incfd)
         drat1 = del1/dmax
         drat2 = del2/dmax
         D(1,i) = dmin/(w1*drat1+w2*drat2)
-      ENDIF
+      END IF
       !
-    ENDDO
+    END DO
     !
     !  SET D(N) VIA NON-CENTERED THREE-POINT FORMULA, ADJUSTED TO BE
     !     SHAPE-PRESERVING.
@@ -177,11 +177,11 @@ SUBROUTINE PCHCI(N,H,Slope,D,Incfd)
       !        NEED DO THIS CHECK ONLY IF MONOTONICITY SWITCHES.
       dmax = three*del2
       IF ( ABS(D(1,N))>ABS(dmax) ) D(1,N) = dmax
-    ENDIF
+    END IF
   ELSE
     D(1,1) = del1
     D(1,N) = del1
-  ENDIF
+  END IF
   !
   !  NORMAL RETURN.
   !

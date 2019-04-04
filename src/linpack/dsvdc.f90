@@ -119,7 +119,7 @@ SUBROUTINE DSVDC(X,Ldx,N,P,S,E,U,Ldu,V,Ldv,Work,Job,Info)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   INTEGER Ldx, N, P, Ldu, Ldv, Job, Info
   REAL(8) :: X(Ldx,*), S(*), E(*), U(Ldu,*), V(Ldv,*), Work(*)
   !
@@ -166,9 +166,9 @@ SUBROUTINE DSVDC(X,Ldx,N,P,S,E,U,Ldu,V,Ldv,Work,Job,Info)
           IF ( X(l,l)/=0.0D0 ) S(l) = SIGN(S(l),X(l,l))
           CALL DSCAL(N-l+1,1.0D0/S(l),X(l,l),1)
           X(l,l) = 1.0D0 + X(l,l)
-        ENDIF
+        END IF
         S(l) = -S(l)
-      ENDIF
+      END IF
       IF ( P>=lp1 ) THEN
         DO j = lp1, P
           IF ( l<=nct ) THEN
@@ -178,15 +178,15 @@ SUBROUTINE DSVDC(X,Ldx,N,P,S,E,U,Ldu,V,Ldv,Work,Job,Info)
               !
               t = -DDOT(N-l+1,X(l,l),1,X(l,j),1)/X(l,l)
               CALL DAXPY(N-l+1,t,X(l,l),1,X(l,j),1)
-            ENDIF
-          ENDIF
+            END IF
+          END IF
           !
           !           PLACE THE L-TH ROW OF X INTO  E FOR THE
           !           SUBSEQUENT CALCULATION OF THE ROW TRANSFORMATION.
           !
           E(j) = X(l,j)
-        ENDDO
-      ENDIF
+        END DO
+      END IF
       IF ( .NOT.(.NOT.wantu.OR.l>nct) ) THEN
         !
         !           PLACE THE TRANSFORMATION IN U FOR SUBSEQUENT BACK
@@ -194,8 +194,8 @@ SUBROUTINE DSVDC(X,Ldx,N,P,S,E,U,Ldu,V,Ldv,Work,Job,Info)
         !
         DO i = l, N
           U(i,l) = X(i,l)
-        ENDDO
-      ENDIF
+        END DO
+      END IF
       IF ( l<=nrt ) THEN
         !
         !           COMPUTE THE L-TH ROW TRANSFORMATION AND PLACE THE
@@ -206,7 +206,7 @@ SUBROUTINE DSVDC(X,Ldx,N,P,S,E,U,Ldu,V,Ldv,Work,Job,Info)
           IF ( E(lp1)/=0.0D0 ) E(l) = SIGN(E(l),E(lp1))
           CALL DSCAL(P-l,1.0D0/E(l),E(lp1),1)
           E(lp1) = 1.0D0 + E(lp1)
-        ENDIF
+        END IF
         E(l) = -E(l)
         IF ( lp1<=N.AND.E(l)/=0.0D0 ) THEN
           !
@@ -214,14 +214,14 @@ SUBROUTINE DSVDC(X,Ldx,N,P,S,E,U,Ldu,V,Ldv,Work,Job,Info)
           !
           DO i = lp1, N
             Work(i) = 0.0D0
-          ENDDO
+          END DO
           DO j = lp1, P
             CALL DAXPY(N-l,E(j),X(lp1,j),1,Work(lp1),1)
-          ENDDO
+          END DO
           DO j = lp1, P
             CALL DAXPY(N-l,-E(j)/E(lp1),Work(lp1),1,X(lp1,j),1)
-          ENDDO
-        ENDIF
+          END DO
+        END IF
         IF ( wantv ) THEN
           !
           !              PLACE THE TRANSFORMATION IN V FOR SUBSEQUENT
@@ -229,11 +229,11 @@ SUBROUTINE DSVDC(X,Ldx,N,P,S,E,U,Ldu,V,Ldv,Work,Job,Info)
           !
           DO i = lp1, P
             V(i,l) = E(i)
-          ENDDO
-        ENDIF
-      ENDIF
-    ENDDO
-  ENDIF
+          END DO
+        END IF
+      END IF
+    END DO
+  END IF
   !
   !     SET UP THE FINAL BIDIAGONAL MATRIX OR ORDER M.
   !
@@ -252,17 +252,17 @@ SUBROUTINE DSVDC(X,Ldx,N,P,S,E,U,Ldu,V,Ldv,Work,Job,Info)
       DO j = nctp1, ncu
         DO i = 1, N
           U(i,j) = 0.0D0
-        ENDDO
+        END DO
         U(j,j) = 1.0D0
-      ENDDO
-    ENDIF
+      END DO
+    END IF
     IF ( nct>=1 ) THEN
       DO ll = 1, nct
         l = nct - ll + 1
         IF ( S(l)==0.0D0 ) THEN
           DO i = 1, N
             U(i,l) = 0.0D0
-          ENDDO
+          END DO
           U(l,l) = 1.0D0
         ELSE
           lp1 = l + 1
@@ -270,20 +270,20 @@ SUBROUTINE DSVDC(X,Ldx,N,P,S,E,U,Ldu,V,Ldv,Work,Job,Info)
             DO j = lp1, ncu
               t = -DDOT(N-l+1,U(l,l),1,U(l,j),1)/U(l,l)
               CALL DAXPY(N-l+1,t,U(l,l),1,U(l,j),1)
-            ENDDO
-          ENDIF
+            END DO
+          END IF
           CALL DSCAL(N-l+1,-1.0D0,U(l,l),1)
           U(l,l) = 1.0D0 + U(l,l)
           lm1 = l - 1
           IF ( lm1>=1 ) THEN
             DO i = 1, lm1
               U(i,l) = 0.0D0
-            ENDDO
-          ENDIF
-        ENDIF
-      ENDDO
-    ENDIF
-  ENDIF
+            END DO
+          END IF
+        END IF
+      END DO
+    END IF
+  END IF
   !
   !     IF IT IS REQUIRED, GENERATE V.
   !
@@ -296,15 +296,15 @@ SUBROUTINE DSVDC(X,Ldx,N,P,S,E,U,Ldu,V,Ldv,Work,Job,Info)
           DO j = lp1, P
             t = -DDOT(P-l,V(lp1,l),1,V(lp1,j),1)/V(lp1,l)
             CALL DAXPY(P-l,t,V(lp1,l),1,V(lp1,j),1)
-          ENDDO
-        ENDIF
-      ENDIF
+          END DO
+        END IF
+      END IF
       DO i = 1, P
         V(i,l) = 0.0D0
-      ENDDO
+      END DO
       V(l,l) = 1.0D0
-    ENDDO
-  ENDIF
+    END DO
+  END IF
   !
   !     MAIN ITERATION LOOP FOR THE SINGULAR VALUES.
   !
@@ -338,8 +338,8 @@ SUBROUTINE DSVDC(X,Ldx,N,P,S,E,U,Ldu,V,Ldv,Work,Job,Info)
         IF ( ztest==test ) THEN
           E(l) = 0.0D0
           EXIT
-        ENDIF
-      ENDDO
+        END IF
+      END DO
       IF ( l/=m-1 ) THEN
         lp1 = l + 1
         mp1 = m + 1
@@ -353,8 +353,8 @@ SUBROUTINE DSVDC(X,Ldx,N,P,S,E,U,Ldu,V,Ldv,Work,Job,Info)
           IF ( ztest==test ) THEN
             S(ls) = 0.0D0
             EXIT
-          ENDIF
-        ENDDO
+          END IF
+        END DO
         IF ( ls==l ) THEN
           kase = 3
         ELSEIF ( ls/=m ) THEN
@@ -362,10 +362,10 @@ SUBROUTINE DSVDC(X,Ldx,N,P,S,E,U,Ldu,V,Ldv,Work,Job,Info)
           l = ls
         ELSE
           kase = 1
-        ENDIF
+        END IF
       ELSE
         kase = 4
-      ENDIF
+      END IF
       l = l + 1
       !
       !        PERFORM THE TASK INDICATED BY KASE.
@@ -384,7 +384,7 @@ SUBROUTINE DSVDC(X,Ldx,N,P,S,E,U,Ldu,V,Ldv,Work,Job,Info)
             f = -sn*E(k)
             E(k) = cs*E(k)
             IF ( wantu ) CALL DROT(N,U(1,k),1,U(1,l-1),1,cs,sn)
-          ENDDO
+          END DO
         CASE (3)
           !
           !        PERFORM ONE QR STEP.
@@ -405,7 +405,7 @@ SUBROUTINE DSVDC(X,Ldx,N,P,S,E,U,Ldu,V,Ldv,Work,Job,Info)
             shift = SQRT(b**2+c)
             IF ( b<0.0D0 ) shift = -shift
             shift = c/(b+shift)
-          ENDIF
+          END IF
           f = (sl+sm)*(sl-sm) - shift
           g = sl*el
           !
@@ -427,7 +427,7 @@ SUBROUTINE DSVDC(X,Ldx,N,P,S,E,U,Ldu,V,Ldv,Work,Job,Info)
             g = sn*E(k+1)
             E(k+1) = cs*E(k+1)
             IF ( wantu.AND.k<N ) CALL DROT(N,U(1,k),1,U(1,k+1),1,cs,sn)
-          ENDDO
+          END DO
           E(m-1) = f
           iter = iter + 1
         CASE (4)
@@ -440,7 +440,7 @@ SUBROUTINE DSVDC(X,Ldx,N,P,S,E,U,Ldu,V,Ldv,Work,Job,Info)
           IF ( S(l)<0.0D0 ) THEN
             S(l) = -S(l)
             IF ( wantv ) CALL DSCAL(P,-1.0D0,V(1,l),1)
-          ENDIF
+          END IF
           !
           !           ORDER THE SINGULAR VALUE.
           !
@@ -452,7 +452,7 @@ SUBROUTINE DSVDC(X,Ldx,N,P,S,E,U,Ldu,V,Ldv,Work,Job,Info)
             IF ( wantv.AND.l<P ) CALL DSWAP(P,V(1,l),1,V(1,l+1),1)
             IF ( wantu.AND.l<N ) CALL DSWAP(N,U(1,l),1,U(1,l+1),1)
             l = l + 1
-          ENDDO
+          END DO
           GOTO 50
         CASE DEFAULT
           !
@@ -469,16 +469,16 @@ SUBROUTINE DSVDC(X,Ldx,N,P,S,E,U,Ldu,V,Ldv,Work,Job,Info)
             IF ( k/=l ) THEN
               f = -sn*E(k-1)
               E(k-1) = cs*E(k-1)
-            ENDIF
+            END IF
             IF ( wantv ) CALL DROT(P,V(1,k),1,V(1,m),1,cs,sn)
-          ENDDO
+          END DO
       END SELECT
       CYCLE
     ELSE
       Info = m
       EXIT
-    ENDIF
-    50     iter = 0
+    END IF
+    50  iter = 0
     m = m - 1
-  ENDDO
+  END DO
 END SUBROUTINE DSVDC

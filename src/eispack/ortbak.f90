@@ -81,7 +81,7 @@ SUBROUTINE ORTBAK(Nm,Low,Igh,A,Ort,M,Z)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   !
   INTEGER i, j, M, la, mm, mp, Nm, Igh, kp1, Low, mp1
   REAL A(Nm,*), Ort(*), Z(Nm,*)
@@ -100,27 +100,27 @@ SUBROUTINE ORTBAK(Nm,Low,Igh,A,Ort,M,Z)
           !
           DO i = mp1, Igh
             Ort(i) = A(i,mp-1)
-          ENDDO
+          END DO
           !
           DO j = 1, M
             g = 0.0E0
             !
             DO i = mp, Igh
               g = g + Ort(i)*Z(i,j)
-            ENDDO
+            END DO
             !     .......... DIVISOR BELOW IS NEGATIVE OF H FORMED IN ORTHES.
             !                DOUBLE DIVISION AVOIDS POSSIBLE UNDERFLOW ..........
             g = (g/Ort(mp))/A(mp,mp-1)
             !
             DO i = mp, Igh
               Z(i,j) = Z(i,j) + g*Ort(i)
-            ENDDO
+            END DO
             !
-          ENDDO
-        ENDIF
+          END DO
+        END IF
         !
-      ENDDO
-    ENDIF
-  ENDIF
+      END DO
+    END IF
+  END IF
   !
 END SUBROUTINE ORTBAK

@@ -26,7 +26,7 @@ SUBROUTINE RADB5(Ido,L1,Cc,Ch,Wa1,Wa2,Wa3,Wa4)
   !   890831  Modified array declarations.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
-  
+
   INTEGER i, ic, Ido, idp2, k, L1
   REAL Cc(Ido,5,*), Ch(Ido,L1,5), ci2, ci3, ci4, ci5, cr2, cr3, cr4, cr5, di2, di3, &
     di4, di5, dr2, dr3, dr4, dr5, pi, ti11
@@ -52,7 +52,7 @@ SUBROUTINE RADB5(Ido,L1,Cc,Ch,Wa1,Wa2,Wa3,Wa4)
     Ch(1,k,3) = cr3 - ci4
     Ch(1,k,4) = cr3 + ci4
     Ch(1,k,5) = cr2 + ci5
-  ENDDO
+  END DO
   IF ( Ido==1 ) RETURN
   idp2 = Ido + 2
   IF ( (Ido-1)/2<L1 ) THEN
@@ -94,10 +94,10 @@ SUBROUTINE RADB5(Ido,L1,Cc,Ch,Wa1,Wa2,Wa3,Wa4)
         Ch(i,k,4) = Wa3(i-2)*di4 + Wa3(i-1)*dr4
         Ch(i-1,k,5) = Wa4(i-2)*dr5 - Wa4(i-1)*di5
         Ch(i,k,5) = Wa4(i-2)*di5 + Wa4(i-1)*dr5
-      ENDDO
-    ENDDO
+      END DO
+    END DO
     RETURN
-  ENDIF
+  END IF
   DO k = 1, L1
     !DIR$ IVDEP
     DO i = 3, Ido, 2
@@ -136,7 +136,7 @@ SUBROUTINE RADB5(Ido,L1,Cc,Ch,Wa1,Wa2,Wa3,Wa4)
       Ch(i,k,4) = Wa3(i-2)*di4 + Wa3(i-1)*dr4
       Ch(i-1,k,5) = Wa4(i-2)*dr5 - Wa4(i-1)*di5
       Ch(i,k,5) = Wa4(i-2)*di5 + Wa4(i-1)*dr5
-    ENDDO
-  ENDDO
+    END DO
+  END DO
   RETURN
 END SUBROUTINE RADB5

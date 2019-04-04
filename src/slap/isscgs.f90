@@ -216,7 +216,7 @@ INTEGER FUNCTION ISSCGS(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,&
     CALL MATVEC(N,X,V2,Nelt,Ia,Ja,A,Isym)
     DO i = 1, N
       V2(i) = V2(i) - B(i)
-    ENDDO
+    END DO
     Err = SNRM2(N,V2,1)/Bnrm
   ELSEIF ( Itol==2 ) THEN
     !                  -1              -1
@@ -224,21 +224,21 @@ INTEGER FUNCTION ISSCGS(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,&
     IF ( Iter==0 ) THEN
       CALL MSOLVE(N,B,V2,Nelt,Ia,Ja,A,Isym,Rwork,Iwork)
       Bnrm = SNRM2(N,V2,1)
-    ENDIF
+    END IF
     Err = SNRM2(N,R,1)/Bnrm
   ELSEIF ( Itol==11 ) THEN
     !         err = ||x-TrueSolution||/||TrueSolution|| (2-Norms).
     IF ( Iter==0 ) Solnrm = SNRM2(N,SOLn,1)
     DO i = 1, N
       V2(i) = X(i) - SOLn(i)
-    ENDDO
+    END DO
     Err = SNRM2(N,V2,1)/Solnrm
   ELSE
     !
     !         If we get here ITOL is not one of the acceptable values.
     Err = R1MACH(2)
     Ierr = 3
-  ENDIF
+  END IF
   !
   !         Print the error and coefficients AK, BK on each step,
   !         if desired.
@@ -251,8 +251,8 @@ INTEGER FUNCTION ISSCGS(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,&
       WRITE (Iunit,99002) Iter, Err
     ELSE
       WRITE (Iunit,99002) Iter, Err, Ak, Bk
-    ENDIF
-  ENDIF
+    END IF
+  END IF
   IF ( Err<=Tol ) ISSCGS = 1
   !
   RETURN

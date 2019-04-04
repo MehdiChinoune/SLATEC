@@ -74,8 +74,8 @@ CONTAINS
         IF ( Kprint>=2.AND.PASs ) WRITE (NPRint,99002)
         99002 FORMAT ('+',39X,'PASS')
         IF ( .NOT.PASs ) Ipass = 0
-      ENDIF
-    ENDDO
+      END IF
+    END DO
     IF ( Kprint>=2.AND.Ipass==1 ) WRITE (NPRint,99003)
     99003 FORMAT (/' ****************BLAS PASSED ALL TESTS****************')
     IF ( Kprint>=1.AND.Ipass==0 ) WRITE (NPRint,99004)
@@ -230,20 +230,20 @@ CONTAINS
           DO i = 1, 4
             stemp(i) = REAL( dab(i,k), 4 )
             stemp(i+4) = zero
-          ENDDO
+          END DO
           stemp(9) = zero
           CALL SROTMG(stemp(1),stemp(2),stemp(3),stemp(4),stemp(5))
           !
           DO i = 1, 9
             strue(i) = REAL( dtrue(i,k), 4 )
-          ENDDO
+          END DO
           CALL STEST(9,stemp,strue,strue,Sfac,Kprint)
         CASE (6)
           ! 17. DROTMG
           DO i = 1, 4
             dtemp(i) = dab(i,k)
             dtemp(i+4) = dzero
-          ENDDO
+          END DO
           dtemp(9) = dzero
           CALL DROTMG(dtemp(1),dtemp(2),dtemp(3),dtemp(4),dtemp(5))
           CALL DTEST(9,dtemp,dtrue(1,k),dtrue(1,k),Dfac,Kprint)
@@ -262,7 +262,7 @@ CONTAINS
           stmp = REAL(ds1(k))
           CALL STEST(1,ss,stmp,stmp,Sfac,Kprint)
       END SELECT
-    ENDDO
+    END DO
     RETURN
     !                     THE FOLLOWING STOP SHOULD NEVER BE REACHED.
     100  STOP
@@ -397,7 +397,7 @@ CONTAINS
           sx(i) = REAL( dv(i,np1,INCx), 4 )
           dx(i) = dv(i,np1,INCx)
           cx(i) = cv(i,np1,INCx)
-        ENDDO
+        END DO
         !
         !                        BRANCH TO INVOKE SUBPROGRAM TO BE TESTED.
         !
@@ -428,7 +428,7 @@ CONTAINS
             CALL SSCAL(N,sa,sx,INCx)
             DO i = 1, len
               strue(i) = REAL( dtrue5(i,np1,INCx), 4 )
-            ENDDO
+            END DO
             CALL STEST(len,sx,strue,strue,Sfac,Kprint)
           CASE (8)
             ! 33. DSCALE
@@ -461,8 +461,8 @@ CONTAINS
             CALL STEST(1,stmp,stmp2,stmp2,Sfac,Kprint)
         END SELECT
         !
-      ENDDO
-    ENDDO
+      END DO
+    END DO
   END SUBROUTINE CHECK1
   !** CHECK2
   SUBROUTINE CHECK2(Sfac,Sdfac,Dfac,Dqfac,Kprint)
@@ -897,7 +897,7 @@ CONTAINS
           dy(i) = dy1(i)
           cx(i) = cx1(i)
           cy(i) = cy1(i)
-        ENDDO
+        END DO
         !
         ! BRANCH TO SELECT SUBPROGRAM TO BE TESTED.
         !
@@ -953,7 +953,7 @@ CONTAINS
             CALL SAXPY(N,sa,sx,INCx,sy,INCy)
             DO j = 1, leny
               sty(j) = REAL( dt8(j,kn,ki), 4 )
-            ENDDO
+            END DO
             CALL STEST(leny,sy,sty,ssize2(:,ksize),Sfac,Kprint)
           CASE (10)
             ! 10. DAXPY
@@ -972,7 +972,7 @@ CONTAINS
               sy(i) = REAL( dy1(i), 4 )
               stx(i) = REAL( dt9x(i,kn,ki), 4 )
               sty(i) = REAL( dt9y(i,kn,ki), 4 )
-            ENDDO
+            END DO
             CALL SROT(N,sx,INCx,sy,INCy,sc,ss)
             CALL STEST(lenx,sx,stx,ssize2(:,ksize),Sfac,Kprint)
             CALL STEST(leny,sy,sty,ssize2(:,ksize),Sfac,Kprint)
@@ -981,7 +981,7 @@ CONTAINS
             DO i = 1, 7
               dx(i) = dx1(i)
               dy(i) = dy1(i)
-            ENDDO
+            END DO
             CALL DROT(N,dx,INCx,dy,INCy,dc,ds)
             CALL DTEST(lenx,dx,dt9x(1,kn,ki),dsize2(:,ksize),Dfac,Kprint)
             CALL DTEST(leny,dy,dt9y(1,kn,ki),dsize2(:,ksize),Dfac,Kprint)
@@ -994,17 +994,17 @@ CONTAINS
                 sy(i) = REAL( dy1(i), 4 )
                 stx(i) = REAL( dt19x(i,kpar,kni), 4 )
                 sty(i) = REAL( dt19y(i,kpar,kni), 4 )
-              ENDDO
+              END DO
               !
               DO i = 1, 5
                 sparam(i) = REAL( dpar(i,kpar), 4 )
-              ENDDO
+              END DO
               ! SET MODE TO IDENTIFY DIAGNOSTIC OUTPUT, IF ANY
               MODe = INT(sparam(1))
               !
               DO i = 1, lenx
                 ssize(i) = stx(i)
-              ENDDO
+              END DO
               !  THE TRUE RESULTS DT19X(1,2,7) AND
               !  DT19X(5,3,8) ARE ZERO DUE TO CANCELLATION.
               !  DT19X(1,2,7) = 2.*.6 - 4.*.3 = 0
@@ -1017,7 +1017,7 @@ CONTAINS
               CALL SROTM(N,sx,INCx,sy,INCy,sparam)
               CALL STEST(lenx,sx,stx,ssize,Sfac,Kprint)
               CALL STEST(leny,sy,sty,sty,Sfac,Kprint)
-            ENDDO
+            END DO
           CASE (19)
             ! 19. DROTM
             kni = kn + 4*(ki-1)
@@ -1027,17 +1027,17 @@ CONTAINS
                 dy(i) = dy1(i)
                 dtx(i) = dt19x(i,kpar,kni)
                 dty(i) = dt19y(i,kpar,kni)
-              ENDDO
+              END DO
               !
               DO i = 1, 5
                 dparam(i) = dpar(i,kpar)
-              ENDDO
+              END DO
               ! SET MODE TO IDENTIFY DIAGNOSTIC OUTPUT, IF ANY
               MODe = INT(dparam(1))
               !
               DO i = 1, lenx
                 dsize(i) = dtx(i)
-              ENDDO
+              END DO
               !  SEE REMARK ABOVE ABOUT DT11X(1,2,7) AND DT11X(5,3,8).
               IF ( (kpar==2).AND.(kni==7) ) dsize(1) = 2.4D0
               IF ( (kpar==3).AND.(kni==8) ) dsize(5) = 1.8D0
@@ -1045,12 +1045,12 @@ CONTAINS
               CALL DROTM(N,dx,INCx,dy,INCy,dparam)
               CALL DTEST(lenx,dx,dtx,dsize,Dfac,Kprint)
               CALL DTEST(leny,dy,dty,dty,Dfac,Kprint)
-            ENDDO
+            END DO
           CASE (20)
             ! 20. SCOPY
             DO i = 1, 7
               sty(i) = REAL( dt10y(i,kn,ki), 4 )
-            ENDDO
+            END DO
             CALL SCOPY(N,sx,INCx,sy,INCy)
             CALL STEST(leny,sy,sty,ssize2,1.,Kprint)
           CASE (21)
@@ -1068,7 +1068,7 @@ CONTAINS
             DO i = 1, 7
               stx(i) = REAL( dt10x(i,kn,ki), 4 )
               sty(i) = REAL( dt10y(i,kn,ki), 4 )
-            ENDDO
+            END DO
             CALL STEST(lenx,sx,stx,ssize2,1.,Kprint)
             CALL STEST(leny,sy,sty,ssize2,1.,Kprint)
           CASE (24)
@@ -1091,8 +1091,8 @@ CONTAINS
         !
         !
         !
-      ENDDO
-    ENDDO
+      END DO
+    END DO
     RETURN
     !                 THE FOLLOWING STOP SHOULD NEVER BE REACHED.
     100  STOP
@@ -1150,15 +1150,15 @@ CONTAINS
             WRITE (NPRint,99002)
             99002 FORMAT ('0CASE  N INCX INCY MODE  I',29X,'COMP(I)',29X,'TRUE(I)',&
               2X,'DIFFERENCE'/1X)
-          ENDIF
-        ENDIF
+          END IF
+        END IF
         IF ( Kprint>=3 ) THEN
           id = Icomp(i) - Itrue(i)
           WRITE (NPRint,99003) ICAse, N, INCx, INCy, MODe, i, Icomp(i), Itrue(i), id
           99003 FORMAT (1X,I4,I3,3I5,I3,2I36,I12)
-        ENDIF
-      ENDIF
-    ENDDO
+        END IF
+      END IF
+    END DO
     RETURN
   END SUBROUTINE ITEST
   !** STEST
@@ -1222,13 +1222,13 @@ CONTAINS
             WRITE (NPRint,99002)
             99002 FORMAT ('0CASE  N INCX INCY MODE  I',29X,'COMP(I)',29X,'TRUE(I)',&
               2X,'DIFFERENCE',5X,'SIZE(I)'/1X)
-          ENDIF
-        ENDIF
+          END IF
+        END IF
         IF ( Kprint>=3 ) WRITE (NPRint,99003) ICAse, N, INCx, INCy, MODe, &
           i, Scomp(i), Strue(i), sd, Ssize(i)
         99003 FORMAT (1X,I4,I3,3I5,I3,2E36.8,2E12.4)
-      ENDIF
-    ENDDO
+      END IF
+    END DO
     RETURN
   END SUBROUTINE STEST
   !** DTEST
@@ -1290,13 +1290,13 @@ CONTAINS
             WRITE (NPRint,99002)
             99002 FORMAT ('0CASE  N INCX INCY MODE  I',29X,'COMP(I)',29X,'TRUE(I)',&
               2X,'DIFFERENCE',5X,'SIZE(I)'/1X)
-          ENDIF
-        ENDIF
+          END IF
+        END IF
         IF ( Kprint>=3 ) WRITE (NPRint,99003) ICAse, N, INCx, INCy, MODe, &
           i, Dcomp(i), Dtrue(i), dd, Dsize(i)
         99003 FORMAT (1X,I4,I3,3I5,I3,2D36.18,2D12.4)
-      ENDIF
-    ENDDO
+      END IF
+    END DO
     RETURN
   END SUBROUTINE DTEST
 
@@ -1359,13 +1359,13 @@ CONTAINS
             WRITE (NPRint,99002)
             99002 FORMAT ('0CASE  N INCX INCY MODE  I',29X,'COMP(I)',29X,'TRUE(I)',&
               2X,'DIFFERENCE',5X,'SIZE(I)'/1X)
-          ENDIF
-        ENDIF
+          END IF
+        END IF
         IF ( Kprint>=3 ) WRITE (NPRint,99003) ICAse, N, INCx, INCy, MODe, &
           i, Ccomp(i), Ctrue(i), dd, Csize(i)
         99003 FORMAT (1X,I4,I3,3I5,I3,2D36.18,2D12.4)
-      ENDIF
-    ENDDO
+      END IF
+    END DO
     RETURN
   END SUBROUTINE CTEST
 END MODULE TEST17_MOD
@@ -1438,7 +1438,7 @@ PROGRAM TEST17
     CALL XSETF(0)
   ELSE
     CALL XSETF(1)
-  ENDIF
+  END IF
   !
   !     Test BLAS
   !
@@ -1454,6 +1454,6 @@ PROGRAM TEST17
     WRITE (lun,99002) nfail
     99002 FORMAT (/' ************* WARNING -- ',I5,&
       ' TEST(S) FAILED IN PROGRAM TEST17 *************')
-  ENDIF
+  END IF
   STOP
 END PROGRAM TEST17

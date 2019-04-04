@@ -43,17 +43,17 @@ SUBROUTINE DFSPVD(T,K,X,Ileft,Vnikx,Nderiv)
       idervm = ideriv - 1
       DO j = ideriv, K
         Vnikx(j-1,idervm) = Vnikx(j,ideriv)
-      ENDDO
+      END DO
       ideriv = idervm
       CALL DFSPVN(T,0,2,X,Ileft,Vnikx(ideriv,ideriv))
-    ENDDO
+    END DO
     !
     DO i = 1, K
       DO j = 1, K
         a(i,j) = 0.D0
-      ENDDO
+      END DO
       a(i,i) = 1.D0
-    ENDDO
+    END DO
     kmd = K
     DO m = 2, Nderiv
       kmd = kmd - 1
@@ -72,20 +72,20 @@ SUBROUTINE DFSPVD(T,K,X,Ileft,Vnikx,Nderiv)
             jlow = MAX(i,m)
             DO j = jlow, K
               v = a(i,j)*Vnikx(j,m) + v
-            ENDDO
+            END DO
             Vnikx(i,m) = v
-          ENDDO
+          END DO
           EXIT
         ELSE
           IF ( diff/=0.D0 ) THEN
             DO l = 1, j
               a(l,j) = (a(l,j)-a(l,j-1))/diff*fkmd
-            ENDDO
-          ENDIF
+            END DO
+          END IF
           j = jm1
           i = i - 1
-        ENDIF
-      ENDDO
-    ENDDO
-  ENDIF
+        END IF
+      END DO
+    END DO
+  END IF
 END SUBROUTINE DFSPVD

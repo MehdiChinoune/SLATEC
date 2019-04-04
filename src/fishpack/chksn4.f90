@@ -46,7 +46,7 @@ SUBROUTINE CHKSN4(Mbdcnd,Nbdcnd,Alpha,Beta,COFX,Singlr)
   !
   IF ( Mbdcnd==3 ) THEN
     IF ( Alpha/=0.0.OR.Beta/=0.0 ) RETURN
-  ENDIF
+  END IF
   !
   !     CHECK THAT NON-DERIVATIVE COEFFICIENT FUNCTIONS
   !     ARE ZERO
@@ -55,7 +55,7 @@ SUBROUTINE CHKSN4(Mbdcnd,Nbdcnd,Alpha,Beta,COFX,Singlr)
     xi = AIT + (i-1)*DLX
     CALL COFX(xi,ai,bi,ci)
     IF ( ci/=0.0 ) RETURN
-  ENDDO
+  END DO
   !
   !     THE OPERATOR MUST BE SINGULAR IF THIS POINT IS REACHED
   !

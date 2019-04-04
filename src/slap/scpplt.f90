@@ -147,7 +147,7 @@ SUBROUTINE SCPPLT(N,Nelt,Ia,Ja,A,Isym,Iunit)
   nmax = MIN(MAXORD,N)
   DO i = 1, nmax
     chmat(i)(1:nmax) = ' '
-  ENDDO
+  END DO
   DO icol = 1, nmax
     jbgn = Ja(icol)
     jend = Ja(icol+1) - 1
@@ -162,8 +162,8 @@ SUBROUTINE SCPPLT(N,Nelt,Ia,Ja,A,Isym,Iunit)
             chmat(irow)(icol:icol) = '#'
           ELSE
             chmat(irow)(icol:icol) = '*'
-          ENDIF
-        ENDIF
+          END IF
+        END IF
         IF ( irow==icol ) THEN
           !         Diagonal entry.
           IF ( A(j)==0.0E0 ) THEN
@@ -172,7 +172,7 @@ SUBROUTINE SCPPLT(N,Nelt,Ia,Ja,A,Isym,Iunit)
             chmat(irow)(icol:icol) = 'D'
           ELSE
             chmat(irow)(icol:icol) = 'N'
-          ENDIF
+          END IF
           !         Off-Diagonal entry
         ELSEIF ( A(j)==0.0E0 ) THEN
           chmat(irow)(icol:icol) = '0'
@@ -180,10 +180,10 @@ SUBROUTINE SCPPLT(N,Nelt,Ia,Ja,A,Isym,Iunit)
           chmat(irow)(icol:icol) = '#'
         ELSE
           chmat(irow)(icol:icol) = '*'
-        ENDIF
-      ENDIF
-    ENDDO
-  ENDDO
+        END IF
+      END IF
+    END DO
+  END DO
   !
   !         Write out the heading.
   WRITE (Iunit,99001) N, Nelt, REAL(Nelt)/(N*N)
@@ -198,7 +198,7 @@ SUBROUTINE SCPPLT(N,Nelt,Ia,Ja,A,Isym,Iunit)
   DO irow = 1, nmax
     WRITE (Iunit,99003) irow, chmat(irow)(1:nmax)
     99003 FORMAT (1X,I3,A)
-  ENDDO
+  END DO
   RETURN
   !------------- LAST LINE OF SCPPLT FOLLOWS ----------------------------
 END SUBROUTINE SCPPLT

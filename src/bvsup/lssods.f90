@@ -122,7 +122,7 @@ SUBROUTINE LSSODS(A,X,B,M,N,Nrda,Iflag,Irank,Iscale,Q,Diag,Kpivot,Iter,&
   !   900402  Added TYPE section.  (WRB)
   !   910408  Updated the REFERENCES section.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   INTEGER nfatal, nmir, Nrda
   REAL A(Nrda,*), acc, B(*), Diag(*), Div(*), gam, gamma, Q(Nrda,*), R(*), &
     R1MACH, Resnrm, Scales(*), SDOT, SDSDOT, Td(*), uro, X(*), Xnorm, Z(*), znorm
@@ -151,15 +151,15 @@ SUBROUTINE LSSODS(A,X,B,M,N,Nrda,Iflag,Irank,Iscale,Q,Diag,Kpivot,Iter,&
           IF ( nfatal==0 ) nfat = 0
           CALL XSETF(nfat)
           CALL XERMAX(1)
-        ENDIF
+        END IF
         !
         !     COPY MATRIX A INTO MATRIX Q
         !
         DO j = 1, N
           DO k = 1, M
             Q(k,j) = A(k,j)
-          ENDDO
-        ENDDO
+          END DO
+        END DO
         !
         !     USE ORTHOGONAL TRANSFORMATIONS TO REDUCE Q TO
         !     UPPER TRIANGULAR FORM
@@ -174,7 +174,7 @@ SUBROUTINE LSSODS(A,X,B,M,N,Nrda,Iflag,Irank,Iscale,Q,Diag,Kpivot,Iter,&
           !
           DO k = 1, N
             Div(k) = Diag(k)
-          ENDDO
+          END DO
           GOTO 100
         ELSE
           !
@@ -183,12 +183,12 @@ SUBROUTINE LSSODS(A,X,B,M,N,Nrda,Iflag,Irank,Iscale,Q,Diag,Kpivot,Iter,&
           !
           IF ( Irank/=0 ) CALL OHTROR(Q,N,Nrda,Diag,Irank,Div,Td)
           RETURN
-        ENDIF
+        END IF
       ELSEIF ( Iflag==1 ) THEN
         GOTO 100
-      ENDIF
-    ENDIF
-  ENDIF
+      END IF
+    END IF
+  END IF
   !
   !     INVALID INPUT FOR LSSODS
   Iflag = 2
@@ -204,7 +204,7 @@ SUBROUTINE LSSODS(A,X,B,M,N,Nrda,Iflag,Irank,Iscale,Q,Diag,Kpivot,Iter,&
   !
   DO k = 1, N
     X(k) = 0.
-  ENDDO
+  END DO
   !
   IF ( Irank>0 ) THEN
     !
@@ -212,7 +212,7 @@ SUBROUTINE LSSODS(A,X,B,M,N,Nrda,Iflag,Irank,Iscale,Q,Diag,Kpivot,Iter,&
     !
     DO k = 1, M
       R(k) = B(k)
-    ENDDO
+    END DO
     !
     !- *********************************************************************
     !     SOLUTION SECTION
@@ -229,8 +229,8 @@ SUBROUTINE LSSODS(A,X,B,M,N,Nrda,Iflag,Irank,Iscale,Q,Diag,Kpivot,Iter,&
         gamma = SDOT(mj,Q(j,j),1,R(j),1)/(Diag(j)*Q(j,j))
         DO k = j, M
           R(k) = R(k) + gamma*Q(k,j)
-        ENDDO
-      ENDDO
+        END DO
+      END DO
       !
       !        BACKWARD SUBSTITUTION FOR TRIANGULAR SYSTEM SOLUTION
       !
@@ -240,8 +240,8 @@ SUBROUTINE LSSODS(A,X,B,M,N,Nrda,Iflag,Irank,Iscale,Q,Diag,Kpivot,Iter,&
           k = Irank - l
           kp = k + 1
           Z(k) = (R(k)-SDOT(l,Q(k,kp),Nrda,Z(kp),1))/Div(k)
-        ENDDO
-      ENDIF
+        END DO
+      END IF
       !
       IF ( Irank/=N ) THEN
         !
@@ -251,15 +251,15 @@ SUBROUTINE LSSODS(A,X,B,M,N,Nrda,Iflag,Irank,Iscale,Q,Diag,Kpivot,Iter,&
         nmir = N - Irank
         DO k = irp, N
           Z(k) = 0.
-        ENDDO
+        END DO
         DO k = 1, Irank
           gam = ((Td(k)*Z(k))+SDOT(nmir,Q(k,irp),Nrda,Z(irp),1))/(Td(k)*Div(k))
           Z(k) = Z(k) + gam*Td(k)
           DO j = irp, N
             Z(j) = Z(j) + gam*Q(k,j)
-          ENDDO
-        ENDDO
-      ENDIF
+          END DO
+        END DO
+      END IF
       !
       !        REORDER SOLUTION COMPONENTS ACCORDING TO PIVOTAL POINTS
       !        AND RESCALE ANSWERS AS DICTATED
@@ -268,7 +268,7 @@ SUBROUTINE LSSODS(A,X,B,M,N,Nrda,Iflag,Irank,Iscale,Q,Diag,Kpivot,Iter,&
         Z(k) = Z(k)*Scales(k)
         l = Kpivot(k)
         X(l) = X(l) + Z(k)
-      ENDDO
+      END DO
       !
       !        COMPUTE CORRECTION VECTOR NORM (SOLUTION NORM)
       !
@@ -280,7 +280,7 @@ SUBROUTINE LSSODS(A,X,B,M,N,Nrda,Iflag,Irank,Iscale,Q,Diag,Kpivot,Iter,&
         !
         DO k = 1, M
           R(k) = -SDSDOT(N,-B(k),A(k,1),Nrda,X(1),1)
-        ENDDO
+        END DO
         Resnrm = SQRT(SDOT(M,R(1),1,R(1),1))
         IF ( it/=1 ) THEN
           !
@@ -304,9 +304,9 @@ SUBROUTINE LSSODS(A,X,B,M,N,Nrda,Iflag,Irank,Iscale,Q,Diag,Kpivot,Iter,&
               CALL XERMSG('SLATEC','LSSODS',&
                 'PROBLEM MAY BE ILL-CONDITIONED.  MAXIMAL MACHINE ACCURACY IS NOT ACHIEVABLE.',3,1)
               RETURN
-            ENDIF
-          ENDIF
-        ENDIF
+            END IF
+          END IF
+        END IF
         !
         znrm0 = znorm
       ELSE
@@ -323,9 +323,9 @@ SUBROUTINE LSSODS(A,X,B,M,N,Nrda,Iflag,Irank,Iscale,Q,Diag,Kpivot,Iter,&
         ELSE
           Resnrm = SQRT(SDOT(mmir,R(irp),1,R(irp),1))
           RETURN
-        ENDIF
-      ENDIF
-    ENDDO
+        END IF
+      END IF
+    END DO
     !- *********************************************************************
     !
     !- *********************************************************************
@@ -333,7 +333,7 @@ SUBROUTINE LSSODS(A,X,B,M,N,Nrda,Iflag,Irank,Iscale,Q,Diag,Kpivot,Iter,&
     CALL XERMSG('SLATEC','LSSODS',&
       'CONVERGENCE HAS NOT BEEN OBTAINED WITH ALLOWABLE NUMBER OF ITERATIVE IMPROVEMENT STEPS.',8,1)
     RETURN
-  ENDIF
+  END IF
   !
   !     SPECIAL CASE FOR THE NULL MATRIX
   Iter = 0

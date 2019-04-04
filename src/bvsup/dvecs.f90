@@ -58,13 +58,13 @@ SUBROUTINE DVECS(Ncomp,Lnfc,Yhp,Work,Iwork,Inhomo,Iflag)
     ELSE
       DO k = 1, Ncomp
         Yhp(k,Lnfc+1) = Yhp(k,LNFcc+1)
-      ENDDO
+      END DO
       Iflag = 1
-    ENDIF
+    END IF
   ELSE
     DO k = 1, Ncomp
       Yhp(k,Lnfc+1) = Yhp(k,LNFcc+1)
-    ENDDO
+    END DO
     Iflag = 1
-  ENDIF
+  END IF
 END SUBROUTINE DVECS

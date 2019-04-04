@@ -43,7 +43,7 @@ SUBROUTINE DSTOR1(U,Yh,V,Yp,Ntemp,Ndisk,Ntape)
   nctnf = NCOmp*NFC
   DO j = 1, nctnf
     U(j) = Yh(j)
-  ENDDO
+  END DO
   IF ( INHomo==1 ) THEN
     !
     !           NONZERO PARTICULAR SOLUTION
@@ -52,7 +52,7 @@ SUBROUTINE DSTOR1(U,Yh,V,Yp,Ntemp,Ndisk,Ntape)
       !
       DO j = 1, NCOmp
         V(j) = C*Yp(j)
-      ENDDO
+      END DO
       !
       !        IS OUTPUT INFORMATION TO BE WRITTEN TO DISK
       !
@@ -62,8 +62,8 @@ SUBROUTINE DSTOR1(U,Yh,V,Yp,Ntemp,Ndisk,Ntape)
       DO j = 1, NCOmp
         V(j) = Yp(j)
         !     .........EXIT
-      ENDDO
-    ENDIF
+      END DO
+    END IF
     !
     !           ZERO PARTICULAR SOLUTION
     !
@@ -71,8 +71,8 @@ SUBROUTINE DSTOR1(U,Yh,V,Yp,Ntemp,Ndisk,Ntape)
   ELSEIF ( Ntemp/=1 ) THEN
     DO j = 1, NCOmp
       V(j) = 0.0D0
-    ENDDO
+    END DO
     IF ( Ndisk==1 ) WRITE (Ntape) (V(j),j=1,NCOmp), (U(j),j=1,nctnf)
-  ENDIF
+  END IF
   !
 END SUBROUTINE DSTOR1

@@ -341,16 +341,16 @@ SUBROUTINE DQAWFE(F,A,Omega,Integr,Epsabs,Limlst,Limit,Maxp1,Result,&
               !
               IF ( (Abserr+0.1D+02*correc)<=Epsabs.OR.&
                 (Abserr<=Epsabs.AND.0.1D+02*correc>=Epsabs) ) EXIT
-            ENDIF
+            END IF
             IF ( Ier/=0.AND.Ier/=7 ) EXIT
-          ENDIF
+          END IF
         ELSE
           psum(1) = Rslst(1)
-        ENDIF
+        END IF
         ll = numrl2
         c1 = c2
         c2 = c2 + cycle
-      ENDDO
+      END DO
       !
       !         SET FINAL RESULT AND ERROR ESTIMATE
       !         -----------------------------------
@@ -360,11 +360,11 @@ SUBROUTINE DQAWFE(F,A,Omega,Integr,Epsabs,Limlst,Limit,Maxp1,Result,&
       IF ( Result==0.0D+00.OR.psum(numrl2)==0.0D+00 ) THEN
         IF ( Abserr>errsum ) GOTO 50
         IF ( psum(numrl2)==0.0D+00 ) RETURN
-      ENDIF
+      END IF
       IF ( Abserr/ABS(Result)<=(errsum+drl)/ABS(psum(numrl2)) ) THEN
         IF ( Ier>=1.AND.Ier/=7 ) Abserr = Abserr + drl
         RETURN
-      ENDIF
+      END IF
     ELSE
       !
       !           INTEGRATION BY DQAGIE IF OMEGA IS ZERO
@@ -377,9 +377,9 @@ SUBROUTINE DQAWFE(F,A,Omega,Integr,Epsabs,Limlst,Limit,Maxp1,Result,&
       Ierlst(1) = Ier
       Lst = 1
       RETURN
-    ENDIF
-    50     Result = psum(numrl2)
+    END IF
+    50  Result = psum(numrl2)
     Abserr = errsum + drl
-  ENDIF
+  END IF
   RETURN
 END SUBROUTINE DQAWFE

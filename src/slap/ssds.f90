@@ -128,7 +128,7 @@ SUBROUTINE SSDS(N,Nelt,Ia,Ja,A,Isym,Dinv)
   !
   DO icol = 1, N
     Dinv(icol) = 1.0E0/A(Ja(icol))
-  ENDDO
+  END DO
   !
   !------------- LAST LINE OF SSDS FOLLOWS ----------------------------
 END SUBROUTINE SSDS

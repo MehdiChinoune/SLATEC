@@ -91,7 +91,7 @@ SUBROUTINE COMQR(Nm,N,Low,Igh,Hr,Hi,Wr,Wi,Ierr)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   !
   INTEGER i, j, l, N, en, ll, Nm, Igh, itn, its, Low, lp1, enm1, Ierr
   REAL Hr(Nm,*), Hi(Nm,*), Wr(*), Wi(*)
@@ -117,24 +117,24 @@ SUBROUTINE COMQR(Nm,N,Low,Igh,Hr,Hi,Wr,Wi,Ierr)
           si = yr*Hi(i,j) - yi*Hr(i,j)
           Hr(i,j) = yr*Hr(i,j) + yi*Hi(i,j)
           Hi(i,j) = si
-        ENDDO
+        END DO
         !
         DO j = Low, ll
           si = yr*Hi(j,i) + yi*Hr(j,i)
           Hr(j,i) = yr*Hr(j,i) - yi*Hi(j,i)
           Hi(j,i) = si
-        ENDDO
-      ENDIF
+        END DO
+      END IF
       !
-    ENDDO
-  ENDIF
+    END DO
+  END IF
   !     .......... STORE ROOTS ISOLATED BY CBAL ..........
   DO i = 1, N
     IF ( i<Low.OR.i>Igh ) THEN
       Wr(i) = Hr(i,i)
       Wi(i) = Hi(i,i)
-    ENDIF
-  ENDDO
+    END IF
+  END DO
   !
   en = Igh
   tr = 0.0E0
@@ -154,7 +154,7 @@ SUBROUTINE COMQR(Nm,N,Low,Igh,Hr,Hi,Wr,Wi,Ierr)
     s1 = ABS(Hr(l-1,l-1)) + ABS(Hi(l-1,l-1)) + ABS(Hr(l,l)) + ABS(Hi(l,l))
     s2 = s1 + ABS(Hr(l,l-1))
     IF ( s2==s1 ) EXIT
-  ENDDO
+  END DO
   !     .......... FORM SHIFT ..........
   IF ( l==en ) THEN
     !     .......... A ROOT FOUND ..........
@@ -183,17 +183,17 @@ SUBROUTINE COMQR(Nm,N,Low,Igh,Hr,Hi,Wr,Wi,Ierr)
         IF ( yr*zzr+yi*zzi<0.0E0 ) THEN
           zzr = -zzr
           zzi = -zzi
-        ENDIF
+        END IF
         CALL CDIV(xr,xi,yr+zzr,yi+zzi,xr,xi)
         sr = sr - xr
         si = si - xi
-      ENDIF
-    ENDIF
+      END IF
+    END IF
     !
     DO i = Low, en
       Hr(i,i) = Hr(i,i) - sr
       Hi(i,i) = Hi(i,i) - si
-    ENDDO
+    END DO
     !
     tr = tr + sr
     ti = ti + si
@@ -223,9 +223,9 @@ SUBROUTINE COMQR(Nm,N,Low,Igh,Hr,Hi,Wr,Wi,Ierr)
         Hi(i-1,j) = xr*yi - xi*yr + Hi(i,i-1)*zzi
         Hr(i,j) = xr*zzr - xi*zzi - Hi(i,i-1)*yr
         Hi(i,j) = xr*zzi + xi*zzr - Hi(i,i-1)*yi
-      ENDDO
+      END DO
       !
-    ENDDO
+    END DO
     !
     si = Hi(en,en)
     IF ( si/=0.0E0 ) THEN
@@ -234,7 +234,7 @@ SUBROUTINE COMQR(Nm,N,Low,Igh,Hr,Hi,Wr,Wi,Ierr)
       si = si/norm
       Hr(en,en) = norm
       Hi(en,en) = 0.0E0
-    ENDIF
+    END IF
     !     .......... INVERSE OPERATION (COLUMNS) ..........
     DO j = lp1, en
       xr = Wr(j-1)
@@ -248,13 +248,13 @@ SUBROUTINE COMQR(Nm,N,Low,Igh,Hr,Hi,Wr,Wi,Ierr)
         IF ( i/=j ) THEN
           yi = Hi(i,j-1)
           Hi(i,j-1) = xr*yi + xi*yr + Hi(j,j-1)*zzi
-        ENDIF
+        END IF
         Hr(i,j-1) = xr*yr - xi*yi + Hi(j,j-1)*zzr
         Hr(i,j) = xr*zzr + xi*zzi - Hi(j,j-1)*yr
         Hi(i,j) = xr*zzi - xi*zzr - Hi(j,j-1)*yi
-      ENDDO
+      END DO
       !
-    ENDDO
+    END DO
     !
     IF ( si/=0.0E0 ) THEN
       !
@@ -264,9 +264,9 @@ SUBROUTINE COMQR(Nm,N,Low,Igh,Hr,Hi,Wr,Wi,Ierr)
         Hr(i,en) = sr*yr - si*yi
         Hi(i,en) = sr*yi + si*yr
         !
-      ENDDO
-    ENDIF
+      END DO
+    END IF
     GOTO 200
-  ENDIF
+  END IF
   RETURN
 END SUBROUTINE COMQR

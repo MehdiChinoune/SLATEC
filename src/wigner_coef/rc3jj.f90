@@ -165,7 +165,7 @@ SUBROUTINE RC3JJ(L2,L3,M2,M3,L1min,L1max,Thrcof,Ndim,Ier)
     Ier = 2
     CALL XERMSG('SLATEC','RC3JJ','L2+ABS(M2) or L3+ABS(M3) not integer.',Ier,1)
     RETURN
-  ENDIF
+  END IF
   !
   !
   !
@@ -179,7 +179,7 @@ SUBROUTINE RC3JJ(L2,L3,M2,M3,L1min,L1max,Thrcof,Ndim,Ier)
     Ier = 3
     CALL XERMSG('SLATEC','RC3JJ','L1MAX-L1MIN not integer.',Ier,1)
     RETURN
-  ENDIF
+  END IF
   IF ( L1min<L1max-eps ) THEN
     !
     !  This is reached in case that L1 takes more than one value,
@@ -206,7 +206,7 @@ SUBROUTINE RC3JJ(L2,L3,M2,M3,L1min,L1max,Thrcof,Ndim,Ier)
       !
       !
       lstep = 1
-    ENDIF
+    END IF
   ELSEIF ( L1min<L1max+eps ) THEN
     !
     !  This is reached in case that L1 can take only one value,
@@ -221,7 +221,7 @@ SUBROUTINE RC3JJ(L2,L3,M2,M3,L1min,L1max,Thrcof,Ndim,Ier)
     Ier = 4
     CALL XERMSG('SLATEC','RC3JJ','L1MIN greater than L1MAX.',Ier,1)
     RETURN
-  ENDIF
+  END IF
   100  lstep = lstep + 1
   l1 = l1 + one
   !
@@ -244,7 +244,7 @@ SUBROUTINE RC3JJ(L2,L3,M2,M3,L1min,L1max,Thrcof,Ndim,Ier)
     !
     IF ( lstep>2 ) c1old = ABS(c1)
     c1 = -(l1+l1-one)*dv/denom
-  ENDIF
+  END IF
   !
   IF ( lstep>2 ) THEN
     !
@@ -271,11 +271,11 @@ SUBROUTINE RC3JJ(L2,L3,M2,M3,L1min,L1max,Thrcof,Ndim,Ier)
         DO i = 1, lstep
           IF ( ABS(Thrcof(i))<srtiny ) Thrcof(i) = zero
           Thrcof(i) = Thrcof(i)/srhuge
-        ENDDO
+        END DO
         sum1 = sum1/huge
         sumfor = sumfor/huge
         x = x/srhuge
-      ENDIF
+      END IF
       !
       !  As long as ABS(C1) is decreasing, the recursion proceeds towards
       !  increasing 3j values and, hence, is numerically stable.  Once
@@ -283,7 +283,7 @@ SUBROUTINE RC3JJ(L2,L3,M2,M3,L1min,L1max,Thrcof,Ndim,Ier)
       !  reversed.
       !
       IF ( c1old>ABS(c1) ) GOTO 100
-    ENDIF
+    END IF
     !
     !
     !  Keep three 3j coefficients around LMATCH for comparison with
@@ -356,15 +356,15 @@ SUBROUTINE RC3JJ(L2,L3,M2,M3,L1min,L1max,Thrcof,Ndim,Ier)
             ratio = one/ratio
             DO n = nlim, nfin
               Thrcof(n) = ratio*Thrcof(n)
-            ENDDO
+            END DO
             sumuni = sumfor + ratio*ratio*sumbac
           ELSE
             !
             DO n = 1, nlim
               Thrcof(n) = ratio*Thrcof(n)
-            ENDDO
+            END DO
             sumuni = ratio*ratio*sumfor + sumbac
-          ENDIF
+          END IF
           EXIT
         ELSE
           !
@@ -385,13 +385,13 @@ SUBROUTINE RC3JJ(L2,L3,M2,M3,L1min,L1max,Thrcof,Ndim,Ier)
               index = nfin - i + 1
               IF ( ABS(Thrcof(index))<srtiny ) Thrcof(index) = zero
               Thrcof(index) = Thrcof(index)/srhuge
-            ENDDO
+            END DO
             sum2 = sum2/huge
             !
             !
             sumbac = sumbac/huge
-          ENDIF
-        ENDIF
+          END IF
+        END IF
       ELSE
         !
         !  If L1 = L1MAX + 1, the third term in the recursion formula vanishes
@@ -401,8 +401,8 @@ SUBROUTINE RC3JJ(L2,L3,M2,M3,L1min,L1max,Thrcof,Ndim,Ier)
         sumbac = sum2
         !
         sum2 = sum2 + tiny*(l1+l1-three)*c1*c1
-      ENDIF
-    ENDDO
+      END IF
+    END DO
   ELSE
     !
     !
@@ -414,7 +414,7 @@ SUBROUTINE RC3JJ(L2,L3,M2,M3,L1min,L1max,Thrcof,Ndim,Ier)
     IF ( lstep/=nfin ) GOTO 100
     !
     sumuni = sum1
-  ENDIF
+  END IF
   !
   !
   !  Normalize 3j coefficients
@@ -433,12 +433,12 @@ SUBROUTINE RC3JJ(L2,L3,M2,M3,L1min,L1max,Thrcof,Ndim,Ier)
     DO n = 1, nfin
       IF ( ABS(Thrcof(n))<thresh ) Thrcof(n) = zero
       Thrcof(n) = cnorm*Thrcof(n)
-    ENDDO
+    END DO
     RETURN
-  ENDIF
+  END IF
   !
   DO n = 1, nfin
     Thrcof(n) = cnorm*Thrcof(n)
-  ENDDO
+  END DO
   RETURN
 END SUBROUTINE RC3JJ

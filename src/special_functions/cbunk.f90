@@ -25,7 +25,7 @@ SUBROUTINE CBUNK(Z,Fnu,Kode,Mr,N,Y,Nz,Tol,Elim,Alim)
   !* REVISION HISTORY  (YYMMDD)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
-  
+
   INTEGER Kode, Mr, N, Nz
   COMPLEX Y(N), Z
   REAL Alim, ax, ay, Elim, Fnu, Tol, xx, yy
@@ -48,5 +48,5 @@ SUBROUTINE CBUNK(Z,Fnu,Kode,Mr,N,Y,Nz,Tol,Elim,Alim)
     !     -PI/3.LE.ARG(Z).LE.PI/3
     !-----------------------------------------------------------------------
     CALL CUNK1(Z,Fnu,Kode,Mr,N,Y,Nz,Tol,Elim,Alim)
-  ENDIF
+  END IF
 END SUBROUTINE CBUNK

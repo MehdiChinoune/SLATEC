@@ -590,7 +590,7 @@ SUBROUTINE SBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,&
       CALL XERMSG('SLATEC','SBOCLS','MDW = '//xern1//' MUST BE POSITIVE.',53,1)
       !     DO(RETURN TO USER PROGRAM UNIT)
       GOTO 100
-    ENDIF
+    END IF
     !
     !     SEE THAT NUMBER OF CONSTRAINTS IS NONNEGATIVE.
     IF ( Mcon<0 ) THEN
@@ -599,7 +599,7 @@ SUBROUTINE SBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,&
         ' MUST BE NON-NEGATIVE',54,1)
       !     DO(RETURN TO USER PROGRAM UNIT)
       GOTO 100
-    ENDIF
+    END IF
     !
     !     SEE THAT NUMBER OF UNKNOWNS IS POSITIVE.
     IF ( Ncols<=0 ) THEN
@@ -608,7 +608,7 @@ SUBROUTINE SBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,&
         ' THE NO. OF VARIABLES, MUST BE POSITIVE.',55,1)
       !     DO(RETURN TO USER PROGRAM UNIT)
       GOTO 100
-    ENDIF
+    END IF
     !
     !     SEE THAT CONSTRAINT INDICATORS ARE ALL WELL-DEFINED.
     DO j = 1, Ncols + Mcon
@@ -619,8 +619,8 @@ SUBROUTINE SBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,&
           ' MUST BE 1-4.',56,1)
         !     DO(RETURN TO USER PROGRAM UNIT)
         GOTO 100
-      ENDIF
-    ENDDO
+      END IF
+    END DO
     !
     !     SEE THAT BOUNDS ARE CONSISTENT.
     DO j = 1, Ncols + Mcon
@@ -633,9 +633,9 @@ SUBROUTINE SBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,&
             ' IS .GT. BU('//xern1//') = '//xern4,57,1)
           !     DO(RETURN TO USER PROGRAM UNIT)
           GOTO 100
-        ENDIF
-      ENDIF
-    ENDDO
+        END IF
+      END IF
+    END DO
     !     END PROCEDURE
     !     DO(PROCESS OPTION ARRAY)
     !     PROCEDURE(PROCESS OPTION ARRAY)
@@ -667,7 +667,7 @@ SUBROUTINE SBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,&
           lbou = ABS(lopt)
         ELSE
           lbou = lopt - 15
-        ENDIF
+        END IF
         !
         !     SEND COL. SCALING TO SBOLS().
         Iopt(lbou) = 4
@@ -686,12 +686,12 @@ SUBROUTINE SBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,&
           Iopt(lbou+5) = lopt - lbou + 1
         ELSE
           Iopt(lbou+4) = -Iopt(lbou+4)
-        ENDIF
+        END IF
         IF ( mopt<0 ) THEN
           lboum = ABS(mopt)
         ELSE
           lboum = mopt - 8
-        ENDIF
+        END IF
         !
         !     CHANGE PRETRIANGULARIZATION FACTOR IN SBOLSM().
         Iopt(lboum) = 5
@@ -709,7 +709,7 @@ SUBROUTINE SBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,&
           Iopt(lboum+6) = mopt - lboum + 1
         ELSE
           Iopt(lboum+5) = -Iopt(lboum+5)
-        ENDIF
+        END IF
         !     EXIT FOREVER
         EXIT
       ELSEIF ( jp==99 ) THEN
@@ -750,7 +750,7 @@ SUBROUTINE SBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,&
           Iopt(locacc+1) = Mcon + 1
           accum = .TRUE.
           Iopt(locacc) = igo
-        ENDIF
+        END IF
         !     CYCLE FOREVER
         lds = 4
       ELSEIF ( jp==2 ) THEN
@@ -776,7 +776,7 @@ SUBROUTINE SBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,&
           lliw = Iopt(locdim+5)
           liopt = Iopt(locdim+6)
           checkl = .TRUE.
-        ENDIF
+        END IF
         !     CYCLE FOREVER
         lds = 8
         !
@@ -792,8 +792,8 @@ SUBROUTINE SBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,&
               ' MUST BE 1-3',48,1)
             !     DO(RETURN TO USER PROGRAM UNIT)
             GOTO 100
-          ENDIF
-        ENDIF
+          END IF
+        END IF
         !     CYCLE FOREVER
         lds = 2
         !
@@ -808,7 +808,7 @@ SUBROUTINE SBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,&
               ') FOR USER-PROVIDED COLUMN SCALING MUST BE POSITIVE.',49,1)
             !     DO(RETURN TO USER PROGRAM UNIT)
             GOTO 100
-          ENDIF
+          END IF
           CALL SCOPY(Ncols,X(Ncols+Iopt(lp+2)),1,Rw,1)
           lenx = lenx + Ncols
           DO j = 1, Ncols
@@ -820,9 +820,9 @@ SUBROUTINE SBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,&
                 //xern1//' NOW = '//xern3,50,1)
               !     DO(RETURN TO USER PROGRAM UNIT)
               GOTO 100
-            ENDIF
-          ENDDO
-        ENDIF
+            END IF
+          END DO
+        END IF
         !     CYCLE FOREVER
         lds = 2
         !
@@ -847,7 +847,7 @@ SUBROUTINE SBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,&
         ELSE
           lds = 2
           !     CYCLE FOREVER
-        ENDIF
+        END IF
         !
         !     THIS OPTION AVOIDS THE CONSTRAINT RESOLVING PHASE FOR
         !     THE LINEAR CONSTRAINTS C*X=Y.
@@ -870,8 +870,8 @@ SUBROUTINE SBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,&
           ' IS NOT DEFINED.',51,1)
         !     DO(RETURN TO USER PROGRAM UNIT)
         GOTO 100
-      ENDIF
-    ENDDO
+      END IF
+    END DO
     !     END FOREVER
     !     END PROCEDURE
     IF ( checkl ) THEN
@@ -884,7 +884,7 @@ SUBROUTINE SBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,&
         mdwl = Mcon + MAX(Mrows,Ncols)
       ELSE
         mdwl = Mcon + Ncols + 1
-      ENDIF
+      END IF
       IF ( lmdw<mdwl ) THEN
         WRITE (xern1,'(I8)') lmdw
         WRITE (xern2,'(I8)') mdwl
@@ -892,7 +892,7 @@ SUBROUTINE SBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,&
           xern1//' MUST BE .GE. THE NUMBER OF EFFECTIVE ROWS = '//xern2,41,1)
         !     DO(RETURN TO USER PROGRAM UNIT)
         GOTO 100
-      ENDIF
+      END IF
       IF ( lndw<Ncols+Mcon+1 ) THEN
         WRITE (xern1,'(I8)') lndw
         WRITE (xern2,'(I8)') Ncols + Mcon + 1
@@ -900,7 +900,7 @@ SUBROUTINE SBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,&
           xern1//' MUST BE .GE. NCOLS+MCON+1 = '//xern2,42,1)
         !     DO(RETURN TO USER PROGRAM UNIT)
         GOTO 100
-      ENDIF
+      END IF
       IF ( llb<Ncols+Mcon ) THEN
         WRITE (xern1,'(I8)') llb
         WRITE (xern2,'(I8)') Ncols + Mcon
@@ -909,7 +909,7 @@ SUBROUTINE SBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,&
           //xern1//' MUST BE .GE. NCOLS+MCON = '//xern2,43,1)
         !     DO(RETURN TO USER PROGRAM UNIT)
         GOTO 100
-      ENDIF
+      END IF
       IF ( llx<lenx ) THEN
         WRITE (xern1,'(I8)') llx
         WRITE (xern2,'(I8)') lenx
@@ -917,7 +917,7 @@ SUBROUTINE SBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,&
           ' MUST BE .GE. THE REQD. LENGTH = '//xern2,44,1)
         !     DO(RETURN TO USER PROGRAM UNIT)
         GOTO 100
-      ENDIF
+      END IF
       IF ( llrw<6*Ncols+5*Mcon ) THEN
         WRITE (xern1,'(I8)') llrw
         WRITE (xern2,'(I8)') 6*Ncols + 5*Mcon
@@ -925,7 +925,7 @@ SUBROUTINE SBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,&
           ' MUST BE .GE. 6*NCOLS+5*MCON = '//xern2,45,1)
         !     DO(RETURN TO USER PROGRAM UNIT)
         GOTO 100
-      ENDIF
+      END IF
       IF ( lliw<2*Ncols+2*Mcon ) THEN
         WRITE (xern1,'(I8)') lliw
         WRITE (xern2,'(I8)') 2*Ncols + 2*Mcon
@@ -933,7 +933,7 @@ SUBROUTINE SBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,&
           ' MUST BE .GE. 2*NCOLS+2*MCON = '//xern2,46,1)
         !     DO(RETURN TO USER PROGRAM UNIT)
         GOTO 100
-      ENDIF
+      END IF
       IF ( liopt<lp+17 ) THEN
         WRITE (xern1,'(I8)') liopt
         WRITE (xern2,'(I8)') lp + 17
@@ -941,10 +941,10 @@ SUBROUTINE SBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,&
           ' MUST BE .GE. THE REQD. LEN = '//xern2,47,1)
         !     DO(RETURN TO USER PROGRAM UNIT)
         GOTO 100
-      ENDIF
+      END IF
       !     END PROCEDURE
-    ENDIF
-  ENDIF
+    END IF
+  END IF
   !
   !     OPTIONALLY GO BACK TO THE USER FOR ACCUMULATION OF LEAST SQUARES
   !     EQUATIONS AND DIRECTIONS FOR PROCESSING THESE EQUATIONS.
@@ -961,8 +961,8 @@ SUBROUTINE SBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,&
         ' MUST BE .GE. 0 .AND. .LE. MDW-MCON = '//xern2,52,1)
       !    (RETURN TO USER PROGRAM UNIT)
       GOTO 100
-    ENDIF
-  ENDIF
+    END IF
+  END IF
   !
   !     USE THE SOFTWARE OF SBOLS( ) FOR THE TRIANGULARIZATION OF THE
   !     LEAST SQUARES MATRIX.  THIS MAY INVOLVE A SYSTALTIC INTERCHANGE
@@ -979,12 +979,12 @@ SUBROUTINE SBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,&
       Rw(irw),Iw(iiw))
   ELSE
     mout = Mrows
-  ENDIF
+  END IF
   IF ( accum ) THEN
     accum = Iopt(locacc)==1
     Iopt(locacc+1) = jopt(03) + Mcon
     Mrows = MIN(Ncols+1,mnew)
-  ENDIF
+  END IF
   !     END PROCEDURE
   IF ( accum ) RETURN
   !     DO(SOLVE CONSTRAINED AND BOUNDED LEAST SQUARES PROBLEM)
@@ -997,13 +997,13 @@ SUBROUTINE SBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,&
     !     PROJECT THE LINEAR CONSTRAINTS INTO A REACHABLE SET.
     DO i = 1, Mcon
       CALL SCOPY(Ncols,W(i,1),Mdw,W(Mcon+1,Ncols+i),1)
-    ENDDO
+    END DO
     !
     !      PLACE (-)IDENTITY MATRIX AFTER CONSTRAINT DATA.
     DO j = Ncols + 1, Ncols + Mcon + 1
       W(1,j) = zero
       CALL SCOPY(Mcon,W(1,j),0,W(1,j),1)
-    ENDDO
+    END DO
     W(1,Ncols+1) = -one
     CALL SCOPY(Mcon,W(1,Ncols+1),0,W(1,Ncols+1),Mdw+1)
     !
@@ -1032,27 +1032,27 @@ SUBROUTINE SBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,&
         CASE DEFAULT
       END SELECT
       !     CASE 4
-    ENDDO
+    END DO
     !
     !     MOVE CONSTRAINT DATA BACK TO THE ORIGINAL AREA.
     DO j = Ncols + 1, Ncols + Mcon
       CALL SCOPY(Ncols,W(Mcon+1,j),1,W(j-Ncols,1),Mdw)
-    ENDDO
-  ENDIF
+    END DO
+  END IF
   IF ( Mcon>0 ) THEN
     DO j = Ncols + 1, Ncols + Mcon
       W(Mcon+1,j) = zero
       CALL SCOPY(mout,W(Mcon+1,j),0,W(Mcon+1,j),1)
-    ENDDO
+    END DO
     !
     !     PUT IN (-)IDENTITY MATRIX (POSSIBLY) ONCE AGAIN.
     DO j = Ncols + 1, Ncols + Mcon + 1
       W(1,j) = zero
       CALL SCOPY(Mcon,W(1,j),0,W(1,j),1)
-    ENDDO
+    END DO
     W(1,Ncols+1) = -one
     CALL SCOPY(Mcon,W(1,Ncols+1),0,W(1,Ncols+1),Mdw+1)
-  ENDIF
+  END IF
   !
   !     COMPUTE NOMINAL COLUMN SCALING FOR THE UNWEIGHTED MATRIX.
   cnorm = zero
@@ -1065,7 +1065,7 @@ SUBROUTINE SBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,&
     cnorm = MAX(cnorm,t1)
     anorm = MAX(anorm,t2)
     X(Ncols+Mcon+j) = one/t
-  ENDDO
+  END DO
   SELECT CASE (iscale)
     CASE (2)
       !     CASE 2
@@ -1075,7 +1075,7 @@ SUBROUTINE SBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,&
         t = SNRM2(Mcon+mout,W(1,j),1)
         IF ( t==zero ) t = one
         X(Ncols+Mcon+j) = one/t
-      ENDDO
+      END DO
     CASE (3)
       !     CASE 3
       !
@@ -1092,7 +1092,7 @@ SUBROUTINE SBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,&
   END SELECT
   DO j = Ncols + 1, Ncols + Mcon
     X(Ncols+Mcon+j) = one
-  ENDDO
+  END DO
   !
   !     WEIGHT THE LEAST SQUARES EQUATIONS.
   wt = srelpr
@@ -1100,7 +1100,7 @@ SUBROUTINE SBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,&
   IF ( cnorm>zero ) wt = wt*cnorm
   DO i = 1, mout
     CALL SSCAL(Ncols,wt,W(i+Mcon,1),Mdw)
-  ENDDO
+  END DO
   CALL SSCAL(mout,wt,W(Mcon+1,Mcon+Ncols+1),1)
   lrw = 1
   liw = 1

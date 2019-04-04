@@ -188,8 +188,8 @@ CONTAINS
         IF ( Kprint>=1.AND.Ipass==0 ) WRITE (Lun,99006)
         99006 FORMAT (/' ************  DEABM FAILED TESTS  ************')
         RETURN
-      ENDIF
-    ENDDO
+      END IF
+    END DO
   END SUBROUTINE QXABM
   !** QXBDF
   SUBROUTINE QXBDF(Lun,Kprint,Ipass)
@@ -305,8 +305,8 @@ CONTAINS
         IF ( Kprint>=1.AND.Ipass==0 ) WRITE (Lun,99006)
         99006 FORMAT (/' ************  DEBDF FAILED TESTS  ************')
         RETURN
-      ENDIF
-    ENDDO
+      END IF
+    END DO
   END SUBROUTINE QXBDF
   !** QXRKF
   SUBROUTINE QXRKF(Lun,Kprint,Ipass)
@@ -420,8 +420,8 @@ CONTAINS
         IF ( Kprint>=1.AND.Ipass==0 ) WRITE (Lun,99006)
         99006 FORMAT (/' ************  DERKF FAILED TESTS  ************')
         RETURN
-      ENDIF
-    ENDDO
+      END IF
+    END DO
   END SUBROUTINE QXRKF
   !** QXBVSP
   SUBROUTINE QXBVSP(Lun,Kprint,Ipass)
@@ -472,13 +472,13 @@ CONTAINS
       99001 FORMAT ('1')
       WRITE (Lun,99002)
       99002 FORMAT (/' BVSUP QUICK CHECK')
-    ENDIF
+    END IF
     !
     !-----INITIALIZE VARIABLES FOR TEST PROBLEM.
     !
     DO i = 1, 9
       itmp(i) = 0
-    ENDDO
+    END DO
     !
     tol = 1.0E-03
     XSAve = 0.
@@ -505,7 +505,7 @@ CONTAINS
     !
     DO i = 1, 15
       iwork(i) = 0
-    ENDDO
+    END DO
     !
     CALL BVSUP(y,nrowy,ncomp,xpts,nxpts,a,nrowa,alpha,nic,b,nrowb,beta,nfc,&
       igofx,re,ae,iflag,work,ndw,iwork,ndiw,neqivp)
@@ -518,7 +518,7 @@ CONTAINS
       IF ( Kprint>1 ) WRITE (Lun,99003) iflag
       99003 FORMAT (10X,'IFLAG =',I2)
       GOTO 300
-    ENDIF
+    END IF
     !
     !-----CHECK THE ACCURACY OF THE SOLUTION.
     !
@@ -528,8 +528,8 @@ CONTAINS
         abser = ABS(yans(l,j)-y(l,j))
         reler = abser/ABS(yans(l,j))
         IF ( reler>tol.AND.abser>tol ) Ipass = 0
-      ENDDO
-    ENDDO
+      END DO
+    END DO
     !
     !-----CHECK FOR SUPPRESSION OF PRINTING.
     !
@@ -556,9 +556,9 @@ CONTAINS
           IF ( reler>tol.AND.abser>tol ) msg = 'FAIL'
           WRITE (Lun,99008) xpts(j), y(1,j), y(2,j), yans(1,j), yans(2,j), msg
           99008 FORMAT (F5.1,4E20.7,5X,A)
-        ENDDO
-      ENDIF
-    ENDIF
+        END DO
+      END IF
+    END IF
     !
     !-----SEND MESSAGE INDICATING PASSAGE OR FAILURE OF TESTS.
     !
@@ -579,7 +579,7 @@ CONTAINS
     DO
       DO i = 1, 15
         iwork(i) = 0
-      ENDDO
+      END DO
       CALL BVSUP(y,nrowy,ncomp,xpts,nxpts,a,nrowa,alpha,nic,b,nrowb,beta,nfc,&
         igofx,re,ae,iflag,work,ndw,iwork,ndiw,neqivp)
       SELECT CASE (kount)
@@ -641,7 +641,7 @@ CONTAINS
           nrowy = 2
           igofx = 3
       END SELECT
-    ENDDO
+    END DO
     !
     WRITE (Lun,99013) iflag
     IF ( iflag==-2 ) itmp(kont) = 1
@@ -665,7 +665,7 @@ CONTAINS
     300  ipss = 1
     DO i = 1, kont
       ipss = ipss*itmp(i)
-    ENDDO
+    END DO
     !
     CALL PASS(Lun,2,ipss)
     !
@@ -752,7 +752,7 @@ PROGRAM TEST43
     CALL XSETF(0)
   ELSE
     CALL XSETF(1)
-  ENDIF
+  END IF
   !
   !     Test DEABM
   !
@@ -783,6 +783,6 @@ PROGRAM TEST43
     WRITE (lun,99002) nfail
     99002 FORMAT (/' ************* WARNING -- ',I5,&
       ' TEST(S) FAILED IN PROGRAM TEST43 *************')
-  ENDIF
+  END IF
   STOP
 END PROGRAM TEST43

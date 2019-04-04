@@ -57,28 +57,28 @@ SUBROUTINE SPELIP(Intl,Iorder,A,B,M,Mbdcnd,Bda,Alpha,Bdb,Beta,C,D,N,&
   DO i = 2, M
     DO j = 2, N
       Usol(i,j) = Grhs(i,j)
-    ENDDO
-  ENDDO
+    END DO
+  END DO
   IF ( KSWx/=2.AND.KSWx/=3 ) THEN
     DO j = 2, N
       Usol(1,j) = Grhs(1,j)
-    ENDDO
-  ENDIF
+    END DO
+  END IF
   IF ( KSWx/=2.AND.KSWx/=5 ) THEN
     DO j = 2, N
       Usol(K,j) = Grhs(K,j)
-    ENDDO
-  ENDIF
+    END DO
+  END IF
   IF ( KSWy/=2.AND.KSWy/=3 ) THEN
     DO i = 2, M
       Usol(i,1) = Grhs(i,1)
-    ENDDO
-  ENDIF
+    END DO
+  END IF
   IF ( KSWy/=2.AND.KSWy/=5 ) THEN
     DO i = 2, M
       Usol(i,L) = Grhs(i,L)
-    ENDDO
-  ENDIF
+    END DO
+  END IF
   IF ( KSWx/=2.AND.KSWx/=3.AND.KSWy/=2.AND.KSWy/=3 ) Usol(1,1) = Grhs(1,1)
   IF ( KSWx/=2.AND.KSWx/=5.AND.KSWy/=2.AND.KSWy/=3 ) Usol(K,1) = Grhs(K,1)
   IF ( KSWx/=2.AND.KSWx/=3.AND.KSWy/=2.AND.KSWy/=5 ) Usol(1,L) = Grhs(1,L)
@@ -128,7 +128,7 @@ SUBROUTINE SPELIP(Intl,Iorder,A,B,M,Mbdcnd,Bda,Alpha,Bdb,Beta,C,D,N,&
     Am(i) = axi
     Bm(i) = bxi
     Cm(i) = cxi
-  ENDDO
+  END DO
   !
   !     SET Y DIRECTION
   !
@@ -141,7 +141,7 @@ SUBROUTINE SPELIP(Intl,Iorder,A,B,M,Mbdcnd,Bda,Alpha,Bdb,Beta,C,D,N,&
     An(j) = dyj
     Bn(j) = eyj
     Cn(j) = fyj
-  ENDDO
+  END DO
   !
   !     ADJUST EDGES IN X DIRECTION UNLESS PERIODIC
   !
@@ -231,14 +231,14 @@ SUBROUTINE SPELIP(Intl,Iorder,A,B,M,Mbdcnd,Bda,Alpha,Bdb,Beta,C,D,N,&
         Usol(IS,j) = Usol(IS,j) + 2.0*DLX*ax1*Bda(j)
       ELSE
         Usol(IS,j) = Usol(IS,j) - ax1*Usol(1,j)
-      ENDIF
+      END IF
       IF ( KSWx/=2.AND.KSWx/=5 ) THEN
         Usol(MS,j) = Usol(MS,j) - 2.0*DLX*cxm*Bdb(j)
       ELSE
         Usol(MS,j) = Usol(MS,j) - cxm*Usol(K,j)
-      ENDIF
-    ENDDO
-  ENDIF
+      END IF
+    END DO
+  END IF
   IF ( KSWy/=1 ) THEN
     !
     !     ADJUST USOL ALONG Y EDGE
@@ -248,14 +248,14 @@ SUBROUTINE SPELIP(Intl,Iorder,A,B,M,Mbdcnd,Bda,Alpha,Bdb,Beta,C,D,N,&
         Usol(i,JS) = Usol(i,JS) + 2.0*DLY*dy1*Bdc(i)
       ELSE
         Usol(i,JS) = Usol(i,JS) - dy1*Usol(i,1)
-      ENDIF
+      END IF
       IF ( KSWy/=2.AND.KSWy/=5 ) THEN
         Usol(i,NS) = Usol(i,NS) - 2.0*DLY*fyn*Bdd(i)
       ELSE
         Usol(i,NS) = Usol(i,NS) - fyn*Usol(i,L)
-      ENDIF
-    ENDDO
-  ENDIF
+      END IF
+    END DO
+  END IF
   !
   !     SAVE ADJUSTED EDGES IN GRHS IF IORDER=4
   !
@@ -263,12 +263,12 @@ SUBROUTINE SPELIP(Intl,Iorder,A,B,M,Mbdcnd,Bda,Alpha,Bdb,Beta,C,D,N,&
     DO j = JS, NS
       Grhs(IS,j) = Usol(IS,j)
       Grhs(MS,j) = Usol(MS,j)
-    ENDDO
+    END DO
     DO i = IS, MS
       Grhs(i,JS) = Usol(i,JS)
       Grhs(i,NS) = Usol(i,NS)
-    ENDDO
-  ENDIF
+    END DO
+  END IF
   iord = Iorder
   Pertrb = 0.0
   !
@@ -303,13 +303,13 @@ SUBROUTINE SPELIP(Intl,Iorder,A,B,M,Mbdcnd,Bda,Alpha,Bdb,Beta,C,D,N,&
   IF ( KSWx==1 ) THEN
     DO j = 1, L
       Usol(K,j) = Usol(1,j)
-    ENDDO
-  ENDIF
+    END DO
+  END IF
   IF ( KSWy==1 ) THEN
     DO i = 1, K
       Usol(i,L) = Usol(i,1)
-    ENDDO
-  ENDIF
+    END DO
+  END IF
   !
   !     MINIMIZE SOLUTION WITH RESPECT TO WEIGHTED LEAST SQUARES
   !     NORM IF OPERATOR IS SINGULAR

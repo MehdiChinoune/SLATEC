@@ -47,14 +47,14 @@ CONTAINS
     DO j = 1, n
       DO i = 1, n
         ac(i,j) = CMPLX(a(i,j),0.)
-      ENDDO
-    ENDDO
+      END DO
+    END DO
     job = 1
     CALL CGEEV(ac,lda,n,ec,vc,ldv,w,job,info)
     IF ( info/=0 ) THEN
       IF ( Kprint>=2 ) WRITE (Lun,99003) 'CGEEV', info
       Ipass = 0
-    ENDIF
+    END IF
     DO j = 1, n
       err = ABS(AIMAG(ec(j)))
       IF ( err>=relerr ) Ipass = 0
@@ -65,15 +65,15 @@ CONTAINS
         erri = ABS(recj-ek(i))
         IF ( erri<err ) id = i
         err = MIN(erri,err)
-      ENDDO
+      END DO
       IF ( ABS(recj-ek(id))/ABS(ek(id))>=relerr ) Ipass = 0
-    ENDDO
+    END DO
     job = 0
     CALL SGEEV(a,lda,n,ec,vc,ldv,w,job,info)
     IF ( info/=0 ) THEN
       IF ( Kprint>=2 ) WRITE (Lun,99003) 'SGEEV', info
       Ipass = 0
-    ENDIF
+    END IF
     DO j = 1, n
       err = ABS(AIMAG(ec(j)))
       IF ( err>=relerr ) Ipass = 0
@@ -84,9 +84,9 @@ CONTAINS
         erri = ABS(recj-ek(i))
         IF ( erri<err ) id = i
         err = MIN(erri,err)
-      ENDDO
+      END DO
       IF ( ABS(recj-ek(id))/ABS(ek(id))>=relerr ) Ipass = 0
-    ENDDO
+    END DO
     IF ( Kprint>=2.AND.Ipass/=0 ) WRITE (Lun,99001)
     99001 FORMAT (' EISQX1 PASSES ALL TESTS.')
     IF ( Kprint>=1.AND.Ipass==0 ) WRITE (Lun,99002)
@@ -143,14 +143,14 @@ CONTAINS
         a1(i,j) = ap(id)
         a2(id) = ap(id)
         ac(i,j) = CMPLX(ap(id),0.)
-      ENDDO
-    ENDDO
+      END DO
+    END DO
     job = 1
     CALL CHIEV(ac,lda,n,e,vc,ldv,w,job,info)
     IF ( info/=0 ) THEN
       IF ( Kprint>=2 ) WRITE (Lun,99003) 'CHIEV', info
       Ipass = 0
-    ENDIF
+    END IF
     DO j = 1, n
       err = ABS(e(j)-ek(1))
       id = 1
@@ -158,14 +158,14 @@ CONTAINS
         erri = ABS(e(j)-ek(i))
         IF ( erri<err ) id = i
         err = MIN(erri,err)
-      ENDDO
+      END DO
       IF ( ABS(e(j)-ek(id))/ABS(ek(id))>=relerr ) Ipass = 0
-    ENDDO
+    END DO
     CALL SSIEV(a1,lda,n,e,w,job,info)
     IF ( info/=0 ) THEN
       IF ( Kprint>=2 ) WRITE (Lun,99003) 'SSIEV', info
       Ipass = 0
-    ENDIF
+    END IF
     DO j = 1, n
       err = ABS(e(j)-ek(1))
       id = 1
@@ -173,15 +173,15 @@ CONTAINS
         erri = ABS(e(j)-ek(i))
         IF ( erri<err ) id = i
         err = MIN(erri,err)
-      ENDDO
+      END DO
       IF ( ABS(e(j)-ek(id))/ABS(ek(id))>=relerr ) Ipass = 0
-    ENDDO
+    END DO
     job = 0
     CALL SSPEV(a2,n,e,v,ldv,w,job,info)
     IF ( info/=0 ) THEN
       IF ( Kprint>=2 ) WRITE (Lun,99003) 'SSPEV', info
       Ipass = 0
-    ENDIF
+    END IF
     DO j = 1, n
       err = ABS(e(j)-ek(1))
       id = 1
@@ -189,9 +189,9 @@ CONTAINS
         erri = ABS(e(j)-ek(i))
         IF ( erri<err ) id = i
         err = MIN(erri,err)
-      ENDDO
+      END DO
       IF ( ABS(e(j)-ek(id))/ABS(ek(id))>=relerr ) Ipass = 0
-    ENDDO
+    END DO
     IF ( Kprint>=2.AND.Ipass/=0 ) WRITE (Lun,99001)
     99001 FORMAT (' EISQX2 PASSES ALL TESTS.')
     IF ( Kprint>=1.AND.Ipass==0 ) WRITE (Lun,99002)
@@ -271,7 +271,7 @@ PROGRAM TEST24
     CALL XSETF(0)
   ELSE
     CALL XSETF(1)
-  ENDIF
+  END IF
   !
   !     Test SGEEV and CGEEV
   !
@@ -292,6 +292,6 @@ PROGRAM TEST24
     WRITE (lun,99002) nfail
     99002 FORMAT (/' ************* WARNING -- ',I5,&
       ' TEST(S) FAILED IN PROGRAM TEST24 *************')
-  ENDIF
+  END IF
   STOP
 END PROGRAM TEST24

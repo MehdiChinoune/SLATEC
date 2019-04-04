@@ -286,7 +286,7 @@ REAL(8) FUNCTION DRC(X,Y,Ier)
     lolim = 5.0D0*D1MACH(1)
     uplim = D1MACH(2)/5.0D0
     first = .FALSE.
-  ENDIF
+  END IF
   !
   !         CALL ERROR HANDLER IF NECESSARY.
   !
@@ -298,7 +298,7 @@ REAL(8) FUNCTION DRC(X,Y,Ier)
     CALL XERMSG('SLATEC','DRC','X.LT.0 .OR. Y.LE.0 WHERE X = '//xern3//&
       ' AND Y = '//xern4,1,1)
     RETURN
-  ENDIF
+  END IF
   !
   IF ( MAX(X,Y)>uplim ) THEN
     Ier = 3
@@ -308,7 +308,7 @@ REAL(8) FUNCTION DRC(X,Y,Ier)
     CALL XERMSG('SLATEC','DRC','MAX(X,Y).GT.UPLIM WHERE X = '//xern3//&
       ' Y = '//xern4//' AND UPLIM = '//xern5,3,1)
     RETURN
-  ENDIF
+  END IF
   !
   IF ( X+Y<lolim ) THEN
     Ier = 2
@@ -318,7 +318,7 @@ REAL(8) FUNCTION DRC(X,Y,Ier)
     CALL XERMSG('SLATEC','DRC','X+Y.LT.LOLIM WHERE X = '//xern3//' Y = '//&
       xern4//' AND LOLIM = '//xern5,2,1)
     RETURN
-  ENDIF
+  END IF
   !
   Ier = 0
   xn = X
@@ -336,6 +336,6 @@ REAL(8) FUNCTION DRC(X,Y,Ier)
       lamda = 2.0D0*SQRT(xn)*SQRT(yn) + yn
       xn = (xn+lamda)*0.250D0
       yn = (yn+lamda)*0.250D0
-    ENDIF
-  ENDDO
+    END IF
+  END DO
 END FUNCTION DRC

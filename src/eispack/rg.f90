@@ -91,7 +91,7 @@ SUBROUTINE RG(Nm,N,A,Wr,Wi,Matz,Z,Iv1,Fv1,Ierr)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !   921103  Corrected description of IV1.  (DWL, FNF and WRB)
-  
+
   !
   INTEGER N, Nm, is1, is2, Ierr, Matz
   REAL A(Nm,*), Wr(*), Wi(*), Z(Nm,*), Fv1(*)
@@ -110,8 +110,8 @@ SUBROUTINE RG(Nm,N,A,Wr,Wi,Matz,Z,Iv1,Fv1,Ierr)
     ELSE
       !     .......... FIND EIGENVALUES ONLY ..........
       CALL HQR(Nm,N,is1,is2,A,Wr,Wi,Ierr)
-    ENDIF
+    END IF
   ELSE
     Ierr = 10*N
-  ENDIF
+  END IF
 END SUBROUTINE RG

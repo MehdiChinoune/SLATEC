@@ -215,7 +215,7 @@ SUBROUTINE ZBESY(Zr,Zi,Fnu,Kode,N,Cyr,Cyi,Nz,Cwrkr,Cwrki,Ierr)
           c1i = exi*ey
           c2r = exr
           c2i = -exi
-        ENDIF
+        END IF
         Nz = 0
         rtol = 1.0D0/tol
         ascle = D1MACH(1)*rtol*1.0D+3
@@ -233,7 +233,7 @@ SUBROUTINE ZBESY(Zr,Zi,Fnu,Kode,N,Cyr,Cyi,Nz,Cwrkr,Cwrki,Ierr)
             aa = aa*rtol
             bb = bb*rtol
             atol = tol
-          ENDIF
+          END IF
           str = (aa*c2r-bb*c2i)*atol
           sti = (aa*c2i+bb*c2r)*atol
           aa = Cyr(i)
@@ -243,13 +243,13 @@ SUBROUTINE ZBESY(Zr,Zi,Fnu,Kode,N,Cyr,Cyi,Nz,Cwrkr,Cwrki,Ierr)
             aa = aa*rtol
             bb = bb*rtol
             atol = tol
-          ENDIF
+          END IF
           str = str - (aa*c1r-bb*c1i)*atol
           sti = sti - (aa*c1i+bb*c1r)*atol
           Cyr(i) = -sti*hcii
           Cyi(i) = str*hcii
           IF ( str==0.0D0.AND.sti==0.0D0.AND.ey==0.0D0 ) Nz = Nz + 1
-        ENDDO
+        END DO
         RETURN
       ELSE
         DO i = 1, N
@@ -257,9 +257,9 @@ SUBROUTINE ZBESY(Zr,Zi,Fnu,Kode,N,Cyr,Cyi,Nz,Cwrkr,Cwrki,Ierr)
           sti = Cwrki(i) - Cyi(i)
           Cyr(i) = -sti*hcii
           Cyi(i) = str*hcii
-        ENDDO
+        END DO
         RETURN
-      ENDIF
-    ENDIF
-  ENDIF
+      END IF
+    END IF
+  END IF
 END SUBROUTINE ZBESY

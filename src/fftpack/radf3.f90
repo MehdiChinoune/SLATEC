@@ -26,7 +26,7 @@ SUBROUTINE RADF3(Ido,L1,Cc,Ch,Wa1,Wa2)
   !   890831  Modified array declarations.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
-  
+
   INTEGER i, ic, Ido, idp2, k, L1
   REAL Cc(Ido,L1,3), Ch(Ido,3,*), ci2, cr2, di2, di3, dr2, dr3, taui, taur, ti2, &
     ti3, tr2, tr3, Wa1(*), Wa2(*)
@@ -38,7 +38,7 @@ SUBROUTINE RADF3(Ido,L1,Cc,Ch,Wa1,Wa2)
     Ch(1,1,k) = Cc(1,k,1) + cr2
     Ch(1,3,k) = taui*(Cc(1,k,3)-Cc(1,k,2))
     Ch(Ido,2,k) = Cc(1,k,1) + taur*cr2
-  ENDDO
+  END DO
   IF ( Ido==1 ) RETURN
   idp2 = Ido + 2
   IF ( (Ido-1)/2<L1 ) THEN
@@ -62,10 +62,10 @@ SUBROUTINE RADF3(Ido,L1,Cc,Ch,Wa1,Wa2)
         Ch(ic-1,2,k) = tr2 - tr3
         Ch(i,3,k) = ti2 + ti3
         Ch(ic,2,k) = ti3 - ti2
-      ENDDO
-    ENDDO
+      END DO
+    END DO
     RETURN
-  ENDIF
+  END IF
   DO k = 1, L1
     !DIR$ IVDEP
     DO i = 3, Ido, 2
@@ -86,7 +86,7 @@ SUBROUTINE RADF3(Ido,L1,Cc,Ch,Wa1,Wa2)
       Ch(ic-1,2,k) = tr2 - tr3
       Ch(i,3,k) = ti2 + ti3
       Ch(ic,2,k) = ti3 - ti2
-    ENDDO
-  ENDDO
+    END DO
+  END DO
   RETURN
 END SUBROUTINE RADF3

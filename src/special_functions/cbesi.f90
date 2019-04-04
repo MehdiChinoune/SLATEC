@@ -229,7 +229,7 @@ SUBROUTINE CBESI(Z,Fnu,Kode,N,Cy,Nz,Ierr)
         s2 = SIN(arg)
         csgn = CMPLX(s1,s2)
         IF ( MOD(inu,2)==1 ) csgn = -csgn
-      ENDIF
+      END IF
       CALL CBINU(zn,Fnu,Kode,N,Cy,Nz,rl,fnul,tol,elim,alim)
       IF ( Nz>=0 ) THEN
         IF ( xx>=0.0E0 ) RETURN
@@ -249,11 +249,11 @@ SUBROUTINE CBESI(Z,Fnu,Kode,N,Cy,Nz,Ierr)
           IF ( MAX(ABS(aa),ABS(bb))<=ascle ) THEN
             zn = zn*CMPLX(rtol,0.0E0)
             atol = tol
-          ENDIF
+          END IF
           zn = zn*csgn
           Cy(i) = zn*CMPLX(atol,0.0E0)
           csgn = -csgn
-        ENDDO
+        END DO
         RETURN
       ELSEIF ( Nz==(-2) ) THEN
         Nz = 0
@@ -263,9 +263,9 @@ SUBROUTINE CBESI(Z,Fnu,Kode,N,Cy,Nz,Ierr)
         Nz = 0
         Ierr = 2
         RETURN
-      ENDIF
-    ENDIF
-  ENDIF
+      END IF
+    END IF
+  END IF
   Nz = 0
   Ierr = 4
 END SUBROUTINE CBESI

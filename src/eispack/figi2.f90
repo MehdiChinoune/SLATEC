@@ -82,7 +82,7 @@ SUBROUTINE FIGI2(Nm,N,T,D,E,Z,Ierr)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   !
   INTEGER i, j, N, Nm, Ierr
   REAL T(Nm,3), D(*), E(*), Z(Nm,*)
@@ -95,7 +95,7 @@ SUBROUTINE FIGI2(Nm,N,T,D,E,Z,Ierr)
     !
     DO j = 1, N
       Z(i,j) = 0.0E0
-    ENDDO
+    END DO
     !
     IF ( i==1 ) THEN
       Z(i,i) = 1.0E0
@@ -109,10 +109,10 @@ SUBROUTINE FIGI2(Nm,N,T,D,E,Z,Ierr)
       ELSE
         E(i) = SQRT(h)
         Z(i,i) = Z(i-1,i-1)*E(i)/T(i-1,3)
-      ENDIF
-    ENDIF
+      END IF
+    END IF
     D(i) = T(i,2)
-  ENDDO
+  END DO
   !
   RETURN
   !     .......... SET ERROR -- PRODUCT OF SOME PAIR OF OFF-DIAGONAL

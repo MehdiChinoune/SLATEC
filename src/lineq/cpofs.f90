@@ -113,7 +113,7 @@ SUBROUTINE CPOFS(A,Lda,N,V,Itask,Ind,Work)
   !   900510  Convert XERRWV calls to XERMSG calls, cvt GOTO's to
   !           IF-THEN-ELSE.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   !
   INTEGER Lda, N, Itask, Ind, info
   COMPLEX A(Lda,*), V(*), Work(*)
@@ -128,21 +128,21 @@ SUBROUTINE CPOFS(A,Lda,N,V,Itask,Ind,Work)
     CALL XERMSG('SLATEC','CPOFS','LDA = '//xern1//' IS LESS THAN N = '//&
       xern2,-1,1)
     RETURN
-  ENDIF
+  END IF
   !
   IF ( N<=0 ) THEN
     Ind = -2
     WRITE (xern1,'(I8)') N
     CALL XERMSG('SLATEC','CPOFS','N = '//xern1//' IS LESS THAN 1',-2,1)
     RETURN
-  ENDIF
+  END IF
   !
   IF ( Itask<1 ) THEN
     Ind = -3
     WRITE (xern1,'(I8)') Itask
     CALL XERMSG('SLATEC','CPOFS','ITASK = '//xern1//' IS LESS THAN 1',-3,1)
     RETURN
-  ENDIF
+  END IF
   !
   IF ( Itask==1 ) THEN
     !
@@ -157,7 +157,7 @@ SUBROUTINE CPOFS(A,Lda,N,V,Itask,Ind,Work)
       CALL XERMSG('SLATEC','CPOFS',&
         'SINGULAR OR NOT POSITIVE DEFINITE - NO SOLUTION',-4,1)
       RETURN
-    ENDIF
+    END IF
     !
     !        COMPUTE IND (ESTIMATE OF NO. OF SIGNIFICANT DIGITS)
     !        AND CHECK FOR IND GREATER THAN ZERO
@@ -166,8 +166,8 @@ SUBROUTINE CPOFS(A,Lda,N,V,Itask,Ind,Work)
     IF ( Ind<=0 ) THEN
       Ind = -10
       CALL XERMSG('SLATEC','CPOFS','SOLUTION MAY HAVE NO SIGNIFICANCE',-10,0)
-    ENDIF
-  ENDIF
+    END IF
+  END IF
   !
   !     SOLVE AFTER FACTORING
   !

@@ -47,7 +47,7 @@ SUBROUTINE PRWPGE(Key,Ipage,Lpg,Sx,Ix)
   !   900510  Fixed error messages and replaced GOTOs with
   !           IF-THEN-ELSE.  (RWC)
   !   910403  Updated AUTHOR and DESCRIPTION sections.  (WRB)
-  
+
   INTEGER Ipage, Ix(*), Key, Lpg
   REAL Sx(*)
   !* FIRST EXECUTABLE STATEMENT  PRWPGE
@@ -77,5 +77,5 @@ SUBROUTINE PRWPGE(Key,Ipage,Lpg,Sx,Ix)
   ELSE
     CALL XERMSG('SLATEC','PRWPGE',&
       'THE VALUE OF KEY (READ-WRITE FLAG) WAS NOT 1 OR 2.',55,1)
-  ENDIF
+  END IF
 END SUBROUTINE PRWPGE

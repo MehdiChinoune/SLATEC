@@ -122,7 +122,7 @@ SUBROUTINE CUNIK(Zr,Fnu,Ikflg,Ipmtr,Tol,Init,Phi,Zeta1,Zeta2,Sum,Cwrk)
         DO j = 1, k
           l = l + 1
           s = s*t2 + CMPLX(c(l),0.0E0)
-        ENDDO
+        END DO
         crfn = crfn*sr
         Cwrk(k) = crfn*s
         ac = ac*rfn
@@ -130,17 +130,17 @@ SUBROUTINE CUNIK(Zr,Fnu,Ikflg,Ipmtr,Tol,Init,Phi,Zeta1,Zeta2,Sum,Cwrk)
         tsti = AIMAG(Cwrk(k))
         test = ABS(tstr) + ABS(tsti)
         IF ( ac<Tol.AND.test<Tol ) GOTO 20
-      ENDDO
+      END DO
       k = 15
-      20       Init = k
+      20  Init = k
     ELSE
       ac = 2.0E0*ABS(ALOG(test)) + Fnu
       Zeta1 = CMPLX(ac,0.0E0)
       Zeta2 = CMPLX(Fnu,0.0E0)
       Phi = cone
       RETURN
-    ENDIF
-  ENDIF
+    END IF
+  END IF
   IF ( Ikflg==2 ) THEN
     !-----------------------------------------------------------------------
     !     COMPUTE SUM FOR THE K FUNCTION
@@ -150,18 +150,18 @@ SUBROUTINE CUNIK(Zr,Fnu,Ikflg,Ipmtr,Tol,Init,Phi,Zeta1,Zeta2,Sum,Cwrk)
     DO i = 1, Init
       s = s + t*Cwrk(i)
       t = -t
-    ENDDO
+    END DO
     Sum = s
     Phi = Cwrk(16)*con(2)
     RETURN
-  ENDIF
+  END IF
   !-----------------------------------------------------------------------
   !     COMPUTE SUM FOR THE I FUNCTION
   !-----------------------------------------------------------------------
   s = czero
   DO i = 1, Init
     s = s + Cwrk(i)
-  ENDDO
+  END DO
   Sum = s
   Phi = Cwrk(16)*con(1)
   RETURN

@@ -62,8 +62,8 @@ SUBROUTINE LA05ED(A,Irn,Ip,N,Iw,Ia,Reals)
       k = Ip(j) + nz - 1
       Iw(j) = Irn(k)
       Irn(k) = -j
-    ENDIF
-  ENDDO
+    END IF
+  END DO
   ! KN IS THE POSITION OF NEXT ENTRY IN COMPRESSED FILE.
   kn = 0
   ipi = 0
@@ -86,10 +86,10 @@ SUBROUTINE LA05ED(A,Irn,Ip,N,Iw,Ia,Reals)
         Ip(j) = ipi + 1
         Iw(j) = kn - ipi
         ipi = kn
-      ENDIF
+      END IF
       Irn(kn) = Irn(k)
-    ENDIF
-  ENDDO
+    END IF
+  END DO
   IF ( Reals ) LROw = kn
   IF ( .NOT.Reals ) LCOl = kn
 END SUBROUTINE LA05ED

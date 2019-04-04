@@ -65,7 +65,7 @@ SUBROUTINE FULMAT(I,J,Aij,Indcat,Prgopt,Dattrv,Iflag)
           EXIT
         ELSE
           lp = next
-        ENDIF
+        END IF
       ELSE
         nerr = 29
         level = 1
@@ -73,8 +73,8 @@ SUBROUTINE FULMAT(I,J,Aij,Indcat,Prgopt,Dattrv,Iflag)
           'IN SPLP PACKAGE, ROW DIM., MRELAS, NVARS ARE MISSING FROM PRGOPT.',nerr,level)
         Iflag(1) = 3
         EXIT
-      ENDIF
-    ENDDO
+      END IF
+    END DO
   ELSEIF ( Iflag(1)==2 ) THEN
     DO
       I = Iflag(2)
@@ -88,11 +88,11 @@ SUBROUTINE FULMAT(I,J,Aij,Indcat,Prgopt,Dattrv,Iflag)
         IF ( Aij/=zero ) THEN
           Indcat = 0
           EXIT
-        ENDIF
+        END IF
       ELSE
         Iflag(2) = 1
         Iflag(3) = J + 1
-      ENDIF
-    ENDDO
-  ENDIF
+      END IF
+    END DO
+  END IF
 END SUBROUTINE FULMAT

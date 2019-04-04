@@ -349,7 +349,7 @@ SUBROUTINE DSDGMR(N,B,X,Nelt,Ia,Ja,A,Isym,Nsave,Itol,Tol,Itmax,Iter,Err,&
   IF ( Nsave<=1 ) THEN
     Ierr = 3
     RETURN
-  ENDIF
+  END IF
   !
   !         Change the SLAP input matrix IA, JA, A to SLAP-Column format.
   CALL DS2Y(N,Nelt,Ia,Ja,A,Isym)

@@ -58,7 +58,7 @@ SUBROUTINE CASYI(Z,Fnu,Kode,N,Y,Nz,Rl,Tol,Elim,Alim)
     IF ( (ABS(acz)<=Alim).OR.(N<=2) ) THEN
       koded = 0
       ak1 = ak1*CEXP(cz)
-    ENDIF
+    END IF
     fdn = 0.0E0
     IF ( dnu2>rtr1 ) fdn = dnu2*dnu2
     ez = Z*CMPLX(8.0E0,0.0E0)
@@ -85,7 +85,7 @@ SUBROUTINE CASYI(Z,Fnu,Kode,N,Y,Nz,Rl,Tol,Elim,Alim)
       IF ( yy<0.0E0 ) bk = -bk
       p1 = CMPLX(ak,bk)
       IF ( MOD(inu,2)==1 ) p1 = -p1
-    ENDIF
+    END IF
     DO k = 1, il
       sqk = fdn - 1.0E0
       atol = s*ABS(sqk)
@@ -108,15 +108,15 @@ SUBROUTINE CASYI(Z,Fnu,Kode,N,Y,Nz,Rl,Tol,Elim,Alim)
         ak = ak + 8.0E0
         sqk = sqk - ak
         IF ( aa<=atol ) GOTO 20
-      ENDDO
+      END DO
       GOTO 100
-      20       s2 = cs1
+      20  s2 = cs1
       IF ( x+x<Elim ) s2 = s2 + p1*cs2*CEXP(-Z-Z)
       fdn = fdn + 8.0E0*dfnu + 4.0E0
       p1 = -p1
       m = N - il + k
       Y(m) = s2*ak1
-    ENDDO
+    END DO
     IF ( N<=2 ) RETURN
     nn = N
     k = nn - 2
@@ -127,13 +127,13 @@ SUBROUTINE CASYI(Z,Fnu,Kode,N,Y,Nz,Rl,Tol,Elim,Alim)
       Y(k) = CMPLX(ak+Fnu,0.0E0)*rz*Y(k+1) + Y(k+2)
       ak = ak - 1.0E0
       k = k - 1
-    ENDDO
+    END DO
     IF ( koded==0 ) RETURN
     ck = CEXP(cz)
     DO i = 1, nn
       Y(i) = Y(i)*ck
-    ENDDO
+    END DO
     RETURN
-  ENDIF
+  END IF
   100  Nz = -2
 END SUBROUTINE CASYI

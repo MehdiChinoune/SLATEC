@@ -87,7 +87,7 @@ SUBROUTINE RSP(Nm,N,Nv,A,W,Matz,Z,Fv1,Fv2,Ierr)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   !
   INTEGER i, j, N, Nm, Nv, Ierr, Matz
   REAL A(*), W(*), Z(Nm,*), Fv1(*), Fv2(*)
@@ -104,18 +104,18 @@ SUBROUTINE RSP(Nm,N,Nv,A,W,Matz,Z,Fv1,Fv2,Ierr)
         !
         DO j = 1, N
           Z(j,i) = 0.0E0
-        ENDDO
+        END DO
         !
         Z(i,i) = 1.0E0
-      ENDDO
+      END DO
       !
       CALL TQL2(Nm,N,W,Fv1,Z,Ierr)
       IF ( Ierr==0 ) CALL TRBAK3(Nm,N,Nv,A,N,Z)
     ELSE
       !     .......... FIND EIGENVALUES ONLY ..........
       CALL TQLRAT(N,W,Fv2,Ierr)
-    ENDIF
+    END IF
   ELSE
     Ierr = 20*N
-  ENDIF
+  END IF
 END SUBROUTINE RSP

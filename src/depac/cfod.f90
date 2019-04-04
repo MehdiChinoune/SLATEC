@@ -25,7 +25,7 @@ SUBROUTINE CFOD(Meth,Elco,Tesco)
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
-  
+
   !
   !
   !LLL. OPTIMIZE
@@ -77,20 +77,20 @@ SUBROUTINE CFOD(Meth,Elco,Tesco)
       DO ib = 1, nq
         i = nq + 2 - ib
         pc(i) = pc(i-1) + fnq*pc(i)
-      ENDDO
+      END DO
       pc(1) = fnq*pc(1)
       ! STORE COEFFICIENTS IN ELCO AND TESCO. --------------------------------
       DO i = 1, nqp1
         Elco(i,nq) = pc(i)/pc(2)
-      ENDDO
+      END DO
       Elco(2,nq) = 1.0E0
       Tesco(1,nq) = rq1fac
       Tesco(2,nq) = nqp1/Elco(1,nq)
       Tesco(3,nq) = (nq+2)/Elco(1,nq)
       rq1fac = rq1fac/fnq
-    ENDDO
+    END DO
     RETURN
-  ENDIF
+  END IF
   !
   Elco(1,1) = 1.0E0
   Elco(2,1) = 1.0E0
@@ -116,7 +116,7 @@ SUBROUTINE CFOD(Meth,Elco,Tesco)
     DO ib = 1, nqm1
       i = nqp1 - ib
       pc(i) = pc(i-1) + fnqm1*pc(i)
-    ENDDO
+    END DO
     pc(1) = fnqm1*pc(1)
     ! COMPUTE INTEGRAL, -1 TO 0, OF P(X) AND X*P(X). -----------------------
     pint = pc(1)
@@ -126,19 +126,19 @@ SUBROUTINE CFOD(Meth,Elco,Tesco)
       tsign = -tsign
       pint = pint + tsign*pc(i)/i
       xpin = xpin + tsign*pc(i)/(i+1)
-    ENDDO
+    END DO
     ! STORE COEFFICIENTS IN ELCO AND TESCO. --------------------------------
     Elco(1,nq) = pint*rq1fac
     Elco(2,nq) = 1.0E0
     DO i = 2, nq
       Elco(i+1,nq) = rq1fac*pc(i)/i
-    ENDDO
+    END DO
     agamq = rqfac*xpin
     ragq = 1.0E0/agamq
     Tesco(2,nq) = ragq
     IF ( nq<12 ) Tesco(1,nqp1) = ragq*rqfac/nqp1
     Tesco(3,nqm1) = ragq
-  ENDDO
+  END DO
   RETURN
   !----------------------- END OF SUBROUTINE CFOD  -----------------------
   RETURN

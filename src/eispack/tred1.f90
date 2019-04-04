@@ -75,7 +75,7 @@ SUBROUTINE TRED1(Nm,N,A,D,E,E2)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   !
   INTEGER i, j, k, l, N, ii, Nm, jp1
   REAL A(Nm,*), D(*), E(*), E2(*)
@@ -84,7 +84,7 @@ SUBROUTINE TRED1(Nm,N,A,D,E,E2)
   !* FIRST EXECUTABLE STATEMENT  TRED1
   DO i = 1, N
     D(i) = A(i,i)
-  ENDDO
+  END DO
   !     .......... FOR I=N STEP -1 UNTIL 1 DO -- ..........
   DO ii = 1, N
     i = N + 1 - ii
@@ -95,14 +95,14 @@ SUBROUTINE TRED1(Nm,N,A,D,E,E2)
       !     .......... SCALE ROW (ALGOL TOL THEN NOT NEEDED) ..........
       DO k = 1, l
         scale = scale + ABS(A(i,k))
-      ENDDO
+      END DO
       !
       IF ( scale/=0.0E0 ) THEN
         !
         DO k = 1, l
           A(i,k) = A(i,k)/scale
           h = h + A(i,k)*A(i,k)
-        ENDDO
+        END DO
         !
         E2(i) = scale*scale*h
         f = A(i,l)
@@ -118,19 +118,19 @@ SUBROUTINE TRED1(Nm,N,A,D,E,E2)
             !     .......... FORM ELEMENT OF A*U ..........
             DO k = 1, j
               g = g + A(j,k)*A(i,k)
-            ENDDO
+            END DO
             !
             jp1 = j + 1
             IF ( l>=jp1 ) THEN
               !
               DO k = jp1, l
                 g = g + A(k,j)*A(i,k)
-              ENDDO
-            ENDIF
+              END DO
+            END IF
             !     .......... FORM ELEMENT OF P ..........
             E(j) = g/h
             f = f + E(j)*A(i,j)
-          ENDDO
+          END DO
           !
           h = f/(h+h)
           !     .......... FORM REDUCED A ..........
@@ -141,22 +141,22 @@ SUBROUTINE TRED1(Nm,N,A,D,E,E2)
             !
             DO k = 1, j
               A(j,k) = A(j,k) - f*E(k) - g*A(i,k)
-            ENDDO
-          ENDDO
-        ENDIF
+            END DO
+          END DO
+        END IF
         !
         DO k = 1, l
           A(i,k) = scale*A(i,k)
-        ENDDO
+        END DO
         GOTO 50
-      ENDIF
-    ENDIF
+      END IF
+    END IF
     E(i) = 0.0E0
     E2(i) = 0.0E0
     !
-    50     h = D(i)
+    50  h = D(i)
     D(i) = A(i,i)
     A(i,i) = h
-  ENDDO
+  END DO
   !
 END SUBROUTINE TRED1

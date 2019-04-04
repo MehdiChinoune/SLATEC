@@ -73,12 +73,12 @@ REAL FUNCTION POCH1(A,X)
     sqtbig = 1.0/SQRT(24.0*R1MACH(1))
     alneps = LOG(R1MACH(3))
     first = .FALSE.
-  ENDIF
+  END IF
   !
   IF ( X==0.0 ) THEN
     POCH1 = PSI(A)
     RETURN
-  ENDIF
+  END IF
   !
   absx = ABS(X)
   absa = ABS(A)
@@ -119,14 +119,14 @@ REAL FUNCTION POCH1(A,X)
           DO j = 1, k
             ndx = k - j + 1
             gbk = gbk + bern(ndx)*gbern(j)
-          ENDDO
+          END DO
           gbern(k+1) = -rho*gbk/k
           !
           term = term*(2*k-2.-X)*(2*k-1.-X)*var2
           poly1 = poly1 + gbern(k+1)*term
-        ENDDO
-      ENDIF
-    ENDIF
+        END DO
+      END IF
+    END IF
     !
     poly1 = (X-1.0)*poly1
     POCH1 = EXPREL(q)*(alnvar+q*poly1) + poly1
@@ -140,8 +140,8 @@ REAL FUNCTION POCH1(A,X)
         i = incr - ii
         binv = 1.0/(bp+i)
         POCH1 = (POCH1-binv)/(1.0+X*binv)
-      ENDDO
-    ENDIF
+      END DO
+    END IF
     !
     IF ( bp==A ) RETURN
     !
@@ -154,6 +154,6 @@ REAL FUNCTION POCH1(A,X)
     !
     POCH1 = trig + (1.0+X*trig)*POCH1
     RETURN
-  ENDIF
+  END IF
   !
 END FUNCTION POCH1

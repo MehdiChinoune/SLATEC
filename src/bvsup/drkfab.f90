@@ -68,7 +68,7 @@ SUBROUTINE DRKFAB(Ncomp,Xpts,Nxpts,Nfc,Iflag,Z,Mxnon,P,Ntp,Ip,Yhp,Niv,U,V,&
   IF ( NOPg/=0 ) THEN
     INFo(3) = 0
     IF ( X==Z(1) ) jon = 2
-  ENDIF
+  END IF
   nfcp1 = Nfc + 1
   !
   !        ***************************************************************
@@ -86,12 +86,12 @@ SUBROUTINE DRKFAB(Ncomp,Xpts,Nxpts,Nfc,Iflag,Z,Mxnon,P,Ntp,Ip,Yhp,Niv,U,V,&
     !
     !              BEGIN BLOCK PERMITTING ...EXITS TO 190
     !                 BEGIN BLOCK PERMITTING ...EXITS TO 30
-    50     xxop = XOP
+    50  xxop = XOP
     !                 ...EXIT
     IF ( NOPg/=0 ) THEN
       IF ( XENd>XBEg.AND.XOP>Z(jon) ) xxop = Z(jon)
       IF ( XENd<XBEg.AND.XOP<Z(jon) ) xxop = Z(jon)
-    ENDIF
+    END IF
     DO
       !
       !                 ******************************************************
@@ -106,7 +106,7 @@ SUBROUTINE DRKFAB(Ncomp,Xpts,Nxpts,Nfc,Iflag,Z,Mxnon,P,Ntp,Ip,Yhp,Niv,U,V,&
         !
         CALL DDERKF(DBVDER,NEQ,X,Yhp,xxop,INFo,RE,AE,idid,Work,KKKint,Iwork,&
           LLLint,G,ipar)
-      ENDIF
+      END IF
       IF ( idid>=1 ) THEN
         !
         !                       ************************************************
@@ -129,7 +129,7 @@ SUBROUTINE DRKFAB(Ncomp,Xpts,Nxpts,Nfc,Iflag,Z,Mxnon,P,Ntp,Ip,Yhp,Niv,U,V,&
           !                    .........EXIT
           IF ( idid==1 ) CYCLE
           EXIT
-        ENDIF
+        END IF
         !
         IF ( NDIsk==0 ) non = NUMort + 1
         CALL DREORT(Ncomp,U(1,1,kod),V(1,kod),Yhp,Niv,W(1,non),S,P(1,non),&
@@ -157,8 +157,8 @@ SUBROUTINE DRKFAB(Ncomp,Xpts,Nxpts,Nfc,Iflag,Z,Mxnon,P,Ntp,Ip,Yhp,Niv,U,V,&
               Iflag = 13
               !     .....................EXIT
               RETURN
-            ENDIF
-          ENDIF
+            END IF
+          END IF
           !
           NUMort = NUMort + 1
           CALL DSTOR1(Yhp,U(1,1,kod),Yhp(1,nfcp1),V(1,kod),1,NDIsk,NTApe)
@@ -174,7 +174,7 @@ SUBROUTINE DRKFAB(Ncomp,Xpts,Nxpts,Nfc,Iflag,Z,Mxnon,P,Ntp,Ip,Yhp,Niv,U,V,&
           IF ( NDIsk/=0 ) THEN
             IF ( INHomo==1 ) WRITE (NTApe) (W(j,1),j=1,Nfcc)
             WRITE (NTApe) (Ip(j,1),j=1,Nfcc), (P(j,1),j=1,Ntp)
-          ENDIF
+          END IF
           INFo(1) = 0
           jon = jon + 1
           !                 ......EXIT
@@ -195,7 +195,7 @@ SUBROUTINE DRKFAB(Ncomp,Xpts,Nxpts,Nfc,Iflag,Z,Mxnon,P,Ntp,Ip,Yhp,Niv,U,V,&
         ELSEIF ( idid/=1 ) THEN
           EXIT
           !                    ......EXIT
-        ENDIF
+        END IF
       ELSE
         INFo(1) = 1
         !                    ......EXIT
@@ -203,15 +203,15 @@ SUBROUTINE DRKFAB(Ncomp,Xpts,Nxpts,Nfc,Iflag,Z,Mxnon,P,Ntp,Ip,Yhp,Niv,U,V,&
           Iflag = 20 - idid
           !     .....................EXIT
           RETURN
-        ENDIF
-      ENDIF
-    ENDDO
+        END IF
+      END IF
+    END DO
     !
     !           STORAGE OF HOMOGENEOUS SOLUTIONS IN U AND THE PARTICULAR
     !           SOLUTION IN V AT THE OUTPUT POINTS.
     !
     CALL DSTOR1(U(1,1,kod),Yhp,V(1,kod),Yhp(1,nfcp1),0,NDIsk,NTApe)
-  ENDDO
+  END DO
   !        ***************************************************************
   !        ***************************************************************
   !

@@ -312,21 +312,21 @@ INTEGER FUNCTION ISDGMR(N,B,X,Xl,Nelt,Ia,Ja,A,Isym,MSOLVE,Nmsl,Itol,Tol,&
       IF ( (Kmp<Maxl).AND.(Lgmr/=0) ) THEN
         tem = 1.0D0/(R0nrm*Prod)
         CALL DSCAL(N,tem,R,1)
-      ENDIF
+      END IF
     ELSEIF ( Itol==3 ) THEN
       !         err = Max |(Minv*Residual)(i)/x(i)|
       !         When JPRE .lt. 0, R already contains Minv*Residual.
       IF ( Jpre>0 ) THEN
         CALL MSOLVE(N,R,Dz,Nelt,Ia,Ja,A,Isym,Rwork,Iwork)
         Nmsl = Nmsl + 1
-      ENDIF
+      END IF
       !
       !         Unscale R by R0NRM*PROD when KMP < MAXL.
       !
       IF ( (Kmp<Maxl).AND.(Lgmr/=0) ) THEN
         tem = 1.0D0/(R0nrm*Prod)
         CALL DSCAL(N,tem,R,1)
-      ENDIF
+      END IF
       !
       fuzz = D1MACH(1)
       ielmax = 1
@@ -336,16 +336,16 @@ INTEGER FUNCTION ISDGMR(N,B,X,Xl,Nelt,Ia,Ja,A,Isym,MSOLVE,Nmsl,Itol,Tol,&
         IF ( rat>ratmax ) THEN
           ielmax = i
           ratmax = rat
-        ENDIF
-      ENDDO
+        END IF
+      END DO
       Err = ratmax
       IF ( ratmax<=Tol ) ISDGMR = 1
       IF ( Iunit>0 ) WRITE (Iunit,99001) Iter, ielmax, ratmax
       99001 FORMAT (1X,' ITER = ',I5,' IELMAX = ',I5,' |R(IELMAX)/X(IELMAX)| = ',&
         D12.5)
       RETURN
-    ENDIF
-  ENDIF
+    END IF
+  END IF
   IF ( Itol==11 ) THEN
     !
     !       Use DXLCAL to calculate the approximate solution XL.
@@ -359,42 +359,42 @@ INTEGER FUNCTION ISDGMR(N,B,X,Xl,Nelt,Ia,Ja,A,Isym,MSOLVE,Nmsl,Itol,Tol,&
     ELSE
       !         Return since this is the first call to DPIGMR on a restart.
       RETURN
-    ENDIF
+    END IF
     !
     IF ( (Jscal==0).OR.(Jscal==2) ) THEN
       !         err = ||x-TrueSolution||/||TrueSolution||(2-Norms).
       IF ( Iter==0 ) solnrm = DNRM2(N,SOLn,1)
       DO i = 1, N
         Dz(i) = Xl(i) - SOLn(i)
-      ENDDO
+      END DO
       Err = DNRM2(N,Dz,1)/solnrm
     ELSE
       IF ( Iter==0 ) THEN
         solnrm = 0
         DO i = 1, N
           solnrm = solnrm + (Sx(i)*SOLn(i))**2
-        ENDDO
+        END DO
         solnrm = SQRT(solnrm)
-      ENDIF
+      END IF
       dxnrm = 0
       DO i = 1, N
         dxnrm = dxnrm + (Sx(i)*(Xl(i)-SOLn(i)))**2
-      ENDDO
+      END DO
       dxnrm = SQRT(dxnrm)
       !         err = ||SX*(x-TrueSolution)||/||SX*TrueSolution|| (2-Norms).
       Err = dxnrm/solnrm
-    ENDIF
-  ENDIF
+    END IF
+  END IF
   !
   IF ( Iunit/=0 ) THEN
     IF ( Iter==0 ) THEN
       WRITE (Iunit,99002) N, Itol, Maxl, Kmp
       99002 FORMAT (' Generalized Minimum Residual(',I3,I3,') for ','N, ITOL = ',&
         I5,I5,/' ITER','   Natural Err Est','   Error Estimate')
-    ENDIF
+    END IF
     WRITE (Iunit,99003) Iter, Rnrm/Bnrm, Err
     99003 FORMAT (1X,I4,1X,D16.7,1X,D16.7)
-  ENDIF
+  END IF
   IF ( Err<=Tol ) ISDGMR = 1
   !
   RETURN

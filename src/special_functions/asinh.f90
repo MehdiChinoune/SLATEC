@@ -56,7 +56,7 @@ REAL FUNCTION ASINH(X)
     sqeps = SQRT(R1MACH(3))
     xmax = 1.0/sqeps
     first = .FALSE.
-  ENDIF
+  END IF
   !
   y = ABS(X)
   IF ( y>1.0 ) THEN
@@ -65,7 +65,7 @@ REAL FUNCTION ASINH(X)
     IF ( y>=xmax ) ASINH = aln2 + LOG(y)
     ASINH = SIGN(ASINH,X)
     RETURN
-  ENDIF
+  END IF
   !
   ASINH = X
   IF ( y>sqeps ) ASINH = X*(1.0+CSEVL(2.*X*X-1.,asnhcs,nterms))

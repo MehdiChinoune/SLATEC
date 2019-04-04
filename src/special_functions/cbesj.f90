@@ -231,7 +231,7 @@ SUBROUTINE CBESJ(Z,Fnu,Kode,N,Cy,Nz,Ierr)
         zn = -zn
         csgn = CONJG(csgn)
         ci = CONJG(ci)
-      ENDIF
+      END IF
       CALL CBINU(zn,Fnu,Kode,N,Cy,Nz,rl,fnul,tol,elim,alim)
       IF ( Nz>=0 ) THEN
         nl = N - Nz
@@ -247,11 +247,11 @@ SUBROUTINE CBESJ(Z,Fnu,Kode,N,Cy,Nz,Ierr)
           IF ( MAX(ABS(aa),ABS(bb))<=ascle ) THEN
             zn = zn*CMPLX(rtol,0.0E0)
             atol = tol
-          ENDIF
+          END IF
           zn = zn*csgn
           Cy(i) = zn*CMPLX(atol,0.0E0)
           csgn = csgn*ci
-        ENDDO
+        END DO
         RETURN
       ELSEIF ( Nz==(-2) ) THEN
         Nz = 0
@@ -261,9 +261,9 @@ SUBROUTINE CBESJ(Z,Fnu,Kode,N,Cy,Nz,Ierr)
         Nz = 0
         Ierr = 2
         RETURN
-      ENDIF
-    ENDIF
-  ENDIF
+      END IF
+    END IF
+  END IF
   Nz = 0
   Ierr = 4
 END SUBROUTINE CBESJ

@@ -110,11 +110,11 @@ SUBROUTINE ZRATI(Zr,Zi,Fnu,N,Cyr,Cyi,Tol)
           p2r = ptr
           p2i = pti
           t1r = t1r - coner
-        ENDDO
+        END DO
         IF ( p1r==czeror.AND.p1i==czeroi ) THEN
           p1r = Tol
           p1i = Tol
-        ENDIF
+        END IF
         CALL ZDIV(p2r,p2i,p1r,p1i,Cyr(N),Cyi(N))
         IF ( N==1 ) RETURN
         k = N - 1
@@ -131,13 +131,13 @@ SUBROUTINE ZRATI(Zr,Zi,Fnu,N,Cyr,Cyi,Tol)
             ptr = Tol
             pti = Tol
             ak = Tol*rt2
-          ENDIF
+          END IF
           rak = coner/ak
           Cyr(k) = rak*ptr*rak
           Cyi(k) = -rak*pti*rak
           t1r = t1r - coner
           k = k - 1
-        ENDDO
+        END DO
         EXIT
       ELSE
         ak = ZABS(t1r,t1i)*0.5D0
@@ -145,7 +145,7 @@ SUBROUTINE ZRATI(Zr,Zi,Fnu,N,Cyr,Cyi,Tol)
         rho = MIN(ap2/ap1,flam)
         test = test1*SQRT(rho/(rho*rho-1.0D0))
         itime = 2
-      ENDIF
-    ENDIF
-  ENDDO
+      END IF
+    END IF
+  END DO
 END SUBROUTINE ZRATI

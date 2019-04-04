@@ -57,7 +57,7 @@ SUBROUTINE MPMUL(X,Y,Z)
     ! CLEAR ACCUMULATOR
     DO i = 1, i2
       R(i) = 0
-    ENDDO
+    END DO
     ! PERFORM MULTIPLICATION
     c = 8
     DO i = 1, T
@@ -77,12 +77,12 @@ SUBROUTINE MPMUL(X,Y,Z)
             IF ( ri<0 ) GOTO 100
             c = ri/B
             R(j1) = ri - B*c
-          ENDDO
+          END DO
           IF ( c/=0 ) GOTO 200
           c = 8
-        ENDIF
-      ENDIF
-    ENDDO
+        END IF
+      END IF
+    END DO
     IF ( c/=8 ) THEN
       IF ( (xi<0).OR.(xi>=B) ) GOTO 200
       c = 0
@@ -92,9 +92,9 @@ SUBROUTINE MPMUL(X,Y,Z)
         IF ( ri<0 ) GOTO 100
         c = ri/B
         R(j1) = ri - B*c
-      ENDDO
+      END DO
       IF ( c/=0 ) GOTO 200
-    ENDIF
+    END IF
     ! NORMALIZE AND ROUND RESULT
     CALL MPNZR(rs,re,Z,0)
     RETURN
@@ -102,7 +102,7 @@ SUBROUTINE MPMUL(X,Y,Z)
     ! SET RESULT TO ZERO
     Z(1) = 0
     RETURN
-  ENDIF
+  END IF
   100  WRITE (LUN,99001)
   99001 FORMAT (' *** INTEGER OVERFLOW IN MPMUL, B TOO LARGE ***')
   GOTO 300

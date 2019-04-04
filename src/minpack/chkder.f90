@@ -128,14 +128,14 @@ SUBROUTINE CHKDER(M,N,X,Fvec,Fjac,Ldfjac,Xp,Fvecp,Mode,Err)
     epslog = LOG10(eps)
     DO i = 1, M
       Err(i) = zero
-    ENDDO
+    END DO
     DO j = 1, N
       temp = ABS(X(j))
       IF ( temp==zero ) temp = one
       DO i = 1, M
         Err(i) = Err(i) + temp*Fjac(i,j)
-      ENDDO
-    ENDDO
+      END DO
+    END DO
     DO i = 1, M
       temp = one
       IF ( Fvec(i)/=zero.AND.Fvecp(i)/=zero.AND.ABS(Fvecp(i)-Fvec(i))&
@@ -144,7 +144,7 @@ SUBROUTINE CHKDER(M,N,X,Fvec,Fjac,Ldfjac,Xp,Fvecp,Mode,Err)
       Err(i) = one
       IF ( temp>epsmch.AND.temp<eps ) Err(i) = (LOG10(temp)-epslog)/epslog
       IF ( temp>=eps ) Err(i) = zero
-    ENDDO
+    END DO
   ELSE
     !
     !        MODE = 1.
@@ -153,8 +153,8 @@ SUBROUTINE CHKDER(M,N,X,Fvec,Fjac,Ldfjac,Xp,Fvecp,Mode,Err)
       temp = eps*ABS(X(j))
       IF ( temp==zero ) temp = eps
       Xp(j) = X(j) + temp
-    ENDDO
-  ENDIF
+    END DO
+  END IF
   !
   !
   !     LAST CARD OF SUBROUTINE CHKDER.

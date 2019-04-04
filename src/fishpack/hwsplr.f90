@@ -318,7 +318,7 @@ SUBROUTINE HWSPLR(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   INTEGER i, id2, id3, id4, id5, id6, Idimf, ierr1, Ierror, ij, &
     ip, iwstor, j, k, l, lp, M, Mbdcnd, mp1, mstart
   REAL A, a1, a2, B, Bda(*), Bdb(*), Bdc(*), Bdd(*), C, D, deltar, deltht, &
@@ -400,7 +400,7 @@ SUBROUTINE HWSPLR(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
     W(j) = (r+dlrby2)/(r*dlrsq)
     j = id2 + i
     W(j) = -a1 + Elmbda
-  ENDDO
+  END DO
   SELECT CASE (Mbdcnd)
     CASE (1,5)
     CASE (3)
@@ -419,25 +419,25 @@ SUBROUTINE HWSPLR(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
       a1 = 2.*deltar*W(1)
       DO j = nstart, nstop
         F(1,j) = F(1,j) + a1*Bda(j)
-      ENDDO
+      END DO
     CASE (5,6)
     CASE DEFAULT
       a1 = W(1)
       DO j = nstart, nstop
         F(2,j) = F(2,j) - a1*F(1,j)
-      ENDDO
+      END DO
   END SELECT
   SELECT CASE (Mbdcnd)
     CASE (2,3,6)
       a1 = 2.*deltar*W(id4)
       DO j = nstart, nstop
         F(mp1,j) = F(mp1,j) - a1*Bdb(j)
-      ENDDO
+      END DO
     CASE DEFAULT
       a1 = W(id4)
       DO j = nstart, nstop
         F(M,j) = F(M,j) - a1*F(mp1,j)
-      ENDDO
+      END DO
   END SELECT
   !
   !     ENTER BOUNDARY DATA FOR THETA-BOUNDARIES.
@@ -453,12 +453,12 @@ SUBROUTINE HWSPLR(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
       DO i = mstart, mstop
         j = i + lp
         F(i,1) = F(i,1) + a1*W(j)*Bdc(i)
-      ENDDO
+      END DO
     CASE DEFAULT
       DO i = mstart, mstop
         j = i + lp
         F(i,2) = F(i,2) - a1*W(j)*F(i,1)
-      ENDDO
+      END DO
   END SELECT
   a1 = 1./dlthsq
   SELECT CASE (np)
@@ -468,12 +468,12 @@ SUBROUTINE HWSPLR(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
       DO i = mstart, mstop
         j = i + lp
         F(i,np1) = F(i,np1) - a1*W(j)*Bdd(i)
-      ENDDO
+      END DO
     CASE DEFAULT
       DO i = mstart, mstop
         j = i + lp
         F(i,N) = F(i,N) - a1*W(j)*F(i,np1)
-      ENDDO
+      END DO
   END SELECT
   !
   !     ADJUST RIGHT SIDE OF EQUATION FOR UNKNOWN AT POLE WHEN HAVE
@@ -510,27 +510,27 @@ SUBROUTINE HWSPLR(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
         k = nstop - 1
         DO j = ij, k
           s1 = s1 + F(i,j)
-        ENDDO
+        END DO
         j = i + l
         s = s + (a2*s1+F(i,nstart)+F(i,nstop))*W(j)
-      ENDDO
+      END DO
       s2 = M*A + deltar*((M-1)*(M+1)*.5+.25) + s2
       s1 = (2.+a2*(nunk-2))*s2
       IF ( Mbdcnd/=3 ) THEN
         s2 = N*a2*deltar/8.
         s = s + F(1,1)*s2
         s1 = s1 + s2
-      ENDIF
+      END IF
       Pertrb = s/s1
       DO i = mstart, mstop
         DO j = nstart, nstop
           F(i,j) = F(i,j) - Pertrb
-        ENDDO
-      ENDDO
-    ENDIF
+        END DO
+      END DO
+    END IF
   ELSE
     Ierror = 11
-  ENDIF
+  END IF
   !
   !     MULTIPLY I-TH EQUATION THROUGH BY (R(I)*DELTHT)**2.
   !
@@ -546,8 +546,8 @@ SUBROUTINE HWSPLR(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
     W(j) = a1*W(j)
     DO j = nstart, nstop
       F(i,j) = a1*F(i,j)
-    ENDDO
-  ENDDO
+    END DO
+  END DO
   W(1) = 0.
   W(id4) = 0.
   !
@@ -567,7 +567,7 @@ SUBROUTINE HWSPLR(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
       IF ( Elmbda==0. ) THEN
         ypole = 0.
         GOTO 300
-      ENDIF
+      END IF
   END SELECT
   j = id5 + munk
   W(j) = W(id2)/W(id3)
@@ -577,37 +577,37 @@ SUBROUTINE HWSPLR(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
     lp = id2 + i
     k = id3 + i
     W(j) = W(i)/(W(lp)-W(k)*W(j+1))
-  ENDDO
+  END DO
   W(id5+1) = -.5*dlthsq/(W(id2+1)-W(id3+1)*W(id5+2))
   DO i = 2, munk
     j = id5 + i
     W(j) = -W(j)*W(j-1)
-  ENDDO
+  END DO
   s = 0.
   DO j = nstart, nstop
     s = s + F(2,j)
-  ENDDO
+  END DO
   a2 = nunk
   IF ( Nbdcnd/=0 ) THEN
     s = s - .5*(F(2,nstart)+F(2,nstop))
     a2 = a2 - 1.
-  ENDIF
+  END IF
   ypole = (.25*dlrsq*F(1,1)-s/a2)/(W(id5+1)-1.+Elmbda*dlrsq*.25)
   DO i = mstart, mstop
     k = l + i
     DO j = nstart, nstop
       F(i,j) = F(i,j) + ypole*W(k)
-    ENDDO
-  ENDDO
+    END DO
+  END DO
   300 CONTINUE
   DO j = 1, np1
     F(1,j) = ypole
-  ENDDO
+  END DO
   400 CONTINUE
   IF ( Nbdcnd==0 ) THEN
     DO i = mstart, mstop
       F(i,np1) = F(i,1)
-    ENDDO
-  ENDIF
+    END DO
+  END IF
   W(1) = iwstor
 END SUBROUTINE HWSPLR

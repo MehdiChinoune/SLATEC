@@ -43,7 +43,7 @@ SUBROUTINE DPCHKT(N,X,Knotyp,T)
   !   900430  Produced double precision version.
   !   930514  Changed NKNOTS from an output to an input variable.  (FNF)
   !   930604  Removed unused variable NKNOTS from argument list.  (FNF)
-  
+
   !
   !*Internal Notes:
   !
@@ -74,7 +74,7 @@ SUBROUTINE DPCHKT(N,X,Knotyp,T)
     j = j + 2
     T(j) = X(k)
     T(j+1) = T(j)
-  ENDDO
+  END DO
   !     Assertion:  At this point T(3),...,T(NDIM+2) have been set and
   !                 J=NDIM+1.
   !
@@ -94,7 +94,7 @@ SUBROUTINE DPCHKT(N,X,Knotyp,T)
     !          Quadruple end knots.
     T(2) = X(1)
     T(ndim+3) = X(N)
-  ENDIF
+  END IF
   T(1) = T(2)
   T(ndim+4) = T(ndim+3)
   !

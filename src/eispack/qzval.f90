@@ -105,7 +105,7 @@ SUBROUTINE QZVAL(Nm,N,A,B,Alfr,Alfi,Beta,Matz,Z)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   !
   INTEGER i, j, N, en, na, Nm, nn, isw
   REAL A(Nm,*), B(Nm,*), Alfr(*), Alfi(*), Beta(*), Z(Nm,*)
@@ -145,7 +145,7 @@ SUBROUTINE QZVAL(Nm,N,A,B,Alfr,Alfi,Beta,Matz,Z)
           IF ( ABS(e)>ABS(ei) ) THEN
             e = ei
             t = (a11-e*b11)/b11
-          ENDIF
+          END IF
           c = 0.5E0*(t-s*b12)
           d = c*c + s*(a12-e*b12)
           IF ( d<0.0E0 ) THEN
@@ -169,7 +169,7 @@ SUBROUTINE QZVAL(Nm,N,A,B,Alfr,Alfi,Beta,Matz,Z)
               a1i = a12i
               a2 = -a11r
               a2i = -a11i
-            ENDIF
+            END IF
             !     .......... CHOOSE COMPLEX Z ..........
             cz = SQRT(a1*a1+a1i*a1i)
             IF ( cz==0.0E0 ) THEN
@@ -182,7 +182,7 @@ SUBROUTINE QZVAL(Nm,N,A,B,Alfr,Alfi,Beta,Matz,Z)
               cz = cz/r
               szr = szr/r
               szi = szi/r
-            ENDIF
+            END IF
             IF ( an<(ABS(e)+ei)*bn ) THEN
               a1 = cz*a11 + szr*a12
               a1i = szi*a12
@@ -193,7 +193,7 @@ SUBROUTINE QZVAL(Nm,N,A,B,Alfr,Alfi,Beta,Matz,Z)
               a1i = szi*b12
               a2 = szr*b22
               a2i = szi*b22
-            ENDIF
+            END IF
             !     .......... CHOOSE COMPLEX Q ..........
             cq = SQRT(a1*a1+a1i*a1i)
             IF ( cq==0.0E0 ) THEN
@@ -206,7 +206,7 @@ SUBROUTINE QZVAL(Nm,N,A,B,Alfr,Alfi,Beta,Matz,Z)
               cq = cq/r
               sqr = sqr/r
               sqi = sqi/r
-            ENDIF
+            END IF
             !     .......... COMPUTE DIAGONAL ELEMENTS THAT WOULD RESULT
             !                IF TRANSFORMATIONS WERE APPLIED ..........
             ssr = sqr*szr + sqi*szi
@@ -230,7 +230,7 @@ SUBROUTINE QZVAL(Nm,N,A,B,Alfr,Alfi,Beta,Matz,Z)
               ti = -ssi*a11 - sqi*cz*a12 + cq*szi*a21
               dr = ssr*b11 - sqr*cz*b12 + cq*cz*b22
               di = -ssi*b11 - sqi*cz*b12
-            ENDDO
+            END DO
           ELSE
             !     .......... TWO REAL ROOTS.
             !                ZERO BOTH A(EN,NA) AND B(EN,NA) ..........
@@ -244,17 +244,17 @@ SUBROUTINE QZVAL(Nm,N,A,B,Alfr,Alfi,Beta,Matz,Z)
             ELSE
               a1 = a12
               a2 = a11
-            ENDIF
+            END IF
             GOTO 50
-          ENDIF
+          END IF
         ELSE
           a1 = A(en,en)
           a2 = A(en,na)
           bn = 0.0E0
           GOTO 50
-        ENDIF
-      ENDIF
-    ENDIF
+        END IF
+      END IF
+    END IF
     !     .......... 1-BY-1 BLOCK, ONE REAL ROOT ..........
     Alfr(en) = A(en,en)
     IF ( B(en,en)<0.0E0 ) Alfr(en) = -Alfr(en)
@@ -262,7 +262,7 @@ SUBROUTINE QZVAL(Nm,N,A,B,Alfr,Alfi,Beta,Matz,Z)
     Alfi(en) = 0.0E0
     CYCLE
     !     .......... CHOOSE AND APPLY REAL Z ..........
-    50     s = ABS(a1) + ABS(a2)
+    50  s = ABS(a1) + ABS(a2)
     u1 = a1/s
     u2 = a2/s
     r = SIGN(SQRT(u1*u1+u2*u2),u1)
@@ -277,7 +277,7 @@ SUBROUTINE QZVAL(Nm,N,A,B,Alfr,Alfi,Beta,Matz,Z)
       t = B(i,en) + u2*B(i,na)
       B(i,en) = B(i,en) + t*v1
       B(i,na) = B(i,na) + t*v2
-    ENDDO
+    END DO
     !
     IF ( Matz ) THEN
       !
@@ -285,19 +285,19 @@ SUBROUTINE QZVAL(Nm,N,A,B,Alfr,Alfi,Beta,Matz,Z)
         t = Z(i,en) + u2*Z(i,na)
         Z(i,en) = Z(i,en) + t*v1
         Z(i,na) = Z(i,na) + t*v2
-      ENDDO
-    ENDIF
+      END DO
+    END IF
     !
     IF ( bn==0.0E0 ) GOTO 200
     IF ( an>=ABS(e)*bn ) THEN
       a1 = B(na,na)
       a2 = B(en,na)
       GOTO 150
-    ENDIF
-    100    a1 = A(na,na)
+    END IF
+    100  a1 = A(na,na)
     a2 = A(en,na)
     !     .......... CHOOSE AND APPLY REAL Q ..........
-    150    s = ABS(a1) + ABS(a2)
+    150  s = ABS(a1) + ABS(a2)
     IF ( s/=0.0E0 ) THEN
       u1 = a1/s
       u2 = a2/s
@@ -313,10 +313,10 @@ SUBROUTINE QZVAL(Nm,N,A,B,Alfr,Alfi,Beta,Matz,Z)
         t = B(na,j) + u2*B(en,j)
         B(na,j) = B(na,j) + t*v1
         B(en,j) = B(en,j) + t*v2
-      ENDDO
-    ENDIF
+      END DO
+    END IF
     !
-    200    A(en,na) = 0.0E0
+    200  A(en,na) = 0.0E0
     B(en,na) = 0.0E0
     Alfr(na) = A(na,na)
     Alfr(en) = A(en,en)
@@ -326,7 +326,7 @@ SUBROUTINE QZVAL(Nm,N,A,B,Alfr,Alfi,Beta,Matz,Z)
     Beta(en) = ABS(B(en,en))
     Alfi(en) = 0.0E0
     Alfi(na) = 0.0E0
-    250    isw = 3 - isw
-  ENDDO
+    250  isw = 3 - isw
+  END DO
   !
 END SUBROUTINE QZVAL

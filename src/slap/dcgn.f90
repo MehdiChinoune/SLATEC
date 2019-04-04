@@ -306,18 +306,18 @@ SUBROUTINE DCGN(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MTTVEC,MSOLVE,Itol,Tol,&
   IF ( N<1 ) THEN
     Ierr = 3
     RETURN
-  ENDIF
+  END IF
   tolmin = 500*D1MACH(3)
   IF ( Tol<tolmin ) THEN
     Tol = tolmin
     Ierr = 4
-  ENDIF
+  END IF
   !         Calculate initial residual and pseudo-residual, and check
   !         stopping criterion.
   CALL MATVEC(N,X,R,Nelt,Ia,Ja,A,Isym)
   DO i = 1, N
     R(i) = B(i) - R(i)
-  ENDDO
+  END DO
   CALL MSOLVE(N,R,Z,Nelt,Ia,Ja,A,Isym,Rwork,Iwork)
   CALL MTTVEC(N,Z,Atz,Nelt,Ia,Ja,A,Isym)
   !
@@ -336,15 +336,15 @@ SUBROUTINE DCGN(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MTTVEC,MSOLVE,Itol,Tol,&
       IF ( bknum<=0.0D0 ) THEN
         Ierr = 6
         RETURN
-      ENDIF
+      END IF
       IF ( Iter==1 ) THEN
         CALL DCOPY(N,Z,1,P,1)
       ELSE
         bk = bknum/bkden
         DO i = 1, N
           P(i) = Z(i) + bk*P(i)
-        ENDDO
-      ENDIF
+        END DO
+      END IF
       bkden = bknum
       !
       !         Calculate coefficient AK, new iterate X, new residual R,
@@ -355,7 +355,7 @@ SUBROUTINE DCGN(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MTTVEC,MSOLVE,Itol,Tol,&
       IF ( akden<=0.0D0 ) THEN
         Ierr = 6
         RETURN
-      ENDIF
+      END IF
       ak = bknum/akden
       CALL DAXPY(N,ak,Atp,1,X,1)
       CALL MATVEC(N,Atp,Z,Nelt,Ia,Ja,A,Isym)
@@ -368,13 +368,13 @@ SUBROUTINE DCGN(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MTTVEC,MSOLVE,Itol,Tol,&
         Itmax,Iter,Err,Ierr,Iunit,R,Z,P,Atp,Atz,Dz,Atdz,Rwork,Iwork,ak,&
         bk,bnrm,solnrm)/=0 ) RETURN
       !
-    ENDDO
+    END DO
     !
     !         *****   end of loop  *****
     !
     !         stopping criterion not satisfied.
     Iter = Itmax + 1
-  ENDIF
+  END IF
   !
   !------------- LAST LINE OF DCGN FOLLOWS ----------------------------
   RETURN

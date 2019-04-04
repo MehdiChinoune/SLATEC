@@ -45,9 +45,9 @@ CONTAINS
         er = ABS(Y(k)-yt)
         Erm = MAX(Erm,er)
         a1 = a1*alph1/i
-      ENDDO
+      END DO
       a2 = a2*alph2/j
-    ENDDO
+    END DO
   END SUBROUTINE EDIT2
   !** SDASQC
   SUBROUTINE SDASQC(Lun,Kprint,Ipass)
@@ -130,7 +130,7 @@ CONTAINS
     DO j190 = 1, 2
       DO i = 1, 15
         info(i) = 0
-      ENDDO
+      END DO
       IF ( j190==2 ) info(5) = 1
       !
       IF ( Kprint>2 ) WRITE (Lun,99002) info(5)
@@ -152,7 +152,7 @@ CONTAINS
         IF ( Kprint>2 ) THEN
           WRITE (Lun,99003) t, y(1), y(2), nqu, hu
           99003 FORMAT (1X,1P,E15.5,E16.5,E16.5,I6,E14.3)
-        ENDIF
+        END IF
         !
         IF ( idid<0 ) EXIT
         yt1 = EXP(-10.0E0*t)
@@ -165,20 +165,20 @@ CONTAINS
           IF ( Kprint>=2 ) WRITE (Lun,99010) t
           !
           nerr = nerr + 1
-        ENDIF
+        END IF
         tout = tout + dtout
-      ENDDO
+      END DO
       IF ( idid<0 ) THEN
         IF ( Kprint>=2 ) WRITE (Lun,99011) idid, t
         !
         nerr = nerr + 1
-      ENDIF
+      END IF
       nst = iwork(11)
       nfe = iwork(12)
       nje = iwork(13)
       IF ( Kprint>2 ) WRITE (Lun,99012) nst, nfe, nje, ero
       !
-    ENDDO
+    END DO
     !
     ! SECOND PROBLEM
     !
@@ -198,7 +198,7 @@ CONTAINS
     DO j290 = 1, 2
       DO i = 1, 15
         info(i) = 0
-      ENDDO
+      END DO
       info(6) = 1
       IF ( j290==2 ) info(5) = 1
       !
@@ -208,11 +208,11 @@ CONTAINS
       t = 0.0E0
       DO i = 2, neq
         y(i) = 0.0E0
-      ENDDO
+      END DO
       y(1) = 1.0E0
       DO i = 1, neq
         delta(i) = 0.0E0
-      ENDDO
+      END DO
       !        Following is to initialize YPRIME.
       CALL SDRES2(t,y,delta,yprime,ires,rpar,ipar)
       tout = 0.01E0
@@ -232,19 +232,19 @@ CONTAINS
         IF ( er>1000.0E0 ) THEN
           IF ( Kprint>=2 ) WRITE (Lun,99010) t
           nerr = nerr + 1
-        ENDIF
+        END IF
         tout = tout*10.0E0
-      ENDDO
+      END DO
       IF ( idid<0 ) THEN
         IF ( Kprint>=2 ) WRITE (Lun,99011) idid, t
         nerr = nerr + 1
-      ENDIF
+      END IF
       nst = iwork(11)
       nfe = iwork(12)
       nje = iwork(13)
       IF ( Kprint>2 ) WRITE (Lun,99012) nst, nfe, nje, ero
       !
-    ENDDO
+    END DO
     IF ( Kprint>=2 ) WRITE (Lun,99007) nerr
     !
     99007 FORMAT (////1X,' NUMBER OF ERRORS ENCOUNTERED =',I3)
@@ -331,10 +331,10 @@ CONTAINS
       Pd(mband+3,j) = 0.0E0
       Pd(mband+4,j) = 0.0E0
       Pd(mband+5,j) = alph2
-    ENDDO
+    END DO
     DO j = 1, neq, ng
       Pd(mband+1,j) = 0.0E0
-    ENDDO
+    END DO
   END SUBROUTINE SDJAC2
   !** SDRES1
   SUBROUTINE SDRES1(T,Y,Yprime,Delta,Ires,Rpar,Ipar)
@@ -401,8 +401,8 @@ CONTAINS
         IF ( i/=1 ) d = d + Y(k-1)*alph1
         IF ( j/=1 ) d = d + Y(k-ng)*alph2
         Delta(k) = d - Yprime(k)
-      ENDDO
-    ENDDO
+      END DO
+    END DO
   END SUBROUTINE SDRES2
 END MODULE TEST48_MOD
 !** TEST48
@@ -472,7 +472,7 @@ PROGRAM TEST48
     CALL XSETF(0)
   ELSE
     CALL XSETF(1)
-  ENDIF
+  END IF
   CALL XERMAX(1000)
   !
   !     Test SDASSL
@@ -489,6 +489,6 @@ PROGRAM TEST48
     WRITE (lun,99002) nfail
     99002 FORMAT (/' ************* WARNING -- ',I5,&
       ' TEST(S) FAILED IN PROGRAM TEST48 *************')
-  ENDIF
+  END IF
   STOP
 END PROGRAM TEST48

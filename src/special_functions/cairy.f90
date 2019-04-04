@@ -213,10 +213,10 @@ SUBROUTINE CAIRY(Z,Id,Kode,Ai,Nz,Ierr)
         bk = REAL(zta)
         ck = -ABS(bk)
         zta = CMPLX(ck,ak)
-      ENDIF
+      END IF
       IF ( zi==0.0E0 ) THEN
         IF ( zr<=0.0E0 ) zta = CMPLX(0.0E0,ak)
-      ENDIF
+      END IF
       aa = REAL(zta)
       IF ( aa<0.0E0.OR.zr<=0.0E0 ) THEN
         IF ( Kode/=2 ) THEN
@@ -228,8 +228,8 @@ SUBROUTINE CAIRY(Z,Id,Kode,Ai,Nz,Ierr)
             iflag = 1
             sfac = tol
             IF ( aa>elim ) GOTO 50
-          ENDIF
-        ENDIF
+          END IF
+        END IF
         !-----------------------------------------------------------------------
         !     CBKNU AND CACAI RETURN EXP(ZTA)*K(FNU,ZTA) ON KODE=2
         !-----------------------------------------------------------------------
@@ -241,7 +241,7 @@ SUBROUTINE CAIRY(Z,Id,Kode,Ai,Nz,Ierr)
           GOTO 50
         ELSE
           Nz = Nz + nn
-        ENDIF
+        END IF
       ELSEIF ( Kode==2 ) THEN
         CALL CBKNU(zta,fnu,Kode,1,cy,Nz,tol,elim,alim)
         !-----------------------------------------------------------------------
@@ -259,8 +259,8 @@ SUBROUTINE CAIRY(Z,Id,Kode,Ai,Nz,Ierr)
           RETURN
         ELSE
           CALL CBKNU(zta,fnu,Kode,1,cy,Nz,tol,elim,alim)
-        ENDIF
-      ENDIF
+        END IF
+      END IF
       s1 = cy(1)*CMPLX(coef,0.0E0)
       IF ( iflag/=0 ) THEN
         s1 = s1*CMPLX(sfac,0.0E0)
@@ -272,16 +272,16 @@ SUBROUTINE CAIRY(Z,Id,Kode,Ai,Nz,Ierr)
           s1 = s1*csq
           Ai = s1*CMPLX(1.0E0/sfac,0.0E0)
           RETURN
-        ENDIF
+        END IF
       ELSEIF ( Id==1 ) THEN
         Ai = -Z*s1
         RETURN
       ELSE
         Ai = csq*s1
         RETURN
-      ENDIF
-    ENDIF
-    50     Nz = 0
+      END IF
+    END IF
+    50  Nz = 0
     Ierr = 2
     RETURN
   ELSE
@@ -303,7 +303,7 @@ SUBROUTINE CAIRY(Z,Id,Kode,Ai,Nz,Ierr)
         IF ( az>aa ) s1 = CMPLX(c2,0.0E0)*Z
         Ai = CMPLX(c1,0.0E0) - s1
         RETURN
-      ENDIF
+      END IF
     ELSE
       aa = az*az
       IF ( aa>=tol/az ) THEN
@@ -335,8 +335,8 @@ SUBROUTINE CAIRY(Z,Id,Kode,Ai,Nz,Ierr)
           IF ( atrm<tol*ad ) EXIT
           ak = ak + 18.0E0
           bk = bk + 18.0E0
-        ENDDO
-      ENDIF
+        END DO
+      END IF
       IF ( Id==1 ) THEN
         Ai = -s2*CMPLX(c2,0.0E0)
         IF ( az>tol ) Ai = Ai + Z*Z*s1*CMPLX(c1/(1.0E0+fid),0.0E0)
@@ -350,9 +350,9 @@ SUBROUTINE CAIRY(Z,Id,Kode,Ai,Nz,Ierr)
         zta = Z*CSQRT(Z)*CMPLX(tth,0.0E0)
         Ai = Ai*CEXP(zta)
         RETURN
-      ENDIF
-    ENDIF
-  ENDIF
+      END IF
+    END IF
+  END IF
   100  Nz = 0
   Ierr = 5
   RETURN

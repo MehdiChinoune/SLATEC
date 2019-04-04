@@ -206,7 +206,7 @@ SUBROUTINE SOS(FNC,Neq,X,Rtolx,Atolx,Tolf,Iflag,Rw,Lrw,Iw,Liw)
     CALL XERMSG('SLATEC','SOS','THE NUMBER OF EQUATIONS MUST BE A POSITIVE INTEGER.&
       & YOU HAVE CALLED THE CODE WITH NEQ = '//xern1,1,1)
     Iflag = 9
-  ENDIF
+  END IF
   !
   IF ( Rtolx<0.0D0.OR.Atolx<0.0D0 ) THEN
     WRITE (xern3,'(1PE15.6)') Atolx
@@ -215,14 +215,14 @@ SUBROUTINE SOS(FNC,Neq,X,Rtolx,Atolx,Tolf,Iflag,Rw,Lrw,Iw,Liw)
       & CANNOT BE NEGATIVE. YOU HAVE CALLED THE CODE WITH  RTOLX = '//xern3//&
       ' AND ATOLX = '//xern4,2,1)
     Iflag = 9
-  ENDIF
+  END IF
   !
   IF ( Tolf<0.0D0 ) THEN
     WRITE (xern3,'(1PE15.6)') Tolf
     CALL XERMSG('SLATEC','SOS','THE RESIDUAL ERROR TOLERANCE MUST BE NON-NEGATIVE.&
       & YOU HAVE CALLED THE CODE WITH TOLF = '//xern3,3,1)
     Iflag = 9
-  ENDIF
+  END IF
   !
   iprint = 0
   mxit = 50
@@ -235,8 +235,8 @@ SUBROUTINE SOS(FNC,Neq,X,Rtolx,Atolx,Tolf,Iflag,Rw,Lrw,Iw,Liw)
         & PUT ITEMS BY SETTING  IFLAG=-1. HOWEVER YOU HAVE CALLED THE CODE WITH&
         & THE MAXIMUM ALLOWABLE NUMBER OF ITERATIONS SET TO  IW(2) = '//xern1,4,1)
       Iflag = 9
-    ENDIF
-  ENDIF
+    END IF
+  END IF
   !
   nc = (Neq*(Neq+1))/2
   IF ( Lrw<1+6*Neq+nc ) THEN
@@ -244,14 +244,14 @@ SUBROUTINE SOS(FNC,Neq,X,Rtolx,Atolx,Tolf,Iflag,Rw,Lrw,Iw,Liw)
     CALL XERMSG('SLATEC','SOS','DIMENSION OF THE RW ARRAY MUST BE AT LEAST&
       & 1 + 6*NEQ + NEQ*(NEQ+1)/2 .  YOU HAVE CALLED THE CODE WITH LRW = '//xern1,5,1)
     Iflag = 9
-  ENDIF
+  END IF
   !
   IF ( Liw<3+Neq ) THEN
     WRITE (xern1,'(I8)') Liw
     CALL XERMSG('SLATEC','SOS','DIMENSION OF THE IW ARRAY MUST BE AT LEAST&
       & 3 + NEQ.  YOU HAVE CALLED THE CODE WITH  LIW = '//xern1,6,1)
     Iflag = 9
-  ENDIF
+  END IF
   !
   IF ( Iflag/=9 ) THEN
     ncjs = 6
@@ -269,5 +269,5 @@ SUBROUTINE SOS(FNC,Neq,X,Rtolx,Atolx,Tolf,Iflag,Rw,Lrw,Iw,Liw)
       iprint,Rw(1),Rw(2),nc,Rw(k1),Rw(k2),Rw(k3),Rw(k4),Rw(k5),Rw(k6),Iw(4))
     !
     Iw(3) = mxit
-  ENDIF
+  END IF
 END SUBROUTINE SOS

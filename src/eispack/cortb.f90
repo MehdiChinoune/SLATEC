@@ -85,7 +85,7 @@ SUBROUTINE CORTB(Nm,Low,Igh,Ar,Ai,Ortr,Orti,M,Zr,Zi)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   !
   INTEGER i, j, M, la, mm, mp, Nm, Igh, kp1, Low, mp1
   REAL Ar(Nm,*), Ai(Nm,*), Ortr(*), Orti(*)
@@ -108,7 +108,7 @@ SUBROUTINE CORTB(Nm,Low,Igh,Ar,Ai,Ortr,Orti,M,Zr,Zi)
           DO i = mp1, Igh
             Ortr(i) = Ar(i,mp-1)
             Orti(i) = Ai(i,mp-1)
-          ENDDO
+          END DO
           !
           DO j = 1, M
             gr = 0.0E0
@@ -117,7 +117,7 @@ SUBROUTINE CORTB(Nm,Low,Igh,Ar,Ai,Ortr,Orti,M,Zr,Zi)
             DO i = mp, Igh
               gr = gr + Ortr(i)*Zr(i,j) + Orti(i)*Zi(i,j)
               gi = gi + Ortr(i)*Zi(i,j) - Orti(i)*Zr(i,j)
-            ENDDO
+            END DO
             !
             gr = gr/h
             gi = gi/h
@@ -125,13 +125,13 @@ SUBROUTINE CORTB(Nm,Low,Igh,Ar,Ai,Ortr,Orti,M,Zr,Zi)
             DO i = mp, Igh
               Zr(i,j) = Zr(i,j) + gr*Ortr(i) - gi*Orti(i)
               Zi(i,j) = Zi(i,j) + gr*Orti(i) + gi*Ortr(i)
-            ENDDO
+            END DO
             !
-          ENDDO
-        ENDIF
+          END DO
+        END IF
         !
-      ENDDO
-    ENDIF
-  ENDIF
+      END DO
+    END IF
+  END IF
   !
 END SUBROUTINE CORTB

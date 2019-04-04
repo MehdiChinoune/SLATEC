@@ -46,7 +46,7 @@ SUBROUTINE ICOPY(N,Ix,Incx,Iy,Incy)
 
   !* REVISION HISTORY  (YYMMDD)
   !   930201  DATE WRITTEN
-  
+
   INTEGER i, iix, iiy, Incx, Incy, m, mp1, N, ns
   INTEGER Ix(*), Iy(*)
   !* FIRST EXECUTABLE STATEMENT  ICOPY
@@ -63,9 +63,9 @@ SUBROUTINE ICOPY(N,Ix,Incx,Iy,Incy)
       IF ( m/=0 ) THEN
         DO i = 1, m
           Iy(i) = Ix(i)
-        ENDDO
+        END DO
         IF ( N<7 ) RETURN
-      ENDIF
+      END IF
       GOTO 100
     ELSE
       !
@@ -74,10 +74,10 @@ SUBROUTINE ICOPY(N,Ix,Incx,Iy,Incy)
       ns = N*Incx
       DO i = 1, ns, Incx
         Iy(i) = Ix(i)
-      ENDDO
+      END DO
       RETURN
-    ENDIF
-  ENDIF
+    END IF
+  END IF
   !
   !     Code for unequal or nonpositive increments.
   !
@@ -89,7 +89,7 @@ SUBROUTINE ICOPY(N,Ix,Incx,Iy,Incy)
     Iy(iiy) = Ix(iix)
     iix = iix + Incx
     iiy = iiy + Incy
-  ENDDO
+  END DO
   RETURN
   100  mp1 = m + 1
   DO i = mp1, N, 7
@@ -100,6 +100,6 @@ SUBROUTINE ICOPY(N,Ix,Incx,Iy,Incy)
     Iy(i+4) = Ix(i+4)
     Iy(i+5) = Ix(i+5)
     Iy(i+6) = Ix(i+6)
-  ENDDO
+  END DO
   RETURN
 END SUBROUTINE ICOPY

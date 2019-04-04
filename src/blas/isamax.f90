@@ -52,7 +52,7 @@ INTEGER FUNCTION ISAMAX(N,Sx,Incx)
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !   920618  Slight restructuring of code.  (RWC, WRB)
-  
+
   REAL Sx(*), smax, xmag
   INTEGER i, Incx, ix, N
   !* FIRST EXECUTABLE STATEMENT  ISAMAX
@@ -71,10 +71,10 @@ INTEGER FUNCTION ISAMAX(N,Sx,Incx)
       IF ( xmag>smax ) THEN
         ISAMAX = i
         smax = xmag
-      ENDIF
-    ENDDO
+      END IF
+    END DO
     RETURN
-  ENDIF
+  END IF
   !
   !     Code for increment not equal to 1.
   !
@@ -87,8 +87,8 @@ INTEGER FUNCTION ISAMAX(N,Sx,Incx)
     IF ( xmag>smax ) THEN
       ISAMAX = i
       smax = xmag
-    ENDIF
+    END IF
     ix = ix + Incx
-  ENDDO
+  END DO
   RETURN
 END FUNCTION ISAMAX

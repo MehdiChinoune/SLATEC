@@ -79,8 +79,8 @@ SUBROUTINE DREORT(Ncomp,Y,Yp,Yhp,Niv,W,S,P,Ip,Stowa,Iflag)
     IF ( KNSwot<NSWot ) THEN
       !     ......EXIT
       IF ( (XENd-X)*(X-XOT)<0.0D0 ) RETURN
-    ENDIF
-  ENDIF
+    END IF
+  END IF
   CALL DSTOR1(Y,Yhp,Yp,Yhp(1,nfcp),1,0,0)
   !
   !        ***************************************************************
@@ -111,7 +111,7 @@ SUBROUTINE DREORT(Ncomp,Y,Yp,Yhp,Niv,W,S,P,Ip,Stowa,Iflag)
         DO ijk = 1, nfcp
           !              ......EXIT
           IF ( S(ijk)>1.0D20 ) GOTO 50
-        ENDDO
+        END DO
         !
         !                 USE LINEAR EXTRAPOLATION ON LOGARITHMIC VALUES OF THE
         !                 NORM DECREMENTS TO DETERMINE NEXT ORTHONORMALIZATION
@@ -139,23 +139,23 @@ SUBROUTINE DREORT(Ncomp,Y,Yp,Yhp,Niv,W,S,P,Ip,Stowa,Iflag)
             NSWot = MIN(MNSwot,NSWot)
             PWCnd = wcnd
             PX = X
-          ENDIF
+          END IF
         ELSE
           XOT = XENd
           NSWot = MIN(MNSwot,NSWot)
           PWCnd = wcnd
           PX = X
-        ENDIF
+        END IF
         RETURN
-      ENDIF
-    ENDIF
+      END IF
+    END IF
     !
     !              *********************************************************
     !
     !              ORTHONORMALIZATION NECESSARY SO WE NORMALIZE THE
     !              HOMOGENEOUS SOLUTION VECTORS AND CHANGE W ACCORDINGLY.
     !
-    50     NSWot = 1
+    50  NSWot = 1
     KNSwot = 0
     LOTjp = 1
     kk = 1
@@ -170,12 +170,12 @@ SUBROUTINE DREORT(Ncomp,Y,Yp,Yhp,Niv,W,S,P,Ip,Stowa,Iflag)
       IF ( NFC/=NFCc ) THEN
         !                 ......EXIT
         IF ( l/=k/2 ) CYCLE
-      ENDIF
+      END IF
       DO j = 1, Ncomp
         Y(j,l) = Y(j,l)*vnorm
-      ENDDO
+      END DO
       l = l + 1
-    ENDDO
+    END DO
     !
     IF ( INHomo==1.AND.NPS/=1 ) THEN
       !
@@ -187,11 +187,11 @@ SUBROUTINE DREORT(Ncomp,Y,Yp,Yhp,Niv,W,S,P,Ip,Stowa,Iflag)
       S(nfcp) = ypnm
       DO j = 1, Ncomp
         Yp(j) = Yp(j)/ypnm
-      ENDDO
+      END DO
       DO j = 1, NFCc
         W(j) = C*W(j)
-      ENDDO
-    ENDIF
+      END DO
+    END IF
     !
     IF ( Iflag==1 ) CALL DSTWAY(Y,Yp,Yhp,0,Stowa)
     Iflag = 0
@@ -213,6 +213,6 @@ SUBROUTINE DREORT(Ncomp,Y,Yp,Yhp,Niv,W,S,P,Ip,Stowa,Iflag)
     TND = TND + 1.0D0
     !           .........EXIT
     Iflag = 10
-  ENDIF
+  END IF
   RETURN
 END SUBROUTINE DREORT

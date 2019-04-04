@@ -102,7 +102,7 @@ SUBROUTINE DS2LT(N,Nelt,Ia,Ja,A,Isym,Nel,Iel,Jel,El)
   !   910411  Prologue converted to Version 4.0 format.  (BAB)
   !   920511  Added complete declaration section.  (WRB)
   !   930701  Updated CATEGORY section.  (FNF, WRB)
-  
+
   !     .. Scalar Arguments ..
   INTEGER Isym, N, Nel, Nelt
   !     .. Array Arguments ..
@@ -127,9 +127,9 @@ SUBROUTINE DS2LT(N,Nelt,Ia,Ja,A,Isym,Nel,Iel,Jel,El)
           Nel = Nel + 1
           Iel(Nel) = Ia(j)
           El(Nel) = A(j)
-        ENDIF
-      ENDDO
-    ENDDO
+        END IF
+      END DO
+    END DO
     Jel(N+1) = Nel + 1
   ELSE
     !
@@ -140,10 +140,10 @@ SUBROUTINE DS2LT(N,Nelt,Ia,Ja,A,Isym,Nel,Iel,Jel,El)
     DO i = 1, Nelt
       Iel(i) = Ia(i)
       El(i) = A(i)
-    ENDDO
+    END DO
     DO i = 1, N + 1
       Jel(i) = Ja(i)
-    ENDDO
-  ENDIF
+    END DO
+  END IF
   !------------- LAST LINE OF DS2LT FOLLOWS ----------------------------
 END SUBROUTINE DS2LT

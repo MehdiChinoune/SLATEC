@@ -90,7 +90,7 @@ REAL FUNCTION BESJ0(X)
     xsml = SQRT(8.0*R1MACH(3))
     xmax = 1.0/R1MACH(4)
     first = .FALSE.
-  ENDIF
+  END IF
   !
   y = ABS(X)
   IF ( y>4.0 ) THEN
@@ -103,7 +103,7 @@ REAL FUNCTION BESJ0(X)
     theta = y - pi4 + CSEVL(z,bth0cs,ntth0)/y
     BESJ0 = ampl*COS(theta)
     RETURN
-  ENDIF
+  END IF
   !
   BESJ0 = 1.0
   IF ( y>xsml ) BESJ0 = CSEVL(.125*y*y-1.,bj0cs,ntj0)

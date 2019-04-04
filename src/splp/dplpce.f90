@@ -42,7 +42,7 @@ SUBROUTINE DPLPCE(Mrelas,Nvars,Lmx,Lbm,Itlp,Itbrc,Ibasis,Imat,Ibrc,Ipr,&
   !   890606  Changed references from IPLOC to IDLOC.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
-  
+
   INTEGER i, IDLOC, ihi, il1, ilow, ipage, Itbrc, Itlp, iu1, j, &
     key, l, Lbm, Lmx, lpg, Mrelas, n20002, n20012, n20016, n20023
   INTEGER n20047, n20057, n20061, Nvars
@@ -70,9 +70,9 @@ SUBROUTINE DPLPCE(Mrelas,Nvars,Lmx,Lbm,Itlp,Itbrc,Ibasis,Imat,Ibrc,Ipr,&
       Ww(i) = -one
     ELSE
       Ww(i) = one
-    ENDIF
+    END IF
     i = i + 1
-  ENDDO
+  END DO
   !
   !     PERTURB RIGHT-SIDE IN UNITS OF LAST BITS TO BETTER REFLECT
   !     ERRORS IN THE CHECK SUM SOLNS.
@@ -81,7 +81,7 @@ SUBROUTINE DPLPCE(Mrelas,Nvars,Lmx,Lbm,Itlp,Itbrc,Ibasis,Imat,Ibrc,Ipr,&
   DO WHILE ( (n20012-i)>=0 )
     Ww(i) = Ww(i) + ten*Eps*Ww(i)
     i = i + 1
-  ENDDO
+  END DO
   trans = .TRUE.
   CALL LA05BD(Basmat,Ibrc,Lbm,Mrelas,Ipr,Iwr,Wr,Gg,Ww,trans)
   i = 1
@@ -93,7 +93,7 @@ SUBROUTINE DPLPCE(Mrelas,Nvars,Lmx,Lbm,Itlp,Itbrc,Ibasis,Imat,Ibrc,Ipr,&
     !     THIS VALUE (FACTOR) MIGHT NEED TO BE CHANGED.
     Singlr = Singlr .OR. (Erd(i)>=factor)
     i = i + 1
-  ENDDO
+  END DO
   Erdnrm = DASUM(Mrelas,Erd,1)
   !
   !     RECALCULATE ROW CHECK SUMS EVERY ITBRC ITERATIONS OR WHEN
@@ -112,7 +112,7 @@ SUBROUTINE DPLPCE(Mrelas,Nvars,Lmx,Lbm,Itlp,Itbrc,Ibasis,Imat,Ibrc,Ipr,&
           ilow = Imat(j+3) + 1
         ELSE
           ilow = Nvars + 5
-        ENDIF
+        END IF
         IF ( .NOT.(pagepl) ) THEN
           il1 = ihi + 1
         ELSE
@@ -120,31 +120,31 @@ SUBROUTINE DPLPCE(Mrelas,Nvars,Lmx,Lbm,Itlp,Itbrc,Ibasis,Imat,Ibrc,Ipr,&
           IF ( il1>=Lmx-1 ) THEN
             ilow = ilow + 2
             il1 = IDLOC(ilow,Amat,Imat)
-          ENDIF
+          END IF
           ipage = ABS(Imat(Lmx-1))
-        ENDIF
+        END IF
         ihi = Imat(j+4) - (ilow-il1)
         DO
           iu1 = MIN(Lmx-2,ihi)
           IF ( il1>iu1 ) EXIT
           DO i = il1, iu1
             Ww(Imat(i)) = Ww(Imat(i)) + Amat(i)*Csc(j)
-          ENDDO
+          END DO
           IF ( ihi<=Lmx-2 ) EXIT
           ipage = ipage + 1
           key = 1
           CALL DPRWPG(key,ipage,lpg,Amat,Imat)
           il1 = Nvars + 5
           ihi = ihi - lpg
-        ENDDO
+        END DO
         pagepl = ihi==(Lmx-2)
       ELSE
         !
         !     THE VARIABLE IS NON-BASIC.
         pagepl = .TRUE.
-      ENDIF
+      END IF
       j = j + 1
-    ENDDO
+    END DO
     l = 1
     n20047 = Mrelas
     DO WHILE ( (n20047-l)>=0 )
@@ -155,10 +155,10 @@ SUBROUTINE DPLPCE(Mrelas,Nvars,Lmx,Lbm,Itlp,Itbrc,Ibasis,Imat,Ibrc,Ipr,&
           Ww(i) = Ww(i) - one
         ELSE
           Ww(i) = Ww(i) + one
-        ENDIF
-      ENDIF
+        END IF
+      END IF
       l = l + 1
-    ENDDO
+    END DO
     !
     !     PERTURB RIGHT-SIDE IN UNITS OF LAST BIT POSITIONS.
     i = 1
@@ -166,7 +166,7 @@ SUBROUTINE DPLPCE(Mrelas,Nvars,Lmx,Lbm,Itlp,Itbrc,Ibasis,Imat,Ibrc,Ipr,&
     DO WHILE ( (n20057-i)>=0 )
       Ww(i) = Ww(i) + ten*Eps*Ww(i)
       i = i + 1
-    ENDDO
+    END DO
     trans = .FALSE.
     CALL LA05BD(Basmat,Ibrc,Lbm,Mrelas,Ipr,Iwr,Wr,Gg,Ww,trans)
     i = 1
@@ -178,7 +178,7 @@ SUBROUTINE DPLPCE(Mrelas,Nvars,Lmx,Lbm,Itlp,Itbrc,Ibasis,Imat,Ibrc,Ipr,&
       !     THIS VALUE (FACTOR) MIGHT NEED TO BE CHANGED.
       Singlr = Singlr .OR. (Erp(i)>=factor)
       i = i + 1
-    ENDDO
-  ENDIF
+    END DO
+  END IF
   !
 END SUBROUTINE DPLPCE

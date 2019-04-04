@@ -52,7 +52,7 @@ REAL FUNCTION SASUM(N,Sx,Incx)
   !   900821  Modified to correct problem with a negative increment.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   REAL Sx(*)
   INTEGER i, Incx, ix, m, mp1, N
   !* FIRST EXECUTABLE STATEMENT  SASUM
@@ -69,14 +69,14 @@ REAL FUNCTION SASUM(N,Sx,Incx)
     IF ( m/=0 ) THEN
       DO i = 1, m
         SASUM = SASUM + ABS(Sx(i))
-      ENDDO
+      END DO
       IF ( N<6 ) RETURN
-    ENDIF
+    END IF
     mp1 = m + 1
     DO i = mp1, N, 6
       SASUM = SASUM + ABS(Sx(i)) + ABS(Sx(i+1)) + ABS(Sx(i+2))&
         + ABS(Sx(i+3)) + ABS(Sx(i+4)) + ABS(Sx(i+5))
-    ENDDO
+    END DO
   ELSE
     !
     !     Code for increment not equal to 1.
@@ -86,7 +86,7 @@ REAL FUNCTION SASUM(N,Sx,Incx)
     DO i = 1, N
       SASUM = SASUM + ABS(Sx(ix))
       ix = ix + Incx
-    ENDDO
+    END DO
     RETURN
-  ENDIF
+  END IF
 END FUNCTION SASUM

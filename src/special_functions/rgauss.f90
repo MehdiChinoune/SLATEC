@@ -48,7 +48,7 @@ REAL FUNCTION RGAUSS(Xmean,Sd)
   RGAUSS = -6.0
   DO i = 1, 12
     RGAUSS = RGAUSS + RAND(0.0)
-  ENDDO
+  END DO
   !
   RGAUSS = Xmean + Sd*RGAUSS
   !

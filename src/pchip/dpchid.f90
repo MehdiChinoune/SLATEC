@@ -154,9 +154,9 @@ REAL(8) FUNCTION DPCHID(N,X,F,D,Incfd,Skip,Ia,Ib,Ierr)
     ELSE
       DO i = 2, N
         IF ( X(i)<=X(i-1) ) GOTO 200
-      ENDDO
-    ENDIF
-  ENDIF
+      END DO
+    END IF
+  END IF
   !
   !  FUNCTION DEFINITION IS OK, GO ON.
   !
@@ -174,10 +174,10 @@ REAL(8) FUNCTION DPCHID(N,X,F,D,Incfd,Skip,Ia,Ib,Ierr)
     DO i = low, iup
       h = X(i+1) - X(i)
       sum = sum + h*((F(1,i)+F(1,i+1))+(D(1,i)-D(1,i+1))*(h/six))
-    ENDDO
+    END DO
     value = half*sum
     IF ( Ia>Ib ) value = -value
-  ENDIF
+  END IF
   !
   !  NORMAL RETURN.
   !

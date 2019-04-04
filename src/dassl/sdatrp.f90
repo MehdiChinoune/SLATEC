@@ -55,7 +55,7 @@ SUBROUTINE SDATRP(X,Xout,Yout,Ypout,Neq,Kold,Phi,Psi)
   DO i = 1, Neq
     Yout(i) = Phi(i,1)
     Ypout(i) = 0.0E0
-  ENDDO
+  END DO
   c = 1.0E0
   d = 0.0E0
   gamma = temp1/Psi(1)
@@ -66,8 +66,8 @@ SUBROUTINE SDATRP(X,Xout,Yout,Ypout,Neq,Kold,Phi,Psi)
     DO i = 1, Neq
       Yout(i) = Yout(i) + c*Phi(i,j)
       Ypout(i) = Ypout(i) + d*Phi(i,j)
-    ENDDO
-  ENDDO
+    END DO
+  END DO
   !
   !------END OF SUBROUTINE SDATRP------
 END SUBROUTINE SDATRP

@@ -108,7 +108,7 @@ REAL(8) FUNCTION DCHFIE(X1,X2,F1,F2,D1,D2,A,B)
     dterm = (D1*(psia2-psib2)+D2*(psib1-psia1))*(h/six)
     !
     DCHFIE = (half*h)*(fterm+dterm)
-  ENDIF
+  END IF
   !
   !------------- LAST LINE OF DCHFIE FOLLOWS -----------------------------
 END FUNCTION DCHFIE

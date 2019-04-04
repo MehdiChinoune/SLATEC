@@ -152,12 +152,12 @@ SUBROUTINE RATQR(N,Eps1,D,E,E2,M,W,Ind,Bd,Type,Idef,Ierr)
   !     .......... COPY D ARRAY INTO W ..........
   DO i = 1, N
     W(i) = D(i)
-  ENDDO
+  END DO
   !
   IF ( .NOT.(Type) ) THEN
     j = 1
     GOTO 200
-  ENDIF
+  END IF
   100  err = 0.0E0
   s = 0.0E0
   !     .......... LOOK FOR SMALL SUB-DIAGONAL ENTRIES AND DEFINE
@@ -173,7 +173,7 @@ SUBROUTINE RATQR(N,Eps1,D,E,E2,M,W,Ind,Bd,Type,Idef,Ierr)
       E2(i) = 0.0E0
     ELSEIF ( p<=machep*(ABS(D(i))+ABS(D(i-1))) ) THEN
       E2(i) = 0.0E0
-    ENDIF
+    END IF
     Bd(i) = E2(i)
     !     .......... COUNT ALSO IF ELEMENT OF E2 HAS UNDERFLOWED ..........
     IF ( E2(i)==0.0E0 ) j = j + 1
@@ -181,7 +181,7 @@ SUBROUTINE RATQR(N,Eps1,D,E,E2,M,W,Ind,Bd,Type,Idef,Ierr)
     q = 0.0E0
     IF ( i/=N ) q = ABS(E(i+1))
     tot = MIN(W(i)-p-q,tot)
-  ENDDO
+  END DO
   !
   IF ( jdef==1.AND.tot<0.0E0 ) THEN
     tot = 0.0E0
@@ -190,8 +190,8 @@ SUBROUTINE RATQR(N,Eps1,D,E,E2,M,W,Ind,Bd,Type,Idef,Ierr)
     DO i = 1, N
       W(i) = W(i) - tot
       !
-    ENDDO
-  ENDIF
+    END DO
+  END IF
   !
   DO k = 1, M
     DO
@@ -208,8 +208,8 @@ SUBROUTINE RATQR(N,Eps1,D,E,E2,M,W,Ind,Bd,Type,Idef,Ierr)
           k1 = k + 1
           DO j = k1, N
             IF ( Bd(j)<=(machep*(W(j)+W(j-1)))**2 ) Bd(j) = 0.0E0
-          ENDDO
-        ENDIF
+          END DO
+        END IF
         !
         f = Bd(N)/delta
         qp = delta + f
@@ -232,9 +232,9 @@ SUBROUTINE RATQR(N,Eps1,D,E,E2,M,W,Ind,Bd,Type,Idef,Ierr)
             ELSE
               IF ( delta>=(-Eps1) ) GOTO 150
               GOTO 300
-            ENDIF
-          ENDDO
-        ENDIF
+            END IF
+          END DO
+        END IF
         !
         W(k) = qp
         s = qp/p
@@ -249,17 +249,17 @@ SUBROUTINE RATQR(N,Eps1,D,E,E2,M,W,Ind,Bd,Type,Idef,Ierr)
             IF ( W(j)<=delta ) THEN
               i = j
               delta = W(j)
-            ENDIF
-          ENDDO
+            END IF
+          END DO
           EXIT
-        ENDIF
+        END IF
       ELSE
         IF ( delta>=(-Eps1) ) EXIT
         GOTO 300
-      ENDIF
-    ENDDO
+      END IF
+    END DO
     !     .......... CONVERGENCE ..........
-    150    IF ( i<N ) Bd(i+1) = Bd(i)*f/qp
+    150  IF ( i<N ) Bd(i+1) = Bd(i)*f/qp
     ii = Ind(i)
     IF ( i/=k ) THEN
       k1 = i - k
@@ -269,14 +269,14 @@ SUBROUTINE RATQR(N,Eps1,D,E,E2,M,W,Ind,Bd,Type,Idef,Ierr)
         W(j+1) = W(j) - s
         Bd(j+1) = Bd(j)
         Ind(j+1) = Ind(j)
-      ENDDO
-    ENDIF
+      END DO
+    END IF
     !
     W(k) = tot
     err = err + ABS(delta)
     Bd(k) = err
     Ind(k) = ii
-  ENDDO
+  END DO
   !
   IF ( Type ) RETURN
   f = Bd(1)
@@ -287,7 +287,7 @@ SUBROUTINE RATQR(N,Eps1,D,E,E2,M,W,Ind,Bd,Type,Idef,Ierr)
   200 CONTINUE
   DO i = 1, N
     W(i) = -W(i)
-  ENDDO
+  END DO
   !
   jdef = -jdef
   IF ( j==1 ) GOTO 100

@@ -181,7 +181,7 @@ SUBROUTINE CNBIR(Abe,Lda,N,Ml,Mu,V,Itask,Ind,Work,Iwork)
   !   900510  Convert XERRWV calls to XERMSG calls, cvt GOTO's to
   !           IF-THEN-ELSE.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   !
   INTEGER Lda, N, Itask, Ind, Iwork(*), info, j, k, kk, l, m, Ml, Mu, nc
   COMPLEX Abe(Lda,*), V(*), Work(N,*), CDCDOT
@@ -195,35 +195,35 @@ SUBROUTINE CNBIR(Abe,Lda,N,Ml,Mu,V,Itask,Ind,Work,Iwork)
     CALL XERMSG('SLATEC','CNBIR','LDA = '//xern1//' IS LESS THAN N = '//&
       xern2,-1,1)
     RETURN
-  ENDIF
+  END IF
   !
   IF ( N<=0 ) THEN
     Ind = -2
     WRITE (xern1,'(I8)') N
     CALL XERMSG('SLATEC','CNBIR','N = '//xern1//' IS LESS THAN 1',-2,1)
     RETURN
-  ENDIF
+  END IF
   !
   IF ( Itask<1 ) THEN
     Ind = -3
     WRITE (xern1,'(I8)') Itask
     CALL XERMSG('SLATEC','CNBIR','ITASK = '//xern1//' IS LESS THAN 1',-3,1)
     RETURN
-  ENDIF
+  END IF
   !
   IF ( Ml<0.OR.Ml>=N ) THEN
     Ind = -5
     WRITE (xern1,'(I8)') Ml
     CALL XERMSG('SLATEC','CNBIR','ML = '//xern1//' IS OUT OF RANGE',-5,1)
     RETURN
-  ENDIF
+  END IF
   !
   IF ( Mu<0.OR.Mu>=N ) THEN
     Ind = -6
     WRITE (xern1,'(I8)') Mu
     CALL XERMSG('SLATEC','CNBIR','MU = '//xern1//' IS OUT OF RANGE',-6,1)
     RETURN
-  ENDIF
+  END IF
   !
   nc = 2*Ml + Mu + 1
   IF ( Itask==1 ) THEN
@@ -233,7 +233,7 @@ SUBROUTINE CNBIR(Abe,Lda,N,Ml,Mu,V,Itask,Ind,Work,Iwork)
     m = Ml + Mu + 1
     DO j = 1, m
       CALL CCOPY(N,Abe(1,j),1,Work(1,j),1)
-    ENDDO
+    END DO
     !
     !        FACTOR MATRIX A INTO LU
     CALL CNBFA(Work,N,N,Ml,Mu,Iwork,info)
@@ -243,8 +243,8 @@ SUBROUTINE CNBIR(Abe,Lda,N,Ml,Mu,V,Itask,Ind,Work,Iwork)
       Ind = -4
       CALL XERMSG('SLATEC','CNBIR','SINGULAR MATRIX A - NO SOLUTION',-4,1)
       RETURN
-    ENDIF
-  ENDIF
+    END IF
+  END IF
   !
   !     SOLVE WHEN FACTORING COMPLETE
   !     MOVE VECTOR B TO WORK
@@ -258,7 +258,7 @@ SUBROUTINE CNBIR(Abe,Lda,N,Ml,Mu,V,Itask,Ind,Work,Iwork)
   IF ( xnorm==0.0 ) THEN
     Ind = 75
     RETURN
-  ENDIF
+  END IF
   !
   !     COMPUTE  RESIDUAL
   !
@@ -267,7 +267,7 @@ SUBROUTINE CNBIR(Abe,Lda,N,Ml,Mu,V,Itask,Ind,Work,Iwork)
     kk = MAX(1,j-Ml)
     l = MIN(j-1,Ml) + MIN(N-j,Mu) + 1
     Work(j,nc+1) = CDCDOT(l,-Work(j,nc+1),Abe(j,k),Lda,V(kk),1)
-  ENDDO
+  END DO
   !
   !     SOLVE A*DELTA=R
   !
@@ -284,5 +284,5 @@ SUBROUTINE CNBIR(Abe,Lda,N,Ml,Mu,V,Itask,Ind,Work,Iwork)
   IF ( Ind<=0 ) THEN
     Ind = -10
     CALL XERMSG('SLATEC','CNBIR','SOLUTION MAY HAVE NO SIGNIFICANCE',-10,0)
-  ENDIF
+  END IF
 END SUBROUTINE CNBIR

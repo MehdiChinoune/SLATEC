@@ -58,7 +58,7 @@ SUBROUTINE PRWVIR(Key,Ipage,Lpg,Sx,Ix)
   IF ( first ) THEN
     CALL SOPENM(ipagef,Lpg)
     Sx(4) = one
-  ENDIF
+  END IF
   !
   !     PERFORM EITHER A READ OR A WRITE.
   !
@@ -67,5 +67,5 @@ SUBROUTINE PRWVIR(Key,Ipage,Lpg,Sx,Ix)
     CALL SREADP(ipagef,Ix(istart),Sx(istart),Lpg,iaddr)
   ELSEIF ( Key==2 ) THEN
     CALL SWRITP(ipagef,Ix(istart),Sx(istart),Lpg,iaddr)
-  ENDIF
+  END IF
 END SUBROUTINE PRWVIR

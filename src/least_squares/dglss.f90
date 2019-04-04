@@ -148,7 +148,7 @@ SUBROUTINE DGLSS(A,Mda,M,N,B,Mdb,Nb,Rnorm,Work,Lw,Iwork,Liw,Info)
     IF ( Info==-1 ) RETURN
     Info = M - krank
     RETURN
-  ENDIF
+  END IF
   CALL DLLSIA(A,Mda,M,N,B,Mdb,Nb,re,ae,key,mode,np,krank,ksure,Rnorm,Work,&
     Lw,Iwork,Liw,Info)
   IF ( Info==-1 ) RETURN

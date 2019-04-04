@@ -106,7 +106,7 @@ SUBROUTINE CCHDC(A,Lda,P,Work,Jpvt,Job,Info)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   INTEGER Lda, P, Jpvt(*), Job, Info
   COMPLEX A(Lda,*), Work(*)
   !
@@ -146,15 +146,15 @@ SUBROUTINE CCHDC(A,Lda,P,Work,Jpvt,Job,Info)
                 temp = A(k,j)
                 A(k,j) = A(pl,j)
                 A(pl,j) = temp
-              ENDIF
-            ENDDO
-          ENDIF
+              END IF
+            END DO
+          END IF
           Jpvt(k) = Jpvt(pl)
           Jpvt(pl) = k
-        ENDIF
+        END IF
         pl = pl + 1
-      ENDIF
-    ENDDO
+      END IF
+    END DO
     pu = P
     IF ( P>=pl ) THEN
       DO kb = pl, P
@@ -178,18 +178,18 @@ SUBROUTINE CCHDC(A,Lda,P,Work,Jpvt,Job,Info)
                   temp = A(k,j)
                   A(k,j) = A(pu,j)
                   A(pu,j) = temp
-                ENDIF
-              ENDDO
-            ENDIF
+                END IF
+              END DO
+            END IF
             jt = Jpvt(k)
             Jpvt(k) = Jpvt(pu)
             Jpvt(pu) = jt
-          ENDIF
+          END IF
           pu = pu - 1
-        ENDIF
-      ENDDO
-    ENDIF
-  ENDIF
+        END IF
+      END DO
+    END IF
+  END IF
   DO k = 1, P
     !
     !        REDUCTION LOOP.
@@ -205,9 +205,9 @@ SUBROUTINE CCHDC(A,Lda,P,Work,Jpvt,Job,Info)
         IF ( REAL(A(l,l))>maxdia ) THEN
           maxdia = REAL(A(l,l))
           maxl = l
-        ENDIF
-      ENDDO
-    ENDIF
+        END IF
+      END DO
+    END IF
     !
     !        QUIT IF THE PIVOT ELEMENT IS NOT POSITIVE.
     !
@@ -224,7 +224,7 @@ SUBROUTINE CCHDC(A,Lda,P,Work,Jpvt,Job,Info)
         Jpvt(maxl) = Jpvt(k)
         Jpvt(k) = jp
         A(k,maxl) = CONJG(A(k,maxl))
-      ENDIF
+      END IF
       !
       !        REDUCTION STEP. PIVOTING IS CONTAINED ACROSS THE ROWS.
       !
@@ -241,17 +241,17 @@ SUBROUTINE CCHDC(A,Lda,P,Work,Jpvt,Job,Info)
               temp = A(k,j)
               A(k,j) = A(maxl,j)
               A(maxl,j) = temp
-            ENDIF
-          ENDIF
+            END IF
+          END IF
           A(k,j) = A(k,j)/Work(k)
           Work(j) = CONJG(A(k,j))
           temp = -A(k,j)
           CALL CAXPY(j-k,temp,Work(kp1),1,A(kp1,j),1)
-        ENDDO
-      ENDIF
+        END DO
+      END IF
     ELSE
       Info = k - 1
       EXIT
-    ENDIF
-  ENDDO
+    END IF
+  END DO
 END SUBROUTINE CCHDC

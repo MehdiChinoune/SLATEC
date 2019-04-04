@@ -55,8 +55,8 @@ SUBROUTINE HWSSS1(Ts,Tf,M,Mbdcnd,Bdts,Bdtf,Ps,Pf,N,Nbdcnd,Bdps,Bdpf,&
       Am(i) = t1*SIN(theta-hdth)
       Cm(i) = t1*SIN(theta+hdth)
       Bm(i) = -Am(i) - Cm(i) + Elmbda
-    ENDIF
-  ENDDO
+    END IF
+  END DO
   inp = 0
   isp = 0
   !
@@ -108,15 +108,15 @@ SUBROUTINE HWSSS1(Ts,Tf,M,Mbdcnd,Bdts,Bdtf,Ps,Pf,N,Nbdcnd,Bdps,Bdpf,&
     D(its) = Cm(its)/Bm(its)
     DO i = itsp, M
       D(i) = Cm(i)/(Bm(i)-Am(i)*D(i-1))
-    ENDDO
+    END DO
     Ss(M) = -D(M)
     iid = M - its
     DO ii = 1, iid
       i = M - ii
       Ss(i) = -D(i)*Ss(i+1)
-    ENDDO
+    END DO
     Ss(M+1) = 1.
-  ENDIF
+  END IF
   IF ( inp>0 ) THEN
     Sn(1) = 1.
     D(itf) = Am(itf)/Bm(itf)
@@ -124,12 +124,12 @@ SUBROUTINE HWSSS1(Ts,Tf,M,Mbdcnd,Bdts,Bdtf,Ps,Pf,N,Nbdcnd,Bdps,Bdpf,&
     DO ii = 1, iid
       i = itf - ii
       D(i) = Am(i)/(Bm(i)-Cm(i)*D(i+1))
-    ENDDO
+    END DO
     Sn(2) = -D(2)
     DO i = 3, itf
       Sn(i) = -D(i)*Sn(i-1)
-    ENDDO
-  ENDIF
+    END DO
+  END IF
   !
   ! BOUNDARY CONDITIONS AT PHI=PS
   !
@@ -169,7 +169,7 @@ SUBROUTINE HWSSS1(Ts,Tf,M,Mbdcnd,Bdts,Bdtf,Ps,Pf,N,Nbdcnd,Bdps,Bdpf,&
     Am(i) = cf*Am(i)
     Bm(i) = cf*Bm(i)
     Cm(i) = cf*Cm(i)
-  ENDDO
+  END DO
   Am(its) = 0.
   Cm(itf) = 0.
   ising = 0
@@ -187,11 +187,11 @@ SUBROUTINE HWSSS1(Ts,Tf,M,Mbdcnd,Bdts,Bdtf,Ps,Pf,N,Nbdcnd,Bdps,Bdpf,&
             sum1 = 0.
             DO i = itsp, itfm
               sum1 = sum1 + Sint(i)
-            ENDDO
+            END DO
             sum = sum + fjj*(sum1+wts+wtf)
             sum = sum + (wps+wpf)*sum1
             hne = sum
-          ENDIF
+          END IF
       END SELECT
   END SELECT
   SELECT CASE (mbr)
@@ -199,58 +199,58 @@ SUBROUTINE HWSSS1(Ts,Tf,M,Mbdcnd,Bdts,Bdtf,Ps,Pf,N,Nbdcnd,Bdps,Bdpf,&
     CASE (2,3,8)
       DO j = jps, jpf
         F(2,j) = F(2,j) - at*F(1,j)
-      ENDDO
+      END DO
     CASE (4,5,9)
       DO j = jps, jpf
         F(1,j) = F(1,j) + tdt*Bdts(j)*at
-      ENDDO
+      END DO
     CASE DEFAULT
       IF ( Nbdcnd==3 ) THEN
         yhld = F(1,jps) - 4./(fn*dphi*dth2)*(Bdpf(2)-Bdps(2))
         DO j = 1, np1
           F(1,j) = yhld
-        ENDDO
-      ENDIF
+        END DO
+      END IF
   END SELECT
   SELECT CASE (mbr)
     CASE (1)
     CASE (2,5,6)
       DO j = jps, jpf
         F(M,j) = F(M,j) - ct*F(M+1,j)
-      ENDDO
+      END DO
     CASE (3,4,7)
       DO j = jps, jpf
         F(M+1,j) = F(M+1,j) - tdt*Bdtf(j)*ct
-      ENDDO
+      END DO
     CASE DEFAULT
       IF ( Nbdcnd==3 ) THEN
         yhld = F(M+1,jps) - 4./(fn*dphi*dth2)*(Bdpf(M)-Bdps(M))
         DO j = 1, np1
           F(M+1,j) = yhld
-        ENDDO
-      ENDIF
+        END DO
+      END IF
   END SELECT
   SELECT CASE (nbr)
     CASE (1)
     CASE (4,5)
       DO i = its, itf
         F(i,1) = F(i,1) + tdp*Bdps(i)/(dphi2*Sint(i)*Sint(i))
-      ENDDO
+      END DO
     CASE DEFAULT
       DO i = its, itf
         F(i,2) = F(i,2) - F(i,1)/(dphi2*Sint(i)*Sint(i))
-      ENDDO
+      END DO
   END SELECT
   SELECT CASE (nbr)
     CASE (1)
     CASE (3,4)
       DO i = its, itf
         F(i,N+1) = F(i,N+1) - tdp*Bdpf(i)/(dphi2*Sint(i)*Sint(i))
-      ENDDO
+      END DO
     CASE DEFAULT
       DO i = its, itf
         F(i,N) = F(i,N) - F(i,N+1)/(dphi2*Sint(i)*Sint(i))
-      ENDDO
+      END DO
   END SELECT
   Pertrb = 0.
   IF ( ising/=0 ) THEN
@@ -262,30 +262,30 @@ SUBROUTINE HWSSS1(Ts,Tf,M,Mbdcnd,Bdts,Bdtf,Ps,Pf,N,Nbdcnd,Bdps,Bdpf,&
       sum1 = 0.
       DO j = jpsp, jpfm
         sum1 = sum1 + F(i,j)
-      ENDDO
+      END DO
       sum = sum + Sint(i)*sum1
-    ENDDO
+    END DO
     sum1 = 0.
     sum2 = 0.
     DO j = jpsp, jpfm
       sum1 = sum1 + F(its,j)
       sum2 = sum2 + F(itf,j)
-    ENDDO
+    END DO
     sum = sum + wts*sum1 + wtf*sum2
     sum1 = 0.
     sum2 = 0.
     DO i = itsp, itfm
       sum1 = sum1 + Sint(i)*F(i,jps)
       sum2 = sum2 + Sint(i)*F(i,jpf)
-    ENDDO
+    END DO
     sum = sum + wps*sum1 + wpf*sum2
     Pertrb = sum/hne
     DO j = 1, np1
       DO i = 1, mp1
         F(i,j) = F(i,j) - Pertrb
-      ENDDO
-    ENDDO
-  ENDIF
+      END DO
+    END DO
+  END IF
   !
   ! SCALE RIGHT SIDE FOR SUBROUTINE GENBUN
   !
@@ -293,8 +293,8 @@ SUBROUTINE HWSSS1(Ts,Tf,M,Mbdcnd,Bdts,Bdtf,Ps,Pf,N,Nbdcnd,Bdps,Bdpf,&
     cf = dphi2*Sint(i)*Sint(i)
     DO j = jps, jpf
       F(i,j) = cf*F(i,j)
-    ENDDO
-  ENDDO
+    END DO
+  END DO
   CALL GENBUN(Nbdcnd,nunk,1,munk,Am(its),Bm(its),Cm(its),Idimf,F(its,jps),&
     ierror,D)
   IF ( ising>0 ) THEN
@@ -302,21 +302,21 @@ SUBROUTINE HWSSS1(Ts,Tf,M,Mbdcnd,Bdts,Bdtf,Ps,Pf,N,Nbdcnd,Bdps,Bdpf,&
       IF ( isp>0 ) THEN
         DO j = 1, np1
           F(M+1,j) = 0.
-        ENDDO
+        END DO
         GOTO 100
-      ENDIF
+      END IF
     ELSEIF ( isp<=0 ) THEN
       DO j = 1, np1
         F(1,j) = 0.
-      ENDDO
+      END DO
       GOTO 100
-    ENDIF
-  ENDIF
+    END IF
+  END IF
   IF ( inp>0 ) THEN
     sum = wps*F(its,jps) + wpf*F(its,jpf)
     DO j = jpsp, jpfm
       sum = sum + F(its,j)
-    ENDDO
+    END DO
     dfn = cp*sum
     dnn = cp*((wps+wpf+fjj)*(Sn(2)-1.)) + Elmbda
     dsn = cp*(wps+wpf+fjj)*Sn(M)
@@ -326,20 +326,20 @@ SUBROUTINE HWSSS1(Ts,Tf,M,Mbdcnd,Bdts,Bdtf,Ps,Pf,N,Nbdcnd,Bdps,Bdpf,&
         hld = cnp*Sn(i)
         DO j = jps, jpf
           F(i,j) = F(i,j) + hld
-        ENDDO
-      ENDDO
+        END DO
+      END DO
       DO j = 1, np1
         F(1,j) = cnp
-      ENDDO
+      END DO
       GOTO 100
-    ENDIF
+    END IF
   ELSEIF ( isp<=0 ) THEN
     GOTO 100
-  ENDIF
+  END IF
   sum = wps*F(itf,jps) + wpf*F(itf,jpf)
   DO j = jpsp, jpfm
     sum = sum + F(itf,j)
-  ENDDO
+  END DO
   dfs = cp*sum
   dss = cp*((wps+wpf+fjj)*(Ss(M)-1.)) + Elmbda
   dns = cp*(wps+wpf+fjj)*Ss(2)
@@ -349,11 +349,11 @@ SUBROUTINE HWSSS1(Ts,Tf,M,Mbdcnd,Bdts,Bdtf,Ps,Pf,N,Nbdcnd,Bdps,Bdpf,&
       hld = csp*Ss(i)
       DO j = jps, jpf
         F(i,j) = F(i,j) + hld
-      ENDDO
-    ENDDO
+      END DO
+    END DO
     DO j = 1, np1
       F(M+1,j) = csp
-    ENDDO
+    END DO
   ELSE
     rtn = F(1,1) - dfn
     rts = F(M+1,1) - dfs
@@ -370,22 +370,22 @@ SUBROUTINE HWSSS1(Ts,Tf,M,Mbdcnd,Bdts,Bdtf,Ps,Pf,N,Nbdcnd,Bdps,Bdpf,&
       rts = rts - rtn*dsn/dnn
       csp = rts/den
       cnp = (rtn-csp*dns)/dnn
-    ENDIF
+    END IF
     DO i = its, itf
       hld = cnp*Sn(i) + csp*Ss(i)
       DO j = jps, jpf
         F(i,j) = F(i,j) + hld
-      ENDDO
-    ENDDO
+      END DO
+    END DO
     DO j = 1, np1
       F(1,j) = cnp
       F(M+1,j) = csp
-    ENDDO
-  ENDIF
+    END DO
+  END IF
   100 CONTINUE
   IF ( Nbdcnd==0 ) THEN
     DO i = 1, mp1
       F(i,jpf+1) = F(i,jps)
-    ENDDO
-  ENDIF
+    END DO
+  END IF
 END SUBROUTINE HWSSS1

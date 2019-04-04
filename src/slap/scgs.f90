@@ -282,19 +282,19 @@ SUBROUTINE SCGS(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,Iter,&
   IF ( N<1 ) THEN
     Ierr = 3
     RETURN
-  ENDIF
+  END IF
   tolmin = 500*R1MACH(3)
   IF ( Tol<tolmin ) THEN
     Tol = tolmin
     Ierr = 4
-  ENDIF
+  END IF
   !
   !         Calculate initial residual and pseudo-residual, and check
   !         stopping criterion.
   CALL MATVEC(N,X,R,Nelt,Ia,Ja,A,Isym)
   DO i = 1, N
     V1(i) = R(i) - B(i)
-  ENDDO
+  END DO
   CALL MSOLVE(N,V1,R,Nelt,Ia,Ja,A,Isym,Rwork,Iwork)
   !
   IF ( ISSCGS(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,Iter,Err,&
@@ -306,7 +306,7 @@ SUBROUTINE SCGS(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,Iter,&
     fuzz = R1MACH(3)**2
     DO i = 1, N
       R0(i) = R(i)
-    ENDDO
+    END DO
     rhonm1 = 1
     !
     !         ***** ITERATION LOOP *****
@@ -322,16 +322,16 @@ SUBROUTINE SCGS(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,Iter,&
         DO i = 1, N
           U(i) = R(i)
           P(i) = R(i)
-        ENDDO
+        END DO
       ELSE
         DO i = 1, N
           U(i) = R(i) + bk*Q(i)
           V1(i) = Q(i) + bk*P(i)
-        ENDDO
+        END DO
         DO i = 1, N
           P(i) = U(i) + bk*V1(i)
-        ENDDO
-      ENDIF
+        END DO
+      END IF
       !
       !         Calculate coefficient AK, new iterate X, Q
       CALL MATVEC(N,P,V2,Nelt,Ia,Ja,A,Isym)
@@ -342,10 +342,10 @@ SUBROUTINE SCGS(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,Iter,&
       akm = -ak
       DO i = 1, N
         Q(i) = U(i) + akm*V1(i)
-      ENDDO
+      END DO
       DO i = 1, N
         V1(i) = U(i) + Q(i)
-      ENDDO
+      END DO
       !         X = X - ak*V1.
       CALL SAXPY(N,akm,V1,1,X,1)
       !                     -1
@@ -361,13 +361,13 @@ SUBROUTINE SCGS(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,Iter,&
       !
       !         Update RHO.
       rhonm1 = rhon
-    ENDDO
+    END DO
     !
     !         *****   end of loop  *****
     !         Stopping criterion not satisfied.
     Iter = Itmax + 1
     Ierr = 2
-  ENDIF
+  END IF
   100  RETURN
   !
   !         Breakdown of method detected.

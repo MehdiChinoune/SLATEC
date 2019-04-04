@@ -62,7 +62,7 @@ SUBROUTINE CSROT(N,Cx,Incx,Cy,Incy,C,S)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920310  Corrected definition of LX in DESCRIPTION.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   COMPLEX Cx(*), Cy(*), ctemp
   REAL C, S
   INTEGER i, Incx, Incy, ix, iy, N
@@ -76,9 +76,9 @@ SUBROUTINE CSROT(N,Cx,Incx,Cy,Incy,C,S)
       ctemp = C*Cx(i) + S*Cy(i)
       Cy(i) = C*Cy(i) - S*Cx(i)
       Cx(i) = ctemp
-    ENDDO
+    END DO
     RETURN
-  ENDIF
+  END IF
   !
   !     Code for unequal increments or equal increments not equal to 1.
   !
@@ -92,6 +92,6 @@ SUBROUTINE CSROT(N,Cx,Incx,Cy,Incy,C,S)
     Cx(ix) = ctemp
     ix = ix + Incx
     iy = iy + Incy
-  ENDDO
+  END DO
   RETURN
 END SUBROUTINE CSROT

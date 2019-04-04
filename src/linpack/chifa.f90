@@ -75,7 +75,7 @@ SUBROUTINE CHIFA(A,Lda,N,Kpvt,Info)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   INTEGER Lda, N, Kpvt(*), Info
   COMPLEX A(Lda,*)
   !
@@ -126,11 +126,11 @@ SUBROUTINE CHIFA(A,Lda,N,Kpvt,Info)
         imaxp1 = imax + 1
         DO j = imaxp1, k
           rowmax = MAX(rowmax,CABS1(A(imax,j)))
-        ENDDO
+        END DO
         IF ( imax/=1 ) THEN
           jmax = ICAMAX(imax-1,A(1,imax),1)
           rowmax = MAX(rowmax,CABS1(A(jmax,imax)))
-        ENDIF
+        END IF
         IF ( CABS1(A(imax,imax))>=alpha*rowmax ) THEN
           kstep = 1
           swap = .TRUE.
@@ -140,11 +140,11 @@ SUBROUTINE CHIFA(A,Lda,N,Kpvt,Info)
         ELSE
           kstep = 1
           swap = .FALSE.
-        ENDIF
+        END IF
       ELSE
         kstep = 1
         swap = .FALSE.
-      ENDIF
+      END IF
       IF ( MAX(absakk,colmax)==0.0E0 ) THEN
         !
         !           COLUMN K IS ZERO.  SET INFO AND ITERATE THE LOOP.
@@ -165,11 +165,11 @@ SUBROUTINE CHIFA(A,Lda,N,Kpvt,Info)
             t = CONJG(A(j,k-1))
             A(j,k-1) = CONJG(A(imax,j))
             A(imax,j) = t
-          ENDDO
+          END DO
           t = A(k-1,k)
           A(k-1,k) = A(imax,k)
           A(imax,k) = t
-        ENDIF
+        END IF
         !
         !           PERFORM THE ELIMINATION.
         !
@@ -191,8 +191,8 @@ SUBROUTINE CHIFA(A,Lda,N,Kpvt,Info)
             A(j,k) = mulk
             A(j,k-1) = mulkm1
             A(j,j) = CMPLX(REAL(A(j,j)),0.0E0)
-          ENDDO
-        ENDIF
+          END DO
+        END IF
         !
         !           SET THE PIVOT ARRAY.
         !
@@ -213,8 +213,8 @@ SUBROUTINE CHIFA(A,Lda,N,Kpvt,Info)
             t = CONJG(A(j,k))
             A(j,k) = CONJG(A(imax,j))
             A(imax,j) = t
-          ENDDO
-        ENDIF
+          END DO
+        END IF
         !
         !           PERFORM THE ELIMINATION.
         !
@@ -225,18 +225,18 @@ SUBROUTINE CHIFA(A,Lda,N,Kpvt,Info)
           CALL CAXPY(j,t,A(1,k),1,A(1,j),1)
           A(j,j) = CMPLX(REAL(A(j,j)),0.0E0)
           A(j,k) = mulk
-        ENDDO
+        END DO
         !
         !           SET THE PIVOT ARRAY.
         !
         Kpvt(k) = k
         IF ( swap ) Kpvt(k) = imax
-      ENDIF
+      END IF
       k = k - kstep
     ELSE
       Kpvt(1) = 1
       IF ( CABS1(A(1,1))==0.0E0 ) Info = 1
       EXIT
-    ENDIF
-  ENDDO
+    END IF
+  END DO
 END SUBROUTINE CHIFA

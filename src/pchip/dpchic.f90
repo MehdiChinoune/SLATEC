@@ -254,7 +254,7 @@ SUBROUTINE DPCHIC(Ic,Vc,Switch,N,X,F,D,Incfd,Wk,Nwk,Ierr)
   ELSE
     DO i = 2, N
       IF ( X(i)<=X(i-1) ) GOTO 100
-    ENDDO
+    END DO
     !
     ibeg = Ic(1)
     iend = Ic(2)
@@ -285,7 +285,7 @@ SUBROUTINE DPCHIC(Ic,Vc,Switch,N,X,F,D,Incfd,Wk,Nwk,Ierr)
         DO i = 1, nless1
           Wk(i) = X(i+1) - X(i)
           Wk(nless1+i) = (F(1,i+1)-F(1,i))/Wk(i)
-        ENDDO
+        END DO
         !
         !  SPECIAL CASE N=2 -- USE LINEAR INTERPOLATION.
         !
@@ -312,12 +312,12 @@ SUBROUTINE DPCHIC(Ic,Vc,Switch,N,X,F,D,Incfd,Wk,Nwk,Ierr)
               Ierr = -8
               CALL XERMSG('SLATEC','DPCHIC','ERROR RETURN FROM DPCHCS',Ierr,1)
               RETURN
-            ENDIF
-          ENDIF
+            END IF
+          END IF
         ELSE
           D(1,1) = Wk(2)
           D(1,N) = Wk(2)
-        ENDIF
+        END IF
         !
         !  SET END CONDITIONS.
         !
@@ -332,15 +332,15 @@ SUBROUTINE DPCHIC(Ic,Vc,Switch,N,X,F,D,Incfd,Wk,Nwk,Ierr)
             Ierr = -9
             CALL XERMSG('SLATEC','DPCHIC','ERROR RETURN FROM DPCHCE',Ierr,1)
             RETURN
-          ENDIF
-        ENDIF
+          END IF
+        END IF
         !
         !  NORMAL RETURN.
         !
         RETURN
-      ENDIF
-    ENDIF
-  ENDIF
+      END IF
+    END IF
+  END IF
   !
   !     X-ARRAY NOT STRICTLY INCREASING.
   100  Ierr = -3

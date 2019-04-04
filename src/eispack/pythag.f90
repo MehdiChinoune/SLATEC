@@ -26,7 +26,7 @@ REAL FUNCTION PYTHAG(A,B)
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
-  
+
   REAL A, B
   !
   REAL p, q, r, s, t
@@ -46,7 +46,7 @@ REAL FUNCTION PYTHAG(A,B)
         s = r/t
         p = p + 2.0E0*p*s
         q = q*s
-      ENDIF
-    ENDDO
-  ENDIF
+      END IF
+    END DO
+  END IF
 END FUNCTION PYTHAG

@@ -52,7 +52,7 @@ SUBROUTINE CSSCAL(N,Sa,Cx,Incx)
   !   900821  Modified to correct problem with a negative increment.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   COMPLEX Cx(*)
   REAL Sa
   INTEGER i, Incx, ix, N
@@ -65,9 +65,9 @@ SUBROUTINE CSSCAL(N,Sa,Cx,Incx)
     !
     DO i = 1, N
       Cx(i) = Sa*Cx(i)
-    ENDDO
+    END DO
     RETURN
-  ENDIF
+  END IF
   !
   !     Code for increment not equal to 1.
   !
@@ -76,6 +76,6 @@ SUBROUTINE CSSCAL(N,Sa,Cx,Incx)
   DO i = 1, N
     Cx(ix) = Sa*Cx(ix)
     ix = ix + Incx
-  ENDDO
+  END DO
   RETURN
 END SUBROUTINE CSSCAL

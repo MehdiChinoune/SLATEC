@@ -77,7 +77,7 @@ SUBROUTINE QS2I1R(Ia,Ja,A,N,Kflag)
   !   920511  Added complete declaration section.  (WRB)
   !   920929  Corrected format of reference.  (FNF)
   !   921012  Added E0's to f.p. constants.  (FNF)
-  
+
   !VD$R NOVECTOR
   !VD$R NOCONCUR
   !     .. Scalar Arguments ..
@@ -100,22 +100,22 @@ SUBROUTINE QS2I1R(Ia,Ja,A,N,Kflag)
     CALL XERMSG('SLATEC','QS2I1R',&
       'The number of values to be sorted was not positive.',1,1)
     RETURN
-  ENDIF
+  END IF
   IF ( N==1 ) RETURN
   kk = ABS(Kflag)
   IF ( kk/=1 ) THEN
     CALL XERMSG('SLATEC','QS2I1R',&
       'The sort control parameter, K, was not 1 or -1.',2,1)
     RETURN
-  ENDIF
+  END IF
   !
   !     Alter array IA to get decreasing order if needed.
   !
   IF ( Kflag<1 ) THEN
     DO i = 1, nn
       Ia(i) = -Ia(i)
-    ENDDO
-  ENDIF
+    END DO
+  END IF
   !
   !     Sort IA and carry JA and A along.
   !     And now...Just a little black magic...
@@ -128,7 +128,7 @@ SUBROUTINE QS2I1R(Ia,Ja,A,N,Kflag)
     r = r + 3.90625E-2
   ELSE
     r = r - .21875E0
-  ENDIF
+  END IF
   200  k = i
   !
   !     Select a central element of the array and save it in location
@@ -151,7 +151,7 @@ SUBROUTINE QS2I1R(Ia,Ja,A,N,Kflag)
     A(ij) = A(i)
     A(i) = ta
     ta = A(ij)
-  ENDIF
+  END IF
   l = j
   !
   !     If last element of array is less than it, swap with it.
@@ -179,8 +179,8 @@ SUBROUTINE QS2I1R(Ia,Ja,A,N,Kflag)
       A(ij) = A(i)
       A(i) = ta
       ta = A(ij)
-    ENDIF
-  ENDIF
+    END IF
+  END IF
   DO
     !
     !     Find an element in the second half of the array which is
@@ -209,7 +209,7 @@ SUBROUTINE QS2I1R(Ia,Ja,A,N,Kflag)
             A(l) = A(k)
             A(k) = tta
             EXIT
-          ENDIF
+          END IF
           !
           !     Save upper and lower subscripts of the array yet to be sorted.
           !
@@ -223,12 +223,12 @@ SUBROUTINE QS2I1R(Ia,Ja,A,N,Kflag)
             iu(m) = j
             j = l
             m = m + 1
-          ENDIF
+          END IF
           GOTO 400
-        ENDIF
-      ENDDO
-    ENDIF
-  ENDDO
+        END IF
+      END DO
+    END IF
+  END DO
   !
   !     Begin again on another portion of the unsorted array.
   !
@@ -240,13 +240,13 @@ SUBROUTINE QS2I1R(Ia,Ja,A,N,Kflag)
     IF ( Kflag<1 ) THEN
       DO i = 1, nn
         Ia(i) = -Ia(i)
-      ENDDO
-    ENDIF
+      END DO
+    END IF
     RETURN
   ELSE
     i = il(m)
     j = iu(m)
-  ENDIF
+  END IF
   400 CONTINUE
   IF ( j-i>=1 ) GOTO 200
   IF ( i==j ) GOTO 300
@@ -270,10 +270,10 @@ SUBROUTINE QS2I1R(Ia,Ja,A,N,Kflag)
           Ja(k+1) = jt
           A(k+1) = ta
           EXIT
-        ENDIF
-      ENDDO
-    ENDIF
-  ENDDO
+        END IF
+      END DO
+    END IF
+  END DO
   !------------- LAST LINE OF QS2I1R FOLLOWS ----------------------------
   RETURN
 END SUBROUTINE QS2I1R

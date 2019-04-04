@@ -75,7 +75,7 @@ SUBROUTINE PFQAD(F,Ldc,C,Xi,Lxi,K,Id,X1,X2,Tol,Quad,Ierr)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   !
   INTEGER Id, Ierr, iflg, ilo, il1, il2, inppv, K, Ldc, left, Lxi, mf1, mf2
   REAL a, aa, ans, b, bb, C(Ldc,*), q, Quad, ta, tb, Tol, wtol, Xi(*), X1, X2
@@ -118,12 +118,12 @@ SUBROUTINE PFQAD(F,Ldc,C,Xi,Lxi,K,Id,X1,X2,Tol,Quad,Ierr)
         CALL PPGQ8(F,Ldc,C,Xi,Lxi,K,Id,a,b,inppv,Tol,ans,iflg)
         IF ( iflg>1 ) Ierr = 2
         q = q + ans
-      ENDDO
+      END DO
       IF ( X1>X2 ) q = -q
       Quad = q
       RETURN
-    ENDIF
-  ENDIF
+    END IF
+  END IF
   !
   CALL XERMSG('SLATEC','PFQAD',&
     'TOL IS LESS THAN THE SINGLE PRECISION TOLERANCE OR GREATER THAN 0.1',2,1)

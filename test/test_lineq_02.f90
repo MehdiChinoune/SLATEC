@@ -79,7 +79,7 @@ CONTAINS
     DO i = 1, n
       c(i) = sign/i
       sign = -sign
-    ENDDO
+    END DO
     !
     !     CASE 1 FOR WELL-CONDITIONED MATRIX, CASE 2 FOR SINGULAR MATRIX.
     !
@@ -88,7 +88,7 @@ CONTAINS
         !           SET VECTOR B TO ZERO.
         DO i = 1, n
           b(i) = 0.0E0
-        ENDDO
+        END DO
         !
         !           FORM VECTOR B FOR NON-BANDED.
         !
@@ -96,8 +96,8 @@ CONTAINS
           DO i = 1, n
             DO j = 1, n
               b(i) = b(i) + a(i,j)*c(j)
-            ENDDO
-          ENDDO
+            END DO
+          END DO
         ELSE
           !
           !              FORM ABE(NB ARRAY) FROM MATRIX A
@@ -106,8 +106,8 @@ CONTAINS
           DO j = 1, jd
             DO i = 1, n
               abe(i,j) = 0.0E0
-            ENDDO
-          ENDDO
+            END DO
+          END DO
           !
           mlp = ml + 1
           DO i = 1, n
@@ -117,9 +117,9 @@ CONTAINS
               k = j - i + mlp
               abe(i,k) = a(i,j)
               b(i) = b(i) + (a(i,j)*c(j))
-            ENDDO
-          ENDDO
-        ENDIF
+            END DO
+          END DO
+        END IF
         !
         !           FORM BT FROM B, AT FROM A, AND ABET FROM ABE.
         !
@@ -127,26 +127,26 @@ CONTAINS
           bt(i) = b(i)
           DO j = 1, n
             at(i,j) = a(i,j)
-          ENDDO
-        ENDDO
+          END DO
+        END DO
         !
         DO j = 1, jd
           DO i = 1, n
             abet(i,j) = abe(i,j)
-          ENDDO
-        ENDDO
+          END DO
+        END DO
         !
         !           MAKE AT AND ABET SINGULAR FOR CASE  =  2
         !
         IF ( kcase==2 ) THEN
           DO j = 1, n
             at(1,j) = 0.0E0
-          ENDDO
+          END DO
           !
           DO j = 1, jd
             abet(1,j) = 0.0E0
-          ENDDO
-        ENDIF
+          END DO
+        END IF
         !
         !           SOLVE FOR X
         !
@@ -162,14 +162,14 @@ CONTAINS
           DO i = 1, n
             delx = ABS(bt(i)-c(i))
             delmax = MAX(delmax,delx)
-          ENDDO
+          END DO
           !
           IF ( r<=delmax ) THEN
             Nerr = Nerr + 1
             WRITE (Lun,99002) list(kprog), kcase, delmax
             99002 FORMAT ('   PROBLEM WITH S',A,', CASE ',I1,'.  MAX ABS ERROR OF',&
               E11.4/)
-          ENDIF
+          END IF
           !
           !              CHECK CONTROL FOR SINGULAR MATRIX FOR CASE 2
           !
@@ -178,9 +178,9 @@ CONTAINS
           WRITE (Lun,99003) list(kprog), kcase, ind
           99003 FORMAT ('   PROBLEM WITH S',A,', CASE ',I1,'.  IND = ',I2,&
             ' INSTEAD OF -4'/)
-        ENDIF
-      ENDDO
-    ENDDO
+        END IF
+      END DO
+    END DO
     !
     !     SUMMARY PRINT
     !
@@ -264,7 +264,7 @@ CONTAINS
     DO i = 1, n
       c(i) = sign/i
       sign = -sign
-    ENDDO
+    END DO
     !
     !     CASE 1 FOR WELL-CONDITIONED MATRIX, CASE 2 FOR SINGULAR MATRIX.
     !
@@ -273,7 +273,7 @@ CONTAINS
         !           SET VECTOR B TO ZERO.
         DO i = 1, n
           b(i) = 0.0D0
-        ENDDO
+        END DO
         !
         !           FORM VECTOR B FOR NON-BANDED.
         !
@@ -281,8 +281,8 @@ CONTAINS
           DO i = 1, n
             DO j = 1, n
               b(i) = b(i) + a(i,j)*c(j)
-            ENDDO
-          ENDDO
+            END DO
+          END DO
         ELSE
           !
           !              FORM ABE(NB ARRAY) FROM MATRIX A
@@ -291,8 +291,8 @@ CONTAINS
           DO j = 1, jd
             DO i = 1, n
               abe(i,j) = 0.0D0
-            ENDDO
-          ENDDO
+            END DO
+          END DO
           !
           mlp = ml + 1
           DO i = 1, n
@@ -302,9 +302,9 @@ CONTAINS
               k = j - i + mlp
               abe(i,k) = a(i,j)
               b(i) = b(i) + (a(i,j)*c(j))
-            ENDDO
-          ENDDO
-        ENDIF
+            END DO
+          END DO
+        END IF
         !
         !           FORM BT FROM B, AT FROM A, AND ABET FROM ABE.
         !
@@ -312,26 +312,26 @@ CONTAINS
           bt(i) = b(i)
           DO j = 1, n
             at(i,j) = a(i,j)
-          ENDDO
-        ENDDO
+          END DO
+        END DO
         !
         DO j = 1, jd
           DO i = 1, n
             abet(i,j) = abe(i,j)
-          ENDDO
-        ENDDO
+          END DO
+        END DO
         !
         !           MAKE AT AND ABET SINGULAR FOR CASE  =  2
         !
         IF ( kcase==2 ) THEN
           DO j = 1, n
             at(1,j) = 0.0D0
-          ENDDO
+          END DO
           !
           DO j = 1, jd
             abet(1,j) = 0.0D0
-          ENDDO
-        ENDIF
+          END DO
+        END IF
         !
         !           SOLVE FOR X
         !
@@ -345,14 +345,14 @@ CONTAINS
           DO i = 1, n
             delx = REAL( ABS(bt(i)-c(i)), 4 )
             delmax = MAX(delmax,delx)
-          ENDDO
+          END DO
           !
           IF ( r<=delmax ) THEN
             Nerr = Nerr + 1
             WRITE (Lun,99002) list(kprog), kcase, delmax
             99002 FORMAT ('   PROBLEM WITH D',A,', CASE ',I1,'.  MAX ABS ERROR OF',&
               E11.4/)
-          ENDIF
+          END IF
           !
           !              CHECK CONTROL FOR SINGULAR MATRIX FOR CASE 2
           !
@@ -361,9 +361,9 @@ CONTAINS
           WRITE (Lun,99003) list(kprog), kcase, ind
           99003 FORMAT ('   PROBLEM WITH D',A,', CASE ',I1,'.  IND = ',I2,&
             ' INSTEAD OF -4'/)
-        ENDIF
-      ENDDO
-    ENDDO
+        END IF
+      END DO
+    END DO
     !
     !     SUMMARY PRINT
     !
@@ -449,8 +449,8 @@ CONTAINS
     DO j = 1, jd
       DO i = 1, n
         abe(i,j) = (0.0E0,0.0E0)
-      ENDDO
-    ENDDO
+      END DO
+    END DO
     !
     mlp = ml + 1
     DO i = 1, n
@@ -459,8 +459,8 @@ CONTAINS
       DO j = j1, j2
         k = j - i + mlp
         abe(i,k) = a(i,j)
-      ENDDO
-    ENDDO
+      END DO
+    END DO
     !
     !     CASE 1 FOR WELL-CONDITIONED MATRIX, CASE 2 FOR SINGULAR MATRIX
     !
@@ -471,26 +471,26 @@ CONTAINS
           bt(i) = b(i)
           DO j = 1, n
             at(i,j) = a(i,j)
-          ENDDO
-        ENDDO
+          END DO
+        END DO
         !
         DO j = 1, jd
           DO i = 1, n
             abet(i,j) = abe(i,j)
-          ENDDO
-        ENDDO
+          END DO
+        END DO
         !
         !           MAKE AT AND ABET SINGULAR FOR CASE  =  2
         !
         IF ( kcase==2 ) THEN
           DO j = 1, n
             at(1,j) = (0.0E0,0.0E0)
-          ENDDO
+          END DO
           !
           DO j = 1, jd
             abet(1,j) = (0.0E0,0.0E0)
-          ENDDO
-        ENDIF
+          END DO
+        END IF
         !
         !           SOLVE FOR X
         !
@@ -508,14 +508,14 @@ CONTAINS
             delmax = MAX(delmax,delx)
             delx = ABS(AIMAG(bt(i))-AIMAG(c(i)))
             delmax = MAX(delmax,delx)
-          ENDDO
+          END DO
           !
           IF ( r<=delmax ) THEN
             Nerr = Nerr + 1
             WRITE (Lun,99002) list(kprog), kcase, delmax
             99002 FORMAT ('   PROBLEM WITH C',A,', CASE ',I1,'.  MAX ABS ERROR OF',&
               E11.4/)
-          ENDIF
+          END IF
           !              CHECK CONTROL FOR SINGULAR MATRIX FOR CASE 2
           !
         ELSEIF ( ind/=-4 ) THEN
@@ -523,9 +523,9 @@ CONTAINS
           WRITE (Lun,99003) list(kprog), kcase, ind
           99003 FORMAT ('   PROBLEM WITH C',A,', CASE ',I1,'.  IND = ',I2,&
             ' INSTEAD OF -4'/)
-        ENDIF
-      ENDDO
-    ENDDO
+        END IF
+      END DO
+    END DO
     !
     !     SUMMARY PRINT
     !
@@ -607,7 +607,7 @@ PROGRAM TEST22
     CALL XSETF(0)
   ELSE
     CALL XSETF(1)
-  ENDIF
+  END IF
   !
   !     Test LINPACK routines
   !
@@ -627,6 +627,6 @@ PROGRAM TEST22
     WRITE (lun,99002) nfail
     99002 FORMAT (/' ************* WARNING -- ',I5,&
       ' TEST(S) FAILED IN PROGRAM TEST22 *************')
-  ENDIF
+  END IF
   STOP
 END PROGRAM TEST22

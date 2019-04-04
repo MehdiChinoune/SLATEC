@@ -131,7 +131,7 @@ SUBROUTINE SOSEQS(FNC,N,S,Rtolx,Atolx,Tolf,Iflag,Mxit,Ncjs,Nsrrc,Nsri,&
     Is(k) = k
     X(k) = S(k)
     Temp(k) = X(k)
-  ENDDO
+  END DO
   !
   !
   !    *****************************************
@@ -142,7 +142,7 @@ SUBROUTINE SOSEQS(FNC,N,S,Rtolx,Atolx,Tolf,Iflag,Mxit,Ncjs,Nsrrc,Nsri,&
     !
     DO k = 1, N
       Fac(k) = sruro
-    ENDDO
+    END DO
     DO
       !
       kn = 1
@@ -167,8 +167,8 @@ SUBROUTINE SOSEQS(FNC,N,S,Rtolx,Atolx,Tolf,Iflag,Mxit,Ncjs,Nsrrc,Nsri,&
           DO j = 1, km1
             js = Is(j)
             X(js) = Temp(js) + Y(j)
-          ENDDO
-        ENDIF
+          END DO
+        END IF
         !
         !
         !     EVALUATE THE K-TH EQUATION AND THE INTERMEDIATE COMPUTATION
@@ -201,17 +201,17 @@ SUBROUTINE SOSEQS(FNC,N,S,Rtolx,Atolx,Tolf,Iflag,Mxit,Ncjs,Nsrrc,Nsri,&
               DO l = 1, km1
                 ls = Is(l)
                 X(ls) = Temp(ls) + Y(l)
-              ENDDO
-            ENDIF
+              END DO
+            END IF
             fp = FNC(X,k)
             X(item) = hx
             fdif = fp - f
             IF ( ABS(fdif)<=uro*ABS(f) ) THEN
               fdif = 0.
               it = it + 1
-            ENDIF
+            END IF
             P(j) = fdif/h
-          ENDDO
+          END DO
           !
           IF ( it>(N-k) ) THEN
             !
@@ -224,7 +224,7 @@ SUBROUTINE SOSEQS(FNC,N,S,Rtolx,Atolx,Tolf,Iflag,Mxit,Ncjs,Nsrrc,Nsri,&
               fact = 100.*Fac(isj)
               IF ( fact>1.E+10 ) GOTO 300
               Fac(isj) = fact
-            ENDDO
+            END DO
             GOTO 50
             !
           ELSEIF ( k/=N ) THEN
@@ -238,8 +238,8 @@ SUBROUTINE SOSEQS(FNC,N,S,Rtolx,Atolx,Tolf,Iflag,Mxit,Ncjs,Nsrrc,Nsri,&
               IF ( test>pmax ) THEN
                 pmax = test
                 isv = j
-              ENDIF
-            ENDDO
+              END IF
+            END DO
             IF ( pmax==0. ) GOTO 300
             !
             !     SET UP THE COEFFICIENTS FOR THE K-TH ROW OF THE TRIANGULAR
@@ -251,7 +251,7 @@ SUBROUTINE SOSEQS(FNC,N,S,Rtolx,Atolx,Tolf,Iflag,Mxit,Ncjs,Nsrrc,Nsri,&
             DO j = k, N
               IF ( j/=isv ) C(kk) = -P(j)/pmax
               kk = kk + 1
-            ENDDO
+            END DO
             P(k) = pmax
             !
             !
@@ -272,10 +272,10 @@ SUBROUTINE SOSEQS(FNC,N,S,Rtolx,Atolx,Tolf,Iflag,Mxit,Ncjs,Nsrrc,Nsri,&
                 C(kj) = C(jk)
                 C(jk) = csv
                 kj = kj + N - j
-              ENDDO
-            ENDIF
-          ENDIF
-        ENDIF
+              END DO
+            END IF
+          END IF
+        END IF
         !
         kn = kn + np1 - k
         !
@@ -283,7 +283,7 @@ SUBROUTINE SOSEQS(FNC,N,S,Rtolx,Atolx,Tolf,Iflag,Mxit,Ncjs,Nsrrc,Nsri,&
         !
         B(k) = -f/P(k)
         !
-      ENDDO
+      END DO
       !
       !    ********
       !    ******** END OF LOOP CREATING THE TRIANGULAR LINEARIZATION MATRIX
@@ -304,7 +304,7 @@ SUBROUTINE SOSEQS(FNC,N,S,Rtolx,Atolx,Tolf,Iflag,Mxit,Ncjs,Nsrrc,Nsri,&
         js = Is(j)
         X(js) = Temp(js) + yj
         xnorm = MAX(xnorm,ABS(X(js)))
-      ENDDO
+      END DO
       !
       !
       !     PRINT INTERMEDIATE SOLUTION ITERATES AND RESIDUAL NORM IF DESIRED
@@ -314,7 +314,7 @@ SUBROUTINE SOSEQS(FNC,N,S,Rtolx,Atolx,Tolf,Iflag,Mxit,Ncjs,Nsrrc,Nsri,&
         WRITE (loun,99001) Fmax, mm, (X(j),j=1,N)
         99001 FORMAT ('0RESIDUAL NORM =',E9.2,/1X,'SOLUTION ITERATE',' (',I3,')',&
           /(1X,5E26.14))
-      ENDIF
+      END IF
       !
       !     TEST FOR CONVERGENCE TO A SOLUTION (RELATIVE AND/OR ABSOLUTE ERROR
       !     COMPARISON ON SUCCESSIVE APPROXIMATIONS OF EACH SOLUTION VARIABLE)
@@ -322,15 +322,15 @@ SUBROUTINE SOSEQS(FNC,N,S,Rtolx,Atolx,Tolf,Iflag,Mxit,Ncjs,Nsrrc,Nsri,&
       DO j = 1, N
         js = Is(j)
         IF ( ABS(Y(j))>re*ABS(X(js))+Atolx ) GOTO 100
-      ENDDO
+      END DO
       IF ( Fmax<=fmxs ) Iflag = 1
       EXIT
       50 CONTINUE
-    ENDDO
+    END DO
     !
     !     TEST FOR CONVERGENCE TO A SOLUTION BASED ON RESIDUALS
     !
-    100    IF ( Fmax<=Tolf ) Iflag = Iflag + 2
+    100  IF ( Fmax<=Tolf ) Iflag = Iflag + 2
     IF ( Iflag>0 ) GOTO 200
     !
     !
@@ -346,9 +346,9 @@ SUBROUTINE SOSEQS(FNC,N,S,Rtolx,Atolx,Tolf,Iflag,Mxit,Ncjs,Nsrrc,Nsri,&
         fmin = Fmax
         DO j = 1, N
           S(j) = X(j)
-        ENDDO
+        END DO
         ic = 0
-      ENDIF
+      END IF
       !
       !     TEST FOR LIMITING PRECISION CONVERGENCE.  VERY SLOWLY CONVERGENT
       !     PROBLEMS MAY ALSO BE DETECTED.
@@ -364,10 +364,10 @@ SUBROUTINE SOSEQS(FNC,N,S,Rtolx,Atolx,Tolf,Iflag,Mxit,Ncjs,Nsrrc,Nsri,&
               Iflag = 4
               Fmax = fmin
               GOTO 400
-            ENDIF
-          ENDIF
-        ENDIF
-      ENDIF
+            END IF
+          END IF
+        END IF
+      END IF
       icr = 0
       !
       !     TEST FOR DIVERGENCE OF THE ITERATIVE SCHEME.
@@ -379,16 +379,16 @@ SUBROUTINE SOSEQS(FNC,N,S,Rtolx,Atolx,Tolf,Iflag,Mxit,Ncjs,Nsrrc,Nsri,&
         IF ( ic>=Nsri ) THEN
           Iflag = 7
           GOTO 200
-        ENDIF
-      ENDIF
+        END IF
+      END IF
     ELSE
       fmin = Fmax
-    ENDIF
+    END IF
     !
     !     CHECK TO SEE IF NEXT ITERATION CAN USE THE OLD JACOBIAN
     !     FACTORIZATION
     !
-    150    itry = itry - 1
+    150  itry = itry - 1
     IF ( itry==0 ) THEN
       itry = Ncjs
     ELSEIF ( 20.*ynorm>xnorm ) THEN
@@ -397,23 +397,23 @@ SUBROUTINE SOSEQS(FNC,N,S,Rtolx,Atolx,Tolf,Iflag,Mxit,Ncjs,Nsrrc,Nsri,&
       itry = Ncjs
     ELSEIF ( Fmax>=2.*fmxs ) THEN
       itry = Ncjs
-    ENDIF
+    END IF
     !
     !     SAVE THE CURRENT SOLUTION APPROXIMATION AND THE RESIDUAL AND
     !     SOLUTION INCREMENT NORMS FOR USE IN THE NEXT ITERATION.
     !
     DO j = 1, N
       Temp(j) = X(j)
-    ENDDO
+    END DO
     IF ( m==mit ) THEN
       fn2 = Fmax
       yn3 = ynorm
-    ENDIF
+    END IF
     fmxs = Fmax
     yns = ynorm
     !
     !
-  ENDDO
+  END DO
   !
   !    *****************************************
   !    **** END OF PRINCIPAL ITERATION LOOP ****
@@ -431,7 +431,7 @@ SUBROUTINE SOSEQS(FNC,N,S,Rtolx,Atolx,Tolf,Iflag,Mxit,Ncjs,Nsrrc,Nsri,&
   200 CONTINUE
   DO j = 1, N
     S(j) = X(j)
-  ENDDO
+  END DO
   GOTO 400
   !
   !
@@ -440,7 +440,7 @@ SUBROUTINE SOSEQS(FNC,N,S,Rtolx,Atolx,Tolf,Iflag,Mxit,Ncjs,Nsrrc,Nsri,&
   IFlag = 8
   DO j = 1, N
     S(j) = Temp(j)
-  ENDDO
+  END DO
   !
   !
   400  Mxit = m

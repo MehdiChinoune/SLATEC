@@ -26,7 +26,7 @@ SUBROUTINE CMPOSP(M,N,A,Bb,C,Q,Idimq,B,B2,B3,W,W2,W3,D,Tcos,P)
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
-  
+
   INTEGER i, Idimq, ipstor, j, lh, M, mr, N, nr, nrm1, nrmj, nrpj
   COMPLEX A(*), Bb(*), C(*), Q(Idimq,*), B(*), B2(*), B3(*), W(*), W2(*), &
     W3(*), D(*), Tcos(*), P(*), s, t
@@ -45,11 +45,11 @@ SUBROUTINE CMPOSP(M,N,A,Bb,C,Q,Idimq,B,B2,B3,W,W2,W3,D,Tcos,P)
         t = Q(i,j) + Q(i,nrpj)
         Q(i,j) = s
         Q(i,nrpj) = t
-      ENDDO
-    ENDDO
+      END DO
+    END DO
     DO i = 1, mr
       Q(i,nr) = 2.*Q(i,nr)
-    ENDDO
+    END DO
     lh = nrm1/2
     DO j = 1, lh
       nrmj = nr - j
@@ -57,8 +57,8 @@ SUBROUTINE CMPOSP(M,N,A,Bb,C,Q,Idimq,B,B2,B3,W,W2,W3,D,Tcos,P)
         s = Q(i,j)
         Q(i,j) = Q(i,nrmj)
         Q(i,nrmj) = s
-      ENDDO
-    ENDDO
+      END DO
+    END DO
     CALL CMPOSD(mr,nrm1,2,A,Bb,C,Q,Idimq,B,W,D,Tcos,P)
     ipstor = INT(W(1))
     CALL CMPOSN(mr,nr,2,1,A,Bb,C,Q(1,nr),Idimq,B,B2,B3,W,W2,W3,D,Tcos,P)
@@ -70,19 +70,19 @@ SUBROUTINE CMPOSP(M,N,A,Bb,C,Q,Idimq,B,B2,B3,W,W2,W3,D,Tcos,P)
         t = .5*(Q(i,nrpj)-Q(i,j))
         Q(i,nrpj) = t
         Q(i,j) = s
-      ENDDO
-    ENDDO
+      END DO
+    END DO
     DO i = 1, mr
       Q(i,nr) = .5*Q(i,nr)
-    ENDDO
+    END DO
     DO j = 1, lh
       nrmj = nr - j
       DO i = 1, mr
         s = Q(i,j)
         Q(i,j) = Q(i,nrmj)
         Q(i,nrmj) = s
-      ENDDO
-    ENDDO
+      END DO
+    END DO
   ELSE
     !
     !     EVEN NUMBER OF UNKNOWNS
@@ -95,12 +95,12 @@ SUBROUTINE CMPOSP(M,N,A,Bb,C,Q,Idimq,B,B2,B3,W,W2,W3,D,Tcos,P)
         t = Q(i,nrmj) + Q(i,nrpj)
         Q(i,nrmj) = s
         Q(i,nrpj) = t
-      ENDDO
-    ENDDO
+      END DO
+    END DO
     DO i = 1, mr
       Q(i,nr) = 2.*Q(i,nr)
       Q(i,N) = 2.*Q(i,N)
-    ENDDO
+    END DO
     CALL CMPOSD(mr,nrm1,1,A,Bb,C,Q,Idimq,B,W,D,Tcos,P)
     ipstor = INT(W(1))
     CALL CMPOSN(mr,nr+1,1,1,A,Bb,C,Q(1,nr),Idimq,B,B2,B3,W,W2,W3,D,Tcos,P)
@@ -113,13 +113,13 @@ SUBROUTINE CMPOSP(M,N,A,Bb,C,Q,Idimq,B,B2,B3,W,W2,W3,D,Tcos,P)
         t = .5*(Q(i,nrpj)-Q(i,nrmj))
         Q(i,nrmj) = s
         Q(i,nrpj) = t
-      ENDDO
-    ENDDO
+      END DO
+    END DO
     DO i = 1, mr
       Q(i,nr) = .5*Q(i,nr)
       Q(i,N) = .5*Q(i,N)
-    ENDDO
-  ENDIF
+    END DO
+  END IF
   !
   !     RETURN STORAGE REQUIREMENTS FOR P VECTORS.
   !

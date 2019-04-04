@@ -81,7 +81,7 @@ SUBROUTINE MPBLAS(I1)
       'Array space not sufficient for Quad Precision 2x Double Precision, Proceeding.',1,1)
     MPT = 26
     MPMxr = 30
-  ENDIF
+  END IF
   !                  EXPONENT RANGE
   MPM = MIN(32767,I1MACH(9)/4-1)
 END SUBROUTINE MPBLAS

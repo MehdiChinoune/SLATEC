@@ -41,7 +41,7 @@ CONTAINS
       i = 7
       ic = 0
       Reset = .FALSE.
-    ENDIF
+    END IF
     !
     !     The sequence of values of I is bounded between 1 and 999.
     !     If initial I = 1,2,3,6,7 or 9, the period will be 50.
@@ -56,10 +56,10 @@ CONTAINS
       IF ( ic>=5 ) THEN
         ic = 0
         CYCLE
-      ENDIF
+      END IF
       DBEG = REAL(i-500, 8)/1001.0D0
       EXIT
-    ENDDO
+    END DO
     !
     !     End of DBEG.
     !
@@ -153,14 +153,14 @@ CONTAINS
       WRITE (Nout,FMT=99007) (bet(i),i=1,NBET)
       IF ( .NOT.tsterr ) WRITE (Nout,FMT=99010)
       WRITE (Nout,FMT=99001) thresh
-    ENDIF
+    END IF
     !
     !     Set names of subroutines and flags which indicate
     !     whether they are to be tested.
     !
     DO i = 1, NSUBS
       ltest(i) = .TRUE.
-    ENDDO
+    END DO
     !
     !     Set EPS (the machine precision).
     !
@@ -172,13 +172,13 @@ CONTAINS
     DO j = 1, n
       DO i = 1, n
         a(i,j) = MAX(i-j+1,0)
-      ENDDO
+      END DO
       x(j) = j
       y(j) = ZERO
-    ENDDO
+    END DO
     DO j = 1, n
       yy(j) = j*((j+1)*j)/2 - ((j+1)*j*(j-1))/3
-    ENDDO
+    END DO
     !     YY holds the exact result. On exit from DMVCH YT holds
     !     the result computed by DMVCH.
     trans = 'N'
@@ -189,7 +189,7 @@ CONTAINS
     IF ( .NOT.same.OR.err/=ZERO ) THEN
       Ipass = 0
       IF ( Kprint>=2 ) WRITE (Nout,FMT=99008) trans, same, err
-    ENDIF
+    END IF
     trans = 'T'
     ftl = .FALSE.
     CALL DMVCH(trans,n,n,ONE,a,NMAX,x,-1,ZERO,y,-1,yt,g,yy,eps,err,ftl,Nout,&
@@ -198,7 +198,7 @@ CONTAINS
     IF ( .NOT.same.OR.err/=ZERO ) THEN
       Ipass = 0
       IF ( Kprint>=2 ) WRITE (Nout,FMT=99008) trans, same, err
-    ENDIF
+    END IF
     !
     !     Test each subroutine in turn.
     !
@@ -244,8 +244,8 @@ CONTAINS
         END SELECT
         !
         IF ( ftl1.OR.ftl2 ) Ipass = 0
-      ENDIF
-    ENDDO
+      END IF
+    END DO
     RETURN
     !
     99001 FORMAT (' ROUTINES PASS COMPUTATIONAL TESTS IF TEST RATIO IS LES',&
@@ -351,14 +351,14 @@ CONTAINS
       WRITE (Nout,FMT=99005) (bet(i),i=1,NBET)
       IF ( .NOT.tsterr ) WRITE (Nout,FMT=99008)
       WRITE (Nout,FMT=99001) thresh
-    ENDIF
+    END IF
     !
     !     Set names of subroutines and flags which indicate
     !     whether they are to be tested.
     !
     DO i = 1, NSUBS
       ltest(i) = .TRUE.
-    ENDDO
+    END DO
     !
     !     Set EPS (the machine precision).
     !
@@ -370,14 +370,14 @@ CONTAINS
     DO j = 1, n
       DO i = 1, n
         ab(i,j) = MAX(i-j+1,0)
-      ENDDO
+      END DO
       ab(j,NMAX+1) = j
       ab(1,NMAX+j) = j
       c(j,1) = ZERO
-    ENDDO
+    END DO
     DO j = 1, n
       cc(j) = j*((j+1)*j)/2 - ((j+1)*j*(j-1))/3
-    ENDDO
+    END DO
     !     CC holds the exact result. On exit from DMMCH CT holds
     !     the result computed by DMMCH.
     transa = 'N'
@@ -389,7 +389,7 @@ CONTAINS
     IF ( .NOT.same.OR.err/=ZERO ) THEN
       Ipass = 0
       IF ( Kprint>=2 ) WRITE (Nout,FMT=99006) transa, transb, same, err
-    ENDIF
+    END IF
     transb = 'T'
     ftl = .FALSE.
     CALL DMMCH(transa,transb,n,1,n,ONE,ab,NMAX,ab(1,NMAX+1),NMAX,ZERO,c,NMAX,&
@@ -398,14 +398,14 @@ CONTAINS
     IF ( .NOT.same.OR.err/=ZERO ) THEN
       Ipass = 0
       IF ( Kprint>=2 ) WRITE (Nout,FMT=99006) transa, transb, same, err
-    ENDIF
+    END IF
     DO j = 1, n
       ab(j,NMAX+1) = n - j + 1
       ab(1,NMAX+j) = n - j + 1
-    ENDDO
+    END DO
     DO j = 1, n
       cc(n-j+1) = j*((j+1)*j)/2 - ((j+1)*j*(j-1))/3
-    ENDDO
+    END DO
     transa = 'T'
     transb = 'N'
     ftl = .FALSE.
@@ -415,7 +415,7 @@ CONTAINS
     IF ( .NOT.same.OR.err/=ZERO ) THEN
       Ipass = 0
       IF ( Kprint>=2 ) WRITE (Nout,FMT=99006) transa, transb, same, err
-    ENDIF
+    END IF
     transb = 'T'
     ftl = .FALSE.
     CALL DMMCH(transa,transb,n,1,n,ONE,ab,NMAX,ab(1,NMAX+1),NMAX,ZERO,c,NMAX,&
@@ -424,7 +424,7 @@ CONTAINS
     IF ( .NOT.same.OR.err/=ZERO ) THEN
       Ipass = 0
       IF ( Kprint>=2 ) WRITE (Nout,FMT=99006) transa, transb, same, err
-    ENDIF
+    END IF
     !
     !     Test each subroutine in turn.
     !
@@ -463,8 +463,8 @@ CONTAINS
         END SELECT
         !
         IF ( ftl1.OR.ftl2 ) Ipass = 0
-      ENDIF
-    ENDDO
+      END IF
+    END DO
     RETURN
     !
     99001 FORMAT (' ROUTINES PASS COMPUTATIONAL TESTS IF TEST RATIO IS LES',&
@@ -549,19 +549,19 @@ CONTAINS
             A(i,j) = DBEG(Reset) + Transl
           ELSE
             A(i,j) = ZERO
-          ENDIF
+          END IF
           IF ( i/=j ) THEN
             IF ( sym ) THEN
               A(j,i) = A(i,j)
             ELSEIF ( tri ) THEN
               A(j,i) = ZERO
-            ENDIF
-          ENDIF
-        ENDIF
-      ENDDO
+            END IF
+          END IF
+        END IF
+      END DO
       IF ( tri ) A(j,j) = A(j,j) + ONE
       IF ( unit ) A(j,j) = ONE
-    ENDDO
+    END DO
     !
     !     Store elements in array AS in data structure required by routine.
     !
@@ -569,23 +569,23 @@ CONTAINS
       DO j = 1, N
         DO i = 1, M
           Aa(i+(j-1)*Lda) = A(i,j)
-        ENDDO
+        END DO
         DO i = M + 1, Lda
           Aa(i+(j-1)*Lda) = ROGUE
-        ENDDO
-      ENDDO
+        END DO
+      END DO
     ELSEIF ( Type=='GB' ) THEN
       DO j = 1, N
         DO i1 = 1, Ku + 1 - j
           Aa(i1+(j-1)*Lda) = ROGUE
-        ENDDO
+        END DO
         DO i2 = i1, MIN(Kl+Ku+1,Ku+1+M-j)
           Aa(i2+(j-1)*Lda) = A(i2+j-Ku-1,j)
-        ENDDO
+        END DO
         DO i3 = i2, Lda
           Aa(i3+(j-1)*Lda) = ROGUE
-        ENDDO
-      ENDDO
+        END DO
+      END DO
     ELSEIF ( Type=='SY'.OR.Type=='TR' ) THEN
       DO j = 1, N
         IF ( upper ) THEN
@@ -594,25 +594,25 @@ CONTAINS
             iend = j - 1
           ELSE
             iend = j
-          ENDIF
+          END IF
         ELSE
           IF ( unit ) THEN
             ibeg = j + 1
           ELSE
             ibeg = j
-          ENDIF
+          END IF
           iend = N
-        ENDIF
+        END IF
         DO i = 1, ibeg - 1
           Aa(i+(j-1)*Lda) = ROGUE
-        ENDDO
+        END DO
         DO i = ibeg, iend
           Aa(i+(j-1)*Lda) = A(i,j)
-        ENDDO
+        END DO
         DO i = iend + 1, Lda
           Aa(i+(j-1)*Lda) = ROGUE
-        ENDDO
-      ENDDO
+        END DO
+      END DO
     ELSEIF ( Type=='SB'.OR.Type=='TB' ) THEN
       DO j = 1, N
         IF ( upper ) THEN
@@ -622,26 +622,26 @@ CONTAINS
             iend = Kl
           ELSE
             iend = Kl + 1
-          ENDIF
+          END IF
         ELSE
           kk = 1
           IF ( unit ) THEN
             ibeg = 2
           ELSE
             ibeg = 1
-          ENDIF
+          END IF
           iend = MIN(Kl+1,1+M-j)
-        ENDIF
+        END IF
         DO i = 1, ibeg - 1
           Aa(i+(j-1)*Lda) = ROGUE
-        ENDDO
+        END DO
         DO i = ibeg, iend
           Aa(i+(j-1)*Lda) = A(i+j-kk,j)
-        ENDDO
+        END DO
         DO i = iend + 1, Lda
           Aa(i+(j-1)*Lda) = ROGUE
-        ENDDO
-      ENDDO
+        END DO
+      END DO
     ELSEIF ( Type=='SP'.OR.Type=='TP' ) THEN
       ioff = 0
       DO j = 1, N
@@ -651,16 +651,16 @@ CONTAINS
         ELSE
           ibeg = j
           iend = N
-        ENDIF
+        END IF
         DO i = ibeg, iend
           ioff = ioff + 1
           Aa(ioff) = A(i,j)
           IF ( i==j ) THEN
             IF ( unit ) Aa(ioff) = ROGUE
-          ENDIF
-        ENDDO
-      ENDDO
-    ENDIF
+          END IF
+        END DO
+      END DO
+    END IF
     !
     !     End of DMAKE2.
     !
@@ -735,13 +735,13 @@ CONTAINS
               A(j,i) = A(i,j)
             ELSEIF ( tri ) THEN
               A(j,i) = ZERO
-            ENDIF
-          ENDIF
-        ENDIF
-      ENDDO
+            END IF
+          END IF
+        END IF
+      END DO
       IF ( tri ) A(j,j) = A(j,j) + ONE
       IF ( unit ) A(j,j) = ONE
-    ENDDO
+    END DO
     !
     !     Store elements in array AS in data structure required by routine.
     !
@@ -749,11 +749,11 @@ CONTAINS
       DO j = 1, N
         DO i = 1, M
           Aa(i+(j-1)*Lda) = A(i,j)
-        ENDDO
+        END DO
         DO i = M + 1, Lda
           Aa(i+(j-1)*Lda) = ROGUE
-        ENDDO
-      ENDDO
+        END DO
+      END DO
     ELSEIF ( Type=='SY'.OR.Type=='TR' ) THEN
       DO j = 1, N
         IF ( upper ) THEN
@@ -762,26 +762,26 @@ CONTAINS
             iend = j - 1
           ELSE
             iend = j
-          ENDIF
+          END IF
         ELSE
           IF ( unit ) THEN
             ibeg = j + 1
           ELSE
             ibeg = j
-          ENDIF
+          END IF
           iend = N
-        ENDIF
+        END IF
         DO i = 1, ibeg - 1
           Aa(i+(j-1)*Lda) = ROGUE
-        ENDDO
+        END DO
         DO i = ibeg, iend
           Aa(i+(j-1)*Lda) = A(i,j)
-        ENDDO
+        END DO
         DO i = iend + 1, Lda
           Aa(i+(j-1)*Lda) = ROGUE
-        ENDDO
-      ENDDO
-    ENDIF
+        END DO
+      END DO
+    END IF
     !
     !     End of DMAKE3.
     !
@@ -844,40 +844,40 @@ CONTAINS
       DO i = 1, M
         Ct(i) = ZERO
         G(i) = ZERO
-      ENDDO
+      END DO
       IF ( .NOT.trana.AND..NOT.tranb ) THEN
         DO k = 1, Kk
           DO i = 1, M
             Ct(i) = Ct(i) + A(i,k)*B(k,j)
             G(i) = G(i) + ABS(A(i,k))*ABS(B(k,j))
-          ENDDO
-        ENDDO
+          END DO
+        END DO
       ELSEIF ( trana.AND..NOT.tranb ) THEN
         DO k = 1, Kk
           DO i = 1, M
             Ct(i) = Ct(i) + A(k,i)*B(k,j)
             G(i) = G(i) + ABS(A(k,i))*ABS(B(k,j))
-          ENDDO
-        ENDDO
+          END DO
+        END DO
       ELSEIF ( .NOT.trana.AND.tranb ) THEN
         DO k = 1, Kk
           DO i = 1, M
             Ct(i) = Ct(i) + A(i,k)*B(j,k)
             G(i) = G(i) + ABS(A(i,k))*ABS(B(j,k))
-          ENDDO
-        ENDDO
+          END DO
+        END DO
       ELSEIF ( trana.AND.tranb ) THEN
         DO k = 1, Kk
           DO i = 1, M
             Ct(i) = Ct(i) + A(k,i)*B(j,k)
             G(i) = G(i) + ABS(A(k,i))*ABS(B(j,k))
-          ENDDO
-        ENDDO
-      ENDIF
+          END DO
+        END DO
+      END IF
       DO i = 1, M
         Ct(i) = Alpha*Ct(i) + Beta*C(i,j)
         G(i) = ABS(Alpha)*G(i) + ABS(Beta)*ABS(C(i,j))
-      ENDDO
+      END DO
       !
       !        Compute the error ratio for this result.
       !
@@ -895,12 +895,12 @@ CONTAINS
                 WRITE (Nout,FMT=99002) k, Ct(k), Cc(k,j)
               ELSE
                 WRITE (Nout,FMT=99002) k, Cc(k,j), Ct(k)
-              ENDIF
-            ENDDO
-          ENDIF
-        ENDIF
-      ENDDO
-    ENDDO
+              END IF
+            END DO
+          END IF
+        END IF
+      END DO
+    END DO
     RETURN
     !
     99001 FORMAT (' ******* FATAL ERROR - COMPUTED RESULT IS LESS THAN HAL',&
@@ -960,21 +960,21 @@ CONTAINS
     ELSE
       ml = M
       nl = N
-    ENDIF
+    END IF
     IF ( Incx<0 ) THEN
       kx = nl
       incxl = -1
     ELSE
       kx = 1
       incxl = 1
-    ENDIF
+    END IF
     IF ( Incy<0 ) THEN
       ky = ml
       incyl = -1
     ELSE
       ky = 1
       incyl = 1
-    ENDIF
+    END IF
     !
     !     Compute expected result in YT using data in A, X and Y.
     !     Compute gauges in G.
@@ -989,18 +989,18 @@ CONTAINS
           Yt(iy) = Yt(iy) + A(j,i)*X(jx)
           G(iy) = G(iy) + ABS(A(j,i)*X(jx))
           jx = jx + incxl
-        ENDDO
+        END DO
       ELSE
         DO j = 1, nl
           Yt(iy) = Yt(iy) + A(i,j)*X(jx)
           G(iy) = G(iy) + ABS(A(i,j)*X(jx))
           jx = jx + incxl
-        ENDDO
-      ENDIF
+        END DO
+      END IF
       Yt(iy) = Alpha*Yt(iy) + Beta*Y(iy)
       G(iy) = ABS(Alpha)*G(iy) + ABS(Beta*Y(iy))
       iy = iy + incyl
-    ENDDO
+    END DO
     !
     !     Compute the error ratio for this result.
     !
@@ -1018,11 +1018,11 @@ CONTAINS
               WRITE (Nout,FMT=99002) k, Yt(k), Yy(1+(k-1)*ABS(Incy))
             ELSE
               WRITE (Nout,FMT=99002) k, Yy(1+(k-1)*ABS(Incy)), Yt(k)
-            ENDIF
-          ENDDO
-        ENDIF
-      ENDIF
-    ENDDO
+            END IF
+          END DO
+        END IF
+      END IF
+    END DO
     RETURN
     !
     99001 FORMAT (' ******* FATAL ERROR - COMPUTED RESULT IS LESS THAN HAL',&
@@ -1070,8 +1070,8 @@ CONTAINS
       IF ( Ri(i)/=Rj(i) ) THEN
         LDE = .FALSE.
         EXIT
-      ENDIF
-    ENDDO
+      END IF
+    END DO
     !
     !     End of LDE.
     !
@@ -1119,8 +1119,8 @@ CONTAINS
       DO j = 1, N
         DO i = M + 1, Lda
           IF ( Aa(i,j)/=As(i,j) ) GOTO 100
-        ENDDO
-      ENDDO
+        END DO
+      END DO
     ELSEIF ( Type=='SY' ) THEN
       DO j = 1, N
         IF ( upper ) THEN
@@ -1129,15 +1129,15 @@ CONTAINS
         ELSE
           ibeg = j
           iend = N
-        ENDIF
+        END IF
         DO i = 1, ibeg - 1
           IF ( Aa(i,j)/=As(i,j) ) GOTO 100
-        ENDDO
+        END DO
         DO i = iend + 1, Lda
           IF ( Aa(i,j)/=As(i,j) ) GOTO 100
-        ENDDO
-      ENDDO
-    ENDIF
+        END DO
+      END DO
+    END IF
     !
     LDERES = .TRUE.
     RETURN
@@ -1213,7 +1213,7 @@ CONTAINS
       nargs = 11
     ELSEIF ( banded ) THEN
       nargs = 13
-    ENDIF
+    END IF
     !
     nc = 0
     reset = .TRUE.
@@ -1231,7 +1231,7 @@ CONTAINS
           nk = Nkb
         ELSE
           nk = 1
-        ENDIF
+        END IF
         DO iku = 1, nk
           IF ( banded ) THEN
             ku = Kb(iku)
@@ -1239,13 +1239,13 @@ CONTAINS
           ELSE
             ku = n - 1
             kl = m - 1
-          ENDIF
+          END IF
           !              Set LDA to 1 more than minimum value if room.
           IF ( banded ) THEN
             lda = kl + ku + 1
           ELSE
             lda = m
-          ENDIF
+          END IF
           IF ( lda<Nmax ) lda = lda + 1
           !              Skip tests if not enough room.
           IF ( lda<=Nmax ) THEN
@@ -1267,7 +1267,7 @@ CONTAINS
               ELSE
                 ml = m
                 nl = n
-              ENDIF
+              END IF
               !
               DO ix = 1, Ninc
                 incx = Inc(ix)
@@ -1281,7 +1281,7 @@ CONTAINS
                 IF ( nl>1 ) THEN
                   X(nl/2) = ZERO
                   Xx(1+ABS(incx)*(nl/2-1)) = ZERO
-                ENDIF
+                END IF
                 !
                 DO iy = 1, Ninc
                   incy = Inc(iy)
@@ -1312,16 +1312,16 @@ CONTAINS
                       als = alpha
                       DO i = 1, laa
                         As(i) = Aa(i)
-                      ENDDO
+                      END DO
                       ldas = lda
                       DO i = 1, lx
                         Xs(i) = Xx(i)
-                      ENDDO
+                      END DO
                       incxs = incx
                       bls = beta
                       DO i = 1, ly
                         Ys(i) = Yy(i)
-                      ENDDO
+                      END DO
                       incys = incy
                       !
                       !                             Call the subroutine.
@@ -1331,14 +1331,14 @@ CONTAINS
                       ELSEIF ( banded ) THEN
                         CALL DGBMV(trans,m,n,kl,ku,alpha,Aa,lda,Xx,incx,beta,&
                           Yy,incy)
-                      ENDIF
+                      END IF
                       !
                       !                             Check if error-exit was taken incorrectly.
                       !
                       IF ( NUMXER(nerr)/=0 ) THEN
                         IF ( Kprint>=2 ) WRITE (Nout,FMT=99007)
                         Fatal = .TRUE.
-                      ENDIF
+                      END IF
                       !
                       !                             See what data changed inside subroutines.
                       !
@@ -1356,7 +1356,7 @@ CONTAINS
                           isame(10) = LDE(Ys,Yy,ly)
                         ELSE
                           isame(10) = LDERES('GE',' ',1,ml,Ys,Yy,ABS(incy))
-                        ENDIF
+                        END IF
                         isame(11) = incys==incy
                       ELSEIF ( banded ) THEN
                         isame(4) = kls==kl
@@ -1371,9 +1371,9 @@ CONTAINS
                           isame(12) = LDE(Ys,Yy,ly)
                         ELSE
                           isame(12) = LDERES('GE',' ',1,ml,Ys,Yy,ABS(incy))
-                        ENDIF
+                        END IF
                         isame(13) = incys==incy
-                      ENDIF
+                      END IF
                       !
                       !                             If data was incorrectly changed, report
                       !                             and return.
@@ -1382,8 +1382,8 @@ CONTAINS
                         IF ( .NOT.isame(i) ) THEN
                           Fatal = .TRUE.
                           IF ( Kprint>=2 ) WRITE (Nout,FMT=99002) i
-                        ENDIF
-                      ENDDO
+                        END IF
+                      END DO
                       !
                       ftl = .FALSE.
                       IF ( .NOT.null ) THEN
@@ -1393,7 +1393,7 @@ CONTAINS
                         CALL DMVCH(trans,m,n,alpha,A,Nmax,X,incx,beta,Y,incy,&
                           Yt,G,Yy,Eps,err,ftl,Nout,.TRUE.,Kprint)
                         errmax = MAX(errmax,err)
-                      ENDIF
+                      END IF
                       IF ( ftl ) THEN
                         Fatal = .TRUE.
                         IF ( Kprint>=3 ) THEN
@@ -1404,26 +1404,26 @@ CONTAINS
                           ELSEIF ( banded ) THEN
                             WRITE (Nout,FMT=99005) nc, Sname, trans, m, &
                               n, kl, ku, alpha, lda, incx, beta, incy
-                          ENDIF
-                        ENDIF
-                      ENDIF
+                          END IF
+                        END IF
+                      END IF
                       !
-                    ENDDO
+                    END DO
                     !
-                  ENDDO
+                  END DO
                   !
-                ENDDO
+                END DO
                 !
-              ENDDO
+              END DO
               !
-            ENDDO
-          ENDIF
+            END DO
+          END IF
           !
-        ENDDO
+        END DO
         !
-      ENDDO
+      END DO
       !
-    ENDDO
+    END DO
     !
     !     Report result.
     !
@@ -1433,9 +1433,9 @@ CONTAINS
           WRITE (Nout,FMT=99001) Sname, nc
         ELSE
           WRITE (Nout,FMT=99003) Sname, nc, errmax
-        ENDIF
-      ENDIF
-    ENDIF
+        END IF
+      END IF
+    END IF
     RETURN
     !
     99001 FORMAT (' ',A6,' PASSED THE COMPUTATIONAL TESTS (',I6,' CALL','S)')
@@ -1546,7 +1546,7 @@ CONTAINS
               ELSE
                 ma = m
                 na = k
-              ENDIF
+              END IF
               !                 Set LDA to 1 more than minimum value if room.
               lda = ma
               IF ( lda<Nmax ) lda = lda + 1
@@ -1568,7 +1568,7 @@ CONTAINS
                   ELSE
                     mb = k
                     nb = n
-                  ENDIF
+                  END IF
                   !                    Set LDB to 1 more than minimum value if room.
                   ldb = mb
                   IF ( ldb<Nmax ) ldb = ldb + 1
@@ -1603,16 +1603,16 @@ CONTAINS
                         als = alpha
                         DO i = 1, laa
                           As(i) = Aa(i)
-                        ENDDO
+                        END DO
                         ldas = lda
                         DO i = 1, lbb
                           Bs(i) = Bb(i)
-                        ENDDO
+                        END DO
                         ldbs = ldb
                         bls = beta
                         DO i = 1, lcc
                           Cs(i) = Cc(i)
-                        ENDDO
+                        END DO
                         ldcs = ldc
                         !
                         !                          Call the subroutine.
@@ -1625,7 +1625,7 @@ CONTAINS
                         IF ( NUMXER(nerr)/=0 ) THEN
                           IF ( Kprint>=2 ) WRITE (Nout,FMT=99006)
                           Fatal = .TRUE.
-                        ENDIF
+                        END IF
                         !
                         !                          See what data changed inside subroutines.
                         !
@@ -1644,7 +1644,7 @@ CONTAINS
                           isame(12) = LDE(Cs,Cc,lcc)
                         ELSE
                           isame(12) = LDERES('GE',' ',m,n,Cs,Cc,ldc)
-                        ENDIF
+                        END IF
                         isame(13) = ldcs==ldc
                         !
                         !                          If data was incorrectly changed, report
@@ -1654,8 +1654,8 @@ CONTAINS
                           IF ( .NOT.isame(i) ) THEN
                             Fatal = .TRUE.
                             IF ( Kprint>=2 ) WRITE (Nout,FMT=99002) i
-                          ENDIF
-                        ENDDO
+                          END IF
+                        END DO
                         !
                         ftl = .FALSE.
                         IF ( .NOT.null ) THEN
@@ -1665,32 +1665,32 @@ CONTAINS
                           CALL DMMCH(transa,transb,m,n,k,alpha,A,Nmax,B,Nmax,&
                             beta,C,Nmax,Ct,G,Cc,ldc,Eps,err,ftl,Nout,.TRUE.,Kprint)
                           errmax = MAX(errmax,err)
-                        ENDIF
+                        END IF
                         IF ( ftl ) THEN
                           Fatal = .TRUE.
                           IF ( Kprint>=3 ) THEN
                             WRITE (Nout,FMT=99004) Sname
                             WRITE (Nout,FMT=99005) nc, Sname, transa, &
                               transb, m, n, k, alpha, lda, ldb, beta, ldc
-                          ENDIF
-                        ENDIF
+                          END IF
+                        END IF
                         !
-                      ENDDO
+                      END DO
                       !
-                    ENDDO
-                  ENDIF
+                    END DO
+                  END IF
                   !
-                ENDDO
-              ENDIF
+                END DO
+              END IF
               !
-            ENDDO
+            END DO
             !
-          ENDDO
-        ENDIF
+          END DO
+        END IF
         !
-      ENDDO
+      END DO
       !
-    ENDDO
+    END DO
     !
     !     Report result.
     !
@@ -1700,9 +1700,9 @@ CONTAINS
           WRITE (Nout,FMT=99001) Sname, nc
         ELSE
           WRITE (Nout,FMT=99003) Sname, nc, errmax
-        ENDIF
-      ENDIF
-    ENDIF
+        END IF
+      END IF
+    END IF
     RETURN
     !
     99001 FORMAT (' ',A6,' PASSED THE COMPUTATIONAL TESTS (',I6,' CALL','S)')
@@ -1788,7 +1788,7 @@ CONTAINS
       nargs = 11
     ELSEIF ( packed ) THEN
       nargs = 9
-    ENDIF
+    END IF
     !
     nc = 0
     reset = .TRUE.
@@ -1801,19 +1801,19 @@ CONTAINS
         nk = Nkb
       ELSE
         nk = 1
-      ENDIF
+      END IF
       DO ik = 1, nk
         IF ( banded ) THEN
           k = Kb(ik)
         ELSE
           k = n - 1
-        ENDIF
+        END IF
         !           Set LDA to 1 more than minimum value if room.
         IF ( banded ) THEN
           lda = k + 1
         ELSE
           lda = n
-        ENDIF
+        END IF
         IF ( lda<Nmax ) lda = lda + 1
         !           Skip tests if not enough room.
         IF ( lda<=Nmax ) THEN
@@ -1821,7 +1821,7 @@ CONTAINS
             laa = (n*(n+1))/2
           ELSE
             laa = lda*n
-          ENDIF
+          END IF
           null = n<=0
           !
           DO ic = 1, 2
@@ -1843,7 +1843,7 @@ CONTAINS
               IF ( n>1 ) THEN
                 X(n/2) = ZERO
                 Xx(1+ABS(incx)*(n/2-1)) = ZERO
-              ENDIF
+              END IF
               !
               DO iy = 1, Ninc
                 incy = Inc(iy)
@@ -1872,16 +1872,16 @@ CONTAINS
                     als = alpha
                     DO i = 1, laa
                       As(i) = Aa(i)
-                    ENDDO
+                    END DO
                     ldas = lda
                     DO i = 1, lx
                       Xs(i) = Xx(i)
-                    ENDDO
+                    END DO
                     incxs = incx
                     bls = beta
                     DO i = 1, ly
                       Ys(i) = Yy(i)
-                    ENDDO
+                    END DO
                     incys = incy
                     !
                     !                          Call the subroutine.
@@ -1892,14 +1892,14 @@ CONTAINS
                       CALL DSBMV(uplo,n,k,alpha,Aa,lda,Xx,incx,beta,Yy,incy)
                     ELSEIF ( packed ) THEN
                       CALL DSPMV(uplo,n,alpha,Aa,Xx,incx,beta,Yy,incy)
-                    ENDIF
+                    END IF
                     !
                     !                          Check if error-exit was taken incorrectly.
                     !
                     IF ( NUMXER(nerr)/=0 ) THEN
                       IF ( Kprint>=2 ) WRITE (Nout,FMT=99008)
                       Fatal = .TRUE.
-                    ENDIF
+                    END IF
                     !
                     !                          See what data changed inside subroutines.
                     !
@@ -1916,7 +1916,7 @@ CONTAINS
                         isame(9) = LDE(Ys,Yy,ly)
                       ELSE
                         isame(9) = LDERES('GE',' ',1,n,Ys,Yy,ABS(incy))
-                      ENDIF
+                      END IF
                       isame(10) = incys==incy
                     ELSEIF ( banded ) THEN
                       isame(3) = ks==k
@@ -1930,7 +1930,7 @@ CONTAINS
                         isame(10) = LDE(Ys,Yy,ly)
                       ELSE
                         isame(10) = LDERES('GE',' ',1,n,Ys,Yy,ABS(incy))
-                      ENDIF
+                      END IF
                       isame(11) = incys==incy
                     ELSEIF ( packed ) THEN
                       isame(3) = als==alpha
@@ -1942,9 +1942,9 @@ CONTAINS
                         isame(8) = LDE(Ys,Yy,ly)
                       ELSE
                         isame(8) = LDERES('GE',' ',1,n,Ys,Yy,ABS(incy))
-                      ENDIF
+                      END IF
                       isame(9) = incys==incy
-                    ENDIF
+                    END IF
                     !
                     !                          If data was incorrectly changed, report and
                     !                          return.
@@ -1953,8 +1953,8 @@ CONTAINS
                       IF ( .NOT.isame(i) ) THEN
                         Fatal = .TRUE.
                         IF ( Kprint>=2 ) WRITE (Nout,FMT=99002) i
-                      ENDIF
-                    ENDDO
+                      END IF
+                    END DO
                     !
                     ftl = .FALSE.
                     IF ( .NOT.null ) THEN
@@ -1964,7 +1964,7 @@ CONTAINS
                       CALL DMVCH('N',n,n,alpha,A,Nmax,X,incx,beta,Y,incy,Yt,G,&
                         Yy,Eps,err,ftl,Nout,.TRUE.,Kprint)
                       errmax = MAX(errmax,err)
-                    ENDIF
+                    END IF
                     IF ( ftl ) THEN
                       Fatal = .TRUE.
                       IF ( Kprint>=3 ) THEN
@@ -1978,24 +1978,24 @@ CONTAINS
                         ELSEIF ( packed ) THEN
                           WRITE (Nout,FMT=99005) nc, Sname, uplo, n, &
                             alpha, incx, beta, incy
-                        ENDIF
-                      ENDIF
-                    ENDIF
+                        END IF
+                      END IF
+                    END IF
                     !
-                  ENDDO
+                  END DO
                   !
-                ENDDO
+                END DO
                 !
-              ENDDO
+              END DO
               !
-            ENDDO
+            END DO
             !
-          ENDDO
-        ENDIF
+          END DO
+        END IF
         !
-      ENDDO
+      END DO
       !
-    ENDDO
+    END DO
     !
     !     Report result.
     !
@@ -2005,9 +2005,9 @@ CONTAINS
           WRITE (Nout,FMT=99001) Sname, nc
         ELSE
           WRITE (Nout,FMT=99003) Sname, nc, errmax
-        ENDIF
-      ENDIF
-    ENDIF
+        END IF
+      END IF
+    END IF
     RETURN
     !
     99001 FORMAT (' ',A6,' PASSED THE COMPUTATIONAL TESTS (',I6,' CALL','S)')
@@ -2125,7 +2125,7 @@ CONTAINS
                 na = m
               ELSE
                 na = n
-              ENDIF
+              END IF
               !              Set LDA to 1 more than minimum value if room.
               lda = na
               IF ( lda<Nmax ) lda = lda + 1
@@ -2162,16 +2162,16 @@ CONTAINS
                       als = alpha
                       DO i = 1, laa
                         As(i) = Aa(i)
-                      ENDDO
+                      END DO
                       ldas = lda
                       DO i = 1, lbb
                         Bs(i) = Bb(i)
-                      ENDDO
+                      END DO
                       ldbs = ldb
                       bls = beta
                       DO i = 1, lcc
                         Cs(i) = Cc(i)
-                      ENDDO
+                      END DO
                       ldcs = ldc
                       !
                       !                       Call the subroutine.
@@ -2183,7 +2183,7 @@ CONTAINS
                       IF ( NUMXER(nerr)/=0 ) THEN
                         IF ( Kprint>=2 ) WRITE (Nout,FMT=99006)
                         Fatal = .TRUE.
-                      ENDIF
+                      END IF
                       !
                       !                       See what data changed inside subroutines.
                       !
@@ -2201,7 +2201,7 @@ CONTAINS
                         isame(11) = LDE(Cs,Cc,lcc)
                       ELSE
                         isame(11) = LDERES('GE',' ',m,n,Cs,Cc,ldc)
-                      ENDIF
+                      END IF
                       isame(12) = ldcs==ldc
                       !
                       !                       If data was incorrectly changed, report and
@@ -2211,8 +2211,8 @@ CONTAINS
                         IF ( .NOT.isame(i) ) THEN
                           Fatal = .TRUE.
                           IF ( Kprint>=2 ) WRITE (Nout,FMT=99002) i
-                        ENDIF
-                      ENDDO
+                        END IF
+                      END DO
                       !
                       ftl = .FALSE.
                       IF ( .NOT.null ) THEN
@@ -2225,32 +2225,32 @@ CONTAINS
                         ELSE
                           CALL DMMCH('N','N',m,n,n,alpha,B,Nmax,A,Nmax,beta,C,&
                             Nmax,Ct,G,Cc,ldc,Eps,err,ftl,Nout,.TRUE.,Kprint)
-                        ENDIF
+                        END IF
                         errmax = MAX(errmax,err)
-                      ENDIF
+                      END IF
                       IF ( ftl ) THEN
                         Fatal = .TRUE.
                         IF ( Kprint>=3 ) THEN
                           WRITE (Nout,FMT=99004) Sname
                           WRITE (Nout,FMT=99005) nc, Sname, side, uplo, &
                             m, n, alpha, lda, ldb, beta, ldc
-                        ENDIF
-                      ENDIF
+                        END IF
+                      END IF
                       !
-                    ENDDO
+                    END DO
                     !
-                  ENDDO
+                  END DO
                   !
-                ENDDO
-              ENDIF
+                END DO
+              END IF
               !
-            ENDDO
-          ENDIF
-        ENDIF
+            END DO
+          END IF
+        END IF
         !
-      ENDDO
+      END DO
       !
-    ENDDO
+    END DO
     !
     !     Report result.
     !
@@ -2260,9 +2260,9 @@ CONTAINS
           WRITE (Nout,FMT=99001) Sname, nc
         ELSE
           WRITE (Nout,FMT=99003) Sname, nc, errmax
-        ENDIF
-      ENDIF
-    ENDIF
+        END IF
+      END IF
+    END IF
     RETURN
     !
     99001 FORMAT (' ',A6,' PASSED THE COMPUTATIONAL TESTS (',I6,' CALL','S)')
@@ -2348,7 +2348,7 @@ CONTAINS
       nargs = 9
     ELSEIF ( packed ) THEN
       nargs = 7
-    ENDIF
+    END IF
     !
     nc = 0
     reset = .TRUE.
@@ -2356,7 +2356,7 @@ CONTAINS
     !     Set up zero vector for DMVCH.
     DO i = 1, Nmax
       Z(i) = ZERO
-    ENDDO
+    END DO
     !
     DO in = 1, Nidim
       n = Idim(in)
@@ -2365,19 +2365,19 @@ CONTAINS
         nk = Nkb
       ELSE
         nk = 1
-      ENDIF
+      END IF
       DO ik = 1, nk
         IF ( banded ) THEN
           k = Kb(ik)
         ELSE
           k = n - 1
-        ENDIF
+        END IF
         !           Set LDA to 1 more than minimum value if room.
         IF ( banded ) THEN
           lda = k + 1
         ELSE
           lda = n
-        ENDIF
+        END IF
         IF ( lda<Nmax ) lda = lda + 1
         !           Skip tests if not enough room.
         IF ( lda<=Nmax ) THEN
@@ -2385,7 +2385,7 @@ CONTAINS
             laa = (n*(n+1))/2
           ELSE
             laa = lda*n
-          ENDIF
+          END IF
           null = n<=0
           !
           DO icu = 1, 2
@@ -2415,7 +2415,7 @@ CONTAINS
                   IF ( n>1 ) THEN
                     X(n/2) = ZERO
                     Xx(1+ABS(incx)*(n/2-1)) = ZERO
-                  ENDIF
+                  END IF
                   !
                   nc = nc + 1
                   !
@@ -2428,11 +2428,11 @@ CONTAINS
                   ks = k
                   DO i = 1, laa
                     As(i) = Aa(i)
-                  ENDDO
+                  END DO
                   ldas = lda
                   DO i = 1, lx
                     Xs(i) = Xx(i)
-                  ENDDO
+                  END DO
                   incxs = incx
                   !
                   !                       Call the subroutine.
@@ -2444,7 +2444,7 @@ CONTAINS
                       CALL DTBMV(uplo,trans,diag,n,k,Aa,lda,Xx,incx)
                     ELSEIF ( packed ) THEN
                       CALL DTPMV(uplo,trans,diag,n,Aa,Xx,incx)
-                    ENDIF
+                    END IF
                   ELSEIF ( Sname(4:5)=='SV' ) THEN
                     IF ( full ) THEN
                       CALL DTRSV(uplo,trans,diag,n,Aa,lda,Xx,incx)
@@ -2452,15 +2452,15 @@ CONTAINS
                       CALL DTBSV(uplo,trans,diag,n,k,Aa,lda,Xx,incx)
                     ELSEIF ( packed ) THEN
                       CALL DTPSV(uplo,trans,diag,n,Aa,Xx,incx)
-                    ENDIF
-                  ENDIF
+                    END IF
+                  END IF
                   !
                   !                       Check if error-exit was taken incorrectly.
                   !
                   IF ( NUMXER(nerr)/=0 ) THEN
                     IF ( Kprint>=2 ) WRITE (Nout,FMT=99008)
                     Fatal = .TRUE.
-                  ENDIF
+                  END IF
                   !
                   !                       See what data changed inside subroutines.
                   !
@@ -2475,7 +2475,7 @@ CONTAINS
                       isame(7) = LDE(Xs,Xx,lx)
                     ELSE
                       isame(7) = LDERES('GE',' ',1,n,Xs,Xx,ABS(incx))
-                    ENDIF
+                    END IF
                     isame(8) = incxs==incx
                   ELSEIF ( banded ) THEN
                     isame(5) = ks==k
@@ -2485,7 +2485,7 @@ CONTAINS
                       isame(8) = LDE(Xs,Xx,lx)
                     ELSE
                       isame(8) = LDERES('GE',' ',1,n,Xs,Xx,ABS(incx))
-                    ENDIF
+                    END IF
                     isame(9) = incxs==incx
                   ELSEIF ( packed ) THEN
                     isame(5) = LDE(As,Aa,laa)
@@ -2493,9 +2493,9 @@ CONTAINS
                       isame(6) = LDE(Xs,Xx,lx)
                     ELSE
                       isame(6) = LDERES('GE',' ',1,n,Xs,Xx,ABS(incx))
-                    ENDIF
+                    END IF
                     isame(7) = incxs==incx
-                  ENDIF
+                  END IF
                   !
                   !                       If data was incorrectly changed, report and
                   !                       return.
@@ -2504,8 +2504,8 @@ CONTAINS
                     IF ( .NOT.isame(i) ) THEN
                       Fatal = .TRUE.
                       IF ( Kprint>=2 ) WRITE (Nout,FMT=99002) i
-                    ENDIF
-                  ENDDO
+                    END IF
+                  END DO
                   !
                   ftl = .FALSE.
                   IF ( .NOT.null ) THEN
@@ -2522,12 +2522,12 @@ CONTAINS
                       DO i = 1, n
                         Z(i) = Xx(1+(i-1)*ABS(incx))
                         Xx(1+(i-1)*ABS(incx)) = X(i)
-                      ENDDO
+                      END DO
                       CALL DMVCH(trans,n,n,ONE,A,Nmax,Z,incx,ZERO,X,incx,Xt,G,&
                         Xx,Eps,err,ftl,Nout,.FALSE.,Kprint)
-                    ENDIF
+                    END IF
                     errmax = MAX(errmax,err)
-                  ENDIF
+                  END IF
                   IF ( ftl ) THEN
                     Fatal = .TRUE.
                     IF ( Kprint>=3 ) THEN
@@ -2541,22 +2541,22 @@ CONTAINS
                       ELSEIF ( packed ) THEN
                         WRITE (Nout,FMT=99005) nc, Sname, uplo, trans, &
                           diag, n, incx
-                      ENDIF
-                    ENDIF
-                  ENDIF
+                      END IF
+                    END IF
+                  END IF
                   !
-                ENDDO
+                END DO
                 !
-              ENDDO
+              END DO
               !
-            ENDDO
+            END DO
             !
-          ENDDO
-        ENDIF
+          END DO
+        END IF
         !
-      ENDDO
+      END DO
       !
-    ENDDO
+    END DO
     !
     !     Report result.
     !
@@ -2566,9 +2566,9 @@ CONTAINS
           WRITE (Nout,FMT=99001) Sname, nc
         ELSE
           WRITE (Nout,FMT=99003) Sname, nc, errmax
-        ENDIF
-      ENDIF
-    ENDIF
+        END IF
+      END IF
+    END IF
     RETURN
     !
     99001 FORMAT (' ',A6,' PASSED THE COMPUTATIONAL TESTS (',I6,' CALL','S)')
@@ -2658,8 +2658,8 @@ CONTAINS
     DO j = 1, Nmax
       DO i = 1, Nmax
         C(i,j) = ZERO
-      ENDDO
-    ENDDO
+      END DO
+    END DO
     !
     DO im = 1, Nidim
       m = Idim(im)
@@ -2681,7 +2681,7 @@ CONTAINS
               na = m
             ELSE
               na = n
-            ENDIF
+            END IF
             !              Set LDA to 1 more than minimum value if room.
             lda = na
             IF ( lda<Nmax ) lda = lda + 1
@@ -2723,11 +2723,11 @@ CONTAINS
                     als = alpha
                     DO i = 1, laa
                       As(i) = Aa(i)
-                    ENDDO
+                    END DO
                     ldas = lda
                     DO i = 1, lbb
                       Bs(i) = Bb(i)
-                    ENDDO
+                    END DO
                     ldbs = ldb
                     !
                     !                          Call the subroutine.
@@ -2736,14 +2736,14 @@ CONTAINS
                       CALL DTRMM(side,uplo,transa,diag,m,n,alpha,Aa,lda,Bb,ldb)
                     ELSEIF ( Sname(4:5)=='SM' ) THEN
                       CALL DTRSM(side,uplo,transa,diag,m,n,alpha,Aa,lda,Bb,ldb)
-                    ENDIF
+                    END IF
                     !
                     !                          Check if error-exit was taken incorrectly.
                     !
                     IF ( NUMXER(nerr)/=0 ) THEN
                       IF ( Kprint>=2 ) WRITE (Nout,FMT=99006)
                       Fatal = .TRUE.
-                    ENDIF
+                    END IF
                     !
                     !                          See what data changed inside subroutines.
                     !
@@ -2760,7 +2760,7 @@ CONTAINS
                       isame(10) = LDE(Bs,Bb,lbb)
                     ELSE
                       isame(10) = LDERES('GE',' ',m,n,Bs,Bb,ldb)
-                    ENDIF
+                    END IF
                     isame(11) = ldbs==ldb
                     !
                     !                          If data was incorrectly changed, report and
@@ -2770,8 +2770,8 @@ CONTAINS
                       IF ( .NOT.isame(i) ) THEN
                         Fatal = .TRUE.
                         IF ( Kprint>=2 ) WRITE (Nout,FMT=99002) i
-                      ENDIF
-                    ENDDO
+                      END IF
+                    END DO
                     !
                     ftl = .FALSE.
                     IF ( .NOT.null ) THEN
@@ -2785,7 +2785,7 @@ CONTAINS
                         ELSE
                           CALL DMMCH('N',transa,m,n,n,alpha,B,Nmax,A,Nmax,&
                             ZERO,C,Nmax,Ct,G,Bb,ldb,Eps,err,ftl,Nout,.TRUE.,Kprint)
-                        ENDIF
+                        END IF
                       ELSEIF ( Sname(4:5)=='SM' ) THEN
                         !
                         !                                Compute approximation to original
@@ -2795,8 +2795,8 @@ CONTAINS
                           DO i = 1, m
                             C(i,j) = Bb(i+(j-1)*ldb)
                             Bb(i+(j-1)*ldb) = alpha*B(i,j)
-                          ENDDO
-                        ENDDO
+                          END DO
+                        END DO
                         !
                         IF ( left ) THEN
                           CALL DMMCH(transa,'N',m,n,m,ONE,A,Nmax,C,Nmax,ZERO,&
@@ -2804,33 +2804,33 @@ CONTAINS
                         ELSE
                           CALL DMMCH('N',transa,m,n,n,ONE,C,Nmax,A,Nmax,ZERO,&
                             B,Nmax,Ct,G,Bb,ldb,Eps,err,ftl,Nout,.FALSE.,Kprint)
-                        ENDIF
-                      ENDIF
+                        END IF
+                      END IF
                       errmax = MAX(errmax,err)
-                    ENDIF
+                    END IF
                     IF ( ftl ) THEN
                       Fatal = .TRUE.
                       IF ( Kprint>=3 ) THEN
                         WRITE (Nout,FMT=99004) Sname
                         WRITE (Nout,FMT=99005) nc, Sname, side, uplo, &
                           transa, diag, m, n, alpha, lda, ldb
-                      ENDIF
-                    ENDIF
+                      END IF
+                    END IF
                     !
-                  ENDDO
+                  END DO
                   !
-                ENDDO
+                END DO
                 !
-              ENDDO
+              END DO
               !
-            ENDDO
+            END DO
             !
-          ENDDO
-        ENDIF
+          END DO
+        END IF
         !
-      ENDDO
+      END DO
       !
-    ENDDO
+    END DO
     !
     !     Report result.
     !
@@ -2840,9 +2840,9 @@ CONTAINS
           WRITE (Nout,FMT=99001) Sname, nc
         ELSE
           WRITE (Nout,FMT=99003) Sname, nc, errmax
-        ENDIF
-      ENDIF
-    ENDIF
+        END IF
+      END IF
+    END IF
     RETURN
     !
     99001 FORMAT (' ',A6,' PASSED THE COMPUTATIONAL TESTS (',I6,' CALL','S)')
@@ -2949,7 +2949,7 @@ CONTAINS
             IF ( m>1 ) THEN
               X(m/2) = ZERO
               Xx(1+ABS(incx)*(m/2-1)) = ZERO
-            ENDIF
+            END IF
             !
             DO iy = 1, Ninc
               incy = Inc(iy)
@@ -2962,7 +2962,7 @@ CONTAINS
               IF ( n>1 ) THEN
                 Y(n/2) = ZERO
                 Yy(1+ABS(incy)*(n/2-1)) = ZERO
-              ENDIF
+              END IF
               !
               DO ia = 1, Nalf
                 alpha = Alf(ia)
@@ -2982,15 +2982,15 @@ CONTAINS
                 als = alpha
                 DO i = 1, laa
                   As(i) = Aa(i)
-                ENDDO
+                END DO
                 ldas = lda
                 DO i = 1, lx
                   Xs(i) = Xx(i)
-                ENDDO
+                END DO
                 incxs = incx
                 DO i = 1, ly
                   Ys(i) = Yy(i)
-                ENDDO
+                END DO
                 incys = incy
                 !
                 !                    Call the subroutine.
@@ -3002,7 +3002,7 @@ CONTAINS
                 IF ( NUMXER(nerr)/=0 ) THEN
                   IF ( Kprint>=2 ) WRITE (Nout,FMT=99007)
                   Fatal = .TRUE.
-                ENDIF
+                END IF
                 !
                 !                    See what data changed inside subroutine.
                 !
@@ -3017,7 +3017,7 @@ CONTAINS
                   isame(8) = LDE(As,Aa,laa)
                 ELSE
                   isame(8) = LDERES('GE',' ',m,n,As,Aa,lda)
-                ENDIF
+                END IF
                 isame(9) = ldas==lda
                 !
                 !                    If data was incorrectly changed, report and return.
@@ -3026,8 +3026,8 @@ CONTAINS
                   IF ( .NOT.isame(i) ) THEN
                     Fatal = .TRUE.
                     IF ( Kprint>=2 ) WRITE (Nout,FMT=99002) i
-                  ENDIF
-                ENDDO
+                  END IF
+                END DO
                 !
                 ftl = .FALSE.
                 IF ( .NOT.null ) THEN
@@ -3037,42 +3037,42 @@ CONTAINS
                   IF ( incx>0 ) THEN
                     DO i = 1, m
                       Z(i) = X(i)
-                    ENDDO
+                    END DO
                   ELSE
                     DO i = 1, m
                       Z(i) = X(m-i+1)
-                    ENDDO
-                  ENDIF
+                    END DO
+                  END IF
                   DO j = 1, n
                     IF ( incy>0 ) THEN
                       w(1) = Y(j)
                     ELSE
                       w(1) = Y(n-j+1)
-                    ENDIF
+                    END IF
                     CALL DMVCH('N',m,1,alpha,Z,Nmax,w,1,ONE,A(1,j),1,Yt,G,&
                       Aa(1+(j-1)*lda),Eps,err,ftl,Nout,.TRUE.,Kprint)
                     errmax = MAX(errmax,err)
-                  ENDDO
-                ENDIF
+                  END DO
+                END IF
                 IF ( ftl ) THEN
                   Fatal = .TRUE.
                   IF ( Kprint>=3 ) THEN
                     WRITE (Nout,FMT=99005) j
                     WRITE (Nout,FMT=99004) Sname
                     WRITE (Nout,FMT=99006) nc, Sname, m, n, alpha, incx, incy, lda
-                  ENDIF
-                ENDIF
+                  END IF
+                END IF
                 !
-              ENDDO
+              END DO
               !
-            ENDDO
+            END DO
             !
-          ENDDO
-        ENDIF
+          END DO
+        END IF
         !
-      ENDDO
+      END DO
       !
-    ENDDO
+    END DO
     !
     !     Report result.
     !
@@ -3082,9 +3082,9 @@ CONTAINS
           WRITE (Nout,FMT=99001) Sname, nc
         ELSE
           WRITE (Nout,FMT=99003) Sname, nc, errmax
-        ENDIF
-      ENDIF
-    ENDIF
+        END IF
+      END IF
+    END IF
     RETURN
     !
     99001 FORMAT (' ',A6,' PASSED THE COMPUTATIONAL TESTS (',I6,' CALL','S)')
@@ -3190,7 +3190,7 @@ CONTAINS
             ELSE
               ma = n
               na = k
-            ENDIF
+            END IF
             !              Set LDA to 1 more than minimum value if room.
             lda = ma
             IF ( lda<Nmax ) lda = lda + 1
@@ -3227,12 +3227,12 @@ CONTAINS
                     als = alpha
                     DO i = 1, laa
                       As(i) = Aa(i)
-                    ENDDO
+                    END DO
                     ldas = lda
                     bets = beta
                     DO i = 1, lcc
                       Cs(i) = Cc(i)
-                    ENDDO
+                    END DO
                     ldcs = ldc
                     !
                     !                       Call the subroutine.
@@ -3244,7 +3244,7 @@ CONTAINS
                     IF ( NUMXER(nerr)/=0 ) THEN
                       IF ( Kprint>=2 ) WRITE (Nout,FMT=99006)
                       Fatal = .TRUE.
-                    ENDIF
+                    END IF
                     !
                     !                       See what data changed inside subroutines.
                     !
@@ -3260,7 +3260,7 @@ CONTAINS
                       isame(9) = LDE(Cs,Cc,lcc)
                     ELSE
                       isame(9) = LDERES('SY',uplo,n,n,Cs,Cc,ldc)
-                    ENDIF
+                    END IF
                     isame(10) = ldcs==ldc
                     !
                     !                       If data was incorrectly changed, report and
@@ -3270,8 +3270,8 @@ CONTAINS
                       IF ( .NOT.isame(i) ) THEN
                         Fatal = .TRUE.
                         IF ( Kprint>=2 ) WRITE (Nout,FMT=99002) i
-                      ENDIF
-                    ENDDO
+                      END IF
+                    END DO
                     !
                     ftl = .FALSE.
                     IF ( .NOT.null ) THEN
@@ -3286,7 +3286,7 @@ CONTAINS
                         ELSE
                           jj = j
                           lj = n - j + 1
-                        ENDIF
+                        END IF
                         IF ( tran ) THEN
                           CALL DMMCH('T','N',lj,1,k,alpha,A(1,jj),Nmax,A(1,j),&
                             Nmax,beta,C(jj,j),Nmax,Ct,G,Cc(jc),ldc,&
@@ -3295,37 +3295,37 @@ CONTAINS
                           CALL DMMCH('N','T',lj,1,k,alpha,A(jj,1),Nmax,A(j,1),&
                             Nmax,beta,C(jj,j),Nmax,Ct,G,Cc(jc),ldc,&
                             Eps,err,ftl,Nout,.TRUE.,Kprint)
-                        ENDIF
+                        END IF
                         IF ( upper ) THEN
                           jc = jc + ldc
                         ELSE
                           jc = jc + ldc + 1
-                        ENDIF
+                        END IF
                         errmax = MAX(errmax,err)
-                      ENDDO
-                    ENDIF
+                      END DO
+                    END IF
                     IF ( ftl ) THEN
                       Fatal = .TRUE.
                       IF ( Kprint>=3 ) THEN
                         WRITE (Nout,FMT=99004) Sname
                         WRITE (Nout,FMT=99005) nc, Sname, uplo, trans, n, &
                           k, alpha, lda, beta, ldc
-                      ENDIF
-                    ENDIF
+                      END IF
+                    END IF
                     !
-                  ENDDO
+                  END DO
                   !
-                ENDDO
+                END DO
                 !
-              ENDDO
-            ENDIF
+              END DO
+            END IF
             !
-          ENDDO
+          END DO
           !
-        ENDDO
-      ENDIF
+        END DO
+      END IF
       !
-    ENDDO
+    END DO
     !
     !     Report result.
     !
@@ -3335,9 +3335,9 @@ CONTAINS
           WRITE (Nout,FMT=99001) Sname, nc
         ELSE
           WRITE (Nout,FMT=99003) Sname, nc, errmax
-        ENDIF
-      ENDIF
-    ENDIF
+        END IF
+      END IF
+    END IF
     RETURN
     !
     99001 FORMAT (' ',A6,' PASSED THE COMPUTATIONAL TESTS (',I6,' CALL','S)')
@@ -3420,7 +3420,7 @@ CONTAINS
       nargs = 7
     ELSEIF ( packed ) THEN
       nargs = 6
-    ENDIF
+    END IF
     !
     nc = 0
     reset = .TRUE.
@@ -3437,7 +3437,7 @@ CONTAINS
           laa = (n*(n+1))/2
         ELSE
           laa = lda*n
-        ENDIF
+        END IF
         !
         DO ic = 1, 2
           uplo = ich(ic:ic)
@@ -3454,7 +3454,7 @@ CONTAINS
             IF ( n>1 ) THEN
               X(n/2) = ZERO
               Xx(1+ABS(incx)*(n/2-1)) = ZERO
-            ENDIF
+            END IF
             !
             DO ia = 1, Nalf
               alpha = Alf(ia)
@@ -3475,11 +3475,11 @@ CONTAINS
               als = alpha
               DO i = 1, laa
                 As(i) = Aa(i)
-              ENDDO
+              END DO
               ldas = lda
               DO i = 1, lx
                 Xs(i) = Xx(i)
-              ENDDO
+              END DO
               incxs = incx
               !
               !                 Call the subroutine.
@@ -3488,14 +3488,14 @@ CONTAINS
                 CALL DSYR(uplo,n,alpha,Xx,incx,Aa,lda)
               ELSEIF ( packed ) THEN
                 CALL DSPR(uplo,n,alpha,Xx,incx,Aa)
-              ENDIF
+              END IF
               !
               !                 Check if error-exit was taken incorrectly.
               !
               IF ( NUMXER(nerr)/=0 ) THEN
                 IF ( Kprint>=2 ) WRITE (Nout,FMT=99008)
                 Fatal = .TRUE.
-              ENDIF
+              END IF
               !
               !                 See what data changed inside subroutines.
               !
@@ -3508,7 +3508,7 @@ CONTAINS
                 isame(6) = LDE(As,Aa,laa)
               ELSE
                 isame(6) = LDERES(Sname(2:3),uplo,n,n,As,Aa,lda)
-              ENDIF
+              END IF
               IF ( .NOT.packed ) isame(7) = ldas==lda
               !
               !                 If data was incorrectly changed, report and return.
@@ -3517,8 +3517,8 @@ CONTAINS
                 IF ( .NOT.isame(i) ) THEN
                   Fatal = .TRUE.
                   IF ( Kprint>=2 ) WRITE (Nout,FMT=99002) i
-                ENDIF
-              ENDDO
+                END IF
+              END DO
               !
               ftl = .FALSE.
               IF ( .NOT.null ) THEN
@@ -3528,12 +3528,12 @@ CONTAINS
                 IF ( incx>0 ) THEN
                   DO i = 1, n
                     Z(i) = X(i)
-                  ENDDO
+                  END DO
                 ELSE
                   DO i = 1, n
                     Z(i) = X(n-i+1)
-                  ENDDO
-                ENDIF
+                  END DO
+                END IF
                 ja = 1
                 DO j = 1, n
                   w(1) = Z(j)
@@ -3543,7 +3543,7 @@ CONTAINS
                   ELSE
                     jj = j
                     lj = n - j + 1
-                  ENDIF
+                  END IF
                   ftl = .FALSE.
                   CALL DMVCH('N',lj,1,alpha,Z(jj),lj,w,1,ONE,A(jj,j),1,Yt,G,&
                     Aa(ja),Eps,err,ftl,Nout,.TRUE.,Kprint)
@@ -3553,10 +3553,10 @@ CONTAINS
                     ja = ja + lda
                   ELSE
                     ja = ja + lda + 1
-                  ENDIF
+                  END IF
                   errmax = MAX(errmax,err)
-                ENDDO
-              ENDIF
+                END DO
+              END IF
               IF ( ftl ) THEN
                 Fatal = .TRUE.
                 IF ( Kprint>=3 ) THEN
@@ -3566,18 +3566,18 @@ CONTAINS
                     WRITE (Nout,FMT=99007) nc, Sname, uplo, n, alpha, incx, lda
                   ELSEIF ( packed ) THEN
                     WRITE (Nout,FMT=99006) nc, Sname, uplo, n, alpha, incx
-                  ENDIF
-                ENDIF
-              ENDIF
+                  END IF
+                END IF
+              END IF
               !
-            ENDDO
+            END DO
             !
-          ENDDO
+          END DO
           !
-        ENDDO
-      ENDIF
+        END DO
+      END IF
       !
-    ENDDO
+    END DO
     !
     !     Report result.
     !
@@ -3587,9 +3587,9 @@ CONTAINS
           WRITE (Nout,FMT=99001) Sname, nc
         ELSE
           WRITE (Nout,FMT=99003) Sname, nc, errmax
-        ENDIF
-      ENDIF
-    ENDIF
+        END IF
+      END IF
+    END IF
     RETURN
     !
     99001 FORMAT (' ',A6,' PASSED THE COMPUTATIONAL TESTS (',I6,' CALL','S)')
@@ -3698,7 +3698,7 @@ CONTAINS
             ELSE
               ma = n
               na = k
-            ENDIF
+            END IF
             !              Set LDA to 1 more than minimum value if room.
             lda = ma
             IF ( lda<Nmax ) lda = lda + 1
@@ -3712,7 +3712,7 @@ CONTAINS
                 CALL DMAKE3('GE',' ',' ',ma,na,Ab,2*Nmax,Aa,lda,reset,ZERO)
               ELSE
                 CALL DMAKE3('GE',' ',' ',ma,na,Ab,Nmax,Aa,lda,reset,ZERO)
-              ENDIF
+              END IF
               !
               !              Generate the matrix B.
               !
@@ -3723,7 +3723,7 @@ CONTAINS
               ELSE
                 CALL DMAKE3('GE',' ',' ',ma,na,Ab(k*Nmax+1),Nmax,Bb,ldb,reset,&
                   ZERO)
-              ENDIF
+              END IF
               !
               DO icu = 1, 2
                 uplo = ichu(icu:icu)
@@ -3750,16 +3750,16 @@ CONTAINS
                     als = alpha
                     DO i = 1, laa
                       As(i) = Aa(i)
-                    ENDDO
+                    END DO
                     ldas = lda
                     DO i = 1, lbb
                       Bs(i) = Bb(i)
-                    ENDDO
+                    END DO
                     ldbs = ldb
                     bets = beta
                     DO i = 1, lcc
                       Cs(i) = Cc(i)
-                    ENDDO
+                    END DO
                     ldcs = ldc
                     !
                     !                       Call the subroutine.
@@ -3771,7 +3771,7 @@ CONTAINS
                     IF ( NUMXER(nerr)/=0 ) THEN
                       IF ( Kprint>=2 ) WRITE (Nout,FMT=99006)
                       Fatal = .TRUE.
-                    ENDIF
+                    END IF
                     !
                     !                       See what data changed inside subroutines.
                     !
@@ -3789,7 +3789,7 @@ CONTAINS
                       isame(11) = LDE(Cs,Cc,lcc)
                     ELSE
                       isame(11) = LDERES('SY',uplo,n,n,Cs,Cc,ldc)
-                    ENDIF
+                    END IF
                     isame(12) = ldcs==ldc
                     !
                     !                       If data was incorrectly changed, report and
@@ -3799,8 +3799,8 @@ CONTAINS
                       IF ( .NOT.isame(i) ) THEN
                         Fatal = .TRUE.
                         IF ( Kprint>=2 ) WRITE (Nout,FMT=99002) i
-                      ENDIF
-                    ENDDO
+                      END IF
+                    END DO
                     !
                     ftl = .FALSE.
                     IF ( .NOT.null ) THEN
@@ -3816,12 +3816,12 @@ CONTAINS
                         ELSE
                           jj = j
                           lj = n - j + 1
-                        ENDIF
+                        END IF
                         IF ( tran ) THEN
                           DO i = 1, k
                             W(i) = Ab((j-1)*2*Nmax+k+i)
                             W(k+i) = Ab((j-1)*2*Nmax+i)
-                          ENDDO
+                          END DO
                           CALL DMMCH('T','N',lj,1,2*k,alpha,Ab(jjab),2*Nmax,W,&
                             2*Nmax,beta,C(jj,j),Nmax,Ct,G,Cc(jc),ldc,&
                             Eps,err,ftl,Nout,.TRUE.,Kprint)
@@ -3829,42 +3829,42 @@ CONTAINS
                           DO i = 1, k
                             W(i) = Ab((k+i-1)*Nmax+j)
                             W(k+i) = Ab((i-1)*Nmax+j)
-                          ENDDO
+                          END DO
                           CALL DMMCH('N','N',lj,1,2*k,alpha,Ab(jj),Nmax,W,&
                             2*Nmax,beta,C(jj,j),Nmax,Ct,G,Cc(jc),ldc,&
                             Eps,err,ftl,Nout,.TRUE.,Kprint)
-                        ENDIF
+                        END IF
                         IF ( upper ) THEN
                           jc = jc + ldc
                         ELSE
                           jc = jc + ldc + 1
                           IF ( tran ) jjab = jjab + 2*Nmax
-                        ENDIF
+                        END IF
                         errmax = MAX(errmax,err)
-                      ENDDO
-                    ENDIF
+                      END DO
+                    END IF
                     IF ( ftl ) THEN
                       Fatal = .TRUE.
                       IF ( Kprint>=3 ) THEN
                         WRITE (Nout,FMT=99004) Sname
                         WRITE (Nout,FMT=99005) nc, Sname, uplo, trans, n, &
                           k, alpha, lda, ldb, beta, ldc
-                      ENDIF
-                    ENDIF
+                      END IF
+                    END IF
                     !
-                  ENDDO
+                  END DO
                   !
-                ENDDO
+                END DO
                 !
-              ENDDO
-            ENDIF
+              END DO
+            END IF
             !
-          ENDDO
+          END DO
           !
-        ENDDO
-      ENDIF
+        END DO
+      END IF
       !
-    ENDDO
+    END DO
     !
     !     Report result.
     !
@@ -3874,9 +3874,9 @@ CONTAINS
           WRITE (Nout,FMT=99001) Sname, nc
         ELSE
           WRITE (Nout,FMT=99003) Sname, nc, errmax
-        ENDIF
-      ENDIF
-    ENDIF
+        END IF
+      END IF
+    END IF
     RETURN
     !
     99001 FORMAT (' ',A6,' PASSED THE COMPUTATIONAL TESTS (',I6,' CALL','S)')
@@ -3959,7 +3959,7 @@ CONTAINS
       nargs = 9
     ELSEIF ( packed ) THEN
       nargs = 8
-    ENDIF
+    END IF
     !
     nc = 0
     reset = .TRUE.
@@ -3976,7 +3976,7 @@ CONTAINS
           laa = (n*(n+1))/2
         ELSE
           laa = lda*n
-        ENDIF
+        END IF
         !
         DO ic = 1, 2
           uplo = ich(ic:ic)
@@ -3993,7 +3993,7 @@ CONTAINS
             IF ( n>1 ) THEN
               X(n/2) = ZERO
               Xx(1+ABS(incx)*(n/2-1)) = ZERO
-            ENDIF
+            END IF
             !
             DO iy = 1, Ninc
               incy = Inc(iy)
@@ -4006,7 +4006,7 @@ CONTAINS
               IF ( n>1 ) THEN
                 Y(n/2) = ZERO
                 Yy(1+ABS(incy)*(n/2-1)) = ZERO
-              ENDIF
+              END IF
               !
               DO ia = 1, Nalf
                 alpha = Alf(ia)
@@ -4027,15 +4027,15 @@ CONTAINS
                 als = alpha
                 DO i = 1, laa
                   As(i) = Aa(i)
-                ENDDO
+                END DO
                 ldas = lda
                 DO i = 1, lx
                   Xs(i) = Xx(i)
-                ENDDO
+                END DO
                 incxs = incx
                 DO i = 1, ly
                   Ys(i) = Yy(i)
-                ENDDO
+                END DO
                 incys = incy
                 !
                 !                    Call the subroutine.
@@ -4044,14 +4044,14 @@ CONTAINS
                   CALL DSYR2(uplo,n,alpha,Xx,incx,Yy,incy,Aa,lda)
                 ELSEIF ( packed ) THEN
                   CALL DSPR2(uplo,n,alpha,Xx,incx,Yy,incy,Aa)
-                ENDIF
+                END IF
                 !
                 !                    Check if error-exit was taken incorrectly.
                 !
                 IF ( NUMXER(nerr)/=0 ) THEN
                   IF ( Kprint>=2 ) WRITE (Nout,FMT=99008)
                   Fatal = .TRUE.
-                ENDIF
+                END IF
                 !
                 !                    See what data changed inside subroutines.
                 !
@@ -4066,7 +4066,7 @@ CONTAINS
                   isame(8) = LDE(As,Aa,laa)
                 ELSE
                   isame(8) = LDERES(Sname(2:3),uplo,n,n,As,Aa,lda)
-                ENDIF
+                END IF
                 IF ( .NOT.packed ) isame(9) = ldas==lda
                 !
                 !                    If data was incorrectly changed, report and return.
@@ -4075,8 +4075,8 @@ CONTAINS
                   IF ( .NOT.isame(i) ) THEN
                     Fatal = .TRUE.
                     IF ( Kprint>=2 ) WRITE (Nout,FMT=99002) i
-                  ENDIF
-                ENDDO
+                  END IF
+                END DO
                 !
                 IF ( .NOT.null ) THEN
                   !
@@ -4085,21 +4085,21 @@ CONTAINS
                   IF ( incx>0 ) THEN
                     DO i = 1, n
                       Z(i,1) = X(i)
-                    ENDDO
+                    END DO
                   ELSE
                     DO i = 1, n
                       Z(i,1) = X(n-i+1)
-                    ENDDO
-                  ENDIF
+                    END DO
+                  END IF
                   IF ( incy>0 ) THEN
                     DO i = 1, n
                       Z(i,2) = Y(i)
-                    ENDDO
+                    END DO
                   ELSE
                     DO i = 1, n
                       Z(i,2) = Y(n-i+1)
-                    ENDDO
-                  ENDIF
+                    END DO
+                  END IF
                   ja = 1
                   DO j = 1, n
                     w(1) = Z(j,2)
@@ -4110,7 +4110,7 @@ CONTAINS
                     ELSE
                       jj = j
                       lj = n - j + 1
-                    ENDIF
+                    END IF
                     ftl = .FALSE.
                     CALL DMVCH('N',lj,2,alpha,Z(jj,1),Nmax,w,1,ONE,A(jj,j),1,&
                       Yt,G,Aa(ja),Eps,err,ftl,Nout,.TRUE.,Kprint)
@@ -4120,7 +4120,7 @@ CONTAINS
                       ja = ja + lda
                     ELSE
                       ja = ja + lda + 1
-                    ENDIF
+                    END IF
                     errmax = MAX(errmax,err)
                     IF ( ftl ) THEN
                       Fatal = .TRUE.
@@ -4133,22 +4133,22 @@ CONTAINS
                         ELSEIF ( packed ) THEN
                           WRITE (Nout,FMT=99006) nc, Sname, uplo, n, &
                             alpha, incx, incy
-                        ENDIF
-                      ENDIF
-                    ENDIF
-                  ENDDO
-                ENDIF
+                        END IF
+                      END IF
+                    END IF
+                  END DO
+                END IF
                 !
-              ENDDO
+              END DO
               !
-            ENDDO
+            END DO
             !
-          ENDDO
+          END DO
           !
-        ENDDO
-      ENDIF
+        END DO
+      END IF
       !
-    ENDDO
+    END DO
     !
     !     Report result.
     !
@@ -4158,9 +4158,9 @@ CONTAINS
           WRITE (Nout,FMT=99001) Sname, nc
         ELSE
           WRITE (Nout,FMT=99003) Sname, nc, errmax
-        ENDIF
-      ENDIF
-    ENDIF
+        END IF
+      END IF
+    END IF
     RETURN
     !
     99001 FORMAT (' ',A6,' PASSED THE COMPUTATIONAL TESTS (',I6,' CALL','S)')
@@ -4228,7 +4228,7 @@ CONTAINS
       CALL XSETF(0)
     ELSE
       CALL XSETF(1)
-    ENDIF
+    END IF
     SELECT CASE (Isnum)
       CASE (2)
         infot = 1
@@ -4598,8 +4598,8 @@ CONTAINS
         WRITE (Nout,FMT=99001) Srnamt
       ELSE
         WRITE (Nout,FMT=99002) Srnamt
-      ENDIF
-    ENDIF
+      END IF
+    END IF
     CALL XSETF(kontrl)
     RETURN
     !
@@ -4657,7 +4657,7 @@ CONTAINS
       CALL XSETF(0)
     ELSE
       CALL XSETF(1)
-    ENDIF
+    END IF
     SELECT CASE (Isnum)
       CASE (2)
         infot = 1
@@ -5321,8 +5321,8 @@ CONTAINS
         WRITE (Nout,FMT=99001) Srnamt
       ELSE
         WRITE (Nout,FMT=99002) Srnamt
-      ENDIF
-    ENDIF
+      END IF
+    END IF
     CALL XSETF(kontrl)
     RETURN
     !
@@ -5400,7 +5400,7 @@ PROGRAM TEST19
     CALL XSETF(0)
   ELSE
     CALL XSETF(1)
-  ENDIF
+  END IF
   !
   !     Test double precision Level 2 BLAS routines
   !
@@ -5421,6 +5421,6 @@ PROGRAM TEST19
     WRITE (lun,99002) nfail
     99002 FORMAT (/' ************* WARNING -- ',I5,&
       ' TEST(S) FAILED IN PROGRAM TEST19 *************')
-  ENDIF
+  END IF
   STOP
 END PROGRAM TEST19

@@ -134,7 +134,7 @@ SUBROUTINE XLEGF(Dnu1,Nudiff,Mu1,Mu2,Theta,Id,Pqa,Ipqa,Ierror)
   !           section.  (WRB)
   !           CALLs to XERROR changed to CALLs to XERMSG.  (WRB)
   !   920127  Revised PURPOSE section of prologue.  (DWL)
-  
+
   INTEGER i, Id, Ierror, Ipqa(*), l, Mu1, Mu2, Nudiff
   REAL Pqa(*), Dnu1, dnu2, sx, Theta, x, pi2
   !
@@ -150,7 +150,7 @@ SUBROUTINE XLEGF(Dnu1,Nudiff,Mu1,Mu2,Theta,Id,Pqa,Ipqa,Ierror)
   DO i = 1, l
     Pqa(i) = 0.
     Ipqa(i) = 0
-  ENDDO
+  END DO
   !
   !        CHECK FOR VALID INPUT VALUES
   !
@@ -174,7 +174,7 @@ SUBROUTINE XLEGF(Dnu1,Nudiff,Mu1,Mu2,Theta,Id,Pqa,Ipqa,Ierror)
               IF ( (Id/=3).OR.(MOD(Dnu1,1.)==0.) ) THEN
                 IF ( (Id==4).AND.(MOD(Dnu1,1.)/=0.) ) GOTO 100
                 IF ( (Id==3.OR.Id==4).AND.Mu1>dnu2 ) RETURN
-              ENDIF
+              END IF
               !
               x = COS(Theta)
               sx = 1./SIN(Theta)
@@ -193,7 +193,7 @@ SUBROUTINE XLEGF(Dnu1,Nudiff,Mu1,Mu2,Theta,Id,Pqa,Ipqa,Ierror)
                   !
                   CALL XPMU(Dnu1,dnu2,Mu1,Mu2,Theta,x,sx,Id,Pqa,Ipqa,Ierror)
                   IF ( Ierror/=0 ) RETURN
-                ENDIF
+                END IF
                 !
                 !        IF ID = 3, TRANSFORM P(-MU,NU,X) VECTOR INTO
                 !        P(MU,NU,X) VECTOR.
@@ -221,7 +221,7 @@ SUBROUTINE XLEGF(Dnu1,Nudiff,Mu1,Mu2,Theta,Id,Pqa,Ipqa,Ierror)
                 !
                 CALL XQMU(Dnu1,dnu2,Mu1,Mu2,Theta,x,sx,Id,Pqa,Ipqa,Ierror)
                 IF ( Ierror/=0 ) RETURN
-              ENDIF
+              END IF
               !
               !        PLACE RESULTS IN REDUCED FORM IF POSSIBLE
               !        AND RETURN TO MAIN PROGRAM.
@@ -229,14 +229,14 @@ SUBROUTINE XLEGF(Dnu1,Nudiff,Mu1,Mu2,Theta,Id,Pqa,Ipqa,Ierror)
               DO i = 1, l
                 CALL XRED(Pqa(i),Ipqa(i),Ierror)
                 IF ( Ierror/=0 ) RETURN
-              ENDDO
+              END DO
               RETURN
-            ENDIF
-          ENDIF
-        ENDIF
-      ENDIF
-    ENDIF
-  ENDIF
+            END IF
+          END IF
+        END IF
+      END IF
+    END IF
+  END IF
   !
   !        *****     ERROR TERMINATION     *****
   !

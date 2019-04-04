@@ -120,7 +120,7 @@ SUBROUTINE DFDJC1(FCN,N,X,Fvec,Fjac,Ldfjac,Iflag,Ml,Mu,Epsfcn,Wa1,Wa2)
         h = eps*ABS(Wa2(j))
         IF ( h==zero ) h = eps
         X(j) = Wa2(j) + h
-      ENDDO
+      END DO
       CALL FCN(N,X,Wa1,Iflag)
       IF ( Iflag<0 ) EXIT
       DO j = k, N, msum
@@ -130,9 +130,9 @@ SUBROUTINE DFDJC1(FCN,N,X,Fvec,Fjac,Ldfjac,Iflag,Ml,Mu,Epsfcn,Wa1,Wa2)
         DO i = 1, N
           Fjac(i,j) = zero
           IF ( i>=j-Mu.AND.i<=j+Ml ) Fjac(i,j) = (Wa1(i)-Fvec(i))/h
-        ENDDO
-      ENDDO
-    ENDDO
+        END DO
+      END DO
+    END DO
   ELSE
     !
     !        COMPUTATION OF DENSE APPROXIMATE JACOBIAN.
@@ -147,9 +147,9 @@ SUBROUTINE DFDJC1(FCN,N,X,Fvec,Fjac,Ldfjac,Iflag,Ml,Mu,Epsfcn,Wa1,Wa2)
       X(j) = temp
       DO i = 1, N
         Fjac(i,j) = (Wa1(i)-Fvec(i))/h
-      ENDDO
-    ENDDO
-  ENDIF
+      END DO
+    END DO
+  END IF
   !
   !     LAST CARD OF SUBROUTINE DFDJC1.
   !

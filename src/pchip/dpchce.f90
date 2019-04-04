@@ -159,7 +159,7 @@ SUBROUTINE DPCHCE(Ic,Vc,N,X,H,Slope,D,Incfd,Ierr)
         !           INDEX RUNS FROM K DOWN TO 1.
         xtemp(j) = X(index)
         IF ( j<k ) stemp(j) = Slope(index-1)
-      ENDDO
+      END DO
       !                 -----------------------------
       D(1,1) = DPCHDF(k,xtemp,stemp,ierf)
       !                 -----------------------------
@@ -168,7 +168,7 @@ SUBROUTINE DPCHCE(Ic,Vc,N,X,H,Slope,D,Incfd,Ierr)
       !        USE 'NOT A KNOT' CONDITION.
       D(1,1) = (three*(H(1)*Slope(2)+H(2)*Slope(1))-two*(H(1)+H(2))*D(1,2)&
         -H(1)*D(1,3))/H(2)
-    ENDIF
+    END IF
     !
     IF ( ibeg<=0 ) THEN
       !
@@ -178,16 +178,16 @@ SUBROUTINE DPCHCE(Ic,Vc,N,X,H,Slope,D,Incfd,Ierr)
         IF ( D(1,1)/=zero ) THEN
           D(1,1) = zero
           Ierr = Ierr + 1
-        ENDIF
+        END IF
       ELSEIF ( DPCHST(D(1,1),Slope(1))<zero ) THEN
         D(1,1) = zero
         Ierr = Ierr + 1
       ELSEIF ( ABS(D(1,1))>three*ABS(Slope(1)) ) THEN
         D(1,1) = three*Slope(1)
         Ierr = Ierr + 1
-      ENDIF
-    ENDIF
-  ENDIF
+      END IF
+    END IF
+  END IF
   !
   !  TREAT END BOUNDARY CONDITION.
   !
@@ -207,7 +207,7 @@ SUBROUTINE DPCHCE(Ic,Vc,N,X,H,Slope,D,Incfd,Ierr)
         !           INDEX RUNS FROM N+1-K UP TO N.
         xtemp(j) = X(index)
         IF ( j<k ) stemp(j) = Slope(index)
-      ENDDO
+      END DO
       !                 -----------------------------
       D(1,N) = DPCHDF(k,xtemp,stemp,ierf)
       !                 -----------------------------
@@ -216,7 +216,7 @@ SUBROUTINE DPCHCE(Ic,Vc,N,X,H,Slope,D,Incfd,Ierr)
       !        USE 'NOT A KNOT' CONDITION.
       D(1,N) = (three*(H(N-1)*Slope(N-2)+H(N-2)*Slope(N-1))&
         -two*(H(N-1)+H(N-2))*D(1,N-1)-H(N-1)*D(1,N-2))/H(N-2)
-    ENDIF
+    END IF
     !
     IF ( iend<=0 ) THEN
       !
@@ -226,16 +226,16 @@ SUBROUTINE DPCHCE(Ic,Vc,N,X,H,Slope,D,Incfd,Ierr)
         IF ( D(1,N)/=zero ) THEN
           D(1,N) = zero
           Ierr = Ierr + 2
-        ENDIF
+        END IF
       ELSEIF ( DPCHST(D(1,N),Slope(N-1))<zero ) THEN
         D(1,N) = zero
         Ierr = Ierr + 2
       ELSEIF ( ABS(D(1,N))>three*ABS(Slope(N-1)) ) THEN
         D(1,N) = three*Slope(N-1)
         Ierr = Ierr + 2
-      ENDIF
-    ENDIF
-  ENDIF
+      END IF
+    END IF
+  END IF
   !
   !  NORMAL RETURN.
   !

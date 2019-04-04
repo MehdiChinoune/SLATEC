@@ -400,7 +400,7 @@ SUBROUTINE FC(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkpt,Nconst,Xconst,&
       'IN FC, THE NUMBER OF KNOTS MUST BE AT LEAST TWICE THE B-SPLINE ORDER.',2,1)
     Mode = -1
     RETURN
-  ENDIF
+  END IF
 
   mdg = Nbkpt - Nord + 3
   mdw = Nbkpt - Nord + 1 + Nconst

@@ -78,7 +78,7 @@ SUBROUTINE DBSPVN(T,Jhigh,K,Index,X,Ileft,Vnikx,Work,Iwork)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   !
   INTEGER Ileft, imjp1, Index, ipj, Iwork, Jhigh, jp1, jp1ml, K, l
   REAL(8) :: T(*), vm, vmprev, Vnikx(*), Work(*), X
@@ -106,7 +106,7 @@ SUBROUTINE DBSPVN(T,Jhigh,K,Index,X,Ileft,Vnikx,Work,Iwork)
       Iwork = 1
       Vnikx(1) = 1.0D0
       IF ( Iwork>=Jhigh ) GOTO 100
-    ENDIF
+    END IF
     DO
       !
       ipj = Ileft + Iwork
@@ -120,12 +120,12 @@ SUBROUTINE DBSPVN(T,Jhigh,K,Index,X,Ileft,Vnikx,Work,Iwork)
         vm = Vnikx(l)/(Work(l)+Work(K+jp1ml))
         Vnikx(l) = vm*Work(l) + vmprev
         vmprev = vm*Work(K+jp1ml)
-      ENDDO
+      END DO
       Vnikx(jp1) = vmprev
       Iwork = jp1
       IF ( Iwork>=Jhigh ) EXIT
-    ENDDO
-  ENDIF
+    END DO
+  END IF
   !
   100  RETURN
   END SUBROUTINE DBSPVN

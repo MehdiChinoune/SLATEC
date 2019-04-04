@@ -180,7 +180,7 @@ SUBROUTINE DNBFS(Abe,Lda,N,Ml,Mu,V,Itask,Ind,Work,Iwork)
   !   900510  Convert XERRWV calls to XERMSG calls, changed GOTOs to
   !           IF-THEN-ELSEs.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   !
   INTEGER Lda, N, Itask, Ind, Iwork(*), Ml, Mu
   REAL(8) :: Abe(Lda,*), V(*), Work(*), D1MACH
@@ -194,35 +194,35 @@ SUBROUTINE DNBFS(Abe,Lda,N,Ml,Mu,V,Itask,Ind,Work,Iwork)
     CALL XERMSG('SLATEC','DNBFS','LDA = '//xern1//' IS LESS THAN N = '//&
       xern2,-1,1)
     RETURN
-  ENDIF
+  END IF
   !
   IF ( N<=0 ) THEN
     Ind = -2
     WRITE (xern1,'(I8)') N
     CALL XERMSG('SLATEC','DNBFS','N = '//xern1//' IS LESS THAN 1',-2,1)
     RETURN
-  ENDIF
+  END IF
   !
   IF ( Itask<1 ) THEN
     Ind = -3
     WRITE (xern1,'(I8)') Itask
     CALL XERMSG('SLATEC','DNBFS','ITASK = '//xern1//' IS LESS THAN 1',-3,1)
     RETURN
-  ENDIF
+  END IF
   !
   IF ( Ml<0.OR.Ml>=N ) THEN
     Ind = -5
     WRITE (xern1,'(I8)') Ml
     CALL XERMSG('SLATEC','DNBFS','ML = '//xern1//' IS OUT OF RANGE',-5,1)
     RETURN
-  ENDIF
+  END IF
   !
   IF ( Mu<0.OR.Mu>=N ) THEN
     Ind = -6
     WRITE (xern1,'(I8)') Mu
     CALL XERMSG('SLATEC','DNBFS','MU = '//xern1//' IS OUT OF RANGE',-6,1)
     RETURN
-  ENDIF
+  END IF
   !
   IF ( Itask==1 ) THEN
     !
@@ -236,7 +236,7 @@ SUBROUTINE DNBFS(Abe,Lda,N,Ml,Mu,V,Itask,Ind,Work,Iwork)
       Ind = -4
       CALL XERMSG('SLATEC','DNBFS','SINGULAR MATRIX A - NO SOLUTION',-4,1)
       RETURN
-    ENDIF
+    END IF
     !
     !        COMPUTE IND (ESTIMATE OF NO. OF SIGNIFICANT DIGITS)
     !        AND CHECK FOR IND GREATER THAN ZERO
@@ -245,8 +245,8 @@ SUBROUTINE DNBFS(Abe,Lda,N,Ml,Mu,V,Itask,Ind,Work,Iwork)
     IF ( Ind<=0 ) THEN
       Ind = -10
       CALL XERMSG('SLATEC','DNBFS','SOLUTION MAY HAVE NO SIGNIFICANCE',-10,0)
-    ENDIF
-  ENDIF
+    END IF
+  END IF
   !
   !     SOLVE AFTER FACTORING
   !

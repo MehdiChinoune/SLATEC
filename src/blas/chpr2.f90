@@ -137,11 +137,11 @@ SUBROUTINE CHPR2(Uplo,N,Alpha,X,Incx,Y,Incy,Ap)
     info = 5
   ELSEIF ( Incy==0 ) THEN
     info = 7
-  ENDIF
+  END IF
   IF ( info/=0 ) THEN
     CALL XERBLA('CHPR2 ',info)
     RETURN
-  ENDIF
+  END IF
   !
   !     Quick return if possible.
   !
@@ -155,15 +155,15 @@ SUBROUTINE CHPR2(Uplo,N,Alpha,X,Incx,Y,Incy,Ap)
       kx = 1
     ELSE
       kx = 1 - (N-1)*Incx
-    ENDIF
+    END IF
     IF ( Incy>0 ) THEN
       ky = 1
     ELSE
       ky = 1 - (N-1)*Incy
-    ENDIF
+    END IF
     jx = kx
     jy = ky
-  ENDIF
+  END IF
   !
   !     Start the operations. In this version the elements of the array AP
   !     are accessed sequentially with one pass through AP.
@@ -182,13 +182,13 @@ SUBROUTINE CHPR2(Uplo,N,Alpha,X,Incx,Y,Incy,Ap)
           DO i = 1, j - 1
             Ap(k) = Ap(k) + X(i)*temp1 + Y(i)*temp2
             k = k + 1
-          ENDDO
+          END DO
           Ap(kk+j-1) = REAL(Ap(kk+j-1)) + REAL(X(j)*temp1+Y(j)*temp2)
         ELSE
           Ap(kk+j-1) = REAL(Ap(kk+j-1))
-        ENDIF
+        END IF
         kk = kk + j
-      ENDDO
+      END DO
     ELSE
       DO j = 1, N
         IF ( (X(jx)/=ZERO).OR.(Y(jy)/=ZERO) ) THEN
@@ -200,16 +200,16 @@ SUBROUTINE CHPR2(Uplo,N,Alpha,X,Incx,Y,Incy,Ap)
             Ap(k) = Ap(k) + X(ix)*temp1 + Y(iy)*temp2
             ix = ix + Incx
             iy = iy + Incy
-          ENDDO
+          END DO
           Ap(kk+j-1) = REAL(Ap(kk+j-1)) + REAL(X(jx)*temp1+Y(jy)*temp2)
         ELSE
           Ap(kk+j-1) = REAL(Ap(kk+j-1))
-        ENDIF
+        END IF
         jx = jx + Incx
         jy = jy + Incy
         kk = kk + j
-      ENDDO
-    ENDIF
+      END DO
+    END IF
     !
     !        Form  A  when lower triangle is stored in AP.
     !
@@ -223,12 +223,12 @@ SUBROUTINE CHPR2(Uplo,N,Alpha,X,Incx,Y,Incy,Ap)
         DO i = j + 1, N
           Ap(k) = Ap(k) + X(i)*temp1 + Y(i)*temp2
           k = k + 1
-        ENDDO
+        END DO
       ELSE
         Ap(kk) = REAL(Ap(kk))
-      ENDIF
+      END IF
       kk = kk + N - j + 1
-    ENDDO
+    END DO
   ELSE
     DO j = 1, N
       IF ( (X(jx)/=ZERO).OR.(Y(jy)/=ZERO) ) THEN
@@ -241,15 +241,15 @@ SUBROUTINE CHPR2(Uplo,N,Alpha,X,Incx,Y,Incy,Ap)
           ix = ix + Incx
           iy = iy + Incy
           Ap(k) = Ap(k) + X(ix)*temp1 + Y(iy)*temp2
-        ENDDO
+        END DO
       ELSE
         Ap(kk) = REAL(Ap(kk))
-      ENDIF
+      END IF
       jx = jx + Incx
       jy = jy + Incy
       kk = kk + N - j + 1
-    ENDDO
-  ENDIF
+    END DO
+  END IF
   !
   !
   !     End of CHPR2 .

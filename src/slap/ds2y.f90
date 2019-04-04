@@ -133,7 +133,7 @@ SUBROUTINE DS2Y(N,Nelt,Ia,Ja,A,Isym)
   !   910502  Corrected C***FIRST EXECUTABLE STATEMENT line.  (FNF)
   !   920511  Added complete declaration section.  (WRB)
   !   930701  Updated CATEGORY section.  (FNF, WRB)
-  
+
   !     .. Scalar Arguments ..
   INTEGER Isym, N, Nelt
   !     .. Array Arguments ..
@@ -167,9 +167,9 @@ SUBROUTINE DS2Y(N,Nelt,Ia,Ja,A,Isym)
       IF ( Ja(j)/=icol ) THEN
         Ja(icol+1) = j
         EXIT
-      ENDIF
-    ENDDO
-  ENDDO
+      END IF
+    END DO
+  END DO
   Ja(N+1) = Nelt + 1
   !
   !         Mark the n+2 element so that future calls to a SLAP routine
@@ -197,8 +197,8 @@ SUBROUTINE DS2Y(N,Nelt,Ia,Ja,A,Isym)
         A(i) = A(ibgn)
         A(ibgn) = temp
         EXIT
-      ENDIF
-    ENDDO
+      END IF
+    END DO
     ibgn = ibgn + 1
     IF ( ibgn<iend ) THEN
       DO i = ibgn, iend
@@ -210,10 +210,10 @@ SUBROUTINE DS2Y(N,Nelt,Ia,Ja,A,Isym)
             temp = A(i)
             A(i) = A(j)
             A(j) = temp
-          ENDIF
-        ENDDO
-      ENDDO
-    ENDIF
-  ENDDO
+          END IF
+        END DO
+      END DO
+    END IF
+  END DO
   !------------- LAST LINE OF DS2Y FOLLOWS ----------------------------
 END SUBROUTINE DS2Y

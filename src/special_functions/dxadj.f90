@@ -71,7 +71,7 @@ SUBROUTINE DXADJ(X,Ix,Ierror)
     ELSEIF ( Ix<=KMAx-L2 ) THEN
       Ix = Ix + L2
       RETURN
-    ENDIF
+    END IF
   ELSE
     IF ( RADixl*ABS(X)>=1.0D0 ) GOTO 200
     X = X*RAD2l
@@ -81,8 +81,8 @@ SUBROUTINE DXADJ(X,Ix,Ierror)
     ELSEIF ( Ix>=-KMAx+L2 ) THEN
       Ix = Ix - L2
       RETURN
-    ENDIF
-  ENDIF
+    END IF
+  END IF
   100  CALL XERMSG('SLATEC','DXADJ','overflow in auxiliary index',207,1)
   Ierror = 207
   RETURN

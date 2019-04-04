@@ -52,7 +52,7 @@ SUBROUTINE CWRSK(Zr,Fnu,Kode,N,Y,Nz,Cw,Tol,Elim,Alim)
       s1 = COS(yy)
       s2 = SIN(yy)
       cinu = CMPLX(s1,s2)
-    ENDIF
+    END IF
     !-----------------------------------------------------------------------
     !     ON LOW EXPONENT MACHINES THE K FUNCTIONS CAN BE CLOSE TO BOTH
     !     THE UNDER AND OVERFLOW LIMITS AND THE NORMALIZATION MUST BE
@@ -67,8 +67,8 @@ SUBROUTINE CWRSK(Zr,Fnu,Kode,N,Y,Nz,Cw,Tol,Elim,Alim)
       IF ( acw>=ascle ) cscl = CMPLX(Tol,0.0E0)
     ELSE
       cscl = CMPLX(1.0E0/Tol,0.0E0)
-    ENDIF
-  ENDIF
+    END IF
+  END IF
   c1 = Cw(1)*cscl
   c2 = Cw(2)*cscl
   st = Y(1)
@@ -87,6 +87,6 @@ SUBROUTINE CWRSK(Zr,Fnu,Kode,N,Y,Nz,Cw,Tol,Elim,Alim)
     cinu = st*cinu
     st = Y(i)
     Y(i) = cinu*cscl
-  ENDDO
+  END DO
   RETURN
 END SUBROUTINE CWRSK

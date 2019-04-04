@@ -140,7 +140,7 @@ REAL(8) FUNCTION DDAWS(X)
     xbig = SQRT(0.5/eps)
     xmax = EXP(MIN(-LOG(2.D0*D1MACH(1)),LOG(D1MACH(2)))-0.001D0)
     first = .FALSE.
-  ENDIF
+  END IF
   !
   y = ABS(X)
   IF ( y<=1.0D0 ) THEN
@@ -160,7 +160,7 @@ REAL(8) FUNCTION DDAWS(X)
     CALL XERMSG('SLATEC','DDAWS','ABS(X) SO LARGE DAWS UNDERFLOWS',1,1)
     DDAWS = 0.0D0
     RETURN
-  ENDIF
+  END IF
   DDAWS = 0.5D0/X
   IF ( y>xbig ) RETURN
   !

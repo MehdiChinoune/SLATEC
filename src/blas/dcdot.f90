@@ -47,7 +47,7 @@ SUBROUTINE DCDOT(N,Fm,Cx,Incx,Cy,Incy,Dcr,Dci)
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
-  
+
   INTEGER i, Incx, Incy, kx, ky, N
   COMPLEX Cx(*), Cy(*)
   REAL(8) :: Dcr, Dci, dt1, dt2, dt3, dt4, Fm
@@ -69,6 +69,6 @@ SUBROUTINE DCDOT(N,Fm,Cx,Incx,Cy,Incy,Dcr,Dci)
       Dci = Dci + (dt1*dt4) + Fm*(dt3*dt2)
       kx = kx + Incx
       ky = ky + Incy
-    ENDDO
-  ENDIF
+    END DO
+  END IF
 END SUBROUTINE DCDOT

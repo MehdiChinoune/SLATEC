@@ -117,14 +117,14 @@ CONTAINS
     !
     DO i = 1, 9
       itest(i) = 0
-    ENDDO
+    END DO
     icnt = 0
     TOL = SQRT(D1MACH(4))
     m = 11
     DO i = 1, m
       x(i) = i - 6
       y(i) = x(i)**4
-    ENDDO
+    END DO
     !
     !     Test DPOLFT
     !     Input EPS is negative - specified level
@@ -151,13 +151,13 @@ CONTAINS
         IF ( Kprint>2.OR.itest(icnt)/=1 ) THEN
           WRITE (Lun,FMT=99005) SVEps, NORdp, RP, IERp
           WRITE (Lun,FMT=99006) EPS, NORd, R(11), IERr
-        ENDIF
+        END IF
         !
         !     Send message indicating passage or failure of test
         !
         CALL PASS(Lun,icnt,itest(icnt))
-      ENDIF
-    ENDIF
+      END IF
+    END IF
     !
     !     Input EPS is negative - computed level
     !
@@ -178,13 +178,13 @@ CONTAINS
           WRITE (Lun,FMT=99008) maxord
           WRITE (Lun,FMT=99005) SVEps, NORdp, RP, IERp
           WRITE (Lun,FMT=99006) EPS, NORd, R(11), IERr
-        ENDIF
+        END IF
         !
         !     Send message indicating passage or failure of test
         !
         CALL PASS(Lun,icnt,itest(icnt))
-      ENDIF
-    ENDIF
+      END IF
+    END IF
     !
     !     Input EPS is zero
     !
@@ -208,13 +208,13 @@ CONTAINS
           WRITE (Lun,FMT=99008) maxord
           WRITE (Lun,FMT=99005) SVEps, NORdp, RP, IERp
           WRITE (Lun,FMT=99006) EPS, NORd, R(11), IERr
-        ENDIF
+        END IF
         !
         !     Send message indicating passage or failure of test
         !
         CALL PASS(Lun,icnt,itest(icnt))
-      ENDIF
-    ENDIF
+      END IF
+    END IF
     !
     !     Input EPS is positive
     !
@@ -237,13 +237,13 @@ CONTAINS
           WRITE (Lun,FMT=99008) maxord
           WRITE (Lun,FMT=99005) SVEps, NORdp, RP, IERp
           WRITE (Lun,FMT=99006) EPS, NORd, R(11), IERr
-        ENDIF
+        END IF
         !
         !     Send message indicating passage or failure of test
         !
         CALL PASS(Lun,icnt,itest(icnt))
-      ENDIF
-    ENDIF
+      END IF
+    END IF
     !
     !     Improper input
     !
@@ -257,7 +257,7 @@ CONTAINS
       CALL XSETF(0)
     ELSE
       CALL XSETF(1)
-    ENDIF
+    END IF
     CALL XERCLR
     !
     IF ( Kprint>=3 ) WRITE (Lun,99001)
@@ -272,14 +272,14 @@ CONTAINS
       IF ( Kprint>=3 ) WRITE (Lun,99011) 'PASSED', IERr
     ELSEIF ( Kprint>=2 ) THEN
       WRITE (Lun,99011) 'FAILED', IERr
-    ENDIF
+    END IF
     !
     !     Check for suppression of printing.
     !
     IF ( Kprint/=0 ) THEN
       IF ( Kprint/=1.OR.itest(icnt)/=1 ) THEN
         IF ( Kprint<=2.AND.itest(icnt)==1 ) THEN
-        ENDIF
+        END IF
         !
         !     Send message indicating passage or failure of test
         !
@@ -287,8 +287,8 @@ CONTAINS
         !
         CALL XERCLR
         CALL XSETF(kontrl)
-      ENDIF
-    ENDIF
+      END IF
+    END IF
     !
     !     MAXORD too small to meet RMS error
     !
@@ -315,13 +315,13 @@ CONTAINS
           WRITE (Lun,FMT=99008) maxord
           WRITE (Lun,FMT=99005) SVEps, NORdp, RP, IERp
           WRITE (Lun,FMT=99006) EPS, NORd, R(11), IERr
-        ENDIF
+        END IF
         !
         !     Send message indicating passage or failure of test
         !
         CALL PASS(Lun,icnt,itest(icnt))
-      ENDIF
-    ENDIF
+      END IF
+    END IF
     !
     !     MAXORD too small to meet statistical test
     !
@@ -346,13 +346,13 @@ CONTAINS
           WRITE (Lun,FMT=99008) maxord
           WRITE (Lun,FMT=99005) SVEps, NORdp, RP, IERp
           WRITE (Lun,FMT=99006) EPS, NORd, R(11), IERr
-        ENDIF
+        END IF
         !
         !     Send message indicating passage or failure of test
         !
         CALL PASS(Lun,icnt,itest(icnt))
-      ENDIF
-    ENDIF
+      END IF
+    END IF
     !
     !     Test DPCOEF
     !
@@ -362,7 +362,7 @@ CONTAINS
     y(6) = 1.0D0
     DO i = 1, m
       w(i) = 1.0D0/(y(i)**2)
-    ENDDO
+    END DO
     y(6) = 0.0D0
     CALL DPOLFT(m,x,y,w,maxord,NORd,EPS,R,IERr,a)
     CALL DPCOEF(4,5.0D0,tc,a)
@@ -382,8 +382,8 @@ CONTAINS
         !     Send message indicating passage or failure of test
         !
         CALL PASS(Lun,icnt,itest(icnt))
-      ENDIF
-    ENDIF
+      END IF
+    END IF
     !
     !     Test DP1VLU
     !     Normal call
@@ -406,15 +406,15 @@ CONTAINS
         !     Send message indicating passage or failure of test
         !
         CALL PASS(Lun,icnt,itest(icnt))
-      ENDIF
-    ENDIF
+      END IF
+    END IF
     !
     !     Check to see if all tests passed
     !
     Ipass = 1
     DO i = 1, 9
       Ipass = Ipass*itest(i)
-    ENDDO
+    END DO
     !
     IF ( Ipass==1.AND.Kprint>=3 ) WRITE (Lun,FMT=99019)
     IF ( Ipass==0.AND.Kprint>=2 ) WRITE (Lun,FMT=99020)
@@ -527,7 +527,7 @@ CONTAINS
       Ipass = 0
       fatal = .TRUE.
       IF ( Kprint>=2 ) CALL PASS(Lun,1,0)
-    ENDIF
+    END IF
     IF ( (fatal.AND.Kprint>=2).OR.Kprint>=3 ) WRITE (Lun,99007) infos, &
       fnorms, info, fnorm
     !
@@ -538,12 +538,12 @@ CONTAINS
     CALL DFCN2(iflag,m,n,x,fvec,fjac,ldfjac)
     DO i = 1, 3
       fjtj(i) = zero
-    ENDDO
+    END DO
     DO i = 1, m
       fjtj(1) = fjtj(1) + fjac(i,1)**2
       fjtj(2) = fjtj(2) + fjac(i,1)*fjac(i,2)
       fjtj(3) = fjtj(3) + fjac(i,2)**2
-    ENDDO
+    END DO
     !
     !     Calculate the covariance matrix.
     !
@@ -563,7 +563,7 @@ CONTAINS
       Ipass = 0
       fatal = .TRUE.
       IF ( Kprint>=2 ) CALL PASS(Lun,2,0)
-    ENDIF
+    END IF
     IF ( (fatal.AND.Kprint>=2).OR.Kprint>=3 ) WRITE (Lun,99008) infos, info, &
       temp1, temp2, temp3
     !
@@ -582,7 +582,7 @@ CONTAINS
       Ipass = 0
       fatal = .TRUE.
       IF ( Kprint>=2 ) CALL PASS(Lun,3,0)
-    ENDIF
+    END IF
     IF ( (fatal.AND.Kprint>=2).OR.Kprint>=3 ) WRITE (Lun,99007) infos, &
       fnorms, info, fnorm
     !
@@ -593,12 +593,12 @@ CONTAINS
     CALL DFDJC3(DFCN1,m,n,x,fvec,fjac,ldfjac,iflag,zero,wa)
     DO i = 1, 3
       fjtj(i) = zero
-    ENDDO
+    END DO
     DO i = 1, m
       fjtj(1) = fjtj(1) + fjac(i,1)**2
       fjtj(2) = fjtj(2) + fjac(i,1)*fjac(i,2)
       fjtj(3) = fjtj(3) + fjac(i,2)**2
-    ENDDO
+    END DO
     !
     !     Calculate the covariance matrix.
     !
@@ -618,7 +618,7 @@ CONTAINS
       Ipass = 0
       fatal = .TRUE.
       IF ( Kprint>=2 ) CALL PASS(Lun,4,0)
-    ENDIF
+    END IF
     IF ( (fatal.AND.Kprint>=2).OR.Kprint>=3 ) WRITE (Lun,99008) infos, info, &
       temp1, temp2, temp3
     !
@@ -638,7 +638,7 @@ CONTAINS
       Ipass = 0
       fatal = .TRUE.
       IF ( Kprint>=2 ) CALL PASS(Lun,5,0)
-    ENDIF
+    END IF
     IF ( (fatal.AND.Kprint>=2).OR.Kprint>=3 ) WRITE (Lun,99007) infos, &
       fnorms, info, fnorm
     !
@@ -647,14 +647,14 @@ CONTAINS
     sigma = fnorm*fnorm/(m-n)
     DO i = 1, 3
       fjtj(i) = zero
-    ENDDO
+    END DO
     iflag = 3
     DO i = 1, m
       CALL DFCN3(iflag,m,n,x,fvec,fjrow,i)
       fjtj(1) = fjtj(1) + fjrow(1)**2
       fjtj(2) = fjtj(2) + fjrow(1)*fjrow(2)
       fjtj(3) = fjtj(3) + fjrow(2)**2
-    ENDDO
+    END DO
     !
     !     Calculate the covariance matrix.
     !
@@ -674,7 +674,7 @@ CONTAINS
       Ipass = 0
       fatal = .TRUE.
       IF ( Kprint>=2 ) CALL PASS(Lun,6,0)
-    ENDIF
+    END IF
     IF ( (fatal.AND.Kprint>=2).OR.Kprint>=3 ) WRITE (Lun,99008) infos, info, &
       temp1, temp2, temp3
     !
@@ -685,7 +685,7 @@ CONTAINS
       CALL XSETF(0)
     ELSE
       CALL XSETF(1)
-    ENDIF
+    END IF
     fatal = .FALSE.
     CALL XERCLR
     !
@@ -713,11 +713,11 @@ CONTAINS
       IF ( Kprint>=2 ) THEN
         WRITE (Lun,99003)
         99003 FORMAT (' AT LEAST ONE INCORRECT ARGUMENT TEST FAILED')
-      ENDIF
+      END IF
     ELSEIF ( Kprint>=3 ) THEN
       WRITE (Lun,99004)
       99004 FORMAT (' ALL INCORRECT ARGUMENT TESTS PASSED')
-    ENDIF
+    END IF
     !
     !     Print PASS/FAIL message.
     !
@@ -869,7 +869,7 @@ CONTAINS
       xconst(nconst) = t
       yconst(nconst) = zero
       nderiv(nconst) = 1 + 4*2
-    ENDDO
+    END DO
     !
     !     Constrain function value at right-most breakpoint to be one.
     !
@@ -895,7 +895,7 @@ CONTAINS
       xconst(nconst) = bkpt(l)
       yconst(nconst) = zero
       nderiv(nconst) = 0 + 4*2
-    ENDDO
+    END DO
     !
     idigit = -4
     !
@@ -908,7 +908,7 @@ CONTAINS
         ,idigit)
       CALL DVOUT(nconst,yconst,'('' CONSTRAINT VALUES'')',idigit)
       CALL IVOUT(nconst,nderiv,'('' CONSTRAINT INDICATOR'')',idigit)
-    ENDIF
+    END IF
     !
     !     Declare amount of working storage allocated to DFC.
     !
@@ -931,7 +931,7 @@ CONTAINS
     diff = 0.0D0
     DO i = 1, ndata
       diff = MAX(diff,ABS(coeff(i)-coefck(i)))
-    ENDDO
+    END DO
     IF ( diff<=tol ) THEN
       fatal = .FALSE.
       IF ( Kprint>=3 ) WRITE (Lun,99002)
@@ -941,14 +941,14 @@ CONTAINS
       fatal = .TRUE.
       IF ( Kprint>=2 ) WRITE (Lun,99003)
       99003 FORMAT (/' DFC FAILED TEST 1')
-    ENDIF
+    END IF
     !
     IF ( (fatal.AND.Kprint>=2).OR.Kprint>=3 ) THEN
       CALL DVOUT(ndata,coefck,'(/'' PREDICTED COEFFICIENTS OF THE B-SPLINE '//&
         'FROM SAMPLE'')',idigit)
       CALL DVOUT(ndata,coeff,'(/'' COEFFICIENTS OF THE B-SPLINE COMPUTED '//&
         'BY DFC'')',idigit)
-    ENDIF
+    END IF
     !
     !     Compute value, first two derivatives and probable uncertainty.
     !
@@ -962,18 +962,18 @@ CONTAINS
       ii = 1
       DO j = 1, 3
         v(i,j+1) = DBVALU(bkpt,coeff,n,nord,j-1,xval,ii,work)
-      ENDDO
+      END DO
       v(i,1) = xval
       !
       !       The variance function DCV is a companion subprogram to DFC.
       !
       v(i,5) = SQRT(DCV(xval,ndata,nconst,nord,nbkpt,bkpt,w))
-    ENDDO
+    END DO
     !
     diff = 0.0D0
     DO i = 1, nval
       diff = MAX(diff,ABS(v(i,2)-check(i)))
-    ENDDO
+    END DO
     IF ( diff<=tol ) THEN
       fatal = .FALSE.
       IF ( Kprint>=3 ) WRITE (Lun,99004)
@@ -983,7 +983,7 @@ CONTAINS
       fatal = .TRUE.
       IF ( Kprint>=2 ) WRITE (Lun,99005)
       99005 FORMAT (/' DFC (AND DBVALU) FAILED TEST 2')
-    ENDIF
+    END IF
     !
     IF ( (fatal.AND.Kprint>=2).OR.Kprint>=3 ) THEN
       !
@@ -994,7 +994,7 @@ CONTAINS
       WRITE (Lun,99006)
       99006 FORMAT (/' VALUES SHOULD CORRESPOND TO THOSE IN ','SAND78-1291,',&
         ' P. 26')
-    ENDIF
+    END IF
     !
     !     Trigger error conditions.
     !
@@ -1003,7 +1003,7 @@ CONTAINS
       CALL XSETF(0)
     ELSE
       CALL XSETF(1)
-    ENDIF
+    END IF
     fatal = .FALSE.
     CALL XERCLR
     !
@@ -1053,11 +1053,11 @@ CONTAINS
       IF ( Kprint>=2 ) THEN
         WRITE (Lun,99008)
         99008 FORMAT (' AT LEAST ONE INCORRECT ARGUMENT TEST FAILED')
-      ENDIF
+      END IF
     ELSEIF ( Kprint>=3 ) THEN
       WRITE (Lun,99009)
       99009 FORMAT (' ALL INCORRECT ARGUMENT TESTS PASSED')
-    ENDIF
+    END IF
     !
     !     Print PASS/FAIL message.
     !
@@ -1116,7 +1116,7 @@ CONTAINS
     DO i = 1, M
       temp = i
       Fvec(i) = two + two*temp - EXP(temp*X(1)) - EXP(temp*X(2))
-    ENDDO
+    END DO
   END SUBROUTINE DFCN1
   !** DFCN2
   SUBROUTINE DFCN2(Iflag,M,N,X,Fvec,Fjac,Ldfjac)
@@ -1172,7 +1172,7 @@ CONTAINS
       DO i = 1, M
         temp = i
         Fvec(i) = two + two*temp - EXP(temp*X(1)) - EXP(temp*X(2))
-      ENDDO
+      END DO
     ELSE
       !
       !       Evaluate Jacobian.
@@ -1182,8 +1182,8 @@ CONTAINS
         temp = i
         Fjac(i,1) = -temp*EXP(temp*X(1))
         Fjac(i,2) = -temp*EXP(temp*X(2))
-      ENDDO
-    ENDIF
+      END DO
+    END IF
   END SUBROUTINE DFCN2
   !** DFCN3
   SUBROUTINE DFCN3(Iflag,M,N,X,Fvec,Fjrow,Nrow)
@@ -1239,7 +1239,7 @@ CONTAINS
       DO i = 1, M
         temp = i
         Fvec(i) = two + two*temp - EXP(temp*X(1)) - EXP(temp*X(2))
-      ENDDO
+      END DO
     ELSE
       !
       !       Evaluate one row of Jacobian.
@@ -1248,7 +1248,7 @@ CONTAINS
       temp = Nrow
       Fjrow(1) = -temp*EXP(temp*X(1))
       Fjrow(2) = -temp*EXP(temp*X(2))
-    ENDIF
+    END IF
   END SUBROUTINE DFCN3
 END MODULE TEST53_MOD
 !** TEST53
@@ -1323,7 +1323,7 @@ PROGRAM TEST53
     CALL XSETF(0)
   ELSE
     CALL XSETF(1)
-  ENDIF
+  END IF
   !
   !     Test DNLS1E and DNLS1
   !
@@ -1349,6 +1349,6 @@ PROGRAM TEST53
     WRITE (lun,99002) nfail
     99002 FORMAT (/' ************* WARNING -- ',I5,&
       ' TEST(S) FAILED IN PROGRAM TEST53 *************')
-  ENDIF
+  END IF
   STOP
 END PROGRAM TEST53

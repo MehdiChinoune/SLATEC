@@ -76,7 +76,7 @@ REAL FUNCTION PSI(X)
     xbig = 1.0/SQRT(R1MACH(3))
     dxrel = SQRT(R1MACH(4))
     first = .FALSE.
-  ENDIF
+  END IF
   !
   y = ABS(X)
   IF ( y>=2.0 ) THEN
@@ -89,9 +89,9 @@ REAL FUNCTION PSI(X)
       PSI = LOG(ABS(X)) - 0.5/X + aux - pi*COT(pi*X)
     ELSE
       PSI = LOG(X) - 0.5/X + aux
-    ENDIF
+    END IF
     RETURN
-  ENDIF
+  END IF
   !
   ! PSI(X) FOR -2. .LT. X .LT. 2.
   !
@@ -112,6 +112,6 @@ REAL FUNCTION PSI(X)
   !
   DO i = 1, n
     PSI = PSI - 1.0/(X+i-1)
-  ENDDO
+  END DO
   RETURN
 END FUNCTION PSI

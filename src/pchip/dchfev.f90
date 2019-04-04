@@ -130,8 +130,8 @@ SUBROUTINE DCHFEV(X1,X2,F1,F2,D1,D2,Ne,Xe,Fe,Next,Ierr)
       Ierr = -2
       CALL XERMSG('SLATEC','DCHFEV','INTERVAL ENDPOINTS EQUAL',Ierr,1)
       RETURN
-    ENDIF
-  ENDIF
+    END IF
+  END IF
   !
   !  INITIALIZE.
   !
@@ -160,7 +160,7 @@ SUBROUTINE DCHFEV(X1,X2,F1,F2,D1,D2,Ne,Xe,Fe,Next,Ierr)
     IF ( x<xmi ) Next(1) = Next(1) + 1
     IF ( x>xma ) Next(2) = Next(2) + 1
     !        (NOTE REDUNDANCY--IF EITHER CONDITION IS TRUE, OTHER IS FALSE.)
-  ENDDO
+  END DO
   !
   !  NORMAL RETURN.
   !

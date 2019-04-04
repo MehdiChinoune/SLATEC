@@ -61,7 +61,7 @@ SUBROUTINE ZSERI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol,Elim,Alim)
     acz = ZABS(czr,czi)
     nn = N
     CALL ZLOG(hzr,hzi,ckr,cki,idum)
-  ENDIF
+  END IF
   100  dfnu = Fnu + (nn-1)
   fnup = dfnu + 1.0D0
   !-----------------------------------------------------------------------
@@ -78,7 +78,7 @@ SUBROUTINE ZSERI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol,Elim,Alim)
       ss = 1.0D0/Tol
       crscr = Tol
       ascle = arm*ss
-    ENDIF
+    END IF
     aa = EXP(ak1r)
     IF ( iflag==1 ) aa = aa*ss
     coefr = aa*COS(ak1i)
@@ -108,8 +108,8 @@ SUBROUTINE ZSERI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol,Elim,Alim)
           ak = ak + 2.0D0
           aa = aa*acz*rs
           IF ( aa<=atol ) EXIT
-        ENDDO
-      ENDIF
+        END DO
+      END IF
       s2r = s1r*coefr - s1i*coefi
       s2i = s1r*coefi + s1i*coefr
       wr(i) = s2r
@@ -117,7 +117,7 @@ SUBROUTINE ZSERI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol,Elim,Alim)
       IF ( iflag/=0 ) THEN
         CALL ZUCHK(s2r,s2i,nw,ascle,Tol)
         IF ( nw/=0 ) GOTO 200
-      ENDIF
+      END IF
       m = nn - i + 1
       Yr(m) = s2r*crscr
       Yi(m) = s2i*crscr
@@ -125,8 +125,8 @@ SUBROUTINE ZSERI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol,Elim,Alim)
         CALL ZDIV(coefr,coefi,hzr,hzi,str,sti)
         coefr = str*dfnu
         coefi = sti*dfnu
-      ENDIF
-    ENDDO
+      END IF
+    END DO
     IF ( nn<=2 ) RETURN
     k = nn - 2
     ak = k
@@ -161,13 +161,13 @@ SUBROUTINE ZSERI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol,Elim,Alim)
         ak = ak - 1.0D0
         k = k - 1
         IF ( ZABS(ckr,cki)>ascle ) GOTO 400
-      ENDDO
+      END DO
       RETURN
     ELSE
       ib = 3
       GOTO 300
-    ENDIF
-  ENDIF
+    END IF
+  END IF
   200  Nz = Nz + 1
   Yr(nn) = zeror
   Yi(nn) = zeroi
@@ -182,14 +182,14 @@ SUBROUTINE ZSERI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol,Elim,Alim)
     nn = nn - 1
     IF ( nn==0 ) RETURN
     GOTO 100
-  ENDIF
+  END IF
   300 CONTINUE
   DO i = ib, nn
     Yr(k) = (ak+Fnu)*(rzr*Yr(k+1)-rzi*Yi(k+1)) + Yr(k+2)
     Yi(k) = (ak+Fnu)*(rzr*Yi(k+1)+rzi*Yr(k+1)) + Yi(k+2)
     ak = ak - 1.0D0
     k = k - 1
-  ENDDO
+  END DO
   RETURN
   400  ib = l + 1
   IF ( ib>nn ) RETURN
@@ -199,11 +199,11 @@ SUBROUTINE ZSERI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol,Elim,Alim)
   IF ( Fnu==0.0D0 ) THEN
     Yr(1) = coner
     Yi(1) = conei
-  ENDIF
+  END IF
   IF ( N==1 ) RETURN
   DO i = 2, N
     Yr(i) = zeror
     Yi(i) = zeroi
-  ENDDO
+  END DO
   RETURN
 END SUBROUTINE ZSERI

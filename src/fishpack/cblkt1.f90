@@ -80,15 +80,15 @@ SUBROUTINE CBLKT1(N,An,Bn,Cn,M,Am,Bm,Cm,Idimy,Y,B,W1,W2,W3,Wd,Ww,Wu,PRDCT,CPRDCT
             DO j = 1, M
               W3(j) = (0.,0.)
               W2(j) = (0.,0.)
-            ENDDO
-          ENDIF
+            END DO
+          END IF
           DO j = 1, M
             Y(j,i) = W1(j) + W2(j) + Y(j,i)
-          ENDDO
-        ENDIF
-      ENDIF
-    ENDDO
-  ENDDO
+          END DO
+        END IF
+      END IF
+    END DO
+  END DO
   IF ( NPP==0 ) THEN
     !
     !     THE PERIODIC CASE IS TREATED USING THE CAPACITANCE MATRIX METHOD
@@ -103,7 +103,7 @@ SUBROUTINE CBLKT1(N,An,Bn,Cn,M,Am,Bm,Cm,Idimy,Y,B,W1,W2,W3,Wd,Ww,Wu,PRDCT,CPRDCT
     izr = i
     DO j = 1, M
       W2(j) = W1(j)
-    ENDDO
+    END DO
     DO ll = 2, K
       l = K - ll + 1
       ir = l - 1
@@ -117,9 +117,9 @@ SUBROUTINE CBLKT1(N,An,Bn,Cn,M,Am,Bm,Cm,Idimy,Y,B,W1,W2,W3,Wd,Ww,Wu,PRDCT,CPRDCT
       CALL PRDCT(np1,B(ip1),0,dum,0,dum,nc,Cn(idxc),W1,W1,M,Am,Bm,Cm,Wd,Ww,Wu)
       DO j = 1, M
         W1(j) = Y(j,i) + W1(j)
-      ENDDO
+      END DO
       CALL PRDCT(nz,B(iz),nm1,B(im1),np1,B(ip1),0,dum,W1,W1,M,Am,Bm,Cm,Wd,Ww,Wu)
-    ENDDO
+    END DO
     DO ll = 2, K
       l = K - ll + 1
       ir = l - 1
@@ -137,18 +137,18 @@ SUBROUTINE CBLKT1(N,An,Bn,Cn,M,Am,Bm,Cm,Idimy,Y,B,W1,W2,W3,Wd,Ww,Wu,PRDCT,CPRDCT
           CALL PRDCT(nm1,B(im1),0,dum,0,dum,na,An(idxa),W2,W2,M,Am,Bm,Cm,Wd,Ww,Wu)
           DO j = 1, M
             W2(j) = Y(j,i) + W2(j)
-          ENDDO
+          END DO
           CALL PRDCT(nz,B(iz),nm1,B(im1),np1,B(ip1),0,dum,W2,W2,M,Am,Bm,Cm,&
             Wd,Ww,Wu)
           izr = i
           IF ( i==NM ) GOTO 50
-        ENDIF
-      ENDDO
-    ENDDO
+        END IF
+      END DO
+    END DO
     50 CONTINUE
     DO j = 1, M
       Y(j,NM+1) = Y(j,NM+1) - Cn(NM+1)*W1(j) - An(NM+1)*W2(j)
-    ENDDO
+    END DO
     CALL INXCB(if/2,K-1,im1,nm1)
     CALL INXCB(if,K-1,ip,np)
     IF ( NCMplx/=0 ) THEN
@@ -157,13 +157,13 @@ SUBROUTINE CBLKT1(N,An,Bn,Cn,M,Am,Bm,Cm,Idimy,Y,B,W1,W2,W3,Wd,Ww,Wu,PRDCT,CPRDCT
     ELSE
       CALL PRDCT(NM+1,B(ip),nm1,B(im1),0,dum,0,dum,Y(1,NM+1),Y(1,NM+1),M,Am,&
         Bm,Cm,Wd,Ww,Wu)
-    ENDIF
+    END IF
     DO j = 1, M
       W1(j) = An(1)*Y(j,NM+1)
       W2(j) = Cn(NM)*Y(j,NM+1)
       Y(j,1) = Y(j,1) - W1(j)
       Y(j,NM) = Y(j,NM) - W2(j)
-    ENDDO
+    END DO
     DO l = 1, kdo
       ir = l - 1
       i2 = 2**ir
@@ -178,8 +178,8 @@ SUBROUTINE CBLKT1(N,An,Bn,Cn,M,Am,Bm,Cm,Idimy,Y,B,W1,W2,W3,Wd,Ww,Wu,PRDCT,CPRDCT
       CALL PRDCT(nm1,B(im1),0,dum,0,dum,na,An(idxa),W1,W1,M,Am,Bm,Cm,Wd,Ww,Wu)
       DO j = 1, M
         Y(j,i) = Y(j,i) - W1(j)
-      ENDDO
-    ENDDO
+      END DO
+    END DO
     !
     izr = NM
     DO l = 1, kdo
@@ -204,15 +204,15 @@ SUBROUTINE CBLKT1(N,An,Bn,Cn,M,Am,Bm,Cm,Idimy,Y,B,W1,W2,W3,Wd,Ww,Wu,PRDCT,CPRDCT
             Ww,Wu)
           DO j = 1, M
             Y(j,i) = Y(j,i) - W2(j)
-          ENDDO
+          END DO
           izr = i
           EXIT
         ELSEIF ( i==izr ) THEN
           EXIT
-        ENDIF
-      ENDDO
-    ENDDO
-  ENDIF
+        END IF
+      END DO
+    END DO
+  END IF
   !
   ! BEGIN BACK SUBSTITUTION PHASE
   !
@@ -238,25 +238,25 @@ SUBROUTINE CBLKT1(N,An,Bn,Cn,M,Am,Bm,Cm,Idimy,Y,B,W1,W2,W3,Wd,Ww,Wu,PRDCT,CPRDCT
         IF ( i<=i2 ) THEN
           DO j = 1, M
             W1(j) = (0.,0.)
-          ENDDO
+          END DO
         ELSE
           CALL PRDCT(nm1,B(im1),0,dum,0,dum,na,An(idxa),Y(1,imi2),W1,M,Am,&
             Bm,Cm,Wd,Ww,Wu)
-        ENDIF
+        END IF
         IF ( ipi2<=NM ) THEN
           CALL PRDCT(np1,B(ip1),0,dum,0,dum,nc,Cn(idxc),Y(1,ipi2),W2,M,Am,&
             Bm,Cm,Wd,Ww,Wu)
         ELSE
           DO j = 1, M
             W2(j) = (0.,0.)
-          ENDDO
-        ENDIF
+          END DO
+        END IF
         DO j = 1, M
           W1(j) = Y(j,i) + W1(j) + W2(j)
-        ENDDO
+        END DO
         CALL PRDCT(nz,B(iz),nm1,B(im1),np1,B(ip1),0,dum,W1,Y(1,i),M,Am,Bm,&
           Cm,Wd,Ww,Wu)
-      ENDIF
-    ENDDO
-  ENDDO
+      END IF
+    END DO
+  END DO
 END SUBROUTINE CBLKT1

@@ -57,5 +57,5 @@ SUBROUTINE XGETUA(Iunita,N)
     index = i + 4
     IF ( i==1 ) index = 3
     Iunita(i) = J4SAVE(index,0,.FALSE.)
-  ENDDO
+  END DO
 END SUBROUTINE XGETUA

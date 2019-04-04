@@ -57,7 +57,7 @@ COMPLEX FUNCTION C9LGMC(Zin)
     xbig = 1.0/SQRT(R1MACH(3))
     xmax = EXP(MIN(LOG(R1MACH(2)/12.0),-LOG(12.*R1MACH(1))))
     first = .FALSE.
-  ENDIF
+  END IF
   !
   z = Zin
   x = REAL(z)
@@ -74,7 +74,7 @@ COMPLEX FUNCTION C9LGMC(Zin)
     C9LGMC = (0.0,0.0)
     CALL XERMSG('SLATEC','C9LGMC','Z SO BIG C9LGMC UNDERFLOWS',1,1)
     RETURN
-  ENDIF
+  END IF
   !
   IF ( cabsz>=xbig ) C9LGMC = 1.0/(12.0*z)
   IF ( cabsz>=xbig ) RETURN
@@ -84,7 +84,7 @@ COMPLEX FUNCTION C9LGMC(Zin)
   DO i = 1, nterm
     ndx = nterm + 1 - i
     C9LGMC = bern(ndx) + C9LGMC*z2inv
-  ENDDO
+  END DO
   !
   C9LGMC = C9LGMC/z
   RETURN

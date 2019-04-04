@@ -139,7 +139,7 @@ REAL(8) FUNCTION DBSI1E(X)
     xmin = 2.0D0*D1MACH(1)
     xsml = SQRT(4.5D0*D1MACH(3))
     first = .FALSE.
-  ENDIF
+  END IF
   !
   y = ABS(X)
   IF ( y>3.0D0 ) THEN
@@ -148,7 +148,7 @@ REAL(8) FUNCTION DBSI1E(X)
     IF ( y>8.D0 ) DBSI1E = (0.375D0+DCSEVL(16.D0/y-1.D0,ai12cs,ntai12))/SQRT(y)
     DBSI1E = SIGN(DBSI1E,X)
     RETURN
-  ENDIF
+  END IF
   !
   DBSI1E = 0.0D0
   IF ( y==0.D0 ) RETURN

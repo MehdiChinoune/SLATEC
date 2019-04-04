@@ -45,7 +45,7 @@ SUBROUTINE ZSQRT(Ar,Ai,Br,Bi)
       Br = 0.0D+0
       Bi = 0.0D+0
       RETURN
-    ENDIF
+    END IF
   ELSEIF ( Ai==0.0D+0 ) THEN
     IF ( Ar>0.0D+0 ) THEN
       Br = SQRT(Ar)
@@ -55,15 +55,15 @@ SUBROUTINE ZSQRT(Ar,Ai,Br,Bi)
       Br = 0.0D+0
       Bi = SQRT(ABS(Ar))
       RETURN
-    ENDIF
+    END IF
   ELSE
     dtheta = DATAN(Ai/Ar)
     IF ( dtheta<=0.0D+0 ) THEN
       IF ( Ar<0.0D+0 ) dtheta = dtheta + dpi
     ELSE
       IF ( Ar<0.0D+0 ) dtheta = dtheta - dpi
-    ENDIF
-  ENDIF
+    END IF
+  END IF
   dtheta = dtheta*0.5D+0
   Br = zm*COS(dtheta)
   Bi = zm*SIN(dtheta)

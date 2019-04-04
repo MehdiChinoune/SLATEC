@@ -60,7 +60,7 @@ REAL FUNCTION ALNREL(X)
     nlnrel = INITS(alnrcs,23,0.1*R1MACH(3))
     xmin = -1.0 + SQRT(R1MACH(4))
     first = .FALSE.
-  ENDIF
+  END IF
   !
   IF ( X<=(-1.0) ) CALL XERMSG('SLATEC','ALNREL','X IS LE -1',2,2)
   IF ( X<xmin ) CALL XERMSG('SLATEC','ALNREL',&
@@ -70,6 +70,6 @@ REAL FUNCTION ALNREL(X)
     ALNREL = X*(1.-X*CSEVL(X/.375,alnrcs,nlnrel))
   ELSE
     ALNREL = LOG(1.0+X)
-  ENDIF
+  END IF
   !
 END FUNCTION ALNREL

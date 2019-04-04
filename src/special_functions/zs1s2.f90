@@ -57,9 +57,9 @@ SUBROUTINE ZS1S2(Zrr,Zri,S1r,S1i,S2r,S2i,Nz,Ascle,Alim,Iuf)
         CALL ZEXP(c1r,c1i,S1r,S1i)
         as1 = ZABS(S1r,S1i)
         Iuf = Iuf + 1
-      ENDIF
-    ENDIF
-  ENDIF
+      END IF
+    END IF
+  END IF
   aa = MAX(as1,as2)
   IF ( aa>Ascle ) RETURN
   S1r = zeror

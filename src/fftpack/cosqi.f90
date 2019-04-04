@@ -67,6 +67,6 @@ SUBROUTINE COSQI(N,Wsave)
   DO k = 1, N
     fk = fk + 1.
     Wsave(k) = COS(fk*dt)
-  ENDDO
+  END DO
   CALL RFFTI(N,Wsave(N+1))
 END SUBROUTINE COSQI

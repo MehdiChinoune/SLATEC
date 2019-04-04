@@ -53,7 +53,7 @@ REAL FUNCTION SDOT(N,Sx,Incx,Sy,Incy)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920310  Corrected definition of LX in DESCRIPTION.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   INTEGER i, Incx, Incy, ix, iy, m, mp1, N, ns
   REAL Sx(*), Sy(*)
   !* FIRST EXECUTABLE STATEMENT  SDOT
@@ -71,9 +71,9 @@ REAL FUNCTION SDOT(N,Sx,Incx,Sy,Incy)
       IF ( m/=0 ) THEN
         DO i = 1, m
           SDOT = SDOT + Sx(i)*Sy(i)
-        ENDDO
+        END DO
         IF ( N<5 ) RETURN
-      ENDIF
+      END IF
       GOTO 100
     ELSE
       !
@@ -82,10 +82,10 @@ REAL FUNCTION SDOT(N,Sx,Incx,Sy,Incy)
       ns = N*Incx
       DO i = 1, ns, Incx
         SDOT = SDOT + Sx(i)*Sy(i)
-      ENDDO
+      END DO
       RETURN
-    ENDIF
-  ENDIF
+    END IF
+  END IF
   !
   !     Code for unequal or nonpositive increments.
   !
@@ -97,12 +97,12 @@ REAL FUNCTION SDOT(N,Sx,Incx,Sy,Incy)
     SDOT = SDOT + Sx(ix)*Sy(iy)
     ix = ix + Incx
     iy = iy + Incy
-  ENDDO
+  END DO
   RETURN
   100  mp1 = m + 1
   DO i = mp1, N, 5
     SDOT = SDOT + Sx(i)*Sy(i) + Sx(i+1)*Sy(i+1) + Sx(i+2)*Sy(i+2) + Sx(i+3)&
       *Sy(i+3) + Sx(i+4)*Sy(i+4)
-  ENDDO
+  END DO
   RETURN
 END FUNCTION SDOT

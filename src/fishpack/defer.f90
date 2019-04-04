@@ -68,14 +68,14 @@ SUBROUTINE DEFER(COFX,COFY,Idmn,Usol,Grhs)
       IF ( .NOT.(KSWy==1.OR.(j>1.AND.j<L)) )&
         ty = dj/3.0*(uyyyy/4.0+uyyy/DLY)
       Grhs(i,j) = Grhs(i,j) + DLX**2*tx + DLY**2*ty
-    ENDDO
-  ENDDO
+    END DO
+  END DO
   !
   !     RESET THE RIGHT HAND SIDE IN USOL
   !
   DO i = IS, MS
     DO j = JS, NS
       Usol(i,j) = Grhs(i,j)
-    ENDDO
-  ENDDO
+    END DO
+  END DO
 END SUBROUTINE DEFER

@@ -83,7 +83,7 @@ SUBROUTINE DBNFAC(W,Nroww,Nrow,Nbandl,Nbandu,Iflag)
   !   890831  Modified array declarations.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
-  
+
   !
   INTEGER Iflag, Nbandl, Nbandu, Nrow, Nroww, i, ipk, j, jmax, k, &
     kmax, middle, midmk, nrowm1
@@ -100,7 +100,7 @@ SUBROUTINE DBNFAC(W,Nroww,Nrow,Nbandl,Nbandu,Iflag)
       !                A IS UPPER TRIANGULAR. CHECK THAT DIAGONAL IS NONZERO .
       DO i = 1, nrowm1
         IF ( W(middle,i)==0.0D0 ) GOTO 100
-      ENDDO
+      END DO
     ELSEIF ( Nbandu>0 ) THEN
       !
       !        A  IS NOT JUST A TRIANGULAR MATRIX. CONSTRUCT LU FACTORIZATION
@@ -114,7 +114,7 @@ SUBROUTINE DBNFAC(W,Nroww,Nrow,Nbandl,Nbandu,Iflag)
         !              DIVIDE EACH ENTRY IN COLUMN  I  BELOW DIAGONAL BY PIVOT .
         DO j = 1, jmax
           W(middle+j,i) = W(middle+j,i)/pivot
-        ENDDO
+        END DO
         !                 KMAX  IS THE NUMBER OF (NONZERO) ENTRIES IN ROW  I  TO
         !                     THE RIGHT OF THE DIAGONAL .
         kmax = MIN(Nbandu,Nrow-i)
@@ -126,9 +126,9 @@ SUBROUTINE DBNFAC(W,Nroww,Nrow,Nbandl,Nbandu,Iflag)
           factor = W(midmk,ipk)
           DO j = 1, jmax
             W(midmk+j,ipk) = W(midmk+j,ipk) - W(middle+j,i)*factor
-          ENDDO
-        ENDDO
-      ENDDO
+          END DO
+        END DO
+      END DO
     ELSE
       !              A IS LOWER TRIANGULAR. CHECK THAT DIAGONAL IS NONZERO AND
       !                 DIVIDE EACH COLUMN BY ITS DIAGONAL .
@@ -138,11 +138,11 @@ SUBROUTINE DBNFAC(W,Nroww,Nrow,Nbandl,Nbandu,Iflag)
         jmax = MIN(Nbandl,Nrow-i)
         DO j = 1, jmax
           W(middle+j,i) = W(middle+j,i)/pivot
-        ENDDO
-      ENDDO
+        END DO
+      END DO
       RETURN
-    ENDIF
-  ENDIF
+    END IF
+  END IF
   !                                       CHECK THE LAST DIAGONAL ENTRY .
   IF ( W(middle,Nrow)/=0.0D0 ) RETURN
   100 CONTINUE

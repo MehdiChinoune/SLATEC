@@ -72,15 +72,15 @@ SUBROUTINE DLPDP(A,Mda,M,N1,N2,Prgopt,X,Wnorm,Mode,Ws,Is)
       IF ( sc/=zero ) THEN
         sc = one/sc
         CALL DSCAL(np1,sc,A(i,1),Mda)
-      ENDIF
-    ENDDO
+      END IF
+    END DO
     !
     !           SCALE RT.-SIDE VECTOR TO HAVE LENGTH ONE (OR ZERO).
     ynorm = DNRM2(M,A(1,np1),1)
     IF ( ynorm/=zero ) THEN
       sc = one/ynorm
       CALL DSCAL(M,sc,A(1,np1),1)
-    ENDIF
+    END IF
     !
     !           SCALE COLS OF MATRIX H.
     j = N1 + 1
@@ -90,7 +90,7 @@ SUBROUTINE DLPDP(A,Mda,M,N1,N2,Prgopt,X,Wnorm,Mode,Ws,Is)
       CALL DSCAL(M,sc,A(1,j),1)
       X(j) = sc
       j = j + 1
-    ENDDO
+    END DO
     IF ( N1>0 ) THEN
       !
       !              COPY TRANSPOSE OF (H G Y) TO WORK ARRAY WS(*).
@@ -108,7 +108,7 @@ SUBROUTINE DLPDP(A,Mda,M,N1,N2,Prgopt,X,Wnorm,Mode,Ws,Is)
         !                 MOVE COMPONENT OF VECTOR Y INTO WORK ARRAY.
         Ws(iw+1) = A(i,np1)
         iw = iw + 1
-      ENDDO
+      END DO
       Ws(iw+1) = zero
       CALL DCOPY(n,Ws(iw+1),0,Ws(iw+1),1)
       iw = iw + n
@@ -137,15 +137,15 @@ SUBROUTINE DLPDP(A,Mda,M,N1,N2,Prgopt,X,Wnorm,Mode,Ws,Is)
         sc = one/sc
         DO j = 1, N1
           X(j) = sc*DDOT(M,A(1,j),1,Ws(ix),1)
-        ENDDO
+        END DO
         !
         !                 COMPUTE THE VECTOR Q=Y-GW.  OVERWRITE Y WITH THIS
         !                 VECTOR.
         DO i = 1, M
           A(i,np1) = A(i,np1) - DDOT(N1,A(i,1),Mda,X,1)
-        ENDDO
-      ENDIF
-    ENDIF
+        END DO
+      END IF
+    END IF
     IF ( N2>0 ) THEN
       !
       !              COPY TRANSPOSE OF (H Q) TO WORK ARRAY WS(*).
@@ -155,7 +155,7 @@ SUBROUTINE DLPDP(A,Mda,M,N1,N2,Prgopt,X,Wnorm,Mode,Ws,Is)
         iw = iw + N2
         Ws(iw+1) = A(i,np1)
         iw = iw + 1
-      ENDDO
+      END DO
       Ws(iw+1) = zero
       CALL DCOPY(N2,Ws(iw+1),0,Ws(iw+1),1)
       iw = iw + N2
@@ -185,9 +185,9 @@ SUBROUTINE DLPDP(A,Mda,M,N1,N2,Prgopt,X,Wnorm,Mode,Ws,Is)
         DO j = 1, N2
           l = N1 + j
           X(l) = sc*DDOT(M,A(1,l),1,Ws(ix),1)*X(l)
-        ENDDO
-      ENDIF
-    ENDIF
+        END DO
+      END IF
+    END IF
     !
     !           ACCOUNT FOR SCALING OF RT.-SIDE VECTOR IN SOLUTION.
     CALL DSCAL(n,ynorm,X,1)
@@ -196,8 +196,8 @@ SUBROUTINE DLPDP(A,Mda,M,N1,N2,Prgopt,X,Wnorm,Mode,Ws,Is)
     IF ( n>0 ) THEN
       X(1) = zero
       CALL DCOPY(n,X,0,X,1)
-    ENDIF
+    END IF
     Wnorm = zero
-  ENDIF
+  END IF
   RETURN
 END SUBROUTINE DLPDP

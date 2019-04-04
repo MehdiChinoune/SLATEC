@@ -282,7 +282,7 @@ CONTAINS
       IF ( relerr>errtol.AND.Kprint>=2 ) WRITE (Lun,99001) i, relerr, abserr
       99001 FORMAT (' For I  = ',I3,'  test fails with RELERR  = ',D38.30,&
         '  and ABSERR  = ',D38.30)
-    ENDDO
+    END DO
     Ipass = 0
     IF ( errmax<=errtol ) Ipass = 1
     IF ( Ipass/=0.AND.Kprint>=2 ) WRITE (Lun,99002)
@@ -359,7 +359,7 @@ PROGRAM TEST03
     CALL XSETF(0)
   ELSE
     CALL XSETF(1)
-  ENDIF
+  END IF
   !
   !     Test double precision Fullerton routines
   !
@@ -375,6 +375,6 @@ PROGRAM TEST03
     WRITE (lun,99002) nfail
     99002 FORMAT (/' ************* WARNING -- ',I5,&
       ' TEST(S) FAILED IN PROGRAM TEST03  *************')
-  ENDIF
+  END IF
   STOP
 END PROGRAM TEST03

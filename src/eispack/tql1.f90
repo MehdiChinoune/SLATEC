@@ -73,7 +73,7 @@ SUBROUTINE TQL1(N,D,E,Ierr)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   !
   INTEGER i, j, l, m, N, ii, l1, l2, mml, Ierr
   REAL D(*), E(*)
@@ -86,7 +86,7 @@ SUBROUTINE TQL1(N,D,E,Ierr)
     !
     DO i = 2, N
       E(i-1) = E(i)
-    ENDDO
+    END DO
     !
     f = 0.0E0
     b = 0.0E0
@@ -101,7 +101,7 @@ SUBROUTINE TQL1(N,D,E,Ierr)
         IF ( b+ABS(E(m))==b ) EXIT
         !     .......... E(N) IS ALWAYS ZERO, SO THERE IS NO EXIT
         !                THROUGH THE BOTTOM OF THE LOOP ..........
-      ENDDO
+      END DO
       !
       IF ( m/=l ) THEN
         DO WHILE ( j/=30 )
@@ -120,8 +120,8 @@ SUBROUTINE TQL1(N,D,E,Ierr)
             !
             DO i = l2, N
               D(i) = D(i) - h
-            ENDDO
-          ENDIF
+            END DO
+          END IF
           !
           f = f + h
           !     .......... QL TRANSFORMATION ..........
@@ -151,19 +151,19 @@ SUBROUTINE TQL1(N,D,E,Ierr)
               E(i+1) = s*p*r
               s = c/r
               c = 1.0E0/r
-            ENDIF
+            END IF
             p = c*D(i) - s*g
             D(i+1) = h + s*(c*g+s*D(i))
-          ENDDO
+          END DO
           !
           p = -s*s2*c3*el1*E(l)/dl1
           E(l) = s*p
           D(l) = c*p
           IF ( b+ABS(E(l))<=b ) GOTO 20
-        ENDDO
+        END DO
         GOTO 100
-      ENDIF
-      20       p = D(l) + f
+      END IF
+      20  p = D(l) + f
       !     .......... ORDER EIGENVALUES ..........
       IF ( l/=1 ) THEN
         !     .......... FOR I=L STEP -1 UNTIL 2 DO -- ..........
@@ -171,14 +171,14 @@ SUBROUTINE TQL1(N,D,E,Ierr)
           i = l + 2 - ii
           IF ( p>=D(i-1) ) GOTO 40
           D(i) = D(i-1)
-        ENDDO
-      ENDIF
+        END DO
+      END IF
       !
       i = 1
-      40       D(i) = p
+      40  D(i) = p
       !
-    ENDDO
-  ENDIF
+    END DO
+  END IF
   RETURN
   !     .......... SET ERROR -- NO CONVERGENCE TO AN
   !                EIGENVALUE AFTER 30 ITERATIONS ..........

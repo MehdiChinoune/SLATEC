@@ -28,7 +28,7 @@ REAL(8) FUNCTION DDANRM(Neq,V,Wt,Rpar,Ipar)
   !   901019  Merged changes made by C. Ulrich with SLATEC 4.0 format.
   !   901026  Added explicit declarations for all variables and minor
   !           cosmetic changes to prologue.  (FNF)
-  
+
   !
   INTEGER Neq, Ipar(*)
   REAL(8) :: V(Neq), Wt(Neq), Rpar(*)
@@ -41,13 +41,13 @@ REAL(8) FUNCTION DDANRM(Neq,V,Wt,Rpar,Ipar)
   vmax = 0.0D0
   DO i = 1, Neq
     IF ( ABS(V(i)/Wt(i))>vmax ) vmax = ABS(V(i)/Wt(i))
-  ENDDO
+  END DO
   IF ( vmax>0.0D0 ) THEN
     sum = 0.0D0
     DO i = 1, Neq
       sum = sum + ((V(i)/Wt(i))/vmax)**2
-    ENDDO
+    END DO
     DDANRM = vmax*SQRT(sum/Neq)
-  ENDIF
+  END IF
   !------END OF FUNCTION DDANRM------
 END FUNCTION DDANRM

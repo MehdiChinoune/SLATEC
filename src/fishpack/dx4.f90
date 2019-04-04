@@ -58,7 +58,7 @@ SUBROUTINE DX4(U,Idmn,I,J,Uxxx,Uxxxx)
           Uxxxx = (2.0*U(1,J)-9.0*U(2,J)+16.0*U(3,J)-14.0*U(4,J)+6.0*U(5,J)&
             -U(6,J))/DLX4
           RETURN
-        ENDIF
+        END IF
       ELSEIF ( I==K-1 ) THEN
         !
         !     COMPUTE PARTIAL DERIVATIVE APPROXIMATIONS AT X=B-DLX
@@ -76,7 +76,7 @@ SUBROUTINE DX4(U,Idmn,I,J,Uxxx,Uxxxx)
           Uxxxx = (-U(K-5,J)+6.0*U(K-4,J)-14.0*U(K-3,J)+16.0*U(K-2,J)&
             -9.0*U(K-1,J)+2.0*U(K,J))/DLX4
           RETURN
-        ENDIF
+        END IF
       ELSEIF ( I==K ) THEN
         !
         !     COMPUTE PARTIAL DERIVATIVE APPROXIMATIONS AT X=B
@@ -86,8 +86,8 @@ SUBROUTINE DX4(U,Idmn,I,J,Uxxx,Uxxxx)
         Uxxxx = (-2.0*U(K-5,J)+11.0*U(K-4,J)-24.0*U(K-3,J)+26.0*U(K-2,J)&
           -14.0*U(K-1,J)+3.0*U(K,J))/DLX4
         RETURN
-      ENDIF
-    ENDIF
+      END IF
+    END IF
     !
     !     COMPUTE PARTIAL DERIVATIVE APPROXIMATIONS AT X=A
     !
@@ -96,8 +96,8 @@ SUBROUTINE DX4(U,Idmn,I,J,Uxxx,Uxxxx)
       Uxxxx = (3.0*U(1,J)-14.0*U(2,J)+26.0*U(3,J)-24.0*U(4,J)+11.0*U(5,J)&
         -2.0*U(6,J))/DLX4
       RETURN
-    ENDIF
-  ENDIF
+    END IF
+  END IF
   !
   !     PERIODIC AT X=A
   !

@@ -90,7 +90,7 @@ REAL FUNCTION DAWS(X)
     xbig = SQRT(0.5/eps)
     xmax = EXP(MIN(-LOG(2.*R1MACH(1)),LOG(R1MACH(2)))-1.0)
     first = .FALSE.
-  ENDIF
+  END IF
   !
   y = ABS(X)
   IF ( y<=1.0 ) THEN
@@ -110,7 +110,7 @@ REAL FUNCTION DAWS(X)
     CALL XERMSG('SLATEC','DAWS','ABS(X) SO LARGE DAWS UNDERFLOWS',1,1)
     DAWS = 0.0
     RETURN
-  ENDIF
+  END IF
   DAWS = 0.5/X
   IF ( y>xbig ) RETURN
   !

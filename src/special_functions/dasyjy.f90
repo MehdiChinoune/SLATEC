@@ -210,7 +210,7 @@ SUBROUTINE DASYJY(FUNJY,X,Fnu,Flgjy,In,Y,Wk,Iflw)
   ELSE
     jr = I1MACH(14)
     elim = -2.303D0*tb*(ju+jr)
-  ENDIF
+  END IF
   fn = Fnu
   Iflw = 0
   DO jn = 1, In
@@ -238,7 +238,7 @@ SUBROUTINE DASYJY(FUNJY,X,Fnu,Flgjy,In,Y,Wk,Iflw)
           Wk(5) = rtz*Wk(7)
           Wk(6) = Wk(5)*Wk(5)
           GOTO 100
-        ENDIF
+        END IF
       ELSE
         !
         !     CASES FOR (X/FN).GT.SQRT(1.2775)
@@ -251,7 +251,7 @@ SUBROUTINE DASYJY(FUNJY,X,Fnu,Flgjy,In,Y,Wk,Iflw)
         Wk(5) = rtz*Wk(7)
         Wk(6) = -Wk(5)*Wk(5)
         GOTO 100
-      ENDIF
+      END IF
     ELSE
       !
       !     ASYMPTOTIC EXPANSION
@@ -269,14 +269,14 @@ SUBROUTINE DASYJY(FUNJY,X,Fnu,Flgjy,In,Y,Wk,Iflw)
         akm = MAX(sa,2.0D0)
         kmax(i) = INT(akm)
         sa = sa + sb
-      ENDDO
+      END DO
       kb = kmax(5)
       klast = kb - 1
       sa = gama(kb)
       DO k = 1, klast
         kb = kb - 1
         sa = sa*Wk(1) + gama(kb)
-      ENDDO
+      END DO
       z = Wk(1)*sa
       az = ABS(z)
       rtz = SQRT(az)
@@ -287,7 +287,7 @@ SUBROUTINE DASYJY(FUNJY,X,Fnu,Flgjy,In,Y,Wk,Iflw)
       IF ( z>0.0D0 ) THEN
         IF ( Wk(4)>elim ) GOTO 50
         Wk(6) = -Wk(6)
-      ENDIF
+      END IF
       phi = SQRT(SQRT(sa+sa+sa+sa))
       !
       !     B(ZETA) FOR S=0
@@ -298,7 +298,7 @@ SUBROUTINE DASYJY(FUNJY,X,Fnu,Flgjy,In,Y,Wk,Iflw)
       DO k = 1, klast
         kb = kb - 1
         sb = sb*Wk(1) + beta(kb,1)
-      ENDDO
+      END DO
       ksp1 = 1
       fn2 = fn*fn
       rfn2 = 1.0D0/fn2
@@ -321,20 +321,20 @@ SUBROUTINE DASYJY(FUNJY,X,Fnu,Flgjy,In,Y,Wk,Iflw)
           kb = kb - 1
           sa = sa*Wk(1) + alfa(kb,ks)
           sb = sb*Wk(1) + beta(kb,ksp1)
-        ENDDO
+        END DO
         ta = sa*rden
         tb = sb*rden
         asum = asum + ta
         bsum = bsum + tb
         IF ( ABS(ta)<=tol.AND.ABS(tb)<=relb ) EXIT
-      ENDDO
+      END DO
       bsum = bsum/(fn*Wk(7))
       GOTO 150
-    ENDIF
+    END IF
     !
-    50     Iflw = 1
+    50  Iflw = 1
     RETURN
-    100    phi = SQRT((rtz+rtz)*tau)
+    100  phi = SQRT((rtz+rtz)*tau)
     tb = 1.0D0
     asum = 1.0D0
     tfn = tau/fn
@@ -365,13 +365,13 @@ SUBROUTINE DASYJY(FUNJY,X,Fnu,Flgjy,In,Y,Wk,Iflw)
         DO j = 2, kp1
           l = l + 1
           s1 = s1*t2 + c(l)
-        ENDDO
+        END DO
         ap = ap*tfn
         upol(kp1) = ap*s1
         cr(ks) = br(ks)*rzden
         rzden = rzden*rcz
         dr(ks) = ar(ks)*rzden
-      ENDDO
+      END DO
       suma = upol(lrp1)
       sumb = upol(lr+2) + upol(lrp1)*crz32
       ju = lrp1
@@ -379,7 +379,7 @@ SUBROUTINE DASYJY(FUNJY,X,Fnu,Flgjy,In,Y,Wk,Iflw)
         ju = ju - 1
         suma = suma + cr(jr)*upol(ju)
         sumb = sumb + dr(jr)*upol(ju)
-      ENDDO
+      END DO
       rden = rden*rfn2
       tb = -tb
       IF ( Wk(1)>0.0D0 ) tb = ABS(tb)
@@ -387,30 +387,30 @@ SUBROUTINE DASYJY(FUNJY,X,Fnu,Flgjy,In,Y,Wk,Iflw)
         IF ( iseta/=1 ) THEN
           IF ( ABS(suma)<tol ) iseta = 1
           asum = asum + suma*tb
-        ENDIF
+        END IF
         IF ( isetb/=1 ) THEN
           IF ( ABS(sumb)<relb ) isetb = 1
           bsum = bsum + sumb*tb
-        ENDIF
+        END IF
         IF ( iseta==1.AND.isetb==1 ) EXIT
       ELSE
         asum = asum + suma*tb
         bsum = bsum + sumb*tb
-      ENDIF
-    ENDDO
+      END IF
+    END DO
     tb = Wk(5)
     IF ( Wk(1)>0.0D0 ) tb = -tb
     bsum = bsum/tb
     !
-    150    CALL FUNJY(Wk(6),Wk(5),Wk(4),fi,dfi)
+    150  CALL FUNJY(Wk(6),Wk(5),Wk(4),fi,dfi)
     ta = 1.0D0/tol
     tb = D1MACH(1)*ta*1.0D+3
     IF ( ABS(fi)<=tb ) THEN
       fi = fi*ta
       dfi = dfi*ta
       phi = phi*tol
-    ENDIF
+    END IF
     Y(jn) = Flgjy*phi*(fi*asum+dfi*bsum)/Wk(7)
     fn = fn - Flgjy
-  ENDDO
+  END DO
 END SUBROUTINE DASYJY

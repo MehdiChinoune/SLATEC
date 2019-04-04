@@ -66,7 +66,7 @@ SUBROUTINE SGTSL(N,C,D,E,B,Info)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   INTEGER N, Info
   REAL C(*), D(*), E(*), B(*)
   !
@@ -102,7 +102,7 @@ SUBROUTINE SGTSL(N,C,D,E,B,Info)
         t = B(kp1)
         B(kp1) = B(k)
         B(k) = t
-      ENDIF
+      END IF
       !
       !              ZERO ELEMENTS
       !
@@ -115,9 +115,9 @@ SUBROUTINE SGTSL(N,C,D,E,B,Info)
       ELSE
         Info = k
         RETURN
-      ENDIF
-    ENDDO
-  ENDIF
+      END IF
+    END DO
+  END IF
   IF ( C(N)/=0.0E0 ) THEN
     !
     !           BACK SOLVE
@@ -130,12 +130,12 @@ SUBROUTINE SGTSL(N,C,D,E,B,Info)
         DO kb = 1, nm2
           k = nm2 - kb + 1
           B(k) = (B(k)-D(k)*B(k+1)-E(k)*B(k+2))/C(k)
-        ENDDO
-      ENDIF
-    ENDIF
+        END DO
+      END IF
+    END IF
   ELSE
     Info = N
-  ENDIF
+  END IF
   !
   RETURN
 END SUBROUTINE SGTSL

@@ -93,7 +93,7 @@ SUBROUTINE RGG(Nm,N,A,B,Alfr,Alfi,Beta,Matz,Z,Ierr)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   !
   INTEGER N, Nm, Ierr, Matz
   REAL A(Nm,*), B(Nm,*), Alfr(*), Alfi(*), Beta(*), Z(Nm,*)
@@ -116,5 +116,5 @@ SUBROUTINE RGG(Nm,N,A,B,Alfr,Alfi,Beta,Matz,Z,Ierr)
     CALL QZHES(Nm,N,A,B,tf,Z)
     CALL QZIT(Nm,N,A,B,0.0E0,tf,Z,Ierr)
     CALL QZVAL(Nm,N,A,B,Alfr,Alfi,Beta,tf,Z)
-  ENDIF
+  END IF
 END SUBROUTINE RGG

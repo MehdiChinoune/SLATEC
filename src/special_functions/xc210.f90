@@ -93,7 +93,7 @@ SUBROUTINE XC210(K,Z,J,Ierror)
           ic = it/m
           id = MOD(it,m)
           Z = Z/m + id
-        ENDDO
+        END DO
         ja = ka*LG102(1) + ka1*LG102(2) + ic
       ELSE
         DO ii = 1, nm1
@@ -102,9 +102,9 @@ SUBROUTINE XC210(K,Z,J,Ierror)
           ic = it/m
           id = MOD(it,m)
           Z = Z/m + id
-        ENDDO
+        END DO
         ja = ka*LG102(1) + ic
-      ENDIF
+      END IF
       Z = Z/m
       IF ( K>0 ) THEN
         J = ja + 1
@@ -112,10 +112,10 @@ SUBROUTINE XC210(K,Z,J,Ierror)
       ELSE
         J = -ja
         Z = 10.0**(-Z)
-      ENDIF
+      END IF
       RETURN
-    ENDIF
-  ENDIF
+    END IF
+  END IF
   !   THIS ERROR OCCURS IF K EXCEEDS  MLG102**2 - 1  IN MAGNITUDE.
   !
   CALL XERMSG('SLATEC','XC210','K too large',108,1)

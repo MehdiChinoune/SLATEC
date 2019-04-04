@@ -174,11 +174,11 @@ SUBROUTINE DSBMV(Uplo,N,K,Alpha,A,Lda,X,Incx,Beta,Y,Incy)
     info = 8
   ELSEIF ( Incy==0 ) THEN
     info = 11
-  ENDIF
+  END IF
   IF ( info/=0 ) THEN
     CALL XERBLA('DSBMV ',info)
     RETURN
-  ENDIF
+  END IF
   !
   !     Quick return if possible.
   !
@@ -190,12 +190,12 @@ SUBROUTINE DSBMV(Uplo,N,K,Alpha,A,Lda,X,Incx,Beta,Y,Incy)
     kx = 1
   ELSE
     kx = 1 - (N-1)*Incx
-  ENDIF
+  END IF
   IF ( Incy>0 ) THEN
     ky = 1
   ELSE
     ky = 1 - (N-1)*Incy
-  ENDIF
+  END IF
   !
   !     Start the operations. In this version the elements of the array A
   !     are accessed sequentially with one pass through A.
@@ -209,23 +209,23 @@ SUBROUTINE DSBMV(Uplo,N,K,Alpha,A,Lda,X,Incx,Beta,Y,Incy)
         DO i = 1, N
           Y(iy) = ZERO
           iy = iy + Incy
-        ENDDO
+        END DO
       ELSE
         DO i = 1, N
           Y(iy) = Beta*Y(iy)
           iy = iy + Incy
-        ENDDO
-      ENDIF
+        END DO
+      END IF
     ELSEIF ( Beta==ZERO ) THEN
       DO i = 1, N
         Y(i) = ZERO
-      ENDDO
+      END DO
     ELSE
       DO i = 1, N
         Y(i) = Beta*Y(i)
-      ENDDO
-    ENDIF
-  ENDIF
+      END DO
+    END IF
+  END IF
   IF ( Alpha==ZERO ) RETURN
   IF ( LSAME(Uplo,'U') ) THEN
     !
@@ -240,9 +240,9 @@ SUBROUTINE DSBMV(Uplo,N,K,Alpha,A,Lda,X,Incx,Beta,Y,Incy)
         DO i = MAX(1,j-K), j - 1
           Y(i) = Y(i) + temp1*A(l+i,j)
           temp2 = temp2 + A(l+i,j)*X(i)
-        ENDDO
+        END DO
         Y(j) = Y(j) + temp1*A(kplus1,j) + Alpha*temp2
-      ENDDO
+      END DO
     ELSE
       jx = kx
       jy = ky
@@ -257,16 +257,16 @@ SUBROUTINE DSBMV(Uplo,N,K,Alpha,A,Lda,X,Incx,Beta,Y,Incy)
           temp2 = temp2 + A(l+i,j)*X(ix)
           ix = ix + Incx
           iy = iy + Incy
-        ENDDO
+        END DO
         Y(jy) = Y(jy) + temp1*A(kplus1,j) + Alpha*temp2
         jx = jx + Incx
         jy = jy + Incy
         IF ( j>K ) THEN
           kx = kx + Incx
           ky = ky + Incy
-        ENDIF
-      ENDDO
-    ENDIF
+        END IF
+      END DO
+    END IF
     !
     !        Form  y  when lower triangle of A is stored.
     !
@@ -279,9 +279,9 @@ SUBROUTINE DSBMV(Uplo,N,K,Alpha,A,Lda,X,Incx,Beta,Y,Incy)
       DO i = j + 1, MIN(N,j+K)
         Y(i) = Y(i) + temp1*A(l+i,j)
         temp2 = temp2 + A(l+i,j)*X(i)
-      ENDDO
+      END DO
       Y(j) = Y(j) + Alpha*temp2
-    ENDDO
+    END DO
   ELSE
     jx = kx
     jy = ky
@@ -297,12 +297,12 @@ SUBROUTINE DSBMV(Uplo,N,K,Alpha,A,Lda,X,Incx,Beta,Y,Incy)
         iy = iy + Incy
         Y(iy) = Y(iy) + temp1*A(l+i,j)
         temp2 = temp2 + A(l+i,j)*X(ix)
-      ENDDO
+      END DO
       Y(jy) = Y(jy) + Alpha*temp2
       jx = jx + Incx
       jy = jy + Incy
-    ENDDO
-  ENDIF
+    END DO
+  END IF
   !
   !
   !     End of DSBMV .

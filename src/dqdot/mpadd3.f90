@@ -46,7 +46,7 @@ SUBROUTINE MPADD3(X,Y,S,Med,Re)
   DO WHILE ( i>ted )
     R(i) = 0
     i = i - 1
-  ENDDO
+  END DO
   IF ( S<0 ) THEN
     DO WHILE ( i>T )
       ! HERE DO SUBTRACTION, ABS(Y) .GT. ABS(X)
@@ -57,9 +57,9 @@ SUBROUTINE MPADD3(X,Y,S,Med,Re)
         ! BORROW GENERATED HERE
         c = -1
         R(i) = R(i) + B
-      ENDIF
+      END IF
       i = i - 1
-    ENDDO
+    END DO
     DO WHILE ( i>Med )
       j = i - Med
       c = Y(i+2) + c - X(j+2)
@@ -73,8 +73,8 @@ SUBROUTINE MPADD3(X,Y,S,Med,Re)
         R(i) = c + B
         c = -1
         i = i - 1
-      ENDIF
-    ENDDO
+      END IF
+    END DO
     DO
       IF ( i<=0 ) RETURN
       c = Y(i+2) + c
@@ -82,7 +82,7 @@ SUBROUTINE MPADD3(X,Y,S,Med,Re)
       R(i) = c + B
       c = -1
       i = i - 1
-    ENDDO
+    END DO
   ELSE
     ! HERE DO ADDITION, EXPONENT(Y) .GE. EXPONENT(X)
     IF ( i>=T ) THEN
@@ -91,8 +91,8 @@ SUBROUTINE MPADD3(X,Y,S,Med,Re)
         R(i) = X(j+2)
         i = i - 1
         IF ( i<=T ) EXIT
-      ENDDO
-    ENDIF
+      END DO
+    END IF
     DO WHILE ( i>Med )
       j = i - Med
       c = Y(i+2) + X(j+2) + c
@@ -106,26 +106,26 @@ SUBROUTINE MPADD3(X,Y,S,Med,Re)
         R(i) = c - B
         c = 1
         i = i - 1
-      ENDIF
-    ENDDO
+      END IF
+    END DO
     DO WHILE ( i>0 )
       c = Y(i+2) + c
       IF ( c<B ) GOTO 100
       R(i) = 0
       c = 1
       i = i - 1
-    ENDDO
+    END DO
     IF ( c==0 ) RETURN
     ! MUST SHIFT RIGHT HERE AS CARRY OFF END
     i2p = i2 + 1
     DO j = 2, i2
       i = i2p - j
       R(i+1) = R(i)
-    ENDDO
+    END DO
     R(1) = 1
     Re = Re + 1
     RETURN
-  ENDIF
+  END IF
   100  R(i) = c
   i = i - 1
   DO
@@ -133,5 +133,5 @@ SUBROUTINE MPADD3(X,Y,S,Med,Re)
     IF ( i<=0 ) RETURN
     R(i) = Y(i+2)
     i = i - 1
-  ENDDO
+  END DO
 END SUBROUTINE MPADD3

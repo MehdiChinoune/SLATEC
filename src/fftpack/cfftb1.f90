@@ -78,7 +78,7 @@ SUBROUTINE CFFTB1(N,C,Ch,Wa,Ifac)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900131  Routine changed from subsidiary to user-callable.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   REAL C(*), Ch(*), Wa(*)
   INTEGER i, idl1, ido, idot, Ifac(*), ip, iw, ix2, ix3, ix4, k1, &
     l1, l2, N, n2, na, nac, nf
@@ -100,14 +100,14 @@ SUBROUTINE CFFTB1(N,C,Ch,Wa,Ifac)
         CALL PASSB4(idot,l1,Ch,C,Wa(iw),Wa(ix2),Wa(ix3))
       ELSE
         CALL PASSB4(idot,l1,C,Ch,Wa(iw),Wa(ix2),Wa(ix3))
-      ENDIF
+      END IF
       na = 1 - na
     ELSEIF ( ip==2 ) THEN
       IF ( na/=0 ) THEN
         CALL PASSB2(idot,l1,Ch,C,Wa(iw))
       ELSE
         CALL PASSB2(idot,l1,C,Ch,Wa(iw))
-      ENDIF
+      END IF
       na = 1 - na
     ELSEIF ( ip==3 ) THEN
       ix2 = iw + idot
@@ -115,14 +115,14 @@ SUBROUTINE CFFTB1(N,C,Ch,Wa,Ifac)
         CALL PASSB3(idot,l1,Ch,C,Wa(iw),Wa(ix2))
       ELSE
         CALL PASSB3(idot,l1,C,Ch,Wa(iw),Wa(ix2))
-      ENDIF
+      END IF
       na = 1 - na
     ELSEIF ( ip/=5 ) THEN
       IF ( na/=0 ) THEN
         CALL PASSB(nac,idot,ip,l1,idl1,Ch,Ch,Ch,C,C,Wa(iw))
       ELSE
         CALL PASSB(nac,idot,ip,l1,idl1,C,C,C,Ch,Ch,Wa(iw))
-      ENDIF
+      END IF
       IF ( nac/=0 ) na = 1 - na
     ELSE
       ix2 = iw + idot
@@ -132,15 +132,15 @@ SUBROUTINE CFFTB1(N,C,Ch,Wa,Ifac)
         CALL PASSB5(idot,l1,Ch,C,Wa(iw),Wa(ix2),Wa(ix3),Wa(ix4))
       ELSE
         CALL PASSB5(idot,l1,C,Ch,Wa(iw),Wa(ix2),Wa(ix3),Wa(ix4))
-      ENDIF
+      END IF
       na = 1 - na
-    ENDIF
+    END IF
     l1 = l2
     iw = iw + (ip-1)*idot
-  ENDDO
+  END DO
   IF ( na==0 ) RETURN
   n2 = N + N
   DO i = 1, n2
     C(i) = Ch(i)
-  ENDDO
+  END DO
 END SUBROUTINE CFFTB1

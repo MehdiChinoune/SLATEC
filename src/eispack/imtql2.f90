@@ -95,7 +95,7 @@ SUBROUTINE IMTQL2(Nm,N,D,E,Z,Ierr)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   !
   INTEGER i, j, k, l, m, N, ii, Nm, mml, Ierr
   REAL D(*), E(*), Z(Nm,*)
@@ -108,7 +108,7 @@ SUBROUTINE IMTQL2(Nm,N,D,E,Z,Ierr)
     !
     DO i = 2, N
       E(i-1) = E(i)
-    ENDDO
+    END DO
     !
     E(N) = 0.0E0
     !
@@ -121,7 +121,7 @@ SUBROUTINE IMTQL2(Nm,N,D,E,Z,Ierr)
         s1 = ABS(D(m)) + ABS(D(m+1))
         s2 = s1 + ABS(E(m))
         IF ( s2==s1 ) EXIT
-      ENDDO
+      END DO
       !
       p = D(l)
       IF ( m/=l ) THEN
@@ -152,7 +152,7 @@ SUBROUTINE IMTQL2(Nm,N,D,E,Z,Ierr)
             E(i+1) = f*r
             s = 1.0E0/r
             c = c*s
-          ENDIF
+          END IF
           g = D(i+1) - p
           r = (D(i)-g)*s + 2.0E0*c*b
           p = s*r
@@ -163,16 +163,16 @@ SUBROUTINE IMTQL2(Nm,N,D,E,Z,Ierr)
             f = Z(k,i+1)
             Z(k,i+1) = s*Z(k,i) + c*f
             Z(k,i) = c*Z(k,i) - s*f
-          ENDDO
+          END DO
           !
-        ENDDO
+        END DO
         !
         D(l) = D(l) - p
         E(l) = g
         E(m) = 0.0E0
         GOTO 20
-      ENDIF
-    ENDDO
+      END IF
+    END DO
     !     .......... ORDER EIGENVALUES AND EIGENVECTORS ..........
     DO ii = 2, N
       i = ii - 1
@@ -183,8 +183,8 @@ SUBROUTINE IMTQL2(Nm,N,D,E,Z,Ierr)
         IF ( D(j)<p ) THEN
           k = j
           p = D(j)
-        ENDIF
-      ENDDO
+        END IF
+      END DO
       !
       IF ( k/=i ) THEN
         D(k) = D(i)
@@ -194,12 +194,12 @@ SUBROUTINE IMTQL2(Nm,N,D,E,Z,Ierr)
           p = Z(j,i)
           Z(j,i) = Z(j,k)
           Z(j,k) = p
-        ENDDO
-      ENDIF
+        END DO
+      END IF
       !
       !
-    ENDDO
-  ENDIF
+    END DO
+  END IF
   RETURN
   !     .......... SET ERROR -- NO CONVERGENCE TO AN
   !                EIGENVALUE AFTER 30 ITERATIONS ..........

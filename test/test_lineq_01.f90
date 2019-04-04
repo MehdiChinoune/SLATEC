@@ -80,21 +80,21 @@ CONTAINS
       itask = 1
       DO i = 1, n
         btemp(i) = b(i)
-      ENDDO
+      END DO
       DO j = 1, n
         DO i = 1, n
           atemp(i,j) = a(i,j)
-        ENDDO
-      ENDDO
+        END DO
+      END DO
       IF ( kprog==1 ) THEN
         CALL SGEFS(atemp,lda,n,btemp,itask,ind,work,iwork)
       ELSE
         CALL SGEIR(atemp,lda,n,btemp,itask,ind,work,iwork)
-      ENDIF
+      END IF
       IF ( ind<0 ) THEN
         IF ( Kprint>=2 ) WRITE (Lun,FMT=99004) list(kprog), ind
         Nerr = Nerr + 1
-      ENDIF
+      END IF
       !
       !       Calculate error for first test
       !
@@ -102,41 +102,41 @@ CONTAINS
       !
       DO i = 1, n
         errmax = MAX(errmax,ABS(btemp(i)-bxex(i)))
-      ENDDO
+      END DO
       IF ( errcmp>errmax ) THEN
         IF ( Kprint>=3 ) WRITE (Lun,FMT=99004) list(kprog)
       ELSE
         IF ( Kprint>=2 ) WRITE (Lun,FMT=99005) list(kprog), errmax
         Nerr = Nerr + 1
-      ENDIF
+      END IF
       !
       !       Second test case - singular matrix
       !
       itask = 1
       DO i = 1, n
         btemp(i) = b(i)
-      ENDDO
+      END DO
       DO j = 1, n
         DO i = 1, n
           atemp(i,j) = a(i,j)
-        ENDDO
-      ENDDO
+        END DO
+      END DO
       DO j = 1, n
         atemp(1,j) = 0.0E0
-      ENDDO
+      END DO
       IF ( kprog==1 ) THEN
         CALL SGEFS(atemp,lda,n,btemp,itask,ind,work,iwork)
       ELSE
         CALL SGEIR(atemp,lda,n,btemp,itask,ind,work,iwork)
-      ENDIF
+      END IF
       IF ( ind==-4 ) THEN
         IF ( Kprint>=3 ) WRITE (Lun,FMT=99006) list(kprog)
       ELSE
         IF ( Kprint>=2 ) WRITE (Lun,FMT=99007) list(kprog), ind
         Nerr = Nerr + 1
-      ENDIF
+      END IF
       !
-    ENDDO
+    END DO
     !
     IF ( Kprint>=3.AND.Nerr==0 ) WRITE (Lun,99002)
     99002 FORMAT (/,2X,'SGEFS and SGEIR Quick Check PASSED'/)
@@ -227,17 +227,17 @@ CONTAINS
     itask = 1
     DO i = 1, n
       btemp(i) = b(i)
-    ENDDO
+    END DO
     DO j = 1, n
       DO i = 1, n
         atemp(i,j) = a(i,j)
-      ENDDO
-    ENDDO
+      END DO
+    END DO
     CALL DGEFS(atemp,lda,n,btemp,itask,ind,work,iwork)
     IF ( ind<0 ) THEN
       IF ( Kprint>=2 ) WRITE (Lun,FMT=99005) list(kprog), ind
       Nerr = Nerr + 1
-    ENDIF
+    END IF
     !
     !     Calculate error for first test
     !
@@ -245,35 +245,35 @@ CONTAINS
     !
     DO i = 1, n
       errmax = MAX(errmax,ABS(btemp(i)-bxex(i)))
-    ENDDO
+    END DO
     IF ( errcmp>errmax ) THEN
       IF ( Kprint>=3 ) WRITE (Lun,FMT=99004) list(kprog)
     ELSE
       IF ( Kprint>=2 ) WRITE (Lun,FMT=99005) list(kprog), errmax
       Nerr = Nerr + 1
-    ENDIF
+    END IF
     !
     !     Second test case - singular matrix
     !
     itask = 1
     DO i = 1, n
       btemp(i) = b(i)
-    ENDDO
+    END DO
     DO j = 1, n
       DO i = 1, n
         atemp(i,j) = a(i,j)
-      ENDDO
-    ENDDO
+      END DO
+    END DO
     DO j = 1, n
       atemp(1,j) = 0.0D0
-    ENDDO
+    END DO
     CALL DGEFS(atemp,lda,n,btemp,itask,ind,work,iwork)
     IF ( ind==-4 ) THEN
       IF ( Kprint>=3 ) WRITE (Lun,FMT=99006) list(kprog)
     ELSE
       IF ( Kprint>=2 ) WRITE (Lun,FMT=99007) list(kprog), ind
       Nerr = Nerr + 1
-    ENDIF
+    END IF
     !
     IF ( Kprint>=3.AND.Nerr==0 ) WRITE (Lun,99002)
     99002 FORMAT (/,2X,'DGEFS Quick Check PASSED'/)
@@ -359,61 +359,61 @@ CONTAINS
       itask = 1
       DO i = 1, n
         btemp(i) = b(i)
-      ENDDO
+      END DO
       DO j = 1, n
         DO i = 1, n
           atemp(i,j) = a(i,j)
-        ENDDO
-      ENDDO
+        END DO
+      END DO
       IF ( kprog==1 ) THEN
         CALL CGEFS(atemp,lda,n,btemp,itask,ind,work,iwork)
       ELSE
         CALL CGEIR(atemp,lda,n,btemp,itask,ind,work,iwork)
-      ENDIF
+      END IF
       IF ( ind<0 ) THEN
         IF ( Kprint>=2 ) WRITE (Lun,FMT=99005) list(kprog), ind
         Nerr = Nerr + 1
-      ENDIF
+      END IF
       !
       !       Calculate error for first test
       !
       indx = 0
       DO i = 1, n
         IF ( CABS1(bxex(i)-btemp(i))>.0001 ) indx = indx + 1
-      ENDDO
+      END DO
       IF ( indx==0 ) THEN
         IF ( Kprint>=3 ) WRITE (Lun,FMT=99004) list(kprog)
       ELSE
         IF ( Kprint>=2 ) WRITE (Lun,FMT=99005) list(kprog)
         Nerr = Nerr + 1
-      ENDIF
+      END IF
       !
       !       Second test case - singular matrix
       !
       itask = 1
       DO i = 1, n
         btemp(i) = b(i)
-      ENDDO
+      END DO
       DO j = 1, n
         DO i = 1, n
           atemp(i,j) = a(i,j)
-        ENDDO
-      ENDDO
+        END DO
+      END DO
       DO j = 1, n
         atemp(1,j) = (0.E0,0.E0)
-      ENDDO
+      END DO
       IF ( kprog==1 ) THEN
         CALL CGEFS(atemp,lda,n,btemp,itask,ind,work,iwork)
       ELSE
         CALL CGEIR(atemp,lda,n,btemp,itask,ind,work,iwork)
-      ENDIF
+      END IF
       IF ( ind==-4 ) THEN
         IF ( Kprint>=3 ) WRITE (Lun,FMT=99006) list(kprog)
       ELSE
         IF ( Kprint>=2 ) WRITE (Lun,FMT=99007) list(kprog), ind
         Nerr = Nerr + 1
-      ENDIF
-    ENDDO
+      END IF
+    END DO
     !
     IF ( Kprint>=3.AND.Nerr==0 ) WRITE (Lun,99002)
     99002 FORMAT (/,2X,'CGEFS and CGEIR Quick Check PASSED'/)
@@ -497,7 +497,7 @@ PROGRAM TEST21
     CALL XSETF(0)
   ELSE
     CALL XSETF(1)
-  ENDIF
+  END IF
   !
   !     Test LINPACK routines
   !
@@ -517,6 +517,6 @@ PROGRAM TEST21
     WRITE (lun,99002) nfail
     99002 FORMAT (/' ************* WARNING -- ',I5,&
       ' TEST(S) FAILED IN PROGRAM TEST21 *************')
-  ENDIF
+  END IF
   STOP
 END PROGRAM TEST21

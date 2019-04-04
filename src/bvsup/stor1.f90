@@ -44,7 +44,7 @@ SUBROUTINE STOR1(U,Yh,V,Yp,Ntemp,Ndisk,Ntape)
   nctnf = NCOmp*NFC
   DO j = 1, nctnf
     U(j) = Yh(j)
-  ENDDO
+  END DO
   IF ( INHomo/=1 ) THEN
     !
     !   ZERO PARTICULAR SOLUTION
@@ -52,7 +52,7 @@ SUBROUTINE STOR1(U,Yh,V,Yp,Ntemp,Ndisk,Ntape)
     IF ( Ntemp==1 ) RETURN
     DO j = 1, NCOmp
       V(j) = 0.
-    ENDDO
+    END DO
     IF ( Ndisk==1 ) WRITE (Ntape) (V(j),j=1,NCOmp), (U(j),j=1,nctnf)
     !
     !   NONZERO PARTICULAR SOLUTION
@@ -61,7 +61,7 @@ SUBROUTINE STOR1(U,Yh,V,Yp,Ntemp,Ndisk,Ntape)
     !
     DO j = 1, NCOmp
       V(j) = C*Yp(j)
-    ENDDO
+    END DO
     !
     !  IS OUTPUT INFORMATION TO BE WRITTEN TO DISK
     !
@@ -70,8 +70,8 @@ SUBROUTINE STOR1(U,Yh,V,Yp,Ntemp,Ndisk,Ntape)
     !
     DO j = 1, NCOmp
       V(j) = Yp(j)
-    ENDDO
+    END DO
     RETURN
-  ENDIF
+  END IF
   !
 END SUBROUTINE STOR1

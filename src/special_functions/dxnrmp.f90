@@ -137,7 +137,7 @@ SUBROUTINE DXNRMP(Nu,Mu1,Mu2,Darg,Mode,Dpn,Ipn,Isig,Ierror)
   !           section.  (WRB)
   !           CALLs to XERROR changed to CALLs to XERMSG.  (WRB)
   !   920127  Revised PURPOSE section of prologue.  (DWL)
-  
+
   INTEGER i, Ierror, ip, ip1, ip2, j, k, mu
   INTEGER Nu, Mu1, Mu2, Mode, Ipn(*), Isig
   REAL(8) :: Darg, Dpn(*)
@@ -170,7 +170,7 @@ SUBROUTINE DXNRMP(Nu,Mu1,Mu2,Darg,Mode,Dpn,Ipn,Isig,Ierror)
     sx = SQRT((1.0D0+ABS(x))*((0.5D0-ABS(x))+0.5D0))
     tx = x/sx
     Isig = INT( LOG10(2.0D0*Nu*(5.0D0+tx**2)) )
-  ENDIF
+  END IF
   !
   !        BEGIN CALCULATION
   !
@@ -187,8 +187,8 @@ SUBROUTINE DXNRMP(Nu,Mu1,Mu2,Darg,Mode,Dpn,Ipn,Isig,Ierror)
     IF ( i<=0 ) THEN
       Isig = 0
       RETURN
-    ENDIF
-  ENDDO
+    END IF
+  END DO
   mu = Nu
   !
   !        P1 = 0. = NORMALIZED LEGENDRE(NU,NU+1,X)
@@ -208,7 +208,7 @@ SUBROUTINE DXNRMP(Nu,Mu1,Mu2,Darg,Mode,Dpn,Ipn,Isig,Ierror)
     CALL DXADJ(p2,ip2,Ierror)
     IF ( Ierror/=0 ) RETURN
     dk = dk + 2.0D0
-  ENDDO
+  END DO
   p2 = p2*SQRT(p3)
   CALL DXADJ(p2,ip2,Ierror)
   IF ( Ierror/=0 ) RETURN
@@ -219,7 +219,7 @@ SUBROUTINE DXNRMP(Nu,Mu1,Mu2,Darg,Mode,Dpn,Ipn,Isig,Ierror)
     Ipn(i) = ip2
     i = i - 1
     IF ( i==0 ) GOTO 500
-  ENDIF
+  END IF
   !
   !        RECURRENCE PROCESS
   !
@@ -238,7 +238,7 @@ SUBROUTINE DXNRMP(Nu,Mu1,Mu2,Darg,Mode,Dpn,Ipn,Isig,Ierror)
     Ipn(i) = ip
     i = i - 1
     IF ( i==0 ) GOTO 500
-  ENDIF
+  END IF
   p1 = p2
   ip1 = ip2
   p2 = p
@@ -252,7 +252,7 @@ SUBROUTINE DXNRMP(Nu,Mu1,Mu2,Darg,Mode,Dpn,Ipn,Isig,Ierror)
   DO i = 1, k
     Dpn(i) = 0.0D0
     Ipn(i) = 0
-  ENDDO
+  END DO
   Isig = 0
   IF ( Mu1<=0 ) THEN
     Isig = 1
@@ -261,9 +261,9 @@ SUBROUTINE DXNRMP(Nu,Mu1,Mu2,Darg,Mode,Dpn,Ipn,Isig,Ierror)
     IF ( MOD(Nu,2)/=0 ) THEN
       IF ( Mode/=1.OR.Darg/=1.0D0 ) THEN
         IF ( Mode/=2 ) Dpn(1) = -Dpn(1)
-      ENDIF
-    ENDIF
-  ENDIF
+      END IF
+    END IF
+  END IF
   RETURN
   !
   !          ERROR PRINTOUTS AND TERMINATION.
@@ -281,6 +281,6 @@ SUBROUTINE DXNRMP(Nu,Mu1,Mu2,Darg,Mode,Dpn,Ipn,Isig,Ierror)
   DO i = 1, k
     CALL DXRED(Dpn(i),Ipn(i),Ierror)
     IF ( Ierror/=0 ) RETURN
-  ENDDO
+  END DO
   RETURN
 END SUBROUTINE DXNRMP

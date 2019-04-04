@@ -176,10 +176,10 @@ SUBROUTINE DHFTI(A,Mda,M,N,B,Mdb,Nb,Tau,Krank,Rnorm,H,G,Ip)
             DO l = j, N
               H(l) = H(l) - A(j-1,l)**2
               IF ( H(l)>H(lmax) ) lmax = l
-            ENDDO
+            END DO
             !                    ......EXIT
             IF ( factor*H(lmax)>hmax*releps ) GOTO 5
-          ENDIF
+          END IF
           !
           !                        COMPUTE SQUARED COLUMN LENGTHS AND FIND LMAX
           !                       ..
@@ -188,31 +188,31 @@ SUBROUTINE DHFTI(A,Mda,M,N,B,Mdb,Nb,Tau,Krank,Rnorm,H,G,Ip)
             H(l) = 0.0D0
             DO i = j, M
               H(l) = H(l) + A(i,l)**2
-            ENDDO
+            END DO
             IF ( H(l)>H(lmax) ) lmax = l
-          ENDDO
+          END DO
           hmax = H(lmax)
           !                    ..
           !                     LMAX HAS BEEN DETERMINED
           !
           !                     DO COLUMN INTERCHANGES IF NEEDED.
           !                    ..
-          5            Ip(j) = lmax
+          5  Ip(j) = lmax
           IF ( Ip(j)/=j ) THEN
             DO i = 1, M
               tmp = A(i,j)
               A(i,j) = A(i,lmax)
               A(i,lmax) = tmp
-            ENDDO
+            END DO
             H(lmax) = H(j)
-          ENDIF
+          END IF
           !
           !                     COMPUTE THE J-TH TRANSFORMATION AND APPLY IT TO A
           !                     AND B.
           !                    ..
           CALL DH12(1,j,j+1,M,A(1,j),1,H(j),A(1,j+1),1,Mda,N-j)
           CALL DH12(2,j,j+1,M,A(1,j),1,H(j),B,1,Mdb,Nb)
-        ENDDO
+        END DO
         !
         !                  DETERMINE THE PSEUDORANK, K, USING THE TOLERANCE,
         !                  TAU.
@@ -220,7 +220,7 @@ SUBROUTINE DHFTI(A,Mda,M,N,B,Mdb,Nb,Tau,Krank,Rnorm,H,G,Ip)
         DO j = 1, ldiag
           !              ......EXIT
           IF ( ABS(A(j,j))<=Tau ) GOTO 20
-        ENDDO
+        END DO
         k = ldiag
         !           ......EXIT
         GOTO 50
@@ -231,16 +231,16 @@ SUBROUTINE DHFTI(A,Mda,M,N,B,Mdb,Nb,Tau,Krank,Rnorm,H,G,Ip)
           'MDB.LT.MAX(M,N).AND.NB.GT.1. PROBABLE ERROR.',nerr,iopt)
         !     ...............EXIT
         RETURN
-      ENDIF
-      20       k = j - 1
+      END IF
+      20  k = j - 1
     ELSE
       nerr = 1
       iopt = 2
       CALL XERMSG('SLATEC','DHFTI','MDA.LT.M, PROBABLE ERROR.',nerr,iopt)
       !     ...............EXIT
       RETURN
-    ENDIF
-    50     kp1 = k + 1
+    END IF
+    50  kp1 = k + 1
     !
     !           COMPUTE THE NORMS OF THE RESIDUAL VECTORS.
     !
@@ -250,11 +250,11 @@ SUBROUTINE DHFTI(A,Mda,M,N,B,Mdb,Nb,Tau,Krank,Rnorm,H,G,Ip)
         IF ( M>=kp1 ) THEN
           DO i = kp1, M
             tmp = tmp + B(i,jb)**2
-          ENDDO
-        ENDIF
+          END DO
+        END IF
         Rnorm(jb) = SQRT(tmp)
-      ENDDO
-    ENDIF
+      END DO
+    END IF
     !           SPECIAL FOR PSEUDORANK = 0
     IF ( k>0 ) THEN
       !
@@ -265,8 +265,8 @@ SUBROUTINE DHFTI(A,Mda,M,N,B,Mdb,Nb,Tau,Krank,Rnorm,H,G,Ip)
         DO ii = 1, k
           i = kp1 - ii
           CALL DH12(1,i,kp1,N,A(i,1),Mda,G(i),A,Mda,1,i-1)
-        ENDDO
-      ENDIF
+        END DO
+      END IF
       !
       !
       IF ( Nb>=1 ) THEN
@@ -281,22 +281,22 @@ SUBROUTINE DHFTI(A,Mda,M,N,B,Mdb,Nb,Tau,Krank,Rnorm,H,G,Ip)
             IF ( k>=ip1 ) THEN
               DO j = ip1, k
                 sm = sm + A(i,j)*B(j,jb)
-              ENDDO
-            ENDIF
+              END DO
+            END IF
             sm1 = sm
             B(i,jb) = (B(i,jb)-sm1)/A(i,i)
-          ENDDO
+          END DO
           !
           !                  COMPLETE COMPUTATION OF SOLUTION VECTOR.
           !                 ..
           IF ( k/=N ) THEN
             DO j = kp1, N
               B(j,jb) = szero
-            ENDDO
+            END DO
             DO i = 1, k
               CALL DH12(2,i,kp1,N,A(i,1),Mda,G(i),B(1,jb),1,Mdb,1)
-            ENDDO
-          ENDIF
+            END DO
+          END IF
           !
           !                   RE-ORDER THE SOLUTION VECTOR TO COMPENSATE FOR THE
           !                   COLUMN INTERCHANGES.
@@ -308,18 +308,18 @@ SUBROUTINE DHFTI(A,Mda,M,N,B,Mdb,Nb,Tau,Krank,Rnorm,H,G,Ip)
               tmp = B(l,jb)
               B(l,jb) = B(j,jb)
               B(j,jb) = tmp
-            ENDIF
-          ENDDO
-        ENDDO
-      ENDIF
+            END IF
+          END DO
+        END DO
+      END IF
     ELSEIF ( Nb>=1 ) THEN
       DO jb = 1, Nb
         DO i = 1, N
           B(i,jb) = szero
-        ENDDO
-      ENDDO
-    ENDIF
-  ENDIF
+        END DO
+      END DO
+    END IF
+  END IF
   !        ..
   !         THE SOLUTION VECTORS, X, ARE NOW
   !         IN THE FIRST  N  ROWS OF THE ARRAY B(,).

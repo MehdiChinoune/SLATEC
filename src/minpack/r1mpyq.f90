@@ -81,8 +81,8 @@ SUBROUTINE R1MPYQ(M,N,A,Lda,V,W)
         temp = cos*A(i,j) - sin*A(i,N)
         A(i,N) = sin*A(i,j) + cos*A(i,N)
         A(i,j) = temp
-      ENDDO
-    ENDDO
+      END DO
+    END DO
     !
     !     APPLY THE SECOND SET OF GIVENS ROTATIONS TO A.
     !
@@ -95,9 +95,9 @@ SUBROUTINE R1MPYQ(M,N,A,Lda,V,W)
         temp = cos*A(i,j) + sin*A(i,N)
         A(i,N) = -sin*A(i,j) + cos*A(i,N)
         A(i,j) = temp
-      ENDDO
-    ENDDO
-  ENDIF
+      END DO
+    END DO
+  END IF
   !
   !     LAST CARD OF SUBROUTINE R1MPYQ.
   !

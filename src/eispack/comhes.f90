@@ -77,7 +77,7 @@ SUBROUTINE COMHES(Nm,N,Low,Igh,Ar,Ai,Int)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   !
   INTEGER i, j, m, N, la, Nm, Igh, kp1, Low, mm1, mp1
   REAL Ar(Nm,*), Ai(Nm,*)
@@ -100,8 +100,8 @@ SUBROUTINE COMHES(Nm,N,Low,Igh,Ar,Ai,Int)
           xr = Ar(j,mm1)
           xi = Ai(j,mm1)
           i = j
-        ENDIF
-      ENDDO
+        END IF
+      END DO
       !
       Int(m) = i
       IF ( i/=m ) THEN
@@ -113,7 +113,7 @@ SUBROUTINE COMHES(Nm,N,Low,Igh,Ar,Ai,Int)
           yi = Ai(i,j)
           Ai(i,j) = Ai(m,j)
           Ai(m,j) = yi
-        ENDDO
+        END DO
         !
         DO j = 1, Igh
           yr = Ar(j,i)
@@ -122,8 +122,8 @@ SUBROUTINE COMHES(Nm,N,Low,Igh,Ar,Ai,Int)
           yi = Ai(j,i)
           Ai(j,i) = Ai(j,m)
           Ai(j,m) = yi
-        ENDDO
-      ENDIF
+        END DO
+      END IF
       !     .......... END INTERCHANGE ..........
       IF ( xr/=0.0E0.OR.xi/=0.0E0 ) THEN
         mp1 = m + 1
@@ -139,18 +139,18 @@ SUBROUTINE COMHES(Nm,N,Low,Igh,Ar,Ai,Int)
             DO j = m, N
               Ar(i,j) = Ar(i,j) - yr*Ar(m,j) + yi*Ai(m,j)
               Ai(i,j) = Ai(i,j) - yr*Ai(m,j) - yi*Ar(m,j)
-            ENDDO
+            END DO
             !
             DO j = 1, Igh
               Ar(j,m) = Ar(j,m) + yr*Ar(j,i) - yi*Ai(j,i)
               Ai(j,m) = Ai(j,m) + yr*Ai(j,i) + yi*Ar(j,i)
-            ENDDO
-          ENDIF
+            END DO
+          END IF
           !
-        ENDDO
-      ENDIF
+        END DO
+      END IF
       !
-    ENDDO
-  ENDIF
+    END DO
+  END IF
   !
 END SUBROUTINE COMHES

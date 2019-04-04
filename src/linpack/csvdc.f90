@@ -119,7 +119,7 @@ SUBROUTINE CSVDC(X,Ldx,N,P,S,E,U,Ldu,V,Ldv,Work,Job,Info)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   INTEGER Ldx, N, P, Ldu, Ldv, Job, Info
   COMPLEX X(Ldx,*), S(*), E(*), U(Ldu,*), V(Ldv,*), Work(*)
   !
@@ -168,9 +168,9 @@ SUBROUTINE CSVDC(X,Ldx,N,P,S,E,U,Ldu,V,Ldv,Work,Job,Info)
           IF ( CABS1(X(l,l))/=0.0E0 ) S(l) = CSIGN(S(l),X(l,l))
           CALL CSCAL(N-l+1,1.0E0/S(l),X(l,l),1)
           X(l,l) = (1.0E0,0.0E0) + X(l,l)
-        ENDIF
+        END IF
         S(l) = -S(l)
-      ENDIF
+      END IF
       IF ( P>=lp1 ) THEN
         DO j = lp1, P
           IF ( l<=nct ) THEN
@@ -180,15 +180,15 @@ SUBROUTINE CSVDC(X,Ldx,N,P,S,E,U,Ldu,V,Ldv,Work,Job,Info)
               !
               t = -CDOTC(N-l+1,X(l,l),1,X(l,j),1)/X(l,l)
               CALL CAXPY(N-l+1,t,X(l,l),1,X(l,j),1)
-            ENDIF
-          ENDIF
+            END IF
+          END IF
           !
           !           PLACE THE L-TH ROW OF X INTO  E FOR THE
           !           SUBSEQUENT CALCULATION OF THE ROW TRANSFORMATION.
           !
           E(j) = CONJG(X(l,j))
-        ENDDO
-      ENDIF
+        END DO
+      END IF
       IF ( .NOT.(.NOT.wantu.OR.l>nct) ) THEN
         !
         !           PLACE THE TRANSFORMATION IN U FOR SUBSEQUENT BACK
@@ -196,8 +196,8 @@ SUBROUTINE CSVDC(X,Ldx,N,P,S,E,U,Ldu,V,Ldv,Work,Job,Info)
         !
         DO i = l, N
           U(i,l) = X(i,l)
-        ENDDO
-      ENDIF
+        END DO
+      END IF
       IF ( l<=nrt ) THEN
         !
         !           COMPUTE THE L-TH ROW TRANSFORMATION AND PLACE THE
@@ -208,7 +208,7 @@ SUBROUTINE CSVDC(X,Ldx,N,P,S,E,U,Ldu,V,Ldv,Work,Job,Info)
           IF ( CABS1(E(lp1))/=0.0E0 ) E(l) = CSIGN(E(l),E(lp1))
           CALL CSCAL(P-l,1.0E0/E(l),E(lp1),1)
           E(lp1) = (1.0E0,0.0E0) + E(lp1)
-        ENDIF
+        END IF
         E(l) = -CONJG(E(l))
         IF ( lp1<=N.AND.CABS1(E(l))/=0.0E0 ) THEN
           !
@@ -216,14 +216,14 @@ SUBROUTINE CSVDC(X,Ldx,N,P,S,E,U,Ldu,V,Ldv,Work,Job,Info)
           !
           DO i = lp1, N
             Work(i) = (0.0E0,0.0E0)
-          ENDDO
+          END DO
           DO j = lp1, P
             CALL CAXPY(N-l,E(j),X(lp1,j),1,Work(lp1),1)
-          ENDDO
+          END DO
           DO j = lp1, P
             CALL CAXPY(N-l,CONJG(-E(j)/E(lp1)),Work(lp1),1,X(lp1,j),1)
-          ENDDO
-        ENDIF
+          END DO
+        END IF
         IF ( wantv ) THEN
           !
           !              PLACE THE TRANSFORMATION IN V FOR SUBSEQUENT
@@ -231,11 +231,11 @@ SUBROUTINE CSVDC(X,Ldx,N,P,S,E,U,Ldu,V,Ldv,Work,Job,Info)
           !
           DO i = lp1, P
             V(i,l) = E(i)
-          ENDDO
-        ENDIF
-      ENDIF
-    ENDDO
-  ENDIF
+          END DO
+        END IF
+      END IF
+    END DO
+  END IF
   !
   !     SET UP THE FINAL BIDIAGONAL MATRIX OR ORDER M.
   !
@@ -254,17 +254,17 @@ SUBROUTINE CSVDC(X,Ldx,N,P,S,E,U,Ldu,V,Ldv,Work,Job,Info)
       DO j = nctp1, ncu
         DO i = 1, N
           U(i,j) = (0.0E0,0.0E0)
-        ENDDO
+        END DO
         U(j,j) = (1.0E0,0.0E0)
-      ENDDO
-    ENDIF
+      END DO
+    END IF
     IF ( nct>=1 ) THEN
       DO ll = 1, nct
         l = nct - ll + 1
         IF ( CABS1(S(l))==0.0E0 ) THEN
           DO i = 1, N
             U(i,l) = (0.0E0,0.0E0)
-          ENDDO
+          END DO
           U(l,l) = (1.0E0,0.0E0)
         ELSE
           lp1 = l + 1
@@ -272,20 +272,20 @@ SUBROUTINE CSVDC(X,Ldx,N,P,S,E,U,Ldu,V,Ldv,Work,Job,Info)
             DO j = lp1, ncu
               t = -CDOTC(N-l+1,U(l,l),1,U(l,j),1)/U(l,l)
               CALL CAXPY(N-l+1,t,U(l,l),1,U(l,j),1)
-            ENDDO
-          ENDIF
+            END DO
+          END IF
           CALL CSCAL(N-l+1,(-1.0E0,0.0E0),U(l,l),1)
           U(l,l) = (1.0E0,0.0E0) + U(l,l)
           lm1 = l - 1
           IF ( lm1>=1 ) THEN
             DO i = 1, lm1
               U(i,l) = (0.0E0,0.0E0)
-            ENDDO
-          ENDIF
-        ENDIF
-      ENDDO
-    ENDIF
-  ENDIF
+            END DO
+          END IF
+        END IF
+      END DO
+    END IF
+  END IF
   !
   !     IF IT IS REQUIRED, GENERATE V.
   !
@@ -298,15 +298,15 @@ SUBROUTINE CSVDC(X,Ldx,N,P,S,E,U,Ldu,V,Ldv,Work,Job,Info)
           DO j = lp1, P
             t = -CDOTC(P-l,V(lp1,l),1,V(lp1,j),1)/V(lp1,l)
             CALL CAXPY(P-l,t,V(lp1,l),1,V(lp1,j),1)
-          ENDDO
-        ENDIF
-      ENDIF
+          END DO
+        END IF
+      END IF
       DO i = 1, P
         V(i,l) = (0.0E0,0.0E0)
-      ENDDO
+      END DO
       V(l,l) = (1.0E0,0.0E0)
-    ENDDO
-  ENDIF
+    END DO
+  END IF
   !
   !     TRANSFORM S AND E SO THAT THEY ARE REAL.
   !
@@ -317,7 +317,7 @@ SUBROUTINE CSVDC(X,Ldx,N,P,S,E,U,Ldu,V,Ldv,Work,Job,Info)
       S(i) = t
       IF ( i<m ) E(i) = E(i)/r
       IF ( wantu ) CALL CSCAL(N,r,U(1,i),1)
-    ENDIF
+    END IF
     IF ( i==m ) EXIT
     IF ( CABS1(E(i))/=0.0E0 ) THEN
       t = CMPLX(ABS(E(i)),0.0E0)
@@ -325,8 +325,8 @@ SUBROUTINE CSVDC(X,Ldx,N,P,S,E,U,Ldu,V,Ldv,Work,Job,Info)
       E(i) = t
       S(i+1) = S(i+1)*r
       IF ( wantv ) CALL CSCAL(P,r,V(1,i+1),1)
-    ENDIF
-  ENDDO
+    END IF
+  END DO
   !
   !     MAIN ITERATION LOOP FOR THE SINGULAR VALUES.
   !
@@ -360,8 +360,8 @@ SUBROUTINE CSVDC(X,Ldx,N,P,S,E,U,Ldu,V,Ldv,Work,Job,Info)
         IF ( ztest==test ) THEN
           E(l) = (0.0E0,0.0E0)
           EXIT
-        ENDIF
-      ENDDO
+        END IF
+      END DO
       IF ( l/=m-1 ) THEN
         lp1 = l + 1
         mp1 = m + 1
@@ -375,8 +375,8 @@ SUBROUTINE CSVDC(X,Ldx,N,P,S,E,U,Ldu,V,Ldv,Work,Job,Info)
           IF ( ztest==test ) THEN
             S(ls) = (0.0E0,0.0E0)
             EXIT
-          ENDIF
-        ENDDO
+          END IF
+        END DO
         IF ( ls==l ) THEN
           kase = 3
         ELSEIF ( ls/=m ) THEN
@@ -384,10 +384,10 @@ SUBROUTINE CSVDC(X,Ldx,N,P,S,E,U,Ldu,V,Ldv,Work,Job,Info)
           l = ls
         ELSE
           kase = 1
-        ENDIF
+        END IF
       ELSE
         kase = 4
-      ENDIF
+      END IF
       l = l + 1
       !
       !        PERFORM THE TASK INDICATED BY KASE.
@@ -406,7 +406,7 @@ SUBROUTINE CSVDC(X,Ldx,N,P,S,E,U,Ldu,V,Ldv,Work,Job,Info)
             f = -sn*REAL(E(k))
             E(k) = cs*E(k)
             IF ( wantu ) CALL CSROT(N,U(1,k),1,U(1,l-1),1,cs,sn)
-          ENDDO
+          END DO
         CASE (3)
           !
           !        PERFORM ONE QR STEP.
@@ -427,7 +427,7 @@ SUBROUTINE CSVDC(X,Ldx,N,P,S,E,U,Ldu,V,Ldv,Work,Job,Info)
             shift = SQRT(b**2+c)
             IF ( b<0.0E0 ) shift = -shift
             shift = c/(b+shift)
-          ENDIF
+          END IF
           f = (sl+sm)*(sl-sm) - shift
           g = sl*el
           !
@@ -449,7 +449,7 @@ SUBROUTINE CSVDC(X,Ldx,N,P,S,E,U,Ldu,V,Ldv,Work,Job,Info)
             g = sn*REAL(E(k+1))
             E(k+1) = cs*E(k+1)
             IF ( wantu.AND.k<N ) CALL CSROT(N,U(1,k),1,U(1,k+1),1,cs,sn)
-          ENDDO
+          END DO
           E(m-1) = CMPLX(f,0.0E0)
           iter = iter + 1
         CASE (4)
@@ -462,7 +462,7 @@ SUBROUTINE CSVDC(X,Ldx,N,P,S,E,U,Ldu,V,Ldv,Work,Job,Info)
           IF ( REAL(S(l))<0.0E0 ) THEN
             S(l) = -S(l)
             IF ( wantv ) CALL CSCAL(P,(-1.0E0,0.0E0),V(1,l),1)
-          ENDIF
+          END IF
           !
           !           ORDER THE SINGULAR VALUE.
           !
@@ -474,7 +474,7 @@ SUBROUTINE CSVDC(X,Ldx,N,P,S,E,U,Ldu,V,Ldv,Work,Job,Info)
             IF ( wantv.AND.l<P ) CALL CSWAP(P,V(1,l),1,V(1,l+1),1)
             IF ( wantu.AND.l<N ) CALL CSWAP(N,U(1,l),1,U(1,l+1),1)
             l = l + 1
-          ENDDO
+          END DO
           GOTO 50
         CASE DEFAULT
           !
@@ -491,16 +491,16 @@ SUBROUTINE CSVDC(X,Ldx,N,P,S,E,U,Ldu,V,Ldv,Work,Job,Info)
             IF ( k/=l ) THEN
               f = -sn*REAL(E(k-1))
               E(k-1) = cs*E(k-1)
-            ENDIF
+            END IF
             IF ( wantv ) CALL CSROT(P,V(1,k),1,V(1,m),1,cs,sn)
-          ENDDO
+          END DO
       END SELECT
       CYCLE
     ELSE
       Info = m
       EXIT
-    ENDIF
-    50     iter = 0
+    END IF
+    50  iter = 0
     m = m - 1
-  ENDDO
+  END DO
 END SUBROUTINE CSVDC

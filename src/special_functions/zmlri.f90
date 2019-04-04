@@ -74,7 +74,7 @@ SUBROUTINE ZMLRI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol)
     ap = ZABS(p2r,p2i)
     IF ( ap>tst*ak*ak ) GOTO 100
     ak = ak + 1.0D0
-  ENDDO
+  END DO
   Nz = -2
   RETURN
   100  i = i + 1
@@ -113,11 +113,11 @@ SUBROUTINE ZMLRI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol)
         rho = MIN(flam,fkap)
         tst = tst*SQRT(rho/(rho*rho-1.0D0))
         itime = 2
-      ENDIF
-    ENDDO
+      END IF
+    END DO
     Nz = -2
     RETURN
-  ENDIF
+  END IF
   !-----------------------------------------------------------------------
   !     BACKWARD RECURRENCE AND SUM NORMALIZING RELATION
   !-----------------------------------------------------------------------
@@ -151,7 +151,7 @@ SUBROUTINE ZMLRI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol)
     sumi = sumi + (ack+bk)*p1i
     bk = ack
     fkk = fkk - 1.0D0
-  ENDDO
+  END DO
   Yr(N) = p2r
   Yi(N) = p2i
   IF ( N/=1 ) THEN
@@ -171,8 +171,8 @@ SUBROUTINE ZMLRI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol)
       m = N - i + 1
       Yr(m) = p2r
       Yi(m) = p2i
-    ENDDO
-  ENDIF
+    END DO
+  END IF
   IF ( ifnu>0 ) THEN
     DO i = 1, ifnu
       ptr = p2r
@@ -187,8 +187,8 @@ SUBROUTINE ZMLRI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol)
       sumi = sumi + (ack+bk)*p1i
       bk = ack
       fkk = fkk - 1.0D0
-    ENDDO
-  ENDIF
+    END DO
+  END IF
   ptr = Zr
   pti = Zi
   IF ( Kode==2 ) ptr = zeror
@@ -216,6 +216,6 @@ SUBROUTINE ZMLRI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol)
     str = Yr(i)*cnormr - Yi(i)*cnormi
     Yi(i) = Yr(i)*cnormi + Yi(i)*cnormr
     Yr(i) = str
-  ENDDO
+  END DO
   RETURN
 END SUBROUTINE ZMLRI

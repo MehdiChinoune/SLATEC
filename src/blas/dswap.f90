@@ -54,7 +54,7 @@ SUBROUTINE DSWAP(N,Dx,Incx,Dy,Incy)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920310  Corrected definition of LX in DESCRIPTION.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   INTEGER i, Incx, Incy, ix, iy, m, mp1, N, ns
   REAL(8) :: Dx(*), Dy(*), dtemp1, dtemp2, dtemp3
   !* FIRST EXECUTABLE STATEMENT  DSWAP
@@ -73,9 +73,9 @@ SUBROUTINE DSWAP(N,Dx,Incx,Dy,Incy)
           dtemp1 = Dx(i)
           Dx(i) = Dy(i)
           Dy(i) = dtemp1
-        ENDDO
+        END DO
         IF ( N<3 ) RETURN
-      ENDIF
+      END IF
       GOTO 100
     ELSE
       !
@@ -86,10 +86,10 @@ SUBROUTINE DSWAP(N,Dx,Incx,Dy,Incy)
         dtemp1 = Dx(i)
         Dx(i) = Dy(i)
         Dy(i) = dtemp1
-      ENDDO
+      END DO
       RETURN
-    ENDIF
-  ENDIF
+    END IF
+  END IF
   !
   !     Code for unequal or nonpositive increments.
   !
@@ -103,7 +103,7 @@ SUBROUTINE DSWAP(N,Dx,Incx,Dy,Incy)
     Dy(iy) = dtemp1
     ix = ix + Incx
     iy = iy + Incy
-  ENDDO
+  END DO
   RETURN
   100  mp1 = m + 1
   DO i = mp1, N, 3
@@ -116,6 +116,6 @@ SUBROUTINE DSWAP(N,Dx,Incx,Dy,Incy)
     Dy(i) = dtemp1
     Dy(i+1) = dtemp2
     Dy(i+2) = dtemp3
-  ENDDO
+  END DO
   RETURN
 END SUBROUTINE DSWAP

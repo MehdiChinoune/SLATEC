@@ -49,7 +49,7 @@ REAL FUNCTION ALNGAM(X)
     xmax = R1MACH(2)/LOG(R1MACH(2))
     dxrel = SQRT(R1MACH(4))
     first = .FALSE.
-  ENDIF
+  END IF
   !
   y = ABS(X)
   IF ( y>10.0 ) THEN
@@ -62,7 +62,7 @@ REAL FUNCTION ALNGAM(X)
     IF ( X>0. ) THEN
       ALNGAM = sq2pil + (X-0.5)*LOG(X) - X + R9LGMC(y)
       RETURN
-    ENDIF
+    END IF
     !
     sinpiy = ABS(SIN(pi*y))
     IF ( sinpiy==0. ) CALL XERMSG('SLATEC','ALNGAM',&
@@ -73,7 +73,7 @@ REAL FUNCTION ALNGAM(X)
     !
     ALNGAM = sqpi2l + (X-0.5)*LOG(y) - X - LOG(sinpiy) - R9LGMC(y)
     RETURN
-  ENDIF
+  END IF
   !
   ! LOG (ABS (GAMMA(X))) FOR  ABS(X) .LE. 10.0
   !

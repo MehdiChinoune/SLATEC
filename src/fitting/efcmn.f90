@@ -60,19 +60,19 @@ SUBROUTINE EFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Mdein,Mdeout,&
     CALL XERMSG('SLATEC','EFCMN',&
       'IN EFC, THE ORDER OF THE B-SPLINE MUST BE 1 THRU 20.',3,1)
     RETURN
-  ENDIF
+  END IF
   !
   IF ( Nbkpt<2*Nord ) THEN
     CALL XERMSG('SLATEC','EFCMN',&
       'IN EFC, THE NUMBER OF KNOTS MUST BE AT LEAST TWICE THE B-SPLINE ORDER.',4,1)
     RETURN
-  ENDIF
+  END IF
   !
   IF ( Ndata<0 ) THEN
     CALL XERMSG('SLATEC','EFCMN',&
       'IN EFC, THE NUMBER OF DATA POINTS MUST BE NONNEGATIVE.',5,1)
     RETURN
-  ENDIF
+  END IF
   !
   nb = (Nbkpt-Nord+3)*(Nord+1) + (Nbkpt+1)*(Nord+1) + 2*MAX(Nbkpt,Ndata)&
     + Nbkpt + Nord**2
@@ -84,12 +84,12 @@ SUBROUTINE EFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Mdein,Mdeout,&
       //xern1//' GIVEN = '//xern2,6,1)
     Mdeout = -1
     RETURN
-  ENDIF
+  END IF
   !
   IF ( Mdein/=1.AND.Mdein/=2 ) THEN
     CALL XERMSG('SLATEC','EFCMN','IN EFC, INPUT VALUE OF MDEIN MUST BE 1-2.',7,1)
     RETURN
-  ENDIF
+  END IF
   !
   !     Sort the breakpoints.
   !
@@ -110,24 +110,24 @@ SUBROUTINE EFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Mdein,Mdeout,&
   CALL SCOPY(Ndata,Xdata,1,Xtemp,1)
   DO i = 1, Ndata
     Ptemp(i) = i
-  ENDDO
+  END DO
   !
   IF ( Ndata>0 ) THEN
     CALL SSORT(Xtemp,Ptemp,Ndata,2)
     xmin = MIN(xmin,Xtemp(1))
     xmax = MAX(xmax,Xtemp(Ndata))
-  ENDIF
+  END IF
   !
   !     Fix breakpoint array if needed. This should only involve very
   !     minor differences with the input array of breakpoints.
   !
   DO i = 1, Nord
     Bkpt(i) = MIN(Bkpt(i),xmin)
-  ENDDO
+  END DO
   !
   DO i = np1, Nbkpt
     Bkpt(i) = MAX(Bkpt(i),xmax)
-  ENDDO
+  END DO
   !
   !     Initialize parameters of banded matrix processor, BNDACC( ).
   !
@@ -162,9 +162,9 @@ SUBROUTINE EFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Mdein,Mdeout,&
           CALL SCOPY(nordp1,W(intseq,1),Mdw,G(ir,1),Mdg)
           CALL BNDACC(G,Mdg,Nord,ip,ir,1,intseq)
           intseq = intseq + 1
-        ENDIF
-      ENDDO
-    ENDIF
+        END IF
+      END DO
+    END IF
     !
     !        Obtain B-spline function value.
     !
@@ -186,8 +186,8 @@ SUBROUTINE EFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Mdein,Mdeout,&
     IF ( irow==Mdg-1 ) THEN
       CALL BNDACC(G,Mdg,Nord,ip,ir,mt,ileft-nordm1)
       mt = 0
-    ENDIF
-  ENDDO
+    END IF
+  END DO
   !
   !     Process last block of equations.
   !
@@ -200,8 +200,8 @@ SUBROUTINE EFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Mdein,Mdeout,&
     DO i = intseq, np1
       CALL SCOPY(nordp1,W(i,1),Mdw,G(ir,1),Mdg)
       CALL BNDACC(G,Mdg,Nord,ip,ir,1,MIN(n,i))
-    ENDDO
-  ENDIF
+    END DO
+  END IF
   !
   !     Last call to adjust block positioning.
   !
@@ -213,7 +213,7 @@ SUBROUTINE EFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Mdein,Mdeout,&
   !
   DO i = 1, np1
     CALL SCOPY(nordp1,G(i,1),Mdg,W(i,1),Mdw)
-  ENDDO
+  END DO
   !
   !     Solve for coefficients when possible.
   !
@@ -221,8 +221,8 @@ SUBROUTINE EFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Mdein,Mdeout,&
     IF ( G(i,1)==0.E0 ) THEN
       Mdeout = 2
       RETURN
-    ENDIF
-  ENDDO
+    END IF
+  END DO
   !
   !     All the diagonal terms in the accumulated triangular
   !     matrix are nonzero.  The solution can be computed but

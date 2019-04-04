@@ -30,7 +30,7 @@ SUBROUTINE RADB2(Ido,L1,Cc,Ch,Wa1)
   DO k = 1, L1
     Ch(1,k,1) = Cc(1,1,k) + Cc(Ido,2,k)
     Ch(1,k,2) = Cc(1,1,k) - Cc(Ido,2,k)
-  ENDDO
+  END DO
   IF ( Ido<2 ) RETURN
   IF ( Ido/=2 ) THEN
     idp2 = Ido + 2
@@ -45,8 +45,8 @@ SUBROUTINE RADB2(Ido,L1,Cc,Ch,Wa1)
           ti2 = Cc(i,1,k) + Cc(ic,2,k)
           Ch(i-1,k,2) = Wa1(i-2)*tr2 - Wa1(i-1)*ti2
           Ch(i,k,2) = Wa1(i-2)*ti2 + Wa1(i-1)*tr2
-        ENDDO
-      ENDDO
+        END DO
+      END DO
     ELSE
       DO k = 1, L1
         !DIR$ IVDEP
@@ -58,14 +58,14 @@ SUBROUTINE RADB2(Ido,L1,Cc,Ch,Wa1)
           ti2 = Cc(i,1,k) + Cc(ic,2,k)
           Ch(i-1,k,2) = Wa1(i-2)*tr2 - Wa1(i-1)*ti2
           Ch(i,k,2) = Wa1(i-2)*ti2 + Wa1(i-1)*tr2
-        ENDDO
-      ENDDO
-    ENDIF
+        END DO
+      END DO
+    END IF
     IF ( MOD(Ido,2)==1 ) RETURN
-  ENDIF
+  END IF
   DO k = 1, L1
     Ch(Ido,k,1) = Cc(Ido,1,k) + Cc(Ido,1,k)
     Ch(Ido,k,2) = -(Cc(1,2,k)+Cc(1,2,k))
-  ENDDO
+  END DO
   RETURN
 END SUBROUTINE RADB2

@@ -23,7 +23,7 @@ SUBROUTINE CDSCL(Hmax,N,Nq,Rmax,H,Rc,Rh,Yh)
   !* REVISION HISTORY  (YYMMDD)
   !   790601  DATE WRITTEN
   !   900329  Initial submission to SLATEC.
-  
+
   INTEGER i, j, N, Nq
   COMPLEX Yh(N,*)
   REAL H, Hmax, Rc, Rh, Rmax, r1
@@ -32,14 +32,14 @@ SUBROUTINE CDSCL(Hmax,N,Nq,Rmax,H,Rc,Rh,Yh)
     Rh = MIN(ABS(H)*Rh,ABS(H)*Rmax,Hmax)/ABS(H)
   ELSE
     Rh = MIN(Rh,Rmax,Hmax/ABS(H))
-  ENDIF
+  END IF
   r1 = 1.E0
   DO j = 1, Nq
     r1 = r1*Rh
     DO i = 1, N
       Yh(i,j+1) = Yh(i,j+1)*r1
-    ENDDO
-  ENDDO
+    END DO
+  END DO
   H = H*Rh
   Rc = Rc*Rh
 END SUBROUTINE CDSCL

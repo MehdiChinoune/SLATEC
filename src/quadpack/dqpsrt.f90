@@ -72,7 +72,7 @@ SUBROUTINE DQPSRT(Limit,Last,Maxerr,Ermax,Elist,Iord,Nrmax)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
-  
+
   !
   REAL(8) :: Elist(*), Ermax, errmax, errmin
   INTEGER i, ibeg, ido, Iord(*), isucc, j, jbnd, jupbn, k, Last, Limit, Maxerr, Nrmax
@@ -97,8 +97,8 @@ SUBROUTINE DQPSRT(Limit,Last,Maxerr,Ermax,Elist,Iord,Nrmax)
         IF ( errmax<=Elist(isucc) ) EXIT
         Iord(Nrmax) = isucc
         Nrmax = Nrmax - 1
-      ENDDO
-    ENDIF
+      END DO
+    END IF
     !
     !           COMPUTE THE NUMBER OF ELEMENTS IN THE LIST TO BE MAINTAINED
     !           IN DESCENDING ORDER. THIS NUMBER DEPENDS ON THE NUMBER OF
@@ -119,14 +119,14 @@ SUBROUTINE DQPSRT(Limit,Last,Maxerr,Ermax,Elist,Iord,Nrmax)
         !- **JUMP OUT OF DO-LOOP
         IF ( errmax>=Elist(isucc) ) GOTO 100
         Iord(i-1) = isucc
-      ENDDO
-    ENDIF
+      END DO
+    END IF
     Iord(jbnd) = Maxerr
     Iord(jupbn) = Last
   ELSE
     Iord(1) = 1
     Iord(2) = 2
-  ENDIF
+  END IF
   GOTO 300
   !
   !           INSERT ERRMIN BY TRAVERSING THE LIST BOTTOM-UP.
@@ -139,7 +139,7 @@ SUBROUTINE DQPSRT(Limit,Last,Maxerr,Ermax,Elist,Iord,Nrmax)
     IF ( errmin<Elist(isucc) ) GOTO 200
     Iord(k+1) = isucc
     k = k - 1
-  ENDDO
+  END DO
   Iord(i) = Last
   GOTO 300
   200  Iord(k+1) = Last

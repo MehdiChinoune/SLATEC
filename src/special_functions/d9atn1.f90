@@ -78,7 +78,7 @@ REAL(8) FUNCTION D9ATN1(X)
     xbig = 1.571D0/SQRT(eps)
     xmax = 1.571D0/eps
     first = .FALSE.
-  ENDIF
+  END IF
   !
   y = ABS(X)
   IF ( y>1.0D0 ) THEN
@@ -90,7 +90,7 @@ REAL(8) FUNCTION D9ATN1(X)
     !
     D9ATN1 = (ATAN(X)-X)/X**3
     RETURN
-  ENDIF
+  END IF
   !
   IF ( y<=xsml ) D9ATN1 = -1.0D0/3.0D0
   IF ( y<=xsml ) RETURN

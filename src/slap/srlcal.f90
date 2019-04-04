@@ -77,7 +77,7 @@ SUBROUTINE SRLCAL(N,Kmp,Ll,Maxl,V,Q,Rl,Snormw,Prod,R0nrm)
   !   910411  Prologue converted to Version 4.0 format.  (BAB)
   !   910506  Made subsidiary to SGMRES.  (FNF)
   !   920511  Added complete declaration section.  (WRB)
-  
+
   !         The following is for optimized compilation on LLNL/LTSS Crays.
   !LLL. OPTIMIZE
   !     .. Scalar Arguments ..
@@ -104,15 +104,15 @@ SUBROUTINE SRLCAL(N,Kmp,Ll,Maxl,V,Q,Rl,Snormw,Prod,R0nrm)
       c = Q(i2-1)
       DO k = 1, N
         Rl(k) = s*Rl(k) + c*V(k,ip1)
-      ENDDO
-    ENDDO
+      END DO
+    END DO
     s = Q(2*Ll)
     c = Q(2*Ll-1)/Snormw
     llp1 = Ll + 1
     DO k = 1, N
       Rl(k) = s*Rl(k) + c*V(k,llp1)
-    ENDDO
-  ENDIF
+    END DO
+  END IF
   !
   !         When KMP < MAXL, RL vector already partially calculated.
   !         Scale RL by R0NRM*PROD to obtain the residual RL.

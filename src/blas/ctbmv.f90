@@ -186,11 +186,11 @@ SUBROUTINE CTBMV(Uplo,Trans,Diag,N,K,A,Lda,X,Incx)
     info = 7
   ELSEIF ( Incx==0 ) THEN
     info = 9
-  ENDIF
+  END IF
   IF ( info/=0 ) THEN
     CALL XERBLA('CTBMV ',info)
     RETURN
-  ENDIF
+  END IF
   !
   !     Quick return if possible.
   !
@@ -206,7 +206,7 @@ SUBROUTINE CTBMV(Uplo,Trans,Diag,N,K,A,Lda,X,Incx)
     kx = 1 - (N-1)*Incx
   ELSEIF ( Incx/=1 ) THEN
     kx = 1
-  ENDIF
+  END IF
   !
   !     Start the operations. In this version the elements of A are
   !     accessed sequentially with one pass through A.
@@ -224,10 +224,10 @@ SUBROUTINE CTBMV(Uplo,Trans,Diag,N,K,A,Lda,X,Incx)
             l = kplus1 - j
             DO i = MAX(1,j-K), j - 1
               X(i) = X(i) + temp*A(l+i,j)
-            ENDDO
+            END DO
             IF ( nounit ) X(j) = X(j)*A(kplus1,j)
-          ENDIF
-        ENDDO
+          END IF
+        END DO
       ELSE
         jx = kx
         DO j = 1, N
@@ -238,13 +238,13 @@ SUBROUTINE CTBMV(Uplo,Trans,Diag,N,K,A,Lda,X,Incx)
             DO i = MAX(1,j-K), j - 1
               X(ix) = X(ix) + temp*A(l+i,j)
               ix = ix + Incx
-            ENDDO
+            END DO
             IF ( nounit ) X(jx) = X(jx)*A(kplus1,j)
-          ENDIF
+          END IF
           jx = jx + Incx
           IF ( j>K ) kx = kx + Incx
-        ENDDO
-      ENDIF
+        END DO
+      END IF
     ELSEIF ( Incx==1 ) THEN
       DO j = N, 1, -1
         IF ( X(j)/=ZERO ) THEN
@@ -252,10 +252,10 @@ SUBROUTINE CTBMV(Uplo,Trans,Diag,N,K,A,Lda,X,Incx)
           l = 1 - j
           DO i = MIN(N,j+K), j + 1, -1
             X(i) = X(i) + temp*A(l+i,j)
-          ENDDO
+          END DO
           IF ( nounit ) X(j) = X(j)*A(1,j)
-        ENDIF
-      ENDDO
+        END IF
+      END DO
     ELSE
       kx = kx + (N-1)*Incx
       jx = kx
@@ -267,13 +267,13 @@ SUBROUTINE CTBMV(Uplo,Trans,Diag,N,K,A,Lda,X,Incx)
           DO i = MIN(N,j+K), j + 1, -1
             X(ix) = X(ix) + temp*A(l+i,j)
             ix = ix - Incx
-          ENDDO
+          END DO
           IF ( nounit ) X(jx) = X(jx)*A(1,j)
-        ENDIF
+        END IF
         jx = jx - Incx
         IF ( (N-j)>=K ) kx = kx - Incx
-      ENDDO
-    ENDIF
+      END DO
+    END IF
     !
     !        Form  x := A'*x  or  x := conjg( A' )*x.
     !
@@ -287,15 +287,15 @@ SUBROUTINE CTBMV(Uplo,Trans,Diag,N,K,A,Lda,X,Incx)
           IF ( nounit ) temp = temp*A(kplus1,j)
           DO i = j - 1, MAX(1,j-K), -1
             temp = temp + A(l+i,j)*X(i)
-          ENDDO
+          END DO
         ELSE
           IF ( nounit ) temp = temp*CONJG(A(kplus1,j))
           DO i = j - 1, MAX(1,j-K), -1
             temp = temp + CONJG(A(l+i,j))*X(i)
-          ENDDO
-        ENDIF
+          END DO
+        END IF
         X(j) = temp
-      ENDDO
+      END DO
     ELSE
       kx = kx + (N-1)*Incx
       jx = kx
@@ -309,18 +309,18 @@ SUBROUTINE CTBMV(Uplo,Trans,Diag,N,K,A,Lda,X,Incx)
           DO i = j - 1, MAX(1,j-K), -1
             temp = temp + A(l+i,j)*X(ix)
             ix = ix - Incx
-          ENDDO
+          END DO
         ELSE
           IF ( nounit ) temp = temp*CONJG(A(kplus1,j))
           DO i = j - 1, MAX(1,j-K), -1
             temp = temp + CONJG(A(l+i,j))*X(ix)
             ix = ix - Incx
-          ENDDO
-        ENDIF
+          END DO
+        END IF
         X(jx) = temp
         jx = jx - Incx
-      ENDDO
-    ENDIF
+      END DO
+    END IF
   ELSEIF ( Incx==1 ) THEN
     DO j = 1, N
       temp = X(j)
@@ -329,15 +329,15 @@ SUBROUTINE CTBMV(Uplo,Trans,Diag,N,K,A,Lda,X,Incx)
         IF ( nounit ) temp = temp*A(1,j)
         DO i = j + 1, MIN(N,j+K)
           temp = temp + A(l+i,j)*X(i)
-        ENDDO
+        END DO
       ELSE
         IF ( nounit ) temp = temp*CONJG(A(1,j))
         DO i = j + 1, MIN(N,j+K)
           temp = temp + CONJG(A(l+i,j))*X(i)
-        ENDDO
-      ENDIF
+        END DO
+      END IF
       X(j) = temp
-    ENDDO
+    END DO
   ELSE
     jx = kx
     DO j = 1, N
@@ -350,18 +350,18 @@ SUBROUTINE CTBMV(Uplo,Trans,Diag,N,K,A,Lda,X,Incx)
         DO i = j + 1, MIN(N,j+K)
           temp = temp + A(l+i,j)*X(ix)
           ix = ix + Incx
-        ENDDO
+        END DO
       ELSE
         IF ( nounit ) temp = temp*CONJG(A(1,j))
         DO i = j + 1, MIN(N,j+K)
           temp = temp + CONJG(A(l+i,j))*X(ix)
           ix = ix + Incx
-        ENDDO
-      ENDIF
+        END DO
+      END IF
       X(jx) = temp
       jx = jx + Incx
-    ENDDO
-  ENDIF
+    END DO
+  END IF
   !
   !
   !     End of CTBMV .

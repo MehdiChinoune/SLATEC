@@ -170,7 +170,7 @@ SUBROUTINE RC6J(L2,L3,L4,L5,L6,L1min,L1max,Sixcof,Ndim,Ier)
     Ier = 3
     CALL XERMSG('SLATEC','RC6J','L4, L5, L3 triangular condition not satisfied.',Ier,1)
     RETURN
-  ENDIF
+  END IF
   !
   !  Limits for L1
   !
@@ -182,7 +182,7 @@ SUBROUTINE RC6J(L2,L3,L4,L5,L6,L1min,L1max,Sixcof,Ndim,Ier)
     Ier = 4
     CALL XERMSG('SLATEC','RC6J','L1MAX-L1MIN not integer.',Ier,1)
     RETURN
-  ENDIF
+  END IF
   IF ( L1min<L1max-eps ) THEN
     !
     !
@@ -208,7 +208,7 @@ SUBROUTINE RC6J(L2,L3,L4,L5,L6,L1min,L1max,Sixcof,Ndim,Ier)
       sum1 = (l1+l1+one)*tiny
       !
       lstep = 1
-    ENDIF
+    END IF
   ELSEIF ( L1min<L1max+eps ) THEN
     !
     !
@@ -224,7 +224,7 @@ SUBROUTINE RC6J(L2,L3,L4,L5,L6,L1min,L1max,Sixcof,Ndim,Ier)
     Ier = 5
     CALL XERMSG('SLATEC','RC6J','L1MIN greater than L1MAX.',Ier,1)
     RETURN
-  ENDIF
+  END IF
   100  lstep = lstep + 1
   l1 = l1 + one
   !
@@ -249,7 +249,7 @@ SUBROUTINE RC6J(L2,L3,L4,L5,L6,L1min,L1max,Sixcof,Ndim,Ier)
     !
     IF ( lstep>2 ) c1old = ABS(c1)
     c1 = -(l1+l1-one)*dv/denom
-  ENDIF
+  END IF
   !
   IF ( lstep>2 ) THEN
     !
@@ -277,11 +277,11 @@ SUBROUTINE RC6J(L2,L3,L4,L5,L6,L1min,L1max,Sixcof,Ndim,Ier)
         DO i = 1, lstep
           IF ( ABS(Sixcof(i))<srtiny ) Sixcof(i) = zero
           Sixcof(i) = Sixcof(i)/srhuge
-        ENDDO
+        END DO
         sum1 = sum1/huge
         sumfor = sumfor/huge
         x = x/srhuge
-      ENDIF
+      END IF
       !
       !
       !  As long as the coefficient ABS(C1) is decreasing, the recursion
@@ -290,7 +290,7 @@ SUBROUTINE RC6J(L2,L3,L4,L5,L6,L1min,L1max,Sixcof,Ndim,Ier)
       !  direction is reversed.
       !
       IF ( c1old>ABS(c1) ) GOTO 100
-    ENDIF
+    END IF
     !
     !
     !  Keep three 6j coefficients around LMATCH for comparison later
@@ -360,11 +360,11 @@ SUBROUTINE RC6J(L2,L3,L4,L5,L6,L1min,L1max,Sixcof,Ndim,Ier)
             index = nfin - i + 1
             IF ( ABS(Sixcof(index))<srtiny ) Sixcof(index) = zero
             Sixcof(index) = Sixcof(index)/srhuge
-          ENDDO
+          END DO
           sumbac = sumbac/huge
           !
           sum2 = sum2/huge
-        ENDIF
+        END IF
       ELSE
         !
         !  If L1 = L1MAX + 1 the third term in the recursion equation vanishes
@@ -374,8 +374,8 @@ SUBROUTINE RC6J(L2,L3,L4,L5,L6,L1min,L1max,Sixcof,Ndim,Ier)
         IF ( lstep==nstep2 ) EXIT
         sumbac = sum2
         sum2 = sum2 + (l1+l1-three)*c1*c1*tiny
-      ENDIF
-    ENDDO
+      END IF
+    END DO
     !
     !
     !  The forward recursion 6j coefficients X1, X2, X3 are to be matched
@@ -398,15 +398,15 @@ SUBROUTINE RC6J(L2,L3,L4,L5,L6,L1min,L1max,Sixcof,Ndim,Ier)
       ratio = one/ratio
       DO n = nlim, nfin
         Sixcof(n) = ratio*Sixcof(n)
-      ENDDO
+      END DO
       sumuni = sumfor + ratio*ratio*sumbac
     ELSE
       !
       DO n = 1, nlim
         Sixcof(n) = ratio*Sixcof(n)
-      ENDDO
+      END DO
       sumuni = ratio*ratio*sumfor + sumbac
-    ENDIF
+    END IF
   ELSE
     !
     !  If L1 = L1MIN + 1, the third term in recursion equation vanishes
@@ -418,7 +418,7 @@ SUBROUTINE RC6J(L2,L3,L4,L5,L6,L1min,L1max,Sixcof,Ndim,Ier)
     IF ( lstep/=nfin ) GOTO 100
     !
     sumuni = sum1
-  ENDIF
+  END IF
   !
   !
   !  Normalize 6j coefficients
@@ -437,12 +437,12 @@ SUBROUTINE RC6J(L2,L3,L4,L5,L6,L1min,L1max,Sixcof,Ndim,Ier)
     DO n = 1, nfin
       IF ( ABS(Sixcof(n))<thresh ) Sixcof(n) = zero
       Sixcof(n) = cnorm*Sixcof(n)
-    ENDDO
+    END DO
     RETURN
-  ENDIF
+  END IF
   !
   DO n = 1, nfin
     Sixcof(n) = cnorm*Sixcof(n)
-  ENDDO
+  END DO
   RETURN
 END SUBROUTINE RC6J

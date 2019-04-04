@@ -77,7 +77,7 @@ PROGRAM TESTI
     CALL XSETF(0)
   ELSE
     CALL XSETF(1)
-  ENDIF
+  END IF
   !
   !     Test single precision Fullerton intrinsics.
   !
@@ -100,7 +100,7 @@ PROGRAM TESTI
     WRITE (UNIT=lun,FMT=99001)
   ELSE
     WRITE (UNIT=lun,FMT=99002) nfail
-  ENDIF
+  END IF
   STOP
   99001 FORMAT (/' --------------TESTI PASSED ALL TESTS----------------')
   99002 FORMAT (/' ************* WARNING -- ',I5,&
@@ -214,8 +214,8 @@ SUBROUTINE QCINTC(Lun,Kprint,Ipass)
     IF ( CABS(c(i)-w(i))>=errtol*CABS(c(i))+errtol ) THEN
       Ipass = 0
       IF ( Kprint>=2 ) WRITE (UNIT=Lun,FMT=99003) i, w(i), c(i)
-    ENDIF
-  ENDDO
+    END IF
+  END DO
   IF ( Ipass/=0.AND.Kprint>=2 ) WRITE (UNIT=Lun,FMT=99002)
   RETURN
   99001 FORMAT (//' Test of complex Fullerton intrinsic routines')
@@ -393,8 +393,8 @@ SUBROUTINE QCINTD(Lun,Kprint,Ipass)
     IF ( ABS(v(i)-y(i))>=errtol*ABS(v(i))+errtol ) THEN
       Ipass = 0
       IF ( Kprint>=2 ) WRITE (UNIT=Lun,FMT=99003) i, y(i), v(i)
-    ENDIF
-  ENDDO
+    END IF
+  END DO
   IF ( Ipass/=0.AND.Kprint>=2 ) WRITE (UNIT=Lun,FMT=99002)
   RETURN
   99001 FORMAT (//' Test of double precision Fullerton intrinsic ','routines')
@@ -561,8 +561,8 @@ SUBROUTINE QCINTS(Lun,Kprint,Ipass)
     IF ( ABS(v(i)-y(i))>=errtol*ABS(v(i))+errtol ) THEN
       Ipass = 0
       IF ( Kprint>=2 ) WRITE (UNIT=Lun,FMT=99003) i, y(i), v(i)
-    ENDIF
-  ENDDO
+    END IF
+  END DO
   IF ( Ipass/=0.AND.Kprint>=2 ) WRITE (UNIT=Lun,FMT=99002)
   RETURN
   99001 FORMAT (//' Test of single precision Fullerton intrinsic ','routines')

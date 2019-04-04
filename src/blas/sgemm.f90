@@ -171,12 +171,12 @@ SUBROUTINE SGEMM(Transa,Transb,M,N,K,Alpha,A,Lda,B,Ldb,Beta,C,Ldc)
   ELSE
     nrowa = K
     ncola = M
-  ENDIF
+  END IF
   IF ( notb ) THEN
     nrowb = K
   ELSE
     nrowb = N
-  ENDIF
+  END IF
   !
   !     Test the input parameters.
   !
@@ -199,11 +199,11 @@ SUBROUTINE SGEMM(Transa,Transb,M,N,K,Alpha,A,Lda,B,Ldb,Beta,C,Ldc)
     info = 10
   ELSEIF ( Ldc<MAX(1,M) ) THEN
     info = 13
-  ENDIF
+  END IF
   IF ( info/=0 ) THEN
     CALL XERBLA('SGEMM ',info)
     RETURN
-  ENDIF
+  END IF
   !
   !     Quick return if possible.
   !
@@ -216,17 +216,17 @@ SUBROUTINE SGEMM(Transa,Transb,M,N,K,Alpha,A,Lda,B,Ldb,Beta,C,Ldc)
       DO j = 1, N
         DO i = 1, M
           C(i,j) = ZERO
-        ENDDO
-      ENDDO
+        END DO
+      END DO
     ELSE
       DO j = 1, N
         DO i = 1, M
           C(i,j) = Beta*C(i,j)
-        ENDDO
-      ENDDO
-    ENDIF
+        END DO
+      END DO
+    END IF
     RETURN
-  ENDIF
+  END IF
   !
   !     Start the operations.
   !
@@ -239,21 +239,21 @@ SUBROUTINE SGEMM(Transa,Transb,M,N,K,Alpha,A,Lda,B,Ldb,Beta,C,Ldc)
         IF ( Beta==ZERO ) THEN
           DO i = 1, M
             C(i,j) = ZERO
-          ENDDO
+          END DO
         ELSEIF ( Beta/=ONE ) THEN
           DO i = 1, M
             C(i,j) = Beta*C(i,j)
-          ENDDO
-        ENDIF
+          END DO
+        END IF
         DO l = 1, K
           IF ( B(l,j)/=ZERO ) THEN
             temp = Alpha*B(l,j)
             DO i = 1, M
               C(i,j) = C(i,j) + temp*A(i,l)
-            ENDDO
-          ENDIF
-        ENDDO
-      ENDDO
+            END DO
+          END IF
+        END DO
+      END DO
     ELSE
       !
       !           Form  C := alpha*A'*B + beta*C
@@ -263,15 +263,15 @@ SUBROUTINE SGEMM(Transa,Transb,M,N,K,Alpha,A,Lda,B,Ldb,Beta,C,Ldc)
           temp = ZERO
           DO l = 1, K
             temp = temp + A(l,i)*B(l,j)
-          ENDDO
+          END DO
           IF ( Beta==ZERO ) THEN
             C(i,j) = Alpha*temp
           ELSE
             C(i,j) = Alpha*temp + Beta*C(i,j)
-          ENDIF
-        ENDDO
-      ENDDO
-    ENDIF
+          END IF
+        END DO
+      END DO
+    END IF
   ELSEIF ( nota ) THEN
     !
     !           Form  C := alpha*A*B' + beta*C
@@ -280,21 +280,21 @@ SUBROUTINE SGEMM(Transa,Transb,M,N,K,Alpha,A,Lda,B,Ldb,Beta,C,Ldc)
       IF ( Beta==ZERO ) THEN
         DO i = 1, M
           C(i,j) = ZERO
-        ENDDO
+        END DO
       ELSEIF ( Beta/=ONE ) THEN
         DO i = 1, M
           C(i,j) = Beta*C(i,j)
-        ENDDO
-      ENDIF
+        END DO
+      END IF
       DO l = 1, K
         IF ( B(j,l)/=ZERO ) THEN
           temp = Alpha*B(j,l)
           DO i = 1, M
             C(i,j) = C(i,j) + temp*A(i,l)
-          ENDDO
-        ENDIF
-      ENDDO
-    ENDDO
+          END DO
+        END IF
+      END DO
+    END DO
   ELSE
     !
     !           Form  C := alpha*A'*B' + beta*C
@@ -304,15 +304,15 @@ SUBROUTINE SGEMM(Transa,Transb,M,N,K,Alpha,A,Lda,B,Ldb,Beta,C,Ldc)
         temp = ZERO
         DO l = 1, K
           temp = temp + A(l,i)*B(j,l)
-        ENDDO
+        END DO
         IF ( Beta==ZERO ) THEN
           C(i,j) = Alpha*temp
         ELSE
           C(i,j) = Alpha*temp + Beta*C(i,j)
-        ENDIF
-      ENDDO
-    ENDDO
-  ENDIF
+        END IF
+      END DO
+    END DO
+  END IF
   !
   !
   !     End of SGEMM .

@@ -77,7 +77,7 @@ REAL(8) FUNCTION DGAMMA(X)
     CALL DGAMLM(xmin,xmax)
     dxrel = SQRT(D1MACH(4))
     first = .FALSE.
-  ENDIF
+  END IF
   !
   y = ABS(X)
   IF ( y>10.D0 ) THEN
@@ -129,15 +129,15 @@ REAL(8) FUNCTION DGAMMA(X)
       !
       DO i = 1, n
         DGAMMA = DGAMMA/(X+i-1)
-      ENDDO
+      END DO
       RETURN
-    ENDIF
-  ENDIF
+    END IF
+  END IF
   !
   ! GAMMA(X) FOR X .GE. 2.0 AND X .LE. 10.0
   !
   DO i = 1, n
     DGAMMA = (y+i)*DGAMMA
-  ENDDO
+  END DO
   RETURN
 END FUNCTION DGAMMA

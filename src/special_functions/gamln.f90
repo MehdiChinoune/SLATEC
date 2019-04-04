@@ -120,9 +120,9 @@ REAL FUNCTION GAMLN(Z,Ierr)
         IF ( nz<=100 ) THEN
           GAMLN = gln(nz)
           RETURN
-        ENDIF
-      ENDIF
-    ENDIF
+        END IF
+      END IF
+    END IF
     wdtol = R1MACH(4)
     wdtol = MAX(wdtol,0.5E-18)
     i1m = I1MACH(11)
@@ -138,7 +138,7 @@ REAL FUNCTION GAMLN(Z,Ierr)
     IF ( Z<zmin ) THEN
       zinc = zmin - nz
       zdmy = Z + zinc
-    ENDIF
+    END IF
     zp = 1.0E0/zdmy
     t1 = cf(1)*zp
     s = t1
@@ -150,19 +150,19 @@ REAL FUNCTION GAMLN(Z,Ierr)
         trm = cf(k)*zp
         IF ( ABS(trm)<tst ) EXIT
         s = s + trm
-      ENDDO
-    ENDIF
+      END DO
+    END IF
     IF ( zinc==0.0E0 ) THEN
       tlg = ALOG(Z)
       GAMLN = Z*(tlg-1.0E0) + 0.5E0*(con-tlg) + s
       RETURN
-    ENDIF
-  ENDIF
+    END IF
+  END IF
   zp = 1.0E0
   nz = INT( zinc )
   DO i = 1, nz
     zp = zp*(Z+(i-1))
-  ENDDO
+  END DO
   tlg = ALOG(zdmy)
   GAMLN = zdmy*(tlg-1.0E0) - ALOG(zp) + 0.5E0*(con-tlg) + s
   RETURN

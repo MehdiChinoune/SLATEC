@@ -26,7 +26,7 @@ SUBROUTINE RADF4(Ido,L1,Cc,Ch,Wa1,Wa2,Wa3)
   !   890831  Modified array declarations.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
-  
+
   INTEGER i, ic, Ido, idp2, k, L1
   REAL Cc(Ido,L1,4), Ch(Ido,4,*), ci2, ci3, ci4, cr2, cr3, cr4, hsqt2, ti1, ti2, &
     ti3, ti4, tr1, tr2, tr3, tr4, Wa1(*), Wa2(*), Wa3(*)
@@ -39,7 +39,7 @@ SUBROUTINE RADF4(Ido,L1,Cc,Ch,Wa1,Wa2,Wa3)
     Ch(Ido,4,k) = tr2 - tr1
     Ch(Ido,2,k) = Cc(1,k,1) - Cc(1,k,3)
     Ch(1,3,k) = Cc(1,k,4) - Cc(1,k,2)
-  ENDDO
+  END DO
   IF ( Ido<2 ) RETURN
   IF ( Ido/=2 ) THEN
     idp2 = Ido + 2
@@ -70,8 +70,8 @@ SUBROUTINE RADF4(Ido,L1,Cc,Ch,Wa1,Wa2,Wa3)
           Ch(ic-1,2,k) = tr3 - ti4
           Ch(i,3,k) = tr4 + ti3
           Ch(ic,2,k) = tr4 - ti3
-        ENDDO
-      ENDDO
+        END DO
+      END DO
     ELSE
       DO k = 1, L1
         !DIR$ IVDEP
@@ -99,11 +99,11 @@ SUBROUTINE RADF4(Ido,L1,Cc,Ch,Wa1,Wa2,Wa3)
           Ch(ic-1,2,k) = tr3 - ti4
           Ch(i,3,k) = tr4 + ti3
           Ch(ic,2,k) = tr4 - ti3
-        ENDDO
-      ENDDO
-    ENDIF
+        END DO
+      END DO
+    END IF
     IF ( MOD(Ido,2)==1 ) RETURN
-  ENDIF
+  END IF
   DO k = 1, L1
     ti1 = -hsqt2*(Cc(Ido,k,2)+Cc(Ido,k,4))
     tr1 = hsqt2*(Cc(Ido,k,2)-Cc(Ido,k,4))
@@ -111,6 +111,6 @@ SUBROUTINE RADF4(Ido,L1,Cc,Ch,Wa1,Wa2,Wa3)
     Ch(Ido,3,k) = Cc(Ido,k,1) - tr1
     Ch(1,2,k) = ti1 - Cc(Ido,k,3)
     Ch(1,4,k) = ti1 + Cc(Ido,k,3)
-  ENDDO
+  END DO
   RETURN
 END SUBROUTINE RADF4

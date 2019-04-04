@@ -101,7 +101,7 @@ SUBROUTINE QZVEC(Nm,N,A,B,Alfr,Alfi,Beta,Z)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   !
   INTEGER i, j, k, m, N, en, ii, jj, na, Nm, nn, isw, enm2
   REAL A(Nm,*), B(Nm,*), Alfr(*), Alfi(*), Beta(*), Z(Nm,*)
@@ -144,7 +144,7 @@ SUBROUTINE QZVEC(Nm,N,A,B,Alfr,Alfi,Beta,Z)
               x1 = -almi*B(i,j)
               ra = ra + x*B(j,na) - x1*B(j,en)
               sa = sa + x*B(j,en) + x1*B(j,na)
-            ENDDO
+            END DO
             !
             IF ( i/=1.AND.isw/=2 ) THEN
               IF ( betm*A(i,i-1)/=0.0E0 ) THEN
@@ -154,156 +154,157 @@ SUBROUTINE QZVEC(Nm,N,A,B,Alfr,Alfi,Beta,Z)
                 s = sa
                 isw = 2
                 CYCLE
-              ENDIF
-            ENDIF
+              END IF
+            END IF
             m = i
             IF ( isw==2 ) GOTO 6
             !     .......... COMPLEX 1-BY-1 BLOCK ..........
             tr = -ra
             ti = -sa
-            2              dr = w
+            2  dr = w
             di = w1
             !     .......... COMPLEX DIVIDE (T1,T2) = (TR,TI) / (DR,DI) ..........
-            4              IF ( ABS(di)<=ABS(dr) ) THEN
-            rr = di/dr
-            d = dr + di*rr
-            t1 = (tr+ti*rr)/d
-            t2 = (ti-tr*rr)/d
+            4 CONTINUE
+            IF ( ABS(di)<=ABS(dr) ) THEN
+              rr = di/dr
+              d = dr + di*rr
+              t1 = (tr+ti*rr)/d
+              t2 = (ti-tr*rr)/d
+              IF ( isw==1 ) GOTO 10
+              IF ( isw==2 ) GOTO 8
+            END IF
+            rr = dr/di
+            d = dr*rr + di
+            t1 = (tr*rr+ti)/d
+            t2 = (ti*rr-tr)/d
             IF ( isw==1 ) GOTO 10
             IF ( isw==2 ) GOTO 8
-        ENDIF
-        rr = dr/di
-        d = dr*rr + di
-        t1 = (tr*rr+ti)/d
-        t2 = (ti*rr-tr)/d
-        IF ( isw==1 ) GOTO 10
-        IF ( isw==2 ) GOTO 8
-        !     .......... COMPLEX 2-BY-2 BLOCK ..........
-        6              x = betm*A(i,i+1) - almr*B(i,i+1)
-        x1 = -almi*B(i,i+1)
-        y = betm*A(i+1,i)
-        tr = y*ra - w*r + w1*s
-        ti = y*sa - w*s - w1*r
-        dr = w*zz - w1*z1 - x*y
-        di = w*z1 + w1*zz - x1*y
-        IF ( dr==0.0E0.AND.di==0.0E0 ) dr = epsb
-        GOTO 4
-        8              B(i+1,na) = t1
-        B(i+1,en) = t2
-        isw = 1
-        IF ( ABS(y)>ABS(w)+ABS(w1) ) THEN
-          t1 = (-r-zz*B(i+1,na)+z1*B(i+1,en))/y
-          t2 = (-s-zz*B(i+1,en)-z1*B(i+1,na))/y
-        ELSE
-          tr = -ra - x*B(i+1,na) + x1*B(i+1,en)
-          ti = -sa - x*B(i+1,en) - x1*B(i+1,na)
-          GOTO 2
-        ENDIF
-        10             B(i,na) = t1
-        B(i,en) = t2
-  ENDDO
-ENDIF
-ELSE
-!     .......... REAL VECTOR ..........
-m = en
-B(en,en) = 1.0E0
-IF ( na/=0 ) THEN
-  alfm = Alfr(m)
-  betm = Beta(m)
-  !     .......... FOR I=EN-1 STEP -1 UNTIL 1 DO -- ..........
-  DO ii = 1, na
-    i = en - ii
-    w = betm*A(i,i) - alfm*B(i,i)
-    r = 0.0E0
-    !
-    DO j = m, en
-      r = r + (betm*A(i,j)-alfm*B(i,j))*B(j,en)
-    ENDDO
-    !
-    IF ( i/=1.AND.isw/=2 ) THEN
-      IF ( betm*A(i,i-1)/=0.0E0 ) THEN
-        zz = w
-        s = r
-        GOTO 12
-      ENDIF
-    ENDIF
-    m = i
-    IF ( isw==2 ) THEN
-      !     .......... REAL 2-BY-2 BLOCK ..........
-      x = betm*A(i,i+1) - alfm*B(i,i+1)
-      y = betm*A(i+1,i)
-      q = w*zz - x*y
-      t = (x*s-zz*r)/q
-      B(i,en) = t
-      IF ( ABS(x)<=ABS(zz) ) THEN
-        B(i+1,en) = (-s-y*t)/zz
+            !     .......... COMPLEX 2-BY-2 BLOCK ..........
+            6 x = betm*A(i,i+1) - almr*B(i,i+1)
+            x1 = -almi*B(i,i+1)
+            y = betm*A(i+1,i)
+            tr = y*ra - w*r + w1*s
+            ti = y*sa - w*s - w1*r
+            dr = w*zz - w1*z1 - x*y
+            di = w*z1 + w1*zz - x1*y
+            IF ( dr==0.0E0.AND.di==0.0E0 ) dr = epsb
+            GOTO 4
+            8 B(i+1,na) = t1
+            B(i+1,en) = t2
+            isw = 1
+            IF ( ABS(y)>ABS(w)+ABS(w1) ) THEN
+              t1 = (-r-zz*B(i+1,na)+z1*B(i+1,en))/y
+              t2 = (-s-zz*B(i+1,en)-z1*B(i+1,na))/y
+            ELSE
+              tr = -ra - x*B(i+1,na) + x1*B(i+1,en)
+              ti = -sa - x*B(i+1,en) - x1*B(i+1,na)
+              GOTO 2
+            END IF
+            10 B(i,na) = t1
+            B(i,en) = t2
+          END DO
+        END IF
       ELSE
-        B(i+1,en) = (-r-w*t)/x
-      ENDIF
-    ELSE
-      !     .......... REAL 1-BY-1 BLOCK ..........
-      t = w
-      IF ( w==0.0E0 ) t = epsb
-      B(i,en) = -r/t
+        !     .......... REAL VECTOR ..........
+        m = en
+        B(en,en) = 1.0E0
+        IF ( na/=0 ) THEN
+          alfm = Alfr(m)
+          betm = Beta(m)
+          !     .......... FOR I=EN-1 STEP -1 UNTIL 1 DO -- ..........
+          DO ii = 1, na
+            i = en - ii
+            w = betm*A(i,i) - alfm*B(i,i)
+            r = 0.0E0
+            !
+            DO j = m, en
+              r = r + (betm*A(i,j)-alfm*B(i,j))*B(j,en)
+            END DO
+            !
+            IF ( i/=1.AND.isw/=2 ) THEN
+              IF ( betm*A(i,i-1)/=0.0E0 ) THEN
+                zz = w
+                s = r
+                GOTO 12
+              END IF
+            END IF
+            m = i
+            IF ( isw==2 ) THEN
+              !     .......... REAL 2-BY-2 BLOCK ..........
+              x = betm*A(i,i+1) - alfm*B(i,i+1)
+              y = betm*A(i+1,i)
+              q = w*zz - x*y
+              t = (x*s-zz*r)/q
+              B(i,en) = t
+              IF ( ABS(x)<=ABS(zz) ) THEN
+                B(i+1,en) = (-s-y*t)/zz
+              ELSE
+                B(i+1,en) = (-r-w*t)/x
+              END IF
+            ELSE
+              !     .......... REAL 1-BY-1 BLOCK ..........
+              t = w
+              IF ( w==0.0E0 ) t = epsb
+              B(i,en) = -r/t
+              CYCLE
+            END IF
+            12  isw = 3 - isw
+            !     .......... END REAL VECTOR ..........
+          END DO
+        END IF
+        CYCLE
+      END IF
+    END IF
+    !     .......... END COMPLEX VECTOR ..........
+    isw = 3 - isw
+  END DO
+  !     .......... END BACK SUBSTITUTION.
+  !                TRANSFORM TO ORIGINAL COORDINATE SYSTEM.
+  !                FOR J=N STEP -1 UNTIL 1 DO -- ..........
+  DO jj = 1, N
+    j = N + 1 - jj
+    !
+    DO i = 1, N
+      zz = 0.0E0
+      !
+      DO k = 1, j
+        zz = zz + Z(i,k)*B(k,j)
+      END DO
+      !
+      Z(i,j) = zz
+    END DO
+  END DO
+  !     .......... NORMALIZE SO THAT MODULUS OF LARGEST
+  !                COMPONENT OF EACH VECTOR IS 1.
+  !                (ISW IS 1 INITIALLY FROM BEFORE) ..........
+  DO j = 1, N
+    d = 0.0E0
+    IF ( isw==2 ) THEN
+      !
+      DO i = 1, N
+        r = ABS(Z(i,j-1)) + ABS(Z(i,j))
+        IF ( r/=0.0E0 ) r = r*SQRT((Z(i,j-1)/r)**2+(Z(i,j)/r)**2)
+        IF ( r>d ) d = r
+      END DO
+      !
+      DO i = 1, N
+        Z(i,j-1) = Z(i,j-1)/d
+        Z(i,j) = Z(i,j)/d
+      END DO
+    ELSEIF ( Alfi(j)==0.0E0 ) THEN
+      !
+      DO i = 1, N
+        IF ( ABS(Z(i,j))>d ) d = ABS(Z(i,j))
+      END DO
+      !
+      DO i = 1, N
+        Z(i,j) = Z(i,j)/d
+      END DO
+      !
       CYCLE
-    ENDIF
-    12             isw = 3 - isw
-    !     .......... END REAL VECTOR ..........
-  ENDDO
-ENDIF
-CYCLE
-ENDIF
-ENDIF
-!     .......... END COMPLEX VECTOR ..........
-isw = 3 - isw
-ENDDO
-!     .......... END BACK SUBSTITUTION.
-!                TRANSFORM TO ORIGINAL COORDINATE SYSTEM.
-!                FOR J=N STEP -1 UNTIL 1 DO -- ..........
-DO jj = 1, N
-j = N + 1 - jj
-!
-DO i = 1, N
-zz = 0.0E0
-!
-DO k = 1, j
-zz = zz + Z(i,k)*B(k,j)
-ENDDO
-!
-Z(i,j) = zz
-ENDDO
-ENDDO
-!     .......... NORMALIZE SO THAT MODULUS OF LARGEST
-!                COMPONENT OF EACH VECTOR IS 1.
-!                (ISW IS 1 INITIALLY FROM BEFORE) ..........
-DO j = 1, N
-d = 0.0E0
-IF ( isw==2 ) THEN
-!
-DO i = 1, N
-r = ABS(Z(i,j-1)) + ABS(Z(i,j))
-IF ( r/=0.0E0 ) r = r*SQRT((Z(i,j-1)/r)**2+(Z(i,j)/r)**2)
-IF ( r>d ) d = r
-ENDDO
-!
-DO i = 1, N
-Z(i,j-1) = Z(i,j-1)/d
-Z(i,j) = Z(i,j)/d
-ENDDO
-ELSEIF ( Alfi(j)==0.0E0 ) THEN
-!
-DO i = 1, N
-IF ( ABS(Z(i,j))>d ) d = ABS(Z(i,j))
-ENDDO
-!
-DO i = 1, N
-Z(i,j) = Z(i,j)/d
-ENDDO
-!
-CYCLE
-ENDIF
-!
-isw = 3 - isw
-ENDDO
-!
+    END IF
+    !
+    isw = 3 - isw
+  END DO
+  !
 END SUBROUTINE QZVEC

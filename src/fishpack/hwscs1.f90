@@ -22,7 +22,7 @@ SUBROUTINE HWSCS1(Intl,Ts,Tf,M,Mbdcnd,Bdts,Bdtf,Rs,Rf,N,Nbdcnd,Bdrs,Bdrf,&
   !   891009  Removed unreferenced variables.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
-  
+
   INTEGER i, ictr, Idimf, ierror, iflg, Intl, ising, itf, itfm, &
     its, itsp, j, jrf, jrfm, jrs, jrsp, l, M, Mbdcnd, mp
   REAL Am(*), An(*), ar, at, Bdrf(*), Bdrs(*), Bdtf(*), Bdts(*), Bm(*), &
@@ -45,8 +45,8 @@ SUBROUTINE HWSCS1(Intl,Ts,Tf,M,Mbdcnd,Bdts,Bdtf,Rs,Rf,N,Nbdcnd,Bdrs,Bdrf,&
       Am(i) = t1*SIN(theta-hdth)
       Cm(i) = t1*SIN(theta+hdth)
       Bm(i) = -(Am(i)+Cm(i))
-    ENDIF
-  ENDDO
+    END IF
+  END DO
   np1 = N + 1
   dr = (Rf-Rs)/N
   hdr = dr/2.
@@ -58,7 +58,7 @@ SUBROUTINE HWSCS1(Intl,Ts,Tf,M,Mbdcnd,Bdts,Bdtf,Rs,Rf,N,Nbdcnd,Bdrs,Bdrf,&
     An(j) = (R(j)-hdr)**2/dr2
     Cn(j) = (R(j)+hdr)**2/dr2
     Bn(j) = -(An(j)+Cn(j))
-  ENDDO
+  END DO
   mp = 1
   np = 1
   !
@@ -113,15 +113,15 @@ SUBROUTINE HWSCS1(Intl,Ts,Tf,M,Mbdcnd,Bdts,Bdtf,Rs,Rf,N,Nbdcnd,Bdrs,Bdrf,&
       DO j = 3, N
         l = N - j + 2
         S(l) = An(l)/(Bn(l)-Cn(l)*S(l+1))
-      ENDDO
+      END DO
       S(2) = -S(2)
       DO j = 3, N
         S(j) = -S(j)*S(j-1)
-      ENDDO
+      END DO
       wtnm = wts + wtf
       DO i = itsp, itfm
         wtnm = wtnm + Sint(i)
-      ENDDO
+      END DO
       yps = czr*wtnm*(S(2)-1.)
     CASE DEFAULT
       ar = An(2)
@@ -148,7 +148,7 @@ SUBROUTINE HWSCS1(Intl,Ts,Tf,M,Mbdcnd,Bdts,Bdtf,Rs,Rf,N,Nbdcnd,Bdrs,Bdrf,&
   nunk = jrf - jrs + 1
   DO i = its, itf
     Bmh(i) = Bm(i)
-  ENDDO
+  END DO
   ising = 0
   SELECT CASE (Nbdcnd)
     CASE (1,2,4,5)
@@ -164,16 +164,16 @@ SUBROUTINE HWSCS1(Intl,Ts,Tf,M,Mbdcnd,Bdts,Bdtf,Rs,Rf,N,Nbdcnd,Bdrs,Bdrf,&
               r2 = R(j)**2
               DO i = itsp, itfm
                 sum = sum + r2*Sint(i)
-              ENDDO
-            ENDDO
+              END DO
+            END DO
             DO j = jrsp, jrfm
               sum = sum + (wts+wtf)*R(j)**2
-            ENDDO
+            END DO
             DO i = itsp, itfm
               sum = sum + (wrs+wrf)*Sint(i)
-            ENDDO
+            END DO
             hne = sum
-          ENDIF
+          END IF
       END SELECT
   END SELECT
   SELECT CASE (Mbdcnd)
@@ -188,57 +188,57 @@ SUBROUTINE HWSCS1(Intl,Ts,Tf,M,Mbdcnd,Bdts,Bdtf,Rs,Rf,N,Nbdcnd,Bdrs,Bdrf,&
   END SELECT
   DO i = itsp, itfm
     Bm(i) = Bmh(i) + Elmbda/Sint(i)**2
-  ENDDO
+  END DO
   SELECT CASE (Mbdcnd)
     CASE (3,4,8)
       DO j = jrs, jrf
         F(1,j) = F(1,j) + tdt*Bdts(j)*at/R(j)**2
-      ENDDO
+      END DO
     CASE (5,6,9)
     CASE DEFAULT
       DO j = jrs, jrf
         F(2,j) = F(2,j) - at*F(1,j)/R(j)**2
-      ENDDO
+      END DO
   END SELECT
   SELECT CASE (Mbdcnd)
     CASE (2,3,6)
       DO j = jrs, jrf
         F(M+1,j) = F(M+1,j) - tdt*Bdtf(j)*ct/R(j)**2
-      ENDDO
+      END DO
     CASE (7,8,9)
     CASE DEFAULT
       DO j = jrs, jrf
         F(M,j) = F(M,j) - ct*F(M+1,j)/R(j)**2
-      ENDDO
+      END DO
   END SELECT
   SELECT CASE (Nbdcnd)
     CASE (1,2)
       rs2 = (Rs+dr)**2
       DO i = its, itf
         F(i,2) = F(i,2) - ar*F(i,1)/rs2
-      ENDDO
+      END DO
     CASE (3,4)
       DO i = its, itf
         F(i,1) = F(i,1) + tdr*Bdrs(i)*ar/Rs**2
-      ENDDO
+      END DO
     CASE DEFAULT
       IF ( Mbdcnd==3 ) THEN
         yhld = F(its,1) - czr/tdt*(SIN(Tf)*Bdtf(2)-SIN(Ts)*Bdts(2))
         DO i = 1, mp1
           F(i,1) = yhld
-        ENDDO
-      ENDIF
+        END DO
+      END IF
   END SELECT
   SELECT CASE (Nbdcnd)
     CASE (2,3,6)
       DO i = its, itf
         F(i,N+1) = F(i,N+1) - tdr*Bdrf(i)*cr/Rf**2
-      ENDDO
+      END DO
     CASE DEFAULT
       rf2 = (Rf-dr)**2
       DO i = its, itf
         F(i,N) = F(i,N) - cr*F(i,N+1)/rf2
-      ENDDO
+      END DO
   END SELECT
   Pertrb = 0.
   IF ( ising/=0 ) THEN
@@ -249,27 +249,27 @@ SUBROUTINE HWSCS1(Intl,Ts,Tf,M,Mbdcnd,Bdts,Bdtf,Rs,Rf,N,Nbdcnd,Bdrs,Bdrf,&
       r2 = R(j)**2
       DO i = itsp, itfm
         sum = sum + r2*Sint(i)*F(i,j)
-      ENDDO
-    ENDDO
+      END DO
+    END DO
     DO j = jrsp, jrfm
       sum = sum + R(j)**2*(wts*F(its,j)+wtf*F(itf,j))
-    ENDDO
+    END DO
     DO i = itsp, itfm
       sum = sum + Sint(i)*(wrs*F(i,jrs)+wrf*F(i,jrf))
-    ENDDO
+    END DO
     Pertrb = sum/hne
     DO j = 1, np1
       DO i = 1, mp1
         F(i,j) = F(i,j) - Pertrb
-      ENDDO
-    ENDDO
-  ENDIF
+      END DO
+    END DO
+  END IF
   DO j = jrs, jrf
     rsq = R(j)**2
     DO i = its, itf
       F(i,j) = rsq*F(i,j)
-    ENDDO
-  ENDDO
+    END DO
+  END DO
   iflg = Intl
   DO
     CALL BLKTRI(iflg,np,nunk,An(jrs),Bn(jrs),Cn(jrs),mp,munk,Am(its),Bm(its)&
@@ -279,34 +279,34 @@ SUBROUTINE HWSCS1(Intl,Ts,Tf,M,Mbdcnd,Bdts,Bdtf,Rs,Rf,N,Nbdcnd,Bdrs,Bdrf,&
       IF ( Nbdcnd==0 ) THEN
         DO i = 1, mp1
           F(i,jrf+1) = F(i,jrs)
-        ENDDO
-      ENDIF
+        END DO
+      END IF
       IF ( Mbdcnd==0 ) THEN
         DO j = 1, np1
           F(itf+1,j) = F(its,j)
-        ENDDO
-      ENDIF
+        END DO
+      END IF
       xp = 0.
       IF ( ictr/=0 ) THEN
         IF ( ising==0 ) THEN
           sum = wts*F(its,2) + wtf*F(itf,2)
           DO i = itsp, itfm
             sum = sum + Sint(i)*F(i,2)
-          ENDDO
+          END DO
           yph = czr*sum
           xp = (F(its,1)-yph)/yps
           DO j = jrs, jrf
             xps = xp*S(j)
             DO i = its, itf
               F(i,j) = F(i,j) + xps
-            ENDDO
-          ENDDO
-        ENDIF
+            END DO
+          END DO
+        END IF
         DO i = 1, mp1
           F(i,1) = xp
-        ENDDO
-      ENDIF
+        END DO
+      END IF
       EXIT
-    ENDIF
-  ENDDO
+    END IF
+  END DO
 END SUBROUTINE HWSCS1

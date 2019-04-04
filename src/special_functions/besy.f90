@@ -135,8 +135,8 @@ SUBROUTINE BESY(X,Fnu,N,Y)
           CALL XERMSG('SLATEC','BESY',&
             'OVERFLOW, FNU OR N TOO LARGE OR X TOO SMALL',6,1)
           RETURN
-        ENDIF
-      ENDIF
+        END IF
+      END IF
       IF ( nud<nulim(nn) ) THEN
         !
         IF ( dnu/=0.0E0 ) THEN
@@ -150,7 +150,7 @@ SUBROUTINE BESY(X,Fnu,N,Y)
           s1 = BESY0(X)
           IF ( nud==0.AND.nd==1 ) GOTO 20
           s2 = BESY1(X)
-        ENDIF
+        END IF
         trx = 2.0E0/X
         tm = (dnu+dnu+2.0E0)/X
         !     FORWARD RECUR FROM DNU TO FNU+1 TO GET Y(1) AND Y(2)
@@ -161,11 +161,11 @@ SUBROUTINE BESY(X,Fnu,N,Y)
             s2 = tm*s2 - s1
             s1 = s
             tm = tm + trx
-          ENDDO
+          END DO
           IF ( nd==1 ) s1 = s2
         ELSEIF ( nd<=1 ) THEN
           s1 = s2
-        ENDIF
+        END IF
       ELSE
         !
         !     ASYMPTOTIC EXPANSION FOR ORDERS FNU AND FNU+1.GE.NULIM
@@ -181,20 +181,20 @@ SUBROUTINE BESY(X,Fnu,N,Y)
           trx = 2.0E0/X
           tm = (Fnu+Fnu+2.0E0)/X
           GOTO 100
-        ENDIF
-      ENDIF
-      20       Y(1) = s1
+        END IF
+      END IF
+      20  Y(1) = s1
       IF ( nd==1 ) RETURN
       Y(2) = s2
-    ENDIF
-  ENDIF
+    END IF
+  END IF
   100 CONTINUE
   IF ( nd==2 ) RETURN
   !     FORWARD RECUR FROM FNU+2 TO FNU+N-1
   DO i = 3, nd
     Y(i) = tm*Y(i-1) - Y(i-2)
     tm = tm + trx
-  ENDDO
+  END DO
   RETURN
   200 CONTINUE
   IF ( dnu==0.0E0 ) THEN
@@ -204,7 +204,7 @@ SUBROUTINE BESY(X,Fnu,N,Y)
       Y(j) = BESY0(X)
       IF ( nd==1 ) RETURN
       j = j + 1
-    ENDIF
+    END IF
     Y(j) = BESY1(X)
     IF ( nd==1 ) RETURN
     trx = 2.0E0/X
@@ -213,6 +213,6 @@ SUBROUTINE BESY(X,Fnu,N,Y)
   ELSE
     CALL BESYNU(X,Fnu,nd,Y)
     RETURN
-  ENDIF
+  END IF
   RETURN
 END SUBROUTINE BESY

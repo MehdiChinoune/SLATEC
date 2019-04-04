@@ -15,13 +15,17 @@ steps:
     make -j
   displayName: 'Building gfortran-8-Release'
 - script: |
+    ls
+    cd build
     make test
   displayName: 'Testing gfortran-8-Release'
 - script: |
+    cd build
     rm -r *
     cmake .. -DCMAKE_Fortran_COMPILER=gfortran-8 -DCMAKE_BUILD_TYPE=Debug
     make -j
   displayName: 'Building gfortran-8-Debug'
 - script: |
+    cd build
     make test
   displayName: 'Testing gfortran-8-Debug'

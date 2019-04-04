@@ -85,7 +85,7 @@ SUBROUTINE CH(Nm,N,Ar,Ai,W,Matz,Zr,Zi,Fv1,Fv2,Fm1,Ierr)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   !
   INTEGER i, j, N, Nm, Ierr, Matz
   REAL Ar(Nm,*), Ai(Nm,*), W(*), Zr(Nm,*), Zi(Nm,*)
@@ -101,18 +101,18 @@ SUBROUTINE CH(Nm,N,Ar,Ai,W,Matz,Zr,Zi,Fv1,Fv2,Fm1,Ierr)
         !
         DO j = 1, N
           Zr(j,i) = 0.0E0
-        ENDDO
+        END DO
         !
         Zr(i,i) = 1.0E0
-      ENDDO
+      END DO
       !
       CALL TQL2(Nm,N,W,Fv1,Zr,Ierr)
       IF ( Ierr==0 ) CALL HTRIBK(Nm,N,Ar,Ai,Fm1,N,Zr,Zi)
     ELSE
       !     .......... FIND EIGENVALUES ONLY ..........
       CALL TQLRAT(N,W,Fv2,Ierr)
-    ENDIF
+    END IF
   ELSE
     Ierr = 10*N
-  ENDIF
+  END IF
 END SUBROUTINE CH

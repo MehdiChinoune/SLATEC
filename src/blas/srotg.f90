@@ -66,7 +66,7 @@ SUBROUTINE SROTG(Sa,Sb,Sc,Ss)
   !   861211  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   REAL r, Sa, Sb, Sc, Ss, u, v
   !* FIRST EXECUTABLE STATEMENT  SROTG
   IF ( ABS(Sa)>ABS(Sb) ) THEN
@@ -113,8 +113,8 @@ SUBROUTINE SROTG(Sa,Sb,Sc,Ss)
     IF ( Sc/=0.0E0 ) THEN
       Sb = 1.0E0/Sc
       RETURN
-    ENDIF
-  ENDIF
+    END IF
+  END IF
   Sb = 1.0E0
   RETURN
 END SUBROUTINE SROTG

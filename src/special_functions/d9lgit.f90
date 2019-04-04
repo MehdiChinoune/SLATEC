@@ -45,7 +45,7 @@ REAL(8) FUNCTION D9LGIT(A,X,Algap1)
     eps = 0.5D0*D1MACH(3)
     sqeps = SQRT(D1MACH(4))
     first = .FALSE.
-  ENDIF
+  END IF
   !
   IF ( X<=0.D0.OR.A<X ) CALL XERMSG('SLATEC','D9LGIT',&
     'X SHOULD BE GT 0.0 AND LE A',2,2)
@@ -62,7 +62,7 @@ REAL(8) FUNCTION D9LGIT(A,X,Algap1)
     p = r*p
     s = s + p
     IF ( ABS(p)<eps*s ) GOTO 100
-  ENDDO
+  END DO
   CALL XERMSG('SLATEC','D9LGIT',&
     'NO CONVERGENCE IN 200 TERMS OF CONTINUED FRACTION',3,2)
   !

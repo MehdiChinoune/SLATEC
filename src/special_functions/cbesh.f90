@@ -238,7 +238,7 @@ SUBROUTINE CBESH(Z,Fnu,Kode,M,N,Cy,Nz,Ierr)
       IF ( .NOT.((xn>=0.0E0).AND.(xn/=0.0E0.OR.yn>=0.0E0.OR.M/=2)) ) THEN
         mr = -mm
         IF ( xn==0.0E0.AND.yn<0.0E0 ) zn = -zn
-      ENDIF
+      END IF
       CALL CBUNK(zn,Fnu,Kode,mr,nn,Cy,nw,tol,elim,alim)
       IF ( nw<0 ) GOTO 200
       Nz = Nz + nw
@@ -256,13 +256,13 @@ SUBROUTINE CBESH(Z,Fnu,Kode,M,N,Cy,Nz,Ierr)
           IF ( nn==0 ) THEN
             IF ( xn<0.0E0 ) GOTO 100
             RETURN
-          ENDIF
+          END IF
         ELSEIF ( az<=tol ) THEN
           arg = 0.5E0*az
           aln = -fn*ALOG(arg)
           IF ( aln>elim ) GOTO 100
-        ENDIF
-      ENDIF
+        END IF
+      END IF
       IF ( (xn<0.0E0).OR.(xn==0.0E0.AND.yn<0.0E0.AND.M==2) ) THEN
         !-----------------------------------------------------------------------
         !     LEFT HALF PLANE COMPUTATION
@@ -277,8 +277,8 @@ SUBROUTINE CBESH(Z,Fnu,Kode,M,N,Cy,Nz,Ierr)
         !     YN.GE.0. .OR. M=1)
         !-----------------------------------------------------------------------
         CALL CBKNU(zn,Fnu,Kode,nn,Cy,Nz,tol,elim,alim)
-      ENDIF
-    ENDIF
+      END IF
+    END IF
     !-----------------------------------------------------------------------
     !     H(M,FNU,Z) = -FMM*(I/HPI)*(ZT**FNU)*K(FNU,-Z*ZT)
     !
@@ -313,13 +313,13 @@ SUBROUTINE CBESH(Z,Fnu,Kode,M,N,Cy,Nz,Ierr)
       IF ( MAX(ABS(aa),ABS(bb))<=ascle ) THEN
         zn = zn*CMPLX(rtol,0.0E0)
         atol = tol
-      ENDIF
+      END IF
       zn = zn*csgn
       Cy(i) = zn*CMPLX(atol,0.0E0)
       csgn = csgn*zt
-    ENDDO
+    END DO
     RETURN
-  ENDIF
+  END IF
   100  Ierr = 2
   Nz = 0
   RETURN

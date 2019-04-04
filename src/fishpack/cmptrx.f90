@@ -28,7 +28,7 @@ SUBROUTINE CMPTRX(Idegbr,Idegcr,M,A,B,C,Y,Tcos,D,W)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
-  
+
   INTEGER i, Idegbr, Idegcr, ip, k, l, lint, M, mm1
   COMPLEX A(*), B(*), C(*), Y(*), Tcos(*), D(*), W(*), x, xx, z
   INTEGER kb, kc
@@ -46,8 +46,8 @@ SUBROUTINE CMPTRX(Idegbr,Idegcr,M,A,B,C,Y,Tcos,D,W)
       DO i = 1, M
         W(i) = Y(i)
         Y(i) = xx*Y(i)
-      ENDDO
-    ENDIF
+      END DO
+    END IF
     z = 1./(B(1)-x)
     D(1) = C(1)*z
     Y(1) = Y(1)*z
@@ -55,23 +55,23 @@ SUBROUTINE CMPTRX(Idegbr,Idegcr,M,A,B,C,Y,Tcos,D,W)
       z = 1./(B(i)-x-A(i)*D(i-1))
       D(i) = C(i)*z
       Y(i) = (Y(i)-A(i)*Y(i-1))*z
-    ENDDO
+    END DO
     z = B(M) - x - A(M)*D(mm1)
     IF ( ABS(z)/=0. ) THEN
       Y(M) = (Y(M)-A(M)*Y(mm1))/z
     ELSE
       Y(M) = (0.,0.)
-    ENDIF
+    END IF
     DO ip = 1, mm1
       i = M - ip
       Y(i) = Y(i) - D(i)*Y(i+1)
-    ENDDO
+    END DO
     IF ( k==l ) THEN
       DO i = 1, M
         Y(i) = Y(i) + W(i)
-      ENDDO
+      END DO
       lint = lint + 1
       l = (lint*kb)/kc
-    ENDIF
-  ENDDO
+    END IF
+  END DO
 END SUBROUTINE CMPTRX

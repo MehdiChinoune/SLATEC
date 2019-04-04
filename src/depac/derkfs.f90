@@ -126,7 +126,7 @@ SUBROUTINE DERKFS(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
     Nstifs = 0
     !                       -- RESET INFO(1) FOR SUBSEQUENT CALLS
     Info(1) = 1
-  ENDIF
+  END IF
   !
   !.......................................................................
   !
@@ -139,7 +139,7 @@ SUBROUTINE DERKFS(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
       & YOU ARE ATTEMPTING TO CONTINUE THE INTEGRATION ILLEGALLY BY CALLING&
       & THE CODE WITH  INFO(1) = '//xern1,3,1)
     Idid = -33
-  ENDIF
+  END IF
   !
   IF ( Info(2)/=0.AND.Info(2)/=1 ) THEN
     WRITE (xern1,'(I8)') Info(2)
@@ -147,7 +147,7 @@ SUBROUTINE DERKFS(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
       'IN DERKF, INFO(2) MUST BE 0 OR 1 INDICATING SCALAR AND VECTOR ERROR TOLERANCES,&
       & RESPECTIVELY.  YOU HAVE CALLED THE CODE WITH INFO(2) = '//xern1,4,1)
     Idid = -33
-  ENDIF
+  END IF
   !
   IF ( Info(3)/=0.AND.Info(3)/=1 ) THEN
     WRITE (xern1,'(I8)') Info(3)
@@ -155,14 +155,14 @@ SUBROUTINE DERKFS(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
       'IN DERKF, INFO(3) MUST BE 0 OR 1 INDICATING THE OR INTERMEDIATE-OUTPUT&
       & MODE OF INTEGRATION, RESPECTIVELY.  YOU HAVE CALLED THE CODE WITH  INFO(3) = '//xern1,5,1)
     Idid = -33
-  ENDIF
+  END IF
   !
   IF ( Neq<1 ) THEN
     WRITE (xern1,'(I8)') Neq
     CALL XERMSG('SLATEC','DERKFS',&
       'IN DERKF, THE NUMBER OF EQUATIONS NEQ MUST BE A POSITIVE INTEGER.  YOU HAVE CALLED THE CODE WITH NEQ = '//xern1,6,1)
     Idid = -33
-  ENDIF
+  END IF
   !
   nrtolp = 0
   natolp = 0
@@ -176,7 +176,7 @@ SUBROUTINE DERKFS(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
         & NO FURTHER CHECKING OF RTOL COMPONENTS IS DONE.',7,1)
       Idid = -33
       nrtolp = 1
-    ENDIF
+    END IF
     !
     IF ( natolp==0.AND.Atol(k)<0.D0 ) THEN
       WRITE (xern1,'(I8)') k
@@ -187,11 +187,11 @@ SUBROUTINE DERKFS(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
         & NO FURTHER CHECKING OF ATOL COMPONENTS IS DONE.',8,1)
       Idid = -33
       natolp = 1
-    ENDIF
+    END IF
     !
     IF ( Info(2)==0 ) EXIT
     IF ( natolp>0.AND.nrtolp>0 ) EXIT
-  ENDDO
+  END DO
   !
   !
   !     CHECK SOME CONTINUATION POSSIBILITIES
@@ -202,7 +202,7 @@ SUBROUTINE DERKFS(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
       CALL XERMSG('SLATEC','DERKFS','IN DERKF, YOU HAVE CALLED THE CODE WITH  T = TOUT = '&
         //xern3//'$$THIS IS NOT ALLOWED ON CONTINUATION CALLS.',9,1)
       Idid = -33
-    ENDIF
+    END IF
     !
     IF ( T/=Told ) THEN
       WRITE (xern3,'(1PE15.6)') Told
@@ -210,7 +210,7 @@ SUBROUTINE DERKFS(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
       CALL XERMSG('SLATEC','DERKFS','IN DERKF, YOU HAVE CHANGED THE VALUE OF T FROM '&
         //xern3//' TO '//xern4//'$$THIS IS NOT ALLOWED ON CONTINUATION CALLS.',10,1)
       Idid = -33
-    ENDIF
+    END IF
     !
     IF ( Init/=1 ) THEN
       IF ( Dtsign*(Tout-T)<0.D0 ) THEN
@@ -219,9 +219,9 @@ SUBROUTINE DERKFS(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
           //xern3//' YOU ARE ATTEMPTING TO CHANGE THE DIRECTION OF INTEGRATION.&
           &$$THIS IS NOT ALLOWED WITHOUT RESTARTING.',11,1)
         Idid = -33
-      ENDIF
-    ENDIF
-  ENDIF
+      END IF
+    END IF
+  END IF
   !
   !     INVALID INPUT DETECTED
   !
@@ -234,8 +234,8 @@ SUBROUTINE DERKFS(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
         & SUCCESSIVE ENTRIES.  IT IS IMPOSSIBLE TO PROCEED BECAUSE YOU HAVE&
         & NOT CORRECTED THE PROBLEM, SO EXECUTION IS BEING TERMINATED.',12,2)
       RETURN
-    ENDIF
-  ENDIF
+    END IF
+  END IF
   !
   !.......................................................................
   !
@@ -248,9 +248,9 @@ SUBROUTINE DERKFS(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
     IF ( Rtol(k)+Atol(k)<=0. ) THEN
       Rtol(k) = Rer
       Idid = -2
-    ENDIF
+    END IF
     IF ( Info(2)==0 ) EXIT
-  ENDDO
+  END DO
   !
   IF ( Idid/=(-2) ) THEN
     !
@@ -273,7 +273,7 @@ SUBROUTINE DERKFS(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
       IF ( T==Tout ) GOTO 200
     ELSEIF ( Init/=1 ) THEN
       GOTO 100
-    ENDIF
+    END IF
     !
     !                         -- SET SIGN OF INTEGRATION DIRECTION  AND
     !                         -- ESTIMATE STARTING STEP SIZE
@@ -291,7 +291,7 @@ SUBROUTINE DERKFS(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
       tol = Rtol(ktol)*ABS(Y(k)) + Atol(ktol)
       IF ( tol==0. ) tol = dy*Rtol(ktol)
       F1(k) = tol
-    ENDDO
+    END DO
     !
     CALL HSTART(F,Neq,T,Tout,Y,Yp,F1,4,u,big,F2,F3,F4,F5,Rpar,Ipar,H)
   ELSE
@@ -300,7 +300,7 @@ SUBROUTINE DERKFS(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
     !                                                SMALL POSITIVE VALUE
     Tolfac = 1.
     GOTO 300
-  ENDIF
+  END IF
   !
   !.......................................................................
   !
@@ -345,8 +345,8 @@ SUBROUTINE DERKFS(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
           Tolfac = MAX(Tolfac,ABS(Y(k))*(Rer/et))
         ELSE
           Tolfac = MAX(Tolfac,Rer/Rtol(ktol))
-        ENDIF
-      ENDDO
+        END IF
+      END DO
       IF ( Tolfac<=1. ) THEN
         !
         !     SET SMALLEST ALLOWABLE STEP SIZE
@@ -371,8 +371,8 @@ SUBROUTINE DERKFS(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
             !
             output = .TRUE.
             H = dt
-          ENDIF
-        ENDIF
+          END IF
+        END IF
         !
         !
         !- *********************************************************************
@@ -433,7 +433,7 @@ SUBROUTINE DERKFS(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
                 es = ABS(H*(0.055455*Yp(k)-0.035493*F1(k)-0.036571*F2(k)&
                   +0.023107*F3(k)-0.009515*F4(k)+0.003017*F5(k)))
                 estiff = MAX(estiff,es/et)
-              ENDIF
+              END IF
               eeoet = MAX(eeoet,ee/et)
             ELSE
               !
@@ -441,8 +441,8 @@ SUBROUTINE DERKFS(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
               !                                                              VANISHES
               Idid = -3
               GOTO 300
-            ENDIF
-          ENDDO
+            END IF
+          END DO
           !
           esttol = ABS(H)*eeoet/752400.
           !
@@ -457,7 +457,7 @@ SUBROUTINE DERKFS(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
             T = T + H
             DO k = 1, Neq
               Y(k) = Ys(k)
-            ENDDO
+            END DO
             a = T
             CALL F(a,Y,Yp,Rpar,Ipar)
             !
@@ -499,9 +499,9 @@ SUBROUTINE DERKFS(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
                   Nonstf = .TRUE.
                   !                       RESET STIFF STEP COUNTER
                   Nstifs = 0
-                ENDIF
-              ENDIF
-            ENDIF
+                END IF
+              END IF
+            END IF
             !
             !- *********************************************************************
             !     END OF CORE INTEGRATOR
@@ -544,8 +544,8 @@ SUBROUTINE DERKFS(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
             Tolfac = 1.69*esttol
             Idid = -2
             GOTO 300
-          ENDIF
-        ENDDO
+          END IF
+        END DO
         !
         !                       A SIGNIFICANT AMOUNT OF WORK HAS BEEN EXPENDED
         Idid = -1
@@ -558,7 +558,7 @@ SUBROUTINE DERKFS(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
           Nonstf = .FALSE.
           Ntstep = 0
           Nstifs = 0
-        ENDIF
+        END IF
         GOTO 300
       ELSE
         !
@@ -567,20 +567,20 @@ SUBROUTINE DERKFS(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
         Tolfac = 2.*Tolfac
         Idid = -2
         GOTO 300
-      ENDIF
+      END IF
       150 CONTINUE
-    ENDDO
+    END DO
   ELSE
     !
     !     IF TOO CLOSE TO OUTPUT POINT,EXTRAPOLATE AND RETURN
     !
     DO k = 1, Neq
       Y(k) = Y(k) + dt*Yp(k)
-    ENDDO
+    END DO
     a = Tout
     CALL F(a,Y,Yp,Rpar,Ipar)
     Ksteps = Ksteps + 1
-  ENDIF
+  END IF
   !
   !                 INTERVAL MODE
   200  Idid = 2
@@ -602,5 +602,5 @@ SUBROUTINE DERKFS(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
   DO k = 2, Neq
     Rtol(k) = Tolfac*Rtol(k)
     Atol(k) = Tolfac*Atol(k)
-  ENDDO
+  END DO
 END SUBROUTINE DERKFS

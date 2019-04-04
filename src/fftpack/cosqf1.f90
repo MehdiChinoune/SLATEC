@@ -47,19 +47,19 @@ SUBROUTINE COSQF1(N,X,W,Xh)
     kc = np2 - k
     Xh(k) = X(k) + X(kc)
     Xh(kc) = X(k) - X(kc)
-  ENDDO
+  END DO
   modn = MOD(N,2)
   IF ( modn==0 ) Xh(ns2+1) = X(ns2+1) + X(ns2+1)
   DO k = 2, ns2
     kc = np2 - k
     X(k) = W(k-1)*Xh(kc) + W(kc-1)*Xh(k)
     X(kc) = W(k-1)*Xh(k) - W(kc-1)*Xh(kc)
-  ENDDO
+  END DO
   IF ( modn==0 ) X(ns2+1) = W(ns2)*Xh(ns2+1)
   CALL RFFTF(N,X,Xh)
   DO i = 3, N, 2
     xim1 = X(i-1) - X(i)
     X(i) = X(i-1) + X(i)
     X(i-1) = xim1
-  ENDDO
+  END DO
 END SUBROUTINE COSQF1

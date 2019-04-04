@@ -80,7 +80,7 @@ SUBROUTINE SINT(N,X,Wsave)
   !   891009  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   INTEGER i, k, kc, kw, modn, N, nf, np1, ns2
   REAL sqrt3, t1, t2, Wsave(*), X(*), xh
   !* FIRST EXECUTABLE STATEMENT  SINT
@@ -105,7 +105,7 @@ SUBROUTINE SINT(N,X,Wsave)
       t2 = Wsave(kw)*(X(k)+X(kc))
       Wsave(k+1) = t1 + t2
       Wsave(kc+1) = t2 - t1
-    ENDDO
+    END DO
     modn = MOD(N,2)
     IF ( modn/=0 ) Wsave(ns2+2) = 4.*X(ns2+1)
     nf = np1 + ns2 + 1
@@ -114,8 +114,8 @@ SUBROUTINE SINT(N,X,Wsave)
     DO i = 3, N, 2
       X(i-1) = -Wsave(i)
       X(i) = X(i-2) + Wsave(i-1)
-    ENDDO
+    END DO
     IF ( modn/=0 ) RETURN
     X(N) = -Wsave(N+1)
-  ENDIF
+  END IF
 END SUBROUTINE SINT

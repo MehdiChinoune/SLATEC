@@ -84,9 +84,9 @@ SUBROUTINE DMOUT(M,N,Lda,A,Ifmt,Idigit)
         WRITE (lout,99002) (icol,i,i=k1,k2)
         DO i = 1, M
           WRITE (lout,99010) i, (A(i,j),j=k1,k2)
-        ENDDO
-      ENDDO
-    ENDIF
+        END DO
+      END DO
+    END IF
     !
     IF ( ndigit<=6 ) THEN
       !
@@ -95,8 +95,8 @@ SUBROUTINE DMOUT(M,N,Lda,A,Ifmt,Idigit)
         WRITE (lout,99002) (icol,i,i=k1,k2)
         DO i = 1, M
           WRITE (lout,99006) i, (A(i,j),j=k1,k2)
-        ENDDO
-      ENDDO
+        END DO
+      END DO
       RETURN
       !
     ELSEIF ( ndigit<=14 ) THEN
@@ -106,8 +106,8 @@ SUBROUTINE DMOUT(M,N,Lda,A,Ifmt,Idigit)
         WRITE (lout,99003) (icol,i,i=k1,k2)
         DO i = 1, M
           WRITE (lout,99007) i, (A(i,j),j=k1,k2)
-        ENDDO
-      ENDDO
+        END DO
+      END DO
       RETURN
       !
     ELSEIF ( ndigit>20 ) THEN
@@ -117,10 +117,10 @@ SUBROUTINE DMOUT(M,N,Lda,A,Ifmt,Idigit)
         WRITE (lout,99005) (icol,i,i=k1,k2)
         DO i = 1, M
           WRITE (lout,99009) i, (A(i,j),j=k1,k2)
-        ENDDO
-      ENDDO
+        END DO
+      END DO
       RETURN
-    ENDIF
+    END IF
   ELSE
     !
     ndigit = -Idigit
@@ -132,8 +132,8 @@ SUBROUTINE DMOUT(M,N,Lda,A,Ifmt,Idigit)
         99001 FORMAT (10X,10(4X,A,I4,1X))
         DO i = 1, M
           WRITE (lout,99010) i, (A(i,j),j=k1,k2)
-        ENDDO
-      ENDDO
+        END DO
+      END DO
       RETURN
       !
     ELSEIF ( ndigit<=6 ) THEN
@@ -143,8 +143,8 @@ SUBROUTINE DMOUT(M,N,Lda,A,Ifmt,Idigit)
         WRITE (lout,99002) (icol,i,i=k1,k2)
         DO i = 1, M
           WRITE (lout,99006) i, (A(i,j),j=k1,k2)
-        ENDDO
-      ENDDO
+        END DO
+      END DO
       RETURN
       !
     ELSEIF ( ndigit<=14 ) THEN
@@ -154,8 +154,8 @@ SUBROUTINE DMOUT(M,N,Lda,A,Ifmt,Idigit)
         WRITE (lout,99003) (icol,i,i=k1,k2)
         DO i = 1, M
           WRITE (lout,99007) i, (A(i,j),j=k1,k2)
-        ENDDO
-      ENDDO
+        END DO
+      END DO
       RETURN
       !
     ELSEIF ( ndigit>20 ) THEN
@@ -165,8 +165,8 @@ SUBROUTINE DMOUT(M,N,Lda,A,Ifmt,Idigit)
         WRITE (lout,99005) (icol,i,i=k1,k2)
         DO i = 1, M
           WRITE (lout,99009) i, (A(i,j),j=k1,k2)
-        ENDDO
-      ENDDO
+        END DO
+      END DO
       RETURN
     ELSE
       !
@@ -175,19 +175,19 @@ SUBROUTINE DMOUT(M,N,Lda,A,Ifmt,Idigit)
         WRITE (lout,99004) (icol,i,i=k1,k2)
         DO i = 1, M
           WRITE (lout,99008) i, (A(i,j),j=k1,k2)
-        ENDDO
-      ENDDO
+        END DO
+      END DO
       RETURN
-    ENDIF
-  ENDIF
+    END IF
+  END IF
   !
   DO k1 = 1, N, 4
     k2 = MIN(N,k1+3)
     WRITE (lout,99004) (icol,i,i=k1,k2)
     DO i = 1, M
       WRITE (lout,99008) i, (A(i,j),j=k1,k2)
-    ENDDO
-  ENDDO
+    END DO
+  END DO
   RETURN
   99002 FORMAT (10X,8(5X,A,I4,2X))
   99003 FORMAT (10X,5(9X,A,I4,6X))

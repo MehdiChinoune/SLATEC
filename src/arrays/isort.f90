@@ -57,7 +57,7 @@ SUBROUTINE ISORT(Ix,Iy,N,Kflag)
   !   920519  Clarified error messages.  (DWL)
   !   920801  Declarations section rebuilt and code restructured to use
   !           IF-THEN-ELSE-ENDIF.  (RWC, WRB)
-  
+
   !     .. Scalar Arguments ..
   INTEGER Kflag, N
   !     .. Array Arguments ..
@@ -77,22 +77,22 @@ SUBROUTINE ISORT(Ix,Iy,N,Kflag)
     CALL XERMSG('SLATEC','ISORT',&
       'The number of values to be sorted is not positive.',1,1)
     RETURN
-  ENDIF
+  END IF
   !
   kk = ABS(Kflag)
   IF ( kk/=1.AND.kk/=2 ) THEN
     CALL XERMSG('SLATEC','ISORT',&
       'The sort control parameter, K, is not 2, 1, -1, or -2.',2,1)
     RETURN
-  ENDIF
+  END IF
   !
   !     Alter array IX to get decreasing order if needed
   !
   IF ( Kflag<=-1 ) THEN
     DO i = 1, nn
       Ix(i) = -Ix(i)
-    ENDDO
-  ENDIF
+    END DO
+  END IF
   !
   IF ( kk==2 ) THEN
     !
@@ -111,7 +111,7 @@ SUBROUTINE ISORT(Ix,Iy,N,Kflag)
     i = 1
     j = nn
     r = 0.375E0
-  ENDIF
+  END IF
   !
   100 CONTINUE
   IF ( i==j ) GOTO 300
@@ -119,7 +119,7 @@ SUBROUTINE ISORT(Ix,Iy,N,Kflag)
     r = r + 3.90625E-2
   ELSE
     r = r - 0.21875E0
-  ENDIF
+  END IF
   !
   200  k = i
   !
@@ -134,7 +134,7 @@ SUBROUTINE ISORT(Ix,Iy,N,Kflag)
     Ix(ij) = Ix(i)
     Ix(i) = t
     t = Ix(ij)
-  ENDIF
+  END IF
   l = j
   !
   !     If last element of array is less than than T, interchange with T
@@ -150,8 +150,8 @@ SUBROUTINE ISORT(Ix,Iy,N,Kflag)
       Ix(ij) = Ix(i)
       Ix(i) = t
       t = Ix(ij)
-    ENDIF
-  ENDIF
+    END IF
+  END IF
   DO
     !
     !     Find an element in the second half of the array which is smaller
@@ -174,7 +174,7 @@ SUBROUTINE ISORT(Ix,Iy,N,Kflag)
             Ix(l) = Ix(k)
             Ix(k) = tt
             EXIT
-          ENDIF
+          END IF
           !
           !     Save upper and lower subscripts of the array yet to be sorted
           !
@@ -188,12 +188,12 @@ SUBROUTINE ISORT(Ix,Iy,N,Kflag)
             iu(m) = j
             j = l
             m = m + 1
-          ENDIF
+          END IF
           GOTO 400
-        ENDIF
-      ENDDO
-    ENDIF
-  ENDDO
+        END IF
+      END DO
+    END IF
+  END DO
   !
   !     Begin again on another portion of the unsorted array
   !
@@ -220,10 +220,10 @@ SUBROUTINE ISORT(Ix,Iy,N,Kflag)
         IF ( t>=Ix(k) ) THEN
           Ix(k+1) = t
           EXIT
-        ENDIF
-      ENDDO
-    ENDIF
-  ENDDO
+        END IF
+      END DO
+    END IF
+  END DO
   !
   500 CONTINUE
   IF ( i==j ) GOTO 700
@@ -231,7 +231,7 @@ SUBROUTINE ISORT(Ix,Iy,N,Kflag)
     r = r + 3.90625E-2
   ELSE
     r = r - 0.21875E0
-  ENDIF
+  END IF
   !
   600  k = i
   !
@@ -250,7 +250,7 @@ SUBROUTINE ISORT(Ix,Iy,N,Kflag)
     Iy(ij) = Iy(i)
     Iy(i) = ty
     ty = Iy(ij)
-  ENDIF
+  END IF
   l = j
   !
   !     If last element of array is less than T, interchange with T
@@ -272,8 +272,8 @@ SUBROUTINE ISORT(Ix,Iy,N,Kflag)
       Iy(ij) = Iy(i)
       Iy(i) = ty
       ty = Iy(ij)
-    ENDIF
-  ENDIF
+    END IF
+  END IF
   DO
     !
     !     Find an element in the second half of the array which is smaller
@@ -299,7 +299,7 @@ SUBROUTINE ISORT(Ix,Iy,N,Kflag)
             Iy(l) = Iy(k)
             Iy(k) = tty
             EXIT
-          ENDIF
+          END IF
           !
           !     Save upper and lower subscripts of the array yet to be sorted
           !
@@ -313,12 +313,12 @@ SUBROUTINE ISORT(Ix,Iy,N,Kflag)
             iu(m) = j
             j = l
             m = m + 1
-          ENDIF
+          END IF
           GOTO 800
-        ENDIF
-      ENDDO
-    ENDIF
-  ENDDO
+        END IF
+      END DO
+    END IF
+  END DO
   !
   !     Begin again on another portion of the unsorted array
   !
@@ -348,10 +348,10 @@ SUBROUTINE ISORT(Ix,Iy,N,Kflag)
           Ix(k+1) = t
           Iy(k+1) = ty
           EXIT
-        ENDIF
-      ENDDO
-    ENDIF
-  ENDDO
+        END IF
+      END DO
+    END IF
+  END DO
   !
   !     Clean up
   !
@@ -359,6 +359,6 @@ SUBROUTINE ISORT(Ix,Iy,N,Kflag)
   IF ( Kflag<=-1 ) THEN
     DO i = 1, nn
       Ix(i) = -Ix(i)
-    ENDDO
-  ENDIF
+    END DO
+  END IF
 END SUBROUTINE ISORT

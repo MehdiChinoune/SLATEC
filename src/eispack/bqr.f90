@@ -119,7 +119,7 @@ SUBROUTINE BQR(Nm,N,Mb,A,T,R,Ierr,Nv,Rv)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   !
   INTEGER i, j, k, l, m, N, ii, ik, jk, jm, kj, kk, km, ll, Mb, mk, mn, mz
   INTEGER m1, m2, m3, m4, ni, Nm, Nv, its, kj1, m21, m31, Ierr, imult
@@ -148,7 +148,7 @@ SUBROUTINE BQR(Nm,N,Mb,A,T,R,Ierr,Nv,Rv)
     DO k = 1, m
       mk = k + mz
       f = f + ABS(A(N,mk))
-    ENDDO
+    END DO
     !
     IF ( its==0.AND.f>R ) R = f
     IF ( R+f<=R ) EXIT
@@ -166,17 +166,17 @@ SUBROUTINE BQR(Nm,N,Mb,A,T,R,Ierr,Nv,Rv)
           q = (A(N-1,Mb)-g)/(2.0E0*f)
           s = PYTHAG(q,1.0E0)
           g = g - f/(q+SIGN(s,q))
-        ENDIF
+        END IF
         T = T + g
         !
         DO i = 1, N
           A(i,Mb) = A(i,Mb) - g
-        ENDDO
-      ENDIF
+        END DO
+      END IF
       !
       DO k = m31, m4
         Rv(k) = 0.0E0
-      ENDDO
+      END DO
       !
       DO ii = 1, mn
         i = ii - m
@@ -187,13 +187,13 @@ SUBROUTINE BQR(Nm,N,Mb,A,T,R,Ierr,Nv,Rv)
         !
         DO k = 1, m3
           Rv(k) = 0.0E0
-        ENDDO
+        END DO
         !
         DO k = l, m1
           km = k + m
           mk = k + mz
           Rv(km) = A(ii,mk)
-        ENDDO
+        END DO
         !
         ll = MIN(m,ni)
         IF ( ll/=0 ) THEN
@@ -203,13 +203,13 @@ SUBROUTINE BQR(Nm,N,Mb,A,T,R,Ierr,Nv,Rv)
             ik = ii + k
             mk = Mb - k
             Rv(km) = A(ik,mk)
-          ENDDO
-        ENDIF
+          END DO
+        END IF
         !     .......... PRE-MULTIPLY WITH HOUSEHOLDER REFLECTIONS ..........
         ll = m2
         imult = 0
         !     .......... MULTIPLICATION PROCEDURE ..........
-        10         kj = m4 - m1
+        10  kj = m4 - m1
         !
         DO j = 1, ll
           kj = kj + m1
@@ -221,7 +221,7 @@ SUBROUTINE BQR(Nm,N,Mb,A,T,R,Ierr,Nv,Rv)
               kj = kj + 1
               jk = j + k - 1
               f = f + Rv(kj)*Rv(jk)
-            ENDDO
+            END DO
             !
             f = f/Rv(jm)
             kj = kj - m1
@@ -230,18 +230,18 @@ SUBROUTINE BQR(Nm,N,Mb,A,T,R,Ierr,Nv,Rv)
               kj = kj + 1
               jk = j + k - 1
               Rv(jk) = Rv(jk) - Rv(kj)*f
-            ENDDO
+            END DO
             !
             kj = kj - m1
-          ENDIF
-        ENDDO
+          END IF
+        END DO
         !
         IF ( imult/=0 ) THEN
           !     .......... STORE COLUMN OF NEW A MATRIX ..........
           DO k = l, m1
             mk = k + mz
             A(i,mk) = Rv(k)
-          ENDDO
+          END DO
           GOTO 30
         ELSE
           !     .......... HOUSEHOLDER REFLECTION ..........
@@ -252,13 +252,13 @@ SUBROUTINE BQR(Nm,N,Mb,A,T,R,Ierr,Nv,Rv)
           !
           DO k = m21, m3
             scale = scale + ABS(Rv(k))
-          ENDDO
+          END DO
           !
           IF ( scale/=0.0E0 ) THEN
             !
             DO k = m21, m3
               s = s + (Rv(k)/scale)**2
-            ENDDO
+            END DO
             !
             s = scale*scale*s
             g = -SIGN(SQRT(s),f)
@@ -271,22 +271,22 @@ SUBROUTINE BQR(Nm,N,Mb,A,T,R,Ierr,Nv,Rv)
               kj = kj + 1
               km = k + m2
               Rv(kj) = Rv(km)
-            ENDDO
-          ENDIF
+            END DO
+          END IF
           !     .......... SAVE COLUMN OF TRIANGULAR FACTOR R ..........
           DO k = l, m1
             km = k + m
             mk = k + mz
             A(ii,mk) = Rv(km)
-          ENDDO
-        ENDIF
+          END DO
+        END IF
         !
-        20         l = MAX(1,m1+1-i)
+        20  l = MAX(1,m1+1-i)
         IF ( i>0 ) THEN
           !     .......... PERFORM ADDITIONAL STEPS ..........
           DO k = 1, m21
             Rv(k) = 0.0E0
-          ENDDO
+          END DO
           !
           ll = MIN(m1,ni+m1)
           !     .......... GET ROW OF TRIANGULAR FACTOR R ..........
@@ -296,14 +296,14 @@ SUBROUTINE BQR(Nm,N,Mb,A,T,R,Ierr,Nv,Rv)
             ik = i + k
             mk = Mb - k
             Rv(km) = A(ik,mk)
-          ENDDO
+          END DO
           !     .......... POST-MULTIPLY WITH HOUSEHOLDER REFLECTIONS ..........
           ll = m1
           imult = 1
           GOTO 10
-        ENDIF
+        END IF
         !     .......... UPDATE HOUSEHOLDER REFLECTIONS ..........
-        30         IF ( l>1 ) l = l - 1
+        30  IF ( l>1 ) l = l - 1
         kj1 = m4 + l*m1
         !
         DO j = l, m2
@@ -314,24 +314,24 @@ SUBROUTINE BQR(Nm,N,Mb,A,T,R,Ierr,Nv,Rv)
             kj1 = kj1 + 1
             kj = kj1 - m1
             Rv(kj) = Rv(kj1)
-          ENDDO
-        ENDDO
+          END DO
+        END DO
         !
         !
-      ENDDO
-    ENDIF
-  ENDDO
+      END DO
+    END IF
+  END DO
   !     .......... CONVERGENCE ..........
   T = T + g
   !
   DO i = 1, N
     A(i,Mb) = A(i,Mb) - g
-  ENDDO
+  END DO
   !
   DO k = 1, m1
     mk = k + mz
     A(N,mk) = 0.0E0
     !
-  ENDDO
+  END DO
   RETURN
 END SUBROUTINE BQR

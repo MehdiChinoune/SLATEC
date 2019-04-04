@@ -170,7 +170,7 @@ SUBROUTINE DLLSIA(A,Mda,M,N,B,Mdb,Nb,Re,Ae,Key,Mode,Np,Krank,Ksure,Rnorm,&
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900510  Fixed an error message.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   INTEGER i, Info, it, Key, Krank, Ksure, Liw, Lw, M, Mda, Mdb, &
     Mode, N, n1, n2, n3, n4, n5, Nb, Np
   REAL(8) :: A(Mda,*), Ae(*), B(Mdb,*), eps, Re(*), Rnorm(*), W(*)
@@ -223,8 +223,8 @@ SUBROUTINE DLLSIA(A,Mda,M,N,B,Mdb,Nb,Re,Ae,Key,Mode,Np,Krank,Ksure,Rnorm,&
                   RETURN
                 ELSEIF ( it/=0 ) THEN
                   GOTO 2
-                ENDIF
-              ENDIF
+                END IF
+              END IF
               IF ( Key<0.OR.Key>3 ) THEN
                 CALL XERMSG('SLATEC','DLLSIA','KEY OUT OF RANGE',2,1)
                 RETURN
@@ -253,7 +253,7 @@ SUBROUTINE DLLSIA(A,Mda,M,N,B,Mdb,Nb,Re,Ae,Key,Mode,Np,Krank,Ksure,Rnorm,&
                       IF ( Re(i)>1.0D0 ) GOTO 20
                       IF ( Re(i)<eps ) Re(i) = eps
                       W(n4-1+i) = Ae(1)
-                    ENDDO
+                    END DO
                     CALL DU11LS(A,Mda,M,N,Re,W(n4),Mode,Np,Krank,Ksure,&
                       W(n1),W(n2),W(n3),Iwork(n1),Iwork(n2))
                   ELSEIF ( Key==2 ) THEN
@@ -264,7 +264,7 @@ SUBROUTINE DLLSIA(A,Mda,M,N,B,Mdb,Nb,Re,Ae,Key,Mode,Np,Krank,Ksure,Rnorm,&
                     DO i = 1, N
                       W(n4-1+i) = Re(1)
                       IF ( Ae(i)<0.0D0 ) GOTO 100
-                    ENDDO
+                    END DO
                     CALL DU11LS(A,Mda,M,N,W(n4),Ae,Mode,Np,Krank,Ksure,&
                       W(n1),W(n2),W(n3),Iwork(n1),Iwork(n2))
                   ELSEIF ( Key==3 ) THEN
@@ -274,7 +274,7 @@ SUBROUTINE DLLSIA(A,Mda,M,N,B,Mdb,Nb,Re,Ae,Key,Mode,Np,Krank,Ksure,Rnorm,&
                       IF ( Re(i)>1.0D0 ) GOTO 20
                       IF ( Re(i)<eps ) Re(i) = eps
                       IF ( Ae(i)<0.0D0 ) GOTO 100
-                    ENDDO
+                    END DO
                     CALL DU11LS(A,Mda,M,N,Re,Ae,Mode,Np,Krank,Ksure,W(n1),&
                       W(n2),W(n3),Iwork(n1),Iwork(n2))
                   ELSE
@@ -286,58 +286,59 @@ SUBROUTINE DLLSIA(A,Mda,M,N,B,Mdb,Nb,Re,Ae,Key,Mode,Np,Krank,Ksure,Rnorm,&
                     DO i = 1, N
                       W(n4-1+i) = Re(1)
                       W(n5-1+i) = Ae(1)
-                    ENDDO
+                    END DO
                     CALL DU11LS(A,Mda,M,N,W(n4),W(n5),Mode,Np,Krank,Ksure,&
                       W(n1),W(n2),W(n3),Iwork(n1),Iwork(n2))
-                  ENDIF
-                ENDIF
-              ENDIF
-            ENDIF
+                  END IF
+                END IF
+              END IF
+            END IF
             !
             !     DETERMINE INFO
             !
-            2              IF ( Krank==N ) THEN
-            Info = 5
-          ELSEIF ( Krank==0 ) THEN
-            Info = 3
-          ELSEIF ( Krank>=Np ) THEN
-            Info = Mode
-            IF ( Mode==0 ) RETURN
-          ELSE
-            Info = 4
-            RETURN
-          ENDIF
-          IF ( Nb==0 ) RETURN
-          !
-          !     SOLUTION PHASE
-          !
-          n1 = 1
-          n2 = n1 + N
-          n3 = n2 + N
-          IF ( Info==2 ) THEN
+            2 CONTINUE
+            IF ( Krank==N ) THEN
+              Info = 5
+            ELSEIF ( Krank==0 ) THEN
+              Info = 3
+            ELSEIF ( Krank>=Np ) THEN
+              Info = Mode
+              IF ( Mode==0 ) RETURN
+            ELSE
+              Info = 4
+              RETURN
+            END IF
+            IF ( Nb==0 ) RETURN
             !
-            IF ( Lw>=n3-1 ) THEN
-              CALL DU12LS(A,Mda,M,N,B,Mdb,Nb,Mode,Krank,Rnorm,W(n1),W(n2),&
+            !     SOLUTION PHASE
+            !
+            n1 = 1
+            n2 = n1 + N
+            n3 = n2 + N
+            IF ( Info==2 ) THEN
+              !
+              IF ( Lw>=n3-1 ) THEN
+                CALL DU12LS(A,Mda,M,N,B,Mdb,Nb,Mode,Krank,Rnorm,W(n1),W(n2),&
+                  Iwork(n1),Iwork(n2))
+                RETURN
+              END IF
+            ELSEIF ( Lw>=n2-1 ) THEN
+              CALL DU12LS(A,Mda,M,N,B,Mdb,Nb,Mode,Krank,Rnorm,W(n1),W(n1),&
                 Iwork(n1),Iwork(n2))
               RETURN
-            ENDIF
-          ELSEIF ( Lw>=n2-1 ) THEN
-            CALL DU12LS(A,Mda,M,N,B,Mdb,Nb,Mode,Krank,Rnorm,W(n1),W(n1),&
-              Iwork(n1),Iwork(n2))
-            RETURN
-          ENDIF
-        ENDIF
-        5            CALL XERMSG('SLATEC','DLLSIA','INSUFFICIENT WORK SPACE',8,1)
-        Info = -1
+            END IF
+          END IF
+          5  CALL XERMSG('SLATEC','DLLSIA','INSUFFICIENT WORK SPACE',8,1)
+          Info = -1
+          RETURN
+        END IF
+        10  CALL XERMSG('SLATEC','DLLSIA','RE(I) .LT. 0',2,1)
         RETURN
-      ENDIF
-      10         CALL XERMSG('SLATEC','DLLSIA','RE(I) .LT. 0',2,1)
+      END IF
+      20  CALL XERMSG('SLATEC','DLLSIA','RE(I) .GT. 1',2,1)
       RETURN
-    ENDIF
-    20       CALL XERMSG('SLATEC','DLLSIA','RE(I) .GT. 1',2,1)
-    RETURN
-  ENDIF
-ENDIF
-100  CALL XERMSG('SLATEC','DLLSIA','AE(I) .LT. 0',2,1)
-RETURN
-  END SUBROUTINE DLLSIA
+    END IF
+  END IF
+  100  CALL XERMSG('SLATEC','DLLSIA','AE(I) .LT. 0',2,1)
+  RETURN
+END SUBROUTINE DLLSIA

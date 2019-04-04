@@ -35,14 +35,14 @@ SUBROUTINE CPROC(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Y,M,A,B,C,D,W,Yy)
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
-  
+
   REAL Aa(*), Bm1(*), Bm2(*), rt, Yy(*)
   INTEGER ia, id, iflg, j, k, M, m1, m2, mm, Na, Nd, Nm1, Nm2
   COMPLEX Y(*), D(*), W(*), Bd(*), crt, den, y1, y2, X(*), A(*), B(*), C(*)
   !* FIRST EXECUTABLE STATEMENT  CPROC
   DO j = 1, M
     Y(j) = X(j)
-  ENDDO
+  END DO
   mm = M - 1
   id = Nd
   m1 = Nm1
@@ -63,17 +63,17 @@ SUBROUTINE CPROC(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Y,M,A,B,C,D,W,Yy)
       den = B(k+1) - crt - C(k+1)*D(k+2)
       D(k+1) = A(k+1)/den
       W(k+1) = (Y(k+1)-C(k+1)*W(k+2))/den
-    ENDDO
+    END DO
     den = B(1) - crt - C(1)*D(2)
     IF ( ABS(den)/=0 ) THEN
       Y(1) = (Y(1)-C(1)*W(2))/den
     ELSE
       Y(1) = (1.,0.)
-    ENDIF
+    END IF
     DO j = 2, M
       Y(j) = W(j) - D(j)*Y(j-1)
-    ENDDO
-  ENDIF
+    END DO
+  END IF
   IF ( m1<=0 ) THEN
     IF ( m2<=0 ) THEN
       IF ( ia>0 ) THEN
@@ -85,14 +85,14 @@ SUBROUTINE CPROC(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Y,M,A,B,C,D,W,Yy)
         !
         DO j = 1, M
           Y(j) = rt*Y(j)
-        ENDDO
-      ENDIF
+        END DO
+      END IF
       IF ( iflg>0 ) GOTO 100
       RETURN
     ELSE
       rt = Bm2(m2)
       m2 = m2 - 1
-    ENDIF
+    END IF
   ELSEIF ( m2<=0 ) THEN
     rt = Bm1(m1)
     m1 = m1 - 1
@@ -102,7 +102,7 @@ SUBROUTINE CPROC(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Y,M,A,B,C,D,W,Yy)
   ELSE
     rt = Bm1(m1)
     m1 = m1 - 1
-  ENDIF
+  END IF
   y1 = (B(1)-rt)*Y(1) + C(1)*Y(2)
   IF ( mm>=2 ) THEN
     !
@@ -112,8 +112,8 @@ SUBROUTINE CPROC(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Y,M,A,B,C,D,W,Yy)
       y2 = A(j)*Y(j-1) + (B(j)-rt)*Y(j) + C(j)*Y(j+1)
       Y(j-1) = y1
       y1 = y2
-    ENDDO
-  ENDIF
+    END DO
+  END IF
   Y(M) = A(M)*Y(M-1) + (B(M)-rt)*Y(M)
   Y(M-1) = y1
   iflg = 1

@@ -137,7 +137,7 @@ REAL(8) FUNCTION DERFC(X)
     xmax = txmax - 0.5D0*LOG(txmax)/txmax - 0.01D0
     sqeps = SQRT(2.0D0*D1MACH(3))
     first = .FALSE.
-  ENDIF
+  END IF
   !
   IF ( X<=xsml ) THEN
     !
@@ -160,8 +160,8 @@ REAL(8) FUNCTION DERFC(X)
       IF ( y<sqeps ) DERFC = 1.0D0 - 2.0D0*X/sqrtpi
       IF ( y>=sqeps ) DERFC = 1.0D0 - X*(1.0D0+DCSEVL(2.D0*X*X-1.D0,erfcs,nterf))
       RETURN
-    ENDIF
-  ENDIF
+    END IF
+  END IF
   !
   ! ERFC(X) = 1.0 - ERF(X)  FOR  1.0 .LT. ABS(X) .LE. XMAX
   !

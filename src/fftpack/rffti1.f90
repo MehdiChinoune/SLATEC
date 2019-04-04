@@ -74,7 +74,7 @@ SUBROUTINE RFFTI1(N,Wa,Ifac)
     ntry = ntryh(j)
   ELSE
     ntry = ntry + 2
-  ENDIF
+  END IF
   DO
     nq = nl/ntry
     nr = nl - ntry*nq
@@ -87,10 +87,10 @@ SUBROUTINE RFFTI1(N,Wa,Ifac)
         DO i = 2, nf
           ib = nf - i + 2
           Ifac(ib+2) = Ifac(ib+1)
-        ENDDO
+        END DO
         Ifac(3) = 2
-      ENDIF
-    ENDIF
+      END IF
+    END IF
     IF ( nl==1 ) THEN
       Ifac(1) = N
       Ifac(2) = nf
@@ -117,12 +117,12 @@ SUBROUTINE RFFTI1(N,Wa,Ifac)
             arg = fi*argld
             Wa(i-1) = COS(arg)
             Wa(i) = SIN(arg)
-          ENDDO
+          END DO
           is = is + ido
-        ENDDO
+        END DO
         l1 = l2
-      ENDDO
+      END DO
       EXIT
-    ENDIF
-  ENDDO
+    END IF
+  END DO
 END SUBROUTINE RFFTI1

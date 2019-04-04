@@ -65,7 +65,7 @@ REAL(8) FUNCTION DBESK1(X)
     xmaxt = -LOG(D1MACH(1))
     xmax = xmaxt - 0.5D0*xmaxt*LOG(xmaxt)/(xmaxt+0.5D0)
     first = .FALSE.
-  ENDIF
+  END IF
   !
   IF ( X<=0.D0 ) CALL XERMSG('SLATEC','DBESK1','X IS ZERO OR NEGATIVE',2,2)
   IF ( X>2.0D0 ) THEN
@@ -76,7 +76,7 @@ REAL(8) FUNCTION DBESK1(X)
     !
     DBESK1 = EXP(-X)*DBSK1E(X)
     RETURN
-  ENDIF
+  END IF
   !
   IF ( X<xmin ) CALL XERMSG('SLATEC','DBESK1','X SO SMALL K1 OVERFLOWS',3,2)
   y = 0.D0

@@ -55,7 +55,7 @@ SUBROUTINE CAXPY(N,Ca,Cx,Incx,Cy,Incy)
   !   920310  Corrected definition of LX in DESCRIPTION.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !   920801  Removed variable CANORM.  (RWC, WRB)
-  
+
   INTEGER i, Incx, Incy, kx, ky, N, ns
   COMPLEX Cx(*), Cy(*), Ca
   !* FIRST EXECUTABLE STATEMENT  CAXPY
@@ -67,9 +67,9 @@ SUBROUTINE CAXPY(N,Ca,Cx,Incx,Cy,Incy)
     ns = N*Incx
     DO i = 1, ns, Incx
       Cy(i) = Ca*Cx(i) + Cy(i)
-    ENDDO
+    END DO
     RETURN
-  ENDIF
+  END IF
   !
   !     Code for unequal or nonpositive increments.
   !
@@ -81,6 +81,6 @@ SUBROUTINE CAXPY(N,Ca,Cx,Incx,Cy,Incy)
     Cy(ky) = Cy(ky) + Ca*Cx(kx)
     kx = kx + Incx
     ky = ky + Incy
-  ENDDO
+  END DO
   RETURN
 END SUBROUTINE CAXPY

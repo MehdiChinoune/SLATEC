@@ -110,7 +110,7 @@ SUBROUTINE COMQR2(Nm,N,Low,Igh,Ortr,Orti,Hr,Hi,Wr,Wi,Zr,Zi,Ierr)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   !
   INTEGER i, j, k, l, m, N, en, ii, jj, ll, Nm, nn, Igh, ip1
   INTEGER itn, its, Low, lp1, enm1, iend, Ierr
@@ -128,8 +128,8 @@ SUBROUTINE COMQR2(Nm,N,Low,Igh,Ortr,Orti,Hr,Hi,Wr,Wi,Zr,Zi,Ierr)
       Zr(i,j) = 0.0E0
       Zi(i,j) = 0.0E0
       IF ( i==j ) Zr(i,j) = 1.0E0
-    ENDDO
-  ENDDO
+    END DO
+  END DO
   !     .......... FORM THE MATRIX OF ACCUMULATED TRANSFORMATIONS
   !                FROM THE INFORMATION LEFT BY CORTH ..........
   iend = Igh - Low - 1
@@ -147,7 +147,7 @@ SUBROUTINE COMQR2(Nm,N,Low,Igh,Ortr,Orti,Hr,Hi,Wr,Wi,Zr,Zi,Ierr)
           DO k = ip1, Igh
             Ortr(k) = Hr(k,i-1)
             Orti(k) = Hi(k,i-1)
-          ENDDO
+          END DO
           !
           DO j = i, Igh
             sr = 0.0E0
@@ -156,7 +156,7 @@ SUBROUTINE COMQR2(Nm,N,Low,Igh,Ortr,Orti,Hr,Hi,Wr,Wi,Zr,Zi,Ierr)
             DO k = i, Igh
               sr = sr + Ortr(k)*Zr(k,j) + Orti(k)*Zi(k,j)
               si = si + Ortr(k)*Zi(k,j) - Orti(k)*Zr(k,j)
-            ENDDO
+            END DO
             !
             sr = sr/norm
             si = si/norm
@@ -164,14 +164,14 @@ SUBROUTINE COMQR2(Nm,N,Low,Igh,Ortr,Orti,Hr,Hi,Wr,Wi,Zr,Zi,Ierr)
             DO k = i, Igh
               Zr(k,j) = Zr(k,j) + sr*Ortr(k) - si*Orti(k)
               Zi(k,j) = Zi(k,j) + sr*Orti(k) + si*Ortr(k)
-            ENDDO
+            END DO
             !
-          ENDDO
-        ENDIF
-      ENDIF
+          END DO
+        END IF
+      END IF
       !
-    ENDDO
-  ENDIF
+    END DO
+  END IF
   !     .......... CREATE REAL SUBDIAGONAL ELEMENTS ..........
   l = Low + 1
   !
@@ -188,30 +188,30 @@ SUBROUTINE COMQR2(Nm,N,Low,Igh,Ortr,Orti,Hr,Hi,Wr,Wi,Zr,Zi,Ierr)
         si = yr*Hi(i,j) - yi*Hr(i,j)
         Hr(i,j) = yr*Hr(i,j) + yi*Hi(i,j)
         Hi(i,j) = si
-      ENDDO
+      END DO
       !
       DO j = 1, ll
         si = yr*Hi(j,i) + yi*Hr(j,i)
         Hr(j,i) = yr*Hr(j,i) - yi*Hi(j,i)
         Hi(j,i) = si
-      ENDDO
+      END DO
       !
       DO j = Low, Igh
         si = yr*Zi(j,i) + yi*Zr(j,i)
         Zr(j,i) = yr*Zr(j,i) - yi*Zi(j,i)
         Zi(j,i) = si
-      ENDDO
-    ENDIF
+      END DO
+    END IF
     !
-  ENDDO
+  END DO
   !     .......... STORE ROOTS ISOLATED BY CBAL ..........
   100 CONTINUE
   DO i = 1, N
     IF ( i<Low.OR.i>Igh ) THEN
       Wr(i) = Hr(i,i)
       Wi(i) = Hi(i,i)
-    ENDIF
-  ENDDO
+    END IF
+  END DO
   !
   en = Igh
   tr = 0.0E0
@@ -228,8 +228,8 @@ SUBROUTINE COMQR2(Nm,N,Low,Igh,Ortr,Orti,Hr,Hi,Wr,Wi,Zr,Zi,Ierr)
       !
       DO j = i, N
         norm = norm + ABS(Hr(i,j)) + ABS(Hi(i,j))
-      ENDDO
-    ENDDO
+      END DO
+    END DO
     !
     IF ( N/=1.AND.norm/=0.0E0 ) THEN
       !     .......... FOR EN=N STEP -1 UNTIL 2 DO -- ..........
@@ -249,8 +249,8 @@ SUBROUTINE COMQR2(Nm,N,Low,Igh,Ortr,Orti,Hr,Hi,Wr,Wi,Zr,Zi,Ierr)
             DO j = ip1, enm1
               zzr = zzr + Hr(i,j)*Hr(j,en) - Hi(i,j)*Hi(j,en)
               zzi = zzi + Hr(i,j)*Hi(j,en) + Hi(i,j)*Hr(j,en)
-            ENDDO
-          ENDIF
+            END DO
+          END IF
           !
           yr = xr - Wr(i)
           yi = xi - Wi(i)
@@ -261,13 +261,13 @@ SUBROUTINE COMQR2(Nm,N,Low,Igh,Ortr,Orti,Hr,Hi,Wr,Wi,Zr,Zi,Ierr)
               IF ( norm+yr<=norm ) THEN
                 yr = 2.0E0*yr
                 EXIT
-              ENDIF
-            ENDDO
-          ENDIF
+              END IF
+            END DO
+          END IF
           CALL CDIV(zzr,zzi,yr,yi,Hr(i,en),Hi(i,en))
-        ENDDO
+        END DO
         !
-      ENDDO
+      END DO
       !     .......... END BACKSUBSTITUTION ..........
       enm1 = N - 1
       !     .......... VECTORS OF ISOLATED ROOTS ..........
@@ -278,10 +278,10 @@ SUBROUTINE COMQR2(Nm,N,Low,Igh,Ortr,Orti,Hr,Hi,Wr,Wi,Zr,Zi,Ierr)
           DO j = ip1, N
             Zr(i,j) = Hr(i,j)
             Zi(i,j) = Hi(i,j)
-          ENDDO
-        ENDIF
+          END DO
+        END IF
         !
-      ENDDO
+      END DO
       !     .......... MULTIPLY BY TRANSFORMATION MATRIX TO GIVE
       !                VECTORS OF ORIGINAL FULL MATRIX.
       !                FOR J=N STEP -1 UNTIL LOW+1 DO -- ..........
@@ -296,19 +296,19 @@ SUBROUTINE COMQR2(Nm,N,Low,Igh,Ortr,Orti,Hr,Hi,Wr,Wi,Zr,Zi,Ierr)
           DO k = Low, m
             zzr = zzr + Zr(i,k)*Hr(k,j) - Zi(i,k)*Hi(k,j)
             zzi = zzi + Zr(i,k)*Hi(k,j) + Zi(i,k)*Hr(k,j)
-          ENDDO
+          END DO
           !
           Zr(i,j) = zzr
           Zi(i,j) = zzi
-        ENDDO
+        END DO
         !
-      ENDDO
-    ENDIF
+      END DO
+    END IF
     RETURN
   ELSE
     its = 0
     enm1 = en - 1
-  ENDIF
+  END IF
   !     .......... LOOK FOR SINGLE SMALL SUB-DIAGONAL ELEMENT
   !                FOR L=EN STEP -1 UNTIL LOW DO -- ..........
   300 CONTINUE
@@ -318,7 +318,7 @@ SUBROUTINE COMQR2(Nm,N,Low,Igh,Ortr,Orti,Hr,Hi,Wr,Wi,Zr,Zi,Ierr)
     s1 = ABS(Hr(l-1,l-1)) + ABS(Hi(l-1,l-1)) + ABS(Hr(l,l)) + ABS(Hi(l,l))
     s2 = s1 + ABS(Hr(l,l-1))
     IF ( s2==s1 ) EXIT
-  ENDDO
+  END DO
   !     .......... FORM SHIFT ..........
   IF ( l==en ) THEN
     !     .......... A ROOT FOUND ..........
@@ -349,17 +349,17 @@ SUBROUTINE COMQR2(Nm,N,Low,Igh,Ortr,Orti,Hr,Hi,Wr,Wi,Zr,Zi,Ierr)
         IF ( yr*zzr+yi*zzi<0.0E0 ) THEN
           zzr = -zzr
           zzi = -zzi
-        ENDIF
+        END IF
         CALL CDIV(xr,xi,yr+zzr,yi+zzi,xr,xi)
         sr = sr - xr
         si = si - xi
-      ENDIF
-    ENDIF
+      END IF
+    END IF
     !
     DO i = Low, en
       Hr(i,i) = Hr(i,i) - sr
       Hi(i,i) = Hi(i,i) - si
-    ENDDO
+    END DO
     !
     tr = tr + sr
     ti = ti + si
@@ -389,9 +389,9 @@ SUBROUTINE COMQR2(Nm,N,Low,Igh,Ortr,Orti,Hr,Hi,Wr,Wi,Zr,Zi,Ierr)
         Hi(i-1,j) = xr*yi - xi*yr + Hi(i,i-1)*zzi
         Hr(i,j) = xr*zzr - xi*zzi - Hi(i,i-1)*yr
         Hi(i,j) = xr*zzi + xi*zzr - Hi(i,i-1)*yi
-      ENDDO
+      END DO
       !
-    ENDDO
+    END DO
     !
     si = Hi(en,en)
     IF ( si/=0.0E0 ) THEN
@@ -408,9 +408,9 @@ SUBROUTINE COMQR2(Nm,N,Low,Igh,Ortr,Orti,Hr,Hi,Wr,Wi,Zr,Zi,Ierr)
           yi = Hi(en,j)
           Hr(en,j) = sr*yr + si*yi
           Hi(en,j) = sr*yi - si*yr
-        ENDDO
-      ENDIF
-    ENDIF
+        END DO
+      END IF
+    END IF
     !     .......... INVERSE OPERATION (COLUMNS) ..........
     DO j = lp1, en
       xr = Wr(j-1)
@@ -424,11 +424,11 @@ SUBROUTINE COMQR2(Nm,N,Low,Igh,Ortr,Orti,Hr,Hi,Wr,Wi,Zr,Zi,Ierr)
         IF ( i/=j ) THEN
           yi = Hi(i,j-1)
           Hi(i,j-1) = xr*yi + xi*yr + Hi(j,j-1)*zzi
-        ENDIF
+        END IF
         Hr(i,j-1) = xr*yr - xi*yi + Hi(j,j-1)*zzr
         Hr(i,j) = xr*zzr + xi*zzi - Hi(j,j-1)*yr
         Hi(i,j) = xr*zzi - xi*zzr - Hi(j,j-1)*yi
-      ENDDO
+      END DO
       !
       DO i = Low, Igh
         yr = Zr(i,j-1)
@@ -439,9 +439,9 @@ SUBROUTINE COMQR2(Nm,N,Low,Igh,Ortr,Orti,Hr,Hi,Wr,Wi,Zr,Zi,Ierr)
         Zi(i,j-1) = xr*yi + xi*yr + Hi(j,j-1)*zzi
         Zr(i,j) = xr*zzr + xi*zzi - Hi(j,j-1)*yr
         Zi(i,j) = xr*zzi - xi*zzr - Hi(j,j-1)*yi
-      ENDDO
+      END DO
       !
-    ENDDO
+    END DO
     !
     IF ( si/=0.0E0 ) THEN
       !
@@ -450,7 +450,7 @@ SUBROUTINE COMQR2(Nm,N,Low,Igh,Ortr,Orti,Hr,Hi,Wr,Wi,Zr,Zi,Ierr)
         yi = Hi(i,en)
         Hr(i,en) = sr*yr - si*yi
         Hi(i,en) = sr*yi + si*yr
-      ENDDO
+      END DO
       !
       DO i = Low, Igh
         yr = Zr(i,en)
@@ -458,9 +458,9 @@ SUBROUTINE COMQR2(Nm,N,Low,Igh,Ortr,Orti,Hr,Hi,Wr,Wi,Zr,Zi,Ierr)
         Zr(i,en) = sr*yr - si*yi
         Zi(i,en) = sr*yi + si*yr
         !
-      ENDDO
-    ENDIF
+      END DO
+    END IF
     GOTO 300
-  ENDIF
+  END IF
   RETURN
 END SUBROUTINE COMQR2

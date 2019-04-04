@@ -58,7 +58,7 @@ SUBROUTINE DPRWVR(Key,Ipage,Lpg,Sx,Ix)
   IF ( first ) THEN
     CALL SOPENM(ipagef,Lpg)
     Sx(4) = one
-  ENDIF
+  END IF
   !
   !     PERFORM EITHER A READ OR A WRITE.
   !
@@ -67,5 +67,5 @@ SUBROUTINE DPRWVR(Key,Ipage,Lpg,Sx,Ix)
     CALL DREADP(ipagef,Ix(istart),Sx(istart),Lpg,iaddr)
   ELSEIF ( Key==2 ) THEN
     CALL DWRITP(ipagef,Ix(istart),Sx(istart),Lpg,iaddr)
-  ENDIF
+  END IF
 END SUBROUTINE DPRWVR

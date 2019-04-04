@@ -51,7 +51,7 @@ REAL(8) FUNCTION D9PAK(Y,N)
     nmin = INT( a1n2b*I1MACH(15) )
     nmax = INT( a1n2b*I1MACH(16) )
     first = .FALSE.
-  ENDIF
+  END IF
   !
   CALL D9UPAK(Y,D9PAK,ny)
   !
@@ -72,15 +72,15 @@ REAL(8) FUNCTION D9PAK(Y,N)
         D9PAK = 2.0D0*D9PAK
         nsum = nsum - 1
         IF ( nsum==0 ) EXIT
-      ENDDO
+      END DO
     ELSE
       DO
         !
         D9PAK = 0.5D0*D9PAK
         nsum = nsum + 1
         IF ( nsum==0 ) RETURN
-      ENDDO
-    ENDIF
-  ENDIF
+      END DO
+    END IF
+  END IF
   RETURN
 END FUNCTION D9PAK

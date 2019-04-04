@@ -143,7 +143,7 @@ SUBROUTINE HSTART(F,Neq,A,B,Y,Yprime,Etol,Morder,Small,Big,Spy,Pv,Yp,Sf,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
-  
+
   REAL A, absdx, B, Big, da, delf, delx, delxb, dely, dfdub, &
     dfdxb, dx, dy, Etol(*), fbnd, H, HVNRM, power, Pv(*), relper
   REAL Rpar(*), Sf(*), Small, Spy(*), srydpb, wtj, Y(*), ydpb, ynorm, &
@@ -176,7 +176,7 @@ SUBROUTINE HSTART(F,Neq,A,B,Y,Yprime,Etol,Morder,Small,Big,Spy,Pv,Yp,Sf,&
       Spy(j) = Sf(j)/Etol(j)
       Yp(j) = Yprime(j)/Etol(j)
       Pv(j) = Spy(j) - Yp(j)
-    ENDDO
+    END DO
   ELSE
     power = 2./(Morder+1)
     DO j = 1, Neq
@@ -184,8 +184,8 @@ SUBROUTINE HSTART(F,Neq,A,B,Y,Yprime,Etol,Morder,Small,Big,Spy,Pv,Yp,Sf,&
       Spy(j) = Sf(j)/wtj
       Yp(j) = Yprime(j)/wtj
       Pv(j) = Spy(j) - Yp(j)
-    ENDDO
-  ENDIF
+    END DO
+  END IF
   !
   delf = HVNRM(Pv,Neq)
   dfdxb = Big
@@ -218,15 +218,15 @@ SUBROUTINE HSTART(F,Neq,A,B,Y,Yprime,Etol,Morder,Small,Big,Spy,Pv,Yp,Sf,&
     DO j = 1, Neq
       Spy(j) = Yprime(j)
       Yp(j) = Etol(j)
-    ENDDO
+    END DO
   ELSE
     !                       USE INITIAL DERIVATIVES FOR FIRST PERTURBATION
     icase = 1
     DO j = 1, Neq
       Spy(j) = Yprime(j)
       Yp(j) = Yprime(j)
-    ENDDO
-  ENDIF
+    END DO
+  END IF
   !
   dfdub = 0.
   lk = MIN(Neq+1,3)
@@ -240,43 +240,43 @@ SUBROUTINE HSTART(F,Neq,A,B,Y,Yprime,Etol,Morder,Small,Big,Spy,Pv,Yp,Sf,&
         delxb = Big
         IF ( relper*ynorm<Big*ypnorm ) delxb = relper*ynorm/ypnorm
         delx = SIGN(delxb,dx)
-      ENDIF
+      END IF
       DO j = 1, Neq
         IF ( ABS(delx*Yp(j))>Etol(j) ) delx = SIGN(Etol(j)/Yp(j),dx)
-      ENDDO
+      END DO
     ELSE
       delx = SIGN(1.0,dx)
-    ENDIF
+    END IF
     !                       DEFINE PERTURBED VECTOR OF INITIAL VALUES
     DO j = 1, Neq
       Pv(j) = Y(j) + delx*Yp(j)
-    ENDDO
+    END DO
     IF ( k==2 ) THEN
       !                       USE A SHIFTED VALUE OF THE INDEPENDENT VARIABLE
       !                                             IN COMPUTING ONE ESTIMATE
       CALL F(A+da,Pv,Yp,Rpar,Ipar)
       DO j = 1, Neq
         Pv(j) = Yp(j) - Sf(j)
-      ENDDO
+      END DO
     ELSE
       !                       EVALUATE DERIVATIVES ASSOCIATED WITH PERTURBED
       !                       VECTOR  AND  COMPUTE CORRESPONDING DIFFERENCES
       CALL F(A,Pv,Yp,Rpar,Ipar)
       DO j = 1, Neq
         Pv(j) = Yp(j) - Yprime(j)
-      ENDDO
-    ENDIF
+      END DO
+    END IF
     !                       CHOOSE LARGEST BOUND ON THE WEIGHTED FIRST
     !                                                   DERIVATIVE
     IF ( Morder==1 ) THEN
       DO j = 1, Neq
         Yp(j) = Yp(j)/Etol(j)
-      ENDDO
+      END DO
     ELSE
       DO j = 1, Neq
         Yp(j) = Yp(j)/Etol(j)**power
-      ENDDO
-    ENDIF
+      END DO
+    END IF
     fbnd = MAX(fbnd,HVNRM(Yp,Neq))
     !                       COMPUTE BOUND ON A LOCAL LIPSCHITZ CONSTANT
     delf = HVNRM(Pv,Neq)
@@ -284,7 +284,7 @@ SUBROUTINE HSTART(F,Neq,A,B,Y,Yprime,Etol,Morder,Small,Big,Spy,Pv,Yp,Sf,&
       dely = ABS(delx)*ypnorm
       IF ( delf>=Big*dely ) EXIT
       dfdub = MAX(dfdub,delf/dely)
-    ENDIF
+    END IF
     !
     IF ( k==lk ) GOTO 100
     !                       CHOOSE NEXT PERTURBATION VECTOR
@@ -296,12 +296,12 @@ SUBROUTINE HSTART(F,Neq,A,B,Y,Yprime,Etol,Morder,Small,Big,Spy,Pv,Yp,Sf,&
         icase = 3
         dy = ABS(Pv(j))
         IF ( dy==0. ) dy = MAX(delf,Etol(j))
-      ENDIF
+      END IF
       IF ( Spy(j)==0. ) Spy(j) = Yp(j)
       IF ( Spy(j)/=0. ) dy = SIGN(dy,Spy(j))
       Yp(j) = dy
-    ENDDO
-  ENDDO
+    END DO
+  END DO
   !
   !                       PROTECT AGAINST AN OVERFLOW
   dfdub = Big
@@ -332,11 +332,11 @@ SUBROUTINE HSTART(F,Neq,A,B,Y,Yprime,Etol,Morder,Small,Big,Spy,Pv,Yp,Sf,&
       !
       !                       ONLY SECOND DERIVATIVE TERM (YDPB) IS ZERO
       IF ( 1.0<fbnd*absdx ) H = 1./fbnd
-    ENDIF
+    END IF
     !
     !                       BOTH FIRST DERIVATIVE TERM (FBND) AND SECOND
     !                                    DERIVATIVE TERM (YDPB) ARE ZERO
-  ENDIF
+  END IF
   !
   !                       FURTHER RESTRICT THE STEP LENGTH TO BE NOT
   !                                                 BIGGER THAN  1/DFDUB

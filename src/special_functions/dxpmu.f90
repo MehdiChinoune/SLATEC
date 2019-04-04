@@ -28,7 +28,7 @@ SUBROUTINE DXPMU(Nu1,Nu2,Mu1,Mu2,Theta,X,Sx,Id,Pqa,Ipqa,Ierror)
   !           Corrected order of sections in prologue and added TYPE
   !           section.  (WRB)
   !   920127  Revised PURPOSE section of prologue.  (DWL)
-  
+
   INTEGER Id, Ierror, ip0, Ipqa(*), j, mu, Mu1, Mu2, n
   REAL(8) :: Pqa(*), Nu1, Nu2, p0, X, Sx, Theta, x1, x2
   !
@@ -71,7 +71,7 @@ SUBROUTINE DXPMU(Nu1,Nu2,Mu1,Mu2,Theta,X,Sx,Id,Pqa,Ipqa,Ierror)
         IF ( j==1 ) EXIT
         j = j - 1
         mu = mu - 1
-      ENDDO
-    ENDIF
-  ENDIF
+      END DO
+    END IF
+  END IF
 END SUBROUTINE DXPMU

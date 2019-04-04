@@ -36,7 +36,7 @@ SUBROUTINE ZBINU(Zr,Zi,Fnu,Kode,N,Cyr,Cyi,Nz,Rl,Fnul,Tol,Elim,Alim)
   dfnu = Fnu + (N-1)
   IF ( az>2.0D0 ) THEN
     IF ( az*az*0.25D0>dfnu+1.0D0 ) GOTO 100
-  ENDIF
+  END IF
   !-----------------------------------------------------------------------
   !     POWER SERIES
   !-----------------------------------------------------------------------
@@ -51,7 +51,7 @@ SUBROUTINE ZBINU(Zr,Zi,Fnu,Kode,N,Cyr,Cyi,Nz,Rl,Fnul,Tol,Elim,Alim)
   IF ( az>=Rl ) THEN
     IF ( dfnu>1.0D0 ) THEN
       IF ( az+az<dfnu*dfnu ) GOTO 200
-    ENDIF
+    END IF
     !-----------------------------------------------------------------------
     !     ASYMPTOTIC EXPANSION FOR LARGE Z
     !-----------------------------------------------------------------------
@@ -60,7 +60,7 @@ SUBROUTINE ZBINU(Zr,Zi,Fnu,Kode,N,Cyr,Cyi,Nz,Rl,Fnul,Tol,Elim,Alim)
     GOTO 700
   ELSEIF ( dfnu<=1.0D0 ) THEN
     GOTO 400
-  ENDIF
+  END IF
   !-----------------------------------------------------------------------
   !     OVERFLOW AND UNDERFLOW TEST ON I SEQUENCE FOR MILLER ALGORITHM
   !-----------------------------------------------------------------------
@@ -91,10 +91,10 @@ SUBROUTINE ZBINU(Zr,Zi,Fnu,Kode,N,Cyr,Cyi,Nz,Rl,Fnul,Tol,Elim,Alim)
       DO i = 1, nn
         Cyr(i) = zeror
         Cyi(i) = zeroi
-      ENDDO
+      END DO
       RETURN
-    ENDIF
-  ENDIF
+    END IF
+  END IF
   !-----------------------------------------------------------------------
   !     MILLER ALGORITHM NORMALIZED BY THE SERIES
   !-----------------------------------------------------------------------
@@ -112,7 +112,7 @@ SUBROUTINE ZBINU(Zr,Zi,Fnu,Kode,N,Cyr,Cyi,Nz,Rl,Fnul,Tol,Elim,Alim)
   IF ( nlast/=0 ) THEN
     nn = nlast
     GOTO 300
-  ENDIF
+  END IF
   600  RETURN
   700  Nz = -1
   IF ( nw==(-2) ) Nz = -2

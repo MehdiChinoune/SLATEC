@@ -92,7 +92,7 @@ SUBROUTINE RSB(Nm,N,Mb,A,W,Matz,Z,Fv1,Fv2,Ierr)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   !
   INTEGER N, Mb, Nm, Ierr, Matz
   REAL A(Nm,*), W(*), Z(Nm,*), Fv1(*), Fv2(*)
@@ -116,5 +116,5 @@ SUBROUTINE RSB(Nm,N,Mb,A,W,Matz,Z,Fv1,Fv2,Ierr)
     tf = .FALSE.
     CALL BANDR(Nm,N,Mb,A,W,Fv1,Fv2,tf,Z)
     CALL TQLRAT(N,W,Fv2,Ierr)
-  ENDIF
+  END IF
 END SUBROUTINE RSB

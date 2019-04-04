@@ -76,11 +76,11 @@ SUBROUTINE LA05CD(A,Ind,Ia,N,Ip,Iw,W,G,U,Mm)
       krl = kr + nz
       DO km = kr, krl
         IF ( Ind(km,2)==jm ) EXIT
-      ENDDO
+      END DO
       A(km) = A(krl)
       Ind(km,2) = Ind(krl,2)
       Ind(krl,2) = 0
-    ENDDO
+    END DO
     !
     ! INSERT NEW COLUMN
     DO ii = 1, N
@@ -93,7 +93,7 @@ SUBROUTINE LA05CD(A,Ind,Ia,N,Ip,Iw,W,G,U,Mm)
         ! COMPRESS COLUMN FILE IF NECESSARY.
         IF ( NCP>=mcp.OR.LENl+LENu>=Ia ) GOTO 300
         CALL LA05ED(A,Ind,Ip(1,2),N,Iw(1,2),Ia,.FALSE.)
-      ENDIF
+      END IF
       LCOl = LCOl + 1
       nz = Iw(jm,2)
       IF ( nz==0 ) Ip(jm,2) = LCOl
@@ -103,13 +103,13 @@ SUBROUTINE LA05CD(A,Ind,Ia,N,Ip,Iw,W,G,U,Mm)
       kpl = Ip(i,1) + nz
       IF ( kpl<=LROw ) THEN
         IF ( Ind(kpl,2)==0 ) GOTO 20
-      ENDIF
+      END IF
       ! NEW ENTRY HAS TO BE CREATED.
       IF ( LENl+LROw+nz>=Ia ) THEN
         IF ( NCP>=mcp.OR.LENl+LENu+nz>=Ia ) GOTO 300
         ! COMPRESS ROW FILE IF NECESSARY.
         CALL LA05ED(A,Ind(1,2),Ip,N,Iw,Ia,.TRUE.)
-      ENDIF
+      END IF
       kp = Ip(i,1)
       Ip(i,1) = LROw + 1
       IF ( nz/=0 ) THEN
@@ -119,16 +119,16 @@ SUBROUTINE LA05CD(A,Ind,Ia,N,Ip,Iw,W,G,U,Mm)
           A(LROw) = A(k)
           Ind(LROw,2) = Ind(k,2)
           Ind(k,2) = 0
-        ENDDO
-      ENDIF
+        END DO
+      END IF
       LROw = LROw + 1
       kpl = LROw
       ! PLACE NEW ELEMENT AT END OF ROW.
-      20       Iw(i,1) = nz + 1
+      20  Iw(i,1) = nz + 1
       A(kpl) = W(i)
       Ind(kpl,2) = jm
-      40       W(i) = 0.0D0
-    ENDDO
+      40  W(i) = 0.0D0
+    END DO
     IF ( Iw(im,1)==0.OR.Iw(jm,2)==0.OR.m>last ) GOTO 200
     !
     ! FIND COLUMN SINGLETONS, OTHER THAN THE SPIKE. NON-SINGLETONS ARE
@@ -150,17 +150,17 @@ SUBROUTINE LA05CD(A,Ind,Ia,N,Ip,Iw,W,G,U,Mm)
         DO k = kp, kl
           j = Ind(k,2)
           W(j) = 1.0D0
-        ENDDO
+        END DO
         Iw(ins,4) = i
         ins = ins + 1
-      ENDIF
-    ENDDO
+      END IF
+    END DO
     ! PLACE NON-SINGLETONS IN NEW POSITION.
     ij = m + 1
     DO ii = m1, last - 1
       Iw(ii,3) = Iw(ij,4)
       ij = ij + 1
-    ENDDO
+    END DO
     ! PLACE SPIKE AT END.
     Iw(last,3) = im
     !
@@ -187,15 +187,15 @@ SUBROUTINE LA05CD(A,Ind,Ia,N,Ip,Iw,W,G,U,Mm)
         DO k = kp, kl
           i = Ind(k,1)
           W(i) = 2.0D0
-        ENDDO
-      ENDIF
-    ENDDO
+        END DO
+      END IF
+    END DO
     DO ii = m1, last1
       jns = jns + 1
       i = Iw(jns,4)
       W(i) = 3.0D0
       Iw(ii,3) = i
-    ENDDO
+    END DO
     !
     ! DEAL WITH SINGLETON SPIKE COLUMN. NOTE THAT BUMP ROWS ARE MARKED BY
     !    W(I)=3.
@@ -210,8 +210,8 @@ SUBROUTINE LA05CD(A,Ind,Ia,N,Ip,Iw,W,G,U,Mm)
           i = l
           knp = k
           is = 1
-        ENDIF
-      ENDDO
+        END IF
+      END DO
       IF ( is==0 ) GOTO 200
       ! MAKE A(I,JM) A PIVOT.
       Ind(knp,1) = Ind(kp,1)
@@ -219,7 +219,7 @@ SUBROUTINE LA05CD(A,Ind,Ia,N,Ip,Iw,W,G,U,Mm)
       kp = Ip(i,1)
       DO k = kp, Ia
         IF ( Ind(k,2)==jm ) EXIT
-      ENDDO
+      END DO
       am = A(kp)
       A(kp) = A(k)
       A(k) = am
@@ -228,27 +228,27 @@ SUBROUTINE LA05CD(A,Ind,Ia,N,Ip,Iw,W,G,U,Mm)
       jm = Ind(k,2)
       Iw(ii,4) = i
       W(i) = 2.0D0
-    ENDDO
+    END DO
     ii = last1
     GOTO 100
-    50     in = m1
+    50 in = m1
     DO ij = ii, last1
       Iw(ij,4) = Iw(in,3)
       in = in + 1
-    ENDDO
-  ENDIF
+    END DO
+  END IF
   100  last2 = last1 - 1
   IF ( m1/=last1 ) THEN
     DO i = m1, last2
       Iw(i,3) = Iw(i,4)
-    ENDDO
+    END DO
     m1 = ii
     IF ( m1/=last1 ) THEN
       !
       ! CLEAR W
       DO i = 1, N
         W(i) = 0.0D0
-      ENDDO
+      END DO
       !
       ! PERFORM ELIMINATION
       ir = Iw(last1,3)
@@ -263,11 +263,11 @@ SUBROUTINE LA05CD(A,Ind,Ia,N,Ip,Iw,W,G,U,Mm)
         krl = kr + Iw(ir,1) - 1
         DO knp = kr, krl
           IF ( jp==Ind(knp,2) ) GOTO 110
-        ENDDO
+        END DO
         IF ( ii==last1 ) GOTO 200
         CYCLE
         ! BRING ELEMENT TO BE ELIMINATED TO FRONT OF ITS ROW.
-        110        am = A(knp)
+        110  am = A(knp)
         A(knp) = A(kr)
         A(kr) = am
         Ind(knp,2) = Ind(kr,2)
@@ -276,8 +276,8 @@ SUBROUTINE LA05CD(A,Ind,Ia,N,Ip,Iw,W,G,U,Mm)
           IF ( ABS(A(kp))>=U*ABS(am) ) THEN
             IF ( ABS(am)<U*ABS(A(kp)) ) GOTO 120
             IF ( Iw(ipp,1)<=Iw(ir,1) ) GOTO 120
-          ENDIF
-        ENDIF
+          END IF
+        END IF
         ! PERFORM INTERCHANGE
         Iw(last1,3) = ipp
         Iw(ii,3) = ir
@@ -289,10 +289,10 @@ SUBROUTINE LA05CD(A,Ind,Ia,N,Ip,Iw,W,G,U,Mm)
         kj = Ip(jp,2)
         DO k = kj, Ia
           IF ( Ind(k,1)==ipp ) EXIT
-        ENDDO
+        END DO
         Ind(k,1) = Ind(kj,1)
         Ind(kj,1) = ipp
-        120        IF ( A(kp)==0.0D0 ) GOTO 200
+        120  IF ( A(kp)==0.0D0 ) GOTO 200
         IF ( ii/=last1 ) THEN
           am = -A(kr)/A(kp)
           ! COMPRESS ROW FILE UNLESS IT IS CERTAIN THAT THERE IS ROOM FOR NEW ROW.
@@ -301,7 +301,7 @@ SUBROUTINE LA05CD(A,Ind,Ia,N,Ip,Iw,W,G,U,Mm)
             CALL LA05ED(A,Ind(1,2),Ip,N,Iw,Ia,.TRUE.)
             kp = Ip(ipp,1)
             kr = Ip(ir,1)
-          ENDIF
+          END IF
           krl = kr + Iw(ir,1) - 1
           kq = kp + 1
           kpl = kp + Iw(ipp,1) - 1
@@ -310,8 +310,8 @@ SUBROUTINE LA05CD(A,Ind,Ia,N,Ip,Iw,W,G,U,Mm)
             DO k = kq, kpl
               j = Ind(k,2)
               W(j) = A(k)
-            ENDDO
-          ENDIF
+            END DO
+          END IF
           Ip(ir,1) = LROw + 1
           !
           ! TRANSFER MODIFIED ELEMENTS.
@@ -331,7 +331,7 @@ SUBROUTINE LA05CD(A,Ind,Ia,N,Ip,Iw,W,G,U,Mm)
                 Iw(j,2) = kl - k
                 DO kk = k, kl
                   IF ( Ind(kk,1)==ir ) EXIT
-                ENDDO
+                END DO
                 Ind(kk,1) = Ind(kl,1)
                 Ind(kl,1) = 0
               ELSE
@@ -339,10 +339,10 @@ SUBROUTINE LA05CD(A,Ind,Ia,N,Ip,Iw,W,G,U,Mm)
                 LROw = LROw + 1
                 A(LROw) = au
                 Ind(LROw,2) = j
-              ENDIF
+              END IF
               W(j) = 0.0D0
-            ENDDO
-          ENDIF
+            END DO
+          END IF
           !
           ! SCAN PIVOT ROW FOR FILLS.
           IF ( kq<=kpl ) THEN
@@ -364,12 +364,12 @@ SUBROUTINE LA05CD(A,Ind,Ia,N,Ip,Iw,W,G,U,Mm)
                 IF ( Ind(kl+1,1)==0 ) THEN
                   Ind(kl+1,1) = ir
                   GOTO 122
-                ENDIF
+                END IF
               ELSEIF ( LCOl+LENl<Ia ) THEN
                 LCOl = LCOl + 1
                 Ind(kl+1,1) = ir
                 GOTO 122
-              ENDIF
+              END IF
               ! NEW ENTRY HAS TO BE CREATED.
               IF ( LCOl+LENl+nz+1>=Ia ) THEN
                 ! COMPRESS COLUMN FILE IF THERE IS NOT ROOM FOR NEW ENTRY.
@@ -377,22 +377,22 @@ SUBROUTINE LA05CD(A,Ind,Ia,N,Ip,Iw,W,G,U,Mm)
                 CALL LA05ED(A,Ind,Ip(1,2),N,Iw(1,2),Ia,.FALSE.)
                 k = Ip(j,2)
                 kl = k + nz - 1
-              ENDIF
+              END IF
               ! TRANSFER OLD ENTRY INTO NEW.
               Ip(j,2) = LCOl + 1
               DO kk = k, kl
                 LCOl = LCOl + 1
                 Ind(LCOl,1) = Ind(kk,1)
                 Ind(kk,1) = 0
-              ENDDO
+              END DO
               ! ADD NEW ELEMENT.
               LCOl = LCOl + 1
               Ind(LCOl,1) = ir
-              122              G = MAX(G,ABS(au))
+              122  G = MAX(G,ABS(au))
               Iw(j,2) = nz + 1
-              124              W(j) = 0.0D0
-            ENDDO
-          ENDIF
+              124  W(j) = 0.0D0
+            END DO
+          END IF
           Iw(ir,1) = LROw + 1 - Ip(ir,1)
           !
           ! STORE MULTIPLIER
@@ -400,7 +400,7 @@ SUBROUTINE LA05CD(A,Ind,Ia,N,Ip,Iw,W,G,U,Mm)
             ! COMPRESS COL FILE IF NECESSARY.
             IF ( NCP>=mcp ) GOTO 300
             CALL LA05ED(A,Ind,Ip(1,2),N,Iw(1,2),Ia,.FALSE.)
-          ENDIF
+          END IF
           k = Ia - LENl
           LENl = LENl + 1
           A(k) = am
@@ -412,15 +412,15 @@ SUBROUTINE LA05CD(A,Ind,Ia,N,Ip,Iw,W,G,U,Mm)
           kl = kp + nz
           DO k = kp, kl
             IF ( Ind(k,1)==ir ) EXIT
-          ENDDO
+          END DO
           Ind(k,1) = Ind(kl,1)
           Iw(jp,2) = nz
           Ind(kl,1) = 0
           LENu = LENu - 1
-        ENDIF
-      ENDDO
-    ENDIF
-  ENDIF
+        END IF
+      END DO
+    END IF
+  END IF
   !
   ! CONSTRUCT COLUMN PERMUTATION AND STORE IT IN IW(.,4)
   DO ii = m, last
@@ -428,7 +428,7 @@ SUBROUTINE LA05CD(A,Ind,Ia,N,Ip,Iw,W,G,U,Mm)
     k = Ip(i,1)
     j = Ind(k,2)
     Iw(ii,4) = j
-  ENDDO
+  END DO
   RETURN
   !
   !     THE FOLLOWING INSTRUCTIONS IMPLEMENT THE FAILURE EXITS.
@@ -437,7 +437,7 @@ SUBROUTINE LA05CD(A,Ind,Ia,N,Ip,Iw,W,G,U,Mm)
   IF ( LP>0 ) THEN
     WRITE (xern1,'(I8)') Mm
     CALL XERMSG('SLATEC','LA05CD','SINGULAR MATRIX AFTER REPLACEMENT OF COLUMN.  INDEX = '//xern1,-6,1)
-  ENDIF
+  END IF
   G = -6.0D0
   RETURN
   !

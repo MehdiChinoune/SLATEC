@@ -189,7 +189,7 @@ SUBROUTINE PCHSP(Ic,Vc,N,X,F,D,Incfd,Wk,Nwk,Ierr)
     ELSE
       DO j = 2, N
         IF ( X(j)<=X(j-1) ) GOTO 20
-      ENDDO
+      END DO
       !
       ibeg = Ic(1)
       iend = Ic(2)
@@ -218,7 +218,7 @@ SUBROUTINE PCHSP(Ic,Vc,N,X,F,D,Incfd,Wk,Nwk,Ierr)
         DO j = 2, N
           Wk(1,j) = X(j) - X(j-1)
           Wk(2,j) = (F(1,j)-F(1,j-1))/Wk(1,j)
-        ENDDO
+        END DO
         !
         !  SET TO DEFAULT BOUNDARY CONDITIONS IF N IS TOO SMALL.
         !
@@ -236,13 +236,13 @@ SUBROUTINE PCHSP(Ic,Vc,N,X,F,D,Incfd,Wk,Nwk,Ierr)
             !           INDEX RUNS FROM IBEG DOWN TO 1.
             xtemp(j) = X(index)
             IF ( j<ibeg ) stemp(j) = Wk(2,index)
-          ENDDO
+          END DO
           !                 --------------------------------
           D(1,1) = PCHDF(ibeg,xtemp,stemp,Ierr)
           !                 --------------------------------
           IF ( Ierr/=0 ) GOTO 100
           ibeg = 1
-        ENDIF
+        END IF
         !
         IF ( (iend==1).OR.(iend==2) ) THEN
           D(1,N) = Vc(2)
@@ -253,13 +253,13 @@ SUBROUTINE PCHSP(Ic,Vc,N,X,F,D,Incfd,Wk,Nwk,Ierr)
             !           INDEX RUNS FROM N+1-IEND UP TO N.
             xtemp(j) = X(index)
             IF ( j<iend ) stemp(j) = Wk(2,index+1)
-          ENDDO
+          END DO
           !                 --------------------------------
           D(1,N) = PCHDF(iend,xtemp,stemp,Ierr)
           !                 --------------------------------
           IF ( Ierr/=0 ) GOTO 100
           iend = 1
-        ENDIF
+        END IF
         !
         ! --------------------( BEGIN CODING FROM CUBSPL )--------------------
         !
@@ -283,7 +283,7 @@ SUBROUTINE PCHSP(Ic,Vc,N,X,F,D,Incfd,Wk,Nwk,Ierr)
             Wk(1,1) = Wk(1,2) + Wk(1,3)
             D(1,1) = ((Wk(1,2)+two*Wk(1,1))*Wk(2,2)*Wk(1,3)+Wk(1,2)&
               **2*Wk(2,3))/Wk(1,1)
-          ENDIF
+          END IF
         ELSEIF ( ibeg==1 ) THEN
           !        SLOPE PRESCRIBED AT LEFT END.
           Wk(2,1) = one
@@ -293,7 +293,7 @@ SUBROUTINE PCHSP(Ic,Vc,N,X,F,D,Incfd,Wk,Nwk,Ierr)
           Wk(2,1) = two
           Wk(1,1) = one
           D(1,1) = three*Wk(2,2) - half*Wk(1,2)*D(1,1)
-        ENDIF
+        END IF
         !
         !  IF THERE ARE INTERIOR KNOTS, GENERATE THE CORRESPONDING EQUATIONS AND
         !  CARRY OUT THE FORWARD PASS OF GAUSS ELIMINATION, AFTER WHICH THE J-TH
@@ -306,8 +306,8 @@ SUBROUTINE PCHSP(Ic,Vc,N,X,F,D,Incfd,Wk,Nwk,Ierr)
             g = -Wk(1,j+1)/Wk(2,j-1)
             D(1,j) = g*D(1,j-1) + three*(Wk(1,j)*Wk(2,j+1)+Wk(1,j+1)*Wk(2,j) )
             Wk(2,j) = g*Wk(1,j-1) + two*(Wk(1,j)+Wk(1,j+1))
-          ENDDO
-        ENDIF
+          END DO
+        END IF
         !
         !  CONSTRUCT LAST EQUATION FROM SECOND BOUNDARY CONDITION, OF THE FORM
         !           (-G*WK(2,N-1))*S(N-1) + WK(2,N)*S(N) = D(1,N)
@@ -344,14 +344,14 @@ SUBROUTINE PCHSP(Ic,Vc,N,X,F,D,Incfd,Wk,Nwk,Ierr)
             IF ( Wk(2,N-1)==zero ) GOTO 50
             g = -g/Wk(2,N-1)
             Wk(2,N) = Wk(1,N-1)
-          ENDIF
+          END IF
           !
           !  COMPLETE FORWARD PASS OF GAUSS ELIMINATION.
           !
           Wk(2,N) = g*Wk(1,N-1) + Wk(2,N)
           IF ( Wk(2,N)==zero ) GOTO 50
           D(1,N) = (g*D(1,N-1)+D(1,N))/Wk(2,N)
-        ENDIF
+        END IF
         !
         !  CARRY OUT BACK SUBSTITUTION
         !
@@ -359,27 +359,27 @@ SUBROUTINE PCHSP(Ic,Vc,N,X,F,D,Incfd,Wk,Nwk,Ierr)
         DO j = nm1, 1, -1
           IF ( Wk(2,j)==zero ) GOTO 50
           D(1,j) = (D(1,j)-Wk(1,j)*D(1,j+1))/Wk(2,j)
-        ENDDO
+        END DO
         ! --------------------(  END  CODING FROM CUBSPL )--------------------
         !
         !  NORMAL RETURN.
         !
         RETURN
-      ENDIF
+      END IF
       !
       !     X-ARRAY NOT STRICTLY INCREASING.
-      20       Ierr = -3
+      20  Ierr = -3
       CALL XERMSG('SLATEC','PCHSP','X-ARRAY NOT STRICTLY INCREASING',Ierr,1)
       RETURN
-    ENDIF
+    END IF
     !
     !     SINGULAR SYSTEM.
     !   *** THEORETICALLY, THIS CAN ONLY OCCUR IF SUCCESSIVE X-VALUES   ***
     !   *** ARE EQUAL, WHICH SHOULD ALREADY HAVE BEEN CAUGHT (IERR=-3). ***
-    50     Ierr = -8
+    50  Ierr = -8
     CALL XERMSG('SLATEC','PCHSP','SINGULAR LINEAR SYSTEM',Ierr,1)
     RETURN
-  ENDIF
+  END IF
   !
   !     ERROR RETURN FROM PCHDF.
   !   *** THIS CASE SHOULD NEVER OCCUR ***

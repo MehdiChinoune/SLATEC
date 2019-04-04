@@ -41,8 +41,8 @@ SUBROUTINE INXCB(I,Ir,Idx,Idp)
     IF ( I-ipl<=NM ) THEN
       IF ( I+ipl>NM ) Idp = NM + ipl - I + 1
       RETURN
-    ENDIF
-  ENDIF
+    END IF
+  END IF
   Idp = 0
   RETURN
 END SUBROUTINE INXCB

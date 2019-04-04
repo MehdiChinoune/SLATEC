@@ -29,7 +29,7 @@ SUBROUTINE XPMUP(Nu1,Nu2,Mu1,Mu2,Pqa,Ipqa,Ierror)
   !           Corrected order of sections in prologue and added TYPE
   !           section.  (WRB)
   !   920127  Revised PURPOSE section of prologue.  (DWL)
-  
+
   INTEGER i, Ierror, Ipqa(*), iprod, j, k, l, mu, Mu1, Mu2, n
   REAL dmu, nu, Nu1, Nu2, Pqa(*), prod
   !* FIRST EXECUTABLE STATEMENT  XPMUP
@@ -48,8 +48,8 @@ SUBROUTINE XPMUP(Nu1,Nu2,Mu1,Mu2,Pqa,Ipqa,Ierror)
       !        INCREMENT EITHER MU OR NU AS APPROPRIATE.
       IF ( Nu2-Nu1>.5 ) nu = nu + 1.
       IF ( Mu2>Mu1 ) mu = mu + 1
-    ENDDO
-  ENDIF
+    END DO
+  END IF
   !
   !        TRANSFORM P(-MU,NU,X) TO P(MU,NU,X) USING
   !        P(MU,NU,X)=(NU-MU+1)*(NU-MU+2)*...*(NU+MU)*P(-MU,NU,X)*(-1)**MU
@@ -61,16 +61,16 @@ SUBROUTINE XPMUP(Nu1,Nu2,Mu1,Mu2,Pqa,Ipqa,Ierror)
     DO l = 1, k
       prod = prod*(dmu-nu-l)
       CALL XADJ(prod,iprod,Ierror)
-    ENDDO
+    END DO
     IF ( Ierror/=0 ) RETURN
-  ENDIF
+  END IF
   DO i = j, n
     IF ( mu/=0 ) THEN
       Pqa(i) = Pqa(i)*prod*(-1)**mu
       Ipqa(i) = Ipqa(i) + iprod
       CALL XADJ(Pqa(i),Ipqa(i),Ierror)
       IF ( Ierror/=0 ) RETURN
-    ENDIF
+    END IF
     IF ( Nu2-Nu1>.5 ) THEN
       prod = prod*(-dmu-nu-1.)/(dmu-nu-1.)
       CALL XADJ(prod,iprod,Ierror)
@@ -82,6 +82,6 @@ SUBROUTINE XPMUP(Nu1,Nu2,Mu1,Mu2,Pqa,Ipqa,Ierror)
       IF ( Ierror/=0 ) RETURN
       mu = mu + 1
       dmu = dmu + 1.
-    ENDIF
-  ENDDO
+    END IF
+  END DO
 END SUBROUTINE XPMUP

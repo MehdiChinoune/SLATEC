@@ -457,8 +457,8 @@ SUBROUTINE SNSQ(FCN,JAC,Iopt,N,X,Fvec,Fjac,Ldfjac,Xtol,Maxfev,Ml,Mu,&
   IF ( Mode==2 ) THEN
     DO j = 1, N
       IF ( Diag(j)<=zero ) GOTO 300
-    ENDDO
-  ENDIF
+    END DO
+  END IF
   !
   !     EVALUATE THE FUNCTION AT THE STARTING POINT
   !     AND CALCULATE ITS NORM.
@@ -496,7 +496,7 @@ SUBROUTINE SNSQ(FCN,JAC,Iopt,N,X,Fvec,Fjac,Ldfjac,Xtol,Maxfev,Ml,Mu,&
     !
     CALL JAC(N,X,Fvec,Fjac,Ldfjac,iflag)
     Njev = Njev + 1
-  ENDIF
+  END IF
   !
   IF ( iflag<0 ) GOTO 300
   !
@@ -512,37 +512,37 @@ SUBROUTINE SNSQ(FCN,JAC,Iopt,N,X,Fvec,Fjac,Ldfjac,Xtol,Maxfev,Ml,Mu,&
       DO j = 1, N
         Diag(j) = Wa2(j)
         IF ( Wa2(j)==zero ) Diag(j) = one
-      ENDDO
-    ENDIF
+      END DO
+    END IF
     !
     !        ON THE FIRST ITERATION, CALCULATE THE NORM OF THE SCALED X
     !        AND INITIALIZE THE STEP BOUND DELTA.
     !
     DO j = 1, N
       Wa3(j) = Diag(j)*X(j)
-    ENDDO
+    END DO
     xnorm = ENORM(N,Wa3)
     delta = Factor*xnorm
     IF ( delta==zero ) delta = Factor
-  ENDIF
+  END IF
   !
   !        FORM (Q TRANSPOSE)*FVEC AND STORE IN QTF.
   !
   DO i = 1, N
     Qtf(i) = Fvec(i)
-  ENDDO
+  END DO
   DO j = 1, N
     IF ( Fjac(j,j)/=zero ) THEN
       sum = zero
       DO i = j, N
         sum = sum + Fjac(i,j)*Qtf(i)
-      ENDDO
+      END DO
       temp = -sum/Fjac(j,j)
       DO i = j, N
         Qtf(i) = Qtf(i) + Fjac(i,j)*temp
-      ENDDO
-    ENDIF
-  ENDDO
+      END DO
+    END IF
+  END DO
   !
   !        COPY THE TRIANGULAR FACTOR OF THE QR FACTORIZATION INTO R.
   !
@@ -554,11 +554,11 @@ SUBROUTINE SNSQ(FCN,JAC,Iopt,N,X,Fvec,Fjac,Ldfjac,Xtol,Maxfev,Ml,Mu,&
       DO i = 1, jm1
         R(l) = Fjac(i,j)
         l = l + N - i
-      ENDDO
-    ENDIF
+      END DO
+    END IF
     R(l) = Wa1(j)
     IF ( Wa1(j)==zero ) sing = .TRUE.
-  ENDDO
+  END DO
   !
   !        ACCUMULATE THE ORTHOGONAL FACTOR IN FJAC.
   !
@@ -569,8 +569,8 @@ SUBROUTINE SNSQ(FCN,JAC,Iopt,N,X,Fvec,Fjac,Ldfjac,Xtol,Maxfev,Ml,Mu,&
   IF ( Mode/=2 ) THEN
     DO j = 1, N
       Diag(j) = MAX(Diag(j),Wa2(j))
-    ENDDO
-  ENDIF
+    END DO
+  END IF
   !
   !        BEGINNING OF THE INNER LOOP.
   !
@@ -582,7 +582,7 @@ SUBROUTINE SNSQ(FCN,JAC,Iopt,N,X,Fvec,Fjac,Ldfjac,Xtol,Maxfev,Ml,Mu,&
     iflag = 0
     IF ( MOD(iter-1,Nprint)==0 ) CALL FCN(N,X,Fvec,iflag)
     IF ( iflag<0 ) GOTO 300
-  ENDIF
+  END IF
   !
   !           DETERMINE THE DIRECTION P.
   !
@@ -594,7 +594,7 @@ SUBROUTINE SNSQ(FCN,JAC,Iopt,N,X,Fvec,Fjac,Ldfjac,Xtol,Maxfev,Ml,Mu,&
     Wa1(j) = -Wa1(j)
     Wa2(j) = X(j) + Wa1(j)
     Wa3(j) = Diag(j)*Wa1(j)
-  ENDDO
+  END DO
   pnorm = ENORM(N,Wa3)
   !
   !           ON THE FIRST ITERATION, ADJUST THE INITIAL STEP BOUND.
@@ -622,9 +622,9 @@ SUBROUTINE SNSQ(FCN,JAC,Iopt,N,X,Fvec,Fjac,Ldfjac,Xtol,Maxfev,Ml,Mu,&
       DO j = i, N
         sum = sum + R(l)*Wa1(j)
         l = l + 1
-      ENDDO
+      END DO
       Wa3(i) = Qtf(i) + sum
-    ENDDO
+    END DO
     temp = ENORM(N,Wa3)
     prered = zero
     IF ( temp<fnorm ) prered = one - (temp/fnorm)**2
@@ -646,7 +646,7 @@ SUBROUTINE SNSQ(FCN,JAC,Iopt,N,X,Fvec,Fjac,Ldfjac,Xtol,Maxfev,Ml,Mu,&
       ncsuc = 0
       ncfail = ncfail + 1
       delta = p5*delta
-    ENDIF
+    END IF
     !
     !           TEST FOR SUCCESSFUL ITERATION.
     !
@@ -658,11 +658,11 @@ SUBROUTINE SNSQ(FCN,JAC,Iopt,N,X,Fvec,Fjac,Ldfjac,Xtol,Maxfev,Ml,Mu,&
         X(j) = Wa2(j)
         Wa2(j) = Diag(j)*X(j)
         Fvec(j) = Wa4(j)
-      ENDDO
+      END DO
       xnorm = ENORM(N,Wa2)
       fnorm = fnorm1
       iter = iter + 1
-    ENDIF
+    END IF
     !
     !           DETERMINE THE PROGRESS OF THE ITERATION.
     !
@@ -695,11 +695,11 @@ SUBROUTINE SNSQ(FCN,JAC,Iopt,N,X,Fvec,Fjac,Ldfjac,Xtol,Maxfev,Ml,Mu,&
           sum = zero
           DO i = 1, N
             sum = sum + Fjac(i,j)*Wa4(i)
-          ENDDO
+          END DO
           Wa2(j) = (sum-Wa3(j))/pnorm
           Wa1(j) = Diag(j)*((Diag(j)*Wa1(j))/pnorm)
           IF ( ratio>=p0001 ) Qtf(j) = sum
-        ENDDO
+        END DO
         !
         !           COMPUTE THE QR FACTORIZATION OF THE UPDATED JACOBIAN.
         !
@@ -714,9 +714,9 @@ SUBROUTINE SNSQ(FCN,JAC,Iopt,N,X,Fvec,Fjac,Ldfjac,Xtol,Maxfev,Ml,Mu,&
         !        END OF THE OUTER LOOP.
         !
         GOTO 200
-      ENDIF
-    ENDIF
-  ENDIF
+      END IF
+    END IF
+  END IF
   !
   !     TERMINATION, EITHER NORMAL OR USER IMPOSED.
   !

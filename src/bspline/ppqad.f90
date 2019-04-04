@@ -57,7 +57,7 @@ SUBROUTINE PPQAD(Ldc,C,Xi,Lxi,K,X1,X2,Pquad)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   !
   INTEGER i, ii, il, ilo, il1, il2, im, K, Ldc, left, Lxi, mf1, mf2
   REAL a, aa, bb, C(Ldc,*), dx, flk, Pquad, q, s, ss(2), ta, tb, x, Xi(*), X1, X2
@@ -75,7 +75,7 @@ SUBROUTINE PPQAD(Ldc,C,Xi,Lxi,K,X1,X2,Pquad)
   ELSEIF ( Ldc<K ) THEN
     CALL XERMSG('SLATEC','PPQAD','LDC DOES NOT SATISFY LDC.GE.K',2,1)
     RETURN
-  ENDIF
+  END IF
   aa = MIN(X1,X2)
   bb = MAX(X1,X2)
   IF ( aa==bb ) RETURN
@@ -102,13 +102,13 @@ SUBROUTINE PPQAD(Ldc,C,Xi,Lxi,K,X1,X2,Pquad)
           s = s*dx/flk + C(im,left)
           im = im - 1
           flk = flk - 1.0E0
-        ENDDO
+        END DO
         ss(ii) = s*dx
-      ENDIF
+      END IF
       x = a
-    ENDDO
+    END DO
     q = q + (ss(1)-ss(2))
-  ENDDO
+  END DO
   IF ( X1>X2 ) q = -q
   Pquad = q
   RETURN

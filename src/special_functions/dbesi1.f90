@@ -62,7 +62,7 @@ REAL(8) FUNCTION DBESI1(X)
     xsml = SQRT(4.5D0*D1MACH(3))
     xmax = LOG(D1MACH(2))
     first = .FALSE.
-  ENDIF
+  END IF
   !
   y = ABS(X)
   IF ( y>3.0D0 ) THEN
@@ -71,7 +71,7 @@ REAL(8) FUNCTION DBESI1(X)
     !
     DBESI1 = EXP(y)*DBSI1E(X)
     RETURN
-  ENDIF
+  END IF
   !
   DBESI1 = 0.D0
   IF ( y==0.D0 ) RETURN

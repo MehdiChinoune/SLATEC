@@ -303,14 +303,14 @@ SUBROUTINE DBCG(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MTTVEC,MSOLVE,MTSOLV,Itol,&
   IF ( N<1 ) THEN
     Ierr = 3
     RETURN
-  ENDIF
+  END IF
   fuzz = D1MACH(3)
   tolmin = 500*fuzz
   fuzz = fuzz*fuzz
   IF ( Tol<tolmin ) THEN
     Tol = tolmin
     Ierr = 4
-  ENDIF
+  END IF
   !
   !         Calculate initial residual and pseudo-residual, and check
   !         stopping criterion.
@@ -318,7 +318,7 @@ SUBROUTINE DBCG(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MTTVEC,MSOLVE,MTSOLV,Itol,&
   DO i = 1, N
     R(i) = B(i) - R(i)
     Rr(i) = R(i)
-  ENDDO
+  END DO
   CALL MSOLVE(N,R,Z,Nelt,Ia,Ja,A,Isym,Rwork,Iwork)
   CALL MTSOLV(N,Rr,Zz,Nelt,Ia,Ja,A,Isym,Rwork,Iwork)
   !
@@ -336,7 +336,7 @@ SUBROUTINE DBCG(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MTTVEC,MSOLVE,MTSOLV,Itol,&
       IF ( ABS(bknum)<=fuzz ) THEN
         Ierr = 6
         RETURN
-      ENDIF
+      END IF
       IF ( Iter==1 ) THEN
         CALL DCOPY(N,Z,1,P,1)
         CALL DCOPY(N,Zz,1,Pp,1)
@@ -345,8 +345,8 @@ SUBROUTINE DBCG(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MTTVEC,MSOLVE,MTSOLV,Itol,&
         DO i = 1, N
           P(i) = Z(i) + bk*P(i)
           Pp(i) = Zz(i) + bk*Pp(i)
-        ENDDO
-      ENDIF
+        END DO
+      END IF
       bkden = bknum
       !
       !         Calculate coefficient AK, new iterate X, new residuals R and
@@ -357,7 +357,7 @@ SUBROUTINE DBCG(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MTTVEC,MSOLVE,MTSOLV,Itol,&
       IF ( ABS(akden)<=fuzz ) THEN
         Ierr = 6
         RETURN
-      ENDIF
+      END IF
       CALL DAXPY(N,ak,P,1,X,1)
       CALL DAXPY(N,-ak,Z,1,R,1)
       CALL MTTVEC(N,Pp,Zz,Nelt,Ia,Ja,A,Isym)
@@ -370,14 +370,14 @@ SUBROUTINE DBCG(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MTTVEC,MSOLVE,MTSOLV,Itol,&
         Ierr,Iunit,R,Z,P,Rr,Zz,Pp,Dz,Rwork,Iwork,ak,bk,bnrm,solnrm)/=0 )&
         RETURN
       !
-    ENDDO
+    END DO
     !
     !         *****   end of loop  *****
     !
     !         stopping criterion not satisfied.
     Iter = Itmax + 1
     Ierr = 2
-  ENDIF
+  END IF
   !
   !------------- LAST LINE OF DBCG FOLLOWS ----------------------------
   RETURN

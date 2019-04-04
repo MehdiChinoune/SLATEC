@@ -112,7 +112,7 @@ SUBROUTINE ORTHOL(A,M,N,Nrda,Iflag,Irank,Iscale,Diag,Kpivot,Scales,Cols,Cs)
       Cols(j) = SDOT(M,A(1,j),1,A(1,j),1)
       Cs(j) = Cols(j)
       anorm = anorm + Cols(j)
-    ENDDO
+    END DO
     !
     !     PERFORM COLUMN SCALING ON A WHEN SPECIFIED
     !
@@ -136,13 +136,13 @@ SUBROUTINE ORTHOL(A,M,N,Nrda,Iflag,Irank,Iscale,Diag,Kpivot,Scales,Cols,Cs)
           IF ( Cols(j)<sruro*Cs(j) ) THEN
             Cols(j) = SDOT(mk,A(k,j),1,A(k,j),1)
             Cs(j) = Cols(j)
-          ENDIF
+          END IF
           IF ( j/=k ) THEN
             IF ( sigma>=0.99*Cols(j) ) CYCLE
-          ENDIF
+          END IF
           sigma = Cols(j)
           jcol = j
-        ENDDO
+        END DO
         IF ( jcol/=k ) THEN
           !
           !        PERFORM COLUMN INTERCHANGE
@@ -162,9 +162,9 @@ SUBROUTINE ORTHOL(A,M,N,Nrda,Iflag,Irank,Iscale,Diag,Kpivot,Scales,Cols,Cs)
             asave = A(l,k)
             A(l,k) = A(l,jcol)
             A(l,jcol) = asave
-          ENDDO
-        ENDIF
-      ENDIF
+          END DO
+        END IF
+      END IF
       !
       !        CHECK RANK OF THE MATRIX
       !
@@ -184,10 +184,10 @@ SUBROUTINE ORTHOL(A,M,N,Nrda,Iflag,Irank,Iscale,Diag,Kpivot,Scales,Cols,Cs)
             as = SDOT(mk,A(k,k),1,A(k,j),1)/sad
             DO l = k, M
               A(l,j) = A(l,j) + as*A(l,k)
-            ENDDO
+            END DO
             Cols(j) = Cols(j) - A(k,j)**2
-          ENDDO
-        ENDIF
+          END DO
+        END IF
       ELSE
         !
         !        RANK DEFICIENT PROBLEM
@@ -196,10 +196,10 @@ SUBROUTINE ORTHOL(A,M,N,Nrda,Iflag,Irank,Iscale,Diag,Kpivot,Scales,Cols,Cs)
         CALL XERMSG('SLATEC','ORTHOL',&
           'RANK OF MATRIX IS LESS THAN THE NUMBER OF COLUMNS.',1,1)
         RETURN
-      ENDIF
-    ENDDO
+      END IF
+    END DO
     RETURN
-  ENDIF
+  END IF
   Iflag = 2
   CALL XERMSG('SLATEC','ORTHOL','INVALID INPUT PARAMETERS.',2,1)
   RETURN

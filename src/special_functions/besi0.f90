@@ -58,7 +58,7 @@ REAL FUNCTION BESI0(X)
     xsml = SQRT(4.5*R1MACH(3))
     xmax = LOG(R1MACH(2))
     first = .FALSE.
-  ENDIF
+  END IF
   !
   y = ABS(X)
   IF ( y>3.0 ) THEN
@@ -68,7 +68,7 @@ REAL FUNCTION BESI0(X)
     !
     BESI0 = EXP(y)*BESI0E(X)
     RETURN
-  ENDIF
+  END IF
   !
   BESI0 = 1.0
   IF ( y>xsml ) BESI0 = 2.75 + CSEVL(y*y/4.5-1.0,bi0cs,nti0)

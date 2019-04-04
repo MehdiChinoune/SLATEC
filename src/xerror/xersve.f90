@@ -107,7 +107,7 @@ SUBROUTINE XERSVE(Librar,Subrou,Messg,Kflag,Nerr,Level,Icount)
         WRITE (iunit,99002) libtab(i), subtab(i), mestab(i), nertab(i), &
           levtab(i), kount(i)
         99002 FORMAT (1X,A,3X,A,3X,A,3I10)
-      ENDDO
+      END DO
       !
       !           Print number of other errors.
       !
@@ -115,14 +115,14 @@ SUBROUTINE XERSVE(Librar,Subrou,Messg,Kflag,Nerr,Level,Icount)
       99003 FORMAT ('0OTHER ERRORS NOT INDIVIDUALLY TABULATED = ',I10)
       WRITE (iunit,99004)
       99004 FORMAT (1X)
-    ENDDO
+    END DO
     !
     !        Clear the error tables.
     !
     IF ( Kflag==0 ) THEN
       nmsg = 0
       kountx = 0
-    ENDIF
+    END IF
   ELSE
     !
     !        PROCESS A MESSAGE...
@@ -138,8 +138,8 @@ SUBROUTINE XERSVE(Librar,Subrou,Messg,Kflag,Nerr,Level,Icount)
         kount(i) = kount(i) + 1
         Icount = kount(i)
         RETURN
-      ENDIF
-    ENDDO
+      END IF
+    END DO
     !
     IF ( nmsg<LENTAB ) THEN
       !
@@ -159,7 +159,7 @@ SUBROUTINE XERSVE(Librar,Subrou,Messg,Kflag,Nerr,Level,Icount)
       !
       kountx = kountx + 1
       Icount = 0
-    ENDIF
-  ENDIF
+    END IF
+  END IF
   RETURN
 END SUBROUTINE XERSVE

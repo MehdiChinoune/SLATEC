@@ -103,11 +103,11 @@ SUBROUTINE DDAJAC(Neq,X,Y,Yprime,Delta,Cj,H,Ier,Wt,E,Wm,Iwm,RES,Ires,&
         delinv = 1.0D0/del
         DO l = 1, Neq
           Wm(nrow+l) = (E(l)-Delta(l))*delinv
-        ENDDO
+        END DO
         nrow = nrow + Neq
         Y(i) = ysave
         Yprime(i) = ypsave
-      ENDDO
+      END DO
     CASE (3)
       !
       !
@@ -120,7 +120,7 @@ SUBROUTINE DDAJAC(Neq,X,Y,Yprime,Delta,Cj,H,Ier,Wt,E,Wm,Iwm,RES,Ires,&
       lenpd = (2*Iwm(LML)+Iwm(LMU)+1)*Neq
       DO i = 1, lenpd
         Wm(npdm1+i) = 0.0D0
-      ENDDO
+      END DO
       CALL JAC(X,Y,Yprime,Wm(NPD),Cj,Rpar,Ipar)
       meband = 2*Iwm(LML) + Iwm(LMU) + 1
       !
@@ -151,7 +151,7 @@ SUBROUTINE DDAJAC(Neq,X,Y,Yprime,Delta,Cj,H,Ier,Wt,E,Wm,Iwm,RES,Ires,&
           del = (Y(n)+del) - Y(n)
           Y(n) = Y(n) + del
           Yprime(n) = Yprime(n) + Cj*del
-        ENDDO
+        END DO
         CALL RES(X,Y,Yprime,E,Ires,Rpar,Ipar)
         IF ( Ires<0 ) RETURN
         DO n = j, Neq, mband
@@ -167,9 +167,9 @@ SUBROUTINE DDAJAC(Neq,X,Y,Yprime,Delta,Cj,H,Ier,Wt,E,Wm,Iwm,RES,Ires,&
           ii = n*meb1 - Iwm(LML) + npdm1
           DO i = i1, i2
             Wm(ii+i) = (E(i)-Delta(i))*delinv
-          ENDDO
-        ENDDO
-      ENDDO
+          END DO
+        END DO
+      END DO
       CALL DGBFA(Wm(NPD),meband,Neq,Iwm(LML),Iwm(LMU),Iwm(LIPVT),Ier)
       RETURN
     CASE DEFAULT
@@ -179,7 +179,7 @@ SUBROUTINE DDAJAC(Neq,X,Y,Yprime,Delta,Cj,H,Ier,Wt,E,Wm,Iwm,RES,Ires,&
       lenpd = Neq*Neq
       DO i = 1, lenpd
         Wm(npdm1+i) = 0.0D0
-      ENDDO
+      END DO
       CALL JAC(X,Y,Yprime,Wm(NPD),Cj,Rpar,Ipar)
   END SELECT
   !

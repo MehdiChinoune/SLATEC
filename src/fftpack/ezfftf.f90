@@ -80,7 +80,7 @@ SUBROUTINE EZFFTF(N,R,Azero,A,B,Wsave)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   REAL A(*), Azero, B(*), cf, cfm, R(*), Wsave(*)
   INTEGER i, N, ns2, ns2m
   !* FIRST EXECUTABLE STATEMENT  EZFFTF
@@ -94,7 +94,7 @@ SUBROUTINE EZFFTF(N,R,Azero,A,B,Wsave)
   ELSE
     DO i = 1, N
       Wsave(i) = R(i)
-    ENDDO
+    END DO
     CALL RFFTF(N,Wsave,Wsave(N+1))
     cf = 2./N
     cfm = -cf
@@ -104,7 +104,7 @@ SUBROUTINE EZFFTF(N,R,Azero,A,B,Wsave)
     DO i = 1, ns2m
       A(i) = cf*Wsave(2*i)
       B(i) = cfm*Wsave(2*i+1)
-    ENDDO
+    END DO
     IF ( MOD(N,2)==0 ) A(ns2) = .5*cf*Wsave(N)
-  ENDIF
+  END IF
 END SUBROUTINE EZFFTF

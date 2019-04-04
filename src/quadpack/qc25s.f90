@@ -156,7 +156,7 @@ SUBROUTINE QC25S(F,A,B,Bl,Br,Alfa,Beta,Ri,Rj,Rg,Rh,Result,Abserr,Resasc,&
       isym = 26 - i
       fval(i) = F(u+centr)*(fix-u)**Beta
       fval(isym) = F(centr-u)*(fix+u)**Beta
-    ENDDO
+    END DO
     factor = hlgth**(Alfa+0.1E+01)
     Result = 0.0E+00
     Abserr = 0.0E+00
@@ -176,7 +176,7 @@ SUBROUTINE QC25S(F,A,B,Bl,Br,Alfa,Beta,Ri,Rj,Rg,Rh,Result,Abserr,Resasc,&
         isym = 26 - i
         fval(i) = fval(i)*LOG(fix-u)
         fval(isym) = fval(isym)*LOG(fix+u)
-      ENDDO
+      END DO
       CALL QCHEB(x,fval,cheb12,cheb24)
       !
       !           INTEGR = 3  (OR 4)
@@ -184,10 +184,10 @@ SUBROUTINE QC25S(F,A,B,Bl,Br,Alfa,Beta,Ri,Rj,Rg,Rh,Result,Abserr,Resasc,&
       DO i = 1, 13
         res12 = res12 + cheb12(i)*Ri(i)
         res24 = res24 + cheb24(i)*Ri(i)
-      ENDDO
+      END DO
       DO i = 14, 25
         res24 = res24 + cheb24(i)*Ri(i)
-      ENDDO
+      END DO
       IF ( Integr/=3 ) THEN
         !
         !           INTEGR = 4
@@ -200,11 +200,11 @@ SUBROUTINE QC25S(F,A,B,Bl,Br,Alfa,Beta,Ri,Rj,Rg,Rh,Result,Abserr,Resasc,&
         DO i = 1, 13
           res12 = res12 + cheb12(i)*Rg(i)
           res24 = res24 + cheb24(i)*Rg(i)
-        ENDDO
+        END DO
         DO i = 14, 25
           res24 = res24 + cheb24(i)*Rg(i)
-        ENDDO
-      ENDIF
+        END DO
+      END IF
     ELSE
       CALL QCHEB(x,fval,cheb12,cheb24)
       !
@@ -213,10 +213,10 @@ SUBROUTINE QC25S(F,A,B,Bl,Br,Alfa,Beta,Ri,Rj,Rg,Rh,Result,Abserr,Resasc,&
       DO i = 1, 13
         res12 = res12 + cheb12(i)*Ri(i)
         res24 = res24 + cheb24(i)*Ri(i)
-      ENDDO
+      END DO
       DO i = 14, 25
         res24 = res24 + cheb24(i)*Ri(i)
-      ENDDO
+      END DO
       IF ( Integr/=1 ) THEN
         !
         !           INTEGR = 2
@@ -229,12 +229,12 @@ SUBROUTINE QC25S(F,A,B,Bl,Br,Alfa,Beta,Ri,Rj,Rg,Rh,Result,Abserr,Resasc,&
         DO i = 1, 13
           res12 = res12 + cheb12(i)*Rg(i)
           res24 = res12 + cheb24(i)*Rg(i)
-        ENDDO
+        END DO
         DO i = 14, 25
           res24 = res24 + cheb24(i)*Rg(i)
-        ENDDO
-      ENDIF
-    ENDIF
+        END DO
+      END IF
+    END IF
     Result = (Result+res24)*factor
     Abserr = (Abserr+ABS(res24-res12))*factor
   ELSEIF ( Br==B.AND.(Beta/=0.0E+00.OR.Integr==3.OR.Integr==4) ) THEN
@@ -258,7 +258,7 @@ SUBROUTINE QC25S(F,A,B,Bl,Br,Alfa,Beta,Ri,Rj,Rg,Rh,Result,Abserr,Resasc,&
       isym = 26 - i
       fval(i) = F(u+centr)*(fix+u)**Alfa
       fval(isym) = F(centr-u)*(fix-u)**Alfa
-    ENDDO
+    END DO
     factor = hlgth**(Beta+0.1E+01)
     Result = 0.0E+00
     Abserr = 0.0E+00
@@ -278,7 +278,7 @@ SUBROUTINE QC25S(F,A,B,Bl,Br,Alfa,Beta,Ri,Rj,Rg,Rh,Result,Abserr,Resasc,&
         isym = 26 - i
         fval(i) = fval(i)*LOG(fix+u)
         fval(isym) = fval(isym)*LOG(fix-u)
-      ENDDO
+      END DO
       CALL QCHEB(x,fval,cheb12,cheb24)
       !
       !           INTEGR = 2  (OR 4)
@@ -286,10 +286,10 @@ SUBROUTINE QC25S(F,A,B,Bl,Br,Alfa,Beta,Ri,Rj,Rg,Rh,Result,Abserr,Resasc,&
       DO i = 1, 13
         res12 = res12 + cheb12(i)*Rj(i)
         res24 = res24 + cheb24(i)*Rj(i)
-      ENDDO
+      END DO
       DO i = 14, 25
         res24 = res24 + cheb24(i)*Rj(i)
-      ENDDO
+      END DO
       IF ( Integr/=2 ) THEN
         dc = LOG(Br-Bl)
         Result = res24*dc
@@ -302,11 +302,11 @@ SUBROUTINE QC25S(F,A,B,Bl,Br,Alfa,Beta,Ri,Rj,Rg,Rh,Result,Abserr,Resasc,&
         DO i = 1, 13
           res12 = res12 + cheb12(i)*Rh(i)
           res24 = res24 + cheb24(i)*Rh(i)
-        ENDDO
+        END DO
         DO i = 14, 25
           res24 = res24 + cheb24(i)*Rh(i)
-        ENDDO
-      ENDIF
+        END DO
+      END IF
     ELSE
       !
       !           INTEGR = 1  (OR 3)
@@ -315,10 +315,10 @@ SUBROUTINE QC25S(F,A,B,Bl,Br,Alfa,Beta,Ri,Rj,Rg,Rh,Result,Abserr,Resasc,&
       DO i = 1, 13
         res12 = res12 + cheb12(i)*Rj(i)
         res24 = res24 + cheb24(i)*Rj(i)
-      ENDDO
+      END DO
       DO i = 14, 25
         res24 = res24 + cheb24(i)*Rj(i)
-      ENDDO
+      END DO
       IF ( Integr/=1 ) THEN
         !
         !           INTEGR = 3
@@ -331,12 +331,12 @@ SUBROUTINE QC25S(F,A,B,Bl,Br,Alfa,Beta,Ri,Rj,Rg,Rh,Result,Abserr,Resasc,&
         DO i = 1, 13
           res12 = res12 + cheb12(i)*Rh(i)
           res24 = res24 + cheb24(i)*Rh(i)
-        ENDDO
+        END DO
         DO i = 14, 25
           res24 = res24 + cheb24(i)*Rh(i)
-        ENDDO
-      ENDIF
-    ENDIF
+        END DO
+      END IF
+    END IF
     Result = (Result+res24)*factor
     Abserr = (Abserr+ABS(res24-res12))*factor
   ELSE
@@ -347,5 +347,5 @@ SUBROUTINE QC25S(F,A,B,Bl,Br,Alfa,Beta,Ri,Rj,Rg,Rh,Result,Abserr,Resasc,&
     !
     CALL QK15W(F,QWGTS,A,B,Alfa,Beta,Integr,Bl,Br,Result,Abserr,resabs,Resasc)
     Nev = 15
-  ENDIF
+  END IF
 END SUBROUTINE QC25S

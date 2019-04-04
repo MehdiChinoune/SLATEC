@@ -56,9 +56,9 @@ SUBROUTINE POISN2(M,N,Istag,Mixbnd,A,Bb,C,Q,Idimq,B,B2,B3,W,W2,W3,D,Tcos,P)
   IF ( Istag/=2 ) THEN
     DO i = 1, mr
       Q(i,N) = .5*Q(i,N)
-    ENDDO
+    END DO
     IF ( Mixbnd==2 ) GOTO 100
-  ENDIF
+  END IF
   IF ( N<=3 ) GOTO 200
   100  jr = 2*i2r
   nrod = 1
@@ -68,7 +68,7 @@ SUBROUTINE POISN2(M,N,Istag,Mixbnd,A,Bb,C,Q,Idimq,B,B2,B3,W,W2,W3,D,Tcos,P)
     nrod = 1 - nrod
   ELSE
     jstart = 1
-  ENDIF
+  END IF
   jstop = nlast - jr
   IF ( nrod==0 ) jstop = jstop - i2r
   CALL COSGEN(i2r,1,0.5,0.0,Tcos)
@@ -88,35 +88,35 @@ SUBROUTINE POISN2(M,N,Istag,Mixbnd,A,Bb,C,Q,Idimq,B,B2,B3,W,W2,W3,D,Tcos,P)
         jm1 = jp1
         jm2 = jp2
         jm3 = jp3
-      ENDIF
+      END IF
       IF ( i2r/=1 ) THEN
         DO i = 1, mr
           fi = Q(i,j)
           Q(i,j) = Q(i,j) - Q(i,jm1) - Q(i,jp1) + Q(i,jm2) + Q(i,jp2)
           B(i) = fi + Q(i,j) - Q(i,jm3) - Q(i,jp3)
-        ENDDO
+        END DO
       ELSE
         IF ( j==1 ) jm2 = jp2
         DO i = 1, mr
           B(i) = 2.*Q(i,j)
           Q(i,j) = Q(i,jm2) + Q(i,jp2)
-        ENDDO
-      ENDIF
+        END DO
+      END IF
       CALL TRIX(i2r,0,mr,A,Bb,C,B,Tcos,D,W)
       DO i = 1, mr
         Q(i,j) = Q(i,j) + B(i)
-      ENDDO
+      END DO
       !
       !     END OF REDUCTION FOR REGULAR UNKNOWNS.
       !
-    ENDDO
+    END DO
     !
     !     BEGIN SPECIAL REDUCTION FOR LAST UNKNOWN.
     !
     j = jstop + jr
   ELSE
     j = jr
-  ENDIF
+  END IF
   nlast = j
   jm1 = j - i2rby2
   jm2 = j - i2r
@@ -130,17 +130,17 @@ SUBROUTINE POISN2(M,N,Istag,Mixbnd,A,Bb,C,Q,Idimq,B,B2,B3,W,W2,W3,D,Tcos,P)
     IF ( i2r/=1 ) THEN
       DO i = 1, mr
         B(i) = Q(i,j) + .5*(Q(i,jm2)-Q(i,jm1)-Q(i,jm3))
-      ENDDO
+      END DO
       IF ( nrodpr/=0 ) THEN
         DO i = 1, mr
           B(i) = B(i) + Q(i,jp2) - Q(i,jp1)
-        ENDDO
+        END DO
       ELSE
         DO i = 1, mr
           ii = ip + i
           B(i) = B(i) + P(ii)
-        ENDDO
-      ENDIF
+        END DO
+      END IF
       CALL TRIX(i2r,0,mr,A,Bb,C,B,Tcos,D,W)
       ip = ip + mr
       ipstor = MAX(ipstor,ip+mr)
@@ -148,34 +148,34 @@ SUBROUTINE POISN2(M,N,Istag,Mixbnd,A,Bb,C,Q,Idimq,B,B2,B3,W,W2,W3,D,Tcos,P)
         ii = ip + i
         P(ii) = B(i) + .5*(Q(i,j)-Q(i,jm1)-Q(i,jp1))
         B(i) = P(ii) + Q(i,jp2)
-      ENDDO
+      END DO
       IF ( lr==0 ) THEN
         DO i = 1, i2r
           ii = kr + i
           Tcos(ii) = Tcos(i)
-        ENDDO
+        END DO
       ELSE
         CALL COSGEN(lr,1,0.5,fden,Tcos(i2r+1))
         CALL S1MERG(Tcos,0,i2r,i2r,lr,kr)
-      ENDIF
+      END IF
       CALL COSGEN(kr,1,0.5,fden,Tcos)
       IF ( lr/=0 ) THEN
         CALL TRIX(kr,kr,mr,A,Bb,C,B,Tcos,D,W)
       ELSEIF ( Istag==1 ) THEN
         DO i = 1, mr
           B(i) = fistag*B(i)
-        ENDDO
+        END DO
       ELSE
         CALL TRIX(kr,kr,mr,A,Bb,C,B,Tcos,D,W)
-      ENDIF
+      END IF
       DO i = 1, mr
         ii = ip + i
         Q(i,j) = Q(i,jm2) + P(ii) + B(i)
-      ENDDO
+      END DO
     ELSE
       DO i = 1, mr
         B(i) = Q(i,j)
-      ENDDO
+      END DO
       CALL TRIX(1,0,mr,A,Bb,C,B,Tcos,D,W)
       ip = 0
       ipstor = mr
@@ -183,20 +183,20 @@ SUBROUTINE POISN2(M,N,Istag,Mixbnd,A,Bb,C,Q,Idimq,B,B2,B3,W,W2,W3,D,Tcos,P)
         DO i = 1, mr
           P(i) = B(i)
           Q(i,j) = Q(i,jm2) + 2.*Q(i,jp2) + 3.*B(i)
-        ENDDO
+        END DO
       ELSE
         DO i = 1, mr
           P(i) = B(i)
           B(i) = B(i) + Q(i,N)
-        ENDDO
+        END DO
         Tcos(1) = 1.
         Tcos(2) = 0.
         CALL TRIX(1,1,mr,A,Bb,C,B,Tcos,D,W)
         DO i = 1, mr
           Q(i,j) = Q(i,jm2) + P(i) + B(i)
-        ENDDO
-      ENDIF
-    ENDIF
+        END DO
+      END IF
+    END IF
     lr = kr
     kr = kr + jr
   ELSE
@@ -206,50 +206,50 @@ SUBROUTINE POISN2(M,N,Istag,Mixbnd,A,Bb,C,Q,Idimq,B,B2,B3,W,W2,W3,D,Tcos,P)
     IF ( i2r/=1 ) THEN
       DO i = 1, mr
         B(i) = Q(i,j) + .5*(Q(i,jm2)-Q(i,jm1)-Q(i,jm3))
-      ENDDO
+      END DO
       IF ( nrodpr/=0 ) THEN
         DO i = 1, mr
           Q(i,j) = Q(i,j) - Q(i,jm1) + Q(i,jm2)
-        ENDDO
+        END DO
       ELSE
         DO i = 1, mr
           ii = ip + i
           Q(i,j) = Q(i,jm2) + P(ii)
-        ENDDO
+        END DO
         ip = ip - mr
-      ENDIF
+      END IF
       IF ( lr==0 ) THEN
         DO i = 1, mr
           B(i) = fistag*B(i)
-        ENDDO
+        END DO
       ELSE
         CALL COSGEN(lr,1,0.5,fden,Tcos(kr+1))
-      ENDIF
+      END IF
     ELSE
       DO i = 1, mr
         B(i) = fistag*Q(i,j)
         Q(i,j) = Q(i,jm2)
-      ENDDO
-    ENDIF
+      END DO
+    END IF
     CALL COSGEN(kr,1,0.5,fden,Tcos)
     CALL TRIX(kr,lr,mr,A,Bb,C,B,Tcos,D,W)
     DO i = 1, mr
       Q(i,j) = Q(i,j) + B(i)
-    ENDDO
+    END DO
     kr = kr + i2r
-  ENDIF
+  END IF
   IF ( Mixbnd==2 ) THEN
     nr = nlast/jr
     IF ( nr<=1 ) THEN
       DO i = 1, mr
         B(i) = Q(i,nlast)
-      ENDDO
+      END DO
       GOTO 500
-    ENDIF
+    END IF
   ELSE
     nr = (nlast-1)/jr + 1
     IF ( nr<=3 ) GOTO 200
-  ENDIF
+  END IF
   i2r = jr
   nrodpr = nrod
   GOTO 100
@@ -271,7 +271,7 @@ SUBROUTINE POISN2(M,N,Istag,Mixbnd,A,Bb,C,Q,Idimq,B,B2,B3,W,W2,W3,D,Tcos,P)
         B(i) = Q(i,1) + 2.*P(ii)
         Q(i,1) = .5*Q(i,1) - Q(i,jm1)
         B2(i) = 2.*(Q(i,1)+Q(i,nlast))
-      ENDDO
+      END DO
       k(1) = kr + jr - 1
       Tcos(k(1)+1) = -2.
       k(4) = k(1) + 3 - Istag
@@ -288,34 +288,34 @@ SUBROUTINE POISN2(M,N,Istag,Mixbnd,A,Bb,C,Q,Idimq,B,B2,B3,W,W2,W3,D,Tcos,P)
       CALL TRI3(mr,A,Bb,C,k,B,B2,B3,Tcos,D,W,W2,W3)
       DO i = 1, mr
         B(i) = B(i) + B2(i)
-      ENDDO
+      END DO
       Tcos(1) = 2.
       CALL TRIX(1,0,mr,A,Bb,C,B,Tcos,D,W)
       DO i = 1, mr
         Q(i,1) = Q(i,1) + B(i)
-      ENDDO
+      END DO
     ELSE
       !
       !     CASE  N = 2
       !
       DO i = 1, mr
         B(i) = Q(i,1)
-      ENDDO
+      END DO
       Tcos(1) = 0.
       CALL TRIX(1,0,mr,A,Bb,C,B,Tcos,D,W)
       DO i = 1, mr
         Q(i,1) = B(i)
         B(i) = 2.*(Q(i,2)+B(i))*fistag
-      ENDDO
+      END DO
       Tcos(1) = -fistag
       Tcos(2) = 2.
       CALL TRIX(2,0,mr,A,Bb,C,B,Tcos,D,W)
       DO i = 1, mr
         Q(i,1) = Q(i,1) + B(i)
-      ENDDO
+      END DO
       jr = 1
       i2r = 0
-    ENDIF
+    END IF
     GOTO 400
   ELSE
     IF ( lr==0 ) THEN
@@ -326,32 +326,32 @@ SUBROUTINE POISN2(M,N,Istag,Mixbnd,A,Bb,C,Q,Idimq,B,B2,B3,W,W2,W3,D,Tcos,P)
         IF ( Istag/=2 ) THEN
           DO i = 1, mr
             B(i) = Q(i,j) + .5*Q(i,1) - Q(i,jm1) + Q(i,nlast) - Q(i,jm2)
-          ENDDO
+          END DO
           CALL COSGEN(jr,1,0.5,0.0,Tcos)
           CALL TRIX(jr,0,mr,A,Bb,C,B,Tcos,D,W)
           DO i = 1, mr
             Q(i,j) = .5*(Q(i,j)-Q(i,jm1)-Q(i,jp1)) + B(i)
             B(i) = Q(i,1) + 2.*Q(i,nlast) + 4.*Q(i,j)
-          ENDDO
+          END DO
           jr2 = 2*jr
           CALL COSGEN(jr,1,0.0,0.0,Tcos)
           DO i = 1, jr
             i1 = jr + i
             i2 = jr + 1 - i
             Tcos(i1) = -Tcos(i2)
-          ENDDO
+          END DO
           CALL TRIX(jr2,0,mr,A,Bb,C,B,Tcos,D,W)
           DO i = 1, mr
             Q(i,j) = Q(i,j) + B(i)
             B(i) = Q(i,1) + 2.*Q(i,j)
-          ENDDO
+          END DO
           CALL COSGEN(jr,1,0.5,0.0,Tcos)
           CALL TRIX(jr,0,mr,A,Bb,C,B,Tcos,D,W)
           DO i = 1, mr
             Q(i,1) = .5*Q(i,1) - Q(i,jm1) + B(i)
-          ENDDO
+          END DO
           GOTO 400
-        ENDIF
+        END IF
         !
         !     CASE N = 3.
         !
@@ -364,7 +364,7 @@ SUBROUTINE POISN2(M,N,Istag,Mixbnd,A,Bb,C,Q,Idimq,B,B2,B3,W,W2,W3,D,Tcos,P)
           Q(i,2) = 0.
           B2(i) = Q(i,3)
           B3(i) = Q(i,1)
-        ENDDO
+        END DO
         jr = 1
         i2r = 0
         j = 2
@@ -372,13 +372,13 @@ SUBROUTINE POISN2(M,N,Istag,Mixbnd,A,Bb,C,Q,Idimq,B,B2,B3,W,W2,W3,D,Tcos,P)
       ELSE
         DO i = 1, mr
           B(i) = Q(i,2)
-        ENDDO
+        END DO
         Tcos(1) = 0.
         CALL TRIX(1,0,mr,A,Bb,C,B,Tcos,D,W)
         DO i = 1, mr
           Q(i,2) = B(i)
           B(i) = 4.*B(i) + Q(i,1) + 2.*Q(i,3)
-        ENDDO
+        END DO
         Tcos(1) = -2.
         Tcos(2) = 2.
         i1 = 2
@@ -387,37 +387,37 @@ SUBROUTINE POISN2(M,N,Istag,Mixbnd,A,Bb,C,Q,Idimq,B,B2,B3,W,W2,W3,D,Tcos,P)
         DO i = 1, mr
           Q(i,2) = Q(i,2) + B(i)
           B(i) = Q(i,1) + 2.*Q(i,2)
-        ENDDO
+        END DO
         Tcos(1) = 0.
         CALL TRIX(1,0,mr,A,Bb,C,B,Tcos,D,W)
         DO i = 1, mr
           Q(i,1) = B(i)
-        ENDDO
+        END DO
         jr = 1
         i2r = 0
         GOTO 400
-      ENDIF
-    ENDIF
+      END IF
+    END IF
     DO i = 1, mr
       B(i) = .5*Q(i,1) - Q(i,jm1) + Q(i,j)
-    ENDDO
+    END DO
     IF ( nrod/=0 ) THEN
       DO i = 1, mr
         B(i) = B(i) + Q(i,nlast) - Q(i,jm2)
-      ENDDO
+      END DO
     ELSE
       DO i = 1, mr
         ii = ip + i
         B(i) = B(i) + P(ii)
-      ENDDO
-    ENDIF
+      END DO
+    END IF
     DO i = 1, mr
       t = .5*(Q(i,j)-Q(i,jm1)-Q(i,jp1))
       Q(i,j) = t
       B2(i) = Q(i,nlast) + t
       B3(i) = Q(i,1) + 2.*t
-    ENDDO
-  ENDIF
+    END DO
+  END IF
   300  k(1) = kr + 2*jr - 1
   k(2) = kr + jr
   Tcos(k(1)+1) = -2.
@@ -435,64 +435,64 @@ SUBROUTINE POISN2(M,N,Istag,Mixbnd,A,Bb,C,Q,Idimq,B,B2,B3,W,W2,W3,D,Tcos,P)
     CALL COSGEN(lr,1,0.5,fden,Tcos(k(4)))
     CALL S1MERG(Tcos,k(3),jr,k(3)+jr,lr,k(3)-lr)
     CALL COSGEN(kr,1,0.5,fden,Tcos(k(4)))
-  ENDIF
+  END IF
   k(3) = kr
   k(4) = kr
   CALL TRI3(mr,A,Bb,C,k,B,B2,B3,Tcos,D,W,W2,W3)
   DO i = 1, mr
     B(i) = B(i) + B2(i) + B3(i)
-  ENDDO
+  END DO
   Tcos(1) = 2.
   CALL TRIX(1,0,mr,A,Bb,C,B,Tcos,D,W)
   DO i = 1, mr
     Q(i,j) = Q(i,j) + B(i)
     B(i) = Q(i,1) + 2.*Q(i,j)
-  ENDDO
+  END DO
   CALL COSGEN(jr,1,0.5,0.0,Tcos)
   CALL TRIX(jr,0,mr,A,Bb,C,B,Tcos,D,W)
   IF ( jr/=1 ) THEN
     DO i = 1, mr
       Q(i,1) = .5*Q(i,1) - Q(i,jm1) + B(i)
-    ENDDO
+    END DO
   ELSE
     DO i = 1, mr
       Q(i,1) = B(i)
-    ENDDO
-  ENDIF
+    END DO
+  END IF
   !
   !     START BACK SUBSTITUTION.
   !
   400  j = nlast - jr
   DO i = 1, mr
     B(i) = Q(i,nlast) + Q(i,j)
-  ENDDO
+  END DO
   500  jm2 = nlast - i2r
   IF ( jr==1 ) THEN
     DO i = 1, mr
       Q(i,nlast) = 0.
-    ENDDO
+    END DO
   ELSEIF ( nrod/=0 ) THEN
     DO i = 1, mr
       Q(i,nlast) = Q(i,nlast) - Q(i,jm2)
-    ENDDO
+    END DO
   ELSE
     DO i = 1, mr
       ii = ip + i
       Q(i,nlast) = P(ii)
-    ENDDO
+    END DO
     ip = ip - mr
-  ENDIF
+  END IF
   CALL COSGEN(kr,1,0.5,fden,Tcos)
   CALL COSGEN(lr,1,0.5,fden,Tcos(kr+1))
   IF ( lr==0 ) THEN
     DO i = 1, mr
       B(i) = fistag*B(i)
-    ENDDO
-  ENDIF
+    END DO
+  END IF
   CALL TRIX(kr,lr,mr,A,Bb,C,B,Tcos,D,W)
   DO i = 1, mr
     Q(i,nlast) = Q(i,nlast) + B(i)
-  ENDDO
+  END DO
   nlastp = nlast
   DO
     jstep = jr
@@ -509,7 +509,7 @@ SUBROUTINE POISN2(M,N,Istag,Mixbnd,A,Bb,C,Q,Idimq,B,B2,B3,W,W2,W3,D,Tcos,P)
         jstart = jr
       ELSE
         jstart = 1 + jr
-      ENDIF
+      END IF
       kr = kr - jr
       IF ( nlast+jr>N ) THEN
         jstop = nlast - jr
@@ -517,7 +517,7 @@ SUBROUTINE POISN2(M,N,Istag,Mixbnd,A,Bb,C,Q,Idimq,B,B2,B3,W,W2,W3,D,Tcos,P)
         kr = kr - jr
         nlast = nlast + jr
         jstop = nlast - jstep
-      ENDIF
+      END IF
       lr = kr - jr
       CALL COSGEN(jr,1,0.5,0.0,Tcos)
       DO j = jstart, jstop, jstep
@@ -526,31 +526,31 @@ SUBROUTINE POISN2(M,N,Istag,Mixbnd,A,Bb,C,Q,Idimq,B,B2,B3,W,W2,W3,D,Tcos,P)
         IF ( j/=jr ) THEN
           DO i = 1, mr
             B(i) = Q(i,j) + Q(i,jm2) + Q(i,jp2)
-          ENDDO
+          END DO
         ELSE
           DO i = 1, mr
             B(i) = Q(i,j) + Q(i,jp2)
-          ENDDO
-        ENDIF
+          END DO
+        END IF
         IF ( jr/=1 ) THEN
           jm1 = j - i2r
           jp1 = j + i2r
           DO i = 1, mr
             Q(i,j) = .5*(Q(i,j)-Q(i,jm1)-Q(i,jp1))
-          ENDDO
+          END DO
         ELSE
           DO i = 1, mr
             Q(i,j) = 0.
-          ENDDO
-        ENDIF
+          END DO
+        END IF
         CALL TRIX(jr,0,mr,A,Bb,C,B,Tcos,D,W)
         DO i = 1, mr
           Q(i,j) = Q(i,j) + B(i)
-        ENDDO
-      ENDDO
+        END DO
+      END DO
       nrod = 1
       IF ( nlast+i2r<=N ) nrod = 0
       IF ( nlastp/=nlast ) GOTO 400
-    ENDIF
-  ENDDO
+    END IF
+  END DO
 END SUBROUTINE POISN2

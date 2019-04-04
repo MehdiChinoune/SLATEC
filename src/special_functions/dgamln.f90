@@ -121,9 +121,9 @@ REAL(8) FUNCTION DGAMLN(Z,Ierr)
         IF ( nz<=100 ) THEN
           DGAMLN = gln(nz)
           RETURN
-        ENDIF
-      ENDIF
-    ENDIF
+        END IF
+      END IF
+    END IF
     wdtol = D1MACH(4)
     wdtol = MAX(wdtol,0.5D-18)
     i1m = I1MACH(14)
@@ -139,7 +139,7 @@ REAL(8) FUNCTION DGAMLN(Z,Ierr)
     IF ( Z<zmin ) THEN
       zinc = zmin - nz
       zdmy = Z + zinc
-    ENDIF
+    END IF
     zp = 1.0D0/zdmy
     t1 = cf(1)*zp
     s = t1
@@ -151,19 +151,19 @@ REAL(8) FUNCTION DGAMLN(Z,Ierr)
         trm = cf(k)*zp
         IF ( ABS(trm)<tst ) EXIT
         s = s + trm
-      ENDDO
-    ENDIF
+      END DO
+    END IF
     IF ( zinc==0.0D0 ) THEN
       tlg = LOG(Z)
       DGAMLN = Z*(tlg-1.0D0) + 0.5D0*(con-tlg) + s
       RETURN
-    ENDIF
-  ENDIF
+    END IF
+  END IF
   zp = 1.0D0
   nz = INT( zinc )
   DO i = 1, nz
     zp = zp*(Z+(i-1))
-  ENDDO
+  END DO
   tlg = LOG(zdmy)
   DGAMLN = zdmy*(tlg-1.0D0) - LOG(zp) + 0.5D0*(con-tlg) + s
   RETURN

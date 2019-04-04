@@ -119,7 +119,7 @@ SUBROUTINE CCHUD(R,Ldr,P,X,Z,Ldz,Nz,Y,Rho,C,S)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   INTEGER Ldr, P, Ldz, Nz
   REAL Rho(*), C(*)
   COMPLEX R(Ldr,*), X(*), Z(Ldz,*), Y(*), S(*)
@@ -142,13 +142,13 @@ SUBROUTINE CCHUD(R,Ldr,P,X,Z,Ldz,Nz,Y,Rho,C,S)
         t = C(i)*R(i,j) + S(i)*xj
         xj = C(i)*xj - CONJG(S(i))*R(i,j)
         R(i,j) = t
-      ENDDO
-    ENDIF
+      END DO
+    END IF
     !
     !        COMPUTE THE NEXT ROTATION.
     !
     CALL CROTG(R(j,j),xj,C(j),S(j))
-  ENDDO
+  END DO
   !
   !     IF REQUIRED, UPDATE Z AND RHO.
   !
@@ -159,12 +159,12 @@ SUBROUTINE CCHUD(R,Ldr,P,X,Z,Ldz,Nz,Y,Rho,C,S)
         t = C(i)*Z(i,j) + S(i)*zeta
         zeta = C(i)*zeta - CONJG(S(i))*Z(i,j)
         Z(i,j) = t
-      ENDDO
+      END DO
       azeta = ABS(zeta)
       IF ( azeta/=0.0E0.AND.Rho(j)>=0.0E0 ) THEN
         scale = azeta + Rho(j)
         Rho(j) = scale*SQRT((azeta/scale)**2+(Rho(j)/scale)**2)
-      ENDIF
-    ENDDO
-  ENDIF
+      END IF
+    END DO
+  END IF
 END SUBROUTINE CCHUD

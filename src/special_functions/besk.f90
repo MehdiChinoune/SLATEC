@@ -165,10 +165,10 @@ SUBROUTINE BESK(X,Fnu,Kode,N,Y,Nz)
           GOTO 700
         ELSEIF ( nn==1 ) THEN
           GOTO 200
-        ENDIF
-      ENDIF
-    ENDIF
-  ENDIF
+        END IF
+      END IF
+    END IF
+  END IF
   !
   !     UNDERFLOW TEST (LEADING EXPONENTIAL OF ASYMPTOTIC EXPANSION)
   !     FOR THE FIRST ORDER, FNU.GE.NULIM
@@ -203,14 +203,14 @@ SUBROUTINE BESK(X,Fnu,Kode,N,Y,Nz)
       s1 = BESK0E(X)
     ELSE
       s1 = BESK0(X)
-    ENDIF
+    END IF
     IF ( nud==0.AND.nd==1 ) GOTO 400
     IF ( Kode==2 ) THEN
       s2 = BESK1E(X)
     ELSE
       s2 = BESK1(X)
-    ENDIF
-  ENDIF
+    END IF
+  END IF
   trx = 2.0E0/X
   tm = (dnu+dnu+2.0E0)/X
   !     FORWARD RECUR FROM DNU TO FNU+1 TO GET Y(1) AND Y(2)
@@ -221,11 +221,11 @@ SUBROUTINE BESK(X,Fnu,Kode,N,Y,Nz)
       s2 = tm*s2 + s1
       s1 = s
       tm = tm + trx
-    ENDDO
+    END DO
     IF ( nd==1 ) s1 = s2
   ELSEIF ( nd<=1 ) THEN
     s1 = s2
-  ENDIF
+  END IF
   400  Y(1) = s1
   IF ( nd==1 ) GOTO 800
   Y(2) = s2
@@ -235,8 +235,8 @@ SUBROUTINE BESK(X,Fnu,Kode,N,Y,Nz)
     DO i = 3, nd
       Y(i) = tm*Y(i-1) + Y(i-2)
       tm = tm + trx
-    ENDDO
-  ENDIF
+    END DO
+  END IF
   GOTO 800
   !     OVERFLOW TEST
   600 CONTINUE
@@ -245,8 +245,8 @@ SUBROUTINE BESK(X,Fnu,Kode,N,Y,Nz)
       CALL XERMSG('SLATEC','BESK',&
         'OVERFLOW, FNU OR N TOO LARGE OR X TOO SMALL',6,1)
       RETURN
-    ENDIF
-  ENDIF
+    END IF
+  END IF
   IF ( dnu==0.0E0 ) THEN
     j = nud
     IF ( j/=1 ) THEN
@@ -255,18 +255,18 @@ SUBROUTINE BESK(X,Fnu,Kode,N,Y,Nz)
         Y(j) = BESK0E(X)
       ELSE
         Y(j) = BESK0(X)
-      ENDIF
+      END IF
       IF ( nd==1 ) GOTO 800
       j = j + 1
-    ENDIF
+    END IF
     IF ( Kode==2 ) THEN
       Y(j) = BESK1E(X)
     ELSE
       Y(j) = BESK1(X)
-    ENDIF
+    END IF
   ELSE
     CALL BESKNU(X,Fnu,Kode,nd,Y,mz)
-  ENDIF
+  END IF
   GOTO 800
   700 CONTINUE
   DO
@@ -280,8 +280,8 @@ SUBROUTINE BESK(X,Fnu,Kode,N,Y,Nz)
     gnu = gnu + 1.0E0
     IF ( fnn>=2.0E0 ) THEN
       IF ( nud>=nulim(nn) ) GOTO 100
-    ENDIF
-  ENDDO
+    END IF
+  END DO
   800  Nz = N - nd
   IF ( Nz==0 ) RETURN
   IF ( nd/=0 ) THEN
@@ -289,10 +289,10 @@ SUBROUTINE BESK(X,Fnu,Kode,N,Y,Nz)
       j = N - i + 1
       k = nd - i + 1
       Y(j) = Y(k)
-    ENDDO
-  ENDIF
+    END DO
+  END IF
   DO i = 1, Nz
     Y(i) = 0.0E0
-  ENDDO
+  END DO
   RETURN
 END SUBROUTINE BESK

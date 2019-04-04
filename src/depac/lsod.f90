@@ -98,7 +98,7 @@ SUBROUTINE LSOD(F,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,Acor,&
     H = 1.
     !                          -- RESET IBEGIN FOR SUBSEQUENT CALLS
     IBEgin = 1
-  ENDIF
+  END IF
   !
   !.......................................................................
   !
@@ -109,7 +109,7 @@ SUBROUTINE LSOD(F,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,Acor,&
     CALL XERMSG('SLATEC','LSOD',&
       'IN DEBDF, THE NUMBER OF EQUATIONS MUST BE A POSITIVE INTEGER.$$YOU HAVE CALLED THE CODE WITH NEQ = '//xern1,6,1)
     Idid = -33
-  ENDIF
+  END IF
   !
   nrtolp = 0
   natolp = 0
@@ -127,21 +127,22 @@ SUBROUTINE LSOD(F,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,Acor,&
         nrtolp = 1
       ELSEIF ( natolp>0 ) THEN
         GOTO 50
-      ENDIF
-    ENDIF
+      END IF
+    END IF
     !
     IF ( Atol(k)<0. ) THEN
       WRITE (xern1,'(I8)') k
       WRITE (xern3,'(1PE15.6)') Atol(k)
       CALL XERMSG('SLATEC','LSOD','IN DEBDF, THE ABSOLUTE ERROR TOLERANCES MUST&
-        & BE NON-NEGATIVE.$$YOU HAVE CALLED THE CODE WITH ATOL('//xern1//') = '//xern3//&
-        '$$IN THE CASE OF VECTOR ERROR TOLERANCES, NO FURTHER CHECKING OF ATOL COMPONENTS IS DONE.',8,1)
+        & BE NON-NEGATIVE.$$YOU HAVE CALLED THE CODE WITH ATOL('//xern1//') = '&
+        //xern3//'$$IN THE CASE OF VECTOR ERROR TOLERANCES,&
+        & NO FURTHER CHECKING OF ATOL COMPONENTS IS DONE.',8,1)
       Idid = -33
       IF ( nrtolp>0 ) EXIT
       natolp = 1
-    ENDIF
-    50     IF ( ITOl==0 ) EXIT
-  ENDDO
+    END IF
+    50  IF ( ITOl==0 ) EXIT
+  END DO
   !
   IF ( ITStop==1 ) THEN
     IF ( SIGN(1.,Tout-T)/=SIGN(1.,Tstop-T).OR.ABS(Tout-T)>ABS(Tstop-T) ) THEN
@@ -151,8 +152,8 @@ SUBROUTINE LSOD(F,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,Acor,&
         //xern3//'$$BUT YOU HAVE ALSO TOLD THE CODE NOT TO INTEGRATE PAST THE POINT&
         & TSTOP = '//xern4//' BY SETTING INFO(4) = 1.  THESE INSTRUCTIONS CONFLICT.',14,1)
       Idid = -33
-    ENDIF
-  ENDIF
+    END IF
+  END IF
   !
   !        CHECK SOME CONTINUATION POSSIBILITIES
   !
@@ -163,7 +164,7 @@ SUBROUTINE LSOD(F,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,Acor,&
         'IN DEBDF, YOU HAVE CALLED THE CODE WITH T = TOUT = '//&
         xern3//'  THIS IS NOT ALLOWED ON CONTINUATION CALLS.',9,1)
       Idid = -33
-    ENDIF
+    END IF
     !
     IF ( T/=TOLd ) THEN
       WRITE (xern3,'(1PE15.6)') TOLd
@@ -172,7 +173,7 @@ SUBROUTINE LSOD(F,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,Acor,&
         'IN DEBDF, YOU HAVE CHANGED THE VALUE OF T FROM '//xern3//' TO '//xern4//&
         '  THIS IS NOT ALLOWED ON CONTINUATION CALLS.',10,1)
       Idid = -33
-    ENDIF
+    END IF
     !
     IF ( INIt/=1 ) THEN
       IF ( Delsgn*(Tout-T)<0. ) THEN
@@ -181,9 +182,9 @@ SUBROUTINE LSOD(F,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,Acor,&
           'IN DEBDF, BY CALLING THE CODE WITH TOUT = '//xern3//&
           ' YOU ARE ATTEMPTING TO CHANGE THE DIRECTION OF INTEGRATION.$$THIS IS NOT ALLOWED WITHOUT RESTARTING.',11,1)
         Idid = -33
-      ENDIF
-    ENDIF
-  ENDIF
+      END IF
+    END IF
+  END IF
   !
   IF ( Idid==(-33) ) THEN
     IF ( IQUit/=(-33) ) THEN
@@ -194,9 +195,9 @@ SUBROUTINE LSOD(F,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,Acor,&
       CALL XERMSG('SLATEC','LSOD','IN DEBDF, INVALID INPUT WAS DETECTED ON&
         & SUCCESSIVE ENTRIES.  IT IS IMPOSSIBLE TO PROCEED BECAUSE YOU HAVE NOT&
         & CORRECTED THE PROBLEM, SO EXECUTION IS BEING TERMINATED.',12,2)
-    ENDIF
+    END IF
     RETURN
-  ENDIF
+  END IF
   !
   !.......................................................................
   !
@@ -209,9 +210,9 @@ SUBROUTINE LSOD(F,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,Acor,&
     IF ( Rtol(k)+Atol(k)<=0. ) THEN
       Rtol(k) = 100.*U
       Idid = -2
-    ENDIF
+    END IF
     IF ( ITOl==0 ) EXIT
-  ENDDO
+  END DO
   !
   IF ( Idid/=(-2) ) THEN
     !
@@ -235,13 +236,13 @@ SUBROUTINE LSOD(F,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,Acor,&
         Idid = 2
         DO l = 1, Neq
           Ypout(l) = Yh(l,2)
-        ENDDO
+        END DO
         TOLd = T
         RETURN
-      ENDIF
+      END IF
     ELSEIF ( INIt/=1 ) THEN
       GOTO 100
-    ENDIF
+    END IF
     !
     !                         -- COMPUTE INITIAL STEP SIZE
     !                         -- SAVE SIGN OF INTEGRATION DIRECTION
@@ -254,7 +255,7 @@ SUBROUTINE LSOD(F,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,Acor,&
       tol = Rtol(ltol)*ABS(Y(l)) + Atol(ltol)
       IF ( tol==0. ) GOTO 200
       Ewt(l) = tol
-    ENDDO
+    END DO
     !
     big = SQRT(R1MACH(2))
     CALL HSTART(F,Neq,T,Tout,Y,Yh(1,2),Ewt,1,U,big,Yh(1,3),Yh(1,4),Yh(1,5),&
@@ -265,14 +266,14 @@ SUBROUTINE LSOD(F,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,Acor,&
     DO l = 1, Neq
       Yh(l,1) = Y(l)
       Yh(l,2) = H*Yh(l,2)
-    ENDDO
+    END DO
     INIt = 2
   ELSE
     !                       RTOL=ATOL=0 ON INPUT, SO RTOL IS CHANGED TO A
     !                                                SMALL POSITIVE VALUE
     IBEgin = -1
     RETURN
-  ENDIF
+  END IF
   !
   !.......................................................................
   !
@@ -296,15 +297,15 @@ SUBROUTINE LSOD(F,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,Acor,&
         dt = Tout - X
         DO l = 1, Neq
           Y(l) = Yh(l,1) + (dt/H)*Yh(l,2)
-        ENDDO
+        END DO
         CALL F(Tout,Y,Ypout,Rpar,Ipar)
         NFE = NFE + 1
         Idid = 3
         T = Tout
         TOLd = T
         RETURN
-      ENDIF
-    ENDIF
+      END IF
+    END IF
     !
     IF ( .NOT.(IINteg==0.OR..NOT.Intout) ) THEN
       !
@@ -332,7 +333,7 @@ SUBROUTINE LSOD(F,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,Acor,&
         IF ( ITOl==1 ) ltol = l
         Ewt(l) = Rtol(ltol)*ABS(Yh(l,1)) + Atol(ltol)
         IF ( Ewt(l)<=0.0 ) GOTO 200
-      ENDDO
+      END DO
       Tolfac = U*VNWRMS(Neq,Yh,Ewt)
       IF ( Tolfac<=1. ) THEN
         !
@@ -358,9 +359,9 @@ SUBROUTINE LSOD(F,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,Acor,&
             !                       REPEATED CORRECTOR CONVERGENCE FAILURES
             Idid = -6
             IBEgin = -1
-          ENDIF
+          END IF
           GOTO 300
-        ENDIF
+        END IF
       ELSE
         !
         !                       TOLERANCES TOO SMALL
@@ -372,11 +373,11 @@ SUBROUTINE LSOD(F,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,Acor,&
           DO l = 2, Neq
             Rtol(l) = Tolfac*Rtol(l)
             Atol(l) = Tolfac*Atol(l)
-          ENDDO
-        ENDIF
+          END DO
+        END IF
         IBEgin = -1
         GOTO 300
-      ENDIF
+      END IF
     ELSE
       !
       !                       A SIGNIFICANT AMOUNT OF WORK HAS BEEN EXPENDED
@@ -384,15 +385,15 @@ SUBROUTINE LSOD(F,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,Acor,&
       KSTeps = 0
       IBEgin = -1
       GOTO 300
-    ENDIF
-  ENDDO
+    END IF
+  END DO
   CALL INTYD(Tout,0,Yh,Neq,Y,intflg)
   CALL INTYD(Tout,1,Yh,Neq,Ypout,intflg)
   Idid = 3
   IF ( X==Tout ) THEN
     Idid = 2
     Intout = .FALSE.
-  ENDIF
+  END IF
   T = Tout
   TOLd = T
   RETURN
@@ -408,7 +409,7 @@ SUBROUTINE LSOD(F,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,Acor,&
   DO l = 1, Neq
     Y(l) = Yh(l,1)
     Ypout(l) = Yh(l,2)/H
-  ENDDO
+  END DO
   T = X
   TOLd = T
   Intout = .FALSE.

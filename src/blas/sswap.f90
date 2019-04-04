@@ -54,7 +54,7 @@ SUBROUTINE SSWAP(N,Sx,Incx,Sy,Incy)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920310  Corrected definition of LX in DESCRIPTION.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   INTEGER i, Incx, Incy, ix, iy, m, mp1, N, ns
   REAL Sx(*), Sy(*), stemp1, stemp2, stemp3
   !* FIRST EXECUTABLE STATEMENT  SSWAP
@@ -73,9 +73,9 @@ SUBROUTINE SSWAP(N,Sx,Incx,Sy,Incy)
           stemp1 = Sx(i)
           Sx(i) = Sy(i)
           Sy(i) = stemp1
-        ENDDO
+        END DO
         IF ( N<3 ) RETURN
-      ENDIF
+      END IF
       GOTO 100
     ELSE
       !
@@ -86,10 +86,10 @@ SUBROUTINE SSWAP(N,Sx,Incx,Sy,Incy)
         stemp1 = Sx(i)
         Sx(i) = Sy(i)
         Sy(i) = stemp1
-      ENDDO
+      END DO
       RETURN
-    ENDIF
-  ENDIF
+    END IF
+  END IF
   !
   !     Code for unequal or nonpositive increments.
   !
@@ -103,7 +103,7 @@ SUBROUTINE SSWAP(N,Sx,Incx,Sy,Incy)
     Sy(iy) = stemp1
     ix = ix + Incx
     iy = iy + Incy
-  ENDDO
+  END DO
   RETURN
   100  mp1 = m + 1
   DO i = mp1, N, 3
@@ -116,6 +116,6 @@ SUBROUTINE SSWAP(N,Sx,Incx,Sy,Incy)
     Sy(i) = stemp1
     Sy(i+1) = stemp2
     Sy(i+2) = stemp3
-  ENDDO
+  END DO
   RETURN
 END SUBROUTINE SSWAP

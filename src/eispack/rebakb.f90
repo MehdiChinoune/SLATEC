@@ -74,7 +74,7 @@ SUBROUTINE REBAKB(Nm,N,B,Dl,M,Z)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   !
   INTEGER i, j, k, M, N, i1, ii, Nm
   REAL B(Nm,*), Dl(*), Z(Nm,*)
@@ -93,12 +93,12 @@ SUBROUTINE REBAKB(Nm,N,B,Dl,M,Z)
           !
           DO k = 1, i1
             x = x + B(i,k)*Z(k,j)
-          ENDDO
-        ENDIF
+          END DO
+        END IF
         !
         Z(i,j) = x
-      ENDDO
-    ENDDO
-  ENDIF
+      END DO
+    END DO
+  END IF
   !
 END SUBROUTINE REBAKB

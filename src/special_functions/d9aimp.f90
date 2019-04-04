@@ -279,7 +279,7 @@ SUBROUTINE D9AIMP(X,Ampl,Theta)
     !
     xsml = -1.0D0/D1MACH(3)**0.3333D0
     first = .FALSE.
-  ENDIF
+  END IF
   !
   IF ( X<(-4.0D0) ) THEN
     z = 1.0D0
@@ -298,7 +298,7 @@ SUBROUTINE D9AIMP(X,Ampl,Theta)
     z = (128.D0/X**3+9.0D0)/7.0D0
     Ampl = 0.3125D0 + DCSEVL(z,am21cs,nam21)
     Theta = -0.625D0 + DCSEVL(z,ath1cs,nath1)
-  ENDIF
+  END IF
   !
   sqrtx = SQRT(-X)
   Ampl = SQRT(Ampl/sqrtx)

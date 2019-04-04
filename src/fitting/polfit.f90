@@ -155,12 +155,12 @@ SUBROUTINE POLFIT(N,X,Y,W,Maxdeg,Ndeg,Eps,R,Ierr,A)
   IF ( W(1)<0.0 ) THEN
     DO i = 1, m
       W(i) = 1.0
-    ENDDO
+    END DO
   ELSE
     DO i = 1, m
       IF ( W(i)<=0.0 ) GOTO 700
-    ENDDO
-  ENDIF
+    END DO
+  END IF
   IF ( Eps<0.0 ) THEN
     !
     ! DETERMINE SIGNIFICANCE LEVEL INDEX TO BE USED IN STATISTICAL TEST FOR
@@ -175,8 +175,8 @@ SUBROUTINE POLFIT(N,X,Y,W,Maxdeg,Ndeg,Eps,R,Ierr,A)
       ksig = 1
       IF ( idegf<10 ) ksig = 2
       IF ( idegf<5 ) ksig = 3
-    ENDIF
-  ENDIF
+    END IF
+  END IF
   !
   ! INITIALIZE INDEXES AND COEFFICIENTS FOR FITTING
   !
@@ -187,7 +187,7 @@ SUBROUTINE POLFIT(N,X,Y,W,Maxdeg,Ndeg,Eps,R,Ierr,A)
   k5 = k4 + m
   DO i = 2, k4
     A(i) = 0.0
-  ENDDO
+  END DO
   w11 = 0.0
   IF ( N<0 ) THEN
     !
@@ -196,7 +196,7 @@ SUBROUTINE POLFIT(N,X,Y,W,Maxdeg,Ndeg,Eps,R,Ierr,A)
     DO i = 1, m
       k4pi = k4 + i
       w11 = w11 + W(i)*A(k4pi)**2
-    ENDDO
+    END DO
   ELSE
     !
     ! UNCONSTRAINED CASE
@@ -205,8 +205,8 @@ SUBROUTINE POLFIT(N,X,Y,W,Maxdeg,Ndeg,Eps,R,Ierr,A)
       k4pi = k4 + i
       A(k4pi) = 1.0
       w11 = w11 + W(i)
-    ENDDO
-  ENDIF
+    END DO
+  END IF
   !
   ! COMPUTE FIT OF DEGREE ZERO
   !
@@ -214,7 +214,7 @@ SUBROUTINE POLFIT(N,X,Y,W,Maxdeg,Ndeg,Eps,R,Ierr,A)
   DO i = 1, m
     k4pi = k4 + i
     temd1 = temd1 + REAL(W(i), 8)*REAL(Y(i), 8)*REAL(A(k4pi), 8)
-  ENDDO
+  END DO
   temd1 = temd1/REAL(w11, 8)
   A(k2+1) = REAL( temd1, 4 )
   sigj = 0.0
@@ -225,7 +225,7 @@ SUBROUTINE POLFIT(N,X,Y,W,Maxdeg,Ndeg,Eps,R,Ierr,A)
     R(i) = REAL( temd2, 4 )
     A(k5pi) = REAL( temd2 - R(i), 4 )
     sigj = sigj + W(i)*((Y(i)-R(i))-A(k5pi))**2
-  ENDDO
+  END DO
   j = 0
   !
   ! SEE IF POLYNOMIAL OF DEGREE 0 SATISFIES THE DEGREE SELECTION CRITERION
@@ -255,7 +255,7 @@ SUBROUTINE POLFIT(N,X,Y,W,Maxdeg,Ndeg,Eps,R,Ierr,A)
       k4pi = k4 + i
       temd2 = A(k4pi)
       temd1 = temd1 + REAL(X(i), 8)*REAL(W(i), 8)*temd2*temd2
-    ENDDO
+    END DO
     A(jp1) = REAL( temd1/w11, 4 )
     !
     ! EVALUATE ORTHOGONAL POLYNOMIAL AT DATA POINTS
@@ -269,7 +269,7 @@ SUBROUTINE POLFIT(N,X,Y,W,Maxdeg,Ndeg,Eps,R,Ierr,A)
       A(k3pi) = A(k4pi)
       A(k4pi) = (X(i)-A(jp1))*A(k3pi) - A(k1pj)*temp
       w11 = w11 + W(i)*A(k4pi)**2
-    ENDDO
+    END DO
     !
     ! GET NEW ORTHOGONAL POLYNOMIAL COEFFICIENT USING PARTIAL DOUBLE
     ! PRECISION
@@ -280,7 +280,7 @@ SUBROUTINE POLFIT(N,X,Y,W,Maxdeg,Ndeg,Eps,R,Ierr,A)
       k5pi = k5 + i
       temd2 = REAL(W(i),8)*REAL((Y(i)-R(i))-A(k5pi), 8)*REAL(A(k4pi), 8)
       temd1 = temd1 + temd2
-    ENDDO
+    END DO
     temd1 = temd1/REAL(w11, 8)
     A(k2pj+1) = REAL( temd1, 4 )
     !
@@ -298,7 +298,7 @@ SUBROUTINE POLFIT(N,X,Y,W,Maxdeg,Ndeg,Eps,R,Ierr,A)
       R(i) = REAL( temd2, 4 )
       A(k5pi) = REAL( temd2 - R(i), 4 )
       sigj = sigj + W(i)*((Y(i)-R(i))-A(k5pi))**2
-    ENDDO
+    END DO
     !
     ! SEE IF DEGREE SELECTION CRITERION HAS BEEN SATISFIED OR IF DEGREE
     ! MAXDEG  HAS BEEN REACHED
@@ -325,8 +325,8 @@ SUBROUTINE POLFIT(N,X,Y,W,Maxdeg,Ndeg,Eps,R,Ierr,A)
       GOTO 300
     ELSE
       GOTO 400
-    ENDIF
-  ENDDO
+    END IF
+  END DO
   !
   ! POLYNOMIAL OF DEGREE J SATISFIES F TEST
   !
@@ -352,7 +352,7 @@ SUBROUTINE POLFIT(N,X,Y,W,Maxdeg,Ndeg,Eps,R,Ierr,A)
     Ndeg = Maxdeg
     sig = sigj
     GOTO 900
-  ENDIF
+  END IF
   !
   ! RETURNS
   !
@@ -380,8 +380,8 @@ SUBROUTINE POLFIT(N,X,Y,W,Maxdeg,Ndeg,Eps,R,Ierr,A)
     nder = 0
     DO i = 1, m
       CALL PVALUE(Ndeg,nder,X(i),R(i),yp,A)
-    ENDDO
-  ENDIF
+    END DO
+  END IF
   Eps = SQRT(sig/xm)
   RETURN
 END SUBROUTINE POLFIT

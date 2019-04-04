@@ -141,15 +141,15 @@ SUBROUTINE DSTOD(Neq,Y,Yh,Nyh,Yh1,Ewt,Savf,Acor,Wm,Iwm,DF,DJAC,Rpar,Ipar)
         iret = 1
         !        ............EXIT
         GOTO 100
-      ENDIF
+      END IF
     ELSEIF ( NQ<=MAXord ) THEN
       GOTO 200
-    ENDIF
+    END IF
     NQ = MAXord
     L = LMAx
     DO i = 1, L
       EL(i) = ELCo(i,NQ)
-    ENDDO
+    END DO
     NQNyh = NQ*Nyh
     RC = RC*EL(1)/EL0
     EL0 = EL(1)
@@ -164,7 +164,7 @@ SUBROUTINE DSTOD(Neq,Y,Yh,Nyh,Yh1,Ewt,Savf,Acor,Wm,Iwm,DF,DJAC,Rpar,Ipar)
     ELSE
       rh = MIN(rh,ABS(H/HOLd))
       H = HOLd
-    ENDIF
+    END IF
     GOTO 300
   ELSE
     IF ( JSTart==-2 ) GOTO 200
@@ -197,12 +197,12 @@ SUBROUTINE DSTOD(Neq,Y,Yh,Nyh,Yh1,Ewt,Savf,Acor,Wm,Iwm,DF,DJAC,Rpar,Ipar)
     !            THE START OF THE PROBLEM.
     !           ------------------------------------------------------------
     CALL DCFOD(METh,ELCo,TESco)
-  ENDIF
+  END IF
   !           BEGIN BLOCK PERMITTING ...EXITS TO 680
   100 CONTINUE
   DO i = 1, L
     EL(i) = ELCo(i,NQ)
-  ENDDO
+  END DO
   NQNyh = NQ*Nyh
   RC = RC*EL(1)/EL0
   EL0 = EL(1)
@@ -234,8 +234,8 @@ SUBROUTINE DSTOD(Neq,Y,Yh,Nyh,Yh1,Ewt,Savf,Acor,Wm,Iwm,DF,DJAC,Rpar,Ipar)
     r = r*rh
     DO i = 1, N
       Yh(i,j) = Yh(i,j)*r
-    ENDDO
-  ENDDO
+    END DO
+  END DO
   H = H*rh
   RC = RC*rh
   IALth = L
@@ -244,10 +244,10 @@ SUBROUTINE DSTOD(Neq,Y,Yh,Nyh,Yh1,Ewt,Savf,Acor,Wm,Iwm,DF,DJAC,Rpar,Ipar)
     r = 1.0D0/TESco(2,NQU)
     DO i = 1, N
       Acor(i) = Acor(i)*r
-    ENDDO
+    END DO
     !     ...............EXIT
     GOTO 1000
-  ENDIF
+  END IF
   !                 ------------------------------------------------------
   !                  THIS SECTION COMPUTES THE PREDICTED VALUES BY
   !                  EFFECTIVELY MULTIPLYING THE YH ARRAY BY THE PASCAL
@@ -269,8 +269,8 @@ SUBROUTINE DSTOD(Neq,Y,Yh,Nyh,Yh1,Ewt,Savf,Acor,Wm,Iwm,DF,DJAC,Rpar,Ipar)
     i1 = i1 - Nyh
     DO i = i1, NQNyh
       Yh1(i) = Yh1(i) + Yh1(i+Nyh)
-    ENDDO
-  ENDDO
+    END DO
+  END DO
   KSTeps = KSTeps + 1
   !                          ---------------------------------------------
   !                           UP TO 3 CORRECTOR ITERATIONS ARE TAKEN.  A
@@ -284,7 +284,7 @@ SUBROUTINE DSTOD(Neq,Y,Yh,Nyh,Yh1,Ewt,Savf,Acor,Wm,Iwm,DF,DJAC,Rpar,Ipar)
   500  m = 0
   DO i = 1, N
     Y(i) = Yh(i,1)
-  ENDDO
+  END DO
   CALL DF(TN,Y,Savf,Rpar,Ipar)
   NFE = NFE + 1
   IF ( IPUp>0 ) THEN
@@ -303,10 +303,10 @@ SUBROUTINE DSTOD(Neq,Y,Yh,Nyh,Yh1,Ewt,Savf,Acor,Wm,Iwm,DF,DJAC,Rpar,Ipar)
     CALL DPJAC(Neq,Y,Yh,Nyh,Ewt,Acor,Savf,Wm,Iwm,DF,DJAC,Rpar,Ipar)
     !                          ......EXIT
     IF ( IER/=0 ) GOTO 800
-  ENDIF
+  END IF
   DO i = 1, N
     Acor(i) = 0.0D0
-  ENDDO
+  END DO
   600 CONTINUE
   IF ( MITer/=0 ) THEN
     !                                   ------------------------------------
@@ -318,7 +318,7 @@ SUBROUTINE DSTOD(Neq,Y,Yh,Nyh,Yh1,Ewt,Savf,Acor,Wm,Iwm,DF,DJAC,Rpar,Ipar)
     !                                   ------------------------------------
     DO i = 1, N
       Y(i) = H*Savf(i) - (Yh(i,2)+Acor(i))
-    ENDDO
+    END DO
     CALL DSLVS(Wm,Iwm,Y,Savf)
     !                             ......EXIT
     IF ( IER/=0 ) GOTO 700
@@ -326,7 +326,7 @@ SUBROUTINE DSTOD(Neq,Y,Yh,Nyh,Yh1,Ewt,Savf,Acor,Wm,Iwm,DF,DJAC,Rpar,Ipar)
     DO i = 1, N
       Acor(i) = Acor(i) + Y(i)
       Y(i) = Yh(i,1) + EL(1)*Acor(i)
-    ENDDO
+    END DO
   ELSE
     !                                   ------------------------------------
     !                                    IN THE CASE OF FUNCTIONAL
@@ -337,13 +337,13 @@ SUBROUTINE DSTOD(Neq,Y,Yh,Nyh,Yh1,Ewt,Savf,Acor,Wm,Iwm,DF,DJAC,Rpar,Ipar)
     DO i = 1, N
       Savf(i) = H*Savf(i) - Yh(i,2)
       Y(i) = Savf(i) - Acor(i)
-    ENDDO
+    END DO
     del = DVNRMS(N,Y,Ewt)
     DO i = 1, N
       Y(i) = Yh(i,1) + EL(1)*Savf(i)
       Acor(i) = Savf(i)
-    ENDDO
-  ENDIF
+    END DO
+  END IF
   !                                ---------------------------------------
   !                                 TEST FOR CONVERGENCE.  IF M.GT.0, AN
   !                                 ESTIMATE OF THE CONVERGENCE RATE
@@ -362,8 +362,8 @@ SUBROUTINE DSTOD(Neq,Y,Yh,Nyh,Yh1,Ewt,Savf,Acor,Wm,Iwm,DF,DJAC,Rpar,Ipar)
         CALL DF(TN,Y,Savf,Rpar,Ipar)
         NFE = NFE + 1
         GOTO 600
-      ENDIF
-    ENDIF
+      END IF
+    END IF
   ELSE
     !                                   ------------------------------------
     !                                    THE CORRECTOR HAS CONVERGED.  IPUP
@@ -396,8 +396,8 @@ SUBROUTINE DSTOD(Neq,Y,Yh,Nyh,Yh1,Ewt,Savf,Acor,Wm,Iwm,DF,DJAC,Rpar,Ipar)
         i1 = i1 - Nyh
         DO i = i1, NQNyh
           Yh1(i) = Yh1(i) - Yh1(i+Nyh)
-        ENDDO
-      ENDDO
+        END DO
+      END DO
       RMAx = 2.0D0
       IF ( ABS(H)<=HMIn*1.00001D0 ) THEN
         !                                      ---------------------------------
@@ -432,12 +432,12 @@ SUBROUTINE DSTOD(Neq,Y,Yh,Nyh,Yh1,Ewt,Savf,Acor,Wm,Iwm,DF,DJAC,Rpar,Ipar)
         H = H*rh
         DO i = 1, N
           Y(i) = Yh(i,1)
-        ENDDO
+        END DO
         CALL DF(TN,Y,Savf,Rpar,Ipar)
         NFE = NFE + 1
         DO i = 1, N
           Yh(i,2) = H*Savf(i)
-        ENDDO
+        END DO
         IPUp = MITer
         IALth = 5
         !              ......EXIT
@@ -455,7 +455,7 @@ SUBROUTINE DSTOD(Neq,Y,Yh,Nyh,Yh1,Ewt,Savf,Acor,Wm,Iwm,DF,DJAC,Rpar,Ipar)
         KFLag = -1
         !     ..................EXIT
         GOTO 1000
-      ENDIF
+      END IF
     ELSE
       !                                      BEGIN BLOCK
       !                                      PERMITTING ...EXITS TO 360
@@ -486,8 +486,8 @@ SUBROUTINE DSTOD(Neq,Y,Yh,Nyh,Yh1,Ewt,Savf,Acor,Wm,Iwm,DF,DJAC,Rpar,Ipar)
       DO j = 1, L
         DO i = 1, N
           Yh(i,j) = Yh(i,j) + EL(j)*Acor(i)
-        ENDDO
-      ENDDO
+        END DO
+      END DO
       IALth = IALth - 1
       IF ( IALth/=0 ) THEN
         !                                      ...EXIT
@@ -496,13 +496,13 @@ SUBROUTINE DSTOD(Neq,Y,Yh,Nyh,Yh1,Ewt,Savf,Acor,Wm,Iwm,DF,DJAC,Rpar,Ipar)
           IF ( L/=LMAx ) THEN
             DO i = 1, N
               Yh(i,LMAx) = Acor(i)
-            ENDDO
-          ENDIF
-        ENDIF
+            END DO
+          END IF
+        END IF
         r = 1.0D0/TESco(2,NQU)
         DO i = 1, N
           Acor(i) = Acor(i)*r
-        ENDDO
+        END DO
         !     .................................EXIT
         GOTO 1000
       ELSE
@@ -530,16 +530,16 @@ SUBROUTINE DSTOD(Neq,Y,Yh,Nyh,Yh1,Ewt,Savf,Acor,Wm,Iwm,DF,DJAC,Rpar,Ipar)
         IF ( L/=LMAx ) THEN
           DO i = 1, N
             Savf(i) = Acor(i) - Yh(i,LMAx)
-          ENDDO
+          END DO
           dup = DVNRMS(N,Savf,Ewt)/TESco(3,NQ)
           exup = 1.0D0/(L+1)
           !                       .....................EXIT
           rhup = 1.0D0/(1.4D0*dup**exup+0.0000014D0)
-        ENDIF
+        END IF
         GOTO 900
-      ENDIF
-    ENDIF
-  ENDIF
+      END IF
+    END IF
+  END IF
   !                             ------------------------------------------
   !                              THE CORRECTOR ITERATION FAILED TO
   !                              CONVERGE IN 3 TRIES.  IF MITER .NE. 0 AND
@@ -556,7 +556,7 @@ SUBROUTINE DSTOD(Neq,Y,Yh,Nyh,Yh1,Ewt,Savf,Acor,Wm,Iwm,DF,DJAC,Rpar,Ipar)
   IF ( IPUp/=0 ) THEN
     IPUp = MITer
     GOTO 500
-  ENDIF
+  END IF
   800  TN = told
   ncf = ncf + 1
   RMAx = 2.0D0
@@ -565,8 +565,8 @@ SUBROUTINE DSTOD(Neq,Y,Yh,Nyh,Yh1,Ewt,Savf,Acor,Wm,Iwm,DF,DJAC,Rpar,Ipar)
     i1 = i1 - Nyh
     DO i = i1, NQNyh
       Yh1(i) = Yh1(i) - Yh1(i+Nyh)
-    ENDDO
-  ENDDO
+    END DO
+  END DO
   IF ( ABS(H)<=HMIn*1.00001D0 ) THEN
     KFLag = -2
     !     ........................EXIT
@@ -582,7 +582,7 @@ SUBROUTINE DSTOD(Neq,Y,Yh,Nyh,Yh1,Ewt,Savf,Acor,Wm,Iwm,DF,DJAC,Rpar,Ipar)
     KFLag = -2
     !     ........................EXIT
     GOTO 1000
-  ENDIF
+  END IF
   900  exsm = 1.0D0/L
   rhsm = 1.0D0/(1.2D0*dsm**exsm+0.0000012D0)
   rhdn = 0.0D0
@@ -590,7 +590,7 @@ SUBROUTINE DSTOD(Neq,Y,Yh,Nyh,Yh1,Ewt,Savf,Acor,Wm,Iwm,DF,DJAC,Rpar,Ipar)
     ddn = DVNRMS(N,Yh(1,L),Ewt)/TESco(1,NQ)
     exdn = 1.0D0/NQ
     rhdn = 1.0D0/(1.3D0*ddn**exdn+0.0000013D0)
-  ENDIF
+  END IF
   IF ( rhsm>=rhup ) THEN
     IF ( rhsm>=rhdn ) THEN
       newq = NQ
@@ -600,7 +600,7 @@ SUBROUTINE DSTOD(Neq,Y,Yh,Nyh,Yh1,Ewt,Savf,Acor,Wm,Iwm,DF,DJAC,Rpar,Ipar)
         r = 1.0D0/TESco(2,NQU)
         DO i = 1, N
           Acor(i) = Acor(i)*r
-        ENDDO
+        END DO
         !     .....................EXIT
         GOTO 1000
       ELSE
@@ -622,9 +622,9 @@ SUBROUTINE DSTOD(Neq,Y,Yh,Nyh,Yh1,Ewt,Savf,Acor,Wm,Iwm,DF,DJAC,Rpar,Ipar)
           iret = 2
           !           ..................EXIT
           GOTO 100
-        ENDIF
-      ENDIF
-    ENDIF
+        END IF
+      END IF
+    END IF
   ELSEIF ( rhup>rhdn ) THEN
     newq = L
     rh = rhup
@@ -632,7 +632,7 @@ SUBROUTINE DSTOD(Neq,Y,Yh,Nyh,Yh1,Ewt,Savf,Acor,Wm,Iwm,DF,DJAC,Rpar,Ipar)
       r = EL(L)/L
       DO i = 1, N
         Yh(i,newq+1) = Acor(i)*r
-      ENDDO
+      END DO
       NQ = newq
       L = NQ + 1
       iret = 2
@@ -643,11 +643,11 @@ SUBROUTINE DSTOD(Neq,Y,Yh,Nyh,Yh1,Ewt,Savf,Acor,Wm,Iwm,DF,DJAC,Rpar,Ipar)
       r = 1.0D0/TESco(2,NQU)
       DO i = 1, N
         Acor(i) = Acor(i)*r
-      ENDDO
+      END DO
       !     ...........................EXIT
       GOTO 1000
-    ENDIF
-  ENDIF
+    END IF
+  END IF
   newq = NQ - 1
   rh = rhdn
   IF ( KFLag<0.AND.rh>1.0D0 ) rh = 1.0D0
@@ -657,7 +657,7 @@ SUBROUTINE DSTOD(Neq,Y,Yh,Nyh,Yh1,Ewt,Savf,Acor,Wm,Iwm,DF,DJAC,Rpar,Ipar)
     DO i = 1, N
       Acor(i) = Acor(i)*r
       !     ..................EXIT
-    ENDDO
+    END DO
   ELSE
     IF ( KFLag<=-2 ) rh = MIN(rh,0.2D0)
     !                          ---------------------------------------------
@@ -677,8 +677,8 @@ SUBROUTINE DSTOD(Neq,Y,Yh,Nyh,Yh1,Ewt,Savf,Acor,Wm,Iwm,DF,DJAC,Rpar,Ipar)
       iret = 2
       !           ...............EXIT
       GOTO 100
-    ENDIF
-  ENDIF
+    END IF
+  END IF
   1000 HOLd = H
   JSTart = 1
   !     ----------------------- END OF SUBROUTINE DSTOD

@@ -35,7 +35,7 @@ REAL(8) FUNCTION DVNRMS(N,V,W)
   sum = 0.0D0
   DO i = 1, N
     sum = sum + (V(i)/W(i))**2
-  ENDDO
+  END DO
   DVNRMS = SQRT(sum/N)
   !     ----------------------- END OF FUNCTION DVNRMS
   !     ------------------------

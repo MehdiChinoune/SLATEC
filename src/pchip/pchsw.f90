@@ -129,7 +129,7 @@ SUBROUTINE PCHSW(Dfmax,Iextrm,D1,D2,H,Slope,Ierr)
       hphi = H*ABS(phi)
       !           AT THIS POINT, HPHI.GT.0, SO DIVIDE IS OK.
       IF ( hphi*ABS(D2)>Dfmax ) D2 = SIGN(Dfmax/hphi,D2)
-    ENDIF
+    END IF
   ELSE
     !
     rho = Slope/D1
@@ -161,11 +161,11 @@ SUBROUTINE PCHSW(Dfmax,Iextrm,D1,D2,H,Slope,Ierr)
           RETURN
         ELSE
           that = (cp-SQRT(radcal))/(three*nu)
-        ENDIF
+        END IF
       ELSE
         that = one/(two*sigma)
-      ENDIF
-    ENDIF
+      END IF
+    END IF
     phi = that*((nu*that-cp)*that+one)
     !
     !          CONVERT TO DISTANCE FROM F2 IF IEXTRM.NE.1 .
@@ -177,8 +177,8 @@ SUBROUTINE PCHSW(Dfmax,Iextrm,D1,D2,H,Slope,Ierr)
       !           AT THIS POINT, HPHI.GT.0, SO DIVIDE IS OK.
       D1 = SIGN(Dfmax/hphi,D1)
       D2 = -lambda*D1
-    ENDIF
-  ENDIF
+    END IF
+  END IF
   !
   !  NORMAL RETURN.
   !

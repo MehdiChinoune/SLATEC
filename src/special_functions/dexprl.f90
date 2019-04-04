@@ -49,7 +49,7 @@ REAL(8) FUNCTION DEXPRL(X)
     nterms = INT( xn - (xn*xln+alneps)/(xln+1.36D0) + 1.5D0 )
     xbnd = D1MACH(3)
     first = .FALSE.
-  ENDIF
+  END IF
   !
   absx = ABS(X)
   IF ( absx>0.5D0 ) DEXPRL = (EXP(X)-1.0D0)/X
@@ -61,6 +61,6 @@ REAL(8) FUNCTION DEXPRL(X)
   DEXPRL = 0.0D0
   DO i = 1, nterms
     DEXPRL = 1.0D0 + DEXPRL*X/(nterms+2-i)
-  ENDDO
+  END DO
   !
 END FUNCTION DEXPRL

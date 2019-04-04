@@ -56,7 +56,7 @@ SUBROUTINE XSETF(Kontrl)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900510  Change call to XERRWV to XERMSG.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   INTEGER J4SAVE, junk, Kontrl
   CHARACTER(8) :: xern1
   !* FIRST EXECUTABLE STATEMENT  XSETF
@@ -64,7 +64,7 @@ SUBROUTINE XSETF(Kontrl)
     WRITE (xern1,'(I8)') Kontrl
     CALL XERMSG('SLATEC','XSETF','INVALID ARGUMENT = '//xern1,1,2)
     RETURN
-  ENDIF
+  END IF
   !
   junk = J4SAVE(2,Kontrl,.TRUE.)
 END SUBROUTINE XSETF

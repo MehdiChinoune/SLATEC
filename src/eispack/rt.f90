@@ -89,7 +89,7 @@ SUBROUTINE RT(Nm,N,A,W,Matz,Z,Fv1,Ierr)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   !
   INTEGER N, Nm, Ierr, Matz
   REAL A(Nm,3), W(*), Z(Nm,*), Fv1(*)
@@ -106,5 +106,5 @@ SUBROUTINE RT(Nm,N,A,W,Matz,Z,Fv1,Ierr)
     !     .......... FIND EIGENVALUES ONLY ..........
     CALL FIGI(Nm,N,A,W,Fv1,Fv1,Ierr)
     IF ( Ierr<=0 ) CALL IMTQL1(N,W,Fv1,Ierr)
-  ENDIF
+  END IF
 END SUBROUTINE RT

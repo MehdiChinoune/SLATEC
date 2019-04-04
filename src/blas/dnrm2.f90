@@ -101,7 +101,7 @@ REAL(8) FUNCTION DNRM2(N,Dx,Incx)
   ELSE
     DNRM2 = zero
     RETURN
-  ENDIF
+  END IF
   100 CONTINUE
   SELECT CASE(next)
     CASE(200)
@@ -150,7 +150,7 @@ REAL(8) FUNCTION DNRM2(N,Dx,Incx)
     !
     sum = (sum*xmax)*xmax
     GOTO 800
-  ENDIF
+  END IF
   !
   !                     COMMON CODE FOR PHASES 2 AND 4.
   !                     IN PHASE 4 SUM IS LARGE.  SCALE TO AVOID OVERFLOW.
@@ -161,7 +161,7 @@ REAL(8) FUNCTION DNRM2(N,Dx,Incx)
   ELSE
     sum = one + sum*(xmax/Dx(i))**2
     xmax = ABS(Dx(i))
-  ENDIF
+  END IF
   GOTO 900
   !
   !     FOR REAL OR D.P. SET HITEST = CUTHI/N
@@ -174,7 +174,7 @@ REAL(8) FUNCTION DNRM2(N,Dx,Incx)
   DO j = i, nn, Incx
     IF ( ABS(Dx(j))>=hitest ) GOTO 400
     sum = sum + Dx(j)**2
-  ENDDO
+  END DO
   DNRM2 = SQRT(sum)
   RETURN
   !

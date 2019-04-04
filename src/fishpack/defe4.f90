@@ -64,14 +64,14 @@ SUBROUTINE DEFE4(COFX,Idmn,Usol,Grhs)
         tx = ai/3.0*(uxxxx/4.0+uxxx/DLX)
       IF ( .NOT.(KSWy==1.OR.(j>1.AND.j<L)) ) ty = (uyyyy/4.0+uyyy/DLY)/3.0
       Grhs(i,j) = Grhs(i,j) + DLY**2*(DLX**2*tx+DLY**2*ty)
-    ENDDO
-  ENDDO
+    END DO
+  END DO
   !
   !     RESET THE RIGHT HAND SIDE IN USOL
   !
   DO i = IS, MS
     DO j = JS, NS
       Usol(i,j) = Grhs(i,j)
-    ENDDO
-  ENDDO
+    END DO
+  END DO
 END SUBROUTINE DEFE4

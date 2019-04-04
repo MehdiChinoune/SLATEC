@@ -54,7 +54,7 @@ INTEGER FUNCTION ICAMAX(N,Cx,Incx)
   !   900821  Modified to correct problem with a negative increment.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   COMPLEX Cx(*)
   REAL smax, xmag
   INTEGER i, Incx, ix, N
@@ -75,10 +75,10 @@ INTEGER FUNCTION ICAMAX(N,Cx,Incx)
       IF ( xmag>smax ) THEN
         ICAMAX = i
         smax = xmag
-      ENDIF
-    ENDDO
+      END IF
+    END DO
     RETURN
-  ENDIF
+  END IF
   !
   !     Code for increment not equal to 1.
   !
@@ -91,8 +91,8 @@ INTEGER FUNCTION ICAMAX(N,Cx,Incx)
     IF ( xmag>smax ) THEN
       ICAMAX = i
       smax = xmag
-    ENDIF
+    END IF
     ix = ix + Incx
-  ENDDO
+  END DO
   RETURN
 END FUNCTION ICAMAX

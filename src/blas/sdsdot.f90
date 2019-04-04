@@ -56,7 +56,7 @@ REAL FUNCTION SDSDOT(N,Sb,Sx,Incx,Sy,Incy)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920310  Corrected definition of LX in DESCRIPTION.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   INTEGER i, Incx, Incy, kx, ky, N, ns
   REAL Sx(*), Sy(*), Sb
   REAL(8) :: dsdot
@@ -70,7 +70,7 @@ REAL FUNCTION SDSDOT(N,Sb,Sx,Incx,Sy,Incy)
       ns = N*Incx
       DO i = 1, ns, Incx
         dsdot = dsdot + REAL(Sx(i))*REAL(Sy(i))
-      ENDDO
+      END DO
       SDSDOT = REAL( dsdot, 4 )
       RETURN
     ELSE
@@ -85,9 +85,9 @@ REAL FUNCTION SDSDOT(N,Sb,Sx,Incx,Sy,Incy)
         dsdot = dsdot + REAL(Sx(kx), 8)*REAL(Sy(ky), 8)
         kx = kx + Incx
         ky = ky + Incy
-      ENDDO
-    ENDIF
-  ENDIF
+      END DO
+    END IF
+  END IF
   SDSDOT = REAL( dsdot, 4 )
   RETURN
 END FUNCTION SDSDOT

@@ -60,7 +60,7 @@ REAL FUNCTION R9GMIC(A,X,Alx)
     t = te/fkp1
     s = s + t
     IF ( ABS(t)<eps*s ) GOTO 100
-  ENDDO
+  END DO
   CALL XERMSG('SLATEC','R9GMIC',&
     'NO CONVERGENCE IN 200 TERMS OF CONTINUED FRACTION',4,2)
   !
@@ -80,11 +80,11 @@ REAL FUNCTION R9GMIC(A,X,Alx)
     t = te/(fm-fk)
     s = s + t
     IF ( ABS(t)<eps*ABS(s) ) EXIT
-  ENDDO
+  END DO
   !
   DO k = 1, m
     R9GMIC = R9GMIC + 1.0/k
-  ENDDO
+  END DO
   !
   sgng = 1.0
   IF ( MOD(m,2)==1 ) sgng = -1.0

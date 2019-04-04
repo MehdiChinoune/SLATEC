@@ -101,10 +101,10 @@ SUBROUTINE QRSOLV(N,R,Ldr,Ipvt,Diag,Qtb,X,Sigma,Wa)
   DO j = 1, N
     DO i = j, N
       R(i,j) = R(j,i)
-    ENDDO
+    END DO
     X(j) = R(j,j)
     Wa(j) = Qtb(j)
-  ENDDO
+  END DO
   !
   !     ELIMINATE THE DIAGONAL MATRIX D USING A GIVENS ROTATION.
   !
@@ -117,7 +117,7 @@ SUBROUTINE QRSOLV(N,R,Ldr,Ipvt,Diag,Qtb,X,Sigma,Wa)
     IF ( Diag(l)/=zero ) THEN
       DO k = j, N
         Sigma(k) = zero
-      ENDDO
+      END DO
       Sigma(j) = Diag(l)
       !
       !        THE TRANSFORMATIONS TO ELIMINATE THE ROW OF D
@@ -139,7 +139,7 @@ SUBROUTINE QRSOLV(N,R,Ldr,Ipvt,Diag,Qtb,X,Sigma,Wa)
             cotan = R(k,k)/Sigma(k)
             sin = p5/SQRT(p25+p25*cotan**2)
             cos = sin*cotan
-          ENDIF
+          END IF
           !
           !           COMPUTE THE MODIFIED DIAGONAL ELEMENT OF R AND
           !           THE MODIFIED ELEMENT OF ((Q TRANSPOSE)*B,0).
@@ -157,18 +157,18 @@ SUBROUTINE QRSOLV(N,R,Ldr,Ipvt,Diag,Qtb,X,Sigma,Wa)
               temp = cos*R(i,k) + sin*Sigma(i)
               Sigma(i) = -sin*R(i,k) + cos*Sigma(i)
               R(i,k) = temp
-            ENDDO
-          ENDIF
-        ENDIF
-      ENDDO
-    ENDIF
+            END DO
+          END IF
+        END IF
+      END DO
+    END IF
     !
     !        STORE THE DIAGONAL ELEMENT OF S AND RESTORE
     !        THE CORRESPONDING DIAGONAL ELEMENT OF R.
     !
     Sigma(j) = R(j,j)
     R(j,j) = X(j)
-  ENDDO
+  END DO
   !
   !     SOLVE THE TRIANGULAR SYSTEM FOR Z. IF THE SYSTEM IS
   !     SINGULAR, THEN OBTAIN A LEAST SQUARES SOLUTION.
@@ -177,7 +177,7 @@ SUBROUTINE QRSOLV(N,R,Ldr,Ipvt,Diag,Qtb,X,Sigma,Wa)
   DO j = 1, N
     IF ( Sigma(j)==zero.AND.nsing==N ) nsing = j - 1
     IF ( nsing<N ) Wa(j) = zero
-  ENDDO
+  END DO
   IF ( nsing>=1 ) THEN
     DO k = 1, nsing
       j = nsing - k + 1
@@ -186,18 +186,18 @@ SUBROUTINE QRSOLV(N,R,Ldr,Ipvt,Diag,Qtb,X,Sigma,Wa)
       IF ( nsing>=jp1 ) THEN
         DO i = jp1, nsing
           sum = sum + R(i,j)*Wa(i)
-        ENDDO
-      ENDIF
+        END DO
+      END IF
       Wa(j) = (Wa(j)-sum)/Sigma(j)
-    ENDDO
-  ENDIF
+    END DO
+  END IF
   !
   !     PERMUTE THE COMPONENTS OF Z BACK TO COMPONENTS OF X.
   !
   DO j = 1, N
     l = Ipvt(j)
     X(l) = Wa(j)
-  ENDDO
+  END DO
   !
   !     LAST CARD OF SUBROUTINE QRSOLV.
   !

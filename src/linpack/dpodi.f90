@@ -79,7 +79,7 @@ SUBROUTINE DPODI(A,Lda,N,Det,Job)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   INTEGER Lda, N, Job
   REAL(8) :: A(Lda,*)
   REAL(8) :: Det(2)
@@ -101,13 +101,13 @@ SUBROUTINE DPODI(A,Lda,N,Det,Job)
       DO WHILE ( Det(1)<1.0D0 )
         Det(1) = s*Det(1)
         Det(2) = Det(2) - 1.0D0
-      ENDDO
+      END DO
       DO WHILE ( Det(1)>=s )
         Det(1) = Det(1)/s
         Det(2) = Det(2) + 1.0D0
-      ENDDO
-    ENDDO
-  ENDIF
+      END DO
+    END DO
+  END IF
   !
   !     COMPUTE INVERSE(R)
   !
@@ -122,9 +122,9 @@ SUBROUTINE DPODI(A,Lda,N,Det,Job)
           t = A(k,j)
           A(k,j) = 0.0D0
           CALL DAXPY(k,t,A(1,k),1,A(1,j),1)
-        ENDDO
-      ENDIF
-    ENDDO
+        END DO
+      END IF
+    END DO
     !
     !        FORM  INVERSE(R) * TRANS(INVERSE(R))
     !
@@ -134,10 +134,10 @@ SUBROUTINE DPODI(A,Lda,N,Det,Job)
         DO k = 1, jm1
           t = A(k,j)
           CALL DAXPY(k,t,A(1,j),1,A(1,k),1)
-        ENDDO
-      ENDIF
+        END DO
+      END IF
       t = A(j,j)
       CALL DSCAL(j,t,A(1,j),1)
-    ENDDO
-  ENDIF
+    END DO
+  END IF
 END SUBROUTINE DPODI

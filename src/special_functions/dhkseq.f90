@@ -81,7 +81,7 @@ SUBROUTINE DHKSEQ(X,M,H,Ierr)
     nx = INT(X)
     xinc = xmin - nx
     xdmy = X + xinc
-  ENDIF
+  END IF
   rxsq = 1.0D0/(xdmy*xdmy)
   hrx = 0.5D0/xdmy
   tst = 0.5D0*wdtol
@@ -98,9 +98,9 @@ SUBROUTINE DHKSEQ(X,M,H,Ierr)
       IF ( ABS(trm(k))<tst ) GOTO 100
       s = s + trm(k)
       tk = tk + 2.0D0
-    ENDDO
+    END DO
     GOTO 200
-  ENDIF
+  END IF
   100  H(M) = s + 0.5D0
   IF ( M/=1 ) THEN
     !-----------------------------------------------------------------------
@@ -117,13 +117,13 @@ SUBROUTINE DHKSEQ(X,M,H,Ierr)
           IF ( ABS(trm(k))<tst ) GOTO 120
           s = s + trm(k)
           fk = fk + 2.0D0
-        ENDDO
+        END DO
         GOTO 200
-      ENDIF
-      120      mx = M - i + 1
+      END IF
+      120  mx = M - i + 1
       H(mx) = s + 0.5D0
-    ENDDO
-  ENDIF
+    END DO
+  END IF
   IF ( xinc==0.0D0 ) RETURN
   !-----------------------------------------------------------------------
   !     RECUR BACKWARD FROM XDMY TO X
@@ -137,7 +137,7 @@ SUBROUTINE DHKSEQ(X,M,H,Ierr)
     trmh(i) = X/(xh+nx-i)
     v(i) = trmh(i)
     s = s + u(i) - v(i)
-  ENDDO
+  END DO
   mx = nx + 1
   trmr(mx) = X/xdmy
   u(mx) = trmr(mx)
@@ -149,10 +149,10 @@ SUBROUTINE DHKSEQ(X,M,H,Ierr)
       trmr(i) = trmr(i)*u(i)
       trmh(i) = trmh(i)*v(i)
       s = s + trmr(i) - trmh(i)
-    ENDDO
+    END DO
     trmr(mx) = trmr(mx)*u(mx)
     H(j) = H(j)*trmr(mx) + s
-  ENDDO
+  END DO
   RETURN
   200  Ierr = 2
 END SUBROUTINE DHKSEQ

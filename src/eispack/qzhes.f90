@@ -80,7 +80,7 @@ SUBROUTINE QZHES(Nm,N,A,B,Matz,Z)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   !
   INTEGER i, j, k, l, N, lb, l1, Nm, nk1, nm1, nm2
   REAL A(Nm,*), B(Nm,*), Z(Nm,*)
@@ -95,11 +95,11 @@ SUBROUTINE QZHES(Nm,N,A,B,Matz,Z)
       !
       DO j = 1, N
         Z(i,j) = 0.0E0
-      ENDDO
+      END DO
       !
       Z(i,i) = 1.0E0
-    ENDDO
-  ENDIF
+    END DO
+  END IF
   !     .......... REDUCE B TO UPPER TRIANGULAR FORM ..........
   IF ( N>1 ) THEN
     nm1 = N - 1
@@ -110,7 +110,7 @@ SUBROUTINE QZHES(Nm,N,A,B,Matz,Z)
       !
       DO i = l1, N
         s = s + ABS(B(i,l))
-      ENDDO
+      END DO
       !
       IF ( s/=0.0E0 ) THEN
         s = s + ABS(B(l,l))
@@ -119,7 +119,7 @@ SUBROUTINE QZHES(Nm,N,A,B,Matz,Z)
         DO i = l, N
           B(i,l) = B(i,l)/s
           r = r + B(i,l)**2
-        ENDDO
+        END DO
         !
         r = SIGN(SQRT(r),B(l,l))
         B(l,l) = B(l,l) + r
@@ -130,39 +130,39 @@ SUBROUTINE QZHES(Nm,N,A,B,Matz,Z)
           !
           DO i = l, N
             t = t + B(i,l)*B(i,j)
-          ENDDO
+          END DO
           !
           t = -t/rho
           !
           DO i = l, N
             B(i,j) = B(i,j) + t*B(i,l)
-          ENDDO
+          END DO
           !
-        ENDDO
+        END DO
         !
         DO j = 1, N
           t = 0.0E0
           !
           DO i = l, N
             t = t + B(i,l)*A(i,j)
-          ENDDO
+          END DO
           !
           t = -t/rho
           !
           DO i = l, N
             A(i,j) = A(i,j) + t*B(i,l)
-          ENDDO
+          END DO
           !
-        ENDDO
+        END DO
         !
         B(l,l) = -s*r
         !
         DO i = l1, N
           B(i,l) = 0.0E0
-        ENDDO
-      ENDIF
+        END DO
+      END IF
       !
-    ENDDO
+    END DO
     !     .......... REDUCE A TO UPPER HESSENBERG FORM, WHILE
     !                KEEPING B TRIANGULAR ..........
     IF ( N/=2 ) THEN
@@ -188,7 +188,7 @@ SUBROUTINE QZHES(Nm,N,A,B,Matz,Z)
               t = A(l,j) + u2*A(l1,j)
               A(l,j) = A(l,j) + t*v1
               A(l1,j) = A(l1,j) + t*v2
-            ENDDO
+            END DO
             !
             A(l1,k) = 0.0E0
             !
@@ -196,7 +196,7 @@ SUBROUTINE QZHES(Nm,N,A,B,Matz,Z)
               t = B(l,j) + u2*B(l1,j)
               B(l,j) = B(l,j) + t*v1
               B(l1,j) = B(l1,j) + t*v2
-            ENDDO
+            END DO
             !     .......... ZERO B(L+1,L) ..........
             s = ABS(B(l1,l1)) + ABS(B(l1,l))
             IF ( s/=0.0E0 ) THEN
@@ -211,7 +211,7 @@ SUBROUTINE QZHES(Nm,N,A,B,Matz,Z)
                 t = B(i,l1) + u2*B(i,l)
                 B(i,l1) = B(i,l1) + t*v1
                 B(i,l) = B(i,l) + t*v2
-              ENDDO
+              END DO
               !
               B(l1,l) = 0.0E0
               !
@@ -219,7 +219,7 @@ SUBROUTINE QZHES(Nm,N,A,B,Matz,Z)
                 t = A(i,l1) + u2*A(i,l)
                 A(i,l1) = A(i,l1) + t*v1
                 A(i,l) = A(i,l) + t*v2
-              ENDDO
+              END DO
               !
               IF ( Matz ) THEN
                 !
@@ -227,15 +227,15 @@ SUBROUTINE QZHES(Nm,N,A,B,Matz,Z)
                   t = Z(i,l1) + u2*Z(i,l)
                   Z(i,l1) = Z(i,l1) + t*v1
                   Z(i,l) = Z(i,l) + t*v2
-                ENDDO
-              ENDIF
-            ENDIF
-          ENDIF
+                END DO
+              END IF
+            END IF
+          END IF
           !
-        ENDDO
+        END DO
         !
-      ENDDO
-    ENDIF
-  ENDIF
+      END DO
+    END IF
+  END IF
   !
 END SUBROUTINE QZHES

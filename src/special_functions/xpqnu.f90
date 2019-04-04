@@ -64,9 +64,9 @@ SUBROUTINE XPQNU(Nu1,Nu2,Mu,Theta,Id,Pqa,Ipqa,Ierror)
     DO i = 1, k
       factmu = factmu*i
       CALL XADJ(factmu,if,Ierror)
-    ENDDO
+    END DO
     IF ( Ierror/=0 ) RETURN
-  ENDIF
+  END IF
   IF ( k==0 ) factmu = 1.
   IF ( k==0 ) if = 0
   !
@@ -113,7 +113,7 @@ SUBROUTINE XPQNU(Nu1,Nu2,Mu,Theta,Id,Pqa,Ipqa,Ierror)
           a = a*y*(flok-2.-nu)*(flok-1.+nu)/((flok-1.+dmu)*(flok-1.))
           CALL XADJ(a,ia,Ierror)
           IF ( Ierror/=0 ) RETURN
-        ENDIF
+        END IF
         IF ( Mu>=1 ) THEN
           x1 = (nu*(nu+1.)*(z-w+XPSI(flok,ipsik,ipsix))+(nu-flok+1.)&
             *(nu+flok)/(2.*flok))*a
@@ -125,8 +125,8 @@ SUBROUTINE XPQNU(Nu1,Nu2,Mu,Theta,Id,Pqa,Ipqa,Ierror)
           ix1 = ia
           CALL XADD(pq,ipq,x1,ix1,pq,ipq,Ierror)
           IF ( Ierror/=0 ) RETURN
-        ENDIF
-      ENDDO
+        END IF
+      END DO
       IF ( Mu>=1 ) pq = -r*pq
       ixs = 0
       IF ( Mu>=1 ) CALL XADD(pq,ipq,-xs,ixs,pq,ipq,Ierror)
@@ -151,7 +151,7 @@ SUBROUTINE XPQNU(Nu1,Nu2,Mu,Theta,Id,Pqa,Ipqa,Ierror)
         IF ( a==0. ) EXIT
         CALL XADD(pq,ipq,a,ia,pq,ipq,Ierror)
         IF ( Ierror/=0 ) RETURN
-      ENDDO
+      END DO
       IF ( Mu>0 ) THEN
         x2 = r
         x1 = pq
@@ -159,25 +159,25 @@ SUBROUTINE XPQNU(Nu1,Nu2,Mu,Theta,Id,Pqa,Ipqa,Ierror)
         DO i = 1, k
           x1 = x1*x2
           CALL XADJ(x1,ipq,Ierror)
-        ENDDO
+        END DO
         IF ( Ierror/=0 ) RETURN
         pq = x1/factmu
         ipq = ipq - if
         CALL XADJ(pq,ipq,Ierror)
         IF ( Ierror/=0 ) RETURN
-      ENDIF
-    ENDIF
+      END IF
+    END IF
     IF ( j==1 ) pq2 = pq
     IF ( j==1 ) ipq2 = ipq
     nu = nu + 1.
-  ENDDO
+  END DO
   k = 0
   IF ( nu-1.5>=Nu1 ) THEN
     k = k + 1
     Pqa(k) = pq2
     Ipqa(k) = ipq2
     IF ( nu>Nu2+.5 ) RETURN
-  ENDIF
+  END IF
   100  pq1 = pq
   ipq1 = ipq
   IF ( nu>=Nu1+.5 ) THEN
@@ -185,7 +185,7 @@ SUBROUTINE XPQNU(Nu1,Nu2,Mu,Theta,Id,Pqa,Ipqa,Ierror)
     Pqa(k) = pq
     Ipqa(k) = ipq
     IF ( nu>Nu2+.5 ) RETURN
-  ENDIF
+  END IF
   !
   !        FORWARD NU-WISE RECURRENCE FOR F(MU,NU,X) FOR FIXED MU
   !        USING

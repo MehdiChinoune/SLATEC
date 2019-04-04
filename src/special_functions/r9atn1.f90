@@ -63,7 +63,7 @@ REAL FUNCTION R9ATN1(X)
     xbig = 1.571/SQRT(eps)
     xmax = 1.571/eps
     first = .FALSE.
-  ENDIF
+  END IF
   !
   y = ABS(X)
   IF ( y>1.0 ) THEN
@@ -75,7 +75,7 @@ REAL FUNCTION R9ATN1(X)
     !
     R9ATN1 = (ATAN(X)-X)/X**3
     RETURN
-  ENDIF
+  END IF
   !
   IF ( y<=xsml ) R9ATN1 = -1.0/3.0
   IF ( y<=xsml ) RETURN

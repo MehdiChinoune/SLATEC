@@ -62,7 +62,7 @@ SUBROUTINE CPOFA(A,Lda,N,Info)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   INTEGER Lda, N, Info
   COMPLEX A(Lda,*)
   !
@@ -80,12 +80,12 @@ SUBROUTINE CPOFA(A,Lda,N,Info)
         t = t/A(k,k)
         A(k,j) = t
         s = s + REAL(t*CONJG(t))
-      ENDDO
-    ENDIF
+      END DO
+    END IF
     s = REAL(A(j,j)) - s
     IF ( s<=0.0E0.OR.AIMAG(A(j,j))/=0.0E0 ) RETURN
     A(j,j) = CMPLX(SQRT(s),0.0E0)
-  ENDDO
+  END DO
   Info = 0
   RETURN
 END SUBROUTINE CPOFA

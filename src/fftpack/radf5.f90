@@ -26,7 +26,7 @@ SUBROUTINE RADF5(Ido,L1,Cc,Ch,Wa1,Wa2,Wa3,Wa4)
   !   890831  Modified array declarations.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
-  
+
   INTEGER i, ic, Ido, idp2, k, L1
   REAL Cc(Ido,L1,5), Ch(Ido,5,*), ci2, ci3, ci4, ci5, cr2, cr3, cr4, cr5, di2, di3, &
     di4, di5, dr2, dr3, dr4, dr5, pi, ti11
@@ -48,7 +48,7 @@ SUBROUTINE RADF5(Ido,L1,Cc,Ch,Wa1,Wa2,Wa3,Wa4)
     Ch(1,3,k) = ti11*ci5 + ti12*ci4
     Ch(Ido,4,k) = Cc(1,k,1) + tr12*cr2 + tr11*cr3
     Ch(1,5,k) = ti12*ci5 - ti11*ci4
-  ENDDO
+  END DO
   IF ( Ido==1 ) RETURN
   idp2 = Ido + 2
   IF ( (Ido-1)/2<L1 ) THEN
@@ -90,10 +90,10 @@ SUBROUTINE RADF5(Ido,L1,Cc,Ch,Wa1,Wa2,Wa3,Wa4)
         Ch(ic-1,4,k) = tr3 - tr4
         Ch(i,5,k) = ti3 + ti4
         Ch(ic,4,k) = ti4 - ti3
-      ENDDO
-    ENDDO
+      END DO
+    END DO
     RETURN
-  ENDIF
+  END IF
   DO k = 1, L1
     !DIR$ IVDEP
     DO i = 3, Ido, 2
@@ -132,7 +132,7 @@ SUBROUTINE RADF5(Ido,L1,Cc,Ch,Wa1,Wa2,Wa3,Wa4)
       Ch(ic-1,4,k) = tr3 - tr4
       Ch(i,5,k) = ti3 + ti4
       Ch(ic,4,k) = ti4 - ti3
-    ENDDO
-  ENDDO
+    END DO
+  END DO
   RETURN
 END SUBROUTINE RADF5

@@ -54,7 +54,7 @@ COMPLEX FUNCTION CDOTC(N,Cx,Incx,Cy,Incy)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920310  Corrected definition of LX in DESCRIPTION.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   INTEGER i, Incx, Incy, kx, ky, N, ns
   COMPLEX Cx(*), Cy(*)
   !* FIRST EXECUTABLE STATEMENT  CDOTC
@@ -67,9 +67,9 @@ COMPLEX FUNCTION CDOTC(N,Cx,Incx,Cy,Incy)
     ns = N*Incx
     DO i = 1, ns, Incx
       CDOTC = CDOTC + CONJG(Cx(i))*Cy(i)
-    ENDDO
+    END DO
     RETURN
-  ENDIF
+  END IF
   !
   !     Code for unequal or nonpositive increments.
   !
@@ -81,6 +81,6 @@ COMPLEX FUNCTION CDOTC(N,Cx,Incx,Cy,Incy)
     CDOTC = CDOTC + CONJG(Cx(kx))*Cy(ky)
     kx = kx + Incx
     ky = ky + Incy
-  ENDDO
+  END DO
   RETURN
 END FUNCTION CDOTC

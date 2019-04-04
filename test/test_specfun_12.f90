@@ -41,7 +41,7 @@ CONTAINS
       kontrl = +1
     ELSE
       kontrl = 0
-    ENDIF
+    END IF
     CALL XSETF(kontrl)
     !
     !  FORCE ERROR 1
@@ -54,7 +54,7 @@ CONTAINS
       ipass1 = 1
     ELSE
       ipass1 = 0
-    ENDIF
+    END IF
     CALL XERCLR
     !
     !  FORCE ERROR 2
@@ -67,7 +67,7 @@ CONTAINS
       ipass2 = 1
     ELSE
       ipass2 = 0
-    ENDIF
+    END IF
     CALL XERCLR
     !
     !  FORCE ERROR 3
@@ -80,7 +80,7 @@ CONTAINS
       ipass3 = 1
     ELSE
       ipass3 = 0
-    ENDIF
+    END IF
     CALL XERCLR
     !
     !  ARGUMENTS IN RANGE
@@ -93,7 +93,7 @@ CONTAINS
       ipass4 = 1
     ELSE
       ipass4 = 0
-    ENDIF
+    END IF
     Ipass = MIN(ipass1,ipass2,ipass3,ipass4)
     IF ( Kprint<=0 ) THEN
     ELSEIF ( Kprint==1 ) THEN
@@ -106,7 +106,7 @@ CONTAINS
       IF ( ipass4==0 ) WRITE (Lun,99005) pi, trc, dif
       99005 FORMAT (' CORRECT ANSWER =',1PE14.6/'COMPUTED ANSWER =',&
         E14.6/'     DIFFERENCE =',E14.6)
-    ENDIF
+    END IF
     CALL XSETF(contrl)
     99006 FORMAT (' RC - FAILED')
   END SUBROUTINE QCRC
@@ -149,7 +149,7 @@ CONTAINS
       kontrl = +1
     ELSE
       kontrl = 0
-    ENDIF
+    END IF
     CALL XSETF(kontrl)
     !
     !  FORCE ERROR 1
@@ -162,7 +162,7 @@ CONTAINS
       ipass1 = 1
     ELSE
       ipass1 = 0
-    ENDIF
+    END IF
     CALL XERCLR
     !
     !  FORCE ERROR 2
@@ -175,7 +175,7 @@ CONTAINS
       ipass2 = 1
     ELSE
       ipass2 = 0
-    ENDIF
+    END IF
     CALL XERCLR
     !
     !  FORCE ERROR 3
@@ -188,7 +188,7 @@ CONTAINS
       ipass3 = 1
     ELSE
       ipass3 = 0
-    ENDIF
+    END IF
     CALL XERCLR
     !
     !  ARGUMENTS IN RANGE
@@ -202,7 +202,7 @@ CONTAINS
       ipass4 = 1
     ELSE
       Ipass = 0
-    ENDIF
+    END IF
     Ipass = MIN(ipass1,ipass2,ipass3,ipass4)
     IF ( Kprint<=0 ) THEN
     ELSEIF ( Kprint==1 ) THEN
@@ -215,7 +215,7 @@ CONTAINS
       IF ( ipass4==0 ) WRITE (Lun,99005) blem, trd, dif
       99005 FORMAT (' CORRECT ANSWER =',1PE14.6/'COMPUTED ANSWER =',&
         E14.6/'     DIFFERENCE =',E14.6)
-    ENDIF
+    END IF
     CALL XSETF(contrl)
     99006 FORMAT (' RD - FAILED')
   END SUBROUTINE QCRD
@@ -258,7 +258,7 @@ CONTAINS
       kontrl = +1
     ELSE
       kontrl = 0
-    ENDIF
+    END IF
     CALL XSETF(kontrl)
     !
     !  FORCE ERROR 1
@@ -271,7 +271,7 @@ CONTAINS
       ipass1 = 1
     ELSE
       ipass1 = 0
-    ENDIF
+    END IF
     CALL XERCLR
     !
     !  FORCE ERROR 2
@@ -284,7 +284,7 @@ CONTAINS
       ipass2 = 1
     ELSE
       ipass2 = 0
-    ENDIF
+    END IF
     CALL XERCLR
     !
     !  FORCE ERROR 3
@@ -297,7 +297,7 @@ CONTAINS
       ipass3 = 1
     ELSE
       ipass3 = 0
-    ENDIF
+    END IF
     CALL XERCLR
     !
     !  ARGUMENTS IN RANGE
@@ -311,7 +311,7 @@ CONTAINS
       ipass4 = 1
     ELSE
       ipass4 = 0
-    ENDIF
+    END IF
     Ipass = MIN(ipass1,ipass2,ipass3,ipass4)
     IF ( Kprint==0 ) THEN
     ELSEIF ( Kprint==1 ) THEN
@@ -324,7 +324,7 @@ CONTAINS
       IF ( ipass4==0 ) WRITE (Lun,99005) alem, trf, dif
       99005 FORMAT (' CORRECT ANSWER =',1PE14.6/'COMPUTED ANSWER =',&
         E14.6/'     DIFFERENCE =',E14.6)
-    ENDIF
+    END IF
     CALL XSETF(contrl)
     99006 FORMAT (' RF - FAILED')
   END SUBROUTINE QCRF
@@ -367,7 +367,7 @@ CONTAINS
       kontrl = +1
     ELSE
       kontrl = 0
-    ENDIF
+    END IF
     CALL XSETF(kontrl)
     !
     !  FORCE ERROR 1
@@ -380,7 +380,7 @@ CONTAINS
       ipass1 = 1
     ELSE
       ipass1 = 0
-    ENDIF
+    END IF
     CALL XERCLR
     !
     !  FORCE ERROR 2
@@ -393,7 +393,7 @@ CONTAINS
       ipass2 = 1
     ELSE
       ipass2 = 0
-    ENDIF
+    END IF
     CALL XERCLR
     !
     !  FORCE ERROR 3
@@ -406,7 +406,7 @@ CONTAINS
       ipass3 = 1
     ELSE
       ipass3 = 0
-    ENDIF
+    END IF
     CALL XERCLR
     !
     !  ARGUMENTS IN RANGE
@@ -419,7 +419,7 @@ CONTAINS
       ipass4 = 1
     ELSE
       ipass4 = 0
-    ENDIF
+    END IF
     Ipass = MIN(ipass1,ipass2,ipass3,ipass4)
     IF ( Kprint<=0 ) THEN
     ELSEIF ( Kprint==1 ) THEN
@@ -432,7 +432,7 @@ CONTAINS
       IF ( ipass4==0 ) WRITE (Lun,99005) consj, trj, dif
       99005 FORMAT (' CORRECT ANSWER =',1PE14.6/'COMPUTED ANSWER =',&
         E14.6/'     DIFFERENCE =',E14.6)
-    ENDIF
+    END IF
     CALL XSETF(contrl)
     99006 FORMAT (' RJ - FAILED')
   END SUBROUTINE QCRJ
@@ -507,7 +507,7 @@ PROGRAM TEST13
     CALL XSETF(0)
   ELSE
     CALL XSETF(1)
-  ENDIF
+  END IF
   !
   !     Test single precision Carlson elliptic routines
   !
@@ -529,6 +529,6 @@ PROGRAM TEST13
     WRITE (lun,99002) nfail
     99002 FORMAT (/' ************* WARNING -- ',I5,&
       ' TEST(S) FAILED IN PROGRAM TEST13  *************')
-  ENDIF
+  END IF
   STOP
 END PROGRAM TEST13

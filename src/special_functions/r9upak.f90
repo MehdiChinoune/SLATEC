@@ -29,7 +29,7 @@ SUBROUTINE R9UPAK(X,Y,N)
   !   780701  DATE WRITTEN
   !   861211  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
-  
+
   !* FIRST EXECUTABLE STATEMENT  R9UPAK
   REAL absx, X, Y
   INTEGER N
@@ -43,13 +43,13 @@ SUBROUTINE R9UPAK(X,Y,N)
     DO WHILE ( absx<0.5E0 )
       N = N - 1
       absx = absx*2.0E0
-    ENDDO
+    END DO
     !
     DO WHILE ( absx>=1.0E0 )
       N = N + 1
       absx = absx*0.5E0
-    ENDDO
+    END DO
     Y = SIGN(absx,X)
-  ENDIF
+  END IF
   !
 END SUBROUTINE R9UPAK

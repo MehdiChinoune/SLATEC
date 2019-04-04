@@ -54,7 +54,7 @@ CONTAINS
     !   890911  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   901010  Added PASS/FAIL message and cleaned up FORMATs.  (RWC)
-    
+
     REAL am(75), an(105), bm(75), bn(105), cm(75), cn(105), deltas, deltat, &
       ermax, err, hds, hdt, s(75), t(105), tds, tdt, temp1, temp2, temp3, w(1952)
     REAL y(75,105), z
@@ -74,11 +74,11 @@ CONTAINS
     deltas = 1.0E0/(m+1)
     DO i = 1, m
       s(i) = i*deltas
-    ENDDO
+    END DO
     deltat = 1.0E0/(n+1)
     DO j = 1, n
       t(j) = j*deltat
-    ENDDO
+    END DO
     !
     !     COMPUTE THE COEFFICIENTS AM, BM AND CM CORRESPONDING TO THE S
     !     DIRECTION.
@@ -92,7 +92,7 @@ CONTAINS
       am(i) = temp1*temp2
       cm(i) = temp1*temp3
       bm(i) = -(am(i)+cm(i))
-    ENDDO
+    END DO
     !
     !     COMPUTE THE COEFFICIENTS AN, BN AND CN CORRESPONDING TO THE T
     !     DIRECTION.
@@ -106,25 +106,25 @@ CONTAINS
       an(j) = temp1*temp2
       cn(j) = temp1*temp3
       bn(j) = -(an(j)+cn(j))
-    ENDDO
+    END DO
     !
     !     COMPUTE RIGHT SIDE OF EQUATION
     !
     DO j = 1, n
       DO i = 1, m
         y(i,j) = 3.75*s(i)*t(j)*(s(i)**4.+t(j)**4.)
-      ENDDO
-    ENDDO
+      END DO
+    END DO
     !
     !     INCLUDE NONHOMOGENEOUS BOUNDARY INTO RIGHT SIDE. NOTE THAT THE
     !     CORNER AT J=N,I=M INCLUDES CONTRIBUTIONS FROM BOTH BOUNDARIES.
     !
     DO j = 1, n
       y(m,j) = y(m,j) - cm(m)*t(j)**5.
-    ENDDO
+    END DO
     DO i = 1, m
       y(i,n) = y(i,n) - cn(n)*s(i)**5.
-    ENDDO
+    END DO
     DO
       !
       CALL BLKTRI(iflg,np,n,an,bn,cn,mp,m,am,bm,cm,idimy,y,ierror,w)
@@ -138,8 +138,8 @@ CONTAINS
           DO i = 1, m
             z = ABS(y(i,j)-(s(i)*t(j))**5.)
             IF ( z>err ) err = z
-          ENDDO
-        ENDDO
+          END DO
+        END DO
         !
         Ipass = 1
         IF ( err>ermax ) Ipass = 0
@@ -160,11 +160,11 @@ CONTAINS
           ELSE
             WRITE (Lun,99003)
             99003 FORMAT (60X,'FAIL'/)
-          ENDIF
-        ENDIF
+          END IF
+        END IF
         RETURN
-      ENDIF
-    ENDDO
+      END IF
+    END DO
   END SUBROUTINE QXBLKT
   !** QXCRT
   SUBROUTINE QXCRT(Lun,Kprint,Ipass)
@@ -235,7 +235,7 @@ CONTAINS
     !   890911  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   901010  Added PASS/FAIL message and cleaned up FORMATs.  (RWC)
-    
+
     REAL a, b, bda, bdb(81), bdc, bdd, c, d, dum, elmbda, ermax, err, &
       f(45,82), pertrb, pi, piby2, PIMACH, pisq, w(1200), x(41)
     REAL y(81), z
@@ -271,30 +271,30 @@ CONTAINS
     !
     DO i = 1, mp1
       x(i) = (i-1)/20.0E0
-    ENDDO
+    END DO
     DO j = 1, np1
       y(j) = -1.0E0 + (j-1)/20.0E0
-    ENDDO
+    END DO
     !
     !     GENERATE BOUNDARY DATA.
     !
     DO j = 1, np1
       bdb(j) = 4.*COS((y(j)+1.)*piby2)
-    ENDDO
+    END DO
     !
     !     BDA, BDC, AND BDD ARE DUMMY VARIABLES.
     !
     DO j = 1, np1
       f(1,j) = 0.
-    ENDDO
+    END DO
     !
     !     GENERATE RIGHT SIDE OF EQUATION.
     !
     DO i = 2, mp1
       DO j = 1, np1
         f(i,j) = (2.-(4.+pisq/4.)*x(i)**2)*COS((y(j)+1.)*piby2)
-      ENDDO
-    ENDDO
+      END DO
+    END DO
     CALL HWSCRT(a,b,m,mbdcnd,bda,bdb,c,d,n,nbdcnd,bdc,bdd,elmbda,f,idimf,&
       pertrb,ierror,w)
     !
@@ -306,8 +306,8 @@ CONTAINS
       DO j = 1, np1
         z = ABS(f(i,j)-x(i)**2*COS((y(j)+1.)*piby2))
         IF ( z>err ) err = z
-      ENDDO
-    ENDDO
+      END DO
+    END DO
     !
     Ipass = 1
     IF ( err>ermax ) Ipass = 0
@@ -328,8 +328,8 @@ CONTAINS
       ELSE
         WRITE (Lun,99003)
         99003 FORMAT (60X,'FAIL'/)
-      ENDIF
-    ENDIF
+      END IF
+    END IF
     RETURN
   END SUBROUTINE QXCRT
   !** QXCSP
@@ -385,7 +385,7 @@ CONTAINS
     !   890911  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   901010  Added PASS/FAIL message and cleaned up FORMATs.  (RWC)
-    
+
     REAL bdrf, bdrs, bdtf(33), bdts, ci4, dphi, dr, dtheta, dum, elmbda, &
       ermax, err, f(48,33), pertrb, pi, PIMACH, r(33), rf, rs, si
     REAL tf, theta(48), ts, w(1200), z
@@ -418,24 +418,24 @@ CONTAINS
     dtheta = tf/m
     DO i = 1, mp1
       theta(i) = (i-1)*dtheta
-    ENDDO
+    END DO
     np1 = n + 1
     dr = 1.0E0/n
     DO j = 1, np1
       r(j) = (j-1)*dr
-    ENDDO
+    END DO
     !
     !     GENERATE NORMAL DERIVATIVE DATA AT EQUATOR
     !
     DO j = 1, np1
       bdtf(j) = 0.
-    ENDDO
+    END DO
     !
     !     COMPUTE BOUNDARY DATA ON THE SURFACE OF THE SPHERE
     !
     DO i = 1, mp1
       f(i,n+1) = COS(theta(i))**4
-    ENDDO
+    END DO
     !
     !     COMPUTE RIGHT SIDE OF EQUATION
     !
@@ -443,8 +443,8 @@ CONTAINS
       ci4 = 12.0E0*COS(theta(i))**2
       DO j = 1, n
         f(i,j) = ci4*r(j)**2
-      ENDDO
-    ENDDO
+      END DO
+    END DO
     !
     CALL HWSCSP(intl,ts,tf,m,mbdcnd,bdts,bdtf,rs,rf,n,nbdcnd,bdrs,bdrf,elmbda,&
       f,idimf,pertrb,ierror,w)
@@ -457,8 +457,8 @@ CONTAINS
       DO j = 1, n
         z = ABS(f(i,j)-ci4*r(j)**4)
         IF ( z>err ) err = z
-      ENDDO
-    ENDDO
+      END DO
+    END DO
     !
     Ipass = 1
     IF ( err>ermax ) Ipass = 0
@@ -477,9 +477,9 @@ CONTAINS
           WRITE (Lun,99003)
         ELSE
           WRITE (Lun,99004)
-        ENDIF
-      ENDIF
-    ENDIF
+        END IF
+      END IF
+    END IF
     !
     !     THE FOLLOWING PROGRAM ILLUSTRATES THE USE OF HWSCSP TO SOLVE
     !     A THREE DIMENSIONAL PROBLEM WHICH HAS LONGITUDINAL DEPENDENCE
@@ -493,15 +493,15 @@ CONTAINS
     !
     DO i = 1, mp1
       f(i,n+1) = SIN(theta(i))
-    ENDDO
+    END DO
     !
     !     COMPUTE RIGHT SIDE OF THE EQUATION
     !
     DO j = 1, n
       DO i = 1, mp1
         f(i,j) = 0.
-      ENDDO
-    ENDDO
+      END DO
+    END DO
     !
     CALL HWSCSP(intl,ts,tf,m,mbdcnd,bdts,bdtf,rs,rf,n,nbdcnd,bdrs,bdrf,elmbda,&
       f,idimf,pertrb,ierror,w)
@@ -514,8 +514,8 @@ CONTAINS
       DO j = 1, np1
         z = ABS(f(i,j)-r(j)*si)
         IF ( z>err ) err = z
-      ENDDO
-    ENDDO
+      END DO
+    END DO
     !
     IF ( err>ermax ) Ipass = 0
     IF ( Kprint==0 ) RETURN
@@ -532,8 +532,8 @@ CONTAINS
         WRITE (Lun,99003)
       ELSE
         WRITE (Lun,99004)
-      ENDIF
-    ENDIF
+      END IF
+    END IF
     RETURN
     99003 FORMAT (60X,'PASS'/)
     99004 FORMAT (60X,'FAIL'/)
@@ -612,7 +612,7 @@ CONTAINS
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   901010  Added PASS/FAIL message and cleaned up FORMATs.  (RWC)
     !   930415  Test modified to use a 64 by 128 grid.  (WRB)
-    
+
     REAL a, b, bda(129), bdb(129), bdc(65), bdd(65), c, d, elmbda, ermax, err, &
       f(65,129), pertrb, r(65), w(1400), x, z(129)
     INTEGER i, idimf, ierror, Ipass, j, Kprint, Lun, m, mbdcnd, mp1, n, nbdcnd, np1
@@ -645,20 +645,20 @@ CONTAINS
     !
     DO i = 1, mp1
       r(i) = (i-1)/64.0E0
-    ENDDO
+    END DO
     DO j = 1, np1
       z(j) = (j-1)/128.0E0
-    ENDDO
+    END DO
     !
     !     GENERATE BOUNDARY DATA.
     !
     DO j = 1, np1
       bdb(j) = 4.0*z(j)**4
-    ENDDO
+    END DO
     DO i = 1, mp1
       bdc(i) = 0.0
       bdd(i) = 4.0*r(i)**4
-    ENDDO
+    END DO
     !
     !     BDA IS A DUMMY VARIABLE.
     !
@@ -667,8 +667,8 @@ CONTAINS
     DO i = 1, mp1
       DO j = 1, np1
         f(i,j) = 4.0*r(i)**2*z(j)**2*(4.0*z(j)**2+3.0*r(i)**2)
-      ENDDO
-    ENDDO
+      END DO
+    END DO
     CALL HWSCYL(a,b,m,mbdcnd,bda,bdb,c,d,n,nbdcnd,bdc,bdd,elmbda,f,idimf,&
       pertrb,ierror,w)
     !
@@ -680,21 +680,21 @@ CONTAINS
     DO i = 1, mp1
       DO j = 1, np1
         x = x + f(i,j) - (r(i)*z(j))**4
-      ENDDO
-    ENDDO
+      END DO
+    END DO
     x = x/(np1*mp1)
     DO i = 1, mp1
       DO j = 1, np1
         f(i,j) = f(i,j) - x
-      ENDDO
-    ENDDO
+      END DO
+    END DO
     err = 0.0
     DO i = 1, mp1
       DO j = 1, np1
         x = ABS(f(i,j)-(r(i)*z(j))**4)
         IF ( x>err ) err = x
-      ENDDO
-    ENDDO
+      END DO
+    END DO
     !
     Ipass = 1
     IF ( err>ermax ) Ipass = 0
@@ -765,7 +765,7 @@ CONTAINS
     !   891009  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   901010  Added PASS/FAIL message and cleaned up FORMATs.  (RWC)
-    
+
     REAL a(20), b(20), c(20), deltax, deltay, dum, dysq, ermax, err, f(25,130), pi, &
       PIMACH, s, t, w(1200), x(20), y(120), z
     INTEGER i, idimy, ierror, Ipass, j, Kprint, Lun, m, mm1, mperod, n, nperod
@@ -789,10 +789,10 @@ CONTAINS
     !
     DO i = 1, m
       x(i) = (i-1)*deltax
-    ENDDO
+    END DO
     DO j = 1, n
       y(j) = -pi + (j-1)*deltay
-    ENDDO
+    END DO
     !
     !     GENERATE COEFFICIENTS.
     !
@@ -805,7 +805,7 @@ CONTAINS
       a(i) = (1.+x(i))**2*s + (1.+x(i))*t
       c(i) = (1.+x(i))**2*s - (1.+x(i))*t
       b(i) = -2.0E0*(1.0E0+x(i))**2*s
-    ENDDO
+    END DO
     c(m) = 0.
     !
     !     GENERATE RIGHT SIDE OF EQUATION FOR I = 1 SHOWING INTRODUCTION OF
@@ -814,7 +814,7 @@ CONTAINS
     dysq = deltay**2
     DO j = 1, n
       f(1,j) = dysq*(11.+8./deltax)*SIN(y(j))
-    ENDDO
+    END DO
     !
     !     GENERATE RIGHT SIDE.
     !
@@ -822,8 +822,8 @@ CONTAINS
     DO i = 2, mm1
       DO j = 1, n
         f(i,j) = dysq*3.*(1.+x(i))**4*SIN(y(j))
-      ENDDO
-    ENDDO
+      END DO
+    END DO
     !
     !     GENERATE RIGHT SIDE FOR I = M SHOWING INTRODUCTION OF
     !     BOUNDARY DATA.
@@ -831,7 +831,7 @@ CONTAINS
     DO j = 1, n
       f(m,j) = dysq*(3.*(1.+x(m))**4-16.*((1.+x(m))/deltax)**2+16.*(1.+x(m))&
         /deltax)*SIN(y(j))
-    ENDDO
+    END DO
     CALL GENBUN(nperod,n,mperod,m,a,b,c,idimy,f,ierror,w)
     !
     !     COMPUTE DISCRETIZATION ERROR.  THE EXACT SOLUTION IS
@@ -842,8 +842,8 @@ CONTAINS
       DO j = 1, n
         z = ABS(f(i,j)-(1.+x(i))**4*SIN(y(j)))
         IF ( z>err ) err = z
-      ENDDO
-    ENDDO
+      END DO
+    END DO
     !
     Ipass = 1
     IF ( err>ermax ) Ipass = 0
@@ -864,8 +864,8 @@ CONTAINS
       ELSE
         WRITE (Lun,99003)
         99003 FORMAT (60X,'FAIL'/)
-      ENDIF
-    ENDIF
+      END IF
+    END IF
     RETURN
   END SUBROUTINE QXGBUN
   !** QXPLR
@@ -937,7 +937,7 @@ CONTAINS
     !   890911  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   901010  Added PASS/FAIL message and cleaned up FORMATs.  (RWC)
-    
+
     REAL a, b, bda, bdb, bdc(51), bdd(51), c, d, dum, elmbda, ermax, err, &
       f(100,50), pertrb, pi, PIMACH, r(51), theta(49), w(1200), z
     INTEGER i, idimf, ierror, Ipass, j, Kprint, Lun, m, mbdcnd, mp1, &
@@ -970,31 +970,31 @@ CONTAINS
     !
     DO i = 1, mp1
       r(i) = (i-1)/50.0E0
-    ENDDO
+    END DO
     DO j = 1, np1
       theta(j) = (j-1)*pi/96.0E0
-    ENDDO
+    END DO
     !
     !     GENERATE BOUNDARY DATA.
     !
     DO i = 1, mp1
       bdc(i) = 0.
       bdd(i) = 0.
-    ENDDO
+    END DO
     !
     !     BDA AND BDB ARE DUMMY VARIABLES.
     !
     DO j = 1, np1
       f(mp1,j) = 1. - COS(4.*theta(j))
-    ENDDO
+    END DO
     !
     !     GENERATE RIGHT SIDE OF EQUATION.
     !
     DO i = 1, m
       DO j = 1, np1
         f(i,j) = 16.*r(i)**2
-      ENDDO
-    ENDDO
+      END DO
+    END DO
     CALL HWSPLR(a,b,m,mbdcnd,bda,bdb,c,d,n,nbdcnd,bdc,bdd,elmbda,f,idimf,&
       pertrb,ierror,w)
     !
@@ -1006,8 +1006,8 @@ CONTAINS
       DO j = 1, np1
         z = ABS(f(i,j)-r(i)**4*(1.-COS(4.*theta(j))))
         IF ( z>err ) err = z
-      ENDDO
-    ENDDO
+      END DO
+    END DO
     !
     Ipass = 1
     IF ( err>ermax ) Ipass = 0
@@ -1028,8 +1028,8 @@ CONTAINS
       ELSE
         WRITE (Lun,99003)
         99003 FORMAT (60X,'FAIL'/)
-      ENDIF
-    ENDIF
+      END IF
+    END IF
     RETURN
   END SUBROUTINE QXPLR
   !** QXSSP
@@ -1086,7 +1086,7 @@ CONTAINS
     !   890911  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   901010  Added PASS/FAIL message and cleaned up FORMATs.  (RWC)
-    
+
     REAL bdpf, bdps, bdtf(73), bdts, dphi, dtheta, dum, elmbda, ermax, &
       err, f(19,73), pertrb, pf, pi, PIMACH, ps, sinp(73), sint(19), tf, ts
     REAL w(1200), z
@@ -1115,26 +1115,26 @@ CONTAINS
     mp1 = m + 1
     DO i = 1, mp1
       sint(i) = SIN((i-1)*dtheta)
-    ENDDO
+    END DO
     dphi = (pi+pi)/n
     np1 = n + 1
     DO j = 1, np1
       sinp(j) = SIN((j-1)*dphi)
-    ENDDO
+    END DO
     !
     !     COMPUTE RIGHT SIDE OF EQUATION AND STORE IN F
     !
     DO j = 1, np1
       DO i = 1, mp1
         f(i,j) = 2. - 6.*(sint(i)*sinp(j))**2
-      ENDDO
-    ENDDO
+      END DO
+    END DO
     !
     !     STORE DERIVATIVE DATA AT THE EQUATOR
     !
     DO j = 1, np1
       bdtf(j) = 0.
-    ENDDO
+    END DO
     !
     CALL HWSSSP(ts,tf,m,mbdcnd,bdts,bdtf,ps,pf,n,nbdcnd,bdps,bdpf,elmbda,f,&
       idimf,pertrb,ierror,w)
@@ -1147,8 +1147,8 @@ CONTAINS
       DO i = 1, mp1
         z = ABS(f(i,j)-(sint(i)*sinp(j))**2-f(1,1))
         IF ( z>err ) err = z
-      ENDDO
-    ENDDO
+      END DO
+    END DO
     !
     Ipass = 1
     IF ( err>ermax ) Ipass = 0
@@ -1169,8 +1169,8 @@ CONTAINS
       ELSE
         WRITE (Lun,99003)
         99003 FORMAT (60X,'FAIL'/)
-      ENDIF
-    ENDIF
+      END IF
+    END IF
     RETURN
   END SUBROUTINE QXSSP
 END MODULE TEST50_MOD
@@ -1233,7 +1233,7 @@ PROGRAM TEST50
   !   890618  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900524  Cosmetic changes to code.  (WRB)
-  
+
   INTEGER I1MACH
   INTEGER ipass, kprint, lin, lun, nfail
   !* FIRST EXECUTABLE STATEMENT  TEST50
@@ -1250,7 +1250,7 @@ PROGRAM TEST50
     CALL XSETF(0)
   ELSE
     CALL XSETF(1)
-  ENDIF
+  END IF
   !
   !     Test HWSCRT
   !
@@ -1296,6 +1296,6 @@ PROGRAM TEST50
     WRITE (lun,99002) nfail
     99002 FORMAT (/' ************* WARNING -- ',I5,&
       ' TEST(S) FAILED IN PROGRAM TEST50 *************')
-  ENDIF
+  END IF
   STOP
 END PROGRAM TEST50

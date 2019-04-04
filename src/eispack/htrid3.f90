@@ -86,7 +86,7 @@ SUBROUTINE HTRID3(Nm,N,A,D,E,E2,Tau)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   !
   INTEGER i, j, k, l, N, ii, Nm, jm1, jp1
   REAL A(Nm,*), D(*), E(*), E2(*), Tau(2,*)
@@ -106,7 +106,7 @@ SUBROUTINE HTRID3(Nm,N,A,D,E,E2,Tau)
       !     .......... SCALE ROW (ALGOL TOL THEN NOT NEEDED) ..........
       DO k = 1, l
         scale = scale + ABS(A(i,k)) + ABS(A(k,i))
-      ENDDO
+      END DO
       !
       IF ( scale/=0.0E0 ) THEN
         !
@@ -114,7 +114,7 @@ SUBROUTINE HTRID3(Nm,N,A,D,E,E2,Tau)
           A(i,k) = A(i,k)/scale
           A(k,i) = A(k,i)/scale
           h = h + A(i,k)*A(i,k) + A(k,i)*A(k,i)
-        ENDDO
+        END DO
         !
         E2(i) = scale*scale*h
         g = SQRT(h)
@@ -135,16 +135,16 @@ SUBROUTINE HTRID3(Nm,N,A,D,E,E2,Tau)
           A(l,i) = g*A(l,i)
           IF ( l/=1 ) GOTO 50
           GOTO 100
-        ENDIF
+        END IF
       ELSE
         Tau(1,l) = 1.0E0
         Tau(2,l) = 0.0E0
-      ENDIF
-    ENDIF
+      END IF
+    END IF
     E(i) = 0.0E0
     E2(i) = 0.0E0
     GOTO 150
-    50     f = 0.0E0
+    50  f = 0.0E0
     !
     DO j = 1, l
       g = 0.0E0
@@ -155,8 +155,8 @@ SUBROUTINE HTRID3(Nm,N,A,D,E,E2,Tau)
         DO k = 1, jm1
           g = g + A(j,k)*A(i,k) + A(k,j)*A(k,i)
           gi = gi - A(j,k)*A(k,i) + A(k,j)*A(i,k)
-        ENDDO
-      ENDIF
+        END DO
+      END IF
       !
       g = g + A(j,j)*A(i,j)
       gi = gi - A(j,j)*A(j,i)
@@ -166,13 +166,13 @@ SUBROUTINE HTRID3(Nm,N,A,D,E,E2,Tau)
         DO k = jp1, l
           g = g + A(k,j)*A(i,k) - A(j,k)*A(k,i)
           gi = gi - A(k,j)*A(k,i) - A(j,k)*A(i,k)
-        ENDDO
-      ENDIF
+        END DO
+      END IF
       !     .......... FORM ELEMENT OF P ..........
       E(j) = g/h
       Tau(2,j) = gi/h
       f = f + E(j)*A(i,j) - Tau(2,j)*A(j,i)
-    ENDDO
+    END DO
     !
     hh = f/(h+h)
     !     .......... FORM REDUCED A ..........
@@ -190,20 +190,20 @@ SUBROUTINE HTRID3(Nm,N,A,D,E,E2,Tau)
         DO k = 1, jm1
           A(j,k) = A(j,k) - f*E(k) - g*A(i,k) + fi*Tau(2,k) + gi*A(k,i)
           A(k,j) = A(k,j) - f*Tau(2,k) - g*A(k,i) - fi*E(k) - gi*A(i,k)
-        ENDDO
-      ENDIF
+        END DO
+      END IF
       !
-    ENDDO
+    END DO
     !
     100 CONTINUE
     DO k = 1, l
       A(i,k) = scale*A(i,k)
       A(k,i) = scale*A(k,i)
-    ENDDO
+    END DO
     !
     Tau(2,l) = -si
-    150    D(i) = A(i,i)
+    150  D(i) = A(i,i)
     A(i,i) = scale*SQRT(h)
-  ENDDO
+  END DO
   !
 END SUBROUTINE HTRID3

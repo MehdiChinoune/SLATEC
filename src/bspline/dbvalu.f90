@@ -76,7 +76,7 @@ REAL(8) FUNCTION DBVALU(T,A,N,K,Ideriv,X,Inbv,Work)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   !
   INTEGER i, Ideriv, iderp1, ihi, ihmkmj, ilo, imk, imkpj, Inbv, &
     ipj, ip1, ip1mj, j, jj, j1, j2, K, kmider, kmj, km1, kpk, mflag, N
@@ -115,21 +115,21 @@ REAL(8) FUNCTION DBVALU(T,A,N,K,Ideriv,X,Inbv,Work)
           DO WHILE ( i/=K )
             i = i - 1
             IF ( X/=T(i) ) GOTO 20
-          ENDDO
+          END DO
           CALL XERMSG('SLATEC','DBVALU',&
             'A LEFT LIMITING VALUE CANNOT BE OBTAINED AT T(K)',2,1)
           RETURN
-        ENDIF
-      ENDIF
+        END IF
+      END IF
       !
       !- ** DIFFERENCE THE COEFFICIENTS *IDERIV* TIMES
       !     WORK(I) = AJ(I), WORK(K+I) = DP(I), WORK(K+K+I) = DM(I), I=1.K
       !
-      20       imk = i - K
+      20  imk = i - K
       DO j = 1, K
         imkpj = imk + j
         Work(j) = A(imkpj)
-      ENDDO
+      END DO
       IF ( Ideriv/=0 ) THEN
         DO j = 1, Ideriv
           kmj = K - j
@@ -138,9 +138,9 @@ REAL(8) FUNCTION DBVALU(T,A,N,K,Ideriv,X,Inbv,Work)
             ihi = i + jj
             ihmkmj = ihi - kmj
             Work(jj) = (Work(jj+1)-Work(jj))/(T(ihi)-T(ihmkmj))*fkmj
-          ENDDO
-        ENDDO
-      ENDIF
+          END DO
+        END DO
+      END IF
       !
       !- ** COMPUTE VALUE AT *X* IN (T(I),(T(I+1)) OF IDERIV-TH DERIVATIVE,
       !     GIVEN ITS RELEVANT B-SPLINE COEFF. IN AJ(1),...,AJ(K-IDERIV).
@@ -156,7 +156,7 @@ REAL(8) FUNCTION DBVALU(T,A,N,K,Ideriv,X,Inbv,Work)
           Work(j2) = X - T(ip1mj)
           j1 = j1 + 1
           j2 = j2 + 1
-        ENDDO
+        END DO
         iderp1 = Ideriv + 1
         DO j = iderp1, km1
           kmj = K - j
@@ -165,11 +165,11 @@ REAL(8) FUNCTION DBVALU(T,A,N,K,Ideriv,X,Inbv,Work)
             Work(jj) = (Work(jj+1)*Work(kpk+ilo)+Work(jj)*Work(K+jj))&
               /(Work(kpk+ilo)+Work(K+jj))
             ilo = ilo - 1
-          ENDDO
-        ENDDO
-      ENDIF
-    ENDIF
-  ENDIF
+          END DO
+        END DO
+      END IF
+    END IF
+  END IF
   DBVALU = Work(1)
   RETURN
 END FUNCTION DBVALU

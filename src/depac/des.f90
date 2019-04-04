@@ -89,7 +89,7 @@ SUBROUTINE DES(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Ypout,Yp,Yy,Wt,P,Phi,&
     Nornd = .TRUE.
     !                       -- RESET INFO(1) FOR SUBSEQUENT CALLS
     Info(1) = 1
-  ENDIF
+  END IF
   !
   !.......................................................................
   !
@@ -102,7 +102,7 @@ SUBROUTINE DES(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Ypout,Yp,Yy,Wt,P,Phi,&
       & YOU ARE ATTEMPTING TO CONTINUE THE INTEGRATION ILLEGALLY BY CALLING THE&
       & CODE WITH INFO(1) = '//xern1,3,1)
     Idid = -33
-  ENDIF
+  END IF
   !
   IF ( Info(2)/=0.AND.Info(2)/=1 ) THEN
     WRITE (xern1,'(I8)') Info(2)
@@ -110,7 +110,7 @@ SUBROUTINE DES(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Ypout,Yp,Yy,Wt,P,Phi,&
       & SCALAR AND VECTOR ERROR TOLERANCES, RESPECTIVELY.&
       & YOU HAVE CALLED THE CODE WITH INFO(2) = '//xern1,4,1)
     Idid = -33
-  ENDIF
+  END IF
   !
   IF ( Info(3)/=0.AND.Info(3)/=1 ) THEN
     WRITE (xern1,'(I8)') Info(3)
@@ -118,7 +118,7 @@ SUBROUTINE DES(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Ypout,Yp,Yy,Wt,P,Phi,&
       & THE INTERVAL OR INTERMEDIATE-OUTPUT MODE OF INTEGRATION, RESPECTIVELY.&
       & YOU HAVE CALLED THE CODE WITH  INFO(3) = '//xern1,5,1)
     Idid = -33
-  ENDIF
+  END IF
   !
   IF ( Info(4)/=0.AND.Info(4)/=1 ) THEN
     WRITE (xern1,'(I8)') Info(4)
@@ -126,14 +126,14 @@ SUBROUTINE DES(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Ypout,Yp,Yy,Wt,P,Phi,&
       & WHETHER OR NOT THE INTEGRATION INTERVAL IS TO BE RESTRICTED BY A POINT TSTOP.&
       & YOU HAVE CALLED THE CODE WITH INFO(4) = '//xern1,14,1)
     Idid = -33
-  ENDIF
+  END IF
   !
   IF ( Neq<1 ) THEN
     WRITE (xern1,'(I8)') Neq
     CALL XERMSG('SLATEC','DES','IN DEABM, THE NUMBER OF EQUATIONS NEQ MUST BE&
       & A POSITIVE INTEGER.  YOU HAVE CALLED THE CODE WITH  NEQ = '//xern1,6,1)
     Idid = -33
-  ENDIF
+  END IF
   !
   nrtolp = 0
   natolp = 0
@@ -147,7 +147,7 @@ SUBROUTINE DES(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Ypout,Yp,Yy,Wt,P,Phi,&
         & CHECKING OF RTOL COMPONENTS IS DONE.',7,1)
       Idid = -33
       nrtolp = 1
-    ENDIF
+    END IF
     !
     IF ( natolp==0.AND.Atol(k)<0. ) THEN
       WRITE (xern1,'(I8)') k
@@ -158,11 +158,11 @@ SUBROUTINE DES(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Ypout,Yp,Yy,Wt,P,Phi,&
         & CHECKING OF ATOL COMPONENTS IS DONE.',8,1)
       Idid = -33
       natolp = 1
-    ENDIF
+    END IF
     !
     IF ( Info(2)==0 ) EXIT
     IF ( natolp>0.AND.nrtolp>0 ) EXIT
-  ENDDO
+  END DO
   !
   IF ( Info(4)==1 ) THEN
     IF ( SIGN(1.,Tout-T)/=SIGN(1.,Tstop-T).OR.ABS(Tout-T)>ABS(Tstop-T) ) THEN
@@ -172,8 +172,8 @@ SUBROUTINE DES(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Ypout,Yp,Yy,Wt,P,Phi,&
         //xern3//' BUT YOU HAVE ALSO TOLD THE CODE (INFO(4) = 1) NOT TO&
         & INTEGRATE PAST THE POINT TSTOP = '//xern4//' THESE INSTRUCTIONS CONFLICT.',14,1)
       Idid = -33
-    ENDIF
-  ENDIF
+    END IF
+  END IF
   !
   !     CHECK SOME CONTINUATION POSSIBILITIES
   !
@@ -183,7 +183,7 @@ SUBROUTINE DES(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Ypout,Yp,Yy,Wt,P,Phi,&
       CALL XERMSG('SLATEC','DES','IN DEABM, YOU HAVE CALLED THE CODE WITH  T =&
         & TOUT = '//xern3//'$$THIS IS NOT ALLOWED ON CONTINUATION CALLS.',9,1)
       Idid = -33
-    ENDIF
+    END IF
     !
     IF ( T/=Told ) THEN
       WRITE (xern3,'(1PE15.6)') Told
@@ -191,7 +191,7 @@ SUBROUTINE DES(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Ypout,Yp,Yy,Wt,P,Phi,&
       CALL XERMSG('SLATEC','DES','IN DEABM, YOU HAVE CHANGED THE VALUE OF T FROM '&
         //xern3//' TO '//xern4//'  THIS IS NOT ALLOWED ON CONTINUATION CALLS.',10,1)
       Idid = -33
-    ENDIF
+    END IF
     !
     IF ( Init/=1 ) THEN
       IF ( Delsgn*(Tout-T)<0. ) THEN
@@ -200,9 +200,9 @@ SUBROUTINE DES(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Ypout,Yp,Yy,Wt,P,Phi,&
           //xern3//' YOU ARE ATTEMPTING TO CHANGE THE DIRECTION OF INTEGRATION.&
           &$$THIS IS NOT ALLOWED WITHOUT RESTARTING.',11,1)
         Idid = -33
-      ENDIF
-    ENDIF
-  ENDIF
+      END IF
+    END IF
+  END IF
   !
   !     INVALID INPUT DETECTED
   !
@@ -214,9 +214,9 @@ SUBROUTINE DES(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Ypout,Yp,Yy,Wt,P,Phi,&
       CALL XERMSG('SLATEC','DES','IN DEABM, INVALID INPUT WAS DETECTED ON&
         & SUCCESSIVE ENTRIES.  IT IS IMPOSSIBLE TO PROCEED BECAUSE YOU HAVE NOT&
         & CORRECTED THE PROBLEM, SO EXECUTION IS BEING TERMINATED.',12,2)
-    ENDIF
+    END IF
     RETURN
-  ENDIF
+  END IF
   !
   !.......................................................................
   !
@@ -229,9 +229,9 @@ SUBROUTINE DES(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Ypout,Yp,Yy,Wt,P,Phi,&
     IF ( Rtol(k)+Atol(k)<=0. ) THEN
       Rtol(k) = Fouru
       Idid = -2
-    ENDIF
+    END IF
     IF ( Info(2)==0 ) EXIT
-  ENDDO
+  END DO
   !
   IF ( Idid/=(-2) ) THEN
     !
@@ -255,13 +255,13 @@ SUBROUTINE DES(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Ypout,Yp,Yy,Wt,P,Phi,&
         Idid = 2
         DO l = 1, Neq
           Ypout(l) = Yp(l)
-        ENDDO
+        END DO
         Told = T
         RETURN
-      ENDIF
+      END IF
     ELSEIF ( Init/=1 ) THEN
       GOTO 100
-    ENDIF
+    END IF
     !
     !                         -- SET INDEPENDENT AND DEPENDENT VARIABLES
     !                                              X AND YY(*) FOR STEPS
@@ -272,7 +272,7 @@ SUBROUTINE DES(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Ypout,Yp,Yy,Wt,P,Phi,&
     X = T
     DO l = 1, Neq
       Yy(l) = Y(l)
-    ENDDO
+    END DO
     Delsgn = SIGN(1.0,Tout-T)
     H = SIGN(MAX(Fouru*ABS(X),ABS(Tout-X)),Tout-X)
   ELSE
@@ -280,7 +280,7 @@ SUBROUTINE DES(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Ypout,Yp,Yy,Wt,P,Phi,&
     !                                                SMALL POSITIVE VALUE
     Info(1) = -1
     RETURN
-  ENDIF
+  END IF
   !
   !.......................................................................
   !
@@ -304,14 +304,14 @@ SUBROUTINE DES(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Ypout,Yp,Yy,Wt,P,Phi,&
         dt = Tout - X
         DO l = 1, Neq
           Y(l) = Yy(l) + dt*Yp(l)
-        ENDDO
+        END DO
         CALL F(Tout,Y,Ypout,Rpar,Ipar)
         Idid = 3
         T = Tout
         Told = T
         RETURN
-      ENDIF
-    ENDIF
+      END IF
+    END IF
     !
     IF ( .NOT.(Info(3)==0.OR..NOT.Intout) ) THEN
       !
@@ -321,7 +321,7 @@ SUBROUTINE DES(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Ypout,Yp,Yy,Wt,P,Phi,&
       DO l = 1, Neq
         Y(l) = Yy(l)
         Ypout(l) = Yp(l)
-      ENDDO
+      END DO
       T = X
       Told = T
       Intout = .FALSE.
@@ -346,7 +346,7 @@ SUBROUTINE DES(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Ypout,Yp,Yy,Wt,P,Phi,&
         IF ( Info(2)==1 ) ltol = l
         Wt(l) = Rtol(ltol)*ABS(Yy(l)) + Atol(ltol)
         IF ( Wt(l)<=0.0 ) GOTO 120
-      ENDDO
+      END DO
       !
       CALL STEPS(F,Neq,Yy,X,H,Eps,Wt,Start,Hold,Kord,Kold,crash,Phi,P,Yp,&
         Psi,Alpha,Beta,Sig,V,W,G,Phase1,Ns,Nornd,Ksteps,Twou,Fouru,&
@@ -374,17 +374,17 @@ SUBROUTINE DES(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Ypout,Yp,Yy,Wt,P,Phi,&
           DO l = 2, Neq
             Rtol(l) = Eps*Rtol(l)
             Atol(l) = Eps*Atol(l)
-          ENDDO
-        ENDIF
+          END DO
+        END IF
         GOTO 200
-      ENDIF
+      END IF
       !
       !                       RELATIVE ERROR CRITERION INAPPROPRIATE
-      120      Idid = -3
+      120  Idid = -3
       DO l = 1, Neq
         Y(l) = Yy(l)
         Ypout(l) = Yp(l)
-      ENDDO
+      END DO
       T = X
       Told = T
       Info(1) = -1
@@ -401,25 +401,25 @@ SUBROUTINE DES(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Ypout,Yp,Yy,Wt,P,Phi,&
         Idid = -4
         Stiff = .FALSE.
         Kle4 = 0
-      ENDIF
+      END IF
       !
       DO l = 1, Neq
         Y(l) = Yy(l)
         Ypout(l) = Yp(l)
-      ENDDO
+      END DO
       T = X
       Told = T
       Info(1) = -1
       Intout = .FALSE.
       RETURN
-    ENDIF
-  ENDDO
+    END IF
+  END DO
   CALL SINTRP(X,Yy,Tout,Y,Ypout,Neq,Kold,Phi,Ivc,Iv,Kgi,Gi,Alpha,G,W,Xold,P)
   Idid = 3
   IF ( X==Tout ) THEN
     Idid = 2
     Intout = .FALSE.
-  ENDIF
+  END IF
   T = Tout
   Told = T
   RETURN
@@ -427,7 +427,7 @@ SUBROUTINE DES(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Ypout,Yp,Yy,Wt,P,Phi,&
   DO l = 1, Neq
     Y(l) = Yy(l)
     Ypout(l) = Yp(l)
-  ENDDO
+  END DO
   T = X
   Told = T
   Info(1) = -1

@@ -65,7 +65,7 @@ SUBROUTINE ZACON(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Rl,Fnul,Tol,Elim,Alim)
         cpn = COS(yy)
         spn = SIN(yy)
         CALL ZMLT(csgnr,csgni,cpn,spn,csgnr,csgni)
-      ENDIF
+      END IF
       !-----------------------------------------------------------------------
       !     CALCULATE CSPN=EXP(FNU*PI*I) TO MINIMIZE LOSSES OF SIGNIFICANCE
       !     WHEN FNU IS LARGE
@@ -79,7 +79,7 @@ SUBROUTINE ZACON(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Rl,Fnul,Tol,Elim,Alim)
       IF ( MOD(inu,2)/=0 ) THEN
         cspnr = -cspnr
         cspni = -cspni
-      ENDIF
+      END IF
       iuf = 0
       c1r = s1r
       c1i = s1i
@@ -91,7 +91,7 @@ SUBROUTINE ZACON(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Rl,Fnul,Tol,Elim,Alim)
         Nz = Nz + nw
         sc1r = c1r
         sc1i = c1i
-      ENDIF
+      END IF
       CALL ZMLT(cspnr,cspni,c1r,c1i,str,sti)
       CALL ZMLT(csgnr,csgni,c2r,c2i,ptr,pti)
       Yr(1) = str + ptr
@@ -110,7 +110,7 @@ SUBROUTINE ZACON(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Rl,Fnul,Tol,Elim,Alim)
         Nz = Nz + nw
         sc2r = c1r
         sc2i = c1i
-      ENDIF
+      END IF
       CALL ZMLT(cspnr,cspni,c1r,c1i,str,sti)
       CALL ZMLT(csgnr,csgni,c2r,c2i,ptr,pti)
       Yr(2) = str + ptr
@@ -147,7 +147,7 @@ SUBROUTINE ZACON(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Rl,Fnul,Tol,Elim,Alim)
         kflag = 1
       ELSEIF ( as2>=bry(2) ) THEN
         kflag = 3
-      ENDIF
+      END IF
       bscle = bry(kflag)
       s1r = s1r*cssr(kflag)
       s1i = s1i*cssr(kflag)
@@ -183,9 +183,9 @@ SUBROUTINE ZACON(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Rl,Fnul,Tol,Elim,Alim)
               s2i = sc2i*cssr(kflag)
               str = sc2r
               sti = sc2i
-            ENDIF
-          ENDIF
-        ENDIF
+            END IF
+          END IF
+        END IF
         ptr = cspnr*c1r - cspni*c1i
         pti = cspnr*c1i + cspni*c1r
         Yr(i) = ptr + csgnr*c2r - csgni*c2i
@@ -210,12 +210,12 @@ SUBROUTINE ZACON(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Rl,Fnul,Tol,Elim,Alim)
             s2r = s2r*cssr(kflag)
             s2i = s2i*cssr(kflag)
             csr = csrr(kflag)
-          ENDIF
-        ENDIF
-      ENDDO
+          END IF
+        END IF
+      END DO
       RETURN
-    ENDIF
-  ENDIF
+    END IF
+  END IF
   Nz = -1
   IF ( nw==(-2) ) Nz = -2
 END SUBROUTINE ZACON

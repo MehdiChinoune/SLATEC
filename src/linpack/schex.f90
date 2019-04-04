@@ -137,7 +137,7 @@ SUBROUTINE SCHEX(R,Ldr,P,K,L,Z,Ldz,Nz,C,S,Job)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   INTEGER Ldr, P, K, L, Ldz, Nz, Job
   REAL R(Ldr,*), Z(Ldz,*), S(*)
   REAL C(*)
@@ -165,21 +165,21 @@ SUBROUTINE SCHEX(R,Ldr,P,K,L,Z,Ldz,Nz,C,S,Job)
     DO i = 1, K
       ii = lmk + i
       S(ii) = R(i,K)
-    ENDDO
+    END DO
     DO j = K, lm1
       DO i = 1, j
         R(i,j) = R(i,j+1)
-      ENDDO
+      END DO
       jj = j - km1
       S(jj) = R(j+1,j+1)
-    ENDDO
+    END DO
     DO i = 1, K
       ii = lmk + i
       R(i,L) = S(ii)
-    ENDDO
+    END DO
     DO i = kp1, L
       R(i,L) = 0.0E0
-    ENDDO
+    END DO
     !
     !        REDUCTION LOOP.
     !
@@ -194,14 +194,14 @@ SUBROUTINE SCHEX(R,Ldr,P,K,L,Z,Ldz,Nz,C,S,Job)
           t = C(ii)*R(i,j) + S(ii)*R(i+1,j)
           R(i+1,j) = C(ii)*R(i+1,j) - S(ii)*R(i,j)
           R(i,j) = t
-        ENDDO
-      ENDIF
+        END DO
+      END IF
       IF ( j<L ) THEN
         jj = j - K + 1
         t = S(jj)
         CALL SROTG(R(j,j),t,C(jj),S(jj))
-      ENDIF
-    ENDDO
+      END IF
+    END DO
     !
     !        APPLY THE ROTATIONS TO Z.
     !
@@ -212,9 +212,9 @@ SUBROUTINE SCHEX(R,Ldr,P,K,L,Z,Ldz,Nz,C,S,Job)
           t = C(ii)*Z(i,j) + S(ii)*Z(i+1,j)
           Z(i+1,j) = C(ii)*Z(i+1,j) - S(ii)*Z(i,j)
           Z(i,j) = t
-        ENDDO
-      ENDDO
-    ENDIF
+        END DO
+      END DO
+    END IF
   ELSE
     !
     !     RIGHT CIRCULAR SHIFT.
@@ -225,20 +225,20 @@ SUBROUTINE SCHEX(R,Ldr,P,K,L,Z,Ldz,Nz,C,S,Job)
     DO i = 1, L
       ii = L - i + 1
       S(i) = R(ii,L)
-    ENDDO
+    END DO
     DO jj = K, lm1
       j = lm1 - jj + K
       DO i = 1, j
         R(i,j+1) = R(i,j)
-      ENDDO
+      END DO
       R(j+1,j+1) = 0.0E0
-    ENDDO
+    END DO
     IF ( K/=1 ) THEN
       DO i = 1, km1
         ii = L - i + 1
         R(i,K) = S(ii)
-      ENDDO
-    ENDIF
+      END DO
+    END IF
     !
     !        CALCULATE THE ROTATIONS.
     !
@@ -246,7 +246,7 @@ SUBROUTINE SCHEX(R,Ldr,P,K,L,Z,Ldz,Nz,C,S,Job)
     DO i = 1, lmk
       CALL SROTG(S(i+1),t,C(i),S(i))
       t = S(i+1)
-    ENDDO
+    END DO
     R(K,K) = t
     DO j = kp1, P
       il = MAX(1,L-j+1)
@@ -255,8 +255,8 @@ SUBROUTINE SCHEX(R,Ldr,P,K,L,Z,Ldz,Nz,C,S,Job)
         t = C(ii)*R(i,j) + S(ii)*R(i+1,j)
         R(i+1,j) = C(ii)*R(i+1,j) - S(ii)*R(i,j)
         R(i,j) = t
-      ENDDO
-    ENDDO
+      END DO
+    END DO
     !
     !        IF REQUIRED, APPLY THE TRANSFORMATIONS TO Z.
     !
@@ -267,8 +267,8 @@ SUBROUTINE SCHEX(R,Ldr,P,K,L,Z,Ldz,Nz,C,S,Job)
           t = C(ii)*Z(i,j) + S(ii)*Z(i+1,j)
           Z(i+1,j) = C(ii)*Z(i+1,j) - S(ii)*Z(i,j)
           Z(i,j) = t
-        ENDDO
-      ENDDO
-    ENDIF
-  ENDIF
+        END DO
+      END DO
+    END IF
+  END IF
 END SUBROUTINE SCHEX

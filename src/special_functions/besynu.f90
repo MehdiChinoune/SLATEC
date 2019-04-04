@@ -152,17 +152,17 @@ SUBROUTINE BESYNU(X,Fnu,N,Y)
               t2 = t2*(fmu-fn)/t1
               ss = ss + t2
               IF ( ABS(t2)<=relb ) EXIT
-            ENDDO
+            END DO
             s2 = coef*(s*sa+ss*sb)
             fmu = fmu + 8.0E0*dnu + 4.0E0
             tb = sa
             sa = -sb
             sb = tb
-          ENDDO
+          END DO
           IF ( nn<=1 ) THEN
             s1 = s2
             GOTO 100
-          ENDIF
+          END IF
         ELSE
           !
           !     MILLER ALGORITHM FOR X1.LT.X.LE.X2
@@ -218,7 +218,7 @@ SUBROUTINE BESYNU(X,Fnu,N,Y)
                 rs = rs + rp2
                 cs = cs + cp2
                 kk = kk - 1
-              ENDDO
+              END DO
               pt = MAX(ABS(rs),ABS(cs))
               fc = (rs/pt)**2 + (cs/pt)**2
               pt = pt*SQRT(fc)
@@ -241,10 +241,10 @@ SUBROUTINE BESYNU(X,Fnu,N,Y)
               ELSE
                 Y(1) = s1
                 RETURN
-              ENDIF
-            ENDIF
-          ENDDO
-        ENDIF
+              END IF
+            END IF
+          END DO
+        END IF
       ELSE
         !
         !     SERIES FOR X.LE.X1
@@ -264,9 +264,9 @@ SUBROUTINE BESYNU(X,Fnu,N,Y)
             tm = cc(k)*ak
             s = s + tm
             IF ( ABS(tm)<tol ) EXIT
-          ENDDO
+          END DO
           g1 = -(s+s)
-        ENDIF
+        END IF
         g2 = t1 + t2
         smu = 1.0E0
         fc = 1.0E0/pi
@@ -278,7 +278,7 @@ SUBROUTINE BESYNU(X,Fnu,N,Y)
           tm = (dnu+dnu)*tm*tm
           fc = dnu/SIN(dnu*pi)
           IF ( fmu/=0.0E0 ) smu = SINH(fmu)/fmu
-        ENDIF
+        END IF
         f = fc*(g1*COSH(fmu)+g2*flrx*smu)
         fx = EXP(fmu)
         p = fc*t1*fx
@@ -306,8 +306,8 @@ SUBROUTINE BESYNU(X,Fnu,N,Y)
               ak = ak + 1.0E0
               s = ABS(t1)/(1.0E0+ABS(s1)) + ABS(t2)/(1.0E0+ABS(s2))
               IF ( s<=tol ) EXIT
-            ENDDO
-          ENDIF
+            END DO
+          END IF
           s2 = -s2*rx
           s1 = -s1
         ELSE
@@ -325,13 +325,13 @@ SUBROUTINE BESYNU(X,Fnu,N,Y)
               ak = ak + 1.0E0
               s = ABS(t1)/(1.0E0+ABS(s1))
               IF ( s<=tol ) EXIT
-            ENDDO
-          ENDIF
+            END DO
+          END IF
           Y(1) = -s1
           RETURN
-        ENDIF
-      ENDIF
-    ENDIF
+        END IF
+      END IF
+    END IF
     !
     !     FORWARD RECURSION ON THE THREE TERM RECURSION RELATION
     !
@@ -343,12 +343,12 @@ SUBROUTINE BESYNU(X,Fnu,N,Y)
         s2 = ck*s2 - s1
         s1 = st
         ck = ck + rx
-      ENDDO
+      END DO
       IF ( N==1 ) s1 = s2
     ELSEIF ( N<=1 ) THEN
       s1 = s2
-    ENDIF
-  ENDIF
+    END IF
+  END IF
   100  Y(1) = s1
   IF ( N==1 ) RETURN
   Y(2) = s2
@@ -356,6 +356,6 @@ SUBROUTINE BESYNU(X,Fnu,N,Y)
   DO i = 3, N
     Y(i) = ck*Y(i-1) - Y(i-2)
     ck = ck + rx
-  ENDDO
+  END DO
   RETURN
 END SUBROUTINE BESYNU

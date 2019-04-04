@@ -102,7 +102,7 @@ SUBROUTINE EXINT(X,N,Kode,M,Tol,En,Nz,Ierr)
   !   920207  Updated with code with a revision date of 880811 from
   !           D. Amos.  Included correction of argument list.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   REAL a(99), aa, aams, ah, ak, at, b(99), bk, bt, cc, cnorm, ct, em, &
     emx, En(*), etol, fnm, fx, pt, p1, p2, s, Tol, tx, X, xcut, &
     xlim, xtol, y(2), yt, y1, y2
@@ -144,10 +144,10 @@ SUBROUTINE EXINT(X,N,Kode,M,Tol,En,Nz,Ierr)
         Nz = M
         DO i = 1, M
           En(i) = 0.0E0
-        ENDDO
+        END DO
         RETURN
-      ENDIF
-    ENDIF
+      END IF
+    END IF
     ix = INT( X + 0.5E0 )
     kn = N + M - 1
     IF ( kn<=ix ) THEN
@@ -168,19 +168,19 @@ SUBROUTINE EXINT(X,N,Kode,M,Tol,En,Nz,Ierr)
         IF ( kn/=1 ) THEN
           ix = 2
           GOTO 100
-        ENDIF
+        END IF
       ELSE
         Ierr = 2
         RETURN
-      ENDIF
-    ENDIF
+      END IF
+    END IF
     ks = 2
     icase = 3
     GOTO 200
   ELSEIF ( X==0.0E0.AND.N>1 ) THEN
     DO i = 1, M
       En(i) = 1.0E0/(N+i-2)
-    ENDDO
+    END DO
     RETURN
   ELSE
     !-----------------------------------------------------------------------
@@ -206,7 +206,7 @@ SUBROUTINE EXINT(X,N,Kode,M,Tol,En,Nz,Ierr)
     IF ( nd/=1 ) THEN
       xtol = 0.3333E0*Tol
       s = 1.0E0/fnm
-    ENDIF
+    END IF
     aa = 1.0E0
     ak = 1.0E0
     ic = 35
@@ -225,15 +225,15 @@ SUBROUTINE EXINT(X,N,Kode,M,Tol,En,Nz,Ierr)
           IF ( nd-2>i.OR.i>nd-1 ) GOTO 50
           ak = ak + 1.0E0
           CYCLE
-        ENDIF
-      ENDIF
+        END IF
+      END IF
       ak = ak + 1.0E0
-    ENDDO
+    END DO
     IF ( ic/=1 ) THEN
       Ierr = 2
       RETURN
-    ENDIF
-    50     IF ( nd==1 ) s = s + (-LOG(X)+PSIXN(1))
+    END IF
+    50  IF ( nd==1 ) s = s + (-LOG(X)+PSIXN(1))
     IF ( Kode==2 ) s = s*EXP(X)
     En(1) = s
     emx = 1.0E0
@@ -243,12 +243,12 @@ SUBROUTINE EXINT(X,N,Kode,M,Tol,En,Nz,Ierr)
       IF ( Kode==1 ) emx = EXP(-X)
       IF ( icase==1 ) GOTO 300
       IF ( icase==2 ) GOTO 400
-    ENDIF
+    END IF
     IF ( icase==2 ) RETURN
     IF ( Kode==1 ) emx = EXP(-X)
     En(1) = (emx-s)/X
     RETURN
-  ENDIF
+  END IF
   100  icase = 1
   ks = ix
   ml = ix - N
@@ -311,7 +311,7 @@ SUBROUTINE EXINT(X,N,Kode,M,Tol,En,Nz,Ierr)
         yt = y1
         y1 = (b(kk)*y1-y2)/a(kk)
         y2 = yt
-      ENDDO
+      END DO
       !-----------------------------------------------------------------------
       !     THE CONTIGUOUS RELATION
       !              X*U(B,C+1,X)=(C-B)*U(B,C,X)+U(B-1,C,X)
@@ -329,14 +329,14 @@ SUBROUTINE EXINT(X,N,Kode,M,Tol,En,Nz,Ierr)
         aa = ks
         IF ( icase==1 ) GOTO 300
         IF ( icase==2 ) GOTO 400
-      ENDIF
+      END IF
       !-----------------------------------------------------------------------
       !     RECURSION SECTION  N*E(N+1,X) + X*E(N,X)=EMX
       !-----------------------------------------------------------------------
       En(1) = emx*(1.0E0-y(1))/X
       RETURN
-    ENDIF
-  ENDDO
+    END IF
+  END DO
   Ierr = 2
   RETURN
   300  k = ind - 1
@@ -344,7 +344,7 @@ SUBROUTINE EXINT(X,N,Kode,M,Tol,En,Nz,Ierr)
     aa = aa - 1.0E0
     En(k) = (emx-aa*En(k+1))/X
     k = k - 1
-  ENDDO
+  END DO
   IF ( mu<=0 ) RETURN
   aa = ks
   400  k = ind
@@ -352,6 +352,6 @@ SUBROUTINE EXINT(X,N,Kode,M,Tol,En,Nz,Ierr)
     En(k+1) = (emx-X*En(k))/aa
     aa = aa + 1.0E0
     k = k + 1
-  ENDDO
+  END DO
   RETURN
 END SUBROUTINE EXINT

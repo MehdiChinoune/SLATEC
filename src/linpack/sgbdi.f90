@@ -83,10 +83,10 @@ SUBROUTINE SGBDI(Abd,Lda,N,Ml,Mu,Ipvt,Det)
     DO WHILE ( ABS(Det(1))<1.0E0 )
       Det(1) = ten*Det(1)
       Det(2) = Det(2) - 1.0E0
-    ENDDO
+    END DO
     DO WHILE ( ABS(Det(1))>=ten )
       Det(1) = Det(1)/ten
       Det(2) = Det(2) + 1.0E0
-    ENDDO
-  ENDDO
+    END DO
+  END DO
 END SUBROUTINE SGBDI

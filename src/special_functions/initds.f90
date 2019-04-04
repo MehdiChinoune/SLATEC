@@ -57,7 +57,7 @@ INTEGER FUNCTION INITDS(Os,Nos,Eta)
     i = Nos + 1 - ii
     err = err + ABS(REAL(Os(i)))
     IF ( err>Eta ) EXIT
-  ENDDO
+  END DO
   !
   IF ( i==Nos ) CALL XERMSG('SLATEC','INITDS',&
     'Chebyshev series too short for specified accuracy',1,1)

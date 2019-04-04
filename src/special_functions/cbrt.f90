@@ -54,7 +54,7 @@ REAL FUNCTION CBRT(X)
   DO iter = 1, niter
     cbrtsq = CBRT*CBRT
     CBRT = CBRT + (y-CBRT*cbrtsq)/(3.0*cbrtsq)
-  ENDDO
+  END DO
   !
   CBRT = R9PAK(cbrt2(irem)*SIGN(CBRT,X),ixpnt)
   !

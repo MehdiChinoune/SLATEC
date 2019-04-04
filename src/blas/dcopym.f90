@@ -43,7 +43,7 @@ SUBROUTINE DCOPYM(N,Dx,Incx,Dy,Incy)
   !   861211  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920310  Corrected definition of LX in DESCRIPTION.  (WRB)
-  
+
   INTEGER i, Incx, Incy, ix, iy, m, mp1, N, ns
   REAL(8) :: Dx(*), Dy(*)
   !* FIRST EXECUTABLE STATEMENT  DCOPYM
@@ -60,9 +60,9 @@ SUBROUTINE DCOPYM(N,Dx,Incx,Dy,Incy)
       IF ( m/=0 ) THEN
         DO i = 1, m
           Dy(i) = -Dx(i)
-        ENDDO
+        END DO
         IF ( N<7 ) RETURN
-      ENDIF
+      END IF
       GOTO 100
     ELSE
       !
@@ -71,10 +71,10 @@ SUBROUTINE DCOPYM(N,Dx,Incx,Dy,Incy)
       ns = N*Incx
       DO i = 1, ns, Incx
         Dy(i) = -Dx(i)
-      ENDDO
+      END DO
       RETURN
-    ENDIF
-  ENDIF
+    END IF
+  END IF
   !
   !     Code for unequal or nonpositive increments.
   !
@@ -86,7 +86,7 @@ SUBROUTINE DCOPYM(N,Dx,Incx,Dy,Incy)
     Dy(iy) = -Dx(ix)
     ix = ix + Incx
     iy = iy + Incy
-  ENDDO
+  END DO
   RETURN
   100  mp1 = m + 1
   DO i = mp1, N, 7
@@ -97,6 +97,6 @@ SUBROUTINE DCOPYM(N,Dx,Incx,Dy,Incy)
     Dy(i+4) = -Dx(i+4)
     Dy(i+5) = -Dx(i+5)
     Dy(i+6) = -Dx(i+6)
-  ENDDO
+  END DO
   RETURN
 END SUBROUTINE DCOPYM

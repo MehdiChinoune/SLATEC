@@ -35,7 +35,7 @@ SUBROUTINE BSPLVN(T,Jhigh,Index,X,Ileft,Vnikx)
     j = 1
     Vnikx(1) = 1.
     IF ( j>=Jhigh ) RETURN
-  ENDIF
+  END IF
   DO
     !
     ipj = Ileft + j
@@ -49,11 +49,11 @@ SUBROUTINE BSPLVN(T,Jhigh,Index,X,Ileft,Vnikx)
       vm = Vnikx(l)/(deltap(l)+deltam(jp1ml))
       Vnikx(l) = vm*deltap(l) + vmprev
       vmprev = vm*deltam(jp1ml)
-    ENDDO
+    END DO
     Vnikx(jp1) = vmprev
     j = jp1
     IF ( j>=Jhigh ) EXIT
-  ENDDO
+  END DO
   !
   RETURN
 END SUBROUTINE BSPLVN

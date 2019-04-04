@@ -31,7 +31,7 @@ SUBROUTINE U12LS(A,Mda,M,N,B,Mdb,Nb,Mode,Krank,Rnorm,H,W,Ic,Ir)
   !   890831  Modified array declarations.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
-  
+
   INTEGER i, ij, im1, j, jb, k, kp1, Krank, M, Mda, Mdb, Mode, N, Nb, nmk
   REAL A(Mda,*), B(Mdb,*), bb, H(*), Rnorm(*), SDOT, SNRM2, tt, W(*)
   INTEGER Ic(*), Ir(*)
@@ -51,7 +51,7 @@ SUBROUTINE U12LS(A,Mda,M,N,B,Mdb,Nb,Mode,Krank,Rnorm,H,W,Ic,Ir)
       IF ( i==M ) THEN
         DO i = 1, M
           Ir(i) = ABS(Ir(i))
-        ENDDO
+        END DO
         !
         !     APPLY HOUSEHOLDER TRANSFORMATIONS TO B
         !
@@ -61,15 +61,15 @@ SUBROUTINE U12LS(A,Mda,M,N,B,Mdb,Nb,Mode,Krank,Rnorm,H,W,Ic,Ir)
           DO i = 1, Nb
             bb = -SDOT(M-j+1,A(j,j),1,B(j,i),1)/H(j)
             CALL SAXPY(M-j+1,bb,A(j,j),1,B(j,i),1)
-          ENDDO
+          END DO
           A(j,j) = tt
-        ENDDO
+        END DO
         !
         !        FIND NORMS OF RESIDUAL VECTOR(S)..(BEFORE OVERWRITE B)
         !
         DO jb = 1, Nb
           Rnorm(jb) = SNRM2((M-k),B(kp1,jb),1)
-        ENDDO
+        END DO
         !
         !     BACK SOLVE UPPER TRIANGULAR R
         !
@@ -77,7 +77,7 @@ SUBROUTINE U12LS(A,Mda,M,N,B,Mdb,Nb,Mode,Krank,Rnorm,H,W,Ic,Ir)
         DO
           DO jb = 1, Nb
             B(i,jb) = B(i,jb)/A(i,i)
-          ENDDO
+          END DO
           IF ( i==1 ) THEN
             !
             !     RANK LT N
@@ -88,8 +88,8 @@ SUBROUTINE U12LS(A,Mda,M,N,B,Mdb,Nb,Mode,Krank,Rnorm,H,W,Ic,Ir)
               DO jb = 1, Nb
                 DO i = kp1, N
                   B(i,jb) = 0.0
-                ENDDO
-              ENDDO
+                END DO
+              END DO
               IF ( Mode/=1 ) THEN
                 !
                 !      MINIMAL LENGTH SOLUTION
@@ -101,10 +101,10 @@ SUBROUTINE U12LS(A,Mda,M,N,B,Mdb,Nb,Mode,Krank,Rnorm,H,W,Ic,Ir)
                     tt = tt - B(i,jb)
                     CALL SAXPY(nmk,tt,A(i,kp1),Mda,B(kp1,jb),1)
                     B(i,jb) = B(i,jb) + tt*W(i)
-                  ENDDO
-                ENDDO
-              ENDIF
-            ENDIF
+                  END DO
+                END DO
+              END IF
+            END IF
             !
             !
             !     REORDER B TO REFLECT COLUMN INTERCHANGES
@@ -115,7 +115,7 @@ SUBROUTINE U12LS(A,Mda,M,N,B,Mdb,Nb,Mode,Krank,Rnorm,H,W,Ic,Ir)
               IF ( i==N ) THEN
                 DO i = 1, N
                   Ic(i) = ABS(Ic(i))
-                ENDDO
+                END DO
                 RETURN
               ELSE
                 j = Ic(i)
@@ -128,19 +128,19 @@ SUBROUTINE U12LS(A,Mda,M,N,B,Mdb,Nb,Mode,Krank,Rnorm,H,W,Ic,Ir)
                       Ic(j) = -Ic(j)
                       j = ij
                       IF ( j==i ) EXIT
-                    ENDDO
-                  ENDIF
-                ENDIF
-              ENDIF
-            ENDDO
+                    END DO
+                  END IF
+                END IF
+              END IF
+            END DO
           ELSE
             im1 = i - 1
             DO jb = 1, Nb
               CALL SAXPY(im1,-B(i,jb),A(1,i),1,B(1,jb),1)
-            ENDDO
+            END DO
             i = im1
-          ENDIF
-        ENDDO
+          END IF
+        END DO
       ELSE
         j = Ir(i)
         IF ( j/=i ) THEN
@@ -148,37 +148,37 @@ SUBROUTINE U12LS(A,Mda,M,N,B,Mdb,Nb,Mode,Krank,Rnorm,H,W,Ic,Ir)
             Ir(i) = -Ir(i)
             DO jb = 1, Nb
               Rnorm(jb) = B(i,jb)
-            ENDDO
+            END DO
             ij = i
             DO
               DO jb = 1, Nb
                 B(ij,jb) = B(j,jb)
-              ENDDO
+              END DO
               ij = j
               j = Ir(ij)
               Ir(ij) = -Ir(ij)
               IF ( j==i ) THEN
                 DO jb = 1, Nb
                   B(ij,jb) = Rnorm(jb)
-                ENDDO
+                END DO
                 EXIT
-              ENDIF
-            ENDDO
-          ENDIF
-        ENDIF
-      ENDIF
-    ENDDO
+              END IF
+            END DO
+          END IF
+        END IF
+      END IF
+    END DO
   ELSE
     DO jb = 1, Nb
       Rnorm(jb) = SNRM2(M,B(1,jb),1)
-    ENDDO
+    END DO
     DO jb = 1, Nb
       DO i = 1, N
         B(i,jb) = 0.0
-      ENDDO
-    ENDDO
+      END DO
+    END DO
     RETURN
-  ENDIF
+  END IF
   !
   !        SOLUTION VECTORS ARE IN FIRST N ROWS OF B(,)
   !

@@ -90,7 +90,7 @@ REAL FUNCTION BI(X)
     x3sml = eta**0.3333
     xmax = (1.5*LOG(R1MACH(2)))**0.6666
     first = .FALSE.
-  ENDIF
+  END IF
   !
   IF ( X<(-1.0) ) THEN
     CALL R9AIMP(X,xm,theta)
@@ -110,7 +110,7 @@ REAL FUNCTION BI(X)
     !
     BI = BIE(X)*EXP(2.0*X*SQRT(X)/3.0)
     RETURN
-  ENDIF
+  END IF
   z = (2.0*X**3-9.0)/7.0
   BI = 1.125 + CSEVL(z,bif2cs,nbif2) + X*(0.625+CSEVL(z,big2cs,nbig2))
   RETURN

@@ -169,7 +169,7 @@ SUBROUTINE DSYMM(Side,Uplo,M,N,Alpha,A,Lda,B,Ldb,Beta,C,Ldc)
     nrowa = M
   ELSE
     nrowa = N
-  ENDIF
+  END IF
   upper = LSAME(Uplo,'U')
   !
   !     Test the input parameters.
@@ -189,11 +189,11 @@ SUBROUTINE DSYMM(Side,Uplo,M,N,Alpha,A,Lda,B,Ldb,Beta,C,Ldc)
     info = 9
   ELSEIF ( Ldc<MAX(1,M) ) THEN
     info = 12
-  ENDIF
+  END IF
   IF ( info/=0 ) THEN
     CALL XERBLA('DSYMM ',info)
     RETURN
-  ENDIF
+  END IF
   !
   !     Quick return if possible.
   !
@@ -206,17 +206,17 @@ SUBROUTINE DSYMM(Side,Uplo,M,N,Alpha,A,Lda,B,Ldb,Beta,C,Ldc)
       DO j = 1, N
         DO i = 1, M
           C(i,j) = ZERO
-        ENDDO
-      ENDDO
+        END DO
+      END DO
     ELSE
       DO j = 1, N
         DO i = 1, M
           C(i,j) = Beta*C(i,j)
-        ENDDO
-      ENDDO
-    ENDIF
+        END DO
+      END DO
+    END IF
     RETURN
-  ENDIF
+  END IF
   !
   !     Start the operations.
   !
@@ -229,33 +229,33 @@ SUBROUTINE DSYMM(Side,Uplo,M,N,Alpha,A,Lda,B,Ldb,Beta,C,Ldc)
       IF ( Beta==ZERO ) THEN
         DO i = 1, M
           C(i,j) = temp1*B(i,j)
-        ENDDO
+        END DO
       ELSE
         DO i = 1, M
           C(i,j) = Beta*C(i,j) + temp1*B(i,j)
-        ENDDO
-      ENDIF
+        END DO
+      END IF
       DO k = 1, j - 1
         IF ( upper ) THEN
           temp1 = Alpha*A(k,j)
         ELSE
           temp1 = Alpha*A(j,k)
-        ENDIF
+        END IF
         DO i = 1, M
           C(i,j) = C(i,j) + temp1*B(i,k)
-        ENDDO
-      ENDDO
+        END DO
+      END DO
       DO k = j + 1, N
         IF ( upper ) THEN
           temp1 = Alpha*A(j,k)
         ELSE
           temp1 = Alpha*A(k,j)
-        ENDIF
+        END IF
         DO i = 1, M
           C(i,j) = C(i,j) + temp1*B(i,k)
-        ENDDO
-      ENDDO
-    ENDDO
+        END DO
+      END DO
+    END DO
     !
     !        Form  C := alpha*A*B + beta*C.
     !
@@ -267,14 +267,14 @@ SUBROUTINE DSYMM(Side,Uplo,M,N,Alpha,A,Lda,B,Ldb,Beta,C,Ldc)
         DO k = 1, i - 1
           C(k,j) = C(k,j) + temp1*A(k,i)
           temp2 = temp2 + B(k,j)*A(k,i)
-        ENDDO
+        END DO
         IF ( Beta==ZERO ) THEN
           C(i,j) = temp1*A(i,i) + Alpha*temp2
         ELSE
           C(i,j) = Beta*C(i,j) + temp1*A(i,i) + Alpha*temp2
-        ENDIF
-      ENDDO
-    ENDDO
+        END IF
+      END DO
+    END DO
   ELSE
     DO j = 1, N
       DO i = M, 1, -1
@@ -283,15 +283,15 @@ SUBROUTINE DSYMM(Side,Uplo,M,N,Alpha,A,Lda,B,Ldb,Beta,C,Ldc)
         DO k = i + 1, M
           C(k,j) = C(k,j) + temp1*A(k,i)
           temp2 = temp2 + B(k,j)*A(k,i)
-        ENDDO
+        END DO
         IF ( Beta==ZERO ) THEN
           C(i,j) = temp1*A(i,i) + Alpha*temp2
         ELSE
           C(i,j) = Beta*C(i,j) + temp1*A(i,i) + Alpha*temp2
-        ENDIF
-      ENDDO
-    ENDDO
-  ENDIF
+        END IF
+      END DO
+    END DO
+  END IF
   !
   !
   !     End of DSYMM .

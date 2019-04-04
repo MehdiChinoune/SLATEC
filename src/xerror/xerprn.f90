@@ -100,7 +100,7 @@ SUBROUTINE XERPRN(Prefix,Npref,Messg,Nwrap)
   n = I1MACH(4)
   DO i = 1, nunit
     IF ( iu(i)==0 ) iu(i) = n
-  ENDDO
+  END DO
   !
   !       LPREF IS THE LENGTH OF THE PREFIX.  THE PREFIX IS PLACED AT THE
   !       BEGINNING OF CBUFF, THE CHARACTER BUFFER, AND KEPT THERE DURING
@@ -110,7 +110,7 @@ SUBROUTINE XERPRN(Prefix,Npref,Messg,Nwrap)
     lpref = LEN(Prefix)
   ELSE
     lpref = Npref
-  ENDIF
+  END IF
   lpref = MIN(16,lpref)
   IF ( lpref/=0 ) cbuff(1:lpref) = Prefix
   !
@@ -126,7 +126,7 @@ SUBROUTINE XERPRN(Prefix,Npref,Messg,Nwrap)
   DO i = 1, n
     IF ( Messg(lenmsg:lenmsg)/=' ' ) EXIT
     lenmsg = lenmsg - 1
-  ENDDO
+  END DO
   !
   !       IF THE MESSAGE IS ALL BLANKS, THEN PRINT ONE BLANK LINE.
   !
@@ -134,9 +134,9 @@ SUBROUTINE XERPRN(Prefix,Npref,Messg,Nwrap)
     cbuff(lpref+1:lpref+1) = ' '
     DO i = 1, nunit
       WRITE (iu(i),'(A)') cbuff(1:lpref+1)
-    ENDDO
+    END DO
     RETURN
-  ENDIF
+  END IF
   !
   !       SET NEXTC TO THE POSITION IN MESSG WHERE THE NEXT SUBSTRING
   !       STARTS.  FROM THIS POSITION WE SCAN FOR THE NEW LINE SENTINEL.
@@ -190,9 +190,9 @@ SUBROUTINE XERPRN(Prefix,Npref,Messg,Nwrap)
             lpiece = i - 1
             idelta = 1
             EXIT
-          ENDIF
-        ENDDO
-      ENDIF
+          END IF
+        END DO
+      END IF
       cbuff(lpref+1:lpref+lpiece) = Messg(nextc:nextc+lpiece-1)
       nextc = nextc + lpiece + idelta
     ELSEIF ( lpiece==1 ) THEN
@@ -213,8 +213,8 @@ SUBROUTINE XERPRN(Prefix,Npref,Messg,Nwrap)
           lpiece = i - 1
           idelta = 1
           EXIT
-        ENDIF
-      ENDDO
+        END IF
+      END DO
       cbuff(lpref+1:lpref+lpiece) = Messg(nextc:nextc+lpiece-1)
       nextc = nextc + lpiece + idelta
     ELSE
@@ -225,14 +225,14 @@ SUBROUTINE XERPRN(Prefix,Npref,Messg,Nwrap)
       lpiece = lpiece - 1
       cbuff(lpref+1:lpref+lpiece) = Messg(nextc:nextc+lpiece-1)
       nextc = nextc + lpiece + 2
-    ENDIF
+    END IF
     !
     !       PRINT
     !
     DO i = 1, nunit
       WRITE (iu(i),'(A)') cbuff(1:lpref+lpiece)
-    ENDDO
+    END DO
     !
     IF ( nextc>lenmsg ) EXIT
-  ENDDO
+  END DO
 END SUBROUTINE XERPRN

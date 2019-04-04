@@ -62,7 +62,7 @@ REAL FUNCTION ALBETA(A,B)
     !
     ALBETA = LOG(GAMMA(p)*(GAMMA(q)/GAMMA(p+q)))
     RETURN
-  ENDIF
+  END IF
   !
   ! P IS SMALL, BUT Q IS BIG.
   !

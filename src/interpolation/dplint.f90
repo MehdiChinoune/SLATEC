@@ -49,7 +49,7 @@ SUBROUTINE DPLINT(N,X,Y,C)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   INTEGER i, k, km1, N
   REAL(8) :: dif, C(*), X(*), Y(*)
   !* FIRST EXECUTABLE STATEMENT  DPLINT
@@ -67,9 +67,9 @@ SUBROUTINE DPLINT(N,X,Y,C)
         dif = X(i) - X(k)
         IF ( dif==0.0 ) GOTO 100
         C(k) = (C(i)-C(k))/dif
-      ENDDO
-    ENDDO
+      END DO
+    END DO
     RETURN
-  ENDIF
+  END IF
   100  CALL XERMSG('SLATEC','DPLINT','THE ABSCISSAS ARE NOT DISTINCT.',2,1)
 END SUBROUTINE DPLINT

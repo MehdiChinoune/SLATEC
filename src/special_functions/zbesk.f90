@@ -230,7 +230,7 @@ SUBROUTINE ZBESK(Zr,Zi,Fnu,Kode,N,Cyr,Cyi,Nz,Ierr)
       IF ( Zr<0.0D0 ) THEN
         mr = 1
         IF ( Zi<0.0D0 ) mr = -1
-      ENDIF
+      END IF
       CALL ZBUNK(Zr,Zi,Fnu,Kode,mr,nn,Cyr,Cyi,nw,tol,elim,alim)
       IF ( nw<0 ) GOTO 200
       Nz = Nz + nw
@@ -249,13 +249,13 @@ SUBROUTINE ZBESK(Zr,Zi,Fnu,Kode,N,Cyr,Cyi,Nz,Ierr)
           IF ( nn==0 ) THEN
             IF ( Zr<0.0D0 ) GOTO 100
             RETURN
-          ENDIF
+          END IF
         ELSEIF ( az<=tol ) THEN
           arg = 0.5D0*az
           aln = -fn*LOG(arg)
           IF ( aln>elim ) GOTO 100
-        ENDIF
-      ENDIF
+        END IF
+      END IF
       IF ( Zr>=0.0D0 ) THEN
         !-----------------------------------------------------------------------
         !     RIGHT HALF PLANE COMPUTATION, REAL(Z).GE.0.
@@ -275,9 +275,9 @@ SUBROUTINE ZBESK(Zr,Zi,Fnu,Kode,N,Cyr,Cyi,Nz,Ierr)
         IF ( nw<0 ) GOTO 200
         Nz = nw
         RETURN
-      ENDIF
-    ENDIF
-  ENDIF
+      END IF
+    END IF
+  END IF
   100  Nz = 0
   Ierr = 2
   RETURN

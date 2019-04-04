@@ -64,7 +64,7 @@ SUBROUTINE LA05BD(A,Ind,Ia,N,Ip,Iw,W,G,B,Trans)
       DO i = 1, N
         W(i) = B(i)
         B(i) = 0.D0
-      ENDDO
+      END DO
       DO ii = 1, N
         i = Iw(ii,4)
         am = W(i)
@@ -79,10 +79,10 @@ SUBROUTINE LA05BD(A,Ind,Ia,N,Ip,Iw,W,G,B,Trans)
             DO k = k2, kl
               i = Ind(k,2)
               W(i) = W(i) - am*A(k)
-            ENDDO
-          ENDIF
-        ENDIF
-      ENDDO
+            END DO
+          END IF
+        END IF
+      END DO
       !
       !     MULTIPLY VECTOR BY INVERSE OF TRANSPOSE OF L
       IF ( kll>Ia ) RETURN
@@ -91,8 +91,8 @@ SUBROUTINE LA05BD(A,Ind,Ia,N,Ip,Iw,W,G,B,Trans)
         IF ( B(j)/=0.D0 ) THEN
           i = Ind(k,1)
           B(i) = B(i) + A(k)*B(j)
-        ENDIF
-      ENDDO
+        END IF
+      END DO
     ELSE
       !
       !     MULTIPLY VECTOR BY INVERSE OF L
@@ -104,13 +104,13 @@ SUBROUTINE LA05BD(A,Ind,Ia,N,Ip,Iw,W,G,B,Trans)
           IF ( B(i)/=0.D0 ) THEN
             j = Ind(k,2)
             B(j) = B(j) + A(k)*B(i)
-          ENDIF
-        ENDDO
-      ENDIF
+          END IF
+        END DO
+      END IF
       DO i = 1, N
         W(i) = B(i)
         B(i) = 0.D0
-      ENDDO
+      END DO
       !
       !     MULTIPLY VECTOR BY INVERSE OF U
       n1 = N + 1
@@ -128,8 +128,8 @@ SUBROUTINE LA05BD(A,Ind,Ia,N,Ip,Iw,W,G,B,Trans)
           DO k = k2, kl
             j = Ind(k,2)
             am = am - A(k)*B(j)
-          ENDDO
-        ENDIF
+          END DO
+        END IF
         IF ( am/=0. ) THEN
           j = Ind(kp,2)
           B(j) = am/A(kp)
@@ -140,10 +140,10 @@ SUBROUTINE LA05BD(A,Ind,Ia,N,Ip,Iw,W,G,B,Trans)
             DO k = k2, kl
               i = Ind(k,1)
               Ip(i,1) = -ABS(Ip(i,1))
-            ENDDO
-          ENDIF
-        ENDIF
-      ENDDO
-    ENDIF
-  ENDIF
+            END DO
+          END IF
+        END IF
+      END DO
+    END IF
+  END IF
 END SUBROUTINE LA05BD

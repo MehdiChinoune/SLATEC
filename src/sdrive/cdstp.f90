@@ -105,7 +105,7 @@ SUBROUTINE CDSTP(Eps,F,FA,Hmax,Impl,Ierror,JACOBN,Matdim,Maxord,Mint,&
     IF ( N==0 ) GOTO 800
     IF ( H==0.E0 ) GOTO 500
     IF ( ier ) GOTO 600
-  ENDIF
+  END IF
   100  ntry = ntry + 1
   IF ( ntry>MXTRY ) THEN
     !
@@ -117,17 +117,17 @@ SUBROUTINE CDSTP(Eps,F,FA,Hmax,Impl,Ierror,JACOBN,Matdim,Maxord,Mint,&
     CALL CDPSC(1,N,Nq,Yh)
     evaljc = (((ABS(Rc-1.E0)>RCTEST).OR.(Nstep>=Jstepl+NDJSTP)).AND.(Miter/=0))
     evalfa = .NOT.evaljc
-  ENDIF
+  END IF
   !
   200  iter = 0
   DO i = 1, N
     Y(i) = Yh(i,1)
-  ENDDO
+  END DO
   CALL F(N,T,Y,Save2)
   IF ( N==0 ) THEN
     Jstate = 6
     GOTO 700
-  ENDIF
+  END IF
   Nfe = Nfe + 1
   IF ( evaljc.OR.ier ) THEN
     CALL CDPST(El,F,FA,H,Impl,JACOBN,Matdim,Miter,Ml,Mu,N,Nde,Nq,Save2,T,&
@@ -137,10 +137,10 @@ SUBROUTINE CDSTP(Eps,F,FA,Hmax,Impl,Ierror,JACOBN,Matdim,Maxord,Mint,&
     Convrg = .FALSE.
     Rc = 1.E0
     Jstepl = Nstep
-  ENDIF
+  END IF
   DO i = 1, N
     Save1(i) = 0.E0
-  ENDDO
+  END DO
   DO
     !                      Up to MXITER corrector iterations are taken.
     !                      Convergence is tested by requiring the r.m.s.
@@ -165,26 +165,26 @@ SUBROUTINE CDSTP(Eps,F,FA,Hmax,Impl,Ierror,JACOBN,Matdim,Maxord,Mint,&
         numer = SCNRM2(N,Save1,1)
         DO i = 1, N
           Dfdy(1,i) = Save1(i)
-        ENDDO
+        END DO
         y0nrm = SCNRM2(N,Yh,1)
       ELSE
         denom = numer
         DO i = 1, N
           Dfdy(1,i) = Save1(i) - Dfdy(1,i)
-        ENDDO
+        END DO
         numer = SCNRM2(N,Dfdy,Matdim)
         IF ( El(1,Nq)*numer<=100.E0*Uround*y0nrm ) THEN
           IF ( Rmax==RMFAIL ) THEN
             switch = .TRUE.
             GOTO 400
-          ENDIF
-        ENDIF
+          END IF
+        END IF
         DO i = 1, N
           Dfdy(1,i) = Save1(i)
-        ENDDO
+        END DO
         IF ( denom/=0.E0 ) bnd = MAX(bnd,numer/(denom*ABS(H)*El(1,Nq)))
-      ENDIF
-    ENDIF
+      END IF
+    END IF
     IF ( iter>0 ) Trend = MAX(.9E0*Trend,d/d1)
     d1 = d
     ctest = MIN(2.E0*Trend,1.E0)*d
@@ -193,15 +193,15 @@ SUBROUTINE CDSTP(Eps,F,FA,Hmax,Impl,Ierror,JACOBN,Matdim,Maxord,Mint,&
     IF ( iter<MXITER ) THEN
       DO i = 1, N
         Y(i) = Yh(i,1) + El(1,Nq)*Save1(i)
-      ENDDO
+      END DO
       CALL F(N,T,Y,Save2)
       IF ( N==0 ) THEN
         Jstate = 6
         GOTO 700
-      ENDIF
+      END IF
       Nfe = Nfe + 1
       CYCLE
-    ENDIF
+    END IF
     !                     The corrector iteration failed to converge in
     !                     MXITER tries.  If partials are involved but are
     !                     not up to date, they are reevaluated for the next
@@ -212,9 +212,9 @@ SUBROUTINE CDSTP(Eps,F,FA,Hmax,Impl,Ierror,JACOBN,Matdim,Maxord,Mint,&
       evaljc = .TRUE.
       evalfa = .FALSE.
       GOTO 200
-    ENDIF
+    END IF
     EXIT
-  ENDDO
+  END DO
   300  T = told
   CALL CDPSC(-1,N,Nq,Yh)
   Nwait = Nq + 2
@@ -223,7 +223,7 @@ SUBROUTINE CDSTP(Eps,F,FA,Hmax,Impl,Ierror,JACOBN,Matdim,Maxord,Mint,&
     rh = .3E0
   ELSE
     rh = .9E0*(Eps/ctest)**(.2E0)
-  ENDIF
+  END IF
   IF ( rh*H==0.E0 ) GOTO 500
   CALL CDSCL(Hmax,N,Nq,Rmax,H,Rc,rh,Yh)
   GOTO 100
@@ -235,12 +235,12 @@ SUBROUTINE CDSTP(Eps,F,FA,Hmax,Impl,Ierror,JACOBN,Matdim,Maxord,Mint,&
   IF ( Ierror==1.OR.Ierror==5 ) THEN
     DO i = 1, Nde
       Save2(i) = Save1(i)/Ywt(i)
-    ENDDO
+    END DO
   ELSE
     DO i = 1, Nde
       Save2(i) = Save1(i)/MAX(ABS(Y(i)),ABS(Ywt(i)))
-    ENDDO
-  ENDIF
+    END DO
+  END IF
   etest = SCNRM2(Nde,Save2,1)/(Tq(2,Nq)*SQRT(REAL(Nde)))
   !
   !                           The error test failed.  NFAIL keeps track of
@@ -259,12 +259,12 @@ SUBROUTINE CDSTP(Eps,F,FA,Hmax,Impl,Ierror,JACOBN,Matdim,Maxord,Mint,&
         IF ( Ierror==1.OR.Ierror==5 ) THEN
           DO i = 1, Nde
             Save2(i) = Yh(i,Nq+1)/Ywt(i)
-          ENDDO
+          END DO
         ELSE
           DO i = 1, Nde
             Save2(i) = Yh(i,Nq+1)/MAX(ABS(Y(i)),ABS(Ywt(i)))
-          ENDDO
-        ENDIF
+          END DO
+        END IF
         erdn = SCNRM2(Nde,Save2,1)/(Tq(1,Nq)*SQRT(REAL(Nde)))
         rh1 = 1.E0/MAX(1.E0,BIAS1*(erdn/Eps)**(1.E0/Nq))
         IF ( rh2<rh1 ) THEN
@@ -273,15 +273,15 @@ SUBROUTINE CDSTP(Eps,F,FA,Hmax,Impl,Ierror,JACOBN,Matdim,Maxord,Mint,&
           rh = rh1
         ELSE
           rh = rh2
-        ENDIF
+        END IF
       ELSE
         rh = rh2
-      ENDIF
+      END IF
       Nwait = Nq + 2
       IF ( rh*H==0.E0 ) GOTO 500
       CALL CDSCL(Hmax,N,Nq,Rmax,H,Rc,rh,Yh)
       GOTO 100
-    ENDIF
+    END IF
     !                Control reaches this section if the error test has
     !                failed MXFAIL or more times.  It is assumed that the
     !                derivatives that have accumulated in the YH array have
@@ -292,7 +292,7 @@ SUBROUTINE CDSTP(Eps,F,FA,Hmax,Impl,Ierror,JACOBN,Matdim,Maxord,Mint,&
     Jtask = 2
     DO i = 1, N
       Y(i) = Yh(i,1)
-    ENDDO
+    END DO
     CALL CDNTL(Eps,F,FA,Hmax,Hold,Impl,Jtask,Matdim,Maxord,Mint,Miter,Ml,Mu,&
       N,Nde,Save1,T,Uround,USERS,Y,Ywt,H,Mntold,Mtrold,Nfe,Rc,Yh,A,&
       Convrg,El,Fac,ier,Ipvt,Nq,Nwait,rh,Rmax,Save2,Tq,Trend,Iswflg,Jstate)
@@ -301,7 +301,7 @@ SUBROUTINE CDSTP(Eps,F,FA,Hmax,Impl,Ierror,JACOBN,Matdim,Maxord,Mint,&
     IF ( H==0.E0 ) GOTO 500
     IF ( .NOT.(ier) ) GOTO 100
     GOTO 600
-  ENDIF
+  END IF
   !                          After a successful step, update the YH array.
   Nstep = Nstep + 1
   Hused = H
@@ -311,11 +311,11 @@ SUBROUTINE CDSTP(Eps,F,FA,Hmax,Impl,Ierror,JACOBN,Matdim,Maxord,Mint,&
   DO j = 1, Nq + 1
     DO i = 1, N
       Yh(i,j) = Yh(i,j) + El(j,Nq)*Save1(i)
-    ENDDO
-  ENDDO
+    END DO
+  END DO
   DO i = 1, N
     Y(i) = Yh(i,1)
-  ENDDO
+  END DO
   !                                          If ISWFLG is 3, consider
   !                                          changing integration methods.
   IF ( Iswflg==3 ) THEN
@@ -335,7 +335,7 @@ SUBROUTINE CDSTP(Eps,F,FA,Hmax,Impl,Ierror,JACOBN,Matdim,Maxord,Mint,&
           Trend = 1.E0
           CALL CDCST(Maxord,Mint,Iswflg,El,Tq)
           Nwait = Nq + 2
-        ENDIF
+        END IF
       ELSEIF ( Mint==2 ) THEN
         hs = ABS(H)/MAX(Uround,(etest/Eps)**(1.E0/(Nq+1)))
         hn = ABS(H)/MAX(Uround,(etest*El(Nq+1,1)/Eps)**(1.E0/(Nq+1)))
@@ -351,10 +351,10 @@ SUBROUTINE CDSTP(Eps,F,FA,Hmax,Impl,Ierror,JACOBN,Matdim,Maxord,Mint,&
           Convrg = .FALSE.
           CALL CDCST(Maxord,Mint,Iswflg,El,Tq)
           Nwait = Nq + 2
-        ENDIF
-      ENDIF
-    ENDIF
-  ENDIF
+        END IF
+      END IF
+    END IF
+  END IF
   IF ( switch ) THEN
     Mint = 2
     Mntold = Mint
@@ -367,7 +367,7 @@ SUBROUTINE CDSTP(Eps,F,FA,Hmax,Impl,Ierror,JACOBN,Matdim,Maxord,Mint,&
     Trend = 1.E0
     CALL CDCST(Maxord,Mint,Iswflg,El,Tq)
     Nwait = Nq + 2
-  ENDIF
+  END IF
   !                           Consider changing H if NWAIT = 1.  Otherwise
   !                           decrease NWAIT by 1.  If NWAIT is then 1 and
   !                           NQ.LT.MAXORD, then SAVE1 is saved for use in
@@ -381,8 +381,8 @@ SUBROUTINE CDSTP(Eps,F,FA,Hmax,Impl,Ierror,JACOBN,Matdim,Maxord,Mint,&
     IF ( Nwait==1.AND.Nq<Maxord ) THEN
       DO i = 1, Nde
         Yh(i,Maxord+1) = Save1(i)
-      ENDDO
-    ENDIF
+      END DO
+    END IF
     !             If a change in H is considered, an increase or decrease in
     !             order by one is considered also.  A change in H is made
     !             only if it is by a factor of at least TRSHLD.  Factors
@@ -401,15 +401,15 @@ SUBROUTINE CDSTP(Eps,F,FA,Hmax,Impl,Ierror,JACOBN,Matdim,Maxord,Mint,&
       IF ( Ierror==1.OR.Ierror==5 ) THEN
         DO i = 1, Nde
           Save2(i) = Yh(i,Nq+1)/Ywt(i)
-        ENDDO
+        END DO
       ELSE
         DO i = 1, Nde
           Save2(i) = Yh(i,Nq+1)/MAX(ABS(Y(i)),ABS(Ywt(i)))
-        ENDDO
-      ENDIF
+        END DO
+      END IF
       erdn = SCNRM2(Nde,Save2,1)/(Tq(1,Nq)*SQRT(REAL(Nde)))
       rh1 = 1.E0/MAX(Uround,BIAS1*(erdn/Eps)**(1.E0/Nq))
-    ENDIF
+    END IF
     rh2 = 1.E0/MAX(Uround,BIAS2*(etest/Eps)**(1.E0/(Nq+1)))
     IF ( Nq==Maxord ) THEN
       rh3 = 0.E0
@@ -417,15 +417,15 @@ SUBROUTINE CDSTP(Eps,F,FA,Hmax,Impl,Ierror,JACOBN,Matdim,Maxord,Mint,&
       IF ( Ierror==1.OR.Ierror==5 ) THEN
         DO i = 1, Nde
           Save2(i) = (Save1(i)-Yh(i,Maxord+1))/Ywt(i)
-        ENDDO
+        END DO
       ELSE
         DO i = 1, Nde
           Save2(i) = (Save1(i)-Yh(i,Maxord+1))/MAX(ABS(Y(i)),ABS(Ywt(i)))
-        ENDDO
-      ENDIF
+        END DO
+      END IF
       erup = SCNRM2(Nde,Save2,1)/(Tq(3,Nq)*SQRT(REAL(Nde)))
       rh3 = 1.E0/MAX(Uround,BIAS3*(erup/Eps)**(1.E0/(Nq+2)))
-    ENDIF
+    END IF
     IF ( rh1>rh2.AND.rh1>=rh3 ) THEN
       rh = rh1
       IF ( rh<=TRSHLD ) GOTO 450
@@ -439,17 +439,17 @@ SUBROUTINE CDSTP(Eps,F,FA,Hmax,Impl,Ierror,JACOBN,Matdim,Maxord,Mint,&
       IF ( rh<=TRSHLD ) GOTO 450
       DO i = 1, N
         Yh(i,Nq+2) = Save1(i)*El(Nq+1,Nq)/(Nq+1)
-      ENDDO
+      END DO
       Nq = Nq + 1
       Rc = Rc*El(1,Nq)/El(1,Nq-1)
-    ENDIF
+    END IF
     IF ( Iswflg==3.AND.Mint==1 ) THEN
       IF ( bnd/=0.E0 ) rh = MIN(rh,1.E0/(2.E0*El(1,Nq)*bnd*ABS(H)))
-    ENDIF
+    END IF
     CALL CDSCL(Hmax,N,Nq,Rmax,H,Rc,rh,Yh)
     Rmax = RMNORM
-    450    Nwait = Nq + 2
-  ENDIF
+    450  Nwait = Nq + 2
+  END IF
   !               All returns are made through this section.  H is saved
   !               in HOLD to allow the caller to change H on the next step
   Jstate = 1
@@ -460,7 +460,7 @@ SUBROUTINE CDSTP(Eps,F,FA,Hmax,Impl,Ierror,JACOBN,Matdim,Maxord,Mint,&
   Hold = H
   DO i = 1, N
     Y(i) = Yh(i,1)
-  ENDDO
+  END DO
   RETURN
   !
   600  Jstate = 4
@@ -471,6 +471,6 @@ SUBROUTINE CDSTP(Eps,F,FA,Hmax,Impl,Ierror,JACOBN,Matdim,Maxord,Mint,&
   CALL CDPSC(-1,nsv,Nq,Yh)
   DO i = 1, nsv
     Y(i) = Yh(i,1)
-  ENDDO
+  END DO
   800  Hold = H
 END SUBROUTINE CDSTP

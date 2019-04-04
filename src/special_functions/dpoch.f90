@@ -67,9 +67,9 @@ REAL(8) FUNCTION DPOCH(A,X)
         ia = INT( A )
         DPOCH = (-1.0D0)**n*DFAC(-ia)/DFAC(-ia-n)
         RETURN
-      ENDIF
-    ENDIF
-  ENDIF
+      END IF
+    END IF
+  END IF
   !
   ! A+X IS NOT ZERO OR A NEGATIVE INTEGER.
   !
@@ -91,7 +91,7 @@ REAL(8) FUNCTION DPOCH(A,X)
       CALL DLGAMS(A,alnga,sgnga)
       DPOCH = sgngax*sgnga*EXP(alngax-alnga)
       RETURN
-    ENDIF
+    END IF
   ELSE
     !
     ! X IS A SMALL NON-POSITIVE INTEGER, PRESUMMABLY A COMMON CASE.
@@ -100,9 +100,9 @@ REAL(8) FUNCTION DPOCH(A,X)
     IF ( n==0 ) RETURN
     DO i = 1, n
       DPOCH = DPOCH*(A+i-1)
-    ENDDO
+    END DO
     RETURN
-  ENDIF
+  END IF
   !
   ! ABS(X) IS SMALL AND BOTH ABS(A+X) AND ABS(A) ARE LARGE.  THUS,
   ! A+X AND A MUST HAVE THE SAME SIGN.  FOR NEGATIVE A, WE USE

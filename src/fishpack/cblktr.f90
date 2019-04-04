@@ -252,7 +252,7 @@ SUBROUTINE CBLKTR(Iflg,Np,N,An,Bn,Cn,Mp,M,Am,Bm,Cm,Idimy,Y,Ierror,W)
           iw1 = iwbh
           W(1) = iw1 - 1 + MAX(2*NM,12*M)
           NM = NM - 1
-        ENDIF
+        END IF
         !
         ! SUBROUTINE CCMPB COMPUTES THE ROOTS OF THE B POLYNOMIALS
         !
@@ -275,10 +275,10 @@ SUBROUTINE CBLKTR(Iflg,Np,N,An,Bn,Cn,Mp,M,Am,Bm,Cm,Idimy,Y,Ierror,W)
             CALL CBLKT1(nl,An,Bn,Cn,M,Am,Bm,Cm,Idimy,Y,W(2),Wc(iw1/2),Wc(iw2/2),&
               Wc(iw3/2),Wc(iwd),Wc(iww),Wc(iwu),PROCP,CPROCP)
             W(1:200) = [ ( [REAL(Wc(i)),AIMAG(Wc(i))], i=1,100 ) ]
-          ENDIF
-        ENDIF
+          END IF
+        END IF
         EXIT
-      ENDIF
-    ENDDO
-  ENDIF
+      END IF
+    END DO
+  END IF
 END SUBROUTINE CBLKTR

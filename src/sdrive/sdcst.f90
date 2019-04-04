@@ -38,14 +38,14 @@ SUBROUTINE SDCST(Maxord,Mint,Iswflg,El,Tq)
   !* REVISION HISTORY  (YYMMDD)
   !   790601  DATE WRITTEN
   !   900329  Initial submission to SLATEC.
-  
+
   REAL El(13,12), factrl(12), gamma(14), sum, Tq(3,12)
   INTEGER i, Iswflg, j, Maxord, Mint, mxrd
   !* FIRST EXECUTABLE STATEMENT  SDCST
   factrl(1) = 1.E0
   DO i = 2, Maxord
     factrl(i) = i*factrl(i-1)
-  ENDDO
+  END DO
   !                                             Compute Adams coefficients
   IF ( Mint==1 ) THEN
     gamma(1) = 1.E0
@@ -53,9 +53,9 @@ SUBROUTINE SDCST(Maxord,Mint,Iswflg,El,Tq)
       sum = 0.E0
       DO j = 1, i
         sum = sum - gamma(j)/(i-j+2)
-      ENDDO
+      END DO
       gamma(i+1) = sum
-    ENDDO
+    END DO
     El(1,1) = 1.E0
     El(2,1) = 1.E0
     El(2,2) = 1.E0
@@ -64,21 +64,21 @@ SUBROUTINE SDCST(Maxord,Mint,Iswflg,El,Tq)
       El(2,j) = factrl(j-1)
       DO i = 3, j
         El(i,j) = (j-1)*El(i,j-1) + El(i-1,j-1)
-      ENDDO
+      END DO
       El(j+1,j) = 1.E0
-    ENDDO
+    END DO
     DO j = 2, Maxord
       El(1,j) = El(1,j-1) + gamma(j)
       El(2,j) = 1.E0
       DO i = 3, j + 1
         El(i,j) = El(i,j)/((i-1)*factrl(j-1))
-      ENDDO
-    ENDDO
+      END DO
+    END DO
     DO j = 1, Maxord
       Tq(1,j) = -1.E0/(factrl(j)*gamma(j))
       Tq(2,j) = -1.E0/gamma(j+1)
       Tq(3,j) = -1.E0/gamma(j+2)
-    ENDDO
+    END DO
     !                                              Compute Gear coefficients
   ELSEIF ( Mint==2 ) THEN
     El(1,1) = 1.E0
@@ -87,22 +87,22 @@ SUBROUTINE SDCST(Maxord,Mint,Iswflg,El,Tq)
       El(1,j) = factrl(j)
       DO i = 2, j
         El(i,j) = j*El(i,j-1) + El(i-1,j-1)
-      ENDDO
+      END DO
       El(j+1,j) = 1.E0
-    ENDDO
+    END DO
     sum = 1.E0
     DO j = 2, Maxord
       sum = sum + 1.E0/j
       DO i = 1, j + 1
         El(i,j) = El(i,j)/(factrl(j)*sum)
-      ENDDO
-    ENDDO
+      END DO
+    END DO
     DO j = 1, Maxord
       IF ( j>1 ) Tq(1,j) = 1.E0/factrl(j-1)
       Tq(2,j) = (j+1)/El(1,j)
       Tq(3,j) = (j+2)/El(1,j)
-    ENDDO
-  ENDIF
+    END DO
+  END IF
   !                          Compute constants used in the stiffness test.
   !                          These are the ratio of TQ(2,NQ) for the Gear
   !                          methods to those for the Adams methods.
@@ -114,14 +114,14 @@ SUBROUTINE SDCST(Maxord,Mint,Iswflg,El,Tq)
         sum = 0.E0
         DO j = 1, i
           sum = sum - gamma(j)/(i-j+2)
-        ENDDO
+        END DO
         gamma(i+1) = sum
-      ENDDO
-    ENDIF
+      END DO
+    END IF
     sum = 1.E0
     DO i = 2, mxrd
       sum = sum + 1.E0/i
       El(1+i,1) = -(i+1)*sum*gamma(i+1)
-    ENDDO
-  ENDIF
+    END DO
+  END IF
 END SUBROUTINE SDCST

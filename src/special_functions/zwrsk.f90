@@ -55,7 +55,7 @@ SUBROUTINE ZWRSK(Zrr,Zri,Fnu,Kode,N,Yr,Yi,Nz,Cwr,Cwi,Tol,Elim,Alim)
     IF ( Kode/=1 ) THEN
       cinur = COS(Zri)
       cinui = SIN(Zri)
-    ENDIF
+    END IF
     !-----------------------------------------------------------------------
     !     ON LOW EXPONENT MACHINES THE K FUNCTIONS CAN BE CLOSE TO BOTH
     !     THE UNDER AND OVERFLOW LIMITS AND THE NORMALIZATION MUST BE
@@ -70,8 +70,8 @@ SUBROUTINE ZWRSK(Zrr,Zri,Fnu,Kode,N,Yr,Yi,Nz,Cwr,Cwi,Tol,Elim,Alim)
       IF ( acw>=ascle ) csclr = Tol
     ELSE
       csclr = 1.0D0/Tol
-    ENDIF
-  ENDIF
+    END IF
+  END IF
   c1r = Cwr(1)*csclr
   c1i = Cwi(1)*csclr
   c2r = Cwr(2)*csclr
@@ -107,6 +107,6 @@ SUBROUTINE ZWRSK(Zrr,Zri,Fnu,Kode,N,Yr,Yi,Nz,Cwr,Cwi,Tol,Elim,Alim)
     sti = Yi(i)
     Yr(i) = cinur*csclr
     Yi(i) = cinui*csclr
-  ENDDO
+  END DO
   RETURN
 END SUBROUTINE ZWRSK

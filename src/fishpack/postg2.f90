@@ -70,48 +70,48 @@ SUBROUTINE POSTG2(Nperod,N,M,A,Bb,C,Idimq,Q,B,B2,B3,W,W2,W3,D,Tcos,P)
         IF ( ijump/=2 ) THEN
           ijump = 2
           CALL COSGEN(i2r,1,0.5,0.0,Tcos)
-        ENDIF
+        END IF
         IF ( i2r/=1 ) THEN
           DO i = 1, mr
             fi = Q(i,j)
             Q(i,j) = Q(i,j) - Q(i,jm1) - Q(i,jp1) + Q(i,jm2) + Q(i,jp2)
             B(i) = fi + Q(i,j) - Q(i,jm3) - Q(i,jp3)
-          ENDDO
+          END DO
         ELSE
           DO i = 1, mr
             B(i) = 2.*Q(i,j)
             Q(i,j) = Q(i,jm2) + Q(i,jp2)
-          ENDDO
-        ENDIF
+          END DO
+        END IF
       ELSE
         CALL COSGEN(i2r,1,fnum,0.5,Tcos)
         IF ( i2r/=1 ) THEN
           DO i = 1, mr
             B(i) = Q(i,1) + 0.5*(Q(i,jp2)-Q(i,jp1)-Q(i,jp3))
             Q(i,1) = Q(i,jp2) + Q(i,1) - Q(i,jp1)
-          ENDDO
+          END DO
         ELSE
           DO i = 1, mr
             B(i) = Q(i,1)
             Q(i,1) = Q(i,2)
-          ENDDO
-        ENDIF
-      ENDIF
+          END DO
+        END IF
+      END IF
       CALL TRIX(i2r,0,mr,A,Bb,C,B,Tcos,D,W)
       DO i = 1, mr
         Q(i,j) = Q(i,j) + B(i)
-      ENDDO
+      END DO
       !
       !     END OF REDUCTION FOR REGULAR UNKNOWNS.
       !
-    ENDDO
+    END DO
     !
     !     BEGIN SPECIAL REDUCTION FOR LAST UNKNOWN.
     !
     j = jstop + jr
   ELSE
     j = jr
-  ENDIF
+  END IF
   nlast = j
   jm1 = j - i2rby2
   jm2 = j - i2r
@@ -125,17 +125,17 @@ SUBROUTINE POSTG2(Nperod,N,M,A,Bb,C,Idimq,Q,B,B2,B3,W,W2,W3,D,Tcos,P)
     IF ( i2r/=1 ) THEN
       DO i = 1, mr
         B(i) = Q(i,j) + .5*(Q(i,jm2)-Q(i,jm1)-Q(i,jm3))
-      ENDDO
+      END DO
       IF ( nrodpr/=0 ) THEN
         DO i = 1, mr
           B(i) = B(i) + Q(i,jp2) - Q(i,jp1)
-        ENDDO
+        END DO
       ELSE
         DO i = 1, mr
           ii = ip + i
           B(i) = B(i) + P(ii)
-        ENDDO
-      ENDIF
+        END DO
+      END IF
       CALL COSGEN(i2r,1,0.5,0.0,Tcos)
       CALL TRIX(i2r,0,mr,A,Bb,C,B,Tcos,D,W)
       ip = ip + mr
@@ -144,26 +144,26 @@ SUBROUTINE POSTG2(Nperod,N,M,A,Bb,C,Idimq,Q,B,B2,B3,W,W2,W3,D,Tcos,P)
         ii = ip + i
         P(ii) = B(i) + .5*(Q(i,j)-Q(i,jm1)-Q(i,jp1))
         B(i) = P(ii) + Q(i,jp2)
-      ENDDO
+      END DO
       IF ( lr==0 ) THEN
         DO i = 1, i2r
           ii = kr + i
           Tcos(ii) = Tcos(i)
-        ENDDO
+        END DO
       ELSE
         CALL COSGEN(lr,1,fnum2,0.5,Tcos(i2r+1))
         CALL S1MERG(Tcos,0,i2r,i2r,lr,kr)
-      ENDIF
+      END IF
       CALL COSGEN(kr,1,fnum2,0.5,Tcos)
       CALL TRIX(kr,kr,mr,A,Bb,C,B,Tcos,D,W)
       DO i = 1, mr
         ii = ip + i
         Q(i,j) = Q(i,jm2) + P(ii) + B(i)
-      ENDDO
+      END DO
     ELSE
       DO i = 1, mr
         B(i) = Q(i,j)
-      ENDDO
+      END DO
       Tcos(1) = 0.
       CALL TRIX(1,0,mr,A,Bb,C,B,Tcos,D,W)
       ip = 0
@@ -171,14 +171,14 @@ SUBROUTINE POSTG2(Nperod,N,M,A,Bb,C,Idimq,Q,B,B2,B3,W,W2,W3,D,Tcos,P)
       DO i = 1, mr
         P(i) = B(i)
         B(i) = B(i) + Q(i,N)
-      ENDDO
+      END DO
       Tcos(1) = -1. + 2*(np/2)
       Tcos(2) = 0.
       CALL TRIX(1,1,mr,A,Bb,C,B,Tcos,D,W)
       DO i = 1, mr
         Q(i,j) = Q(i,jm2) + P(i) + B(i)
-      ENDDO
-    ENDIF
+      END DO
+    END IF
     lr = kr
     kr = kr + jr
   ELSE
@@ -188,38 +188,38 @@ SUBROUTINE POSTG2(Nperod,N,M,A,Bb,C,Idimq,Q,B,B2,B3,W,W2,W3,D,Tcos,P)
     IF ( i2r/=1 ) THEN
       DO i = 1, mr
         B(i) = Q(i,j) + .5*(Q(i,jm2)-Q(i,jm1)-Q(i,jm3))
-      ENDDO
+      END DO
       IF ( nrodpr/=0 ) THEN
         DO i = 1, mr
           Q(i,j) = Q(i,j) - Q(i,jm1) + Q(i,jm2)
-        ENDDO
+        END DO
       ELSE
         DO i = 1, mr
           ii = ip + i
           Q(i,j) = Q(i,jm2) + P(ii)
-        ENDDO
+        END DO
         ip = ip - mr
-      ENDIF
+      END IF
       IF ( lr/=0 ) CALL COSGEN(lr,1,fnum2,0.5,Tcos(kr+1))
     ELSE
       DO i = 1, mr
         B(i) = Q(i,j)
         Q(i,j) = Q(i,jm2)
-      ENDDO
-    ENDIF
+      END DO
+    END IF
     CALL COSGEN(kr,1,fnum2,0.5,Tcos)
     CALL TRIX(kr,lr,mr,A,Bb,C,B,Tcos,D,W)
     DO i = 1, mr
       Q(i,j) = Q(i,j) + B(i)
-    ENDDO
+    END DO
     kr = kr + i2r
-  ENDIF
+  END IF
   nr = (nlast-1)/jr + 1
   IF ( nr>3 ) THEN
     i2r = jr
     nrodpr = nrod
     GOTO 100
-  ENDIF
+  END IF
   !
   !      BEGIN SOLUTION
   !
@@ -237,7 +237,7 @@ SUBROUTINE POSTG2(Nperod,N,M,A,Bb,C,Idimq,Q,B,B2,B3,W,W2,W3,D,Tcos,P)
       B(i) = Q(i,1) + P(ii)
       Q(i,1) = Q(i,1) - Q(i,jm1)
       B2(i) = Q(i,1) + Q(i,nlast)
-    ENDDO
+    END DO
     k(1) = kr + jr
     k(2) = k(1) + jr
     CALL COSGEN(jr-1,1,0.0,1.0,Tcos(k(1)+1))
@@ -260,37 +260,37 @@ SUBROUTINE POSTG2(Nperod,N,M,A,Bb,C,Idimq,Q,B,B2,B3,W,W2,W3,D,Tcos,P)
     CALL TRI3(mr,A,Bb,C,k,B,B2,B3,Tcos,D,W,W2,W3)
     DO i = 1, mr
       B(i) = B(i) + B2(i)
-    ENDDO
+    END DO
     IF ( np==3 ) THEN
       Tcos(1) = 2.
       CALL TRIX(1,0,mr,A,Bb,C,B,Tcos,D,W)
-    ENDIF
+    END IF
     DO i = 1, mr
       Q(i,1) = Q(i,1) + B(i)
-    ENDDO
+    END DO
   ELSEIF ( lr/=0 ) THEN
     !
     !     CASE OF GENERAL N WITH NR = 3 .
     !
     DO i = 1, mr
       B(i) = Q(i,1) - Q(i,jm1) + Q(i,j)
-    ENDDO
+    END DO
     IF ( nrod/=0 ) THEN
       DO i = 1, mr
         B(i) = B(i) + Q(i,nlast) - Q(i,jm2)
-      ENDDO
+      END DO
     ELSE
       DO i = 1, mr
         ii = ip + i
         B(i) = B(i) + P(ii)
-      ENDDO
-    ENDIF
+      END DO
+    END IF
     DO i = 1, mr
       t = .5*(Q(i,j)-Q(i,jm1)-Q(i,jp1))
       Q(i,j) = t
       B2(i) = Q(i,nlast) + t
       B3(i) = Q(i,1) + t
-    ENDDO
+    END DO
     k(1) = kr + 2*jr
     CALL COSGEN(jr-1,1,0.0,1.0,Tcos(k(1)+1))
     k(2) = k(1) + jr
@@ -316,40 +316,40 @@ SUBROUTINE POSTG2(Nperod,N,M,A,Bb,C,Idimq,Q,B,B2,B3,W,W2,W3,D,Tcos,P)
     CALL TRI3(mr,A,Bb,C,k,B,B2,B3,Tcos,D,W,W2,W3)
     DO i = 1, mr
       B(i) = B(i) + B2(i) + B3(i)
-    ENDDO
+    END DO
     IF ( np==3 ) THEN
       Tcos(1) = 2.
       CALL TRIX(1,0,mr,A,Bb,C,B,Tcos,D,W)
-    ENDIF
+    END IF
     DO i = 1, mr
       Q(i,j) = Q(i,j) + B(i)
       B(i) = Q(i,1) + Q(i,j)
-    ENDDO
+    END DO
     CALL COSGEN(jr,1,fnum,0.5,Tcos)
     CALL TRIX(jr,0,mr,A,Bb,C,B,Tcos,D,W)
     IF ( jr/=1 ) THEN
       DO i = 1, mr
         Q(i,1) = Q(i,1) - Q(i,jm1) + B(i)
-      ENDDO
+      END DO
     ELSE
       DO i = 1, mr
         Q(i,1) = B(i)
-      ENDDO
-    ENDIF
+      END DO
+    END IF
   ELSEIF ( N/=3 ) THEN
     !
     !     CASE N = 2**P+1
     !
     DO i = 1, mr
       B(i) = Q(i,j) + Q(i,1) - Q(i,jm1) + Q(i,nlast) - Q(i,jm2)
-    ENDDO
+    END DO
     SELECT CASE (np)
       CASE (2)
         DO i = 1, mr
           fi = (Q(i,j)-Q(i,jm1)-Q(i,jp1))/2.
           B2(i) = Q(i,1) + fi
           B3(i) = Q(i,nlast) + fi
-        ENDDO
+        END DO
         k(1) = nlast + jr - 1
         k(2) = k(1) + jr - 1
         CALL COSGEN(jr-1,1,0.0,1.0,Tcos(k(1)+1))
@@ -367,7 +367,7 @@ SUBROUTINE POSTG2(Nperod,N,M,A,Bb,C,Idimq,Q,B,B2,B3,W,W2,W3,D,Tcos,P)
         DO i = 1, mr
           B2(i) = Q(i,1) + Q(i,nlast) + Q(i,j) - Q(i,jm1) - Q(i,jp1)
           B3(i) = 0.
-        ENDDO
+        END DO
         k(1) = nlast - 1
         k(2) = nlast + jr - 1
         CALL COSGEN(jr-1,1,0.0,1.0,Tcos(nlast))
@@ -384,20 +384,20 @@ SUBROUTINE POSTG2(Nperod,N,M,A,Bb,C,Idimq,Q,B,B2,B3,W,W2,W3,D,Tcos,P)
     CALL TRI3(mr,A,Bb,C,k,B,B2,B3,Tcos,D,W,W2,W3)
     DO i = 1, mr
       B(i) = B(i) + B2(i) + B3(i)
-    ENDDO
+    END DO
     IF ( np==3 ) THEN
       Tcos(1) = 2.
       CALL TRIX(1,0,mr,A,Bb,C,B,Tcos,D,W)
-    ENDIF
+    END IF
     DO i = 1, mr
       Q(i,j) = B(i) + .5*(Q(i,j)-Q(i,jm1)-Q(i,jp1))
       B(i) = Q(i,j) + Q(i,1)
-    ENDDO
+    END DO
     CALL COSGEN(jr,1,fnum,0.5,Tcos)
     CALL TRIX(jr,0,mr,A,Bb,C,B,Tcos,D,W)
     DO i = 1, mr
       Q(i,1) = Q(i,1) - Q(i,jm1) + B(i)
-    ENDDO
+    END DO
   ELSE
     !
     !     CASE N = 3.
@@ -408,7 +408,7 @@ SUBROUTINE POSTG2(Nperod,N,M,A,Bb,C,Idimq,Q,B,B2,B3,W,W2,W3,D,Tcos,P)
           B(i) = Q(i,2)
           B2(i) = Q(i,3)
           B3(i) = Q(i,1)
-        ENDDO
+        END DO
         CALL COSGEN(3,1,0.5,0.0,Tcos)
         Tcos(4) = -1.
         Tcos(5) = 1.
@@ -423,7 +423,7 @@ SUBROUTINE POSTG2(Nperod,N,M,A,Bb,C,Idimq,Q,B,B2,B3,W,W2,W3,D,Tcos,P)
           B(i) = Q(i,2)
           B2(i) = Q(i,1) + Q(i,3)
           B3(i) = 0.
-        ENDDO
+        END DO
         SELECT CASE (np)
           CASE (1,2)
             Tcos(1) = -2.
@@ -442,7 +442,7 @@ SUBROUTINE POSTG2(Nperod,N,M,A,Bb,C,Idimq,Q,B,B2,B3,W,W2,W3,D,Tcos,P)
     CALL TRI3(mr,A,Bb,C,k,B,B2,B3,Tcos,D,W,W2,W3)
     DO i = 1, mr
       B(i) = B(i) + B2(i) + B3(i)
-    ENDDO
+    END DO
     SELECT CASE (np)
       CASE (1,2)
       CASE DEFAULT
@@ -452,44 +452,44 @@ SUBROUTINE POSTG2(Nperod,N,M,A,Bb,C,Idimq,Q,B,B2,B3,W,W2,W3,D,Tcos,P)
     DO i = 1, mr
       Q(i,2) = B(i)
       B(i) = Q(i,1) + B(i)
-    ENDDO
+    END DO
     Tcos(1) = -1. + 4.*fnum
     CALL TRIX(1,0,mr,A,Bb,C,B,Tcos,D,W)
     DO i = 1, mr
       Q(i,1) = B(i)
-    ENDDO
+    END DO
     jr = 1
     i2r = 0
-  ENDIF
+  END IF
   !
   !     START BACK SUBSTITUTION.
   !
   300  j = nlast - jr
   DO i = 1, mr
     B(i) = Q(i,nlast) + Q(i,j)
-  ENDDO
+  END DO
   jm2 = nlast - i2r
   IF ( jr==1 ) THEN
     DO i = 1, mr
       Q(i,nlast) = 0.
-    ENDDO
+    END DO
   ELSEIF ( nrod/=0 ) THEN
     DO i = 1, mr
       Q(i,nlast) = Q(i,nlast) - Q(i,jm2)
-    ENDDO
+    END DO
   ELSE
     DO i = 1, mr
       ii = ip + i
       Q(i,nlast) = P(ii)
-    ENDDO
+    END DO
     ip = ip - mr
-  ENDIF
+  END IF
   CALL COSGEN(kr,1,fnum2,0.5,Tcos)
   CALL COSGEN(lr,1,fnum2,0.5,Tcos(kr+1))
   CALL TRIX(kr,lr,mr,A,Bb,C,B,Tcos,D,W)
   DO i = 1, mr
     Q(i,nlast) = Q(i,nlast) + B(i)
-  ENDDO
+  END DO
   nlastp = nlast
   DO
     jstep = jr
@@ -510,7 +510,7 @@ SUBROUTINE POSTG2(Nperod,N,M,A,Bb,C,Idimq,Q,B,B2,B3,W,W2,W3,D,Tcos,P)
         kr = kr - jr
         nlast = nlast + jr
         jstop = nlast - jstep
-      ENDIF
+      END IF
       lr = kr - jr
       CALL COSGEN(jr,1,0.5,0.0,Tcos)
       DO j = jstart, jstop, jstep
@@ -519,31 +519,31 @@ SUBROUTINE POSTG2(Nperod,N,M,A,Bb,C,Idimq,Q,B,B2,B3,W,W2,W3,D,Tcos,P)
         IF ( j/=jr ) THEN
           DO i = 1, mr
             B(i) = Q(i,j) + Q(i,jm2) + Q(i,jp2)
-          ENDDO
+          END DO
         ELSE
           DO i = 1, mr
             B(i) = Q(i,j) + Q(i,jp2)
-          ENDDO
-        ENDIF
+          END DO
+        END IF
         IF ( jr/=1 ) THEN
           jm1 = j - i2r
           jp1 = j + i2r
           DO i = 1, mr
             Q(i,j) = .5*(Q(i,j)-Q(i,jm1)-Q(i,jp1))
-          ENDDO
+          END DO
         ELSE
           DO i = 1, mr
             Q(i,j) = 0.
-          ENDDO
-        ENDIF
+          END DO
+        END IF
         CALL TRIX(jr,0,mr,A,Bb,C,B,Tcos,D,W)
         DO i = 1, mr
           Q(i,j) = Q(i,j) + B(i)
-        ENDDO
-      ENDDO
+        END DO
+      END DO
       nrod = 1
       IF ( nlast+i2r<=N ) nrod = 0
       IF ( nlastp/=nlast ) GOTO 300
-    ENDIF
-  ENDDO
+    END IF
+  END DO
 END SUBROUTINE POSTG2

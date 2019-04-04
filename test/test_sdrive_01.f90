@@ -84,7 +84,7 @@ CONTAINS
         WRITE (Lun,*) ' Number of evaluations of the right hand side is  ', nfe
         WRITE (Lun,*) ' Number of evaluations of the Jacobian matrix is  ', nje
         WRITE (Lun,'(//)')
-      ENDIF
+      END IF
       Ipass = 0
     ELSEIF ( ABS(1.E0-y(1)*1.5E0)>eps**(2.E0/3.E0).OR.ABS(1.E0-y(2)*3.E0)&
         >eps**(2.E0/3.E0).OR.ABS(1.E0-y(3))>eps**(2.E0/3.E0) ) THEN
@@ -105,7 +105,7 @@ CONTAINS
         WRITE (Lun,*) ' Number of evaluations of the right hand side is  ', nfe
         WRITE (Lun,*) ' Number of evaluations of the Jacobian matrix is  ', nje
         WRITE (Lun,'(//)')
-      ENDIF
+      END IF
       Ipass = 0
     ELSEIF ( Kprint==2 ) THEN
       WRITE (Lun,&
@@ -119,7 +119,7 @@ CONTAINS
       WRITE (Lun,*) ' Y(2) ', y(2)
       WRITE (Lun,*) ' Y(3) ', y(3)
       WRITE (Lun,'(/)')
-    ENDIF
+    END IF
     CALL XERCLR
     !                                         Run SDRIV1 with invalid input.
     nx = 201
@@ -152,7 +152,7 @@ CONTAINS
         WRITE (Lun,*) ' Number of evaluations of the right hand side is  ', nfe
         WRITE (Lun,*) ' Number of evaluations of the Jacobian matrix is  ', nje
         WRITE (Lun,'(//)')
-      ENDIF
+      END IF
       Ipass = 0
     ELSEIF ( Kprint==2 ) THEN
       WRITE (Lun,&
@@ -163,7 +163,7 @@ CONTAINS
       WRITE (Lun,*) ' The value of N was set to ', nx
       WRITE (Lun,*) ' MSTATE = ', mstate, ', Error number = ', ierflg
       WRITE (Lun,'(/)')
-    ENDIF
+    END IF
     CALL XERCLR
     !                                            Exercise SDRIV2 for problem
     !                                            with known solution.
@@ -202,7 +202,7 @@ CONTAINS
         WRITE (Lun,*) ' Number of evaluations of the right hand side is  ', nfe
         WRITE (Lun,*) ' Number of evaluations of the Jacobian matrix is  ', nje
         WRITE (Lun,'(//)')
-      ENDIF
+      END IF
       Ipass = 0
     ELSEIF ( ABS(1.E0-y(1)*1.5E0)>eps**(2.E0/3.E0).OR.ABS(1.E0-y(2)*3.E0)&
         >eps**(2.E0/3.E0).OR.ABS(1.E0-y(3))>eps**(2.E0/3.E0) ) THEN
@@ -223,7 +223,7 @@ CONTAINS
         WRITE (Lun,*) ' Number of evaluations of the right hand side is  ', nfe
         WRITE (Lun,*) ' Number of evaluations of the Jacobian matrix is  ', nje
         WRITE (Lun,'(//)')
-      ENDIF
+      END IF
       Ipass = 0
     ELSEIF ( Kprint==2 ) THEN
       WRITE (Lun,&
@@ -237,7 +237,7 @@ CONTAINS
       WRITE (Lun,*) ' Y(2) ', y(2)
       WRITE (Lun,*) ' Y(3) ', y(3)
       WRITE (Lun,'(/)')
-    ENDIF
+    END IF
     CALL XERCLR
     !                                         Run SDRIV2 with invalid input.
     t = 0.E0
@@ -273,7 +273,7 @@ CONTAINS
         WRITE (Lun,*) ' Number of evaluations of the right hand side is  ', nfe
         WRITE (Lun,*) ' Number of evaluations of the Jacobian matrix is  ', nje
         WRITE (Lun,'(//)')
-      ENDIF
+      END IF
       Ipass = 0
     ELSEIF ( Kprint==2 ) THEN
       WRITE (Lun,&
@@ -284,7 +284,7 @@ CONTAINS
       WRITE (Lun,*) ' The value of LENW was set to ', lenwx
       WRITE (Lun,*) ' MSTATE = ', mstate, ', Error number = ', ierflg
       WRITE (Lun,'(/)')
-    ENDIF
+    END IF
     CALL XERCLR
     !                                            Exercise SDRIV3 for problem
     !                                            with known solution.
@@ -324,7 +324,7 @@ CONTAINS
         WRITE (Lun,*) ' Number of evaluations of the right hand side is  ', nfe
         WRITE (Lun,*) ' Number of evaluations of the Jacobian matrix is  ', nje
         WRITE (Lun,'(//)')
-      ENDIF
+      END IF
       Ipass = 0
     ELSEIF ( ABS(1.E0-y(1)*1.5E0)>eps**(2.E0/3.E0).OR.ABS(1.E0-y(2)*3.E0)&
         >eps**(2.E0/3.E0).OR.ABS(1.E0-y(3))>eps**(2.E0/3.E0) ) THEN
@@ -346,7 +346,7 @@ CONTAINS
         WRITE (Lun,*) ' Number of evaluations of the right hand side is  ', nfe
         WRITE (Lun,*) ' Number of evaluations of the Jacobian matrix is  ', nje
         WRITE (Lun,'(//)')
-      ENDIF
+      END IF
       Ipass = 0
     ELSEIF ( Kprint==2 ) THEN
       WRITE (Lun,&
@@ -360,7 +360,7 @@ CONTAINS
       WRITE (Lun,*) ' Y(2) ', y(2)
       WRITE (Lun,*) ' Y(3) ', y(3)
       WRITE (Lun,'(/)')
-    ENDIF
+    END IF
     CALL XERCLR
     !                                         Run SDRIV3 with invalid input.
     t = 0.E0
@@ -397,7 +397,7 @@ CONTAINS
         WRITE (Lun,*) ' Number of evaluations of the right hand side is  ', nfe
         WRITE (Lun,*) ' Number of evaluations of the Jacobian matrix is  ', nje
         WRITE (Lun,'(//)')
-      ENDIF
+      END IF
       Ipass = 0
     ELSEIF ( Kprint==2 ) THEN
       WRITE (Lun,&
@@ -408,7 +408,7 @@ CONTAINS
       WRITE (Lun,*) ' The value of LENIW was set to ', leniwx
       WRITE (Lun,*) ' NSTATE = ', nstate, ', Error number = ', ierflg
       WRITE (Lun,'(/)')
-    ENDIF
+    END IF
     CALL XERCLR
   END SUBROUTINE SDQCK
   !** SDF
@@ -518,7 +518,7 @@ PROGRAM TEST45
     CALL XSETF(0)
   ELSE
     CALL XSETF(1)
-  ENDIF
+  END IF
   !
   !     Test single precision SDRIVE
   !
@@ -534,6 +534,6 @@ PROGRAM TEST45
     WRITE (lun,99002) nfail
     99002 FORMAT (/' ************* WARNING -- ',I5,&
       ' TEST(S) FAILED IN PROGRAM TEST45 *************')
-  ENDIF
+  END IF
   STOP
 END PROGRAM TEST45

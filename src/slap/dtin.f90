@@ -137,7 +137,7 @@ SUBROUTINE DTIN(N,Nelt,Ia,Ja,A,Isym,Soln,Rhs,Iunit,Job)
   !   920511  Added complete declaration section.  (WRB)
   !   921007  Changed E's to D's in formats.  (FNF)
   !   930701  Updated CATEGORY section.  (FNF, WRB)
-  
+
   !     .. Scalar Arguments ..
   INTEGER Isym, Iunit, Job, N, Nelt
   !     .. Array Arguments ..
@@ -160,7 +160,7 @@ SUBROUTINE DTIN(N,Nelt,Ia,Ja,A,Isym,Soln,Rhs,Iunit,Job)
   DO i = 1, Nelt
     READ (Iunit,99002) Ia(i), Ja(i), A(i)
     99002 FORMAT (1X,I5,1X,I5,1X,D16.7)
-  ENDDO
+  END DO
   !
   !         If requested, read in the rhs.
   jobret = 0
@@ -173,9 +173,9 @@ SUBROUTINE DTIN(N,Nelt,Ia,Ja,A,Isym,Soln,Rhs,Iunit,Job)
     ELSE
       DO i = 1, N
         Rhs(i) = 0
-      ENDDO
-    ENDIF
-  ENDIF
+      END DO
+    END IF
+  END IF
   !
   !         If requested, read in the solution.
   IF ( Job>1 ) THEN
@@ -187,9 +187,9 @@ SUBROUTINE DTIN(N,Nelt,Ia,Ja,A,Isym,Soln,Rhs,Iunit,Job)
     ELSE
       DO i = 1, N
         Soln(i) = 0
-      ENDDO
-    ENDIF
-  ENDIF
+      END DO
+    END IF
+  END IF
   !
   Job = jobret
   RETURN

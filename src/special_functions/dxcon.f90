@@ -90,11 +90,11 @@ SUBROUTINE DXCON(X,Ix,Ierror)
       IF ( ABS(X)<1.0D0 ) THEN
         X = X*RADixl
         Ix = Ix - L
-      ENDIF
+      END IF
     ELSEIF ( ABS(X)>=1.0D0 ) THEN
       X = X/RADixl
       Ix = Ix + L
-    ENDIF
+    END IF
     !
     ! AT THIS POINT, RADIX**(-L) .LE. ABS(X) .LT. 1.0D0     IN CASE 1,
     !                      1.0D0 .LE. ABS(X) .LT. RADIX**L  IN CASE 2.
@@ -104,21 +104,21 @@ SUBROUTINE DXCON(X,Ix,Ierror)
       DO WHILE ( a>ABS(X) )
         i = i - 1
         a = a/RADix
-      ENDDO
+      END DO
       DO WHILE ( ABS(X)>=RADix*a )
         i = i + 1
         a = a*RADix
-      ENDDO
+      END DO
     ELSE
       DO WHILE ( a>RADix*ABS(X) )
         i = i - 1
         a = a/RADix
-      ENDDO
+      END DO
       DO WHILE ( ABS(X)>=a )
         i = i + 1
         a = a*RADix
-      ENDDO
-    ENDIF
+      END DO
+    END IF
     !
     ! AT THIS POINT I IS SUCH THAT
     ! RADIX**(I-1) .LE. ABS(X) .LT. RADIX**I      IN CASE 1,
@@ -129,11 +129,11 @@ SUBROUTINE DXCON(X,Ix,Ierror)
     DO WHILE ( a>b )
       itemp = itemp - 1
       a = a/RADix
-    ENDDO
+    END DO
     DO WHILE ( b>=a*RADix )
       itemp = itemp + 1
       a = a*RADix
-    ENDDO
+    END DO
     !
     ! AT THIS POINT ITEMP IS SUCH THAT
     ! RADIX**ITEMP .LE. 10**ISPACE .LT. RADIX**(ITEMP+1).
@@ -147,7 +147,7 @@ SUBROUTINE DXCON(X,Ix,Ierror)
       Ix = j
       IF ( icase==1 ) GOTO 50
       IF ( icase==2 ) GOTO 100
-    ENDIF
+    END IF
     i1 = i/itemp
     X = X*RADix**(-i1*itemp)
     Ix = Ix + i1*itemp
@@ -170,13 +170,13 @@ SUBROUTINE DXCON(X,Ix,Ierror)
     DO WHILE ( b*ABS(X)<1.0D0 )
       X = X*b
       Ix = Ix - ispace
-    ENDDO
+    END DO
     RETURN
     100 CONTINUE
     DO WHILE ( 10.0D0*ABS(X)>=b )
       X = X/b
       Ix = Ix + ispace
-    ENDDO
-  ENDIF
+    END DO
+  END IF
   RETURN
 END SUBROUTINE DXCON

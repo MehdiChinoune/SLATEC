@@ -78,7 +78,7 @@ SUBROUTINE STRSL(T,Ldt,N,B,Job,Info)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   INTEGER Ldt, N, Job, Info
   REAL T(Ldt,*), B(*)
   !
@@ -91,7 +91,7 @@ SUBROUTINE STRSL(T,Ldt,N,B,Job,Info)
   !
   DO Info = 1, N
     IF ( T(Info,Info)==0.0E0 ) RETURN
-  ENDDO
+  END DO
   Info = 0
   !
   !        DETERMINE THE TASK AND GO TO IT.
@@ -111,8 +111,8 @@ SUBROUTINE STRSL(T,Ldt,N,B,Job,Info)
           temp = -B(j+1)
           CALL SAXPY(j,temp,T(1,j+1),1,B(1),1)
           B(j) = B(j)/T(j,j)
-        ENDDO
-      ENDIF
+        END DO
+      END IF
     CASE (3)
       !
       !        SOLVE TRANS(T)*X=B FOR T LOWER TRIANGULAR.
@@ -123,8 +123,8 @@ SUBROUTINE STRSL(T,Ldt,N,B,Job,Info)
           j = N - jj + 1
           B(j) = B(j) - SDOT(jj-1,T(j+1,j),1,B(j+1),1)
           B(j) = B(j)/T(j,j)
-        ENDDO
-      ENDIF
+        END DO
+      END IF
     CASE (4)
       !
       !        SOLVE TRANS(T)*X=B FOR T UPPER TRIANGULAR.
@@ -134,8 +134,8 @@ SUBROUTINE STRSL(T,Ldt,N,B,Job,Info)
         DO j = 2, N
           B(j) = B(j) - SDOT(j-1,T(1,j),1,B(1),1)
           B(j) = B(j)/T(j,j)
-        ENDDO
-      ENDIF
+        END DO
+      END IF
     CASE DEFAULT
       !
       !        SOLVE T*X=B FOR T LOWER TRIANGULAR
@@ -146,8 +146,8 @@ SUBROUTINE STRSL(T,Ldt,N,B,Job,Info)
           temp = -B(j-1)
           CALL SAXPY(N-j+1,temp,T(j,j-1),1,B(j),1)
           B(j) = B(j)/T(j,j)
-        ENDDO
-      ENDIF
+        END DO
+      END IF
   END SELECT
   RETURN
 END SUBROUTINE STRSL

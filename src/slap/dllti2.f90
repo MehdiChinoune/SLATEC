@@ -124,7 +124,7 @@ SUBROUTINE DLLTI2(N,B,X,Nel,Iel,Jel,El,Dinv)
   !   920511  Added complete declaration section.  (WRB)
   !   921113  Corrected C***CATEGORY line.  (FNF)
   !   930701  Updated CATEGORY section.  (FNF, WRB)
-  
+
   !     .. Scalar Arguments ..
   INTEGER N, Nel
   !     .. Array Arguments ..
@@ -138,7 +138,7 @@ SUBROUTINE DLLTI2(N,B,X,Nel,Iel,Jel,El,Dinv)
   !
   DO i = 1, N
     X(i) = B(i)
-  ENDDO
+  END DO
   DO irow = 1, N
     ibgn = Iel(irow) + 1
     iend = Iel(irow+1) - 1
@@ -149,15 +149,15 @@ SUBROUTINE DLLTI2(N,B,X,Nel,Iel,Jel,El,Dinv)
       !VD$ NODEPCHK
       DO i = ibgn, iend
         X(irow) = X(irow) - El(i)*X(Jel(i))
-      ENDDO
-    ENDIF
-  ENDDO
+      END DO
+    END IF
+  END DO
   !
   !         Solve  D*Z = Y,  storing result in X.
   !
   DO i = 1, N
     X(i) = X(i)*Dinv(i)
-  ENDDO
+  END DO
   !
   !         Solve  L-trans*X = Z.
   !
@@ -171,9 +171,9 @@ SUBROUTINE DLLTI2(N,B,X,Nel,Iel,Jel,El,Dinv)
       !VD$ NODEPCHK
       DO i = ibgn, iend
         X(Jel(i)) = X(Jel(i)) - El(i)*X(irow)
-      ENDDO
-    ENDIF
-  ENDDO
+      END DO
+    END IF
+  END DO
   !
   !------------- LAST LINE OF DLLTI2 FOLLOWS ----------------------------
 END SUBROUTINE DLLTI2

@@ -67,7 +67,7 @@ SUBROUTINE QELG(N,Epstab,Result,Abserr,Res3la,Nres)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
-  
+
   !
   REAL Abserr, delta1, delta2, delta3, R1MACH, epmach, epsinf, &
     Epstab(52), error, err1, err2, err3, e0, e1, e1abs, e2, e3, &
@@ -155,10 +155,10 @@ SUBROUTINE QELG(N,Epstab,Result,Abserr,Res3la,Nres)
             IF ( error<=Abserr ) THEN
               Abserr = error
               Result = res
-            ENDIF
+            END IF
             CYCLE
-          ENDIF
-        ENDIF
+          END IF
+        END IF
         N = i + i - 1
         !- **JUMP OUT OF DO-LOOP
         EXIT
@@ -173,8 +173,8 @@ SUBROUTINE QELG(N,Epstab,Result,Abserr,Res3la,Nres)
         Abserr = err2 + err3
         !- **JUMP OUT OF DO-LOOP
         GOTO 100
-      ENDIF
-    ENDDO
+      END IF
+    END DO
     !
     !           SHIFT THE TABLE.
     !
@@ -186,14 +186,14 @@ SUBROUTINE QELG(N,Epstab,Result,Abserr,Res3la,Nres)
       ib2 = ib + 2
       Epstab(ib) = Epstab(ib2)
       ib = ib2
-    ENDDO
+    END DO
     IF ( num/=N ) THEN
       indx = num - N + 1
       DO i = 1, N
         Epstab(i) = Epstab(indx)
         indx = indx + 1
-      ENDDO
-    ENDIF
+      END DO
+    END IF
     IF ( Nres>=4 ) THEN
       !
       !           COMPUTE ERROR ESTIMATE
@@ -205,7 +205,7 @@ SUBROUTINE QELG(N,Epstab,Result,Abserr,Res3la,Nres)
     ELSE
       Res3la(Nres) = Result
       Abserr = oflow
-    ENDIF
-  ENDIF
+    END IF
+  END IF
   100  Abserr = MAX(Abserr,0.5E+01*epmach*ABS(Result))
 END SUBROUTINE QELG

@@ -238,7 +238,7 @@ SUBROUTINE DQAWO(F,A,B,Omega,Integr,Epsabs,Epsrel,Result,Abserr,Neval,Ier,&
     !         CALL ERROR HANDLER IF NECESSARY
     !
     lvl = 0
-  ENDIF
+  END IF
   IF ( Ier==6 ) lvl = 0
   IF ( Ier/=0 ) CALL XERMSG('SLATEC','DQAWO','ABNORMAL RETURN',Ier,lvl)
 END SUBROUTINE DQAWO

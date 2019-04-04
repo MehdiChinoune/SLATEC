@@ -55,6 +55,6 @@ SUBROUTINE BESKS(Xnu,X,Nin,Bk)
   n = ABS(Nin)
   DO i = 1, n
     Bk(i) = expxi*Bk(i)
-  ENDDO
+  END DO
   !
 END SUBROUTINE BESKS

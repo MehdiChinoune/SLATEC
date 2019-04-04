@@ -108,14 +108,14 @@ SUBROUTINE LSI(W,Mdw,Ma,Mg,N,Prgopt,X,Rnorm,Mode,Ws,Ip)
         last = link
         link = next
         CYCLE
-      ENDIF
+      END IF
       !
       !     Compute matrix norm of least squares equations.
       !
       anorm = 0.E0
       DO j = 1, N
         anorm = MAX(anorm,SASUM(Ma,W(1,j),1))
-      ENDDO
+      END DO
       !
       !     Set tolerance for HFTI( ) rank test.
       !
@@ -145,30 +145,30 @@ SUBROUTINE LSI(W,Mdw,Ma,Mg,N,Prgopt,X,Rnorm,Mode,Ws,Ip)
         IF ( minman>0 ) THEN
           DO i = map1, m
             W(i,np1) = W(i,np1) - SDOT(N,W(i,1),Mdw,Ws,1)
-          ENDDO
+          END DO
           !
           !           Apply permutations to col. of inequality constraint matrix.
           !
           DO i = 1, minman
             CALL SSWAP(Mg,W(map1,i),1,W(map1,Ip(i)),1)
-          ENDDO
+          END DO
           !
           !           Apply Householder transformations to constraint matrix.
           !
           IF ( krank>0.AND.krank<N ) THEN
             DO i = krank, 1, -1
               CALL H12(2,i,krank+1,N,W(i,1),Mdw,Ws(n1+i-1),W(map1,1),Mdw,1,Mg)
-            ENDDO
-          ENDIF
+            END DO
+          END IF
           !
           !           Compute permuted inequality constraint matrix times r-inv.
           !
           DO i = map1, m
             DO j = 1, krank
               W(i,j) = (W(i,j)-SDOT(j-1,W(1,j),1,W(i,1),Mdw))/W(j,j)
-            ENDDO
-          ENDDO
-        ENDIF
+            END DO
+          END DO
+        END IF
         !
         !        Solve the reduced problem with LPDP algorithm,
         !        the least projected distance problem.
@@ -181,40 +181,40 @@ SUBROUTINE LSI(W,Mdw,Ma,Mg,N,Prgopt,X,Rnorm,Mode,Ws,Ip)
         IF ( mdlpdp==1 ) THEN
           DO i = krank, 1, -1
             X(i) = (X(i)-SDOT(krank-i,W(i,i+1),Mdw,X(i+1),1))/W(i,i)
-          ENDDO
+          END DO
           !
           !           Apply Householder transformation to solution vector.
           !
           IF ( krank<N ) THEN
             DO i = 1, krank
               CALL H12(2,i,krank+1,N,W(i,1),Mdw,Ws(n1+i-1),X,1,1,1)
-            ENDDO
-          ENDIF
+            END DO
+          END IF
           !
           !           Repermute variables to their input order.
           !
           IF ( minman>0 ) THEN
             DO i = minman, 1, -1
               CALL SSWAP(1,X(i),1,X(Ip(i)),1)
-            ENDDO
+            END DO
             !
             !              Variables are now in original coordinates.
             !              Add solution of unconstrained problem.
             !
             DO i = 1, N
               X(i) = X(i) + Ws(i)
-            ENDDO
+            END DO
             !
             !              Compute the residual vector norm.
             !
             Rnorm = SQRT(Rnorm**2+xnorm**2)
-          ENDIF
+          END IF
         ELSE
           Mode = 2
-        ENDIF
+        END IF
       ELSE
         CALL SCOPY(N,Ws,1,X,1)
-      ENDIF
+      END IF
       !
       !     Compute covariance matrix based on the orthogonal decomposition
       !     from HFTI( ).
@@ -231,7 +231,7 @@ SUBROUTINE LSI(W,Mdw,Ma,Mg,N,Prgopt,X,Rnorm,Mode,Ws,Ip)
         !
         DO j = 1, krank
           W(j,j) = 1.E0/W(j,j)
-        ENDDO
+        END DO
         !
         !     Invert the upper triangular QR factor on itself.
         !
@@ -239,17 +239,17 @@ SUBROUTINE LSI(W,Mdw,Ma,Mg,N,Prgopt,X,Rnorm,Mode,Ws,Ip)
           DO i = 1, krm1
             DO j = i + 1, krank
               W(i,j) = -SDOT(j-i,W(i,i),Mdw,W(i,j),1)*W(j,j)
-            ENDDO
-          ENDDO
-        ENDIF
+            END DO
+          END DO
+        END IF
         !
         !     Compute the inverted factor times its transpose.
         !
         DO i = 1, krank
           DO j = i, krank
             W(i,j) = SDOT(krank+1-j,W(i,j),Mdw,W(j,j),Mdw)
-          ENDDO
-        ENDDO
+          END DO
+        END DO
         !
         !     Zero out lower trapezoidal part.
         !     Copy upper triangular to lower triangular part.
@@ -257,11 +257,11 @@ SUBROUTINE LSI(W,Mdw,Ma,Mg,N,Prgopt,X,Rnorm,Mode,Ws,Ip)
         IF ( krank<N ) THEN
           DO j = 1, krank
             CALL SCOPY(j,W(1,j),1,W(j,1),Mdw)
-          ENDDO
+          END DO
           !
           DO i = krp1, N
             CALL SCOPY(i,0.E0,0,W(i,1),Mdw)
-          ENDDO
+          END DO
           !
           !        Apply right side transformations to lower triangle.
           !
@@ -285,12 +285,12 @@ SUBROUTINE LSI(W,Mdw,Ma,Mg,N,Prgopt,X,Rnorm,Mode,Ws,Ip)
               !
               DO j = krp1, N
                 Ws(n3+j-1) = W(i,j)
-              ENDDO
+              END DO
               !
               DO j = 1, N
                 Ws(j) = rb*(SDOT(j-i,W(j,i),Mdw,Ws(n3+i-1),1)+SDOT(N-j+1,W(j&
                   ,j),1,Ws(n3+j-1),1))
-              ENDDO
+              END DO
               !
               l = n3 + i
               gam = 0.5E0*rb*SDOT(N-i+1,Ws(l-1),1,Ws(i),1)
@@ -298,22 +298,22 @@ SUBROUTINE LSI(W,Mdw,Ma,Mg,N,Prgopt,X,Rnorm,Mode,Ws,Ip)
               DO j = i, N
                 DO l = 1, i - 1
                   W(j,l) = W(j,l) + Ws(n3+j-1)*Ws(l)
-                ENDDO
+                END DO
                 !
                 DO l = i, j
                   W(j,l) = W(j,l) + Ws(j)*Ws(n3+l-1) + Ws(l)*Ws(n3+j-1)
-                ENDDO
-              ENDDO
-            ENDIF
-          ENDDO
+                END DO
+              END DO
+            END IF
+          END DO
           !
           !        Copy lower triangle to upper triangle to symmetrize the
           !        covariance matrix.
           !
           DO i = 1, N
             CALL SCOPY(i,W(i,1),Mdw,W(1,i),1)
-          ENDDO
-        ENDIF
+          END DO
+        END IF
         !
         !     Repermute rows and columns.
         !
@@ -324,8 +324,8 @@ SUBROUTINE LSI(W,Mdw,Ma,Mg,N,Prgopt,X,Rnorm,Mode,Ws,Ip)
             CALL SSWAP(i-1,W(1,i),1,W(1,k),1)
             CALL SSWAP(k-i-1,W(i,i+1),Mdw,W(i+1,k),1)
             CALL SSWAP(N-k,W(i,k+1),Mdw,W(k,k+1),Mdw)
-          ENDIF
-        ENDDO
+          END IF
+        END DO
         !
         !     Put in normalized residual sum of squares scale factor
         !     and symmetrize the resulting covariance matrix.
@@ -333,11 +333,11 @@ SUBROUTINE LSI(W,Mdw,Ma,Mg,N,Prgopt,X,Rnorm,Mode,Ws,Ip)
         DO j = 1, N
           CALL SSCAL(j,fac,W(1,j),1)
           CALL SCOPY(j,W(1,j),1,W(j,1),Mdw)
-        ENDDO
-      ENDIF
+        END DO
+      END IF
       EXIT
-    ENDDO
-  ENDIF
+    END DO
+  END IF
   !
   Ip(1) = krank
   Ip(2) = N + MAX(m,N) + (Mg+2)*(N+7)

@@ -26,6 +26,6 @@ REAL FUNCTION PPSPF(X,Iz,C,A,Bh)
   sum = 0.
   DO j = 1, Iz
     sum = sum + 1./(X-Bh(j))
-  ENDDO
+  END DO
   PPSPF = sum
 END FUNCTION PPSPF

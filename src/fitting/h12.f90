@@ -51,7 +51,7 @@ SUBROUTINE H12(Mode,Lpivot,L1,M,U,Iue,Up,C,Ice,Icv,Ncv)
   !   890831  Modified array declarations.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
-  
+
   INTEGER i, i2, i3, i4, Ice, Icv, incr, Iue, j, kl1, kl2, klp, &
     L1, l1m1, Lpivot, M, mml1p2, Mode, Ncv
   REAL b, C(*), cl, clinv, one, SDOT, sm, U(Iue,*), ul1m1, Up
@@ -64,13 +64,13 @@ SUBROUTINE H12(Mode,Lpivot,L1,M,U,Iue,Up,C,Ice,Icv,Ncv)
     !                            ****** CONSTRUCT THE TRANSFORMATION. ******
     DO j = L1, M
       cl = MAX(ABS(U(1,j)),cl)
-    ENDDO
+    END DO
     IF ( cl<=0 ) GOTO 100
     clinv = one/cl
     sm = (U(1,Lpivot)*clinv)**2
     DO j = L1, M
       sm = sm + (U(1,j)*clinv)**2
-    ENDDO
+    END DO
     cl = cl*SQRT(sm)
     IF ( U(1,Lpivot)>0 ) cl = -cl
     Up = U(1,Lpivot) - cl
@@ -79,7 +79,7 @@ SUBROUTINE H12(Mode,Lpivot,L1,M,U,Iue,Up,C,Ice,Icv,Ncv)
     !
   ELSEIF ( cl<=0 ) THEN
     GOTO 100
-  ENDIF
+  END IF
   IF ( Ncv<=0 ) RETURN
   b = Up*U(1,Lpivot)
   !                       B  MUST BE NONPOSITIVE HERE.  IF B = 0., RETURN.
@@ -100,7 +100,7 @@ SUBROUTINE H12(Mode,Lpivot,L1,M,U,Iue,Up,C,Ice,Icv,Ncv)
         sm = sm*b
         CALL SAXPY(mml1p2,sm,U(1,l1m1),Iue,C(kl1),Ice)
         kl1 = kl1 + Icv
-      ENDDO
+      END DO
       U(1,l1m1) = ul1m1
       IF ( Lpivot==l1m1 ) RETURN
       kl1 = kl2
@@ -117,17 +117,17 @@ SUBROUTINE H12(Mode,Lpivot,L1,M,U,Iue,Up,C,Ice,Icv,Ncv)
         DO i = L1, M
           sm = sm + C(i3)*U(1,i)
           i3 = i3 + Ice
-        ENDDO
+        END DO
         IF ( sm/=0 ) THEN
           sm = sm*b
           C(i2) = C(i2) + sm*Up
           DO i = L1, M
             C(i4) = C(i4) + sm*U(1,i)
             i4 = i4 + Ice
-          ENDDO
-        ENDIF
-      ENDDO
-    ENDIF
-  ENDIF
+          END DO
+        END IF
+      END DO
+    END IF
+  END IF
   100  RETURN
   END SUBROUTINE H12

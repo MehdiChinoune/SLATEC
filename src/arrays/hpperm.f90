@@ -46,7 +46,7 @@ SUBROUTINE HPPERM(Hx,N,Iperm,Work,Ier)
   !   901004  DATE WRITTEN
   !   920507  Modified by M. McClain to revise prologue text and to add
   !           check for length of work array.
-  
+
   INTEGER N, Iperm(*), i, Ier, indx, indx0, istrt
   CHARACTER*(*) Hx(*), Work
   !* FIRST EXECUTABLE STATEMENT  HPPERM
@@ -56,13 +56,13 @@ SUBROUTINE HPPERM(Hx,N,Iperm,Work,Ier)
     CALL XERMSG('SLATEC','HPPERM',&
       'The number of values to be rearranged, N, is not positive.',Ier,1)
     RETURN
-  ENDIF
+  END IF
   IF ( LEN(Work)<LEN(Hx(1)) ) THEN
     Ier = 2
     CALL XERMSG('SLATEC','HPPERM',&
       'The length of the work variable, WORK, is too short.',Ier,1)
     RETURN
-  ENDIF
+  END IF
   !
   !     CHECK WHETHER IPERM IS A VALID PERMUTATION
   !
@@ -72,13 +72,13 @@ SUBROUTINE HPPERM(Hx,N,Iperm,Work,Ier)
       IF ( Iperm(indx)>0 ) THEN
         Iperm(indx) = -Iperm(indx)
         CYCLE
-      ENDIF
-    ENDIF
+      END IF
+    END IF
     Ier = 3
     CALL XERMSG('SLATEC','HPPERM',&
       'The permutation vector, IPERM, is not valid.',Ier,1)
     RETURN
-  ENDDO
+  END DO
   !
   !     REARRANGE THE VALUES OF HX
   !
@@ -95,9 +95,9 @@ SUBROUTINE HPPERM(Hx,N,Iperm,Work,Ier)
         indx0 = indx
         Iperm(indx) = -Iperm(indx)
         indx = Iperm(indx)
-      ENDDO
+      END DO
       Hx(indx0) = Work
-    ENDIF
-  ENDDO
+    END IF
+  END DO
   !
 END SUBROUTINE HPPERM

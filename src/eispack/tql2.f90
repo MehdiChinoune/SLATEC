@@ -90,7 +90,7 @@ SUBROUTINE TQL2(Nm,N,D,E,Z,Ierr)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   !
   INTEGER i, j, k, l, m, N, ii, l1, l2, Nm, mml, Ierr
   REAL D(*), E(*), Z(Nm,*)
@@ -103,7 +103,7 @@ SUBROUTINE TQL2(Nm,N,D,E,Z,Ierr)
     !
     DO i = 2, N
       E(i-1) = E(i)
-    ENDDO
+    END DO
     !
     f = 0.0E0
     b = 0.0E0
@@ -118,7 +118,7 @@ SUBROUTINE TQL2(Nm,N,D,E,Z,Ierr)
         IF ( b+ABS(E(m))==b ) EXIT
         !     .......... E(N) IS ALWAYS ZERO, SO THERE IS NO EXIT
         !                THROUGH THE BOTTOM OF THE LOOP ..........
-      ENDDO
+      END DO
       !
       IF ( m/=l ) THEN
         DO WHILE ( j/=30 )
@@ -137,8 +137,8 @@ SUBROUTINE TQL2(Nm,N,D,E,Z,Ierr)
             !
             DO i = l2, N
               D(i) = D(i) - h
-            ENDDO
-          ENDIF
+            END DO
+          END IF
           !
           f = f + h
           !     .......... QL TRANSFORMATION ..........
@@ -168,7 +168,7 @@ SUBROUTINE TQL2(Nm,N,D,E,Z,Ierr)
               E(i+1) = s*p*r
               s = c/r
               c = 1.0E0/r
-            ENDIF
+            END IF
             p = c*D(i) - s*g
             D(i+1) = h + s*(c*g+s*D(i))
             !     .......... FORM VECTOR ..........
@@ -176,19 +176,19 @@ SUBROUTINE TQL2(Nm,N,D,E,Z,Ierr)
               h = Z(k,i+1)
               Z(k,i+1) = s*Z(k,i) + c*h
               Z(k,i) = c*Z(k,i) - s*h
-            ENDDO
+            END DO
             !
-          ENDDO
+          END DO
           !
           p = -s*s2*c3*el1*E(l)/dl1
           E(l) = s*p
           D(l) = c*p
           IF ( b+ABS(E(l))<=b ) GOTO 20
-        ENDDO
+        END DO
         GOTO 100
-      ENDIF
-      20       D(l) = D(l) + f
-    ENDDO
+      END IF
+      20  D(l) = D(l) + f
+    END DO
     !     .......... ORDER EIGENVALUES AND EIGENVECTORS ..........
     DO ii = 2, N
       i = ii - 1
@@ -199,8 +199,8 @@ SUBROUTINE TQL2(Nm,N,D,E,Z,Ierr)
         IF ( D(j)<p ) THEN
           k = j
           p = D(j)
-        ENDIF
-      ENDDO
+        END IF
+      END DO
       !
       IF ( k/=i ) THEN
         D(k) = D(i)
@@ -210,12 +210,12 @@ SUBROUTINE TQL2(Nm,N,D,E,Z,Ierr)
           p = Z(j,i)
           Z(j,i) = Z(j,k)
           Z(j,k) = p
-        ENDDO
-      ENDIF
+        END DO
+      END IF
       !
       !
-    ENDDO
-  ENDIF
+    END DO
+  END IF
   RETURN
   !     .......... SET ERROR -- NO CONVERGENCE TO AN
   !                EIGENVALUE AFTER 30 ITERATIONS ..........

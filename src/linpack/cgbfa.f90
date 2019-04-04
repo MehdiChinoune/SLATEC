@@ -104,7 +104,7 @@ SUBROUTINE CGBFA(Abd,Lda,N,Ml,Mu,Ipvt,Info)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   INTEGER Lda, N, Ml, Mu, Ipvt(*), Info
   COMPLEX Abd(Lda,*)
   !
@@ -125,9 +125,9 @@ SUBROUTINE CGBFA(Abd,Lda,N,Ml,Mu,Ipvt,Info)
       i0 = m + 1 - jz
       DO i = i0, Ml
         Abd(i,jz) = (0.0E0,0.0E0)
-      ENDDO
-    ENDDO
-  ENDIF
+      END DO
+    END DO
+  END IF
   jz = j1
   ju = 0
   !
@@ -145,9 +145,9 @@ SUBROUTINE CGBFA(Abd,Lda,N,Ml,Mu,Ipvt,Info)
         IF ( Ml>=1 ) THEN
           DO i = 1, Ml
             Abd(i,jz) = (0.0E0,0.0E0)
-          ENDDO
-        ENDIF
-      ENDIF
+          END DO
+        END IF
+      END IF
       !
       !        FIND L = PIVOT INDEX
       !
@@ -167,7 +167,7 @@ SUBROUTINE CGBFA(Abd,Lda,N,Ml,Mu,Ipvt,Info)
           t = Abd(l,k)
           Abd(l,k) = Abd(m,k)
           Abd(m,k) = t
-        ENDIF
+        END IF
         !
         !           COMPUTE MULTIPLIERS
         !
@@ -186,13 +186,13 @@ SUBROUTINE CGBFA(Abd,Lda,N,Ml,Mu,Ipvt,Info)
             IF ( l/=mm ) THEN
               Abd(l,j) = Abd(mm,j)
               Abd(mm,j) = t
-            ENDIF
+            END IF
             CALL CAXPY(lm,t,Abd(m+1,k),1,Abd(mm+1,j),1)
-          ENDDO
-        ENDIF
-      ENDIF
-    ENDDO
-  ENDIF
+          END DO
+        END IF
+      END IF
+    END DO
+  END IF
   Ipvt(N) = N
   IF ( CABS1(Abd(m,N))==0.0E0 ) Info = N
 END SUBROUTINE CGBFA

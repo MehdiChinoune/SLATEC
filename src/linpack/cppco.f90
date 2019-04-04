@@ -98,7 +98,7 @@ SUBROUTINE CPPCO(Ap,N,Rcond,Z,Info)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   INTEGER N, Info
   COMPLEX Ap(*), Z(*)
   REAL Rcond
@@ -122,13 +122,13 @@ SUBROUTINE CPPCO(Ap,N,Rcond,Z,Info)
       DO i = 1, jm1
         Z(i) = CMPLX(REAL(Z(i))+CABS1(Ap(ij)),0.0E0)
         ij = ij + 1
-      ENDDO
-    ENDIF
-  ENDDO
+      END DO
+    END IF
+  END DO
   anorm = 0.0E0
   DO j = 1, N
     anorm = MAX(anorm,REAL(Z(j)))
-  ENDDO
+  END DO
   !
   !     FACTOR
   !
@@ -146,7 +146,7 @@ SUBROUTINE CPPCO(Ap,N,Rcond,Z,Info)
     ek = (1.0E0,0.0E0)
     DO j = 1, N
       Z(j) = (0.0E0,0.0E0)
-    ENDDO
+    END DO
     kk = 0
     DO k = 1, N
       kk = kk + k
@@ -155,7 +155,7 @@ SUBROUTINE CPPCO(Ap,N,Rcond,Z,Info)
         s = REAL(Ap(kk))/CABS1(ek-Z(k))
         CALL CSSCAL(N,s,Z,1)
         ek = CMPLX(s,0.0E0)*ek
-      ENDIF
+      END IF
       wk = ek - Z(k)
       wkm = -ek - Z(k)
       s = CABS1(wk)
@@ -170,7 +170,7 @@ SUBROUTINE CPPCO(Ap,N,Rcond,Z,Info)
           Z(j) = Z(j) + wk*CONJG(Ap(kj))
           s = s + CABS1(Z(j))
           kj = kj + j
-        ENDDO
+        END DO
         IF ( s<sm ) THEN
           t = wkm - wk
           wk = wkm
@@ -178,11 +178,11 @@ SUBROUTINE CPPCO(Ap,N,Rcond,Z,Info)
           DO j = kp1, N
             Z(j) = Z(j) + t*CONJG(Ap(kj))
             kj = kj + j
-          ENDDO
-        ENDIF
-      ENDIF
+          END DO
+        END IF
+      END IF
       Z(k) = wk
-    ENDDO
+    END DO
     s = 1.0E0/SCASUM(N,Z,1)
     CALL CSSCAL(N,s,Z,1)
     !
@@ -193,12 +193,12 @@ SUBROUTINE CPPCO(Ap,N,Rcond,Z,Info)
       IF ( CABS1(Z(k))>REAL(Ap(kk)) ) THEN
         s = REAL(Ap(kk))/CABS1(Z(k))
         CALL CSSCAL(N,s,Z,1)
-      ENDIF
+      END IF
       Z(k) = Z(k)/Ap(kk)
       kk = kk - k
       t = -Z(k)
       CALL CAXPY(k-1,t,Ap(kk+1),1,Z(1),1)
-    ENDDO
+    END DO
     s = 1.0E0/SCASUM(N,Z,1)
     CALL CSSCAL(N,s,Z,1)
     !
@@ -213,9 +213,9 @@ SUBROUTINE CPPCO(Ap,N,Rcond,Z,Info)
         s = REAL(Ap(kk))/CABS1(Z(k))
         CALL CSSCAL(N,s,Z,1)
         ynorm = s*ynorm
-      ENDIF
+      END IF
       Z(k) = Z(k)/Ap(kk)
-    ENDDO
+    END DO
     s = 1.0E0/SCASUM(N,Z,1)
     CALL CSSCAL(N,s,Z,1)
     ynorm = s*ynorm
@@ -228,12 +228,12 @@ SUBROUTINE CPPCO(Ap,N,Rcond,Z,Info)
         s = REAL(Ap(kk))/CABS1(Z(k))
         CALL CSSCAL(N,s,Z,1)
         ynorm = s*ynorm
-      ENDIF
+      END IF
       Z(k) = Z(k)/Ap(kk)
       kk = kk - k
       t = -Z(k)
       CALL CAXPY(k-1,t,Ap(kk+1),1,Z(1),1)
-    ENDDO
+    END DO
     !        MAKE ZNORM = 1.0
     s = 1.0E0/SCASUM(N,Z,1)
     CALL CSSCAL(N,s,Z,1)
@@ -241,5 +241,5 @@ SUBROUTINE CPPCO(Ap,N,Rcond,Z,Info)
     !
     IF ( anorm/=0.0E0 ) Rcond = ynorm/anorm
     IF ( anorm==0.0E0 ) Rcond = 0.0E0
-  ENDIF
+  END IF
 END SUBROUTINE CPPCO

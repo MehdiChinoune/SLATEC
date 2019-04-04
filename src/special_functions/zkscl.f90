@@ -62,15 +62,15 @@ SUBROUTINE ZKSCL(Zrr,Zri,Fnu,N,Yr,Yi,Nz,Rzr,Rzi,Ascle,Tol,Elim)
         Yi(i) = csi
         ic = i
         Nz = Nz - 1
-      ENDIF
-    ENDIF
-  ENDDO
+      END IF
+    END IF
+  END DO
   IF ( N==1 ) RETURN
   IF ( ic<=1 ) THEN
     Yr(1) = zeror
     Yi(1) = zeroi
     Nz = 2
-  ENDIF
+  END IF
   IF ( N==2 ) RETURN
   IF ( Nz==0 ) RETURN
   fn = Fnu + 1.0D0
@@ -120,16 +120,16 @@ SUBROUTINE ZKSCL(Zrr,Zri,Fnu,N,Yr,Yi,Nz,Rzr,Rzi,Ascle,Tol,Elim)
         IF ( ic==kk-1 ) GOTO 100
         ic = kk
         CYCLE
-      ENDIF
-    ENDIF
+      END IF
+    END IF
     IF ( alas>=helim ) THEN
       zdr = zdr - Elim
       s1r = s1r*celmr
       s1i = s1i*celmr
       s2r = s2r*celmr
       s2i = s2i*celmr
-    ENDIF
-  ENDDO
+    END IF
+  END DO
   Nz = N
   IF ( ic==N ) Nz = N - 1
   GOTO 200
@@ -138,5 +138,5 @@ SUBROUTINE ZKSCL(Zrr,Zri,Fnu,N,Yr,Yi,Nz,Rzr,Rzi,Ascle,Tol,Elim)
   DO i = 1, Nz
     Yr(i) = zeror
     Yi(i) = zeroi
-  ENDDO
+  END DO
 END SUBROUTINE ZKSCL

@@ -83,8 +83,8 @@ SUBROUTINE SMOUT(M,N,Lda,A,Ifmt,Idigit)
         WRITE (lout,99001) (icol,i,i=k1,k2)
         DO i = 1, M
           WRITE (lout,99005) i, (A(i,j),j=k1,k2)
-        ENDDO
-      ENDDO
+        END DO
+      END DO
       RETURN
       !
     ELSEIF ( ndigit<=6 ) THEN
@@ -94,8 +94,8 @@ SUBROUTINE SMOUT(M,N,Lda,A,Ifmt,Idigit)
         WRITE (lout,99002) (icol,i,i=k1,k2)
         DO i = 1, M
           WRITE (lout,99006) i, (A(i,j),j=k1,k2)
-        ENDDO
-      ENDDO
+        END DO
+      END DO
       RETURN
       !
     ELSEIF ( ndigit>10 ) THEN
@@ -105,8 +105,8 @@ SUBROUTINE SMOUT(M,N,Lda,A,Ifmt,Idigit)
         WRITE (lout,99004) (icol,i,i=k1,k2)
         DO i = 1, M
           WRITE (lout,99008) i, (A(i,j),j=k1,k2)
-        ENDDO
-      ENDDO
+        END DO
+      END DO
       RETURN
     ELSE
       !
@@ -115,10 +115,10 @@ SUBROUTINE SMOUT(M,N,Lda,A,Ifmt,Idigit)
         WRITE (lout,99003) (icol,i,i=k1,k2)
         DO i = 1, M
           WRITE (lout,99007) i, (A(i,j),j=k1,k2)
-        ENDDO
-      ENDDO
+        END DO
+      END DO
       RETURN
-    ENDIF
+    END IF
     !
   ELSEIF ( ndigit<=4 ) THEN
     !
@@ -127,8 +127,8 @@ SUBROUTINE SMOUT(M,N,Lda,A,Ifmt,Idigit)
       WRITE (lout,99001) (icol,i,i=k1,k2)
       DO i = 1, M
         WRITE (lout,99005) i, (A(i,j),j=k1,k2)
-      ENDDO
-    ENDDO
+      END DO
+    END DO
     RETURN
     !
   ELSEIF ( ndigit<=6 ) THEN
@@ -138,8 +138,8 @@ SUBROUTINE SMOUT(M,N,Lda,A,Ifmt,Idigit)
       WRITE (lout,99002) (icol,i,i=k1,k2)
       DO i = 1, M
         WRITE (lout,99006) i, (A(i,j),j=k1,k2)
-      ENDDO
-    ENDDO
+      END DO
+    END DO
     RETURN
     !
   ELSEIF ( ndigit>10 ) THEN
@@ -149,18 +149,18 @@ SUBROUTINE SMOUT(M,N,Lda,A,Ifmt,Idigit)
       WRITE (lout,99004) (icol,i,i=k1,k2)
       DO i = 1, M
         WRITE (lout,99008) i, (A(i,j),j=k1,k2)
-      ENDDO
-    ENDDO
+      END DO
+    END DO
     RETURN
-  ENDIF
+  END IF
   !
   DO k1 = 1, N, 6
     k2 = MIN(N,k1+5)
     WRITE (lout,99003) (icol,i,i=k1,k2)
     DO i = 1, M
       WRITE (lout,99007) i, (A(i,j),j=k1,k2)
-    ENDDO
-  ENDDO
+    END DO
+  END DO
   RETURN
   99001 FORMAT (10X,10(4X,A,I4,1X))
   99002 FORMAT (10X,8(5X,A,I4,2X))

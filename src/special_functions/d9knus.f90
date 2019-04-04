@@ -101,7 +101,7 @@ SUBROUTINE D9KNUS(Xnu,X,Bknu,Bknu1,Iswtch)
     alnbig = LOG(D1MACH(2))
     alneps = REAL(  LOG(0.1D0*D1MACH(3)), 4 )
     first = .FALSE.
-  ENDIF
+  END IF
   !
   IF ( Xnu<0.D0.OR.Xnu>=1.D0 )&
     CALL XERMSG('SLATEC','D9KNUS','XNU MUST BE GE 0 AND LT 1',1,2)
@@ -119,7 +119,7 @@ SUBROUTINE D9KNUS(Xnu,X,Bknu,Bknu1,Iswtch)
       Bknu = sqpi2/sqrtx
       Bknu1 = Bknu
       RETURN
-    ENDIF
+    END IF
   ELSE
     !
     ! X IS SMALL.  COMPUTE K-SUB-XNU (X) AND THE DERIVATIVE OF K-SUB-XNU (X)
@@ -137,7 +137,7 @@ SUBROUTINE D9KNUS(Xnu,X,Bknu,Bknu1,Iswtch)
       IF ( -0.5D0*Xnu*alnz-aln2-LOG(Xnu)>alnbig )&
         CALL XERMSG('SLATEC','D9KNUS',&
         'X SO SMALL BESSEL K-SUB-XNU OVERFLOWS',3,2)
-    ENDIF
+    END IF
     !
     vlnz = v*alnz
     x2tov = EXP(0.5D0*vlnz)
@@ -163,7 +163,7 @@ SUBROUTINE D9KNUS(Xnu,X,Bknu,Bknu1,Iswtch)
       b0 = b0/(xi*(xi+v))
       alpha(i) = (alpha(i-1)+2.0D0*xi*a0)/(xi*(xi+v))
       beta(i) = (xi-0.5D0*v)*alpha(i) - ztov*b0
-    ENDDO
+    END DO
     !
     Bknu = alpha(nterms)
     bknud = beta(nterms)
@@ -171,7 +171,7 @@ SUBROUTINE D9KNUS(Xnu,X,Bknu,Bknu1,Iswtch)
       i = nterms + 1 - ii
       Bknu = alpha(i) + Bknu*z
       bknud = beta(i) + bknud*z
-    ENDDO
+    END DO
     !
     expx = EXP(X)
     Bknu = expx*Bknu/x2tov
@@ -187,7 +187,7 @@ SUBROUTINE D9KNUS(Xnu,X,Bknu,Bknu1,Iswtch)
     Bknu = -v*Bknu/X - bknud
     Bknu1 = 2.0D0*Xnu*Bknu/X + bknu0
     RETURN
-  ENDIF
+  END IF
   an = -0.60 - 1.02/REAL(X)
   bn = -0.27 - 0.53/REAL(X)
   nterms = MIN(32,MAX1(3.0,an+bn*alneps))
@@ -225,14 +225,14 @@ SUBROUTINE D9KNUS(Xnu,X,Bknu,Bknu1,Iswtch)
           !
           alpha(i) = -p1*alpha(i-1) - p2*alpha(i-2) - p3*alpha(i-3)
           beta(i) = -p1*beta(i-1) - p2*beta(i-2) - p3*beta(i-3)
-        ENDDO
-      ENDIF
+        END DO
+      END IF
       !
       result = sqpi2*beta(nterms)/(sqrtx*alpha(nterms))
-    ENDIF
+    END IF
     !
     IF ( inu==1 ) Bknu = result
     IF ( inu==2 ) Bknu1 = result
-  ENDDO
+  END DO
   RETURN
 END SUBROUTINE D9KNUS

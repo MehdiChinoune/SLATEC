@@ -53,10 +53,10 @@ SUBROUTINE SVECS(Ncomp,Lnfc,Yhp,Work,Iwork,Inhomo,Iflag)
     IF ( Iflag/=0.OR.niv/=Lnfc ) THEN
       Iflag = 99
       RETURN
-    ENDIF
-  ENDIF
+    END IF
+  END IF
   DO k = 1, Ncomp
     Yhp(k,Lnfc+1) = Yhp(k,LNFcc+1)
-  ENDDO
+  END DO
   Iflag = 1
 END SUBROUTINE SVECS

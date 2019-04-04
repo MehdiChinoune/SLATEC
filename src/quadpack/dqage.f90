@@ -297,7 +297,7 @@ SUBROUTINE DQAGE(F,A,B,Epsabs,Epsrel,Key,Limit,Result,Abserr,Neval,Ier,&
           IF ( ABS(Rlist(maxerr)-area12)<=0.1D-04*ABS(area12).AND.&
             erro12>=0.99D+00*errmax ) iroff1 = iroff1 + 1
           IF ( Last>10.AND.erro12>errmax ) iroff2 = iroff2 + 1
-        ENDIF
+        END IF
         Rlist(maxerr) = area1
         Rlist(Last) = area2
         errbnd = MAX(Epsabs,Epsrel*ABS(area))
@@ -317,7 +317,7 @@ SUBROUTINE DQAGE(F,A,B,Epsabs,Epsrel,Key,Limit,Result,Abserr,Neval,Ier,&
           !
           IF ( MAX(ABS(a1),ABS(b2))<=(0.1D+01+0.1D+03*epmach)&
             *(ABS(a2)+0.1D+04*uflow) ) Ier = 3
-        ENDIF
+        END IF
         !
         !           APPEND THE NEWLY-CREATED INTERVALS TO THE LIST.
         !
@@ -335,7 +335,7 @@ SUBROUTINE DQAGE(F,A,B,Epsabs,Epsrel,Key,Limit,Result,Abserr,Neval,Ier,&
           Blist(Last) = b2
           Elist(maxerr) = error1
           Elist(Last) = error2
-        ENDIF
+        END IF
         !
         !           CALL SUBROUTINE DQPSRT TO MAINTAIN THE DESCENDING ORDERING
         !           IN THE LIST OF ERROR ESTIMATES AND SELECT THE SUBINTERVAL
@@ -344,7 +344,7 @@ SUBROUTINE DQAGE(F,A,B,Epsabs,Epsrel,Key,Limit,Result,Abserr,Neval,Ier,&
         CALL DQPSRT(Limit,Last,maxerr,errmax,Elist,Iord,nrmax)
         !- **JUMP OUT OF DO-LOOP
         IF ( Ier/=0.OR.errsum<=errbnd ) EXIT
-      ENDDO
+      END DO
       !
       !           COMPUTE FINAL RESULT.
       !           ---------------------
@@ -352,10 +352,10 @@ SUBROUTINE DQAGE(F,A,B,Epsabs,Epsrel,Key,Limit,Result,Abserr,Neval,Ier,&
       Result = 0.0D+00
       DO k = 1, Last
         Result = Result + Rlist(k)
-      ENDDO
+      END DO
       Abserr = errsum
-    ENDIF
+    END IF
     IF ( keyf/=1 ) Neval = (10*keyf+1)*(2*Neval+1)
     IF ( keyf==1 ) Neval = 30*Neval + 15
-  ENDIF
+  END IF
 END SUBROUTINE DQAGE

@@ -62,10 +62,10 @@ SUBROUTINE CACAI(Z,Fnu,Kode,Mr,N,Y,Nz,Rl,Tol,Elim,Alim)
       !-----------------------------------------------------------------------
       CALL CASYI(zn,Fnu,Kode,nn,Y,nw,Rl,Tol,Elim,Alim)
       IF ( nw<0 ) GOTO 100
-    ENDIF
+    END IF
   ELSE
     CALL CSERI(zn,Fnu,Kode,nn,Y,nw,Tol,Elim,Alim)
-  ENDIF
+  END IF
   !-----------------------------------------------------------------------
   !     ANALYTIC CONTINUATION TO THE LEFT HALF PLANE FOR THE K FUNCTION
   !-----------------------------------------------------------------------
@@ -79,7 +79,7 @@ SUBROUTINE CACAI(Z,Fnu,Kode,Mr,N,Y,Nz,Rl,Tol,Elim,Alim)
       cpn = COS(yy)
       spn = SIN(yy)
       csgn = csgn*CMPLX(cpn,spn)
-    ENDIF
+    END IF
     !-----------------------------------------------------------------------
     !     CALCULATE CSPN=EXP(FNU*PI*I) TO MINIMIZE LOSSES OF SIGNIFICANCE
     !     WHEN FNU IS LARGE
@@ -97,10 +97,10 @@ SUBROUTINE CACAI(Z,Fnu,Kode,Mr,N,Y,Nz,Rl,Tol,Elim,Alim)
       ascle = 1.0E+3*R1MACH(1)/Tol
       CALL CS1S2(zn,c1,c2,nw,ascle,Alim,iuf)
       Nz = Nz + nw
-    ENDIF
+    END IF
     Y(1) = cspn*c1 + csgn*c2
     RETURN
-  ENDIF
+  END IF
   100  Nz = -1
   IF ( nw==(-2) ) Nz = -2
 END SUBROUTINE CACAI

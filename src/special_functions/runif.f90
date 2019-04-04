@@ -79,10 +79,10 @@ REAL FUNCTION RUNIF(T,N)
       !
       DO i = 1, nold
         T(i) = RAND(0.)
-      ENDDO
+      END DO
       T(nold+1) = RAND(0.)
-    ENDIF
-  ENDIF
+    END IF
+  END IF
   !
   j = INT( T(nold+1)*floatn ) + 1
   T(nold+1) = T(j)

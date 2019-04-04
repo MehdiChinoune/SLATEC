@@ -83,7 +83,7 @@ SUBROUTINE SGECO(A,Lda,N,Ipvt,Rcond,Z)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   INTEGER Lda, N, Ipvt(*)
   REAL A(Lda,*), Z(*)
   REAL Rcond
@@ -98,7 +98,7 @@ SUBROUTINE SGECO(A,Lda,N,Ipvt,Rcond,Z)
   anorm = 0.0E0
   DO j = 1, N
     anorm = MAX(anorm,SASUM(N,A(1,j),1))
-  ENDDO
+  END DO
   !
   !     FACTOR
   !
@@ -116,14 +116,14 @@ SUBROUTINE SGECO(A,Lda,N,Ipvt,Rcond,Z)
   ek = 1.0E0
   DO j = 1, N
     Z(j) = 0.0E0
-  ENDDO
+  END DO
   DO k = 1, N
     IF ( Z(k)/=0.0E0 ) ek = SIGN(ek,-Z(k))
     IF ( ABS(ek-Z(k))>ABS(A(k,k)) ) THEN
       s = ABS(A(k,k))/ABS(ek-Z(k))
       CALL SSCAL(N,s,Z,1)
       ek = s*ek
-    ENDIF
+    END IF
     wk = ek - Z(k)
     wkm = -ek - Z(k)
     s = ABS(wk)
@@ -134,24 +134,24 @@ SUBROUTINE SGECO(A,Lda,N,Ipvt,Rcond,Z)
     ELSE
       wk = wk/A(k,k)
       wkm = wkm/A(k,k)
-    ENDIF
+    END IF
     kp1 = k + 1
     IF ( kp1<=N ) THEN
       DO j = kp1, N
         sm = sm + ABS(Z(j)+wkm*A(k,j))
         Z(j) = Z(j) + wk*A(k,j)
         s = s + ABS(Z(j))
-      ENDDO
+      END DO
       IF ( s<sm ) THEN
         t = wkm - wk
         wk = wkm
         DO j = kp1, N
           Z(j) = Z(j) + t*A(k,j)
-        ENDDO
-      ENDIF
-    ENDIF
+        END DO
+      END IF
+    END IF
     Z(k) = wk
-  ENDDO
+  END DO
   s = 1.0E0/SASUM(N,Z,1)
   CALL SSCAL(N,s,Z,1)
   !
@@ -163,12 +163,12 @@ SUBROUTINE SGECO(A,Lda,N,Ipvt,Rcond,Z)
     IF ( ABS(Z(k))>1.0E0 ) THEN
       s = 1.0E0/ABS(Z(k))
       CALL SSCAL(N,s,Z,1)
-    ENDIF
+    END IF
     l = Ipvt(k)
     t = Z(l)
     Z(l) = Z(k)
     Z(k) = t
-  ENDDO
+  END DO
   s = 1.0E0/SASUM(N,Z,1)
   CALL SSCAL(N,s,Z,1)
   !
@@ -186,8 +186,8 @@ SUBROUTINE SGECO(A,Lda,N,Ipvt,Rcond,Z)
       s = 1.0E0/ABS(Z(k))
       CALL SSCAL(N,s,Z,1)
       ynorm = s*ynorm
-    ENDIF
-  ENDDO
+    END IF
+  END DO
   s = 1.0E0/SASUM(N,Z,1)
   CALL SSCAL(N,s,Z,1)
   ynorm = s*ynorm
@@ -200,12 +200,12 @@ SUBROUTINE SGECO(A,Lda,N,Ipvt,Rcond,Z)
       s = ABS(A(k,k))/ABS(Z(k))
       CALL SSCAL(N,s,Z,1)
       ynorm = s*ynorm
-    ENDIF
+    END IF
     IF ( A(k,k)/=0.0E0 ) Z(k) = Z(k)/A(k,k)
     IF ( A(k,k)==0.0E0 ) Z(k) = 1.0E0
     t = -Z(k)
     CALL SAXPY(k-1,t,A(1,k),1,Z(1),1)
-  ENDDO
+  END DO
   !     MAKE ZNORM = 1.0
   s = 1.0E0/SASUM(N,Z,1)
   CALL SSCAL(N,s,Z,1)

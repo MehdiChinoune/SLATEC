@@ -121,7 +121,7 @@ SUBROUTINE CINVIT(Nm,N,Ar,Ai,Wr,Wi,Select,Mm,M,Zr,Zi,Ierr,Rm1,Rm2,Rv1,Rv2)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   !
   INTEGER i, j, k, M, N, s, ii, Mm, mp, Nm, uk, ip1, its, km1, Ierr
   REAL Ar(Nm,*), Ai(Nm,*), Wr(*), Wi(*), Zr(Nm,*), Zi(Nm,*)
@@ -143,7 +143,7 @@ SUBROUTINE CINVIT(Nm,N,Ar,Ai,Wr,Wi,Select,Mm,M,Zr,Zi,Ierr,Rm1,Rm2,Rv1,Rv2)
       DO uk = k, N
         IF ( uk==N ) EXIT
         IF ( Ar(uk+1,uk)==0.0E0.AND.Ai(uk+1,uk)==0.0E0 ) EXIT
-      ENDDO
+      END DO
       !     .......... COMPUTE INFINITY NORM OF LEADING UK BY UK
       !                (HESSENBERG) MATRIX ..........
       norm = 0.0E0
@@ -154,11 +154,11 @@ SUBROUTINE CINVIT(Nm,N,Ar,Ai,Wr,Wi,Select,Mm,M,Zr,Zi,Ierr,Rm1,Rm2,Rv1,Rv2)
         !
         DO j = mp, uk
           x = x + PYTHAG(Ar(i,j),Ai(i,j))
-        ENDDO
+        END DO
         !
         IF ( x>norm ) norm = x
         mp = i
-      ENDDO
+      END DO
       !     .......... EPS3 REPLACES ZERO PIVOT IN DECOMPOSITION
       !                AND CLOSE ROOTS ARE MODIFIED BY EPS3 ..........
       IF ( norm==0.0E0 ) norm = 1.0E0
@@ -171,9 +171,9 @@ SUBROUTINE CINVIT(Nm,N,Ar,Ai,Wr,Wi,Select,Mm,M,Zr,Zi,Ierr,Rm1,Rm2,Rv1,Rv2)
           ukroot = SQRT(REAL(uk))
           growto = 0.1E0/ukroot
           EXIT
-        ENDIF
-      ENDDO
-    ENDIF
+        END IF
+      END DO
+    END IF
     rlambd = Wr(k)
     ilambd = Wi(k)
     IF ( k==1 ) GOTO 150
@@ -181,32 +181,32 @@ SUBROUTINE CINVIT(Nm,N,Ar,Ai,Wr,Wi,Select,Mm,M,Zr,Zi,Ierr,Rm1,Rm2,Rv1,Rv2)
     GOTO 100
     !     .......... PERTURB EIGENVALUE IF IT IS CLOSE
     !                TO ANY PREVIOUS EIGENVALUE ..........
-    50     rlambd = rlambd + eps3
+    50  rlambd = rlambd + eps3
     !     .......... FOR I=K-1 STEP -1 UNTIL 1 DO -- ..........
     100 CONTINUE
     DO ii = 1, km1
       i = k - ii
       IF ( Select(i).AND.ABS(Wr(i)-rlambd)<eps3.AND.ABS(Wi(i)-ilambd)<eps3 )&
         GOTO 50
-    ENDDO
+    END DO
     !
     Wr(k) = rlambd
     !     .......... FORM UPPER HESSENBERG (AR,AI)-(RLAMBD,ILAMBD)*I
     !                AND INITIAL COMPLEX VECTOR ..........
-    150    mp = 1
+    150  mp = 1
     !
     DO i = 1, uk
       !
       DO j = mp, uk
         Rm1(i,j) = Ar(i,j)
         Rm2(i,j) = Ai(i,j)
-      ENDDO
+      END DO
       !
       Rm1(i,i) = Rm1(i,i) - rlambd
       Rm2(i,i) = Rm2(i,i) - ilambd
       mp = i
       Rv1(i) = eps3
-    ENDDO
+    END DO
     !     .......... TRIANGULAR DECOMPOSITION WITH INTERCHANGES,
     !                REPLACING ZERO PIVOTS BY EPS3 ..........
     IF ( uk/=1 ) THEN
@@ -222,8 +222,8 @@ SUBROUTINE CINVIT(Nm,N,Ar,Ai,Wr,Wi,Select,Mm,M,Zr,Zi,Ierr,Rm1,Rm2,Rv1,Rv2)
             y = Rm2(i,j)
             Rm2(i,j) = Rm2(mp,j)
             Rm2(mp,j) = y
-          ENDDO
-        ENDIF
+          END DO
+        END IF
         !
         IF ( Rm1(mp,mp)==0.0E0.AND.Rm2(mp,mp)==0.0E0 ) Rm1(mp,mp) = eps3
         CALL CDIV(Rm1(i,mp),Rm2(i,mp),Rm1(mp,mp),Rm2(mp,mp),x,y)
@@ -232,11 +232,11 @@ SUBROUTINE CINVIT(Nm,N,Ar,Ai,Wr,Wi,Select,Mm,M,Zr,Zi,Ierr,Rm1,Rm2,Rv1,Rv2)
           DO j = i, uk
             Rm1(i,j) = Rm1(i,j) - x*Rm1(mp,j) + y*Rm2(mp,j)
             Rm2(i,j) = Rm2(i,j) - x*Rm2(mp,j) - y*Rm1(mp,j)
-          ENDDO
-        ENDIF
+          END DO
+        END IF
         !
-      ENDDO
-    ENDIF
+      END DO
+    END IF
     !
     IF ( Rm1(uk,uk)==0.0E0.AND.Rm2(uk,uk)==0.0E0 ) Rm1(uk,uk) = eps3
     its = 0
@@ -253,11 +253,11 @@ SUBROUTINE CINVIT(Nm,N,Ar,Ai,Wr,Wi,Select,Mm,M,Zr,Zi,Ierr,Rm1,Rm2,Rv1,Rv2)
           DO j = ip1, uk
             x = x - Rm1(i,j)*Rv1(j) + Rm2(i,j)*Rv2(j)
             y = y - Rm1(i,j)*Rv2(j) - Rm2(i,j)*Rv1(j)
-          ENDDO
-        ENDIF
+          END DO
+        END IF
         !
         CALL CDIV(x,y,Rm1(i,i),Rm2(i,i),Rv1(i),Rv2(i))
-      ENDDO
+      END DO
       !     .......... ACCEPTANCE TEST FOR EIGENVECTOR
       !                AND NORMALIZATION ..........
       its = its + 1
@@ -269,9 +269,9 @@ SUBROUTINE CINVIT(Nm,N,Ar,Ai,Wr,Wi,Select,Mm,M,Zr,Zi,Ierr,Rm1,Rm2,Rv1,Rv2)
         IF ( normv<x ) THEN
           normv = x
           j = i
-        ENDIF
+        END IF
         norm = norm + x
-      ENDDO
+      END DO
       !
       IF ( norm>=growto ) THEN
         !     .......... ACCEPT VECTOR ..........
@@ -280,7 +280,7 @@ SUBROUTINE CINVIT(Nm,N,Ar,Ai,Wr,Wi,Select,Mm,M,Zr,Zi,Ierr,Rm1,Rm2,Rv1,Rv2)
         !
         DO i = 1, uk
           CALL CDIV(Rv1(i),Rv2(i),x,y,Zr(i,s),Zi(i,s))
-        ENDDO
+        END DO
         !
         IF ( uk==N ) GOTO 200
         j = uk + 1
@@ -299,20 +299,20 @@ SUBROUTINE CINVIT(Nm,N,Ar,Ai,Wr,Wi,Select,Mm,M,Zr,Zi,Ierr,Rm1,Rm2,Rv1,Rv2)
         !
         DO i = 2, uk
           Rv1(i) = y
-        ENDDO
+        END DO
         !
         j = uk - its + 1
         Rv1(j) = Rv1(j) - eps3*x
-      ENDIF
-    ENDDO
+      END IF
+    END DO
     !     .......... SET REMAINING VECTOR COMPONENTS TO ZERO ..........
     DO i = j, N
       Zr(i,s) = 0.0E0
       Zi(i,s) = 0.0E0
-    ENDDO
+    END DO
     !
-    200    s = s + 1
-  ENDDO
+    200  s = s + 1
+  END DO
   !
   GOTO 400
   !     .......... SET ERROR -- UNDERESTIMATE OF EIGENVECTOR

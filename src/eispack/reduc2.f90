@@ -83,7 +83,7 @@ SUBROUTINE REDUC2(Nm,N,A,B,Dl,Ierr)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   !
   INTEGER i, j, k, N, i1, j1, Nm, nn, Ierr
   REAL A(Nm,*), B(Nm,*), Dl(*)
@@ -103,8 +103,8 @@ SUBROUTINE REDUC2(Nm,N,A,B,Dl,Ierr)
           !
           DO k = 1, i1
             x = x - B(i,k)*B(j,k)
-          ENDDO
-        ENDIF
+          END DO
+        END IF
         !
         IF ( j/=i ) THEN
           B(j,i) = x/y
@@ -112,10 +112,10 @@ SUBROUTINE REDUC2(Nm,N,A,B,Dl,Ierr)
           IF ( x<=0.0E0 ) GOTO 100
           y = SQRT(x)
           Dl(i) = y
-        ENDIF
-      ENDDO
-    ENDDO
-  ENDIF
+        END IF
+      END DO
+    END DO
+  END IF
   !     .......... FORM THE LOWER TRIANGLE OF A*L
   !                IN THE LOWER TRIANGLE OF THE ARRAY A ..........
   DO i = 1, nn
@@ -128,19 +128,19 @@ SUBROUTINE REDUC2(Nm,N,A,B,Dl,Ierr)
         !
         DO k = j1, i
           x = x + A(k,i)*B(k,j)
-        ENDDO
-      ENDIF
+        END DO
+      END IF
       !
       IF ( i/=nn ) THEN
         !
         DO k = i1, nn
           x = x + A(i,k)*B(k,j)
-        ENDDO
-      ENDIF
+        END DO
+      END IF
       !
       A(i,j) = x
-    ENDDO
-  ENDDO
+    END DO
+  END DO
   !     .......... PRE-MULTIPLY BY TRANSPOSE(L) AND OVERWRITE ..........
   DO i = 1, nn
     i1 = i + 1
@@ -152,12 +152,12 @@ SUBROUTINE REDUC2(Nm,N,A,B,Dl,Ierr)
         !
         DO k = i1, nn
           x = x + A(k,j)*B(k,i)
-        ENDDO
-      ENDIF
+        END DO
+      END IF
       !
       A(i,j) = x
-    ENDDO
-  ENDDO
+    END DO
+  END DO
   !
   RETURN
   !     .......... SET ERROR -- B IS NOT POSITIVE DEFINITE ..........

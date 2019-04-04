@@ -61,7 +61,7 @@ CONTAINS
       WRITE (Lun,99001) '================='
       WRITE (Lun,99002) 'OUTPUT FROM ISRTQC'
       WRITE (Lun,99002) '================='
-    ENDIF
+    END IF
     Ipass = 1
     !
     !     -------------------------------------------------------------
@@ -75,7 +75,7 @@ CONTAINS
       DO i = 1, N
         y(i) = x(i,j)
         yc(i) = x(i,j)
-      ENDDO
+      END DO
       !
       !        ... CALL ROUTINE TO BE TESTED
       !
@@ -88,7 +88,7 @@ CONTAINS
       DO i = 1, N
         fail = fail .OR. (y(i)/=xs(i,j)) .OR. ((kabs==1).AND.(yc(i)/=x(i,j)))&
           .OR. ((kabs==2).AND.(yc(i)/=xs(i,j)))
-      ENDDO
+      END DO
       !
       !        ... PRODUCE REQUIRED OUTPUT
       !
@@ -97,7 +97,7 @@ CONTAINS
         IF ( Kprint>0 ) WRITE (Lun,99001) 'ISORT FAILED TEST ', j
       ELSE
         IF ( Kprint>=2 ) WRITE (Lun,99001) 'ISORT PASSED TEST ', j
-      ENDIF
+      END IF
       IF ( (fail.AND.(Kprint>=2)).OR.(Kprint>=3) ) THEN
         WRITE (Lun,99001) '------------------------'
         WRITE (Lun,99002) 'DETAILS OF ISORT TEST ', j
@@ -113,13 +113,13 @@ CONTAINS
           WRITE (Lun,99003) '    CORRECT OUTPUT = ', (x(i,j),i=1,N)
         ELSE
           WRITE (Lun,99003) '    CORRECT OUTPUT = ', (xs(i,j),i=1,N)
-        ENDIF
+        END IF
         WRITE (Lun,99002) '3RD ARGUMENT (VECTOR LENGTH)'
         WRITE (Lun,99004) '             INPUT = ', N
         WRITE (Lun,99002) '4TH ARGUMENT (TYPE OF SORT)'
         WRITE (Lun,99004) '             INPUT = ', kflag(j)
-      ENDIF
-    ENDDO
+      END IF
+    END DO
     !
     !     -------------------------------------------------------------
     !                            CHECK IPSORT
@@ -131,7 +131,7 @@ CONTAINS
       !
       DO i = 1, N
         y(i) = x(i,j)
-      ENDDO
+      END DO
       !
       !        ... CALL ROUTINE TO BE TESTED
       !
@@ -144,7 +144,7 @@ CONTAINS
       DO i = 1, N
         fail = fail .OR. (iy(i)/=ix(i,j)) .OR. ((kabs==1).AND.(y(i)/=x(i,j)))&
           .OR. ((kabs==2).AND.(y(i)/=xs(i,j)))
-      ENDDO
+      END DO
       !
       !        ... PRODUCE REQUIRED OUTPUT
       !
@@ -153,7 +153,7 @@ CONTAINS
         IF ( Kprint>0 ) WRITE (Lun,99001) 'IPSORT FAILED TEST ', j
       ELSE
         IF ( Kprint>=2 ) WRITE (Lun,99001) 'IPSORT PASSED TEST ', j
-      ENDIF
+      END IF
       IF ( (fail.AND.(Kprint>=2)).OR.(Kprint>=3) ) THEN
         WRITE (Lun,99001) '-------------------------'
         WRITE (Lun,99002) 'DETAILS OF IPSORT TEST ', j
@@ -165,7 +165,7 @@ CONTAINS
           WRITE (Lun,99003) '    CORRECT OUTPUT = ', (x(i,j),i=1,N)
         ELSE
           WRITE (Lun,99003) '    CORRECT OUTPUT = ', (xs(i,j),i=1,N)
-        ENDIF
+        END IF
         WRITE (Lun,99002) '2ND ARGUMENT (VECTOR LENGTH)'
         WRITE (Lun,99004) '             INPUT = ', N
         WRITE (Lun,99002) '3RD ARGUMENT (PERMUTATION VECTOR)'
@@ -173,9 +173,9 @@ CONTAINS
         WRITE (Lun,99004) '    CORRECT OUTPUT = ', (ix(i,j),i=1,N)
         WRITE (Lun,99002) '4TH ARGUMENT (TYPE OF SORT)'
         WRITE (Lun,99004) '             INPUT = ', kflag(j)
-      ENDIF
+      END IF
       !
-    ENDDO
+    END DO
     !
     !     ... TEST ERROR MESSAGES
     !
@@ -183,7 +183,7 @@ CONTAINS
       CALL XSETF(0)
     ELSE
       CALL XSETF(-1)
-    ENDIF
+    END IF
     !
     nn = -1
     kkflag = 1
@@ -205,7 +205,7 @@ CONTAINS
     ELSEIF ( (Kprint>=1).AND.(Ipass==0) ) THEN
       WRITE (Lun,*)
       WRITE (Lun,*) ' IPSORT FAILED ERROR MESSAGE TESTS'
-    ENDIF
+    END IF
     !
     !     -------------------------------------------------------------
     !                            CHECK IPPERM
@@ -222,8 +222,8 @@ CONTAINS
           iy(i) = i
         ELSE
           iy(i) = ix(i,j)
-        ENDIF
-      ENDDO
+        END IF
+      END DO
       !
       !        ... CALL ROUTINE TO BE TESTED
       !
@@ -237,7 +237,7 @@ CONTAINS
           ((kabs==2).AND.(iy(i)/=ix(i,j))) .OR. &
           ((kabs==1).AND.(y(i)/=x(i,j))) .OR. &
           ((kabs==2).AND.(y(i)/=xs(i,j)))
-      ENDDO
+      END DO
       !
       !        ... PRODUCE REQUIRED OUTPUT
       !
@@ -246,7 +246,7 @@ CONTAINS
         IF ( Kprint>0 ) WRITE (Lun,99001) 'IPPERM FAILED TEST ', j
       ELSE
         IF ( Kprint>=2 ) WRITE (Lun,99001) 'IPPERM PASSED TEST ', j
-      ENDIF
+      END IF
       IF ( (fail.AND.(Kprint>=2)).OR.(Kprint>=3) ) THEN
         WRITE (Lun,99001) '------------------------'
         WRITE (Lun,99002) 'DETAILS OF IPPERM TEST', j
@@ -258,16 +258,16 @@ CONTAINS
           WRITE (Lun,99003) '    CORRECT OUTPUT =', (x(i,j),i=1,N)
         ELSE
           WRITE (Lun,99003) '    CORRECT OUTPUT =', (xs(i,j),i=1,N)
-        ENDIF
+        END IF
         WRITE (Lun,99002) '2ND ARGUMENT (VECTOR LENGTH)'
         WRITE (Lun,99004) '             INPUT =', N
         WRITE (Lun,99002) '3RD ARGUMENT (PERMUTATION VECTOR)'
         WRITE (Lun,99004) '             INPUT =', (iy(i),i=1,N)
         WRITE (Lun,99002) '4TH ARGUMENT (ERROR FLAG)'
         WRITE (Lun,99004) '             OUTPUT =', ier
-      ENDIF
+      END IF
       !
-    ENDDO
+    END DO
     !
     !     ... TEST ERROR MESSAGES
     !
@@ -275,7 +275,7 @@ CONTAINS
       CALL XSETF(0)
     ELSE
       CALL XSETF(-1)
-    ENDIF
+    END IF
     !
     nn = -1
     IF ( Kprint>=3 ) WRITE (Lun,*)
@@ -296,7 +296,7 @@ CONTAINS
     ELSEIF ( (Kprint>=1).AND.(Ipass==0) ) THEN
       WRITE (Lun,*)
       WRITE (Lun,*) ' IPPERM FAILED ERROR MESSAGE TESTS'
-    ENDIF
+    END IF
     !
     RETURN
     !
@@ -369,7 +369,7 @@ CONTAINS
       WRITE (Lun,99001) '================='
       WRITE (Lun,99002) 'OUTPUT FROM HSRTQC'
       WRITE (Lun,99002) '================='
-    ENDIF
+    END IF
     Ipass = 1
     !
     !     -------------------------------------------------------------
@@ -382,7 +382,7 @@ CONTAINS
       !
       DO i = 1, N
         y(i) = x(i,j)
-      ENDDO
+      END DO
       !
       !        ... CALL ROUTINE TO BE TESTED
       !
@@ -395,7 +395,7 @@ CONTAINS
       DO i = 1, N
         fail = fail .OR. (iy(i)/=ix(i,j)) .OR. ((kabs==1).AND.(y(i)/=x(i,j)))&
           .OR. ((kabs==2).AND.(y(i)/=xs(i,j)))
-      ENDDO
+      END DO
       !
       !        ... PRODUCE REQUIRED OUTPUT
       !
@@ -404,7 +404,7 @@ CONTAINS
         IF ( Kprint>0 ) WRITE (Lun,99001) 'HPSORT FAILED TEST ', j
       ELSE
         IF ( Kprint>=2 ) WRITE (Lun,99001) 'HPSORT PASSED TEST ', j
-      ENDIF
+      END IF
       IF ( (fail.AND.(Kprint>=2)).OR.(Kprint>=3) ) THEN
         WRITE (Lun,99001) '-------------------------'
         WRITE (Lun,99002) 'DETAILS OF HPSORT TEST ', j
@@ -416,7 +416,7 @@ CONTAINS
           WRITE (Lun,99003) '    CORRECT OUTPUT = ', (x(i,j),i=1,N)
         ELSE
           WRITE (Lun,99003) '    CORRECT OUTPUT = ', (xs(i,j),i=1,N)
-        ENDIF
+        END IF
         WRITE (Lun,99002) '2ND ARGUMENT (VECTOR LENGTH)'
         WRITE (Lun,99004) '             INPUT = ', N
         WRITE (Lun,99002) '3RD ARGUMENT (PERMUTATION VECTOR)'
@@ -424,9 +424,9 @@ CONTAINS
         WRITE (Lun,99004) '    CORRECT OUTPUT = ', (ix(i,j),i=1,N)
         WRITE (Lun,99002) '4TH ARGUMENT (TYPE OF SORT)'
         WRITE (Lun,99004) '             INPUT = ', kflag(j)
-      ENDIF
+      END IF
       !
-    ENDDO
+    END DO
     !
     !     ... TEST ERROR MESSAGES
     !
@@ -434,7 +434,7 @@ CONTAINS
       CALL XSETF(0)
     ELSE
       CALL XSETF(-1)
-    ENDIF
+    END IF
     !
     nn = -1
     strbeg = 1
@@ -496,7 +496,7 @@ CONTAINS
     ELSEIF ( (Kprint>=1).AND.(Ipass==0) ) THEN
       WRITE (Lun,*)
       WRITE (Lun,*) ' HPSORT FAILED ERROR MESSAGE TESTS'
-    ENDIF
+    END IF
     !
     !     -------------------------------------------------------------
     !                            CHECK HPPERM
@@ -513,8 +513,8 @@ CONTAINS
           iy(i) = i
         ELSE
           iy(i) = ix(i,j)
-        ENDIF
-      ENDDO
+        END IF
+      END DO
       !
       !        ... CALL ROUTINE TO BE TESTED
       !
@@ -528,7 +528,7 @@ CONTAINS
           ((kabs==2).AND.(iy(i)/=ix(i,j))) .OR.&
           ((kabs==1).AND.(y(i)/=x(i,j))) .OR.&
           ((kabs==2).AND.(y(i)/=xs(i,j)))
-      ENDDO
+      END DO
       !
       !        ... PRODUCE REQUIRED OUTPUT
       !
@@ -537,7 +537,7 @@ CONTAINS
         IF ( Kprint>0 ) WRITE (Lun,99001) 'HPPERM FAILED TEST ', j
       ELSE
         IF ( Kprint>=2 ) WRITE (Lun,99001) 'HPPERM PASSED TEST ', j
-      ENDIF
+      END IF
       IF ( (fail.AND.(Kprint>=2)).OR.(Kprint>=3) ) THEN
         WRITE (Lun,99001) '------------------------'
         WRITE (Lun,99002) 'DETAILS OF HPPERM TEST', j
@@ -549,16 +549,16 @@ CONTAINS
           WRITE (Lun,99003) '    CORRECT OUTPUT =', (x(i,j),i=1,N)
         ELSE
           WRITE (Lun,99003) '    CORRECT OUTPUT =', (xs(i,j),i=1,N)
-        ENDIF
+        END IF
         WRITE (Lun,99002) '2ND ARGUMENT (VECTOR LENGTH)'
         WRITE (Lun,99004) '             INPUT =', N
         WRITE (Lun,99002) '3RD ARGUMENT (PERMUTATION VECTOR)'
         WRITE (Lun,99004) '             INPUT =', (iy(i),i=1,N)
         WRITE (Lun,99002) '4TH ARGUMENT (ERROR FLAG)'
         WRITE (Lun,99004) '             OUTPUT =', ier
-      ENDIF
+      END IF
       !
-    ENDDO
+    END DO
     !
     !     ... TEST ERROR MESSAGES
     !
@@ -566,7 +566,7 @@ CONTAINS
       CALL XSETF(0)
     ELSE
       CALL XSETF(-1)
-    ENDIF
+    END IF
     !
     nn = -1
     IF ( Kprint>=3 ) WRITE (Lun,*)
@@ -587,7 +587,7 @@ CONTAINS
     ELSEIF ( (Kprint>=1).AND.(Ipass==0) ) THEN
       WRITE (Lun,*)
       WRITE (Lun,*) ' HPPERM FAILED ERROR MESSAGE TESTS'
-    ENDIF
+    END IF
     !
     RETURN
     !
@@ -658,7 +658,7 @@ CONTAINS
       WRITE (Lun,99001) '================='
       WRITE (Lun,99002) 'OUTPUT FROM SSRTQC'
       WRITE (Lun,99002) '================='
-    ENDIF
+    END IF
     Ipass = 1
     !
     !     -------------------------------------------------------------
@@ -672,7 +672,7 @@ CONTAINS
       DO i = 1, N
         y(i) = x(i,j)
         yc(i) = x(i,j)
-      ENDDO
+      END DO
       !
       !        ... CALL ROUTINE TO BE TESTED
       !
@@ -685,7 +685,7 @@ CONTAINS
       DO i = 1, N
         fail = fail .OR. (y(i)/=xs(i,j)) .OR. ((kabs==1).AND.(yc(i)/=x(i,j)))&
           .OR. ((kabs==2).AND.(yc(i)/=xs(i,j)))
-      ENDDO
+      END DO
       !
       !        ... PRODUCE REQUIRED OUTPUT
       !
@@ -694,7 +694,7 @@ CONTAINS
         IF ( Kprint>0 ) WRITE (Lun,99001) 'SSORT FAILED TEST ', j
       ELSE
         IF ( Kprint>=2 ) WRITE (Lun,99001) 'SSORT PASSED TEST ', j
-      ENDIF
+      END IF
       IF ( (fail.AND.(Kprint>=2)).OR.(Kprint>=3) ) THEN
         WRITE (Lun,99001) '------------------------'
         WRITE (Lun,99002) 'DETAILS OF SSORT TEST ', j
@@ -710,13 +710,13 @@ CONTAINS
           WRITE (Lun,99003) '    CORRECT OUTPUT = ', (x(i,j),i=1,N)
         ELSE
           WRITE (Lun,99003) '    CORRECT OUTPUT = ', (xs(i,j),i=1,N)
-        ENDIF
+        END IF
         WRITE (Lun,99002) '3RD ARGUMENT (VECTOR LENGTH)'
         WRITE (Lun,99004) '             INPUT = ', N
         WRITE (Lun,99002) '4TH ARGUMENT (TYPE OF SORT)'
         WRITE (Lun,99004) '             INPUT = ', kflag(j)
-      ENDIF
-    ENDDO
+      END IF
+    END DO
     !
     !     -------------------------------------------------------------
     !                            CHECK SPSORT
@@ -728,7 +728,7 @@ CONTAINS
       !
       DO i = 1, N
         y(i) = x(i,j)
-      ENDDO
+      END DO
       !
       !        ... CALL ROUTINE TO BE TESTED
       !
@@ -741,7 +741,7 @@ CONTAINS
       DO i = 1, N
         fail = fail .OR. (iy(i)/=ix(i,j)) .OR. ((kabs==1).AND.(y(i)/=x(i,j)))&
           .OR. ((kabs==2).AND.(y(i)/=xs(i,j)))
-      ENDDO
+      END DO
       !
       !        ... PRODUCE REQUIRED OUTPUT
       !
@@ -750,7 +750,7 @@ CONTAINS
         IF ( Kprint>0 ) WRITE (Lun,99001) 'SPSORT FAILED TEST ', j
       ELSE
         IF ( Kprint>=2 ) WRITE (Lun,99001) 'SPSORT PASSED TEST ', j
-      ENDIF
+      END IF
       IF ( (fail.AND.(Kprint>=2)).OR.(Kprint>=3) ) THEN
         WRITE (Lun,99001) '-------------------------'
         WRITE (Lun,99002) 'DETAILS OF SPSORT TEST ', j
@@ -762,7 +762,7 @@ CONTAINS
           WRITE (Lun,99003) '    CORRECT OUTPUT = ', (x(i,j),i=1,N)
         ELSE
           WRITE (Lun,99003) '    CORRECT OUTPUT = ', (xs(i,j),i=1,N)
-        ENDIF
+        END IF
         WRITE (Lun,99002) '2ND ARGUMENT (VECTOR LENGTH)'
         WRITE (Lun,99004) '             INPUT = ', N
         WRITE (Lun,99002) '3RD ARGUMENT (PERMUTATION VECTOR)'
@@ -770,9 +770,9 @@ CONTAINS
         WRITE (Lun,99004) '    CORRECT OUTPUT = ', (ix(i,j),i=1,N)
         WRITE (Lun,99002) '4TH ARGUMENT (TYPE OF SORT)'
         WRITE (Lun,99004) '             INPUT = ', kflag(j)
-      ENDIF
+      END IF
       !
-    ENDDO
+    END DO
     !
     !     ... TEST ERROR MESSAGES
     !
@@ -780,7 +780,7 @@ CONTAINS
       CALL XSETF(0)
     ELSE
       CALL XSETF(-1)
-    ENDIF
+    END IF
     !
     nn = -1
     kkflag = 1
@@ -802,7 +802,7 @@ CONTAINS
     ELSEIF ( (Kprint>=1).AND.(Ipass==0) ) THEN
       WRITE (Lun,*)
       WRITE (Lun,*) ' SPSORT FAILED ERROR MESSAGE TESTS'
-    ENDIF
+    END IF
     !
     !     -------------------------------------------------------------
     !                            CHECK SPPERM
@@ -819,8 +819,8 @@ CONTAINS
           iy(i) = i
         ELSE
           iy(i) = ix(i,j)
-        ENDIF
-      ENDDO
+        END IF
+      END DO
       !
       !        ... CALL ROUTINE TO BE TESTED
       !
@@ -834,7 +834,7 @@ CONTAINS
           ((kabs==2).AND.(iy(i)/=ix(i,j))) .OR. &
           ((kabs==1).AND.(y(i)/=x(i,j))) .OR. &
           ((kabs==2).AND.(y(i)/=xs(i,j)))
-      ENDDO
+      END DO
       !
       !        ... PRODUCE REQUIRED OUTPUT
       !
@@ -843,7 +843,7 @@ CONTAINS
         IF ( Kprint>0 ) WRITE (Lun,99001) 'SPPERM FAILED TEST ', j
       ELSE
         IF ( Kprint>=2 ) WRITE (Lun,99001) 'SPPERM PASSED TEST ', j
-      ENDIF
+      END IF
       IF ( (fail.AND.(Kprint>=2)).OR.(Kprint>=3) ) THEN
         WRITE (Lun,99001) '------------------------'
         WRITE (Lun,99002) 'DETAILS OF SPPERM TEST', j
@@ -855,16 +855,16 @@ CONTAINS
           WRITE (Lun,99003) '    CORRECT OUTPUT =', (x(i,j),i=1,N)
         ELSE
           WRITE (Lun,99003) '    CORRECT OUTPUT =', (xs(i,j),i=1,N)
-        ENDIF
+        END IF
         WRITE (Lun,99002) '2ND ARGUMENT (VECTOR LENGTH)'
         WRITE (Lun,99004) '             INPUT =', N
         WRITE (Lun,99002) '3RD ARGUMENT (PERMUTATION VECTOR)'
         WRITE (Lun,99004) '             INPUT =', (iy(i),i=1,N)
         WRITE (Lun,99002) '4TH ARGUMENT (ERROR FLAG)'
         WRITE (Lun,99004) '             OUTPUT =', ier
-      ENDIF
+      END IF
       !
-    ENDDO
+    END DO
     !
     !     ... TEST ERROR MESSAGES
     !
@@ -872,7 +872,7 @@ CONTAINS
       CALL XSETF(0)
     ELSE
       CALL XSETF(-1)
-    ENDIF
+    END IF
     !
     nn = -1
     IF ( Kprint>=3 ) WRITE (Lun,*)
@@ -893,7 +893,7 @@ CONTAINS
     ELSEIF ( (Kprint>=1).AND.(Ipass==0) ) THEN
       WRITE (Lun,*)
       WRITE (Lun,*) ' SPPERM FAILED ERROR MESSAGE TESTS'
-    ENDIF
+    END IF
     !
     RETURN
     !
@@ -964,7 +964,7 @@ CONTAINS
       WRITE (Lun,99001) '================='
       WRITE (Lun,99002) 'OUTPUT FROM DSRTQC'
       WRITE (Lun,99002) '================='
-    ENDIF
+    END IF
     Ipass = 1
     !
     !     -------------------------------------------------------------
@@ -978,7 +978,7 @@ CONTAINS
       DO i = 1, N
         y(i) = x(i,j)
         yc(i) = x(i,j)
-      ENDDO
+      END DO
       !
       !        ... CALL ROUTINE TO BE TESTED
       !
@@ -991,7 +991,7 @@ CONTAINS
       DO i = 1, N
         fail = fail .OR. (y(i)/=xs(i,j)) .OR. ((kabs==1).AND.(yc(i)/=x(i,j)))&
           .OR. ((kabs==2).AND.(yc(i)/=xs(i,j)))
-      ENDDO
+      END DO
       !
       !        ... PRODUCE REQUIRED OUTPUT
       !
@@ -1000,7 +1000,7 @@ CONTAINS
         IF ( Kprint>0 ) WRITE (Lun,99001) 'DSORT FAILED TEST ', j
       ELSE
         IF ( Kprint>=2 ) WRITE (Lun,99001) 'DSORT PASSED TEST ', j
-      ENDIF
+      END IF
       IF ( (fail.AND.(Kprint>=2)).OR.(Kprint>=3) ) THEN
         WRITE (Lun,99001) '------------------------'
         WRITE (Lun,99002) 'DETAILS OF DSORT TEST ', j
@@ -1016,13 +1016,13 @@ CONTAINS
           WRITE (Lun,99003) '    CORRECT OUTPUT = ', (x(i,j),i=1,N)
         ELSE
           WRITE (Lun,99003) '    CORRECT OUTPUT = ', (xs(i,j),i=1,N)
-        ENDIF
+        END IF
         WRITE (Lun,99002) '3RD ARGUMENT (VECTOR LENGTH)'
         WRITE (Lun,99004) '             INPUT = ', N
         WRITE (Lun,99002) '4TH ARGUMENT (TYPE OF SORT)'
         WRITE (Lun,99004) '             INPUT = ', kflag(j)
-      ENDIF
-    ENDDO
+      END IF
+    END DO
     !
     !     -------------------------------------------------------------
     !                            CHECK DPSORT
@@ -1034,7 +1034,7 @@ CONTAINS
       !
       DO i = 1, N
         y(i) = x(i,j)
-      ENDDO
+      END DO
       !
       !        ... CALL ROUTINE TO BE TESTED
       !
@@ -1047,7 +1047,7 @@ CONTAINS
       DO i = 1, N
         fail = fail .OR. (iy(i)/=ix(i,j)) .OR. ((kabs==1).AND.(y(i)/=x(i,j)))&
           .OR. ((kabs==2).AND.(y(i)/=xs(i,j)))
-      ENDDO
+      END DO
       !
       !        ... PRODUCE REQUIRED OUTPUT
       !
@@ -1056,7 +1056,7 @@ CONTAINS
         IF ( Kprint>0 ) WRITE (Lun,99001) 'DPSORT FAILED TEST ', j
       ELSE
         IF ( Kprint>=2 ) WRITE (Lun,99001) 'DPSORT PASSED TEST ', j
-      ENDIF
+      END IF
       IF ( (fail.AND.(Kprint>=2)).OR.(Kprint>=3) ) THEN
         WRITE (Lun,99001) '-------------------------'
         WRITE (Lun,99002) 'DETAILS OF DPSORT TEST ', j
@@ -1068,7 +1068,7 @@ CONTAINS
           WRITE (Lun,99003) '    CORRECT OUTPUT = ', (x(i,j),i=1,N)
         ELSE
           WRITE (Lun,99003) '    CORRECT OUTPUT = ', (xs(i,j),i=1,N)
-        ENDIF
+        END IF
         WRITE (Lun,99002) '2ND ARGUMENT (VECTOR LENGTH)'
         WRITE (Lun,99004) '             INPUT = ', N
         WRITE (Lun,99002) '3RD ARGUMENT (PERMUTATION VECTOR)'
@@ -1076,9 +1076,9 @@ CONTAINS
         WRITE (Lun,99004) '    CORRECT OUTPUT = ', (ix(i,j),i=1,N)
         WRITE (Lun,99002) '4TH ARGUMENT (TYPE OF SORT)'
         WRITE (Lun,99004) '             INPUT = ', kflag(j)
-      ENDIF
+      END IF
       !
-    ENDDO
+    END DO
     !
     !     ... TEST ERROR MESSAGES
     !
@@ -1086,7 +1086,7 @@ CONTAINS
       CALL XSETF(0)
     ELSE
       CALL XSETF(-1)
-    ENDIF
+    END IF
     !
     nn = -1
     kkflag = 1
@@ -1108,7 +1108,7 @@ CONTAINS
     ELSEIF ( (Kprint>=1).AND.(Ipass==0) ) THEN
       WRITE (Lun,*)
       WRITE (Lun,*) ' DPSORT FAILED ERROR MESSAGE TESTS'
-    ENDIF
+    END IF
     !
     !     -------------------------------------------------------------
     !                            CHECK DPPERM
@@ -1125,8 +1125,8 @@ CONTAINS
           iy(i) = i
         ELSE
           iy(i) = ix(i,j)
-        ENDIF
-      ENDDO
+        END IF
+      END DO
       !
       !        ... CALL ROUTINE TO BE TESTED
       !
@@ -1140,7 +1140,7 @@ CONTAINS
           ((kabs==2).AND.(iy(i)/=ix(i,j))) .OR. &
           ((kabs==1).AND.(y(i)/=x(i,j))) .OR. &
           ((kabs==2).AND.(y(i)/=xs(i,j)))
-      ENDDO
+      END DO
       !
       !        ... PRODUCE REQUIRED OUTPUT
       !
@@ -1149,7 +1149,7 @@ CONTAINS
         IF ( Kprint>0 ) WRITE (Lun,99001) 'DPPERM FAILED TEST ', j
       ELSE
         IF ( Kprint>=2 ) WRITE (Lun,99001) 'DPPERM PASSED TEST ', j
-      ENDIF
+      END IF
       IF ( (fail.AND.(Kprint>=2)).OR.(Kprint>=3) ) THEN
         WRITE (Lun,99001) '------------------------'
         WRITE (Lun,99002) 'DETAILS OF DPPERM TEST', j
@@ -1161,16 +1161,16 @@ CONTAINS
           WRITE (Lun,99003) '    CORRECT OUTPUT =', (x(i,j),i=1,N)
         ELSE
           WRITE (Lun,99003) '    CORRECT OUTPUT =', (xs(i,j),i=1,N)
-        ENDIF
+        END IF
         WRITE (Lun,99002) '2ND ARGUMENT (VECTOR LENGTH)'
         WRITE (Lun,99004) '             INPUT =', N
         WRITE (Lun,99002) '3RD ARGUMENT (PERMUTATION VECTOR)'
         WRITE (Lun,99004) '             INPUT =', (iy(i),i=1,N)
         WRITE (Lun,99002) '4TH ARGUMENT (ERROR FLAG)'
         WRITE (Lun,99004) '             OUTPUT =', ier
-      ENDIF
+      END IF
       !
-    ENDDO
+    END DO
     !
     !     ... TEST ERROR MESSAGES
     !
@@ -1178,7 +1178,7 @@ CONTAINS
       CALL XSETF(0)
     ELSE
       CALL XSETF(-1)
-    ENDIF
+    END IF
     !
     nn = -1
     IF ( Kprint>=3 ) WRITE (Lun,*)
@@ -1199,7 +1199,7 @@ CONTAINS
     ELSEIF ( (Kprint>=1).AND.(Ipass==0) ) THEN
       WRITE (Lun,*)
       WRITE (Lun,*) ' DPPERM FAILED ERROR MESSAGE TESTS'
-    ENDIF
+    END IF
     !
     RETURN
     !
@@ -1277,7 +1277,7 @@ PROGRAM TEST54
     CALL XSETF(0)
   ELSE
     CALL XSETF(1)
-  ENDIF
+  END IF
   !
   !     Test ISORT, IPSORT and IPPERM
   !
@@ -1308,6 +1308,6 @@ PROGRAM TEST54
     WRITE (lun,99002) nfail
     99002 FORMAT (/' ************* WARNING -- ',I5,&
       ' TEST(S) FAILED IN PROGRAM TEST54 *************')
-  ENDIF
+  END IF
   STOP
 END PROGRAM TEST54

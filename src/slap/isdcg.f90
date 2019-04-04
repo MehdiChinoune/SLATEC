@@ -199,21 +199,21 @@ INTEGER FUNCTION ISDCG(N,B,X,Nelt,Ia,Ja,A,Isym,MSOLVE,Itol,Tol,Itmax,Iter,&
     IF ( Iter==0 ) THEN
       CALL MSOLVE(N,R,Z,Nelt,Ia,Ja,A,Isym,Rwork,Iwork)
       Bnrm = DNRM2(N,Dz,1)
-    ENDIF
+    END IF
     Err = DNRM2(N,Z,1)/Bnrm
   ELSEIF ( Itol==11 ) THEN
     !         err = ||x-TrueSolution||/||TrueSolution|| (2-Norms).
     IF ( Iter==0 ) Solnrm = DNRM2(N,SOLn,1)
     DO i = 1, N
       Dz(i) = X(i) - SOLn(i)
-    ENDDO
+    END DO
     Err = DNRM2(N,Dz,1)/Solnrm
   ELSE
     !
     !         If we get here ITOL is not one of the acceptable values.
     Err = D1MACH(2)
     Ierr = 3
-  ENDIF
+  END IF
   !
   IF ( Iunit/=0 ) THEN
     IF ( Iter==0 ) THEN
@@ -223,8 +223,8 @@ INTEGER FUNCTION ISDCG(N,B,X,Nelt,Ia,Ja,A,Isym,MSOLVE,Itol,Tol,Itmax,Iter,&
       WRITE (Iunit,99002) Iter, Err
     ELSE
       WRITE (Iunit,99002) Iter, Err, Ak, Bk
-    ENDIF
-  ENDIF
+    END IF
+  END IF
   IF ( Err<=Tol ) ISDCG = 1
   RETURN
   99002 FORMAT (1X,I4,1X,D16.7,1X,D16.7,1X,D16.7)

@@ -30,7 +30,7 @@ SUBROUTINE CUNI1(Z,Fnu,Kode,N,Y,Nz,Nlast,Fnul,Tol,Elim,Alim)
   !* REVISION HISTORY  (YYMMDD)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
-  
+
   INTEGER i, iflag, init, k, Kode, m, N, nd, Nlast, nn, nuf, nw, Nz
   COMPLEX cfn, crsc, cscl, csr(3), css(3), cwrk(16), c1, c2, &
     phi, rz, sum, s1, s2, Y(N), Z, zeta1, zeta2, cy(2)
@@ -66,16 +66,16 @@ SUBROUTINE CUNI1(Z,Fnu,Kode,N,Y,Nz,Nlast,Fnul,Tol,Elim,Alim)
   ELSE
     cfn = CMPLX(fn,0.0E0)
     s1 = -zeta1 + cfn*(cfn/(Z+zeta2))
-  ENDIF
+  END IF
   rs1 = REAL(s1)
   IF ( ABS(rs1)>Elim ) THEN
     IF ( rs1>0.0E0 ) GOTO 400
     Nz = N
     DO i = 1, N
       Y(i) = czero
-    ENDDO
+    END DO
     RETURN
-  ENDIF
+  END IF
   100  nn = MIN(2,nd)
   DO i = 1, nn
     fn = Fnu + (nd-i)
@@ -87,7 +87,7 @@ SUBROUTINE CUNI1(Z,Fnu,Kode,N,Y,Nz,Nlast,Fnul,Tol,Elim,Alim)
       cfn = CMPLX(fn,0.0E0)
       yy = AIMAG(Z)
       s1 = -zeta1 + cfn*(cfn/(Z+zeta2)) + CMPLX(0.0E0,yy)
-    ENDIF
+    END IF
     !-----------------------------------------------------------------------
     !     TEST FOR UNDERFLOW AND OVERFLOW
     !-----------------------------------------------------------------------
@@ -104,8 +104,8 @@ SUBROUTINE CUNI1(Z,Fnu,Kode,N,Y,Nz,Nlast,Fnul,Tol,Elim,Alim)
       IF ( i==1 ) iflag = 1
       IF ( rs1>=0.0E0 ) THEN
         IF ( i==1 ) iflag = 3
-      ENDIF
-    ENDIF
+      END IF
+    END IF
     !-----------------------------------------------------------------------
     !     SCALE S1 IF ABS(S1).LT.ASCLE
     !-----------------------------------------------------------------------
@@ -118,11 +118,11 @@ SUBROUTINE CUNI1(Z,Fnu,Kode,N,Y,Nz,Nlast,Fnul,Tol,Elim,Alim)
     IF ( iflag==1 ) THEN
       CALL CUCHK(s2,nw,bry(1),Tol)
       IF ( nw/=0 ) GOTO 300
-    ENDIF
+    END IF
     m = nd - i + 1
     cy(i) = s2
     Y(m) = s2*csr(iflag)
-  ENDDO
+  END DO
   IF ( nd>2 ) THEN
     rz = CMPLX(2.0E0,0.0E0)/Z
     bry(2) = 1.0E0/bry(1)
@@ -155,10 +155,10 @@ SUBROUTINE CUNI1(Z,Fnu,Kode,N,Y,Nz,Nlast,Fnul,Tol,Elim,Alim)
           s1 = s1*css(iflag)
           s2 = s2*css(iflag)
           c1 = csr(iflag)
-        ENDIF
-      ENDIF
-    ENDDO
-  ENDIF
+        END IF
+      END IF
+    END DO
+  END IF
   200  RETURN
   !-----------------------------------------------------------------------
   !     SET UNDERFLOW AND UPDATE PARAMETERS
@@ -178,8 +178,8 @@ SUBROUTINE CUNI1(Z,Fnu,Kode,N,Y,Nz,Nlast,Fnul,Tol,Elim,Alim)
       IF ( fn>=Fnul ) GOTO 100
       Nlast = nd
       RETURN
-    ENDIF
-  ENDIF
+    END IF
+  END IF
   400  Nz = -1
   RETURN
 END SUBROUTINE CUNI1

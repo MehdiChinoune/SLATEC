@@ -81,7 +81,7 @@ SUBROUTINE AVINT(X,Y,N,Xlo,Xup,Ans,Ierr)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   REAL Ans, fl, fr, slope, X(*), Xlo, Xup, Y(*)
   INTEGER i, Ierr, inlft, inrt, istart, istop, N
   REAL(8) :: r3, rp5, sum, syl, syl2, syl3, syu, syu2, syu3, &
@@ -99,19 +99,19 @@ SUBROUTINE AVINT(X,Y,N,Xlo,Xup,Ans,Ierr)
       DO i = 2, N
         IF ( X(i)<=X(i-1) ) GOTO 200
         IF ( X(i)>Xup ) EXIT
-      ENDDO
+      END DO
       IF ( N>=3 ) THEN
         IF ( X(N-2)<Xlo ) GOTO 100
         IF ( X(3)>Xup ) GOTO 100
         i = 1
         DO WHILE ( X(i)<Xlo )
           i = i + 1
-        ENDDO
+        END DO
         inlft = i
         i = N
         DO WHILE ( X(i)>Xup )
           i = i - 1
-        ENDDO
+        END DO
         inrt = i
         IF ( (inrt-inlft)<2 ) GOTO 100
         istart = inlft
@@ -147,7 +147,7 @@ SUBROUTINE AVINT(X,Y,N,Xlo,Xup,Ans,Ierr)
             ca = 0.5*(a+ca)
             cb = 0.5*(b+cb)
             cc = 0.5*(c+cc)
-          ENDIF
+          END IF
           syu = x2
           syu2 = syu*syu
           syu3 = syu2*syu
@@ -158,7 +158,7 @@ SUBROUTINE AVINT(X,Y,N,Xlo,Xup,Ans,Ierr)
           syl = syu
           syl2 = syu2
           syl3 = syu3
-        ENDDO
+        END DO
         syu = Xup
         Ans = REAL( sum + ca*(syu**3-syl3)/r3 + cb*rp5*(syu**2-syl2)&
           + cc*(syu-syl) , 4 )
@@ -170,14 +170,14 @@ SUBROUTINE AVINT(X,Y,N,Xlo,Xup,Ans,Ierr)
         fr = Y(2) + slope*(Xup-X(2))
         Ans = 0.5*(fl+fr)*(Xup-Xlo)
         RETURN
-      ENDIF
-    ENDIF
+      END IF
+    END IF
   ELSEIF ( Xlo/=Xup ) THEN
     Ierr = 2
     CALL XERMSG('SLATEC','AVINT',&
       'THE UPPER LIMIT OF INTEGRATION WAS NOT GREATER THAN THE LOWER LIMIT.',4,1)
     RETURN
-  ENDIF
+  END IF
   RETURN
   100  Ierr = 3
   CALL XERMSG('SLATEC','AVINT',&

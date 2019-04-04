@@ -101,7 +101,7 @@ SUBROUTINE ASYIK(X,Fnu,Kode,Flgik,Ra,Arg,In,Y)
       etx = Kode - 1
       t = Ra*(1.0E0-etx) + etx/(z+Ra)
       Arg = fn*(t-gln)*Flgik
-    ENDIF
+    END IF
     coef = EXP(Arg)
     t = 1.0E0/Ra
     t2 = t*t
@@ -116,13 +116,13 @@ SUBROUTINE ASYIK(X,Fnu,Kode,Flgik,Ra,Arg,In,Y)
       DO j = 2, k
         l = l + 1
         s1 = s1*t2 + c(l)
-      ENDDO
+      END DO
       ap = ap*t
       ak = ap*s1
       s2 = s2 + ak
       IF ( MAX(ABS(ak),ABS(ap))<tol ) EXIT
-    ENDDO
+    END DO
     t = ABS(t)
     Y(jn) = s2*coef*SQRT(t)*con(kk)
-  ENDDO
+  END DO
 END SUBROUTINE ASYIK

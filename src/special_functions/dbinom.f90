@@ -42,7 +42,7 @@ REAL(8) FUNCTION DBINOM(N,M)
     bilnmx = LOG(D1MACH(2)) - 0.0001D0
     fintmx = 0.9D0/D1MACH(3)
     first = .FALSE.
-  ENDIF
+  END IF
   !
   IF ( N<0.OR.M<0 ) CALL XERMSG('SLATEC','DBINOM','N OR M LT ZERO',1,2)
   IF ( N<M ) CALL XERMSG('SLATEC','DBINOM','N LT M',2,2)
@@ -57,12 +57,12 @@ REAL(8) FUNCTION DBINOM(N,M)
         xn = N - i + 1
         xk = i
         DBINOM = DBINOM*(xn/xk)
-      ENDDO
+      END DO
       !
       IF ( DBINOM<fintmx ) DBINOM = AINT(DBINOM+0.5D0)
       RETURN
-    ENDIF
-  ENDIF
+    END IF
+  END IF
   !
   ! IF K.LT.9, APPROX IS NOT VALID AND ANSWER IS CLOSE TO THE OVERFLOW LIM
   IF ( k<9 ) CALL XERMSG('SLATEC','DBINOM',&

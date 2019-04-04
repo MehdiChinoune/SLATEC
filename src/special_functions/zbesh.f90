@@ -243,8 +243,8 @@ SUBROUTINE ZBESH(Zr,Zi,Fnu,Kode,M,N,Cyr,Cyi,Nz,Ierr)
         IF ( znr==0.0D0.AND.zni<0.0D0 ) THEN
           znr = -znr
           zni = -zni
-        ENDIF
-      ENDIF
+        END IF
+      END IF
       CALL ZBUNK(znr,zni,Fnu,Kode,mr,nn,Cyr,Cyi,nw,tol,elim,alim)
       IF ( nw<0 ) GOTO 200
       Nz = Nz + nw
@@ -262,13 +262,13 @@ SUBROUTINE ZBESH(Zr,Zi,Fnu,Kode,M,N,Cyr,Cyi,Nz,Ierr)
           IF ( nn==0 ) THEN
             IF ( znr<0.0D0 ) GOTO 100
             RETURN
-          ENDIF
+          END IF
         ELSEIF ( az<=tol ) THEN
           arg = 0.5D0*az
           aln = -fn*LOG(arg)
           IF ( aln>elim ) GOTO 100
-        ENDIF
-      ENDIF
+        END IF
+      END IF
       IF ( (znr<0.0D0).OR.(znr==0.0D0.AND.zni<0.0D0.AND.M==2) ) THEN
         !-----------------------------------------------------------------------
         !     LEFT HALF PLANE COMPUTATION
@@ -283,8 +283,8 @@ SUBROUTINE ZBESH(Zr,Zi,Fnu,Kode,M,N,Cyr,Cyi,Nz,Ierr)
         !     YN.GE.0. .OR. M=1)
         !-----------------------------------------------------------------------
         CALL ZBKNU(znr,zni,Fnu,Kode,nn,Cyr,Cyi,Nz,tol,elim,alim)
-      ENDIF
-    ENDIF
+      END IF
+    END IF
     !-----------------------------------------------------------------------
     !     H(M,FNU,Z) = -FMM*(I/HPI)*(ZT**FNU)*K(FNU,-Z*ZT)
     !
@@ -309,7 +309,7 @@ SUBROUTINE ZBESH(Zr,Zi,Fnu,Kode,M,N,Cyr,Cyi,Nz,Ierr)
       !     ZNI = -ZNI
       csgnr = -csgnr
       csgni = -csgni
-    ENDIF
+    END IF
     zti = -fmm
     rtol = 1.0D0/tol
     ascle = ufl*rtol
@@ -327,7 +327,7 @@ SUBROUTINE ZBESH(Zr,Zi,Fnu,Kode,M,N,Cyr,Cyi,Nz,Ierr)
         aa = aa*rtol
         bb = bb*rtol
         atol = tol
-      ENDIF
+      END IF
       str = aa*csgnr - bb*csgni
       sti = aa*csgni + bb*csgnr
       Cyr(i) = str*atol
@@ -335,9 +335,9 @@ SUBROUTINE ZBESH(Zr,Zi,Fnu,Kode,M,N,Cyr,Cyi,Nz,Ierr)
       str = -csgni*zti
       csgni = csgnr*zti
       csgnr = str
-    ENDDO
+    END DO
     RETURN
-  ENDIF
+  END IF
   100  Nz = 0
   Ierr = 2
   RETURN

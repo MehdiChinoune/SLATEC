@@ -101,7 +101,7 @@ SUBROUTINE MINFIT(Nm,M,N,A,W,Ip,B,Ierr,Rv1)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   !
   INTEGER i, j, k, l, M, N, ii, Ip, i1, kk, k1, ll, l1, m1, Nm, its, Ierr
   REAL A(Nm,*), W(*), B(Nm,Ip), Rv1(*)
@@ -125,14 +125,14 @@ SUBROUTINE MINFIT(Nm,M,N,A,W,Ip,B,Ierr,Rv1)
       !
       DO k = i, M
         scale = scale + ABS(A(k,i))
-      ENDDO
+      END DO
       !
       IF ( scale/=0.0E0 ) THEN
         !
         DO k = i, M
           A(k,i) = A(k,i)/scale
           s = s + A(k,i)**2
-        ENDDO
+        END DO
         !
         f = A(i,i)
         g = -SIGN(SQRT(s),f)
@@ -145,15 +145,15 @@ SUBROUTINE MINFIT(Nm,M,N,A,W,Ip,B,Ierr,Rv1)
             !
             DO k = i, M
               s = s + A(k,i)*A(k,j)
-            ENDDO
+            END DO
             !
             f = s/h
             !
             DO k = i, M
               A(k,j) = A(k,j) + f*A(k,i)
-            ENDDO
-          ENDDO
-        ENDIF
+            END DO
+          END DO
+        END IF
         !
         IF ( Ip/=0 ) THEN
           !
@@ -162,21 +162,21 @@ SUBROUTINE MINFIT(Nm,M,N,A,W,Ip,B,Ierr,Rv1)
             !
             DO k = i, M
               s = s + A(k,i)*B(k,j)
-            ENDDO
+            END DO
             !
             f = s/h
             !
             DO k = i, M
               B(k,j) = B(k,j) + f*A(k,i)
-            ENDDO
-          ENDDO
-        ENDIF
+            END DO
+          END DO
+        END IF
         !
         DO k = i, M
           A(k,i) = scale*A(k,i)
-        ENDDO
-      ENDIF
-    ENDIF
+        END DO
+      END IF
+    END IF
     !
     W(i) = scale*g
     g = 0.0E0
@@ -186,14 +186,14 @@ SUBROUTINE MINFIT(Nm,M,N,A,W,Ip,B,Ierr,Rv1)
       !
       DO k = l, N
         scale = scale + ABS(A(i,k))
-      ENDDO
+      END DO
       !
       IF ( scale/=0.0E0 ) THEN
         !
         DO k = l, N
           A(i,k) = A(i,k)/scale
           s = s + A(i,k)**2
-        ENDDO
+        END DO
         !
         f = A(i,l)
         g = -SIGN(SQRT(s),f)
@@ -202,7 +202,7 @@ SUBROUTINE MINFIT(Nm,M,N,A,W,Ip,B,Ierr,Rv1)
         !
         DO k = l, N
           Rv1(k) = A(i,k)/h
-        ENDDO
+        END DO
         !
         IF ( i/=M ) THEN
           !
@@ -211,22 +211,22 @@ SUBROUTINE MINFIT(Nm,M,N,A,W,Ip,B,Ierr,Rv1)
             !
             DO k = l, N
               s = s + A(j,k)*A(i,k)
-            ENDDO
+            END DO
             !
             DO k = l, N
               A(j,k) = A(j,k) + s*Rv1(k)
-            ENDDO
-          ENDDO
-        ENDIF
+            END DO
+          END DO
+        END IF
         !
         DO k = l, N
           A(i,k) = scale*A(i,k)
-        ENDDO
-      ENDIF
-    ENDIF
+        END DO
+      END IF
+    END IF
     !
     s1 = MAX(s1,ABS(W(i))+ABS(Rv1(i)))
-  ENDDO
+  END DO
   !     .......... ACCUMULATION OF RIGHT-HAND TRANSFORMATIONS.
   !                FOR I=N STEP -1 UNTIL 1 DO -- ..........
   DO ii = 1, N
@@ -237,31 +237,31 @@ SUBROUTINE MINFIT(Nm,M,N,A,W,Ip,B,Ierr,Rv1)
         DO j = l, N
           !     .......... DOUBLE DIVISION AVOIDS POSSIBLE UNDERFLOW ..........
           A(j,i) = (A(i,j)/A(i,l))/g
-        ENDDO
+        END DO
         !
         DO j = l, N
           s = 0.0E0
           !
           DO k = l, N
             s = s + A(i,k)*A(k,j)
-          ENDDO
+          END DO
           !
           DO k = l, N
             A(k,j) = A(k,j) + s*A(k,i)
-          ENDDO
-        ENDDO
-      ENDIF
+          END DO
+        END DO
+      END IF
       !
       DO j = l, N
         A(i,j) = 0.0E0
         A(j,i) = 0.0E0
-      ENDDO
-    ENDIF
+      END DO
+    END IF
     !
     A(i,i) = 1.0E0
     g = Rv1(i)
     l = i
-  ENDDO
+  END DO
   !
   IF ( M<N.AND.Ip/=0 ) THEN
     m1 = M + 1
@@ -270,9 +270,9 @@ SUBROUTINE MINFIT(Nm,M,N,A,W,Ip,B,Ierr,Rv1)
       !
       DO j = 1, Ip
         B(i,j) = 0.0E0
-      ENDDO
-    ENDDO
-  ENDIF
+      END DO
+    END DO
+  END IF
   !     .......... DIAGONALIZATION OF THE BIDIAGONAL FORM ..........
   !     .......... FOR K=N STEP -1 UNTIL 1 DO -- ..........
   DO kk = 1, N
@@ -289,7 +289,7 @@ SUBROUTINE MINFIT(Nm,M,N,A,W,Ip,B,Ierr,Rv1)
       !     .......... RV1(1) IS ALWAYS ZERO, SO THERE IS NO EXIT
       !                THROUGH THE BOTTOM OF THE LOOP ..........
       IF ( s1+ABS(W(l1))==s1 ) EXIT
-    ENDDO
+    END DO
     !     .......... CANCELLATION OF RV1(L) IF L GREATER THAN 1 ..........
     c = 0.0E0
     s = 1.0E0
@@ -310,12 +310,12 @@ SUBROUTINE MINFIT(Nm,M,N,A,W,Ip,B,Ierr,Rv1)
           z = B(i,j)
           B(l1,j) = y*c + z*s
           B(i,j) = -y*s + z*c
-        ENDDO
-      ENDIF
+        END DO
+      END IF
       !
-    ENDDO
+    END DO
     !     .......... TEST FOR CONVERGENCE ..........
-    100    z = W(k)
+    100  z = W(k)
     IF ( l/=k ) THEN
       !     .......... SHIFT FROM BOTTOM 2 BY 2 MINOR ..........
       IF ( its==30 ) GOTO 200
@@ -351,7 +351,7 @@ SUBROUTINE MINFIT(Nm,M,N,A,W,Ip,B,Ierr,Rv1)
           z = A(j,i)
           A(j,i1) = x*c + z*s
           A(j,i) = -x*s + z*c
-        ENDDO
+        END DO
         !
         z = PYTHAG(f,h)
         W(i1) = z
@@ -359,7 +359,7 @@ SUBROUTINE MINFIT(Nm,M,N,A,W,Ip,B,Ierr,Rv1)
         IF ( z/=0.0E0 ) THEN
           c = f/z
           s = h/z
-        ENDIF
+        END IF
         f = c*g + s*y
         x = -s*g + c*y
         IF ( Ip/=0 ) THEN
@@ -369,10 +369,10 @@ SUBROUTINE MINFIT(Nm,M,N,A,W,Ip,B,Ierr,Rv1)
             z = B(i,j)
             B(i1,j) = y*c + z*s
             B(i,j) = -y*s + z*c
-          ENDDO
-        ENDIF
+          END DO
+        END IF
         !
-      ENDDO
+      END DO
       !
       Rv1(l) = 0.0E0
       Rv1(k) = f
@@ -385,10 +385,10 @@ SUBROUTINE MINFIT(Nm,M,N,A,W,Ip,B,Ierr,Rv1)
       !
       DO j = 1, N
         A(j,k) = -A(j,k)
-      ENDDO
-    ENDIF
+      END DO
+    END IF
     !
-  ENDDO
+  END DO
   !
   RETURN
   !     .......... SET ERROR -- NO CONVERGENCE TO A

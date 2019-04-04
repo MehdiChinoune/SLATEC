@@ -76,7 +76,7 @@ SUBROUTINE TRBAK3(Nm,N,Nv,A,M,Z)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   !
   INTEGER i, j, k, l, M, N, ik, iz, Nm, Nv
   REAL A(*), Z(Nm,*)
@@ -100,7 +100,7 @@ SUBROUTINE TRBAK3(Nm,N,Nv,A,M,Z)
             DO k = 1, l
               ik = ik + 1
               s = s + A(ik)*Z(k,j)
-            ENDDO
+            END DO
             !     .......... DOUBLE DIVISION AVOIDS POSSIBLE UNDERFLOW ..........
             s = (s/h)/h
             ik = iz
@@ -108,13 +108,13 @@ SUBROUTINE TRBAK3(Nm,N,Nv,A,M,Z)
             DO k = 1, l
               ik = ik + 1
               Z(k,j) = Z(k,j) - s*A(ik)
-            ENDDO
+            END DO
             !
-          ENDDO
-        ENDIF
+          END DO
+        END IF
         !
-      ENDDO
-    ENDIF
-  ENDIF
+      END DO
+    END IF
+  END IF
   !
 END SUBROUTINE TRBAK3

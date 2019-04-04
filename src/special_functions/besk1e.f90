@@ -85,7 +85,7 @@ REAL FUNCTION BESK1E(X)
     xmin = EXP(MAX(LOG(R1MACH(1)),-LOG(R1MACH(2)))+.01)
     xsml = SQRT(4.0*R1MACH(3))
     first = .FALSE.
-  ENDIF
+  END IF
   !
   IF ( X<=0. ) CALL XERMSG('SLATEC','BESK1E','X IS ZERO OR NEGATIVE',2,2)
   IF ( X>2.0 ) THEN
@@ -94,9 +94,9 @@ REAL FUNCTION BESK1E(X)
       BESK1E = (1.25+CSEVL((16./X-5.)/3.,ak1cs,ntak1))/SQRT(X)
     ELSE
       BESK1E = (1.25+CSEVL(16./X-1.,ak12cs,ntak12))/SQRT(X)
-    ENDIF
+    END IF
     RETURN
-  ENDIF
+  END IF
   !
   IF ( X<xmin ) CALL XERMSG('SLATEC','BESK1E','X SO SMALL K1 OVERFLOWS',3,2)
   y = 0.

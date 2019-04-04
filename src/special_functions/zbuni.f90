@@ -54,7 +54,7 @@ SUBROUTINE ZBUNI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Nui,Nlast,Fnul,Tol,Elim,Alim)
       !     -PI/3.LE.ARG(Z).LE.PI/3
       !-----------------------------------------------------------------------
       CALL ZUNI1(Zr,Zi,Fnu,Kode,N,Yr,Yi,nw,Nlast,Fnul,Tol,Elim,Alim)
-    ENDIF
+    END IF
     IF ( nw>=0 ) GOTO 100
   ELSE
     fnui = Nui
@@ -73,7 +73,7 @@ SUBROUTINE ZBUNI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Nui,Nlast,Fnul,Tol,Elim,Alim)
       !     -PI/3.LE.ARG(Z).LE.PI/3
       !-----------------------------------------------------------------------
       CALL ZUNI1(Zr,Zi,gnu,Kode,2,cyr,cyi,nw,Nlast,Fnul,Tol,Elim,Alim)
-    ENDIF
+    END IF
     IF ( nw>=0 ) THEN
       IF ( nw/=0 ) THEN
         Nlast = N
@@ -97,7 +97,7 @@ SUBROUTINE ZBUNI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Nui,Nlast,Fnul,Tol,Elim,Alim)
           iflag = 3
           ascle = bry(3)
           csclr = Tol
-        ENDIF
+        END IF
         cscrr = 1.0D0/csclr
         s1r = cyr(2)*csclr
         s1i = cyi(2)*csclr
@@ -135,9 +135,9 @@ SUBROUTINE ZBUNI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Nui,Nlast,Fnul,Tol,Elim,Alim)
               s1i = s1i*csclr
               s2r = s2r*csclr
               s2i = s2i*csclr
-            ENDIF
-          ENDIF
-        ENDDO
+            END IF
+          END IF
+        END DO
         Yr(N) = s2r*cscrr
         Yi(N) = s2i*cscrr
         IF ( N==1 ) RETURN
@@ -174,13 +174,13 @@ SUBROUTINE ZBUNI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Nui,Nlast,Fnul,Tol,Elim,Alim)
               s1i = s1i*csclr
               s2r = s2r*csclr
               s2i = s2i*csclr
-            ENDIF
-          ENDIF
-        ENDDO
+            END IF
+          END IF
+        END DO
         RETURN
-      ENDIF
-    ENDIF
-  ENDIF
+      END IF
+    END IF
+  END IF
   Nz = -1
   IF ( nw==(-2) ) Nz = -2
   RETURN

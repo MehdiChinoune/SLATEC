@@ -58,7 +58,7 @@ SUBROUTINE DSORT(Dx,Dy,N,Kflag)
   !   920519  Clarified error messages.  (DWL)
   !   920801  Declarations section rebuilt and code restructured to use
   !           IF-THEN-ELSE-ENDIF.  (RWC, WRB)
-  
+
   !     .. Scalar Arguments ..
   INTEGER Kflag, N
   !     .. Array Arguments ..
@@ -78,22 +78,22 @@ SUBROUTINE DSORT(Dx,Dy,N,Kflag)
     CALL XERMSG('SLATEC','DSORT',&
       'The number of values to be sorted is not positive.',1,1)
     RETURN
-  ENDIF
+  END IF
   !
   kk = ABS(Kflag)
   IF ( kk/=1.AND.kk/=2 ) THEN
     CALL XERMSG('SLATEC','DSORT',&
       'The sort control parameter, K, is not 2, 1, -1, or -2.',2,1)
     RETURN
-  ENDIF
+  END IF
   !
   !     Alter array DX to get decreasing order if needed
   !
   IF ( Kflag<=-1 ) THEN
     DO i = 1, nn
       Dx(i) = -Dx(i)
-    ENDDO
-  ENDIF
+    END DO
+  END IF
   !
   IF ( kk==2 ) THEN
     !
@@ -112,7 +112,7 @@ SUBROUTINE DSORT(Dx,Dy,N,Kflag)
     i = 1
     j = nn
     r = 0.375D0
-  ENDIF
+  END IF
   !
   100 CONTINUE
   IF ( i==j ) GOTO 300
@@ -120,7 +120,7 @@ SUBROUTINE DSORT(Dx,Dy,N,Kflag)
     r = r + 3.90625D-2
   ELSE
     r = r - 0.21875D0
-  ENDIF
+  END IF
   !
   200  k = i
   !
@@ -135,7 +135,7 @@ SUBROUTINE DSORT(Dx,Dy,N,Kflag)
     Dx(ij) = Dx(i)
     Dx(i) = t
     t = Dx(ij)
-  ENDIF
+  END IF
   l = j
   !
   !     If last element of array is less than than T, interchange with T
@@ -151,8 +151,8 @@ SUBROUTINE DSORT(Dx,Dy,N,Kflag)
       Dx(ij) = Dx(i)
       Dx(i) = t
       t = Dx(ij)
-    ENDIF
-  ENDIF
+    END IF
+  END IF
   DO
     !
     !     Find an element in the second half of the array which is smaller
@@ -175,7 +175,7 @@ SUBROUTINE DSORT(Dx,Dy,N,Kflag)
             Dx(l) = Dx(k)
             Dx(k) = tt
             EXIT
-          ENDIF
+          END IF
           !
           !     Save upper and lower subscripts of the array yet to be sorted
           !
@@ -189,12 +189,12 @@ SUBROUTINE DSORT(Dx,Dy,N,Kflag)
             iu(m) = j
             j = l
             m = m + 1
-          ENDIF
+          END IF
           GOTO 400
-        ENDIF
-      ENDDO
-    ENDIF
-  ENDDO
+        END IF
+      END DO
+    END IF
+  END DO
   !
   !     Begin again on another portion of the unsorted array
   !
@@ -221,10 +221,10 @@ SUBROUTINE DSORT(Dx,Dy,N,Kflag)
         IF ( t>=Dx(k) ) THEN
           Dx(k+1) = t
           EXIT
-        ENDIF
-      ENDDO
-    ENDIF
-  ENDDO
+        END IF
+      END DO
+    END IF
+  END DO
   !
   500 CONTINUE
   IF ( i==j ) GOTO 700
@@ -232,7 +232,7 @@ SUBROUTINE DSORT(Dx,Dy,N,Kflag)
     r = r + 3.90625D-2
   ELSE
     r = r - 0.21875D0
-  ENDIF
+  END IF
   !
   600  k = i
   !
@@ -251,7 +251,7 @@ SUBROUTINE DSORT(Dx,Dy,N,Kflag)
     Dy(ij) = Dy(i)
     Dy(i) = ty
     ty = Dy(ij)
-  ENDIF
+  END IF
   l = j
   !
   !     If last element of array is less than T, interchange with T
@@ -273,8 +273,8 @@ SUBROUTINE DSORT(Dx,Dy,N,Kflag)
       Dy(ij) = Dy(i)
       Dy(i) = ty
       ty = Dy(ij)
-    ENDIF
-  ENDIF
+    END IF
+  END IF
   DO
     !
     !     Find an element in the second half of the array which is smaller
@@ -300,7 +300,7 @@ SUBROUTINE DSORT(Dx,Dy,N,Kflag)
             Dy(l) = Dy(k)
             Dy(k) = tty
             EXIT
-          ENDIF
+          END IF
           !
           !     Save upper and lower subscripts of the array yet to be sorted
           !
@@ -314,12 +314,12 @@ SUBROUTINE DSORT(Dx,Dy,N,Kflag)
             iu(m) = j
             j = l
             m = m + 1
-          ENDIF
+          END IF
           GOTO 800
-        ENDIF
-      ENDDO
-    ENDIF
-  ENDDO
+        END IF
+      END DO
+    END IF
+  END DO
   !
   !     Begin again on another portion of the unsorted array
   !
@@ -349,10 +349,10 @@ SUBROUTINE DSORT(Dx,Dy,N,Kflag)
           Dx(k+1) = t
           Dy(k+1) = ty
           EXIT
-        ENDIF
-      ENDDO
-    ENDIF
-  ENDDO
+        END IF
+      END DO
+    END IF
+  END DO
   !
   !     Clean up
   !
@@ -360,6 +360,6 @@ SUBROUTINE DSORT(Dx,Dy,N,Kflag)
   IF ( Kflag<=-1 ) THEN
     DO i = 1, nn
       Dx(i) = -Dx(i)
-    ENDDO
-  ENDIF
+    END DO
+  END IF
 END SUBROUTINE DSORT

@@ -120,7 +120,7 @@ SUBROUTINE LSSUDS(A,X,B,N,M,Nrda,U,Nrdu,Iflag,Mlso,Irank,Iscale,Q,Diag,&
   !   900510  Fixed an error message.  (RWC)
   !   910408  Updated the AUTHOR and REFERENCES sections.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   INTEGER nmir, Nrda, Nrdu, nu
   REAL A(Nrda,*), B(*), Diag(*), Div(*), gam, gamma, Q(Nrda,*), R1MACH, res, &
     S(*), Scales(*), SDOT, ss, Td(*), U(Nrdu,*), uro, X(*)
@@ -150,15 +150,15 @@ SUBROUTINE LSSUDS(A,X,B,N,M,Nrda,U,Nrdu,Iflag,Mlso,Irank,Iscale,Q,Diag,&
           IF ( nfatal==0 ) nfat = 0
           CALL XSETF(nfat)
           CALL XERMAX(1)
-        ENDIF
+        END IF
         !
         !     COPY MATRIX A INTO MATRIX Q
         !
         DO k = 1, M
           DO j = 1, N
             Q(j,k) = A(j,k)
-          ENDDO
-        ENDDO
+          END DO
+        END DO
         !
         !     USE ORTHOGONAL TRANSFORMATIONS TO REDUCE Q TO LOWER
         !     TRIANGULAR FORM
@@ -173,7 +173,7 @@ SUBROUTINE LSSUDS(A,X,B,N,M,Nrda,U,Nrdu,Iflag,Mlso,Irank,Iscale,Q,Diag,&
           !
           DO k = 1, N
             Div(k) = Diag(k)
-          ENDDO
+          END DO
           GOTO 100
         ELSE
           !
@@ -182,12 +182,12 @@ SUBROUTINE LSSUDS(A,X,B,N,M,Nrda,U,Nrdu,Iflag,Mlso,Irank,Iscale,Q,Diag,&
           !
           IF ( Irank/=0 ) CALL OHTROL(Q,N,Nrda,Diag,Irank,Div,Td)
           RETURN
-        ENDIF
+        END IF
       ELSEIF ( Iflag==1 ) THEN
         GOTO 100
-      ENDIF
-    ENDIF
-  ENDIF
+      END IF
+    END IF
+  END IF
   !
   !     INVALID INPUT FOR LSSUDS
   Iflag = 2
@@ -204,10 +204,10 @@ SUBROUTINE LSSUDS(A,X,B,N,M,Nrda,U,Nrdu,Iflag,Mlso,Irank,Iscale,Q,Diag,&
     DO k = 1, N
       kp = Kpivot(k)
       X(k) = B(kp)
-    ENDDO
+    END DO
     DO k = 1, N
       S(k) = X(k)
-    ENDDO
+    END DO
     !
     irp = Irank + 1
     nu = 1
@@ -226,16 +226,16 @@ SUBROUTINE LSSUDS(A,X,B,N,M,Nrda,U,Nrdu,Iflag,Mlso,Irank,Iscale,Q,Diag,&
         S(k) = S(k) + gam*Td(k)
         DO j = irp, N
           S(j) = S(j) + gam*Q(j,k)
-        ENDDO
-      ENDDO
+        END DO
+      END DO
       res = SDOT(nmir,S(irp),1,S(irp),1)
       IF ( res>ss*(10.*MAX(10.**Isflg,10.*uro))**2 ) THEN
         !
         !     INCONSISTENT SYSTEM
         Iflag = 4
         nu = 0
-      ENDIF
-    ENDIF
+      END IF
+    END IF
     !
     !     APPLY FORWARD SUBSTITUTION TO SOLVE LOWER TRIANGULAR SYSTEM
     !
@@ -243,15 +243,15 @@ SUBROUTINE LSSUDS(A,X,B,N,M,Nrda,U,Nrdu,Iflag,Mlso,Irank,Iscale,Q,Diag,&
     IF ( Irank/=1 ) THEN
       DO k = 2, Irank
         S(k) = (S(k)-SDOT(k-1,Q(k,1),Nrda,S(1),1))/Div(k)
-      ENDDO
-    ENDIF
+      END DO
+    END IF
     !
     !     INITIALIZE X VECTOR AND THEN APPLY ORTHOGONAL TRANSFORMATION
     !
     DO k = 1, M
       X(k) = 0.
       IF ( k<=Irank ) X(k) = S(k)
-    ENDDO
+    END DO
     !
     DO jr = 1, Irank
       j = irp - jr
@@ -259,14 +259,14 @@ SUBROUTINE LSSUDS(A,X,B,N,M,Nrda,U,Nrdu,Iflag,Mlso,Irank,Iscale,Q,Diag,&
       gamma = SDOT(mj,Q(j,j),Nrda,X(j),1)/(Diag(j)*Q(j,j))
       DO k = j, M
         X(k) = X(k) + gamma*Q(j,k)
-      ENDDO
-    ENDDO
+      END DO
+    END DO
     !
     !     RESCALE ANSWERS AS DICTATED
     !
     DO k = 1, M
       X(k) = X(k)*Scales(k)
-    ENDDO
+    END DO
     !
     IF ( (nu==0).OR.(M==Irank) ) RETURN
     !
@@ -277,7 +277,7 @@ SUBROUTINE LSSUDS(A,X,B,N,M,Nrda,U,Nrdu,Iflag,Mlso,Irank,Iscale,Q,Diag,&
       DO i = 1, M
         U(i,k) = 0.
         IF ( i==Irank+k ) U(i,k) = 1.
-      ENDDO
+      END DO
       !
       DO jr = 1, Irank
         j = irp - jr
@@ -285,9 +285,9 @@ SUBROUTINE LSSUDS(A,X,B,N,M,Nrda,U,Nrdu,Iflag,Mlso,Irank,Iscale,Q,Diag,&
         gamma = SDOT(mj,Q(j,j),Nrda,U(j,k),1)/(Diag(j)*Q(j,j))
         DO i = j, M
           U(i,k) = U(i,k) + gamma*Q(j,i)
-        ENDDO
-      ENDDO
-    ENDDO
+        END DO
+      END DO
+    END DO
   ELSE
     !
     !     SPECIAL CASE FOR THE NULL MATRIX
@@ -297,13 +297,13 @@ SUBROUTINE LSSUDS(A,X,B,N,M,Nrda,U,Nrdu,Iflag,Mlso,Irank,Iscale,Q,Diag,&
         U(k,k) = 1.
         DO j = 1, M
           IF ( j/=k ) U(j,k) = 0.
-        ENDDO
-      ENDIF
-    ENDDO
+        END DO
+      END IF
+    END DO
     DO k = 1, N
       IF ( B(k)>0. ) Iflag = 4
-    ENDDO
+    END DO
     RETURN
-  ENDIF
+  END IF
   !
 END SUBROUTINE LSSUDS

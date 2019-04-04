@@ -155,7 +155,7 @@ REAL FUNCTION E1(X)
     xmaxt = -LOG(R1MACH(1))
     xmax = xmaxt - LOG(xmaxt)
     first = .FALSE.
-  ENDIF
+  END IF
   !
   IF ( X<=(-10.) ) THEN
     !
@@ -200,7 +200,7 @@ REAL FUNCTION E1(X)
     CALL XERMSG('SLATEC','E1','X SO BIG E1 UNDERFLOWS',1,1)
     E1 = 0.
     RETURN
-  ENDIF
+  END IF
   !
   ! E1(X) = -EI(-X) FOR 4. .LT. X .LE. XMAX
   !

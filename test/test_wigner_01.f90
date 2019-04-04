@@ -83,7 +83,7 @@ CONTAINS
       WRITE (Lun,*) ' AN EXPLANATION OF THE VARIOUS '//&
         'TESTS CAN BE FOUND IN THE PROGRAM COMMENTS.'
       WRITE (Lun,*)
-    ENDIF
+    END IF
     !
     ! --- FIND NUMBER OF SIGNIFICANT FIGURES FOR FORMATTING
     x = 1.0/3.0
@@ -93,14 +93,14 @@ CONTAINS
       IF ( string(i:i)=='3' ) THEN
         first = i
         EXIT
-      ENDIF
-    ENDDO
+      END IF
+    END DO
     DO i = first, 35
       IF ( string(i:i)/='3' ) THEN
         last = i - 1
         GOTO 100
-      ENDIF
-    ENDDO
+      END IF
+    END DO
     last = 36
     100  nsig = last - first + 1
     fmt(1:16) = '(1X,F5.1,T8,G35.'
@@ -126,8 +126,8 @@ CONTAINS
         m1 = 1.0
         diff(index) = ABS(thrcof(index)-r3jj(index))
         IF ( diff(index)>ABS(r3jj(index))*tol ) ipass1 = 0
-      ENDDO
-    ENDIF
+      END DO
+    END IF
     IF ( Kprint>=3.OR.(Kprint==2.AND.ipass1==0) ) THEN
       WRITE (Lun,*) ' TEST 1, RECURRENCE IN L1, COMPARE VALUES OF 3J ', &
         'CALCULATED BY RC3JJ TO'
@@ -145,18 +145,18 @@ CONTAINS
           WRITE (Lun,fmt) l1, thrcof(index), r3jj(index)
           IF ( diff(index)>ABS(r3jj(index))*tol ) WRITE (Lun,'(1X,A,F5.1)')&
             'DIFFERENCE EXCEEDS ERROR TOLERANCE FOR L1 =', l1
-        ENDDO
-      ENDIF
-    ENDIF
+        END DO
+      END IF
+    END IF
     IF ( ipass1==0 ) THEN
       IF ( Kprint>=1 ) THEN
         WRITE (Lun,*) ' ***** ***** TEST 1 FAILED ***** *****'
         WRITE (Lun,*)
-      ENDIF
+      END IF
     ELSEIF ( Kprint>=2 ) THEN
       WRITE (Lun,*) ' ***** ***** TEST 1 PASSED ***** *****'
       WRITE (Lun,*)
-    ENDIF
+    END IF
     !
     ! --- TEST 2: COMPARE RC3JM VALUES WITH FORMULA
     ipass2 = 1
@@ -173,8 +173,8 @@ CONTAINS
         m3 = -m1 - m2
         diff(index) = ABS(thrcof(index)-r3jm(index))
         IF ( diff(index)>ABS(r3jm(index))*tol ) ipass2 = 0
-      ENDDO
-    ENDIF
+      END DO
+    END IF
     IF ( Kprint>=3.OR.(Kprint==2.AND.ipass2==0) ) THEN
       WRITE (Lun,*) ' TEST 2, RECURRENCE IN M2, COMPARE VALUES OF 3J ', &
         'CALCULATED BY RC3JM TO'
@@ -194,18 +194,18 @@ CONTAINS
           WRITE (Lun,fmt) m2, thrcof(index), r3jm(index)
           IF ( diff(index)>ABS(r3jm(index))*tol ) WRITE (Lun,'(1X,A,F5.1)')&
             'DIFFERENCE EXCEEDS ERROR TOLERANCE FOR M2 =', m2
-        ENDDO
-      ENDIF
-    ENDIF
+        END DO
+      END IF
+    END IF
     IF ( ipass2==0 ) THEN
       IF ( Kprint>=1 ) THEN
         WRITE (Lun,*) ' ***** ***** TEST 2 FAILED ***** *****'
         WRITE (Lun,*)
-      ENDIF
+      END IF
     ELSEIF ( Kprint>=2 ) THEN
       WRITE (Lun,*) ' ***** ***** TEST 2 PASSED ***** *****'
       WRITE (Lun,*)
-    ENDIF
+    END IF
     !
     ! --- TEST3: COMPARE COMMON VALUE OF RC3JJ AND RC3JM
     ipass3 = 1
@@ -224,7 +224,7 @@ CONTAINS
     ELSE
       diff(1) = ABS(jjval-jmval)
       IF ( diff(1)>0.5*ABS(jjval+jmval)*tol ) ipass3 = 0
-    ENDIF
+    END IF
     IF ( Kprint>=3.OR.(Kprint==2.AND.ipass3==0) ) THEN
       WRITE (Lun,*) ' TEST 3, COMPARE A COMMON VALUE CALCULATED BY ', &
         'BOTH RC3JJ AND RC3JM'
@@ -239,17 +239,17 @@ CONTAINS
         WRITE (Lun,fmt2) 'RC3JM VALUE =', jmval
         IF ( diff(1)>0.5*ABS(jjval+jmval)*tol ) WRITE (Lun,'(1X,A)')&
           'DIFFERENCE EXCEEDS ERROR TOLERANCE'
-      ENDIF
-    ENDIF
+      END IF
+    END IF
     IF ( ipass3==0 ) THEN
       IF ( Kprint>=1 ) THEN
         WRITE (Lun,*) ' ***** ***** TEST 3 FAILED ***** *****'
         WRITE (Lun,*)
-      ENDIF
+      END IF
     ELSEIF ( Kprint>=2 ) THEN
       WRITE (Lun,*) ' ***** ***** TEST 3 PASSED ***** *****'
       WRITE (Lun,*)
-    ENDIF
+    END IF
     !
     ! --- TEST 4: COMPARE RC6J VALUES WITH FORMULA
     ipass4 = 1
@@ -265,8 +265,8 @@ CONTAINS
       DO index = 1, INT(l1max-l1min) + 1
         diff(index) = ABS(sixcof(index)-r6j(index))
         IF ( diff(index)>ABS(r6j(index))*tol ) ipass4 = 0
-      ENDDO
-    ENDIF
+      END DO
+    END IF
     IF ( Kprint>=3.OR.(Kprint==2.AND.ipass4==0) ) THEN
       WRITE (Lun,*) ' TEST 4, RECURRENCE IN L1, COMPARE VALUES OF 6J ', &
         'CALCULATED BY RC6J TO'
@@ -284,18 +284,18 @@ CONTAINS
           WRITE (Lun,fmt) l1, sixcof(index), r6j(index)
           IF ( diff(index)>ABS(r6j(index))*tol ) WRITE (Lun,'(1X,A,F5.1)')&
             'DIFFERENCE EXCEEDS ERROR TOLERANCE FOR L1 =', l1
-        ENDDO
-      ENDIF
-    ENDIF
+        END DO
+      END IF
+    END IF
     IF ( ipass4==0 ) THEN
       IF ( Kprint>=1 ) THEN
         WRITE (Lun,*) ' ***** ***** TEST 4 FAILED ***** *****'
         WRITE (Lun,*)
-      ENDIF
+      END IF
     ELSEIF ( Kprint>=2 ) THEN
       WRITE (Lun,*) ' ***** ***** TEST 4 PASSED ***** *****'
       WRITE (Lun,*)
-    ENDIF
+    END IF
     !
     ! --- TEST 5: CHECK INVALID INPUT
     ipass5 = 1
@@ -303,7 +303,7 @@ CONTAINS
       CALL XSETF(0)
     ELSE
       CALL XSETF(-1)
-    ENDIF
+    END IF
     IF ( Kprint>=3 ) WRITE (Lun,*) ' TEST 5, CHECK FOR PROPER HANDLING ', &
       'OF INVALID INPUT'
     ! --- RC3JJ: L2-ABS(M2) OR L3-ABS(M3) LESS THAN ZERO (IER=1)
@@ -451,11 +451,11 @@ CONTAINS
       IF ( Kprint>=1 ) THEN
         WRITE (Lun,*) ' ***** ***** TEST 5 FAILED ***** *****'
         WRITE (Lun,*)
-      ENDIF
+      END IF
     ELSEIF ( Kprint>=2 ) THEN
       WRITE (Lun,*) ' ***** ***** TEST 5 PASSED ***** *****'
       WRITE (Lun,*)
-    ENDIF
+    END IF
     !
     ! --- END OF TESTS
     IF ( (ipass1==0).OR.(ipass2==0).OR.(ipass3==0).OR.(ipass4==0).OR.&
@@ -467,7 +467,7 @@ CONTAINS
       Ipass = 1
       IF ( Kprint>=2 ) WRITE (Lun,99008)
       99008 FORMAT (' *****  QC36J  PASSED ALL TESTS  *****')
-    ENDIF
+    END IF
     99009 FORMAT ('              L2 = ',F5.1,'   L3 = ',F5.1)
     99010 FORMAT (' M1 = ',F5.1,'   M2 = ',F5.1,'   M3 = ',F5.1)
     !
@@ -543,7 +543,7 @@ PROGRAM TEST15
     CALL XSETF(0)
   ELSE
     CALL XSETF(1)
-  ENDIF
+  END IF
   !
   !     Test single precision 3J6J routines
   !
@@ -559,6 +559,6 @@ PROGRAM TEST15
     WRITE (lun,99002) nfail
     99002 FORMAT (/' ************* WARNING -- ',I5,&
       ' TEST(S) FAILED IN PROGRAM TEST15  *************')
-  ENDIF
+  END IF
   STOP
 END PROGRAM TEST15

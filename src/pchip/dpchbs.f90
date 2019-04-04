@@ -160,7 +160,7 @@ SUBROUTINE DPCHBS(N,X,F,D,Incfd,Knotyp,Nknots,T,Bcoef,Ndim,Kord,Ierr)
   !   930514  Corrected problems with dimensioning of arguments and
   !           clarified DESCRIPTION.  (FNF)
   !   930604  Removed  NKNOTS from DPCHKT call list.  (FNF)
-  
+
   !
   !*Internal Notes:
   !
@@ -192,7 +192,7 @@ SUBROUTINE DPCHBS(N,X,F,D,Incfd,Knotyp,Nknots,T,Bcoef,Ndim,Kord,Ierr)
     Ierr = -1
     CALL XERMSG(libnam,subnam,'KNOTYP GREATER THAN 2',Ierr,1)
     RETURN
-  ENDIF
+  END IF
   IF ( Knotyp>=0 ) THEN
     !          Set up knot sequence.
     Nknots = Ndim + 4
@@ -201,7 +201,7 @@ SUBROUTINE DPCHBS(N,X,F,D,Incfd,Knotyp,Nknots,T,Bcoef,Ndim,Kord,Ierr)
     Ierr = -2
     CALL XERMSG(libnam,subnam,'KNOTYP.LT.0 AND NKNOTS.NE.(2*N+4)',Ierr,1)
     RETURN
-  ENDIF
+  END IF
   !
   !  Compute B-spline coefficients.
   !
@@ -215,7 +215,7 @@ SUBROUTINE DPCHBS(N,X,F,D,Incfd,Knotyp,Nknots,T,Bcoef,Ndim,Kord,Ierr)
     !          The following assumes T(2*K+1) = X(K).
     hnew = T(kk+3) - T(kk+1)
     Bcoef(kk) = F(1,k) + hnew*dov3
-  ENDDO
+  END DO
   !
   !  Terminate.
   !

@@ -65,7 +65,7 @@ SUBROUTINE DP1VLU(L,Nder,X,Yfit,Yp,A)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   INTEGER i, ic, ilo, in, inp1, iup, k1, k1i, k2, k3, k3p1, &
     k3pn, k4, k4p1, k4pn, kc, L, lm1, lp1, maxord, n, Nder, ndo, ndp1, nord
   REAL(8) :: A(*), cc, dif, val, X, Yfit, Yp(*)
@@ -89,8 +89,8 @@ SUBROUTINE DP1VLU(L,Nder,X,Yfit,Yp,A)
       IF ( Nder>=1 ) THEN
         DO i = 1, Nder
           Yp(i) = 0.0D0
-        ENDDO
-      ENDIF
+        END DO
+      END IF
       IF ( L>=2 ) THEN
         !
         ! L IS GREATER THAN 1
@@ -104,7 +104,7 @@ SUBROUTINE DP1VLU(L,Nder,X,Yfit,Yp,A)
         iup = k4 + ndp1
         DO i = ilo, iup
           A(i) = 0.0D0
-        ENDDO
+        END DO
         dif = X - A(lp1)
         kc = k2 + lp1
         A(k4p1) = A(kc)
@@ -125,7 +125,7 @@ SUBROUTINE DP1VLU(L,Nder,X,Yfit,Yp,A)
               k3pn = k3p1 + n
               k4pn = k4p1 + n
               Yp(n) = dif*A(k3pn) + n*A(k3pn-1) - A(k1i)*A(k4pn)
-            ENDDO
+            END DO
             !
             ! SAVE VALUES NEEDED FOR NEXT EVALUATION OF RECURRENCE RELATIONS
             !
@@ -134,11 +134,11 @@ SUBROUTINE DP1VLU(L,Nder,X,Yfit,Yp,A)
               k4pn = k4p1 + n
               A(k4pn) = A(k3pn)
               A(k3pn) = Yp(n)
-            ENDDO
-          ENDIF
+            END DO
+          END IF
           A(k4p1) = A(k3p1)
           A(k3p1) = val
-        ENDDO
+        END DO
       ELSEIF ( L==1 ) THEN
         !
         ! L IS 1
@@ -151,14 +151,14 @@ SUBROUTINE DP1VLU(L,Nder,X,Yfit,Yp,A)
         ! L IS 0
         !
         val = A(k2+1)
-      ENDIF
+      END IF
       !
       ! NORMAL RETURN OR ABORT DUE TO ERROR
       !
       Yfit = val
       RETURN
-    ENDIF
-  ENDIF
+    END IF
+  END IF
   !
   WRITE (xern1,'(I8)') L
   WRITE (xern2,'(I8)') nord

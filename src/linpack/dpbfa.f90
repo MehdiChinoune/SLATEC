@@ -83,7 +83,7 @@ SUBROUTINE DPBFA(Abd,Lda,N,M,Info)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   INTEGER Lda, N, M, Info
   REAL(8) :: Abd(Lda,*)
   !
@@ -105,12 +105,12 @@ SUBROUTINE DPBFA(Abd,Lda,N,M,Info)
         s = s + t*t
         ik = ik - 1
         jk = jk + 1
-      ENDDO
-    ENDIF
+      END DO
+    END IF
     s = Abd(M+1,j) - s
     IF ( s<=0.0D0 ) RETURN
     Abd(M+1,j) = SQRT(s)
-  ENDDO
+  END DO
   Info = 0
   RETURN
 END SUBROUTINE DPBFA

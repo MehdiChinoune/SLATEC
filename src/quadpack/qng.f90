@@ -229,14 +229,14 @@ SUBROUTINE QNG(F,A,B,Epsabs,Epsrel,Result,Abserr,Neval,Ier)
           Neval = 43
           DO k = 1, 10
             res43 = res43 + savfun(k)*w43a(k)
-          ENDDO
+          END DO
           DO k = 1, 11
             ipx = ipx + 1
             absc = hlgth*x3(k)
             fval = F(absc+centr) + F(centr-absc)
             res43 = res43 + fval*w43b(k)
             savfun(ipx) = fval
-          ENDDO
+          END DO
           !
           !          TEST FOR CONVERGENCE.
           !
@@ -250,11 +250,11 @@ SUBROUTINE QNG(F,A,B,Epsabs,Epsrel,Result,Abserr,Neval,Ier)
           Neval = 87
           DO k = 1, 21
             res87 = res87 + savfun(k)*w87a(k)
-          ENDDO
+          END DO
           DO k = 1, 22
             absc = hlgth*x4(k)
             res87 = res87 + w87b(k)*(F(absc+centr)+F(centr-absc))
-          ENDDO
+          END DO
           Result = res87*hlgth
           Abserr = ABS((res87-res43)*hlgth)
         CASE DEFAULT
@@ -272,7 +272,7 @@ SUBROUTINE QNG(F,A,B,Epsabs,Epsrel,Result,Abserr,Neval,Ier)
             savfun(k) = fval
             fv1(k) = fval1
             fv2(k) = fval2
-          ENDDO
+          END DO
           ipx = 5
           DO k = 1, 5
             ipx = ipx + 1
@@ -285,7 +285,7 @@ SUBROUTINE QNG(F,A,B,Epsabs,Epsrel,Result,Abserr,Neval,Ier)
             savfun(ipx) = fval
             fv3(k) = fval1
             fv4(k) = fval2
-          ENDDO
+          END DO
           !
           !          TEST FOR CONVERGENCE.
           !
@@ -296,7 +296,7 @@ SUBROUTINE QNG(F,A,B,Epsabs,Epsrel,Result,Abserr,Neval,Ier)
           DO k = 1, 5
             resasc = resasc + w21a(k)*(ABS(fv1(k)-reskh)+ABS(fv2(k)-reskh))&
               + w21b(k)*(ABS(fv3(k)-reskh)+ABS(fv4(k)-reskh))
-          ENDDO
+          END DO
           Abserr = ABS((res21-res10)*hlgth)
           resasc = resasc*dhlgth
       END SELECT
@@ -307,8 +307,8 @@ SUBROUTINE QNG(F,A,B,Epsabs,Epsrel,Result,Abserr,Neval,Ier)
       IF ( Abserr<=MAX(Epsabs,Epsrel*ABS(Result)) ) Ier = 0
       !- **JUMP OUT OF DO-LOOP
       IF ( Ier==0 ) RETURN
-    ENDDO
-  ENDIF
+    END DO
+  END IF
   CALL XERMSG('SLATEC','QNG','ABNORMAL RETURN',Ier,0)
   RETURN
 END SUBROUTINE QNG

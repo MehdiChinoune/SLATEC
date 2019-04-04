@@ -118,9 +118,9 @@ SUBROUTINE DPOPT(Prgopt,Mrelas,Nvars,Info,Csc,Ibasis,Ropt,Intopt,Lopt)
               ,nerr,iopt)
             Info = -nerr
             RETURN
-          ENDIF
-        ENDDO
-      ENDIF
+          END IF
+        END DO
+      END IF
       !
       !     IF USER HAS PROVIDED SIZE PARAMETERS, MAKE SURE THEY ARE ORDERED
       !     AND POSITIVE.
@@ -131,8 +131,8 @@ SUBROUTINE DPOPT(Prgopt,Mrelas,Nvars,Info,Csc,Ibasis,Ropt,Intopt,Lopt)
             'IN DSPLP, SIZE PARAMETERS FOR MATRIX MUST BE SMALLEST AND LARGEST MAGNITUDES OF NONZERO ENTRIES.',nerr,iopt)
           Info = -nerr
           RETURN
-        ENDIF
-      ENDIF
+        END IF
+      END IF
       !
       !     THE NUMBER OF ITERATIONS OF REV. SIMPLEX STEPS MUST BE POSITIVE.
       IF ( mxitlp>0 ) THEN
@@ -172,7 +172,7 @@ SUBROUTINE DPOPT(Prgopt,Mrelas,Nvars,Info,Csc,Ibasis,Ropt,Intopt,Lopt)
           'IN DSPLP, THE NUMBER OF REVISED SIMPLEX STEPS BETWEEN CHECK-POINTS MUST BE POSITIVE.',nerr,iopt)
         Info = -nerr
         RETURN
-      ENDIF
+      END IF
     ELSEIF ( ictopt<=ictmax ) THEN
       key = INT( Prgopt(last+1) )
       !
@@ -243,9 +243,9 @@ SUBROUTINE DPOPT(Prgopt,Mrelas,Nvars,Info,Csc,Ibasis,Ropt,Intopt,Lopt)
           DO WHILE ( (n20043-i)>=0 )
             Ibasis(i) = INT( Prgopt(last+2+i) )
             i = i + 1
-          ENDDO
+          END DO
           lds = Mrelas + 3
-        ENDIF
+        END IF
         !
         !     IF KEY = 60,  SEE IF USER HAS PROVIDED SCALING OF COLUMNS.
       ELSEIF ( key==60 ) THEN
@@ -258,9 +258,9 @@ SUBROUTINE DPOPT(Prgopt,Mrelas,Nvars,Info,Csc,Ibasis,Ropt,Intopt,Lopt)
           DO WHILE ( (n20053-j)>=0 )
             Csc(j) = ABS(Prgopt(last+2+j))
             j = j + 1
-          ENDDO
+          END DO
           lds = Nvars + 3
-        ENDIF
+        END IF
         !
         !     IF KEY = 61,  SEE IF USER HAS PROVIDED SCALING OF COSTS.
       ELSEIF ( key==61 ) THEN
@@ -275,7 +275,7 @@ SUBROUTINE DPOPT(Prgopt,Mrelas,Nvars,Info,Csc,Ibasis,Ropt,Intopt,Lopt)
         IF ( sizeup ) THEN
           asmall = Prgopt(last+3)
           abig = Prgopt(last+4)
-        ENDIF
+        END IF
         lds = 5
         !
         !     IF KEY = 63, SEE IF TOLERANCE FOR LINEAR SYSTEM RESIDUAL ERROR IS
@@ -302,7 +302,7 @@ SUBROUTINE DPOPT(Prgopt,Mrelas,Nvars,Info,Csc,Ibasis,Ropt,Intopt,Lopt)
         IF ( Prgopt(last+2)/=zero ) THEN
           npp = INT( MAX(Prgopt(last+3),one) )
           npp = MIN(npp,Nvars)
-        ENDIF
+        END IF
         lds = 4
         !     IF KEY = 67, CHANGE THE TUNING PARAMETER TO APPLY TO THE ERROR
         !     ESTIMATES FOR THE PRIMAL AND DUAL SYSTEMS.
@@ -317,7 +317,7 @@ SUBROUTINE DPOPT(Prgopt,Mrelas,Nvars,Info,Csc,Ibasis,Ropt,Intopt,Lopt)
       ELSEIF ( key==69 ) THEN
         IF ( Prgopt(last+2)/=zero ) tolabs = Prgopt(last+3)
         lds = 4
-      ENDIF
+      END IF
       !
       ictopt = ictopt + 1
       last = next
@@ -328,8 +328,8 @@ SUBROUTINE DPOPT(Prgopt,Mrelas,Nvars,Info,Csc,Ibasis,Ropt,Intopt,Lopt)
         'IN DSPLP, OPTION ARRAY PROCESSING IS CYCLING.',nerr,iopt)
       Info = -nerr
       RETURN
-    ENDIF
-  ENDDO
+    END IF
+  END DO
   nerr = 19
   CALL XERMSG('SLATEC','DPOPT',&
     'IN DSPLP, FILE NUMBERS FOR SAVED DATA AND MATRIX PAGES MUST BE POSITIVE AND NOT EQUAL.',nerr,iopt)

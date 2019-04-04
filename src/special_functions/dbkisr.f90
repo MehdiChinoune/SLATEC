@@ -45,8 +45,8 @@ SUBROUTINE DBKISR(X,N,Sum,Ierr)
       DO i = 1, N
         pol = -pol*X + c(i)
         pr = pr*X/i
-      ENDDO
-    ENDIF
+      END DO
+    END IF
     hx = X*0.5D0
     hxs = hx*hx
     xln = LOG(hx)
@@ -69,7 +69,7 @@ SUBROUTINE DBKISR(X,N,Sum,Ierr)
       tkp = tkp + 2.0D0
       bk = bk + tkp
       fk = fk + 1.0D0
-    ENDDO
+    END DO
     Ierr = 2
     RETURN
     !-----------------------------------------------------------------------
@@ -82,7 +82,7 @@ SUBROUTINE DBKISR(X,N,Sum,Ierr)
     hx = X*0.5D0
     Sum = DPSIXN(1) - LOG(hx)
     RETURN
-  ENDIF
+  END IF
   100  Sum = (Sum*hxs+DPSIXN(np)-xln)*pr
   IF ( N==1 ) Sum = -Sum
   Sum = pol + Sum

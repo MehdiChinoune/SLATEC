@@ -178,12 +178,12 @@ SUBROUTINE DQK15I(F,Boun,Inf,A,B,Result,Abserr,Resabs,Resasc)
     resg = resg + wg(j)*fsum
     resk = resk + wgk(j)*fsum
     Resabs = Resabs + wgk(j)*(ABS(fval1)+ABS(fval2))
-  ENDDO
+  END DO
   reskh = resk*0.5D+00
   Resasc = wgk(8)*ABS(fc-reskh)
   DO j = 1, 7
     Resasc = Resasc + wgk(j)*(ABS(fv1(j)-reskh)+ABS(fv2(j)-reskh))
-  ENDDO
+  END DO
   Result = resk*hlgth
   Resasc = Resasc*hlgth
   Resabs = Resabs*hlgth

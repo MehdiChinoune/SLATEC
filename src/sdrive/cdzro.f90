@@ -60,7 +60,7 @@ SUBROUTINE CDZRO(Ae,F,H,N,Nq,Iroot,Re,T,Yh,Uround,B,C,Fb,Fc,Y)
   !* REVISION HISTORY  (YYMMDD)
   !   790601  DATE WRITTEN
   !   900329  Initial submission to SLATEC.
-  
+
   INTEGER ic, Iroot, kount, N, Nq
   COMPLEX Y(*), Yh(N,*)
   REAL a, acbs, acmb, Ae, B, C, cmb, er, F, fa, Fb, Fc, H, p, &
@@ -82,7 +82,7 @@ SUBROUTINE CDZRO(Ae,F,H,N,Nq,Iroot,Re,T,Yh,Uround,B,C,Fb,Fc,Y)
     Fb = Fc
     C = a
     Fc = fa
-  ENDIF
+  END IF
   cmb = 0.5E0*(C-B)
   acmb = ABS(cmb)
   tol = rw*ABS(B) + Ae
@@ -97,7 +97,7 @@ SUBROUTINE CDZRO(Ae,F,H,N,Nq,Iroot,Re,T,Yh,Uround,B,C,Fb,Fc,Y)
   IF ( p<0.E0 ) THEN
     p = -p
     q = -q
-  ENDIF
+  END IF
   !                          Update A and check for satisfactory reduction
   !                          in the size of our bounding interval.
   a = B
@@ -108,9 +108,9 @@ SUBROUTINE CDZRO(Ae,F,H,N,Nq,Iroot,Re,T,Yh,Uround,B,C,Fb,Fc,Y)
       !                                                                 Bisect
       B = 0.5E0*(C+B)
       GOTO 200
-    ENDIF
+    END IF
     ic = 0
-  ENDIF
+  END IF
   acbs = acmb
   !                                            Test for too small a change
   IF ( p<=ABS(q)*tol ) THEN
@@ -124,7 +124,7 @@ SUBROUTINE CDZRO(Ae,F,H,N,Nq,Iroot,Re,T,Yh,Uround,B,C,Fb,Fc,Y)
   ELSE
     !                                                                 Bisect
     B = 0.5E0*(C+B)
-  ENDIF
+  END IF
   !                                             Have completed computation
   !                                             for new iterate B.
   200  CALL CDNTP(H,0,N,Nq,T,B,Yh,Y)
@@ -138,6 +138,6 @@ SUBROUTINE CDZRO(Ae,F,H,N,Nq,Iroot,Re,T,Yh,Uround,B,C,Fb,Fc,Y)
   IF ( SIGN(1.0E0,Fb)==SIGN(1.0E0,Fc) ) THEN
     C = a
     Fc = fa
-  ENDIF
+  END IF
   GOTO 100
 END SUBROUTINE CDZRO

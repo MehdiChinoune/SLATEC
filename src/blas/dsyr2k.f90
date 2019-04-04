@@ -172,7 +172,7 @@ SUBROUTINE DSYR2K(Uplo,Trans,N,K,Alpha,A,Lda,B,Ldb,Beta,C,Ldc)
     nrowa = N
   ELSE
     nrowa = K
-  ENDIF
+  END IF
   upper = LSAME(Uplo,'U')
   !
   info = 0
@@ -191,11 +191,11 @@ SUBROUTINE DSYR2K(Uplo,Trans,N,K,Alpha,A,Lda,B,Ldb,Beta,C,Ldc)
     info = 9
   ELSEIF ( Ldc<MAX(1,N) ) THEN
     info = 12
-  ENDIF
+  END IF
   IF ( info/=0 ) THEN
     CALL XERBLA('DSYR2K',info)
     RETURN
-  ENDIF
+  END IF
   !
   !     Quick return if possible.
   !
@@ -209,30 +209,30 @@ SUBROUTINE DSYR2K(Uplo,Trans,N,K,Alpha,A,Lda,B,Ldb,Beta,C,Ldc)
         DO j = 1, N
           DO i = 1, j
             C(i,j) = ZERO
-          ENDDO
-        ENDDO
+          END DO
+        END DO
       ELSE
         DO j = 1, N
           DO i = 1, j
             C(i,j) = Beta*C(i,j)
-          ENDDO
-        ENDDO
-      ENDIF
+          END DO
+        END DO
+      END IF
     ELSEIF ( Beta==ZERO ) THEN
       DO j = 1, N
         DO i = j, N
           C(i,j) = ZERO
-        ENDDO
-      ENDDO
+        END DO
+      END DO
     ELSE
       DO j = 1, N
         DO i = j, N
           C(i,j) = Beta*C(i,j)
-        ENDDO
-      ENDDO
-    ENDIF
+        END DO
+      END DO
+    END IF
     RETURN
-  ENDIF
+  END IF
   !
   !     Start the operations.
   !
@@ -245,44 +245,44 @@ SUBROUTINE DSYR2K(Uplo,Trans,N,K,Alpha,A,Lda,B,Ldb,Beta,C,Ldc)
         IF ( Beta==ZERO ) THEN
           DO i = 1, j
             C(i,j) = ZERO
-          ENDDO
+          END DO
         ELSEIF ( Beta/=ONE ) THEN
           DO i = 1, j
             C(i,j) = Beta*C(i,j)
-          ENDDO
-        ENDIF
+          END DO
+        END IF
         DO l = 1, K
           IF ( (A(j,l)/=ZERO).OR.(B(j,l)/=ZERO) ) THEN
             temp1 = Alpha*B(j,l)
             temp2 = Alpha*A(j,l)
             DO i = 1, j
               C(i,j) = C(i,j) + A(i,l)*temp1 + B(i,l)*temp2
-            ENDDO
-          ENDIF
-        ENDDO
-      ENDDO
+            END DO
+          END IF
+        END DO
+      END DO
     ELSE
       DO j = 1, N
         IF ( Beta==ZERO ) THEN
           DO i = j, N
             C(i,j) = ZERO
-          ENDDO
+          END DO
         ELSEIF ( Beta/=ONE ) THEN
           DO i = j, N
             C(i,j) = Beta*C(i,j)
-          ENDDO
-        ENDIF
+          END DO
+        END IF
         DO l = 1, K
           IF ( (A(j,l)/=ZERO).OR.(B(j,l)/=ZERO) ) THEN
             temp1 = Alpha*B(j,l)
             temp2 = Alpha*A(j,l)
             DO i = j, N
               C(i,j) = C(i,j) + A(i,l)*temp1 + B(i,l)*temp2
-            ENDDO
-          ENDIF
-        ENDDO
-      ENDDO
-    ENDIF
+            END DO
+          END IF
+        END DO
+      END DO
+    END IF
     !
     !        Form  C := alpha*A'*B + alpha*B'*A + C.
     !
@@ -294,14 +294,14 @@ SUBROUTINE DSYR2K(Uplo,Trans,N,K,Alpha,A,Lda,B,Ldb,Beta,C,Ldc)
         DO l = 1, K
           temp1 = temp1 + A(l,i)*B(l,j)
           temp2 = temp2 + B(l,i)*A(l,j)
-        ENDDO
+        END DO
         IF ( Beta==ZERO ) THEN
           C(i,j) = Alpha*temp1 + Alpha*temp2
         ELSE
           C(i,j) = Beta*C(i,j) + Alpha*temp1 + Alpha*temp2
-        ENDIF
-      ENDDO
-    ENDDO
+        END IF
+      END DO
+    END DO
   ELSE
     DO j = 1, N
       DO i = j, N
@@ -310,15 +310,15 @@ SUBROUTINE DSYR2K(Uplo,Trans,N,K,Alpha,A,Lda,B,Ldb,Beta,C,Ldc)
         DO l = 1, K
           temp1 = temp1 + A(l,i)*B(l,j)
           temp2 = temp2 + B(l,i)*A(l,j)
-        ENDDO
+        END DO
         IF ( Beta==ZERO ) THEN
           C(i,j) = Alpha*temp1 + Alpha*temp2
         ELSE
           C(i,j) = Beta*C(i,j) + Alpha*temp1 + Alpha*temp2
-        ENDIF
-      ENDDO
-    ENDDO
-  ENDIF
+        END IF
+      END DO
+    END DO
+  END IF
   !
   !
   !     End of DSYR2K.

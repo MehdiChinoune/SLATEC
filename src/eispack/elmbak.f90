@@ -76,7 +76,7 @@ SUBROUTINE ELMBAK(Nm,Low,Igh,A,Int,M,Z)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   !
   INTEGER i, j, M, la, mm, mp, Nm, Igh, kp1, Low, mp1
   REAL A(Nm,*), Z(Nm,*)
@@ -99,10 +99,10 @@ SUBROUTINE ELMBAK(Nm,Low,Igh,A,Int,M,Z)
             !
             DO j = 1, M
               Z(i,j) = Z(i,j) + x*Z(mp,j)
-            ENDDO
-          ENDIF
+            END DO
+          END IF
           !
-        ENDDO
+        END DO
         !
         i = Int(mp)
         IF ( i/=mp ) THEN
@@ -111,11 +111,11 @@ SUBROUTINE ELMBAK(Nm,Low,Igh,A,Int,M,Z)
             x = Z(i,j)
             Z(i,j) = Z(mp,j)
             Z(mp,j) = x
-          ENDDO
-        ENDIF
+          END DO
+        END IF
         !
-      ENDDO
-    ENDIF
-  ENDIF
+      END DO
+    END IF
+  END IF
   !
 END SUBROUTINE ELMBAK

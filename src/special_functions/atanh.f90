@@ -57,7 +57,7 @@ REAL FUNCTION ATANH(X)
     dxrel = SQRT(R1MACH(4))
     sqeps = SQRT(3.0*R1MACH(3))
     first = .FALSE.
-  ENDIF
+  END IF
   !
   y = ABS(X)
   IF ( y>=1.0 ) CALL XERMSG('SLATEC','ATANH','ABS(X) GE 1',2,2)

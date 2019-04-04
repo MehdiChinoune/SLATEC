@@ -143,9 +143,9 @@ SUBROUTINE TRIDIB(N,Eps1,D,E,E2,Lb,Ub,M11,M,W,Ind,Ierr,Rv4,Rv5)
       s1 = ABS(D(i)) + ABS(D(i-1))
       s2 = s1 + ABS(E(i))
       IF ( s2>s1 ) CYCLE
-    ENDIF
+    END IF
     E2(i) = 0.0E0
-  ENDDO
+  END DO
   !
   x1 = MAX(ABS(xu),ABS(x0))*machep*N
   xu = xu - x1
@@ -171,7 +171,7 @@ SUBROUTINE TRIDIB(N,Eps1,D,E,E2,Lb,Ub,M11,M,W,Ind,Ierr,Rv4,Rv5)
     x0 = t2
     isturm = 2
     GOTO 100
-  ENDIF
+  END IF
   300  q = 0
   r = 0
   !     .......... ESTABLISH AND PROCESS NEXT SUBMATRIX, REFINING
@@ -191,11 +191,11 @@ SUBROUTINE TRIDIB(N,Eps1,D,E,E2,Lb,Ub,M11,M,W,Ind,Ierr,Rv4,Rv5)
     IF ( q/=N ) THEN
       u = ABS(E(q+1))
       v = E2(q+1)
-    ENDIF
+    END IF
     xu = MIN(D(q)-(x1+u),xu)
     x0 = MAX(D(q)+(x1+u),x0)
     IF ( v==0.0E0 ) EXIT
-  ENDDO
+  END DO
   !
   x1 = MAX(ABS(xu),ABS(x0))*machep
   IF ( Eps1<=0.0E0 ) Eps1 = -x1
@@ -213,7 +213,7 @@ SUBROUTINE TRIDIB(N,Eps1,D,E,E2,Lb,Ub,M11,M,W,Ind,Ierr,Rv4,Rv5)
     m2 = p
     Rv5(p) = D(p)
     GOTO 800
-  ENDIF
+  END IF
   500  xu = Lb
   !     .......... FOR I=K STEP -1 UNTIL M1 DO -- ..........
   DO ii = m1, k
@@ -221,8 +221,8 @@ SUBROUTINE TRIDIB(N,Eps1,D,E,E2,Lb,Ub,M11,M,W,Ind,Ierr,Rv4,Rv5)
     IF ( xu<Rv4(i) ) THEN
       xu = Rv4(i)
       EXIT
-    ENDIF
-  ENDDO
+    END IF
+  END DO
   !
   IF ( x0>Rv5(k) ) x0 = Rv5(k)
   !     .......... NEXT BISECTION STEP ..........
@@ -235,7 +235,7 @@ SUBROUTINE TRIDIB(N,Eps1,D,E,E2,Lb,Ub,M11,M,W,Ind,Ierr,Rv4,Rv5)
     k = k - 1
     IF ( k<m1 ) GOTO 800
     GOTO 500
-  ENDIF
+  END IF
   700 CONTINUE
   DO
     !     .......... IN-LINE PROCEDURE FOR STURM SEQUENCE ..........
@@ -248,10 +248,10 @@ SUBROUTINE TRIDIB(N,Eps1,D,E,E2,Lb,Ub,M11,M,W,Ind,Ierr,Rv4,Rv5)
       ELSE
         v = ABS(E(i))/machep
         IF ( E2(i)==0.0E0 ) v = 0.0E0
-      ENDIF
+      END IF
       u = D(i) - x1 - v
       IF ( u<0.0E0 ) s = s + 1
-    ENDDO
+    END DO
     !
     SELECT CASE (isturm)
       CASE (1)
@@ -263,7 +263,7 @@ SUBROUTINE TRIDIB(N,Eps1,D,E,E2,Lb,Ub,M11,M,W,Ind,Ierr,Rv4,Rv5)
           GOTO 200
         ELSE
           x0 = x1
-        ENDIF
+        END IF
         GOTO 100
       CASE (2)
         IF ( s<m22 ) THEN
@@ -273,7 +273,7 @@ SUBROUTINE TRIDIB(N,Eps1,D,E,E2,Lb,Ub,M11,M,W,Ind,Ierr,Rv4,Rv5)
           GOTO 300
         ELSE
           x0 = x1
-        ENDIF
+        END IF
         GOTO 100
       CASE (3)
         m1 = s + 1
@@ -289,7 +289,7 @@ SUBROUTINE TRIDIB(N,Eps1,D,E,E2,Lb,Ub,M11,M,W,Ind,Ierr,Rv4,Rv5)
         DO i = m1, m2
           Rv5(i) = Ub
           Rv4(i) = Lb
-        ENDDO
+        END DO
         !     .......... LOOP FOR K-TH EIGENVALUE
         !                FOR K=M2 STEP -1 UNTIL M1 DO --
         !                (-DO- NOT USED TO LEGALIZE -COMPUTED GO TO-) ..........
@@ -306,11 +306,11 @@ SUBROUTINE TRIDIB(N,Eps1,D,E,E2,Lb,Ub,M11,M,W,Ind,Ierr,Rv4,Rv5)
             IF ( Rv5(s)>x1 ) Rv5(s) = x1
           ELSE
             Rv4(m1) = x1
-          ENDIF
-        ENDIF
+          END IF
+        END IF
         GOTO 600
     END SELECT
-  ENDDO
+  END DO
   !     .......... ORDER EIGENVALUES TAGGED WITH THEIR
   !                SUBMATRIX ASSOCIATIONS ..........
   800  s = r
@@ -330,14 +330,14 @@ SUBROUTINE TRIDIB(N,Eps1,D,E,E2,Lb,Ub,M11,M,W,Ind,Ierr,Rv4,Rv5)
           i = l + s - ii
           W(i+1) = W(i)
           Ind(i+1) = Ind(i)
-        ENDDO
-      ENDIF
-    ENDIF
+        END DO
+      END IF
+    END IF
     !
     W(l) = Rv5(k)
     Ind(l) = tag
     k = k + 1
-  ENDDO
+  END DO
   !
   900 CONTINUE
   IF ( q<N ) GOTO 400

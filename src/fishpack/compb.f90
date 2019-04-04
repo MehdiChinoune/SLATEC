@@ -44,7 +44,7 @@ SUBROUTINE COMPB(N,Ierror,An,Bn,Cn,B,Ah,Bh)
     arg = An(j)*Cn(j-1)
     IF ( arg<0 ) GOTO 200
     B(j) = SIGN(SQRT(arg),An(j))
-  ENDDO
+  END DO
   CNV = EPS*bnorm
   if = 2**K
   kdo = K - 1
@@ -64,19 +64,19 @@ SUBROUTINE COMPB(N,Ierror,An,Bn,Cn,B,Ah,Bh)
         ls = ls + 1
         Bh(ls) = Bn(j)
         Ah(ls) = B(j)
-      ENDDO
+      END DO
       CALL TEVLS(nb,Bh,Ah,Ierror)
       IF ( Ierror/=0 ) GOTO 100
       lh = ib - 1
       DO j = 1, nb
         lh = lh + 1
         B(lh) = -Bh(j)
-      ENDDO
-    ENDDO
-  ENDDO
+      END DO
+    END DO
+  END DO
   DO j = 1, NM
     B(j) = -Bn(j)
-  ENDDO
+  END DO
   IF ( NPP==0 ) THEN
     nmp = NM + 1
     nb = NM + nmp
@@ -87,7 +87,7 @@ SUBROUTINE COMPB(N,Ierror,An,Bn,Cn,B,Ah,Bh)
       IF ( arg<0 ) GOTO 200
       Bh(j) = SIGN(SQRT(arg),-An(l1))
       Ah(j) = -Bn(l1)
-    ENDDO
+    END DO
     CALL TEVLS(nb,Ah,Bh,Ierror)
     IF ( Ierror/=0 ) GOTO 100
     CALL INDXB(if,K-1,j2,lh)
@@ -108,13 +108,13 @@ SUBROUTINE COMPB(N,Ierror,An,Bn,Cn,B,Ah,Bh)
         j2 = j2 + 1
         lh = lh + 1
         IF ( j2>n2m2 ) EXIT
-      ENDIF
-    ENDDO
+      END IF
+    END DO
     B(lh) = B(n2m2+1)
     CALL INDXB(if,K-1,j1,j2)
     j2 = j1 + nmp + nmp
     CALL PPADD(NM+1,Ierror,An,Cn,Bc(j1),B(j1),B(j2))
-  ENDIF
+  END IF
   RETURN
   100  Ierror = 4
   RETURN

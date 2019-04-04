@@ -475,23 +475,23 @@ SUBROUTINE DGMRES(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,&
             nms = nms + 1
           ELSE
             CALL DCOPY(N,B,1,Rgwk(lr),1)
-          ENDIF
+          END IF
           IF ( jscal==2.OR.jscal==3 ) THEN
             sum = 0
             DO i = 1, N
               sum = sum + (Rgwk(lr-1+i)*Sb(i))**2
-            ENDDO
+            END DO
             bnrm = SQRT(sum)
           ELSE
             bnrm = DNRM2(N,Rgwk(lr),1)
-          ENDIF
+          END IF
           !   ------------------------------------------------------------------
           !         Calculate initial residual.
           !   ------------------------------------------------------------------
           CALL MATVEC(N,X,Rgwk(lr),Nelt,Ia,Ja,A,Isym)
           DO i = 1, N
             Rgwk(lr-1+i) = B(i) - Rgwk(lr-1+i)
-          ENDDO
+          END DO
           !   ------------------------------------------------------------------
           !         If performing restarting, then load the residual into the
           !         correct location in the RGWK array.
@@ -516,12 +516,12 @@ SUBROUTINE DGMRES(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,&
             lzm1 = lz - 1
             DO i = 1, N
               X(i) = X(i) + Rgwk(lzm1+i)
-            ENDDO
+            END DO
             IF ( iflag/=0 ) THEN
               IF ( iflag==1 ) THEN
                 nrsts = nrsts + 1
                 CYCLE
-              ENDIF
+              END IF
               IF ( iflag==2 ) THEN
                 !
                 !         GMRES failed to reduce last residual in MAXL iterations.
@@ -530,8 +530,8 @@ SUBROUTINE DGMRES(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,&
                 Rgwk(1) = rhol
                 Ierr = 2
                 RETURN
-              ENDIF
-            ENDIF
+              END IF
+            END IF
             !   ------------------------------------------------------------------
             !         All returns are made through this section.
             !   ------------------------------------------------------------------
@@ -541,17 +541,17 @@ SUBROUTINE DGMRES(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,&
             Rgwk(1) = rhol
             Ierr = 0
             RETURN
-          ENDDO
+          END DO
           !
           !         Max number((NRMAX+1)*MAXL) of linear iterations performed.
           Igwk(7) = nms
           Rgwk(1) = rhol
           Ierr = 1
           RETURN
-        ENDIF
-      ENDIF
-    ENDIF
-  ENDIF
+        END IF
+      END IF
+    END IF
+  END IF
   !         Error return.  Inconsistent ITOL and JPRE values.
   Err = Tol
   Ierr = -2

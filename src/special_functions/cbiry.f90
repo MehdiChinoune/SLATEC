@@ -210,7 +210,7 @@ SUBROUTINE CBIRY(Z,Id,Kode,Bi,Ierr)
         bk = REAL(zta)
         ck = -ABS(bk)
         zta = CMPLX(ck,ak)
-      ENDIF
+      END IF
       IF ( zi==0.0E0.AND.zr<=0.0E0 ) zta = CMPLX(0.0E0,ak)
       aa = REAL(zta)
       IF ( Kode/=2 ) THEN
@@ -222,14 +222,14 @@ SUBROUTINE CBIRY(Z,Id,Kode,Bi,Ierr)
           bb = bb + 0.25E0*ALOG(az)
           sfac = tol
           IF ( bb>elim ) GOTO 50
-        ENDIF
-      ENDIF
+        END IF
+      END IF
       fmr = 0.0E0
       IF ( aa<0.0E0.OR.zr<=0.0E0 ) THEN
         fmr = pi
         IF ( zi<0.0E0 ) fmr = -pi
         zta = -zta
-      ENDIF
+      END IF
       !-----------------------------------------------------------------------
       !     AA=FACTOR FOR ANALYTIC CONTINUATION OF I(FNU,ZTA)
       !     KODE=2 RETURNS EXP(-ABS(XZTA))*I(FNU,ZTA) FROM CBINU
@@ -257,12 +257,12 @@ SUBROUTINE CBIRY(Z,Id,Kode,Bi,Ierr)
           s1 = csq*s1
           Bi = s1*CMPLX(1.0E0/sfac,0.0E0)
           RETURN
-        ENDIF
+        END IF
       ELSEIF ( nz/=(-1) ) THEN
         GOTO 100
-      ENDIF
-    ENDIF
-    50     nz = 0
+      END IF
+    END IF
+    50  nz = 0
     Ierr = 2
     RETURN
   ELSE
@@ -306,8 +306,8 @@ SUBROUTINE CBIRY(Z,Id,Kode,Bi,Ierr)
           IF ( atrm<tol*ad ) EXIT
           ak = ak + 18.0E0
           bk = bk + 18.0E0
-        ENDDO
-      ENDIF
+        END DO
+      END IF
       IF ( Id==1 ) THEN
         Bi = s2*CMPLX(c2,0.0E0)
         IF ( az>tol ) Bi = Bi + Z*Z*s1*CMPLX(c1/(1.0E0+fid),0.0E0)
@@ -325,9 +325,9 @@ SUBROUTINE CBIRY(Z,Id,Kode,Bi,Ierr)
         aa = -ABS(aa)
         Bi = Bi*CMPLX(EXP(aa),0.0E0)
         RETURN
-      ENDIF
-    ENDIF
-  ENDIF
+      END IF
+    END IF
+  END IF
   100  nz = 0
   Ierr = 5
   RETURN

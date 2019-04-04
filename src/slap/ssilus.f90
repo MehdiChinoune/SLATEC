@@ -167,7 +167,7 @@ SUBROUTINE SSILUS(N,Nelt,Ia,Ja,A,Isym,Nl,Il,Jl,L,Dinv,Nu,Iu,Ju,U,Nrow,Ncol)
   !   920511  Added complete declaration section.  (WRB)
   !   920929  Corrected format of reference.  (FNF)
   !   930701  Updated CATEGORY section.  (FNF, WRB)
-  
+
   !     .. Scalar Arguments ..
   INTEGER Isym, N, Nelt, Nl, Nu
   !     .. Array Arguments ..
@@ -184,7 +184,7 @@ SUBROUTINE SSILUS(N,Nelt,Ia,Ja,A,Isym,Nl,Il,Jl,L,Dinv,Nu,Iu,Ju,U,Nrow,Ncol)
   DO i = 1, N
     Nrow(i) = 0
     Ncol(i) = 0
-  ENDDO
+  END DO
   !VD$R NOCONCUR
   !VD$R NOVECTOR
   DO icol = 1, N
@@ -197,10 +197,10 @@ SUBROUTINE SSILUS(N,Nelt,Ia,Ja,A,Isym,Nl,Il,Jl,L,Dinv,Nu,Iu,Ju,U,Nrow,Ncol)
         ELSE
           Nrow(Ia(j)) = Nrow(Ia(j)) + 1
           IF ( Isym/=0 ) Ncol(Ia(j)) = Ncol(Ia(j)) + 1
-        ENDIF
-      ENDDO
-    ENDIF
-  ENDDO
+        END IF
+      END DO
+    END IF
+  END DO
   Ju(1) = 1
   Il(1) = 1
   DO icol = 1, N
@@ -208,7 +208,7 @@ SUBROUTINE SSILUS(N,Nelt,Ia,Ja,A,Isym,Nl,Il,Jl,L,Dinv,Nu,Iu,Ju,U,Nrow,Ncol)
     Ju(icol+1) = Ju(icol) + Ncol(icol)
     Nrow(icol) = Il(icol)
     Ncol(icol) = Ju(icol)
-  ENDDO
+  END DO
   !
   !         Copy the matrix A into the L and U structures.
   DO icol = 1, N
@@ -233,11 +233,11 @@ SUBROUTINE SSILUS(N,Nelt,Ia,Ja,A,Isym,Nl,Il,Jl,L,Dinv,Nu,Iu,Ju,U,Nrow,Ncol)
             Iu(Ncol(irow)) = icol
             U(Ncol(irow)) = A(j)
             Ncol(irow) = Ncol(irow) + 1
-          ENDIF
-        ENDIF
-      ENDDO
-    ENDIF
-  ENDDO
+          END IF
+        END IF
+      END DO
+    END IF
+  END DO
   !
   !         Sort the rows of L and the columns of U.
   DO k = 2, N
@@ -253,10 +253,10 @@ SUBROUTINE SSILUS(N,Nelt,Ia,Ja,A,Isym,Nl,Il,Jl,L,Dinv,Nu,Iu,Ju,U,Nrow,Ncol)
             temp = U(j)
             U(j) = U(i)
             U(i) = temp
-          ENDIF
-        ENDDO
-      ENDDO
-    ENDIF
+          END IF
+        END DO
+      END DO
+    END IF
     ibgn = Il(k)
     iend = Il(k+1) - 1
     IF ( ibgn<iend ) THEN
@@ -269,11 +269,11 @@ SUBROUTINE SSILUS(N,Nelt,Ia,Ja,A,Isym,Nl,Il,Jl,L,Dinv,Nu,Iu,Ju,U,Nrow,Ncol)
             temp = L(i)
             L(i) = L(j)
             L(j) = temp
-          ENDIF
-        ENDDO
-      ENDDO
-    ENDIF
-  ENDDO
+          END IF
+        END DO
+      END DO
+    END IF
+  END DO
   !
   !         Perform the incomplete LDU decomposition.
   DO i = 2, N
@@ -300,7 +300,7 @@ SUBROUTINE SSILUS(N,Nelt,Ia,Ja,A,Isym,Nl,Il,Jl,L,Dinv,Nu,Iu,Ju,U,Nrow,Ncol)
                 IF ( indxr1<=indxr2 ) THEN
                   kr = Jl(indxr1)
                   CYCLE
-                ENDIF
+                END IF
               ELSEIF ( kr==kc ) THEN
                 L(indx) = L(indx) - L(indxr1)*Dinv(kc)*U(indxc1)
                 indxr1 = indxr1 + 1
@@ -308,15 +308,15 @@ SUBROUTINE SSILUS(N,Nelt,Ia,Ja,A,Isym,Nl,Il,Jl,L,Dinv,Nu,Iu,Ju,U,Nrow,Ncol)
                 IF ( indxr1<=indxr2.AND.indxc1<=indxc2 ) THEN
                   kr = Jl(indxr1)
                   CYCLE
-                ENDIF
-              ENDIF
+                END IF
+              END IF
               EXIT
-            ENDDO
-          ENDIF
-        ENDIF
+            END DO
+          END IF
+        END IF
         L(indx) = L(indx)/Dinv(Jl(indx))
-      ENDDO
-    ENDIF
+      END DO
+    END IF
     !
     !         I-th column of U
     indx1 = Ju(i)
@@ -340,7 +340,7 @@ SUBROUTINE SSILUS(N,Nelt,Ia,Ja,A,Isym,Nl,Il,Jl,L,Dinv,Nu,Iu,Ju,U,Nrow,Ncol)
                 IF ( indxr1<=indxr2 ) THEN
                   kr = Jl(indxr1)
                   CYCLE
-                ENDIF
+                END IF
               ELSEIF ( kr==kc ) THEN
                 U(indx) = U(indx) - L(indxr1)*Dinv(kc)*U(indxc1)
                 indxr1 = indxr1 + 1
@@ -348,15 +348,15 @@ SUBROUTINE SSILUS(N,Nelt,Ia,Ja,A,Isym,Nl,Il,Jl,L,Dinv,Nu,Iu,Ju,U,Nrow,Ncol)
                 IF ( indxr1<=indxr2.AND.indxc1<=indxc2 ) THEN
                   kr = Jl(indxr1)
                   CYCLE
-                ENDIF
-              ENDIF
+                END IF
+              END IF
               EXIT
-            ENDDO
-          ENDIF
-        ENDIF
+            END DO
+          END IF
+        END IF
         U(indx) = U(indx)/Dinv(Iu(indx))
-      ENDDO
-    ENDIF
+      END DO
+    END IF
     !
     !         I-th diagonal element
     indxr1 = Il(i)
@@ -376,7 +376,7 @@ SUBROUTINE SSILUS(N,Nelt,Ia,Ja,A,Isym,Nl,Il,Jl,L,Dinv,Nu,Iu,Ju,U,Nrow,Ncol)
             IF ( indxr1<=indxr2 ) THEN
               kr = Jl(indxr1)
               CYCLE
-            ENDIF
+            END IF
           ELSEIF ( kr==kc ) THEN
             Dinv(i) = Dinv(i) - L(indxr1)*Dinv(kc)*U(indxc1)
             indxr1 = indxr1 + 1
@@ -384,20 +384,20 @@ SUBROUTINE SSILUS(N,Nelt,Ia,Ja,A,Isym,Nl,Il,Jl,L,Dinv,Nu,Iu,Ju,U,Nrow,Ncol)
             IF ( indxr1<=indxr2.AND.indxc1<=indxc2 ) THEN
               kr = Jl(indxr1)
               CYCLE
-            ENDIF
-          ENDIF
+            END IF
+          END IF
           EXIT
-        ENDDO
-      ENDIF
-    ENDIF
+        END DO
+      END IF
+    END IF
     !
-  ENDDO
+  END DO
   !
   !         Replace diagonal elements by their inverses.
   !VD$ VECTOR
   DO i = 1, N
     Dinv(i) = 1.0E0/Dinv(i)
-  ENDDO
+  END DO
   !
   !------------- LAST LINE OF SSILUS FOLLOWS ----------------------------
 END SUBROUTINE SSILUS

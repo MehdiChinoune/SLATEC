@@ -39,7 +39,7 @@ SUBROUTINE SPLPFE(Mrelas,Nvars,Lmx,Lbm,Ienter,Ibasis,Imat,Ibrc,Ipr,Iwr,&
   !   890605  Removed unreferenced labels.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
-  
+
   INTEGER i, Ienter, ihi, il1, ilow, ipage, IPLOC, iu1, j, key, &
     Lbm, Lmx, lpg, Mrelas, n20002, n20050, Nvars
   REAL SASUM
@@ -70,7 +70,7 @@ SUBROUTINE SPLPFE(Mrelas,Nvars,Lmx,Lbm,Ienter,Ibasis,Imat,Ibrc,Ipr,Iwr,&
         !     THEN DO NOT CONSIDER IT AS A CANDIDATE TO ENTER.
         IF ( Ind(j)==3 ) THEN
           IF ( (Bu(j)-Bl(j))<=Eps*(ABS(Bl(j))+ABS(Bu(j))) ) GOTO 50
-        ENDIF
+        END IF
         rcost = Rz(j)
         !
         !     IF VARIABLE IS AT UPPER BOUND IT CAN ONLY DECREASE.  THIS
@@ -90,12 +90,12 @@ SUBROUTINE SPLPFE(Mrelas,Nvars,Lmx,Lbm,Ienter,Ibasis,Imat,Ibrc,Ipr,Iwr,&
           IF ( ratio>rmax ) THEN
             rmax = ratio
             Ienter = i
-          ENDIF
-        ENDIF
-      ENDIF
-    ENDIF
-    50     i = i + 1
-  ENDDO
+          END IF
+        END IF
+      END IF
+    END IF
+    50  i = i + 1
+  END DO
   !
   !     USE COL. CHOSEN TO COMPUTE SEARCH DIRECTION.
   IF ( Found ) THEN
@@ -107,12 +107,12 @@ SUBROUTINE SPLPFE(Mrelas,Nvars,Lmx,Lbm,Ienter,Ibasis,Imat,Ibrc,Ipr,Iwr,&
         ilow = Imat(j+3) + 1
       ELSE
         ilow = Nvars + 5
-      ENDIF
+      END IF
       il1 = IPLOC(ilow,Amat,Imat)
       IF ( il1>=Lmx-1 ) THEN
         ilow = ilow + 2
         il1 = IPLOC(ilow,Amat,Imat)
-      ENDIF
+      END IF
       ipage = ABS(Imat(Lmx-1))
       ihi = Imat(j+4) - (ilow-il1)
       DO
@@ -120,19 +120,19 @@ SUBROUTINE SPLPFE(Mrelas,Nvars,Lmx,Lbm,Ienter,Ibasis,Imat,Ibrc,Ipr,Iwr,&
         IF ( il1>iu1 ) EXIT
         DO i = il1, iu1
           Ww(Imat(i)) = Amat(i)*Csc(j)
-        ENDDO
+        END DO
         IF ( ihi<=Lmx-2 ) EXIT
         ipage = ipage + 1
         key = 1
         CALL PRWPGE(key,ipage,lpg,Amat,Imat)
         il1 = Nvars + 5
         ihi = ihi - lpg
-      ENDDO
+      END DO
     ELSEIF ( Ind(j)/=2 ) THEN
       Ww(j-Nvars) = -one
     ELSE
       Ww(j-Nvars) = one
-    ENDIF
+    END IF
     !
     !     COMPUTE SEARCH DIRECTION.
     trans = .FALSE.
@@ -147,12 +147,12 @@ SUBROUTINE SPLPFE(Mrelas,Nvars,Lmx,Lbm,Ienter,Ibasis,Imat,Ibrc,Ipr,Iwr,&
       DO WHILE ( (n20050-i)>=0 )
         Ww(i) = -Ww(i)
         i = i + 1
-      ENDDO
-    ENDIF
+      END DO
+    END IF
     Dirnrm = SASUM(Mrelas,Ww,1)
     !
     !     COPY CONTENTS OF WR(*) TO DUALS(*) FOR USE IN
     !     ADD-DROP (EXCHANGE) STEP, LA05CS( ).
     CALL SCOPY(Mrelas,Wr,1,Duals,1)
-  ENDIF
+  END IF
 END SUBROUTINE SPLPFE

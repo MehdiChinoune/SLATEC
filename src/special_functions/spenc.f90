@@ -67,7 +67,7 @@ REAL FUNCTION SPENC(X)
     nspenc = INITS(spencs,19,0.1*R1MACH(3))
     xbig = 1.0/R1MACH(3)
     first = .FALSE.
-  ENDIF
+  END IF
   !
   IF ( X>2.0 ) THEN
     !
@@ -107,8 +107,8 @@ REAL FUNCTION SPENC(X)
       IF ( X>(-xbig) ) SPENC = SPENC + &
         (1.0+CSEVL(4.0/(1.0-X)-1.0,spencs,nspenc))/(1.0-X)
       RETURN
-    ENDIF
-  ENDIF
+    END IF
+  END IF
   !
   ! 1.0 .LT. X .LE. 2.0
   !

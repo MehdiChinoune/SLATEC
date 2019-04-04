@@ -88,14 +88,14 @@ SUBROUTINE DEXBVP(Y,Nrowy,Xpts,A,Nrowa,Alpha,B,Nrowb,Beta,Iflag,Work,Iwork)
         ELSE
           nsafw = NEEdw + inc
           nsafiw = NEEdiw
-        ENDIF
+        END IF
         !
         WRITE (xern1,'(I8)') nsafw
         WRITE (xern2,'(I8)') nsafiw
         CALL XERMSG('SLATEC','DEXBVP',&
           'IN DBVSUP, PREDICTED STORAGE ALLOCATION FOR WORK ARRAY IS '&
           //xern1//', PREDICTED STORAGE ALLOCATION FOR IWORK ARRAY IS '//xern2,1,0)
-      ENDIF
+      END IF
       !
       Iwork(1) = MXNon
       EXIT
@@ -105,6 +105,6 @@ SUBROUTINE DEXBVP(Y,Nrowy,Xpts,A,Nrowa,Alpha,B,Nrowb,Beta,Iflag,Work,Iwork)
     ELSE
       kotc = kotc + 1
       iexp = iexp - 2
-    ENDIF
-  ENDDO
+    END IF
+  END DO
 END SUBROUTINE DEXBVP

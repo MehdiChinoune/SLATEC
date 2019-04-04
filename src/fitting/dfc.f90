@@ -382,7 +382,7 @@ SUBROUTINE DFC(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkpt,Nconst,Xconst,&
   !   900607  Editorial changes to Prologue to make Prologues for EFC,
   !           DEFC, FC, and DFC look as much the same as possible.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   REAL(8) :: Bkpt(*), Coeff(*), Sddata(*), W(*), Xconst(*), &
     Xdata(*), Yconst(*), Ydata(*)
   INTEGER Iw(*), Mode, Nbkpt, Nconst, Ndata, Nderiv(*), Nord
@@ -403,7 +403,7 @@ SUBROUTINE DFC(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkpt,Nconst,Xconst,&
       'IN FC, THE NUMBER OF KNOTS MUST BE AT LEAST TWICE THE B-SPLINE ORDER.',2,1)
     Mode = -1
     RETURN
-  ENDIF
+  END IF
 
   mdg = Nbkpt - Nord + 3
   mdw = Nbkpt - Nord + 1 + Nconst

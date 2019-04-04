@@ -45,19 +45,19 @@ SUBROUTINE MC20AD(Nc,Maxa,A,Inum,Jptr,Jnum,Jdisp)
   !**      CLEAR JPTR
   DO j = 1, Nc
     Jptr(j) = 0
-  ENDDO
+  END DO
   !**      COUNT THE NUMBER OF ELEMENTS IN EACH COLUMN.
   DO k = 1, Maxa
     j = Jnum(k) + Jdisp
     Jptr(j) = Jptr(j) + 1
-  ENDDO
+  END DO
   !**      SET THE JPTR ARRAY
   k = 1
   DO j = 1, Nc
     kr = k + Jptr(j)
     Jptr(j) = k
     k = kr
-  ENDDO
+  END DO
   !
   !**      REORDER THE ELEMENTS INTO COLUMN ORDER.  THE ALGORITHM IS AN
   !        IN-PLACE SORT AND IS OF ORDER MAXA.
@@ -89,10 +89,10 @@ SUBROUTINE MC20AD(Nc,Maxa,A,Inum,Jptr,Jnum,Jdisp)
         ace = acep
         ice = icep
         jce = jcep + Jdisp
-      ENDDO
-    ENDIF
+      END DO
+    END IF
     !
-  ENDDO
+  END DO
   !
   !**      RESET JPTR VECTOR.
   ja = 1
@@ -100,5 +100,5 @@ SUBROUTINE MC20AD(Nc,Maxa,A,Inum,Jptr,Jnum,Jdisp)
     jb = Jptr(j)
     Jptr(j) = ja
     ja = jb
-  ENDDO
+  END DO
 END SUBROUTINE MC20AD

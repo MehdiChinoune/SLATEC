@@ -134,9 +134,9 @@ SUBROUTINE SGEEV(A,Lda,N,E,V,Ldv,Work,Job,Info)
           m = 1 + j*Ldv
           k = 1 + j*Lda
           CALL SCOPY(N,A(k),1,A(m),1)
-        ENDDO
-      ENDIF
-    ENDIF
+        END DO
+      END IF
+    END IF
     !
     !     SCALE AND ORTHOGONAL REDUCTION TO HESSENBERG.
     !
@@ -166,14 +166,14 @@ SUBROUTINE SGEEV(A,Lda,N,E,V,Ldv,Work,Job,Info)
           IF ( E(i)<0.0E0 ) CALL SCOPYM(N,V(k),1,Work(2),2)
           l = 2*(j-1)*Ldv + 1
           CALL SCOPY(2*N,Work(1),1,V(l),1)
-        ENDDO
-      ENDIF
+        END DO
+      END IF
     ELSE
       !
       !     EIGENVALUES ONLY
       !
       CALL HQR(Lda,N,ilo,ihi,A,E(1),E(N+1),Info)
-    ENDIF
+    END IF
     !
     !     CONVERT EIGENVALUES TO COMPLEX STORAGE.
     !
@@ -181,7 +181,7 @@ SUBROUTINE SGEEV(A,Lda,N,E,V,Ldv,Work,Job,Info)
     CALL SCOPY(N,E(N+1),1,E(2),2)
     CALL SCOPY(N,Work(1),1,E(1),2)
     RETURN
-  ENDIF
+  END IF
   !
   !     TAKE CARE OF N=1 CASE
   !

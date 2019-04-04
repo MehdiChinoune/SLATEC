@@ -88,7 +88,7 @@ SUBROUTINE ZBKNU(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol,Elim,Alim)
         fc = fc/SIN(fc)
         smur = cshr/dnu
         smui = cshi/dnu
-      ENDIF
+      END IF
       a2 = 1.0D0 + dnu
       !-----------------------------------------------------------------------
       !     GAM(1-Z)*GAM(1+Z)=PI*Z/SIN(PI*Z), T1=1/GAM(1-DNU), T2=1/GAM(1+DNU)
@@ -108,9 +108,9 @@ SUBROUTINE ZBKNU(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol,Elim,Alim)
           tm = cc(k)*ak
           s = s + tm
           IF ( ABS(tm)<Tol ) EXIT
-        ENDDO
+        END DO
         g1 = -s
-      ENDIF
+      END IF
       g2 = (t1+t2)*0.5D0
       fr = fc*(cchr*g1+smur*g2)
       fi = fc*(cchi*g1+smui*g2)
@@ -161,8 +161,8 @@ SUBROUTINE ZBKNU(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol,Elim,Alim)
             bk = bk + ak + ak + 1.0D0
             ak = ak + 1.0D0
             IF ( a1<=Tol ) EXIT
-          ENDDO
-        ENDIF
+          END DO
+        END IF
         kflag = 2
         a1 = Fnu + 1.0D0
         ak = a1*ABS(smur)
@@ -177,7 +177,7 @@ SUBROUTINE ZBKNU(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol,Elim,Alim)
           CALL ZEXP(Zr,Zi,fr,fi)
           CALL ZMLT(s1r,s1i,fr,fi,s1r,s1i)
           CALL ZMLT(s2r,s2i,fr,fi,s2r,s2i)
-        ENDIF
+        END IF
         GOTO 200
       ELSE
         !-----------------------------------------------------------------------
@@ -207,17 +207,17 @@ SUBROUTINE ZBKNU(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol,Elim,Alim)
             bk = bk + ak + ak + 1.0D0
             ak = ak + 1.0D0
             IF ( a1<=Tol ) EXIT
-          ENDDO
-        ENDIF
+          END DO
+        END IF
         Yr(1) = s1r
         Yi(1) = s1i
         IF ( koded==1 ) RETURN
         CALL ZEXP(Zr,Zi,str,sti)
         CALL ZMLT(s1r,s1i,str,sti,Yr(1),Yi(1))
         RETURN
-      ENDIF
-    ENDIF
-  ENDIF
+      END IF
+    END IF
+  END IF
   !-----------------------------------------------------------------------
   !     IFLAG=0 MEANS NO UNDERFLOW OCCURRED
   !     IFLAG=1 MEANS AN UNDERFLOW OCCURRED- COMPUTATION PROCEEDS WITH
@@ -241,8 +241,8 @@ SUBROUTINE ZBKNU(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol,Elim,Alim)
       sti = -str*SIN(Zi)
       str = str*COS(Zi)
       CALL ZMLT(coefr,coefi,str,sti,coefr,coefi)
-    ENDIF
-  ENDIF
+    END IF
+  END IF
   IF ( ABS(dnu)==0.5D0 ) GOTO 800
   !-----------------------------------------------------------------------
   !     MILLER ALGORITHM FOR ABS(Z).GT.R1
@@ -268,7 +268,7 @@ SUBROUTINE ZBKNU(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol,Elim,Alim)
     t1 = ABS(t1)
   ELSE
     t1 = hpi
-  ENDIF
+  END IF
   IF ( t2>caz ) THEN
     !-----------------------------------------------------------------------
     !     COMPUTE BACKWARD INDEX K FOR ABS(Z).LT.R2
@@ -302,14 +302,14 @@ SUBROUTINE ZBKNU(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol,Elim,Alim)
       fk = fk + coner
       str = ABS(p2r)*fk
       IF ( etest<str ) GOTO 50
-    ENDDO
+    END DO
     !
     !
     Nz = -2
     RETURN
-    50     fk = fk + spi*t1*SQRT(t2/caz)
+    50  fk = fk + spi*t1*SQRT(t2/caz)
     fhs = ABS(0.25D0-dnu2)
-  ENDIF
+  END IF
   !-----------------------------------------------------------------------
   !     BACKWARD RECURRENCE LOOP FOR MILLER ALGORITHM
   !-----------------------------------------------------------------------
@@ -338,7 +338,7 @@ SUBROUTINE ZBKNU(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol,Elim,Alim)
     csi = csi + p2i
     fks = a1 - fk + coner
     fk = fk - coner
-  ENDDO
+  END DO
   !-----------------------------------------------------------------------
   !     COMPUTE (P2/CS)=(P2/ABS(CS))*(CONJG(CS)/ABS(CS)) FOR BETTER
   !     SCALING
@@ -372,7 +372,7 @@ SUBROUTINE ZBKNU(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol,Elim,Alim)
     zdi = Zi
     IF ( iflag/=1 ) GOTO 400
     GOTO 700
-  ENDIF
+  END IF
   !-----------------------------------------------------------------------
   !     FORWARD RECURSION ON THE THREE TERM RECURSION WITH RELATION WITH
   !     SCALING NEAR EXPONENT EXTREMES ON KFLAG=1 OR KFLAG=3
@@ -422,32 +422,32 @@ SUBROUTINE ZBKNU(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol,Elim,Alim)
             IF ( ic==(i-1) ) GOTO 600
             ic = i
             CYCLE
-          ENDIF
-        ENDIF
+          END IF
+        END IF
         IF ( alas>=helim ) THEN
           zdr = zdr - Elim
           s1r = s1r*celmr
           s1i = s1i*celmr
           s2r = s2r*celmr
           s2i = s2i*celmr
-        ENDIF
-      ENDDO
+        END IF
+      END DO
       IF ( N==1 ) THEN
         s1r = s2r
         s1i = s2i
-      ENDIF
+      END IF
       GOTO 700
-    ENDIF
+    END IF
   ELSE
     IF ( N<=1 ) THEN
       s1r = s2r
       s1i = s2i
-    ENDIF
+    END IF
     zdr = Zr
     zdi = Zi
     IF ( iflag/=1 ) GOTO 400
     GOTO 700
-  ENDIF
+  END IF
   300  p1r = csrr(kflag)
   ascle = bry(kflag)
   DO i = inub, inu
@@ -478,13 +478,13 @@ SUBROUTINE ZBKNU(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol,Elim,Alim)
         s2r = s2r*str
         s2i = s2i*str
         p1r = csrr(kflag)
-      ENDIF
-    ENDIF
-  ENDDO
+      END IF
+    END IF
+  END DO
   IF ( N==1 ) THEN
     s1r = s2r
     s1i = s2i
-  ENDIF
+  END IF
   400  str = csrr(kflag)
   Yr(1) = s1r*str
   Yi(1) = s1i*str
@@ -527,9 +527,9 @@ SUBROUTINE ZBKNU(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol,Elim,Alim)
         s2r = s2r*str
         s2i = s2i*str
         p1r = csrr(kflag)
-      ENDIF
-    ENDIF
-  ENDDO
+      END IF
+    END IF
+  END DO
   RETURN
   600  kflag = 1
   inub = i + 1
@@ -542,14 +542,14 @@ SUBROUTINE ZBKNU(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol,Elim,Alim)
   IF ( N==1 ) THEN
     s1r = s2r
     s1i = s2i
-  ENDIF
+  END IF
   GOTO 400
   700  Yr(1) = s1r
   Yi(1) = s1i
   IF ( N/=1 ) THEN
     Yr(2) = s2r
     Yi(2) = s2i
-  ENDIF
+  END IF
   ascle = bry(1)
   CALL ZKSCL(zdr,zdi,Fnu,N,Yr,Yi,Nz,rzr,rzi,ascle,Tol,Elim)
   inu = N - Nz

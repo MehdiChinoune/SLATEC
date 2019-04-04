@@ -40,7 +40,7 @@ SUBROUTINE RADB3(Ido,L1,Cc,Ch,Wa1,Wa2)
     ci3 = taui*(Cc(1,3,k)+Cc(1,3,k))
     Ch(1,k,2) = cr2 - ci3
     Ch(1,k,3) = cr2 + ci3
-  ENDDO
+  END DO
   IF ( Ido==1 ) RETURN
   idp2 = Ido + 2
   IF ( (Ido-1)/2<L1 ) THEN
@@ -64,10 +64,10 @@ SUBROUTINE RADB3(Ido,L1,Cc,Ch,Wa1,Wa2)
         Ch(i,k,2) = Wa1(i-2)*di2 + Wa1(i-1)*dr2
         Ch(i-1,k,3) = Wa2(i-2)*dr3 - Wa2(i-1)*di3
         Ch(i,k,3) = Wa2(i-2)*di3 + Wa2(i-1)*dr3
-      ENDDO
-    ENDDO
+      END DO
+    END DO
     RETURN
-  ENDIF
+  END IF
   DO k = 1, L1
     !DIR$ IVDEP
     DO i = 3, Ido, 2
@@ -88,7 +88,7 @@ SUBROUTINE RADB3(Ido,L1,Cc,Ch,Wa1,Wa2)
       Ch(i,k,2) = Wa1(i-2)*di2 + Wa1(i-1)*dr2
       Ch(i-1,k,3) = Wa2(i-2)*dr3 - Wa2(i-1)*di3
       Ch(i,k,3) = Wa2(i-2)*di3 + Wa2(i-1)*dr3
-    ENDDO
-  ENDDO
+    END DO
+  END DO
   RETURN
 END SUBROUTINE RADB3

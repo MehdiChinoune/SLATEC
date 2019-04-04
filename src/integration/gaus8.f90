@@ -133,11 +133,11 @@ SUBROUTINE GAUS8(FUN,A,B,Err,Ans,Ierr)
               RETURN
             ELSE
               lmn = MIN(lmn,lmx)
-            ENDIF
-          ENDIF
-        ENDIF
-      ENDIF
-    ENDIF
+            END IF
+          END IF
+        END IF
+      END IF
+    END IF
     tol = MAX(ABS(Err),2.0E0**(5-nbits))/2.0E0
     IF ( Err==0.0E0 ) tol = SQRT(R1MACH(4))
     eps = tol
@@ -150,7 +150,7 @@ SUBROUTINE GAUS8(FUN,A,B,Err,Ans,Ierr)
     area = ABS(est)
     ef = 0.5E0
     mxl = 0
-  ENDIF
+  END IF
   100 CONTINUE
   DO
     !
@@ -180,8 +180,8 @@ SUBROUTINE GAUS8(FUN,A,B,Err,Ans,Ierr)
       lr(l) = -1
       aa(l) = aa(l-1)
       est = gl
-    ENDIF
-  ENDDO
+    END IF
+  END DO
   ce = ce + (est-glr)
   IF ( lr(l)<=0 ) THEN
     !
@@ -202,8 +202,8 @@ SUBROUTINE GAUS8(FUN,A,B,Err,Ans,Ierr)
         GOTO 200
       ELSE
         vr = vl(l+1) + vr
-      ENDIF
-    ENDDO
+      END IF
+    END DO
     !
     !     Exit
     !
@@ -212,10 +212,10 @@ SUBROUTINE GAUS8(FUN,A,B,Err,Ans,Ierr)
       Ierr = 2
       CALL XERMSG('SLATEC','GAUS8',&
         'ANS is probably insufficiently accurate.',3,1)
-    ENDIF
+    END IF
     IF ( Err<0.0E0 ) Err = ce
     RETURN
-  ENDIF
+  END IF
   200  est = gr(l-1)
   lr(l) = 1
   aa(l) = aa(l) + 4.0E0*hh(l)

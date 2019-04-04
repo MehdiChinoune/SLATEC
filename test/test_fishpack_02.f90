@@ -126,7 +126,7 @@ CONTAINS
         x(j) = SIN(j*sqrt2)
         y(j) = x(j)
         xh(j) = x(j)
-      ENDDO
+      END DO
       !
       !       Test Subroutines RFFTI, RFFTF and RFFTB
       !
@@ -142,17 +142,17 @@ CONTAINS
             arg1 = (i-1)*arg
             sum1 = sum1 + x(i)*COS(arg1)
             sum2 = sum2 + x(i)*SIN(arg1)
-          ENDDO
+          END DO
           y(2*k-2) = REAL( sum1, 4 )
           y(2*k-1) = REAL( -sum2, 4 )
-        ENDDO
-      ENDIF
+        END DO
+      END IF
       sum1 = 0.0D0
       sum2 = 0.0D0
       DO i = 1, nm1, 2
         sum1 = sum1 + x(i)
         sum2 = sum2 + x(i+1)
-      ENDDO
+      END DO
       IF ( modn==1 ) sum1 = sum1 + x(n)
       y(1) = REAL( sum1 + sum2, 4 )
       IF ( modn==0 ) y(n) = REAL( sum1 - sum2, 4 )
@@ -161,7 +161,7 @@ CONTAINS
       DO i = 1, n
         rftf = MAX(rftf,ABS(x(i)-y(i)))
         x(i) = xh(i)
-      ENDDO
+      END DO
       rftf = rftf/n
       IF ( rftf<=errmax ) THEN
         IF ( Kprint>=3 ) WRITE (Lun,99003)
@@ -170,7 +170,7 @@ CONTAINS
         Ipass = 0
         IF ( Kprint>=2 ) WRITE (Lun,99004)
         99004 FORMAT (' Test of RFFTF FAILED')
-      ENDIF
+      END IF
       sign = 1.0
       DO i = 1, n
         sum = 0.5D0*x(1)
@@ -179,19 +179,19 @@ CONTAINS
           DO k = 2, ns2
             arg1 = (k-1)*arg
             sum = sum + x(2*k-2)*COS(arg1) - x(2*k-1)*SIN(arg1)
-          ENDDO
-        ENDIF
+          END DO
+        END IF
         IF ( modn==0 ) sum = sum + 0.5D0*sign*x(n)
         y(i) = REAL( sum + sum, 4 )
         sign = -sign
-      ENDDO
+      END DO
       CALL RFFTB(n,x,w)
       rftb = 0.0
       DO i = 1, n
         rftb = MAX(rftb,ABS(x(i)-y(i)))
         x(i) = xh(i)
         y(i) = xh(i)
-      ENDDO
+      END DO
       rftb = rftb/n
       IF ( rftb<=errmax ) THEN
         IF ( Kprint>=3 ) WRITE (Lun,99005)
@@ -200,7 +200,7 @@ CONTAINS
         Ipass = 0
         IF ( Kprint>=2 ) WRITE (Lun,99006)
         99006 FORMAT (' Test of RFFTB FAILED')
-      ENDIF
+      END IF
       !
       CALL RFFTB(n,y,w)
       CALL RFFTF(n,y,w)
@@ -208,7 +208,7 @@ CONTAINS
       rftfb = 0.0
       DO i = 1, n
         rftfb = MAX(rftfb,ABS(cf*y(i)-x(i)))
-      ENDDO
+      END DO
       IF ( rftfb<=errmax ) THEN
         IF ( Kprint>=3 ) WRITE (Lun,99007)
         99007 FORMAT (' Test of RFFTF and RFFTB PASSED')
@@ -216,22 +216,22 @@ CONTAINS
         Ipass = 0
         IF ( Kprint>=2 ) WRITE (Lun,99008)
         99008 FORMAT (' Test of RFFTF and RFFTB FAILED')
-      ENDIF
+      END IF
       !
       !       Test Subroutines SINTI and SINT
       !
       dt = pi/n
       DO i = 1, nm1
         x(i) = xh(i)
-      ENDDO
+      END DO
       DO i = 1, nm1
         y(i) = 0.0
         arg1 = i*dt
         DO k = 1, nm1
           y(i) = y(i) + x(k)*REAL( SIN((k)*arg1), 4 )
-        ENDDO
+        END DO
         y(i) = y(i) + y(i)
-      ENDDO
+      END DO
       CALL SINTI(nm1,w)
       CALL SINT(nm1,x,w)
       cf = 0.5/n
@@ -240,7 +240,7 @@ CONTAINS
         sintt = MAX(sintt,ABS(x(i)-y(i)))
         x(i) = xh(i)
         y(i) = x(i)
-      ENDDO
+      END DO
       sintt = cf*sintt
       IF ( sintt<=errmax ) THEN
         IF ( Kprint>=3 ) WRITE (Lun,99009)
@@ -249,13 +249,13 @@ CONTAINS
         Ipass = 0
         IF ( Kprint>=2 ) WRITE (Lun,99010)
         99010 FORMAT (' First test of SINT FAILED')
-      ENDIF
+      END IF
       CALL SINT(nm1,x,w)
       CALL SINT(nm1,x,w)
       sintfb = 0.0
       DO i = 1, nm1
         sintfb = MAX(sintfb,ABS(cf*x(i)-y(i)))
-      ENDDO
+      END DO
       IF ( sintfb<=errmax ) THEN
         IF ( Kprint>=3 ) WRITE (Lun,99011)
         99011 FORMAT (' Second test of SINT PASSED')
@@ -263,23 +263,23 @@ CONTAINS
         Ipass = 0
         IF ( Kprint>=2 ) WRITE (Lun,99012)
         99012 FORMAT (' Second test of SINT FAILED')
-      ENDIF
+      END IF
       !
       !       Test Subroutines COSTI and COST
       !
       DO i = 1, np1
         x(i) = xh(i)
-      ENDDO
+      END DO
       sign = 1.0
       DO i = 1, np1
         y(i) = 0.5*(x(1)+sign*x(n+1))
         arg = (i-1)*dt
         DO k = 2, n
           y(i) = y(i) + x(k)*REAL( COS((k-1)*arg), 4 )
-        ENDDO
+        END DO
         y(i) = y(i) + y(i)
         sign = -sign
-      ENDDO
+      END DO
       CALL COSTI(np1,w)
       CALL COST(np1,x,w)
       costt = 0.0
@@ -287,7 +287,7 @@ CONTAINS
         costt = MAX(costt,ABS(x(i)-y(i)))
         x(i) = xh(i)
         y(i) = xh(i)
-      ENDDO
+      END DO
       costt = cf*costt
       IF ( costt<=errmax ) THEN
         IF ( Kprint>=3 ) WRITE (Lun,99013)
@@ -296,14 +296,14 @@ CONTAINS
         Ipass = 0
         IF ( Kprint>=2 ) WRITE (Lun,99014)
         99014 FORMAT (' First test of COST FAILED')
-      ENDIF
+      END IF
       !
       CALL COST(np1,x,w)
       CALL COST(np1,x,w)
       costfb = 0.0
       DO i = 1, np1
         costfb = MAX(costfb,ABS(cf*x(i)-y(i)))
-      ENDDO
+      END DO
       IF ( costfb<=errmax ) THEN
         IF ( Kprint>=3 ) WRITE (Lun,99015)
         99015 FORMAT (' Second test of COST PASSED')
@@ -311,30 +311,30 @@ CONTAINS
         Ipass = 0
         IF ( Kprint>=2 ) WRITE (Lun,99016)
         99016 FORMAT (' Second test of COST FAILED')
-      ENDIF
+      END IF
       !
       !       Test Subroutines SINQI, SINQF and SINQB
       !
       cf = 0.25/n
       DO i = 1, n
         y(i) = xh(i)
-      ENDDO
+      END DO
       dt = pi/(n+n)
       DO i = 1, n
         x(i) = 0.0
         arg = i*dt
         DO k = 1, n
           x(i) = x(i) + y(k)*REAL( SIN((k+k-1)*arg), 4 )
-        ENDDO
+        END DO
         x(i) = 4.0*x(i)
-      ENDDO
+      END DO
       CALL SINQI(n,w)
       CALL SINQB(n,y,w)
       sinqbt = 0.0
       DO i = 1, n
         sinqbt = MAX(sinqbt,ABS(y(i)-x(i)))
         x(i) = xh(i)
-      ENDDO
+      END DO
       sinqbt = cf*sinqbt
       IF ( sinqbt<=errmax ) THEN
         IF ( Kprint>=3 ) WRITE (Lun,99017)
@@ -343,7 +343,7 @@ CONTAINS
         Ipass = 0
         IF ( Kprint>=2 ) WRITE (Lun,99018)
         99018 FORMAT (' Test of SINQB FAILED')
-      ENDIF
+      END IF
       !
       sign = 1.0
       DO i = 1, n
@@ -351,17 +351,17 @@ CONTAINS
         y(i) = 0.5*sign*x(n)
         DO k = 1, nm1
           y(i) = y(i) + x(k)*REAL( SIN((k)*arg), 4 )
-        ENDDO
+        END DO
         y(i) = y(i) + y(i)
         sign = -sign
-      ENDDO
+      END DO
       CALL SINQF(n,x,w)
       sinqft = 0.0
       DO i = 1, n
         sinqft = MAX(sinqft,ABS(x(i)-y(i)))
         y(i) = xh(i)
         x(i) = xh(i)
-      ENDDO
+      END DO
       IF ( sinqft<=errmax ) THEN
         IF ( Kprint>=3 ) WRITE (Lun,99019)
         99019 FORMAT (' Test of SINQF PASSED')
@@ -369,14 +369,14 @@ CONTAINS
         Ipass = 0
         IF ( Kprint>=2 ) WRITE (Lun,99020)
         99020 FORMAT (' Test of SINQF FAILED')
-      ENDIF
+      END IF
       !
       CALL SINQF(n,y,w)
       CALL SINQB(n,y,w)
       sinqfb = 0.0
       DO i = 1, n
         sinqfb = MAX(sinqfb,ABS(cf*y(i)-x(i)))
-      ENDDO
+      END DO
       IF ( sinqfb<=errmax ) THEN
         IF ( Kprint>=3 ) WRITE (Lun,99021)
         99021 FORMAT (' Test of SINQF and SINQB PASSED')
@@ -384,28 +384,28 @@ CONTAINS
         Ipass = 0
         IF ( Kprint>=2 ) WRITE (Lun,99022)
         99022 FORMAT (' Test of SINQF and SINQB FAILED')
-      ENDIF
+      END IF
       !
       !       Test Subroutines COSQI, COSQF and COSQB
       !
       DO i = 1, n
         y(i) = xh(i)
-      ENDDO
+      END DO
       DO i = 1, n
         x(i) = 0.0
         arg = (i-1)*dt
         DO k = 1, n
           x(i) = x(i) + y(k)*REAL( COS((k+k-1)*arg), 4 )
-        ENDDO
+        END DO
         x(i) = 4.0*x(i)
-      ENDDO
+      END DO
       CALL COSQI(n,w)
       CALL COSQB(n,y,w)
       cosqbt = 0.0
       DO i = 1, n
         cosqbt = MAX(cosqbt,ABS(x(i)-y(i)))
         x(i) = xh(i)
-      ENDDO
+      END DO
       cosqbt = cf*cosqbt
       IF ( cosqbt<=errmax ) THEN
         IF ( Kprint>=3 ) WRITE (Lun,99023)
@@ -414,23 +414,23 @@ CONTAINS
         Ipass = 0
         IF ( Kprint>=2 ) WRITE (Lun,99024)
         99024 FORMAT (' Test of COSQB FAILED')
-      ENDIF
+      END IF
       !
       DO i = 1, n
         y(i) = 0.5*x(1)
         arg = (i+i-1)*dt
         DO k = 2, n
           y(i) = y(i) + x(k)*REAL( COS((k-1)*arg), 4 )
-        ENDDO
+        END DO
         y(i) = y(i) + y(i)
-      ENDDO
+      END DO
       CALL COSQF(n,x,w)
       cosqft = 0.0
       DO i = 1, n
         cosqft = MAX(cosqft,ABS(y(i)-x(i)))
         x(i) = xh(i)
         y(i) = xh(i)
-      ENDDO
+      END DO
       cosqft = cf*cosqft
       IF ( cosqft<=errmax ) THEN
         IF ( Kprint>=3 ) WRITE (Lun,99025)
@@ -439,14 +439,14 @@ CONTAINS
         Ipass = 0
         IF ( Kprint>=2 ) WRITE (Lun,99026)
         99026 FORMAT (' Test of COSQF FAILED')
-      ENDIF
+      END IF
       !
       CALL COSQB(n,x,w)
       CALL COSQF(n,x,w)
       cosqfb = 0.0
       DO i = 1, n
         cosqfb = MAX(cosqfb,ABS(cf*x(i)-y(i)))
-      ENDDO
+      END DO
       IF ( cosqfb<=errmax ) THEN
         IF ( Kprint>=3 ) WRITE (Lun,99027)
         99027 FORMAT (' Test of COSQF and COSQB PASSED')
@@ -454,14 +454,14 @@ CONTAINS
         Ipass = 0
         IF ( Kprint>=2 ) WRITE (Lun,99028)
         99028 FORMAT (' Test of COSQF and COSQB FAILED')
-      ENDIF
+      END IF
       !
       !       Test Subroutines EZFFTI, EZFFTF and EZFFTB
       !
       CALL EZFFTI(n,w)
       DO i = 1, n
         x(i) = xh(i)
-      ENDDO
+      END DO
       tpi = REAL( 2.0*pi, 4 )
       dt = tpi/n
       ns2 = (n+1)/2
@@ -476,18 +476,18 @@ CONTAINS
             arg1 = (i-1)*arg
             sum1 = sum1 + x(i)*COS(arg1)
             sum2 = sum2 + x(i)*SIN(arg1)
-          ENDDO
+          END DO
           a(k) = REAL( cf*sum1, 4 )
           b(k) = REAL( cf*sum2, 4 )
-        ENDDO
-      ENDIF
+        END DO
+      END IF
       nm1 = n - 1
       sum1 = 0.0D0
       sum2 = 0.0D0
       DO i = 1, nm1, 2
         sum1 = sum1 + x(i)
         sum2 = sum2 + x(i+1)
-      ENDDO
+      END DO
       IF ( modn==1 ) sum1 = sum1 + x(n)
       azero = REAL( 0.5*cf*(sum1+sum2), 4 )
       IF ( modn==0 ) a(ns2) = REAL( 0.5*cf*(sum1-sum2), 4 )
@@ -497,7 +497,7 @@ CONTAINS
       IF ( ns2m>0 ) THEN
         DO i = 1, ns2m
           dezf1 = MAX(dezf1,ABS(ah(i)-a(i)),ABS(bh(i)-b(i)))
-        ENDDO
+        END DO
         IF ( dezf1<=errmax ) THEN
           IF ( Kprint>=3 ) WRITE (Lun,99029)
           99029 FORMAT (' Test of EZFFTF PASSED')
@@ -505,8 +505,8 @@ CONTAINS
           Ipass = 0
           IF ( Kprint>=2 ) WRITE (Lun,99030)
           99030 FORMAT (' Test of EZFFTF FAILED')
-        ENDIF
-      ENDIF
+        END IF
+      END IF
       !
       ns2 = n/2
       IF ( modn==0 ) b(ns2) = 0.0
@@ -516,15 +516,15 @@ CONTAINS
         DO k = 1, ns2
           arg2 = k*arg1
           sum = sum + a(k)*COS(arg2) + b(k)*SIN(arg2)
-        ENDDO
+        END DO
         x(i) = REAL( sum, 4 )
-      ENDDO
+      END DO
       CALL EZFFTB(n,y,azero,a,b,w)
       dezb1 = 0.0
       DO i = 1, n
         dezb1 = MAX(dezb1,ABS(x(i)-y(i)))
         x(i) = xh(i)
-      ENDDO
+      END DO
       IF ( dezb1<=errmax ) THEN
         IF ( Kprint>=3 ) WRITE (Lun,99031)
         99031 FORMAT (' Test of EZFFTB PASSED')
@@ -532,14 +532,14 @@ CONTAINS
         Ipass = 0
         IF ( Kprint>=2 ) WRITE (Lun,99032)
         99032 FORMAT (' Test of EZFFTB FAILED')
-      ENDIF
+      END IF
       !
       CALL EZFFTF(n,x,azero,a,b,w)
       CALL EZFFTB(n,y,azero,a,b,w)
       dezfb = 0.0
       DO i = 1, n
         dezfb = MAX(dezfb,ABS(x(i)-y(i)))
-      ENDDO
+      END DO
       IF ( dezfb<=errmax ) THEN
         IF ( Kprint>=3 ) WRITE (Lun,99033)
         99033 FORMAT (' Test of EZFFTF and EZFFTB PASSED')
@@ -547,13 +547,13 @@ CONTAINS
         Ipass = 0
         IF ( Kprint>=2 ) WRITE (Lun,99034)
         99034 FORMAT (' Test of EZFFTF and EZFFTB FAILED')
-      ENDIF
+      END IF
       !
       !       Test Subroutines CFFTI, CFFTF and CFFTB
       !
       DO i = 1, n
         cx(i) = CMPLX(COS(sqrt2*i),SIN(sqrt2*(i*i)))
-      ENDDO
+      END DO
       dt = (pi+pi)/n
       DO i = 1, n
         arg1 = -(i-1)*dt
@@ -561,15 +561,15 @@ CONTAINS
         DO k = 1, n
           arg2 = (k-1)*arg1
           cy(i) = cy(i) + CMPLX(COS(arg2),SIN(arg2),4)*cx(k)
-        ENDDO
-      ENDDO
+        END DO
+      END DO
       CALL CFFTI(n,w)
       CALL CFFTF(n,cx,w)
       dcfftf = 0.0
       DO i = 1, n
         dcfftf = MAX(dcfftf,CABS(cx(i)-cy(i)))
         cx(i) = cx(i)/n
-      ENDDO
+      END DO
       dcfftf = dcfftf/n
       IF ( dcfftf<=errmax ) THEN
         IF ( Kprint>=3 ) WRITE (Lun,99035)
@@ -578,7 +578,7 @@ CONTAINS
         Ipass = 0
         IF ( Kprint>=2 ) WRITE (Lun,99036)
         99036 FORMAT (' Test of CFFTF FAILED')
-      ENDIF
+      END IF
       !
       DO i = 1, n
         arg1 = (i-1)*dt
@@ -586,14 +586,14 @@ CONTAINS
         DO k = 1, n
           arg2 = (k-1)*arg1
           cy(i) = cy(i) + CMPLX(COS(arg2),SIN(arg2),4)*cx(k)
-        ENDDO
-      ENDDO
+        END DO
+      END DO
       CALL CFFTB(n,cx,w)
       dcfftb = 0.0
       DO i = 1, n
         dcfftb = MAX(dcfftb,CABS(cx(i)-cy(i)))
         cx(i) = cy(i)
-      ENDDO
+      END DO
       IF ( dcfftb<=errmax ) THEN
         IF ( Kprint>=3 ) WRITE (Lun,99037)
         99037 FORMAT (' Test of CFFTB PASSED')
@@ -601,7 +601,7 @@ CONTAINS
         Ipass = 0
         IF ( Kprint>=2 ) WRITE (Lun,99038)
         99038 FORMAT (' Test of CFFTB FAILED')
-      ENDIF
+      END IF
       !
       cf = 1.0/n
       CALL CFFTF(n,cx,w)
@@ -609,7 +609,7 @@ CONTAINS
       dcfb = 0.0
       DO i = 1, n
         dcfb = MAX(dcfb,CABS(cf*cx(i)-cy(i)))
-      ENDDO
+      END DO
       IF ( dcfb<=errmax ) THEN
         IF ( Kprint>=3 ) WRITE (Lun,99039)
         99039 FORMAT (' Test of CFFTF and CFFTB PASSED')
@@ -617,7 +617,7 @@ CONTAINS
         Ipass = 0
         IF ( Kprint>=2 ) WRITE (Lun,99040)
         99040 FORMAT (' Test of CFFTF and CFFTB FAILED')
-      ENDIF
+      END IF
       IF ( Kprint>=3 ) THEN
         WRITE (Lun,99041) n, rftf, rftb, rftfb, sintt, sintfb, costt, &
           costfb, sinqft, sinqbt, sinqfb, cosqft, &
@@ -629,8 +629,8 @@ CONTAINS
           '  COSQFB ',E10.3/7X,'  DEZF1  ',E10.3,'  DEZB1  ',E10.3,&
           '  DEZFB  ',E10.3/7X,'  CFFTF  ',E10.3,'  CFFTB  ',E10.3,&
           '  CFFTFB ',E10.3)
-      ENDIF
-    ENDDO
+      END IF
+    END DO
     IF ( Kprint>=2.AND.Ipass==1 ) WRITE (Lun,99042)
     99042 FORMAT (/' ***********FFT ROUTINES PASSED ALL TESTS************')
     IF ( Kprint>=1.AND.Ipass==0 ) WRITE (Lun,99043)
@@ -709,7 +709,7 @@ PROGRAM TEST51
     CALL XSETF(0)
   ELSE
     CALL XSETF(1)
-  ENDIF
+  END IF
   !
   !     Test FFT package
   !
@@ -725,6 +725,6 @@ PROGRAM TEST51
     WRITE (lun,99002) nfail
     99002 FORMAT (/' ************* WARNING -- ',I5,&
       ' TEST(S) FAILED IN PROGRAM TEST51 *************')
-  ENDIF
+  END IF
   STOP
 END PROGRAM TEST51

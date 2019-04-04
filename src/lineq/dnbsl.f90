@@ -85,7 +85,7 @@ SUBROUTINE DNBSL(Abe,Lda,N,Ml,Mu,Ipvt,B,Job)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   INTEGER Lda, N, Ml, Mu, Ipvt(*), Job
   REAL(8) :: Abe(Lda,*), B(*)
   !
@@ -105,7 +105,7 @@ SUBROUTINE DNBSL(Abe,Lda,N,Ml,Mu,Ipvt,B,Job)
       lb = k - lm
       t = DDOT(lm,Abe(k-1,Ml+2),ldb,B(lb),1)
       B(k) = (B(k)-t)/Abe(k,Ml+1)
-    ENDDO
+    END DO
     !
     !       NOW SOLVE TRANS(L)*X = Y
     !
@@ -121,10 +121,10 @@ SUBROUTINE DNBSL(Abe,Lda,N,Ml,Mu,Ipvt,B,Job)
             t = B(l)
             B(l) = B(k)
             B(k) = t
-          ENDIF
-        ENDDO
-      ENDIF
-    ENDIF
+          END IF
+        END DO
+      END IF
+    END IF
   ELSE
     !
     !       JOB = 0, SOLVE  A * X = B
@@ -139,12 +139,12 @@ SUBROUTINE DNBSL(Abe,Lda,N,Ml,Mu,Ipvt,B,Job)
           IF ( l/=k ) THEN
             B(l) = B(k)
             B(k) = t
-          ENDIF
+          END IF
           mlm = Ml - (lm-1)
           CALL DAXPY(lm,t,Abe(k+lm,mlm),ldb,B(k+1),1)
-        ENDDO
-      ENDIF
-    ENDIF
+        END DO
+      END IF
+    END IF
     !
     !       NOW SOLVE  U*X = Y
     !
@@ -156,6 +156,6 @@ SUBROUTINE DNBSL(Abe,Lda,N,Ml,Mu,Ipvt,B,Job)
       t = -B(k)
       IF(k<=1) CYCLE
       CALL DAXPY(lm,t,Abe(k-1,Ml+2),ldb,B(lb),1)
-    ENDDO
-  ENDIF
+    END DO
+  END IF
 END SUBROUTINE DNBSL

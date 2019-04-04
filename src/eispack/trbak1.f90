@@ -78,7 +78,7 @@ SUBROUTINE TRBAK1(Nm,N,A,E,M,Z)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   !
   INTEGER i, j, k, l, M, N, Nm
   REAL A(Nm,*), E(*), Z(Nm,*)
@@ -97,20 +97,20 @@ SUBROUTINE TRBAK1(Nm,N,A,E,M,Z)
             !
             DO k = 1, l
               s = s + A(i,k)*Z(k,j)
-            ENDDO
+            END DO
             !     .......... DIVISOR BELOW IS NEGATIVE OF H FORMED IN TRED1.
             !                DOUBLE DIVISION AVOIDS POSSIBLE UNDERFLOW ..........
             s = (s/A(i,l))/E(i)
             !
             DO k = 1, l
               Z(k,j) = Z(k,j) + s*A(i,k)
-            ENDDO
+            END DO
             !
-          ENDDO
-        ENDIF
+          END DO
+        END IF
         !
-      ENDDO
-    ENDIF
-  ENDIF
+      END DO
+    END IF
+  END IF
   !
 END SUBROUTINE TRBAK1

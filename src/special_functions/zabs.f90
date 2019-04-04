@@ -25,7 +25,7 @@ REAL(8) FUNCTION ZABS(Zr,Zi)
   !* REVISION HISTORY  (YYMMDD)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
-  
+
   REAL(8) :: Zr, Zi, u, v, q, s
   !* FIRST EXECUTABLE STATEMENT  ZABS
   u = ABS(Zr)
@@ -43,7 +43,7 @@ REAL(8) FUNCTION ZABS(Zr,Zi)
     q = u/v
     ZABS = v*SQRT(1.D+0+q*q)
     RETURN
-  ENDIF
+  END IF
   q = v/u
   ZABS = u*SQRT(1.D+0+q*q)
   RETURN

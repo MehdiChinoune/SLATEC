@@ -63,7 +63,7 @@ REAL(8) FUNCTION DERF(X)
     xbig = SQRT(-LOG(sqrtpi*D1MACH(3)))
     sqeps = SQRT(2.0D0*D1MACH(3))
     first = .FALSE.
-  ENDIF
+  END IF
   !
   y = ABS(X)
   IF ( y>1.D0 ) THEN
@@ -74,9 +74,9 @@ REAL(8) FUNCTION DERF(X)
       DERF = SIGN(1.0D0-DERFC(y),X)
     ELSE
       DERF = SIGN(1.0D0,X)
-    ENDIF
+    END IF
     RETURN
-  ENDIF
+  END IF
   !
   ! ERF(X) = 1.0 - ERFC(X)  FOR  -1.0 .LE. X .LE. 1.0
   !

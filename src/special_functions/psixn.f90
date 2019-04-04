@@ -90,11 +90,11 @@ REAL FUNCTION PSIXN(N)
         trm = -b(k)*ax
         IF ( ABS(trm)<wdtol ) EXIT
         s = s + trm
-      ENDDO
-    ENDIF
+      END DO
+    END IF
     PSIXN = s + LOG(fn)
   ELSE
     PSIXN = c(N)
     RETURN
-  ENDIF
+  END IF
 END FUNCTION PSIXN

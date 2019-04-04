@@ -47,7 +47,7 @@ SUBROUTINE COSQB1(N,X,W,Xh)
     xim1 = X(i-1) + X(i)
     X(i) = X(i) - X(i-1)
     X(i-1) = xim1
-  ENDDO
+  END DO
   X(1) = X(1) + X(1)
   modn = MOD(N,2)
   IF ( modn==0 ) X(N) = X(N) + X(N)
@@ -56,12 +56,12 @@ SUBROUTINE COSQB1(N,X,W,Xh)
     kc = np2 - k
     Xh(k) = W(k-1)*X(kc) + W(kc-1)*X(k)
     Xh(kc) = W(k-1)*X(k) - W(kc-1)*X(kc)
-  ENDDO
+  END DO
   IF ( modn==0 ) X(ns2+1) = W(ns2)*(X(ns2+1)+X(ns2+1))
   DO k = 2, ns2
     kc = np2 - k
     X(k) = Xh(k) + Xh(kc)
     X(kc) = Xh(k) - Xh(kc)
-  ENDDO
+  END DO
   X(1) = X(1) + X(1)
 END SUBROUTINE COSQB1

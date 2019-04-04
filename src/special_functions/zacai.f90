@@ -65,10 +65,10 @@ SUBROUTINE ZACAI(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Rl,Tol,Elim,Alim)
       !-----------------------------------------------------------------------
       CALL ZASYI(znr,zni,Fnu,Kode,nn,Yr,Yi,nw,Rl,Tol,Elim,Alim)
       IF ( nw<0 ) GOTO 100
-    ENDIF
+    END IF
   ELSE
     CALL ZSERI(znr,zni,Fnu,Kode,nn,Yr,Yi,nw,Tol,Elim,Alim)
-  ENDIF
+  END IF
   !-----------------------------------------------------------------------
   !     ANALYTIC CONTINUATION TO THE LEFT HALF PLANE FOR THE K FUNCTION
   !-----------------------------------------------------------------------
@@ -82,7 +82,7 @@ SUBROUTINE ZACAI(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Rl,Tol,Elim,Alim)
       yy = -zni
       csgnr = -csgni*SIN(yy)
       csgni = csgni*COS(yy)
-    ENDIF
+    END IF
     !-----------------------------------------------------------------------
     !     CALCULATE CSPN=EXP(FNU*PI*I) TO MINIMIZE LOSSES OF SIGNIFICANCE
     !     WHEN FNU IS LARGE
@@ -94,7 +94,7 @@ SUBROUTINE ZACAI(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Rl,Tol,Elim,Alim)
     IF ( MOD(inu,2)/=0 ) THEN
       cspnr = -cspnr
       cspni = -cspni
-    ENDIF
+    END IF
     c1r = cyr(1)
     c1i = cyi(1)
     c2r = Yr(1)
@@ -104,11 +104,11 @@ SUBROUTINE ZACAI(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Rl,Tol,Elim,Alim)
       ascle = 1.0D+3*D1MACH(1)/Tol
       CALL ZS1S2(znr,zni,c1r,c1i,c2r,c2i,nw,ascle,Alim,iuf)
       Nz = Nz + nw
-    ENDIF
+    END IF
     Yr(1) = cspnr*c1r - cspni*c1i + csgnr*c2r - csgni*c2i
     Yi(1) = cspnr*c1i + cspni*c1r + csgnr*c2i + csgni*c2r
     RETURN
-  ENDIF
+  END IF
   100  Nz = -1
   IF ( nw==(-2) ) Nz = -2
 END SUBROUTINE ZACAI

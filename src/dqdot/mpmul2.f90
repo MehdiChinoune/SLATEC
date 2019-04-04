@@ -61,11 +61,11 @@ SUBROUTINE MPMUL2(X,Iy,Z,Trunc)
         99001 FORMAT (' *** OVERFLOW OCCURRED IN MPMUL2 ***')
         CALL MPOVFL(Z)
         RETURN
-      ENDIF
+      END IF
     ELSEIF ( j/=0 ) THEN
       GOTO 200
-    ENDIF
-  ENDIF
+    END IF
+  END IF
   ! RESULT ZERO
   100  Z(1) = 0
   RETURN
@@ -93,7 +93,7 @@ SUBROUTINE MPMUL2(X,Iy,Z,Trunc)
       is = ri/B
       c = j1*ix + c1 + is
       R(i+4) = ri - B*is
-    ENDDO
+    END DO
     IF ( c<0 ) GOTO 400
     IF ( c==0 ) GOTO 300
   ELSE
@@ -102,7 +102,7 @@ SUBROUTINE MPMUL2(X,Iy,Z,Trunc)
       ri = j*X(i+2) + c
       c = ri/B
       R(i+4) = ri - B*c
-    ENDDO
+    END DO
     ! CHECK FOR INTEGER OVERFLOW
     IF ( ri<0 ) GOTO 400
     ! HAVE TO TREAT FIRST FOUR WORDS OF R SEPARATELY
@@ -111,22 +111,22 @@ SUBROUTINE MPMUL2(X,Iy,Z,Trunc)
       ri = c
       c = ri/B
       R(i) = ri - B*c
-    ENDDO
+    END DO
     IF ( c==0 ) GOTO 300
-  ENDIF
+  END IF
   DO
     ! HAVE TO SHIFT RIGHT HERE AS CARRY OFF END
     DO ij = 1, t3
       i = t4 - ij
       R(i+1) = R(i)
-    ENDDO
+    END DO
     ri = c
     c = ri/B
     R(1) = ri - B*c
     re = re + 1
     IF ( c<0 ) GOTO 400
     IF ( c==0 ) EXIT
-  ENDDO
+  END DO
   ! NORMALIZE AND ROUND OR TRUNCATE RESULT
   300  CALL MPNZR(rs,re,Z,Trunc)
   RETURN

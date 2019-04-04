@@ -72,7 +72,7 @@ SUBROUTINE SSISL(A,Lda,N,Kpvt,B)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   INTEGER Lda, N, Kpvt(*)
   REAL A(Lda,*), B(*)
   !
@@ -98,13 +98,13 @@ SUBROUTINE SSISL(A,Lda,N,Kpvt,B)
           temp = B(k-1)
           B(k-1) = B(kp)
           B(kp) = temp
-        ENDIF
+        END IF
         !
         !              APPLY THE TRANSFORMATION.
         !
         CALL SAXPY(k-2,B(k),A(1,k),1,B(1),1)
         CALL SAXPY(k-2,B(k-1),A(1,k-1),1,B(1),1)
-      ENDIF
+      END IF
       !
       !           APPLY D INVERSE.
       !
@@ -129,19 +129,19 @@ SUBROUTINE SSISL(A,Lda,N,Kpvt,B)
           temp = B(k)
           B(k) = B(kp)
           B(kp) = temp
-        ENDIF
+        END IF
         !
         !              APPLY THE TRANSFORMATION.
         !
         CALL SAXPY(k-1,B(k),A(1,k),1,B(1),1)
-      ENDIF
+      END IF
       !
       !           APPLY D INVERSE.
       !
       B(k) = B(k)/A(k,k)
       k = k - 1
-    ENDIF
-  ENDDO
+    END IF
+  END DO
   !
   !     LOOP FORWARD APPLYING THE TRANSFORMATIONS.
   !
@@ -165,8 +165,8 @@ SUBROUTINE SSISL(A,Lda,N,Kpvt,B)
           temp = B(k)
           B(k) = B(kp)
           B(kp) = temp
-        ENDIF
-      ENDIF
+        END IF
+      END IF
       k = k + 2
     ELSE
       !
@@ -185,9 +185,9 @@ SUBROUTINE SSISL(A,Lda,N,Kpvt,B)
           temp = B(k)
           B(k) = B(kp)
           B(kp) = temp
-        ENDIF
-      ENDIF
+        END IF
+      END IF
       k = k + 1
-    ENDIF
-  ENDDO
+    END IF
+  END DO
 END SUBROUTINE SSISL

@@ -83,7 +83,7 @@ REAL FUNCTION BESK0E(X)
     ntak02 = INITS(ak02cs,14,0.1*R1MACH(3))
     xsml = SQRT(4.0*R1MACH(3))
     first = .FALSE.
-  ENDIF
+  END IF
   !
   IF ( X<=0. ) CALL XERMSG('SLATEC','BESK0E','X IS ZERO OR NEGATIVE',2,2)
   IF ( X>2. ) THEN
@@ -92,9 +92,9 @@ REAL FUNCTION BESK0E(X)
       BESK0E = (1.25+CSEVL((16./X-5.)/3.,ak0cs,ntak0))/SQRT(X)
     ELSE
       BESK0E = (1.25+CSEVL(16./X-1.,ak02cs,ntak02))/SQRT(X)
-    ENDIF
+    END IF
     RETURN
-  ENDIF
+  END IF
   !
   y = 0.
   IF ( X>xsml ) y = X*X

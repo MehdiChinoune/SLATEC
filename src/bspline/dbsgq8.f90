@@ -125,11 +125,11 @@ SUBROUTINE DBSGQ8(FUN,Xt,Bc,N,Kk,Id,A,B,Inbv,Err,Ans,Ierr,Work)
               RETURN
             ELSE
               lmn = MIN(lmn,lmx)
-            ENDIF
-          ENDIF
-        ENDIF
-      ENDIF
-    ENDIF
+            END IF
+          END IF
+        END IF
+      END IF
+    END IF
     tol = MAX(ABS(Err),2.0D0**(5-nbits))/2.0D0
     IF ( Err==0.0D0 ) tol = SQRT(D1MACH(4))
     eps = tol
@@ -142,7 +142,7 @@ SUBROUTINE DBSGQ8(FUN,Xt,Bc,N,Kk,Id,A,B,Inbv,Err,Ans,Ierr,Work)
     area = ABS(est)
     ef = 0.5D0
     mxl = 0
-  ENDIF
+  END IF
   100 CONTINUE
   DO
     !
@@ -171,8 +171,8 @@ SUBROUTINE DBSGQ8(FUN,Xt,Bc,N,Kk,Id,A,B,Inbv,Err,Ans,Ierr,Work)
       lr(l) = -1
       aa(l) = aa(l-1)
       est = gl
-    ENDIF
-  ENDDO
+    END IF
+  END DO
   ce = ce + (est-glr)
   IF ( lr(l)<=0 ) THEN
     !
@@ -193,8 +193,8 @@ SUBROUTINE DBSGQ8(FUN,Xt,Bc,N,Kk,Id,A,B,Inbv,Err,Ans,Ierr,Work)
         GOTO 200
       ELSE
         vr = vl(l+1) + vr
-      ENDIF
-    ENDDO
+      END IF
+    END DO
     !
     !      EXIT
     !
@@ -203,10 +203,10 @@ SUBROUTINE DBSGQ8(FUN,Xt,Bc,N,Kk,Id,A,B,Inbv,Err,Ans,Ierr,Work)
       Ierr = 2
       CALL XERMSG('SLATEC','DBSGQ8',&
         'ANS IS PROBABLY INSUFFICIENTLY ACCURATE.',3,1)
-    ENDIF
+    END IF
     IF ( Err<0.0D0 ) Err = ce
     RETURN
-  ENDIF
+  END IF
   200  est = gr(l-1)
   lr(l) = 1
   aa(l) = aa(l) + 4.0D0*hh(l)

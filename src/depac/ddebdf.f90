@@ -774,8 +774,8 @@ SUBROUTINE DDEBDF(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,&
         & HAS NOT ADVANCED.  CHECK THE WAY YOU HAVE SET PARAMETERS FOR THE CALL&
         & TO THE CODE, PARTICULARLY INFO(1).',13,2)
       RETURN
-    ENDIF
-  ENDIF
+    END IF
+  END IF
   !
   Idid = 0
   !
@@ -788,7 +788,7 @@ SUBROUTINE DDEBDF(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,&
       & YOU ARE ATTEMPTING TO CONTINUE THE INTEGRATION ILLEGALLY BY CALLING&
       & THE CODE WITH  INFO(1) = '//xern1,3,1)
     Idid = -33
-  ENDIF
+  END IF
   !
   IF ( Info(2)/=0.AND.Info(2)/=1 ) THEN
     WRITE (xern1,'(I8)') Info(2)
@@ -796,7 +796,7 @@ SUBROUTINE DDEBDF(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,&
       & AND VECTOR ERROR TOLERANCES, RESPECTIVELY.&
       & YOU HAVE CALLED THE CODE WITH INFO(2) = '//xern1,4,1)
     Idid = -33
-  ENDIF
+  END IF
   !
   IF ( Info(3)/=0.AND.Info(3)/=1 ) THEN
     WRITE (xern1,'(I8)') Info(3)
@@ -804,7 +804,7 @@ SUBROUTINE DDEBDF(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,&
       & INTERVAL OR INTERMEDIATE-OUTPUT MODE OF INTEGRATION, RESPECTIVELY.&
       & YOU HAVE CALLED THE CODE WITH  INFO(3) = '//xern1,5,1)
     Idid = -33
-  ENDIF
+  END IF
   !
   IF ( Info(4)/=0.AND.Info(4)/=1 ) THEN
     WRITE (xern1,'(I8)') Info(4)
@@ -812,7 +812,7 @@ SUBROUTINE DDEBDF(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,&
       & OR NOT THE INTEGRATION INTERVAL IS TO BE RESTRICTED BY A POINT TSTOP.&
       & YOU HAVE CALLED THE CODE WITH INFO(4) = '//xern1,14,1)
     Idid = -33
-  ENDIF
+  END IF
   !
   IF ( Info(5)/=0.AND.Info(5)/=1 ) THEN
     WRITE (xern1,'(I8)') Info(5)
@@ -821,7 +821,7 @@ SUBROUTINE DDEBDF(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,&
       & OR YOU PROVIDE A SUBROUTINE TO EVALUATE IT ANALYTICALLY.&
       & YOU HAVE CALLED THE CODE WITH INFO(5) = '//xern1,15,1)
     Idid = -33
-  ENDIF
+  END IF
   !
   IF ( Info(6)/=0.AND.Info(6)/=1 ) THEN
     WRITE (xern1,'(I8)') Info(6)
@@ -829,7 +829,7 @@ SUBROUTINE DDEBDF(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,&
       & THE CODE IS TOLD TO TREAT THE JACOBIAN AS A FULL (DENSE) MATRIX OR AS&
       & HAVING A SPECIAL BANDED STRUCTURE.  YOU HAVE CALLED THE CODE WITH INFO(6) = '//xern1,16,1)
     Idid = -33
-  ENDIF
+  END IF
   !
   ilrw = Neq
   IF ( Info(6)/=0 ) THEN
@@ -849,8 +849,8 @@ SUBROUTINE DDEBDF(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,&
         & ML,MU .GE. 0 AND  ML,MU .LT. NEQ.  YOU HAVE CALLED THE CODE WITH ML = '&
         //xern1//' AND MU = '//xern2,17,1)
       Idid = -33
-    ENDIF
-  ENDIF
+    END IF
+  END IF
   !
   !        CHECK LRW AND LIW FOR SUFFICIENT STORAGE ALLOCATION
   !
@@ -862,15 +862,15 @@ SUBROUTINE DDEBDF(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,&
     ELSE
       CALL XERMSG('SLATEC','DDEBDF','LENGTH OF ARRAY RWORK MUST BE AT LEAST 250&
         & + 10*NEQ + (2*ML+MU+1)*NEQ.$$YOU HAVE CALLED THE CODE WITH  LRW = '//xern1,18,1)
-    ENDIF
+    END IF
     Idid = -33
-  ENDIF
+  END IF
   !
   IF ( Liw<56+Neq ) THEN
     WRITE (xern1,'(I8)') Liw
     CALL XERMSG('SLATEC','DDEBDF','LENGTH OF ARRAY IWORK BE AT LEAST  56 + NEQ.  YOU HAVE CALLED THE CODE WITH LIW = '//xern1,2,1)
     Idid = -33
-  ENDIF
+  END IF
   !
   !        COMPUTE THE INDICES FOR THE ARRAYS TO BE STORED IN THE WORK
   !        ARRAY AND RESTORE COMMON BLOCK DATA

@@ -48,7 +48,7 @@ SUBROUTINE DBNSLV(W,Nroww,Nrow,Nbandl,Nbandu,B)
   !   890831  Modified array declarations.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
-  
+
   !
   INTEGER Nbandl, Nbandu, Nrow, Nroww, i, j, jmax, middle, nrowm1
   REAL(8) :: W(Nroww,*), B(*)
@@ -66,9 +66,9 @@ SUBROUTINE DBNSLV(W,Nroww,Nrow,Nbandl,Nbandu,B)
         jmax = MIN(Nbandl,Nrow-i)
         DO j = 1, jmax
           B(i+j) = B(i+j) - B(i)*W(middle+j,i)
-        ENDDO
-      ENDDO
-    ENDIF
+        END DO
+      END DO
+    END IF
     !                                 BACKWARD PASS
     !            FOR I=NROW,NROW-1,...,1, DIVIDE RIGHT SIDE(I) BY I-TH DIAG-
     !            ONAL ENTRY OF  U, THEN SUBTRACT  RIGHT SIDE(I)*(I-TH COLUMN
@@ -80,19 +80,19 @@ SUBROUTINE DBNSLV(W,Nroww,Nrow,Nbandl,Nbandu,B)
         jmax = MIN(Nbandu,i-1)
         DO j = 1, jmax
           B(i-j) = B(i-j) - B(i)*W(middle-j,i)
-        ENDDO
+        END DO
         i = i - 1
         IF ( i<=1 ) THEN
           B(1) = B(1)/W(middle,1)
           EXIT
-        ENDIF
-      ENDDO
+        END IF
+      END DO
     ELSE
       !                                A  IS LOWER TRIANGULAR .
       DO i = 1, Nrow
         B(i) = B(i)/W(1,i)
-      ENDDO
+      END DO
       RETURN
-    ENDIF
-  ENDIF
+    END IF
+  END IF
 END SUBROUTINE DBNSLV

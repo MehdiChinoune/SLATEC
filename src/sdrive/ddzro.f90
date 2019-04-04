@@ -60,7 +60,7 @@ SUBROUTINE DDZRO(Ae,F,H,N,Nq,Iroot,Re,T,Yh,Uround,B,C,Fb,Fc,Y)
   !* REVISION HISTORY  (YYMMDD)
   !   790601  DATE WRITTEN
   !   900329  Initial submission to SLATEC.
-  
+
   INTEGER ic, Iroot, kount, N, Nq
   REAL(8) :: a, acbs, acmb, Ae, B, C, cmb, er, F, fa, Fb, &
     Fc, H, p, q, Re, rw, T, tol, Uround, Y(*), Yh(N,*)
@@ -81,7 +81,7 @@ SUBROUTINE DDZRO(Ae,F,H,N,Nq,Iroot,Re,T,Yh,Uround,B,C,Fb,Fc,Y)
     Fb = Fc
     C = a
     Fc = fa
-  ENDIF
+  END IF
   cmb = 0.5D0*(C-B)
   acmb = ABS(cmb)
   tol = rw*ABS(B) + Ae
@@ -96,7 +96,7 @@ SUBROUTINE DDZRO(Ae,F,H,N,Nq,Iroot,Re,T,Yh,Uround,B,C,Fb,Fc,Y)
   IF ( p<0.D0 ) THEN
     p = -p
     q = -q
-  ENDIF
+  END IF
   !                          Update A and check for satisfactory reduction
   !                          in the size of our bounding interval.
   a = B
@@ -107,9 +107,9 @@ SUBROUTINE DDZRO(Ae,F,H,N,Nq,Iroot,Re,T,Yh,Uround,B,C,Fb,Fc,Y)
       !                                                                 Bisect
       B = 0.5D0*(C+B)
       GOTO 200
-    ENDIF
+    END IF
     ic = 0
-  ENDIF
+  END IF
   acbs = acmb
   !                                            Test for too small a change
   IF ( p<=ABS(q)*tol ) THEN
@@ -123,7 +123,7 @@ SUBROUTINE DDZRO(Ae,F,H,N,Nq,Iroot,Re,T,Yh,Uround,B,C,Fb,Fc,Y)
   ELSE
     !                                                                 Bisect
     B = 0.5D0*(C+B)
-  ENDIF
+  END IF
   !                                             Have completed computation
   !                                             for new iterate B.
   200  CALL DDNTP(H,0,N,Nq,T,B,Yh,Y)
@@ -137,6 +137,6 @@ SUBROUTINE DDZRO(Ae,F,H,N,Nq,Iroot,Re,T,Yh,Uround,B,C,Fb,Fc,Y)
   IF ( SIGN(1.0D0,Fb)==SIGN(1.0D0,Fc) ) THEN
     C = a
     Fc = fa
-  ENDIF
+  END IF
   GOTO 100
 END SUBROUTINE DDZRO

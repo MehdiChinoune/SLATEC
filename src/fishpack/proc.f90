@@ -35,7 +35,7 @@ SUBROUTINE PROC(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Y,M,A,B,C,D,W,U)
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
-  
+
   REAL Aa(*), Bd(*), Bm1(*), Bm2(*), rt
   INTEGER ia, ibr, id, j, k, M, m1, m2, mm, Na, Nd, Nm1, Nm2
   COMPLEX X(*), Y(*), A(*), B(*), C(*), D(*), W(*), U(*), den
@@ -43,7 +43,7 @@ SUBROUTINE PROC(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Y,M,A,B,C,D,W,U)
   DO j = 1, M
     W(j) = X(j)
     Y(j) = W(j)
-  ENDDO
+  END DO
   mm = M - 1
   id = Nd
   ibr = 0
@@ -61,8 +61,8 @@ SUBROUTINE PROC(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Y,M,A,B,C,D,W,U)
       !
       DO j = 1, M
         Y(j) = rt*W(j)
-      ENDDO
-    ENDIF
+      END DO
+    END IF
     IF ( id<=0 ) RETURN
     rt = Bd(id)
     id = id - 1
@@ -77,13 +77,13 @@ SUBROUTINE PROC(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Y,M,A,B,C,D,W,U)
       den = B(k+1) - rt - C(k+1)*D(k+2)
       D(k+1) = A(k+1)/den
       W(k+1) = (Y(k+1)-C(k+1)*W(k+2))/den
-    ENDDO
+    END DO
     den = B(1) - rt - C(1)*D(2)
     W(1) = (1.,0.)
     IF ( ABS(den)/=0 ) W(1) = (Y(1)-C(1)*W(2))/den
     DO j = 2, M
       W(j) = W(j) - D(j)*W(j-1)
-    ENDDO
+    END DO
     IF ( Na<=0 ) THEN
       IF ( m1<=0 ) THEN
         IF ( m2>0 ) GOTO 400
@@ -92,32 +92,32 @@ SUBROUTINE PROC(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Y,M,A,B,C,D,W,U)
         IF ( m2<=0 ) GOTO 300
         IF ( ABS(Bm1(m1))>ABS(Bm2(m2)) ) GOTO 300
         GOTO 400
-      ENDIF
-    ENDIF
-  ENDDO
+      END IF
+    END IF
+  END DO
   200 CONTINUE
   DO j = 1, M
     Y(j) = W(j)
-  ENDDO
+  END DO
   ibr = 1
   GOTO 100
   300 CONTINUE
   IF ( ibr<=0 ) THEN
     IF ( ABS(Bm1(m1)-Bd(id))<ABS(Bm1(m1)-rt) ) GOTO 200
-  ENDIF
+  END IF
   rt = rt - Bm1(m1)
   m1 = m1 - 1
   GOTO 500
   400 CONTINUE
   IF ( ibr<=0 ) THEN
     IF ( ABS(Bm2(m2)-Bd(id))<ABS(Bm2(m2)-rt) ) GOTO 200
-  ENDIF
+  END IF
   rt = rt - Bm2(m2)
   m2 = m2 - 1
   500 CONTINUE
   DO j = 1, M
     Y(j) = Y(j) + rt*W(j)
-  ENDDO
+  END DO
   GOTO 100
   RETURN
 END SUBROUTINE PROC

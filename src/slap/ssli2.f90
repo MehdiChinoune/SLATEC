@@ -113,7 +113,7 @@ SUBROUTINE SSLI2(N,B,X,Nel,Iel,Jel,El)
   !   920511  Added complete declaration section.  (WRB)
   !   921113  Corrected C***CATEGORY line.  (FNF)
   !   930701  Updated CATEGORY section.  (FNF, WRB)
-  
+
   !     .. Scalar Arguments ..
   INTEGER N, Nel
   !     .. Array Arguments ..
@@ -128,7 +128,7 @@ SUBROUTINE SSLI2(N,B,X,Nel,Iel,Jel,El)
   !
   DO i = 1, N
     X(i) = B(i)
-  ENDDO
+  END DO
   !
   !VD$ NOCONCUR
   DO icol = 1, N
@@ -142,9 +142,9 @@ SUBROUTINE SSLI2(N,B,X,Nel,Iel,Jel,El)
       !VD$ NODEPCHK
       DO j = jbgn, jend
         X(Iel(j)) = X(Iel(j)) - El(j)*X(icol)
-      ENDDO
-    ENDIF
-  ENDDO
+      END DO
+    END IF
+  END DO
   !
   !------------- LAST LINE OF SSLI2 FOLLOWS ----------------------------
 END SUBROUTINE SSLI2

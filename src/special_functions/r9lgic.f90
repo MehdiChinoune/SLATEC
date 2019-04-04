@@ -54,7 +54,7 @@ REAL FUNCTION R9LGIC(A,X,Alx)
     p = r*p
     s = s + p
     IF ( ABS(p)<eps*s ) GOTO 100
-  ENDDO
+  END DO
   CALL XERMSG('SLATEC','R9LGIC',&
     'NO CONVERGENCE IN 200 TERMS OF CONTINUED FRACTION',1,2)
   !

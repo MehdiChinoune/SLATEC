@@ -70,7 +70,7 @@ SUBROUTINE SPLPMU(Mrelas,Nvars,Lmx,Lbm,Nredc,Info,Ienter,Ileave,Iopt,Npp,&
   DO WHILE ( (n20002-i)>=0 )
     Rprim(i) = Rprim(i) - Theta*Ww(i)
     i = i + 1
-  ENDDO
+  END DO
   !
   !     IF EJECTED VARIABLE IS LEAVING AT AN UPPER BOUND,  THEN
   !     TRANSLATE RIGHT HAND SIDE.
@@ -101,7 +101,7 @@ SUBROUTINE SPLPMU(Mrelas,Nvars,Lmx,Lbm,Nredc,Info,Ienter,Ileave,Iopt,Npp,&
     IF ( MOD(Ibb(ibas),2)==0 ) scalr = -scalr
     npr001 = 300
     GOTO 1800
-  ENDIF
+  END IF
   300  Ibb(ibas) = Ibb(ibas) + 1
   GOTO 600
   400  Theta = -scalr - Theta
@@ -138,8 +138,8 @@ SUBROUTINE SPLPMU(Mrelas,Nvars,Lmx,Lbm,Nredc,Info,Ienter,Ileave,Iopt,Npp,&
       IF ( ibas<=Nvars ) scalr = scalr/Csc(ibas)
       npr001 = 800
       GOTO 1800
-    ENDIF
-  ENDDO
+    END IF
+  END DO
   !
   !     UPDATE REDUCED COSTS, EDGE WEIGHTS, AND MATRIX DECOMPOSITION.
   IF ( Ienter==Ileave ) THEN
@@ -187,8 +187,8 @@ SUBROUTINE SPLPMU(Mrelas,Nvars,Lmx,Lbm,Nredc,Info,Ienter,Ileave,Iopt,Npp,&
         'IN SPLP, MOVED TO A SINGULAR POINT.  THIS SHOULD NOT HAPPEN.',nerr,Iopt)
       Info = -nerr
       RETURN
-    ENDIF
-  ENDIF
+    END IF
+  END IF
   800  Rprim(k) = -scalr
   Rprnrm = Rprnrm - scalr
   900  Primal(k+Nvars) = zero
@@ -214,7 +214,7 @@ SUBROUTINE SPLPMU(Mrelas,Nvars,Lmx,Lbm,Nredc,Info,Ienter,Ileave,Iopt,Npp,&
     !
     !     COMPUTE UPDATED DUAL VARIABLES IN DUALS(*).
     npr003 = 1100
-  ENDIF
+  END IF
   GOTO 1900
   !
   !     COMPUTE THE DOT PRODUCT OF COL. J OF THE NEW INVERSE (TRANSPOSE)
@@ -252,7 +252,7 @@ SUBROUTINE SPLPMU(Mrelas,Nvars,Lmx,Lbm,Nredc,Info,Ienter,Ileave,Iopt,Npp,&
       ilow = Imat(j+3) + 1
     ELSE
       ilow = Nvars + 5
-    ENDIF
+    END IF
     IF ( .NOT.(pagepl) ) THEN
       il1 = ihi + 1
     ELSE
@@ -260,9 +260,9 @@ SUBROUTINE SPLPMU(Mrelas,Nvars,Lmx,Lbm,Nredc,Info,Ienter,Ileave,Iopt,Npp,&
       IF ( il1>=Lmx-1 ) THEN
         ilow = ilow + 2
         il1 = IPLOC(ilow,Amat,Imat)
-      ENDIF
+      END IF
       ipage = ABS(Imat(Lmx-1))
-    ENDIF
+    END IF
     ihi = Imat(j+4) - (ilow-il1)
     DO
       iu1 = MIN(Lmx-2,ihi)
@@ -271,14 +271,14 @@ SUBROUTINE SPLPMU(Mrelas,Nvars,Lmx,Lbm,Nredc,Info,Ienter,Ileave,Iopt,Npp,&
         rzj = rzj - Amat(i)*Duals(Imat(i))
         alpha = alpha + Amat(i)*Erd(Imat(i))
         gamma = gamma + Amat(i)*Ww(Imat(i))
-      ENDDO
+      END DO
       IF ( ihi<=Lmx-2 ) EXIT
       ipage = ipage + 1
       key = 1
       CALL PRWPGE(key,ipage,lpg,Amat,Imat)
       il1 = Nvars + 5
       ihi = ihi - lpg
-    ENDDO
+    END DO
     pagepl = ihi==(Lmx-2)
     Rz(j) = rzj*Csc(j)
     alpha = alpha*Csc(j)
@@ -286,13 +286,13 @@ SUBROUTINE SPLPMU(Mrelas,Nvars,Lmx,Lbm,Nredc,Info,Ienter,Ileave,Iopt,Npp,&
     !
     !     NONBASIC DEPENDENT VARIABLES (COLUMNS DEFINED IMPLICITLY)
     Rg(j) = MAX(Rg(j)-two*alpha*gamma+alpha**2*gq,one+alpha**2)
-  ENDIF
+  END IF
   !
   rcost = Rz(j)
   IF ( MOD(Ibb(j),2)==0 ) rcost = -rcost
   IF ( Ind(j)==3 ) THEN
     IF ( Bu(j)==Bl(j) ) rcost = zero
-  ENDIF
+  END IF
   IF ( Ind(j)==4 ) rcost = -ABS(rcost)
   cnorm = one
   IF ( j<=Nvars ) cnorm = Colnrm(j)
@@ -331,7 +331,7 @@ SUBROUTINE SPLPMU(Mrelas,Nvars,Lmx,Lbm,Nredc,Info,Ienter,Ileave,Iopt,Npp,&
       ilow = Imat(j+3) + 1
     ELSE
       ilow = Nvars + 5
-    ENDIF
+    END IF
     IF ( .NOT.(pagepl) ) THEN
       il1 = ihi + 1
     ELSE
@@ -339,23 +339,23 @@ SUBROUTINE SPLPMU(Mrelas,Nvars,Lmx,Lbm,Nredc,Info,Ienter,Ileave,Iopt,Npp,&
       IF ( il1>=Lmx-1 ) THEN
         ilow = ilow + 2
         il1 = IPLOC(ilow,Amat,Imat)
-      ENDIF
+      END IF
       ipage = ABS(Imat(Lmx-1))
-    ENDIF
+    END IF
     ihi = Imat(j+4) - (ilow-il1)
-  ENDIF
+  END IF
   1500 iu1 = MIN(Lmx-2,ihi)
   IF ( iu1>=il1.AND.MOD(iu1-il1,2)==0 ) THEN
     Rz(j) = Rz(j) - Amat(il1)*Duals(Imat(il1))
     il1 = il1 + 1
-  ENDIF
+  END IF
   IF ( il1<=iu1 ) THEN
     !
     !     UNROLL THE DOT PRODUCT LOOP TO A DEPTH OF TWO.  (THIS IS DONE
     !     FOR INCREASED EFFICIENCY).
     DO i = il1, iu1, 2
       Rz(j) = Rz(j) - Amat(i)*Duals(Imat(i)) - Amat(i+1)*Duals(Imat(i+1))
-    ENDDO
+    END DO
     IF ( ihi>Lmx-2 ) THEN
       ipage = ipage + 1
       key = 1
@@ -363,8 +363,8 @@ SUBROUTINE SPLPMU(Mrelas,Nvars,Lmx,Lbm,Nredc,Info,Ienter,Ileave,Iopt,Npp,&
       il1 = Nvars + 5
       ihi = ihi - lpg
       GOTO 1500
-    ENDIF
-  ENDIF
+    END IF
+  END IF
   pagepl = ihi==(Lmx-2)
   !
   !     NONBASIC DEPENDENT VARIABLES (COLUMNS DEFINED IMPLICITLY)
@@ -374,7 +374,7 @@ SUBROUTINE SPLPMU(Mrelas,Nvars,Lmx,Lbm,Nredc,Info,Ienter,Ileave,Iopt,Npp,&
   IF ( MOD(Ibb(j),2)==0 ) rcost = -rcost
   IF ( Ind(j)==3 ) THEN
     IF ( Bu(j)==Bl(j) ) rcost = zero
-  ENDIF
+  END IF
   IF ( Ind(j)==4 ) rcost = -ABS(rcost)
   cnorm = one
   IF ( j<=Nvars ) cnorm = Colnrm(j)
@@ -393,15 +393,15 @@ SUBROUTINE SPLPMU(Mrelas,Nvars,Lmx,Lbm,Nredc,Info,Ienter,Ileave,Iopt,Npp,&
       Rhs(i) = Rhs(i) + scalr
     ELSE
       Rhs(i) = Rhs(i) - scalr
-    ENDIF
+    END IF
   ELSE
     i = 0
     DO
       CALL PNNZRS(i,aij,iplace,Amat,Imat,ibas)
       IF ( i<=0 ) EXIT
       Rhs(i) = Rhs(i) - scalr*aij*Csc(ibas)
-    ENDDO
-  ENDIF
+    END DO
+  END IF
   Rhsnrm = MAX(Rhsnrm,SASUM(Mrelas,Rhs,1))
   SELECT CASE(npr001)
     CASE(100)
@@ -424,9 +424,9 @@ SUBROUTINE SPLPMU(Mrelas,Nvars,Lmx,Lbm,Nredc,Info,Ienter,Ileave,Iopt,Npp,&
       Duals(i) = Xlamda*Primal(i+Nvars)
     ELSE
       Duals(i) = Costsc*Costs(j)*Csc(j) + Xlamda*Primal(i+Nvars)
-    ENDIF
+    END IF
     i = i + 1
-  ENDDO
+  END DO
   !
   trans = .TRUE.
   CALL LA05BS(Basmat,Ibrc,Lbm,Mrelas,Ipr,Iwr,Wr,Gg,Duals,trans)

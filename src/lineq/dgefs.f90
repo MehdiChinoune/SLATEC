@@ -111,7 +111,7 @@ SUBROUTINE DGEFS(A,Lda,N,V,Itask,Ind,Work,Iwork)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   !
   INTEGER Lda, N, Itask, Ind, Iwork(*)
   REAL(8) :: A(Lda,*), V(*), Work(*), D1MACH
@@ -125,21 +125,21 @@ SUBROUTINE DGEFS(A,Lda,N,V,Itask,Ind,Work,Iwork)
     CALL XERMSG('SLATEC','DGEFS','LDA = '//xern1//' IS LESS THAN N = '//&
       xern2,-1,1)
     RETURN
-  ENDIF
+  END IF
   !
   IF ( N<=0 ) THEN
     Ind = -2
     WRITE (xern1,'(I8)') N
     CALL XERMSG('SLATEC','DGEFS','N = '//xern1//' IS LESS THAN 1',-2,1)
     RETURN
-  ENDIF
+  END IF
   !
   IF ( Itask<1 ) THEN
     Ind = -3
     WRITE (xern1,'(I8)') Itask
     CALL XERMSG('SLATEC','DGEFS','ITASK = '//xern1//' IS LESS THAN 1',-3,1)
     RETURN
-  ENDIF
+  END IF
   !
   IF ( Itask==1 ) THEN
     !
@@ -153,7 +153,7 @@ SUBROUTINE DGEFS(A,Lda,N,V,Itask,Ind,Work,Iwork)
       Ind = -4
       CALL XERMSG('SLATEC','DGEFS','SINGULAR MATRIX A - NO SOLUTION',-4,1)
       RETURN
-    ENDIF
+    END IF
     !
     !        COMPUTE IND (ESTIMATE OF NO. OF SIGNIFICANT DIGITS)
     !        AND CHECK FOR IND GREATER THAN ZERO
@@ -162,8 +162,8 @@ SUBROUTINE DGEFS(A,Lda,N,V,Itask,Ind,Work,Iwork)
     IF ( Ind<=0 ) THEN
       Ind = -10
       CALL XERMSG('SLATEC','DGEFS','SOLUTION MAY HAVE NO SIGNIFICANCE',-10,0)
-    ENDIF
-  ENDIF
+    END IF
+  END IF
   !
   !     SOLVE AFTER FACTORING
   !

@@ -130,11 +130,11 @@ SUBROUTINE CHER(Uplo,N,Alpha,X,Incx,A,Lda)
     info = 5
   ELSEIF ( Lda<MAX(1,N) ) THEN
     info = 7
-  ENDIF
+  END IF
   IF ( info/=0 ) THEN
     CALL XERBLA('CHER  ',info)
     RETURN
-  ENDIF
+  END IF
   !
   !     Quick return if possible.
   !
@@ -146,7 +146,7 @@ SUBROUTINE CHER(Uplo,N,Alpha,X,Incx,A,Lda)
     kx = 1 - (N-1)*Incx
   ELSEIF ( Incx/=1 ) THEN
     kx = 1
-  ENDIF
+  END IF
   !
   !     Start the operations. In this version the elements of A are
   !     accessed sequentially with one pass through the triangular part
@@ -162,12 +162,12 @@ SUBROUTINE CHER(Uplo,N,Alpha,X,Incx,A,Lda)
           temp = Alpha*CONJG(X(j))
           DO i = 1, j - 1
             A(i,j) = A(i,j) + X(i)*temp
-          ENDDO
+          END DO
           A(j,j) = REAL(A(j,j)) + REAL(X(j)*temp)
         ELSE
           A(j,j) = REAL(A(j,j))
-        ENDIF
-      ENDDO
+        END IF
+      END DO
     ELSE
       jx = kx
       DO j = 1, N
@@ -177,14 +177,14 @@ SUBROUTINE CHER(Uplo,N,Alpha,X,Incx,A,Lda)
           DO i = 1, j - 1
             A(i,j) = A(i,j) + X(ix)*temp
             ix = ix + Incx
-          ENDDO
+          END DO
           A(j,j) = REAL(A(j,j)) + REAL(X(jx)*temp)
         ELSE
           A(j,j) = REAL(A(j,j))
-        ENDIF
+        END IF
         jx = jx + Incx
-      ENDDO
-    ENDIF
+      END DO
+    END IF
     !
     !        Form  A  when A is stored in lower triangle.
     !
@@ -195,11 +195,11 @@ SUBROUTINE CHER(Uplo,N,Alpha,X,Incx,A,Lda)
         A(j,j) = REAL(A(j,j)) + REAL(temp*X(j))
         DO i = j + 1, N
           A(i,j) = A(i,j) + X(i)*temp
-        ENDDO
+        END DO
       ELSE
         A(j,j) = REAL(A(j,j))
-      ENDIF
-    ENDDO
+      END IF
+    END DO
   ELSE
     jx = kx
     DO j = 1, N
@@ -210,13 +210,13 @@ SUBROUTINE CHER(Uplo,N,Alpha,X,Incx,A,Lda)
         DO i = j + 1, N
           ix = ix + Incx
           A(i,j) = A(i,j) + X(ix)*temp
-        ENDDO
+        END DO
       ELSE
         A(j,j) = REAL(A(j,j))
-      ENDIF
+      END IF
       jx = jx + Incx
-    ENDDO
-  ENDIF
+    END DO
+  END IF
   !
   !
   !     End of CHER  .

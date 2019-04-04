@@ -64,7 +64,7 @@ REAL(8) FUNCTION DASINH(X)
     sqeps = SQRT(D1MACH(3))
     xmax = 1.0D0/sqeps
     first = .FALSE.
-  ENDIF
+  END IF
   !
   y = ABS(X)
   IF ( y>1.0D0 ) THEN
@@ -72,7 +72,7 @@ REAL(8) FUNCTION DASINH(X)
     IF ( y>=xmax ) DASINH = aln2 + LOG(y)
     DASINH = SIGN(DASINH,X)
     RETURN
-  ENDIF
+  END IF
   !
   DASINH = X
   IF ( y>sqeps ) DASINH = X*(1.0D0+DCSEVL(2.D0*X*X-1.D0,asnhcs,nterms))

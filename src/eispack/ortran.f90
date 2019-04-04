@@ -75,7 +75,7 @@ SUBROUTINE ORTRAN(Nm,N,Low,Igh,A,Ort,Z)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   !
   INTEGER i, j, N, kl, mm, mp, Nm, Igh, Low, mp1
   REAL A(Nm,*), Ort(*), Z(Nm,*)
@@ -87,10 +87,10 @@ SUBROUTINE ORTRAN(Nm,N,Low,Igh,A,Ort,Z)
     !
     DO j = 1, N
       Z(i,j) = 0.0E0
-    ENDDO
+    END DO
     !
     Z(i,i) = 1.0E0
-  ENDDO
+  END DO
   !
   kl = Igh - Low - 1
   IF ( kl>=1 ) THEN
@@ -102,26 +102,26 @@ SUBROUTINE ORTRAN(Nm,N,Low,Igh,A,Ort,Z)
         !
         DO i = mp1, Igh
           Ort(i) = A(i,mp-1)
-        ENDDO
+        END DO
         !
         DO j = mp, Igh
           g = 0.0E0
           !
           DO i = mp, Igh
             g = g + Ort(i)*Z(i,j)
-          ENDDO
+          END DO
           !     .......... DIVISOR BELOW IS NEGATIVE OF H FORMED IN ORTHES.
           !                DOUBLE DIVISION AVOIDS POSSIBLE UNDERFLOW ..........
           g = (g/Ort(mp))/A(mp,mp-1)
           !
           DO i = mp, Igh
             Z(i,j) = Z(i,j) + g*Ort(i)
-          ENDDO
+          END DO
           !
-        ENDDO
-      ENDIF
+        END DO
+      END IF
       !
-    ENDDO
-  ENDIF
+    END DO
+  END IF
   !
 END SUBROUTINE ORTRAN

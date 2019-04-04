@@ -50,7 +50,7 @@ SUBROUTINE GAMLIM(Xmin,Xmax)
     xln = LOG(Xmin)
     Xmin = Xmin - Xmin*((Xmin+0.5)*xln-Xmin-0.2258+alnsml)/(Xmin*xln+0.5)
     IF ( ABS(Xmin-xold)<0.005 ) GOTO 100
-  ENDDO
+  END DO
   CALL XERMSG('SLATEC','GAMLIM','UNABLE TO FIND XMIN',1,2)
   !
   100  Xmin = -Xmin + 0.01
@@ -62,7 +62,7 @@ SUBROUTINE GAMLIM(Xmin,Xmax)
     xln = LOG(Xmax)
     Xmax = Xmax - Xmax*((Xmax-0.5)*xln-Xmax+0.9189-alnbig)/(Xmax*xln-0.5)
     IF ( ABS(Xmax-xold)<0.005 ) GOTO 200
-  ENDDO
+  END DO
   CALL XERMSG('SLATEC','GAMLIM','UNABLE TO FIND XMAX',2,2)
   !
   200  Xmax = Xmax - 0.01

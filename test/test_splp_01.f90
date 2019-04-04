@@ -181,10 +181,10 @@ CONTAINS
           dattrv(kount) = kk
           kount = kount + 1
           dattrv(kount) = d(kk,mm)
-        ENDIF
-      ENDDO
+        END IF
+      END DO
       kount = kount + 1
-    ENDDO
+    END DO
     dattrv(kount) = zero
     !
     !     NON-NEGATIVITY CONSTRAINT
@@ -193,7 +193,7 @@ CONTAINS
       bl(ic) = zero
       ind(ic) = 3
       bu(ic) = 10000000.000
-    ENDDO
+    END DO
     !
     !     LE CONSTRAINTS
     !
@@ -202,7 +202,7 @@ CONTAINS
       ind(ivv) = 3
       bl(ivv) = 100.00000
       bu(ivv) = 100000000.00000
-    ENDDO
+    END DO
     prgopt(01) = 18
     prgopt(02) = 59
     prgopt(03) = 0
@@ -231,17 +231,17 @@ CONTAINS
     !
     DO i = 1, mrelas
       isoln(i) = INT( prgopt(i+3) )
-    ENDDO
+    END DO
     !
     Ipass = 1
     DO j = 1, mrelas
       DO i = 1, mrelas
         IF ( isoln(i)==ibasis(j) ) GOTO 100
-      ENDDO
+      END DO
       Ipass = 0
       EXIT
       100 CONTINUE
-    ENDDO
+    END DO
     !
     IF ( Kprint>=2 ) WRITE (Lun,99002) (isoln(i),ibasis(i),i=1,mrelas)
     !
@@ -330,7 +330,7 @@ CONTAINS
         !
         DO j = 1, ncols
           CALL SCOPY(mrows,d(1,j),1,w(1,j),1)
-        ENDDO
+        END DO
         !
         CALL SCOPY(mrows,rhs(1,irhs),1,w(1,ncols+1),1)
         !
@@ -338,13 +338,13 @@ CONTAINS
         !
         DO j = 1, ncols
           ind(j) = 3
-        ENDDO
+        END DO
         !
         CALL SBOLS(w,mdw,mrows,ncols,bl(1,ib),bu(1,ib),ind,iopt,x,rnorm,mode,&
           rw,iw)
         DO j = 1, ncols
           x(j) = x(j) - xtrue(j)
-        ENDDO
+        END DO
         !
         sr = SNRM2(ncols,x,1)
         mpass = 1
@@ -355,9 +355,9 @@ CONTAINS
           IF ( mpass==0 ) msg = 'FAIL'
           itest = itest + 1
           WRITE (Lun,99003) itest, ib, irhs, sr, msg
-        ENDIF
-      ENDDO
-    ENDDO
+        END IF
+      END DO
+    END DO
     !
     !     RUN STOER'S PROBLEM FROM 1971 SIAM J. N. ANAL. PAPER.
     !
@@ -378,7 +378,7 @@ CONTAINS
         DO j = 1, ncols
           CALL SCOPY(mcon,c(1,j),1,w(1,j),1)
           CALL SCOPY(mrows,d(1,j),1,w(mcon+1,j),1)
-        ENDDO
+        END DO
         !
         CALL SCOPY(mrows,rhs(1,irhs),1,w(mcon+1,ncols+1),1)
         !
@@ -397,7 +397,7 @@ CONTAINS
           mode,rw,iw)
         DO j = 1, ncols + mcon
           x(j) = x(j) - xtrue(j)
-        ENDDO
+        END DO
         !
         sr = SNRM2(ncols+mcon,x,1)
         mpass = 1
@@ -408,9 +408,9 @@ CONTAINS
           IF ( mpass==0 ) msg = 'FAIL'
           itest = itest + 1
           WRITE (Lun,99003) itest, ib, irhs, sr, msg
-        ENDIF
-      ENDDO
-    ENDDO
+        END IF
+      END DO
+    END DO
     !
     !     HERE THE VALUE OF IPASS=1 SAYS THAT SBOCLS() HAS PASSED ITS TESTS.
     !          THE VALUE OF IPASS=0 SAYS THAT SBOCLS() HAS NOT PASSED.
@@ -493,7 +493,7 @@ PROGRAM TEST37
     CALL XSETF(0)
   ELSE
     CALL XSETF(1)
-  ENDIF
+  END IF
   !
   !     Test SPLP package
   !
@@ -514,6 +514,6 @@ PROGRAM TEST37
     WRITE (lun,99002) nfail
     99002 FORMAT (/' ************* WARNING -- ',I5,&
       ' TEST(S) FAILED IN PROGRAM TEST37 *************')
-  ENDIF
+  END IF
   STOP
 END PROGRAM TEST37

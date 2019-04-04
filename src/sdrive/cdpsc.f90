@@ -25,7 +25,7 @@ SUBROUTINE CDPSC(Ksgn,N,Nq,Yh)
   !* REVISION HISTORY  (YYMMDD)
   !   790601  DATE WRITTEN
   !   900329  Initial submission to SLATEC.
-  
+
   INTEGER i, j, j1, j2, Ksgn, N, Nq
   COMPLEX Yh(N,*)
   !* FIRST EXECUTABLE STATEMENT  CDPSC
@@ -35,17 +35,17 @@ SUBROUTINE CDPSC(Ksgn,N,Nq,Yh)
         j = Nq - j2 + j1
         DO i = 1, N
           Yh(i,j) = Yh(i,j) + Yh(i,j+1)
-        ENDDO
-      ENDDO
-    ENDDO
+        END DO
+      END DO
+    END DO
   ELSE
     DO j1 = 1, Nq
       DO j2 = j1, Nq
         j = Nq - j2 + j1
         DO i = 1, N
           Yh(i,j) = Yh(i,j) - Yh(i,j+1)
-        ENDDO
-      ENDDO
-    ENDDO
-  ENDIF
+        END DO
+      END DO
+    END DO
+  END IF
 END SUBROUTINE CDPSC

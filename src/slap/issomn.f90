@@ -208,21 +208,21 @@ INTEGER FUNCTION ISSOMN(N,B,X,Nelt,Ia,Ja,A,Isym,MSOLVE,Nsave,Itol,Tol,&
     IF ( Iter==0 ) THEN
       CALL MSOLVE(N,B,Dz,Nelt,Ia,Ja,A,Isym,Rwork,Iwork)
       Bnrm = SNRM2(N,Dz,1)
-    ENDIF
+    END IF
     Err = SNRM2(N,Z,1)/Bnrm
   ELSEIF ( Itol==11 ) THEN
     !         err = ||x-TrueSolution||/||TrueSolution|| (2-Norms).
     IF ( Iter==0 ) Solnrm = SNRM2(N,SOLn,1)
     DO i = 1, N
       Dz(i) = X(i) - SOLn(i)
-    ENDDO
+    END DO
     Err = SNRM2(N,Dz,1)/Solnrm
   ELSE
     !
     !         If we get here ITOL is not one of the acceptable values.
     Err = R1MACH(2)
     Ierr = 3
-  ENDIF
+  END IF
   !
   IF ( Iunit/=0 ) THEN
     IF ( Iter==0 ) THEN
@@ -232,8 +232,8 @@ INTEGER FUNCTION ISSOMN(N,B,X,Nelt,Ia,Ja,A,Isym,MSOLVE,Nsave,Itol,Tol,&
       WRITE (Iunit,99002) Iter, Err
     ELSE
       WRITE (Iunit,99002) Iter, Err, Ak
-    ENDIF
-  ENDIF
+    END IF
+  END IF
   IF ( Err<=Tol ) ISSOMN = 1
   !
   RETURN

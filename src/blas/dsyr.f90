@@ -126,11 +126,11 @@ SUBROUTINE DSYR(Uplo,N,Alpha,X,Incx,A,Lda)
     info = 5
   ELSEIF ( Lda<MAX(1,N) ) THEN
     info = 7
-  ENDIF
+  END IF
   IF ( info/=0 ) THEN
     CALL XERBLA('DSYR  ',info)
     RETURN
-  ENDIF
+  END IF
   !
   !     Quick return if possible.
   !
@@ -142,7 +142,7 @@ SUBROUTINE DSYR(Uplo,N,Alpha,X,Incx,A,Lda)
     kx = 1 - (N-1)*Incx
   ELSEIF ( Incx/=1 ) THEN
     kx = 1
-  ENDIF
+  END IF
   !
   !     Start the operations. In this version the elements of A are
   !     accessed sequentially with one pass through the triangular part
@@ -158,9 +158,9 @@ SUBROUTINE DSYR(Uplo,N,Alpha,X,Incx,A,Lda)
           temp = Alpha*X(j)
           DO i = 1, j
             A(i,j) = A(i,j) + X(i)*temp
-          ENDDO
-        ENDIF
-      ENDDO
+          END DO
+        END IF
+      END DO
     ELSE
       jx = kx
       DO j = 1, N
@@ -170,11 +170,11 @@ SUBROUTINE DSYR(Uplo,N,Alpha,X,Incx,A,Lda)
           DO i = 1, j
             A(i,j) = A(i,j) + X(ix)*temp
             ix = ix + Incx
-          ENDDO
-        ENDIF
+          END DO
+        END IF
         jx = jx + Incx
-      ENDDO
-    ENDIF
+      END DO
+    END IF
     !
     !        Form  A  when A is stored in lower triangle.
     !
@@ -184,9 +184,9 @@ SUBROUTINE DSYR(Uplo,N,Alpha,X,Incx,A,Lda)
         temp = Alpha*X(j)
         DO i = j, N
           A(i,j) = A(i,j) + X(i)*temp
-        ENDDO
-      ENDIF
-    ENDDO
+        END DO
+      END IF
+    END DO
   ELSE
     jx = kx
     DO j = 1, N
@@ -196,11 +196,11 @@ SUBROUTINE DSYR(Uplo,N,Alpha,X,Incx,A,Lda)
         DO i = j, N
           A(i,j) = A(i,j) + X(ix)*temp
           ix = ix + Incx
-        ENDDO
-      ENDIF
+        END DO
+      END IF
       jx = jx + Incx
-    ENDDO
-  ENDIF
+    END DO
+  END IF
   !
   !
   !     End of DSYR  .

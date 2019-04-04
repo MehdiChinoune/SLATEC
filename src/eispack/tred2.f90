@@ -73,7 +73,7 @@ SUBROUTINE TRED2(Nm,N,A,D,E,Z)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   !
   INTEGER i, j, k, l, N, ii, Nm, jp1
   REAL A(Nm,*), D(*), E(*), Z(Nm,*)
@@ -84,8 +84,8 @@ SUBROUTINE TRED2(Nm,N,A,D,E,Z)
     !
     DO j = 1, i
       Z(i,j) = A(i,j)
-    ENDDO
-  ENDDO
+    END DO
+  END DO
   !
   IF ( N/=1 ) THEN
     !     .......... FOR I=N STEP -1 UNTIL 2 DO -- ..........
@@ -100,14 +100,14 @@ SUBROUTINE TRED2(Nm,N,A,D,E,Z)
         !     .......... SCALE ROW (ALGOL TOL THEN NOT NEEDED) ..........
         DO k = 1, l
           scale = scale + ABS(Z(i,k))
-        ENDDO
+        END DO
         !
         IF ( scale/=0.0E0 ) THEN
           !
           DO k = 1, l
             Z(i,k) = Z(i,k)/scale
             h = h + Z(i,k)*Z(i,k)
-          ENDDO
+          END DO
           !
           f = Z(i,l)
           g = -SIGN(SQRT(h),f)
@@ -122,19 +122,19 @@ SUBROUTINE TRED2(Nm,N,A,D,E,Z)
             !     .......... FORM ELEMENT OF A*U ..........
             DO k = 1, j
               g = g + Z(j,k)*Z(i,k)
-            ENDDO
+            END DO
             !
             jp1 = j + 1
             IF ( l>=jp1 ) THEN
               !
               DO k = jp1, l
                 g = g + Z(k,j)*Z(i,k)
-              ENDDO
-            ENDIF
+              END DO
+            END IF
             !     .......... FORM ELEMENT OF P ..........
             E(j) = g/h
             f = f + E(j)*Z(i,j)
-          ENDDO
+          END DO
           !
           hh = f/(h+h)
           !     .......... FORM REDUCED A ..........
@@ -145,16 +145,16 @@ SUBROUTINE TRED2(Nm,N,A,D,E,Z)
             !
             DO k = 1, j
               Z(j,k) = Z(j,k) - f*E(k) - g*Z(i,k)
-            ENDDO
-          ENDDO
+            END DO
+          END DO
         ELSE
           E(i) = Z(i,l)
-        ENDIF
-      ENDIF
+        END IF
+      END IF
       !
       D(i) = h
-    ENDDO
-  ENDIF
+    END DO
+  END IF
   !
   D(1) = 0.0E0
   E(1) = 0.0E0
@@ -168,13 +168,13 @@ SUBROUTINE TRED2(Nm,N,A,D,E,Z)
         !
         DO k = 1, l
           g = g + Z(i,k)*Z(k,j)
-        ENDDO
+        END DO
         !
         DO k = 1, l
           Z(k,j) = Z(k,j) - g*Z(k,i)
-        ENDDO
-      ENDDO
-    ENDIF
+        END DO
+      END DO
+    END IF
     !
     D(i) = Z(i,i)
     Z(i,i) = 1.0E0
@@ -183,9 +183,9 @@ SUBROUTINE TRED2(Nm,N,A,D,E,Z)
       DO j = 1, l
         Z(i,j) = 0.0E0
         Z(j,i) = 0.0E0
-      ENDDO
-    ENDIF
+      END DO
+    END IF
     !
-  ENDDO
+  END DO
   !
 END SUBROUTINE TRED2

@@ -68,7 +68,7 @@ SUBROUTINE DBSPDR(T,A,N,K,Nderiv,Ad)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   !
   !
   INTEGER i, id, ii, ipkmid, jj, jm, K, kmid, N, Nderiv
@@ -86,10 +86,10 @@ SUBROUTINE DBSPDR(T,A,N,K,Nderiv,Ad)
   ELSEIF ( Nderiv<1.OR.Nderiv>K ) THEN
     CALL XERMSG('SLATEC','DBSPDR','NDERIV DOES NOT SATISFY 1.LE.NDERIV.LE.K',2,1)
     RETURN
-  ENDIF
+  END IF
   DO i = 1, N
     Ad(i) = A(i)
-  ENDDO
+  END DO
   IF ( Nderiv==1 ) RETURN
   kmid = K
   jj = N
@@ -103,9 +103,9 @@ SUBROUTINE DBSPDR(T,A,N,K,Nderiv,Ad)
       diff = T(ipkmid) - T(i)
       IF ( diff/=0.0D0 ) Ad(ii+jj) = (Ad(ii+jm+1)-Ad(ii+jm))/diff*fkmid
       ii = ii + 1
-    ENDDO
+    END DO
     jm = jj
     jj = jj + N - id + 1
-  ENDDO
+  END DO
   RETURN
 END SUBROUTINE DBSPDR

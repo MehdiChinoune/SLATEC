@@ -96,7 +96,7 @@ SUBROUTINE SROTMG(Sd1,Sd2,Sx1,Sy1,Sparam)
           !         GO SCALE-CHECK..
           GOTO 200
           !         GO ZERO-H-D-AND-SX1..
-        ENDIF
+        END IF
       ELSEIF ( .NOT.sq2<zero ) THEN
         sflag = one
         sh11 = sp1/sp2
@@ -109,14 +109,14 @@ SUBROUTINE SROTMG(Sd1,Sd2,Sx1,Sy1,Sparam)
         !         GO SCALE-CHECK
         GOTO 200
         !         GO ZERO-H-D-AND-SX1..
-      ENDIF
+      END IF
     ELSE
       sflag = -two
       Sparam(1) = sflag
       RETURN
-    ENDIF
+    END IF
     !       GO ZERO-H-D-AND-SX1..
-  ENDIF
+  END IF
   !     PROCEDURE..ZERO-H-D-AND-SX1..
   sflag = -one
   sh11 = zero
@@ -141,8 +141,8 @@ SUBROUTINE SROTMG(Sd1,Sd2,Sx1,Sy1,Sparam)
       sh11 = one
       sh22 = one
       sflag = -one
-    ENDIF
-  ENDIF
+    END IF
+  END IF
   SELECT CASE(igo)
     CASE(300)
       GOTO 300
@@ -206,7 +206,7 @@ SUBROUTINE SROTMG(Sd1,Sd2,Sx1,Sy1,Sparam)
   ELSE
     Sparam(2) = sh11
     Sparam(5) = sh22
-  ENDIF
+  END IF
   Sparam(1) = sflag
   RETURN
 END SUBROUTINE SROTMG

@@ -121,7 +121,7 @@ SUBROUTINE R9AIMP(X,Ampl,Theta)
     !
     xsml = -1.0/R1MACH(3)**0.3333
     first = .FALSE.
-  ENDIF
+  END IF
   !
   IF ( X>=(-2.0) ) THEN
     !
@@ -135,7 +135,7 @@ SUBROUTINE R9AIMP(X,Ampl,Theta)
     IF ( X>xsml ) z = 16.0/X**3 + 1.0
     Ampl = 0.3125 + CSEVL(z,am21cs,nam21)
     Theta = -0.625 + CSEVL(z,ath1cs,nath1)
-  ENDIF
+  END IF
   !
   sqrtx = SQRT(-X)
   Ampl = SQRT(Ampl/sqrtx)

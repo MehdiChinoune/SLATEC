@@ -142,7 +142,7 @@ CONTAINS
       iunit = 0
     ELSE
       iunit = Lun
-    ENDIF
+    END IF
     !
     !     Set the Error tolerance to depend on the machine epsilon.
     !
@@ -174,12 +174,12 @@ CONTAINS
             '*RANDOM* Matrix.')
           nfail = nfail + 1
           CYCLE
-        ENDIF
+        END IF
         IF ( isym==0 ) THEN
           dens = REAL(nelt)/(n*n)
         ELSE
           dens = REAL(2*nelt)/(n*n)
-        ENDIF
+        END IF
         IF ( Kprint>=2 ) THEN
           WRITE (Lun,99003) n, nelt, dens
           99003 FORMAT (/'                * RANDOM Matrix of size',I5,&
@@ -187,7 +187,7 @@ CONTAINS
             I5,1P,E16.7)
           WRITE (Lun,99004) tol
           99004 FORMAT ('                Error tolerance = ',1P,E16.7)
-        ENDIF
+        END IF
         !
         !         Convert to the SLAP-Column format and
         !         write out matrix in SLAP-Column format, if desired.
@@ -198,7 +198,7 @@ CONTAINS
           99005 FORMAT (/'  ***** SLAP Column Matrix *****'/' Indx   ia   ja     a'/&
             (1X,I4,1X,I4,1X,I4,1X,1P,E16.7))
           CALL SCPPLT(n,nelt,ia,ja,a,isym,Lun)
-        ENDIF
+        END IF
         !
         !**********************************************************************
         !                    BEGINNING OF SLAP QUICK TESTS
@@ -244,7 +244,7 @@ CONTAINS
             iunit,rwork,lenw,iwork,leniw)
           !
           CALL OUTERR('SSDCG ',ierr,Kprint,nfail,Lun,iter,err)
-        ENDIF
+        END IF
         !
         !         * * * * * *    SSICCG    * * * * * *
         !
@@ -256,7 +256,7 @@ CONTAINS
             ierr,iunit,rwork,lenw,iwork,leniw)
           !
           CALL OUTERR('SSICCG',ierr,Kprint,nfail,Lun,iter,err)
-        ENDIF
+        END IF
         !
         !         * * * * * *    SSDCGN   * * * * * *
         !
@@ -329,7 +329,7 @@ CONTAINS
             err,ierr,iunit,rwork,lenw,iwork,leniw)
           !
           CALL OUTERR('SSDOMN',ierr,Kprint,nfail,Lun,iter,err)
-        ENDDO
+        END DO
         !
         !         * * * * * *   SSLUOM   * * * * * *
         !
@@ -342,7 +342,7 @@ CONTAINS
             err,ierr,iunit,rwork,lenw,iwork,leniw)
           !
           CALL OUTERR('SSLUOM',ierr,Kprint,nfail,Lun,iter,err)
-        ENDDO
+        END DO
         !
         !         * * * * * *   SSDGMR   * * * * * *
         !
@@ -356,7 +356,7 @@ CONTAINS
             err,ierr,iunit,rwork,lenw,iwork,leniw)
           !
           CALL OUTERR('SSDGMR',ierr,Kprint,nfail,Lun,iter,err)
-        ENDDO
+        END DO
         !
         !         * * * * * *   SSLUGM   * * * * * *
         !
@@ -369,9 +369,9 @@ CONTAINS
             err,ierr,iunit,rwork,lenw,iwork,leniw)
           !
           CALL OUTERR('SSLUGM',ierr,Kprint,nfail,Lun,iter,err)
-        ENDDO
-      ENDDO
-    ENDDO
+        END DO
+      END DO
+    END DO
     !
     IF ( nfail==0 ) THEN
       Ipass = 1
@@ -382,7 +382,7 @@ CONTAINS
       IF ( Kprint>=2 ) WRITE (Lun,99007) nfail
       99007 FORMAT ('*********',I3,' single precision SLAP tests failed ',&
         '*********')
-    ENDIF
+    END IF
     !
     RETURN
     99008 FORMAT (/1X,A6,' : ITOL = ',I2,'   ISYM = ',I1)
@@ -505,7 +505,7 @@ CONTAINS
     DO i = 1, N
       Idiag(i) = 0
       Dsum(i) = -1.0E0
-    ENDDO
+    END DO
     dummy = 0.0
     Nelt = 0
     !
@@ -529,7 +529,7 @@ CONTAINS
         IF ( Nelt>Neltmx ) THEN
           Ierr = 1
           RETURN
-        ENDIF
+        END IF
         Ia(Nelt) = N + 1 - Itmp(irow)
         Ja(Nelt) = icol
         IF ( Ia(Nelt)==icol ) THEN
@@ -545,16 +545,16 @@ CONTAINS
             IF ( Nelt>Neltmx ) THEN
               Ierr = 1
               RETURN
-            ENDIF
+            END IF
             Ia(Nelt) = icol
             Ja(Nelt) = Ia(Nelt-1)
             A(Nelt) = A(Nelt-1)*Factor
             Dsum(Ja(Nelt)) = Dsum(Ja(Nelt)) + A(Nelt)
           ELSE
             Dsum(Ia(Nelt)) = Dsum(Ia(Nelt)) + A(Nelt)
-          ENDIF
-        ENDIF
-      ENDDO
+          END IF
+        END IF
+      END DO
       IF ( Idiag(icol)==0 ) THEN
         !
         !           Add a diagonal to the column.
@@ -563,13 +563,13 @@ CONTAINS
         IF ( Nelt>Neltmx ) THEN
           Ierr = 1
           RETURN
-        ENDIF
+        END IF
         Idiag(icol) = Nelt
         A(Nelt) = 0.0E0
         Ia(Nelt) = icol
         Ja(Nelt) = icol
-      ENDIF
-    ENDDO
+      END IF
+    END DO
     !
     !         Clean up the diagonals.
     !
@@ -578,7 +578,7 @@ CONTAINS
     !DIR$ IVDEP
     DO i = 1, N
       A(Idiag(i)) = -1.0001E0*Dsum(i)
-    ENDDO
+    END DO
     !
     !         Set a random solution and determine the right-hand side.
     !
@@ -587,14 +587,14 @@ CONTAINS
     DO i = 1, N
       SOLn(i) = RAND(dummy)
       F(i) = 0.0E0
-    ENDDO
+    END DO
     !
     !VD$ NOVECTOR
     !VD$ NOCONCUR
     DO k = 1, Nelt
       F(Ia(k)) = F(Ia(k)) + A(k)*SOLn(Ja(k))
       IF ( Isym/=0.AND.Ia(k)/=Ja(k) ) F(Ja(k)) = F(Ja(k)) + A(k)*SOLn(Ia(k))
-    ENDDO
+    END DO
     !------------- LAST LINE OF SRMGEN FOLLOWS ----------------------------
   END SUBROUTINE SRMGEN
   !** VFILL
@@ -676,7 +676,7 @@ CONTAINS
       V(i+1) = Val
       V(i+2) = Val
       V(i+3) = Val
-    ENDDO
+    END DO
     !------------- LAST LINE OF VFILL FOLLOWS -----------------------------
   END SUBROUTINE VFILL
   !** OUTERR
@@ -714,15 +714,15 @@ CONTAINS
     IF ( Iout==1.AND.Ierr/=0 ) THEN
       WRITE (Istdo,99001) Method
       99001 FORMAT (1X,A6,' : **** FAILURE ****')
-    ENDIF
+    END IF
     IF ( Iout==2 ) THEN
       IF ( Ierr==0 ) THEN
         WRITE (Istdo,99002) Method
         99002 FORMAT (1X,A6,' : **** PASSED  ****')
       ELSE
         WRITE (Istdo,99004) Method, Ierr, Iter, Err
-      ENDIF
-    ENDIF
+      END IF
+    END IF
     IF ( Iout>=3 ) THEN
       IF ( Ierr==0 ) THEN
         WRITE (Istdo,99003) Method, Ierr, Iter, Err
@@ -732,8 +732,8 @@ CONTAINS
           ' Iteration Count = ',I3,' Stop Test = ',1P,E13.6)
       ELSE
         WRITE (Istdo,99004) Method, Ierr, Iter, Err
-      ENDIF
-    ENDIF
+      END IF
+    END IF
     RETURN
     99004 FORMAT (' **************** WARNING ***********************'/' **** ',A6,&
       ' Quick Test FAILED: IERR = ',I5,&
@@ -812,7 +812,7 @@ PROGRAM TEST25
     CALL XSETF(0)
   ELSE
     CALL XSETF(1)
-  ENDIF
+  END IF
   CALL XERMAX(1000)
   !
   !     Test SLAP (single precision)
@@ -829,6 +829,6 @@ PROGRAM TEST25
     WRITE (lun,99002) nfail
     99002 FORMAT (/' ************* WARNING -- ',I5,&
       ' TEST(S) FAILED IN PROGRAM TEST25 *************')
-  ENDIF
+  END IF
   STOP
 END PROGRAM TEST25

@@ -63,7 +63,7 @@ REAL(8) FUNCTION DBESJ1(X)
     xsml = SQRT(8.0D0*D1MACH(3))
     xmin = 2.0D0*D1MACH(1)
     first = .FALSE.
-  ENDIF
+  END IF
   !
   y = ABS(X)
   IF ( y>4.0D0 ) THEN
@@ -71,7 +71,7 @@ REAL(8) FUNCTION DBESJ1(X)
     CALL D9B1MP(y,ampl,theta)
     DBESJ1 = SIGN(ampl,X)*COS(theta)
     RETURN
-  ENDIF
+  END IF
   !
   DBESJ1 = 0.0D0
   IF ( y==0.0D0 ) RETURN

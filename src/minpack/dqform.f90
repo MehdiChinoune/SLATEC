@@ -65,9 +65,9 @@ SUBROUTINE DQFORM(M,N,Q,Ldq,Wa)
       jm1 = j - 1
       DO i = 1, jm1
         Q(i,j) = zero
-      ENDDO
-    ENDDO
-  ENDIF
+      END DO
+    END DO
+  END IF
   !
   !     INITIALIZE REMAINING COLUMNS TO THOSE OF THE IDENTITY MATRIX.
   !
@@ -76,10 +76,10 @@ SUBROUTINE DQFORM(M,N,Q,Ldq,Wa)
     DO j = np1, M
       DO i = 1, M
         Q(i,j) = zero
-      ENDDO
+      END DO
       Q(j,j) = one
-    ENDDO
-  ENDIF
+    END DO
+  END IF
   !
   !     ACCUMULATE Q FROM ITS FACTORED FORM.
   !
@@ -88,21 +88,21 @@ SUBROUTINE DQFORM(M,N,Q,Ldq,Wa)
     DO i = k, M
       Wa(i) = Q(i,k)
       Q(i,k) = zero
-    ENDDO
+    END DO
     Q(k,k) = one
     IF ( Wa(k)/=zero ) THEN
       DO j = k, M
         sum = zero
         DO i = k, M
           sum = sum + Q(i,j)*Wa(i)
-        ENDDO
+        END DO
         temp = sum/Wa(k)
         DO i = k, M
           Q(i,j) = Q(i,j) - temp*Wa(i)
-        ENDDO
-      ENDDO
-    ENDIF
-  ENDDO
+        END DO
+      END DO
+    END IF
+  END DO
   !
   !     LAST CARD OF SUBROUTINE DQFORM.
   !

@@ -114,7 +114,7 @@ SUBROUTINE SPOIR(A,Lda,N,V,Itask,Ind,Work)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   !
   INTEGER Lda, N, Itask, Ind, info, j
   REAL A(Lda,*), V(*), Work(N,*), SASUM, xnorm, dnorm, R1MACH
@@ -128,21 +128,21 @@ SUBROUTINE SPOIR(A,Lda,N,V,Itask,Ind,Work)
     CALL XERMSG('SLATEC','SPOIR','LDA = '//xern1//' IS LESS THAN N = '//&
       xern2,-1,1)
     RETURN
-  ENDIF
+  END IF
   !
   IF ( N<=0 ) THEN
     Ind = -2
     WRITE (xern1,'(I8)') N
     CALL XERMSG('SLATEC','SPOIR','N = '//xern1//' IS LESS THAN 1',-2,1)
     RETURN
-  ENDIF
+  END IF
   !
   IF ( Itask<1 ) THEN
     Ind = -3
     WRITE (xern1,'(I8)') Itask
     CALL XERMSG('SLATEC','SPOIR','ITASK = '//xern1//' IS LESS THAN 1',-3,1)
     RETURN
-  ENDIF
+  END IF
   !
   IF ( Itask==1 ) THEN
     !
@@ -150,7 +150,7 @@ SUBROUTINE SPOIR(A,Lda,N,V,Itask,Ind,Work)
     !
     DO j = 1, N
       CALL SCOPY(N,A(1,j),1,Work(1,j),1)
-    ENDDO
+    END DO
     !
     !        FACTOR MATRIX A INTO R
     CALL SPOFA(Work,N,N,info)
@@ -161,8 +161,8 @@ SUBROUTINE SPOIR(A,Lda,N,V,Itask,Ind,Work)
       CALL XERMSG('SLATEC','SPOIR',&
         'SINGULAR OR NOT POSITIVE DEFINITE - NO SOLUTION',-4,1)
       RETURN
-    ENDIF
-  ENDIF
+    END IF
+  END IF
   !
   !     SOLVE AFTER FACTORING
   !     MOVE VECTOR B TO WORK
@@ -176,14 +176,14 @@ SUBROUTINE SPOIR(A,Lda,N,V,Itask,Ind,Work)
   IF ( xnorm==0.0 ) THEN
     Ind = 75
     RETURN
-  ENDIF
+  END IF
   !
   !     COMPUTE  RESIDUAL
   !
   DO j = 1, N
     Work(j,N+1) = -Work(j,N+1) + REAL( DSDOT(j-1,A(1,j),1,V(1),1)&
       + DSDOT(N-j+1,A(j,j),Lda,V(j),1) , 4 )
-  ENDDO
+  END DO
   !
   !     SOLVE A*DELTA=R
   !
@@ -200,5 +200,5 @@ SUBROUTINE SPOIR(A,Lda,N,V,Itask,Ind,Work)
   IF ( Ind<=0 ) THEN
     Ind = -10
     CALL XERMSG('SLATEC','SPOIR','SOLUTION MAY HAVE NO SIGNIFICANCE',-10,0)
-  ENDIF
+  END IF
 END SUBROUTINE SPOIR

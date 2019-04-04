@@ -73,7 +73,7 @@ REAL(8) FUNCTION DAI(X)
     xmaxt = (-1.5D0*LOG(D1MACH(1)))**0.6667D0
     xmax = xmaxt - xmaxt*LOG(xmaxt)/(4.0D0*SQRT(xmaxt)+1.0D0) - 0.01D0
     first = .FALSE.
-  ENDIF
+  END IF
   !
   IF ( X<(-1.D0) ) THEN
     CALL D9AIMP(X,xm,theta)
@@ -91,7 +91,7 @@ REAL(8) FUNCTION DAI(X)
     DAI = 0.0D0
     CALL XERMSG('SLATEC','DAI','X SO BIG AI UNDERFLOWS',1,1)
     RETURN
-  ENDIF
+  END IF
   DAI = DAIE(X)*EXP(-2.0D0*X*SQRT(X)/3.0D0)
   RETURN
 END FUNCTION DAI

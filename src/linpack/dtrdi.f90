@@ -76,7 +76,7 @@ SUBROUTINE DTRDI(T,Ldt,N,Det,Job,Info)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   INTEGER Ldt, N, Job, Info
   REAL(8) :: T(Ldt,*), Det(2)
   !
@@ -97,13 +97,13 @@ SUBROUTINE DTRDI(T,Ldt,N,Det,Job,Info)
       DO WHILE ( ABS(Det(1))<1.0D0 )
         Det(1) = ten*Det(1)
         Det(2) = Det(2) - 1.0D0
-      ENDDO
+      END DO
       DO WHILE ( ABS(Det(1))>=ten )
         Det(1) = Det(1)/ten
         Det(2) = Det(2) + 1.0D0
-      ENDDO
-    ENDDO
-  ENDIF
+      END DO
+    END DO
+  END IF
   !
   !        COMPUTE INVERSE OF UPPER TRIANGULAR
   !
@@ -125,9 +125,9 @@ SUBROUTINE DTRDI(T,Ldt,N,Det,Job,Info)
             temp = T(k,j)
             T(k,j) = 0.0D0
             CALL DAXPY(N-k+1,temp,T(k,k),1,T(k,j),1)
-          ENDDO
-        ENDIF
-      ENDDO
+          END DO
+        END IF
+      END DO
       Info = 0
     ELSE
       DO k = 1, N
@@ -142,11 +142,11 @@ SUBROUTINE DTRDI(T,Ldt,N,Det,Job,Info)
             temp = T(k,j)
             T(k,j) = 0.0D0
             CALL DAXPY(k,temp,T(1,k),1,T(1,j),1)
-          ENDDO
-        ENDIF
-      ENDDO
+          END DO
+        END IF
+      END DO
       Info = 0
-    ENDIF
-  ENDIF
+    END IF
+  END IF
   RETURN
 END SUBROUTINE DTRDI

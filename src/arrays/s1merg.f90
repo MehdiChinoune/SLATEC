@@ -31,7 +31,7 @@ SUBROUTINE S1MERG(Tcos,I1,M1,I2,M2,I3)
   !           not compile correctly with optimization on the IBM RS6000.
   !           (RWC)
   !   920130  Code name changed from MERGE to S1MERG.  (WRB)
-  
+
   INTEGER I1, I2, I3, M1, M2
   REAL Tcos(*)
   !
@@ -43,12 +43,12 @@ SUBROUTINE S1MERG(Tcos,I1,M1,I2,M2,I3)
   IF ( M1==0.AND.M2/=0 ) THEN
     CALL SCOPY(M2,Tcos(I2+1),1,Tcos(I3+1),1)
     RETURN
-  ENDIF
+  END IF
   !
   IF ( M1/=0.AND.M2==0 ) THEN
     CALL SCOPY(M1,Tcos(I1+1),1,Tcos(I3+1),1)
     RETURN
-  ENDIF
+  END IF
   !
   j1 = 1
   j2 = 1
@@ -61,15 +61,15 @@ SUBROUTINE S1MERG(Tcos,I1,M1,I2,M2,I3)
       IF ( j1>M1 ) THEN
         CALL SCOPY(M2-j2+1,Tcos(I2+j2),1,Tcos(I3+j3+1),1)
         RETURN
-      ENDIF
+      END IF
     ELSE
       Tcos(I3+j3) = Tcos(I2+j2)
       j2 = j2 + 1
       IF ( j2>M2 ) THEN
         CALL SCOPY(M1-j1+1,Tcos(I1+j1),1,Tcos(I3+j3+1),1)
         RETURN
-      ENDIF
-    ENDIF
+      END IF
+    END IF
     j3 = j3 + 1
-  ENDDO
+  END DO
 END SUBROUTINE S1MERG

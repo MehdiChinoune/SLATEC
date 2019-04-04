@@ -80,7 +80,7 @@ SUBROUTINE SROT(N,Sx,Incx,Sy,Incy,Sc,Ss)
         Sy(ky) = -Ss*w + Sc*z
         kx = kx + Incx
         ky = ky + Incy
-      ENDDO
+      END DO
     ELSE
       !
       !          Code for equal and positive increments.
@@ -91,8 +91,8 @@ SUBROUTINE SROT(N,Sx,Incx,Sy,Incy,Sc,Ss)
         z = Sy(i)
         Sx(i) = Sc*w + Ss*z
         Sy(i) = -Ss*w + Sc*z
-      ENDDO
-    ENDIF
-  ENDIF
+      END DO
+    END IF
+  END IF
   !
 END SUBROUTINE SROT

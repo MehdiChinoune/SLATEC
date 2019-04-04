@@ -160,7 +160,7 @@ SUBROUTINE JAIRY(X,Rx,C,Ai,Dai)
         e1 = tt*e1 - e2 + b(j)
         f2 = temp1
         e2 = temp2
-      ENDDO
+      END DO
       temp1 = t*f1 - f2 + a(1)
       temp2 = t*e1 - e2 + b(1)
       rtrx = SQRT(Rx)
@@ -181,14 +181,14 @@ SUBROUTINE JAIRY(X,Rx,C,Ai,Dai)
         e1 = tt*e1 - e2 + db(j)
         f2 = temp1
         e2 = temp2
-      ENDDO
+      END DO
       temp1 = t*f1 - f2 + da(1)
       temp2 = t*e1 - e2 + db(1)
       e1 = ccv*con5 + 0.5E0*scv
       e2 = scv*con5 - 0.5E0*ccv
       Dai = (temp1*e1-temp2*e2)*rtrx
       RETURN
-    ENDIF
+    END IF
   ELSEIF ( C>5.0E0 ) THEN
     !
     t = 10.0E0/C - 1.0E0
@@ -201,7 +201,7 @@ SUBROUTINE JAIRY(X,Rx,C,Ai,Dai)
       temp1 = f1
       f1 = tt*f1 - f2 + ak3(j)
       f2 = temp1
-    ENDDO
+    END DO
     rtrx = SQRT(Rx)
     ec = EXP(-C)
     Ai = ec*(t*f1-f2+ak3(1))/rtrx
@@ -213,7 +213,7 @@ SUBROUTINE JAIRY(X,Rx,C,Ai,Dai)
       temp1 = f1
       f1 = tt*f1 - f2 + dak3(j)
       f2 = temp1
-    ENDDO
+    END DO
     Dai = -rtrx*ec*(t*f1-f2+dak3(1))
     RETURN
   ELSEIF ( X>1.20E0 ) THEN
@@ -228,7 +228,7 @@ SUBROUTINE JAIRY(X,Rx,C,Ai,Dai)
       temp1 = f1
       f1 = tt*f1 - f2 + ak2(j)
       f2 = temp1
-    ENDDO
+    END DO
     rtrx = SQRT(Rx)
     ec = EXP(-C)
     Ai = ec*(t*f1-f2+ak2(1))/rtrx
@@ -240,7 +240,7 @@ SUBROUTINE JAIRY(X,Rx,C,Ai,Dai)
       temp1 = f1
       f1 = tt*f1 - f2 + dak2(j)
       f2 = temp1
-    ENDDO
+    END DO
     Dai = -ec*(t*f1-f2+dak2(1))*rtrx
     RETURN
   ELSE
@@ -254,7 +254,7 @@ SUBROUTINE JAIRY(X,Rx,C,Ai,Dai)
       temp1 = f1
       f1 = tt*f1 - f2 + ak1(j)
       f2 = temp1
-    ENDDO
+    END DO
     Ai = t*f1 - f2 + ak1(1)
     !
     j = n1d
@@ -265,10 +265,10 @@ SUBROUTINE JAIRY(X,Rx,C,Ai,Dai)
       temp1 = f1
       f1 = tt*f1 - f2 + dak1(j)
       f2 = temp1
-    ENDDO
+    END DO
     Dai = -(t*f1-f2+dak1(1))
     RETURN
-  ENDIF
+  END IF
   t = 0.4E0*C - 1.0E0
   tt = t + t
   j = n3
@@ -284,7 +284,7 @@ SUBROUTINE JAIRY(X,Rx,C,Ai,Dai)
     e1 = tt*e1 - e2 + ajn(j)
     f2 = temp1
     e2 = temp2
-  ENDDO
+  END DO
   Ai = (t*e1-e2+ajn(1)) - X*(t*f1-f2+ajp(1))
   j = n3d
   f1 = dajp(j)
@@ -299,7 +299,7 @@ SUBROUTINE JAIRY(X,Rx,C,Ai,Dai)
     e1 = tt*e1 - e2 + dajn(j)
     f2 = temp1
     e2 = temp2
-  ENDDO
+  END DO
   Dai = X*X*(t*f1-f2+dajp(1)) + (t*e1-e2+dajn(1))
   RETURN
 END SUBROUTINE JAIRY

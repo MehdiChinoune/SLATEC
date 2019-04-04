@@ -77,7 +77,7 @@ SUBROUTINE DBVDER(X,Y,Yp,G,Ipar)
     CALL DFMAT(X,Y(na),Yp(na))
     NOFst = NOFst - NCOmp
     na = na + NCOmp
-  ENDDO
+  END DO
   !
   IF ( INHomo/=1 ) RETURN
   CALL DFMAT(X,Y(na),Yp(na))
@@ -87,7 +87,7 @@ SUBROUTINE DBVDER(X,Y,Yp,G,Ipar)
     IF ( IVP==0 ) CALL DGVEC(X,G)
     IF ( IVP>0 ) CALL DUVEC(X,Y(IVP+1),G)
     XSAv = X
-  ENDIF
+  END IF
   !
   !     If the user has chosen not to normalize the particular
   !     solution, then C is defined in DBVPOR to be 1.0
@@ -98,5 +98,5 @@ SUBROUTINE DBVDER(X,Y,Yp,G,Ipar)
   DO j = 1, NCOmp
     l = na + j - 1
     Yp(l) = Yp(l) + G(j)/C
-  ENDDO
+  END DO
 END SUBROUTINE DBVDER

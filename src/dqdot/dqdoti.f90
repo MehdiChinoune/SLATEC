@@ -84,7 +84,7 @@ REAL(8) FUNCTION DQDOTI(N,Db,Qc,Dx,Incx,Dy,Incy)
   IF ( Db/=0.D0 ) THEN
     CALL MPCDM(Db,qx)
     CALL MPADD(Qc,qx,Qc)
-  ENDIF
+  END IF
   IF ( N/=0 ) THEN
     ix = 1
     iy = 1
@@ -97,7 +97,7 @@ REAL(8) FUNCTION DQDOTI(N,Db,Qc,Dx,Incx,Dy,Incy)
       CALL MPADD(Qc,qx,Qc)
       ix = ix + Incx
       iy = iy + Incy
-    ENDDO
-  ENDIF
+    END DO
+  END IF
   CALL MPCMD(Qc,DQDOTI)
 END FUNCTION DQDOTI

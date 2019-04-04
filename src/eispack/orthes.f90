@@ -74,7 +74,7 @@ SUBROUTINE ORTHES(Nm,N,Low,Igh,A,Ort)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   !
   INTEGER i, j, m, N, ii, jj, la, mp, Nm, Igh, kp1, Low
   REAL A(Nm,*), Ort(*)
@@ -92,7 +92,7 @@ SUBROUTINE ORTHES(Nm,N,Low,Igh,A,Ort)
       !     .......... SCALE COLUMN (ALGOL TOL THEN NOT NEEDED) ..........
       DO i = m, Igh
         scale = scale + ABS(A(i,m-1))
-      ENDDO
+      END DO
       !
       IF ( scale/=0.0E0 ) THEN
         mp = m + Igh
@@ -101,7 +101,7 @@ SUBROUTINE ORTHES(Nm,N,Low,Igh,A,Ort)
           i = mp - ii
           Ort(i) = A(i,m-1)/scale
           h = h + Ort(i)*Ort(i)
-        ENDDO
+        END DO
         !
         g = -SIGN(SQRT(h),Ort(m))
         h = h - Ort(m)*g
@@ -113,15 +113,15 @@ SUBROUTINE ORTHES(Nm,N,Low,Igh,A,Ort)
           DO ii = m, Igh
             i = mp - ii
             f = f + Ort(i)*A(i,j)
-          ENDDO
+          END DO
           !
           f = f/h
           !
           DO i = m, Igh
             A(i,j) = A(i,j) - f*Ort(i)
-          ENDDO
+          END DO
           !
-        ENDDO
+        END DO
         !     .......... FORM (I-(U*UT)/H)*A*(I-(U*UT)/H) ..........
         DO i = 1, Igh
           f = 0.0E0
@@ -129,20 +129,20 @@ SUBROUTINE ORTHES(Nm,N,Low,Igh,A,Ort)
           DO jj = m, Igh
             j = mp - jj
             f = f + Ort(j)*A(i,j)
-          ENDDO
+          END DO
           !
           f = f/h
           !
           DO j = m, Igh
             A(i,j) = A(i,j) - f*Ort(j)
-          ENDDO
+          END DO
           !
-        ENDDO
+        END DO
         !
         Ort(m) = scale*Ort(m)
         A(m,m-1) = scale*g
-      ENDIF
-    ENDDO
-  ENDIF
+      END IF
+    END DO
+  END IF
   !
 END SUBROUTINE ORTHES

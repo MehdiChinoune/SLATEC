@@ -73,7 +73,7 @@ REAL(8) FUNCTION DLNREL(X)
     nlnrel = INITDS(alnrcs,43,0.1*REAL(D1MACH(3)))
     xmin = -1.0D0 + SQRT(D1MACH(4))
     first = .FALSE.
-  ENDIF
+  END IF
   !
   IF ( X<=(-1.D0) ) CALL XERMSG('SLATEC','DLNREL','X IS LE -1',2,2)
   IF ( X<xmin ) CALL XERMSG('SLATEC','DLNREL',&
@@ -83,6 +83,6 @@ REAL(8) FUNCTION DLNREL(X)
     DLNREL = X*(1.D0-X*DCSEVL(X/.375D0,alnrcs,nlnrel))
   ELSE
     DLNREL = LOG(1.0D0+X)
-  ENDIF
+  END IF
   !
 END FUNCTION DLNREL

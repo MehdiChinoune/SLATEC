@@ -74,7 +74,7 @@ SUBROUTINE TRED3(N,Nv,A,D,E,E2)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   !
   INTEGER i, j, k, l, N, ii, iz, jk, Nv
   REAL A(*), D(*), E(*), E2(*)
@@ -94,14 +94,14 @@ SUBROUTINE TRED3(N,Nv,A,D,E,E2)
         iz = iz + 1
         D(k) = A(iz)
         scale = scale + ABS(D(k))
-      ENDDO
+      END DO
       !
       IF ( scale/=0.0E0 ) THEN
         !
         DO k = 1, l
           D(k) = D(k)/scale
           h = h + D(k)*D(k)
-        ENDDO
+        END DO
         !
         E2(i) = scale*scale*h
         f = D(l)
@@ -121,11 +121,11 @@ SUBROUTINE TRED3(N,Nv,A,D,E,E2)
               jk = jk + 1
               IF ( k>j ) jk = jk + k - 2
               g = g + A(jk)*D(k)
-            ENDDO
+            END DO
             !     .......... FORM ELEMENT OF P ..........
             E(j) = g/h
             f = f + E(j)*D(j)
-          ENDDO
+          END DO
           !
           hh = f/(h+h)
           jk = 0
@@ -138,17 +138,17 @@ SUBROUTINE TRED3(N,Nv,A,D,E,E2)
             DO k = 1, j
               jk = jk + 1
               A(jk) = A(jk) - f*E(k) - g*D(k)
-            ENDDO
-          ENDDO
-        ENDIF
+            END DO
+          END DO
+        END IF
         GOTO 50
-      ENDIF
-    ENDIF
+      END IF
+    END IF
     E(i) = 0.0E0
     E2(i) = 0.0E0
     !
-    50     D(i) = A(iz+1)
+    50  D(i) = A(iz+1)
     A(iz+1) = scale*SQRT(h)
-  ENDDO
+  END DO
   !
 END SUBROUTINE TRED3

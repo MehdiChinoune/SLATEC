@@ -48,7 +48,7 @@ COMPLEX FUNCTION CATAN2(Csn,Ccs)
     !
     CATAN2 = CMPLX(SIGN(0.5*pi,REAL(Csn)),0.0)
     RETURN
-  ENDIF
+  END IF
   !
   CATAN2 = CATAN(Csn/Ccs)
   IF ( REAL(Ccs)<0. ) CATAN2 = CATAN2 + pi

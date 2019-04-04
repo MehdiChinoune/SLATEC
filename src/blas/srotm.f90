@@ -92,7 +92,7 @@ SUBROUTINE SROTM(N,Sx,Incx,Sy,Incy,Sparam)
           Sy(ky) = w*sh21 + z*sh22
           kx = kx + Incx
           ky = ky + Incy
-        ENDDO
+        END DO
       ELSEIF ( sflag==0 ) THEN
         sh12 = Sparam(4)
         sh21 = Sparam(3)
@@ -103,7 +103,7 @@ SUBROUTINE SROTM(N,Sx,Incx,Sy,Incy,Sparam)
           Sy(ky) = w*sh21 + z
           kx = kx + Incx
           ky = ky + Incy
-        ENDDO
+        END DO
       ELSE
         sh11 = Sparam(2)
         sh22 = Sparam(5)
@@ -114,8 +114,8 @@ SUBROUTINE SROTM(N,Sx,Incx,Sy,Incy,Sparam)
           Sy(ky) = -w + sh22*z
           kx = kx + Incx
           ky = ky + Incy
-        ENDDO
-      ENDIF
+        END DO
+      END IF
     ELSE
       !
       nsteps = N*Incx
@@ -129,7 +129,7 @@ SUBROUTINE SROTM(N,Sx,Incx,Sy,Incy,Sparam)
           z = Sy(i)
           Sx(i) = w*sh11 + z*sh12
           Sy(i) = w*sh21 + z*sh22
-        ENDDO
+        END DO
       ELSEIF ( sflag==0 ) THEN
         sh12 = Sparam(4)
         sh21 = Sparam(3)
@@ -138,7 +138,7 @@ SUBROUTINE SROTM(N,Sx,Incx,Sy,Incy,Sparam)
           z = Sy(i)
           Sx(i) = w + z*sh12
           Sy(i) = w*sh21 + z
-        ENDDO
+        END DO
       ELSE
         sh11 = Sparam(2)
         sh22 = Sparam(5)
@@ -147,8 +147,8 @@ SUBROUTINE SROTM(N,Sx,Incx,Sy,Incy,Sparam)
           z = Sy(i)
           Sx(i) = w*sh11 + z
           Sy(i) = -w + sh22*z
-        ENDDO
-      ENDIF
-    ENDIF
-  ENDIF
+        END DO
+      END IF
+    END IF
+  END IF
 END SUBROUTINE SROTM

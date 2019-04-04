@@ -265,7 +265,7 @@ SUBROUTINE POIS3D(Lperod,L,C1,Mperod,M,C2,Nperod,N,A,B,C,Ldimf,Mdimf,F,Ierror,W)
     IF ( A(k)/=C(1) ) GOTO 100
     IF ( C(k)/=C(1) ) GOTO 100
     IF ( B(k)/=B(1) ) GOTO 100
-  ENDDO
+  END DO
   GOTO 300
   100  Ierror = 9
   200 CONTINUE
@@ -293,14 +293,14 @@ SUBROUTINE POIS3D(Lperod,L,C1,Mperod,M,C2,Nperod,N,A,B,C,Ldimf,Mdimf,F,Ierror,W)
             nhmk = nh - k
             W(k) = F(i,j,nhmk) - F(i,j,nhpk)
             W(nhpk) = F(i,j,nhmk) + F(i,j,nhpk)
-          ENDDO
+          END DO
           W(nh) = 2.*F(i,j,nh)
           IF ( nodd/=1 ) W(N) = 2.*F(i,j,N)
           DO k = 1, N
             F(i,j,k) = W(k)
-          ENDDO
-        ENDDO
-      ENDDO
+          END DO
+        END DO
+      END DO
       save(1) = C(nhm1)
       save(2) = A(nh)
       save(3) = C(nh)
@@ -315,8 +315,8 @@ SUBROUTINE POIS3D(Lperod,L,C1,Mperod,M,C2,Nperod,N,A,B,C,Ldimf,Mdimf,F,Ierror,W)
       ELSE
         B(nhm1) = B(nhm1) - A(nh-1)
         B(N) = B(N) + A(N)
-      ENDIF
-    ENDIF
+      END IF
+    END IF
     CALL POS3D1(lp,L,mp,M,N,A,B,C,Ldimf,Mdimf,F,W,W(iwyrt),W(iwt),W(iwd),&
       W(iwx),W(iwy),C1,C2,W(iwbb))
     IF ( np/=2 ) THEN
@@ -327,20 +327,20 @@ SUBROUTINE POIS3D(Lperod,L,C1,Mperod,M,C2,Nperod,N,A,B,C,Ldimf,Mdimf,F,Ierror,W)
             nhpk = nh + k
             W(nhmk) = .5*(F(i,j,nhpk)+F(i,j,k))
             W(nhpk) = .5*(F(i,j,nhpk)-F(i,j,k))
-          ENDDO
+          END DO
           W(nh) = .5*F(i,j,nh)
           IF ( nodd/=1 ) W(N) = .5*F(i,j,N)
           DO k = 1, N
             F(i,j,k) = W(k)
-          ENDDO
-        ENDDO
-      ENDDO
+          END DO
+        END DO
+      END DO
       C(nhm1) = save(1)
       A(nh) = save(2)
       C(nh) = save(3)
       B(nhm1) = save(4)
       B(N) = save(5)
       A(N) = save(6)
-    ENDIF
-  ENDIF
+    END IF
+  END IF
 END SUBROUTINE POIS3D

@@ -72,7 +72,7 @@ SUBROUTINE CUNK1(Z,Fnu,Kode,Mr,N,Y,Nz,Tol,Elim,Alim)
     ELSE
       cfn = CMPLX(fn,0.0E0)
       s1 = zeta1(j) - cfn*(cfn/(zr+zeta2(j)))
-    ENDIF
+    END IF
     !-----------------------------------------------------------------------
     !     TEST FOR UNDERFLOW AND OVERFLOW
     !-----------------------------------------------------------------------
@@ -89,8 +89,8 @@ SUBROUTINE CUNK1(Z,Fnu,Kode,Mr,N,Y,Nz,Tol,Elim,Alim)
         IF ( kdflg==1 ) kflag = 1
         IF ( rs1>=0.0E0 ) THEN
           IF ( kdflg==1 ) kflag = 3
-        ENDIF
-      ENDIF
+        END IF
+      END IF
       !-----------------------------------------------------------------------
       !     SCALE S1 TO KEEP INTERMEDIATE ARITHMETIC ON SCALE NEAR
       !     EXPONENT EXTREMES
@@ -104,14 +104,14 @@ SUBROUTINE CUNK1(Z,Fnu,Kode,Mr,N,Y,Nz,Tol,Elim,Alim)
       IF ( kflag==1 ) THEN
         CALL CUCHK(s2,nw,bry(1),Tol)
         IF ( nw/=0 ) GOTO 50
-      ENDIF
+      END IF
       cy(kdflg) = s2
       Y(i) = s2*csr(kflag)
       IF ( kdflg==2 ) GOTO 100
       kdflg = 2
       CYCLE
-    ENDIF
-    50     IF ( rs1>0.0E0 ) GOTO 600
+    END IF
+    50  IF ( rs1>0.0E0 ) GOTO 600
     !-----------------------------------------------------------------------
     !     FOR X.LT.0.0, THE I FUNCTION TO BE ADDED WILL OVERFLOW
     !-----------------------------------------------------------------------
@@ -123,9 +123,9 @@ SUBROUTINE CUNK1(Z,Fnu,Kode,Mr,N,Y,Nz,Tol,Elim,Alim)
       IF ( Y(i-1)/=czero ) THEN
         Y(i-1) = czero
         Nz = Nz + 1
-      ENDIF
-    ENDIF
-  ENDDO
+      END IF
+    END IF
+  END DO
   i = N
   100  rz = CMPLX(2.0E0,0.0E0)/zr
   ck = CMPLX(fn,0.0E0)*rz
@@ -145,7 +145,7 @@ SUBROUTINE CUNK1(Z,Fnu,Kode,Mr,N,Y,Nz,Tol,Elim,Alim)
   ELSE
     cfn = CMPLX(fn,0.0E0)
     s1 = zeta1d - cfn*(cfn/(zr+zeta2d))
-  ENDIF
+  END IF
   rs1 = REAL(s1)
   IF ( ABS(rs1)<=Elim ) THEN
     IF ( ABS(rs1)<Alim ) GOTO 200
@@ -155,7 +155,7 @@ SUBROUTINE CUNK1(Z,Fnu,Kode,Mr,N,Y,Nz,Tol,Elim,Alim)
     aphi = ABS(phid)
     rs1 = rs1 + ALOG(aphi)
     IF ( ABS(rs1)<Elim ) GOTO 200
-  ENDIF
+  END IF
   IF ( rs1>0.0E0 ) GOTO 600
   !-----------------------------------------------------------------------
   !     FOR X.LT.0.0, THE I FUNCTION TO BE ADDED WILL OVERFLOW
@@ -164,7 +164,7 @@ SUBROUTINE CUNK1(Z,Fnu,Kode,Mr,N,Y,Nz,Tol,Elim,Alim)
   Nz = N
   DO i = 1, N
     Y(i) = czero
-  ENDDO
+  END DO
   RETURN
   !-----------------------------------------------------------------------
   !     RECUR FORWARD FOR REMAINDER OF THE SEQUENCE
@@ -194,9 +194,9 @@ SUBROUTINE CUNK1(Z,Fnu,Kode,Mr,N,Y,Nz,Tol,Elim,Alim)
         s1 = s1*css(kflag)
         s2 = s2*css(kflag)
         c1 = csr(kflag)
-      ENDIF
-    ENDIF
-  ENDDO
+      END IF
+    END IF
+  END DO
   300 CONTINUE
   IF ( Mr==0 ) RETURN
   !-----------------------------------------------------------------------
@@ -235,8 +235,8 @@ SUBROUTINE CUNK1(Z,Fnu,Kode,Mr,N,Y,Nz,Tol,Elim,Alim)
       IF ( (kk/=ib).AND.(kk/=ic) ) THEN
         initd = 0
         GOTO 350
-      ENDIF
-    ENDIF
+      END IF
+    END IF
     initd = init(j)
     phid = phi(j)
     zeta1d = zeta1(j)
@@ -244,13 +244,13 @@ SUBROUTINE CUNK1(Z,Fnu,Kode,Mr,N,Y,Nz,Tol,Elim,Alim)
     sumd = sum(j)
     m = j
     j = 3 - j
-    350    CALL CUNIK(zr,fn,1,0,Tol,initd,phid,zeta1d,zeta2d,sumd,cwrk(1,m))
+    350  CALL CUNIK(zr,fn,1,0,Tol,initd,phid,zeta1d,zeta2d,sumd,cwrk(1,m))
     IF ( Kode==1 ) THEN
       s1 = -zeta1d + zeta2d
     ELSE
       cfn = CMPLX(fn,0.0E0)
       s1 = -zeta1d + cfn*(cfn/(zr+zeta2d))
-    ENDIF
+    END IF
     !-----------------------------------------------------------------------
     !     TEST FOR UNDERFLOW AND OVERFLOW
     !-----------------------------------------------------------------------
@@ -267,8 +267,8 @@ SUBROUTINE CUNK1(Z,Fnu,Kode,Mr,N,Y,Nz,Tol,Elim,Alim)
       IF ( kdflg==1 ) iflag = 1
       IF ( rs1>=0.0E0 ) THEN
         IF ( kdflg==1 ) iflag = 3
-      ENDIF
-    ENDIF
+      END IF
+    END IF
     s2 = csgn*phid*sumd
     c2r = REAL(s1)
     c2i = AIMAG(s1)
@@ -278,8 +278,8 @@ SUBROUTINE CUNK1(Z,Fnu,Kode,Mr,N,Y,Nz,Tol,Elim,Alim)
     IF ( iflag==1 ) THEN
       CALL CUCHK(s2,nw,bry(1),Tol)
       IF ( nw/=0 ) s2 = CMPLX(0.0E0,0.0E0)
-    ENDIF
-    400    cy(kdflg) = s2
+    END IF
+    400  cy(kdflg) = s2
     c2 = s2
     s2 = s2*csr(iflag)
     !-----------------------------------------------------------------------
@@ -289,7 +289,7 @@ SUBROUTINE CUNK1(Z,Fnu,Kode,Mr,N,Y,Nz,Tol,Elim,Alim)
     IF ( Kode/=1 ) THEN
       CALL CS1S2(zr,s1,s2,nw,asc,Alim,iuf)
       Nz = Nz + nw
-    ENDIF
+    END IF
     Y(kk) = s1*cspn + s2
     kk = kk - 1
     cspn = -cspn
@@ -300,11 +300,11 @@ SUBROUTINE CUNK1(Z,Fnu,Kode,Mr,N,Y,Nz,Tol,Elim,Alim)
     ELSE
       kdflg = 1
       CYCLE
-    ENDIF
-    450    IF ( rs1>0.0E0 ) GOTO 600
+    END IF
+    450  IF ( rs1>0.0E0 ) GOTO 600
     s2 = czero
     GOTO 400
-  ENDDO
+  END DO
   k = N
   500  il = N - k
   IF ( il==0 ) RETURN
@@ -329,7 +329,7 @@ SUBROUTINE CUNK1(Z,Fnu,Kode,Mr,N,Y,Nz,Tol,Elim,Alim)
     IF ( Kode/=1 ) THEN
       CALL CS1S2(zr,c1,c2,nw,asc,Alim,iuf)
       Nz = Nz + nw
-    ENDIF
+    END IF
     Y(kk) = c1*cspn + c2
     kk = kk - 1
     cspn = -cspn
@@ -347,9 +347,9 @@ SUBROUTINE CUNK1(Z,Fnu,Kode,Mr,N,Y,Nz,Tol,Elim,Alim)
         s1 = s1*css(iflag)
         s2 = s2*css(iflag)
         cs = csr(iflag)
-      ENDIF
-    ENDIF
-  ENDDO
+      END IF
+    END IF
+  END DO
   RETURN
   600  Nz = -1
 END SUBROUTINE CUNK1

@@ -73,7 +73,7 @@ SUBROUTINE DQCHEB(X,Fval,Cheb12,Cheb24)
     j = 26 - i
     v(i) = Fval(i) - Fval(j)
     Fval(i) = Fval(i) + Fval(j)
-  ENDDO
+  END DO
   alam1 = v(1) - v(9)
   alam2 = X(6)*(v(3)-v(7)-v(11))
   Cheb12(4) = alam1 + alam2
@@ -113,7 +113,7 @@ SUBROUTINE DQCHEB(X,Fval,Cheb12,Cheb24)
     j = 14 - i
     v(i) = Fval(i) - Fval(j)
     Fval(i) = Fval(i) + Fval(j)
-  ENDDO
+  END DO
   alam1 = v(1) + X(8)*v(5)
   alam2 = X(4)*v(3)
   Cheb12(3) = alam1 + alam2
@@ -132,7 +132,7 @@ SUBROUTINE DQCHEB(X,Fval,Cheb12,Cheb24)
     j = 8 - i
     v(i) = Fval(i) - Fval(j)
     Fval(i) = Fval(i) + Fval(j)
-  ENDDO
+  END DO
   Cheb12(5) = v(1) + X(8)*v(3)
   Cheb12(9) = Fval(1) - X(8)*Fval(3)
   alam = X(4)*v(2)
@@ -150,13 +150,13 @@ SUBROUTINE DQCHEB(X,Fval,Cheb12,Cheb24)
   alam = 0.1D+01/0.6D+01
   DO i = 2, 12
     Cheb12(i) = Cheb12(i)*alam
-  ENDDO
+  END DO
   alam = 0.5D+00*alam
   Cheb12(1) = Cheb12(1)*alam
   Cheb12(13) = Cheb12(13)*alam
   DO i = 2, 24
     Cheb24(i) = Cheb24(i)*alam
-  ENDDO
+  END DO
   Cheb24(1) = 0.5D+00*alam*Cheb24(1)
   Cheb24(25) = 0.5D+00*alam*Cheb24(25)
 END SUBROUTINE DQCHEB

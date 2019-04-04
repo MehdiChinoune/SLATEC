@@ -76,7 +76,7 @@ SUBROUTINE SHEQR(A,Lda,N,Q,Info,Ijob)
   !   910411  Prologue converted to Version 4.0 format.  (BAB)
   !   910506  Made subsidiary to SGMRES.  (FNF)
   !   920511  Added complete declaration section.  (WRB)
-  
+
   !         The following is for optimized compilation on LLNL/LTSS Crays.
   !LLL. OPTIMIZE
   !     .. Scalar Arguments ..
@@ -107,7 +107,7 @@ SUBROUTINE SHEQR(A,Lda,N,Q,Info,Ijob)
       s = Q(i+1)
       A(k,N) = c*t1 - s*t2
       A(k+1,N) = s*t1 + c*t2
-    ENDDO
+    END DO
     !   -------------------------------------------------------------------
     !         Complete update of decomposition by forming last Givens
     !         rotation, and multiplying it times the column
@@ -127,14 +127,14 @@ SUBROUTINE SHEQR(A,Lda,N,Q,Info,Ijob)
       t = t2/t1
       c = 1.0E0/SQRT(1.0E0+t*t)
       s = -c*t
-    ENDIF
+    END IF
     iq = 2*N - 1
     Q(iq) = c
     Q(iq+1) = s
     A(N,N) = c*t1 - s*t2
     IF ( A(N,N)==0.0E0 ) Info = N
     RETURN
-  ENDIF
+  END IF
   !   -------------------------------------------------------------------
   !         A new factorization is desired.
   !   -------------------------------------------------------------------
@@ -158,8 +158,8 @@ SUBROUTINE SHEQR(A,Lda,N,Q,Info,Ijob)
         s = Q(i+1)
         A(j,k) = c*t1 - s*t2
         A(j+1,k) = s*t1 + c*t2
-      ENDDO
-    ENDIF
+      END DO
+    END IF
     !
     !         Compute Givens components C and S.
     !
@@ -177,12 +177,12 @@ SUBROUTINE SHEQR(A,Lda,N,Q,Info,Ijob)
       t = t2/t1
       c = 1.0E0/SQRT(1.0E0+t*t)
       s = -c*t
-    ENDIF
+    END IF
     Q(iq) = c
     Q(iq+1) = s
     A(k,k) = c*t1 - s*t2
     IF ( A(k,k)==0.0E0 ) Info = k
-  ENDDO
+  END DO
   RETURN
   !------------- LAST LINE OF SHEQR FOLLOWS ----------------------------
   RETURN

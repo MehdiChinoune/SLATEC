@@ -76,12 +76,12 @@ SUBROUTINE INTYD(T,K,Yh,Nyh,Dky,Iflag)
         jj1 = L - K
         DO jj = jj1, NQ
           ic = ic*jj
-        ENDDO
-      ENDIF
+        END DO
+      END IF
       c = ic
       DO i = 1, N
         Dky(i) = c*Yh(i,L)
-      ENDDO
+      END DO
       IF ( K/=NQ ) THEN
         jb2 = NQ - K
         DO jb = 1, jb2
@@ -92,21 +92,21 @@ SUBROUTINE INTYD(T,K,Yh,Nyh,Dky,Iflag)
             jj1 = jp1 - K
             DO jj = jj1, j
               ic = ic*jj
-            ENDDO
-          ENDIF
+            END DO
+          END IF
           c = ic
           DO i = 1, N
             Dky(i) = c*Yh(i,jp1) + s*Dky(i)
-          ENDDO
-        ENDDO
+          END DO
+        END DO
         IF ( K==0 ) RETURN
-      ENDIF
-    ENDIF
-  ENDIF
+      END IF
+    END IF
+  END IF
   r = H**(-K)
   DO i = 1, N
     Dky(i) = r*Dky(i)
-  ENDDO
+  END DO
   RETURN
   !----------------------- END OF SUBROUTINE INTYD -----------------------
   RETURN

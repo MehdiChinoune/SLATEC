@@ -59,7 +59,7 @@ REAL(8) FUNCTION DBESJ0(X)
     ntj0 = INITDS(bj0cs,19,0.1*REAL(D1MACH(3)))
     xsml = SQRT(8.0D0*D1MACH(3))
     first = .FALSE.
-  ENDIF
+  END IF
   !
   y = ABS(X)
   IF ( y>4.0D0 ) THEN
@@ -67,7 +67,7 @@ REAL(8) FUNCTION DBESJ0(X)
     CALL D9B0MP(y,ampl,theta)
     DBESJ0 = ampl*COS(theta)
     RETURN
-  ENDIF
+  END IF
   !
   DBESJ0 = 1.0D0
   IF ( y>xsml ) DBESJ0 = DCSEVL(.125D0*y*y-1.D0,bj0cs,ntj0)

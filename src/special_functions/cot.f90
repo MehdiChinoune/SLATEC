@@ -56,7 +56,7 @@ REAL FUNCTION COT(X)
     xmin = EXP(MAX(LOG(R1MACH(1)),-LOG(R1MACH(2)))+0.01)
     sqeps = SQRT(R1MACH(4))
     first = .FALSE.
-  ENDIF
+  END IF
   !
   y = ABS(X)
   IF ( ABS(X)<xmin ) CALL XERMSG('SLATEC','COT',&
@@ -95,7 +95,7 @@ REAL FUNCTION COT(X)
   ELSE
     COT = (0.5+CSEVL(8.0*y*y-1.,cotcs,nterms))/(0.5*y)
     COT = (COT**2-1.0)*0.5/COT
-  ENDIF
+  END IF
   !
   IF ( X/=0. ) COT = SIGN(COT,X)
   IF ( ifn==1 ) COT = -COT

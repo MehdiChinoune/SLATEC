@@ -326,7 +326,7 @@ SUBROUTINE HSTCYL(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   INTEGER i, Idimf, ierr1, Ierror, iwb, iwc, iwr, j, k, lp, M, Mbdcnd, N, Nbdcnd, np
   REAL A, a1, B, Bda(*), Bdb(*), Bdc(*), Bdd(*), C, D, deltar, deltht, &
     dlrsq, dlthsq, Elmbda, F(Idimf,*), Pertrb, W(*)
@@ -363,7 +363,7 @@ SUBROUTINE HSTCYL(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
     W(k) = (A+i*deltar)/(dlrsq*W(j))
     k = iwb + i
     W(k) = Elmbda/W(j)**2 - 2./dlrsq
-  ENDDO
+  END DO
   !
   !     ENTER BOUNDARY DATA FOR R-BOUNDARIES.
   !
@@ -373,14 +373,14 @@ SUBROUTINE HSTCYL(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
       W(iwb+1) = W(iwb+1) + W(1)
       DO j = 1, N
         F(1,j) = F(1,j) + a1*Bda(j)
-      ENDDO
+      END DO
     CASE (5,6)
     CASE DEFAULT
       a1 = 2.*W(1)
       W(iwb+1) = W(iwb+1) - W(1)
       DO j = 1, N
         F(1,j) = F(1,j) - a1*Bda(j)
-      ENDDO
+      END DO
   END SELECT
   SELECT CASE (Mbdcnd)
     CASE (2,3,6)
@@ -388,13 +388,13 @@ SUBROUTINE HSTCYL(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
       a1 = deltar*W(iwr)
       DO j = 1, N
         F(M,j) = F(M,j) - a1*Bdb(j)
-      ENDDO
+      END DO
     CASE DEFAULT
       W(iwc) = W(iwc) - W(iwr)
       a1 = 2.*W(iwr)
       DO j = 1, N
         F(M,j) = F(M,j) - a1*Bdb(j)
-      ENDDO
+      END DO
   END SELECT
   !
   !     ENTER BOUNDARY DATA FOR THETA-BOUNDARIES.
@@ -407,11 +407,11 @@ SUBROUTINE HSTCYL(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
       a1 = 1./deltht
       DO i = 1, M
         F(i,1) = F(i,1) + a1*Bdc(i)
-      ENDDO
+      END DO
     CASE DEFAULT
       DO i = 1, M
         F(i,1) = F(i,1) - a1*Bdc(i)
-      ENDDO
+      END DO
   END SELECT
   a1 = 2./dlthsq
   SELECT CASE (np)
@@ -420,11 +420,11 @@ SUBROUTINE HSTCYL(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
       a1 = 1./deltht
       DO i = 1, M
         F(i,N) = F(i,N) - a1*Bdd(i)
-      ENDDO
+      END DO
     CASE DEFAULT
       DO i = 1, M
         F(i,N) = F(i,N) - a1*Bdd(i)
-      ENDDO
+      END DO
   END SELECT
   !
   !     ADJUST RIGHT SIDE OF SINGULAR PROBLEMS TO INSURE EXISTENCE OF A
@@ -443,21 +443,21 @@ SUBROUTINE HSTCYL(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
               a1 = 0.
               DO j = 1, N
                 a1 = a1 + F(i,j)
-              ENDDO
+              END DO
               j = iwr + i
               Pertrb = Pertrb + a1*W(j)
-            ENDDO
+            END DO
             Pertrb = Pertrb/(M*N*0.5*(A+B))
             DO i = 1, M
               DO j = 1, N
                 F(i,j) = F(i,j) - Pertrb
-              ENDDO
-            ENDDO
+              END DO
+            END DO
         END SELECT
     END SELECT
   ELSE
     Ierror = 11
-  ENDIF
+  END IF
   !
   !     MULTIPLY I-TH EQUATION THROUGH BY  DELTHT**2
   !
@@ -469,8 +469,8 @@ SUBROUTINE HSTCYL(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
     W(j) = W(j)*dlthsq
     DO j = 1, N
       F(i,j) = F(i,j)*dlthsq
-    ENDDO
-  ENDDO
+    END DO
+  END DO
   lp = Nbdcnd
   W(1) = 0.
   W(iwr) = 0.
@@ -481,6 +481,6 @@ SUBROUTINE HSTCYL(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
     CALL GENBUN(lp,N,1,M,W,W(iwb+1),W(iwc+1),Idimf,F,ierr1,W(iwr+1))
   ELSE
     CALL POISTG(lp,N,1,M,W,W(iwb+1),W(iwc+1),Idimf,F,ierr1,W(iwr+1))
-  ENDIF
+  END IF
   W(1) = W(iwr+1) + 3*M
 END SUBROUTINE HSTCYL

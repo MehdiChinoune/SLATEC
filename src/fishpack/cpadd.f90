@@ -47,21 +47,21 @@ SUBROUTINE CPADD(N,Ierror,A,C,Cbp,Bp,Bh)
     DO j = 1, N
       nt = N - j
       Bh(j) = Bp(nt+1)
-    ENDDO
+    END DO
   ELSEIF ( Bp(N)==Bp(1) ) THEN
     GOTO 300
   ELSE
     DO j = 1, N
       Bh(j) = Bp(j)
-    ENDDO
-  ENDIF
+    END DO
+  END IF
   NCMplx = 0
   modiz = MOD(iz,2)
   is = 1
   IF ( modiz/=0 ) THEN
     IF ( A(1)<0 ) GOTO 100
     IF ( A(1)==0 ) GOTO 300
-  ENDIF
+  END IF
   xl = Bh(1)
   db = Bh(3) - Bh(1)
   DO
@@ -71,8 +71,8 @@ SUBROUTINE CPADD(N,Ierror,A,C,Cbp,Bp,Bh)
       Cbp(1) = CMPLX(BCRH(xl,Bh(1),iz,C,A,Bh,PGSF,sgn),0.)
       is = 2
       EXIT
-    ENDIF
-  ENDDO
+    END IF
+  END DO
   100 CONTINUE
   IF = iz - 1
   IF ( modiz/=0 ) THEN
@@ -81,8 +81,8 @@ SUBROUTINE CPADD(N,Ierror,A,C,Cbp,Bp,Bh)
       GOTO 300
     ELSE
       GOTO 200
-    ENDIF
-  ENDIF
+    END IF
+  END IF
   xr = Bh(iz)
   db = Bh(iz) - Bh(iz-2)
   DO
@@ -92,8 +92,8 @@ SUBROUTINE CPADD(N,Ierror,A,C,Cbp,Bp,Bh)
       Cbp(iz) = CMPLX(BCRH(Bh(iz),xr,iz,C,A,Bh,PGSF,sgn),0.)
       if = iz - 2
       EXIT
-    ENDIF
-  ENDDO
+    END IF
+  END DO
   200 CONTINUE
   DO ig = is, if, 2
     xl = Bh(ig)
@@ -119,15 +119,15 @@ SUBROUTINE CPADD(N,Ierror,A,C,Cbp,Bp,Bh)
         icv = 0
         cx = CMPLX(xm,0.)
         GOTO 250
-      ENDIF
-    ENDIF
+      END IF
+    END IF
     !
     !     CASE OF A MULTIPLE ZERO
     !
     Cbp(ig) = CMPLX(xm,0.)
     Cbp(ig+1) = CMPLX(xm,0.)
     CYCLE
-    250    fsg = (1.,0.)
+    250  fsg = (1.,0.)
     hsg = (1.,0.)
     fp = (0.,0.)
     fpp = (0.,0.)
@@ -137,17 +137,17 @@ SUBROUTINE CPADD(N,Ierror,A,C,Cbp,Bp,Bh)
       hsg = hsg*C(j)*dd
       fp = fp + dd
       fpp = fpp - dd*dd
-    ENDDO
+    END DO
     IF ( modiz/=0 ) THEN
       f = (1.,0.) + fsg + hsg
     ELSE
       f = (1.,0.) - fsg - hsg
-    ENDIF
+    END IF
     i3 = 0
     IF ( ABS(fp)>0 ) THEN
       i3 = 1
       r3 = -f/fp
-    ENDIF
+    END IF
     IF ( ABS(fpp)<=0 ) THEN
       r1 = r3
     ELSE
@@ -158,13 +158,13 @@ SUBROUTINE CPADD(N,Ierror,A,C,Cbp,Bp,Bh)
         r1 = r2/fpp
       ELSE
         r1 = r1/fpp
-      ENDIF
+      END IF
       r2 = 2.*f/fpp/r1
       IF ( ABS(r2)<ABS(r1) ) r1 = r2
       IF ( i3>0 ) THEN
         IF ( ABS(r3)<ABS(r1) ) r1 = r3
-      ENDIF
-    ENDIF
+      END IF
+    END IF
     cx = cx + r1
     it = it + 1
     IF ( it>50 ) GOTO 300
@@ -175,8 +175,8 @@ SUBROUTINE CPADD(N,Ierror,A,C,Cbp,Bp,Bh)
     ELSE
       Cbp(ig) = cx
       Cbp(ig+1) = CONJG(cx)
-    ENDIF
-  ENDDO
+    END IF
+  END DO
   IF ( ABS(Cbp(N))<ABS(Cbp(1)) ) THEN
     nhalf = N/2
     DO j = 1, nhalf
@@ -184,18 +184,18 @@ SUBROUTINE CPADD(N,Ierror,A,C,Cbp,Bp,Bh)
       cx = Cbp(j)
       Cbp(j) = Cbp(nt+1)
       Cbp(nt+1) = cx
-    ENDDO
+    END DO
   ELSEIF ( ABS(Cbp(N))==ABS(Cbp(1)) ) THEN
     GOTO 300
-  ENDIF
+  END IF
   NCMplx = 1
   DO j = 2, iz
     IF ( AIMAG(Cbp(j))/=0 ) RETURN
-  ENDDO
+  END DO
   NCMplx = 0
   DO j = 2, iz
     Bp(j) = REAL(Cbp(j))
-  ENDDO
+  END DO
   RETURN
   300  Ierror = 4
   RETURN

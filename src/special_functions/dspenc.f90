@@ -84,7 +84,7 @@ REAL(8) FUNCTION DSPENC(X)
     nspenc = INITDS(spencs,38,0.1*REAL(D1MACH(3)))
     xbig = 1.0D0/D1MACH(3)
     first = .FALSE.
-  ENDIF
+  END IF
   !
   IF ( X>2.0D0 ) THEN
     !
@@ -124,8 +124,8 @@ REAL(8) FUNCTION DSPENC(X)
       IF ( X>(-xbig) ) DSPENC = DSPENC + &
         (1.D0+DCSEVL(4.D0/(1.D0-X)-1.D0,spencs,nspenc))/(1.D0-X)
       RETURN
-    ENDIF
-  ENDIF
+    END IF
+  END IF
   !
   ! 1.0 .LT. X .LE. 2.0
   !

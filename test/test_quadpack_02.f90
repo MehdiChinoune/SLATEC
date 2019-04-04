@@ -113,8 +113,8 @@ CONTAINS
         WRITE (Lun,'(/'' SOME TEST(S) IN CDQAG FAILED''/)')
       ELSEIF ( Kprint>=2 ) THEN
         WRITE (Lun,'(/'' ALL TEST(S) IN CDQAG PASSED''/)')
-      ENDIF
-    ENDIF
+      END IF
+    END IF
   END SUBROUTINE CDQAG
   !** CDQAGI
   SUBROUTINE CDQAGI(Lun,Kprint,Ipass)
@@ -247,8 +247,8 @@ CONTAINS
         WRITE (Lun,'(/'' SOME TEST(S) IN CDQAGI FAILED''/)')
       ELSEIF ( Kprint>=2 ) THEN
         WRITE (Lun,'(/'' ALL TEST(S) IN CDQAGI PASSED''/)')
-      ENDIF
-    ENDIF
+      END IF
+    END IF
   END SUBROUTINE CDQAGI
   !** CDQAGP
   SUBROUTINE CDQAGP(Lun,Kprint,Ipass)
@@ -393,8 +393,8 @@ CONTAINS
         WRITE (Lun,'(/'' SOME TEST(S) IN CDQAGP FAILED''/)')
       ELSEIF ( Kprint>=2 ) THEN
         WRITE (Lun,'(/'' ALL TEST(S) IN CDQAGP PASSED''/)')
-      ENDIF
-    ENDIF
+      END IF
+    END IF
   END SUBROUTINE CDQAGP
   !** CDQAGS
   SUBROUTINE CDQAGS(Lun,Kprint,Ipass)
@@ -533,8 +533,8 @@ CONTAINS
         WRITE (Lun,'(/'' SOME TEST(S) IN CDQAGS FAILED''/)')
       ELSEIF ( Kprint>=2 ) THEN
         WRITE (Lun,'(/'' ALL TEST(S) IN CDQAGS PASSED''/)')
-      ENDIF
-    ENDIF
+      END IF
+    END IF
   END SUBROUTINE CDQAGS
   !** CDQAWC
   SUBROUTINE CDQAWC(Lun,Kprint,Ipass)
@@ -639,8 +639,8 @@ CONTAINS
         WRITE (Lun,'(/'' SOME TEST(S) IN CDQAWC FAILED''/)')
       ELSEIF ( Kprint>=2 ) THEN
         WRITE (Lun,'(/'' ALL TEST(S) IN CDQAWC PASSED''/)')
-      ENDIF
-    ENDIF
+      END IF
+    END IF
   END SUBROUTINE CDQAWC
   !** CDQAWF
   SUBROUTINE CDQAWF(Lun,Kprint,Ipass)
@@ -756,8 +756,8 @@ CONTAINS
         WRITE (Lun,'(/'' SOME TEST(S) IN CDQAWF FAILED''/)')
       ELSEIF ( Kprint>=2 ) THEN
         WRITE (Lun,'(/'' ALL TEST(S) IN CDQAWF PASSED''/)')
-      ENDIF
-    ENDIF
+      END IF
+    END IF
   END SUBROUTINE CDQAWF
   !** CDQAWO
   SUBROUTINE CDQAWO(Lun,Kprint,Ipass)
@@ -887,8 +887,8 @@ CONTAINS
         WRITE (Lun,'(/'' SOME TEST(S) IN CDQAWO FAILED''/)')
       ELSEIF ( Kprint>=2 ) THEN
         WRITE (Lun,'(/'' ALL TEST(S) IN CDQAWO PASSED''/)')
-      ENDIF
-    ENDIF
+      END IF
+    END IF
   END SUBROUTINE CDQAWO
   !** CDQAWS
   SUBROUTINE CDQAWS(Lun,Kprint,Ipass)
@@ -994,8 +994,8 @@ CONTAINS
         WRITE (Lun,'(/'' SOME TEST(S) IN CDQAWS FAILED''/)')
       ELSEIF ( Kprint>=2 ) THEN
         WRITE (Lun,'(/'' ALL TEST(S) IN CDQAWS PASSED''/)')
-      ENDIF
-    ENDIF
+      END IF
+    END IF
   END SUBROUTINE CDQAWS
   !** CDQNG
   SUBROUTINE CDQNG(Lun,Kprint,Ipass)
@@ -1072,8 +1072,8 @@ CONTAINS
         WRITE (Lun,'(/'' SOME TEST(S) IN CDQNG FAILED''/)')
       ELSEIF ( Kprint>=2 ) THEN
         WRITE (Lun,'(/'' ALL TEST(S) IN CDQNG PASSED''/)')
-      ENDIF
-    ENDIF
+      END IF
+    END IF
   END SUBROUTINE CDQNG
   !** DF0C
   REAL(8) FUNCTION DF0C(X)
@@ -1814,14 +1814,14 @@ CONTAINS
           WRITE (UNIT=Lun,FMT=99009) Exact, Result, error, Abserr, ier, Neval
         ELSE
           WRITE (Lun,FMT=99010) Result, Abserr, ier, Neval
-        ENDIF
+        END IF
       ELSEIF ( Kprint>=3 ) THEN
         !
         !           Write PASS message.
         !
         WRITE (UNIT=Lun,FMT=99001) Num1
-      ENDIF
-    ENDIF
+      END IF
+    END IF
     !
     RETURN
     !
@@ -1911,7 +1911,7 @@ PROGRAM TEST40
     CALL XSETF(0)
   ELSE
     CALL XSETF(1)
-  ENDIF
+  END IF
   !
   !     Test double precision QUADPACK routines
   !
@@ -1969,6 +1969,6 @@ PROGRAM TEST40
     WRITE (lun,99002) nfail
     99002 FORMAT (/' ************* WARNING -- ',I5,&
       ' TEST(S) FAILED IN PROGRAM TEST40 *************')
-  ENDIF
+  END IF
   STOP
 END PROGRAM TEST40

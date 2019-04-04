@@ -93,7 +93,7 @@ SUBROUTINE SHELS(A,Lda,N,Q,B)
     t2 = B(kp1)
     B(k) = c*t1 - s*t2
     B(kp1) = s*t1 + c*t2
-  ENDDO
+  END DO
   !
   !         Now solve  R*X = Q*B.
   !
@@ -102,6 +102,6 @@ SUBROUTINE SHELS(A,Lda,N,Q,B)
     B(k) = B(k)/A(k,k)
     t = -B(k)
     CALL SAXPY(k-1,t,A(1,k),1,B(1),1)
-  ENDDO
+  END DO
   !------------- LAST LINE OF SHELS FOLLOWS ----------------------------
 END SUBROUTINE SHELS

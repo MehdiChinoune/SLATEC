@@ -33,7 +33,7 @@ SUBROUTINE U11LS(A,Mda,M,N,Ub,Db,Mode,Np,Krank,Ksure,H,W,Eb,Ic,Ir)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900328  Added TYPE section.  (WRB)
-  
+
   INTEGER Mda, mm, Mode, N, nmk, Np
   REAL A(Mda,*), bb, Db(*), Eb(*), H(*), r2, rmin, SDOT, SNRM2, sum, t, temp, &
     tn, tt, Ub(*), W(*)
@@ -48,10 +48,10 @@ SUBROUTINE U11LS(A,Mda,M,N,Ub,Db,Mode,Np,Krank,Ksure,H,W,Eb,Ic,Ir)
   Krank = N
   DO i = 1, N
     Ic(i) = i
-  ENDDO
+  END DO
   DO i = 1, M
     Ir(i) = i
-  ENDDO
+  END DO
   !
   !        DETERMINE REL AND ABS ERROR VECTORS
   !
@@ -62,7 +62,7 @@ SUBROUTINE U11LS(A,Mda,M,N,Ub,Db,Mode,Np,Krank,Ksure,H,W,Eb,Ic,Ir)
   DO i = 1, N
     H(i) = SNRM2(M,A(1,i),1)
     W(i) = H(i)
-  ENDDO
+  END DO
   !
   !         INITIALIZE ERROR BOUNDS
   !
@@ -70,7 +70,7 @@ SUBROUTINE U11LS(A,Mda,M,N,Ub,Db,Mode,Np,Krank,Ksure,H,W,Eb,Ic,Ir)
     Eb(i) = MAX(Db(i),Ub(i)*H(i))
     Ub(i) = Eb(i)
     Db(i) = 0.0
-  ENDDO
+  END DO
   !
   !          DISCARD SELF DEPENDENT COLUMNS
   !
@@ -96,12 +96,12 @@ SUBROUTINE U11LS(A,Mda,M,N,Ub,Db,Mode,Np,Krank,Ksure,H,W,Eb,Ic,Ir)
           'FIRST NP COLUMNS ARE LINEARLY DEPENDENT',8,0)
         Krank = i - 1
         RETURN
-      ENDIF
+      END IF
     ELSE
       IF ( i==Krank ) EXIT
       i = i + 1
-    ENDIF
-  ENDDO
+    END IF
+  END DO
   !
   !           TEST FOR ZERO RANK
   !
@@ -109,7 +109,7 @@ SUBROUTINE U11LS(A,Mda,M,N,Ub,Db,Mode,Np,Krank,Ksure,H,W,Eb,Ic,Ir)
     Krank = 0
     Ksure = 0
     RETURN
-  ENDIF
+  END IF
   !
   !        M A I N    L O O P
   !
@@ -132,8 +132,8 @@ SUBROUTINE U11LS(A,Mda,M,N,Ub,Db,Mode,Np,Krank,Ksure,H,W,Eb,Ic,Ir)
       IF ( Ub(i)<H(i)*rmin ) THEN
         rmin = Ub(i)/H(i)
         imin = i
-      ENDIF
-    ENDDO
+      END IF
+    END DO
     !
     !     TEST FOR RANK DEFICIENCY
     !
@@ -143,7 +143,7 @@ SUBROUTINE U11LS(A,Mda,M,N,Ub,Db,Mode,Np,Krank,Ksure,H,W,Eb,Ic,Ir)
       !     COMPUTE EXACT UB
       DO i = 1, jm1
         W(i) = A(i,imin)
-      ENDDO
+      END DO
       l = jm1
       DO
         W(l) = W(l)/A(l,l)
@@ -151,7 +151,7 @@ SUBROUTINE U11LS(A,Mda,M,N,Ub,Db,Mode,Np,Krank,Ksure,H,W,Eb,Ic,Ir)
           tt = Eb(imin)
           DO i = 1, jm1
             tt = tt + ABS(W(i))*Eb(i)
-          ENDDO
+          END DO
           Ub(imin) = tt
           IF ( Ub(imin)/H(imin)<1.0 ) GOTO 400
           EXIT
@@ -159,12 +159,12 @@ SUBROUTINE U11LS(A,Mda,M,N,Ub,Db,Mode,Np,Krank,Ksure,H,W,Eb,Ic,Ir)
           lm1 = l - 1
           DO i = l, jm1
             W(lm1) = W(lm1) - A(lm1,i)*W(i)
-          ENDDO
+          END DO
           l = lm1
-        ENDIF
-      ENDDO
-    ENDIF
-  ENDIF
+        END IF
+      END DO
+    END IF
+  END IF
   !
   !        MATRIX REDUCTION
   !
@@ -181,14 +181,14 @@ SUBROUTINE U11LS(A,Mda,M,N,Ub,Db,Mode,Np,Krank,Ksure,H,W,Eb,Ic,Ir)
       CALL SSWAP(1,Db(imin),1,Db(kk),1)
       CALL SSWAP(1,W(imin),1,W(kk),1)
       CALL SSWAP(1,H(imin),1,H(kk),1)
-    ENDIF
+    END IF
     IF ( j<=Krank ) GOTO 200
     GOTO 500
   ELSE
     CALL XERMSG('SLATEC','U11LS','FIRST NP COLUMNS ARE LINEARLY DEPENDENT',8,0)
     Krank = j - 1
     RETURN
-  ENDIF
+  END IF
   !
   !        COLUMN PIVOT
   !
@@ -201,7 +201,7 @@ SUBROUTINE U11LS(A,Mda,M,N,Ub,Db,Mode,Np,Krank,Ksure,H,W,Eb,Ic,Ir)
     CALL SSWAP(1,Db(j),1,Db(imin),1)
     CALL SSWAP(1,W(j),1,W(imin),1)
     CALL ISWAP(1,Ic(j),1,Ic(imin),1)
-  ENDIF
+  END IF
   !
   !        ROW PIVOT
   !
@@ -210,7 +210,7 @@ SUBROUTINE U11LS(A,Mda,M,N,Ub,Db,Mode,Np,Krank,Ksure,H,W,Eb,Ic,Ir)
   IF ( jmax/=j ) THEN
     CALL SSWAP(N,A(j,1),Mda,A(jmax,1),Mda)
     CALL ISWAP(1,Ir(j),1,Ir(jmax),1)
-  ENDIF
+  END IF
   !
   !     APPLY HOUSEHOLDER TRANSFORMATION
   !
@@ -234,11 +234,11 @@ SUBROUTINE U11LS(A,Mda,M,N,Ub,Db,Mode,Np,Krank,Ksure,H,W,Eb,Ic,Ir)
             W(i) = H(i)
           ELSE
             H(i) = H(i)*SQRT(t)
-          ENDIF
-        ENDIF
-      ENDIF
-    ENDDO
-  ENDIF
+          END IF
+        END IF
+      END IF
+    END DO
+  END IF
   H(j) = A(j,j)
   A(j,j) = -tn
   !
@@ -251,9 +251,9 @@ SUBROUTINE U11LS(A,Mda,M,N,Ub,Db,Mode,Np,Krank,Ksure,H,W,Eb,Ic,Ir)
     DO i = jp1, Krank
       Ub(i) = Ub(i) + ABS(A(j,i))*Ub(j)
       Db(i) = Db(i) - A(j,i)*Db(j)
-    ENDDO
+    END DO
     GOTO 100
-  ENDIF
+  END IF
   !
   !        E N D    M A I N    L O O P
   !
@@ -270,10 +270,10 @@ SUBROUTINE U11LS(A,Mda,M,N,Ub,Db,Mode,Np,Krank,Ksure,H,W,Eb,Ic,Ir)
         temp = Ub(ii)
         Ub(ii) = Ub(ii+1)
         Ub(ii+1) = temp
-      ENDIF
-    ENDDO
+      END IF
+    END DO
     IF ( is==0 ) EXIT
-  ENDDO
+  END DO
   Ksure = 0
   sum = 0.0
   DO i = 1, Krank
@@ -281,7 +281,7 @@ SUBROUTINE U11LS(A,Mda,M,N,Ub,Db,Mode,Np,Krank,Ksure,H,W,Eb,Ic,Ir)
     IF ( r2+sum>=1.0 ) EXIT
     sum = sum + r2
     Ksure = Ksure + 1
-  ENDDO
+  END DO
   !
   !     IF SYSTEM IS OF REDUCED RANK AND MODE = 2
   !     COMPLETE THE DECOMPOSITION FOR SHORTEST LEAST SQUARES SOLUTION
@@ -303,8 +303,8 @@ SUBROUTINE U11LS(A,Mda,M,N,Ub,Db,Mode,Np,Krank,Ksure,H,W,Eb,Ic,Ir)
         tt = tt - A(ii,i)
         CALL SAXPY(nmk,tt,A(i,kp1),Mda,A(ii,kp1),Mda)
         A(ii,i) = A(ii,i) + tt*W(i)
-      ENDDO
+      END DO
       i = i - 1
-    ENDDO
-  ENDIF
+    END DO
+  END IF
 END SUBROUTINE U11LS

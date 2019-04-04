@@ -164,7 +164,7 @@ SUBROUTINE CQRSL(X,Ldx,N,K,Qraux,Y,Qy,Qty,B,Rsd,Xb,Job,Info)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   INTEGER Ldx, N, K, Job, Info
   COMPLEX X(Ldx,*), Qraux(*), Y(*), Qy(*), Qty(*), B(*), Rsd(*), Xb(*)
   !
@@ -207,9 +207,9 @@ SUBROUTINE CQRSL(X,Ldx,N,K,Qraux,Y,Qy,Qty,B,Rsd,Xb,Job,Info)
           t = -CDOTC(N-j+1,X(j,j),1,Qy(j),1)/X(j,j)
           CALL CAXPY(N-j+1,t,X(j,j),1,Qy(j),1)
           X(j,j) = temp
-        ENDIF
-      ENDDO
-    ENDIF
+        END IF
+      END DO
+    END IF
     IF ( cqty ) THEN
       !
       !           COMPUTE CTRANS(Q)*Y.
@@ -221,9 +221,9 @@ SUBROUTINE CQRSL(X,Ldx,N,K,Qraux,Y,Qy,Qty,B,Rsd,Xb,Job,Info)
           t = -CDOTC(N-j+1,X(j,j),1,Qty(j),1)/X(j,j)
           CALL CAXPY(N-j+1,t,X(j,j),1,Qty(j),1)
           X(j,j) = temp
-        ENDIF
-      ENDDO
-    ENDIF
+        END IF
+      END DO
+    END IF
     !
     !        SET UP TO COMPUTE B, RSD, OR XB.
     !
@@ -234,13 +234,13 @@ SUBROUTINE CQRSL(X,Ldx,N,K,Qraux,Y,Qy,Qty,B,Rsd,Xb,Job,Info)
     IF ( .NOT.(.NOT.cxb.OR.kp1>N) ) THEN
       DO i = kp1, N
         Xb(i) = (0.0E0,0.0E0)
-      ENDDO
-    ENDIF
+      END DO
+    END IF
     IF ( cr ) THEN
       DO i = 1, K
         Rsd(i) = (0.0E0,0.0E0)
-      ENDDO
-    ENDIF
+      END DO
+    END IF
     IF ( cb ) THEN
       !
       !           COMPUTE B.
@@ -252,13 +252,13 @@ SUBROUTINE CQRSL(X,Ldx,N,K,Qraux,Y,Qy,Qty,B,Rsd,Xb,Job,Info)
           IF ( j/=1 ) THEN
             t = -B(j)
             CALL CAXPY(j-1,t,X(1,j),1,B,1)
-          ENDIF
+          END IF
         ELSE
           Info = j
           EXIT
-        ENDIF
-      ENDDO
-    ENDIF
+        END IF
+      END DO
+    END IF
     IF ( .NOT.(.NOT.cr.AND..NOT.cxb) ) THEN
       !
       !           COMPUTE RSD OR XB AS REQUIRED.
@@ -271,15 +271,15 @@ SUBROUTINE CQRSL(X,Ldx,N,K,Qraux,Y,Qy,Qty,B,Rsd,Xb,Job,Info)
           IF ( cr ) THEN
             t = -CDOTC(N-j+1,X(j,j),1,Rsd(j),1)/X(j,j)
             CALL CAXPY(N-j+1,t,X(j,j),1,Rsd(j),1)
-          ENDIF
+          END IF
           IF ( cxb ) THEN
             t = -CDOTC(N-j+1,X(j,j),1,Xb(j),1)/X(j,j)
             CALL CAXPY(N-j+1,t,X(j,j),1,Xb(j),1)
-          ENDIF
+          END IF
           X(j,j) = temp
-        ENDIF
-      ENDDO
-    ENDIF
+        END IF
+      END DO
+    END IF
   ELSE
     IF ( cqy ) Qy(1) = Y(1)
     IF ( cqty ) Qty(1) = Y(1)
@@ -289,8 +289,8 @@ SUBROUTINE CQRSL(X,Ldx,N,K,Qraux,Y,Qy,Qty,B,Rsd,Xb,Job,Info)
         B(1) = Y(1)/X(1,1)
       ELSE
         Info = 1
-      ENDIF
-    ENDIF
+      END IF
+    END IF
     IF ( cr ) Rsd(1) = (0.0E0,0.0E0)
-  ENDIF
+  END IF
 END SUBROUTINE CQRSL

@@ -76,9 +76,9 @@ SUBROUTINE CPEVL(N,M,A,Z,C,B,Kbd)
         s = AIMAG(ZA(Z)*t)
         B(i) = (1.+8.*d1)*(bim1+d1*ZA(cim1)+CMPLX(r,s))
         IF ( j==1 ) B(i) = 0.0
-      ENDIF
-    ENDDO
-  ENDDO
+      END IF
+    END DO
+  END DO
 CONTAINS
   COMPLEX FUNCTION ZA(q)
     COMPLEX, INTENT(IN) :: q

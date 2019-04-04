@@ -71,13 +71,13 @@ CONTAINS
       IF ( ABS(d(i)-xchk(i))>tol ) THEN
         Ipass = 0
         fatal = .TRUE.
-      ENDIF
-    ENDDO
+      END IF
+    END DO
     IF ( fatal ) THEN
       IF ( Kprint>=2 ) WRITE (Lun,99007) 'FAILED', (d(i),i=1,n)
     ELSE
       IF ( Kprint>=3 ) WRITE (Lun,99007) 'PASSED', (d(i),i=1,n)
-    ENDIF
+    END IF
     !
     !     Test POLYVL.
     !
@@ -87,15 +87,15 @@ CONTAINS
     ELSE
       Ipass = 0
       IF ( Kprint>=2 ) WRITE (Lun,99008) 'FAILED', yf, (d(i),i=1,5)
-    ENDIF
+    END IF
     !
     fatal = .FALSE.
     DO i = 1, 5
       IF ( ABS(dchk(i+1)-d(i))>tol ) THEN
         Ipass = 0
         fatal = .TRUE.
-      ENDIF
-    ENDDO
+      END IF
+    END DO
     !
     !     Trigger 2 error conditions
     !
@@ -104,7 +104,7 @@ CONTAINS
       CALL XSETF(0)
     ELSE
       CALL XSETF(1)
-    ENDIF
+    END IF
     fatal = .FALSE.
     CALL XERCLR
     !
@@ -114,7 +114,7 @@ CONTAINS
     IF ( NUMXER(nerr)/=2 ) THEN
       Ipass = 0
       fatal = .TRUE.
-    ENDIF
+    END IF
     CALL XERCLR
     !
     x(1) = -1.0E0
@@ -122,7 +122,7 @@ CONTAINS
     IF ( NUMXER(nerr)/=2 ) THEN
       Ipass = 0
       fatal = .TRUE.
-    ENDIF
+    END IF
     CALL XERCLR
     !
     CALL XSETF(kontrl)
@@ -130,11 +130,11 @@ CONTAINS
       IF ( Kprint>=2 ) THEN
         WRITE (Lun,99003)
         99003 FORMAT (/' AT LEAST ONE INCORRECT ARGUMENT TEST FAILED')
-      ENDIF
+      END IF
     ELSEIF ( Kprint>=3 ) THEN
       WRITE (Lun,99004)
       99004 FORMAT (/' ALL INCORRECT ARGUMENT TESTS PASSED')
-    ENDIF
+    END IF
     !
     IF ( Ipass==1.AND.Kprint>=2 ) WRITE (Lun,99005)
     99005 FORMAT (/' ****************POLINT PASSED ALL TESTS**************')
@@ -213,13 +213,13 @@ CONTAINS
       IF ( ABS(d(i)-xchk(i))>tol ) THEN
         Ipass = 0
         fatal = .TRUE.
-      ENDIF
-    ENDDO
+      END IF
+    END DO
     IF ( fatal ) THEN
       IF ( Kprint>=2 ) WRITE (Lun,99007) 'FAILED', (d(i),i=1,n)
     ELSE
       IF ( Kprint>=3 ) WRITE (Lun,99007) 'PASSED', (d(i),i=1,n)
-    ENDIF
+    END IF
     !
     !     Test DPOLVL.
     !
@@ -229,15 +229,15 @@ CONTAINS
     ELSE
       Ipass = 0
       IF ( Kprint>=2 ) WRITE (Lun,99008) 'FAILED', yf, (d(i),i=1,5)
-    ENDIF
+    END IF
     !
     fatal = .FALSE.
     DO i = 1, 5
       IF ( ABS(dchk(i+1)-d(i))>tol ) THEN
         Ipass = 0
         fatal = .TRUE.
-      ENDIF
-    ENDDO
+      END IF
+    END DO
     !
     !     Trigger 2 error conditions
     !
@@ -246,7 +246,7 @@ CONTAINS
       CALL XSETF(0)
     ELSE
       CALL XSETF(1)
-    ENDIF
+    END IF
     fatal = .FALSE.
     CALL XERCLR
     !
@@ -256,7 +256,7 @@ CONTAINS
     IF ( NUMXER(nerr)/=2 ) THEN
       Ipass = 0
       fatal = .TRUE.
-    ENDIF
+    END IF
     CALL XERCLR
     !
     x(1) = -1.0D0
@@ -264,7 +264,7 @@ CONTAINS
     IF ( NUMXER(nerr)/=2 ) THEN
       Ipass = 0
       fatal = .TRUE.
-    ENDIF
+    END IF
     CALL XERCLR
     !
     CALL XSETF(kontrl)
@@ -272,11 +272,11 @@ CONTAINS
       IF ( Kprint>=2 ) THEN
         WRITE (Lun,99003)
         99003 FORMAT (/' AT LEAST ONE INCORRECT ARGUMENT TEST FAILED')
-      ENDIF
+      END IF
     ELSEIF ( Kprint>=3 ) THEN
       WRITE (Lun,99004)
       99004 FORMAT (/' ALL INCORRECT ARGUMENT TESTS PASSED')
-    ENDIF
+    END IF
     !
     IF ( Ipass==1.AND.Kprint>=2 ) WRITE (Lun,99005)
     99005 FORMAT (/' ****************DPLINT PASSED ALL TESTS**************')
@@ -363,7 +363,7 @@ PROGRAM TEST29
     CALL XSETF(0)
   ELSE
     CALL XSETF(1)
-  ENDIF
+  END IF
   !
   !     Test POLINT, POLCOF and POLYVL.
   !
@@ -384,6 +384,6 @@ PROGRAM TEST29
     WRITE (lun,99002) nfail
     99002 FORMAT (/' ************* WARNING -- ',I5,&
       ' TEST(S) FAILED IN PROGRAM TEST29 *************')
-  ENDIF
+  END IF
   STOP
 END PROGRAM TEST29

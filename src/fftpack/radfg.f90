@@ -46,16 +46,16 @@ SUBROUTINE RADFG(Ido,Ip,L1,Idl1,Cc,C1,C2,Ch,Ch2,Wa)
   IF ( Ido==1 ) THEN
     DO ik = 1, Idl1
       C2(ik,1) = Ch2(ik,1)
-    ENDDO
+    END DO
   ELSE
     DO ik = 1, Idl1
       Ch2(ik,1) = C2(ik,1)
-    ENDDO
+    END DO
     DO j = 2, Ip
       DO k = 1, L1
         Ch(1,k,j) = C1(1,k,j)
-      ENDDO
-    ENDDO
+      END DO
+    END DO
     IF ( nbd>L1 ) THEN
       is = -Ido
       DO j = 2, Ip
@@ -67,9 +67,9 @@ SUBROUTINE RADFG(Ido,Ip,L1,Idl1,Cc,C1,C2,Ch,Ch2,Wa)
             idij = idij + 2
             Ch(i-1,k,j) = Wa(idij-1)*C1(i-1,k,j) + Wa(idij)*C1(i,k,j)
             Ch(i,k,j) = Wa(idij-1)*C1(i,k,j) - Wa(idij)*C1(i-1,k,j)
-          ENDDO
-        ENDDO
-      ENDDO
+          END DO
+        END DO
+      END DO
     ELSE
       is = -Ido
       DO j = 2, Ip
@@ -80,10 +80,10 @@ SUBROUTINE RADFG(Ido,Ip,L1,Idl1,Cc,C1,C2,Ch,Ch2,Wa)
           DO k = 1, L1
             Ch(i-1,k,j) = Wa(idij-1)*C1(i-1,k,j) + Wa(idij)*C1(i,k,j)
             Ch(i,k,j) = Wa(idij-1)*C1(i,k,j) - Wa(idij)*C1(i-1,k,j)
-          ENDDO
-        ENDDO
-      ENDDO
-    ENDIF
+          END DO
+        END DO
+      END DO
+    END IF
     IF ( nbd<L1 ) THEN
       DO j = 2, ipph
         jc = ipp2 - j
@@ -93,9 +93,9 @@ SUBROUTINE RADFG(Ido,Ip,L1,Idl1,Cc,C1,C2,Ch,Ch2,Wa)
             C1(i-1,k,jc) = Ch(i,k,j) - Ch(i,k,jc)
             C1(i,k,j) = Ch(i,k,j) + Ch(i,k,jc)
             C1(i,k,jc) = Ch(i-1,k,jc) - Ch(i-1,k,j)
-          ENDDO
-        ENDDO
-      ENDDO
+          END DO
+        END DO
+      END DO
     ELSE
       DO j = 2, ipph
         jc = ipp2 - j
@@ -106,18 +106,18 @@ SUBROUTINE RADFG(Ido,Ip,L1,Idl1,Cc,C1,C2,Ch,Ch2,Wa)
             C1(i-1,k,jc) = Ch(i,k,j) - Ch(i,k,jc)
             C1(i,k,j) = Ch(i,k,j) + Ch(i,k,jc)
             C1(i,k,jc) = Ch(i-1,k,jc) - Ch(i-1,k,j)
-          ENDDO
-        ENDDO
-      ENDDO
-    ENDIF
-  ENDIF
+          END DO
+        END DO
+      END DO
+    END IF
+  END IF
   DO j = 2, ipph
     jc = ipp2 - j
     DO k = 1, L1
       C1(1,k,j) = Ch(1,k,j) + Ch(1,k,jc)
       C1(1,k,jc) = Ch(1,k,jc) - Ch(1,k,j)
-    ENDDO
-  ENDDO
+    END DO
+  END DO
   !
   ar1 = 1.
   ai1 = 0.
@@ -129,7 +129,7 @@ SUBROUTINE RADFG(Ido,Ip,L1,Idl1,Cc,C1,C2,Ch,Ch2,Wa)
     DO ik = 1, Idl1
       Ch2(ik,l) = C2(ik,1) + ar1*C2(ik,2)
       Ch2(ik,lc) = ai1*C2(ik,Ip)
-    ENDDO
+    END DO
     dc2 = ar1
     ds2 = ai1
     ar2 = ar1
@@ -142,36 +142,36 @@ SUBROUTINE RADFG(Ido,Ip,L1,Idl1,Cc,C1,C2,Ch,Ch2,Wa)
       DO ik = 1, Idl1
         Ch2(ik,l) = Ch2(ik,l) + ar2*C2(ik,j)
         Ch2(ik,lc) = Ch2(ik,lc) + ai2*C2(ik,jc)
-      ENDDO
-    ENDDO
-  ENDDO
+      END DO
+    END DO
+  END DO
   DO j = 2, ipph
     DO ik = 1, Idl1
       Ch2(ik,1) = Ch2(ik,1) + C2(ik,j)
-    ENDDO
-  ENDDO
+    END DO
+  END DO
   !
   IF ( Ido<L1 ) THEN
     DO i = 1, Ido
       DO k = 1, L1
         Cc(i,1,k) = Ch(i,k,1)
-      ENDDO
-    ENDDO
+      END DO
+    END DO
   ELSE
     DO k = 1, L1
       DO i = 1, Ido
         Cc(i,1,k) = Ch(i,k,1)
-      ENDDO
-    ENDDO
-  ENDIF
+      END DO
+    END DO
+  END IF
   DO j = 2, ipph
     jc = ipp2 - j
     j2 = j + j
     DO k = 1, L1
       Cc(Ido,j2-2,k) = Ch(1,k,j)
       Cc(1,j2-1,k) = Ch(1,k,jc)
-    ENDDO
-  ENDDO
+    END DO
+  END DO
   IF ( Ido==1 ) RETURN
   IF ( nbd<L1 ) THEN
     DO j = 2, ipph
@@ -184,11 +184,11 @@ SUBROUTINE RADFG(Ido,Ip,L1,Idl1,Cc,C1,C2,Ch,Ch2,Wa)
           Cc(ic-1,j2-2,k) = Ch(i-1,k,j) - Ch(i-1,k,jc)
           Cc(i,j2-1,k) = Ch(i,k,j) + Ch(i,k,jc)
           Cc(ic,j2-2,k) = Ch(i,k,jc) - Ch(i,k,j)
-        ENDDO
-      ENDDO
-    ENDDO
+        END DO
+      END DO
+    END DO
     RETURN
-  ENDIF
+  END IF
   DO j = 2, ipph
     jc = ipp2 - j
     j2 = j + j
@@ -200,8 +200,8 @@ SUBROUTINE RADFG(Ido,Ip,L1,Idl1,Cc,C1,C2,Ch,Ch2,Wa)
         Cc(ic-1,j2-2,k) = Ch(i-1,k,j) - Ch(i-1,k,jc)
         Cc(i,j2-1,k) = Ch(i,k,j) + Ch(i,k,jc)
         Cc(ic,j2-2,k) = Ch(i,k,jc) - Ch(i,k,j)
-      ENDDO
-    ENDDO
-  ENDDO
+      END DO
+    END DO
+  END DO
   RETURN
 END SUBROUTINE RADFG

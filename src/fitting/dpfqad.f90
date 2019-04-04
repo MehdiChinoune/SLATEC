@@ -122,12 +122,12 @@ SUBROUTINE DPFQAD(F,Ldc,C,Xi,Lxi,K,Id,X1,X2,Tol,Quad,Ierr)
         CALL DPPGQ8(F,Ldc,C,Xi,Lxi,K,Id,a,b,inppv,Tol,ans,iflg)
         IF ( iflg>1 ) Ierr = 2
         q = q + ans
-      ENDDO
+      END DO
       IF ( X1>X2 ) q = -q
       Quad = q
       RETURN
-    ENDIF
-  ENDIF
+    END IF
+  END IF
   !
   CALL XERMSG('SLATEC','DPFQAD','TOL IS LESS DTOL OR GREATER THAN 0.1',2,1)
   RETURN

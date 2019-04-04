@@ -95,7 +95,7 @@ SUBROUTINE SVD(Nm,M,N,A,W,Matu,U,Matv,V,Ierr,Rv1)
   !   890831  Modified array declarations.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
-  
+
   !
   INTEGER i, j, k, l, M, N, ii, i1, kk, k1, ll, l1, mn, Nm, its, Ierr
   REAL A(Nm,*), W(*), U(Nm,*), V(Nm,*), Rv1(*)
@@ -110,8 +110,8 @@ SUBROUTINE SVD(Nm,M,N,A,W,Matu,U,Matv,V,Ierr,Rv1)
     !
     DO j = 1, N
       U(i,j) = A(i,j)
-    ENDDO
-  ENDDO
+    END DO
+  END DO
   !     .......... HOUSEHOLDER REDUCTION TO BIDIAGONAL FORM ..........
   g = 0.0E0
   scale = 0.0E0
@@ -127,14 +127,14 @@ SUBROUTINE SVD(Nm,M,N,A,W,Matu,U,Matv,V,Ierr,Rv1)
       !
       DO k = i, M
         scale = scale + ABS(U(k,i))
-      ENDDO
+      END DO
       !
       IF ( scale/=0.0E0 ) THEN
         !
         DO k = i, M
           U(k,i) = U(k,i)/scale
           s = s + U(k,i)**2
-        ENDDO
+        END DO
         !
         f = U(i,i)
         g = -SIGN(SQRT(s),f)
@@ -147,21 +147,21 @@ SUBROUTINE SVD(Nm,M,N,A,W,Matu,U,Matv,V,Ierr,Rv1)
             !
             DO k = i, M
               s = s + U(k,i)*U(k,j)
-            ENDDO
+            END DO
             !
             f = s/h
             !
             DO k = i, M
               U(k,j) = U(k,j) + f*U(k,i)
-            ENDDO
-          ENDDO
-        ENDIF
+            END DO
+          END DO
+        END IF
         !
         DO k = i, M
           U(k,i) = scale*U(k,i)
-        ENDDO
-      ENDIF
-    ENDIF
+        END DO
+      END IF
+    END IF
     !
     W(i) = scale*g
     g = 0.0E0
@@ -171,14 +171,14 @@ SUBROUTINE SVD(Nm,M,N,A,W,Matu,U,Matv,V,Ierr,Rv1)
       !
       DO k = l, N
         scale = scale + ABS(U(i,k))
-      ENDDO
+      END DO
       !
       IF ( scale/=0.0E0 ) THEN
         !
         DO k = l, N
           U(i,k) = U(i,k)/scale
           s = s + U(i,k)**2
-        ENDDO
+        END DO
         !
         f = U(i,l)
         g = -SIGN(SQRT(s),f)
@@ -187,7 +187,7 @@ SUBROUTINE SVD(Nm,M,N,A,W,Matu,U,Matv,V,Ierr,Rv1)
         !
         DO k = l, N
           Rv1(k) = U(i,k)/h
-        ENDDO
+        END DO
         !
         IF ( i/=M ) THEN
           !
@@ -196,22 +196,22 @@ SUBROUTINE SVD(Nm,M,N,A,W,Matu,U,Matv,V,Ierr,Rv1)
             !
             DO k = l, N
               s = s + U(j,k)*U(i,k)
-            ENDDO
+            END DO
             !
             DO k = l, N
               U(j,k) = U(j,k) + s*Rv1(k)
-            ENDDO
-          ENDDO
-        ENDIF
+            END DO
+          END DO
+        END IF
         !
         DO k = l, N
           U(i,k) = scale*U(i,k)
-        ENDDO
-      ENDIF
-    ENDIF
+        END DO
+      END IF
+    END IF
     !
     s1 = MAX(s1,ABS(W(i))+ABS(Rv1(i)))
-  ENDDO
+  END DO
   !     .......... ACCUMULATION OF RIGHT-HAND TRANSFORMATIONS ..........
   IF ( Matv ) THEN
     !     .......... FOR I=N STEP -1 UNTIL 1 DO -- ..........
@@ -223,32 +223,32 @@ SUBROUTINE SVD(Nm,M,N,A,W,Matu,U,Matv,V,Ierr,Rv1)
           DO j = l, N
             !     .......... DOUBLE DIVISION AVOIDS POSSIBLE UNDERFLOW ..........
             V(j,i) = (U(i,j)/U(i,l))/g
-          ENDDO
+          END DO
           !
           DO j = l, N
             s = 0.0E0
             !
             DO k = l, N
               s = s + U(i,k)*V(k,j)
-            ENDDO
+            END DO
             !
             DO k = l, N
               V(k,j) = V(k,j) + s*V(k,i)
-            ENDDO
-          ENDDO
-        ENDIF
+            END DO
+          END DO
+        END IF
         !
         DO j = l, N
           V(i,j) = 0.0E0
           V(j,i) = 0.0E0
-        ENDDO
-      ENDIF
+        END DO
+      END IF
       !
       V(i,i) = 1.0E0
       g = Rv1(i)
       l = i
-    ENDDO
-  ENDIF
+    END DO
+  END IF
   !     .......... ACCUMULATION OF LEFT-HAND TRANSFORMATIONS ..........
   IF ( Matu ) THEN
     !     ..........FOR I=MIN(M,N) STEP -1 UNTIL 1 DO -- ..........
@@ -263,14 +263,14 @@ SUBROUTINE SVD(Nm,M,N,A,W,Matu,U,Matv,V,Ierr,Rv1)
         !
         DO j = l, N
           U(i,j) = 0.0E0
-        ENDDO
-      ENDIF
+        END DO
+      END IF
       !
       IF ( g==0.0E0 ) THEN
         !
         DO j = i, M
           U(j,i) = 0.0E0
-        ENDDO
+        END DO
       ELSE
         IF ( i/=mn ) THEN
           !
@@ -279,25 +279,25 @@ SUBROUTINE SVD(Nm,M,N,A,W,Matu,U,Matv,V,Ierr,Rv1)
             !
             DO k = l, M
               s = s + U(k,i)*U(k,j)
-            ENDDO
+            END DO
             !     .......... DOUBLE DIVISION AVOIDS POSSIBLE UNDERFLOW ..........
             f = (s/U(i,i))/g
             !
             DO k = i, M
               U(k,j) = U(k,j) + f*U(k,i)
-            ENDDO
-          ENDDO
-        ENDIF
+            END DO
+          END DO
+        END IF
         !
         DO j = i, M
           U(j,i) = U(j,i)/g
           !
-        ENDDO
-      ENDIF
+        END DO
+      END IF
       !
       U(i,i) = U(i,i) + 1.0E0
-    ENDDO
-  ENDIF
+    END DO
+  END IF
   !     .......... DIAGONALIZATION OF THE BIDIAGONAL FORM ..........
   !     .......... FOR K=N STEP -1 UNTIL 1 DO -- ..........
   DO kk = 1, N
@@ -314,7 +314,7 @@ SUBROUTINE SVD(Nm,M,N,A,W,Matu,U,Matv,V,Ierr,Rv1)
       !     .......... RV1(1) IS ALWAYS ZERO, SO THERE IS NO EXIT
       !                THROUGH THE BOTTOM OF THE LOOP ..........
       IF ( s1+ABS(W(l1))==s1 ) EXIT
-    ENDDO
+    END DO
     !     .......... CANCELLATION OF RV1(L) IF L GREATER THAN 1 ..........
     c = 0.0E0
     s = 1.0E0
@@ -335,12 +335,12 @@ SUBROUTINE SVD(Nm,M,N,A,W,Matu,U,Matv,V,Ierr,Rv1)
           z = U(j,i)
           U(j,l1) = y*c + z*s
           U(j,i) = -y*s + z*c
-        ENDDO
-      ENDIF
+        END DO
+      END IF
       !
-    ENDDO
+    END DO
     !     .......... TEST FOR CONVERGENCE ..........
-    100    z = W(k)
+    100  z = W(k)
     IF ( l/=k ) THEN
       !     .......... SHIFT FROM BOTTOM 2 BY 2 MINOR ..........
       IF ( its==30 ) GOTO 200
@@ -377,8 +377,8 @@ SUBROUTINE SVD(Nm,M,N,A,W,Matu,U,Matv,V,Ierr,Rv1)
             z = V(j,i)
             V(j,i1) = x*c + z*s
             V(j,i) = -x*s + z*c
-          ENDDO
-        ENDIF
+          END DO
+        END IF
         !
         z = PYTHAG(f,h)
         W(i1) = z
@@ -386,7 +386,7 @@ SUBROUTINE SVD(Nm,M,N,A,W,Matu,U,Matv,V,Ierr,Rv1)
         IF ( z/=0.0E0 ) THEN
           c = f/z
           s = h/z
-        ENDIF
+        END IF
         f = c*g + s*y
         x = -s*g + c*y
         IF ( Matu ) THEN
@@ -396,10 +396,10 @@ SUBROUTINE SVD(Nm,M,N,A,W,Matu,U,Matv,V,Ierr,Rv1)
             z = U(j,i)
             U(j,i1) = y*c + z*s
             U(j,i) = -y*s + z*c
-          ENDDO
-        ENDIF
+          END DO
+        END IF
         !
-      ENDDO
+      END DO
       !
       Rv1(l) = 0.0E0
       Rv1(k) = f
@@ -413,11 +413,11 @@ SUBROUTINE SVD(Nm,M,N,A,W,Matu,U,Matv,V,Ierr,Rv1)
         !
         DO j = 1, N
           V(j,k) = -V(j,k)
-        ENDDO
-      ENDIF
-    ENDIF
+        END DO
+      END IF
+    END IF
     !
-  ENDDO
+  END DO
   !
   RETURN
   !     .......... SET ERROR -- NO CONVERGENCE TO A

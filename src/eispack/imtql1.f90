@@ -75,7 +75,7 @@ SUBROUTINE IMTQL1(N,D,E,Ierr)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   !
   INTEGER i, j, l, m, N, ii, mml, Ierr
   REAL D(*), E(*)
@@ -88,7 +88,7 @@ SUBROUTINE IMTQL1(N,D,E,Ierr)
     !
     DO i = 2, N
       E(i-1) = E(i)
-    ENDDO
+    END DO
     !
     E(N) = 0.0E0
     !
@@ -101,7 +101,7 @@ SUBROUTINE IMTQL1(N,D,E,Ierr)
         s1 = ABS(D(m)) + ABS(D(m+1))
         s2 = s1 + ABS(E(m))
         IF ( s2==s1 ) EXIT
-      ENDDO
+      END DO
       !
       p = D(l)
       IF ( m==l ) THEN
@@ -112,11 +112,11 @@ SUBROUTINE IMTQL1(N,D,E,Ierr)
             i = l + 2 - ii
             IF ( p>=D(i-1) ) GOTO 30
             D(i) = D(i-1)
-          ENDDO
-        ENDIF
+          END DO
+        END IF
         !
         i = 1
-        30         D(i) = p
+        30  D(i) = p
       ELSE
         IF ( j==30 ) GOTO 100
         j = j + 1
@@ -145,22 +145,22 @@ SUBROUTINE IMTQL1(N,D,E,Ierr)
             E(i+1) = f*r
             s = 1.0E0/r
             c = c*s
-          ENDIF
+          END IF
           g = D(i+1) - p
           r = (D(i)-g)*s + 2.0E0*c*b
           p = s*r
           D(i+1) = g + p
           g = c*r - b
-        ENDDO
+        END DO
         !
         D(l) = D(l) - p
         E(l) = g
         E(m) = 0.0E0
         GOTO 20
-      ENDIF
+      END IF
       !
-    ENDDO
-  ENDIF
+    END DO
+  END IF
   RETURN
   !     .......... SET ERROR -- NO CONVERGENCE TO AN
   !                EIGENVALUE AFTER 30 ITERATIONS ..........

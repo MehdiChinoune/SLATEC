@@ -68,7 +68,7 @@ CONTAINS
       99003 FORMAT (' ON COMPUTERS WITH MAXIMUM EXPONENT LESS THAN 500, SMALL'/&
         ' TEST VALUES FOR NU, MU ARE USED. IF LARGER THAN OR EQUAL 500,'/&
         ' LARGER VALUES ARE USED. THIS COMPUTER USES THE LARGER VALUES.')
-    ENDIF
+    END IF
     nudiff = 5
     mu1 = INT( dnu1 )
     mu2 = mu1
@@ -117,7 +117,7 @@ CONTAINS
       isum = isum + ierror
       CALL XCON(r(i),ir(i),ierror)
       isum = isum + ierror
-    ENDDO
+    END DO
     x11 = p(1)
     ix11 = ip(1)
     x12 = r(1)
@@ -130,23 +130,23 @@ CONTAINS
       DO i = 1, 5
         WRITE (Lun,fmtf) nu, c1(i), ic1(i)
         nu = nu + 1.
-      ENDDO
+      END DO
       WRITE (Lun,'(A)') '     NU   CASORATI 2'
       nu = dnu1
       DO i = 1, 5
         WRITE (Lun,fmtf) nu, c2(i), ic2(i)
         nu = nu + 1.
-      ENDDO
-    ENDIF
+      END DO
+    END IF
     DO i = 1, 5
       IF ( ABS(1.0-c1(i))>=10.0E0**(6-ndec) ) GOTO 100
       IF ( ABS(1.0-c2(i))>=10.0E0**(6-ndec) ) GOTO 100
-    ENDDO
+    END DO
     IF ( isum==0 ) THEN
       IF ( Kprint>=2 ) WRITE (Lun,99005)
       99005 FORMAT (' ***** TEST 1 (SINGLE PRECISION) PASSED *****')
       GOTO 200
-    ENDIF
+    END IF
     100 CONTINUE
     IF ( Kprint>=1 ) WRITE (Lun,99006)
     99006 FORMAT (' ***** TEST 1 (SINGLE PRECISION) FAILED *****')
@@ -182,7 +182,7 @@ CONTAINS
       isum = isum + ierror
       CALL XCON(r(i),ir(i),ierror)
       isum = isum + ierror
-    ENDDO
+    END DO
     x21 = p(6)
     ix21 = ip(6)
     x22 = r(6)
@@ -195,19 +195,19 @@ CONTAINS
       DO i = 1, 5
         WRITE (Lun,fmti) mu, c1(i), ic1(i)
         mu = mu + 1
-      ENDDO
+      END DO
       WRITE (Lun,'(A)') '     MU   CASORATI 4'
       mu = mu1
       DO i = 1, 5
         WRITE (Lun,fmti) mu, c2(i), ic2(i)
         mu = mu + 1
-      ENDDO
-    ENDIF
+      END DO
+    END IF
     DO i = 1, 5
       IF ( ABS(1.0-c1(i))>=10.0E0**(6-ndec) ) GOTO 300
       IF ( ABS(1.0-c2(i))>=10.0E0**(6-ndec) ) GOTO 300
       IF ( isum/=0 ) GOTO 300
-    ENDDO
+    END DO
     IF ( Kprint>=2 ) WRITE (Lun,99008)
     99008 FORMAT (' ***** TEST 2 (SINGLE PRECISION) PASSED *****')
     GOTO 400
@@ -236,7 +236,7 @@ CONTAINS
       WRITE (Lun,'(A)') '          Q(MU,NU)'
       WRITE (Lun,fmt) x13, ix13
       WRITE (Lun,fmt) x23, ix23
-    ENDIF
+    END IF
     IF ( ABS((x11-x21)/x11)<10.0E0**(6-ndec) ) THEN
       IF ( ABS((x12-x22)/x12)<10.0E0**(6-ndec) ) THEN
         IF ( ABS((x13-x13)/x13)<10.0E0**(6-ndec) ) THEN
@@ -246,12 +246,12 @@ CONTAINS
                 IF ( Kprint>=2 ) WRITE (Lun,99011)
                 99011 FORMAT (' ***** TEST 3 (SINGLE PRECISION) PASSED *****')
                 GOTO 500
-              ENDIF
-            ENDIF
-          ENDIF
-        ENDIF
-      ENDIF
-    ENDIF
+              END IF
+            END IF
+          END IF
+        END IF
+      END IF
+    END IF
     IF ( Kprint>=1 ) WRITE (Lun,99012)
     99012 FORMAT (' ***** TEST 3 (SINGLE PRECISION) FAILED *****')
     ierr = ierr + 1
@@ -284,16 +284,16 @@ CONTAINS
       WRITE (Lun,'(A)') '          NORMALIZED P'
       WRITE (Lun,fmt) x11, ix11
       WRITE (Lun,fmt) x21, ix21
-    ENDIF
+    END IF
     IF ( ABS((x11-x21)/x11)<10.0E0**(6-ndec) ) THEN
       IF ( ix11==ix21 ) THEN
         IF ( isum==0 ) THEN
           IF ( Kprint>=2 ) WRITE (Lun,99014)
           99014 FORMAT (' ***** TEST 4 (SINGLE PRECISION) PASSED *****')
           GOTO 600
-        ENDIF
-      ENDIF
-    ENDIF
+        END IF
+      END IF
+    END IF
     IF ( Kprint>=1 ) WRITE (Lun,99015)
     99015 FORMAT (' ***** TEST 4 (SINGLE PRECISION) FAILED *****')
     ierr = ierr + 1
@@ -333,9 +333,9 @@ CONTAINS
           IF ( Kprint>=2 ) WRITE (Lun,99017)
           99017 FORMAT (' ***** TEST 5 (SINGLE PRECISION) PASSED *****')
           GOTO 700
-        ENDIF
-      ENDIF
-    ENDIF
+        END IF
+      END IF
+    END IF
     IF ( Kprint>=1 ) WRITE (Lun,99018)
     99018 FORMAT (' ***** TEST 5 (SINGLE PRECISION) FAILED *****')
     ierr = ierr + 1
@@ -344,7 +344,7 @@ CONTAINS
     IF ( ierr/=0 ) THEN
       IF ( Kprint>=2 ) WRITE (Lun,99019) ierr
       99019 FORMAT (/'  TESTS COMPLETED, NUMBER OF TESTS FAILED = ',I2)
-    ENDIF
+    END IF
   END SUBROUTINE FCNQX1
   !** XCSRT
   SUBROUTINE XCSRT(Dnu1,Nudiff,Mu1,Mu2,Theta,P,Q,R,Ip,Iq,Ir,C1,Ic1,C2,Ic2,Ierror)
@@ -403,7 +403,7 @@ CONTAINS
       IF ( Ierror/=0 ) RETURN
       CALL XADJ(R(i),Ir(i),Ierror)
       IF ( Ierror/=0 ) RETURN
-    ENDDO
+    END DO
     !
     !         CHECKS FOR FIXED MU, VARIABLE NU
     !
@@ -468,11 +468,11 @@ CONTAINS
             DO j = 1, k
               C2(i) = C2(i)/(Dnu1+dmu+1.-j)
               CALL XADJ(C2(i),Ic2(i),Ierror)
-            ENDDO
+            END DO
             IF ( Ierror/=0 ) RETURN
-          ENDIF
-        ENDIF
-      ENDDO
+          END IF
+        END IF
+      END DO
     ELSE
       dmu1 = Mu1
       DO i = 1, lm1
@@ -531,12 +531,12 @@ CONTAINS
           DO j = 1, k
             IF ( k>0 ) C2(i) = C2(i)/(nu+dmu1+1.-j)
             CALL XADJ(C2(i),Ic2(i),Ierror)
-          ENDDO
+          END DO
           IF ( Ierror/=0 ) RETURN
           IF ( k<=0 ) C2(i) = (nu+1.)*C2(i)
-        ENDIF
-      ENDDO
-    ENDIF
+        END IF
+      END DO
+    END IF
     !
     !         PLACE RESULTS IN REDUCED FORM.
     !
@@ -545,7 +545,7 @@ CONTAINS
       IF ( Ierror/=0 ) RETURN
       CALL XRED(C2(i),Ic2(i),Ierror)
       IF ( Ierror/=0 ) RETURN
-    ENDDO
+    END DO
   END SUBROUTINE XCSRT
 END MODULE TEST11_MOD
 !** TEST11
@@ -614,7 +614,7 @@ PROGRAM TEST11
     CALL XSETF(0)
   ELSE
     CALL XSETF(1)
-  ENDIF
+  END IF
   !
   !     Test XLEGF and XNRMP
   !
@@ -630,6 +630,6 @@ PROGRAM TEST11
     WRITE (lun,99002) nfail
     99002 FORMAT (/' ************* WARNING -- ',I5,&
       ' TEST(S) FAILED IN PROGRAM TEST11 *************')
-  ENDIF
+  END IF
   STOP
 END PROGRAM TEST11

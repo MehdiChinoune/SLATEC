@@ -23,7 +23,7 @@ SUBROUTINE PASSF4(Ido,L1,Cc,Ch,Wa1,Wa2,Wa3)
   !   890831  Modified array declarations.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
-  
+
   INTEGER i, Ido, k, L1
   REAL Cc(Ido,4,*), Ch(Ido,L1,4), ci2, ci3, ci4, cr2, cr3, cr4, ti1, ti2, ti3, ti4, &
     tr1, tr2, tr3, tr4, Wa1(*), Wa2(*), Wa3(*)
@@ -46,7 +46,7 @@ SUBROUTINE PASSF4(Ido,L1,Cc,Ch,Wa1,Wa2,Wa3)
       Ch(1,k,4) = tr1 - tr4
       Ch(2,k,2) = ti1 + ti4
       Ch(2,k,4) = ti1 - ti4
-    ENDDO
+    END DO
     RETURN
   ELSEIF ( Ido/2<L1 ) THEN
     DO i = 2, Ido, 2
@@ -74,10 +74,10 @@ SUBROUTINE PASSF4(Ido,L1,Cc,Ch,Wa1,Wa2,Wa3)
         Ch(i,k,3) = Wa2(i-1)*ci3 - Wa2(i)*cr3
         Ch(i-1,k,4) = Wa3(i-1)*cr4 + Wa3(i)*ci4
         Ch(i,k,4) = Wa3(i-1)*ci4 - Wa3(i)*cr4
-      ENDDO
-    ENDDO
+      END DO
+    END DO
     RETURN
-  ENDIF
+  END IF
   DO k = 1, L1
     !DIR$ IVDEP
     DO i = 2, Ido, 2
@@ -103,7 +103,7 @@ SUBROUTINE PASSF4(Ido,L1,Cc,Ch,Wa1,Wa2,Wa3)
       Ch(i,k,3) = Wa2(i-1)*ci3 - Wa2(i)*cr3
       Ch(i-1,k,4) = Wa3(i-1)*cr4 + Wa3(i)*ci4
       Ch(i,k,4) = Wa3(i-1)*ci4 - Wa3(i)*cr4
-    ENDDO
-  ENDDO
+    END DO
+  END DO
   RETURN
 END SUBROUTINE PASSF4

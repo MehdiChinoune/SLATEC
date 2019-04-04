@@ -156,7 +156,7 @@ SUBROUTINE BSKIN(X,N,Kode,M,Y,Nz,Ierr)
     DO k = 3, M
       Y(k) = fn*Y(k-2)/(fn+1.0E0)
       fn = fn + 1.0E0
-    ENDDO
+    END DO
     RETURN
   ELSE
     i1m = -I1MACH(12)
@@ -200,7 +200,7 @@ SUBROUTINE BSKIN(X,N,Kode,M,Y,Nz,Ierr)
         nn = nl
         nflg = MIN(M-m3,1)
         GOTO 200
-      ENDIF
+      END IF
     ELSE
       IF ( N>nlim ) GOTO 300
       !-----------------------------------------------------------------------
@@ -212,7 +212,7 @@ SUBROUTINE BSKIN(X,N,Kode,M,Y,Nz,Ierr)
         m3 = 3
         nn = 0
         nflg = 1
-      ENDIF
+      END IF
       xp = 1.0E0
       IF ( Kode==2 ) xp = EXP(X)
       DO i = 1, m3
@@ -222,15 +222,15 @@ SUBROUTINE BSKIN(X,N,Kode,M,Y,Nz,Ierr)
         IF ( nn>=N ) THEN
           kk = nn - N + 1
           Y(kk) = w
-        ENDIF
+        END IF
         ys(i) = w
         nn = nn + 1
-      ENDDO
+      END DO
       IF ( nflg==0 ) RETURN
       ns = nn
       xp = 1.0E0
-    ENDIF
-  ENDIF
+    END IF
+  END IF
   !-----------------------------------------------------------------------
   !     FORWARD RECURSION SCALED BY EXP(X) ON ICASE=0,1,2
   !-----------------------------------------------------------------------
@@ -247,9 +247,9 @@ SUBROUTINE BSKIN(X,N,Kode,M,Y,Nz,Ierr)
     IF ( ns>=N ) THEN
       kk = ns - N + 1
       Y(kk) = ys(3)*xp
-    ENDIF
+    END IF
     ns = ns + 1
-  ENDDO
+  END DO
   RETURN
   200  kk = (nlim-nn)/2
   ktrms = MAX(0,kk)
@@ -263,7 +263,7 @@ SUBROUTINE BSKIN(X,N,Kode,M,Y,Nz,Ierr)
     IF ( Ierr/=0 ) RETURN
     ys(i) = w
     np = np + 1
-  ENDDO
+  END DO
   !-----------------------------------------------------------------------
   !     SUM SERIES OF EXPONENTIAL INTEGRALS BACKWARD
   !-----------------------------------------------------------------------
@@ -273,7 +273,7 @@ SUBROUTINE BSKIN(X,N,Kode,M,Y,Nz,Ierr)
     CALL EXINT(X,np,2,ne,tol,exi,Nz,Ierr)
     IF ( Nz/=0 ) GOTO 400
     IF ( Ierr==2 ) RETURN
-  ENDIF
+  END IF
   DO i = 1, m3
     ss = 0.0E0
     IF ( ktrms/=0 ) THEN
@@ -283,10 +283,10 @@ SUBROUTINE BSKIN(X,N,Kode,M,Y,Nz,Ierr)
         ss = ss + a(il)*exi(kk)
         kk = kk - 2
         il = il - 1
-      ENDDO
-    ENDIF
+      END DO
+    END IF
     ys(i) = ys(i) + ss
-  ENDDO
+  END DO
   IF ( icase/=1 ) THEN
     IF ( nflg/=0 ) THEN
       !-----------------------------------------------------------------------
@@ -299,7 +299,7 @@ SUBROUTINE BSKIN(X,N,Kode,M,Y,Nz,Ierr)
         yss(i) = ys(i)
         kk = kk - 1
         k = k - 1
-      ENDDO
+      END DO
       il = kk
       IF ( il>0 ) THEN
         fn = nn - 3
@@ -312,18 +312,18 @@ SUBROUTINE BSKIN(X,N,Kode,M,Y,Nz,Ierr)
           Y(kk) = ys(1)*xp
           kk = kk - 1
           fn = fn - 1.0E0
-        ENDDO
-      ENDIF
+        END DO
+      END IF
       IF ( icase/=2 ) RETURN
       DO i = 1, m3
         ys(i) = yss(i)
-      ENDDO
+      END DO
       GOTO 100
-    ENDIF
-  ENDIF
+    END IF
+  END IF
   DO i = 1, m3
     Y(i) = ys(i)*xp
-  ENDDO
+  END DO
   IF ( icase==1.AND.nflg==1 ) GOTO 100
   RETURN
   !-----------------------------------------------------------------------
@@ -339,5 +339,5 @@ SUBROUTINE BSKIN(X,N,Kode,M,Y,Nz,Ierr)
   400  Nz = M
   DO i = 1, M
     Y(i) = 0.0E0
-  ENDDO
+  END DO
 END SUBROUTINE BSKIN

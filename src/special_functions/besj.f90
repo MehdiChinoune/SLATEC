@@ -120,7 +120,7 @@ SUBROUTINE BESJ(X,Alpha,N,Y,Nz)
     RETURN
   ELSEIF ( N==1 ) THEN
     kt = 2
-  ENDIF
+  END IF
   nn = N
   IF ( X<0 ) THEN
     CALL XERMSG('SLATEC','BESJ','X LESS THAN ZERO.',2,1)
@@ -133,10 +133,10 @@ SUBROUTINE BESJ(X,Alpha,N,Y,Nz)
       i1 = 2
     ELSE
       i1 = 1
-    ENDIF
+    END IF
     DO i = i1, N
       Y(i) = 0.0E0
-    ENDDO
+    END DO
     RETURN
   ELSE
     IF ( Alpha<0.0E0 ) GOTO 1200
@@ -179,7 +179,7 @@ SUBROUTINE BESJ(X,Alpha,N,Y,Nz)
           ELSE
             idalp = ialp - in - 1
             kt = 1
-          ENDIF
+          END IF
           is = kt
           fidal = idalp
           dalpha = fidal + fnf
@@ -193,7 +193,7 @@ SUBROUTINE BESJ(X,Alpha,N,Y,Nz)
           fn = fnu
           is = kt
           GOTO 100
-        ENDIF
+        END IF
       ELSEIF ( X>12.0E0 ) THEN
         ans = MAX(36.0E0-fnu,0.0E0)
         ns = INT(ans)
@@ -206,8 +206,8 @@ SUBROUTINE BESJ(X,Alpha,N,Y,Nz)
       ELSE
         xo2l = LOG(xo2)
         ns = INT(sxo2-fnu) + 1
-      ENDIF
-    ENDIF
+      END IF
+    END IF
     fni = fni + ns
     dfn = fni + fnf
     fn = dfn
@@ -215,7 +215,7 @@ SUBROUTINE BESJ(X,Alpha,N,Y,Nz)
     is = kt
     IF ( N-1+ns>0 ) is = 3
     GOTO 200
-  ENDIF
+  END IF
   100 CONTINUE
   DO
     !
@@ -240,7 +240,7 @@ SUBROUTINE BESJ(X,Alpha,N,Y,Nz)
       IF ( nn==1 ) THEN
         kt = 2
         is = 2
-      ENDIF
+      END IF
     ELSE
       SELECT CASE (is)
         CASE (1)
@@ -258,7 +258,7 @@ SUBROUTINE BESJ(X,Alpha,N,Y,Nz)
                 /wk(7)
             ELSE
               tb = gln/wk(5)
-            ENDIF
+            END IF
           ELSE
             rden = (pp(4)*wk(6)+pp(3))*wk(6) + 1.0E0
             rzden = pp(1) + pp(2)*wk(6)
@@ -268,8 +268,8 @@ SUBROUTINE BESJ(X,Alpha,N,Y,Nz)
                 /wk(7)
             ELSE
               tb = gln/wk(5)
-            ENDIF
-          ENDIF
+            END IF
+          END IF
           in = INT(ta/tb+1.5E0)
           IF ( in<=inlim ) GOTO 900
         CASE DEFAULT
@@ -277,8 +277,8 @@ SUBROUTINE BESJ(X,Alpha,N,Y,Nz)
       temp(1) = temp(3)
       kt = 1
       EXIT
-    ENDIF
-  ENDDO
+    END IF
+  END DO
   is = 2
   fni = fni - 1.0E0
   dfn = fni + fnf
@@ -306,8 +306,8 @@ SUBROUTINE BESJ(X,Alpha,N,Y,Nz)
       t2 = t2 + ak
       ak = ak + 2.0E0
       s1 = s1 + fn
-    ENDDO
-  ENDIF
+    END DO
+  END IF
   temp(is) = s*earg
   SELECT CASE (is)
     CASE (2)
@@ -345,7 +345,7 @@ SUBROUTINE BESJ(X,Alpha,N,Y,Nz)
   IF ( nn==1 ) THEN
     kt = 2
     is = 2
-  ENDIF
+  END IF
   IF ( sxo2>fnp1 ) GOTO 100
   arg = arg - xo2l + LOG(fnp1)
   IF ( arg>=(-elim1) ) GOTO 200
@@ -363,7 +363,7 @@ SUBROUTINE BESJ(X,Alpha,N,Y,Nz)
     Y(nn) = temp(1)
     Y(nn-1) = temp(2)
     IF ( nn==2 ) RETURN
-  ENDIF
+  END IF
   trx = 2.0E0/X
   dtm = fni
   tm = (dtm+fnf)*trx
@@ -374,7 +374,7 @@ SUBROUTINE BESJ(X,Alpha,N,Y,Nz)
     ta = ta*rtol
     tb = tb*rtol
     ak = tol
-  ENDIF
+  END IF
   kk = 2
   in = ns - 1
   IF ( in==0 ) GOTO 1100
@@ -388,7 +388,7 @@ SUBROUTINE BESJ(X,Alpha,N,Y,Nz)
     k = k - 1
     dtm = dtm - 1.0E0
     tm = (dtm+fnf)*trx
-  ENDDO
+  END DO
   RETURN
   700  Y(1) = temp(2)
   RETURN
@@ -420,7 +420,7 @@ SUBROUTINE BESJ(X,Alpha,N,Y,Nz)
     s2 = s2 + t2
     IF ( ABS(t2)<=relb ) EXIT
     ak = ak + 8.0E0
-  ENDDO
+  END DO
   temp(is) = coef*(s1*sb-s2*sa)
   IF ( is==2 ) THEN
     !
@@ -440,7 +440,7 @@ SUBROUTINE BESJ(X,Alpha,N,Y,Nz)
         s2 = tm*s2 - s1
         tm = tm + tx
         s1 = s
-      ENDDO
+      END DO
       IF ( nn==1 ) THEN
         Y(1) = s2
         RETURN
@@ -449,8 +449,8 @@ SUBROUTINE BESJ(X,Alpha,N,Y,Nz)
         s2 = tm*s2 - s1
         tm = tm + tx
         s1 = s
-      ENDIF
-    ENDIF
+      END IF
+    END IF
     !
     !     FORWARD RECUR FROM INDEX ALPHA TO ALPHA+N-1
     !
@@ -460,7 +460,7 @@ SUBROUTINE BESJ(X,Alpha,N,Y,Nz)
     DO i = 3, nn
       Y(i) = tm*Y(i-1) - Y(i-2)
       tm = tm + tx
-    ENDDO
+    END DO
     RETURN
   ELSE
     fidal = fidal + 1.0E0
@@ -470,7 +470,7 @@ SUBROUTINE BESJ(X,Alpha,N,Y,Nz)
     sa = -sb
     sb = tb
     GOTO 800
-  ENDIF
+  END IF
   900  dtm = fni + in
   trx = 2.0E0/X
   tm = (dtm+fnf)*trx
@@ -490,7 +490,7 @@ SUBROUTINE BESJ(X,Alpha,N,Y,Nz)
       ta = s
       dtm = dtm - 1.0E0
       tm = (dtm+fnf)*trx
-    ENDDO
+    END DO
     !     NORMALIZATION
     IF ( kk/=1 ) EXIT
     s = temp(3)
@@ -501,12 +501,12 @@ SUBROUTINE BESJ(X,Alpha,N,Y,Nz)
       ta = ta*rtol
       tb = tb*rtol
       ak = tol
-    ENDIF
+    END IF
     ta = ta*sa
     kk = 2
     in = ns
     IF ( ns==0 ) EXIT
-  ENDDO
+  END DO
   1100 Y(nn) = tb*ak
   Nz = N - nn
   IF ( nn==1 ) RETURN
@@ -530,7 +530,7 @@ SUBROUTINE BESJ(X,Alpha,N,Y,Nz)
     dtm = dtm - 1.0E0
     tm = (dtm+fnf)*trx
     k = k - 1
-  ENDDO
+  END DO
   RETURN
   !
   !

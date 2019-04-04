@@ -80,7 +80,7 @@ REAL FUNCTION R9LN2R(X)
     txbig = 4.0/SQRT(sqeps)
     xbig = txbig - (sqeps*txbig**2-2.0*LOG(txbig))/(2.*sqeps*txbig)
     first = .FALSE.
-  ENDIF
+  END IF
   !
   IF ( X<(-0.625).OR.X>0.8125 ) THEN
     !
@@ -93,12 +93,12 @@ REAL FUNCTION R9LN2R(X)
     !
     R9LN2R = (LOG(1.0+X)-X*(1.0-0.5*X))/X**3
     RETURN
-  ENDIF
+  END IF
   !
   IF ( X<0.0 ) THEN
     R9LN2R = 0.375 + CSEVL(16.*X/5.+1.0,ln21cs,ntln21)
   ELSE
     R9LN2R = 0.375 + CSEVL(32.*X/13.-1.0,ln22cs,ntln22)
-  ENDIF
+  END IF
   RETURN
 END FUNCTION R9LN2R

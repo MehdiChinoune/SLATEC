@@ -68,7 +68,7 @@ SUBROUTINE INTRV(Xt,Lxt,X,Ilo,Ileft,Mflag)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   !
   INTEGER ihi, Ileft, Ilo, istep, Lxt, Mflag, middle
   REAL X, Xt(*)
@@ -79,7 +79,7 @@ SUBROUTINE INTRV(Xt,Lxt,X,Ilo,Ileft,Mflag)
     IF ( Lxt<=1 ) GOTO 100
     Ilo = Lxt - 1
     ihi = Lxt
-  ENDIF
+  END IF
   !
   IF ( X>=Xt(ihi) ) THEN
     !- ** NOW X .GE. XT(ILO) . FIND UPPER BOUND
@@ -94,8 +94,8 @@ SUBROUTINE INTRV(Xt,Lxt,X,Ilo,Ileft,Mflag)
       ELSE
         IF ( X<Xt(ihi) ) EXIT
         istep = istep*2
-      ENDIF
-    ENDDO
+      END IF
+    END DO
   ELSE
     IF ( X>=Xt(Ilo) ) GOTO 200
     !
@@ -111,9 +111,9 @@ SUBROUTINE INTRV(Xt,Lxt,X,Ilo,Ileft,Mflag)
       ELSE
         IF ( X>=Xt(Ilo) ) EXIT
         istep = istep*2
-      ENDIF
-    ENDDO
-  ENDIF
+      END IF
+    END DO
+  END IF
   DO
     !
     !- ** NOW XT(ILO) .LE. X .LT. XT(IHI) . NARROW THE INTERVAL
@@ -124,8 +124,8 @@ SUBROUTINE INTRV(Xt,Lxt,X,Ilo,Ileft,Mflag)
       ihi = middle
     ELSE
       Ilo = middle
-    ENDIF
-  ENDDO
+    END IF
+  END DO
   !- ** SET OUTPUT AND RETURN
   100  Mflag = -1
   Ileft = 1

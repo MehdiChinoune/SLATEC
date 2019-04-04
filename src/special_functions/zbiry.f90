@@ -219,11 +219,11 @@ SUBROUTINE ZBIRY(Zr,Zi,Id,Kode,Bir,Bii,Ierr)
         ck = -ABS(bk)
         ztar = ck
         ztai = ak
-      ENDIF
+      END IF
       IF ( Zi==0.0D0.AND.Zr<=0.0D0 ) THEN
         ztar = 0.0D0
         ztai = ak
-      ENDIF
+      END IF
       aa = ztar
       IF ( Kode/=2 ) THEN
         !-----------------------------------------------------------------------
@@ -234,15 +234,15 @@ SUBROUTINE ZBIRY(Zr,Zi,Id,Kode,Bir,Bii,Ierr)
           bb = bb + 0.25D0*LOG(az)
           sfac = tol
           IF ( bb>elim ) GOTO 50
-        ENDIF
-      ENDIF
+        END IF
+      END IF
       fmr = 0.0D0
       IF ( aa<0.0D0.OR.Zr<=0.0D0 ) THEN
         fmr = pi
         IF ( Zi<0.0D0 ) fmr = -pi
         ztar = -ztar
         ztai = -ztai
-      ENDIF
+      END IF
       !-----------------------------------------------------------------------
       !     AA=FACTOR FOR ANALYTIC CONTINUATION OF I(FNU,ZTA)
       !     KODE=2 RETURNS EXP(-ABS(XZTA))*I(FNU,ZTA) FROM CBESI
@@ -286,12 +286,12 @@ SUBROUTINE ZBIRY(Zr,Zi,Id,Kode,Bir,Bii,Ierr)
           Bir = s1r/sfac
           Bii = s1i/sfac
           RETURN
-        ENDIF
+        END IF
       ELSEIF ( nz/=(-1) ) THEN
         GOTO 100
-      ENDIF
-    ENDIF
-    50     Ierr = 2
+      END IF
+    END IF
+    50  Ierr = 2
     nz = 0
     RETURN
   ELSE
@@ -347,8 +347,8 @@ SUBROUTINE ZBIRY(Zr,Zi,Id,Kode,Bir,Bii,Ierr)
           IF ( atrm<tol*ad ) EXIT
           ak = ak + 18.0D0
           bk = bk + 18.0D0
-        ENDDO
-      ENDIF
+        END DO
+      END IF
       IF ( Id==1 ) THEN
         Bir = s2r*c2
         Bii = s2i*c2
@@ -358,7 +358,7 @@ SUBROUTINE ZBIRY(Zr,Zi,Id,Kode,Bir,Bii,Ierr)
           sti = s1r*Zi + s1i*Zr
           Bir = Bir + cc*(str*Zr-sti*Zi)
           Bii = Bii + cc*(str*Zi+sti*Zr)
-        ENDIF
+        END IF
         IF ( Kode==1 ) RETURN
         CALL ZSQRT(Zr,Zi,str,sti)
         ztar = tth*(Zr*str-Zi*sti)
@@ -382,9 +382,9 @@ SUBROUTINE ZBIRY(Zr,Zi,Id,Kode,Bir,Bii,Ierr)
         Bir = Bir*eaa
         Bii = Bii*eaa
         RETURN
-      ENDIF
-    ENDIF
-  ENDIF
+      END IF
+    END IF
+  END IF
   100  nz = 0
   Ierr = 5
   RETURN

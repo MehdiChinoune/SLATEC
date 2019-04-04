@@ -108,7 +108,7 @@ SUBROUTINE DORTHR(A,N,M,Nrda,Iflag,Irank,Iscale,Diag,Kpivot,Scales,Rows,Rs)
       Rows(j) = DDOT(M,A(j,1),Nrda,A(j,1),Nrda)
       Rs(j) = Rows(j)
       anorm = anorm + Rows(j)
-    ENDDO
+    END DO
     !
     !        PERFORM COLUMN SCALING ON A WHEN SPECIFIED
     !
@@ -135,14 +135,14 @@ SUBROUTINE DORTHR(A,N,M,Nrda,Iflag,Irank,Iscale,Diag,Kpivot,Scales,Rows,Rs)
           IF ( Rows(j)<sruro*Rs(j) ) THEN
             Rows(j) = DDOT(mk,A(j,k),Nrda,A(j,k),Nrda)
             Rs(j) = Rows(j)
-          ENDIF
+          END IF
           IF ( j/=k ) THEN
             !                 ......EXIT
             IF ( sigma>=0.99D0*Rows(j) ) CYCLE
-          ENDIF
+          END IF
           sigma = Rows(j)
           jrow = j
-        ENDDO
+        END DO
         !           ...EXIT
         IF ( jrow/=k ) THEN
           !
@@ -160,9 +160,9 @@ SUBROUTINE DORTHR(A,N,M,Nrda,Iflag,Irank,Iscale,Diag,Kpivot,Scales,Rows,Rs)
             asave = A(k,l)
             A(k,l) = A(jrow,l)
             A(jrow,l) = asave
-          ENDDO
-        ENDIF
-      ENDIF
+          END DO
+        END IF
+      END IF
       !
       !           CHECK RANK OF THE MATRIX
       !
@@ -182,10 +182,10 @@ SUBROUTINE DORTHR(A,N,M,Nrda,Iflag,Irank,Iscale,Diag,Kpivot,Scales,Rows,Rs)
             as = DDOT(mk,A(k,k),Nrda,A(j,k),Nrda)/sad
             DO l = k, M
               A(j,l) = A(j,l) + as*A(k,l)
-            ENDDO
+            END DO
             Rows(j) = Rows(j) - A(j,k)**2
-          ENDDO
-        ENDIF
+          END DO
+        END IF
       ELSE
         !
         !              RANK DEFICIENT PROBLEM
@@ -195,12 +195,12 @@ SUBROUTINE DORTHR(A,N,M,Nrda,Iflag,Irank,Iscale,Diag,Kpivot,Scales,Rows,Rs)
           'RANK OF MATRIX IS LESS THAN THE NUMBER OF ROWS.',1,1)
         !        ......EXIT
         EXIT
-      ENDIF
-    ENDDO
+      END IF
+    END DO
   ELSE
     Iflag = 2
     CALL XERMSG('SLATEC','DORTHR','INVALID INPUT PARAMETERS.',2,1)
-  ENDIF
+  END IF
   !
   !
 END SUBROUTINE DORTHR

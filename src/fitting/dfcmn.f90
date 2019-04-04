@@ -63,14 +63,14 @@ SUBROUTINE DFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Nconst,Xconst,&
       'IN DFC, THE NUMBER OF KNOTS MUST BE AT LEAST TWICE THE B-SPLINE ORDER.',2,1)
     Mode = -1
     RETURN
-  ENDIF
+  END IF
   !
   IF ( Ndata<0 ) THEN
     CALL XERMSG('SLATEC','DFCMN',&
       'IN DFC, THE NUMBER OF DATA POINTS MUST BE NONNEGATIVE.',2,1)
     Mode = -1
     RETURN
-  ENDIF
+  END IF
   !
   !     Amount of storage allocated for W(*), IW(*).
   !
@@ -86,7 +86,7 @@ SUBROUTINE DFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Nconst,Xconst,&
       'IN DFC, INSUFFICIENT STORAGE FOR W(*).  CHECK NB = '//xern1,2,1)
     Mode = -1
     RETURN
-  ENDIF
+  END IF
   !
   IF ( Mode==1 ) THEN
     band = .TRUE.
@@ -108,7 +108,7 @@ SUBROUTINE DFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Nconst,Xconst,&
     CALL XERMSG('SLATEC','DFCMN','IN DFC, INPUT VALUE OF MODE MUST BE 1-4.',2,1)
     Mode = -1
     RETURN
-  ENDIF
+  END IF
   Mode = 0
   !
   !     Sort the breakpoints.
@@ -127,8 +127,8 @@ SUBROUTINE DFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Nconst,Xconst,&
       nincon = nincon + 1
     ELSE
       neqcon = neqcon + 1
-    ENDIF
-  ENDDO
+    END IF
+  END DO
   !
   !     Compute the number of variables.
   !
@@ -148,7 +148,7 @@ SUBROUTINE DFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Nconst,Xconst,&
   DO i = 1, Nconst
     xmin = MIN(xmin,Xconst(i))
     xmax = MAX(xmax,Xconst(i))
-  ENDDO
+  END DO
   nordm1 = Nord - 1
   nordp1 = Nord + 1
   !
@@ -163,7 +163,7 @@ SUBROUTINE DFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Nconst,Xconst,&
     prgopt(3) = 1
   ELSE
     prgopt(3) = 0
-  ENDIF
+  END IF
   !
   !     Increase the rank determination tolerances for both equality
   !     constraint equations and least squares equations.
@@ -193,23 +193,23 @@ SUBROUTINE DFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Nconst,Xconst,&
     CALL DCOPY(Ndata,Xdata,1,Xtemp,1)
     DO i = 1, Ndata
       Ptemp(i) = i
-    ENDDO
+    END DO
     !
     IF ( Ndata>0 ) THEN
       CALL DSORT(Xtemp,Ptemp,Ndata,2)
       xmin = MIN(xmin,Xtemp(1))
       xmax = MAX(xmax,Xtemp(Ndata))
-    ENDIF
+    END IF
     !
     !        Fix breakpoint array if needed.
     !
     DO i = 1, Nord
       Bkpt(i) = MIN(Bkpt(i),xmin)
-    ENDDO
+    END DO
     !
     DO i = np1, Nbkpt
       Bkpt(i) = MAX(Bkpt(i),xmax)
-    ENDDO
+    END DO
     !
     !        Initialize parameters of banded matrix processor, DBNDAC( ).
     !
@@ -235,8 +235,8 @@ SUBROUTINE DFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Nconst,Xconst,&
         !
         DO WHILE ( xval>=Bkpt(ileft+1).AND.ileft<n )
           ileft = ileft + 1
-        ENDDO
-      ENDIF
+        END DO
+      END IF
       !
       !           Obtain B-spline function value.
       !
@@ -258,8 +258,8 @@ SUBROUTINE DFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Nconst,Xconst,&
       IF ( irow==Mdg-1 ) THEN
         CALL DBNDAC(G,Mdg,Nord,ip,ir,mt,ileft-nordm1)
         mt = 0
-      ENDIF
-    ENDDO
+      END IF
+    END DO
     !
     !        Process last block of equations.
     !
@@ -269,19 +269,19 @@ SUBROUTINE DFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Nconst,Xconst,&
     !
     CALL DCOPY(nordp1,0.D0,0,G(ir,1),Mdg)
     CALL DBNDAC(G,Mdg,Nord,ip,ir,1,np1)
-  ENDIF
+  END IF
   !
   band = band .AND. Nconst==0
   DO i = 1, n
     band = band .AND. G(i,1)/=0.D0
-  ENDDO
+  END DO
   !
   !     Process banded least squares equations.
   !
   IF ( band ) THEN
     CALL DBNDSL(1,G,Mdg,Nord,ip,ir,Coeff,n,rnorm)
     RETURN
-  ENDIF
+  END IF
   !
   !     Check further for sufficient storage in working arrays.
   !
@@ -291,7 +291,7 @@ SUBROUTINE DFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Nconst,Xconst,&
       'IN DFC, INSUFFICIENT STORAGE FOR W(*).  CHECK LW = '//xern1,2,1)
     Mode = -1
     RETURN
-  ENDIF
+  END IF
   !
   IF ( iw2<intw1 ) THEN
     WRITE (xern1,'(I8)') intw1
@@ -299,7 +299,7 @@ SUBROUTINE DFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Nconst,Xconst,&
       'IN DFC, INSUFFICIENT STORAGE FOR IW(*).  CHECK IW1 = '//xern1,2,1)
     Mode = -1
     RETURN
-  ENDIF
+  END IF
   !
   !     Write equality constraints.
   !     Analyze constraint indicators for an equality constraint.
@@ -316,7 +316,7 @@ SUBROUTINE DFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Nconst,Xconst,&
       !
       DO WHILE ( xval>=Bkpt(ileft+1).AND.ileft<n )
         ileft = ileft + 1
-      ENDDO
+      END DO
       !
       CALL DFSPVD(Bkpt,Nord,xval,ileft,Bf,ideriv+1)
       CALL DCOPY(np1,0.D0,0,W(neqcon,1),Mdw)
@@ -330,13 +330,13 @@ SUBROUTINE DFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Nconst,Xconst,&
         !
         DO WHILE ( yval>=Bkpt(ileft+1).AND.ileft<n )
           ileft = ileft + 1
-        ENDDO
+        END DO
         !
         CALL DFSPVD(Bkpt,Nord,yval,ileft,Bf,ideriv+1)
         CALL DAXPY(Nord,-1.D0,Bf(1,ideriv+1),1,W(neqcon,ileft-nordm1),Mdw)
-      ENDIF
-    ENDIF
-  ENDDO
+      END IF
+    END IF
+  END DO
   !
   !     Transfer least squares data.
   !
@@ -345,7 +345,7 @@ SUBROUTINE DFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Nconst,Xconst,&
     CALL DCOPY(n,0.D0,0,W(irow,1),Mdw)
     CALL DCOPY(MIN(np1-i,Nord),G(i,1),Mdg,W(irow,i),Mdw)
     W(irow,np1) = G(i,nordp1)
-  ENDDO
+  END DO
   !
   !     Write inequality constraints.
   !     Analyze constraint indicators for inequality constraints.
@@ -362,7 +362,7 @@ SUBROUTINE DFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Nconst,Xconst,&
       !
       DO WHILE ( xval>=Bkpt(ileft+1).AND.ileft<n )
         ileft = ileft + 1
-      ENDDO
+      END DO
       !
       CALL DFSPVD(Bkpt,Nord,xval,ileft,Bf,ideriv+1)
       irow = neqcon + np1 + nincon
@@ -375,9 +375,9 @@ SUBROUTINE DFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Nconst,Xconst,&
       ELSE
         W(irow,np1) = -Yconst(idata)
         CALL DSCAL(Nord,-1.D0,W(irow,intrvl),Mdw)
-      ENDIF
-    ENDIF
-  ENDDO
+      END IF
+    END IF
+  END DO
   !
   !     Solve constrained least squares equations.
   !

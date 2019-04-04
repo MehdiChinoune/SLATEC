@@ -58,7 +58,7 @@ SUBROUTINE CPZERO(In,A,R,T,Iflg,S)
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
-  
+
   INTEGER i, Iflg, imax, In, j, n, n1, nit, nmax, nr
   REAL u, v, x
   REAL S(*)
@@ -91,7 +91,7 @@ SUBROUTINE CPZERO(In,A,R,T,Iflg,S)
           DO i = 2, n1
             T(n+i) = -ABS(T(n+2-i))
             IF ( REAL(T(n+i))<REAL(T(imax)) ) imax = n + i
-          ENDDO
+          END DO
           x = (-REAL(T(imax))/REAL(T(n1)))**(1./(imax-n1))
           DO
             x = 2.*x
@@ -108,23 +108,23 @@ SUBROUTINE CPZERO(In,A,R,T,Iflg,S)
                   DO i = 1, n
                     u = (3.14159265/n)*(2*i-1.5)
                     R(i) = MAX(x,.001*ABS(temp(1)))*CMPLX(COS(u),SIN(u)) + temp(1)
-                  ENDDO
+                  END DO
                   GOTO 50
-                ENDIF
-              ENDDO
-            ENDIF
-          ENDDO
+                END IF
+              END DO
+            END IF
+          END DO
         ELSE
           R(n) = 0.0
           S(n) = 0.0
           n = n - 1
-        ENDIF
-      ENDDO
-    ENDIF
+        END IF
+      END DO
+    END IF
     !
     !          MAIN ITERATION LOOP STARTS HERE
     !
-    50     nr = 0
+    50  nr = 0
     nmax = 25*n
     DO nit = 1, nmax
       DO i = 1, n
@@ -134,21 +134,21 @@ SUBROUTINE CPZERO(In,A,R,T,Iflg,S)
             temp = A(1)
             DO j = 1, n
               IF ( j/=i ) temp = temp*(R(i)-R(j))
-            ENDDO
+            END DO
             T(i) = pn(1)/temp(1)
           ELSE
             T(i) = 0.0
             nr = nr + 1
-          ENDIF
-        ENDIF
-      ENDDO
+          END IF
+        END IF
+      END DO
       DO i = 1, n
         R(i) = R(i) - T(i)
-      ENDDO
+      END DO
       IF ( nr==n ) GOTO 100
-    ENDDO
+    END DO
     GOTO 200
-  ENDIF
+  END IF
   !
   !          CALCULATE ERROR BOUNDS FOR ZEROS
   !
@@ -162,9 +162,9 @@ SUBROUTINE CPZERO(In,A,R,T,Iflg,S)
       temp = CMPLX(MAX(ABS(REAL(T(i+1)))-REAL(T(n1+i)),0.0),&
         MAX(ABS(AIMAG(T(i+1)))-AIMAG(T(n1+i)),0.0))
       S(nr) = MAX(S(nr),(ABS(temp(1))/x)**(1./i))
-    ENDDO
+    END DO
     S(nr) = 1./S(nr)
-  ENDDO
+  END DO
   RETURN
   !        ERROR EXITS
   200 CONTINUE

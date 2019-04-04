@@ -32,7 +32,7 @@ SUBROUTINE OHTROL(Q,N,Nrda,Diag,Irank,Div,Td)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
-  
+
   INTEGER Irank, irp, j, k, kir, kirm, l, N, nmir, Nrda
   REAL dd, Diag(*), diagk, Div(*), Q(Nrda,*), qs, SDOT, sig, sqd, Td(*), tdv
   !* FIRST EXECUTABLE STATEMENT  OHTROL
@@ -54,8 +54,8 @@ SUBROUTINE OHTROL(Q,N,Nrda,Diag,Irank,Div,Td)
         Q(kir,j) = Q(kir,j) + qs*tdv
         DO l = irp, N
           Q(l,j) = Q(l,j) + qs*Q(l,kir)
-        ENDDO
-      ENDDO
-    ENDIF
-  ENDDO
+        END DO
+      END DO
+    END IF
+  END DO
 END SUBROUTINE OHTROL

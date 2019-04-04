@@ -112,7 +112,7 @@ SUBROUTINE SSMV(N,X,Y,Nelt,Ia,Ja,A,Isym)
   !   910411  Prologue converted to Version 4.0 format.  (BAB)
   !   920511  Added complete declaration section.  (WRB)
   !   930701  Updated CATEGORY section.  (FNF, WRB)
-  
+
   !     .. Scalar Arguments ..
   INTEGER Isym, N, Nelt
   !     .. Array Arguments ..
@@ -126,7 +126,7 @@ SUBROUTINE SSMV(N,X,Y,Nelt,Ia,Ja,A,Isym)
   !
   DO i = 1, N
     Y(i) = 0
-  ENDDO
+  END DO
   !
   !         Multiply by A.
   !
@@ -139,8 +139,8 @@ SUBROUTINE SSMV(N,X,Y,Nelt,Ia,Ja,A,Isym)
     !VD$ NODEPCHK
     DO i = ibgn, iend
       Y(Ia(i)) = Y(Ia(i)) + A(i)*X(icol)
-    ENDDO
-  ENDDO
+    END DO
+  END DO
   !
   IF ( Isym==1 ) THEN
     !
@@ -154,9 +154,9 @@ SUBROUTINE SSMV(N,X,Y,Nelt,Ia,Ja,A,Isym)
       IF ( jbgn<=jend ) THEN
         DO j = jbgn, jend
           Y(irow) = Y(irow) + A(j)*X(Ia(j))
-        ENDDO
-      ENDIF
-    ENDDO
-  ENDIF
+        END DO
+      END IF
+    END DO
+  END IF
   !------------- LAST LINE OF SSMV FOLLOWS ----------------------------
 END SUBROUTINE SSMV

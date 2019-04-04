@@ -27,7 +27,7 @@ LOGICAL FUNCTION COMP(Ieract,Ierexp,Lout,Kprint)
   !   900315  Revised prologue.  (FNF)
   !   900316  Minor modification to format 5010.  (FNF)
   !   910708  Minor modifications in use of KPRINT.  (WRB)
-  
+
   INTEGER Ieract, Ierexp, Lout, Kprint
   !* FIRST EXECUTABLE STATEMENT  COMP
   IF ( Ieract==Ierexp ) THEN
@@ -38,7 +38,7 @@ LOGICAL FUNCTION COMP(Ieract,Ierexp,Lout,Kprint)
     COMP = .FALSE.
     IF ( Kprint>=3 ) WRITE (Lout,99002) Ieract
     99002 FORMAT (' *** COMPARE FAILED -- IERR =',I5)
-  ENDIF
+  END IF
   !
   !------------- LAST LINE OF COMP FOLLOWS -----------------------------
 END FUNCTION COMP

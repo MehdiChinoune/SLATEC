@@ -137,7 +137,7 @@ SUBROUTINE SGBCO(Abd,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   INTEGER Lda, N, Ml, Mu, Ipvt(*)
   REAL Abd(Lda,*), Z(*)
   REAL Rcond
@@ -157,7 +157,7 @@ SUBROUTINE SGBCO(Abd,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
     IF ( is>Ml+1 ) is = is - 1
     IF ( j<=Mu ) l = l + 1
     IF ( j>=N-Ml ) l = l - 1
-  ENDDO
+  END DO
   !
   !     FACTOR
   !
@@ -175,7 +175,7 @@ SUBROUTINE SGBCO(Abd,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
   ek = 1.0E0
   DO j = 1, N
     Z(j) = 0.0E0
-  ENDDO
+  END DO
   m = Ml + Mu + 1
   ju = 0
   DO k = 1, N
@@ -184,7 +184,7 @@ SUBROUTINE SGBCO(Abd,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
       s = ABS(Abd(m,k))/ABS(ek-Z(k))
       CALL SSCAL(N,s,Z,1)
       ek = s*ek
-    ENDIF
+    END IF
     wk = ek - Z(k)
     wkm = -ek - Z(k)
     s = ABS(wk)
@@ -195,7 +195,7 @@ SUBROUTINE SGBCO(Abd,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
     ELSE
       wk = wk/Abd(m,k)
       wkm = wkm/Abd(m,k)
-    ENDIF
+    END IF
     kp1 = k + 1
     ju = MIN(MAX(ju,Mu+Ipvt(k)),N)
     mm = m
@@ -205,7 +205,7 @@ SUBROUTINE SGBCO(Abd,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
         sm = sm + ABS(Z(j)+wkm*Abd(mm,j))
         Z(j) = Z(j) + wk*Abd(mm,j)
         s = s + ABS(Z(j))
-      ENDDO
+      END DO
       IF ( s<sm ) THEN
         t = wkm - wk
         wk = wkm
@@ -213,11 +213,11 @@ SUBROUTINE SGBCO(Abd,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
         DO j = kp1, ju
           mm = mm - 1
           Z(j) = Z(j) + t*Abd(mm,j)
-        ENDDO
-      ENDIF
-    ENDIF
+        END DO
+      END IF
+    END IF
     Z(k) = wk
-  ENDDO
+  END DO
   s = 1.0E0/SASUM(N,Z,1)
   CALL SSCAL(N,s,Z,1)
   !
@@ -230,12 +230,12 @@ SUBROUTINE SGBCO(Abd,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
     IF ( ABS(Z(k))>1.0E0 ) THEN
       s = 1.0E0/ABS(Z(k))
       CALL SSCAL(N,s,Z,1)
-    ENDIF
+    END IF
     l = Ipvt(k)
     t = Z(l)
     Z(l) = Z(k)
     Z(k) = t
-  ENDDO
+  END DO
   s = 1.0E0/SASUM(N,Z,1)
   CALL SSCAL(N,s,Z,1)
   !
@@ -254,8 +254,8 @@ SUBROUTINE SGBCO(Abd,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
       s = 1.0E0/ABS(Z(k))
       CALL SSCAL(N,s,Z,1)
       ynorm = s*ynorm
-    ENDIF
-  ENDDO
+    END IF
+  END DO
   s = 1.0E0/SASUM(N,Z,1)
   CALL SSCAL(N,s,Z,1)
   ynorm = s*ynorm
@@ -268,7 +268,7 @@ SUBROUTINE SGBCO(Abd,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
       s = ABS(Abd(m,k))/ABS(Z(k))
       CALL SSCAL(N,s,Z,1)
       ynorm = s*ynorm
-    ENDIF
+    END IF
     IF ( Abd(m,k)/=0.0E0 ) Z(k) = Z(k)/Abd(m,k)
     IF ( Abd(m,k)==0.0E0 ) Z(k) = 1.0E0
     lm = MIN(k,m) - 1
@@ -276,7 +276,7 @@ SUBROUTINE SGBCO(Abd,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
     lz = k - lm
     t = -Z(k)
     CALL SAXPY(lm,t,Abd(la,k),1,Z(lz),1)
-  ENDDO
+  END DO
   !     MAKE ZNORM = 1.0
   s = 1.0E0/SASUM(N,Z,1)
   CALL SSCAL(N,s,Z,1)

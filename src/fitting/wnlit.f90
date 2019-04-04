@@ -103,17 +103,17 @@ SUBROUTINE WNLIT(W,Mdw,M,N,L,Ipivot,Itype,H,Scale,Rnorm,Idope,Dope,Done)
               IF ( t>amax ) THEN
                 imax = jp
                 amax = t
-              ENDIF
-            ENDDO
+              END IF
+            END DO
             jp = imax
-          ENDIF
+          END IF
           !
           IF ( W(j,i)/=0.E0 ) THEN
             CALL SROTMG(Scale(jp),Scale(j),W(jp,i),W(j,i),sparam)
             W(j,i) = 0.E0
             CALL SROTM(N+1-i,W(jp,i+1),Mdw,W(j,i+1),Mdw,sparam)
-          ENDIF
-        ENDDO
+          END IF
+        END DO
       ELSEIF ( lend>i ) THEN
         !
         !           Column I is dependent.  Swap with column LEND.
@@ -128,10 +128,10 @@ SUBROUTINE WNLIT(W,Mdw,M,N,L,Ipivot,Itype,H,Scale,Rnorm,Idope,Dope,Done)
       ELSE
         krank = i - 1
         GOTO 100
-      ENDIF
+      END IF
       EXIT
-    ENDDO
-  ENDDO
+    END DO
+  END DO
   krank = l1
   !
   100 CONTINUE
@@ -139,7 +139,7 @@ SUBROUTINE WNLIT(W,Mdw,M,N,L,Ipivot,Itype,H,Scale,Rnorm,Idope,Dope,Done)
     factor = alsq
     DO i = krank + 1, me
       CALL SCOPY(L,0.E0,0,W(i,1),Mdw)
-    ENDDO
+    END DO
     !
     !        Determine the rank of the remaining equality constraint
     !        equations by eliminating within the block of constrained
@@ -165,8 +165,8 @@ SUBROUTINE WNLIT(W,Mdw,M,N,L,Ipivot,Itype,H,Scale,Rnorm,Idope,Dope,Done)
           CALL SROTMG(Scale(j-1),Scale(j),W(j-1,i),W(j,i),sparam)
           W(j,i) = 0.E0
           CALL SROTM(N+1-i,W(j-1,i+1),Mdw,W(j,i+1),Mdw,sparam)
-        ENDIF
-      ENDDO
+        END IF
+      END DO
       !
       !           I=column being eliminated.
       !           Test independence of incoming column.
@@ -183,16 +183,16 @@ SUBROUTINE WNLIT(W,Mdw,M,N,L,Ipivot,Itype,H,Scale,Rnorm,Idope,Dope,Done)
           !                 Reclassify the zeroed row as a least squares equation.
           !
           Itype(ir) = 1
-        ENDDO
+        END DO
         !
         !              Reduce ME to reflect any discovered dependent equality
         !              constraints.
         !
         me = jj - 1
         EXIT
-      ENDIF
-    ENDDO
-  ENDIF
+      END IF
+    END DO
+  END IF
   !
   !     Try to determine the variables KRANK+1 through L1 from the
   !     least squares equations.  Continue the triangularization with
@@ -226,8 +226,8 @@ SUBROUTINE WNLIT(W,Mdw,M,N,L,Ipivot,Itype,H,Scale,Rnorm,Idope,Dope,Done)
           CALL SROTMG(Scale(j-1),Scale(j),W(j-1,i),W(j,i),sparam)
           W(j,i) = 0.E0
           CALL SROTM(N+1-i,W(j-1,i+1),Mdw,W(j,i+1),Mdw,sparam)
-        ENDIF
-      ENDDO
+        END IF
+      END DO
       !
       !           Test if new pivot element is near zero.
       !           If so, the column is dependent.
@@ -240,10 +240,10 @@ SUBROUTINE WNLIT(W,Mdw,M,N,L,Ipivot,Itype,H,Scale,Rnorm,Idope,Dope,Done)
         DO i1 = ir, M
           DO j1 = i + 1, N
             rn = MAX(rn,Scale(i1)*W(i1,j1)**2)
-          ENDDO
-        ENDDO
+          END DO
+        END DO
         indep = t>rn*tau**2
-      ENDIF
+      END IF
       !
       !           If independent, swap the IR-th and KRANK+1-th rows to
       !           maintain the triangular form.  Update the rank indicator
@@ -262,8 +262,8 @@ SUBROUTINE WNLIT(W,Mdw,M,N,L,Ipivot,Itype,H,Scale,Rnorm,Idope,Dope,Done)
       Scale(krank+1) = alsq
       me = me + 1
       krank = krank + 1
-    ENDDO
-  ENDIF
+    END DO
+  END IF
   !
   !     If pseudorank is less than L, apply Householder transformation.
   !     from right.
@@ -271,8 +271,8 @@ SUBROUTINE WNLIT(W,Mdw,M,N,L,Ipivot,Itype,H,Scale,Rnorm,Idope,Dope,Done)
   IF ( krank<L ) THEN
     DO j = krank, 1, -1
       CALL H12(1,j,krank+1,L,W(j,1),Mdw,H(j),W,Mdw,1,j-1)
-    ENDDO
-  ENDIF
+    END DO
+  END IF
   !
   niv = krank + nsoln - L
   IF ( L==N ) Done = .TRUE.

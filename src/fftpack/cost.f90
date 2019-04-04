@@ -78,7 +78,7 @@ SUBROUTINE COST(N,X,Wsave)
   !   881128  Modified by Dick Valent to meet prologue standards.
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   REAL c1, t1, t2, tx2, Wsave(*), X(*), x1h, x1p3, xi, xim2
   INTEGER i, k, kc, modn, N, nm1, np1, ns2
   !* FIRST EXECUTABLE STATEMENT  COST
@@ -102,7 +102,7 @@ SUBROUTINE COST(N,X,Wsave)
       t2 = Wsave(k)*t2
       X(k) = t1 - t2
       X(kc) = t1 + t2
-    ENDDO
+    END DO
     modn = MOD(N,2)
     IF ( modn/=0 ) X(ns2+1) = X(ns2+1) + X(ns2+1)
     CALL RFFTF(nm1,X,Wsave(N+1))
@@ -113,10 +113,10 @@ SUBROUTINE COST(N,X,Wsave)
       X(i) = X(i-2) - X(i-1)
       X(i-1) = xim2
       xim2 = xi
-    ENDDO
+    END DO
     IF ( modn/=0 ) X(N) = xim2
     RETURN
-  ENDIF
+  END IF
   x1p3 = X(1) + X(3)
   tx2 = X(2) + X(2)
   X(2) = X(1) - X(3)

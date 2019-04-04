@@ -306,8 +306,8 @@ SUBROUTINE QAGPE(F,A,B,Npts2,Points,Epsabs,Epsrel,Limit,Result,Abserr,&
   IF ( npts/=0 ) THEN
     DO i = 1, npts
       Pts(i+1) = Points(i)
-    ENDDO
-  ENDIF
+    END DO
+  END IF
   Pts(npts+2) = MAX(A,B)
   nint = npts + 1
   a1 = Pts(1)
@@ -320,12 +320,12 @@ SUBROUTINE QAGPE(F,A,B,Npts2,Points,Epsabs,Epsrel,Limit,Result,Abserr,&
           temp = Pts(i)
           Pts(i) = Pts(j)
           Pts(j) = temp
-        ENDIF
-      ENDDO
-    ENDDO
+        END IF
+      END DO
+    END DO
     IF ( Pts(1)/=MIN(A,B).OR.Pts(nintp1)/=MAX(A,B) ) Ier = 6
     IF ( Ier==6 ) RETURN
-  ENDIF
+  END IF
   !
   !            COMPUTE FIRST INTEGRAL AND ERROR APPROXIMATIONS.
   !            ------------------------------------------------
@@ -346,12 +346,12 @@ SUBROUTINE QAGPE(F,A,B,Npts2,Points,Epsabs,Epsrel,Limit,Result,Abserr,&
     Rlist(i) = area1
     Iord(i) = i
     a1 = b1
-  ENDDO
+  END DO
   errsum = 0.0E+00
   DO i = 1, nint
     IF ( Ndin(i)==1 ) Elist(i) = Abserr
     errsum = errsum + Elist(i)
-  ENDDO
+  END DO
   !
   !           TEST ON ACCURACY.
   !
@@ -369,15 +369,15 @@ SUBROUTINE QAGPE(F,A,B,Npts2,Points,Epsabs,Epsrel,Limit,Result,Abserr,&
         IF ( Elist(ind1)<=Elist(ind2) ) THEN
           ind1 = ind2
           k = j
-        ENDIF
-      ENDDO
+        END IF
+      END DO
       IF ( ind1/=Iord(i) ) THEN
         Iord(k) = Iord(i)
         Iord(i) = ind1
-      ENDIF
-    ENDDO
+      END IF
+    END DO
     IF ( Limit<Npts2 ) Ier = 1
-  ENDIF
+  END IF
   IF ( Ier/=0.OR.Abserr<=errbnd ) RETURN
   !
   !           INITIALIZATION
@@ -436,9 +436,9 @@ SUBROUTINE QAGPE(F,A,B,Npts2,Points,Epsabs,Epsrel,Limit,Result,Abserr,&
           erro12>=0.99E+00*errmax ) THEN
         IF ( extrap ) iroff2 = iroff2 + 1
         IF ( .NOT.extrap ) iroff1 = iroff1 + 1
-      ENDIF
+      END IF
       IF ( Last>10.AND.erro12>errmax ) iroff3 = iroff3 + 1
-    ENDIF
+    END IF
     Level(maxerr) = levcur
     Level(Last) = levcur
     Rlist(maxerr) = area1
@@ -478,7 +478,7 @@ SUBROUTINE QAGPE(F,A,B,Npts2,Points,Epsabs,Epsrel,Limit,Result,Abserr,&
       Blist(Last) = b2
       Elist(maxerr) = error1
       Elist(Last) = error2
-    ENDIF
+    END IF
     !
     !           CALL SUBROUTINE QPSRT TO MAINTAIN THE DESCENDING ORDERING
     !           IN THE LIST OF ERROR ESTIMATES AND SELECT THE
@@ -501,7 +501,7 @@ SUBROUTINE QAGPE(F,A,B,Npts2,Points,Epsabs,Epsrel,Limit,Result,Abserr,&
         IF ( Level(maxerr)+1<=levmax ) CYCLE
         extrap = .TRUE.
         nrmax = 2
-      ENDIF
+      END IF
       IF ( ierro/=3.AND.erlarg>ertest ) THEN
         !
         !           THE SMALLEST INTERVAL HAS THE LARGEST ERROR.
@@ -518,8 +518,8 @@ SUBROUTINE QAGPE(F,A,B,Npts2,Points,Epsabs,Epsrel,Limit,Result,Abserr,&
           !- **JUMP OUT OF DO-LOOP
           IF ( Level(maxerr)+1<=levmax ) GOTO 100
           nrmax = nrmax + 1
-        ENDDO
-      ENDIF
+        END DO
+      END IF
       !
       !           PERFORM EXTRAPOLATION.
       !
@@ -537,22 +537,22 @@ SUBROUTINE QAGPE(F,A,B,Npts2,Points,Epsabs,Epsrel,Limit,Result,Abserr,&
           ertest = MAX(Epsabs,Epsrel*ABS(reseps))
           !- **JUMP OUT OF DO-LOOP
           IF ( Abserr<ertest ) EXIT
-        ENDIF
+        END IF
         !
         !           PREPARE BISECTION OF THE SMALLEST INTERVAL.
         !
         IF ( numrl2==1 ) noext = .TRUE.
         IF ( Ier>=5 ) EXIT
-      ENDIF
+      END IF
       maxerr = Iord(1)
       errmax = Elist(maxerr)
       nrmax = 1
       extrap = .FALSE.
       levmax = levmax + 1
       erlarg = errsum
-    ENDIF
+    END IF
     100 CONTINUE
-  ENDDO
+  END DO
   !
   !           SET THE FINAL RESULT.
   !           ---------------------
@@ -567,24 +567,24 @@ SUBROUTINE QAGPE(F,A,B,Npts2,Points,Epsabs,Epsrel,Limit,Result,Abserr,&
         IF ( area==0.0E+00 ) GOTO 300
       ELSEIF ( Abserr/ABS(Result)>errsum/ABS(area) ) THEN
         GOTO 200
-      ENDIF
-    ENDIF
+      END IF
+    END IF
     !
     !           TEST ON DIVERGENCE.
     !
     IF ( ksgn/=(-1).OR.MAX(ABS(Result),ABS(area))>defabs*0.1E-01 ) THEN
       IF ( 0.1E-01>(Result/area).OR.(Result/area)>0.1E+03.OR.&
         errsum>ABS(area) ) Ier = 6
-    ENDIF
+    END IF
     GOTO 300
-  ENDIF
+  END IF
   !
   !           COMPUTE GLOBAL INTEGRAL SUM.
   !
   200  Result = 0.0E+00
   DO k = 1, Last
     Result = Result + Rlist(k)
-  ENDDO
+  END DO
   Abserr = errsum
   300 CONTINUE
   IF ( Ier>2 ) Ier = Ier - 1

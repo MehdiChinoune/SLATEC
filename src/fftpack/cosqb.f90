@@ -80,7 +80,7 @@ SUBROUTINE COSQB(N,X,Wsave)
   !   881128  Modified by Dick Valent to meet prologue standards.
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   INTEGER N
   REAL tsqrt2, Wsave(*), X(*), x1
   !* FIRST EXECUTABLE STATEMENT  COSQB
@@ -95,5 +95,5 @@ SUBROUTINE COSQB(N,X,Wsave)
     RETURN
   ELSE
     CALL COSQB1(N,X,Wsave,Wsave(N+1))
-  ENDIF
+  END IF
 END SUBROUTINE COSQB

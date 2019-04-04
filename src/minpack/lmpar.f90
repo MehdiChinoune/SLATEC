@@ -126,7 +126,7 @@ SUBROUTINE LMPAR(N,R,Ldr,Ipvt,Diag,Qtb,Delta,Par,X,Sigma,Wa1,Wa2)
     Wa1(j) = Qtb(j)
     IF ( R(j,j)==zero.AND.nsing==N ) nsing = j - 1
     IF ( nsing<N ) Wa1(j) = zero
-  ENDDO
+  END DO
   IF ( nsing>=1 ) THEN
     DO k = 1, nsing
       j = nsing - k + 1
@@ -136,14 +136,14 @@ SUBROUTINE LMPAR(N,R,Ldr,Ipvt,Diag,Qtb,Delta,Par,X,Sigma,Wa1,Wa2)
       IF ( jm1>=1 ) THEN
         DO i = 1, jm1
           Wa1(i) = Wa1(i) - R(i,j)*temp
-        ENDDO
-      ENDIF
-    ENDDO
-  ENDIF
+        END DO
+      END IF
+    END DO
+  END IF
   DO j = 1, N
     l = Ipvt(j)
     X(l) = Wa1(j)
-  ENDDO
+  END DO
   !
   !     INITIALIZE THE ITERATION COUNTER.
   !     EVALUATE THE FUNCTION AT THE ORIGIN, AND TEST
@@ -152,7 +152,7 @@ SUBROUTINE LMPAR(N,R,Ldr,Ipvt,Diag,Qtb,Delta,Par,X,Sigma,Wa1,Wa2)
   iter = 0
   DO j = 1, N
     Wa2(j) = Diag(j)*X(j)
-  ENDDO
+  END DO
   dxnorm = ENORM(N,Wa2)
   fp = dxnorm - Delta
   IF ( fp<=p1*Delta ) THEN
@@ -171,20 +171,20 @@ SUBROUTINE LMPAR(N,R,Ldr,Ipvt,Diag,Qtb,Delta,Par,X,Sigma,Wa1,Wa2)
       DO j = 1, N
         l = Ipvt(j)
         Wa1(j) = Diag(l)*(Wa2(l)/dxnorm)
-      ENDDO
+      END DO
       DO j = 1, N
         sum = zero
         jm1 = j - 1
         IF ( jm1>=1 ) THEN
           DO i = 1, jm1
             sum = sum + R(i,j)*Wa1(i)
-          ENDDO
-        ENDIF
+          END DO
+        END IF
         Wa1(j) = (Wa1(j)-sum)/R(j,j)
-      ENDDO
+      END DO
       temp = ENORM(N,Wa1)
       parl = ((fp/Delta)/temp)/temp
-    ENDIF
+    END IF
     !
     !     CALCULATE AN UPPER BOUND, PARU, FOR THE ZERO OF THE FUNCTION.
     !
@@ -192,10 +192,10 @@ SUBROUTINE LMPAR(N,R,Ldr,Ipvt,Diag,Qtb,Delta,Par,X,Sigma,Wa1,Wa2)
       sum = zero
       DO i = 1, j
         sum = sum + R(i,j)*Qtb(i)
-      ENDDO
+      END DO
       l = Ipvt(j)
       Wa1(j) = sum/Diag(l)
-    ENDDO
+    END DO
     gnorm = ENORM(N,Wa1)
     paru = gnorm/Delta
     IF ( paru==zero ) paru = dwarf/MIN(Delta,p1)
@@ -218,11 +218,11 @@ SUBROUTINE LMPAR(N,R,Ldr,Ipvt,Diag,Qtb,Delta,Par,X,Sigma,Wa1,Wa2)
       temp = SQRT(Par)
       DO j = 1, N
         Wa1(j) = temp*Diag(j)
-      ENDDO
+      END DO
       CALL QRSOLV(N,R,Ldr,Ipvt,Wa1,Qtb,X,Sigma,Wa2)
       DO j = 1, N
         Wa2(j) = Diag(j)*X(j)
-      ENDDO
+      END DO
       dxnorm = ENORM(N,Wa2)
       temp = fp
       fp = dxnorm - Delta
@@ -242,7 +242,7 @@ SUBROUTINE LMPAR(N,R,Ldr,Ipvt,Diag,Qtb,Delta,Par,X,Sigma,Wa1,Wa2)
         DO j = 1, N
           l = Ipvt(j)
           Wa1(j) = Diag(l)*(Wa2(l)/dxnorm)
-        ENDDO
+        END DO
         DO j = 1, N
           Wa1(j) = Wa1(j)/Sigma(j)
           temp = Wa1(j)
@@ -250,9 +250,9 @@ SUBROUTINE LMPAR(N,R,Ldr,Ipvt,Diag,Qtb,Delta,Par,X,Sigma,Wa1,Wa2)
           IF ( N>=jp1 ) THEN
             DO i = jp1, N
               Wa1(i) = Wa1(i) - R(i,j)*temp
-            ENDDO
-          ENDIF
-        ENDDO
+            END DO
+          END IF
+        END DO
         temp = ENORM(N,Wa1)
         parc = ((fp/Delta)/temp)/temp
         !
@@ -267,9 +267,9 @@ SUBROUTINE LMPAR(N,R,Ldr,Ipvt,Diag,Qtb,Delta,Par,X,Sigma,Wa1,Wa2)
         !        END OF AN ITERATION.
         !
         Par = MAX(parl,Par+parc)
-      ENDIF
-    ENDDO
-  ENDIF
+      END IF
+    END DO
+  END IF
   !
   !     LAST CARD OF SUBROUTINE LMPAR.
   !

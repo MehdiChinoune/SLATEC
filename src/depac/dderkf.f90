@@ -611,7 +611,7 @@ SUBROUTINE DDERKF(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,&
   !   900510  Convert XERRWV calls to XERMSG calls, make Prologue comments
   !           consistent with DERKF.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   !
   INTEGER Idid, Info(15), Ipar(*), Iwork(*), kdi, kf1, kf2, kf3, kf4, kf5, &
     kh, krer, ktf, kto, ktstar, ku, kyp, kys, Liw, Lrw, Neq
@@ -634,8 +634,8 @@ SUBROUTINE DDERKF(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,&
         & HAS NOT ADVANCED. CHECK THE WAY YOU HAVE SET PARAMETERS FOR THE CALL&
         & TO THE CODE, PARTICULARLY INFO(1).',13,2)
       RETURN
-    ENDIF
-  ENDIF
+    END IF
+  END IF
   !
   !     CHECK LRW AND LIW FOR SUFFICIENT STORAGE ALLOCATION
   !
@@ -645,13 +645,13 @@ SUBROUTINE DDERKF(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,&
     CALL XERMSG('SLATEC','DDERKF','LENGTH OF RWORK ARRAY MUST BE AT LEAST&
       & 30 + 7*NEQ.  YOU HAVE CALLED THE CODE WITH LRW = '//xern1,1,1)
     Idid = -33
-  ENDIF
+  END IF
   !
   IF ( Liw<34 ) THEN
     WRITE (xern1,'(I8)') Liw
     CALL XERMSG('SLATEC','DDERKF','LENGTH OF IWORK ARRAY MUST BE AT LEAST 34.  YOU HAVE CALLED THE CODE WITH LIW = '//xern1,2,1)
     Idid = -33
-  ENDIF
+  END IF
   !
   !     COMPUTE INDICES FOR THE SPLITTING OF THE RWORK ARRAY
   !
@@ -681,7 +681,7 @@ SUBROUTINE DDERKF(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,&
   IF ( Info(1)/=0 ) THEN
     stiff = (Iwork(25)==0)
     nonstf = (Iwork(26)==0)
-  ENDIF
+  END IF
   !
   CALL DRKFS(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork(kh),Rwork(ktf),&
     Rwork(kyp),Rwork(kf1),Rwork(kf2),Rwork(kf3),Rwork(kf4),&

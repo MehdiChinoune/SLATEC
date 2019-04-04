@@ -120,7 +120,7 @@ CONTAINS
       !        array.
       !
       CALL DCOPY(ma,a(1,i),1,d(mep1,i),1)
-    ENDDO
+    END DO
     !
     !     Copy the right-side vectors into the work array in compatible
     !     order.
@@ -140,7 +140,7 @@ CONTAINS
     !
     DO i = 1, ma
       work(i) = DDOT(n,d(i,1),mdd,sol,1) - f(i)
-    ENDDO
+    END DO
     resnrm = DNRM2(ma,work,1)
     !
     !     Call DLSEI to get solution in X(*), least squares residual in
@@ -166,7 +166,7 @@ CONTAINS
       Ipass = 0
       IF ( Kprint>=2 ) WRITE (Lun,99003) relerr, relnrm
       99003 FORMAT (/' DLSEI FAILED TEST'/' RELERR = ',1P,D20.6/' RELNRM = ',D20.6)
-    ENDIF
+    END IF
     !
     !     Print out known and computed solutions.
     !
@@ -174,7 +174,7 @@ CONTAINS
       CALL DVOUT(n,err,'('' RESIDUALS FROM KNOWN LEAST SQUARES SOLUTION'')',&
         idigit)
       CALL DVOUT(n,x,'(/'' SOLUTION COMPUTED BY DLSEI'')',jdigit)
-    ENDIF
+    END IF
     !
     IF ( Kprint>=2 ) THEN
       IF ( Kprint/=2.OR.Ipass==0 ) THEN
@@ -193,8 +193,8 @@ CONTAINS
         !
         CALL DVOUT(1,relnrm,'(/'' COMPUTED RELATIVE ERROR IN RESIDUAL NORM'')'&
           ,idigit)
-      ENDIF
-    ENDIF
+      END IF
+    END IF
     !
     !     Check calls to error processor.
     !
@@ -203,7 +203,7 @@ CONTAINS
       CALL XSETF(0)
     ELSE
       CALL XSETF(1)
-    ENDIF
+    END IF
     fatal = .FALSE.
     CALL XERCLR
     !
@@ -214,7 +214,7 @@ CONTAINS
     IF ( NUMXER(nerr)/=2 ) THEN
       Ipass = 0
       fatal = .TRUE.
-    ENDIF
+    END IF
     CALL XERCLR
     !
     prgopt(1) = -1
@@ -222,7 +222,7 @@ CONTAINS
     IF ( NUMXER(nerr)/=2 ) THEN
       Ipass = 0
       fatal = .TRUE.
-    ENDIF
+    END IF
     CALL XERCLR
     !
     !     Restore KONTRL and check to see if the tests of error detection
@@ -233,11 +233,11 @@ CONTAINS
       IF ( Kprint>=2 ) THEN
         WRITE (Lun,99005)
         99005 FORMAT (/' AT LEAST ONE INCORRECT ARGUMENT TEST FAILED')
-      ENDIF
+      END IF
     ELSEIF ( Kprint>=3 ) THEN
       WRITE (Lun,99006)
       99006 FORMAT (/' ALL INCORRECT ARGUMENT TESTS PASSED')
-    ENDIF
+    END IF
     !
     !     Print PASS/FAIL message.
     !
@@ -323,9 +323,9 @@ CONTAINS
         DO i = 1, 4
           DO j = 1, 4
             a(i,j) = aa(i,j,kprog)
-          ENDDO
+          END DO
           b(i) = bb(i,kprog)
-        ENDDO
+        END DO
         !
         !           MAKE 3 ROWS IDENTICAL FOR CASE 2.
         !
@@ -333,10 +333,10 @@ CONTAINS
           DO i = 2, 3
             DO j = 1, 4
               a(i,j) = a(1,j)
-            ENDDO
+            END DO
             b(i) = b(1)
-          ENDDO
-        ENDIF
+          END DO
+        END IF
         !
         !           SOLVE FOR VECTOR  X .
         !
@@ -351,7 +351,7 @@ CONTAINS
         DO i = 1, 4
           delx = ABS(b(i)-xx(i,kk))
           delmax = MAX(delmax,delx)
-        ENDDO
+        END DO
         !
         IF ( Kprint>=3 ) WRITE (Lun,99002) list(kprog), kcase, delmax
         99002 FORMAT (3X,A,'LSIA, CASE ',I1,'.  MAX ABS ERROR OF',D11.4/)
@@ -360,7 +360,7 @@ CONTAINS
           IF ( Kprint>=2 ) WRITE (Lun,99003) list(kprog), kcase, delmax
           99003 FORMAT ('   PROBLEM WITH ',A,'LSIA, CASE ',I1,'.  MAX ABS ERROR OF',&
             D11.4/)
-        ENDIF
+        END IF
         !
         IF ( Kprint>=3 ) WRITE (Lun,99004) list(kprog), kcase, rnorm
         99004 FORMAT (3X,A,'LSIA, CASE ',I1,'.  RNORM IS ',D11.4/)
@@ -369,7 +369,7 @@ CONTAINS
           IF ( Kprint>=2 ) WRITE (Lun,99005) list(kprog), kcase, rnorm
           99005 FORMAT ('   PROBLEM WITH ',A,'LSIA, CASE ',I1,&
             '.  RNORM (TOO LARGE) IS',D11.4/)
-        ENDIF
+        END IF
         IF ( Kprint>=3 ) WRITE (Lun,99006) list(kprog), kcase, info, inf(kk)
         !
         99006 FORMAT (3X,A,'LSIA, CASE ',I1,'.  INFO=',I1,' (SHOULD = ',I1,')'/)
@@ -378,9 +378,9 @@ CONTAINS
           IF ( Kprint>=2 ) WRITE (Lun,99007) list(kprog), kcase, info, inf(kk)
           99007 FORMAT ('   PROBLEM WITH ',A,'LSIA, CASE ',I1,'.  INFO=',I1,&
             ' (SHOULD = ',I1,')'/)
-        ENDIF
-      ENDDO
-    ENDDO
+        END IF
+      END DO
+    END DO
     !
     !     SUMMARY PRINT
     !
@@ -463,7 +463,7 @@ PROGRAM TEST28
     CALL XSETF(0)
   ELSE
     CALL XSETF(1)
-  ENDIF
+  END IF
   !
   !     Test DLSEI
   !
@@ -484,6 +484,6 @@ PROGRAM TEST28
     WRITE (lun,99002) nfail
     99002 FORMAT (/' ************* WARNING -- ',I5,&
       ' TEST(S) FAILED IN PROGRAM TEST28 *************')
-  ENDIF
+  END IF
   STOP
 END PROGRAM TEST28

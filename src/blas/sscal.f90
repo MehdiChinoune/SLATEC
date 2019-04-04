@@ -52,7 +52,7 @@ SUBROUTINE SSCAL(N,Sa,Sx,Incx)
   !   900821  Modified to correct problem with a negative increment.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   REAL Sa, Sx(*)
   INTEGER i, Incx, ix, m, mp1, N
   !* FIRST EXECUTABLE STATEMENT  SSCAL
@@ -67,9 +67,9 @@ SUBROUTINE SSCAL(N,Sa,Sx,Incx)
     IF ( m/=0 ) THEN
       DO i = 1, m
         Sx(i) = Sa*Sx(i)
-      ENDDO
+      END DO
       IF ( N<5 ) RETURN
-    ENDIF
+    END IF
     mp1 = m + 1
     DO i = mp1, N, 5
       Sx(i) = Sa*Sx(i)
@@ -77,7 +77,7 @@ SUBROUTINE SSCAL(N,Sa,Sx,Incx)
       Sx(i+2) = Sa*Sx(i+2)
       Sx(i+3) = Sa*Sx(i+3)
       Sx(i+4) = Sa*Sx(i+4)
-    ENDDO
+    END DO
   ELSE
     !
     !     Code for increment not equal to 1.
@@ -87,7 +87,7 @@ SUBROUTINE SSCAL(N,Sa,Sx,Incx)
     DO i = 1, N
       Sx(ix) = Sa*Sx(ix)
       ix = ix + Incx
-    ENDDO
+    END DO
     RETURN
-  ENDIF
+  END IF
 END SUBROUTINE SSCAL

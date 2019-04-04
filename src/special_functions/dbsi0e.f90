@@ -137,7 +137,7 @@ REAL(8) FUNCTION DBSI0E(X)
     ntai02 = INITDS(ai02cs,69,eta)
     xsml = SQRT(4.5D0*D1MACH(3))
     first = .FALSE.
-  ENDIF
+  END IF
   !
   y = ABS(X)
   IF ( y>3.0D0 ) THEN
@@ -145,7 +145,7 @@ REAL(8) FUNCTION DBSI0E(X)
     IF ( y<=8.D0 ) DBSI0E = (0.375D0+DCSEVL((48.D0/y-11.D0)/5.D0,ai0cs,ntai0))/SQRT(y)
     IF ( y>8.D0 ) DBSI0E = (0.375D0+DCSEVL(16.D0/y-1.D0,ai02cs,ntai02))/SQRT(y)
     RETURN
-  ENDIF
+  END IF
   !
   DBSI0E = 1.0D0 - X
   IF ( y>xsml ) DBSI0E = EXP(-y)*(2.75D0+DCSEVL(y*y/4.5D0-1.D0,bi0cs,nti0))

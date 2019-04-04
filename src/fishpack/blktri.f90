@@ -246,7 +246,7 @@ SUBROUTINE BLKTRI(Iflg,Np,N,An,Bn,Cn,Mp,M,Am,Bm,Cm,Idimy,Y,Ierror,W)
           iw1 = iwbh
           W(1) = iw1 - 1 + MAX(2*NM,6*M)
           NM = NM - 1
-        ENDIF
+        END IF
         !
         ! SUBROUTINE COMP B COMPUTES THE ROOTS OF THE B POLYNOMIALS
         !
@@ -267,10 +267,10 @@ SUBROUTINE BLKTRI(Iflg,Np,N,An,Bn,Cn,Mp,M,Am,Bm,Cm,Idimy,Y,Ierror,W)
           ELSE
             CALL BLKTR1(nl,An,Bn,Cn,M,Am,Bm,Cm,Idimy,Y,W(2),W(iw1),W(iw2),&
               W(iw3),W(iwd),W(iww),W(iwu),PRODP,CPRODP)
-          ENDIF
-        ENDIF
+          END IF
+        END IF
         EXIT
-      ENDIF
-    ENDDO
-  ENDIF
+      END IF
+    END DO
+  END IF
 END SUBROUTINE BLKTRI

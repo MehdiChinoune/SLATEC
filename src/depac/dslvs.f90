@@ -79,12 +79,12 @@ SUBROUTINE DSLVS(Wm,Iwm,X,Tem)
           !        .........EXIT
           IF ( ABS(di)==0.0D0 ) GOTO 100
           Wm(i+2) = 1.0D0/di
-        ENDDO
-      ENDIF
+        END DO
+      END IF
       DO i = 1, N
         X(i) = Wm(i+2)*X(i)
         !     ......EXIT
-      ENDDO
+      END DO
     CASE (4,5)
       !
       ml = Iwm(1)

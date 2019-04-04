@@ -79,7 +79,7 @@ SUBROUTINE DAVINT(X,Y,N,Xlo,Xup,Ans,Ierr)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   !
   INTEGER i, Ierr, inlft, inrt, istart, istop, N
   REAL(8) :: a, Ans, b, c, ca, cb, cc, fl, fr, r3, rp5, &
@@ -102,7 +102,7 @@ SUBROUTINE DAVINT(X,Y,N,Xlo,Xup,Ans,Ierr)
         IF ( X(i)<=X(i-1) ) GOTO 50
         !                 ...EXIT
         IF ( X(i)>Xup ) EXIT
-      ENDDO
+      END DO
       IF ( N<3 ) THEN
         !
         !                    SPECIAL N=2 CASE
@@ -122,12 +122,12 @@ SUBROUTINE DAVINT(X,Y,N,Xlo,Xup,Ans,Ierr)
         i = 1
         DO WHILE ( X(i)<Xlo )
           i = i + 1
-        ENDDO
+        END DO
         inlft = i
         i = N
         DO WHILE ( X(i)>Xup )
           i = i - 1
-        ENDDO
+        END DO
         inrt = i
         IF ( (inrt-inlft)>=2 ) THEN
           istart = inlft
@@ -163,7 +163,7 @@ SUBROUTINE DAVINT(X,Y,N,Xlo,Xup,Ans,Ierr)
               ca = a
               cb = b
               cc = c
-            ENDIF
+            END IF
             syu = x2
             syu2 = syu*syu
             syu3 = syu2*syu
@@ -174,7 +174,7 @@ SUBROUTINE DAVINT(X,Y,N,Xlo,Xup,Ans,Ierr)
             syl = syu
             syl2 = syu2
             syl3 = syu3
-          ENDDO
+          END DO
           syu = Xup
           Ans = sum + ca*(syu**3-syl3)/r3 + cb*rp5*(syu**2-syl2) + cc*(syu-syl)
         ELSE
@@ -182,7 +182,7 @@ SUBROUTINE DAVINT(X,Y,N,Xlo,Xup,Ans,Ierr)
           !     ...............EXIT
           CALL XERMSG('SLATEC','DAVINT',&
             'THERE WERE LESS THAN THREE FUNCTION VALUES BETWEEN THE LIMITS OF INTEGRATION.',4,1)
-        ENDIF
+        END IF
         RETURN
       ELSE
         Ierr = 3
@@ -190,17 +190,17 @@ SUBROUTINE DAVINT(X,Y,N,Xlo,Xup,Ans,Ierr)
           'THERE WERE LESS THAN THREE FUNCTION VALUES BETWEEN THE LIMITS OF INTEGRATION.',4,1)
         !     ...............EXIT
         RETURN
-      ENDIF
+      END IF
     ELSE
       Ierr = 5
       CALL XERMSG('SLATEC','DAVINT',&
         'LESS THAN TWO FUNCTION VALUES WERE SUPPLIED.',4,1)
       !     ...............EXIT
       RETURN
-    ENDIF
-    50     Ierr = 4
+    END IF
+    50  Ierr = 4
     CALL XERMSG('SLATEC','DAVINT',&
       'THE ABSCISSAS WERE NOT STRICTLY INCREASING.  MUST HAVE X(I-1) .LT. X(I) FOR ALL I.',4,1)
-  ENDIF
+  END IF
   RETURN
 END SUBROUTINE DAVINT

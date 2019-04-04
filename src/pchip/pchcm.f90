@@ -126,7 +126,7 @@ SUBROUTINE PCHCM(N,X,F,D,Incfd,Skip,Ismon,Ierr)
   !   890407  Modified DESCRIPTION to LDOC format.
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920429  Revised format and order of references.  (WRB,FNF)
-  
+
   !
   !  Fortran intrinsics used:  ISIGN.
   !  Other routines used:  CHFCM, XERMSG.
@@ -180,10 +180,10 @@ SUBROUTINE PCHCM(N,X,F,D,Incfd,Skip,Ismon,Ierr)
     ELSE
       DO i = 2, N
         IF ( X(i)<=X(i-1) ) GOTO 100
-      ENDDO
+      END DO
       Skip = .TRUE.
-    ENDIF
-  ENDIF
+    END IF
+  END IF
   !
   !  FUNCTION DEFINITION IS OK -- GO ON.
   !
@@ -223,9 +223,9 @@ SUBROUTINE PCHCM(N,X,F,D,Incfd,Skip,Ismon,Ierr)
         !                 At this point, both are nonzero with same sign, and
         !                 we have already eliminated case both +-1.
         Ismon(N) = ISIGN(3,Ismon(N))
-      ENDIF
-    ENDIF
-  ENDDO
+      END IF
+    END IF
+  END DO
   !
   !  NORMAL RETURN.
   !

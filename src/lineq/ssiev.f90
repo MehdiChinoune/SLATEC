@@ -85,7 +85,7 @@ SUBROUTINE SSIEV(A,Lda,N,E,Work,Job,Info)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
-  
+
   INTEGER i, j
   INTEGER Info, Job, Lda, N
   REAL A(Lda,*), E(*), Work(*)
@@ -106,8 +106,8 @@ SUBROUTINE SSIEV(A,Lda,N,E,Work,Job,Info)
   DO j = 1, N
     DO i = 1, j
       A(j,i) = A(i,j)
-    ENDDO
-  ENDDO
+    END DO
+  END DO
   !
   IF ( Job/=0 ) THEN
     !
@@ -116,7 +116,7 @@ SUBROUTINE SSIEV(A,Lda,N,E,Work,Job,Info)
     CALL TRED2(Lda,N,A,E,Work,A)
     CALL IMTQL2(Lda,N,E,Work,A,Info)
     RETURN
-  ENDIF
+  END IF
   !
   !     EIGENVALUES ONLY
   !

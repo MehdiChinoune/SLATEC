@@ -148,7 +148,7 @@ SUBROUTINE DHSTRT(DF,Neq,A,B,Y,Yprime,Etol,Morder,Small,Big,Spy,Pv,Yp,Sf,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
-  
+
   !
   INTEGER Ipar(*), j, k, lk, Morder, Neq
   REAL(8) :: A, absdx, B, Big, da, delf, dely, dfdub, dfdxb, &
@@ -178,7 +178,7 @@ SUBROUTINE DHSTRT(DF,Neq,A,B,Y,Yprime,Etol,Morder,Small,Big,Spy,Pv,Yp,Sf,&
   CALL DF(A+da,Y,Sf,Rpar,Ipar)
   DO j = 1, Neq
     Yp(j) = Sf(j) - Yprime(j)
-  ENDDO
+  END DO
   delf = DHVNRM(Yp,Neq)
   dfdxb = Big
   IF ( delf<Big*ABS(da) ) dfdxb = delf/ABS(da)
@@ -219,15 +219,15 @@ SUBROUTINE DHSTRT(DF,Neq,A,B,Y,Yprime,Etol,Morder,Small,Big,Spy,Pv,Yp,Sf,&
     DO j = 1, Neq
       Spy(j) = 0.0D0
       Yp(j) = 1.0D0
-    ENDDO
+    END DO
     delf = DHVNRM(Yp,Neq)
   ELSE
     !           USE INITIAL DERIVATIVES FOR FIRST PERTURBATION
     DO j = 1, Neq
       Spy(j) = Yprime(j)
       Yp(j) = Yprime(j)
-    ENDDO
-  ENDIF
+    END DO
+  END IF
   !
   dfdub = 0.0D0
   lk = MIN(Neq+1,3)
@@ -235,22 +235,22 @@ SUBROUTINE DHSTRT(DF,Neq,A,B,Y,Yprime,Etol,Morder,Small,Big,Spy,Pv,Yp,Sf,&
     !           DEFINE PERTURBED VECTOR OF INITIAL VALUES
     DO j = 1, Neq
       Pv(j) = Y(j) + dely*(Yp(j)/delf)
-    ENDDO
+    END DO
     IF ( k==2 ) THEN
       !              USE A SHIFTED VALUE OF THE INDEPENDENT VARIABLE
       !                                    IN COMPUTING ONE ESTIMATE
       CALL DF(A+da,Pv,Yp,Rpar,Ipar)
       DO j = 1, Neq
         Pv(j) = Yp(j) - Sf(j)
-      ENDDO
+      END DO
     ELSE
       !              EVALUATE DERIVATIVES ASSOCIATED WITH PERTURBED
       !              VECTOR  AND  COMPUTE CORRESPONDING DIFFERENCES
       CALL DF(A,Pv,Yp,Rpar,Ipar)
       DO j = 1, Neq
         Pv(j) = Yp(j) - Yprime(j)
-      ENDDO
-    ENDIF
+      END DO
+    END IF
     !           CHOOSE LARGEST BOUNDS ON THE FIRST DERIVATIVE
     !                          AND A LOCAL LIPSCHITZ CONSTANT
     fbnd = MAX(fbnd,DHVNRM(Yp,Neq))
@@ -269,13 +269,13 @@ SUBROUTINE DHSTRT(DF,Neq,A,B,Y,Yprime,Etol,Morder,Small,Big,Spy,Pv,Yp,Sf,&
       ELSE
         dy = ABS(Pv(j))
         IF ( dy==0.0D0 ) dy = delf
-      ENDIF
+      END IF
       IF ( Spy(j)==0.0D0 ) Spy(j) = Yp(j)
       IF ( Spy(j)/=0.0D0 ) dy = SIGN(dy,Spy(j))
       Yp(j) = dy
-    ENDDO
+    END DO
     delf = DHVNRM(Yp,Neq)
-  ENDDO
+  END DO
   !
   !        PROTECT AGAINST AN OVERFLOW
   dfdub = Big
@@ -298,7 +298,7 @@ SUBROUTINE DHSTRT(DF,Neq,A,B,Y,Yprime,Etol,Morder,Small,Big,Spy,Pv,Yp,Sf,&
     tolexp = LOG10(Etol(k))
     tolmin = MIN(tolmin,tolexp)
     tolsum = tolsum + tolexp
-  ENDDO
+  END DO
   tolp = 10.0D0**(0.5D0*(tolsum/Neq+tolmin)/(Morder+1))
   !
   !     ..................................................................
@@ -326,7 +326,7 @@ SUBROUTINE DHSTRT(DF,Neq,A,B,Y,Yprime,Etol,Morder,Small,Big,Spy,Pv,Yp,Sf,&
     !
     !        ONLY SECOND DERIVATIVE TERM (YDPB) IS ZERO
     IF ( tolp<fbnd*absdx ) H = tolp/fbnd
-  ENDIF
+  END IF
   !
   !     FURTHER RESTRICT THE STEP LENGTH TO BE NOT
   !                               BIGGER THAN  1/DFDUB

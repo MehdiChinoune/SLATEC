@@ -40,7 +40,7 @@ LOGICAL FUNCTION WNLT2(Me,Mend,Ir,Factor,Tau,Scale,Wic)
   !* REVISION HISTORY  (YYMMDD)
   !   790701  DATE WRITTEN
   !   890620  Code extracted from WNLIT and made a subroutine.  (RWC))
-  
+
   REAL Factor, Scale(*), Tau, Wic(*)
   INTEGER Ir, Me, Mend
   !
@@ -59,7 +59,7 @@ LOGICAL FUNCTION WNLT2(Me,Mend,Ir,Factor,Tau,Scale,Wic)
       sn = sn + t
     ELSE
       rn = rn + t
-    ENDIF
-  ENDDO
+    END IF
+  END DO
   WNLT2 = rn>sn*Tau**2
 END FUNCTION WNLT2

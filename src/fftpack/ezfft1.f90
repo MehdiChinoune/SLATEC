@@ -44,7 +44,7 @@ SUBROUTINE EZFFT1(N,Wa,Ifac)
     ntry = ntryh(j)
   ELSE
     ntry = ntry + 2
-  ENDIF
+  END IF
   DO
     nq = nl/ntry
     nr = nl - ntry*nq
@@ -57,10 +57,10 @@ SUBROUTINE EZFFT1(N,Wa,Ifac)
         DO i = 2, nf
           ib = nf - i + 2
           Ifac(ib+2) = Ifac(ib+1)
-        ENDDO
+        END DO
         Ifac(3) = 2
-      ENDIF
-    ENDIF
+      END IF
+    END IF
     IF ( nl==1 ) THEN
       Ifac(1) = N
       Ifac(2) = nf
@@ -91,13 +91,13 @@ SUBROUTINE EZFFT1(N,Wa,Ifac)
               i = i + 2
               Wa(i-1) = ch1*Wa(i-3) - sh1*Wa(i-2)
               Wa(i) = ch1*Wa(i-2) + sh1*Wa(i-3)
-            ENDDO
-          ENDIF
+            END DO
+          END IF
           is = is + ido
-        ENDDO
+        END DO
         l1 = l2
-      ENDDO
+      END DO
       EXIT
-    ENDIF
-  ENDDO
+    END IF
+  END DO
 END SUBROUTINE EZFFT1

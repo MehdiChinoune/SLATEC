@@ -69,7 +69,7 @@ REAL(8) FUNCTION DGAMIT(A,X)
     sqeps = SQRT(D1MACH(4))
     bot = LOG(D1MACH(1))
     first = .FALSE.
-  ENDIF
+  END IF
   !
   IF ( X<0.D0 ) CALL XERMSG('SLATEC','DGAMIT','X IS NEGATIVE',2,2)
   !
@@ -113,15 +113,15 @@ REAL(8) FUNCTION DGAMIT(A,X)
           !
           CALL XERCLR
           CALL XERMSG('SLATEC','DGAMIT','RESULT LT HALF PRECISION',1,1)
-        ENDIF
-      ENDIF
-    ENDIF
+        END IF
+      END IF
+    END IF
   ELSE
     t = D9LGIT(A,X,DLNGAM(A+1.0D0))
     IF ( t<bot ) CALL XERCLR
     DGAMIT = EXP(t)
     RETURN
-  ENDIF
+  END IF
   !
   t = -A*alx + LOG(ABS(h))
   IF ( t<bot ) CALL XERCLR

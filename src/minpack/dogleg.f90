@@ -93,27 +93,27 @@ SUBROUTINE DOGLEG(N,R,Lr,Diag,Qtb,Delta,X,Wa1,Wa2)
       DO i = jp1, N
         sum = sum + R(l)*X(i)
         l = l + 1
-      ENDDO
-    ENDIF
+      END DO
+    END IF
     temp = R(jj)
     IF ( temp==zero ) THEN
       l = j
       DO i = 1, j
         temp = MAX(temp,ABS(R(l)))
         l = l + N - i
-      ENDDO
+      END DO
       temp = epsmch*temp
       IF ( temp==zero ) temp = epsmch
-    ENDIF
+    END IF
     X(j) = (Qtb(j)-sum)/temp
-  ENDDO
+  END DO
   !
   !     TEST WHETHER THE GAUSS-NEWTON DIRECTION IS ACCEPTABLE.
   !
   DO j = 1, N
     Wa1(j) = zero
     Wa2(j) = Diag(j)*X(j)
-  ENDDO
+  END DO
   qnorm = ENORM(N,Wa2)
   IF ( qnorm>Delta ) THEN
     !
@@ -126,9 +126,9 @@ SUBROUTINE DOGLEG(N,R,Lr,Diag,Qtb,Delta,X,Wa1,Wa2)
       DO i = j, N
         Wa1(i) = Wa1(i) + R(l)*temp
         l = l + 1
-      ENDDO
+      END DO
       Wa1(j) = Wa1(j)/Diag(j)
-    ENDDO
+    END DO
     !
     !     CALCULATE THE NORM OF THE SCALED GRADIENT DIRECTION,
     !     NORMALIZE, AND RESCALE THE GRADIENT.
@@ -139,7 +139,7 @@ SUBROUTINE DOGLEG(N,R,Lr,Diag,Qtb,Delta,X,Wa1,Wa2)
     IF ( gnorm/=zero ) THEN
       DO j = 1, N
         Wa1(j) = (Wa1(j)/gnorm)/Diag(j)
-      ENDDO
+      END DO
       !
       !     CALCULATE THE POINT ALONG THE SCALED GRADIENT
       !     AT WHICH THE QUADRATIC IS MINIMIZED.
@@ -150,9 +150,9 @@ SUBROUTINE DOGLEG(N,R,Lr,Diag,Qtb,Delta,X,Wa1,Wa2)
         DO i = j, N
           sum = sum + R(l)*Wa1(i)
           l = l + 1
-        ENDDO
+        END DO
         Wa2(j) = sum
-      ENDDO
+      END DO
       temp = ENORM(N,Wa2)
       sgnorm = (gnorm/temp)/temp
       !
@@ -171,8 +171,8 @@ SUBROUTINE DOGLEG(N,R,Lr,Diag,Qtb,Delta,X,Wa1,Wa2)
           **2 + SQRT((temp-(Delta/qnorm))**2+(one-(Delta/qnorm)**2)&
           *(one-(sgnorm/Delta)**2))
         alpha = ((Delta/qnorm)*(one-(sgnorm/Delta)**2))/temp
-      ENDIF
-    ENDIF
+      END IF
+    END IF
     !
     !     FORM APPROPRIATE CONVEX COMBINATION OF THE GAUSS-NEWTON
     !     DIRECTION AND THE SCALED GRADIENT DIRECTION.
@@ -180,8 +180,8 @@ SUBROUTINE DOGLEG(N,R,Lr,Diag,Qtb,Delta,X,Wa1,Wa2)
     temp = (one-alpha)*MIN(sgnorm,Delta)
     DO j = 1, N
       X(j) = temp*Wa1(j) + alpha*X(j)
-    ENDDO
-  ENDIF
+    END DO
+  END IF
   !
   !     LAST CARD OF SUBROUTINE DOGLEG.
   !

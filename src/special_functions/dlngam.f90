@@ -49,7 +49,7 @@ REAL(8) FUNCTION DLNGAM(X)
     xmax = temp*D1MACH(2)
     dxrel = SQRT(D1MACH(4))
     first = .FALSE.
-  ENDIF
+  END IF
   !
   y = ABS(X)
   IF ( y>10.D0 ) THEN
@@ -62,7 +62,7 @@ REAL(8) FUNCTION DLNGAM(X)
     IF ( X>0.D0 ) THEN
       DLNGAM = sq2pil + (X-0.5D0)*LOG(X) - X + D9LGMC(y)
       RETURN
-    ENDIF
+    END IF
     !
     sinpiy = ABS(SIN(pi*y))
     IF ( sinpiy==0.D0 ) CALL XERMSG('SLATEC','DLNGAM',&
@@ -73,7 +73,7 @@ REAL(8) FUNCTION DLNGAM(X)
     !
     DLNGAM = sqpi2l + (X-0.5D0)*LOG(y) - X - LOG(sinpiy) - D9LGMC(y)
     RETURN
-  ENDIF
+  END IF
   !
   ! LOG (ABS (DGAMMA(X)) ) FOR ABS(X) .LE. 10.0
   !

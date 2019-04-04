@@ -59,7 +59,7 @@ SUBROUTINE DVOUT(N,Dx,Ifmt,Idigit)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910403  Updated AUTHOR section.  (WRB)
-  
+
   INTEGER i, I1MACH, Idigit, k1, k2, lout, N, ndigit
   REAL(8) :: Dx(*)
   CHARACTER Ifmt*(*)
@@ -77,7 +77,7 @@ SUBROUTINE DVOUT(N,Dx,Ifmt,Idigit)
       DO k1 = 1, N, 4
         k2 = MIN(N,k1+3)
         WRITE (lout,99001) k1, k2, (Dx(i),i=k1,k2)
-      ENDDO
+      END DO
       RETURN
       !
     ELSEIF ( ndigit<=14 ) THEN
@@ -85,7 +85,7 @@ SUBROUTINE DVOUT(N,Dx,Ifmt,Idigit)
       DO k1 = 1, N, 2
         k2 = MIN(N,k1+1)
         WRITE (lout,99002) k1, k2, (Dx(i),i=k1,k2)
-      ENDDO
+      END DO
       RETURN
       !
     ELSEIF ( ndigit>20 ) THEN
@@ -93,23 +93,23 @@ SUBROUTINE DVOUT(N,Dx,Ifmt,Idigit)
       DO k1 = 1, N
         k2 = k1
         WRITE (lout,99004) k1, k2, (Dx(i),i=k1,k2)
-      ENDDO
+      END DO
       RETURN
     ELSE
       !
       DO k1 = 1, N, 2
         k2 = MIN(N,k1+1)
         WRITE (lout,99003) k1, k2, (Dx(i),i=k1,k2)
-      ENDDO
+      END DO
       RETURN
-    ENDIF
+    END IF
     !
   ELSEIF ( ndigit<=6 ) THEN
     !
     DO k1 = 1, N, 8
       k2 = MIN(N,k1+7)
       WRITE (lout,99001) k1, k2, (Dx(i),i=k1,k2)
-    ENDDO
+    END DO
     RETURN
     !
   ELSEIF ( ndigit<=14 ) THEN
@@ -117,7 +117,7 @@ SUBROUTINE DVOUT(N,Dx,Ifmt,Idigit)
     DO k1 = 1, N, 5
       k2 = MIN(N,k1+4)
       WRITE (lout,99002) k1, k2, (Dx(i),i=k1,k2)
-    ENDDO
+    END DO
     RETURN
     !
   ELSEIF ( ndigit>20 ) THEN
@@ -125,14 +125,14 @@ SUBROUTINE DVOUT(N,Dx,Ifmt,Idigit)
     DO k1 = 1, N, 3
       k2 = MIN(N,k1+2)
       WRITE (lout,99004) k1, k2, (Dx(i),i=k1,k2)
-    ENDDO
+    END DO
     RETURN
-  ENDIF
+  END IF
   !
   DO k1 = 1, N, 4
     k2 = MIN(N,k1+3)
     WRITE (lout,99003) k1, k2, (Dx(i),i=k1,k2)
-  ENDDO
+  END DO
   RETURN
   99001 FORMAT (1X,I4,' - ',I4,1X,1P,8D14.5)
   99002 FORMAT (1X,I4,' - ',I4,1X,1P,5D22.13)

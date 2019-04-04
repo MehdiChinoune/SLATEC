@@ -78,7 +78,7 @@ SUBROUTINE SPSORT(X,N,Iperm,Kflag,Ier)
   !   920507  Modified by M. McClain to revise prologue text.
   !   920818  Declarations section rebuilt and code restructured to use
   !           IF-THEN-ELSE-ENDIF.  (SMR, WRB)
-  
+
   !     .. Scalar Arguments ..
   INTEGER Ier, Kflag, N
   !     .. Array Arguments ..
@@ -101,20 +101,20 @@ SUBROUTINE SPSORT(X,N,Iperm,Kflag,Ier)
     CALL XERMSG('SLATEC','SPSORT',&
       'The number of values to be sorted, N, is not positive.',Ier,1)
     RETURN
-  ENDIF
+  END IF
   kk = ABS(Kflag)
   IF ( kk/=1.AND.kk/=2 ) THEN
     Ier = 2
     CALL XERMSG('SLATEC','SPSORT',&
       'The sort control parameter, KFLAG, is not 2, 1, -1, or -2.',Ier,1)
     RETURN
-  ENDIF
+  END IF
   !
   !     Initialize permutation vector
   !
   DO i = 1, nn
     Iperm(i) = i
-  ENDDO
+  END DO
   !
   !     Return if only one value is to be sorted
   !
@@ -125,8 +125,8 @@ SUBROUTINE SPSORT(X,N,Iperm,Kflag,Ier)
   IF ( Kflag<=-1 ) THEN
     DO i = 1, nn
       X(i) = -X(i)
-    ENDDO
-  ENDIF
+    END DO
+  END IF
   !
   !     Sort X only
   !
@@ -141,7 +141,7 @@ SUBROUTINE SPSORT(X,N,Iperm,Kflag,Ier)
     r = r + 3.90625E-2
   ELSE
     r = r - 0.21875E0
-  ENDIF
+  END IF
   !
   200  k = i
   !
@@ -156,7 +156,7 @@ SUBROUTINE SPSORT(X,N,Iperm,Kflag,Ier)
     Iperm(ij) = Iperm(i)
     Iperm(i) = lm
     lm = Iperm(ij)
-  ENDIF
+  END IF
   l = j
   !
   !     If last element of array is less than LM, interchange with LM
@@ -173,8 +173,8 @@ SUBROUTINE SPSORT(X,N,Iperm,Kflag,Ier)
       Iperm(ij) = Iperm(i)
       Iperm(i) = lm
       lm = Iperm(ij)
-    ENDIF
-  ENDIF
+    END IF
+  END IF
   DO
     !
     !     Find an element in the second half of the array which is smaller
@@ -211,13 +211,13 @@ SUBROUTINE SPSORT(X,N,Iperm,Kflag,Ier)
               iu(m) = j
               j = l
               m = m + 1
-            ENDIF
+            END IF
             GOTO 400
-          ENDIF
-        ENDIF
-      ENDDO
-    ENDIF
-  ENDDO
+          END IF
+        END IF
+      END DO
+    END IF
+  END DO
   !
   !     Begin again on another portion of the unsorted array
   !
@@ -229,8 +229,8 @@ SUBROUTINE SPSORT(X,N,Iperm,Kflag,Ier)
     IF ( Kflag<=-1 ) THEN
       DO i = 1, nn
         X(i) = -X(i)
-      ENDDO
-    ENDIF
+      END DO
+    END IF
     !
     !     Rearrange the values of X if desired
     !
@@ -251,25 +251,25 @@ SUBROUTINE SPSORT(X,N,Iperm,Kflag,Ier)
               Iperm(indx) = -Iperm(indx)
               indx = ABS(Iperm(indx))
               CYCLE
-            ENDIF
+            END IF
             X(indx0) = temp
             EXIT
-          ENDDO
-        ENDIF
-      ENDDO
+          END DO
+        END IF
+      END DO
       !
       !        Revert the signs of the IPERM values
       !
       DO i = 1, nn
         Iperm(i) = -Iperm(i)
-      ENDDO
+      END DO
       !
-    ENDIF
+    END IF
     RETURN
   ELSE
     i = il(m)
     j = iu(m)
-  ENDIF
+  END IF
   !
   400 CONTINUE
   IF ( j-i>=1 ) GOTO 200
@@ -290,10 +290,10 @@ SUBROUTINE SPSORT(X,N,Iperm,Kflag,Ier)
         IF ( X(lm)>=X(Iperm(k)) ) THEN
           Iperm(k+1) = lm
           EXIT
-        ENDIF
-      ENDDO
-    ENDIF
-  ENDDO
+        END IF
+      END DO
+    END IF
+  END DO
   !
   RETURN
 END SUBROUTINE SPSORT

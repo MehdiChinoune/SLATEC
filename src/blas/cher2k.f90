@@ -175,7 +175,7 @@ SUBROUTINE CHER2K(Uplo,Trans,N,K,Alpha,A,Lda,B,Ldb,Beta,C,Ldc)
     nrowa = N
   ELSE
     nrowa = K
-  ENDIF
+  END IF
   upper = LSAME(Uplo,'U')
   !
   info = 0
@@ -193,11 +193,11 @@ SUBROUTINE CHER2K(Uplo,Trans,N,K,Alpha,A,Lda,B,Ldb,Beta,C,Ldc)
     info = 9
   ELSEIF ( Ldc<MAX(1,N) ) THEN
     info = 12
-  ENDIF
+  END IF
   IF ( info/=0 ) THEN
     CALL XERBLA('CHER2K',info)
     RETURN
-  ENDIF
+  END IF
   !
   !     Quick return if possible.
   !
@@ -211,32 +211,32 @@ SUBROUTINE CHER2K(Uplo,Trans,N,K,Alpha,A,Lda,B,Ldb,Beta,C,Ldc)
         DO j = 1, N
           DO i = 1, j
             C(i,j) = ZERO
-          ENDDO
-        ENDDO
+          END DO
+        END DO
       ELSE
         DO j = 1, N
           DO i = 1, j - 1
             C(i,j) = Beta*C(i,j)
-          ENDDO
+          END DO
           C(j,j) = Beta*REAL(C(j,j))
-        ENDDO
-      ENDIF
+        END DO
+      END IF
     ELSEIF ( Beta==REAL(ZERO) ) THEN
       DO j = 1, N
         DO i = j, N
           C(i,j) = ZERO
-        ENDDO
-      ENDDO
+        END DO
+      END DO
     ELSE
       DO j = 1, N
         C(j,j) = Beta*REAL(C(j,j))
         DO i = j + 1, N
           C(i,j) = Beta*C(i,j)
-        ENDDO
-      ENDDO
-    ENDIF
+        END DO
+      END DO
+    END IF
     RETURN
-  ENDIF
+  END IF
   !
   !     Start the operations.
   !
@@ -250,48 +250,48 @@ SUBROUTINE CHER2K(Uplo,Trans,N,K,Alpha,A,Lda,B,Ldb,Beta,C,Ldc)
         IF ( Beta==REAL(ZERO) ) THEN
           DO i = 1, j
             C(i,j) = ZERO
-          ENDDO
+          END DO
         ELSEIF ( Beta/=ONE ) THEN
           DO i = 1, j - 1
             C(i,j) = Beta*C(i,j)
-          ENDDO
+          END DO
           C(j,j) = Beta*REAL(C(j,j))
-        ENDIF
+        END IF
         DO l = 1, K
           IF ( (A(j,l)/=ZERO).OR.(B(j,l)/=ZERO) ) THEN
             temp1 = Alpha*CONJG(B(j,l))
             temp2 = CONJG(Alpha*A(j,l))
             DO i = 1, j - 1
               C(i,j) = C(i,j) + A(i,l)*temp1 + B(i,l)*temp2
-            ENDDO
+            END DO
             C(j,j) = REAL(C(j,j)) + REAL(A(j,l)*temp1+B(j,l)*temp2)
-          ENDIF
-        ENDDO
-      ENDDO
+          END IF
+        END DO
+      END DO
     ELSE
       DO j = 1, N
         IF ( Beta==REAL(ZERO) ) THEN
           DO i = j, N
             C(i,j) = ZERO
-          ENDDO
+          END DO
         ELSEIF ( Beta/=ONE ) THEN
           DO i = j + 1, N
             C(i,j) = Beta*C(i,j)
-          ENDDO
+          END DO
           C(j,j) = Beta*REAL(C(j,j))
-        ENDIF
+        END IF
         DO l = 1, K
           IF ( (A(j,l)/=ZERO).OR.(B(j,l)/=ZERO) ) THEN
             temp1 = Alpha*CONJG(B(j,l))
             temp2 = CONJG(Alpha*A(j,l))
             DO i = j + 1, N
               C(i,j) = C(i,j) + A(i,l)*temp1 + B(i,l)*temp2
-            ENDDO
+            END DO
             C(j,j) = REAL(C(j,j)) + REAL(A(j,l)*temp1+B(j,l)*temp2)
-          ENDIF
-        ENDDO
-      ENDDO
-    ENDIF
+          END IF
+        END DO
+      END DO
+    END IF
     !
     !        Form  C := alpha*conjg( A' )*B + conjg( alpha )*conjg( B' )*A +
     !                   C.
@@ -304,21 +304,21 @@ SUBROUTINE CHER2K(Uplo,Trans,N,K,Alpha,A,Lda,B,Ldb,Beta,C,Ldc)
         DO l = 1, K
           temp1 = temp1 + CONJG(A(l,i))*B(l,j)
           temp2 = temp2 + CONJG(B(l,i))*A(l,j)
-        ENDDO
+        END DO
         IF ( i==j ) THEN
           IF ( Beta==REAL(ZERO) ) THEN
             C(j,j) = REAL(Alpha*temp1+CONJG(Alpha)*temp2)
           ELSE
             C(j,j) = Beta*REAL(C(j,j))&
               + REAL(Alpha*temp1+CONJG(Alpha)*temp2)
-          ENDIF
+          END IF
         ELSEIF ( Beta==REAL(ZERO) ) THEN
           C(i,j) = Alpha*temp1 + CONJG(Alpha)*temp2
         ELSE
           C(i,j) = Beta*C(i,j) + Alpha*temp1 + CONJG(Alpha)*temp2
-        ENDIF
-      ENDDO
-    ENDDO
+        END IF
+      END DO
+    END DO
   ELSE
     DO j = 1, N
       DO i = j, N
@@ -327,22 +327,22 @@ SUBROUTINE CHER2K(Uplo,Trans,N,K,Alpha,A,Lda,B,Ldb,Beta,C,Ldc)
         DO l = 1, K
           temp1 = temp1 + CONJG(A(l,i))*B(l,j)
           temp2 = temp2 + CONJG(B(l,i))*A(l,j)
-        ENDDO
+        END DO
         IF ( i==j ) THEN
           IF ( Beta==REAL(ZERO) ) THEN
             C(j,j) = REAL(Alpha*temp1+CONJG(Alpha)*temp2)
           ELSE
             C(j,j) = Beta*REAL(C(j,j))&
               + REAL(Alpha*temp1+CONJG(Alpha)*temp2)
-          ENDIF
+          END IF
         ELSEIF ( Beta==REAL(ZERO) ) THEN
           C(i,j) = Alpha*temp1 + CONJG(Alpha)*temp2
         ELSE
           C(i,j) = Beta*C(i,j) + Alpha*temp1 + CONJG(Alpha)*temp2
-        ENDIF
-      ENDDO
-    ENDDO
-  ENDIF
+        END IF
+      END DO
+    END DO
+  END IF
   !
   !
   !     End of CHER2K.

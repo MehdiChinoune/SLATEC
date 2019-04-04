@@ -101,7 +101,7 @@ SUBROUTINE DCHKW(Name,Lociw,Leniw,Locw,Lenw,Ierr,Iter,Err)
     CALL XERMSG('SLATEC','DCHKW',&
       'In '//xernam//', INTEGER work array too short.  '//&
       'IWORK needs '//xern1//'; have allocated '//xern2,1,1)
-  ENDIF
+  END IF
   !
   !         Check the Double Precision workspace situation.
   IF ( Locw>Lenw ) THEN
@@ -113,6 +113,6 @@ SUBROUTINE DCHKW(Name,Lociw,Leniw,Locw,Lenw,Ierr,Iter,Err)
     CALL XERMSG('SLATEC','DCHKW',&
       'In '//xernam//', DOUBLE PRECISION work array too '//&
       'short.  RWORK needs '//xern1//'; have allocated '//xern2,1,1)
-  ENDIF
+  END IF
   !------------- LAST LINE OF DCHKW FOLLOWS ----------------------------
 END SUBROUTINE DCHKW

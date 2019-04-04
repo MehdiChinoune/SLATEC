@@ -73,7 +73,7 @@ SUBROUTINE ELTRAN(Nm,N,Low,Igh,A,Int,Z)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   !
   INTEGER i, j, N, kl, mm, mp, Nm, Igh, Low, mp1
   REAL A(Nm,*), Z(Nm,*)
@@ -84,10 +84,10 @@ SUBROUTINE ELTRAN(Nm,N,Low,Igh,A,Int,Z)
     !
     DO j = 1, N
       Z(i,j) = 0.0E0
-    ENDDO
+    END DO
     !
     Z(i,i) = 1.0E0
-  ENDDO
+  END DO
   !
   kl = Igh - Low - 1
   IF ( kl>=1 ) THEN
@@ -98,7 +98,7 @@ SUBROUTINE ELTRAN(Nm,N,Low,Igh,A,Int,Z)
       !
       DO i = mp1, Igh
         Z(i,mp) = A(i,mp-1)
-      ENDDO
+      END DO
       !
       i = Int(mp)
       IF ( i/=mp ) THEN
@@ -106,11 +106,11 @@ SUBROUTINE ELTRAN(Nm,N,Low,Igh,A,Int,Z)
         DO j = mp, Igh
           Z(mp,j) = Z(i,j)
           Z(i,j) = 0.0E0
-        ENDDO
+        END DO
         !
         Z(i,mp) = 1.0E0
-      ENDIF
-    ENDDO
-  ENDIF
+      END IF
+    END DO
+  END IF
   !
 END SUBROUTINE ELTRAN

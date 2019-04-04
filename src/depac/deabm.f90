@@ -572,7 +572,7 @@ SUBROUTINE DEABM(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,Rpar,Ipa
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   REAL Atol(*), Rpar(*), Rtol(*), Rwork(*), T, Tout, Y(*)
   INTEGER ialpha, ibeta, idelsn, Idid, ifouru, ig, igi, ihold, &
     Info(15), ip, Ipar(*), iphi, ipsi, isig, itold, itstar, itwou, iv, iw, Iwork(*)
@@ -596,8 +596,8 @@ SUBROUTINE DEABM(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,Rpar,Ipa
         & HAS NOT ADVANCED.  CHECK THE WAY YOU HAVE SET PARAMETERS FOR THE CALL TO THE CODE,&
         & PARTICULARLY INFO(1).',13,2)
       RETURN
-    ENDIF
-  ENDIF
+    END IF
+  END IF
   !
   !     CHECK LRW AND LIW FOR SUFFICIENT STORAGE ALLOCATION
   !
@@ -607,14 +607,14 @@ SUBROUTINE DEABM(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,Rpar,Ipa
     CALL XERMSG('SLATEC','DEABM','THE LENGTH OF THE RWORK ARRAY MUST BE AT LEAST 130&
       & + 21*NEQ.$$YOU HAVE CALLED THE CODE WITH LRW = '//xern1,1,1)
     Idid = -33
-  ENDIF
+  END IF
   !
   IF ( Liw<51 ) THEN
     WRITE (xern1,'(I8)') Liw
     CALL XERMSG('SLATEC','DEABM','THE LENGTH OF THE IWORK ARRAY MUST BE AT LEAST 51.&
       &$$YOU HAVE CALLED THE CODE WITH LIW = '//xern1,2,1)
     Idid = -33
-  ENDIF
+  END IF
   !
   !     COMPUTE THE INDICES FOR THE ARRAYS TO BE STORED IN THE WORK ARRAY
   !
@@ -647,7 +647,7 @@ SUBROUTINE DEABM(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,Rpar,Ipa
     nornd = Iwork(23)/=(-1)
     stiff = Iwork(24)/=(-1)
     intout = Iwork(25)/=(-1)
-  ENDIF
+  END IF
   !
   CALL DES(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork(iypout),Rwork(iyp),&
     Rwork(iyy),Rwork(iwt),Rwork(ip),Rwork(iphi),Rwork(ialpha),&

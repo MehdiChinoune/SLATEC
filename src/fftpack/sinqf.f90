@@ -89,9 +89,9 @@ SUBROUTINE SINQF(N,X,Wsave)
     xhold = X(k)
     X(k) = X(kc+1)
     X(kc+1) = xhold
-  ENDDO
+  END DO
   CALL COSQF(N,X,Wsave)
   DO k = 2, N, 2
     X(k) = -X(k)
-  ENDDO
+  END DO
 END SUBROUTINE SINQF

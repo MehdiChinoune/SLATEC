@@ -35,7 +35,7 @@ SUBROUTINE PRODP(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Y,M,A,B,C,D,U,W)
   !   801001  DATE WRITTEN
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
-  
+
   REAL A(*), Aa(*), am, B(*), Bd(*), bh, Bm1(*), Bm2(*), C(*), D(*), den, rt, &
     U(*), v, W(*), X(*), Y(*), ym
   INTEGER ia, ibr, id, j, k, M, m1, m2, mm, mm2, Na, Nd, Nm1, Nm2
@@ -43,7 +43,7 @@ SUBROUTINE PRODP(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Y,M,A,B,C,D,U,W)
   DO j = 1, M
     Y(j) = X(j)
     W(j) = Y(j)
-  ENDDO
+  END DO
   mm = M - 1
   mm2 = M - 2
   id = Nd
@@ -59,8 +59,8 @@ SUBROUTINE PRODP(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Y,M,A,B,C,D,U,W)
       ia = ia - 1
       DO j = 1, M
         Y(j) = rt*W(j)
-      ENDDO
-    ENDIF
+      END DO
+    END IF
     IF ( id<=0 ) RETURN
     rt = Bd(id)
     id = id - 1
@@ -84,8 +84,8 @@ SUBROUTINE PRODP(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Y,M,A,B,C,D,U,W)
         bh = bh - v*U(j-1)
         ym = ym - v*W(j-1)
         v = -v*D(j-1)
-      ENDDO
-    ENDIF
+      END DO
+    END IF
     den = B(M-1) - rt - A(M-1)*D(M-2)
     D(M-1) = (C(M-1)-A(M-1)*U(M-2))/den
     W(M-1) = (Y(M-1)-A(M-1)*W(M-2))/den
@@ -97,12 +97,12 @@ SUBROUTINE PRODP(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Y,M,A,B,C,D,U,W)
       W(M) = (ym-am*W(M-1))/den
     ELSE
       W(M) = 1.
-    ENDIF
+    END IF
     W(M-1) = W(M-1) - D(M-1)*W(M)
     DO j = 2, mm
       k = M - j
       W(k) = W(k) - D(k)*W(k+1) - U(k)*W(M)
-    ENDDO
+    END DO
     IF ( Na<=0 ) THEN
       IF ( m1<=0 ) THEN
         IF ( m2>0 ) GOTO 400
@@ -111,32 +111,32 @@ SUBROUTINE PRODP(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Y,M,A,B,C,D,U,W)
         IF ( m2<=0 ) GOTO 300
         IF ( ABS(Bm1(m1))>ABS(Bm2(m2)) ) GOTO 300
         GOTO 400
-      ENDIF
-    ENDIF
-  ENDDO
+      END IF
+    END IF
+  END DO
   200 CONTINUE
   DO j = 1, M
     Y(j) = W(j)
-  ENDDO
+  END DO
   ibr = 1
   GOTO 100
   300 CONTINUE
   IF ( ibr<=0 ) THEN
     IF ( ABS(Bm1(m1)-Bd(id))<ABS(Bm1(m1)-rt) ) GOTO 200
-  ENDIF
+  END IF
   rt = rt - Bm1(m1)
   m1 = m1 - 1
   GOTO 500
   400 CONTINUE
   IF ( ibr<=0 ) THEN
     IF ( ABS(Bm2(m2)-Bd(id))<ABS(Bm2(m2)-rt) ) GOTO 200
-  ENDIF
+  END IF
   rt = rt - Bm2(m2)
   m2 = m2 - 1
   500 CONTINUE
   DO j = 1, M
     Y(j) = Y(j) + rt*W(j)
-  ENDDO
+  END DO
   GOTO 100
   RETURN
 END SUBROUTINE PRODP

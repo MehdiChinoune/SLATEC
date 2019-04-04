@@ -32,7 +32,7 @@ SUBROUTINE D9UPAK(X,Y,N)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900820  Corrected code to find Y between 0.5 and 1.0 rather than
   !           between 0.05 and 1.0.  (WRB)
-  
+
   INTEGER N
   REAL(8) :: X, Y, absx
   !* FIRST EXECUTABLE STATEMENT  D9UPAK
@@ -46,13 +46,13 @@ SUBROUTINE D9UPAK(X,Y,N)
     DO WHILE ( absx<0.5D0 )
       N = N - 1
       absx = absx*2.0D0
-    ENDDO
+    END DO
     !
     DO WHILE ( absx>=1.0D0 )
       N = N + 1
       absx = absx*0.5D0
-    ENDDO
+    END DO
     Y = SIGN(absx,X)
-  ENDIF
+  END IF
   !
 END SUBROUTINE D9UPAK

@@ -55,7 +55,7 @@ SUBROUTINE DPTSL(N,D,E,B)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   INTEGER N
   REAL(8) :: D(*), E(*), B(*)
   !
@@ -82,8 +82,8 @@ SUBROUTINE DPTSL(N,D,E,B)
         D(kbm1) = D(kbm1) - t2*E(kbm1)
         B(kbm1) = B(kbm1) - t2*B(kbm1+1)
         kbm1 = kbm1 - 1
-      ENDDO
-    ENDIF
+      END DO
+    END IF
     kp1 = nm1d2 + 1
     !
     !        CLEAN UP FOR POSSIBLE 2 X 2 BLOCK AT CENTER
@@ -93,7 +93,7 @@ SUBROUTINE DPTSL(N,D,E,B)
       D(kp1+1) = D(kp1+1) - t1*E(kp1)
       B(kp1+1) = B(kp1+1) - t1*B(kp1)
       kp1 = kp1 + 1
-    ENDIF
+    END IF
     !
     !        BACK SOLVE STARTING AT THE CENTER, GOING TOWARDS THE TOP
     !        AND BOTTOM
@@ -106,10 +106,10 @@ SUBROUTINE DPTSL(N,D,E,B)
         B(k) = (B(k)-E(k)*B(k+1))/D(k)
         B(kf+1) = (B(kf+1)-E(kf)*B(kf))/D(kf+1)
         k = k - 1
-      ENDDO
-    ENDIF
+      END DO
+    END IF
     IF ( MOD(N,2)==0 ) B(1) = (B(1)-E(1)*B(2))/D(1)
   ELSE
     B(1) = B(1)/D(1)
-  ENDIF
+  END IF
 END SUBROUTINE DPTSL

@@ -79,7 +79,7 @@ SUBROUTINE CPODI(A,Lda,N,Det,Job)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   INTEGER Lda, N, Job
   COMPLEX A(Lda,*)
   REAL Det(2)
@@ -101,13 +101,13 @@ SUBROUTINE CPODI(A,Lda,N,Det,Job)
       DO WHILE ( Det(1)<1.0E0 )
         Det(1) = s*Det(1)
         Det(2) = Det(2) - 1.0E0
-      ENDDO
+      END DO
       DO WHILE ( Det(1)>=s )
         Det(1) = Det(1)/s
         Det(2) = Det(2) + 1.0E0
-      ENDDO
-    ENDDO
-  ENDIF
+      END DO
+    END DO
+  END IF
   !
   !     COMPUTE INVERSE(R)
   !
@@ -122,9 +122,9 @@ SUBROUTINE CPODI(A,Lda,N,Det,Job)
           t = A(k,j)
           A(k,j) = (0.0E0,0.0E0)
           CALL CAXPY(k,t,A(1,k),1,A(1,j),1)
-        ENDDO
-      ENDIF
-    ENDDO
+        END DO
+      END IF
+    END DO
     !
     !        FORM  INVERSE(R) * CTRANS(INVERSE(R))
     !
@@ -134,10 +134,10 @@ SUBROUTINE CPODI(A,Lda,N,Det,Job)
         DO k = 1, jm1
           t = CONJG(A(k,j))
           CALL CAXPY(k,t,A(1,j),1,A(1,k),1)
-        ENDDO
-      ENDIF
+        END DO
+      END IF
       t = CONJG(A(j,j))
       CALL CSCAL(j,t,A(1,j),1)
-    ENDDO
-  ENDIF
+    END DO
+  END IF
 END SUBROUTINE CPODI

@@ -27,7 +27,7 @@ SUBROUTINE DWNLT3(I,Imax,M,Mdw,Ipivot,H,W)
   !   790701  DATE WRITTEN
   !   890620  Code extracted from WNLIT and made a subroutine.  (RWC))
   !   900604  DP version created from SP version.  (RWC)
-  
+
   INTEGER I, Imax, Ipivot(*), M, Mdw
   REAL(8) :: H(*), W(Mdw,*)
   !
@@ -47,5 +47,5 @@ SUBROUTINE DWNLT3(I,Imax,M,Mdw,Ipivot,H,W)
     t = H(Imax)
     H(Imax) = H(I)
     H(I) = t
-  ENDIF
+  END IF
 END SUBROUTINE DWNLT3

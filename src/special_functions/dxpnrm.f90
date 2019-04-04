@@ -29,7 +29,7 @@ SUBROUTINE DXPNRM(Nu1,Nu2,Mu1,Mu2,Pqa,Ipqa,Ierror)
   !           Corrected order of sections in prologue and added TYPE
   !           section.  (WRB)
   !   920127  Revised PURPOSE section of prologue.  (DWL)
-  
+
   INTEGER i, Ierror, Ipqa(*), iprod, j, k, l, mu, Mu1, Mu2
   REAL(8) :: c1, dmu, nu, Nu1, Nu2, Pqa(*), prod
   !* FIRST EXECUTABLE STATEMENT  DXPNRM
@@ -52,7 +52,7 @@ SUBROUTINE DXPNRM(Nu1,Nu2,Mu1,Mu2,Pqa,Ipqa,Ierror)
     !
     IF ( Mu2>Mu1 ) dmu = dmu + 1.D0
     IF ( Nu2-Nu1>.5D0 ) nu = nu + 1.D0
-  ENDDO
+  END DO
   !
   !         TRANSFORM P(-MU,NU,X) INTO NORMALIZED P(MU,NU,X) USING
   !              NORM P(MU,NU,X)=
@@ -66,9 +66,9 @@ SUBROUTINE DXPNRM(Nu1,Nu2,Mu1,Mu2,Pqa,Ipqa,Ierror)
     DO i = 1, k
       prod = prod*SQRT(nu+dmu+1.D0-i)
       CALL DXADJ(prod,iprod,Ierror)
-    ENDDO
+    END DO
     IF ( Ierror/=0 ) RETURN
-  ENDIF
+  END IF
   DO i = j, l
     c1 = prod*SQRT(nu+.5D0)
     Pqa(i) = Pqa(i)*c1
@@ -93,6 +93,6 @@ SUBROUTINE DXPNRM(Nu1,Nu2,Mu1,Mu2,Pqa,Ipqa,Ierror)
       IF ( Ierror/=0 ) RETURN
       mu = mu + 1
       dmu = dmu + 1.D0
-    ENDIF
-  ENDDO
+    END IF
+  END DO
 END SUBROUTINE DXPNRM

@@ -66,7 +66,7 @@ REAL(8) FUNCTION DCSEVL(X,Cs,N)
     b1 = b0
     ni = N + 1 - i
     b0 = twox*b1 - b2 + Cs(ni)
-  ENDDO
+  END DO
   !
   DCSEVL = 0.5D0*(b0-b2)
   !

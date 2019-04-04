@@ -49,7 +49,7 @@ SUBROUTINE MPDIVI(X,Iy,Z)
     WRITE (LUN,99001)
     99001 FORMAT (' *** ATTEMPTED DIVISION BY ZERO IN CALL TO MPDIVI ***')
     GOTO 500
-  ENDIF
+  END IF
   re = X(2)
   ! CHECK FOR ZERO DIVIDEND
   IF ( rs/=0 ) THEN
@@ -64,7 +64,7 @@ SUBROUTINE MPDIVI(X,Iy,Z)
         Z(1) = rs
         Z(2) = re - 1
         RETURN
-      ENDIF
+      END IF
       ! CHECK FOR DIVISION BY 1 OR -1
     ELSEIF ( j/=1 ) THEN
       c = 0
@@ -90,8 +90,8 @@ SUBROUTINE MPDIVI(X,Iy,Z)
             IF ( c2>=j2 ) GOTO 200
           ELSE
             GOTO 200
-          ENDIF
-        ENDDO
+          END IF
+        END DO
       ELSE
         DO
           ! LOOK FOR FIRST NONZERO DIGIT IN QUOTIENT
@@ -113,25 +113,25 @@ SUBROUTINE MPDIVI(X,Iy,Z)
                 c = c + X(i+2)
                 R(k) = c/j
                 c = B*(c-j*R(k))
-              ENDDO
+              END DO
               IF ( c<0 ) GOTO 400
               kh = kh + 1
-            ENDIF
+            END IF
             DO k = kh, i2
               R(k) = c/j
               c = B*(c-j*R(k))
-            ENDDO
+            END DO
             IF ( c>=0 ) EXIT
             GOTO 400
-          ENDIF
-        ENDDO
-      ENDIF
+          END IF
+        END DO
+      END IF
     ELSE
       CALL MPSTR(X,Z)
       Z(1) = rs
       RETURN
-    ENDIF
-  ENDIF
+    END IF
+  END IF
   ! NORMALIZE AND ROUND RESULT
   100  CALL MPNZR(rs,re,Z,0)
   RETURN
@@ -146,13 +146,13 @@ SUBROUTINE MPDIVI(X,Iy,Z)
     ! HERE IQ*B WOULD POSSIBLY OVERFLOW SO INCREASE IR
     ir = ir + 1
     iq = iq - j1
-  ENDIF
+  END IF
   iq = iq*B - ir*j2
   IF ( iq<0 ) THEN
     ! HERE IQ NEGATIVE SO IR WAS TOO LARGE
     ir = ir - 1
     iq = iq + j
-  ENDIF
+  END IF
   IF ( i<=T ) iq = iq + X(i+2)
   iqj = iq/j
   ! R(K) = QUOTIENT, C = REMAINDER
@@ -164,7 +164,7 @@ SUBROUTINE MPDIVI(X,Iy,Z)
     IF ( k>i2 ) GOTO 100
     i = i + 1
     GOTO 300
-  ENDIF
+  END IF
   ! CARRY NEGATIVE SO OVERFLOW MUST HAVE OCCURRED
   400  CALL MPCHK(1,4)
   WRITE (LUN,99002)

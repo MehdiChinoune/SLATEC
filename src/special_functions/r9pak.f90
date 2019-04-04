@@ -50,7 +50,7 @@ REAL FUNCTION R9PAK(Y,N)
     nmin = INT( a1n2b*I1MACH(12) )
     nmax = INT( a1n2b*I1MACH(13) )
     first = .FALSE.
-  ENDIF
+  END IF
   !
   CALL R9UPAK(Y,R9PAK,ny)
   !
@@ -70,15 +70,15 @@ REAL FUNCTION R9PAK(Y,N)
         R9PAK = 2.0*R9PAK
         nsum = nsum - 1
         IF ( nsum==0 ) EXIT
-      ENDDO
+      END DO
     ELSE
       DO
         !
         R9PAK = 0.5*R9PAK
         nsum = nsum + 1
         IF ( nsum==0 ) RETURN
-      ENDDO
-    ENDIF
-  ENDIF
+      END DO
+    END IF
+  END IF
   RETURN
 END FUNCTION R9PAK

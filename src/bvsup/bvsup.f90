@@ -446,8 +446,8 @@ SUBROUTINE BVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
                             IF ( Xpts(k)<=Xpts(k+1) ) GOTO 100
                           ELSEIF ( Xpts(k+1)<=Xpts(k) ) THEN
                             GOTO 100
-                          ENDIF
-                        ENDDO
+                          END IF
+                        END DO
                         !
                         !- *********************************************************************
                         !     CHECK FOR DISK STORAGE
@@ -458,7 +458,7 @@ SUBROUTINE BVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
                           NTApe = Iwork(12)
                           kpts = 1
                           NDIsk = 1
-                        ENDIF
+                        END IF
                         !
                         !- *********************************************************************
                         !     SET INTEG PARAMETER ACCORDING TO CHOICE OF INTEGRATOR.
@@ -472,23 +472,23 @@ SUBROUTINE BVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
                         IF ( Igofx==1 ) GOTO 300
                         DO j = 1, Nic
                           IF ( Alpha(j)/=0.0 ) GOTO 300
-                        ENDDO
+                        END DO
                         DO j = 1, Nfc
                           IF ( Beta(j)/=0.0 ) GOTO 200
-                        ENDDO
+                        END DO
                         INHomo = 3
                         GOTO 400
-                      ENDIF
-                    ENDIF
-                  ENDIF
-                ENDIF
-              ENDIF
-            ENDIF
-          ENDIF
-        ENDIF
-      ENDIF
-    ENDIF
-  ENDIF
+                      END IF
+                    END IF
+                  END IF
+                END IF
+              END IF
+            END IF
+          END IF
+        END IF
+      END IF
+    END IF
+  END IF
   100 CONTINUE
   IFlag = -2
   RETURN
@@ -539,7 +539,7 @@ SUBROUTINE BVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
     !   (DERKF)
     KKKint = 33 + 7*ndeq
     LLLint = 34
-  ENDIF
+  END IF
   !
   !   (COEF)
   kkkcof = 5*NFCc + NFCc**2
@@ -572,7 +572,7 @@ SUBROUTINE BVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
       ELSE
         non = 0
         MXNon = nrtemp
-      ENDIF
+      END IF
       !
       Iwork(2) = MXNon
       !
@@ -586,9 +586,9 @@ SUBROUTINE BVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
         MXNon = Iwork(1)
         Work(MXNon+1) = 2.*Xpts(Nxpts) - Xpts(1)
         GOTO 500
-      ENDIF
-    ENDIF
-  ENDIF
+      END IF
+    END IF
+  END IF
   !
   Iflag = -1
   IF ( NDIsk/=1 ) THEN
@@ -605,7 +605,7 @@ SUBROUTINE BVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
     WRITE (xern2,'(I8)') NEEdiw
     CALL XERMSG('SLATEC','BVSUP','REQUIRED STORAGE FOR WORK ARRAY IS '//&
       xern1//' + NUMBER OF ORTHONOMALIZATIONS. $$REQUIRED STORAGE FOR IWORK ARRAY IS '//xern2,1,0)
-  ENDIF
+  END IF
   RETURN
   !
   !- *********************************************************************

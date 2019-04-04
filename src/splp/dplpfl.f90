@@ -36,7 +36,7 @@ SUBROUTINE DPLPFL(Mrelas,Nvars,Ienter,Ileave,Ibasis,Ind,Ibb,Theta,Dirnrm,&
   !   890605  Removed unreferenced labels.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
-  
+
   INTEGER i, Ienter, Ileave, j, Mrelas, n20005, n20036, Nvars
   INTEGER Ibasis(*), Ind(*), Ibb(*)
   REAL(8) :: Csc(*), Ww(*), Bl(*), Bu(*), Erp(*), Rprim(*), &
@@ -54,7 +54,7 @@ SUBROUTINE DPLPFL(Mrelas,Nvars,Ienter,Ileave,Ibasis,Ind,Ibb,Theta,Dirnrm,&
     IF ( j<=Nvars ) Theta = Theta/Csc(j)
     Finite = .TRUE.
     Ileave = Ienter
-  ENDIF
+  END IF
   !
   !     NOW USE THE BASIC VARIABLES TO POSSIBLY RESTRICT THE STEP
   !     LENGTH EVEN FURTHER.
@@ -89,7 +89,7 @@ SUBROUTINE DPLPFL(Mrelas,Nvars,Ienter,Ileave,Ibasis,Ind,Ibb,Theta,Dirnrm,&
           !     IF THE BASIC VARIABLE IS FEASIBLE AND IS NOT AT ITS UPPER BOUND,
           !     THEN IT CAN INCREASE TO ITS UPPER BOUND.
           Theta = ratio
-        ENDIF
+        END IF
       ELSEIF ( Ind(j)==3.AND.Primal(i+Nvars)==zero ) THEN
         bound = Bu(j) - Bl(j)
         IF ( j<=Nvars ) bound = bound/Csc(j)
@@ -101,8 +101,8 @@ SUBROUTINE DPLPFL(Mrelas,Nvars,Ienter,Ileave,Ibasis,Ind,Ibb,Theta,Dirnrm,&
         ELSEIF ( ratio<Theta ) THEN
           Ileave = -i
           Theta = ratio
-        ENDIF
-      ENDIF
+        END IF
+      END IF
       i = i + 1
       !
       !     IF RPRIM(I) IS ESSENTIALLY ZERO, SET RATIO TO ZERO AND EXIT LOOP.
@@ -126,16 +126,16 @@ SUBROUTINE DPLPFL(Mrelas,Nvars,Ienter,Ileave,Ibasis,Ind,Ibb,Theta,Dirnrm,&
           !     THE DIRECTION COMPONENT IS NEGATIVE, THEREFORE THE VARIABLE WILL
           !     INCREASE.
           Theta = ratio
-        ENDIF
-      ENDIF
+        END IF
+      END IF
       i = i + 1
     ELSE
       Theta = zero
       Ileave = i
       Finite = .TRUE.
       EXIT
-    ENDIF
-  ENDDO
+    END IF
+  END DO
   !
   !     IF STEP LENGTH IS FINITE, SEE IF STEP LENGTH IS ABOUT ZERO.
   IF ( Finite ) THEN
@@ -146,6 +146,6 @@ SUBROUTINE DPLPFL(Mrelas,Nvars,Ienter,Ileave,Ibasis,Ind,Ibb,Theta,Dirnrm,&
       Zerolv = Zerolv .AND. ABS(Theta*Ww(i))<=Erp(i)*Rprnrm
       IF ( .NOT.Zerolv ) EXIT
       i = i + 1
-    ENDDO
-  ENDIF
+    END DO
+  END IF
 END SUBROUTINE DPLPFL

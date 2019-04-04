@@ -58,7 +58,7 @@ SUBROUTINE CACON(Z,Fnu,Kode,Mr,N,Y,Nz,Rl,Fnul,Tol,Elim,Alim)
         cpn = COS(yy)
         spn = SIN(yy)
         csgn = csgn*CMPLX(cpn,spn)
-      ENDIF
+      END IF
       !-----------------------------------------------------------------------
       !     CALCULATE CSPN=EXP(FNU*PI*I) TO MINIMIZE LOSSES OF SIGNIFICANCE
       !     WHEN FNU IS LARGE
@@ -77,7 +77,7 @@ SUBROUTINE CACON(Z,Fnu,Kode,Mr,N,Y,Nz,Rl,Fnul,Tol,Elim,Alim)
         CALL CS1S2(zn,c1,c2,nw,ascle,Alim,iuf)
         Nz = Nz + nw
         sc1 = c1
-      ENDIF
+      END IF
       Y(1) = cspn*c1 + csgn*c2
       IF ( N==1 ) RETURN
       cspn = -cspn
@@ -88,7 +88,7 @@ SUBROUTINE CACON(Z,Fnu,Kode,Mr,N,Y,Nz,Rl,Fnul,Tol,Elim,Alim)
         CALL CS1S2(zn,c1,c2,nw,ascle,Alim,iuf)
         Nz = Nz + nw
         sc2 = c1
-      ENDIF
+      END IF
       Y(2) = cspn*c1 + csgn*c2
       IF ( N==2 ) RETURN
       cspn = -cspn
@@ -114,7 +114,7 @@ SUBROUTINE CACON(Z,Fnu,Kode,Mr,N,Y,Nz,Rl,Fnul,Tol,Elim,Alim)
         kflag = 1
       ELSEIF ( as2>=bry(2) ) THEN
         kflag = 3
-      ENDIF
+      END IF
       bscle = bry(kflag)
       s1 = s1*css(kflag)
       s2 = s2*css(kflag)
@@ -137,9 +137,9 @@ SUBROUTINE CACON(Z,Fnu,Kode,Mr,N,Y,Nz,Rl,Fnul,Tol,Elim,Alim)
               s1 = sc1*css(kflag)
               s2 = sc2*css(kflag)
               st = sc2
-            ENDIF
-          ENDIF
-        ENDIF
+            END IF
+          END IF
+        END IF
         Y(i) = cspn*c1 + csgn*c2
         ck = ck + rz
         cspn = -cspn
@@ -157,12 +157,12 @@ SUBROUTINE CACON(Z,Fnu,Kode,Mr,N,Y,Nz,Rl,Fnul,Tol,Elim,Alim)
             s1 = s1*css(kflag)
             s2 = s2*css(kflag)
             cs = csr(kflag)
-          ENDIF
-        ENDIF
-      ENDDO
+          END IF
+        END IF
+      END DO
       RETURN
-    ENDIF
-  ENDIF
+    END IF
+  END IF
   Nz = -1
   IF ( nw==(-2) ) Nz = -2
 END SUBROUTINE CACON

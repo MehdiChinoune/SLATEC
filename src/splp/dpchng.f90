@@ -77,7 +77,7 @@ SUBROUTINE DPCHNG(Ii,Xval,Iplace,Sx,Ix,Ircx)
   IF ( Ircx==0 ) THEN
     nerr = 55
     CALL XERMSG('SLATEC','DPCHNG','IRCX=0',nerr,iopt)
-  ENDIF
+  END IF
   lmx = Ix(1)
   !
   !     LMX IS THE LENGTH OF THE IN-MEMORY STORAGE AREA.
@@ -91,7 +91,7 @@ SUBROUTINE DPCHNG(Ii,Xval,Iplace,Sx,Ix,Ircx)
       nerr = 55
       CALL XERMSG('SLATEC','DPCHNG',&
         'SUBSCRIPTS FOR ARRAY ELEMENT TO BE ACCESSED WERE OUT OF BOUNDS',nerr,iopt)
-    ENDIF
+    END IF
     !
     !     CHECK SUBSCRIPTS OF THE ROW. THE ROW NUMBER MUST BE .LE. M AND
     !     THE INDEX MUST BE .LE. N.
@@ -100,7 +100,7 @@ SUBROUTINE DPCHNG(Ii,Xval,Iplace,Sx,Ix,Ircx)
     nerr = 55
     CALL XERMSG('SLATEC','DPCHNG',&
       'SUBSCRIPTS FOR ARRAY ELEMENT TO BE ACCESSED WERE OUT OF BOUNDS',nerr,iopt)
-  ENDIF
+  END IF
   !
   !     SET I TO BE THE ELEMENT OF ROW/COLUMN J TO BE CHANGED.
   !
@@ -110,7 +110,7 @@ SUBROUTINE DPCHNG(Ii,Xval,Iplace,Sx,Ix,Ircx)
   ELSE
     i = ABS(Ii)
     j = ABS(Ircx)
-  ENDIF
+  END IF
   !
   !     THE INTEGER LL POINTS TO THE START OF THE MATRIX ELEMENT DATA.
   !
@@ -125,7 +125,7 @@ SUBROUTINE DPCHNG(Ii,Xval,Iplace,Sx,Ix,Ircx)
     Iplace = Ix(j+3) + 1
   ELSE
     Iplace = ll + 1
-  ENDIF
+  END IF
   !
   !     IEND POINTS TO THE LAST ELEMENT OF THE VECTOR TO BE SCANNED.
   !
@@ -148,7 +148,7 @@ SUBROUTINE DPCHNG(Ii,Xval,Iplace,Sx,Ix,Ircx)
   il = MIN(il,lmx-2)
   DO WHILE ( .NOT.(ipl>=il.OR.Ix(ipl)>=i) )
     ipl = ipl + 1
-  ENDDO
+  END DO
   !
   !     SET IPLACE AND STORE DATA ITEM IF FOUND.
   !
@@ -160,7 +160,7 @@ SUBROUTINE DPCHNG(Ii,Xval,Iplace,Sx,Ix,Ircx)
     IF ( ilast/=iend ) THEN
       ipl = ll + 1
       np = np + 1
-    ENDIF
+    END IF
     IF ( ilast/=iend ) GOTO 100
     !
     !     INSERT NEW DATA ITEM INTO LOCATION AT IPLACE(IPL).
@@ -168,7 +168,7 @@ SUBROUTINE DPCHNG(Ii,Xval,Iplace,Sx,Ix,Ircx)
     IF ( ipl>il.OR.(ipl==il.AND.i>Ix(ipl)) ) THEN
       ipl = il + 1
       IF ( ipl==lmx-1 ) ipl = ipl + 2
-    ENDIF
+    END IF
     Iplace = (np-1)*lpg + ipl
     !
     !     GO TO A NEW PAGE, IF NECESSARY, TO INSERT THE ITEM.
@@ -186,7 +186,7 @@ SUBROUTINE DPCHNG(Ii,Xval,Iplace,Sx,Ix,Ircx)
     Sx(ipl) = Xval
     Sx(lmx) = one
     RETURN
-  ENDIF
+  END IF
   200  ilast = MIN(iend,np*lpg+ll-2)
   il = IDLOC(ilast,Sx,Ix)
   il = MIN(il,lmx-2)
@@ -198,9 +198,9 @@ SUBROUTINE DPCHNG(Ii,Xval,Iplace,Sx,Ix,Ircx)
     DO jj = istart, il
       Sx(k-jj) = Sx(k-jj-1)
       Ix(k-jj) = Ix(k-jj-1)
-    ENDDO
+    END DO
     Sx(lmx) = one
-  ENDIF
+  END IF
   IF ( ipl<=lmx ) THEN
     Sx(ipl) = sxval
     Ix(ipl) = i
@@ -210,8 +210,8 @@ SUBROUTINE DPCHNG(Ii,Xval,Iplace,Sx,Ix,Ircx)
     IF ( Ix(lmx-1)>0 ) THEN
       ipl = ll + 1
       np = np + 1
-    ENDIF
-  ENDIF
+    END IF
+  END IF
   IF ( Ix(lmx-1)>0 ) GOTO 200
   np = ABS(Ix(lmx-1))
   !
@@ -246,7 +246,7 @@ SUBROUTINE DPCHNG(Ii,Xval,Iplace,Sx,Ix,Ircx)
     Sx(il) = sxval
     Ix(il) = i
     Sx(lmx) = one
-  ENDIF
+  END IF
   !
   !     INCREMENT POINTERS TO LAST ELEMENT IN VECTORS J,J+1,... .
   !
@@ -257,7 +257,7 @@ SUBROUTINE DPCHNG(Ii,Xval,Iplace,Sx,Ix,Ircx)
     Ix(jj) = Ix(jj) + 1
     IF ( MOD(Ix(jj)-ll,lpg)==lpg-1 ) Ix(jj) = Ix(jj) + 2
     jj = jj + 1
-  ENDDO
+  END DO
   !
   !     IPLACE POINTS TO THE INSERTED DATA ITEM.
   !

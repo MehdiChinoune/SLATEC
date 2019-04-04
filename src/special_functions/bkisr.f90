@@ -43,8 +43,8 @@ SUBROUTINE BKISR(X,N,Sum,Ierr)
       DO i = 1, N
         pol = -pol*X + c(i)
         pr = pr*X/i
-      ENDDO
-    ENDIF
+      END DO
+    END IF
     hx = X*0.5E0
     hxs = hx*hx
     xln = LOG(hx)
@@ -67,7 +67,7 @@ SUBROUTINE BKISR(X,N,Sum,Ierr)
       tkp = tkp + 2.0E0
       bk = bk + tkp
       fk = fk + 1.0E0
-    ENDDO
+    END DO
     Ierr = 2
     RETURN
     !-----------------------------------------------------------------------
@@ -80,7 +80,7 @@ SUBROUTINE BKISR(X,N,Sum,Ierr)
     hx = X*0.5E0
     Sum = PSIXN(1) - LOG(hx)
     RETURN
-  ENDIF
+  END IF
   100  Sum = (Sum*hxs+PSIXN(np)-xln)*pr
   IF ( N==1 ) Sum = -Sum
   Sum = pol + Sum

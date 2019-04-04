@@ -82,7 +82,7 @@ SUBROUTINE CBKNU(Z,Fnu,Kode,N,Y,Nz,Tol,Elim,Alim)
         fc = dnu*pi
         fc = fc/SIN(fc)
         smu = csh*CMPLX(1.0E0/dnu,0.0E0)
-      ENDIF
+      END IF
       a2 = 1.0E0 + dnu
       !-----------------------------------------------------------------------
       !     GAM(1-Z)*GAM(1+Z)=PI*Z/SIN(PI*Z), T1=1/GAM(1-DNU), T2=1/GAM(1+DNU)
@@ -102,9 +102,9 @@ SUBROUTINE CBKNU(Z,Fnu,Kode,N,Y,Nz,Tol,Elim,Alim)
           tm = cc(k)*ak
           s = s + tm
           IF ( ABS(tm)<Tol ) EXIT
-        ENDDO
+        END DO
         g1 = -s
-      ENDIF
+      END IF
       g2 = 0.5E0*(t1+t2)*fc
       g1 = g1*fc
       f = CMPLX(g1,0.0E0)*cch + smu*CMPLX(g2,0.0E0)
@@ -136,8 +136,8 @@ SUBROUTINE CBKNU(Z,Fnu,Kode,N,Y,Nz,Tol,Elim,Alim)
             bk = bk + ak + ak + 1.0E0
             ak = ak + 1.0E0
             IF ( a1<=Tol ) EXIT
-          ENDDO
-        ENDIF
+          END DO
+        END IF
         kflag = 2
         bk = REAL(smu)
         a1 = Fnu + 1.0E0
@@ -150,7 +150,7 @@ SUBROUTINE CBKNU(Z,Fnu,Kode,N,Y,Nz,Tol,Elim,Alim)
           f = CEXP(Z)
           s1 = s1*f
           s2 = s2*f
-        ENDIF
+        END IF
         GOTO 200
       ELSE
         !-----------------------------------------------------------------------
@@ -170,15 +170,15 @@ SUBROUTINE CBKNU(Z,Fnu,Kode,N,Y,Nz,Tol,Elim,Alim)
             bk = bk + ak + ak + 1.0E0
             ak = ak + 1.0E0
             IF ( a1<=Tol ) EXIT
-          ENDDO
-        ENDIF
+          END DO
+        END IF
         Y(1) = s1
         IF ( koded==1 ) RETURN
         Y(1) = s1*CEXP(Z)
         RETURN
-      ENDIF
-    ENDIF
-  ENDIF
+      END IF
+    END IF
+  END IF
   !-----------------------------------------------------------------------
   !     IFLAG=0 MEANS NO UNDERFLOW OCCURRED
   !     IFLAG=1 MEANS AN UNDERFLOW OCCURRED- COMPUTATION PROCEEDS WITH
@@ -200,8 +200,8 @@ SUBROUTINE CBKNU(Z,Fnu,Kode,N,Y,Nz,Tol,Elim,Alim)
       a1 = EXP(-xx)*REAL(css(kflag))
       pt = CMPLX(a1,0.0E0)*CMPLX(COS(yy),-SIN(yy))
       coef = coef*pt
-    ENDIF
-  ENDIF
+    END IF
+  END IF
   IF ( ABS(dnu)==0.5E0 ) GOTO 800
   !-----------------------------------------------------------------------
   !     MILLER ALGORITHM FOR ABS(Z).GT.R1
@@ -226,7 +226,7 @@ SUBROUTINE CBKNU(Z,Fnu,Kode,N,Y,Nz,Tol,Elim,Alim)
     t1 = ABS(t1)
   ELSE
     t1 = hpi
-  ENDIF
+  END IF
   IF ( t2>caz ) THEN
     !-----------------------------------------------------------------------
     !     COMPUTE BACKWARD INDEX K FOR ABS(Z).LT.R2
@@ -260,12 +260,12 @@ SUBROUTINE CBKNU(Z,Fnu,Kode,N,Y,Nz,Tol,Elim,Alim)
       fk = fk + 1.0E0
       tm = ABS(a2)*fk
       IF ( etest<tm ) GOTO 50
-    ENDDO
+    END DO
     Nz = -2
     RETURN
-    50     fk = fk + spi*t1*SQRT(t2/caz)
+    50  fk = fk + spi*t1*SQRT(t2/caz)
     fhs = ABS(0.25E0-dnu2)
-  ENDIF
+  END IF
   100  k = INT( fk )
   !-----------------------------------------------------------------------
   !     BACKWARD RECURRENCE LOOP FOR MILLER ALGORITHM
@@ -287,7 +287,7 @@ SUBROUTINE CBKNU(Z,Fnu,Kode,N,Y,Nz,Tol,Elim,Alim)
     cs = cs + p2
     fks = a1 - fk + 1.0E0
     fk = fk - 1.0E0
-  ENDDO
+  END DO
   !-----------------------------------------------------------------------
   !     COMPUTE (P2/CS)=(P2/ABS(CS))*(CONJG(CS)/ABS(CS)) FOR BETTER
   !     SCALING
@@ -311,7 +311,7 @@ SUBROUTINE CBKNU(Z,Fnu,Kode,N,Y,Nz,Tol,Elim,Alim)
     zd = Z
     IF ( iflag/=1 ) GOTO 400
     GOTO 700
-  ENDIF
+  END IF
   !-----------------------------------------------------------------------
   !     FORWARD RECURSION ON THE THREE TERM RECURSION RELATION WITH
   !     SCALING NEAR EXPONENT EXTREMES ON KFLAG=1 OR KFLAG=3
@@ -354,24 +354,24 @@ SUBROUTINE CBKNU(Z,Fnu,Kode,N,Y,Nz,Tol,Elim,Alim)
             IF ( ic==(i-1) ) GOTO 600
             ic = i
             CYCLE
-          ENDIF
-        ENDIF
+          END IF
+        END IF
         IF ( alas>=helim ) THEN
           xd = xd - Elim
           s1 = s1*celm
           s2 = s2*celm
           zd = CMPLX(xd,yd)
-        ENDIF
-      ENDDO
+        END IF
+      END DO
       IF ( N==1 ) s1 = s2
       GOTO 700
-    ENDIF
+    END IF
   ELSE
     IF ( N==1 ) s1 = s2
     zd = Z
     IF ( iflag/=1 ) GOTO 400
     GOTO 700
-  ENDIF
+  END IF
   300  p1 = csr(kflag)
   ascle = bry(kflag)
   DO i = inub, inu
@@ -394,9 +394,9 @@ SUBROUTINE CBKNU(Z,Fnu,Kode,N,Y,Nz,Tol,Elim,Alim)
         s1 = s1*css(kflag)
         s2 = s2*css(kflag)
         p1 = csr(kflag)
-      ENDIF
-    ENDIF
-  ENDDO
+      END IF
+    END IF
+  END DO
   IF ( N==1 ) s1 = s2
   400  Y(1) = s1*csr(kflag)
   IF ( N==1 ) RETURN
@@ -428,9 +428,9 @@ SUBROUTINE CBKNU(Z,Fnu,Kode,N,Y,Nz,Tol,Elim,Alim)
         s1 = s1*css(kflag)
         s2 = s2*css(kflag)
         p1 = csr(kflag)
-      ENDIF
-    ENDIF
-  ENDDO
+      END IF
+    END IF
+  END DO
   RETURN
   600  kflag = 1
   inub = i + 1

@@ -91,7 +91,7 @@ REAL FUNCTION BESJ1(X)
     xmin = 2.0*R1MACH(1)
     xmax = 1.0/R1MACH(4)
     first = .FALSE.
-  ENDIF
+  END IF
   !
   y = ABS(X)
   IF ( y>4.0 ) THEN
@@ -103,7 +103,7 @@ REAL FUNCTION BESJ1(X)
     theta = y - 3.0*pi4 + CSEVL(z,bth1cs,ntth1)/y
     BESJ1 = SIGN(ampl,X)*COS(theta)
     RETURN
-  ENDIF
+  END IF
   !
   BESJ1 = 0.
   IF ( y==0.0 ) RETURN

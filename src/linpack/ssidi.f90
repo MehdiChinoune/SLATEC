@@ -89,7 +89,7 @@ SUBROUTINE SSIDI(A,Lda,N,Kpvt,Det,Inert,Work,Job)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   INTEGER Lda, N, Job
   REAL A(Lda,*), Work(*)
   REAL Det(2)
@@ -109,12 +109,12 @@ SUBROUTINE SSIDI(A,Lda,N,Kpvt,Det,Inert,Work,Job)
       Inert(1) = 0
       Inert(2) = 0
       Inert(3) = 0
-    ENDIF
+    END IF
     IF ( .NOT.(nodet) ) THEN
       Det(1) = 1.0E0
       Det(2) = 0.0E0
       ten = 10.0E0
-    ENDIF
+    END IF
     t = 0.0E0
     DO k = 1, N
       d = A(k,k)
@@ -135,14 +135,14 @@ SUBROUTINE SSIDI(A,Lda,N,Kpvt,Det,Inert,Work,Job)
         ELSE
           t = ABS(A(k,k+1))
           d = (d/t)*A(k+1,k+1) - t
-        ENDIF
-      ENDIF
+        END IF
+      END IF
       !
       IF ( .NOT.(noert) ) THEN
         IF ( d>0.0E0 ) Inert(1) = Inert(1) + 1
         IF ( d<0.0E0 ) Inert(2) = Inert(2) + 1
         IF ( d==0.0E0 ) Inert(3) = Inert(3) + 1
-      ENDIF
+      END IF
       !
       IF ( .NOT.(nodet) ) THEN
         Det(1) = d*Det(1)
@@ -150,15 +150,15 @@ SUBROUTINE SSIDI(A,Lda,N,Kpvt,Det,Inert,Work,Job)
           DO WHILE ( ABS(Det(1))<1.0E0 )
             Det(1) = ten*Det(1)
             Det(2) = Det(2) - 1.0E0
-          ENDDO
+          END DO
           DO WHILE ( ABS(Det(1))>=ten )
             Det(1) = Det(1)/ten
             Det(2) = Det(2) + 1.0E0
-          ENDDO
-        ENDIF
-      ENDIF
-    ENDDO
-  ENDIF
+          END DO
+        END IF
+      END IF
+    END DO
+  END IF
   !
   !     COMPUTE INVERSE(A)
   !
@@ -183,16 +183,16 @@ SUBROUTINE SSIDI(A,Lda,N,Kpvt,Det,Inert,Work,Job)
           DO j = 1, km1
             A(j,k+1) = SDOT(j,A(1,j),1,Work,1)
             CALL SAXPY(j-1,Work(j),A(1,j),1,A(1,k+1),1)
-          ENDDO
+          END DO
           A(k+1,k+1) = A(k+1,k+1) + SDOT(km1,Work,1,A(1,k+1),1)
           A(k,k+1) = A(k,k+1) + SDOT(km1,A(1,k),1,A(1,k+1),1)
           CALL SCOPY(km1,A(1,k),1,Work,1)
           DO j = 1, km1
             A(j,k) = SDOT(j,A(1,j),1,Work,1)
             CALL SAXPY(j-1,Work(j),A(1,j),1,A(1,k),1)
-          ENDDO
+          END DO
           A(k,k) = A(k,k) + SDOT(km1,Work,1,A(1,k),1)
-        ENDIF
+        END IF
         kstep = 2
       ELSE
         !
@@ -204,11 +204,11 @@ SUBROUTINE SSIDI(A,Lda,N,Kpvt,Det,Inert,Work,Job)
           DO j = 1, km1
             A(j,k) = SDOT(j,A(1,j),1,Work,1)
             CALL SAXPY(j-1,Work(j),A(1,j),1,A(1,k),1)
-          ENDDO
+          END DO
           A(k,k) = A(k,k) + SDOT(km1,Work,1,A(1,k),1)
-        ENDIF
+        END IF
         kstep = 1
-      ENDIF
+      END IF
       !
       !           SWAP
       !
@@ -220,14 +220,14 @@ SUBROUTINE SSIDI(A,Lda,N,Kpvt,Det,Inert,Work,Job)
           temp = A(j,k)
           A(j,k) = A(ks,j)
           A(ks,j) = temp
-        ENDDO
+        END DO
         IF ( kstep/=1 ) THEN
           temp = A(ks,k+1)
           A(ks,k+1) = A(k,k+1)
           A(k,k+1) = temp
-        ENDIF
-      ENDIF
+        END IF
+      END IF
       k = k + kstep
-    ENDDO
-  ENDIF
+    END DO
+  END IF
 END SUBROUTINE SSIDI

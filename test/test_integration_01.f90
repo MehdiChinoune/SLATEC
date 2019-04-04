@@ -41,7 +41,7 @@ CONTAINS
     !
     a = 0.0E0
     b = 5.0E0
-    xint = REAL( (EXP(5.0D0) - 1.D0), 4 )
+    xint = EXP(5.) - 1.
     n = 500
     rn1 = n - 1
     sqb = SQRT(b)
@@ -49,7 +49,7 @@ CONTAINS
     DO i = 1, n
       x(i) = sqb*SQRT(a+(i-1)*(b-a)/rn1) + del
       y(i) = EXP(x(i))
-    ENDDO
+    END DO
     CALL AVINT(x,y,n,a,b,ans,ierr)
     !
     !     See if test was passed.
@@ -57,7 +57,7 @@ CONTAINS
     IF ( ABS(ans-xint)>tol ) THEN
       Ipass = 0
       IF ( Kprint>=3 ) WRITE (Lun,99009) ierr, ans, xint
-    ENDIF
+    END IF
     !
     !     Perform second accuracy test.
     !
@@ -75,7 +75,7 @@ CONTAINS
     IF ( ABS(ans-xint)>tol1 ) THEN
       Ipass = 0
       IF ( Kprint>=3 ) WRITE (Lun,99009) ierr, ans, xint
-    ENDIF
+    END IF
     !
     !     Send message indicating passage or failure of tests.
     !
@@ -86,8 +86,8 @@ CONTAINS
       ELSE
         WRITE (Lun,99003)
         99003 FORMAT (/' AVINT failed at least one accuracy test.')
-      ENDIF
-    ENDIF
+      END IF
+    END IF
     !
     !     Test error returns.
     !
@@ -96,18 +96,18 @@ CONTAINS
       CALL XSETF(0)
     ELSE
       CALL XSETF(1)
-    ENDIF
+    END IF
     fatal = .FALSE.
     CALL XERCLR
     !
     IF ( Kprint>=3 ) THEN
       WRITE (Lun,99004)
       99004 FORMAT (/' Test error returns from AVINT'/' 4 error messages expected'/)
-    ENDIF
+    END IF
     DO i = 1, 20
       x(i) = (i-1)/19.0E0 - 0.01E0
       IF ( i/=1 ) y(i) = x(i)/(EXP(x(i))-1.0)
-    ENDDO
+    END DO
     !
     !     Test IERR = 1 error return.
     !
@@ -117,7 +117,7 @@ CONTAINS
       Ipass = 0
       fatal = .TRUE.
       IF ( Kprint>=3 ) WRITE (Lun,99010) ierr, 1
-    ENDIF
+    END IF
     CALL XERCLR
     !
     !     Test IERR = 2 error return.
@@ -127,12 +127,12 @@ CONTAINS
       Ipass = 0
       fatal = .TRUE.
       IF ( Kprint>=3 ) WRITE (Lun,99010) ierr, 2
-    ENDIF
+    END IF
     IF ( ans/=0.0E0 ) THEN
       Ipass = 0
       fatal = .TRUE.
       IF ( Kprint>=3 ) WRITE (Lun,99011)
-    ENDIF
+    END IF
     CALL XERCLR
     !
     !     Test IERR = 5 error return.
@@ -142,12 +142,12 @@ CONTAINS
       Ipass = 0
       fatal = .TRUE.
       IF ( Kprint>=3 ) WRITE (Lun,99010) ierr, 5
-    ENDIF
+    END IF
     IF ( ans/=0.0E0 ) THEN
       Ipass = 0
       fatal = .TRUE.
       IF ( Kprint>=3 ) WRITE (Lun,99011)
-    ENDIF
+    END IF
     CALL XERCLR
     !
     !     Test IERR = 4 error return.
@@ -159,12 +159,12 @@ CONTAINS
       Ipass = 0
       fatal = .TRUE.
       IF ( Kprint>=3 ) WRITE (Lun,99010) ierr, 4
-    ENDIF
+    END IF
     IF ( ans/=0.0E0 ) THEN
       Ipass = 0
       fatal = .TRUE.
       IF ( Kprint>=3 ) WRITE (Lun,99011)
-    ENDIF
+    END IF
     CALL XERCLR
     !
     !     Test IERR = 3 error return.
@@ -176,12 +176,12 @@ CONTAINS
       Ipass = 0
       fatal = .TRUE.
       IF ( Kprint>=3 ) WRITE (Lun,99010) ierr, 3
-    ENDIF
+    END IF
     IF ( ans/=0.0E0 ) THEN
       Ipass = 0
       fatal = .TRUE.
       IF ( Kprint>=3 ) WRITE (Lun,99011)
-    ENDIF
+    END IF
     CALL XERCLR
     !
     !     Reset XERMSG control variables and write summary.
@@ -191,11 +191,11 @@ CONTAINS
       IF ( Kprint>=2 ) THEN
         WRITE (Lun,99005)
         99005 FORMAT (/' At least one incorrect argument test FAILED')
-      ENDIF
+      END IF
     ELSEIF ( Kprint>=3 ) THEN
       WRITE (Lun,99006)
       99006 FORMAT (/' All incorrect argument tests PASSED')
-    ENDIF
+    END IF
     !
     !     Write PASS/FAIL message.
     !
@@ -266,7 +266,7 @@ CONTAINS
     ELSE
       Ipass = 0
       IF ( Kprint>=2 ) WRITE (Lun,99004) 'FAILED', a, b, ans, cor, err, ierr
-    ENDIF
+    END IF
     !
     !     Second accuracy test.
     !
@@ -280,7 +280,7 @@ CONTAINS
     ELSE
       Ipass = 0
       IF ( Kprint>=2 ) WRITE (Lun,99004) 'FAILED', a, b, ans, cor, err, ierr
-    ENDIF
+    END IF
     !
     !     Test error returns.
     !
@@ -289,7 +289,7 @@ CONTAINS
       CALL XSETF(0)
     ELSE
       CALL XSETF(1)
-    ENDIF
+    END IF
     fatal = .FALSE.
     !
     IF ( Kprint>=3 ) WRITE (Lun,FMT=99005)
@@ -311,7 +311,7 @@ CONTAINS
       IF ( Kprint>=2 ) WRITE (Lun,FMT=99006) 'PASSED', req, ans, ierr, err, cor
       Ipass = 0
       fatal = .TRUE.
-    ENDIF
+    END IF
     !
     !     Test GAUS8 with A and B nearly equal.
     !
@@ -330,18 +330,18 @@ CONTAINS
       Ipass = 0
       fatal = .TRUE.
       IF ( Kprint>=2 ) WRITE (Lun,99007) 'FAILED'
-    ENDIF
+    END IF
     !
     CALL XSETF(kontrl)
     IF ( fatal ) THEN
       IF ( Kprint>=2 ) THEN
         WRITE (Lun,99001)
         99001 FORMAT (/' At least one incorrect argument test FAILED')
-      ENDIF
+      END IF
     ELSEIF ( Kprint>=3 ) THEN
       WRITE (Lun,99002)
       99002 FORMAT (/' All incorrect argument tests PASSED')
-    ENDIF
+    END IF
     !
     IF ( Ipass==1.AND.Kprint>=3 ) WRITE (Lun,FMT=99008)
     IF ( Ipass==0.AND.Kprint>=2 ) WRITE (Lun,FMT=99009)
@@ -416,7 +416,7 @@ CONTAINS
     ELSE
       Ipass = 0
       IF ( Kprint>=2 ) WRITE (Lun,99004) 'FAILED', a, b, ans, cor, err, ierr, nfct
-    ENDIF
+    END IF
     !
     !     Second accuracy test.
     !
@@ -430,7 +430,7 @@ CONTAINS
     ELSE
       Ipass = 0
       IF ( Kprint>=2 ) WRITE (Lun,99004) 'FAILED', a, b, ans, cor, err, ierr, nfct
-    ENDIF
+    END IF
     !
     !     Test error returns.
     !
@@ -439,7 +439,7 @@ CONTAINS
       CALL XSETF(0)
     ELSE
       CALL XSETF(1)
-    ENDIF
+    END IF
     fatal = .FALSE.
     !
     IF ( Kprint>=3 ) WRITE (Lun,FMT=99005)
@@ -461,7 +461,7 @@ CONTAINS
       IF ( Kprint>=2 ) WRITE (Lun,FMT=99006) 'FAILED', req, ans, ierr, err, cor
       Ipass = 0
       fatal = .TRUE.
-    ENDIF
+    END IF
     !
     !     Test QNC79 with A and B nearly equal.
     !
@@ -480,18 +480,18 @@ CONTAINS
       Ipass = 0
       fatal = .TRUE.
       IF ( Kprint>=2 ) WRITE (Lun,99007) 'FAILED'
-    ENDIF
+    END IF
     !
     CALL XSETF(kontrl)
     IF ( fatal ) THEN
       IF ( Kprint>=2 ) THEN
         WRITE (Lun,99001)
         99001 FORMAT (/' At least one incorrect argument test FAILED')
-      ENDIF
+      END IF
     ELSEIF ( Kprint>=3 ) THEN
       WRITE (Lun,99002)
       99002 FORMAT (/' All incorrect argument tests PASSED')
-    ENDIF
+    END IF
     !
     IF ( Ipass==1.AND.Kprint>=3 ) WRITE (Lun,FMT=99008)
     IF ( Ipass==0.AND.Kprint>=2 ) WRITE (Lun,FMT=99009)
@@ -635,7 +635,7 @@ PROGRAM TEST41
     CALL XSETF(0)
   ELSE
     CALL XSETF(1)
-  ENDIF
+  END IF
   !
   !     Test AVINT
   !
@@ -661,6 +661,6 @@ PROGRAM TEST41
     WRITE (lun,99002) nfail
     99002 FORMAT (/' ************* WARNING -- ',I5,&
       ' TEST(S) FAILED IN PROGRAM TEST41 *************')
-  ENDIF
+  END IF
   STOP
 END PROGRAM TEST41

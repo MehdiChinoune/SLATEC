@@ -83,7 +83,7 @@ SUBROUTINE CPBFA(Abd,Lda,N,M,Info)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   INTEGER Lda, N, M, Info
   COMPLEX Abd(Lda,*)
   !
@@ -105,12 +105,12 @@ SUBROUTINE CPBFA(Abd,Lda,N,M,Info)
         s = s + REAL(t*CONJG(t))
         ik = ik - 1
         jk = jk + 1
-      ENDDO
-    ENDIF
+      END DO
+    END IF
     s = REAL(Abd(M+1,j)) - s
     IF ( s<=0.0E0.OR.AIMAG(Abd(M+1,j))/=0.0E0 ) RETURN
     Abd(M+1,j) = CMPLX(SQRT(s),0.0E0)
-  ENDDO
+  END DO
   Info = 0
   RETURN
 END SUBROUTINE CPBFA

@@ -49,7 +49,7 @@ SUBROUTINE CROTG(Ca,Cb,C,S)
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
-  
+
   COMPLEX Ca, Cb, S
   REAL C
   REAL norm, scale
@@ -66,5 +66,5 @@ SUBROUTINE CROTG(Ca,Cb,C,S)
     C = ABS(Ca)/norm
     S = alpha*CONJG(Cb)/norm
     Ca = alpha*norm
-  ENDIF
+  END IF
 END SUBROUTINE CROTG

@@ -985,7 +985,7 @@ SUBROUTINE DDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
     !     ARE EITHER ZERO OR ONE.
     DO i = 2, 11
       IF ( Info(i)/=0.AND.Info(i)/=1 ) GOTO 400
-    ENDDO
+    END DO
     !
     IF ( Neq<=0 ) THEN
       !
@@ -1003,8 +1003,8 @@ SUBROUTINE DDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
           WRITE (xern1,'(I8)') mxord
           CALL XERMSG('SLATEC','DDASSL','MAXORD = '//xern1//' NOT IN RANGE',3,1)
           GOTO 1200
-        ENDIF
-      ENDIF
+        END IF
+      END IF
       Iwork(LMXORD) = mxord
       !
       !     COMPUTE MTYPE,LENPD,LENRW.CHECK ML AND MU.
@@ -1015,7 +1015,7 @@ SUBROUTINE DDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
           Iwork(LMTYPE) = 1
         ELSE
           Iwork(LMTYPE) = 2
-        ENDIF
+        END IF
       ELSEIF ( Iwork(LML)<0.OR.Iwork(LML)>=Neq ) THEN
         !
         WRITE (xern1,'(I8)') Iwork(LML)
@@ -1038,8 +1038,8 @@ SUBROUTINE DDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
           mband = Iwork(LML) + Iwork(LMU) + 1
           msave = (Neq/mband) + 1
           lenrw = 40 + (Iwork(LMXORD)+4)*Neq + lenpd + 2*msave
-        ENDIF
-      ENDIF
+        END IF
+      END IF
       !
       !     CHECK LENGTHS OF RWORK AND IWORK
       leniw = 20 + Neq
@@ -1071,8 +1071,8 @@ SUBROUTINE DDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
             WRITE (xern3,'(1P,D15.6)') hmax
             CALL XERMSG('SLATEC','DDASSL','HMAX = '//xern3//' .LT. 0.0',10,1)
             GOTO 1200
-          ENDIF
-        ENDIF
+          END IF
+        END IF
         !
         !     INITIALIZE COUNTERS
         Iwork(LNST) = 0
@@ -1081,8 +1081,8 @@ SUBROUTINE DDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
         !
         Iwork(LNSTL) = 0
         Idid = 1
-      ENDIF
-    ENDIF
+      END IF
+    END IF
     !
     !-----------------------------------------------------------------------
     !     THIS BLOCK IS FOR CONTINUATION CALLS
@@ -1105,7 +1105,7 @@ SUBROUTINE DDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
       'THE LAST STEP TERMINATED WITH A NEGATIVE VALUE OF IDID = '&
       //xern1//' AND NO APPROPRIATE ACTION WAS TAKEN.  RUN TERMINATED',-998,2)
     RETURN
-  ENDIF
+  END IF
   !
   !-----------------------------------------------------------------------
   !     THIS BLOCK IS EXECUTED ON ALL CALLS.
@@ -1124,7 +1124,7 @@ SUBROUTINE DDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
     IF ( rtoli>0.0D0.OR.atoli>0.0D0 ) nzflg = 1
     IF ( rtoli<0.0D0 ) GOTO 500
     IF ( atoli<0.0D0 ) GOTO 600
-  ENDDO
+  END DO
   IF ( nzflg==0 ) THEN
     !
     CALL XERMSG('SLATEC','DDASSL','ALL ELEMENTS OF RTOL AND ATOL ARE ZERO',8,1)
@@ -1155,7 +1155,7 @@ SUBROUTINE DDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
       IF ( Info(7)/=0 ) THEN
         rh = ABS(h)/Rwork(LHMAX)
         IF ( rh>1.0D0 ) h = h/rh
-      ENDIF
+      END IF
       IF ( T==Tout ) GOTO 1100
       IF ( (T-Tout)*h>0.0D0 ) GOTO 800
       IF ( Info(4)==1 ) THEN
@@ -1174,9 +1174,9 @@ SUBROUTINE DDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
               T = tn
               Idid = 1
               done = .TRUE.
-            ENDIF
+            END IF
             GOTO 20
-          ENDIF
+          END IF
         ELSE
           tstop = Rwork(LTSTOP)
           IF ( (tn-tstop)*h>0.0D0 ) GOTO 1000
@@ -1187,21 +1187,21 @@ SUBROUTINE DDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
             Idid = 3
             done = .TRUE.
             GOTO 20
-          ENDIF
-        ENDIF
+          END IF
+        END IF
         !     CHECK WHETHER WE ARE WITHIN ROUNDOFF OF TSTOP
         IF ( ABS(tn-tstop)>100.0D0*uround*(ABS(tn)+ABS(h)) ) THEN
           tnext = tn + h
           IF ( (tnext-tstop)*h>0.0D0 ) THEN
             h = tstop - tn
             Rwork(LH) = h
-          ENDIF
+          END IF
         ELSE
           CALL DDATRP(tn,tstop,Y,Yprime,Neq,Iwork(LKOLD),Rwork(lphi),Rwork(LPSI))
           Idid = 2
           T = tstop
           done = .TRUE.
-        ENDIF
+        END IF
       ELSEIF ( Info(3)==1 ) THEN
         IF ( (tn-T)*h>0.0D0 ) THEN
           IF ( (tn-Tout)*h>0.0D0 ) THEN
@@ -1214,16 +1214,16 @@ SUBROUTINE DDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
             T = tn
             Idid = 1
             done = .TRUE.
-          ENDIF
-        ENDIF
+          END IF
+        END IF
       ELSEIF ( (tn-Tout)*h>=0.0D0 ) THEN
         CALL DDATRP(tn,Tout,Y,Yprime,Neq,Iwork(LKOLD),Rwork(lphi),Rwork(LPSI))
         T = Tout
         Idid = 3
         done = .TRUE.
-      ENDIF
+      END IF
       !
-      20       IF ( done ) GOTO 300
+      20  IF ( done ) GOTO 300
     ELSE
       !
       !-----------------------------------------------------------------------
@@ -1240,7 +1240,7 @@ SUBROUTINE DDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
       CALL DDAWTS(Neq,Info(2),Rtol,Atol,Y,Rwork(lwt),Rpar,Ipar)
       DO i = 1, Neq
         IF ( Rwork(lwt+i-1)<=0.0D0 ) GOTO 900
-      ENDDO
+      END DO
       !
       !     COMPUTE UNIT ROUNDOFF AND HMIN
       uround = D1MACH(4)
@@ -1274,20 +1274,20 @@ SUBROUTINE DDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
             !
             CALL XERMSG('SLATEC','DDASSL','INFO(8)=1 AND H0=0.0',12,1)
             GOTO 1200
-          ENDIF
-        ENDIF
+          END IF
+        END IF
         !     ADJUST HO IF NECESSARY TO MEET HMAX BOUND
         IF ( Info(7)/=0 ) THEN
           rh = ABS(ho)/Rwork(LHMAX)
           IF ( rh>1.0D0 ) ho = ho/rh
-        ENDIF
+        END IF
         !     COMPUTE TSTOP, IF APPLICABLE
         IF ( Info(4)/=0 ) THEN
           tstop = Rwork(LTSTOP)
           IF ( (tstop-T)*ho<0.0D0 ) GOTO 1000
           IF ( (T+ho-tstop)*ho>0.0D0 ) ho = tstop - T
           IF ( (tstop-Tout)*ho<0.0D0 ) GOTO 700
-        ENDIF
+        END IF
         !
         !     COMPUTE INITIAL DERIVATIVE, UPDATING TN AND Y, IF APPLICABLE
         IF ( Info(11)/=0 ) THEN
@@ -1295,7 +1295,7 @@ SUBROUTINE DDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
             Rwork(lphi),Rwork(LDELTA),Rwork(le),Rwork(lwm),&
             Iwork(LIWM),hmin,Rwork(LROUND),Info(10),ntemp)
           IF ( Idid<0 ) GOTO 100
-        ENDIF
+        END IF
         !
         !     LOAD H WITH HO.  STORE H IN RWORK(LH)
         h = ho
@@ -1307,10 +1307,10 @@ SUBROUTINE DDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
           Rwork(lphi+i-1) = Y(i)
           Rwork(itemp+i-1) = h*Yprime(i)
           !
-        ENDDO
-      ENDIF
-    ENDIF
-  ENDIF
+        END DO
+      END IF
+    END IF
+  END IF
   !
   !-------------------------------------------------------
   !     THE NEXT BLOCK CONTAINS THE CALL TO THE
@@ -1335,8 +1335,8 @@ SUBROUTINE DDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
         IF ( Rwork(i+lwt-1)<=0.0D0 ) THEN
           Idid = -3
           GOTO 200
-        ENDIF
-      ENDDO
+        END IF
+      END DO
       !
       !     TEST FOR TOO MUCH ACCURACY REQUESTED.
       r = DDANRM(Neq,Rwork(lphi),Rwork(lwt),Rpar,Ipar)*100.0D0*uround
@@ -1349,7 +1349,7 @@ SUBROUTINE DDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
         IF ( Info(7)/=0 ) THEN
           rh = ABS(h)/Rwork(LHMAX)
           IF ( rh>1.0D0 ) h = h/rh
-        ENDIF
+        END IF
         !
         CALL DDASTP(tn,Y,Yprime,Neq,RES,JAC,h,Rwork(lwt),Info(1),Idid,Rpar,&
           Ipar,Rwork(lphi),Rwork(LDELTA),Rwork(le),Rwork(lwm),&
@@ -1362,17 +1362,17 @@ SUBROUTINE DDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
         DO i = 1, Neq
           Rtol(i) = r*Rtol(i)
           Atol(i) = r*Atol(i)
-        ENDDO
+        END DO
         Idid = -2
       ELSE
         Rtol(1) = r*Rtol(1)
         Atol(1) = r*Atol(1)
         Idid = -2
-      ENDIF
+      END IF
     ELSE
       Idid = -1
-    ENDIF
-  ENDIF
+    END IF
+  END IF
   200 CONTINUE
   IF ( Idid<0 ) THEN
     !
@@ -1478,7 +1478,7 @@ SUBROUTINE DDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
       ELSE
         T = tn
         Idid = 1
-      ENDIF
+      END IF
     ELSEIF ( (tn-Tout)*h<0.0D0 ) THEN
       IF ( ABS(tn-tstop)<=100.0D0*uround*(ABS(tn)+ABS(h)) ) THEN
         CALL DDATRP(tn,tstop,Y,Yprime,Neq,Iwork(LKOLD),Rwork(lphi),Rwork(LPSI))
@@ -1488,12 +1488,12 @@ SUBROUTINE DDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
         tnext = tn + h
         IF ( (tnext-tstop)*h>0.0D0 ) h = tstop - tn
         GOTO 100
-      ENDIF
+      END IF
     ELSE
       CALL DDATRP(tn,Tout,Y,Yprime,Neq,Iwork(LKOLD),Rwork(lphi),Rwork(LPSI))
       T = Tout
       Idid = 3
-    ENDIF
+    END IF
   ELSEIF ( Info(3)/=0 ) THEN
     IF ( (tn-Tout)*h>=0.0D0 ) THEN
       CALL DDATRP(tn,Tout,Y,Yprime,Neq,Iwork(LKOLD),Rwork(lphi),Rwork(LPSI))
@@ -1502,13 +1502,13 @@ SUBROUTINE DDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
     ELSE
       T = tn
       Idid = 1
-    ENDIF
+    END IF
   ELSE
     IF ( (tn-Tout)*h<0.0D0 ) GOTO 100
     CALL DDATRP(tn,Tout,Y,Yprime,Neq,Iwork(LKOLD),Rwork(lphi),Rwork(LPSI))
     Idid = 3
     T = Tout
-  ENDIF
+  END IF
   !
   !--------------------------------------------------------
   !     ALL SUCCESSFUL RETURNS FROM DDASSL ARE MADE FROM

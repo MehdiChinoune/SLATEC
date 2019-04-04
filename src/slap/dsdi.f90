@@ -94,6 +94,6 @@ SUBROUTINE DSDI(N,B,X,Nelt,Ia,Ja,A,Isym,Rwork,Iwork)
   locd = Iwork(4) - 1
   DO i = 1, N
     X(i) = Rwork(locd+i)*B(i)
-  ENDDO
+  END DO
   !------------- LAST LINE OF DSDI FOLLOWS ----------------------------
 END SUBROUTINE DSDI

@@ -44,7 +44,7 @@ SUBROUTINE SCOPYM(N,Sx,Incx,Sy,Incy)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920310  Corrected definition of LX in DESCRIPTION.  (WRB)
-  
+
   INTEGER i, Incx, Incy, ix, iy, m, mp1, N, ns
   REAL Sx(*), Sy(*)
   !* FIRST EXECUTABLE STATEMENT  SCOPYM
@@ -61,9 +61,9 @@ SUBROUTINE SCOPYM(N,Sx,Incx,Sy,Incy)
       IF ( m/=0 ) THEN
         DO i = 1, m
           Sy(i) = -Sx(i)
-        ENDDO
+        END DO
         IF ( N<7 ) RETURN
-      ENDIF
+      END IF
       GOTO 100
     ELSE
       !
@@ -72,10 +72,10 @@ SUBROUTINE SCOPYM(N,Sx,Incx,Sy,Incy)
       ns = N*Incx
       DO i = 1, ns, Incx
         Sy(i) = -Sx(i)
-      ENDDO
+      END DO
       RETURN
-    ENDIF
-  ENDIF
+    END IF
+  END IF
   !
   !     Code for unequal or nonpositive increments.
   !
@@ -87,7 +87,7 @@ SUBROUTINE SCOPYM(N,Sx,Incx,Sy,Incy)
     Sy(iy) = -Sx(ix)
     ix = ix + Incx
     iy = iy + Incy
-  ENDDO
+  END DO
   RETURN
   100  mp1 = m + 1
   DO i = mp1, N, 7
@@ -98,6 +98,6 @@ SUBROUTINE SCOPYM(N,Sx,Incx,Sy,Incy)
     Sy(i+4) = -Sx(i+4)
     Sy(i+5) = -Sx(i+5)
     Sy(i+6) = -Sx(i+6)
-  ENDDO
+  END DO
   RETURN
 END SUBROUTINE SCOPYM

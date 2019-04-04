@@ -76,7 +76,7 @@ SUBROUTINE DPPFA(Ap,N,Info)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   INTEGER N, Info
   REAL(8) :: Ap(*)
   !
@@ -99,13 +99,13 @@ SUBROUTINE DPPFA(Ap,N,Info)
         t = t/Ap(kk)
         Ap(kj) = t
         s = s + t*t
-      ENDDO
-    ENDIF
+      END DO
+    END IF
     jj = jj + j
     s = Ap(jj) - s
     IF ( s<=0.0D0 ) RETURN
     Ap(jj) = SQRT(s)
-  ENDDO
+  END DO
   Info = 0
   RETURN
 END SUBROUTINE DPPFA

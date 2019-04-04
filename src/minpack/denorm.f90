@@ -79,7 +79,7 @@ REAL(8) FUNCTION DENORM(N,X)
       ELSE
         s3 = one + s3*(x3max/xabs)**2
         x3max = xabs
-      ENDIF
+      END IF
       !
       !              SUM FOR LARGE COMPONENTS.
       !
@@ -88,8 +88,8 @@ REAL(8) FUNCTION DENORM(N,X)
     ELSE
       s1 = one + s1*(x1max/xabs)**2
       x1max = xabs
-    ENDIF
-  ENDDO
+    END IF
+  END DO
   !
   !     CALCULATION OF NORM.
   !
@@ -100,7 +100,7 @@ REAL(8) FUNCTION DENORM(N,X)
   ELSE
     IF ( s2>=x3max ) DENORM = SQRT(s2*(one+(x3max/s2)*(x3max*s3)))
     IF ( s2<x3max ) DENORM = SQRT(x3max*((s2/x3max)+(x3max*s3)))
-  ENDIF
+  END IF
   !
   !     LAST CARD OF FUNCTION DENORM.
   !

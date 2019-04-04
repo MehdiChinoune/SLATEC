@@ -48,14 +48,14 @@ SUBROUTINE MPNZR(Rs,Re,Z,Trunc)
         is = i - 1
         IF ( R(i)>0 ) GOTO 100
         ! FRACTION ZERO
-      ENDDO
+      END DO
     ELSE
       WRITE (LUN,99001)
       99001 FORMAT (' *** SIGN NOT 0, +1 OR -1 IN CALL TO MPNZR,',&
         ' POSSIBLE OVERWRITING PROBLEM ***')
       CALL MPERR
-    ENDIF
-  ENDIF
+    END IF
+  END IF
   ! STORE ZERO IN Z
   Z(1) = 0
   RETURN
@@ -67,12 +67,12 @@ SUBROUTINE MPNZR(Rs,Re,Z,Trunc)
     DO j = 1, i2m
       k = j + is
       R(j) = R(k)
-    ENDDO
+    END DO
     i2p = i2m + 1
     DO j = i2p, i2
       R(j) = 0
-    ENDDO
-  ENDIF
+    END DO
+  END IF
   ! CHECK TO SEE IF TRUNCATION IS DESIRED
   IF ( Trunc==0 ) THEN
     ! SEE IF ROUNDING NECESSARY
@@ -84,7 +84,7 @@ SUBROUTINE MPNZR(Rs,Re,Z,Trunc)
         it = T + i
         IF ( R(it)<b2 ) EXIT
         IF ( R(it)/=b2 ) GOTO 150
-      ENDDO
+      END DO
       GOTO 200
     ELSE
       ! B EVEN.  ROUND IF R(T+1).GE.B2 UNLESS R(T) ODD AND ALL ZEROS
@@ -93,9 +93,9 @@ SUBROUTINE MPNZR(Rs,Re,Z,Trunc)
       IF ( R(T+1)==b2 ) THEN
         IF ( MOD(R(T),2)/=0 ) THEN
           IF ( (R(T+2)+R(T+3)+R(T+4))==0 ) GOTO 200
-        ENDIF
-      ENDIF
-    ENDIF
+        END IF
+      END IF
+    END IF
     ! ROUND
     150 CONTINUE
     DO j = 1, T
@@ -103,11 +103,11 @@ SUBROUTINE MPNZR(Rs,Re,Z,Trunc)
       R(i) = R(i) + 1
       IF ( R(i)<B ) GOTO 200
       R(i) = 0
-    ENDDO
+    END DO
     ! EXCEPTIONAL CASE, ROUNDED UP TO .10000...
     Re = Re + 1
     R(1) = 1
-  ENDIF
+  END IF
   ! CHECK FOR OVERFLOW
   200 CONTINUE
   IF ( Re>M ) THEN
@@ -120,12 +120,12 @@ SUBROUTINE MPNZR(Rs,Re,Z,Trunc)
     ! UNDERFLOW HERE
     CALL MPUNFL(Z)
     RETURN
-  ENDIF
+  END IF
   ! STORE RESULT IN Z
   Z(1) = Rs
   Z(2) = Re
   DO i = 1, T
     Z(i+2) = R(i)
-  ENDDO
+  END DO
   RETURN
 END SUBROUTINE MPNZR

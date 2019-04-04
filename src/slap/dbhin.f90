@@ -160,7 +160,7 @@ SUBROUTINE DBHIN(N,Nelt,Ia,Ja,A,Isym,Soln,Rhs,Iunit,Job)
   !   921007  Corrected description of input format.  (FNF)
   !   921208  Added Implementation Note and code to zero out SOLN.  (FNF)
   !   930701  Updated CATEGORY section.  (FNF, WRB)
-  
+
   !     .. Scalar Arguments ..
   INTEGER Isym, Iunit, Job, N, Nelt
   !     .. Array Arguments ..
@@ -198,12 +198,12 @@ SUBROUTINE DBHIN(N,Nelt,Ia,Ja,A,Isym,Soln,Rhs,Iunit,Job)
     N = nrow
     jobret = -1
     GOTO 100
-  ENDIF
+  END IF
   IF ( nind>Nelt ) THEN
     Nelt = nind
     jobret = -2
     GOTO 100
-  ENDIF
+  END IF
   !
   !         Set the parameters.
   !
@@ -216,14 +216,14 @@ SUBROUTINE DBHIN(N,Nelt,Ia,Ja,A,Isym,Soln,Rhs,Iunit,Job)
   ELSE
     jobret = -3
     GOTO 100
-  ENDIF
+  END IF
   READ (Iunit,pntfmt) (Ja(i),i=1,N+1)
   READ (Iunit,rinfmt) (Ia(i),i=1,Nelt)
   jobret = 10
   IF ( nnvls>0 ) THEN
     READ (Iunit,nvlfmt) (A(i),i=1,Nelt)
     jobret = 0
-  ENDIF
+  END IF
   IF ( MOD(Job,2)==1 ) THEN
     !
     !         User requests that the RHS be read in.  If it is in the input
@@ -235,9 +235,9 @@ SUBROUTINE DBHIN(N,Nelt,Ia,Ja,A,Isym,Soln,Rhs,Iunit,Job)
     ELSE
       DO i = 1, N
         Rhs(i) = 0
-      ENDDO
-    ENDIF
-  ENDIF
+      END DO
+    END IF
+  END IF
   IF ( (Job==2).OR.(Job==3) ) THEN
     !
     !         User requests that the SOLN be read in.
@@ -245,8 +245,8 @@ SUBROUTINE DBHIN(N,Nelt,Ia,Ja,A,Isym,Soln,Rhs,Iunit,Job)
     !
     DO i = 1, N
       Soln(i) = 0
-    ENDDO
-  ENDIF
+    END DO
+  END IF
   !
   !         Now loop through the IA array making sure that the diagonal
   !         matrix element appears first in the column.  Then sort the
@@ -270,8 +270,8 @@ SUBROUTINE DBHIN(N,Nelt,Ia,Ja,A,Isym,Soln,Rhs,Iunit,Job)
         A(i) = A(ibgn)
         A(ibgn) = temp
         EXIT
-      ENDIF
-    ENDDO
+      END IF
+    END DO
     ibgn = ibgn + 1
     IF ( ibgn<iend ) THEN
       DO i = ibgn, iend
@@ -283,11 +283,11 @@ SUBROUTINE DBHIN(N,Nelt,Ia,Ja,A,Isym,Soln,Rhs,Iunit,Job)
             temp = A(i)
             A(i) = A(j)
             A(j) = temp
-          ENDIF
-        ENDDO
-      ENDDO
-    ENDIF
-  ENDDO
+          END IF
+        END DO
+      END DO
+    END IF
+  END DO
   !
   !         Set return flag.
   100  Job = jobret

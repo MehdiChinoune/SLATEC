@@ -59,7 +59,7 @@ SUBROUTINE CDNTL(Eps,F,FA,Hmax,Hold,Impl,Jtask,Matdim,Maxord,Mint,Miter,&
     IF ( Jtask==0 ) THEN
       CALL CDCST(Maxord,Mint,Iswflg,El,Tq)
       Rmax = RMINIT
-    ENDIF
+    END IF
     Rc = 0.E0
     Convrg = .FALSE.
     Trend = 1.E0
@@ -69,7 +69,7 @@ SUBROUTINE CDNTL(Eps,F,FA,Hmax,Hold,Impl,Jtask,Matdim,Maxord,Mint,Miter,&
     IF ( N==0 ) THEN
       Jstate = 6
       RETURN
-    ENDIF
+    END IF
     Nfe = Nfe + 1
     IF ( Impl/=0 ) THEN
       IF ( Miter==3 ) THEN
@@ -78,112 +78,112 @@ SUBROUTINE CDNTL(Eps,F,FA,Hmax,Hold,Impl,Jtask,Matdim,Maxord,Mint,Miter,&
         IF ( iflag==-1 ) THEN
           Ier = .TRUE.
           RETURN
-        ENDIF
+        END IF
         IF ( N==0 ) THEN
           Jstate = 10
           RETURN
-        ENDIF
+        END IF
       ELSEIF ( Impl==1 ) THEN
         IF ( Miter==1.OR.Miter==2 ) THEN
           CALL FA(N,T,Y,A,Matdim,Ml,Mu,Nde)
           IF ( N==0 ) THEN
             Jstate = 9
             RETURN
-          ENDIF
+          END IF
           CALL CGEFA(A,Matdim,N,Ipvt,info)
           IF ( info/=0 ) THEN
             Ier = .TRUE.
             RETURN
-          ENDIF
+          END IF
           CALL CGESL(A,Matdim,N,Ipvt,Save2,0)
         ELSEIF ( Miter==4.OR.Miter==5 ) THEN
           CALL FA(N,T,Y,A(Ml+1,1),Matdim,Ml,Mu,Nde)
           IF ( N==0 ) THEN
             Jstate = 9
             RETURN
-          ENDIF
+          END IF
           CALL CGBFA(A,Matdim,N,Ml,Mu,Ipvt,info)
           IF ( info/=0 ) THEN
             Ier = .TRUE.
             RETURN
-          ENDIF
+          END IF
           CALL CGBSL(A,Matdim,N,Ml,Mu,Ipvt,Save2,0)
-        ENDIF
+        END IF
       ELSEIF ( Impl==2 ) THEN
         CALL FA(N,T,Y,A,Matdim,Ml,Mu,Nde)
         IF ( N==0 ) THEN
           Jstate = 9
           RETURN
-        ENDIF
+        END IF
         DO i = 1, Nde
           IF ( A(i,1)==0.E0 ) THEN
             Ier = .TRUE.
             RETURN
           ELSE
             Save2(i) = Save2(i)/A(i,1)
-          ENDIF
-        ENDDO
+          END IF
+        END DO
         DO i = Nde + 1, N
           A(i,1) = 0.E0
-        ENDDO
+        END DO
       ELSEIF ( Impl==3 ) THEN
         IF ( Miter==1.OR.Miter==2 ) THEN
           CALL FA(N,T,Y,A,Matdim,Ml,Mu,Nde)
           IF ( N==0 ) THEN
             Jstate = 9
             RETURN
-          ENDIF
+          END IF
           CALL CGEFA(A,Matdim,Nde,Ipvt,info)
           IF ( info/=0 ) THEN
             Ier = .TRUE.
             RETURN
-          ENDIF
+          END IF
           CALL CGESL(A,Matdim,Nde,Ipvt,Save2,0)
         ELSEIF ( Miter==4.OR.Miter==5 ) THEN
           CALL FA(N,T,Y,A(Ml+1,1),Matdim,Ml,Mu,Nde)
           IF ( N==0 ) THEN
             Jstate = 9
             RETURN
-          ENDIF
+          END IF
           CALL CGBFA(A,Matdim,Nde,Ml,Mu,Ipvt,info)
           IF ( info/=0 ) THEN
             Ier = .TRUE.
             RETURN
-          ENDIF
+          END IF
           CALL CGBSL(A,Matdim,Nde,Ml,Mu,Ipvt,Save2,0)
-        ENDIF
-      ENDIF
-    ENDIF
+        END IF
+      END IF
+    END IF
     DO i = 1, Nde
       Save1(i) = Save2(i)/MAX(1.E0,ABS(Ywt(i)))
-    ENDDO
+    END DO
     sum = SCNRM2(Nde,Save1,1)/SQRT(REAL(Nde))
     IF ( sum>Eps/ABS(H) ) H = SIGN(Eps/sum,H)
     DO i = 1, N
       Yh(i,2) = H*Save2(i)
-    ENDDO
+    END DO
     IF ( Miter==2.OR.Miter==5.OR.Iswflg==3 ) THEN
       DO i = 1, N
         Fac(i) = SQRT(Uround)
-      ENDDO
-    ENDIF
+      END DO
+    END IF
   ELSE
     IF ( Miter/=Mtrold ) THEN
       Mtrold = Miter
       Rc = 0.E0
       Convrg = .FALSE.
-    ENDIF
+    END IF
     IF ( Mint/=Mntold ) THEN
       Mntold = Mint
       oldl0 = El(1,Nq)
       CALL CDCST(Maxord,Mint,Iswflg,El,Tq)
       Rc = Rc*El(1,Nq)/oldl0
       Nwait = Nq + 2
-    ENDIF
+    END IF
     IF ( H/=Hold ) THEN
       Nwait = Nq + 2
       Rh = H/Hold
       CALL CDSCL(Hmax,N,Nq,Rmax,Hold,Rc,Rh,Yh)
-    ENDIF
-  ENDIF
+    END IF
+  END IF
 END SUBROUTINE CDNTL

@@ -73,7 +73,7 @@ SUBROUTINE CTRCO(T,Ldt,N,Rcond,Z,Job)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   INTEGER Ldt, N, Job
   COMPLEX T(Ldt,*), Z(*)
   REAL Rcond
@@ -97,7 +97,7 @@ SUBROUTINE CTRCO(T,Ldt,N,Rcond,Z,Job)
     i1 = 1
     IF ( lower ) i1 = j
     tnorm = MAX(tnorm,SCASUM(l,T(i1,j),1))
-  ENDDO
+  END DO
   !
   !     RCOND = 1/(NORM(T)*(ESTIMATE OF NORM(INVERSE(T)))) .
   !     ESTIMATE = NORM(Z)/NORM(Y) WHERE  T*Z = Y  AND  CTRANS(T)*Y = E .
@@ -111,7 +111,7 @@ SUBROUTINE CTRCO(T,Ldt,N,Rcond,Z,Job)
   ek = (1.0E0,0.0E0)
   DO j = 1, N
     Z(j) = (0.0E0,0.0E0)
-  ENDDO
+  END DO
   DO kk = 1, N
     k = kk
     IF ( lower ) k = N + 1 - kk
@@ -120,7 +120,7 @@ SUBROUTINE CTRCO(T,Ldt,N,Rcond,Z,Job)
       s = CABS1(T(k,k))/CABS1(ek-Z(k))
       CALL CSSCAL(N,s,Z,1)
       ek = CMPLX(s,0.0E0)*ek
-    ENDIF
+    END IF
     wk = ek - Z(k)
     wkm = -ek - Z(k)
     s = CABS1(wk)
@@ -131,7 +131,7 @@ SUBROUTINE CTRCO(T,Ldt,N,Rcond,Z,Job)
     ELSE
       wk = wk/CONJG(T(k,k))
       wkm = wkm/CONJG(T(k,k))
-    ENDIF
+    END IF
     IF ( kk/=N ) THEN
       j1 = k + 1
       IF ( lower ) j1 = 1
@@ -141,17 +141,17 @@ SUBROUTINE CTRCO(T,Ldt,N,Rcond,Z,Job)
         sm = sm + CABS1(Z(j)+wkm*CONJG(T(k,j)))
         Z(j) = Z(j) + wk*CONJG(T(k,j))
         s = s + CABS1(Z(j))
-      ENDDO
+      END DO
       IF ( s<sm ) THEN
         w = wkm - wk
         wk = wkm
         DO j = j1, j2
           Z(j) = Z(j) + w*CONJG(T(k,j))
-        ENDDO
-      ENDIF
-    ENDIF
+        END DO
+      END IF
+    END IF
     Z(k) = wk
-  ENDDO
+  END DO
   s = 1.0E0/SCASUM(N,Z,1)
   CALL CSSCAL(N,s,Z,1)
   !
@@ -166,7 +166,7 @@ SUBROUTINE CTRCO(T,Ldt,N,Rcond,Z,Job)
       s = CABS1(T(k,k))/CABS1(Z(k))
       CALL CSSCAL(N,s,Z,1)
       ynorm = s*ynorm
-    ENDIF
+    END IF
     IF ( CABS1(T(k,k))/=0.0E0 ) Z(k) = Z(k)/T(k,k)
     IF ( CABS1(T(k,k))==0.0E0 ) Z(k) = (1.0E0,0.0E0)
     i1 = 1
@@ -174,8 +174,8 @@ SUBROUTINE CTRCO(T,Ldt,N,Rcond,Z,Job)
     IF ( kk<N ) THEN
       w = -Z(k)
       CALL CAXPY(N-kk,w,T(i1,k),1,Z(i1),1)
-    ENDIF
-  ENDDO
+    END IF
+  END DO
   !     MAKE ZNORM = 1.0
   s = 1.0E0/SCASUM(N,Z,1)
   CALL CSSCAL(N,s,Z,1)

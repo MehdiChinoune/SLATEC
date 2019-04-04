@@ -68,7 +68,7 @@ SUBROUTINE BSPPP(T,A,N,K,Ldc,C,Xi,Lxi,Work)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   !
   INTEGER ileft, inev, K, Ldc, Lxi, N, nk
   REAL A(*), C(Ldc,*), T(*), Work(*), Xi(*)
@@ -84,7 +84,7 @@ SUBROUTINE BSPPP(T,A,N,K,Ldc,C,Xi,Lxi,Work)
   ELSEIF ( Ldc<K ) THEN
     CALL XERMSG('SLATEC','BSPPP','LDC DOES NOT SATISFY LDC.GE.K',2,1)
     RETURN
-  ENDIF
+  END IF
   CALL BSPDR(T,A,N,K,K,Work)
   Lxi = 0
   Xi(1) = T(K)
@@ -95,7 +95,7 @@ SUBROUTINE BSPPP(T,A,N,K,Ldc,C,Xi,Lxi,Work)
       Lxi = Lxi + 1
       Xi(Lxi+1) = T(ileft+1)
       CALL BSPEV(T,Work(1),N,K,K,Xi(Lxi),inev,C(1,Lxi),Work(nk))
-    ENDIF
-  ENDDO
+    END IF
+  END DO
   RETURN
 END SUBROUTINE BSPPP

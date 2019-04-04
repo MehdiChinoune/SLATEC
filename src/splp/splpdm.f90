@@ -65,7 +65,7 @@ SUBROUTINE SPLPDM(Mrelas,Nvars,Lmx,Lbm,Nredc,Info,Iopt,Ibasis,Imat,Ibrc,&
         Basmat(nzbm) = one
       ELSE
         Basmat(nzbm) = -one
-      ENDIF
+      END IF
       Ibrc(nzbm,1) = j - Nvars
       Ibrc(nzbm,2) = k
     ELSE
@@ -82,11 +82,11 @@ SUBROUTINE SPLPDM(Mrelas,Nvars,Lmx,Lbm,Nredc,Info,Iopt,Ibasis,Imat,Ibrc,&
           Ibrc(nzbm,1) = i
           Ibrc(nzbm,2) = k
           CYCLE
-        ENDIF
+        END IF
         EXIT
-      ENDDO
-    ENDIF
-  ENDDO
+      END DO
+    END IF
+  END DO
   !
   Singlr = .FALSE.
   !
@@ -114,5 +114,5 @@ SUBROUTINE SPLPDM(Mrelas,Nvars,Lmx,Lbm,Nredc,Info,Iopt,Ibasis,Imat,Ibrc,&
     CALL XERMSG('SLATEC','SPLPDM','IN SPLP, LA05AS RETURNED ERROR FLAG = '//&
       xern3,27,Iopt)
     Info = -27
-  ENDIF
+  END IF
 END SUBROUTINE SPLPDM

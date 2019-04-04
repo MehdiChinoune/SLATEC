@@ -123,7 +123,7 @@ SUBROUTINE SPBCO(Abd,Lda,N,M,Rcond,Z,Info)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   INTEGER Lda, N, M, Info
   REAL Abd(Lda,*), Z(*)
   REAL Rcond
@@ -144,13 +144,13 @@ SUBROUTINE SPBCO(Abd,Lda,N,M,Rcond,Z,Info)
       DO i = mu, M
         k = k + 1
         Z(k) = Z(k) + ABS(Abd(i,j))
-      ENDDO
-    ENDIF
-  ENDDO
+      END DO
+    END IF
+  END DO
   anorm = 0.0E0
   DO j = 1, N
     anorm = MAX(anorm,Z(j))
-  ENDDO
+  END DO
   !
   !     FACTOR
   !
@@ -168,14 +168,14 @@ SUBROUTINE SPBCO(Abd,Lda,N,M,Rcond,Z,Info)
     ek = 1.0E0
     DO j = 1, N
       Z(j) = 0.0E0
-    ENDDO
+    END DO
     DO k = 1, N
       IF ( Z(k)/=0.0E0 ) ek = SIGN(ek,-Z(k))
       IF ( ABS(ek-Z(k))>Abd(M+1,k) ) THEN
         s = Abd(M+1,k)/ABS(ek-Z(k))
         CALL SSCAL(N,s,Z,1)
         ek = s*ek
-      ENDIF
+      END IF
       wk = ek - Z(k)
       wkm = -ek - Z(k)
       s = ABS(wk)
@@ -191,7 +191,7 @@ SUBROUTINE SPBCO(Abd,Lda,N,M,Rcond,Z,Info)
           sm = sm + ABS(Z(j)+wkm*Abd(i,j))
           Z(j) = Z(j) + wk*Abd(i,j)
           s = s + ABS(Z(j))
-        ENDDO
+        END DO
         IF ( s<sm ) THEN
           t = wkm - wk
           wk = wkm
@@ -199,11 +199,11 @@ SUBROUTINE SPBCO(Abd,Lda,N,M,Rcond,Z,Info)
           DO j = kp1, j2
             i = i - 1
             Z(j) = Z(j) + t*Abd(i,j)
-          ENDDO
-        ENDIF
-      ENDIF
+          END DO
+        END IF
+      END IF
       Z(k) = wk
-    ENDDO
+    END DO
     s = 1.0E0/SASUM(N,Z,1)
     CALL SSCAL(N,s,Z,1)
     !
@@ -214,14 +214,14 @@ SUBROUTINE SPBCO(Abd,Lda,N,M,Rcond,Z,Info)
       IF ( ABS(Z(k))>Abd(M+1,k) ) THEN
         s = Abd(M+1,k)/ABS(Z(k))
         CALL SSCAL(N,s,Z,1)
-      ENDIF
+      END IF
       Z(k) = Z(k)/Abd(M+1,k)
       lm = MIN(k-1,M)
       la = M + 1 - lm
       lb = k - lm
       t = -Z(k)
       CALL SAXPY(lm,t,Abd(la,k),1,Z(lb),1)
-    ENDDO
+    END DO
     s = 1.0E0/SASUM(N,Z,1)
     CALL SSCAL(N,s,Z,1)
     !
@@ -238,9 +238,9 @@ SUBROUTINE SPBCO(Abd,Lda,N,M,Rcond,Z,Info)
         s = Abd(M+1,k)/ABS(Z(k))
         CALL SSCAL(N,s,Z,1)
         ynorm = s*ynorm
-      ENDIF
+      END IF
       Z(k) = Z(k)/Abd(M+1,k)
-    ENDDO
+    END DO
     s = 1.0E0/SASUM(N,Z,1)
     CALL SSCAL(N,s,Z,1)
     ynorm = s*ynorm
@@ -253,14 +253,14 @@ SUBROUTINE SPBCO(Abd,Lda,N,M,Rcond,Z,Info)
         s = Abd(M+1,k)/ABS(Z(k))
         CALL SSCAL(N,s,Z,1)
         ynorm = s*ynorm
-      ENDIF
+      END IF
       Z(k) = Z(k)/Abd(M+1,k)
       lm = MIN(k-1,M)
       la = M + 1 - lm
       lb = k - lm
       t = -Z(k)
       CALL SAXPY(lm,t,Abd(la,k),1,Z(lb),1)
-    ENDDO
+    END DO
     !        MAKE ZNORM = 1.0
     s = 1.0E0/SASUM(N,Z,1)
     CALL SSCAL(N,s,Z,1)
@@ -268,5 +268,5 @@ SUBROUTINE SPBCO(Abd,Lda,N,M,Rcond,Z,Info)
     !
     IF ( anorm/=0.0E0 ) Rcond = ynorm/anorm
     IF ( anorm==0.0E0 ) Rcond = 0.0E0
-  ENDIF
+  END IF
 END SUBROUTINE SPBCO

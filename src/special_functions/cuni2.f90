@@ -80,7 +80,7 @@ SUBROUTINE CUNI2(Z,Fnu,Kode,N,Y,Nz,Nlast,Fnul,Tol,Elim,Alim)
     zb = CONJG(zb)
     cid = -cid
     c2 = CONJG(c2)
-  ENDIF
+  END IF
   !-----------------------------------------------------------------------
   !     CHECK FOR UNDERFLOW AND OVERFLOW ON FIRST MEMBER
   !-----------------------------------------------------------------------
@@ -91,16 +91,16 @@ SUBROUTINE CUNI2(Z,Fnu,Kode,N,Y,Nz,Nlast,Fnul,Tol,Elim,Alim)
   ELSE
     cfn = CMPLX(Fnu,0.0E0)
     s1 = -zeta1 + cfn*(cfn/(zb+zeta2))
-  ENDIF
+  END IF
   rs1 = REAL(s1)
   IF ( ABS(rs1)>Elim ) THEN
     IF ( rs1>0.0E0 ) GOTO 400
     Nz = N
     DO i = 1, N
       Y(i) = czero
-    ENDDO
+    END DO
     RETURN
-  ENDIF
+  END IF
   100  nn = MIN(2,nd)
   DO i = 1, nn
     fn = Fnu + (nd-i)
@@ -111,7 +111,7 @@ SUBROUTINE CUNI2(Z,Fnu,Kode,N,Y,Nz,Nlast,Fnul,Tol,Elim,Alim)
       cfn = CMPLX(fn,0.0E0)
       ay = ABS(yy)
       s1 = -zeta1 + cfn*(cfn/(zb+zeta2)) + CMPLX(0.0E0,ay)
-    ENDIF
+    END IF
     !-----------------------------------------------------------------------
     !     TEST FOR UNDERFLOW AND OVERFLOW
     !-----------------------------------------------------------------------
@@ -130,8 +130,8 @@ SUBROUTINE CUNI2(Z,Fnu,Kode,N,Y,Nz,Nlast,Fnul,Tol,Elim,Alim)
       IF ( i==1 ) iflag = 1
       IF ( rs1>=0.0E0 ) THEN
         IF ( i==1 ) iflag = 3
-      ENDIF
-    ENDIF
+      END IF
+    END IF
     !-----------------------------------------------------------------------
     !     SCALE S1 TO KEEP INTERMEDIATE ARITHMETIC ON SCALE NEAR
     !     EXPONENT EXTREMES
@@ -147,14 +147,14 @@ SUBROUTINE CUNI2(Z,Fnu,Kode,N,Y,Nz,Nlast,Fnul,Tol,Elim,Alim)
     IF ( iflag==1 ) THEN
       CALL CUCHK(s2,nw,bry(1),Tol)
       IF ( nw/=0 ) GOTO 300
-    ENDIF
+    END IF
     IF ( yy<=0.0E0 ) s2 = CONJG(s2)
     j = nd - i + 1
     s2 = s2*c2
     cy(i) = s2
     Y(j) = s2*csr(iflag)
     c2 = c2*cid
-  ENDDO
+  END DO
   IF ( nd>2 ) THEN
     rz = CMPLX(2.0E0,0.0E0)/Z
     bry(2) = 1.0E0/bry(1)
@@ -187,10 +187,10 @@ SUBROUTINE CUNI2(Z,Fnu,Kode,N,Y,Nz,Nlast,Fnul,Tol,Elim,Alim)
           s1 = s1*css(iflag)
           s2 = s2*css(iflag)
           c1 = csr(iflag)
-        ENDIF
-      ENDIF
-    ENDDO
-  ENDIF
+        END IF
+      END IF
+    END DO
+  END IF
   200  RETURN
   300 CONTINUE
   IF ( rs1<=0.0E0 ) THEN
@@ -222,9 +222,9 @@ SUBROUTINE CUNI2(Z,Fnu,Kode,N,Y,Nz,Nlast,Fnul,Tol,Elim,Alim)
         c2 = zar*cip(in)
         IF ( yy<=0.0E0 ) c2 = CONJG(c2)
         GOTO 100
-      ENDIF
-    ENDIF
-  ENDIF
+      END IF
+    END IF
+  END IF
   400  Nz = -1
   RETURN
 END SUBROUTINE CUNI2

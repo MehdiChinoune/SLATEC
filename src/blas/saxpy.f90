@@ -55,7 +55,7 @@ SUBROUTINE SAXPY(N,Sa,Sx,Incx,Sy,Incy)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920310  Corrected definition of LX in DESCRIPTION.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   INTEGER i, Incx, Incy, ix, iy, m, mp1, N, ns
   REAL Sx(*), Sy(*), Sa
   !* FIRST EXECUTABLE STATEMENT  SAXPY
@@ -72,9 +72,9 @@ SUBROUTINE SAXPY(N,Sa,Sx,Incx,Sy,Incy)
       IF ( m/=0 ) THEN
         DO i = 1, m
           Sy(i) = Sy(i) + Sa*Sx(i)
-        ENDDO
+        END DO
         IF ( N<4 ) RETURN
-      ENDIF
+      END IF
       GOTO 100
     ELSE
       !
@@ -83,10 +83,10 @@ SUBROUTINE SAXPY(N,Sa,Sx,Incx,Sy,Incy)
       ns = N*Incx
       DO i = 1, ns, Incx
         Sy(i) = Sa*Sx(i) + Sy(i)
-      ENDDO
+      END DO
       RETURN
-    ENDIF
-  ENDIF
+    END IF
+  END IF
   !
   !     Code for unequal or nonpositive increments.
   !
@@ -98,7 +98,7 @@ SUBROUTINE SAXPY(N,Sa,Sx,Incx,Sy,Incy)
     Sy(iy) = Sy(iy) + Sa*Sx(ix)
     ix = ix + Incx
     iy = iy + Incy
-  ENDDO
+  END DO
   RETURN
   100  mp1 = m + 1
   DO i = mp1, N, 4
@@ -106,6 +106,6 @@ SUBROUTINE SAXPY(N,Sa,Sx,Incx,Sy,Incy)
     Sy(i+1) = Sy(i+1) + Sa*Sx(i+1)
     Sy(i+2) = Sy(i+2) + Sa*Sx(i+2)
     Sy(i+3) = Sy(i+3) + Sa*Sx(i+3)
-  ENDDO
+  END DO
   RETURN
 END SUBROUTINE SAXPY

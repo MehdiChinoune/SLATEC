@@ -113,7 +113,7 @@ SUBROUTINE SSD2S(N,Nelt,Ia,Ja,A,Isym,Dinv)
   !   920511  Added complete declaration section.  (WRB)
   !   921113  Corrected C***CATEGORY line.  (FNF)
   !   930701  Updated CATEGORY section.  (FNF, WRB)
-  
+
   !     .. Scalar Arguments ..
   INTEGER Isym, N, Nelt
   !     .. Array Arguments ..
@@ -124,7 +124,7 @@ SUBROUTINE SSD2S(N,Nelt,Ia,Ja,A,Isym,Dinv)
   !* FIRST EXECUTABLE STATEMENT  SSD2S
   DO i = 1, N
     Dinv(i) = 0
-  ENDDO
+  END DO
   !
   !         Loop over each column.
   !VD$R NOCONCUR
@@ -139,7 +139,7 @@ SUBROUTINE SSD2S(N,Nelt,Ia,Ja,A,Isym,Dinv)
     !VD$ NODEPCHK
     DO k = kbgn, kend
       Dinv(Ia(k)) = Dinv(Ia(k)) + A(k)**2
-    ENDDO
+    END DO
     IF ( Isym==1 ) THEN
       !
       !         Lower triangle stored by columns => upper triangle stored by
@@ -149,13 +149,13 @@ SUBROUTINE SSD2S(N,Nelt,Ia,Ja,A,Isym,Dinv)
       IF ( kbgn<=kend ) THEN
         DO k = kbgn, kend
           Dinv(i) = Dinv(i) + A(k)**2
-        ENDDO
-      ENDIF
-    ENDIF
-  ENDDO
+        END DO
+      END IF
+    END IF
+  END DO
   DO i = 1, N
     Dinv(i) = 1.0E0/Dinv(i)
-  ENDDO
+  END DO
   !
   !------------- LAST LINE OF SSD2S FOLLOWS ----------------------------
 END SUBROUTINE SSD2S

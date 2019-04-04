@@ -98,10 +98,10 @@ SUBROUTINE DPJAC(Neq,Y,Yh,Nyh,Ewt,Ftem,Savf,Wm,Iwm,DF,DJAC,Rpar,Ipar)
         CALL DF(TN,Y,Ftem,Rpar,Ipar)
         DO i = 1, N
           Wm(i+j1) = (Ftem(i)-Savf(i))*fac
-        ENDDO
+        END DO
         Y(j) = yj
         j1 = j1 + N
-      ENDDO
+      END DO
       NFE = NFE + N
     CASE (3)
       !              IF MITER = 3, CONSTRUCT A DIAGONAL APPROXIMATION TO J AND
@@ -111,7 +111,7 @@ SUBROUTINE DPJAC(Neq,Y,Yh,Nyh,Ewt,Ftem,Savf,Wm,Iwm,DF,DJAC,Rpar,Ipar)
       r = EL0*0.1D0
       DO i = 1, N
         Y(i) = Y(i) + r*(H*Savf(i)-Yh(i,2))
-      ENDDO
+      END DO
       CALL DF(TN,Y,Wm(3),Rpar,Ipar)
       NFE = NFE + 1
       DO i = 1, N
@@ -122,8 +122,8 @@ SUBROUTINE DPJAC(Neq,Y,Yh,Nyh,Ewt,Ftem,Savf,Wm,Iwm,DF,DJAC,Rpar,Ipar)
           !           .........EXIT
           IF ( ABS(di)==0.0D0 ) GOTO 100
           Wm(i+2) = 0.1D0*r0/di
-        ENDIF
-      ENDDO
+        END IF
+      END DO
       !     .........EXIT
       RETURN
     CASE (4)
@@ -137,12 +137,12 @@ SUBROUTINE DPJAC(Neq,Y,Yh,Nyh,Ewt,Ftem,Savf,Wm,Iwm,DF,DJAC,Rpar,Ipar)
       lenp = meband*N
       DO i = 1, lenp
         Wm(i+2) = 0.0D0
-      ENDDO
+      END DO
       CALL DJAC(TN,Y,Wm(ml3),meband,Rpar,Ipar)
       con = -hl0
       DO i = 1, lenp
         Wm(i+2) = Wm(i+2)*con
-      ENDDO
+      END DO
       !        ...EXIT
       GOTO 200
     CASE (5)
@@ -163,7 +163,7 @@ SUBROUTINE DPJAC(Neq,Y,Yh,Nyh,Ewt,Ftem,Savf,Wm,Iwm,DF,DJAC,Rpar,Ipar)
           yi = Y(i)
           r = MAX(srur*ABS(yi),r0*Ewt(i))
           Y(i) = Y(i) + r
-        ENDDO
+        END DO
         CALL DF(TN,Y,Ftem,Rpar,Ipar)
         DO jj = j, N, mband
           Y(jj) = Yh(jj,1)
@@ -175,9 +175,9 @@ SUBROUTINE DPJAC(Neq,Y,Yh,Nyh,Ewt,Ftem,Savf,Wm,Iwm,DF,DJAC,Rpar,Ipar)
           ii = jj*meb1 - ml + 2
           DO i = i1, i2
             Wm(ii+i) = (Ftem(i)-Savf(i))*fac
-          ENDDO
-        ENDDO
-      ENDDO
+          END DO
+        END DO
+      END DO
       NFE = NFE + mba
       GOTO 200
     CASE DEFAULT
@@ -186,13 +186,13 @@ SUBROUTINE DPJAC(Neq,Y,Yh,Nyh,Ewt,Ftem,Savf,Wm,Iwm,DF,DJAC,Rpar,Ipar)
       lenp = N*N
       DO i = 1, lenp
         Wm(i+2) = 0.0D0
-      ENDDO
+      END DO
       CALL DJAC(TN,Y,Wm(3),N,Rpar,Ipar)
       con = -hl0
       DO i = 1, lenp
         Wm(i+2) = Wm(i+2)*con
         !              ...EXIT
-      ENDDO
+      END DO
   END SELECT
   !              ADD IDENTITY MATRIX.
   !              -------------------------------------------------
@@ -200,7 +200,7 @@ SUBROUTINE DPJAC(Neq,Y,Yh,Nyh,Ewt,Ftem,Savf,Wm,Iwm,DF,DJAC,Rpar,Ipar)
   DO i = 1, N
     Wm(j) = Wm(j) + 1.0D0
     j = j + (N+1)
-  ENDDO
+  END DO
   !              DO LU DECOMPOSITION ON P.
   !              --------------------------------------------
   CALL DGEFA(Wm(3),N,N,Iwm(21),IER)
@@ -215,7 +215,7 @@ SUBROUTINE DPJAC(Neq,Y,Yh,Nyh,Ewt,Ftem,Savf,Wm,Iwm,DF,DJAC,Rpar,Ipar)
   DO i = 1, N
     Wm(ii) = Wm(ii) + 1.0D0
     ii = ii + meband
-  ENDDO
+  END DO
   !        DO LU DECOMPOSITION OF P.
   !        --------------------------------------------
   CALL DGBFA(Wm(3),meband,N,ml,mu,Iwm(21),IER)

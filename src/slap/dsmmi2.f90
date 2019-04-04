@@ -164,7 +164,7 @@ SUBROUTINE DSMMI2(N,B,X,Il,Jl,L,Dinv,Iu,Ju,U)
   !   920511  Added complete declaration section.  (WRB)
   !   921113  Corrected C***CATEGORY line.  (FNF)
   !   930701  Updated CATEGORY section.  (FNF, WRB)
-  
+
   !     .. Scalar Arguments ..
   INTEGER N
   !     .. Array Arguments ..
@@ -178,7 +178,7 @@ SUBROUTINE DSMMI2(N,B,X,Il,Jl,L,Dinv,Iu,Ju,U)
   !
   DO i = 1, N
     X(i) = B(i)
-  ENDDO
+  END DO
   DO irow = 2, N
     jbgn = Il(irow)
     jend = Il(irow+1) - 1
@@ -189,14 +189,14 @@ SUBROUTINE DSMMI2(N,B,X,Il,Jl,L,Dinv,Iu,Ju,U)
       !VD$ NODEPCHK
       DO j = jbgn, jend
         X(irow) = X(irow) - L(j)*X(Jl(j))
-      ENDDO
-    ENDIF
-  ENDDO
+      END DO
+    END IF
+  END DO
   !
   !         Solve  D*Z = Y,  storing result in X.
   DO i = 1, N
     X(i) = X(i)*Dinv(i)
-  ENDDO
+  END DO
   !
   !         Solve  U*X = Z, U stored by columns.
   DO icol = N, 2, -1
@@ -208,9 +208,9 @@ SUBROUTINE DSMMI2(N,B,X,Il,Jl,L,Dinv,Iu,Ju,U)
       !VD$ NODEPCHK
       DO j = jbgn, jend
         X(Iu(j)) = X(Iu(j)) - U(j)*X(icol)
-      ENDDO
-    ENDIF
-  ENDDO
+      END DO
+    END IF
+  END DO
   !
   !         Solve  U'*Y = X,  storing result in X, U stored by columns.
   DO irow = 2, N
@@ -223,14 +223,14 @@ SUBROUTINE DSMMI2(N,B,X,Il,Jl,L,Dinv,Iu,Ju,U)
       !VD$ NODEPCHK
       DO j = jbgn, jend
         X(irow) = X(irow) - U(j)*X(Iu(j))
-      ENDDO
-    ENDIF
-  ENDDO
+      END DO
+    END IF
+  END DO
   !
   !         Solve  D*Z = Y,  storing result in X.
   DO i = 1, N
     X(i) = X(i)*Dinv(i)
-  ENDDO
+  END DO
   !
   !         Solve  L'*X = Z, L stored by rows.
   DO icol = N, 2, -1
@@ -242,9 +242,9 @@ SUBROUTINE DSMMI2(N,B,X,Il,Jl,L,Dinv,Iu,Ju,U)
       !VD$ NODEPCHK
       DO j = jbgn, jend
         X(Jl(j)) = X(Jl(j)) - L(j)*X(icol)
-      ENDDO
-    ENDIF
-  ENDDO
+      END DO
+    END IF
+  END DO
   !
   !------------- LAST LINE OF DSMMI2 FOLLOWS ----------------------------
 END SUBROUTINE DSMMI2

@@ -83,7 +83,7 @@ SUBROUTINE BAKVEC(Nm,N,T,E,M,Z,Ierr)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   !
   INTEGER i, j, M, N, Nm, Ierr
   REAL T(Nm,3), E(*), Z(Nm,*)
@@ -100,21 +100,21 @@ SUBROUTINE BAKVEC(Nm,N,T,E,M,Z,Ierr)
         ELSE
           IF ( T(i,1)/=0.0E0.OR.T(i-1,3)/=0.0E0 ) GOTO 50
           E(i) = 1.0E0
-        ENDIF
-      ENDDO
+        END IF
+      END DO
       !
       DO j = 1, M
         !
         DO i = 2, N
           Z(i,j) = Z(i,j)*E(i)
-        ENDDO
+        END DO
         !
-      ENDDO
-    ENDIF
+      END DO
+    END IF
     RETURN
     !     .......... SET ERROR -- EIGENVECTORS CANNOT BE
     !                FOUND BY THIS PROGRAM ..........
-    50     Ierr = 2*N + i
-  ENDIF
+    50  Ierr = 2*N + i
+  END IF
   RETURN
 END SUBROUTINE BAKVEC

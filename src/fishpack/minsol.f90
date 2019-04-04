@@ -51,8 +51,8 @@ SUBROUTINE MINSOL(Usol,Idmn,Zn,Zm,Pertb)
       jj = j - JS + 1
       ete = ete + Zm(ii)*Zn(jj)
       ute = ute + Usol(i,j)*Zm(ii)*Zn(jj)
-    ENDDO
-  ENDDO
+    END DO
+  END DO
   !
   !     SET PERTURBATION PARAMETER
   !
@@ -63,6 +63,6 @@ SUBROUTINE MINSOL(Usol,Idmn,Zn,Zm,Pertb)
   DO i = istr, ifnl
     DO j = jstr, jfnl
       Usol(i,j) = Usol(i,j) - pertrb
-    ENDDO
-  ENDDO
+    END DO
+  END DO
 END SUBROUTINE MINSOL

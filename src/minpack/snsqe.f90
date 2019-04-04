@@ -372,14 +372,14 @@ SUBROUTINE SNSQE(FCN,JAC,Iopt,N,X,Fvec,Tol,Nprint,Info,Wa,Lwa)
     mode = 2
     DO j = 1, N
       Wa(j) = one
-    ENDDO
+    END DO
     lr = (N*(N+1))/2
     index = 6*N + lr
     CALL SNSQ(FCN,JAC,Iopt,N,X,Fvec,Wa(index+1),N,xtol,maxfev,ml,mu,epsfcn,&
       Wa(1),mode,factor,Nprint,Info,nfev,njev,Wa(6*N+1),lr,Wa(N+1),&
       Wa(2*N+1),Wa(3*N+1),Wa(4*N+1),Wa(5*N+1))
     IF ( Info==5 ) Info = 4
-  ENDIF
+  END IF
   IF ( Info==0 ) CALL XERMSG('SLATEC','SNSQE','INVALID INPUT PARAMETER.',2,1)
   !
   !     LAST CARD OF SUBROUTINE SNSQE.

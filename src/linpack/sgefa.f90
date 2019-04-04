@@ -68,7 +68,7 @@ SUBROUTINE SGEFA(A,Lda,N,Ipvt,Info)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   INTEGER Lda, N, Ipvt(*), Info
   REAL A(Lda,*)
   !
@@ -101,7 +101,7 @@ SUBROUTINE SGEFA(A,Lda,N,Ipvt,Info)
           t = A(l,k)
           A(l,k) = A(k,k)
           A(k,k) = t
-        ENDIF
+        END IF
         !
         !           COMPUTE MULTIPLIERS
         !
@@ -115,12 +115,12 @@ SUBROUTINE SGEFA(A,Lda,N,Ipvt,Info)
           IF ( l/=k ) THEN
             A(l,j) = A(k,j)
             A(k,j) = t
-          ENDIF
+          END IF
           CALL SAXPY(N-k,t,A(k+1,k),1,A(k+1,j),1)
-        ENDDO
-      ENDIF
-    ENDDO
-  ENDIF
+        END DO
+      END IF
+    END DO
+  END IF
   Ipvt(N) = N
   IF ( A(N,N)==0.0E0 ) Info = N
 END SUBROUTINE SGEFA

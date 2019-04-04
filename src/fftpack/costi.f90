@@ -72,6 +72,6 @@ SUBROUTINE COSTI(N,Wsave)
     fk = fk + 1.
     Wsave(k) = 2.*SIN(fk*dt)
     Wsave(kc) = 2.*COS(fk*dt)
-  ENDDO
+  END DO
   CALL RFFTI(nm1,Wsave(N+1))
 END SUBROUTINE COSTI

@@ -134,9 +134,9 @@ SUBROUTINE CHIEV(A,Lda,N,E,V,Ldv,Work,Job,Info)
           m = 1 + j*2*Ldv
           k = 1 + j*2*Lda
           CALL SCOPY(2*N,A(k),1,A(m),1)
-        ENDDO
-      ENDIF
-    ENDIF
+        END DO
+      END IF
+    END IF
     !
     !     FILL IN LOWER TRIANGLE OF A, COLUMN BY COLUMN.
     !
@@ -147,7 +147,7 @@ SUBROUTINE CHIEV(A,Lda,N,E,V,Ldv,Work,Job,Info)
       IF ( A(k+1)/=0.0 ) RETURN
       CALL SCOPY(N-j+1,A(k),mdim,A(k),2)
       CALL SCOPYM(N-j+1,A(k+1),mdim,A(k+1),2)
-    ENDDO
+    END DO
     !
     !     SEPARATE REAL AND IMAGINARY PARTS
     !
@@ -157,7 +157,7 @@ SUBROUTINE CHIEV(A,Lda,N,E,V,Ldv,Work,Job,Info)
       CALL SCOPY(N,A(k+1),2,Work(1),1)
       CALL SCOPY(N,A(k),2,A(k),1)
       CALL SCOPY(N,Work(1),1,A(l),1)
-    ENDDO
+    END DO
     !
     !    REDUCE A TO TRIDIAGONAL MATRIX.
     !
@@ -171,10 +171,10 @@ SUBROUTINE CHIEV(A,Lda,N,E,V,Ldv,Work,Job,Info)
         m = k + N - 1
         DO i = k, m
           V(i) = 0.
-        ENDDO
+        END DO
         i = k + j - 1
         V(i) = 1.
-      ENDDO
+      END DO
       CALL IMTQL2(mdim,N,E,Work(1),V,Info)
       IF ( Info/=0 ) RETURN
       CALL HTRIBK(mdim,N,A(1),A(N+1),Work(2*N+1),N,V(1),V(N+1))
@@ -188,7 +188,7 @@ SUBROUTINE CHIEV(A,Lda,N,E,V,Ldv,Work,Job,Info)
         CALL SCOPY(N,V(k),1,Work(1),1)
         CALL SCOPY(N,V(l),1,V(i+1),2)
         CALL SCOPY(N,Work(1),1,V(i),2)
-      ENDDO
+      END DO
       RETURN
     ELSE
       !
@@ -196,8 +196,8 @@ SUBROUTINE CHIEV(A,Lda,N,E,V,Ldv,Work,Job,Info)
       !
       CALL TQLRAT(N,E,Work(N+1),Info)
       RETURN
-    ENDIF
-  ENDIF
+    END IF
+  END IF
   !
   !     TAKE CARE OF N=1 CASE.
   !

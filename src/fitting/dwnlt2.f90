@@ -41,7 +41,7 @@ LOGICAL FUNCTION DWNLT2(Me,Mend,Ir,Factor,Tau,Scale,Wic)
   !   790701  DATE WRITTEN
   !   890620  Code extracted from WNLIT and made a subroutine.  (RWC))
   !   900604  DP version created from SP version.  (RWC)
-  
+
   REAL(8) :: Factor, Scale(*), Tau, Wic(*)
   INTEGER Ir, Me, Mend
   !
@@ -60,7 +60,7 @@ LOGICAL FUNCTION DWNLT2(Me,Mend,Ir,Factor,Tau,Scale,Wic)
       sn = sn + t
     ELSE
       rn = rn + t
-    ENDIF
-  ENDDO
+    END IF
+  END DO
   DWNLT2 = rn>sn*Tau**2
 END FUNCTION DWNLT2

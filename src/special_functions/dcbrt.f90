@@ -58,7 +58,7 @@ REAL(8) FUNCTION DCBRT(X)
   DO iter = 1, niter
     cbrtsq = DCBRT*DCBRT
     DCBRT = DCBRT + (y-DCBRT*cbrtsq)/(3.D0*cbrtsq)
-  ENDDO
+  END DO
   !
   DCBRT = D9PAK(cbrt2(irem)*SIGN(DCBRT,X),ixpnt)
   !

@@ -113,7 +113,7 @@ SUBROUTINE SSMTV(N,X,Y,Nelt,Ia,Ja,A,Isym)
   !   910411  Prologue converted to Version 4.0 format.  (BAB)
   !   920511  Added complete declaration section.  (WRB)
   !   930701  Updated CATEGORY section.  (FNF, WRB)
-  
+
   !     .. Scalar Arguments ..
   INTEGER Isym, N, Nelt
   !     .. Array Arguments ..
@@ -127,7 +127,7 @@ SUBROUTINE SSMTV(N,X,Y,Nelt,Ia,Ja,A,Isym)
   !
   DO i = 1, N
     Y(i) = 0
-  ENDDO
+  END DO
   !
   !         Multiply by A-Transpose.
   !         A-Transpose is stored by rows...
@@ -138,8 +138,8 @@ SUBROUTINE SSMTV(N,X,Y,Nelt,Ia,Ja,A,Isym)
     !VD$ ASSOC
     DO i = ibgn, iend
       Y(irow) = Y(irow) + A(i)*X(Ia(i))
-    ENDDO
-  ENDDO
+    END DO
+  END DO
   !
   IF ( Isym==1 ) THEN
     !
@@ -156,9 +156,9 @@ SUBROUTINE SSMTV(N,X,Y,Nelt,Ia,Ja,A,Isym)
         !VD$ NODEPCHK
         DO j = jbgn, jend
           Y(Ia(j)) = Y(Ia(j)) + A(j)*X(icol)
-        ENDDO
-      ENDIF
-    ENDDO
-  ENDIF
+        END DO
+      END IF
+    END DO
+  END IF
   !------------- LAST LINE OF SSMTV FOLLOWS ----------------------------
 END SUBROUTINE SSMTV

@@ -461,8 +461,8 @@ SUBROUTINE DBVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
                             !                          .........EXIT
                           ELSEIF ( Xpts(k+1)<=Xpts(k) ) THEN
                             GOTO 100
-                          ENDIF
-                        ENDDO
+                          END IF
+                        END DO
                         !
                         !                             ******************************************
                         !                                 CHECK FOR DISK STORAGE
@@ -473,7 +473,7 @@ SUBROUTINE DBVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
                           NTApe = Iwork(12)
                           kpts = 1
                           NDIsk = 1
-                        ENDIF
+                        END IF
                         !
                         !                             ******************************************
                         !                                 SET INTEG PARAMETER ACCORDING TO
@@ -490,25 +490,25 @@ SUBROUTINE DBVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
                         DO j = 1, Nic
                           !                 ...............EXIT
                           IF ( Alpha(j)/=0.0D0 ) GOTO 300
-                        ENDDO
+                        END DO
                         DO j = 1, Nfc
                           !                    ............EXIT
                           IF ( Beta(j)/=0.0D0 ) GOTO 200
-                        ENDDO
+                        END DO
                         INHomo = 3
                         !              ...............EXIT
                         GOTO 400
-                      ENDIF
-                    ENDIF
-                  ENDIF
-                ENDIF
-              ENDIF
-            ENDIF
-          ENDIF
-        ENDIF
-      ENDIF
-    ENDIF
-  ENDIF
+                      END IF
+                    END IF
+                  END IF
+                END IF
+              END IF
+            END IF
+          END IF
+        END IF
+      END IF
+    END IF
+  END IF
   100 CONTINUE
   IFlag = -2
   !     ..................EXIT
@@ -561,7 +561,7 @@ SUBROUTINE DBVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
     !              (DDERKF)
     KKKint = 33 + 7*ndeq
     LLLint = 34
-  ENDIF
+  END IF
   !
   !              (COEF)
   kkkcof = 5*NFCc + NFCc**2
@@ -596,7 +596,7 @@ SUBROUTINE DBVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
       ELSE
         non = 0
         MXNon = nrtemp
-      ENDIF
+      END IF
       !
       Iwork(2) = MXNon
       !
@@ -612,9 +612,9 @@ SUBROUTINE DBVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
         Work(MXNon+1) = 2.0D0*Xpts(Nxpts) - Xpts(1)
         !        .........EXIT
         GOTO 500
-      ENDIF
-    ENDIF
-  ENDIF
+      END IF
+    END IF
+  END IF
   !
   Iflag = -1
   IF ( NDIsk/=1 ) THEN
@@ -631,7 +631,7 @@ SUBROUTINE DBVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
     WRITE (xern2,'(I8)') NEEdiw
     CALL XERMSG('SLATEC','DBVSUP','REQUIRED STORAGE FOR WORK ARRAY IS '//&
       xern1//' + NUMBER OF ORTHONOMALIZATIONS. $$REQUIRED STORAGE FOR IWORK ARRAY IS '//xern2,1,0)
-  ENDIF
+  END IF
   RETURN
   !
   !        ***************************************************************

@@ -101,7 +101,7 @@ SUBROUTINE SCHKW(Name,Lociw,Leniw,Locw,Lenw,Ierr,Iter,Err)
     CALL XERMSG('SLATEC','SCHKW',&
       'In '//xernam//', INTEGER work array too short.  '//&
       'IWORK needs '//xern1//'; have allocated '//xern2,1,1)
-  ENDIF
+  END IF
   !
   !         Check the Real workspace situation.
   IF ( Locw>Lenw ) THEN
@@ -113,6 +113,6 @@ SUBROUTINE SCHKW(Name,Lociw,Leniw,Locw,Lenw,Ierr,Iter,Err)
     CALL XERMSG('SLATEC','SCHKW',&
       'In '//xernam//', REAL work array too short.  '//&
       'RWORK needs '//xern1//'; have allocated '//xern2,1,1)
-  ENDIF
+  END IF
   !------------- LAST LINE OF SCHKW FOLLOWS ----------------------------
 END SUBROUTINE SCHKW

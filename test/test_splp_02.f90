@@ -179,24 +179,24 @@ CONTAINS
           dattrv(kount) = kk
           kount = kount + 1
           dattrv(kount) = d(kk,mm)
-        ENDIF
-      ENDDO
+        END IF
+      END DO
       kount = kount + 1
-    ENDDO
+    END DO
     dattrv(kount) = zero
     !     NON-NEGATIVITY CONSTRAINT
     DO ic = 1, nvars
       bl(ic) = zero
       ind(ic) = 3
       bu(ic) = 10000000.000D0
-    ENDDO
+    END DO
     !     LE CONSTRAINTS
     DO iv = 1, mrelas
       ivv = iv + nvars
       ind(ivv) = 3
       bl(ivv) = 100.00000D0
       bu(ivv) = 100000000.00000D0
-    ENDDO
+    END DO
     prgopt(01) = 18
     prgopt(02) = 59
     prgopt(03) = 0
@@ -225,17 +225,17 @@ CONTAINS
     !
     DO i = 1, mrelas
       isoln(i) = INT( prgopt(i+3) )
-    ENDDO
+    END DO
     !
     Ipass = 1
     DO j = 1, mrelas
       DO i = 1, mrelas
         IF ( isoln(i)==ibasis(j) ) GOTO 100
-      ENDDO
+      END DO
       Ipass = 0
       EXIT
       100 CONTINUE
-    ENDDO
+    END DO
     !
     IF ( Kprint>=2 ) WRITE (Lun,99002) (isoln(i),ibasis(i),i=1,mrelas)
     !
@@ -327,7 +327,7 @@ CONTAINS
         !
         DO j = 1, ncols
           CALL DCOPY(mrows,d(1,j),1,w(1,j),1)
-        ENDDO
+        END DO
         !
         CALL DCOPY(mrows,rhs(1,irhs),1,w(1,ncols+1),1)
         !
@@ -335,13 +335,13 @@ CONTAINS
         !
         DO j = 1, ncols
           ind(j) = 3
-        ENDDO
+        END DO
         !
         CALL DBOLS(w,mdw,mrows,ncols,bl(1,ib),bu(1,ib),ind,iopt,x,rnorm,mode,&
           rw,iw)
         DO j = 1, ncols
           x(j) = x(j) - xtrue(j)
-        ENDDO
+        END DO
         !
         sr = DNRM2(ncols,x,1)
         mpass = 1
@@ -352,9 +352,9 @@ CONTAINS
           IF ( mpass==0 ) msg = 'FAIL'
           itest = itest + 1
           WRITE (Lun,99003) itest, ib, irhs, sr, msg
-        ENDIF
-      ENDDO
-    ENDDO
+        END IF
+      END DO
+    END DO
     !
     !     RUN STOER'S PROBLEM FROM 1971 SIAM J. N. ANAL. PAPER.
     !
@@ -375,7 +375,7 @@ CONTAINS
         DO j = 1, ncols
           CALL DCOPY(mcon,c(1,j),1,w(1,j),1)
           CALL DCOPY(mrows,d(1,j),1,w(mcon+1,j),1)
-        ENDDO
+        END DO
         !
         CALL DCOPY(mrows,rhs(1,irhs),1,w(mcon+1,ncols+1),1)
         !
@@ -394,7 +394,7 @@ CONTAINS
           mode,rw,iw)
         DO j = 1, ncols + mcon
           x(j) = x(j) - xtrue(j)
-        ENDDO
+        END DO
         !
         sr = DNRM2(ncols+mcon,x,1)
         mpass = 1
@@ -405,9 +405,9 @@ CONTAINS
           IF ( mpass==0 ) msg = 'FAIL'
           itest = itest + 1
           WRITE (Lun,99003) itest, ib, irhs, sr, msg
-        ENDIF
-      ENDDO
-    ENDDO
+        END IF
+      END DO
+    END DO
     !
     !     HERE THE VALUE OF IPASS=1 SAYS THAT DBOCLS HAS PASSED ITS TESTS.
     !          THE VALUE OF IPASS=0 SAYS THAT DBOCLS HAS NOT PASSED.
@@ -490,7 +490,7 @@ PROGRAM TEST38
     CALL XSETF(0)
   ELSE
     CALL XSETF(1)
-  ENDIF
+  END IF
   !
   !     Test DSPLP package
   !
@@ -511,6 +511,6 @@ PROGRAM TEST38
     WRITE (lun,99002) nfail
     99002 FORMAT (/' ************* WARNING -- ',I5,&
       ' TEST(S) FAILED IN PROGRAM TEST38 *************')
-  ENDIF
+  END IF
   STOP
 END PROGRAM TEST38

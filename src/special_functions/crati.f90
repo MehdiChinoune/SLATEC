@@ -28,7 +28,7 @@ SUBROUTINE CRATI(Z,Fnu,N,Cy,Tol)
   !* REVISION HISTORY  (YYMMDD)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
-  
+
   INTEGER i, id, idnu, inu, itime, k, kk, magz, N
   COMPLEX cdfnu, Cy(N), pt, p1, p2, rz, t1, Z
   REAL ak, amagz, ap1, ap2, arg, az, dfnu, fdnu, flam, Fnu, fnup, &
@@ -88,7 +88,7 @@ SUBROUTINE CRATI(Z,Fnu,N,Cy,Tol)
           p1 = rz*(cdfnu+t1)*p1 + p2
           p2 = pt
           t1 = t1 - cone
-        ENDDO
+        END DO
         IF ( REAL(p1)==0.0E0.AND.AIMAG(p1)==0.0E0 ) p1 = CMPLX(Tol,Tol)
         Cy(N) = p2/p1
         IF ( N==1 ) RETURN
@@ -102,7 +102,7 @@ SUBROUTINE CRATI(Z,Fnu,N,Cy,Tol)
           Cy(k) = cone/pt
           t1 = t1 - cone
           k = k - 1
-        ENDDO
+        END DO
         EXIT
       ELSE
         ak = ABS(t1)*0.5E0
@@ -110,7 +110,7 @@ SUBROUTINE CRATI(Z,Fnu,N,Cy,Tol)
         rho = MIN(ap2/ap1,flam)
         test = test1*SQRT(rho/(rho*rho-1.0E0))
         itime = 2
-      ENDIF
-    ENDIF
-  ENDDO
+      END IF
+    END IF
+  END DO
 END SUBROUTINE CRATI

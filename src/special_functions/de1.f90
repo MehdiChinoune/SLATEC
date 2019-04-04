@@ -275,7 +275,7 @@ REAL(8) FUNCTION DE1(X)
     xmaxt = -LOG(D1MACH(1))
     xmax = xmaxt - LOG(xmaxt)
     first = .FALSE.
-  ENDIF
+  END IF
   !
   IF ( X>(-1.D0) ) THEN
     !
@@ -293,7 +293,7 @@ REAL(8) FUNCTION DE1(X)
       CALL XERMSG('SLATEC','DE1','X SO BIG E1 UNDERFLOWS',1,1)
       DE1 = 0.D0
       RETURN
-    ENDIF
+    END IF
   ELSEIF ( X>(-32.D0) ) THEN
     !
     IF ( X<=(-8.D0) ) THEN
@@ -307,11 +307,11 @@ REAL(8) FUNCTION DE1(X)
     ELSE
       DE1 = EXP(-X)/X*(1.D0+DCSEVL(16.D0/X+3.D0,ae12cs,ntae12))
       RETURN
-    ENDIF
+    END IF
   ELSE
     DE1 = EXP(-X)/X*(1.D0+DCSEVL(64.D0/X+1.D0,ae10cs,ntae10))
     RETURN
-  ENDIF
+  END IF
   DE1 = EXP(-X)/X*(1.D0+DCSEVL(8.D0/X-1.D0,ae14cs,ntae14))
   RETURN
 END FUNCTION DE1

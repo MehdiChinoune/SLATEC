@@ -64,9 +64,9 @@ REAL FUNCTION POCH(A,X)
         !
         POCH = (-1.0)**n*FAC(-INT(A))/FAC(-INT(A)-n)
         RETURN
-      ENDIF
-    ENDIF
-  ENDIF
+      END IF
+    END IF
+  END IF
   !
   ! HERE WE KNOW A+X IS NOT ZERO OR A NEGATIVE INTEGER.
   !
@@ -88,7 +88,7 @@ REAL FUNCTION POCH(A,X)
       CALL ALGAMS(A,alnga,sgnga)
       POCH = sgngax*sgnga*EXP(alngax-alnga)
       RETURN
-    ENDIF
+    END IF
   ELSE
     !
     ! X IS A SMALL NON-POSITIVE INTEGER, PRESUMMABLY A COMMON CASE.
@@ -97,9 +97,9 @@ REAL FUNCTION POCH(A,X)
     IF ( n==0 ) RETURN
     DO i = 1, n
       POCH = POCH*(A+i-1)
-    ENDDO
+    END DO
     RETURN
-  ENDIF
+  END IF
   !
   ! HERE ABS(X) IS SMALL AND BOTH ABS(A+X) AND ABS(A) ARE LARGE.  THUS,
   ! A+X AND A MUST HAVE THE SAME SIGN.  FOR NEGATIVE A, WE USE

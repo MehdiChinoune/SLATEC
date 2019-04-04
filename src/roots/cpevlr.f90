@@ -35,6 +35,6 @@ SUBROUTINE CPEVLR(N,M,A,X,C)
       IF ( j/=1 ) ci = C(i)
       IF ( i/=1 ) cim1 = C(i-1)
       C(i) = cim1 + X*ci
-    ENDDO
-  ENDDO
+    END DO
+  END DO
 END SUBROUTINE CPEVLR

@@ -29,7 +29,7 @@ REAL(8) FUNCTION DQWGTF(X,Omega,P2,P3,P4,Integr)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
-  
+
   !
   REAL(8) :: Omega, omx, P2, P3, P4, X
   INTEGER Integr
@@ -39,5 +39,5 @@ REAL(8) FUNCTION DQWGTF(X,Omega,P2,P3,P4,Integr)
     DQWGTF = SIN(omx)
   ELSE
     DQWGTF = COS(omx)
-  ENDIF
+  END IF
 END FUNCTION DQWGTF

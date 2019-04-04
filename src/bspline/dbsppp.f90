@@ -67,7 +67,7 @@ SUBROUTINE DBSPPP(T,A,N,K,Ldc,C,Xi,Lxi,Work)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   !
   INTEGER ileft, inev, K, Ldc, Lxi, N, nk
   REAL(8) :: A(*), C(Ldc,*), T(*), Work(*), Xi(*)
@@ -83,7 +83,7 @@ SUBROUTINE DBSPPP(T,A,N,K,Ldc,C,Xi,Lxi,Work)
   ELSEIF ( Ldc<K ) THEN
     CALL XERMSG('SLATEC','DBSPPP','LDC DOES NOT SATISFY LDC.GE.K',2,1)
     RETURN
-  ENDIF
+  END IF
   CALL DBSPDR(T,A,N,K,K,Work)
   Lxi = 0
   Xi(1) = T(K)
@@ -94,7 +94,7 @@ SUBROUTINE DBSPPP(T,A,N,K,Ldc,C,Xi,Lxi,Work)
       Lxi = Lxi + 1
       Xi(Lxi+1) = T(ileft+1)
       CALL DBSPEV(T,Work(1),N,K,K,Xi(Lxi),inev,C(1,Lxi),Work(nk))
-    ENDIF
-  ENDDO
+    END IF
+  END DO
   RETURN
 END SUBROUTINE DBSPPP

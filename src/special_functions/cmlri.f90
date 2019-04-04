@@ -24,7 +24,7 @@ SUBROUTINE CMLRI(Z,Fnu,Kode,N,Y,Nz,Tol)
   !* REVISION HISTORY  (YYMMDD)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
-  
+
   INTEGER i, iaz, idum, ifnu, inu, itime, k, kk, km, Kode, m, N, Nz
   COMPLEX ck, cnorm, pt, p1, p2, rz, sum, Y(N), Z
   REAL ack, ak, ap, at, az, bk, fkap, fkk, flam, fnf, Fnu, rho, &
@@ -60,7 +60,7 @@ SUBROUTINE CMLRI(Z,Fnu,Kode,N,Y,Nz,Tol)
     ap = ABS(p2)
     IF ( ap>tst*ak*ak ) GOTO 100
     ak = ak + 1.0E0
-  ENDDO
+  END DO
   Nz = -2
   RETURN
   100  i = i + 1
@@ -90,11 +90,11 @@ SUBROUTINE CMLRI(Z,Fnu,Kode,N,Y,Nz,Tol)
         rho = MIN(flam,fkap)
         tst = tst*SQRT(rho/(rho*rho-1.0E0))
         itime = 2
-      ENDIF
-    ENDDO
+      END IF
+    END DO
     Nz = -2
     RETURN
-  ENDIF
+  END IF
   !-----------------------------------------------------------------------
   !     BACKWARD RECURRENCE AND SUM NORMALIZING RELATION
   !-----------------------------------------------------------------------
@@ -121,7 +121,7 @@ SUBROUTINE CMLRI(Z,Fnu,Kode,N,Y,Nz,Tol)
     sum = sum + CMPLX(ack+bk,0.0E0)*p1
     bk = ack
     fkk = fkk - 1.0E0
-  ENDDO
+  END DO
   Y(N) = p2
   IF ( N/=1 ) THEN
     DO i = 2, N
@@ -135,8 +135,8 @@ SUBROUTINE CMLRI(Z,Fnu,Kode,N,Y,Nz,Tol)
       fkk = fkk - 1.0E0
       m = N - i + 1
       Y(m) = p2
-    ENDDO
-  ENDIF
+    END DO
+  END IF
   IF ( ifnu>0 ) THEN
     DO i = 1, ifnu
       pt = p2
@@ -147,8 +147,8 @@ SUBROUTINE CMLRI(Z,Fnu,Kode,N,Y,Nz,Tol)
       sum = sum + CMPLX(ack+bk,0.0E0)*p1
       bk = ack
       fkk = fkk - 1.0E0
-    ENDDO
-  ENDIF
+    END DO
+  END IF
   pt = Z
   IF ( Kode==2 ) pt = pt - CMPLX(x,0.0E0)
   p1 = -CMPLX(fnf,0.0E0)*CLOG(rz) + pt
@@ -166,6 +166,6 @@ SUBROUTINE CMLRI(Z,Fnu,Kode,N,Y,Nz,Tol)
   cnorm = ck*pt
   DO i = 1, N
     Y(i) = Y(i)*cnorm
-  ENDDO
+  END DO
   RETURN
 END SUBROUTINE CMLRI

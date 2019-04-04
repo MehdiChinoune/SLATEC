@@ -75,7 +75,7 @@ SUBROUTINE POLCOF(Xx,N,X,C,D,Work)
   !* FIRST EXECUTABLE STATEMENT  POLCOF
   DO k = 1, N
     D(k) = C(k)
-  ENDDO
+  END DO
   IF ( N==1 ) RETURN
   Work(1) = 1.0
   pone = C(1)
@@ -87,7 +87,7 @@ SUBROUTINE POLCOF(Xx,N,X,C,D,Work)
     Work(k) = Work(npkm1)*Work(km1)
     ptwo = pone + Work(k)*C(k)
     pone = ptwo
-  ENDDO
+  END DO
   D(1) = ptwo
   IF ( N==2 ) RETURN
   DO k = 2, nm1
@@ -100,6 +100,6 @@ SUBROUTINE POLCOF(Xx,N,X,C,D,Work)
       km1pi = km1 + i
       Work(i) = Work(km2npi)*Work(im1) + Work(i)
       D(k) = D(k) + Work(i)*D(km1pi)
-    ENDDO
-  ENDDO
+    END DO
+  END DO
 END SUBROUTINE POLCOF

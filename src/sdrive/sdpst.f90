@@ -48,14 +48,14 @@ SUBROUTINE SDPST(El,F,FA,H,Impl,JACOBN,Matdim,Miter,Ml,Mu,N,Nde,Nq,Save2,&
       IF ( N==0 ) THEN
         Jstate = 8
         RETURN
-      ENDIF
+      END IF
       IF ( Iswflg==3 ) Bnd = SNRM2(N*N,Dfdy,1)
       factor = -El(1,Nq)*H
       DO j = 1, N
         DO i = 1, N
           Dfdy(i,j) = factor*Dfdy(i,j)
-        ENDDO
-      ENDDO
+        END DO
+      END DO
     ELSEIF ( Miter==2 ) THEN
       br = Uround**(.875E0)
       bl = Uround**(.75E0)
@@ -71,13 +71,13 @@ SUBROUTINE SDPST(El,F,FA,H,Impl,JACOBN,Matdim,Miter,Ml,Mu,N,Nde,Nq,Save2,&
               CYCLE
             ELSE
               dy = ys
-            ENDIF
-          ENDIF
+            END IF
+          END IF
           IF ( Nq==1 ) THEN
             dy = SIGN(dy,Save2(j))
           ELSE
             dy = SIGN(dy,Yh(j,3))
-          ENDIF
+          END IF
           dy = (Y(j)+dy) - Y(j)
           yj = Y(j)
           Y(j) = Y(j) + dy
@@ -85,12 +85,12 @@ SUBROUTINE SDPST(El,F,FA,H,Impl,JACOBN,Matdim,Miter,Ml,Mu,N,Nde,Nq,Save2,&
           IF ( N==0 ) THEN
             Jstate = 6
             RETURN
-          ENDIF
+          END IF
           Y(j) = yj
           factor = -El(1,Nq)*H/dy
           DO i = 1, N
             Dfdy(i,j) = (Save1(i)-Save2(i))*factor
-          ENDDO
+          END DO
           !                                                                 Step 1
           diff = ABS(Save2(1)-Save1(1))
           imax = 1
@@ -98,8 +98,8 @@ SUBROUTINE SDPST(El,F,FA,H,Impl,JACOBN,Matdim,Miter,Ml,Mu,N,Nde,Nq,Save2,&
             IF ( ABS(Save2(i)-Save1(i))>diff ) THEN
               imax = i
               diff = ABS(Save2(i)-Save1(i))
-            ENDIF
-          ENDDO
+            END IF
+          END DO
           !                                                                 Step 2
           IF ( MIN(ABS(Save2(imax)),ABS(Save1(imax)))>0.E0 ) THEN
             scale = MAX(ABS(Save2(imax)),ABS(Save1(imax)))
@@ -111,50 +111,50 @@ SUBROUTINE SDPST(El,F,FA,H,Impl,JACOBN,Matdim,Miter,Ml,Mu,N,Nde,Nq,Save2,&
               !                                                                 Step 4
             ELSEIF ( diff<br*scale ) THEN
               Fac(j) = MIN(bp*Fac(j),FACMAX)
-            ENDIF
-          ENDIF
+            END IF
+          END IF
           EXIT
-        ENDDO
-      ENDDO
+        END DO
+      END DO
       IF ( Iswflg==3 ) Bnd = SNRM2(N*N,Dfdy,1)/(-El(1,Nq)*H)
       Nfe = Nfe + N
-    ENDIF
+    END IF
     IF ( Impl==0 ) THEN
       DO i = 1, N
         Dfdy(i,i) = Dfdy(i,i) + 1.E0
-      ENDDO
+      END DO
     ELSEIF ( Impl==1 ) THEN
       CALL FA(N,T,Y,A,Matdim,Ml,Mu,Nde)
       IF ( N==0 ) THEN
         Jstate = 9
         RETURN
-      ENDIF
+      END IF
       DO j = 1, N
         DO i = 1, N
           Dfdy(i,j) = Dfdy(i,j) + A(i,j)
-        ENDDO
-      ENDDO
+        END DO
+      END DO
     ELSEIF ( Impl==2 ) THEN
       CALL FA(N,T,Y,A,Matdim,Ml,Mu,Nde)
       IF ( N==0 ) THEN
         Jstate = 9
         RETURN
-      ENDIF
+      END IF
       DO i = 1, Nde
         Dfdy(i,i) = Dfdy(i,i) + A(i,1)
-      ENDDO
+      END DO
     ELSEIF ( Impl==3 ) THEN
       CALL FA(N,T,Y,A,Matdim,Ml,Mu,Nde)
       IF ( N==0 ) THEN
         Jstate = 9
         RETURN
-      ENDIF
+      END IF
       DO j = 1, Nde
         DO i = 1, Nde
           Dfdy(i,j) = Dfdy(i,j) + A(i,j)
-        ENDDO
-      ENDDO
-    ENDIF
+        END DO
+      END DO
+    END IF
     CALL SGEFA(Dfdy,Matdim,N,Ipvt,info)
     IF ( info/=0 ) Ier = .TRUE.
   ELSEIF ( Miter==4.OR.Miter==5 ) THEN
@@ -163,14 +163,14 @@ SUBROUTINE SDPST(El,F,FA,H,Impl,JACOBN,Matdim,Miter,Ml,Mu,N,Nde,Nq,Save2,&
       IF ( N==0 ) THEN
         Jstate = 8
         RETURN
-      ENDIF
+      END IF
       factor = -El(1,Nq)*H
       mw = Ml + Mu + 1
       DO j = 1, N
         DO i = MAX(Ml+1,mw+1-j), MIN(mw+N-j,mw+Ml)
           Dfdy(i,j) = factor*Dfdy(i,j)
-        ENDDO
-      ENDDO
+        END DO
+      END DO
     ELSEIF ( Miter==5 ) THEN
       br = Uround**(.875E0)
       bl = Uround**(.75E0)
@@ -189,24 +189,24 @@ SUBROUTINE SDPST(El,F,FA,H,Impl,JACOBN,Matdim,Miter,Ml,Mu,N,Nde,Nq,Save2,&
                 CYCLE
               ELSE
                 dy = ys
-              ENDIF
-            ENDIF
+              END IF
+            END IF
             IF ( Nq==1 ) THEN
               dy = SIGN(dy,Save2(k))
             ELSE
               dy = SIGN(dy,Yh(k,3))
-            ENDIF
+            END IF
             dy = (Y(k)+dy) - Y(k)
             Dfdy(mw,k) = Y(k)
             Y(k) = Y(k) + dy
             EXIT
-          ENDDO
-        ENDDO
+          END DO
+        END DO
         CALL F(N,T,Y,Save1)
         IF ( N==0 ) THEN
           Jstate = 6
           RETURN
-        ENDIF
+        END IF
         DO k = j, N, mw
           Y(k) = Dfdy(mw,k)
           ys = MAX(ABS(Ywt(k)),ABS(Y(k)))
@@ -216,12 +216,12 @@ SUBROUTINE SDPST(El,F,FA,H,Impl,JACOBN,Matdim,Miter,Ml,Mu,N,Nde,Nq,Save2,&
             dy = SIGN(dy,Save2(k))
           ELSE
             dy = SIGN(dy,Yh(k,3))
-          ENDIF
+          END IF
           dy = (Y(k)+dy) - Y(k)
           factor = -El(1,Nq)*H/dy
           DO i = MAX(Ml+1,mw+1-k), MIN(mw+N-k,mw+Ml)
             Dfdy(i,k) = factor*(Save1(i+k-mw)-Save2(i+k-mw))
-          ENDDO
+          END DO
           !                                                                 Step 1
           imax = MAX(1,k-Mu)
           diff = ABS(Save2(imax)-Save1(imax))
@@ -229,8 +229,8 @@ SUBROUTINE SDPST(El,F,FA,H,Impl,JACOBN,Matdim,Miter,Ml,Mu,N,Nde,Nq,Save2,&
             IF ( ABS(Save2(i)-Save1(i))>diff ) THEN
               imax = i
               diff = ABS(Save2(i)-Save1(i))
-            ENDIF
-          ENDDO
+            END IF
+          END DO
           !                                                                 Step 2
           IF ( MIN(ABS(Save2(imax)),ABS(Save1(imax)))>0.E0 ) THEN
             scale = MAX(ABS(Save2(imax)),ABS(Save1(imax)))
@@ -242,65 +242,65 @@ SUBROUTINE SDPST(El,F,FA,H,Impl,JACOBN,Matdim,Miter,Ml,Mu,N,Nde,Nq,Save2,&
               !                                                                 Step 4
             ELSEIF ( diff<br*scale ) THEN
               Fac(k) = MIN(bp*Fac(k),FACMAX)
-            ENDIF
-          ENDIF
-        ENDDO
-      ENDDO
+            END IF
+          END IF
+        END DO
+      END DO
       Nfe = Nfe + j2
-    ENDIF
+    END IF
     IF ( Iswflg==3 ) THEN
       dfdymx = 0.E0
       DO j = 1, N
         DO i = MAX(Ml+1,mw+1-j), MIN(mw+N-j,mw+Ml)
           dfdymx = MAX(dfdymx,ABS(Dfdy(i,j)))
-        ENDDO
-      ENDDO
+        END DO
+      END DO
       Bnd = 0.E0
       IF ( dfdymx/=0.E0 ) THEN
         DO j = 1, N
           DO i = MAX(Ml+1,mw+1-j), MIN(mw+N-j,mw+Ml)
             Bnd = Bnd + (Dfdy(i,j)/dfdymx)**2
-          ENDDO
-        ENDDO
+          END DO
+        END DO
         Bnd = dfdymx*SQRT(Bnd)/(-El(1,Nq)*H)
-      ENDIF
-    ENDIF
+      END IF
+    END IF
     IF ( Impl==0 ) THEN
       DO j = 1, N
         Dfdy(mw,j) = Dfdy(mw,j) + 1.E0
-      ENDDO
+      END DO
     ELSEIF ( Impl==1 ) THEN
       CALL FA(N,T,Y,A(Ml+1,1),Matdim,Ml,Mu,Nde)
       IF ( N==0 ) THEN
         Jstate = 9
         RETURN
-      ENDIF
+      END IF
       DO j = 1, N
         DO i = MAX(Ml+1,mw+1-j), MIN(mw+N-j,mw+Ml)
           Dfdy(i,j) = Dfdy(i,j) + A(i,j)
-        ENDDO
-      ENDDO
+        END DO
+      END DO
     ELSEIF ( Impl==2 ) THEN
       CALL FA(N,T,Y,A,Matdim,Ml,Mu,Nde)
       IF ( N==0 ) THEN
         Jstate = 9
         RETURN
-      ENDIF
+      END IF
       DO j = 1, Nde
         Dfdy(mw,j) = Dfdy(mw,j) + A(j,1)
-      ENDDO
+      END DO
     ELSEIF ( Impl==3 ) THEN
       CALL FA(N,T,Y,A(Ml+1,1),Matdim,Ml,Mu,Nde)
       IF ( N==0 ) THEN
         Jstate = 9
         RETURN
-      ENDIF
+      END IF
       DO j = 1, Nde
         DO i = MAX(Ml+1,mw+1-j), MIN(mw+Nde-j,mw+Ml)
           Dfdy(i,j) = Dfdy(i,j) + A(i,j)
-        ENDDO
-      ENDDO
-    ENDIF
+        END DO
+      END DO
+    END IF
     CALL SGBFA(Dfdy,Matdim,N,Ml,Mu,Ipvt,info)
     IF ( info/=0 ) Ier = .TRUE.
   ELSEIF ( Miter==3 ) THEN
@@ -309,10 +309,10 @@ SUBROUTINE SDPST(El,F,FA,H,Impl,JACOBN,Matdim,Miter,Ml,Mu,N,Nde,Nq,Save2,&
     IF ( iflag==-1 ) THEN
       Ier = .TRUE.
       RETURN
-    ENDIF
+    END IF
     IF ( N==0 ) THEN
       Jstate = 10
       RETURN
-    ENDIF
-  ENDIF
+    END IF
+  END IF
 END SUBROUTINE SDPST

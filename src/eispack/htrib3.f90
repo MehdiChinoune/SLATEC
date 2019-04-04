@@ -78,7 +78,7 @@ SUBROUTINE HTRIB3(Nm,N,A,Tau,M,Zr,Zi)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   !
   INTEGER i, j, k, l, M, N, Nm
   REAL A(Nm,*), Tau(2,*), Zr(Nm,*), Zi(Nm,*)
@@ -94,8 +94,8 @@ SUBROUTINE HTRIB3(Nm,N,A,Tau,M,Zr,Zi)
       DO j = 1, M
         Zi(k,j) = -Zr(k,j)*Tau(2,k)
         Zr(k,j) = Zr(k,j)*Tau(1,k)
-      ENDDO
-    ENDDO
+      END DO
+    END DO
     !
     IF ( N/=1 ) THEN
       !     .......... RECOVER AND APPLY THE HOUSEHOLDER MATRICES ..........
@@ -111,7 +111,7 @@ SUBROUTINE HTRIB3(Nm,N,A,Tau,M,Zr,Zi)
             DO k = 1, l
               s = s + A(i,k)*Zr(k,j) - A(k,i)*Zi(k,j)
               si = si + A(i,k)*Zi(k,j) + A(k,i)*Zr(k,j)
-            ENDDO
+            END DO
             !     .......... DOUBLE DIVISIONS AVOID POSSIBLE UNDERFLOW ..........
             s = (s/h)/h
             si = (si/h)/h
@@ -119,13 +119,13 @@ SUBROUTINE HTRIB3(Nm,N,A,Tau,M,Zr,Zi)
             DO k = 1, l
               Zr(k,j) = Zr(k,j) - s*A(i,k) - si*A(k,i)
               Zi(k,j) = Zi(k,j) - si*A(i,k) + s*A(k,i)
-            ENDDO
+            END DO
             !
-          ENDDO
-        ENDIF
+          END DO
+        END IF
         !
-      ENDDO
-    ENDIF
-  ENDIF
+      END DO
+    END IF
+  END IF
   !
 END SUBROUTINE HTRIB3

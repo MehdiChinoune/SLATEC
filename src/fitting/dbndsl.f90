@@ -197,7 +197,7 @@ SUBROUTINE DBNDSL(Mode,G,Mdg,Nb,Ip,Ir,X,N,Rnorm)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   INTEGER i, i1, i2, ie, ii, iopt, Ip, Ir, irm1, ix, j, jg, l, &
     Mdg, Mode, N, Nb, nerr, np1
   REAL(8) :: G(Mdg,*), Rnorm, rsq, s, X(*), zero
@@ -216,12 +216,12 @@ SUBROUTINE DBNDSL(Mode,G,Mdg,Nb,Ip,Ir,X,N,Rnorm)
           DO i = i1, i2
             l = j - i + 1 + MAX(0,i-Ip)
             s = s + X(i)*G(i,l)
-          ENDDO
-        ENDIF
+          END DO
+        END IF
         l = MAX(0,j-Ip)
         IF ( G(j,l+1)==0 ) GOTO 100
         X(j) = (X(j)-s)/G(j,l+1)
-      ENDDO
+      END DO
       RETURN
     CASE (3)
     CASE DEFAULT
@@ -229,16 +229,16 @@ SUBROUTINE DBNDSL(Mode,G,Mdg,Nb,Ip,Ir,X,N,Rnorm)
       !                                   ALG. STEP 26
       DO j = 1, N
         X(j) = G(j,Nb+1)
-      ENDDO
+      END DO
       rsq = zero
       np1 = N + 1
       irm1 = Ir - 1
       IF ( np1<=irm1 ) THEN
         DO j = np1, irm1
           rsq = rsq + G(j,Nb+1)**2
-        ENDDO
+        END DO
         Rnorm = SQRT(rsq)
-      ENDIF
+      END IF
   END SELECT
   !                                   ********************* MODE = 3
   !                                   ALG. STEP 27
@@ -255,12 +255,12 @@ SUBROUTINE DBNDSL(Mode,G,Mdg,Nb,Ip,Ir,X,N,Rnorm)
         jg = j + l
         ix = i - 1 + j
         s = s + G(i,jg)*X(ix)
-      ENDDO
-    ENDIF
+      END DO
+    END IF
     !                                   ALG. STEP 31
     IF ( G(i,l+1)==0 ) GOTO 100
     X(i) = (X(i)-s)/G(i,l+1)
-  ENDDO
+  END DO
   !                                   ALG. STEP 32
   RETURN
   !

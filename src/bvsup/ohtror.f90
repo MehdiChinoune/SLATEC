@@ -32,7 +32,7 @@ SUBROUTINE OHTROR(Q,N,Nrda,Diag,Irank,Div,Td)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
-  
+
   INTEGER Irank, irp, j, k, kir, kirm, l, N, nmir, Nrda
   REAL dd, Diag(*), diagk, Div(*), Q(Nrda,*), qs, SDOT, sig, sqd, Td(*), tdv
   !* FIRST EXECUTABLE STATEMENT  OHTROR
@@ -54,8 +54,8 @@ SUBROUTINE OHTROR(Q,N,Nrda,Diag,Irank,Div,Td)
         Q(j,kir) = Q(j,kir) + qs*tdv
         DO l = irp, N
           Q(j,l) = Q(j,l) + qs*Q(kir,l)
-        ENDDO
-      ENDDO
-    ENDIF
-  ENDDO
+        END DO
+      END DO
+    END IF
+  END DO
 END SUBROUTINE OHTROR

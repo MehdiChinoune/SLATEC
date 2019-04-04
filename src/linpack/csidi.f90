@@ -83,7 +83,7 @@ SUBROUTINE CSIDI(A,Lda,N,Kpvt,Det,Work,Job)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   INTEGER Lda, N, Job
   COMPLEX A(Lda,*), Det(2), Work(*)
   INTEGER Kpvt(*)
@@ -122,22 +122,22 @@ SUBROUTINE CSIDI(A,Lda,N,Kpvt,Det,Work,Job)
         ELSE
           t = A(k,k+1)
           d = (d/t)*A(k+1,k+1) - t
-        ENDIF
-      ENDIF
+        END IF
+      END IF
       !
       Det(1) = d*Det(1)
       IF ( CABS1(Det(1))/=0.0E0 ) THEN
         DO WHILE ( CABS1(Det(1))<1.0E0 )
           Det(1) = CMPLX(ten,0.0E0)*Det(1)
           Det(2) = Det(2) - (1.0E0,0.0E0)
-        ENDDO
+        END DO
         DO WHILE ( CABS1(Det(1))>=ten )
           Det(1) = Det(1)/CMPLX(ten,0.0E0)
           Det(2) = Det(2) + (1.0E0,0.0E0)
-        ENDDO
-      ENDIF
-    ENDDO
-  ENDIF
+        END DO
+      END IF
+    END DO
+  END IF
   !
   !     COMPUTE INVERSE(A)
   !
@@ -162,16 +162,16 @@ SUBROUTINE CSIDI(A,Lda,N,Kpvt,Det,Work,Job)
           DO j = 1, km1
             A(j,k+1) = CDOTU(j,A(1,j),1,Work,1)
             CALL CAXPY(j-1,Work(j),A(1,j),1,A(1,k+1),1)
-          ENDDO
+          END DO
           A(k+1,k+1) = A(k+1,k+1) + CDOTU(km1,Work,1,A(1,k+1),1)
           A(k,k+1) = A(k,k+1) + CDOTU(km1,A(1,k),1,A(1,k+1),1)
           CALL CCOPY(km1,A(1,k),1,Work,1)
           DO j = 1, km1
             A(j,k) = CDOTU(j,A(1,j),1,Work,1)
             CALL CAXPY(j-1,Work(j),A(1,j),1,A(1,k),1)
-          ENDDO
+          END DO
           A(k,k) = A(k,k) + CDOTU(km1,Work,1,A(1,k),1)
-        ENDIF
+        END IF
         kstep = 2
       ELSE
         !
@@ -183,11 +183,11 @@ SUBROUTINE CSIDI(A,Lda,N,Kpvt,Det,Work,Job)
           DO j = 1, km1
             A(j,k) = CDOTU(j,A(1,j),1,Work,1)
             CALL CAXPY(j-1,Work(j),A(1,j),1,A(1,k),1)
-          ENDDO
+          END DO
           A(k,k) = A(k,k) + CDOTU(km1,Work,1,A(1,k),1)
-        ENDIF
+        END IF
         kstep = 1
-      ENDIF
+      END IF
       !
       !           SWAP
       !
@@ -199,14 +199,14 @@ SUBROUTINE CSIDI(A,Lda,N,Kpvt,Det,Work,Job)
           temp = A(j,k)
           A(j,k) = A(ks,j)
           A(ks,j) = temp
-        ENDDO
+        END DO
         IF ( kstep/=1 ) THEN
           temp = A(ks,k+1)
           A(ks,k+1) = A(k,k+1)
           A(k,k+1) = temp
-        ENDIF
-      ENDIF
+        END IF
+      END IF
       k = k + kstep
-    ENDDO
-  ENDIF
+    END DO
+  END IF
 END SUBROUTINE CSIDI

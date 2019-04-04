@@ -49,7 +49,7 @@ SUBROUTINE POLINT(N,X,Y,C)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   REAL C(*), dif, X(*), Y(*)
   INTEGER i, k, km1, N
   !* FIRST EXECUTABLE STATEMENT  POLINT
@@ -67,9 +67,9 @@ SUBROUTINE POLINT(N,X,Y,C)
         dif = X(i) - X(k)
         IF ( dif==0.0 ) GOTO 100
         C(k) = (C(i)-C(k))/dif
-      ENDDO
-    ENDDO
+      END DO
+    END DO
     RETURN
-  ENDIF
+  END IF
   100  CALL XERMSG('SLATEC','POLINT','THE ABSCISSAS ARE NOT DISTINCT.',2,1)
 END SUBROUTINE POLINT

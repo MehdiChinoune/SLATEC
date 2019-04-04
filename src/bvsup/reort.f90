@@ -72,8 +72,8 @@ SUBROUTINE REORT(Ncomp,Y,Yp,Yhp,Niv,W,S,P,Ip,Stowa,Iflag)
     KNSwot = KNSwot + 1
     IF ( KNSwot<NSWot ) THEN
       IF ( (XENd-X)*(X-XOT)<0. ) RETURN
-    ENDIF
-  ENDIF
+    END IF
+  END IF
   CALL STOR1(Y,Yhp,Yp,Yhp(1,nfcp),1,0,0)
   !
   !     ****************************************
@@ -99,7 +99,7 @@ SUBROUTINE REORT(Ncomp,Y,Yp,Yhp,Niv,W,S,P,Ip,Stowa,Iflag)
       IF ( wcnd>=50.*TOL ) THEN
         DO ijk = 1, nfcp
           IF ( S(ijk)>1.0E+20 ) GOTO 50
-        ENDDO
+        END DO
         !
         !     USE LINEAR EXTRAPOLATION ON LOGARITHMIC VALUES OF THE NORM
         !     DECREMENTS TO DETERMINE NEXT ORTHONORMALIZATION CHECKPOINT.
@@ -122,21 +122,21 @@ SUBROUTINE REORT(Ncomp,Y,Yp,Yhp,Niv,W,S,P,Ip,Stowa,Iflag)
             XOT = XENd
           ELSE
             XOT = X + dx*dndt/dnd
-          ENDIF
-        ENDIF
+          END IF
+        END IF
         NSWot = MIN(MNSwot,NSWot)
         PWCnd = wcnd
         PX = X
         RETURN
-      ENDIF
-    ENDIF
+      END IF
+    END IF
     !
     !     ****************************************
     !
     !     ORTHONORMALIZATION NECESSARY SO WE NORMALIZE THE HOMOGENEOUS
     !     SOLUTION VECTORS AND CHANGE W ACCORDINGLY.
     !
-    50     NSWot = 1
+    50  NSWot = 1
     KNSwot = 0
     LOTjp = 1
     kk = 1
@@ -149,12 +149,12 @@ SUBROUTINE REORT(Ncomp,Y,Yp,Yhp,Niv,W,S,P,Ip,Stowa,Iflag)
       kk = kk + NFCc + 1 - k
       IF ( NFC/=NFCc ) THEN
         IF ( l/=k/2 ) CYCLE
-      ENDIF
+      END IF
       DO j = 1, Ncomp
         Y(j,l) = Y(j,l)*vnorm
-      ENDDO
+      END DO
       l = l + 1
-    ENDDO
+    END DO
     !
     IF ( INHomo==1.AND.NPS/=1 ) THEN
       !
@@ -166,11 +166,11 @@ SUBROUTINE REORT(Ncomp,Y,Yp,Yhp,Niv,W,S,P,Ip,Stowa,Iflag)
       S(nfcp) = ypnm
       DO j = 1, Ncomp
         Yp(j) = Yp(j)/ypnm
-      ENDDO
+      END DO
       DO j = 1, NFCc
         W(j) = C*W(j)
-      ENDDO
-    ENDIF
+      END DO
+    END IF
     !
     IF ( Iflag==1 ) CALL STWAY(Y,Yp,Yhp,0,Stowa)
     Iflag = 0
@@ -188,9 +188,9 @@ SUBROUTINE REORT(Ncomp,Y,Yp,Yhp,Niv,W,S,P,Ip,Stowa,Iflag)
         TND = TND + 1.
         Iflag = 10
         RETURN
-      ENDIF
-    ENDIF
+      END IF
+    END IF
     Iflag = 30
     RETURN
-  ENDIF
+  END IF
 END SUBROUTINE REORT

@@ -98,14 +98,14 @@ SUBROUTINE DCOEF(Yh,Yp,Ncomp,Nrowb,Nfc,Nic,B,Beta,Coef,Inhomo,Re,Ae,By,&
       l = j
       IF ( Nfc/=Nfcc ) l = 2*j - 1
       By(k,l) = DDOT(Ncomp,B(k,1),Nrowb,Yh(1,j),1)
-    ENDDO
+    END DO
     IF ( Nfc/=Nfcc ) THEN
       DO j = 1, Nfc
         l = 2*j
         bykl = DDOT(ncomp2,B(k,1),Nrowb,Yh(ncomp2+1,j),1)
         By(k,l) = DDOT(ncomp2,B(k,ncomp2+1),Nrowb,Yh(1,j),1) - bykl
-      ENDDO
-    ENDIF
+      END DO
+    END IF
     SELECT CASE (Inhomo)
       CASE (2)
         !        CASE 2
@@ -117,7 +117,7 @@ SUBROUTINE DCOEF(Yh,Yp,Ncomp,Nrowb,Nfc,Nic,B,Beta,Coef,Inhomo,Re,Ae,By,&
         !        CASE 1
         Cvec(k) = Beta(k) - DDOT(Ncomp,B(k,1),Nrowb,Yp,1)
     END SELECT
-  ENDDO
+  END DO
   cons = ABS(Cvec(1))
   bys = ABS(By(1,1))
   !
@@ -148,7 +148,7 @@ SUBROUTINE DCOEF(Yh,Yp,Ncomp,Nrowb,Nfc,Nic,B,Beta,Coef,Inhomo,Re,Ae,By,&
           un = MAX(un,ABS(Yh(k,1)))
           ypn = MAX(ypn,ABS(Yp(k)))
           bn = MAX(bn,ABS(B(1,k)))
-        ENDDO
+        END DO
         bbn = MAX(bn,ABS(Beta(1)))
         IF ( bys<=10.0D0*(Re*un+Ae)*bn ) THEN
           brn = bbn/bn*bys
@@ -159,18 +159,18 @@ SUBROUTINE DCOEF(Yh,Yp,Ncomp,Nrowb,Nfc,Nic,B,Beta,Coef,Inhomo,Re,Ae,By,&
         ELSEIF ( Inhomo==3 ) THEN
           Iflag = 3
           Coef(1) = 1.0D0
-        ENDIF
+        END IF
       ELSEIF ( Inhomo==3 ) THEN
         IF ( Iwork(1)<Nfcc ) THEN
           DO k = 1, Nfcc
             ki = 4*Nfcc + k
             Coef(k) = Work(ki)
-          ENDDO
+          END DO
         ELSE
           Iflag = 3
           DO k = 1, Nfcc
             Coef(k) = 0.0D0
-          ENDDO
+          END DO
           Coef(Nfcc) = 1.0D0
           nfccm1 = Nfcc - 1
           DO k = 1, nfccm1
@@ -179,14 +179,14 @@ SUBROUTINE DCOEF(Yh,Yp,Ncomp,Nrowb,Nfc,Nic,B,Beta,Coef,Inhomo,Re,Ae,By,&
             gam = DDOT(l,By(j,j),Nfcc,Coef(j),1)/(Work(j)*By(j,j))
             DO i = j, Nfcc
               Coef(i) = Coef(i) + gam*By(j,i)
-            ENDDO
-          ENDDO
-        ENDIF
-      ENDIF
+            END DO
+          END DO
+        END IF
+      END IF
       EXIT
     ELSE
       kflag = 1
       Iflag = 1
-    ENDIF
-  ENDDO
+    END IF
+  END DO
 END SUBROUTINE DCOEF

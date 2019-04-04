@@ -763,7 +763,7 @@ SUBROUTINE DDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
       'Illegal input.  Improper value for NSTATE(= '//intgr1//').',Ierflg,1)
     Nstate = 12
     RETURN
-  ENDIF
+  END IF
   npar = N
   IF ( Eps<0.D0 ) THEN
     WRITE (rl1,'(D16.8)') Eps
@@ -772,7 +772,7 @@ SUBROUTINE DDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
       ', is negative.',Ierflg,1)
     Nstate = 12
     RETURN
-  ENDIF
+  END IF
   IF ( N<=0 ) THEN
     WRITE (intgr1,'(I8)') N
     Ierflg = 22
@@ -780,7 +780,7 @@ SUBROUTINE DDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
       intgr1//', is not positive.',Ierflg,1)
     Nstate = 12
     RETURN
-  ENDIF
+  END IF
   IF ( Mxord<=0 ) THEN
     WRITE (intgr1,'(I8)') Mxord
     Ierflg = 28
@@ -788,7 +788,7 @@ SUBROUTINE DDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
       intgr1//', is not positive.',Ierflg,1)
     Nstate = 12
     RETURN
-  ENDIF
+  END IF
   IF ( Mint<1.OR.Mint>3 ) THEN
     WRITE (intgr1,'(I8)') Mint
     Ierflg = 23
@@ -835,12 +835,12 @@ SUBROUTINE DDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
       intgr1//', is not allowed.',Ierflg,1)
     Nstate = 12
     RETURN
-  ENDIF
+  END IF
   IF ( Miter==0.OR.Miter==3 ) THEN
     liwchk = INDPVT - 1
   ELSEIF ( Miter==1.OR.Miter==2.OR.Miter==4.OR.Miter==5 ) THEN
     liwchk = INDPVT + N - 1
-  ENDIF
+  END IF
   IF ( Leniw<liwchk ) THEN
     WRITE (intgr1,'(I8)') liwchk
     Ierflg = 33
@@ -849,14 +849,14 @@ SUBROUTINE DDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
       & parameters involved, the required storage is '//intgr1//' .',Ierflg,1)
     Nstate = 12
     RETURN
-  ENDIF
+  END IF
   !                                                Allocate the WORK array
   !                                         IYH is the index of YH in WORK
   IF ( Mint==1.OR.Mint==3 ) THEN
     maxord = MIN(Mxord,12)
   ELSEIF ( Mint==2 ) THEN
     maxord = MIN(Mxord,5)
-  ENDIF
+  END IF
   idfdy = IYH + (maxord+1)*N
   !                                             IDFDY is the index of DFDY
   !
@@ -866,7 +866,7 @@ SUBROUTINE DDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
     iywt = idfdy + N*N
   ELSEIF ( Miter==4.OR.Miter==5 ) THEN
     iywt = idfdy + (2*Ml+Mu+1)*N
-  ENDIF
+  END IF
   !                                               IYWT is the index of YWT
   isave1 = iywt + N
   !                                           ISAVE1 is the index of SAVE1
@@ -882,7 +882,7 @@ SUBROUTINE DDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
     ia = ifac + N
   ELSE
     ia = ifac
-  ENDIF
+  END IF
   !                                                   IA is the index of A
   IF ( Impl==0.OR.Miter==3 ) THEN
     lenchk = ia - 1
@@ -896,7 +896,7 @@ SUBROUTINE DDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
     lenchk = ia - 1 + N*Nde
   ELSEIF ( Impl==3.AND.(Miter==4.OR.Miter==5) ) THEN
     lenchk = ia - 1 + (2*Ml+Mu+1)*Nde
-  ENDIF
+  END IF
   IF ( Lenw<lenchk ) THEN
     WRITE (intgr1,'(I8)') lenchk
     Ierflg = 32
@@ -905,26 +905,26 @@ SUBROUTINE DDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
       & involved, the required storage is '//intgr1//' .',Ierflg,1)
     Nstate = 12
     RETURN
-  ENDIF
+  END IF
   IF ( Miter==0.OR.Miter==3 ) THEN
     matdim = 1
   ELSEIF ( Miter==1.OR.Miter==2 ) THEN
     matdim = N
   ELSEIF ( Miter==4.OR.Miter==5 ) THEN
     matdim = 2*Ml + Mu + 1
-  ENDIF
+  END IF
   IF ( Impl==0.OR.Impl==1 ) THEN
     ndecom = N
   ELSEIF ( Impl==2.OR.Impl==3 ) THEN
     ndecom = Nde
-  ENDIF
+  END IF
   IF ( Nstate==1 ) THEN
     !                                                  Initialize parameters
     IF ( Mint==1.OR.Mint==3 ) THEN
       Iwork(IMXORD) = MIN(Mxord,12)
     ELSEIF ( Mint==2 ) THEN
       Iwork(IMXORD) = MIN(Mxord,5)
-    ENDIF
+    END IF
     Iwork(IMXRDS) = Mxord
     IF ( Mint==1.OR.Mint==2 ) THEN
       Iwork(IMNT) = Mint
@@ -937,7 +937,7 @@ SUBROUTINE DDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
       Iwork(IMNTLD) = Iwork(IMNT)
       Iwork(IMTRLD) = Iwork(IMTR)
       Iwork(IMTRSV) = Miter
-    ENDIF
+    END IF
     Work(IHMAX) = Hmax
     uround = D1MACH(4)
     Work(IMACH4) = uround
@@ -945,7 +945,7 @@ SUBROUTINE DDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
     IF ( Nroot/=0 ) THEN
       re = uround
       ae = Work(IMACH1)
-    ENDIF
+    END IF
     h = (Tout-T)*(1.D0-4.D0*uround)
     h = SIGN(MIN(ABS(h),Hmax),h)
     Work(IH) = h
@@ -968,7 +968,7 @@ SUBROUTINE DDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
     !                                                 Set initial conditions
     DO i = 1, N
       Work(i+IYH-1) = Y(i)
-    ENDDO
+    END DO
     IF ( T==Tout ) RETURN
     GOTO 100
   ELSE
@@ -976,8 +976,8 @@ SUBROUTINE DDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
     IF ( Nroot/=0 ) THEN
       re = uround
       ae = Work(IMACH1)
-    ENDIF
-  ENDIF
+    END IF
+  END IF
   !                                             On a continuation, check
   !                                             that output points have
   !                                             been or will be overtaken.
@@ -985,7 +985,7 @@ SUBROUTINE DDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
     convrg = .TRUE.
   ELSE
     convrg = .FALSE.
-  ENDIF
+  END IF
   T = Work(IT)
   h = Work(IH)
   hsign = Work(IHSIGN)
@@ -1020,13 +1020,13 @@ SUBROUTINE DDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
                 iroot = i
                 troot = Work(jtroot)
                 EXIT
-              ENDIF
+              END IF
               IF ( Work(jtroot)*hsign>Work(ITOUT)*hsign ) THEN
                 iroot = i
                 troot = Work(jtroot)
-              ENDIF
-            ENDIF
-          ENDDO
+              END IF
+            END IF
+          END DO
           Iwork(INROOT) = iroot
           Work(ITOUT) = troot
           Iwork(IJROOT) = Ntask
@@ -1039,7 +1039,7 @@ SUBROUTINE DDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
               T = troot
               Ierflg = 0
               GOTO 500
-            ENDIF
+            END IF
           ELSEIF ( Ntask==2.OR.Ntask==3 ) THEN
             !
             !                                     If there are no more roots, or the
@@ -1054,8 +1054,8 @@ SUBROUTINE DDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
               Ierflg = 0
               T = troot
               GOTO 500
-            ENDIF
-          ENDIF
+            END IF
+          END IF
         ELSEIF ( Tout*hsign>=Work(ITOUT)*hsign ) THEN
           troot = Work(ITOUT)
           CALL DDNTP(h,0,N,Iwork(INQ),T,troot,Work(IYH),Y)
@@ -1065,9 +1065,9 @@ SUBROUTINE DDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
           GOTO 500
           !                                         A root has just been reported.
           !                                         Select the next root.
-        ENDIF
-      ENDIF
-    ENDIF
+        END IF
+      END IF
+    END IF
     !
     IF ( Ntask==1 ) THEN
       Nstate = 2
@@ -1076,7 +1076,7 @@ SUBROUTINE DDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
         T = Tout
         Ierflg = 0
         GOTO 500
-      ENDIF
+      END IF
     ELSEIF ( Ntask==2 ) THEN
       !                                                      Check if TOUT has
       !                                                      been reset .LT. T
@@ -1091,7 +1091,7 @@ SUBROUTINE DDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
         CALL DDNTP(h,0,N,Iwork(INQ),T,Tout,Work(IYH),Y)
         T = Tout
         GOTO 500
-      ENDIF
+      END IF
       !                                   Determine if TOUT has been overtaken
       !
       IF ( ABS(Tout-T)<=NROUND*uround*MAX(ABS(T),ABS(Tout)) ) THEN
@@ -1099,14 +1099,14 @@ SUBROUTINE DDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
         Nstate = 2
         Ierflg = 0
         GOTO 400
-      ENDIF
+      END IF
       !                                             If there are no more roots
       !                                             to report, report T.
       IF ( Nstate==5 ) THEN
         Nstate = 2
         Ierflg = 0
         GOTO 400
-      ENDIF
+      END IF
       Nstate = 2
       !                                                       See if TOUT will
       !                                                       be overtaken.
@@ -1116,7 +1116,7 @@ SUBROUTINE DDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
         Work(IH) = h
         IF ( h==0.D0 ) GOTO 600
         Iwork(IJTASK) = -1
-      ENDIF
+      END IF
     ELSEIF ( Ntask==3 ) THEN
       Nstate = 2
       IF ( T*hsign>Tout*hsign ) THEN
@@ -1130,20 +1130,20 @@ SUBROUTINE DDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
         CALL DDNTP(h,0,N,Iwork(INQ),T,Tout,Work(IYH),Y)
         T = Tout
         GOTO 500
-      ENDIF
+      END IF
       IF ( ABS(Tout-T)<=NROUND*uround*MAX(ABS(T),ABS(Tout)) ) THEN
         T = Tout
         Ierflg = 0
         GOTO 400
-      ENDIF
+      END IF
       IF ( (T+h)*hsign>Tout*hsign ) THEN
         h = Tout - T
         IF ( (T+h)*hsign>Tout*hsign ) h = h*(1.D0-4.D0*uround)
         Work(IH) = h
         IF ( h==0.D0 ) GOTO 600
         Iwork(IJTASK) = -1
-      ENDIF
-    ENDIF
+      END IF
+    END IF
     !                         Implement changes in MINT, MITER, and/or HMAX.
     !
     IF ( (Mint/=Iwork(IMNTLD).OR.Miter/=Iwork(IMTRLD)).AND.Mint/=3.AND.&
@@ -1153,15 +1153,15 @@ SUBROUTINE DDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
       IF ( h/=Work(IH) ) THEN
         Iwork(IJTASK) = -1
         Work(IH) = h
-      ENDIF
+      END IF
       Work(IHMAX) = Hmax
-    ENDIF
-  ENDIF
+    END IF
+  END IF
   !
   100  nstepl = Iwork(INSTEP)
   DO i = 1, N
     Y(i) = Work(i+IYH-1)
-  ENDDO
+  END DO
   IF ( Nroot/=0 ) THEN
     DO i = 1, Nroot
       Work(i+ignow-1) = G(npar,T,Y,i)
@@ -1169,337 +1169,339 @@ SUBROUTINE DDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
         Iwork(INROOT) = i
         Nstate = 7
         RETURN
-      ENDIF
-    ENDDO
-  ENDIF
+      END IF
+    END DO
+  END IF
   IF ( Ierror==1 ) THEN
     DO i = 1, N
       Work(i+iywt-1) = 1.D0
-    ENDDO
+    END DO
     GOTO 300
   ELSEIF ( Ierror==5 ) THEN
     DO i = 1, N
       Work(i+iywt-1) = Ewt(i)
-    ENDDO
+    END DO
     GOTO 300
-  ENDIF
+  END IF
   !                                       Reset YWT array.  Looping point.
   200 CONTINUE
   IF ( Ierror==2 ) THEN
     DO i = 1, N
       IF ( Y(i)==0.D0 ) GOTO 250
       Work(i+iywt-1) = ABS(Y(i))
-    ENDDO
+    END DO
     GOTO 300
-    250    IF ( Iwork(IJTASK)==0 ) THEN
-    CALL F(npar,T,Y,Work(isave2))
-    IF ( npar==0 ) THEN
-      Nstate = 6
-      RETURN
-    ENDIF
-    Iwork(INFE) = Iwork(INFE) + 1
-    IF ( Miter==3.AND.Impl/=0 ) THEN
-      iflag = 0
-      CALL USERS(Y,Work(IYH),Work(iywt),Work(isave1),Work(isave2),T,h,&
-        Work(IEL),Impl,npar,ndecom,iflag)
-      IF ( iflag==-1 ) GOTO 700
+    250 CONTINUE
+    IF ( Iwork(IJTASK)==0 ) THEN
+      CALL F(npar,T,Y,Work(isave2))
       IF ( npar==0 ) THEN
-        Nstate = 10
+        Nstate = 6
         RETURN
-      ENDIF
-    ELSEIF ( Impl==1 ) THEN
-      IF ( Miter==1.OR.Miter==2 ) THEN
+      END IF
+      Iwork(INFE) = Iwork(INFE) + 1
+      IF ( Miter==3.AND.Impl/=0 ) THEN
+        iflag = 0
+        CALL USERS(Y,Work(IYH),Work(iywt),Work(isave1),Work(isave2),T,h,&
+          Work(IEL),Impl,npar,ndecom,iflag)
+        IF ( iflag==-1 ) GOTO 700
+        IF ( npar==0 ) THEN
+          Nstate = 10
+          RETURN
+        END IF
+      ELSEIF ( Impl==1 ) THEN
+        IF ( Miter==1.OR.Miter==2 ) THEN
+          CALL FA(npar,T,Y,Work(ia),matdim,Ml,Mu,ndecom)
+          IF ( npar==0 ) THEN
+            Nstate = 9
+            RETURN
+          END IF
+          CALL DGEFA(Work(ia),matdim,N,Iwork(INDPVT),info)
+          IF ( info/=0 ) GOTO 700
+          CALL DGESL(Work(ia),matdim,N,Iwork(INDPVT),Work(isave2),0)
+        ELSEIF ( Miter==4.OR.Miter==5 ) THEN
+          CALL FA(npar,T,Y,Work(ia+Ml),matdim,Ml,Mu,ndecom)
+          IF ( npar==0 ) THEN
+            Nstate = 9
+            RETURN
+          END IF
+          CALL DGBFA(Work(ia),matdim,N,Ml,Mu,Iwork(INDPVT),info)
+          IF ( info/=0 ) GOTO 700
+          CALL DGBSL(Work(ia),matdim,N,Ml,Mu,Iwork(INDPVT),Work(isave2),0)
+        END IF
+      ELSEIF ( Impl==2 ) THEN
         CALL FA(npar,T,Y,Work(ia),matdim,Ml,Mu,ndecom)
         IF ( npar==0 ) THEN
           Nstate = 9
           RETURN
-        ENDIF
-        CALL DGEFA(Work(ia),matdim,N,Iwork(INDPVT),info)
-        IF ( info/=0 ) GOTO 700
-        CALL DGESL(Work(ia),matdim,N,Iwork(INDPVT),Work(isave2),0)
-      ELSEIF ( Miter==4.OR.Miter==5 ) THEN
-        CALL FA(npar,T,Y,Work(ia+Ml),matdim,Ml,Mu,ndecom)
-        IF ( npar==0 ) THEN
-          Nstate = 9
-          RETURN
-        ENDIF
-        CALL DGBFA(Work(ia),matdim,N,Ml,Mu,Iwork(INDPVT),info)
-        IF ( info/=0 ) GOTO 700
-        CALL DGBSL(Work(ia),matdim,N,Ml,Mu,Iwork(INDPVT),Work(isave2),0)
-      ENDIF
-    ELSEIF ( Impl==2 ) THEN
-      CALL FA(npar,T,Y,Work(ia),matdim,Ml,Mu,ndecom)
-      IF ( npar==0 ) THEN
-        Nstate = 9
-        RETURN
-      ENDIF
-      DO i = 1, ndecom
-        IF ( Work(i+ia-1)==0.D0 ) GOTO 700
-        Work(i+isave2-1) = Work(i+isave2-1)/Work(i+ia-1)
-      ENDDO
-    ELSEIF ( Impl==3 ) THEN
-      IF ( Miter==1.OR.Miter==2 ) THEN
-        CALL FA(npar,T,Y,Work(ia),matdim,Ml,Mu,ndecom)
-        IF ( npar==0 ) THEN
-          Nstate = 9
-          RETURN
-        ENDIF
-        CALL DGEFA(Work(ia),matdim,Nde,Iwork(INDPVT),info)
-        IF ( info/=0 ) GOTO 700
-        CALL DGESL(Work(ia),matdim,Nde,Iwork(INDPVT),Work(isave2),0)
-      ELSEIF ( Miter==4.OR.Miter==5 ) THEN
-        CALL FA(npar,T,Y,Work(ia+Ml),matdim,Ml,Mu,ndecom)
-        IF ( npar==0 ) THEN
-          Nstate = 9
-          RETURN
-        ENDIF
-        CALL DGBFA(Work(ia),matdim,Nde,Ml,Mu,Iwork(INDPVT),info)
-        IF ( info/=0 ) GOTO 700
-        CALL DGBSL(Work(ia),matdim,Nde,Ml,Mu,Iwork(INDPVT),Work(isave2),0)
-      ENDIF
-    ENDIF
-  ENDIF
-  DO j = i, N
-    IF ( Y(j)/=0.D0 ) THEN
-      Work(j+iywt-1) = ABS(Y(j))
-    ELSEIF ( Iwork(IJTASK)==0 ) THEN
-      Work(j+iywt-1) = ABS(h*Work(j+isave2-1))
-    ELSE
-      Work(j+iywt-1) = ABS(Work(j+IYH+N-1))
-    ENDIF
-    IF ( Work(j+iywt-1)==0.D0 ) Work(j+iywt-1) = uround
-  ENDDO
-ELSEIF ( Ierror==3 ) THEN
+        END IF
+        DO i = 1, ndecom
+          IF ( Work(i+ia-1)==0.D0 ) GOTO 700
+          Work(i+isave2-1) = Work(i+isave2-1)/Work(i+ia-1)
+        END DO
+      ELSEIF ( Impl==3 ) THEN
+        IF ( Miter==1.OR.Miter==2 ) THEN
+          CALL FA(npar,T,Y,Work(ia),matdim,Ml,Mu,ndecom)
+          IF ( npar==0 ) THEN
+            Nstate = 9
+            RETURN
+          END IF
+          CALL DGEFA(Work(ia),matdim,Nde,Iwork(INDPVT),info)
+          IF ( info/=0 ) GOTO 700
+          CALL DGESL(Work(ia),matdim,Nde,Iwork(INDPVT),Work(isave2),0)
+        ELSEIF ( Miter==4.OR.Miter==5 ) THEN
+          CALL FA(npar,T,Y,Work(ia+Ml),matdim,Ml,Mu,ndecom)
+          IF ( npar==0 ) THEN
+            Nstate = 9
+            RETURN
+          END IF
+          CALL DGBFA(Work(ia),matdim,Nde,Ml,Mu,Iwork(INDPVT),info)
+          IF ( info/=0 ) GOTO 700
+          CALL DGBSL(Work(ia),matdim,Nde,Ml,Mu,Iwork(INDPVT),Work(isave2),0)
+        END IF
+      END IF
+    END IF
+    DO j = i, N
+      IF ( Y(j)/=0.D0 ) THEN
+        Work(j+iywt-1) = ABS(Y(j))
+      ELSEIF ( Iwork(IJTASK)==0 ) THEN
+        Work(j+iywt-1) = ABS(h*Work(j+isave2-1))
+      ELSE
+        Work(j+iywt-1) = ABS(Work(j+IYH+N-1))
+      END IF
+      IF ( Work(j+iywt-1)==0.D0 ) Work(j+iywt-1) = uround
+    END DO
+  ELSEIF ( Ierror==3 ) THEN
+    DO i = 1, N
+      Work(i+iywt-1) = MAX(Ewt(1),ABS(Y(i)))
+    END DO
+  ELSEIF ( Ierror==4 ) THEN
+    DO i = 1, N
+      Work(i+iywt-1) = MAX(Ewt(i),ABS(Y(i)))
+    END DO
+  END IF
+  !
+  300 CONTINUE
   DO i = 1, N
-    Work(i+iywt-1) = MAX(Ewt(1),ABS(Y(i)))
-  ENDDO
-ELSEIF ( Ierror==4 ) THEN
-  DO i = 1, N
-    Work(i+iywt-1) = MAX(Ewt(i),ABS(Y(i)))
-  ENDDO
-ENDIF
-!
-300 CONTINUE
-DO i = 1, N
-  Work(i+isave2-1) = Y(i)/Work(i+iywt-1)
-ENDDO
-sum = DNRM2(N,Work(isave2),1)/SQRT(REAL(N, 8))
-sum = MAX(1.D0,sum)
-IF ( Eps<sum*uround ) THEN
-  Eps = sum*uround*(1.D0+10.D0*uround)
-  WRITE (rl1,'(D16.8)') T
-  WRITE (rl2,'(D16.8)') Eps
-  Ierflg = 4
-  CALL XERMSG('SLATEC','DDRIV3','At T, '//rl1//', the requested accuracy,&
-    & EPS, was not obtainable with the machine precision.&
-    & EPS has been increased to '//rl2//' .',Ierflg,0)
-  Nstate = 4
-  GOTO 400
-ENDIF
-IF ( ABS(h)>=uround*ABS(T) ) THEN
-  Iwork(INDPRT) = 0
-ELSEIF ( Iwork(INDPRT)==0 ) THEN
-  WRITE (rl1,'(D16.8)') T
-  WRITE (rl2,'(D16.8)') h
-  Ierflg = 15
-  CALL XERMSG('SLATEC','DDRIV3','At T, '//rl1//', the step size, '//rl2//&
-    ', is smaller than the roundoff level of T.  This may occur if there is&
-    & an abrupt change in the right hand side of the differential equations.',Ierflg,0)
-  Iwork(INDPRT) = 1
-ENDIF
-IF ( Ntask/=2 ) THEN
-  IF ( (Iwork(INSTEP)-nstepl)==Mxstep ) THEN
+    Work(i+isave2-1) = Y(i)/Work(i+iywt-1)
+  END DO
+  sum = DNRM2(N,Work(isave2),1)/SQRT(REAL(N, 8))
+  sum = MAX(1.D0,sum)
+  IF ( Eps<sum*uround ) THEN
+    Eps = sum*uround*(1.D0+10.D0*uround)
     WRITE (rl1,'(D16.8)') T
-    WRITE (intgr1,'(I8)') Mxstep
-    WRITE (rl2,'(D16.8)') Tout
-    Ierflg = 3
-    CALL XERMSG('SLATEC','DDRIV3','At T, '//rl1//', '//intgr1//&
-      ' steps have been taken without reaching TOUT, '//rl2//' .',Ierflg,0)
-    Nstate = 3
+    WRITE (rl2,'(D16.8)') Eps
+    Ierflg = 4
+    CALL XERMSG('SLATEC','DDRIV3','At T, '//rl1//', the requested accuracy,&
+      & EPS, was not obtainable with the machine precision.&
+      & EPS has been increased to '//rl2//' .',Ierflg,0)
+    Nstate = 4
     GOTO 400
-  ENDIF
-ENDIF
-!
-!     CALL DDSTP (EPS, F, FA, HMAX, IMPL, IERROR, JACOBN, MATDIM,
-!    8            MAXORD, MINT, MITER, ML, MU, N, NDE, YWT, UROUND,
-!    8            USERS,  AVGH, AVGORD, H, HUSED, JTASK, MNTOLD, MTROLD,
-!    8            NFE, NJE, NQUSED, NSTEP, T, Y, YH,  A, CONVRG,
-!    8            DFDY, EL, FAC, HOLD, IPVT, JSTATE, JSTEPL, NQ, NWAIT,
-!    8            RC, RMAX, SAVE1, SAVE2, TQ, TREND, ISWFLG, MTRSV,
-!    8            MXRDSV)
-!
-CALL DDSTP(Eps,F,FA,Work(IHMAX),Impl,Ierror,JACOBN,matdim,Iwork(IMXORD),&
-  Iwork(IMNT),Iwork(IMTR),Ml,Mu,npar,ndecom,Work(iywt),uround,&
-  USERS,Work(IAVGH),Work(IAVGRD),Work(IH),hused,Iwork(IJTASK),&
-  Iwork(IMNTLD),Iwork(IMTRLD),Iwork(INFE),Iwork(INJE),&
-  Iwork(INQUSE),Iwork(INSTEP),Work(IT),Y,Work(IYH),Work(ia),&
-  convrg,Work(idfdy),Work(IEL),Work(ifac),Work(IHOLD),&
-  Iwork(INDPVT),jstate,Iwork(IJSTPL),Iwork(INQ),Iwork(INWAIT),&
-  Work(IRC),Work(IRMAX),Work(isave1),Work(isave2),Work(ITQ),&
-  Work(ITREND),Mint,Iwork(IMTRSV),Iwork(IMXRDS))
-T = Work(IT)
-h = Work(IH)
-IF ( convrg ) THEN
-  Iwork(ICNVRG) = 1
-ELSE
-  Iwork(ICNVRG) = 0
-ENDIF
-SELECT CASE (jstate)
-  CASE (2)
-    GOTO 600
-  CASE (3)
-    !
+  END IF
+  IF ( ABS(h)>=uround*ABS(T) ) THEN
+    Iwork(INDPRT) = 0
+  ELSEIF ( Iwork(INDPRT)==0 ) THEN
     WRITE (rl1,'(D16.8)') T
-    Ierflg = 42
-    CALL XERMSG('SLATEC','DDRIV3','At T, '//rl1//&
-      ', the step size has been reduced about 50 '//&
-      'times without advancing the solution.&
-      & Often this occurs if the problem setup is incorrect.',Ierflg,1)
-    Nstate = 12
-    RETURN
-  CASE (4,5)
-    GOTO 700
-  CASE (6,7,8,9,10)
-    !
-    Nstate = jstate
-    RETURN
-  CASE DEFAULT
-    Iwork(IJTASK) = 1
-    !                                 Determine if a root has been overtaken
-    IF ( Nroot/=0 ) THEN
-      iroot = 0
-      DO i = 1, Nroot
-        glast = Work(i+ignow-1)
-        gnow = G(npar,T,Y,i)
-        IF ( npar==0 ) THEN
-          Iwork(INROOT) = i
-          Nstate = 7
-          RETURN
-        ENDIF
-        Work(i+ignow-1) = gnow
-        IF ( glast*gnow>0.D0 ) THEN
-          Work(i+itroot-1) = T + h
-        ELSEIF ( gnow==0.D0 ) THEN
-          Work(i+itroot-1) = T
-          iroot = i
-        ELSEIF ( glast==0.D0 ) THEN
-          Work(i+itroot-1) = T + h
-        ELSEIF ( ABS(hused)>=uround*ABS(T) ) THEN
-          tlast = T - hused
-          iroot = i
-          troot = T
-          CALL DDZRO(ae,G,h,npar,Iwork(INQ),iroot,re,T,Work(IYH),uround,&
-            troot,tlast,gnow,glast,Y)
-          DO j = 1, N
-            Y(j) = Work(IYH+j-1)
-          ENDDO
+    WRITE (rl2,'(D16.8)') h
+    Ierflg = 15
+    CALL XERMSG('SLATEC','DDRIV3','At T, '//rl1//', the step size, '//rl2//&
+      ', is smaller than the roundoff level of T.  This may occur if there is&
+      & an abrupt change in the right hand side of the differential equations.',Ierflg,0)
+    Iwork(INDPRT) = 1
+  END IF
+  IF ( Ntask/=2 ) THEN
+    IF ( (Iwork(INSTEP)-nstepl)==Mxstep ) THEN
+      WRITE (rl1,'(D16.8)') T
+      WRITE (intgr1,'(I8)') Mxstep
+      WRITE (rl2,'(D16.8)') Tout
+      Ierflg = 3
+      CALL XERMSG('SLATEC','DDRIV3','At T, '//rl1//', '//intgr1//&
+        ' steps have been taken without reaching TOUT, '//rl2//' .',Ierflg,0)
+      Nstate = 3
+      GOTO 400
+    END IF
+  END IF
+  !
+  !     CALL DDSTP (EPS, F, FA, HMAX, IMPL, IERROR, JACOBN, MATDIM,
+  !    8            MAXORD, MINT, MITER, ML, MU, N, NDE, YWT, UROUND,
+  !    8            USERS,  AVGH, AVGORD, H, HUSED, JTASK, MNTOLD, MTROLD,
+  !    8            NFE, NJE, NQUSED, NSTEP, T, Y, YH,  A, CONVRG,
+  !    8            DFDY, EL, FAC, HOLD, IPVT, JSTATE, JSTEPL, NQ, NWAIT,
+  !    8            RC, RMAX, SAVE1, SAVE2, TQ, TREND, ISWFLG, MTRSV,
+  !    8            MXRDSV)
+  !
+  CALL DDSTP(Eps,F,FA,Work(IHMAX),Impl,Ierror,JACOBN,matdim,Iwork(IMXORD),&
+    Iwork(IMNT),Iwork(IMTR),Ml,Mu,npar,ndecom,Work(iywt),uround,&
+    USERS,Work(IAVGH),Work(IAVGRD),Work(IH),hused,Iwork(IJTASK),&
+    Iwork(IMNTLD),Iwork(IMTRLD),Iwork(INFE),Iwork(INJE),&
+    Iwork(INQUSE),Iwork(INSTEP),Work(IT),Y,Work(IYH),Work(ia),&
+    convrg,Work(idfdy),Work(IEL),Work(ifac),Work(IHOLD),&
+    Iwork(INDPVT),jstate,Iwork(IJSTPL),Iwork(INQ),Iwork(INWAIT),&
+    Work(IRC),Work(IRMAX),Work(isave1),Work(isave2),Work(ITQ),&
+    Work(ITREND),Mint,Iwork(IMTRSV),Iwork(IMXRDS))
+  T = Work(IT)
+  h = Work(IH)
+  IF ( convrg ) THEN
+    Iwork(ICNVRG) = 1
+  ELSE
+    Iwork(ICNVRG) = 0
+  END IF
+  SELECT CASE (jstate)
+    CASE (2)
+      GOTO 600
+    CASE (3)
+      !
+      WRITE (rl1,'(D16.8)') T
+      Ierflg = 42
+      CALL XERMSG('SLATEC','DDRIV3','At T, '//rl1//&
+        ', the step size has been reduced about 50 '//&
+        'times without advancing the solution.&
+        & Often this occurs if the problem setup is incorrect.',Ierflg,1)
+      Nstate = 12
+      RETURN
+    CASE (4,5)
+      GOTO 700
+    CASE (6,7,8,9,10)
+      !
+      Nstate = jstate
+      RETURN
+    CASE DEFAULT
+      Iwork(IJTASK) = 1
+      !                                 Determine if a root has been overtaken
+      IF ( Nroot/=0 ) THEN
+        iroot = 0
+        DO i = 1, Nroot
+          glast = Work(i+ignow-1)
+          gnow = G(npar,T,Y,i)
           IF ( npar==0 ) THEN
             Iwork(INROOT) = i
             Nstate = 7
             RETURN
-          ENDIF
-          Work(i+itroot-1) = troot
-        ELSE
-          Work(i+itroot-1) = T
-          iroot = i
-        ENDIF
-      ENDDO
-      IF ( iroot==0 ) THEN
-        Iwork(IJROOT) = 0
-        !                                                  Select the first root
-      ELSE
-        Iwork(IJROOT) = Ntask
-        Iwork(INRTLD) = Nroot
-        Iwork(INDTRT) = itroot
-        troot = T + h
-        DO i = 1, Nroot
-          IF ( Work(i+itroot-1)*hsign<troot*hsign ) THEN
-            troot = Work(i+itroot-1)
+          END IF
+          Work(i+ignow-1) = gnow
+          IF ( glast*gnow>0.D0 ) THEN
+            Work(i+itroot-1) = T + h
+          ELSEIF ( gnow==0.D0 ) THEN
+            Work(i+itroot-1) = T
             iroot = i
-          ENDIF
-        ENDDO
-        Iwork(INROOT) = iroot
-        Work(ITOUT) = troot
-        IF ( troot*hsign<=Tout*hsign ) THEN
-          CALL DDNTP(h,0,N,Iwork(INQ),T,troot,Work(IYH),Y)
-          Nstate = 5
-          T = troot
-          Ierflg = 0
-          GOTO 500
-        ENDIF
-      ENDIF
-    ENDIF
-    !                               Test for NTASK condition to be satisfied
-    Nstate = 2
-    IF ( Ntask==1 ) THEN
-      IF ( T*hsign<Tout*hsign ) GOTO 200
-      CALL DDNTP(h,0,N,Iwork(INQ),T,Tout,Work(IYH),Y)
-      T = Tout
-      Ierflg = 0
-      GOTO 500
-      !                               TOUT is assumed to have been attained
-      !                               exactly if T is within twenty roundoff
-      !                               units of TOUT, relative to MAX(TOUT, T).
-      !
-    ELSEIF ( Ntask==2 ) THEN
-      IF ( ABS(Tout-T)<=NROUND*uround*MAX(ABS(T),ABS(Tout)) ) THEN
+          ELSEIF ( glast==0.D0 ) THEN
+            Work(i+itroot-1) = T + h
+          ELSEIF ( ABS(hused)>=uround*ABS(T) ) THEN
+            tlast = T - hused
+            iroot = i
+            troot = T
+            CALL DDZRO(ae,G,h,npar,Iwork(INQ),iroot,re,T,Work(IYH),uround,&
+              troot,tlast,gnow,glast,Y)
+            DO j = 1, N
+              Y(j) = Work(IYH+j-1)
+            END DO
+            IF ( npar==0 ) THEN
+              Iwork(INROOT) = i
+              Nstate = 7
+              RETURN
+            END IF
+            Work(i+itroot-1) = troot
+          ELSE
+            Work(i+itroot-1) = T
+            iroot = i
+          END IF
+        END DO
+        IF ( iroot==0 ) THEN
+          Iwork(IJROOT) = 0
+          !                                                  Select the first root
+        ELSE
+          Iwork(IJROOT) = Ntask
+          Iwork(INRTLD) = Nroot
+          Iwork(INDTRT) = itroot
+          troot = T + h
+          DO i = 1, Nroot
+            IF ( Work(i+itroot-1)*hsign<troot*hsign ) THEN
+              troot = Work(i+itroot-1)
+              iroot = i
+            END IF
+          END DO
+          Iwork(INROOT) = iroot
+          Work(ITOUT) = troot
+          IF ( troot*hsign<=Tout*hsign ) THEN
+            CALL DDNTP(h,0,N,Iwork(INQ),T,troot,Work(IYH),Y)
+            Nstate = 5
+            T = troot
+            Ierflg = 0
+            GOTO 500
+          END IF
+        END IF
+      END IF
+      !                               Test for NTASK condition to be satisfied
+      Nstate = 2
+      IF ( Ntask==1 ) THEN
+        IF ( T*hsign<Tout*hsign ) GOTO 200
+        CALL DDNTP(h,0,N,Iwork(INQ),T,Tout,Work(IYH),Y)
         T = Tout
-      ELSEIF ( (T+h)*hsign>Tout*hsign ) THEN
-        h = Tout - T
-        IF ( (T+h)*hsign>Tout*hsign ) h = h*(1.D0-4.D0*uround)
-        Work(IH) = h
-        IF ( h==0.D0 ) GOTO 600
-        Iwork(IJTASK) = -1
-      ENDIF
-    ELSEIF ( Ntask==3 ) THEN
-      IF ( ABS(Tout-T)<=NROUND*uround*MAX(ABS(T),ABS(Tout)) ) THEN
-        T = Tout
-      ELSE
-        IF ( (T+h)*hsign>Tout*hsign ) THEN
+        Ierflg = 0
+        GOTO 500
+        !                               TOUT is assumed to have been attained
+        !                               exactly if T is within twenty roundoff
+        !                               units of TOUT, relative to MAX(TOUT, T).
+        !
+      ELSEIF ( Ntask==2 ) THEN
+        IF ( ABS(Tout-T)<=NROUND*uround*MAX(ABS(T),ABS(Tout)) ) THEN
+          T = Tout
+        ELSEIF ( (T+h)*hsign>Tout*hsign ) THEN
           h = Tout - T
           IF ( (T+h)*hsign>Tout*hsign ) h = h*(1.D0-4.D0*uround)
           Work(IH) = h
           IF ( h==0.D0 ) GOTO 600
           Iwork(IJTASK) = -1
-        ENDIF
-        GOTO 200
-      ENDIF
-    ENDIF
-    Ierflg = 0
-END SELECT
-!                                      All returns are made through this
-!                                      section.  IMXERR is determined.
-400 CONTINUE
-DO i = 1, N
-  Y(i) = Work(i+IYH-1)
-ENDDO
-500 CONTINUE
-IF ( Iwork(IJTASK)==0 ) RETURN
-big = 0.D0
-imxerr = 1
-DO i = 1, N
-  !                                            SIZE = ABS(ERROR(I)/YWT(I))
-  size = ABS(Work(i+isave1-1)/Work(i+iywt-1))
-  IF ( big<size ) THEN
-    big = size
-    imxerr = i
-  ENDIF
-ENDDO
-Iwork(INDMXR) = imxerr
-Work(IHUSED) = hused
-RETURN
-!                                        Fatal errors are processed here
-!
-600  WRITE (rl1,'(D16.8)') T
-Ierflg = 41
-CALL XERMSG('SLATEC','DDRIV3',&
-  'At T, '//rl1//', the attempted step size has gone to zero.  Often this occurs if the problem setup is incorrect.',Ierflg,1)
-Nstate = 12
-RETURN
-!
-700  WRITE (rl1,'(D16.8)') T
-Ierflg = 43
-CALL XERMSG('SLATEC','DDRIV3',&
-  'At T, '//rl1//', while solving A*YDOT = F, A is singular.',Ierflg,1)
-Nstate = 12
+        END IF
+      ELSEIF ( Ntask==3 ) THEN
+        IF ( ABS(Tout-T)<=NROUND*uround*MAX(ABS(T),ABS(Tout)) ) THEN
+          T = Tout
+        ELSE
+          IF ( (T+h)*hsign>Tout*hsign ) THEN
+            h = Tout - T
+            IF ( (T+h)*hsign>Tout*hsign ) h = h*(1.D0-4.D0*uround)
+            Work(IH) = h
+            IF ( h==0.D0 ) GOTO 600
+            Iwork(IJTASK) = -1
+          END IF
+          GOTO 200
+        END IF
+      END IF
+      Ierflg = 0
+  END SELECT
+  !                                      All returns are made through this
+  !                                      section.  IMXERR is determined.
+  400 CONTINUE
+  DO i = 1, N
+    Y(i) = Work(i+IYH-1)
+  END DO
+  500 CONTINUE
+  IF ( Iwork(IJTASK)==0 ) RETURN
+  big = 0.D0
+  imxerr = 1
+  DO i = 1, N
+    !                                            SIZE = ABS(ERROR(I)/YWT(I))
+    size = ABS(Work(i+isave1-1)/Work(i+iywt-1))
+    IF ( big<size ) THEN
+      big = size
+      imxerr = i
+    END IF
+  END DO
+  Iwork(INDMXR) = imxerr
+  Work(IHUSED) = hused
+  RETURN
+  !                                        Fatal errors are processed here
+  !
+  600  WRITE (rl1,'(D16.8)') T
+  Ierflg = 41
+  CALL XERMSG('SLATEC','DDRIV3',&
+    'At T, '//rl1//', the attempted step size has gone to zero.&
+    & Often this occurs if the problem setup is incorrect.',Ierflg,1)
+  Nstate = 12
+  RETURN
+  !
+  700  WRITE (rl1,'(D16.8)') T
+  Ierflg = 43
+  CALL XERMSG('SLATEC','DDRIV3',&
+    'At T, '//rl1//', while solving A*YDOT = F, A is singular.',Ierflg,1)
+  Nstate = 12
 END SUBROUTINE DDRIV3

@@ -48,7 +48,7 @@ COMPLEX FUNCTION CEXPRL(Z)
     nterms = INT( xn - (xn*xln+alneps)/(xln+1.36) + 1.5 )
     rbnd = R1MACH(3)
     first = .FALSE.
-  ENDIF
+  END IF
   !
   r = ABS(Z)
   IF ( r>0.5 ) CEXPRL = (EXP(Z)-1.0)/Z
@@ -60,6 +60,6 @@ COMPLEX FUNCTION CEXPRL(Z)
   CEXPRL = (0.0,0.0)
   DO i = 1, nterms
     CEXPRL = 1.0 + CEXPRL*Z/(nterms+2-i)
-  ENDDO
+  END DO
   !
 END FUNCTION CEXPRL

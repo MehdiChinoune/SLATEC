@@ -375,7 +375,7 @@ SUBROUTINE HSTSSP(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   INTEGER i, Idimf, ierr1, Ierror, isw, iwb, iwc, iwr, iws, j, &
     jsw, k, lp, M, mb, Mbdcnd, mm1, N, Nbdcnd, np
   REAL A, a1, a2, a3, B, Bda(*), Bdb(*), Bdc(*), Bdd(*), C, D, deltar, &
@@ -412,20 +412,20 @@ SUBROUTINE HSTSSP(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
         IF ( A==0. ) THEN
           mb = 6
           jsw = 2
-        ENDIF
+        END IF
       CASE (3,6,8,9)
       CASE (4)
         IF ( B==pi ) THEN
           mb = 8
           jsw = 2
-        ENDIF
+        END IF
       CASE DEFAULT
         IF ( A==0..AND.B==pi ) THEN
           mb = 9
           jsw = 2
-        ENDIF
+        END IF
     END SELECT
-  ENDIF
+  END IF
   !
   !     DEFINE A,B,C COEFFICIENTS IN W-ARRAY.
   !
@@ -437,7 +437,7 @@ SUBROUTINE HSTSSP(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
     j = iwr + i
     W(j) = SIN(A+(i-0.5)*deltar)
     W(i) = SIN((A+(i-1)*deltar))/dlrsq
-  ENDDO
+  END DO
   mm1 = M - 1
   DO i = 1, mm1
     k = iwc + i
@@ -445,7 +445,7 @@ SUBROUTINE HSTSSP(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
     j = iwr + i
     k = iwb + i
     W(k) = Elmbda*W(j) - (W(i)+W(i+1))
-  ENDDO
+  END DO
   W(iwr) = SIN(B)/dlrsq
   W(iwc) = Elmbda*W(iws) - (W(M)+W(iwr))
   DO i = 1, M
@@ -453,8 +453,8 @@ SUBROUTINE HSTSSP(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
     a1 = W(j)
     DO j = 1, N
       F(i,j) = a1*F(i,j)
-    ENDDO
-  ENDDO
+    END DO
+  END DO
   !
   !     ENTER BOUNDARY DATA FOR THETA-BOUNDARIES.
   !
@@ -464,14 +464,14 @@ SUBROUTINE HSTSSP(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
       W(iwb+1) = W(iwb+1) + W(1)
       DO j = 1, N
         F(1,j) = F(1,j) + a1*Bda(j)
-      ENDDO
+      END DO
     CASE (5,6,9)
     CASE DEFAULT
       a1 = 2.*W(1)
       W(iwb+1) = W(iwb+1) - W(1)
       DO j = 1, N
         F(1,j) = F(1,j) - a1*Bda(j)
-      ENDDO
+      END DO
   END SELECT
   SELECT CASE (mb)
     CASE (2,3,6)
@@ -479,14 +479,14 @@ SUBROUTINE HSTSSP(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
       W(iwc) = W(iwc) + W(iwr)
       DO j = 1, N
         F(M,j) = F(M,j) - a1*Bdb(j)
-      ENDDO
+      END DO
     CASE (7,8,9)
     CASE DEFAULT
       a1 = 2.*W(iwr)
       W(iwc) = W(iwc) - W(iwr)
       DO j = 1, N
         F(M,j) = F(M,j) - a1*Bdb(j)
-      ENDDO
+      END DO
   END SELECT
   !
   !     ENTER BOUNDARY DATA FOR PHI-BOUNDARIES.
@@ -500,12 +500,12 @@ SUBROUTINE HSTSSP(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
       DO i = 1, M
         j = iwr + i
         F(i,1) = F(i,1) + a1*Bdc(i)/W(j)
-      ENDDO
+      END DO
     CASE DEFAULT
       DO i = 1, M
         j = iwr + i
         F(i,1) = F(i,1) - a1*Bdc(i)/W(j)
-      ENDDO
+      END DO
   END SELECT
   a1 = 2./dlthsq
   SELECT CASE (np)
@@ -515,12 +515,12 @@ SUBROUTINE HSTSSP(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
       DO i = 1, M
         j = iwr + i
         F(i,N) = F(i,N) - a1*Bdd(i)/W(j)
-      ENDDO
+      END DO
     CASE DEFAULT
       DO i = 1, M
         j = iwr + i
         F(i,N) = F(i,N) - a1*Bdd(i)/W(j)
-      ENDDO
+      END DO
   END SELECT
   !
   !     ADJUST RIGHT SIDE OF SINGULAR PROBLEMS TO INSURE EXISTENCE OF A
@@ -539,8 +539,8 @@ SUBROUTINE HSTSSP(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
             DO j = 1, N
               DO i = 1, M
                 Pertrb = Pertrb + F(i,j)
-              ENDDO
-            ENDDO
+              END DO
+            END DO
             a1 = N*(COS(A)-COS(B))/(2.*SIN(0.5*deltar))
             Pertrb = Pertrb/a1
             DO i = 1, M
@@ -548,21 +548,21 @@ SUBROUTINE HSTSSP(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
               a1 = Pertrb*W(j)
               DO j = 1, N
                 F(i,j) = F(i,j) - a1
-              ENDDO
-            ENDDO
+              END DO
+            END DO
             a2 = 0.
             a3 = 0.
             DO j = 1, N
               a2 = a2 + F(1,j)
               a3 = a3 + F(M,j)
-            ENDDO
+            END DO
             a2 = a2/W(iwr+1)
             a3 = a3/W(iws)
         END SELECT
     END SELECT
   ELSE
     Ierror = 14
-  ENDIF
+  END IF
   !
   !     MULTIPLY I-TH EQUATION THROUGH BY  R(I)*DELTHT**2
   !
@@ -576,8 +576,8 @@ SUBROUTINE HSTSSP(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
     W(j) = a1*W(j)
     DO j = 1, N
       F(i,j) = a1*F(i,j)
-    ENDDO
-  ENDDO
+    END DO
+  END DO
   lp = Nbdcnd
   W(1) = 0.
   W(iwr) = 0.
@@ -588,14 +588,14 @@ SUBROUTINE HSTSSP(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
     CALL GENBUN(lp,N,1,M,W,W(iwb+1),W(iwc+1),Idimf,F,ierr1,W(iwr+1))
   ELSE
     CALL POISTG(lp,N,1,M,W,W(iwb+1),W(iwc+1),Idimf,F,ierr1,W(iwr+1))
-  ENDIF
+  END IF
   W(1) = W(iwr+1) + 3*M
   IF ( isw==2.AND.jsw==2 ) THEN
     IF ( mb/=8 ) THEN
       a1 = 0.
       DO j = 1, N
         a1 = a1 + F(1,j)
-      ENDDO
+      END DO
       a1 = (a1-dlrsq*a2/16.)/N
       IF ( Nbdcnd==3 ) a1 = a1 + (Bdd(1)-Bdc(1))/(D-C)
       a1 = Bda(1) - a1
@@ -603,15 +603,15 @@ SUBROUTINE HSTSSP(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
       a1 = 0.
       DO j = 1, N
         a1 = a1 + F(M,j)
-      ENDDO
+      END DO
       a1 = (a1-dlrsq*a3/16.)/N
       IF ( Nbdcnd==3 ) a1 = a1 + (Bdd(M)-Bdc(M))/(D-C)
       a1 = Bdb(1) - a1
-    ENDIF
+    END IF
     DO i = 1, M
       DO j = 1, N
         F(i,j) = F(i,j) + a1
-      ENDDO
-    ENDDO
-  ENDIF
+      END DO
+    END DO
+  END IF
 END SUBROUTINE HSTSSP

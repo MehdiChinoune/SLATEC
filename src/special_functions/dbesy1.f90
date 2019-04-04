@@ -64,7 +64,7 @@ REAL(8) FUNCTION DBESY1(X)
     xmin = 1.571D0*EXP(MAX(LOG(D1MACH(1)),-LOG(D1MACH(2)))+0.01D0)
     xsml = SQRT(4.0D0*D1MACH(3))
     first = .FALSE.
-  ENDIF
+  END IF
   !
   IF ( X<=0.D0 ) CALL XERMSG('SLATEC','DBESY1','X IS ZERO OR NEGATIVE',1,2)
   IF ( X>4.0D0 ) THEN
@@ -72,7 +72,7 @@ REAL(8) FUNCTION DBESY1(X)
     CALL D9B1MP(X,ampl,theta)
     DBESY1 = ampl*SIN(theta)
     RETURN
-  ENDIF
+  END IF
   !
   IF ( X<xmin ) CALL XERMSG('SLATEC','DBESY1','X SO SMALL Y1 OVERFLOWS',3,2)
   y = 0.D0

@@ -167,15 +167,15 @@ SUBROUTINE DSDSCL(N,Nelt,Ia,Ja,A,Isym,X,B,Dinv,Job,Itol)
   IF ( Job/=0 ) THEN
     DO icol = 1, N
       Dinv(icol) = 1.0D0/SQRT(A(Ja(icol)))
-    ENDDO
+    END DO
   ELSE
     !
     !         UNSCALING...
     !
     DO icol = 1, N
       Dinv(icol) = 1.0D0/Dinv(icol)
-    ENDDO
-  ENDIF
+    END DO
+  END IF
   !
   DO icol = 1, N
     jbgn = Ja(icol)
@@ -183,21 +183,21 @@ SUBROUTINE DSDSCL(N,Nelt,Ia,Ja,A,Isym,X,B,Dinv,Job,Itol)
     di = Dinv(icol)
     DO j = jbgn, jend
       A(j) = Dinv(Ia(j))*A(j)*di
-    ENDDO
-  ENDDO
+    END DO
+  END DO
   !
   DO icol = 1, N
     B(icol) = B(icol)*Dinv(icol)
     X(icol) = X(icol)/Dinv(icol)
-  ENDDO
+  END DO
   !
   !         Check to see if we need to scale the "true solution" as well.
   !
   IF ( Itol==11 ) THEN
     DO icol = 1, N
       SOLn(icol) = SOLn(icol)/Dinv(icol)
-    ENDDO
-  ENDIF
+    END DO
+  END IF
   !
   !------------- LAST LINE OF DSDSCL FOLLOWS ----------------------------
 END SUBROUTINE DSDSCL

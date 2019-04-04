@@ -71,6 +71,6 @@ SUBROUTINE SINTI(N,Wsave)
   DO k = ks, kf
     fk = fk + 1.
     Wsave(k) = 2.*SIN(fk*dt)
-  ENDDO
+  END DO
   CALL RFFTI(np1,Wsave(kf+1))
 END SUBROUTINE SINTI

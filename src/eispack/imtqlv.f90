@@ -96,7 +96,7 @@ SUBROUTINE IMTQLV(N,D,E,E2,W,Ind,Ierr,Rv1)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   !
   INTEGER i, j, k, l, m, N, ii, mml, tag, Ierr
   REAL D(*), E(*), E2(*), W(*), Rv1(*)
@@ -112,7 +112,7 @@ SUBROUTINE IMTQLV(N,D,E,E2,W,Ind,Ierr,Rv1)
   DO i = 1, N
     W(i) = D(i)
     IF ( i/=1 ) Rv1(i-1) = E(i)
-  ENDDO
+  END DO
   !
   E2(1) = 0.0E0
   Rv1(N) = 0.0E0
@@ -128,13 +128,13 @@ SUBROUTINE IMTQLV(N,D,E,E2,W,Ind,Ierr,Rv1)
       IF ( s2==s1 ) EXIT
       !     .......... GUARD AGAINST UNDERFLOWED ELEMENT OF E2 ..........
       IF ( E2(m+1)==0.0E0 ) GOTO 100
-    ENDDO
+    END DO
     !
     IF ( m<=k ) GOTO 150
     IF ( m/=N ) E2(m+1) = 0.0E0
-    100    k = m
+    100  k = m
     tag = tag + 1
-    150    p = W(l)
+    150  p = W(l)
     IF ( m==l ) THEN
       !     .......... ORDER EIGENVALUES ..........
       IF ( l/=1 ) THEN
@@ -144,11 +144,11 @@ SUBROUTINE IMTQLV(N,D,E,E2,W,Ind,Ierr,Rv1)
           IF ( p>=W(i-1) ) GOTO 160
           W(i) = W(i-1)
           Ind(i) = Ind(i-1)
-        ENDDO
-      ENDIF
+        END DO
+      END IF
       !
       i = 1
-      160      W(i) = p
+      160  W(i) = p
       Ind(i) = tag
     ELSE
       IF ( j==30 ) GOTO 200
@@ -178,20 +178,20 @@ SUBROUTINE IMTQLV(N,D,E,E2,W,Ind,Ierr,Rv1)
           Rv1(i+1) = f*r
           s = 1.0E0/r
           c = c*s
-        ENDIF
+        END IF
         g = W(i+1) - p
         r = (W(i)-g)*s + 2.0E0*c*b
         p = s*r
         W(i+1) = g + p
         g = c*r - b
-      ENDDO
+      END DO
       !
       W(l) = W(l) - p
       Rv1(l) = g
       Rv1(m) = 0.0E0
       GOTO 50
-    ENDIF
-  ENDDO
+    END IF
+  END DO
   !
   RETURN
   !     .......... SET ERROR -- NO CONVERGENCE TO AN

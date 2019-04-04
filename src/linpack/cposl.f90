@@ -83,7 +83,7 @@ SUBROUTINE CPOSL(A,Lda,N,B)
   DO k = 1, N
     t = CDOTC(k-1,A(1,k),1,B(1),1)
     B(k) = (B(k)-t)/A(k,k)
-  ENDDO
+  END DO
   !
   !     SOLVE R*X = Y
   !
@@ -92,5 +92,5 @@ SUBROUTINE CPOSL(A,Lda,N,B)
     B(k) = B(k)/A(k,k)
     t = -B(k)
     CALL CAXPY(k-1,t,A(1,k),1,B(1),1)
-  ENDDO
+  END DO
 END SUBROUTINE CPOSL

@@ -118,7 +118,7 @@ SUBROUTINE DQNC79(FUN,A,B,Err,Ans,Ierr,K)
     nlmx = MIN(99,(nbits*4)/5)
     sq2 = SQRT(2.0D0)
     first = .FALSE.
-  ENDIF
+  END IF
   Ans = 0.0D0
   Ierr = 1
   ce = 0.0D0
@@ -134,9 +134,9 @@ SUBROUTINE DQNC79(FUN,A,B,Err,Ans,Ierr,K)
         lmx = MIN(nlmx,nbits-nib-4)
         IF ( lmx<2 ) GOTO 400
         lmn = MIN(lmn,lmx)
-      ENDIF
-    ENDIF
-  ENDIF
+      END IF
+    END IF
+  END IF
   tol = MAX(ABS(Err),2.0D0**(5-nbits))
   IF ( Err==0.0D0 ) tol = SQRT(D1MACH(4))
   eps = tol
@@ -145,7 +145,7 @@ SUBROUTINE DQNC79(FUN,A,B,Err,Ans,Ierr,K)
   lr(1) = 1
   DO i = 1, 11, 2
     f(i) = FUN(A+(i-1)*hh(1))
-  ENDDO
+  END DO
   blocal = B
   f(13) = FUN(blocal)
   K = 7
@@ -160,7 +160,7 @@ SUBROUTINE DQNC79(FUN,A,B,Err,Ans,Ierr,K)
   100 CONTINUE
   DO i = 2, 12, 2
     f(i) = FUN(aa(l)+(i-1)*hh(l))
-  ENDDO
+  END DO
   K = K + 6
   !
   !     Compute left and right half estimates
@@ -211,7 +211,7 @@ SUBROUTINE DQNC79(FUN,A,B,Err,Ans,Ierr,K)
       !     Have hit maximum refinement level -- penalize the cumulative error
       !
       ce = ce + (q7-q13)
-    ENDIF
+    END IF
     !
     !     Update the bank account.  Don't go into debt.
     !
@@ -240,8 +240,8 @@ SUBROUTINE DQNC79(FUN,A,B,Err,Ans,Ierr,K)
           GOTO 300
         ELSE
           vr = vl(l+1) + vr
-        ENDIF
-      ENDDO
+        END IF
+      END DO
       !
       !     Exit
       !
@@ -250,10 +250,10 @@ SUBROUTINE DQNC79(FUN,A,B,Err,Ans,Ierr,K)
         Ierr = 2
         CALL XERMSG('SLATEC','DQNC79',&
           'ANS is probably insufficiently accurate.',2,1)
-      ENDIF
+      END IF
       RETURN
-    ENDIF
-  ENDIF
+    END IF
+  END IF
   200  l = l + 1
   eps = eps*0.5D0
   IF ( l<=17 ) ef = ef/sq2

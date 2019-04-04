@@ -88,7 +88,7 @@ SUBROUTINE CHPFA(Ap,N,Kpvt,Info)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   INTEGER N, Kpvt(*), Info
   COMPLEX Ap(*)
   !
@@ -146,12 +146,12 @@ SUBROUTINE CHPFA(Ap,N,Kpvt,Info)
         DO j = imaxp1, k
           rowmax = MAX(rowmax,CABS1(Ap(imj)))
           imj = imj + j
-        ENDDO
+        END DO
         IF ( imax/=1 ) THEN
           jmax = ICAMAX(imax-1,Ap(im+1),1)
           jmim = jmax + im
           rowmax = MAX(rowmax,CABS1(Ap(jmim)))
-        ENDIF
+        END IF
         imim = imax + im
         IF ( CABS1(Ap(imim))>=alpha*rowmax ) THEN
           kstep = 1
@@ -162,11 +162,11 @@ SUBROUTINE CHPFA(Ap,N,Kpvt,Info)
         ELSE
           kstep = 1
           swap = .FALSE.
-        ENDIF
+        END IF
       ELSE
         kstep = 1
         swap = .FALSE.
-      ENDIF
+      END IF
       IF ( MAX(absakk,colmax)==0.0E0 ) THEN
         !
         !           COLUMN K IS ZERO.  SET INFO AND ITERATE THE LOOP.
@@ -192,11 +192,11 @@ SUBROUTINE CHPFA(Ap,N,Kpvt,Info)
             Ap(jkm1) = CONJG(Ap(imj))
             Ap(imj) = t
             imj = imj - (j-1)
-          ENDDO
+          END DO
           t = Ap(km1k)
           Ap(km1k) = Ap(imk)
           Ap(imk) = t
-        ENDIF
+        END IF
         !
         !           PERFORM THE ELIMINATION.
         !
@@ -224,8 +224,8 @@ SUBROUTINE CHPFA(Ap,N,Kpvt,Info)
             ijj = ij + j
             Ap(ijj) = CMPLX(REAL(Ap(ijj)),0.0E0)
             ij = ij - (j-1)
-          ENDDO
-        ENDIF
+          END DO
+        END IF
         !
         !           SET THE PIVOT ARRAY.
         !
@@ -249,8 +249,8 @@ SUBROUTINE CHPFA(Ap,N,Kpvt,Info)
             Ap(jk) = CONJG(Ap(imj))
             Ap(imj) = t
             imj = imj - (j-1)
-          ENDDO
-        ENDIF
+          END DO
+        END IF
         !
         !           PERFORM THE ELIMINATION.
         !
@@ -265,13 +265,13 @@ SUBROUTINE CHPFA(Ap,N,Kpvt,Info)
           Ap(ijj) = CMPLX(REAL(Ap(ijj)),0.0E0)
           Ap(jk) = mulk
           ij = ij - (j-1)
-        ENDDO
+        END DO
         !
         !           SET THE PIVOT ARRAY.
         !
         Kpvt(k) = k
         IF ( swap ) Kpvt(k) = imax
-      ENDIF
+      END IF
       ik = ik - (k-1)
       IF ( kstep==2 ) ik = ik - (k-2)
       k = k - kstep
@@ -279,6 +279,6 @@ SUBROUTINE CHPFA(Ap,N,Kpvt,Info)
       Kpvt(1) = 1
       IF ( CABS1(Ap(1))==0.0E0 ) Info = 1
       EXIT
-    ENDIF
-  ENDDO
+    END IF
+  END DO
 END SUBROUTINE CHPFA

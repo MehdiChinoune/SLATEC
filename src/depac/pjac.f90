@@ -92,10 +92,10 @@ SUBROUTINE PJAC(Neq,Y,Yh,Nyh,Ewt,Ftem,Savf,Wm,Iwm,F,JAC,Rpar,Ipar)
         CALL F(TN,Y,Ftem,Rpar,Ipar)
         DO i = 1, N
           Wm(i+j1) = (Ftem(i)-Savf(i))*fac
-        ENDDO
+        END DO
         Y(j) = yj
         j1 = j1 + N
-      ENDDO
+      END DO
       NFE = NFE + N
     CASE (3)
       ! IF MITER = 3, CONSTRUCT A DIAGONAL APPROXIMATION TO J AND P. ---------
@@ -104,7 +104,7 @@ SUBROUTINE PJAC(Neq,Y,Yh,Nyh,Ewt,Ftem,Savf,Wm,Iwm,F,JAC,Rpar,Ipar)
       r = EL0*0.1E0
       DO i = 1, N
         Y(i) = Y(i) + r*(H*Savf(i)-Yh(i,2))
-      ENDDO
+      END DO
       CALL F(TN,Y,Wm(3),Rpar,Ipar)
       NFE = NFE + 1
       DO i = 1, N
@@ -114,8 +114,8 @@ SUBROUTINE PJAC(Neq,Y,Yh,Nyh,Ewt,Ftem,Savf,Wm,Iwm,F,JAC,Rpar,Ipar)
         IF ( ABS(r0)>=UROund*Ewt(i) ) THEN
           IF ( ABS(di)==0.0E0 ) GOTO 100
           Wm(i+2) = 0.1E0*r0/di
-        ENDIF
-      ENDDO
+        END IF
+      END DO
       RETURN
     CASE (4)
       ! IF MITER = 4, CALL JAC AND MULTIPLY BY SCALAR. -----------------------
@@ -127,12 +127,12 @@ SUBROUTINE PJAC(Neq,Y,Yh,Nyh,Ewt,Ftem,Savf,Wm,Iwm,F,JAC,Rpar,Ipar)
       lenp = meband*N
       DO i = 1, lenp
         Wm(i+2) = 0.0E0
-      ENDDO
+      END DO
       CALL JAC(TN,Y,Wm(ml3),meband,Rpar,Ipar)
       con = -hl0
       DO i = 1, lenp
         Wm(i+2) = Wm(i+2)*con
-      ENDDO
+      END DO
       GOTO 200
     CASE (5)
       ! IF MITER = 5, MAKE MBAND CALLS TO F TO APPROXIMATE J. ----------------
@@ -151,7 +151,7 @@ SUBROUTINE PJAC(Neq,Y,Yh,Nyh,Ewt,Ftem,Savf,Wm,Iwm,F,JAC,Rpar,Ipar)
           yi = Y(i)
           r = MAX(srur*ABS(yi),r0*Ewt(i))
           Y(i) = Y(i) + r
-        ENDDO
+        END DO
         CALL F(TN,Y,Ftem,Rpar,Ipar)
         DO jj = j, N, mband
           Y(jj) = Yh(jj,1)
@@ -163,9 +163,9 @@ SUBROUTINE PJAC(Neq,Y,Yh,Nyh,Ewt,Ftem,Savf,Wm,Iwm,F,JAC,Rpar,Ipar)
           ii = jj*meb1 - ml + 2
           DO i = i1, i2
             Wm(ii+i) = (Ftem(i)-Savf(i))*fac
-          ENDDO
-        ENDDO
-      ENDDO
+          END DO
+        END DO
+      END DO
       NFE = NFE + mba
       GOTO 200
     CASE DEFAULT
@@ -173,19 +173,19 @@ SUBROUTINE PJAC(Neq,Y,Yh,Nyh,Ewt,Ftem,Savf,Wm,Iwm,F,JAC,Rpar,Ipar)
       lenp = N*N
       DO i = 1, lenp
         Wm(i+2) = 0.0E0
-      ENDDO
+      END DO
       CALL JAC(TN,Y,Wm(3),N,Rpar,Ipar)
       con = -hl0
       DO i = 1, lenp
         Wm(i+2) = Wm(i+2)*con
-      ENDDO
+      END DO
   END SELECT
   ! ADD IDENTITY MATRIX. -------------------------------------------------
   j = 3
   DO i = 1, N
     Wm(j) = Wm(j) + 1.0E0
     j = j + (N+1)
-  ENDDO
+  END DO
   ! DO LU DECOMPOSITION ON P. --------------------------------------------
   CALL SGEFA(Wm(3),N,N,Iwm(21),IER)
   RETURN
@@ -196,7 +196,7 @@ SUBROUTINE PJAC(Neq,Y,Yh,Nyh,Ewt,Ftem,Savf,Wm,Iwm,F,JAC,Rpar,Ipar)
   DO i = 1, N
     Wm(ii) = Wm(ii) + 1.0E0
     ii = ii + meband
-  ENDDO
+  END DO
   ! DO LU DECOMPOSITION OF P. --------------------------------------------
   CALL SGBFA(Wm(3),meband,N,ml,mu,Iwm(21),IER)
   !----------------------- END OF SUBROUTINE PJAC -----------------------

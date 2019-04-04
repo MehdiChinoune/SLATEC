@@ -82,7 +82,7 @@ SUBROUTINE HTRIBK(Nm,N,Ar,Ai,Tau,M,Zr,Zi)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   !
   INTEGER i, j, k, l, M, N, Nm
   REAL Ar(Nm,*), Ai(Nm,*), Tau(2,*), Zr(Nm,*), Zi(Nm,*)
@@ -98,8 +98,8 @@ SUBROUTINE HTRIBK(Nm,N,Ar,Ai,Tau,M,Zr,Zi)
       DO j = 1, M
         Zi(k,j) = -Zr(k,j)*Tau(2,k)
         Zr(k,j) = Zr(k,j)*Tau(1,k)
-      ENDDO
-    ENDDO
+      END DO
+    END DO
     !
     IF ( N/=1 ) THEN
       !     .......... RECOVER AND APPLY THE HOUSEHOLDER MATRICES ..........
@@ -115,7 +115,7 @@ SUBROUTINE HTRIBK(Nm,N,Ar,Ai,Tau,M,Zr,Zi)
             DO k = 1, l
               s = s + Ar(i,k)*Zr(k,j) - Ai(i,k)*Zi(k,j)
               si = si + Ar(i,k)*Zi(k,j) + Ai(i,k)*Zr(k,j)
-            ENDDO
+            END DO
             !     .......... DOUBLE DIVISIONS AVOID POSSIBLE UNDERFLOW ..........
             s = (s/h)/h
             si = (si/h)/h
@@ -123,13 +123,13 @@ SUBROUTINE HTRIBK(Nm,N,Ar,Ai,Tau,M,Zr,Zi)
             DO k = 1, l
               Zr(k,j) = Zr(k,j) - s*Ar(i,k) - si*Ai(i,k)
               Zi(k,j) = Zi(k,j) - si*Ar(i,k) + s*Ai(i,k)
-            ENDDO
+            END DO
             !
-          ENDDO
-        ENDIF
+          END DO
+        END IF
         !
-      ENDDO
-    ENDIF
-  ENDIF
+      END DO
+    END IF
+  END IF
   !
 END SUBROUTINE HTRIBK

@@ -761,7 +761,7 @@ SUBROUTINE SDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
       'Illegal input.  Improper value for NSTATE(= '//intgr1//').',Ierflg,1)
     Nstate = 12
     RETURN
-  ENDIF
+  END IF
   npar = N
   IF ( Eps<0.E0 ) THEN
     WRITE (rl1,'(E16.8)') Eps
@@ -770,7 +770,7 @@ SUBROUTINE SDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
       ', is negative.',Ierflg,1)
     Nstate = 12
     RETURN
-  ENDIF
+  END IF
   IF ( N<=0 ) THEN
     WRITE (intgr1,'(I8)') N
     Ierflg = 22
@@ -778,7 +778,7 @@ SUBROUTINE SDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
       intgr1//', is not positive.',Ierflg,1)
     Nstate = 12
     RETURN
-  ENDIF
+  END IF
   IF ( Mxord<=0 ) THEN
     WRITE (intgr1,'(I8)') Mxord
     Ierflg = 28
@@ -786,7 +786,7 @@ SUBROUTINE SDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
       intgr1//', is not positive.',Ierflg,1)
     Nstate = 12
     RETURN
-  ENDIF
+  END IF
   IF ( Mint<1.OR.Mint>3 ) THEN
     WRITE (intgr1,'(I8)') Mint
     Ierflg = 23
@@ -833,12 +833,12 @@ SUBROUTINE SDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
       intgr1//', is not allowed.',Ierflg,1)
     Nstate = 12
     RETURN
-  ENDIF
+  END IF
   IF ( Miter==0.OR.Miter==3 ) THEN
     liwchk = INDPVT - 1
   ELSEIF ( Miter==1.OR.Miter==2.OR.Miter==4.OR.Miter==5 ) THEN
     liwchk = INDPVT + N - 1
-  ENDIF
+  END IF
   IF ( Leniw<liwchk ) THEN
     WRITE (intgr1,'(I8)') liwchk
     Ierflg = 33
@@ -847,14 +847,14 @@ SUBROUTINE SDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
       & the required storage is '//intgr1//' .',Ierflg,1)
     Nstate = 12
     RETURN
-  ENDIF
+  END IF
   !                                                Allocate the WORK array
   !                                         IYH is the index of YH in WORK
   IF ( Mint==1.OR.Mint==3 ) THEN
     maxord = MIN(Mxord,12)
   ELSEIF ( Mint==2 ) THEN
     maxord = MIN(Mxord,5)
-  ENDIF
+  END IF
   idfdy = IYH + (maxord+1)*N
   !                                             IDFDY is the index of DFDY
   !
@@ -864,7 +864,7 @@ SUBROUTINE SDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
     iywt = idfdy + N*N
   ELSEIF ( Miter==4.OR.Miter==5 ) THEN
     iywt = idfdy + (2*Ml+Mu+1)*N
-  ENDIF
+  END IF
   !                                               IYWT is the index of YWT
   isave1 = iywt + N
   !                                           ISAVE1 is the index of SAVE1
@@ -880,7 +880,7 @@ SUBROUTINE SDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
     ia = ifac + N
   ELSE
     ia = ifac
-  ENDIF
+  END IF
   !                                                   IA is the index of A
   IF ( Impl==0.OR.Miter==3 ) THEN
     lenchk = ia - 1
@@ -894,7 +894,7 @@ SUBROUTINE SDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
     lenchk = ia - 1 + N*Nde
   ELSEIF ( Impl==3.AND.(Miter==4.OR.Miter==5) ) THEN
     lenchk = ia - 1 + (2*Ml+Mu+1)*Nde
-  ENDIF
+  END IF
   IF ( Lenw<lenchk ) THEN
     WRITE (intgr1,'(I8)') lenchk
     Ierflg = 32
@@ -903,26 +903,26 @@ SUBROUTINE SDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
       & parameters involved, the required storage is '//intgr1//' .',Ierflg,1)
     Nstate = 12
     RETURN
-  ENDIF
+  END IF
   IF ( Miter==0.OR.Miter==3 ) THEN
     matdim = 1
   ELSEIF ( Miter==1.OR.Miter==2 ) THEN
     matdim = N
   ELSEIF ( Miter==4.OR.Miter==5 ) THEN
     matdim = 2*Ml + Mu + 1
-  ENDIF
+  END IF
   IF ( Impl==0.OR.Impl==1 ) THEN
     ndecom = N
   ELSEIF ( Impl==2.OR.Impl==3 ) THEN
     ndecom = Nde
-  ENDIF
+  END IF
   IF ( Nstate==1 ) THEN
     !                                                  Initialize parameters
     IF ( Mint==1.OR.Mint==3 ) THEN
       Iwork(IMXORD) = MIN(Mxord,12)
     ELSEIF ( Mint==2 ) THEN
       Iwork(IMXORD) = MIN(Mxord,5)
-    ENDIF
+    END IF
     Iwork(IMXRDS) = Mxord
     IF ( Mint==1.OR.Mint==2 ) THEN
       Iwork(IMNT) = Mint
@@ -935,7 +935,7 @@ SUBROUTINE SDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
       Iwork(IMNTLD) = Iwork(IMNT)
       Iwork(IMTRLD) = Iwork(IMTR)
       Iwork(IMTRSV) = Miter
-    ENDIF
+    END IF
     Work(IHMAX) = Hmax
     uround = R1MACH(4)
     Work(IMACH4) = uround
@@ -943,7 +943,7 @@ SUBROUTINE SDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
     IF ( Nroot/=0 ) THEN
       re = uround
       ae = Work(IMACH1)
-    ENDIF
+    END IF
     h = (Tout-T)*(1.E0-4.E0*uround)
     h = SIGN(MIN(ABS(h),Hmax),h)
     Work(IH) = h
@@ -966,7 +966,7 @@ SUBROUTINE SDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
     !                                                 Set initial conditions
     DO i = 1, N
       Work(i+IYH-1) = Y(i)
-    ENDDO
+    END DO
     IF ( T==Tout ) RETURN
     GOTO 100
   ELSE
@@ -974,8 +974,8 @@ SUBROUTINE SDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
     IF ( Nroot/=0 ) THEN
       re = uround
       ae = Work(IMACH1)
-    ENDIF
-  ENDIF
+    END IF
+  END IF
   !                                             On a continuation, check
   !                                             that output points have
   !                                             been or will be overtaken.
@@ -983,7 +983,7 @@ SUBROUTINE SDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
     convrg = .TRUE.
   ELSE
     convrg = .FALSE.
-  ENDIF
+  END IF
   T = Work(IT)
   h = Work(IH)
   hsign = Work(IHSIGN)
@@ -1018,13 +1018,13 @@ SUBROUTINE SDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
                 iroot = i
                 troot = Work(jtroot)
                 EXIT
-              ENDIF
+              END IF
               IF ( Work(jtroot)*hsign>Work(ITOUT)*hsign ) THEN
                 iroot = i
                 troot = Work(jtroot)
-              ENDIF
-            ENDIF
-          ENDDO
+              END IF
+            END IF
+          END DO
           Iwork(INROOT) = iroot
           Work(ITOUT) = troot
           Iwork(IJROOT) = Ntask
@@ -1037,7 +1037,7 @@ SUBROUTINE SDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
               T = troot
               Ierflg = 0
               GOTO 500
-            ENDIF
+            END IF
           ELSEIF ( Ntask==2.OR.Ntask==3 ) THEN
             !
             !                                     If there are no more roots, or the
@@ -1052,8 +1052,8 @@ SUBROUTINE SDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
               Ierflg = 0
               T = troot
               GOTO 500
-            ENDIF
-          ENDIF
+            END IF
+          END IF
         ELSEIF ( Tout*hsign>=Work(ITOUT)*hsign ) THEN
           troot = Work(ITOUT)
           CALL SDNTP(h,0,N,Iwork(INQ),T,troot,Work(IYH),Y)
@@ -1063,9 +1063,9 @@ SUBROUTINE SDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
           GOTO 500
           !                                         A root has just been reported.
           !                                         Select the next root.
-        ENDIF
-      ENDIF
-    ENDIF
+        END IF
+      END IF
+    END IF
     !
     IF ( Ntask==1 ) THEN
       Nstate = 2
@@ -1074,7 +1074,7 @@ SUBROUTINE SDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
         T = Tout
         Ierflg = 0
         GOTO 500
-      ENDIF
+      END IF
     ELSEIF ( Ntask==2 ) THEN
       !                                                      Check if TOUT has
       !                                                      been reset .LT. T
@@ -1089,7 +1089,7 @@ SUBROUTINE SDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
         CALL SDNTP(h,0,N,Iwork(INQ),T,Tout,Work(IYH),Y)
         T = Tout
         GOTO 500
-      ENDIF
+      END IF
       !                                   Determine if TOUT has been overtaken
       !
       IF ( ABS(Tout-T)<=NROUND*uround*MAX(ABS(T),ABS(Tout)) ) THEN
@@ -1097,14 +1097,14 @@ SUBROUTINE SDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
         Nstate = 2
         Ierflg = 0
         GOTO 400
-      ENDIF
+      END IF
       !                                             If there are no more roots
       !                                             to report, report T.
       IF ( Nstate==5 ) THEN
         Nstate = 2
         Ierflg = 0
         GOTO 400
-      ENDIF
+      END IF
       Nstate = 2
       !                                                       See if TOUT will
       !                                                       be overtaken.
@@ -1114,7 +1114,7 @@ SUBROUTINE SDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
         Work(IH) = h
         IF ( h==0.E0 ) GOTO 600
         Iwork(IJTASK) = -1
-      ENDIF
+      END IF
     ELSEIF ( Ntask==3 ) THEN
       Nstate = 2
       IF ( T*hsign>Tout*hsign ) THEN
@@ -1128,20 +1128,20 @@ SUBROUTINE SDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
         CALL SDNTP(h,0,N,Iwork(INQ),T,Tout,Work(IYH),Y)
         T = Tout
         GOTO 500
-      ENDIF
+      END IF
       IF ( ABS(Tout-T)<=NROUND*uround*MAX(ABS(T),ABS(Tout)) ) THEN
         T = Tout
         Ierflg = 0
         GOTO 400
-      ENDIF
+      END IF
       IF ( (T+h)*hsign>Tout*hsign ) THEN
         h = Tout - T
         IF ( (T+h)*hsign>Tout*hsign ) h = h*(1.E0-4.E0*uround)
         Work(IH) = h
         IF ( h==0.E0 ) GOTO 600
         Iwork(IJTASK) = -1
-      ENDIF
-    ENDIF
+      END IF
+    END IF
     !                         Implement changes in MINT, MITER, and/or HMAX.
     !
     IF ( (Mint/=Iwork(IMNTLD).OR.Miter/=Iwork(IMTRLD)).AND.Mint/=3.AND.&
@@ -1151,15 +1151,15 @@ SUBROUTINE SDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
       IF ( h/=Work(IH) ) THEN
         Iwork(IJTASK) = -1
         Work(IH) = h
-      ENDIF
+      END IF
       Work(IHMAX) = Hmax
-    ENDIF
-  ENDIF
+    END IF
+  END IF
   !
   100  nstepl = Iwork(INSTEP)
   DO i = 1, N
     Y(i) = Work(i+IYH-1)
-  ENDDO
+  END DO
   IF ( Nroot/=0 ) THEN
     DO i = 1, Nroot
       Work(i+ignow-1) = G(npar,T,Y,i)
@@ -1167,27 +1167,27 @@ SUBROUTINE SDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
         Iwork(INROOT) = i
         Nstate = 7
         RETURN
-      ENDIF
-    ENDDO
-  ENDIF
+      END IF
+    END DO
+  END IF
   IF ( Ierror==1 ) THEN
     DO i = 1, N
       Work(i+iywt-1) = 1.E0
-    ENDDO
+    END DO
     GOTO 300
   ELSEIF ( Ierror==5 ) THEN
     DO i = 1, N
       Work(i+iywt-1) = Ewt(i)
-    ENDDO
+    END DO
     GOTO 300
-  ENDIF
+  END IF
   !                                       Reset YWT array.  Looping point.
   200 CONTINUE
   IF ( Ierror==2 ) THEN
     DO i = 1, N
       IF ( Y(i)==0.E0 ) GOTO 250
       Work(i+iywt-1) = ABS(Y(i))
-    ENDDO
+    END DO
     GOTO 300
     250 CONTINUE
     IF ( Iwork(IJTASK)==0 ) THEN
@@ -1195,7 +1195,7 @@ SUBROUTINE SDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
       IF ( npar==0 ) THEN
         Nstate = 6
         RETURN
-      ENDIF
+      END IF
       Iwork(INFE) = Iwork(INFE) + 1
       IF ( Miter==3.AND.Impl/=0 ) THEN
         iflag = 0
@@ -1205,14 +1205,14 @@ SUBROUTINE SDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
         IF ( npar==0 ) THEN
           Nstate = 10
           RETURN
-        ENDIF
+        END IF
       ELSEIF ( Impl==1 ) THEN
         IF ( Miter==1.OR.Miter==2 ) THEN
           CALL FA(npar,T,Y,Work(ia),matdim,Ml,Mu,ndecom)
           IF ( npar==0 ) THEN
             Nstate = 9
             RETURN
-          ENDIF
+          END IF
           CALL SGEFA(Work(ia),matdim,N,Iwork(INDPVT),info)
           IF ( info/=0 ) GOTO 700
           CALL SGESL(Work(ia),matdim,N,Iwork(INDPVT),Work(isave2),0)
@@ -1221,28 +1221,28 @@ SUBROUTINE SDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
           IF ( npar==0 ) THEN
             Nstate = 9
             RETURN
-          ENDIF
+          END IF
           CALL SGBFA(Work(ia),matdim,N,Ml,Mu,Iwork(INDPVT),info)
           IF ( info/=0 ) GOTO 700
           CALL SGBSL(Work(ia),matdim,N,Ml,Mu,Iwork(INDPVT),Work(isave2),0)
-        ENDIF
+        END IF
       ELSEIF ( Impl==2 ) THEN
         CALL FA(npar,T,Y,Work(ia),matdim,Ml,Mu,ndecom)
         IF ( npar==0 ) THEN
           Nstate = 9
           RETURN
-        ENDIF
+        END IF
         DO i = 1, ndecom
           IF ( Work(i+ia-1)==0.E0 ) GOTO 700
           Work(i+isave2-1) = Work(i+isave2-1)/Work(i+ia-1)
-        ENDDO
+        END DO
       ELSEIF ( Impl==3 ) THEN
         IF ( Miter==1.OR.Miter==2 ) THEN
           CALL FA(npar,T,Y,Work(ia),matdim,Ml,Mu,ndecom)
           IF ( npar==0 ) THEN
             Nstate = 9
             RETURN
-          ENDIF
+          END IF
           CALL SGEFA(Work(ia),matdim,Nde,Iwork(INDPVT),info)
           IF ( info/=0 ) GOTO 700
           CALL SGESL(Work(ia),matdim,Nde,Iwork(INDPVT),Work(isave2),0)
@@ -1251,13 +1251,13 @@ SUBROUTINE SDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
           IF ( npar==0 ) THEN
             Nstate = 9
             RETURN
-          ENDIF
+          END IF
           CALL SGBFA(Work(ia),matdim,Nde,Ml,Mu,Iwork(INDPVT),info)
           IF ( info/=0 ) GOTO 700
           CALL SGBSL(Work(ia),matdim,Nde,Ml,Mu,Iwork(INDPVT),Work(isave2),0)
-        ENDIF
-      ENDIF
-    ENDIF
+        END IF
+      END IF
+    END IF
     DO j = i, N
       IF ( Y(j)/=0.E0 ) THEN
         Work(j+iywt-1) = ABS(Y(j))
@@ -1265,23 +1265,23 @@ SUBROUTINE SDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
         Work(j+iywt-1) = ABS(h*Work(j+isave2-1))
       ELSE
         Work(j+iywt-1) = ABS(Work(j+IYH+N-1))
-      ENDIF
+      END IF
       IF ( Work(j+iywt-1)==0.E0 ) Work(j+iywt-1) = uround
-    ENDDO
+    END DO
   ELSEIF ( Ierror==3 ) THEN
     DO i = 1, N
       Work(i+iywt-1) = MAX(Ewt(1),ABS(Y(i)))
-    ENDDO
+    END DO
   ELSEIF ( Ierror==4 ) THEN
     DO i = 1, N
       Work(i+iywt-1) = MAX(Ewt(i),ABS(Y(i)))
-    ENDDO
-  ENDIF
+    END DO
+  END IF
   !
   300 CONTINUE
   DO i = 1, N
     Work(i+isave2-1) = Y(i)/Work(i+iywt-1)
-  ENDDO
+  END DO
   sum = SNRM2(N,Work(isave2),1)/SQRT(REAL(N))
   sum = MAX(1.E0,sum)
   IF ( Eps<sum*uround ) THEN
@@ -1294,7 +1294,7 @@ SUBROUTINE SDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
       & EPS has been increased to '//rl2//' .',Ierflg,0)
     Nstate = 4
     GOTO 400
-  ENDIF
+  END IF
   IF ( ABS(h)>=uround*ABS(T) ) THEN
     Iwork(INDPRT) = 0
   ELSEIF ( Iwork(INDPRT)==0 ) THEN
@@ -1305,7 +1305,7 @@ SUBROUTINE SDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
       ', is smaller than the roundoff level of T. This may occur if there is&
       & an abrupt change in the right hand side of the differential equations.',Ierflg,0)
     Iwork(INDPRT) = 1
-  ENDIF
+  END IF
   IF ( Ntask/=2 ) THEN
     IF ( (Iwork(INSTEP)-nstepl)==Mxstep ) THEN
       WRITE (rl1,'(E16.8)') T
@@ -1316,8 +1316,8 @@ SUBROUTINE SDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
         ' steps have been taken without reaching TOUT, '//rl2//' .',Ierflg,0)
       Nstate = 3
       GOTO 400
-    ENDIF
-  ENDIF
+    END IF
+  END IF
   !
   !     CALL SDSTP (EPS, F, FA, HMAX, IMPL, IERROR, JACOBN, MATDIM,
   !    8            MAXORD, MINT, MITER, ML, MU, N, NDE, YWT, UROUND,
@@ -1342,7 +1342,7 @@ SUBROUTINE SDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
     Iwork(ICNVRG) = 1
   ELSE
     Iwork(ICNVRG) = 0
-  ENDIF
+  END IF
   SELECT CASE (jstate)
     CASE (2)
       GOTO 600
@@ -1374,7 +1374,7 @@ SUBROUTINE SDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
             Iwork(INROOT) = i
             Nstate = 7
             RETURN
-          ENDIF
+          END IF
           Work(i+ignow-1) = gnow
           IF ( glast*gnow>0.E0 ) THEN
             Work(i+itroot-1) = T + h
@@ -1391,18 +1391,18 @@ SUBROUTINE SDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
               troot,tlast,gnow,glast,Y)
             DO j = 1, N
               Y(j) = Work(IYH+j-1)
-            ENDDO
+            END DO
             IF ( npar==0 ) THEN
               Iwork(INROOT) = i
               Nstate = 7
               RETURN
-            ENDIF
+            END IF
             Work(i+itroot-1) = troot
           ELSE
             Work(i+itroot-1) = T
             iroot = i
-          ENDIF
-        ENDDO
+          END IF
+        END DO
         IF ( iroot==0 ) THEN
           Iwork(IJROOT) = 0
           !                                                  Select the first root
@@ -1415,8 +1415,8 @@ SUBROUTINE SDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
             IF ( Work(i+itroot-1)*hsign<troot*hsign ) THEN
               troot = Work(i+itroot-1)
               iroot = i
-            ENDIF
-          ENDDO
+            END IF
+          END DO
           Iwork(INROOT) = iroot
           Work(ITOUT) = troot
           IF ( troot*hsign<=Tout*hsign ) THEN
@@ -1425,9 +1425,9 @@ SUBROUTINE SDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
             T = troot
             Ierflg = 0
             GOTO 500
-          ENDIF
-        ENDIF
-      ENDIF
+          END IF
+        END IF
+      END IF
       !                               Test for NTASK condition to be satisfied
       Nstate = 2
       IF ( Ntask==1 ) THEN
@@ -1449,7 +1449,7 @@ SUBROUTINE SDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
           Work(IH) = h
           IF ( h==0.E0 ) GOTO 600
           Iwork(IJTASK) = -1
-        ENDIF
+        END IF
       ELSEIF ( Ntask==3 ) THEN
         IF ( ABS(Tout-T)<=NROUND*uround*MAX(ABS(T),ABS(Tout)) ) THEN
           T = Tout
@@ -1460,10 +1460,10 @@ SUBROUTINE SDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
             Work(IH) = h
             IF ( h==0.E0 ) GOTO 600
             Iwork(IJTASK) = -1
-          ENDIF
+          END IF
           GOTO 200
-        ENDIF
-      ENDIF
+        END IF
+      END IF
       Ierflg = 0
   END SELECT
   !                                      All returns are made through this
@@ -1471,7 +1471,7 @@ SUBROUTINE SDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
   400 CONTINUE
   DO i = 1, N
     Y(i) = Work(i+IYH-1)
-  ENDDO
+  END DO
   500 CONTINUE
   IF ( Iwork(IJTASK)==0 ) RETURN
   big = 0.E0
@@ -1482,8 +1482,8 @@ SUBROUTINE SDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
     IF ( big<size ) THEN
       big = size
       imxerr = i
-    ENDIF
-  ENDDO
+    END IF
+  END DO
   Iwork(INDMXR) = imxerr
   Work(IHUSED) = hused
   RETURN

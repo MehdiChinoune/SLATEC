@@ -60,7 +60,7 @@ REAL FUNCTION R9GMIT(A,X,Algap1,Sgngam,Alx)
     t = te/(ae+fk)
     s = s + t
     IF ( ABS(t)<eps*ABS(s) ) GOTO 100
-  ENDDO
+  END DO
   CALL XERMSG('SLATEC','R9GMIT',&
     'NO CONVERGENCE IN 200 TERMS OF TAYLOR-S SERIES',2,2)
   !
@@ -80,8 +80,8 @@ REAL FUNCTION R9GMIT(A,X,Algap1,Sgngam,Alx)
         t = X*t/(aeps-m-1+k)
         s = s + t
         IF ( ABS(t)<eps*ABS(s) ) EXIT
-      ENDDO
-    ENDIF
+      END DO
+    END IF
     !
     R9GMIT = 0.0
     algs = -ma*LOG(X) + algs
@@ -95,7 +95,7 @@ REAL FUNCTION R9GMIT(A,X,Algap1,Sgngam,Alx)
       IF ( alg2>bot ) R9GMIT = sgng2*EXP(alg2)
       IF ( algs>bot ) R9GMIT = R9GMIT + EXP(algs)
       RETURN
-    ENDIF
-  ENDIF
+    END IF
+  END IF
   !
 END FUNCTION R9GMIT

@@ -127,7 +127,7 @@ SUBROUTINE DBESI(X,Alpha,Kode,N,Y,Nz)
     RETURN
   ELSEIF ( N==1 ) THEN
     kt = 2
-  ENDIF
+  END IF
   nn = N
   IF ( Kode<1.OR.Kode>2 ) THEN
     !
@@ -146,10 +146,10 @@ SUBROUTINE DBESI(X,Alpha,Kode,N,Y,Nz)
       i1 = 2
     ELSE
       i1 = 1
-    ENDIF
+    END IF
     DO i = i1, N
       Y(i) = 0.0D0
-    ENDDO
+    END DO
     RETURN
   ELSE
     IF ( Alpha<0.0D0 ) GOTO 1300
@@ -195,7 +195,7 @@ SUBROUTINE DBESI(X,Alpha,Kode,N,Y,Nz)
         ELSE
           earg = earg*EXP(X)
           GOTO 1000
-        ENDIF
+        END IF
       ELSE
         ans = MAX(36.0D0-fnu,0.0D0)
         ns = INT(ans)
@@ -227,10 +227,10 @@ SUBROUTINE DBESI(X,Alpha,Kode,N,Y,Nz)
           ELSE
             IF ( km/=0 ) GOTO 100
             GOTO 200
-          ENDIF
-        ENDIF
-      ENDIF
-    ENDIF
+          END IF
+        END IF
+      END IF
+    END IF
     fni = fni + ns
     dfn = fni + fnf
     fn = dfn
@@ -238,7 +238,7 @@ SUBROUTINE DBESI(X,Alpha,Kode,N,Y,Nz)
     is = kt
     IF ( N-1+ns>0 ) is = 3
     GOTO 500
-  ENDIF
+  END IF
   !
   !     UNDERFLOW TEST ON UNIFORM ASYMPTOTIC EXPANSION
   !
@@ -261,7 +261,7 @@ SUBROUTINE DBESI(X,Alpha,Kode,N,Y,Nz)
   IF ( nn==1 ) THEN
     kt = 2
     is = 2
-  ENDIF
+  END IF
   GOTO 100
   300  is = 2
   fni = fni - 1.0D0
@@ -279,7 +279,7 @@ SUBROUTINE DBESI(X,Alpha,Kode,N,Y,Nz)
     gln = LOG((1.0D0+ra)/z)
     t = ra*(1.0D0-etx) + etx/(z+ra)
     arg = fn*(t-gln)
-  ENDIF
+  END IF
   400  i1 = ABS(3-is)
   i1 = MAX(i1,1)
   flgik = 1.0D0
@@ -308,7 +308,7 @@ SUBROUTINE DBESI(X,Alpha,Kode,N,Y,Nz)
       ELSE
         Y(1) = temp(3)
         RETURN
-      ENDIF
+      END IF
     CASE DEFAULT
   END SELECT
   !
@@ -332,8 +332,8 @@ SUBROUTINE DBESI(X,Alpha,Kode,N,Y,Nz)
       t2 = t2 + ak
       ak = ak + 2.0D0
       s1 = s1 + fn
-    ENDDO
-  ENDIF
+    END DO
+  END IF
   temp(is) = s*earg
   SELECT CASE (is)
     CASE (2)
@@ -373,7 +373,7 @@ SUBROUTINE DBESI(X,Alpha,Kode,N,Y,Nz)
   IF ( nn==1 ) THEN
     kt = 2
     is = 2
-  ENDIF
+  END IF
   IF ( sxo2>fnp1 ) GOTO 100
   arg = arg - xo2l + LOG(fnp1)
   IF ( arg>=(-elim) ) GOTO 500
@@ -403,21 +403,21 @@ SUBROUTINE DBESI(X,Alpha,Kode,N,Y,Nz)
         s1 = s
         dtm = dtm - 1.0D0
         tm = (dtm+fnf)*trx
-      ENDDO
+      END DO
       Y(nn) = s1
       IF ( nn==1 ) RETURN
       Y(nn-1) = s2
       IF ( nn==2 ) RETURN
-    ENDIF
+    END IF
     k = nn + 1
     DO i = 3, nn
       k = k - 1
       Y(k-2) = tm*Y(k-1) + Y(k)
       dtm = dtm - 1.0D0
       tm = (dtm+fnf)*trx
-    ENDDO
+    END DO
     RETURN
-  ENDIF
+  END IF
   1000 etx = 8.0D0*X
   is = kt
   in = 0
@@ -443,7 +443,7 @@ SUBROUTINE DBESI(X,Alpha,Kode,N,Y,Nz)
     s = s + t
     IF ( ABS(t)<=atol ) EXIT
     ak = ak + 8.0D0
-  ENDDO
+  END DO
   temp(is) = s*earg
   IF ( is==2 ) GOTO 900
   is = 2
@@ -467,7 +467,7 @@ SUBROUTINE DBESI(X,Alpha,Kode,N,Y,Nz)
       ta = s
       dtm = dtm - 1.0D0
       tm = (dtm+fnf)*trx
-    ENDDO
+    END DO
     !     NORMALIZATION
     IF ( kk/=1 ) EXIT
     ta = (ta/tb)*temp(3)
@@ -475,7 +475,7 @@ SUBROUTINE DBESI(X,Alpha,Kode,N,Y,Nz)
     kk = 2
     in = ns
     IF ( ns==0 ) EXIT
-  ENDDO
+  END DO
   Y(nn) = tb
   Nz = N - nn
   IF ( nn==1 ) RETURN
@@ -494,7 +494,7 @@ SUBROUTINE DBESI(X,Alpha,Kode,N,Y,Nz)
     dtm = dtm - 1.0D0
     tm = (dtm+fnf)*trx
     k = k - 1
-  ENDDO
+  END DO
   RETURN
   1300 CALL XERMSG('SLATEC','DBESI','ORDER, ALPHA, LESS THAN ZERO.',2,1)
   RETURN

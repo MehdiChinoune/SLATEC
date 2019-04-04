@@ -337,7 +337,7 @@ REAL(8) FUNCTION DRD(X,Y,Z,Ier)
     tuplim = (0.10D0*errtol)**(1.0E0/3.0E0)/tuplim
     uplim = tuplim**2.0D0
     first = .FALSE.
-  ENDIF
+  END IF
   !
   !         CALL ERROR HANDLER IF NECESSARY.
   !
@@ -349,7 +349,7 @@ REAL(8) FUNCTION DRD(X,Y,Z,Ier)
     CALL XERMSG('SLATEC','DRD','MIN(X,Y).LT.0 WHERE X = '//xern3//&
       ' AND Y = '//xern4,1,1)
     RETURN
-  ENDIF
+  END IF
   !
   IF ( MAX(X,Y,Z)>uplim ) THEN
     Ier = 3
@@ -360,7 +360,7 @@ REAL(8) FUNCTION DRD(X,Y,Z,Ier)
     CALL XERMSG('SLATEC','DRD','MAX(X,Y,Z).GT.UPLIM WHERE X = '//xern3//&
       ' Y = '//xern4//' Z = '//xern5//' AND UPLIM = '//xern6,3,1)
     RETURN
-  ENDIF
+  END IF
   !
   IF ( MIN(X+Y,Z)<lolim ) THEN
     Ier = 2
@@ -371,7 +371,7 @@ REAL(8) FUNCTION DRD(X,Y,Z,Ier)
     CALL XERMSG('SLATEC','DRD','MIN(X+Y,Z).LT.LOLIM WHERE X = '//xern3//&
       ' Y = '//xern4//' Z = '//xern5//' AND LOLIM = '//xern6,2,1)
     RETURN
-  ENDIF
+  END IF
   !
   Ier = 0
   xn = X
@@ -407,7 +407,7 @@ REAL(8) FUNCTION DRD(X,Y,Z,Ier)
       xn = (xn+lamda)*0.250D0
       yn = (yn+lamda)*0.250D0
       zn = (zn+lamda)*0.250D0
-    ENDIF
-  ENDDO
+    END IF
+  END DO
   !
 END FUNCTION DRD

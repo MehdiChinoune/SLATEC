@@ -92,7 +92,7 @@ SUBROUTINE DROTM(N,Dx,Incx,Dy,Incy,Dparam)
           Dy(ky) = w*dh21 + z*dh22
           kx = kx + Incx
           ky = ky + Incy
-        ENDDO
+        END DO
       ELSEIF ( dflag==0 ) THEN
         dh12 = Dparam(4)
         dh21 = Dparam(3)
@@ -103,7 +103,7 @@ SUBROUTINE DROTM(N,Dx,Incx,Dy,Incy,Dparam)
           Dy(ky) = w*dh21 + z
           kx = kx + Incx
           ky = ky + Incy
-        ENDDO
+        END DO
       ELSE
         dh11 = Dparam(2)
         dh22 = Dparam(5)
@@ -114,8 +114,8 @@ SUBROUTINE DROTM(N,Dx,Incx,Dy,Incy,Dparam)
           Dy(ky) = -w + dh22*z
           kx = kx + Incx
           ky = ky + Incy
-        ENDDO
-      ENDIF
+        END DO
+      END IF
     ELSE
       !
       nsteps = N*Incx
@@ -129,7 +129,7 @@ SUBROUTINE DROTM(N,Dx,Incx,Dy,Incy,Dparam)
           z = Dy(i)
           Dx(i) = w*dh11 + z*dh12
           Dy(i) = w*dh21 + z*dh22
-        ENDDO
+        END DO
       ELSEIF ( dflag==0 ) THEN
         dh12 = Dparam(4)
         dh21 = Dparam(3)
@@ -138,7 +138,7 @@ SUBROUTINE DROTM(N,Dx,Incx,Dy,Incy,Dparam)
           z = Dy(i)
           Dx(i) = w + z*dh12
           Dy(i) = w*dh21 + z
-        ENDDO
+        END DO
       ELSE
         dh11 = Dparam(2)
         dh22 = Dparam(5)
@@ -147,8 +147,8 @@ SUBROUTINE DROTM(N,Dx,Incx,Dy,Incy,Dparam)
           z = Dy(i)
           Dx(i) = w*dh11 + z
           Dy(i) = -w + dh22*z
-        ENDDO
-      ENDIF
-    ENDIF
-  ENDIF
+        END DO
+      END IF
+    END IF
+  END IF
 END SUBROUTINE DROTM

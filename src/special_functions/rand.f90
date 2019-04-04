@@ -126,8 +126,8 @@ REAL FUNCTION RAND(R)
       ix0 = MOD(iy0,2048)
       iy1 = iy1 + (iy0-ix0)/2048
       ix1 = MOD(iy1,2048)
-    ENDIF
-  ENDIF
+    END IF
+  END IF
   !
   RAND = ix1*2048 + ix0
   RAND = RAND/4194304.

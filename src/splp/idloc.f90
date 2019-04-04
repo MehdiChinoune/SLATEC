@@ -35,7 +35,7 @@ INTEGER FUNCTION IDLOC(Loc,Sx,Ix)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   910731  Added code to set IDLOC to 0 if LOC is non-positive.  (WRB)
-  
+
   INTEGER ipage, itemp, k, key, lmx, lmxm1, Loc, lpg, np
   REAL(8) :: Sx(*)
   INTEGER Ix(*)
@@ -45,7 +45,7 @@ INTEGER FUNCTION IDLOC(Loc,Sx,Ix)
       'A value of LOC, the first argument, .LE. 0 was encountered',55,1)
     IDLOC = 0
     RETURN
-  ENDIF
+  END IF
   !
   !     Two cases exist:  (1.LE.LOC.LE.K) .OR. (LOC.GT.K).
   !
@@ -55,7 +55,7 @@ INTEGER FUNCTION IDLOC(Loc,Sx,Ix)
   IF ( Loc<=k ) THEN
     IDLOC = Loc
     RETURN
-  ENDIF
+  END IF
   !
   !     Compute length of the page, starting address of the page, page
   !     number and relative working address.
@@ -75,8 +75,8 @@ INTEGER FUNCTION IDLOC(Loc,Sx,Ix)
       Sx(lmx) = 0.0
       key = 2
       CALL DPRWPG(key,np,lpg,Sx,Ix)
-    ENDIF
+    END IF
     key = 1
     CALL DPRWPG(key,ipage,lpg,Sx,Ix)
-  ENDIF
+  END IF
 END FUNCTION IDLOC

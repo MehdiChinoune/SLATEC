@@ -218,7 +218,7 @@ SUBROUTINE STEPS(F,Neqn,Y,X,H,Eps,Wt,Start,Hold,K,Kold,Crash,Phi,P,Yp,Psi,&
     round = 0.0
     DO l = 1, Neqn
       round = round + (Y(l)/Wt(l))**2
-    ENDDO
+    END DO
     round = Twou*SQRT(round)
     IF ( p5eps>=round ) THEN
       Crash = .FALSE.
@@ -234,7 +234,7 @@ SUBROUTINE STEPS(F,Neqn,Y,X,H,Eps,Wt,Start,Hold,K,Kold,Crash,Phi,P,Yp,Psi,&
         DO l = 1, Neqn
           Phi(l,1) = Yp(l)
           Phi(l,2) = 0.0
-        ENDDO
+        END DO
         !20     SUM = SUM + (YP(L)/WT(L))**2
         !     SUM = SQRT(SUM)
         !     ABSH = ABS(H)
@@ -257,18 +257,18 @@ SUBROUTINE STEPS(F,Neqn,Y,X,H,Eps,Wt,Start,Hold,K,Kold,Crash,Phi,P,Yp,Psi,&
           Nornd = .FALSE.
           DO l = 1, Neqn
             Phi(l,15) = 0.0
-          ENDDO
-        ENDIF
-      ENDIF
+          END DO
+        END IF
+      END IF
       ifail = 0
     ELSE
       Eps = 2.0*round*(1.0+Fouru)
       RETURN
-    ENDIF
+    END IF
   ELSE
     H = SIGN(Fouru*ABS(X),H)
     RETURN
-  ENDIF
+  END IF
   !       ***     END BLOCK 0     ***
   !
   !       ***     BEGIN BLOCK 1     ***
@@ -307,8 +307,8 @@ SUBROUTINE STEPS(F,Neqn,Y,X,H,Eps,Wt,Start,Hold,K,Kold,Crash,Phi,P,Yp,Psi,&
         Alpha(i) = H/temp1
         reali = i
         Sig(i+1) = reali*Alpha(i)*Sig(i)
-      ENDDO
-    ENDIF
+      END DO
+    END IF
     Psi(K) = temp1
     !
     !   COMPUTE COEFFICIENTS G(*)
@@ -328,24 +328,24 @@ SUBROUTINE STEPS(F,Neqn,Y,X,H,Eps,Wt,Start,Hold,K,Kold,Crash,Phi,P,Yp,Psi,&
           IF ( K==2 ) THEN
             Kgi = 1
             Gi(1) = W(2)
-          ENDIF
+          END IF
         ELSE
           jv = kp1 - Iv(Ivc)
           Ivc = Ivc - 1
-        ENDIF
+        END IF
         nsm2 = Ns - 2
         IF ( nsm2>=jv ) THEN
           DO j = jv, nsm2
             i = K - j
             V(i) = V(i) - Alpha(j+1)*V(i+1)
             W(i) = V(i)
-          ENDDO
+          END DO
           IF ( i==2 ) THEN
             Kgi = Ns - 1
             Gi(Kgi) = W(2)
-          ENDIF
-        ENDIF
-      ENDIF
+          END IF
+        END IF
+      END IF
       !
       !   UPDATE V(*) AND SET W(*)
       !
@@ -354,30 +354,30 @@ SUBROUTINE STEPS(F,Neqn,Y,X,H,Eps,Wt,Start,Hold,K,Kold,Crash,Phi,P,Yp,Psi,&
       DO iq = 1, limit1
         V(iq) = V(iq) - temp5*V(iq+1)
         W(iq) = V(iq)
-      ENDDO
+      END DO
       G(nsp1) = W(1)
       IF ( limit1/=1 ) THEN
         Kgi = Ns
         Gi(Kgi) = W(2)
-      ENDIF
+      END IF
       W(limit1+1) = V(limit1+1)
       IF ( K<Kold ) THEN
         Ivc = Ivc + 1
         Iv(Ivc) = limit1 + 2
-      ENDIF
+      END IF
     ELSE
       DO iq = 1, K
         temp3 = iq*(iq+1)
         V(iq) = 1.0/temp3
         W(iq) = V(iq)
-      ENDDO
+      END DO
       Ivc = 0
       Kgi = 0
       IF ( K/=1 ) THEN
         Kgi = 1
         Gi(1) = W(2)
-      ENDIF
-    ENDIF
+      END IF
+    END IF
     !
     !   COMPUTE THE G(*) IN THE WORK VECTOR W(*)
     !
@@ -389,11 +389,11 @@ SUBROUTINE STEPS(F,Neqn,Y,X,H,Eps,Wt,Start,Hold,K,Kold,Crash,Phi,P,Yp,Psi,&
         temp6 = Alpha(i-1)
         DO iq = 1, limit2
           W(iq) = W(iq) - temp6*W(iq+1)
-        ENDDO
+        END DO
         G(i) = W(1)
-      ENDDO
-    ENDIF
-  ENDIF
+      END DO
+    END IF
+  END IF
   !       ***     END BLOCK 1     ***
   !
   !       ***     BEGIN BLOCK 2     ***
@@ -413,9 +413,9 @@ SUBROUTINE STEPS(F,Neqn,Y,X,H,Eps,Wt,Start,Hold,K,Kold,Crash,Phi,P,Yp,Psi,&
       temp1 = Beta(i)
       DO l = 1, Neqn
         Phi(l,i) = temp1*Phi(l,i)
-      ENDDO
-    ENDDO
-  ENDIF
+      END DO
+    END DO
+  END IF
   !
   !   PREDICT SOLUTION AND DIFFERENCES
   !
@@ -423,7 +423,7 @@ SUBROUTINE STEPS(F,Neqn,Y,X,H,Eps,Wt,Start,Hold,K,Kold,Crash,Phi,P,Yp,Psi,&
     Phi(l,kp2) = Phi(l,kp1)
     Phi(l,kp1) = 0.0
     P(l) = 0.0
-  ENDDO
+  END DO
   DO j = 1, K
     i = kp1 - j
     ip1 = i + 1
@@ -431,19 +431,19 @@ SUBROUTINE STEPS(F,Neqn,Y,X,H,Eps,Wt,Start,Hold,K,Kold,Crash,Phi,P,Yp,Psi,&
     DO l = 1, Neqn
       P(l) = P(l) + temp2*Phi(l,i)
       Phi(l,i) = Phi(l,i) + Phi(l,ip1)
-    ENDDO
-  ENDDO
+    END DO
+  END DO
   IF ( Nornd ) THEN
     DO l = 1, Neqn
       P(l) = Y(l) + H*P(l)
-    ENDDO
+    END DO
   ELSE
     DO l = 1, Neqn
       tau = H*P(l) - Phi(l,15)
       P(l) = Y(l) + tau
       Phi(l,16) = (P(l)-Y(l)) - tau
-    ENDDO
-  ENDIF
+    END DO
+  END IF
   Xold = X
   X = X + H
   absh = ABS(H)
@@ -460,8 +460,8 @@ SUBROUTINE STEPS(F,Neqn,Y,X,H,Eps,Wt,Start,Hold,K,Kold,Crash,Phi,P,Yp,Psi,&
     IF ( km2<0 ) GOTO 150
     IF ( km2/=0 ) erkm2 = erkm2 + ((Phi(l,km1)+temp4)*temp3)**2
     erkm1 = erkm1 + ((Phi(l,K)+temp4)*temp3)**2
-    150    erk = erk + (temp4*temp3)**2
-  ENDDO
+    150  erk = erk + (temp4*temp3)**2
+  END DO
   IF ( km2<0 ) GOTO 200
   IF ( km2/=0 ) erkm2 = absh*Sig(km1)*gstr(km2)*SQRT(erkm2)
   erkm1 = absh*Sig(K)*gstr(km1)*SQRT(erkm1)
@@ -477,7 +477,7 @@ SUBROUTINE STEPS(F,Neqn,Y,X,H,Eps,Wt,Start,Hold,K,Kold,Crash,Phi,P,Yp,Psi,&
     IF ( erkm1<=0.5*erk ) knew = km1
   ELSE
     IF ( MAX(erkm1,erkm2)<=erk ) knew = km1
-  ENDIF
+  END IF
   !
   !   TEST IF STEP SUCCESSFUL
   !
@@ -500,7 +500,7 @@ SUBROUTINE STEPS(F,Neqn,Y,X,H,Eps,Wt,Start,Hold,K,Kold,Crash,Phi,P,Yp,Psi,&
         temp3 = Y(l)
         Y(l) = P(l) + temp1*(Yp(l)-Phi(l,1))
         P(l) = temp3
-      ENDDO
+      END DO
     ELSE
       DO l = 1, Neqn
         temp3 = Y(l)
@@ -508,8 +508,8 @@ SUBROUTINE STEPS(F,Neqn,Y,X,H,Eps,Wt,Start,Hold,K,Kold,Crash,Phi,P,Yp,Psi,&
         Y(l) = P(l) + rho
         Phi(l,15) = (Y(l)-P(l)) - rho
         P(l) = temp3
-      ENDDO
-    ENDIF
+      END DO
+    END IF
     CALL F(X,Y,Yp,Rpar,Ipar)
     !
     !   UPDATE DIFFERENCES FOR NEXT STEP
@@ -517,12 +517,12 @@ SUBROUTINE STEPS(F,Neqn,Y,X,H,Eps,Wt,Start,Hold,K,Kold,Crash,Phi,P,Yp,Psi,&
     DO l = 1, Neqn
       Phi(l,kp1) = Yp(l) - Phi(l,1)
       Phi(l,kp2) = Phi(l,kp1) - Phi(l,kp2)
-    ENDDO
+    END DO
     DO i = 1, K
       DO l = 1, Neqn
         Phi(l,i) = Phi(l,i) + Phi(l,kp1)
-      ENDDO
-    ENDDO
+      END DO
+    END DO
     !
     !   ESTIMATE ERROR AT ORDER K+1 UNLESS:
     !     IN FIRST PHASE WHEN ALWAYS RAISE ORDER,
@@ -536,7 +536,7 @@ SUBROUTINE STEPS(F,Neqn,Y,X,H,Eps,Wt,Start,Hold,K,Kold,Crash,Phi,P,Yp,Psi,&
       IF ( kp1>Ns ) GOTO 400
       DO l = 1, Neqn
         erkp1 = erkp1 + (Phi(l,kp2)/Wt(l))**2
-      ENDDO
+      END DO
       erkp1 = absh*gstr(kp1)*SQRT(erkp1)
       !
       !   USING ESTIMATED ERROR AT ORDER K+1, DETERMINE APPROPRIATE ORDER
@@ -547,8 +547,8 @@ SUBROUTINE STEPS(F,Neqn,Y,X,H,Eps,Wt,Start,Hold,K,Kold,Crash,Phi,P,Yp,Psi,&
         IF ( erkp1>=erk.OR.K==12 ) GOTO 400
       ELSEIF ( erkp1>=0.5*erk ) THEN
         GOTO 400
-      ENDIF
-    ENDIF
+      END IF
+    END IF
     !
     !   HERE ERKP1 .LT. ERK .LT. MAX(ERKM1,ERKM2) ELSE ORDER WOULD HAVE
     !   BEEN LOWERED IN BLOCK 2.  THUS ORDER IS TO BE RAISED
@@ -578,13 +578,13 @@ SUBROUTINE STEPS(F,Neqn,Y,X,H,Eps,Wt,Start,Hold,K,Kold,Crash,Phi,P,Yp,Psi,&
       ip1 = i + 1
       DO l = 1, Neqn
         Phi(l,i) = temp1*(Phi(l,i)-Phi(l,ip1))
-      ENDDO
-    ENDDO
+      END DO
+    END DO
     IF ( K>=2 ) THEN
       DO i = 2, K
         Psi(i-1) = Psi(i) - H
-      ENDDO
-    ENDIF
+      END DO
+    END IF
     !
     !   ON THIRD FAILURE, SET ORDER TO ONE.  THEREAFTER, USE OPTIMAL STEP
     !   SIZE
@@ -594,9 +594,9 @@ SUBROUTINE STEPS(F,Neqn,Y,X,H,Eps,Wt,Start,Hold,K,Kold,Crash,Phi,P,Yp,Psi,&
     IF ( ifail<3 ) GOTO 250
     IF ( ifail/=3 ) THEN
       IF ( p5eps<0.25*erk ) temp2 = SQRT(p5eps/erk)
-    ENDIF
+    END IF
     knew = 1
-    250    H = temp2*H
+    250  H = temp2*H
     K = knew
     Ns = 0
     IF ( ABS(H)>=Fouru*ABS(X) ) GOTO 100
@@ -604,7 +604,7 @@ SUBROUTINE STEPS(F,Neqn,Y,X,H,Eps,Wt,Start,Hold,K,Kold,Crash,Phi,P,Yp,Psi,&
     H = SIGN(Fouru*ABS(X),H)
     Eps = Eps + Eps
     RETURN
-  ENDIF
+  END IF
   !
   !   LOWER ORDER
   !
@@ -622,9 +622,9 @@ SUBROUTINE STEPS(F,Neqn,Y,X,H,Eps,Wt,Start,Hold,K,Kold,Crash,Phi,P,Yp,Psi,&
         r = (p5eps/erk)**(1.0/temp2)
         hnew = absh*MAX(0.5,MIN(0.9,r))
         hnew = SIGN(MAX(hnew,Fouru*ABS(X)),H)
-      ENDIF
-    ENDIF
-  ENDIF
+      END IF
+    END IF
+  END IF
   H = hnew
   !       ***     END BLOCK 4     ***
 END SUBROUTINE STEPS

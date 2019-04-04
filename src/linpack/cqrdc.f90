@@ -106,7 +106,7 @@ SUBROUTINE CQRDC(X,Ldx,N,P,Qraux,Jpvt,Work,Job)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   INTEGER jj
   INTEGER Ldx, N, P, Job
   INTEGER Jpvt(*)
@@ -137,8 +137,8 @@ SUBROUTINE CQRDC(X,Ldx,N,P,Qraux,Jpvt,Work,Job)
         Jpvt(j) = Jpvt(pl)
         Jpvt(pl) = j
         pl = pl + 1
-      ENDIF
-    ENDDO
+      END IF
+    END DO
     pu = P
     DO jj = 1, P
       j = P - jj + 1
@@ -149,11 +149,11 @@ SUBROUTINE CQRDC(X,Ldx,N,P,Qraux,Jpvt,Work,Job)
           jp = Jpvt(pu)
           Jpvt(pu) = Jpvt(j)
           Jpvt(j) = jp
-        ENDIF
+        END IF
         pu = pu - 1
-      ENDIF
-    ENDDO
-  ENDIF
+      END IF
+    END DO
+  END IF
   !
   !     COMPUTE THE NORMS OF THE FREE COLUMNS.
   !
@@ -161,8 +161,8 @@ SUBROUTINE CQRDC(X,Ldx,N,P,Qraux,Jpvt,Work,Job)
     DO j = pl, pu
       Qraux(j) = CMPLX(SCNRM2(N,X(1,j),1),0.0E0)
       Work(j) = Qraux(j)
-    ENDDO
-  ENDIF
+    END DO
+  END IF
   !
   !     PERFORM THE HOUSEHOLDER REDUCTION OF X.
   !
@@ -179,8 +179,8 @@ SUBROUTINE CQRDC(X,Ldx,N,P,Qraux,Jpvt,Work,Job)
         IF ( REAL(Qraux(j))>maxnrm ) THEN
           maxnrm = REAL(Qraux(j))
           maxj = j
-        ENDIF
-      ENDDO
+        END IF
+      END DO
       IF ( maxj/=l ) THEN
         CALL CSWAP(N,X(1,l),1,X(1,maxj),1)
         Qraux(maxj) = Qraux(l)
@@ -188,8 +188,8 @@ SUBROUTINE CQRDC(X,Ldx,N,P,Qraux,Jpvt,Work,Job)
         jp = Jpvt(maxj)
         Jpvt(maxj) = Jpvt(l)
         Jpvt(l) = jp
-      ENDIF
-    ENDIF
+      END IF
+    END IF
     Qraux(l) = (0.0E0,0.0E0)
     IF ( l/=N ) THEN
       !
@@ -220,17 +220,17 @@ SUBROUTINE CQRDC(X,Ldx,N,P,Qraux,Jpvt,Work,Job)
                   Work(j) = Qraux(j)
                 ELSE
                   Qraux(j) = Qraux(j)*SQRT(t)
-                ENDIF
-              ENDIF
-            ENDIF
-          ENDDO
-        ENDIF
+                END IF
+              END IF
+            END IF
+          END DO
+        END IF
         !
         !              SAVE THE TRANSFORMATION.
         !
         Qraux(l) = X(l,l)
         X(l,l) = -nrmxl
-      ENDIF
-    ENDIF
-  ENDDO
+      END IF
+    END IF
+  END DO
 END SUBROUTINE CQRDC

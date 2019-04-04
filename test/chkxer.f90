@@ -36,7 +36,7 @@ SUBROUTINE CHKXER(Srnamt,Infot,Nout,Fatal,Kprint)
   IF ( NUMXER(nerr)/=Infot ) THEN
     Fatal = .TRUE.
     IF ( Kprint>=3 ) WRITE (Nout,FMT=99001) Infot, Srnamt
-  ENDIF
+  END IF
   RETURN
   !
   99001 FORMAT (' ***** ILLEGAL VALUE OF PARAMETER NUMBER ',I2,' NOT D',&

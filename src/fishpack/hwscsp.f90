@@ -354,7 +354,7 @@ SUBROUTINE HWSCSP(Intl,Ts,Tf,M,Mbdcnd,Bdts,Bdtf,Rs,Rf,N,Nbdcnd,Bdrs,Bdrf,&
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   INTEGER i1, i10, i2, i3, i4, i5, i6, i7, i8, i9, Idimf, &
     Ierror, Intl, k, l, M, Mbdcnd, mp1, N, Nbdcnd
   REAL Bdrf(*), Bdrs(*), Bdtf(*), Bdts(*), dum, Elmbda, F(Idimf,*), Pertrb, pi, PIMACH, &
@@ -415,6 +415,6 @@ SUBROUTINE HWSCSP(Intl,Ts,Tf,M,Mbdcnd,Bdts,Bdtf,Rs,Rf,N,Nbdcnd,Bdrs,Bdrf,&
         Elmbda,F,Idimf,Pertrb,W(2),W(i1),W(i2),W(i3),W(i4),W(i5),&
         W(i6),W(i7),W(i8),W(i9),W(i10))
       EXIT
-    ENDIF
-  ENDDO
+    END IF
+  END DO
 END SUBROUTINE HWSCSP

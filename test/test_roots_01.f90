@@ -45,7 +45,7 @@ CONTAINS
     relerr = SQRT(R1MACH(4))
     DO j = 1, idegp1
       ac(j) = CMPLX(a(j),0.)
-    ENDDO
+    END DO
     info = 0
     CALL CPZERO(ideg,ac,z,w(4),info,w)
     IF ( info/=0 ) THEN
@@ -56,7 +56,7 @@ CONTAINS
         ' POLYNOMIAL IS ZERO')
       IF ( info==2.AND.Kprint>=1 ) WRITE (Lun,99002)
       99002 FORMAT (' CPZERO TEST FAILS: NON-CONVERGENCE IN 125 ITERATIONS')
-    ENDIF
+    END IF
     DO j = 1, ideg
       err = ABS(z(j)-zk(1))
       id = 1
@@ -64,9 +64,9 @@ CONTAINS
         erri = ABS(z(j)-zk(i))
         IF ( erri<err ) id = i
         err = MIN(erri,err)
-      ENDDO
+      END DO
       IF ( ABS(z(j)-zk(id))/ABS(zk(id))>=relerr ) Ipass = 0
-    ENDDO
+    END DO
     info = 0
     CALL RPZERO(ideg,a,z,w(4),info,w)
     IF ( info/=0 ) THEN
@@ -76,7 +76,7 @@ CONTAINS
         ' POLYNOMIAL IS ZERO')
       IF ( info==2.AND.Kprint>=1 ) WRITE (Lun,99004)
       99004 FORMAT (' RPZERO TEST FAILS: NON-CONVERGENCE IN 125 ITERATIONS')
-    ENDIF
+    END IF
     DO j = 1, ideg
       err = ABS(z(j)-zk(1))
       id = 1
@@ -84,9 +84,9 @@ CONTAINS
         erri = ABS(z(j)-zk(i))
         IF ( erri<err ) id = i
         err = MIN(erri,err)
-      ENDDO
+      END DO
       IF ( ABS(z(j)-zk(id))/ABS(zk(id))>=relerr ) Ipass = 0
-    ENDDO
+    END DO
     IF ( Kprint>=2.AND.Ipass/=0 ) WRITE (Lun,99005)
     99005 FORMAT (' CPRPQX PASSES ALL TESTS.')
     IF ( Kprint>=1.AND.Ipass==0 ) WRITE (Lun,99006)
@@ -152,7 +152,7 @@ CONTAINS
     ELSE
       Ipass = 0
       IF ( Kprint>=2 ) WRITE (Lun,99007) 'FAILED', b, c, iflag
-    ENDIF
+    END IF
     !
     !     Trigger 2 error conditions
     !
@@ -161,7 +161,7 @@ CONTAINS
       CALL XSETF(0)
     ELSE
       CALL XSETF(1)
-    ENDIF
+    END IF
     fatal = .FALSE.
     CALL XERCLR
     !
@@ -178,7 +178,7 @@ CONTAINS
       Ipass = 0
       fatal = .TRUE.
       IF ( Kprint>=2 ) WRITE (Lun,99008) iflag, 2
-    ENDIF
+    END IF
     !
     !     IFLAG=4 (No sign change)
     !
@@ -190,7 +190,7 @@ CONTAINS
       Ipass = 0
       fatal = .TRUE.
       IF ( Kprint>=2 ) WRITE (Lun,99008) iflag, 4
-    ENDIF
+    END IF
     !
     CALL XERCLR
     !
@@ -199,11 +199,11 @@ CONTAINS
       IF ( Kprint>=2 ) THEN
         WRITE (Lun,99003)
         99003 FORMAT (/' At least IFLAG test failed')
-      ENDIF
+      END IF
     ELSEIF ( Kprint>=3 ) THEN
       WRITE (Lun,99004)
       99004 FORMAT (/' All IFLAG tests passed')
-    ENDIF
+    END IF
     !
     IF ( Ipass==1.AND.Kprint>=2 ) WRITE (Lun,99005)
     99005 FORMAT (/' ***************FZERO PASSED ALL TESTS**************')
@@ -268,7 +268,7 @@ CONTAINS
     ELSE
       Ipass = 0
       IF ( Kprint>=2 ) WRITE (Lun,99007) 'FAILED', b, c, iflag
-    ENDIF
+    END IF
     !
     !     Trigger 2 error conditions
     !
@@ -277,7 +277,7 @@ CONTAINS
       CALL XSETF(0)
     ELSE
       CALL XSETF(1)
-    ENDIF
+    END IF
     fatal = .FALSE.
     CALL XERCLR
     !
@@ -294,7 +294,7 @@ CONTAINS
       Ipass = 0
       fatal = .TRUE.
       IF ( Kprint>=2 ) WRITE (Lun,99008) iflag, 2
-    ENDIF
+    END IF
     !
     !     IFLAG=4 (No sign change)
     !
@@ -306,7 +306,7 @@ CONTAINS
       Ipass = 0
       fatal = .TRUE.
       IF ( Kprint>=2 ) WRITE (Lun,99008) iflag, 4
-    ENDIF
+    END IF
     !
     CALL XERCLR
     !
@@ -315,11 +315,11 @@ CONTAINS
       IF ( Kprint>=2 ) THEN
         WRITE (Lun,99003)
         99003 FORMAT (/' At least IFLAG test failed')
-      ENDIF
+      END IF
     ELSEIF ( Kprint>=3 ) THEN
       WRITE (Lun,99004)
       99004 FORMAT (/' All IFLAG tests passed')
-    ENDIF
+    END IF
     !
     IF ( Ipass==1.AND.Kprint>=2 ) WRITE (Lun,99005)
     99005 FORMAT (/' ***************DFZERO PASSED ALL TESTS**************')
@@ -378,7 +378,7 @@ CONTAINS
     DO j = 1, 8
       coef(j) = beta
       beta = 2.0*beta
-    ENDDO
+    END DO
     !
     CALL RPQR79(7,coef,root,ierr,work)
     !
@@ -386,7 +386,7 @@ CONTAINS
     !
     DO i = 1, 7
       itmp(i) = 0
-    ENDDO
+    END DO
     !
     !     Check for roots in any order.
     !
@@ -395,16 +395,16 @@ CONTAINS
         IF ( ABS(root(i)-chk(j))<=tol ) THEN
           itmp(j) = 1
           EXIT
-        ENDIF
-      ENDDO
-    ENDDO
+        END IF
+      END DO
+    END DO
     !
     !     Check that we found all 7 roots.
     !
     Ipass = 1
     DO i = 1, 7
       Ipass = Ipass*itmp(i)
-    ENDDO
+    END DO
     !
     !     Print test results.
     !
@@ -418,7 +418,7 @@ CONTAINS
         'IMAG  PART'/'  NUMBER',8X,2(' of  ZERO ',12X))
       WRITE (Lun,99005) (j,root(j),j=1,7)
       99005 FORMAT (I6,3X,1P,2E22.14)
-    ENDIF
+    END IF
     IF ( Kprint>=2 ) CALL PASS(Lun,1,Ipass)
     !
     !     Trigger 2 error conditions
@@ -428,7 +428,7 @@ CONTAINS
       CALL XSETF(0)
     ELSE
       CALL XSETF(1)
-    ENDIF
+    END IF
     fatal = .FALSE.
     CALL XERCLR
     IF ( Kprint>=3 ) WRITE (Lun,99006)
@@ -453,11 +453,11 @@ CONTAINS
       IF ( Kprint>=2 ) THEN
         WRITE (Lun,99007)
         99007 FORMAT (/' AT LEAST ONE INCORRECT ARGUMENT TEST FAILED')
-      ENDIF
+      END IF
     ELSEIF ( Kprint>=3 ) THEN
       WRITE (Lun,99008)
       99008 FORMAT (/' ALL INCORRECT ARGUMENT TESTS PASSED')
-    ENDIF
+    END IF
     !
     IF ( Ipass==1.AND.Kprint>1 ) WRITE (Lun,99009)
     99009 FORMAT (/' **************RPQR79 PASSED ALL TESTS**************')
@@ -515,7 +515,7 @@ CONTAINS
     !
     DO i = 1, 7
       itmp(i) = 0
-    ENDDO
+    END DO
     !
     !     Check for roots in any order.
     !
@@ -524,16 +524,16 @@ CONTAINS
         IF ( ABS(root(i)-chk1(j))<=tol ) THEN
           itmp(j) = 1
           EXIT
-        ENDIF
-      ENDDO
-    ENDDO
+        END IF
+      END DO
+    END DO
     !
     !     Check that we found all 7 roots.
     !
     itest(1) = 1
     DO i = 1, 7
       itest(1) = itest(1)*itmp(i)
-    ENDDO
+    END DO
     !
     !     Print test results.
     !
@@ -542,7 +542,7 @@ CONTAINS
       WRITE (Lun,99009) (j,coeff1(j),j=1,9)
       WRITE (Lun,99010)
       WRITE (Lun,99011) (j,root(j),j=1,7)
-    ENDIF
+    END IF
     IF ( Kprint>=2 ) CALL PASS(Lun,1,itest(1))
     !
     !     Set up next problem.
@@ -563,7 +563,7 @@ CONTAINS
       WRITE (Lun,99009) (j,coeff2(j),j=1,2)
       WRITE (Lun,99010)
       WRITE (Lun,99011) (j,root(j),j=1,1)
-    ENDIF
+    END IF
     IF ( Kprint>=2 ) CALL PASS(Lun,2,itest(2))
     !
     !     Trigger 2 error conditions
@@ -573,7 +573,7 @@ CONTAINS
       CALL XSETF(0)
     ELSE
       CALL XSETF(1)
-    ENDIF
+    END IF
     fatal = .FALSE.
     CALL XERCLR
     IF ( Kprint>=3 ) WRITE (Lun,99003)
@@ -597,11 +597,11 @@ CONTAINS
       IF ( Kprint>=2 ) THEN
         WRITE (Lun,99004)
         99004 FORMAT (/' AT LEAST ONE INCORRECT ARGUMENT TEST FAILED')
-      ENDIF
+      END IF
     ELSEIF ( Kprint>=3 ) THEN
       WRITE (Lun,99005)
       99005 FORMAT (/' ALL INCORRECT ARGUMENT TESTS PASSED')
-    ENDIF
+    END IF
     !
     !     See if all tests passed.
     !
@@ -691,7 +691,7 @@ PROGRAM TEST34
     CALL XSETF(0)
   ELSE
     CALL XSETF(1)
-  ENDIF
+  END IF
   !
   !     Test CPZERO and RPZERO
   !
@@ -727,6 +727,6 @@ PROGRAM TEST34
     WRITE (lun,99002) nfail
     99002 FORMAT (/' ************* WARNING -- ',I5,&
       ' TEST(S) FAILED IN PROGRAM TEST34 *************')
-  ENDIF
+  END IF
   STOP
 END PROGRAM TEST34

@@ -94,14 +94,14 @@ SUBROUTINE SCOEF(Yh,Yp,Ncomp,Nrowb,Nfc,Nic,B,Beta,Coef,Inhomo,Re,Ae,By,&
       l = j
       IF ( Nfc/=Nfcc ) l = 2*j - 1
       By(k,l) = SDOT(Ncomp,B(k,1),Nrowb,Yh(1,j),1)
-    ENDDO
+    END DO
     IF ( Nfc/=Nfcc ) THEN
       DO j = 1, Nfc
         l = 2*j
         bykl = SDOT(ncomp2,B(k,1),Nrowb,Yh(ncomp2+1,j),1)
         By(k,l) = SDOT(ncomp2,B(k,ncomp2+1),Nrowb,Yh(1,j),1) - bykl
-      ENDDO
-    ENDIF
+      END DO
+    END IF
     SELECT CASE (Inhomo)
       CASE (2)
         !     CASE 2
@@ -113,7 +113,7 @@ SUBROUTINE SCOEF(Yh,Yp,Ncomp,Nrowb,Nfc,Nic,B,Beta,Coef,Inhomo,Re,Ae,By,&
         !     CASE 1
         Cvec(k) = Beta(k) - SDOT(Ncomp,B(k,1),Nrowb,Yp,1)
     END SELECT
-  ENDDO
+  END DO
   cons = ABS(Cvec(1))
   bys = ABS(By(1,1))
   !
@@ -144,7 +144,7 @@ SUBROUTINE SCOEF(Yh,Yp,Ncomp,Nrowb,Nfc,Nic,B,Beta,Coef,Inhomo,Re,Ae,By,&
           un = MAX(un,ABS(Yh(k,1)))
           ypn = MAX(ypn,ABS(Yp(k)))
           bn = MAX(bn,ABS(B(1,k)))
-        ENDDO
+        END DO
         bbn = MAX(bn,ABS(Beta(1)))
         IF ( bys<=10.*(Re*un+Ae)*bn ) EXIT
         IF ( Inhomo/=3 ) RETURN
@@ -157,13 +157,13 @@ SUBROUTINE SCOEF(Yh,Yp,Ncomp,Nrowb,Nfc,Nic,B,Beta,Coef,Inhomo,Re,Ae,By,&
           DO k = 1, Nfcc
             ki = 4*Nfcc + k
             Coef(k) = Work(ki)
-          ENDDO
+          END DO
           RETURN
         ELSE
           Iflag = 3
           DO k = 1, Nfcc
             Coef(k) = 0.
-          ENDDO
+          END DO
           Coef(Nfcc) = 1.
           nfccm1 = Nfcc - 1
           DO k = 1, nfccm1
@@ -172,16 +172,16 @@ SUBROUTINE SCOEF(Yh,Yp,Ncomp,Nrowb,Nfc,Nic,B,Beta,Coef,Inhomo,Re,Ae,By,&
             gam = SDOT(l,By(j,j),Nfcc,Coef(j),1)/(Work(j)*By(j,j))
             DO i = j, Nfcc
               Coef(i) = Coef(i) + gam*By(j,i)
-            ENDDO
-          ENDDO
+            END DO
+          END DO
           RETURN
-        ENDIF
-      ENDIF
+        END IF
+      END IF
     ELSE
       kflag = 1
       Iflag = 1
-    ENDIF
-  ENDDO
+    END IF
+  END DO
   brn = bbn/bn*bys
   IF ( cons>=0.1*brn.AND.cons<=10.*brn ) Iflag = 1
   IF ( cons>10.*brn ) Iflag = 2

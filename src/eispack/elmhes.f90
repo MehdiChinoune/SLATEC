@@ -71,7 +71,7 @@ SUBROUTINE ELMHES(Nm,N,Low,Igh,A,Int)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   !
   INTEGER i, j, m, N, la, Nm, Igh, kp1, Low, mm1, mp1
   REAL A(Nm,*)
@@ -92,8 +92,8 @@ SUBROUTINE ELMHES(Nm,N,Low,Igh,A,Int)
         IF ( ABS(A(j,mm1))>ABS(x) ) THEN
           x = A(j,mm1)
           i = j
-        ENDIF
-      ENDDO
+        END IF
+      END DO
       !
       Int(m) = i
       IF ( i/=m ) THEN
@@ -102,14 +102,14 @@ SUBROUTINE ELMHES(Nm,N,Low,Igh,A,Int)
           y = A(i,j)
           A(i,j) = A(m,j)
           A(m,j) = y
-        ENDDO
+        END DO
         !
         DO j = 1, Igh
           y = A(j,i)
           A(j,i) = A(j,m)
           A(j,m) = y
-        ENDDO
-      ENDIF
+        END DO
+      END IF
       !    .......... END INTERCHANGE ..........
       IF ( x/=0.0E0 ) THEN
         mp1 = m + 1
@@ -122,17 +122,17 @@ SUBROUTINE ELMHES(Nm,N,Low,Igh,A,Int)
             !
             DO j = m, N
               A(i,j) = A(i,j) - y*A(m,j)
-            ENDDO
+            END DO
             !
             DO j = 1, Igh
               A(j,m) = A(j,m) + y*A(j,i)
-            ENDDO
-          ENDIF
+            END DO
+          END IF
           !
-        ENDDO
-      ENDIF
+        END DO
+      END IF
       !
-    ENDDO
-  ENDIF
+    END DO
+  END IF
   !
 END SUBROUTINE ELMHES

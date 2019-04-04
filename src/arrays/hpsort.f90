@@ -115,7 +115,7 @@ SUBROUTINE HPSORT(Hx,N,Strbeg,Strend,Iperm,Kflag,Work,Ier)
   !   920507  Modified by M. McClain to revise prologue text.
   !   920818  Declarations section rebuilt and code restructured to use
   !           IF-THEN-ELSE-ENDIF.  (SMR, WRB)
-  
+
   !     .. Scalar Arguments ..
   INTEGER Ier, Kflag, N, Strbeg, Strend
   CHARACTER*(*) Work
@@ -139,44 +139,44 @@ SUBROUTINE HPSORT(Hx,N,Strbeg,Strend,Iperm,Kflag,Work,Ier)
     CALL XERMSG('SLATEC','HPSORT',&
       'The number of values to be sorted, N, is not positive.',Ier,1)
     RETURN
-  ENDIF
+  END IF
   kk = ABS(Kflag)
   IF ( kk/=1.AND.kk/=2 ) THEN
     Ier = 2
     CALL XERMSG('SLATEC','HPSORT',&
       'The sort control parameter, KFLAG, is not 2, 1, -1, or -2.',Ier,1)
     RETURN
-  ENDIF
+  END IF
   !
   IF ( LEN(Work)<LEN(Hx(1)) ) THEN
     Ier = 3
     CALL XERMSG('SLATEC',' HPSORT',&
       'The length of the work variable, WORK, is too short.',Ier,1)
     RETURN
-  ENDIF
+  END IF
   IF ( Strbeg>Strend ) THEN
     Ier = 4
     CALL XERMSG('SLATEC','HPSORT',&
       'The string beginning, STRBEG, is beyond its end, STREND.',Ier,1)
     RETURN
-  ENDIF
+  END IF
   IF ( Strbeg<1.OR.Strbeg>LEN(Hx(1)) ) THEN
     Ier = 5
     CALL XERMSG('SLATEC','HPSORT',&
       'The string beginning, STRBEG, is out-of-range.',Ier,1)
     RETURN
-  ENDIF
+  END IF
   IF ( Strend<1.OR.Strend>LEN(Hx(1)) ) THEN
     Ier = 6
     CALL XERMSG('SLATEC','HPSORT','The string end, STREND, is out-of-range.',Ier,1)
     RETURN
-  ENDIF
+  END IF
   !
   !     Initialize permutation vector
   !
   DO i = 1, nn
     Iperm(i) = i
-  ENDDO
+  END DO
   !
   !     Return if only one value is to be sorted
   !
@@ -195,7 +195,7 @@ SUBROUTINE HPSORT(Hx,N,Strbeg,Strend,Iperm,Kflag,Work,Ier)
     r = r + 3.90625E-2
   ELSE
     r = r - 0.21875E0
-  ENDIF
+  END IF
   !
   200  k = i
   !
@@ -210,7 +210,7 @@ SUBROUTINE HPSORT(Hx,N,Strbeg,Strend,Iperm,Kflag,Work,Ier)
     Iperm(ij) = Iperm(i)
     Iperm(i) = lm
     lm = Iperm(ij)
-  ENDIF
+  END IF
   l = j
   !
   !     If last element of array is less than LM, interchange with LM
@@ -227,8 +227,8 @@ SUBROUTINE HPSORT(Hx,N,Strbeg,Strend,Iperm,Kflag,Work,Ier)
       Iperm(ij) = Iperm(i)
       Iperm(i) = lm
       lm = Iperm(ij)
-    ENDIF
-  ENDIF
+    END IF
+  END IF
   DO
     !
     !     Find an element in the second half of the array which is smaller
@@ -265,13 +265,13 @@ SUBROUTINE HPSORT(Hx,N,Strbeg,Strend,Iperm,Kflag,Work,Ier)
               iu(m) = j
               j = l
               m = m + 1
-            ENDIF
+            END IF
             GOTO 400
-          ENDIF
-        ENDIF
-      ENDDO
-    ENDIF
-  ENDDO
+          END IF
+        END IF
+      END DO
+    END IF
+  END DO
   !
   !     Begin again on another portion of the unsorted array
   !
@@ -290,8 +290,8 @@ SUBROUTINE HPSORT(Hx,N,Strbeg,Strend,Iperm,Kflag,Work,Ier)
         lm = Iperm(i)
         Iperm(i) = Iperm(ir)
         Iperm(ir) = lm
-      ENDDO
-    ENDIF
+      END DO
+    END IF
     !
     !     Rearrange the values of HX if desired
     !
@@ -312,25 +312,25 @@ SUBROUTINE HPSORT(Hx,N,Strbeg,Strend,Iperm,Kflag,Work,Ier)
               Iperm(indx) = -Iperm(indx)
               indx = ABS(Iperm(indx))
               CYCLE
-            ENDIF
+            END IF
             Hx(indx0) = Work
             EXIT
-          ENDDO
-        ENDIF
-      ENDDO
+          END DO
+        END IF
+      END DO
       !
       !        Revert the signs of the IPERM values
       !
       DO i = 1, nn
         Iperm(i) = -Iperm(i)
-      ENDDO
+      END DO
       !
-    ENDIF
+    END IF
     RETURN
   ELSE
     i = il(m)
     j = iu(m)
-  ENDIF
+  END IF
   !
   400 CONTINUE
   IF ( j-i>=1 ) GOTO 200
@@ -351,10 +351,10 @@ SUBROUTINE HPSORT(Hx,N,Strbeg,Strend,Iperm,Kflag,Work,Ier)
         IF ( Hx(lm)(Strbeg:Strend)>=Hx(Iperm(k))(Strbeg:Strend) ) THEN
           Iperm(k+1) = lm
           EXIT
-        ENDIF
-      ENDDO
-    ENDIF
-  ENDDO
+        END IF
+      END DO
+    END IF
+  END DO
   !
   RETURN
 END SUBROUTINE HPSORT

@@ -60,7 +60,7 @@ REAL(8) FUNCTION DLBETA(A,B)
     !
     DLBETA = LOG(DGAMMA(p)*(DGAMMA(q)/DGAMMA(p+q)))
     RETURN
-  ENDIF
+  END IF
   !
   ! P IS SMALL, BUT Q IS BIG.
   !

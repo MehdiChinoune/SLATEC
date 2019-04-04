@@ -237,7 +237,7 @@ SUBROUTINE SSGS(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
   IF ( N<1.OR.Nelt<1 ) THEN
     Ierr = 3
     RETURN
-  ENDIF
+  END IF
   !
   !         Modify the SLAP matrix data structure to YSMP-Column.
   CALL SS2Y(N,Nelt,Ia,Ja,A,Isym)
@@ -250,11 +250,11 @@ SUBROUTINE SSGS(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
       jend = Ja(icol+1) - 1
       DO j = jbgn, jend
         IF ( Ia(j)>=icol ) nl = nl + 1
-      ENDDO
-    ENDDO
+      END DO
+    END DO
   ELSE
     nl = Ja(N+1) - 1
-  ENDIF
+  END IF
   !
   !         Set up the work arrays.  Then store the lower triangle of
   !         the matrix.

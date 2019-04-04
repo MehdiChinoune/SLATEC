@@ -26,7 +26,7 @@ SUBROUTINE RADB4(Ido,L1,Cc,Ch,Wa1,Wa2,Wa3)
   !   890831  Modified array declarations.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
-  
+
   INTEGER i, ic, Ido, idp2, k, L1
   REAL Cc(Ido,4,*), Ch(Ido,L1,4), ci2, ci3, ci4, cr2, cr3, cr4, sqrt2, ti1, ti2, &
     ti3, ti4, tr1, tr2, tr3, tr4, Wa1(*), Wa2(*), Wa3(*)
@@ -41,7 +41,7 @@ SUBROUTINE RADB4(Ido,L1,Cc,Ch,Wa1,Wa2,Wa3)
     Ch(1,k,2) = tr1 - tr4
     Ch(1,k,3) = tr2 - tr3
     Ch(1,k,4) = tr1 + tr4
-  ENDDO
+  END DO
   IF ( Ido<2 ) RETURN
   IF ( Ido/=2 ) THEN
     idp2 = Ido + 2
@@ -72,8 +72,8 @@ SUBROUTINE RADB4(Ido,L1,Cc,Ch,Wa1,Wa2,Wa3)
           Ch(i,k,3) = Wa2(i-2)*ci3 + Wa2(i-1)*cr3
           Ch(i-1,k,4) = Wa3(i-2)*cr4 - Wa3(i-1)*ci4
           Ch(i,k,4) = Wa3(i-2)*ci4 + Wa3(i-1)*cr4
-        ENDDO
-      ENDDO
+        END DO
+      END DO
     ELSE
       DO k = 1, L1
         !DIR$ IVDEP
@@ -101,11 +101,11 @@ SUBROUTINE RADB4(Ido,L1,Cc,Ch,Wa1,Wa2,Wa3)
           Ch(i,k,3) = Wa2(i-2)*ci3 + Wa2(i-1)*cr3
           Ch(i-1,k,4) = Wa3(i-2)*cr4 - Wa3(i-1)*ci4
           Ch(i,k,4) = Wa3(i-2)*ci4 + Wa3(i-1)*cr4
-        ENDDO
-      ENDDO
-    ENDIF
+        END DO
+      END DO
+    END IF
     IF ( MOD(Ido,2)==1 ) RETURN
-  ENDIF
+  END IF
   DO k = 1, L1
     ti1 = Cc(1,2,k) + Cc(1,4,k)
     ti2 = Cc(1,4,k) - Cc(1,2,k)
@@ -115,6 +115,6 @@ SUBROUTINE RADB4(Ido,L1,Cc,Ch,Wa1,Wa2,Wa3)
     Ch(Ido,k,2) = sqrt2*(tr1-ti1)
     Ch(Ido,k,3) = ti2 + ti2
     Ch(Ido,k,4) = -sqrt2*(tr1+ti1)
-  ENDDO
+  END DO
   RETURN
 END SUBROUTINE RADB4

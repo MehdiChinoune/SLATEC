@@ -101,12 +101,12 @@ SUBROUTINE BSQAD(T,Bcoef,N,K,X1,X2,Bquad,Work)
           IF ( K>12 ) THEN
             jf = 4
             mf = 5
-          ENDIF
-        ENDIF
+          END IF
+        END IF
         !
         DO i = 1, mf
           sum(i) = 0.0E0
-        ENDDO
+        END DO
         ilo = 1
         inbv = 1
         CALL INTRV(T,npk,aa,ilo,il1,mflag)
@@ -127,19 +127,19 @@ SUBROUTINE BSQAD(T,Bcoef,N,K,X1,X2,Bquad,Work)
               gx = c1 + bpa
               y1 = BVALU(T,Bcoef,N,K,0,gx,inbv,Work)
               sum(m) = sum(m) + (y1+y2)*bma
-            ENDDO
-          ENDIF
-        ENDDO
+            END DO
+          END IF
+        END DO
         q = 0.0E0
         DO m = 1, mf
           q = q + gwts(jf+m)*sum(m)
-        ENDDO
+        END DO
         IF ( X1>X2 ) q = -q
         Bquad = q
         RETURN
-      ENDIF
-    ENDIF
-  ENDIF
+      END IF
+    END IF
+  END IF
   !
   !
   CALL XERMSG('SLATEC','BSQAD',&

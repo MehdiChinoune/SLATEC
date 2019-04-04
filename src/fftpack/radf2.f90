@@ -23,14 +23,14 @@ SUBROUTINE RADF2(Ido,L1,Cc,Ch,Wa1)
   !   890831  Modified array declarations.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
-  
+
   INTEGER i, ic, Ido, idp2, k, L1
   REAL Cc(Ido,L1,2), Ch(Ido,2,*), ti2, tr2, Wa1(*)
   !* FIRST EXECUTABLE STATEMENT  RADF2
   DO k = 1, L1
     Ch(1,1,k) = Cc(1,k,1) + Cc(1,k,2)
     Ch(Ido,2,k) = Cc(1,k,1) - Cc(1,k,2)
-  ENDDO
+  END DO
   IF ( Ido<2 ) RETURN
   IF ( Ido/=2 ) THEN
     idp2 = Ido + 2
@@ -45,8 +45,8 @@ SUBROUTINE RADF2(Ido,L1,Cc,Ch,Wa1)
           Ch(ic,2,k) = ti2 - Cc(i,k,1)
           Ch(i-1,1,k) = Cc(i-1,k,1) + tr2
           Ch(ic-1,2,k) = Cc(i-1,k,1) - tr2
-        ENDDO
-      ENDDO
+        END DO
+      END DO
     ELSE
       DO k = 1, L1
         !DIR$ IVDEP
@@ -58,14 +58,14 @@ SUBROUTINE RADF2(Ido,L1,Cc,Ch,Wa1)
           Ch(ic,2,k) = ti2 - Cc(i,k,1)
           Ch(i-1,1,k) = Cc(i-1,k,1) + tr2
           Ch(ic-1,2,k) = Cc(i-1,k,1) - tr2
-        ENDDO
-      ENDDO
-    ENDIF
+        END DO
+      END DO
+    END IF
     IF ( MOD(Ido,2)==1 ) RETURN
-  ENDIF
+  END IF
   DO k = 1, L1
     Ch(1,2,k) = -Cc(Ido,k,2)
     Ch(Ido,1,k) = Cc(Ido,k,1)
-  ENDDO
+  END DO
   RETURN
 END SUBROUTINE RADF2

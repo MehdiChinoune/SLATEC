@@ -144,11 +144,11 @@ SUBROUTINE CHEMV(Uplo,N,Alpha,A,Lda,X,Incx,Beta,Y,Incy)
     info = 7
   ELSEIF ( Incy==0 ) THEN
     info = 10
-  ENDIF
+  END IF
   IF ( info/=0 ) THEN
     CALL XERBLA('CHEMV ',info)
     RETURN
-  ENDIF
+  END IF
   !
   !     Quick return if possible.
   !
@@ -160,12 +160,12 @@ SUBROUTINE CHEMV(Uplo,N,Alpha,A,Lda,X,Incx,Beta,Y,Incy)
     kx = 1
   ELSE
     kx = 1 - (N-1)*Incx
-  ENDIF
+  END IF
   IF ( Incy>0 ) THEN
     ky = 1
   ELSE
     ky = 1 - (N-1)*Incy
-  ENDIF
+  END IF
   !
   !     Start the operations. In this version the elements of A are
   !     accessed sequentially with one pass through the triangular part
@@ -180,23 +180,23 @@ SUBROUTINE CHEMV(Uplo,N,Alpha,A,Lda,X,Incx,Beta,Y,Incy)
         DO i = 1, N
           Y(iy) = ZERO
           iy = iy + Incy
-        ENDDO
+        END DO
       ELSE
         DO i = 1, N
           Y(iy) = Beta*Y(iy)
           iy = iy + Incy
-        ENDDO
-      ENDIF
+        END DO
+      END IF
     ELSEIF ( Beta==ZERO ) THEN
       DO i = 1, N
         Y(i) = ZERO
-      ENDDO
+      END DO
     ELSE
       DO i = 1, N
         Y(i) = Beta*Y(i)
-      ENDDO
-    ENDIF
-  ENDIF
+      END DO
+    END IF
+  END IF
   IF ( Alpha==ZERO ) RETURN
   IF ( LSAME(Uplo,'U') ) THEN
     !
@@ -209,9 +209,9 @@ SUBROUTINE CHEMV(Uplo,N,Alpha,A,Lda,X,Incx,Beta,Y,Incy)
         DO i = 1, j - 1
           Y(i) = Y(i) + temp1*A(i,j)
           temp2 = temp2 + CONJG(A(i,j))*X(i)
-        ENDDO
+        END DO
         Y(j) = Y(j) + temp1*REAL(A(j,j)) + Alpha*temp2
-      ENDDO
+      END DO
     ELSE
       jx = kx
       jy = ky
@@ -225,12 +225,12 @@ SUBROUTINE CHEMV(Uplo,N,Alpha,A,Lda,X,Incx,Beta,Y,Incy)
           temp2 = temp2 + CONJG(A(i,j))*X(ix)
           ix = ix + Incx
           iy = iy + Incy
-        ENDDO
+        END DO
         Y(jy) = Y(jy) + temp1*REAL(A(j,j)) + Alpha*temp2
         jx = jx + Incx
         jy = jy + Incy
-      ENDDO
-    ENDIF
+      END DO
+    END IF
     !
     !        Form  y  when A is stored in lower triangle.
     !
@@ -242,9 +242,9 @@ SUBROUTINE CHEMV(Uplo,N,Alpha,A,Lda,X,Incx,Beta,Y,Incy)
       DO i = j + 1, N
         Y(i) = Y(i) + temp1*A(i,j)
         temp2 = temp2 + CONJG(A(i,j))*X(i)
-      ENDDO
+      END DO
       Y(j) = Y(j) + Alpha*temp2
-    ENDDO
+    END DO
   ELSE
     jx = kx
     jy = ky
@@ -259,12 +259,12 @@ SUBROUTINE CHEMV(Uplo,N,Alpha,A,Lda,X,Incx,Beta,Y,Incy)
         iy = iy + Incy
         Y(iy) = Y(iy) + temp1*A(i,j)
         temp2 = temp2 + CONJG(A(i,j))*X(ix)
-      ENDDO
+      END DO
       Y(jy) = Y(jy) + Alpha*temp2
       jx = jx + Incx
       jy = jy + Incy
-    ENDDO
-  ENDIF
+    END DO
+  END IF
   !
   !
   !     End of CHEMV .

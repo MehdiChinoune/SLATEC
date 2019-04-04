@@ -165,7 +165,7 @@ SUBROUTINE SSICS(N,Nelt,Ia,Ja,A,Isym,Nel,Iel,Jel,El,D,R,Iwarn)
   !   920511  Added complete declaration section.  (WRB)
   !   920929  Corrected format of reference.  (FNF)
   !   930701  Updated CATEGORY section.  (FNF, WRB)
-  
+
   !     .. Scalar Arguments ..
   INTEGER Isym, Iwarn, N, Nel, Nelt
   !     .. Array Arguments ..
@@ -212,14 +212,14 @@ SUBROUTINE SSICS(N,Nelt,Ia,Ja,A,Isym,Nel,Iel,Jel,El,D,R,Iwarn)
     ELSE
       icbgn = 1
       icend = irow - 1
-    ENDIF
+    END IF
     DO ic = icbgn, icend
       IF ( Isym==0 ) THEN
         icol = Ia(ic)
         IF ( icol>=irow ) CYCLE
       ELSE
         icol = ic
-      ENDIF
+      END IF
       jbgn = Ja(icol) + 1
       jend = Ja(icol+1) - 1
       IF ( jbgn<=jend.AND.Ia(jend)>=irow ) THEN
@@ -230,11 +230,11 @@ SUBROUTINE SSICS(N,Nelt,Ia,Ja,A,Isym,Nel,Iel,Jel,El,D,R,Iwarn)
             Jel(Nel) = icol
             El(Nel) = A(j)
             EXIT
-          ENDIF
-        ENDDO
-      ENDIF
-    ENDDO
-  ENDDO
+          END IF
+        END DO
+      END IF
+    END DO
+  END DO
   Iel(N+1) = Nel + 1
   !
   !         Sort ROWS of lower triangle into descending order (count out
@@ -254,11 +254,11 @@ SUBROUTINE SSICS(N,Nelt,Ia,Ja,A,Isym,Nel,Iel,Jel,El,D,R,Iwarn)
             eltmp = El(j)
             El(j) = El(i)
             El(i) = eltmp
-          ENDIF
-        ENDDO
-      ENDDO
-    ENDIF
-  ENDDO
+          END IF
+        END DO
+      END DO
+    END IF
+  END DO
   !
   !         Perform the Incomplete Cholesky decomposition by looping
   !         over the rows.
@@ -273,7 +273,7 @@ SUBROUTINE SSICS(N,Nelt,Ia,Ja,A,Isym,Nel,Iel,Jel,El,D,R,Iwarn)
     !         Hint: it's the second entry.
     i = Iel(ir) + 1
     El(i) = El(i)/D(1)
-  ENDDO
+  END DO
   !
   DO irow = 2, N
     !
@@ -281,7 +281,7 @@ SUBROUTINE SSICS(N,Nelt,Ia,Ja,A,Isym,Nel,Iel,Jel,El,D,R,Iwarn)
     !
     DO i = 1, irow - 1
       R(i) = 0
-    ENDDO
+    END DO
     ibgn = Iel(irow) + 1
     iend = Iel(irow+1) - 1
     IF ( ibgn<=iend ) THEN
@@ -291,15 +291,15 @@ SUBROUTINE SSICS(N,Nelt,Ia,Ja,A,Isym,Nel,Iel,Jel,El,D,R,Iwarn)
       DO i = ibgn, iend
         R(Jel(i)) = El(i)*D(Jel(i))
         D(irow) = D(irow) - El(i)*R(Jel(i))
-      ENDDO
+      END DO
       !
       !         Check to see if we have a problem with the diagonal.
       !
       IF ( D(irow)<=0.0E0 ) THEN
         IF ( Iwarn==0 ) Iwarn = irow
         D(irow) = 1
-      ENDIF
-    ENDIF
+      END IF
+    END IF
     !
     !         Update each EL(IROW+1:N,IROW), if there are any.
     !         Use the structure of A to determine the Non-zero elements
@@ -321,35 +321,35 @@ SUBROUTINE SSICS(N,Nelt,Ia,Ja,A,Isym,Nel,Iel,Jel,El,D,R,Iwarn)
                 IF ( Jel(icend)>=irow ) THEN
                   icend = icend - 1
                   CYCLE
-                ENDIF
+                END IF
                 !         Sum up the EL(IR,1:IROW-1)*R(1:IROW-1) contributions.
                 !LLL. OPTION ASSERT (NOHAZARD)
                 !DIR$ IVDEP
                 !VD$ NODEPCHK
                 DO ic = ibgn, icend
                   El(i) = El(i) - El(ic)*R(Jel(ic))
-                ENDDO
+                END DO
                 El(i) = El(i)/D(irow)
                 GOTO 50
-              ENDDO
-            ENDIF
-          ENDDO
+              END DO
+            END IF
+          END DO
           !
           !         If we get here, we have real problems...
           WRITE (xern1,'(I8)') irow
           CALL XERMSG('SLATEC','SSICS',&
             'A and EL data structure mismatch in row '//xern1,1,2)
-        ENDIF
-      ENDIF
+        END IF
+      END IF
       50 CONTINUE
-    ENDDO
-  ENDDO
+    END DO
+  END DO
   !
   !         Replace diagonals by their inverses.
   !
   !VD$ CONCUR
   DO i = 1, N
     D(i) = 1.0E0/D(i)
-  ENDDO
+  END DO
   !------------- LAST LINE OF SSICS FOLLOWS ----------------------------
 END SUBROUTINE SSICS

@@ -153,7 +153,7 @@ SUBROUTINE CSYRK(Uplo,Trans,N,K,Alpha,A,Lda,Beta,C,Ldc)
     nrowa = N
   ELSE
     nrowa = K
-  ENDIF
+  END IF
   upper = LSAME(Uplo,'U')
   !
   info = 0
@@ -169,11 +169,11 @@ SUBROUTINE CSYRK(Uplo,Trans,N,K,Alpha,A,Lda,Beta,C,Ldc)
     info = 7
   ELSEIF ( Ldc<MAX(1,N) ) THEN
     info = 10
-  ENDIF
+  END IF
   IF ( info/=0 ) THEN
     CALL XERBLA('CSYRK ',info)
     RETURN
-  ENDIF
+  END IF
   !
   !     Quick return if possible.
   !
@@ -187,30 +187,30 @@ SUBROUTINE CSYRK(Uplo,Trans,N,K,Alpha,A,Lda,Beta,C,Ldc)
         DO j = 1, N
           DO i = 1, j
             C(i,j) = ZERO
-          ENDDO
-        ENDDO
+          END DO
+        END DO
       ELSE
         DO j = 1, N
           DO i = 1, j
             C(i,j) = Beta*C(i,j)
-          ENDDO
-        ENDDO
-      ENDIF
+          END DO
+        END DO
+      END IF
     ELSEIF ( Beta==ZERO ) THEN
       DO j = 1, N
         DO i = j, N
           C(i,j) = ZERO
-        ENDDO
-      ENDDO
+        END DO
+      END DO
     ELSE
       DO j = 1, N
         DO i = j, N
           C(i,j) = Beta*C(i,j)
-        ENDDO
-      ENDDO
-    ENDIF
+        END DO
+      END DO
+    END IF
     RETURN
-  ENDIF
+  END IF
   !
   !     Start the operations.
   !
@@ -223,42 +223,42 @@ SUBROUTINE CSYRK(Uplo,Trans,N,K,Alpha,A,Lda,Beta,C,Ldc)
         IF ( Beta==ZERO ) THEN
           DO i = 1, j
             C(i,j) = ZERO
-          ENDDO
+          END DO
         ELSEIF ( Beta/=ONE ) THEN
           DO i = 1, j
             C(i,j) = Beta*C(i,j)
-          ENDDO
-        ENDIF
+          END DO
+        END IF
         DO l = 1, K
           IF ( A(j,l)/=ZERO ) THEN
             temp = Alpha*A(j,l)
             DO i = 1, j
               C(i,j) = C(i,j) + temp*A(i,l)
-            ENDDO
-          ENDIF
-        ENDDO
-      ENDDO
+            END DO
+          END IF
+        END DO
+      END DO
     ELSE
       DO j = 1, N
         IF ( Beta==ZERO ) THEN
           DO i = j, N
             C(i,j) = ZERO
-          ENDDO
+          END DO
         ELSEIF ( Beta/=ONE ) THEN
           DO i = j, N
             C(i,j) = Beta*C(i,j)
-          ENDDO
-        ENDIF
+          END DO
+        END IF
         DO l = 1, K
           IF ( A(j,l)/=ZERO ) THEN
             temp = Alpha*A(j,l)
             DO i = j, N
               C(i,j) = C(i,j) + temp*A(i,l)
-            ENDDO
-          ENDIF
-        ENDDO
-      ENDDO
-    ENDIF
+            END DO
+          END IF
+        END DO
+      END DO
+    END IF
     !
     !        Form  C := alpha*A'*A + beta*C.
     !
@@ -268,29 +268,29 @@ SUBROUTINE CSYRK(Uplo,Trans,N,K,Alpha,A,Lda,Beta,C,Ldc)
         temp = ZERO
         DO l = 1, K
           temp = temp + A(l,i)*A(l,j)
-        ENDDO
+        END DO
         IF ( Beta==ZERO ) THEN
           C(i,j) = Alpha*temp
         ELSE
           C(i,j) = Alpha*temp + Beta*C(i,j)
-        ENDIF
-      ENDDO
-    ENDDO
+        END IF
+      END DO
+    END DO
   ELSE
     DO j = 1, N
       DO i = j, N
         temp = ZERO
         DO l = 1, K
           temp = temp + A(l,i)*A(l,j)
-        ENDDO
+        END DO
         IF ( Beta==ZERO ) THEN
           C(i,j) = Alpha*temp
         ELSE
           C(i,j) = Alpha*temp + Beta*C(i,j)
-        ENDIF
-      ENDDO
-    ENDDO
-  ENDIF
+        END IF
+      END DO
+    END DO
+  END IF
   !
   !
   !     End of CSYRK .

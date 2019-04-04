@@ -281,7 +281,7 @@ SUBROUTINE QAWSE(F,A,B,Alfa,Beta,Integr,Epsabs,Epsrel,Limit,Result,Abserr,&
       Rlist(2) = area2
       Elist(1) = error1
       Elist(2) = error2
-    ENDIF
+    END IF
     Iord(1) = 1
     Iord(2) = 2
     IF ( Limit==2 ) Ier = 1
@@ -328,8 +328,8 @@ SUBROUTINE QAWSE(F,A,B,Alfa,Beta,Integr,Epsabs,Epsrel,Limit,Result,Abserr,&
             IF ( ABS(Rlist(maxerr)-area12)<0.1E-04*ABS(area12).AND.&
               erro12>=0.99E+00*errmax ) iroff1 = iroff1 + 1
             IF ( Last>10.AND.erro12>errmax ) iroff2 = iroff2 + 1
-          ENDIF
-        ENDIF
+          END IF
+        END IF
         Rlist(maxerr) = area1
         Rlist(Last) = area2
         !
@@ -353,7 +353,7 @@ SUBROUTINE QAWSE(F,A,B,Alfa,Beta,Integr,Epsabs,Epsrel,Limit,Result,Abserr,&
           !
           IF ( MAX(ABS(a1),ABS(b2))<=(0.1E+01+0.1E+03*epmach)&
             *(ABS(a2)+0.1E+04*uflow) ) Ier = 3
-        ENDIF
+        END IF
         !
         !           APPEND THE NEWLY-CREATED INTERVALS TO THE LIST.
         !
@@ -371,7 +371,7 @@ SUBROUTINE QAWSE(F,A,B,Alfa,Beta,Integr,Epsabs,Epsrel,Limit,Result,Abserr,&
           Blist(Last) = b2
           Elist(maxerr) = error1
           Elist(Last) = error2
-        ENDIF
+        END IF
         !
         !           CALL SUBROUTINE QPSRT TO MAINTAIN THE DESCENDING ORDERING
         !           IN THE LIST OF ERROR ESTIMATES AND SELECT THE
@@ -381,7 +381,7 @@ SUBROUTINE QAWSE(F,A,B,Alfa,Beta,Integr,Epsabs,Epsrel,Limit,Result,Abserr,&
         CALL QPSRT(Limit,Last,maxerr,errmax,Elist,Iord,nrmax)
         !- **JUMP OUT OF DO-LOOP
         IF ( Ier/=0.OR.errsum<=errbnd ) EXIT
-      ENDDO
+      END DO
       !
       !           COMPUTE FINAL RESULT.
       !           ---------------------
@@ -389,8 +389,8 @@ SUBROUTINE QAWSE(F,A,B,Alfa,Beta,Integr,Epsabs,Epsrel,Limit,Result,Abserr,&
       Result = 0.0E+00
       DO k = 1, Last
         Result = Result + Rlist(k)
-      ENDDO
+      END DO
       Abserr = errsum
-    ENDIF
-  ENDIF
+    END IF
+  END IF
 END SUBROUTINE QAWSE

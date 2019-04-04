@@ -81,7 +81,7 @@ SUBROUTINE RSG(Nm,N,A,B,W,Matz,Z,Fv1,Fv2,Ierr)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   !
   INTEGER N, Nm, Ierr, Matz
   REAL A(Nm,*), B(Nm,*), W(*), Z(Nm,*), Fv1(*), Fv2(*)
@@ -100,9 +100,9 @@ SUBROUTINE RSG(Nm,N,A,B,W,Matz,Z,Fv1,Fv2,Ierr)
         !     .......... FIND EIGENVALUES ONLY ..........
         CALL TRED1(Nm,N,A,W,Fv1,Fv2)
         CALL TQLRAT(N,W,Fv2,Ierr)
-      ENDIF
-    ENDIF
+      END IF
+    END IF
   ELSE
     Ierr = 10*N
-  ENDIF
+  END IF
 END SUBROUTINE RSG

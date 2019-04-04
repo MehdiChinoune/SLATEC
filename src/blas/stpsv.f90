@@ -142,11 +142,11 @@ SUBROUTINE STPSV(Uplo,Trans,Diag,N,Ap,X,Incx)
     info = 4
   ELSEIF ( Incx==0 ) THEN
     info = 7
-  ENDIF
+  END IF
   IF ( info/=0 ) THEN
     CALL XERBLA('STPSV ',info)
     RETURN
-  ENDIF
+  END IF
   !
   !     Quick return if possible.
   !
@@ -161,7 +161,7 @@ SUBROUTINE STPSV(Uplo,Trans,Diag,N,Ap,X,Incx)
     kx = 1 - (N-1)*Incx
   ELSEIF ( Incx/=1 ) THEN
     kx = 1
-  ENDIF
+  END IF
   !
   !     Start the operations. In this version the elements of AP are
   !     accessed sequentially with one pass through AP.
@@ -181,10 +181,10 @@ SUBROUTINE STPSV(Uplo,Trans,Diag,N,Ap,X,Incx)
             DO i = j - 1, 1, -1
               X(i) = X(i) - temp*Ap(k)
               k = k - 1
-            ENDDO
-          ENDIF
+            END DO
+          END IF
           kk = kk - j
-        ENDDO
+        END DO
       ELSE
         jx = kx + (N-1)*Incx
         DO j = N, 1, -1
@@ -195,12 +195,12 @@ SUBROUTINE STPSV(Uplo,Trans,Diag,N,Ap,X,Incx)
             DO k = kk - 1, kk - j + 1, -1
               ix = ix - Incx
               X(ix) = X(ix) - temp*Ap(k)
-            ENDDO
-          ENDIF
+            END DO
+          END IF
           jx = jx - Incx
           kk = kk - j
-        ENDDO
-      ENDIF
+        END DO
+      END IF
     ELSE
       kk = 1
       IF ( Incx==1 ) THEN
@@ -212,10 +212,10 @@ SUBROUTINE STPSV(Uplo,Trans,Diag,N,Ap,X,Incx)
             DO i = j + 1, N
               X(i) = X(i) - temp*Ap(k)
               k = k + 1
-            ENDDO
-          ENDIF
+            END DO
+          END IF
           kk = kk + (N-j+1)
-        ENDDO
+        END DO
       ELSE
         jx = kx
         DO j = 1, N
@@ -226,13 +226,13 @@ SUBROUTINE STPSV(Uplo,Trans,Diag,N,Ap,X,Incx)
             DO k = kk + 1, kk + N - j
               ix = ix + Incx
               X(ix) = X(ix) - temp*Ap(k)
-            ENDDO
-          ENDIF
+            END DO
+          END IF
           jx = jx + Incx
           kk = kk + (N-j+1)
-        ENDDO
-      ENDIF
-    ENDIF
+        END DO
+      END IF
+    END IF
     !
     !        Form  x := inv( A' )*x.
     !
@@ -245,11 +245,11 @@ SUBROUTINE STPSV(Uplo,Trans,Diag,N,Ap,X,Incx)
         DO i = 1, j - 1
           temp = temp - Ap(k)*X(i)
           k = k + 1
-        ENDDO
+        END DO
         IF ( nounit ) temp = temp/Ap(kk+j-1)
         X(j) = temp
         kk = kk + j
-      ENDDO
+      END DO
     ELSE
       jx = kx
       DO j = 1, N
@@ -258,13 +258,13 @@ SUBROUTINE STPSV(Uplo,Trans,Diag,N,Ap,X,Incx)
         DO k = kk, kk + j - 2
           temp = temp - Ap(k)*X(ix)
           ix = ix + Incx
-        ENDDO
+        END DO
         IF ( nounit ) temp = temp/Ap(kk+j-1)
         X(jx) = temp
         jx = jx + Incx
         kk = kk + j
-      ENDDO
-    ENDIF
+      END DO
+    END IF
   ELSE
     kk = (N*(N+1))/2
     IF ( Incx==1 ) THEN
@@ -274,11 +274,11 @@ SUBROUTINE STPSV(Uplo,Trans,Diag,N,Ap,X,Incx)
         DO i = N, j + 1, -1
           temp = temp - Ap(k)*X(i)
           k = k - 1
-        ENDDO
+        END DO
         IF ( nounit ) temp = temp/Ap(kk-N+j)
         X(j) = temp
         kk = kk - (N-j+1)
-      ENDDO
+      END DO
     ELSE
       kx = kx + (N-1)*Incx
       jx = kx
@@ -288,14 +288,14 @@ SUBROUTINE STPSV(Uplo,Trans,Diag,N,Ap,X,Incx)
         DO k = kk, kk - (N-(j+1)), -1
           temp = temp - Ap(k)*X(ix)
           ix = ix - Incx
-        ENDDO
+        END DO
         IF ( nounit ) temp = temp/Ap(kk-N+j)
         X(jx) = temp
         jx = jx - Incx
         kk = kk - (N-j+1)
-      ENDDO
-    ENDIF
-  ENDIF
+      END DO
+    END IF
+  END IF
   !
   !
   !     End of STPSV .

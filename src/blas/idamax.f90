@@ -52,7 +52,7 @@ INTEGER FUNCTION IDAMAX(N,Dx,Incx)
   !   900821  Modified to correct problem with a negative increment.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   REAL(8) :: Dx(*), dmax, xmag
   INTEGER i, Incx, ix, N
   !* FIRST EXECUTABLE STATEMENT  IDAMAX
@@ -71,10 +71,10 @@ INTEGER FUNCTION IDAMAX(N,Dx,Incx)
       IF ( xmag>dmax ) THEN
         IDAMAX = i
         dmax = xmag
-      ENDIF
-    ENDDO
+      END IF
+    END DO
     RETURN
-  ENDIF
+  END IF
   !
   !     Code for increments not equal to 1.
   !
@@ -87,8 +87,8 @@ INTEGER FUNCTION IDAMAX(N,Dx,Incx)
     IF ( xmag>dmax ) THEN
       IDAMAX = i
       dmax = xmag
-    ENDIF
+    END IF
     ix = ix + Incx
-  ENDDO
+  END DO
   RETURN
 END FUNCTION IDAMAX

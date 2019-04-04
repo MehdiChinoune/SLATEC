@@ -48,7 +48,7 @@ REAL(8) FUNCTION DGAMR(X)
     CALL XSETF(irold)
     DGAMR = sgngx*EXP(-alngx)
     RETURN
-  ENDIF
+  END IF
   DGAMR = 1.0D0/DGAMMA(X)
   CALL XERCLR
   CALL XSETF(irold)

@@ -53,14 +53,14 @@ SUBROUTINE CKSCL(Zr,Fnu,N,Y,Nz,Rz,Ascle,Tol,Elim)
         Y(i) = cs
         Nz = Nz - 1
         ic = i
-      ENDIF
-    ENDIF
-  ENDDO
+      END IF
+    END IF
+  END DO
   IF ( N==1 ) RETURN
   IF ( ic<=1 ) THEN
     Y(1) = czero
     Nz = 2
-  ENDIF
+  END IF
   IF ( N==2 ) RETURN
   IF ( Nz==0 ) RETURN
   fn = Fnu + 1.0E0
@@ -100,15 +100,15 @@ SUBROUTINE CKSCL(Zr,Fnu,N,Y,Nz,Rz,Ascle,Tol,Elim)
         IF ( ic==(kk-1) ) GOTO 100
         ic = kk
         CYCLE
-      ENDIF
-    ENDIF
+      END IF
+    END IF
     IF ( alas>=helim ) THEN
       xx = xx - Elim
       s1 = s1*celm
       s2 = s2*celm
       zd = CMPLX(xx,zri)
-    ENDIF
-  ENDDO
+    END IF
+  END DO
   Nz = N
   IF ( ic==N ) Nz = N - 1
   GOTO 200
@@ -116,5 +116,5 @@ SUBROUTINE CKSCL(Zr,Fnu,N,Y,Nz,Rz,Ascle,Tol,Elim)
   200 CONTINUE
   DO k = 1, Nz
     Y(k) = czero
-  ENDDO
+  END DO
 END SUBROUTINE CKSCL

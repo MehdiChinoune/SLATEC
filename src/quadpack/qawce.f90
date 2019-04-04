@@ -225,7 +225,7 @@ SUBROUTINE QAWCE(F,A,B,C,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,&
     IF ( A>B ) THEN
       aa = B
       bb = A
-    ENDIF
+    END IF
     Ier = 0
     krule = 1
     CALL QC25C(F,aa,bb,C,Result,Abserr,krule,Neval)
@@ -306,7 +306,7 @@ SUBROUTINE QAWCE(F,A,B,C,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,&
           !
           IF ( MAX(ABS(a1),ABS(b2))<=(0.1E+01+0.1E+03*epmach)&
             *(ABS(a2)+0.1E+04*uflow) ) Ier = 3
-        ENDIF
+        END IF
         !
         !           APPEND THE NEWLY-CREATED INTERVALS TO THE LIST.
         !
@@ -324,7 +324,7 @@ SUBROUTINE QAWCE(F,A,B,C,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,&
           Blist(Last) = b2
           Elist(maxerr) = error1
           Elist(Last) = error2
-        ENDIF
+        END IF
         !
         !           CALL SUBROUTINE QPSRT TO MAINTAIN THE DESCENDING ORDERING
         !           IN THE LIST OF ERROR ESTIMATES AND SELECT THE
@@ -334,7 +334,7 @@ SUBROUTINE QAWCE(F,A,B,C,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,&
         CALL QPSRT(Limit,Last,maxerr,errmax,Elist,Iord,nrmax)
         !- **JUMP OUT OF DO-LOOP
         IF ( Ier/=0.OR.errsum<=errbnd ) EXIT
-      ENDDO
+      END DO
       !
       !           COMPUTE FINAL RESULT.
       !           ---------------------
@@ -342,9 +342,9 @@ SUBROUTINE QAWCE(F,A,B,C,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,&
       Result = 0.0E+00
       DO k = 1, Last
         Result = Result + Rlist(k)
-      ENDDO
+      END DO
       Abserr = errsum
-    ENDIF
+    END IF
     IF ( aa==B ) Result = -Result
-  ENDIF
+  END IF
 END SUBROUTINE QAWCE

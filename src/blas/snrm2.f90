@@ -102,7 +102,7 @@ REAL FUNCTION SNRM2(N,Sx,Incx)
   ELSE
     SNRM2 = zero
     RETURN
-  ENDIF
+  END IF
   100 CONTINUE
   SELECT CASE(next)
     CASE(200)
@@ -150,7 +150,7 @@ REAL FUNCTION SNRM2(N,Sx,Incx)
     !
     sum = (sum*xmax)*xmax
     GOTO 800
-  ENDIF
+  END IF
   !
   !                     COMMON CODE FOR PHASES 2 AND 4.
   !                     IN PHASE 4 SUM IS LARGE.  SCALE TO AVOID OVERFLOW.
@@ -161,7 +161,7 @@ REAL FUNCTION SNRM2(N,Sx,Incx)
   ELSE
     sum = one + sum*(xmax/Sx(i))**2
     xmax = ABS(Sx(i))
-  ENDIF
+  END IF
   GOTO 900
   !
   !     FOR REAL OR D.P. SET HITEST = CUTHI/N
@@ -174,7 +174,7 @@ REAL FUNCTION SNRM2(N,Sx,Incx)
   DO j = i, nn, Incx
     IF ( ABS(Sx(j))>=hitest ) GOTO 400
     sum = sum + Sx(j)**2
-  ENDDO
+  END DO
   SNRM2 = SQRT(sum)
   RETURN
   !

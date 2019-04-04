@@ -135,7 +135,7 @@ SUBROUTINE CNBCO(Abe,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   INTEGER Lda, N, Ml, Mu, Ipvt(*)
   COMPLEX Abe(Lda,*), Z(*)
   REAL Rcond
@@ -157,7 +157,7 @@ SUBROUTINE CNBCO(Abe,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
     nl = MIN(Ml,N-j)
     l = 1 + nu + nl
     anorm = MAX(anorm,SCASUM(l,Abe(j+nl,ml1-nl),ldb))
-  ENDDO
+  END DO
   !
   !     FACTOR
   !
@@ -175,7 +175,7 @@ SUBROUTINE CNBCO(Abe,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
   ek = (1.0E0,0.0E0)
   DO j = 1, N
     Z(j) = (0.0E0,0.0E0)
-  ENDDO
+  END DO
   m = Ml + Mu + 1
   ju = 0
   DO k = 1, N
@@ -184,7 +184,7 @@ SUBROUTINE CNBCO(Abe,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
       s = CABS1(Abe(k,ml1))/CABS1(ek-Z(k))
       CALL CSSCAL(N,s,Z,1)
       ek = CMPLX(s,0.0E0)*ek
-    ENDIF
+    END IF
     wk = ek - Z(k)
     wkm = -ek - Z(k)
     s = CABS1(wk)
@@ -195,7 +195,7 @@ SUBROUTINE CNBCO(Abe,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
     ELSE
       wk = wk/CONJG(Abe(k,ml1))
       wkm = wkm/CONJG(Abe(k,ml1))
-    ENDIF
+    END IF
     kp1 = k + 1
     ju = MIN(MAX(ju,Mu+Ipvt(k)),N)
     mm = ml1
@@ -205,7 +205,7 @@ SUBROUTINE CNBCO(Abe,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
         sm = sm + CABS1(Z(i)+wkm*CONJG(Abe(k,mm)))
         Z(i) = Z(i) + wk*CONJG(Abe(k,mm))
         s = s + CABS1(Z(i))
-      ENDDO
+      END DO
       IF ( s<sm ) THEN
         t = wkm - wk
         wk = wkm
@@ -213,11 +213,11 @@ SUBROUTINE CNBCO(Abe,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
         DO i = kp1, ju
           mm = mm + 1
           Z(i) = Z(i) + t*CONJG(Abe(k,mm))
-        ENDDO
-      ENDIF
-    ENDIF
+        END DO
+      END IF
+    END IF
     Z(k) = wk
-  ENDDO
+  END DO
   s = 1.0E0/SCASUM(N,Z,1)
   CALL CSSCAL(N,s,Z,1)
   !
@@ -230,12 +230,12 @@ SUBROUTINE CNBCO(Abe,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
     IF ( CABS1(Z(k))>1.0E0 ) THEN
       s = 1.0E0/CABS1(Z(k))
       CALL CSSCAL(N,s,Z,1)
-    ENDIF
+    END IF
     l = Ipvt(k)
     t = Z(l)
     Z(l) = Z(k)
     Z(k) = t
-  ENDDO
+  END DO
   s = 1.0E0/SCASUM(N,Z,1)
   CALL CSSCAL(N,s,Z,1)
   !
@@ -254,8 +254,8 @@ SUBROUTINE CNBCO(Abe,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
       s = 1.0E0/CABS1(Z(k))
       CALL CSSCAL(N,s,Z,1)
       ynorm = s*ynorm
-    ENDIF
-  ENDDO
+    END IF
+  END DO
   s = 1.0E0/SCASUM(N,Z,1)
   CALL CSSCAL(N,s,Z,1)
   ynorm = s*ynorm
@@ -268,7 +268,7 @@ SUBROUTINE CNBCO(Abe,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
       s = CABS1(Abe(k,ml1))/CABS1(Z(k))
       CALL CSSCAL(N,s,Z,1)
       ynorm = s*ynorm
-    ENDIF
+    END IF
     IF ( CABS1(Abe(k,ml1))/=0.0E0 ) Z(k) = Z(k)/Abe(k,ml1)
     IF ( CABS1(Abe(k,ml1))==0.0E0 ) Z(k) = 1.0E0
     lm = MIN(k,m) - 1
@@ -276,7 +276,7 @@ SUBROUTINE CNBCO(Abe,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
     t = -Z(k)
     IF(k<=1) CYCLE
     CALL CAXPY(lm,t,Abe(k-1,Ml+2),-ldb,Z(lz),1)
-  ENDDO
+  END DO
   !     MAKE ZNORM = 1.0E0
   s = 1.0E0/SCASUM(N,Z,1)
   CALL CSSCAL(N,s,Z,1)

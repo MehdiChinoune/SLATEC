@@ -54,7 +54,7 @@ REAL FUNCTION SCASUM(N,Cx,Incx)
   !   900821  Modified to correct problem with a negative increment.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   COMPLEX Cx(*)
   INTEGER i, Incx, ix, N
   !* FIRST EXECUTABLE STATEMENT  SCASUM
@@ -67,9 +67,9 @@ REAL FUNCTION SCASUM(N,Cx,Incx)
     !
     DO i = 1, N
       SCASUM = SCASUM + ABS(REAL(Cx(i))) + ABS(AIMAG(Cx(i)))
-    ENDDO
+    END DO
     RETURN
-  ENDIF
+  END IF
   !
   !     Code for increment not equal to 1.
   !
@@ -78,6 +78,6 @@ REAL FUNCTION SCASUM(N,Cx,Incx)
   DO i = 1, N
     SCASUM = SCASUM + ABS(REAL(Cx(ix))) + ABS(AIMAG(Cx(ix)))
     ix = ix + Incx
-  ENDDO
+  END DO
   RETURN
 END FUNCTION SCASUM

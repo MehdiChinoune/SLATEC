@@ -124,11 +124,11 @@ SUBROUTINE CHPR(Uplo,N,Alpha,X,Incx,Ap)
     info = 2
   ELSEIF ( Incx==0 ) THEN
     info = 5
-  ENDIF
+  END IF
   IF ( info/=0 ) THEN
     CALL XERBLA('CHPR  ',info)
     RETURN
-  ENDIF
+  END IF
   !
   !     Quick return if possible.
   !
@@ -140,7 +140,7 @@ SUBROUTINE CHPR(Uplo,N,Alpha,X,Incx,Ap)
     kx = 1 - (N-1)*Incx
   ELSEIF ( Incx/=1 ) THEN
     kx = 1
-  ENDIF
+  END IF
   !
   !     Start the operations. In this version the elements of the array AP
   !     are accessed sequentially with one pass through AP.
@@ -158,13 +158,13 @@ SUBROUTINE CHPR(Uplo,N,Alpha,X,Incx,Ap)
           DO i = 1, j - 1
             Ap(k) = Ap(k) + X(i)*temp
             k = k + 1
-          ENDDO
+          END DO
           Ap(kk+j-1) = REAL(Ap(kk+j-1)) + REAL(X(j)*temp)
         ELSE
           Ap(kk+j-1) = REAL(Ap(kk+j-1))
-        ENDIF
+        END IF
         kk = kk + j
-      ENDDO
+      END DO
     ELSE
       jx = kx
       DO j = 1, N
@@ -174,15 +174,15 @@ SUBROUTINE CHPR(Uplo,N,Alpha,X,Incx,Ap)
           DO k = kk, kk + j - 2
             Ap(k) = Ap(k) + X(ix)*temp
             ix = ix + Incx
-          ENDDO
+          END DO
           Ap(kk+j-1) = REAL(Ap(kk+j-1)) + REAL(X(jx)*temp)
         ELSE
           Ap(kk+j-1) = REAL(Ap(kk+j-1))
-        ENDIF
+        END IF
         jx = jx + Incx
         kk = kk + j
-      ENDDO
-    ENDIF
+      END DO
+    END IF
     !
     !        Form  A  when lower triangle is stored in AP.
     !
@@ -195,12 +195,12 @@ SUBROUTINE CHPR(Uplo,N,Alpha,X,Incx,Ap)
         DO i = j + 1, N
           Ap(k) = Ap(k) + X(i)*temp
           k = k + 1
-        ENDDO
+        END DO
       ELSE
         Ap(kk) = REAL(Ap(kk))
-      ENDIF
+      END IF
       kk = kk + N - j + 1
-    ENDDO
+    END DO
   ELSE
     jx = kx
     DO j = 1, N
@@ -211,14 +211,14 @@ SUBROUTINE CHPR(Uplo,N,Alpha,X,Incx,Ap)
         DO k = kk + 1, kk + N - j
           ix = ix + Incx
           Ap(k) = Ap(k) + X(ix)*temp
-        ENDDO
+        END DO
       ELSE
         Ap(kk) = REAL(Ap(kk))
-      ENDIF
+      END IF
       jx = jx + Incx
       kk = kk + N - j + 1
-    ENDDO
-  ENDIF
+    END DO
+  END IF
   !
   !
   !     End of CHPR  .

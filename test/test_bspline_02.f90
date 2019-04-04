@@ -77,7 +77,7 @@ CONTAINS
     DO i = 1, ndata
       x(i) = (i-1)/den
       y(i) = SIN(pi*x(i))
-    ENDDO
+    END DO
     x(3) = 2.0D0/den
     y(3) = SIN(pi*x(3))
     !
@@ -102,8 +102,8 @@ CONTAINS
           Ipass = 0
           IF ( Kprint>=2 ) WRITE (Lun,99002)
           99002 FORMAT (' ERROR TEST FOR INTERPOLATION BY DBINT4 NOT SATISFIED')
-        ENDIF
-      ENDDO
+        END IF
+      END DO
       inbv = 1
       bv = DBVALU(t,bc,n,k,1,x(1),inbv,w)
       er = ABS(pi-bv)
@@ -112,7 +112,7 @@ CONTAINS
         IF ( Kprint>=2 ) WRITE (Lun,99003)
         99003 FORMAT (' ERROR TEST FOR INTERPOLATION BY DBINT4 NOT SATISFIED ',&
           'BY FIRST DERIVATIVE')
-      ENDIF
+      END IF
       bv = DBVALU(t,bc,n,k,2,x(ndata),inbv,w)
       er = ABS(bv)
       IF ( er>tol ) THEN
@@ -120,7 +120,7 @@ CONTAINS
         IF ( Kprint>=2 ) WRITE (Lun,99004)
         99004 FORMAT (' ERROR TEST FOR INTERPOLATION BY DBINT4 NOT SATISFIED ',&
           'BY SECOND DERIVATIVE')
-      ENDIF
+      END IF
       !
       !       Test for equality of area from 4 routines.
       !
@@ -141,16 +141,16 @@ CONTAINS
           Ipass = 0
           IF ( Kprint>=2 ) WRITE (Lun,99005)
           99005 FORMAT (' ERROR IN QUADRATURE CHECKS')
-        ENDIF
-      ENDDO
+        END IF
+      END DO
       qsave(knt) = bquad
-    ENDDO
+    END DO
     er = ABS(qsave(1)-qsave(2))
     IF ( er>tol ) THEN
       Ipass = 0
       IF ( Kprint>=2 ) WRITE (Lun,99006)
       99006 FORMAT (' ERROR IN QUADRATURE CHECK USING TWO SETS OF KNOTS')
-    ENDIF
+    END IF
     !
     !     Check DBSPDR and DBSPEV against DBVALU, DPPVAL and DBSPVD.
     !
@@ -172,9 +172,9 @@ CONTAINS
           Ipass = 0
           IF ( Kprint>=2 ) WRITE (Lun,99007)
           99007 FORMAT (' COMPARISONS FROM DBSPEV AND DBVALU DO NOT AGREE')
-        ENDIF
+        END IF
         atol = 10.0D0*atol
-      ENDDO
+      END DO
       atol = tol
       DO j = 1, k
         spv = DPPVAL(ldc,c,xi,lxi,k,j-1,xx,inppv)
@@ -185,9 +185,9 @@ CONTAINS
           Ipass = 0
           IF ( Kprint>=2 ) WRITE (Lun,99008)
           99008 FORMAT (' COMPARISONS FROM DBSPEV AND DPPVAL DO NOT AGREE')
-        ENDIF
+        END IF
         atol = 10.0D0*atol
-      ENDDO
+      END DO
       atol = tol
       ldcc = 4
       x1 = xx
@@ -199,7 +199,7 @@ CONTAINS
         er = 0.0D0
         DO jj = 1, k
           er = er + bc(ileft-k+jj)*cc(jj,j)
-        ENDDO
+        END DO
         er = ABS(er-sv(j))
         x2 = ABS(sv(j))
         IF ( x2>1.0D0 ) er = er/x2
@@ -207,22 +207,22 @@ CONTAINS
           Ipass = 0
           IF ( Kprint>=2 ) WRITE (Lun,99009)
           99009 FORMAT (' COMPARISONS FROM DBSPEV AND DBSPVD DO NOT AGREE')
-        ENDIF
+        END IF
         atol = 10.0D0*atol
-      ENDDO
-    ENDDO
+      END DO
+    END DO
     DO k = 2, 4
       n = ndata
       nmk = n - k
       DO i = 1, k
         t(i) = x(1)
         t(n+i) = x(n)
-      ENDDO
+      END DO
       xl = x(n) - x(1)
       dn = n - k + 1
       DO i = 1, nmk
         t(k+i) = x(1) + i*xl/dn
-      ENDDO
+      END DO
       CALL DBINTK(x,y,t,n,k,bc,qq,w)
       !
       !       Error test on DBINTK.
@@ -236,9 +236,9 @@ CONTAINS
           Ipass = 0
           IF ( Kprint>=2 ) WRITE (Lun,99010)
           99010 FORMAT (' ERROR TEST FOR INTERPOLATION BY DBINTK NOT SATISFIED')
-        ENDIF
-      ENDDO
-    ENDDO
+        END IF
+      END DO
+    END DO
     !
     !     Trigger error conditions.
     !
@@ -247,7 +247,7 @@ CONTAINS
       CALL XSETF(0)
     ELSE
       CALL XSETF(1)
-    ENDIF
+    END IF
     fatal = .FALSE.
     CALL XERCLR
     !
@@ -275,14 +275,14 @@ CONTAINS
         IF ( NUMXER(nerr)/=2 ) THEN
           Ipass = 0
           fatal = .TRUE.
-        ENDIF
+        END IF
         CALL XERCLR
         !
         CALL DBSPEV(t,adif,n,k,id,xx,inev,sv,qq)
         IF ( NUMXER(nerr)/=2 ) THEN
           Ipass = 0
           fatal = .TRUE.
-        ENDIF
+        END IF
         CALL XERCLR
         !
         jhigh = n - 10
@@ -290,61 +290,61 @@ CONTAINS
         IF ( NUMXER(nerr)/=2 ) THEN
           Ipass = 0
           fatal = .TRUE.
-        ENDIF
+        END IF
         CALL XERCLR
         !
         CALL DBFQAD(DFB,t,bc,n,k,id,xx,x2,tol,quad,ierr,qq)
         IF ( NUMXER(nerr)/=2 ) THEN
           Ipass = 0
           fatal = .TRUE.
-        ENDIF
+        END IF
         CALL XERCLR
-      ENDIF
+      END IF
       !
       IF ( i/=3.AND.i/=4 ) THEN
         CALL DBSPPP(t,bc,n,k,ldc,c,xi,lxi,qq)
         IF ( NUMXER(nerr)/=2 ) THEN
           Ipass = 0
           fatal = .TRUE.
-        ENDIF
+        END IF
         CALL XERCLR
-      ENDIF
+      END IF
       !
       IF ( i<=3 ) THEN
         CALL DBSPDR(t,bc,n,k,id,adif)
         IF ( NUMXER(nerr)/=2 ) THEN
           Ipass = 0
           fatal = .TRUE.
-        ENDIF
+        END IF
         CALL XERCLR
-      ENDIF
+      END IF
       !
       IF ( i/=3.AND.i/=5 ) THEN
         CALL DBSQAD(t,bc,n,k,xx,x2,bquad,qq)
         IF ( NUMXER(nerr)/=2 ) THEN
           Ipass = 0
           fatal = .TRUE.
-        ENDIF
+        END IF
         CALL XERCLR
-      ENDIF
+      END IF
       !
       IF ( i>1 ) THEN
         CALL DBSPVD(t,k,id,xx,ileft,ldc,c,qq)
         IF ( NUMXER(nerr)/=2 ) THEN
           Ipass = 0
           fatal = .TRUE.
-        ENDIF
+        END IF
         CALL XERCLR
-      ENDIF
+      END IF
       !
       IF ( i<=2 ) THEN
         CALL DBINTK(x,y,t,n,k,bc,qq,adif)
         IF ( NUMXER(nerr)/=2 ) THEN
           Ipass = 0
           fatal = .TRUE.
-        ENDIF
+        END IF
         CALL XERCLR
-      ENDIF
+      END IF
       !
       IF ( i/=4 ) THEN
         kntopt = ldc - 2
@@ -353,25 +353,25 @@ CONTAINS
         IF ( NUMXER(nerr)/=2 ) THEN
           Ipass = 0
           fatal = .TRUE.
-        ENDIF
+        END IF
         CALL XERCLR
-      ENDIF
+      END IF
       w(i) = -w(i)
-    ENDDO
+    END DO
     kntopt = 1
     x(1) = 1.0D0
     CALL DBINT4(x,y,n,ibcl,ibcr,fbcl,fbcr,kntopt,t,bc,n,k,qq)
     IF ( NUMXER(nerr)/=2 ) THEN
       Ipass = 0
       fatal = .TRUE.
-    ENDIF
+    END IF
     CALL XERCLR
     !
     CALL DBINTK(x,y,t,n,k,bc,qq,adif)
     IF ( NUMXER(nerr)/=2 ) THEN
       Ipass = 0
       fatal = .TRUE.
-    ENDIF
+    END IF
     CALL XERCLR
     !
     x(1) = 0.0D0
@@ -380,20 +380,20 @@ CONTAINS
     DO i = 1, 3
       qq(i) = -0.30D0 + 0.10D0*(i-1)
       qq(i+3) = 1.1D0 + 0.10D0*(i-1)
-    ENDDO
+    END DO
     qq(1) = 1.0D0
     CALL DBINT4(x,y,ndata,1,1,fbcl,fbcr,3,t,bc,n,k,qq)
     IF ( NUMXER(nerr)/=2 ) THEN
       Ipass = 0
       fatal = .TRUE.
-    ENDIF
+    END IF
     CALL XERCLR
     !
     CALL DBFQAD(DFB,t,bc,n,k,id,x1,x2,atol,quad,ierr,qq)
     IF ( NUMXER(nerr)/=2 ) THEN
       Ipass = 0
       fatal = .TRUE.
-    ENDIF
+    END IF
     CALL XERCLR
     !
     inppv = 1
@@ -408,14 +408,14 @@ CONTAINS
       IF ( (i/=4.AND.NUMXER(nerr)/=2).OR.(i==4.AND.NUMXER(nerr)/=0) ) THEN
         Ipass = 0
         fatal = .TRUE.
-      ENDIF
+      END IF
       CALL XERCLR
       !
       CALL DPFQAD(DFB,ldc,c,xi,lxi,k,id,xx,x2,tol,quad,ierr)
       IF ( (i/=4.AND.NUMXER(nerr)/=2).OR.(i==4.AND.NUMXER(nerr)/=0) ) THEN
         Ipass = 0
         fatal = .TRUE.
-      ENDIF
+      END IF
       CALL XERCLR
       !
       IF ( i/=3 ) THEN
@@ -423,18 +423,18 @@ CONTAINS
         IF ( (i/=4.AND.NUMXER(nerr)/=2).OR.(i==4.AND.NUMXER(nerr)/=0) ) THEN
           Ipass = 0
           fatal = .TRUE.
-        ENDIF
+        END IF
         CALL XERCLR
-      ENDIF
+      END IF
       !
       w(i) = -w(i)
-    ENDDO
+    END DO
     ldc = INT(w(5))
     CALL DPFQAD(DFB,ldc,c,xi,lxi,k,id,x1,x2,atol,quad,ierr)
     IF ( NUMXER(nerr)/=2 ) THEN
       Ipass = 0
       fatal = .TRUE.
-    ENDIF
+    END IF
     CALL XERCLR
     !
     !     Restore KONTRL and check to see if the tests of error detection
@@ -445,11 +445,11 @@ CONTAINS
       IF ( Kprint>=2 ) THEN
         WRITE (Lun,99012)
         99012 FORMAT (/' AT LEAST ONE INCORRECT ARGUMENT TEST FAILED')
-      ENDIF
+      END IF
     ELSEIF ( Kprint>=3 ) THEN
       WRITE (Lun,99013)
       99013 FORMAT (/' ALL INCORRECT ARGUMENT TESTS PASSED')
-    ENDIF
+    END IF
     !
     !     Print PASS/FAIL message.
     !
@@ -555,7 +555,7 @@ PROGRAM TEST31
     CALL XSETF(0)
   ELSE
     CALL XSETF(1)
-  ENDIF
+  END IF
   !
   !     Test double precision B-Spline package
   !
@@ -571,6 +571,6 @@ PROGRAM TEST31
     WRITE (lun,99002) nfail
     99002 FORMAT (/' ************* WARNING -- ',I5,&
       ' TEST(S) FAILED IN PROGRAM TEST31 *************')
-  ENDIF
+  END IF
   STOP
 END PROGRAM TEST31

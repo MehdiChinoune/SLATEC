@@ -86,7 +86,7 @@ SUBROUTINE COMLR(Nm,N,Low,Igh,Hr,Hi,Wr,Wi,Ierr)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   !
   INTEGER i, j, l, m, N, en, ll, mm, Nm, Igh, im1, itn, its, &
     Low, mp1, enm1, Ierr
@@ -100,8 +100,8 @@ SUBROUTINE COMLR(Nm,N,Low,Igh,Hr,Hi,Wr,Wi,Ierr)
     IF ( i<Low.OR.i>Igh ) THEN
       Wr(i) = Hr(i,i)
       Wi(i) = Hi(i,i)
-    ENDIF
-  ENDDO
+    END IF
+  END DO
   !
   en = Igh
   tr = 0.0E0
@@ -121,7 +121,7 @@ SUBROUTINE COMLR(Nm,N,Low,Igh,Hr,Hi,Wr,Wi,Ierr)
     s1 = ABS(Hr(l-1,l-1)) + ABS(Hi(l-1,l-1)) + ABS(Hr(l,l)) + ABS(Hi(l,l))
     s2 = s1 + ABS(Hr(l,l-1)) + ABS(Hi(l,l-1))
     IF ( s2==s1 ) EXIT
-  ENDDO
+  END DO
   !     .......... FORM SHIFT ..........
   IF ( l==en ) THEN
     !     .......... A ROOT FOUND ..........
@@ -150,17 +150,17 @@ SUBROUTINE COMLR(Nm,N,Low,Igh,Hr,Hi,Wr,Wi,Ierr)
         IF ( yr*zzr+yi*zzi<0.0E0 ) THEN
           zzr = -zzr
           zzi = -zzi
-        ENDIF
+        END IF
         CALL CDIV(xr,xi,yr+zzr,yi+zzi,xr,xi)
         sr = sr - xr
         si = si - xi
-      ENDIF
-    ENDIF
+      END IF
+    END IF
     !
     DO i = Low, en
       Hr(i,i) = Hr(i,i) - sr
       Hi(i,i) = Hi(i,i) - si
-    ENDDO
+    END DO
     !
     tr = tr + sr
     ti = ti + si
@@ -183,7 +183,7 @@ SUBROUTINE COMLR(Nm,N,Low,Igh,Hr,Hi,Wr,Wi,Ierr)
       s1 = zzr/yi*(zzr+xr+xi)
       s2 = s1 + yr
       IF ( s2==s1 ) EXIT
-    ENDDO
+    END DO
     !     .......... TRIANGULAR DECOMPOSITION H=L*R ..........
     mp1 = m + 1
     !
@@ -205,20 +205,20 @@ SUBROUTINE COMLR(Nm,N,Low,Igh,Hr,Hi,Wr,Wi,Ierr)
           zzi = Hi(im1,j)
           Hi(im1,j) = Hi(i,j)
           Hi(i,j) = zzi
-        ENDDO
+        END DO
         !
         CALL CDIV(xr,xi,yr,yi,zzr,zzi)
         Wr(i) = 1.0E0
-      ENDIF
+      END IF
       Hr(i,im1) = zzr
       Hi(i,im1) = zzi
       !
       DO j = i, en
         Hr(i,j) = Hr(i,j) - zzr*Hr(im1,j) + zzi*Hi(im1,j)
         Hi(i,j) = Hi(i,j) - zzr*Hi(im1,j) - zzi*Hr(im1,j)
-      ENDDO
+      END DO
       !
-    ENDDO
+    END DO
     !     .......... COMPOSITION R*L=H ..........
     DO j = mp1, en
       xr = Hr(j,j-1)
@@ -236,17 +236,17 @@ SUBROUTINE COMLR(Nm,N,Low,Igh,Hr,Hi,Wr,Wi,Ierr)
           zzi = Hi(i,j-1)
           Hi(i,j-1) = Hi(i,j)
           Hi(i,j) = zzi
-        ENDDO
-      ENDIF
+        END DO
+      END IF
       !
       DO i = l, j
         Hr(i,j-1) = Hr(i,j-1) + xr*Hr(i,j) - xi*Hi(i,j)
         Hi(i,j-1) = Hi(i,j-1) + xr*Hi(i,j) + xi*Hr(i,j)
-      ENDDO
+      END DO
       !
-    ENDDO
+    END DO
     !
     GOTO 200
-  ENDIF
+  END IF
   RETURN
 END SUBROUTINE COMLR

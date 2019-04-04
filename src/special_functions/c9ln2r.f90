@@ -54,7 +54,7 @@ COMPLEX FUNCTION C9LN2R(Z)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
-  
+
   REAL aipart, arg, cabsz, R9ATN1, R9LN2R, rpart, x, xz, y, y1x, yz
   COMPLEX Z
   !* FIRST EXECUTABLE STATEMENT  C9LN2R
@@ -66,7 +66,7 @@ COMPLEX FUNCTION C9LN2R(Z)
     !
     C9LN2R = (LOG(1.0+Z)-Z*(1.0-0.5*Z))/Z**3
     RETURN
-  ENDIF
+  END IF
   !
   C9LN2R = CMPLX(1.0/3.0,0.0)
   IF ( cabsz==0.0 ) RETURN

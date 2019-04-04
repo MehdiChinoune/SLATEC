@@ -74,7 +74,7 @@ SUBROUTINE ZUNK2(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Tol,Elim,Alim)
   IF ( Zr<0.0D0 ) THEN
     zrr = -Zr
     zri = -Zi
-  ENDIF
+  END IF
   yy = zri
   znr = zri
   zni = -zrr
@@ -95,7 +95,7 @@ SUBROUTINE ZUNK2(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Tol,Elim,Alim)
   IF ( yy<=0.0D0 ) THEN
     znr = -znr
     zbi = -zbi
-  ENDIF
+  END IF
   !-----------------------------------------------------------------------
   !     K(FNU,Z) IS COMPUTED FROM H(2,FNU,-I*Z) WHERE Z IS IN THE FIRST
   !     QUADRANT. FOURTH QUADRANT VALUES (YY.LE.0.0E0) ARE COMPUTED BY
@@ -121,7 +121,7 @@ SUBROUTINE ZUNK2(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Tol,Elim,Alim)
       sti = -sti*rast*rast
       s1r = zeta1r(j) - str
       s1i = zeta1i(j) - sti
-    ENDIF
+    END IF
     !-----------------------------------------------------------------------
     !     TEST FOR UNDERFLOW AND OVERFLOW
     !-----------------------------------------------------------------------
@@ -139,8 +139,8 @@ SUBROUTINE ZUNK2(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Tol,Elim,Alim)
         IF ( kdflg==1 ) kflag = 1
         IF ( rs1>=0.0D0 ) THEN
           IF ( kdflg==1 ) kflag = 3
-        ENDIF
-      ENDIF
+        END IF
+      END IF
       !-----------------------------------------------------------------------
       !     SCALE S1 TO KEEP INTERMEDIATE ARITHMETIC ON SCALE NEAR
       !     EXPONENT EXTREMES
@@ -168,7 +168,7 @@ SUBROUTINE ZUNK2(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Tol,Elim,Alim)
       IF ( kflag==1 ) THEN
         CALL ZUCHK(s2r,s2i,nw,bry(1),Tol)
         IF ( nw/=0 ) GOTO 50
-      ENDIF
+      END IF
       IF ( yy<=0.0D0 ) s2i = -s2i
       cyr(kdflg) = s2r
       cyi(kdflg) = s2i
@@ -180,8 +180,8 @@ SUBROUTINE ZUNK2(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Tol,Elim,Alim)
       IF ( kdflg==2 ) GOTO 100
       kdflg = 2
       CYCLE
-    ENDIF
-    50     IF ( rs1>0.0D0 ) GOTO 600
+    END IF
+    50  IF ( rs1>0.0D0 ) GOTO 600
     !-----------------------------------------------------------------------
     !     FOR ZR.LT.0.0, THE I FUNCTION TO BE ADDED WILL OVERFLOW
     !-----------------------------------------------------------------------
@@ -198,9 +198,9 @@ SUBROUTINE ZUNK2(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Tol,Elim,Alim)
         Yr(i-1) = zeror
         Yi(i-1) = zeroi
         Nz = Nz + 1
-      ENDIF
-    ENDIF
-  ENDDO
+      END IF
+    END IF
+  END DO
   i = N
   100  razr = 1.0D0/ZABS(zrr,zri)
   str = zrr*razr
@@ -231,7 +231,7 @@ SUBROUTINE ZUNK2(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Tol,Elim,Alim)
     sti = -sti*rast*rast
     s1r = zet1dr - str
     s1i = zet1di - sti
-  ENDIF
+  END IF
   rs1 = s1r
   IF ( ABS(rs1)<=Elim ) THEN
     IF ( ABS(rs1)<Alim ) GOTO 200
@@ -241,7 +241,7 @@ SUBROUTINE ZUNK2(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Tol,Elim,Alim)
     aphi = ZABS(phidr,phidi)
     rs1 = rs1 + LOG(aphi)
     IF ( ABS(rs1)<Elim ) GOTO 200
-  ENDIF
+  END IF
   IF ( rs1>0.0D0 ) GOTO 600
   !-----------------------------------------------------------------------
   !     FOR ZR.LT.0.0, THE I FUNCTION TO BE ADDED WILL OVERFLOW
@@ -251,7 +251,7 @@ SUBROUTINE ZUNK2(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Tol,Elim,Alim)
   DO i = 1, N
     Yr(i) = zeror
     Yi(i) = zeroi
-  ENDDO
+  END DO
   RETURN
   200  s1r = cyr(1)
   s1i = cyi(1)
@@ -288,9 +288,9 @@ SUBROUTINE ZUNK2(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Tol,Elim,Alim)
         s2r = s2r*cssr(kflag)
         s2i = s2i*cssr(kflag)
         c1r = csrr(kflag)
-      ENDIF
-    ENDIF
-  ENDDO
+      END IF
+    END IF
+  END DO
   300 CONTINUE
   IF ( Mr==0 ) RETURN
   !-----------------------------------------------------------------------
@@ -311,7 +311,7 @@ SUBROUTINE ZUNK2(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Tol,Elim,Alim)
   IF ( MOD(ifn,2)/=0 ) THEN
     cspnr = -cspnr
     cspni = -cspni
-  ENDIF
+  END IF
   !-----------------------------------------------------------------------
   !     CS=COEFF OF THE J FUNCTION TO GET THE I FUNCTION. I(FNU,Z) IS
   !     COMPUTED FROM EXP(I*FNU*HPI)*J(FNU,-I*Z) WHERE Z IS IN THE FIRST
@@ -344,8 +344,8 @@ SUBROUTINE ZUNK2(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Tol,Elim,Alim)
         CALL ZUNHJ(znr,zni,fn,0,Tol,phidr,phidi,argdr,argdi,zet1dr,zet1di,&
           zet2dr,zet2di,asumdr,asumdi,bsumdr,bsumdi)
         GOTO 350
-      ENDIF
-    ENDIF
+      END IF
+    END IF
     phidr = phir(j)
     phidi = phii(j)
     argdr = argr(j)
@@ -359,97 +359,98 @@ SUBROUTINE ZUNK2(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Tol,Elim,Alim)
     bsumdr = bsumr(j)
     bsumdi = bsumi(j)
     j = 3 - j
-    350    IF ( Kode==1 ) THEN
-    s1r = -zet1dr + zet2dr
-    s1i = -zet1di + zet2di
-  ELSE
-    str = zbr + zet2dr
-    sti = zbi + zet2di
-    rast = fn/ZABS(str,sti)
-    str = str*rast*rast
-    sti = -sti*rast*rast
-    s1r = -zet1dr + str
-    s1i = -zet1di + sti
-  ENDIF
-  !-----------------------------------------------------------------------
-  !     TEST FOR UNDERFLOW AND OVERFLOW
-  !-----------------------------------------------------------------------
-  rs1 = s1r
-  IF ( ABS(rs1)>Elim ) GOTO 450
-  IF ( kdflg==1 ) iflag = 2
-  IF ( ABS(rs1)>=Alim ) THEN
+    350 CONTINUE
+    IF ( Kode==1 ) THEN
+      s1r = -zet1dr + zet2dr
+      s1i = -zet1di + zet2di
+    ELSE
+      str = zbr + zet2dr
+      sti = zbi + zet2di
+      rast = fn/ZABS(str,sti)
+      str = str*rast*rast
+      sti = -sti*rast*rast
+      s1r = -zet1dr + str
+      s1i = -zet1di + sti
+    END IF
     !-----------------------------------------------------------------------
-    !     REFINE  TEST AND SCALE
+    !     TEST FOR UNDERFLOW AND OVERFLOW
     !-----------------------------------------------------------------------
-    aphi = ZABS(phidr,phidi)
-    aarg = ZABS(argdr,argdi)
-    rs1 = rs1 + LOG(aphi) - 0.25D0*LOG(aarg) - aic
+    rs1 = s1r
     IF ( ABS(rs1)>Elim ) GOTO 450
-    IF ( kdflg==1 ) iflag = 1
-    IF ( rs1>=0.0D0 ) THEN
-      IF ( kdflg==1 ) iflag = 3
-    ENDIF
-  ENDIF
-  CALL ZAIRY(argdr,argdi,0,2,air,aii,nai,idum)
-  CALL ZAIRY(argdr,argdi,1,2,dair,daii,ndai,idum)
-  str = dair*bsumdr - daii*bsumdi
-  sti = dair*bsumdi + daii*bsumdr
-  str = str + (air*asumdr-aii*asumdi)
-  sti = sti + (air*asumdi+aii*asumdr)
-  ptr = str*phidr - sti*phidi
-  pti = str*phidi + sti*phidr
-  s2r = ptr*csr - pti*csi
-  s2i = ptr*csi + pti*csr
-  str = EXP(s1r)*cssr(iflag)
-  s1r = str*COS(s1i)
-  s1i = str*SIN(s1i)
-  str = s2r*s1r - s2i*s1i
-  s2i = s2r*s1i + s2i*s1r
-  s2r = str
-  IF ( iflag==1 ) THEN
-    CALL ZUCHK(s2r,s2i,nw,bry(1),Tol)
-    IF ( nw/=0 ) THEN
-      s2r = zeror
-      s2i = zeroi
-    ENDIF
-  ENDIF
-  400    IF ( yy<=0.0D0 ) s2i = -s2i
-  cyr(kdflg) = s2r
-  cyi(kdflg) = s2i
-  c2r = s2r
-  c2i = s2i
-  s2r = s2r*csrr(iflag)
-  s2i = s2i*csrr(iflag)
-  !-----------------------------------------------------------------------
-  !     ADD I AND K FUNCTIONS, K SEQUENCE IN Y(I), I=1,N
-  !-----------------------------------------------------------------------
-  s1r = Yr(kk)
-  s1i = Yi(kk)
-  IF ( Kode/=1 ) THEN
-    CALL ZS1S2(zrr,zri,s1r,s1i,s2r,s2i,nw,asc,Alim,iuf)
-    Nz = Nz + nw
-  ENDIF
-  Yr(kk) = s1r*cspnr - s1i*cspni + s2r
-  Yi(kk) = s1r*cspni + s1i*cspnr + s2i
-  kk = kk - 1
-  cspnr = -cspnr
-  cspni = -cspni
-  str = csi
-  csi = -csr
-  csr = str
-  IF ( c2r/=0.0D0.OR.c2i/=0.0D0 ) THEN
-    IF ( kdflg==2 ) GOTO 500
-    kdflg = 2
-    CYCLE
-  ELSE
-    kdflg = 1
-    CYCLE
-  ENDIF
-  450    IF ( rs1>0.0D0 ) GOTO 600
-  s2r = zeror
-  s2i = zeroi
-  GOTO 400
-  ENDDO
+    IF ( kdflg==1 ) iflag = 2
+    IF ( ABS(rs1)>=Alim ) THEN
+      !-----------------------------------------------------------------------
+      !     REFINE  TEST AND SCALE
+      !-----------------------------------------------------------------------
+      aphi = ZABS(phidr,phidi)
+      aarg = ZABS(argdr,argdi)
+      rs1 = rs1 + LOG(aphi) - 0.25D0*LOG(aarg) - aic
+      IF ( ABS(rs1)>Elim ) GOTO 450
+      IF ( kdflg==1 ) iflag = 1
+      IF ( rs1>=0.0D0 ) THEN
+        IF ( kdflg==1 ) iflag = 3
+      END IF
+    END IF
+    CALL ZAIRY(argdr,argdi,0,2,air,aii,nai,idum)
+    CALL ZAIRY(argdr,argdi,1,2,dair,daii,ndai,idum)
+    str = dair*bsumdr - daii*bsumdi
+    sti = dair*bsumdi + daii*bsumdr
+    str = str + (air*asumdr-aii*asumdi)
+    sti = sti + (air*asumdi+aii*asumdr)
+    ptr = str*phidr - sti*phidi
+    pti = str*phidi + sti*phidr
+    s2r = ptr*csr - pti*csi
+    s2i = ptr*csi + pti*csr
+    str = EXP(s1r)*cssr(iflag)
+    s1r = str*COS(s1i)
+    s1i = str*SIN(s1i)
+    str = s2r*s1r - s2i*s1i
+    s2i = s2r*s1i + s2i*s1r
+    s2r = str
+    IF ( iflag==1 ) THEN
+      CALL ZUCHK(s2r,s2i,nw,bry(1),Tol)
+      IF ( nw/=0 ) THEN
+        s2r = zeror
+        s2i = zeroi
+      END IF
+    END IF
+    400  IF ( yy<=0.0D0 ) s2i = -s2i
+    cyr(kdflg) = s2r
+    cyi(kdflg) = s2i
+    c2r = s2r
+    c2i = s2i
+    s2r = s2r*csrr(iflag)
+    s2i = s2i*csrr(iflag)
+    !-----------------------------------------------------------------------
+    !     ADD I AND K FUNCTIONS, K SEQUENCE IN Y(I), I=1,N
+    !-----------------------------------------------------------------------
+    s1r = Yr(kk)
+    s1i = Yi(kk)
+    IF ( Kode/=1 ) THEN
+      CALL ZS1S2(zrr,zri,s1r,s1i,s2r,s2i,nw,asc,Alim,iuf)
+      Nz = Nz + nw
+    END IF
+    Yr(kk) = s1r*cspnr - s1i*cspni + s2r
+    Yi(kk) = s1r*cspni + s1i*cspnr + s2i
+    kk = kk - 1
+    cspnr = -cspnr
+    cspni = -cspni
+    str = csi
+    csi = -csr
+    csr = str
+    IF ( c2r/=0.0D0.OR.c2i/=0.0D0 ) THEN
+      IF ( kdflg==2 ) GOTO 500
+      kdflg = 2
+      CYCLE
+    ELSE
+      kdflg = 1
+      CYCLE
+    END IF
+    450  IF ( rs1>0.0D0 ) GOTO 600
+    s2r = zeror
+    s2i = zeroi
+    GOTO 400
+  END DO
   k = N
   500  il = N - k
   IF ( il==0 ) RETURN
@@ -482,7 +483,7 @@ SUBROUTINE ZUNK2(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Tol,Elim,Alim)
     IF ( Kode/=1 ) THEN
       CALL ZS1S2(zrr,zri,c1r,c1i,c2r,c2i,nw,asc,Alim,iuf)
       Nz = Nz + nw
-    ENDIF
+    END IF
     Yr(kk) = c1r*cspnr - c1i*cspni + c2r
     Yi(kk) = c1r*cspni + c1i*cspnr + c2i
     kk = kk - 1
@@ -504,9 +505,9 @@ SUBROUTINE ZUNK2(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Tol,Elim,Alim)
         s2r = s2r*cssr(iflag)
         s2i = s2i*cssr(iflag)
         csr = csrr(iflag)
-      ENDIF
-    ENDIF
-  ENDDO
+      END IF
+    END IF
+  END DO
   RETURN
   600  Nz = -1
 END SUBROUTINE ZUNK2

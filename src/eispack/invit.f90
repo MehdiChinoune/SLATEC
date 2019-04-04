@@ -132,7 +132,7 @@ SUBROUTINE INVIT(Nm,N,A,Wr,Wi,Select,Mm,M,Z,Ierr,Rm1,Rv1,Rv2)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   !
   INTEGER i, j, k, l, M, N, s, ii, ip, Mm, mp, Nm, ns, n1, &
     uk, ip1, its, km1, Ierr
@@ -157,7 +157,7 @@ SUBROUTINE INVIT(Nm,N,A,Wr,Wi,Select,Mm,M,Z,Ierr,Rm1,Rv1,Rv2)
     IF ( Wi(k)/=0.0E0.AND.ip>=0 ) THEN
       ip = 1
       IF ( Select(k).AND.Select(k+1) ) Select(k+1) = .FALSE.
-    ENDIF
+    END IF
     IF ( .NOT.Select(k) ) GOTO 400
     IF ( Wi(k)/=0.0E0 ) s = s + 1
     IF ( s>Mm ) GOTO 500
@@ -166,7 +166,7 @@ SUBROUTINE INVIT(Nm,N,A,Wr,Wi,Select,Mm,M,Z,Ierr,Rm1,Rv1,Rv2)
       DO uk = k, N
         IF ( uk==N ) EXIT
         IF ( A(uk+1,uk)==0.0E0 ) EXIT
-      ENDDO
+      END DO
       !     .......... COMPUTE INFINITY NORM OF LEADING UK BY UK
       !                (HESSENBERG) MATRIX ..........
       norm = 0.0E0
@@ -177,11 +177,11 @@ SUBROUTINE INVIT(Nm,N,A,Wr,Wi,Select,Mm,M,Z,Ierr,Rm1,Rv1,Rv2)
         !
         DO j = mp, uk
           x = x + ABS(A(i,j))
-        ENDDO
+        END DO
         !
         IF ( x>norm ) norm = x
         mp = i
-      ENDDO
+      END DO
       !     .......... EPS3 REPLACES ZERO PIVOT IN DECOMPOSITION
       !                AND CLOSE ROOTS ARE MODIFIED BY EPS3 ..........
       IF ( norm==0.0E0 ) norm = 1.0E0
@@ -194,9 +194,9 @@ SUBROUTINE INVIT(Nm,N,A,Wr,Wi,Select,Mm,M,Z,Ierr,Rm1,Rv1,Rv2)
           ukroot = SQRT(REAL(uk))
           growto = 0.1E0/ukroot
           EXIT
-        ENDIF
-      ENDDO
-    ENDIF
+        END IF
+      END DO
+    END IF
     rlambd = Wr(k)
     ilambd = Wi(k)
     IF ( k==1 ) GOTO 150
@@ -204,14 +204,14 @@ SUBROUTINE INVIT(Nm,N,A,Wr,Wi,Select,Mm,M,Z,Ierr,Rm1,Rv1,Rv2)
     GOTO 100
     !     .......... PERTURB EIGENVALUE IF IT IS CLOSE
     !                TO ANY PREVIOUS EIGENVALUE ..........
-    50     rlambd = rlambd + eps3
+    50  rlambd = rlambd + eps3
     !     .......... FOR I=K-1 STEP -1 UNTIL 1 DO -- ..........
     100 CONTINUE
     DO ii = 1, km1
       i = k - ii
       IF ( Select(i).AND.ABS(Wr(i)-rlambd)<eps3.AND.ABS(Wi(i)-ilambd)<eps3 )&
         GOTO 50
-    ENDDO
+    END DO
     !
     Wr(k) = rlambd
     !     .......... PERTURB CONJUGATE EIGENVALUE TO MATCH ..........
@@ -219,18 +219,18 @@ SUBROUTINE INVIT(Nm,N,A,Wr,Wi,Select,Mm,M,Z,Ierr,Rm1,Rv1,Rv2)
     Wr(ip1) = rlambd
     !     .......... FORM UPPER HESSENBERG A-RLAMBD*I (TRANSPOSED)
     !                AND INITIAL REAL VECTOR ..........
-    150    mp = 1
+    150  mp = 1
     !
     DO i = 1, uk
       !
       DO j = mp, uk
         Rm1(j,i) = A(i,j)
-      ENDDO
+      END DO
       !
       Rm1(i,i) = Rm1(i,i) - rlambd
       mp = i
       Rv1(i) = eps3
-    ENDDO
+    END DO
     !
     its = 0
     IF ( ilambd/=0.0E0 ) THEN
@@ -248,9 +248,9 @@ SUBROUTINE INVIT(Nm,N,A,Wr,Wi,Select,Mm,M,Z,Ierr,Rm1,Rv1,Rv2)
           !
           DO i = 4, N
             Rm1(1,i) = 0.0E0
-          ENDDO
-        ENDIF
-      ENDIF
+          END DO
+        END IF
+      END IF
       !
       DO i = 2, uk
         mp = i - 1
@@ -265,7 +265,7 @@ SUBROUTINE INVIT(Nm,N,A,Wr,Wi,Select,Mm,M,Z,Ierr,Rm1,Rv1,Rv2)
             IF ( i==N ) Z(mp,s-1) = 0.0E0
             t = 0.0E0
             x = eps3*eps3
-          ENDIF
+          END IF
           w = w/x
           x = Rm1(mp,mp)*w
           y = -t*w
@@ -278,16 +278,16 @@ SUBROUTINE INVIT(Nm,N,A,Wr,Wi,Select,Mm,M,Z,Ierr,Rm1,Rv1,Rv2)
               l = j - ns
               t = Z(mp,l)
               Z(i,l) = -x*t - y*Rm1(j,mp)
-            ENDIF
+            END IF
             Rm1(j,i) = Rm1(j,i) - x*Rm1(j,mp) + y*t
-          ENDDO
+          END DO
           !
           IF ( i<n1 ) THEN
             Rm1(i,i+2) = Rm1(i,i+2) - ilambd
           ELSE
             l = i - ns
             Z(i,l) = Z(i,l) - ilambd
-          ENDIF
+          END IF
         ELSE
           x = Rm1(mp,mp)/w
           y = t/w
@@ -306,8 +306,8 @@ SUBROUTINE INVIT(Nm,N,A,Wr,Wi,Select,Mm,M,Z,Ierr,Rm1,Rv1,Rv2)
               l = j - ns
               Z(i,l) = Z(mp,l) - y*w
               Z(mp,l) = 0.0E0
-            ENDIF
-          ENDDO
+            END IF
+          END DO
           !
           Rm1(i,i) = Rm1(i,i) - y*ilambd
           IF ( i<n1 ) THEN
@@ -317,16 +317,16 @@ SUBROUTINE INVIT(Nm,N,A,Wr,Wi,Select,Mm,M,Z,Ierr,Rm1,Rv1,Rv2)
             l = i - ns
             Z(mp,l) = -ilambd
             Z(i,l) = Z(i,l) + x*ilambd
-          ENDIF
-        ENDIF
-      ENDDO
+          END IF
+        END IF
+      END DO
       !
       IF ( uk<n1 ) THEN
         t = Rm1(uk,uk+2)
       ELSE
         l = uk - ns
         t = Z(uk,l)
-      ENDIF
+      END IF
       IF ( Rm1(uk,uk)==0.0E0.AND.t==0.0E0 ) Rm1(uk,uk) = eps3
       GOTO 250
     ELSE
@@ -343,8 +343,8 @@ SUBROUTINE INVIT(Nm,N,A,Wr,Wi,Select,Mm,M,Z,Ierr,Rm1,Rv1,Rv2)
               y = Rm1(j,i)
               Rm1(j,i) = Rm1(j,mp)
               Rm1(j,mp) = y
-            ENDDO
-          ENDIF
+            END DO
+          END IF
           !
           IF ( Rm1(mp,mp)==0.0E0 ) Rm1(mp,mp) = eps3
           x = Rm1(mp,i)/Rm1(mp,mp)
@@ -352,14 +352,14 @@ SUBROUTINE INVIT(Nm,N,A,Wr,Wi,Select,Mm,M,Z,Ierr,Rm1,Rv1,Rv2)
             !
             DO j = i, uk
               Rm1(j,i) = Rm1(j,i) - x*Rm1(j,mp)
-            ENDDO
-          ENDIF
+            END DO
+          END IF
           !
-        ENDDO
-      ENDIF
+        END DO
+      END IF
       !
       IF ( Rm1(uk,uk)==0.0E0 ) Rm1(uk,uk) = eps3
-    ENDIF
+    END IF
     !     .......... BACK SUBSTITUTION FOR REAL VECTOR
     !                FOR I=UK STEP -1 UNTIL 1 DO -- ..........
     200 CONTINUE
@@ -371,11 +371,11 @@ SUBROUTINE INVIT(Nm,N,A,Wr,Wi,Select,Mm,M,Z,Ierr,Rm1,Rv1,Rv2)
         !
         DO j = ip1, uk
           y = y - Rm1(j,i)*Rv1(j)
-        ENDDO
-      ENDIF
+        END DO
+      END IF
       !
       Rv1(i) = y/Rm1(i,i)
-    ENDDO
+    END DO
     !
     GOTO 300
     !     .......... BACK SUBSTITUTION FOR COMPLEX VECTOR
@@ -394,23 +394,23 @@ SUBROUTINE INVIT(Nm,N,A,Wr,Wi,Select,Mm,M,Z,Ierr,Rm1,Rv1,Rv2)
           ELSE
             l = j - ns
             t = Z(i,l)
-          ENDIF
+          END IF
           x = x - Rm1(j,i)*Rv1(j) + t*Rv2(j)
           y = y - Rm1(j,i)*Rv2(j) - t*Rv1(j)
-        ENDDO
-      ENDIF
+        END DO
+      END IF
       !
       IF ( i<n1 ) THEN
         t = Rm1(i,i+2)
       ELSE
         l = i - ns
         t = Z(i,l)
-      ENDIF
+      END IF
       CALL CDIV(x,y,Rm1(i,i),t,Rv1(i),Rv2(i))
-    ENDDO
+    END DO
     !     .......... ACCEPTANCE TEST FOR REAL OR COMPLEX
     !                EIGENVECTOR AND NORMALIZATION ..........
-    300    its = its + 1
+    300  its = its + 1
     norm = 0.0E0
     normv = 0.0E0
     !
@@ -420,9 +420,9 @@ SUBROUTINE INVIT(Nm,N,A,Wr,Wi,Select,Mm,M,Z,Ierr,Rm1,Rv1,Rv2)
       IF ( normv<x ) THEN
         normv = x
         j = i
-      ENDIF
+      END IF
       norm = norm + x
-    ENDDO
+    END DO
     !
     IF ( norm>=growto ) THEN
       !     .......... ACCEPT VECTOR ..........
@@ -435,8 +435,8 @@ SUBROUTINE INVIT(Nm,N,A,Wr,Wi,Select,Mm,M,Z,Ierr,Rm1,Rv1,Rv2)
           CALL CDIV(Rv1(i),Rv2(i),x,y,Z(i,s-1),Z(i,s))
         ELSE
           Z(i,s) = Rv1(i)*x
-        ENDIF
-      ENDDO
+        END IF
+      END DO
       !
       IF ( uk==N ) GOTO 350
       j = uk + 1
@@ -453,23 +453,23 @@ SUBROUTINE INVIT(Nm,N,A,Wr,Wi,Select,Mm,M,Z,Ierr,Rm1,Rv1,Rv2)
       !
       DO i = 2, uk
         Rv1(i) = y
-      ENDDO
+      END DO
       !
       j = uk - its + 1
       Rv1(j) = Rv1(j) - eps3*x
       IF ( ilambd/=0.0E0 ) GOTO 250
       GOTO 200
-    ENDIF
+    END IF
     !     .......... SET REMAINING VECTOR COMPONENTS TO ZERO ..........
     DO i = j, N
       Z(i,s) = 0.0E0
       IF ( ilambd/=0.0E0 ) Z(i,s-1) = 0.0E0
-    ENDDO
+    END DO
     !
-    350    s = s + 1
-    400    IF ( ip==(-1) ) ip = 0
+    350  s = s + 1
+    400  IF ( ip==(-1) ) ip = 0
     IF ( ip==1 ) ip = -1
-  ENDDO
+  END DO
   !
   GOTO 600
   !     .......... SET ERROR -- UNDERESTIMATE OF EIGENVECTOR

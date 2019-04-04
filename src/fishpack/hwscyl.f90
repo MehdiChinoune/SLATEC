@@ -308,7 +308,7 @@ SUBROUTINE HWSCYL(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   INTEGER i, id2, id3, id4, id5, id6, Idimf, ierr1, Ierror, ij, &
     istart, j, k, l, M, Mbdcnd, mp1, mstart, mstop, munk
   REAL A, a1, a2, B, Bda(*), Bdb(*), Bdc(*), Bdd(*), C, D, deltar, deltht, &
@@ -384,7 +384,7 @@ SUBROUTINE HWSCYL(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
     W(id3+1) = 2.*a1
     istart = 2
     ij = 1
-  ENDIF
+  END IF
   DO i = istart, munk
     r = A + (i-ij)*deltar
     j = id5 + i
@@ -397,7 +397,7 @@ SUBROUTINE HWSCYL(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
     k = id6 + i
     j = id2 + i
     W(j) = -a1 + Elmbda*W(k)
-  ENDDO
+  END DO
   SELECT CASE (Mbdcnd)
     CASE (1,5)
     CASE (3,6)
@@ -416,25 +416,25 @@ SUBROUTINE HWSCYL(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
       a1 = 2.*deltar*W(1)
       DO j = nstart, nstop
         F(1,j) = F(1,j) + a1*Bda(j)
-      ENDDO
+      END DO
     CASE (5,6)
     CASE DEFAULT
       a1 = W(1)
       DO j = nstart, nstop
         F(2,j) = F(2,j) - a1*F(1,j)
-      ENDDO
+      END DO
   END SELECT
   SELECT CASE (Mbdcnd)
     CASE (2,3,6)
       a1 = 2.*deltar*W(id4)
       DO j = nstart, nstop
         F(mp1,j) = F(mp1,j) - a1*Bdb(j)
-      ENDDO
+      END DO
     CASE DEFAULT
       a1 = W(id4)
       DO j = nstart, nstop
         F(M,j) = F(M,j) - a1*F(mp1,j)
-      ENDDO
+      END DO
   END SELECT
   !
   !     ENTER BOUNDARY DATA FOR Z-BOUNDARIES.
@@ -448,11 +448,11 @@ SUBROUTINE HWSCYL(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
       a1 = 2./deltht
       DO i = mstart, mstop
         F(i,1) = F(i,1) + a1*Bdc(i)
-      ENDDO
+      END DO
     CASE DEFAULT
       DO i = mstart, mstop
         F(i,2) = F(i,2) - a1*F(i,1)
-      ENDDO
+      END DO
   END SELECT
   a1 = 1./dlthsq
   SELECT CASE (np)
@@ -461,11 +461,11 @@ SUBROUTINE HWSCYL(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
       a1 = 2./deltht
       DO i = mstart, mstop
         F(i,np1) = F(i,np1) - a1*Bdd(i)
-      ENDDO
+      END DO
     CASE DEFAULT
       DO i = mstart, mstop
         F(i,N) = F(i,N) - a1*F(i,np1)
-      ENDDO
+      END DO
   END SELECT
   !
   !     ADJUST RIGHT SIDE OF SINGULAR PROBLEMS TO INSURE EXISTENCE OF A
@@ -499,10 +499,10 @@ SUBROUTINE HWSCYL(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
       nstm1 = nstop - 1
       DO j = nsp1, nstm1
         s1 = s1 + F(i,j)
-      ENDDO
+      END DO
       k = i + l
       s = s + (a2*s1+F(i,nstart)+F(i,nstop))*W(k)
-    ENDDO
+    END DO
     s2 = M*A + (.75+(M-1)*(M+1))*dlrby2
     IF ( Mbdcnd==3 ) s2 = s2 + .25*dlrby2
     s1 = (2.+a2*(nunk-2))*s2
@@ -510,11 +510,11 @@ SUBROUTINE HWSCYL(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
     DO i = mstart, mstop
       DO j = nstart, nstop
         F(i,j) = F(i,j) - Pertrb
-      ENDDO
-    ENDDO
+      END DO
+    END DO
   ELSE
     Ierror = 11
-  ENDIF
+  END IF
   !
   !     MULTIPLY I-TH EQUATION THROUGH BY DELTHT**2 TO PUT EQUATION INTO
   !     CORRECT FORM FOR SUBROUTINE GENBUN.
@@ -529,8 +529,8 @@ SUBROUTINE HWSCYL(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
     W(j) = W(j)*dlthsq
     DO j = nstart, nstop
       F(i,j) = F(i,j)*dlthsq
-    ENDDO
-  ENDDO
+    END DO
+  END DO
   W(1) = 0.
   W(id4) = 0.
   !
@@ -542,6 +542,6 @@ SUBROUTINE HWSCYL(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   IF ( Nbdcnd==0 ) THEN
     DO i = mstart, mstop
       F(i,np1) = F(i,1)
-    ENDDO
-  ENDIF
+    END DO
+  END IF
 END SUBROUTINE HWSCYL

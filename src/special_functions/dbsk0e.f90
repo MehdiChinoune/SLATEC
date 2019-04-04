@@ -114,7 +114,7 @@ REAL(8) FUNCTION DBSK0E(X)
     ntak02 = INITDS(ak02cs,33,eta)
     xsml = SQRT(4.0D0*D1MACH(3))
     first = .FALSE.
-  ENDIF
+  END IF
   !
   IF ( X<=0.D0 ) CALL XERMSG('SLATEC','DBSK0E','X IS ZERO OR NEGATIVE',2,2)
   IF ( X>2.0D0 ) THEN
@@ -123,9 +123,9 @@ REAL(8) FUNCTION DBSK0E(X)
       DBSK0E = (1.25D0+DCSEVL((16.D0/X-5.D0)/3.D0,ak0cs,ntak0))/SQRT(X)
     ELSE
       DBSK0E = (1.25D0+DCSEVL(16.D0/X-1.D0,ak02cs,ntak02))/SQRT(X)
-    ENDIF
+    END IF
     RETURN
-  ENDIF
+  END IF
   !
   y = 0.D0
   IF ( X>xsml ) y = X*X

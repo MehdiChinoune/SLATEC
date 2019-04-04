@@ -99,7 +99,7 @@ SUBROUTINE DPPCO(Ap,N,Rcond,Z,Info)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   INTEGER N, Info
   REAL(8) :: Ap(*), Z(*)
   REAL(8) :: Rcond
@@ -121,13 +121,13 @@ SUBROUTINE DPPCO(Ap,N,Rcond,Z,Info)
       DO i = 1, jm1
         Z(i) = Z(i) + ABS(Ap(ij))
         ij = ij + 1
-      ENDDO
-    ENDIF
-  ENDDO
+      END DO
+    END IF
+  END DO
   anorm = 0.0D0
   DO j = 1, N
     anorm = MAX(anorm,Z(j))
-  ENDDO
+  END DO
   !
   !     FACTOR
   !
@@ -145,7 +145,7 @@ SUBROUTINE DPPCO(Ap,N,Rcond,Z,Info)
     ek = 1.0D0
     DO j = 1, N
       Z(j) = 0.0D0
-    ENDDO
+    END DO
     kk = 0
     DO k = 1, N
       kk = kk + k
@@ -154,7 +154,7 @@ SUBROUTINE DPPCO(Ap,N,Rcond,Z,Info)
         s = Ap(kk)/ABS(ek-Z(k))
         CALL DSCAL(N,s,Z,1)
         ek = s*ek
-      ENDIF
+      END IF
       wk = ek - Z(k)
       wkm = -ek - Z(k)
       s = ABS(wk)
@@ -169,7 +169,7 @@ SUBROUTINE DPPCO(Ap,N,Rcond,Z,Info)
           Z(j) = Z(j) + wk*Ap(kj)
           s = s + ABS(Z(j))
           kj = kj + j
-        ENDDO
+        END DO
         IF ( s<sm ) THEN
           t = wkm - wk
           wk = wkm
@@ -177,11 +177,11 @@ SUBROUTINE DPPCO(Ap,N,Rcond,Z,Info)
           DO j = kp1, N
             Z(j) = Z(j) + t*Ap(kj)
             kj = kj + j
-          ENDDO
-        ENDIF
-      ENDIF
+          END DO
+        END IF
+      END IF
       Z(k) = wk
-    ENDDO
+    END DO
     s = 1.0D0/DASUM(N,Z,1)
     CALL DSCAL(N,s,Z,1)
     !
@@ -192,12 +192,12 @@ SUBROUTINE DPPCO(Ap,N,Rcond,Z,Info)
       IF ( ABS(Z(k))>Ap(kk) ) THEN
         s = Ap(kk)/ABS(Z(k))
         CALL DSCAL(N,s,Z,1)
-      ENDIF
+      END IF
       Z(k) = Z(k)/Ap(kk)
       kk = kk - k
       t = -Z(k)
       CALL DAXPY(k-1,t,Ap(kk+1),1,Z(1),1)
-    ENDDO
+    END DO
     s = 1.0D0/DASUM(N,Z,1)
     CALL DSCAL(N,s,Z,1)
     !
@@ -212,9 +212,9 @@ SUBROUTINE DPPCO(Ap,N,Rcond,Z,Info)
         s = Ap(kk)/ABS(Z(k))
         CALL DSCAL(N,s,Z,1)
         ynorm = s*ynorm
-      ENDIF
+      END IF
       Z(k) = Z(k)/Ap(kk)
-    ENDDO
+    END DO
     s = 1.0D0/DASUM(N,Z,1)
     CALL DSCAL(N,s,Z,1)
     ynorm = s*ynorm
@@ -227,12 +227,12 @@ SUBROUTINE DPPCO(Ap,N,Rcond,Z,Info)
         s = Ap(kk)/ABS(Z(k))
         CALL DSCAL(N,s,Z,1)
         ynorm = s*ynorm
-      ENDIF
+      END IF
       Z(k) = Z(k)/Ap(kk)
       kk = kk - k
       t = -Z(k)
       CALL DAXPY(k-1,t,Ap(kk+1),1,Z(1),1)
-    ENDDO
+    END DO
     !        MAKE ZNORM = 1.0
     s = 1.0D0/DASUM(N,Z,1)
     CALL DSCAL(N,s,Z,1)
@@ -240,5 +240,5 @@ SUBROUTINE DPPCO(Ap,N,Rcond,Z,Info)
     !
     IF ( anorm/=0.0D0 ) Rcond = ynorm/anorm
     IF ( anorm==0.0D0 ) Rcond = 0.0D0
-  ENDIF
+  END IF
 END SUBROUTINE DPPCO

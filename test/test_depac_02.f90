@@ -186,7 +186,7 @@ CONTAINS
         IF ( idid==-1 ) THEN
           nstep = nstep + 500
           IF ( nstep<2000 ) CYCLE
-        ENDIF
+        END IF
         !
         !     Finish up.
         !
@@ -198,8 +198,8 @@ CONTAINS
         IF ( Kprint>=1.AND.Ipass==0 ) WRITE (Lun,99006)
         99006 FORMAT (/' ************  DDEABM FAILED TESTS  ************')
         RETURN
-      ENDIF
-    ENDDO
+      END IF
+    END DO
   END SUBROUTINE QXDABM
   !** QXDBDF
   SUBROUTINE QXDBDF(Lun,Kprint,Ipass)
@@ -312,7 +312,7 @@ CONTAINS
         IF ( idid==-1 ) THEN
           nstep = nstep + 500
           IF ( nstep<2000 ) CYCLE
-        ENDIF
+        END IF
         !
         !     Finish up.
         !
@@ -324,8 +324,8 @@ CONTAINS
         IF ( Kprint>=1.AND.Ipass==0 ) WRITE (Lun,99006)
         99006 FORMAT (/' ************  DDEBDF FAILED TESTS  ************')
         RETURN
-      ENDIF
-    ENDDO
+      END IF
+    END DO
   END SUBROUTINE QXDBDF
   !** QXDBVS
   SUBROUTINE QXDBVS(Lun,Kprint,Ipass)
@@ -378,13 +378,13 @@ CONTAINS
       99001 FORMAT ('1')
       WRITE (Lun,99002)
       99002 FORMAT (/' DBVSUP QUICK CHECK')
-    ENDIF
+    END IF
     !
     !-----INITIALIZE VARIABLES FOR TEST PROBLEM.
     !
     DO i = 1, 9
       itmp(i) = 0
-    ENDDO
+    END DO
     !
     tol = 1.0D-03
     XSAve = 0.0D+00
@@ -411,7 +411,7 @@ CONTAINS
     !
     DO i = 1, 15
       iwork(i) = 0
-    ENDDO
+    END DO
     !
     CALL DBVSUP(y,nrowy,ncomp,xpts,nxpts,a,nrowa,alpha,nic,b,nrowb,beta,nfc,&
       igofx,re,ae,iflag,work,ndw,iwork,ndiw,neqivp)
@@ -424,7 +424,7 @@ CONTAINS
       IF ( Kprint>1 ) WRITE (Lun,99003) iflag
       99003 FORMAT (10X,'IFLAG =',I2)
       GOTO 300
-    ENDIF
+    END IF
     !
     !-----CHECK THE ACCURACY OF THE SOLUTION.
     !
@@ -434,8 +434,8 @@ CONTAINS
         abser = ABS(yans(l,j)-y(l,j))
         reler = abser/ABS(yans(l,j))
         IF ( reler>tol.AND.abser>tol ) Ipass = 0
-      ENDDO
-    ENDDO
+      END DO
+    END DO
     !
     !-----CHECK FOR SUPPRESSION OF PRINTING.
     !
@@ -462,9 +462,9 @@ CONTAINS
           IF ( reler>tol.AND.abser>tol ) msg = 'FAIL'
           WRITE (Lun,99008) xpts(j), y(1,j), y(2,j), yans(1,j), yans(2,j), msg
           99008 FORMAT (F5.1,4E20.7,5X,A)
-        ENDDO
-      ENDIF
-    ENDIF
+        END DO
+      END IF
+    END IF
     !
     !-----SEND MESSAGE INDICATING PASSAGE OR FAILURE OF TESTS.
     !
@@ -485,7 +485,7 @@ CONTAINS
     DO
       DO i = 1, 15
         iwork(i) = 0
-      ENDDO
+      END DO
       CALL DBVSUP(y,nrowy,ncomp,xpts,nxpts,a,nrowa,alpha,nic,b,nrowb,beta,nfc,&
         igofx,re,ae,iflag,work,ndw,iwork,ndiw,neqivp)
       SELECT CASE (kount)
@@ -547,7 +547,7 @@ CONTAINS
           nrowy = 2
           igofx = 3
       END SELECT
-    ENDDO
+    END DO
     !
     WRITE (Lun,99013) iflag
     IF ( iflag==-2 ) itmp(kont) = 1
@@ -571,7 +571,7 @@ CONTAINS
     300  ipss = 1
     DO i = 1, kont
       ipss = ipss*itmp(i)
-    ENDDO
+    END DO
     !
     CALL PASS(Lun,2,ipss)
     !
@@ -696,7 +696,7 @@ CONTAINS
         IF ( idid==-1 ) THEN
           nstep = nstep + 500
           IF ( nstep<2000 ) CYCLE
-        ENDIF
+        END IF
         !
         !     Finish up.
         !
@@ -708,8 +708,8 @@ CONTAINS
         IF ( Kprint>=1.AND.Ipass==0 ) WRITE (Lun,99006)
         99006 FORMAT (/' ************  DDERKF FAILED TESTS  ************')
         RETURN
-      ENDIF
-    ENDDO
+      END IF
+    END DO
   END SUBROUTINE QXDRKF
 END MODULE TEST44_MOD
 !** TEST44
@@ -782,7 +782,7 @@ PROGRAM TEST44
     CALL XSETF(0)
   ELSE
     CALL XSETF(1)
-  ENDIF
+  END IF
   !
   !     Test DDEABM
   !
@@ -813,6 +813,6 @@ PROGRAM TEST44
     WRITE (lun,99002) nfail
     99002 FORMAT (/' ************* WARNING -- ',I5,&
       ' TEST(S) FAILED IN PROGRAM TEST44 *************')
-  ENDIF
+  END IF
   STOP
 END PROGRAM TEST44

@@ -62,7 +62,7 @@ SUBROUTINE ZUOIK(Zr,Zi,Fnu,Kode,Ikflg,N,Yr,Yi,Nuf,Tol,Elim,Alim)
   IF ( Zr<0.0D0 ) THEN
     zrr = -Zr
     zri = -Zi
-  ENDIF
+  END IF
   zbr = zrr
   zbi = zri
   ax = ABS(Zr)*1.7321D0
@@ -74,7 +74,7 @@ SUBROUTINE ZUOIK(Zr,Zi,Fnu,Kode,Ikflg,N,Yr,Yi,Nuf,Tol,Elim,Alim)
     fnn = nn
     gnn = Fnu + fnn - 1.0D0
     gnu = MAX(gnn,fnn)
-  ENDIF
+  END IF
   !-----------------------------------------------------------------------
   !     ONLY THE MAGNITUDE OF ARG AND PHI ARE NEEDED ALONG WITH THE
   !     REAL PARTS OF ZETA1, ZETA2 AND ZB. NO ATTEMPT IS MADE TO GET
@@ -95,15 +95,15 @@ SUBROUTINE ZUOIK(Zr,Zi,Fnu,Kode,Ikflg,N,Yr,Yi,Nuf,Tol,Elim,Alim)
       zeta2i,sumr,sumi,cwrkr,cwrki)
     czr = -zeta1r + zeta2r
     czi = -zeta1i + zeta2i
-  ENDIF
+  END IF
   IF ( Kode/=1 ) THEN
     czr = czr - zbr
     czi = czi - zbi
-  ENDIF
+  END IF
   IF ( Ikflg/=1 ) THEN
     czr = -czr
     czi = -czi
-  ENDIF
+  END IF
   aphi = ZABS(phir,phii)
   rcz = czr
   !-----------------------------------------------------------------------
@@ -130,19 +130,19 @@ SUBROUTINE ZUOIK(Zr,Zi,Fnu,Kode,Ikflg,N,Yr,Yi,Nuf,Tol,Elim,Alim)
             CALL ZLOG(argr,argi,str,sti,idum)
             czr = czr - 0.25D0*str - aic
             czi = czi - 0.25D0*sti
-          ENDIF
+          END IF
           ax = EXP(rcz)/Tol
           ay = czi
           czr = ax*COS(ay)
           czi = ax*SIN(ay)
           CALL ZUCHK(czr,czi,nw,ascle,Tol)
           IF ( nw==0 ) GOTO 50
-        ENDIF
-      ENDIF
+        END IF
+      END IF
       DO i = 1, nn
         Yr(i) = zeror
         Yi(i) = zeroi
-      ENDDO
+      END DO
       Nuf = nn
       RETURN
     ELSE
@@ -151,11 +151,11 @@ SUBROUTINE ZUOIK(Zr,Zi,Fnu,Kode,Ikflg,N,Yr,Yi,Nuf,Tol,Elim,Alim)
       IF ( rcz>Elim ) THEN
         Nuf = -1
         RETURN
-      ENDIF
-    ENDIF
-    50     IF ( Ikflg==2 ) RETURN
+      END IF
+    END IF
+    50  IF ( Ikflg==2 ) RETURN
     IF ( N==1 ) RETURN
-  ENDIF
+  END IF
   !-----------------------------------------------------------------------
   !     SET UNDERFLOWS ON I SEQUENCE
   !-----------------------------------------------------------------------
@@ -172,11 +172,11 @@ SUBROUTINE ZUOIK(Zr,Zi,Fnu,Kode,Ikflg,N,Yr,Yi,Nuf,Tol,Elim,Alim)
       zeta2i,sumr,sumi,cwrkr,cwrki)
     czr = -zeta1r + zeta2r
     czi = -zeta1i + zeta2i
-  ENDIF
+  END IF
   IF ( Kode/=1 ) THEN
     czr = czr - zbr
     czi = czi - zbi
-  ENDIF
+  END IF
   aphi = ZABS(phir,phii)
   rcz = czr
   IF ( rcz>=(-Elim) ) THEN
@@ -192,15 +192,15 @@ SUBROUTINE ZUOIK(Zr,Zi,Fnu,Kode,Ikflg,N,Yr,Yi,Nuf,Tol,Elim,Alim)
         CALL ZLOG(argr,argi,str,sti,idum)
         czr = czr - 0.25D0*str - aic
         czi = czi - 0.25D0*sti
-      ENDIF
+      END IF
       ax = EXP(rcz)/Tol
       ay = czi
       czr = ax*COS(ay)
       czi = ax*SIN(ay)
       CALL ZUCHK(czr,czi,nw,ascle,Tol)
       IF ( nw==0 ) RETURN
-    ENDIF
-  ENDIF
+    END IF
+  END IF
   Yr(nn) = zeror
   Yi(nn) = zeroi
   nn = nn - 1

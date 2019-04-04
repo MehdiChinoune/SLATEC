@@ -93,7 +93,7 @@ REAL FUNCTION BESY1(X)
     xsml = SQRT(4.0*R1MACH(3))
     xmax = 1.0/R1MACH(4)
     first = .FALSE.
-  ENDIF
+  END IF
   !
   IF ( X<=0. ) CALL XERMSG('SLATEC','BESY1','X IS ZERO OR NEGATIVE',1,2)
   IF ( X>4.0 ) THEN
@@ -106,7 +106,7 @@ REAL FUNCTION BESY1(X)
     theta = X - 3.0*pi4 + CSEVL(z,bth1cs,ntth1)/X
     BESY1 = ampl*SIN(theta)
     RETURN
-  ENDIF
+  END IF
   !
   IF ( X<xmin ) CALL XERMSG('SLATEC','BESY1','X SO SMALL Y1 OVERFLOWS',3,2)
   y = 0.

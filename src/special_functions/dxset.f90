@@ -239,10 +239,10 @@ SUBROUTINE DXSET(Irad,Nradpl,Dzero,Nbits,Ierror)
           CALL XERMSG('SLATEC','DXSET','IMPROPER VALUE OF IRAD',201,1)
           Ierror = 201
           RETURN
-        ENDIF
-      ENDIF
-    ENDIF
-  ENDIF
+        END IF
+      END IF
+    END IF
+  END IF
   log2r = 0
   IF ( iradx==2 ) log2r = 1
   IF ( iradx==4 ) log2r = 2
@@ -258,7 +258,7 @@ SUBROUTINE DXSET(Irad,Nradpl,Dzero,Nbits,Ierror)
     lx = lx - 1
   ELSE
     lx = MIN((1-iminex)/2,(imaxex-1)/2)
-  ENDIF
+  END IF
   L2 = 2*lx
   IF ( lx>=4 ) THEN
     L = lx
@@ -289,7 +289,7 @@ SUBROUTINE DXSET(Irad,Nradpl,Dzero,Nbits,Ierror)
           it = log2r*log102(i) + ic
           ic = it/1000
           lgtemp(i) = MOD(it,1000)
-        ENDDO
+        END DO
         !
         !   AFTER COMPLETION OF THE FOLLOWING LOOP, LG102 CONTAINS
         ! LOG10(IRADX) IN RADIX MLG102. THE RADIX POINT IS
@@ -304,11 +304,11 @@ SUBROUTINE DXSET(Irad,Nradpl,Dzero,Nbits,Ierror)
               it = 2*lgtemp(k) + ic
               ic = it/1000
               lgtemp(k) = MOD(it,1000)
-            ENDDO
+            END DO
             lg102x = 2*lg102x + ic
-          ENDDO
+          END DO
           LG102(i) = lg102x
-        ENDDO
+        END DO
         !
         ! CHECK SPECIAL CONDITIONS REQUIRED BY SUBROUTINES...
         IF ( nrdplc>=L ) THEN
@@ -318,22 +318,22 @@ SUBROUTINE DXSET(Irad,Nradpl,Dzero,Nbits,Ierror)
         ELSEIF ( 6*L<=KMAx ) THEN
           iflag = 1
           RETURN
-        ENDIF
+        END IF
       ELSE
         CALL XERMSG('SLATEC','DXSET','IMPROPER VALUE OF NRADPL',204,1)
         Ierror = 204
         RETURN
-      ENDIF
+      END IF
     ELSE
       CALL XERMSG('SLATEC','DXSET','IMPROPER VALUE OF NBITS',203,1)
       Ierror = 203
       RETURN
-    ENDIF
+    END IF
   ELSE
     CALL XERMSG('SLATEC','DXSET','IMPROPER VALUE OF DZERO',202,1)
     Ierror = 202
     RETURN
-  ENDIF
+  END IF
   CALL XERMSG('SLATEC','DXSET','6*L .GT. KMAX',206,1)
   Ierror = 206
   RETURN

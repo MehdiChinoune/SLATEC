@@ -79,7 +79,7 @@ SUBROUTINE CGESL(A,Lda,N,Ipvt,B,Job)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   INTEGER Lda, N, Ipvt(*), Job
   COMPLEX A(Lda,*), B(*)
   !
@@ -95,7 +95,7 @@ SUBROUTINE CGESL(A,Lda,N,Ipvt,B,Job)
     DO k = 1, N
       t = CDOTC(k-1,A(1,k),1,B(1),1)
       B(k) = (B(k)-t)/CONJG(A(k,k))
-    ENDDO
+    END DO
     !
     !        NOW SOLVE CTRANS(L)*X = Y
     !
@@ -108,9 +108,9 @@ SUBROUTINE CGESL(A,Lda,N,Ipvt,B,Job)
           t = B(l)
           B(l) = B(k)
           B(k) = t
-        ENDIF
-      ENDDO
-    ENDIF
+        END IF
+      END DO
+    END IF
   ELSE
     !
     !        JOB = 0, SOLVE  A * X = B
@@ -123,10 +123,10 @@ SUBROUTINE CGESL(A,Lda,N,Ipvt,B,Job)
         IF ( l/=k ) THEN
           B(l) = B(k)
           B(k) = t
-        ENDIF
+        END IF
         CALL CAXPY(N-k,t,A(k+1,k),1,B(k+1),1)
-      ENDDO
-    ENDIF
+      END DO
+    END IF
     !
     !        NOW SOLVE  U*X = Y
     !
@@ -135,6 +135,6 @@ SUBROUTINE CGESL(A,Lda,N,Ipvt,B,Job)
       B(k) = B(k)/A(k,k)
       t = -B(k)
       CALL CAXPY(k-1,t,A(1,k),1,B(1),1)
-    ENDDO
-  ENDIF
+    END DO
+  END IF
 END SUBROUTINE CGESL

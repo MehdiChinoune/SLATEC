@@ -647,8 +647,8 @@ SUBROUTINE SNLS1(FCN,Iopt,M,N,X,Fvec,Fjac,Ldfjac,Ftol,Xtol,Gtol,Maxfev,&
   IF ( Mode==2 ) THEN
     DO j = 1, N
       IF ( Diag(j)<=zero ) GOTO 200
-    ENDDO
-  ENDIF
+    END DO
+  END IF
   !
   !     EVALUATE THE FUNCTION AT THE STARTING POINT
   !     AND CALCULATE ITS NORM.
@@ -675,7 +675,7 @@ SUBROUTINE SNLS1(FCN,Iopt,M,N,X,Fvec,Fjac,Ldfjac,Ftol,Xtol,Gtol,Maxfev,&
     iflag = 0
     IF ( MOD(iter-1,Nprint)==0 ) CALL FCN(iflag,M,N,X,Fvec,Fjac,ijunk)
     IF ( iflag<0 ) GOTO 200
-  ENDIF
+  END IF
   !
   !        CALCULATE THE JACOBIAN MATRIX.
   !
@@ -691,8 +691,8 @@ SUBROUTINE SNLS1(FCN,Iopt,M,N,X,Fvec,Fjac,Ldfjac,Ftol,Xtol,Gtol,Maxfev,&
       Qtf(j) = zero
       DO i = 1, N
         Fjac(i,j) = zero
-      ENDDO
-    ENDDO
+      END DO
+    END DO
     DO i = 1, M
       nrow = i
       iflag = 3
@@ -718,7 +718,7 @@ SUBROUTINE SNLS1(FCN,Iopt,M,N,X,Fvec,Fjac,Ldfjac,Ftol,Xtol,Gtol,Maxfev,&
           CALL FCN(iflag,M,N,Wa1,Wa4,Fjac,nrow)
           Nfev = Nfev + 1
           IF ( iflag<0 ) GOTO 200
-        ENDIF
+        END IF
         modech = 2
         CALL CHKDER(1,N,X,Fvec(i),Wa3,1,Wa1,Wa4(i),modech,err)
         IF ( err(1)<chklim ) THEN
@@ -726,12 +726,12 @@ SUBROUTINE SNLS1(FCN,Iopt,M,N,X,Fvec,Fjac,Ldfjac,Ftol,Xtol,Gtol,Maxfev,&
           WRITE (xern3,'(1PE15.6)') err
           CALL XERMSG('SLATEC','SNLS1','DERIVATIVE OF FUNCTION '//xern1//&
             ' MAY BE WRONG, ERR = '//xern3//' TOO CLOSE TO 0.',7,0)
-        ENDIF
-      ENDIF
+        END IF
+      END IF
       !
       temp = Fvec(i)
       CALL RWUPDT(N,Fjac,Ldfjac,Wa3,Qtf,temp,Wa1,Wa2)
-    ENDDO
+    END DO
     Njev = Njev + 1
     !
     !        IF THE JACOBIAN IS RANK DEFICIENT, CALL QRFAC TO
@@ -742,7 +742,7 @@ SUBROUTINE SNLS1(FCN,Iopt,M,N,X,Fvec,Fjac,Ldfjac,Ftol,Xtol,Gtol,Maxfev,&
       IF ( Fjac(j,j)==zero ) sing = .TRUE.
       Ipvt(j) = j
       Wa2(j) = ENORM(j,Fjac(1,j))
-    ENDDO
+    END DO
     IF ( sing ) THEN
       CALL QRFAC(N,N,Fjac,Ldfjac,.TRUE.,Ipvt,N,Wa1,Wa2,Wa3)
       DO j = 1, N
@@ -750,15 +750,15 @@ SUBROUTINE SNLS1(FCN,Iopt,M,N,X,Fvec,Fjac,Ldfjac,Ftol,Xtol,Gtol,Maxfev,&
           sum = zero
           DO i = j, N
             sum = sum + Fjac(i,j)*Qtf(i)
-          ENDDO
+          END DO
           temp = -sum/Fjac(j,j)
           DO i = j, N
             Qtf(i) = Qtf(i) + Fjac(i,j)*temp
-          ENDDO
-        ENDIF
+          END DO
+        END IF
         Fjac(j,j) = Wa1(j)
-      ENDDO
-    ENDIF
+      END DO
+    END IF
   ELSE
     !
     !     STORE THE FULL JACOBIAN USING M*N STORAGE
@@ -802,11 +802,11 @@ SUBROUTINE SNLS1(FCN,Iopt,M,N,X,Fvec,Fjac,Ldfjac,Ftol,Xtol,Gtol,Maxfev,&
             WRITE (xern3,'(1PE15.6)') err
             CALL XERMSG('SLATEC','SNLS1','DERIVATIVE OF FUNCTION '//&
               xern1//' MAY BE WRONG, ERR = '//xern3//' TOO CLOSE TO 0.',7,0)
-          ENDIF
-        ENDDO
+          END IF
+        END DO
         !
-      ENDIF
-    ENDIF
+      END IF
+    END IF
     IF ( iflag<0 ) GOTO 200
     !
     !        COMPUTE THE QR FACTORIZATION OF THE JACOBIAN.
@@ -818,22 +818,22 @@ SUBROUTINE SNLS1(FCN,Iopt,M,N,X,Fvec,Fjac,Ldfjac,Ftol,Xtol,Gtol,Maxfev,&
     !
     DO i = 1, M
       Wa4(i) = Fvec(i)
-    ENDDO
+    END DO
     DO j = 1, N
       IF ( Fjac(j,j)/=zero ) THEN
         sum = zero
         DO i = j, M
           sum = sum + Fjac(i,j)*Wa4(i)
-        ENDDO
+        END DO
         temp = -sum/Fjac(j,j)
         DO i = j, M
           Wa4(i) = Wa4(i) + Fjac(i,j)*temp
-        ENDDO
-      ENDIF
+        END DO
+      END IF
       Fjac(j,j) = Wa1(j)
       Qtf(j) = Wa4(j)
-    ENDDO
-  ENDIF
+    END DO
+  END IF
   !
   !        ON THE FIRST ITERATION AND IF MODE IS 1, SCALE ACCORDING
   !        TO THE NORMS OF THE COLUMNS OF THE INITIAL JACOBIAN.
@@ -843,19 +843,19 @@ SUBROUTINE SNLS1(FCN,Iopt,M,N,X,Fvec,Fjac,Ldfjac,Ftol,Xtol,Gtol,Maxfev,&
       DO j = 1, N
         Diag(j) = Wa2(j)
         IF ( Wa2(j)==zero ) Diag(j) = one
-      ENDDO
-    ENDIF
+      END DO
+    END IF
     !
     !        ON THE FIRST ITERATION, CALCULATE THE NORM OF THE SCALED X
     !        AND INITIALIZE THE STEP BOUND DELTA.
     !
     DO j = 1, N
       Wa3(j) = Diag(j)*X(j)
-    ENDDO
+    END DO
     xnorm = ENORM(N,Wa3)
     delta = Factor*xnorm
     IF ( delta==zero ) delta = Factor
-  ENDIF
+  END IF
   !
   !        COMPUTE THE NORM OF THE SCALED GRADIENT.
   !
@@ -867,11 +867,11 @@ SUBROUTINE SNLS1(FCN,Iopt,M,N,X,Fvec,Fjac,Ldfjac,Ftol,Xtol,Gtol,Maxfev,&
         sum = zero
         DO i = 1, j
           sum = sum + Fjac(i,j)*(Qtf(i)/fnorm)
-        ENDDO
+        END DO
         gnorm = MAX(gnorm,ABS(sum/Wa2(l)))
-      ENDIF
-    ENDDO
-  ENDIF
+      END IF
+    END DO
+  END IF
   !
   !        TEST FOR CONVERGENCE OF THE GRADIENT NORM.
   !
@@ -883,8 +883,8 @@ SUBROUTINE SNLS1(FCN,Iopt,M,N,X,Fvec,Fjac,Ldfjac,Ftol,Xtol,Gtol,Maxfev,&
     IF ( Mode/=2 ) THEN
       DO j = 1, N
         Diag(j) = MAX(Diag(j),Wa2(j))
-      ENDDO
-    ENDIF
+      END DO
+    END IF
     DO
       !
       !        BEGINNING OF THE INNER LOOP.
@@ -900,7 +900,7 @@ SUBROUTINE SNLS1(FCN,Iopt,M,N,X,Fvec,Fjac,Ldfjac,Ftol,Xtol,Gtol,Maxfev,&
         Wa1(j) = -Wa1(j)
         Wa2(j) = X(j) + Wa1(j)
         Wa3(j) = Diag(j)*Wa1(j)
-      ENDDO
+      END DO
       pnorm = ENORM(N,Wa3)
       !
       !           ON THE FIRST ITERATION, ADJUST THE INITIAL STEP BOUND.
@@ -929,8 +929,8 @@ SUBROUTINE SNLS1(FCN,Iopt,M,N,X,Fvec,Fjac,Ldfjac,Ftol,Xtol,Gtol,Maxfev,&
         temp = Wa1(l)
         DO i = 1, j
           Wa3(i) = Wa3(i) + Fjac(i,j)*temp
-        ENDDO
-      ENDDO
+        END DO
+      END DO
       temp1 = ENORM(N,Wa3)/fnorm
       temp2 = (SQRT(par)*pnorm)/fnorm
       prered = temp1**2 + temp2**2/p5
@@ -953,7 +953,7 @@ SUBROUTINE SNLS1(FCN,Iopt,M,N,X,Fvec,Fjac,Ldfjac,Ftol,Xtol,Gtol,Maxfev,&
       ELSEIF ( par==zero.OR.ratio>=p75 ) THEN
         delta = pnorm/p5
         par = p5*par
-      ENDIF
+      END IF
       !
       !           TEST FOR SUCCESSFUL ITERATION.
       !
@@ -964,14 +964,14 @@ SUBROUTINE SNLS1(FCN,Iopt,M,N,X,Fvec,Fjac,Ldfjac,Ftol,Xtol,Gtol,Maxfev,&
         DO j = 1, N
           X(j) = Wa2(j)
           Wa2(j) = Diag(j)*X(j)
-        ENDDO
+        END DO
         DO i = 1, M
           Fvec(i) = Wa4(i)
-        ENDDO
+        END DO
         xnorm = ENORM(N,Wa2)
         fnorm = fnorm1
         iter = iter + 1
-      ENDIF
+      END IF
       !
       !           TESTS FOR CONVERGENCE.
       !
@@ -994,8 +994,8 @@ SUBROUTINE SNLS1(FCN,Iopt,M,N,X,Fvec,Fjac,Ldfjac,Ftol,Xtol,Gtol,Maxfev,&
       !        END OF THE OUTER LOOP.
       !
       IF ( ratio>=p0001 ) GOTO 100
-    ENDDO
-  ENDIF
+    END DO
+  END IF
   !
   !     TERMINATION, EITHER NORMAL OR USER IMPOSED.
   !

@@ -72,7 +72,7 @@ REAL(8) FUNCTION DPPVAL(Ldc,C,Xi,Lxi,K,Ideriv,X,Inppv)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   !
   INTEGER i, Ideriv, Inppv, j, K, Ldc, Lxi, ndummy, kk
   REAL(8) :: C(Ldc,*), dx, X, Xi(*)
@@ -103,7 +103,7 @@ REAL(8) FUNCTION DPPVAL(Ldc,C,Xi,Lxi,K,Ideriv,X,Inppv)
       j = j - 1
       kk = kk - 1
       IF ( kk<=0 ) EXIT
-    ENDDO
-  ENDIF
+    END DO
+  END IF
   RETURN
 END FUNCTION DPPVAL

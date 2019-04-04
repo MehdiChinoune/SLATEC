@@ -88,7 +88,7 @@ SUBROUTINE CBAL(Nm,N,Ar,Ai,Low,Igh,Scale)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   !
   INTEGER i, j, k, l, m, N, jj, Nm, Igh, Low, iexc
   REAL Ar(Nm,*), Ai(Nm,*), Scale(*)
@@ -117,7 +117,7 @@ SUBROUTINE CBAL(Nm,N,Ar,Ai,Low,Igh,Scale)
       f = Ai(i,j)
       Ai(i,j) = Ai(i,m)
       Ai(i,m) = f
-    ENDDO
+    END DO
     !
     DO i = k, N
       f = Ar(j,i)
@@ -126,8 +126,8 @@ SUBROUTINE CBAL(Nm,N,Ar,Ai,Low,Igh,Scale)
       f = Ai(j,i)
       Ai(j,i) = Ai(m,i)
       Ai(m,i) = f
-    ENDDO
-  ENDIF
+    END DO
+  END IF
   !
   IF ( iexc==2 ) THEN
     !     .......... SEARCH FOR COLUMNS ISOLATING AN EIGENVALUE
@@ -139,7 +139,7 @@ SUBROUTINE CBAL(Nm,N,Ar,Ai,Low,Igh,Scale)
     !                AND PUSH THEM DOWN ..........
     IF ( l==1 ) GOTO 600
     l = l - 1
-  ENDIF
+  END IF
   !     .......... FOR J=L STEP -1 UNTIL 1 DO -- ..........
   200 CONTINUE
   DO jj = 1, l
@@ -148,15 +148,15 @@ SUBROUTINE CBAL(Nm,N,Ar,Ai,Low,Igh,Scale)
     DO i = 1, l
       IF ( i/=j ) THEN
         IF ( Ar(j,i)/=0.0E0.OR.Ai(j,i)/=0.0E0 ) GOTO 300
-      ENDIF
-    ENDDO
+      END IF
+    END DO
     !
     m = l
     iexc = 1
     GOTO 100
     !
     300 CONTINUE
-  ENDDO
+  END DO
   !
   400 CONTINUE
   DO j = k, l
@@ -164,18 +164,18 @@ SUBROUTINE CBAL(Nm,N,Ar,Ai,Low,Igh,Scale)
     DO i = k, l
       IF ( i/=j ) THEN
         IF ( Ar(i,j)/=0.0E0.OR.Ai(i,j)/=0.0E0 ) GOTO 500
-      ENDIF
-    ENDDO
+      END IF
+    END DO
     !
     m = k
     iexc = 2
     GOTO 100
     500 CONTINUE
-  ENDDO
+  END DO
   !     .......... NOW BALANCE THE SUBMATRIX IN ROWS K TO L ..........
   DO i = k, l
     Scale(i) = 1.0E0
-  ENDDO
+  END DO
   DO
     !     .......... ITERATIVE LOOP FOR NORM REDUCTION ..........
     noconv = .FALSE.
@@ -188,8 +188,8 @@ SUBROUTINE CBAL(Nm,N,Ar,Ai,Low,Igh,Scale)
         IF ( j/=i ) THEN
           c = c + ABS(Ar(j,i)) + ABS(Ai(j,i))
           r = r + ABS(Ar(i,j)) + ABS(Ai(i,j))
-        ENDIF
-      ENDDO
+        END IF
+      END DO
       !     .......... GUARD AGAINST ZERO C OR R DUE TO UNDERFLOW ..........
       IF ( c/=0.0E0.AND.r/=0.0E0 ) THEN
         g = r/radix
@@ -198,12 +198,12 @@ SUBROUTINE CBAL(Nm,N,Ar,Ai,Low,Igh,Scale)
         DO WHILE ( c<g )
           f = f*radix
           c = c*b2
-        ENDDO
+        END DO
         g = r*radix
         DO WHILE ( c>=g )
           f = f/radix
           c = c/b2
-        ENDDO
+        END DO
         !     .......... NOW BALANCE ..........
         IF ( (c+r)/f<0.95E0*s ) THEN
           g = 1.0E0/f
@@ -213,19 +213,19 @@ SUBROUTINE CBAL(Nm,N,Ar,Ai,Low,Igh,Scale)
           DO j = k, N
             Ar(i,j) = Ar(i,j)*g
             Ai(i,j) = Ai(i,j)*g
-          ENDDO
+          END DO
           !
           DO j = 1, l
             Ar(j,i) = Ar(j,i)*f
             Ai(j,i) = Ai(j,i)*f
-          ENDDO
-        ENDIF
-      ENDIF
+          END DO
+        END IF
+      END IF
       !
-    ENDDO
+    END DO
     !
     IF ( .NOT.(noconv) ) EXIT
-  ENDDO
+  END DO
   !
   600  Low = k
   Igh = l

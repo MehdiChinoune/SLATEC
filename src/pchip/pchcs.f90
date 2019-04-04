@@ -128,11 +128,11 @@ SUBROUTINE PCHCS(Switch,N,H,Slope,D,Incfd,Ierr)
       IF ( i>2 ) THEN
         IF ( PCHST(Slope(i-2),Slope(i))>zero ) CYCLE
         !                   --------------------------
-      ENDIF
+      END IF
       IF ( i<nless1 ) THEN
         IF ( PCHST(Slope(i+1),Slope(i-1))>zero ) CYCLE
         !                   ----------------------------
-      ENDIF
+      END IF
       !
       !   ....... COMPUTE PROVISIONAL VALUE FOR D(1,I).
       !
@@ -159,7 +159,7 @@ SUBROUTINE PCHCS(Switch,N,H,Slope,D,Incfd,Ierr)
         !              SET UP TO COMPUTE NEW VALUES FOR D(1,I) AND D(1,I+1).
         wtave(1) = dext
         IF ( k<nless1 ) wtave(2) = PCHSD(Slope(k),Slope(k+1),H(k),H(k+1))
-      ENDIF
+      END IF
     ELSEIF ( PCHST(Slope(i-1),Slope(i))==0 ) THEN
       !
       !
@@ -177,7 +177,7 @@ SUBROUTINE PCHCS(Switch,N,H,Slope,D,Incfd,Ierr)
       wtave(2) = PCHSD(Slope(k),Slope(k+1),H(k),H(k+1))
     ELSE
       CYCLE
-    ENDIF
+    END IF
     !
     !
     !....... AT THIS POINT WE HAVE DETERMINED THAT THERE WILL BE AN EXTREMUM
@@ -208,7 +208,7 @@ SUBROUTINE PCHCS(Switch,N,H,Slope,D,Incfd,Ierr)
       D(1,i) = MIN(fact,one)*wtave(i-k+1)
       !              NOTE THAT I-K+1 = 1 IF K=I  (=NLESS1),
       !                        I-K+1 = 2 IF K=I-1(=1).
-    ENDIF
+    END IF
     !
     !
     !....... ADJUST IF NECESSARY TO LIMIT EXCURSIONS FROM DATA.
@@ -225,11 +225,11 @@ SUBROUTINE PCHCS(Switch,N,H,Slope,D,Incfd,Ierr)
       CALL PCHSW(dfmx,indx,D(1,k),D(1,k+1),H(k),Slope(k),Ierr)
       !        ---------------------------------------------------------------
       IF ( Ierr/=0 ) RETURN
-    ENDIF
+    END IF
     !
     !....... END OF SEGMENT LOOP.
     !
-  ENDDO
+  END DO
   !
   !------------- LAST LINE OF PCHCS FOLLOWS ------------------------------
 CONTAINS

@@ -102,19 +102,19 @@ SUBROUTINE DMGSBV(M,N,A,Ia,Niv,Iflag,S,P,Ip,Inhomo,V,W,Wcnd)
         j = 2*i - 1
         P(j) = vl
         Ip(j) = j
-      ENDIF
+      END IF
       j = j + 1
       P(j) = vl
       Ip(j) = j
       IF ( vl>y ) THEN
         y = vl
         ix = i
-      ENDIF
-    ENDDO
+      END IF
+    END DO
     IF ( INDpvt==1 ) THEN
       ix = 1
       y = P(1)
-    ENDIF
+    END IF
     lix = ix
     IF ( N/=NFCc ) lix = 2*ix - 1
     P(lix) = P(1)
@@ -143,7 +143,7 @@ SUBROUTINE DMGSBV(M,N,A,Ia,Niv,Iflag,S,P,Ip,Inhomo,V,W,Wcnd)
             nn = NFCc
             lix = 2*ix - 1
             lr = 2*nr - 1
-          ENDIF
+          END IF
           IF ( nr/=1 ) THEN
             kd = lix - lr
             kj = lr
@@ -154,11 +154,11 @@ SUBROUTINE DMGSBV(M,N,A,Ia,Niv,Iflag,S,P,Ip,Inhomo,V,W,Wcnd)
               P(kj) = P(jk)
               P(jk) = psave
               kj = kj + nn - j
-            ENDDO
+            END DO
             jy = jk + nmnr
             jz = jy - kd
             P(jy) = P(jz)
-          ENDIF
+          END IF
           iz = Ip(lix)
           Ip(lix) = Ip(lr)
           Ip(lr) = iz
@@ -174,12 +174,12 @@ SUBROUTINE DMGSBV(M,N,A,Ia,Niv,Iflag,S,P,Ip,Inhomo,V,W,Wcnd)
                 P(kj) = P(jk)
                 P(jk) = psave
                 kj = kj + NFCc - k
-              ENDDO
-            ENDIF
+              END DO
+            END IF
             iz = Ip(lix+1)
             Ip(lix+1) = Ip(lr+1)
             Ip(lr+1) = iz
-          ENDIF
+          END IF
           !
           !                       PIVOTING OF COLUMNS OF VECTORS
           !
@@ -187,8 +187,8 @@ SUBROUTINE DMGSBV(M,N,A,Ia,Niv,Iflag,S,P,Ip,Inhomo,V,W,Wcnd)
             t = A(l,ix)
             A(l,ix) = A(l,nr)
             A(l,nr) = t
-          ENDDO
-        ENDIF
+          END DO
+        END IF
         !
         !                    CALCULATE P(NR,NR) AS NORM SQUARED OF PIVOTAL
         !                    VECTOR
@@ -203,7 +203,7 @@ SUBROUTINE DMGSBV(M,N,A,Ia,Niv,Iflag,S,P,Ip,Inhomo,V,W,Wcnd)
           P(jp) = 0.0D0
           kp = jp + nmnr
           P(kp) = y
-        ENDIF
+        END IF
         IF ( nr/=N.AND.nivn/=Niv ) THEN
           !
           !                       CALCULATE ORTHOGONAL PROJECTION VECTORS AND
@@ -222,7 +222,7 @@ SUBROUTINE DMGSBV(M,N,A,Ia,Niv,Iflag,S,P,Ip,Inhomo,V,W,Wcnd)
             P(jp) = dot*ry
             DO i = 1, M
               A(i,j) = A(i,j) - P(jp)*A(i,nr)
-            ENDDO
+            END DO
             IF ( N/=NFCc ) THEN
               kp = jp + nmnr
               jp = jp + 1
@@ -235,9 +235,9 @@ SUBROUTINE DMGSBV(M,N,A,Ia,Niv,Iflag,S,P,Ip,Inhomo,V,W,Wcnd)
                 l = m2 + k
                 A(k,j) = A(k,j) - pjp*A(l,nr)
                 A(l,j) = A(l,j) + pjp*A(k,nr)
-              ENDDO
+              END DO
               P(jq) = P(jq) - pjp*(pjp/ry)
-            ENDIF
+            END IF
             !
             !                          TEST FOR CANCELLATION IN RECURRENCE RELATION
             !
@@ -245,8 +245,8 @@ SUBROUTINE DMGSBV(M,N,A,Ia,Niv,Iflag,S,P,Ip,Inhomo,V,W,Wcnd)
             IF ( P(jq)>y ) THEN
               y = P(jq)
               ix = j
-            ENDIF
-          ENDDO
+            END IF
+          END DO
           IF ( N/=NFCc ) jp = kp
           !                       ************************************************
           IF ( INDpvt==1 ) ix = ip1
@@ -258,7 +258,7 @@ SUBROUTINE DMGSBV(M,N,A,Ia,Niv,Iflag,S,P,Ip,Inhomo,V,W,Wcnd)
           !           ............EXIT
           IF ( y<=EPS*S(ix) ) GOTO 50
           Wcnd = MIN(Wcnd,y/S(ix))
-        ENDIF
+        END IF
         !
         !                    COMPUTE ORTHOGONAL PROJECTION OF PARTICULAR
         !                    SOLUTION
@@ -270,7 +270,7 @@ SUBROUTINE DMGSBV(M,N,A,Ia,Niv,Iflag,S,P,Ip,Inhomo,V,W,Wcnd)
           W(lr) = DDOT(M,A(1,nr),1,V,1)*ry
           DO i = 1, M
             V(i) = V(i) - W(lr)*A(i,nr)
-          ENDDO
+          END DO
           !                 ...EXIT
           IF ( N/=NFCc ) THEN
             lr = 2*nr
@@ -279,10 +279,10 @@ SUBROUTINE DMGSBV(M,N,A,Ia,Niv,Iflag,S,P,Ip,Inhomo,V,W,Wcnd)
               l = m2 + k
               V(k) = V(k) + W(lr)*A(l,nr)
               V(l) = V(l) - W(lr)*A(k,nr)
-            ENDDO
-          ENDIF
-        ENDIF
-      ENDDO
+            END DO
+          END IF
+        END IF
+      END DO
       !              *********************************************************
       !
       !                  TEST FOR LINEAR DEPENDENCE OF PARTICULAR SOLUTION
@@ -294,11 +294,11 @@ SUBROUTINE DMGSBV(M,N,A,Ia,Niv,Iflag,S,P,Ip,Inhomo,V,W,Wcnd)
       IF ( S(np1)/=0.0D0 ) Wcnd = MIN(Wcnd,vnorm/S(np1))
       !        ......EXIT
       IF ( vnorm>=EPS*S(np1) ) RETURN
-    ENDIF
-    50     Iflag = 2
+    END IF
+    50  Iflag = 2
     Wcnd = EPS
   ELSE
     Iflag = 1
-  ENDIF
+  END IF
   RETURN
 END SUBROUTINE DMGSBV

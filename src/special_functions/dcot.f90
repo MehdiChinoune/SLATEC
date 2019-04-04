@@ -61,7 +61,7 @@ REAL(8) FUNCTION DCOT(X)
     xmin = EXP(MAX(LOG(D1MACH(1)),-LOG(D1MACH(2)))+0.01D0)
     sqeps = SQRT(D1MACH(4))
     first = .FALSE.
-  ENDIF
+  END IF
   !
   y = ABS(X)
   IF ( y<xmin ) CALL XERMSG('SLATEC','DCOT',&
@@ -100,7 +100,7 @@ REAL(8) FUNCTION DCOT(X)
   ELSE
     DCOT = (0.5D0+DCSEVL(8.D0*y*y-1.D0,cotcs,nterms))/(0.5D0*y)
     DCOT = (DCOT*DCOT-1.D0)*0.5D0/DCOT
-  ENDIF
+  END IF
   !
   IF ( X/=0.D0 ) DCOT = SIGN(DCOT,X)
   IF ( ifn==1 ) DCOT = -DCOT

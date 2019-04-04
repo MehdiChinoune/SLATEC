@@ -66,7 +66,7 @@ REAL FUNCTION AI(X)
     xmaxt = (-1.5*LOG(R1MACH(1)))**0.6667
     xmax = xmaxt - xmaxt*LOG(xmaxt)/(4.0*SQRT(xmaxt)+1.0) - 0.01
     first = .FALSE.
-  ENDIF
+  END IF
   !
   IF ( X<(-1.0) ) THEN
     CALL R9AIMP(X,xm,theta)
@@ -84,7 +84,7 @@ REAL FUNCTION AI(X)
     AI = 0.0
     CALL XERMSG('SLATEC','AI','X SO BIG AI UNDERFLOWS',1,1)
     RETURN
-  ENDIF
+  END IF
   AI = AIE(X)*EXP(-2.0*X*SQRT(X)/3.0)
   RETURN
 END FUNCTION AI

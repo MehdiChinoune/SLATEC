@@ -116,7 +116,7 @@ SUBROUTINE CGEIR(A,Lda,N,V,Itask,Ind,Work,Iwork)
   !   900510  Convert XERRWV calls to XERMSG calls, cvt GOTO's to
   !           IF-THEN-ELSE.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   !
   INTEGER Lda, N, Itask, Ind, Iwork(*), info, j
   COMPLEX A(Lda,*), V(*), Work(N,*), CDCDOT
@@ -130,27 +130,27 @@ SUBROUTINE CGEIR(A,Lda,N,V,Itask,Ind,Work,Iwork)
     CALL XERMSG('SLATEC','CGEIR','LDA = '//xern1//' IS LESS THAN N = '//&
       xern2,-1,1)
     RETURN
-  ENDIF
+  END IF
   !
   IF ( N<=0 ) THEN
     Ind = -2
     WRITE (xern1,'(I8)') N
     CALL XERMSG('SLATEC','CGEIR','N = '//xern1//' IS LESS THAN 1',-2,1)
     RETURN
-  ENDIF
+  END IF
   !
   IF ( Itask<1 ) THEN
     Ind = -3
     WRITE (xern1,'(I8)') Itask
     CALL XERMSG('SLATEC','CGEIR','ITASK = '//xern1//' IS LESS THAN 1',-3,1)
     RETURN
-  ENDIF
+  END IF
   !
   IF ( Itask==1 ) THEN
     !        MOVE MATRIX A TO WORK
     DO j = 1, N
       CALL CCOPY(N,A(1,j),1,Work(1,j),1)
-    ENDDO
+    END DO
     !
     !        FACTOR MATRIX A INTO LU
     !
@@ -162,8 +162,8 @@ SUBROUTINE CGEIR(A,Lda,N,V,Itask,Ind,Work,Iwork)
       Ind = -4
       CALL XERMSG('SLATEC','CGEIR','SINGULAR MATRIX A - NO SOLUTION',-4,1)
       RETURN
-    ENDIF
-  ENDIF
+    END IF
+  END IF
   !
   !     SOLVE WHEN FACTORING COMPLETE
   !     MOVE VECTOR B TO WORK
@@ -177,13 +177,13 @@ SUBROUTINE CGEIR(A,Lda,N,V,Itask,Ind,Work,Iwork)
   IF ( xnorm==0.0 ) THEN
     Ind = 75
     RETURN
-  ENDIF
+  END IF
   !
   !     COMPUTE  RESIDUAL
   !
   DO j = 1, N
     Work(j,N+1) = CDCDOT(N,-Work(j,N+1),A(j,1),Lda,V,1)
-  ENDDO
+  END DO
   !
   !     SOLVE A*DELTA=R
   !
@@ -200,5 +200,5 @@ SUBROUTINE CGEIR(A,Lda,N,V,Itask,Ind,Work,Iwork)
   IF ( Ind<=0 ) THEN
     Ind = -10
     CALL XERMSG('SLATEC','CGEIR','SOLUTION MAY HAVE NO SIGNIFICANCE',-10,0)
-  ENDIF
+  END IF
 END SUBROUTINE CGEIR

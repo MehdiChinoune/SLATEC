@@ -20,7 +20,7 @@ SUBROUTINE TRIDQ(Mr,A,B,C,Y,D)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900308  Renamed routine from TRID to TRIDQ.  (WRB)
   !   900402  Added TYPE section.  (WRB)
-  
+
   REAL A(*), B(*), C(*), D(*), Y(*), z
   INTEGER i, ip, m, mm1, Mr
   !* FIRST EXECUTABLE STATEMENT  TRIDQ
@@ -33,15 +33,15 @@ SUBROUTINE TRIDQ(Mr,A,B,C,Y,D)
     z = 1./(B(i)-A(i)*D(i-1))
     D(i) = C(i)*z
     Y(i) = (Y(i)-A(i)*Y(i-1))*z
-  ENDDO
+  END DO
   z = B(m) - A(m)*D(mm1)
   IF ( z/=0. ) THEN
     Y(m) = (Y(m)-A(m)*Y(mm1))/z
   ELSE
     Y(m) = 0.
-  ENDIF
+  END IF
   DO ip = 1, mm1
     i = m - ip
     Y(i) = Y(i) - D(i)*Y(i+1)
-  ENDDO
+  END DO
 END SUBROUTINE TRIDQ

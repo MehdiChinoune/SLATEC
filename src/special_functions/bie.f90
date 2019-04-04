@@ -124,7 +124,7 @@ REAL FUNCTION BIE(X)
     x32sml = 1.3104*x3sml**2
     xbig = R1MACH(2)**0.6666
     first = .FALSE.
-  ENDIF
+  END IF
   !
   IF ( X<(-1.0) ) THEN
     CALL R9AIMP(X,xm,theta)
@@ -151,7 +151,7 @@ REAL FUNCTION BIE(X)
     IF ( X<xbig ) z = 16.0/(X*sqrtx) - 1.0
     BIE = (0.625+CSEVL(z,bip2cs,nbip2))/SQRT(sqrtx)
     RETURN
-  ENDIF
+  END IF
   sqrtx = SQRT(X)
   z = atr/(X*sqrtx) + btr
   BIE = (0.625+CSEVL(z,bipcs,nbip))/SQRT(sqrtx)

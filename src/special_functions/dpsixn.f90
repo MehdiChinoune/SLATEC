@@ -89,11 +89,11 @@ REAL(8) FUNCTION DPSIXN(N)
         trm = -b(k)*ax
         IF ( ABS(trm)<wdtol ) EXIT
         s = s + trm
-      ENDDO
-    ENDIF
+      END DO
+    END IF
     DPSIXN = s + LOG(fn)
   ELSE
     DPSIXN = c(N)
     RETURN
-  ENDIF
+  END IF
 END FUNCTION DPSIXN

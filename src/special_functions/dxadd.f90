@@ -80,12 +80,12 @@ SUBROUTINE DXADD(X,Ix,Y,Iy,Z,Iz,Ierror)
           ELSE
             Z = Y
             Iz = Iy
-          ENDIF
+          END IF
           CALL DXADJ(Z,Iz,Ierror)
           RETURN
-        ENDIF
-      ENDIF
-    ENDIF
+        END IF
+      END IF
+    END IF
     i = Ix - Iy
     IF ( i<0 ) THEN
       s = Y
@@ -105,14 +105,14 @@ SUBROUTINE DXADD(X,Ix,Y,Iy,Z,Iz,Ierror)
       ELSE
         Z = X + Y
         Iz = Ix
-      ENDIF
+      END IF
       CALL DXADJ(Z,Iz,Ierror)
       RETURN
     ELSE
       s = X
       is = Ix
       t = Y
-    ENDIF
+    END IF
     !
     !  AT THIS POINT, THE ONE OF (X,IX) OR (Y,IY) THAT HAS THE
     ! LARGER AUXILIARY INDEX IS STORED IN (S,IS). THE PRINCIPAL
@@ -131,14 +131,14 @@ SUBROUTINE DXADD(X,Ix,Y,Iy,Z,Iz,Ierror)
         j = i1 + 1
         t = t*RADix**(L-i2)
         GOTO 300
-      ENDIF
-    ENDIF
+      END IF
+    END IF
   ELSE
     Z = X
     Iz = Ix
     CALL DXADJ(Z,Iz,Ierror)
     RETURN
-  ENDIF
+  END IF
   100  j = i1
   t = t*RADix**(-i2)
   GOTO 300
@@ -166,7 +166,7 @@ SUBROUTINE DXADD(X,Ix,Y,Iy,Z,Iz,Ierror)
             GOTO 350
           CASE DEFAULT
         END SELECT
-      ENDIF
+      END IF
       IF ( RADixl*ABS(s)>=1.0D0 ) THEN
         SELECT CASE (j)
           CASE (1)
@@ -180,7 +180,7 @@ SUBROUTINE DXADD(X,Ix,Y,Iy,Z,Iz,Ierror)
             GOTO 320
         END SELECT
         GOTO 400
-      ENDIF
+      END IF
       320 CONTINUE
       SELECT CASE (j)
         CASE (1)
@@ -195,12 +195,12 @@ SUBROUTINE DXADD(X,Ix,Y,Iy,Z,Iz,Ierror)
       s = s*RADixl
       s = s*RADixl
       GOTO 400
-    ENDIF
-    350    Z = s
+    END IF
+    350  Z = s
     Iz = is
     CALL DXADJ(Z,Iz,Ierror)
     RETURN
-  ENDIF
+  END IF
   !
   !   AT THIS POINT, THE REMAINING DIFFERENCE IN THE
   ! AUXILIARY INDICES HAS BEEN USED TO EFFECT A RIGHT SHIFT
@@ -222,7 +222,7 @@ SUBROUTINE DXADD(X,Ix,Y,Iy,Z,Iz,Ierror)
   ELSE
     Z = s + t
     Iz = is - j*L
-  ENDIF
+  END IF
   CALL DXADJ(Z,Iz,Ierror)
   RETURN
 END SUBROUTINE DXADD

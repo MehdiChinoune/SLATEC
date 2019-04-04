@@ -117,7 +117,7 @@ SUBROUTINE DPCHFE(N,X,F,D,Incfd,Skip,Ne,Xe,Fe,Ierr)
   !   891006  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-  
+
   !  Programming notes:
   !
   !     1. To produce a single precision version, simply:
@@ -172,9 +172,9 @@ SUBROUTINE DPCHFE(N,X,F,D,Incfd,Skip,Ne,Xe,Fe,Ierr)
     ELSE
       DO i = 2, N
         IF ( X(i)<=X(i-1) ) GOTO 500
-      ENDDO
-    ENDIF
-  ENDIF
+      END DO
+    END IF
+  END IF
   !
   !  FUNCTION DEFINITION IS OK, GO ON.
   !
@@ -193,7 +193,7 @@ SUBROUTINE DPCHFE(N,X,F,D,Incfd,Skip,Ne,Xe,Fe,Ierr)
     !                              ( INTERVAL IS X(IL).LE.X.LT.X(IR) . )
     jfirst = 1
     ir = 2
-  ENDIF
+  END IF
   !
   !     SKIP OUT OF LOOP IF HAVE PROCESSED ALL EVALUATION POINTS.
   !
@@ -204,7 +204,7 @@ SUBROUTINE DPCHFE(N,X,F,D,Incfd,Skip,Ne,Xe,Fe,Ierr)
   !
   DO j = jfirst, Ne
     IF ( Xe(j)>=X(ir) ) GOTO 200
-  ENDDO
+  END DO
   j = Ne + 1
   GOTO 300
   !
@@ -238,9 +238,9 @@ SUBROUTINE DPCHFE(N,X,F,D,Incfd,Skip,Ne,Xe,Fe,Ierr)
       !           ELSE
       !              WE SHOULD NEVER HAVE GOTTEN HERE.
       Ierr = Ierr + next(2)
-    ENDIF
-    !           ENDIF
-    !        ENDIF
+    END IF
+    !           END IF
+    !        END IF
     !
     IF ( next(1)/=0 ) THEN
       !        IF (NEXT(1) .GT. 0)  THEN
@@ -255,7 +255,7 @@ SUBROUTINE DPCHFE(N,X,F,D,Incfd,Skip,Ne,Xe,Fe,Ierr)
         !              FIRST, LOCATE FIRST POINT TO LEFT OF X(IR-1).
         DO i = jfirst, j - 1
           IF ( Xe(i)<X(ir-1) ) GOTO 320
-        ENDDO
+        END DO
         !              NOTE-- CANNOT DROP THROUGH HERE UNLESS THERE IS AN ERROR
         !                     IN DCHFEV.
         GOTO 600
@@ -264,15 +264,15 @@ SUBROUTINE DPCHFE(N,X,F,D,Incfd,Skip,Ne,Xe,Fe,Ierr)
         !              THESE ARE ACTUALLY EXTRAPOLATION POINTS.
         Ierr = Ierr + next(1)
         GOTO 350
-      ENDIF
+      END IF
       !
       !              RESET J.  (THIS WILL BE THE NEW JFIRST.)
-      320      j = i
+      320  j = i
       !
       !              NOW FIND OUT HOW FAR TO BACK UP IN THE X-ARRAY.
       DO i = 1, ir - 1
         IF ( Xe(j)<X(i) ) EXIT
-      ENDDO
+      END DO
       !              NB-- CAN NEVER DROP THROUGH HERE, SINCE XE(J).LT.X(IR-1).
       !
       !              AT THIS POINT, EITHER  XE(J) .LT. X(1)
@@ -280,12 +280,12 @@ SUBROUTINE DPCHFE(N,X,F,D,Incfd,Skip,Ne,Xe,Fe,Ierr)
       !              RESET IR, RECOGNIZING THAT IT WILL BE INCREMENTED BEFORE
       !              CYCLING.
       ir = MAX(1,i-1)
-    ENDIF
-    !           ENDIF
-    !        ENDIF
+    END IF
+    !           END IF
+    !        END IF
     !
-    350    jfirst = j
-  ENDIF
+    350  jfirst = j
+  END IF
   !
   !     END OF IR-LOOP.
   !

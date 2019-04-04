@@ -107,7 +107,7 @@ SUBROUTINE SORTH(Vnew,V,Hes,N,Ll,Ldhes,Kmp,Snormw)
     Hes(i,Ll) = SDOT(N,V(1,i),1,Vnew,1)
     tem = -Hes(i,Ll)
     CALL SAXPY(N,tem,V(1,i),1,Vnew,1)
-  ENDDO
+  END DO
   !   -------------------------------------------------------------------
   !         Compute SNORMW = norm of VNEW.  If VNEW is small compared
   !         to its input value (in norm), then reorthogonalize VNEW to
@@ -124,8 +124,8 @@ SUBROUTINE SORTH(Vnew,V,Hes,N,Ll,Ldhes,Kmp,Snormw)
       Hes(i,Ll) = Hes(i,Ll) - tem
       CALL SAXPY(N,tem,V(1,i),1,Vnew,1)
       sumdsq = sumdsq + tem**2
-    ENDIF
-  ENDDO
+    END IF
+  END DO
   IF ( sumdsq==0.0E0 ) RETURN
   arg = MAX(0.0E0,Snormw**2-sumdsq)
   Snormw = SQRT(arg)

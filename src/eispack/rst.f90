@@ -79,7 +79,7 @@ SUBROUTINE RST(Nm,N,W,E,Matz,Z,Ierr)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   !
   INTEGER i, j, N, Nm, Ierr, Matz
   REAL W(*), E(*), Z(Nm,*)
@@ -94,14 +94,14 @@ SUBROUTINE RST(Nm,N,W,E,Matz,Z,Ierr)
       !
       DO j = 1, N
         Z(j,i) = 0.0E0
-      ENDDO
+      END DO
       !
       Z(i,i) = 1.0E0
-    ENDDO
+    END DO
     !
     CALL IMTQL2(Nm,N,W,E,Z,Ierr)
   ELSE
     !     .......... FIND EIGENVALUES ONLY ..........
     CALL IMTQL1(N,W,E,Ierr)
-  ENDIF
+  END IF
 END SUBROUTINE RST

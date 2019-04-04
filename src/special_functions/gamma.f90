@@ -68,7 +68,7 @@ REAL FUNCTION GAMMA(X)
     ! FINISH INITIALIZATION.  START EVALUATING GAMMA(X).
     !
     first = .FALSE.
-  ENDIF
+  END IF
   !
   y = ABS(X)
   IF ( y>10.0 ) THEN
@@ -120,15 +120,15 @@ REAL FUNCTION GAMMA(X)
       !
       DO i = 1, n
         GAMMA = GAMMA/(X+i-1)
-      ENDDO
+      END DO
       RETURN
-    ENDIF
-  ENDIF
+    END IF
+  END IF
   !
   ! GAMMA(X) FOR X .GE. 2.
   !
   DO i = 1, n
     GAMMA = (y+i)*GAMMA
-  ENDDO
+  END DO
   RETURN
 END FUNCTION GAMMA

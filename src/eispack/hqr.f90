@@ -84,7 +84,7 @@ SUBROUTINE HQR(Nm,N,Low,Igh,H,Wr,Wi,Ierr)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   !
   INTEGER i, j, k, l, m, N, en, ll, mm, na, Nm, Igh, itn, its, &
     Low, mp2, enm2, Ierr
@@ -102,14 +102,14 @@ SUBROUTINE HQR(Nm,N,Low,Igh,H,Wr,Wi,Ierr)
     !
     DO j = k, N
       norm = norm + ABS(H(i,j))
-    ENDDO
+    END DO
     !
     k = i
     IF ( i<Low.OR.i>Igh ) THEN
       Wr(i) = H(i,i)
       Wi(i) = 0.0E0
-    ENDIF
-  ENDDO
+    END IF
+  END DO
   !
   en = Igh
   t = 0.0E0
@@ -130,7 +130,7 @@ SUBROUTINE HQR(Nm,N,Low,Igh,H,Wr,Wi,Ierr)
     IF ( s==0.0E0 ) s = norm
     s2 = s + ABS(H(l,l-1))
     IF ( s2==s ) EXIT
-  ENDDO
+  END DO
   !     .......... FORM SHIFT ..........
   x = H(en,en)
   IF ( l==en ) THEN
@@ -161,7 +161,7 @@ SUBROUTINE HQR(Nm,N,Low,Igh,H,Wr,Wi,Ierr)
         IF ( zz/=0.0E0 ) Wr(en) = x - w/zz
         Wi(na) = 0.0E0
         Wi(en) = 0.0E0
-      ENDIF
+      END IF
       en = enm2
     ELSEIF ( itn==0 ) THEN
       !     .......... SET ERROR -- NO CONVERGENCE TO AN
@@ -175,13 +175,13 @@ SUBROUTINE HQR(Nm,N,Low,Igh,H,Wr,Wi,Ierr)
         !
         DO i = Low, en
           H(i,i) = H(i,i) - x
-        ENDDO
+        END DO
         !
         s = ABS(H(en,na)) + ABS(H(na,enm2))
         x = 0.75E0*s
         y = x
         w = -0.4375E0*s*s
-      ENDIF
+      END IF
       its = its + 1
       itn = itn - 1
       !     .......... LOOK FOR TWO CONSECUTIVE SMALL
@@ -203,14 +203,14 @@ SUBROUTINE HQR(Nm,N,Low,Igh,H,Wr,Wi,Ierr)
         s1 = ABS(p)*(ABS(H(m-1,m-1))+ABS(zz)+ABS(H(m+1,m+1)))
         s2 = s1 + ABS(H(m,m-1))*(ABS(q)+ABS(r))
         IF ( s2==s1 ) EXIT
-      ENDDO
+      END DO
       !
       mp2 = m + 2
       !
       DO i = mp2, en
         H(i,i-2) = 0.0E0
         IF ( i/=mp2 ) H(i,i-3) = 0.0E0
-      ENDDO
+      END DO
       !     .......... DOUBLE QR STEP INVOLVING ROWS L TO EN AND
       !                COLUMNS M TO EN ..........
       DO k = m, na
@@ -225,13 +225,13 @@ SUBROUTINE HQR(Nm,N,Low,Igh,H,Wr,Wi,Ierr)
           p = p/x
           q = q/x
           r = r/x
-        ENDIF
+        END IF
         s = SIGN(SQRT(p*p+q*q+r*r),p)
         IF ( k==m ) THEN
           IF ( l/=m ) H(k,k-1) = -H(k,k-1)
         ELSE
           H(k,k-1) = -s*x
-        ENDIF
+        END IF
         p = p + s
         x = p/s
         y = q/s
@@ -244,10 +244,10 @@ SUBROUTINE HQR(Nm,N,Low,Igh,H,Wr,Wi,Ierr)
           IF ( notlas ) THEN
             p = p + r*H(k+2,j)
             H(k+2,j) = H(k+2,j) - p*zz
-          ENDIF
+          END IF
           H(k+1,j) = H(k+1,j) - p*y
           H(k,j) = H(k,j) - p*x
-        ENDDO
+        END DO
         !
         j = MIN(en,k+3)
         !     .......... COLUMN MODIFICATION ..........
@@ -256,16 +256,16 @@ SUBROUTINE HQR(Nm,N,Low,Igh,H,Wr,Wi,Ierr)
           IF ( notlas ) THEN
             p = p + zz*H(i,k+2)
             H(i,k+2) = H(i,k+2) - p*r
-          ENDIF
+          END IF
           H(i,k+1) = H(i,k+1) - p*q
           H(i,k) = H(i,k) - p
-        ENDDO
+        END DO
         !
-      ENDDO
+      END DO
       !
       GOTO 200
-    ENDIF
-  ENDIF
+    END IF
+  END IF
   GOTO 100
   RETURN
 END SUBROUTINE HQR

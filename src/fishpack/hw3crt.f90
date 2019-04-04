@@ -369,7 +369,7 @@ SUBROUTINE HW3CRT(Xs,Xf,L,Lbdcnd,Bdxs,Bdxf,Ys,Yf,M,Mbdcnd,Bdys,Bdyf,Zs,Zf,&
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
-  
+
   INTEGER i, Ierror, ir, iwb, iwc, iww, j, k, L, Lbdcnd, Ldimf, &
     lp, lp1, lstart, lstop, lstpm1, lunk, M, Mbdcnd, Mdimf
   REAL Bdxf(Mdimf,*), Bdxs(Mdimf,*), Bdyf(Ldimf,*), Bdys(Ldimf,*), &
@@ -411,7 +411,7 @@ SUBROUTINE HW3CRT(Xs,Xf,L,Lbdcnd,Bdxs,Bdxf,Ys,Yf,M,Mbdcnd,Bdys,Bdyf,Zs,Zf,&
       CASE DEFAULT
         mstop = mp1
     END SELECT
-    50     munk = mstop - mstart + 1
+    50  munk = mstop - mstart + 1
     dz = (Zf-Zs)/N
     twbydz = 2./dz
     np = Nbdcnd + 1
@@ -431,7 +431,7 @@ SUBROUTINE HW3CRT(Xs,Xf,L,Lbdcnd,Bdxs,Bdxf,Ys,Yf,M,Mbdcnd,Bdys,Bdyf,Zs,Zf,&
       CASE DEFAULT
         nstop = np1
     END SELECT
-    100    nunk = nstop - nstart + 1
+    100  nunk = nstop - nstart + 1
     lp1 = L + 1
     dx = (Xf-Xs)/L
     c1 = 1./(dx**2)
@@ -449,15 +449,15 @@ SUBROUTINE HW3CRT(Xs,Xf,L,Lbdcnd,Bdxs,Bdxf,Ys,Yf,M,Mbdcnd,Bdys,Bdyf,Zs,Zf,&
         DO j = mstart, mstop
           DO k = nstart, nstop
             F(1,j,k) = F(1,j,k) + twbydx*Bdxs(j,k)
-          ENDDO
-        ENDDO
+          END DO
+        END DO
       CASE DEFAULT
         lstart = 2
         DO j = mstart, mstop
           DO k = nstart, nstop
             F(2,j,k) = F(2,j,k) - c1*F(1,j,k)
-          ENDDO
-        ENDDO
+          END DO
+        END DO
     END SELECT
     SELECT CASE (lp)
       CASE (1)
@@ -466,16 +466,16 @@ SUBROUTINE HW3CRT(Xs,Xf,L,Lbdcnd,Bdxs,Bdxf,Ys,Yf,M,Mbdcnd,Bdys,Bdyf,Zs,Zf,&
         DO j = mstart, mstop
           DO k = nstart, nstop
             F(lp1,j,k) = F(lp1,j,k) - twbydx*Bdxf(j,k)
-          ENDDO
-        ENDDO
+          END DO
+        END DO
       CASE DEFAULT
         DO j = mstart, mstop
           DO k = nstart, nstop
             F(L,j,k) = F(L,j,k) - c1*F(lp1,j,k)
-          ENDDO
-        ENDDO
+          END DO
+        END DO
     END SELECT
-    150    lunk = lstop - lstart + 1
+    150  lunk = lstop - lstart + 1
     !
     !     ENTER BOUNDARY DATA FOR Y-BOUNDARIES.
     !
@@ -486,14 +486,14 @@ SUBROUTINE HW3CRT(Xs,Xf,L,Lbdcnd,Bdxs,Bdxf,Ys,Yf,M,Mbdcnd,Bdys,Bdyf,Zs,Zf,&
         DO i = lstart, lstop
           DO k = nstart, nstop
             F(i,1,k) = F(i,1,k) + twbydy*Bdys(i,k)
-          ENDDO
-        ENDDO
+          END DO
+        END DO
       CASE DEFAULT
         DO i = lstart, lstop
           DO k = nstart, nstop
             F(i,2,k) = F(i,2,k) - c2*F(i,1,k)
-          ENDDO
-        ENDDO
+          END DO
+        END DO
     END SELECT
     SELECT CASE (mp)
       CASE (1)
@@ -501,14 +501,14 @@ SUBROUTINE HW3CRT(Xs,Xf,L,Lbdcnd,Bdxs,Bdxf,Ys,Yf,M,Mbdcnd,Bdys,Bdyf,Zs,Zf,&
         DO i = lstart, lstop
           DO k = nstart, nstop
             F(i,mp1,k) = F(i,mp1,k) - twbydy*Bdyf(i,k)
-          ENDDO
-        ENDDO
+          END DO
+        END DO
       CASE DEFAULT
         DO i = lstart, lstop
           DO k = nstart, nstop
             F(i,M,k) = F(i,M,k) - c2*F(i,mp1,k)
-          ENDDO
-        ENDDO
+          END DO
+        END DO
     END SELECT
     !
     !     ENTER BOUNDARY DATA FOR Z-BOUNDARIES.
@@ -521,14 +521,14 @@ SUBROUTINE HW3CRT(Xs,Xf,L,Lbdcnd,Bdxs,Bdxf,Ys,Yf,M,Mbdcnd,Bdys,Bdyf,Zs,Zf,&
         DO i = lstart, lstop
           DO j = mstart, mstop
             F(i,j,1) = F(i,j,1) + twbydz*Bdzs(i,j)
-          ENDDO
-        ENDDO
+          END DO
+        END DO
       CASE DEFAULT
         DO i = lstart, lstop
           DO j = mstart, mstop
             F(i,j,2) = F(i,j,2) - c3*F(i,j,1)
-          ENDDO
-        ENDDO
+          END DO
+        END DO
     END SELECT
     SELECT CASE (np)
       CASE (1)
@@ -536,19 +536,19 @@ SUBROUTINE HW3CRT(Xs,Xf,L,Lbdcnd,Bdxs,Bdxf,Ys,Yf,M,Mbdcnd,Bdys,Bdyf,Zs,Zf,&
         DO i = lstart, lstop
           DO j = mstart, mstop
             F(i,j,np1) = F(i,j,np1) - twbydz*Bdzf(i,j)
-          ENDDO
-        ENDDO
+          END DO
+        END DO
       CASE DEFAULT
         DO i = lstart, lstop
           DO j = mstart, mstop
             F(i,j,N) = F(i,j,N) - c3*F(i,j,np1)
-          ENDDO
-        ENDDO
+          END DO
+        END DO
     END SELECT
     !
     !     DEFINE A,B,C COEFFICIENTS IN W-ARRAY.
     !
-    250    iwb = nunk + 1
+    250  iwb = nunk + 1
     iwc = iwb + nunk
     iww = iwc + nunk
     DO k = 1, nunk
@@ -557,7 +557,7 @@ SUBROUTINE HW3CRT(Xs,Xf,L,Lbdcnd,Bdxs,Bdxf,Ys,Yf,M,Mbdcnd,Bdys,Bdyf,Zs,Zf,&
       W(i) = c3
       i = iwb + k - 1
       W(i) = -2.*c3 + Elmbda
-    ENDDO
+    END DO
     SELECT CASE (np)
       CASE (1,2)
         GOTO 300
@@ -570,7 +570,7 @@ SUBROUTINE HW3CRT(Xs,Xf,L,Lbdcnd,Bdxs,Bdxf,Ys,Yf,M,Mbdcnd,Bdys,Bdyf,Zs,Zf,&
       CASE DEFAULT
         W(iwb-1) = 2.*c3
     END SELECT
-    300    Pertrb = 0.
+    300  Pertrb = 0.
     !
     !     FOR SINGULAR PROBLEMS ADJUST DATA TO INSURE A SOLUTION WILL EXIST.
     !
@@ -596,48 +596,48 @@ SUBROUTINE HW3CRT(Xs,Xf,L,Lbdcnd,Bdxs,Bdxf,Ys,Yf,M,Mbdcnd,Bdys,Bdyf,Zs,Zf,&
                     DO j = 2, mstpm1
                       DO i = 2, lstpm1
                         s1 = s1 + F(i,j,k)
-                      ENDDO
+                      END DO
                       s1 = s1 + (F(1,j,k)+F(lstop,j,k))/xlp
-                    ENDDO
+                    END DO
                     s2 = 0.
                     DO i = 2, lstpm1
                       s2 = s2 + F(i,1,k) + F(i,mstop,k)
-                    ENDDO
+                    END DO
                     s2 = (s2+(F(1,1,k)+F(1,mstop,k)+F(lstop,1,k)+F(lstop,mstop,k))&
                       /xlp)/ylp
                     s1 = s1 + s2
-                  ENDDO
+                  END DO
                   s = (F(1,1,1)+F(lstop,1,1)+F(1,1,nstop)+F(lstop,1,nstop)&
                     +F(1,mstop,1)+F(lstop,mstop,1)+F(1,mstop,nstop)&
                     +F(lstop,mstop,nstop))/(xlp*ylp)
                   DO j = 2, mstpm1
                     DO i = 2, lstpm1
                       s = s + F(i,j,1) + F(i,j,nstop)
-                    ENDDO
-                  ENDDO
+                    END DO
+                  END DO
                   s2 = 0.
                   DO i = 2, lstpm1
                     s2 = s2 + F(i,1,1) + F(i,1,nstop) + F(i,mstop,1)&
                       + F(i,mstop,nstop)
-                  ENDDO
+                  END DO
                   s = s2/ylp + s
                   s2 = 0.
                   DO j = 2, mstpm1
                     s2 = s2 + F(1,j,1) + F(1,j,nstop) + F(lstop,j,1)&
                       + F(lstop,j,nstop)
-                  ENDDO
+                  END DO
                   s = s2/xlp + s
                   Pertrb = (s/zlp+s1)/((lunk+1.-xlp)*(munk+1.-ylp)*(nunk+1.-zlp))
                   DO i = 1, lunk
                     DO j = 1, munk
                       DO k = 1, nunk
                         F(i,j,k) = F(i,j,k) - Pertrb
-                      ENDDO
-                    ENDDO
-                  ENDDO
+                      END DO
+                    END DO
+                  END DO
                 ELSE
                   Ierror = 12
-                ENDIF
+                END IF
             END SELECT
         END SELECT
     END SELECT
@@ -646,7 +646,7 @@ SUBROUTINE HW3CRT(Xs,Xf,L,Lbdcnd,Bdxs,Bdxf,Ys,Yf,M,Mbdcnd,Bdys,Bdyf,Zs,Zf,&
       nperod = 1
       W(1) = 0.
       W(iww-1) = 0.
-    ENDIF
+    END IF
     CALL POIS3D(Lbdcnd,lunk,c1,Mbdcnd,munk,c2,nperod,nunk,W,W(iwb),W(iwc),&
       Ldimf,Mdimf,F(lstart,mstart,nstart),ir,W(iww))
     !
@@ -656,40 +656,40 @@ SUBROUTINE HW3CRT(Xs,Xf,L,Lbdcnd,Bdxs,Bdxf,Ys,Yf,M,Mbdcnd,Bdys,Bdyf,Zs,Zf,&
       IF ( mp==1 ) THEN
         DO k = nstart, nstop
           F(1,mp1,k) = F(1,1,k)
-        ENDDO
+        END DO
         mstop = mp1
-      ENDIF
+      END IF
       IF ( np==1 ) THEN
         DO j = mstart, mstop
           F(1,j,np1) = F(1,j,1)
-        ENDDO
+        END DO
         nstop = np1
-      ENDIF
+      END IF
       DO j = mstart, mstop
         DO k = nstart, nstop
           F(lp1,j,k) = F(1,j,k)
-        ENDDO
-      ENDDO
-    ENDIF
+        END DO
+      END DO
+    END IF
     IF ( mp==1 ) THEN
       IF ( np==1 ) THEN
         DO i = lstart, lstop
           F(i,1,np1) = F(i,1,1)
-        ENDDO
+        END DO
         nstop = np1
-      ENDIF
+      END IF
       DO i = lstart, lstop
         DO k = nstart, nstop
           F(i,mp1,k) = F(i,1,k)
-        ENDDO
-      ENDDO
-    ENDIF
+        END DO
+      END DO
+    END IF
     IF ( np==1 ) THEN
       DO i = lstart, lstop
         DO j = mstart, mstop
           F(i,j,np1) = F(i,j,1)
-        ENDDO
-      ENDDO
-    ENDIF
-  ENDIF
+        END DO
+      END DO
+    END IF
+  END IF
 END SUBROUTINE HW3CRT

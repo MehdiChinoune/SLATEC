@@ -110,8 +110,8 @@ SUBROUTINE FDJAC3(FCN,M,N,X,Fvec,Fjac,Ldfjac,Iflag,Epsfcn,Wa)
     X(j) = temp
     DO i = 1, M
       Fjac(i,j) = (Wa(i)-Fvec(i))/h
-    ENDDO
-  ENDDO
+    END DO
+  END DO
   !
   !     LAST CARD OF SUBROUTINE FDJAC3.
   !

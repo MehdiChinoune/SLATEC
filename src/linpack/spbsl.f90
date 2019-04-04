@@ -91,7 +91,7 @@ SUBROUTINE SPBSL(Abd,Lda,N,M,B)
     lb = k - lm
     t = SDOT(lm,Abd(la,k),1,B(lb),1)
     B(k) = (B(k)-t)/Abd(M+1,k)
-  ENDDO
+  END DO
   !
   !     SOLVE R*X = Y
   !
@@ -103,5 +103,5 @@ SUBROUTINE SPBSL(Abd,Lda,N,M,B)
     B(k) = B(k)/Abd(M+1,k)
     t = -B(k)
     CALL SAXPY(lm,t,Abd(la,k),1,B(lb),1)
-  ENDDO
+  END DO
 END SUBROUTINE SPBSL

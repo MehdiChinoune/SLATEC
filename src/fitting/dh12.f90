@@ -54,7 +54,7 @@ SUBROUTINE DH12(Mode,Lpivot,L1,M,U,Iue,Up,C,Ice,Icv,Ncv)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   900911  Added DDOT to DOUBLE PRECISION statement.  (WRB)
-  
+
   INTEGER i, i2, i3, i4, Ice, Icv, incr, Iue, j, kl1, kl2, klp, &
     L1, l1m1, Lpivot, M, mml1p2, Mode, Ncv
   REAL(8) :: b, C(*), cl, clinv, one, ul1m1, sm, U(Iue,*), Up, DDOT
@@ -69,14 +69,14 @@ SUBROUTINE DH12(Mode,Lpivot,L1,M,U,Iue,Up,C,Ice,Icv,Ncv)
       !           ****** CONSTRUCT THE TRANSFORMATION. ******
       DO j = L1, M
         cl = MAX(ABS(U(1,j)),cl)
-      ENDDO
+      END DO
       !     .........EXIT
       IF ( cl<=0.0D0 ) RETURN
       clinv = one/cl
       sm = (U(1,Lpivot)*clinv)**2
       DO j = L1, M
         sm = sm + (U(1,j)*clinv)**2
-      ENDDO
+      END DO
       cl = cl*SQRT(sm)
       IF ( U(1,Lpivot)>0.0D0 ) cl = -cl
       Up = U(1,Lpivot) - cl
@@ -86,7 +86,7 @@ SUBROUTINE DH12(Mode,Lpivot,L1,M,U,Iue,Up,C,Ice,Icv,Ncv)
     ELSEIF ( cl<=0.0D0 ) THEN
       RETURN
       !     ......EXIT
-    ENDIF
+    END IF
     !     ...EXIT
     IF ( Ncv>0 ) THEN
       b = Up*U(1,Lpivot)
@@ -106,16 +106,16 @@ SUBROUTINE DH12(Mode,Lpivot,L1,M,U,Iue,Up,C,Ice,Icv,Ncv)
             DO i = L1, M
               sm = sm + C(i3)*U(1,i)
               i3 = i3 + Ice
-            ENDDO
+            END DO
             IF ( sm/=0.0D0 ) THEN
               sm = sm*b
               C(i2) = C(i2) + sm*Up
               DO i = L1, M
                 C(i4) = C(i4) + sm*U(1,i)
                 i4 = i4 + Ice
-              ENDDO
-            ENDIF
-          ENDDO
+              END DO
+            END IF
+          END DO
         ELSE
           l1m1 = L1 - 1
           kl1 = 1 + (l1m1-1)*Ice
@@ -129,17 +129,17 @@ SUBROUTINE DH12(Mode,Lpivot,L1,M,U,Iue,Up,C,Ice,Icv,Ncv)
             sm = sm*b
             CALL DAXPY(mml1p2,sm,U(1,l1m1),Iue,C(kl1),Ice)
             kl1 = kl1 + Icv
-          ENDDO
+          END DO
           U(1,l1m1) = ul1m1
           !     ......EXIT
           IF ( Lpivot/=l1m1 ) THEN
             kl1 = kl2
             CALL DSWAP(Ncv,C(kl1),Icv,C(klp),Icv)
-          ENDIF
-        ENDIF
+          END IF
+        END IF
         !     ......EXIT
-      ENDIF
-    ENDIF
-  ENDIF
+      END IF
+    END IF
+  END IF
   RETURN
 END SUBROUTINE DH12

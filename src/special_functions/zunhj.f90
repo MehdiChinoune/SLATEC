@@ -304,8 +304,8 @@ SUBROUTINE ZUNHJ(Zr,Zi,Fnu,Ipmtr,Tol,Phir,Phii,Argr,Argi,Zeta1r,Zeta1i,&
         IF ( zthr/=0.0D0 ) THEN
           ang = DATAN(zthi/zthr)
           IF ( zthr<0.0D0 ) ang = ang + gpi
-        ENDIF
-      ENDIF
+        END IF
+      END IF
       pp = azth**ex2
       ang = ang*ex2
       zetar = pp*COS(ang)
@@ -377,7 +377,7 @@ SUBROUTINE ZUNHJ(Zr,Zi,Fnu,Ipmtr,Tol,Phir,Phii,Argr,Argi,Zeta1r,Zeta1i,&
                 str = zar*t2r - t2i*zai + c(l)
                 zai = zar*t2i + zai*t2r
                 zar = str
-              ENDDO
+              END DO
               str = ptfnr*tfnr - ptfni*tfni
               ptfni = ptfnr*tfni + ptfni*tfnr
               ptfnr = str
@@ -390,7 +390,7 @@ SUBROUTINE ZUNHJ(Zr,Zi,Fnu,Ipmtr,Tol,Phir,Phii,Argr,Argi,Zeta1r,Zeta1i,&
               przthr = str
               drr(ks) = przthr*ar(ks+2)
               dri(ks) = przthi*ar(ks+2)
-            ENDDO
+            END DO
             pp = pp*rfnu2
             IF ( ias/=1 ) THEN
               sumar = upr(lrp1)
@@ -400,12 +400,12 @@ SUBROUTINE ZUNHJ(Zr,Zi,Fnu,Ipmtr,Tol,Phir,Phii,Argr,Argi,Zeta1r,Zeta1i,&
                 ju = ju - 1
                 sumar = sumar + crr(jr)*upr(ju) - cri(jr)*upi(ju)
                 sumai = sumai + crr(jr)*upi(ju) + cri(jr)*upr(ju)
-              ENDDO
+              END DO
               Asumr = Asumr + sumar
               Asumi = Asumi + sumai
               test = ABS(sumar) + ABS(sumai)
               IF ( pp<Tol.AND.test<Tol ) ias = 1
-            ENDIF
+            END IF
             IF ( ibs/=1 ) THEN
               sumbr = upr(lr+2) + upr(lrp1)*zcr - upi(lrp1)*zci
               sumbi = upi(lr+2) + upr(lrp1)*zci + upi(lrp1)*zcr
@@ -414,20 +414,20 @@ SUBROUTINE ZUNHJ(Zr,Zi,Fnu,Ipmtr,Tol,Phir,Phii,Argr,Argi,Zeta1r,Zeta1i,&
                 ju = ju - 1
                 sumbr = sumbr + drr(jr)*upr(ju) - dri(jr)*upi(ju)
                 sumbi = sumbi + drr(jr)*upi(ju) + dri(jr)*upr(ju)
-              ENDDO
+              END DO
               Bsumr = Bsumr + sumbr
               Bsumi = Bsumi + sumbi
               test = ABS(sumbr) + ABS(sumbi)
               IF ( pp<btol.AND.test<btol ) ibs = 1
-            ENDIF
+            END IF
             IF ( ias==1.AND.ibs==1 ) EXIT
-          ENDDO
-        ENDIF
+          END DO
+        END IF
         Asumr = Asumr + coner
         str = -Bsumr*rfn13
         sti = -Bsumi*rfn13
         CALL ZDIV(str,sti,rtztr,rtzti,Bsumr,Bsumi)
-      ENDIF
+      END IF
     ELSE
       !-----------------------------------------------------------------------
       !     POWER SERIES FOR ABS(W2).LE.0.25D0
@@ -446,10 +446,10 @@ SUBROUTINE ZUNHJ(Zr,Zi,Fnu,Ipmtr,Tol,Phir,Phii,Argr,Argi,Zeta1r,Zeta1i,&
           sumai = sumai + pi(k)*gama(k)
           ap(k) = ap(k-1)*aw2
           IF ( ap(k)<Tol ) GOTO 20
-        ENDDO
+        END DO
         k = 30
-      ENDIF
-      20       kmax = k
+      END IF
+      20  kmax = k
       zetar = w2r*sumar - w2i*sumai
       zetai = w2r*sumai + w2i*sumar
       Argr = zetar*fn23
@@ -476,7 +476,7 @@ SUBROUTINE ZUNHJ(Zr,Zi,Fnu,Ipmtr,Tol,Phir,Phii,Argr,Argi,Zeta1r,Zeta1i,&
         DO k = 1, kmax
           sumbr = sumbr + pr(k)*beta(k)
           sumbi = sumbi + pi(k)*beta(k)
-        ENDDO
+        END DO
         Asumr = zeror
         Asumi = zeroi
         Bsumr = sumbr
@@ -500,11 +500,11 @@ SUBROUTINE ZUNHJ(Zr,Zi,Fnu,Ipmtr,Tol,Phir,Phii,Argr,Argi,Zeta1r,Zeta1i,&
                 sumar = sumar + pr(k)*alfa(m)
                 sumai = sumai + pi(k)*alfa(m)
                 IF ( ap(k)<atol ) EXIT
-              ENDDO
+              END DO
               Asumr = Asumr + sumar*pp
               Asumi = Asumi + sumai*pp
               IF ( pp<Tol ) ias = 1
-            ENDIF
+            END IF
             IF ( ibs/=1 ) THEN
               sumbr = zeror
               sumbi = zeroi
@@ -513,22 +513,22 @@ SUBROUTINE ZUNHJ(Zr,Zi,Fnu,Ipmtr,Tol,Phir,Phii,Argr,Argi,Zeta1r,Zeta1i,&
                 sumbr = sumbr + pr(k)*beta(m)
                 sumbi = sumbi + pi(k)*beta(m)
                 IF ( ap(k)<atol ) EXIT
-              ENDDO
+              END DO
               Bsumr = Bsumr + sumbr*pp
               Bsumi = Bsumi + sumbi*pp
               IF ( pp<btol ) ibs = 1
-            ENDIF
+            END IF
             IF ( ias==1.AND.ibs==1 ) EXIT
             l1 = l1 + 30
             l2 = l2 + 30
-          ENDDO
-        ENDIF
+          END DO
+        END IF
         Asumr = Asumr + coner
         pp = rfnu*rfn13
         Bsumr = Bsumr*pp
         Bsumi = Bsumi*pp
-      ENDIF
-    ENDIF
+      END IF
+    END IF
   ELSE
     Zeta1r = 2.0D0*ABS(LOG(test)) + Fnu
     Zeta1i = 0.0D0
@@ -539,6 +539,6 @@ SUBROUTINE ZUNHJ(Zr,Zi,Fnu,Ipmtr,Tol,Phir,Phii,Argr,Argi,Zeta1r,Zeta1i,&
     Argr = 1.0D0
     Argi = 0.0D0
     RETURN
-  ENDIF
+  END IF
   RETURN
 END SUBROUTINE ZUNHJ

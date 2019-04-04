@@ -33,7 +33,7 @@ SUBROUTINE CDCOR(Dfdy,El,FA,H,Ierror,Impl,Ipvt,Matdim,Miter,Ml,Mu,N,Nde,&
   !* REVISION HISTORY  (YYMMDD)
   !   790601  DATE WRITTEN
   !   900329  Initial submission to SLATEC.
-  
+
   INTEGER i, Ierror, iflag, Impl, j, Jstate, Matdim, Miter, Ml, Mu, mw, N, Nde, Nq
   COMPLEX A(Matdim,*), Dfdy(Matdim,*), Save1(*), Save2(*), Y(*), Yh(N,*), Ywt(*)
   REAL D, El(13,12), H, SCNRM2, T
@@ -44,153 +44,153 @@ SUBROUTINE CDCOR(Dfdy,El,FA,H,Ierror,Impl,Ipvt,Matdim,Miter,Ml,Mu,N,Nde,&
     IF ( Ierror==1.OR.Ierror==5 ) THEN
       DO i = 1, N
         Save1(i) = (H*Save2(i)-Yh(i,2)-Save1(i))/Ywt(i)
-      ENDDO
+      END DO
     ELSE
       DO i = 1, N
         Save1(i) = (H*Save2(i)-Yh(i,2)-Save1(i))/MAX(ABS(Y(i)),ABS(Ywt(i)))
-      ENDDO
-    ENDIF
+      END DO
+    END IF
     D = SCNRM2(N,Save1,1)/SQRT(REAL(N))
     DO i = 1, N
       Save1(i) = H*Save2(i) - Yh(i,2)
-    ENDDO
+    END DO
   ELSEIF ( Miter==1.OR.Miter==2 ) THEN
     IF ( Impl==0 ) THEN
       DO i = 1, N
         Save2(i) = H*Save2(i) - Yh(i,2) - Save1(i)
-      ENDDO
+      END DO
     ELSEIF ( Impl==1 ) THEN
       IF ( Evalfa ) THEN
         CALL FA(N,T,Y,A,Matdim,Ml,Mu,Nde)
         IF ( N==0 ) THEN
           Jstate = 9
           RETURN
-        ENDIF
+        END IF
       ELSE
         Evalfa = .TRUE.
-      ENDIF
+      END IF
       DO i = 1, N
         Save2(i) = H*Save2(i)
-      ENDDO
+      END DO
       DO j = 1, N
         DO i = 1, N
           Save2(i) = Save2(i) - A(i,j)*(Yh(j,2)+Save1(j))
-        ENDDO
-      ENDDO
+        END DO
+      END DO
     ELSEIF ( Impl==2 ) THEN
       IF ( Evalfa ) THEN
         CALL FA(N,T,Y,A,Matdim,Ml,Mu,Nde)
         IF ( N==0 ) THEN
           Jstate = 9
           RETURN
-        ENDIF
+        END IF
       ELSE
         Evalfa = .TRUE.
-      ENDIF
+      END IF
       DO i = 1, N
         Save2(i) = H*Save2(i) - A(i,1)*(Yh(i,2)+Save1(i))
-      ENDDO
+      END DO
     ELSEIF ( Impl==3 ) THEN
       IF ( Evalfa ) THEN
         CALL FA(N,T,Y,A,Matdim,Ml,Mu,Nde)
         IF ( N==0 ) THEN
           Jstate = 9
           RETURN
-        ENDIF
+        END IF
       ELSE
         Evalfa = .TRUE.
-      ENDIF
+      END IF
       DO i = 1, N
         Save2(i) = H*Save2(i)
-      ENDDO
+      END DO
       DO j = 1, Nde
         DO i = 1, Nde
           Save2(i) = Save2(i) - A(i,j)*(Yh(j,2)+Save1(j))
-        ENDDO
-      ENDDO
-    ENDIF
+        END DO
+      END DO
+    END IF
     CALL CGESL(Dfdy,Matdim,N,Ipvt,Save2,0)
     IF ( Ierror==1.OR.Ierror==5 ) THEN
       DO i = 1, N
         Save1(i) = Save1(i) + Save2(i)
         Save2(i) = Save2(i)/Ywt(i)
-      ENDDO
+      END DO
     ELSE
       DO i = 1, N
         Save1(i) = Save1(i) + Save2(i)
         Save2(i) = Save2(i)/MAX(ABS(Y(i)),ABS(Ywt(i)))
-      ENDDO
-    ENDIF
+      END DO
+    END IF
     D = SCNRM2(N,Save2,1)/SQRT(REAL(N))
   ELSEIF ( Miter==4.OR.Miter==5 ) THEN
     IF ( Impl==0 ) THEN
       DO i = 1, N
         Save2(i) = H*Save2(i) - Yh(i,2) - Save1(i)
-      ENDDO
+      END DO
     ELSEIF ( Impl==1 ) THEN
       IF ( Evalfa ) THEN
         CALL FA(N,T,Y,A(Ml+1,1),Matdim,Ml,Mu,Nde)
         IF ( N==0 ) THEN
           Jstate = 9
           RETURN
-        ENDIF
+        END IF
       ELSE
         Evalfa = .TRUE.
-      ENDIF
+      END IF
       DO i = 1, N
         Save2(i) = H*Save2(i)
-      ENDDO
+      END DO
       mw = Ml + 1 + Mu
       DO j = 1, N
         DO i = MAX(Ml+1,mw+1-j), MIN(mw+N-j,mw+Ml)
           Save2(i+j-mw) = Save2(i+j-mw) - A(i,j)*(Yh(j,2)+Save1(j))
-        ENDDO
-      ENDDO
+        END DO
+      END DO
     ELSEIF ( Impl==2 ) THEN
       IF ( Evalfa ) THEN
         CALL FA(N,T,Y,A,Matdim,Ml,Mu,Nde)
         IF ( N==0 ) THEN
           Jstate = 9
           RETURN
-        ENDIF
+        END IF
       ELSE
         Evalfa = .TRUE.
-      ENDIF
+      END IF
       DO i = 1, N
         Save2(i) = H*Save2(i) - A(i,1)*(Yh(i,2)+Save1(i))
-      ENDDO
+      END DO
     ELSEIF ( Impl==3 ) THEN
       IF ( Evalfa ) THEN
         CALL FA(N,T,Y,A(Ml+1,1),Matdim,Ml,Mu,Nde)
         IF ( N==0 ) THEN
           Jstate = 9
           RETURN
-        ENDIF
+        END IF
       ELSE
         Evalfa = .TRUE.
-      ENDIF
+      END IF
       DO i = 1, N
         Save2(i) = H*Save2(i)
-      ENDDO
+      END DO
       mw = Ml + 1 + Mu
       DO j = 1, Nde
         DO i = MAX(Ml+1,mw+1-j), MIN(mw+Nde-j,mw+Ml)
           Save2(i+j-mw) = Save2(i+j-mw) - A(i,j)*(Yh(j,2)+Save1(j))
-        ENDDO
-      ENDDO
-    ENDIF
+        END DO
+      END DO
+    END IF
     CALL CGBSL(Dfdy,Matdim,N,Ml,Mu,Ipvt,Save2,0)
     IF ( Ierror==1.OR.Ierror==5 ) THEN
       DO i = 1, N
         Save1(i) = Save1(i) + Save2(i)
         Save2(i) = Save2(i)/Ywt(i)
-      ENDDO
+      END DO
     ELSE
       DO i = 1, N
         Save1(i) = Save1(i) + Save2(i)
         Save2(i) = Save2(i)/MAX(ABS(Y(i)),ABS(Ywt(i)))
-      ENDDO
-    ENDIF
+      END DO
+    END IF
     D = SCNRM2(N,Save2,1)/SQRT(REAL(N))
   ELSEIF ( Miter==3 ) THEN
     iflag = 2
@@ -198,18 +198,18 @@ SUBROUTINE CDCOR(Dfdy,El,FA,H,Ierror,Impl,Ipvt,Matdim,Miter,Ml,Mu,N,Nde,&
     IF ( N==0 ) THEN
       Jstate = 10
       RETURN
-    ENDIF
+    END IF
     IF ( Ierror==1.OR.Ierror==5 ) THEN
       DO i = 1, N
         Save1(i) = Save1(i) + Save2(i)
         Save2(i) = Save2(i)/Ywt(i)
-      ENDDO
+      END DO
     ELSE
       DO i = 1, N
         Save1(i) = Save1(i) + Save2(i)
         Save2(i) = Save2(i)/MAX(ABS(Y(i)),ABS(Ywt(i)))
-      ENDDO
-    ENDIF
+      END DO
+    END IF
     D = SCNRM2(N,Save2,1)/SQRT(REAL(N))
-  ENDIF
+  END IF
 END SUBROUTINE CDCOR

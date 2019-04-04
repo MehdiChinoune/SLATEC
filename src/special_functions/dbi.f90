@@ -104,7 +104,7 @@ REAL(8) FUNCTION DBI(X)
     x3sml = eta**0.3333
     xmax = (1.5*LOG(D1MACH(2)))**0.6666D0
     first = .FALSE.
-  ENDIF
+  END IF
   !
   IF ( X<(-1.0D0) ) THEN
     CALL D9AIMP(X,xm,theta)
@@ -123,7 +123,7 @@ REAL(8) FUNCTION DBI(X)
     !
     DBI = DBIE(X)*EXP(2.0D0*X*SQRT(X)/3.0D0)
     RETURN
-  ENDIF
+  END IF
   z = (2.0D0*X**3-9.0D0)/7.D0
   DBI = 1.125D0 + DCSEVL(z,bif2cs,nbif2)&
     + X*(0.625D0+DCSEVL(z,big2cs,nbig2))

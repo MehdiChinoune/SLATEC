@@ -46,5 +46,5 @@ SUBROUTINE ZBUNK(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Tol,Elim,Alim)
     !     -PI/3.LE.ARG(Z).LE.PI/3
     !-----------------------------------------------------------------------
     CALL ZUNK1(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Tol,Elim,Alim)
-  ENDIF
+  END IF
 END SUBROUTINE ZBUNK

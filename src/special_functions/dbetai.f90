@@ -55,7 +55,7 @@ REAL(8) FUNCTION DBETAI(X,Pin,Qin)
     sml = D1MACH(1)
     alnsml = LOG(sml)
     first = .FALSE.
-  ENDIF
+  END IF
   !
   IF ( X<0.D0.OR.X>1.D0 )&
     CALL XERMSG('SLATEC','DBETAI','X IS NOT IN THE RANGE (0,1)',1,2)
@@ -70,8 +70,8 @@ REAL(8) FUNCTION DBETAI(X,Pin,Qin)
       y = 1.0D0 - y
       p = Qin
       q = Pin
-    ENDIF
-  ENDIF
+    END IF
+  END IF
   !
   IF ( (p+q)*y/(p+1.D0)<eps ) THEN
     !
@@ -99,9 +99,9 @@ REAL(8) FUNCTION DBETAI(X,Pin,Qin)
           xi = i
           term = term*(xi-ps)*y/xi
           DBETAI = DBETAI + term/(p+xi)
-        ENDDO
-      ENDIF
-    ENDIF
+        END DO
+      END IF
+    END IF
     !
     ! NOW EVALUATE THE FINITE SUM, MAYBE.
     !
@@ -125,11 +125,11 @@ REAL(8) FUNCTION DBETAI(X,Pin,Qin)
         IF ( term>1.0D0 ) term = term*sml
         !
         IF ( ib==0 ) finsum = finsum + term
-      ENDDO
+      END DO
       !
       DBETAI = DBETAI + finsum
-    ENDIF
-  ENDIF
+    END IF
+  END IF
   IF ( y/=X.OR.p/=Pin ) DBETAI = 1.0D0 - DBETAI
   DBETAI = MAX(MIN(DBETAI,1.0D0),0.0D0)
   RETURN

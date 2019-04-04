@@ -16,7 +16,7 @@ SUBROUTINE PASS(Lun,Icnt,Itest)
   !   ??????  DATE WRITTEN
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920210  PURPOSE added and code restructured.  (WRB)
-  
+
   INTEGER Icnt, Itest, Lun
   !* FIRST EXECUTABLE STATEMENT  PASS
   IF ( Itest/=0 ) THEN
@@ -25,6 +25,6 @@ SUBROUTINE PASS(Lun,Icnt,Itest)
   ELSE
     WRITE (Lun,99002) Icnt
     99002 FORMAT (/' *****TEST NUMBER',I5,' FAILED**********')
-  ENDIF
+  END IF
   RETURN
 END SUBROUTINE PASS

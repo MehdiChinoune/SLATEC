@@ -65,7 +65,7 @@ SUBROUTINE PCOEF(L,C,Tc,A)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   REAL A(*), C, fac, save, Tc(*)
   INTEGER i, L, ll, llp1, llp2, new, nr
   !* FIRST EXECUTABLE STATEMENT  PCOEF
@@ -77,8 +77,8 @@ SUBROUTINE PCOEF(L,C,Tc,A)
     DO i = 3, llp1
       fac = fac*(i-1)
       Tc(i) = Tc(i)/fac
-    ENDDO
-  ENDIF
+    END DO
+  END IF
   IF ( L<0 ) THEN
     nr = llp1/2
     llp2 = ll + 2
@@ -87,6 +87,6 @@ SUBROUTINE PCOEF(L,C,Tc,A)
       new = llp2 - i
       Tc(i) = Tc(new)
       Tc(new) = save
-    ENDDO
-  ENDIF
+    END DO
+  END IF
 END SUBROUTINE PCOEF

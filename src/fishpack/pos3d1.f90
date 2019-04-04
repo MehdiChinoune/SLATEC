@@ -47,7 +47,7 @@ SUBROUTINE POS3D1(Lp,L,Mp,M,N,A,B,C,Ldimf,Mdimf,F,Xrt,Yrt,T,D,Wx,Wy,C1,C2,Bb)
       DO i = 3, lr, 2
         Xrt(i-1) = -4.*C1*(SIN((i-1)*dx))**2
         Xrt(i) = Xrt(i-1)
-      ENDDO
+      END DO
       CALL RFFTI(lr,Wx)
       GOTO 100
     CASE (2)
@@ -60,7 +60,7 @@ SUBROUTINE POS3D1(Lp,L,Mp,M,N,A,B,C,Ldimf,Mdimf,F,Xrt,Yrt,T,D,Wx,Wy,C1,C2,Bb)
   END SELECT
   DO i = 1, lr
     Xrt(i) = -4.*C1*(SIN((i-di)*dx))**2
-  ENDDO
+  END DO
   scalx = 2.*scalx
   SELECT CASE (Lp)
     CASE (1)
@@ -83,7 +83,7 @@ SUBROUTINE POS3D1(Lp,L,Mp,M,N,A,B,C,Ldimf,Mdimf,F,Xrt,Yrt,T,D,Wx,Wy,C1,C2,Bb)
       DO j = 3, mr, 2
         Yrt(j-1) = -4.*C2*(SIN((j-1)*dy))**2
         Yrt(j) = Yrt(j-1)
-      ENDDO
+      END DO
       CALL RFFTI(mr,Wy)
       GOTO 200
     CASE (2)
@@ -96,7 +96,7 @@ SUBROUTINE POS3D1(Lp,L,Mp,M,N,A,B,C,Ldimf,Mdimf,F,Xrt,Yrt,T,D,Wx,Wy,C1,C2,Bb)
   END SELECT
   DO j = 1, mr
     Yrt(j) = -4.*C2*(SIN((j-dj)*dy))**2
-  ENDDO
+  END DO
   scaly = 2.*scaly
   SELECT CASE (Mp)
     CASE (1)
@@ -119,7 +119,7 @@ SUBROUTINE POS3D1(Lp,L,Mp,M,N,A,B,C,Ldimf,Mdimf,F,Xrt,Yrt,T,D,Wx,Wy,C1,C2,Bb)
       DO k = 1, nr
         DO i = 1, lr
           T(i) = F(i,j,k)
-        ENDDO
+        END DO
         SELECT CASE (Lp)
           CASE (2)
             CALL SINT(lr,T,Wx)
@@ -128,7 +128,7 @@ SUBROUTINE POS3D1(Lp,L,Mp,M,N,A,B,C,Ldimf,Mdimf,F,Xrt,Yrt,T,D,Wx,Wy,C1,C2,Bb)
               CALL SINQB(lr,T,Wx)
             ELSE
               CALL SINQF(lr,T,Wx)
-            ENDIF
+            END IF
           CASE (4)
             CALL COST(lr,T,Wx)
           CASE (5)
@@ -136,27 +136,27 @@ SUBROUTINE POS3D1(Lp,L,Mp,M,N,A,B,C,Ldimf,Mdimf,F,Xrt,Yrt,T,D,Wx,Wy,C1,C2,Bb)
               CALL COSQB(lr,T,Wx)
             ELSE
               CALL COSQF(lr,T,Wx)
-            ENDIF
+            END IF
           CASE DEFAULT
             IF ( ifwrd==2 ) THEN
               CALL RFFTB(lr,T,Wx)
             ELSE
               CALL RFFTF(lr,T,Wx)
-            ENDIF
+            END IF
         END SELECT
         DO i = 1, lr
           F(i,j,k) = T(i)
-        ENDDO
-      ENDDO
-    ENDDO
+        END DO
+      END DO
+    END DO
     IF ( ifwrd==2 ) THEN
       DO i = 1, lr
         DO j = 1, mr
           DO k = 1, nr
             F(i,j,k) = F(i,j,k)/(scalx*scaly)
-          ENDDO
-        ENDDO
-      ENDDO
+          END DO
+        END DO
+      END DO
       EXIT
     ELSE
       DO
@@ -167,7 +167,7 @@ SUBROUTINE POS3D1(Lp,L,Mp,M,N,A,B,C,Ldimf,Mdimf,F,Xrt,Yrt,T,D,Wx,Wy,C1,C2,Bb)
           DO k = 1, nr
             DO j = 1, mr
               T(j) = F(i,j,k)
-            ENDDO
+            END DO
             SELECT CASE (Mp)
               CASE (2)
                 CALL SINT(mr,T,Wy)
@@ -176,7 +176,7 @@ SUBROUTINE POS3D1(Lp,L,Mp,M,N,A,B,C,Ldimf,Mdimf,F,Xrt,Yrt,T,D,Wx,Wy,C1,C2,Bb)
                   CALL SINQB(mr,T,Wy)
                 ELSE
                   CALL SINQF(mr,T,Wy)
-                ENDIF
+                END IF
               CASE (4)
                 CALL COST(mr,T,Wy)
               CASE (5)
@@ -184,19 +184,19 @@ SUBROUTINE POS3D1(Lp,L,Mp,M,N,A,B,C,Ldimf,Mdimf,F,Xrt,Yrt,T,D,Wx,Wy,C1,C2,Bb)
                   CALL COSQB(mr,T,Wy)
                 ELSE
                   CALL COSQF(mr,T,Wy)
-                ENDIF
+                END IF
               CASE DEFAULT
                 IF ( ifwrd==2 ) THEN
                   CALL RFFTB(mr,T,Wy)
                 ELSE
                   CALL RFFTF(mr,T,Wy)
-                ENDIF
+                END IF
             END SELECT
             DO j = 1, mr
               F(i,j,k) = T(j)
-            ENDDO
-          ENDDO
-        ENDDO
+            END DO
+          END DO
+        END DO
         IF ( ifwrd==2 ) EXIT
         !
         !     SOLVE TRIDIAGONAL SYSTEMS IN Z
@@ -206,15 +206,15 @@ SUBROUTINE POS3D1(Lp,L,Mp,M,N,A,B,C,Ldimf,Mdimf,F,Xrt,Yrt,T,D,Wx,Wy,C1,C2,Bb)
             DO k = 1, nr
               Bb(k) = B(k) + Xrt(i) + Yrt(j)
               T(k) = F(i,j,k)
-            ENDDO
+            END DO
             CALL TRIDQ(nr,A,Bb,C,T,D)
             DO k = 1, nr
               F(i,j,k) = T(k)
-            ENDDO
-          ENDDO
-        ENDDO
+            END DO
+          END DO
+        END DO
         ifwrd = 2
-      ENDDO
-    ENDIF
-  ENDDO
+      END DO
+    END IF
+  END DO
 END SUBROUTINE POS3D1

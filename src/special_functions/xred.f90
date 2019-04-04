@@ -69,28 +69,28 @@ SUBROUTINE XRED(X,Ix,Ierror)
         DO WHILE ( xa>=1.0 )
           xa = xa/RAD2l
           ixa1 = ixa1 + 1
-        ENDDO
+        END DO
         xa = xa*RADix**ixa2
         IF ( ixa1/=0 ) THEN
           DO i = 1, ixa1
             IF ( xa>1.0 ) RETURN
             xa = xa*RAD2l
-          ENDDO
-        ENDIF
+          END DO
+        END IF
       ELSE
         DO WHILE ( xa<=1.0 )
           xa = xa*RAD2l
           ixa1 = ixa1 + 1
-        ENDDO
+        END DO
         xa = xa/RADix**ixa2
         IF ( ixa1/=0 ) THEN
           DO i = 1, ixa1
             IF ( xa<1.0 ) RETURN
             xa = xa/RAD2l
-          ENDDO
-        ENDIF
-      ENDIF
-    ENDIF
+          END DO
+        END IF
+      END IF
+    END IF
     IF ( xa<=RAD2l ) THEN
       IF ( xa>1.0 ) THEN
         X = SIGN(xa,X)
@@ -98,8 +98,8 @@ SUBROUTINE XRED(X,Ix,Ierror)
       ELSEIF ( RAD2l*xa>=1.0 ) THEN
         X = SIGN(xa,X)
         Ix = 0
-      ENDIF
-    ENDIF
-  ENDIF
+      END IF
+    END IF
+  END IF
   RETURN
 END SUBROUTINE XRED

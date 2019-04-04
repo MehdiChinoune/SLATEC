@@ -49,8 +49,8 @@ SUBROUTINE STWAY(U,V,Yhp,Inout,Stowa)
       DO j = 1, NEQivp
         ksj = ks + j
         Yhp(ksj) = Stowa(ksj)
-      ENDDO
-    ENDIF
+      END DO
+    END IF
     ks = ks + NEQivp
     X = Stowa(ks+1)
     INFo(1) = 0
@@ -59,7 +59,7 @@ SUBROUTINE STWAY(U,V,Yhp,Inout,Stowa)
     IF ( NDIsk==0.OR.ko==0 ) RETURN
     DO k = 1, ko
       BACKSPACE NTApe
-    ENDDO
+    END DO
   ELSE
     !
     !     SAVE IN STOWA ARRAY AND ISTKOP
@@ -71,12 +71,12 @@ SUBROUTINE STWAY(U,V,Yhp,Inout,Stowa)
       DO j = 1, NEQivp
         ksj = ks + j
         Stowa(ksj) = Yhp(ksj)
-      ENDDO
-    ENDIF
+      END DO
+    END IF
     ks = ks + NEQivp
     Stowa(ks+1) = X
     ISTkop = KOP
     IF ( XOP==X ) ISTkop = KOP + 1
     RETURN
-  ENDIF
+  END IF
 END SUBROUTINE STWAY

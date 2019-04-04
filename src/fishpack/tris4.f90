@@ -44,7 +44,7 @@ SUBROUTINE TRIS4(N,A,B,C,D,U,Z)
     U(j) = -C(j-1)*U(j-1)/den
     bn = bn - v*U(j-1)
     v = -v*D(j-1)
-  ENDDO
+  END DO
   den = B(N-1) - C(N-2)*D(N-2)
   D(N-1) = (A(N)-C(N-2)*U(N-2))/den
   an = C(N-1) - v*D(N-2)
@@ -59,5 +59,5 @@ SUBROUTINE TRIS4(N,A,B,C,D,U,Z)
   DO j = 2, nm1
     k = N - j
     Z(k) = -D(k)*Z(k+1) - U(k)*Z(N)
-  ENDDO
+  END DO
 END SUBROUTINE TRIS4

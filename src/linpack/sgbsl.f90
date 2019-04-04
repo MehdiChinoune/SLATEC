@@ -86,7 +86,7 @@ SUBROUTINE SGBSL(Abd,Lda,N,Ml,Mu,Ipvt,B,Job)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   INTEGER Lda, N, Ml, Mu, Ipvt(*), Job
   REAL Abd(Lda,*), B(*)
   !
@@ -106,7 +106,7 @@ SUBROUTINE SGBSL(Abd,Lda,N,Ml,Mu,Ipvt,B,Job)
       lb = k - lm
       t = SDOT(lm,Abd(la,k),1,B(lb),1)
       B(k) = (B(k)-t)/Abd(m,k)
-    ENDDO
+    END DO
     !
     !        NOW SOLVE TRANS(L)*X = Y
     !
@@ -121,10 +121,10 @@ SUBROUTINE SGBSL(Abd,Lda,N,Ml,Mu,Ipvt,B,Job)
             t = B(l)
             B(l) = B(k)
             B(k) = t
-          ENDIF
-        ENDDO
-      ENDIF
-    ENDIF
+          END IF
+        END DO
+      END IF
+    END IF
   ELSE
     !
     !        JOB = 0, SOLVE  A * X = B
@@ -139,11 +139,11 @@ SUBROUTINE SGBSL(Abd,Lda,N,Ml,Mu,Ipvt,B,Job)
           IF ( l/=k ) THEN
             B(l) = B(k)
             B(k) = t
-          ENDIF
+          END IF
           CALL SAXPY(lm,t,Abd(m+1,k),1,B(k+1),1)
-        ENDDO
-      ENDIF
-    ENDIF
+        END DO
+      END IF
+    END IF
     !
     !        NOW SOLVE  U*X = Y
     !
@@ -155,6 +155,6 @@ SUBROUTINE SGBSL(Abd,Lda,N,Ml,Mu,Ipvt,B,Job)
       lb = k - lm
       t = -B(k)
       CALL SAXPY(lm,t,Abd(la,k),1,B(lb),1)
-    ENDDO
-  ENDIF
+    END DO
+  END IF
 END SUBROUTINE SGBSL

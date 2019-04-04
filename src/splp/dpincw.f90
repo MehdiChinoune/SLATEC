@@ -37,7 +37,7 @@ SUBROUTINE DPINCW(Mrelas,Nvars,Lmx,Lbm,Npp,Jstrt,Ibasis,Imat,Ibrc,Ipr,Iwr,&
   !   890606  Changed references from IPLOC to IDLOC.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
-  
+
   INTEGER i, IDLOC, ihi, il1, ilow, ipage, iu1, j, Jstrt, key, &
     Lbm, Lmx, lpg, Mrelas, nnegrc, Npp, Nvars
   INTEGER Ibasis(*), Imat(*), Ibrc(Lbm,2), Ipr(*), Iwr(*), Ind(*), Ibb(*)
@@ -78,7 +78,7 @@ SUBROUTINE DPINCW(Mrelas,Nvars,Lmx,Lbm,Npp,Jstrt,Ibasis,Imat,Ibrc,Ipr,Iwr,&
       trans = .FALSE.
       CALL LA05BD(Basmat,Ibrc,Lbm,Mrelas,Ipr,Iwr,Wr,Gg,Ww,trans)
       Rg(j) = DDOT(Mrelas,Ww,1,Ww,1) + one
-    ENDIF
+    END IF
   ELSE
     rzj = Costsc*Costs(j)
     Ww(1) = zero
@@ -87,7 +87,7 @@ SUBROUTINE DPINCW(Mrelas,Nvars,Lmx,Lbm,Npp,Jstrt,Ibasis,Imat,Ibrc,Ipr,Iwr,&
       ilow = Imat(j+3) + 1
     ELSE
       ilow = Nvars + 5
-    ENDIF
+    END IF
     IF ( .NOT.(pagepl) ) THEN
       il1 = ihi + 1
     ELSE
@@ -95,9 +95,9 @@ SUBROUTINE DPINCW(Mrelas,Nvars,Lmx,Lbm,Npp,Jstrt,Ibasis,Imat,Ibrc,Ipr,Iwr,&
       IF ( il1>=Lmx-1 ) THEN
         ilow = ilow + 2
         il1 = IDLOC(ilow,Amat,Imat)
-      ENDIF
+      END IF
       ipage = ABS(Imat(Lmx-1))
-    ENDIF
+    END IF
     ihi = Imat(j+4) - (ilow-il1)
     DO
       iu1 = MIN(Lmx-2,ihi)
@@ -105,14 +105,14 @@ SUBROUTINE DPINCW(Mrelas,Nvars,Lmx,Lbm,Npp,Jstrt,Ibasis,Imat,Ibrc,Ipr,Iwr,&
       DO i = il1, iu1
         rzj = rzj - Amat(i)*Duals(Imat(i))
         Ww(Imat(i)) = Amat(i)*Csc(j)
-      ENDDO
+      END DO
       IF ( ihi<=Lmx-2 ) EXIT
       ipage = ipage + 1
       key = 1
       CALL DPRWPG(key,ipage,lpg,Amat,Imat)
       il1 = Nvars + 5
       ihi = ihi - lpg
-    ENDDO
+    END DO
     pagepl = ihi==(Lmx-2)
     Rz(j) = rzj*Csc(j)
     IF ( Stpedg ) THEN
@@ -122,8 +122,8 @@ SUBROUTINE DPINCW(Mrelas,Nvars,Lmx,Lbm,Npp,Jstrt,Ibasis,Imat,Ibrc,Ipr,Iwr,&
       !     THESE ARE NONBASIC DEPENDENT VARIABLES. THE COLS. ARE IMPLICITLY
       !     DEFINED.
       Rg(j) = DDOT(Mrelas,Ww,1,Ww,1) + one
-    ENDIF
-  ENDIF
+    END IF
+  END IF
   !
   rcost = Rz(j)
   IF ( MOD(Ibb(j),2)==0 ) rcost = -rcost

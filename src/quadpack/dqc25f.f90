@@ -220,7 +220,7 @@ SUBROUTINE DQC25F(F,A,B,Omega,Integr,Nrmom,Maxp1,Ksave,Result,Abserr,&
             +as-par2*(an+0.1D+01)*(an+0.2D+01)*v(i-2))&
             /(par2*(an-0.1D+01)*(an-0.2D+01))
           an = an + 0.2D+01
-        ENDDO
+        END DO
       ELSE
         !
         !           COMPUTE THE CHEBYSHEV MOMENTS AS THE SOLUTIONS OF A
@@ -237,7 +237,7 @@ SUBROUTINE DQC25F(F,A,B,Omega,Integr,Nrmom,Maxp1,Ksave,Result,Abserr,&
           d1(k+1) = (an+0.3D+01)*(an+0.4D+01)*par2
           v(k+3) = as - (an2-0.4D+01)*ac
           an = an + 0.2D+01
-        ENDDO
+        END DO
         an2 = an*an
         d(noequ) = -0.2D+01*(an2-0.4D+01)*(par22-an2-an2)
         v(noequ+3) = as - (an2-0.4D+01)*ac
@@ -255,10 +255,10 @@ SUBROUTINE DQC25F(F,A,B,Omega,Integr,Nrmom,Maxp1,Ksave,Result,Abserr,&
         !- **       DOUBLE PRECISION VERSION OF LINPACK ROUTINE SGTSL
         !
         CALL DGTSL(noequ,d1,d,d2,v(4),iers)
-      ENDIF
+      END IF
       DO j = 1, 13
         Chebmo(m,2*j-1) = v(j)
-      ENDDO
+      END DO
       !
       !           COMPUTE THE CHEBYSHEV MOMENTS WITH RESPECT TO SINE.
       !
@@ -278,7 +278,7 @@ SUBROUTINE DQC25F(F,A,B,Omega,Integr,Nrmom,Maxp1,Ksave,Result,Abserr,&
             +ac-par2*(an+0.1D+01)*(an+0.2D+01)*v(i-2))&
             /(par2*(an-0.1D+01)*(an-0.2D+01))
           an = an + 0.2D+01
-        ENDDO
+        END DO
       ELSE
         !
         !           COMPUTE THE CHEBYSHEV MOMENTS AS THE SOLUTIONS OF A BOUNDARY
@@ -293,7 +293,7 @@ SUBROUTINE DQC25F(F,A,B,Omega,Integr,Nrmom,Maxp1,Ksave,Result,Abserr,&
           d1(k+1) = (an+0.3D+01)*(an+0.4D+01)*par2
           v(k+2) = ac + (an2-0.4D+01)*as
           an = an + 0.2D+01
-        ENDDO
+        END DO
         an2 = an*an
         d(noequ) = -0.2D+01*(an2-0.4D+01)*(par22-an2-an2)
         v(noequ+2) = ac + (an2-0.4D+01)*as
@@ -311,11 +311,11 @@ SUBROUTINE DQC25F(F,A,B,Omega,Integr,Nrmom,Maxp1,Ksave,Result,Abserr,&
         !- **       DOUBLE PRECISION VERSION OF LINPACK ROUTINE SGTSL
         !
         CALL DGTSL(noequ,d1,d,d2,v(3),iers)
-      ENDIF
+      END IF
       DO j = 1, 12
         Chebmo(m,2*j) = v(j)
-      ENDDO
-    ENDIF
+      END DO
+    END IF
     IF ( Nrmom<Momcom ) m = Nrmom + 1
     IF ( Momcom<(Maxp1-1).AND.Nrmom>=Momcom ) Momcom = Momcom + 1
     !
@@ -329,7 +329,7 @@ SUBROUTINE DQC25F(F,A,B,Omega,Integr,Nrmom,Maxp1,Ksave,Result,Abserr,&
       isym = 26 - i
       fval(i) = F(hlgth*x(i-1)+centr)
       fval(isym) = F(centr-hlgth*x(i-1))
-    ENDDO
+    END DO
     CALL DQCHEB(x,fval,cheb12,cheb24)
     !
     !           COMPUTE THE INTEGRAL AND ERROR ESTIMATES.
@@ -341,7 +341,7 @@ SUBROUTINE DQC25F(F,A,B,Omega,Integr,Nrmom,Maxp1,Ksave,Result,Abserr,&
       resc12 = resc12 + cheb12(k)*Chebmo(m,k)
       ress12 = ress12 + cheb12(k+1)*Chebmo(m,k+1)
       k = k - 2
-    ENDDO
+    END DO
     resc24 = cheb24(25)*Chebmo(m,25)
     ress24 = 0.0D+00
     Resabs = ABS(cheb24(25))
@@ -351,7 +351,7 @@ SUBROUTINE DQC25F(F,A,B,Omega,Integr,Nrmom,Maxp1,Ksave,Result,Abserr,&
       ress24 = ress24 + cheb24(k+1)*Chebmo(m,k+1)
       Resabs = ABS(cheb24(k)) + ABS(cheb24(k+1))
       k = k - 2
-    ENDDO
+    END DO
     estc = ABS(resc24-resc12)
     ests = ABS(ress24-ress12)
     Resabs = Resabs*ABS(hlgth)
@@ -361,9 +361,9 @@ SUBROUTINE DQC25F(F,A,B,Omega,Integr,Nrmom,Maxp1,Ksave,Result,Abserr,&
     ELSE
       Result = conc*resc24 - cons*ress24
       Abserr = ABS(conc*estc) + ABS(cons*ests)
-    ENDIF
+    END IF
   ELSE
     CALL DQK15W(F,DQWGTF,Omega,p2,p3,p4,Integr,A,B,Result,Abserr,Resabs,Resasc)
     Neval = 15
-  ENDIF
+  END IF
 END SUBROUTINE DQC25F

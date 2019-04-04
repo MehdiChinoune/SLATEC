@@ -244,7 +244,7 @@ SUBROUTINE SPIGMR(N,R0,Sr,Sz,Jscal,Maxl,Maxlp1,Kmp,Nrsts,Jpre,MATVEC,&
   !
   DO i = 1, N
     Z(i) = 0
-  ENDDO
+  END DO
   !
   Iflag = 0
   Lgmr = 0
@@ -260,16 +260,16 @@ SUBROUTINE SPIGMR(N,R0,Sr,Sz,Jscal,Maxl,Maxlp1,Kmp,Nrsts,Jpre,MATVEC,&
     CALL SCOPY(N,R0,1,Wk,1)
     CALL MSOLVE(N,Wk,R0,Nelt,Ia,Ja,A,Isym,Rpar,Ipar)
     Nmsl = Nmsl + 1
-  ENDIF
+  END IF
   IF ( ((Jscal==2).OR.(Jscal==3)).AND.(Nrsts==0) ) THEN
     DO i = 1, N
       V(i,1) = R0(i)*Sr(i)
-    ENDDO
+    END DO
   ELSE
     DO i = 1, N
       V(i,1) = R0(i)
-    ENDDO
-  ENDIF
+    END DO
+  END IF
   r0nrm = SNRM2(N,V,1)
   iter = Nrsts*Maxl
   !
@@ -286,8 +286,8 @@ SUBROUTINE SPIGMR(N,R0,Sr,Sz,Jscal,Maxl,Maxlp1,Kmp,Nrsts,Jpre,MATVEC,&
   DO j = 1, Maxl
     DO i = 1, Maxlp1
       Hes(i,j) = 0
-    ENDDO
-  ENDDO
+    END DO
+  END DO
   !   -------------------------------------------------------------------
   !         Main loop to compute the vectors V(*,2) to V(*,MAXL).
   !         The running product PROD is needed for the convergence test.
@@ -307,27 +307,27 @@ SUBROUTINE SPIGMR(N,R0,Sr,Sz,Jscal,Maxl,Maxlp1,Kmp,Nrsts,Jpre,MATVEC,&
     IF ( (Jscal==1).OR.(Jscal==3) ) THEN
       DO i = 1, N
         Wk(i) = V(i,ll)/Sz(i)
-      ENDDO
+      END DO
     ELSE
       CALL SCOPY(N,V(1,ll),1,Wk,1)
-    ENDIF
+    END IF
     IF ( Jpre>0 ) THEN
       CALL MSOLVE(N,Wk,Z,Nelt,Ia,Ja,A,Isym,Rpar,Ipar)
       Nmsl = Nmsl + 1
       CALL MATVEC(N,Z,V(1,ll+1),Nelt,Ia,Ja,A,Isym)
     ELSE
       CALL MATVEC(N,Wk,V(1,ll+1),Nelt,Ia,Ja,A,Isym)
-    ENDIF
+    END IF
     IF ( Jpre<0 ) THEN
       CALL SCOPY(N,V(1,ll+1),1,Wk,1)
       CALL MSOLVE(N,Wk,V(1,ll+1),Nelt,Ia,Ja,A,Isym,Rpar,Ipar)
       Nmsl = Nmsl + 1
-    ENDIF
+    END IF
     IF ( (Jscal==2).OR.(Jscal==3) ) THEN
       DO i = 1, N
         V(i,ll+1) = V(i,ll+1)*Sr(i)
-      ENDDO
-    ENDIF
+      END DO
+    END IF
     CALL SORTH(V(1,ll+1),V,Hes,N,ll,Maxlp1,Kmp,snormw)
     Hes(ll+1,ll) = snormw
     CALL SHEQR(Hes,Maxlp1,ll,Q,info,ll)
@@ -350,18 +350,18 @@ SUBROUTINE SPIGMR(N,R0,Sr,Sz,Jscal,Maxl,Maxlp1,Kmp,Nrsts,Jpre,MATVEC,&
           c = Q(i2-1)
           DO k = 1, N
             Dl(k) = s*Dl(k) + c*V(k,ip1)
-          ENDDO
-        ENDDO
-      ENDIF
+          END DO
+        END DO
+      END IF
       s = Q(2*ll)
       c = Q(2*ll-1)/snormw
       llp1 = ll + 1
       DO k = 1, N
         Dl(k) = s*Dl(k) + c*V(k,llp1)
-      ENDDO
+      END DO
       dlnrm = SNRM2(N,Dl,1)
       rho = rho*dlnrm
-    ENDIF
+    END IF
     Rhol = rho
     !   -------------------------------------------------------------------
     !         Test for convergence.  If passed, compute approximation ZL.
@@ -377,7 +377,7 @@ SUBROUTINE SPIGMR(N,R0,Sr,Sz,Jscal,Maxl,Maxlp1,Kmp,Nrsts,Jpre,MATVEC,&
     !   -------------------------------------------------------------------
     tem = 1.0E0/snormw
     CALL SSCAL(N,tem,V(1,ll+1),1)
-  ENDDO
+  END DO
   IF ( rho<r0nrm ) THEN
     Iflag = 1
     !
@@ -392,7 +392,7 @@ SUBROUTINE SPIGMR(N,R0,Sr,Sz,Jscal,Maxl,Maxlp1,Kmp,Nrsts,Jpre,MATVEC,&
     !
     IF ( Nrmax>0 ) CALL SRLCAL(N,Kmp,Maxl,Maxl,V,Q,Dl,snormw,prod,r0nrm)
     GOTO 200
-  ENDIF
+  END IF
   100 CONTINUE
   IFlag = 2
   !
@@ -400,7 +400,7 @@ SUBROUTINE SPIGMR(N,R0,Sr,Sz,Jscal,Maxl,Maxlp1,Kmp,Nrsts,Jpre,MATVEC,&
   !
   DO i = 1, N
     Z(i) = 0
-  ENDDO
+  END DO
   RETURN
   !   -------------------------------------------------------------------
   !         Compute the approximation ZL to the solution.  Since the
@@ -411,24 +411,24 @@ SUBROUTINE SPIGMR(N,R0,Sr,Sz,Jscal,Maxl,Maxlp1,Kmp,Nrsts,Jpre,MATVEC,&
   llp1 = ll + 1
   DO k = 1, llp1
     R0(k) = 0
-  ENDDO
+  END DO
   R0(1) = r0nrm
   CALL SHELS(Hes,Maxlp1,ll,Q,R0)
   DO k = 1, N
     Z(k) = 0
-  ENDDO
+  END DO
   DO i = 1, ll
     CALL SAXPY(N,R0(i),V(1,i),1,Z,1)
-  ENDDO
+  END DO
   IF ( (Jscal==1).OR.(Jscal==3) ) THEN
     DO i = 1, N
       Z(i) = Z(i)/Sz(i)
-    ENDDO
-  ENDIF
+    END DO
+  END IF
   IF ( Jpre>0 ) THEN
     CALL SCOPY(N,Z,1,Wk,1)
     CALL MSOLVE(N,Wk,Z,Nelt,Ia,Ja,A,Isym,Rpar,Ipar)
     Nmsl = Nmsl + 1
-  ENDIF
+  END IF
   !------------- LAST LINE OF SPIGMR FOLLOWS ----------------------------
 END SUBROUTINE SPIGMR

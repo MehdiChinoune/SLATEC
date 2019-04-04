@@ -106,7 +106,7 @@ SUBROUTINE BINT4(X,Y,Ndata,Ibcl,Ibcr,Fbcl,Fbcr,Kntopt,T,Bcoef,N,K,W)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   !
   INTEGER i, Ibcl, Ibcr, iflag, ilb, ileft, it, iub, iw, iwp, j, &
     jw, K, Kntopt, N, Ndata, ndm, np, nwrow
@@ -123,7 +123,7 @@ SUBROUTINE BINT4(X,Y,Ndata,Ibcl,Ibcr,Fbcl,Fbcr,Kntopt,T,Bcoef,N,K,W)
     ndm = Ndata - 1
     DO i = 1, ndm
       IF ( X(i)>=X(i+1) ) GOTO 50
-    ENDDO
+    END DO
     IF ( Ibcl<1.OR.Ibcl>2 ) THEN
       CALL XERMSG('SLATEC','BINT4','IBCL IS NOT 1 OR 2',2,1)
       RETURN
@@ -139,7 +139,7 @@ SUBROUTINE BINT4(X,Y,Ndata,Ibcl,Ibcr,Fbcl,Fbcr,Kntopt,T,Bcoef,N,K,W)
       np = N + 1
       DO i = 1, Ndata
         T(i+3) = X(i)
-      ENDDO
+      END DO
       SELECT CASE (Kntopt)
         CASE (2)
           !     SET UP KNOT ARRAY WITH SYMMETRIC PLACEMENT ABOUT END POINTS
@@ -149,14 +149,14 @@ SUBROUTINE BINT4(X,Y,Ndata,Ibcl,Ibcr,Fbcl,Fbcr,Kntopt,T,Bcoef,N,K,W)
             DO i = 1, 3
               T(4-i) = tx1 - X(i+1)
               T(np+i) = txn - X(Ndata-i)
-            ENDDO
+            END DO
           ELSE
             xl = (X(Ndata)-X(1))/3.0E0
             DO i = 1, 3
               T(4-i) = T(5-i) - xl
               T(np+i) = T(np+i-1) + xl
-            ENDDO
-          ENDIF
+            END DO
+          END IF
         CASE (3)
           !     SET UP KNOT ARRAY LESS THAN X(1) AND GREATER THAN X(NDATA) TO BE
           !     SUPPLIED BY USER IN WORK LOCATIONS W(1) THROUGH W(6) WHEN KNTOPT=3
@@ -167,20 +167,20 @@ SUBROUTINE BINT4(X,Y,Ndata,Ibcl,Ibcr,Fbcl,Fbcr,Kntopt,T,Bcoef,N,K,W)
             T(np+i) = W(iw,jw)
             IF ( T(4-i)>T(5-i) ) GOTO 100
             IF ( T(np+i)<T(np+i-1) ) GOTO 100
-          ENDDO
+          END DO
         CASE DEFAULT
           !     SET UP KNOT ARRAY WITH MULTIPLICITY 4 AT X(1) AND X(NDATA)
           DO i = 1, 3
             T(4-i) = X(1)
             T(np+i) = X(Ndata)
-          ENDDO
+          END DO
       END SELECT
       !
       DO i = 1, 5
         DO j = 1, N
           W(i,j) = 0.0E0
-        ENDDO
-      ENDDO
+        END DO
+      END DO
       !     SET UP LEFT INTERPOLATION POINT AND LEFT BOUNDARY CONDITION FOR
       !     RIGHT LIMITS
       it = Ibcl + 1
@@ -190,7 +190,7 @@ SUBROUTINE BINT4(X,Y,Ndata,Ibcl,Ibcr,Fbcl,Fbcr,Kntopt,T,Bcoef,N,K,W)
       DO j = 1, 3
         W(j+1,4-j) = vnikx(4-j,it)
         W(j,4-j) = vnikx(4-j,1)
-      ENDDO
+      END DO
       Bcoef(1) = Y(1)
       Bcoef(2) = Fbcl
       !     SET UP INTERPOLATION EQUATIONS FOR POINTS I=2 TO I=NDATA-1
@@ -201,10 +201,10 @@ SUBROUTINE BINT4(X,Y,Ndata,Ibcl,Ibcr,Fbcl,Fbcr,Kntopt,T,Bcoef,N,K,W)
           CALL BSPVD(T,K,1,X(i),ileft,4,vnikx,work)
           DO j = 1, 3
             W(j+1,3+i-j) = vnikx(4-j,1)
-          ENDDO
+          END DO
           Bcoef(i+1) = Y(i)
-        ENDDO
-      ENDIF
+        END DO
+      END IF
       !     SET UP RIGHT INTERPOLATION POINT AND RIGHT BOUNDARY CONDITION FOR
       !     LEFT LIMITS(ILEFT IS ASSOCIATED WITH T(N)=X(NDATA-1))
       it = Ibcr + 1
@@ -214,7 +214,7 @@ SUBROUTINE BINT4(X,Y,Ndata,Ibcl,Ibcr,Fbcl,Fbcr,Kntopt,T,Bcoef,N,K,W)
       DO j = 1, 3
         W(j+1,3+Ndata-j) = vnikx(5-j,it)
         W(j+2,3+Ndata-j) = vnikx(5-j,1)
-      ENDDO
+      END DO
       Bcoef(N-1) = Fbcr
       Bcoef(N) = Y(Ndata)
       !     SOLVE SYSTEM OF EQUATIONS
@@ -231,12 +231,12 @@ SUBROUTINE BINT4(X,Y,Ndata,Ibcl,Ibcr,Fbcl,Fbcr,Kntopt,T,Bcoef,N,K,W)
       ELSE
         CALL BNSLV(W(iwp,1),nwrow,N,ilb,iub,Bcoef)
         RETURN
-      ENDIF
-    ENDIF
+      END IF
+    END IF
     50 CALL XERMSG('SLATEC','BINT4','X VALUES ARE NOT DISTINCT OR NOT ORDERED',&
       2,1)
     RETURN
-  ENDIF
+  END IF
   100  CALL XERMSG('SLATEC','BINT4',&
     'KNOT INPUT THROUGH W ARRAY IS NOT ORDERED PROPERLY',2,1)
 END SUBROUTINE BINT4

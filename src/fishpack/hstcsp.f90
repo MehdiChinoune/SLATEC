@@ -405,7 +405,7 @@ SUBROUTINE HSTCSP(Intl,A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   INTEGER Idimf, ierr1, Ierror, Intl, iwan, iwbm, iwbn, iwcm, iwcn, &
     iwrsq, iwsnth, iwwrk, M, Mbdcnd, N, Nbdcnd
   REAL A, B, Bda(*), Bdb(*), Bdc(*), Bdd(*), C, D, dum, Elmbda, F(Idimf,*), &
@@ -448,5 +448,5 @@ SUBROUTINE HSTCSP(Intl,A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
       ,W(iwsnth),W(iwrsq),W(iwwrk))
     W(1) = W(iwwrk) + iwwrk - 1
     Ierror = ierr1
-  ENDIF
+  END IF
 END SUBROUTINE HSTCSP

@@ -64,7 +64,7 @@ REAL(8) FUNCTION DATANH(X)
     dxrel = SQRT(D1MACH(4))
     sqeps = SQRT(3.0D0*D1MACH(3))
     first = .FALSE.
-  ENDIF
+  END IF
   !
   y = ABS(X)
   IF ( y>=1.D0 ) CALL XERMSG('SLATEC','DATANH','ABS(X) GE 1',2,2)

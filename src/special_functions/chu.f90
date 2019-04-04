@@ -87,11 +87,11 @@ REAL FUNCTION CHU(A,B,X)
             xi = i
             t = t*(A-B+xi)*X/((1.0-B+xi)*xi)
             sum = sum + t
-          ENDDO
-        ENDIF
+          END DO
+        END IF
         !
         sum = GAMMA(B-1.0)*GAMR(A)*X**(1-n)*xtoeps*sum
-      ENDIF
+      END IF
     ELSE
       !
       ! CONSIDER THE CASE B .LT. 1.0 FIRST.
@@ -105,11 +105,11 @@ REAL FUNCTION CHU(A,B,X)
           xi1 = i - 1
           t = t*(A+xi1)*X/((B+xi1)*(xi1+1.0))
           sum = sum + t
-        ENDDO
-      ENDIF
+        END DO
+      END IF
       !
       sum = POCH(1.0+A-B,-A)*sum
-    ENDIF
+    END IF
     !
     ! NOW EVALUATE THE INFINITE SUM.     -----------------------------------
     !
@@ -150,10 +150,10 @@ REAL FUNCTION CHU(A,B,X)
         t = c0 + xeps1*b0
         CHU = CHU + t
         IF ( ABS(t)<eps*ABS(CHU) ) RETURN
-      ENDDO
+      END DO
       CALL XERMSG('SLATEC','CHU',&
         'NO CONVERGENCE IN 1000 TERMS OF THE ASCENDING SERIES',3,2)
-    ENDIF
+    END IF
     !
     ! X**(-BEPS) IS VERY DIFFERENT FROM 1.0, SO THE STRAIGHTFORWARD
     ! FORMULATION IS STABLE.
@@ -170,10 +170,10 @@ REAL FUNCTION CHU(A,B,X)
       t = a0 - b0
       CHU = CHU + t
       IF ( ABS(t)<eps*ABS(CHU) ) RETURN
-    ENDDO
+    END DO
     CALL XERMSG('SLATEC','CHU',&
       'NO CONVERGENCE IN 1000 TERMS OF THE ASCENDING SERIES',3,2)
-  ENDIF
+  END IF
   !
   ! USE LUKE-S RATIONAL APPROX IN THE ASYMPTOTIC REGION.
   !

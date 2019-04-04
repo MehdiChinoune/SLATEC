@@ -45,7 +45,7 @@ CHARACTER(10) FUNCTION CVTCAT(Categ)
       CVTCAT(ii+1:ii+1) = Categ(i:i)
       i = i + 1
       CYCLE
-    ENDIF
+    END IF
     IF ( Categ(i+1:i+1)>'9'.OR.Categ(i+1:i+1)<'0' ) THEN
       CVTCAT(ii:ii) = '0'
       CVTCAT(ii+1:ii+1) = Categ(i:i)
@@ -58,8 +58,8 @@ CHARACTER(10) FUNCTION CVTCAT(Categ)
       IF ( i+1<l ) CVTCAT(ii+2:ii+2) = Categ(i+2:i+2)
       i = i + 3
       ii = ii + 3
-    ENDIF
-  ENDDO
+    END IF
+  END DO
 END FUNCTION CVTCAT
 !** FIND
 INTEGER FUNCTION FIND(X,N,T)
@@ -100,7 +100,7 @@ INTEGER FUNCTION FIND(X,N,T)
   !        IF (T .EQ. X(I)) THEN
   !          FIND = I
   !          RETURN
-  !        ENDIF
+  !        END IF
   !   10 CONTINUE
   !      FIND = 0
   !
@@ -129,7 +129,7 @@ INTEGER FUNCTION FIND(X,N,T)
   IF ( N==0 ) THEN
     FIND = 0
     RETURN
-  ENDIF
+  END IF
   m = INT( LOG(REAL(N))/B )
   k = 2**m
   i = N - k + 1
@@ -142,14 +142,14 @@ INTEGER FUNCTION FIND(X,N,T)
         i = i - k
         IF ( i>=1 ) EXIT
         i = i + k
-      ENDDO
+      END DO
     ELSE
       m = m - 1
       IF ( m<0 ) GOTO 100
       k = k/2
       i = i + k
-    ENDIF
-  ENDDO
+    END IF
+  END DO
   FIND = i
   RETURN
   100  IF ( T<X(i) ) i = i - 1
@@ -207,8 +207,8 @@ INTEGER FUNCTION LENSTR(String)
     IF ( String(i:i)/=' ' ) THEN
       LENSTR = i
       RETURN
-    ENDIF
-  ENDDO
+    END IF
+  END DO
   LENSTR = 0
 END FUNCTION LENSTR
 !** UPCASE
@@ -277,13 +277,13 @@ SUBROUTINE UPCASE(Str1,Str2)
   IF ( m>n ) THEN
     CALL XERMSG(' ','UPCASE',MSG,1,2)
     m = n
-  ENDIF
+  END IF
   DO i = 1, m
     Str2(i:i) = Str1(i:i)
     l = ICHAR(Str2(i:i))
     IF ( l>=97.AND.l<=122 ) Str2(i:i) = CHAR(l-32)
-  ENDDO
+  END DO
   DO i = m + 1, n
     Str2(i:i) = ' '
-  ENDDO
+  END DO
 END SUBROUTINE UPCASE

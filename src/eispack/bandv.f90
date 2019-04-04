@@ -130,7 +130,7 @@ SUBROUTINE BANDV(Nm,N,Mbw,A,E21,M,W,Z,Ierr,Nv,Rv,Rv6)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   !
   INTEGER i, j, k, M, N, r, ii, ij, jj, kj, mb, m1, Nm, Nv, &
     ij1, its, kj1, Mbw, m21
@@ -165,11 +165,11 @@ SUBROUTINE BANDV(Nm,N,Mbw,A,E21,M,W,Z,Ierr,Nv,Rv,Rv6)
             IF ( E21<0.0E0 ) THEN
               s = s + ABS(A(ij,kj))
               ij = ij + 1
-            ENDIF
-          ENDDO
+            END IF
+          END DO
           !
           norm = MAX(norm,s)
-        ENDDO
+        END DO
         !
         IF ( E21<0.0E0 ) norm = 0.5E0*norm
         !     .......... EPS2 IS THE CRITERION FOR GROUPING,
@@ -187,15 +187,15 @@ SUBROUTINE BANDV(Nm,N,Mbw,A,E21,M,W,Z,Ierr,Nv,Rv,Rv6)
             eps4 = uk*eps3
             group = 0
             EXIT
-          ENDIF
-        ENDDO
+          END IF
+        END DO
         !     .......... LOOK FOR CLOSE OR COINCIDENT ROOTS ..........
       ELSEIF ( ABS(x1-x0)>=eps2 ) THEN
         group = 0
       ELSE
         group = group + 1
         IF ( order*(x1-x0)<=0.0E0 ) x1 = x0 + order*eps3
-      ENDIF
+      END IF
       !     .......... EXPAND MATRIX, SUBTRACT EIGENVALUE,
       !                AND INITIALIZE VECTOR ..........
       DO i = 1, N
@@ -210,7 +210,7 @@ SUBROUTINE BANDV(Nm,N,Mbw,A,E21,M,W,Z,Ierr,Nv,Rv,Rv6)
             ELSEIF ( ij<=0 ) THEN
               Rv(ij1) = 0.0E0
               ij1 = ij1 + N
-            ENDIF
+            END IF
             ij = ij + N
             ii = i + j
             IF ( ii<=N ) THEN
@@ -218,17 +218,17 @@ SUBROUTINE BANDV(Nm,N,Mbw,A,E21,M,W,Z,Ierr,Nv,Rv,Rv6)
               IF ( E21<0.0E0 ) THEN
                 ii = i
                 jj = mb + j
-              ENDIF
+              END IF
               Rv(kj) = A(ii,jj)
               kj = kj + N
-            ENDIF
-          ENDDO
-        ENDIF
+            END IF
+          END DO
+        END IF
         !
         Rv(ij) = A(i,mb) - x1
         Rv6(i) = eps4
         IF ( order==0.0E0 ) Rv6(i) = Z(i,r)
-      ENDDO
+      END DO
       !
       IF ( m1/=0 ) THEN
         !     .......... ELIMINATION WITH INTERCHANGES ..........
@@ -245,10 +245,10 @@ SUBROUTINE BANDV(Nm,N,Mbw,A,E21,M,W,Z,Ierr,Nv,Rv,Rv6)
             DO kj = j, jj, N
               Rv(kj1) = Rv(kj)
               kj1 = kj
-            ENDDO
+            END DO
             !
             Rv(kj1) = 0.0E0
-          ENDDO
+          END DO
           !
           IF ( i/=N ) THEN
             u = 0.0E0
@@ -259,8 +259,8 @@ SUBROUTINE BANDV(Nm,N,Mbw,A,E21,M,W,Z,Ierr,Nv,Rv,Rv6)
               IF ( ABS(Rv(j))>=ABS(u) ) THEN
                 u = Rv(j)
                 k = j
-              ENDIF
-            ENDDO
+              END IF
+            END DO
             !
             j = i + N
             jj = j + maxj
@@ -272,14 +272,14 @@ SUBROUTINE BANDV(Nm,N,Mbw,A,E21,M,W,Z,Ierr,Nv,Rv,Rv6)
                 Rv(ij) = Rv(kj)
                 Rv(kj) = v
                 kj = kj + N
-              ENDDO
+              END DO
               !
               IF ( order==0.0E0 ) THEN
                 v = Rv6(i)
                 Rv6(i) = Rv6(k)
                 Rv6(k) = v
-              ENDIF
-            ENDIF
+              END IF
+            END IF
             IF ( u/=0.0E0 ) THEN
               !
               DO k = ii, maxk
@@ -289,15 +289,15 @@ SUBROUTINE BANDV(Nm,N,Mbw,A,E21,M,W,Z,Ierr,Nv,Rv,Rv6)
                 DO ij = j, jj, N
                   kj = kj + N
                   Rv(kj) = Rv(kj) - v*Rv(ij)
-                ENDDO
+                END DO
                 !
                 IF ( order==0.0E0 ) Rv6(k) = Rv6(k) - v*Rv6(i)
-              ENDDO
-            ENDIF
-          ENDIF
+              END DO
+            END IF
+          END IF
           !
-        ENDDO
-      ENDIF
+        END DO
+      END IF
       DO
         !     .......... BACK SUBSTITUTION
         !                FOR I=N STEP -1 UNTIL 1 DO -- ..........
@@ -312,17 +312,17 @@ SUBROUTINE BANDV(Nm,N,Mbw,A,E21,M,W,Z,Ierr,Nv,Rv,Rv6)
             DO ij = j, jj, N
               ij1 = ij1 + 1
               Rv6(i) = Rv6(i) - Rv(ij)*Rv6(ij1)
-            ENDDO
-          ENDIF
+            END DO
+          END IF
           !
           v = Rv(i)
           IF ( ABS(v)<eps3 ) THEN
             !     .......... SET ERROR -- NEARLY SINGULAR LINEAR SYSTEM ..........
             IF ( order==0.0E0 ) Ierr = -r
             v = SIGN(eps3,v)
-          ENDIF
+          END IF
           Rv6(i) = Rv6(i)/v
-        ENDDO
+        END DO
         !
         xu = 1.0E0
         IF ( order==0.0E0 ) EXIT
@@ -336,20 +336,20 @@ SUBROUTINE BANDV(Nm,N,Mbw,A,E21,M,W,Z,Ierr,Nv,Rv,Rv6)
             !
             DO i = 1, N
               xu = xu + Rv6(i)*Z(i,j)
-            ENDDO
+            END DO
             !
             DO i = 1, N
               Rv6(i) = Rv6(i) - xu*Z(i,j)
-            ENDDO
+            END DO
             !
-          ENDDO
-        ENDIF
+          END DO
+        END IF
         !
         norm = 0.0E0
         !
         DO i = 1, N
           norm = norm + ABS(Rv6(i))
-        ENDDO
+        END DO
         !
         IF ( norm>=0.1E0 ) THEN
           !     .......... NORMALIZE SO THAT SUM OF SQUARES IS
@@ -358,7 +358,7 @@ SUBROUTINE BANDV(Nm,N,Mbw,A,E21,M,W,Z,Ierr,Nv,Rv,Rv6)
           !
           DO i = 1, N
             u = u + Rv6(i)**2
-          ENDDO
+          END DO
           !
           xu = 1.0E0/SQRT(u)
           EXIT
@@ -376,18 +376,18 @@ SUBROUTINE BANDV(Nm,N,Mbw,A,E21,M,W,Z,Ierr,Nv,Rv,Rv6)
           !
           DO i = 2, N
             Rv6(i) = xu
-          ENDDO
+          END DO
           !
           Rv6(its) = Rv6(its) - eps4*uk
-        ENDIF
-      ENDDO
+        END IF
+      END DO
       !
       DO i = 1, N
         Z(i,r) = Rv6(i)*xu
-      ENDDO
+      END DO
       !
       x0 = x1
-    ENDDO
-  ENDIF
+    END DO
+  END IF
   !
 END SUBROUTINE BANDV

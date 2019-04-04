@@ -77,7 +77,7 @@ SUBROUTINE CORTH(Nm,N,Low,Igh,Ar,Ai,Ortr,Orti)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   !
   INTEGER i, j, m, N, ii, jj, la, mp, Nm, Igh, kp1, Low
   REAL Ar(Nm,*), Ai(Nm,*), Ortr(*), Orti(*)
@@ -97,7 +97,7 @@ SUBROUTINE CORTH(Nm,N,Low,Igh,Ar,Ai,Ortr,Orti)
       !     .......... SCALE COLUMN (ALGOL TOL THEN NOT NEEDED) ..........
       DO i = m, Igh
         scale = scale + ABS(Ar(i,m-1)) + ABS(Ai(i,m-1))
-      ENDDO
+      END DO
       !
       IF ( scale/=0.0E0 ) THEN
         mp = m + Igh
@@ -107,7 +107,7 @@ SUBROUTINE CORTH(Nm,N,Low,Igh,Ar,Ai,Ortr,Orti)
           Ortr(i) = Ar(i,m-1)/scale
           Orti(i) = Ai(i,m-1)/scale
           h = h + Ortr(i)*Ortr(i) + Orti(i)*Orti(i)
-        ENDDO
+        END DO
         !
         g = SQRT(h)
         f = PYTHAG(Ortr(m),Orti(m))
@@ -120,7 +120,7 @@ SUBROUTINE CORTH(Nm,N,Low,Igh,Ar,Ai,Ortr,Orti)
           g = g/f
           Ortr(m) = (1.0E0+g)*Ortr(m)
           Orti(m) = (1.0E0+g)*Orti(m)
-        ENDIF
+        END IF
         !     .......... FORM (I-(U*UT)/H) * A ..........
         DO j = m, N
           fr = 0.0E0
@@ -130,7 +130,7 @@ SUBROUTINE CORTH(Nm,N,Low,Igh,Ar,Ai,Ortr,Orti)
             i = mp - ii
             fr = fr + Ortr(i)*Ar(i,j) + Orti(i)*Ai(i,j)
             fi = fi + Ortr(i)*Ai(i,j) - Orti(i)*Ar(i,j)
-          ENDDO
+          END DO
           !
           fr = fr/h
           fi = fi/h
@@ -138,9 +138,9 @@ SUBROUTINE CORTH(Nm,N,Low,Igh,Ar,Ai,Ortr,Orti)
           DO i = m, Igh
             Ar(i,j) = Ar(i,j) - fr*Ortr(i) + fi*Orti(i)
             Ai(i,j) = Ai(i,j) - fr*Orti(i) - fi*Ortr(i)
-          ENDDO
+          END DO
           !
-        ENDDO
+        END DO
         !     .......... FORM (I-(U*UT)/H)*A*(I-(U*UT)/H) ..........
         DO i = 1, Igh
           fr = 0.0E0
@@ -150,7 +150,7 @@ SUBROUTINE CORTH(Nm,N,Low,Igh,Ar,Ai,Ortr,Orti)
             j = mp - jj
             fr = fr + Ortr(j)*Ar(i,j) - Orti(j)*Ai(i,j)
             fi = fi + Ortr(j)*Ai(i,j) + Orti(j)*Ar(i,j)
-          ENDDO
+          END DO
           !
           fr = fr/h
           fi = fi/h
@@ -158,16 +158,16 @@ SUBROUTINE CORTH(Nm,N,Low,Igh,Ar,Ai,Ortr,Orti)
           DO j = m, Igh
             Ar(i,j) = Ar(i,j) - fr*Ortr(j) - fi*Orti(j)
             Ai(i,j) = Ai(i,j) + fr*Orti(j) - fi*Ortr(j)
-          ENDDO
+          END DO
           !
-        ENDDO
+        END DO
         !
         Ortr(m) = scale*Ortr(m)
         Orti(m) = scale*Orti(m)
         Ar(m,m-1) = -g*Ar(m,m-1)
         Ai(m,m-1) = -g*Ai(m,m-1)
-      ENDIF
-    ENDDO
-  ENDIF
+      END IF
+    END DO
+  END IF
   !
 END SUBROUTINE CORTH

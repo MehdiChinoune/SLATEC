@@ -56,7 +56,7 @@ COMPLEX FUNCTION CPSI(Zin)
     rmin = EXP(MAX(LOG(R1MACH(1)),-LOG(R1MACH(2)))+0.011)
     rbig = 1.0/R1MACH(3)
     first = .FALSE.
-  ENDIF
+  END IF
   !
   z = Zin
   x = REAL(z)
@@ -80,13 +80,13 @@ COMPLEX FUNCTION CPSI(Zin)
             'ANSWER LT HALF PRECISION BECAUSE Z TOO NEAR NEGATIVE INTEGER',1,1)
           IF ( y==0.0.AND.x==AINT(x) )&
             CALL XERMSG('SLATEC','CPSI','Z IS A NEGATIVE INTEGER',3,2)
-        ENDIF
+        END IF
         !
         n = INT( SQRT(bound**2-y**2) - x ) + 1
         DO i = 1, n
           corr = corr - 1.0/z
           z = z + 1.0
-        ENDDO
+        END DO
       ELSE
         !
         ! USE THE REFLECTION FORMULA FOR REAL(Z) NEGATIVE, ABS(Z) LARGE, AND
@@ -94,9 +94,9 @@ COMPLEX FUNCTION CPSI(Zin)
         !
         corr = -pi*CCOT(pi*z)
         z = 1.0 - z
-      ENDIF
-    ENDIF
-  ENDIF
+      END IF
+    END IF
+  END IF
   !
   ! NOW EVALUATE THE ASYMPTOTIC SERIES FOR SUITABLY LARGE Z.
   !
@@ -108,9 +108,9 @@ COMPLEX FUNCTION CPSI(Zin)
     DO i = 1, nterm
       ndx = nterm + 1 - i
       CPSI = bern(ndx) + z2inv*CPSI
-    ENDDO
+    END DO
     CPSI = LOG(z) - 0.5/z - CPSI*z2inv + corr
-  ENDIF
+  END IF
   !
   IF ( y<0.0 ) CPSI = CONJG(CPSI)
   !

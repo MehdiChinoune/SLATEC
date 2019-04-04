@@ -69,7 +69,7 @@ REAL FUNCTION GAMIT(A,X)
     sqeps = SQRT(R1MACH(4))
     bot = LOG(R1MACH(1))
     first = .FALSE.
-  ENDIF
+  END IF
   !
   IF ( X<0.0 ) CALL XERMSG('SLATEC','GAMIT','X IS NEGATIVE',2,2)
   !
@@ -110,15 +110,15 @@ REAL FUNCTION GAMIT(A,X)
         IF ( ABS(h)<=sqeps ) THEN
           CALL XERCLR
           CALL XERMSG('SLATEC','GAMIT','RESULT LT HALF PRECISION',1,1)
-        ENDIF
-      ENDIF
-    ENDIF
+        END IF
+      END IF
+    END IF
   ELSE
     t = R9LGIT(A,X,ALNGAM(A+1.0))
     IF ( t<bot ) CALL XERCLR
     GAMIT = EXP(t)
     RETURN
-  ENDIF
+  END IF
   !
   t = -A*alx + LOG(ABS(h))
   IF ( t<bot ) CALL XERCLR

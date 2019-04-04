@@ -123,20 +123,20 @@ SUBROUTINE DBFQAD(F,T,Bcoef,N,K,Id,X1,X2,Tol,Quad,Ierr,Work)
               CALL DBSGQ8(F,T,Bcoef,N,K,Id,a,b,inbv,Tol,ans,iflg,Work)
               IF ( iflg>1 ) Ierr = 2
               q = q + ans
-            ENDIF
-          ENDDO
+            END IF
+          END DO
           IF ( X1>X2 ) q = -q
           Quad = q
           RETURN
-        ENDIF
-      ENDIF
+        END IF
+      END IF
       !
       !
       CALL XERMSG('SLATEC','DBFQAD',&
         'X1 OR X2 OR BOTH DO NOT SATISFY T(K).LE.X.LE.T(N+1)',2,1)
       RETURN
-    ENDIF
-  ENDIF
+    END IF
+  END IF
   CALL XERMSG('SLATEC','DBFQAD','TOL IS LESS DTOL OR GREATER THAN 0.1',2,1)
   RETURN
 END SUBROUTINE DBFQAD

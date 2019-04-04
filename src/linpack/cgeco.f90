@@ -83,7 +83,7 @@ SUBROUTINE CGECO(A,Lda,N,Ipvt,Rcond,Z)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   INTEGER Lda, N, Ipvt(*)
   COMPLEX A(Lda,*), Z(*)
   REAL Rcond
@@ -100,7 +100,7 @@ SUBROUTINE CGECO(A,Lda,N,Ipvt,Rcond,Z)
   anorm = 0.0E0
   DO j = 1, N
     anorm = MAX(anorm,SCASUM(N,A(1,j),1))
-  ENDDO
+  END DO
   !
   !     FACTOR
   !
@@ -118,14 +118,14 @@ SUBROUTINE CGECO(A,Lda,N,Ipvt,Rcond,Z)
   ek = (1.0E0,0.0E0)
   DO j = 1, N
     Z(j) = (0.0E0,0.0E0)
-  ENDDO
+  END DO
   DO k = 1, N
     IF ( CABS1(Z(k))/=0.0E0 ) ek = CSIGN1(ek,-Z(k))
     IF ( CABS1(ek-Z(k))>CABS1(A(k,k)) ) THEN
       s = CABS1(A(k,k))/CABS1(ek-Z(k))
       CALL CSSCAL(N,s,Z,1)
       ek = CMPLX(s,0.0E0)*ek
-    ENDIF
+    END IF
     wk = ek - Z(k)
     wkm = -ek - Z(k)
     s = CABS1(wk)
@@ -136,24 +136,24 @@ SUBROUTINE CGECO(A,Lda,N,Ipvt,Rcond,Z)
     ELSE
       wk = wk/CONJG(A(k,k))
       wkm = wkm/CONJG(A(k,k))
-    ENDIF
+    END IF
     kp1 = k + 1
     IF ( kp1<=N ) THEN
       DO j = kp1, N
         sm = sm + CABS1(Z(j)+wkm*CONJG(A(k,j)))
         Z(j) = Z(j) + wk*CONJG(A(k,j))
         s = s + CABS1(Z(j))
-      ENDDO
+      END DO
       IF ( s<sm ) THEN
         t = wkm - wk
         wk = wkm
         DO j = kp1, N
           Z(j) = Z(j) + t*CONJG(A(k,j))
-        ENDDO
-      ENDIF
-    ENDIF
+        END DO
+      END IF
+    END IF
     Z(k) = wk
-  ENDDO
+  END DO
   s = 1.0E0/SCASUM(N,Z,1)
   CALL CSSCAL(N,s,Z,1)
   !
@@ -165,12 +165,12 @@ SUBROUTINE CGECO(A,Lda,N,Ipvt,Rcond,Z)
     IF ( CABS1(Z(k))>1.0E0 ) THEN
       s = 1.0E0/CABS1(Z(k))
       CALL CSSCAL(N,s,Z,1)
-    ENDIF
+    END IF
     l = Ipvt(k)
     t = Z(l)
     Z(l) = Z(k)
     Z(k) = t
-  ENDDO
+  END DO
   s = 1.0E0/SCASUM(N,Z,1)
   CALL CSSCAL(N,s,Z,1)
   !
@@ -188,8 +188,8 @@ SUBROUTINE CGECO(A,Lda,N,Ipvt,Rcond,Z)
       s = 1.0E0/CABS1(Z(k))
       CALL CSSCAL(N,s,Z,1)
       ynorm = s*ynorm
-    ENDIF
-  ENDDO
+    END IF
+  END DO
   s = 1.0E0/SCASUM(N,Z,1)
   CALL CSSCAL(N,s,Z,1)
   ynorm = s*ynorm
@@ -202,12 +202,12 @@ SUBROUTINE CGECO(A,Lda,N,Ipvt,Rcond,Z)
       s = CABS1(A(k,k))/CABS1(Z(k))
       CALL CSSCAL(N,s,Z,1)
       ynorm = s*ynorm
-    ENDIF
+    END IF
     IF ( CABS1(A(k,k))/=0.0E0 ) Z(k) = Z(k)/A(k,k)
     IF ( CABS1(A(k,k))==0.0E0 ) Z(k) = (1.0E0,0.0E0)
     t = -Z(k)
     CALL CAXPY(k-1,t,A(1,k),1,Z(1),1)
-  ENDDO
+  END DO
   !     MAKE ZNORM = 1.0
   s = 1.0E0/SCASUM(N,Z,1)
   CALL CSSCAL(N,s,Z,1)

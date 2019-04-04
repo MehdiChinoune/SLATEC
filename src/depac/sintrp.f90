@@ -61,7 +61,7 @@ SUBROUTINE SINTRP(X,Y,Xout,Yout,Ypout,Neqn,Kold,Phi,Ivc,Iv,Kgi,Gi,Alpha,&
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   INTEGER i, iq, Iv(10), Ivc, iw, j, jq, Kgi, Kold, kp1, kp2, l, m, Neqn
   REAL alp, Alpha(12), c(13), g(13), gamma, gdi, gdif, Gi(11), h, hi, hmu, Og(13), &
     Ow(12), Ox, Oy(*), Phi(Neqn,16), rmu, sigma, temp1, temp2
@@ -83,7 +83,7 @@ SUBROUTINE SINTRP(X,Y,Xout,Yout,Ypout,Neqn,Kold,Phi,Ivc,Iv,Kgi,Gi,Alpha,&
     xiq = xi*xiq
     temp1 = iq*(iq+1)
     w(iq) = xiq/temp1
-  ENDDO
+  END DO
   !
   !   COMPUTE THE DOUBLE INTEGRAL TERM GDI
   !
@@ -97,13 +97,13 @@ SUBROUTINE SINTRP(X,Y,Xout,Yout,Ypout,Neqn,Kold,Phi,Ivc,Iv,Kgi,Gi,Alpha,&
     ELSE
       gdi = 1.0/temp1
       m = 2
-    ENDIF
+    END IF
     IF ( m<=Kold ) THEN
       DO i = m, Kold
         gdi = Ow(kp2-i) - Alpha(i)*gdi
-      ENDDO
-    ENDIF
-  ENDIF
+      END DO
+    END IF
+  END IF
   !
   !   COMPUTE G(*) AND C(*)
   !
@@ -118,11 +118,11 @@ SUBROUTINE SINTRP(X,Y,Xout,Yout,Ypout,Neqn,Kold,Phi,Ivc,Iv,Kgi,Gi,Alpha,&
       l = kp2 - i
       DO jq = 1, l
         w(jq) = gamma*w(jq) - alp*w(jq+1)
-      ENDDO
+      END DO
       g(i+1) = w(1)
       c(i+1) = gamma*c(i)
-    ENDDO
-  ENDIF
+    END DO
+  END IF
   !
   !   DEFINE INTERPOLATION PARAMETERS
   !
@@ -136,7 +136,7 @@ SUBROUTINE SINTRP(X,Y,Xout,Yout,Ypout,Neqn,Kold,Phi,Ivc,Iv,Kgi,Gi,Alpha,&
   DO l = 1, Neqn
     Yout(l) = 0.0
     Ypout(l) = 0.0
-  ENDDO
+  END DO
   DO j = 1, Kold
     i = kp2 - j
     gdif = Og(i) - Og(i-1)
@@ -145,12 +145,12 @@ SUBROUTINE SINTRP(X,Y,Xout,Yout,Ypout,Neqn,Kold,Phi,Ivc,Iv,Kgi,Gi,Alpha,&
     DO l = 1, Neqn
       Yout(l) = Yout(l) + temp2*Phi(l,i)
       Ypout(l) = Ypout(l) + temp3*Phi(l,i)
-    ENDDO
-  ENDDO
+    END DO
+  END DO
   DO l = 1, Neqn
     Yout(l) = ((1.0-sigma)*Oy(l)+sigma*Y(l))&
       + h*(Yout(l)+(g(1)-sigma*Og(1))*Phi(l,1))
     Ypout(l) = hmu*(Oy(l)-Y(l)) + (Ypout(l)+(c(1)+rmu*Og(1))*Phi(l,1))
-  ENDDO
+  END DO
   !
 END SUBROUTINE SINTRP

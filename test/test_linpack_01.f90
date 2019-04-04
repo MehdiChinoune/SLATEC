@@ -73,8 +73,8 @@ CONTAINS
       jpvtt(j) = jpvt(j)
       DO i = 1, p
         at(i,j) = a(i,j)
-      ENDDO
-    ENDDO
+      END DO
+    END DO
     !
     !     TEST CCHDC.
     !
@@ -84,28 +84,28 @@ CONTAINS
       DO i = 1, p
         delx = ABS(REAL(at(i,j)-af(i,j))) + ABS(AIMAG(at(i,j)-af(i,j)))
         IF ( delx>.0001 ) indx = indx + 1
-      ENDDO
-    ENDDO
+      END DO
+    END DO
     !
     IF ( indx/=0 ) THEN
       WRITE (Lun,99002) kfail(1:9)
       Nerr = Nerr + 1
-    ENDIF
+    END IF
     !
     indx = 0
     DO i = 1, p
       IF ( jpvtt(i)/=jpvtc(i) ) indx = indx + 1
-    ENDDO
+    END DO
     !
     IF ( indx/=0 ) THEN
       WRITE (Lun,99002) kfail(11:14)
       Nerr = Nerr + 1
-    ENDIF
+    END IF
     !
     IF ( info/=infoc ) THEN
       WRITE (Lun,99002) kfail(16:19)
       Nerr = Nerr + 1
-    ENDIF
+    END IF
     !
     IF ( Kprint>=2.OR.Nerr/=0 ) WRITE (Lun,99001) Nerr
     !
@@ -187,14 +187,14 @@ CONTAINS
       bt(j) = b(j)
       DO i = 1, 6
         at(i,j) = abd(i,j)
-      ENDDO
-    ENDDO
+      END DO
+    END DO
     !
     CALL CGBFA(at,lda,n,ml,mu,ipvt,info)
     IF ( info/=0 ) THEN
       WRITE (Lun,99002) kprog(1:4), kfail(1:4)
       Nerr = Nerr + 1
-    ENDIF
+    END IF
     !
     !     TEST CGBSL FOR JOB=0
     !
@@ -202,12 +202,12 @@ CONTAINS
     indx = 0
     DO i = 1, n
       IF ( CABS1(c(i)-bt(i))>.0001 ) indx = indx + 1
-    ENDDO
+    END DO
     !
     IF ( indx/=0 ) THEN
       WRITE (Lun,99002) kprog(11:14), kfail(12:19)
       Nerr = Nerr + 1
-    ENDIF
+    END IF
     !
     !     FORM AT FOR CGBCO AND BT FOR CGBSL, TEST CGBCO
     !
@@ -215,15 +215,15 @@ CONTAINS
       bt(j) = b(j)
       DO i = 1, 6
         at(i,j) = abd(i,j)
-      ENDDO
-    ENDDO
+      END DO
+    END DO
     !
     CALL CGBCO(at,lda,n,ml,mu,ipvt,rcond,z)
     r = ABS(rcnd-rcond)
     IF ( r>=.0001 ) THEN
       WRITE (Lun,99002) kprog(6:9), kfail(6:10)
       Nerr = Nerr + 1
-    ENDIF
+    END IF
     !
     !     TEST CGBSL FOR JOB NOT EQUAL TO 0
     !
@@ -231,12 +231,12 @@ CONTAINS
     indx = 0
     DO i = 1, n
       IF ( CABS1(c(i)-bt(i))>.0001 ) indx = indx + 1
-    ENDDO
+    END DO
     !
     IF ( indx/=0 ) THEN
       WRITE (Lun,99002) kprog(11:14), kfail(12:19)
       Nerr = Nerr + 1
-    ENDIF
+    END IF
     !
     !     TEST CGBDI
     !
@@ -244,12 +244,12 @@ CONTAINS
     indx = 0
     DO i = 1, 2
       IF ( CABS1(dc(i)-det(i))>.0001 ) indx = indx + 1
-    ENDDO
+    END DO
     !
     IF ( indx/=0 ) THEN
       WRITE (Lun,99002) kprog(16:19), kfail(21:31)
       Nerr = Nerr + 1
-    ENDIF
+    END IF
     !
     IF ( Kprint>=2.OR.Nerr/=0 ) WRITE (Lun,99001) Nerr
     !
@@ -332,14 +332,14 @@ CONTAINS
       bt(j) = b(j)
       DO i = 1, n
         at(i,j) = a(i,j)
-      ENDDO
-    ENDDO
+      END DO
+    END DO
     !
     CALL CGEFA(at,lda,n,ipvt,info)
     IF ( info/=0 ) THEN
       WRITE (Lun,99002) kprog(1:4), kfail(1:4)
       Nerr = Nerr + 1
-    ENDIF
+    END IF
     !
     !     TEST CGESL FOR JOB=0
     !
@@ -347,12 +347,12 @@ CONTAINS
     indx = 0
     DO i = 1, n
       IF ( CABS1(c(i)-bt(i))>.0001 ) indx = indx + 1
-    ENDDO
+    END DO
     !
     IF ( indx/=0 ) THEN
       WRITE (Lun,99002) kprog(11:14), kfail(12:19)
       Nerr = Nerr + 1
-    ENDIF
+    END IF
     !
     !     FORM AT FOR CGECO AND BT FOR CGESL, TEST CGECO
     !
@@ -360,15 +360,15 @@ CONTAINS
       bt(j) = b(j)
       DO i = 1, n
         at(i,j) = a(i,j)
-      ENDDO
-    ENDDO
+      END DO
+    END DO
     !
     CALL CGECO(at,lda,n,ipvt,rcond,z)
     r = ABS(rcnd-rcond)
     IF ( r>=.0001 ) THEN
       WRITE (Lun,99002) kprog(6:9), kfail(6:10)
       Nerr = Nerr + 1
-    ENDIF
+    END IF
     !
     !     TEST CGESL FOR JOB NOT EQUAL TO 0
     !
@@ -376,12 +376,12 @@ CONTAINS
     indx = 0
     DO i = 1, n
       IF ( CABS1(c(i)-bt(i))>.0001 ) indx = indx + 1
-    ENDDO
+    END DO
     !
     IF ( indx/=0 ) THEN
       WRITE (Lun,99002) kprog(11:14), kfail(12:19)
       Nerr = Nerr + 1
-    ENDIF
+    END IF
     !
     !     TEST CGEDI FOR JOB=11
     !
@@ -389,24 +389,24 @@ CONTAINS
     indx = 0
     DO i = 1, 2
       IF ( CABS1(dc(i)-det(i))>.0001 ) indx = indx + 1
-    ENDDO
+    END DO
     !
     IF ( indx/=0 ) THEN
       WRITE (Lun,99002) kprog(16:19), kfail(21:31)
       Nerr = Nerr + 1
-    ENDIF
+    END IF
     !
     indx = 0
     DO i = 1, n
       DO j = 1, n
         IF ( CABS1(ainv(i,j)-at(i,j))>.0001 ) indx = indx + 1
-      ENDDO
-    ENDDO
+      END DO
+    END DO
     !
     IF ( indx/=0 ) THEN
       WRITE (Lun,99002) kprog(16:19), kfail(33:39)
       Nerr = Nerr + 1
-    ENDIF
+    END IF
     !
     IF ( Kprint>=2.OR.Nerr/=0 ) WRITE (Lun,99001) Nerr
     !
@@ -473,24 +473,24 @@ CONTAINS
       dt(i) = d(i)
       et(i) = e(i)
       bt(i) = b(i)
-    ENDDO
+    END DO
     !
     CALL CGTSL(n,ct,dt,et,bt,info)
     IF ( info/=0 ) THEN
       WRITE (Lun,99002) kfail(1:4)
       Nerr = Nerr + 1
-    ENDIF
+    END IF
     !
     indx = 0
     DO i = 1, n
       delx = CABS1(bt(i)-cx(i))
       IF ( delx>.0001 ) indx = indx + 1
-    ENDDO
+    END DO
     !
     IF ( indx/=0 ) THEN
       WRITE (Lun,99002) kfail(6:13)
       Nerr = Nerr + 1
-    ENDIF
+    END IF
     !
     IF ( Kprint>=2.OR.Nerr/=0 ) WRITE (Lun,99001) Nerr
     !
@@ -573,14 +573,14 @@ CONTAINS
       bt(j) = b(j)
       DO i = 1, n
         at(i,j) = a(i,j)
-      ENDDO
-    ENDDO
+      END DO
+    END DO
     !
     CALL CHIFA(at,lda,n,ipvt,info)
     IF ( info/=0 ) THEN
       WRITE (Lun,99002) kprog(1:4), kfail(1:4)
       Nerr = Nerr + 1
-    ENDIF
+    END IF
     !
     !     TEST CHISL
     !
@@ -588,27 +588,27 @@ CONTAINS
     indx = 0
     DO i = 1, n
       IF ( CABS1(c(i)-bt(i))>.0001 ) indx = indx + 1
-    ENDDO
+    END DO
     !
     IF ( indx/=0 ) THEN
       WRITE (Lun,99002) kprog(11:14), kfail(12:19)
       Nerr = Nerr + 1
-    ENDIF
+    END IF
     !
     !     FORM AT FOR CHICO, TEST CHICO
     !
     DO j = 1, n
       DO i = 1, n
         at(i,j) = a(i,j)
-      ENDDO
-    ENDDO
+      END DO
+    END DO
     !
     CALL CHICO(at,lda,n,ipvt,rcond,z)
     r = ABS(rcnd-rcond)
     IF ( r>=.0001 ) THEN
       WRITE (Lun,99002) kprog(6:9), kfail(6:10)
       Nerr = Nerr + 1
-    ENDIF
+    END IF
     !
     !     TEST CHIDI FOR JOB=111
     !
@@ -616,34 +616,34 @@ CONTAINS
     indx = 0
     DO i = 1, 2
       IF ( ABS(dc(i)-det(i))>.0001 ) indx = indx + 1
-    ENDDO
+    END DO
     !
     IF ( indx/=0 ) THEN
       WRITE (Lun,99002) kprog(16:19), kfail(21:31)
       Nerr = Nerr + 1
-    ENDIF
+    END IF
     !
     indx = 0
     DO i = 1, n
       DO j = 1, n
         IF ( CABS1(ainv(i,j)-at(i,j))>.0001 ) indx = indx + 1
-      ENDDO
-    ENDDO
+      END DO
+    END DO
     !
     IF ( indx/=0 ) THEN
       WRITE (Lun,99002) kprog(16:19), kfail(33:39)
       Nerr = Nerr + 1
-    ENDIF
+    END IF
     !
     indx = 0
     DO i = 1, 3
       IF ( (inert(i)-irt(i))/=0 ) indx = indx + 1
-    ENDDO
+    END DO
     !
     IF ( indx/=0 ) THEN
       WRITE (Lun,99002) kprog(16:19), kfail(41:47)
       Nerr = Nerr + 1
-    ENDIF
+    END IF
     !
     IF ( Kprint>=2.OR.Nerr/=0 ) WRITE (Lun,99001) Nerr
     !
@@ -720,17 +720,17 @@ CONTAINS
     !
     DO j = 1, n
       bt(j) = b(j)
-    ENDDO
+    END DO
     !
     DO i = 1, 10
       at(i) = ap(i)
-    ENDDO
+    END DO
     !
     CALL CHPFA(at,n,ipvt,info)
     IF ( info/=0 ) THEN
       WRITE (Lun,99002) kprog(1:4), kfail(1:4)
       Nerr = Nerr + 1
-    ENDIF
+    END IF
     !
     !     TEST CHPSL
     !
@@ -738,25 +738,25 @@ CONTAINS
     indx = 0
     DO i = 1, n
       IF ( CABS1(c(i)-bt(i))>.0001 ) indx = indx + 1
-    ENDDO
+    END DO
     !
     IF ( indx/=0 ) THEN
       WRITE (Lun,99002) kprog(11:14), kfail(12:19)
       Nerr = Nerr + 1
-    ENDIF
+    END IF
     !
     !     FORM AT FOR CHPCO, TEST CHPCO
     !
     DO i = 1, 10
       at(i) = ap(i)
-    ENDDO
+    END DO
     !
     CALL CHPCO(at,n,ipvt,rcond,z)
     r = ABS(rcnd-rcond)
     IF ( r>=.0001 ) THEN
       WRITE (Lun,99002) kprog(6:9), kfail(6:10)
       Nerr = Nerr + 1
-    ENDIF
+    END IF
     !
     !     TEST CHPDI FOR JOB=111
     !
@@ -764,32 +764,32 @@ CONTAINS
     indx = 0
     DO i = 1, 2
       IF ( ABS(dc(i)-det(i))>.0001 ) indx = indx + 1
-    ENDDO
+    END DO
     !
     IF ( indx/=0 ) THEN
       WRITE (Lun,99002) kprog(16:19), kfail(21:31)
       Nerr = Nerr + 1
-    ENDIF
+    END IF
     !
     indx = 0
     DO i = 1, 10
       IF ( CABS1(ainv(i)-at(i))>.0001 ) indx = indx + 1
-    ENDDO
+    END DO
     !
     IF ( indx/=0 ) THEN
       WRITE (Lun,99002) kprog(16:19), kfail(33:39)
       Nerr = Nerr + 1
-    ENDIF
+    END IF
     !
     indx = 0
     DO i = 1, 3
       IF ( (inert(i)-irt(i))/=0 ) indx = indx + 1
-    ENDDO
+    END DO
     !
     IF ( indx/=0 ) THEN
       WRITE (Lun,99002) kprog(16:19), kfail(41:47)
       Nerr = Nerr + 1
-    ENDIF
+    END IF
     !
     IF ( Kprint>=2.OR.Nerr/=0 ) WRITE (Lun,99001) Nerr
     !
@@ -865,14 +865,14 @@ CONTAINS
       bt(j) = b(j)
       DO i = 1, 2
         at(i,j) = abd(i,j)
-      ENDDO
-    ENDDO
+      END DO
+    END DO
     !
     CALL CPBFA(at,lda,n,m,info)
     IF ( info/=0 ) THEN
       WRITE (Lun,99002) kprog(1:4), kfail(1:4)
       Nerr = Nerr + 1
-    ENDIF
+    END IF
     !
     !     TEST CPBSL
     !
@@ -880,32 +880,32 @@ CONTAINS
     indx = 0
     DO i = 1, n
       IF ( CABS1(c(i)-bt(i))>.0001 ) indx = indx + 1
-    ENDDO
+    END DO
     !
     IF ( indx/=0 ) THEN
       WRITE (Lun,99002) kprog(11:14), kfail(12:19)
       Nerr = Nerr + 1
-    ENDIF
+    END IF
     !
     !     FORM AT FOR CPBCO, TEST CPBCO
     !
     DO j = 1, n
       DO i = 1, 2
         at(i,j) = abd(i,j)
-      ENDDO
-    ENDDO
+      END DO
+    END DO
     !
     CALL CPBCO(at,lda,n,m,rcond,z,info)
     r = ABS(rcnd-rcond)
     IF ( r>=.0001 ) THEN
       WRITE (Lun,99002) kprog(6:9), kfail(6:10)
       Nerr = Nerr + 1
-    ENDIF
+    END IF
     !
     IF ( info/=0 ) THEN
       WRITE (Lun,99002) kprog(6:9), kfail(1:4)
       Nerr = Nerr + 1
-    ENDIF
+    END IF
     !
     !     TEST CPBDI
     !
@@ -913,12 +913,12 @@ CONTAINS
     indx = 0
     DO i = 1, 2
       IF ( ABS(dc(i)-det(i))>.0001 ) indx = indx + 1
-    ENDDO
+    END DO
     !
     IF ( indx/=0 ) THEN
       WRITE (Lun,99002) kprog(16:19), kfail(21:31)
       Nerr = Nerr + 1
-    ENDIF
+    END IF
     !
     IF ( Kprint>=2.OR.Nerr/=0 ) WRITE (Lun,99001) Nerr
     !
@@ -1001,14 +1001,14 @@ CONTAINS
       bt(j) = b(j)
       DO i = 1, n
         at(i,j) = a(i,j)
-      ENDDO
-    ENDDO
+      END DO
+    END DO
     !
     CALL CPOFA(at,lda,n,info)
     IF ( info/=0 ) THEN
       WRITE (Lun,99002) kprog(1:4), kfail(1:4)
       Nerr = Nerr + 1
-    ENDIF
+    END IF
     !
     !     TEST CPOSL
     !
@@ -1016,32 +1016,32 @@ CONTAINS
     indx = 0
     DO i = 1, n
       IF ( CABS1(c(i)-bt(i))>.0001 ) indx = indx + 1
-    ENDDO
+    END DO
     !
     IF ( indx/=0 ) THEN
       WRITE (Lun,99002) kprog(11:14), kfail(12:19)
       Nerr = Nerr + 1
-    ENDIF
+    END IF
     !
     !     FORM AT FOR CPOCO, TEST CPOCO
     !
     DO j = 1, n
       DO i = 1, n
         at(i,j) = a(i,j)
-      ENDDO
-    ENDDO
+      END DO
+    END DO
     !
     CALL CPOCO(at,lda,n,rcond,z,info)
     r = ABS(rcnd-rcond)
     IF ( r>=.0001 ) THEN
       WRITE (Lun,99002) kprog(6:9), kfail(6:10)
       Nerr = Nerr + 1
-    ENDIF
+    END IF
     !
     IF ( info/=0 ) THEN
       WRITE (Lun,99002) kprog(6:9), kfail(1:4)
       Nerr = Nerr + 1
-    ENDIF
+    END IF
     !
     !     TEST CPODI FOR JOB=11
     !
@@ -1049,24 +1049,24 @@ CONTAINS
     indx = 0
     DO i = 1, 2
       IF ( ABS(dc(i)-det(i))>.0001 ) indx = indx + 1
-    ENDDO
+    END DO
     !
     IF ( indx/=0 ) THEN
       WRITE (Lun,99002) kprog(16:19), kfail(21:31)
       Nerr = Nerr + 1
-    ENDIF
+    END IF
     !
     indx = 0
     DO i = 1, n
       DO j = 1, n
         IF ( CABS1(ainv(i,j)-at(i,j))>.0001 ) indx = indx + 1
-      ENDDO
-    ENDDO
+      END DO
+    END DO
     !
     IF ( indx/=0 ) THEN
       WRITE (Lun,99002) kprog(16:19), kfail(33:39)
       Nerr = Nerr + 1
-    ENDIF
+    END IF
     !
     !
     IF ( Kprint>=2.OR.Nerr/=0 ) WRITE (Lun,99001) Nerr
@@ -1143,17 +1143,17 @@ CONTAINS
     !
     DO j = 1, n
       bt(j) = b(j)
-    ENDDO
+    END DO
     !
     DO i = 1, 10
       at(i) = ap(i)
-    ENDDO
+    END DO
     !
     CALL CPPFA(at,n,info)
     IF ( info/=0 ) THEN
       WRITE (Lun,99002) kprog(1:4), kfail(1:4)
       Nerr = Nerr + 1
-    ENDIF
+    END IF
     !
     !     TEST CPPSL
     !
@@ -1161,30 +1161,30 @@ CONTAINS
     indx = 0
     DO i = 1, n
       IF ( CABS1(c(i)-bt(i))>.0001 ) indx = indx + 1
-    ENDDO
+    END DO
     !
     IF ( indx/=0 ) THEN
       WRITE (Lun,99002) kprog(11:14), kfail(12:19)
       Nerr = Nerr + 1
-    ENDIF
+    END IF
     !
     !     FORM AT FOR CPPCO, TEST CPPCO
     !
     DO i = 1, 10
       at(i) = ap(i)
-    ENDDO
+    END DO
     !
     CALL CPPCO(at,n,rcond,z,info)
     r = ABS(rcnd-rcond)
     IF ( r>=.0001 ) THEN
       WRITE (Lun,99002) kprog(6:9), kfail(6:10)
       Nerr = Nerr + 1
-    ENDIF
+    END IF
     !
     IF ( info/=0 ) THEN
       WRITE (Lun,99002) kprog(6:9), kfail(1:4)
       Nerr = Nerr + 1
-    ENDIF
+    END IF
     !
     !     TEST CPPDI FOR JOB=11
     !
@@ -1192,22 +1192,22 @@ CONTAINS
     indx = 0
     DO i = 1, 2
       IF ( ABS(dc(i)-det(i))>.0001 ) indx = indx + 1
-    ENDDO
+    END DO
     !
     IF ( indx/=0 ) THEN
       WRITE (Lun,99002) kprog(16:19), kfail(21:31)
       Nerr = Nerr + 1
-    ENDIF
+    END IF
     !
     indx = 0
     DO i = 1, 10
       IF ( CABS1(ainv(i)-at(i))>.0001 ) indx = indx + 1
-    ENDDO
+    END DO
     !
     IF ( indx/=0 ) THEN
       WRITE (Lun,99002) kprog(16:19), kfail(33:39)
       Nerr = Nerr + 1
-    ENDIF
+    END IF
     !
     IF ( Kprint>=2.OR.Nerr/=0 ) WRITE (Lun,99001) Nerr
     !
@@ -1270,20 +1270,20 @@ CONTAINS
       dt(i) = d(i)
       et(i) = e(i)
       bt(i) = b(i)
-    ENDDO
+    END DO
     !
     CALL CPTSL(n,dt,et,bt)
     indx = 0
     DO i = 1, n
       delx = CABS1(bt(i)-cx(i))
       IF ( delx>.0001 ) indx = indx + 1
-    ENDDO
+    END DO
     !
     IF ( indx/=0 ) THEN
       WRITE (Lun,99001)
       99001 FORMAT (/' *** CPTSL FAILURE - ERROR IN SOLUTION')
       Nerr = Nerr + 1
-    ENDIF
+    END IF
     !
     IF ( Kprint>=2.OR.Nerr/=0 ) WRITE (Lun,99002) Nerr
     !
@@ -1372,8 +1372,8 @@ CONTAINS
       jpvtt(j) = jpvt(j)
       DO i = 1, n
         at(i,j) = a(i,j)
-      ENDDO
-    ENDDO
+      END DO
+    END DO
     !
     !     TEST CQRDC (FACTOR, QRAUX, JPVT)
     !
@@ -1383,37 +1383,37 @@ CONTAINS
     DO j = 1, n
       DO i = 1, n
         IF ( CABS1(at(i,j)-ac(i,j))>.0001 ) indx(1) = indx(1) + 1
-      ENDDO
-    ENDDO
+      END DO
+    END DO
     !
     IF ( indx(1)/=0 ) THEN
       WRITE (Lun,99002) kprog(1:4), kfail(1:6)
       Nerr = Nerr + 1
-    ENDIF
+    END IF
     !
     DO i = 1, 2
       indx(i) = 0
-    ENDDO
+    END DO
     !
     DO i = 1, n
       IF ( CABS1(qraux(i)-qrauxc(i))>.0001 ) indx(1) = indx(1) + 1
       IF ( jpvtt(i)/=jpvtc(i) ) indx(2) = indx(2) + 1
-    ENDDO
+    END DO
     !
     DO i = 1, 2
       l = 7*i + 1
       IF ( indx(i)/=0 ) THEN
         WRITE (Lun,99002) kprog(1:4), kfail(l:l+4)
         Nerr = Nerr + 1
-      ENDIF
-    ENDDO
+      END IF
+    END DO
     !
     !     TEST CQRSL (QY, QTY, SOLUTION, RSD, XB, INFO)
     !
     job = 11111
     DO i = 1, 5
       indx(i) = 0
-    ENDDO
+    END DO
     !
     CALL CQRSL(at,ldx,n,k,qraux,y,qy,qty,b,rsd,xb,job,info)
     DO i = 1, n
@@ -1422,20 +1422,20 @@ CONTAINS
       IF ( CABS1(b(i)-bc(i))>.0001 ) indx(3) = indx(3) + 1
       IF ( CABS1(rsd(i)-rsdc(i))>.0001 ) indx(4) = indx(4) + 1
       IF ( CABS1(xb(i)-xbc(i))>.0001 ) indx(5) = indx(5) + 1
-    ENDDO
+    END DO
     !
     DO i = 1, 5
       l = 10*i + 11
       IF ( indx(i)/=0 ) THEN
         WRITE (Lun,99002) kprog(6:9), kfail(l:l+8)
         Nerr = Nerr + 1
-      ENDIF
-    ENDDO
+      END IF
+    END DO
     !
     IF ( info/=0 ) THEN
       WRITE (Lun,99002) kprog(6:9), kfail(71:74)
       Nerr = Nerr + 1
-    ENDIF
+    END IF
     !
     IF ( Kprint>=2.OR.Nerr/=0 ) WRITE (Lun,99001) Nerr
     !
@@ -1517,14 +1517,14 @@ CONTAINS
       bt(j) = b(j)
       DO i = 1, n
         at(i,j) = a(i,j)
-      ENDDO
-    ENDDO
+      END DO
+    END DO
     !
     CALL CSIFA(at,lda,n,ipvt,info)
     IF ( info/=0 ) THEN
       WRITE (Lun,99002) kprog(1:4), kfail(1:4)
       Nerr = Nerr + 1
-    ENDIF
+    END IF
     !
     !     TEST CSISL
     !
@@ -1532,27 +1532,27 @@ CONTAINS
     indx = 0
     DO i = 1, n
       IF ( CABS1(c(i)-bt(i))>.0001 ) indx = indx + 1
-    ENDDO
+    END DO
     !
     IF ( indx/=0 ) THEN
       WRITE (Lun,99002) kprog(11:14), kfail(12:19)
       Nerr = Nerr + 1
-    ENDIF
+    END IF
     !
     !     FORM AT FOR CSICO, TEST CSICO
     !
     DO j = 1, n
       DO i = 1, n
         at(i,j) = a(i,j)
-      ENDDO
-    ENDDO
+      END DO
+    END DO
     !
     CALL CSICO(at,lda,n,ipvt,rcond,z)
     r = ABS(rcnd-rcond)
     IF ( r>=.0001 ) THEN
       WRITE (Lun,99002) kprog(6:9), kfail(6:10)
       Nerr = Nerr + 1
-    ENDIF
+    END IF
     !
     !     TEST CSIDI FOR JOB=11
     !
@@ -1560,24 +1560,24 @@ CONTAINS
     indx = 0
     DO i = 1, 2
       IF ( CABS1(dc(i)-det(i))>.0001 ) indx = indx + 1
-    ENDDO
+    END DO
     !
     IF ( indx/=0 ) THEN
       WRITE (Lun,99002) kprog(16:19), kfail(21:31)
       Nerr = Nerr + 1
-    ENDIF
+    END IF
     !
     indx = 0
     DO i = 1, n
       DO j = 1, n
         IF ( CABS1(ainv(i,j)-at(i,j))>.0001 ) indx = indx + 1
-      ENDDO
-    ENDDO
+      END DO
+    END DO
     !
     IF ( indx/=0 ) THEN
       WRITE (Lun,99002) kprog(16:19), kfail(33:39)
       Nerr = Nerr + 1
-    ENDIF
+    END IF
     !
     IF ( Kprint>=2.OR.Nerr/=0 ) WRITE (Lun,99001) Nerr
     !
@@ -1653,17 +1653,17 @@ CONTAINS
     !
     DO j = 1, n
       bt(j) = b(j)
-    ENDDO
+    END DO
     !
     DO i = 1, 10
       at(i) = ap(i)
-    ENDDO
+    END DO
     !
     CALL CSPFA(at,n,ipvt,info)
     IF ( info/=0 ) THEN
       WRITE (Lun,99002) kprog(1:4), kfail(1:4)
       Nerr = Nerr + 1
-    ENDIF
+    END IF
     !
     !     TEST CSPSL
     !
@@ -1671,25 +1671,25 @@ CONTAINS
     indx = 0
     DO i = 1, n
       IF ( CABS1(c(i)-bt(i))>.0001 ) indx = indx + 1
-    ENDDO
+    END DO
     !
     IF ( indx/=0 ) THEN
       WRITE (Lun,99002) kprog(11:14), kfail(12:19)
       Nerr = Nerr + 1
-    ENDIF
+    END IF
     !
     !     FORM AT FOR CSPCO, TEST CSPCO
     !
     DO i = 1, 10
       at(i) = ap(i)
-    ENDDO
+    END DO
     !
     CALL CSPCO(at,n,ipvt,rcond,z)
     r = ABS(rcnd-rcond)
     IF ( r>=.0001 ) THEN
       WRITE (Lun,99002) kprog(6:9), kfail(6:10)
       Nerr = Nerr + 1
-    ENDIF
+    END IF
     !
     !     TEST CSPDI FOR JOB=11
     !
@@ -1697,22 +1697,22 @@ CONTAINS
     indx = 0
     DO i = 1, 2
       IF ( CABS1(dc(i)-det(i))>.0001 ) indx = indx + 1
-    ENDDO
+    END DO
     !
     IF ( indx/=0 ) THEN
       WRITE (Lun,99002) kprog(16:19), kfail(21:31)
       Nerr = Nerr + 1
-    ENDIF
+    END IF
     !
     indx = 0
     DO i = 1, 10
       IF ( CABS1(ainv(i)-at(i))>.0001 ) indx = indx + 1
-    ENDDO
+    END DO
     !
     IF ( indx/=0 ) THEN
       WRITE (Lun,99002) kprog(16:19), kfail(33:39)
       Nerr = Nerr + 1
-    ENDIF
+    END IF
     !
     IF ( Kprint>=2.OR.Nerr/=0 ) WRITE (Lun,99001) Nerr
     !
@@ -1794,14 +1794,14 @@ CONTAINS
     DO j = 1, n
       DO i = 1, n
         at(i,j) = a(i,j)
-      ENDDO
-    ENDDO
+      END DO
+    END DO
     !
     !     TEST CSVDC  (S, E, U, V, INFO)
     !
     DO i = 1, 4
       indx(i) = 0
-    ENDDO
+    END DO
     !
     CALL CSVDC(at,ldx,n,p,s,e,u,ldu,v,ldv,work,job,info)
     DO j = 1, n
@@ -1810,21 +1810,21 @@ CONTAINS
       DO i = 1, n
         IF ( CABS1(u(i,j)-uvc(i,j))>.0001 ) indx(3) = indx(3) + 1
         IF ( CABS1(v(i,j)-uvc(i,j))>.0001 ) indx(4) = indx(4) + 1
-      ENDDO
-    ENDDO
+      END DO
+    END DO
     !
     DO i = 1, 4
       kone = 2*i - 1
       IF ( indx(i)/=0 ) THEN
         WRITE (Lun,99002) kfail(kone:kone)
         Nerr = Nerr + 1
-      ENDIF
-    ENDDO
+      END IF
+    END DO
     !
     IF ( info/=0 ) THEN
       WRITE (Lun,99002) kfail(9:12)
       Nerr = Nerr + 1
-    ENDIF
+    END IF
     !
     IF ( Kprint>=2.OR.Nerr/=0 ) WRITE (Lun,99001) Nerr
     !
@@ -1917,8 +1917,8 @@ CONTAINS
         bt(j) = b(j,k)
         DO i = 1, n
           at(i,j) = a(i,j)
-        ENDDO
-      ENDDO
+        END DO
+      END DO
       !
       job = k - 1
       CALL CTRCO(at,lda,n,rcond,z,job)
@@ -1926,7 +1926,7 @@ CONTAINS
       IF ( r>=.0001 ) THEN
         WRITE (Lun,99002) kprog(6:9), kfail(6:10)
         Nerr = Nerr + 1
-      ENDIF
+      END IF
       !
       !        TEST CTRSL FOR JOB= 0 OR 1
       !
@@ -1934,24 +1934,24 @@ CONTAINS
       IF ( info/=0 ) THEN
         WRITE (Lun,99002) kprog(11:14), kfail(1:4)
         Nerr = Nerr + 1
-      ENDIF
+      END IF
       !
       indx = 0
       DO i = 1, n
         IF ( CABS1(c(i)-bt(i))>.0001 ) indx = indx + 1
-      ENDDO
+      END DO
       !
       IF ( indx/=0 ) THEN
         WRITE (Lun,99002) kprog(11:14), kfail(12:19)
         Nerr = Nerr + 1
-      ENDIF
+      END IF
       !
       !        FORM BT FOR CTRSL
       !
       kk = 3 - k
       DO j = 1, n
         bt(j) = b(j,kk)
-      ENDDO
+      END DO
       !
       !        TEST CTRSL FOR JOB EQUAL TO 10 OR 11
       !
@@ -1960,17 +1960,17 @@ CONTAINS
       IF ( info/=0 ) THEN
         WRITE (Lun,99002) kprog(11:14), kfail(1:4)
         Nerr = Nerr + 1
-      ENDIF
+      END IF
       !
       indx = 0
       DO i = 1, n
         IF ( CABS1(c(i)-bt(i))>.0001 ) indx = indx + 1
-      ENDDO
+      END DO
       !
       IF ( indx/=0 ) THEN
         WRITE (Lun,99002) kprog(11:14), kfail(12:19)
         Nerr = Nerr + 1
-      ENDIF
+      END IF
       !
       !        TEST CTRDI FOR JOB= 110 OR 111
       !
@@ -1979,30 +1979,30 @@ CONTAINS
       IF ( info/=0 ) THEN
         WRITE (Lun,99002) kprog(16:19), kfail(1:4)
         Nerr = Nerr + 1
-      ENDIF
+      END IF
       !
       indx = 0
       DO i = 1, 2
         IF ( CABS1(dc(i)-det(i))>.0001 ) indx = indx + 1
-      ENDDO
+      END DO
       !
       IF ( indx/=0 ) THEN
         WRITE (Lun,99002) kprog(16:19), kfail(21:31)
         Nerr = Nerr + 1
-      ENDIF
+      END IF
       !
       indx = 0
       DO i = 1, n
         DO j = 1, n
           IF ( CABS1(ainv(i,j,k)-at(i,j))>.0001 ) indx = indx + 1
-        ENDDO
-      ENDDO
+        END DO
+      END DO
       !
       IF ( indx/=0 ) THEN
         WRITE (Lun,99002) kprog(16:19), kfail(33:39)
         Nerr = Nerr + 1
-      ENDIF
-    ENDDO
+      END IF
+    END DO
     !
     IF ( Kprint>=2.OR.Nerr/=0 ) WRITE (Lun,99001) Nerr
     !
@@ -2097,7 +2097,7 @@ PROGRAM TEST23
     CALL XSETF(0)
   ELSE
     CALL XSETF(1)
-  ENDIF
+  END IF
   !
   !     Test LINPACK routines
   !
@@ -2142,6 +2142,6 @@ PROGRAM TEST23
     WRITE (lun,99002) nfail
     99002 FORMAT (/' ************* WARNING -- ',I5,&
       ' TEST(S) FAILED IN PROGRAM TEST23 *************')
-  ENDIF
+  END IF
   STOP
 END PROGRAM TEST23

@@ -82,7 +82,7 @@ SUBROUTINE CSPDI(Ap,N,Kpvt,Det,Work,Job)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   INTEGER N, Job
   COMPLEX Ap(*), Work(*), Det(2)
   INTEGER Kpvt(*)
@@ -126,8 +126,8 @@ SUBROUTINE CSPDI(Ap,N,Kpvt,Det,Work,Job)
           kkp1 = ikp1 + k
           t = Ap(kkp1)
           d = (d/t)*Ap(kkp1+1) - t
-        ENDIF
-      ENDIF
+        END IF
+      END IF
       !
       IF ( .NOT.(nodet) ) THEN
         Det(1) = d*Det(1)
@@ -135,16 +135,16 @@ SUBROUTINE CSPDI(Ap,N,Kpvt,Det,Work,Job)
           DO WHILE ( CABS1(Det(1))<1.0E0 )
             Det(1) = CMPLX(ten,0.0E0)*Det(1)
             Det(2) = Det(2) - (1.0E0,0.0E0)
-          ENDDO
+          END DO
           DO WHILE ( CABS1(Det(1))>=ten )
             Det(1) = Det(1)/CMPLX(ten,0.0E0)
             Det(2) = Det(2) + (1.0E0,0.0E0)
-          ENDDO
-        ENDIF
-      ENDIF
+          END DO
+        END IF
+      END IF
       ik = ik + k
-    ENDDO
-  ENDIF
+    END DO
+  END IF
   !
   !     COMPUTE INVERSE(A)
   !
@@ -176,7 +176,7 @@ SUBROUTINE CSPDI(Ap,N,Kpvt,Det,Work,Job)
             Ap(jkp1) = CDOTU(j,Ap(ij+1),1,Work,1)
             CALL CAXPY(j-1,Work(j),Ap(ij+1),1,Ap(ikp1+1),1)
             ij = ij + j
-          ENDDO
+          END DO
           Ap(kkp1+1) = Ap(kkp1+1) + CDOTU(km1,Work,1,Ap(ikp1+1),1)
           Ap(kkp1) = Ap(kkp1) + CDOTU(km1,Ap(ik+1),1,Ap(ikp1+1),1)
           CALL CCOPY(km1,Ap(ik+1),1,Work,1)
@@ -186,9 +186,9 @@ SUBROUTINE CSPDI(Ap,N,Kpvt,Det,Work,Job)
             Ap(jk) = CDOTU(j,Ap(ij+1),1,Work,1)
             CALL CAXPY(j-1,Work(j),Ap(ij+1),1,Ap(ik+1),1)
             ij = ij + j
-          ENDDO
+          END DO
           Ap(kk) = Ap(kk) + CDOTU(km1,Work,1,Ap(ik+1),1)
-        ENDIF
+        END IF
         kstep = 2
       ELSE
         !
@@ -203,11 +203,11 @@ SUBROUTINE CSPDI(Ap,N,Kpvt,Det,Work,Job)
             Ap(jk) = CDOTU(j,Ap(ij+1),1,Work,1)
             CALL CAXPY(j-1,Work(j),Ap(ij+1),1,Ap(ik+1),1)
             ij = ij + j
-          ENDDO
+          END DO
           Ap(kk) = Ap(kk) + CDOTU(km1,Work,1,Ap(ik+1),1)
-        ENDIF
+        END IF
         kstep = 1
-      ENDIF
+      END IF
       !
       !           SWAP
       !
@@ -223,17 +223,17 @@ SUBROUTINE CSPDI(Ap,N,Kpvt,Det,Work,Job)
           Ap(jk) = Ap(ksj)
           Ap(ksj) = temp
           ksj = ksj - (j-1)
-        ENDDO
+        END DO
         IF ( kstep/=1 ) THEN
           kskp1 = ikp1 + ks
           temp = Ap(kskp1)
           Ap(kskp1) = Ap(kkp1)
           Ap(kkp1) = temp
-        ENDIF
-      ENDIF
+        END IF
+      END IF
       ik = ik + k
       IF ( kstep==2 ) ik = ik + k + 1
       k = k + kstep
-    ENDDO
-  ENDIF
+    END DO
+  END IF
 END SUBROUTINE CSPDI

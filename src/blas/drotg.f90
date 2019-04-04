@@ -67,7 +67,7 @@ SUBROUTINE DROTG(Da,Db,Dc,Ds)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   REAL(8) :: Da, Db, Dc, Ds, u, v, r
   !* FIRST EXECUTABLE STATEMENT  DROTG
   IF ( ABS(Da)>ABS(Db) ) THEN
@@ -114,8 +114,8 @@ SUBROUTINE DROTG(Da,Db,Dc,Ds)
     IF ( Dc/=0.0D0 ) THEN
       Db = 1.0D0/Dc
       RETURN
-    ENDIF
-  ENDIF
+    END IF
+  END IF
   Db = 1.0D0
   RETURN
 END SUBROUTINE DROTG

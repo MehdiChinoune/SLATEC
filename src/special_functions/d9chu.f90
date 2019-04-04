@@ -49,7 +49,7 @@ REAL(8) FUNCTION D9CHU(A,B,Z)
     eps = 4.0D0*D1MACH(4)
     sqeps = SQRT(D1MACH(4))
     first = .FALSE.
-  ENDIF
+  END IF
   !
   bp = 1.0D0 + A - B
   ab = A*bp
@@ -92,8 +92,8 @@ REAL(8) FUNCTION D9CHU(A,B,Z)
     DO j = 1, 3
       aa(j) = aa(j+1)
       bb(j) = bb(j+1)
-    ENDDO
-  ENDDO
+    END DO
+  END DO
   CALL XERMSG('SLATEC','D9CHU','NO CONVERGENCE IN 300 TERMS',2,2)
   !
   100  D9CHU = aa(4)/bb(4)

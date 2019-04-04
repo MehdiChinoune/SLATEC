@@ -99,7 +99,7 @@ SUBROUTINE R1UPDT(M,N,S,Ls,U,V,W,Sing)
   DO i = N, M
     W(i) = S(l)
     l = l + 1
-  ENDDO
+  END DO
   !
   !     ROTATE THE VECTOR V INTO A MULTIPLE OF THE N-TH UNIT VECTOR
   !     IN SUCH A WAY THAT A SPIKE IS INTRODUCED INTO W.
@@ -126,7 +126,7 @@ SUBROUTINE R1UPDT(M,N,S,Ls,U,V,W,Sing)
           cos = sin*cotan
           tau = one
           IF ( ABS(cos)*giant>one ) tau = one/cos
-        ENDIF
+        END IF
         !
         !        APPLY THE TRANSFORMATION TO V AND STORE THE INFORMATION
         !        NECESSARY TO RECOVER THE GIVENS ROTATION.
@@ -142,16 +142,16 @@ SUBROUTINE R1UPDT(M,N,S,Ls,U,V,W,Sing)
           W(i) = sin*S(l) + cos*W(i)
           S(l) = temp
           l = l + 1
-        ENDDO
-      ENDIF
-    ENDDO
-  ENDIF
+        END DO
+      END IF
+    END DO
+  END IF
   !
   !     ADD THE SPIKE FROM THE RANK 1 UPDATE TO W.
   !
   DO i = 1, M
     W(i) = W(i) + V(N)*U(i)
-  ENDDO
+  END DO
   !
   !     ELIMINATE THE SPIKE.
   !
@@ -174,7 +174,7 @@ SUBROUTINE R1UPDT(M,N,S,Ls,U,V,W,Sing)
           cos = sin*cotan
           tau = one
           IF ( ABS(cos)*giant>one ) tau = one/cos
-        ENDIF
+        END IF
         !
         !        APPLY THE TRANSFORMATION TO S AND REDUCE THE SPIKE IN W.
         !
@@ -184,20 +184,20 @@ SUBROUTINE R1UPDT(M,N,S,Ls,U,V,W,Sing)
           W(i) = -sin*S(l) + cos*W(i)
           S(l) = temp
           l = l + 1
-        ENDDO
+        END DO
         !
         !        STORE THE INFORMATION NECESSARY TO RECOVER THE
         !        GIVENS ROTATION.
         !
         W(j) = tau
-      ENDIF
+      END IF
       !
       !        TEST FOR ZERO DIAGONAL ELEMENTS IN THE OUTPUT S.
       !
       IF ( S(jj)==zero ) Sing = .TRUE.
       jj = jj + (M-j+1)
-    ENDDO
-  ENDIF
+    END DO
+  END IF
   !
   !     MOVE W BACK INTO THE LAST COLUMN OF THE OUTPUT S.
   !
@@ -205,7 +205,7 @@ SUBROUTINE R1UPDT(M,N,S,Ls,U,V,W,Sing)
   DO i = N, M
     S(l) = W(i)
     l = l + 1
-  ENDDO
+  END DO
   IF ( S(jj)==zero ) Sing = .TRUE.
   !
   !     LAST CARD OF SUBROUTINE R1UPDT.

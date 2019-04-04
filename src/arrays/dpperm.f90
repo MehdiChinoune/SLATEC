@@ -42,7 +42,7 @@ SUBROUTINE DPPERM(Dx,N,Iperm,Ier)
   !* REVISION HISTORY  (YYMMDD)
   !   901004  DATE WRITTEN
   !   920507  Modified by M. McClain to revise prologue text.
-  
+
   INTEGER N, Iperm(*), i, Ier, indx, indx0, istrt
   REAL(8) :: Dx(*), dtemp
   !* FIRST EXECUTABLE STATEMENT  DPPERM
@@ -52,7 +52,7 @@ SUBROUTINE DPPERM(Dx,N,Iperm,Ier)
     CALL XERMSG('SLATEC','DPPERM',&
       'The number of values to be rearranged, N, is not positive.',Ier,1)
     RETURN
-  ENDIF
+  END IF
   !
   !     CHECK WHETHER IPERM IS A VALID PERMUTATION
   !
@@ -62,13 +62,13 @@ SUBROUTINE DPPERM(Dx,N,Iperm,Ier)
       IF ( Iperm(indx)>0 ) THEN
         Iperm(indx) = -Iperm(indx)
         CYCLE
-      ENDIF
-    ENDIF
+      END IF
+    END IF
     Ier = 2
     CALL XERMSG('SLATEC','DPPERM',&
       'The permutation vector, IPERM, is not valid.',Ier,1)
     RETURN
-  ENDDO
+  END DO
   !
   !     REARRANGE THE VALUES OF DX
   !
@@ -85,9 +85,9 @@ SUBROUTINE DPPERM(Dx,N,Iperm,Ier)
         indx0 = indx
         Iperm(indx) = -Iperm(indx)
         indx = Iperm(indx)
-      ENDDO
+      END DO
       Dx(indx0) = dtemp
-    ENDIF
-  ENDDO
+    END IF
+  END DO
   !
 END SUBROUTINE DPPERM

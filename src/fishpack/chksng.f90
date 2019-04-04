@@ -45,10 +45,10 @@ SUBROUTINE CHKSNG(Mbdcnd,Nbdcnd,Alpha,Beta,Gama,Xnu,COFX,COFY,Singlr)
   !
   IF ( Mbdcnd==3 ) THEN
     IF ( Alpha/=0.0.OR.Beta/=0.0 ) RETURN
-  ENDIF
+  END IF
   IF ( Nbdcnd==3 ) THEN
     IF ( Gama/=0.0.OR.Xnu/=0.0 ) RETURN
-  ENDIF
+  END IF
   !
   !     CHECK THAT NON-DERIVATIVE COEFFICIENT FUNCTIONS
   !     ARE ZERO
@@ -57,12 +57,12 @@ SUBROUTINE CHKSNG(Mbdcnd,Nbdcnd,Alpha,Beta,Gama,Xnu,COFX,COFY,Singlr)
     xi = AIT + (i-1)*DLX
     CALL COFX(xi,ai,bi,ci)
     IF ( ci/=0.0 ) RETURN
-  ENDDO
+  END DO
   DO j = JS, NS
     yj = CIT + (j-1)*DLY
     CALL COFY(yj,dj,ej,fj)
     IF ( fj/=0.0 ) RETURN
-  ENDDO
+  END DO
   !
   !     THE OPERATOR MUST BE SINGULAR IF THIS POINT IS REACHED
   !

@@ -301,8 +301,8 @@ SUBROUTINE CUNHJ(Z,Fnu,Ipmtr,Tol,Phi,Arg,Zeta1,Zeta2,Asum,Bsum)
         IF ( zthr/=0.0E0 ) THEN
           ang = ATAN(zthi/zthr)
           IF ( zthr<0.0E0 ) ang = ang + pi
-        ENDIF
-      ENDIF
+        END IF
+      END IF
       pp = azth**ex2
       ang = ang*ex2
       zetar = pp*COS(ang)
@@ -348,13 +348,13 @@ SUBROUTINE CUNHJ(Z,Fnu,Ipmtr,Tol,Phi,Arg,Zeta1,Zeta2,Asum,Bsum)
               DO j = 2, kp1
                 l = l + 1
                 za = za*t2 + CMPLX(c(l),0.0E0)
-              ENDDO
+              END DO
               ptfn = ptfn*tfn
               up(kp1) = ptfn*za
               cr(ks) = przth*CMPLX(br(ks+1),0.0E0)
               przth = przth*rzth
               dr(ks) = przth*CMPLX(ar(ks+2),0.0E0)
-            ENDDO
+            END DO
             pp = pp*rfnu2
             IF ( ias/=1 ) THEN
               suma = up(lrp1)
@@ -362,32 +362,32 @@ SUBROUTINE CUNHJ(Z,Fnu,Ipmtr,Tol,Phi,Arg,Zeta1,Zeta2,Asum,Bsum)
               DO jr = 1, lr
                 ju = ju - 1
                 suma = suma + cr(jr)*up(ju)
-              ENDDO
+              END DO
               Asum = Asum + suma
               asumr = REAL(Asum)
               asumi = AIMAG(Asum)
               test = ABS(asumr) + ABS(asumi)
               IF ( pp<Tol.AND.test<Tol ) ias = 1
-            ENDIF
+            END IF
             IF ( ibs/=1 ) THEN
               sumb = up(lr+2) + up(lrp1)*zc
               ju = lrp1
               DO jr = 1, lr
                 ju = ju - 1
                 sumb = sumb + dr(jr)*up(ju)
-              ENDDO
+              END DO
               Bsum = Bsum + sumb
               bsumr = REAL(Bsum)
               bsumi = AIMAG(Bsum)
               test = ABS(bsumr) + ABS(bsumi)
               IF ( pp<btol.AND.test<Tol ) ibs = 1
-            ENDIF
+            END IF
             IF ( ias==1.AND.ibs==1 ) EXIT
-          ENDDO
-        ENDIF
+          END DO
+        END IF
         Asum = Asum + cone
         Bsum = -Bsum*rfn13/rtzta
-      ENDIF
+      END IF
     ELSE
       !-----------------------------------------------------------------------
       !     POWER SERIES FOR ABS(W2).LE.0.25E0
@@ -402,10 +402,10 @@ SUBROUTINE CUNHJ(Z,Fnu,Ipmtr,Tol,Phi,Arg,Zeta1,Zeta2,Asum,Bsum)
           suma = suma + p(k)*CMPLX(gama(k),0.0E0)
           ap(k) = ap(k-1)*aw2
           IF ( ap(k)<Tol ) GOTO 20
-        ENDDO
+        END DO
         k = 30
-      ENDIF
-      20       kmax = k
+      END IF
+      20  kmax = k
       zeta = w2*suma
       Arg = zeta*CMPLX(fn23,0.0E0)
       za = CSQRT(suma)
@@ -420,7 +420,7 @@ SUBROUTINE CUNHJ(Z,Fnu,Ipmtr,Tol,Phi,Arg,Zeta1,Zeta2,Asum,Bsum)
         sumb = czero
         DO k = 1, kmax
           sumb = sumb + p(k)*CMPLX(beta(k),0.0E0)
-        ENDDO
+        END DO
         Asum = czero
         Bsum = sumb
         l1 = 0
@@ -440,30 +440,30 @@ SUBROUTINE CUNHJ(Z,Fnu,Ipmtr,Tol,Phi,Arg,Zeta1,Zeta2,Asum,Bsum)
                 m = l1 + k
                 suma = suma + p(k)*CMPLX(alfa(m),0.0E0)
                 IF ( ap(k)<atol ) EXIT
-              ENDDO
+              END DO
               Asum = Asum + suma*CMPLX(pp,0.0E0)
               IF ( pp<Tol ) ias = 1
-            ENDIF
+            END IF
             IF ( ibs/=1 ) THEN
               sumb = czero
               DO k = 1, kmax
                 m = l2 + k
                 sumb = sumb + p(k)*CMPLX(beta(m),0.0E0)
                 IF ( ap(k)<atol ) EXIT
-              ENDDO
+              END DO
               Bsum = Bsum + sumb*CMPLX(pp,0.0E0)
               IF ( pp<btol ) ibs = 1
-            ENDIF
+            END IF
             IF ( ias==1.AND.ibs==1 ) EXIT
             l1 = l1 + 30
             l2 = l2 + 30
-          ENDDO
-        ENDIF
+          END DO
+        END IF
         Asum = Asum + cone
         pp = rfnu*REAL(rfn13)
         Bsum = Bsum*CMPLX(pp,0.0E0)
-      ENDIF
-    ENDIF
+      END IF
+    END IF
   ELSE
     ac = 2.0E0*ABS(ALOG(test)) + Fnu
     Zeta1 = CMPLX(ac,0.0E0)
@@ -471,6 +471,6 @@ SUBROUTINE CUNHJ(Z,Fnu,Ipmtr,Tol,Phi,Arg,Zeta1,Zeta2,Asum,Bsum)
     Phi = cone
     Arg = cone
     RETURN
-  ENDIF
+  END IF
   RETURN
 END SUBROUTINE CUNHJ

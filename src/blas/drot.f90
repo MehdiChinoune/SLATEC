@@ -80,7 +80,7 @@ SUBROUTINE DROT(N,Dx,Incx,Dy,Incy,Dc,Ds)
         Dy(ky) = -Ds*w + Dc*z
         kx = kx + Incx
         ky = ky + Incy
-      ENDDO
+      END DO
     ELSE
       !
       !          Code for equal and positive increments.
@@ -91,8 +91,8 @@ SUBROUTINE DROT(N,Dx,Incx,Dy,Incy,Dc,Ds)
         z = Dy(i)
         Dx(i) = Dc*w + Ds*z
         Dy(i) = -Ds*w + Dc*z
-      ENDDO
-    ENDIF
-  ENDIF
+      END DO
+    END IF
+  END IF
   !
 END SUBROUTINE DROT

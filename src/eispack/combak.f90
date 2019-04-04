@@ -79,7 +79,7 @@ SUBROUTINE COMBAK(Nm,Low,Igh,Ar,Ai,Int,M,Zr,Zi)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   !
   INTEGER i, j, M, la, mm, mp, Nm, Igh, kp1, Low, mp1
   REAL Ar(Nm,*), Ai(Nm,*), Zr(Nm,*), Zi(Nm,*)
@@ -104,10 +104,10 @@ SUBROUTINE COMBAK(Nm,Low,Igh,Ar,Ai,Int,M,Zr,Zi)
             DO j = 1, M
               Zr(i,j) = Zr(i,j) + xr*Zr(mp,j) - xi*Zi(mp,j)
               Zi(i,j) = Zi(i,j) + xr*Zi(mp,j) + xi*Zr(mp,j)
-            ENDDO
-          ENDIF
+            END DO
+          END IF
           !
-        ENDDO
+        END DO
         !
         i = Int(mp)
         IF ( i/=mp ) THEN
@@ -119,11 +119,11 @@ SUBROUTINE COMBAK(Nm,Low,Igh,Ar,Ai,Int,M,Zr,Zi)
             xi = Zi(i,j)
             Zi(i,j) = Zi(mp,j)
             Zi(mp,j) = xi
-          ENDDO
-        ENDIF
+          END DO
+        END IF
         !
-      ENDDO
-    ENDIF
-  ENDIF
+      END DO
+    END IF
+  END IF
   !
 END SUBROUTINE COMBAK

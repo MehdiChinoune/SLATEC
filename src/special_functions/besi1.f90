@@ -58,7 +58,7 @@ REAL FUNCTION BESI1(X)
     xsml = SQRT(4.5*R1MACH(3))
     xmax = LOG(R1MACH(2))
     first = .FALSE.
-  ENDIF
+  END IF
   !
   y = ABS(X)
   IF ( y>3.0 ) THEN
@@ -68,7 +68,7 @@ REAL FUNCTION BESI1(X)
     !
     BESI1 = EXP(y)*BESI1E(X)
     RETURN
-  ENDIF
+  END IF
   !
   BESI1 = 0.0
   IF ( y==0.0 ) RETURN

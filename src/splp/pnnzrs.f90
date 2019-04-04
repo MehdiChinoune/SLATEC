@@ -75,7 +75,7 @@ SUBROUTINE PNNZRS(I,Xval,Iplace,Sx,Ix,Ircx)
   IF ( Ircx==0 ) THEN
     nerr = 55
     CALL XERMSG('SLATEC','PNNZRS','IRCX=0.',nerr,iopt)
-  ENDIF
+  END IF
   !
   !     LMX IS THE LENGTH OF THE IN-MEMORY STORAGE AREA.
   !
@@ -89,7 +89,7 @@ SUBROUTINE PNNZRS(I,Xval,Iplace,Sx,Ix,Ircx)
       nerr = 55
       CALL XERMSG('SLATEC','PNNZRS',&
         'SUBSCRIPTS FOR ARRAY ELEMENT TO BE ACCESSED WERE OUT OF BOUNDS.',nerr,iopt)
-    ENDIF
+    END IF
     l = Ix(2)
   ELSE
     !
@@ -100,9 +100,9 @@ SUBROUTINE PNNZRS(I,Xval,Iplace,Sx,Ix,Ircx)
       nerr = 55
       CALL XERMSG('SLATEC','PNNZRS',&
         'SUBSCRIPTS FOR ARRAY ELEMENT TO BE ACCESSED WERE OUT OF BOUNDS.',nerr,iopt)
-    ENDIF
+    END IF
     l = Ix(3)
-  ENDIF
+  END IF
   !
   !     HERE L IS THE LARGEST POSSIBLE SUBSCRIPT WITHIN THE VECTOR.
   !
@@ -127,7 +127,7 @@ SUBROUTINE PNNZRS(I,Xval,Iplace,Sx,Ix,Ircx)
       I = 0
       Xval = zero
       RETURN
-    ENDIF
+    END IF
   ELSE
     !
     !     SEARCHING FOR THE NEXT NONZERO IN A COLUMN.
@@ -138,8 +138,8 @@ SUBROUTINE PNNZRS(I,Xval,Iplace,Sx,Ix,Ircx)
         Iplace = Ix(j+3) + 1
       ELSE
         Iplace = ll + 1
-      ENDIF
-    ENDIF
+      END IF
+    END IF
     !
     !     THE CASE I.LE.0 SIGNALS THAT THE SCAN FOR THE ENTRY
     !     IS TO BEGIN AT THE START OF THE VECTOR.
@@ -149,7 +149,7 @@ SUBROUTINE PNNZRS(I,Xval,Iplace,Sx,Ix,Ircx)
       istart = Ix(j+3) + 1
     ELSE
       istart = ll + 1
-    ENDIF
+    END IF
     iend = Ix(j+4)
     !
     !     VALIDATE IPLACE. SET TO START OF VECTOR IF OUT OF RANGE.
@@ -159,8 +159,8 @@ SUBROUTINE PNNZRS(I,Xval,Iplace,Sx,Ix,Ircx)
         Iplace = Ix(j+3) + 1
       ELSE
         Iplace = ll + 1
-      ENDIF
-    ENDIF
+      END IF
+    END IF
     !
     !     SCAN THROUGH SEVERAL PAGES, IF NECESSARY, TO FIND MATRIX ENTRY.
     !
@@ -177,9 +177,9 @@ SUBROUTINE PNNZRS(I,Xval,Iplace,Sx,Ix,Ircx)
       !
       Iplace = Iplace + idiff + 1
       ipl = IPLOC(Iplace,Sx,Ix)
-    ENDIF
+    END IF
     np = ABS(Ix(lmx-1))
-  ENDIF
+  END IF
   100  ilast = MIN(iend,np*lpg+ll-2)
   !
   !     THE VIRTUAL END OF THE DATA FOR THIS PAGE IS ILAST.
@@ -193,7 +193,7 @@ SUBROUTINE PNNZRS(I,Xval,Iplace,Sx,Ix,Ircx)
   !
   DO WHILE ( .NOT.(ipl>=il.OR.(Ix(ipl)>I.AND.Sx(ipl)/=zero)) )
     ipl = ipl + 1
-  ENDDO
+  END DO
   !
   !     TEST IF WE HAVE FOUND THE NEXT NONZERO.
   !
@@ -221,7 +221,7 @@ SUBROUTINE PNNZRS(I,Xval,Iplace,Sx,Ix,Ircx)
     Xval = Sx(ipl)
     Iplace = (np-1)*lpg + ipl
     RETURN
-  ENDIF
+  END IF
   200 CONTINUE
   IF ( (n20046-ii)<0 ) THEN
     !
@@ -240,7 +240,7 @@ SUBROUTINE PNNZRS(I,Xval,Iplace,Sx,Ix,Ircx)
       ipploc = Ix(ii+3) + 1
     ELSE
       ipploc = ll + 1
-    ENDIF
+    END IF
     iend = Ix(ii+4)
     !
     !     SCAN THROUGH SEVERAL PAGES, IF NECESSARY, TO FIND MATRIX ENTRY.
@@ -253,15 +253,15 @@ SUBROUTINE PNNZRS(I,Xval,Iplace,Sx,Ix,Ircx)
     IF ( idiff<=1.AND.Ix(lmx-1)>0 ) THEN
       ipploc = ipploc + idiff + 1
       ipl = IPLOC(ipploc,Sx,Ix)
-    ENDIF
+    END IF
     np = ABS(Ix(lmx-1))
-  ENDIF
+  END IF
   300  ilast = MIN(iend,np*lpg+ll-2)
   il = IPLOC(ilast,Sx,Ix)
   il = MIN(il,lmx-2)
   DO WHILE ( .NOT.(ipl>=il.OR.Ix(ipl)>=j) )
     ipl = ipl + 1
-  ENDDO
+  END DO
   !
   !     TEST IF WE HAVE FOUND THE NEXT NONZERO.
   !
@@ -272,7 +272,7 @@ SUBROUTINE PNNZRS(I,Xval,Iplace,Sx,Ix,Ircx)
     IF ( ilast/=iend ) GOTO 300
     ii = ii + 1
     GOTO 200
-  ENDIF
+  END IF
   I = ii
   Xval = Sx(ipl)
   RETURN

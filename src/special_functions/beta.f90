@@ -45,7 +45,7 @@ REAL FUNCTION BETA(A,B)
   IF ( alnsml==0.0 ) THEN
     CALL GAMLIM(xmin,xmax)
     alnsml = LOG(R1MACH(1))
-  ENDIF
+  END IF
   !
   IF ( A<=0..OR.B<=0. ) CALL XERMSG('SLATEC','BETA',&
     'BOTH ARGUMENTS MUST BE GT 0',2,2)
@@ -53,7 +53,7 @@ REAL FUNCTION BETA(A,B)
   IF ( A+B<xmax ) THEN
     BETA = GAMMA(A)*GAMMA(B)/GAMMA(A+B)
     RETURN
-  ENDIF
+  END IF
   !
   BETA = ALBETA(A,B)
   IF ( BETA<alnsml ) CALL XERMSG('SLATEC','BETA',&

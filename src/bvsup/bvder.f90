@@ -74,7 +74,7 @@ SUBROUTINE BVDER(X,Y,Yp,G,Ipar)
     CALL FMAT(X,Y(na),Yp(na))
     NOFst = NOFst - NCOmp
     na = na + NCOmp
-  ENDDO
+  END DO
   !
   IF ( INHomo/=1 ) RETURN
   CALL FMAT(X,Y(na),Yp(na))
@@ -84,7 +84,7 @@ SUBROUTINE BVDER(X,Y,Yp,G,Ipar)
     IF ( IVP==0 ) CALL GVEC(X,G)
     IF ( IVP>0 ) CALL UVEC(X,Y(IVP+1),G)
     XSAv = X
-  ENDIF
+  END IF
   !
   !     If the user has chosen not to normalize the particular
   !     solution, then C is defined in BVPOR to be 1.0
@@ -95,5 +95,5 @@ SUBROUTINE BVDER(X,Y,Yp,G,Ipar)
   DO j = 1, NCOmp
     l = na + j - 1
     Yp(l) = Yp(l) + G(j)/C
-  ENDDO
+  END DO
 END SUBROUTINE BVDER

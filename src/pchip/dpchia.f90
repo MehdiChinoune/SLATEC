@@ -162,9 +162,9 @@ REAL(8) FUNCTION DPCHIA(N,X,F,D,Incfd,Skip,A,B,Ierr)
     ELSE
       DO i = 2, N
         IF ( X(i)<=X(i-1) ) GOTO 200
-      ENDDO
-    ENDIF
-  ENDIF
+      END DO
+    END IF
+  END IF
   !
   !  FUNCTION DEFINITION IS OK, GO ON.
   !
@@ -195,14 +195,14 @@ REAL(8) FUNCTION DPCHIA(N,X,F,D,Incfd,Skip,A,B,Ierr)
       ia = 1
       DO i = 1, N - 1
         IF ( xa>X(i) ) ia = i + 1
-      ENDDO
+      END DO
       !             IA = 1 IMPLIES XA.LT.X(1) .  OTHERWISE,
       !             IA IS LARGEST INDEX SUCH THAT X(IA-1).LT.XA,.
       !
       ib = N
       DO i = N, ia, -1
         IF ( xb<X(i) ) ib = i - 1
-      ENDDO
+      END DO
       !             IB = N IMPLIES XB.GT.X(N) .  OTHERWISE,
       !             IB IS SMALLEST INDEX SUCH THAT XB.LT.X(IB+1) .
       !
@@ -228,8 +228,8 @@ REAL(8) FUNCTION DPCHIA(N,X,F,D,Incfd,Skip,A,B,Ierr)
             Ierr = -4
             CALL XERMSG('SLATEC','DPCHIA','TROUBLE IN DPCHID',Ierr,1)
             GOTO 100
-          ENDIF
-        ENDIF
+          END IF
+        END IF
         !
         !              THEN ADD ON INTEGRAL OVER (XA,X(IA)).
         IF ( xa<X(ia) ) THEN
@@ -239,7 +239,7 @@ REAL(8) FUNCTION DPCHIA(N,X,F,D,Incfd,Skip,A,B,Ierr)
           value = value + DCHFIE(X(il),X(ir),F(1,il),F(1,ir),D(1,il),D(1,ir)&
             ,xa,X(ia))
           !                                 -------------------------------------
-        ENDIF
+        END IF
         !
         !              THEN ADD ON INTEGRAL OVER (X(IB),XB).
         IF ( xb>X(ib) ) THEN
@@ -249,13 +249,13 @@ REAL(8) FUNCTION DPCHIA(N,X,F,D,Incfd,Skip,A,B,Ierr)
           value = value + DCHFIE(X(il),X(ir),F(1,il),F(1,ir),D(1,il),D(1,ir)&
             ,X(ib),xb)
           !                                 -------------------------------------
-        ENDIF
+        END IF
         !
         !              FINALLY, ADJUST SIGN IF NECESSARY.
         IF ( A>B ) value = -value
-      ENDIF
-    ENDIF
-  ENDIF
+      END IF
+    END IF
+  END IF
   !
   !  NORMAL RETURN.
   !

@@ -92,7 +92,7 @@ REAL FUNCTION ERFC(X)
     xmax = txmax - 0.5*LOG(txmax)/txmax - 0.01
     sqeps = SQRT(2.0*R1MACH(3))
     first = .FALSE.
-  ENDIF
+  END IF
   !
   IF ( X<=xsml ) THEN
     !
@@ -115,8 +115,8 @@ REAL FUNCTION ERFC(X)
       IF ( y<sqeps ) ERFC = 1.0 - 2.0*X/sqrtpi
       IF ( y>=sqeps ) ERFC = 1.0 - X*(1.0+CSEVL(2.*X*X-1.,erfcs,nterf))
       RETURN
-    ENDIF
-  ENDIF
+    END IF
+  END IF
   !
   ! ERFC(X) = 1.0 - ERF(X) FOR 1. .LT. ABS(X) .LE. XMAX
   !

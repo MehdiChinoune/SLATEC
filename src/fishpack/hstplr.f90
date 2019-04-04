@@ -328,7 +328,7 @@ SUBROUTINE HSTPLR(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   INTEGER i, Idimf, ierr1, Ierror, isw, iwb, iwc, iwr, j, k, lp, &
     M, mb, Mbdcnd, N, Nbdcnd, np
   REAL A, a1, a2, B, Bda(*), Bdb(*), Bdc(*), Bdd(*), C, D, deltar, deltht, &
@@ -369,14 +369,14 @@ SUBROUTINE HSTPLR(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
     W(k) = (A+i*deltar)/dlrsq
     k = iwb + i
     W(k) = (Elmbda-2./dlrsq)*W(j)
-  ENDDO
+  END DO
   DO i = 1, M
     j = iwr + i
     a1 = W(j)
     DO j = 1, N
       F(i,j) = a1*F(i,j)
-    ENDDO
-  ENDDO
+    END DO
+  END DO
   !
   !     ENTER BOUNDARY DATA FOR R-BOUNDARIES.
   !
@@ -386,14 +386,14 @@ SUBROUTINE HSTPLR(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
       W(iwb+1) = W(iwb+1) + W(1)
       DO j = 1, N
         F(1,j) = F(1,j) + a1*Bda(j)
-      ENDDO
+      END DO
     CASE (5,6)
     CASE DEFAULT
       a1 = 2.*W(1)
       W(iwb+1) = W(iwb+1) - W(1)
       DO j = 1, N
         F(1,j) = F(1,j) - a1*Bda(j)
-      ENDDO
+      END DO
   END SELECT
   SELECT CASE (mb)
     CASE (2,3,6)
@@ -401,13 +401,13 @@ SUBROUTINE HSTPLR(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
       W(iwc) = W(iwc) + W(iwr)
       DO j = 1, N
         F(M,j) = F(M,j) - a1*Bdb(j)
-      ENDDO
+      END DO
     CASE DEFAULT
       a1 = 2.*W(iwr)
       W(iwc) = W(iwc) - W(iwr)
       DO j = 1, N
         F(M,j) = F(M,j) - a1*Bdb(j)
-      ENDDO
+      END DO
   END SELECT
   !
   !     ENTER BOUNDARY DATA FOR THETA-BOUNDARIES.
@@ -421,12 +421,12 @@ SUBROUTINE HSTPLR(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
       DO i = 1, M
         j = iwr + i
         F(i,1) = F(i,1) + a1*Bdc(i)/W(j)
-      ENDDO
+      END DO
     CASE DEFAULT
       DO i = 1, M
         j = iwr + i
         F(i,1) = F(i,1) - a1*Bdc(i)/W(j)
-      ENDDO
+      END DO
   END SELECT
   a1 = 2./dlthsq
   SELECT CASE (np)
@@ -436,12 +436,12 @@ SUBROUTINE HSTPLR(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
       DO i = 1, M
         j = iwr + i
         F(i,N) = F(i,N) - a1*Bdd(i)/W(j)
-      ENDDO
+      END DO
     CASE DEFAULT
       DO i = 1, M
         j = iwr + i
         F(i,N) = F(i,N) - a1*Bdd(i)/W(j)
-      ENDDO
+      END DO
   END SELECT
   !
   !     ADJUST RIGHT SIDE OF SINGULAR PROBLEMS TO INSURE EXISTENCE OF A
@@ -460,26 +460,26 @@ SUBROUTINE HSTPLR(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
             DO j = 1, N
               DO i = 1, M
                 Pertrb = Pertrb + F(i,j)
-              ENDDO
-            ENDDO
+              END DO
+            END DO
             Pertrb = Pertrb/(M*N*0.5*(A+B))
             DO i = 1, M
               j = iwr + i
               a1 = Pertrb*W(j)
               DO j = 1, N
                 F(i,j) = F(i,j) - a1
-              ENDDO
-            ENDDO
+              END DO
+            END DO
             a2 = 0.
             DO j = 1, N
               a2 = a2 + F(1,j)
-            ENDDO
+            END DO
             a2 = a2/W(iwr+1)
         END SELECT
     END SELECT
   ELSE
     Ierror = 11
-  ENDIF
+  END IF
   !
   !     MULTIPLY I-TH EQUATION THROUGH BY  R(I)*DELTHT**2
   !
@@ -493,8 +493,8 @@ SUBROUTINE HSTPLR(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
     W(j) = a1*W(j)
     DO j = 1, N
       F(i,j) = a1*F(i,j)
-    ENDDO
-  ENDDO
+    END DO
+  END DO
   lp = Nbdcnd
   W(1) = 0.
   W(iwr) = 0.
@@ -505,20 +505,20 @@ SUBROUTINE HSTPLR(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
     CALL GENBUN(lp,N,1,M,W,W(iwb+1),W(iwc+1),Idimf,F,ierr1,W(iwr+1))
   ELSE
     CALL POISTG(lp,N,1,M,W,W(iwb+1),W(iwc+1),Idimf,F,ierr1,W(iwr+1))
-  ENDIF
+  END IF
   W(1) = W(iwr+1) + 3*M
   IF ( A==0..AND.Mbdcnd==2.AND.isw==2 ) THEN
     a1 = 0.
     DO j = 1, N
       a1 = a1 + F(1,j)
-    ENDDO
+    END DO
     a1 = (a1-dlrsq*a2/16.)/N
     IF ( Nbdcnd==3 ) a1 = a1 + (Bdd(1)-Bdc(1))/(D-C)
     a1 = Bda(1) - a1
     DO i = 1, M
       DO j = 1, N
         F(i,j) = F(i,j) + a1
-      ENDDO
-    ENDDO
-  ENDIF
+      END DO
+    END DO
+  END IF
 END SUBROUTINE HSTPLR

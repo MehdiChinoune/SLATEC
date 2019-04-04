@@ -48,7 +48,7 @@ REAL FUNCTION EXPREL(X)
     nterms = INT( xn - (xn*xln+alneps)/(xln+1.36) + 1.5 )
     xbnd = R1MACH(3)
     first = .FALSE.
-  ENDIF
+  END IF
   !
   absx = ABS(X)
   IF ( absx>0.5 ) EXPREL = (EXP(X)-1.0)/X
@@ -60,6 +60,6 @@ REAL FUNCTION EXPREL(X)
   EXPREL = 0.0
   DO i = 1, nterms
     EXPREL = 1.0 + EXPREL*X/(nterms+2-i)
-  ENDDO
+  END DO
   !
 END FUNCTION EXPREL

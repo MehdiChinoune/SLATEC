@@ -31,7 +31,7 @@ SUBROUTINE U12US(A,Mda,M,N,B,Mdb,Nb,Mode,Krank,Rnorm,H,W,Ir,Ic)
   !   890831  Modified array declarations.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
-  
+
   INTEGER i, ij, ip1, j, jb, k, kp1, Krank, M, Mda, Mdb, mmk, Mode, N, Nb
   REAL A(Mda,*), B(Mdb,*), bb, H(*), Rnorm(*), SDOT, SNRM2, tt, W(*)
   INTEGER Ic(*), Ir(*)
@@ -51,7 +51,7 @@ SUBROUTINE U12US(A,Mda,M,N,B,Mdb,Nb,Mode,Krank,Rnorm,H,W,Ir,Ic)
       IF ( i==M ) THEN
         DO i = 1, M
           Ir(i) = ABS(Ir(i))
-        ENDDO
+        END DO
         !
         !     IF A IS OF REDUCED RANK AND MODE=2,
         !     APPLY HOUSEHOLDER TRANSFORMATIONS TO B
@@ -65,15 +65,15 @@ SUBROUTINE U12US(A,Mda,M,N,B,Mdb,Nb,Mode,Krank,Rnorm,H,W,Ir,Ic)
               tt = tt - B(i,jb)
               CALL SAXPY(mmk,tt,A(kp1,i),1,B(kp1,jb),1)
               B(i,jb) = B(i,jb) + tt*W(i)
-            ENDDO
-          ENDDO
-        ENDIF
+            END DO
+          END DO
+        END IF
         !
         !     FIND NORMS OF RESIDUAL VECTOR(S)..(BEFORE OVERWRITE B)
         !
         DO jb = 1, Nb
           Rnorm(jb) = SNRM2((M-k),B(kp1,jb),1)
-        ENDDO
+        END DO
         !
         !     BACK SOLVE LOWER TRIANGULAR L
         !
@@ -83,8 +83,8 @@ SUBROUTINE U12US(A,Mda,M,N,B,Mdb,Nb,Mode,Krank,Rnorm,H,W,Ir,Ic)
             IF ( i==k ) EXIT
             ip1 = i + 1
             CALL SAXPY(k-i,-B(i,jb),A(ip1,i),1,B(ip1,jb),1)
-          ENDDO
-        ENDDO
+          END DO
+        END DO
         !
         !
         !      TRUNCATED SOLUTION
@@ -93,9 +93,9 @@ SUBROUTINE U12US(A,Mda,M,N,B,Mdb,Nb,Mode,Krank,Rnorm,H,W,Ir,Ic)
           DO jb = 1, Nb
             DO i = kp1, N
               B(i,jb) = 0.0
-            ENDDO
-          ENDDO
-        ENDIF
+            END DO
+          END DO
+        END IF
         !
         !     APPLY HOUSEHOLDER TRANSFORMATIONS TO B
         !
@@ -106,9 +106,9 @@ SUBROUTINE U12US(A,Mda,M,N,B,Mdb,Nb,Mode,Krank,Rnorm,H,W,Ir,Ic)
           DO jb = 1, Nb
             bb = -SDOT(N-j+1,A(j,j),Mda,B(j,jb),1)/H(j)
             CALL SAXPY(N-j+1,bb,A(j,j),Mda,B(j,jb),1)
-          ENDDO
+          END DO
           A(j,j) = tt
-        ENDDO
+        END DO
         !
         !
         !     REORDER B TO REFLECT COLUMN INTERCHANGES
@@ -119,7 +119,7 @@ SUBROUTINE U12US(A,Mda,M,N,B,Mdb,Nb,Mode,Krank,Rnorm,H,W,Ir,Ic)
           IF ( i==N ) THEN
             DO i = 1, N
               Ic(i) = ABS(Ic(i))
-            ENDDO
+            END DO
             RETURN
           ELSE
             j = Ic(i)
@@ -132,11 +132,11 @@ SUBROUTINE U12US(A,Mda,M,N,B,Mdb,Nb,Mode,Krank,Rnorm,H,W,Ir,Ic)
                   Ic(j) = -Ic(j)
                   j = ij
                   IF ( j==i ) EXIT
-                ENDDO
-              ENDIF
-            ENDIF
-          ENDIF
-        ENDDO
+                END DO
+              END IF
+            END IF
+          END IF
+        END DO
       ELSE
         j = Ir(i)
         IF ( j/=i ) THEN
@@ -144,37 +144,37 @@ SUBROUTINE U12US(A,Mda,M,N,B,Mdb,Nb,Mode,Krank,Rnorm,H,W,Ir,Ic)
             Ir(i) = -Ir(i)
             DO jb = 1, Nb
               Rnorm(jb) = B(i,jb)
-            ENDDO
+            END DO
             ij = i
             DO
               DO jb = 1, Nb
                 B(ij,jb) = B(j,jb)
-              ENDDO
+              END DO
               ij = j
               j = Ir(ij)
               Ir(ij) = -Ir(ij)
               IF ( j==i ) THEN
                 DO jb = 1, Nb
                   B(ij,jb) = Rnorm(jb)
-                ENDDO
+                END DO
                 EXIT
-              ENDIF
-            ENDDO
-          ENDIF
-        ENDIF
-      ENDIF
-    ENDDO
+              END IF
+            END DO
+          END IF
+        END IF
+      END IF
+    END DO
   ELSE
     DO jb = 1, Nb
       Rnorm(jb) = SNRM2(M,B(1,jb),1)
-    ENDDO
+    END DO
     DO jb = 1, Nb
       DO i = 1, N
         B(i,jb) = 0.0
-      ENDDO
-    ENDDO
+      END DO
+    END DO
     RETURN
-  ENDIF
+  END IF
   !
   !        SOLUTION VECTORS ARE IN FIRST N ROWS OF B(,)
   !

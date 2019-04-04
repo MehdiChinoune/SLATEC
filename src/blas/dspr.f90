@@ -119,11 +119,11 @@ SUBROUTINE DSPR(Uplo,N,Alpha,X,Incx,Ap)
     info = 2
   ELSEIF ( Incx==0 ) THEN
     info = 5
-  ENDIF
+  END IF
   IF ( info/=0 ) THEN
     CALL XERBLA('DSPR  ',info)
     RETURN
-  ENDIF
+  END IF
   !
   !     Quick return if possible.
   !
@@ -135,7 +135,7 @@ SUBROUTINE DSPR(Uplo,N,Alpha,X,Incx,Ap)
     kx = 1 - (N-1)*Incx
   ELSEIF ( Incx/=1 ) THEN
     kx = 1
-  ENDIF
+  END IF
   !
   !     Start the operations. In this version the elements of the array AP
   !     are accessed sequentially with one pass through AP.
@@ -153,10 +153,10 @@ SUBROUTINE DSPR(Uplo,N,Alpha,X,Incx,Ap)
           DO i = 1, j
             Ap(k) = Ap(k) + X(i)*temp
             k = k + 1
-          ENDDO
-        ENDIF
+          END DO
+        END IF
         kk = kk + j
-      ENDDO
+      END DO
     ELSE
       jx = kx
       DO j = 1, N
@@ -166,12 +166,12 @@ SUBROUTINE DSPR(Uplo,N,Alpha,X,Incx,Ap)
           DO k = kk, kk + j - 1
             Ap(k) = Ap(k) + X(ix)*temp
             ix = ix + Incx
-          ENDDO
-        ENDIF
+          END DO
+        END IF
         jx = jx + Incx
         kk = kk + j
-      ENDDO
-    ENDIF
+      END DO
+    END IF
     !
     !        Form  A  when lower triangle is stored in AP.
     !
@@ -183,10 +183,10 @@ SUBROUTINE DSPR(Uplo,N,Alpha,X,Incx,Ap)
         DO i = j, N
           Ap(k) = Ap(k) + X(i)*temp
           k = k + 1
-        ENDDO
-      ENDIF
+        END DO
+      END IF
       kk = kk + N - j + 1
-    ENDDO
+    END DO
   ELSE
     jx = kx
     DO j = 1, N
@@ -196,12 +196,12 @@ SUBROUTINE DSPR(Uplo,N,Alpha,X,Incx,Ap)
         DO k = kk, kk + N - j
           Ap(k) = Ap(k) + X(ix)*temp
           ix = ix + Incx
-        ENDDO
-      ENDIF
+        END DO
+      END IF
       jx = jx + Incx
       kk = kk + N - j + 1
-    ENDDO
-  ENDIF
+    END DO
+  END IF
   !
   !
   !     End of DSPR  .

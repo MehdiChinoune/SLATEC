@@ -137,14 +137,14 @@ INTEGER FUNCTION DCHFCM(D1,D2,Delta)
         !              TO CLOSE TO BOUNDARY TO TELL,
         !                  IN THE PRESENCE OF ROUND-OFF ERRORS.
         ismon = 3*itrue
-      ENDIF
-    ENDIF
+      END IF
+    END IF
     !        CASE OF CONSTANT DATA.
   ELSEIF ( (D1==zero).AND.(D2==zero) ) THEN
     ismon = 0
   ELSE
     ismon = 2
-  ENDIF
+  END IF
   !
   !  RETURN VALUE.
   !

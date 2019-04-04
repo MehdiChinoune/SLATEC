@@ -61,16 +61,16 @@ SUBROUTINE MPCDM(Dx,Z)
     rs = 1
     dj = Dx
     ie = 0
-  ENDIF
+  END IF
   DO WHILE ( dj>=1D0 )
     ! INCREASE IE AND DIVIDE DJ BY 16.
     ie = ie + 1
     dj = 0.0625D0*dj
-  ENDDO
+  END DO
   DO WHILE ( dj<0.0625D0 )
     ie = ie - 1
     dj = 16D0*dj
-  ENDDO
+  END DO
   ! NOW DJ IS DY DIVIDED BY SUITABLE POWER OF 16
   ! SET EXPONENT TO 0
   re = 0
@@ -80,7 +80,7 @@ SUBROUTINE MPCDM(Dx,Z)
     dj = db*dj
     R(i) = INT(dj)
     dj = dj - REAL(R(i), 8)
-  ENDDO
+  END DO
   ! NORMALIZE RESULT
   CALL MPNZR(rs,re,Z,0)
   ib = MAX(7*B*B,32767)/16
@@ -93,8 +93,8 @@ SUBROUTINE MPCDM(Dx,Z)
       IF ( (tp>ib).OR.(tp==B).OR.(i>=k) ) THEN
         CALL MPDIVI(Z,tp,Z)
         tp = 1
-      ENDIF
-    ENDDO
+      END IF
+    END DO
     RETURN
   ELSEIF ( ie/=0 ) THEN
     DO i = 1, ie
@@ -102,7 +102,7 @@ SUBROUTINE MPCDM(Dx,Z)
       IF ( (tp>ib).OR.(tp==B).OR.(i>=ie) ) THEN
         CALL MPMULI(Z,tp,Z)
         tp = 1
-      ENDIF
-    ENDDO
-  ENDIF
+      END IF
+    END DO
+  END IF
 END SUBROUTINE MPCDM

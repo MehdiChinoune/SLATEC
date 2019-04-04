@@ -332,9 +332,9 @@ SUBROUTINE QAGIE(F,Bound,Inf,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,&
           erro12>=0.99E+00*errmax ) THEN
         IF ( extrap ) iroff2 = iroff2 + 1
         IF ( .NOT.extrap ) iroff1 = iroff1 + 1
-      ENDIF
+      END IF
       IF ( Last>10.AND.erro12>errmax ) iroff3 = iroff3 + 1
-    ENDIF
+    END IF
     Rlist(maxerr) = area1
     Rlist(Last) = area2
     errbnd = MAX(Epsabs,Epsrel*ABS(area))
@@ -372,7 +372,7 @@ SUBROUTINE QAGIE(F,Bound,Inf,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,&
       Blist(Last) = b2
       Elist(maxerr) = error1
       Elist(Last) = error2
-    ENDIF
+    END IF
     !
     !           CALL SUBROUTINE QPSRT TO MAINTAIN THE DESCENDING ORDERING
     !           IN THE LIST OF ERROR ESTIMATES AND SELECT THE
@@ -398,7 +398,7 @@ SUBROUTINE QAGIE(F,Bound,Inf,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,&
         IF ( ABS(Blist(maxerr)-Alist(maxerr))>small ) CYCLE
         extrap = .TRUE.
         nrmax = 2
-      ENDIF
+      END IF
       IF ( ierro/=3.AND.erlarg>ertest ) THEN
         !
         !           THE SMALLEST INTERVAL HAS THE LARGEST ERROR.
@@ -414,8 +414,8 @@ SUBROUTINE QAGIE(F,Bound,Inf,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,&
           errmax = Elist(maxerr)
           IF ( ABS(Blist(maxerr)-Alist(maxerr))>small ) GOTO 100
           nrmax = nrmax + 1
-        ENDDO
-      ENDIF
+        END DO
+      END IF
       !
       !           PERFORM EXTRAPOLATION.
       !
@@ -431,7 +431,7 @@ SUBROUTINE QAGIE(F,Bound,Inf,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,&
         correc = erlarg
         ertest = MAX(Epsabs,Epsrel*ABS(reseps))
         IF ( Abserr<=ertest ) EXIT
-      ENDIF
+      END IF
       !
       !            PREPARE BISECTION OF THE SMALLEST INTERVAL.
       !
@@ -443,9 +443,9 @@ SUBROUTINE QAGIE(F,Bound,Inf,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,&
       extrap = .FALSE.
       small = small*0.5E+00
       erlarg = errsum
-    ENDIF
+    END IF
     100 CONTINUE
-  ENDDO
+  END DO
   !
   !           SET FINAL RESULT AND ERROR ESTIMATE.
   !           ------------------------------------
@@ -459,24 +459,24 @@ SUBROUTINE QAGIE(F,Bound,Inf,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,&
         IF ( area==0.0E+00 ) GOTO 300
       ELSEIF ( Abserr/ABS(Result)>errsum/ABS(area) ) THEN
         GOTO 200
-      ENDIF
-    ENDIF
+      END IF
+    END IF
     !
     !           TEST ON DIVERGENCE
     !
     IF ( ksgn/=(-1).OR.MAX(ABS(Result),ABS(area))>defabs*0.1E-01 ) THEN
       IF ( 0.1E-01>(Result/area).OR.(Result/area)>0.1E+03.OR.&
         errsum>ABS(area) ) Ier = 6
-    ENDIF
+    END IF
     GOTO 300
-  ENDIF
+  END IF
   !
   !           COMPUTE GLOBAL INTEGRAL SUM.
   !
   200  Result = 0.0E+00
   DO k = 1, Last
     Result = Result + Rlist(k)
-  ENDDO
+  END DO
   Abserr = errsum
   300  Neval = 30*Last - 15
   IF ( Inf==2 ) Neval = 2*Neval

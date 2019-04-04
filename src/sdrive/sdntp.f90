@@ -24,43 +24,43 @@ SUBROUTINE SDNTP(H,K,N,Nq,T,Tout,Yh,Y)
   !* REVISION HISTORY  (YYMMDD)
   !   790601  DATE WRITTEN
   !   900329  Initial submission to SLATEC.
-  
+
   INTEGER i, j, jj, K, kk, kused, N, Nq
   REAL factor, H, r, T, Tout, Y(*), Yh(N,*)
   !* FIRST EXECUTABLE STATEMENT  SDNTP
   IF ( K==0 ) THEN
     DO i = 1, N
       Y(i) = Yh(i,Nq+1)
-    ENDDO
+    END DO
     r = ((Tout-T)/H)
     DO jj = 1, Nq
       j = Nq + 1 - jj
       DO i = 1, N
         Y(i) = Yh(i,j) + r*Y(i)
-      ENDDO
-    ENDDO
+      END DO
+    END DO
   ELSE
     kused = MIN(K,Nq)
     factor = 1.E0
     DO kk = 1, kused
       factor = factor*(Nq+1-kk)
-    ENDDO
+    END DO
     DO i = 1, N
       Y(i) = factor*Yh(i,Nq+1)
-    ENDDO
+    END DO
     r = ((Tout-T)/H)
     DO jj = kused + 1, Nq
       j = kused + 1 + Nq - jj
       factor = 1.E0
       DO kk = 1, kused
         factor = factor*(j-kk)
-      ENDDO
+      END DO
       DO i = 1, N
         Y(i) = factor*Yh(i,j) + r*Y(i)
-      ENDDO
-    ENDDO
+      END DO
+    END DO
     DO i = 1, N
       Y(i) = Y(i)*H**(-kused)
-    ENDDO
-  ENDIF
+    END DO
+  END IF
 END SUBROUTINE SDNTP

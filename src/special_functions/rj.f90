@@ -327,7 +327,7 @@ REAL FUNCTION RJ(X,Y,Z,P,Ier)
     lolim = (5.0E0*R1MACH(1))**(1.0E0/3.0E0)
     uplim = 0.30E0*(R1MACH(2)/5.0E0)**(1.0E0/3.0E0)
     first = .FALSE.
-  ENDIF
+  END IF
   !
   !         CALL ERROR HANDLER IF NECESSARY.
   !
@@ -340,7 +340,7 @@ REAL FUNCTION RJ(X,Y,Z,P,Ier)
     CALL XERMSG('SLATEC','RJ','MIN(X,Y,Z).LT.0 WHERE X = '//xern3//' Y = '//&
       xern4//' AND Z = '//xern5,1,1)
     RETURN
-  ENDIF
+  END IF
   !
   IF ( MAX(X,Y,Z,P)>uplim ) THEN
     Ier = 3
@@ -353,7 +353,7 @@ REAL FUNCTION RJ(X,Y,Z,P,Ier)
       ' Y = '//xern4//' Z = '//xern5//' P = '//xern6//&
       ' AND UPLIM = '//xern7,3,1)
     RETURN
-  ENDIF
+  END IF
   !
   IF ( MIN(X+Y,X+Z,Y+Z,P)<lolim ) THEN
     Ier = 2
@@ -365,7 +365,7 @@ REAL FUNCTION RJ(X,Y,Z,P,Ier)
     CALL XERMSG('SLATEC','RJ','MIN(X+Y,X+Z,Y+Z,P).LT.LOLIM WHERE X = '//&
       xern3//' Y = '//xern4//' Z = '//xern5//' P = '//xern6//' AND LOLIM = ',2,1)
     RETURN
-  ENDIF
+  END IF
   !
   Ier = 0
   xn = X
@@ -408,6 +408,6 @@ REAL FUNCTION RJ(X,Y,Z,P,Ier)
       yn = (yn+lamda)*0.250E0
       zn = (zn+lamda)*0.250E0
       pn = (pn+lamda)*0.250E0
-    ENDIF
-  ENDDO
+    END IF
+  END DO
 END FUNCTION RJ

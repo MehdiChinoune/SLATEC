@@ -458,7 +458,7 @@ SUBROUTINE DBOLS(W,Mdw,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Iw)
       CALL XERMSG('SLATEC','DBOLS','MDW = '//xern1//' MUST BE POSITIVE.',2,1)
       !     DO(RETURN TO USER PROGRAM UNIT)
       GOTO 100
-    ENDIF
+    END IF
     !
     !     SEE THAT NUMBER OF UNKNOWNS IS POSITIVE.
     IF ( Ncols<=0 ) THEN
@@ -467,7 +467,7 @@ SUBROUTINE DBOLS(W,Mdw,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Iw)
         ' THE NO. OF VARIABLES MUST BE POSITIVE.',3,1)
       !     DO(RETURN TO USER PROGRAM UNIT)
       GOTO 100
-    ENDIF
+    END IF
     !
     !     SEE THAT CONSTRAINT INDICATORS ARE ALL WELL-DEFINED.
     DO j = 1, Ncols
@@ -478,8 +478,8 @@ SUBROUTINE DBOLS(W,Mdw,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Iw)
           ' MUST BE 1-4.',4,1)
         !     DO(RETURN TO USER PROGRAM UNIT)
         GOTO 100
-      ENDIF
-    ENDDO
+      END IF
+    END DO
     !
     !     SEE THAT BOUNDS ARE CONSISTENT.
     DO j = 1, Ncols
@@ -492,9 +492,9 @@ SUBROUTINE DBOLS(W,Mdw,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Iw)
             ' IS .GT. BU('//xern1//') = '//xern4,5,1)
           !     DO(RETURN TO USER PROGRAM UNIT)
           GOTO 100
-        ENDIF
-      ENDIF
-    ENDDO
+        END IF
+      END IF
+    END DO
     !     END PROCEDURE
     !     DO(PROCESS OPTION ARRAY)
     !     PROCEDURE(PROCESS OPTION ARRAY)
@@ -529,14 +529,14 @@ SUBROUTINE DBOLS(W,Mdw,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Iw)
               xern1//' MUST BE .GE. THE NUMBER OF ROWS = '//xern2,11,1)
             !     DO(RETURN TO USER PROGRAM UNIT)
             GOTO 100
-          ENDIF
+          END IF
           IF ( lndw<Ncols+1 ) THEN
             WRITE (xern1,'(I8)') lndw
             WRITE (xern2,'(I8)') Ncols + 1
             CALL XERMSG('SLATEC','DBOLS','THE COLUMN DIMENSION OF W(,) = '//&
               xern1//' MUST BE .GE. NCOLS+1 = '//xern2,12,1)
             GOTO 100
-          ENDIF
+          END IF
           IF ( llb<Ncols ) THEN
             WRITE (xern1,'(I8)') llb
             WRITE (xern2,'(I8)') Ncols
@@ -545,7 +545,7 @@ SUBROUTINE DBOLS(W,Mdw,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Iw)
               //xern1//' MUST BE .GE. NCOLS = '//xern2,13,1)
             !     DO(RETURN TO USER PROGRAM UNIT)
             GOTO 100
-          ENDIF
+          END IF
           IF ( llx<lenx ) THEN
             WRITE (xern1,'(I8)') llx
             WRITE (xern2,'(I8)') lenx
@@ -553,7 +553,7 @@ SUBROUTINE DBOLS(W,Mdw,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Iw)
               ' MUST BE .GE. THE REQUIRED LENGTH = '//xern2,14,1)
             !     DO(RETURN TO USER PROGRAM UNIT)
             GOTO 100
-          ENDIF
+          END IF
           IF ( llrw<5*Ncols ) THEN
             WRITE (xern1,'(I8)') llrw
             WRITE (xern2,'(I8)') 5*Ncols
@@ -561,7 +561,7 @@ SUBROUTINE DBOLS(W,Mdw,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Iw)
               ' MUST BE .GE. 5*NCOLS = '//xern2,15,1)
             !     DO(RETURN TO USER PROGRAM UNIT)
             GOTO 100
-          ENDIF
+          END IF
           IF ( lliw<2*Ncols ) THEN
             WRITE (xern1,'(I8)') lliw
             WRITE (xern2,'(I8)') 2*Ncols
@@ -569,7 +569,7 @@ SUBROUTINE DBOLS(W,Mdw,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Iw)
               ' MUST BE .GE. 2*NCOLS = '//xern2,16,1)
             !     DO(RETURN TO USER PROGRAM UNIT)
             GOTO 100
-          ENDIF
+          END IF
           IF ( liopt<lp+1 ) THEN
             WRITE (xern1,'(I8)') liopt
             WRITE (xern2,'(I8)') lp + 1
@@ -577,9 +577,9 @@ SUBROUTINE DBOLS(W,Mdw,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Iw)
               xern1//' MUST BE .GE. THE REQUIRED LEN = '//xern2,17,1)
             !     DO(RETURN TO USER PROGRAM UNIT)
             GOTO 100
-          ENDIF
+          END IF
           !     END PROCEDURE
-        ENDIF
+        END IF
         EXIT
       ELSEIF ( jp==99 ) THEN
         lds = 1
@@ -617,7 +617,7 @@ SUBROUTINE DBOLS(W,Mdw,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Iw)
           !              CALL DBOLS( )
           Iopt(locacc+1) = 1
           igo = 1
-        ENDIF
+        END IF
         lds = 4
       ELSEIF ( jp==2 ) THEN
         IF ( ip>0 ) THEN
@@ -640,7 +640,7 @@ SUBROUTINE DBOLS(W,Mdw,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Iw)
           lliw = Iopt(locdim+5)
           liopt = Iopt(locdim+6)
           checkl = .TRUE.
-        ENDIF
+        END IF
         lds = 8
         !
         !     OPTION TO MODIFY THE COLUMN SCALING.
@@ -655,8 +655,8 @@ SUBROUTINE DBOLS(W,Mdw,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Iw)
               ' MUST BE 1-3',7,1)
             !     DO(RETURN TO USER PROGRAM UNIT)
             GOTO 100
-          ENDIF
-        ENDIF
+          END IF
+        END IF
         !     CYCLE FOREVER
         lds = 2
         !
@@ -671,7 +671,7 @@ SUBROUTINE DBOLS(W,Mdw,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Iw)
               ') FOR USER-PROVIDED COLUMN SCALING MUST BE POSITIVE.',8,1)
             !     DO(RETURN TO USER PROGRAM UNIT)
             GOTO 100
-          ENDIF
+          END IF
           CALL DCOPY(Ncols,X(Ncols+Iopt(lp+2)),1,Rw,1)
           lenx = lenx + Ncols
           DO j = 1, Ncols
@@ -682,9 +682,9 @@ SUBROUTINE DBOLS(W,Mdw,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Iw)
                 'EACH PROVIDED COLUMN SCALE FACTOR MUST BE POSITIVE.$$COMPONENT '&
                 //xern1//' NOW = '//xern3,9,1)
               GOTO 100
-            ENDIF
-          ENDDO
-        ENDIF
+            END IF
+          END DO
+        END IF
         !     CYCLE FOREVER
         lds = 2
         !
@@ -703,7 +703,7 @@ SUBROUTINE DBOLS(W,Mdw,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Iw)
         ELSE
           lds = 2
           !     CYCLE FOREVER
-        ENDIF
+        END IF
         !
         !     NO VALID OPTION NUMBER WAS NOTED. THIS IS AN ERROR CONDITION.
       ELSE
@@ -712,9 +712,9 @@ SUBROUTINE DBOLS(W,Mdw,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Iw)
           ' IS NOT DEFINED.',6,1)
         !     DO(RETURN TO USER PROGRAM UNIT)
         GOTO 100
-      ENDIF
-    ENDDO
-  ENDIF
+      END IF
+    END DO
+  END IF
   IF ( igo==1 ) THEN
     !
     !     GO BACK TO THE USER FOR ACCUMULATION OF LEAST SQUARES
@@ -732,7 +732,7 @@ SUBROUTINE DBOLS(W,Mdw,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Iw)
         ' MUST BE .GE. 0 .AND. .LE. MDW = '//xern2,10,1)
       !     DO(RETURN TO USER PROGRAM UNIT)
       GOTO 100
-    ENDIF
+    END IF
     DO j = 1, MIN(Ncols+1,mnew)
       DO i = mnew, MAX(Mrows,j) + 1, -1
         ibig = IDAMAX(i-j,W(j,j),1) + j - 1
@@ -741,8 +741,8 @@ SUBROUTINE DBOLS(W,Mdw,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Iw)
         CALL DROTG(W(ibig,j),W(i,j),sc,ss)
         CALL DROT(Ncols+1-j,W(ibig,j+1),Mdw,W(i,j+1),Mdw,sc,ss)
         W(i,j) = zero
-      ENDDO
-    ENDDO
+      END DO
+    END DO
     Mrows = MIN(Ncols+1,mnew)
     Iopt(locacc+1) = Mrows + 1
     igo = Iopt(locacc)
@@ -765,7 +765,7 @@ SUBROUTINE DBOLS(W,Mdw,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Iw)
             Rw(j) = one
           ELSE
             Rw(j) = one/Rw(j)
-          ENDIF
+          END IF
         CASE (2)
           !     CASE 2
           !
@@ -776,7 +776,7 @@ SUBROUTINE DBOLS(W,Mdw,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Iw)
             Rw(j) = one
           ELSE
             Rw(j) = one/Rw(j)
-          ENDIF
+          END IF
         CASE (3)
           !     CASE 3
           !
@@ -790,7 +790,7 @@ SUBROUTINE DBOLS(W,Mdw,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Iw)
           EXIT
         CASE DEFAULT
       END SELECT
-    ENDDO
+    END DO
     !     END PROCEDURE
     !     DO(SOLVE BOUNDED LEAST SQUARES PROBLEM)
     !     PROCEDURE(SOLVE BOUNDED LEAST SQUARES PROBLEM)
@@ -802,12 +802,12 @@ SUBROUTINE DBOLS(W,Mdw,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Iw)
       Iw(j+Ncols) = 1
       Rw(3*Ncols+j) = Bl(j)
       Rw(4*Ncols+j) = Bu(j)
-    ENDDO
+    END DO
     CALL DBOLSM(W,Mdw,Mrows,Ncols,Rw(3*Ncols+1),Rw(4*Ncols+1),Ind,Iopt(lopt)&
       ,X,Rnorm,Mode,Rw(Ncols+1),Rw(2*Ncols+1),Rw,Iw,Iw(Ncols+1))
     !     END PROCEDURE
     igo = 0
-  ENDIF
+  END IF
   RETURN
   !     PROCEDURE(RETURN TO USER PROGRAM UNIT)
   100 CONTINUE

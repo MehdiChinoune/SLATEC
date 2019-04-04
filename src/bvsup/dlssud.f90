@@ -118,7 +118,7 @@ SUBROUTINE DLSSUD(A,X,B,N,M,Nrda,U,Nrdu,Iflag,Mlso,Irank,Iscale,Q,Diag,&
   !   900328  Added TYPE section.  (WRB)
   !   910408  Updated the AUTHOR and REFERENCES sections.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   INTEGER J4SAVE
   REAL(8) :: DDOT, D1MACH
   INTEGER i, Iflag, Irank, irp, Iscale, Isflg, j, jr, k, kp, &
@@ -151,15 +151,15 @@ SUBROUTINE DLSSUD(A,X,B,N,M,Nrda,U,Nrdu,Iflag,Mlso,Irank,Iscale,Q,Diag,&
           IF ( nfatal==0 ) nfat = 0
           CALL XSETF(nfat)
           CALL XERMAX(1)
-        ENDIF
+        END IF
         !
         !                 COPY MATRIX A INTO MATRIX Q
         !
         DO k = 1, M
           DO j = 1, N
             Q(j,k) = A(j,k)
-          ENDDO
-        ENDDO
+          END DO
+        END DO
         !
         !                 USE ORTHOGONAL TRANSFORMATIONS TO REDUCE Q TO LOWER
         !                 TRIANGULAR FORM
@@ -174,7 +174,7 @@ SUBROUTINE DLSSUD(A,X,B,N,M,Nrda,U,Nrdu,Iflag,Mlso,Irank,Iscale,Q,Diag,&
           !
           DO k = 1, N
             Div(k) = Diag(k)
-          ENDDO
+          END DO
           !        .........EXIT
           GOTO 100
         ELSE
@@ -185,13 +185,13 @@ SUBROUTINE DLSSUD(A,X,B,N,M,Nrda,U,Nrdu,Iflag,Mlso,Irank,Iscale,Q,Diag,&
           IF ( Irank/=0 ) CALL DOHTRL(Q,N,Nrda,Diag,Irank,Div,Td)
           !     ...............EXIT
           RETURN
-        ENDIF
+        END IF
         !        ......EXIT
       ELSEIF ( Iflag==1 ) THEN
         GOTO 100
-      ENDIF
-    ENDIF
-  ENDIF
+      END IF
+    END IF
+  END IF
   !
   !           INVALID INPUT FOR DLSSUD
   Iflag = 2
@@ -210,10 +210,10 @@ SUBROUTINE DLSSUD(A,X,B,N,M,Nrda,U,Nrdu,Iflag,Mlso,Irank,Iscale,Q,Diag,&
     DO k = 1, N
       kp = Kpivot(k)
       X(k) = B(kp)
-    ENDDO
+    END DO
     DO k = 1, N
       S(k) = X(k)
-    ENDDO
+    END DO
     !
     irp = Irank + 1
     nu = 1
@@ -234,8 +234,8 @@ SUBROUTINE DLSSUD(A,X,B,N,M,Nrda,U,Nrdu,Iflag,Mlso,Irank,Iscale,Q,Diag,&
         S(k) = S(k) + gam*Td(k)
         DO j = irp, N
           S(j) = S(j) + gam*Q(j,k)
-        ENDDO
-      ENDDO
+        END DO
+      END DO
       res = DDOT(nmir,S(irp),1,S(irp),1)
       !           ...EXIT
       IF ( res>ss*(10.0D0*MAX(10.0D0**Isflg,10.0D0*uro))**2 ) THEN
@@ -243,8 +243,8 @@ SUBROUTINE DLSSUD(A,X,B,N,M,Nrda,U,Nrdu,Iflag,Mlso,Irank,Iscale,Q,Diag,&
         !              INCONSISTENT SYSTEM
         Iflag = 4
         nu = 0
-      ENDIF
-    ENDIF
+      END IF
+    END IF
     !
     !           APPLY FORWARD SUBSTITUTION TO SOLVE LOWER TRIANGULAR SYSTEM
     !
@@ -252,15 +252,15 @@ SUBROUTINE DLSSUD(A,X,B,N,M,Nrda,U,Nrdu,Iflag,Mlso,Irank,Iscale,Q,Diag,&
     IF ( Irank>=2 ) THEN
       DO k = 2, Irank
         S(k) = (S(k)-DDOT(k-1,Q(k,1),Nrda,S(1),1))/Div(k)
-      ENDDO
-    ENDIF
+      END DO
+    END IF
     !
     !           INITIALIZE X VECTOR AND THEN APPLY ORTHOGONAL TRANSFORMATION
     !
     DO k = 1, M
       X(k) = 0.0D0
       IF ( k<=Irank ) X(k) = S(k)
-    ENDDO
+    END DO
     !
     DO jr = 1, Irank
       j = irp - jr
@@ -268,14 +268,14 @@ SUBROUTINE DLSSUD(A,X,B,N,M,Nrda,U,Nrdu,Iflag,Mlso,Irank,Iscale,Q,Diag,&
       gamma = DDOT(mj,Q(j,j),Nrda,X(j),1)/(Diag(j)*Q(j,j))
       DO k = j, M
         X(k) = X(k) + gamma*Q(j,k)
-      ENDDO
-    ENDDO
+      END DO
+    END DO
     !
     !           RESCALE ANSWERS AS DICTATED
     !
     DO k = 1, M
       X(k) = X(k)*Scales(k)
-    ENDDO
+    END DO
     !
     IF ( nu/=0.AND.M/=Irank ) THEN
       !
@@ -287,7 +287,7 @@ SUBROUTINE DLSSUD(A,X,B,N,M,Nrda,U,Nrdu,Iflag,Mlso,Irank,Iscale,Q,Diag,&
         DO i = 1, M
           U(i,k) = 0.0D0
           IF ( i==Irank+k ) U(i,k) = 1.0D0
-        ENDDO
+        END DO
         !
         DO jr = 1, Irank
           j = irp - jr
@@ -295,10 +295,10 @@ SUBROUTINE DLSSUD(A,X,B,N,M,Nrda,U,Nrdu,Iflag,Mlso,Irank,Iscale,Q,Diag,&
           gamma = DDOT(mj,Q(j,j),Nrda,U(j,k),1)/(Diag(j)*Q(j,j))
           DO i = j, M
             U(i,k) = U(i,k) + gamma*Q(j,i)
-          ENDDO
-        ENDDO
-      ENDDO
-    ENDIF
+          END DO
+        END DO
+      END DO
+    END IF
   ELSE
     !
     !           SPECIAL CASE FOR THE NULL MATRIX
@@ -308,13 +308,13 @@ SUBROUTINE DLSSUD(A,X,B,N,M,Nrda,U,Nrdu,Iflag,Mlso,Irank,Iscale,Q,Diag,&
         U(k,k) = 1.0D0
         DO j = 1, M
           IF ( j/=k ) U(j,k) = 0.0D0
-        ENDDO
-      ENDIF
-    ENDDO
+        END DO
+      END IF
+    END DO
     DO k = 1, N
       IF ( B(k)>0.0D0 ) Iflag = 4
-    ENDDO
-  ENDIF
+    END DO
+  END IF
   !
   RETURN
 END SUBROUTINE DLSSUD

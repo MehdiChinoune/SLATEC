@@ -136,7 +136,7 @@ SUBROUTINE ZUNIK(Zrr,Zri,Fnu,Ikflg,Ipmtr,Tol,Init,Phir,Phii,Zeta1r,Zeta1i,&
           str = sr*t2r - si*t2i + c(l)
           si = sr*t2i + si*t2r
           sr = str
-        ENDDO
+        END DO
         str = crfnr*srr - crfni*sri
         crfni = crfnr*sri + crfni*srr
         crfnr = str
@@ -145,9 +145,9 @@ SUBROUTINE ZUNIK(Zrr,Zri,Fnu,Ikflg,Ipmtr,Tol,Init,Phir,Phii,Zeta1r,Zeta1i,&
         ac = ac*rfn
         test = ABS(Cwrkr(k)) + ABS(Cwrki(k))
         IF ( ac<Tol.AND.test<Tol ) GOTO 20
-      ENDDO
+      END DO
       k = 15
-      20       Init = k
+      20  Init = k
     ELSE
       Zeta1r = 2.0D0*ABS(LOG(test)) + Fnu
       Zeta1i = 0.0D0
@@ -156,8 +156,8 @@ SUBROUTINE ZUNIK(Zrr,Zri,Fnu,Ikflg,Ipmtr,Tol,Init,Phir,Phii,Zeta1r,Zeta1i,&
       Phir = 1.0D0
       Phii = 0.0D0
       RETURN
-    ENDIF
-  ENDIF
+    END IF
+  END IF
   IF ( Ikflg==2 ) THEN
     !-----------------------------------------------------------------------
     !     COMPUTE SUM FOR THE K FUNCTION
@@ -169,13 +169,13 @@ SUBROUTINE ZUNIK(Zrr,Zri,Fnu,Ikflg,Ipmtr,Tol,Init,Phir,Phii,Zeta1r,Zeta1i,&
       sr = sr + tr*Cwrkr(i)
       si = si + tr*Cwrki(i)
       tr = -tr
-    ENDDO
+    END DO
     Sumr = sr
     Sumi = si
     Phir = Cwrkr(16)*con(2)
     Phii = Cwrki(16)*con(2)
     RETURN
-  ENDIF
+  END IF
   !-----------------------------------------------------------------------
   !     COMPUTE SUM FOR THE I FUNCTION
   !-----------------------------------------------------------------------
@@ -184,7 +184,7 @@ SUBROUTINE ZUNIK(Zrr,Zri,Fnu,Ikflg,Ipmtr,Tol,Init,Phir,Phii,Zeta1r,Zeta1i,&
   DO i = 1, Init
     sr = sr + Cwrkr(i)
     si = si + Cwrki(i)
-  ENDDO
+  END DO
   Sumr = sr
   Sumi = si
   Phir = Cwrkr(16)*con(1)

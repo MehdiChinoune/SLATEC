@@ -92,7 +92,7 @@ REAL FUNCTION BESY0(X)
     xsml = SQRT(4.0*R1MACH(3))
     xmax = 1.0/R1MACH(4)
     first = .FALSE.
-  ENDIF
+  END IF
   !
   IF ( X<=0. ) CALL XERMSG('SLATEC','BESY0','X IS ZERO OR NEGATIVE',1,2)
   IF ( X>4.0 ) THEN
@@ -105,7 +105,7 @@ REAL FUNCTION BESY0(X)
     theta = X - pi4 + CSEVL(z,bth0cs,ntth0)/X
     BESY0 = ampl*SIN(theta)
     RETURN
-  ENDIF
+  END IF
   !
   y = 0.
   IF ( X>xsml ) y = X*X

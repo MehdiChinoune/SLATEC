@@ -185,8 +185,8 @@ SUBROUTINE BVPOR(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
         IF ( INHomo==1 ) nfcp2 = nfcp1 + 1
         DO k = 1, NEQivp
           Yhp(k,nfcp2) = Alpha(Nic+k)
-        ENDDO
-      ENDIF
+        END DO
+      END IF
       CALL STOR1(U,Yhp,V,Yhp(1,nfcp1),0,NDIsk,NTApe)
       !
       !- *********************************************************************
@@ -252,50 +252,50 @@ SUBROUTINE BVPOR(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
               BACKSPACE NTApe
               READ (NTApe) (Ip(i,1),i=1,Nfcc), (P(i,1),i=1,Ntp)
               BACKSPACE NTApe
-            ENDIF
+            END IF
             IF ( INHomo==1 ) THEN
               IF ( NDIsk/=0 ) THEN
                 BACKSPACE NTApe
                 READ (NTApe) (W(i,1),i=1,Nfcc)
                 BACKSPACE NTApe
-              ENDIF
+              END IF
               DO n = 1, Nfcc
                 Coef(n) = Coef(n) - W(n,non)
-              ENDDO
-            ENDIF
+              END DO
+            END IF
             CALL BKSOL(Nfcc,P(1,non),Coef)
             DO m = 1, Nfcc
               Work(m) = Coef(m)
-            ENDDO
+            END DO
             DO m = 1, Nfcc
               l = Ip(m,non)
               Coef(l) = Work(m)
-            ENDDO
+            END DO
             k = k - 1
-          ENDDO
+          END DO
           IF ( NDIsk/=0 ) THEN
             BACKSPACE NTApe
             READ (NTApe) (V(i,1),i=1,Ncomp), ((U(i,m,1),i=1,Ncomp),m=1,Nfc)
             BACKSPACE NTApe
-          ENDIF
+          END IF
           DO n = 1, Ncomp
             Y(n,kpts) = V(n,kod) + SDOT(Nfc,U(n,1,kod),Ncomp,Coef,ic)
-          ENDDO
+          END DO
           IF ( Nfc/=Nfcc ) THEN
             DO n = 1, ncomp2
               nn = ncomp2 + n
               Y(n,kpts) = Y(n,kpts) - SDOT(Nfc,U(nn,1,kod),Ncomp,Coef(2),2)
               Y(nn,kpts) = Y(nn,kpts) + SDOT(Nfc,U(n,1,kod),Ncomp,Coef(2),2)
-            ENDDO
-          ENDIF
-        ENDDO
-      ENDIF
+            END DO
+          END IF
+        END DO
+      END IF
     ELSE
       Iflag = -5
-    ENDIF
+    END IF
   ELSE
     Iflag = -4
-  ENDIF
+  END IF
   !
   !- *********************************************************************
   !

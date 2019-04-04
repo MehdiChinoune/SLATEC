@@ -85,7 +85,7 @@ SUBROUTINE HTRIDI(Nm,N,Ar,Ai,D,E,E2,Tau)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   !
   INTEGER i, j, k, l, N, ii, Nm, jp1
   REAL Ar(Nm,*), Ai(Nm,*), D(*), E(*), E2(*), Tau(2,*)
@@ -98,7 +98,7 @@ SUBROUTINE HTRIDI(Nm,N,Ar,Ai,D,E,E2,Tau)
   !
   DO i = 1, N
     D(i) = Ar(i,i)
-  ENDDO
+  END DO
   !     .......... FOR I=N STEP -1 UNTIL 1 DO -- ..........
   DO ii = 1, N
     i = N + 1 - ii
@@ -109,7 +109,7 @@ SUBROUTINE HTRIDI(Nm,N,Ar,Ai,D,E,E2,Tau)
       !     .......... SCALE ROW (ALGOL TOL THEN NOT NEEDED) ..........
       DO k = 1, l
         scale = scale + ABS(Ar(i,k)) + ABS(Ai(i,k))
-      ENDDO
+      END DO
       !
       IF ( scale/=0.0E0 ) THEN
         !
@@ -117,7 +117,7 @@ SUBROUTINE HTRIDI(Nm,N,Ar,Ai,D,E,E2,Tau)
           Ar(i,k) = Ar(i,k)/scale
           Ai(i,k) = Ai(i,k)/scale
           h = h + Ar(i,k)*Ar(i,k) + Ai(i,k)*Ai(i,k)
-        ENDDO
+        END DO
         !
         E2(i) = scale*scale*h
         g = SQRT(h)
@@ -138,16 +138,16 @@ SUBROUTINE HTRIDI(Nm,N,Ar,Ai,D,E,E2,Tau)
           Ai(i,l) = g*Ai(i,l)
           IF ( l/=1 ) GOTO 50
           GOTO 100
-        ENDIF
+        END IF
       ELSE
         Tau(1,l) = 1.0E0
         Tau(2,l) = 0.0E0
-      ENDIF
-    ENDIF
+      END IF
+    END IF
     E(i) = 0.0E0
     E2(i) = 0.0E0
     GOTO 150
-    50     f = 0.0E0
+    50  f = 0.0E0
     !
     DO j = 1, l
       g = 0.0E0
@@ -156,7 +156,7 @@ SUBROUTINE HTRIDI(Nm,N,Ar,Ai,D,E,E2,Tau)
       DO k = 1, j
         g = g + Ar(j,k)*Ar(i,k) + Ai(j,k)*Ai(i,k)
         gi = gi - Ar(j,k)*Ai(i,k) + Ai(j,k)*Ar(i,k)
-      ENDDO
+      END DO
       !
       jp1 = j + 1
       IF ( l>=jp1 ) THEN
@@ -164,13 +164,13 @@ SUBROUTINE HTRIDI(Nm,N,Ar,Ai,D,E,E2,Tau)
         DO k = jp1, l
           g = g + Ar(k,j)*Ar(i,k) - Ai(k,j)*Ai(i,k)
           gi = gi - Ar(k,j)*Ai(i,k) - Ai(k,j)*Ar(i,k)
-        ENDDO
-      ENDIF
+        END DO
+      END IF
       !     .......... FORM ELEMENT OF P ..........
       E(j) = g/h
       Tau(2,j) = gi/h
       f = f + E(j)*Ar(i,j) - Tau(2,j)*Ai(i,j)
-    ENDDO
+    END DO
     !
     hh = f/(h+h)
     !     .......... FORM REDUCED A ..........
@@ -185,20 +185,20 @@ SUBROUTINE HTRIDI(Nm,N,Ar,Ai,D,E,E2,Tau)
       DO k = 1, j
         Ar(j,k) = Ar(j,k) - f*E(k) - g*Ar(i,k) + fi*Tau(2,k) + gi*Ai(i,k)
         Ai(j,k) = Ai(j,k) - f*Tau(2,k) - g*Ai(i,k) - fi*E(k) - gi*Ar(i,k)
-      ENDDO
-    ENDDO
+      END DO
+    END DO
     !
     100 CONTINUE
     DO k = 1, l
       Ar(i,k) = scale*Ar(i,k)
       Ai(i,k) = scale*Ai(i,k)
-    ENDDO
+    END DO
     !
     Tau(2,l) = -si
-    150    hh = D(i)
+    150  hh = D(i)
     D(i) = Ar(i,i)
     Ar(i,i) = hh
     Ai(i,i) = scale*SQRT(h)
-  ENDDO
+  END DO
   !
 END SUBROUTINE HTRIDI

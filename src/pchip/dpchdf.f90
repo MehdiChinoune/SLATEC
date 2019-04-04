@@ -90,22 +90,22 @@ REAL(8) FUNCTION DPCHDF(K,X,S,Ierr)
     CALL XERMSG('SLATEC','DPCHDF','K LESS THAN THREE',Ierr,1)
     DPCHDF = zero
     RETURN
-  ENDIF
+  END IF
   !
   !  COMPUTE COEFFICIENTS OF INTERPOLATING POLYNOMIAL.
   !
   DO j = 2, K - 1
     DO i = 1, K - j
       S(i) = (S(i+1)-S(i))/(X(i+j)-X(i))
-    ENDDO
-  ENDDO
+    END DO
+  END DO
   !
   !  EVALUATE DERIVATIVE AT X(K).
   !
   value = S(1)
   DO i = 2, K - 1
     value = S(i) + value*(X(K)-X(i))
-  ENDDO
+  END DO
   !
   !  NORMAL RETURN.
   !

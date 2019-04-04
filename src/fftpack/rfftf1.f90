@@ -93,7 +93,7 @@ SUBROUTINE RFFTF1(N,C,Ch,Wa,Ifac)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900131  Routine changed from subsidiary to user-callable.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   REAL C(*), Ch(*), Wa(*)
   INTEGER i, idl1, ido, Ifac(*), ip, iw, ix2, ix3, ix4, k1, kh, l1, l2, N, na, nf
   !* FIRST EXECUTABLE STATEMENT  RFFTF1
@@ -116,7 +116,7 @@ SUBROUTINE RFFTF1(N,C,Ch,Wa,Ifac)
         CALL RADF4(ido,l1,Ch,C,Wa(iw),Wa(ix2),Wa(ix3))
       ELSE
         CALL RADF4(ido,l1,C,Ch,Wa(iw),Wa(ix2),Wa(ix3))
-      ENDIF
+      END IF
     ELSEIF ( ip/=2 ) THEN
       IF ( ip==3 ) THEN
         ix2 = iw + ido
@@ -124,7 +124,7 @@ SUBROUTINE RFFTF1(N,C,Ch,Wa,Ifac)
           CALL RADF3(ido,l1,Ch,C,Wa(iw),Wa(ix2))
         ELSE
           CALL RADF3(ido,l1,C,Ch,Wa(iw),Wa(ix2))
-        ENDIF
+        END IF
       ELSEIF ( ip/=5 ) THEN
         IF ( ido==1 ) na = 1 - na
         IF ( na/=0 ) THEN
@@ -133,7 +133,7 @@ SUBROUTINE RFFTF1(N,C,Ch,Wa,Ifac)
         ELSE
           CALL RADFG(ido,ip,l1,idl1,C,C,C,Ch,Ch,Wa(iw))
           na = 1
-        ENDIF
+        END IF
       ELSE
         ix2 = iw + ido
         ix3 = ix2 + ido
@@ -142,17 +142,17 @@ SUBROUTINE RFFTF1(N,C,Ch,Wa,Ifac)
           CALL RADF5(ido,l1,Ch,C,Wa(iw),Wa(ix2),Wa(ix3),Wa(ix4))
         ELSE
           CALL RADF5(ido,l1,C,Ch,Wa(iw),Wa(ix2),Wa(ix3),Wa(ix4))
-        ENDIF
-      ENDIF
+        END IF
+      END IF
     ELSEIF ( na/=0 ) THEN
       CALL RADF2(ido,l1,Ch,C,Wa(iw))
     ELSE
       CALL RADF2(ido,l1,C,Ch,Wa(iw))
-    ENDIF
+    END IF
     l2 = l1
-  ENDDO
+  END DO
   IF ( na==1 ) RETURN
   DO i = 1, N
     C(i) = Ch(i)
-  ENDDO
+  END DO
 END SUBROUTINE RFFTF1

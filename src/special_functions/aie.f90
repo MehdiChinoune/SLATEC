@@ -88,7 +88,7 @@ REAL FUNCTION AIE(X)
     x32sml = 1.3104*x3sml**2
     xbig = R1MACH(2)**0.6666
     first = .FALSE.
-  ENDIF
+  END IF
   !
   IF ( X<(-1.0) ) THEN
     CALL R9AIMP(X,xm,theta)
@@ -102,7 +102,7 @@ REAL FUNCTION AIE(X)
     IF ( X<xbig ) z = 2.0/(X*sqrtx) - 1.0
     AIE = (.28125+CSEVL(z,aipcs,naip))/SQRT(sqrtx)
     RETURN
-  ENDIF
+  END IF
   z = 0.0
   IF ( ABS(X)>x3sml ) z = X**3
   AIE = 0.375 + (CSEVL(z,aifcs,naif)-X*(0.25+CSEVL(z,aigcs,naig)))

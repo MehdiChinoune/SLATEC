@@ -114,19 +114,21 @@ REAL FUNCTION SCNRM2(N,Cx,Incx)
         CASE(140)
           GOTO 140
       END SELECT
-      20       IF ( absx>cutlo ) GOTO 120
+      20 CONTINUE
+      IF ( absx>cutlo ) GOTO 120
       next = 40
       scale = .FALSE.
       !
       !                        PHASE 1.  SUM IS ZERO
       !
-      40       IF ( absx==zero ) GOTO 160
+      40 CONTINUE
+      IF ( absx==zero ) GOTO 160
       IF ( absx>cutlo ) GOTO 120
       !
       !                                PREPARE FOR PHASE 2.
       !
       next = 80
-      60       scale = .TRUE.
+      60 scale = .TRUE.
       xmax = absx
       !
       sum = sum + (absx/xmax)**2
@@ -135,73 +137,77 @@ REAL FUNCTION SCNRM2(N,Cx,Incx)
       !                   PHASE 2.  SUM IS SMALL.
       !                             SCALE TO AVOID DESTRUCTIVE UNDERFLOW.
       !
-      80       IF ( absx>cutlo ) THEN
+      80 CONTINUE
+      IF ( absx>cutlo ) THEN
+        !
+        !                  PREPARE FOR PHASE 3.
+        !
+        sum = (sum*xmax)*xmax
+        GOTO 120
+      END IF
       !
-      !                  PREPARE FOR PHASE 3.
+      !                     COMMON CODE FOR PHASES 2 AND 4.
+      !                     IN PHASE 4 SUM IS LARGE.  SCALE TO AVOID OVERFLOW.
       !
-      sum = (sum*xmax)*xmax
-      GOTO 120
-  ENDIF
-  !
-  !                     COMMON CODE FOR PHASES 2 AND 4.
-  !                     IN PHASE 4 SUM IS LARGE.  SCALE TO AVOID OVERFLOW.
-  !
-  100      IF ( absx<=xmax ) THEN
-  sum = sum + (absx/xmax)**2
-ELSE
-  sum = one + sum*(xmax/absx)**2
-  xmax = absx
-ENDIF
-GOTO 160
-!
-120      next = 140
-scale = .FALSE.
-!
-!     FOR REAL OR D.P. SET HITEST = CUTHI/N
-!     FOR COMPLEX      SET HITEST = CUTHI/(2*N)
-!
-hitest = cuthi/N
-!
-!                   PHASE 3.  SUM IS MID-RANGE.  NO SCALING.
-!
-140      IF ( absx>=hitest ) THEN
-!
-!                                PREPARE FOR PHASE 4.
-!
-next =100
-sum = (sum/absx)/absx
-GOTO 60
-ELSE
-sum = sum + absx**2
-ENDIF
-!
-!                  CONTROL SELECTION OF REAL AND IMAGINARY PARTS.
-!
-160      IF ( .NOT.(imag) ) THEN
-absx = ABS(AIMAG(Cx(i)))
-imag = .TRUE.
-SELECT CASE(next)
-CASE(20)
-  GOTO 20
-CASE(40)
-  GOTO 40
-CASE(80)
-  GOTO 80
-CASE(100)
-  GOTO 100
-CASE(140)
-  GOTO 140
-END SELECT
-ENDIF
-!
-ENDDO
-!
-!              END OF MAIN LOOP.
-!              COMPUTE SQUARE ROOT AND ADJUST FOR SCALING.
-!
-SCNRM2 = SQRT(sum)
-IF ( scale ) SCNRM2 = SCNRM2*xmax
-ELSE
-SCNRM2 = zero
-ENDIF
+      100 CONTINUE
+      IF ( absx<=xmax ) THEN
+        sum = sum + (absx/xmax)**2
+      ELSE
+        sum = one + sum*(xmax/absx)**2
+        xmax = absx
+      END IF
+      GOTO 160
+      !
+      120 next = 140
+      scale = .FALSE.
+      !
+      !     FOR REAL OR D.P. SET HITEST = CUTHI/N
+      !     FOR COMPLEX      SET HITEST = CUTHI/(2*N)
+      !
+      hitest = cuthi/N
+      !
+      !                   PHASE 3.  SUM IS MID-RANGE.  NO SCALING.
+      !
+      140 CONTINUE
+      IF ( absx>=hitest ) THEN
+        !
+        !                                PREPARE FOR PHASE 4.
+        !
+        next =100
+        sum = (sum/absx)/absx
+        GOTO 60
+      ELSE
+        sum = sum + absx**2
+      END IF
+      !
+      !                  CONTROL SELECTION OF REAL AND IMAGINARY PARTS.
+      !
+      160 CONTINUE
+      IF ( .NOT.(imag) ) THEN
+        absx = ABS(AIMAG(Cx(i)))
+        imag = .TRUE.
+        SELECT CASE(next)
+          CASE(20)
+            GOTO 20
+          CASE(40)
+            GOTO 40
+          CASE(80)
+            GOTO 80
+          CASE(100)
+            GOTO 100
+          CASE(140)
+            GOTO 140
+        END SELECT
+      END IF
+      !
+    END DO
+    !
+    !              END OF MAIN LOOP.
+    !              COMPUTE SQUARE ROOT AND ADJUST FOR SCALING.
+    !
+    SCNRM2 = SQRT(sum)
+    IF ( scale ) SCNRM2 = SCNRM2*xmax
+  ELSE
+    SCNRM2 = zero
+  END IF
 END FUNCTION SCNRM2

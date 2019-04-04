@@ -96,7 +96,7 @@ SUBROUTINE SDAINI(X,Y,Yprime,Neq,RES,JAC,H,Wt,Idid,Rpar,Ipar,Phi,Delta,E,&
   DO i = 1, Neq
     Phi(i,1) = Y(i)
     Phi(i,2) = Yprime(i)
-  ENDDO
+  END DO
   !
   !
   !----------------------------------------------------
@@ -111,7 +111,7 @@ SUBROUTINE SDAINI(X,Y,Yprime,Neq,RES,JAC,H,Wt,Idid,Rpar,Ipar,Phi,Delta,E,&
   !     PREDICT SOLUTION AND DERIVATIVE
   DO i = 1, Neq
     Y(i) = Y(i) + H*Yprime(i)
-  ENDDO
+  END DO
   !
   jcalc = -1
   m = 0
@@ -148,15 +148,15 @@ SUBROUTINE SDAINI(X,Y,Yprime,Neq,RES,JAC,H,Wt,Idid,Rpar,Ipar,Phi,Delta,E,&
           EXIT
         ELSE
           nsf = 0
-        ENDIF
-      ENDIF
+        END IF
+      END IF
       !
       !
       !
       !     MULTIPLY RESIDUAL BY DAMPING FACTOR
       DO i = 1, Neq
         Delta(i) = Delta(i)*damp
-      ENDDO
+      END DO
       !
       !     COMPUTE A NEW ITERATE (BACK SUBSTITUTION)
       !     STORE THE CORRECTION IN DELTA
@@ -167,7 +167,7 @@ SUBROUTINE SDAINI(X,Y,Yprime,Neq,RES,JAC,H,Wt,Idid,Rpar,Ipar,Phi,Delta,E,&
       DO i = 1, Neq
         Y(i) = Y(i) - Delta(i)
         Yprime(i) = Yprime(i) - cj*Delta(i)
-      ENDDO
+      END DO
       !
       !     TEST FOR CONVERGENCE OF THE ITERATION.
       !
@@ -182,10 +182,10 @@ SUBROUTINE SDAINI(X,Y,Yprime,Neq,RES,JAC,H,Wt,Idid,Rpar,Ipar,Phi,Delta,E,&
             EXIT
           ELSE
             s = rate/(1.0E0-rate)
-          ENDIF
+          END IF
         ELSE
           oldnrm = delnrm
-        ENDIF
+        END IF
         !
         IF ( s*delnrm>0.33E0 ) THEN
           !
@@ -204,9 +204,9 @@ SUBROUTINE SDAINI(X,Y,Yprime,Neq,RES,JAC,H,Wt,Idid,Rpar,Ipar,Phi,Delta,E,&
             !
             IF ( (m/mjac)*mjac==m ) jcalc = -1
             CYCLE
-          ENDIF
-        ENDIF
-      ENDIF
+          END IF
+        END IF
+      END IF
       !
       !
       !     THE ITERATION HAS CONVERGED.
@@ -214,7 +214,7 @@ SUBROUTINE SDAINI(X,Y,Yprime,Neq,RES,JAC,H,Wt,Idid,Rpar,Ipar,Phi,Delta,E,&
       IF ( Nonneg/=0 ) THEN
         DO i = 1, Neq
           Delta(i) = MIN(Y(i),0.0E0)
-        ENDDO
+        END DO
         !
         delnrm = SDANRM(Neq,Delta,Wt,Rpar,Ipar)
         IF ( delnrm>0.33E0 ) THEN
@@ -224,12 +224,12 @@ SUBROUTINE SDAINI(X,Y,Yprime,Neq,RES,JAC,H,Wt,Idid,Rpar,Ipar,Phi,Delta,E,&
           DO i = 1, Neq
             Y(i) = Y(i) - Delta(i)
             Yprime(i) = Yprime(i) - cj*Delta(i)
-          ENDDO
-        ENDIF
-      ENDIF
-    ENDIF
+          END DO
+        END IF
+      END IF
+    END IF
     EXIT
-  ENDDO
+  END DO
   IF ( convgd ) THEN
     !
     !
@@ -242,11 +242,11 @@ SUBROUTINE SDAINI(X,Y,Yprime,Neq,RES,JAC,H,Wt,Idid,Rpar,Ipar,Phi,Delta,E,&
     !
     DO i = 1, Neq
       E(i) = Y(i) - Phi(i,1)
-    ENDDO
+    END DO
     err = SDANRM(Neq,E,Wt,Rpar,Ipar)
     !
     IF ( err<=1.0E0 ) RETURN
-  ENDIF
+  END IF
   !
   !
   !
@@ -262,7 +262,7 @@ SUBROUTINE SDAINI(X,Y,Yprime,Neq,RES,JAC,H,Wt,Idid,Rpar,Ipar,Phi,Delta,E,&
   DO i = 1, Neq
     Y(i) = Phi(i,1)
     Yprime(i) = Phi(i,2)
-  ENDDO
+  END DO
   !
   IF ( convgd ) THEN
     !
@@ -281,14 +281,14 @@ SUBROUTINE SDAINI(X,Y,Yprime,Neq,RES,JAC,H,Wt,Idid,Rpar,Ipar,Phi,Delta,E,&
     ELSE
       Idid = -12
       RETURN
-    ENDIF
+    END IF
   ELSE
     nsf = nsf + 1
     H = H*0.25E0
     IF ( nsf<3.AND.ABS(H)>=Hmin ) GOTO 100
     Idid = -12
     RETURN
-  ENDIF
+  END IF
   Idid = -12
   RETURN
   !

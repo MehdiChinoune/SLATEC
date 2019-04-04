@@ -162,7 +162,7 @@ SUBROUTINE DTRMM(Side,Uplo,Transa,Diag,M,N,Alpha,A,Lda,B,Ldb)
     nrowa = M
   ELSE
     nrowa = N
-  ENDIF
+  END IF
   nounit = LSAME(Diag,'N')
   upper = LSAME(Uplo,'U')
   !
@@ -184,11 +184,11 @@ SUBROUTINE DTRMM(Side,Uplo,Transa,Diag,M,N,Alpha,A,Lda,B,Ldb)
     info = 9
   ELSEIF ( Ldb<MAX(1,M) ) THEN
     info = 11
-  ENDIF
+  END IF
   IF ( info/=0 ) THEN
     CALL XERBLA('DTRMM ',info)
     RETURN
-  ENDIF
+  END IF
   !
   !     Quick return if possible.
   !
@@ -200,10 +200,10 @@ SUBROUTINE DTRMM(Side,Uplo,Transa,Diag,M,N,Alpha,A,Lda,B,Ldb)
     DO j = 1, N
       DO i = 1, M
         B(i,j) = ZERO
-      ENDDO
-    ENDDO
+      END DO
+    END DO
     RETURN
-  ENDIF
+  END IF
   !
   !     Start the operations.
   !
@@ -219,12 +219,12 @@ SUBROUTINE DTRMM(Side,Uplo,Transa,Diag,M,N,Alpha,A,Lda,B,Ldb)
               temp = Alpha*B(k,j)
               DO i = 1, k - 1
                 B(i,j) = B(i,j) + temp*A(i,k)
-              ENDDO
+              END DO
               IF ( nounit ) temp = temp*A(k,k)
               B(k,j) = temp
-            ENDIF
-          ENDDO
-        ENDDO
+            END IF
+          END DO
+        END DO
       ELSE
         DO j = 1, N
           DO k = M, 1, -1
@@ -234,11 +234,11 @@ SUBROUTINE DTRMM(Side,Uplo,Transa,Diag,M,N,Alpha,A,Lda,B,Ldb)
               IF ( nounit ) B(k,j) = B(k,j)*A(k,k)
               DO i = k + 1, M
                 B(i,j) = B(i,j) + temp*A(i,k)
-              ENDDO
-            ENDIF
-          ENDDO
-        ENDDO
-      ENDIF
+              END DO
+            END IF
+          END DO
+        END DO
+      END IF
       !
       !           Form  B := alpha*B*A'.
       !
@@ -249,10 +249,10 @@ SUBROUTINE DTRMM(Side,Uplo,Transa,Diag,M,N,Alpha,A,Lda,B,Ldb)
           IF ( nounit ) temp = temp*A(i,i)
           DO k = 1, i - 1
             temp = temp + A(k,i)*B(k,j)
-          ENDDO
+          END DO
           B(i,j) = Alpha*temp
-        ENDDO
-      ENDDO
+        END DO
+      END DO
     ELSE
       DO j = 1, N
         DO i = 1, M
@@ -260,11 +260,11 @@ SUBROUTINE DTRMM(Side,Uplo,Transa,Diag,M,N,Alpha,A,Lda,B,Ldb)
           IF ( nounit ) temp = temp*A(i,i)
           DO k = i + 1, M
             temp = temp + A(k,i)*B(k,j)
-          ENDDO
+          END DO
           B(i,j) = Alpha*temp
-        ENDDO
-      ENDDO
-    ENDIF
+        END DO
+      END DO
+    END IF
   ELSEIF ( LSAME(Transa,'N') ) THEN
     !
     !           Form  B := alpha*B*A.
@@ -275,33 +275,33 @@ SUBROUTINE DTRMM(Side,Uplo,Transa,Diag,M,N,Alpha,A,Lda,B,Ldb)
         IF ( nounit ) temp = temp*A(j,j)
         DO i = 1, M
           B(i,j) = temp*B(i,j)
-        ENDDO
+        END DO
         DO k = 1, j - 1
           IF ( A(k,j)/=ZERO ) THEN
             temp = Alpha*A(k,j)
             DO i = 1, M
               B(i,j) = B(i,j) + temp*B(i,k)
-            ENDDO
-          ENDIF
-        ENDDO
-      ENDDO
+            END DO
+          END IF
+        END DO
+      END DO
     ELSE
       DO j = 1, N
         temp = Alpha
         IF ( nounit ) temp = temp*A(j,j)
         DO i = 1, M
           B(i,j) = temp*B(i,j)
-        ENDDO
+        END DO
         DO k = j + 1, N
           IF ( A(k,j)/=ZERO ) THEN
             temp = Alpha*A(k,j)
             DO i = 1, M
               B(i,j) = B(i,j) + temp*B(i,k)
-            ENDDO
-          ENDIF
-        ENDDO
-      ENDDO
-    ENDIF
+            END DO
+          END IF
+        END DO
+      END DO
+    END IF
     !
     !           Form  B := alpha*B*A'.
     !
@@ -312,17 +312,17 @@ SUBROUTINE DTRMM(Side,Uplo,Transa,Diag,M,N,Alpha,A,Lda,B,Ldb)
           temp = Alpha*A(j,k)
           DO i = 1, M
             B(i,j) = B(i,j) + temp*B(i,k)
-          ENDDO
-        ENDIF
-      ENDDO
+          END DO
+        END IF
+      END DO
       temp = Alpha
       IF ( nounit ) temp = temp*A(k,k)
       IF ( temp/=ONE ) THEN
         DO i = 1, M
           B(i,k) = temp*B(i,k)
-        ENDDO
-      ENDIF
-    ENDDO
+        END DO
+      END IF
+    END DO
   ELSE
     DO k = N, 1, -1
       DO j = k + 1, N
@@ -330,18 +330,18 @@ SUBROUTINE DTRMM(Side,Uplo,Transa,Diag,M,N,Alpha,A,Lda,B,Ldb)
           temp = Alpha*A(j,k)
           DO i = 1, M
             B(i,j) = B(i,j) + temp*B(i,k)
-          ENDDO
-        ENDIF
-      ENDDO
+          END DO
+        END IF
+      END DO
       temp = Alpha
       IF ( nounit ) temp = temp*A(k,k)
       IF ( temp/=ONE ) THEN
         DO i = 1, M
           B(i,k) = temp*B(i,k)
-        ENDDO
-      ENDIF
-    ENDDO
-  ENDIF
+        END DO
+      END IF
+    END DO
+  END IF
   !
   !
   !     End of DTRMM .

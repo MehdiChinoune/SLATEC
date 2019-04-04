@@ -80,7 +80,7 @@ SUBROUTINE BSPEV(T,Ad,N,K,Nderiv,X,Inev,Svalue,Work)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   !
   INTEGER i, id, Inev, iwork, jj, K, kp1, kp1mn, l, left, ll, mflag, N, Nderiv
   REAL Ad(*), Svalue(*), sum, T(*), Work(*), X
@@ -106,15 +106,15 @@ SUBROUTINE BSPEV(T,Ad,N,K,Nderiv,X,Inev,Svalue,Work)
         DO WHILE ( i/=K )
           i = i - 1
           IF ( X/=T(i) ) GOTO 20
-        ENDDO
+        END DO
         CALL XERMSG('SLATEC','BSPEV',&
           'A LEFT LIMITING VALUE CANNOT BE OBTAINED AT T(K)',2,1)
         RETURN
-      ENDIF
+      END IF
       !
       !- I* HAS BEEN FOUND IN (K,N) SO THAT T(I) .LE. X .LT. T(I+1)
       !     (OR .LE. T(I+1), IF T(I) .LT. T(I+1) = T(N+1) ).
-      20       kp1mn = K + 1 - id
+      20  kp1mn = K + 1 - id
       kp1 = K + 1
       CALL BSPVN(T,kp1mn,K,1,X,i,Work(1),Work(kp1),iwork)
       jj = (N+N-id+2)*(id-1)/2
@@ -127,7 +127,7 @@ SUBROUTINE BSPEV(T,Ad,N,K,Nderiv,X,Inev,Svalue,Work)
         DO l = 1, kp1mn
           sum = sum + Work(l)*Ad(ll)
           ll = ll + 1
-        ENDDO
+        END DO
         Svalue(id) = sum
         id = id - 1
         IF ( id==0 ) THEN
@@ -137,10 +137,10 @@ SUBROUTINE BSPEV(T,Ad,N,K,Nderiv,X,Inev,Svalue,Work)
           jj = jj - (N-id+1)
           kp1mn = kp1mn + 1
           CALL BSPVN(T,kp1mn,K,2,X,i,Work(1),Work(kp1),iwork)
-        ENDIF
-      ENDDO
-    ENDIF
-  ENDIF
+        END IF
+      END DO
+    END IF
+  END IF
   100  CALL XERMSG('SLATEC','BSPEV','X IS NOT IN T(K).LE.X.LE.T(N+1)',2,1)
   RETURN
 END SUBROUTINE BSPEV

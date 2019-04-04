@@ -129,7 +129,7 @@ SUBROUTINE DSDS(N,Nelt,Ia,Ja,A,Isym,Dinv)
   !
   DO icol = 1, N
     Dinv(icol) = 1.0D0/A(Ja(icol))
-  ENDDO
+  END DO
   !
   !------------- LAST LINE OF DSDS FOLLOWS ----------------------------
 END SUBROUTINE DSDS

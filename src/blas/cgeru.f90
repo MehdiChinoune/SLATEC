@@ -120,11 +120,11 @@ SUBROUTINE CGERU(M,N,Alpha,X,Incx,Y,Incy,A,Lda)
     info = 7
   ELSEIF ( Lda<MAX(1,M) ) THEN
     info = 9
-  ENDIF
+  END IF
   IF ( info/=0 ) THEN
     CALL XERBLA('CGERU ',info)
     RETURN
-  ENDIF
+  END IF
   !
   !     Quick return if possible.
   !
@@ -137,23 +137,23 @@ SUBROUTINE CGERU(M,N,Alpha,X,Incx,Y,Incy,A,Lda)
     jy = 1
   ELSE
     jy = 1 - (N-1)*Incy
-  ENDIF
+  END IF
   IF ( Incx==1 ) THEN
     DO j = 1, N
       IF ( Y(jy)/=ZERO ) THEN
         temp = Alpha*Y(jy)
         DO i = 1, M
           A(i,j) = A(i,j) + X(i)*temp
-        ENDDO
-      ENDIF
+        END DO
+      END IF
       jy = jy + Incy
-    ENDDO
+    END DO
   ELSE
     IF ( Incx>0 ) THEN
       kx = 1
     ELSE
       kx = 1 - (M-1)*Incx
-    ENDIF
+    END IF
     DO j = 1, N
       IF ( Y(jy)/=ZERO ) THEN
         temp = Alpha*Y(jy)
@@ -161,11 +161,11 @@ SUBROUTINE CGERU(M,N,Alpha,X,Incx,Y,Incy,A,Lda)
         DO i = 1, M
           A(i,j) = A(i,j) + X(ix)*temp
           ix = ix + Incx
-        ENDDO
-      ENDIF
+        END DO
+      END IF
       jy = jy + Incy
-    ENDDO
-  ENDIF
+    END DO
+  END IF
   !
   !
   !     End of CGERU .

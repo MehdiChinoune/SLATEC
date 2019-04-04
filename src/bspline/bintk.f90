@@ -98,7 +98,7 @@ SUBROUTINE BINTK(X,Y,T,N,K,Bcoef,Q,Work)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   !
   INTEGER iflag, iwork, K, N, i, ilp1mx, j, jj, km1, kpkm2, left, lenq, np1
   REAL Bcoef(*), Y(*), Q(*), T(*), X(*), xi, Work(*)
@@ -116,8 +116,8 @@ SUBROUTINE BINTK(X,Y,T,N,K,Bcoef,Q,Work)
       IF ( jj/=0 ) THEN
         DO i = 1, jj
           IF ( X(i)>=X(i+1) ) GOTO 50
-        ENDDO
-      ENDIF
+        END DO
+      END IF
       np1 = N + 1
       km1 = K - 1
       kpkm2 = 2*km1
@@ -126,7 +126,7 @@ SUBROUTINE BINTK(X,Y,T,N,K,Bcoef,Q,Work)
       lenq = N*(K+km1)
       DO i = 1, lenq
         Q(i) = 0.0E0
-      ENDDO
+      END DO
       !
       !  ***   LOOP OVER I TO CONSTRUCT THE  N  INTERPOLATION EQUATIONS
       DO i = 1, N
@@ -143,8 +143,8 @@ SUBROUTINE BINTK(X,Y,T,N,K,Bcoef,Q,Work)
             left = left - 1
             IF ( xi<=T(left+1) ) EXIT
             GOTO 20
-          ENDIF
-        ENDDO
+          END IF
+        END DO
         !        *** THE I-TH EQUATION ENFORCES INTERPOLATION AT XI, HENCE
         !        A(I,J) = B(J,K,T)(XI), ALL J. ONLY THE  K  ENTRIES WITH  J =
         !        LEFT-K+1,...,LEFT ACTUALLY MIGHT BE NONZERO. THESE  K  NUMBERS
@@ -166,8 +166,8 @@ SUBROUTINE BINTK(X,Y,T,N,K,Bcoef,Q,Work)
         DO j = 1, K
           jj = jj + kpkm2
           Q(jj) = Bcoef(j)
-        ENDDO
-      ENDDO
+        END DO
+      END DO
       !
       !     ***OBTAIN FACTORIZATION OF  A , STORED AGAIN IN  Q.
       CALL BNFAC(Q,K+km1,N,km1,km1,iflag)
@@ -180,17 +180,18 @@ SUBROUTINE BINTK(X,Y,T,N,K,Bcoef,Q,Work)
         !     *** SOLVE  A*BCOEF = Y  BY BACKSUBSTITUTION
         DO i = 1, N
           Bcoef(i) = Y(i)
-        ENDDO
+        END DO
         CALL BNSLV(Q,K+km1,N,km1,km1,Bcoef)
         RETURN
-      ENDIF
+      END IF
       !
       !
-      20       CALL XERMSG('SLATEC','BINTK',&
-        'SOME ABSCISSA WAS NOT IN THE SUPPORT OF THE CORRESPONDING BASIS FUNCTION AND THE SYSTEM IS SINGULAR.',2,1)
+      20  CALL XERMSG('SLATEC','BINTK',&
+        'SOME ABSCISSA WAS NOT IN THE SUPPORT OF THE CORRESPONDING BASIS FUNCTION&
+        & AND THE SYSTEM IS SINGULAR.',2,1)
       RETURN
-    ENDIF
-    50     CALL XERMSG('SLATEC','BINTK',&
+    END IF
+    50  CALL XERMSG('SLATEC','BINTK',&
       'X(I) DOES NOT SATISFY X(I).LT.X(I+1) FOR SOME I',2,1)
-  ENDIF
+  END IF
 END SUBROUTINE BINTK

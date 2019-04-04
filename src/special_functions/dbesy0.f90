@@ -61,7 +61,7 @@ REAL(8) FUNCTION DBESY0(X)
     nty0 = INITDS(by0cs,19,0.1*REAL(D1MACH(3)))
     xsml = SQRT(4.0D0*D1MACH(3))
     first = .FALSE.
-  ENDIF
+  END IF
   !
   IF ( X<=0.D0 ) CALL XERMSG('SLATEC','DBESY0','X IS ZERO OR NEGATIVE',1,2)
   IF ( X>4.0D0 ) THEN
@@ -69,7 +69,7 @@ REAL(8) FUNCTION DBESY0(X)
     CALL D9B0MP(X,ampl,theta)
     DBESY0 = ampl*SIN(theta)
     RETURN
-  ENDIF
+  END IF
   !
   y = 0.D0
   IF ( X>xsml ) y = X*X

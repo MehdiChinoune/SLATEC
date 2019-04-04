@@ -264,7 +264,7 @@ SUBROUTINE DSICCG(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
   IF ( N<1.OR.Nelt<1 ) THEN
     Ierr = 3
     RETURN
-  ENDIF
+  END IF
   !
   !         Change the SLAP input matrix IA, JA, A to SLAP-Column format.
   CALL DS2Y(N,Nelt,Ia,Ja,A,Isym)
@@ -275,7 +275,7 @@ SUBROUTINE DSICCG(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
     nl = (Nelt+N)/2
   ELSE
     nl = Nelt
-  ENDIF
+  END IF
   !
   locjel = LOCIB
   lociel = locjel + nl
@@ -310,7 +310,7 @@ SUBROUTINE DSICCG(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
     CALL XERMSG('SLATEC','DSICCG','IC factorization broke down on step '//&
       xern1//'.  Diagonal was set to unity and factorization proceeded.',1,1)
     Ierr = 7
-  ENDIF
+  END IF
   !
   !         Do the Preconditioned Conjugate Gradient.
   CALL DCG(N,B,X,Nelt,Ia,Ja,A,Isym,DSMV,DSLLTI,Itol,Tol,Itmax,Iter,Err,Ierr,&

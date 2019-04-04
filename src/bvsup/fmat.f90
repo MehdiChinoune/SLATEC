@@ -29,6 +29,6 @@ SUBROUTINE FMAT(X,Y,Yp)
     XSAve = X
     tanx = TAN(X/57.2957795130823)
     TERm = 3.0/tanx + 2.0*tanx
-  ENDIF
+  END IF
   Yp(2) = -TERm*Y(2) - 0.7*Y(1)
 END SUBROUTINE FMAT

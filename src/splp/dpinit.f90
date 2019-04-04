@@ -75,13 +75,13 @@ SUBROUTINE DPINIT(Mrelas,Nvars,Costs,Bl,Bu,Ind,Primal,Info,Amat,Csc,&
             Csc(j) = one/cmax
           ELSE
             Csc(j) = one
-          ENDIF
+          END IF
           j = j + 1
           EXIT
-        ENDIF
-      ENDDO
-    ENDDO
-  ENDIF
+        END IF
+      END DO
+    END DO
+  END IF
   !
   !     FORM CHECK SUMS OF COLUMNS. COMPUTE MATRIX NORM OF SCALED MATRIX.
   Anorm = zero
@@ -103,9 +103,9 @@ SUBROUTINE DPINIT(Mrelas,Nvars,Costs,Bl,Bu,Ind,Primal,Info,Amat,Csc,&
         Anorm = MAX(Anorm,Colnrm(j))
         j = j + 1
         EXIT
-      ENDIF
-    ENDDO
-  ENDDO
+      END IF
+    END DO
+  END DO
   !
   !     IF THE USER HAS NOT PROVIDED COST VECTOR SCALING THEN SCALE IT
   !     USING THE MAX. NORM OF THE TRANSFORMED COST VECTOR, IF NONZERO.
@@ -115,14 +115,14 @@ SUBROUTINE DPINIT(Mrelas,Nvars,Costs,Bl,Bu,Ind,Primal,Info,Amat,Csc,&
   DO WHILE ( (n20028-j)>=0 )
     testsc = MAX(testsc,ABS(Csc(j)*Costs(j)))
     j = j + 1
-  ENDDO
+  END DO
   IF ( .NOT.cstscp ) THEN
     IF ( testsc<=zero ) THEN
       Costsc = one
     ELSE
       Costsc = one/testsc
-    ENDIF
-  ENDIF
+    END IF
+  END IF
   Xlamda = (Costsc+Costsc)*testsc
   IF ( Xlamda==zero ) Xlamda = one
   !
@@ -147,7 +147,7 @@ SUBROUTINE DPINIT(Mrelas,Nvars,Costs,Bl,Bu,Ind,Primal,Info,Amat,Csc,&
       scalr = -Bl(j)
     ELSEIF ( Ind(j)==4 ) THEN
       scalr = zero
-    ENDIF
+    END IF
     IF ( scalr==zero ) THEN
       j = j + 1
     ELSE
@@ -159,10 +159,10 @@ SUBROUTINE DPINIT(Mrelas,Nvars,Costs,Bl,Bu,Ind,Primal,Info,Amat,Csc,&
         ELSE
           j = j + 1
           EXIT
-        ENDIF
-      ENDDO
-    ENDIF
-  ENDDO
+        END IF
+      END DO
+    END IF
+  END DO
   !
   !     TRANSLATE RHS ACCORDING TO CLASSIFICATION OF DEPENDENT VARIABLES.
   i = Nvars + 1
@@ -176,10 +176,10 @@ SUBROUTINE DPINIT(Mrelas,Nvars,Costs,Bl,Bu,Ind,Primal,Info,Amat,Csc,&
       scalr = Bl(i)
     ELSEIF ( Ind(i)==4 ) THEN
       scalr = zero
-    ENDIF
+    END IF
     Rhs(i-Nvars) = Rhs(i-Nvars) + scalr
     i = i + 1
-  ENDDO
+  END DO
   Rhsnrm = DASUM(Mrelas,Rhs,1)
   !
   !     IF THIS IS NOT A CONTINUATION OR THE USER HAS NOT PROVIDED THE
@@ -191,8 +191,8 @@ SUBROUTINE DPINIT(Mrelas,Nvars,Costs,Bl,Bu,Ind,Primal,Info,Amat,Csc,&
     DO WHILE ( (n20066-j)>=0 )
       Ibasis(j) = Nvars + j
       j = j + 1
-    ENDDO
-  ENDIF
+    END DO
+  END IF
   !
   !     DEFINE THE ARRAY IBB(*)
   j = 1
@@ -200,13 +200,13 @@ SUBROUTINE DPINIT(Mrelas,Nvars,Costs,Bl,Bu,Ind,Primal,Info,Amat,Csc,&
   DO WHILE ( (n20070-j)>=0 )
     Ibb(j) = 1
     j = j + 1
-  ENDDO
+  END DO
   j = 1
   n20074 = Mrelas
   DO WHILE ( (n20074-j)>=0 )
     Ibb(Ibasis(j)) = -1
     j = j + 1
-  ENDDO
+  END DO
   !
   !     DEFINE THE REST OF IBASIS(*)
   ip = Mrelas
@@ -216,8 +216,8 @@ SUBROUTINE DPINIT(Mrelas,Nvars,Costs,Bl,Bu,Ind,Primal,Info,Amat,Csc,&
     IF ( Ibb(j)>0 ) THEN
       ip = ip + 1
       Ibasis(ip) = j
-    ENDIF
+    END IF
     j = j + 1
-  ENDDO
+  END DO
   RETURN
 END SUBROUTINE DPINIT

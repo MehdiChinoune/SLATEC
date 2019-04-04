@@ -143,7 +143,7 @@ SUBROUTINE SXLCAL(N,Lgmr,X,Xl,Zl,Hes,Maxlp1,Q,V,R0nrm,Wk,Sz,Jscal,Jpre,&
   !   910502  Removed MSOLVE from ROUTINES CALLED list.  (FNF)
   !   910506  Made subsidiary to SGMRES.  (FNF)
   !   920511  Added complete declaration section.  (WRB)
-  
+
   !         The following is for optimized compilation on LLNL/LTSS Crays.
   !LLL. OPTIMIZE
   !     .. Scalar Arguments ..
@@ -164,28 +164,28 @@ SUBROUTINE SXLCAL(N,Lgmr,X,Xl,Zl,Hes,Maxlp1,Q,V,R0nrm,Wk,Sz,Jscal,Jpre,&
   llp1 = ll + 1
   DO k = 1, llp1
     Wk(k) = 0
-  ENDDO
+  END DO
   Wk(1) = R0nrm
   CALL SHELS(Hes,Maxlp1,ll,Q,Wk)
   DO k = 1, N
     Zl(k) = 0
-  ENDDO
+  END DO
   DO i = 1, ll
     CALL SAXPY(N,Wk(i),V(1,i),1,Zl,1)
-  ENDDO
+  END DO
   IF ( (Jscal==1).OR.(Jscal==3) ) THEN
     DO k = 1, N
       Zl(k) = Zl(k)/Sz(k)
-    ENDDO
-  ENDIF
+    END DO
+  END IF
   IF ( Jpre>0 ) THEN
     CALL SCOPY(N,Zl,1,Wk,1)
     CALL MSOLVE(N,Wk,Zl,Nelt,Ia,Ja,A,Isym,Rpar,Ipar)
     Nmsl = Nmsl + 1
-  ENDIF
+  END IF
   !         calculate XL from X and ZL.
   DO k = 1, N
     Xl(k) = X(k) + Zl(k)
-  ENDDO
+  END DO
   !------------- LAST LINE OF SXLCAL FOLLOWS ----------------------------
 END SUBROUTINE SXLCAL

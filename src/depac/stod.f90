@@ -136,15 +136,15 @@ SUBROUTINE STOD(Neq,Y,Yh,Nyh,Yh1,Ewt,Savf,Acor,Wm,Iwm,F,JAC,Rpar,Ipar)
         IALth = L
         iret = 1
         GOTO 100
-      ENDIF
+      END IF
     ELSEIF ( NQ<=MAXord ) THEN
       GOTO 200
-    ENDIF
+    END IF
     NQ = MAXord
     L = LMAx
     DO i = 1, L
       EL(i) = ELCo(i,NQ)
-    ENDDO
+    END DO
     NQNyh = NQ*Nyh
     RC = RC*EL(1)/EL0
     EL0 = EL(1)
@@ -159,7 +159,7 @@ SUBROUTINE STOD(Neq,Y,Yh,Nyh,Yh1,Ewt,Savf,Acor,Wm,Iwm,F,JAC,Rpar,Ipar)
     ELSE
       rh = MIN(rh,ABS(H/HOLd))
       H = HOLd
-    ENDIF
+    END IF
     GOTO 300
   ELSE
     IF ( JSTart==-2 ) GOTO 200
@@ -190,11 +190,11 @@ SUBROUTINE STOD(Neq,Y,Yh,Nyh,Yh1,Ewt,Savf,Acor,Wm,Iwm,F,JAC,Rpar,Ipar)
     ! WHENEVER THE ORDER NQ IS CHANGED, OR AT THE START OF THE PROBLEM.
     !-----------------------------------------------------------------------
     CALL CFOD(METh,ELCo,TESco)
-  ENDIF
+  END IF
   100 CONTINUE
   DO i = 1, L
     EL(i) = ELCo(i,NQ)
-  ENDDO
+  END DO
   NQNyh = NQ*Nyh
   RC = RC*EL(1)/EL0
   EL0 = EL(1)
@@ -225,15 +225,15 @@ SUBROUTINE STOD(Neq,Y,Yh,Nyh,Yh1,Ewt,Savf,Acor,Wm,Iwm,F,JAC,Rpar,Ipar)
     r = r*rh
     DO i = 1, N
       Yh(i,j) = Yh(i,j)*r
-    ENDDO
-  ENDDO
+    END DO
+  END DO
   H = H*rh
   RC = RC*rh
   IALth = L
   IF ( iredo==0 ) THEN
     RMAx = 10.0E0
     GOTO 1200
-  ENDIF
+  END IF
   !-----------------------------------------------------------------------
   ! THIS SECTION COMPUTES THE PREDICTED VALUES BY EFFECTIVELY
   ! MULTIPLYING THE YH ARRAY BY THE PASCAL TRIANGLE MATRIX.
@@ -251,8 +251,8 @@ SUBROUTINE STOD(Neq,Y,Yh,Nyh,Yh1,Ewt,Savf,Acor,Wm,Iwm,F,JAC,Rpar,Ipar)
     i1 = i1 - Nyh
     DO i = i1, NQNyh
       Yh1(i) = Yh1(i) + Yh1(i+Nyh)
-    ENDDO
-  ENDDO
+    END DO
+  END DO
   KSTeps = KSTeps + 1
   !-----------------------------------------------------------------------
   ! UP TO 3 CORRECTOR ITERATIONS ARE TAKEN.  A CONVERGENCE TEST IS
@@ -263,7 +263,7 @@ SUBROUTINE STOD(Neq,Y,Yh,Nyh,Yh1,Ewt,Savf,Acor,Wm,Iwm,F,JAC,Rpar,Ipar)
   500  m = 0
   DO i = 1, N
     Y(i) = Yh(i,1)
-  ENDDO
+  END DO
   CALL F(TN,Y,Savf,Rpar,Ipar)
   NFE = NFE + 1
   IF ( IPUp>0 ) THEN
@@ -278,10 +278,10 @@ SUBROUTINE STOD(Neq,Y,Yh,Nyh,Yh1,Ewt,Savf,Acor,Wm,Iwm,F,JAC,Rpar,Ipar)
     CRAte = 0.7E0
     CALL PJAC(Neq,Y,Yh,Nyh,Ewt,Acor,Savf,Wm,Iwm,F,JAC,Rpar,Ipar)
     IF ( IER/=0 ) GOTO 800
-  ENDIF
+  END IF
   DO i = 1, N
     Acor(i) = 0.0E0
-  ENDDO
+  END DO
   600 CONTINUE
   IF ( MITer/=0 ) THEN
     !-----------------------------------------------------------------------
@@ -291,14 +291,14 @@ SUBROUTINE STOD(Neq,Y,Yh,Nyh,Yh1,Ewt,Savf,Acor,Wm,Iwm,F,JAC,Rpar,Ipar)
     !-----------------------------------------------------------------------
     DO i = 1, N
       Y(i) = H*Savf(i) - (Yh(i,2)+Acor(i))
-    ENDDO
+    END DO
     CALL SLVS(Wm,Iwm,Y,Savf)
     IF ( IER/=0 ) GOTO 700
     del = VNWRMS(N,Y,Ewt)
     DO i = 1, N
       Acor(i) = Acor(i) + Y(i)
       Y(i) = Yh(i,1) + EL(1)*Acor(i)
-    ENDDO
+    END DO
   ELSE
     !-----------------------------------------------------------------------
     ! IN THE CASE OF FUNCTIONAL ITERATION, UPDATE Y DIRECTLY FROM
@@ -307,13 +307,13 @@ SUBROUTINE STOD(Neq,Y,Yh,Nyh,Yh1,Ewt,Savf,Acor,Wm,Iwm,F,JAC,Rpar,Ipar)
     DO i = 1, N
       Savf(i) = H*Savf(i) - Yh(i,2)
       Y(i) = Savf(i) - Acor(i)
-    ENDDO
+    END DO
     del = VNWRMS(N,Y,Ewt)
     DO i = 1, N
       Y(i) = Yh(i,1) + EL(1)*Savf(i)
       Acor(i) = Savf(i)
-    ENDDO
-  ENDIF
+    END DO
+  END IF
   !-----------------------------------------------------------------------
   ! TEST FOR CONVERGENCE.  IF M.GT.0, AN ESTIMATE OF THE CONVERGENCE
   ! RATE CONSTANT IS STORED IN CRATE, AND THIS IS USED IN THE TEST.
@@ -345,8 +345,8 @@ SUBROUTINE STOD(Neq,Y,Yh,Nyh,Yh1,Ewt,Savf,Acor,Wm,Iwm,F,JAC,Rpar,Ipar)
         i1 = i1 - Nyh
         DO i = i1, NQNyh
           Yh1(i) = Yh1(i) - Yh1(i+Nyh)
-        ENDDO
-      ENDDO
+        END DO
+      END DO
       RMAx = 2.0E0
       IF ( ABS(H)<=HMIn*1.00001E0 ) THEN
         !-----------------------------------------------------------------------
@@ -374,12 +374,12 @@ SUBROUTINE STOD(Neq,Y,Yh,Nyh,Yh1,Ewt,Savf,Acor,Wm,Iwm,F,JAC,Rpar,Ipar)
           H = H*rh
           DO i = 1, N
             Y(i) = Yh(i,1)
-          ENDDO
+          END DO
           CALL F(TN,Y,Savf,Rpar,Ipar)
           NFE = NFE + 1
           DO i = 1, N
             Yh(i,2) = H*Savf(i)
-          ENDDO
+          END DO
           IPUp = MITer
           IALth = 5
           IF ( NQ==1 ) GOTO 400
@@ -387,12 +387,12 @@ SUBROUTINE STOD(Neq,Y,Yh,Nyh,Yh1,Ewt,Savf,Acor,Wm,Iwm,F,JAC,Rpar,Ipar)
           L = 2
           iret = 3
           GOTO 100
-        ENDIF
+        END IF
       ELSE
         iredo = 2
         rhup = 0.0E0
         GOTO 900
-      ENDIF
+      END IF
     ELSE
       !-----------------------------------------------------------------------
       ! AFTER A SUCCESSFUL STEP, UPDATE THE YH ARRAY.
@@ -412,8 +412,8 @@ SUBROUTINE STOD(Neq,Y,Yh,Nyh,Yh1,Ewt,Savf,Acor,Wm,Iwm,F,JAC,Rpar,Ipar)
       DO j = 1, L
         DO i = 1, N
           Yh(i,j) = Yh(i,j) + EL(j)*Acor(i)
-        ENDDO
-      ENDDO
+        END DO
+      END DO
       IALth = IALth - 1
       IF ( IALth==0 ) THEN
         !-----------------------------------------------------------------------
@@ -429,23 +429,23 @@ SUBROUTINE STOD(Neq,Y,Yh,Nyh,Yh1,Ewt,Savf,Acor,Wm,Iwm,F,JAC,Rpar,Ipar)
         IF ( L/=LMAx ) THEN
           DO i = 1, N
             Savf(i) = Acor(i) - Yh(i,LMAx)
-          ENDDO
+          END DO
           dup = VNWRMS(N,Savf,Ewt)/TESco(3,NQ)
           exup = 1.0E0/(L+1)
           rhup = 1.0E0/(1.4E0*dup**exup+0.0000014E0)
-        ENDIF
+        END IF
         GOTO 900
       ELSE
         IF ( IALth<=1 ) THEN
           IF ( L/=LMAx ) THEN
             DO i = 1, N
               Yh(i,LMAx) = Acor(i)
-            ENDDO
-          ENDIF
-        ENDIF
+            END DO
+          END IF
+        END IF
         GOTO 1200
-      ENDIF
-    ENDIF
+      END IF
+    END IF
   ELSE
     m = m + 1
     IF ( m/=3 ) THEN
@@ -454,9 +454,9 @@ SUBROUTINE STOD(Neq,Y,Yh,Nyh,Yh1,Ewt,Savf,Acor,Wm,Iwm,F,JAC,Rpar,Ipar)
         CALL F(TN,Y,Savf,Rpar,Ipar)
         NFE = NFE + 1
         GOTO 600
-      ENDIF
-    ENDIF
-  ENDIF
+      END IF
+    END IF
+  END IF
   !-----------------------------------------------------------------------
   ! THE CORRECTOR ITERATION FAILED TO CONVERGE IN 3 TRIES.
   ! IF MITER .NE. 0 AND THE JACOBIAN IS OUT OF DATE, PJAC IS CALLED FOR
@@ -468,7 +468,7 @@ SUBROUTINE STOD(Neq,Y,Yh,Nyh,Yh1,Ewt,Savf,Acor,Wm,Iwm,F,JAC,Rpar,Ipar)
   IF ( IPUp/=0 ) THEN
     IPUp = MITer
     GOTO 500
-  ENDIF
+  END IF
   800  TN = told
   ncf = ncf + 1
   RMAx = 2.0E0
@@ -477,8 +477,8 @@ SUBROUTINE STOD(Neq,Y,Yh,Nyh,Yh1,Ewt,Savf,Acor,Wm,Iwm,F,JAC,Rpar,Ipar)
     i1 = i1 - Nyh
     DO i = i1, NQNyh
       Yh1(i) = Yh1(i) - Yh1(i+Nyh)
-    ENDDO
-  ENDDO
+    END DO
+  END DO
   IF ( ABS(H)<=HMIn*1.00001E0 ) THEN
     KFLag = -2
     GOTO 1300
@@ -491,7 +491,7 @@ SUBROUTINE STOD(Neq,Y,Yh,Nyh,Yh1,Ewt,Savf,Acor,Wm,Iwm,F,JAC,Rpar,Ipar)
     iredo = 1
     rh = MAX(rh,HMIn/ABS(H))
     GOTO 300
-  ENDIF
+  END IF
   900  exsm = 1.0E0/L
   rhsm = 1.0E0/(1.2E0*dsm**exsm+0.0000012E0)
   rhdn = 0.0E0
@@ -499,13 +499,13 @@ SUBROUTINE STOD(Neq,Y,Yh,Nyh,Yh1,Ewt,Savf,Acor,Wm,Iwm,F,JAC,Rpar,Ipar)
     ddn = VNWRMS(N,Yh(1,L),Ewt)/TESco(1,NQ)
     exdn = 1.0E0/NQ
     rhdn = 1.0E0/(1.3E0*ddn**exdn+0.0000013E0)
-  ENDIF
+  END IF
   IF ( rhsm>=rhup ) THEN
     IF ( rhsm>=rhdn ) THEN
       newq = NQ
       rh = rhsm
       GOTO 1000
-    ENDIF
+    END IF
   ELSEIF ( rhup>rhdn ) THEN
     newq = L
     rh = rhup
@@ -516,10 +516,10 @@ SUBROUTINE STOD(Neq,Y,Yh,Nyh,Yh1,Ewt,Savf,Acor,Wm,Iwm,F,JAC,Rpar,Ipar)
       r = EL(L)/L
       DO i = 1, N
         Yh(i,newq+1) = Acor(i)*r
-      ENDDO
+      END DO
       GOTO 1100
-    ENDIF
-  ENDIF
+    END IF
+  END IF
   newq = NQ - 1
   rh = rhdn
   IF ( KFLag<0.AND.rh>1.0E0 ) rh = 1.0E0
@@ -537,8 +537,8 @@ SUBROUTINE STOD(Neq,Y,Yh,Nyh,Yh1,Ewt,Savf,Acor,Wm,Iwm,F,JAC,Rpar,Ipar)
     IF ( newq==NQ ) THEN
       rh = MAX(rh,HMIn/ABS(H))
       GOTO 300
-    ENDIF
-  ENDIF
+    END IF
+  END IF
   1100 NQ = newq
   L = NQ + 1
   iret = 2
@@ -546,7 +546,7 @@ SUBROUTINE STOD(Neq,Y,Yh,Nyh,Yh1,Ewt,Savf,Acor,Wm,Iwm,F,JAC,Rpar,Ipar)
   1200 r = 1.0E0/TESco(2,NQU)
   DO i = 1, N
     Acor(i) = Acor(i)*r
-  ENDDO
+  END DO
   1300 HOLd = H
   JSTart = 1
   !----------------------- END OF SUBROUTINE STOD  -----------------------

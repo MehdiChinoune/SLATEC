@@ -360,7 +360,7 @@ SUBROUTINE DQAWOE(F,A,B,Omega,Integr,Epsabs,Epsrel,Limit,Icall,Maxp1,Result,&
         numrl2 = 1
         extall = .TRUE.
         rlist2(1) = Result
-      ENDIF
+      END IF
       IF ( 0.25D+00*ABS(B-A)*domega<=0.2D+01 ) extall = .TRUE.
       ksgn = -1
       IF ( dres>=(0.1D+01-0.5D+02*epmach)*defabs ) ksgn = 1
@@ -398,9 +398,9 @@ SUBROUTINE DQAWOE(F,A,B,Omega,Integr,Epsabs,Epsrel,Limit,Icall,Maxp1,Result,&
               erro12>=0.99D+00*errmax ) THEN
             IF ( extrap ) iroff2 = iroff2 + 1
             IF ( .NOT.extrap ) iroff1 = iroff1 + 1
-          ENDIF
+          END IF
           IF ( Last>10.AND.erro12>errmax ) iroff3 = iroff3 + 1
-        ENDIF
+        END IF
         Rlist(maxerr) = area1
         Rlist(Last) = area2
         Nnlog(maxerr) = nrmom
@@ -439,7 +439,7 @@ SUBROUTINE DQAWOE(F,A,B,Omega,Integr,Epsabs,Epsrel,Limit,Icall,Maxp1,Result,&
           Blist(Last) = b2
           Elist(maxerr) = error1
           Elist(Last) = error2
-        ENDIF
+        END IF
         !
         !           CALL SUBROUTINE DQPSRT TO MAINTAIN THE DESCENDING ORDERING
         !           IN THE LIST OF ERROR ESTIMATES AND SELECT THE SUBINTERVAL
@@ -459,7 +459,7 @@ SUBROUTINE DQAWOE(F,A,B,Omega,Integr,Epsabs,Epsrel,Limit,Icall,Maxp1,Result,&
             erlarg = erlarg - erlast
             IF ( ABS(b1-a1)>small ) erlarg = erlarg + erro12
             IF ( extrap ) GOTO 5
-          ENDIF
+          END IF
           !
           !           TEST WHETHER THE INTERVAL TO BE BISECTED NEXT IS THE
           !           SMALLEST INTERVAL.
@@ -479,100 +479,101 @@ SUBROUTINE DQAWOE(F,A,B,Omega,Integr,Epsabs,Epsrel,Limit,Icall,Maxp1,Result,&
             IF ( 0.25D+00*width*domega>0.2D+01 ) CYCLE
             extall = .TRUE.
             GOTO 10
-          ENDIF
-          5            IF ( ierro/=3.AND.erlarg>ertest ) THEN
+          END IF
+          5 CONTINUE
+          IF ( ierro/=3.AND.erlarg>ertest ) THEN
+            !
+            !           THE SMALLEST INTERVAL HAS THE LARGEST ERROR.
+            !           BEFORE BISECTING DECREASE THE SUM OF THE ERRORS OVER
+            !           THE LARGER INTERVALS (ERLARG) AND PERFORM EXTRAPOLATION.
+            !
+            jupbnd = Last
+            IF ( Last>(Limit/2+2) ) jupbnd = Limit + 3 - Last
+            id = nrmax
+            DO k = id, jupbnd
+              maxerr = Iord(nrmax)
+              errmax = Elist(maxerr)
+              IF ( ABS(Blist(maxerr)-Alist(maxerr))>small ) GOTO 20
+              nrmax = nrmax + 1
+            END DO
+          END IF
           !
-          !           THE SMALLEST INTERVAL HAS THE LARGEST ERROR.
-          !           BEFORE BISECTING DECREASE THE SUM OF THE ERRORS OVER
-          !           THE LARGER INTERVALS (ERLARG) AND PERFORM EXTRAPOLATION.
+          !           PERFORM EXTRAPOLATION.
           !
-          jupbnd = Last
-          IF ( Last>(Limit/2+2) ) jupbnd = Limit + 3 - Last
-          id = nrmax
-          DO k = id, jupbnd
-            maxerr = Iord(nrmax)
-            errmax = Elist(maxerr)
-            IF ( ABS(Blist(maxerr)-Alist(maxerr))>small ) GOTO 20
-            nrmax = nrmax + 1
-          ENDDO
-        ENDIF
-        !
-        !           PERFORM EXTRAPOLATION.
-        !
-        numrl2 = numrl2 + 1
-        rlist2(numrl2) = area
-        IF ( numrl2>=3 ) THEN
-          CALL DQELG(numrl2,rlist2,reseps,abseps,res3la,nres)
-          ktmin = ktmin + 1
-          IF ( ktmin>5.AND.Abserr<0.1D-02*errsum ) Ier = 5
-          IF ( abseps<Abserr ) THEN
-            ktmin = 0
-            Abserr = abseps
-            Result = reseps
-            correc = erlarg
-            ertest = MAX(Epsabs,Epsrel*ABS(reseps))
-            !- **JUMP OUT OF DO-LOOP
-            IF ( Abserr<=ertest ) EXIT
-          ENDIF
-          !
-          !           PREPARE BISECTION OF THE SMALLEST INTERVAL.
-          !
-          IF ( numrl2==1 ) noext = .TRUE.
-          IF ( Ier==5 ) EXIT
-        ENDIF
-        maxerr = Iord(1)
-        errmax = Elist(maxerr)
-        nrmax = 1
-        extrap = .FALSE.
-        small = small*0.5D+00
+          numrl2 = numrl2 + 1
+          rlist2(numrl2) = area
+          IF ( numrl2>=3 ) THEN
+            CALL DQELG(numrl2,rlist2,reseps,abseps,res3la,nres)
+            ktmin = ktmin + 1
+            IF ( ktmin>5.AND.Abserr<0.1D-02*errsum ) Ier = 5
+            IF ( abseps<Abserr ) THEN
+              ktmin = 0
+              Abserr = abseps
+              Result = reseps
+              correc = erlarg
+              ertest = MAX(Epsabs,Epsrel*ABS(reseps))
+              !- **JUMP OUT OF DO-LOOP
+              IF ( Abserr<=ertest ) EXIT
+            END IF
+            !
+            !           PREPARE BISECTION OF THE SMALLEST INTERVAL.
+            !
+            IF ( numrl2==1 ) noext = .TRUE.
+            IF ( Ier==5 ) EXIT
+          END IF
+          maxerr = Iord(1)
+          errmax = Elist(maxerr)
+          nrmax = 1
+          extrap = .FALSE.
+          small = small*0.5D+00
+          erlarg = errsum
+          CYCLE
+        END IF
+        10  ertest = errbnd
         erlarg = errsum
-        CYCLE
-    ENDIF
-    10         ertest = errbnd
-    erlarg = errsum
-    20 CONTINUE
-  ENDDO
-  !
-  !           SET THE FINAL RESULT.
-  !           ---------------------
-  !
-  IF ( Abserr/=oflow.AND.nres/=0 ) THEN
-    IF ( Ier+ierro/=0 ) THEN
-      IF ( ierro==3 ) Abserr = Abserr + correc
-      IF ( Ier==0 ) Ier = 3
-      IF ( Result==0.0D+00.OR.area==0.0D+00 ) THEN
-        IF ( Abserr>errsum ) GOTO 50
-        IF ( area==0.0D+00 ) THEN
-          IF ( Ier>2 ) Ier = Ier - 1
-          IF ( Integr==2.AND.Omega<0.0D+00 ) Result = -Result
-          RETURN
-        ENDIF
-      ELSEIF ( Abserr/ABS(Result)>errsum/ABS(area) ) THEN
-        GOTO 50
-      ENDIF
-    ENDIF
+        20 CONTINUE
+      END DO
+      !
+      !           SET THE FINAL RESULT.
+      !           ---------------------
+      !
+      IF ( Abserr/=oflow.AND.nres/=0 ) THEN
+        IF ( Ier+ierro/=0 ) THEN
+          IF ( ierro==3 ) Abserr = Abserr + correc
+          IF ( Ier==0 ) Ier = 3
+          IF ( Result==0.0D+00.OR.area==0.0D+00 ) THEN
+            IF ( Abserr>errsum ) GOTO 50
+            IF ( area==0.0D+00 ) THEN
+              IF ( Ier>2 ) Ier = Ier - 1
+              IF ( Integr==2.AND.Omega<0.0D+00 ) Result = -Result
+              RETURN
+            END IF
+          ELSEIF ( Abserr/ABS(Result)>errsum/ABS(area) ) THEN
+            GOTO 50
+          END IF
+        END IF
+        !
+        !           TEST ON DIVERGENCE.
+        !
+        IF ( ksgn/=(-1).OR.MAX(ABS(Result),ABS(area))>defabs*0.1D-01 ) THEN
+          IF ( 0.1D-01>(Result/area).OR.(Result/area)>0.1D+03.OR.&
+            errsum>=ABS(area) ) Ier = 6
+        END IF
+        IF ( Ier>2 ) Ier = Ier - 1
+        IF ( Integr==2.AND.Omega<0.0D+00 ) Result = -Result
+        RETURN
+      END IF
+    END IF
     !
-    !           TEST ON DIVERGENCE.
+    !           COMPUTE GLOBAL INTEGRAL SUM.
     !
-    IF ( ksgn/=(-1).OR.MAX(ABS(Result),ABS(area))>defabs*0.1D-01 ) THEN
-      IF ( 0.1D-01>(Result/area).OR.(Result/area)>0.1D+03.OR.&
-        errsum>=ABS(area) ) Ier = 6
-    ENDIF
+    50  Result = 0.0D+00
+    DO k = 1, Last
+      Result = Result + Rlist(k)
+    END DO
+    Abserr = errsum
     IF ( Ier>2 ) Ier = Ier - 1
     IF ( Integr==2.AND.Omega<0.0D+00 ) Result = -Result
-    RETURN
-  ENDIF
-  ENDIF
-  !
-  !           COMPUTE GLOBAL INTEGRAL SUM.
-  !
-  50     Result = 0.0D+00
-  DO k = 1, Last
-    Result = Result + Rlist(k)
-  ENDDO
-  Abserr = errsum
-  IF ( Ier>2 ) Ier = Ier - 1
-  IF ( Integr==2.AND.Omega<0.0D+00 ) Result = -Result
-ENDIF
-RETURN
+  END IF
+  RETURN
 END SUBROUTINE DQAWOE

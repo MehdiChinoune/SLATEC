@@ -154,9 +154,9 @@ SUBROUTINE DBSKNU(X,Fnu,Kode,N,Y,Nz)
                 tm = cc(k)*ak
                 s = s + tm
                 IF ( ABS(tm)<tol ) EXIT
-              ENDDO
+              END DO
               g1 = -s
-            ENDIF
+            END IF
             g2 = (t1+t2)*0.5D0
             smu = 1.0D0
             fc = 1.0D0
@@ -166,7 +166,7 @@ SUBROUTINE DBSKNU(X,Fnu,Kode,N,Y,Nz)
               fc = dnu*pi
               fc = fc/SIN(fc)
               IF ( fmu/=0.0D0 ) smu = SINH(fmu)/fmu
-            ENDIF
+            END IF
             f = fc*(g1*COSH(fmu)+g2*flrx*smu)
             fc = EXP(fmu)
             p = 0.5D0*fc/t2
@@ -192,14 +192,14 @@ SUBROUTINE DBSKNU(X,Fnu,Kode,N,Y,Nz)
                   ak = ak + 1.0D0
                   s = ABS(t1)/(1.0D0+ABS(s1)) + ABS(t2)/(1.0D0+ABS(s2))
                   IF ( s<=tol ) EXIT
-                ENDDO
-              ENDIF
+                END DO
+              END IF
               s2 = s2*rx
               IF ( koded/=1 ) THEN
                 f = EXP(X)
                 s1 = s1*f
                 s2 = s2*f
-              ENDIF
+              END IF
               GOTO 20
             ELSE
               IF ( X>=tol ) THEN
@@ -215,15 +215,15 @@ SUBROUTINE DBSKNU(X,Fnu,Kode,N,Y,Nz)
                   ak = ak + 1.0D0
                   s = ABS(t1)/(1.0D0+ABS(s1))
                   IF ( s<=tol ) EXIT
-                ENDDO
-              ENDIF
+                END DO
+              END IF
               Y(1) = s1
               IF ( koded==1 ) RETURN
               Y(1) = s1*EXP(X)
               RETURN
-            ENDIF
-          ENDIF
-        ENDIF
+            END IF
+          END IF
+        END IF
         DO
           coef = rthpi/SQRT(X)
           IF ( koded==2 ) EXIT
@@ -233,8 +233,8 @@ SUBROUTINE DBSKNU(X,Fnu,Kode,N,Y,Nz)
           ELSE
             coef = coef*EXP(-X)
             EXIT
-          ENDIF
-        ENDDO
+          END IF
+        END DO
         IF ( ABS(dnu)==0.5D0 ) THEN
           !
           !     FNU=HALF ODD INTEGER CASE
@@ -270,14 +270,14 @@ SUBROUTINE DBSKNU(X,Fnu,Kode,N,Y,Nz)
               ak = ak + 8.0D0
               sqk = sqk + ak
               IF ( ABS(ck)<tol ) EXIT
-            ENDDO
+            END DO
             s2 = s*coef
             fmu = fmu + 8.0D0*dnu + 4.0D0
-          ENDDO
+          END DO
           IF ( nn<=1 ) THEN
             s1 = s2
             GOTO 50
-          ENDIF
+          END IF
         ELSE
           !
           !     MILLER ALGORITHM FOR X1.LT.X.LE.X2
@@ -314,19 +314,19 @@ SUBROUTINE DBSKNU(X,Fnu,Kode,N,Y,Nz)
                 p1 = pt
                 s = s + p2
                 kk = kk - 1
-              ENDDO
+              END DO
               s1 = coef*(p2/s)
               IF ( inu<=0.AND.N<=1 ) GOTO 50
               s2 = s1*(X+dnu+0.5D0-p1/p2)/X
               EXIT
-            ENDIF
-          ENDDO
-        ENDIF
-      ENDIF
+            END IF
+          END DO
+        END IF
+      END IF
       !
       !     FORWARD RECURSION ON THE THREE TERM RECURSION RELATION
       !
-      20       ck = (dnu+dnu+2.0D0)/X
+      20  ck = (dnu+dnu+2.0D0)/X
       IF ( N==1 ) inu = inu - 1
       IF ( inu>0 ) THEN
         DO i = 1, inu
@@ -334,72 +334,73 @@ SUBROUTINE DBSKNU(X,Fnu,Kode,N,Y,Nz)
           s2 = ck*s2 + s1
           s1 = st
           ck = ck + rx
-        ENDDO
+        END DO
         IF ( N==1 ) s1 = s2
       ELSEIF ( N<=1 ) THEN
         s1 = s2
-      ENDIF
-    ENDIF
-    50     IF ( iflag==1 ) THEN
-    !     IFLAG=1 CASES
-    s = -X + LOG(s1)
-    Y(1) = 0.0D0
-    Nz = 1
-    IF ( s>=-elim ) THEN
-      Y(1) = EXP(s)
-      Nz = 0
-    ENDIF
-    IF ( N==1 ) RETURN
-    s = -X + LOG(s2)
-    Y(2) = 0.0D0
-    Nz = Nz + 1
-    IF ( s>=-elim ) THEN
-      Nz = Nz - 1
-      Y(2) = EXP(s)
-    ENDIF
-    IF ( N==2 ) RETURN
-    kk = 2
-    IF ( Nz>=2 ) THEN
+      END IF
+    END IF
+    50 CONTINUE
+    IF ( iflag==1 ) THEN
+      !     IFLAG=1 CASES
+      s = -X + LOG(s1)
+      Y(1) = 0.0D0
+      Nz = 1
+      IF ( s>=-elim ) THEN
+        Y(1) = EXP(s)
+        Nz = 0
+      END IF
+      IF ( N==1 ) RETURN
+      s = -X + LOG(s2)
+      Y(2) = 0.0D0
+      Nz = Nz + 1
+      IF ( s>=-elim ) THEN
+        Nz = Nz - 1
+        Y(2) = EXP(s)
+      END IF
+      IF ( N==2 ) RETURN
+      kk = 2
+      IF ( Nz>=2 ) THEN
+        DO i = 3, N
+          kk = i
+          st = s2
+          s2 = ck*s2 + s1
+          s1 = st
+          ck = ck + rx
+          s = -X + LOG(s2)
+          Nz = Nz + 1
+          Y(i) = 0.0D0
+          IF ( s>=-elim ) THEN
+            Y(i) = EXP(s)
+            Nz = Nz - 1
+            GOTO 100
+          END IF
+        END DO
+        RETURN
+      END IF
+    ELSE
+      Y(1) = s1
+      IF ( N==1 ) RETURN
+      Y(2) = s2
+      IF ( N==2 ) RETURN
       DO i = 3, N
-        kk = i
-        st = s2
-        s2 = ck*s2 + s1
-        s1 = st
+        Y(i) = ck*Y(i-1) + Y(i-2)
         ck = ck + rx
-        s = -X + LOG(s2)
-        Nz = Nz + 1
-        Y(i) = 0.0D0
-        IF ( s>=-elim ) THEN
-          Y(i) = EXP(s)
-          Nz = Nz - 1
-          GOTO 100
-        ENDIF
-      ENDDO
+      END DO
       RETURN
-    ENDIF
-  ELSE
-    Y(1) = s1
-    IF ( N==1 ) RETURN
-    Y(2) = s2
-    IF ( N==2 ) RETURN
-    DO i = 3, N
-      Y(i) = ck*Y(i-1) + Y(i-2)
-      ck = ck + rx
-    ENDDO
-    RETURN
-  ENDIF
-ENDIF
-100 CONTINUE
-IF ( kk==N ) RETURN
-s2 = s2*ck + s1
-ck = ck + rx
-kk = kk + 1
-Y(kk) = EXP(-X+LOG(s2))
-IF ( kk==N ) RETURN
-kk = kk + 1
-DO i = kk, N
-  Y(i) = ck*Y(i-1) + Y(i-2)
+    END IF
+  END IF
+  100 CONTINUE
+  IF ( kk==N ) RETURN
+  s2 = s2*ck + s1
   ck = ck + rx
-ENDDO
-RETURN
-  END SUBROUTINE DBSKNU
+  kk = kk + 1
+  Y(kk) = EXP(-X+LOG(s2))
+  IF ( kk==N ) RETURN
+  kk = kk + 1
+  DO i = kk, N
+    Y(i) = ck*Y(i-1) + Y(i-2)
+    ck = ck + rx
+  END DO
+  RETURN
+END SUBROUTINE DBSKNU

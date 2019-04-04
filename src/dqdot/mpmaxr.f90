@@ -41,7 +41,7 @@ SUBROUTINE MPMAXR(X)
   ! SET FRACTION DIGITS TO B-1
   DO i = 1, T
     X(i+2) = it
-  ENDDO
+  END DO
   ! SET SIGN AND EXPONENT
   X(1) = 1
   X(2) = M

@@ -158,7 +158,7 @@ SUBROUTINE D9B0MP(X,Ampl,Theta)
     !
     xmax = 1.0D0/D1MACH(4)
     first = .FALSE.
-  ENDIF
+  END IF
   !
   IF ( X<4.D0 ) CALL XERMSG('SLATEC','D9B0MP','X MUST BE GE 4',1,2)
   !
@@ -171,7 +171,7 @@ SUBROUTINE D9B0MP(X,Ampl,Theta)
     Ampl = (.75D0+DCSEVL(z,bm02cs,nbm02))/SQRT(X)
     Theta = X - pi4 + DCSEVL(z,bth0cs,nbth0)/X
     RETURN
-  ENDIF
+  END IF
   z = (128.D0/(X*X)-5.D0)/3.D0
   Ampl = (.75D0+DCSEVL(z,bm0cs,nbm0))/SQRT(X)
   Theta = X - pi4 + DCSEVL(z,bt02cs,nbt02)/X

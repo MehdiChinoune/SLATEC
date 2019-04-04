@@ -79,7 +79,7 @@ SUBROUTINE RS(Nm,N,A,W,Matz,Z,Fv1,Fv2,Ierr)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   !
   INTEGER N, Nm, Ierr, Matz
   REAL A(Nm,*), W(*), Z(Nm,*), Fv1(*), Fv2(*)
@@ -96,5 +96,5 @@ SUBROUTINE RS(Nm,N,A,W,Matz,Z,Fv1,Fv2,Ierr)
     !     .......... FIND EIGENVALUES ONLY ..........
     CALL TRED1(Nm,N,A,W,Fv1,Fv2)
     CALL TQLRAT(N,W,Fv2,Ierr)
-  ENDIF
+  END IF
 END SUBROUTINE RS

@@ -106,7 +106,7 @@ SUBROUTINE QZIT(Nm,N,A,B,Eps1,Matz,Z,Ierr)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   !
   INTEGER i, j, k, l, N, en, k1, k2, ld, ll, l1, na, Nm, ish, itn, its, km1, lm1
   INTEGER enm2, Ierr, lor1, enorn
@@ -130,11 +130,11 @@ SUBROUTINE QZIT(Nm,N,A,B,Eps1,Matz,Z,Ierr)
     DO j = i, N
       ani = ani + ABS(A(i,j))
       bni = bni + ABS(B(i,j))
-    ENDDO
+    END DO
     !
     IF ( ani>anorm ) anorm = ani
     IF ( bni>bnorm ) bnorm = bni
-  ENDDO
+  END DO
   !
   IF ( anorm==0.0E0 ) anorm = 1.0E0
   IF ( bnorm==0.0E0 ) bnorm = 1.0E0
@@ -145,8 +145,8 @@ SUBROUTINE QZIT(Nm,N,A,B,Eps1,Matz,Z,Ierr)
     DO
       ep = ep/2.0E0
       IF ( 1.0E0+ep<=1.0E0 ) EXIT
-    ENDDO
-  ENDIF
+    END DO
+  END IF
   epsa = ep*anorm
   epsb = ep*bnorm
   !     .......... REDUCE A TO QUASI-TRIANGULAR FORM, WHILE
@@ -166,7 +166,7 @@ SUBROUTINE QZIT(Nm,N,A,B,Eps1,Matz,Z,Ierr)
     its = 0
     na = en - 1
     enm2 = na - 1
-  ENDIF
+  END IF
   200  ish = 2
   !     .......... CHECK FOR CONVERGENCE OR REDUCIBILITY.
   !                FOR L=EN STEP -1 UNTIL 1 DO -- ..........
@@ -175,14 +175,14 @@ SUBROUTINE QZIT(Nm,N,A,B,Eps1,Matz,Z,Ierr)
     l = lm1 + 1
     IF ( l==1 ) GOTO 400
     IF ( ABS(A(l,lm1))<=epsa ) EXIT
-  ENDDO
+  END DO
   !
   300  A(l,lm1) = 0.0E0
   IF ( l>=na ) THEN
     !     .......... 1-BY-1 OR 2-BY-2 BLOCK ISOLATED ..........
     en = lm1
     GOTO 100
-  ENDIF
+  END IF
   !     .......... CHECK FOR SMALL TOP OF B ..........
   400  ld = l
   DO
@@ -247,10 +247,10 @@ SUBROUTINE QZIT(Nm,N,A,B,Eps1,Matz,Z,Ierr)
               t = A(l,l)
               IF ( ABS(B(l,l))>epsb ) t = t - sh*B(l,l)
               IF ( ABS(A(l,lm1))<=ABS(t/A(l1,l))*epsa ) GOTO 500
-            ENDDO
-          ENDIF
-        ENDIF
-      ENDIF
+            END DO
+          END IF
+        END IF
+      END IF
       !
       a1 = a11 - sh
       a2 = a21
@@ -273,15 +273,15 @@ SUBROUTINE QZIT(Nm,N,A,B,Eps1,Matz,Z,Ierr)
         t = B(l,j) + u2*B(l1,j)
         B(l,j) = B(l,j) + t*v1
         B(l1,j) = B(l1,j) + t*v2
-      ENDDO
+      END DO
       !
       IF ( l/=1 ) A(l,lm1) = -A(l,lm1)
       lm1 = l
       l = l1
       GOTO 300
-    ENDIF
+    END IF
     500 CONTINUE
-  ENDDO
+  END DO
   its = its + 1
   itn = itn - 1
   IF ( .NOT.Matz ) lor1 = ld
@@ -298,7 +298,7 @@ SUBROUTINE QZIT(Nm,N,A,B,Eps1,Matz,Z,Ierr)
         a1 = A(k,km1)
         a2 = A(k1,km1)
         a3 = A(k2,km1)
-      ENDIF
+      END IF
       s = ABS(a1) + ABS(a2) + ABS(a3)
       IF ( s==0.0E0 ) CYCLE
       u1 = a1/s
@@ -320,12 +320,12 @@ SUBROUTINE QZIT(Nm,N,A,B,Eps1,Matz,Z,Ierr)
         B(k,j) = B(k,j) + t*v1
         B(k1,j) = B(k1,j) + t*v2
         B(k2,j) = B(k2,j) + t*v3
-      ENDDO
+      END DO
       !
       IF ( k/=l ) THEN
         A(k1,km1) = 0.0E0
         A(k2,km1) = 0.0E0
-      ENDIF
+      END IF
       !     .......... ZERO B(K+2,K+1) AND B(K+2,K) ..........
       s = ABS(B(k2,k2)) + ABS(B(k2,k1)) + ABS(B(k2,k))
       IF ( s/=0.0E0 ) THEN
@@ -348,7 +348,7 @@ SUBROUTINE QZIT(Nm,N,A,B,Eps1,Matz,Z,Ierr)
           B(i,k2) = B(i,k2) + t*v1
           B(i,k1) = B(i,k1) + t*v2
           B(i,k) = B(i,k) + t*v3
-        ENDDO
+        END DO
         !
         B(k2,k) = 0.0E0
         B(k2,k1) = 0.0E0
@@ -359,15 +359,15 @@ SUBROUTINE QZIT(Nm,N,A,B,Eps1,Matz,Z,Ierr)
             Z(i,k2) = Z(i,k2) + t*v1
             Z(i,k1) = Z(i,k1) + t*v2
             Z(i,k) = Z(i,k) + t*v3
-          ENDDO
-        ENDIF
-      ENDIF
+          END DO
+        END IF
+      END IF
     ELSE
       !     .......... ZERO A(K+1,K-1) ..........
       IF ( k/=l ) THEN
         a1 = A(k,km1)
         a2 = A(k1,km1)
-      ENDIF
+      END IF
       s = ABS(a1) + ABS(a2)
       IF ( s==0.0E0 ) EXIT
       u1 = a1/s
@@ -384,10 +384,10 @@ SUBROUTINE QZIT(Nm,N,A,B,Eps1,Matz,Z,Ierr)
         t = B(k,j) + u2*B(k1,j)
         B(k,j) = B(k,j) + t*v1
         B(k1,j) = B(k1,j) + t*v2
-      ENDDO
+      END DO
       !
       IF ( k/=l ) A(k1,km1) = 0.0E0
-    ENDIF
+    END IF
     !     .......... ZERO B(K+1,K) ..........
     s = ABS(B(k1,k1)) + ABS(B(k1,k))
     IF ( s/=0.0E0 ) THEN
@@ -405,7 +405,7 @@ SUBROUTINE QZIT(Nm,N,A,B,Eps1,Matz,Z,Ierr)
         t = B(i,k1) + u2*B(i,k)
         B(i,k1) = B(i,k1) + t*v1
         B(i,k) = B(i,k) + t*v2
-      ENDDO
+      END DO
       !
       B(k1,k) = 0.0E0
       IF ( Matz ) THEN
@@ -414,11 +414,11 @@ SUBROUTINE QZIT(Nm,N,A,B,Eps1,Matz,Z,Ierr)
           t = Z(i,k1) + u2*Z(i,k)
           Z(i,k1) = Z(i,k1) + t*v1
           Z(i,k) = Z(i,k) + t*v2
-        ENDDO
-      ENDIF
-    ENDIF
+        END DO
+      END IF
+    END IF
     !
-  ENDDO
+  END DO
   !     .......... END QZ STEP ..........
   GOTO 200
   RETURN

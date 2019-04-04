@@ -84,7 +84,7 @@ SUBROUTINE DPOLVL(Nder,Xx,Yfit,Yp,N,X,C,Work,Ierr)
   !   891006  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   INTEGER i, Ierr, im1, izero, k, km1, km1pi, km2pn, km2pni, m, &
     mm, N, ndr, Nder, nmkp1, npkm1
   REAL(8) :: C(*), fac, pione, pitwo, pone, ptwo, X(*), xk, Xx, Yfit, Yp(*), Work(*)
@@ -103,7 +103,7 @@ SUBROUTINE DPOLVL(Nder,Xx,Yfit,Yp,N,X,C,Work,Ierr)
       pione = pitwo
       ptwo = pone + pitwo*C(k)
       pone = ptwo
-    ENDDO
+    END DO
     Yfit = ptwo
     RETURN
     !
@@ -123,7 +123,7 @@ SUBROUTINE DPOLVL(Nder,Xx,Yfit,Yp,N,X,C,Work,Ierr)
       !
       izero = 1
       ndr = N - 1
-    ENDIF
+    END IF
     m = ndr + 1
     mm = m
     !
@@ -132,7 +132,7 @@ SUBROUTINE DPOLVL(Nder,Xx,Yfit,Yp,N,X,C,Work,Ierr)
     !
     DO k = 1, ndr
       Yp(k) = C(k+1)
-    ENDDO
+    END DO
     !
     !     *****  THE FOLLOWING SECTION OF CODE IS EASIER TO READ IF ONE
     !            BREAKS WORK INTO TWO ARRAYS W AND V. THE CODE WOULD THEN
@@ -156,7 +156,7 @@ SUBROUTINE DPOLVL(Nder,Xx,Yfit,Yp,N,X,C,Work,Ierr)
       Work(k) = Work(npkm1)*Work(km1)
       ptwo = pone + Work(k)*C(k)
       pone = ptwo
-    ENDDO
+    END DO
     Yfit = ptwo
     !
     !     ** AT THIS POINT THE POLYNOMIAL HAS BEEN EVALUATED AND INFORMATION
@@ -183,17 +183,17 @@ SUBROUTINE DPOLVL(Nder,Xx,Yfit,Yp,N,X,C,Work,Ierr)
           km1pi = km1 + i
           Work(i) = Work(km2pni)*Work(im1) + Work(i)
           Yp(km1) = Yp(km1) + Work(i)*C(km1pi)
-        ENDDO
-      ENDDO
+        END DO
+      END DO
       IF ( ndr/=1 ) THEN
         fac = 1.0D0
         DO k = 2, ndr
           xk = k
           fac = xk*fac
           Yp(k) = fac*Yp(k)
-        ENDDO
-      ENDIF
-    ENDIF
+        END DO
+      END IF
+    END IF
     !
     !     ***** END OF DERIVATIVE EVALUATIONS
     !
@@ -203,7 +203,7 @@ SUBROUTINE DPOLVL(Nder,Xx,Yfit,Yp,N,X,C,Work,Ierr)
     !
     DO k = N, Nder
       Yp(k) = 0.0D0
-    ENDDO
+    END DO
   ELSE
     Yfit = C(1)
     !
@@ -211,7 +211,7 @@ SUBROUTINE DPOLVL(Nder,Xx,Yfit,Yp,N,X,C,Work,Ierr)
     !
     DO k = 1, Nder
       Yp(k) = 0.0D0
-    ENDDO
+    END DO
     RETURN
-  ENDIF
+  END IF
 END SUBROUTINE DPOLVL

@@ -58,7 +58,7 @@ SUBROUTINE DY4(U,Idmn,I,J,Uyyy,Uyyyy)
           Uyyyy = (2.0*U(I,1)-9.0*U(I,2)+16.0*U(I,3)-14.0*U(I,4)+6.0*U(I,5)&
             -U(I,6))/DLY4
           RETURN
-        ENDIF
+        END IF
       ELSEIF ( J==L-1 ) THEN
         !
         !     COMPUTE PARTIAL DERIVATIVE APPROXIMATIONS AT Y=D-DLY
@@ -76,7 +76,7 @@ SUBROUTINE DY4(U,Idmn,I,J,Uyyy,Uyyyy)
           Uyyyy = (-U(I,L-5)+6.0*U(I,L-4)-14.0*U(I,L-3)+16.0*U(I,L-2)&
             -9.0*U(I,L-1)+2.0*U(I,L))/DLY4
           RETURN
-        ENDIF
+        END IF
       ELSEIF ( J==L ) THEN
         !
         !     COMPUTE PARTIAL DERIVATIVE APPROXIMATIONS AT Y=D
@@ -86,8 +86,8 @@ SUBROUTINE DY4(U,Idmn,I,J,Uyyy,Uyyyy)
         Uyyyy = (-2.0*U(I,L-5)+11.0*U(I,L-4)-24.0*U(I,L-3)+26.0*U(I,L-2)&
           -14.0*U(I,L-1)+3.0*U(I,L))/DLY4
         RETURN
-      ENDIF
-    ENDIF
+      END IF
+    END IF
     !
     !     COMPUTE PARTIAL DERIVATIVE APPROXIMATIONS AT Y=C
     !
@@ -96,8 +96,8 @@ SUBROUTINE DY4(U,Idmn,I,J,Uyyy,Uyyyy)
       Uyyyy = (3.0*U(I,1)-14.0*U(I,2)+26.0*U(I,3)-24.0*U(I,4)+11.0*U(I,5)&
         -2.0*U(I,6))/DLY4
       RETURN
-    ENDIF
-  ENDIF
+    END IF
+  END IF
   !
   !     PERIODIC AT X=A
   !

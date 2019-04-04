@@ -86,7 +86,7 @@ SUBROUTINE SPOCO(A,Lda,N,Rcond,Z,Info)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   INTEGER Lda, N, Info
   REAL A(Lda,*), Z(*)
   REAL Rcond
@@ -104,13 +104,13 @@ SUBROUTINE SPOCO(A,Lda,N,Rcond,Z,Info)
     IF ( jm1>=1 ) THEN
       DO i = 1, jm1
         Z(i) = Z(i) + ABS(A(i,j))
-      ENDDO
-    ENDIF
-  ENDDO
+      END DO
+    END IF
+  END DO
   anorm = 0.0E0
   DO j = 1, N
     anorm = MAX(anorm,Z(j))
-  ENDDO
+  END DO
   !
   !     FACTOR
   !
@@ -128,14 +128,14 @@ SUBROUTINE SPOCO(A,Lda,N,Rcond,Z,Info)
     ek = 1.0E0
     DO j = 1, N
       Z(j) = 0.0E0
-    ENDDO
+    END DO
     DO k = 1, N
       IF ( Z(k)/=0.0E0 ) ek = SIGN(ek,-Z(k))
       IF ( ABS(ek-Z(k))>A(k,k) ) THEN
         s = A(k,k)/ABS(ek-Z(k))
         CALL SSCAL(N,s,Z,1)
         ek = s*ek
-      ENDIF
+      END IF
       wk = ek - Z(k)
       wkm = -ek - Z(k)
       s = ABS(wk)
@@ -148,17 +148,17 @@ SUBROUTINE SPOCO(A,Lda,N,Rcond,Z,Info)
           sm = sm + ABS(Z(j)+wkm*A(k,j))
           Z(j) = Z(j) + wk*A(k,j)
           s = s + ABS(Z(j))
-        ENDDO
+        END DO
         IF ( s<sm ) THEN
           t = wkm - wk
           wk = wkm
           DO j = kp1, N
             Z(j) = Z(j) + t*A(k,j)
-          ENDDO
-        ENDIF
-      ENDIF
+          END DO
+        END IF
+      END IF
       Z(k) = wk
-    ENDDO
+    END DO
     s = 1.0E0/SASUM(N,Z,1)
     CALL SSCAL(N,s,Z,1)
     !
@@ -169,11 +169,11 @@ SUBROUTINE SPOCO(A,Lda,N,Rcond,Z,Info)
       IF ( ABS(Z(k))>A(k,k) ) THEN
         s = A(k,k)/ABS(Z(k))
         CALL SSCAL(N,s,Z,1)
-      ENDIF
+      END IF
       Z(k) = Z(k)/A(k,k)
       t = -Z(k)
       CALL SAXPY(k-1,t,A(1,k),1,Z(1),1)
-    ENDDO
+    END DO
     s = 1.0E0/SASUM(N,Z,1)
     CALL SSCAL(N,s,Z,1)
     !
@@ -187,9 +187,9 @@ SUBROUTINE SPOCO(A,Lda,N,Rcond,Z,Info)
         s = A(k,k)/ABS(Z(k))
         CALL SSCAL(N,s,Z,1)
         ynorm = s*ynorm
-      ENDIF
+      END IF
       Z(k) = Z(k)/A(k,k)
-    ENDDO
+    END DO
     s = 1.0E0/SASUM(N,Z,1)
     CALL SSCAL(N,s,Z,1)
     ynorm = s*ynorm
@@ -202,11 +202,11 @@ SUBROUTINE SPOCO(A,Lda,N,Rcond,Z,Info)
         s = A(k,k)/ABS(Z(k))
         CALL SSCAL(N,s,Z,1)
         ynorm = s*ynorm
-      ENDIF
+      END IF
       Z(k) = Z(k)/A(k,k)
       t = -Z(k)
       CALL SAXPY(k-1,t,A(1,k),1,Z(1),1)
-    ENDDO
+    END DO
     !        MAKE ZNORM = 1.0
     s = 1.0E0/SASUM(N,Z,1)
     CALL SSCAL(N,s,Z,1)
@@ -214,5 +214,5 @@ SUBROUTINE SPOCO(A,Lda,N,Rcond,Z,Info)
     !
     IF ( anorm/=0.0E0 ) Rcond = ynorm/anorm
     IF ( anorm==0.0E0 ) Rcond = 0.0E0
-  ENDIF
+  END IF
 END SUBROUTINE SPOCO

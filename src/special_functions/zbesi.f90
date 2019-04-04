@@ -237,8 +237,8 @@ SUBROUTINE ZBESI(Zr,Zi,Fnu,Kode,N,Cyr,Cyi,Nz,Ierr)
         IF ( MOD(inu,2)/=0 ) THEN
           csgnr = -csgnr
           csgni = -csgni
-        ENDIF
-      ENDIF
+        END IF
+      END IF
       CALL ZBINU(znr,zni,Fnu,Kode,N,Cyr,Cyi,Nz,rl,fnul,tol,elim,alim)
       IF ( Nz>=0 ) THEN
         IF ( Zr>=0.0D0 ) RETURN
@@ -260,14 +260,14 @@ SUBROUTINE ZBESI(Zr,Zi,Fnu,Kode,N,Cyr,Cyi,Nz,Ierr)
             aa = aa*rtol
             bb = bb*rtol
             atol = tol
-          ENDIF
+          END IF
           str = aa*csgnr - bb*csgni
           sti = aa*csgni + bb*csgnr
           Cyr(i) = str*atol
           Cyi(i) = sti*atol
           csgnr = -csgnr
           csgni = -csgni
-        ENDDO
+        END DO
         RETURN
       ELSEIF ( Nz==(-2) ) THEN
         Nz = 0
@@ -277,9 +277,9 @@ SUBROUTINE ZBESI(Zr,Zi,Fnu,Kode,N,Cyr,Cyi,Nz,Ierr)
         Nz = 0
         Ierr = 2
         RETURN
-      ENDIF
-    ENDIF
-  ENDIF
+      END IF
+    END IF
+  END IF
   Nz = 0
   Ierr = 4
 END SUBROUTINE ZBESI

@@ -273,7 +273,7 @@ SUBROUTINE WNNLS(W,Mdw,Me,Ma,N,L,Prgopt,X,Rnorm,Mode,Iwork,Work)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   INTEGER L, l1, l2, l3, l4, l5, liw, lw, Ma, Mdw, Me, Mode, N
   REAL Prgopt(*), Rnorm, W(Mdw,*), Work(*), X(*)
   INTEGER Iwork(*)
@@ -290,8 +290,8 @@ SUBROUTINE WNNLS(W,Mdw,Me,Ma,N,L,Prgopt,X,Rnorm,Mode,Iwork,Work)
       CALL XERMSG('SLATEC','WNNLS','INSUFFICIENT STORAGE ALLOCATED FOR WORK(*), NEED LW = '//xern1,2,1)
       Mode = 2
       RETURN
-    ENDIF
-  ENDIF
+    END IF
+  END IF
   !
   IF ( Iwork(2)>0 ) THEN
     liw = Me + Ma + N
@@ -300,20 +300,20 @@ SUBROUTINE WNNLS(W,Mdw,Me,Ma,N,L,Prgopt,X,Rnorm,Mode,Iwork,Work)
       CALL XERMSG('SLATEC','WNNLS','INSUFFICIENT STORAGE ALLOCATED FOR IWORK(*), NEED LIW = '//xern1,2,1)
       Mode = 2
       RETURN
-    ENDIF
-  ENDIF
+    END IF
+  END IF
   !
   IF ( Mdw<Me+Ma ) THEN
     CALL XERMSG('SLATEC','WNNLS','THE VALUE MDW.LT.ME+MA IS AN ERROR',1,1)
     Mode = 2
     RETURN
-  ENDIF
+  END IF
   !
   IF ( L<0.OR.L>N ) THEN
     CALL XERMSG('SLATEC','WNNLS','L.GE.0 .AND. L.LE.N IS REQUIRED',2,1)
     Mode = 2
     RETURN
-  ENDIF
+  END IF
   !
   !     THE PURPOSE OF THIS SUBROUTINE IS TO BREAK UP THE ARRAYS
   !     WORK(*) AND IWORK(*) INTO SEPARATE WORK ARRAYS

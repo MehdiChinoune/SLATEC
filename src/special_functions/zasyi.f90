@@ -59,7 +59,7 @@ SUBROUTINE ZASYI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Rl,Tol,Elim,Alim)
   IF ( Kode==2 ) THEN
     czr = zeror
     czi = Zi
-  ENDIF
+  END IF
   IF ( ABS(czr)>Elim ) THEN
     Nz = -1
     RETURN
@@ -70,7 +70,7 @@ SUBROUTINE ZASYI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Rl,Tol,Elim,Alim)
       koded = 0
       CALL ZEXP(czr,czi,str,sti)
       CALL ZMLT(ak1r,ak1i,str,sti,ak1r,ak1i)
-    ENDIF
+    END IF
     fdn = 0.0D0
     IF ( dnu2>rtr1 ) fdn = dnu2*dnu2
     ezr = Zr*8.0D0
@@ -101,8 +101,8 @@ SUBROUTINE ZASYI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Rl,Tol,Elim,Alim)
       IF ( MOD(inu,2)/=0 ) THEN
         p1r = -p1r
         p1i = -p1i
-      ENDIF
-    ENDIF
+      END IF
+    END IF
     DO k = 1, il
       sqk = fdn - 1.0D0
       atol = s*ABS(sqk)
@@ -134,9 +134,9 @@ SUBROUTINE ZASYI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Rl,Tol,Elim,Alim)
         ak = ak + 8.0D0
         sqk = sqk - ak
         IF ( aa<=atol ) GOTO 20
-      ENDDO
+      END DO
       GOTO 100
-      20       s2r = cs1r
+      20  s2r = cs1r
       s2i = cs1i
       IF ( Zr+Zr<Elim ) THEN
         tzr = Zr + Zr
@@ -146,14 +146,14 @@ SUBROUTINE ZASYI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Rl,Tol,Elim,Alim)
         CALL ZMLT(str,sti,cs2r,cs2i,str,sti)
         s2r = s2r + str
         s2i = s2i + sti
-      ENDIF
+      END IF
       fdn = fdn + 8.0D0*dfnu + 4.0D0
       p1r = -p1r
       p1i = -p1i
       m = N - il + k
       Yr(m) = s2r*ak1r - s2i*ak1i
       Yi(m) = s2r*ak1i + s2i*ak1r
-    ENDDO
+    END DO
     IF ( N<=2 ) RETURN
     nn = N
     k = nn - 2
@@ -168,15 +168,15 @@ SUBROUTINE ZASYI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Rl,Tol,Elim,Alim)
       Yi(k) = (ak+Fnu)*(rzr*Yi(k+1)+rzi*Yr(k+1)) + Yi(k+2)
       ak = ak - 1.0D0
       k = k - 1
-    ENDDO
+    END DO
     IF ( koded==0 ) RETURN
     CALL ZEXP(czr,czi,ckr,cki)
     DO i = 1, nn
       str = Yr(i)*ckr - Yi(i)*cki
       Yi(i) = Yr(i)*cki + Yi(i)*ckr
       Yr(i) = str
-    ENDDO
+    END DO
     RETURN
-  ENDIF
+  END IF
   100  Nz = -2
 END SUBROUTINE ZASYI

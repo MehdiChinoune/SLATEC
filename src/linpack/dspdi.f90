@@ -89,7 +89,7 @@ SUBROUTINE DSPDI(Ap,N,Kpvt,Det,Inert,Work,Job)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   INTEGER N, Job
   REAL(8) :: Ap(*), Work(*)
   REAL(8) :: Det(2)
@@ -110,12 +110,12 @@ SUBROUTINE DSPDI(Ap,N,Kpvt,Det,Inert,Work,Job)
       Inert(1) = 0
       Inert(2) = 0
       Inert(3) = 0
-    ENDIF
+    END IF
     IF ( .NOT.(nodet) ) THEN
       Det(1) = 1.0D0
       Det(2) = 0.0D0
       ten = 10.0D0
-    ENDIF
+    END IF
     t = 0.0D0
     ik = 0
     DO k = 1, N
@@ -140,14 +140,14 @@ SUBROUTINE DSPDI(Ap,N,Kpvt,Det,Inert,Work,Job)
           kkp1 = ikp1 + k
           t = ABS(Ap(kkp1))
           d = (d/t)*Ap(kkp1+1) - t
-        ENDIF
-      ENDIF
+        END IF
+      END IF
       !
       IF ( .NOT.(noert) ) THEN
         IF ( d>0.0D0 ) Inert(1) = Inert(1) + 1
         IF ( d<0.0D0 ) Inert(2) = Inert(2) + 1
         IF ( d==0.0D0 ) Inert(3) = Inert(3) + 1
-      ENDIF
+      END IF
       !
       IF ( .NOT.(nodet) ) THEN
         Det(1) = d*Det(1)
@@ -155,16 +155,16 @@ SUBROUTINE DSPDI(Ap,N,Kpvt,Det,Inert,Work,Job)
           DO WHILE ( ABS(Det(1))<1.0D0 )
             Det(1) = ten*Det(1)
             Det(2) = Det(2) - 1.0D0
-          ENDDO
+          END DO
           DO WHILE ( ABS(Det(1))>=ten )
             Det(1) = Det(1)/ten
             Det(2) = Det(2) + 1.0D0
-          ENDDO
-        ENDIF
-      ENDIF
+          END DO
+        END IF
+      END IF
       ik = ik + k
-    ENDDO
-  ENDIF
+    END DO
+  END IF
   !
   !     COMPUTE INVERSE(A)
   !
@@ -196,7 +196,7 @@ SUBROUTINE DSPDI(Ap,N,Kpvt,Det,Inert,Work,Job)
             Ap(jkp1) = DDOT(j,Ap(ij+1),1,Work,1)
             CALL DAXPY(j-1,Work(j),Ap(ij+1),1,Ap(ikp1+1),1)
             ij = ij + j
-          ENDDO
+          END DO
           Ap(kkp1+1) = Ap(kkp1+1) + DDOT(km1,Work,1,Ap(ikp1+1),1)
           Ap(kkp1) = Ap(kkp1) + DDOT(km1,Ap(ik+1),1,Ap(ikp1+1),1)
           CALL DCOPY(km1,Ap(ik+1),1,Work,1)
@@ -206,9 +206,9 @@ SUBROUTINE DSPDI(Ap,N,Kpvt,Det,Inert,Work,Job)
             Ap(jk) = DDOT(j,Ap(ij+1),1,Work,1)
             CALL DAXPY(j-1,Work(j),Ap(ij+1),1,Ap(ik+1),1)
             ij = ij + j
-          ENDDO
+          END DO
           Ap(kk) = Ap(kk) + DDOT(km1,Work,1,Ap(ik+1),1)
-        ENDIF
+        END IF
         kstep = 2
       ELSE
         !
@@ -223,11 +223,11 @@ SUBROUTINE DSPDI(Ap,N,Kpvt,Det,Inert,Work,Job)
             Ap(jk) = DDOT(j,Ap(ij+1),1,Work,1)
             CALL DAXPY(j-1,Work(j),Ap(ij+1),1,Ap(ik+1),1)
             ij = ij + j
-          ENDDO
+          END DO
           Ap(kk) = Ap(kk) + DDOT(km1,Work,1,Ap(ik+1),1)
-        ENDIF
+        END IF
         kstep = 1
-      ENDIF
+      END IF
       !
       !           SWAP
       !
@@ -243,17 +243,17 @@ SUBROUTINE DSPDI(Ap,N,Kpvt,Det,Inert,Work,Job)
           Ap(jk) = Ap(ksj)
           Ap(ksj) = temp
           ksj = ksj - (j-1)
-        ENDDO
+        END DO
         IF ( kstep/=1 ) THEN
           kskp1 = ikp1 + ks
           temp = Ap(kskp1)
           Ap(kskp1) = Ap(kkp1)
           Ap(kkp1) = temp
-        ENDIF
-      ENDIF
+        END IF
+      END IF
       ik = ik + k
       IF ( kstep==2 ) ik = ik + k + 1
       k = k + kstep
-    ENDDO
-  ENDIF
+    END DO
+  END IF
 END SUBROUTINE DSPDI

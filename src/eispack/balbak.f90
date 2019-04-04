@@ -72,7 +72,7 @@ SUBROUTINE BALBAK(Nm,N,Low,Igh,Scale,M,Z)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   !
   INTEGER i, j, k, M, N, ii, Nm, Igh, Low
   REAL Scale(*), Z(Nm,*)
@@ -89,10 +89,10 @@ SUBROUTINE BALBAK(Nm,N,Low,Igh,Scale,M,Z)
         !                S=1.0E0/SCALE(I). ..........
         DO j = 1, M
           Z(i,j) = Z(i,j)*s
-        ENDDO
+        END DO
         !
-      ENDDO
-    ENDIF
+      END DO
+    END IF
     !     ......... FOR I=LOW-1 STEP -1 UNTIL 1,
     !               IGH+1 STEP 1 UNTIL N DO -- ..........
     DO ii = 1, N
@@ -106,11 +106,11 @@ SUBROUTINE BALBAK(Nm,N,Low,Igh,Scale,M,Z)
             s = Z(i,j)
             Z(i,j) = Z(k,j)
             Z(k,j) = s
-          ENDDO
-        ENDIF
-      ENDIF
+          END DO
+        END IF
+      END IF
       !
-    ENDDO
-  ENDIF
+    END DO
+  END IF
   !
 END SUBROUTINE BALBAK

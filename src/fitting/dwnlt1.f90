@@ -43,13 +43,13 @@ SUBROUTINE DWNLT1(I,Lend,Mend,Ir,Mdw,Recalc,Imax,Hbar,H,Scale,W)
     !
     DO j = I, Lend
       H(j) = H(j) - Scale(Ir-1)*W(Ir-1,j)**2
-    ENDDO
+    END DO
     !
     !        Test for numerical accuracy.
     !
     Imax = IDAMAX(Lend-I+1,H(I),1) + I - 1
     Recalc = (Hbar+1.E-3*H(Imax))==Hbar
-  ENDIF
+  END IF
   !
   !     If required, recalculate column SS, using rows IR through MEND.
   !
@@ -58,12 +58,12 @@ SUBROUTINE DWNLT1(I,Lend,Mend,Ir,Mdw,Recalc,Imax,Hbar,H,Scale,W)
       H(j) = 0.D0
       DO k = Ir, Mend
         H(j) = H(j) + Scale(k)*W(k,j)**2
-      ENDDO
-    ENDDO
+      END DO
+    END DO
     !
     !        Find column with largest SS.
     !
     Imax = IDAMAX(Lend-I+1,H(I),1) + I - 1
     Hbar = H(Imax)
-  ENDIF
+  END IF
 END SUBROUTINE DWNLT1

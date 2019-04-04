@@ -56,7 +56,7 @@ REAL FUNCTION BETAI(X,Pin,Qin)
     sml = R1MACH(1)
     alnsml = LOG(sml)
     first = .FALSE.
-  ENDIF
+  END IF
   !
   IF ( X<0..OR.X>1.0 ) CALL XERMSG('SLATEC','BETAI',&
     'X IS NOT IN THE RANGE (0,1)',1,2)
@@ -71,8 +71,8 @@ REAL FUNCTION BETAI(X,Pin,Qin)
       y = 1.0 - y
       p = Qin
       q = Pin
-    ENDIF
-  ENDIF
+    END IF
+  END IF
   !
   IF ( (p+q)*y/(p+1.)<eps ) THEN
     !
@@ -100,9 +100,9 @@ REAL FUNCTION BETAI(X,Pin,Qin)
         DO i = 1, n
           term = term*(i-ps)*y/i
           BETAI = BETAI + term/(p+i)
-        ENDDO
-      ENDIF
-    ENDIF
+        END DO
+      END IF
+    END IF
     !
     ! NOW EVALUATE THE FINITE SUM, MAYBE.
     !
@@ -125,11 +125,11 @@ REAL FUNCTION BETAI(X,Pin,Qin)
         IF ( term>1.0 ) term = term*sml
         !
         IF ( ib==0 ) finsum = finsum + term
-      ENDDO
+      END DO
       !
       BETAI = BETAI + finsum
-    ENDIF
-  ENDIF
+    END IF
+  END IF
   IF ( y/=X.OR.p/=Pin ) BETAI = 1.0 - BETAI
   BETAI = MAX(MIN(BETAI,1.0),0.0)
   RETURN

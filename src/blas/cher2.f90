@@ -143,11 +143,11 @@ SUBROUTINE CHER2(Uplo,N,Alpha,X,Incx,Y,Incy,A,Lda)
     info = 7
   ELSEIF ( Lda<MAX(1,N) ) THEN
     info = 9
-  ENDIF
+  END IF
   IF ( info/=0 ) THEN
     CALL XERBLA('CHER2 ',info)
     RETURN
-  ENDIF
+  END IF
   !
   !     Quick return if possible.
   !
@@ -161,15 +161,15 @@ SUBROUTINE CHER2(Uplo,N,Alpha,X,Incx,Y,Incy,A,Lda)
       kx = 1
     ELSE
       kx = 1 - (N-1)*Incx
-    ENDIF
+    END IF
     IF ( Incy>0 ) THEN
       ky = 1
     ELSE
       ky = 1 - (N-1)*Incy
-    ENDIF
+    END IF
     jx = kx
     jy = ky
-  ENDIF
+  END IF
   !
   !     Start the operations. In this version the elements of A are
   !     accessed sequentially with one pass through the triangular part
@@ -186,12 +186,12 @@ SUBROUTINE CHER2(Uplo,N,Alpha,X,Incx,Y,Incy,A,Lda)
           temp2 = CONJG(Alpha*X(j))
           DO i = 1, j - 1
             A(i,j) = A(i,j) + X(i)*temp1 + Y(i)*temp2
-          ENDDO
+          END DO
           A(j,j) = REAL(A(j,j)) + REAL(X(j)*temp1+Y(j)*temp2)
         ELSE
           A(j,j) = REAL(A(j,j))
-        ENDIF
-      ENDDO
+        END IF
+      END DO
     ELSE
       DO j = 1, N
         IF ( (X(jx)/=ZERO).OR.(Y(jy)/=ZERO) ) THEN
@@ -203,15 +203,15 @@ SUBROUTINE CHER2(Uplo,N,Alpha,X,Incx,Y,Incy,A,Lda)
             A(i,j) = A(i,j) + X(ix)*temp1 + Y(iy)*temp2
             ix = ix + Incx
             iy = iy + Incy
-          ENDDO
+          END DO
           A(j,j) = REAL(A(j,j)) + REAL(X(jx)*temp1+Y(jy)*temp2)
         ELSE
           A(j,j) = REAL(A(j,j))
-        ENDIF
+        END IF
         jx = jx + Incx
         jy = jy + Incy
-      ENDDO
-    ENDIF
+      END DO
+    END IF
     !
     !        Form  A  when A is stored in the lower triangle.
     !
@@ -223,11 +223,11 @@ SUBROUTINE CHER2(Uplo,N,Alpha,X,Incx,Y,Incy,A,Lda)
         A(j,j) = REAL(A(j,j)) + REAL(X(j)*temp1+Y(j)*temp2)
         DO i = j + 1, N
           A(i,j) = A(i,j) + X(i)*temp1 + Y(i)*temp2
-        ENDDO
+        END DO
       ELSE
         A(j,j) = REAL(A(j,j))
-      ENDIF
-    ENDDO
+      END IF
+    END DO
   ELSE
     DO j = 1, N
       IF ( (X(jx)/=ZERO).OR.(Y(jy)/=ZERO) ) THEN
@@ -240,14 +240,14 @@ SUBROUTINE CHER2(Uplo,N,Alpha,X,Incx,Y,Incy,A,Lda)
           ix = ix + Incx
           iy = iy + Incy
           A(i,j) = A(i,j) + X(ix)*temp1 + Y(iy)*temp2
-        ENDDO
+        END DO
       ELSE
         A(j,j) = REAL(A(j,j))
-      ENDIF
+      END IF
       jx = jx + Incx
       jy = jy + Incy
-    ENDDO
-  ENDIF
+    END DO
+  END IF
   !
   !
   !     End of CHER2 .

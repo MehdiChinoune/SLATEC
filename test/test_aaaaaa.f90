@@ -76,14 +76,14 @@ CONTAINS
         WRITE (Lun,99006)
         WRITE (Lun,99002) ver
         99002 FORMAT (' *** Passed -- version number = ',A16)
-      ENDIF
+      END IF
     ELSE
       Ipass = 0
       IF ( Kprint>=3 ) WRITE (Lun,99006)
       IF ( Kprint>=2 ) WRITE (Lun,99003) ver, VERSN
       99003 FORMAT (' *** Failed -- version number from AAAAAA = ',A16,&
         ' but expected version number = ',A16)
-    ENDIF
+    END IF
     !
     !     Terminate.
     !
@@ -163,7 +163,7 @@ PROGRAM TEST01
     CALL XSETF(0)
   ELSE
     CALL XSETF(1)
-  ENDIF
+  END IF
   !
   !     Test AAAAAA
   !
@@ -179,6 +179,6 @@ PROGRAM TEST01
     WRITE (lun,99002) nfail
     99002 FORMAT (/' ************* WARNING -- ',I5,&
       ' TEST(S) FAILED IN PROGRAM TEST01  *************')
-  ENDIF
+  END IF
   STOP
 END PROGRAM TEST01

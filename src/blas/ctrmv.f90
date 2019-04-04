@@ -146,11 +146,11 @@ SUBROUTINE CTRMV(Uplo,Trans,Diag,N,A,Lda,X,Incx)
     info = 6
   ELSEIF ( Incx==0 ) THEN
     info = 8
-  ENDIF
+  END IF
   IF ( info/=0 ) THEN
     CALL XERBLA('CTRMV ',info)
     RETURN
-  ENDIF
+  END IF
   !
   !     Quick return if possible.
   !
@@ -166,7 +166,7 @@ SUBROUTINE CTRMV(Uplo,Trans,Diag,N,A,Lda,X,Incx)
     kx = 1 - (N-1)*Incx
   ELSEIF ( Incx/=1 ) THEN
     kx = 1
-  ENDIF
+  END IF
   !
   !     Start the operations. In this version the elements of A are
   !     accessed sequentially with one pass through A.
@@ -182,10 +182,10 @@ SUBROUTINE CTRMV(Uplo,Trans,Diag,N,A,Lda,X,Incx)
             temp = X(j)
             DO i = 1, j - 1
               X(i) = X(i) + temp*A(i,j)
-            ENDDO
+            END DO
             IF ( nounit ) X(j) = X(j)*A(j,j)
-          ENDIF
-        ENDDO
+          END IF
+        END DO
       ELSE
         jx = kx
         DO j = 1, N
@@ -195,22 +195,22 @@ SUBROUTINE CTRMV(Uplo,Trans,Diag,N,A,Lda,X,Incx)
             DO i = 1, j - 1
               X(ix) = X(ix) + temp*A(i,j)
               ix = ix + Incx
-            ENDDO
+            END DO
             IF ( nounit ) X(jx) = X(jx)*A(j,j)
-          ENDIF
+          END IF
           jx = jx + Incx
-        ENDDO
-      ENDIF
+        END DO
+      END IF
     ELSEIF ( Incx==1 ) THEN
       DO j = N, 1, -1
         IF ( X(j)/=ZERO ) THEN
           temp = X(j)
           DO i = N, j + 1, -1
             X(i) = X(i) + temp*A(i,j)
-          ENDDO
+          END DO
           IF ( nounit ) X(j) = X(j)*A(j,j)
-        ENDIF
-      ENDDO
+        END IF
+      END DO
     ELSE
       kx = kx + (N-1)*Incx
       jx = kx
@@ -221,12 +221,12 @@ SUBROUTINE CTRMV(Uplo,Trans,Diag,N,A,Lda,X,Incx)
           DO i = N, j + 1, -1
             X(ix) = X(ix) + temp*A(i,j)
             ix = ix - Incx
-          ENDDO
+          END DO
           IF ( nounit ) X(jx) = X(jx)*A(j,j)
-        ENDIF
+        END IF
         jx = jx - Incx
-      ENDDO
-    ENDIF
+      END DO
+    END IF
     !
     !        Form  x := A'*x  or  x := conjg( A' )*x.
     !
@@ -238,15 +238,15 @@ SUBROUTINE CTRMV(Uplo,Trans,Diag,N,A,Lda,X,Incx)
           IF ( nounit ) temp = temp*A(j,j)
           DO i = j - 1, 1, -1
             temp = temp + A(i,j)*X(i)
-          ENDDO
+          END DO
         ELSE
           IF ( nounit ) temp = temp*CONJG(A(j,j))
           DO i = j - 1, 1, -1
             temp = temp + CONJG(A(i,j))*X(i)
-          ENDDO
-        ENDIF
+          END DO
+        END IF
         X(j) = temp
-      ENDDO
+      END DO
     ELSE
       jx = kx + (N-1)*Incx
       DO j = N, 1, -1
@@ -257,18 +257,18 @@ SUBROUTINE CTRMV(Uplo,Trans,Diag,N,A,Lda,X,Incx)
           DO i = j - 1, 1, -1
             ix = ix - Incx
             temp = temp + A(i,j)*X(ix)
-          ENDDO
+          END DO
         ELSE
           IF ( nounit ) temp = temp*CONJG(A(j,j))
           DO i = j - 1, 1, -1
             ix = ix - Incx
             temp = temp + CONJG(A(i,j))*X(ix)
-          ENDDO
-        ENDIF
+          END DO
+        END IF
         X(jx) = temp
         jx = jx - Incx
-      ENDDO
-    ENDIF
+      END DO
+    END IF
   ELSEIF ( Incx==1 ) THEN
     DO j = 1, N
       temp = X(j)
@@ -276,15 +276,15 @@ SUBROUTINE CTRMV(Uplo,Trans,Diag,N,A,Lda,X,Incx)
         IF ( nounit ) temp = temp*A(j,j)
         DO i = j + 1, N
           temp = temp + A(i,j)*X(i)
-        ENDDO
+        END DO
       ELSE
         IF ( nounit ) temp = temp*CONJG(A(j,j))
         DO i = j + 1, N
           temp = temp + CONJG(A(i,j))*X(i)
-        ENDDO
-      ENDIF
+        END DO
+      END IF
       X(j) = temp
-    ENDDO
+    END DO
   ELSE
     jx = kx
     DO j = 1, N
@@ -295,18 +295,18 @@ SUBROUTINE CTRMV(Uplo,Trans,Diag,N,A,Lda,X,Incx)
         DO i = j + 1, N
           ix = ix + Incx
           temp = temp + A(i,j)*X(ix)
-        ENDDO
+        END DO
       ELSE
         IF ( nounit ) temp = temp*CONJG(A(j,j))
         DO i = j + 1, N
           ix = ix + Incx
           temp = temp + CONJG(A(i,j))*X(ix)
-        ENDDO
-      ENDIF
+        END DO
+      END IF
       X(jx) = temp
       jx = jx + Incx
-    ENDDO
-  ENDIF
+    END DO
+  END IF
   !
   !
   !     End of CTRMV .

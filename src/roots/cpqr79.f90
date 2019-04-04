@@ -60,7 +60,7 @@ SUBROUTINE CPQR79(Ndeg,Coeff,Root,Ierr,Work)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   911010  Code reworked and simplified.  (RWC and WRB)
-  
+
   INTEGER km1
   COMPLEX Coeff(*), Root(*), scale, c
   REAL Work(*)
@@ -71,18 +71,18 @@ SUBROUTINE CPQR79(Ndeg,Coeff,Root,Ierr,Work)
     Ierr = 2
     CALL XERMSG('SLATEC','CPQR79','LEADING COEFFICIENT IS ZERO.',2,1)
     RETURN
-  ENDIF
+  END IF
   !
   IF ( Ndeg<=0 ) THEN
     Ierr = 3
     CALL XERMSG('SLATEC','CPQR79','DEGREE INVALID.',3,1)
     RETURN
-  ENDIF
+  END IF
   !
   IF ( Ndeg==1 ) THEN
     Root(1) = -Coeff(2)/Coeff(1)
     RETURN
-  ENDIF
+  END IF
   !
   scale = 1.0E0/Coeff(1)
   khr = 1
@@ -92,7 +92,7 @@ SUBROUTINE CPQR79(Ndeg,Coeff,Root,Ierr,Work)
   !
   DO k = 1, kwr
     Work(k) = 0.0E0
-  ENDDO
+  END DO
   !
   DO k = 1, Ndeg
     kad = (k-1)*Ndeg + 1
@@ -101,7 +101,7 @@ SUBROUTINE CPQR79(Ndeg,Coeff,Root,Ierr,Work)
     kj = khi + kad - 1
     Work(kj) = -AIMAG(c)
     IF ( k/=Ndeg ) Work(kad+k) = 1.0E0
-  ENDDO
+  END DO
   !
   CALL COMQR(Ndeg,Ndeg,1,Ndeg,Work(khr),Work(khi),Work(kwr),Work(kwi),Ierr)
   !
@@ -109,10 +109,10 @@ SUBROUTINE CPQR79(Ndeg,Coeff,Root,Ierr,Work)
     Ierr = 1
     CALL XERMSG('SLATEC','CPQR79','NO CONVERGENCE IN 30 QR ITERATIONS.',1,1)
     RETURN
-  ENDIF
+  END IF
   !
   DO k = 1, Ndeg
     km1 = k - 1
     Root(k) = CMPLX(Work(kwr+km1),Work(kwi+km1))
-  ENDDO
+  END DO
 END SUBROUTINE CPQR79

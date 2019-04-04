@@ -64,7 +64,7 @@ SUBROUTINE CUOIK(Z,Fnu,Kode,Ikflg,N,Y,Nuf,Tol,Elim,Alim)
     fnn = nn
     gnn = Fnu + fnn - 1.0E0
     gnu = MAX(gnn,fnn)
-  ENDIF
+  END IF
   !-----------------------------------------------------------------------
   !     ONLY THE MAGNITUDE OF ARG AND PHI ARE NEEDED ALONG WITH THE
   !     REAL PARTS OF ZETA1, ZETA2 AND ZB. NO ATTEMPT IS MADE TO GET
@@ -80,7 +80,7 @@ SUBROUTINE CUOIK(Z,Fnu,Kode,Ikflg,N,Y,Nuf,Tol,Elim,Alim)
     init = 0
     CALL CUNIK(zr,gnu,Ikflg,1,Tol,init,phi,zeta1,zeta2,sum,cwrk)
     cz = -zeta1 + zeta2
-  ENDIF
+  END IF
   IF ( Kode==2 ) cz = cz - zb
   IF ( Ikflg==2 ) cz = -cz
   aphi = ABS(phi)
@@ -109,11 +109,11 @@ SUBROUTINE CUOIK(Z,Fnu,Kode,Ikflg,N,Y,Nuf,Tol,Elim,Alim)
           cz = CMPLX(ax,0.0E0)*CMPLX(COS(ay),SIN(ay))
           CALL CUCHK(cz,nw,ascle,Tol)
           IF ( nw/=1 ) GOTO 50
-        ENDIF
-      ENDIF
+        END IF
+      END IF
       DO i = 1, nn
         Y(i) = czero
-      ENDDO
+      END DO
       Nuf = nn
       RETURN
     ELSE
@@ -122,11 +122,11 @@ SUBROUTINE CUOIK(Z,Fnu,Kode,Ikflg,N,Y,Nuf,Tol,Elim,Alim)
       IF ( rcz>Elim ) THEN
         Nuf = -1
         RETURN
-      ENDIF
-    ENDIF
-    50     IF ( Ikflg==2 ) RETURN
+      END IF
+    END IF
+    50  IF ( Ikflg==2 ) RETURN
     IF ( N==1 ) RETURN
-  ENDIF
+  END IF
   !-----------------------------------------------------------------------
   !     SET UNDERFLOWS ON I SEQUENCE
   !-----------------------------------------------------------------------
@@ -139,7 +139,7 @@ SUBROUTINE CUOIK(Z,Fnu,Kode,Ikflg,N,Y,Nuf,Tol,Elim,Alim)
     init = 0
     CALL CUNIK(zr,gnu,Ikflg,1,Tol,init,phi,zeta1,zeta2,sum,cwrk)
     cz = -zeta1 + zeta2
-  ENDIF
+  END IF
   IF ( Kode==2 ) cz = cz - zb
   aphi = ABS(phi)
   rcz = REAL(cz)
@@ -156,8 +156,8 @@ SUBROUTINE CUOIK(Z,Fnu,Kode,Ikflg,N,Y,Nuf,Tol,Elim,Alim)
       cz = CMPLX(ax,0.0E0)*CMPLX(COS(ay),SIN(ay))
       CALL CUCHK(cz,nw,ascle,Tol)
       IF ( nw/=1 ) RETURN
-    ENDIF
-  ENDIF
+    END IF
+  END IF
   Y(nn) = czero
   nn = nn - 1
   Nuf = Nuf + 1

@@ -123,7 +123,7 @@ REAL(8) FUNCTION DCV(Xval,Ndata,Nconst,Nord,Nbkpt,Bkpt,W)
   ileft = Nord
   DO WHILE ( Xval>=Bkpt(ileft+1).AND.ileft<last-1 )
     ileft = ileft + 1
-  ENDDO
+  END DO
   CALL DFSPVN(Bkpt,Nord,1,Xval,ileft,v(Nord+1))
   ileft = ileft - Nord + 1
   ip = mdw*(ileft-1) + ileft + is
@@ -131,7 +131,7 @@ REAL(8) FUNCTION DCV(Xval,Ndata,Nconst,Nord,Nbkpt,Bkpt,W)
   DO i = 1, Nord
     v(i) = DDOT(Nord,W(ip),1,v(Nord+1),1)
     ip = ip + mdw
-  ENDDO
+  END DO
   DCV = MAX(DDOT(Nord,v,1,v(Nord+1),1),zero)
   !
   !     SCALE THE VARIANCE SO IT IS AN UNBIASED ESTIMATE.

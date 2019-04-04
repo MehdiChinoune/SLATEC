@@ -76,7 +76,7 @@ SUBROUTINE SINQB(N,X,Wsave)
   !   881128  Modified by Dick Valent to meet prologue standards.
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   INTEGER k, kc, N, ns2
   REAL Wsave(*), X(*), xhold
   !* FIRST EXECUTABLE STATEMENT  SINQB
@@ -84,16 +84,16 @@ SUBROUTINE SINQB(N,X,Wsave)
     ns2 = N/2
     DO k = 2, N, 2
       X(k) = -X(k)
-    ENDDO
+    END DO
     CALL COSQB(N,X,Wsave)
     DO k = 1, ns2
       kc = N - k
       xhold = X(k)
       X(k) = X(kc+1)
       X(kc+1) = xhold
-    ENDDO
+    END DO
     RETURN
-  ENDIF
+  END IF
   X(1) = 4.*X(1)
   RETURN
 END SUBROUTINE SINQB

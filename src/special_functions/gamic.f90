@@ -66,7 +66,7 @@ REAL FUNCTION GAMIC(A,X)
     alneps = -LOG(R1MACH(3))
     bot = LOG(R1MACH(1))
     first = .FALSE.
-  ENDIF
+  END IF
   !
   IF ( X<0.0 ) CALL XERMSG('SLATEC','GAMIC','X IS NEGATIVE',2,2)
   !
@@ -84,7 +84,7 @@ REAL FUNCTION GAMIC(A,X)
       IF ( A<X ) THEN
         GAMIC = EXP(R9LGIC(A,X,alx))
         RETURN
-      ENDIF
+      END IF
       !
       sgngam = 1.0
       algap1 = ALNGAM(A+1.0)
@@ -101,15 +101,15 @@ REAL FUNCTION GAMIC(A,X)
           !
           GAMIC = R9GMIC(A,X,alx)
           RETURN
-        ENDIF
-      ENDIF
+        END IF
+      END IF
       !
       CALL ALGAMS(A+1.0,algap1,sgngam)
       gstar = R9GMIT(A,X,algap1,sgngam,alx)
       IF ( gstar==0.0 ) izero = 1
       IF ( gstar/=0.0 ) alngs = LOG(ABS(gstar))
       IF ( gstar/=0.0 ) sgngs = SIGN(1.0,gstar)
-    ENDIF
+    END IF
     !
     ! EVALUATION OF GAMIC(A,X) IN TERMS OF TRICOMI-S INCOMPLETE GAMMA FN.
     !
@@ -130,15 +130,15 @@ REAL FUNCTION GAMIC(A,X)
         IF ( ABS(h)<sqeps ) CALL XERCLR
         IF ( ABS(h)<sqeps )&
           CALL XERMSG('SLATEC','GAMIC','RESULT LT HALF PRECISION',1,1)
-      ENDIF
-    ENDIF
+      END IF
+    END IF
   ELSE
     IF ( A<=0.0 ) CALL XERMSG('SLATEC','GAMIC',&
       'X = 0 AND A LE 0 SO GAMIC IS UNDEFINED',3,2)
     !
     GAMIC = EXP(ALNGAM(A+1.0)-LOG(A))
     RETURN
-  ENDIF
+  END IF
   !
   sgng = SIGN(1.0,h)*sga*sgngam
   t = LOG(ABS(h)) + algap1 - LOG(ABS(A))

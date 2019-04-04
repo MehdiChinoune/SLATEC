@@ -94,18 +94,18 @@ CONTAINS
                               ', TOL = ',E14.7/' Y(I) = ',E14.7,&
                               ', Y(I+1) = ',E14.7/' W(I) = ',E14.7,&
                               ', W(I+1) = ',E14.7)
-                          ENDIF
-                        ENDDO
-                      ENDIF
-                    ENDIF
-                  ENDIF
-                ENDIF
-              ENDIF
-            ENDDO
-          ENDDO
-        ENDDO
-      ENDDO
-    ENDDO
+                          END IF
+                        END DO
+                      END IF
+                    END IF
+                  END IF
+                END IF
+              END IF
+            END DO
+          END DO
+        END DO
+      END DO
+    END DO
     !
     !     Check small values of X and order
     !
@@ -127,12 +127,12 @@ CONTAINS
             E14.7,', TOL = ',E14.7/' Y(1) = ',E14.7,', Y(2) = ',&
             E14.7/' W(1) = ',E14.7,', W(2) = ',E14.7)
           EXIT
-        ENDIF
-      ENDDO
+        END IF
+      END DO
       !
       fnu = D1MACH(4)/100.0D0
       x = xx(2*i-1)
-    ENDDO
+    END DO
     !
     !     Check large values of X and order
     !
@@ -154,7 +154,7 @@ CONTAINS
                 IF ( ny/=0 ) CYCLE
                 CALL DBESK(x,fnup,kode,1,w(2),nw)
                 IF ( nw/=0 ) CYCLE
-              ENDIF
+              END IF
               er = y(2)*w(1) + y(1)*w(2) - rx
               er = ABS(er)*x
               IF ( er>tol ) THEN
@@ -167,13 +167,13 @@ CONTAINS
                   E14.7/' Y(1) = ',E14.7,', Y(2) = ',E14.7/' W(1) = ',&
                   E14.7,', W(2) = ',E14.7)
                 GOTO 100
-              ENDIF
+              END IF
               x = x + 10.0D0
-            ENDIF
-          ENDIF
-        ENDDO
-      ENDDO
-    ENDDO
+            END IF
+          END IF
+        END DO
+      END DO
+    END DO
     !
     !     Check underflow flags
     !
@@ -185,7 +185,7 @@ CONTAINS
       Ipass = 0
       IF ( Kprint>=2 ) WRITE (Lun,99005)
       99005 FORMAT (/' ERROR IN DBESI UNDERFLOW TEST'/)
-    ENDIF
+    END IF
     !
     x = LOG(D1MACH(2)/10.0D0) + 20.0D0
     alp = 1.3D0
@@ -195,7 +195,7 @@ CONTAINS
       Ipass = 0
       IF ( Kprint>=2 ) WRITE (Lun,99006)
       99006 FORMAT (/' ERROR IN DBESK UNDERFLOW TEST'/)
-    ENDIF
+    END IF
     !
     !     Trigger 10 error conditions
     !
@@ -204,7 +204,7 @@ CONTAINS
       CALL XSETF(0)
     ELSE
       CALL XSETF(1)
-    ENDIF
+    END IF
     fatal = .FALSE.
     CALL XERCLR
     !
@@ -225,16 +225,16 @@ CONTAINS
       IF ( NUMXER(nerr)/=2 ) THEN
         Ipass = 0
         fatal = .TRUE.
-      ENDIF
+      END IF
       CALL XERCLR
       CALL DBESK(xx(1),xx(2),k,n,w,nw)
       IF ( NUMXER(nerr)/=2 ) THEN
         Ipass = 0
         fatal = .TRUE.
-      ENDIF
+      END IF
       CALL XERCLR
       xx(i) = -xx(i)
-    ENDDO
+    END DO
     !
     !     Trigger overflow
     !
@@ -245,7 +245,7 @@ CONTAINS
     IF ( NUMXER(nerr)/=6 ) THEN
       Ipass = 0
       fatal = .TRUE.
-    ENDIF
+    END IF
     CALL XERCLR
     !
     x = D1MACH(1)*10.0D0
@@ -253,7 +253,7 @@ CONTAINS
     IF ( NUMXER(nerr)/=6 ) THEN
       Ipass = 0
       fatal = .TRUE.
-    ENDIF
+    END IF
     CALL XERCLR
     !
     CALL XSETF(kontrl)
@@ -261,11 +261,11 @@ CONTAINS
       IF ( Kprint>=2 ) THEN
         WRITE (Lun,99008)
         99008 FORMAT (/' AT LEAST ONE INCORRECT ARGUMENT TEST FAILED')
-      ENDIF
+      END IF
     ELSEIF ( Kprint>=3 ) THEN
       WRITE (Lun,99009)
       99009 FORMAT (/' ALL INCORRECT ARGUMENT TESTS PASSED')
-    ENDIF
+    END IF
     !
     IF ( Ipass==1.AND.Kprint>=2 ) WRITE (Lun,99010)
     99010 FORMAT (/' *********DBESI AND DBESK PASSED ALL TESTS***********')
@@ -361,15 +361,15 @@ CONTAINS
                         ', ER   = ',E14.7,', TOL = ',E14.7/' Y(I) = ',&
                         E14.7,', Y(I+1) = ',E14.7/' W(I) = ',E14.7,&
                         ', W(I+1) = ',E14.7)
-                    ENDIF
-                  ENDDO
-                ENDIF
-              ENDIF
-            ENDIF
-          ENDDO
-        ENDDO
-      ENDDO
-    ENDDO
+                    END IF
+                  END DO
+                END IF
+              END IF
+            END IF
+          END DO
+        END DO
+      END DO
+    END DO
     !
     !     Check small values of X and order
     !
@@ -390,11 +390,11 @@ CONTAINS
           ',  FNU = ',E14.7/' X = ',E14.7,', ER = ',E14.7,', TOL = ',&
           E14.7/' Y(1) = ',E14.7,', Y(2) = ',E14.7/' W(1) = ',E14.7,', W(2) = ',E14.7)
         EXIT
-      ENDIF
+      END IF
       fnu = D1MACH(4)/100.0D0
       x = xx(2*i-1)
       rx = rhpi/x
-    ENDDO
+    END DO
     !
     !     Check large values of X and order
     !
@@ -413,7 +413,7 @@ CONTAINS
               CALL DBESJ(x,fnup,1,y(2),ny)
               IF ( ny/=0 ) CYCLE
               CALL DBESY(x,fnup,1,w(2))
-            ENDIF
+            END IF
             er = y(2)*w(1) - y(1)*w(2) - rx
             er = ABS(er)/rx
             IF ( er>tol ) THEN
@@ -425,12 +425,12 @@ CONTAINS
                 ', ER = ',E14.7,', TOL = ',E14.7/' Y(1) = ',E14.7,&
                 ', Y(2) = ',E14.7/' W(1) = ',E14.7,', W(2) = ',E14.7)
               GOTO 100
-            ENDIF
+            END IF
             x = x + 10.0D0
-          ENDIF
-        ENDDO
-      ENDDO
-    ENDDO
+          END IF
+        END DO
+      END DO
+    END DO
     !
     !     Check underflow flags
     !
@@ -442,7 +442,7 @@ CONTAINS
       Ipass = 0
       IF ( Kprint>=2 ) WRITE (Lun,99005)
       99005 FORMAT (/' ERROR IN DBESJ UNDERFLOW TEST'/)
-    ENDIF
+    END IF
     !
     !     Trigger 7 error conditions
     !
@@ -451,7 +451,7 @@ CONTAINS
       CALL XSETF(0)
     ELSE
       CALL XSETF(1)
-    ENDIF
+    END IF
     fatal = .FALSE.
     CALL XERCLR
     !
@@ -470,16 +470,16 @@ CONTAINS
       IF ( NUMXER(nerr)/=2 ) THEN
         Ipass = 0
         fatal = .TRUE.
-      ENDIF
+      END IF
       CALL XERCLR
       CALL DBESY(xx(1),xx(2),n,w)
       IF ( NUMXER(nerr)/=2 ) THEN
         Ipass = 0
         fatal = .TRUE.
-      ENDIF
+      END IF
       CALL XERCLR
       xx(i) = -xx(i)
-    ENDDO
+    END DO
     !
     !     Trigger overflow
     !
@@ -490,18 +490,18 @@ CONTAINS
     IF ( NUMXER(nerr)/=6 ) THEN
       Ipass = 0
       fatal = .TRUE.
-    ENDIF
+    END IF
     CALL XERCLR
     CALL XSETF(kontrl)
     IF ( fatal ) THEN
       IF ( Kprint>=2 ) THEN
         WRITE (Lun,99007)
         99007 FORMAT (/' AT LEAST ONE INCORRECT ARGUMENT TEST FAILED')
-      ENDIF
+      END IF
     ELSEIF ( Kprint>=3 ) THEN
       WRITE (Lun,99008)
       99008 FORMAT (/' ALL INCORRECT ARGUMENT TESTS PASSED')
-    ENDIF
+    END IF
     !
     IF ( Ipass==1.AND.Kprint>=2 ) WRITE (Lun,99009)
     99009 FORMAT (/' *********DBESJ AND DBESY PASSED ALL TESTS*********')
@@ -574,8 +574,8 @@ CONTAINS
               IF ( kx<nm ) THEN
                 icase = 3
                 A = kx
-              ENDIF
-            ENDIF
+              END IF
+            END IF
             sig = 3.0D0/X
             t2 = 1.0D0
             sum = 0.0D0
@@ -607,7 +607,7 @@ CONTAINS
                   ie = m - 1
                   ii = m
                   EXIT
-                ENDIF
+                END IF
                 !
                 !             Forward recur
                 !
@@ -615,11 +615,11 @@ CONTAINS
                   y(kk+1) = (ex-X*y(kk))/bb
                   bb = bb + 1.0D0
                   kk = kk + 1
-                ENDDO
+                END DO
                 IF ( icase==3 ) EXIT
                 GOTO 5
-              ENDIF
-            ENDDO
+              END IF
+            END DO
             bb = A - 1.0D0
             !
             !             Backward recur
@@ -628,7 +628,7 @@ CONTAINS
               y(ii-1) = (ex-bb*y(ii))/X
               bb = bb - 1.0D0
               ii = ii - 1
-            ENDDO
+            END DO
             5 CONTINUE
             DO i = 1, m
               er = ABS((y(i)-en(i))/y(i))
@@ -637,12 +637,12 @@ CONTAINS
                 99002 FORMAT (//' ERROR IN DEG8CK COMPARISON TEST'/)
                 Ipass = 0
                 GOTO 100
-              ENDIF
-            ENDDO
-          ENDDO
-        ENDDO
-      ENDDO
-    ENDDO
+              END IF
+            END DO
+          END DO
+        END DO
+      END DO
+    END DO
     !
     !     Trigger 6 error conditions.
     !
@@ -666,9 +666,9 @@ CONTAINS
         fatal = .TRUE.
         WRITE (Lun,99004) i
         99004 FORMAT (' Error occurred with DO index I =',I2)
-      ENDIF
+      END IF
       xx(i) = -xx(i)
-    ENDDO
+    END DO
     X = 0.0D0
     tol = 1.0D-2
     CALL DEXINT(X,1,1,1,tol,en,nz,ierr)
@@ -677,16 +677,16 @@ CONTAINS
       fatal = .TRUE.
       WRITE (Lun,99005)
       99005 FORMAT (' Error occurred with X = 0.0')
-    ENDIF
+    END IF
     IF ( fatal ) THEN
       IF ( Kprint>=2 ) THEN
         WRITE (Lun,99006)
         99006 FORMAT (/' AT LEAST ONE INCORRECT ARGUMENT TEST FAILED')
-      ENDIF
+      END IF
     ELSEIF ( Kprint>=3 ) THEN
       WRITE (Lun,99007)
       99007 FORMAT (/' ALL INCORRECT ARGUMENT TESTS PASSED')
-    ENDIF
+    END IF
     !
     IF ( Ipass==1.AND.Kprint>=2 ) WRITE (Lun,99008)
     99008 FORMAT (/' *********DEXINT AND DGAUS8 PASSED ALL TESTS*********')
@@ -791,7 +791,7 @@ PROGRAM TEST06
     CALL XSETF(0)
   ELSE
     CALL XSETF(1)
-  ENDIF
+  END IF
   !
   !     Test DEXINT and DQAUS8
   !
@@ -817,6 +817,6 @@ PROGRAM TEST06
     WRITE (lun,99002) nfail
     99002 FORMAT (/' ************* WARNING -- ',I5,&
       ' TEST(S) FAILED IN PROGRAM TEST06  *************')
-  ENDIF
+  END IF
   STOP
 END PROGRAM TEST06

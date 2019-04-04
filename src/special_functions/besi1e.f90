@@ -90,7 +90,7 @@ REAL FUNCTION BESI1E(X)
     xmin = 2.0*R1MACH(1)
     xsml = SQRT(4.5*R1MACH(3))
     first = .FALSE.
-  ENDIF
+  END IF
   !
   y = ABS(X)
   IF ( y>3.0 ) THEN
@@ -99,7 +99,7 @@ REAL FUNCTION BESI1E(X)
     IF ( y>8. ) BESI1E = (.375+CSEVL(16./y-1.0,ai12cs,ntai12))/SQRT(y)
     BESI1E = SIGN(BESI1E,X)
     RETURN
-  ENDIF
+  END IF
   !
   BESI1E = 0.0
   IF ( y==0.0 ) RETURN

@@ -194,7 +194,7 @@ SUBROUTINE XERMSG(Librar,Subrou,Messg,Nerr,Level)
   !           LEVEL=-1 logic, changed calls to XERSAV to XERSVE, and
   !           XERCTL to XERCNT.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   INTEGER i, J4SAVE, kdummy, kount, lerr, Level, lkntrl, llevel, &
     ltemp, maxmes, mkntrl, Nerr
   CHARACTER*(*) Librar, Subrou, Messg
@@ -218,7 +218,7 @@ SUBROUTINE XERMSG(Librar,Subrou,Messg,Nerr,Level)
     CALL XERSVE(' ',' ',' ',0,0,0,kdummy)
     CALL XERHLT(' ***XERMSG -- INVALID INPUT')
     RETURN
-  ENDIF
+  END IF
   !
   !       RECORD THE MESSAGE.
   !
@@ -265,7 +265,7 @@ SUBROUTINE XERMSG(Librar,Subrou,Messg,Nerr,Level)
             temp(ltemp+i+1:ltemp+i+1) = '.'
             ltemp = ltemp + i + 1
             CALL XERPRN(' ***',-1,temp(1:ltemp),72)
-          ENDIF
+          END IF
           !
           !       IF LKNTRL IS POSITIVE, PRINT AN INTRODUCTORY LINE BEFORE
           !       PRINTING THE MESSAGE.  THE INTRODUCTORY LINE TELLS THE CHOICE
@@ -299,7 +299,7 @@ SUBROUTINE XERMSG(Librar,Subrou,Messg,Nerr,Level)
             ELSE
               temp(1:12) = 'FATAL ERROR,'
               ltemp = 12
-            ENDIF
+            END IF
             !
             !       THEN WHETHER THE PROGRAM WILL CONTINUE.
             !
@@ -309,7 +309,7 @@ SUBROUTINE XERMSG(Librar,Subrou,Messg,Nerr,Level)
             ELSE
               temp(ltemp+1:ltemp+16) = ' PROG CONTINUES,'
               ltemp = ltemp + 16
-            ENDIF
+            END IF
             !
             !       FINALLY TELL WHETHER THERE SHOULD BE A TRACEBACK.
             !
@@ -319,9 +319,9 @@ SUBROUTINE XERMSG(Librar,Subrou,Messg,Nerr,Level)
             ELSE
               temp(ltemp+1:ltemp+24) = ' TRACEBACK NOT REQUESTED'
               ltemp = ltemp + 24
-            ENDIF
+            END IF
             CALL XERPRN(' ***',-1,temp(1:ltemp),72)
-          ENDIF
+          END IF
           !
           !       NOW SEND OUT THE MESSAGE.
           !
@@ -334,11 +334,11 @@ SUBROUTINE XERMSG(Librar,Subrou,Messg,Nerr,Level)
             WRITE (temp,'(''ERROR NUMBER = '', I8)') Nerr
             DO i = 16, 22
               IF ( temp(i:i)/=' ' ) EXIT
-            ENDDO
+            END DO
             !
             CALL XERPRN(' *  ',-1,temp(1:15)//temp(i:23),72)
             CALL FDUMP
-          ENDIF
+          END IF
           !
           !       IF LKNTRL IS NOT ZERO, PRINT A BLANK LINE AND AN END OF MESSAGE.
           !
@@ -346,11 +346,11 @@ SUBROUTINE XERMSG(Librar,Subrou,Messg,Nerr,Level)
             CALL XERPRN(' *  ',-1,' ',72)
             CALL XERPRN(' ***',-1,'END OF MESSAGE',72)
             CALL XERPRN('    ',0,' ',72)
-          ENDIF
-        ENDIF
-      ENDIF
-    ENDIF
-  ENDIF
+          END IF
+        END IF
+      END IF
+    END IF
+  END IF
   !
   !       IF THE ERROR IS NOT FATAL OR THE ERROR IS RECOVERABLE AND THE
   !       CONTROL FLAG IS SET FOR RECOVERY, THEN RETURN.
@@ -366,10 +366,10 @@ SUBROUTINE XERMSG(Librar,Subrou,Messg,Nerr,Level)
       CALL XERPRN(' ***',-1,'JOB ABORT DUE TO UNRECOVERED ERROR.',72)
     ELSE
       CALL XERPRN(' ***',-1,'JOB ABORT DUE TO FATAL ERROR.',72)
-    ENDIF
+    END IF
     CALL XERSVE(' ',' ',' ',-1,0,0,kdummy)
     CALL XERHLT(' ')
   ELSE
     CALL XERHLT(Messg)
-  ENDIF
+  END IF
 END SUBROUTINE XERMSG

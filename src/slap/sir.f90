@@ -289,19 +289,19 @@ SUBROUTINE SIR(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,Iter,&
   IF ( N<1 ) THEN
     Ierr = 3
     RETURN
-  ENDIF
+  END IF
   tolmin = 500*R1MACH(3)
   IF ( Tol<tolmin ) THEN
     Tol = tolmin
     Ierr = 4
-  ENDIF
+  END IF
   !
   !         Calculate initial residual and pseudo-residual, and check
   !         stopping criterion.
   CALL MATVEC(N,X,R,Nelt,Ia,Ja,A,Isym)
   DO i = 1, N
     R(i) = B(i) - R(i)
-  ENDDO
+  END DO
   CALL MSOLVE(N,R,Z,Nelt,Ia,Ja,A,Isym,Rwork,Iwork)
   !
   IF ( ISSIR(N,B,X,Nelt,Ia,Ja,A,Isym,MSOLVE,Itol,Tol,Itmax,Iter,Err,Ierr,&
@@ -317,24 +317,24 @@ SUBROUTINE SIR(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,Iter,&
       !         pseudo-residual z.
       DO i = 1, N
         X(i) = X(i) + Z(i)
-      ENDDO
+      END DO
       CALL MATVEC(N,X,R,Nelt,Ia,Ja,A,Isym)
       DO i = 1, N
         R(i) = B(i) - R(i)
-      ENDDO
+      END DO
       CALL MSOLVE(N,R,Z,Nelt,Ia,Ja,A,Isym,Rwork,Iwork)
       !
       !         check stopping criterion.
       IF ( ISSIR(N,B,X,Nelt,Ia,Ja,A,Isym,MSOLVE,Itol,Tol,Itmax,Iter,Err,&
         Ierr,Iunit,R,Z,Dz,Rwork,Iwork,bnrm,solnrm)/=0 ) RETURN
       !
-    ENDDO
+    END DO
     !
     !         *****   end of loop  *****
     !         Stopping criterion not satisfied.
     Iter = Itmax + 1
     Ierr = 2
-  ENDIF
+  END IF
   !
   !------------- LAST LINE OF SIR FOLLOWS -------------------------------
   RETURN

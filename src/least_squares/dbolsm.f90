@@ -449,7 +449,7 @@ SUBROUTINE DBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
       ' MUST BE POSITIVE.',31,1)
     Mode = -31
     RETURN
-  ENDIF
+  END IF
   !
   IF ( Ncols<=0 ) THEN
     WRITE (xern1,'(I8)') Ncols
@@ -457,7 +457,7 @@ SUBROUTINE DBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
       ' MUST BE POSITIVE.',32,1)
     Mode = -32
     RETURN
-  ENDIF
+  END IF
   !
   IF ( Mdw<Minput ) THEN
     WRITE (xern1,'(I8)') Mdw
@@ -466,7 +466,7 @@ SUBROUTINE DBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
       ' MUST BE .GE. THE NUMBER OF ROWS = '//xern2,33,1)
     Mode = -33
     RETURN
-  ENDIF
+  END IF
   !
   !     Verify that bound information is correct.
   !
@@ -478,8 +478,8 @@ SUBROUTINE DBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
         ' THE CONSTRAINT INDICATOR MUST BE 1-4',34,1)
       Mode = -34
       RETURN
-    ENDIF
-  ENDDO
+    END IF
+  END DO
   !
   DO j = 1, Ncols
     IF ( Ind(j)==3 ) THEN
@@ -492,9 +492,9 @@ SUBROUTINE DBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
           ' IS .GT. THE UPPER BOUND = '//xern4,35,1)
         Mode = -35
         RETURN
-      ENDIF
-    ENDIF
-  ENDDO
+      END IF
+    END IF
+  END DO
   !
   !     Check that permutation and polarity arrays have been set.
   !
@@ -506,7 +506,7 @@ SUBROUTINE DBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
         ' IS NOT BETWEEN 1 AND NCOLS = '//xern2,36,1)
       Mode = -36
       RETURN
-    ENDIF
+    END IF
     !
     IF ( Ibb(j)<=0 ) THEN
       WRITE (xern1,'(I8)') j
@@ -516,8 +516,8 @@ SUBROUTINE DBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
         ' MUST BE POSITIVE.$$NOW = '//xern2,37,1)
       Mode = -37
       RETURN
-    ENDIF
-  ENDDO
+    END IF
+  END DO
   !
   !     Process the option array.
   !
@@ -553,12 +553,12 @@ SUBROUTINE DBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
             CALL DROTG(W(i-1,j),W(i,j),sc,ss)
             W(i,j) = ZERO
             CALL DROT(Ncols-j+1,W(i-1,j+1),Mdw,W(i,j+1),Mdw,sc,ss)
-          ENDDO
-        ENDDO
+          END DO
+        END DO
         mrows = Ncols + mval + 1
       ELSE
         mrows = Minput
-      ENDIF
+      END IF
       !
       !     Set the X(*) array to zero so all components are defined.
       !
@@ -577,8 +577,8 @@ SUBROUTINE DBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
         ELSEIF ( Ind(j)==4 ) THEN
           Bl(j) = -big
           Bu(j) = big
-        ENDIF
-      ENDDO
+        END IF
+      END DO
       !
       DO j = 1, Ncols
         IF ( (Bl(j)<=ZERO.AND.ZERO<=Bu(j).AND.ABS(Bu(j))<ABS(Bl(j))).OR.&
@@ -589,8 +589,8 @@ SUBROUTINE DBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
           Scl(j) = -Scl(j)
           DO i = 1, mrows
             W(i,j) = -W(i,j)
-          ENDDO
-        ENDIF
+          END DO
+        END IF
         !
         !         Indices in set T(=TIGHT) are denoted by negative values
         !         of IBASIS(*).
@@ -600,8 +600,8 @@ SUBROUTINE DBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
           t = -Bl(j)
           Bu(j) = Bu(j) + t
           CALL DAXPY(mrows,t,W(1,j),1,W(1,Ncols+1),1)
-        ENDIF
-      ENDDO
+        END IF
+      END DO
       !
       nsetb = 0
       iter = 0
@@ -610,7 +610,7 @@ SUBROUTINE DBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
         CALL DMOUT(mrows,Ncols+1,Mdw,W,'('' PRETRI. INPUT MATRIX'')',-4)
         CALL DVOUT(Ncols,Bl,'('' LOWER BOUNDS'')',-4)
         CALL DVOUT(Ncols,Bu,'('' UPPER BOUNDS'')',-4)
-      ENDIF
+      END IF
       EXIT
     ELSEIF ( jp==99 ) THEN
       lds = 1
@@ -623,7 +623,7 @@ SUBROUTINE DBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
         lds = 0
       ELSE
         lds = 2
-      ENDIF
+      END IF
     ELSEIF ( jp==2 ) THEN
       !
       !         Change tolerance for rank determination.
@@ -638,7 +638,7 @@ SUBROUTINE DBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
             ' MUST BE POSITIVE FOR OPTION NUMBER 2.',24,1)
           Mode = -24
           RETURN
-        ENDIF
+        END IF
         !
         tolind = X(Ncols+ioff)
         IF ( tolind<D1MACH(4) ) THEN
@@ -648,8 +648,8 @@ SUBROUTINE DBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
             'THE TOLERANCE FOR RANK DETERMINATION = '//xern3//&
             ' IS LESS THAN MACHINE PRECISION = '//xern4,25,0)
           Mode = -25
-        ENDIF
-      ENDIF
+        END IF
+      END IF
       lds = 2
     ELSEIF ( jp==3 ) THEN
       !
@@ -666,7 +666,7 @@ SUBROUTINE DBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
             ' MUST BE POSITIVE FOR OPTION NUMBER 3.',26,1)
           Mode = -26
           RETURN
-        ENDIF
+        END IF
         !
         tolsze = X(Ncols+ioff)
         IF ( tolsze<=ZERO ) THEN
@@ -675,8 +675,8 @@ SUBROUTINE DBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
             & FOR REJECTING VARIABLES MUST BE POSITIVE.$$NOW = '//xern3,27,1)
           Mode = -27
           RETURN
-        ENDIF
-      ENDIF
+        END IF
+      END IF
       lds = 2
     ELSEIF ( jp==4 ) THEN
       !
@@ -691,8 +691,8 @@ SUBROUTINE DBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
             ' MUST BE POSITIVE.',28,1)
           Mode = -28
           RETURN
-        ENDIF
-      ENDIF
+        END IF
+      END IF
       lds = 2
     ELSEIF ( jp==5 ) THEN
       !
@@ -708,7 +708,7 @@ SUBROUTINE DBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
             ' MUST BE POSITIVE FOR OPTION NUMBER 5.',29,1)
           Mode = -29
           RETURN
-        ENDIF
+        END IF
         !
         fac = X(Ncols+ioff)
         IF ( fac<ZERO ) THEN
@@ -717,8 +717,8 @@ SUBROUTINE DBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
             'THE FACTOR (NCOLS/MINPUT) WHERE PRE-TRIANGULARIZING IS PERFORMED MUST BE NON-NEGATIVE.$$NOW = '//xern3,30,0)
           Mode = -30
           RETURN
-        ENDIF
-      ENDIF
+        END IF
+      END IF
       lds = 2
     ELSEIF ( jp==6 ) THEN
       !
@@ -731,7 +731,7 @@ SUBROUTINE DBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
         ioff = Iopt(lp+2)
         mval = Iopt(lp+3)
         wt = X(Ncols+ioff)
-      ENDIF
+      END IF
       !
       IF ( mval<0.OR.mval>Minput.OR.wt<=ZERO ) THEN
         WRITE (xern1,'(I8)') mval
@@ -743,7 +743,7 @@ SUBROUTINE DBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
           '.$$WEIGHT = '//xern3//' MUST BE POSITIVE.',38,0)
         Mode = -38
         RETURN
-      ENDIF
+      END IF
       lds = 3
     ELSEIF ( jp==7 ) THEN
       !
@@ -757,8 +757,8 @@ SUBROUTINE DBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
         ' IS NOT DEFINED.',23,1)
       Mode = -23
       RETURN
-    ENDIF
-  ENDDO
+    END IF
+  END DO
   !
   100  iter = iter + 1
   IF ( iter>itmax ) THEN
@@ -771,7 +771,7 @@ SUBROUTINE DBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
     !
     igopr = 1
     GOTO 700
-  ENDIF
+  END IF
   !
   !     Find a variable to become non-active.
   !                                                 T
@@ -782,13 +782,13 @@ SUBROUTINE DBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
     jcol = ABS(Ibasis(j))
     Ww(j) = DDOT(mrows-nsetb,W(INEXT(nsetb),j),1,W(INEXT(nsetb),Ncols+1),1)&
       *ABS(Scl(jcol))
-  ENDDO
+  END DO
   !
   IF ( iprint>0 ) THEN
     CALL DVOUT(Ncols,Ww,'('' GRADIENT VALUES'')',-4)
     CALL IVOUT(Ncols,Ibasis,'('' INTERNAL VARIABLE ORDER'')',-4)
     CALL IVOUT(Ncols,Ibb,'('' BOUND POLARITY'')',-4)
-  ENDIF
+  END IF
   DO
     !
     !     If active set = number of total rows, quit.
@@ -796,7 +796,7 @@ SUBROUTINE DBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
     IF ( nsetb==mrows ) THEN
       found = .FALSE.
       GOTO 600
-    ENDIF
+    END IF
     !
     !     Choose an extremal component of gradient vector for a candidate
     !     to become non-active.
@@ -816,17 +816,17 @@ SUBROUTINE DBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
             IF ( t>wlarge ) THEN
               wlarge = t
               jlarge = j
-            ENDIF
-          ENDIF
+            END IF
+          END IF
         ELSE
           IF ( mval>nsetb ) t = t1
           IF ( ABS(t)>wmag ) THEN
             wmag = ABS(t)
             jmag = j
-          ENDIF
-        ENDIF
-      ENDIF
-    ENDDO
+          END IF
+        END IF
+      END IF
+    END DO
     !
     !     Choose magnitude of largest component of gradient for candidate.
     !
@@ -835,18 +835,18 @@ SUBROUTINE DBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
     IF ( wlarge>ZERO ) THEN
       jbig = jlarge
       wbig = wlarge
-    ENDIF
+    END IF
     !
     IF ( wmag>=wbig ) THEN
       jbig = jmag
       wbig = wmag
-    ENDIF
+    END IF
     !
     IF ( jbig==0 ) THEN
       found = .FALSE.
       IF ( iprint>0 ) CALL IVOUT(0,i,'('' FOUND NO VARIABLE TO ENTER'')',-4)
       GOTO 600
-    ENDIF
+    END IF
     !
     !     See if the incoming column is sufficiently independent.  This
     !     test is made before an elimination is performed.
@@ -867,14 +867,14 @@ SUBROUTINE DBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
       colabv = cl1
       CALL DROTG(cl2,cl3,sc,ss)
       colblo = ABS(cl2)
-    ENDIF
+    END IF
     !
     IF ( colblo<=tolind*colabv ) THEN
       Ww(jbig) = big
       IF ( iprint>0 ) CALL IVOUT(0,i,&
         '('' VARIABLE IS DEPENDENT, NOT USED.'')',-4)
       CYCLE
-    ENDIF
+    END IF
     !
     !     Swap matrix columns NSETB+1 and JBIG, plus pointer information,
     !     and gradient values.
@@ -886,7 +886,7 @@ SUBROUTINE DBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
       itemp = Ibasis(nsetb)
       Ibasis(nsetb) = Ibasis(jbig)
       Ibasis(jbig) = itemp
-    ENDIF
+    END IF
     !
     !     Eliminate entries below the pivot line in column NSETB.
     !
@@ -896,23 +896,23 @@ SUBROUTINE DBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
           CALL DROTG(W(i-1,nsetb),W(i,nsetb),sc,ss)
           W(i,nsetb) = ZERO
           CALL DROT(Ncols-nsetb+1,W(i-1,nsetb+1),Mdw,W(i,nsetb+1),Mdw,sc,ss)
-        ENDIF
-      ENDDO
+        END IF
+      END DO
       !
       IF ( mval>=nsetb.AND.mval<mrows ) THEN
         CALL DROTG(W(nsetb,nsetb),W(mval+1,nsetb),sc,ss)
         W(mval+1,nsetb) = ZERO
         CALL DROT(Ncols-nsetb+1,W(nsetb,nsetb+1),Mdw,W(mval+1,nsetb+1),Mdw,&
           sc,ss)
-      ENDIF
-    ENDIF
+      END IF
+    END IF
     !
     IF ( W(nsetb,nsetb)==ZERO ) THEN
       Ww(nsetb) = big
       nsetb = nsetb - 1
       IF ( iprint>0 ) CALL IVOUT(0,i,'('' PIVOT IS ZERO, NOT USED.'')',-4)
       CYCLE
-    ENDIF
+    END IF
     !
     !     Check that new variable is moving in the right direction.
     !
@@ -932,10 +932,10 @@ SUBROUTINE DBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
         IF ( iprint>0 ) CALL IVOUT(0,i,&
           '('' VARIABLE HAS BAD DIRECTION, NOT USED.'')',-4)
         CYCLE
-      ENDIF
-    ENDIF
+      END IF
+    END IF
     EXIT
-  ENDDO
+  END DO
   found = .TRUE.
   GOTO 600
   !
@@ -949,12 +949,12 @@ SUBROUTINE DBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
     IF ( MOD(Ibb(jcol),2)==0 ) Rw(j) = -Rw(j)
     CALL DAXPY(j-1,-t,W(1,j),1,Rw,1)
     Rw(j) = Rw(j)/ABS(Scl(jcol))
-  ENDDO
+  END DO
   !
   IF ( iprint>0 ) THEN
     CALL DVOUT(nsetb,Rw,'('' SOLN. VALUES'')',-4)
     CALL IVOUT(nsetb,Ibasis,'('' COLS. USED'')',-4)
-  ENDIF
+  END IF
   !
   IF ( lgopr==2 ) THEN
     CALL DCOPY(nsetb,Rw,1,X,1)
@@ -965,23 +965,23 @@ SUBROUTINE DBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
         bou = ZERO
       ELSE
         bou = Bl(jcol)
-      ENDIF
+      END IF
       !
       IF ( (-bou)/=big ) bou = bou/ABS(Scl(jcol))
       IF ( X(j)<=bou ) THEN
         jdrop1 = j
         EXIT
-      ENDIF
+      END IF
       !
       bou = Bu(jcol)
       IF ( bou/=big ) bou = bou/ABS(Scl(jcol))
       IF ( X(j)>=bou ) THEN
         jdrop2 = j
         EXIT
-      ENDIF
-    ENDDO
+      END IF
+    END DO
     GOTO 300
-  ENDIF
+  END IF
   !
   !     See if the unconstrained solution (obtained by solving the
   !     triangular system) satisfies the problem bounds.
@@ -998,7 +998,7 @@ SUBROUTINE DBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
       bou = ZERO
     ELSE
       bou = Bl(jcol)
-    ENDIF
+    END IF
     IF ( (-bou)/=big ) bou = bou/ABS(Scl(jcol))
     IF ( Rw(j)<=bou ) t1 = (X(j)-bou)/(X(j)-Rw(j))
     bou = Bu(jcol)
@@ -1011,13 +1011,13 @@ SUBROUTINE DBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
     IF ( t1<alpha ) THEN
       alpha = t1
       jdrop1 = j
-    ENDIF
+    END IF
     !
     IF ( t2<beta ) THEN
       beta = t2
       jdrop2 = j
-    ENDIF
-  ENDDO
+    END IF
+  END DO
   !
   constr = alpha<TWO .OR. beta<TWO
   IF ( .NOT.constr ) THEN
@@ -1027,20 +1027,20 @@ SUBROUTINE DBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
     !
     CALL DCOPY(nsetb,Rw,1,X,1)
     GOTO 100
-  ENDIF
+  END IF
   !
   !     Take a step that is as large as possible with all variables
   !     remaining feasible.
   !
   DO j = 1, nsetb
     X(j) = X(j) + MIN(alpha,beta)*(Rw(j)-X(j))
-  ENDDO
+  END DO
   !
   IF ( alpha<=beta ) THEN
     jdrop2 = 0
   ELSE
     jdrop1 = 0
-  ENDIF
+  END IF
   !
   300 CONTINUE
   IF ( jdrop1+jdrop2<=0.OR.nsetb<=0 ) GOTO 100
@@ -1060,11 +1060,11 @@ SUBROUTINE DBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
       Scl(jcol) = -Scl(jcol)
       DO i = 1, jdrop
         W(i,jdrop) = -W(i,jdrop)
-      ENDDO
+      END DO
     ELSE
       Ibb(jcol) = Ibb(jcol) + 1
       IF ( MOD(Ibb(jcol),2)==0 ) t = -t
-    ENDIF
+    END IF
     !
     !     Variable is at a lower bound.
     !
@@ -1074,7 +1074,7 @@ SUBROUTINE DBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
     t = -Bl(jcol)
     Bu(jcol) = Bu(jcol) + t
     itemp = -itemp
-  ENDIF
+  END IF
   !
   CALL DAXPY(jdrop,t,W(1,jdrop),1,W(1,Ncols+1),1)
   !
@@ -1085,7 +1085,7 @@ SUBROUTINE DBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
     Ibasis(j-1) = Ibasis(j)
     X(j-1) = X(j)
     CALL DCOPY(j,W(1,j),1,W(1,j-1),1)
-  ENDDO
+  END DO
   !
   Ibasis(nsetb) = itemp
   W(1,nsetb) = ZERO
@@ -1109,14 +1109,14 @@ SUBROUTINE DBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
         IF ( t1>t ) THEN
           jbig = j
           t = t1
-        ENDIF
-      ENDDO
+        END IF
+      END DO
       GOTO 400
-    ENDIF
+    END IF
     CALL DROTG(W(i,i),W(i+1,i),sc,ss)
     W(i+1,i) = ZERO
     CALL DROT(Ncols-i+1,W(i,i+1),Mdw,W(i+1,i+1),Mdw,sc,ss)
-  ENDDO
+  END DO
   GOTO 500
   !
   !     The triangularization is completed by giving up the Hessenberg
@@ -1134,8 +1134,8 @@ SUBROUTINE DBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
       CALL DROTG(W(j,j),W(i,j),sc,ss)
       W(i,j) = ZERO
       CALL DROT(Ncols-j+1,W(j,j+1),Mdw,W(i,j+1),Mdw,sc,ss)
-    ENDDO
-  ENDDO
+    END DO
+  END DO
   !
   !     See if the remaining coefficients are feasible.  They should be
   !     because of the way MIN(ALPHA,BETA) was chosen.  Any that are not
@@ -1152,7 +1152,7 @@ SUBROUTINE DBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
   IF ( found ) THEN
     lgopr = 1
     GOTO 200
-  ENDIF
+  END IF
   !
   !     Rescale and translate variables.
   !
@@ -1162,20 +1162,20 @@ SUBROUTINE DBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
   DO j = 1, nsetb
     jcol = ABS(Ibasis(j))
     X(jcol) = Rw(j)*ABS(Scl(jcol))
-  ENDDO
+  END DO
   !
   DO j = 1, Ncols
     IF ( MOD(Ibb(j),2)==0 ) X(j) = Bu(j) - X(j)
-  ENDDO
+  END DO
   !
   DO j = 1, Ncols
     jcol = Ibasis(j)
     IF ( jcol<0 ) X(-jcol) = Bl(-jcol) + X(-jcol)
-  ENDDO
+  END DO
   !
   DO j = 1, Ncols
     IF ( Scl(j)<ZERO ) X(j) = -X(j)
-  ENDDO
+  END DO
   !
   i = MAX(nsetb,mval)
   Rnorm = DNRM2(mrows-i,W(INEXT(i),Ncols+1),1)

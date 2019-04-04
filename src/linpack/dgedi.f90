@@ -78,7 +78,7 @@ SUBROUTINE DGEDI(A,Lda,N,Ipvt,Det,Work,Job)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   INTEGER Lda, N, Ipvt(*), Job
   REAL(8) :: A(Lda,*), Det(2), Work(*)
   !
@@ -100,13 +100,13 @@ SUBROUTINE DGEDI(A,Lda,N,Ipvt,Det,Work,Job)
       DO WHILE ( ABS(Det(1))<1.0D0 )
         Det(1) = ten*Det(1)
         Det(2) = Det(2) - 1.0D0
-      ENDDO
+      END DO
       DO WHILE ( ABS(Det(1))>=ten )
         Det(1) = Det(1)/ten
         Det(2) = Det(2) + 1.0D0
-      ENDDO
-    ENDDO
-  ENDIF
+      END DO
+    END DO
+  END IF
   !
   !     COMPUTE INVERSE(U)
   !
@@ -121,9 +121,9 @@ SUBROUTINE DGEDI(A,Lda,N,Ipvt,Det,Work,Job)
           t = A(k,j)
           A(k,j) = 0.0D0
           CALL DAXPY(k,t,A(1,k),1,A(1,j),1)
-        ENDDO
-      ENDIF
-    ENDDO
+        END DO
+      END IF
+    END DO
     !
     !        FORM INVERSE(U)*INVERSE(L)
     !
@@ -135,14 +135,14 @@ SUBROUTINE DGEDI(A,Lda,N,Ipvt,Det,Work,Job)
         DO i = kp1, N
           Work(i) = A(i,k)
           A(i,k) = 0.0D0
-        ENDDO
+        END DO
         DO j = kp1, N
           t = Work(j)
           CALL DAXPY(N,t,A(1,j),1,A(1,k),1)
-        ENDDO
+        END DO
         l = Ipvt(k)
         IF ( l/=k ) CALL DSWAP(N,A(1,k),1,A(1,l),1)
-      ENDDO
-    ENDIF
-  ENDIF
+      END DO
+    END IF
+  END IF
 END SUBROUTINE DGEDI

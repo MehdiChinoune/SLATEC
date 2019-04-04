@@ -229,7 +229,7 @@ SUBROUTINE ZBESJ(Zr,Zi,Fnu,Kode,N,Cyr,Cyi,Nz,Ierr)
       IF ( MOD(inuh,2)/=0 ) THEN
         csgnr = -csgnr
         csgni = -csgni
-      ENDIF
+      END IF
       !-----------------------------------------------------------------------
       !     ZN IS IN THE RIGHT HALF PLANE
       !-----------------------------------------------------------------------
@@ -240,7 +240,7 @@ SUBROUTINE ZBESJ(Zr,Zi,Fnu,Kode,N,Cyr,Cyi,Nz,Ierr)
         zni = -zni
         csgni = -csgni
         cii = -cii
-      ENDIF
+      END IF
       CALL ZBINU(znr,zni,Fnu,Kode,N,Cyr,Cyi,Nz,rl,fnul,tol,elim,alim)
       IF ( Nz>=0 ) THEN
         nl = N - Nz
@@ -258,7 +258,7 @@ SUBROUTINE ZBESJ(Zr,Zi,Fnu,Kode,N,Cyr,Cyi,Nz,Ierr)
             aa = aa*rtol
             bb = bb*rtol
             atol = tol
-          ENDIF
+          END IF
           str = aa*csgnr - bb*csgni
           sti = aa*csgni + bb*csgnr
           Cyr(i) = str*atol
@@ -266,7 +266,7 @@ SUBROUTINE ZBESJ(Zr,Zi,Fnu,Kode,N,Cyr,Cyi,Nz,Ierr)
           str = -csgni*cii
           csgni = csgnr*cii
           csgnr = str
-        ENDDO
+        END DO
         RETURN
       ELSEIF ( Nz==(-2) ) THEN
         Nz = 0
@@ -276,9 +276,9 @@ SUBROUTINE ZBESJ(Zr,Zi,Fnu,Kode,N,Cyr,Cyi,Nz,Ierr)
         Nz = 0
         Ierr = 2
         RETURN
-      ENDIF
-    ENDIF
-  ENDIF
+      END IF
+    END IF
+  END IF
   Nz = 0
   Ierr = 4
 END SUBROUTINE ZBESJ

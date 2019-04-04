@@ -147,10 +147,10 @@ SUBROUTINE DEXINT(X,N,Kode,M,Tol,En,Nz,Ierr)
         Nz = M
         DO i = 1, M
           En(i) = 0.0D0
-        ENDDO
+        END DO
         RETURN
-      ENDIF
-    ENDIF
+      END IF
+    END IF
     tx = X + 0.5D0
     ix = INT( tx )
     kn = N + M - 1
@@ -172,19 +172,19 @@ SUBROUTINE DEXINT(X,N,Kode,M,Tol,En,Nz,Ierr)
         IF ( kn/=1 ) THEN
           ix = 2
           GOTO 100
-        ENDIF
+        END IF
       ELSE
         Ierr = 2
         RETURN
-      ENDIF
-    ENDIF
+      END IF
+    END IF
     ks = 2
     icase = 3
     GOTO 200
   ELSEIF ( X==0.0D0.AND.N>1 ) THEN
     DO i = 1, M
       En(i) = 1.0D0/(N+i-2)
-    ENDDO
+    END DO
     RETURN
   ELSE
     !-----------------------------------------------------------------------
@@ -210,7 +210,7 @@ SUBROUTINE DEXINT(X,N,Kode,M,Tol,En,Nz,Ierr)
     IF ( nd/=1 ) THEN
       xtol = 0.3333D0*Tol
       s = 1.0D0/fnm
-    ENDIF
+    END IF
     aa = 1.0D0
     ak = 1.0D0
     ic = 35
@@ -229,15 +229,15 @@ SUBROUTINE DEXINT(X,N,Kode,M,Tol,En,Nz,Ierr)
           IF ( nd-2>i.OR.i>nd-1 ) GOTO 50
           ak = ak + 1.0D0
           CYCLE
-        ENDIF
-      ENDIF
+        END IF
+      END IF
       ak = ak + 1.0D0
-    ENDDO
+    END DO
     IF ( ic/=1 ) THEN
       Ierr = 2
       RETURN
-    ENDIF
-    50     IF ( nd==1 ) s = s + (-LOG(X)+DPSIXN(1))
+    END IF
+    50  IF ( nd==1 ) s = s + (-LOG(X)+DPSIXN(1))
     IF ( Kode==2 ) s = s*EXP(X)
     En(1) = s
     emx = 1.0D0
@@ -247,12 +247,12 @@ SUBROUTINE DEXINT(X,N,Kode,M,Tol,En,Nz,Ierr)
       IF ( Kode==1 ) emx = EXP(-X)
       IF ( icase==1 ) GOTO 300
       IF ( icase==2 ) GOTO 400
-    ENDIF
+    END IF
     IF ( icase==2 ) RETURN
     IF ( Kode==1 ) emx = EXP(-X)
     En(1) = (emx-s)/X
     RETURN
-  ENDIF
+  END IF
   100  icase = 1
   ks = ix
   ml = ix - N
@@ -315,7 +315,7 @@ SUBROUTINE DEXINT(X,N,Kode,M,Tol,En,Nz,Ierr)
         yt = y1
         y1 = (b(kk)*y1-y2)/a(kk)
         y2 = yt
-      ENDDO
+      END DO
       !-----------------------------------------------------------------------
       !     THE CONTIGUOUS RELATION
       !              X*U(B,C+1,X)=(C-B)*U(B,C,X)+U(B-1,C,X)
@@ -333,14 +333,14 @@ SUBROUTINE DEXINT(X,N,Kode,M,Tol,En,Nz,Ierr)
         aa = ks
         IF ( icase==1 ) GOTO 300
         IF ( icase==2 ) GOTO 400
-      ENDIF
+      END IF
       !-----------------------------------------------------------------------
       !     RECURSION SECTION  N*E(N+1,X) + X*E(N,X)=EMX
       !-----------------------------------------------------------------------
       En(1) = emx*(1.0E0-y(1))/X
       RETURN
-    ENDIF
-  ENDDO
+    END IF
+  END DO
   Ierr = 2
   RETURN
   300  k = ind - 1
@@ -348,7 +348,7 @@ SUBROUTINE DEXINT(X,N,Kode,M,Tol,En,Nz,Ierr)
     aa = aa - 1.0D0
     En(k) = (emx-aa*En(k+1))/X
     k = k - 1
-  ENDDO
+  END DO
   IF ( mu<=0 ) RETURN
   aa = ks
   400  k = ind
@@ -356,6 +356,6 @@ SUBROUTINE DEXINT(X,N,Kode,M,Tol,En,Nz,Ierr)
     En(k+1) = (emx-X*En(k))/aa
     aa = aa + 1.0D0
     k = k + 1
-  ENDDO
+  END DO
   RETURN
 END SUBROUTINE DEXINT

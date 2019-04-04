@@ -67,7 +67,7 @@ SUBROUTINE SPLPUP(USRMAT,Mrelas,Nvars,Prgopt,Dattrv,Bl,Bu,Ind,Info,Amat,&
         xern1//' IS NOT DEFINED.',10,1)
       Info = -10
       RETURN
-    ENDIF
+    END IF
     !
     IF ( Ind(j)==3 ) THEN
       IF ( Bl(j)>Bu(j) ) THEN
@@ -79,9 +79,9 @@ SUBROUTINE SPLPUP(USRMAT,Mrelas,Nvars,Prgopt,Dattrv,Bl,Bu,Ind,Info,Amat,&
           ' FOR INDEPENDENT VARIABLE = '//xern1//&
           ' ARE NOT CONSISTENT.',11,1)
         RETURN
-      ENDIF
-    ENDIF
-  ENDDO
+      END IF
+    END IF
+  END DO
   !
   DO i = Nvars + 1, Nvars + Mrelas
     IF ( Ind(i)<1.OR.Ind(i)>4 ) THEN
@@ -90,7 +90,7 @@ SUBROUTINE SPLPUP(USRMAT,Mrelas,Nvars,Prgopt,Dattrv,Bl,Bu,Ind,Info,Amat,&
         xern1//' IS NOT DEFINED.',12,1)
       Info = -12
       RETURN
-    ENDIF
+    END IF
     !
     IF ( Ind(i)==3 ) THEN
       IF ( Bl(i)>Bu(i) ) THEN
@@ -103,9 +103,9 @@ SUBROUTINE SPLPUP(USRMAT,Mrelas,Nvars,Prgopt,Dattrv,Bl,Bu,Ind,Info,Amat,&
           ' ARE NOT CONSISTENT.',13,1)
         Info = -13
         RETURN
-      ENDIF
-    ENDIF
-  ENDDO
+      END IF
+    END IF
+  END DO
   !
   !     GET UPDATES OR DATA FOR MATRIX FROM THE USER
   !
@@ -131,14 +131,14 @@ SUBROUTINE SPLPUP(USRMAT,Mrelas,Nvars,Prgopt,Dattrv,Bl,Bu,Ind,Info,Amat,&
         'IN SPLP, MORE THAN 2*NVARS*MRELAS ITERATIONS DEFINING OR UPDATING MATRIX DATA.',7,1)
       Info = -7
       RETURN
-    ENDIF
+    END IF
     !
     aij = zero
     CALL USRMAT(i,j,aij,indcat,Prgopt,Dattrv,iflag)
     IF ( iflag(1)==1 ) THEN
       iflag(1) = 2
       CYCLE
-    ENDIF
+    END IF
     !
     !     CHECK TO SEE THAT THE SUBSCRIPTS I AND J ARE VALID.
     !
@@ -157,10 +157,10 @@ SUBROUTINE SPLPUP(USRMAT,Mrelas,Nvars,Prgopt,Dattrv,Bl,Bu,Ind,Info,Amat,&
             amx = ABS(aij)
           ELSEIF ( ABS(aij)<amn ) THEN
             amn = ABS(aij)
-          ENDIF
-        ENDIF
+          END IF
+        END IF
         EXIT
-      ENDIF
+      END IF
       !
       WRITE (xern1,'(I8)') i
       WRITE (xern2,'(I8)') j
@@ -168,7 +168,7 @@ SUBROUTINE SPLPUP(USRMAT,Mrelas,Nvars,Prgopt,Dattrv,Bl,Bu,Ind,Info,Amat,&
         ' OR COLUMN INDEX = '//xern2//' IS OUT OF RANGE.',8,1)
       Info = -8
       RETURN
-    ENDIF
+    END IF
     !
     !     IF INDCAT=0 THEN SET A(I,J)=AIJ.
     !     IF INDCAT=1 THEN ACCUMULATE ELEMENT, A(I,J)=A(I,J)+AIJ.
@@ -186,7 +186,7 @@ SUBROUTINE SPLPUP(USRMAT,Mrelas,Nvars,Prgopt,Dattrv,Bl,Bu,Ind,Info,Amat,&
         ' FOR MATRIX DATA MUST BE EITHER 0 OR 1.',9,1)
       Info = -9
       RETURN
-    ENDIF
+    END IF
     !
     !     CHECK ON SIZE OF MATRIX DATA
     !     RECORD THE LARGEST AND SMALLEST(IN MAGNITUDE) NONZERO ELEMENTS.
@@ -200,10 +200,10 @@ SUBROUTINE SPLPUP(USRMAT,Mrelas,Nvars,Prgopt,Dattrv,Bl,Bu,Ind,Info,Amat,&
         amx = ABS(aij)
       ELSEIF ( ABS(aij)<amn ) THEN
         amn = ABS(aij)
-      ENDIF
-    ENDIF
+      END IF
+    END IF
     IF ( iflag(1)==3 ) EXIT
-  ENDDO
+  END DO
   !
   IF ( Sizeup.AND..NOT.first ) THEN
     IF ( amn<Asmall.OR.amx>Abig ) THEN
@@ -211,6 +211,6 @@ SUBROUTINE SPLPUP(USRMAT,Mrelas,Nvars,Prgopt,Dattrv,Bl,Bu,Ind,Info,Amat,&
         'IN SPLP, A MATRIX ELEMENT''S SIZE IS OUT OF THE SPECIFIED RANGE.',22,1)
       Info = -22
       RETURN
-    ENDIF
-  ENDIF
+    END IF
+  END IF
 END SUBROUTINE SPLPUP

@@ -71,7 +71,7 @@ CONTAINS
         infos, fnorms, info, fnorm
       IF ( (Kprint>=2).OR.(Kprint==1.AND.itest(icnt)/=1) )&
         CALL PASS(Lun,icnt,itest(icnt))
-    ENDIF
+    END IF
     !
     !     Option 2, the code approximates the Jacobian.
     !
@@ -89,7 +89,7 @@ CONTAINS
         infos, fnorms, info, fnorm
       IF ( Kprint>=2.OR.(Kprint==1.AND.itest(icnt)/=1) )&
         CALL PASS(Lun,icnt,itest(icnt))
-    ENDIF
+    END IF
     !
     !     Test improper input parameters.
     !
@@ -151,7 +151,7 @@ CONTAINS
       DSOSFN = 1.0D1*(X(2)-X(1)**2)
     ELSE
       DSOSFN = 0.D0
-    ENDIF
+    END IF
   END FUNCTION DSOSFN
   !** DSOSQX
   SUBROUTINE DSOSQX(Lun,Kprint,Ipass)
@@ -227,7 +227,7 @@ CONTAINS
         D20.5/' RETURNED VALUE OF IFLAG AND RESIDUAL NORM',I5,D20.5/)
       IF ( Kprint>=2.OR.(Kprint==1.AND.itest(icnt)/=1) )&
         CALL PASS(Lun,icnt,itest(icnt))
-    ENDIF
+    END IF
     !
     !     Test improper input parameters.
     !
@@ -392,7 +392,7 @@ PROGRAM TEST36
     CALL XSETF(0)
   ELSE
     CALL XSETF(1)
-  ENDIF
+  END IF
   !
   !     Test DNSQE and DNSQ
   !
@@ -413,6 +413,6 @@ PROGRAM TEST36
     WRITE (lun,99002) nfail
     99002 FORMAT (/' ************* WARNING -- ',I5,&
       ' TEST(S) FAILED IN PROGRAM TEST36 *************')
-  ENDIF
+  END IF
   STOP
 END PROGRAM TEST36

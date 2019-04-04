@@ -77,6 +77,6 @@ SUBROUTINE DBSKES(Xnu,X,Nin,Bke)
   DO i = 3, n
     v = v + vincr
     Bke(i) = 2.0D0*v*Bke(i-1)/X + Bke(i-2)
-  ENDDO
+  END DO
   !
 END SUBROUTINE DBSKES

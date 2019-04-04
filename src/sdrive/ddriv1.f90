@@ -321,7 +321,7 @@ SUBROUTINE DDRIV1(N,T,Y,F,Tout,Mstate,Eps,Work,Lenw,Ierflg)
     CALL XERMSG('SLATEC','DDRIV1',&
       'Illegal input.  The magnitude of MSTATE is 7 .',Ierflg,2)
     RETURN
-  ENDIF
+  END IF
   IF ( N>MXN ) THEN
     WRITE (intgr1,'(I8)') N
     Ierflg = 21
@@ -330,14 +330,14 @@ SUBROUTINE DDRIV1(N,T,Y,F,Tout,Mstate,Eps,Work,Lenw,Ierflg)
       ', is greater than the maximum allowed: 200 .',Ierflg,1)
     Mstate = SIGN(7,Mstate)
     RETURN
-  ENDIF
+  END IF
   IF ( Mstate>0 ) THEN
     nstate = Mstate
     ntask = 1
   ELSE
     nstate = -Mstate
     ntask = 3
-  ENDIF
+  END IF
   hmax = 2.D0*ABS(Tout-T)
   leniw = N + IDLIW
   lenwcm = Lenw - leniw
@@ -349,17 +349,17 @@ SUBROUTINE DDRIV1(N,T,Y,F,Tout,Mstate,Eps,Work,Lenw,Ierflg)
       'Insufficient storage allocated for the work array.  The required storage is at least '//intgr1//' .',Ierflg,1)
     Mstate = SIGN(7,Mstate)
     RETURN
-  ENDIF
+  END IF
   IF ( nstate/=1 ) THEN
     DO i = 1, leniw
       iwork(i) = INT( Work(i+lenwcm) )
-    ENDDO
-  ENDIF
+    END DO
+  END IF
   CALL DDRIV3(N,T,Y,F,nstate,Tout,ntask,NROOT,Eps,ewtcom,IERROR,MINT,MITER,&
     IMPL,ml,mu,MXORD,hmax,Work,lenwcm,iwork,leniw,F,F,nde,MXSTEP,D1MACH,F,Ierflg)
   DO i = 1, leniw
     Work(i+lenwcm) = iwork(i)
-  ENDDO
+  END DO
   IF ( nstate<=4 ) THEN
     Mstate = SIGN(nstate,Mstate)
   ELSEIF ( nstate==6 ) THEN
@@ -368,5 +368,5 @@ SUBROUTINE DDRIV1(N,T,Y,F,Tout,Mstate,Eps,Work,Lenw,Ierflg)
     Mstate = SIGN(6,Mstate)
   ELSEIF ( Ierflg>11 ) THEN
     Mstate = SIGN(7,Mstate)
-  ENDIF
+  END IF
 END SUBROUTINE DDRIV1

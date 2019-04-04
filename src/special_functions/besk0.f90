@@ -59,7 +59,7 @@ REAL FUNCTION BESK0(X)
     xmaxt = -LOG(R1MACH(1))
     xmax = xmaxt - 0.5*xmaxt*LOG(xmaxt)/(xmaxt+0.5) - 0.01
     first = .FALSE.
-  ENDIF
+  END IF
   !
   IF ( X<=0. ) CALL XERMSG('SLATEC','BESK0','X IS ZERO OR NEGATIVE',2,2)
   IF ( X>2. ) THEN
@@ -70,7 +70,7 @@ REAL FUNCTION BESK0(X)
     !
     BESK0 = EXP(-X)*BESK0E(X)
     RETURN
-  ENDIF
+  END IF
   !
   y = 0.
   IF ( X>xsml ) y = X*X

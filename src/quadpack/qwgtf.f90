@@ -28,7 +28,7 @@ REAL FUNCTION QWGTF(X,Omega,P2,P3,P4,Integr)
   !   830518  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
-  
+
   !
   REAL Omega, omx, P2, P3, P4, X
   INTEGER Integr
@@ -38,5 +38,5 @@ REAL FUNCTION QWGTF(X,Omega,P2,P3,P4,Integr)
     QWGTF = SIN(omx)
   ELSE
     QWGTF = COS(omx)
-  ENDIF
+  END IF
 END FUNCTION QWGTF

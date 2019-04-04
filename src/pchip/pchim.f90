@@ -176,7 +176,7 @@ SUBROUTINE PCHIM(N,X,F,D,Incfd,Ierr)
     ELSE
       DO i = 2, N
         IF ( X(i)<=X(i-1) ) GOTO 50
-      ENDDO
+      END DO
       !
       !  FUNCTION DEFINITION IS OK, GO ON.
       !
@@ -208,7 +208,7 @@ SUBROUTINE PCHIM(N,X,F,D,Incfd,Ierr)
           !        NEED DO THIS CHECK ONLY IF MONOTONICITY SWITCHES.
           dmax = three*del1
           IF ( ABS(D(1,1))>ABS(dmax) ) D(1,1) = dmax
-        ENDIF
+        END IF
         !
         !  LOOP THROUGH INTERIOR POINTS.
         !
@@ -220,7 +220,7 @@ SUBROUTINE PCHIM(N,X,F,D,Incfd,Ierr)
             hsum = h1 + h2
             del1 = del2
             del2 = (F(1,i+1)-F(1,i))/h2
-          ENDIF
+          END IF
           !
           !        SET D(I)=0 UNLESS DATA ARE STRICTLY MONOTONIC.
           !
@@ -236,7 +236,7 @@ SUBROUTINE PCHIM(N,X,F,D,Incfd,Ierr)
             IF ( del2/=zero ) THEN
               IF ( PCHST(dsave,del2)<zero ) Ierr = Ierr + 1
               dsave = del2
-            ENDIF
+            END IF
           ELSE
             !
             !        USE BRODLIE MODIFICATION OF BUTLAND FORMULA.
@@ -249,9 +249,9 @@ SUBROUTINE PCHIM(N,X,F,D,Incfd,Ierr)
             drat1 = del1/dmax
             drat2 = del2/dmax
             D(1,i) = dmin/(w1*drat1+w2*drat2)
-          ENDIF
+          END IF
           !
-        ENDDO
+        END DO
         !
         !  SET D(N) VIA NON-CENTERED THREE-POINT FORMULA, ADJUSTED TO BE
         !     SHAPE-PRESERVING.
@@ -265,20 +265,20 @@ SUBROUTINE PCHIM(N,X,F,D,Incfd,Ierr)
           !        NEED DO THIS CHECK ONLY IF MONOTONICITY SWITCHES.
           dmax = three*del2
           IF ( ABS(D(1,N))>ABS(dmax) ) D(1,N) = dmax
-        ENDIF
+        END IF
       ELSE
         D(1,1) = del1
         D(1,N) = del1
-      ENDIF
+      END IF
       !
       !  NORMAL RETURN.
       !
       RETURN
-    ENDIF
+    END IF
     !
     !     X-ARRAY NOT STRICTLY INCREASING.
-    50     Ierr = -3
+    50 Ierr = -3
     CALL XERMSG('SLATEC','PCHIM','X-ARRAY NOT STRICTLY INCREASING',Ierr,1)
-  ENDIF
+  END IF
   !------------- LAST LINE OF PCHIM FOLLOWS ------------------------------
 END SUBROUTINE PCHIM

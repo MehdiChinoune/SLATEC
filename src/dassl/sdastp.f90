@@ -160,7 +160,7 @@ SUBROUTINE SDASTP(X,Y,Yprime,Neq,RES,JAC,H,Wt,Jstart,Idid,Rpar,Ipar,Phi,&
     delnrm = 1.0E0
     Iphase = 0
     Ns = 0
-  ENDIF
+  END IF
   !
   !
   !
@@ -193,9 +193,9 @@ SUBROUTINE SDASTP(X,Y,Yprime,Neq,RES,JAC,H,Wt,Jstart,Idid,Rpar,Ipar,Phi,&
       Alpha(i) = H/temp1
       Sigma(i) = (i-1)*Sigma(i-1)*Alpha(i)
       Gamma(i) = Gamma(i-1) + Alpha(i-1)/H
-    ENDDO
+    END DO
     Psi(kp1) = temp1
-  ENDIF
+  END IF
   !
   !     COMPUTE ALPHAS, ALPHA0
   alphas = 0.0E0
@@ -203,7 +203,7 @@ SUBROUTINE SDASTP(X,Y,Yprime,Neq,RES,JAC,H,Wt,Jstart,Idid,Rpar,Ipar,Phi,&
   DO i = 1, K
     alphas = alphas - 1.0E0/i
     alpha0 = alpha0 - Alpha(i)
-  ENDDO
+  END DO
   !
   !     COMPUTE LEADING COEFFICIENT CJ
   cjlast = Cj
@@ -224,9 +224,9 @@ SUBROUTINE SDASTP(X,Y,Yprime,Neq,RES,JAC,H,Wt,Jstart,Idid,Rpar,Ipar,Phi,&
     DO j = nsp1, kp1
       DO i = 1, Neq
         Phi(i,j) = Beta(j)*Phi(i,j)
-      ENDDO
-    ENDDO
-  ENDIF
+      END DO
+    END DO
+  END IF
   !
   !     UPDATE TIME
   X = X + H
@@ -246,13 +246,13 @@ SUBROUTINE SDASTP(X,Y,Yprime,Neq,RES,JAC,H,Wt,Jstart,Idid,Rpar,Ipar,Phi,&
     DO i = 1, Neq
       Y(i) = Phi(i,1)
       Yprime(i) = 0.0E0
-    ENDDO
+    END DO
     DO j = 2, kp1
       DO i = 1, Neq
         Y(i) = Y(i) + Phi(i,j)
         Yprime(i) = Yprime(i) + Gamma(j)*Phi(i,j)
-      ENDDO
-    ENDDO
+      END DO
+    END DO
     pnorm = SDANRM(Neq,Y,Wt,Rpar,Ipar)
     !
     !
@@ -295,14 +295,14 @@ SUBROUTINE SDASTP(X,Y,Yprime,Neq,RES,JAC,H,Wt,Jstart,Idid,Rpar,Ipar,Phi,&
           GOTO 300
         ELSE
           nsf = 0
-        ENDIF
-      ENDIF
+        END IF
+      END IF
       !
       !
       !     INITIALIZE THE ERROR ACCUMULATION VECTOR E.
       DO i = 1, Neq
         E(i) = 0.0E0
-      ENDDO
+      END DO
       DO
         !
         !
@@ -312,7 +312,7 @@ SUBROUTINE SDASTP(X,Y,Yprime,Neq,RES,JAC,H,Wt,Jstart,Idid,Rpar,Ipar,Phi,&
         temp1 = 2.0E0/(1.0E0+Cj/Cjold)
         DO i = 1, Neq
           Delta(i) = Delta(i)*temp1
-        ENDDO
+        END DO
         !
         !     COMPUTE A NEW ITERATE (BACK-SUBSTITUTION).
         !     STORE THE CORRECTION IN DELTA.
@@ -323,7 +323,7 @@ SUBROUTINE SDASTP(X,Y,Yprime,Neq,RES,JAC,H,Wt,Jstart,Idid,Rpar,Ipar,Phi,&
           Y(i) = Y(i) - Delta(i)
           E(i) = E(i) - Delta(i)
           Yprime(i) = Yprime(i) - Cj*Delta(i)
-        ENDDO
+        END DO
         !
         !     TEST FOR CONVERGENCE OF THE ITERATION
         delnrm = SDANRM(Neq,Delta,Wt,Rpar,Ipar)
@@ -334,7 +334,7 @@ SUBROUTINE SDASTP(X,Y,Yprime,Neq,RES,JAC,H,Wt,Jstart,Idid,Rpar,Ipar,Phi,&
           S = rate/(1.0E0-rate)
         ELSE
           oldnrm = delnrm
-        ENDIF
+        END IF
         IF ( S*delnrm<=0.33E0 ) GOTO 200
         !
         !     THE CORRECTOR HAS NOT YET CONVERGED.
@@ -352,8 +352,8 @@ SUBROUTINE SDASTP(X,Y,Yprime,Neq,RES,JAC,H,Wt,Jstart,Idid,Rpar,Ipar,Phi,&
         IF ( ires<0 ) THEN
           convgd = .FALSE.
           GOTO 300
-        ENDIF
-      ENDDO
+        END IF
+      END DO
       !
       !
       !     THE CORRECTOR FAILED TO CONVERGE IN MAXIT
@@ -365,9 +365,9 @@ SUBROUTINE SDASTP(X,Y,Yprime,Neq,RES,JAC,H,Wt,Jstart,Idid,Rpar,Ipar,Phi,&
         GOTO 300
       ELSE
         Jcalc = -1
-      ENDIF
-    ENDIF
-  ENDDO
+      END IF
+    END IF
+  END DO
   !
   !
   !     THE ITERATION HAS CONVERGED.  IF NONNEGATIVITY OF SOLUTION IS
@@ -378,16 +378,16 @@ SUBROUTINE SDASTP(X,Y,Yprime,Neq,RES,JAC,H,Wt,Jstart,Idid,Rpar,Ipar,Phi,&
   IF ( Nonneg/=0 ) THEN
     DO i = 1, Neq
       Delta(i) = MIN(Y(i),0.0E0)
-    ENDDO
+    END DO
     delnrm = SDANRM(Neq,Delta,Wt,Rpar,Ipar)
     IF ( delnrm>0.33E0 ) THEN
       convgd = .FALSE.
     ELSE
       DO i = 1, Neq
         E(i) = E(i) - Delta(i)
-      ENDDO
-    ENDIF
-  ENDIF
+      END DO
+    END IF
+  END IF
   300  Jcalc = 1
   IF ( convgd ) THEN
     !
@@ -412,28 +412,28 @@ SUBROUTINE SDASTP(X,Y,Yprime,Neq,RES,JAC,H,Wt,Jstart,Idid,Rpar,Ipar,Phi,&
     IF ( K/=1 ) THEN
       DO i = 1, Neq
         Delta(i) = Phi(i,kp1) + E(i)
-      ENDDO
+      END DO
       erkm1 = Sigma(K)*SDANRM(Neq,Delta,Wt,Rpar,Ipar)
       terkm1 = K*erkm1
       IF ( K>2 ) THEN
         DO i = 1, Neq
           Delta(i) = Phi(i,K) + Delta(i)
-        ENDDO
+        END DO
         erkm2 = Sigma(K-1)*SDANRM(Neq,Delta,Wt,Rpar,Ipar)
         terkm2 = (K-1)*erkm2
         IF ( MAX(terkm1,terkm2)>terk ) GOTO 350
       ELSEIF ( terkm1>0.5E0*terk ) THEN
         GOTO 350
-      ENDIF
+      END IF
       !     LOWER THE ORDER
       knew = K - 1
       est = erkm1
-    ENDIF
+    END IF
     !
     !
     !     CALCULATE THE LOCAL ERROR FOR THE CURRENT STEP
     !     TO SEE IF THE STEP WAS SUCCESSFUL
-    350    err = ck*enorm
+    350  err = ck*enorm
     IF ( err>1.0E0 ) GOTO 500
     !
     !
@@ -474,7 +474,7 @@ SUBROUTINE SDASTP(X,Y,Yprime,Neq,RES,JAC,H,Wt,Jstart,Idid,Rpar,Ipar,Phi,&
           IF ( kp1<Ns.AND.kdiff/=1 ) THEN
             DO i = 1, Neq
               Delta(i) = E(i) - Phi(i,kp2)
-            ENDDO
+            END DO
             erkp1 = (1.0E0/(K+2))*SDANRM(Neq,Delta,Wt,Rpar,Ipar)
             terkp1 = (K+2)*erkp1
             IF ( K>1 ) THEN
@@ -482,25 +482,25 @@ SUBROUTINE SDASTP(X,Y,Yprime,Neq,RES,JAC,H,Wt,Jstart,Idid,Rpar,Ipar,Phi,&
               IF ( terkp1>=terk.OR.K==Iwm(LMXORD) ) GOTO 400
             ELSEIF ( terkp1>=0.5E0*terk ) THEN
               GOTO 400
-            ENDIF
+            END IF
             !
             !     RAISE ORDER
             K = kp1
             est = erkp1
-          ENDIF
-        ENDIF
+          END IF
+        END IF
         GOTO 400
-      ENDIF
+      END IF
       !
       !     LOWER ORDER
-      360      K = km1
+      360  K = km1
       est = erkm1
-    ENDIF
+    END IF
     !
     !
     !     DETERMINE THE APPROPRIATE STEPSIZE FOR
     !     THE NEXT STEP.
-    400    hnew = H
+    400  hnew = H
     temp2 = K + 1
     r = (2.0E0*est+0.0001E0)**(-1.0E0/temp2)
     IF ( r>=2.0E0 ) THEN
@@ -508,144 +508,145 @@ SUBROUTINE SDASTP(X,Y,Yprime,Neq,RES,JAC,H,Wt,Jstart,Idid,Rpar,Ipar,Phi,&
     ELSEIF ( r<=1.0E0 ) THEN
       r = MAX(0.5E0,MIN(0.9E0,r))
       hnew = H*r
-    ENDIF
+    END IF
     H = hnew
     !
     !
     !     UPDATE DIFFERENCES FOR NEXT STEP
-    450    IF ( Kold/=Iwm(LMXORD) ) THEN
+    450 CONTINUE
+    IF ( Kold/=Iwm(LMXORD) ) THEN
+      DO i = 1, Neq
+        Phi(i,kp2) = E(i)
+      END DO
+    END IF
     DO i = 1, Neq
-      Phi(i,kp2) = E(i)
-    ENDDO
-  ENDIF
-  DO i = 1, Neq
-    Phi(i,kp1) = Phi(i,kp1) + E(i)
-  ENDDO
-  DO j1 = 2, kp1
-    j = kp1 - j1 + 1
-    DO i = 1, Neq
-      Phi(i,j) = Phi(i,j) + Phi(i,j+1)
-    ENDDO
-  ENDDO
+      Phi(i,kp1) = Phi(i,kp1) + E(i)
+    END DO
+    DO j1 = 2, kp1
+      j = kp1 - j1 + 1
+      DO i = 1, Neq
+        Phi(i,j) = Phi(i,j) + Phi(i,j+1)
+      END DO
+    END DO
+    RETURN
+  END IF
+  !
+  !
+  !
+  !
+  !
+  !-----------------------------------------------------------------------
+  !     BLOCK 6
+  !     THE STEP IS UNSUCCESSFUL. RESTORE X,PSI,PHI
+  !     DETERMINE APPROPRIATE STEPSIZE FOR
+  !     CONTINUING THE INTEGRATION, OR EXIT WITH
+  !     AN ERROR FLAG IF THERE HAVE BEEN MANY
+  !     FAILURES.
+  !-----------------------------------------------------------------------
+  500  Iphase = 1
+  !
+  !     RESTORE X,PHI,PSI
+  X = xold
+  IF ( kp1>=nsp1 ) THEN
+    DO j = nsp1, kp1
+      temp1 = 1.0E0/Beta(j)
+      DO i = 1, Neq
+        Phi(i,j) = temp1*Phi(i,j)
+      END DO
+    END DO
+  END IF
+  DO i = 2, kp1
+    Psi(i-1) = Psi(i) - H
+  END DO
+  !
+  !
+  !     TEST WHETHER FAILURE IS DUE TO CORRECTOR ITERATION
+  !     OR ERROR TEST
+  IF ( convgd ) THEN
+    !
+    !
+    !     THE NEWTON SCHEME CONVERGED, AND THE CAUSE
+    !     OF THE FAILURE WAS THE ERROR ESTIMATE
+    !     EXCEEDING THE TOLERANCE.
+    nef = nef + 1
+    Iwm(LETF) = Iwm(LETF) + 1
+    IF ( nef<=1 ) THEN
+      !
+      !     ON FIRST ERROR TEST FAILURE, KEEP CURRENT ORDER OR LOWER
+      !     ORDER BY ONE.  COMPUTE NEW STEPSIZE BASED ON DIFFERENCES
+      !     OF THE SOLUTION.
+      K = knew
+      temp2 = K + 1
+      r = 0.90E0*(2.0E0*est+0.0001E0)**(-1.0E0/temp2)
+      r = MAX(0.25E0,MIN(0.9E0,r))
+      H = H*r
+      IF ( ABS(H)>=Hmin ) GOTO 100
+      Idid = -6
+      !
+      !     ON SECOND ERROR TEST FAILURE, USE THE CURRENT ORDER OR
+      !     DECREASE ORDER BY ONE.  REDUCE THE STEPSIZE BY A FACTOR OF
+      !     FOUR.
+    ELSEIF ( nef>2 ) THEN
+      !
+      !     ON THIRD AND SUBSEQUENT ERROR TEST FAILURES, SET THE ORDER TO
+      !     ONE AND REDUCE THE STEPSIZE BY A FACTOR OF FOUR.
+      K = 1
+      H = 0.25E0*H
+      IF ( ABS(H)>=Hmin ) GOTO 100
+      Idid = -6
+    ELSE
+      K = knew
+      H = 0.25E0*H
+      IF ( ABS(H)>=Hmin ) GOTO 100
+      Idid = -6
+    END IF
+  ELSE
+    Iwm(LCTF) = Iwm(LCTF) + 1
+    !
+    !
+    !     THE NEWTON ITERATION FAILED TO CONVERGE WITH
+    !     A CURRENT ITERATION MATRIX.  DETERMINE THE CAUSE
+    !     OF THE FAILURE AND TAKE APPROPRIATE ACTION.
+    IF ( ier/=0 ) THEN
+      !
+      !     THE ITERATION MATRIX IS SINGULAR. REDUCE
+      !     THE STEPSIZE BY A FACTOR OF 4. IF
+      !     THIS HAPPENS THREE TIMES IN A ROW ON
+      !     THE SAME STEP, RETURN WITH AN ERROR FLAG
+      nsf = nsf + 1
+      r = 0.25E0
+      H = H*r
+      IF ( nsf<3.AND.ABS(H)>=Hmin ) GOTO 100
+      Idid = -8
+      !
+      !
+      !     THE NEWTON ITERATION FAILED TO CONVERGE FOR A REASON
+      !     OTHER THAN A SINGULAR ITERATION MATRIX.  IF IRES = -2, THEN
+      !     RETURN.  OTHERWISE, REDUCE THE STEPSIZE AND TRY AGAIN, UNLESS
+      !     TOO MANY FAILURES HAVE OCCURRED.
+    ELSEIF ( ires>-2 ) THEN
+      ncf = ncf + 1
+      r = 0.25E0
+      H = H*r
+      IF ( ncf<10.AND.ABS(H)>=Hmin ) GOTO 100
+      Idid = -7
+      IF ( ires<0 ) Idid = -10
+      IF ( nef>=3 ) Idid = -9
+    ELSE
+      Idid = -11
+    END IF
+  END IF
+  !
+  !
+  !
+  !
+  !     FOR ALL CRASHES, RESTORE Y TO ITS LAST VALUE,
+  !     INTERPOLATE TO FIND YPRIME AT LAST X, AND RETURN
+  CALL SDATRP(X,X,Y,Yprime,Neq,K,Phi,Psi)
+  !
+  !
+  !     GO BACK AND TRY THIS STEP AGAIN
   RETURN
-ENDIF
-!
-!
-!
-!
-!
-!-----------------------------------------------------------------------
-!     BLOCK 6
-!     THE STEP IS UNSUCCESSFUL. RESTORE X,PSI,PHI
-!     DETERMINE APPROPRIATE STEPSIZE FOR
-!     CONTINUING THE INTEGRATION, OR EXIT WITH
-!     AN ERROR FLAG IF THERE HAVE BEEN MANY
-!     FAILURES.
-!-----------------------------------------------------------------------
-500  Iphase = 1
-!
-!     RESTORE X,PHI,PSI
-X = xold
-IF ( kp1>=nsp1 ) THEN
-  DO j = nsp1, kp1
-    temp1 = 1.0E0/Beta(j)
-    DO i = 1, Neq
-      Phi(i,j) = temp1*Phi(i,j)
-    ENDDO
-  ENDDO
-ENDIF
-DO i = 2, kp1
-  Psi(i-1) = Psi(i) - H
-ENDDO
-!
-!
-!     TEST WHETHER FAILURE IS DUE TO CORRECTOR ITERATION
-!     OR ERROR TEST
-IF ( convgd ) THEN
   !
-  !
-  !     THE NEWTON SCHEME CONVERGED, AND THE CAUSE
-  !     OF THE FAILURE WAS THE ERROR ESTIMATE
-  !     EXCEEDING THE TOLERANCE.
-  nef = nef + 1
-  Iwm(LETF) = Iwm(LETF) + 1
-  IF ( nef<=1 ) THEN
-    !
-    !     ON FIRST ERROR TEST FAILURE, KEEP CURRENT ORDER OR LOWER
-    !     ORDER BY ONE.  COMPUTE NEW STEPSIZE BASED ON DIFFERENCES
-    !     OF THE SOLUTION.
-    K = knew
-    temp2 = K + 1
-    r = 0.90E0*(2.0E0*est+0.0001E0)**(-1.0E0/temp2)
-    r = MAX(0.25E0,MIN(0.9E0,r))
-    H = H*r
-    IF ( ABS(H)>=Hmin ) GOTO 100
-    Idid = -6
-    !
-    !     ON SECOND ERROR TEST FAILURE, USE THE CURRENT ORDER OR
-    !     DECREASE ORDER BY ONE.  REDUCE THE STEPSIZE BY A FACTOR OF
-    !     FOUR.
-  ELSEIF ( nef>2 ) THEN
-    !
-    !     ON THIRD AND SUBSEQUENT ERROR TEST FAILURES, SET THE ORDER TO
-    !     ONE AND REDUCE THE STEPSIZE BY A FACTOR OF FOUR.
-    K = 1
-    H = 0.25E0*H
-    IF ( ABS(H)>=Hmin ) GOTO 100
-    Idid = -6
-  ELSE
-    K = knew
-    H = 0.25E0*H
-    IF ( ABS(H)>=Hmin ) GOTO 100
-    Idid = -6
-  ENDIF
-ELSE
-  Iwm(LCTF) = Iwm(LCTF) + 1
-  !
-  !
-  !     THE NEWTON ITERATION FAILED TO CONVERGE WITH
-  !     A CURRENT ITERATION MATRIX.  DETERMINE THE CAUSE
-  !     OF THE FAILURE AND TAKE APPROPRIATE ACTION.
-  IF ( ier/=0 ) THEN
-    !
-    !     THE ITERATION MATRIX IS SINGULAR. REDUCE
-    !     THE STEPSIZE BY A FACTOR OF 4. IF
-    !     THIS HAPPENS THREE TIMES IN A ROW ON
-    !     THE SAME STEP, RETURN WITH AN ERROR FLAG
-    nsf = nsf + 1
-    r = 0.25E0
-    H = H*r
-    IF ( nsf<3.AND.ABS(H)>=Hmin ) GOTO 100
-    Idid = -8
-    !
-    !
-    !     THE NEWTON ITERATION FAILED TO CONVERGE FOR A REASON
-    !     OTHER THAN A SINGULAR ITERATION MATRIX.  IF IRES = -2, THEN
-    !     RETURN.  OTHERWISE, REDUCE THE STEPSIZE AND TRY AGAIN, UNLESS
-    !     TOO MANY FAILURES HAVE OCCURRED.
-  ELSEIF ( ires>-2 ) THEN
-    ncf = ncf + 1
-    r = 0.25E0
-    H = H*r
-    IF ( ncf<10.AND.ABS(H)>=Hmin ) GOTO 100
-    Idid = -7
-    IF ( ires<0 ) Idid = -10
-    IF ( nef>=3 ) Idid = -9
-  ELSE
-    Idid = -11
-  ENDIF
-ENDIF
-!
-!
-!
-!
-!     FOR ALL CRASHES, RESTORE Y TO ITS LAST VALUE,
-!     INTERPOLATE TO FIND YPRIME AT LAST X, AND RETURN
-CALL SDATRP(X,X,Y,Yprime,Neq,K,Phi,Psi)
-!
-!
-!     GO BACK AND TRY THIS STEP AGAIN
-RETURN
-!
-!------END OF SUBROUTINE SDASTP------
+  !------END OF SUBROUTINE SDASTP------
 END SUBROUTINE SDASTP

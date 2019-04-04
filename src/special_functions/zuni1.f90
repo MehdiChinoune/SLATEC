@@ -76,7 +76,7 @@ SUBROUTINE ZUNI1(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Nlast,Fnul,Tol,Elim,Alim)
     sti = -sti*rast*rast
     s1r = -zeta1r + str
     s1i = -zeta1i + sti
-  ENDIF
+  END IF
   rs1 = s1r
   IF ( ABS(rs1)>Elim ) THEN
     IF ( rs1>0.0D0 ) GOTO 400
@@ -84,9 +84,9 @@ SUBROUTINE ZUNI1(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Nlast,Fnul,Tol,Elim,Alim)
     DO i = 1, N
       Yr(i) = zeror
       Yi(i) = zeroi
-    ENDDO
+    END DO
     RETURN
-  ENDIF
+  END IF
   100  nn = MIN(2,nd)
   DO i = 1, nn
     fn = Fnu + (nd-i)
@@ -104,7 +104,7 @@ SUBROUTINE ZUNI1(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Nlast,Fnul,Tol,Elim,Alim)
       sti = -sti*rast*rast
       s1r = -zeta1r + str
       s1i = -zeta1i + sti + Zi
-    ENDIF
+    END IF
     !-----------------------------------------------------------------------
     !     TEST FOR UNDERFLOW AND OVERFLOW
     !-----------------------------------------------------------------------
@@ -121,8 +121,8 @@ SUBROUTINE ZUNI1(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Nlast,Fnul,Tol,Elim,Alim)
       IF ( i==1 ) iflag = 1
       IF ( rs1>=0.0D0 ) THEN
         IF ( i==1 ) iflag = 3
-      ENDIF
-    ENDIF
+      END IF
+    END IF
     !-----------------------------------------------------------------------
     !     SCALE S1 IF ABS(S1).LT.ASCLE
     !-----------------------------------------------------------------------
@@ -137,13 +137,13 @@ SUBROUTINE ZUNI1(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Nlast,Fnul,Tol,Elim,Alim)
     IF ( iflag==1 ) THEN
       CALL ZUCHK(s2r,s2i,nw,bry(1),Tol)
       IF ( nw/=0 ) GOTO 300
-    ENDIF
+    END IF
     cyr(i) = s2r
     cyi(i) = s2i
     m = nd - i + 1
     Yr(m) = s2r*csrr(iflag)
     Yi(m) = s2i*csrr(iflag)
-  ENDDO
+  END DO
   IF ( nd>2 ) THEN
     rast = 1.0D0/ZABS(Zr,Zi)
     str = Zr*rast
@@ -189,10 +189,10 @@ SUBROUTINE ZUNI1(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Nlast,Fnul,Tol,Elim,Alim)
           s2r = s2r*cssr(iflag)
           s2i = s2i*cssr(iflag)
           c1r = csrr(iflag)
-        ENDIF
-      ENDIF
-    ENDDO
-  ENDIF
+        END IF
+      END IF
+    END DO
+  END IF
   200  RETURN
   !-----------------------------------------------------------------------
   !     SET UNDERFLOW AND UPDATE PARAMETERS
@@ -213,8 +213,8 @@ SUBROUTINE ZUNI1(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Nlast,Fnul,Tol,Elim,Alim)
       IF ( fn>=Fnul ) GOTO 100
       Nlast = nd
       RETURN
-    ENDIF
-  ENDIF
+    END IF
+  END IF
   400  Nz = -1
   RETURN
 END SUBROUTINE ZUNI1

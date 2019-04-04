@@ -111,7 +111,7 @@ REAL(8) FUNCTION D9LN2R(X)
     txbig = 6.0/SQRT(sqeps)
     xbig = txbig - (sqeps*txbig**2-2.D0*LOG(txbig))/(2.D0*sqeps*txbig)
     first = .FALSE.
-  ENDIF
+  END IF
   !
   IF ( X<(-.625D0).OR.X>0.8125D0 ) THEN
     !
@@ -124,12 +124,12 @@ REAL(8) FUNCTION D9LN2R(X)
     !
     D9LN2R = (LOG(1.D0+X)-X*(1.D0-0.5D0*X))/X**3
     RETURN
-  ENDIF
+  END IF
   !
   IF ( X<0.0D0 ) THEN
     D9LN2R = 0.375D0 + DCSEVL(16.D0*X/5.D0+1.D0,ln21cs,ntln21)
   ELSE
     D9LN2R = 0.375D0 + DCSEVL(32.D0*X/13.D0-1.D0,ln22cs,ntln22)
-  ENDIF
+  END IF
   RETURN
 END FUNCTION D9LN2R

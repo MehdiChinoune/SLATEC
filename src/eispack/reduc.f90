@@ -81,7 +81,7 @@ SUBROUTINE REDUC(Nm,N,A,B,Dl,Ierr)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   !
   INTEGER i, j, k, N, i1, j1, Nm, nn, Ierr
   REAL A(Nm,*), B(Nm,*), Dl(*)
@@ -101,8 +101,8 @@ SUBROUTINE REDUC(Nm,N,A,B,Dl,Ierr)
           !
           DO k = 1, i1
             x = x - B(i,k)*B(j,k)
-          ENDDO
-        ENDIF
+          END DO
+        END IF
         !
         IF ( j/=i ) THEN
           B(j,i) = x/y
@@ -110,10 +110,10 @@ SUBROUTINE REDUC(Nm,N,A,B,Dl,Ierr)
           IF ( x<=0.0E0 ) GOTO 100
           y = SQRT(x)
           Dl(i) = y
-        ENDIF
-      ENDDO
-    ENDDO
-  ENDIF
+        END IF
+      END DO
+    END DO
+  END IF
   !     .......... FORM THE TRANSPOSE OF THE UPPER TRIANGLE OF INV(L)*A
   !                IN THE LOWER TRIANGLE OF THE ARRAY A ..........
   DO i = 1, nn
@@ -126,12 +126,12 @@ SUBROUTINE REDUC(Nm,N,A,B,Dl,Ierr)
         !
         DO k = 1, i1
           x = x - B(i,k)*A(j,k)
-        ENDDO
-      ENDIF
+        END DO
+      END IF
       !
       A(j,i) = x/y
-    ENDDO
-  ENDDO
+    END DO
+  END DO
   !     .......... PRE-MULTIPLY BY INV(L) AND OVERWRITE ..........
   DO j = 1, nn
     j1 = j - 1
@@ -143,19 +143,19 @@ SUBROUTINE REDUC(Nm,N,A,B,Dl,Ierr)
         !
         DO k = j, i1
           x = x - A(k,j)*B(i,k)
-        ENDDO
-      ENDIF
+        END DO
+      END IF
       !
       IF ( j/=1 ) THEN
         !
         DO k = 1, j1
           x = x - A(j,k)*B(i,k)
-        ENDDO
-      ENDIF
+        END DO
+      END IF
       !
       A(i,j) = x/Dl(i)
-    ENDDO
-  ENDDO
+    END DO
+  END DO
   !
   RETURN
   !     .......... SET ERROR -- B IS NOT POSITIVE DEFINITE ..........

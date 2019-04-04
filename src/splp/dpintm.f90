@@ -63,14 +63,14 @@ SUBROUTINE DPINTM(M,N,Sx,Ix,Lmx,Ipagef)
   IF ( M<=0.OR.N<=0 ) THEN
     nerr = 55
     CALL XERMSG('SLATEC','DPINTM','MATRIX DIMENSION M OR N .LE. 0',nerr,iopt)
-  ENDIF
+  END IF
   !
   !     VERIFY IF VALUE OF LMX IS LARGE ENOUGH.
   !
   IF ( Lmx<N+7 ) THEN
     nerr = 55
     CALL XERMSG('SLATEC','DPINTM','THE VALUE OF LMX IS TOO SMALL',nerr,iopt)
-  ENDIF
+  END IF
   !
   !     INITIALIZE DATA STRUCTURE INDEPENDENT VALUES.
   !
@@ -93,13 +93,13 @@ SUBROUTINE DPINTM(M,N,Sx,Ix,Lmx,Ipagef)
   DO WHILE ( (n20008-i)>=0 )
     Sx(i) = zero
     i = i + 1
-  ENDDO
+  END DO
   i = 5
   n20012 = lp4
   DO WHILE ( (n20012-i)>=0 )
     Ix(i) = lp4
     i = i + 1
-  ENDDO
+  END DO
   Sx(N+5) = zero
   Ix(N+5) = 0
   Ix(Lmx) = 0

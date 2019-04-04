@@ -74,7 +74,7 @@ SUBROUTINE DQMOMO(Alfa,Beta,Ri,Rj,Rg,Rh,Integr)
   !   891009  Removed unreferenced statement label.  (WRB)
   !   891009  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
-  
+
   !
   REAL(8) :: Alfa, alfp1, alfp2, an, anm1, Beta, betp1, betp2, &
     ralf, rbet, Rg(25), Rh(25), Ri(25), Rj(25)
@@ -101,7 +101,7 @@ SUBROUTINE DQMOMO(Alfa,Beta,Ri,Rj,Rg,Rh,Integr)
     Rj(i) = -(rbet+an*(an-betp2)*Rj(i-1))/(anm1*(an+betp1))
     anm1 = an
     an = an + 0.1D+01
-  ENDDO
+  END DO
   IF ( Integr/=1 ) THEN
     IF ( Integr/=3 ) THEN
       !
@@ -117,9 +117,9 @@ SUBROUTINE DQMOMO(Alfa,Beta,Ri,Rj,Rg,Rh,Integr)
         anm1 = an
         an = an + 0.1D+01
         im1 = i
-      ENDDO
+      END DO
       IF ( Integr==2 ) GOTO 100
-    ENDIF
+    END IF
     !
     !           COMPUTE RH USING A FORWARD RECURRENCE RELATION.
     !
@@ -133,13 +133,13 @@ SUBROUTINE DQMOMO(Alfa,Beta,Ri,Rj,Rg,Rh,Integr)
       anm1 = an
       an = an + 0.1D+01
       im1 = i
-    ENDDO
+    END DO
     DO i = 2, 25, 2
       Rh(i) = -Rh(i)
-    ENDDO
-  ENDIF
+    END DO
+  END IF
   100 CONTINUE
   DO i = 2, 25, 2
     Rj(i) = -Rj(i)
-  ENDDO
+  END DO
 END SUBROUTINE DQMOMO

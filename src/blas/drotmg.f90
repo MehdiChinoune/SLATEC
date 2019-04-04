@@ -97,7 +97,7 @@ SUBROUTINE DROTMG(Dd1,Dd2,Dx1,Dy1,Dparam)
           !         GO SCALE-CHECK..
           GOTO 200
           !         GO ZERO-H-D-AND-DX1..
-        ENDIF
+        END IF
       ELSEIF ( .NOT.dq2<zero ) THEN
         dflag = one
         dh11 = dp1/dp2
@@ -110,14 +110,14 @@ SUBROUTINE DROTMG(Dd1,Dd2,Dx1,Dy1,Dparam)
         !         GO SCALE-CHECK
         GOTO 200
         !         GO ZERO-H-D-AND-DX1..
-      ENDIF
+      END IF
     ELSE
       dflag = -two
       Dparam(1) = dflag
       RETURN
-    ENDIF
+    END IF
     !       GO ZERO-H-D-AND-DX1..
-  ENDIF
+  END IF
   !     PROCEDURE..ZERO-H-D-AND-DX1..
   dflag = -one
   dh11 = zero
@@ -142,8 +142,8 @@ SUBROUTINE DROTMG(Dd1,Dd2,Dx1,Dy1,Dparam)
       dh11 = one
       dh22 = one
       dflag = -one
-    ENDIF
-  ENDIF
+    END IF
+  END IF
   SELECT CASE(igo)
     CASE(300)
       GOTO 300
@@ -207,7 +207,7 @@ SUBROUTINE DROTMG(Dd1,Dd2,Dx1,Dy1,Dparam)
   ELSE
     Dparam(2) = dh11
     Dparam(5) = dh22
-  ENDIF
+  END IF
   Dparam(1) = dflag
   RETURN
 END SUBROUTINE DROTMG

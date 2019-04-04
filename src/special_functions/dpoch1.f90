@@ -82,12 +82,12 @@ REAL(8) FUNCTION DPOCH1(A,X)
     sqtbig = 1.0D0/SQRT(24.0D0*D1MACH(1))
     alneps = LOG(D1MACH(3))
     first = .FALSE.
-  ENDIF
+  END IF
   !
   IF ( X==0.0D0 ) THEN
     DPOCH1 = DPSI(A)
     RETURN
-  ENDIF
+  END IF
   !
   absx = ABS(X)
   absa = ABS(A)
@@ -128,14 +128,14 @@ REAL(8) FUNCTION DPOCH1(A,X)
           DO j = 1, k
             ndx = k - j + 1
             gbk = gbk + bern(ndx)*gbern(j)
-          ENDDO
+          END DO
           gbern(k+1) = -rho*gbk/k
           !
           term = term*(2*k-2-X)*(2*k-1-X)*var2
           poly1 = poly1 + gbern(k+1)*term
-        ENDDO
-      ENDIF
-    ENDIF
+        END DO
+      END IF
+    END IF
     !
     poly1 = (X-1.0D0)*poly1
     DPOCH1 = DEXPRL(q)*(alnvar+q*poly1) + poly1
@@ -149,8 +149,8 @@ REAL(8) FUNCTION DPOCH1(A,X)
         i = incr - ii
         binv = 1.0D0/(bp+i)
         DPOCH1 = (DPOCH1-binv)/(1.0D0+X*binv)
-      ENDDO
-    ENDIF
+      END DO
+    END IF
     !
     IF ( bp==A ) RETURN
     !
@@ -163,6 +163,6 @@ REAL(8) FUNCTION DPOCH1(A,X)
     !
     DPOCH1 = trig + (1.0D0+X*trig)*DPOCH1
     RETURN
-  ENDIF
+  END IF
   !
 END FUNCTION DPOCH1

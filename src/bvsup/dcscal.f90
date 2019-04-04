@@ -45,8 +45,8 @@ SUBROUTINE DCSCAL(A,Nrda,Nrow,Ncol,Cols,Colsav,Rows,Rowsav,Anorm,Scales,Iscale,I
     IF ( Ic/=0 ) THEN
       DO k = 1, Ncol
         Cols(k) = DDOT(Nrow,A(1,k),1,A(1,k),1)
-      ENDDO
-    ENDIF
+      END DO
+    END IF
     !
     ascale = Anorm/Ncol
     DO k = 1, Ncol
@@ -55,12 +55,12 @@ SUBROUTINE DCSCAL(A,Nrda,Nrow,Ncol,Cols,Colsav,Rows,Rowsav,Anorm,Scales,Iscale,I
       IF ( (cs>ten4*ascale).OR.(ten4*cs<ascale) ) GOTO 100
       !        .........EXIT
       IF ( (cs<1.0D0/ten20).OR.(cs>ten20) ) GOTO 100
-    ENDDO
-  ENDIF
+    END DO
+  END IF
   !
   DO k = 1, Ncol
     Scales(k) = 1.0D0
-  ENDDO
+  END DO
   !     ......EXIT
   RETURN
   !
@@ -77,14 +77,14 @@ SUBROUTINE DCSCAL(A,Nrda,Nrow,Ncol,Cols,Colsav,Rows,Rowsav,Anorm,Scales,Iscale,I
         Cols(k) = s*s*Cols(k)
         Anorm = Anorm + Cols(k)
         Colsav(k) = Cols(k)
-      ENDIF
+      END IF
       DO j = 1, Nrow
         A(j,k) = s*A(j,k)
-      ENDDO
+      END DO
     ELSE
       Scales(k) = 1.0D0
-    ENDIF
-  ENDDO
+    END IF
+  END DO
   !
   !     ...EXIT
   IF ( Ic/=0 ) THEN
@@ -93,7 +93,7 @@ SUBROUTINE DCSCAL(A,Nrda,Nrow,Ncol,Cols,Colsav,Rows,Rowsav,Anorm,Scales,Iscale,I
       Rows(k) = DDOT(Ncol,A(k,1),Nrda,A(k,1),Nrda)
       Rowsav(k) = Rows(k)
       Anorm = Anorm + Rows(k)
-    ENDDO
-  ENDIF
+    END DO
+  END IF
   RETURN
 END SUBROUTINE DCSCAL

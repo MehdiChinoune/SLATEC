@@ -118,7 +118,7 @@ SUBROUTINE CPOIR(A,Lda,N,V,Itask,Ind,Work)
   !   900510  Convert XERRWV calls to XERMSG calls, cvt GOTO's to
   !           IF-THEN-ELSE.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   !
   INTEGER Lda, N, Itask, Ind, info, j
   COMPLEX A(Lda,*), V(*), Work(N,*)
@@ -133,21 +133,21 @@ SUBROUTINE CPOIR(A,Lda,N,V,Itask,Ind,Work)
     CALL XERMSG('SLATEC','CPOIR','LDA = '//xern1//' IS LESS THAN N = '//&
       xern2,-1,1)
     RETURN
-  ENDIF
+  END IF
   !
   IF ( N<=0 ) THEN
     Ind = -2
     WRITE (xern1,'(I8)') N
     CALL XERMSG('SLATEC','CPOIR','N = '//xern1//' IS LESS THAN 1',-2,1)
     RETURN
-  ENDIF
+  END IF
   !
   IF ( Itask<1 ) THEN
     Ind = -3
     WRITE (xern1,'(I8)') Itask
     CALL XERMSG('SLATEC','CPOIR','ITASK = '//xern1//' IS LESS THAN 1',-3,1)
     RETURN
-  ENDIF
+  END IF
   !
   IF ( Itask==1 ) THEN
     !
@@ -155,7 +155,7 @@ SUBROUTINE CPOIR(A,Lda,N,V,Itask,Ind,Work)
     !
     DO j = 1, N
       CALL CCOPY(N,A(1,j),1,Work(1,j),1)
-    ENDDO
+    END DO
     !
     !        FACTOR MATRIX A INTO R
     !
@@ -168,8 +168,8 @@ SUBROUTINE CPOIR(A,Lda,N,V,Itask,Ind,Work)
       CALL XERMSG('SLATEC','CPOIR',&
         'SINGULAR OR NOT POSITIVE DEFINITE - NO SOLUTION',-4,1)
       RETURN
-    ENDIF
-  ENDIF
+    END IF
+  END IF
   !
   !     SOLVE AFTER FACTORING
   !     MOVE VECTOR B TO WORK
@@ -183,7 +183,7 @@ SUBROUTINE CPOIR(A,Lda,N,V,Itask,Ind,Work)
   IF ( xnorm==0.0 ) THEN
     Ind = 75
     RETURN
-  ENDIF
+  END IF
   !
   !     COMPUTE  RESIDUAL
   !
@@ -193,7 +193,7 @@ SUBROUTINE CPOIR(A,Lda,N,V,Itask,Ind,Work)
     dr1 = dr1 + dr2 - REAL(REAL(Work(j,N+1)), 8)
     di1 = di1 + di2 - REAL(AIMAG(Work(j,N+1)), 8)
     Work(j,N+1) = CMPLX(REAL(dr1),REAL(di1))
-  ENDDO
+  END DO
   !
   !     SOLVE A*DELTA=R
   !
@@ -210,5 +210,5 @@ SUBROUTINE CPOIR(A,Lda,N,V,Itask,Ind,Work)
   IF ( Ind<=0 ) THEN
     Ind = -10
     CALL XERMSG('SLATEC','CPOIR','SOLUTION MAY HAVE NO SIGNIFICANCE',-10,0)
-  ENDIF
+  END IF
 END SUBROUTINE CPOIR

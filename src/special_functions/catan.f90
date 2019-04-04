@@ -50,7 +50,7 @@ COMPLEX FUNCTION CATAN(Z)
     rmin = SQRT(3.0*R1MACH(3))
     rmax = 1.0/R1MACH(3)
     first = .FALSE.
-  ENDIF
+  END IF
   !
   r = ABS(Z)
   IF ( r<=0.1 ) THEN
@@ -63,7 +63,7 @@ COMPLEX FUNCTION CATAN(Z)
     DO i = 1, nterms
       twoi = 2*(nterms-i) + 1
       CATAN = 1.0/twoi - z2*CATAN
-    ENDDO
+    END DO
     CATAN = Z*CATAN
     RETURN
     !
@@ -80,8 +80,8 @@ COMPLEX FUNCTION CATAN(Z)
     IF ( ABS(r2-1.0)<=sqeps ) THEN
       IF ( ABS(CMPLX(1.0,0.0)+Z*Z)<sqeps ) CALL XERMSG('SLATEC','CATAN',&
         'ANSWER LT HALF PRECISION, Z**2 CLOSE TO -1',1,1)
-    ENDIF
-  ENDIF
+    END IF
+  END IF
   !
   xans = 0.5*ATAN2(2.0*x,1.0-r2)
   yans = 0.25*LOG((r2+2.0*y+1.0)/(r2-2.0*y+1.0))

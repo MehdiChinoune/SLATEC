@@ -96,7 +96,7 @@ REAL(8) FUNCTION DPSI(X)
     xbig = 1.0D0/SQRT(D1MACH(3))
     dxrel = SQRT(D1MACH(4))
     first = .FALSE.
-  ENDIF
+  END IF
   !
   y = ABS(X)
   !
@@ -111,7 +111,7 @@ REAL(8) FUNCTION DPSI(X)
       DPSI = LOG(ABS(X)) - 0.5D0/X + aux - pi*DCOT(pi*X)
     ELSE
       DPSI = LOG(X) - 0.5D0/X + aux
-    ENDIF
+    END IF
     RETURN
   ELSE
     !
@@ -136,15 +136,15 @@ REAL(8) FUNCTION DPSI(X)
       !
       DO i = 1, n
         DPSI = DPSI - 1.D0/(X+i-1)
-      ENDDO
+      END DO
       RETURN
-    ENDIF
-  ENDIF
+    END IF
+  END IF
   !
   ! DPSI(X) FOR X .GE. 2.0 AND X .LE. 10.0
   !
   DO i = 1, n
     DPSI = DPSI + 1.0D0/(y+i)
-  ENDDO
+  END DO
   RETURN
 END FUNCTION DPSI

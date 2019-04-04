@@ -159,7 +159,7 @@ SUBROUTINE CBESK(Z,Fnu,Kode,N,Cy,Nz,Ierr)
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
   !   920128  Category corrected.  (WRB)
   !   920811  Prologue revised.  (DWL)
-  
+
   !
   INTEGER Ierr, k, Kode, k1, k2, mr, N, nn, nuf, nw, Nz, I1MACH
   COMPLEX Cy(N), Z
@@ -227,7 +227,7 @@ SUBROUTINE CBESK(Z,Fnu,Kode,N,Cy,Nz,Ierr)
       IF ( xx<0.0E0 ) THEN
         mr = 1
         IF ( yy<0.0E0 ) mr = -1
-      ENDIF
+      END IF
       CALL CBUNK(Z,Fnu,Kode,mr,nn,Cy,nw,tol,elim,alim)
       IF ( nw<0 ) GOTO 200
       Nz = Nz + nw
@@ -246,13 +246,13 @@ SUBROUTINE CBESK(Z,Fnu,Kode,N,Cy,Nz,Ierr)
           IF ( nn==0 ) THEN
             IF ( xx<0.0E0 ) GOTO 100
             RETURN
-          ENDIF
+          END IF
         ELSEIF ( az<=tol ) THEN
           arg = 0.5E0*az
           aln = -fn*ALOG(arg)
           IF ( aln>elim ) GOTO 100
-        ENDIF
-      ENDIF
+        END IF
+      END IF
       IF ( xx>=0.0E0 ) THEN
         !-----------------------------------------------------------------------
         !     RIGHT HALF PLANE COMPUTATION, REAL(Z).GE.0.
@@ -272,9 +272,9 @@ SUBROUTINE CBESK(Z,Fnu,Kode,N,Cy,Nz,Ierr)
         IF ( nw<0 ) GOTO 200
         Nz = nw
         RETURN
-      ENDIF
-    ENDIF
-  ENDIF
+      END IF
+    END IF
+  END IF
   100  Nz = 0
   Ierr = 2
   RETURN

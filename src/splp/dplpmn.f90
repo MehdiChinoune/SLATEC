@@ -212,7 +212,7 @@ SUBROUTINE DPLPMN(DUSRMT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
     key = 2
     ipage = 1
     GOTO 2500
-  ENDIF
+  END IF
   !
   !     UPDATE MATRIX DATA AND CHECK BOUNDS FOR CONSISTENCY.
   100  CALL DPLPUP(DUSRMT,Mrelas,Nvars,Prgopt,Dattrv,Bl,Bu,Ind,Info,Amat,Imat,&
@@ -256,8 +256,8 @@ SUBROUTINE DPLPMN(DUSRMT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
         &VARIABLE MOVED''/'' TO ITS BOUND.  IT REMAINS NON-BASIC.''/&
         &'' WHEN COL. NO. OF BASIS EXCHANGED IS NEGATIVE, THE LEAVING''/&
         &'' VARIABLE IS AT ITS UPPER BOUND.'')',idg)
-    ENDIF
-  ENDIF
+    END IF
+  END IF
   !++  CODE FOR OUTPUT=NO IS INACTIVE
   !++  END
   !
@@ -283,7 +283,7 @@ SUBROUTINE DPLPMN(DUSRMT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
       'IN DSPLP,  A SINGULAR INITIAL BASIS WAS ENCOUNTERED.',nerr,iopt)
     Info = -nerr
     GOTO 4600
-  ENDIF
+  END IF
   300  npr006 = 400
   GOTO 4000
   400  npr007 = 500
@@ -299,7 +299,7 @@ SUBROUTINE DPLPMN(DUSRMT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
       'IN DSPLP, AN INFEASIBLE INITIAL BASIS WAS ENCOUNTERED.',nerr,iopt)
     Info = -nerr
     GOTO 4600
-  ENDIF
+  END IF
   700  itlp = 0
   !
   !     LAMDA HAS BEEN SET TO A CONSTANT, PERFORM PENALTY METHOD.
@@ -329,8 +329,8 @@ SUBROUTINE DPLPMN(DUSRMT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
         GOTO 4100
       ELSE
         i = i + 1
-      ENDIF
-    ENDDO
+      END IF
+    END DO
     GOTO 1700
   ELSE
     !
@@ -341,7 +341,7 @@ SUBROUTINE DPLPMN(DUSRMT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
     costsc = zero
     npr007 = 1200
     GOTO 2800
-  ENDIF
+  END IF
   1200 npr009 = 1300
   npr013 = 2000
   GOTO 4100
@@ -361,7 +361,7 @@ SUBROUTINE DPLPMN(DUSRMT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
     npr009 = 1700
     npr013 = 2000
     GOTO 4100
-  ENDIF
+  END IF
   !
   1700 npr011 = 1800
   ! CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
@@ -388,7 +388,7 @@ SUBROUTINE DPLPMN(DUSRMT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
     CALL XERMSG('SLATEC','DPLPMN',&
       'IN DSPLP, THE PROBLEM APPEARS TO BE INFEASIBLE AND TO HAVE NO FINITE SOLN.',nerr,iopt)
     Info = -nerr
-  ENDIF
+  END IF
   !
   IF ( Info==(-1).OR.Info==(-3) ) THEN
     size = DASUM(Nvars,Primal,1)*anorm
@@ -403,25 +403,25 @@ SUBROUTINE DPLPMN(DUSRMT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
           CASE (2)
             IF ( size+ABS(Primal(i)-Bu(i))*factor/=size ) THEN
               IF ( Primal(i)>=Bu(i) ) Ind(i) = -4
-            ENDIF
+            END IF
           CASE (3)
             IF ( size+ABS(Primal(i)-Bl(i))*factor/=size ) THEN
               IF ( Primal(i)<Bl(i) ) THEN
                 Ind(i) = -4
               ELSEIF ( size+ABS(Primal(i)-Bu(i))*factor/=size ) THEN
                 IF ( Primal(i)>Bu(i) ) Ind(i) = -4
-              ENDIF
-            ENDIF
+              END IF
+            END IF
           CASE (4)
           CASE DEFAULT
             IF ( size+ABS(Primal(i)-Bl(i))*factor/=size ) THEN
               IF ( Primal(i)<=Bl(i) ) Ind(i) = -4
-            ENDIF
+            END IF
         END SELECT
-      ENDIF
+      END IF
       i = i + 1
-    ENDDO
-  ENDIF
+    END DO
+  END IF
   !
   IF ( Info==(-2).OR.Info==(-3) ) THEN
     j = 1
@@ -443,11 +443,11 @@ SUBROUTINE DPLPMN(DUSRMT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
               Bu(j) = Bl(j)
               Ind(j) = -3
           END SELECT
-        ENDIF
-      ENDIF
+        END IF
+      END IF
       j = j + 1
-    ENDDO
-  ENDIF
+    END DO
+  END IF
   !++  CODE FOR OUTPUT=YES IS ACTIVE
   IF ( kprint<1 ) GOTO 4600
   npr012 = 4600
@@ -473,7 +473,7 @@ SUBROUTINE DPLPMN(DUSRMT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
         CASE DEFAULT
           scalr = -Bl(j)
       END SELECT
-    ENDIF
+    END IF
     IF ( scalr==zero ) THEN
       j = j + 1
     ELSEIF ( j>Nvars ) THEN
@@ -488,10 +488,10 @@ SUBROUTINE DPLPMN(DUSRMT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
         ELSE
           j = j + 1
           EXIT
-        ENDIF
-      ENDDO
-    ENDIF
-  ENDDO
+        END IF
+      END DO
+    END IF
+  END DO
   j = 1
   n20119 = Nvars + Mrelas
   DO WHILE ( (n20119-j)>=0 )
@@ -511,10 +511,10 @@ SUBROUTINE DPLPMN(DUSRMT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
         ELSE
           j = j + 1
           EXIT
-        ENDIF
-      ENDDO
-    ENDIF
-  ENDDO
+        END IF
+      END DO
+    END IF
+  END DO
   SELECT CASE(npr010)
     CASE(900)
       GOTO 900
@@ -527,7 +527,7 @@ SUBROUTINE DPLPMN(DUSRMT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   IF ( kprint>2 ) THEN
     CALL DVOUT(Mrelas,Duals,'('' BASIC (INTERNAL) DUAL SOLN.'')',idg)
     CALL DVOUT(Nvars+Mrelas,Rz,'('' REDUCED COSTS'')',idg)
-  ENDIF
+  END IF
   npr015 = 2200
   GOTO 4200
   2200 CONTINUE
@@ -537,7 +537,7 @@ SUBROUTINE DPLPMN(DUSRMT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
     IF ( redbas ) GOTO 3900
     npr004 = 3500
     GOTO 2700
-  ENDIF
+  END IF
   2300 CONTINUE
   IF ( .NOT.(found) ) THEN
     SELECT CASE(npr009)
@@ -587,15 +587,15 @@ SUBROUTINE DPLPMN(DUSRMT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
           CALL IVOUT(Nvars+Mrelas,Ibb,'('' IBB ARRAY'')',idg)
           CALL DVOUT(Mrelas,Rhs,'('' TRANSLATED RHS'')',idg)
           CALL DVOUT(Mrelas,Duals,'('' BASIC (INTERNAL) DUAL SOLN.'')',idg)
-        ENDIF
+        END IF
         !++  CODE FOR OUTPUT=NO IS INACTIVE
         !++  END
-      ENDIF
+      END IF
       npr005 = 2400
       ntries = 1
       GOTO 3000
-    ENDIF
-  ENDIF
+    END IF
+  END IF
   2400 itlp = itlp + 1
   ! CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
   !     PROCEDURE (CHECK AND RETURN WITH EXCESS ITERATIONS)
@@ -607,7 +607,7 @@ SUBROUTINE DPLPMN(DUSRMT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
     npr011 = 3300
     npr013 = 4300
     GOTO 4100
-  ENDIF
+  END IF
   2500 lpr1 = lpr + 1
   READ (isave) (Amat(i),i=lpr1,Lmx), (Imat(i),i=lpr1,Lmx)
   CALL DPRWPG(key,ipage,lpg,Amat,Imat)
@@ -680,14 +680,14 @@ SUBROUTINE DPLPMN(DUSRMT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
               CALL DPNNZR(k,aij,iplace,Amat,Imat,j)
               IF ( k<=0 ) EXIT
               Rhs(k) = Rhs(k) - upbnd*aij*Csc(j)
-            ENDDO
-          ENDIF
+            END DO
+          END IF
           Primal(i+Nvars) = one
-        ENDIF
-      ENDIF
-    ENDIF
+        END IF
+      END IF
+    END IF
     i = i + 1
-  ENDDO
+  END DO
   SELECT CASE(npr007)
     CASE(500)
       GOTO 500
@@ -706,7 +706,7 @@ SUBROUTINE DPLPMN(DUSRMT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
         !++  CODE FOR OUTPUT=NO IS INACTIVE
         !++  END
         CALL DVOUT(Mrelas,Erd,'('' EST. ERROR IN DUAL COMPS.'')',idg)
-      ENDIF
+      END IF
       SELECT CASE(npr005)
         CASE(300)
           GOTO 300
@@ -718,8 +718,8 @@ SUBROUTINE DPLPMN(DUSRMT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
     ELSEIF ( ntries/=2 ) THEN
       npr004 = 2900
       GOTO 2700
-    ENDIF
-  ENDIF
+    END IF
+  END IF
   nerr = 26
   CALL XERMSG('SLATEC','DPLPMN',&
     'IN DSPLP, MOVED TO A SINGULAR POINT. THIS SHOULD NOT HAPPEN.',nerr,iopt)
@@ -747,7 +747,7 @@ SUBROUTINE DPLPMN(DUSRMT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
       upbnd = Bu(ibas) - Bl(ibas)
       IF ( ibas<=Nvars ) upbnd = upbnd/Csc(ibas)
       xval = MIN(upbnd,xval)
-    ENDIF
+    END IF
     !
     !     SUBTRACT XVAL TIMES COLUMN VECTOR FROM RIGHT-HAND SIDE IN WW(*)
     IF ( xval==zero ) THEN
@@ -757,7 +757,7 @@ SUBROUTINE DPLPMN(DUSRMT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
         Ww(ibas-Nvars) = Ww(ibas-Nvars) + xval
       ELSE
         Ww(ibas-Nvars) = Ww(ibas-Nvars) - xval
-      ENDIF
+      END IF
       j = j + 1
     ELSE
       i = 0
@@ -768,10 +768,10 @@ SUBROUTINE DPLPMN(DUSRMT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
         ELSE
           j = j + 1
           EXIT
-        ENDIF
-      ENDDO
-    ENDIF
-  ENDDO
+        END IF
+      END DO
+    END IF
+  END DO
   !
   !   COMPUTE NORM OF DIFFERENCE AND CHECK FOR FEASIBILITY.
   resnrm = DASUM(Mrelas,Ww,1)
@@ -782,7 +782,7 @@ SUBROUTINE DPLPMN(DUSRMT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   IF ( feas ) THEN
     Primal(Nvars+1) = zero
     CALL DCOPY(Mrelas,Primal(Nvars+1),0,Primal(Nvars+1),1)
-  ENDIF
+  END IF
   SELECT CASE(npr008)
     CASE(600)
       GOTO 600
@@ -807,7 +807,7 @@ SUBROUTINE DPLPMN(DUSRMT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   IF ( kprint>=1 ) THEN
     npr012 = 3400
     GOTO 4500
-  ENDIF
+  END IF
   !++  CODE FOR OUTPUT=NO IS INACTIVE
   !++  END
   3400 idum(1) = 0
@@ -835,7 +835,7 @@ SUBROUTINE DPLPMN(DUSRMT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   DO WHILE ( (n20247-i)>=0 )
     Ibasis(i) = ABS(Ibasis(i))
     i = i + 1
-  ENDDO
+  END DO
   npr015 = 2300
   GOTO 4200
   ! CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
@@ -871,9 +871,9 @@ SUBROUTINE DPLPMN(DUSRMT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
       Duals(i) = xlamda*Primal(i+Nvars)
     ELSE
       Duals(i) = costsc*Costs(j)*Csc(j) + xlamda*Primal(i+Nvars)
-    ENDIF
+    END IF
     i = i + 1
-  ENDDO
+  END DO
   !
   trans = .TRUE.
   CALL LA05BD(Basmat,Ibrc,Lbm,Mrelas,Ipr,Iwr,Wr,gg,Duals,trans)
@@ -906,10 +906,10 @@ SUBROUTINE DPLPMN(DUSRMT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
     DO WHILE ( (n20271-i)>=0 )
       Duals(i) = Duals(i)/costsc
       i = i + 1
-    ENDDO
+    END DO
     npr006 = 4400
     GOTO 4000
-  ENDIF
+  END IF
   !
   !     REAPPLY COLUMN SCALING TO PRIMAL.
   4400 i = 1
@@ -920,9 +920,9 @@ SUBROUTINE DPLPMN(DUSRMT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
       scalr = Csc(j)
       IF ( Ind(j)==2 ) scalr = -scalr
       Rprim(i) = Rprim(i)*scalr
-    ENDIF
+    END IF
     i = i + 1
-  ENDDO
+  END DO
   !
   !     REPLACE TRANSLATED BASIC VARIABLES INTO ARRAY PRIMAL(*)
   Primal(1) = zero
@@ -938,10 +938,10 @@ SUBROUTINE DPLPMN(DUSRMT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
     IF ( Ind(ibas)==3 ) THEN
       IF ( MOD(Ibb(ibas),2)==0 ) xval = Bu(ibas) - Bl(ibas) - xval
       xval = xval + Bl(ibas)
-    ENDIF
+    END IF
     Primal(ibas) = xval
     j = j + 1
-  ENDDO
+  END DO
   !
   !     COMPUTE DUALS FOR INDEPENDENT VARIABLES WITH BOUNDS.
   !     OTHER ENTRIES ARE ZERO.
@@ -956,11 +956,11 @@ SUBROUTINE DPLPMN(DUSRMT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
         CALL DPNNZR(i,aij,iplace,Amat,Imat,j)
         IF ( i<=0 ) EXIT
         rzj = rzj - aij*Duals(i)
-      ENDDO
-    ENDIF
+      END DO
+    END IF
     Duals(Mrelas+j) = rzj
     j = j + 1
-  ENDDO
+  END DO
   SELECT CASE(npr011)
     CASE(1800)
       GOTO 1800
@@ -975,12 +975,12 @@ SUBROUTINE DPLPMN(DUSRMT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
     CALL IVOUT(0,idum,'('' THIS IS A MAXIMIZATION PROBLEM.'')',idg)
   ELSE
     CALL IVOUT(0,idum,'('' THIS IS A MINIMIZATION PROBLEM.'')',idg)
-  ENDIF
+  END IF
   IF ( .NOT.(stpedg) ) THEN
     CALL IVOUT(0,idum,'('' MINIMUM REDUCED COST PRICING WAS USED.'')',idg)
   ELSE
     CALL IVOUT(0,idum,'('' STEEPEST EDGE PRICING WAS USED.'')',idg)
-  ENDIF
+  END IF
   rdum(1) = DDOT(Nvars,Costs,1,Primal,1)
   CALL DVOUT(1,rdum,'('' OUTPUT VALUE OF THE OBJECTIVE FUNCTION'')',idg)
   CALL DVOUT(Nvars+Mrelas,Primal,&
@@ -1015,7 +1015,7 @@ SUBROUTINE DPLPMN(DUSRMT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
       key = 2
       ipage = ABS(Imat(Lmx-1))
       CALL DPRWPG(key,ipage,lpg,Amat,Imat)
-    ENDIF
+    END IF
     !
     !     FORCE PAGE FILE TO BE OPENED ON RESTARTS.
     key = INT( Amat(4) )
@@ -1026,7 +1026,7 @@ SUBROUTINE DPLPMN(DUSRMT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
     ipage = 1
     key = 1
     GOTO 2600
-  ENDIF
+  END IF
   !
   !     THIS TEST IS THERE ONLY TO AVOID DIAGNOSTICS ON SOME FORTRAN
   !     COMPILERS.

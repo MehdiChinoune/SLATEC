@@ -164,7 +164,7 @@ SUBROUTINE QK61(F,A,B,Result,Abserr,Resabs,Resasc)
     resg = resg + wg(j)*fsum
     resk = resk + wgk(jtw)*fsum
     Resabs = Resabs + wgk(jtw)*(ABS(fval1)+ABS(fval2))
-  ENDDO
+  END DO
   DO j = 1, 15
     jtwm1 = j*2 - 1
     absc = hlgth*xgk(jtwm1)
@@ -175,12 +175,12 @@ SUBROUTINE QK61(F,A,B,Result,Abserr,Resabs,Resasc)
     fsum = fval1 + fval2
     resk = resk + wgk(jtwm1)*fsum
     Resabs = Resabs + wgk(jtwm1)*(ABS(fval1)+ABS(fval2))
-  ENDDO
+  END DO
   reskh = resk*0.5E+00
   Resasc = wgk(31)*ABS(fc-reskh)
   DO j = 1, 30
     Resasc = Resasc + wgk(j)*(ABS(fv1(j)-reskh)+ABS(fv2(j)-reskh))
-  ENDDO
+  END DO
   Result = resk*hlgth
   Resabs = Resabs*dhlgth
   Resasc = Resasc*dhlgth

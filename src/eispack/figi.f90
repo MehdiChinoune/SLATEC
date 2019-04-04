@@ -83,7 +83,7 @@ SUBROUTINE FIGI(Nm,N,T,D,E,E2,Ierr)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   !
   INTEGER i, N, Nm, Ierr
   REAL T(Nm,3), D(*), E(*), E2(*)
@@ -99,11 +99,11 @@ SUBROUTINE FIGI(Nm,N,T,D,E,E2,Ierr)
         !     .......... SET ERROR -- PRODUCT OF SOME PAIR OF OFF-DIAGONAL
         !                ELEMENTS IS ZERO WITH ONE MEMBER NON-ZERO ..........
         IF ( T(i,1)/=0.0E0.OR.T(i-1,3)/=0.0E0 ) Ierr = -(3*N+i)
-      ENDIF
+      END IF
       E(i) = SQRT(E2(i))
-    ENDIF
+    END IF
     D(i) = T(i,2)
-  ENDDO
+  END DO
   !
   RETURN
   !     .......... SET ERROR -- PRODUCT OF SOME PAIR OF OFF-DIAGONAL

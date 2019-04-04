@@ -82,7 +82,7 @@ SUBROUTINE CG(Nm,N,Ar,Ai,Wr,Wi,Matz,Zr,Zi,Fv1,Fv2,Fv3,Ierr)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   !
   INTEGER N, Nm, is1, is2, Ierr, Matz
   REAL Ar(Nm,*), Ai(Nm,*), Wr(*), Wi(*), Zr(Nm,*), Zi(Nm,*)
@@ -100,8 +100,8 @@ SUBROUTINE CG(Nm,N,Ar,Ai,Wr,Wi,Matz,Zr,Zi,Fv1,Fv2,Fv3,Ierr)
     ELSE
       !     .......... FIND EIGENVALUES ONLY ..........
       CALL COMQR(Nm,N,is1,is2,Ar,Ai,Wr,Wi,Ierr)
-    ENDIF
+    END IF
   ELSE
     Ierr = 10*N
-  ENDIF
+  END IF
 END SUBROUTINE CG

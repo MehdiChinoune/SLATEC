@@ -81,7 +81,7 @@ SUBROUTINE DBSPVD(T,K,Nderiv,X,Ileft,Ldvnik,Vnikx,Work)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   INTEGER iwork, Ldvnik
   INTEGER i, ideriv, Ileft, ipkmd, j, jj, jlow, jm, jp1mid, K, &
     kmd, kp1, l, ldummy, m, mhigh, Nderiv
@@ -114,16 +114,16 @@ SUBROUTINE DBSPVD(T,K,Nderiv,X,Ileft,Ldvnik,Vnikx,Work)
         DO j = ideriv, K
           Vnikx(j,ideriv) = Vnikx(jp1mid,1)
           jp1mid = jp1mid + 1
-        ENDDO
+        END DO
         ideriv = ideriv - 1
         jj = kp1 - ideriv
         CALL DBSPVN(T,jj,K,2,X,Ileft,Vnikx,Work,iwork)
-      ENDDO
+      END DO
       !
       jm = kp1*(kp1+1)/2
       DO l = 1, jm
         Work(l) = 0.0D0
-      ENDDO
+      END DO
       !     A(I,I) = WORK(I*(I+3)/2) = 1.0       I = 1,K
       l = 2
       j = 0
@@ -131,7 +131,7 @@ SUBROUTINE DBSPVD(T,K,Nderiv,X,Ileft,Ldvnik,Vnikx,Work)
         j = j + l
         Work(j) = 1.0D0
         l = l + 1
-      ENDDO
+      END DO
       kmd = K
       DO m = 2, mhigh
         kmd = kmd - 1
@@ -145,12 +145,12 @@ SUBROUTINE DBSPVD(T,K,Nderiv,X,Ileft,Ldvnik,Vnikx,Work)
           factor = fkmd/(T(ipkmd)-T(i))
           DO l = 1, j
             Work(l+jj) = (Work(l+jj)-Work(l+jm))*factor
-          ENDDO
+          END DO
           i = i - 1
           j = j - 1
           jj = jm
           jm = jm - j
-        ENDDO
+        END DO
         !
         DO i = 1, K
           v = 0.0D0
@@ -159,11 +159,11 @@ SUBROUTINE DBSPVD(T,K,Nderiv,X,Ileft,Ldvnik,Vnikx,Work)
           DO j = jlow, K
             v = Work(i+jj)*Vnikx(j,m) + v
             jj = jj + j + 1
-          ENDDO
+          END DO
           Vnikx(i,m) = v
-        ENDDO
-      ENDDO
-    ENDIF
-  ENDIF
+        END DO
+      END DO
+    END IF
+  END IF
   RETURN
 END SUBROUTINE DBSPVD

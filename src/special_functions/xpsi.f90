@@ -48,7 +48,7 @@ REAL FUNCTION XPSI(A,Ipsik,Ipsix)
   DO i = 1, k1
     k = Ipsik - i
     c = (c+cnum(k)/cdenom(k))/b**2
-  ENDDO
+  END DO
   XPSI = LOG(b) - (c+.5/b)
   IF ( n/=0 ) THEN
     b = 0.
@@ -57,7 +57,7 @@ REAL FUNCTION XPSI(A,Ipsik,Ipsix)
     !
     DO m = 1, n
       b = b + 1./(n-m+A)
-    ENDDO
+    END DO
     XPSI = XPSI - b
-  ENDIF
+  END IF
 END FUNCTION XPSI

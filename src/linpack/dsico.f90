@@ -89,7 +89,7 @@ SUBROUTINE DSICO(A,Lda,N,Kpvt,Rcond,Z)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   INTEGER Lda, N, Kpvt(*)
   REAL(8) :: A(Lda,*), Z(*)
   REAL(8) :: Rcond
@@ -107,13 +107,13 @@ SUBROUTINE DSICO(A,Lda,N,Kpvt,Rcond,Z)
     IF ( jm1>=1 ) THEN
       DO i = 1, jm1
         Z(i) = Z(i) + ABS(A(i,j))
-      ENDDO
-    ENDIF
-  ENDDO
+      END DO
+    END IF
+  END DO
   anorm = 0.0D0
   DO j = 1, N
     anorm = MAX(anorm,Z(j))
-  ENDDO
+  END DO
   !
   !     FACTOR
   !
@@ -130,7 +130,7 @@ SUBROUTINE DSICO(A,Lda,N,Kpvt,Rcond,Z)
   ek = 1.0D0
   DO j = 1, N
     Z(j) = 0.0D0
-  ENDDO
+  END DO
   k = N
   DO WHILE ( k/=0 )
     ks = 1
@@ -141,7 +141,7 @@ SUBROUTINE DSICO(A,Lda,N,Kpvt,Rcond,Z)
       t = Z(kps)
       Z(kps) = Z(kp)
       Z(kp) = t
-    ENDIF
+    END IF
     IF ( Z(k)/=0.0D0 ) ek = SIGN(ek,Z(k))
     Z(k) = Z(k) + ek
     CALL DAXPY(k-ks,Z(k),A(1,k),1,Z(1),1)
@@ -149,7 +149,7 @@ SUBROUTINE DSICO(A,Lda,N,Kpvt,Rcond,Z)
       IF ( Z(k-1)/=0.0D0 ) ek = SIGN(ek,Z(k-1))
       Z(k-1) = Z(k-1) + ek
       CALL DAXPY(k-ks,Z(k-1),A(1,k-1),1,Z(1),1)
-    ENDIF
+    END IF
     IF ( ks==2 ) THEN
       ak = A(k,k)/A(k-1,k)
       akm1 = A(k-1,k-1)/A(k-1,k)
@@ -163,12 +163,12 @@ SUBROUTINE DSICO(A,Lda,N,Kpvt,Rcond,Z)
         s = ABS(A(k,k))/ABS(Z(k))
         CALL DSCAL(N,s,Z,1)
         ek = s*ek
-      ENDIF
+      END IF
       IF ( A(k,k)/=0.0D0 ) Z(k) = Z(k)/A(k,k)
       IF ( A(k,k)==0.0D0 ) Z(k) = 1.0D0
-    ENDIF
+    END IF
     k = k - ks
-  ENDDO
+  END DO
   s = 1.0D0/DASUM(N,Z,1)
   CALL DSCAL(N,s,Z,1)
   !
@@ -186,10 +186,10 @@ SUBROUTINE DSICO(A,Lda,N,Kpvt,Rcond,Z)
         t = Z(k)
         Z(k) = Z(kp)
         Z(kp) = t
-      ENDIF
-    ENDIF
+      END IF
+    END IF
     k = k + ks
-  ENDDO
+  END DO
   s = 1.0D0/DASUM(N,Z,1)
   CALL DSCAL(N,s,Z,1)
   !
@@ -208,10 +208,10 @@ SUBROUTINE DSICO(A,Lda,N,Kpvt,Rcond,Z)
         t = Z(kps)
         Z(kps) = Z(kp)
         Z(kp) = t
-      ENDIF
+      END IF
       CALL DAXPY(k-ks,Z(k),A(1,k),1,Z(1),1)
       IF ( ks==2 ) CALL DAXPY(k-ks,Z(k-1),A(1,k-1),1,Z(1),1)
-    ENDIF
+    END IF
     IF ( ks==2 ) THEN
       ak = A(k,k)/A(k-1,k)
       akm1 = A(k-1,k-1)/A(k-1,k)
@@ -225,12 +225,12 @@ SUBROUTINE DSICO(A,Lda,N,Kpvt,Rcond,Z)
         s = ABS(A(k,k))/ABS(Z(k))
         CALL DSCAL(N,s,Z,1)
         ynorm = s*ynorm
-      ENDIF
+      END IF
       IF ( A(k,k)/=0.0D0 ) Z(k) = Z(k)/A(k,k)
       IF ( A(k,k)==0.0D0 ) Z(k) = 1.0D0
-    ENDIF
+    END IF
     k = k - ks
-  ENDDO
+  END DO
   s = 1.0D0/DASUM(N,Z,1)
   CALL DSCAL(N,s,Z,1)
   ynorm = s*ynorm
@@ -249,10 +249,10 @@ SUBROUTINE DSICO(A,Lda,N,Kpvt,Rcond,Z)
         t = Z(k)
         Z(k) = Z(kp)
         Z(kp) = t
-      ENDIF
-    ENDIF
+      END IF
+    END IF
     k = k + ks
-  ENDDO
+  END DO
   !     MAKE ZNORM = 1.0
   s = 1.0D0/DASUM(N,Z,1)
   CALL DSCAL(N,s,Z,1)

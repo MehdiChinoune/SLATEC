@@ -282,12 +282,12 @@ SUBROUTINE DOMN(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Nsave,Itol,Tol,&
   IF ( N<1 ) THEN
     Ierr = 3
     RETURN
-  ENDIF
+  END IF
   fuzz = D1MACH(3)
   IF ( Tol<500*fuzz ) THEN
     Tol = 500*fuzz
     Ierr = 4
-  ENDIF
+  END IF
   fuzz = fuzz*fuzz
   !
   !         Calculate initial residual and pseudo-residual, and check
@@ -295,7 +295,7 @@ SUBROUTINE DOMN(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Nsave,Itol,Tol,&
   CALL MATVEC(N,X,R,Nelt,Ia,Ja,A,Isym)
   DO i = 1, N
     R(i) = B(i) - R(i)
-  ENDDO
+  END DO
   CALL MSOLVE(N,R,Z,Nelt,Ia,Ja,A,Isym,Rwork,Iwork)
   !
   IF ( ISDOMN(N,B,X,Nelt,Ia,Ja,A,Isym,MSOLVE,Nsave,Itol,Tol,Itmax,Iter,Err,&
@@ -328,23 +328,23 @@ SUBROUTINE DOMN(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Nsave,Itol,Tol,&
             CALL DAXPY(N,-bkl,P(1,ipo),1,P(1,ip),1)
             CALL DAXPY(N,-bkl,Ap(1,ipo),1,Ap(1,ip),1)
             CALL DAXPY(N,-bkl,Emap(1,ipo),1,Emap(1,ip),1)
-          ENDDO
+          END DO
           IF ( Nsave>1 ) THEN
             DO l = Nsave - 1, 1, -1
               Csav(l+1) = Csav(l)
-            ENDDO
-          ENDIF
-        ENDIF
+            END DO
+          END IF
+        END IF
         akden = DDOT(N,Emap(1,ip),1,Emap(1,ip),1)
         IF ( ABS(akden)<fuzz ) THEN
           Ierr = 6
           RETURN
-        ENDIF
+        END IF
         Csav(1) = 1.0D0/akden
         !
         !         calculate coefficient ak, new iterate x, new residual r, and
         !         new pseudo-residual z.
-      ENDIF
+      END IF
       aknum = DDOT(N,Z,1,Emap(1,ip),1)
       ak = aknum/akden
       CALL DAXPY(N,ak,P(1,ip),1,X,1)
@@ -356,14 +356,14 @@ SUBROUTINE DOMN(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Nsave,Itol,Tol,&
         Err,Ierr,Iunit,R,Z,P,Ap,Emap,Dz,Csav,Rwork,Iwork,ak,bnrm,solnrm)&
         /=0 ) RETURN
       !
-    ENDDO
+    END DO
     !
     !         *****   end of loop  *****
     !
     !         Stopping criterion not satisfied.
     Iter = Itmax + 1
     Ierr = 2
-  ENDIF
+  END IF
   !
   !------------- LAST LINE OF DOMN FOLLOWS ----------------------------
   RETURN

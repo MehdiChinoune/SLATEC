@@ -47,7 +47,7 @@ COMPLEX FUNCTION CASIN(Zinp)
     nterms = INT( -0.4343*LOG(R1MACH(3)) )
     rmin = SQRT(6.0*R1MACH(3))
     first = .FALSE.
-  ENDIF
+  END IF
   !
   z = Zinp
   r = ABS(z)
@@ -63,7 +63,7 @@ COMPLEX FUNCTION CASIN(Zinp)
     IF ( REAL(CASIN)<=(-pi2) ) CASIN = -pi - CASIN
     IF ( REAL(Zinp)<0. ) CASIN = -CASIN
     RETURN
-  ENDIF
+  END IF
   !
   CASIN = z
   IF ( r<rmin ) RETURN
@@ -73,7 +73,7 @@ COMPLEX FUNCTION CASIN(Zinp)
   DO i = 1, nterms
     twoi = 2*(nterms-i) + 1
     CASIN = 1.0/twoi + twoi*CASIN*z2/(twoi+1.0)
-  ENDDO
+  END DO
   CASIN = z*CASIN
   RETURN
 END FUNCTION CASIN

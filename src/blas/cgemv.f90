@@ -150,11 +150,11 @@ SUBROUTINE CGEMV(Trans,M,N,Alpha,A,Lda,X,Incx,Beta,Y,Incy)
     info = 8
   ELSEIF ( Incy==0 ) THEN
     info = 11
-  ENDIF
+  END IF
   IF ( info/=0 ) THEN
     CALL XERBLA('CGEMV ',info)
     RETURN
-  ENDIF
+  END IF
   !
   !     Quick return if possible.
   !
@@ -171,17 +171,17 @@ SUBROUTINE CGEMV(Trans,M,N,Alpha,A,Lda,X,Incx,Beta,Y,Incy)
   ELSE
     lenx = M
     leny = N
-  ENDIF
+  END IF
   IF ( Incx>0 ) THEN
     kx = 1
   ELSE
     kx = 1 - (lenx-1)*Incx
-  ENDIF
+  END IF
   IF ( Incy>0 ) THEN
     ky = 1
   ELSE
     ky = 1 - (leny-1)*Incy
-  ENDIF
+  END IF
   !
   !     Start the operations. In this version the elements of A are
   !     accessed sequentially with one pass through A.
@@ -195,23 +195,23 @@ SUBROUTINE CGEMV(Trans,M,N,Alpha,A,Lda,X,Incx,Beta,Y,Incy)
         DO i = 1, leny
           Y(iy) = ZERO
           iy = iy + Incy
-        ENDDO
+        END DO
       ELSE
         DO i = 1, leny
           Y(iy) = Beta*Y(iy)
           iy = iy + Incy
-        ENDDO
-      ENDIF
+        END DO
+      END IF
     ELSEIF ( Beta==ZERO ) THEN
       DO i = 1, leny
         Y(i) = ZERO
-      ENDDO
+      END DO
     ELSE
       DO i = 1, leny
         Y(i) = Beta*Y(i)
-      ENDDO
-    ENDIF
-  ENDIF
+      END DO
+    END IF
+  END IF
   IF ( Alpha==ZERO ) RETURN
   IF ( LSAME(Trans,'N') ) THEN
     !
@@ -224,10 +224,10 @@ SUBROUTINE CGEMV(Trans,M,N,Alpha,A,Lda,X,Incx,Beta,Y,Incy)
           temp = Alpha*X(jx)
           DO i = 1, M
             Y(i) = Y(i) + temp*A(i,j)
-          ENDDO
-        ENDIF
+          END DO
+        END IF
         jx = jx + Incx
-      ENDDO
+      END DO
     ELSE
       DO j = 1, N
         IF ( X(jx)/=ZERO ) THEN
@@ -236,11 +236,11 @@ SUBROUTINE CGEMV(Trans,M,N,Alpha,A,Lda,X,Incx,Beta,Y,Incy)
           DO i = 1, M
             Y(iy) = Y(iy) + temp*A(i,j)
             iy = iy + Incy
-          ENDDO
-        ENDIF
+          END DO
+        END IF
         jx = jx + Incx
-      ENDDO
-    ENDIF
+      END DO
+    END IF
   ELSE
     !
     !        Form  y := alpha*A'*x + y  or  y := alpha*conjg( A' )*x + y.
@@ -252,15 +252,15 @@ SUBROUTINE CGEMV(Trans,M,N,Alpha,A,Lda,X,Incx,Beta,Y,Incy)
         IF ( noconj ) THEN
           DO i = 1, M
             temp = temp + A(i,j)*X(i)
-          ENDDO
+          END DO
         ELSE
           DO i = 1, M
             temp = temp + CONJG(A(i,j))*X(i)
-          ENDDO
-        ENDIF
+          END DO
+        END IF
         Y(jy) = Y(jy) + Alpha*temp
         jy = jy + Incy
-      ENDDO
+      END DO
     ELSE
       DO j = 1, N
         temp = ZERO
@@ -269,18 +269,18 @@ SUBROUTINE CGEMV(Trans,M,N,Alpha,A,Lda,X,Incx,Beta,Y,Incy)
           DO i = 1, M
             temp = temp + A(i,j)*X(ix)
             ix = ix + Incx
-          ENDDO
+          END DO
         ELSE
           DO i = 1, M
             temp = temp + CONJG(A(i,j))*X(ix)
             ix = ix + Incx
-          ENDDO
-        ENDIF
+          END DO
+        END IF
         Y(jy) = Y(jy) + Alpha*temp
         jy = jy + Incy
-      ENDDO
-    ENDIF
-  ENDIF
+      END DO
+    END IF
+  END IF
   !
   !
   !     End of CGEMV .

@@ -1547,7 +1547,7 @@ SUBROUTINE SPLP(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   INTEGER iadbig, ictmax, ictopt, Info, iopt, key, lamat, last, &
     lbasma, lbm, lcolnr, lcsc, lerd, lerp, libb, librc, &
     limat, lipr, Liw, liwork
@@ -1572,14 +1572,14 @@ SUBROUTINE SPLP(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
     CALL XERMSG('SLATEC','SPLP','VALUE OF MRELAS MUST BE .GT. 0.  NOW = '//xern1,5,1)
     Info = -5
     RETURN
-  ENDIF
+  END IF
   !
   IF ( Nvars<=0 ) THEN
     WRITE (xern1,'(I8)') Nvars
     CALL XERMSG('SLATEC','SPLP','VALUE OF NVARS MUST BE .GT. 0.  NOW = '//xern1,6,1)
     Info = -6
     RETURN
-  ENDIF
+  END IF
   !
   lmx = 4*Nvars + 7
   lbm = 8*Mrelas
@@ -1610,7 +1610,7 @@ SUBROUTINE SPLP(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
           xern1//' MUST BE .GE. NVARS+7.',20,1)
         Info = -20
         RETURN
-      ENDIF
+      END IF
       !
       !     TRIVIAL CHECK ON LENGTH OF LA05*() MATRIX AREA.
       IF ( lbm<0 ) EXIT
@@ -1646,7 +1646,7 @@ SUBROUTINE SPLP(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
           //xern1//' AND LIW MUST BE = '//xern2,4,1)
         Info = -4
         RETURN
-      ENDIF
+      END IF
       !
       CALL SPLPMN(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
         Primal,Duals,Work(lamat),Work(lcsc),Work(lcolnr),&
@@ -1665,8 +1665,8 @@ SUBROUTINE SPLP(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
         IF ( Prgopt(last+2)/=zero ) THEN
           lmx = INT( Prgopt(last+3) )
           lbm = INT( Prgopt(last+4) )
-        ENDIF
-      ENDIF
+        END IF
+      END IF
       ictopt = ictopt + 1
       last = next
     ELSE
@@ -1674,8 +1674,8 @@ SUBROUTINE SPLP(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
       CALL XERMSG('SLATEC','SPLP','OPTION ARRAY PROCESSING IS CYCLING.',nerr,iopt)
       Info = -nerr
       RETURN
-    ENDIF
-  ENDDO
+    END IF
+  END DO
   nerr = 21
   CALL XERMSG('SLATEC','SPLP','USER-DEFINED VALUE OF LBM MUST BE .GE. 0.',nerr,iopt)
   Info = -nerr

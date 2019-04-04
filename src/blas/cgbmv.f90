@@ -181,11 +181,11 @@ SUBROUTINE CGBMV(Trans,M,N,Kl,Ku,Alpha,A,Lda,X,Incx,Beta,Y,Incy)
     info = 10
   ELSEIF ( Incy==0 ) THEN
     info = 13
-  ENDIF
+  END IF
   IF ( info/=0 ) THEN
     CALL XERBLA('CGBMV ',info)
     RETURN
-  ENDIF
+  END IF
   !
   !     Quick return if possible.
   !
@@ -202,17 +202,17 @@ SUBROUTINE CGBMV(Trans,M,N,Kl,Ku,Alpha,A,Lda,X,Incx,Beta,Y,Incy)
   ELSE
     lenx = M
     leny = N
-  ENDIF
+  END IF
   IF ( Incx>0 ) THEN
     kx = 1
   ELSE
     kx = 1 - (lenx-1)*Incx
-  ENDIF
+  END IF
   IF ( Incy>0 ) THEN
     ky = 1
   ELSE
     ky = 1 - (leny-1)*Incy
-  ENDIF
+  END IF
   !
   !     Start the operations. In this version the elements of A are
   !     accessed sequentially with one pass through the band part of A.
@@ -226,23 +226,23 @@ SUBROUTINE CGBMV(Trans,M,N,Kl,Ku,Alpha,A,Lda,X,Incx,Beta,Y,Incy)
         DO i = 1, leny
           Y(iy) = ZERO
           iy = iy + Incy
-        ENDDO
+        END DO
       ELSE
         DO i = 1, leny
           Y(iy) = Beta*Y(iy)
           iy = iy + Incy
-        ENDDO
-      ENDIF
+        END DO
+      END IF
     ELSEIF ( Beta==ZERO ) THEN
       DO i = 1, leny
         Y(i) = ZERO
-      ENDDO
+      END DO
     ELSE
       DO i = 1, leny
         Y(i) = Beta*Y(i)
-      ENDDO
-    ENDIF
-  ENDIF
+      END DO
+    END IF
+  END IF
   IF ( Alpha==ZERO ) RETURN
   kup1 = Ku + 1
   IF ( LSAME(Trans,'N') ) THEN
@@ -257,10 +257,10 @@ SUBROUTINE CGBMV(Trans,M,N,Kl,Ku,Alpha,A,Lda,X,Incx,Beta,Y,Incy)
           k = kup1 - j
           DO i = MAX(1,j-Ku), MIN(M,j+Kl)
             Y(i) = Y(i) + temp*A(k+i,j)
-          ENDDO
-        ENDIF
+          END DO
+        END IF
         jx = jx + Incx
-      ENDDO
+      END DO
     ELSE
       DO j = 1, N
         IF ( X(jx)/=ZERO ) THEN
@@ -270,12 +270,12 @@ SUBROUTINE CGBMV(Trans,M,N,Kl,Ku,Alpha,A,Lda,X,Incx,Beta,Y,Incy)
           DO i = MAX(1,j-Ku), MIN(M,j+Kl)
             Y(iy) = Y(iy) + temp*A(k+i,j)
             iy = iy + Incy
-          ENDDO
-        ENDIF
+          END DO
+        END IF
         jx = jx + Incx
         IF ( j>Ku ) ky = ky + Incy
-      ENDDO
-    ENDIF
+      END DO
+    END IF
   ELSE
     !
     !        Form  y := alpha*A'*x + y  or  y := alpha*conjg( A' )*x + y.
@@ -288,15 +288,15 @@ SUBROUTINE CGBMV(Trans,M,N,Kl,Ku,Alpha,A,Lda,X,Incx,Beta,Y,Incy)
         IF ( noconj ) THEN
           DO i = MAX(1,j-Ku), MIN(M,j+Kl)
             temp = temp + A(k+i,j)*X(i)
-          ENDDO
+          END DO
         ELSE
           DO i = MAX(1,j-Ku), MIN(M,j+Kl)
             temp = temp + CONJG(A(k+i,j))*X(i)
-          ENDDO
-        ENDIF
+          END DO
+        END IF
         Y(jy) = Y(jy) + Alpha*temp
         jy = jy + Incy
-      ENDDO
+      END DO
     ELSE
       DO j = 1, N
         temp = ZERO
@@ -306,19 +306,19 @@ SUBROUTINE CGBMV(Trans,M,N,Kl,Ku,Alpha,A,Lda,X,Incx,Beta,Y,Incy)
           DO i = MAX(1,j-Ku), MIN(M,j+Kl)
             temp = temp + A(k+i,j)*X(ix)
             ix = ix + Incx
-          ENDDO
+          END DO
         ELSE
           DO i = MAX(1,j-Ku), MIN(M,j+Kl)
             temp = temp + CONJG(A(k+i,j))*X(ix)
             ix = ix + Incx
-          ENDDO
-        ENDIF
+          END DO
+        END IF
         Y(jy) = Y(jy) + Alpha*temp
         jy = jy + Incy
         IF ( j>Ku ) kx = kx + Incx
-      ENDDO
-    ENDIF
-  ENDIF
+      END DO
+    END IF
+  END IF
   !
   !
   !     End of CGBMV .

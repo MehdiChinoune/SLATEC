@@ -56,7 +56,7 @@ REAL(8) FUNCTION DFAC(N)
   IF ( nmax==0 ) THEN
     CALL DGAMLM(xmin,xmax)
     nmax = INT( xmax ) - 1
-  ENDIF
+  END IF
   !
   IF ( N<0 ) CALL XERMSG('SLATEC','DFAC',&
     'FACTORIAL OF NEGATIVE INTEGER UNDEFINED',1,2)

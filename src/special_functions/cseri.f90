@@ -29,7 +29,7 @@ SUBROUTINE CSERI(Z,Fnu,Kode,N,Y,Nz,Tol,Elim,Alim)
   !* REVISION HISTORY  (YYMMDD)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
-  
+
   INTEGER i, ib, idum, iflag, il, k, Kode, l, m, N, nn, nw, Nz
   COMPLEX ak1, ck, coef, crsc, cz, hz, rz, s1, s2, w(2), Y(N), Z
   REAL aa, acz, ak, Alim, arm, ascle, atol, az, dfnu, Elim, Fnu, &
@@ -55,7 +55,7 @@ SUBROUTINE CSERI(Z,Fnu,Kode,N,Y,Nz,Tol,Elim,Alim)
     acz = ABS(cz)
     nn = N
     ck = CLOG(hz)
-  ENDIF
+  END IF
   100  dfnu = Fnu + (nn-1)
   fnup = dfnu + 1.0E0
   !-----------------------------------------------------------------------
@@ -72,7 +72,7 @@ SUBROUTINE CSERI(Z,Fnu,Kode,N,Y,Nz,Tol,Elim,Alim)
       ss = 1.0E0/Tol
       crsc = CMPLX(Tol,0.0E0)
       ascle = arm*ss
-    ENDIF
+    END IF
     ak = AIMAG(ak1)
     aa = EXP(rak1)
     IF ( iflag==1 ) aa = aa*ss
@@ -96,18 +96,18 @@ SUBROUTINE CSERI(Z,Fnu,Kode,N,Y,Nz,Tol,Elim,Alim)
           ak = ak + 2.0E0
           aa = aa*acz*rs
           IF ( aa<=atol ) EXIT
-        ENDDO
-      ENDIF
+        END DO
+      END IF
       m = nn - i + 1
       s2 = s1*coef
       w(i) = s2
       IF ( iflag/=0 ) THEN
         CALL CUCHK(s2,nw,ascle,Tol)
         IF ( nw/=0 ) GOTO 200
-      ENDIF
+      END IF
       Y(m) = s2*crsc
       IF ( i/=il ) coef = coef*CMPLX(dfnu,0.0E0)/hz
-    ENDDO
+    END DO
     IF ( nn<=2 ) RETURN
     k = nn - 2
     ak = k
@@ -131,13 +131,13 @@ SUBROUTINE CSERI(Z,Fnu,Kode,N,Y,Nz,Tol,Elim,Alim)
         ak = ak - 1.0E0
         k = k - 1
         IF ( ABS(ck)>ascle ) GOTO 400
-      ENDDO
+      END DO
       RETURN
     ELSE
       ib = 3
       GOTO 300
-    ENDIF
-  ENDIF
+    END IF
+  END IF
   200  Nz = Nz + 1
   Y(nn) = czero
   IF ( acz>dfnu ) THEN
@@ -151,13 +151,13 @@ SUBROUTINE CSERI(Z,Fnu,Kode,N,Y,Nz,Tol,Elim,Alim)
     nn = nn - 1
     IF ( nn==0 ) RETURN
     GOTO 100
-  ENDIF
+  END IF
   300 CONTINUE
   DO i = ib, nn
     Y(k) = CMPLX(ak+Fnu,0.0E0)*rz*Y(k+1) + Y(k+2)
     ak = ak - 1.0E0
     k = k - 1
-  ENDDO
+  END DO
   RETURN
   400  ib = l + 1
   IF ( ib>nn ) RETURN
@@ -167,6 +167,6 @@ SUBROUTINE CSERI(Z,Fnu,Kode,N,Y,Nz,Tol,Elim,Alim)
   IF ( N==1 ) RETURN
   DO i = 2, N
     Y(i) = czero
-  ENDDO
+  END DO
   RETURN
 END SUBROUTINE CSERI

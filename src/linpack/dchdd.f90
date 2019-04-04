@@ -136,7 +136,7 @@ SUBROUTINE DCHDD(R,Ldr,P,X,Z,Ldz,Nz,Y,Rho,C,S,Info)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   INTEGER Ldr, P, Ldz, Nz, Info
   REAL(8) :: R(Ldr,*), X(*), Z(Ldz,*), Y(*), S(*)
   REAL(8) :: Rho(*), C(*)
@@ -155,8 +155,8 @@ SUBROUTINE DCHDD(R,Ldr,P,X,Z,Ldz,Nz,Y,Rho,C,S,Info)
     DO j = 2, P
       S(j) = X(j) - DDOT(j-1,R(1,j),1,S,1)
       S(j) = S(j)/R(j,j)
-    ENDDO
-  ENDIF
+    END DO
+  END IF
   norm = DNRM2(P,S,1)
   IF ( norm<1.0D0 ) THEN
     alpha = SQRT(1.0D0-norm**2)
@@ -172,7 +172,7 @@ SUBROUTINE DCHDD(R,Ldr,P,X,Z,Ldz,Nz,Y,Rho,C,S,Info)
       C(i) = a/norm
       S(i) = b/norm
       alpha = scale*norm
-    ENDDO
+    END DO
     !
     !        APPLY THE TRANSFORMATIONS TO R.
     !
@@ -183,8 +183,8 @@ SUBROUTINE DCHDD(R,Ldr,P,X,Z,Ldz,Nz,Y,Rho,C,S,Info)
         t = C(i)*xx + S(i)*R(i,j)
         R(i,j) = C(i)*R(i,j) - S(i)*xx
         xx = t
-      ENDDO
-    ENDDO
+      END DO
+    END DO
     !
     !        IF REQUIRED, DOWNDATE Z AND RHO.
     !
@@ -194,17 +194,17 @@ SUBROUTINE DCHDD(R,Ldr,P,X,Z,Ldz,Nz,Y,Rho,C,S,Info)
         DO i = 1, P
           Z(i,j) = (Z(i,j)-S(i)*zeta)/C(i)
           zeta = C(i)*zeta - S(i)*Z(i,j)
-        ENDDO
+        END DO
         azeta = ABS(zeta)
         IF ( azeta<=Rho(j) ) THEN
           Rho(j) = Rho(j)*SQRT(1.0D0-(azeta/Rho(j))**2)
         ELSE
           Info = 1
           Rho(j) = -1.0D0
-        ENDIF
-      ENDDO
-    ENDIF
+        END IF
+      END DO
+    END IF
   ELSE
     Info = -1
-  ENDIF
+  END IF
 END SUBROUTINE DCHDD

@@ -37,7 +37,7 @@ REAL FUNCTION BSRH(Xll,Xrr,Iz,C,A,Bh,F,Sgn)
     RETURN
   ELSE
     xr = x
-  ENDIF
+  END IF
   dx = .5*dx
   IF ( dx>CNV ) GOTO 100
   BSRH = .5*(xl+xr)

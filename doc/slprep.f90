@@ -159,7 +159,7 @@ PROGRAM SLPREP
   !       MSG = 'Failure in attempting to open ' // FOUT
   !       NERR = 1
   !       GO TO 240
-  !     ENDIF
+  !     END IF
   !
   !     OPEN (UNIT=LU5, FILE=FINPUT, STATUS='UNKNOWN', FORM='FORMATTED',
   !    +      IOSTAT = INFO)
@@ -167,7 +167,7 @@ PROGRAM SLPREP
   !       MSG = 'Failure in attempting to open ' // FINPUT
   !       NERR = 1
   !       GO TO 240
-  !     ENDIF
+  !     END IF
   !
   finp = ' '
   WRITE (UNIT=LU6,FMT=99015) DFINP
@@ -179,7 +179,7 @@ PROGRAM SLPREP
     msg = 'Failure in attempting to open '//finp
     nerr = 1
     GOTO 800
-  ENDIF
+  END IF
   !
   fclass = ' '
   WRITE (UNIT=LU6,FMT=99013) DFCLAS
@@ -191,7 +191,7 @@ PROGRAM SLPREP
     msg = 'Failure in attempting to open '//fclass
     nerr = 1
     GOTO 800
-  ENDIF
+  END IF
   !
   fcat = ' '
   WRITE (UNIT=LU6,FMT=99014) DFCAT
@@ -203,7 +203,7 @@ PROGRAM SLPREP
     msg = 'Failure in attempting to open '//fcat
     nerr = 1
     GOTO 800
-  ENDIF
+  END IF
   !
   fdaf = ' '
   WRITE (UNIT=LU6,FMT=99016) DFDAF
@@ -216,7 +216,7 @@ PROGRAM SLPREP
     msg = 'Failure in attempting to open '//fdaf
     nerr = 1
     GOTO 800
-  ENDIF
+  END IF
   !
   ftbl = ' '
   WRITE (UNIT=LU6,FMT=99017) DFTBL
@@ -228,7 +228,7 @@ PROGRAM SLPREP
     msg = 'Failure in attempting to open '//ftbl
     nerr = 1
     GOTO 800
-  ENDIF
+  END IF
   !
   fkwd = ' '
   WRITE (UNIT=LU6,FMT=99018) DFKWD
@@ -242,7 +242,7 @@ PROGRAM SLPREP
     GOTO 800
   ELSE
     ntkwd = 0
-  ENDIF
+  END IF
   !
   flog = ' '
   WRITE (UNIT=LU6,FMT=99012) DFLOG
@@ -254,7 +254,7 @@ PROGRAM SLPREP
     msg = 'Failure in attempting to open '//flog
     nerr = 1
     GOTO 800
-  ENDIF
+  END IF
   !
   WRITE (UNIT=LU6,FMT=99011) flog
   !
@@ -302,7 +302,7 @@ PROGRAM SLPREP
         ncat = 1
         categ(1) = ' '
         nkwd = 0
-      ENDIF
+      END IF
       !
       IF ( line(2:6)=='***BE' ) THEN
         !
@@ -317,18 +317,18 @@ PROGRAM SLPREP
           msg = 'Routine name not in UPPER case'
           nerr = 2
           EXIT
-        ENDIF
+        END IF
         numr = numr + 1
         IF ( numr>MXNRN ) THEN
           msg = 'Too many routine names.  Recompile code with larger MXNRN.'
           nerr = 2
           EXIT
-        ENDIF
+        END IF
         !
         !       Write every 10th routine name to standard output.
         !
         IF ( MOD(numr,10)==0 ) WRITE (UNIT=LU6,FMT=99006) rtname, numr
-      ENDIF
+      END IF
       !
       !     Effective with version 4.0, every routine MUST have a PURPOSE.
       !
@@ -349,9 +349,9 @@ PROGRAM SLPREP
             !
             ipe = iwr - 1
             EXIT
-          ENDIF
-        ENDDO
-      ENDIF
+          END IF
+        END DO
+      END IF
       !
       IF ( line(2:6)=='***CA' ) THEN
         !
@@ -367,7 +367,7 @@ PROGRAM SLPREP
           msg = 'No category on CATEGORY record'
           nerr = 3
           EXIT
-        ENDIF
+        END IF
         DO
           !
           !       Get the offset location of the next delimiter.
@@ -377,13 +377,13 @@ PROGRAM SLPREP
             id = ilen + 1
           ELSE
             id = ic + icom - 1
-          ENDIF
+          END IF
           ncat = ncat + 1
           IF ( ncat>15 ) THEN
             msg = 'Too many categories in a routine.  Recompile code with larger MXNCAT.'
             nerr = 3
             GOTO 800
-          ENDIF
+          END IF
           !
           !       Put category into table in UPPER case.
           !
@@ -393,7 +393,7 @@ PROGRAM SLPREP
             msg = 'Category not in UPPER case'
             nerr = 3
             GOTO 800
-          ENDIF
+          END IF
           !
           !       Check to see if this category is already in the table of
           !       categories.
@@ -408,16 +408,16 @@ PROGRAM SLPREP
               msg = 'Too many categories in the library.  Recompile code with larger MXNCAT.'
               nerr = 3
               GOTO 800
-            ENDIF
+            END IF
             !
             !         Put category in table and check case.  If not UPPER case,
             !         terminate.
             !
             DO i = ntcat - 1, ABS(ifind) + 1, -1
               tcat(i+1) = tcat(i)
-            ENDDO
+            END DO
             tcat(ABS(ifind)+1) = categ(ncat)
-          ENDIF
+          END IF
           !
           !       Is this the last category for this subprogram?
           !
@@ -439,11 +439,11 @@ PROGRAM SLPREP
                 msg = 'CATEGORY section not in correct form'
                 nerr = 3
                 GOTO 800
-              ENDIF
+              END IF
               iwr = iwr + 1
               WRITE (UNIT=LU17,FMT=99001,REC=iwr) line
               GOTO 710
-            ENDIF
+            END IF
             !
             !       Check to see that there is a blank character following the
             !       delimiter after the category just processed.
@@ -452,14 +452,14 @@ PROGRAM SLPREP
               msg = 'CATEGORY section not in correct form'
               nerr = 3
               GOTO 800
-            ENDIF
+            END IF
             !
             !       Set the pointer IC to the next category.
             !
             ic = id + 2
-          ENDIF
-        ENDDO
-      ENDIF
+          END IF
+        END DO
+      END IF
       !
       IF ( line(2:6)=='***KE' ) THEN
         !
@@ -468,13 +468,13 @@ PROGRAM SLPREP
         !
         !       Initialize the pointer to point to the first keyword phrase.
         !
-        720        ic = 15
+        720  ic = 15
         ilen = LENSTR(line)
         IF ( ic>ilen ) THEN
           msg = 'No keyword phrase on KEYWORD record'
           nerr = 4
           EXIT
-        ENDIF
+        END IF
         DO
           !
           !       Get the offset location of the next delimiter.
@@ -484,19 +484,19 @@ PROGRAM SLPREP
             id = ilen + 1
           ELSE
             id = ic + icom - 1
-          ENDIF
+          END IF
           nkwd = nkwd + 1
           IF ( nkwd>KMAXJ ) THEN
             msg = 'Too many keyword phrases in a routine.  Recompile code with larger KMAXJ.'
             nerr = 4
             GOTO 800
-          ENDIF
+          END IF
           kwrds(nkwd) = ' '
           IF ( id-ic>KMAXI ) THEN
             msg = 'Keyword phrase is too long'
             nerr = 4
             GOTO 800
-          ENDIF
+          END IF
           !
           !       Put keyword phrase in table and check case.  If not UPPER case,
           !       terminate.
@@ -506,7 +506,7 @@ PROGRAM SLPREP
             msg = 'Keyword phrase not in UPPER case'
             nerr = 4
             GOTO 800
-          ENDIF
+          END IF
           mxlkw = MAX(mxlkw,id-ic)
           !
           !       Is this the last keyword for this subprogram?
@@ -526,11 +526,11 @@ PROGRAM SLPREP
                 msg = 'KEYWORD section not in correct form'
                 nerr = 4
                 GOTO 800
-              ENDIF
+              END IF
               iwr = iwr + 1
               WRITE (UNIT=LU17,FMT=99001,REC=iwr) line
               GOTO 720
-            ENDIF
+            END IF
             !
             !       Check to see that there is a blank character following the
             !       delimiter after the category just processed.
@@ -539,11 +539,11 @@ PROGRAM SLPREP
               msg = 'KEYWORD section not in correct form'
               nerr = 4
               GOTO 800
-            ENDIF
+            END IF
             ic = id + 2
-          ENDIF
-        ENDDO
-      ENDIF
+          END IF
+        END DO
+      END IF
       !
       IF ( line(2:6)=='***EN' ) THEN
         !
@@ -568,12 +568,12 @@ PROGRAM SLPREP
                   msg = 'Too many keyword phrases.  Recompile code with larger MXNKWD.'
                   nerr = 2
                   GOTO 800
-                ENDIF
+                END IF
                 DO i = ntkwd - 1, ABS(ifind) + 1, -1
                   tkwd(i+1) = tkwd(i)
                   iptrr(i+1) = iptrr(i)
                   iptrl(i+1) = iptrl(i)
-                ENDDO
+                END DO
                 tkwd(ABS(ifind)+1) = kwrds(j)
                 iptrr(ABS(ifind)+1) = numrr
                 iptrl(ABS(ifind)+1) = 0
@@ -593,22 +593,22 @@ PROGRAM SLPREP
                       !
                       ientry = nextl
                       CYCLE
-                    ENDIF
+                    END IF
                     iptrl(ientry) = inext
                     EXIT
-                  ENDDO
-                ENDIF
+                  END DO
+                END IF
                 iptrl(inext) = 0
                 iptrr(inext) = numrr
                 inext = inext + 1
-              ENDIF
-            ENDDO
-          ENDIF
+              END IF
+            END DO
+          END IF
         ELSE
           msg = 'BEGIN name and END name differ'
           nerr = 5
           EXIT
-        ENDIF
+        END IF
         DO
           !
           !       Read to the next *DECK record.
@@ -617,13 +617,13 @@ PROGRAM SLPREP
           line = TRIM(ADJUSTL(line_big))
           ird = ird + 1
           IF ( IFDECK(line) ) EXIT
-        ENDDO
+        END DO
         !
         !     GOTO read.
         !
-      ENDIF
-    ENDIF
-  ENDDO
+      END IF
+    END IF
+  END DO
   !
   !     Abnormal termination.
   !
@@ -642,7 +642,7 @@ PROGRAM SLPREP
   900 CONTINUE
   DO j = 1, ntcat
     etcat(j) = CVTCAT(tcat(j))
-  ENDDO
+  END DO
   CALL SORT(etcat,ntcat,1,tcat)
   !
   !     Read in the GAMS classification file.
@@ -654,10 +654,10 @@ PROGRAM SLPREP
       msg = 'Too many lines in file '//fclass
       nerr = 6
       GOTO 800
-    ENDIF
+    END IF
     i = i + 1
     class(i) = clline
-  ENDDO
+  END DO
   1000 nclass = i
   class(i+1) = '@'
   mncl = MXNCL
@@ -667,7 +667,7 @@ PROGRAM SLPREP
     line = 'Input file completely read.'
     nerr = 7
     GOTO 800
-  ENDIF
+  END IF
   !
   !     The reason NCC+1 is being written is to call attention to
   !     the fact that an extra line is included in the KPTR array
@@ -683,7 +683,7 @@ PROGRAM SLPREP
   DO j = 1, ntkwd
     ilen = LENSTR(tkwd(j))
     WRITE (UNIT=LU19,FMT=99001) tkwd(j)(1:ilen)
-  ENDDO
+  END DO
   !
   !     We now need to compress the IPTRL and IPTRR tables and remove
   !     any unneeded cells between the original allocated cells (MXNKWD)
@@ -693,7 +693,7 @@ PROGRAM SLPREP
   IF ( ichng>0 ) THEN
     DO j = 1, ntkwd
       IF ( iptrl(j)/=0 ) iptrl(j) = iptrl(j) - ichng
-    ENDDO
+    END DO
     jj = ntkwd + 1
     DO j = MXNKWD + 1, inext - 1
       IF ( iptrl(j)/=0 ) THEN
@@ -701,11 +701,11 @@ PROGRAM SLPREP
       ELSE
         !           IPTRL(JJ)=IPTRL(J)
         iptrl(jj) = 0
-      ENDIF
+      END IF
       iptrr(jj) = iptrr(j)
       jj = jj + 1
-    ENDDO
-  ENDIF
+    END DO
+  END IF
   !
   !     Set last set of pointers to 0.
   !
@@ -713,7 +713,7 @@ PROGRAM SLPREP
   iptrr(inext-ichng) = 0
   DO j = 1, inext - ichng
     WRITE (UNIT=LU19,FMT=99002) iptrl(j), iptrr(j)
-  ENDDO
+  END DO
   !
   !     Normal termination.
   !
@@ -940,13 +940,13 @@ LOGICAL FUNCTION IFSID(Line)
       !         IF (LINE(2:ID-1) .EQ. ' ') IFSID = .TRUE.
       DO i = 2, id - 1
         IF ( Line(i:i)/=' ' ) RETURN
-      ENDDO
+      END DO
       !
       !         We have a line with *^^...^^IDENT
       !
       IFSID = .TRUE.
-    ENDIF
-  ENDIF
+    END IF
+  END IF
   RETURN
 END FUNCTION IFSID
 !** PSCAT
@@ -1228,68 +1228,68 @@ SUBROUTINE PSCAT(Ecat,Ncat,Class,Mncl,Ncc,Tclass,Iptr,Jptr,Kptr,Istmt,Stmts,Nerr
       opart5 = ' '
       opart6 = ' '
       opart7 = ' '
-    ENDIF
+    END IF
     DO
       IF ( opart1/=part1 ) THEN
         opart1 = part1
         Ncc = Ncc + 1
         Tclass(Ncc) = opart1
-      ENDIF
+      END IF
       IF ( part2/=' ' ) THEN
         IF ( opart2/=part2 ) THEN
           opart2 = part2
           Ncc = Ncc + 1
           Tclass(Ncc) = opart1//opart2
           CYCLE
-        ENDIF
+        END IF
         IF ( part3/=' ' ) THEN
           IF ( opart3/=part3 ) THEN
             opart3 = part3
             Ncc = Ncc + 1
             Tclass(Ncc) = opart1//opart2//opart3
             CYCLE
-          ENDIF
+          END IF
           IF ( part4/=' ' ) THEN
             IF ( opart4/=part4 ) THEN
               opart4 = part4
               Ncc = Ncc + 1
               Tclass(Ncc) = opart1//opart2//opart3//opart4
               CYCLE
-            ENDIF
+            END IF
             IF ( part5/=' ' ) THEN
               IF ( opart5/=part5 ) THEN
                 opart5 = part5
                 Ncc = Ncc + 1
                 Tclass(Ncc) = opart1//opart2//opart3//opart4//opart5
                 CYCLE
-              ENDIF
+              END IF
               IF ( part6/=' ' ) THEN
                 IF ( opart6/=part6 ) THEN
                   opart6 = part6
                   Ncc = Ncc + 1
                   Tclass(Ncc) = opart1//opart2//opart3//opart4//opart5//opart6
                   CYCLE
-                ENDIF
+                END IF
                 IF ( part7/=' ' ) THEN
                   IF ( opart7/=part7 ) THEN
                     opart7 = part7
                     Ncc = Ncc + 1
                     Tclass(Ncc) = opart1//opart2//opart3//opart4//opart5//&
                       opart6//opart7
-                  ENDIF
-                ENDIF
-              ENDIF
-            ENDIF
-          ENDIF
-        ENDIF
-      ENDIF
+                  END IF
+                END IF
+              END IF
+            END IF
+          END IF
+        END IF
+      END IF
       EXIT
-    ENDDO
-  ENDDO
+    END DO
+  END DO
   DO i = 1, Ncc
     Iptr(i) = 0
     Jptr(i) = 0
-  ENDDO
+  END DO
   DO j = 1, 7
     istart = 1
     DO
@@ -1305,17 +1305,17 @@ SUBROUTINE PSCAT(Ecat,Ncat,Class,Mncl,Ncc,Tclass,Iptr,Jptr,Kptr,Istmt,Stmts,Nerr
                 Iptr(i) = k
               ELSE
                 Iptr(i) = 0
-              ENDIF
+              END IF
               istart = k
               GOTO 50
-            ENDIF
-          ENDDO
-        ENDIF
-      ENDDO
+            END IF
+          END DO
+        END IF
+      END DO
       EXIT
       50 CONTINUE
-    ENDDO
-  ENDDO
+    END DO
+  END DO
   DO j = 1, 7
     DO i = 1, Ncc
       ilen = LENSTR(Tclass(i))
@@ -1323,13 +1323,13 @@ SUBROUTINE PSCAT(Ecat,Ncat,Class,Mncl,Ncc,Tclass,Iptr,Jptr,Kptr,Istmt,Stmts,Nerr
         nlen = LENSTR(Tclass(i+1))
         IF ( ilen<nlen ) THEN
           IF ( Tclass(i)(1:size(j))==Tclass(i+1)(1:size(j)) ) Jptr(i) = i + 1
-        ENDIF
-      ENDIF
-    ENDDO
-  ENDDO
+        END IF
+      END IF
+    END DO
+  END DO
   DO i = 1, Ncc
     Kptr(i) = 0
-  ENDDO
+  END DO
   !
   iclass = 1
   Istmt = 1
@@ -1342,9 +1342,9 @@ SUBROUTINE PSCAT(Ecat,Ncat,Class,Mncl,Ncc,Tclass,Iptr,Jptr,Kptr,Istmt,Stmts,Nerr
         IF ( iclass>Mncl ) THEN
           Nerr = i
           RETURN
-        ENDIF
+        END IF
         CYCLE
-      ENDIF
+      END IF
       !
       IF ( Tclass(i)==CVTCAT(Class(iclass)(1:iper-1)) ) THEN
         Kptr(i) = Istmt
@@ -1353,17 +1353,17 @@ SUBROUTINE PSCAT(Ecat,Ncat,Class,Mncl,Ncc,Tclass,Iptr,Jptr,Kptr,Istmt,Stmts,Nerr
           Istmt = Istmt + 1
           iclass = iclass + 1
           IF ( Class(iclass)(1:1)/=' ' ) GOTO 100
-        ENDDO
+        END DO
       ELSE
         iclass = iclass + 1
         IF ( iclass>Mncl ) THEN
           Nerr = i
           RETURN
-        ENDIF
-      ENDIF
-    ENDDO
+        END IF
+      END IF
+    END DO
     100 CONTINUE
-  ENDDO
+  END DO
   Kptr(Ncc+1) = Istmt
 END SUBROUTINE PSCAT
 !** SORT
@@ -1424,7 +1424,7 @@ SUBROUTINE SORT(R,N,Nr,Cr)
   ELSE
     m = m/2
     IF ( m==0 ) RETURN
-  ENDIF
+  END IF
   IF ( MOD(m,2)==0 ) m = m + 1
   k = N - m
   j = 1
@@ -1438,10 +1438,10 @@ SUBROUTINE SORT(R,N,Nr,Cr)
       it = Cr(i)
       Cr(i) = Cr(i+m)
       Cr(i+m) = it
-    ENDIF
+    END IF
     i = i - m
     IF ( i<1 ) EXIT
-  ENDDO
+  END DO
   j = j + 1
   IF ( j>k ) GOTO 100
   i = j

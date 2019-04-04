@@ -428,7 +428,7 @@ SUBROUTINE LSEI(W,Mdw,Me,Ma,Mg,N,Prgopt,X,Rnorme,Rnorml,Mode,Ws,Ip)
       'ALL OF THE VARIABLES N, ME, MA, MG MUST BE .GE. 0$$ENTERED ROUTINE WITH$$N  = '//&
       xern1//'$$ME = '//xern2//'$$MA = '//xern3//'$$MG = '//xern4,2,1)
     RETURN
-  ENDIF
+  END IF
   !
   IF ( Ip(1)>0 ) THEN
     lchk = 2*(Me+N) + MAX(Ma+Mg,N) + (Mg+2)*(N+7)
@@ -436,8 +436,8 @@ SUBROUTINE LSEI(W,Mdw,Me,Ma,Mg,N,Prgopt,X,Rnorme,Rnorml,Mode,Ws,Ip)
       WRITE (xern1,'(I8)') lchk
       CALL XERMSG('SLATEC','LSEI','INSUFFICIENT STORAGE ALLOCATED FOR WS(*), NEED LW = '//xern1,2,1)
       RETURN
-    ENDIF
-  ENDIF
+    END IF
+  END IF
   !
   IF ( Ip(2)>0 ) THEN
     lchk = Mg + 2*N + 2
@@ -445,8 +445,8 @@ SUBROUTINE LSEI(W,Mdw,Me,Ma,Mg,N,Prgopt,X,Rnorme,Rnorml,Mode,Ws,Ip)
       WRITE (xern1,'(I8)') lchk
       CALL XERMSG('SLATEC','LSEI','INSUFFICIENT STORAGE ALLOCATED FOR IP(*), NEED LIP = '//xern1,2,1)
       RETURN
-    ENDIF
-  ENDIF
+    END IF
+  END IF
   !
   !     Compute number of possible right multiplying Householder
   !     transformations.
@@ -457,12 +457,12 @@ SUBROUTINE LSEI(W,Mdw,Me,Ma,Mg,N,Prgopt,X,Rnorme,Rnorml,Mode,Ws,Ip)
     Rnorme = 0
     Rnorml = 0
     RETURN
-  ENDIF
+  END IF
   !
   IF ( Mdw<m ) THEN
     CALL XERMSG('SLATEC','LSEI','MDW.LT.ME+MA+MG IS AN ERROR',2,1)
     RETURN
-  ENDIF
+  END IF
   !
   np1 = N + 1
   kranke = MIN(Me,N)
@@ -494,7 +494,7 @@ SUBROUTINE LSEI(W,Mdw,Me,Ma,Mg,N,Prgopt,X,Rnorme,Rnorml,Mode,Ws,Ip)
   IF ( link==0.OR.link>nlink ) THEN
     CALL XERMSG('SLATEC','LSEI','THE OPTION VECTOR IS UNDEFINED',2,1)
     RETURN
-  ENDIF
+  END IF
   DO
     !
     IF ( link>1 ) THEN
@@ -503,7 +503,7 @@ SUBROUTINE LSEI(W,Mdw,Me,Ma,Mg,N,Prgopt,X,Rnorme,Rnorml,Mode,Ws,Ip)
         CALL XERMSG('SLATEC','LSEI',&
           'THE LINKS IN THE OPTION VECTOR ARE CYCLING.',2,1)
         RETURN
-      ENDIF
+      END IF
       !
       key = INT( Prgopt(last+1) )
       IF ( key==1 ) THEN
@@ -513,33 +513,33 @@ SUBROUTINE LSEI(W,Mdw,Me,Ma,Mg,N,Prgopt,X,Rnorme,Rnorml,Mode,Ws,Ip)
           t = SNRM2(m,W(1,j),1)
           IF ( t/=0.E0 ) t = 1.E0/t
           Ws(j+n1-1) = t
-        ENDDO
+        END DO
       ELSEIF ( key==3 ) THEN
         CALL SCOPY(N,Prgopt(last+2),1,Ws(n1),1)
       ELSEIF ( key==4 ) THEN
         tau = MAX(srelpr,Prgopt(last+2))
-      ENDIF
+      END IF
       !
       next = INT( Prgopt(link) )
       IF ( next<=0.OR.next>nlink ) THEN
         CALL XERMSG('SLATEC','LSEI','THE OPTION VECTOR IS UNDEFINED',2,1)
         RETURN
-      ENDIF
+      END IF
       !
       last = link
       link = next
       CYCLE
-    ENDIF
+    END IF
     !
     DO j = 1, N
       CALL SSCAL(m,Ws(n1+j-1),W(1,j),1)
-    ENDDO
+    END DO
     !
     IF ( cov.AND.Mdw<N ) THEN
       CALL XERMSG('SLATEC','LSEI',&
         'MDW .LT. N WHEN COV MATRIX NEEDED, IS AN ERROR',2,1)
       RETURN
-    ENDIF
+    END IF
     !
     !     Problem definition and option vector OK.
     !
@@ -550,7 +550,7 @@ SUBROUTINE LSEI(W,Mdw,Me,Ma,Mg,N,Prgopt,X,Rnorme,Rnorml,Mode,Ws,Ip)
     enorm = 0.E0
     DO j = 1, N
       enorm = MAX(enorm,SASUM(Me,W(1,j),1))
-    ENDDO
+    END DO
     !
     fnorm = SASUM(Me,W(1,np1),1)
     snmax = 0.E0
@@ -570,8 +570,8 @@ SUBROUTINE LSEI(W,Mdw,Me,Ma,Mg,N,Prgopt,X,Rnorme,Rnorml,Mode,Ws,Ip)
           snmax = sn
           rnmax = rn
           imax = k
-        ENDIF
-      ENDDO
+        END IF
+      END DO
       !
       !        Interchange rows if necessary.
       !
@@ -584,10 +584,10 @@ SUBROUTINE LSEI(W,Mdw,Me,Ma,Mg,N,Prgopt,X,Rnorme,Rnorml,Mode,Ws,Ip)
       ELSE
         kranke = i - 1
         EXIT
-      ENDIF
-    ENDDO
+      END IF
+    END DO
     EXIT
-  ENDDO
+  END DO
   !
   !     Save diagonal terms of lower trapezoidal matrix.
   !
@@ -606,15 +606,15 @@ SUBROUTINE LSEI(W,Mdw,Me,Ma,Mg,N,Prgopt,X,Rnorme,Rnorml,Mode,Ws,Ip)
       !           Apply to rt side vector.
       !
       CALL H12(2,k,kranke+1,Me,W(1,k),1,up,W(1,np1),1,1,1)
-    ENDDO
-  ENDIF
+    END DO
+  END IF
   !
   !     Solve for variables 1,...,KRANKE in new coordinates.
   !
   CALL SCOPY(kranke,W(1,np1),1,X,1)
   DO i = 1, kranke
     X(i) = (X(i)-SDOT(i-1,W(i,1),Mdw,X,1))/W(i,i)
-  ENDDO
+  END DO
   !
   !     Compute residuals for reduced problem.
   !
@@ -626,7 +626,7 @@ SUBROUTINE LSEI(W,Mdw,Me,Ma,Mg,N,Prgopt,X,Rnorme,Rnorml,Mode,Ws,Ip)
     rn = SDOT(N-kranke,W(i,kranke+1),Mdw,W(i,kranke+1),Mdw)
     IF ( rn<=sn*tau**2.AND.kranke<N )&
       CALL SCOPY(N-kranke,0.E0,0,W(i,kranke+1),Mdw)
-  ENDDO
+  END DO
   !
   !     Compute equality constraint equations residual length.
   !
@@ -637,8 +637,8 @@ SUBROUTINE LSEI(W,Mdw,Me,Ma,Mg,N,Prgopt,X,Rnorme,Rnorml,Mode,Ws,Ip)
   IF ( kranke<Me ) THEN
     DO j = 1, np1
       CALL SCOPY(m-Me,W(Me+1,j),1,W(kranke+1,j),1)
-    ENDDO
-  ENDIF
+    END DO
+  END IF
   !
   !     Compute solution of reduced problem.
   !
@@ -665,10 +665,10 @@ SUBROUTINE LSEI(W,Mdw,Me,Ma,Mg,N,Prgopt,X,Rnorme,Rnorml,Mode,Ws,Ip)
         IF ( W(i,np1)>tau*size ) THEN
           Mode = Mode + 2
           GOTO 100
-        ENDIF
-      ENDDO
-    ENDIF
-  ENDIF
+        END IF
+      END DO
+    END IF
+  END IF
   !
   !     Replace diagonal terms of lower trapezoidal matrix.
   !
@@ -679,7 +679,7 @@ SUBROUTINE LSEI(W,Mdw,Me,Ma,Mg,N,Prgopt,X,Rnorme,Rnorml,Mode,Ws,Ip)
     !
     DO i = kranke, 1, -1
       CALL H12(2,i,i+1,N,W(i,1),Mdw,Ws(i),X,1,1,1)
-    ENDDO
+    END DO
     !
     !        Compute covariance matrix of equality constrained problem.
     !
@@ -690,7 +690,7 @@ SUBROUTINE LSEI(W,Mdw,Me,Ma,Mg,N,Prgopt,X,Rnorme,Rnorml,Mode,Ws,Ip)
         jp1 = j + 1
         DO i = jp1, N
           W(i,j) = rb*SDOT(N-j,W(i,jp1),Mdw,W(j,jp1),Mdw)
-        ENDDO
+        END DO
         !
         gam = 0.5E0*rb*SDOT(N-j,W(jp1,j),1,W(j,jp1),Mdw)
         CALL SAXPY(N-j,gam,W(j,jp1),Mdw,W(jp1,j),1)
@@ -698,18 +698,18 @@ SUBROUTINE LSEI(W,Mdw,Me,Ma,Mg,N,Prgopt,X,Rnorme,Rnorml,Mode,Ws,Ip)
           DO k = i, N
             W(i,k) = W(i,k) + W(j,i)*W(k,j) + W(i,j)*W(j,k)
             W(k,i) = W(i,k)
-          ENDDO
-        ENDDO
+          END DO
+        END DO
         uj = Ws(j)
         vj = gam*uj
         W(j,j) = uj*vj + uj*vj
         DO i = jp1, N
           W(j,i) = uj*W(i,j) + vj*W(j,i)
-        ENDDO
+        END DO
         CALL SCOPY(N-j,W(j,jp1),Mdw,W(jp1,j),1)
-      ENDDO
-    ENDIF
-  ENDIF
+      END DO
+    END IF
+  END IF
   !
   !     Apply the scaling to the covariance matrix.
   !
@@ -717,8 +717,8 @@ SUBROUTINE LSEI(W,Mdw,Me,Ma,Mg,N,Prgopt,X,Rnorme,Rnorml,Mode,Ws,Ip)
     DO i = 1, N
       CALL SSCAL(N,Ws(i+n1-1),W(i,1),Mdw)
       CALL SSCAL(N,Ws(i+n1-1),W(1,i),1)
-    ENDDO
-  ENDIF
+    END DO
+  END IF
   !
   !     Rescale solution vector.
   !
@@ -726,8 +726,8 @@ SUBROUTINE LSEI(W,Mdw,Me,Ma,Mg,N,Prgopt,X,Rnorme,Rnorml,Mode,Ws,Ip)
   IF ( Mode<=1 ) THEN
     DO j = 1, N
       X(j) = X(j)*Ws(n1+j-1)
-    ENDDO
-  ENDIF
+    END DO
+  END IF
   !
   Ip(1) = kranke
   Ip(3) = Ip(3) + 2*kranke + N

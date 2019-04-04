@@ -49,7 +49,7 @@ COMPLEX FUNCTION CLNGAM(Zin)
     bound = 0.1171*n*(0.1*R1MACH(3))**(-1./(2*n-1))
     dxrel = SQRT(R1MACH(4))
     first = .FALSE.
-  ENDIF
+  END IF
   !
   z = Zin
   x = REAL(Zin)
@@ -67,7 +67,7 @@ COMPLEX FUNCTION CLNGAM(Zin)
         IF ( x<(-0.5).AND.ABS(y)<=dxrel ) THEN
           IF ( ABS((z-AINT(x-0.5))/x)<dxrel ) CALL XERMSG('SLATEC','CLNGAM',&
             'ANSWER LT HALF PRECISION BECAUSE Z TOO NEAR NEGATIVE INTEGER',1,1)
-        ENDIF
+        END IF
         !
         n = INT( SQRT(bound**2-y**2) - x ) + 1
         argsum = 0.0
@@ -76,7 +76,7 @@ COMPLEX FUNCTION CLNGAM(Zin)
           argsum = argsum + CARG(z)
           corr = z*corr
           z = 1.0 + z
-        ENDDO
+        END DO
         !
         IF ( REAL(corr)==0.0.AND.AIMAG(corr)==0.0 )&
           CALL XERMSG('SLATEC','CLNGAM','Z IS A NEGATIVE INTEGER',3,2)
@@ -95,9 +95,9 @@ COMPLEX FUNCTION CLNGAM(Zin)
           + (z-0.5)*LOG(1.0-z) - z - C9LGMC(1.0-z)
         IF ( y>0.0 ) CLNGAM = CONJG(CLNGAM)
         RETURN
-      ENDIF
-    ENDIF
-  ENDIF
+      END IF
+    END IF
+  END IF
   !
   ! USE STIRLING-S APPROXIMATION FOR LARGE Z.
   !

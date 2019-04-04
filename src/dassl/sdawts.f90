@@ -28,7 +28,7 @@ SUBROUTINE SDAWTS(Neq,Iwt,Rtol,Atol,Y,Wt,Rpar,Ipar)
   !   901019  Merged changes made by C. Ulrich with SLATEC 4.0 format.
   !   901026  Added explicit declarations for all variables and minor
   !           cosmetic changes to prologue.  (FNF)
-  
+
   !
   INTEGER Neq, Iwt, Ipar(*)
   REAL Rtol(*), Atol(*), Y(*), Wt(*), Rpar(*)
@@ -43,8 +43,8 @@ SUBROUTINE SDAWTS(Neq,Iwt,Rtol,Atol,Y,Wt,Rpar,Ipar)
     IF ( Iwt/=0 ) THEN
       rtoli = Rtol(i)
       atoli = Atol(i)
-    ENDIF
+    END IF
     Wt(i) = rtoli*ABS(Y(i)) + atoli
-  ENDDO
+  END DO
   !-----------END OF SUBROUTINE SDAWTS------------------------------------
 END SUBROUTINE SDAWTS

@@ -132,11 +132,11 @@ SUBROUTINE SSPR2(Uplo,N,Alpha,X,Incx,Y,Incy,Ap)
     info = 5
   ELSEIF ( Incy==0 ) THEN
     info = 7
-  ENDIF
+  END IF
   IF ( info/=0 ) THEN
     CALL XERBLA('SSPR2 ',info)
     RETURN
-  ENDIF
+  END IF
   !
   !     Quick return if possible.
   !
@@ -150,15 +150,15 @@ SUBROUTINE SSPR2(Uplo,N,Alpha,X,Incx,Y,Incy,Ap)
       kx = 1
     ELSE
       kx = 1 - (N-1)*Incx
-    ENDIF
+    END IF
     IF ( Incy>0 ) THEN
       ky = 1
     ELSE
       ky = 1 - (N-1)*Incy
-    ENDIF
+    END IF
     jx = kx
     jy = ky
-  ENDIF
+  END IF
   !
   !     Start the operations. In this version the elements of the array AP
   !     are accessed sequentially with one pass through AP.
@@ -177,10 +177,10 @@ SUBROUTINE SSPR2(Uplo,N,Alpha,X,Incx,Y,Incy,Ap)
           DO i = 1, j
             Ap(k) = Ap(k) + X(i)*temp1 + Y(i)*temp2
             k = k + 1
-          ENDDO
-        ENDIF
+          END DO
+        END IF
         kk = kk + j
-      ENDDO
+      END DO
     ELSE
       DO j = 1, N
         IF ( (X(jx)/=ZERO).OR.(Y(jy)/=ZERO) ) THEN
@@ -192,13 +192,13 @@ SUBROUTINE SSPR2(Uplo,N,Alpha,X,Incx,Y,Incy,Ap)
             Ap(k) = Ap(k) + X(ix)*temp1 + Y(iy)*temp2
             ix = ix + Incx
             iy = iy + Incy
-          ENDDO
-        ENDIF
+          END DO
+        END IF
         jx = jx + Incx
         jy = jy + Incy
         kk = kk + j
-      ENDDO
-    ENDIF
+      END DO
+    END IF
     !
     !        Form  A  when lower triangle is stored in AP.
     !
@@ -211,10 +211,10 @@ SUBROUTINE SSPR2(Uplo,N,Alpha,X,Incx,Y,Incy,Ap)
         DO i = j, N
           Ap(k) = Ap(k) + X(i)*temp1 + Y(i)*temp2
           k = k + 1
-        ENDDO
-      ENDIF
+        END DO
+      END IF
       kk = kk + N - j + 1
-    ENDDO
+    END DO
   ELSE
     DO j = 1, N
       IF ( (X(jx)/=ZERO).OR.(Y(jy)/=ZERO) ) THEN
@@ -226,13 +226,13 @@ SUBROUTINE SSPR2(Uplo,N,Alpha,X,Incx,Y,Incy,Ap)
           Ap(k) = Ap(k) + X(ix)*temp1 + Y(iy)*temp2
           ix = ix + Incx
           iy = iy + Incy
-        ENDDO
-      ENDIF
+        END DO
+      END IF
       jx = jx + Incx
       jy = jy + Incy
       kk = kk + N - j + 1
-    ENDDO
-  ENDIF
+    END DO
+  END IF
   !
   !
   !     End of SSPR2 .

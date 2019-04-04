@@ -64,7 +64,7 @@ REAL(8) FUNCTION DBESK0(X)
     xmaxt = -LOG(D1MACH(1))
     xmax = xmaxt - 0.5D0*xmaxt*LOG(xmaxt)/(xmaxt+0.5D0)
     first = .FALSE.
-  ENDIF
+  END IF
   !
   IF ( X<=0.D0 ) CALL XERMSG('SLATEC','DBESK0','X IS ZERO OR NEGATIVE',2,2)
   IF ( X>2.0D0 ) THEN
@@ -75,7 +75,7 @@ REAL(8) FUNCTION DBESK0(X)
     !
     DBESK0 = EXP(-X)*DBSK0E(X)
     RETURN
-  ENDIF
+  END IF
   !
   y = 0.D0
   IF ( X>xsml ) y = X*X

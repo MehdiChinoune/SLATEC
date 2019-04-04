@@ -160,7 +160,7 @@ SUBROUTINE CBESY(Z,Fnu,Kode,N,Cy,Nz,Cwrk,Ierr)
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
   !   920128  Category corrected.  (WRB)
   !   920811  Prologue revised.  (DWL)
-  
+
   !
   INTEGER i, Ierr, k, Kode, k1, k2, N, Nz, nz1, nz2, I1MACH
   COMPLEX Cwrk(N), Cy(N), c1, c2, ex, hci, Z, zu, zv
@@ -208,7 +208,7 @@ SUBROUTINE CBESY(Z,Fnu,Kode,N,Cy,Nz,Cwrk,Ierr)
         ELSE
           c1 = ex*CMPLX(ey,0.0E0)
           c2 = CONJG(ex)
-        ENDIF
+        END IF
         Nz = 0
         rtol = 1.0E0/tol
         ascle = R1MACH(1)*rtol*1.0E+3
@@ -221,7 +221,7 @@ SUBROUTINE CBESY(Z,Fnu,Kode,N,Cy,Nz,Cwrk,Ierr)
           IF ( MAX(ABS(aa),ABS(bb))<=ascle ) THEN
             zv = zv*CMPLX(rtol,0.0E0)
             atol = tol
-          ENDIF
+          END IF
           zv = zv*c2*hci
           zv = zv*CMPLX(atol,0.0E0)
           zu = Cy(i)
@@ -231,19 +231,19 @@ SUBROUTINE CBESY(Z,Fnu,Kode,N,Cy,Nz,Cwrk,Ierr)
           IF ( MAX(ABS(aa),ABS(bb))<=ascle ) THEN
             zu = zu*CMPLX(rtol,0.0E0)
             atol = tol
-          ENDIF
+          END IF
           zu = zu*c1*hci
           zu = zu*CMPLX(atol,0.0E0)
           Cy(i) = zv - zu
           IF ( Cy(i)==CMPLX(0.0E0,0.0E0).AND.ey==0.0E0 ) Nz = Nz + 1
-        ENDDO
+        END DO
         RETURN
       ELSE
         DO i = 1, N
           Cy(i) = hci*(Cwrk(i)-Cy(i))
-        ENDDO
+        END DO
         RETURN
-      ENDIF
-    ENDIF
-  ENDIF
+      END IF
+    END IF
+  END IF
 END SUBROUTINE CBESY

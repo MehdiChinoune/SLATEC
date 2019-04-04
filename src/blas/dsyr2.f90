@@ -139,11 +139,11 @@ SUBROUTINE DSYR2(Uplo,N,Alpha,X,Incx,Y,Incy,A,Lda)
     info = 7
   ELSEIF ( Lda<MAX(1,N) ) THEN
     info = 9
-  ENDIF
+  END IF
   IF ( info/=0 ) THEN
     CALL XERBLA('DSYR2 ',info)
     RETURN
-  ENDIF
+  END IF
   !
   !     Quick return if possible.
   !
@@ -157,15 +157,15 @@ SUBROUTINE DSYR2(Uplo,N,Alpha,X,Incx,Y,Incy,A,Lda)
       kx = 1
     ELSE
       kx = 1 - (N-1)*Incx
-    ENDIF
+    END IF
     IF ( Incy>0 ) THEN
       ky = 1
     ELSE
       ky = 1 - (N-1)*Incy
-    ENDIF
+    END IF
     jx = kx
     jy = ky
-  ENDIF
+  END IF
   !
   !     Start the operations. In this version the elements of A are
   !     accessed sequentially with one pass through the triangular part
@@ -182,9 +182,9 @@ SUBROUTINE DSYR2(Uplo,N,Alpha,X,Incx,Y,Incy,A,Lda)
           temp2 = Alpha*X(j)
           DO i = 1, j
             A(i,j) = A(i,j) + X(i)*temp1 + Y(i)*temp2
-          ENDDO
-        ENDIF
-      ENDDO
+          END DO
+        END IF
+      END DO
     ELSE
       DO j = 1, N
         IF ( (X(jx)/=ZERO).OR.(Y(jy)/=ZERO) ) THEN
@@ -196,12 +196,12 @@ SUBROUTINE DSYR2(Uplo,N,Alpha,X,Incx,Y,Incy,A,Lda)
             A(i,j) = A(i,j) + X(ix)*temp1 + Y(iy)*temp2
             ix = ix + Incx
             iy = iy + Incy
-          ENDDO
-        ENDIF
+          END DO
+        END IF
         jx = jx + Incx
         jy = jy + Incy
-      ENDDO
-    ENDIF
+      END DO
+    END IF
     !
     !        Form  A  when A is stored in the lower triangle.
     !
@@ -212,9 +212,9 @@ SUBROUTINE DSYR2(Uplo,N,Alpha,X,Incx,Y,Incy,A,Lda)
         temp2 = Alpha*X(j)
         DO i = j, N
           A(i,j) = A(i,j) + X(i)*temp1 + Y(i)*temp2
-        ENDDO
-      ENDIF
-    ENDDO
+        END DO
+      END IF
+    END DO
   ELSE
     DO j = 1, N
       IF ( (X(jx)/=ZERO).OR.(Y(jy)/=ZERO) ) THEN
@@ -226,12 +226,12 @@ SUBROUTINE DSYR2(Uplo,N,Alpha,X,Incx,Y,Incy,A,Lda)
           A(i,j) = A(i,j) + X(ix)*temp1 + Y(iy)*temp2
           ix = ix + Incx
           iy = iy + Incy
-        ENDDO
-      ENDIF
+        END DO
+      END IF
       jx = jx + Incx
       jy = jy + Incy
-    ENDDO
-  ENDIF
+    END DO
+  END IF
   !
   !
   !     End of DSYR2 .

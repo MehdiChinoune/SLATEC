@@ -62,7 +62,7 @@ SUBROUTINE SPOFA(A,Lda,N,Info)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   INTEGER Lda, N, Info
   REAL A(Lda,*)
   !
@@ -80,12 +80,12 @@ SUBROUTINE SPOFA(A,Lda,N,Info)
         t = t/A(k,k)
         A(k,j) = t
         s = s + t*t
-      ENDDO
-    ENDIF
+      END DO
+    END IF
     s = A(j,j) - s
     IF ( s<=0.0E0 ) RETURN
     A(j,j) = SQRT(s)
-  ENDDO
+  END DO
   Info = 0
   RETURN
 END SUBROUTINE SPOFA

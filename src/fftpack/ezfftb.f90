@@ -109,7 +109,7 @@ SUBROUTINE EZFFTB(N,R,Azero,A,B,Wsave)
   !   881128  Modified by Dick Valent to meet prologue standards.
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   REAL A(*), Azero, B(*), R(*), Wsave(*)
   INTEGER i, N, ns2
   !* FIRST EXECUTABLE STATEMENT  EZFFTB
@@ -125,9 +125,9 @@ SUBROUTINE EZFFTB(N,R,Azero,A,B,Wsave)
     DO i = 1, ns2
       R(2*i) = .5*A(i)
       R(2*i+1) = -.5*B(i)
-    ENDDO
+    END DO
     R(1) = Azero
     IF ( MOD(N,2)==0 ) R(N) = A(ns2+1)
     CALL RFFTB(N,R,Wsave(N+1))
-  ENDIF
+  END IF
 END SUBROUTINE EZFFTB

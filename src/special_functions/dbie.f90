@@ -202,7 +202,7 @@ REAL(8) FUNCTION DBIE(X)
     x32sml = 1.3104D0*x3sml**2
     xbig = D1MACH(2)**0.6666D0
     first = .FALSE.
-  ENDIF
+  END IF
   !
   IF ( X<(-1.0D0) ) THEN
     CALL D9AIMP(X,xm,theta)
@@ -230,7 +230,7 @@ REAL(8) FUNCTION DBIE(X)
     IF ( X<xbig ) z = 16.D0/(X*sqrtx) - 1.0D0
     DBIE = (0.625D0+DCSEVL(z,bip2cs,nbip2))/SQRT(sqrtx)
     RETURN
-  ENDIF
+  END IF
   sqrtx = SQRT(X)
   z = atr/(X*sqrtx) + btr
   DBIE = (0.625D0+DCSEVL(z,bip1cs,nbip1))/SQRT(sqrtx)

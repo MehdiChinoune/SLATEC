@@ -27,7 +27,7 @@ SUBROUTINE CBUNI(Z,Fnu,Kode,N,Y,Nz,Nui,Nlast,Fnul,Tol,Elim,Alim)
   !* REVISION HISTORY  (YYMMDD)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
-  
+
   INTEGER i, iflag, iform, k, Kode, N, nl, Nlast, Nui, nw, Nz
   COMPLEX cscl, cscr, cy(2), rz, st, s1, s2, Y(N), Z
   REAL Alim, ax, ay, dfnu, Elim, Fnu, fnui, Fnul, gnu, Tol, xx, &
@@ -54,7 +54,7 @@ SUBROUTINE CBUNI(Z,Fnu,Kode,N,Y,Nz,Nui,Nlast,Fnul,Tol,Elim,Alim)
       !     -PI/3.LE.ARG(Z).LE.PI/3
       !-----------------------------------------------------------------------
       CALL CUNI1(Z,Fnu,Kode,N,Y,nw,Nlast,Fnul,Tol,Elim,Alim)
-    ENDIF
+    END IF
     IF ( nw>=0 ) GOTO 100
   ELSE
     fnui = Nui
@@ -73,7 +73,7 @@ SUBROUTINE CBUNI(Z,Fnu,Kode,N,Y,Nz,Nui,Nlast,Fnul,Tol,Elim,Alim)
       !     -PI/3.LE.ARG(Z).LE.PI/3
       !-----------------------------------------------------------------------
       CALL CUNI1(Z,gnu,Kode,2,cy,nw,Nlast,Fnul,Tol,Elim,Alim)
-    ENDIF
+    END IF
     IF ( nw>=0 ) THEN
       IF ( nw/=0 ) THEN
         Nlast = N
@@ -100,7 +100,7 @@ SUBROUTINE CBUNI(Z,Fnu,Kode,N,Y,Nz,Nui,Nlast,Fnul,Tol,Elim,Alim)
           ascle = bry(3)
           ax = Tol
           cscl = CMPLX(ax,0.0E0)
-        ENDIF
+        END IF
         ay = 1.0E0/ax
         cscr = CMPLX(ay,0.0E0)
         s1 = cy(2)*cscl
@@ -129,9 +129,9 @@ SUBROUTINE CBUNI(Z,Fnu,Kode,N,Y,Nz,Nui,Nlast,Fnul,Tol,Elim,Alim)
               cscr = CMPLX(ay,0.0E0)
               s1 = s1*cscl
               s2 = s2*cscl
-            ENDIF
-          ENDIF
-        ENDDO
+            END IF
+          END IF
+        END DO
         Y(N) = s2*cscr
         IF ( N==1 ) RETURN
         nl = N - 1
@@ -162,13 +162,13 @@ SUBROUTINE CBUNI(Z,Fnu,Kode,N,Y,Nz,Nui,Nlast,Fnul,Tol,Elim,Alim)
               cscr = CMPLX(ay,0.0E0)
               s1 = s1*cscl
               s2 = s2*cscl
-            ENDIF
-          ENDIF
-        ENDDO
+            END IF
+          END IF
+        END DO
         RETURN
-      ENDIF
-    ENDIF
-  ENDIF
+      END IF
+    END IF
+  END IF
   Nz = -1
   IF ( nw==(-2) ) Nz = -2
   RETURN

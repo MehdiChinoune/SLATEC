@@ -128,7 +128,7 @@ SUBROUTINE QC25C(F,A,B,C,Result,Abserr,Krul,Neval)
       isym = 26 - i
       fval(i) = F(u+centr)
       fval(isym) = F(centr-u)
-    ENDDO
+    END DO
     !
     !           COMPUTE THE CHEBYSHEV SERIES EXPANSION.
     !
@@ -150,7 +150,7 @@ SUBROUTINE QC25C(F,A,B,C,Result,Abserr,Krul,Neval)
       res24 = res24 + cheb24(k)*amom2
       amom0 = amom1
       amom1 = amom2
-    ENDDO
+    END DO
     DO k = 14, 25
       amom2 = 0.2E+01*cc*amom1 - amom0
       ak22 = (k-2)*(k-2)
@@ -158,7 +158,7 @@ SUBROUTINE QC25C(F,A,B,C,Result,Abserr,Krul,Neval)
       res24 = res24 + cheb24(k)*amom2
       amom0 = amom1
       amom1 = amom2
-    ENDDO
+    END DO
     Result = res24
     Abserr = ABS(res24-res12)
   ELSE
@@ -169,5 +169,5 @@ SUBROUTINE QC25C(F,A,B,C,Result,Abserr,Krul,Neval)
     CALL QK15W(F,QWGTC,C,p2,p3,p4,kp,A,B,Result,Abserr,resabs,resasc)
     Neval = 15
     IF ( resasc==Abserr ) Krul = Krul + 1
-  ENDIF
+  END IF
 END SUBROUTINE QC25C

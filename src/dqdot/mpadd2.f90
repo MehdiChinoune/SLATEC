@@ -75,7 +75,7 @@ SUBROUTINE MPADD2(X,Y,Z,Y1,Trunc)
         DO j = 1, T
           IF ( X(j+2)<Y(j+2) ) GOTO 200
           IF ( X(j+2)/=Y(j+2) ) GOTO 400
-        ENDDO
+        END DO
         ! RESULT IS ZERO
         Z(1) = 0
         RETURN
@@ -83,7 +83,7 @@ SUBROUTINE MPADD2(X,Y,Z,Y1,Trunc)
         ! ABS(X) .GT. ABS(Y)
         IF ( med<=T ) GOTO 400
         GOTO 100
-      ENDIF
+      END IF
     ELSE
       CALL MPCHK(1,4)
       WRITE (LUN,99001)
@@ -92,8 +92,8 @@ SUBROUTINE MPADD2(X,Y,Z,Y1,Trunc)
       CALL MPERR
       Z(1) = 0
       RETURN
-    ENDIF
-  ENDIF
+    END IF
+  END IF
   CALL MPSTR(Y,Z)
   Z(1) = Y1(1)
   RETURN

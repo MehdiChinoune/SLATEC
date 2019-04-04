@@ -80,7 +80,7 @@ REAL FUNCTION ENORM(N,X)
       ELSE
         s3 = one + s3*(x3max/xabs)**2
         x3max = xabs
-      ENDIF
+      END IF
       !
       !              SUM FOR LARGE COMPONENTS.
       !
@@ -89,8 +89,8 @@ REAL FUNCTION ENORM(N,X)
     ELSE
       s1 = one + s1*(x1max/xabs)**2
       x1max = xabs
-    ENDIF
-  ENDDO
+    END IF
+  END DO
   !
   !     CALCULATION OF NORM.
   !
@@ -101,7 +101,7 @@ REAL FUNCTION ENORM(N,X)
   ELSE
     IF ( s2>=x3max ) ENORM = SQRT(s2*(one+(x3max/s2)*(x3max*s3)))
     IF ( s2<x3max ) ENORM = SQRT(x3max*((s2/x3max)+(x3max*s3)))
-  ENDIF
+  END IF
   !
   !     LAST CARD OF FUNCTION ENORM.
   !

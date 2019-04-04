@@ -73,26 +73,26 @@ CONTAINS
                     IF ( Kprint>=2 ) WRITE (Lun,99002)
                     99002 FORMAT (8X,'X',13X,'V(1)',11X,'Y(K)',9X,'REL ER','R',5X,&
                       'KODE',3X,'N',4X,'M',4X,'K')
-                  ENDIF
+                  END IF
                   iflg = iflg + 1
                   IF ( Kprint>=2 ) WRITE (Lun,99003) x, v(1), y(k), er, &
                     kode, n, m, k
                   99003 FORMAT (4E15.6,4I5)
                   IF ( iflg>200 ) GOTO 300
-                ENDIF
-              ENDDO
-            ENDIF
+                END IF
+              END DO
+            END IF
             aix = 2*ix - 3
             xinc = MAX(1.0E0,aix)
             x = x + xinc
-          ENDDO
+          END DO
           mdel = MAX(1,mm-1)
           m = m + mdel
-        ENDDO
+        END DO
         ndel = MAX(1,2*n-2)
         n = n + ndel
-      ENDDO
-    ENDDO
+      END DO
+    END DO
     !-----------------------------------------------------------------------
     !     TEST UNDERFLOW
     !-----------------------------------------------------------------------
@@ -105,12 +105,12 @@ CONTAINS
     IF ( nz==m ) THEN
       DO i = 1, m
         IF ( y(i)/=0.0E0 ) GOTO 100
-      ENDDO
+      END DO
     ELSE
       IF ( Kprint>=2 ) WRITE (Lun,99004)
       99004 FORMAT (//' NZ IN UNDERFLOW TEST IS NOT 1'//)
       iflg = iflg + 1
-    ENDIF
+    END IF
     GOTO 200
     100 CONTINUE
     IFlg = iflg + 1
@@ -120,7 +120,7 @@ CONTAINS
     IF ( iflg==0.AND.Kprint>=3 ) THEN
       WRITE (Lun,99006)
       99006 FORMAT (//' QUICK CHECKS OK'//)
-    ENDIF
+    END IF
     Ipass = 0
     IF ( iflg==0 ) Ipass = 1
     RETURN
@@ -199,16 +199,16 @@ CONTAINS
           IF ( er>tol ) THEN
             IF ( iflg==0 ) THEN
               IF ( Kprint>=2 ) WRITE (Lun,99004)
-            ENDIF
+            END IF
             iflg = iflg + 1
             IF ( Kprint>=2 ) WRITE (Lun,99005) x, psi1(1), psi2(i), er, kode, n
             IF ( iflg>200 ) GOTO 100
-          ENDIF
+          END IF
           s = s + 1.0E0/x
           x = x + 1.0E0
-        ENDDO
-      ENDDO
-    ENDDO
+        END DO
+      END DO
+    END DO
     !-----------------------------------------------------------------------
     !     CHECK SMALL X.LT.UNIT ROUNDOFF
     !-----------------------------------------------------------------------
@@ -221,10 +221,10 @@ CONTAINS
     IF ( er>tol ) THEN
       IF ( iflg==0 ) THEN
         IF ( Kprint>=2 ) WRITE (Lun,99004)
-      ENDIF
+      END IF
       iflg = iflg + 1
       IF ( Kprint>=2 ) WRITE (Lun,99005) x, psi1(1), psi2(1), er, kode, n
-    ENDIF
+    END IF
     !-----------------------------------------------------------------------
     !     CONSISTENCY TESTS FOR N.GE.0
     !-----------------------------------------------------------------------
@@ -243,19 +243,19 @@ CONTAINS
               IF ( er>=tol ) THEN
                 IF ( iflg==0 ) THEN
                   IF ( Kprint>=2 ) WRITE (Lun,99004)
-                ENDIF
+                END IF
                 iflg = iflg + 1
                 IF ( Kprint>=2 ) WRITE (Lun,99005) x, psi1(1), psi2(i), er, kode, nm
-              ENDIF
-            ENDDO
-          ENDDO
-        ENDDO
-      ENDDO
-    ENDDO
+              END IF
+            END DO
+          END DO
+        END DO
+      END DO
+    END DO
     IF ( iflg==0.AND.Kprint>=3 ) THEN
       WRITE (Lun,99002)
       99002 FORMAT (//' QUICK CHECKS OK'//)
-    ENDIF
+    END IF
     Ipass = 0
     IF ( iflg==0 ) Ipass = 1
     RETURN
@@ -338,7 +338,7 @@ PROGRAM TEST07
     CALL XSETF(0)
   ELSE
     CALL XSETF(1)
-  ENDIF
+  END IF
   !
   !     Test single precision special function routines
   !
@@ -356,6 +356,6 @@ PROGRAM TEST07
     WRITE (lun,99002) nfail
     99002 FORMAT (/' ************* WARNING -- ',I5,&
       ' TEST(S) FAILED IN PROGRAM TEST07  *************')
-  ENDIF
+  END IF
   STOP
 END PROGRAM TEST07

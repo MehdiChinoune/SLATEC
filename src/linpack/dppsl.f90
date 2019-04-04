@@ -80,12 +80,12 @@ SUBROUTINE DPPSL(Ap,N,B)
     t = DDOT(k-1,Ap(kk+1),1,B(1),1)
     kk = kk + k
     B(k) = (B(k)-t)/Ap(kk)
-  ENDDO
+  END DO
   DO kb = 1, N
     k = N + 1 - kb
     B(k) = B(k)/Ap(kk)
     kk = kk - k
     t = -B(k)
     CALL DAXPY(k-1,t,Ap(kk+1),1,B(1),1)
-  ENDDO
+  END DO
 END SUBROUTINE DPPSL

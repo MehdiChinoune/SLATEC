@@ -65,6 +65,6 @@ SUBROUTINE RPZERO(N,A,R,T,Iflg,S)
   n1 = N + 1
   DO i = 1, n1
     T(i) = CMPLX(A(i),0.0)
-  ENDDO
+  END DO
   CALL CPZERO(N,T,R,T(N+2),Iflg,S)
 END SUBROUTINE RPZERO

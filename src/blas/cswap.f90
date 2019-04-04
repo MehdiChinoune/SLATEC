@@ -54,7 +54,7 @@ SUBROUTINE CSWAP(N,Cx,Incx,Cy,Incy)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920310  Corrected definition of LX in DESCRIPTION.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   INTEGER i, Incx, Incy, kx, ky, N, ns
   COMPLEX Cx(*), Cy(*), ctemp
   !* FIRST EXECUTABLE STATEMENT  CSWAP
@@ -68,9 +68,9 @@ SUBROUTINE CSWAP(N,Cx,Incx,Cy,Incy)
       ctemp = Cx(i)
       Cx(i) = Cy(i)
       Cy(i) = ctemp
-    ENDDO
+    END DO
     RETURN
-  ENDIF
+  END IF
   !
   !     Code for unequal or nonpositive increments.
   !
@@ -84,6 +84,6 @@ SUBROUTINE CSWAP(N,Cx,Incx,Cy,Incy)
     Cy(ky) = ctemp
     kx = kx + Incx
     ky = ky + Incy
-  ENDDO
+  END DO
   RETURN
 END SUBROUTINE CSWAP

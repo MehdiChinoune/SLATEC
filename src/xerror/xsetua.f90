@@ -48,7 +48,7 @@ SUBROUTINE XSETUA(Iunita,N)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900510  Change call to XERRWV to XERMSG.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   INTEGER i, index, Iunita(5), J4SAVE, junk, N
   CHARACTER(8) :: xern1
   !* FIRST EXECUTABLE STATEMENT  XSETUA
@@ -57,12 +57,12 @@ SUBROUTINE XSETUA(Iunita,N)
     WRITE (xern1,'(I8)') N
     CALL XERMSG('SLATEC','XSETUA','INVALID NUMBER OF UNITS, N = '//xern1,1,2)
     RETURN
-  ENDIF
+  END IF
   !
   DO i = 1, N
     index = i + 4
     IF ( i==1 ) index = 3
     junk = J4SAVE(index,Iunita(i),.TRUE.)
-  ENDDO
+  END DO
   junk = J4SAVE(5,N,.TRUE.)
 END SUBROUTINE XSETUA

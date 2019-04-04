@@ -93,7 +93,7 @@ LOGICAL FUNCTION LSAME(Ca,Cb)
   !     IVAL = ICHAR(CA(2))
   !     IF (IVAL.GE.ICHAR('A') .AND. IVAL.LE.ICHAR('Z')) THEN
   !        LSAME = CA(1) .EQ. CHAR(ICIRFX) .AND. CA(2) .EQ. CB
-  !     ENDIF
+  !     END IF
   !
   !     RETURN
   !

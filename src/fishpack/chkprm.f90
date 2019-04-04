@@ -25,7 +25,7 @@ SUBROUTINE CHKPRM(Intl,Iorder,A,B,M,Mbdcnd,C,D,N,Nbdcnd,COFX,COFY,Idmn,Ierror)
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
-  
+
   REAL A, ai, B, bi, C, ci, D, dj, dlx, dly, ej, fj, xi, yj
   INTEGER i, Idmn, Ierror, Intl, Iorder, j, M, Mbdcnd, N, Nbdcnd
   EXTERNAL :: COFX, COFY
@@ -78,9 +78,9 @@ SUBROUTINE CHKPRM(Intl,Iorder,A,B,M,Mbdcnd,C,D,N,Nbdcnd,COFX,COFY,Idmn,Ierror)
       IF ( ai*dj<=0.0 ) THEN
         Ierror = 10
         RETURN
-      ENDIF
-    ENDDO
-  ENDDO
+      END IF
+    END DO
+  END DO
   !
   !     NO ERROR FOUND
   !

@@ -108,7 +108,7 @@ SUBROUTINE DQRFAC(M,N,A,Lda,Pivot,Ipvt,Lipvt,Sigma,Acnorm,Wa)
     Sigma(j) = Acnorm(j)
     Wa(j) = Sigma(j)
     IF ( Pivot ) Ipvt(j) = j
-  ENDDO
+  END DO
   !
   !     REDUCE A TO R WITH HOUSEHOLDER TRANSFORMATIONS.
   !
@@ -121,20 +121,20 @@ SUBROUTINE DQRFAC(M,N,A,Lda,Pivot,Ipvt,Lipvt,Sigma,Acnorm,Wa)
       kmax = j
       DO k = j, N
         IF ( Sigma(k)>Sigma(kmax) ) kmax = k
-      ENDDO
+      END DO
       IF ( kmax/=j ) THEN
         DO i = 1, M
           temp = A(i,j)
           A(i,j) = A(i,kmax)
           A(i,kmax) = temp
-        ENDDO
+        END DO
         Sigma(kmax) = Sigma(j)
         Wa(kmax) = Wa(j)
         k = Ipvt(j)
         Ipvt(j) = Ipvt(kmax)
         Ipvt(kmax) = k
-      ENDIF
-    ENDIF
+      END IF
+    END IF
     !
     !        COMPUTE THE HOUSEHOLDER TRANSFORMATION TO REDUCE THE
     !        J-TH COLUMN OF A TO A MULTIPLE OF THE J-TH UNIT VECTOR.
@@ -144,7 +144,7 @@ SUBROUTINE DQRFAC(M,N,A,Lda,Pivot,Ipvt,Lipvt,Sigma,Acnorm,Wa)
       IF ( A(j,j)<zero ) ajnorm = -ajnorm
       DO i = j, M
         A(i,j) = A(i,j)/ajnorm
-      ENDDO
+      END DO
       A(j,j) = A(j,j) + one
       !
       !        APPLY THE TRANSFORMATION TO THE REMAINING COLUMNS
@@ -156,24 +156,24 @@ SUBROUTINE DQRFAC(M,N,A,Lda,Pivot,Ipvt,Lipvt,Sigma,Acnorm,Wa)
           sum = zero
           DO i = j, M
             sum = sum + A(i,j)*A(i,k)
-          ENDDO
+          END DO
           temp = sum/A(j,j)
           DO i = j, M
             A(i,k) = A(i,k) - temp*A(i,j)
-          ENDDO
+          END DO
           IF ( .NOT.(.NOT.Pivot.OR.Sigma(k)==zero) ) THEN
             temp = A(j,k)/Sigma(k)
             Sigma(k) = Sigma(k)*SQRT(MAX(zero,one-temp**2))
             IF ( p05*(Sigma(k)/Wa(k))**2<=epsmch ) THEN
               Sigma(k) = DENORM(M-j,A(jp1,k))
               Wa(k) = Sigma(k)
-            ENDIF
-          ENDIF
-        ENDDO
-      ENDIF
-    ENDIF
+            END IF
+          END IF
+        END DO
+      END IF
+    END IF
     Sigma(j) = -ajnorm
-  ENDDO
+  END DO
   !
   !     LAST CARD OF SUBROUTINE DQRFAC.
   !

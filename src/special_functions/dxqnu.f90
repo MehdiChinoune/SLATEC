@@ -27,7 +27,7 @@ SUBROUTINE DXQNU(Nu1,Nu2,Mu1,Theta,X,Sx,Id,Pqa,Ipqa,Ierror)
   !   901106  Corrected order of sections in prologue and added TYPE
   !           section.  (WRB)
   !   920127  Revised PURPOSE section of prologue.  (DWL)
-  
+
   INTEGER Id, Ierror, ipq, ipq1, ipq2, Ipqa(*), ipql1, ipql2, k, mu, Mu1
   REAL(8) :: dmu, nu, Nu1, Nu2, pq, Pqa(*), pq1, pq2, Sx, X, x1, x2
   REAL(8) :: Theta, pql1, pql2
@@ -51,7 +51,7 @@ SUBROUTINE DXQNU(Nu1,Nu2,Mu1,Theta,X,Sx,Id,Pqa,Ipqa,Ierror)
     ipq2 = Ipqa(k)
     pql2 = Pqa(k-1)
     ipql2 = Ipqa(k-1)
-  ENDIF
+  END IF
   mu = 1
   !
   !        CALL DXPQNU TO OBTAIN Q(1.,NU2,X) AND Q(1.,NU2-1,X)
@@ -119,7 +119,7 @@ SUBROUTINE DXQNU(Nu1,Nu2,Mu1,Theta,X,Sx,Id,Pqa,Ipqa,Ierror)
           Pqa(k) = pq
           Ipqa(k) = ipq
           nu = nu - 1.D0
-        ENDDO
+        END DO
       ELSE
         !
         !              THEN FOR NU=NU2-1
@@ -131,7 +131,7 @@ SUBROUTINE DXQNU(Nu1,Nu2,Mu1,Theta,X,Sx,Id,Pqa,Ipqa,Ierror)
         ipq1 = ipql1
         k = k - 1
         GOTO 100
-      ENDIF
-    ENDIF
-  ENDDO
+      END IF
+    END IF
+  END DO
 END SUBROUTINE DXQNU

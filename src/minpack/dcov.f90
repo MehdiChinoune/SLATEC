@@ -192,8 +192,8 @@ SUBROUTINE DCOV(FCN,Iopt,M,N,X,Fvec,R,Ldr,Info,Wa1,Wa2,Wa3,Wa4)
           Wa2(j) = zero
           DO i = 1, N
             R(i,j) = zero
-          ENDDO
-        ENDDO
+          END DO
+        END DO
         iflag = 3
         DO i = 1, M
           nrow = i
@@ -201,7 +201,7 @@ SUBROUTINE DCOV(FCN,Iopt,M,N,X,Fvec,R,Ldr,Info,Wa1,Wa2,Wa3,Wa4)
           IF ( iflag<0 ) GOTO 100
           temp = Fvec(i)
           CALL DWUPDT(N,R,Ldr,Wa1,Wa2,temp,Wa3,Wa4)
-        ENDDO
+        END DO
       ELSE
         !
         !     STORE THE FULL JACOBIAN USING M*N STORAGE
@@ -214,20 +214,20 @@ SUBROUTINE DCOV(FCN,Iopt,M,N,X,Fvec,R,Ldr,Info,Wa1,Wa2,Wa3,Wa4)
           !     USER SUPPLIES THE JACOBIAN
           iflag = 2
           CALL FCN(iflag,M,N,X,Fvec,R,Ldr)
-        ENDIF
+        END IF
         IF ( iflag<0 ) GOTO 100
         !
         !     COMPUTE THE QR DECOMPOSITION
         CALL DQRFAC(M,N,R,Ldr,.FALSE.,idum,1,Wa1,Wa1,Wa1)
         DO i = 1, N
           R(i,i) = Wa1(i)
-        ENDDO
-      ENDIF
+        END DO
+      END IF
       !
       !     CHECK IF R IS SINGULAR.
       DO i = 1, N
         IF ( R(i,i)==zero ) sing = .TRUE.
-      ENDDO
+      END DO
       IF ( .NOT.(sing) ) THEN
         !
         !     R IS UPPER TRIANGULAR.  CALCULATE (R TRANSPOSE) INVERSE AND STORE
@@ -240,7 +240,7 @@ SUBROUTINE DCOV(FCN,Iopt,M,N,X,Fvec,R,Ldr,Info,Wa1,Wa2,Wa3,Wa4)
             !     IDENTITY MATRIX.
             DO i = 1, N
               Wa1(i) = zero
-            ENDDO
+            END DO
             Wa1(k) = one
             !
             R(k,k) = Wa1(k)/R(k,k)
@@ -250,11 +250,11 @@ SUBROUTINE DCOV(FCN,Iopt,M,N,X,Fvec,R,Ldr,Info,Wa1,Wa2,Wa3,Wa4)
               !     SUBTRACT R(K,I-1)*R(I-1,*) FROM THE RIGHT-HAND SIDE, WA1(*).
               DO j = i, N
                 Wa1(j) = Wa1(j) - R(k,i-1)*R(i-1,j)
-              ENDDO
+              END DO
               R(k,i) = Wa1(i)/R(i,i)
-            ENDDO
-          ENDDO
-        ENDIF
+            END DO
+          END DO
+        END IF
         R(N,N) = one/R(N,N)
         !
         !     CALCULATE R-INVERSE * (R TRANSPOSE) INVERSE AND STORE IN THE UPPER
@@ -264,14 +264,14 @@ SUBROUTINE DCOV(FCN,Iopt,M,N,X,Fvec,R,Ldr,Info,Wa1,Wa2,Wa3,Wa4)
             temp = zero
             DO k = j, N
               temp = temp + R(i,k)*R(j,k)
-            ENDDO
+            END DO
             R(i,j) = temp*sigma
-          ENDDO
-        ENDDO
+          END DO
+        END DO
         Info = 1
-      ENDIF
-    ENDIF
-  ENDIF
+      END IF
+    END IF
+  END IF
   !
   100 CONTINUE
   IF ( M<=0.OR.N<=0 ) Info = 0

@@ -82,7 +82,7 @@ REAL(8) FUNCTION DGAMRN(X)
   IF ( X<xmin ) THEN
     xinc = xmin - nx
     xdmy = xdmy + xinc
-  ENDIF
+  END IF
   s = 1.0D0
   IF ( xdmy*tol<=1.0D0 ) THEN
     xsq = 1.0D0/(xdmy*xdmy)
@@ -92,8 +92,8 @@ REAL(8) FUNCTION DGAMRN(X)
       IF ( ABS(trm)<tol ) EXIT
       s = s + trm
       xp = xp*xsq
-    ENDDO
-  ENDIF
+    END DO
+  END IF
   s = s/SQRT(xdmy)
   IF ( xinc/=0.0D0 ) THEN
     nx = INT(xinc)
@@ -101,10 +101,10 @@ REAL(8) FUNCTION DGAMRN(X)
     DO i = 1, nx
       s = s*(1.0D0+0.5D0/(X+xp))
       xp = xp + 1.0D0
-    ENDDO
+    END DO
     DGAMRN = s
     RETURN
-  ENDIF
+  END IF
   DGAMRN = s
   RETURN
 END FUNCTION DGAMRN

@@ -92,7 +92,7 @@ SUBROUTINE SSPEV(A,N,E,V,Ldv,Work,Job,Info)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
-  
+
   INTEGER Job
   INTEGER i, Info, j, Ldv, m, N
   REAL A(*), E(*), V(Ldv,*), Work(*)
@@ -116,15 +116,15 @@ SUBROUTINE SSPEV(A,N,E,V,Ldv,Work,Job,Info)
     DO i = 1, N
       DO j = 1, N
         V(i,j) = 0.
-      ENDDO
+      END DO
       V(i,i) = 1.
-    ENDDO
+    END DO
     CALL IMTQL2(Ldv,N,E,Work,V,Info)
     m = N
     IF ( Info/=0 ) m = Info - 1
     CALL TRBAK3(Ldv,N,1,A,m,V)
     RETURN
-  ENDIF
+  END IF
   !
   !     EIGENVALUES ONLY
   !

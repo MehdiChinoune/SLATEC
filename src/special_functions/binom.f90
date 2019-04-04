@@ -43,7 +43,7 @@ REAL FUNCTION BINOM(N,M)
     bilnmx = LOG(R1MACH(2))
     fintmx = 0.9/R1MACH(3)
     first = .FALSE.
-  ENDIF
+  END IF
   !
   IF ( N<0.OR.M<0 ) CALL XERMSG('SLATEC','BINOM','N OR M LT ZERO',1,2)
   IF ( N<M ) CALL XERMSG('SLATEC','BINOM','N LT M',2,2)
@@ -57,12 +57,12 @@ REAL FUNCTION BINOM(N,M)
       !
       DO i = 1, k
         BINOM = BINOM*REAL(N-i+1)/i
-      ENDDO
+      END DO
       !
       IF ( BINOM<fintmx ) BINOM = AINT(BINOM+0.5)
       RETURN
-    ENDIF
-  ENDIF
+    END IF
+  END IF
   !
   ! IF K.LT.9, APPROX IS NOT VALID AND ANSWER IS CLOSE TO THE OVERFLOW LIM
   IF ( k<9 ) CALL XERMSG('SLATEC','BINOM',&

@@ -110,7 +110,7 @@ SUBROUTINE DBKIAS(X,N,Ktrms,T,Ans,Ind,Ms,Gmrn,H,Ierr)
   IF ( Ktrms/=0 ) THEN
     fj = Ktrms
     rat = 0.25D0/(hrtpi*den3*SQRT(fj))
-  ENDIF
+  END IF
   err = err*rat
   fj = -3.0D0
   DO j = 1, 15
@@ -126,8 +126,8 @@ SUBROUTINE DBKIAS(X,N,Ktrms,T,Ans,Ind,Ms,Gmrn,H,Ierr)
       er = er/fm1
       IF ( er<tol ) GOTO 100
       IF ( j>=5 ) err = err/den3
-    ENDIF
-  ENDDO
+    END IF
+  END DO
   Ierr = 2
   RETURN
   100  Ms = j
@@ -142,10 +142,10 @@ SUBROUTINE DBKIAS(X,N,Ktrms,T,Ans,Ind,Ms,Gmrn,H,Ierr)
     DO i = 1, mm
       H(i) = rxp*(1.0D0-H(i))
       rxp = rxp*rat
-    ENDDO
+    END DO
   ELSE
     CALL DHKSEQ(z,mm,H,Ierr)
-  ENDIF
+  END IF
   !-----------------------------------------------------------------------
   !     SCALED S SEQUENCE
   !-----------------------------------------------------------------------
@@ -158,10 +158,10 @@ SUBROUTINE DBKIAS(X,N,Ktrms,T,Ans,Ind,Ms,Gmrn,H,Ierr)
     DO j = 1, km
       ss = ss + s(j)*H(i)
       i = i - 1
-    ENDDO
+    END DO
     s(k) = ss/fk
     fk = fk + 1.0D0
-  ENDDO
+  END DO
   !-----------------------------------------------------------------------
   !     SCALED S-TILDA SEQUENCE
   !-----------------------------------------------------------------------
@@ -174,17 +174,17 @@ SUBROUTINE DBKIAS(X,N,Ktrms,T,Ans,Ind,Ms,Gmrn,H,Ierr)
       w(k) = T(k)*v(k)
       ss = ss + w(k)
       fk = fk + 1.0D0
-    ENDDO
+    END DO
     s(1) = s(1) - ss*rg1
     DO i = 2, mp
       ss = 0.0D0
       DO k = 1, Ktrms
         w(k) = w(k)*v(k)
         ss = ss + w(k)
-      ENDDO
+      END DO
       s(i) = s(i) - ss*rg1
-    ENDDO
-  ENDIF
+    END DO
+  END IF
   !-----------------------------------------------------------------------
   !     SUM ON J
   !-----------------------------------------------------------------------
@@ -207,13 +207,13 @@ SUBROUTINE DBKIAS(X,N,Ktrms,T,Ans,Ind,Ms,Gmrn,H,Ierr)
       DO k = 1, jmi
         v(k) = s(kk)*xp(k)
         kk = kk + 1
-      ENDDO
+      END DO
       CALL DBDIFF(jmi,v)
       sumi = sumi + b(ii)*v(jmi)*xp(i+1)
       ii = ii + 1
-    ENDDO
+    END DO
     sumj = sumj + sumi*rxp
-  ENDDO
+  END DO
   Ans = gs*(s(1)-sumj)
   RETURN
 END SUBROUTINE DBKIAS

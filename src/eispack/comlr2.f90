@@ -109,7 +109,7 @@ SUBROUTINE COMLR2(Nm,N,Low,Igh,Int,Hr,Hi,Wr,Wi,Zr,Zi,Ierr)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   !
   INTEGER i, j, k, l, m, N, en, ii, jj, ll, mm, Nm, nn, Igh, im1, ip1
   INTEGER itn, its, Low, mp1, enm1, iend, Ierr
@@ -126,8 +126,8 @@ SUBROUTINE COMLR2(Nm,N,Low,Igh,Int,Hr,Hi,Wr,Wi,Zr,Zi,Ierr)
       Zr(i,j) = 0.0E0
       Zi(i,j) = 0.0E0
       IF ( i==j ) Zr(i,j) = 1.0E0
-    ENDDO
-  ENDDO
+    END DO
+  END DO
   !     .......... FORM THE MATRIX OF ACCUMULATED TRANSFORMATIONS
   !                FROM THE INFORMATION LEFT BY COMHES ..........
   iend = Igh - Low - 1
@@ -140,7 +140,7 @@ SUBROUTINE COMLR2(Nm,N,Low,Igh,Int,Hr,Hi,Wr,Wi,Zr,Zi,Ierr)
       DO k = ip1, Igh
         Zr(k,i) = Hr(k,i-1)
         Zi(k,i) = Hi(k,i-1)
-      ENDDO
+      END DO
       !
       j = Int(i)
       IF ( i/=j ) THEN
@@ -150,19 +150,19 @@ SUBROUTINE COMLR2(Nm,N,Low,Igh,Int,Hr,Hi,Wr,Wi,Zr,Zi,Ierr)
           Zi(i,k) = Zi(j,k)
           Zr(j,k) = 0.0E0
           Zi(j,k) = 0.0E0
-        ENDDO
+        END DO
         !
         Zr(j,i) = 1.0E0
-      ENDIF
-    ENDDO
-  ENDIF
+      END IF
+    END DO
+  END IF
   !     .......... STORE ROOTS ISOLATED BY CBAL ..........
   DO i = 1, N
     IF ( i<Low.OR.i>Igh ) THEN
       Wr(i) = Hr(i,i)
       Wi(i) = Hi(i,i)
-    ENDIF
-  ENDDO
+    END IF
+  END DO
   !
   en = Igh
   tr = 0.0E0
@@ -179,8 +179,8 @@ SUBROUTINE COMLR2(Nm,N,Low,Igh,Int,Hr,Hi,Wr,Wi,Zr,Zi,Ierr)
       !
       DO j = i, N
         norm = norm + ABS(Hr(i,j)) + ABS(Hi(i,j))
-      ENDDO
-    ENDDO
+      END DO
+    END DO
     !
     Hr(1,1) = norm
     IF ( N/=1.AND.norm/=0.0E0 ) THEN
@@ -201,8 +201,8 @@ SUBROUTINE COMLR2(Nm,N,Low,Igh,Int,Hr,Hi,Wr,Wi,Zr,Zi,Ierr)
             DO j = ip1, enm1
               zzr = zzr + Hr(i,j)*Hr(j,en) - Hi(i,j)*Hi(j,en)
               zzi = zzi + Hr(i,j)*Hi(j,en) + Hi(i,j)*Hr(j,en)
-            ENDDO
-          ENDIF
+            END DO
+          END IF
           !
           yr = xr - Wr(i)
           yi = xi - Wi(i)
@@ -213,13 +213,13 @@ SUBROUTINE COMLR2(Nm,N,Low,Igh,Int,Hr,Hi,Wr,Wi,Zr,Zi,Ierr)
               IF ( norm+yr<=norm ) THEN
                 yr = 2.0E0*yr
                 EXIT
-              ENDIF
-            ENDDO
-          ENDIF
+              END IF
+            END DO
+          END IF
           CALL CDIV(zzr,zzi,yr,yi,Hr(i,en),Hi(i,en))
-        ENDDO
+        END DO
         !
-      ENDDO
+      END DO
       !     .......... END BACKSUBSTITUTION ..........
       enm1 = N - 1
       !     .......... VECTORS OF ISOLATED ROOTS ..........
@@ -230,10 +230,10 @@ SUBROUTINE COMLR2(Nm,N,Low,Igh,Int,Hr,Hi,Wr,Wi,Zr,Zi,Ierr)
           DO j = ip1, N
             Zr(i,j) = Hr(i,j)
             Zi(i,j) = Hi(i,j)
-          ENDDO
-        ENDIF
+          END DO
+        END IF
         !
-      ENDDO
+      END DO
       !     .......... MULTIPLY BY TRANSFORMATION MATRIX TO GIVE
       !                VECTORS OF ORIGINAL FULL MATRIX.
       !                FOR J=N STEP -1 UNTIL LOW+1 DO -- ..........
@@ -248,19 +248,19 @@ SUBROUTINE COMLR2(Nm,N,Low,Igh,Int,Hr,Hi,Wr,Wi,Zr,Zi,Ierr)
           DO k = Low, m
             zzr = zzr + Zr(i,k)*Hr(k,j) - Zi(i,k)*Hi(k,j)
             zzi = zzi + Zr(i,k)*Hi(k,j) + Zi(i,k)*Hr(k,j)
-          ENDDO
+          END DO
           !
           Zr(i,j) = zzr
           Zi(i,j) = zzi
-        ENDDO
+        END DO
         !
-      ENDDO
-    ENDIF
+      END DO
+    END IF
     RETURN
   ELSE
     its = 0
     enm1 = en - 1
-  ENDIF
+  END IF
   !     .......... LOOK FOR SINGLE SMALL SUB-DIAGONAL ELEMENT
   !                FOR L=EN STEP -1 UNTIL LOW DO -- ..........
   200 CONTINUE
@@ -270,7 +270,7 @@ SUBROUTINE COMLR2(Nm,N,Low,Igh,Int,Hr,Hi,Wr,Wi,Zr,Zi,Ierr)
     s1 = ABS(Hr(l-1,l-1)) + ABS(Hi(l-1,l-1)) + ABS(Hr(l,l)) + ABS(Hi(l,l))
     s2 = s1 + ABS(Hr(l,l-1)) + ABS(Hi(l,l-1))
     IF ( s2==s1 ) EXIT
-  ENDDO
+  END DO
   !     .......... FORM SHIFT ..........
   IF ( l==en ) THEN
     !     .......... A ROOT FOUND ..........
@@ -301,17 +301,17 @@ SUBROUTINE COMLR2(Nm,N,Low,Igh,Int,Hr,Hi,Wr,Wi,Zr,Zi,Ierr)
         IF ( yr*zzr+yi*zzi<0.0E0 ) THEN
           zzr = -zzr
           zzi = -zzi
-        ENDIF
+        END IF
         CALL CDIV(xr,xi,yr+zzr,yi+zzi,xr,xi)
         sr = sr - xr
         si = si - xi
-      ENDIF
-    ENDIF
+      END IF
+    END IF
     !
     DO i = Low, en
       Hr(i,i) = Hr(i,i) - sr
       Hi(i,i) = Hi(i,i) - si
-    ENDDO
+    END DO
     !
     tr = tr + sr
     ti = ti + si
@@ -334,7 +334,7 @@ SUBROUTINE COMLR2(Nm,N,Low,Igh,Int,Hr,Hi,Wr,Wi,Zr,Zi,Ierr)
       s1 = zzr/yi*(zzr+xr+xi)
       s2 = s1 + yr
       IF ( s2==s1 ) EXIT
-    ENDDO
+    END DO
     !     .......... TRIANGULAR DECOMPOSITION H=L*R ..........
     mp1 = m + 1
     !
@@ -356,20 +356,20 @@ SUBROUTINE COMLR2(Nm,N,Low,Igh,Int,Hr,Hi,Wr,Wi,Zr,Zi,Ierr)
           zzi = Hi(im1,j)
           Hi(im1,j) = Hi(i,j)
           Hi(i,j) = zzi
-        ENDDO
+        END DO
         !
         CALL CDIV(xr,xi,yr,yi,zzr,zzi)
         Wr(i) = 1.0E0
-      ENDIF
+      END IF
       Hr(i,im1) = zzr
       Hi(i,im1) = zzi
       !
       DO j = i, N
         Hr(i,j) = Hr(i,j) - zzr*Hr(im1,j) + zzi*Hi(im1,j)
         Hi(i,j) = Hi(i,j) - zzr*Hi(im1,j) - zzi*Hr(im1,j)
-      ENDDO
+      END DO
       !
-    ENDDO
+    END DO
     !     .......... COMPOSITION R*L=H ..........
     DO j = mp1, en
       xr = Hr(j,j-1)
@@ -387,7 +387,7 @@ SUBROUTINE COMLR2(Nm,N,Low,Igh,Int,Hr,Hi,Wr,Wi,Zr,Zi,Ierr)
           zzi = Hi(i,j-1)
           Hi(i,j-1) = Hi(i,j)
           Hi(i,j) = zzi
-        ENDDO
+        END DO
         !
         DO i = Low, Igh
           zzr = Zr(i,j-1)
@@ -396,22 +396,22 @@ SUBROUTINE COMLR2(Nm,N,Low,Igh,Int,Hr,Hi,Wr,Wi,Zr,Zi,Ierr)
           zzi = Zi(i,j-1)
           Zi(i,j-1) = Zi(i,j)
           Zi(i,j) = zzi
-        ENDDO
-      ENDIF
+        END DO
+      END IF
       !
       DO i = 1, j
         Hr(i,j-1) = Hr(i,j-1) + xr*Hr(i,j) - xi*Hi(i,j)
         Hi(i,j-1) = Hi(i,j-1) + xr*Hi(i,j) + xi*Hr(i,j)
-      ENDDO
+      END DO
       !     .......... ACCUMULATE TRANSFORMATIONS ..........
       DO i = Low, Igh
         Zr(i,j-1) = Zr(i,j-1) + xr*Zr(i,j) - xi*Zi(i,j)
         Zi(i,j-1) = Zi(i,j-1) + xr*Zi(i,j) + xi*Zr(i,j)
-      ENDDO
+      END DO
       !
-    ENDDO
+    END DO
     !
     GOTO 200
-  ENDIF
+  END IF
   RETURN
 END SUBROUTINE COMLR2

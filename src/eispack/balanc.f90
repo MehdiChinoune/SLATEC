@@ -84,7 +84,7 @@ SUBROUTINE BALANC(Nm,N,A,Low,Igh,Scale)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   !
   INTEGER i, j, k, l, m, N, jj, Nm, Igh, Low, iexc
   REAL A(Nm,*), Scale(*)
@@ -107,14 +107,14 @@ SUBROUTINE BALANC(Nm,N,A,Low,Igh,Scale)
       f = A(i,j)
       A(i,j) = A(i,m)
       A(i,m) = f
-    ENDDO
+    END DO
     !
     DO i = k, N
       f = A(j,i)
       A(j,i) = A(m,i)
       A(m,i) = f
-    ENDDO
-  ENDIF
+    END DO
+  END IF
   !
   IF ( iexc==2 ) THEN
     !     .......... SEARCH FOR COLUMNS ISOLATING AN EIGENVALUE
@@ -126,7 +126,7 @@ SUBROUTINE BALANC(Nm,N,A,Low,Igh,Scale)
     !                AND PUSH THEM DOWN ..........
     IF ( l==1 ) GOTO 600
     l = l - 1
-  ENDIF
+  END IF
   !     .......... FOR J=L STEP -1 UNTIL 1 DO -- ..........
   200 CONTINUE
   DO jj = 1, l
@@ -135,15 +135,15 @@ SUBROUTINE BALANC(Nm,N,A,Low,Igh,Scale)
     DO i = 1, l
       IF ( i/=j ) THEN
         IF ( A(j,i)/=0.0E0 ) GOTO 300
-      ENDIF
-    ENDDO
+      END IF
+    END DO
     !
     m = l
     iexc = 1
     GOTO 100
     !
     300 CONTINUE
-  ENDDO
+  END DO
   !
   400 CONTINUE
   DO j = k, l
@@ -151,18 +151,18 @@ SUBROUTINE BALANC(Nm,N,A,Low,Igh,Scale)
     DO i = k, l
       IF ( i/=j ) THEN
         IF ( A(i,j)/=0.0E0 ) GOTO 500
-      ENDIF
-    ENDDO
+      END IF
+    END DO
     !
     m = k
     iexc = 2
     GOTO 100
     500 CONTINUE
-  ENDDO
+  END DO
   !     .......... NOW BALANCE THE SUBMATRIX IN ROWS K TO L ..........
   DO i = k, l
     Scale(i) = 1.0E0
-  ENDDO
+  END DO
   DO
     !     .......... ITERATIVE LOOP FOR NORM REDUCTION ..........
     noconv = .FALSE.
@@ -175,8 +175,8 @@ SUBROUTINE BALANC(Nm,N,A,Low,Igh,Scale)
         IF ( j/=i ) THEN
           c = c + ABS(A(j,i))
           r = r + ABS(A(i,j))
-        ENDIF
-      ENDDO
+        END IF
+      END DO
       !     .......... GUARD AGAINST ZERO C OR R DUE TO UNDERFLOW ..........
       IF ( c/=0.0E0.AND.r/=0.0E0 ) THEN
         g = r/radix
@@ -185,12 +185,12 @@ SUBROUTINE BALANC(Nm,N,A,Low,Igh,Scale)
         DO WHILE ( c<g )
           f = f*radix
           c = c*b2
-        ENDDO
+        END DO
         g = r*radix
         DO WHILE ( c>=g )
           f = f/radix
           c = c/b2
-        ENDDO
+        END DO
         !     .......... NOW BALANCE ..........
         IF ( (c+r)/f<0.95E0*s ) THEN
           g = 1.0E0/f
@@ -199,18 +199,18 @@ SUBROUTINE BALANC(Nm,N,A,Low,Igh,Scale)
           !
           DO j = k, N
             A(i,j) = A(i,j)*g
-          ENDDO
+          END DO
           !
           DO j = 1, l
             A(j,i) = A(j,i)*f
-          ENDDO
-        ENDIF
-      ENDIF
+          END DO
+        END IF
+      END IF
       !
-    ENDDO
+    END DO
     !
     IF ( .NOT.(noconv) ) EXIT
-  ENDDO
+  END DO
   !
   600  Low = k
   Igh = l

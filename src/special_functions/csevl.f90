@@ -67,7 +67,7 @@ REAL FUNCTION CSEVL(X,Cs,N)
     b1 = b0
     ni = N + 1 - i
     b0 = twox*b1 - b2 + Cs(ni)
-  ENDDO
+  END DO
   !
   CSEVL = 0.5E0*(b0-b2)
   !

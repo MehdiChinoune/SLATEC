@@ -47,7 +47,7 @@ REAL FUNCTION GAMR(X)
     CALL XSETF(irold)
     GAMR = sgngx*EXP(-alngx)
     RETURN
-  ENDIF
+  END IF
   GAMR = 1.0/GAMMA(X)
   CALL XERCLR
   CALL XSETF(irold)

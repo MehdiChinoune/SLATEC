@@ -113,8 +113,8 @@ CONTAINS
         WRITE (Lun,'(/'' SOME TEST(S) IN CQAG FAILED''/)')
       ELSEIF ( Kprint>=2 ) THEN
         WRITE (Lun,'(/'' ALL TEST(S) IN CQAG PASSED''/)')
-      ENDIF
-    ENDIF
+      END IF
+    END IF
   END SUBROUTINE CQAG
   !** CQAGI
   SUBROUTINE CQAGI(Lun,Kprint,Ipass)
@@ -246,8 +246,8 @@ CONTAINS
         WRITE (Lun,'(/'' SOME TEST(S) IN CQAGI FAILED''/)')
       ELSEIF ( Kprint>=2 ) THEN
         WRITE (Lun,'(/'' ALL TEST(S) IN CQAGI PASSED''/)')
-      ENDIF
-    ENDIF
+      END IF
+    END IF
   END SUBROUTINE CQAGI
   !** CQAGP
   SUBROUTINE CQAGP(Lun,Kprint,Ipass)
@@ -392,8 +392,8 @@ CONTAINS
         WRITE (Lun,'(/'' SOME TEST(S) IN CQAGP FAILED''/)')
       ELSEIF ( Kprint>=2 ) THEN
         WRITE (Lun,'(/'' ALL TEST(S) IN CQAGP PASSED''/)')
-      ENDIF
-    ENDIF
+      END IF
+    END IF
   END SUBROUTINE CQAGP
   !** CQAGS
   SUBROUTINE CQAGS(Lun,Kprint,Ipass)
@@ -533,8 +533,8 @@ CONTAINS
         WRITE (Lun,'(/'' SOME TEST(S) IN CQAGS FAILED''/)')
       ELSEIF ( Kprint>=2 ) THEN
         WRITE (Lun,'(/'' ALL TEST(S) IN CQAGS PASSED''/)')
-      ENDIF
-    ENDIF
+      END IF
+    END IF
   END SUBROUTINE CQAGS
   !** CQAWC
   SUBROUTINE CQAWC(Lun,Kprint,Ipass)
@@ -638,8 +638,8 @@ CONTAINS
         WRITE (Lun,'(/'' SOME TEST(S) IN CQAWC FAILED''/)')
       ELSEIF ( Kprint>=2 ) THEN
         WRITE (Lun,'(/'' ALL TEST(S) IN CQAWC PASSED''/)')
-      ENDIF
-    ENDIF
+      END IF
+    END IF
   END SUBROUTINE CQAWC
   !** CQAWF
   SUBROUTINE CQAWF(Lun,Kprint,Ipass)
@@ -754,8 +754,8 @@ CONTAINS
         WRITE (Lun,'(/'' SOME TEST(S) IN CQAWF FAILED''/)')
       ELSEIF ( Kprint>=2 ) THEN
         WRITE (Lun,'(/'' ALL TEST(S) IN CQAWF PASSED''/)')
-      ENDIF
-    ENDIF
+      END IF
+    END IF
   END SUBROUTINE CQAWF
   !** CQAWO
   SUBROUTINE CQAWO(Lun,Kprint,Ipass)
@@ -884,8 +884,8 @@ CONTAINS
         WRITE (Lun,'(/'' SOME TEST(S) IN CQAWO FAILED''/)')
       ELSEIF ( Kprint>=2 ) THEN
         WRITE (Lun,'(/'' ALL TEST(S) IN CQAWO PASSED''/)')
-      ENDIF
-    ENDIF
+      END IF
+    END IF
   END SUBROUTINE CQAWO
   !** CQAWS
   SUBROUTINE CQAWS(Lun,Kprint,Ipass)
@@ -991,8 +991,8 @@ CONTAINS
         WRITE (Lun,'(/'' SOME TEST(S) IN CQAWS FAILED''/)')
       ELSEIF ( Kprint>=2 ) THEN
         WRITE (Lun,'(/'' ALL TEST(S) IN CQAWS PASSED''/)')
-      ENDIF
-    ENDIF
+      END IF
+    END IF
   END SUBROUTINE CQAWS
   !** CQNG
   SUBROUTINE CQNG(Lun,Kprint,Ipass)
@@ -1068,8 +1068,8 @@ CONTAINS
         WRITE (Lun,'(/'' SOME TEST(S) IN CQNG FAILED''/)')
       ELSEIF ( Kprint>=2 ) THEN
         WRITE (Lun,'(/'' ALL TEST(S) IN CQNG PASSED''/)')
-      ENDIF
-    ENDIF
+      END IF
+    END IF
   END SUBROUTINE CQNG
   !** F0C
   REAL FUNCTION F0C(X)
@@ -1576,7 +1576,7 @@ CONTAINS
     IF ( X==.33E+00 ) THEN
       F4S = 0.0
       RETURN
-    ENDIF
+    END IF
     F4S = ABS(X-0.33E+00)**(-0.999E+00)
     RETURN
     RETURN
@@ -1814,14 +1814,14 @@ CONTAINS
           WRITE (UNIT=Lun,FMT=99009) Exact, Result, error, Abserr, ier, Neval
         ELSE
           WRITE (Lun,FMT=99010) Result, Abserr, ier, Neval
-        ENDIF
+        END IF
       ELSEIF ( Kprint>=3 ) THEN
         !
         !           Write PASS message.
         !
         WRITE (UNIT=Lun,FMT=99001) Num1
-      ENDIF
-    ENDIF
+      END IF
+    END IF
     !
     RETURN
     !
@@ -1910,7 +1910,7 @@ PROGRAM TEST39
     CALL XSETF(0)
   ELSE
     CALL XSETF(1)
-  ENDIF
+  END IF
   !
   !     Test single precision QUADPACK routines
   !
@@ -1968,6 +1968,6 @@ PROGRAM TEST39
     WRITE (lun,99002) nfail
     99002 FORMAT (/' ************* WARNING -- ',I5,&
       ' TEST(S) FAILED IN PROGRAM TEST39 *************')
-  ENDIF
+  END IF
   STOP
 END PROGRAM TEST39

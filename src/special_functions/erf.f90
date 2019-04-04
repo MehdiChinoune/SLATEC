@@ -57,7 +57,7 @@ REAL FUNCTION ERF(X)
     xbig = SQRT(-LOG(sqrtpi*R1MACH(3)))
     sqeps = SQRT(2.0*R1MACH(3))
     first = .FALSE.
-  ENDIF
+  END IF
   !
   y = ABS(X)
   IF ( y>1. ) THEN
@@ -68,9 +68,9 @@ REAL FUNCTION ERF(X)
       ERF = SIGN(1.0-ERFC(y),X)
     ELSE
       ERF = SIGN(1.0,X)
-    ENDIF
+    END IF
     RETURN
-  ENDIF
+  END IF
   !
   ! ERF(X) = 1. - ERFC(X) FOR -1. .LE. X .LE. 1.
   !

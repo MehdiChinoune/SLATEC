@@ -222,13 +222,13 @@ SUBROUTINE ZAIRY(Zr,Zi,Id,Kode,Air,Aii,Nz,Ierr)
         ck = -ABS(bk)
         ztar = ck
         ztai = ak
-      ENDIF
+      END IF
       IF ( Zi==0.0D0 ) THEN
         IF ( Zr<=0.0D0 ) THEN
           ztar = 0.0D0
           ztai = ak
-        ENDIF
-      ENDIF
+        END IF
+      END IF
       aa = ztar
       IF ( aa<0.0D0.OR.Zr<=0.0D0 ) THEN
         IF ( Kode/=2 ) THEN
@@ -240,8 +240,8 @@ SUBROUTINE ZAIRY(Zr,Zi,Id,Kode,Air,Aii,Nz,Ierr)
             iflag = 1
             sfac = tol
             IF ( aa>elim ) GOTO 50
-          ENDIF
-        ENDIF
+          END IF
+        END IF
         !-----------------------------------------------------------------------
         !     CBKNU AND CACON RETURN EXP(ZTA)*K(FNU,ZTA) ON KODE=2
         !-----------------------------------------------------------------------
@@ -253,7 +253,7 @@ SUBROUTINE ZAIRY(Zr,Zi,Id,Kode,Air,Aii,Nz,Ierr)
           GOTO 50
         ELSE
           Nz = Nz + nn
-        ENDIF
+        END IF
       ELSEIF ( Kode==2 ) THEN
         CALL ZBKNU(ztar,ztai,fnu,Kode,1,cyr,cyi,Nz,tol,elim,alim)
         !-----------------------------------------------------------------------
@@ -272,8 +272,8 @@ SUBROUTINE ZAIRY(Zr,Zi,Id,Kode,Air,Aii,Nz,Ierr)
           RETURN
         ELSE
           CALL ZBKNU(ztar,ztai,fnu,Kode,1,cyr,cyi,Nz,tol,elim,alim)
-        ENDIF
-      ENDIF
+        END IF
+      END IF
       s1r = cyr(1)*coef
       s1i = cyi(1)*coef
       IF ( iflag/=0 ) THEN
@@ -293,7 +293,7 @@ SUBROUTINE ZAIRY(Zr,Zi,Id,Kode,Air,Aii,Nz,Ierr)
           Air = s1r/sfac
           Aii = s1i/sfac
           RETURN
-        ENDIF
+        END IF
       ELSEIF ( Id==1 ) THEN
         Air = -(Zr*s1r-Zi*s1i)
         Aii = -(Zr*s1i+Zi*s1r)
@@ -302,9 +302,9 @@ SUBROUTINE ZAIRY(Zr,Zi,Id,Kode,Air,Aii,Nz,Ierr)
         Air = csqr*s1r - csqi*s1i
         Aii = csqr*s1i + csqi*s1r
         RETURN
-      ENDIF
-    ENDIF
-    50     Nz = 0
+      END IF
+    END IF
+    50  Nz = 0
     Ierr = 2
     RETURN
   ELSE
@@ -326,7 +326,7 @@ SUBROUTINE ZAIRY(Zr,Zi,Id,Kode,Air,Aii,Nz,Ierr)
         IF ( az>aa ) THEN
           s1r = 0.5D0*(Zr*Zr-Zi*Zi)
           s1i = Zr*Zi
-        ENDIF
+        END IF
         Air = Air + c1*s1r
         Aii = Aii + c1*s1i
         RETURN
@@ -334,11 +334,11 @@ SUBROUTINE ZAIRY(Zr,Zi,Id,Kode,Air,Aii,Nz,Ierr)
         IF ( az>aa ) THEN
           s1r = c2*Zr
           s1i = c2*Zi
-        ENDIF
+        END IF
         Air = c1 - s1r
         Aii = -s1i
         RETURN
-      ENDIF
+      END IF
     ELSE
       aa = az*az
       IF ( aa>=tol/az ) THEN
@@ -379,8 +379,8 @@ SUBROUTINE ZAIRY(Zr,Zi,Id,Kode,Air,Aii,Nz,Ierr)
           IF ( atrm<tol*ad ) EXIT
           ak = ak + 18.0D0
           bk = bk + 18.0D0
-        ENDDO
-      ENDIF
+        END DO
+      END IF
       IF ( Id==1 ) THEN
         Air = -s2r*c2
         Aii = -s2i*c2
@@ -390,7 +390,7 @@ SUBROUTINE ZAIRY(Zr,Zi,Id,Kode,Air,Aii,Nz,Ierr)
           cc = c1/(1.0D0+fid)
           Air = Air + cc*(str*Zr-sti*Zi)
           Aii = Aii + cc*(str*Zi+sti*Zr)
-        ENDIF
+        END IF
         IF ( Kode==1 ) RETURN
         CALL ZSQRT(Zr,Zi,str,sti)
         ztar = tth*(Zr*str-Zi*sti)
@@ -412,9 +412,9 @@ SUBROUTINE ZAIRY(Zr,Zi,Id,Kode,Air,Aii,Nz,Ierr)
         Aii = Air*sti + Aii*str
         Air = ptr
         RETURN
-      ENDIF
-    ENDIF
-  ENDIF
+      END IF
+    END IF
+  END IF
   100  Nz = 0
   Ierr = 5
   RETURN

@@ -75,7 +75,7 @@ SUBROUTINE CPPFA(Ap,N,Info)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   INTEGER N, Info
   COMPLEX Ap(*)
   !
@@ -98,13 +98,13 @@ SUBROUTINE CPPFA(Ap,N,Info)
         t = t/Ap(kk)
         Ap(kj) = t
         s = s + REAL(t*CONJG(t))
-      ENDDO
-    ENDIF
+      END DO
+    END IF
     jj = jj + j
     s = REAL(Ap(jj)) - s
     IF ( s<=0.0E0.OR.AIMAG(Ap(jj))/=0.0E0 ) RETURN
     Ap(jj) = CMPLX(SQRT(s),0.0E0)
-  ENDDO
+  END DO
   Info = 0
   RETURN
 END SUBROUTINE CPPFA

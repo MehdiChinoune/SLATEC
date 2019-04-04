@@ -69,7 +69,7 @@ SUBROUTINE SPPDI(Ap,N,Det,Job)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   INTEGER N, Job
   REAL Ap(*)
   REAL Det(2)
@@ -93,13 +93,13 @@ SUBROUTINE SPPDI(Ap,N,Det,Job)
       DO WHILE ( Det(1)<1.0E0 )
         Det(1) = s*Det(1)
         Det(2) = Det(2) - 1.0E0
-      ENDDO
+      END DO
       DO WHILE ( Det(1)>=s )
         Det(1) = Det(1)/s
         Det(2) = Det(2) + 1.0E0
-      ENDDO
-    ENDDO
-  ENDIF
+      END DO
+    END DO
+  END IF
   !
   !     COMPUTE INVERSE(R)
   !
@@ -121,9 +121,9 @@ SUBROUTINE SPPDI(Ap,N,Det,Job)
           CALL SAXPY(k,t,Ap(k1),1,Ap(j1),1)
           j1 = j1 + j
           kj = kj + j
-        ENDDO
-      ENDIF
-    ENDDO
+        END DO
+      END IF
+    END DO
     !
     !        FORM  INVERSE(R) * TRANS(INVERSE(R))
     !
@@ -140,10 +140,10 @@ SUBROUTINE SPPDI(Ap,N,Det,Job)
           CALL SAXPY(k,t,Ap(j1),1,Ap(k1),1)
           k1 = k1 + k
           kj = kj + 1
-        ENDDO
-      ENDIF
+        END DO
+      END IF
       t = Ap(jj)
       CALL SSCAL(j,t,Ap(j1),1)
-    ENDDO
-  ENDIF
+    END DO
+  END IF
 END SUBROUTINE SPPDI

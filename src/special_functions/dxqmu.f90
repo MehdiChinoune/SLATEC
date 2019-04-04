@@ -26,7 +26,7 @@ SUBROUTINE DXQMU(Nu1,Nu2,Mu1,Mu2,Theta,X,Sx,Id,Pqa,Ipqa,Ierror)
   !   901106  Corrected order of sections in prologue and added TYPE
   !           section.  (WRB)
   !   920127  Revised PURPOSE section of prologue.  (DWL)
-  
+
   INTEGER Id, Ierror, ipq, ipq1, ipq2, Ipqa(*), k, mu, Mu1, Mu2
   REAL(8) :: dmu, nu, Nu1, Nu2, pq, Pqa(*), pq1, pq2, Sx, X, x1, x2
   REAL(8) :: Theta
@@ -57,13 +57,13 @@ SUBROUTINE DXQMU(Nu1,Nu2,Mu1,Mu2,Theta,X,Sx,Id,Pqa,Ipqa,Ierror)
     Pqa(k) = pq2
     Ipqa(k) = ipq2
     IF ( Mu2<1 ) RETURN
-  ENDIF
+  END IF
   IF ( Mu1<=1 ) THEN
     k = k + 1
     Pqa(k) = pq1
     Ipqa(k) = ipq1
     IF ( Mu2<=1 ) RETURN
-  ENDIF
+  END IF
   DO
     !
     !        FORWARD RECURRENCE IN MU TO OBTAIN
@@ -88,7 +88,7 @@ SUBROUTINE DXQMU(Nu1,Nu2,Mu1,Mu2,Theta,X,Sx,Id,Pqa,Ipqa,Ierror)
       Pqa(k) = pq
       Ipqa(k) = ipq
       IF ( Mu2<=mu ) EXIT
-    ENDIF
-  ENDDO
+    END IF
+  END DO
   RETURN
 END SUBROUTINE DXQMU

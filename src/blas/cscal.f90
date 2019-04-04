@@ -52,7 +52,7 @@ SUBROUTINE CSCAL(N,Ca,Cx,Incx)
   !   900821  Modified to correct problem with a negative increment.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   COMPLEX Ca, Cx(*)
   INTEGER i, Incx, ix, N
   !* FIRST EXECUTABLE STATEMENT  CSCAL
@@ -64,9 +64,9 @@ SUBROUTINE CSCAL(N,Ca,Cx,Incx)
     !
     DO i = 1, N
       Cx(i) = Ca*Cx(i)
-    ENDDO
+    END DO
     RETURN
-  ENDIF
+  END IF
   !
   !     Code for increment not equal to 1.
   !
@@ -75,6 +75,6 @@ SUBROUTINE CSCAL(N,Ca,Cx,Incx)
   DO i = 1, N
     Cx(ix) = Ca*Cx(ix)
     ix = ix + Incx
-  ENDDO
+  END DO
   RETURN
 END SUBROUTINE CSCAL

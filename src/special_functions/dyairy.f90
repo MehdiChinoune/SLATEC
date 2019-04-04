@@ -175,7 +175,7 @@ SUBROUTINE DYAIRY(X,Rx,C,Bi,Dbi)
         e1 = tt*e1 - e2 + bb(j)
         f2 = temp1
         e2 = temp2
-      ENDDO
+      END DO
       temp1 = t*f1 - f2 + aa(1)
       temp2 = t*e1 - e2 + bb(1)
       cv = C - fpi12
@@ -193,13 +193,13 @@ SUBROUTINE DYAIRY(X,Rx,C,Bi,Dbi)
         e1 = tt*e1 - e2 + dbb(j)
         f2 = temp1
         e2 = temp2
-      ENDDO
+      END DO
       temp1 = t*f1 - f2 + daa(1)
       temp2 = t*e1 - e2 + dbb(1)
       cv = C - spi12
       Dbi = (temp1*COS(cv)-temp2*SIN(cv))*rtrx
       RETURN
-    ENDIF
+    END IF
   ELSEIF ( C>8.0D0 ) THEN
     !
     rtrx = SQRT(Rx)
@@ -213,7 +213,7 @@ SUBROUTINE DYAIRY(X,Rx,C,Bi,Dbi)
       temp1 = f1
       f1 = tt*f1 - f2 + bk3(j)
       f2 = temp1
-    ENDDO
+    END DO
     s1 = t*f1 - f2 + bk3(1)
     j = n2d
     f1 = dbk3(j)
@@ -223,7 +223,7 @@ SUBROUTINE DYAIRY(X,Rx,C,Bi,Dbi)
       temp1 = f1
       f1 = tt*f1 - f2 + dbk3(j)
       f2 = temp1
-    ENDDO
+    END DO
     d1 = t*f1 - f2 + dbk3(1)
     tc = C + C
     ex = EXP(C)
@@ -242,7 +242,7 @@ SUBROUTINE DYAIRY(X,Rx,C,Bi,Dbi)
         temp1 = f1
         f1 = tt*f1 - f2 + bk4(j)
         f2 = temp1
-      ENDDO
+      END DO
       s2 = t*f1 - f2 + bk4(1)
       Bi = (s1+EXP(-tc)*s2)/rtrx
       Bi = Bi*ex
@@ -254,12 +254,12 @@ SUBROUTINE DYAIRY(X,Rx,C,Bi,Dbi)
         temp1 = f1
         f1 = tt*f1 - f2 + dbk4(j)
         f2 = temp1
-      ENDDO
+      END DO
       d2 = t*f1 - f2 + dbk4(1)
       Dbi = rtrx*(d1+EXP(-tc)*d2)
       Dbi = Dbi*ex
       RETURN
-    ENDIF
+    END IF
   ELSEIF ( X>2.5D0 ) THEN
     rtrx = SQRT(Rx)
     t = (X+X-con2)*con3
@@ -272,7 +272,7 @@ SUBROUTINE DYAIRY(X,Rx,C,Bi,Dbi)
       temp1 = f1
       f1 = tt*f1 - f2 + bk2(j)
       f2 = temp1
-    ENDDO
+    END DO
     Bi = (t*f1-f2+bk2(1))/rtrx
     ex = EXP(C)
     Bi = Bi*ex
@@ -284,7 +284,7 @@ SUBROUTINE DYAIRY(X,Rx,C,Bi,Dbi)
       temp1 = f1
       f1 = tt*f1 - f2 + dbk2(j)
       f2 = temp1
-    ENDDO
+    END DO
     Dbi = (t*f1-f2+dbk2(1))*rtrx
     Dbi = Dbi*ex
     RETURN
@@ -299,7 +299,7 @@ SUBROUTINE DYAIRY(X,Rx,C,Bi,Dbi)
       temp1 = f1
       f1 = tt*f1 - f2 + bk1(j)
       f2 = temp1
-    ENDDO
+    END DO
     Bi = t*f1 - f2 + bk1(1)
     j = n1d
     f1 = dbk1(j)
@@ -309,10 +309,10 @@ SUBROUTINE DYAIRY(X,Rx,C,Bi,Dbi)
       temp1 = f1
       f1 = tt*f1 - f2 + dbk1(j)
       f2 = temp1
-    ENDDO
+    END DO
     Dbi = t*f1 - f2 + dbk1(1)
     RETURN
-  ENDIF
+  END IF
   t = 0.4D0*C - 1.0D0
   tt = t + t
   j = n2
@@ -328,7 +328,7 @@ SUBROUTINE DYAIRY(X,Rx,C,Bi,Dbi)
     e1 = tt*e1 - e2 + bjn(j)
     f2 = temp1
     e2 = temp2
-  ENDDO
+  END DO
   Bi = (t*e1-e2+bjn(1)) - ax*(t*f1-f2+bjp(1))
   j = n3d
   f1 = dbjp(j)
@@ -343,7 +343,7 @@ SUBROUTINE DYAIRY(X,Rx,C,Bi,Dbi)
     e1 = tt*e1 - e2 + dbjn(j)
     f2 = temp1
     e2 = temp2
-  ENDDO
+  END DO
   Dbi = X*X*(t*f1-f2+dbjp(1)) + (t*e1-e2+dbjn(1))
   RETURN
 END SUBROUTINE DYAIRY

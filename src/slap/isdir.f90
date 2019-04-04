@@ -190,26 +190,26 @@ INTEGER FUNCTION ISDIR(N,B,X,Nelt,Ia,Ja,A,Isym,MSOLVE,Itol,Tol,Itmax,Iter,&
     IF ( Iter==0 ) THEN
       CALL MSOLVE(N,B,Dz,Nelt,Ia,Ja,A,Isym,Rwork,Iwork)
       Bnrm = DNRM2(N,Dz,1)
-    ENDIF
+    END IF
     Err = DNRM2(N,Z,1)/Bnrm
   ELSEIF ( Itol==11 ) THEN
     !         err = ||x-TrueSolution||/||TrueSolution|| (2-Norms).
     IF ( Iter==0 ) Solnrm = DNRM2(N,SOLn,1)
     DO i = 1, N
       Dz(i) = X(i) - SOLn(i)
-    ENDDO
+    END DO
     Err = DNRM2(N,Dz,1)/Solnrm
   ELSE
     !
     !         If we get here ITOL is not one of the acceptable values.
     Err = D1MACH(2)
     Ierr = 3
-  ENDIF
+  END IF
   !
   IF ( Iunit/=0 ) THEN
     WRITE (Iunit,99001) Iter, Err
     99001 FORMAT (5X,'ITER = ',I4,' Error Estimate = ',D16.7)
-  ENDIF
+  END IF
   !
   IF ( Err<=Tol ) ISDIR = 1
   !

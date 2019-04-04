@@ -90,7 +90,7 @@ SUBROUTINE TQLRAT(N,D,E2,Ierr)
     !
     DO i = 2, N
       E2(i-1) = E2(i)
-    ENDDO
+    END DO
     !
     f = 0.0E0
     b = 0.0E0
@@ -102,13 +102,13 @@ SUBROUTINE TQLRAT(N,D,E2,Ierr)
       IF ( b<=h ) THEN
         b = h
         c = b*b
-      ENDIF
+      END IF
       !     .......... LOOK FOR SMALL SQUARED SUB-DIAGONAL ELEMENT ..........
       DO m = l, N
         IF ( E2(m)<=c ) EXIT
         !     .......... E2(N) IS ALWAYS ZERO, SO THERE IS NO EXIT
         !                THROUGH THE BOTTOM OF THE LOOP ..........
-      ENDDO
+      END DO
       !
       IF ( m/=l ) THEN
         DO WHILE ( j/=30 )
@@ -124,7 +124,7 @@ SUBROUTINE TQLRAT(N,D,E2,Ierr)
           !
           DO i = l1, N
             D(i) = D(i) - h
-          ENDDO
+          END DO
           !
           f = f + h
           !     .......... RATIONAL QL TRANSFORMATION ..........
@@ -144,7 +144,7 @@ SUBROUTINE TQLRAT(N,D,E2,Ierr)
             g = D(i) - E2(i)/g
             IF ( g==0.0E0 ) g = b
             h = g*p/r
-          ENDDO
+          END DO
           !
           E2(l) = s*g
           D(l) = h
@@ -153,10 +153,10 @@ SUBROUTINE TQLRAT(N,D,E2,Ierr)
           IF ( ABS(E2(l))<=ABS(c/h) ) GOTO 20
           E2(l) = h*E2(l)
           IF ( E2(l)==0.0E0 ) GOTO 20
-        ENDDO
+        END DO
         GOTO 100
-      ENDIF
-      20       p = D(l) + f
+      END IF
+      20  p = D(l) + f
       !     .......... ORDER EIGENVALUES ..........
       IF ( l/=1 ) THEN
         !     .......... FOR I=L STEP -1 UNTIL 2 DO -- ..........
@@ -164,14 +164,14 @@ SUBROUTINE TQLRAT(N,D,E2,Ierr)
           i = l + 2 - ii
           IF ( p>=D(i-1) ) GOTO 40
           D(i) = D(i-1)
-        ENDDO
-      ENDIF
+        END DO
+      END IF
       !
       i = 1
-      40       D(i) = p
+      40  D(i) = p
       !
-    ENDDO
-  ENDIF
+    END DO
+  END IF
   RETURN
   !     .......... SET ERROR -- NO CONVERGENCE TO AN
   !                EIGENVALUE AFTER 30 ITERATIONS ..........

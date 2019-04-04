@@ -291,7 +291,7 @@ SUBROUTINE HSTCRT(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   INTEGER i, id2, id3, id4, Idimf, ierr1, Ierror, j, M, Mbdcnd, &
     mp, mperod, N, Nbdcnd, np, nperod
   REAL A, B, Bda(*), Bdb(*), Bdc(*), Bdd(*), C, D, deltax, deltay, delxsq, &
@@ -333,7 +333,7 @@ SUBROUTINE HSTCRT(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
     W(j) = -st2 + Elmbda*delysq
     j = id3 + i
     W(j) = s
-  ENDDO
+  END DO
   !
   !     ENTER BOUNDARY DATA FOR X-BOUNDARIES.
   !
@@ -343,12 +343,12 @@ SUBROUTINE HSTCRT(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
     CASE (4,5)
       DO j = 1, N
         F(1,j) = F(1,j) + Bda(j)*twdelx
-      ENDDO
+      END DO
       W(id2+1) = W(id2+1) + W(1)
     CASE DEFAULT
       DO j = 1, N
         F(1,j) = F(1,j) - Bda(j)*delxsq
-      ENDDO
+      END DO
       W(id2+1) = W(id2+1) - W(1)
   END SELECT
   SELECT CASE (mp)
@@ -356,12 +356,12 @@ SUBROUTINE HSTCRT(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
     CASE (3,4)
       DO j = 1, N
         F(M,j) = F(M,j) - Bdb(j)*twdelx
-      ENDDO
+      END DO
       W(id3) = W(id3) + W(1)
     CASE DEFAULT
       DO j = 1, N
         F(M,j) = F(M,j) - Bdb(j)*delxsq
-      ENDDO
+      END DO
       W(id3) = W(id3) - W(1)
   END SELECT
   !
@@ -374,33 +374,33 @@ SUBROUTINE HSTCRT(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
     CASE (4,5)
       DO i = 1, M
         F(i,1) = F(i,1) + Bdc(i)*twdely
-      ENDDO
+      END DO
     CASE DEFAULT
       DO i = 1, M
         F(i,1) = F(i,1) - Bdc(i)*twdysq
-      ENDDO
+      END DO
   END SELECT
   SELECT CASE (np)
     CASE (1)
     CASE (3,4)
       DO i = 1, M
         F(i,N) = F(i,N) - Bdd(i)*twdely
-      ENDDO
+      END DO
     CASE DEFAULT
       DO i = 1, M
         F(i,N) = F(i,N) - Bdd(i)*twdysq
-      ENDDO
+      END DO
   END SELECT
   200 CONTINUE
   DO i = 1, M
     DO j = 1, N
       F(i,j) = F(i,j)*delysq
-    ENDDO
-  ENDDO
+    END DO
+  END DO
   IF ( mperod/=0 ) THEN
     W(1) = 0.
     W(id4) = 0.
-  ENDIF
+  END IF
   Pertrb = 0.
   IF ( Elmbda<0 ) THEN
   ELSEIF ( Elmbda==0 ) THEN
@@ -418,20 +418,20 @@ SUBROUTINE HSTCRT(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
             DO j = 1, N
               DO i = 1, M
                 s = s + F(i,j)
-              ENDDO
-            ENDDO
+              END DO
+            END DO
             Pertrb = s/(M*N)
             DO j = 1, N
               DO i = 1, M
                 F(i,j) = F(i,j) - Pertrb
-              ENDDO
-            ENDDO
+              END DO
+            END DO
             Pertrb = Pertrb/delysq
         END SELECT
     END SELECT
   ELSE
     Ierror = 6
-  ENDIF
+  END IF
   !
   !     SOLVE THE EQUATION.
   !
@@ -439,6 +439,6 @@ SUBROUTINE HSTCRT(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
     CALL GENBUN(nperod,N,mperod,M,W(1),W(id2+1),W(id3+1),Idimf,F,ierr1,W(id4+1))
   ELSE
     CALL POISTG(nperod,N,mperod,M,W(1),W(id2+1),W(id3+1),Idimf,F,ierr1,W(id4+1))
-  ENDIF
+  END IF
   W(1) = W(id4+1) + 3*M
 END SUBROUTINE HSTCRT

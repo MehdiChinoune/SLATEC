@@ -24,7 +24,7 @@ SUBROUTINE PASSB(Nac,Ido,Ip,L1,Idl1,Cc,C1,C2,Ch,Ch2,Wa)
   !   891009  Removed unreferenced variable.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
-  
+
   INTEGER i, idij, idj, idl, Idl1, idlj, Ido, idot, idp, ik, inc, &
     Ip, ipp2, ipph, j, jc, k, l, L1, lc
   REAL C1(Ido,L1,*), C2(Idl1,*), Cc(Ido,Ip,*), Ch(Ido,L1,*), Ch2(Idl1,*), Wa(*), wai, war
@@ -43,15 +43,15 @@ SUBROUTINE PASSB(Nac,Ido,Ip,L1,Idl1,Cc,C1,C2,Ch,Ch2,Wa)
         DO k = 1, L1
           Ch(i,k,j) = Cc(i,j,k) + Cc(i,jc,k)
           Ch(i,k,jc) = Cc(i,j,k) - Cc(i,jc,k)
-        ENDDO
-      ENDDO
-    ENDDO
+        END DO
+      END DO
+    END DO
     DO i = 1, Ido
       !DIR$ IVDEP
       DO k = 1, L1
         Ch(i,k,1) = Cc(i,1,k)
-      ENDDO
-    ENDDO
+      END DO
+    END DO
   ELSE
     DO j = 2, ipph
       jc = ipp2 - j
@@ -60,16 +60,16 @@ SUBROUTINE PASSB(Nac,Ido,Ip,L1,Idl1,Cc,C1,C2,Ch,Ch2,Wa)
         DO i = 1, Ido
           Ch(i,k,j) = Cc(i,j,k) + Cc(i,jc,k)
           Ch(i,k,jc) = Cc(i,j,k) - Cc(i,jc,k)
-        ENDDO
-      ENDDO
-    ENDDO
+        END DO
+      END DO
+    END DO
     DO k = 1, L1
       !DIR$ IVDEP
       DO i = 1, Ido
         Ch(i,k,1) = Cc(i,1,k)
-      ENDDO
-    ENDDO
-  ENDIF
+      END DO
+    END DO
+  END IF
   idl = 2 - Ido
   inc = 0
   DO l = 2, ipph
@@ -79,7 +79,7 @@ SUBROUTINE PASSB(Nac,Ido,Ip,L1,Idl1,Cc,C1,C2,Ch,Ch2,Wa)
     DO ik = 1, Idl1
       C2(ik,l) = Ch2(ik,1) + Wa(idl-1)*Ch2(ik,2)
       C2(ik,lc) = Wa(idl)*Ch2(ik,Ip)
-    ENDDO
+    END DO
     idlj = idl
     inc = inc + Ido
     DO j = 3, ipph
@@ -92,15 +92,15 @@ SUBROUTINE PASSB(Nac,Ido,Ip,L1,Idl1,Cc,C1,C2,Ch,Ch2,Wa)
       DO ik = 1, Idl1
         C2(ik,l) = C2(ik,l) + war*Ch2(ik,j)
         C2(ik,lc) = C2(ik,lc) + wai*Ch2(ik,jc)
-      ENDDO
-    ENDDO
-  ENDDO
+      END DO
+    END DO
+  END DO
   DO j = 2, ipph
     !DIR$ IVDEP
     DO ik = 1, Idl1
       Ch2(ik,1) = Ch2(ik,1) + Ch2(ik,j)
-    ENDDO
-  ENDDO
+    END DO
+  END DO
   DO j = 2, ipph
     jc = ipp2 - j
     !DIR$ IVDEP
@@ -109,21 +109,21 @@ SUBROUTINE PASSB(Nac,Ido,Ip,L1,Idl1,Cc,C1,C2,Ch,Ch2,Wa)
       Ch2(ik-1,jc) = C2(ik-1,j) + C2(ik,jc)
       Ch2(ik,j) = C2(ik,j) + C2(ik-1,jc)
       Ch2(ik,jc) = C2(ik,j) - C2(ik-1,jc)
-    ENDDO
-  ENDDO
+    END DO
+  END DO
   Nac = 1
   IF ( Ido==2 ) RETURN
   Nac = 0
   DO ik = 1, Idl1
     C2(ik,1) = Ch2(ik,1)
-  ENDDO
+  END DO
   DO j = 2, Ip
     !DIR$ IVDEP
     DO k = 1, L1
       C1(1,k,j) = Ch(1,k,j)
       C1(2,k,j) = Ch(2,k,j)
-    ENDDO
-  ENDDO
+    END DO
+  END DO
   IF ( idot>L1 ) THEN
     idj = 2 - Ido
     DO j = 2, Ip
@@ -135,11 +135,11 @@ SUBROUTINE PASSB(Nac,Ido,Ip,L1,Idl1,Cc,C1,C2,Ch,Ch2,Wa)
           idij = idij + 2
           C1(i-1,k,j) = Wa(idij-1)*Ch(i-1,k,j) - Wa(idij)*Ch(i,k,j)
           C1(i,k,j) = Wa(idij-1)*Ch(i,k,j) + Wa(idij)*Ch(i-1,k,j)
-        ENDDO
-      ENDDO
-    ENDDO
+        END DO
+      END DO
+    END DO
     RETURN
-  ENDIF
+  END IF
   idij = 0
   DO j = 2, Ip
     idij = idij + 2
@@ -149,8 +149,8 @@ SUBROUTINE PASSB(Nac,Ido,Ip,L1,Idl1,Cc,C1,C2,Ch,Ch2,Wa)
       DO k = 1, L1
         C1(i-1,k,j) = Wa(idij-1)*Ch(i-1,k,j) - Wa(idij)*Ch(i,k,j)
         C1(i,k,j) = Wa(idij-1)*Ch(i,k,j) + Wa(idij)*Ch(i-1,k,j)
-      ENDDO
-    ENDDO
-  ENDDO
+      END DO
+    END DO
+  END DO
   RETURN
 END SUBROUTINE PASSB

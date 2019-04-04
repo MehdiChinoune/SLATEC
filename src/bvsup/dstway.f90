@@ -49,8 +49,8 @@ SUBROUTINE DSTWAY(U,V,Yhp,Inout,Stowa)
       DO j = 1, NEQivp
         ksj = ks + j
         Yhp(ksj) = Stowa(ksj)
-      ENDDO
-    ENDIF
+      END DO
+    END IF
     ks = ks + NEQivp
     X = Stowa(ks+1)
     INFo(1) = 0
@@ -59,8 +59,8 @@ SUBROUTINE DSTWAY(U,V,Yhp,Inout,Stowa)
     IF ( NDIsk/=0.AND.ko/=0 ) THEN
       DO k = 1, ko
         BACKSPACE NTApe
-      ENDDO
-    ENDIF
+      END DO
+    END IF
   ELSE
     !
     !        SAVE IN STOWA ARRAY AND ISTKOP
@@ -72,11 +72,11 @@ SUBROUTINE DSTWAY(U,V,Yhp,Inout,Stowa)
       DO j = 1, NEQivp
         ksj = ks + j
         Stowa(ksj) = Yhp(ksj)
-      ENDDO
-    ENDIF
+      END DO
+    END IF
     ks = ks + NEQivp
     Stowa(ks+1) = X
     ISTkop = KOP
     IF ( XOP==X ) ISTkop = KOP + 1
-  ENDIF
+  END IF
 END SUBROUTINE DSTWAY

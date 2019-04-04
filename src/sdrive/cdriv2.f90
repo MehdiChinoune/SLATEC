@@ -371,7 +371,7 @@ SUBROUTINE CDRIV2(N,T,Y,F,Tout,Mstate,Nroot,Eps,Ewt,Mint,Work,Lenw,Iwork,&
       ' is not in the range 1 to 8 .',Ierflg,1)
     Mstate = SIGN(9,Mstate)
     RETURN
-  ENDIF
+  END IF
   IF ( Mint<1.OR.Mint>3 ) THEN
     WRITE (intgr1,'(I8)') Mint
     Ierflg = 23
@@ -379,20 +379,20 @@ SUBROUTINE CDRIV2(N,T,Y,F,Tout,Mstate,Nroot,Eps,Ewt,Mint,Work,Lenw,Iwork,&
       'Illegal input.  Improper value for the integration method flag, '//intgr1//' .',Ierflg,1)
     Mstate = SIGN(9,Mstate)
     RETURN
-  ENDIF
+  END IF
   IF ( Mstate>=0 ) THEN
     nstate = Mstate
     ntask = 1
   ELSE
     nstate = -Mstate
     ntask = 3
-  ENDIF
+  END IF
   ewtcom(1) = Ewt
   IF ( Ewt/=0.E0 ) THEN
     ierror = 3
   ELSE
     ierror = 2
-  ENDIF
+  END IF
   IF ( Mint==1 ) THEN
     miter = 0
     mxord = 12
@@ -402,7 +402,7 @@ SUBROUTINE CDRIV2(N,T,Y,F,Tout,Mstate,Nroot,Eps,Ewt,Mint,Work,Lenw,Iwork,&
   ELSEIF ( Mint==3 ) THEN
     miter = 2
     mxord = 12
-  ENDIF
+  END IF
   hmax = 2.E0*ABS(Tout-T)
   CALL CDRIV3(N,T,Y,F,nstate,Tout,ntask,Nroot,Eps,ewtcom,ierror,Mint,miter,&
     IMPL,ml,mu,mxord,hmax,Work,Lenw,Iwork,Leniw,F,F,nde,MXSTEP,G,F,Ierflg)
@@ -412,5 +412,5 @@ SUBROUTINE CDRIV2(N,T,Y,F,Tout,Mstate,Nroot,Eps,Ewt,Mint,Work,Lenw,Iwork,&
     Mstate = SIGN(8,Mstate)
   ELSEIF ( nstate>11 ) THEN
     Mstate = SIGN(9,Mstate)
-  ENDIF
+  END IF
 END SUBROUTINE CDRIV2
