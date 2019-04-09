@@ -28,7 +28,7 @@ elseif ( "${CMAKE_Fortran_COMPILER_ID}" MATCHES "Intel" )
 elseif ( "${CMAKE_Fortran_COMPILER_ID}" MATCHES "Flang" )
 
   set( CMAKE_Fortran_FLAGS_RELEASE "${CMAKE_Fortran_FLAGS} -O3 " )
-  set( CMAKE_Fortran_FLAGS_DEBUG "${CMAKE_Fortran_FLAGS} -g" )
+  set( CMAKE_Fortran_FLAGS_DEBUG "${CMAKE_Fortran_FLAGS} -g -Wall " )
 
 elseif ( "${CMAKE_Fortran_COMPILER_ID}" MATCHES "PGI" )
 

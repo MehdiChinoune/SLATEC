@@ -74,6 +74,7 @@ COMPLEX FUNCTION CATAN(Z)
     RETURN
   ELSE
     x = REAL(Z)
+    IF( ABS(x) == 0. ) x = 0.
     y = AIMAG(Z)
     r2 = r*r
     IF ( r2==1.0.AND.x==0.0 ) CALL XERMSG('SLATEC','CATAN','Z IS +I OR -I',2,2)
