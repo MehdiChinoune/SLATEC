@@ -40,7 +40,7 @@ CONTAINS
     !     .. Scalar Arguments ..
     INTEGER Ipass, Kprint, Lun
     !     .. Local Scalars ..
-    REAL(8) :: cnorm, relerr, relnrm, resnrm, rnorme, rnorml, tnorm
+    REAL(8) :: cnorm, relerr(1), relnrm(1), resnrm(1), rnorme, rnorml(1), tnorm
     INTEGER i, idigit, jdigit, kontrl, ma, mdd, me, meap1, mep1, mg, &
       mode, n, nerr, np1
     LOGICAL fatal
@@ -146,7 +146,7 @@ CONTAINS
     !     Call DLSEI to get solution in X(*), least squares residual in
     !     RNORML.
     !
-    CALL DLSEI(d,mdd,me,ma,mg,n,prgopt,x,rnorme,rnorml,mode,work,ip)
+    CALL DLSEI(d,mdd,me,ma,mg,n,prgopt,x,rnorme,rnorml(1),mode,work,ip)
     !
     !     Compute relative error in problem variable solution and residual
     !     norm computation.
@@ -158,7 +158,7 @@ CONTAINS
     relerr = cnorm/tnorm
     relnrm = (resnrm-rnorml)/resnrm
     !
-    IF ( relerr<=70.0D0*SQRT(D1MACH(4)).AND.relnrm<=5.0D0*D1MACH(4) ) THEN
+    IF ( relerr(1)<=70.0D0*SQRT(D1MACH(4)).AND.relnrm(1)<=5.0D0*D1MACH(4) ) THEN
       Ipass = 1
       IF ( Kprint>=3 ) WRITE (Lun,99002)
       99002 FORMAT (/' DLSEI PASSED TEST')
@@ -210,7 +210,7 @@ CONTAINS
     IF ( Kprint>=3 ) WRITE (Lun,99004)
     99004 FORMAT (/' 2 ERROR MESSAGES EXPECTED')
     !
-    CALL DLSEI(d,0,me,ma,mg,n,prgopt,x,rnorme,rnorml,mode,work,ip)
+    CALL DLSEI(d,0,me,ma,mg,n,prgopt,x,rnorme,rnorml(1),mode,work,ip)
     IF ( NUMXER(nerr)/=2 ) THEN
       Ipass = 0
       fatal = .TRUE.
@@ -218,7 +218,7 @@ CONTAINS
     CALL XERCLR
     !
     prgopt(1) = -1
-    CALL DLSEI(d,mdd,me,ma,mg,n,prgopt,x,rnorme,rnorml,mode,work,ip)
+    CALL DLSEI(d,mdd,me,ma,mg,n,prgopt,x,rnorme,rnorml(1),mode,work,ip)
     IF ( NUMXER(nerr)/=2 ) THEN
       Ipass = 0
       fatal = .TRUE.
@@ -293,7 +293,7 @@ CONTAINS
     !           including removing an illegal character from column 1, and
     !           editorial changes.  (RWC)
 
-    REAL(8) :: a(4,4), b(4), D1MACH, delmax, delx, r, rnorm, work(50)
+    REAL(8) :: a(4,4), b(4), D1MACH, delmax, delx, r, rnorm(1), work(50)
     INTEGER i, Ipass, j, kk, Kprint
     INTEGER nerr, kprog, kcase, iwork(20), info, Lun
     REAL(8), PARAMETER :: aa(4,4,2) = RESHAPE( [1.D0, .5D0, 1.D0, .25D0, &
@@ -364,7 +364,7 @@ CONTAINS
         !
         IF ( Kprint>=3 ) WRITE (Lun,99004) list(kprog), kcase, rnorm
         99004 FORMAT (3X,A,'LSIA, CASE ',I1,'.  RNORM IS ',D11.4/)
-        IF ( rnorm>=r ) THEN
+        IF ( rnorm(1)>=r ) THEN
           nerr = nerr + 1
           IF ( Kprint>=2 ) WRITE (Lun,99005) list(kprog), kcase, rnorm
           99005 FORMAT ('   PROBLEM WITH ',A,'LSIA, CASE ',I1,&

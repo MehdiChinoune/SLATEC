@@ -150,7 +150,7 @@ CONTAINS
     INTEGER i, jump, k, Kprint
     REAL sa(1), sb(1), sc(1), Sfac, ss(1)
     REAL strue(9), stemp(9), stmp(1)
-    REAL(8) :: dc(1), ds(1), da(10), Dfac, db(1), dtemp(9)
+    REAL(8) :: dc(1), ds(1), da(1), Dfac, db(1), dtemp(9)
     REAL, PARAMETER :: zero = 0.
     REAL(8), PARAMETER :: dzero = 0.D0
     REAL(8), PARAMETER :: da1(8) = [ .3D0, .4D0, -.3D0, -.4D0, -.3D0, 0.D0, 0.D0, 1.D0 ]
@@ -218,7 +218,7 @@ CONTAINS
           IF ( k>8 ) EXIT
           da = da1(k)
           db = db1(k)
-          CALL DROTG(da,db,dc,ds)
+          CALL DROTG(da(1),db(1),dc(1),ds(1))
           CALL DTEST(1,da,datrue(k),datrue(k),Dfac,Kprint)
           CALL DTEST(1,db,dbtrue(k),dbtrue(k),Dfac,Kprint)
           CALL DTEST(1,dc,dc1(k),dc1(k),Dfac,Kprint)
@@ -252,7 +252,7 @@ CONTAINS
           IF ( k>8 ) EXIT
           sa = REAL( da1(k), 4 )
           sb = REAL( db1(k), 4 )
-          CALL SROTG(sa,sb,sc,ss)
+          CALL SROTG(sa(1),sb(1),sc(1),ss(1))
           stmp = REAL(datrue(k))
           CALL STEST(1,sa,stmp,stmp,Sfac,Kprint)
           stmp = REAL(dbtrue(k))
@@ -497,7 +497,7 @@ CONTAINS
     !   890911  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-    INTEGER i, j, ki, kn, kni, kpar, ksize, lenx, leny, mx, my, Kprint
+    INTEGER i, j, ki, kn, kni, kpar, ksize, lenx, leny, mx, my, Kprint, qc_i(30)
     REAL Sdfac, SDOT, SDSDOT, Sfac
     REAL sx(7), sy(7), stx(7), sty(7), ssize(7), qc(30), sparam(5), stmp(1), stmp2(1)
     REAL(8) :: dx(7), dy(7), dparam(5), dsize(7), dtx(7), dty(7), dtmp(1)
@@ -923,7 +923,8 @@ CONTAINS
             !     IN THE DIAGNOSTIC OUTPUT.
             !
             MODe = 1
-            dtmp = DQDOTI(N,db,qc,dx2,INCx,dy2,INCy)
+            qc_i = INT(qc)
+            dtmp = DQDOTI(N,db,qc_i,dx2,INCx,dy2,INCy)
             CALL DTEST(1,dtmp,dt2(kn,ki,1),dt2(kn,ki,1),Dqfac,Kprint)
           CASE (6)
             ! 6. DQDOTA
@@ -935,10 +936,11 @@ CONTAINS
             !     DQDOTI OR DQDOTA IN THE DIAGNOSTIC OUTPUT.
             !
             MODe = 1
-            dtmp = DQDOTI(N,db,qc,dx2,INCx,dy2,INCy)
+            qc_i = INT(qc)
+            dtmp = DQDOTI(N,db,qc_i,dx2,INCx,dy2,INCy)
             CALL DTEST(1,dtmp,dt2(kn,ki,1),dt2(kn,ki,1),Dqfac,Kprint)
             MODe = 2
-            dtmp = DQDOTA(N,-db,qc,dx2,INCx,dy2,INCy)
+            dtmp = DQDOTA(N,-db,qc_i,dx2,INCx,dy2,INCy)
             CALL DTEST(1,dtmp,dt2(kn,ki,2),dt2(kn,ki,2),Dqfac,Kprint)
           CASE (7)
             ! 7. CDOTC

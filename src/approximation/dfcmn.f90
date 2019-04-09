@@ -267,7 +267,7 @@ SUBROUTINE DFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Nconst,Xconst,&
     !
     !        Last call to adjust block positioning.
     !
-    CALL DCOPY(nordp1,0.D0,0,G(ir,1),Mdg)
+    G(ir,1:nordp1) = 0.D0
     CALL DBNDAC(G,Mdg,Nord,ip,ir,1,np1)
   END IF
   !
@@ -319,7 +319,7 @@ SUBROUTINE DFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Nconst,Xconst,&
       END DO
       !
       CALL DFSPVD(Bkpt,Nord,xval,ileft,Bf,ideriv+1)
-      CALL DCOPY(np1,0.D0,0,W(neqcon,1),Mdw)
+      W(neqcon,1:np1) = 0.D0
       CALL DCOPY(Nord,Bf(1,ideriv+1),1,W(neqcon,ileft-nordm1),Mdw)
       !
       IF ( itype==2 ) THEN
@@ -342,7 +342,7 @@ SUBROUTINE DFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Nconst,Xconst,&
   !
   DO i = 1, np1
     irow = i + neqcon
-    CALL DCOPY(n,0.D0,0,W(irow,1),Mdw)
+    W(irow,1:n) = 0.D0
     CALL DCOPY(MIN(np1-i,Nord),G(i,1),Mdg,W(irow,i),Mdw)
     W(irow,np1) = G(i,nordp1)
   END DO
@@ -366,7 +366,7 @@ SUBROUTINE DFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Nconst,Xconst,&
       !
       CALL DFSPVD(Bkpt,Nord,xval,ileft,Bf,ideriv+1)
       irow = neqcon + np1 + nincon
-      CALL DCOPY(n,0.D0,0,W(irow,1),Mdw)
+      W(irow,1:n) = 0.D0
       intrvl = ileft - nordm1
       CALL DCOPY(Nord,Bf(1,ideriv+1),1,W(irow,intrvl),Mdw)
       !

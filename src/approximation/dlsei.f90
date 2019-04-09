@@ -475,7 +475,7 @@ SUBROUTINE DLSEI(W,Mdw,Me,Ma,Mg,N,Prgopt,X,Rnorme,Rnorml,Mode,Ws,Ip)
   !     The nominal column scaling used in the code is
   !     the identity scaling.
   !
-  CALL DCOPY(N,1.D0,0,Ws(n1),1)
+  Ws(n1:N+n1) = 1.D0
   !
   !     No covariance matrix is nominally computed.
   !
@@ -625,8 +625,7 @@ SUBROUTINE DLSEI(W,Mdw,Me,Ma,Mg,N,Prgopt,X,Rnorme,Rnorml,Mode,Ws,Ip)
     W(i,np1) = W(i,np1) - DDOT(kranke,W(i,1),Mdw,X,1)
     sn = DDOT(kranke,W(i,1),Mdw,W(i,1),Mdw)
     rn = DDOT(N-kranke,W(i,kranke+1),Mdw,W(i,kranke+1),Mdw)
-    IF ( rn<=sn*tau**2.AND.kranke<N )&
-      CALL DCOPY(N-kranke,0.D0,0,W(i,kranke+1),Mdw)
+    IF ( rn<=sn*tau**2.AND.kranke<N ) W(i,kranke+1:N) = 0.D0
   END DO
   !
   !     Compute equality constraint equations residual length.

@@ -236,7 +236,7 @@ CONTAINS
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   901010  Added PASS/FAIL message and cleaned up FORMATs.  (RWC)
 
-    REAL a, b, bda, bdb(81), bdc, bdd, c, d, dum, elmbda, ermax, err, &
+    REAL a, b, bda(1), bdb(81), bdc(1), bdd(1), c, d, dum, elmbda, ermax, err, &
       f(45,82), pertrb, pi, piby2, PIMACH, pisq, w(1200), x(41)
     REAL y(81), z
     INTEGER i, idimf, ierror, Ipass, j, Kprint, Lun, m, mbdcnd, mp1, &
@@ -386,7 +386,7 @@ CONTAINS
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   901010  Added PASS/FAIL message and cleaned up FORMATs.  (RWC)
 
-    REAL bdrf, bdrs, bdtf(33), bdts, ci4, dphi, dr, dtheta, dum, elmbda, &
+    REAL bdrf(1), bdrs(1), bdtf(33), bdts(1), ci4, dphi, dr, dtheta, dum, elmbda, &
       ermax, err, f(48,33), pertrb, pi, PIMACH, r(33), rf, rs, si
     REAL tf, theta(48), ts, w(1200), z
     INTEGER i, idimf, ierror, intl, Ipass, j, Kprint, Lun, m, &
@@ -938,7 +938,7 @@ CONTAINS
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   901010  Added PASS/FAIL message and cleaned up FORMATs.  (RWC)
 
-    REAL a, b, bda, bdb, bdc(51), bdd(51), c, d, dum, elmbda, ermax, err, &
+    REAL a, b, bda(1), bdb(1), bdc(51), bdd(51), c, d, dum, elmbda, ermax, err, &
       f(100,50), pertrb, pi, PIMACH, r(51), theta(49), w(1200), z
     INTEGER i, idimf, ierror, Ipass, j, Kprint, Lun, m, mbdcnd, mp1, &
       n, nbdcnd, np1
@@ -1087,7 +1087,7 @@ CONTAINS
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   901010  Added PASS/FAIL message and cleaned up FORMATs.  (RWC)
 
-    REAL bdpf, bdps, bdtf(73), bdts, dphi, dtheta, dum, elmbda, ermax, &
+    REAL bdpf(1), bdps(1), bdtf(73), bdts(1), dphi, dtheta, dum, elmbda, ermax, &
       err, f(19,73), pertrb, pf, pi, PIMACH, ps, sinp(73), sint(19), tf, ts
     REAL w(1200), z
     INTEGER i, idimf, ierror, Ipass, j, Kprint, Lun, m, mbdcnd, mp1, n, nbdcnd, np1

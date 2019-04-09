@@ -106,7 +106,7 @@ CONTAINS
     !
     INTEGER i, idid, info(15), iout, ipar(1), ires, iwork(45), j190, &
       j290, liw, lrw, ml, mu, neq, nerr, nfe, nje, nout, nqu, nst
-    REAL(8) :: atol, delta(25), er, er1, er2, erm, ero, hu, rpar(1), rtol, &
+    REAL(8) :: atol(1), delta(25), er, er1, er2, erm, ero, hu, rpar(1), rtol(1), &
       rwork(550), t, tout, y(25), yprime(25), yt1, yt2
     !
     REAL(8), PARAMETER :: tout1 = 1.0D0, dtout = 1.0D0
@@ -162,7 +162,7 @@ CONTAINS
         yt2 = 1.0D0 - yt1
         er1 = ABS(yt1-y(1))
         er2 = ABS(yt2-y(2))
-        er = MAX(er1,er2)/atol
+        er = MAX(er1,er2)/atol(1)
         ero = MAX(ero,er)
         IF ( er>1000.0D0 ) THEN
           IF ( Kprint>=2 ) WRITE (Lun,99010) t
@@ -230,7 +230,7 @@ CONTAINS
         99006 FORMAT (1X,1P,D15.5,D14.3,I6,D14.3)
         !
         IF ( idid<0 ) EXIT
-        er = erm/atol
+        er = erm/atol(1)
         ero = MAX(ero,er)
         IF ( er>1000.0D0 ) THEN
           IF ( Kprint>=2 ) WRITE (Lun,99010) t

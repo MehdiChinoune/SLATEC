@@ -177,8 +177,8 @@ CONTAINS
     mint = 1
     lenw = 298
     leniw = 50
-    CALL DDRIV2(N,t,y,DDF,tout,mstate,NROOT,eps,ewt,mint,work,lenw,iwork,&
-      leniw,DDF,ierflg)
+    CALL DDRIV2(N,t,y,DDF,tout,mstate,NROOT,eps,ewt(1),mint,work,lenw,iwork,&
+      leniw,D1MACH,ierflg)
     nstep = iwork(3)
     nfe = iwork(4)
     nje = iwork(5)
@@ -251,8 +251,8 @@ CONTAINS
     mint = 1
     lenwx = 1
     leniw = 50
-    CALL DDRIV2(N,t,y,DDF,tout,mstate,NROOT,eps,ewt,mint,work,lenwx,iwork,&
-      leniw,DDF,ierflg)
+    CALL DDRIV2(N,t,y,DDF,tout,mstate,NROOT,eps,ewt(1),mint,work,lenwx,iwork,&
+      leniw,D1MACH,ierflg)
     IF ( ierflg/=32 ) THEN
       IF ( Kprint==1 ) THEN
         WRITE (Lun,&
@@ -301,7 +301,7 @@ CONTAINS
     leniw = 53
     CALL DDRIV3(N,t,y,DDF,nstate,tout,NTASK,NROOT,eps,ewt,IERROR,mint,MITER,&
       IMPL,ML,MU,MXORD,HMAX,work,lenw,iwork,leniw,DDF,DDF,nde,&
-      MXSTEP,DDF,DDF,ierflg)
+      MXSTEP,D1MACH,DDF,ierflg)
     nstep = iwork(3)
     nfe = iwork(4)
     nje = iwork(5)
@@ -376,7 +376,7 @@ CONTAINS
     leniwx = 1
     CALL DDRIV3(N,t,y,DDF,nstate,tout,NTASK,NROOT,eps,ewt,IERROR,mint,MITER,&
       IMPL,ML,MU,MXORD,HMAX,work,lenw,iwork,leniwx,DDF,DDF,nde,&
-      MXSTEP,DDF,DDF,ierflg)
+      MXSTEP,D1MACH,DDF,ierflg)
     IF ( ierflg/=33 ) THEN
       IF ( Kprint==1 ) THEN
         WRITE (Lun,&

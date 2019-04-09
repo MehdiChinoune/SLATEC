@@ -265,7 +265,7 @@ SUBROUTINE FCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Nconst,Xconst,&
     !
     !        Last call to adjust block positioning.
     !
-    CALL SCOPY(nordp1,0.E0,0,G(ir,1),Mdg)
+    G(ir,1:nordp1) = 0.E0
     CALL BNDACC(G,Mdg,Nord,ip,ir,1,np1)
   END IF
   !
@@ -317,7 +317,7 @@ SUBROUTINE FCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Nconst,Xconst,&
       END DO
       !
       CALL BSPLVD(Bkpt,Nord,xval,ileft,Bf,ideriv+1)
-      CALL SCOPY(np1,0.E0,0,W(neqcon,1),Mdw)
+      W(neqcon,1:np1) = 0.E0
       CALL SCOPY(Nord,Bf(1,ideriv+1),1,W(neqcon,ileft-nordm1),Mdw)
       !
       IF ( itype==2 ) THEN
@@ -340,7 +340,7 @@ SUBROUTINE FCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Nconst,Xconst,&
   !
   DO i = 1, np1
     irow = i + neqcon
-    CALL SCOPY(n,0.E0,0,W(irow,1),Mdw)
+    W(irow,1:n) = 0.E0
     CALL SCOPY(MIN(np1-i,Nord),G(i,1),Mdg,W(irow,i),Mdw)
     W(irow,np1) = G(i,nordp1)
   END DO
@@ -364,7 +364,7 @@ SUBROUTINE FCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Nconst,Xconst,&
       !
       CALL BSPLVD(Bkpt,Nord,xval,ileft,Bf,ideriv+1)
       irow = neqcon + np1 + nincon
-      CALL SCOPY(n,0.E0,0,W(irow,1),Mdw)
+      W(irow,1:n) = 0.E0
       intrvl = ileft - nordm1
       CALL SCOPY(Nord,Bf(1,ideriv+1),1,W(irow,intrvl),Mdw)
       !

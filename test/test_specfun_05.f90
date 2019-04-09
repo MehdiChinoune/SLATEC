@@ -713,7 +713,8 @@ CONTAINS
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-    REAL(8) :: T, aln
+    REAL(8), INTENT(IN) :: T
+    REAL(8) :: aln
     !* FIRST EXECUTABLE STATEMENT  DFEIN
     aln = (FKM-T)*X - A*LOG(T)
     DFEIN = EXP(aln)

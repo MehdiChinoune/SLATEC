@@ -83,7 +83,7 @@ CONTAINS
     costs(36) = 0.000D0
     costs(37) = 0.000D0
     !     PLACE THE NONZERO INFORMATION ABOUT THE MATRIX IN DATTRV(*)
-    CALL DCOPY(14*37,zero,0,d,1)
+    d = 0.D0
     d(1,1) = 1.04000D0
     d(1,23) = 1.00000D0
     d(1,24) = -1.00000D0
@@ -360,7 +360,7 @@ CONTAINS
     !
     DO ib = 1, 2
       DO irhs = 1, 2
-        CALL DCOPY(11*10,0.D0,0,w,1)
+        w(:,1:10) = 0.D0
         CALL DCOPY(ncols,bl(1,ib),1,bl1,1)
         CALL DCOPY(ncols,bu(1,ib),1,bu1,1)
         ind(ncols+1) = 2

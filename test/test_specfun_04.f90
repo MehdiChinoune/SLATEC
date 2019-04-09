@@ -713,7 +713,8 @@ CONTAINS
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-    REAL T, aln
+    REAL, INTENT(IN) :: T
+    REAL aln
     !* FIRST EXECUTABLE STATEMENT  FEIN
     aln = (FKM-T)*X - A*LOG(T)
     FEIN = EXP(aln)

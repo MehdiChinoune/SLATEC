@@ -123,7 +123,7 @@ SUBROUTINE LSI(W,Mdw,Ma,Mg,N,Prgopt,X,Rnorm,Mode,Ws,Ip)
       !
       !     Compute Householder orthogonal decomposition of matrix.
       !
-      CALL SCOPY(N,0.E0,0,Ws,1)
+      Ws(1:N) = 0.E0
       CALL SCOPY(Ma,W(1,np1),1,Ws,1)
       k = MAX(m,N)
       minman = MIN(Ma,N)
@@ -260,7 +260,7 @@ SUBROUTINE LSI(W,Mdw,Ma,Mg,N,Prgopt,X,Rnorm,Mode,Ws,Ip)
           END DO
           !
           DO i = krp1, N
-            CALL SCOPY(i,0.E0,0,W(i,1),Mdw)
+            W(i,1:i) = 0.E0
           END DO
           !
           !        Apply right side transformations to lower triangle.
@@ -278,7 +278,7 @@ SUBROUTINE LSI(W,Mdw,Ma,Mg,N,Prgopt,X,Rnorm,Mode,Ws,Ip)
               !
               !              Store unscaled rank one Householder update in work array.
               !
-              CALL SCOPY(N,0.E0,0,Ws(n3),1)
+              Ws(n3:n3+N-1) = 0.E0
               l = n1 + i
               k = n3 + i
               Ws(k-1) = Ws(l-1)

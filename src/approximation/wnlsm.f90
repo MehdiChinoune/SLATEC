@@ -116,7 +116,7 @@ SUBROUTINE WNLSM(W,Mdw,Mme,Ma,N,L,Prgopt,X,Rnorm,Mode,Ipivot,Itype,Wd,H,&
   !     The nominal column scaling used in the code is
   !     the identity scaling.
   !
-  CALL SCOPY(N,1.E0,0,D,1)
+  D(1:N) = 1.E0
   !
   !     Define bound for number of options to change.
   !
@@ -214,7 +214,7 @@ SUBROUTINE WNLSM(W,Mdw,Mme,Ma,N,L,Prgopt,X,Rnorm,Mode,Ipivot,Itype,Wd,H,&
     !     Set the solution vector X(*) to zero and the column interchange
     !     matrix to the identity.
     !
-    CALL SCOPY(N,0.E0,0,X,1)
+    X(1:N) = 0.E0
     DO i = 1, N
       Ipivot(i) = i
     END DO
@@ -224,7 +224,7 @@ SUBROUTINE WNLSM(W,Mdw,Mme,Ma,N,L,Prgopt,X,Rnorm,Mode,Ipivot,Itype,Wd,H,&
     !     Set first L components of dual vector to zero because
     !     these correspond to the unconstrained variables.
     !
-    CALL SCOPY(L,0.E0,0,Wd,1)
+    Wd(1:L) = 0.E0
     !
     !     The arrays IDOPE(*) and DOPE(*) are used to pass
     !     information to WNLIT().  This was done to avoid
@@ -422,7 +422,7 @@ SUBROUTINE WNLSM(W,Mdw,Mme,Ma,N,L,Prgopt,X,Rnorm,Mode,Ipivot,Itype,Wd,H,&
       !        To perform multiplier test and drop a constraint.
       !
       CALL SCOPY(nsoln,Z,1,X,1)
-      IF ( nsoln<N ) CALL SCOPY(N-nsoln,0.E0,0,X(nsoln+1),1)
+      IF ( nsoln<N ) X(nsoln+1:N) = 0.E0
       !
       !        Reclassify least squares equations as equalities as necessary.
       !
@@ -603,7 +603,7 @@ SUBROUTINE WNLSM(W,Mdw,Mme,Ma,N,L,Prgopt,X,Rnorm,Mode,Ipivot,Itype,Wd,H,&
   !
   !     Fill in trailing zeroes for constrained variables not in solution.
   !
-  IF ( nsoln<N ) CALL SCOPY(N-nsoln,0.E0,0,X(nsoln+1),1)
+  IF ( nsoln<N ) X(nsoln+1:N) = 0.E0
   !
   !     Permute solution vector to natural order.
   !

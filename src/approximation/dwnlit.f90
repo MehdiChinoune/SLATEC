@@ -138,7 +138,7 @@ SUBROUTINE DWNLIT(W,Mdw,M,N,L,Ipivot,Itype,H,Scale,Rnorm,Idope,Dope,Done)
   IF ( krank<me ) THEN
     factor = alsq
     DO i = krank + 1, me
-      CALL DCOPY(L,0.D0,0,W(i,1),Mdw)
+      W(i,1:L) = 0.D0
     END DO
     !
     !        Determine the rank of the remaining equality constraint
@@ -175,7 +175,7 @@ SUBROUTINE DWNLIT(W,Mdw,M,N,L,Ipivot,Itype,H,Scale,Rnorm,Idope,Dope,Done)
       IF ( .NOT.DWNLT2(me,mend,ir,factor,tau,Scale,W(1,i)) ) THEN
         jj = ir
         DO ir = jj, me
-          CALL DCOPY(N,0.D0,0,W(ir,1),Mdw)
+          W(ir,1:N) = 0.D0
           Rnorm = Rnorm + (Scale(ir)*W(ir,N+1)/alsq)*W(ir,N+1)
           W(ir,N+1) = 0.D0
           Scale(ir) = 1.D0

@@ -85,7 +85,7 @@ CONTAINS
     !
     !     PLACE THE NONZERO INFORMATION ABOUT THE MATRIX IN DATTRV(*)
     !
-    CALL SCOPY(14*37,zero,0,d,1)
+    d = 0.E0
     d(1,1) = 1.04000
     d(1,23) = 1.00000
     d(1,24) = -1.00000
@@ -363,7 +363,7 @@ CONTAINS
     !
     DO ib = 1, 2
       DO irhs = 1, 2
-        CALL SCOPY(11*10,0.E0,0,w,1)
+        w(:,1:10) = 0.E0
         CALL SCOPY(ncols,bl(1,ib),1,bl1,1)
         CALL SCOPY(ncols,bu(1,ib),1,bu1,1)
         ind(ncols+1) = 2

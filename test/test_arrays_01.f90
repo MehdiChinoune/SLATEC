@@ -336,7 +336,7 @@ CONTAINS
     !
     LOGICAL fail
     CHARACTER :: short
-    CHARACTER(2) :: y(N), work(N)
+    CHARACTER(2) :: y(N), work
     INTEGER iy(N), Kprint, Lun, Ipass, j, i, kabs, ier, nerr, NUMXER, nn, &
       kkflag, strbeg, strend
     !

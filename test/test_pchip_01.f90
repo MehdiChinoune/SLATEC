@@ -454,7 +454,7 @@ CONTAINS
     !  DECLARATIONS.
     !
     INTEGER i, ierr, kontrl, nerr, next(2)
-    REAL d(10), dum, f(10), temp, x(10)
+    REAL d(10), dum(1), f(10), temp, x(10)
     LOGICAL COMP, skip
     !
     !  INITIALIZE.

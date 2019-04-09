@@ -138,7 +138,7 @@ SUBROUTINE WNLIT(W,Mdw,M,N,L,Ipivot,Itype,H,Scale,Rnorm,Idope,Dope,Done)
   IF ( krank<me ) THEN
     factor = alsq
     DO i = krank + 1, me
-      CALL SCOPY(L,0.E0,0,W(i,1),Mdw)
+      W(i,1:L) = 0.E0
     END DO
     !
     !        Determine the rank of the remaining equality constraint
@@ -175,7 +175,7 @@ SUBROUTINE WNLIT(W,Mdw,M,N,L,Ipivot,Itype,H,Scale,Rnorm,Idope,Dope,Done)
       IF ( .NOT.WNLT2(me,mend,ir,factor,tau,Scale,W(1,i)) ) THEN
         jj = ir
         DO ir = jj, me
-          CALL SCOPY(N,0.E0,0,W(ir,1),Mdw)
+          W(ir,1:N) = 0.E0
           Rnorm = Rnorm + (Scale(ir)*W(ir,N+1)/alsq)*W(ir,N+1)
           W(ir,N+1) = 0.E0
           Scale(ir) = 1.E0

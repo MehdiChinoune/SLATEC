@@ -54,7 +54,7 @@ SUBROUTINE DEFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Mdein,Mdeout,&
   !
   !     Initially set all output coefficients to zero.
   !
-  CALL DCOPY(n,0.D0,0,Coeff,1)
+  Coeff(1:n) = 0.D0
   Mdeout = -1
   IF ( Nord<1.OR.Nord>20 ) THEN
     CALL XERMSG('SLATEC','DEFCMN',&
@@ -206,7 +206,7 @@ SUBROUTINE DEFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Mdein,Mdeout,&
   !
   !     Last call to adjust block positioning.
   !
-  CALL DCOPY(nordp1,0.D0,0,G(ir,1),Mdg)
+  G(ir,1:nordp1) = 0.D0
   CALL DBNDAC(G,Mdg,Nord,ip,ir,1,np1)
   !
   !     Transfer accumulated rows from G(*,*) to W(*,*) for

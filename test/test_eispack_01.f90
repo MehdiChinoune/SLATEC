@@ -31,13 +31,13 @@ CONTAINS
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   900405  CALL to XERROR replaced by message to LUN.  (WRB)
 
-    INTEGER info
     REAL R1MACH
     INTEGER Kprint, Ipass, Lun
-    INTEGER job, i, j, id
+    INTEGER job, i, j, id, info
     REAL w(9)
     REAL err, erri, relerr, recj
     COMPLEX ac(3,3), ec(3), vc(3,3)
+    REAL ac_r(3,6), ec_r(6), vc_r(3,6)
     INTEGER, PARAMETER :: lda = 3, n = 3, ldv = 3
     REAL :: a(3,3) = RESHAPE( [ 1., -2., 6., -1., 0., -3., 2., 5., 6. ], [3,3] )
     REAL, PARAMETER :: ek(3) = [ -1., 3., 5. ]
@@ -50,7 +50,9 @@ CONTAINS
       END DO
     END DO
     job = 1
-    CALL CGEEV(ac,lda,n,ec,vc,ldv,w,job,info)
+    ac_r = RESHAPE( [ ( ( [REAL(ac(i,j)), AIMAG(ac(i,j))], i=1,3 ), j = 1,3 ) ], [3,6] )
+    CALL CGEEV(ac_r,lda,n,ec_r,vc_r,ldv,w,job,info)
+    ec = CMPLX( ec_r(1:5:2), ec_r(2:6:2)  )
     IF ( info/=0 ) THEN
       IF ( Kprint>=2 ) WRITE (Lun,99003) 'CGEEV', info
       Ipass = 0
@@ -69,7 +71,8 @@ CONTAINS
       IF ( ABS(recj-ek(id))/ABS(ek(id))>=relerr ) Ipass = 0
     END DO
     job = 0
-    CALL SGEEV(a,lda,n,ec,vc,ldv,w,job,info)
+    CALL SGEEV(a,lda,n,ec_r,vc_r,ldv,w,job,info)
+    ec = CMPLX( ec_r(1:5:2), ec_r(2:6:2)  )
     IF ( info/=0 ) THEN
       IF ( Kprint>=2 ) WRITE (Lun,99003) 'SGEEV', info
       Ipass = 0
@@ -123,13 +126,13 @@ CONTAINS
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   900405  CALL to XERROR replaced by message to LUN.  (WRB)
 
-    INTEGER info
     REAL R1MACH
     INTEGER Kprint, Ipass, Lun
-    INTEGER job, i, j, id
+    INTEGER job, i, j, id, info
     REAL a1(4,4), a2(10), e(4), v(4,4), w(16)
     REAL err, erri, relerr
     COMPLEX ac(4,4), vc(4,4)
+    REAL ac_r(4,8), vc_r(4,8)
     INTEGER, PARAMETER :: lda = 4, n = 4, ldv = 4
     REAL, PARAMETER :: ap(10) = [ 5., 4., 5., 1., 1., 4., 1., 1., 2., 4. ]
     REAL, PARAMETER :: ek(4) = [ 1., 2., 5., 10. ]
@@ -146,7 +149,8 @@ CONTAINS
       END DO
     END DO
     job = 1
-    CALL CHIEV(ac,lda,n,e,vc,ldv,w,job,info)
+    ac_r = RESHAPE( [ ( ( [REAL(ac(i,j)),AIMAG(ac(i,j))], i=1,4 ), j=1,4 ) ], [4,8] )
+    CALL CHIEV(ac_r,lda,n,e,vc_r,ldv,w,job,info)
     IF ( info/=0 ) THEN
       IF ( Kprint>=2 ) WRITE (Lun,99003) 'CHIEV', info
       Ipass = 0

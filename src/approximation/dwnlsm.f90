@@ -121,7 +121,7 @@ SUBROUTINE DWNLSM(W,Mdw,Mme,Ma,N,L,Prgopt,X,Rnorm,Mode,Ipivot,Itype,Wd,H,&
   !     The nominal column scaling used in the code is
   !     the identity scaling.
   !
-  CALL DCOPY(N,1.D0,0,D,1)
+  D(1:N) = 1.D0
   !
   !     Define bound for number of options to change.
   !
@@ -227,7 +227,7 @@ SUBROUTINE DWNLSM(W,Mdw,Mme,Ma,N,L,Prgopt,X,Rnorm,Mode,Ipivot,Itype,Wd,H,&
     !     Set the solution vector X(*) to zero and the column interchange
     !     matrix to the identity.
     !
-    CALL DCOPY(N,0.D0,0,X,1)
+    X(1:N) = 0.D0
     DO i = 1, N
       Ipivot(i) = i
     END DO
@@ -237,7 +237,7 @@ SUBROUTINE DWNLSM(W,Mdw,Mme,Ma,N,L,Prgopt,X,Rnorm,Mode,Ipivot,Itype,Wd,H,&
     !     Set first L components of dual vector to zero because
     !     these correspond to the unconstrained variables.
     !
-    CALL DCOPY(L,0.D0,0,Wd,1)
+    Wd(1:L) = 0.D0
     !
     !     The arrays IDOPE(*) and DOPE(*) are used to pass
     !     information to DWNLIT().  This was done to avoid
@@ -435,7 +435,7 @@ SUBROUTINE DWNLSM(W,Mdw,Mme,Ma,N,L,Prgopt,X,Rnorm,Mode,Ipivot,Itype,Wd,H,&
       !        To perform multiplier test and drop a constraint.
       !
       CALL DCOPY(nsoln,Z,1,X,1)
-      IF ( nsoln<N ) CALL DCOPY(N-nsoln,0.D0,0,X(nsoln+1),1)
+      IF ( nsoln<N ) X(nsoln+1:N) = 0.D0
       !
       !        Reclassify least squares equations as equalities as necessary.
       !
@@ -616,7 +616,7 @@ SUBROUTINE DWNLSM(W,Mdw,Mme,Ma,N,L,Prgopt,X,Rnorm,Mode,Ipivot,Itype,Wd,H,&
   !
   !     Fill in trailing zeroes for constrained variables not in solution.
   !
-  IF ( nsoln<N ) CALL DCOPY(N-nsoln,0.D0,0,X(nsoln+1),1)
+  IF ( nsoln<N ) X(nsoln+1:N) = 0.D0
   !
   !     Permute solution vector to natural order.
   !

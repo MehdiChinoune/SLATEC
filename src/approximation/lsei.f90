@@ -474,7 +474,7 @@ SUBROUTINE LSEI(W,Mdw,Me,Ma,Mg,N,Prgopt,X,Rnorme,Rnorml,Mode,Ws,Ip)
   !     The nominal column scaling used in the code is
   !     the identity scaling.
   !
-  CALL SCOPY(N,1.E0,0,Ws(n1),1)
+  Ws(n1:n1+N-1) = 1.E0
   !
   !     No covariance matrix is nominally computed.
   !
@@ -624,8 +624,7 @@ SUBROUTINE LSEI(W,Mdw,Me,Ma,Mg,N,Prgopt,X,Rnorme,Rnorml,Mode,Ws,Ip)
     W(i,np1) = W(i,np1) - SDOT(kranke,W(i,1),Mdw,X,1)
     sn = SDOT(kranke,W(i,1),Mdw,W(i,1),Mdw)
     rn = SDOT(N-kranke,W(i,kranke+1),Mdw,W(i,kranke+1),Mdw)
-    IF ( rn<=sn*tau**2.AND.kranke<N )&
-      CALL SCOPY(N-kranke,0.E0,0,W(i,kranke+1),Mdw)
+    IF ( rn<=sn*tau**2.AND.kranke<N ) W(i,kranke+1:N) = 0.E0
   END DO
   !
   !     Compute equality constraint equations residual length.

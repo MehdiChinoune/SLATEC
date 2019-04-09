@@ -531,7 +531,7 @@ CONTAINS
     !   920229  DATE WRITTEN
 
     !     .. Scalar Arguments ..
-    REAL(8) :: X
+    REAL(8), INTENT(IN) :: X
     !     .. Intrinsic Functions ..
     INTRINSIC SQRT
     !* FIRST EXECUTABLE STATEMENT  DFQD1
@@ -559,7 +559,7 @@ CONTAINS
     !   920229  DATE WRITTEN
 
     !     .. Scalar Arguments ..
-    REAL(8) :: X
+    REAL(8), INTENT(IN) :: X
     !     .. Intrinsic Functions ..
     INTRINSIC COS, EXP
     !* FIRST EXECUTABLE STATEMENT  DFQD2

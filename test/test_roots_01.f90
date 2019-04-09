@@ -35,6 +35,7 @@ CONTAINS
     INTEGER idegp1, info, i, j, id
     REAL err, erri, relerr
     COMPLEX ac(6), z(5), w(21)
+    REAL w_r(42)
     INTEGER, PARAMETER :: ideg = 5
     REAL, PARAMETER :: a(6) = [ 1., -3.7, 7.4, -10.8, 10.8, -6.8 ]
     COMPLEX, PARAMETER :: zk(5) = [ (1.7,0.), (1.,1.), (1.,-1.), &
@@ -47,7 +48,8 @@ CONTAINS
       ac(j) = CMPLX(a(j),0.)
     END DO
     info = 0
-    CALL CPZERO(ideg,ac,z,w(4),info,w)
+    w_r = [ ( [REAL(w(i)), AIMAG(w(i))], i=1,21 ) ]
+    CALL CPZERO(ideg,ac,z,w(4),info,w_r)
     IF ( info/=0 ) THEN
       Ipass = 0
       IF ( info==1.AND.Kprint>=1 ) WRITE (Lun,99001)
@@ -68,7 +70,8 @@ CONTAINS
       IF ( ABS(z(j)-zk(id))/ABS(zk(id))>=relerr ) Ipass = 0
     END DO
     info = 0
-    CALL RPZERO(ideg,a,z,w(4),info,w)
+    w_r = [ ( [REAL(w(i)), AIMAG(w(i))], i=1,21 ) ]
+    CALL RPZERO(ideg,a,z,w(4),info,w_r)
     IF ( info/=0 ) THEN
       Ipass = 0
       IF ( info==1.AND.Kprint>=1 ) WRITE (Lun,99003)

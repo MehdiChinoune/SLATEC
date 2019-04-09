@@ -179,8 +179,8 @@ CONTAINS
     mint = 1
     lenw = 298
     leniw = 50
-    CALL CDRIV2(N,t,y,CDF,tout,mstate,NROOT,eps,ewt,mint,work,lenw,iwork,&
-      leniw,CDF,ierflg)
+    CALL CDRIV2(N,t,y,CDF,tout,mstate,NROOT,eps,ewt(1),mint,work,lenw,iwork,&
+      leniw,R1MACH,ierflg)
     nstep = iwork(3)
     nfe = iwork(4)
     nje = iwork(5)
@@ -253,8 +253,8 @@ CONTAINS
     mint = 1
     lenwx = 1
     leniw = 50
-    CALL CDRIV2(N,t,y,CDF,tout,mstate,NROOT,eps,ewt,mint,work,lenwx,iwork,&
-      leniw,CDF,ierflg)
+    CALL CDRIV2(N,t,y,CDF,tout,mstate,NROOT,eps,ewt(1),mint,work,lenwx,iwork,&
+      leniw,R1MACH,ierflg)
     IF ( ierflg/=32 ) THEN
       IF ( Kprint==1 ) THEN
         WRITE (Lun,&
@@ -303,7 +303,7 @@ CONTAINS
     leniw = 53
     CALL CDRIV3(N,t,y,CDF,nstate,tout,NTASK,NROOT,eps,ewt,IERROR,mint,MITER,&
       IMPL,ML,MU,MXORD,HMAX,work,lenw,iwork,leniw,CDF,CDF,nde,&
-      MXSTEP,CDF,CDF,ierflg)
+      MXSTEP,R1MACH,CDF,ierflg)
     nstep = iwork(3)
     nfe = iwork(4)
     nje = iwork(5)
@@ -379,7 +379,7 @@ CONTAINS
     leniwx = 1
     CALL CDRIV3(N,t,y,CDF,nstate,tout,NTASK,NROOT,eps,ewt,IERROR,mint,MITER,&
       IMPL,ML,MU,MXORD,HMAX,work,lenw,iwork,leniwx,CDF,CDF,nde,&
-      MXSTEP,CDF,CDF,ierflg)
+      MXSTEP,R1MACH,CDF,ierflg)
     IF ( ierflg/=33 ) THEN
       IF ( Kprint==1 ) THEN
         WRITE (Lun,&
