@@ -138,8 +138,8 @@ CONTAINS
     !
     !     Declare local variables.
     !
-    INTEGER idid, info(15), ipar, iwork(51), n, liw, lrw, nstep
-    REAL(8) :: abserr, D1MACH, r, relerr, reltol, rpar, rwork(214), t, tout, u(4)
+    INTEGER idid, info(15), ipar(1), iwork(51), n, liw, lrw, nstep
+    REAL(8) :: abserr(1), D1MACH, r, relerr(1), reltol, rpar(1), rwork(214), t, tout, u(4)
     !* FIRST EXECUTABLE STATEMENT  QXDABM
     IF ( Kprint>=2 ) WRITE (Lun,99001)
     !
@@ -262,8 +262,8 @@ CONTAINS
     !
     !     Declare local variables.
     !
-    INTEGER idid, info(15), ipar, iwork(60), n, liw, lrw, nstep
-    REAL(8) :: abserr, D1MACH, r, reltol, relerr, rpar, rwork(306), t, tout, u(4)
+    INTEGER idid, info(15), ipar(1), iwork(60), n, liw, lrw, nstep
+    REAL(8) :: abserr(1), D1MACH, r, reltol, relerr(1), rpar(1), rwork(306), t, tout, u(4)
     !* FIRST EXECUTABLE STATEMENT  QXDBDF
     IF ( Kprint>=2 ) WRITE (Lun,99001)
     !
@@ -648,8 +648,8 @@ CONTAINS
     !
     !     Declare local variables.
     !
-    INTEGER idid, info(15), ipar, iwork(34), n, liw, lrw, nstep
-    REAL(8) :: abserr, D1MACH, r, relerr, reltol, rpar, rwork(61), t, tout, u(4)
+    INTEGER idid, info(15), ipar(1), iwork(34), n, liw, lrw, nstep
+    REAL(8) :: abserr(1), D1MACH, r, relerr(1), reltol, rpar(1), rwork(61), t, tout, u(4)
     !* FIRST EXECUTABLE STATEMENT  QXDRKF
     IF ( Kprint>=2 ) WRITE (Lun,99001)
     !

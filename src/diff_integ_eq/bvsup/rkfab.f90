@@ -41,10 +41,10 @@ SUBROUTINE RKFAB(Ncomp,Xpts,Nxpts,Nfc,Iflag,Z,Mxnon,P,Ntp,Ip,Yhp,Niv,U,V,&
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
 
-  INTEGER Ncomp, Nfc, Nfcc, nfcp1, Niv, non, Ntp, idid, Iflag, Ip(Nfcc,*), ipar, &
+  INTEGER Ncomp, Nfc, Nfcc, nfcp1, Niv, non, Ntp, idid, Iflag, Ip(Nfcc,*), ipar(1), &
     Iwork(*), j, jflag, jon, kod, kopp, Mxnon, Nxpts
   REAL G(*), P(Ntp,*), S(*), Stowa(*), U(Ncomp,Nfc,*), V(Ncomp,*), W(Nfcc,*), &
-    Work(*), Xpts(*), xxop, Yhp(Ncomp,*), Z(*)
+    Work(*), Xpts(*), xxop, Yhp(Ncomp,*), Z(*), ret(1), aet(1)
   EXTERNAL :: BVDER
   !
   !- *********************************************************************
@@ -90,12 +90,16 @@ SUBROUTINE RKFAB(Ncomp,Xpts,Nxpts,Nfc,Iflag,Z,Mxnon,P,Ntp,Ip,Yhp,Niv,U,V,&
     IF ( INTeg==2 ) THEN
       !     DEABM INTEGRATOR
       !
-      CALL DEABM(BVDER,NEQ,X,Yhp,xxop,INFo,RE,AE,idid,Work,KKKint,Iwork,&
+      ret(1) = RE
+      aet(1) = AE
+      CALL DEABM(BVDER,NEQ,X,Yhp,xxop,INFo,ret,aet,idid,Work,KKKint,Iwork,&
         LLLint,G,ipar)
     ELSE
       !     DERKF INTEGRATOR
       !
-      CALL DERKF(BVDER,NEQ,X,Yhp,xxop,INFo,RE,AE,idid,Work,KKKint,Iwork,&
+      ret(1) = RE
+      aet(1) = AE
+      CALL DERKF(BVDER,NEQ,X,Yhp,xxop,INFo,ret,aet,idid,Work,KKKint,Iwork,&
         LLLint,G,ipar)
     END IF
     IF ( idid>=1 ) THEN
