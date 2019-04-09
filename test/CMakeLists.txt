@@ -4,116 +4,116 @@ add_executable(test_aaaaaa test_aaaaaa.f90)
 target_link_libraries(test_aaaaaa slatec  )
 
 add_executable(test_arrays_01 test_arrays_01.f90)
-target_link_libraries(test_arrays_01 arrays  )
+target_link_libraries(test_arrays_01 data_handling  )
 
 add_executable(test_blas_01 test_blas_01.f90)
-target_link_libraries(test_blas_01 blas dqdot)
+target_link_libraries(test_blas_01 linear )
 
 add_executable(test_blas_02 test_blas_02.f90 chkxer.f90 )
-target_link_libraries(test_blas_02 blas )
+target_link_libraries(test_blas_02 linear )
 
 add_executable(test_blas_03 test_blas_03.f90 chkxer.f90)
-target_link_libraries(test_blas_03 blas )
+target_link_libraries(test_blas_03 linear )
 
 add_executable(test_blas_04 test_blas_04.f90 chkxer.f90)
-target_link_libraries(test_blas_04 blas )
+target_link_libraries(test_blas_04 linear )
 
 add_executable(test_bspline_01 test_bspline_01.f90)
-target_link_libraries(test_bspline_01 bspline fitting)
+target_link_libraries(test_bspline_01 interpolation diff_integ )
 
 add_executable(test_bspline_02 test_bspline_02.f90)
-target_link_libraries(test_bspline_02 bspline fitting)
+target_link_libraries(test_bspline_02 interpolation diff_integ )
 
 add_executable(test_dassl_01 test_dassl_01.f90)
-target_link_libraries(test_dassl_01 dassl )
+target_link_libraries(test_dassl_01 diff_integ_eq )
 
 add_executable(test_dassl_02 test_dassl_02.f90)
-target_link_libraries(test_dassl_02 dassl )
+target_link_libraries(test_dassl_02 diff_integ_eq )
 
 add_executable(test_depac_01 test_depac_01.f90 pass.f90)
-target_link_libraries(test_depac_01 depac bvsup)
-target_include_directories(test_depac_01 PRIVATE ${CMAKE_BINARY_DIR}/src/bvsup/ )
+target_link_libraries(test_depac_01 diff_integ_eq )
+target_include_directories(test_depac_01 PRIVATE ${CMAKE_BINARY_DIR}/src/diff_integ_eq/ )
 
 add_executable(test_depac_02 test_depac_02.f90 pass.f90)
-target_link_libraries(test_depac_02 depac bvsup)
-target_include_directories(test_depac_02 PRIVATE ${CMAKE_BINARY_DIR}/src/bvsup/ )
+target_link_libraries(test_depac_02 diff_integ_eq )
+target_include_directories(test_depac_02 PRIVATE ${CMAKE_BINARY_DIR}/src/diff_integ_eq/ )
 
 add_executable(test_eispack_01 test_eispack_01.f90)
-target_link_libraries(test_eispack_01 eispack lineq)
+target_link_libraries(test_eispack_01 linear )
 
 add_executable(test_fishpack_01 test_fishpack_01.f90)
-target_link_libraries(test_fishpack_01 fishpack )
+target_link_libraries(test_fishpack_01 diff_integ_eq )
 
 add_executable(test_fishpack_02 test_fishpack_02.f90)
-target_link_libraries(test_fishpack_02 fishpack )
+target_link_libraries(test_fishpack_02 diff_integ_eq )
 
 add_executable(test_fitting_01 test_fitting_01.f90)
-target_link_libraries(test_fitting_01 fitting least_squares splp)
+target_link_libraries(test_fitting_01 approximation )
 
 add_executable(test_fitting_02 test_fitting_02.f90)
-target_link_libraries(test_fitting_02 fitting least_squares splp)
+target_link_libraries(test_fitting_02 approximation )
 
 add_executable(test_integration_01 test_integration_01.f90)
-target_link_libraries(test_integration_01 integration )
+target_link_libraries(test_integration_01 diff_integ )
 
 add_executable(test_integration_02 test_integration_02.f90)
-target_link_libraries(test_integration_02 integration )
+target_link_libraries(test_integration_02 diff_integ )
 
 add_executable(test_interpolation_01 test_interpolation_01.f90)
 target_link_libraries(test_interpolation_01 interpolation  )
 
 add_executable(test_lineq_01 test_lineq_01.f90)
-target_link_libraries(test_lineq_01 lineq )
+target_link_libraries(test_lineq_01 linear )
 
 add_executable(test_lineq_02 test_lineq_02.f90)
-target_link_libraries(test_lineq_02 lineq )
+target_link_libraries(test_lineq_02 linear )
 
 add_executable(test_linpack_01 test_linpack_01.f90)
-target_link_libraries(test_linpack_01 linpack )
+target_link_libraries(test_linpack_01 linear )
 
 add_executable(test_minpack_01 test_minpack_01.f90 pass.f90)
-target_link_libraries(test_minpack_01 minpack blas roots)
+target_link_libraries(test_minpack_01 approximation nonlin_eq )
 
 add_executable(test_minpack_02 test_minpack_02.f90 pass.f90)
-target_link_libraries(test_minpack_02 minpack blas roots)
+target_link_libraries(test_minpack_02 approximation nonlin_eq )
 
 add_executable(test_minpack_03 test_minpack_03.f90 pass.f90)
-target_link_libraries(test_minpack_03 minpack fitting splp least_squares)
+target_link_libraries(test_minpack_03 approximation interpolation )
 
 add_executable(test_minpack_04 test_minpack_04.f90 pass.f90)
-target_link_libraries(test_minpack_04 minpack fitting splp least_squares)
+target_link_libraries(test_minpack_04 approximation interpolation )
 
 add_executable(test_pchip_01 test_pchip_01.f90 comp.f90)
-target_link_libraries(test_pchip_01 pchip bspline special_functions)
+target_link_libraries(test_pchip_01 interpolation special_functions )
 
 add_executable(test_pchip_02 test_pchip_02.f90 comp.f90)
-target_link_libraries(test_pchip_02 pchip bspline special_functions)
+target_link_libraries(test_pchip_02 interpolation special_functions )
 
 add_executable(test_quadpack_01 test_quadpack_01.f90)
-target_link_libraries(test_quadpack_01 quadpack )
+target_link_libraries(test_quadpack_01 diff_integ )
 
 add_executable(test_quadpack_02 test_quadpack_02.f90)
-target_link_libraries(test_quadpack_02 quadpack )
+target_link_libraries(test_quadpack_02 diff_integ )
 
 add_executable(test_roots_01 test_roots_01.f90 pass.f90)
-target_link_libraries(test_roots_01 roots )
+target_link_libraries(test_roots_01 nonlin_eq )
 
 add_executable(test_sdrive_01 test_sdrive_01.f90)
-target_link_libraries(test_sdrive_01 sdrive )
+target_link_libraries(test_sdrive_01 diff_integ_eq )
 
 add_executable(test_sdrive_02 test_sdrive_02.f90)
-target_link_libraries(test_sdrive_02 sdrive )
+target_link_libraries(test_sdrive_02 diff_integ_eq )
 
 add_executable(test_sdrive_03 test_sdrive_03.f90)
-target_link_libraries(test_sdrive_03 sdrive )
+target_link_libraries(test_sdrive_03 diff_integ_eq )
 
 add_executable(test_slap_01 test_slap_01.f90 ismpl.f90)
-target_link_libraries(test_slap_01 slap special_functions)
-target_include_directories(test_slap_01 PRIVATE ${CMAKE_BINARY_DIR}/src/slap/ )
+target_link_libraries(test_slap_01 linear special_functions )
+target_include_directories(test_slap_01 PRIVATE ${CMAKE_BINARY_DIR}/src/linear/ )
 
 add_executable(test_slap_02 test_slap_02.f90 ismpl.f90)
-target_link_libraries(test_slap_02 slap special_functions)
-target_include_directories(test_slap_02 PRIVATE ${CMAKE_BINARY_DIR}/src/slap/ )
+target_link_libraries(test_slap_02 linear special_functions )
+target_include_directories(test_slap_02 PRIVATE ${CMAKE_BINARY_DIR}/src/linear/ )
 
 add_executable(test_specfun_01 test_specfun_01.f90)
 target_link_libraries(test_specfun_01 special_functions )
@@ -125,10 +125,10 @@ add_executable(test_specfun_03 test_specfun_03.f90)
 target_link_libraries(test_specfun_03 special_functions )
 
 add_executable(test_specfun_04 test_specfun_04.f90)
-target_link_libraries(test_specfun_04 special_functions integration)
+target_link_libraries(test_specfun_04 special_functions diff_integ )
 
 add_executable(test_specfun_05 test_specfun_05.f90)
-target_link_libraries(test_specfun_05 special_functions integration)
+target_link_libraries(test_specfun_05 special_functions diff_integ )
 
 add_executable(test_specfun_06 test_specfun_06.f90)
 target_link_libraries(test_specfun_06 special_functions )
@@ -155,16 +155,16 @@ add_executable(test_specfun_13 test_specfun_13.f90)
 target_link_libraries(test_specfun_13 special_functions )
 
 add_executable(test_splp_01 test_splp_01.f90 pass.f90)
-target_link_libraries(test_splp_01 splp least_squares special_functions)
+target_link_libraries(test_splp_01 optimization approximation )
 
 add_executable(test_splp_02 test_splp_02.f90 pass.f90)
-target_link_libraries(test_splp_02 splp least_squares)
+target_link_libraries(test_splp_02 optimization approximation )
 
 add_executable(test_wigner_01 test_wigner_01.f90)
-target_link_libraries(test_wigner_01 wigner_coef )
+target_link_libraries(test_wigner_01 special_functions )
 
 add_executable(test_wigner_02 test_wigner_02.f90)
-target_link_libraries(test_wigner_02 wigner_coef )
+target_link_libraries(test_wigner_02 special_functions )
 
 add_library(get_argument OBJECT get_argument.f90)
 
