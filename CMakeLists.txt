@@ -33,7 +33,7 @@ elseif ( "${CMAKE_Fortran_COMPILER_ID}" MATCHES "Flang" )
 elseif ( "${CMAKE_Fortran_COMPILER_ID}" MATCHES "PGI" )
 
   set( CMAKE_Fortran_FLAGS_RELEASE "${CMAKE_Fortran_FLAGS} -Mallocatable=03 -O3" )
-  set( CMAKE_Fortran_FLAGS_DEBUG "${CMAKE_Fortran_FLAGS} -Mallocatable=03 -g -C" )
+  set( CMAKE_Fortran_FLAGS_DEBUG "${CMAKE_Fortran_FLAGS} -Minform=inform -Mallocatable=03 -Mstandard -g -C" )
 
 endif ()
 

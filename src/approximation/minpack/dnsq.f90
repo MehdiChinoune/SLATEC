@@ -435,7 +435,7 @@ SUBROUTINE DNSQ(FCN,JAC,Iopt,N,X,Fvec,Fjac,Ldfjac,Xtol,Maxfev,Ml,Mu,&
     Lr, Maxfev, Ml, Mode, Mu, N, ncfail, ncsuc, Nfev, Njev, &
     Nprint, nslow1, nslow2
   REAL(8) :: actred, delta, Diag(*), Epsfcn, epsmch, Factor, Fjac(Ldfjac,*), &
-    fnorm, fnorm1, Fvec(*), pnorm, prered, Qtf(*), R(*), ratio, sum, temp, &
+    fnorm, fnorm1, Fvec(*), pnorm, prered, Qtf(*), R(*), ratio, summ, temp, &
     Wa1(*), Wa2(*), Wa3(*), Wa4(*), X(*), xnorm, Xtol
   EXTERNAL :: FCN
   LOGICAL jeval, sing
@@ -540,11 +540,11 @@ SUBROUTINE DNSQ(FCN,JAC,Iopt,N,X,Fvec,Fjac,Ldfjac,Xtol,Maxfev,Ml,Mu,&
   END DO
   DO j = 1, N
     IF ( Fjac(j,j)/=zero ) THEN
-      sum = zero
+      summ = zero
       DO i = j, N
-        sum = sum + Fjac(i,j)*Qtf(i)
+        summ = summ + Fjac(i,j)*Qtf(i)
       END DO
-      temp = -sum/Fjac(j,j)
+      temp = -summ/Fjac(j,j)
       DO i = j, N
         Qtf(i) = Qtf(i) + Fjac(i,j)*temp
       END DO
@@ -627,12 +627,12 @@ SUBROUTINE DNSQ(FCN,JAC,Iopt,N,X,Fvec,Fjac,Ldfjac,Xtol,Maxfev,Ml,Mu,&
     !
     l = 1
     DO i = 1, N
-      sum = zero
+      summ = zero
       DO j = i, N
-        sum = sum + R(l)*Wa1(j)
+        summ = summ + R(l)*Wa1(j)
         l = l + 1
       END DO
-      Wa3(i) = Qtf(i) + sum
+      Wa3(i) = Qtf(i) + summ
     END DO
     temp = DENORM(N,Wa3)
     prered = zero
@@ -704,13 +704,13 @@ SUBROUTINE DNSQ(FCN,JAC,Iopt,N,X,Fvec,Fjac,Ldfjac,Xtol,Maxfev,Ml,Mu,&
         !              AND UPDATE QTF IF NECESSARY.
         !
         DO j = 1, N
-          sum = zero
+          summ = zero
           DO i = 1, N
-            sum = sum + Fjac(i,j)*Wa4(i)
+            summ = summ + Fjac(i,j)*Wa4(i)
           END DO
-          Wa2(j) = (sum-Wa3(j))/pnorm
+          Wa2(j) = (summ-Wa3(j))/pnorm
           Wa1(j) = Diag(j)*((Diag(j)*Wa1(j))/pnorm)
-          IF ( ratio>=p0001 ) Qtf(j) = sum
+          IF ( ratio>=p0001 ) Qtf(j) = summ
         END DO
         !
         !              COMPUTE THE QR FACTORIZATION OF THE UPDATED JACOBIAN.

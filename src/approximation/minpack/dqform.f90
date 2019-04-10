@@ -53,7 +53,7 @@ SUBROUTINE DQFORM(M,N,Q,Ldq,Wa)
   !   900328  Added TYPE section.  (WRB)
 
   INTEGER i, j, jm1, k, l, Ldq, M, minmn, N, np1
-  REAL(8) :: Q(Ldq,*), sum, temp, Wa(*)
+  REAL(8) :: Q(Ldq,*), summ, temp, Wa(*)
   REAL(8), PARAMETER :: one = 1.0D0, zero = 0.0D0
   !
   !     ZERO OUT UPPER TRIANGLE OF Q IN THE FIRST MIN(M,N) COLUMNS.
@@ -92,11 +92,11 @@ SUBROUTINE DQFORM(M,N,Q,Ldq,Wa)
     Q(k,k) = one
     IF ( Wa(k)/=zero ) THEN
       DO j = k, M
-        sum = zero
+        summ = zero
         DO i = k, M
-          sum = sum + Q(i,j)*Wa(i)
+          summ = summ + Q(i,j)*Wa(i)
         END DO
-        temp = sum/Wa(k)
+        temp = summ/Wa(k)
         DO i = k, M
           Q(i,j) = Q(i,j) - temp*Wa(i)
         END DO

@@ -83,7 +83,7 @@ SUBROUTINE BSPEV(T,Ad,N,K,Nderiv,X,Inev,Svalue,Work)
 
   !
   INTEGER i, id, Inev, iwork, jj, K, kp1, kp1mn, l, left, ll, mflag, N, Nderiv
-  REAL Ad(*), Svalue(*), sum, T(*), Work(*), X
+  REAL Ad(*), Svalue(*), summ, T(*), Work(*), X
   !     DIMENSION T(N+K)
   !* FIRST EXECUTABLE STATEMENT  BSPEV
   IF ( K<1 ) THEN
@@ -122,13 +122,13 @@ SUBROUTINE BSPEV(T,Ad,N,K,Nderiv,X,Inev,Svalue,Work)
         !     ADIF(LEFTPL,ID) = AD(LEFTPL-ID+1 + (2*N-ID+2)*(ID-1)/2)
         !     LEFTPL = LEFT + L
         left = i - kp1mn
-        sum = 0.0E0
+        summ = 0.0E0
         ll = left + jj + 2 - id
         DO l = 1, kp1mn
-          sum = sum + Work(l)*Ad(ll)
+          summ = summ + Work(l)*Ad(ll)
           ll = ll + 1
         END DO
-        Svalue(id) = sum
+        Svalue(id) = summ
         id = id - 1
         IF ( id==0 ) THEN
           !

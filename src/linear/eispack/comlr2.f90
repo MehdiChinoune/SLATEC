@@ -1,5 +1,5 @@
 !** COMLR2
-SUBROUTINE COMLR2(Nm,N,Low,Igh,Int,Hr,Hi,Wr,Wi,Zr,Zi,Ierr)
+SUBROUTINE COMLR2(Nm,N,Low,Igh,Intt,Hr,Hi,Wr,Wi,Zr,Zi,Ierr)
   IMPLICIT NONE
   !>
   !***
@@ -115,7 +115,7 @@ SUBROUTINE COMLR2(Nm,N,Low,Igh,Int,Hr,Hi,Wr,Wi,Zr,Zi,Ierr)
   INTEGER itn, its, Low, mp1, enm1, iend, Ierr
   REAL Hr(Nm,*), Hi(Nm,*), Wr(*), Wi(*), Zr(Nm,*), Zi(Nm,*)
   REAL si, sr, ti, tr, xi, xr, yi, yr, zzi, zzr, norm, s1, s2
-  INTEGER Int(*)
+  INTEGER Intt(*)
   !
   !* FIRST EXECUTABLE STATEMENT  COMLR2
   Ierr = 0
@@ -142,7 +142,7 @@ SUBROUTINE COMLR2(Nm,N,Low,Igh,Int,Hr,Hi,Wr,Wi,Zr,Zi,Ierr)
         Zi(k,i) = Hi(k,i-1)
       END DO
       !
-      j = Int(i)
+      j = Intt(i)
       IF ( i/=j ) THEN
         !
         DO k = i, Igh

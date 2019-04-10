@@ -736,7 +736,7 @@ SUBROUTINE CDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
   EXTERNAL :: F, JACOBN, FA, G, USERS
   COMPLEX Work(*), Y(*)
   REAL ae, avgh, avgord, big, el(13,12), Eps, Ewt(*), G, glast, gnow, h, Hmax, &
-    hold, hsign, hused, rc, re, rmax, size, sum, T, tlast, Tout, &
+    hold, hsign, hused, rc, re, rmax, sizee, summ, T, tlast, Tout, &
     tq(3,12), trend, troot, uround
   INTEGER i, ia, idfdy, Ierflg, Ierror, ifac, iflag, ignow, Impl, imxerr, info, &
     iroot, isave1, isave2, itroot, Iwork(*), iywt, j, jstate, jtroot, lenchk, &
@@ -1307,10 +1307,10 @@ SUBROUTINE CDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
   DO i = 1, N
     Work(i+isave2-1) = Y(i)/Work(i+iywt-1)
   END DO
-  sum = SCNRM2(N,Work(isave2),1)/SQRT(REAL(N))
-  sum = MAX(1.E0,sum)
-  IF ( Eps<sum*uround ) THEN
-    Eps = sum*uround*(1.E0+10.E0*uround)
+  summ = SCNRM2(N,Work(isave2),1)/SQRT(REAL(N))
+  summ = MAX(1.E0,summ)
+  IF ( Eps<summ*uround ) THEN
+    Eps = summ*uround*(1.E0+10.E0*uround)
     WRITE (rl1,'(E16.8)') T
     WRITE (rl2,'(E16.8)') Eps
     Ierflg = 4
@@ -1544,9 +1544,9 @@ SUBROUTINE CDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
   imxerr = 1
   DO i = 1, N
     !                                            SIZE = ABS(ERROR(I)/YWT(I))
-    size = ABS(Work(i+isave1-1)/Work(i+iywt-1))
-    IF ( big<size ) THEN
-      big = size
+    sizee = ABS(Work(i+isave1-1)/Work(i+iywt-1))
+    IF ( big<sizee ) THEN
+      big = sizee
       imxerr = i
     END IF
   END DO

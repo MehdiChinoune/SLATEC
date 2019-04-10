@@ -83,7 +83,7 @@ SUBROUTINE DAVINT(X,Y,N,Xlo,Xup,Ans,Ierr)
   !
   INTEGER i, Ierr, inlft, inrt, istart, istop, N
   REAL(8) :: a, Ans, b, c, ca, cb, cc, fl, fr, r3, rp5, &
-    slope, sum, syl, syl2, syl3, syu, syu2, syu3, &
+    slope, summ, syl, syl2, syl3, syu, syu2, syu3, &
     term1, term2, term3, X(*), x1, x12, x13, x2, x23, x3, Xlo, Xup, Y(*)
   !     BEGIN BLOCK PERMITTING ...EXITS TO 190
   !        BEGIN BLOCK PERMITTING ...EXITS TO 180
@@ -137,7 +137,7 @@ SUBROUTINE DAVINT(X,Y,N,Xlo,Xup,Ans,Ierr)
           !
           r3 = 3.0D0
           rp5 = 0.5D0
-          sum = 0.0D0
+          summ = 0.0D0
           syl = Xlo
           syl2 = syl*syl
           syl3 = syl2*syl
@@ -167,7 +167,7 @@ SUBROUTINE DAVINT(X,Y,N,Xlo,Xup,Ans,Ierr)
             syu = x2
             syu2 = syu*syu
             syu3 = syu2*syu
-            sum = sum + ca*(syu3-syl3)/r3 + cb*rp5*(syu2-syl2) + cc*(syu-syl)
+            summ = summ + ca*(syu3-syl3)/r3 + cb*rp5*(syu2-syl2) + cc*(syu-syl)
             ca = a
             cb = b
             cc = c
@@ -176,7 +176,7 @@ SUBROUTINE DAVINT(X,Y,N,Xlo,Xup,Ans,Ierr)
             syl3 = syu3
           END DO
           syu = Xup
-          Ans = sum + ca*(syu**3-syl3)/r3 + cb*rp5*(syu**2-syl2) + cc*(syu-syl)
+          Ans = summ + ca*(syu**3-syl3)/r3 + cb*rp5*(syu**2-syl2) + cc*(syu-syl)
         ELSE
           Ierr = 3
           !     ...............EXIT

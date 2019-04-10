@@ -1,5 +1,5 @@
 !** CUNIK
-SUBROUTINE CUNIK(Zr,Fnu,Ikflg,Ipmtr,Tol,Init,Phi,Zeta1,Zeta2,Sum,Cwrk)
+SUBROUTINE CUNIK(Zr,Fnu,Ikflg,Ipmtr,Tol,Init,Phi,Zeta1,Zeta2,Summ,Cwrk)
   IMPLICIT NONE
   !>
   !***
@@ -37,7 +37,7 @@ SUBROUTINE CUNIK(Zr,Fnu,Ikflg,Ipmtr,Tol,Init,Phi,Zeta1,Zeta2,Sum,Cwrk)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
 
-  COMPLEX cfn, crfn, Cwrk(16), Phi, s, sr, Sum, t, t2, Zeta1, Zeta2, zn, Zr
+  COMPLEX cfn, crfn, Cwrk(16), Phi, s, sr, Summ, t, t2, Zeta1, Zeta2, zn, Zr
   REAL ac, Fnu, rfn, test, Tol, tstr, tsti, R1MACH
   INTEGER i, Ikflg, Init, Ipmtr, j, k, l
   COMPLEX, PARAMETER :: czero = (0.0E0,0.0E0), cone = (1.0E0,0.0E0)
@@ -151,7 +151,7 @@ SUBROUTINE CUNIK(Zr,Fnu,Ikflg,Ipmtr,Tol,Init,Phi,Zeta1,Zeta2,Sum,Cwrk)
       s = s + t*Cwrk(i)
       t = -t
     END DO
-    Sum = s
+    Summ = s
     Phi = Cwrk(16)*con(2)
     RETURN
   END IF
@@ -162,7 +162,7 @@ SUBROUTINE CUNIK(Zr,Fnu,Ikflg,Ipmtr,Tol,Init,Phi,Zeta1,Zeta2,Sum,Cwrk)
   DO i = 1, Init
     s = s + Cwrk(i)
   END DO
-  Sum = s
+  Summ = s
   Phi = Cwrk(16)*con(1)
   RETURN
 END SUBROUTINE CUNIK

@@ -38,11 +38,11 @@ SUBROUTINE MC20AS(Nc,Maxa,A,Inum,Jptr,Jnum,Jdisp)
 
   REAL ace, acep
   INTEGER i, ice, icep, j, ja, jb, jce, jcep, Nc, Jdisp, Jptr(Nc), k, &
-    kr, loc, Maxa, null
+    kr, locc, Maxa, nul
   INTEGER Inum(*), Jnum(*)
   REAL A(*)
   !* FIRST EXECUTABLE STATEMENT  MC20AS
-  null = -Jdisp
+  nul = -Jdisp
   !**      CLEAR JPTR
   DO j = 1, Nc
     Jptr(j) = 0
@@ -69,23 +69,23 @@ SUBROUTINE MC20AS(Nc,Maxa,A,Inum,Jptr,Jnum,Jdisp)
       ace = A(i)
       ice = Inum(i)
       !        CLEAR THE LOCATION VACATED.
-      Jnum(i) = null
+      Jnum(i) = nul
       !        CHAIN FROM CURRENT ENTRY TO STORE ITEMS.
       DO j = 1, Maxa
         !        CURRENT ENTRY NOT IN CORRECT POSITION.  DETERMINE CORRECT
         !        POSITION TO STORE ENTRY.
-        loc = Jptr(jce)
+        locc = Jptr(jce)
         Jptr(jce) = Jptr(jce) + 1
         !        SAVE CONTENTS OF THAT LOCATION.
-        acep = A(loc)
-        icep = Inum(loc)
-        jcep = Jnum(loc)
+        acep = A(locc)
+        icep = Inum(locc)
+        jcep = Jnum(locc)
         !        STORE CURRENT ENTRY.
-        A(loc) = ace
-        Inum(loc) = ice
-        Jnum(loc) = null
+        A(locc) = ace
+        Inum(locc) = ice
+        Jnum(locc) = nul
         !        CHECK IF NEXT CURRENT ENTRY NEEDS TO BE PROCESSED.
-        IF ( jcep==null ) EXIT
+        IF ( jcep==nul ) EXIT
         !        IT DOES.  COPY INTO CURRENT ENTRY.
         ace = acep
         ice = icep

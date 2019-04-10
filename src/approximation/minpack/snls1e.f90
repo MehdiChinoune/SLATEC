@@ -512,7 +512,7 @@ SUBROUTINE SNLS1E(FCN,Iopt,M,N,X,Fvec,Tol,Nprint,Info,Iw,Wa,Lwa)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER M, N, Nprint, Info, Lwa, Iopt
-  INTEGER index, Iw(*)
+  INTEGER indexx, Iw(*)
   REAL Tol
   REAL X(*), Fvec(*), Wa(*)
   EXTERNAL :: FCN
@@ -537,8 +537,8 @@ SUBROUTINE SNLS1E(FCN,Iopt,M,N,X,Fvec,Tol,Nprint,Info,Iw,Wa,Lwa)
       gtol = zero
       epsfcn = zero
       mode = 1
-      index = 5*N + M
-      CALL SNLS1(FCN,Iopt,M,N,X,Fvec,Wa(index+1),M,ftol,xtol,gtol,maxfev,&
+      indexx = 5*N + M
+      CALL SNLS1(FCN,Iopt,M,N,X,Fvec,Wa(indexx+1),M,ftol,xtol,gtol,maxfev,&
         epsfcn,Wa(1),mode,factor,Nprint,Info,nfev,njev,Iw,Wa(N+1),&
         Wa(2*N+1),Wa(3*N+1),Wa(4*N+1),Wa(5*N+1))
       IF ( Info==8 ) Info = 4

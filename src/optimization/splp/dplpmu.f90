@@ -53,7 +53,7 @@ SUBROUTINE DPLPMU(Mrelas,Nvars,Lmx,Lbm,Nredc,Info,Ienter,Ileave,Iopt,Npp,&
     iplace, iu1, j, Jstrt, k, key, Lbm, Lmx, lpg, Mrelas, n20002, n20018, n20121, &
     nerr, nnegrc, Npp, npr001, npr003, Nredc, Nvars
   INTEGER Ibasis(*), Imat(*), Ibrc(Lbm,2), Ipr(*), Iwr(*), Ind(*), Ibb(*)
-  REAL(8) :: aij, alpha, Anorm, Costsc, Erdnrm, Dulnrm, Eps, gamma, Gg, gq, &
+  REAL(8) :: aij, alpha, Anorm, Costsc, Erdnrm, Dulnrm, Eps, gama, Gg, gq, &
     Rprnrm, rzj, scalr, Theta, Uu, wp, Xlamda, Rhsnrm, rcost, DASUM, DDOT, cnorm
   REAL(8) :: Amat(*), Basmat(*), Csc(*), Wr(*), Rprim(*), Ww(*), Bu(*), Bl(*), &
     Rhs(*), Erd(*), Erp(*), Rz(*), Rg(*), Costs(*), Primal(*), Duals(*), Colnrm(*)
@@ -239,12 +239,12 @@ SUBROUTINE DPLPMU(Mrelas,Nvars,Lmx,Lbm,Nredc,Info,Ienter,Ileave,Iopt,Npp,&
     i = j - Nvars
     alpha = scalr*Erd(i)
     Rz(j) = -scalr*Duals(i)
-    gamma = scalr*Ww(i)
-    Rg(j) = MAX(Rg(j)-two*alpha*gamma+alpha**2*gq,one+alpha**2)
+    gama = scalr*Ww(i)
+    Rg(j) = MAX(Rg(j)-two*alpha*gama+alpha**2*gq,one+alpha**2)
   ELSE
     rzj = Costs(j)*Costsc
     alpha = zero
-    gamma = zero
+    gama = zero
     !
     !     COMPUTE THE DOT PRODUCT OF THE SPARSE MATRIX NONBASIC COLUMNS
     !     WITH THREE VECTORS INVOLVED IN THE UPDATING STEP.
@@ -270,7 +270,7 @@ SUBROUTINE DPLPMU(Mrelas,Nvars,Lmx,Lbm,Nredc,Info,Ienter,Ileave,Iopt,Npp,&
       DO i = il1, iu1
         rzj = rzj - Amat(i)*Duals(Imat(i))
         alpha = alpha + Amat(i)*Erd(Imat(i))
-        gamma = gamma + Amat(i)*Ww(Imat(i))
+        gama = gama + Amat(i)*Ww(Imat(i))
       END DO
       IF ( ihi<=Lmx-2 ) EXIT
       ipage = ipage + 1
@@ -282,10 +282,10 @@ SUBROUTINE DPLPMU(Mrelas,Nvars,Lmx,Lbm,Nredc,Info,Ienter,Ileave,Iopt,Npp,&
     pagepl = ihi==(Lmx-2)
     Rz(j) = rzj*Csc(j)
     alpha = alpha*Csc(j)
-    gamma = gamma*Csc(j)
+    gama = gama*Csc(j)
     !
     !     NONBASIC DEPENDENT VARIABLES (COLUMNS DEFINED IMPLICITLY)
-    Rg(j) = MAX(Rg(j)-two*alpha*gamma+alpha**2*gq,one+alpha**2)
+    Rg(j) = MAX(Rg(j)-two*alpha*gama+alpha**2*gq,one+alpha**2)
   END IF
   !
   rcost = Rz(j)

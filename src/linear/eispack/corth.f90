@@ -81,7 +81,7 @@ SUBROUTINE CORTH(Nm,N,Low,Igh,Ar,Ai,Ortr,Orti)
   !
   INTEGER i, j, m, N, ii, jj, la, mp, Nm, Igh, kp1, Low
   REAL Ar(Nm,*), Ai(Nm,*), Ortr(*), Orti(*)
-  REAL f, g, h, fi, fr, scale
+  REAL f, g, h, fi, fr, scalee
   REAL PYTHAG
   !
   !* FIRST EXECUTABLE STATEMENT  CORTH
@@ -93,19 +93,19 @@ SUBROUTINE CORTH(Nm,N,Low,Igh,Ar,Ai,Ortr,Orti)
       h = 0.0E0
       Ortr(m) = 0.0E0
       Orti(m) = 0.0E0
-      scale = 0.0E0
+      scalee = 0.0E0
       !     .......... SCALE COLUMN (ALGOL TOL THEN NOT NEEDED) ..........
       DO i = m, Igh
-        scale = scale + ABS(Ar(i,m-1)) + ABS(Ai(i,m-1))
+        scalee = scalee + ABS(Ar(i,m-1)) + ABS(Ai(i,m-1))
       END DO
       !
-      IF ( scale/=0.0E0 ) THEN
+      IF ( scalee/=0.0E0 ) THEN
         mp = m + Igh
         !     .......... FOR I=IGH STEP -1 UNTIL M DO -- ..........
         DO ii = m, Igh
           i = mp - ii
-          Ortr(i) = Ar(i,m-1)/scale
-          Orti(i) = Ai(i,m-1)/scale
+          Ortr(i) = Ar(i,m-1)/scalee
+          Orti(i) = Ai(i,m-1)/scalee
           h = h + Ortr(i)*Ortr(i) + Orti(i)*Orti(i)
         END DO
         !
@@ -114,7 +114,7 @@ SUBROUTINE CORTH(Nm,N,Low,Igh,Ar,Ai,Ortr,Orti)
         IF ( f==0.0E0 ) THEN
           !
           Ortr(m) = g
-          Ar(m,m-1) = scale
+          Ar(m,m-1) = scalee
         ELSE
           h = h + f*g
           g = g/f
@@ -162,8 +162,8 @@ SUBROUTINE CORTH(Nm,N,Low,Igh,Ar,Ai,Ortr,Orti)
           !
         END DO
         !
-        Ortr(m) = scale*Ortr(m)
-        Orti(m) = scale*Orti(m)
+        Ortr(m) = scalee*Ortr(m)
+        Orti(m) = scalee*Orti(m)
         Ar(m,m-1) = -g*Ar(m,m-1)
         Ai(m,m-1) = -g*Ai(m,m-1)
       END IF

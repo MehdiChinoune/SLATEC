@@ -26,7 +26,7 @@ SUBROUTINE CMLRI(Z,Fnu,Kode,N,Y,Nz,Tol)
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
 
   INTEGER i, iaz, idum, ifnu, inu, itime, k, kk, km, Kode, m, N, Nz
-  COMPLEX ck, cnorm, pt, p1, p2, rz, sum, Y(N), Z
+  COMPLEX ck, cnorm, pt, p1, p2, rz, summ, Y(N), Z
   REAL ack, ak, ap, at, az, bk, fkap, fkk, flam, fnf, Fnu, rho, &
     rho2, scle, tfnf, Tol, tst, x, GAMLN, R1MACH
   COMPLEX, PARAMETER :: czero = (0.0E0,0.0E0), cone = (1.0E0,0.0E0), ctwo = (2.0E0,0.0E0)
@@ -110,7 +110,7 @@ SUBROUTINE CMLRI(Z,Fnu,Kode,N,Y,Nz,Tol)
   tfnf = fnf + fnf
   bk = GAMLN(fkk+tfnf+1.0E0,idum) - GAMLN(fkk+1.0E0,idum)- GAMLN(tfnf+1.0E0,idum)
   bk = EXP(bk)
-  sum = czero
+  summ = czero
   km = kk - inu
   DO i = 1, km
     pt = p2
@@ -118,7 +118,7 @@ SUBROUTINE CMLRI(Z,Fnu,Kode,N,Y,Nz,Tol)
     p1 = pt
     ak = 1.0E0 - tfnf/(fkk+tfnf)
     ack = bk*ak
-    sum = sum + CMPLX(ack+bk,0.0E0)*p1
+    summ = summ + CMPLX(ack+bk,0.0E0)*p1
     bk = ack
     fkk = fkk - 1.0E0
   END DO
@@ -130,7 +130,7 @@ SUBROUTINE CMLRI(Z,Fnu,Kode,N,Y,Nz,Tol)
       p1 = pt
       ak = 1.0E0 - tfnf/(fkk+tfnf)
       ack = bk*ak
-      sum = sum + CMPLX(ack+bk,0.0E0)*p1
+      summ = summ + CMPLX(ack+bk,0.0E0)*p1
       bk = ack
       fkk = fkk - 1.0E0
       m = N - i + 1
@@ -144,7 +144,7 @@ SUBROUTINE CMLRI(Z,Fnu,Kode,N,Y,Nz,Tol)
       p1 = pt
       ak = 1.0E0 - tfnf/(fkk+tfnf)
       ack = bk*ak
-      sum = sum + CMPLX(ack+bk,0.0E0)*p1
+      summ = summ + CMPLX(ack+bk,0.0E0)*p1
       bk = ack
       fkk = fkk - 1.0E0
     END DO
@@ -158,7 +158,7 @@ SUBROUTINE CMLRI(Z,Fnu,Kode,N,Y,Nz,Tol)
   !     THE DIVISION CEXP(PT)/(SUM+P2) IS ALTERED TO AVOID OVERFLOW
   !     IN THE DENOMINATOR BY SQUARING LARGE QUANTITIES
   !-----------------------------------------------------------------------
-  p2 = p2 + sum
+  p2 = p2 + summ
   ap = ABS(p2)
   p1 = CMPLX(1.0E0/ap,0.0E0)
   ck = CEXP(pt)*p1

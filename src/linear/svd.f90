@@ -99,7 +99,7 @@ SUBROUTINE SVD(Nm,M,N,A,W,Matu,U,Matv,V,Ierr,Rv1)
   !
   INTEGER i, j, k, l, M, N, ii, i1, kk, k1, ll, l1, mn, Nm, its, Ierr
   REAL A(Nm,*), W(*), U(Nm,*), V(Nm,*), Rv1(*)
-  REAL c, f, g, h, s, x, y, z, scale, s1
+  REAL c, f, g, h, s, x, y, z, scalee, s1
   REAL PYTHAG
   LOGICAL Matu, Matv
   !
@@ -114,25 +114,25 @@ SUBROUTINE SVD(Nm,M,N,A,W,Matu,U,Matv,V,Ierr,Rv1)
   END DO
   !     .......... HOUSEHOLDER REDUCTION TO BIDIAGONAL FORM ..........
   g = 0.0E0
-  scale = 0.0E0
+  scalee = 0.0E0
   s1 = 0.0E0
   !
   DO i = 1, N
     l = i + 1
-    Rv1(i) = scale*g
+    Rv1(i) = scalee*g
     g = 0.0E0
     s = 0.0E0
-    scale = 0.0E0
+    scalee = 0.0E0
     IF ( i<=M ) THEN
       !
       DO k = i, M
-        scale = scale + ABS(U(k,i))
+        scalee = scalee + ABS(U(k,i))
       END DO
       !
-      IF ( scale/=0.0E0 ) THEN
+      IF ( scalee/=0.0E0 ) THEN
         !
         DO k = i, M
-          U(k,i) = U(k,i)/scale
+          U(k,i) = U(k,i)/scalee
           s = s + U(k,i)**2
         END DO
         !
@@ -158,25 +158,25 @@ SUBROUTINE SVD(Nm,M,N,A,W,Matu,U,Matv,V,Ierr,Rv1)
         END IF
         !
         DO k = i, M
-          U(k,i) = scale*U(k,i)
+          U(k,i) = scalee*U(k,i)
         END DO
       END IF
     END IF
     !
-    W(i) = scale*g
+    W(i) = scalee*g
     g = 0.0E0
     s = 0.0E0
-    scale = 0.0E0
+    scalee = 0.0E0
     IF ( i<=M.AND.i/=N ) THEN
       !
       DO k = l, N
-        scale = scale + ABS(U(i,k))
+        scalee = scalee + ABS(U(i,k))
       END DO
       !
-      IF ( scale/=0.0E0 ) THEN
+      IF ( scalee/=0.0E0 ) THEN
         !
         DO k = l, N
-          U(i,k) = U(i,k)/scale
+          U(i,k) = U(i,k)/scalee
           s = s + U(i,k)**2
         END DO
         !
@@ -205,7 +205,7 @@ SUBROUTINE SVD(Nm,M,N,A,W,Matu,U,Matv,V,Ierr,Rv1)
         END IF
         !
         DO k = l, N
-          U(i,k) = scale*U(i,k)
+          U(i,k) = scalee*U(i,k)
         END DO
       END IF
     END IF

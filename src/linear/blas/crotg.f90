@@ -52,7 +52,7 @@ SUBROUTINE CROTG(Ca,Cb,C,S)
 
   COMPLEX Ca, Cb, S
   REAL C
-  REAL norm, scale
+  REAL norm, scalee
   COMPLEX alpha
   !* FIRST EXECUTABLE STATEMENT  CROTG
   IF ( ABS(Ca)==0.0 ) THEN
@@ -60,8 +60,8 @@ SUBROUTINE CROTG(Ca,Cb,C,S)
     S = (1.0,0.0)
     Ca = Cb
   ELSE
-    scale = ABS(Ca) + ABS(Cb)
-    norm = scale*SQRT((ABS(Ca/scale))**2+(ABS(Cb/scale))**2)
+    scalee = ABS(Ca) + ABS(Cb)
+    norm = scalee*SQRT((ABS(Ca/scalee))**2+(ABS(Cb/scalee))**2)
     alpha = Ca/ABS(Ca)
     C = ABS(Ca)/norm
     S = alpha*CONJG(Cb)/norm

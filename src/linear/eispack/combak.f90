@@ -1,5 +1,5 @@
 !** COMBAK
-SUBROUTINE COMBAK(Nm,Low,Igh,Ar,Ai,Int,M,Zr,Zi)
+SUBROUTINE COMBAK(Nm,Low,Igh,Ar,Ai,Intt,M,Zr,Zi)
   IMPLICIT NONE
   !>
   !***
@@ -84,7 +84,7 @@ SUBROUTINE COMBAK(Nm,Low,Igh,Ar,Ai,Int,M,Zr,Zi)
   INTEGER i, j, M, la, mm, mp, Nm, Igh, kp1, Low, mp1
   REAL Ar(Nm,*), Ai(Nm,*), Zr(Nm,*), Zi(Nm,*)
   REAL xr, xi
-  INTEGER Int(*)
+  INTEGER Intt(*)
   !
   !* FIRST EXECUTABLE STATEMENT  COMBAK
   IF ( M/=0 ) THEN
@@ -109,7 +109,7 @@ SUBROUTINE COMBAK(Nm,Low,Igh,Ar,Ai,Int,M,Zr,Zi)
           !
         END DO
         !
-        i = Int(mp)
+        i = Intt(mp)
         IF ( i/=mp ) THEN
           !
           DO j = 1, M

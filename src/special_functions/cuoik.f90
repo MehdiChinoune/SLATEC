@@ -43,7 +43,7 @@ SUBROUTINE CUOIK(Z,Fnu,Kode,Ikflg,N,Y,Nuf,Tol,Elim,Alim)
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
 
   INTEGER i, iform, Ikflg, init, Kode, N, nn, Nuf, nw
-  COMPLEX arg, asum, bsum, cwrk(16), cz, phi, sum, Y(N), Z, zb, zeta1, zeta2, zn, zr
+  COMPLEX arg, asum, bsum, cwrk(16), cz, phi, summ, Y(N), Z, zb, zeta1, zeta2, zn, zr
   REAL aarg, Alim, aphi, ascle, ax, ay, Elim, fnn, Fnu, gnn, gnu, rcz, Tol, x, yy, R1MACH
   COMPLEX, PARAMETER :: czero = (0.0E0,0.0E0)
   REAL, PARAMETER :: aic = 1.265512123484645396E+00
@@ -78,7 +78,7 @@ SUBROUTINE CUOIK(Z,Fnu,Kode,Ikflg,N,Y,Nuf,Tol,Elim,Alim)
     aarg = ABS(arg)
   ELSE
     init = 0
-    CALL CUNIK(zr,gnu,Ikflg,1,Tol,init,phi,zeta1,zeta2,sum,cwrk)
+    CALL CUNIK(zr,gnu,Ikflg,1,Tol,init,phi,zeta1,zeta2,summ,cwrk)
     cz = -zeta1 + zeta2
   END IF
   IF ( Kode==2 ) cz = cz - zb
@@ -137,7 +137,7 @@ SUBROUTINE CUOIK(Z,Fnu,Kode,Ikflg,N,Y,Nuf,Tol,Elim,Alim)
     aarg = ABS(arg)
   ELSE
     init = 0
-    CALL CUNIK(zr,gnu,Ikflg,1,Tol,init,phi,zeta1,zeta2,sum,cwrk)
+    CALL CUNIK(zr,gnu,Ikflg,1,Tol,init,phi,zeta1,zeta2,summ,cwrk)
     cz = -zeta1 + zeta2
   END IF
   IF ( Kode==2 ) cz = cz - zb

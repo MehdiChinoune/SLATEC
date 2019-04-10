@@ -62,7 +62,7 @@ SUBROUTINE CPQR79(Ndeg,Coeff,Root,Ierr,Work)
   !   911010  Code reworked and simplified.  (RWC and WRB)
 
   INTEGER km1
-  COMPLEX Coeff(*), Root(*), scale, c
+  COMPLEX Coeff(*), Root(*), scalee, c
   REAL Work(*)
   INTEGER Ndeg, Ierr, k, khr, khi, kwr, kwi, kad, kj
   !* FIRST EXECUTABLE STATEMENT  CPQR79
@@ -84,7 +84,7 @@ SUBROUTINE CPQR79(Ndeg,Coeff,Root,Ierr,Work)
     RETURN
   END IF
   !
-  scale = 1.0E0/Coeff(1)
+  scalee = 1.0E0/Coeff(1)
   khr = 1
   khi = khr + Ndeg*Ndeg
   kwr = khi + khi - khr
@@ -96,7 +96,7 @@ SUBROUTINE CPQR79(Ndeg,Coeff,Root,Ierr,Work)
   !
   DO k = 1, Ndeg
     kad = (k-1)*Ndeg + 1
-    c = scale*Coeff(k+1)
+    c = scalee*Coeff(k+1)
     Work(kad) = -REAL(c)
     kj = khi + kad - 1
     Work(kj) = -AIMAG(c)

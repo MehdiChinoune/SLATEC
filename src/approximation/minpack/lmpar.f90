@@ -112,7 +112,7 @@ SUBROUTINE LMPAR(N,R,Ldr,Ipvt,Diag,Qtb,Delta,Par,X,Sigma,Wa1,Wa2)
   REAL Delta, Par
   REAL R(Ldr,*), Diag(*), Qtb(*), X(*), Sigma(*), Wa1(*), Wa2(*)
   INTEGER i, iter, j, jm1, jp1, k, l, nsing
-  REAL dxnorm, dwarf, fp, gnorm, parc, parl, paru, sum, temp
+  REAL dxnorm, dwarf, fp, gnorm, parc, parl, paru, summ, temp
   REAL R1MACH, ENORM
   REAL, PARAMETER :: p1 = 1.0E-1, p001 = 1.0E-3, zero = 0.0E0
   !* FIRST EXECUTABLE STATEMENT  LMPAR
@@ -173,14 +173,14 @@ SUBROUTINE LMPAR(N,R,Ldr,Ipvt,Diag,Qtb,Delta,Par,X,Sigma,Wa1,Wa2)
         Wa1(j) = Diag(l)*(Wa2(l)/dxnorm)
       END DO
       DO j = 1, N
-        sum = zero
+        summ = zero
         jm1 = j - 1
         IF ( jm1>=1 ) THEN
           DO i = 1, jm1
-            sum = sum + R(i,j)*Wa1(i)
+            summ = summ + R(i,j)*Wa1(i)
           END DO
         END IF
-        Wa1(j) = (Wa1(j)-sum)/R(j,j)
+        Wa1(j) = (Wa1(j)-summ)/R(j,j)
       END DO
       temp = ENORM(N,Wa1)
       parl = ((fp/Delta)/temp)/temp
@@ -189,12 +189,12 @@ SUBROUTINE LMPAR(N,R,Ldr,Ipvt,Diag,Qtb,Delta,Par,X,Sigma,Wa1,Wa2)
     !     CALCULATE AN UPPER BOUND, PARU, FOR THE ZERO OF THE FUNCTION.
     !
     DO j = 1, N
-      sum = zero
+      summ = zero
       DO i = 1, j
-        sum = sum + R(i,j)*Qtb(i)
+        summ = summ + R(i,j)*Qtb(i)
       END DO
       l = Ipvt(j)
-      Wa1(j) = sum/Diag(l)
+      Wa1(j) = summ/Diag(l)
     END DO
     gnorm = ENORM(N,Wa1)
     paru = gnorm/Delta

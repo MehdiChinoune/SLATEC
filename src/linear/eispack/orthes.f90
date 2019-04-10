@@ -78,7 +78,7 @@ SUBROUTINE ORTHES(Nm,N,Low,Igh,A,Ort)
   !
   INTEGER i, j, m, N, ii, jj, la, mp, Nm, Igh, kp1, Low
   REAL A(Nm,*), Ort(*)
-  REAL f, g, h, scale
+  REAL f, g, h, scalee
   !
   !* FIRST EXECUTABLE STATEMENT  ORTHES
   la = Igh - 1
@@ -88,18 +88,18 @@ SUBROUTINE ORTHES(Nm,N,Low,Igh,A,Ort)
     DO m = kp1, la
       h = 0.0E0
       Ort(m) = 0.0E0
-      scale = 0.0E0
+      scalee = 0.0E0
       !     .......... SCALE COLUMN (ALGOL TOL THEN NOT NEEDED) ..........
       DO i = m, Igh
-        scale = scale + ABS(A(i,m-1))
+        scalee = scalee + ABS(A(i,m-1))
       END DO
       !
-      IF ( scale/=0.0E0 ) THEN
+      IF ( scalee/=0.0E0 ) THEN
         mp = m + Igh
         !     .......... FOR I=IGH STEP -1 UNTIL M DO -- ..........
         DO ii = m, Igh
           i = mp - ii
-          Ort(i) = A(i,m-1)/scale
+          Ort(i) = A(i,m-1)/scalee
           h = h + Ort(i)*Ort(i)
         END DO
         !
@@ -139,8 +139,8 @@ SUBROUTINE ORTHES(Nm,N,Low,Igh,A,Ort)
           !
         END DO
         !
-        Ort(m) = scale*Ort(m)
-        A(m,m-1) = scale*g
+        Ort(m) = scalee*Ort(m)
+        A(m,m-1) = scalee*g
       END IF
     END DO
   END IF

@@ -30,13 +30,13 @@ REAL(8) FUNCTION DVNRMS(N,V,W)
   !   900328  Added TYPE section.  (WRB)
   
   INTEGER i, N
-  REAL(8) :: sum, V(*), W(*)
+  REAL(8) :: summ, V(*), W(*)
   !* FIRST EXECUTABLE STATEMENT  DVNRMS
-  sum = 0.0D0
+  summ = 0.0D0
   DO i = 1, N
-    sum = sum + (V(i)/W(i))**2
+    summ = summ + (V(i)/W(i))**2
   END DO
-  DVNRMS = SQRT(sum/N)
+  DVNRMS = SQRT(summ/N)
   !     ----------------------- END OF FUNCTION DVNRMS
   !     ------------------------
 END FUNCTION DVNRMS

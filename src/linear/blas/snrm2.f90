@@ -86,14 +86,14 @@ REAL FUNCTION SNRM2(N,Sx,Incx)
 
   INTEGER i, Incx, j, N, nn
   INTEGER next
-  REAL Sx(*), hitest, sum, xmax
+  REAL Sx(*), hitest, summ, xmax
   REAL, PARAMETER :: zero = 0.0E0, one = 1.0E0
   REAL, PARAMETER :: cutlo = 4.441E-16, cuthi = 1.304E19
   !* FIRST EXECUTABLE STATEMENT  SNRM2
   IF ( N>0 ) THEN
     !
     next = 200
-    sum = zero
+    summ = zero
     nn = N*Incx
     !
     !                                                 BEGIN MAIN LOOP
@@ -134,10 +134,10 @@ REAL FUNCTION SNRM2(N,Sx,Incx)
   !
   400  i = j
   next = 700
-  sum = (sum/Sx(i))/Sx(i)
+  summ = (summ/Sx(i))/Sx(i)
   500  xmax = ABS(Sx(i))
   !
-  sum = sum + (Sx(i)/xmax)**2
+  summ = summ + (Sx(i)/xmax)**2
   GOTO 900
   !
   !                   PHASE 2.  SUM IS SMALL.
@@ -148,7 +148,7 @@ REAL FUNCTION SNRM2(N,Sx,Incx)
     !
     !                  PREPARE FOR PHASE 3.
     !
-    sum = (sum*xmax)*xmax
+    summ = (summ*xmax)*xmax
     GOTO 800
   END IF
   !
@@ -157,9 +157,9 @@ REAL FUNCTION SNRM2(N,Sx,Incx)
   !
   700 CONTINUE
   IF ( ABS(Sx(i))<=xmax ) THEN
-    sum = sum + (Sx(i)/xmax)**2
+    summ = summ + (Sx(i)/xmax)**2
   ELSE
-    sum = one + sum*(xmax/Sx(i))**2
+    summ = one + summ*(xmax/Sx(i))**2
     xmax = ABS(Sx(i))
   END IF
   GOTO 900
@@ -173,9 +173,9 @@ REAL FUNCTION SNRM2(N,Sx,Incx)
   !
   DO j = i, nn, Incx
     IF ( ABS(Sx(j))>=hitest ) GOTO 400
-    sum = sum + Sx(j)**2
+    summ = summ + Sx(j)**2
   END DO
-  SNRM2 = SQRT(sum)
+  SNRM2 = SQRT(summ)
   RETURN
   !
   900  i = i + Incx
@@ -185,6 +185,6 @@ REAL FUNCTION SNRM2(N,Sx,Incx)
   !
   !              COMPUTE SQUARE ROOT AND ADJUST FOR SCALING.
   !
-  SNRM2 = xmax*SQRT(sum)
+  SNRM2 = xmax*SQRT(summ)
   RETURN
 END FUNCTION SNRM2

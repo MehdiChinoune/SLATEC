@@ -55,7 +55,7 @@ SUBROUTINE QFORM(M,N,Q,Ldq,Wa)
   INTEGER M, N, Ldq
   REAL Q(Ldq,*), Wa(*)
   INTEGER i, j, jm1, k, l, minmn, np1
-  REAL sum, temp
+  REAL summ, temp
   REAL, PARAMETER :: one = 1.0E0, zero = 0.0E0
   !* FIRST EXECUTABLE STATEMENT  QFORM
   minmn = MIN(M,N)
@@ -91,11 +91,11 @@ SUBROUTINE QFORM(M,N,Q,Ldq,Wa)
     Q(k,k) = one
     IF ( Wa(k)/=zero ) THEN
       DO j = k, M
-        sum = zero
+        summ = zero
         DO i = k, M
-          sum = sum + Q(i,j)*Wa(i)
+          summ = summ + Q(i,j)*Wa(i)
         END DO
-        temp = sum/Wa(k)
+        temp = summ/Wa(k)
         DO i = k, M
           Q(i,j) = Q(i,j) - temp*Wa(i)
         END DO

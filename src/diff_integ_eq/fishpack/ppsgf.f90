@@ -19,13 +19,13 @@ REAL FUNCTION PPSGF(X,Iz,C,A,Bh)
   !   801001  DATE WRITTEN
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
-  
-  REAL A(*), Bh(*), C(*), sum, X
+
+  REAL A(*), Bh(*), C(*), summ, X
   INTEGER Iz, j
   !* FIRST EXECUTABLE STATEMENT  PPSGF
-  sum = 0.
+  summ = 0.
   DO j = 1, Iz
-    sum = sum - 1./(X-Bh(j))**2
+    summ = summ - 1./(X-Bh(j))**2
   END DO
-  PPSGF = sum
+  PPSGF = summ
 END FUNCTION PPSGF

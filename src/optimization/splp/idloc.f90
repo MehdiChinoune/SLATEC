@@ -1,5 +1,5 @@
 !** IDLOC
-INTEGER FUNCTION IDLOC(Loc,Sx,Ix)
+INTEGER FUNCTION IDLOC(Locc,Sx,Ix)
   IMPLICIT NONE
   !>
   !***
@@ -36,11 +36,11 @@ INTEGER FUNCTION IDLOC(Loc,Sx,Ix)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   910731  Added code to set IDLOC to 0 if LOC is non-positive.  (WRB)
 
-  INTEGER ipage, itemp, k, key, lmx, lmxm1, Loc, lpg, np
+  INTEGER ipage, itemp, k, key, lmx, lmxm1, Locc, lpg, np
   REAL(8) :: Sx(*)
   INTEGER Ix(*)
   !* FIRST EXECUTABLE STATEMENT  IDLOC
-  IF ( Loc<=0 ) THEN
+  IF ( Locc<=0 ) THEN
     CALL XERMSG('SLATEC','IDLOC',&
       'A value of LOC, the first argument, .LE. 0 was encountered',55,1)
     IDLOC = 0
@@ -52,8 +52,8 @@ INTEGER FUNCTION IDLOC(Loc,Sx,Ix)
   k = Ix(3) + 4
   lmx = Ix(1)
   lmxm1 = lmx - 1
-  IF ( Loc<=k ) THEN
-    IDLOC = Loc
+  IF ( Locc<=k ) THEN
+    IDLOC = Locc
     RETURN
   END IF
   !
@@ -61,7 +61,7 @@ INTEGER FUNCTION IDLOC(Loc,Sx,Ix)
   !     number and relative working address.
   !
   lpg = lmx - k
-  itemp = Loc - k - 1
+  itemp = Locc - k - 1
   ipage = itemp/lpg + 1
   IDLOC = MOD(itemp,lpg) + k + 1
   np = ABS(Ix(lmxm1))

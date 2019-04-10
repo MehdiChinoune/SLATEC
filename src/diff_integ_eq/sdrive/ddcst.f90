@@ -40,7 +40,7 @@ SUBROUTINE DDCST(Maxord,Mint,Iswflg,El,Tq)
   !   790601  DATE WRITTEN
   !   900329  Initial submission to SLATEC.
 
-  REAL(8) :: El(13,12), factrl(12), gamma(14), sum, Tq(3,12)
+  REAL(8) :: El(13,12), factrl(12), gama(14), summ, Tq(3,12)
   INTEGER i, Iswflg, j, Maxord, Mint, mxrd
   !* FIRST EXECUTABLE STATEMENT  DDCST
   factrl(1) = 1.D0
@@ -49,13 +49,13 @@ SUBROUTINE DDCST(Maxord,Mint,Iswflg,El,Tq)
   END DO
   !                                             Compute Adams coefficients
   IF ( Mint==1 ) THEN
-    gamma(1) = 1.D0
+    gama(1) = 1.D0
     DO i = 1, Maxord + 1
-      sum = 0.D0
+      summ = 0.D0
       DO j = 1, i
-        sum = sum - gamma(j)/(i-j+2)
+        summ = summ - gama(j)/(i-j+2)
       END DO
-      gamma(i+1) = sum
+      gama(i+1) = summ
     END DO
     El(1,1) = 1.D0
     El(2,1) = 1.D0
@@ -69,16 +69,16 @@ SUBROUTINE DDCST(Maxord,Mint,Iswflg,El,Tq)
       El(j+1,j) = 1.D0
     END DO
     DO j = 2, Maxord
-      El(1,j) = El(1,j-1) + gamma(j)
+      El(1,j) = El(1,j-1) + gama(j)
       El(2,j) = 1.D0
       DO i = 3, j + 1
         El(i,j) = El(i,j)/((i-1)*factrl(j-1))
       END DO
     END DO
     DO j = 1, Maxord
-      Tq(1,j) = -1.D0/(factrl(j)*gamma(j))
-      Tq(2,j) = -1.D0/gamma(j+1)
-      Tq(3,j) = -1.D0/gamma(j+2)
+      Tq(1,j) = -1.D0/(factrl(j)*gama(j))
+      Tq(2,j) = -1.D0/gama(j+1)
+      Tq(3,j) = -1.D0/gama(j+2)
     END DO
     !                                              Compute Gear coefficients
   ELSEIF ( Mint==2 ) THEN
@@ -91,11 +91,11 @@ SUBROUTINE DDCST(Maxord,Mint,Iswflg,El,Tq)
       END DO
       El(j+1,j) = 1.D0
     END DO
-    sum = 1.D0
+    summ = 1.D0
     DO j = 2, Maxord
-      sum = sum + 1.D0/j
+      summ = summ + 1.D0/j
       DO i = 1, j + 1
-        El(i,j) = El(i,j)/(factrl(j)*sum)
+        El(i,j) = El(i,j)/(factrl(j)*summ)
       END DO
     END DO
     DO j = 1, Maxord
@@ -110,19 +110,19 @@ SUBROUTINE DDCST(Maxord,Mint,Iswflg,El,Tq)
   IF ( Iswflg==3 ) THEN
     mxrd = MIN(Maxord,5)
     IF ( Mint==2 ) THEN
-      gamma(1) = 1.D0
+      gama(1) = 1.D0
       DO i = 1, mxrd
-        sum = 0.D0
+        summ = 0.D0
         DO j = 1, i
-          sum = sum - gamma(j)/(i-j+2)
+          summ = summ - gama(j)/(i-j+2)
         END DO
-        gamma(i+1) = sum
+        gama(i+1) = summ
       END DO
     END IF
-    sum = 1.D0
+    summ = 1.D0
     DO i = 2, mxrd
-      sum = sum + 1.D0/i
-      El(1+i,1) = -(i+1)*sum*gamma(i+1)
+      summ = summ + 1.D0/i
+      El(1+i,1) = -(i+1)*summ*gama(i+1)
     END DO
   END IF
 END SUBROUTINE DDCST

@@ -34,7 +34,7 @@ REAL(8) FUNCTION DDANRM(Neq,V,Wt,Rpar,Ipar)
   REAL(8) :: V(Neq), Wt(Neq), Rpar(*)
   !
   INTEGER i
-  REAL(8) :: sum, vmax
+  REAL(8) :: summ, vmax
   !
   !* FIRST EXECUTABLE STATEMENT  DDANRM
   DDANRM = 0.0D0
@@ -43,11 +43,11 @@ REAL(8) FUNCTION DDANRM(Neq,V,Wt,Rpar,Ipar)
     IF ( ABS(V(i)/Wt(i))>vmax ) vmax = ABS(V(i)/Wt(i))
   END DO
   IF ( vmax>0.0D0 ) THEN
-    sum = 0.0D0
+    summ = 0.0D0
     DO i = 1, Neq
-      sum = sum + ((V(i)/Wt(i))/vmax)**2
+      summ = summ + ((V(i)/Wt(i))/vmax)**2
     END DO
-    DDANRM = vmax*SQRT(sum/Neq)
+    DDANRM = vmax*SQRT(summ/Neq)
   END IF
   !------END OF FUNCTION DDANRM------
 END FUNCTION DDANRM

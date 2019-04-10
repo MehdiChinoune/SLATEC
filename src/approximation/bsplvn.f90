@@ -1,5 +1,5 @@
 !** BSPLVN
-SUBROUTINE BSPLVN(T,Jhigh,Index,X,Ileft,Vnikx)
+SUBROUTINE BSPLVN(T,Jhigh,Indexx,X,Ileft,Vnikx)
   IMPLICIT NONE
   !>
   !***
@@ -27,11 +27,11 @@ SUBROUTINE BSPLVN(T,Jhigh,Index,X,Ileft,Vnikx)
   !   900328  Added TYPE section.  (WRB)
 
   REAL T(*), vm, vmprev, Vnikx(*), X
-  INTEGER Ileft, imjp1, Index, ipj, Jhigh, jp1, jp1ml, l
+  INTEGER Ileft, imjp1, Indexx, ipj, Jhigh, jp1, jp1ml, l
   INTEGER :: j = 1
   REAL :: deltam(20) = 0., deltap(20) = 0.
   !* FIRST EXECUTABLE STATEMENT  BSPLVN
-  IF ( Index/=2 ) THEN
+  IF ( Indexx/=2 ) THEN
     j = 1
     Vnikx(1) = 1.
     IF ( j>=Jhigh ) RETURN

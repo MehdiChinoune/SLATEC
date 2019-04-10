@@ -137,19 +137,19 @@ SUBROUTINE RC3JJ(L2,L3,M2,M3,L1min,L1max,Thrcof,Ndim,Ier)
   INTEGER Ndim, Ier
   REAL L2, L3, M2, M3, L1min, L1max, Thrcof(Ndim)
   !
-  INTEGER i, index, lstep, n, nfin, nfinp1, nfinp2, nfinp3, nlim, nstep2
-  REAL a1, a1s, a2, a2s, c1, c1old, c2, cnorm, R1MACH, denom, dv, huge, l1, m1, &
+  INTEGER i, indexx, lstep, n, nfin, nfinp1, nfinp2, nfinp3, nlim, nstep2
+  REAL a1, a1s, a2, a2s, c1, c1old, c2, cnorm, R1MACH, denom, dv, hugee, l1, m1, &
     newfac, oldfac, ratio, sign1, sign2, srhuge, srtiny, sum1, sum2, sumbac, &
-    sumfor, sumuni, thresh, tiny, x, x1, x2, x3, y, y1, y2, y3
+    sumfor, sumuni, thresh, tinyy, x, x1, x2, x3, y, y1, y2, y3
   REAL, PARAMETER :: zero = 0.0, eps = 0.01, one = 1.0, two = 2.0, three = 3.0
   !
   !* FIRST EXECUTABLE STATEMENT  RC3JJ
   Ier = 0
   !  HUGE is the square root of one twentieth of the largest floating
   !  point number, approximately.
-  huge = SQRT(R1MACH(2)/20.0)
-  srhuge = SQRT(huge)
-  tiny = 1.0/huge
+  hugee = SQRT(R1MACH(2)/20.0)
+  srhuge = SQRT(hugee)
+  tinyy = 1.0/hugee
   srtiny = 1.0/srhuge
   !
   !     LMATCH = ZERO
@@ -202,7 +202,7 @@ SUBROUTINE RC3JJ(L2,L3,M2,M3,L1min,L1max,Thrcof,Ndim,Ier)
       newfac = 0.0
       c1 = 0.0
       Thrcof(1) = srtiny
-      sum1 = (l1+l1+one)*tiny
+      sum1 = (l1+l1+one)*tinyy
       !
       !
       lstep = 1
@@ -272,8 +272,8 @@ SUBROUTINE RC3JJ(L2,L3,M2,M3,L1min,L1max,Thrcof,Ndim,Ier)
           IF ( ABS(Thrcof(i))<srtiny ) Thrcof(i) = zero
           Thrcof(i) = Thrcof(i)/srhuge
         END DO
-        sum1 = sum1/huge
-        sumfor = sumfor/huge
+        sum1 = sum1/hugee
+        sumfor = sumfor/hugee
         x = x/srhuge
       END IF
       !
@@ -307,7 +307,7 @@ SUBROUTINE RC3JJ(L2,L3,M2,M3,L1min,L1max,Thrcof,Ndim,Ier)
     nfinp3 = nfin + 3
     l1 = L1max
     Thrcof(nfin) = srtiny
-    sum2 = tiny*(l1+l1+one)
+    sum2 = tinyy*(l1+l1+one)
     !
     l1 = l1 + two
     lstep = 1
@@ -382,14 +382,14 @@ SUBROUTINE RC3JJ(L2,L3,M2,M3,L1min,L1max,Thrcof,Ndim,Ier)
             !
             !     LSCALE = LSCALE + 1
             DO i = 1, lstep
-              index = nfin - i + 1
-              IF ( ABS(Thrcof(index))<srtiny ) Thrcof(index) = zero
-              Thrcof(index) = Thrcof(index)/srhuge
+              indexx = nfin - i + 1
+              IF ( ABS(Thrcof(indexx))<srtiny ) Thrcof(indexx) = zero
+              Thrcof(indexx) = Thrcof(indexx)/srhuge
             END DO
-            sum2 = sum2/huge
+            sum2 = sum2/hugee
             !
             !
-            sumbac = sumbac/huge
+            sumbac = sumbac/hugee
           END IF
         END IF
       ELSE
@@ -400,7 +400,7 @@ SUBROUTINE RC3JJ(L2,L3,M2,M3,L1min,L1max,Thrcof,Ndim,Ier)
         Thrcof(nfin-1) = y
         sumbac = sum2
         !
-        sum2 = sum2 + tiny*(l1+l1-three)*c1*c1
+        sum2 = sum2 + tinyy*(l1+l1-three)*c1*c1
       END IF
     END DO
   ELSE
@@ -410,7 +410,7 @@ SUBROUTINE RC3JJ(L2,L3,M2,M3,L1min,L1max,Thrcof,Ndim,Ier)
     !  hence
     x = srtiny*c1
     Thrcof(2) = x
-    sum1 = sum1 + tiny*(l1+l1+one)*c1*c1
+    sum1 = sum1 + tinyy*(l1+l1+one)*c1*c1
     IF ( lstep/=nfin ) GOTO 100
     !
     sumuni = sum1
@@ -429,7 +429,7 @@ SUBROUTINE RC3JJ(L2,L3,M2,M3,L1min,L1max,Thrcof,Ndim,Ier)
   !
   IF ( ABS(cnorm)<one ) THEN
     !
-    thresh = tiny/ABS(cnorm)
+    thresh = tinyy/ABS(cnorm)
     DO n = 1, nfin
       IF ( ABS(Thrcof(n))<thresh ) Thrcof(n) = zero
       Thrcof(n) = cnorm*Thrcof(n)

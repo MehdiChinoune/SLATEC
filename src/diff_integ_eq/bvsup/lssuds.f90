@@ -122,7 +122,7 @@ SUBROUTINE LSSUDS(A,X,B,N,M,Nrda,U,Nrdu,Iflag,Mlso,Irank,Iscale,Q,Diag,&
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER nmir, Nrda, Nrdu, nu
-  REAL A(Nrda,*), B(*), Diag(*), Div(*), gam, gamma, Q(Nrda,*), R1MACH, res, &
+  REAL A(Nrda,*), B(*), Diag(*), Div(*), gam, gama, Q(Nrda,*), R1MACH, res, &
     S(*), Scales(*), SDOT, ss, Td(*), U(Nrdu,*), uro, X(*)
   INTEGER i, Iflag, Irank, irp, Iscale, Isflg, j, J4SAVE, jr, k, &
     kp, Kpivot(*), l, M, maxmes, mj, Mlso, N, nfat, nfatal
@@ -256,9 +256,9 @@ SUBROUTINE LSSUDS(A,X,B,N,M,Nrda,U,Nrdu,Iflag,Mlso,Irank,Iscale,Q,Diag,&
     DO jr = 1, Irank
       j = irp - jr
       mj = M - j + 1
-      gamma = SDOT(mj,Q(j,j),Nrda,X(j),1)/(Diag(j)*Q(j,j))
+      gama = SDOT(mj,Q(j,j),Nrda,X(j),1)/(Diag(j)*Q(j,j))
       DO k = j, M
-        X(k) = X(k) + gamma*Q(j,k)
+        X(k) = X(k) + gama*Q(j,k)
       END DO
     END DO
     !
@@ -282,9 +282,9 @@ SUBROUTINE LSSUDS(A,X,B,N,M,Nrda,U,Nrdu,Iflag,Mlso,Irank,Iscale,Q,Diag,&
       DO jr = 1, Irank
         j = irp - jr
         mj = M - j + 1
-        gamma = SDOT(mj,Q(j,j),Nrda,U(j,k),1)/(Diag(j)*Q(j,j))
+        gama = SDOT(mj,Q(j,j),Nrda,U(j,k),1)/(Diag(j)*Q(j,j))
         DO i = j, M
-          U(i,k) = U(i,k) + gamma*Q(j,i)
+          U(i,k) = U(i,k) + gama*Q(j,i)
         END DO
       END DO
     END DO

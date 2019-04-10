@@ -85,14 +85,14 @@ REAL(8) FUNCTION DNRM2(N,Dx,Incx)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER i, Incx, j, N, nn, next
-  REAL(8) :: Dx(*), hitest, sum, xmax
+  REAL(8) :: Dx(*), hitest, summ, xmax
   REAL(8), PARAMETER :: zero = 0.0D0, one = 1.0D0
   REAL(8), PARAMETER :: cutlo = 8.232D-11, cuthi = 1.304D19
   !* FIRST EXECUTABLE STATEMENT  DNRM2
   IF ( N>0 ) THEN
     !
     next = 200
-    sum = zero
+    summ = zero
     nn = N*Incx
     !
     !                                                 BEGIN MAIN LOOP
@@ -134,10 +134,10 @@ REAL(8) FUNCTION DNRM2(N,Dx,Incx)
   !
   400  i = j
   next = 700
-  sum = (sum/Dx(i))/Dx(i)
+  summ = (summ/Dx(i))/Dx(i)
   500  xmax = ABS(Dx(i))
   !
-  sum = sum + (Dx(i)/xmax)**2
+  summ = summ + (Dx(i)/xmax)**2
   GOTO 900
   !
   !                   PHASE 2.  SUM IS SMALL.
@@ -148,7 +148,7 @@ REAL(8) FUNCTION DNRM2(N,Dx,Incx)
     !
     !                  PREPARE FOR PHASE 3.
     !
-    sum = (sum*xmax)*xmax
+    summ = (summ*xmax)*xmax
     GOTO 800
   END IF
   !
@@ -157,9 +157,9 @@ REAL(8) FUNCTION DNRM2(N,Dx,Incx)
   !
   700 CONTINUE
   IF ( ABS(Dx(i))<=xmax ) THEN
-    sum = sum + (Dx(i)/xmax)**2
+    summ = summ + (Dx(i)/xmax)**2
   ELSE
-    sum = one + sum*(xmax/Dx(i))**2
+    summ = one + summ*(xmax/Dx(i))**2
     xmax = ABS(Dx(i))
   END IF
   GOTO 900
@@ -173,9 +173,9 @@ REAL(8) FUNCTION DNRM2(N,Dx,Incx)
   !
   DO j = i, nn, Incx
     IF ( ABS(Dx(j))>=hitest ) GOTO 400
-    sum = sum + Dx(j)**2
+    summ = summ + Dx(j)**2
   END DO
-  DNRM2 = SQRT(sum)
+  DNRM2 = SQRT(summ)
   RETURN
   !
   900  i = i + Incx
@@ -185,6 +185,6 @@ REAL(8) FUNCTION DNRM2(N,Dx,Incx)
   !
   !              COMPUTE SQUARE ROOT AND ADJUST FOR SCALING.
   !
-  DNRM2 = xmax*SQRT(sum)
+  DNRM2 = xmax*SQRT(summ)
   RETURN
 END FUNCTION DNRM2

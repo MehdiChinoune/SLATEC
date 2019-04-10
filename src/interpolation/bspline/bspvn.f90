@@ -1,5 +1,5 @@
 !** BSPVN
-SUBROUTINE BSPVN(T,Jhigh,K,Index,X,Ileft,Vnikx,Work,Iwork)
+SUBROUTINE BSPVN(T,Jhigh,K,Indexx,X,Ileft,Vnikx,Work,Iwork)
   IMPLICIT NONE
   !>
   !***
@@ -81,7 +81,7 @@ SUBROUTINE BSPVN(T,Jhigh,K,Index,X,Ileft,Vnikx,Work,Iwork)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   !
-  INTEGER Ileft, imjp1, Index, ipj, Iwork, Jhigh, jp1, jp1ml, K, l
+  INTEGER Ileft, imjp1, Indexx, ipj, Iwork, Jhigh, jp1, jp1ml, K, l
   REAL T(*), vm, vmprev, Vnikx(*), Work(*), X
   !     DIMENSION T(ILEFT+JHIGH)
   !     CONTENT OF J, DELTAM, DELTAP IS EXPECTED UNCHANGED BETWEEN CALLS.
@@ -95,7 +95,7 @@ SUBROUTINE BSPVN(T,Jhigh,K,Index,X,Ileft,Vnikx,Work,Iwork)
   ELSEIF ( Jhigh>K.OR.Jhigh<1 ) THEN
     CALL XERMSG('SLATEC','BSPVN','JHIGH DOES NOT SATISFY 1.LE.JHIGH.LE.K',2,1)
     RETURN
-  ELSEIF ( Index<1.OR.Index>2 ) THEN
+  ELSEIF ( Indexx<1.OR.Indexx>2 ) THEN
     CALL XERMSG('SLATEC','BSPVN','INDEX IS NOT 1 OR 2',2,1)
     RETURN
   ELSEIF ( X<T(Ileft).OR.X>T(Ileft+1) ) THEN
@@ -103,7 +103,7 @@ SUBROUTINE BSPVN(T,Jhigh,K,Index,X,Ileft,Vnikx,Work,Iwork)
       'X DOES NOT SATISFY T(ILEFT).LE.X.LE.T(ILEFT+1)',2,1)
     RETURN
   ELSE
-    IF ( Index/=2 ) THEN
+    IF ( Indexx/=2 ) THEN
       Iwork = 1
       Vnikx(1) = 1.0E0
       IF ( Iwork>=Jhigh ) GOTO 100

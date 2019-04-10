@@ -123,7 +123,7 @@ SUBROUTINE DPCHCE(Ic,Vc,N,X,H,Slope,D,Incfd,Ierr)
   !
   !  DECLARE LOCAL VARIABLES.
   !
-  INTEGER ibeg, iend, ierf, index, j, k
+  INTEGER ibeg, iend, ierf, indexx, j, k
   REAL(8) :: stemp(3), xtemp(4)
   REAL(8) :: DPCHDF, DPCHST
   !
@@ -155,10 +155,10 @@ SUBROUTINE DPCHCE(Ic,Vc,N,X,H,Slope,D,Incfd,Ierr)
       !        USE K-POINT DERIVATIVE FORMULA.
       !        PICK UP FIRST K POINTS, IN REVERSE ORDER.
       DO j = 1, k
-        index = k - j + 1
+        indexx = k - j + 1
         !           INDEX RUNS FROM K DOWN TO 1.
-        xtemp(j) = X(index)
-        IF ( j<k ) stemp(j) = Slope(index-1)
+        xtemp(j) = X(indexx)
+        IF ( j<k ) stemp(j) = Slope(indexx-1)
       END DO
       !                 -----------------------------
       D(1,1) = DPCHDF(k,xtemp,stemp,ierf)
@@ -203,10 +203,10 @@ SUBROUTINE DPCHCE(Ic,Vc,N,X,H,Slope,D,Incfd,Ierr)
       !        USE K-POINT DERIVATIVE FORMULA.
       !        PICK UP LAST K POINTS.
       DO j = 1, k
-        index = N - k + j
+        indexx = N - k + j
         !           INDEX RUNS FROM N+1-K UP TO N.
-        xtemp(j) = X(index)
-        IF ( j<k ) stemp(j) = Slope(index)
+        xtemp(j) = X(indexx)
+        IF ( j<k ) stemp(j) = Slope(indexx)
       END DO
       !                 -----------------------------
       D(1,N) = DPCHDF(k,xtemp,stemp,ierf)

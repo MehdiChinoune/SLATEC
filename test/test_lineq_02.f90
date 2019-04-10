@@ -54,7 +54,7 @@ CONTAINS
 
     INTEGER Kprint, Lun
     REAL at(5,4), abe(5,7), abet(5,7), b(4), bt(4), c(4), &
-      work(35), r, delx, delmax, sign, R1MACH
+      work(35), r, delx, delmax, signn, R1MACH
     INTEGER lda, n, ml, mu, ind, iwork(4), Nerr, i, j, j1, j2, jd, &
       mlp, k, kcase, kprog
     REAL, PARAMETER :: a(4,4) = RESHAPE( [ 5.0E0, 4.0E0, 1.0E0, 1.0E0, &
@@ -75,10 +75,10 @@ CONTAINS
     !
     !     COMPUTE C VECTOR.
     !
-    sign = 1.0E0
+    signn = 1.0E0
     DO i = 1, n
-      c(i) = sign/i
-      sign = -sign
+      c(i) = signn/i
+      signn = -signn
     END DO
     !
     !     CASE 1 FOR WELL-CONDITIONED MATRIX, CASE 2 FOR SINGULAR MATRIX.
@@ -238,7 +238,7 @@ CONTAINS
 
     INTEGER Kprint, Lun
     REAL(8) :: at(5,4), abe(5,7), abet(5,7), b(4), bt(4), &
-      c(4), work(35), sign, D1MACH
+      c(4), work(35), signn, D1MACH
     REAL r, delx, delmax
     INTEGER lda, n, ml, mu, ind, iwork(4), Nerr, i, j, j1, j2, jd, &
       mlp, k, kcase, kprog
@@ -260,10 +260,10 @@ CONTAINS
     !
     !     COMPUTE C VECTOR.
     !
-    sign = 1.0D0
+    signn = 1.0D0
     DO i = 1, n
-      c(i) = sign/i
-      sign = -sign
+      c(i) = signn/i
+      signn = -signn
     END DO
     !
     !     CASE 1 FOR WELL-CONDITIONED MATRIX, CASE 2 FOR SINGULAR MATRIX.

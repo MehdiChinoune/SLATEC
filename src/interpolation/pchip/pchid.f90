@@ -121,7 +121,7 @@ REAL FUNCTION PCHID(N,X,F,D,Incfd,Skip,Ia,Ib,Ierr)
   !  DECLARE LOCAL VARIABLES.
   !
   INTEGER i, iup, low
-  REAL h, sum, value
+  REAL h, summ, value
   !
   !  INITIALIZE.
   !
@@ -166,12 +166,12 @@ REAL FUNCTION PCHID(N,X,F,D,Incfd,Skip,Ia,Ib,Ierr)
   IF ( Ia/=Ib ) THEN
     low = MIN(Ia,Ib)
     iup = MAX(Ia,Ib) - 1
-    sum = zero
+    summ = zero
     DO i = low, iup
       h = X(i+1) - X(i)
-      sum = sum + h*((F(1,i)+F(1,i+1))+(D(1,i)-D(1,i+1))*(h/six))
+      summ = summ + h*((F(1,i)+F(1,i+1))+(D(1,i)-D(1,i+1))*(h/six))
     END DO
-    value = half*sum
+    value = half*summ
     IF ( Ia>Ib ) value = -value
   END IF
   !

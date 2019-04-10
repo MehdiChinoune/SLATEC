@@ -33,7 +33,7 @@ SUBROUTINE CUNI1(Z,Fnu,Kode,N,Y,Nz,Nlast,Fnul,Tol,Elim,Alim)
 
   INTEGER i, iflag, init, k, Kode, m, N, nd, Nlast, nn, nuf, nw, Nz
   COMPLEX cfn, crsc, cscl, csr(3), css(3), cwrk(16), c1, c2, &
-    phi, rz, sum, s1, s2, Y(N), Z, zeta1, zeta2, cy(2)
+    phi, rz, summ, s1, s2, Y(N), Z, zeta1, zeta2, cy(2)
   REAL Alim, aphi, ascle, bry(3), c2i, c2m, c2r, Elim, fn, Fnu, &
     Fnul, rs1, Tol, yy, R1MACH
   COMPLEX, PARAMETER :: czero = (0.0E0,0.0E0), cone = (1.0E0,0.0E0)
@@ -60,7 +60,7 @@ SUBROUTINE CUNI1(Z,Fnu,Kode,N,Y,Nz,Nlast,Fnul,Tol,Elim,Alim)
   !-----------------------------------------------------------------------
   fn = MAX(Fnu,1.0E0)
   init = 0
-  CALL CUNIK(Z,fn,1,1,Tol,init,phi,zeta1,zeta2,sum,cwrk)
+  CALL CUNIK(Z,fn,1,1,Tol,init,phi,zeta1,zeta2,summ,cwrk)
   IF ( Kode==1 ) THEN
     s1 = -zeta1 + zeta2
   ELSE
@@ -80,7 +80,7 @@ SUBROUTINE CUNI1(Z,Fnu,Kode,N,Y,Nz,Nlast,Fnul,Tol,Elim,Alim)
   DO i = 1, nn
     fn = Fnu + (nd-i)
     init = 0
-    CALL CUNIK(Z,fn,1,0,Tol,init,phi,zeta1,zeta2,sum,cwrk)
+    CALL CUNIK(Z,fn,1,0,Tol,init,phi,zeta1,zeta2,summ,cwrk)
     IF ( Kode==1 ) THEN
       s1 = -zeta1 + zeta2
     ELSE
@@ -109,7 +109,7 @@ SUBROUTINE CUNI1(Z,Fnu,Kode,N,Y,Nz,Nlast,Fnul,Tol,Elim,Alim)
     !-----------------------------------------------------------------------
     !     SCALE S1 IF ABS(S1).LT.ASCLE
     !-----------------------------------------------------------------------
-    s2 = phi*sum
+    s2 = phi*summ
     c2r = REAL(s1)
     c2i = AIMAG(s1)
     c2m = EXP(c2r)*REAL(css(iflag))

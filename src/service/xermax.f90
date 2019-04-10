@@ -1,5 +1,5 @@
 !** XERMAX
-SUBROUTINE XERMAX(Max)
+SUBROUTINE XERMAX(Maxx)
   IMPLICIT NONE
   !>
   !***
@@ -43,8 +43,8 @@ SUBROUTINE XERMAX(Max)
   !   861211  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
-  INTEGER J4SAVE, junk, Max
+
+  INTEGER J4SAVE, junk, Maxx
   !* FIRST EXECUTABLE STATEMENT  XERMAX
-  junk = J4SAVE(4,Max,.TRUE.)
+  junk = J4SAVE(4,Maxx,.TRUE.)
 END SUBROUTINE XERMAX

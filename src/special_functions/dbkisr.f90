@@ -1,5 +1,5 @@
 !** DBKISR
-SUBROUTINE DBKISR(X,N,Sum,Ierr)
+SUBROUTINE DBKISR(X,N,Summ,Ierr)
   IMPLICIT NONE
   !>
   !***
@@ -31,7 +31,7 @@ SUBROUTINE DBKISR(X,N,Sum,Ierr)
 
   INTEGER i, Ierr, k, kk, kkn, k1, N, np
   REAL(8) :: ak, atol, bk, fk, fn, hx, hxs, pol, pr, &
-    Sum, tkp, tol, trm, X, xln
+    Summ, tkp, tol, trm, X, xln
   REAL(8) :: DPSIXN, D1MACH
   !
   REAL(8), PARAMETER :: c(2) = [ 1.57079632679489662D+00, 1.0D0 ]
@@ -56,15 +56,15 @@ SUBROUTINE DBKISR(X,N,Sum,Ierr)
     fn = N
     bk = 4.0D0
     ak = 2.0D0/((fn+1.0D0)*(fn+2.0D0))
-    Sum = ak*(DPSIXN(N+3)-DPSIXN(3)+DPSIXN(2)-xln)
-    atol = Sum*tol*0.75D0
+    Summ = ak*(DPSIXN(N+3)-DPSIXN(3)+DPSIXN(2)-xln)
+    atol = Summ*tol*0.75D0
     DO k = 2, 20
       ak = ak*(hxs/bk)*((tkp+1.0D0)/(tkp+fn+1.0D0))*(tkp/(tkp+fn))
       k1 = k + 1
       kk = k1 + k
       kkn = kk + N
       trm = (DPSIXN(k1)+DPSIXN(kkn)-DPSIXN(kk)-xln)*ak
-      Sum = Sum + trm
+      Summ = Summ + trm
       IF ( ABS(trm)<=atol ) GOTO 100
       tkp = tkp + 2.0D0
       bk = bk + tkp
@@ -76,15 +76,15 @@ SUBROUTINE DBKISR(X,N,Sum,Ierr)
     !     SMALL X CASE, X.LT.WORD TOLERANCE
     !-----------------------------------------------------------------------
   ELSEIF ( N>0 ) THEN
-    Sum = c(N)
+    Summ = c(N)
     RETURN
   ELSE
     hx = X*0.5D0
-    Sum = DPSIXN(1) - LOG(hx)
+    Summ = DPSIXN(1) - LOG(hx)
     RETURN
   END IF
-  100  Sum = (Sum*hxs+DPSIXN(np)-xln)*pr
-  IF ( N==1 ) Sum = -Sum
-  Sum = pol + Sum
+  100  Summ = (Summ*hxs+DPSIXN(np)-xln)*pr
+  IF ( N==1 ) Summ = -Summ
+  Summ = pol + Summ
   RETURN
 END SUBROUTINE DBKISR

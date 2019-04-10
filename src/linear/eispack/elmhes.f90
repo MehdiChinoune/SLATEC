@@ -1,5 +1,5 @@
 !** ELMHES
-SUBROUTINE ELMHES(Nm,N,Low,Igh,A,Int)
+SUBROUTINE ELMHES(Nm,N,Low,Igh,A,Intt)
   IMPLICIT NONE
   !>
   !***
@@ -76,7 +76,7 @@ SUBROUTINE ELMHES(Nm,N,Low,Igh,A,Int)
   INTEGER i, j, m, N, la, Nm, Igh, kp1, Low, mm1, mp1
   REAL A(Nm,*)
   REAL x, y
-  INTEGER Int(*)
+  INTEGER Intt(*)
   !
   !* FIRST EXECUTABLE STATEMENT  ELMHES
   la = Igh - 1
@@ -95,7 +95,7 @@ SUBROUTINE ELMHES(Nm,N,Low,Igh,A,Int)
         END IF
       END DO
       !
-      Int(m) = i
+      Intt(m) = i
       IF ( i/=m ) THEN
         !    .......... INTERCHANGE ROWS AND COLUMNS OF A ..........
         DO j = mm1, N

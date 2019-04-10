@@ -31,7 +31,7 @@ SUBROUTINE CUNK1(Z,Fnu,Kode,Mr,N,Y,Nz,Tol,Elim,Alim)
   INTEGER i, ib, iflag, ifn, il, init(2), inu, iuf, k, kdflg, kflag, &
     kk, Kode, Mr, N, nw, Nz, j, ipard, initd, ic, m
   COMPLEX cfn, ck, crsc, cs, cscl, csgn, cspn, csr(3), css(3), &
-    cwrk(16,3), cy(2), c1, c2, phi(2), rz, sum(2), s1, s2, Y(N), Z, &
+    cwrk(16,3), cy(2), c1, c2, phi(2), rz, summ(2), s1, s2, Y(N), Z, &
     zeta1(2), zeta2(2), zr, phid, zeta1d, zeta2d, sumd
   REAL Alim, ang, aphi, asc, ascle, bry(3), cpn, c2i, c2m, c2r, &
     Elim, fmr, fn, fnf, Fnu, rs1, sgn, spn, Tol, x, R1MACH
@@ -66,7 +66,7 @@ SUBROUTINE CUNK1(Z,Fnu,Kode,Mr,N,Y,Nz,Tol,Elim,Alim)
     j = 3 - j
     fn = Fnu + (i-1)
     init(j) = 0
-    CALL CUNIK(zr,fn,2,0,Tol,init(j),phi(j),zeta1(j),zeta2(j),sum(j),cwrk(1,j))
+    CALL CUNIK(zr,fn,2,0,Tol,init(j),phi(j),zeta1(j),zeta2(j),summ(j),cwrk(1,j))
     IF ( Kode==1 ) THEN
       s1 = zeta1(j) - zeta2(j)
     ELSE
@@ -95,7 +95,7 @@ SUBROUTINE CUNK1(Z,Fnu,Kode,Mr,N,Y,Nz,Tol,Elim,Alim)
       !     SCALE S1 TO KEEP INTERMEDIATE ARITHMETIC ON SCALE NEAR
       !     EXPONENT EXTREMES
       !-----------------------------------------------------------------------
-      s2 = phi(j)*sum(j)
+      s2 = phi(j)*summ(j)
       c2r = REAL(s1)
       c2i = AIMAG(s1)
       c2m = EXP(c2r)*REAL(css(kflag))
@@ -241,7 +241,7 @@ SUBROUTINE CUNK1(Z,Fnu,Kode,Mr,N,Y,Nz,Tol,Elim,Alim)
     phid = phi(j)
     zeta1d = zeta1(j)
     zeta2d = zeta2(j)
-    sumd = sum(j)
+    sumd = summ(j)
     m = j
     j = 3 - j
     350  CALL CUNIK(zr,fn,1,0,Tol,initd,phid,zeta1d,zeta2d,sumd,cwrk(1,m))

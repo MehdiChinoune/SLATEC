@@ -214,10 +214,10 @@ SUBROUTINE DQAGPE(F,A,B,Npts2,Points,Epsabs,Epsrel,Limit,Result,Abserr,&
     Epsabs, Epsrel, erlarg, erlast, errbnd, errmax, &
     error1, erro12, error2, errsum, ertest, oflow, &
     Points(*), Pts(*), resa, resabs, reseps, Result, res3la(3), &
-    Rlist(*), rlist2(52), sign, temp, uflow
+    Rlist(*), rlist2(52), signn, temp, uflow
   INTEGER i, id, Ier, ierro, ind1, ind2, Iord(*), ip1, iroff1, &
     iroff2, iroff3, j, jlow, jupbnd, k, ksgn, ktmin, Last, &
-    levcur, Level(*), levmax, Limit, maxerr, Ndin(*), Neval, nint, &
+    levcur, Level(*), levmax, Limit, maxerr, Ndin(*), Neval, nintt, &
     nintp1, npts, Npts2, nres, nrmax, numrl2
   LOGICAL extrap, noext
   !
@@ -300,8 +300,8 @@ SUBROUTINE DQAGPE(F,A,B,Npts2,Points,Epsabs,Epsrel,Limit,Result,Abserr,&
   !            IF ANY BREAK POINTS ARE PROVIDED, SORT THEM INTO AN
   !            ASCENDING SEQUENCE.
   !
-  sign = 1.0D+00
-  IF ( A>B ) sign = -1.0D+00
+  signn = 1.0D+00
+  IF ( A>B ) signn = -1.0D+00
   Pts(1) = MIN(A,B)
   IF ( npts/=0 ) THEN
     DO i = 1, npts
@@ -309,11 +309,11 @@ SUBROUTINE DQAGPE(F,A,B,Npts2,Points,Epsabs,Epsrel,Limit,Result,Abserr,&
     END DO
   END IF
   Pts(npts+2) = MAX(A,B)
-  nint = npts + 1
+  nintt = npts + 1
   a1 = Pts(1)
   IF ( npts/=0 ) THEN
-    nintp1 = nint + 1
-    DO i = 1, nint
+    nintp1 = nintt + 1
+    DO i = 1, nintt
       ip1 = i + 1
       DO j = ip1, nintp1
         IF ( Pts(i)>Pts(j) ) THEN
@@ -331,7 +331,7 @@ SUBROUTINE DQAGPE(F,A,B,Npts2,Points,Epsabs,Epsrel,Limit,Result,Abserr,&
   !            ------------------------------------------------
   !
   resabs = 0.0D+00
-  DO i = 1, nint
+  DO i = 1, nintt
     b1 = Pts(i+1)
     CALL DQK21(F,a1,b1,area1,error1,defabs,resa)
     Abserr = Abserr + error1
@@ -348,23 +348,23 @@ SUBROUTINE DQAGPE(F,A,B,Npts2,Points,Epsabs,Epsrel,Limit,Result,Abserr,&
     a1 = b1
   END DO
   errsum = 0.0D+00
-  DO i = 1, nint
+  DO i = 1, nintt
     IF ( Ndin(i)==1 ) Elist(i) = Abserr
     errsum = errsum + Elist(i)
   END DO
   !
   !           TEST ON ACCURACY.
   !
-  Last = nint
-  Neval = 21*nint
+  Last = nintt
+  Neval = 21*nintt
   dres = ABS(Result)
   errbnd = MAX(Epsabs,Epsrel*dres)
   IF ( Abserr<=0.1D+03*epmach*resabs.AND.Abserr>errbnd ) Ier = 2
-  IF ( nint/=1 ) THEN
+  IF ( nintt/=1 ) THEN
     DO i = 1, npts
       jlow = i + 1
       ind1 = Iord(i)
-      DO j = jlow, nint
+      DO j = jlow, nintt
         ind2 = Iord(j)
         IF ( Elist(ind1)<=Elist(ind2) ) THEN
           ind1 = ind2
@@ -585,6 +585,6 @@ SUBROUTINE DQAGPE(F,A,B,Npts2,Points,Epsabs,Epsrel,Limit,Result,Abserr,&
   Abserr = errsum
   300 CONTINUE
   IF ( Ier>2 ) Ier = Ier - 1
-  Result = Result*sign
+  Result = Result*signn
   RETURN
 END SUBROUTINE DQAGPE

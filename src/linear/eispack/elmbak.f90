@@ -1,5 +1,5 @@
 !** ELMBAK
-SUBROUTINE ELMBAK(Nm,Low,Igh,A,Int,M,Z)
+SUBROUTINE ELMBAK(Nm,Low,Igh,A,Intt,M,Z)
   IMPLICIT NONE
   !>
   !***
@@ -81,7 +81,7 @@ SUBROUTINE ELMBAK(Nm,Low,Igh,A,Int,M,Z)
   INTEGER i, j, M, la, mm, mp, Nm, Igh, kp1, Low, mp1
   REAL A(Nm,*), Z(Nm,*)
   REAL x
-  INTEGER Int(*)
+  INTEGER Intt(*)
   !
   !* FIRST EXECUTABLE STATEMENT  ELMBAK
   IF ( M/=0 ) THEN
@@ -104,7 +104,7 @@ SUBROUTINE ELMBAK(Nm,Low,Igh,A,Int,M,Z)
           !
         END DO
         !
-        i = Int(mp)
+        i = Intt(mp)
         IF ( i/=mp ) THEN
           !
           DO j = 1, M

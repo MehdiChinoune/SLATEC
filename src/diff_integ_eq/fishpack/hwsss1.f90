@@ -28,7 +28,7 @@ SUBROUTINE HWSSS1(Ts,Tf,M,Mbdcnd,Bdts,Bdtf,Ps,Pf,N,Nbdcnd,Bdps,Bdpf,&
     ct, D(*), den, dfn, dfs, dnn, dns, dphi
   REAL dphi2, dsn, dss, dth, dth2, Elmbda, F(Idimf,*), fim1, fjj, fm, fn, &
     hdth, hld, hne, Pertrb, Pf, Ps, rtn, rts, Sint(*)
-  REAL Sn(*), Ss(*), sum, sum1, sum2, t1, tdp, tdt, Tf, theta, Ts, wp, &
+  REAL Sn(*), Ss(*), summ, sum1, sum2, t1, tdp, tdt, Tf, theta, Ts, wp, &
     wpf, wps, wtf, wts, yhld
   INTEGER mp1, munk, N, Nbdcnd, nbr, np1, nunk
   !
@@ -181,16 +181,16 @@ SUBROUTINE HWSSS1(Ts,Tf,M,Mbdcnd,Bdts,Bdtf,Ps,Pf,N,Nbdcnd,Bdps,Bdpf,&
         CASE DEFAULT
           IF ( Elmbda>=0 ) THEN
             ising = 1
-            sum = wts*wps + wts*wpf + wtf*wps + wtf*wpf
-            IF ( inp>0 ) sum = sum + wp
-            IF ( isp>0 ) sum = sum + wp
+            summ = wts*wps + wts*wpf + wtf*wps + wtf*wpf
+            IF ( inp>0 ) summ = summ + wp
+            IF ( isp>0 ) summ = summ + wp
             sum1 = 0.
             DO i = itsp, itfm
               sum1 = sum1 + Sint(i)
             END DO
-            sum = sum + fjj*(sum1+wts+wtf)
-            sum = sum + (wps+wpf)*sum1
-            hne = sum
+            summ = summ + fjj*(sum1+wts+wtf)
+            summ = summ + (wps+wpf)*sum1
+            hne = summ
           END IF
       END SELECT
   END SELECT
@@ -254,16 +254,16 @@ SUBROUTINE HWSSS1(Ts,Tf,M,Mbdcnd,Bdts,Bdtf,Ps,Pf,N,Nbdcnd,Bdps,Bdpf,&
   END SELECT
   Pertrb = 0.
   IF ( ising/=0 ) THEN
-    sum = wts*wps*F(its,jps) + wts*wpf*F(its,jpf) + wtf*wps*F(itf,jps)&
+    summ = wts*wps*F(its,jps) + wts*wpf*F(its,jpf) + wtf*wps*F(itf,jps)&
       + wtf*wpf*F(itf,jpf)
-    IF ( inp>0 ) sum = sum + wp*F(1,jps)
-    IF ( isp>0 ) sum = sum + wp*F(M+1,jps)
+    IF ( inp>0 ) summ = summ + wp*F(1,jps)
+    IF ( isp>0 ) summ = summ + wp*F(M+1,jps)
     DO i = itsp, itfm
       sum1 = 0.
       DO j = jpsp, jpfm
         sum1 = sum1 + F(i,j)
       END DO
-      sum = sum + Sint(i)*sum1
+      summ = summ + Sint(i)*sum1
     END DO
     sum1 = 0.
     sum2 = 0.
@@ -271,15 +271,15 @@ SUBROUTINE HWSSS1(Ts,Tf,M,Mbdcnd,Bdts,Bdtf,Ps,Pf,N,Nbdcnd,Bdps,Bdpf,&
       sum1 = sum1 + F(its,j)
       sum2 = sum2 + F(itf,j)
     END DO
-    sum = sum + wts*sum1 + wtf*sum2
+    summ = summ + wts*sum1 + wtf*sum2
     sum1 = 0.
     sum2 = 0.
     DO i = itsp, itfm
       sum1 = sum1 + Sint(i)*F(i,jps)
       sum2 = sum2 + Sint(i)*F(i,jpf)
     END DO
-    sum = sum + wps*sum1 + wpf*sum2
-    Pertrb = sum/hne
+    summ = summ + wps*sum1 + wpf*sum2
+    Pertrb = summ/hne
     DO j = 1, np1
       DO i = 1, mp1
         F(i,j) = F(i,j) - Pertrb
@@ -313,11 +313,11 @@ SUBROUTINE HWSSS1(Ts,Tf,M,Mbdcnd,Bdts,Bdtf,Ps,Pf,N,Nbdcnd,Bdps,Bdpf,&
     END IF
   END IF
   IF ( inp>0 ) THEN
-    sum = wps*F(its,jps) + wpf*F(its,jpf)
+    summ = wps*F(its,jps) + wpf*F(its,jpf)
     DO j = jpsp, jpfm
-      sum = sum + F(its,j)
+      summ = summ + F(its,j)
     END DO
-    dfn = cp*sum
+    dfn = cp*summ
     dnn = cp*((wps+wpf+fjj)*(Sn(2)-1.)) + Elmbda
     dsn = cp*(wps+wpf+fjj)*Sn(M)
     IF ( isp<=0 ) THEN
@@ -336,11 +336,11 @@ SUBROUTINE HWSSS1(Ts,Tf,M,Mbdcnd,Bdts,Bdtf,Ps,Pf,N,Nbdcnd,Bdps,Bdpf,&
   ELSEIF ( isp<=0 ) THEN
     GOTO 100
   END IF
-  sum = wps*F(itf,jps) + wpf*F(itf,jpf)
+  summ = wps*F(itf,jps) + wpf*F(itf,jpf)
   DO j = jpsp, jpfm
-    sum = sum + F(itf,j)
+    summ = summ + F(itf,j)
   END DO
-  dfs = cp*sum
+  dfs = cp*summ
   dss = cp*((wps+wpf+fjj)*(Ss(M)-1.)) + Elmbda
   dns = cp*(wps+wpf+fjj)*Ss(2)
   IF ( inp<=0 ) THEN

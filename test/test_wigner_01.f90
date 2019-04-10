@@ -48,7 +48,7 @@ CONTAINS
     INTEGER Lun, Kprint, Ipass
     !
     CHARACTER string*36, fmt*30, fmt2*13
-    INTEGER ipass1, ipass2, ipass3, ipass4, ipass5, ier, index, &
+    INTEGER ipass1, ipass2, ipass3, ipass4, ipass5, ier, indexx, &
       i, first, last, nsig, NUMXER, nerr, ierjj, ierjm
     INTEGER, PARAMETER :: NDIM=15
     REAL tol, l1, l2, l3, m1, m2, m3, l1min, l1max, m2min, m2max, &
@@ -122,10 +122,10 @@ CONTAINS
     IF ( ier/=0 ) THEN
       ipass1 = 0
     ELSE
-      DO index = 1, INT(l1max-l1min) + 1
+      DO indexx = 1, INT(l1max-l1min) + 1
         m1 = 1.0
-        diff(index) = ABS(thrcof(index)-r3jj(index))
-        IF ( diff(index)>ABS(r3jj(index))*tol ) ipass1 = 0
+        diff(indexx) = ABS(thrcof(indexx)-r3jj(indexx))
+        IF ( diff(indexx)>ABS(r3jj(indexx))*tol ) ipass1 = 0
       END DO
     END IF
     IF ( Kprint>=3.OR.(Kprint==2.AND.ipass1==0) ) THEN
@@ -140,10 +140,10 @@ CONTAINS
       ELSE
         WRITE (Lun,99002)
         99002 FORMAT ('    L1',T31,' RC3JJ VALUE',T67,'FORMULA VALUE')
-        DO index = 1, INT(l1max-l1min) + 1
-          l1 = index+ l1min - 1
-          WRITE (Lun,fmt) l1, thrcof(index), r3jj(index)
-          IF ( diff(index)>ABS(r3jj(index))*tol ) WRITE (Lun,'(1X,A,F5.1)')&
+        DO indexx = 1, INT(l1max-l1min) + 1
+          l1 = indexx+ l1min - 1
+          WRITE (Lun,fmt) l1, thrcof(indexx), r3jj(indexx)
+          IF ( diff(indexx)>ABS(r3jj(indexx))*tol ) WRITE (Lun,'(1X,A,F5.1)')&
             'DIFFERENCE EXCEEDS ERROR TOLERANCE FOR L1 =', l1
         END DO
       END IF
@@ -168,11 +168,11 @@ CONTAINS
     IF ( ier/=0 ) THEN
       ipass2 = 0
     ELSE
-      DO index = 1, INT(m2max-m2min) + 1
-        m2 = index+ m2min - 1
+      DO indexx = 1, INT(m2max-m2min) + 1
+        m2 = indexx+ m2min - 1
         m3 = -m1 - m2
-        diff(index) = ABS(thrcof(index)-r3jm(index))
-        IF ( diff(index)>ABS(r3jm(index))*tol ) ipass2 = 0
+        diff(indexx) = ABS(thrcof(indexx)-r3jm(indexx))
+        IF ( diff(indexx)>ABS(r3jm(indexx))*tol ) ipass2 = 0
       END DO
     END IF
     IF ( Kprint>=3.OR.(Kprint==2.AND.ipass2==0) ) THEN
@@ -189,10 +189,10 @@ CONTAINS
       ELSE
         WRITE (Lun,99005)
         99005 FORMAT ('    M2',T31,' RC3JM VALUE',T67,'FORMULA VALUE')
-        DO index = 1, INT(m2max-m2min) + 1
-          m2 = index+ m2min - 1
-          WRITE (Lun,fmt) m2, thrcof(index), r3jm(index)
-          IF ( diff(index)>ABS(r3jm(index))*tol ) WRITE (Lun,'(1X,A,F5.1)')&
+        DO indexx = 1, INT(m2max-m2min) + 1
+          m2 = indexx+ m2min - 1
+          WRITE (Lun,fmt) m2, thrcof(indexx), r3jm(indexx)
+          IF ( diff(indexx)>ABS(r3jm(indexx))*tol ) WRITE (Lun,'(1X,A,F5.1)')&
             'DIFFERENCE EXCEEDS ERROR TOLERANCE FOR M2 =', m2
         END DO
       END IF
@@ -262,9 +262,9 @@ CONTAINS
     IF ( ier/=0 ) THEN
       ipass4 = 0
     ELSE
-      DO index = 1, INT(l1max-l1min) + 1
-        diff(index) = ABS(sixcof(index)-r6j(index))
-        IF ( diff(index)>ABS(r6j(index))*tol ) ipass4 = 0
+      DO indexx = 1, INT(l1max-l1min) + 1
+        diff(indexx) = ABS(sixcof(indexx)-r6j(indexx))
+        IF ( diff(indexx)>ABS(r6j(indexx))*tol ) ipass4 = 0
       END DO
     END IF
     IF ( Kprint>=3.OR.(Kprint==2.AND.ipass4==0) ) THEN
@@ -279,10 +279,10 @@ CONTAINS
       ELSE
         WRITE (Lun,99006)
         99006 FORMAT ('    L1',T32,' RC6J VALUE',T67,'FORMULA VALUE')
-        DO index = 1, INT(l1max-l1min) + 1
-          l1 = index+ l1min - 1
-          WRITE (Lun,fmt) l1, sixcof(index), r6j(index)
-          IF ( diff(index)>ABS(r6j(index))*tol ) WRITE (Lun,'(1X,A,F5.1)')&
+        DO indexx = 1, INT(l1max-l1min) + 1
+          l1 = indexx+ l1min - 1
+          WRITE (Lun,fmt) l1, sixcof(indexx), r6j(indexx)
+          IF ( diff(indexx)>ABS(r6j(indexx))*tol ) WRITE (Lun,'(1X,A,F5.1)')&
             'DIFFERENCE EXCEEDS ERROR TOLERANCE FOR L1 =', l1
         END DO
       END IF

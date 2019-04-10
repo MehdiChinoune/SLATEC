@@ -1,6 +1,6 @@
 !** WNLSM
 SUBROUTINE WNLSM(W,Mdw,Mme,Ma,N,L,Prgopt,X,Rnorm,Mode,Ipivot,Itype,Wd,H,&
-    Scale,Z,Temp,D)
+    Scalee,Z,Temp,D)
   IMPLICIT NONE
   !>
   !***
@@ -74,7 +74,7 @@ SUBROUTINE WNLSM(W,Mdw,Mme,Ma,N,L,Prgopt,X,Rnorm,Mode,Ipivot,Itype,Wd,H,&
   !   900510  Fixed an error message.  (RWC)
 
   INTEGER Ipivot(*), Itype(*), L, Ma, Mdw, Mme, Mode, N
-  REAL D(*), H(*), Prgopt(*), Rnorm, Scale(*), Temp(*), W(Mdw,*), Wd(*), X(*), Z(*)
+  REAL D(*), H(*), Prgopt(*), Rnorm, Scalee(*), Temp(*), W(Mdw,*), Wd(*), X(*), Z(*)
   !
   INTEGER, EXTERNAL :: ISAMAX
   REAL, EXTERNAL :: R1MACH, SASUM, SNRM2
@@ -180,7 +180,7 @@ SUBROUTINE WNLSM(W,Mdw,Mme,Ma,N,L,Prgopt,X,Rnorm,Mode,Ipivot,Itype,Wd,H,&
     nsoln = L
     l1 = MIN(m,L)
     !
-    !     Compute scale factor to apply to equality constraint equations.
+    !     Compute scalee factor to apply to equality constraint equations.
     !
     DO j = 1, N
       Wd(j) = SASUM(m,W(1,j),1)
@@ -207,7 +207,7 @@ SUBROUTINE WNLSM(W,Mdw,Mme,Ma,N,L,Prgopt,X,Rnorm,Mode,Ipivot,Itype,Wd,H,&
         t = 1.E0
         itemp = 1
       END IF
-      Scale(i) = t
+      Scalee(i) = t
       Itype(i) = itemp
     END DO
     !
@@ -237,7 +237,7 @@ SUBROUTINE WNLSM(W,Mdw,Mme,Ma,N,L,Prgopt,X,Rnorm,Mode,Ipivot,Itype,Wd,H,&
     dope(1) = alsq
     dope(2) = eanorm
     dope(3) = tau
-    CALL WNLIT(W,Mdw,m,N,L,Ipivot,Itype,H,Scale,Rnorm,idope,dope,done)
+    CALL WNLIT(W,Mdw,m,N,L,Ipivot,Itype,H,Scalee,Rnorm,idope,dope,done)
     me = idope(1)
     krank = idope(2)
     niv = idope(3)
@@ -357,7 +357,7 @@ SUBROUTINE WNLSM(W,Mdw,Mme,Ma,N,L,Prgopt,X,Rnorm,Mode,Ipivot,Itype,Wd,H,&
           !              Zero IP1 to I in column J
           !
           IF ( W(i+1,j)/=0.E0 ) THEN
-            CALL SROTMG(Scale(i),Scale(i+1),W(i,j),W(i+1,j),sparam)
+            CALL SROTMG(Scalee(i),Scalee(i+1),W(i,j),W(i+1,j),sparam)
             W(i+1,j) = 0.E0
             CALL SROTM(N+1-j,W(i,j+1),Mdw,W(i+1,j+1),Mdw,sparam)
           END IF
@@ -366,13 +366,13 @@ SUBROUTINE WNLSM(W,Mdw,Mme,Ma,N,L,Prgopt,X,Rnorm,Mode,Ipivot,Itype,Wd,H,&
           !              Zero IP1 to I in column J
           !
           IF ( W(i+1,j)/=0.E0 ) THEN
-            CALL SROTMG(Scale(i),Scale(i+1),W(i,j),W(i+1,j),sparam)
+            CALL SROTMG(Scalee(i),Scalee(i+1),W(i,j),W(i+1,j),sparam)
             W(i+1,j) = 0.E0
             CALL SROTM(N+1-j,W(i,j+1),Mdw,W(i+1,j+1),Mdw,sparam)
           END IF
         ELSEIF ( Itype(i)==1.AND.Itype(i+1)==0 ) THEN
           CALL SSWAP(N+1,W(i,1),Mdw,W(i+1,1),Mdw)
-          CALL SSWAP(1,Scale(i),1,Scale(i+1),1)
+          CALL SSWAP(1,Scalee(i),1,Scalee(i+1),1)
           itemp = Itype(i+1)
           Itype(i+1) = Itype(i)
           Itype(i) = itemp
@@ -382,14 +382,14 @@ SUBROUTINE WNLSM(W,Mdw,Mme,Ma,N,L,Prgopt,X,Rnorm,Mode,Ipivot,Itype,Wd,H,&
           !              Zero IP1 to I in column J.
           !
           IF ( W(i+1,j)/=0.E0 ) THEN
-            CALL SROTMG(Scale(i),Scale(i+1),W(i,j),W(i+1,j),sparam)
+            CALL SROTMG(Scalee(i),Scalee(i+1),W(i,j),W(i+1,j),sparam)
             W(i+1,j) = 0.E0
             CALL SROTM(N+1-j,W(i,j+1),Mdw,W(i+1,j+1),Mdw,sparam)
           END IF
         ELSEIF ( Itype(i)==0.AND.Itype(i+1)==1 ) THEN
-          IF ( Scale(i)*W(i,j)**2/alsq<=(tau*eanorm)**2 ) THEN
+          IF ( Scalee(i)*W(i,j)**2/alsq<=(tau*eanorm)**2 ) THEN
             CALL SSWAP(N+1,W(i,1),Mdw,W(i+1,1),Mdw)
-            CALL SSWAP(1,Scale(i),1,Scale(i+1),1)
+            CALL SSWAP(1,Scalee(i),1,Scalee(i+1),1)
             itemp = Itype(i+1)
             Itype(i+1) = Itype(i)
             Itype(i) = itemp
@@ -398,7 +398,7 @@ SUBROUTINE WNLSM(W,Mdw,Mme,Ma,N,L,Prgopt,X,Rnorm,Mode,Ipivot,Itype,Wd,H,&
             !                 Zero IP1 to I in column J
             !
           ELSEIF ( W(i+1,j)/=0.E0 ) THEN
-            CALL SROTMG(Scale(i),Scale(i+1),W(i,j),W(i+1,j),sparam)
+            CALL SROTMG(Scalee(i),Scalee(i+1),W(i,j),W(i+1,j),sparam)
             W(i+1,j) = 0.E0
             CALL SROTM(N+1-j,W(i,j+1),Mdw,W(i+1,j+1),Mdw,sparam)
           END IF
@@ -433,7 +433,7 @@ SUBROUTINE WNLSM(W,Mdw,Mme,Ma,N,L,Prgopt,X,Rnorm,Mode,Ipivot,Itype,Wd,H,&
             i = i + 1
           ELSE
             CALL SSWAP(N+1,W(i,1),Mdw,W(me,1),Mdw)
-            CALL SSWAP(1,Scale(i),1,Scale(me),1)
+            CALL SSWAP(1,Scalee(i),1,Scalee(me),1)
             itemp = Itype(i)
             Itype(i) = Itype(me)
             Itype(me) = itemp
@@ -447,7 +447,7 @@ SUBROUTINE WNLSM(W,Mdw,Mme,Ma,N,L,Prgopt,X,Rnorm,Mode,Ipivot,Itype,Wd,H,&
         DO j = nsoln + 1, N
           sm = 0.E0
           DO i = nsoln + 1, m
-            sm = sm + Scale(i)*W(i,j)*W(i,N+1)
+            sm = sm + Scalee(i)*W(i,j)*W(i,N+1)
           END DO
           Wd(j) = sm
         END DO
@@ -505,9 +505,9 @@ SUBROUTINE WNLSM(W,Mdw,Mme,Ma,N,L,Prgopt,X,Rnorm,Mode,Ipivot,Itype,Wd,H,&
           !
           IF ( j==me+1 ) THEN
             imax = me
-            amax = Scale(me)*W(me,nsoln)**2
+            amax = Scalee(me)*W(me,nsoln)**2
             DO jp = j - 1, niv, -1
-              t = Scale(jp)*W(jp,nsoln)**2
+              t = Scalee(jp)*W(jp,nsoln)**2
               IF ( t>amax ) THEN
                 imax = jp
                 amax = t
@@ -517,7 +517,7 @@ SUBROUTINE WNLSM(W,Mdw,Mme,Ma,N,L,Prgopt,X,Rnorm,Mode,Ipivot,Itype,Wd,H,&
           END IF
           !
           IF ( W(j,nsoln)/=0.E0 ) THEN
-            CALL SROTMG(Scale(jp),Scale(j),W(jp,nsoln),W(j,nsoln),sparam)
+            CALL SROTMG(Scalee(jp),Scalee(j),W(jp,nsoln),W(j,nsoln),sparam)
             W(j,nsoln) = 0.E0
             CALL SROTM(N+1-nsoln,W(jp,nsoln+1),Mdw,W(j,nsoln+1),Mdw,sparam)
           END IF
@@ -546,7 +546,7 @@ SUBROUTINE WNLSM(W,Mdw,Mme,Ma,N,L,Prgopt,X,Rnorm,Mode,Ipivot,Itype,Wd,H,&
             !              Swap rows ME+1 and NIV, and scale factors for these rows.
             !
             CALL SSWAP(N+1,W(me+1,1),Mdw,W(niv,1),Mdw)
-            CALL SSWAP(1,Scale(me+1),1,Scale(niv),1)
+            CALL SSWAP(1,Scalee(me+1),1,Scalee(niv),1)
             itemp = Itype(me+1)
             Itype(me+1) = Itype(niv)
             Itype(niv) = itemp
@@ -627,7 +627,7 @@ SUBROUTINE WNLSM(W,Mdw,Mme,Ma,N,L,Prgopt,X,Rnorm,Mode,Ipivot,Itype,Wd,H,&
   DO i = nsoln + 1, m
     t = W(i,N+1)
     IF ( i<=me ) t = t/alamda
-    t = (Scale(i)*t)*t
+    t = (Scalee(i)*t)*t
     Rnorm = Rnorm + t
   END DO
   !

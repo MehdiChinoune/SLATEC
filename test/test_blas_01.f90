@@ -303,7 +303,7 @@ CONTAINS
     !   890911  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-    INTEGER i, ICAMAX, IDAMAX, ISAMAX, jump, len, np1, Kprint, itmp(1)
+    INTEGER i, ICAMAX, IDAMAX, ISAMAX, jump, leng, np1, Kprint, itmp(1)
     REAL SASUM, SCASUM, SCNRM2, Sfac, SNRM2
     REAL(8) :: dx(8), Dfac, dtmp(1)
     REAL(8) :: DNRM2, DASUM
@@ -391,9 +391,9 @@ CONTAINS
     DO INCx = 1, 2
       DO np1 = 1, 5
         N = np1 - 1
-        len = 2*MAX(N,1)
+        leng = 2*MAX(N,1)
         !                                                  SET VECTOR ARGUMENTS.
-        DO i = 1, len
+        DO i = 1, leng
           sx(i) = REAL( dv(i,np1,INCx), 4 )
           dx(i) = dv(i,np1,INCx)
           cx(i) = cv(i,np1,INCx)
@@ -426,22 +426,22 @@ CONTAINS
           CASE (7)
             ! 32. SSCALE
             CALL SSCAL(N,sa,sx,INCx)
-            DO i = 1, len
+            DO i = 1, leng
               strue(i) = REAL( dtrue5(i,np1,INCx), 4 )
             END DO
-            CALL STEST(len,sx,strue,strue,Sfac,Kprint)
+            CALL STEST(leng,sx,strue,strue,Sfac,Kprint)
           CASE (8)
             ! 33. DSCALE
             CALL DSCAL(N,da,dx,INCx)
-            CALL DTEST(len,dx,dtrue5(1,np1,INCx),dtrue5(1,np1,INCx),Dfac,Kprint)
+            CALL DTEST(leng,dx,dtrue5(1,np1,INCx),dtrue5(1,np1,INCx),Dfac,Kprint)
           CASE (9)
             ! 34. CSCALE
             CALL CSCAL(N,ca,cx,INCx)
-            CALL CTEST(len,cx,ctrue5(:,np1,INCx),ctrue5(:,np1,INCx),Sfac,Kprint)
+            CALL CTEST(leng,cx,ctrue5(:,np1,INCx),ctrue5(:,np1,INCx),Sfac,Kprint)
           CASE (10)
             ! 35. CSSCAL
             CALL CSSCAL(N,sa,cx,INCx)
-            CALL CTEST(len,cx,ctrue6(:,np1,INCx),ctrue6(:,np1,INCx),Sfac,Kprint)
+            CALL CTEST(leng,cx,ctrue6(:,np1,INCx),ctrue6(:,np1,INCx),Sfac,Kprint)
           CASE (11)
             ! 36. ISAMAX
             itmp = ISAMAX(N,sx,INCx)
@@ -1100,7 +1100,7 @@ CONTAINS
     100  STOP
   END SUBROUTINE CHECK2
   !** ITEST
-  SUBROUTINE ITEST(Len,Icomp,Itrue,Kprint)
+  SUBROUTINE ITEST(Leng,Icomp,Itrue,Kprint)
     IMPLICIT NONE
     !>
     !***
@@ -1133,10 +1133,10 @@ CONTAINS
     !   920211  Code restructured and information added to the DESCRIPTION
     !           section.  (WRB)
 
-    INTEGER i, Len, Kprint, id
+    INTEGER i, Leng, Kprint, id
     INTEGER Icomp(*), Itrue(*)
     !* FIRST EXECUTABLE STATEMENT  ITEST
-    DO i = 1, Len
+    DO i = 1, Leng
       IF ( Icomp(i)/=Itrue(i) ) THEN
         !
         !         Here ICOMP(I) is not equal to ITRUE(I).
@@ -1164,7 +1164,7 @@ CONTAINS
     RETURN
   END SUBROUTINE ITEST
   !** STEST
-  SUBROUTINE STEST(Len,Scomp,Strue,Ssize,Sfac,Kprint)
+  SUBROUTINE STEST(Leng,Scomp,Strue,Ssize,Sfac,Kprint)
     IMPLICIT NONE
     !>
     !***
@@ -1202,12 +1202,12 @@ CONTAINS
     !   920211  Code restructured and information added to the DESCRIPTION
     !           section.  (WRB)
 
-    INTEGER i, Len, Kprint
+    INTEGER i, Leng, Kprint
     REAL Scomp(*), Strue(*), Ssize(*), Sfac, sd, R1MACH
     REAL :: releps = 0.0E0
     !* FIRST EXECUTABLE STATEMENT  STEST
     IF ( releps==0.0E0 ) releps = R1MACH(4)
-    DO i = 1, Len
+    DO i = 1, Leng
       sd = ABS(Scomp(i)-Strue(i))
       IF ( Sfac*sd>ABS(Ssize(i))*releps ) THEN
         !
@@ -1234,7 +1234,7 @@ CONTAINS
     RETURN
   END SUBROUTINE STEST
   !** DTEST
-  SUBROUTINE DTEST(Len,Dcomp,Dtrue,Dsize,Dfac,Kprint)
+  SUBROUTINE DTEST(Leng,Dcomp,Dtrue,Dsize,Dfac,Kprint)
     IMPLICIT NONE
     !>
     !***
@@ -1270,12 +1270,12 @@ CONTAINS
     !   920211  Code restructured and information added to the DESCRIPTION
     !           section.  (WRB)
 
-    INTEGER i, Len, Kprint
+    INTEGER i, Leng, Kprint
     REAL(8) :: Dcomp(*), Dtrue(*), Dsize(*), Dfac, dd, D1MACH
     REAL(8) :: releps = 0.0D0
     !* FIRST EXECUTABLE STATEMENT  DTEST
     IF ( releps==0.0D0 ) releps = D1MACH(4)
-    DO i = 1, Len
+    DO i = 1, Leng
       dd = ABS(Dcomp(i)-Dtrue(i))
       IF ( Dfac*dd>ABS(Dsize(i))*releps ) THEN
         !
@@ -1302,7 +1302,7 @@ CONTAINS
     RETURN
   END SUBROUTINE DTEST
 
-  SUBROUTINE CTEST(Len,Ccomp,Ctrue,Csize,Cfac,Kprint)
+  SUBROUTINE CTEST(Leng,Ccomp,Ctrue,Csize,Cfac,Kprint)
     IMPLICIT NONE
     !>
     !***
@@ -1338,13 +1338,13 @@ CONTAINS
     !   920211  Code restructured and information added to the DESCRIPTION
     !           section.  (WRB)
 
-    INTEGER i, Len, Kprint
+    INTEGER i, Leng, Kprint
     COMPLEX :: Ccomp(*), Ctrue(*), Csize(*)
     REAL :: Cfac, dd, R1MACH, CABS1
     REAL :: releps = 0.0
     !* FIRST EXECUTABLE STATEMENT  DTEST
     IF ( releps==0.0 ) releps = R1MACH(4)
-    DO i = 1, Len
+    DO i = 1, Leng
       dd = CABS1(Ccomp(i)-Ctrue(i))
       IF ( Cfac*dd>ABS(Csize(i))*releps ) THEN
         !

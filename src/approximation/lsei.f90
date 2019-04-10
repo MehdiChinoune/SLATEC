@@ -398,7 +398,7 @@ SUBROUTINE LSEI(W,Mdw,Me,Ma,Mg,N,Prgopt,X,Rnorme,Rnorml,Mode,Ws,Ip)
   REAL, EXTERNAL :: R1MACH, SASUM, SDOT, SNRM2
   EXTERNAL :: H12, LSI, SAXPY, SCOPY, SSCAL, SSWAP, XERMSG
   !
-  REAL enorm, fnorm, gam, rb, rn, rnmax, size, sn, snmax, t, tau, uj, up, vj, &
+  REAL enorm, fnorm, gam, rb, rn, rnmax, sizee, sn, snmax, t, tau, uj, up, vj, &
     xnorm, xnrme
   INTEGER i, imax, j, jp1, k, key, kranke, last, lchk, link, m,  mapke1, mdeqc, &
     mend, mep1, n1, n2, next, nlink, nopt, np1, ntimes
@@ -660,8 +660,8 @@ SUBROUTINE LSEI(W,Mdw,Me,Ma,Mg,N,Prgopt,X,Rnorme,Rnorml,Mode,Ws,Ip)
       mapke1 = Ma + kranke + 1
       mend = Ma + kranke + Mg
       DO i = mapke1, mend
-        size = SASUM(N,W(i,1),Mdw)*xnorm + ABS(W(i,np1))
-        IF ( W(i,np1)>tau*size ) THEN
+        sizee = SASUM(N,W(i,1),Mdw)*xnorm + ABS(W(i,np1))
+        IF ( W(i,np1)>tau*sizee ) THEN
           Mode = Mode + 2
           GOTO 100
         END IF

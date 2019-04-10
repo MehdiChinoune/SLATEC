@@ -34,7 +34,7 @@ REAL FUNCTION SDANRM(Neq,V,Wt,Rpar,Ipar)
   REAL V(Neq), Wt(Neq), Rpar(*)
   !
   INTEGER i
-  REAL sum, vmax
+  REAL summ, vmax
   !
   !* FIRST EXECUTABLE STATEMENT  SDANRM
   SDANRM = 0.0E0
@@ -43,11 +43,11 @@ REAL FUNCTION SDANRM(Neq,V,Wt,Rpar,Ipar)
     IF ( ABS(V(i)/Wt(i))>vmax ) vmax = ABS(V(i)/Wt(i))
   END DO
   IF ( vmax>0.0E0 ) THEN
-    sum = 0.0E0
+    summ = 0.0E0
     DO i = 1, Neq
-      sum = sum + ((V(i)/Wt(i))/vmax)**2
+      summ = summ + ((V(i)/Wt(i))/vmax)**2
     END DO
-    SDANRM = vmax*SQRT(sum/Neq)
+    SDANRM = vmax*SQRT(summ/Neq)
   END IF
   !------END OF FUNCTION SDANRM------
 END FUNCTION SDANRM

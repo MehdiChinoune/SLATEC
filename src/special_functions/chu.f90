@@ -43,7 +43,7 @@ REAL FUNCTION CHU(A,B,X)
   !   900727  Added EXTERNAL statement.  (WRB)
 
   REAL A, a0, aintb, alnx, B, b0, beps, c0, factor,gamri1, gamrni, pch1ai, &
-    pch1i, pochai, sum, t, X, xeps1, xi, xi1, xn, xtoeps
+    pch1i, pochai, summ, t, X, xeps1, xi, xi1, xn, xtoeps
   INTEGER i, istrt, m, n
   REAL, EXTERNAL :: EXPREL, GAMR, POCH1, R1MACH, R9CHU, GAMMA, POCH
   REAL, PARAMETER :: pi = 3.14159265358979324E0
@@ -76,27 +76,27 @@ REAL FUNCTION CHU(A,B,X)
       !
       ! NOW CONSIDER THE CASE B .GE. 1.0.
       !
-      sum = 0.0
+      summ = 0.0
       m = n - 2
       IF ( m>=0 ) THEN
         t = 1.0
-        sum = 1.0
+        summ = 1.0
         IF ( m/=0 ) THEN
           !
           DO i = 1, m
             xi = i
             t = t*(A-B+xi)*X/((1.0-B+xi)*xi)
-            sum = sum + t
+            summ = summ + t
           END DO
         END IF
         !
-        sum = GAMMA(B-1.0)*GAMR(A)*X**(1-n)*xtoeps*sum
+        summ = GAMMA(B-1.0)*GAMR(A)*X**(1-n)*xtoeps*summ
       END IF
     ELSE
       !
       ! CONSIDER THE CASE B .LT. 1.0 FIRST.
       !
-      sum = 1.0
+      summ = 1.0
       IF ( n/=0 ) THEN
         !
         t = 1.0
@@ -104,11 +104,11 @@ REAL FUNCTION CHU(A,B,X)
         DO i = 1, m
           xi1 = i - 1
           t = t*(A+xi1)*X/((B+xi1)*(xi1+1.0))
-          sum = sum + t
+          summ = summ + t
         END DO
       END IF
       !
-      sum = POCH(1.0+A-B,-A)*sum
+      summ = POCH(1.0+A-B,-A)*summ
     END IF
     !
     ! NOW EVALUATE THE INFINITE SUM.     -----------------------------------
@@ -138,7 +138,7 @@ REAL FUNCTION CHU(A,B,X)
       ! XEPS1 = (1.0 - X**(-BEPS)) / BEPS
       xeps1 = alnx*EXPREL(-beps*alnx)
       !
-      CHU = sum + c0 + xeps1*b0
+      CHU = summ + c0 + xeps1*b0
       xn = n
       DO i = 1, 1000
         xi = istrt + i
@@ -161,7 +161,7 @@ REAL FUNCTION CHU(A,B,X)
     a0 = factor*pochai*GAMR(B+xi)*gamri1/beps
     b0 = xtoeps*b0/beps
     !
-    CHU = sum + a0 - b0
+    CHU = summ + a0 - b0
     DO i = 1, 1000
       xi = istrt + i
       xi1 = istrt + i - 1

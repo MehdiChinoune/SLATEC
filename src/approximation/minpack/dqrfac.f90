@@ -95,7 +95,7 @@ SUBROUTINE DQRFAC(M,N,A,Lda,Pivot,Ipvt,Lipvt,Sigma,Acnorm,Wa)
   LOGICAL Pivot
   REAL(8) :: A(Lda,*), Sigma(*), Acnorm(*), Wa(*)
   INTEGER i, j, jp1, k, kmax, minmn
-  REAL(8) :: ajnorm, epsmch, sum, temp
+  REAL(8) :: ajnorm, epsmch, summ, temp
   REAL(8) :: D1MACH, DENORM
   REAL(8), PARAMETER :: one = 1.0D0, p05 = 5.0D-2, zero = 0.0D0
   !* FIRST EXECUTABLE STATEMENT  DQRFAC
@@ -153,11 +153,11 @@ SUBROUTINE DQRFAC(M,N,A,Lda,Pivot,Ipvt,Lipvt,Sigma,Acnorm,Wa)
       jp1 = j + 1
       IF ( N>=jp1 ) THEN
         DO k = jp1, N
-          sum = zero
+          summ = zero
           DO i = j, M
-            sum = sum + A(i,j)*A(i,k)
+            summ = summ + A(i,j)*A(i,k)
           END DO
-          temp = sum/A(j,j)
+          temp = summ/A(j,j)
           DO i = j, M
             A(i,k) = A(i,k) - temp*A(i,j)
           END DO

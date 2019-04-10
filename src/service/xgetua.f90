@@ -49,13 +49,13 @@ SUBROUTINE XGETUA(Iunita,N)
   !   861211  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
-  INTEGER i, index, Iunita(5), J4SAVE, N
+
+  INTEGER i, indexx, Iunita(5), J4SAVE, N
   !* FIRST EXECUTABLE STATEMENT  XGETUA
   N = J4SAVE(5,0,.FALSE.)
   DO i = 1, N
-    index = i + 4
-    IF ( i==1 ) index = 3
-    Iunita(i) = J4SAVE(index,0,.FALSE.)
+    indexx = i + 4
+    IF ( i==1 ) indexx = 3
+    Iunita(i) = J4SAVE(indexx,0,.FALSE.)
   END DO
 END SUBROUTINE XGETUA

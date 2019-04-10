@@ -34,7 +34,7 @@ SUBROUTINE U11US(A,Mda,M,N,Ub,Db,Mode,Np,Krank,Ksure,H,W,Eb,Ir,Ic)
   !   900328  Added TYPE section.  (WRB)
 
   INTEGER Mda, mmk, Mode, N, nn, Np
-  REAL A(Mda,*), bb, Db(*), Eb(*), H(*), r2, rmin, SDOT, SNRM2, sum, t, temp, &
+  REAL A(Mda,*), bb, Db(*), Eb(*), H(*), r2, rmin, SDOT, SNRM2, summ, t, temp, &
     tn, tt, Ub(*), W(*)
   INTEGER i, ii, im1, imin, is, ISAMAX, j, jm1, jmax, jp1, kk, &
     km1, kmi, kp1, Krank, Ksure, kz, l, lm1, M
@@ -273,11 +273,11 @@ SUBROUTINE U11US(A,Mda,M,N,Ub,Db,Mode,Np,Krank,Ksure,H,W,Eb,Ir,Ic)
     IF ( is==0 ) EXIT
   END DO
   Ksure = 0
-  sum = 0.0
+  summ = 0.0
   DO i = 1, Krank
     r2 = Ub(i)*Ub(i)
-    IF ( r2+sum>=1.0 ) EXIT
-    sum = sum + r2
+    IF ( r2+summ>=1.0 ) EXIT
+    summ = summ + r2
     Ksure = Ksure + 1
   END DO
   !

@@ -1,6 +1,6 @@
 !** XADD
 SUBROUTINE XADD(X,Ix,Y,Iy,Z,Iz,Ierror)
-  USE XBLK ,ONLY: RADix, RADixl, RAD2l, L
+  USE XBLK ,ONLY: RADixx, RADixl, RAD2l, L
   IMPLICIT NONE
   !>
   !***
@@ -124,13 +124,13 @@ SUBROUTINE XADD(X,Ix,Y,Iy,Z,Iz,Ierror)
     IF ( ABS(t)>=RADixl ) THEN
       j = i1 - 2
       IF ( j<0 ) GOTO 200
-      t = t*RADix**(-i2)/RAD2l
+      t = t*RADixx**(-i2)/RAD2l
       GOTO 300
     ELSE
       IF ( ABS(t)>=1.0 ) GOTO 200
       IF ( RADixl*ABS(t)<1.0 ) THEN
         j = i1 + 1
-        t = t*RADix**(L-i2)
+        t = t*RADixx**(L-i2)
         GOTO 300
       END IF
     END IF
@@ -141,11 +141,11 @@ SUBROUTINE XADD(X,Ix,Y,Iy,Z,Iz,Ierror)
     RETURN
   END IF
   100  j = i1
-  t = t*RADix**(-i2)
+  t = t*RADixx**(-i2)
   GOTO 300
   200  j = i1 - 1
   IF ( j<0 ) GOTO 100
-  t = t*RADix**(-i2)/RADixl
+  t = t*RADixx**(-i2)/RADixl
   !
   !  AT THIS POINT, SOME OR ALL OF THE DIFFERENCE IN THE
   ! AUXILIARY INDICES HAS BEEN USED TO EFFECT A LEFT SHIFT

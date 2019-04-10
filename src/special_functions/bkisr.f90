@@ -1,5 +1,5 @@
 !** BKISR
-SUBROUTINE BKISR(X,N,Sum,Ierr)
+SUBROUTINE BKISR(X,N,Summ,Ierr)
   IMPLICIT NONE
   !>
   !***
@@ -29,7 +29,7 @@ SUBROUTINE BKISR(X,N,Sum,Ierr)
   !   910722  Updated AUTHOR section.  (ALS)
 
   INTEGER i, Ierr, k, kk, kkn, k1, N, np
-  REAL ak, atol, bk, fk, fn, hx, hxs, pol, pr, Sum, tkp, tol, trm, X, xln
+  REAL ak, atol, bk, fk, fn, hx, hxs, pol, pr, Summ, tkp, tol, trm, X, xln
   REAL PSIXN, R1MACH
   !
   REAL, PARAMETER :: c(2) = [ 1.57079632679489662E+00, 1.0E0 ]
@@ -54,15 +54,15 @@ SUBROUTINE BKISR(X,N,Sum,Ierr)
     fn = N
     bk = 4.0E0
     ak = 2.0E0/((fn+1.0E0)*(fn+2.0E0))
-    Sum = ak*(PSIXN(N+3)-PSIXN(3)+PSIXN(2)-xln)
-    atol = Sum*tol*0.75E0
+    Summ = ak*(PSIXN(N+3)-PSIXN(3)+PSIXN(2)-xln)
+    atol = Summ*tol*0.75E0
     DO k = 2, 20
       ak = ak*(hxs/bk)*((tkp+1.0E0)/(tkp+fn+1.0E0))*(tkp/(tkp+fn))
       k1 = k + 1
       kk = k1 + k
       kkn = kk + N
       trm = (PSIXN(k1)+PSIXN(kkn)-PSIXN(kk)-xln)*ak
-      Sum = Sum + trm
+      Summ = Summ + trm
       IF ( ABS(trm)<=atol ) GOTO 100
       tkp = tkp + 2.0E0
       bk = bk + tkp
@@ -74,15 +74,15 @@ SUBROUTINE BKISR(X,N,Sum,Ierr)
     !     SMALL X CASE, X.LT.WORD TOLERANCE
     !-----------------------------------------------------------------------
   ELSEIF ( N>0 ) THEN
-    Sum = c(N)
+    Summ = c(N)
     RETURN
   ELSE
     hx = X*0.5E0
-    Sum = PSIXN(1) - LOG(hx)
+    Summ = PSIXN(1) - LOG(hx)
     RETURN
   END IF
-  100  Sum = (Sum*hxs+PSIXN(np)-xln)*pr
-  IF ( N==1 ) Sum = -Sum
-  Sum = pol + Sum
+  100  Summ = (Summ*hxs+PSIXN(np)-xln)*pr
+  IF ( N==1 ) Summ = -Summ
+  Summ = pol + Summ
   RETURN
 END SUBROUTINE BKISR

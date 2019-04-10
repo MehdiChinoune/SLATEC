@@ -44,7 +44,7 @@ SUBROUTINE SPLPUP(USRMAT,Mrelas,Nvars,Prgopt,Dattrv,Bl,Bu,Ind,Info,Amat,&
   !           DO loops to DO loops.  (RWC)
   !   900602  Get rid of ASSIGNed GOTOs.  (RWC)
 
-  INTEGER i, indcat, index, Info, iplace, itcnt, itmax, j, Mrelas, Nvars
+  INTEGER i, indcat, indexx, Info, iplace, itcnt, itmax, j, Mrelas, Nvars
   REAL Abig, aij, Amat(*), amn, amx, Asmall, Bl(*), Bu(*), Dattrv(*), &
     Prgopt(*), xval, zero
   INTEGER iflag(10), Imat(*), Ind(*)
@@ -176,9 +176,9 @@ SUBROUTINE SPLPUP(USRMAT,Mrelas,Nvars,Prgopt,Dattrv,Bl,Bu,Ind,Info,Amat,&
     IF ( indcat==0 ) THEN
       CALL PCHNGS(i,aij,iplace,Amat,Imat,j)
     ELSEIF ( indcat==1 ) THEN
-      index = -(i-1)
-      CALL PNNZRS(index,xval,iplace,Amat,Imat,j)
-      IF ( index==i ) aij = aij + xval
+      indexx = -(i-1)
+      CALL PNNZRS(indexx,xval,iplace,Amat,Imat,j)
+      IF ( indexx==i ) aij = aij + xval
       CALL PCHNGS(i,aij,iplace,Amat,Imat,j)
     ELSE
       WRITE (xern1,'(I8)') indcat

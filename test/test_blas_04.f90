@@ -131,7 +131,7 @@ CONTAINS
     CHARACTER(6), PARAMETER :: snames(NSUBS) = [ 'CGEMV ', 'CGBMV ', 'CHEMV ', &
       'CHBMV ', 'CHPMV ', 'CTRMV ', 'CTBMV ', 'CTPMV ', 'CTRSV ', 'CTBSV ', &
       'CTPSV ', 'CGERC ', 'CGERU ', 'CHER  ', 'CHPR  ', 'CHER2 ', 'CHPR2 ' ]
-    INTEGER, PARAMETER :: idim(NIDIM) = [ 0, 1, 2, 3, 5, 9 ]
+    INTEGER, PARAMETER :: idimm(NIDIM) = [ 0, 1, 2, 3, 5, 9 ]
     INTEGER, PARAMETER :: kb(NKB) = [ 0, 1, 2, 4 ]
     INTEGER, PARAMETER :: inc(NINC) = [ 1, 2, -1, -2 ]
     COMPLEX, PARAMETER :: alf(NALF) = [ (0.0,0.0), (1.0,0.0), (0.7,-0.9) ]
@@ -151,7 +151,7 @@ CONTAINS
     !
     IF ( Kprint>=3 ) THEN
       WRITE (Nout,FMT=99002)
-      WRITE (Nout,FMT=99003) (idim(i),i=1,NIDIM)
+      WRITE (Nout,FMT=99003) (idimm(i),i=1,NIDIM)
       WRITE (Nout,FMT=99004) (kb(i),i=1,NKB)
       WRITE (Nout,FMT=99005) (inc(i),i=1,NINC)
       WRITE (Nout,FMT=99006) (alf(i),i=1,NALF)
@@ -221,29 +221,29 @@ CONTAINS
         SELECT CASE (isnum)
           CASE (3,4,5)
             !           Test CHEMV, 03, CHBMV, 04, and CHPMV, 05.
-            CALL CCHK22(snames(isnum),eps,thresh,Nout,Kprint,ftl2,NIDIM,idim,&
+            CALL CCHK22(snames(isnum),eps,thresh,Nout,Kprint,ftl2,NIDIM,idimm,&
               NKB,kb,NALF,alf,NBET,bet,NINC,inc,NMAX,INCMAX,a,aa,as,x,&
               xx,xs,y,yy,ys,yt,g)
           CASE (6,7,8,9,10,11)
             !           Test CTRMV, 06, CTBMV, 07, CTPMV, 08,
             !           CTRSV, 09, CTBSV, 10, and CTPSV, 11.
-            CALL CCHK32(snames(isnum),eps,thresh,Nout,Kprint,ftl2,NIDIM,idim,&
+            CALL CCHK32(snames(isnum),eps,thresh,Nout,Kprint,ftl2,NIDIM,idimm,&
               NKB,kb,NINC,inc,NMAX,INCMAX,a,aa,as,y,yy,ys,yt,g,z)
           CASE (12,13)
             !           Test CGERC, 12, CGERU, 13.
-            CALL CCHK42(snames(isnum),eps,thresh,Nout,Kprint,ftl2,NIDIM,idim,&
+            CALL CCHK42(snames(isnum),eps,thresh,Nout,Kprint,ftl2,NIDIM,idimm,&
               NALF,alf,NINC,inc,NMAX,INCMAX,a,aa,as,x,xx,xs,y,yy,ys,yt,g,z)
           CASE (14,15)
             !           Test CHER, 14, and CHPR, 15.
-            CALL CCHK52(snames(isnum),eps,thresh,Nout,Kprint,ftl2,NIDIM,idim,&
+            CALL CCHK52(snames(isnum),eps,thresh,Nout,Kprint,ftl2,NIDIM,idimm,&
               NALF,alf,NINC,inc,NMAX,INCMAX,a,aa,as,x,xx,xs,y,yy,ys,yt,g,z)
           CASE (16,17)
             !           Test CHER2, 16, and CHPR2, 17.
-            CALL CCHK62(snames(isnum),eps,thresh,Nout,Kprint,ftl2,NIDIM,idim,&
+            CALL CCHK62(snames(isnum),eps,thresh,Nout,Kprint,ftl2,NIDIM,idimm,&
               NALF,alf,NINC,inc,NMAX,INCMAX,a,aa,as,x,xx,xs,y,yy,ys,yt,g,z)
           CASE DEFAULT
             !           Test CGEMV, 01, and CGBMV, 02.
-            CALL CCHK12(snames(isnum),eps,thresh,Nout,Kprint,ftl2,NIDIM,idim,&
+            CALL CCHK12(snames(isnum),eps,thresh,Nout,Kprint,ftl2,NIDIM,idimm,&
               NKB,kb,NALF,alf,NBET,bet,NINC,inc,NMAX,INCMAX,a,aa,as,x,&
               xx,xs,y,yy,ys,yt,g)
         END SELECT
@@ -335,7 +335,7 @@ CONTAINS
     !     .. Data statements ..
     CHARACTER(6), PARAMETER :: snames(NSUBS) = [ 'CGEMM ', 'CHEMM ', 'CSYMM ', &
       'CTRMM ', 'CTRSM ', 'CHERK ', 'CSYRK ', 'CHER2K', 'CSYR2K' ]
-    INTEGER, PARAMETER :: idim(NIDIM) = [ 0, 1, 2, 3, 5, 9 ]
+    INTEGER, PARAMETER :: idimm(NIDIM) = [ 0, 1, 2, 3, 5, 9 ]
     COMPLEX, PARAMETER :: alf(NALF) = [ (0.0,0.0), (1.0,0.0), (0.7,-0.9) ]
     COMPLEX, PARAMETER :: bet(NBET) = [ (0.0,0.0), (1.0,0.0), (1.3,-1.1) ]
     !* FIRST EXECUTABLE STATEMENT  CBLAT3
@@ -353,7 +353,7 @@ CONTAINS
     !
     IF ( Kprint>=3 ) THEN
       WRITE (Nout,FMT=99002)
-      WRITE (Nout,FMT=99003) (idim(i),i=1,NIDIM)
+      WRITE (Nout,FMT=99003) (idimm(i),i=1,NIDIM)
       WRITE (Nout,FMT=99004) (alf(i),i=1,NALF)
       WRITE (Nout,FMT=99005) (bet(i),i=1,NBET)
       IF ( .NOT.tsterr ) WRITE (Nout,FMT=99008)
@@ -449,23 +449,23 @@ CONTAINS
         SELECT CASE (isnum)
           CASE (2,3)
             !           Test CHEMM, 02, CSYMM, 03.
-            CALL CCHK23(snames(isnum),eps,thresh,Nout,Kprint,ftl2,NIDIM,idim,&
+            CALL CCHK23(snames(isnum),eps,thresh,Nout,Kprint,ftl2,NIDIM,idimm,&
               NALF,alf,NBET,bet,NMAX,ab,aa,as,ab(1,NMAX+1),bb,bs,c,cc,cs,ct,g)
           CASE (4,5)
             !           Test CTRMM, 04, CTRSM, 05.
-            CALL CCHK33(snames(isnum),eps,thresh,Nout,Kprint,ftl2,NIDIM,idim,&
+            CALL CCHK33(snames(isnum),eps,thresh,Nout,Kprint,ftl2,NIDIM,idimm,&
               NALF,alf,NMAX,ab,aa,as,ab(1,NMAX+1),bb,bs,ct,g,c)
           CASE (6,7)
             !           Test CHERK, 06, CSYRK, 07.
-            CALL CCHK43(snames(isnum),eps,thresh,Nout,Kprint,ftl2,NIDIM,idim,&
+            CALL CCHK43(snames(isnum),eps,thresh,Nout,Kprint,ftl2,NIDIM,idimm,&
               NALF,alf,NBET,bet,NMAX,ab,aa,as,ab(1,NMAX+1),bb,bs,c,cc,cs,ct,g)
           CASE (8,9)
             !           Test CHER2K, 08, CSYR2K, 09.
-            CALL CCHK53(snames(isnum),eps,thresh,Nout,Kprint,ftl2,NIDIM,idim,&
+            CALL CCHK53(snames(isnum),eps,thresh,Nout,Kprint,ftl2,NIDIM,idimm,&
               NALF,alf,NBET,bet,NMAX,ab,aa,as,bb,bs,c,cc,cs,ct,g,w)
           CASE DEFAULT
             !           Test CGEMM, 01.
-            CALL CCHK13(snames(isnum),eps,thresh,Nout,Kprint,ftl2,NIDIM,idim,&
+            CALL CCHK13(snames(isnum),eps,thresh,Nout,Kprint,ftl2,NIDIM,idimm,&
               NALF,alf,NBET,bet,NMAX,ab,aa,as,ab(1,NMAX+1),bb,bs,c,cc,cs,ct,g)
         END SELECT
         !
@@ -1240,7 +1240,7 @@ CONTAINS
     RETURN
   END FUNCTION LCERES
   !** CCHK12
-  SUBROUTINE CCHK12(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nkb,Kb,&
+  SUBROUTINE CCHK12(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idimm,Nkb,Kb,&
       Nalf,Alf,Nbet,Bet,Ninc,Inc,Nmax,Incmax,A,Aa,As,X,Xx,Xs,Y,Yy,Ys,Yt,G)
     IMPLICIT NONE
     !>
@@ -1281,14 +1281,14 @@ CONTAINS
       Bet(Nbet), X(Nmax), Xs(Nmax*Incmax), Xx(Nmax*Incmax), Y(Nmax), &
       Ys(Nmax*Incmax), Yt(Nmax), Yy(Nmax*Incmax)
     REAL G(Nmax)
-    INTEGER Idim(Nidim), Inc(Ninc), Kb(Nkb)
+    INTEGER Idimm(Nidim), Inc(Ninc), Kb(Nkb)
     !     .. Local Scalars ..
     COMPLEX alpha, als, beta, bls, transl
     REAL err, errmax
     INTEGER i, ia, ib, ic, iku, im, in, incx, incxs, incy, incys, &
       ix, iy, kl, kls, ku, kus, laa, lda, ldas, lx, ly, m, &
       ml, ms, n, nargs, nc, nd, nk, nerr, nl, ns
-    LOGICAL banded, ftl, full, null, reset, tran
+    LOGICAL banded, ftl, full, nul, reset, tran
     CHARACTER :: trans, transs
     !     .. Local Arrays ..
     LOGICAL isame(13)
@@ -1315,7 +1315,7 @@ CONTAINS
     errmax = RZERO
     !
     DO in = 1, Nidim
-      n = Idim(in)
+      n = Idimm(in)
       nd = n/2 + 1
       !
       DO im = 1, 2
@@ -1345,7 +1345,7 @@ CONTAINS
           !              Skip tests if not enough room.
           IF ( lda<=Nmax ) THEN
             laa = lda*n
-            null = n<=0 .OR. m<=0
+            nul = n<=0 .OR. m<=0
             !
             !              Generate the matrix A.
             !
@@ -1447,7 +1447,7 @@ CONTAINS
                         isame(7) = LCE(Xs,Xx,lx)
                         isame(8) = incxs==incx
                         isame(9) = bls==beta
-                        IF ( null ) THEN
+                        IF ( nul ) THEN
                           isame(10) = LCE(Ys,Yy,ly)
                         ELSE
                           isame(10) = LCERES('GE',' ',1,ml,Ys,Yy,ABS(incy))
@@ -1462,7 +1462,7 @@ CONTAINS
                         isame(9) = LCE(Xs,Xx,lx)
                         isame(10) = incxs==incx
                         isame(11) = bls==beta
-                        IF ( null ) THEN
+                        IF ( nul ) THEN
                           isame(12) = LCE(Ys,Yy,ly)
                         ELSE
                           isame(12) = LCERES('GE',' ',1,ml,Ys,Yy,ABS(incy))
@@ -1481,7 +1481,7 @@ CONTAINS
                       END DO
                       !
                       ftl = .FALSE.
-                      IF ( .NOT.null ) THEN
+                      IF ( .NOT.nul ) THEN
                         !
                         !                                Check the result.
                         !
@@ -1550,7 +1550,7 @@ CONTAINS
     !
   END SUBROUTINE CCHK12
   !** CCHK13
-  SUBROUTINE CCHK13(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nalf,Alf,&
+  SUBROUTINE CCHK13(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idimm,Nalf,Alf,&
       Nbet,Bet,Nmax,A,Aa,As,B,Bb,Bs,C,Cc,Cs,Ct,G)
     IMPLICIT NONE
     !>
@@ -1593,14 +1593,14 @@ CONTAINS
       B(Nmax,Nmax), Bb(Nmax*Nmax), Bet(Nbet), Bs(Nmax*Nmax), &
       C(Nmax,Nmax), Cc(Nmax*Nmax), Cs(Nmax*Nmax), Ct(Nmax)
     REAL G(Nmax)
-    INTEGER Idim(Nidim)
+    INTEGER Idimm(Nidim)
     !     .. Local Scalars ..
     COMPLEX alpha, als, beta, bls
     REAL err, errmax
     INTEGER i, ia, ib, ica, icb, ik, im, in, k, ks, laa, lbb, &
       lcc, lda, ldas, ldb, ldbs, ldc, ldcs, m, ma, mb, ms, &
       n, na, nargs, nb, nc, nerr, ns
-    LOGICAL ftl, null, reset, trana, tranb
+    LOGICAL ftl, nul, reset, trana, tranb
     CHARACTER :: tranas, tranbs, transa, transb
     !     .. Local Arrays ..
     LOGICAL isame(13)
@@ -1619,20 +1619,20 @@ CONTAINS
     errmax = RZERO
     !
     DO im = 1, Nidim
-      m = Idim(im)
+      m = Idimm(im)
       !
       DO in = 1, Nidim
-        n = Idim(in)
+        n = Idimm(in)
         !           Set LDC to 1 more than minimum value if room.
         ldc = m
         IF ( ldc<Nmax ) ldc = ldc + 1
         !           Skip tests if not enough room.
         IF ( ldc<=Nmax ) THEN
           lcc = ldc*n
-          null = n<=0 .OR. m<=0
+          nul = n<=0 .OR. m<=0
           !
           DO ik = 1, Nidim
-            k = Idim(ik)
+            k = Idimm(ik)
             !
             DO ica = 1, 3
               transa = ich(ica:ica)
@@ -1738,7 +1738,7 @@ CONTAINS
                         isame(9) = LCE(Bs,Bb,lbb)
                         isame(10) = ldbs==ldb
                         isame(11) = bls==beta
-                        IF ( null ) THEN
+                        IF ( nul ) THEN
                           isame(12) = LCE(Cs,Cc,lcc)
                         ELSE
                           isame(12) = LCERES('GE',' ',m,n,Cs,Cc,ldc)
@@ -1755,7 +1755,7 @@ CONTAINS
                         END DO
                         !
                         ftl = .FALSE.
-                        IF ( .NOT.null ) THEN
+                        IF ( .NOT.nul ) THEN
                           !
                           !                             Check the result.
                           !
@@ -1816,7 +1816,7 @@ CONTAINS
     !
   END SUBROUTINE CCHK13
   !** CCHK22
-  SUBROUTINE CCHK22(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nkb,Kb,&
+  SUBROUTINE CCHK22(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idimm,Nkb,Kb,&
       Nalf,Alf,Nbet,Bet,Ninc,Inc,Nmax,Incmax,A,Aa,As,X,Xx,Xs,Y,Yy,Ys,Yt,G)
     IMPLICIT NONE
     !>
@@ -1858,13 +1858,13 @@ CONTAINS
       Bet(Nbet), X(Nmax), Xs(Nmax*Incmax), Xx(Nmax*Incmax), Y(Nmax), &
       Ys(Nmax*Incmax), Yt(Nmax), Yy(Nmax*Incmax)
     REAL G(Nmax)
-    INTEGER Idim(Nidim), Inc(Ninc), Kb(Nkb)
+    INTEGER Idimm(Nidim), Inc(Ninc), Kb(Nkb)
     !     .. Local Scalars ..
     COMPLEX alpha, als, beta, bls, transl
     REAL err, errmax
     INTEGER i, ia, ib, ic, ik, in, incx, incxs, incy, incys, ix, &
       iy, k, ks, laa, lda, ldas, lx, ly, n, nargs, nc, nerr, nk, ns
-    LOGICAL banded, ftl, full, null, packed, reset
+    LOGICAL banded, ftl, full, nul, packed, reset
     CHARACTER :: uplo, uplos
     !     .. Local Arrays ..
     LOGICAL isame(13)
@@ -1894,7 +1894,7 @@ CONTAINS
     errmax = RZERO
     !
     DO in = 1, Nidim
-      n = Idim(in)
+      n = Idimm(in)
       !
       IF ( banded ) THEN
         nk = Nkb
@@ -1921,7 +1921,7 @@ CONTAINS
           ELSE
             laa = lda*n
           END IF
-          null = n<=0
+          nul = n<=0
           !
           DO ic = 1, 2
             uplo = ich(ic:ic)
@@ -2011,7 +2011,7 @@ CONTAINS
                       isame(6) = LCE(Xs,Xx,lx)
                       isame(7) = incxs==incx
                       isame(8) = bls==beta
-                      IF ( null ) THEN
+                      IF ( nul ) THEN
                         isame(9) = LCE(Ys,Yy,ly)
                       ELSE
                         isame(9) = LCERES('GE',' ',1,n,Ys,Yy,ABS(incy))
@@ -2025,7 +2025,7 @@ CONTAINS
                       isame(7) = LCE(Xs,Xx,lx)
                       isame(8) = incxs==incx
                       isame(9) = bls==beta
-                      IF ( null ) THEN
+                      IF ( nul ) THEN
                         isame(10) = LCE(Ys,Yy,ly)
                       ELSE
                         isame(10) = LCERES('GE',' ',1,n,Ys,Yy,ABS(incy))
@@ -2037,7 +2037,7 @@ CONTAINS
                       isame(5) = LCE(Xs,Xx,lx)
                       isame(6) = incxs==incx
                       isame(7) = bls==beta
-                      IF ( null ) THEN
+                      IF ( nul ) THEN
                         isame(8) = LCE(Ys,Yy,ly)
                       ELSE
                         isame(8) = LCERES('GE',' ',1,n,Ys,Yy,ABS(incy))
@@ -2056,7 +2056,7 @@ CONTAINS
                     END DO
                     !
                     ftl = .FALSE.
-                    IF ( .NOT.null ) THEN
+                    IF ( .NOT.nul ) THEN
                       !
                       !                             Check the result.
                       !
@@ -2126,7 +2126,7 @@ CONTAINS
     !
   END SUBROUTINE CCHK22
   !** CCHK23
-  SUBROUTINE CCHK23(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nalf,Alf,&
+  SUBROUTINE CCHK23(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idimm,Nalf,Alf,&
       Nbet,Bet,Nmax,A,Aa,As,B,Bb,Bs,C,Cc,Cs,Ct,G)
     IMPLICIT NONE
     !>
@@ -2169,13 +2169,13 @@ CONTAINS
       B(Nmax,Nmax), Bb(Nmax*Nmax), Bet(Nbet), Bs(Nmax*Nmax), &
       C(Nmax,Nmax), Cc(Nmax*Nmax), Cs(Nmax*Nmax), Ct(Nmax)
     REAL G(Nmax)
-    INTEGER Idim(Nidim)
+    INTEGER Idimm(Nidim)
     !     .. Local Scalars ..
     COMPLEX alpha, als, beta, bls
     REAL err, errmax
     INTEGER i, ia, ib, ics, icu, im, in, laa, lbb, lcc, lda, ldas, &
       ldb, ldbs, ldc, ldcs, m, ms, n, na, nargs, nc, nerr, ns
-    LOGICAL conj, ftl, left, null, reset
+    LOGICAL conj, ftl, left, nul, reset
     CHARACTER :: side, sides, uplo, uplos
     !     .. Local Arrays ..
     LOGICAL isame(13)
@@ -2196,17 +2196,17 @@ CONTAINS
     errmax = RZERO
     !
     DO im = 1, Nidim
-      m = Idim(im)
+      m = Idimm(im)
       !
       DO in = 1, Nidim
-        n = Idim(in)
+        n = Idimm(in)
         !           Set LDC to 1 more than minimum value if room.
         ldc = m
         IF ( ldc<Nmax ) ldc = ldc + 1
         !           Skip tests if not enough room.
         IF ( ldc<=Nmax ) THEN
           lcc = ldc*n
-          null = n<=0 .OR. m<=0
+          nul = n<=0 .OR. m<=0
           !           Set LDB to 1 more than minimum value if room.
           ldb = m
           IF ( ldb<Nmax ) ldb = ldb + 1
@@ -2302,7 +2302,7 @@ CONTAINS
                       isame(8) = LCE(Bs,Bb,lbb)
                       isame(9) = ldbs==ldb
                       isame(10) = bls==beta
-                      IF ( null ) THEN
+                      IF ( nul ) THEN
                         isame(11) = LCE(Cs,Cc,lcc)
                       ELSE
                         isame(11) = LCERES('GE',' ',m,n,Cs,Cc,ldc)
@@ -2320,7 +2320,7 @@ CONTAINS
                       END DO
                       !
                       ftl = .FALSE.
-                      IF ( .NOT.null ) THEN
+                      IF ( .NOT.nul ) THEN
                         !
                         !                          Check the result.
                         !
@@ -2385,7 +2385,7 @@ CONTAINS
     !
   END SUBROUTINE CCHK23
   !** CCHK32
-  SUBROUTINE CCHK32(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nkb,Kb,&
+  SUBROUTINE CCHK32(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idimm,Nkb,Kb,&
       Ninc,Inc,Nmax,Incmax,A,Aa,As,X,Xx,Xs,Xt,G,Z)
     IMPLICIT NONE
     !>
@@ -2427,13 +2427,13 @@ CONTAINS
     COMPLEX A(Nmax,Nmax), Aa(Nmax*Nmax), As(Nmax*Nmax), X(Nmax), &
       Xs(Nmax*Incmax), Xt(Nmax), Xx(Nmax*Incmax), Z(Nmax)
     REAL G(Nmax)
-    INTEGER Idim(Nidim), Inc(Ninc), Kb(Nkb)
+    INTEGER Idimm(Nidim), Inc(Ninc), Kb(Nkb)
     !     .. Local Scalars ..
     COMPLEX transl
     REAL err, errmax
     INTEGER i, icd, ict, icu, ik, in, incx, incxs, ix, k, ks, laa, &
       lda, ldas, lx, n, nargs, nc, nerr, nk, ns
-    LOGICAL banded, ftl, full, null, packed, reset
+    LOGICAL banded, ftl, full, nul, packed, reset
     CHARACTER :: diag, diags, trans, transs, uplo, uplos
     !     .. Local Arrays ..
     LOGICAL isame(13)
@@ -2468,7 +2468,7 @@ CONTAINS
     END DO
     !
     DO in = 1, Nidim
-      n = Idim(in)
+      n = Idimm(in)
       !
       IF ( banded ) THEN
         nk = Nkb
@@ -2495,7 +2495,7 @@ CONTAINS
           ELSE
             laa = lda*n
           END IF
-          null = n<=0
+          nul = n<=0
           !
           DO icu = 1, 2
             uplo = ichu(icu:icu)
@@ -2580,7 +2580,7 @@ CONTAINS
                   IF ( full ) THEN
                     isame(5) = LCE(As,Aa,laa)
                     isame(6) = ldas==lda
-                    IF ( null ) THEN
+                    IF ( nul ) THEN
                       isame(7) = LCE(Xs,Xx,lx)
                     ELSE
                       isame(7) = LCERES('GE',' ',1,n,Xs,Xx,ABS(incx))
@@ -2590,7 +2590,7 @@ CONTAINS
                     isame(5) = ks==k
                     isame(6) = LCE(As,Aa,laa)
                     isame(7) = ldas==lda
-                    IF ( null ) THEN
+                    IF ( nul ) THEN
                       isame(8) = LCE(Xs,Xx,lx)
                     ELSE
                       isame(8) = LCERES('GE',' ',1,n,Xs,Xx,ABS(incx))
@@ -2598,7 +2598,7 @@ CONTAINS
                     isame(9) = incxs==incx
                   ELSEIF ( packed ) THEN
                     isame(5) = LCE(As,Aa,laa)
-                    IF ( null ) THEN
+                    IF ( nul ) THEN
                       isame(6) = LCE(Xs,Xx,lx)
                     ELSE
                       isame(6) = LCERES('GE',' ',1,n,Xs,Xx,ABS(incx))
@@ -2617,7 +2617,7 @@ CONTAINS
                   END DO
                   !
                   ftl = .FALSE.
-                  IF ( .NOT.null ) THEN
+                  IF ( .NOT.nul ) THEN
                     IF ( Sname(4:5)=='MV' ) THEN
                       !
                       !                             Check the result.
@@ -2696,7 +2696,7 @@ CONTAINS
     !
   END SUBROUTINE CCHK32
   !** CCHK33
-  SUBROUTINE CCHK33(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nalf,Alf,&
+  SUBROUTINE CCHK33(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idimm,Nalf,Alf,&
       Nmax,A,Aa,As,B,Bb,Bs,Ct,G,C)
     IMPLICIT NONE
     !>
@@ -2738,13 +2738,13 @@ CONTAINS
     COMPLEX A(Nmax,Nmax), Aa(Nmax*Nmax), Alf(Nalf), As(Nmax*Nmax), &
       B(Nmax,Nmax), Bb(Nmax*Nmax), Bs(Nmax*Nmax), C(Nmax,Nmax), Ct(Nmax)
     REAL G(Nmax)
-    INTEGER Idim(Nidim)
+    INTEGER Idimm(Nidim)
     !     .. Local Scalars ..
     COMPLEX alpha, als
     REAL err, errmax
     INTEGER i, ia, icd, ics, ict, icu, im, in, j, laa, lbb, lda, &
       ldas, ldb, ldbs, m, ms, n, na, nargs, nc, nerr, ns
-    LOGICAL ftl, left, null, reset
+    LOGICAL ftl, left, nul, reset
     CHARACTER :: diag, diags, side, sides, tranas, transa, uplo, uplos
     !     .. Local Arrays ..
     LOGICAL isame(13)
@@ -2770,17 +2770,17 @@ CONTAINS
     END DO
     !
     DO im = 1, Nidim
-      m = Idim(im)
+      m = Idimm(im)
       !
       DO in = 1, Nidim
-        n = Idim(in)
+        n = Idimm(in)
         !           Set LDB to 1 more than minimum value if room.
         ldb = m
         IF ( ldb<Nmax ) ldb = ldb + 1
         !           Skip tests if not enough room.
         IF ( ldb<=Nmax ) THEN
           lbb = ldb*n
-          null = m<=0 .OR. n<=0
+          nul = m<=0 .OR. n<=0
           !
           DO ics = 1, 2
             side = ichs(ics:ics)
@@ -2864,7 +2864,7 @@ CONTAINS
                     isame(7) = als==alpha
                     isame(8) = LCE(As,Aa,laa)
                     isame(9) = ldas==lda
-                    IF ( null ) THEN
+                    IF ( nul ) THEN
                       isame(10) = LCE(Bs,Bb,lbb)
                     ELSE
                       isame(10) = LCERES('GE',' ',m,n,Bs,Bb,ldb)
@@ -2882,7 +2882,7 @@ CONTAINS
                     END DO
                     !
                     ftl = .FALSE.
-                    IF ( .NOT.null ) THEN
+                    IF ( .NOT.nul ) THEN
                       IF ( Sname(4:5)=='MM' ) THEN
                         !
                         !                                Check the result.
@@ -2968,7 +2968,7 @@ CONTAINS
     !
   END SUBROUTINE CCHK33
   !** CCHK42
-  SUBROUTINE CCHK42(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nalf,Alf,&
+  SUBROUTINE CCHK42(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idimm,Nalf,Alf,&
       Ninc,Inc,Nmax,Incmax,A,Aa,As,X,Xx,Xs,Y,Yy,Ys,Yt,G,Z)
     IMPLICIT NONE
     !>
@@ -3009,13 +3009,13 @@ CONTAINS
       Xs(Nmax*Incmax), Xx(Nmax*Incmax), Y(Nmax), Ys(Nmax*Incmax), &
       Yt(Nmax), Yy(Nmax*Incmax), Z(Nmax)
     REAL G(Nmax)
-    INTEGER Idim(Nidim), Inc(Ninc)
+    INTEGER Idimm(Nidim), Inc(Ninc)
     !     .. Local Scalars ..
     COMPLEX alpha, als, transl
     REAL err, errmax
     INTEGER i, ia, im, in, incx, incxs, incy, incys, ix, iy, j, &
       laa, lda, ldas, lx, ly, m, ms, n, nargs, nc, nd, nerr, ns
-    LOGICAL conj, ftl, null, reset
+    LOGICAL conj, ftl, nul, reset
     !     .. Local Arrays ..
     COMPLEX w(1)
     LOGICAL isame(13)
@@ -3035,7 +3035,7 @@ CONTAINS
     errmax = RZERO
     !
     DO in = 1, Nidim
-      n = Idim(in)
+      n = Idimm(in)
       nd = n/2 + 1
       !
       DO im = 1, 2
@@ -3048,7 +3048,7 @@ CONTAINS
         !           Skip tests if not enough room.
         IF ( lda<=Nmax ) THEN
           laa = lda*n
-          null = n<=0 .OR. m<=0
+          nul = n<=0 .OR. m<=0
           !
           DO ix = 1, Ninc
             incx = Inc(ix)
@@ -3129,7 +3129,7 @@ CONTAINS
                 isame(5) = incxs==incx
                 isame(6) = LCE(Ys,Yy,ly)
                 isame(7) = incys==incy
-                IF ( null ) THEN
+                IF ( nul ) THEN
                   isame(8) = LCE(As,Aa,laa)
                 ELSE
                   isame(8) = LCERES('GE',' ',m,n,As,Aa,lda)
@@ -3146,7 +3146,7 @@ CONTAINS
                 END DO
                 !
                 ftl = .FALSE.
-                IF ( .NOT.null ) THEN
+                IF ( .NOT.nul ) THEN
                   !
                   !                       Check the result column by column.
                   !
@@ -3220,7 +3220,7 @@ CONTAINS
     !
   END SUBROUTINE CCHK42
   !** CCHK43
-  SUBROUTINE CCHK43(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nalf,Alf,&
+  SUBROUTINE CCHK43(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idimm,Nalf,Alf,&
       Nbet,Bet,Nmax,A,Aa,As,B,Bb,Bs,C,Cc,Cs,Ct,G)
     IMPLICIT NONE
     !>
@@ -3263,13 +3263,13 @@ CONTAINS
       B(Nmax,Nmax), Bb(Nmax*Nmax), Bs(Nmax*Nmax), Bet(Nbet), &
       C(Nmax,Nmax), Cc(Nmax*Nmax), Ct(Nmax), Cs(Nmax*Nmax)
     REAL G(Nmax)
-    INTEGER Idim(Nidim)
+    INTEGER Idimm(Nidim)
     !     .. Local Scalars ..
     COMPLEX alpha, als, beta, bets
     REAL err, errmax, ralpha, rals, rbeta, rbets
     INTEGER i, ia, ib, ict, icu, ik, in, j, jc, jj, k, ks, laa, &
       lcc, lda, ldas, ldc, ldcs, lj, ma, n, na, nargs, nc, nerr, ns
-    LOGICAL conj, ftl, null, reset, tran, upper
+    LOGICAL conj, ftl, nul, reset, tran, upper
     CHARACTER :: trans, transs, uplo, transt, uplos
     !     .. Local Arrays ..
     LOGICAL isame(13)
@@ -3290,7 +3290,7 @@ CONTAINS
     errmax = RZERO
     !
     DO in = 1, Nidim
-      n = Idim(in)
+      n = Idimm(in)
       !        Set LDC to 1 more than minimum value if room.
       ldc = n
       IF ( ldc<Nmax ) ldc = ldc + 1
@@ -3299,7 +3299,7 @@ CONTAINS
         lcc = ldc*n
         !
         DO ik = 1, Nidim
-          k = Idim(ik)
+          k = Idimm(ik)
           !
           DO ict = 1, 2
             trans = icht(ict:ict)
@@ -3340,8 +3340,8 @@ CONTAINS
                       rbeta = REAL(beta)
                       beta = CMPLX(rbeta,RZERO)
                     END IF
-                    null = n<=0
-                    IF ( conj ) null = null .OR.&
+                    nul = n<=0
+                    IF ( conj ) nul = nul .OR.&
                       ((k<=0.OR.ralpha==RZERO).AND.rbeta==RONE)
                     !
                     !                       Generate the matrix C.
@@ -3408,7 +3408,7 @@ CONTAINS
                     ELSE
                       isame(8) = bets==beta
                     END IF
-                    IF ( null ) THEN
+                    IF ( nul ) THEN
                       isame(9) = LCE(Cs,Cc,lcc)
                     ELSE
                       isame(9) = LCERES(Sname(2:3),uplo,n,n,Cs,Cc,ldc)
@@ -3425,7 +3425,7 @@ CONTAINS
                       END IF
                     END DO
                     !
-                    IF ( .NOT.null ) THEN
+                    IF ( .NOT.nul ) THEN
                       !
                       !                          Check the result column by column.
                       !
@@ -3520,7 +3520,7 @@ CONTAINS
     !
   END SUBROUTINE CCHK43
   !** CCHK52
-  SUBROUTINE CCHK52(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nalf,Alf,&
+  SUBROUTINE CCHK52(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idimm,Nalf,Alf,&
       Ninc,Inc,Nmax,Incmax,A,Aa,As,X,Xx,Xs,Y,Yy,Ys,Yt,G,Z)
     IMPLICIT NONE
     !>
@@ -3561,13 +3561,13 @@ CONTAINS
       Xs(Nmax*Incmax), Xx(Nmax*Incmax), Y(Nmax), Ys(Nmax*Incmax), &
       Yt(Nmax), Yy(Nmax*Incmax), Z(Nmax)
     REAL G(Nmax)
-    INTEGER Idim(Nidim), Inc(Ninc)
+    INTEGER Idimm(Nidim), Inc(Ninc)
     !     .. Local Scalars ..
     COMPLEX alpha, transl
     REAL err, errmax, ralpha, rals
     INTEGER i, ia, ic, in, incx, incxs, ix, j, ja, jj, laa, lda, &
       ldas, lj, lx, n, nargs, nc, nerr, ns
-    LOGICAL ftl, full, null, packed, reset, upper
+    LOGICAL ftl, full, nul, packed, reset, upper
     CHARACTER :: uplo, uplos
     !     .. Local Arrays ..
     COMPLEX w(1)
@@ -3595,7 +3595,7 @@ CONTAINS
     errmax = RZERO
     !
     DO in = 1, Nidim
-      n = Idim(in)
+      n = Idimm(in)
       !        Set LDA to 1 more than minimum value if room.
       lda = n
       IF ( lda<Nmax ) lda = lda + 1
@@ -3627,7 +3627,7 @@ CONTAINS
             DO ia = 1, Nalf
               ralpha = REAL(Alf(ia))
               alpha = CMPLX(ralpha,RZERO)
-              null = n<=0 .OR. ralpha==RZERO
+              nul = n<=0 .OR. ralpha==RZERO
               !
               !                 Generate the matrix A.
               !
@@ -3673,7 +3673,7 @@ CONTAINS
               isame(3) = rals==ralpha
               isame(4) = LCE(Xs,Xx,lx)
               isame(5) = incxs==incx
-              IF ( null ) THEN
+              IF ( nul ) THEN
                 isame(6) = LCE(As,Aa,laa)
               ELSE
                 isame(6) = LCERES(Sname(2:3),uplo,n,n,As,Aa,lda)
@@ -3690,7 +3690,7 @@ CONTAINS
               END DO
               !
               ftl = .FALSE.
-              IF ( .NOT.null ) THEN
+              IF ( .NOT.nul ) THEN
                 !
                 !                    Check the result column by column.
                 !
@@ -3776,7 +3776,7 @@ CONTAINS
     !
   END SUBROUTINE CCHK52
   !** CCHK53
-  SUBROUTINE CCHK53(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nalf,Alf,&
+  SUBROUTINE CCHK53(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idimm,Nalf,Alf,&
       Nbet,Bet,Nmax,Ab,Aa,As,Bb,Bs,C,Cc,Cs,Ct,G,W)
     IMPLICIT NONE
     !>
@@ -3819,14 +3819,14 @@ CONTAINS
       Bb(Nmax*Nmax), Bet(Nbet), Bs(Nmax*Nmax), C(Nmax,Nmax), &
       Cc(Nmax*Nmax), Cs(Nmax*Nmax), Ct(Nmax), W(2*Nmax)
     REAL G(Nmax)
-    INTEGER Idim(Nidim)
+    INTEGER Idimm(Nidim)
     !     .. Local Scalars ..
     COMPLEX alpha, als, beta, bets
     REAL err, errmax, rbeta, rbets
     INTEGER i, ia, ib, ict, icu, ik, in, j, jc, jj, jjab, k, ks, &
       laa, lbb, lcc, lda, ldas, ldb, ldbs, ldc, ldcs, lj, ma, &
       n, na, nargs, nc, nerr, ns
-    LOGICAL conj, ftl, null, reset, tran, upper
+    LOGICAL conj, ftl, nul, reset, tran, upper
     CHARACTER :: trans, transs, uplo, transt, uplos
     !     .. Local Arrays ..
     LOGICAL isame(13)
@@ -3847,7 +3847,7 @@ CONTAINS
     errmax = RZERO
     !
     DO in = 1, Nidim
-      n = Idim(in)
+      n = Idimm(in)
       !        Set LDC to 1 more than minimum value if room.
       ldc = n
       IF ( ldc<Nmax ) ldc = ldc + 1
@@ -3856,7 +3856,7 @@ CONTAINS
         lcc = ldc*n
         !
         DO ik = 1, Nidim
-          k = Idim(ik)
+          k = Idimm(ik)
           !
           DO ict = 1, 2
             trans = icht(ict:ict)
@@ -3908,8 +3908,8 @@ CONTAINS
                       rbeta = REAL(beta)
                       beta = CMPLX(rbeta,RZERO)
                     END IF
-                    null = n<=0
-                    IF ( conj ) null = null .OR.&
+                    nul = n<=0
+                    IF ( conj ) nul = nul .OR.&
                       ((k<=0.OR.alpha==ZERO).AND.rbeta==RONE)
                     !
                     !                       Generate the matrix C.
@@ -3974,7 +3974,7 @@ CONTAINS
                     ELSE
                       isame(10) = bets==beta
                     END IF
-                    IF ( null ) THEN
+                    IF ( nul ) THEN
                       isame(11) = LCE(Cs,Cc,lcc)
                     ELSE
                       isame(11) = LCERES('HE',uplo,n,n,Cs,Cc,ldc)
@@ -3991,7 +3991,7 @@ CONTAINS
                       END IF
                     END DO
                     !
-                    IF ( .NOT.null ) THEN
+                    IF ( .NOT.nul ) THEN
                       !
                       !                          Check the result column by column.
                       !
@@ -4105,7 +4105,7 @@ CONTAINS
     !
   END SUBROUTINE CCHK53
   !** CCHK62
-  SUBROUTINE CCHK62(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nalf,Alf,&
+  SUBROUTINE CCHK62(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idimm,Nalf,Alf,&
       Ninc,Inc,Nmax,Incmax,A,Aa,As,X,Xx,Xs,Y,Yy,Ys,Yt,G,Z)
     IMPLICIT NONE
     !>
@@ -4146,13 +4146,13 @@ CONTAINS
       Xs(Nmax*Incmax), Xx(Nmax*Incmax), Y(Nmax), Ys(Nmax*Incmax), &
       Yt(Nmax), Yy(Nmax*Incmax), Z(Nmax,2)
     REAL G(Nmax)
-    INTEGER Idim(Nidim), Inc(Ninc)
+    INTEGER Idimm(Nidim), Inc(Ninc)
     !     .. Local Scalars ..
     COMPLEX alpha, als, transl
     REAL err, errmax
     INTEGER i, ia, ic, in, incx, incxs, incy, incys, ix, iy, j, &
       ja, jj, laa, lda, ldas, lj, lx, ly, n, nargs, nc, nerr, ns
-    LOGICAL ftl, full, null, packed, reset, upper
+    LOGICAL ftl, full, nul, packed, reset, upper
     CHARACTER :: uplo, uplos
     !     .. Local Arrays ..
     COMPLEX w(2)
@@ -4180,7 +4180,7 @@ CONTAINS
     errmax = RZERO
     !
     DO in = 1, Nidim
-      n = Idim(in)
+      n = Idimm(in)
       !        Set LDA to 1 more than minimum value if room.
       lda = n
       IF ( lda<Nmax ) lda = lda + 1
@@ -4224,7 +4224,7 @@ CONTAINS
               !
               DO ia = 1, Nalf
                 alpha = Alf(ia)
-                null = n<=0 .OR. alpha==ZERO
+                nul = n<=0 .OR. alpha==ZERO
                 !
                 !                    Generate the matrix A.
                 !
@@ -4276,7 +4276,7 @@ CONTAINS
                 isame(5) = incxs==incx
                 isame(6) = LCE(Ys,Yy,ly)
                 isame(7) = incys==incy
-                IF ( null ) THEN
+                IF ( nul ) THEN
                   isame(8) = LCE(As,Aa,laa)
                 ELSE
                   isame(8) = LCERES(Sname(2:3),uplo,n,n,As,Aa,lda)
@@ -4293,7 +4293,7 @@ CONTAINS
                 END DO
                 !
                 ftl = .FALSE.
-                IF ( .NOT.null ) THEN
+                IF ( .NOT.nul ) THEN
                   !
                   !                       Check the result column by column.
                   !

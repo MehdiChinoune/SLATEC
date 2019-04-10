@@ -47,7 +47,7 @@ SUBROUTINE DDATRP(X,Xout,Yout,Ypout,Neq,Kold,Phi,Psi)
   REAL(8) :: X, Xout, Yout(*), Ypout(*), Phi(Neq,*), Psi(*)
   !
   INTEGER i, j, koldp1
-  REAL(8) :: c, d, gamma, temp1
+  REAL(8) :: c, d, gama, temp1
   !
   !* FIRST EXECUTABLE STATEMENT  DDATRP
   koldp1 = Kold + 1
@@ -58,11 +58,11 @@ SUBROUTINE DDATRP(X,Xout,Yout,Ypout,Neq,Kold,Phi,Psi)
   END DO
   c = 1.0D0
   d = 0.0D0
-  gamma = temp1/Psi(1)
+  gama = temp1/Psi(1)
   DO j = 2, koldp1
-    d = d*gamma + c/Psi(j-1)
-    c = c*gamma
-    gamma = (temp1+Psi(j-1))/Psi(j)
+    d = d*gama + c/Psi(j-1)
+    c = c*gama
+    gama = (temp1+Psi(j-1))/Psi(j)
     DO i = 1, Neq
       Yout(i) = Yout(i) + c*Phi(i,j)
       Ypout(i) = Ypout(i) + d*Phi(i,j)

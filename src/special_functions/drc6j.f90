@@ -139,10 +139,10 @@ SUBROUTINE DRC6J(L2,L3,L4,L5,L6,L1min,L1max,Sixcof,Ndim,Ier)
   INTEGER Ndim, Ier
   REAL(8) :: L2, L3, L4, L5, L6, L1min, L1max, Sixcof(Ndim)
   !
-  INTEGER i, index, lstep, n, nfin, nfinp1, nfinp2, nfinp3, nlim, nstep2
-  REAL(8) :: a1, a1s, a2, a2s, c1, c1old, c2, cnorm, D1MACH, denom, dv, huge, &
+  INTEGER i, indexx, lstep, n, nfin, nfinp1, nfinp2, nfinp3, nlim, nstep2
+  REAL(8) :: a1, a1s, a2, a2s, c1, c1old, c2, cnorm, D1MACH, denom, dv, hugee, &
     l1, newfac, oldfac, ratio, sign1, sign2, srhuge, srtiny, sum1, sum2, sumbac, &
-    sumfor, sumuni, thresh, tiny, x, x1, x2, x3, y, y1, y2, y3
+    sumfor, sumuni, thresh, tinyy, x, x1, x2, x3, y, y1, y2, y3
   REAL(8), PARAMETER :: zero = 0.0D0, eps = 0.01D0, one = 1.0D0, two = 2.0D0, &
     three = 3.0D0
   !
@@ -150,9 +150,9 @@ SUBROUTINE DRC6J(L2,L3,L4,L5,L6,L1min,L1max,Sixcof,Ndim,Ier)
   Ier = 0
   !  HUGE is the square root of one twentieth of the largest floating
   !  point number, approximately.
-  huge = SQRT(D1MACH(2)/20.0D0)
-  srhuge = SQRT(huge)
-  tiny = 1.0D0/huge
+  hugee = SQRT(D1MACH(2)/20.0D0)
+  srhuge = SQRT(hugee)
+  tinyy = 1.0D0/hugee
   srtiny = 1.0D0/srhuge
   !
   !     LMATCH = ZERO
@@ -206,7 +206,7 @@ SUBROUTINE DRC6J(L2,L3,L4,L5,L6,L1min,L1max,Sixcof,Ndim,Ier)
       newfac = 0.0D0
       c1 = 0.0D0
       Sixcof(1) = srtiny
-      sum1 = (l1+l1+one)*tiny
+      sum1 = (l1+l1+one)*tinyy
       !
       lstep = 1
     END IF
@@ -279,8 +279,8 @@ SUBROUTINE DRC6J(L2,L3,L4,L5,L6,L1min,L1max,Sixcof,Ndim,Ier)
           IF ( ABS(Sixcof(i))<srtiny ) Sixcof(i) = zero
           Sixcof(i) = Sixcof(i)/srhuge
         END DO
-        sum1 = sum1/huge
-        sumfor = sumfor/huge
+        sum1 = sum1/hugee
+        sumfor = sumfor/hugee
         x = x/srhuge
       END IF
       !
@@ -315,7 +315,7 @@ SUBROUTINE DRC6J(L2,L3,L4,L5,L6,L1min,L1max,Sixcof,Ndim,Ier)
     l1 = L1max
     !
     Sixcof(nfin) = srtiny
-    sum2 = (l1+l1+one)*tiny
+    sum2 = (l1+l1+one)*tinyy
     !
     !
     l1 = l1 + two
@@ -358,13 +358,13 @@ SUBROUTINE DRC6J(L2,L3,L4,L5,L6,L1min,L1max,Sixcof,Ndim,Ier)
           !
           !     LSCALE = LSCALE + 1
           DO i = 1, lstep
-            index = nfin - i + 1
-            IF ( ABS(Sixcof(index))<srtiny ) Sixcof(index) = zero
-            Sixcof(index) = Sixcof(index)/srhuge
+            indexx = nfin - i + 1
+            IF ( ABS(Sixcof(indexx))<srtiny ) Sixcof(indexx) = zero
+            Sixcof(indexx) = Sixcof(indexx)/srhuge
           END DO
-          sumbac = sumbac/huge
+          sumbac = sumbac/hugee
           !
-          sum2 = sum2/huge
+          sum2 = sum2/hugee
         END IF
       ELSE
         !
@@ -374,7 +374,7 @@ SUBROUTINE DRC6J(L2,L3,L4,L5,L6,L1min,L1max,Sixcof,Ndim,Ier)
         Sixcof(nfin-1) = y
         IF ( lstep==nstep2 ) EXIT
         sumbac = sum2
-        sum2 = sum2 + (l1+l1-three)*c1*c1*tiny
+        sum2 = sum2 + (l1+l1-three)*c1*c1*tinyy
       END IF
     END DO
     !
@@ -414,7 +414,7 @@ SUBROUTINE DRC6J(L2,L3,L4,L5,L6,L1min,L1max,Sixcof,Ndim,Ier)
     !
     x = srtiny*c1
     Sixcof(2) = x
-    sum1 = sum1 + tiny*(l1+l1+one)*c1*c1
+    sum1 = sum1 + tinyy*(l1+l1+one)*c1*c1
     !
     IF ( lstep/=nfin ) GOTO 100
     !
@@ -434,7 +434,7 @@ SUBROUTINE DRC6J(L2,L3,L4,L5,L6,L1min,L1max,Sixcof,Ndim,Ier)
   !
   IF ( ABS(cnorm)<one ) THEN
     !
-    thresh = tiny/ABS(cnorm)
+    thresh = tinyy/ABS(cnorm)
     DO n = 1, nfin
       IF ( ABS(Sixcof(n))<thresh ) Sixcof(n) = zero
       Sixcof(n) = cnorm*Sixcof(n)

@@ -1,6 +1,6 @@
 !** DXCON
 SUBROUTINE DXCON(X,Ix,Ierror)
-  USE DXBLK ,ONLY: RADix, RADixl, DLG10r, L
+  USE DXBLK ,ONLY: RADixx, RADixl, DLG10r, L
   IMPLICIT NONE
   !>
   !***
@@ -99,24 +99,24 @@ SUBROUTINE DXCON(X,Ix,Ierror)
     ! AT THIS POINT, RADIX**(-L) .LE. ABS(X) .LT. 1.0D0     IN CASE 1,
     !                      1.0D0 .LE. ABS(X) .LT. RADIX**L  IN CASE 2.
     i = INT( LOG10(ABS(X))/DLG10r )
-    a = RADix**i
+    a = RADixx**i
     IF ( icase==2 ) THEN
       DO WHILE ( a>ABS(X) )
         i = i - 1
-        a = a/RADix
+        a = a/RADixx
       END DO
-      DO WHILE ( ABS(X)>=RADix*a )
+      DO WHILE ( ABS(X)>=RADixx*a )
         i = i + 1
-        a = a*RADix
+        a = a*RADixx
       END DO
     ELSE
-      DO WHILE ( a>RADix*ABS(X) )
+      DO WHILE ( a>RADixx*ABS(X) )
         i = i - 1
-        a = a/RADix
+        a = a/RADixx
       END DO
       DO WHILE ( ABS(X)>=a )
         i = i + 1
-        a = a*RADix
+        a = a*RADixx
       END DO
     END IF
     !
@@ -124,22 +124,22 @@ SUBROUTINE DXCON(X,Ix,Ierror)
     ! RADIX**(I-1) .LE. ABS(X) .LT. RADIX**I      IN CASE 1,
     !     RADIX**I .LE. ABS(X) .LT. RADIX**(I+1)  IN CASE 2.
     itemp = INT( ispace/DLG10r )
-    a = RADix**itemp
+    a = RADixx**itemp
     b = 10.0D0**ispace
     DO WHILE ( a>b )
       itemp = itemp - 1
-      a = a/RADix
+      a = a/RADixx
     END DO
-    DO WHILE ( b>=a*RADix )
+    DO WHILE ( b>=a*RADixx )
       itemp = itemp + 1
-      a = a*RADix
+      a = a*RADixx
     END DO
     !
     ! AT THIS POINT ITEMP IS SUCH THAT
     ! RADIX**ITEMP .LE. 10**ISPACE .LT. RADIX**(ITEMP+1).
     IF ( itemp<=0 ) THEN
       ! ITEMP = 0 IF, AND ONLY IF, ISPACE = 1 AND RADIX = 16.0D0
-      X = X*RADix**(-i)
+      X = X*RADixx**(-i)
       Ix = Ix + i
       CALL DXC210(Ix,z,j,Ierror)
       IF ( Ierror/=0 ) RETURN
@@ -149,7 +149,7 @@ SUBROUTINE DXCON(X,Ix,Ierror)
       IF ( icase==2 ) GOTO 100
     END IF
     i1 = i/itemp
-    X = X*RADix**(-i1*itemp)
+    X = X*RADixx**(-i1*itemp)
     Ix = Ix + i1*itemp
     !
     ! AT THIS POINT,

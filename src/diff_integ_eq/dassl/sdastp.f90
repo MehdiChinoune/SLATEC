@@ -1,6 +1,6 @@
 !** SDASTP
 SUBROUTINE SDASTP(X,Y,Yprime,Neq,RES,JAC,H,Wt,Jstart,Idid,Rpar,Ipar,Phi,&
-    Delta,E,Wm,Iwm,Alpha,Beta,Gamma,Psi,Sigma,Cj,Cjold,Hold,&
+    Delta,E,Wm,Iwm,Alpha,Beta,Gama,Psi,Sigma,Cj,Cjold,Hold,&
     S,Hmin,Uround,Iphase,Jcalc,K,Kold,Ns,Nonneg,Ntemp)
   IMPLICIT NONE
   !>
@@ -101,7 +101,7 @@ SUBROUTINE SDASTP(X,Y,Yprime,Neq,RES,JAC,H,Wt,Jstart,Idid,Rpar,Ipar,Phi,&
   INTEGER Neq, Jstart, Idid, Ipar(*), Iwm(*), Iphase, Jcalc, K, &
     Kold, Ns, Nonneg, Ntemp
   REAL X, Y(*), Yprime(*), H, Wt(*), Rpar(*), Phi(Neq,*), Delta(*), &
-    E(*), Wm(*), Alpha(*), Beta(*), Gamma(*), Psi(*), Sigma(*), &
+    E(*), Wm(*), Alpha(*), Beta(*), Gama(*), Psi(*), Sigma(*), &
     Cj, Cjold, Hold, S, Hmin, Uround
   EXTERNAL :: RES, JAC
   !
@@ -183,7 +183,7 @@ SUBROUTINE SDASTP(X,Y,Yprime,Neq,RES,JAC,H,Wt,Jstart,Idid,Rpar,Ipar,Phi,&
     Beta(1) = 1.0E0
     Alpha(1) = 1.0E0
     temp1 = H
-    Gamma(1) = 0.0E0
+    Gama(1) = 0.0E0
     Sigma(1) = 1.0E0
     DO i = 2, kp1
       temp2 = Psi(i-1)
@@ -192,7 +192,7 @@ SUBROUTINE SDASTP(X,Y,Yprime,Neq,RES,JAC,H,Wt,Jstart,Idid,Rpar,Ipar,Phi,&
       temp1 = temp2 + H
       Alpha(i) = H/temp1
       Sigma(i) = (i-1)*Sigma(i-1)*Alpha(i)
-      Gamma(i) = Gamma(i-1) + Alpha(i-1)/H
+      Gama(i) = Gama(i-1) + Alpha(i-1)/H
     END DO
     Psi(kp1) = temp1
   END IF
@@ -250,7 +250,7 @@ SUBROUTINE SDASTP(X,Y,Yprime,Neq,RES,JAC,H,Wt,Jstart,Idid,Rpar,Ipar,Phi,&
     DO j = 2, kp1
       DO i = 1, Neq
         Y(i) = Y(i) + Phi(i,j)
-        Yprime(i) = Yprime(i) + Gamma(j)*Phi(i,j)
+        Yprime(i) = Yprime(i) + Gama(j)*Phi(i,j)
       END DO
     END DO
     pnorm = SDANRM(Neq,Y,Wt,Rpar,Ipar)

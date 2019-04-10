@@ -1,5 +1,5 @@
 !** WNLIT
-SUBROUTINE WNLIT(W,Mdw,M,N,L,Ipivot,Itype,H,Scale,Rnorm,Idope,Dope,Done)
+SUBROUTINE WNLIT(W,Mdw,M,N,L,Ipivot,Itype,H,Scalee,Rnorm,Idope,Dope,Done)
   IMPLICIT NONE
   !>
   !***
@@ -38,7 +38,7 @@ SUBROUTINE WNLIT(W,Mdw,M,N,L,Ipivot,Itype,H,Scale,Rnorm,Idope,Dope,Done)
   !   900328  Added TYPE section.  (WRB)
 
   INTEGER Idope(*), Ipivot(*), Itype(*), L, M, Mdw, N
-  REAL Dope(*), H(*), Rnorm, Scale(*), W(Mdw,*)
+  REAL Dope(*), H(*), Rnorm, Scalee(*), W(Mdw,*)
   LOGICAL Done
   !
   EXTERNAL :: H12, SCOPY, SROTM, SROTMG, SSCAL, SSWAP, WNLT1, WNLT3
@@ -75,7 +75,7 @@ SUBROUTINE WNLIT(W,Mdw,M,N,L,Ipivot,Itype,H,Scale,Rnorm,Idope,Dope,Done)
     !
     ir = i
     mend = M
-    CALL WNLT1(i,lend,M,ir,Mdw,recalc,imax,hbar,H,Scale,W)
+    CALL WNLT1(i,lend,M,ir,Mdw,recalc,imax,hbar,H,Scalee,W)
     !
     !        Update column SS and find pivot column.
     !
@@ -85,7 +85,7 @@ SUBROUTINE WNLIT(W,Mdw,M,N,L,Ipivot,Itype,H,Scale,Rnorm,Idope,Dope,Done)
       !        Perform column interchange.
       !        Test independence of incoming column.
       !
-      IF ( WNLT2(me,mend,ir,factor,tau,Scale,W(1,i)) ) THEN
+      IF ( WNLT2(me,mend,ir,factor,tau,Scalee,W(1,i)) ) THEN
         !
         !           Eliminate I-th column below diagonal using modified Givens
         !           transformations applied to (A B).
@@ -97,9 +97,9 @@ SUBROUTINE WNLIT(W,Mdw,M,N,L,Ipivot,Itype,H,Scale,Rnorm,Idope,Dope,Done)
           jp = j - 1
           IF ( j==me+1 ) THEN
             imax = me
-            amax = Scale(me)*W(me,i)**2
+            amax = Scalee(me)*W(me,i)**2
             DO jp = j - 1, i, -1
-              t = Scale(jp)*W(jp,i)**2
+              t = Scalee(jp)*W(jp,i)**2
               IF ( t>amax ) THEN
                 imax = jp
                 amax = t
@@ -109,7 +109,7 @@ SUBROUTINE WNLIT(W,Mdw,M,N,L,Ipivot,Itype,H,Scale,Rnorm,Idope,Dope,Done)
           END IF
           !
           IF ( W(j,i)/=0.E0 ) THEN
-            CALL SROTMG(Scale(jp),Scale(j),W(jp,i),W(j,i),sparam)
+            CALL SROTMG(Scalee(jp),Scalee(j),W(jp,i),W(j,i),sparam)
             W(j,i) = 0.E0
             CALL SROTM(N+1-i,W(jp,i+1),Mdw,W(j,i+1),Mdw,sparam)
           END IF
@@ -151,7 +151,7 @@ SUBROUTINE WNLIT(W,Mdw,M,N,L,Ipivot,Itype,H,Scale,Rnorm,Idope,Dope,Done)
       ir = krank + i - L
       lend = N
       mend = me
-      CALL WNLT1(i,lend,me,ir,Mdw,recalc,imax,hbar,H,Scale,W)
+      CALL WNLT1(i,lend,me,ir,Mdw,recalc,imax,hbar,H,Scalee,W)
       !
       !           Update col ss and find pivot col
       !
@@ -162,7 +162,7 @@ SUBROUTINE WNLIT(W,Mdw,M,N,L,Ipivot,Itype,H,Scale,Rnorm,Idope,Dope,Done)
       !
       DO j = me, ir + 1, -1
         IF ( W(j,i)/=0.E0 ) THEN
-          CALL SROTMG(Scale(j-1),Scale(j),W(j-1,i),W(j,i),sparam)
+          CALL SROTMG(Scalee(j-1),Scalee(j),W(j-1,i),W(j,i),sparam)
           W(j,i) = 0.E0
           CALL SROTM(N+1-i,W(j-1,i+1),Mdw,W(j,i+1),Mdw,sparam)
         END IF
@@ -172,13 +172,13 @@ SUBROUTINE WNLIT(W,Mdw,M,N,L,Ipivot,Itype,H,Scale,Rnorm,Idope,Dope,Done)
       !           Test independence of incoming column.
       !           Remove any redundant or dependent equality constraints.
       !
-      IF ( .NOT.WNLT2(me,mend,ir,factor,tau,Scale,W(1,i)) ) THEN
+      IF ( .NOT.WNLT2(me,mend,ir,factor,tau,Scalee,W(1,i)) ) THEN
         jj = ir
         DO ir = jj, me
           W(ir,1:N) = 0.E0
-          Rnorm = Rnorm + (Scale(ir)*W(ir,N+1)/alsq)*W(ir,N+1)
+          Rnorm = Rnorm + (Scalee(ir)*W(ir,N+1)/alsq)*W(ir,N+1)
           W(ir,N+1) = 0.E0
-          Scale(ir) = 1.E0
+          Scalee(ir) = 1.E0
           !
           !                 Reclassify the zeroed row as a least squares equation.
           !
@@ -212,7 +212,7 @@ SUBROUTINE WNLIT(W,Mdw,M,N,L,Ipivot,Itype,H,Scale,Rnorm,Idope,Dope,Done)
       ir = me + 1
       lend = L
       mend = M
-      CALL WNLT1(i,L,M,ir,Mdw,recalc,imax,hbar,H,Scale,W)
+      CALL WNLT1(i,L,M,ir,Mdw,recalc,imax,hbar,H,Scalee,W)
       !
       !           Update column SS and find pivot column.
       !
@@ -223,7 +223,7 @@ SUBROUTINE WNLIT(W,Mdw,M,N,L,Ipivot,Itype,H,Scale,Rnorm,Idope,Dope,Done)
       !
       DO j = M, ir + 1, -1
         IF ( W(j,i)/=0.E0 ) THEN
-          CALL SROTMG(Scale(j-1),Scale(j),W(j-1,i),W(j,i),sparam)
+          CALL SROTMG(Scalee(j-1),Scalee(j),W(j-1,i),W(j,i),sparam)
           W(j,i) = 0.E0
           CALL SROTM(N+1-i,W(j-1,i+1),Mdw,W(j,i+1),Mdw,sparam)
         END IF
@@ -233,13 +233,13 @@ SUBROUTINE WNLIT(W,Mdw,M,N,L,Ipivot,Itype,H,Scale,Rnorm,Idope,Dope,Done)
       !           If so, the column is dependent.
       !           Then check row norm test to be classified as independent.
       !
-      t = Scale(ir)*W(ir,i)**2
+      t = Scalee(ir)*W(ir,i)**2
       indep = t>(tau*eanorm)**2
       IF ( indep ) THEN
         rn = 0.E0
         DO i1 = ir, M
           DO j1 = i + 1, N
-            rn = MAX(rn,Scale(i1)*W(i1,j1)**2)
+            rn = MAX(rn,Scalee(i1)*W(i1,j1)**2)
           END DO
         END DO
         indep = t>rn*tau**2
@@ -251,15 +251,15 @@ SUBROUTINE WNLIT(W,Mdw,M,N,L,Ipivot,Itype,H,Scale,Rnorm,Idope,Dope,Done)
       !
       IF ( .NOT.indep ) EXIT
       CALL SSWAP(N+1,W(krank+1,1),Mdw,W(ir,1),Mdw)
-      CALL SSWAP(1,Scale(krank+1),1,Scale(ir),1)
+      CALL SSWAP(1,Scalee(krank+1),1,Scalee(ir),1)
       !
       !           Reclassify the least square equation as an equality
       !           constraint and rescale it.
       !
       Itype(ir) = 0
-      t = SQRT(Scale(krank+1))
+      t = SQRT(Scalee(krank+1))
       CALL SSCAL(N+1,t,W(krank+1,1),Mdw)
-      Scale(krank+1) = alsq
+      Scalee(krank+1) = alsq
       me = me + 1
       krank = krank + 1
     END DO

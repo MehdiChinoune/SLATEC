@@ -125,7 +125,7 @@ CONTAINS
     !
     !  DECLARATIONS.
     !
-    INTEGER i, ierr, iint, next(2), next2(2)
+    INTEGER i, ierr, iintt, next(2), next2(2)
     REAL(8) :: aed, aed2, aedmax, aedmin, aef, aef2, aefmax, aefmin, check(2), &
       checkf(2), checkd(2), d1, d2, dermax, dtrue, dx, eps1, eps2, f1, f2, fact, &
       fermax, floord, floorf, ftrue, machep, red, red2, redmax, redmin, &
@@ -141,7 +141,7 @@ CONTAINS
     !
     REAL(8), PARAMETER :: zero = 0.D0, one = 1.D0, four = 4.D0, ten = 10.D0
     REAL(8), PARAMETER :: small = 1.0D-10
-    INTEGER, PARAMETER :: nint = 3
+    INTEGER, PARAMETER :: nintt = 3
     REAL(8), PARAMETER :: left(3) = [ -1.5D0, 2.0D-10, 1.0D0 ]
     REAL(8), PARAMETER :: right(3) = [ 2.5D0, 3.0D-10, 1.0D+8 ]
     !
@@ -157,9 +157,9 @@ CONTAINS
     !
     !  CYCLE OVER INTERVALS.
     !
-    DO iint = 1, nint
-      x1 = left(iint)
-      x2 = right(iint)
+    DO iintt = 1, nintt
+      x1 = left(iintt)
+      x2 = right(iintt)
       !
       fact = MAX(SQRT(x2-x1),one)
       tol1 = eps1*fact
@@ -171,7 +171,7 @@ CONTAINS
       CALL DFDTRU(x2,f2,d2)
       !
       IF ( Kprint>=3 ) THEN
-        IF ( iint==1 ) WRITE (Lout,99002)
+        IF ( iintt==1 ) WRITE (Lout,99002)
         !
         ! FORMATS.
         !
@@ -397,9 +397,9 @@ CONTAINS
     !
     !  DEFINE RELATIVE ERROR WITH FLOOR.
     !
-    REAL(8) FUNCTION RERR(err,value,floor)
-      REAL(8), INTENT(IN) :: err, value, floor
-      RERR = err/MAX(ABS(value),floor)
+    REAL(8) FUNCTION RERR(err,value,floorr)
+      REAL(8), INTENT(IN) :: err, value, floorr
+      RERR = err/MAX(ABS(value),floorr)
     END FUNCTION RERR
   END SUBROUTINE DEVCHK
   !** DEVERK

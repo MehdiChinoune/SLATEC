@@ -64,7 +64,7 @@ SUBROUTINE DINTP(X,Y,Xout,Yout,Ypout,Neqn,Kold,Phi,Ivc,Iv,Kgi,Gi,Alpha,Og,&
 
   !
   INTEGER i, iq, Iv(10), Ivc, iw, j, jq, Kgi, Kold, kp1, kp2, l, m, Neqn
-  REAL(8) :: alp, Alpha(12), c(13), g(13), gdi, gdif, Gi(11), gamma, h, hi, &
+  REAL(8) :: alp, Alpha(12), c(13), g(13), gdi, gdif, Gi(11), gama, h, hi, &
     hmu, Og(13), Ow(12), Ox, Oy(*), Phi(Neqn,16), rmu, sigma, temp1, &
     temp2, temp3, w(13), X, xi, xim1, xiq, Xout, Y(*), Yout(*), Ypout(*)
   !
@@ -115,13 +115,13 @@ SUBROUTINE DINTP(X,Y,Xout,Yout,Ypout,Neqn,Kold,Phi,Ivc,Iv,Kgi,Gi,Alpha,Og,&
   IF ( Kold>=2 ) THEN
     DO i = 2, Kold
       alp = Alpha(i)
-      gamma = 1.0D0 + xim1*alp
+      gama = 1.0D0 + xim1*alp
       l = kp2 - i
       DO jq = 1, l
-        w(jq) = gamma*w(jq) - alp*w(jq+1)
+        w(jq) = gama*w(jq) - alp*w(jq+1)
       END DO
       g(i+1) = w(1)
-      c(i+1) = gamma*c(i)
+      c(i+1) = gama*c(i)
     END DO
   END IF
   !

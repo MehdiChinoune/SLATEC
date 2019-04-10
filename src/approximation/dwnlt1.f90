@@ -1,5 +1,5 @@
 !** DWNLT1
-SUBROUTINE DWNLT1(I,Lend,Mend,Ir,Mdw,Recalc,Imax,Hbar,H,Scale,W)
+SUBROUTINE DWNLT1(I,Lend,Mend,Ir,Mdw,Recalc,Imax,Hbar,H,Scalee,W)
   IMPLICIT NONE
   !>
   !***
@@ -29,7 +29,7 @@ SUBROUTINE DWNLT1(I,Lend,Mend,Ir,Mdw,Recalc,Imax,Hbar,H,Scale,W)
   !   900604  DP version created from SP version.  (RWC)
 
   INTEGER I, Imax, Ir, Lend, Mdw, Mend
-  REAL(8) :: H(*), Hbar, Scale(*), W(Mdw,*)
+  REAL(8) :: H(*), Hbar, Scalee(*), W(Mdw,*)
   LOGICAL Recalc
   !
   INTEGER, EXTERNAL :: IDAMAX
@@ -42,7 +42,7 @@ SUBROUTINE DWNLT1(I,Lend,Mend,Ir,Mdw,Recalc,Imax,Hbar,H,Scale,W)
     !        Update column SS=sum of squares.
     !
     DO j = I, Lend
-      H(j) = H(j) - Scale(Ir-1)*W(Ir-1,j)**2
+      H(j) = H(j) - Scalee(Ir-1)*W(Ir-1,j)**2
     END DO
     !
     !        Test for numerical accuracy.
@@ -57,7 +57,7 @@ SUBROUTINE DWNLT1(I,Lend,Mend,Ir,Mdw,Recalc,Imax,Hbar,H,Scale,W)
     DO j = I, Lend
       H(j) = 0.D0
       DO k = Ir, Mend
-        H(j) = H(j) + Scale(k)*W(k,j)**2
+        H(j) = H(j) + Scalee(k)*W(k,j)**2
       END DO
     END DO
     !

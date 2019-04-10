@@ -49,7 +49,7 @@ SUBROUTINE CDNTL(Eps,F,FA,Hmax,Hold,Impl,Jtask,Matdim,Maxord,Mint,Miter,&
     Maxord, Mint, Miter, Ml, Mntold, Mtrold, Mu, N, Nde, Nfe, Nq, Nwait
   COMPLEX A(Matdim,*), Fac(*), Save1(*), Save2(*), Y(*), Yh(N,*), Ywt(*)
   REAL El(13,12), Eps, H, Hmax, Hold, oldl0, Rc, Rh, Rmax, &
-    SCNRM2, sum, T, Tq(3,12), Trend, Uround
+    SCNRM2, summ, T, Tq(3,12), Trend, Uround
   INTEGER Ipvt(*)
   LOGICAL Convrg, Ier
   REAL, PARAMETER :: RMINIT = 10000.E0
@@ -157,8 +157,8 @@ SUBROUTINE CDNTL(Eps,F,FA,Hmax,Hold,Impl,Jtask,Matdim,Maxord,Mint,Miter,&
     DO i = 1, Nde
       Save1(i) = Save2(i)/MAX(1.E0,ABS(Ywt(i)))
     END DO
-    sum = SCNRM2(Nde,Save1,1)/SQRT(REAL(Nde))
-    IF ( sum>Eps/ABS(H) ) H = SIGN(Eps/sum,H)
+    summ = SCNRM2(Nde,Save1,1)/SQRT(REAL(Nde))
+    IF ( summ>Eps/ABS(H) ) H = SIGN(Eps/summ,H)
     DO i = 1, N
       Yh(i,2) = H*Save2(i)
     END DO

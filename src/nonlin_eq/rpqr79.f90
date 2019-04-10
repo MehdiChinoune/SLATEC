@@ -59,7 +59,7 @@ SUBROUTINE RPQR79(Ndeg,Coeff,Root,Ierr,Work)
   !   911010  Code reworked and simplified.  (RWC and WRB)
 
   INTEGER km1, kwend
-  REAL Coeff(*), Work(*), scale
+  REAL Coeff(*), Work(*), scalee
   COMPLEX Root(*)
   INTEGER Ndeg, Ierr, k, kh, kwr, kwi, kcol
   !* FIRST EXECUTABLE STATEMENT  RPQR79
@@ -81,7 +81,7 @@ SUBROUTINE RPQR79(Ndeg,Coeff,Root,Ierr,Work)
     RETURN
   END IF
   !
-  scale = 1.0E0/Coeff(1)
+  scalee = 1.0E0/Coeff(1)
   kh = 1
   kwr = kh + Ndeg*Ndeg
   kwi = kwr + Ndeg
@@ -93,7 +93,7 @@ SUBROUTINE RPQR79(Ndeg,Coeff,Root,Ierr,Work)
   !
   DO k = 1, Ndeg
     kcol = (k-1)*Ndeg + 1
-    Work(kcol) = -Coeff(k+1)*scale
+    Work(kcol) = -Coeff(k+1)*scalee
     IF ( k/=Ndeg ) Work(kcol+k) = 1.0E0
   END DO
   !

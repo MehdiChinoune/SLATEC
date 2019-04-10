@@ -1,5 +1,5 @@
 !** BALBAK
-SUBROUTINE BALBAK(Nm,N,Low,Igh,Scale,M,Z)
+SUBROUTINE BALBAK(Nm,N,Low,Igh,Scalee,M,Z)
   IMPLICIT NONE
   !>
   !***
@@ -75,7 +75,7 @@ SUBROUTINE BALBAK(Nm,N,Low,Igh,Scale,M,Z)
 
   !
   INTEGER i, j, k, M, N, ii, Nm, Igh, Low
-  REAL Scale(*), Z(Nm,*)
+  REAL Scalee(*), Z(Nm,*)
   REAL s
   !
   !* FIRST EXECUTABLE STATEMENT  BALBAK
@@ -83,7 +83,7 @@ SUBROUTINE BALBAK(Nm,N,Low,Igh,Scale,M,Z)
     IF ( Igh/=Low ) THEN
       !
       DO i = Low, Igh
-        s = Scale(i)
+        s = Scalee(i)
         !     .......... LEFT HAND EIGENVECTORS ARE BACK TRANSFORMED
         !                IF THE FOREGOING STATEMENT IS REPLACED BY
         !                S=1.0E0/SCALE(I). ..........
@@ -99,7 +99,7 @@ SUBROUTINE BALBAK(Nm,N,Low,Igh,Scale,M,Z)
       i = ii
       IF ( i<Low.OR.i>Igh ) THEN
         IF ( i<Low ) i = Low - ii
-        k = INT(Scale(i))
+        k = INT(Scalee(i))
         IF ( k/=i ) THEN
           !
           DO j = 1, M

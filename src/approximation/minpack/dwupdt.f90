@@ -1,5 +1,5 @@
 !** DWUPDT
-SUBROUTINE DWUPDT(N,R,Ldr,W,B,Alpha,Cos,Sin)
+SUBROUTINE DWUPDT(N,R,Ldr,W,B,Alpha,Coss,Sinn)
   IMPLICIT NONE
   !>
   !***
@@ -79,9 +79,9 @@ SUBROUTINE DWUPDT(N,R,Ldr,W,B,Alpha,Cos,Sin)
 
   INTEGER N, Ldr
   REAL(8) :: Alpha
-  REAL(8) :: R(Ldr,*), W(*), B(*), Cos(*), Sin(*)
+  REAL(8) :: R(Ldr,*), W(*), B(*), Coss(*), Sinn(*)
   INTEGER i, j, jm1
-  REAL(8) :: cotan, rowj, tan, temp
+  REAL(8) :: cotan, rowj, tann, temp
   REAL(8), PARAMETER :: one = 1.0D0, p5 = 5.0D-1, p25 = 2.5D-1, zero = 0.0D0
   !* FIRST EXECUTABLE STATEMENT  DWUPDT
   DO j = 1, N
@@ -93,32 +93,32 @@ SUBROUTINE DWUPDT(N,R,Ldr,W,B,Alpha,Cos,Sin)
     !
     IF ( jm1>=1 ) THEN
       DO i = 1, jm1
-        temp = Cos(i)*R(i,j) + Sin(i)*rowj
-        rowj = -Sin(i)*R(i,j) + Cos(i)*rowj
+        temp = Coss(i)*R(i,j) + Sinn(i)*rowj
+        rowj = -Sinn(i)*R(i,j) + Coss(i)*rowj
         R(i,j) = temp
       END DO
     END IF
     !
     !        DETERMINE A GIVENS ROTATION WHICH ELIMINATES W(J).
     !
-    Cos(j) = one
-    Sin(j) = zero
+    Coss(j) = one
+    Sinn(j) = zero
     IF ( rowj/=zero ) THEN
       IF ( ABS(R(j,j))>=ABS(rowj) ) THEN
-        tan = rowj/R(j,j)
-        Cos(j) = p5/SQRT(p25+p25*tan**2)
-        Sin(j) = Cos(j)*tan
+        tann = rowj/R(j,j)
+        Coss(j) = p5/SQRT(p25+p25*tann**2)
+        Sinn(j) = Coss(j)*tann
       ELSE
         cotan = R(j,j)/rowj
-        Sin(j) = p5/SQRT(p25+p25*cotan**2)
-        Cos(j) = Sin(j)*cotan
+        Sinn(j) = p5/SQRT(p25+p25*cotan**2)
+        Coss(j) = Sinn(j)*cotan
       END IF
       !
       !        APPLY THE CURRENT TRANSFORMATION TO R(J,J), B(J), AND ALPHA.
       !
-      R(j,j) = Cos(j)*R(j,j) + Sin(j)*rowj
-      temp = Cos(j)*B(j) + Sin(j)*Alpha
-      Alpha = -Sin(j)*B(j) + Cos(j)*Alpha
+      R(j,j) = Coss(j)*R(j,j) + Sinn(j)*rowj
+      temp = Coss(j)*B(j) + Sinn(j)*Alpha
+      Alpha = -Sinn(j)*B(j) + Coss(j)*Alpha
       B(j) = temp
     END IF
   END DO

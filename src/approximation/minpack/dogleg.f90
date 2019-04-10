@@ -74,7 +74,7 @@ SUBROUTINE DOGLEG(N,R,Lr,Diag,Qtb,Delta,X,Wa1,Wa2)
   REAL Delta
   REAL R(Lr), Diag(*), Qtb(*), X(*), Wa1(*), Wa2(*)
   INTEGER i, j, jj, jp1, k, l
-  REAL alpha, bnorm, epsmch, gnorm, qnorm, sgnorm, sum, temp
+  REAL alpha, bnorm, epsmch, gnorm, qnorm, sgnorm, summ, temp
   REAL R1MACH, ENORM
   REAL, PARAMETER :: one = 1.0E0, zero = 0.0E0
   !* FIRST EXECUTABLE STATEMENT  DOGLEG
@@ -88,10 +88,10 @@ SUBROUTINE DOGLEG(N,R,Lr,Diag,Qtb,Delta,X,Wa1,Wa2)
     jp1 = j + 1
     jj = jj - k
     l = jj + 1
-    sum = zero
+    summ = zero
     IF ( N>=jp1 ) THEN
       DO i = jp1, N
-        sum = sum + R(l)*X(i)
+        summ = summ + R(l)*X(i)
         l = l + 1
       END DO
     END IF
@@ -105,7 +105,7 @@ SUBROUTINE DOGLEG(N,R,Lr,Diag,Qtb,Delta,X,Wa1,Wa2)
       temp = epsmch*temp
       IF ( temp==zero ) temp = epsmch
     END IF
-    X(j) = (Qtb(j)-sum)/temp
+    X(j) = (Qtb(j)-summ)/temp
   END DO
   !
   !     TEST WHETHER THE GAUSS-NEWTON DIRECTION IS ACCEPTABLE.
@@ -146,12 +146,12 @@ SUBROUTINE DOGLEG(N,R,Lr,Diag,Qtb,Delta,X,Wa1,Wa2)
       !
       l = 1
       DO j = 1, N
-        sum = zero
+        summ = zero
         DO i = j, N
-          sum = sum + R(l)*Wa1(i)
+          summ = summ + R(l)*Wa1(i)
           l = l + 1
         END DO
-        Wa2(j) = sum
+        Wa2(j) = summ
       END DO
       temp = ENORM(N,Wa2)
       sgnorm = (gnorm/temp)/temp

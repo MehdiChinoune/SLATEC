@@ -130,7 +130,7 @@ PROGRAM SLPREP
   !
   !     Other declarations.
   !
-  INTEGER i, ib, ic, ichng, icom, id, ientry, ifind, ilen, inext, &
+  INTEGER i, ib, ic, ichng, icom, id, ientry, ifind, ileng, inext, &
     info, ipe, ips, ird, iwr, j, jj, mncl, mxlkw, mxlr, &
     mxnca, mxnkw, ncat, ncc, nclass, nerr, nextl, nkwd, &
     nstmts, ntcat, ntkwd, numr, numrr
@@ -362,8 +362,8 @@ PROGRAM SLPREP
         !       Initialize the pointer to point to the first category.
         !
         710 ic = 15
-        ilen = LENSTR(line)
-        IF ( ic>ilen ) THEN
+        ileng = LENSTR(line)
+        IF ( ic>ileng ) THEN
           msg = 'No category on CATEGORY record'
           nerr = 3
           EXIT
@@ -372,9 +372,9 @@ PROGRAM SLPREP
           !
           !       Get the offset location of the next delimiter.
           !
-          icom = INDEX(line(ic:ilen),',')
+          icom = INDEX(line(ic:ileng),',')
           IF ( icom==0 ) THEN
-            id = ilen + 1
+            id = ileng + 1
           ELSE
             id = ic + icom - 1
           END IF
@@ -428,7 +428,7 @@ PROGRAM SLPREP
             !
             !       Is this the last category on the current line?
             !
-            IF ( id>=ilen ) THEN
+            IF ( id>=ileng ) THEN
               !
               !         We are at the end of the line and need to read again.
               !
@@ -469,8 +469,8 @@ PROGRAM SLPREP
         !       Initialize the pointer to point to the first keyword phrase.
         !
         720  ic = 15
-        ilen = LENSTR(line)
-        IF ( ic>ilen ) THEN
+        ileng = LENSTR(line)
+        IF ( ic>ileng ) THEN
           msg = 'No keyword phrase on KEYWORD record'
           nerr = 4
           EXIT
@@ -479,9 +479,9 @@ PROGRAM SLPREP
           !
           !       Get the offset location of the next delimiter.
           !
-          icom = INDEX(line(ic:ilen),',')
+          icom = INDEX(line(ic:ileng),',')
           IF ( icom==0 ) THEN
-            id = ilen + 1
+            id = ileng + 1
           ELSE
             id = ic + icom - 1
           END IF
@@ -515,7 +515,7 @@ PROGRAM SLPREP
             mxnkw = MAX(mxnkw,nkwd)
             EXIT
           ELSE
-            IF ( id>=ilen ) THEN
+            IF ( id>=ileng ) THEN
               !
               !         We are at the end of the line and need to read again.
               !
@@ -681,8 +681,8 @@ PROGRAM SLPREP
   !
   WRITE (UNIT=LU19,FMT=99002) ntkwd
   DO j = 1, ntkwd
-    ilen = LENSTR(tkwd(j))
-    WRITE (UNIT=LU19,FMT=99001) tkwd(j)(1:ilen)
+    ileng = LENSTR(tkwd(j))
+    WRITE (UNIT=LU19,FMT=99001) tkwd(j)(1:ileng)
   END DO
   !
   !     We now need to compress the IPTRL and IPTRR tables and remove
@@ -1157,7 +1157,7 @@ SUBROUTINE PSCAT(Ecat,Ncat,Class,Mncl,Ncc,Tclass,Iptr,Jptr,Kptr,Istmt,Stmts,Nerr
   INTEGER Iptr(*), Jptr(*), Kptr(*)
   CHARACTER*(*) Class(*), Ecat(*), Stmts(*), Tclass(*)
   !     .. Local Scalars ..
-  INTEGER i, iclass, ilen, iper, istart, j, k, nlen
+  INTEGER i, iclass, ileng, iper, istart, j, k, nleng
   CHARACTER :: opart1, opart3, opart5, opart7, part1, part3, part5, part7
   CHARACTER(2) :: opart2, opart4, opart6, part2, part4, part6
   !     .. External Functions ..
@@ -1166,7 +1166,7 @@ SUBROUTINE PSCAT(Ecat,Ncat,Class,Mncl,Ncc,Tclass,Iptr,Jptr,Kptr,Istmt,Stmts,Nerr
   !     .. Intrinsic Functions ..
   INTRINSIC INDEX
   !     .. Data statements ..
-  INTEGER, PARAMETER :: size(7) = [ 1, 3, 4, 6, 7, 9, 10 ]
+  INTEGER, PARAMETER :: sizee(7) = [ 1, 3, 4, 6, 7, 9, 10 ]
   !* FIRST EXECUTABLE STATEMENT  PSCAT
   Nerr = 0
   Ncc = 0
@@ -1294,14 +1294,14 @@ SUBROUTINE PSCAT(Ecat,Ncat,Class,Mncl,Ncc,Tclass,Iptr,Jptr,Kptr,Istmt,Stmts,Nerr
     istart = 1
     DO
       DO i = istart, Ncc
-        ilen = LENSTR(Tclass(i))
-        IF ( ilen==size(j) ) THEN
+        ileng = LENSTR(Tclass(i))
+        IF ( ileng==sizee(j) ) THEN
           DO k = i + 1, Ncc
-            nlen = LENSTR(Tclass(k))
-            IF ( ilen==nlen ) THEN
+            nleng = LENSTR(Tclass(k))
+            IF ( ileng==nleng ) THEN
               IF ( j==1 ) THEN
                 Iptr(i) = k
-              ELSEIF ( Tclass(i)(1:size(j-1))==Tclass(k)(1:size(j-1)) ) THEN
+              ELSEIF ( Tclass(i)(1:sizee(j-1))==Tclass(k)(1:sizee(j-1)) ) THEN
                 Iptr(i) = k
               ELSE
                 Iptr(i) = 0
@@ -1318,11 +1318,11 @@ SUBROUTINE PSCAT(Ecat,Ncat,Class,Mncl,Ncc,Tclass,Iptr,Jptr,Kptr,Istmt,Stmts,Nerr
   END DO
   DO j = 1, 7
     DO i = 1, Ncc
-      ilen = LENSTR(Tclass(i))
-      IF ( ilen==size(j) ) THEN
-        nlen = LENSTR(Tclass(i+1))
-        IF ( ilen<nlen ) THEN
-          IF ( Tclass(i)(1:size(j))==Tclass(i+1)(1:size(j)) ) Jptr(i) = i + 1
+      ileng = LENSTR(Tclass(i))
+      IF ( ileng==sizee(j) ) THEN
+        nleng = LENSTR(Tclass(i+1))
+        IF ( ileng<nleng ) THEN
+          IF ( Tclass(i)(1:sizee(j))==Tclass(i+1)(1:sizee(j)) ) Jptr(i) = i + 1
         END IF
       END IF
     END DO

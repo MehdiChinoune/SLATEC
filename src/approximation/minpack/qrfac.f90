@@ -93,7 +93,7 @@ SUBROUTINE QRFAC(M,N,A,Lda,Pivot,Ipvt,Lipvt,Sigma,Acnorm,Wa)
   LOGICAL Pivot
   REAL A(Lda,*), Sigma(*), Acnorm(*), Wa(*)
   INTEGER i, j, jp1, k, kmax, minmn
-  REAL ajnorm, epsmch, sum, temp
+  REAL ajnorm, epsmch, summ, temp
   REAL R1MACH, ENORM
   REAL, PARAMETER :: one = 1.0E0, p05 = 5.0E-2, zero = 0.0E0
   !* FIRST EXECUTABLE STATEMENT  QRFAC
@@ -151,11 +151,11 @@ SUBROUTINE QRFAC(M,N,A,Lda,Pivot,Ipvt,Lipvt,Sigma,Acnorm,Wa)
       jp1 = j + 1
       IF ( N>=jp1 ) THEN
         DO k = jp1, N
-          sum = zero
+          summ = zero
           DO i = j, M
-            sum = sum + A(i,j)*A(i,k)
+            summ = summ + A(i,j)*A(i,k)
           END DO
-          temp = sum/A(j,j)
+          temp = summ/A(j,j)
           DO i = j, M
             A(i,k) = A(i,k) - temp*A(i,j)
           END DO

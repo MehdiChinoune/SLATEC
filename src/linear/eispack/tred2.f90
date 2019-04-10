@@ -77,7 +77,7 @@ SUBROUTINE TRED2(Nm,N,A,D,E,Z)
   !
   INTEGER i, j, k, l, N, ii, Nm, jp1
   REAL A(Nm,*), D(*), E(*), Z(Nm,*)
-  REAL f, g, h, hh, scale
+  REAL f, g, h, hh, scalee
   !
   !* FIRST EXECUTABLE STATEMENT  TRED2
   DO i = 1, N
@@ -93,25 +93,25 @@ SUBROUTINE TRED2(Nm,N,A,D,E,Z)
       i = N + 2 - ii
       l = i - 1
       h = 0.0E0
-      scale = 0.0E0
+      scalee = 0.0E0
       IF ( l<2 ) THEN
         E(i) = Z(i,l)
       ELSE
         !     .......... SCALE ROW (ALGOL TOL THEN NOT NEEDED) ..........
         DO k = 1, l
-          scale = scale + ABS(Z(i,k))
+          scalee = scalee + ABS(Z(i,k))
         END DO
         !
-        IF ( scale/=0.0E0 ) THEN
+        IF ( scalee/=0.0E0 ) THEN
           !
           DO k = 1, l
-            Z(i,k) = Z(i,k)/scale
+            Z(i,k) = Z(i,k)/scalee
             h = h + Z(i,k)*Z(i,k)
           END DO
           !
           f = Z(i,l)
           g = -SIGN(SQRT(h),f)
-          E(i) = scale*g
+          E(i) = scalee*g
           h = h - f*g
           Z(i,l) = f - g
           f = 0.0E0

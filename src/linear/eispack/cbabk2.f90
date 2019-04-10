@@ -1,5 +1,5 @@
 !** CBABK2
-SUBROUTINE CBABK2(Nm,N,Low,Igh,Scale,M,Zr,Zi)
+SUBROUTINE CBABK2(Nm,N,Low,Igh,Scalee,M,Zr,Zi)
   IMPLICIT NONE
   !>
   !***
@@ -77,7 +77,7 @@ SUBROUTINE CBABK2(Nm,N,Low,Igh,Scale,M,Zr,Zi)
 
   !
   INTEGER i, j, k, M, N, ii, Nm, Igh, Low
-  REAL Scale(*), Zr(Nm,*), Zi(Nm,*)
+  REAL Scalee(*), Zr(Nm,*), Zi(Nm,*)
   REAL s
   !
   !* FIRST EXECUTABLE STATEMENT  CBABK2
@@ -85,7 +85,7 @@ SUBROUTINE CBABK2(Nm,N,Low,Igh,Scale,M,Zr,Zi)
     IF ( Igh/=Low ) THEN
       !
       DO i = Low, Igh
-        s = Scale(i)
+        s = Scalee(i)
         !     .......... LEFT HAND EIGENVECTORS ARE BACK TRANSFORMED
         !                IF THE FOREGOING STATEMENT IS REPLACED BY
         !                S=1.0E0/SCALE(I). ..........
@@ -102,7 +102,7 @@ SUBROUTINE CBABK2(Nm,N,Low,Igh,Scale,M,Zr,Zi)
       i = ii
       IF ( i<Low.OR.i>Igh ) THEN
         IF ( i<Low ) i = Low - ii
-        k = INT(Scale(i))
+        k = INT(Scalee(i))
         IF ( k/=i ) THEN
           !
           DO j = 1, M

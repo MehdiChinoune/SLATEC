@@ -124,7 +124,7 @@ SUBROUTINE BQR(Nm,N,Mb,A,T,R,Ierr,Nv,Rv)
   INTEGER i, j, k, l, m, N, ii, ik, jk, jm, kj, kk, km, ll, Mb, mk, mn, mz
   INTEGER m1, m2, m3, m4, ni, Nm, Nv, its, kj1, m21, m31, Ierr, imult
   REAL A(Nm,*), Rv(*)
-  REAL f, g, q, R, s, T, scale
+  REAL f, g, q, R, s, T, scalee
   REAL PYTHAG
   !
   !* FIRST EXECUTABLE STATEMENT  BQR
@@ -248,19 +248,19 @@ SUBROUTINE BQR(Nm,N,Mb,A,T,R,Ierr,Nv,Rv)
           f = Rv(m21)
           s = 0.0E0
           Rv(m4) = 0.0E0
-          scale = 0.0E0
+          scalee = 0.0E0
           !
           DO k = m21, m3
-            scale = scale + ABS(Rv(k))
+            scalee = scalee + ABS(Rv(k))
           END DO
           !
-          IF ( scale/=0.0E0 ) THEN
+          IF ( scalee/=0.0E0 ) THEN
             !
             DO k = m21, m3
-              s = s + (Rv(k)/scale)**2
+              s = s + (Rv(k)/scalee)**2
             END DO
             !
-            s = scale*scale*s
+            s = scalee*scalee*s
             g = -SIGN(SQRT(s),f)
             Rv(m21) = g
             Rv(m4) = s - f*g

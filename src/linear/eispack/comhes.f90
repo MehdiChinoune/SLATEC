@@ -1,5 +1,5 @@
 !** COMHES
-SUBROUTINE COMHES(Nm,N,Low,Igh,Ar,Ai,Int)
+SUBROUTINE COMHES(Nm,N,Low,Igh,Ar,Ai,Intt)
   IMPLICIT NONE
   !>
   !***
@@ -82,7 +82,7 @@ SUBROUTINE COMHES(Nm,N,Low,Igh,Ar,Ai,Int)
   INTEGER i, j, m, N, la, Nm, Igh, kp1, Low, mm1, mp1
   REAL Ar(Nm,*), Ai(Nm,*)
   REAL xr, xi, yr, yi
-  INTEGER Int(*)
+  INTEGER Intt(*)
   !
   !* FIRST EXECUTABLE STATEMENT  COMHES
   la = Igh - 1
@@ -103,7 +103,7 @@ SUBROUTINE COMHES(Nm,N,Low,Igh,Ar,Ai,Int)
         END IF
       END DO
       !
-      Int(m) = i
+      Intt(m) = i
       IF ( i/=m ) THEN
         !     .......... INTERCHANGE ROWS AND COLUMNS OF AR AND AI ..........
         DO j = mm1, N

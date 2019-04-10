@@ -78,7 +78,7 @@ SUBROUTINE TRED3(N,Nv,A,D,E,E2)
   !
   INTEGER i, j, k, l, N, ii, iz, jk, Nv
   REAL A(*), D(*), E(*), E2(*)
-  REAL f, g, h, hh, scale
+  REAL f, g, h, hh, scalee
   !
   !     .......... FOR I=N STEP -1 UNTIL 1 DO -- ..........
   !* FIRST EXECUTABLE STATEMENT  TRED3
@@ -87,29 +87,29 @@ SUBROUTINE TRED3(N,Nv,A,D,E,E2)
     l = i - 1
     iz = (i*l)/2
     h = 0.0E0
-    scale = 0.0E0
+    scalee = 0.0E0
     IF ( l>=1 ) THEN
       !     .......... SCALE ROW (ALGOL TOL THEN NOT NEEDED) ..........
       DO k = 1, l
         iz = iz + 1
         D(k) = A(iz)
-        scale = scale + ABS(D(k))
+        scalee = scalee + ABS(D(k))
       END DO
       !
-      IF ( scale/=0.0E0 ) THEN
+      IF ( scalee/=0.0E0 ) THEN
         !
         DO k = 1, l
-          D(k) = D(k)/scale
+          D(k) = D(k)/scalee
           h = h + D(k)*D(k)
         END DO
         !
-        E2(i) = scale*scale*h
+        E2(i) = scalee*scalee*h
         f = D(l)
         g = -SIGN(SQRT(h),f)
-        E(i) = scale*g
+        E(i) = scalee*g
         h = h - f*g
         D(l) = f - g
-        A(iz) = scale*D(l)
+        A(iz) = scalee*D(l)
         IF ( l/=1 ) THEN
           f = 0.0E0
           !
@@ -148,7 +148,7 @@ SUBROUTINE TRED3(N,Nv,A,D,E,E2)
     E2(i) = 0.0E0
     !
     50  D(i) = A(iz+1)
-    A(iz+1) = scale*SQRT(h)
+    A(iz+1) = scalee*SQRT(h)
   END DO
   !
 END SUBROUTINE TRED3

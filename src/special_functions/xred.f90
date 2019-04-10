@@ -1,6 +1,6 @@
 !** XRED
 SUBROUTINE XRED(X,Ix,Ierror)
-  USE XBLK, ONLY: RADix, RAD2l, L2
+  USE XBLK, ONLY: RADixx, RAD2l, L2
   IMPLICIT NONE
   !>
   !***
@@ -70,7 +70,7 @@ SUBROUTINE XRED(X,Ix,Ierror)
           xa = xa/RAD2l
           ixa1 = ixa1 + 1
         END DO
-        xa = xa*RADix**ixa2
+        xa = xa*RADixx**ixa2
         IF ( ixa1/=0 ) THEN
           DO i = 1, ixa1
             IF ( xa>1.0 ) RETURN
@@ -82,7 +82,7 @@ SUBROUTINE XRED(X,Ix,Ierror)
           xa = xa*RAD2l
           ixa1 = ixa1 + 1
         END DO
-        xa = xa/RADix**ixa2
+        xa = xa/RADixx**ixa2
         IF ( ixa1/=0 ) THEN
           DO i = 1, ixa1
             IF ( xa<1.0 ) RETURN

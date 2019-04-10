@@ -165,7 +165,7 @@ SUBROUTINE DPCHSP(Ic,Vc,N,X,F,D,Incfd,Wk,Nwk,Ierr)
   !
   !  DECLARE LOCAL VARIABLES.
   !
-  INTEGER ibeg, iend, index, j, nm1
+  INTEGER ibeg, iend, indexx, j, nm1
   REAL(8) :: g, stemp(3), xtemp(4)
   REAL(8) :: DPCHDF
   !
@@ -235,10 +235,10 @@ SUBROUTINE DPCHSP(Ic,Vc,N,X,F,D,Incfd,Wk,Nwk,Ierr)
         ELSEIF ( ibeg>2 ) THEN
           !        PICK UP FIRST IBEG POINTS, IN REVERSE ORDER.
           DO j = 1, ibeg
-            index = ibeg - j + 1
+            indexx = ibeg - j + 1
             !           INDEX RUNS FROM IBEG DOWN TO 1.
-            xtemp(j) = X(index)
-            IF ( j<ibeg ) stemp(j) = Wk(2,index)
+            xtemp(j) = X(indexx)
+            IF ( j<ibeg ) stemp(j) = Wk(2,indexx)
           END DO
           !                 --------------------------------
           D(1,1) = DPCHDF(ibeg,xtemp,stemp,Ierr)
@@ -252,10 +252,10 @@ SUBROUTINE DPCHSP(Ic,Vc,N,X,F,D,Incfd,Wk,Nwk,Ierr)
         ELSEIF ( iend>2 ) THEN
           !        PICK UP LAST IEND POINTS.
           DO j = 1, iend
-            index = N - iend + j
+            indexx = N - iend + j
             !           INDEX RUNS FROM N+1-IEND UP TO N.
-            xtemp(j) = X(index)
-            IF ( j<iend ) stemp(j) = Wk(2,index+1)
+            xtemp(j) = X(indexx)
+            IF ( j<iend ) stemp(j) = Wk(2,indexx+1)
           END DO
           !                 --------------------------------
           D(1,N) = DPCHDF(iend,xtemp,stemp,Ierr)

@@ -28,7 +28,7 @@ SUBROUTINE HWSCS1(Intl,Ts,Tf,M,Mbdcnd,Bdts,Bdtf,Rs,Rf,N,Nbdcnd,Bdrs,Bdrf,&
   REAL Am(*), An(*), ar, at, Bdrf(*), Bdrs(*), Bdtf(*), Bdts(*), Bm(*), &
     Bmh(*), Bn(*), Cm(*), Cn(*), cr, ct, czr, dr, dr2, dth, Elmbda
   REAL F(Idimf,*), hdr, hdth, hne, Pertrb, R(*), r2, Rf, rf2, Rs, rs2, rsq, &
-    S(*), sdts, Sint(*), sum, t1, tdr, tdt, Tf
+    S(*), sdts, Sint(*), summ, t1, tdr, tdt, Tf
   REAL theta, Ts, W(*), wrf, wrs, wrz, wtf, wtnm, wts, xp, xps, yhld, yph, yps
   INTEGER mp1, munk, N, Nbdcnd, np, np1, nunk
   !* FIRST EXECUTABLE STATEMENT  HWSCS1
@@ -158,21 +158,21 @@ SUBROUTINE HWSCS1(Intl,Ts,Tf,M,Mbdcnd,Bdts,Bdtf,Rs,Rf,N,Nbdcnd,Bdrs,Bdrf,&
         CASE DEFAULT
           IF ( Elmbda>=0 ) THEN
             ising = 1
-            sum = wts*wrs + wts*wrf + wtf*wrs + wtf*wrf
-            IF ( ictr/=0 ) sum = sum + wrz
+            summ = wts*wrs + wts*wrf + wtf*wrs + wtf*wrf
+            IF ( ictr/=0 ) summ = summ + wrz
             DO j = jrsp, jrfm
               r2 = R(j)**2
               DO i = itsp, itfm
-                sum = sum + r2*Sint(i)
+                summ = summ + r2*Sint(i)
               END DO
             END DO
             DO j = jrsp, jrfm
-              sum = sum + (wts+wtf)*R(j)**2
+              summ = summ + (wts+wtf)*R(j)**2
             END DO
             DO i = itsp, itfm
-              sum = sum + (wrs+wrf)*Sint(i)
+              summ = summ + (wrs+wrf)*Sint(i)
             END DO
-            hne = sum
+            hne = summ
           END IF
       END SELECT
   END SELECT
@@ -242,22 +242,22 @@ SUBROUTINE HWSCS1(Intl,Ts,Tf,M,Mbdcnd,Bdts,Bdtf,Rs,Rf,N,Nbdcnd,Bdrs,Bdrf,&
   END SELECT
   Pertrb = 0.
   IF ( ising/=0 ) THEN
-    sum = wts*wrs*F(its,jrs) + wts*wrf*F(its,jrf) + wtf*wrs*F(itf,jrs)&
+    summ = wts*wrs*F(its,jrs) + wts*wrf*F(its,jrf) + wtf*wrs*F(itf,jrs)&
       + wtf*wrf*F(itf,jrf)
-    IF ( ictr/=0 ) sum = sum + wrz*F(its,1)
+    IF ( ictr/=0 ) summ = summ + wrz*F(its,1)
     DO j = jrsp, jrfm
       r2 = R(j)**2
       DO i = itsp, itfm
-        sum = sum + r2*Sint(i)*F(i,j)
+        summ = summ + r2*Sint(i)*F(i,j)
       END DO
     END DO
     DO j = jrsp, jrfm
-      sum = sum + R(j)**2*(wts*F(its,j)+wtf*F(itf,j))
+      summ = summ + R(j)**2*(wts*F(its,j)+wtf*F(itf,j))
     END DO
     DO i = itsp, itfm
-      sum = sum + Sint(i)*(wrs*F(i,jrs)+wrf*F(i,jrf))
+      summ = summ + Sint(i)*(wrs*F(i,jrs)+wrf*F(i,jrf))
     END DO
-    Pertrb = sum/hne
+    Pertrb = summ/hne
     DO j = 1, np1
       DO i = 1, mp1
         F(i,j) = F(i,j) - Pertrb
@@ -289,11 +289,11 @@ SUBROUTINE HWSCS1(Intl,Ts,Tf,M,Mbdcnd,Bdts,Bdtf,Rs,Rf,N,Nbdcnd,Bdrs,Bdrf,&
       xp = 0.
       IF ( ictr/=0 ) THEN
         IF ( ising==0 ) THEN
-          sum = wts*F(its,2) + wtf*F(itf,2)
+          summ = wts*F(its,2) + wtf*F(itf,2)
           DO i = itsp, itfm
-            sum = sum + Sint(i)*F(i,2)
+            summ = summ + Sint(i)*F(i,2)
           END DO
-          yph = czr*sum
+          yph = czr*summ
           xp = (F(its,1)-yph)/yps
           DO j = jrs, jrf
             xps = xp*S(j)

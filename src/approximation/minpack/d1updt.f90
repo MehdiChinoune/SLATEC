@@ -82,7 +82,7 @@ SUBROUTINE D1UPDT(M,N,S,Ls,U,V,W,Sing)
 
   REAL(8) :: D1MACH
   INTEGER i, j, jj, l, Ls, M, N, nm1, nmj
-  REAL(8) :: cos, cotan, giant, S(*), sin, tan, tau, temp, U(*), V(*), W(*)
+  REAL(8) :: coss, cotan, giant, S(*), sinn, tann, tau, temp, U(*), V(*), W(*)
   LOGICAL Sing
   REAL(8), PARAMETER :: one = 1.0D0, p5 = 5.0D-1, p25 = 2.5D-1, zero = 0.0D0
   !
@@ -118,30 +118,30 @@ SUBROUTINE D1UPDT(M,N,S,Ls,U,V,W,Sing)
         !        J-TH ELEMENT OF V.
         !
         IF ( ABS(V(N))>=ABS(V(j)) ) THEN
-          tan = V(j)/V(N)
-          cos = p5/SQRT(p25+p25*tan**2)
-          sin = cos*tan
-          tau = sin
+          tann = V(j)/V(N)
+          coss = p5/SQRT(p25+p25*tann**2)
+          sinn = coss*tann
+          tau = sinn
         ELSE
           cotan = V(N)/V(j)
-          sin = p5/SQRT(p25+p25*cotan**2)
-          cos = sin*cotan
+          sinn = p5/SQRT(p25+p25*cotan**2)
+          coss = sinn*cotan
           tau = one
-          IF ( ABS(cos)*giant>one ) tau = one/cos
+          IF ( ABS(coss)*giant>one ) tau = one/coss
         END IF
         !
         !        APPLY THE TRANSFORMATION TO V AND STORE THE INFORMATION
         !        NECESSARY TO RECOVER THE GIVENS ROTATION.
         !
-        V(N) = sin*V(j) + cos*V(N)
+        V(N) = sinn*V(j) + coss*V(N)
         V(j) = tau
         !
         !        APPLY THE TRANSFORMATION TO S AND EXTEND THE SPIKE IN W.
         !
         l = jj
         DO i = j, M
-          temp = cos*S(l) - sin*W(i)
-          W(i) = sin*S(l) + cos*W(i)
+          temp = coss*S(l) - sinn*W(i)
+          W(i) = sinn*S(l) + coss*W(i)
           S(l) = temp
           l = l + 1
         END DO
@@ -166,24 +166,24 @@ SUBROUTINE D1UPDT(M,N,S,Ls,U,V,W,Sing)
         !        J-TH ELEMENT OF THE SPIKE.
         !
         IF ( ABS(S(jj))>=ABS(W(j)) ) THEN
-          tan = W(j)/S(jj)
-          cos = p5/SQRT(p25+p25*tan**2)
-          sin = cos*tan
-          tau = sin
+          tann = W(j)/S(jj)
+          coss = p5/SQRT(p25+p25*tann**2)
+          sinn = coss*tann
+          tau = sinn
         ELSE
           cotan = S(jj)/W(j)
-          sin = p5/SQRT(p25+p25*cotan**2)
-          cos = sin*cotan
+          sinn = p5/SQRT(p25+p25*cotan**2)
+          coss = sinn*cotan
           tau = one
-          IF ( ABS(cos)*giant>one ) tau = one/cos
+          IF ( ABS(coss)*giant>one ) tau = one/coss
         END IF
         !
         !        APPLY THE TRANSFORMATION TO S AND REDUCE THE SPIKE IN W.
         !
         l = jj
         DO i = j, M
-          temp = cos*S(l) + sin*W(i)
-          W(i) = -sin*S(l) + cos*W(i)
+          temp = coss*S(l) + sinn*W(i)
+          W(i) = -sinn*S(l) + coss*W(i)
           S(l) = temp
           l = l + 1
         END DO

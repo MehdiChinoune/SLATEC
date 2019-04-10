@@ -73,7 +73,7 @@ SUBROUTINE DDOGLG(N,R,Lr,Diag,Qtb,Delta,X,Wa1,Wa2)
   REAL(8) :: D1MACH, DENORM
   INTEGER i, j, jj, jp1, k, l, Lr, N
   REAL(8) :: alpha, bnorm, Delta, Diag(*), epsmch, gnorm, qnorm, Qtb(*), R(*), &
-    sgnorm, sum, temp, Wa1(*), Wa2(*), X(*)
+    sgnorm, summ, temp, Wa1(*), Wa2(*), X(*)
   REAL(8), PARAMETER :: one = 1.0D0, zero = 0.0D0
   !
   !     EPSMCH IS THE MACHINE PRECISION.
@@ -89,10 +89,10 @@ SUBROUTINE DDOGLG(N,R,Lr,Diag,Qtb,Delta,X,Wa1,Wa2)
     jp1 = j + 1
     jj = jj - k
     l = jj + 1
-    sum = zero
+    summ = zero
     IF ( N>=jp1 ) THEN
       DO i = jp1, N
-        sum = sum + R(l)*X(i)
+        summ = summ + R(l)*X(i)
         l = l + 1
       END DO
     END IF
@@ -106,7 +106,7 @@ SUBROUTINE DDOGLG(N,R,Lr,Diag,Qtb,Delta,X,Wa1,Wa2)
       temp = epsmch*temp
       IF ( temp==zero ) temp = epsmch
     END IF
-    X(j) = (Qtb(j)-sum)/temp
+    X(j) = (Qtb(j)-summ)/temp
   END DO
   !
   !     TEST WHETHER THE GAUSS-NEWTON DIRECTION IS ACCEPTABLE.
@@ -147,12 +147,12 @@ SUBROUTINE DDOGLG(N,R,Lr,Diag,Qtb,Delta,X,Wa1,Wa2)
       END DO
       l = 1
       DO j = 1, N
-        sum = zero
+        summ = zero
         DO i = j, N
-          sum = sum + R(l)*Wa1(i)
+          summ = summ + R(l)*Wa1(i)
           l = l + 1
         END DO
-        Wa2(j) = sum
+        Wa2(j) = summ
       END DO
       temp = DENORM(N,Wa2)
       sgnorm = (gnorm/temp)/temp

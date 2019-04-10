@@ -1,5 +1,5 @@
 !** CBAL
-SUBROUTINE CBAL(Nm,N,Ar,Ai,Low,Igh,Scale)
+SUBROUTINE CBAL(Nm,N,Ar,Ai,Low,Igh,Scalee)
   IMPLICIT NONE
   !>
   !***
@@ -55,7 +55,7 @@ SUBROUTINE CBAL(Nm,N,Ar,Ai,Low,Igh,Scale)
   !          dimensioned SCALE(N).
   !
   !     Suppose that the principal submatrix in rows LOW through IGH
-  !     has been balanced, that P(J) denotes the index interchanged
+  !     has been balanced, that P(J) denotes the indexx interchanged
   !     with J during the permutation step, and that the elements
   !     of the diagonal matrix used are denoted by D(I,J).  Then
   !        SCALE(J) = P(J),    for J = 1,...,LOW-1
@@ -91,23 +91,23 @@ SUBROUTINE CBAL(Nm,N,Ar,Ai,Low,Igh,Scale)
 
   !
   INTEGER i, j, k, l, m, N, jj, Nm, Igh, Low, iexc
-  REAL Ar(Nm,*), Ai(Nm,*), Scale(*)
-  REAL c, f, g, r, s, b2, radix
+  REAL Ar(Nm,*), Ai(Nm,*), Scalee(*)
+  REAL c, f, g, r, s, b2, radixx
   LOGICAL noconv
   !
   !     THE FOLLOWING PORTABLE VALUE OF RADIX WORKS WELL ENOUGH
   !     FOR ALL MACHINES WHOSE BASE IS A POWER OF TWO.
   !
   !* FIRST EXECUTABLE STATEMENT  CBAL
-  radix = 16
+  radixx = 16
   !
-  b2 = radix*radix
+  b2 = radixx*radixx
   k = 1
   l = N
   GOTO 200
   !     .......... IN-LINE PROCEDURE FOR ROW AND
   !                COLUMN EXCHANGE ..........
-  100  Scale(m) = j
+  100  Scalee(m) = j
   IF ( j/=m ) THEN
     !
     DO i = 1, l
@@ -174,7 +174,7 @@ SUBROUTINE CBAL(Nm,N,Ar,Ai,Low,Igh,Scale)
   END DO
   !     .......... NOW BALANCE THE SUBMATRIX IN ROWS K TO L ..........
   DO i = k, l
-    Scale(i) = 1.0E0
+    Scalee(i) = 1.0E0
   END DO
   DO
     !     .......... ITERATIVE LOOP FOR NORM REDUCTION ..........
@@ -192,22 +192,22 @@ SUBROUTINE CBAL(Nm,N,Ar,Ai,Low,Igh,Scale)
       END DO
       !     .......... GUARD AGAINST ZERO C OR R DUE TO UNDERFLOW ..........
       IF ( c/=0.0E0.AND.r/=0.0E0 ) THEN
-        g = r/radix
+        g = r/radixx
         f = 1.0E0
         s = c + r
         DO WHILE ( c<g )
-          f = f*radix
+          f = f*radixx
           c = c*b2
         END DO
-        g = r*radix
+        g = r*radixx
         DO WHILE ( c>=g )
-          f = f/radix
+          f = f/radixx
           c = c/b2
         END DO
         !     .......... NOW BALANCE ..........
         IF ( (c+r)/f<0.95E0*s ) THEN
           g = 1.0E0/f
-          Scale(i) = Scale(i)*f
+          Scalee(i) = Scalee(i)*f
           noconv = .TRUE.
           !
           DO j = k, N

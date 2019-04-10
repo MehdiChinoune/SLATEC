@@ -136,7 +136,7 @@ SUBROUTINE SCHDD(R,Ldr,P,X,Z,Ldz,Nz,Y,Rho,C,S,Info)
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
-  REAL scale
+  REAL scalee
   INTEGER Ldr, P, Ldz, Nz, Info
   REAL R(Ldr,*), X(*), Z(Ldz,*), Y(*), S(*)
   REAL Rho(*), C(*)
@@ -165,13 +165,13 @@ SUBROUTINE SCHDD(R,Ldr,P,X,Z,Ldz,Nz,Y,Rho,C,S,Info)
     !
     DO ii = 1, P
       i = P - ii + 1
-      scale = alpha + ABS(S(i))
-      a = alpha/scale
-      b = S(i)/scale
+      scalee = alpha + ABS(S(i))
+      a = alpha/scalee
+      b = S(i)/scalee
       norm = SQRT(a**2+b**2)
       C(i) = a/norm
       S(i) = b/norm
-      alpha = scale*norm
+      alpha = scalee*norm
     END DO
     !
     !        APPLY THE TRANSFORMATIONS TO R.

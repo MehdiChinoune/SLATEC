@@ -1,5 +1,5 @@
 !** ELTRAN
-SUBROUTINE ELTRAN(Nm,N,Low,Igh,A,Int,Z)
+SUBROUTINE ELTRAN(Nm,N,Low,Igh,A,Intt,Z)
   IMPLICIT NONE
   !>
   !***
@@ -77,7 +77,7 @@ SUBROUTINE ELTRAN(Nm,N,Low,Igh,A,Int,Z)
   !
   INTEGER i, j, N, kl, mm, mp, Nm, Igh, Low, mp1
   REAL A(Nm,*), Z(Nm,*)
-  INTEGER Int(*)
+  INTEGER Intt(*)
   !
   !* FIRST EXECUTABLE STATEMENT  ELTRAN
   DO i = 1, N
@@ -100,7 +100,7 @@ SUBROUTINE ELTRAN(Nm,N,Low,Igh,A,Int,Z)
         Z(i,mp) = A(i,mp-1)
       END DO
       !
-      i = Int(mp)
+      i = Intt(mp)
       IF ( i/=mp ) THEN
         !
         DO j = mp, Igh

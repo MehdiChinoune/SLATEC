@@ -437,7 +437,7 @@ SUBROUTINE SNSQ(FCN,JAC,Iopt,N,X,Fvec,Fjac,Ldfjac,Xtol,Maxfev,Ml,Mu,&
   INTEGER i, iflag, iter, j, jm1, l, ncfail, ncsuc, nslow1, nslow2
   INTEGER iwa(1)
   LOGICAL jeval, sing
-  REAL actred, delta, epsmch, fnorm, fnorm1, pnorm, prered, ratio, sum, temp, xnorm
+  REAL actred, delta, epsmch, fnorm, fnorm1, pnorm, prered, ratio, summ, temp, xnorm
   REAL R1MACH, ENORM
   REAL, PARAMETER ::one = 1.0E0, p1 = 1.0E-1, p5 = 5.0E-1, p001 = 1.0E-3, &
     p0001 = 1.0E-4, zero = 0.0E0
@@ -533,11 +533,11 @@ SUBROUTINE SNSQ(FCN,JAC,Iopt,N,X,Fvec,Fjac,Ldfjac,Xtol,Maxfev,Ml,Mu,&
   END DO
   DO j = 1, N
     IF ( Fjac(j,j)/=zero ) THEN
-      sum = zero
+      summ = zero
       DO i = j, N
-        sum = sum + Fjac(i,j)*Qtf(i)
+        summ = summ + Fjac(i,j)*Qtf(i)
       END DO
-      temp = -sum/Fjac(j,j)
+      temp = -summ/Fjac(j,j)
       DO i = j, N
         Qtf(i) = Qtf(i) + Fjac(i,j)*temp
       END DO
@@ -618,12 +618,12 @@ SUBROUTINE SNSQ(FCN,JAC,Iopt,N,X,Fvec,Fjac,Ldfjac,Xtol,Maxfev,Ml,Mu,&
     !
     l = 1
     DO i = 1, N
-      sum = zero
+      summ = zero
       DO j = i, N
-        sum = sum + R(l)*Wa1(j)
+        summ = summ + R(l)*Wa1(j)
         l = l + 1
       END DO
-      Wa3(i) = Qtf(i) + sum
+      Wa3(i) = Qtf(i) + summ
     END DO
     temp = ENORM(N,Wa3)
     prered = zero
@@ -692,13 +692,13 @@ SUBROUTINE SNSQ(FCN,JAC,Iopt,N,X,Fvec,Fjac,Ldfjac,Xtol,Maxfev,Ml,Mu,&
         !           AND UPDATE QTF IF NECESSARY.
         !
         DO j = 1, N
-          sum = zero
+          summ = zero
           DO i = 1, N
-            sum = sum + Fjac(i,j)*Wa4(i)
+            summ = summ + Fjac(i,j)*Wa4(i)
           END DO
-          Wa2(j) = (sum-Wa3(j))/pnorm
+          Wa2(j) = (summ-Wa3(j))/pnorm
           Wa1(j) = Diag(j)*((Diag(j)*Wa1(j))/pnorm)
-          IF ( ratio>=p0001 ) Qtf(j) = sum
+          IF ( ratio>=p0001 ) Qtf(j) = summ
         END DO
         !
         !           COMPUTE THE QR FACTORIZATION OF THE UPDATED JACOBIAN.

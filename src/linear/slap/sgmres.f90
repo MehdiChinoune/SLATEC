@@ -406,7 +406,7 @@ SUBROUTINE SGMRES(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,&
   !     .. Subroutine Arguments ..
   EXTERNAL :: MATVEC, MSOLVE
   !     .. Local Scalars ..
-  REAL bnrm, rhol, sum
+  REAL bnrm, rhol, summ
   INTEGER i, iflag, jpre, jscal, kmp, ldl, lgmr, lhes, lq, lr, &
     lv, lw, lxl, lz, lzm1, maxl, maxlp1, nms, nmsl, nrmax, nrsts
   !     .. External Functions ..
@@ -475,11 +475,11 @@ SUBROUTINE SGMRES(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,&
             CALL SCOPY(N,B,1,Rgwk(lr),1)
           END IF
           IF ( jscal==2.OR.jscal==3 ) THEN
-            sum = 0
+            summ = 0
             DO i = 1, N
-              sum = sum + (Rgwk(lr-1+i)*Sb(i))**2
+              summ = summ + (Rgwk(lr-1+i)*Sb(i))**2
             END DO
-            bnrm = SQRT(sum)
+            bnrm = SQRT(summ)
           ELSE
             bnrm = SNRM2(N,Rgwk(lr),1)
           END IF

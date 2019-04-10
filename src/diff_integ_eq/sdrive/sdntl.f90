@@ -47,7 +47,7 @@ SUBROUTINE SDNTL(Eps,F,FA,Hmax,Hold,Impl,Jtask,Matdim,Maxord,Mint,Miter,&
   INTEGER i, iflag, Impl, info, Iswflg, Jstate, Jtask, Matdim, &
     Maxord, Mint, Miter, Ml, Mntold, Mtrold, Mu, N, Nde, Nfe, Nq, Nwait
   REAL A(Matdim,*), El(13,12), Eps, Fac(*), H, Hmax, Hold, oldl0, Rc, Rh, Rmax, &
-    Save1(*), Save2(*), SNRM2, sum, T, Tq(3,12), Trend, Uround, Y(*), Yh(N,*), Ywt(*)
+    Save1(*), Save2(*), SNRM2, summ, T, Tq(3,12), Trend, Uround, Y(*), Yh(N,*), Ywt(*)
   INTEGER Ipvt(*)
   LOGICAL Convrg, Ier
   REAL, PARAMETER :: RMINIT = 10000.E0
@@ -155,8 +155,8 @@ SUBROUTINE SDNTL(Eps,F,FA,Hmax,Hold,Impl,Jtask,Matdim,Maxord,Mint,Miter,&
     DO i = 1, Nde
       Save1(i) = Save2(i)/MAX(1.E0,Ywt(i))
     END DO
-    sum = SNRM2(Nde,Save1,1)/SQRT(REAL(Nde))
-    IF ( sum>Eps/ABS(H) ) H = SIGN(Eps/sum,H)
+    summ = SNRM2(Nde,Save1,1)/SQRT(REAL(Nde))
+    IF ( summ>Eps/ABS(H) ) H = SIGN(Eps/summ,H)
     DO i = 1, N
       Yh(i,2) = H*Save2(i)
     END DO

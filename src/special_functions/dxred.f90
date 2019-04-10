@@ -1,6 +1,6 @@
 !** DXRED
 SUBROUTINE DXRED(X,Ix,Ierror)
-  USE DXBLK ,ONLY: RADix, RAD2l, L2
+  USE DXBLK ,ONLY: RADixx, RAD2l, L2
   IMPLICIT NONE
   !>
   !***
@@ -70,7 +70,7 @@ SUBROUTINE DXRED(X,Ix,Ierror)
           xa = xa/RAD2l
           ixa1 = ixa1 + 1
         END DO
-        xa = xa*RADix**ixa2
+        xa = xa*RADixx**ixa2
         IF ( ixa1/=0 ) THEN
           DO i = 1, ixa1
             IF ( xa>1.0D0 ) RETURN
@@ -82,7 +82,7 @@ SUBROUTINE DXRED(X,Ix,Ierror)
           xa = xa*RAD2l
           ixa1 = ixa1 + 1
         END DO
-        xa = xa/RADix**ixa2
+        xa = xa/RADixx**ixa2
         IF ( ixa1/=0 ) THEN
           DO i = 1, ixa1
             IF ( xa<1.0D0 ) RETURN

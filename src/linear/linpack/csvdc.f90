@@ -127,7 +127,7 @@ SUBROUTINE CSVDC(X,Ldx,N,P,S,E,U,Ldu,V,Ldv,Work,Job,Info)
   INTEGER i, iter, j, jobu, k, kase, kk, l, ll, lls, lm1, lp1, &
     ls, lu, m, maxit, mm, mm1, mp1, nct, nctp1, ncu, nrt, nrtp1
   COMPLEX CDOTC, t, r
-  REAL b, c, cs, el, emm1, f, g, SCNRM2, scale, shift, sl, sm, &
+  REAL b, c, cs, el, emm1, f, g, SCNRM2, scalee, shiftt, sl, sm, &
     sn, smm1, t1, test, ztest
   LOGICAL wantu, wantv
   REAL, EXTERNAL :: CABS1
@@ -414,21 +414,21 @@ SUBROUTINE CSVDC(X,Ldx,N,P,S,E,U,Ldu,V,Ldv,Work,Job,Info)
           !
           !           CALCULATE THE SHIFT.
           !
-          scale = MAX(ABS(S(m)),ABS(S(m-1)),ABS(E(m-1)),ABS(S(l)),ABS(E(l)))
-          sm = REAL(S(m))/scale
-          smm1 = REAL(S(m-1))/scale
-          emm1 = REAL(E(m-1))/scale
-          sl = REAL(S(l))/scale
-          el = REAL(E(l))/scale
+          scalee = MAX(ABS(S(m)),ABS(S(m-1)),ABS(E(m-1)),ABS(S(l)),ABS(E(l)))
+          sm = REAL(S(m))/scalee
+          smm1 = REAL(S(m-1))/scalee
+          emm1 = REAL(E(m-1))/scalee
+          sl = REAL(S(l))/scalee
+          el = REAL(E(l))/scalee
           b = ((smm1+sm)*(smm1-sm)+emm1**2)/2.0E0
           c = (sm*emm1)**2
-          shift = 0.0E0
+          shiftt = 0.0E0
           IF ( b/=0.0E0.OR.c/=0.0E0 ) THEN
-            shift = SQRT(b**2+c)
-            IF ( b<0.0E0 ) shift = -shift
-            shift = c/(b+shift)
+            shiftt = SQRT(b**2+c)
+            IF ( b<0.0E0 ) shiftt = -shiftt
+            shiftt = c/(b+shiftt)
           END IF
-          f = (sl+sm)*(sl-sm) - shift
+          f = (sl+sm)*(sl-sm) - shiftt
           g = sl*el
           !
           !           CHASE ZEROS.

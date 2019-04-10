@@ -89,10 +89,10 @@ CONTAINS
     !     .. Scalar Arguments ..
     INTEGER Ipass, Kprint, Lun
     !     .. Local Scalars ..
-    REAL(8) :: arg, arg1, arg2, dt, pi, sum, sum1, sum2
+    REAL(8) :: arg, arg1, arg2, dt, pi, summ, sum1, sum2
     REAL azero, azeroh, cf, cosqbt, cosqfb, cosqft, costfb, costt, &
       dcfb, dcfftb, dcfftf, dezb1, dezf1, dezfb, errmax, rftb, &
-      rftf, rftfb, sign, sinqbt, sinqfb, sinqft, sintfb, sintt, sqrt2, tpi
+      rftf, rftfb, signn, sinqbt, sinqfb, sinqft, sintfb, sintt, sqrt2, tpi
     INTEGER i, j, k, modn, n, nm1, nns, np1, ns2, ns2m, nz
     !     .. Local Arrays ..
     COMPLEX cx(200), cy(200)
@@ -171,19 +171,19 @@ CONTAINS
         IF ( Kprint>=2 ) WRITE (Lun,99004)
         99004 FORMAT (' Test of RFFTF FAILED')
       END IF
-      sign = 1.0
+      signn = 1.0
       DO i = 1, n
-        sum = 0.5D0*x(1)
+        summ = 0.5D0*x(1)
         arg = (i-1)*dt
         IF ( ns2>=2 ) THEN
           DO k = 2, ns2
             arg1 = (k-1)*arg
-            sum = sum + x(2*k-2)*COS(arg1) - x(2*k-1)*SIN(arg1)
+            summ = summ + x(2*k-2)*COS(arg1) - x(2*k-1)*SIN(arg1)
           END DO
         END IF
-        IF ( modn==0 ) sum = sum + 0.5D0*sign*x(n)
-        y(i) = REAL( sum + sum, 4 )
-        sign = -sign
+        IF ( modn==0 ) summ = summ + 0.5D0*signn*x(n)
+        y(i) = REAL( summ + summ, 4 )
+        signn = -signn
       END DO
       CALL RFFTB(n,x,w)
       rftb = 0.0
@@ -270,15 +270,15 @@ CONTAINS
       DO i = 1, np1
         x(i) = xh(i)
       END DO
-      sign = 1.0
+      signn = 1.0
       DO i = 1, np1
-        y(i) = 0.5*(x(1)+sign*x(n+1))
+        y(i) = 0.5*(x(1)+signn*x(n+1))
         arg = (i-1)*dt
         DO k = 2, n
           y(i) = y(i) + x(k)*REAL( COS((k-1)*arg), 4 )
         END DO
         y(i) = y(i) + y(i)
-        sign = -sign
+        signn = -signn
       END DO
       CALL COSTI(np1,w)
       CALL COST(np1,x,w)
@@ -345,15 +345,15 @@ CONTAINS
         99018 FORMAT (' Test of SINQB FAILED')
       END IF
       !
-      sign = 1.0
+      signn = 1.0
       DO i = 1, n
         arg = (i+i-1)*dt
-        y(i) = 0.5*sign*x(n)
+        y(i) = 0.5*signn*x(n)
         DO k = 1, nm1
           y(i) = y(i) + x(k)*REAL( SIN((k)*arg), 4 )
         END DO
         y(i) = y(i) + y(i)
-        sign = -sign
+        signn = -signn
       END DO
       CALL SINQF(n,x,w)
       sinqft = 0.0
@@ -511,13 +511,13 @@ CONTAINS
       ns2 = n/2
       IF ( modn==0 ) b(ns2) = 0.0
       DO i = 1, n
-        sum = azero
+        summ = azero
         arg1 = (i-1)*dt
         DO k = 1, ns2
           arg2 = k*arg1
-          sum = sum + a(k)*COS(arg2) + b(k)*SIN(arg2)
+          summ = summ + a(k)*COS(arg2) + b(k)*SIN(arg2)
         END DO
-        x(i) = REAL( sum, 4 )
+        x(i) = REAL( summ, 4 )
       END DO
       CALL EZFFTB(n,y,azero,a,b,w)
       dezb1 = 0.0

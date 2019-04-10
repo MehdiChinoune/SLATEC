@@ -20,12 +20,12 @@ REAL FUNCTION PPPSF(X,Iz,C,A,Bh)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   
-  REAL A(*), Bh(*), C(*), sum, X
+  REAL A(*), Bh(*), C(*), summ, X
   INTEGER Iz, j
   !* FIRST EXECUTABLE STATEMENT  PPPSF
-  sum = 0.
+  summ = 0.
   DO j = 1, Iz
-    sum = sum + 1./(X-Bh(j))
+    summ = summ + 1./(X-Bh(j))
   END DO
-  PPPSF = sum
+  PPPSF = summ
 END FUNCTION PPPSF

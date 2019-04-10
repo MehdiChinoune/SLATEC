@@ -90,7 +90,7 @@ SUBROUTINE HTRID3(Nm,N,A,D,E,E2,Tau)
   !
   INTEGER i, j, k, l, N, ii, Nm, jm1, jp1
   REAL A(Nm,*), D(*), E(*), E2(*), Tau(2,*)
-  REAL f, g, h, fi, gi, hh, si, scale
+  REAL f, g, h, fi, gi, hh, si, scalee
   REAL PYTHAG
   !
   !* FIRST EXECUTABLE STATEMENT  HTRID3
@@ -101,24 +101,24 @@ SUBROUTINE HTRID3(Nm,N,A,D,E,E2,Tau)
     i = N + 1 - ii
     l = i - 1
     h = 0.0E0
-    scale = 0.0E0
+    scalee = 0.0E0
     IF ( l>=1 ) THEN
       !     .......... SCALE ROW (ALGOL TOL THEN NOT NEEDED) ..........
       DO k = 1, l
-        scale = scale + ABS(A(i,k)) + ABS(A(k,i))
+        scalee = scalee + ABS(A(i,k)) + ABS(A(k,i))
       END DO
       !
-      IF ( scale/=0.0E0 ) THEN
+      IF ( scalee/=0.0E0 ) THEN
         !
         DO k = 1, l
-          A(i,k) = A(i,k)/scale
-          A(k,i) = A(k,i)/scale
+          A(i,k) = A(i,k)/scalee
+          A(k,i) = A(k,i)/scalee
           h = h + A(i,k)*A(i,k) + A(k,i)*A(k,i)
         END DO
         !
-        E2(i) = scale*scale*h
+        E2(i) = scalee*scalee*h
         g = SQRT(h)
-        E(i) = scale*g
+        E(i) = scalee*g
         f = PYTHAG(A(i,l),A(l,i))
         !     .......... FORM NEXT DIAGONAL ELEMENT OF MATRIX T ..........
         IF ( f==0.0E0 ) THEN
@@ -197,13 +197,13 @@ SUBROUTINE HTRID3(Nm,N,A,D,E,E2,Tau)
     !
     100 CONTINUE
     DO k = 1, l
-      A(i,k) = scale*A(i,k)
-      A(k,i) = scale*A(k,i)
+      A(i,k) = scalee*A(i,k)
+      A(k,i) = scalee*A(k,i)
     END DO
     !
     Tau(2,l) = -si
     150  D(i) = A(i,i)
-    A(i,i) = scale*SQRT(h)
+    A(i,i) = scalee*SQRT(h)
   END DO
   !
 END SUBROUTINE HTRID3

@@ -399,7 +399,7 @@ SUBROUTINE DLSEI(W,Mdw,Me,Ma,Mg,N,Prgopt,X,Rnorme,Rnorml,Mode,Ws,Ip)
   EXTERNAL :: DAXPY, DCOPY, DH12, DLSI, DSCAL, DSWAP, XERMSG
   REAL(8), EXTERNAL :: D1MACH, DASUM, DDOT, DNRM2
   !
-  REAL(8) :: enorm, fnorm, gam, rb, rn, rnmax, size, sn, snmax, t, tau, uj, up, &
+  REAL(8) :: enorm, fnorm, gam, rb, rn, rnmax, sizee, sn, snmax, t, tau, uj, up, &
     vj, xnorm, xnrme
   INTEGER i, imax, j, jp1, k, key, kranke, last, lchk, link, m, &
     mapke1, mdeqc, mend, mep1, n1, n2, next, nlink, nopt, np1, ntimes
@@ -661,8 +661,8 @@ SUBROUTINE DLSEI(W,Mdw,Me,Ma,Mg,N,Prgopt,X,Rnorme,Rnorml,Mode,Ws,Ip)
       mapke1 = Ma + kranke + 1
       mend = Ma + kranke + Mg
       DO i = mapke1, mend
-        size = DASUM(N,W(i,1),Mdw)*xnorm + ABS(W(i,np1))
-        IF ( W(i,np1)>tau*size ) THEN
+        sizee = DASUM(N,W(i,1),Mdw)*xnorm + ABS(W(i,np1))
+        IF ( W(i,np1)>tau*sizee ) THEN
           Mode = Mode + 2
           GOTO 100
         END IF

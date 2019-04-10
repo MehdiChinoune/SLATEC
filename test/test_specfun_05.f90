@@ -546,7 +546,7 @@ CONTAINS
     INTEGER Kprint
     INTEGER i, icase, ie, ierr, ii, ik, Ipass, ix, iy, k, ke, kk, &
       kode, kx, Lun, m, n, nm, nz
-    REAL(8) :: ans, atol, bb, en(4), er, ex, sig, sum, tol, t1, t2, xx(5), y(4)
+    REAL(8) :: ans, atol, bb, en(4), er, ex, sig, summ, tol, t1, t2, xx(5), y(4)
     REAL(8) :: D1MACH
     LOGICAL fatal
     !* FIRST EXECUTABLE STATEMENT  DEG8CK
@@ -578,31 +578,31 @@ CONTAINS
             END IF
             sig = 3.0D0/X
             t2 = 1.0D0
-            sum = 0.0D0
+            summ = 0.0D0
             DO
               t1 = t2
               t2 = t2 + sig
               atol = tol
               CALL DGAUS8(DFEIN,t1,t2,atol,ans,ierr)
-              sum = sum + ans
-              IF ( ABS(ans)<ABS(sum)*tol ) THEN
+              summ = summ + ans
+              IF ( ABS(ans)<ABS(summ)*tol ) THEN
                 ex = 1.0D0
                 IF ( kode==1 ) ex = EXP(-X)
                 bb = A
                 IF ( icase==3 ) THEN
                   iy = kx - n + 1
-                  y(iy) = sum
+                  y(iy) = summ
                   ke = m - iy
                   ie = iy - 1
                   kk = iy
                   ii = iy
                 ELSEIF ( icase/=2 ) THEN
-                  y(1) = sum
+                  y(1) = summ
                   IF ( m==1 ) GOTO 5
                   ke = m - 1
                   kk = 1
                 ELSE
-                  y(m) = sum
+                  y(m) = summ
                   IF ( m==1 ) GOTO 5
                   ie = m - 1
                   ii = m

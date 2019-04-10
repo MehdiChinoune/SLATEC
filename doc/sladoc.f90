@@ -126,7 +126,7 @@ PROGRAM SLADOC
   !
   !     Other declarations.
   !
-  INTEGER ierror, ifind, ii, ij, il, ilen, in, inext, ir, irec, &
+  INTEGER ierror, ifind, ii, ij, il, ileng, in, inext, ir, irec, &
     istart, istmt, itemp, jcl, jj, lb2, leng, lftbl, lkats, &
     ll, ls, lt2, ltcl, ncc, nerr, nlines, npd, ntkwd, ntry, num
   CHARACTER(LLN) :: line, linesv
@@ -225,11 +225,11 @@ PROGRAM SLADOC
   !     system.
   !
   temp = FDAF
-  ilen = LENSTR(temp)
-  DO i = ilen, 1, -1
+  ileng = LENSTR(temp)
+  DO i = ileng, 1, -1
     IF ( temp(i:i)=='/' ) THEN
-      INQUIRE (FILE=temp(i+1:ilen),EXIST=lexist)
-      IF ( lexist ) temp(1:ilen-i) = temp(i+1:ilen)
+      INQUIRE (FILE=temp(i+1:ileng),EXIST=lexist)
+      IF ( lexist ) temp(1:ileng-i) = temp(i+1:ileng)
       EXIT
     END IF
   END DO
@@ -241,11 +241,11 @@ PROGRAM SLADOC
     GOTO 700
   END IF
   temp = FCAT
-  ilen = LENSTR(temp)
-  DO i = ilen, 1, -1
+  ileng = LENSTR(temp)
+  DO i = ileng, 1, -1
     IF ( temp(i:i)=='/' ) THEN
-      INQUIRE (FILE=temp(i+1:ilen),EXIST=lexist)
-      IF ( lexist ) temp(1:ilen-i) = temp(i+1:ilen)
+      INQUIRE (FILE=temp(i+1:ileng),EXIST=lexist)
+      IF ( lexist ) temp(1:ileng-i) = temp(i+1:ileng)
       EXIT
     END IF
   END DO
@@ -256,11 +256,11 @@ PROGRAM SLADOC
     GOTO 700
   END IF
   temp = FKWD
-  ilen = LENSTR(temp)
-  DO i = ilen, 1, -1
+  ileng = LENSTR(temp)
+  DO i = ileng, 1, -1
     IF ( temp(i:i)=='/' ) THEN
-      INQUIRE (FILE=temp(i+1:ilen),EXIST=lexist)
-      IF ( lexist ) temp(1:ilen-i) = temp(i+1:ilen)
+      INQUIRE (FILE=temp(i+1:ileng),EXIST=lexist)
+      IF ( lexist ) temp(1:ileng-i) = temp(i+1:ileng)
       EXIT
     END IF
   END DO
@@ -271,11 +271,11 @@ PROGRAM SLADOC
     GOTO 700
   END IF
   temp = FTBL
-  ilen = LENSTR(temp)
-  DO i = ilen, 1, -1
+  ileng = LENSTR(temp)
+  DO i = ileng, 1, -1
     IF ( temp(i:i)=='/' ) THEN
-      INQUIRE (FILE=temp(i+1:ilen),EXIST=lexist)
-      IF ( lexist ) temp(1:ilen-i) = temp(i+1:ilen)
+      INQUIRE (FILE=temp(i+1:ileng),EXIST=lexist)
+      IF ( lexist ) temp(1:ileng-i) = temp(i+1:ileng)
       EXIT
     END IF
   END DO
@@ -599,10 +599,10 @@ PROGRAM SLADOC
         !
         !         The keyword phrase was found on the original command line.
         !
-        ilen = LENSTR(kwrd)
+        ileng = LENSTR(kwrd)
         found = .FALSE.
         DO i = 1, ntkwd
-          ij = INDEX(tkwd(i),kwrd(1:ilen))
+          ij = INDEX(tkwd(i),kwrd(1:ileng))
           IF ( ij/=0 ) THEN
             found = .TRUE.
             !
@@ -685,9 +685,9 @@ PROGRAM SLADOC
           kat = line(ls-1+lb:ls-1+lb+lt-1)
         END IF
         ij = 0
-        ilen = LENSTR(kat)
+        ileng = LENSTR(kat)
         DO i = 1, lftbl
-          IF ( kat==cat(i)(1:ilen) ) THEN
+          IF ( kat==cat(i)(1:ileng) ) THEN
             ij = ij + 1
             !
             !             Collect together in CNAME all the routines having
@@ -800,8 +800,8 @@ PROGRAM SLADOC
           fname = 'keylis'
           WRITE (UNIT=LU6,FMT=99033) 'Keyword', ntkwd
         END IF
-        ilen = LENSTR(fname)
-        WRITE (UNIT=LU6,FMT=99034) fname(1:ilen)
+        ileng = LENSTR(fname)
+        WRITE (UNIT=LU6,FMT=99034) fname(1:ileng)
         !
         !         Ask where he/she wants the list information written.
         !
@@ -1228,8 +1228,8 @@ PROGRAM SLADOC
           WRITE (UNIT=LU6,FMT=99002) line
         END DO
         fname = FLIS
-        ilen = LENSTR(fname)
-        WRITE (UNIT=LU6,FMT=99023) fname(1:ilen)
+        ileng = LENSTR(fname)
+        WRITE (UNIT=LU6,FMT=99023) fname(1:ileng)
         !
         !         Ask where he/she wants the documentation information written.
         !

@@ -124,7 +124,7 @@ REAL(8) FUNCTION DPCHID(N,X,F,D,Incfd,Skip,Ia,Ib,Ierr)
   !  DECLARE LOCAL VARIABLES.
   !
   INTEGER i, iup, low
-  REAL(8) :: h, sum, value
+  REAL(8) :: h, summ, value
   !
   !  INITIALIZE.
   !
@@ -170,12 +170,12 @@ REAL(8) FUNCTION DPCHID(N,X,F,D,Incfd,Skip,Ia,Ib,Ierr)
   IF ( Ia/=Ib ) THEN
     low = MIN(Ia,Ib)
     iup = MAX(Ia,Ib) - 1
-    sum = zero
+    summ = zero
     DO i = low, iup
       h = X(i+1) - X(i)
-      sum = sum + h*((F(1,i)+F(1,i+1))+(D(1,i)-D(1,i+1))*(h/six))
+      summ = summ + h*((F(1,i)+F(1,i+1))+(D(1,i)-D(1,i+1))*(h/six))
     END DO
-    value = half*sum
+    value = half*summ
     IF ( Ia>Ib ) value = -value
   END IF
   !

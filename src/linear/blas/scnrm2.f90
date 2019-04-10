@@ -85,8 +85,8 @@ REAL FUNCTION SCNRM2(N,Cx,Incx)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER i, Incx, N, nn, next
-  LOGICAL imag, scale
-  REAL hitest, sum, xmax, absx
+  LOGICAL imagg, scalee
+  REAL hitest, summ, xmax, absx
   COMPLEX Cx(*)
   REAL, PARAMETER :: zero = 0.0E0, one = 1.0E0
   REAL, PARAMETER :: cutlo = 4.441E-16, cuthi= 1.304E19
@@ -94,14 +94,14 @@ REAL FUNCTION SCNRM2(N,Cx,Incx)
   IF ( N>0 ) THEN
     !
     next = 20
-    sum = zero
+    summ = zero
     nn = N*Incx
     !
     !                                                 BEGIN MAIN LOOP
     !
     DO i = 1, nn, Incx
       absx = ABS(REAL(Cx(i)))
-      imag = .FALSE.
+      imagg = .FALSE.
       SELECT CASE(next)
         CASE(20)
           GOTO 20
@@ -117,7 +117,7 @@ REAL FUNCTION SCNRM2(N,Cx,Incx)
       20 CONTINUE
       IF ( absx>cutlo ) GOTO 120
       next = 40
-      scale = .FALSE.
+      scalee = .FALSE.
       !
       !                        PHASE 1.  SUM IS ZERO
       !
@@ -128,10 +128,10 @@ REAL FUNCTION SCNRM2(N,Cx,Incx)
       !                                PREPARE FOR PHASE 2.
       !
       next = 80
-      60 scale = .TRUE.
+      60 scalee = .TRUE.
       xmax = absx
       !
-      sum = sum + (absx/xmax)**2
+      summ = summ + (absx/xmax)**2
       GOTO 160
       !
       !                   PHASE 2.  SUM IS SMALL.
@@ -142,7 +142,7 @@ REAL FUNCTION SCNRM2(N,Cx,Incx)
         !
         !                  PREPARE FOR PHASE 3.
         !
-        sum = (sum*xmax)*xmax
+        summ = (summ*xmax)*xmax
         GOTO 120
       END IF
       !
@@ -151,15 +151,15 @@ REAL FUNCTION SCNRM2(N,Cx,Incx)
       !
       100 CONTINUE
       IF ( absx<=xmax ) THEN
-        sum = sum + (absx/xmax)**2
+        summ = summ + (absx/xmax)**2
       ELSE
-        sum = one + sum*(xmax/absx)**2
+        summ = one + summ*(xmax/absx)**2
         xmax = absx
       END IF
       GOTO 160
       !
       120 next = 140
-      scale = .FALSE.
+      scalee = .FALSE.
       !
       !     FOR REAL OR D.P. SET HITEST = CUTHI/N
       !     FOR COMPLEX      SET HITEST = CUTHI/(2*N)
@@ -174,18 +174,18 @@ REAL FUNCTION SCNRM2(N,Cx,Incx)
         !                                PREPARE FOR PHASE 4.
         !
         next =100
-        sum = (sum/absx)/absx
+        summ = (summ/absx)/absx
         GOTO 60
       ELSE
-        sum = sum + absx**2
+        summ = summ + absx**2
       END IF
       !
       !                  CONTROL SELECTION OF REAL AND IMAGINARY PARTS.
       !
       160 CONTINUE
-      IF ( .NOT.(imag) ) THEN
+      IF ( .NOT.(imagg) ) THEN
         absx = ABS(AIMAG(Cx(i)))
-        imag = .TRUE.
+        imagg = .TRUE.
         SELECT CASE(next)
           CASE(20)
             GOTO 20
@@ -205,8 +205,8 @@ REAL FUNCTION SCNRM2(N,Cx,Incx)
     !              END OF MAIN LOOP.
     !              COMPUTE SQUARE ROOT AND ADJUST FOR SCALING.
     !
-    SCNRM2 = SQRT(sum)
-    IF ( scale ) SCNRM2 = SCNRM2*xmax
+    SCNRM2 = SQRT(summ)
+    IF ( scalee ) SCNRM2 = SCNRM2*xmax
   ELSE
     SCNRM2 = zero
   END IF

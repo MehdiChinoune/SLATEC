@@ -125,7 +125,7 @@ SUBROUTINE CCHUD(R,Ldr,P,X,Z,Ldz,Nz,Y,Rho,C,S)
   COMPLEX R(Ldr,*), X(*), Z(Ldz,*), Y(*), S(*)
   !
   INTEGER i, j, jm1
-  REAL azeta, scale
+  REAL azeta, scalee
   COMPLEX t, xj, zeta
   !
   !     UPDATE R.
@@ -162,8 +162,8 @@ SUBROUTINE CCHUD(R,Ldr,P,X,Z,Ldz,Nz,Y,Rho,C,S)
       END DO
       azeta = ABS(zeta)
       IF ( azeta/=0.0E0.AND.Rho(j)>=0.0E0 ) THEN
-        scale = azeta + Rho(j)
-        Rho(j) = scale*SQRT((azeta/scale)**2+(Rho(j)/scale)**2)
+        scalee = azeta + Rho(j)
+        Rho(j) = scalee*SQRT((azeta/scalee)**2+(Rho(j)/scalee)**2)
       END IF
     END DO
   END IF

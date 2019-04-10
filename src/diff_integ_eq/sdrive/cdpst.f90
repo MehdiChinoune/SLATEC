@@ -36,7 +36,7 @@ SUBROUTINE CDPST(El,F,FA,H,Impl,JACOBN,Matdim,Miter,Ml,Mu,N,Nde,Nq,Save2,&
     Matdim, Miter, Ml, Mu, mw, N, Nde, Nfe, Nje, Nq
   COMPLEX A(Matdim,*), cfctr, Dfdy(Matdim,*), dy, Fac(*), Save1(*), &
     Save2(*), Y(*), Yh(N,*), yj, ys, Ywt(*)
-  REAL bl, Bnd, bp, br, dfdymx, diff, El(13,12), facmin, factor, H, scale, &
+  REAL bl, Bnd, bp, br, dfdymx, diff, El(13,12), facmin, factor, H, scalee, &
     SCNRM2, T, Uround, zmax, zmin
   INTEGER Ipvt(*)
   LOGICAL Ier
@@ -103,14 +103,14 @@ SUBROUTINE CDPST(El,F,FA,H,Impl,JACOBN,Matdim,Miter,Ml,Mu,N,Nde,Nq,Save2,&
           END DO
           !                                                                 Step 2
           IF ( MIN(ABS(Save2(imax)),ABS(Save1(imax)))>0.E0 ) THEN
-            scale = MAX(ABS(Save2(imax)),ABS(Save1(imax)))
+            scalee = MAX(ABS(Save2(imax)),ABS(Save1(imax)))
             !                                                                 Step 3
-            IF ( diff>BU*scale ) THEN
+            IF ( diff>BU*scalee ) THEN
               Fac(j) = MAX(facmin,REAL(Fac(j))*.5E0)
-            ELSEIF ( br*scale<=diff.AND.diff<=bl*scale ) THEN
+            ELSEIF ( br*scalee<=diff.AND.diff<=bl*scalee ) THEN
               Fac(j) = MIN(REAL(Fac(j))*2.E0,FACMAX)
               !                                                                 Step 4
-            ELSEIF ( diff<br*scale ) THEN
+            ELSEIF ( diff<br*scalee ) THEN
               Fac(j) = MIN(bp*REAL(Fac(j)),FACMAX)
             END IF
           END IF
@@ -225,14 +225,14 @@ SUBROUTINE CDPST(El,F,FA,H,Impl,JACOBN,Matdim,Miter,Ml,Mu,N,Nde,Nq,Save2,&
           END DO
           !                                                                 Step 2
           IF ( MIN(ABS(Save2(imax)),ABS(Save1(imax)))>0.E0 ) THEN
-            scale = MAX(ABS(Save2(imax)),ABS(Save1(imax)))
+            scalee = MAX(ABS(Save2(imax)),ABS(Save1(imax)))
             !                                                                 Step 3
-            IF ( diff>BU*scale ) THEN
+            IF ( diff>BU*scalee ) THEN
               Fac(j) = MAX(facmin,REAL(Fac(j))*.5E0)
-            ELSEIF ( br*scale<=diff.AND.diff<=bl*scale ) THEN
+            ELSEIF ( br*scalee<=diff.AND.diff<=bl*scalee ) THEN
               Fac(j) = MIN(REAL(Fac(j))*2.E0,FACMAX)
               !                                                                 Step 4
-            ELSEIF ( diff<br*scale ) THEN
+            ELSEIF ( diff<br*scalee ) THEN
               Fac(k) = MIN(bp*REAL(Fac(k)),FACMAX)
             END IF
           END IF

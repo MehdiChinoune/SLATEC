@@ -68,7 +68,7 @@ SUBROUTINE DBSQAD(T,Bcoef,N,K,X1,X2,Bquad,Work)
 
   !
   INTEGER i, il1, il2, ilo, inbv, jf, K, left, m, mf, mflag, N, npk, np1
-  REAL(8) :: a, aa, b, bb, Bcoef(*), bma, bpa, Bquad, c1, gx, q, sum(5), T(*), &
+  REAL(8) :: a, aa, b, bb, Bcoef(*), bma, bpa, Bquad, c1, gx, q, summ(5), T(*), &
     ta, tb, Work(*), X1, X2, y1, y2
   REAL(8) :: DBVALU
   !
@@ -110,7 +110,7 @@ SUBROUTINE DBSQAD(T,Bcoef,N,K,X1,X2,Bquad,Work)
         END IF
         !
         DO i = 1, mf
-          sum(i) = 0.0D0
+          summ(i) = 0.0D0
         END DO
         ilo = 1
         inbv = 1
@@ -131,13 +131,13 @@ SUBROUTINE DBSQAD(T,Bcoef,N,K,X1,X2,Bquad,Work)
               y2 = DBVALU(T,Bcoef,N,K,0,gx,inbv,Work)
               gx = c1 + bpa
               y1 = DBVALU(T,Bcoef,N,K,0,gx,inbv,Work)
-              sum(m) = sum(m) + (y1+y2)*bma
+              summ(m) = summ(m) + (y1+y2)*bma
             END DO
           END IF
         END DO
         q = 0.0D0
         DO m = 1, mf
-          q = q + gwts(jf+m)*sum(m)
+          q = q + gwts(jf+m)*summ(m)
         END DO
         IF ( X1>X2 ) q = -q
         Bquad = q

@@ -124,7 +124,7 @@ SUBROUTINE LSSODS(A,X,B,M,N,Nrda,Iflag,Irank,Iscale,Q,Diag,Kpivot,Iter,&
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER nfatal, nmir, Nrda
-  REAL A(Nrda,*), acc, B(*), Diag(*), Div(*), gam, gamma, Q(Nrda,*), R(*), &
+  REAL A(Nrda,*), acc, B(*), Diag(*), Div(*), gam, gama, Q(Nrda,*), R(*), &
     R1MACH, Resnrm, Scales(*), SDOT, SDSDOT, Td(*), uro, X(*), Xnorm, Z(*), znorm
   REAL znrm0
   INTEGER Iflag, Irank, irm, irp, Iscale, it, Iter, iterp, j, &
@@ -226,9 +226,9 @@ SUBROUTINE LSSODS(A,X,B,M,N,Nrda,Iflag,Irank,Iscale,Q,Diag,Kpivot,Iter,&
       !
       DO j = 1, Irank
         mj = M - j + 1
-        gamma = SDOT(mj,Q(j,j),1,R(j),1)/(Diag(j)*Q(j,j))
+        gama = SDOT(mj,Q(j,j),1,R(j),1)/(Diag(j)*Q(j,j))
         DO k = j, M
-          R(k) = R(k) + gamma*Q(k,j)
+          R(k) = R(k) + gama*Q(k,j)
         END DO
       END DO
       !

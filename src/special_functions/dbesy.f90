@@ -80,7 +80,7 @@ SUBROUTINE DBESY(X,Fnu,N,Y)
 
   !
   INTEGER i, iflw, j, N, nb, nd, nn, nud
-  REAL(8) :: azn, cn, dnu, elim, flgjy, fn, Fnu, ran, s, s1, &
+  REAL(8) :: azn, cn, dnu, elim, flgjy, fn, Fnu, rann, s, s1, &
     s2, tm, trx, w(2), wk(7), w2n, X, xlim, xxn, Y(*)
   INTEGER, EXTERNAL :: I1MACH
   REAL(8), EXTERNAL :: DBESY0, DBESY1, D1MACH
@@ -131,8 +131,8 @@ SUBROUTINE DBESY(X,Fnu,N,Y)
       xxn = X/fn
       w2n = 1.0D0 - xxn*xxn
       IF ( w2n>0.0D0 ) THEN
-        ran = SQRT(w2n)
-        azn = LOG((1.0D0+ran)/xxn) - ran
+        rann = SQRT(w2n)
+        azn = LOG((1.0D0+rann)/xxn) - rann
         cn = fn*azn
         IF ( cn>elim ) THEN
           CALL XERMSG('SLATEC','DBESY',&

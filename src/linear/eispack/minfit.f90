@@ -105,32 +105,32 @@ SUBROUTINE MINFIT(Nm,M,N,A,W,Ip,B,Ierr,Rv1)
   !
   INTEGER i, j, k, l, M, N, ii, Ip, i1, kk, k1, ll, l1, m1, Nm, its, Ierr
   REAL A(Nm,*), W(*), B(Nm,Ip), Rv1(*)
-  REAL c, f, g, h, s, x, y, z, scale, s1
+  REAL c, f, g, h, s, x, y, z, scalee, s1
   REAL PYTHAG
   !
   !* FIRST EXECUTABLE STATEMENT  MINFIT
   Ierr = 0
   !     .......... HOUSEHOLDER REDUCTION TO BIDIAGONAL FORM ..........
   g = 0.0E0
-  scale = 0.0E0
+  scalee = 0.0E0
   s1 = 0.0E0
   !
   DO i = 1, N
     l = i + 1
-    Rv1(i) = scale*g
+    Rv1(i) = scalee*g
     g = 0.0E0
     s = 0.0E0
-    scale = 0.0E0
+    scalee = 0.0E0
     IF ( i<=M ) THEN
       !
       DO k = i, M
-        scale = scale + ABS(A(k,i))
+        scalee = scalee + ABS(A(k,i))
       END DO
       !
-      IF ( scale/=0.0E0 ) THEN
+      IF ( scalee/=0.0E0 ) THEN
         !
         DO k = i, M
-          A(k,i) = A(k,i)/scale
+          A(k,i) = A(k,i)/scalee
           s = s + A(k,i)**2
         END DO
         !
@@ -173,25 +173,25 @@ SUBROUTINE MINFIT(Nm,M,N,A,W,Ip,B,Ierr,Rv1)
         END IF
         !
         DO k = i, M
-          A(k,i) = scale*A(k,i)
+          A(k,i) = scalee*A(k,i)
         END DO
       END IF
     END IF
     !
-    W(i) = scale*g
+    W(i) = scalee*g
     g = 0.0E0
     s = 0.0E0
-    scale = 0.0E0
+    scalee = 0.0E0
     IF ( i<=M.AND.i/=N ) THEN
       !
       DO k = l, N
-        scale = scale + ABS(A(i,k))
+        scalee = scalee + ABS(A(i,k))
       END DO
       !
-      IF ( scale/=0.0E0 ) THEN
+      IF ( scalee/=0.0E0 ) THEN
         !
         DO k = l, N
-          A(i,k) = A(i,k)/scale
+          A(i,k) = A(i,k)/scalee
           s = s + A(i,k)**2
         END DO
         !
@@ -220,7 +220,7 @@ SUBROUTINE MINFIT(Nm,M,N,A,W,Ip,B,Ierr,Rv1)
         END IF
         !
         DO k = l, N
-          A(i,k) = scale*A(i,k)
+          A(i,k) = scalee*A(i,k)
         END DO
       END IF
     END IF

@@ -98,7 +98,7 @@ SUBROUTINE DQRSLV(N,R,Ldr,Ipvt,Diag,Qtb,X,Sigma,Wa)
   INTEGER Ipvt(*)
   REAL(8) :: R(Ldr,*), Diag(*), Qtb(*), X(*), Sigma(*), Wa(*)
   INTEGER i, j, jp1, k, kp1, l, nsing
-  REAL(8) :: cos, cotan, qtbpj, sin, sum, tan, temp
+  REAL(8) :: coss, cotan, qtbpj, sinn, summ, tann, temp
   REAL(8), PARAMETER :: p5 = 5.0D-1, p25 = 2.5D-1, zero = 0.0D0
   !* FIRST EXECUTABLE STATEMENT  DQRSLV
   DO j = 1, N
@@ -135,21 +135,21 @@ SUBROUTINE DQRSLV(N,R,Ldr,Ipvt,Diag,Qtb,X,Sigma,Wa)
         !
         IF ( Sigma(k)/=zero ) THEN
           IF ( ABS(R(k,k))>=ABS(Sigma(k)) ) THEN
-            tan = Sigma(k)/R(k,k)
-            cos = p5/SQRT(p25+p25*tan**2)
-            sin = cos*tan
+            tann = Sigma(k)/R(k,k)
+            coss = p5/SQRT(p25+p25*tann**2)
+            sinn = coss*tann
           ELSE
             cotan = R(k,k)/Sigma(k)
-            sin = p5/SQRT(p25+p25*cotan**2)
-            cos = sin*cotan
+            sinn = p5/SQRT(p25+p25*cotan**2)
+            coss = sinn*cotan
           END IF
           !
           !           COMPUTE THE MODIFIED DIAGONAL ELEMENT OF R AND
           !           THE MODIFIED ELEMENT OF ((Q TRANSPOSE)*B,0).
           !
-          R(k,k) = cos*R(k,k) + sin*Sigma(k)
-          temp = cos*Wa(k) + sin*qtbpj
-          qtbpj = -sin*Wa(k) + cos*qtbpj
+          R(k,k) = coss*R(k,k) + sinn*Sigma(k)
+          temp = coss*Wa(k) + sinn*qtbpj
+          qtbpj = -sinn*Wa(k) + coss*qtbpj
           Wa(k) = temp
           !
           !           ACCUMULATE THE TRANSFORMATION IN THE ROW OF S.
@@ -157,8 +157,8 @@ SUBROUTINE DQRSLV(N,R,Ldr,Ipvt,Diag,Qtb,X,Sigma,Wa)
           kp1 = k + 1
           IF ( N>=kp1 ) THEN
             DO i = kp1, N
-              temp = cos*R(i,k) + sin*Sigma(i)
-              Sigma(i) = -sin*R(i,k) + cos*Sigma(i)
+              temp = coss*R(i,k) + sinn*Sigma(i)
+              Sigma(i) = -sinn*R(i,k) + coss*Sigma(i)
               R(i,k) = temp
             END DO
           END IF
@@ -184,14 +184,14 @@ SUBROUTINE DQRSLV(N,R,Ldr,Ipvt,Diag,Qtb,X,Sigma,Wa)
   IF ( nsing>=1 ) THEN
     DO k = 1, nsing
       j = nsing - k + 1
-      sum = zero
+      summ = zero
       jp1 = j + 1
       IF ( nsing>=jp1 ) THEN
         DO i = jp1, nsing
-          sum = sum + R(i,j)*Wa(i)
+          summ = summ + R(i,j)*Wa(i)
         END DO
       END IF
-      Wa(j) = (Wa(j)-sum)/Sigma(j)
+      Wa(j) = (Wa(j)-summ)/Sigma(j)
     END DO
   END IF
   !

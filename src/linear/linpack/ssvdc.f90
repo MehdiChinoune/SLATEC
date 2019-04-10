@@ -127,7 +127,7 @@ SUBROUTINE SSVDC(X,Ldx,N,P,S,E,U,Ldu,V,Ldv,Work,Job,Info)
   INTEGER i, iter, j, jobu, k, kase, kk, l, ll, lls, lm1, lp1, &
     ls, lu, m, maxit, mm, mm1, mp1, nct, nctp1, ncu, nrt, nrtp1
   REAL SDOT, t
-  REAL b, c, cs, el, emm1, f, g, SNRM2, scale, shift, sl, sm, &
+  REAL b, c, cs, el, emm1, f, g, SNRM2, scalee, shiftt, sl, sm, &
     sn, smm1, t1, test, ztest
   LOGICAL wantu, wantv
   !* FIRST EXECUTABLE STATEMENT  SSVDC
@@ -392,21 +392,21 @@ SUBROUTINE SSVDC(X,Ldx,N,P,S,E,U,Ldu,V,Ldv,Work,Job,Info)
           !
           !           CALCULATE THE SHIFT.
           !
-          scale = MAX(ABS(S(m)),ABS(S(m-1)),ABS(E(m-1)),ABS(S(l)),ABS(E(l)))
-          sm = S(m)/scale
-          smm1 = S(m-1)/scale
-          emm1 = E(m-1)/scale
-          sl = S(l)/scale
-          el = E(l)/scale
+          scalee = MAX(ABS(S(m)),ABS(S(m-1)),ABS(E(m-1)),ABS(S(l)),ABS(E(l)))
+          sm = S(m)/scalee
+          smm1 = S(m-1)/scalee
+          emm1 = E(m-1)/scalee
+          sl = S(l)/scalee
+          el = E(l)/scalee
           b = ((smm1+sm)*(smm1-sm)+emm1**2)/2.0E0
           c = (sm*emm1)**2
-          shift = 0.0E0
+          shiftt = 0.0E0
           IF ( b/=0.0E0.OR.c/=0.0E0 ) THEN
-            shift = SQRT(b**2+c)
-            IF ( b<0.0E0 ) shift = -shift
-            shift = c/(b+shift)
+            shiftt = SQRT(b**2+c)
+            IF ( b<0.0E0 ) shiftt = -shiftt
+            shiftt = c/(b+shiftt)
           END IF
-          f = (sl+sm)*(sl-sm) - shift
+          f = (sl+sm)*(sl-sm) - shiftt
           g = sl*el
           !
           !           CHASE ZEROS.

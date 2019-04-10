@@ -621,7 +621,7 @@ SUBROUTINE SNLS1(FCN,Iopt,M,N,X,Fvec,Fjac,Ldfjac,Ftol,Xtol,Gtol,Maxfev,&
   EXTERNAL :: FCN
   INTEGER i, iflag, iter, j, l, modech
   REAL actred, delta, dirder, epsmch, fnorm, fnorm1, gnorm, par, pnorm, prered, &
-    ratio, sum, temp, temp1, temp2, xnorm, err(1)
+    ratio, summ, temp, temp1, temp2, xnorm, err(1)
   REAL R1MACH, ENORM
   CHARACTER(8) :: xern1
   CHARACTER(16) :: xern3
@@ -747,11 +747,11 @@ SUBROUTINE SNLS1(FCN,Iopt,M,N,X,Fvec,Fjac,Ldfjac,Ftol,Xtol,Gtol,Maxfev,&
       CALL QRFAC(N,N,Fjac,Ldfjac,.TRUE.,Ipvt,N,Wa1,Wa2,Wa3)
       DO j = 1, N
         IF ( Fjac(j,j)/=zero ) THEN
-          sum = zero
+          summ = zero
           DO i = j, N
-            sum = sum + Fjac(i,j)*Qtf(i)
+            summ = summ + Fjac(i,j)*Qtf(i)
           END DO
-          temp = -sum/Fjac(j,j)
+          temp = -summ/Fjac(j,j)
           DO i = j, N
             Qtf(i) = Qtf(i) + Fjac(i,j)*temp
           END DO
@@ -821,11 +821,11 @@ SUBROUTINE SNLS1(FCN,Iopt,M,N,X,Fvec,Fjac,Ldfjac,Ftol,Xtol,Gtol,Maxfev,&
     END DO
     DO j = 1, N
       IF ( Fjac(j,j)/=zero ) THEN
-        sum = zero
+        summ = zero
         DO i = j, M
-          sum = sum + Fjac(i,j)*Wa4(i)
+          summ = summ + Fjac(i,j)*Wa4(i)
         END DO
-        temp = -sum/Fjac(j,j)
+        temp = -summ/Fjac(j,j)
         DO i = j, M
           Wa4(i) = Wa4(i) + Fjac(i,j)*temp
         END DO
@@ -864,11 +864,11 @@ SUBROUTINE SNLS1(FCN,Iopt,M,N,X,Fvec,Fjac,Ldfjac,Ftol,Xtol,Gtol,Maxfev,&
     DO j = 1, N
       l = Ipvt(j)
       IF ( Wa2(l)/=zero ) THEN
-        sum = zero
+        summ = zero
         DO i = 1, j
-          sum = sum + Fjac(i,j)*(Qtf(i)/fnorm)
+          summ = summ + Fjac(i,j)*(Qtf(i)/fnorm)
         END DO
-        gnorm = MAX(gnorm,ABS(sum/Wa2(l)))
+        gnorm = MAX(gnorm,ABS(summ/Wa2(l)))
       END IF
     END DO
   END IF

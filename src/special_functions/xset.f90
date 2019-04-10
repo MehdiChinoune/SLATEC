@@ -247,8 +247,8 @@ SUBROUTINE XSET(Irad,Nradpl,Dzero,Nbits,Ierror)
   IF ( iradx==8 ) log2r = 3
   IF ( iradx==16 ) log2r = 4
   NBItsf = log2r*nrdplc
-  RADix = iradx
-  DLG10r = LOG10(RADix)
+  RADixx = iradx
+  DLG10r = LOG10(RADixx)
   IF ( dzerox/=0.0 ) THEN
     lx = INT( 0.5*LOG10(dzerox)/DLG10r )
     ! RADIX**(2*L) SHOULD NOT OVERFLOW, BUT REDUCE L BY 1 FOR FURTHER
@@ -260,7 +260,7 @@ SUBROUTINE XSET(Irad,Nradpl,Dzero,Nbits,Ierror)
   L2 = 2*lx
   IF ( lx>=4 ) THEN
     L = lx
-    RADixl = RADix**L
+    RADixl = RADixx**L
     RAD2l = RADixl**2
     !    IT IS NECESSARY TO RESTRICT NBITS (OR NBITSX) TO BE LESS THAN SOME
     ! UPPER LIMIT BECAUSE OF BINARY-TO-DECIMAL CONVERSION. SUCH CONVERSION

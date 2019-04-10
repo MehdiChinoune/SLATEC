@@ -37,7 +37,7 @@ SUBROUTINE DU11LS(A,Mda,M,N,Ub,Db,Mode,Np,Krank,Ksure,H,W,Eb,Ic,Ir)
   !   900328  Added TYPE section.  (WRB)
 
   INTEGER Mda, mm, Mode, N, nmk, Np
-  REAL(8) :: A(Mda,*), bb, Db(*), Eb(*), H(*), r2, rmin, sum, t, temp, tn, tt, Ub(*), W(*)
+  REAL(8) :: A(Mda,*), bb, Db(*), Eb(*), H(*), r2, rmin, summ, t, temp, tn, tt, Ub(*), W(*)
   INTEGER i, IDAMAX, ii, im1, imin, is, j, jm1, jmax, jp1, kk, &
     km1, kmi, kp1, Krank, Ksure, kz, l, lm1, M
   REAL(8) :: DDOT, DNRM2
@@ -278,11 +278,11 @@ SUBROUTINE DU11LS(A,Mda,M,N,Ub,Db,Mode,Np,Krank,Ksure,H,W,Eb,Ic,Ir)
     IF ( is==0 ) EXIT
   END DO
   Ksure = 0
-  sum = 0.0D0
+  summ = 0.0D0
   DO i = 1, Krank
     r2 = Ub(i)*Ub(i)
-    IF ( r2+sum>=1.0D0 ) EXIT
-    sum = sum + r2
+    IF ( r2+summ>=1.0D0 ) EXIT
+    summ = summ + r2
     Ksure = Ksure + 1
   END DO
   !

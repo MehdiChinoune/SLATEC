@@ -1,5 +1,5 @@
 !** DWNLT2
-LOGICAL FUNCTION DWNLT2(Me,Mend,Ir,Factor,Tau,Scale,Wic)
+LOGICAL FUNCTION DWNLT2(Me,Mend,Ir,Factor,Tau,Scalee,Wic)
   IMPLICIT NONE
   !>
   !***
@@ -42,7 +42,7 @@ LOGICAL FUNCTION DWNLT2(Me,Mend,Ir,Factor,Tau,Scale,Wic)
   !   890620  Code extracted from WNLIT and made a subroutine.  (RWC))
   !   900604  DP version created from SP version.  (RWC)
 
-  REAL(8) :: Factor, Scale(*), Tau, Wic(*)
+  REAL(8) :: Factor, Scalee(*), Tau, Wic(*)
   INTEGER Ir, Me, Mend
   !
   REAL(8) :: rn, sn, t
@@ -52,7 +52,7 @@ LOGICAL FUNCTION DWNLT2(Me,Mend,Ir,Factor,Tau,Scale,Wic)
   sn = 0.E0
   rn = 0.E0
   DO j = 1, Mend
-    t = Scale(j)
+    t = Scalee(j)
     IF ( j<=Me ) t = t/Factor
     t = t*Wic(j)**2
     !

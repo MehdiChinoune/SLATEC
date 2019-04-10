@@ -84,7 +84,7 @@ SUBROUTINE AVINT(X,Y,N,Xlo,Xup,Ans,Ierr)
 
   REAL Ans, fl, fr, slope, X(*), Xlo, Xup, Y(*)
   INTEGER i, Ierr, inlft, inrt, istart, istop, N
-  REAL(8) :: r3, rp5, sum, syl, syl2, syl3, syu, syu2, syu3, &
+  REAL(8) :: r3, rp5, summ, syl, syl2, syl3, syu, syu2, syu3, &
     x1, x2, x3, x12, x13, x23, term1, term2, term3, a, b, c, ca, cb, cc
   !* FIRST EXECUTABLE STATEMENT  AVINT
   Ierr = 1
@@ -121,7 +121,7 @@ SUBROUTINE AVINT(X,Y,N,Xlo,Xup,Ans,Ierr)
         !
         r3 = 3.0D0
         rp5 = 0.5D0
-        sum = 0.0
+        summ = 0.0
         syl = Xlo
         syl2 = syl*syl
         syl3 = syl2*syl
@@ -151,7 +151,7 @@ SUBROUTINE AVINT(X,Y,N,Xlo,Xup,Ans,Ierr)
           syu = x2
           syu2 = syu*syu
           syu3 = syu2*syu
-          sum = sum + ca*(syu3-syl3)/r3 + cb*rp5*(syu2-syl2) + cc*(syu-syl)
+          summ = summ + ca*(syu3-syl3)/r3 + cb*rp5*(syu2-syl2) + cc*(syu-syl)
           ca = a
           cb = b
           cc = c
@@ -160,7 +160,7 @@ SUBROUTINE AVINT(X,Y,N,Xlo,Xup,Ans,Ierr)
           syl3 = syu3
         END DO
         syu = Xup
-        Ans = REAL( sum + ca*(syu**3-syl3)/r3 + cb*rp5*(syu**2-syl2)&
+        Ans = REAL( summ + ca*(syu**3-syl3)/r3 + cb*rp5*(syu**2-syl2)&
           + cc*(syu-syl) , 4 )
       ELSE
         !

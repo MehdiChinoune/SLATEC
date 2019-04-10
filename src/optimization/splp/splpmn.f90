@@ -55,7 +55,7 @@ SUBROUTINE SPLPMN(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   REAL aij, Amat(*), anorm, Basmat(*), Bl(*), Bu(*), Colnrm(*), Costs(*), Csc(*), &
     Dattrv(*), dirnrm, Duals(*), dulnrm, Erd(*), erdnrm, Erp(*), factor, gg, one, &
     Prgopt(*), Primal(*), resnrm, Rg(*), Rhs(*), rhsnrm, Rprim(*), rprnrm, Rz(*), &
-    rzj, scalr, scosts, size, theta, upbnd, uu, Wr(*), Ww(*), xlamda, xval, &
+    rzj, scalr, scosts, sizee, theta, upbnd, uu, Wr(*), Ww(*), xlamda, xval, &
     zero, rdum(01)
   REAL, TARGET :: ropt(07)
   REAL, POINTER :: eps, asmall, abig, costsc, tolls, tune, tolabs
@@ -394,9 +394,9 @@ SUBROUTINE SPLPMN(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   END IF
   !
   IF ( Info==(-1).OR.Info==(-3) ) THEN
-    size = SASUM(Nvars,Primal,1)*anorm
-    size = size/SASUM(Nvars,Csc,1)
-    size = size + SASUM(Mrelas,Primal(Nvars+1),1)
+    sizee = SASUM(Nvars,Primal,1)*anorm
+    sizee = sizee/SASUM(Nvars,Csc,1)
+    sizee = sizee + SASUM(Mrelas,Primal(Nvars+1),1)
     i = 1
     n20058 = Nvars + Mrelas
     DO WHILE ( (n20058-i)>=0 )
@@ -404,20 +404,20 @@ SUBROUTINE SPLPMN(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
       IF ( nx0066>=1.AND.nx0066<=4 ) THEN
         SELECT CASE (nx0066)
           CASE (2)
-            IF ( size+ABS(Primal(i)-Bu(i))*factor/=size ) THEN
+            IF ( sizee+ABS(Primal(i)-Bu(i))*factor/=sizee ) THEN
               IF ( Primal(i)>=Bu(i) ) Ind(i) = -4
             END IF
           CASE (3)
-            IF ( size+ABS(Primal(i)-Bl(i))*factor/=size ) THEN
+            IF ( sizee+ABS(Primal(i)-Bl(i))*factor/=sizee ) THEN
               IF ( Primal(i)<Bl(i) ) THEN
                 Ind(i) = -4
-              ELSEIF ( size+ABS(Primal(i)-Bu(i))*factor/=size ) THEN
+              ELSEIF ( sizee+ABS(Primal(i)-Bu(i))*factor/=sizee ) THEN
                 IF ( Primal(i)>Bu(i) ) Ind(i) = -4
               END IF
             END IF
           CASE (4)
           CASE DEFAULT
-            IF ( size+ABS(Primal(i)-Bl(i))*factor/=size ) THEN
+            IF ( sizee+ABS(Primal(i)-Bl(i))*factor/=sizee ) THEN
               IF ( Primal(i)<=Bl(i) ) Ind(i) = -4
             END IF
         END SELECT

@@ -27,7 +27,7 @@ REAL FUNCTION VNWRMS(N,V,W)
   !   890831  Modified array declarations.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
-  
+
   !
   !
   !LLL. OPTIMIZE
@@ -38,12 +38,12 @@ REAL FUNCTION VNWRMS(N,V,W)
   !   VNWRMS = SQRT( (1/N) * SUM( V(I)/W(I) )**2 )
   !-----------------------------------------------------------------------
   INTEGER N, i
-  REAL V(*), W(*), sum
+  REAL V(*), W(*), summ
   !* FIRST EXECUTABLE STATEMENT  VNWRMS
-  sum = 0.0E0
+  summ = 0.0E0
   DO i = 1, N
-    sum = sum + (V(i)/W(i))**2
+    summ = summ + (V(i)/W(i))**2
   END DO
-  VNWRMS = SQRT(sum/N)
+  VNWRMS = SQRT(summ/N)
   !----------------------- END OF FUNCTION VNWRMS ------------------------
 END FUNCTION VNWRMS
