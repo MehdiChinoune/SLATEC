@@ -499,7 +499,7 @@ CONTAINS
 
     INTEGER i, j, ki, kn, kni, kpar, ksize, lenx, leny, mx, my, Kprint, qc_i(30)
     REAL Sdfac, SDOT, SDSDOT, Sfac
-    REAL sx(7), sy(7), stx(7), sty(7), ssize(7), qc(30), sparam(5), stmp(1), stmp2(1)
+    REAL sx(7), sy(7), stx(7), sty(7), ssize(7), sparam(5), stmp(1), stmp2(1)
     REAL(8) :: dx(7), dy(7), dparam(5), dsize(7), dtx(7), dty(7), dtmp(1)
     REAL(8) :: DSDOT, DDOT, DQDOTI, DQDOTA, Dfac, Dqfac
     !
@@ -923,7 +923,6 @@ CONTAINS
             !     IN THE DIAGNOSTIC OUTPUT.
             !
             MODe = 1
-            qc_i = INT(qc)
             dtmp = DQDOTI(N,db,qc_i,dx2,INCx,dy2,INCy)
             CALL DTEST(1,dtmp,dt2(kn,ki,1),dt2(kn,ki,1),Dqfac,Kprint)
           CASE (6)
@@ -936,7 +935,6 @@ CONTAINS
             !     DQDOTI OR DQDOTA IN THE DIAGNOSTIC OUTPUT.
             !
             MODe = 1
-            qc_i = INT(qc)
             dtmp = DQDOTI(N,db,qc_i,dx2,INCx,dy2,INCy)
             CALL DTEST(1,dtmp,dt2(kn,ki,1),dt2(kn,ki,1),Dqfac,Kprint)
             MODe = 2
