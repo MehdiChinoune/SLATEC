@@ -74,7 +74,6 @@ COMPLEX FUNCTION CATAN(Z)
     RETURN
   ELSE
     x = REAL(Z)
-    IF( ABS(x) == 0. ) x = 0.
     y = AIMAG(Z)
     r2 = r*r
     IF ( r2==1.0.AND.x==0.0 ) CALL XERMSG('SLATEC','CATAN','Z IS +I OR -I',2,2)
@@ -84,7 +83,11 @@ COMPLEX FUNCTION CATAN(Z)
     END IF
   END IF
   !
-  xans = 0.5*ATAN2(2.0*x,1.0-r2)
+  IF ( ABS(x) == 0. ) THEN
+    xans = pi2
+  ELSE
+    xans = 0.5*ATAN2(2.0*x,1.0-r2)
+  END IF
   yans = 0.25*LOG((r2+2.0*y+1.0)/(r2-2.0*y+1.0))
   CATAN = CMPLX(xans,yans)
   RETURN
