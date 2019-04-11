@@ -43,7 +43,7 @@ REAL FUNCTION GAMIC(A,X)
   !                 ACM Transactions on Mathematical Software 5, 4
   !                 (December 1979), pp. 482-489.
   !***
-  ! **Routines called:**  ALGAMS, ALNGAM, R1MACH, R9GMIC, R9GMIT, R9LGIC,
+  ! **Routines called:**  ALGAMS, R1MACH, R9GMIC, R9GMIT, R9LGIC,
   !                    R9LGIT, XERCLR, XERMSG
 
   !* REVISION HISTORY  (YYMMDD)
@@ -55,7 +55,7 @@ REAL FUNCTION GAMIC(A,X)
   !   920528  DESCRIPTION and REFERENCES sections revised.  (WRB)
 
   REAL A, aeps, algap1, alngs, alx, e, fm, gstar, h, sga, sgng,  sgngam, sgngs, t, &
-    X, ALNGAM, R1MACH, R9GMIC, R9GMIT, R9LGIC, R9LGIT
+    X, R1MACH, R9GMIC, R9GMIT, R9LGIC, R9LGIT
   INTEGER izero, ma
   REAL, SAVE :: eps, sqeps, alneps, bot
   LOGICAL :: first = .TRUE.
@@ -87,7 +87,7 @@ REAL FUNCTION GAMIC(A,X)
       END IF
       !
       sgngam = 1.0
-      algap1 = ALNGAM(A+1.0)
+      algap1 = LOG_GAMMA(A+1.0)
       sgngs = 1.0
       alngs = R9LGIT(A,X,algap1)
     ELSE
@@ -136,7 +136,7 @@ REAL FUNCTION GAMIC(A,X)
     IF ( A<=0.0 ) CALL XERMSG('SLATEC','GAMIC',&
       'X = 0 AND A LE 0 SO GAMIC IS UNDEFINED',3,2)
     !
-    GAMIC = EXP(ALNGAM(A+1.0)-LOG(A))
+    GAMIC = EXP(LOG_GAMMA(A+1.0)-LOG(A))
     RETURN
   END IF
   !

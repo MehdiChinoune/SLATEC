@@ -60,7 +60,7 @@ REAL(8) FUNCTION DGAMIT(A,X)
   !   920528  DESCRIPTION and REFERENCES sections revised.  (WRB)
 
   REAL(8) :: A, X, aeps, ainta, algap1, alng, alx, h, sga, sgngam, t, D1MACH, &
-    DGAMR, D9GMIT, D9LGIT, DLNGAM, D9LGIC
+    DGAMR, D9GMIT, D9LGIT, D9LGIC
   REAL(8), SAVE :: alneps, sqeps, bot
   LOGICAL :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  DGAMIT
@@ -117,7 +117,7 @@ REAL(8) FUNCTION DGAMIT(A,X)
       END IF
     END IF
   ELSE
-    t = D9LGIT(A,X,DLNGAM(A+1.0D0))
+    t = D9LGIT(A,X,LOG_GAMMA(A+1.0D0))
     IF ( t<bot ) CALL XERCLR
     DGAMIT = EXP(t)
     RETURN

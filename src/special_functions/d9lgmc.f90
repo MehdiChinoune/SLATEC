@@ -4,7 +4,7 @@ REAL(8) FUNCTION D9LGMC(X)
   !>
   !***
   !  Compute the log Gamma correction factor so that
-  !            LOG(DGAMMA(X)) = LOG(SQRT(2*PI)) + (X-5.)*LOG(X) - X
+  !            LOG(GAMMA(X)) = LOG(SQRT(2*PI)) + (X-5.)*LOG(X) - X
   !            + D9LGMC(X).
   !***
   ! **Library:**   SLATEC (FNLIB)
@@ -21,7 +21,7 @@ REAL(8) FUNCTION D9LGMC(X)
   ! **Description:**
   !
   ! Compute the log gamma correction factor for X .GE. 10. so that
-  ! LOG (DGAMMA(X)) = LOG(SQRT(2*PI)) + (X-.5)*LOG(X) - X + D9lGMC(X)
+  ! LOG (GAMMA(X)) = LOG(SQRT(2*PI)) + (X-.5)*LOG(X) - X + D9lGMC(X)
   !
   ! Series for ALGM       on the interval  0.          to  1.00000E-02
   !                                        with weighted error   1.28E-31

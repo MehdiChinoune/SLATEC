@@ -25,7 +25,7 @@ REAL(8) FUNCTION D9GMIC(A,X,Alx)
   !***
   ! **References:**  (NONE)
   !***
-  ! **Routines called:**  D1MACH, DLNGAM, XERMSG
+  ! **Routines called:**  D1MACH, XERMSG
 
   !* REVISION HISTORY  (YYMMDD)
   !   770701  DATE WRITTEN
@@ -37,7 +37,7 @@ REAL(8) FUNCTION D9GMIC(A,X,Alx)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
 
   INTEGER k, m, mm1
-  REAL(8) :: A, X, Alx, alng, fk, fkp1, fm, s, sgng, t, te, D1MACH, DLNGAM
+  REAL(8) :: A, X, Alx, alng, fk, fkp1, fm, s, sgng, t, te, D1MACH
   REAL(8), SAVE :: eps, bot
   REAL(8), PARAMETER :: euler = 0.57721566490153286060651209008240D0
   LOGICAL :: first = .TRUE.
@@ -92,7 +92,7 @@ REAL(8) FUNCTION D9GMIC(A,X,Alx)
   !
   sgng = 1.0D0
   IF ( MOD(m,2)==1 ) sgng = -1.0D0
-  alng = LOG(D9GMIC) - DLNGAM(fm+1.D0)
+  alng = LOG(D9GMIC) - LOG_GAMMA(fm+1.D0)
   !
   D9GMIC = 0.D0
   IF ( alng>bot ) D9GMIC = sgng*EXP(alng)

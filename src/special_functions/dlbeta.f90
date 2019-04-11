@@ -26,7 +26,7 @@ REAL(8) FUNCTION DLBETA(A,B)
   !***
   ! **References:**  (NONE)
   !***
-  ! **Routines called:**  D9LGMC, DGAMMA, DLNGAM, DLNREL, XERMSG
+  ! **Routines called:**  D9LGMC, DLNREL, XERMSG
 
   !* REVISION HISTORY  (YYMMDD)
   !   770701  DATE WRITTEN
@@ -37,7 +37,7 @@ REAL(8) FUNCTION DLBETA(A,B)
   !   900727  Added EXTERNAL statement.  (WRB)
 
   REAL(8) :: A, B, p, q, corr
-  REAL(8), EXTERNAL :: DGAMMA, D9LGMC, DLNGAM, DLNREL
+  REAL(8), EXTERNAL :: D9LGMC, DLNREL
   REAL(8), PARAMETER :: sq2pil = 0.91893853320467274178032973640562D0
   !* FIRST EXECUTABLE STATEMENT  DLBETA
   p = MIN(A,B)
@@ -58,13 +58,13 @@ REAL(8) FUNCTION DLBETA(A,B)
     !
     ! P AND Q ARE SMALL.
     !
-    DLBETA = LOG(DGAMMA(p)*(DGAMMA(q)/DGAMMA(p+q)))
+    DLBETA = LOG(GAMMA(p)*(GAMMA(q)/GAMMA(p+q)))
     RETURN
   END IF
   !
   ! P IS SMALL, BUT Q IS BIG.
   !
   corr = D9LGMC(q) - D9LGMC(p+q)
-  DLBETA = DLNGAM(p) + corr + p - p*LOG(p+q) + (q-0.5D0)*DLNREL(-p/(p+q))
+  DLBETA = LOG_GAMMA(p) + corr + p - p*LOG(p+q) + (q-0.5D0)*DLNREL(-p/(p+q))
   RETURN
 END FUNCTION DLBETA

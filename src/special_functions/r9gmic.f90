@@ -25,7 +25,7 @@ REAL FUNCTION R9GMIC(A,X,Alx)
   !***
   ! **References:**  (NONE)
   !***
-  ! **Routines called:**  ALNGAM, R1MACH, XERMSG
+  ! **Routines called:**  R1MACH, XERMSG
 
   !* REVISION HISTORY  (YYMMDD)
   !   770701  DATE WRITTEN
@@ -35,7 +35,7 @@ REAL FUNCTION R9GMIC(A,X,Alx)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
 
-  REAL A, alng, ALNGAM, Alx, fk, fkp1, fm, R1MACH, s, sgng, t, te, X
+  REAL A, alng, Alx, fk, fkp1, fm, R1MACH, s, sgng, t, te, X
   INTEGER k, m, ma, mm1
   REAL, PARAMETER :: euler = .5772156649015329E0
   REAL :: eps = 0., bot = 0.
@@ -88,7 +88,7 @@ REAL FUNCTION R9GMIC(A,X,Alx)
   !
   sgng = 1.0
   IF ( MOD(m,2)==1 ) sgng = -1.0
-  alng = LOG(R9GMIC) - ALNGAM(fm+1.0)
+  alng = LOG(R9GMIC) - LOG_GAMMA(fm+1.0)
   !
   R9GMIC = 0.0
   IF ( alng>bot ) R9GMIC = sgng*EXP(alng)

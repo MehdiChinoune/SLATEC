@@ -56,7 +56,7 @@ REAL(8) FUNCTION DGAMIC(A,X)
 
   INTEGER izero
   REAL(8) :: A, X, aeps, ainta, algap1, alngs, alx, e, gstar, h, sga, sgng, &
-    sgngam, sgngs, t, D1MACH, DLNGAM, D9GMIC, D9GMIT, D9LGIC, D9LGIT
+    sgngam, sgngs, t, D1MACH, D9GMIC, D9GMIT, D9LGIC, D9LGIT
   REAL(8), SAVE :: eps, sqeps, alneps, bot
   LOGICAL :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  DGAMIC
@@ -87,7 +87,7 @@ REAL(8) FUNCTION DGAMIC(A,X)
       END IF
       !
       sgngam = 1.0D0
-      algap1 = DLNGAM(A+1.0D0)
+      algap1 = LOG_GAMMA(A+1.0D0)
       sgngs = 1.0D0
       alngs = D9LGIT(A,X,algap1)
     ELSE
@@ -135,7 +135,7 @@ REAL(8) FUNCTION DGAMIC(A,X)
     IF ( A<=0.D0 ) CALL XERMSG('SLATEC','DGAMIC',&
       'X = 0 AND A LE 0 SO DGAMIC IS UNDEFINED',3,2)
     !
-    DGAMIC = EXP(DLNGAM(A+1.D0)-LOG(A))
+    DGAMIC = EXP(LOG_GAMMA(A+1.D0)-LOG(A))
     RETURN
   END IF
   !

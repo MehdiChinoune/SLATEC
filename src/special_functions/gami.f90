@@ -29,7 +29,7 @@ REAL FUNCTION GAMI(A,X)
   !***
   ! **References:**  (NONE)
   !***
-  ! **Routines called:**  ALNGAM, GAMIT, XERMSG
+  ! **Routines called:**  GAMIT, XERMSG
 
   !* REVISION HISTORY  (YYMMDD)
   !   770701  DATE WRITTEN
@@ -37,8 +37,8 @@ REAL FUNCTION GAMI(A,X)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-  
-  REAL A, ALNGAM, factor, GAMIT, X
+
+  REAL A, factor, GAMIT, X
   !* FIRST EXECUTABLE STATEMENT  GAMI
   IF ( A<=0.0 ) CALL XERMSG('SLATEC','GAMI','A MUST BE GT ZERO',1,2)
   IF ( X<0.0 ) CALL XERMSG('SLATEC','GAMI','X MUST BE GE ZERO',2,2)
@@ -47,7 +47,7 @@ REAL FUNCTION GAMI(A,X)
   IF ( X==0.0 ) RETURN
   !
   ! THE ONLY ERROR POSSIBLE IN THE EXPRESSION BELOW IS A FATAL OVERFLOW.
-  factor = EXP(ALNGAM(A)+A*LOG(X))
+  factor = EXP(LOG_GAMMA(A)+A*LOG(X))
   !
   GAMI = factor*GAMIT(A,X)
   !

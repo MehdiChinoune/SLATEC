@@ -27,7 +27,7 @@ REAL(8) FUNCTION DCHU(A,B,X)
   !***
   ! **References:**  (NONE)
   !***
-  ! **Routines called:**  D1MACH, D9CHU, DEXPRL, DGAMMA, DGAMR, DPOCH,
+  ! **Routines called:**  D1MACH, D9CHU, DEXPRL, DGAMR, DPOCH,
   !                    DPOCH1, XERMSG
 
   !* REVISION HISTORY  (YYMMDD)
@@ -41,7 +41,7 @@ REAL(8) FUNCTION DCHU(A,B,X)
   INTEGER i, istrt, m, n
   REAL(8) :: A, B, X, aintb, alnx, a0, beps, b0, c0, factor, gamri1, gamrni, &
     pch1ai, pch1i, pochai, summ, t, xeps1, xi, xi1, xn, xtoeps
-  REAL(8), EXTERNAL :: DGAMMA, D1MACH, DPOCH, DGAMR, DPOCH1, DEXPRL, D9CHU
+  REAL(8), EXTERNAL :: D1MACH, DPOCH, DGAMR, DPOCH1, DEXPRL, D9CHU
   REAL(8), PARAMETER :: pi = 3.141592653589793238462643383279503D0
   REAL(8) :: eps = 0.0D0
   !* FIRST EXECUTABLE STATEMENT  DCHU
@@ -87,7 +87,7 @@ REAL(8) FUNCTION DCHU(A,B,X)
           END DO
         END IF
         !
-        summ = DGAMMA(B-1.0D0)*DGAMR(A)*X**(1-n)*xtoeps*summ
+        summ = GAMMA(B-1.0D0)*DGAMR(A)*X**(1-n)*xtoeps*summ
       END IF
     ELSE
       !

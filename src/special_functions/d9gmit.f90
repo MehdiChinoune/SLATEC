@@ -24,7 +24,7 @@ REAL(8) FUNCTION D9GMIT(A,X,Algap1,Sgngam,Alx)
   !***
   ! **References:**  (NONE)
   !***
-  ! **Routines called:**  D1MACH, DLNGAM, XERMSG
+  ! **Routines called:**  D1MACH, XERMSG
 
   !* REVISION HISTORY  (YYMMDD)
   !   770701  DATE WRITTEN
@@ -37,7 +37,7 @@ REAL(8) FUNCTION D9GMIT(A,X,Algap1,Sgngam,Alx)
 
   INTEGER k, m, ma
   REAL(8) :: A, X, Algap1, Sgngam, Alx, ae, aeps, algs, alg2, fk, s, sgng2, t, te, &
-    D1MACH, DLNGAM
+    D1MACH
   REAL(8), SAVE :: eps, bot
   LOGICAL :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  D9GMIT
@@ -76,7 +76,7 @@ REAL(8) FUNCTION D9GMIT(A,X,Algap1,Sgngam,Alx)
     D9GMIT = EXP(algs)
   ELSE
     !
-    algs = -DLNGAM(1.D0+aeps) + LOG(s)
+    algs = -LOG_GAMMA(1.D0+aeps) + LOG(s)
     s = 1.0D0
     m = -ma - 1
     IF ( m/=0 ) THEN

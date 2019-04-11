@@ -48,7 +48,7 @@ REAL FUNCTION GAMIT(A,X)
   !                 ACM Transactions on Mathematical Software 5, 4
   !                 (December 1979), pp. 482-489.
   !***
-  ! **Routines called:**  ALGAMS, ALNGAM, GAMR, R1MACH, R9GMIT, R9LGIC,
+  ! **Routines called:**  ALGAMS, GAMR, R1MACH, R9GMIT, R9LGIC,
   !                    R9LGIT, XERCLR, XERMSG
 
   !* REVISION HISTORY  (YYMMDD)
@@ -60,7 +60,7 @@ REAL FUNCTION GAMIT(A,X)
   !   920528  DESCRIPTION and REFERENCES sections revised.  (WRB)
 
   REAL :: A, aeps, ainta, algap1, alng, alx, h, sga, sgngam, t, X
-  REAL, EXTERNAL :: ALNGAM, GAMR, R1MACH, R9GMIT, R9LGIC, R9LGIT
+  REAL, EXTERNAL :: GAMR, R1MACH, R9GMIT, R9LGIC, R9LGIT
   REAL, SAVE :: alneps, sqeps, bot
   LOGICAL :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  GAMIT
@@ -114,7 +114,7 @@ REAL FUNCTION GAMIT(A,X)
       END IF
     END IF
   ELSE
-    t = R9LGIT(A,X,ALNGAM(A+1.0))
+    t = R9LGIT(A,X,LOG_GAMMA(A+1.0))
     IF ( t<bot ) CALL XERCLR
     GAMIT = EXP(t)
     RETURN

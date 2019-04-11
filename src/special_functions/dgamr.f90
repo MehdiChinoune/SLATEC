@@ -23,7 +23,7 @@ REAL(8) FUNCTION DGAMR(X)
   !***
   ! **References:**  (NONE)
   !***
-  ! **Routines called:**  DGAMMA, DLGAMS, XERCLR, XGETF, XSETF
+  ! **Routines called:**  DLGAMS, XERCLR, XGETF, XSETF
 
   !* REVISION HISTORY  (YYMMDD)
   !   770701  DATE WRITTEN
@@ -34,7 +34,6 @@ REAL(8) FUNCTION DGAMR(X)
 
   INTEGER irold
   REAL(8) :: X, alngx, sgngx
-  REAL(8), EXTERNAL :: DGAMMA
   !* FIRST EXECUTABLE STATEMENT  DGAMR
   DGAMR = 0.0D0
   IF ( X<=0.0D0.AND.AINT(X)==X ) RETURN
@@ -49,7 +48,7 @@ REAL(8) FUNCTION DGAMR(X)
     DGAMR = sgngx*EXP(-alngx)
     RETURN
   END IF
-  DGAMR = 1.0D0/DGAMMA(X)
+  DGAMR = 1.0D0/GAMMA(X)
   CALL XERCLR
   CALL XSETF(irold)
   RETURN

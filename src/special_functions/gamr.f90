@@ -23,7 +23,7 @@ REAL FUNCTION GAMR(X)
   !***
   ! **References:**  (NONE)
   !***
-  ! **Routines called:**  ALGAMS, GAMMA, XERCLR, XGETF, XSETF
+  ! **Routines called:**  ALGAMS, XERCLR, XGETF, XSETF
 
   !* REVISION HISTORY  (YYMMDD)
   !   770701  DATE WRITTEN
@@ -33,7 +33,6 @@ REAL FUNCTION GAMR(X)
 
   REAL alngx, sgngx, X
   INTEGER irold
-  REAL, EXTERNAL :: GAMMA
   !* FIRST EXECUTABLE STATEMENT  GAMR
   GAMR = 0.0
   IF ( X<=0.0.AND.AINT(X)==X ) RETURN

@@ -23,7 +23,7 @@ REAL(8) FUNCTION DBETA(A,B)
   !***
   ! **References:**  (NONE)
   !***
-  ! **Routines called:**  D1MACH, DGAMLM, DGAMMA, DLBETA, XERMSG
+  ! **Routines called:**  D1MACH, DGAMLM, DLBETA, XERMSG
 
   !* REVISION HISTORY  (YYMMDD)
   !   770601  DATE WRITTEN
@@ -34,7 +34,7 @@ REAL(8) FUNCTION DBETA(A,B)
   !   900727  Added EXTERNAL statement.  (WRB)
 
   REAL(8) :: A, B, xmin
-  REAL(8), EXTERNAL :: DLBETA, DGAMMA, D1MACH
+  REAL(8), EXTERNAL :: DLBETA, D1MACH
   REAL(8), SAVE :: xmax, alnsml
   LOGICAL :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  DBETA
@@ -48,7 +48,7 @@ REAL(8) FUNCTION DBETA(A,B)
     CALL XERMSG('SLATEC','DBETA','BOTH ARGUMENTS MUST BE GT 0',2,2)
   !
   IF ( A+B<xmax ) THEN
-    DBETA = DGAMMA(A)*DGAMMA(B)/DGAMMA(A+B)
+    DBETA = GAMMA(A)*GAMMA(B)/GAMMA(A+B)
     RETURN
   END IF
   !

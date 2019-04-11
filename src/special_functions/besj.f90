@@ -72,7 +72,7 @@ SUBROUTINE BESJ(X,Alpha,N,Y,Nz)
   !                 or Large Orders, NPL Mathematical Tables 6, Her
   !                 Majesty's Stationery Office, London, 1962.
   !***
-  ! **Routines called:**  ALNGAM, ASYJY, I1MACH, JAIRY, R1MACH, XERMSG
+  ! **Routines called:**  ASYJY, I1MACH, JAIRY, R1MACH, XERMSG
 
   !* REVISION HISTORY  (YYMMDD)
   !   750101  DATE WRITTEN
@@ -90,7 +90,7 @@ SUBROUTINE BESJ(X,Alpha,N,Y,Nz)
     sb, sxo2, s1, s2, t, ta, tau, tb, temp(3), tfn, tm, tol, tolln, trx, tx, t1, &
     t2, wk(7), X, xo2, xo2l, Y(*), rtol, slim
   INTEGER, EXTERNAL :: I1MACH
-  REAL, EXTERNAL :: R1MACH, ALNGAM
+  REAL, EXTERNAL :: R1MACH
   EXTERNAL :: JAIRY
   REAL, PARAMETER :: rtwo = 1.34839972492648E+00, pdf = 7.85398163397448E-01, &
     rttp = 7.97884560802865E-01, pidt = 1.57079632679490E+00
@@ -288,7 +288,7 @@ SUBROUTINE BESJ(X,Alpha,N,Y,Nz)
   !
   !     SERIES FOR (X/2)**2.LE.NU+1
   !
-  200  gln = ALNGAM(fnp1)
+  200  gln = LOG_GAMMA(fnp1)
   arg = fn*xo2l - gln
   IF ( arg<(-elim1) ) GOTO 400
   earg = EXP(arg)

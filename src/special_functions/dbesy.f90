@@ -150,9 +150,9 @@ SUBROUTINE DBESY(X,Fnu,N,Y)
           IF ( nb==1 ) GOTO 20
           s2 = w(2)
         ELSE
-          s1 = DBESY0(X)
+          s1 = BESSEL_Y0(X)
           IF ( nud==0.AND.nd==1 ) GOTO 20
-          s2 = DBESY1(X)
+          s2 = BESSEL_Y1(X)
         END IF
         trx = 2.0D0/X
         tm = (dnu+dnu+2.0D0)/X
@@ -204,11 +204,11 @@ SUBROUTINE DBESY(X,Fnu,N,Y)
     j = nud
     IF ( j/=1 ) THEN
       j = j + 1
-      Y(j) = DBESY0(X)
+      Y(j) = BESSEL_Y0(X)
       IF ( nd==1 ) RETURN
       j = j + 1
     END IF
-    Y(j) = DBESY1(X)
+    Y(j) = BESSEL_Y1(X)
     IF ( nd==1 ) RETURN
     trx = 2.0D0/X
     tm = trx

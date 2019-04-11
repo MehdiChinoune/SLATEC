@@ -26,7 +26,7 @@ REAL FUNCTION BETA(A,B)
   !***
   ! **References:**  (NONE)
   !***
-  ! **Routines called:**  ALBETA, GAMLIM, GAMMA, R1MACH, XERMSG
+  ! **Routines called:**  ALBETA, GAMLIM, R1MACH, XERMSG
 
   !* REVISION HISTORY  (YYMMDD)
   !   770601  DATE WRITTEN
@@ -39,7 +39,7 @@ REAL FUNCTION BETA(A,B)
   !   900727  Added EXTERNAL statement.  (WRB)
 
   REAL A, B, xmin
-  REAL, EXTERNAL :: ALBETA, GAMMA, R1MACH
+  REAL, EXTERNAL :: ALBETA, R1MACH
   REAL :: xmax = 0., alnsml = 0.
   !* FIRST EXECUTABLE STATEMENT  BETA
   IF ( alnsml==0.0 ) THEN

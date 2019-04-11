@@ -36,7 +36,7 @@ SUBROUTINE D9KNUS(Xnu,X,Bknu,Bknu1,Iswtch)
   !***
   ! **References:**  (NONE)
   !***
-  ! **Routines called:**  D1MACH, DCSEVL, DGAMMA, INITDS, XERMSG
+  ! **Routines called:**  D1MACH, DCSEVL, INITDS, XERMSG
 
   !* REVISION HISTORY  (YYMMDD)
   !   770601  DATE WRITTEN
@@ -55,7 +55,7 @@ SUBROUTINE D9KNUS(Xnu,X,Bknu,Bknu1,Iswtch)
     bknud, bknu0, b0, c0, expx, p1, p2, p3, qq, result, sqrtx, v, &
     vlnz, xi, xmu, x2n, x2tov, z, ztov
   INTEGER, EXTERNAL :: INITDS
-  REAL(8), EXTERNAL :: D1MACH, DCSEVL, DGAMMA
+  REAL(8), EXTERNAL :: D1MACH, DCSEVL
   INTEGER, SAVE :: ntc0k, ntznu1
   REAL(8), SAVE :: xnusml, xsml, alnsml, alnbig
   REAL, SAVE :: alneps
@@ -144,8 +144,8 @@ SUBROUTINE D9KNUS(Xnu,X,Bknu,Bknu1,Iswtch)
     ztov = 0.0D0
     IF ( vlnz>alnsml ) ztov = x2tov**2
     !
-    a0 = 0.5D0*DGAMMA(1.0D0+v)
-    b0 = 0.5D0*DGAMMA(1.0D0-v)
+    a0 = 0.5D0*GAMMA(1.0D0+v)
+    b0 = 0.5D0*GAMMA(1.0D0-v)
     c0 = -euler
     IF ( ztov>0.5D0.AND.v>xnusml ) c0 = -0.75D0 + DCSEVL((8.0D0*v)*v-1.0D0,c0kcs,ntc0k)
     !

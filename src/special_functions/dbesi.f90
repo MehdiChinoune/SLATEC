@@ -86,7 +86,7 @@ SUBROUTINE DBESI(X,Alpha,Kode,N,Y,Nz)
   !                 or Large Orders, NPL Mathematical Tables 6, Her
   !                 Majesty's Stationery Office, London, 1962.
   !***
-  ! **Routines called:**  D1MACH, DASYIK, DLNGAM, I1MACH, XERMSG
+  ! **Routines called:**  D1MACH, DASYIK, I1MACH, XERMSG
 
   !* REVISION HISTORY  (YYMMDD)
   !   750101  DATE WRITTEN
@@ -105,7 +105,7 @@ SUBROUTINE DBESI(X,Alpha,Kode,N,Y,Nz)
   REAL(8) :: ain, ak, akm, Alpha, ans, ap, arg, atol, tolln, dfn, dtm, dx, earg, &
     elim, etx, flgik, fn, fnf, fni, fnp1, fnu, gln, ra, s, sx, sxo2, s1, s2, t, &
     ta, tb, temp(3), tfn, tm, tol, trx, t2, X, xo2, xo2l, Y(*), z
-  REAL(8) :: D1MACH, DLNGAM
+  REAL(8) :: D1MACH
   REAL(8), PARAMETER :: rttpi = 3.98942280401433D-01
   INTEGER, PARAMETER :: inlim = 80
   !* FIRST EXECUTABLE STATEMENT  DBESI
@@ -314,7 +314,7 @@ SUBROUTINE DBESI(X,Alpha,Kode,N,Y,Nz)
   !
   !     SERIES FOR (X/2)**2.LE.NU+1
   !
-  500  gln = DLNGAM(fnp1)
+  500  gln = LOG_GAMMA(fnp1)
   arg = fn*xo2l - gln - sx
   IF ( arg<(-elim) ) GOTO 700
   earg = EXP(arg)

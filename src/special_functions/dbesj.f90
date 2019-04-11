@@ -76,7 +76,7 @@ SUBROUTINE DBESJ(X,Alpha,N,Y,Nz)
   !                 or Large Orders, NPL Mathematical Tables 6, Her
   !                 Majesty's Stationery Office, London, 1962.
   !***
-  ! **Routines called:**  D1MACH, DASYJY, DJAIRY, DLNGAM, I1MACH, XERMSG
+  ! **Routines called:**  D1MACH, DASYJY, DJAIRY, I1MACH, XERMSG
 
   !* REVISION HISTORY  (YYMMDD)
   !   750101  DATE WRITTEN
@@ -95,7 +95,7 @@ SUBROUTINE DBESJ(X,Alpha,N,Y,Nz)
     rtx, rzden, s, sa, sb, sxo2, s1, s2, t, ta, tau, tb, temp(3), &
     tfn, tm, tol, tolln, trx, tx, t1, t2, wk(7), X, xo2, xo2l, Y(*), slim, rtol
   INTEGER, EXTERNAL :: I1MACH
-  REAL(8), EXTERNAL :: D1MACH, DLNGAM
+  REAL(8), EXTERNAL :: D1MACH
   EXTERNAL :: DJAIRY
   REAL(8), PARAMETER :: rtwo = 1.34839972492648D+00, pdf = 7.85398163397448D-01, &
     rttp = 7.97884560802865D-01, pidt = 1.57079632679490D+00
@@ -291,7 +291,7 @@ SUBROUTINE DBESJ(X,Alpha,N,Y,Nz)
   !
   !     SERIES FOR (X/2)**2.LE.NU+1
   !
-  200  gln = DLNGAM(fnp1)
+  200  gln = LOG_GAMMA(fnp1)
   arg = fn*xo2l - gln
   IF ( arg<(-elim1) ) GOTO 400
   earg = EXP(arg)

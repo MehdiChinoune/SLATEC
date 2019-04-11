@@ -28,7 +28,7 @@ REAL FUNCTION ALBETA(A,B)
   !***
   ! **References:**  (NONE)
   !***
-  ! **Routines called:**  ALNGAM, ALNREL, GAMMA, R9LGMC, XERMSG
+  ! **Routines called:**  ALNREL, R9LGMC, XERMSG
 
   !* REVISION HISTORY  (YYMMDD)
   !   770701  DATE WRITTEN
@@ -41,7 +41,7 @@ REAL FUNCTION ALBETA(A,B)
   !   900727  Added EXTERNAL statement.  (WRB)
 
   REAL A, B, corr, p, q
-  REAL, EXTERNAL :: ALNGAM, ALNREL, R9LGMC, GAMMA
+  REAL, EXTERNAL :: ALNREL, R9LGMC
   REAL, PARAMETER :: sq2pil = 0.91893853320467274E0
   !* FIRST EXECUTABLE STATEMENT  ALBETA
   p = MIN(A,B)
@@ -67,6 +67,6 @@ REAL FUNCTION ALBETA(A,B)
   ! P IS SMALL, BUT Q IS BIG.
   !
   corr = R9LGMC(q) - R9LGMC(p+q)
-  ALBETA = ALNGAM(p) + corr + p - p*LOG(p+q) + (q-0.5)*ALNREL(-p/(p+q))
+  ALBETA = LOG_GAMMA(p) + corr + p - p*LOG(p+q) + (q-0.5)*ALNREL(-p/(p+q))
   RETURN
 END FUNCTION ALBETA

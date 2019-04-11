@@ -27,7 +27,7 @@ REAL(8) FUNCTION DPOCH(A,X)
   !***
   ! **References:**  (NONE)
   !***
-  ! **Routines called:**  D9LGMC, DFAC, DGAMMA, DGAMR, DLGAMS, DLNREL, XERMSG
+  ! **Routines called:**  D9LGMC, DFAC, DGAMR, DLGAMS, DLNREL, XERMSG
 
   !* REVISION HISTORY  (YYMMDD)
   !   770701  DATE WRITTEN
@@ -40,7 +40,7 @@ REAL(8) FUNCTION DPOCH(A,X)
 
   INTEGER i, ia, n
   REAL(8) :: A, X, absa, absax, alnga, alngax, ax, b, sgnga, sgngax
-  REAL(8), EXTERNAL :: DGAMMA, DFAC, DLNREL, D9LGMC, DGAMR, DCOT
+  REAL(8), EXTERNAL :: DFAC, DLNREL, D9LGMC, DGAMR, DCOT
   REAL(8), PARAMETER :: pi = 3.141592653589793238462643383279503D0
   !* FIRST EXECUTABLE STATEMENT  DPOCH
   ax = A + X
@@ -82,7 +82,7 @@ REAL(8) FUNCTION DPOCH(A,X)
     absax = ABS(A+X)
     absa = ABS(A)
     IF ( MAX(absax,absa)<=20.0D0 ) THEN
-      DPOCH = DGAMMA(A+X)*DGAMR(A)
+      DPOCH = GAMMA(A+X)*DGAMR(A)
       RETURN
       !
     ELSEIF ( ABS(X)>0.5D0*absa ) THEN

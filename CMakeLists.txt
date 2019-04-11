@@ -46,11 +46,3 @@ endif ()
 add_subdirectory(src)
 
 add_subdirectory(test)
-
-add_subdirectory(doc)
-
-add_executable(spfuntest spfun.f90 spfunchk.f90)
-target_link_libraries(spfuntest slatec)
-
-add_test(NAME spfuntest COMMAND ./spfuntest 1 WORKING_DIRECTORY ${CMAKE_BINARY_DIR})
-set_tests_properties(spfuntest PROPERTIES FAIL_REGULAR_EXPRESSION "[^a-z]Failed;FAILED")

@@ -59,7 +59,7 @@ SUBROUTINE BESYNU(X,Fnu,N,Y)
   !                 Bessel function of the third kind, Journal of
   !                 Computational Physics 19, (1975), pp. 324-337.
   !***
-  ! **Routines called:**  GAMMA, R1MACH, XERMSG
+  ! **Routines called:**  R1MACH, XERMSG
 
   !* REVISION HISTORY  (YYMMDD)
   !   800501  DATE WRITTEN
@@ -80,7 +80,7 @@ SUBROUTINE BESYNU(X,Fnu,N,Y)
     fhs, fk, fks, flrx, fmu, fn, Fnu, fx, g, g1, g2, p, &
     pt, q, rb(120), rbk, rck, relb, rpt, rp1, rp2, rs, rs1, &
     rs2, rx, s, sa, sb, smu, ss, st, s1, s2, tb, tm, tol, t1, t2, X, Y(*)
-  REAL, EXTERNAL :: GAMMA, R1MACH
+  REAL, EXTERNAL :: R1MACH
   REAL, PARAMETER :: x1 = 3.0E0, x2 = 20.0E0
   REAL, PARAMETER :: pi = 3.14159265358979E+00, rthpi = 7.97884560802865E-01
   REAL, PARAMETER :: hpi = 1.57079632679490E+00

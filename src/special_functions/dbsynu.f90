@@ -63,7 +63,7 @@ SUBROUTINE DBSYNU(X,Fnu,N,Y)
   !                 Bessel function of the third kind, Journal of
   !                 Computational Physics 19, (1975), pp. 324-337.
   !***
-  ! **Routines called:**  D1MACH, DGAMMA, XERMSG
+  ! **Routines called:**  D1MACH, XERMSG
 
   !* REVISION HISTORY  (YYMMDD)
   !   800501  DATE WRITTEN
@@ -84,7 +84,7 @@ SUBROUTINE DBSYNU(X,Fnu,N,Y)
     cs, cs1, cs2, cx, dnu, dnu2, etest, etx, f, fc, fhs, fk, fks, flrx, fmu, fn, &
     Fnu, fx, g, g1, g2, p, pt, q, rb(120), rbk, rck, relb, rpt, rp1, rp2, rs, &
     rs1, rs2, rx, s, sa, sb, smu, ss, st, s1, s2, tb, tm, tol, t1, t2, X, Y(*)
-  REAL(8), EXTERNAL :: DGAMMA, D1MACH
+  REAL(8), EXTERNAL :: D1MACH
   REAL(8), PARAMETER ::  x1 = 3.0D0, x2 = 20.0D0
   REAL(8), PARAMETER ::  pi = 3.14159265358979D+00, rthpi = 7.97884560802865D-01
   REAL(8), PARAMETER ::  hpi = 1.57079632679490D+00
@@ -255,8 +255,8 @@ SUBROUTINE DBSYNU(X,Fnu,N,Y)
         !
         a1 = 1.0D0 - dnu
         a2 = 1.0D0 + dnu
-        t1 = 1.0D0/DGAMMA(a1)
-        t2 = 1.0D0/DGAMMA(a2)
+        t1 = 1.0D0/GAMMA(a1)
+        t2 = 1.0D0/GAMMA(a2)
         IF ( ABS(dnu)>0.1D0 ) THEN
           g1 = (t1-t2)/dnu
         ELSE

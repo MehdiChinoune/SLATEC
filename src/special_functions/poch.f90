@@ -27,7 +27,7 @@ REAL FUNCTION POCH(A,X)
   !***
   ! **References:**  (NONE)
   !***
-  ! **Routines called:**  ALGAMS, ALNREL, FAC, GAMMA, GAMR, R9LGMC, XERMSG
+  ! **Routines called:**  ALGAMS, ALNREL, FAC, GAMR, R9LGMC, XERMSG
 
   !* REVISION HISTORY  (YYMMDD)
   !   770701  DATE WRITTEN
@@ -39,7 +39,7 @@ REAL FUNCTION POCH(A,X)
 
   REAL A, absa, absax, alnga, alngax, ax, b, sgnga, sgngax, X
   INTEGER i, n
-  REAL, EXTERNAL :: ALNREL, COT, FAC, R9LGMC, GAMR, GAMMA
+  REAL, EXTERNAL :: ALNREL, COT, FAC, R9LGMC, GAMR
   REAL, PARAMETER :: pi = 3.141592653589793238E0
   !* FIRST EXECUTABLE STATEMENT  POCH
   ax = A + X

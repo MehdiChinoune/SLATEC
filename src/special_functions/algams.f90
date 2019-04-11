@@ -36,11 +36,11 @@ SUBROUTINE ALGAMS(X,Algam,Sgngam)
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
-  
+
   !* FIRST EXECUTABLE STATEMENT  ALGAMS
-  REAL Algam, ALNGAM, Sgngam, X
+  REAL Algam, Sgngam, X
   INTEGER i
-  Algam = ALNGAM(X)
+  Algam = LOG_GAMMA(X)
   Sgngam = 1.0
   IF ( X>0.0 ) RETURN
   !

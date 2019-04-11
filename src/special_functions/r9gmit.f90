@@ -24,7 +24,7 @@ REAL FUNCTION R9GMIT(A,X,Algap1,Sgngam,Alx)
   !***
   ! **References:**  (NONE)
   !***
-  ! **Routines called:**  ALNGAM, R1MACH, XERMSG
+  ! **Routines called:**  R1MACH, XERMSG
 
   !* REVISION HISTORY  (YYMMDD)
   !   770701  DATE WRITTEN
@@ -34,7 +34,7 @@ REAL FUNCTION R9GMIT(A,X,Algap1,Sgngam,Alx)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
 
-  REAL A, ae, aeps, alg2, Algap1, algs, ALNGAM, Alx, fk, R1MACH, s, sgng2, &
+  REAL A, ae, aeps, alg2, Algap1, algs, Alx, fk, R1MACH, s, sgng2, &
     Sgngam, t, te, X
   INTEGER k, m, ma
   REAL :: eps = 0., bot = 0.
@@ -71,7 +71,7 @@ REAL FUNCTION R9GMIT(A,X,Algap1,Sgngam,Alx)
     R9GMIT = EXP(algs)
   ELSE
     !
-    algs = -ALNGAM(1.0+aeps) + LOG(s)
+    algs = -LOG_GAMMA(1.0+aeps) + LOG(s)
     s = 1.0
     m = -ma - 1
     IF ( m/=0 ) THEN

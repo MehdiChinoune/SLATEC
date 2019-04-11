@@ -29,7 +29,7 @@ REAL(8) FUNCTION DGAMI(A,X)
   !***
   ! **References:**  (NONE)
   !***
-  ! **Routines called:**  DGAMIT, DLNGAM, XERMSG
+  ! **Routines called:**  DGAMIT, XERMSG
 
   !* REVISION HISTORY  (YYMMDD)
   !   770701  DATE WRITTEN
@@ -37,8 +37,8 @@ REAL(8) FUNCTION DGAMI(A,X)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-  
-  REAL(8) :: A, X, factor, DLNGAM, DGAMIT
+
+  REAL(8) :: A, X, factor, DGAMIT
   !* FIRST EXECUTABLE STATEMENT  DGAMI
   IF ( A<=0.D0 ) CALL XERMSG('SLATEC','DGAMI','A MUST BE GT ZERO',1,2)
   IF ( X<0.D0 ) CALL XERMSG('SLATEC','DGAMI','X MUST BE GE ZERO',2,2)
@@ -47,7 +47,7 @@ REAL(8) FUNCTION DGAMI(A,X)
   IF ( X==0.0D0 ) RETURN
   !
   ! THE ONLY ERROR POSSIBLE IN THE EXPRESSION BELOW IS A FATAL OVERFLOW.
-  factor = EXP(DLNGAM(A)+A*LOG(X))
+  factor = EXP(LOG_GAMMA(A)+A*LOG(X))
   !
   DGAMI = factor*DGAMIT(A,X)
   !

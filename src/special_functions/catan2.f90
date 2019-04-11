@@ -38,7 +38,7 @@ COMPLEX FUNCTION CATAN2(Csn,Ccs)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
 
-  COMPLEX Csn, Ccs, CATAN
+  COMPLEX Csn, Ccs
   REAL, PARAMETER :: pi = 3.14159265358979323846E0
   !* FIRST EXECUTABLE STATEMENT  CATAN2
   IF ( ABS(Ccs)==0. ) THEN
@@ -50,7 +50,7 @@ COMPLEX FUNCTION CATAN2(Csn,Ccs)
     RETURN
   END IF
   !
-  CATAN2 = CATAN(Csn/Ccs)
+  CATAN2 = ATAN(Csn/Ccs)
   IF ( REAL(Ccs)<0. ) CATAN2 = CATAN2 + pi
   IF ( REAL(CATAN2)>pi ) CATAN2 = CATAN2 - 2.0*pi
   RETURN

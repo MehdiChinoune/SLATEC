@@ -82,7 +82,7 @@ SUBROUTINE BESI(X,Alpha,Kode,N,Y,Nz)
   !                 or Large Orders, NPL Mathematical Tables 6, Her
   !                 Majesty's Stationery Office, London, 1962.
   !***
-  ! **Routines called:**  ALNGAM, ASYIK, I1MACH, R1MACH, XERMSG
+  ! **Routines called:**  ASYIK, I1MACH, R1MACH, XERMSG
 
   !* REVISION HISTORY  (YYMMDD)
   !   750101  DATE WRITTEN
@@ -100,7 +100,7 @@ SUBROUTINE BESI(X,Alpha,Kode,N,Y,Nz)
   REAL ain, ak, akm, Alpha, ans, ap, arg, atol, tolln, dfn, dtm, dx, earg, elim, &
     etx, flgik, fn, fnf, fni, fnp1, fnu, gln, ra, s, sx, sxo2, s1, s2, t, ta, tb, &
     temp(3), tfn, tm, tol, trx, t2, X, xo2, xo2l, Y(*), z
-  REAL R1MACH, ALNGAM
+  REAL R1MACH
   REAL, PARAMETER :: rttpi = 3.98942280401433E-01
   INTEGER, PARAMETER :: inlim = 80
   !* FIRST EXECUTABLE STATEMENT  BESI
@@ -307,7 +307,7 @@ SUBROUTINE BESI(X,Alpha,Kode,N,Y,Nz)
   !
   !     SERIES FOR (X/2)**2.LE.NU+1
   !
-  500  gln = ALNGAM(fnp1)
+  500  gln = LOG_GAMMA(fnp1)
   arg = fn*xo2l - gln - sx
   IF ( arg<(-elim) ) GOTO 700
   earg = EXP(arg)

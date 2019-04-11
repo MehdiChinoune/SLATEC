@@ -36,7 +36,7 @@ SUBROUTINE R9KNUS(Xnu,X,Bknu,Bknu1,Iswtch)
   !***
   ! **References:**  (NONE)
   !***
-  ! **Routines called:**  CSEVL, GAMMA, INITS, R1MACH, XERMSG
+  ! **Routines called:**  CSEVL, INITS, R1MACH, XERMSG
 
   !* REVISION HISTORY  (YYMMDD)
   !   770601  DATE WRITTEN
@@ -53,7 +53,7 @@ SUBROUTINE R9KNUS(Xnu,X,Bknu,Bknu1,Iswtch)
     xi, xmu, Xnu, z, ztov
   INTEGER i, ii, inu, Iswtch, n, nterms
   INTEGER, EXTERNAL :: INITS
-  REAL, EXTERNAL :: GAMMA, R1MACH
+  REAL, EXTERNAL :: R1MACH
   INTEGER, SAVE :: ntc0k, ntznu1
   REAL, SAVE :: xnusml, xsml, alnsml, alnbig, alneps
   REAL, PARAMETER :: c0kcs(16) = [ .060183057242626108E0,-.15364871433017286E0, &
