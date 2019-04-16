@@ -1,6 +1,5 @@
 !** BANDV
 SUBROUTINE BANDV(Nm,N,Mbw,A,E21,M,W,Z,Ierr,Nv,Rv,Rv6)
-  IMPLICIT NONE
   !>
   !***
   !  Form the eigenvectors of a real symmetric band matrix

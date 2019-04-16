@@ -1,6 +1,5 @@
 !** DUIVP
 SUBROUTINE DUIVP(X,Y,Yp)
-  IMPLICIT NONE
   !>
   !***
   !  Dummy routine for DBVSUP quick check.

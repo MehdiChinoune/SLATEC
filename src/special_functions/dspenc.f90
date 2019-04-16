@@ -1,6 +1,5 @@
 !** DSPENC
 REAL(8) FUNCTION DSPENC(X)
-  IMPLICIT NONE
   !>
   !***
   !  Compute a form of Spence's integral due to K. Mitchell.
@@ -53,8 +52,7 @@ REAL(8) FUNCTION DSPENC(X)
   !   891115  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-  INTEGER INITDS
-  REAL(8) :: X, aln, D1MACH, DCSEVL
+  REAL(8) :: X, aln
   INTEGER, SAVE :: nspenc
   REAL(8), SAVE :: xbig
   REAL(8), PARAMETER :: spencs(38) = [ +.1527365598892405872946684910028D+0, &

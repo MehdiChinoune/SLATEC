@@ -1,6 +1,5 @@
 !** DQRFAC
 SUBROUTINE DQRFAC(M,N,A,Lda,Pivot,Ipvt,Lipvt,Sigma,Acnorm,Wa)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to DNLS1, DNLS1E, DNSQ and DNSQE
@@ -96,7 +95,6 @@ SUBROUTINE DQRFAC(M,N,A,Lda,Pivot,Ipvt,Lipvt,Sigma,Acnorm,Wa)
   REAL(8) :: A(Lda,*), Sigma(*), Acnorm(*), Wa(*)
   INTEGER i, j, jp1, k, kmax, minmn
   REAL(8) :: ajnorm, epsmch, summ, temp
-  REAL(8) :: D1MACH, DENORM
   REAL(8), PARAMETER :: one = 1.0D0, p05 = 5.0D-2, zero = 0.0D0
   !* FIRST EXECUTABLE STATEMENT  DQRFAC
   epsmch = D1MACH(4)

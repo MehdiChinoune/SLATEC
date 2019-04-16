@@ -1,6 +1,5 @@
 !** SPODI
 SUBROUTINE SPODI(A,Lda,N,Det,Job)
-  IMPLICIT NONE
   !>
   !***
   !  Compute the determinant and inverse of a certain real

@@ -1,7 +1,6 @@
 !** SNSQ
 SUBROUTINE SNSQ(FCN,JAC,Iopt,N,X,Fvec,Fjac,Ldfjac,Xtol,Maxfev,Ml,Mu,&
     Epsfcn,Diag,Mode,Factor,Nprint,Info,Nfev,Njev,R,Lr,Qtf,Wa1,Wa2,Wa3,Wa4)
-  IMPLICIT NONE
   !>
   !***
   !  Find a zero of a system of a N nonlinear functions in N
@@ -438,7 +437,6 @@ SUBROUTINE SNSQ(FCN,JAC,Iopt,N,X,Fvec,Fjac,Ldfjac,Xtol,Maxfev,Ml,Mu,&
   INTEGER iwa(1)
   LOGICAL jeval, sing
   REAL actred, delta, epsmch, fnorm, fnorm1, pnorm, prered, ratio, summ, temp, xnorm
-  REAL R1MACH, ENORM
   REAL, PARAMETER ::one = 1.0E0, p1 = 1.0E-1, p5 = 5.0E-1, p001 = 1.0E-3, &
     p0001 = 1.0E-4, zero = 0.0E0
   !

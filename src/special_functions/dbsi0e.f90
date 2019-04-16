@@ -1,6 +1,5 @@
 !** DBSI0E
 REAL(8) FUNCTION DBSI0E(X)
-  IMPLICIT NONE
   !>
   !***
   !  Compute the exponentially scaled modified (hyperbolic)
@@ -55,8 +54,7 @@ REAL(8) FUNCTION DBSI0E(X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
   REAL eta
-  INTEGER INITDS
-  REAL(8) :: X, y, D1MACH, DCSEVL
+  REAL(8) :: X, y
   INTEGER, SAVE :: nti0, ntai0, ntai02
   REAL(8), SAVE :: xsml
   REAL(8), PARAMETER :: bi0cs(18) = [ -.7660547252839144951081894976243285D-1, &

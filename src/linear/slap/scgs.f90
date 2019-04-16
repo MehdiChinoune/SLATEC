@@ -1,7 +1,6 @@
 !** SCGS
 SUBROUTINE SCGS(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,Iter,&
     Err,Ierr,Iunit,R,R0,P,Q,U,V1,V2,Rwork,Iwork)
-  IMPLICIT NONE
   !>
   !***
   !  Preconditioned BiConjugate Gradient Squared Ax=b Solver.
@@ -266,11 +265,6 @@ SUBROUTINE SCGS(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,Iter,&
   !     .. Local Scalars ..
   REAL ak, akm, bk, bnrm, fuzz, rhon, rhonm1, sigma, solnrm, tolmin
   INTEGER i, k
-  !     .. External Functions ..
-  REAL, EXTERNAL :: R1MACH, SDOT
-  INTEGER, EXTERNAL :: ISSCGS
-  !     .. External Subroutines ..
-  EXTERNAL :: SAXPY
   !     .. Intrinsic Functions ..
   INTRINSIC ABS
   !* FIRST EXECUTABLE STATEMENT  SCGS

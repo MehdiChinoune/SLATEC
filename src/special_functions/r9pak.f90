@@ -1,6 +1,5 @@
 !** R9PAK
 REAL FUNCTION R9PAK(Y,N)
-  IMPLICIT NONE
   !>
   !***
   !  Pack a base 2 exponent into a floating point number.
@@ -38,8 +37,8 @@ REAL FUNCTION R9PAK(Y,N)
   !   901009  Routine used I1MACH(7) where it should use I1MACH(10),
   !           Corrected (RWC)
 
-  REAL a1n2b, R1MACH, Y
-  INTEGER I1MACH, N, nsum, ny
+  REAL a1n2b, Y
+  INTEGER N, nsum, ny
   INTEGER, SAVE :: nmin, nmax
   REAL, PARAMETER :: a1n210 = 3.321928094887362E0
   LOGICAL :: first = .TRUE.

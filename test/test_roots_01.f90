@@ -1,4 +1,5 @@
 MODULE TEST34_MOD
+  use slatec
   IMPLICIT NONE
 
 CONTAINS
@@ -30,7 +31,6 @@ CONTAINS
     !   890618  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-    REAL R1MACH
     INTEGER Kprint, Ipass, Lun
     INTEGER idegp1, info, i, j, id
     REAL err, erri, relerr
@@ -126,10 +126,6 @@ CONTAINS
     INTEGER iflag, kontrl
     REAL ae, b, c, pi, r, re, tol
     LOGICAL fatal
-    !     .. External Functions ..
-    REAL, EXTERNAL :: R1MACH
-    !     .. External Subroutines ..
-    EXTERNAL :: FZERO, XERCLR, XGETF, XSETF
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, ATAN, MAX, SIN, SQRT, TAN
     !* FIRST EXECUTABLE STATEMENT  FZTEST
@@ -242,10 +238,6 @@ CONTAINS
     INTEGER iflag, kontrl
     REAL(8) :: ae, b, c, pi, r, re, tol
     LOGICAL fatal
-    !     .. External Functions ..
-    REAL(8), EXTERNAL :: D1MACH
-    !     .. External Subroutines ..
-    EXTERNAL :: DFZERO, XERCLR, XGETF, XSETF
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, ATAN, DSIN, DTAN, MAX, SQRT
     !* FIRST EXECUTABLE STATEMENT  DFZTST
@@ -357,8 +349,8 @@ CONTAINS
     !           the IBM 370 mainframes.  (RWC)
     !   911010  Code reworked and simplified.  (RWC and WRB)
 
-    REAL beta, R1MACH, tol, work(63)
-    INTEGER i, ierr, Ipass, j, kontrl, Kprint, Lun, nerr, NUMXER
+    REAL beta, tol, work(63)
+    INTEGER i, ierr, Ipass, j, kontrl, Kprint, Lun, nerr
     INTEGER itmp(7)
     COMPLEX root(7)
     REAL coef(8)
@@ -489,8 +481,8 @@ CONTAINS
     !   901205  Changed usage of R1MACH(3) to R1MACH(4).  (RWC)
     !   911010  Code reworked and simplified.  (RWC and WRB)
 
-    INTEGER i, ierr, Ipass, j, kontrl, Kprint, Lun, nerr, NUMXER
-    REAL R1MACH, tol
+    INTEGER i, ierr, Ipass, j, kontrl, Kprint, Lun, nerr
+    REAL tol
     INTEGER itest(2), itmp(7)
     REAL work(144)
     COMPLEX root(8)
@@ -625,6 +617,7 @@ END MODULE TEST34_MOD
 !** TEST34
 PROGRAM TEST34
   USE TEST34_MOD
+  use slatec
   IMPLICIT NONE
   !>
   !***
@@ -677,8 +670,6 @@ PROGRAM TEST34
   !   890618  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900524  Cosmetic changes to code.  (WRB)
-
-  INTEGER I1MACH
   INTEGER ipass, kprint, lin, lun, nfail
   !* FIRST EXECUTABLE STATEMENT  TEST34
   lun = I1MACH(2)

@@ -1,6 +1,5 @@
 !** CHER
 SUBROUTINE CHER(Uplo,N,Alpha,X,Incx,A,Lda)
-  IMPLICIT NONE
   !>
   !***
   !  Perform Hermitian rank 1 update of a complex Hermitian
@@ -111,10 +110,6 @@ SUBROUTINE CHER(Uplo,N,Alpha,X,Incx,A,Lda)
   !     .. Local Scalars ..
   COMPLEX temp
   INTEGER i, info, ix, j, jx, kx
-  !     .. External Functions ..
-  LOGICAL, EXTERNAL :: LSAME
-  !     .. External Subroutines ..
-  EXTERNAL :: XERBLA
   !     .. Intrinsic Functions ..
   INTRINSIC CONJG, MAX, REAL
   !* FIRST EXECUTABLE STATEMENT  CHER

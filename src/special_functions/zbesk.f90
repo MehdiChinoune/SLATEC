@@ -1,6 +1,5 @@
 !** ZBESK
 SUBROUTINE ZBESK(Zr,Zi,Fnu,Kode,N,Cyr,Cyi,Nz,Ierr)
-  IMPLICIT NONE
   !>
   !***
   !  Compute a sequence of the Bessel functions K(a,z) for
@@ -166,10 +165,9 @@ SUBROUTINE ZBESK(Zr,Zi,Fnu,Kode,N,Cyr,Cyi,Nz,Ierr)
 
   !
   !     COMPLEX CY,Z
-  INTEGER Ierr, k, Kode, k1, k2, mr, N, nn, nuf, nw, Nz, I1MACH
+  INTEGER Ierr, k, Kode, k1, k2, mr, N, nn, nuf, nw, Nz
   REAL(8) :: aa, alim, aln, arg, az, Cyi(N), Cyr(N), dig, elim, &
     fn, Fnu, fnul, rl, r1m5, tol, ufl, Zi, Zr, bb
-  REAL(8), EXTERNAL :: D1MACH, ZABS
   !* FIRST EXECUTABLE STATEMENT  ZBESK
   Ierr = 0
   Nz = 0

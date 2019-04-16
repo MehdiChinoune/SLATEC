@@ -1,7 +1,6 @@
 !** HW3CRT
 SUBROUTINE HW3CRT(Xs,Xf,L,Lbdcnd,Bdxs,Bdxf,Ys,Yf,M,Mbdcnd,Bdys,Bdyf,Zs,Zf,&
     N,Nbdcnd,Bdzs,Bdzf,Elmbda,Ldimf,Mdimf,F,Pertrb,Ierror,W)
-  IMPLICIT NONE
   !>
   !***
   !  Solve the standard seven-point finite difference

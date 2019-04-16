@@ -1,6 +1,5 @@
 !** ZWRSK
 SUBROUTINE ZWRSK(Zrr,Zri,Fnu,Kode,N,Yr,Yi,Nz,Cwr,Cwi,Tol,Elim,Alim)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to ZBESI and ZBESK
@@ -30,7 +29,6 @@ SUBROUTINE ZWRSK(Zrr,Zri,Fnu,Kode,N,Yr,Yi,Nz,Cwr,Cwi,Tol,Elim,Alim)
   REAL(8) :: act, acw, Alim, ascle, cinui, cinur, csclr, cti, &
     ctr, Cwi(2), Cwr(2), c1i, c1r, c2i, c2r, Elim, Fnu, &
     pti, ptr, ract, sti, str, Tol, Yi(N), Yr(N), Zri, Zrr
-  REAL(8), EXTERNAL :: ZABS, D1MACH
   !* FIRST EXECUTABLE STATEMENT  ZWRSK
   !-----------------------------------------------------------------------
   !     I(FNU+I-1,Z) BY BACKWARD RECURRENCE FOR RATIOS

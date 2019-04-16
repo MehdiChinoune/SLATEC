@@ -1,6 +1,5 @@
 !** POISTG
 SUBROUTINE POISTG(Nperod,N,Mperod,M,A,B,C,Idimy,Y,Ierror,W)
-  IMPLICIT NONE
   !>
   !***
   !  Solve a block tridiagonal system of linear equations

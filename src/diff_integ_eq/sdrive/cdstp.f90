@@ -4,7 +4,6 @@ SUBROUTINE CDSTP(Eps,F,FA,Hmax,Impl,Ierror,JACOBN,Matdim,Maxord,Mint,&
     Jtask,Mntold,Mtrold,Nfe,Nje,Nqused,Nstep,T,Y,Yh,A,Convrg,&
     Dfdy,El,Fac,Hold,Ipvt,Jstate,Jstepl,Nq,Nwait,Rc,Rmax,&
     Save1,Save2,Tq,Trend,Iswflg,Mtrsv,Mxrdsv)
-  IMPLICIT NONE
   !>
   !***
   !  CDSTP performs one step of the integration of an initial
@@ -85,7 +84,6 @@ SUBROUTINE CDSTP(Eps,F,FA,Hmax,Impl,Ierror,JACOBN,Matdim,Maxord,Mint,&
     H, Hmax, hn, Hold, hs, Hused, numer, Rc, rh, rh1, rh2, rh3, Rmax, T, &
     told, Tq(3,12), Trend, Uround, y0nrm
   LOGICAL Convrg, evalfa, evaljc, switch
-  REAL, EXTERNAL :: SCNRM2
   INTEGER, PARAMETER :: MXFAIL = 3, MXITER = 3, MXTRY = 50
   REAL, PARAMETER :: BIAS1 = 1.3E0, BIAS2 = 1.2E0, BIAS3 = 1.4E0, RCTEST = 0.3E0, &
     RMFAIL = 2.E0, RMNORM = 10.E0, TRSHLD = 1.E0

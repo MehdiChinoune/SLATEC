@@ -1,6 +1,5 @@
 !** DBKSOL
 SUBROUTINE DBKSOL(N,A,X)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to DBVSUP
@@ -38,7 +37,6 @@ SUBROUTINE DBKSOL(N,A,X)
   !   910722  Updated AUTHOR section.  (ALS)
 
   !
-  REAL(8) :: DDOT
   INTEGER j, k, m, N, nm1
   REAL(8) :: A(*), X(*)
   !

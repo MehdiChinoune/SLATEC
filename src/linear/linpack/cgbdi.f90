@@ -1,6 +1,5 @@
 !** CGBDI
 SUBROUTINE CGBDI(Abd,Lda,N,Ml,Mu,Ipvt,Det)
-  IMPLICIT NONE
   !>
   !***
   !  Compute the determinant of a complex band matrix using the
@@ -71,7 +70,6 @@ SUBROUTINE CGBDI(Abd,Lda,N,Ml,Mu,Ipvt,Det)
   !
   REAL ten
   INTEGER i, m
-  REAL, EXTERNAL :: CABS1
   !* FIRST EXECUTABLE STATEMENT  CGBDI
   m = Ml + Mu + 1
   Det(1) = (1.0E0,0.0E0)

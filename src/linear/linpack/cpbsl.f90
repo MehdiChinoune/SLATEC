@@ -1,6 +1,5 @@
 !** CPBSL
 SUBROUTINE CPBSL(Abd,Lda,N,M,B)
-  IMPLICIT NONE
   !>
   !***
   !  Solve the complex Hermitian positive definite band system
@@ -75,11 +74,11 @@ SUBROUTINE CPBSL(Abd,Lda,N,M,B)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   INTEGER Lda, N, M
   COMPLEX Abd(Lda,*), B(*)
   !
-  COMPLEX CDOTC, t
+  COMPLEX t
   INTEGER k, kb, la, lb, lm
   !
   !     SOLVE CTRANS(R)*Y = B

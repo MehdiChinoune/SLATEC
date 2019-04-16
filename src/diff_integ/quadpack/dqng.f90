@@ -1,6 +1,5 @@
 !** DQNG
 SUBROUTINE DQNG(F,A,B,Epsabs,Epsrel,Result,Abserr,Neval,Ier)
-  IMPLICIT NONE
   !>
   !***
   !  The routine calculates an approximation result to a
@@ -102,7 +101,6 @@ SUBROUTINE DQNG(F,A,B,Epsabs,Epsrel,Result,Abserr,Neval,Ier)
     res21, res43, res87, resabs, resasc, reskh, savfun(21), uflow
   INTEGER Ier, ipx, k, l, Neval
   REAL(8), EXTERNAL :: F
-  REAL(8), EXTERNAL :: D1MACH
   !
   !           THE FOLLOWING DATA STATEMENTS CONTAIN THE
   !           ABSCISSAE AND WEIGHTS OF THE INTEGRATION RULES USED.

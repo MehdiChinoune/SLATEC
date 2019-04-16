@@ -1,4 +1,5 @@
 MODULE TEST24_MOD
+  use slatec
   IMPLICIT NONE
 
 CONTAINS
@@ -31,7 +32,6 @@ CONTAINS
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   900405  CALL to XERROR replaced by message to LUN.  (WRB)
 
-    REAL R1MACH
     INTEGER Kprint, Ipass, Lun
     INTEGER job, i, j, id, info
     REAL w(9)
@@ -126,7 +126,6 @@ CONTAINS
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   900405  CALL to XERROR replaced by message to LUN.  (WRB)
 
-    REAL R1MACH
     INTEGER Kprint, Ipass, Lun
     INTEGER job, i, j, id, info
     REAL a1(4,4), a2(10), e(4), v(4,4), w(16)
@@ -207,6 +206,7 @@ END MODULE TEST24_MOD
 !** TEST24
 PROGRAM TEST24
   USE TEST24_MOD
+  use slatec
   IMPLICIT NONE
   !>
   !***
@@ -258,8 +258,6 @@ PROGRAM TEST24
   !   890618  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900524  Cosmetic changes to code.  (WRB)
-
-  INTEGER I1MACH
   INTEGER ipass, kprint, lin, lun, nfail
   !* FIRST EXECUTABLE STATEMENT  TEST24
   lun = I1MACH(2)

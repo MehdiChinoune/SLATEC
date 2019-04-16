@@ -1,6 +1,5 @@
 !** POLYVL
 SUBROUTINE POLYVL(Nder,Xx,Yfit,Yp,N,X,C,Work,Ierr)
-  IMPLICIT NONE
   !>
   !***
   !  Calculate the value of a polynomial and its first NDER

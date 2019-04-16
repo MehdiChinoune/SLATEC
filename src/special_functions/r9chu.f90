@@ -1,6 +1,5 @@
 !** R9CHU
 REAL FUNCTION R9CHU(A,B,Z)
-  IMPLICIT NONE
   !>
   !***
   !  Evaluate for large Z  Z**A * U(A,B,Z) where U is the
@@ -39,7 +38,7 @@ REAL FUNCTION R9CHU(A,B,Z)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
 
   REAL A, aa(4), ab, anbn, B, bb(4), bp, c2, ct1, ct2, ct3, d1z, &
-    g1, g2, g3, R1MACH, sab
+    g1, g2, g3, sab
   REAL x2i1, Z
   INTEGER i, j
   REAL, SAVE :: eps, sqeps

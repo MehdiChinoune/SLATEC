@@ -1,6 +1,5 @@
 !** FFTDOC
 SUBROUTINE FFTDOC
-  IMPLICIT NONE
   !>
   !***
   !  Documentation for FFTPACK, a collection of Fast Fourier

@@ -2,7 +2,6 @@
 INTEGER FUNCTION ISSCG(N,B,X,Nelt,Ia,Ja,A,Isym,MSOLVE,Itol,Tol,Itmax,Iter,&
     Err,Ierr,Iunit,R,Z,P,Dz,Rwork,Iwork,Ak,Bk,Bnrm,Solnrm)
   USE SSLBLK
-  IMPLICIT NONE
   !>
   !***
   !  Preconditioned Conjugate Gradient Stop Test.
@@ -183,8 +182,6 @@ INTEGER FUNCTION ISSCG(N,B,X,Nelt,Ia,Ja,A,Isym,MSOLVE,Itol,Tol,Itmax,Iter,&
   EXTERNAL :: MSOLVE
   !     .. Local Scalars ..
   INTEGER i
-  !     .. External Functions ..
-  REAL, EXTERNAL :: R1MACH, SNRM2
   !* FIRST EXECUTABLE STATEMENT  ISSCG
   ISSCG = 0
   !

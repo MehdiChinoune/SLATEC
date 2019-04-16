@@ -1,6 +1,5 @@
 !** ELMBAK
 SUBROUTINE ELMBAK(Nm,Low,Igh,A,Intt,M,Z)
-  IMPLICIT NONE
   !>
   !***
   !  Form the eigenvectors of a real general matrix from the

@@ -1,6 +1,5 @@
 !** DQWGTS
 REAL(8) FUNCTION DQWGTS(X,A,B,Alfa,Beta,Integr)
-  IMPLICIT NONE
   !>
   !***
   !  This function subprogram is used together with the

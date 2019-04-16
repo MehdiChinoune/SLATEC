@@ -1,6 +1,5 @@
 !** SGER
 SUBROUTINE SGER(M,N,Alpha,X,Incx,Y,Incy,A,Lda)
-  IMPLICIT NONE
   !>
   !***
   !  Perform rank 1 update of a real general matrix.
@@ -100,8 +99,7 @@ SUBROUTINE SGER(M,N,Alpha,X,Incx,Y,Incy,A,Lda)
   !     .. Local Scalars ..
   REAL temp
   INTEGER i, info, ix, j, jy, kx
-  !     .. External Subroutines ..
-  EXTERNAL :: XERBLA
+
   !     .. Intrinsic Functions ..
   INTRINSIC MAX
   !* FIRST EXECUTABLE STATEMENT  SGER

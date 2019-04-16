@@ -1,6 +1,5 @@
 !** CHERK
 SUBROUTINE CHERK(Uplo,Trans,N,K,Alpha,A,Lda,Beta,C,Ldc)
-  IMPLICIT NONE
   !>
   !***
   !  Perform Hermitian rank k update of a complex Hermitian
@@ -135,10 +134,6 @@ SUBROUTINE CHERK(Uplo,Trans,N,K,Alpha,A,Lda,Beta,C,Ldc)
   REAL Alpha, Beta
   !     .. Array Arguments ..
   COMPLEX A(Lda,*), C(Ldc,*)
-  !     .. External Functions ..
-  LOGICAL, EXTERNAL :: LSAME
-  !     .. External Subroutines ..
-  EXTERNAL :: XERBLA
   !     .. Intrinsic Functions ..
   INTRINSIC CMPLX, CONJG, MAX, REAL
   !     .. Local Scalars ..

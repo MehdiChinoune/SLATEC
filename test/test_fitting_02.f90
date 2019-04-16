@@ -1,4 +1,5 @@
 MODULE TEST28_MOD
+  use slatec
   IMPLICIT NONE
 
 CONTAINS
@@ -47,11 +48,6 @@ CONTAINS
     !     .. Local Arrays ..
     REAL(8) :: d(11,6), err(5), prgopt(4), work(105), x(5)
     INTEGER ip(17)
-    !     .. External Functions ..
-    REAL(8), EXTERNAL :: D1MACH, DDOT, DNRM2
-    INTEGER, EXTERNAL :: NUMXER
-    !     .. External Subroutines ..
-    EXTERNAL :: DAXPY, DCOPY, DLSEI, DVOUT, XGETF, XSETF
     !     .. Intrinsic Functions ..
     INTRINSIC SQRT
     !     .. Data statements ..
@@ -293,9 +289,8 @@ CONTAINS
     !           including removing an illegal character from column 1, and
     !           editorial changes.  (RWC)
 
-    REAL(8) :: a(4,4), b(4), D1MACH, delmax, delx, r, rnorm(1), work(50)
-    INTEGER i, Ipass, j, kk, Kprint
-    INTEGER nerr, kprog, kcase, iwork(20), info, Lun
+    REAL(8) :: a(4,4), b(4), delmax, delx, r, rnorm(1), work(50)
+    INTEGER i, Ipass, j, kk, Kprint, nerr, kprog, kcase, iwork(20), info, Lun
     REAL(8), PARAMETER :: aa(4,4,2) = RESHAPE( [1.D0, .5D0, 1.D0, .25D0, &
       0.D0, 2.D0, 0.D0, 1.D0, 2.D0, -1.D0, 1.D0, 0.D0, 0.D0, 0.D0, 0.D0, 0.D0, &
       1.D0, 2.D0, -1.D0, 0.D0, 0.D0, 1.D0, 2.D0, 0.D0, -1.D0, 0.D0, 1.D0, 0.D0, &
@@ -397,6 +392,7 @@ END MODULE TEST28_MOD
 !** TEST28
 PROGRAM TEST28
   USE TEST28_MOD
+  use slatec
   IMPLICIT NONE
   !>
   !***
@@ -446,8 +442,6 @@ PROGRAM TEST28
   !   890618  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900524  Cosmetic changes to code.  (WRB)
-
-  INTEGER I1MACH
   INTEGER ipass, kprint, lin, lun, nfail
   !* FIRST EXECUTABLE STATEMENT  TEST28
   lun = I1MACH(2)

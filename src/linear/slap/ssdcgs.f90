@@ -1,7 +1,6 @@
 !** SSDCGS
 SUBROUTINE SSDCGS(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
     Iunit,Rwork,Lenw,Iwork,Leniw)
-  IMPLICIT NONE
   !>
   !***
   !  Diagonally Scaled CGS Sparse Ax=b Solver.
@@ -246,8 +245,6 @@ SUBROUTINE SSDCGS(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
   INTEGER Ia(Nelt), Iwork(Leniw), Ja(Nelt)
   !     .. Local Scalars ..
   INTEGER locdin, lociw, locp, locq, locr, locr0, locu, locv1, locv2, locw
-  !     .. External Subroutines ..
-  EXTERNAL :: SCGS, SCHKW, SS2Y, SSDI, SSDS, SSMV
   !* FIRST EXECUTABLE STATEMENT  SSDCGS
   !
   Ierr = 0

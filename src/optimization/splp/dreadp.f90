@@ -1,6 +1,5 @@
 !** DREADP
 SUBROUTINE DREADP(Ipage,List,Rlist,Lpage,Irec)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to DSPLP

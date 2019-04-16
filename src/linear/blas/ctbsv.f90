@@ -1,6 +1,5 @@
 !** CTBSV
 SUBROUTINE CTBSV(Uplo,Trans,Diag,N,K,A,Lda,X,Incx)
-  IMPLICIT NONE
   !>
   !***
   !  Solve a complex triangular banded system of equations.
@@ -163,10 +162,6 @@ SUBROUTINE CTBSV(Uplo,Trans,Diag,N,K,A,Lda,X,Incx)
   COMPLEX temp
   INTEGER i, info, ix, j, jx, kplus1, kx, l
   LOGICAL noconj, nounit
-  !     .. External Functions ..
-  LOGICAL, EXTERNAL :: LSAME
-  !     .. External Subroutines ..
-  EXTERNAL :: XERBLA
   !     .. Intrinsic Functions ..
   INTRINSIC CONJG, MAX, MIN
   !* FIRST EXECUTABLE STATEMENT  CTBSV

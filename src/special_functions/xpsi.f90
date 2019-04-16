@@ -1,6 +1,5 @@
 !** XPSI
 REAL FUNCTION XPSI(A,Ipsik,Ipsix)
-  IMPLICIT NONE
   !>
   !***
   !  To compute values of the Psi function for XLEGF.

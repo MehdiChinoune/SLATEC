@@ -1,7 +1,6 @@
 !** BLKTRI
 SUBROUTINE BLKTRI(Iflg,Np,N,An,Bn,Cn,Mp,M,Am,Bm,Cm,Idimy,Y,Ierror,W)
   USE CBLKT
-  IMPLICIT NONE
   !>
   !***
   !  Solve a block tridiagonal system of linear equations
@@ -210,7 +209,6 @@ SUBROUTINE BLKTRI(Iflg,Np,N,An,Bn,Cn,Mp,M,Am,Bm,Cm,Idimy,Y,Ierror,W)
   INTEGER Idimy, Ierror, Iflg, iw1, iw2, iw3, iwah, iwbh, iwd, iwu, iww, M, Mp, &
     N, nh, nl, Np
   REAL Am(*), An(*), Bm(*), Bn(*), Cm(*), Cn(*), W(*), Y(Idimy,*)
-  EXTERNAL :: PROD, PRODP, CPROD, CPRODP
   !* FIRST EXECUTABLE STATEMENT  BLKTRI
   NM = N
   Ierror = 0

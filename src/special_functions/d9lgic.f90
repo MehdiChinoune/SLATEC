@@ -1,6 +1,5 @@
 !** D9LGIC
 REAL(8) FUNCTION D9LGIC(A,X,Alx)
-  IMPLICIT NONE
   !>
   !***
   !  Compute the log complementary incomplete Gamma function
@@ -36,7 +35,7 @@ REAL(8) FUNCTION D9LGIC(A,X,Alx)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
 
   INTEGER k
-  REAL(8) :: A, X, Alx, fk, p, r, s, t, xma, xpa, D1MACH
+  REAL(8) :: A, X, Alx, fk, p, r, s, t, xma, xpa
   REAL(8) :: eps = 0.D0
   !* FIRST EXECUTABLE STATEMENT  D9LGIC
   IF ( eps==0.D0 ) eps = 0.5D0*D1MACH(3)

@@ -1,6 +1,5 @@
 !** QC25C
 SUBROUTINE QC25C(F,A,B,C,Result,Abserr,Krul,Neval)
-  IMPLICIT NONE
   !>
   !***
   !  To compute I = Integral of F*W over (A,B) with
@@ -80,7 +79,6 @@ SUBROUTINE QC25C(F,A,B,C,Result,Abserr,Krul,Neval)
   INTEGER i, isym, k, kp, Krul, Neval
   !
   REAL, EXTERNAL :: F
-  REAL, EXTERNAL :: QWGTC
   !
   !           THE VECTOR X CONTAINS THE VALUES COS(K*PI/24),
   !           K = 1, ..., 11, TO BE USED FOR THE CHEBYSHEV SERIES

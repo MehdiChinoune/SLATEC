@@ -1,6 +1,5 @@
 !** QK15I
 SUBROUTINE QK15I(F,Boun,Inf,A,B,Result,Abserr,Resabs,Resasc)
-  IMPLICIT NONE
   !>
   !***
   !  The original (infinite integration range is mapped
@@ -95,7 +94,6 @@ SUBROUTINE QK15I(F,Boun,Inf,A,B,Result,Abserr,Resabs,Resasc)
     Resabs, Resasc, resg, resk, reskh, Result, tabsc1, tabsc2, uflow
   INTEGER Inf, j
   REAL, EXTERNAL :: F
-  REAL, EXTERNAL :: R1MACH
   !
   !           THE ABSCISSAE AND WEIGHTS ARE SUPPLIED FOR THE INTERVAL
   !           (-1,1).  BECAUSE OF SYMMETRY ONLY THE POSITIVE ABSCISSAE AND

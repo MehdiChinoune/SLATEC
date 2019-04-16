@@ -1,6 +1,5 @@
 !** ZUNI2
 SUBROUTINE ZUNI2(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Nlast,Fnul,Tol,Elim,Alim)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to ZBESI and ZBESK
@@ -40,7 +39,6 @@ SUBROUTINE ZUNI2(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Nlast,Fnul,Tol,Elim,Alim)
     daii, dair, Elim, fn, Fnu, Fnul, phii, phir, rast, raz, rs1, rzi, rzr, &
     sti, str, s1i, s1r, s2i, s2r, Tol, Yi(N), Yr(N), zbi, zbr, zeta1i, zeta1r, &
     zeta2i, zeta2r, Zi, zni, znr, Zr, cyr(2), cyi(2), car, sar
-  REAL(8), EXTERNAL :: D1MACH, ZABS
   REAL(8), PARAMETER :: zeror = 0.0D0, zeroi = 0.0D0, coner = 1.0D0
   REAL(8), PARAMETER :: cipr(4) = [ 1.0D0, 0.0D0, -1.0D0, 0.0D0 ]
   REAL(8), PARAMETER :: cipi(4) = [ 0.0D0, 1.0D0, 0.0D0, -1.0D0 ]

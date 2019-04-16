@@ -1,6 +1,5 @@
 !** TRIS4
 SUBROUTINE TRIS4(N,A,B,C,D,U,Z)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to SEPX4

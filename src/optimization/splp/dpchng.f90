@@ -1,6 +1,5 @@
 !** DPCHNG
 SUBROUTINE DPCHNG(Ii,Xval,Iplace,Sx,Ix,Ircx)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to DSPLP
@@ -61,9 +60,7 @@ SUBROUTINE DPCHNG(Ii,Xval,Iplace,Sx,Ix,Ircx)
   !   910403  Updated AUTHOR and DESCRIPTION sections.  (WRB)
 
   INTEGER i, iend, Ii, il, ilast, iopt, ipl, Iplace, Ircx, istart, &
-    Ix(*), ixlast, j, jj, jstart, k, key, ll, lmx, lpg
-  INTEGER n20055, nerr, np
-  INTEGER IDLOC
+    Ix(*), ixlast, j, jj, jstart, k, key, ll, lmx, lpg, n20055, nerr, np
   REAL(8) :: Sx(*), Xval, sxlast, sxval
   REAL(8), PARAMETER :: zero = 0.D0, one = 1.D0
   !* FIRST EXECUTABLE STATEMENT  DPCHNG

@@ -1,7 +1,6 @@
 !** DDASSL
 SUBROUTINE DDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
     Iwork,Liw,Rpar,Ipar,JAC)
-  IMPLICIT NONE
   !>
   !***
   !  This code solves a system of differential/algebraic
@@ -942,11 +941,6 @@ SUBROUTINE DDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
   INTEGER Neq, Info(15), Idid, Lrw, Iwork(*), Liw, Ipar(*)
   REAL(8) :: T, Y(*), Yprime(*), Tout, Rtol(*), Atol(*), Rwork(*), Rpar(*)
   EXTERNAL :: RES, JAC
-  !
-  !     Declare externals.
-  !
-  EXTERNAL :: DDAINI, DDASTP, DDATRP, DDAWTS, XERMSG
-  REAL(8), EXTERNAL :: D1MACH, DDANRM
   !
   !     Declare local variables.
   !

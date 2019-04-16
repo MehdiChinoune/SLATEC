@@ -1,6 +1,5 @@
 !** STRSV
 SUBROUTINE STRSV(Uplo,Trans,Diag,N,A,Lda,X,Incx)
-  IMPLICIT NONE
   !>
   !***
   !  Solve a real triangular system of linear equations.
@@ -125,10 +124,6 @@ SUBROUTINE STRSV(Uplo,Trans,Diag,N,A,Lda,X,Incx)
   REAL temp
   INTEGER i, info, ix, j, jx, kx
   LOGICAL nounit
-  !     .. External Functions ..
-  LOGICAL, EXTERNAL :: LSAME
-  !     .. External Subroutines ..
-  EXTERNAL :: XERBLA
   !     .. Intrinsic Functions ..
   INTRINSIC MAX
   !* FIRST EXECUTABLE STATEMENT  STRSV

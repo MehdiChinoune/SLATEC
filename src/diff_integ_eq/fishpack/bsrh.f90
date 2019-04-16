@@ -1,7 +1,6 @@
 !** BSRH
 REAL FUNCTION BSRH(Xll,Xrr,Iz,C,A,Bh,F,Sgn)
   USE CBLKT
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to BLKTRI

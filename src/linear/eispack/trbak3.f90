@@ -1,6 +1,5 @@
 !** TRBAK3
 SUBROUTINE TRBAK3(Nm,N,Nv,A,M,Z)
-  IMPLICIT NONE
   !>
   !***
   !  Form the eigenvectors of a real symmetric matrix from the

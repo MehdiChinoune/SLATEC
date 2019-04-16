@@ -2,7 +2,6 @@
 SUBROUTINE DREORT(Ncomp,Y,Yp,Yhp,Niv,W,S,P,Ip,Stowa,Iflag)
   USE DML, ONLY : C, INHomo, NFC, PX, PWCnd, TND, X, XENd, XOT, KNSwot, LOTjp, &
     MNSwot, NSWot, TOL, NPS, NFCc
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to DBVSUP
@@ -59,7 +58,6 @@ SUBROUTINE DREORT(Ncomp,Y,Yp,Yhp,Niv,W,S,P,Ip,Stowa,Iflag)
   !   910722  Updated AUTHOR section.  (ALS)
 
   !
-  REAL(8) :: DDOT
   INTEGER Iflag, ijk, Ip(*), j, k, kk, l, mflag, Ncomp, nfcp, Niv
   REAL(8) :: dnd, dndt, dx, P(*), S(*), srp, Stowa(*), vnorm, W(*), wcnd, &
     Y(Ncomp,*), Yhp(Ncomp,*), Yp(*), ypnm

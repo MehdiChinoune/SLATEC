@@ -1,6 +1,5 @@
 !** RFFTI
 SUBROUTINE RFFTI(N,Wsave)
-  IMPLICIT NONE
   !>
   !***
   !  Initialize a work array for RFFTF and RFFTB.

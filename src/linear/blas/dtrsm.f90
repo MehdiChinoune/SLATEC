@@ -1,6 +1,5 @@
 !** DTRSM
 SUBROUTINE DTRSM(Side,Uplo,Transa,Diag,M,N,Alpha,A,Lda,B,Ldb)
-  IMPLICIT NONE
   !>
   !***
   !  Solve one of the matrix equations.
@@ -144,10 +143,6 @@ SUBROUTINE DTRSM(Side,Uplo,Transa,Diag,M,N,Alpha,A,Lda,B,Ldb)
   !     .. Array Arguments ..
   REAL(8) :: A(Lda,*), B(Ldb,*)
   !
-  !     .. External Functions ..
-  LOGICAL, EXTERNAL :: LSAME
-  !     .. External Subroutines ..
-  EXTERNAL :: XERBLA
   !     .. Intrinsic Functions ..
   INTRINSIC MAX
   !     .. Local Scalars ..

@@ -1,6 +1,5 @@
 !** DBKIAS
 SUBROUTINE DBKIAS(X,N,Ktrms,T,Ans,Ind,Ms,Gmrn,H,Ierr)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to DBSKIN
@@ -33,7 +32,6 @@ SUBROUTINE DBKIAS(X,N,Ktrms,T,Ans,Ind,Ms,Gmrn,H,Ierr)
   REAL(8) :: Ans, den1, den2, den3, er, err, fj, fk, fln, fm1, Gmrn, g1, gs, &
     H(*), hn, rat, rg1, rxp, rz, rzx, s(31), ss, sumi, sumj, T(50), &
     tol, v(52), w(52), X, xp(16), z
-  REAL(8) :: DGAMRN, D1MACH
   !-----------------------------------------------------------------------
   !             COEFFICIENTS OF POLYNOMIAL P(J-1,X), J=1,15
   !-----------------------------------------------------------------------

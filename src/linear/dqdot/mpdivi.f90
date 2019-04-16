@@ -1,7 +1,6 @@
 !** MPDIVI
 SUBROUTINE MPDIVI(X,Iy,Z)
   USE MPCOM
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to DQDOTA and DQDOTI

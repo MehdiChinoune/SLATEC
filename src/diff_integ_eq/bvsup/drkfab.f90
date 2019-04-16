@@ -3,7 +3,6 @@ SUBROUTINE DRKFAB(Ncomp,Xpts,Nxpts,Nfc,Iflag,Z,Mxnon,P,Ntp,Ip,Yhp,Niv,U,V,&
     W,S,Stowa,G,Work,Iwork,Nfcc)
   USE DML, ONLY : C, INHomo, KKKint, LLLint, X, XBEg, XENd, XOP, INFo, KOP, &
     AE, RE, NOPg, NDIsk, NTApe, NEQ, INTeg, NPS, NUMort
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to DBVSUP
@@ -45,8 +44,6 @@ SUBROUTINE DRKFAB(Ncomp,Xpts,Nxpts,Nfc,Iflag,Z,Mxnon,P,Ntp,Ip,Yhp,Niv,U,V,&
     nfcp1, Niv, non, Ntp, Nxpts, Ip(Nfcc,*), Iwork(*)
   REAL(8) :: G(*), P(Ntp,*), S(*), Stowa(*), U(Ncomp,Nfc,*), V(Ncomp,*), &
     W(Nfcc,*), Work(*), Xpts(*), xxop, Yhp(Ncomp,*), Z(*), ret(1), aet(1)
-  !
-  EXTERNAL :: DBVDER
   !
   !      *****************************************************************
   !       INITIALIZATION OF COUNTERS AND VARIABLES.

@@ -1,6 +1,5 @@
 !** DEXPRL
 REAL(8) FUNCTION DEXPRL(X)
-  IMPLICIT NONE
   !>
   !***
   !  Calculate the relative error exponential (EXP(X)-1)/X.
@@ -37,7 +36,7 @@ REAL(8) FUNCTION DEXPRL(X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
   INTEGER i
-  REAL(8) :: X, absx, alneps, xln, xn, D1MACH
+  REAL(8) :: X, absx, alneps, xln, xn
   INTEGER, SAVE :: nterms
   REAL(8), SAVE :: xbnd
   LOGICAL :: first = .TRUE.

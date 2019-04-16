@@ -1,6 +1,5 @@
 !** CNBFS
 SUBROUTINE CNBFS(Abe,Lda,N,Ml,Mu,V,Itask,Ind,Work,Iwork)
-  IMPLICIT NONE
   !>
   !***
   !  Solve a general nonsymmetric banded system of linear
@@ -185,7 +184,6 @@ SUBROUTINE CNBFS(Abe,Lda,N,Ml,Mu,V,Itask,Ind,Work,Iwork)
   INTEGER Lda, N, Itask, Ind, Iwork(*), Ml, Mu
   COMPLEX Abe(Lda,*), V(*), Work(*)
   REAL rcond
-  REAL R1MACH
   CHARACTER(8) :: xern1, xern2
   !* FIRST EXECUTABLE STATEMENT  CNBFS
   IF ( Lda<N ) THEN

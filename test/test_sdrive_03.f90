@@ -1,4 +1,5 @@
 MODULE TEST47_MOD
+  use slatec
   IMPLICIT NONE
 
 CONTAINS
@@ -39,7 +40,7 @@ CONTAINS
     !   890405  DATE WRITTEN
     !   890405  Revised to meet SLATEC standards.
 
-    REAL eps, R1MACH, t, tout
+    REAL eps, t, tout
     INTEGER ierflg, Ipass, Kprint, leniw, leniwx, lenw, lenwx, Lun, mint, &
       mstate, nde, nfe, nje, nstate, nstep, nx
     REAL, PARAMETER :: HMAX = 15.E0
@@ -459,6 +460,7 @@ END MODULE TEST47_MOD
 !** TEST47
 PROGRAM TEST47
   USE TEST47_MOD
+  use slatec
   IMPLICIT NONE
   !>
   !***
@@ -506,8 +508,6 @@ PROGRAM TEST47
 
   !* REVISION HISTORY  (YYMMDD)
   !   920801  DATE WRITTEN
-
-  INTEGER I1MACH
   INTEGER ipass, kprint, lin, lun, nfail
   !* FIRST EXECUTABLE STATEMENT  TEST47
   lun = I1MACH(2)

@@ -1,6 +1,5 @@
 !** CHFEV
 SUBROUTINE CHFEV(X1,X2,F1,F2,D1,D2,Ne,Xe,Fe,Next,Ierr)
-  IMPLICIT NONE
   !>
   !***
   !  Evaluate a cubic polynomial given in Hermite form at an

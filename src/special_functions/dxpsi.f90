@@ -1,6 +1,5 @@
 !** DXPSI
 REAL(8) FUNCTION DXPSI(A,Ipsik,Ipsix)
-  IMPLICIT NONE
   !>
   !***
   !  To compute values of the Psi function for DXLEGF.

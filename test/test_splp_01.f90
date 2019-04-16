@@ -1,4 +1,5 @@
 MODULE TEST37_MOD
+  use slatec
   IMPLICIT NONE
 
 CONTAINS
@@ -28,7 +29,6 @@ CONTAINS
     INTEGER i, ibasis(60), ic, icnt, ind(60), info, Ipass, isoln(14), iv, ivv, &
       iwork(900), j, kk, kount, Kprint, liw, Lun, lw, mm, mrelas
     INTEGER nvars
-    REAL, EXTERNAL :: USRMAT
     REAL costs(37)
     !* FIRST EXECUTABLE STATEMENT  SPLPQX
     IF ( Kprint>=2 ) WRITE (Lun,99001)
@@ -293,7 +293,7 @@ CONTAINS
 
     INTEGER ib, Ipass, irhs, itest, j, Kprint, Lun, mcon, mdw, &
       mode, mpass, mrows, ncols
-    REAL R1MACH, rnorm, rnormc, SNRM2, sr
+    REAL rnorm, rnormc, sr
     REAL w(11,11), x(30), rw(55), bl1(10), bu1(10)
     INTEGER ind(10), iw(20), iopt(40)
     CHARACTER(4) :: msg
@@ -427,6 +427,7 @@ END MODULE TEST37_MOD
 !** TEST37
 PROGRAM TEST37
   USE TEST37_MOD
+  use slatec
   IMPLICIT NONE
   !>
   !***
@@ -476,8 +477,6 @@ PROGRAM TEST37
   !   890618  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900524  Cosmetic changes to code.  (WRB)
-
-  INTEGER I1MACH
   INTEGER ipass, kprint, lin, lun, nfail
   !* FIRST EXECUTABLE STATEMENT  TEST37
   lun = I1MACH(2)

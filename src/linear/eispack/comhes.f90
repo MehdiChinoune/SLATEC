@@ -1,6 +1,5 @@
 !** COMHES
 SUBROUTINE COMHES(Nm,N,Low,Igh,Ar,Ai,Intt)
-  IMPLICIT NONE
   !>
   !***
   !  Reduce a complex general matrix to complex upper Hessenberg

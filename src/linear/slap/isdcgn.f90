@@ -3,7 +3,6 @@ INTEGER FUNCTION ISDCGN(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MTTVEC,MSOLVE,Itol,&
     Tol,Itmax,Iter,Err,Ierr,Iunit,R,Z,P,Atp,Atz,Dz,&
     Atdz,Rwork,Iwork,Ak,Bk,Bnrm,Solnrm)
   USE DSLBLK
-  IMPLICIT NONE
   !>
   !***
   !  Preconditioned CG on Normal Equations Stop Test.
@@ -219,8 +218,6 @@ INTEGER FUNCTION ISDCGN(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MTTVEC,MSOLVE,Itol,&
   EXTERNAL :: MATVEC, MSOLVE, MTTVEC
   !     .. Local Scalars ..
   INTEGER i
-  !     .. External Functions ..
-  REAL(8), EXTERNAL :: D1MACH, DNRM2
   !* FIRST EXECUTABLE STATEMENT  ISDCGN
   ISDCGN = 0
   !

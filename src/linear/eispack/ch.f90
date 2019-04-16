@@ -1,6 +1,5 @@
 !** CH
 SUBROUTINE CH(Nm,N,Ar,Ai,W,Matz,Zr,Zi,Fv1,Fv2,Fm1,Ierr)
-  IMPLICIT NONE
   !>
   !***
   !  Compute the eigenvalues and, optionally, the eigenvectors

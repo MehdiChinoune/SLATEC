@@ -1,7 +1,6 @@
 !** DULSIA
 SUBROUTINE DULSIA(A,Mda,M,N,B,Mdb,Nb,Re,Ae,Key,Mode,Np,Krank,Ksure,Rnorm,&
     W,Lw,Iwork,Liw,Info)
-  IMPLICIT NONE
   !>
   !***
   !  Solve an underdetermined linear system of equations by
@@ -181,7 +180,6 @@ SUBROUTINE DULSIA(A,Mda,M,N,B,Mdb,Nb,Re,Ae,Key,Mode,Np,Krank,Ksure,Rnorm,&
   INTEGER i, Info, it, Key, Krank, Ksure, Liw, Lw, M, m1, m2, &
     m3, m4, m5, Mda, Mdb, Mode, N, Nb, Np
   REAL(8) :: A(Mda,*), Ae(*), B(Mdb,*), eps, Re(*), Rnorm(*), W(*)
-  REAL(8) :: D1MACH
   INTEGER Iwork(*)
   !
   !* FIRST EXECUTABLE STATEMENT  DULSIA

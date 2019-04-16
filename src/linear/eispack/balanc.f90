@@ -1,6 +1,5 @@
 !** BALANC
 SUBROUTINE BALANC(Nm,N,A,Low,Igh,Scalee)
-  IMPLICIT NONE
   !>
   !***
   !  Balance a real general matrix and isolate eigenvalues

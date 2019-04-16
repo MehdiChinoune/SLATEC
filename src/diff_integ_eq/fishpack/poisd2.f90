@@ -1,6 +1,5 @@
 !** POISD2
 SUBROUTINE POISD2(Mr,Nr,Istag,Ba,Bb,Bc,Q,Idimq,B,W,D,Tcos,P)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to GENBUN

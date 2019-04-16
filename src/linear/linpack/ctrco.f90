@@ -1,6 +1,5 @@
 !** CTRCO
 SUBROUTINE CTRCO(T,Ldt,N,Rcond,Z,Job)
-  IMPLICIT NONE
   !>
   !***
   !  Estimate the condition number of a triangular matrix.
@@ -79,11 +78,9 @@ SUBROUTINE CTRCO(T,Ldt,N,Rcond,Z,Job)
   REAL Rcond
   !
   COMPLEX w, wk, wkm, ek
-  REAL tnorm, ynorm, s, sm, SCASUM
+  REAL tnorm, ynorm, s, sm
   INTEGER i1, j, j1, j2, k, kk, l
   LOGICAL lower
-  REAL, EXTERNAL :: CABS1
-  COMPLEX, EXTERNAL :: CSIGN1
   !
   !* FIRST EXECUTABLE STATEMENT  CTRCO
   lower = Job==0

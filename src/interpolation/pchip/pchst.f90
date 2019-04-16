@@ -1,6 +1,5 @@
 !** PCHST
 REAL FUNCTION PCHST(Arg1,Arg2)
-  IMPLICIT NONE
   !>
   !***
   !  PCHIP Sign-Testing Routine

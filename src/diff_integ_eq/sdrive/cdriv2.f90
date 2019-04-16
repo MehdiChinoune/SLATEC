@@ -1,7 +1,6 @@
 !** CDRIV2
 SUBROUTINE CDRIV2(N,T,Y,F,Tout,Mstate,Nroot,Eps,Ewt,Mint,Work,Lenw,Iwork,&
     Leniw,G,Ierflg)
-  IMPLICIT NONE
   !>
   !***
   !  The function of CDRIV2 is to solve N ordinary differential

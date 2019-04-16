@@ -1,6 +1,5 @@
 !** RC3JM
 SUBROUTINE RC3JM(L1,L2,L3,M1,M2min,M2max,Thrcof,Ndim,Ier)
-  IMPLICIT NONE
   !>
   !***
   !  Evaluate the 3j symbol g(M2) = (L1 L2   L3  )
@@ -140,7 +139,7 @@ SUBROUTINE RC3JM(L1,L2,L3,M1,M2min,M2max,Thrcof,Ndim,Ier)
   REAL L1, L2, L3, M1, M2min, M2max, Thrcof(Ndim)
   !
   INTEGER i, indexx, lstep, n, nfin, nfinp1, nfinp2, nfinp3, nlim, nstep2
-  REAL a1, a1s, c1, c1old, c2, cnorm, R1MACH, dv, hugee, m2, m3, newfac, oldfac, &
+  REAL a1, a1s, c1, c1old, c2, cnorm, dv, hugee, m2, m3, newfac, oldfac, &
     ratio, sign1, sign2, srhuge, srtiny, sum1, sum2, sumbac, sumfor, sumuni, &
     thresh, tinyy, x, x1, x2, x3, y, y1, y2, y3
   REAL, PARAMETER ::  zero = 0.0, eps = 0.01, one = 1.0, two = 2.0

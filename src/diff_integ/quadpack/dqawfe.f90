@@ -2,7 +2,6 @@
 SUBROUTINE DQAWFE(F,A,Omega,Integr,Epsabs,Limlst,Limit,Maxp1,Result,&
     Abserr,Neval,Ier,Rslst,Erlst,Ierlst,Lst,Alist,Blist,&
     Rlist,Elist,Iord,Nnlog,Chebmo)
-  IMPLICIT NONE
   !>
   !***
   !  The routine calculates an approximation result to a
@@ -225,7 +224,6 @@ SUBROUTINE DQAWFE(F,A,Omega,Integr,Epsabs,Limlst,Limit,Maxp1,Result,&
     fact, Omega, p1, psum(52), reseps, Result, res3la(3), Rlist(*), Rslst(*), uflow
   !
   REAL(8), EXTERNAL :: F
-  REAL(8), EXTERNAL :: D1MACH
   !
   !
   !            THE DIMENSION OF  PSUM  IS DETERMINED BY THE VALUE OF

@@ -1,6 +1,5 @@
 !** CPBDI
 SUBROUTINE CPBDI(Abd,Lda,N,M,Det)
-  IMPLICIT NONE
   !>
   !***
   !  Compute the determinant of a complex Hermitian positive

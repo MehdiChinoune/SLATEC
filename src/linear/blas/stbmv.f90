@@ -1,6 +1,5 @@
 !** STBMV
 SUBROUTINE STBMV(Uplo,Trans,Diag,N,K,A,Lda,X,Incx)
-  IMPLICIT NONE
   !>
   !***
   !  Multiply a real vector by a real triangular band matrix.
@@ -159,10 +158,6 @@ SUBROUTINE STBMV(Uplo,Trans,Diag,N,K,A,Lda,X,Incx)
   REAL temp
   INTEGER i, info, ix, j, jx, kplus1, kx, l
   LOGICAL nounit
-  !     .. External Functions ..
-  LOGICAL, EXTERNAL :: LSAME
-  !     .. External Subroutines ..
-  EXTERNAL :: XERBLA
   !     .. Intrinsic Functions ..
   INTRINSIC MAX, MIN
   !* FIRST EXECUTABLE STATEMENT  STBMV

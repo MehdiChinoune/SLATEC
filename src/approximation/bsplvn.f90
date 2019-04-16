@@ -1,6 +1,5 @@
 !** BSPLVN
 SUBROUTINE BSPLVN(T,Jhigh,Indexx,X,Ileft,Vnikx)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to FC

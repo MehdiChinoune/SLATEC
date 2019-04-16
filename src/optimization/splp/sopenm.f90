@@ -1,6 +1,5 @@
 !** SOPENM
 SUBROUTINE SOPENM(Ipage,Lpage)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to SPLP

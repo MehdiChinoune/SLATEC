@@ -1,6 +1,5 @@
 !** DSD2S
 SUBROUTINE DSD2S(N,Nelt,Ia,Ja,A,Isym,Dinv)
-  IMPLICIT NONE
   !>
   !***
   !  Diagonal Scaling Preconditioner SLAP Normal Eqns Set Up.

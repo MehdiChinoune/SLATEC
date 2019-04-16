@@ -1,6 +1,5 @@
 !** DGEFS
 SUBROUTINE DGEFS(A,Lda,N,V,Itask,Ind,Work,Iwork)
-  IMPLICIT NONE
   !>
   !***
   !  Solve a general system of linear equations.
@@ -114,7 +113,7 @@ SUBROUTINE DGEFS(A,Lda,N,V,Itask,Ind,Work,Iwork)
 
   !
   INTEGER Lda, N, Itask, Ind, Iwork(*)
-  REAL(8) :: A(Lda,*), V(*), Work(*), D1MACH
+  REAL(8) :: A(Lda,*), V(*), Work(*)
   REAL(8) :: rcond
   CHARACTER(8) :: xern1, xern2
   !* FIRST EXECUTABLE STATEMENT  DGEFS

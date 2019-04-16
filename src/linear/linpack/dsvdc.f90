@@ -1,6 +1,5 @@
 !** DSVDC
 SUBROUTINE DSVDC(X,Ldx,N,P,S,E,U,Ldu,V,Ldv,Work,Job,Info)
-  IMPLICIT NONE
   !>
   !***
   !  Perform the singular value decomposition of a rectangular
@@ -126,8 +125,8 @@ SUBROUTINE DSVDC(X,Ldx,N,P,S,E,U,Ldu,V,Ldv,Work,Job,Info)
   !
   INTEGER i, iter, j, jobu, k, kase, kk, l, ll, lls, lm1, lp1, &
     ls, lu, m, maxit, mm, mm1, mp1, nct, nctp1, ncu, nrt, nrtp1
-  REAL(8) :: DDOT, t
-  REAL(8) :: b, c, cs, el, emm1, f, g, DNRM2, scalee, shiftt, &
+  REAL(8) :: t
+  REAL(8) :: b, c, cs, el, emm1, f, g, scalee, shiftt, &
     sl, sm, sn, smm1, t1, test, ztest
   LOGICAL wantu, wantv
   !* FIRST EXECUTABLE STATEMENT  DSVDC

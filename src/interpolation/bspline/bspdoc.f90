@@ -1,6 +1,5 @@
 !** BSPDOC
 SUBROUTINE BSPDOC
-  IMPLICIT NONE
   !>
   !***
   !  Documentation for BSPLINE, a package of subprograms for

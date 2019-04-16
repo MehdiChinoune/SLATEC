@@ -1,7 +1,7 @@
 !** I1MACH
 INTEGER FUNCTION I1MACH(I)
-  use ISO_FORTRAN_ENV
-  IMPLICIT NONE
+  use ISO_FORTRAN_ENV, ONLY : INPUT_UNIT, OUTPUT_UNIT, ERROR_UNIT, &
+    NUMERIC_STORAGE_SIZE, CHARACTER_STORAGE_SIZE
   !>
   !***
   !  Return integer machine dependent constants.
@@ -100,7 +100,7 @@ INTEGER FUNCTION I1MACH(I)
   !   930201  Added DEC Alpha and SGI constants.  (RWC and WRB)
   !   930618  Corrected I1MACH(5) for Convex -p8 and -pd8 compiler
   !           options.  (DWL, RWC and WRB).
-  
+
   INTEGER I
   INTEGER, PARAMETER :: imach(16) = (/ INPUT_UNIT, OUTPUT_UNIT, OUTPUT_UNIT, &
     ERROR_UNIT, NUMERIC_STORAGE_SIZE, CHARACTER_STORAGE_SIZE, &

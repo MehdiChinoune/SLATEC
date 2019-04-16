@@ -1,6 +1,5 @@
 !** DBSGQ8
 SUBROUTINE DBSGQ8(FUN,Xt,Bc,N,Kk,Id,A,B,Inbv,Err,Ans,Ierr,Work)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to DBFQAD
@@ -79,10 +78,8 @@ SUBROUTINE DBSGQ8(FUN,Xt,Bc,N,Kk,Id,A,B,Inbv,Err,Ans,Ierr,Work)
     END FUNCTION
   END INTERFACE
   INTEGER Id, Ierr, Inbv, k, Kk, l, lmn, lmx, lr(60), mxl, N, nbits, nib, nlmx
-  INTEGER I1MACH
   REAL(8) :: A, aa(60), ae, anib, Ans, area, B, Bc(*), c, ce, ee, &
     ef, eps, Err, est, gl, glr, gr(60), hh(60), tol, vl(60), vr, Work(*), Xt(*)
-  REAL(8) :: D1MACH
   REAL(8), PARAMETER :: x1 = 1.83434642495649805D-01, x2 = 5.25532409916328986D-01, &
     x3 =7.96666477413626740D-01 , x4 = 9.60289856497536232D-01
   REAL(8), PARAMETER :: w1 = 3.62683783378361983D-01, w2 = 3.13706645877887287D-01, &
@@ -215,7 +212,6 @@ SUBROUTINE DBSGQ8(FUN,Xt,Bc,N,Kk,Id,A,B,Inbv,Err,Ans,Ierr,Work)
 CONTAINS
   REAL(8) FUNCTION G8(x,h)
     REAL(8), INTENT(IN) :: x, h
-    REAL(8), EXTERNAL :: DBVALU
     G8 = h*((w1*(FUN(x-x1*h)*DBVALU(Xt,Bc,N,Kk,Id,x-x1*h,Inbv,Work)+FUN(x+&
       x1*h)*DBVALU(Xt,Bc,N,Kk,Id,x+x1*h,Inbv,Work))&
       +w2*(FUN(x-x2*h)*DBVALU(Xt,Bc,N,Kk,Id,x-x2*h,Inbv,Work)&

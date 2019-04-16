@@ -1,6 +1,5 @@
 !** CMPTR3
 SUBROUTINE CMPTR3(M,A,B,C,K,Y1,Y2,Y3,Tcos,D,W1,W2,W3)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to CMGNBN

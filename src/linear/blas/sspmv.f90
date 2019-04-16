@@ -1,6 +1,5 @@
 !** SSPMV
 SUBROUTINE SSPMV(Uplo,N,Alpha,Ap,X,Incx,Beta,Y,Incy)
-  IMPLICIT NONE
   !>
   !***
   !  Perform the matrix-vector operation.
@@ -117,10 +116,6 @@ SUBROUTINE SSPMV(Uplo,N,Alpha,Ap,X,Incx,Beta,Y,Incy)
   !     .. Local Scalars ..
   REAL temp1, temp2
   INTEGER i, info, ix, iy, j, jx, jy, k, kk, kx, ky
-  !     .. External Functions ..
-  LOGICAL, EXTERNAL :: LSAME
-  !     .. External Subroutines ..
-  EXTERNAL :: XERBLA
   !* FIRST EXECUTABLE STATEMENT  SSPMV
   !
   !     Test the input parameters.

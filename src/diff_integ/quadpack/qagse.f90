@@ -1,7 +1,6 @@
 !** QAGSE
 SUBROUTINE QAGSE(F,A,B,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,Alist,&
     Blist,Rlist,Elist,Iord,Last)
-  IMPLICIT NONE
   !>
   !***
   !  The routine calculates an approximation result to a given
@@ -178,7 +177,6 @@ SUBROUTINE QAGSE(F,A,B,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,Alist,&
   LOGICAL extrap, noext
   !
   REAL, EXTERNAL :: F
-  REAL, EXTERNAL :: R1MACH
   !
   !            THE DIMENSION OF RLIST2 IS DETERMINED BY THE VALUE OF
   !            LIMEXP IN SUBROUTINE QELG (RLIST2 SHOULD BE OF DIMENSION

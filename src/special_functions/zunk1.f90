@@ -1,6 +1,5 @@
 !** ZUNK1
 SUBROUTINE ZUNK1(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Tol,Elim,Alim)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to ZBESK
@@ -38,7 +37,6 @@ SUBROUTINE ZUNK1(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Tol,Elim,Alim)
     phir(2), rast, razr, rs1, rzi, rzr, sgn, sti, str, sumdi, sumdr, sumi(2), &
     sumr(2), s1i, s1r, s2i, s2r, Tol, Yi(N), Yr(N), zeta1i(2), zeta1r(2), &
     zeta2i(2), zeta2r(2), zet1di, zet1dr, zet2di, zet2dr, Zi, Zr, zri, zrr
-  REAL(8), EXTERNAL :: ZABS, D1MACH
   REAL(8), PARAMETER :: zeror = 0.0D0, zeroi = 0.0D0, coner = 1.0D0
   REAL(8), PARAMETER :: pi = 3.14159265358979324D0
   !* FIRST EXECUTABLE STATEMENT  ZUNK1

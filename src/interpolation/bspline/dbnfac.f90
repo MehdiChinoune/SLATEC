@@ -1,6 +1,5 @@
 !** DBNFAC
 SUBROUTINE DBNFAC(W,Nroww,Nrow,Nbandl,Nbandu,Iflag)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to DBINT4 and DBINTK

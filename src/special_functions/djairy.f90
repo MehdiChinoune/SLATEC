@@ -1,6 +1,5 @@
 !** DJAIRY
 SUBROUTINE DJAIRY(X,Rx,C,Ai,Dai)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to DBESJ and DBESY

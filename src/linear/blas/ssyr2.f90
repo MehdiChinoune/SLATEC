@@ -1,6 +1,5 @@
 !** SSYR2
 SUBROUTINE SSYR2(Uplo,N,Alpha,X,Incx,Y,Incy,A,Lda)
-  IMPLICIT NONE
   !>
   !***
   !  Perform symmetric rank 2 update of a real symmetric matrix.
@@ -118,10 +117,6 @@ SUBROUTINE SSYR2(Uplo,N,Alpha,X,Incx,Y,Incy,A,Lda)
   !     .. Local Scalars ..
   REAL temp1, temp2
   INTEGER i, info, ix, iy, j, jx, jy, kx, ky
-  !     .. External Functions ..
-  LOGICAL, EXTERNAL :: LSAME
-  !     .. External Subroutines ..
-  EXTERNAL :: XERBLA
   !     .. Intrinsic Functions ..
   INTRINSIC MAX
   !* FIRST EXECUTABLE STATEMENT  SSYR2

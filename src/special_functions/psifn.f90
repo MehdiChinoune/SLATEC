@@ -1,6 +1,5 @@
 !** PSIFN
 SUBROUTINE PSIFN(X,N,Kode,M,Ans,Nz,Ierr)
-  IMPLICIT NONE
   !>
   !***
   !  Compute derivatives of the Psi function.
@@ -116,12 +115,10 @@ SUBROUTINE PSIFN(X,N,Kode,M,Ans,Nz,Ierr)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER i, Ierr, j, k, Kode, M, mm, mx, N, nn, np, nx, Nz
-  INTEGER I1MACH
   REAL Ans(*), arg, den, elim, eps, fln, fn, fnp, fns, fx, rln, &
     rxsq, r1m4, r1m5, s, slope, t, ta, tk, tol, tols, trm(22), &
     trmr(100), tss, tst, tt, t1, t2, wdtol, X, xdmln, xdmy, xinc, &
     xln, xm, xmin, xq, yint
-  REAL R1MACH
   INTEGER, PARAMETER :: nmax = 100
   !-----------------------------------------------------------------------
   !             BERNOULLI NUMBERS

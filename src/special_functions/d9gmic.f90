@@ -1,6 +1,5 @@
 !** D9GMIC
 REAL(8) FUNCTION D9GMIC(A,X,Alx)
-  IMPLICIT NONE
   !>
   !***
   !  Compute the complementary incomplete Gamma function for A
@@ -37,7 +36,7 @@ REAL(8) FUNCTION D9GMIC(A,X,Alx)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
 
   INTEGER k, m, mm1
-  REAL(8) :: A, X, Alx, alng, fk, fkp1, fm, s, sgng, t, te, D1MACH
+  REAL(8) :: A, X, Alx, alng, fk, fkp1, fm, s, sgng, t, te
   REAL(8), SAVE :: eps, bot
   REAL(8), PARAMETER :: euler = 0.57721566490153286060651209008240D0
   LOGICAL :: first = .TRUE.

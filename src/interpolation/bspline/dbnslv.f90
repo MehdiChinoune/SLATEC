@@ -1,6 +1,5 @@
 !** DBNSLV
 SUBROUTINE DBNSLV(W,Nroww,Nrow,Nbandl,Nbandu,B)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to DBINT4 and DBINTK

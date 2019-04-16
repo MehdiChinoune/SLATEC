@@ -1,6 +1,5 @@
 !** SSILUS
 SUBROUTINE SSILUS(N,Nelt,Ia,Ja,A,Isym,Nl,Il,Jl,L,Dinv,Nu,Iu,Ju,U,Nrow,Ncol)
-  IMPLICIT NONE
   !>
   !***
   !  Incomplete LU Decomposition Preconditioner SLAP Set Up.

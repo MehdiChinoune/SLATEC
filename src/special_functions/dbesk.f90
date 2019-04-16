@@ -1,6 +1,5 @@
 !** DBESK
 SUBROUTINE DBESK(X,Fnu,Kode,N,Y,Nz)
-  IMPLICIT NONE
   !>
   !***
   !  Implement forward recursion on the three term recursion
@@ -89,10 +88,8 @@ SUBROUTINE DBESK(X,Fnu,Kode,N,Y,Nz)
 
   !
   INTEGER i, j, k, Kode, mz, N, nb, nd, nn, nud, Nz
-  INTEGER I1MACH
   REAL(8) :: cn, dnu, elim, etx, flgik, fn, fnn, Fnu, gln, &
     gnu, rtz, s, s1, s2, t, tm, trx, w(2), X, xlim, Y(*), zn
-  REAL(8) :: DBESK0, DBESK1, DBSK1E, DBSK0E, D1MACH
   INTEGER, PARAMETER :: nulim(2) = [ 35, 70 ]
   !* FIRST EXECUTABLE STATEMENT  DBESK
   nn = -I1MACH(15)

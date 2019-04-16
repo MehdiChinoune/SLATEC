@@ -1,6 +1,5 @@
 !** ENORM
 REAL FUNCTION ENORM(N,X)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to SNLS1, SNLS1E, SNSQ and SNSQE

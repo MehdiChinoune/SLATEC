@@ -1,6 +1,5 @@
 !** DU12LS
 SUBROUTINE DU12LS(A,Mda,M,N,B,Mdb,Nb,Mode,Krank,Rnorm,H,W,Ic,Ir)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to DLLSIA
@@ -34,7 +33,6 @@ SUBROUTINE DU12LS(A,Mda,M,N,B,Mdb,Nb,Mode,Krank,Rnorm,H,W,Ic,Ir)
 
   INTEGER i, ij, im1, j, jb, k, kp1, Krank, M, Mda, Mdb, Mode, N, Nb, nmk
   REAL(8) :: A(Mda,*), B(Mdb,*), bb, H(*), Rnorm(*), tt, W(*)
-  REAL(8) :: DDOT, DNRM2
   INTEGER Ic(*), Ir(*)
   !* FIRST EXECUTABLE STATEMENT  DU12LS
   k = Krank

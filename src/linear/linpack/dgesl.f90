@@ -1,6 +1,5 @@
 !** DGESL
 SUBROUTINE DGESL(A,Lda,N,Ipvt,B,Job)
-  IMPLICIT NONE
   !>
   !***
   !  Solve the real system A*X=B or TRANS(A)*X=B using the
@@ -83,7 +82,7 @@ SUBROUTINE DGESL(A,Lda,N,Ipvt,B,Job)
   INTEGER Lda, N, Ipvt(*), Job
   REAL(8) :: A(Lda,*), B(*)
   !
-  REAL(8) :: DDOT, t
+  REAL(8) :: t
   INTEGER k, kb, l, nm1
   !* FIRST EXECUTABLE STATEMENT  DGESL
   nm1 = N - 1

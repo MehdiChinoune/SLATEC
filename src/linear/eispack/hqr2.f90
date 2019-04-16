@@ -1,6 +1,5 @@
 !** HQR2
 SUBROUTINE HQR2(Nm,N,Low,Igh,H,Wr,Wi,Z,Ierr)
-  IMPLICIT NONE
   !>
   !***
   !  Compute the eigenvalues and eigenvectors of a real upper

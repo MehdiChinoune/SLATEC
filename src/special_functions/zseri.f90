@@ -1,6 +1,5 @@
 !** ZSERI
 SUBROUTINE ZSERI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol,Elim,Alim)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to ZBESI and ZBESK
@@ -37,8 +36,6 @@ SUBROUTINE ZSERI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol,Elim,Alim)
     coefi, coefr, crscr, czi, czr, dfnu, Elim, Fnu, fnup, hzi, hzr, raz, rs, &
     rtr1, rzi, rzr, s, ss, sti, str, s1i, s1r, s2i, s2r, Tol, Yi(N), Yr(N), &
     wi(2), wr(2), Zi, Zr
-  REAL(8), EXTERNAL :: DGAMLN, D1MACH, ZABS
-  EXTERNAL :: ZLOG
   REAL(8), PARAMETER :: zeror = 0.0D0, zeroi = 0.0D0, coner = 1.0D0, conei = 0.0D0
   !* FIRST EXECUTABLE STATEMENT  ZSERI
   Nz = 0

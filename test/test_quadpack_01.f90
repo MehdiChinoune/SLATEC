@@ -1,4 +1,5 @@
 MODULE TEST39_MOD
+  use slatec
   IMPLICIT NONE
 
 CONTAINS
@@ -27,7 +28,7 @@ CONTAINS
 
     ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
     INTEGER ierv(2), Lun
-    REAL a, abserr, b, R1MACH, epmach, epsabs, epsrel, error, &
+    REAL a, abserr, b, epmach, epsabs, epsrel, error, &
       result, uflow, work(400)
     INTEGER ier, ip, Ipass, iwork(100), key, Kprint, last, lenw, limit, neval
     REAL, PARAMETER :: pi = 0.31415926535897932E+01
@@ -142,7 +143,7 @@ CONTAINS
 
     ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
     INTEGER ierv(4), inf
-    REAL abserr, bound, R1MACH, epmach, epsabs, epsrel, error, &
+    REAL abserr, bound, epmach, epsabs, epsrel, error, &
       oflow, result, uflow, work(800)
     INTEGER ier, ip, Ipass, iwork(200), Kprint, last, lenw, limit, Lun, neval
     REAL, PARAMETER :: exact0 = 2.0E+00, exact1 = 0.115470066904E1
@@ -274,7 +275,7 @@ CONTAINS
 
     ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
     INTEGER ierv(4)
-    REAL a, abserr, b, R1MACH, epmach, epsabs, epsrel, error, &
+    REAL a, abserr, b, epmach, epsabs, epsrel, error, &
       oflow, points(5), result, uflow, work(405)
     INTEGER ier, ip, Ipass, iwork(205), Kprint, last, leniw, lenw, limit, &
       Lun, neval, npts2
@@ -421,7 +422,7 @@ CONTAINS
 
     ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
     INTEGER ierv(5), Lun
-    REAL a, abserr, b, R1MACH, epmach, epsabs, epsrel, error, &
+    REAL a, abserr, b, epmach, epsabs, epsrel, error, &
       oflow, result, uflow, work(800)
     INTEGER ier, ip, Ipass, iwork(200), Kprint, last, lenw, limit, neval
     REAL, PARAMETER :: exact0 = 0.2E+01
@@ -561,7 +562,7 @@ CONTAINS
     !
     ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
     INTEGER ierv(2), Lun
-    REAL a, abserr, b, R1MACH, epmach, epsabs, epsrel, error, &
+    REAL a, abserr, b, epmach, epsabs, epsrel, error, &
       c, result, uflow, work(800)
     INTEGER ier, ip, Ipass, iwork(200), Kprint, last, lenw, limit, neval
     REAL, PARAMETER :: exact0 = -0.6284617285065624E+03
@@ -666,7 +667,7 @@ CONTAINS
     !
     ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
     INTEGER ierv(3), integr, iwork(450), leniw, Lun, maxp1
-    REAL a, abserr, R1MACH, epsabs, epmach, error, omega, result, uflow, work(1425)
+    REAL a, abserr, epsabs, epmach, error, omega, result, uflow, work(1425)
     INTEGER ier, ip, Ipass, Kprint, lenw, limit, limlst, lst, neval
     REAL, PARAMETER :: exact0 = 0.1422552162575912E+01
     REAL, PARAMETER :: pi = 0.31415926535897932E+01
@@ -783,7 +784,7 @@ CONTAINS
     ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
     INTEGER leniw
     REAL a, abserr, b, epmach, epsabs, epsrel, error, &
-      oflow, omega, result, R1MACH, uflow, work(1325)
+      oflow, omega, result, uflow, work(1325)
     INTEGER ier, ierv(4), integr, ip, Ipass, iwork(400), Kprint, last, lenw, &
       Lun, maxp1, neval
     REAL, PARAMETER :: exact0 = 0.1042872789432789E+05
@@ -912,7 +913,7 @@ CONTAINS
 
     ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
     INTEGER ierv(2), Lun
-    REAL a, abserr, b, R1MACH, epmach, epsabs, epsrel, error, &
+    REAL a, abserr, b, epmach, epsabs, epsrel, error, &
       alfa, beta, result, uflow, work(800)
     INTEGER ier, ip, Ipass, iwork(200), Kprint, last, lenw, limit, neval, integr
     REAL, PARAMETER :: exact0 = 0.5350190569223644E+00
@@ -1019,7 +1020,7 @@ CONTAINS
 
     ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
     INTEGER Lun
-    REAL a, abserr, b, R1MACH, epmach, epsabs, epsrel, error, result, uflow
+    REAL a, abserr, b, epmach, epsabs, epsrel, error, result, uflow
     INTEGER ier, ierv(1), ip, Ipass, Kprint, neval
     REAL, PARAMETER :: exact1 = 0.7281029132255818E+00
     REAL, PARAMETER :: exact2 = 0.1E+02
@@ -1842,6 +1843,7 @@ END MODULE TEST39_MOD
 !** TEST39
 PROGRAM TEST39
   USE TEST39_MOD
+  use slatec
   IMPLICIT NONE
   !>
   !***
@@ -1893,8 +1895,6 @@ PROGRAM TEST39
   !   890618  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900524  Cosmetic changes to code.  (WRB)
-
-  INTEGER I1MACH
   INTEGER ipass, kprint, lin, lun, nfail
   !* FIRST EXECUTABLE STATEMENT  TEST39
   lun = I1MACH(2)

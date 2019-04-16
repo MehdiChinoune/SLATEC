@@ -1,6 +1,5 @@
 !** DSOS
 SUBROUTINE DSOS(FNC,Neq,X,Rtolx,Atolx,Tolf,Iflag,Rw,Lrw,Iw,Liw)
-  IMPLICIT NONE
   !>
   !***
   !  Solve a square system of nonlinear equations.

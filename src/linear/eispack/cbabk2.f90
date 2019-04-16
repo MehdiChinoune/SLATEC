@@ -1,6 +1,5 @@
 !** CBABK2
 SUBROUTINE CBABK2(Nm,N,Low,Igh,Scalee,M,Zr,Zi)
-  IMPLICIT NONE
   !>
   !***
   !  Form the eigenvectors of a complex general matrix from the

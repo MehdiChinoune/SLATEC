@@ -1,6 +1,5 @@
 !** CDNTP
 SUBROUTINE CDNTP(H,K,N,Nq,T,Tout,Yh,Y)
-  IMPLICIT NONE
   !>
   !***
   !  Subroutine CDNTP interpolates the K-th derivative of Y at

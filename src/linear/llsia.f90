@@ -1,7 +1,6 @@
 !** LLSIA
 SUBROUTINE LLSIA(A,Mda,M,N,B,Mdb,Nb,Re,Ae,Key,Mode,Np,Krank,Ksure,Rnorm,W,&
     Lw,Iwork,Liw,Info)
-  IMPLICIT NONE
   !>
   !***
   !  Solve a linear least squares problems by performing a QR
@@ -172,7 +171,7 @@ SUBROUTINE LLSIA(A,Mda,M,N,B,Mdb,Nb,Re,Ae,Key,Mode,Np,Krank,Ksure,Rnorm,W,&
 
   INTEGER i, Info, it, Key, Krank, Ksure, Liw, Lw, M, Mda, Mdb, &
     Mode, N, n1, n2, n3, n4, n5, Nb, Np
-  REAL A(Mda,*), Ae(*), B(Mdb,*), eps, R1MACH, Re(*), Rnorm(*), W(*)
+  REAL A(Mda,*), Ae(*), B(Mdb,*), eps, Re(*), Rnorm(*), W(*)
   INTEGER Iwork(*)
   !
   !* FIRST EXECUTABLE STATEMENT  LLSIA

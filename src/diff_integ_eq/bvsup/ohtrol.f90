@@ -1,6 +1,5 @@
 !** OHTROL
 SUBROUTINE OHTROL(Q,N,Nrda,Diag,Irank,Div,Td)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to BVSUP
@@ -34,7 +33,7 @@ SUBROUTINE OHTROL(Q,N,Nrda,Diag,Irank,Div,Td)
   !   910722  Updated AUTHOR section.  (ALS)
 
   INTEGER Irank, irp, j, k, kir, kirm, l, N, nmir, Nrda
-  REAL dd, Diag(*), diagk, Div(*), Q(Nrda,*), qs, SDOT, sig, sqd, Td(*), tdv
+  REAL dd, Diag(*), diagk, Div(*), Q(Nrda,*), qs, sig, sqd, Td(*), tdv
   !* FIRST EXECUTABLE STATEMENT  OHTROL
   nmir = N - Irank
   irp = Irank + 1

@@ -3,7 +3,6 @@ SUBROUTINE DDEBDF(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,&
     Rpar,Ipar,DJAC)
   USE DDEBD1, ONLY : H, TN, IYH, IEWt, IACor, ISAvf, IWM, IBEgin, ITOl, IINteg, &
     ITStop, IJAc, IBAnd
-  IMPLICIT NONE
   !>
   !***
   !  Solve an initial value problem in ordinary differential

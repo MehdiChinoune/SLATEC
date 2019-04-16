@@ -3,7 +3,6 @@ SUBROUTINE SPLPMN(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
     Primal,Duals,Amat,Csc,Colnrm,Erd,Erp,Basmat,Wr,Rz,Rg,&
     Rprim,Rhs,Ww,Lmx,Lbm,Ibasis,Ibb,Imat,Ibrc,Ipr,Iwr)
   USE LA05DS
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to SPLP
@@ -50,7 +49,6 @@ SUBROUTINE SPLPMN(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
     Ibasis(*), Ibb(*), Ibrc(Lbm,2), Imat(*), Ind(*), Ipr(*), Iwr(*), idum(01)
   INTEGER, TARGET :: intopt(08)
   INTEGER, POINTER :: idg, ipagef, isave, mxitlp, kprint, itbrc, npp, lprg
-  REAL, EXTERNAL :: SASUM, SDOT
   EXTERNAL :: USRMAT
   REAL aij, Amat(*), anorm, Basmat(*), Bl(*), Bu(*), Colnrm(*), Costs(*), Csc(*), &
     Dattrv(*), dirnrm, Duals(*), dulnrm, Erd(*), erdnrm, Erp(*), factor, gg, one, &
@@ -389,7 +387,8 @@ SUBROUTINE SPLPMN(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   ELSEIF ( (.NOT.feas).AND.unbnd ) THEN
     nerr = 3
     CALL XERMSG('SLATEC','SPLPMN',&
-      'IN SPLP, THE PROBLEM APPEARS TO BE INFEASIBLE AND TO HAVE NO FINITE SOLUTION.',nerr,iopt)
+      'IN SPLP, THE PROBLEM APPEARS TO BE INFEASIBLE AND TO HAVE NO FINITE SOLUTION.'&
+      ,nerr,iopt)
     Info = -nerr
   END IF
   !

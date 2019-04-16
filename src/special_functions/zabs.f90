@@ -1,6 +1,5 @@
 !** ZABS
 REAL(8) FUNCTION ZABS(Zr,Zi)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to ZBESH, ZBESI, ZBESJ, ZBESK, ZBESY, ZAIRY and

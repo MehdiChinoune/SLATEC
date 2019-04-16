@@ -1,6 +1,5 @@
 !** COMLR2
 SUBROUTINE COMLR2(Nm,N,Low,Igh,Intt,Hr,Hi,Wr,Wi,Zr,Zi,Ierr)
-  IMPLICIT NONE
   !>
   !***
   !  Compute the eigenvalues and eigenvectors of a complex upper

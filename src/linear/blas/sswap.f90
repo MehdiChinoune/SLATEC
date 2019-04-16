@@ -1,6 +1,5 @@
 !** SSWAP
 SUBROUTINE SSWAP(N,Sx,Incx,Sy,Incy)
-  IMPLICIT NONE
   !>
   !***
   !  Interchange two vectors.

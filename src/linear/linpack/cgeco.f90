@@ -1,6 +1,5 @@
 !** CGECO
 SUBROUTINE CGECO(A,Lda,N,Ipvt,Rcond,Z)
-  IMPLICIT NONE
   !>
   !***
   !  Factor a matrix using Gaussian elimination and estimate
@@ -88,11 +87,9 @@ SUBROUTINE CGECO(A,Lda,N,Ipvt,Rcond,Z)
   COMPLEX A(Lda,*), Z(*)
   REAL Rcond
   !
-  COMPLEX CDOTC, ek, t, wk, wkm
-  REAL anorm, s, SCASUM, sm, ynorm
+  COMPLEX ek, t, wk, wkm
+  REAL anorm, s, sm, ynorm
   INTEGER info, j, k, kb, kp1, l
-  REAL, EXTERNAL :: CABS1
-  COMPLEX, EXTERNAL :: CSIGN1
   !
   !     COMPUTE 1-NORM OF A
   !

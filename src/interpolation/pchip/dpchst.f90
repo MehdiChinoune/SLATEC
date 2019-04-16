@@ -1,6 +1,5 @@
 !** DPCHST
 REAL(8) FUNCTION DPCHST(Arg1,Arg2)
-  IMPLICIT NONE
   !>
   !***
   !  DPCHIP Sign-Testing Routine

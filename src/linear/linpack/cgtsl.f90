@@ -1,6 +1,5 @@
 !** CGTSL
 SUBROUTINE CGTSL(N,C,D,E,B,Info)
-  IMPLICIT NONE
   !>
   !***
   !  Solve a tridiagonal linear system.
@@ -72,7 +71,6 @@ SUBROUTINE CGTSL(N,C,D,E,B,Info)
   !
   INTEGER k, kb, kp1, nm1, nm2
   COMPLEX t
-  REAL, EXTERNAL :: CABS1
   !* FIRST EXECUTABLE STATEMENT  CGTSL
   Info = 0
   C(1) = D(1)

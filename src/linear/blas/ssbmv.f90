@@ -1,6 +1,5 @@
 !** SSBMV
 SUBROUTINE SSBMV(Uplo,N,K,Alpha,A,Lda,X,Incx,Beta,Y,Incy)
-  IMPLICIT NONE
   !>
   !***
   !  Multiply a real vector by a real symmetric band matrix.
@@ -151,10 +150,6 @@ SUBROUTINE SSBMV(Uplo,N,K,Alpha,A,Lda,X,Incx,Beta,Y,Incy)
   !     .. Local Scalars ..
   REAL temp1, temp2
   INTEGER i, info, ix, iy, j, jx, jy, kplus1, kx, ky, l
-  !     .. External Functions ..
-  LOGICAL, EXTERNAL :: LSAME
-  !     .. External Subroutines ..
-  EXTERNAL :: XERBLA
   !     .. Intrinsic Functions ..
   INTRINSIC MAX, MIN
   !* FIRST EXECUTABLE STATEMENT  SSBMV

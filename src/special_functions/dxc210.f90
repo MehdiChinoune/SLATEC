@@ -1,7 +1,6 @@
 !** DXC210
 SUBROUTINE DXC210(K,Z,J,Ierror)
   USE DXBLK ,ONLY: NLG102, MLG102, LG102
-  IMPLICIT NONE
   !>
   !***
   !  To provide double-precision floating-point arithmetic

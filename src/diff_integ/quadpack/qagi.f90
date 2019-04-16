@@ -1,7 +1,6 @@
 !** QAGI
 SUBROUTINE QAGI(F,Bound,Inf,Epsabs,Epsrel,Result,Abserr,Neval,Ier,Limit,&
     Lenw,Last,Iwork,Work)
-  IMPLICIT NONE
   !>
   !***
   !  The routine calculates an approximation result to a given

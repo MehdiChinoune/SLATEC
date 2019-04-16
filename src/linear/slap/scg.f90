@@ -1,7 +1,6 @@
 !** SCG
 SUBROUTINE SCG(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,Iter,&
     Err,Ierr,Iunit,R,Z,P,Dz,Rwork,Iwork)
-  IMPLICIT NONE
   !>
   !***
   !  Preconditioned Conjugate Gradient Sparse Ax=b Solver.
@@ -267,11 +266,6 @@ SUBROUTINE SCG(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,Iter,&
   !     .. Local Scalars ..
   REAL ak, akden, bk, bkden, bknum, bnrm, solnrm, tolmin
   INTEGER i, k
-  !     .. External Functions ..
-  REAL, EXTERNAL :: R1MACH, SDOT
-  INTEGER, EXTERNAL :: ISSCG
-  !     .. External Subroutines ..
-  EXTERNAL :: SAXPY, SCOPY
   !* FIRST EXECUTABLE STATEMENT  SCG
   !
   !         Check some of the input data.

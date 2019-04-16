@@ -1,6 +1,5 @@
 !** CPPDI
 SUBROUTINE CPPDI(Ap,N,Det,Job)
-  IMPLICIT NONE
   !>
   !***
   !  Compute the determinant and inverse of a complex Hermitian

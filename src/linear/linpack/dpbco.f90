@@ -1,6 +1,5 @@
 !** DPBCO
 SUBROUTINE DPBCO(Abd,Lda,N,M,Rcond,Z,Info)
-  IMPLICIT NONE
   !>
   !***
   !  Factor a real symmetric positive definite matrix stored in
@@ -129,8 +128,8 @@ SUBROUTINE DPBCO(Abd,Lda,N,M,Rcond,Z,Info)
   REAL(8) :: Abd(Lda,*), Z(*)
   REAL(8) :: Rcond
   !
-  REAL(8) :: DDOT, ek, t, wk, wkm
-  REAL(8) :: anorm, s, DASUM, sm, ynorm
+  REAL(8) :: ek, t, wk, wkm
+  REAL(8) :: anorm, s, sm, ynorm
   INTEGER i, j, j2, k, kb, kp1, l, la, lb, lm, mu
   !
   !     FIND NORM OF A

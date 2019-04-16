@@ -1,6 +1,5 @@
 !** MPMULI
 SUBROUTINE MPMULI(X,Iy,Z)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to DQDOTA and DQDOTI

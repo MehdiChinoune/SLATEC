@@ -1,6 +1,5 @@
 !** RFFTF
 SUBROUTINE RFFTF(N,R,Wsave)
-  IMPLICIT NONE
   !>
   !***
   !  Compute the forward transform of a real, periodic sequence.

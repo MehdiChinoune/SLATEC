@@ -1,6 +1,5 @@
 !** ZUNI1
 SUBROUTINE ZUNI1(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Nlast,Fnul,Tol,Elim,Alim)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to ZBESI and ZBESK
@@ -38,7 +37,6 @@ SUBROUTINE ZUNI1(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Nlast,Fnul,Tol,Elim,Alim)
     cwrki(16), cwrkr(16), c1r, c2i, c2m, c2r, Elim, fn, Fnu, Fnul, phii, phir, &
     rast, rs1, rzi, rzr, sti, str, sumi, sumr, s1i, s1r, s2i, s2r, Tol, &
     Yi(N), Yr(N), zeta1i, zeta1r, zeta2i, zeta2r, Zi, Zr, cyr(2), cyi(2)
-  REAL(8), EXTERNAL :: D1MACH, ZABS
   REAL(8), PARAMETER :: zeror = 0.0D0, zeroi = 0.0D0, coner = 1.0D0
   !* FIRST EXECUTABLE STATEMENT  ZUNI1
   Nz = 0

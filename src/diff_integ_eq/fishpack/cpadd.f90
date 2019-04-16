@@ -1,7 +1,6 @@
 !** CPADD
 SUBROUTINE CPADD(N,Ierror,A,C,Cbp,Bp,Bh)
   USE CCBLK
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to CBLKTR
@@ -36,10 +35,9 @@ SUBROUTINE CPADD(N,Ierror,A,C,Cbp,Bp,Bh)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
 
-  REAL A(*), BCRH, Bh(*), Bp(*), C(*), db, psg, scnv, sgn, xl, xm, xr
+  REAL A(*), Bh(*), Bp(*), C(*), db, psg, scnv, sgn, xl, xm, xr
   INTEGER i3, icv, Ierror, if, ig, is, it, iz, j, modiz, N, nhalf, nt
   COMPLEX cx, fsg, hsg, dd, f, fp, fpp, cdis, r1, r2, r3, Cbp(*)
-  REAL, EXTERNAL :: PGSF, PPPSF, PPGSF
   !* FIRST EXECUTABLE STATEMENT  CPADD
   scnv = SQRT(CNV)
   iz = N

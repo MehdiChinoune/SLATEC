@@ -1,7 +1,6 @@
 !** DINTYD
 SUBROUTINE DINTYD(T,K,Yh,Nyh,Dky,Iflag)
   USE DDEBD1, ONLY : H, HU, TN, UROund, L, N, NQ
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to DDEBDF

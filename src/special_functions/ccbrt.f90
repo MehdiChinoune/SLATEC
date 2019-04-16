@@ -1,6 +1,5 @@
 !** CCBRT
 COMPLEX FUNCTION CCBRT(Z)
-  IMPLICIT NONE
   !>
   !***
   !  Compute the cube root.
@@ -30,8 +29,8 @@ COMPLEX FUNCTION CCBRT(Z)
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
-  
-  REAL CARG, CBRT, r, theta
+
+  REAL r, theta
   COMPLEX Z
   !* FIRST EXECUTABLE STATEMENT  CCBRT
   theta = CARG(Z)/3.0

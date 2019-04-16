@@ -1,7 +1,6 @@
 !** DXADJ
 SUBROUTINE DXADJ(X,Ix,Ierror)
   USE DXBLK ,ONLY: RADixl, RAD2l, L2, KMAx
-  IMPLICIT NONE
   !>
   !***
   !  To provide double-precision floating-point arithmetic

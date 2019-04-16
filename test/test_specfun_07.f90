@@ -1,4 +1,5 @@
 MODULE TEST08_MOD
+  use slatec
   IMPLICIT NONE
 
 CONTAINS
@@ -47,9 +48,7 @@ CONTAINS
 
     INTEGER Ipass, Kprint, nz
     INTEGER i, ierr, iflg, ix, i1m12, j, k, kode, Lun, m, mdel, mm, n, ndel, nn
-    INTEGER I1MACH
     REAL(8) :: aix, er, tol, v(1), x, xinc, y(10)
-    REAL(8) :: D1MACH
     !* FIRST EXECUTABLE STATEMENT  DQCKIN
     tol = 1000.0D0*MAX(D1MACH(4),1.0D-18)
     iflg = 0
@@ -175,7 +174,6 @@ CONTAINS
     INTEGER Ipass, Kprint
     INTEGER i, ierr, iflg, ix, kode, Lun, m, n, nm, nn, nz
     REAL(8) :: er, psi1(3), psi2(20), r1m4, s, tol, x
-    REAL(8) :: D1MACH
     REAL(8), PARAMETER :: euler = 0.5772156649015328606D0
     !* FIRST EXECUTABLE STATEMENT  DQCPSI
     r1m4 = D1MACH(4)
@@ -271,6 +269,7 @@ END MODULE TEST08_MOD
 !** TEST08
 PROGRAM TEST08
   USE TEST08_MOD
+  use slatec
   IMPLICIT NONE
   !>
   !***
@@ -320,8 +319,6 @@ PROGRAM TEST08
   !   890618  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900524  Cosmetic changes to code.  (WRB)
-
-  INTEGER I1MACH
   INTEGER ipass, kprint, lin, lun, nfail
   !* FIRST EXECUTABLE STATEMENT  TEST08
   lun = I1MACH(2)

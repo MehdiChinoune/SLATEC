@@ -1,6 +1,5 @@
 !** TRIX
 SUBROUTINE TRIX(Idegbr,Idegcr,M,A,B,C,Y,Tcos,D,W)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to GENBUN

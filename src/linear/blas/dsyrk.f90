@@ -1,6 +1,5 @@
 !** DSYRK
 SUBROUTINE DSYRK(Uplo,Trans,N,K,Alpha,A,Lda,Beta,C,Ldc)
-  IMPLICIT NONE
   !>
   !***
   !  Perform one of the symmetric rank k operations.
@@ -133,10 +132,6 @@ SUBROUTINE DSYRK(Uplo,Trans,N,K,Alpha,A,Lda,Beta,C,Ldc)
   REAL(8) :: Alpha, Beta
   !     .. Array Arguments ..
   REAL(8) :: A(Lda,*), C(Ldc,*)
-  !     .. External Functions ..
-  LOGICAL, EXTERNAL :: LSAME
-  !     .. External Subroutines ..
-  EXTERNAL :: XERBLA
   !     .. Intrinsic Functions ..
   INTRINSIC MAX
   !     .. Local Scalars ..

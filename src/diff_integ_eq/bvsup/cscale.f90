@@ -1,7 +1,6 @@
 !** CSCALE
 SUBROUTINE CSCALE(A,Nrda,Nrow,Ncol,Cols,Colsav,Rows,Rowsav,Anorm,Scales,&
     Iscale,Ic)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to BVSUP
@@ -31,7 +30,7 @@ SUBROUTINE CSCALE(A,Nrda,Nrow,Ncol,Cols,Colsav,Rows,Rowsav,Anorm,Scales,&
 
   INTEGER Ic, ip, Iscale, j, k, Ncol, Nrda, Nrow
   REAL A(Nrda,*), alog2, Anorm, ascale, Cols(*), Colsav(*), cs, p, Rows(*), Rowsav(*), &
-    s, Scales(*), SDOT
+    s, Scales(*)
   !
   REAL(8), PARAMETER :: ten4 = 1.E+4, ten20 = 1.E+20
   !

@@ -1,6 +1,5 @@
 !** DU11US
 SUBROUTINE DU11US(A,Mda,M,N,Ub,Db,Mode,Np,Krank,Ksure,H,W,Eb,Ir,Ic)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to DULSIA
@@ -35,9 +34,8 @@ SUBROUTINE DU11US(A,Mda,M,N,Ub,Db,Mode,Np,Krank,Ksure,H,W,Eb,Ir,Ic)
 
   INTEGER Mda, mmk, Mode, N, nn, Np
   REAL(8) :: A(Mda,*), bb, Db(*), Eb(*), H(*), r2, rmin, summ, t, temp, tn, tt, Ub(*), W(*)
-  INTEGER i, IDAMAX, ii, im1, imin, is, j, jm1, jmax, jp1, kk, &
+  INTEGER i, ii, im1, imin, is, j, jm1, jmax, jp1, kk, &
     km1, kmi, kp1, Krank, Ksure, kz, l, lm1, M
-  REAL(8) :: DDOT, DNRM2
   INTEGER Ic(*), Ir(*)
   !
   !        INITIALIZATION

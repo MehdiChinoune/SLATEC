@@ -1,6 +1,5 @@
 !** DFULMT
 SUBROUTINE DFULMT(I,J,Aij,Indcat,Prgopt,Dattrv,Iflag)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to DSPLP

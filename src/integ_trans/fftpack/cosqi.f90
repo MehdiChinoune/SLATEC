@@ -1,6 +1,5 @@
 !** COSQI
 SUBROUTINE COSQI(N,Wsave)
-  IMPLICIT NONE
   !>
   !***
   !  Initialize a work array for COSQF and COSQB.

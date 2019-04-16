@@ -1,6 +1,5 @@
 !** DCHDD
 SUBROUTINE DCHDD(R,Ldr,P,X,Z,Ldz,Nz,Y,Rho,C,S,Info)
-  IMPLICIT NONE
   !>
   !***
   !  Downdate an augmented Cholesky decomposition or the
@@ -142,8 +141,8 @@ SUBROUTINE DCHDD(R,Ldr,P,X,Z,Ldz,Nz,Y,Rho,C,S,Info)
   REAL(8) :: Rho(*), C(*)
   !
   INTEGER i, ii, j
-  REAL(8) :: a, alpha, azeta, norm, DNRM2
-  REAL(8) :: DDOT, t, zeta, b, xx, scalee
+  REAL(8) :: a, alpha, azeta, norm
+  REAL(8) :: t, zeta, b, xx, scalee
   !
   !     SOLVE THE SYSTEM TRANS(R)*A = X, PLACING THE RESULT
   !     IN THE ARRAY S.

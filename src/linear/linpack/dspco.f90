@@ -1,6 +1,5 @@
 !** DSPCO
 SUBROUTINE DSPCO(Ap,N,Kpvt,Rcond,Z)
-  IMPLICIT NONE
   !>
   !***
   !  Factor a real symmetric matrix stored in packed form
@@ -107,10 +106,8 @@ SUBROUTINE DSPCO(Ap,N,Kpvt,Rcond,Z)
   REAL(8) :: Ap(*), Z(*)
   REAL(8) :: Rcond
   !
-  REAL(8) :: ak, akm1, bk, bkm1, DDOT, denom, ek, t
-  REAL(8) :: anorm, s, DASUM, ynorm
-  INTEGER i, ij, ik, ikm1, ikp1, info, j, jm1, j1
-  INTEGER k, kk, km1k, km1km1, kp, kps, ks
+  REAL(8) :: ak, akm1, bk, bkm1, denom, ek, t, anorm, s, ynorm
+  INTEGER i, ij, ik, ikm1, ikp1, info, j, jm1, j1, k, kk, km1k, km1km1, kp, kps, ks
   !
   !     FIND NORM OF A USING ONLY UPPER HALF
   !

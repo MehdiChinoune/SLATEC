@@ -1,7 +1,6 @@
 !** SBOLSM
 SUBROUTINE SBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
     Scl,Ibasis,Ibb)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to SBOCLS and SBOLS
@@ -429,7 +428,6 @@ SUBROUTINE SBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
   REAL W(Mdw,*), Bl(*), Bu(*), X(*), Rw(*), Ww(*), Scl(*)
   REAL alpha, beta, bou, colabv, colblo, cl1, cl2, cl3, big, fac, Rnorm, sc, ss, &
     t, tolind, wt, t1, t2, wbig, wlarge, wmag, xnew, tolsze
-  REAL SDOT, SNRM2, R1MACH
   INTEGER Ibasis(*), Ibb(*), Ind(*), Iopt(*)
   LOGICAL found, constr
   CHARACTER(8) :: xern1, xern2

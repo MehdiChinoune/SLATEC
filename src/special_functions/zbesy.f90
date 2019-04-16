@@ -1,6 +1,5 @@
 !** ZBESY
 SUBROUTINE ZBESY(Zr,Zi,Fnu,Kode,N,Cyr,Cyi,Nz,Cwrkr,Cwrki,Ierr)
-  IMPLICIT NONE
   !>
   !***
   !  Compute a sequence of the Bessel functions Y(a,z) for
@@ -168,10 +167,10 @@ SUBROUTINE ZBESY(Zr,Zi,Fnu,Kode,N,Cyr,Cyi,Nz,Cwrkr,Cwrki,Ierr)
 
   !
   !     COMPLEX CWRK,CY,C1,C2,EX,HCI,Z,ZU,ZV
-  INTEGER i, Ierr, k, Kode, k1, k2, N, Nz, nz1, nz2, I1MACH
+  INTEGER i, Ierr, k, Kode, k1, k2, N, Nz, nz1, nz2
   REAL(8) :: Cwrki(N), Cwrkr(N), Cyi(N), Cyr(N), c1i, c1r, c2i, c2r, &
     elim, exi, exr, ey, Fnu, hcii, sti, str, tay, &
-    Zi, Zr, D1MACH, ascle, rtol, atol, aa, bb, tol, r1m5
+    Zi, Zr, ascle, rtol, atol, aa, bb, tol, r1m5
   !* FIRST EXECUTABLE STATEMENT  ZBESY
   Ierr = 0
   Nz = 0

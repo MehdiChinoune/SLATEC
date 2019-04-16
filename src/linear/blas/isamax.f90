@@ -1,6 +1,5 @@
 !** ISAMAX
 INTEGER FUNCTION ISAMAX(N,Sx,Incx)
-  IMPLICIT NONE
   !>
   !***
   !  Find the smallest index of that component of a vector

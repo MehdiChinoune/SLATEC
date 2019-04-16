@@ -1,6 +1,5 @@
 !** ORTBAK
 SUBROUTINE ORTBAK(Nm,Low,Igh,A,Ort,M,Z)
-  IMPLICIT NONE
   !>
   !***
   !  Form the eigenvectors of a general real matrix from the

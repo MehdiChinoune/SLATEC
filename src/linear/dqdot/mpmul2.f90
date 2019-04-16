@@ -1,7 +1,6 @@
 !** MPMUL2
 SUBROUTINE MPMUL2(X,Iy,Z,Trunc)
   USE MPCOM
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to DQDOTA and DQDOTI

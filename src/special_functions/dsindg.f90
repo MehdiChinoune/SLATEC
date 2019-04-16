@@ -1,6 +1,5 @@
 !** DSINDG
 REAL(8) FUNCTION DSINDG(X)
-  IMPLICIT NONE
   !>
   !***
   !  Compute the sine of an argument in degrees.

@@ -1,6 +1,5 @@
 !** BESK1
 REAL FUNCTION BESK1(X)
-  IMPLICIT NONE
   !>
   !***
   !  Compute the modified (hyperbolic) Bessel function of the
@@ -43,8 +42,7 @@ REAL FUNCTION BESK1(X)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
 
-  REAL BESI1, BESK1E, CSEVL, R1MACH, X, xmaxt, y
-  INTEGER INITS
+  REAL X, xmaxt, y
   INTEGER, SAVE :: ntk1
   REAL, SAVE :: xmin, xsml, xmax
   REAL, PARAMETER :: bk1cs(11) = [ .0253002273389477705E0,-.353155960776544876E0, &

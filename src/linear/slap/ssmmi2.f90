@@ -1,6 +1,5 @@
 !** SSMMI2
 SUBROUTINE SSMMI2(N,B,X,Il,Jl,L,Dinv,Iu,Ju,U)
-  IMPLICIT NONE
   !>
   !***
   !  SLAP Backsolve for LDU Factorization of Normal Equations.

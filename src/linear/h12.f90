@@ -1,6 +1,5 @@
 !** H12
 SUBROUTINE H12(Mode,Lpivot,L1,M,U,Iue,Up,C,Ice,Icv,Ncv)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to HFTI, LSEI and WNNLS
@@ -54,7 +53,7 @@ SUBROUTINE H12(Mode,Lpivot,L1,M,U,Iue,Up,C,Ice,Icv,Ncv)
 
   INTEGER i, i2, i3, i4, Ice, Icv, incr, Iue, j, kl1, kl2, klp, &
     L1, l1m1, Lpivot, M, mml1p2, Mode, Ncv
-  REAL b, C(*), cl, clinv, one, SDOT, sm, U(Iue,*), ul1m1, Up
+  REAL b, C(*), cl, clinv, one, sm, U(Iue,*), ul1m1, Up
   !* FIRST EXECUTABLE STATEMENT  H12
   one = 1.
   !

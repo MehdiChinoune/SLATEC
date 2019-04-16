@@ -1,6 +1,5 @@
 !** DTBSV
 SUBROUTINE DTBSV(Uplo,Trans,Diag,N,K,A,Lda,X,Incx)
-  IMPLICIT NONE
   !>
   !***
   !  Solve one of the systems of equations.
@@ -163,10 +162,6 @@ SUBROUTINE DTBSV(Uplo,Trans,Diag,N,K,A,Lda,X,Incx)
   REAL(8) :: temp
   INTEGER i, info, ix, j, jx, kplus1, kx, l
   LOGICAL nounit
-  !     .. External Functions ..
-  LOGICAL, EXTERNAL :: LSAME
-  !     .. External Subroutines ..
-  EXTERNAL :: XERBLA
   !     .. Intrinsic Functions ..
   INTRINSIC MAX, MIN
   !* FIRST EXECUTABLE STATEMENT  DTBSV

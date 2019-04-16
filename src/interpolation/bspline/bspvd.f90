@@ -1,6 +1,5 @@
 !** BSPVD
 SUBROUTINE BSPVD(T,K,Nderiv,X,Ileft,Ldvnik,Vnikx,Work)
-  IMPLICIT NONE
   !>
   !***
   !  Calculate the value and all derivatives of order less than

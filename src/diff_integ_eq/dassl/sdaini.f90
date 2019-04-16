@@ -1,7 +1,6 @@
 !** SDAINI
 SUBROUTINE SDAINI(X,Y,Yprime,Neq,RES,JAC,H,Wt,Idid,Rpar,Ipar,Phi,Delta,E,&
     Wm,Iwm,Hmin,Uround,Nonneg,Ntemp)
-  IMPLICIT NONE
   !>
   !***
   !  Initialization routine for SDASSL.
@@ -64,9 +63,6 @@ SUBROUTINE SDAINI(X,Y,Yprime,Neq,RES,JAC,H,Wt,Idid,Rpar,Ipar,Phi,Delta,E,&
   REAL X, Y(*), Yprime(*), H, Wt(*), Rpar(*), Phi(Neq,*), Delta(*), &
     E(*), Wm(*), Hmin, Uround
   EXTERNAL :: RES, JAC
-  !
-  EXTERNAL :: SDAJAC, SDASLV
-  REAL, EXTERNAL :: SDANRM
   !
   INTEGER i, ier, ires, jcalc, m, ncf, nef, nsf
   REAL cj, delnrm, err, oldnrm, r, rate, s, xold, ynorm

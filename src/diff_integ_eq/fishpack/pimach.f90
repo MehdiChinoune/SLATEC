@@ -1,6 +1,5 @@
 !** PIMACH
 REAL FUNCTION PIMACH(Dum)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to HSTCSP, HSTSSP and HWSCSP

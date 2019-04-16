@@ -1,6 +1,5 @@
 !** DCHKW
 SUBROUTINE DCHKW(Name,Lociw,Leniw,Locw,Lenw,Ierr,Iter,Err)
-  IMPLICIT NONE
   !>
   !***
   !  SLAP WORK/IWORK Array Bounds Checker.
@@ -81,10 +80,6 @@ SUBROUTINE DCHKW(Name,Lociw,Leniw,Locw,Lenw,Ierr,Iter,Err)
   CHARACTER Name*(*)
   !     .. Local Scalars ..
   CHARACTER xern1*8, xern2*8, xernam*8
-  !     .. External Functions ..
-  REAL(8), EXTERNAL :: D1MACH
-  !     .. External Subroutines ..
-  EXTERNAL :: XERMSG
   !* FIRST EXECUTABLE STATEMENT  DCHKW
   !
   !         Check the Integer workspace situation.

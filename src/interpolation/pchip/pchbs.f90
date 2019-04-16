@@ -1,6 +1,5 @@
 !** PCHBS
 SUBROUTINE PCHBS(N,X,F,D,Incfd,Knotyp,Nknots,T,Bcoef,Ndim,Kord,Ierr)
-  IMPLICIT NONE
   !>
   !***
   !  Piecewise Cubic Hermite to B-Spline converter.

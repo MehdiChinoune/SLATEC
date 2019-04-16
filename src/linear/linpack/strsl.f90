@@ -1,6 +1,5 @@
 !** STRSL
 SUBROUTINE STRSL(T,Ldt,N,B,Job,Info)
-  IMPLICIT NONE
   !>
   !***
   !  Solve a system of the form  T*X=B or TRANS(T)*X=B, where
@@ -83,7 +82,7 @@ SUBROUTINE STRSL(T,Ldt,N,B,Job,Info)
   REAL T(Ldt,*), B(*)
   !
   !
-  REAL SDOT, temp
+  REAL temp
   INTEGER case, j, jj
   !* FIRST EXECUTABLE STATEMENT  STRSL
   !

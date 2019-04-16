@@ -1,6 +1,5 @@
 !** DDAWS
 REAL(8) FUNCTION DDAWS(X)
-  IMPLICIT NONE
   !>
   !***
   !  Compute Dawson's function.
@@ -52,8 +51,7 @@ REAL(8) FUNCTION DDAWS(X)
   !   920618  Removed space from variable names.  (RWC, WRB)
 
   REAL eps
-  INTEGER INITDS
-  REAL(8) :: X, y, DCSEVL, D1MACH
+  REAL(8) :: X, y
   INTEGER, SAVE :: ntdaw, ntdaw2, ntdawa
   REAL(8), SAVE :: xsml, xbig, xmax
   REAL(8), PARAMETER :: dawcs(21) = [ -.6351734375145949201065127736293D-2, &

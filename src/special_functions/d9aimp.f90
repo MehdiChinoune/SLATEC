@@ -1,6 +1,5 @@
 !** D9AIMP
 SUBROUTINE D9AIMP(X,Ampl,Theta)
-  IMPLICIT NONE
   !>
   !***
   !  Evaluate the Airy modulus and phase.
@@ -69,8 +68,7 @@ SUBROUTINE D9AIMP(X,Ampl,Theta)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
 
   REAL eta
-  INTEGER INITDS
-  REAL(8) :: X, Ampl, Theta, sqrtx, z, D1MACH, DCSEVL
+  REAL(8) :: X, Ampl, Theta, sqrtx, z
   INTEGER, SAVE :: nam20, nath0, nam21, nath1, nam22, nath2
   REAL(8), SAVE :: xsml
   REAL(8), PARAMETER :: am20cs(57) = [ +.108716749086561856615730588125D-1, &

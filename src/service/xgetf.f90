@@ -1,6 +1,5 @@
 !** XGETF
 SUBROUTINE XGETF(Kontrl)
-  IMPLICIT NONE
   !>
   !***
   !  Return the current value of the error control flag.
@@ -34,8 +33,8 @@ SUBROUTINE XGETF(Kontrl)
   !   861211  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
-  INTEGER J4SAVE, Kontrl
+
+  INTEGER Kontrl
   !* FIRST EXECUTABLE STATEMENT  XGETF
   Kontrl = J4SAVE(2,0,.FALSE.)
 END SUBROUTINE XGETF

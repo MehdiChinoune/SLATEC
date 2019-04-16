@@ -1,6 +1,5 @@
 !** CGEFA
 SUBROUTINE CGEFA(A,Lda,N,Ipvt,Info)
-  IMPLICIT NONE
   !>
   !***
   !  Factor a matrix using Gaussian elimination.
@@ -73,8 +72,7 @@ SUBROUTINE CGEFA(A,Lda,N,Ipvt,Info)
   COMPLEX A(Lda,*)
   !
   COMPLEX t
-  INTEGER ICAMAX, j, k, kp1, l, nm1
-  REAL, EXTERNAL :: CABS1
+  INTEGER j, k, kp1, l, nm1
   !
   !     GAUSSIAN ELIMINATION WITH PARTIAL PIVOTING
   !

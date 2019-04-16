@@ -1,6 +1,5 @@
 !** DQMOMO
 SUBROUTINE DQMOMO(Alfa,Beta,Ri,Rj,Rg,Rh,Integr)
-  IMPLICIT NONE
   !>
   !***
   !  This routine computes modified Chebyshev moments.  The K-th

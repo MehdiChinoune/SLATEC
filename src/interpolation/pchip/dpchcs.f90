@@ -1,6 +1,5 @@
 !** DPCHCS
 SUBROUTINE DPCHCS(Switch,N,H,Slope,D,Incfd,Ierr)
-  IMPLICIT NONE
   !>
   !***
   !  Adjusts derivative values for DPCHIC
@@ -107,7 +106,6 @@ SUBROUTINE DPCHCS(Switch,N,H,Slope,D,Incfd,Ierr)
   !
   INTEGER i, indx, k, nless1
   REAL(8) :: del(3), dext, dfloc, dfmx, fact, slmax, wtave(2)
-  REAL(8) :: DPCHST
   !
   !  INITIALIZE.
   !

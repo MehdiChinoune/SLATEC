@@ -1,6 +1,5 @@
 !** DPLINT
 SUBROUTINE DPLINT(N,X,Y,C)
-  IMPLICIT NONE
   !>
   !***
   !  Produce the polynomial which interpolates a set of discrete

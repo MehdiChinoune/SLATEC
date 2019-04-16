@@ -1,6 +1,5 @@
 !** RFFTB
 SUBROUTINE RFFTB(N,R,Wsave)
-  IMPLICIT NONE
   !>
   !***
   !  Compute the backward fast Fourier transform of a real

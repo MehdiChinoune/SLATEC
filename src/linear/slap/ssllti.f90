@@ -1,6 +1,5 @@
 !** SSLLTI
 SUBROUTINE SSLLTI(N,B,X,Nelt,Ia,Ja,A,Isym,Rwork,Iwork)
-  IMPLICIT NONE
   !>
   !***
   !  SLAP MSOLVE for LDL' (IC) Factorization.
@@ -50,7 +49,7 @@ SUBROUTINE SSLLTI(N,B,X,Nelt,Ia,Ja,A,Isym,Rwork,Iwork)
   !   920511  Added complete declaration section.  (WRB)
   !   921113  Corrected C***CATEGORY line.  (FNF)
   !   930701  Updated CATEGORY section.  (FNF, WRB)
-  
+
   !     .. Scalar Arguments ..
   INTEGER Isym, N, Nelt
   !     .. Array Arguments ..
@@ -58,8 +57,6 @@ SUBROUTINE SSLLTI(N,B,X,Nelt,Ia,Ja,A,Isym,Rwork,Iwork)
   INTEGER Ia(Nelt), Iwork(*), Ja(Nelt)
   !     .. Local Scalars ..
   INTEGER locdin, locel, lociel, locjel, nel
-  !     .. External Subroutines ..
-  EXTERNAL :: SLLTI2
   !* FIRST EXECUTABLE STATEMENT  SSLLTI
   nel = Iwork(1)
   lociel = Iwork(3)

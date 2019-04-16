@@ -1,6 +1,5 @@
 !** CPOCO
 SUBROUTINE CPOCO(A,Lda,N,Rcond,Z,Info)
-  IMPLICIT NONE
   !>
   !***
   !  Factor a complex Hermitian positive definite matrix
@@ -91,11 +90,9 @@ SUBROUTINE CPOCO(A,Lda,N,Rcond,Z,Info)
   COMPLEX A(Lda,*), Z(*)
   REAL Rcond
   !
-  COMPLEX CDOTC, ek, t, wk, wkm
-  REAL anorm, s, SCASUM, sm, ynorm
+  COMPLEX ek, t, wk, wkm
+  REAL anorm, s, sm, ynorm
   INTEGER i, j, jm1, k, kb, kp1
-  REAL, EXTERNAL :: CABS1
-  COMPLEX, EXTERNAL :: CSIGN1
   !
   !     FIND NORM OF A USING ONLY UPPER HALF
   !

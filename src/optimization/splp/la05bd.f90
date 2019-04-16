@@ -1,7 +1,6 @@
 !** LA05BD
 SUBROUTINE LA05BD(A,Ind,Ia,N,Ip,Iw,W,G,B,Trans)
   USE LA05DD
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to DSPLP

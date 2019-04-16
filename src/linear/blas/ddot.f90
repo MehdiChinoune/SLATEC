@@ -1,6 +1,5 @@
 !** DDOT
 REAL(8) FUNCTION DDOT(N,Dx,Incx,Dy,Incy)
-  IMPLICIT NONE
   !>
   !***
   !  Compute the inner product of two vectors.

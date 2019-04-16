@@ -1,7 +1,6 @@
 !** DDRIV2
 SUBROUTINE DDRIV2(N,T,Y,F,Tout,Mstate,Nroot,Eps,Ewt,Mint,Work,Lenw,Iwork,&
     Leniw,G,Ierflg)
-  IMPLICIT NONE
   !>
   !***
   !  The function of DDRIV2 is to solve N ordinary differential

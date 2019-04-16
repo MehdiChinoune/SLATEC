@@ -1,6 +1,5 @@
 !** LMPAR
 SUBROUTINE LMPAR(N,R,Ldr,Ipvt,Diag,Qtb,Delta,Par,X,Sigma,Wa1,Wa2)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to SNLS1 and SNLS1E
@@ -113,7 +112,6 @@ SUBROUTINE LMPAR(N,R,Ldr,Ipvt,Diag,Qtb,Delta,Par,X,Sigma,Wa1,Wa2)
   REAL R(Ldr,*), Diag(*), Qtb(*), X(*), Sigma(*), Wa1(*), Wa2(*)
   INTEGER i, iter, j, jm1, jp1, k, l, nsing
   REAL dxnorm, dwarf, fp, gnorm, parc, parl, paru, summ, temp
-  REAL R1MACH, ENORM
   REAL, PARAMETER :: p1 = 1.0E-1, p001 = 1.0E-3, zero = 0.0E0
   !* FIRST EXECUTABLE STATEMENT  LMPAR
   dwarf = R1MACH(1)

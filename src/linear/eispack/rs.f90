@@ -1,6 +1,5 @@
 !** RS
 SUBROUTINE RS(Nm,N,A,W,Matz,Z,Fv1,Fv2,Ierr)
-  IMPLICIT NONE
   !>
   !***
   !  Compute the eigenvalues and, optionally, the eigenvectors

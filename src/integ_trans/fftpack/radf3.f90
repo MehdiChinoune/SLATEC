@@ -1,6 +1,5 @@
 !** RADF3
 SUBROUTINE RADF3(Ido,L1,Cc,Ch,Wa1,Wa2)
-  IMPLICIT NONE
   !>
   !***
   !  Calculate the fast Fourier transform of subvectors of

@@ -1,7 +1,6 @@
 !** MPNZR
 SUBROUTINE MPNZR(Rs,Re,Z,Trunc)
   USE MPCOM
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to DQDOTA and DQDOTI

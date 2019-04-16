@@ -1,6 +1,5 @@
 !** SDOT
 REAL FUNCTION SDOT(N,Sx,Incx,Sy,Incy)
-  IMPLICIT NONE
   !>
   !***
   !  Compute the inner product of two vectors.

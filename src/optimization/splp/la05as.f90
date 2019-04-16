@@ -1,7 +1,6 @@
 !** LA05AS
 SUBROUTINE LA05AS(A,Ind,Nz,Ia,N,Ip,Iw,W,G,U)
   USE LA05DS
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to SPLP
@@ -59,7 +58,6 @@ SUBROUTINE LA05AS(A,Ind,Nz,Ia,N,Ip,Iw,W,G,U)
   !   900402  Added TYPE section.  (WRB)
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
 
-  REAL, EXTERNAL :: R1MACH
   INTEGER i, Ia, idummy, ii, il, in, ipp, ipv, ir, j, jcost, jp, k, k1, k2, kc, &
     kcost, kj, kk, kl, klc, kn, knp, kp, kpc, kpl, kq, kr, krl, ks, l, mcp, N, &
     nc, Nz, nzc

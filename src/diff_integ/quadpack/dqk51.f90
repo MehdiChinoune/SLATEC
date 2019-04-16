@@ -1,6 +1,5 @@
 !** DQK51
 SUBROUTINE DQK51(F,A,B,Result,Abserr,Resabs,Resasc)
-  IMPLICIT NONE
   !>
   !***
   !  To compute I = Integral of F over (A,B) with error
@@ -76,7 +75,6 @@ SUBROUTINE DQK51(F,A,B,Result,Abserr,Resabs,Resasc)
     fv1(25), fv2(25), hlgth, Resabs, Resasc, resg, resk, reskh, Result, uflow
   INTEGER j, jtw, jtwm1
   REAL(8), EXTERNAL :: F
-  REAL(8), EXTERNAL :: D1MACH
   !
   !           THE ABSCISSAE AND WEIGHTS ARE GIVEN FOR THE INTERVAL (-1,1).
   !           BECAUSE OF SYMMETRY ONLY THE POSITIVE ABSCISSAE AND THEIR

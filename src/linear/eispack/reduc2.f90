@@ -1,6 +1,5 @@
 !** REDUC2
 SUBROUTINE REDUC2(Nm,N,A,B,Dl,Ierr)
-  IMPLICIT NONE
   !>
   !***
   !  Reduce a certain generalized symmetric eigenproblem to a

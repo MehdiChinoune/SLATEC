@@ -1,6 +1,5 @@
 !** DTPMV
 SUBROUTINE DTPMV(Uplo,Trans,Diag,N,Ap,X,Incx)
-  IMPLICIT NONE
   !>
   !***
   !  Perform one of the matrix-vector operations.
@@ -119,10 +118,6 @@ SUBROUTINE DTPMV(Uplo,Trans,Diag,N,Ap,X,Incx)
   REAL(8) :: temp
   INTEGER i, info, ix, j, jx, k, kk, kx
   LOGICAL nounit
-  !     .. External Functions ..
-  LOGICAL, EXTERNAL :: LSAME
-  !     .. External Subroutines ..
-  EXTERNAL :: XERBLA
   !* FIRST EXECUTABLE STATEMENT  DTPMV
   !
   !     Test the input parameters.

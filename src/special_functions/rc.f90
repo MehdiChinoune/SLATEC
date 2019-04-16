@@ -1,6 +1,5 @@
 !** RC
 REAL FUNCTION RC(X,Y,Ier)
-  IMPLICIT NONE
   !>
   !***
   !  Calculate an approximation to
@@ -275,7 +274,6 @@ REAL FUNCTION RC(X,Y,Ier)
   !           editorial changes.  (RWC))
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
-  REAL R1MACH
   CHARACTER(16) :: xern3, xern4, xern5
   INTEGER Ier
   REAL lamda, mu, s, sn, X, xn, Y, yn

@@ -1,6 +1,5 @@
 !** GAMIT
 REAL FUNCTION GAMIT(A,X)
-  IMPLICIT NONE
   !>
   !***
   !  Calculate Tricomi's form of the incomplete Gamma function.
@@ -60,7 +59,6 @@ REAL FUNCTION GAMIT(A,X)
   !   920528  DESCRIPTION and REFERENCES sections revised.  (WRB)
 
   REAL :: A, aeps, ainta, algap1, alng, alx, h, sga, sgngam, t, X
-  REAL, EXTERNAL :: GAMR, R1MACH, R9GMIT, R9LGIC, R9LGIT
   REAL, SAVE :: alneps, sqeps, bot
   LOGICAL :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  GAMIT

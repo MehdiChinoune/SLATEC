@@ -1,6 +1,5 @@
 !** SROTG
 SUBROUTINE SROTG(Sa,Sb,Sc,Ss)
-  IMPLICIT NONE
   !>
   !***
   !  Construct a plane Givens rotation.

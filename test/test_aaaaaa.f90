@@ -1,4 +1,5 @@
 MODULE TEST01_MOD
+  use slatec
   IMPLICIT NONE
 
 CONTAINS
@@ -99,6 +100,7 @@ END MODULE TEST01_MOD
 !** TEST01
 PROGRAM TEST01
   USE TEST01_MOD
+  use slatec
   IMPLICIT NONE
   !>
   !***
@@ -146,8 +148,6 @@ PROGRAM TEST01
   !* REVISION HISTORY  (YYMMDD)
   !   890713  DATE WRITTEN
   !   900524  Cosmetic changes to code.  (WRB)
-
-  INTEGER I1MACH
   INTEGER ipass, kprint, lin, lun, nfail
   !* FIRST EXECUTABLE STATEMENT  TEST01
   lun = I1MACH(2)

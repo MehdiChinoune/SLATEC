@@ -1,7 +1,6 @@
 !** QAWSE
 SUBROUTINE QAWSE(F,A,B,Alfa,Beta,Integr,Epsabs,Epsrel,Limit,Result,Abserr,&
     Neval,Ier,Alist,Blist,Rlist,Elist,Iord,Last)
-  IMPLICIT NONE
   !>
   !***
   !  The routine calculates an approximation result to a given
@@ -188,7 +187,6 @@ SUBROUTINE QAWSE(F,A,B,Alfa,Beta,Integr,Epsabs,Epsrel,Limit,Result,Abserr,&
     maxerr, nev, Neval, nrmax
   !
   REAL, EXTERNAL :: F
-  REAL, EXTERNAL :: R1MACH
   !
   !            LIST OF MAJOR VARIABLES
   !            -----------------------

@@ -1,7 +1,6 @@
 !** SIR
 SUBROUTINE SIR(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,Iter,&
     Err,Ierr,Iunit,R,Z,Dz,Rwork,Iwork)
-  IMPLICIT NONE
   !>
   !***
   !  Preconditioned Iterative Refinement Sparse Ax = b Solver.
@@ -277,9 +276,6 @@ SUBROUTINE SIR(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,Iter,&
   !     .. Local Scalars ..
   REAL bnrm, solnrm, tolmin
   INTEGER i, k
-  !     .. External Functions ..
-  REAL, EXTERNAL :: R1MACH
-  INTEGER, EXTERNAL :: ISSIR
   !* FIRST EXECUTABLE STATEMENT  SIR
   !
   !         Check some of the input data.

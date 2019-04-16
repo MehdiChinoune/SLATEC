@@ -1,7 +1,6 @@
 !** XADJ
 SUBROUTINE XADJ(X,Ix,Ierror)
   USE XBLK ,ONLY: RADixl, RAD2l, L2, KMAx
-  IMPLICIT NONE
   !>
   !***
   !  To provide single-precision floating-point arithmetic

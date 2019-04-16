@@ -1,6 +1,5 @@
 !** MPMLP
 SUBROUTINE MPMLP(U,V,W,J)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to DQDOTA and DQDOTI

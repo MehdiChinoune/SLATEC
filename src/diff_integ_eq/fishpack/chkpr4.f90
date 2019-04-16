@@ -1,6 +1,5 @@
 !** CHKPR4
 SUBROUTINE CHKPR4(Iorder,A,B,M,Mbdcnd,C,D,N,Nbdcnd,COFX,Idmn,Ierror)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to SEPX4

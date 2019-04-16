@@ -2,7 +2,6 @@
 INTEGER FUNCTION ISDCG(N,B,X,Nelt,Ia,Ja,A,Isym,MSOLVE,Itol,Tol,Itmax,Iter,&
     Err,Ierr,Iunit,R,Z,P,Dz,Rwork,Iwork,Ak,Bk,Bnrm,Solnrm)
   USE DSLBLK
-  IMPLICIT NONE
   !>
   !***
   !  Preconditioned Conjugate Gradient Stop Test.
@@ -184,8 +183,6 @@ INTEGER FUNCTION ISDCG(N,B,X,Nelt,Ia,Ja,A,Isym,MSOLVE,Itol,Tol,Itmax,Iter,&
   EXTERNAL :: MSOLVE
   !     .. Local Scalars ..
   INTEGER i
-  !     .. External Functions ..
-  REAL(8), EXTERNAL :: D1MACH, DNRM2
   !* FIRST EXECUTABLE STATEMENT  ISDCG
   ISDCG = 0
   !

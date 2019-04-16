@@ -1,7 +1,6 @@
 !** SSDSCL
 SUBROUTINE SSDSCL(N,Nelt,Ia,Ja,A,Isym,X,B,Dinv,Job,Itol)
   USE SSLBLK
-  IMPLICIT NONE
   !>
   !***
   !  Diagonal Scaling of system Ax = b.

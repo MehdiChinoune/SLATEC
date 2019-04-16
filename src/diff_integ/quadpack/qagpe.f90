@@ -1,7 +1,6 @@
 !** QAGPE
 SUBROUTINE QAGPE(F,A,B,Npts2,Points,Epsabs,Epsrel,Limit,Result,Abserr,&
     Neval,Ier,Alist,Blist,Rlist,Elist,Pts,Iord,Level,Ndin,Last)
-  IMPLICIT NONE
   !>
   !***
   !  Approximate a given definite integral I = Integral of F
@@ -221,7 +220,6 @@ SUBROUTINE QAGPE(F,A,B,Npts2,Points,Epsabs,Epsrel,Limit,Result,Abserr,&
   LOGICAL :: extrap, noext
   !
   REAL, EXTERNAL :: F
-  REAL, EXTERNAL :: R1MACH
   !
   !            THE DIMENSION OF RLIST2 IS DETERMINED BY THE VALUE OF
   !            LIMEXP IN SUBROUTINE EPSALG (RLIST2 SHOULD BE OF DIMENSION

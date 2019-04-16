@@ -1,6 +1,5 @@
 !** RAND
 REAL FUNCTION RAND(R)
-  IMPLICIT NONE
   !>
   !***
   !  Generate a uniformly distributed random number.

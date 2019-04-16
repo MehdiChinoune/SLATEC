@@ -1,6 +1,5 @@
 !** DH12
 SUBROUTINE DH12(Mode,Lpivot,L1,M,U,Iue,Up,C,Ice,Icv,Ncv)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to DHFTI, DLSEI and DWNNLS
@@ -57,7 +56,7 @@ SUBROUTINE DH12(Mode,Lpivot,L1,M,U,Iue,Up,C,Ice,Icv,Ncv)
 
   INTEGER i, i2, i3, i4, Ice, Icv, incr, Iue, j, kl1, kl2, klp, &
     L1, l1m1, Lpivot, M, mml1p2, Mode, Ncv
-  REAL(8) :: b, C(*), cl, clinv, one, ul1m1, sm, U(Iue,*), Up, DDOT
+  REAL(8) :: b, C(*), cl, clinv, one, ul1m1, sm, U(Iue,*), Up
   !     BEGIN BLOCK PERMITTING ...EXITS TO 140
   !* FIRST EXECUTABLE STATEMENT  DH12
   one = 1.0D0

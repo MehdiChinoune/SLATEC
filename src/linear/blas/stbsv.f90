@@ -1,6 +1,5 @@
 !** STBSV
 SUBROUTINE STBSV(Uplo,Trans,Diag,N,K,A,Lda,X,Incx)
-  IMPLICIT NONE
   !>
   !***
   !  Solve a real triangular banded system of linear equations.
@@ -163,10 +162,6 @@ SUBROUTINE STBSV(Uplo,Trans,Diag,N,K,A,Lda,X,Incx)
   REAL temp
   INTEGER i, info, ix, j, jx, kplus1, kx, l
   LOGICAL nounit
-  !     .. External Functions ..
-  LOGICAL, EXTERNAL :: LSAME
-  !     .. External Subroutines ..
-  EXTERNAL :: XERBLA
   !     .. Intrinsic Functions ..
   INTRINSIC MAX, MIN
   !* FIRST EXECUTABLE STATEMENT  STBSV

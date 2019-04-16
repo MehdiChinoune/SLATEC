@@ -1,4 +1,5 @@
 MODULE TEST25_MOD
+  use slatec
   IMPLICIT NONE
 
 CONTAINS
@@ -108,11 +109,6 @@ CONTAINS
     !     .. Local Arrays ..
     REAL a(MXNELT), f(MAXN), rwork(MAXRW), xiter(MAXN)
     INTEGER ia(MXNELT), iwork(MAXIW), ja(MXNELT)
-    !     .. External Functions ..
-    REAL, EXTERNAL :: R1MACH
-    !     .. External Subroutines ..
-    EXTERNAL :: SCPPLT, SS2Y, SSDBCG, SSDCG, SSDCGN, SSDCGS, SSDGMR, SSDOMN, SSGS, &
-      SSICCG, SSILUR, SSJAC, SSLUBC, SSLUCN, SSLUCS, SSLUGM, SSLUOM
     !     .. Intrinsic Functions ..
     INTRINSIC MAX, REAL
     !
@@ -483,10 +479,6 @@ CONTAINS
     !     .. Local Scalars ..
     REAL dummy
     INTEGER i, icol, inum, irow, iseed, k, nl
-    !     .. External Functions ..
-    REAL, EXTERNAL :: RAND
-    !     .. External Subroutines ..
-    EXTERNAL :: ISMPL
     !     .. Intrinsic Functions ..
     INTRINSIC INT
     !* FIRST EXECUTABLE STATEMENT  SRMGEN
@@ -745,6 +737,7 @@ END MODULE TEST25_MOD
 !** TEST25
 PROGRAM TEST25
   USE TEST25_MOD
+  use slatec
   IMPLICIT NONE
   !>
   !***
@@ -795,10 +788,6 @@ PROGRAM TEST25
 
   !     .. Local Scalars ..
   INTEGER ipass, kprint, lin, lun, nfail
-  !     .. External Functions ..
-  INTEGER, EXTERNAL :: I1MACH
-  !     .. External Subroutines ..
-  EXTERNAL :: XERMAX, XSETF, XSETUN
   !* FIRST EXECUTABLE STATEMENT  TEST25
   lun = I1MACH(2)
   lin = I1MACH(1)

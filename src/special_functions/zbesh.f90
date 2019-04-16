@@ -1,6 +1,5 @@
 !** ZBESH
 SUBROUTINE ZBESH(Zr,Zi,Fnu,Kode,M,N,Cyr,Cyi,Nz,Ierr)
-  IMPLICIT NONE
   !>
   !***
   !  Compute a sequence of the Hankel functions H(m,a,z)
@@ -169,11 +168,10 @@ SUBROUTINE ZBESH(Zr,Zi,Fnu,Kode,M,N,Cyr,Cyi,Nz,Ierr)
 
   !
   !     COMPLEX CY,Z,ZN,ZT,CSGN
-  INTEGER i, Ierr, inu, inuh, ir, k, Kode, k1, k2, M, mm, mr, N, nn, nuf, nw, Nz, I1MACH
+  INTEGER i, Ierr, inu, inuh, ir, k, Kode, k1, k2, M, mm, mr, N, nn, nuf, nw, Nz
   REAL(8) :: aa, alim, aln, arg, az, Cyi(N), Cyr(N), dig, elim, fmm, fn, Fnu, &
     fnul, rhpi, rl, r1m5, sgn, str, tol, ufl, Zi, zni, znr, Zr, zti, bb, ascle, &
     rtol, atol, sti, csgnr, csgni
-  REAL(8), EXTERNAL :: ZABS, D1MACH
   !
   REAL(8), PARAMETER :: hpi = 1.57079632679489662D0
   !

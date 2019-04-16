@@ -1,4 +1,5 @@
 MODULE TEST27_MOD
+  use slatec
   IMPLICIT NONE
 
 CONTAINS
@@ -47,11 +48,6 @@ CONTAINS
     !     .. Local Arrays ..
     REAL d(11,6), err(5), prgopt(4), work(105), x(5)
     INTEGER ip(17)
-    !     .. External Functions ..
-    REAL, EXTERNAL :: R1MACH, SDOT, SNRM2
-    INTEGER, EXTERNAL :: NUMXER
-    !     .. External Subroutines ..
-    EXTERNAL :: LSEI, SAXPY, SCOPY, SVOUT, XGETF, XSETF
     !     .. Intrinsic Functions ..
     INTRINSIC SQRT
     !     .. Data statements ..
@@ -293,11 +289,8 @@ CONTAINS
     !           including removing an illegal character from column 1, and
     !           editorial changes.  (RWC)
 
-    INTEGER i, Ipass, j, kk, Kprint
-    REAL R1MACH, rnorm(1)
-    REAL a(4,4), b(4), delmax, delx, r
-    REAL work(20)
-    INTEGER nerr, kprog, kcase, iwork(7), info, Lun
+    INTEGER i, Ipass, j, kk, Kprint, nerr, kprog, kcase, iwork(7), info, Lun
+    REAL rnorm(1), a(4,4), b(4), delmax, delx, r, work(20)
     REAL, PARAMETER :: aa(4,4,2) = RESHAPE( [ 1., .5, 1., .25, 0., 2., 0., 1., 2., &
       -1., 1., 0., 0., 0., 0., 0., 1., 2., -1., 0., 0., 1., 2., 0., -1., 0., 1., &
       0., 1., 0., 1., 0. ], [4,4,2] )
@@ -397,6 +390,7 @@ END MODULE TEST27_MOD
 !** TEST27
 PROGRAM TEST27
   USE TEST27_MOD
+  use slatec
   IMPLICIT NONE
   !>
   !***
@@ -446,8 +440,6 @@ PROGRAM TEST27
   !   890618  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900524  Cosmetic changes to code.  (WRB)
-
-  INTEGER I1MACH
   INTEGER ipass, kprint, lin, lun, nfail
   !* FIRST EXECUTABLE STATEMENT  TEST27
   lun = I1MACH(2)

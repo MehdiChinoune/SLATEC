@@ -1,6 +1,5 @@
 !** DPSIXN
 REAL(8) FUNCTION DPSIXN(N)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to DEXINT
@@ -34,7 +33,6 @@ REAL(8) FUNCTION DPSIXN(N)
   !
   INTEGER N, k
   REAL(8) :: ax, fn, rfn2, trm, s, wdtol
-  REAL(8) :: D1MACH
   !
   !             DPSIXN(N), N = 1,100
   REAL(8), PARAMETER :: c(100) = [ -5.77215664901532861D-01, 4.22784335098467139D-01, &

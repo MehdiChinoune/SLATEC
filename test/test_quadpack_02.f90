@@ -1,4 +1,5 @@
 MODULE TEST40_MOD
+  use slatec
   IMPLICIT NONE
 
 CONTAINS
@@ -27,8 +28,7 @@ CONTAINS
 
     ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
     INTEGER ierv(2), Lun
-    REAL(8) :: a, abserr, b, D1MACH, epmach, epsabs, epsrel, error, result, &
-      uflow, work(400)
+    REAL(8) :: a, abserr, b, epmach, epsabs, epsrel, error, result, uflow, work(400)
     INTEGER ier, ip, Ipass, iwork(100), key, Kprint, last, lenw, limit, neval
     REAL(8), PARAMETER :: pi = 0.31415926535897932D+01
     REAL(8), PARAMETER :: exact1 = 0.1154700538379252D+01
@@ -142,7 +142,7 @@ CONTAINS
     !
     ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
     INTEGER ierv(4), inf
-    REAL(8) :: abserr, bound, D1MACH, epmach, epsabs, epsrel, error, oflow, result, &
+    REAL(8) :: abserr, bound, epmach, epsabs, epsrel, error, oflow, result, &
       uflow, work(800)
     INTEGER ier, ip, Ipass, iwork(200), Kprint, last, lenw, limit, Lun, neval
     REAL(8), PARAMETER :: exact0 = 2.0D+00, exact1 = 0.115470066904D1
@@ -275,7 +275,7 @@ CONTAINS
 
     ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
     INTEGER ierv(4)
-    REAL(8) :: a, abserr, b, D1MACH, epmach, epsabs, epsrel, error, oflow, &
+    REAL(8) :: a, abserr, b, epmach, epsabs, epsrel, error, oflow, &
       points(5), result, uflow, work(405)
     INTEGER ier, ip, Ipass, iwork(205), Kprint, last, leniw, lenw, limit, &
       Lun, neval, npts2
@@ -423,7 +423,7 @@ CONTAINS
 
     ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
     INTEGER ierv(5), Lun
-    REAL(8) :: a, abserr, b, D1MACH, epmach, epsabs, epsrel, error, oflow, result, &
+    REAL(8) :: a, abserr, b, epmach, epsabs, epsrel, error, oflow, result, &
       uflow, work(800)
     INTEGER ier, ip, Ipass, iwork(200), Kprint, last, lenw, limit, neval
     REAL(8), PARAMETER :: exact0 = 0.2D+01
@@ -561,7 +561,7 @@ CONTAINS
 
     ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
     INTEGER ierv(2), Lun
-    REAL(8) :: a, abserr, b, D1MACH, epmach, epsabs, epsrel, error, c, result, &
+    REAL(8) :: a, abserr, b, epmach, epsabs, epsrel, error, c, result, &
       uflow, work(800)
     INTEGER ier, ip, Ipass, iwork(200), Kprint, last, lenw, limit, neval
     REAL(8), PARAMETER :: exact0 = -0.6284617285065624D+03
@@ -667,7 +667,7 @@ CONTAINS
 
     ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
     INTEGER ierv(4), integr, iwork(450), leniw, Lun, maxp1
-    REAL(8) :: a, abserr, D1MACH, epsabs, epmach, error, omega, result, uflow, work(1425)
+    REAL(8) :: a, abserr, epsabs, epmach, error, omega, result, uflow, work(1425)
     INTEGER ier, ip, Ipass, Kprint, lenw, limit, limlst, lst, neval
     REAL(8), PARAMETER :: exact0 = 0.1422552162575912D+01
     REAL(8), PARAMETER :: pi = 0.31415926535897932D+01
@@ -785,7 +785,7 @@ CONTAINS
     ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
     INTEGER leniw
     REAL(8) :: a, abserr, b, epmach, epsabs, epsrel, error, oflow, omega, result, &
-      D1MACH, uflow, work(1325)
+      uflow, work(1325)
     INTEGER ier, ierv(4), integr, ip, Ipass, iwork(400), Kprint, last, lenw, &
       Lun, maxp1, neval
     REAL(8), PARAMETER :: exact0 = 0.1042872789432789D+05
@@ -915,7 +915,7 @@ CONTAINS
 
     ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
     INTEGER ierv(2), Lun
-    REAL(8) :: a, abserr, b, D1MACH, epmach, epsabs, epsrel, error, alfa, beta, &
+    REAL(8) :: a, abserr, b, epmach, epsabs, epsrel, error, alfa, beta, &
       result, uflow, work(800)
     INTEGER ier, ip, Ipass, iwork(200), Kprint, last, lenw, limit, neval, integr
     REAL(8), PARAMETER :: exact0 = 0.5350190569223644D+00
@@ -1022,7 +1022,7 @@ CONTAINS
 
     ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
     INTEGER Lun
-    REAL(8) :: a, abserr, b, D1MACH, epmach, epsabs, epsrel, error, result, uflow
+    REAL(8) :: a, abserr, b, epmach, epsabs, epsrel, error, result, uflow
     INTEGER ier, ierv(1), ip, Ipass, Kprint, neval
     REAL(8), PARAMETER :: exact1 = 0.7281029132255818D+00
     REAL(8), PARAMETER :: exact2 = 0.1D+02
@@ -1842,6 +1842,7 @@ END MODULE TEST40_MOD
 !** TEST40
 PROGRAM TEST40
   USE TEST40_MOD
+  use slatec
   IMPLICIT NONE
   !>
   !***
@@ -1894,8 +1895,6 @@ PROGRAM TEST40
   !   890618  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900524  Cosmetic changes to code.  (WRB)
-
-  INTEGER I1MACH
   INTEGER ipass, kprint, lin, lun, nfail
   !* FIRST EXECUTABLE STATEMENT  TEST40
   lun = I1MACH(2)

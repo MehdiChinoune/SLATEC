@@ -2,7 +2,6 @@
 SUBROUTINE DRKFS(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
     F4,F5,Ys,Told,Dtsign,U26,Rer,Init,Ksteps,Kop,Iquit,Stiff,&
     Nonstf,Ntstep,Nstifs,Rpar,Ipar)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to DDERKF
@@ -56,7 +55,7 @@ SUBROUTINE DRKFS(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
   !
   INTEGER Idid, Info(15), Init, Ipar(*), Iquit, k, Kop, Ksteps, ktol, &
     natolp, Neq, nrtolp, Nstifs, Ntstep
-  REAL(8) :: a, Atol(*), big, D1MACH, dt, Dtsign, DHVNRM, dy, &
+  REAL(8) :: a, Atol(*), big, dt, Dtsign, dy, &
     ee, eeoet, es, estiff, esttol, et, F1(*), F2(*), F3(*), &
     F4(*), F5(*), H, hmin, Rer, Rpar(*), Rtol(*), s, T, &
     tol, Told, Tolfac, Tout, u, U26, ute, Y(*), yavg, Yp(*), Ys(*)

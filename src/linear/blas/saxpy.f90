@@ -1,6 +1,5 @@
 !** SAXPY
 SUBROUTINE SAXPY(N,Sa,Sx,Incx,Sy,Incy)
-  IMPLICIT NONE
   !>
   !***
   !  Compute a constant times a vector plus a vector.

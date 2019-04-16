@@ -1,6 +1,5 @@
 !** BESI0E
 REAL FUNCTION BESI0E(X)
-  IMPLICIT NONE
   !>
   !***
   !  Compute the exponentially scaled modified (hyperbolic)
@@ -55,8 +54,7 @@ REAL FUNCTION BESI0E(X)
   !   890313  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-  REAL CSEVL, R1MACH, X, y
-  INTEGER INITS
+  REAL X, y
   INTEGER, SAVE :: nti0, ntai0, ntai02
   REAL, SAVE :: xsml
   REAL, PARAMETER :: bi0cs(12) = [ -.07660547252839144951E0, 1.927337953993808270E0, &

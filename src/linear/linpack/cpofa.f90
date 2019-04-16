@@ -1,6 +1,5 @@
 !** CPOFA
 SUBROUTINE CPOFA(A,Lda,N,Info)
-  IMPLICIT NONE
   !>
   !***
   !  Factor a complex Hermitian positive definite matrix.
@@ -66,7 +65,7 @@ SUBROUTINE CPOFA(A,Lda,N,Info)
   INTEGER Lda, N, Info
   COMPLEX A(Lda,*)
   !
-  COMPLEX CDOTC, t
+  COMPLEX t
   REAL s
   INTEGER j, jm1, k
   !* FIRST EXECUTABLE STATEMENT  CPOFA

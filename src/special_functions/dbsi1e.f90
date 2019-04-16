@@ -1,6 +1,5 @@
 !** DBSI1E
 REAL(8) FUNCTION DBSI1E(X)
-  IMPLICIT NONE
   !>
   !***
   !  Compute the exponentially scaled modified (hyperbolic)
@@ -56,8 +55,7 @@ REAL(8) FUNCTION DBSI1E(X)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
 
   REAL eta
-  INTEGER INITDS
-  REAL(8) :: X, y, D1MACH, DCSEVL
+  REAL(8) :: X, y
   INTEGER, SAVE :: nti1, ntai1, ntai12
   REAL(8), SAVE :: xmin, xsml
   REAL(8), PARAMETER :: bi1cs(17) = [ -.19717132610998597316138503218149D-2, &

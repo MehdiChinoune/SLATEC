@@ -1,6 +1,5 @@
 !** POLINT
 SUBROUTINE POLINT(N,X,Y,C)
-  IMPLICIT NONE
   !>
   !***
   !  Produce the polynomial which interpolates a set of discrete

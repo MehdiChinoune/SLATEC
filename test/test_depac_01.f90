@@ -1,4 +1,5 @@
 MODULE TEST43_MOD
+  use slatec
   IMPLICIT NONE
 
 CONTAINS
@@ -138,7 +139,7 @@ CONTAINS
     !     Declare local variables.
     !
     INTEGER idid, info(15), ipar(1), iwork(51), n, liw, lrw
-    REAL abserr(1), r, R1MACH, relerr(1), reltol, rpar(1), rwork(214), t, tout, u(4)
+    REAL abserr(1), r, relerr(1), reltol, rpar(1), rwork(214), t, tout, u(4)
     !* FIRST EXECUTABLE STATEMENT  QXABM
     IF ( Kprint>=2 ) WRITE (Lun,99001)
     !
@@ -253,7 +254,7 @@ CONTAINS
     !     Declare local variables.
     !
     INTEGER idid, info(15), ipar(1), iwork(60), n, liw, lrw
-    REAL abserr(1), r, R1MACH, relerr(1), reltol, rpar(1), rwork(306), t, tout, u(4)
+    REAL abserr(1), r, relerr(1), reltol, rpar(1), rwork(306), t, tout, u(4)
     !* FIRST EXECUTABLE STATEMENT  QXBDF
     IF ( Kprint>=2 ) WRITE (Lun,99001)
     !
@@ -370,7 +371,7 @@ CONTAINS
     !     Declare local variables.
     !
     INTEGER idid, info(15), ipar(1), iwork(34), n, liw, lrw
-    REAL abserr(1), r, R1MACH, relerr(1), reltol, rpar(1), rwork(61), t, tout, u(4)
+    REAL abserr(1), r, relerr(1), reltol, rpar(1), rwork(61), t, tout, u(4)
     !* FIRST EXECUTABLE STATEMENT  QXRKF
     IF ( Kprint>=2 ) WRITE (Lun,99001)
     !
@@ -685,6 +686,7 @@ END MODULE TEST43_MOD
 !** TEST43
 PROGRAM TEST43
   USE TEST43_MOD
+  use slatec
   IMPLICIT NONE
   !>
   !***
@@ -735,8 +737,6 @@ PROGRAM TEST43
   !   890618  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900524  Cosmetic changes to code.  (WRB)
-
-  INTEGER I1MACH
   INTEGER ipass, kprint, lin, lun, nfail
   !* FIRST EXECUTABLE STATEMENT  TEST43
   lun = I1MACH(2)

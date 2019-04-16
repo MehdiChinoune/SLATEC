@@ -1,6 +1,5 @@
 !** XERMAX
 SUBROUTINE XERMAX(Maxx)
-  IMPLICIT NONE
   !>
   !***
   !  Set maximum number of times any error message is to be
@@ -44,7 +43,7 @@ SUBROUTINE XERMAX(Maxx)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
-  INTEGER J4SAVE, junk, Maxx
+  INTEGER junk, Maxx
   !* FIRST EXECUTABLE STATEMENT  XERMAX
   junk = J4SAVE(4,Maxx,.TRUE.)
 END SUBROUTINE XERMAX

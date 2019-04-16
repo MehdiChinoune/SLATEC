@@ -1,6 +1,5 @@
 !** SSYRK
 SUBROUTINE SSYRK(Uplo,Trans,N,K,Alpha,A,Lda,Beta,C,Ldc)
-  IMPLICIT NONE
   !>
   !***
   !  Perform symmetric rank k update of a real symmetric matrix.
@@ -133,10 +132,6 @@ SUBROUTINE SSYRK(Uplo,Trans,N,K,Alpha,A,Lda,Beta,C,Ldc)
   REAL Alpha, Beta
   !     .. Array Arguments ..
   REAL A(Lda,*), C(Ldc,*)
-  !     .. External Functions ..
-  LOGICAL, EXTERNAL :: LSAME
-  !     .. External Subroutines ..
-  EXTERNAL :: XERBLA
   !     .. Intrinsic Functions ..
   INTRINSIC MAX
   !     .. Local Scalars ..

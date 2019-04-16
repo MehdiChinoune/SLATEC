@@ -1,6 +1,5 @@
 !** DLNREL
 REAL(8) FUNCTION DLNREL(X)
-  IMPLICIT NONE
   !>
   !***
   !  Evaluate ln(1+X) accurate in the sense of relative error.
@@ -41,8 +40,7 @@ REAL(8) FUNCTION DLNREL(X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
 
-  INTEGER INITDS
-  REAL(8) :: X, DCSEVL, D1MACH
+  REAL(8) :: X
   INTEGER, SAVE :: nlnrel
   REAL(8), SAVE :: xmin
   REAL(8), PARAMETER :: alnrcs(43) = [ +.10378693562743769800686267719098D+1, &

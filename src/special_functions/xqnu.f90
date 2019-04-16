@@ -1,6 +1,5 @@
 !** XQNU
 SUBROUTINE XQNU(Nu1,Nu2,Mu1,Theta,X,Sx,Id,Pqa,Ipqa,Ierror)
-  IMPLICIT NONE
   !>
   !***
   !  To compute the values of Legendre functions for XLEGF.

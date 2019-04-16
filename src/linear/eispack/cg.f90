@@ -1,6 +1,5 @@
 !** CG
 SUBROUTINE CG(Nm,N,Ar,Ai,Wr,Wi,Matz,Zr,Zi,Fv1,Fv2,Fv3,Ierr)
-  IMPLICIT NONE
   !>
   !***
   !  Compute the eigenvalues and, optionally, the eigenvectors

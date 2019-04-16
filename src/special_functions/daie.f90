@@ -1,6 +1,5 @@
 !** DAIE
 REAL(8) FUNCTION DAIE(X)
-  IMPLICIT NONE
   !>
   !***
   !  Calculate the Airy function for a negative argument and an
@@ -64,8 +63,7 @@ REAL(8) FUNCTION DAIE(X)
   !   920618  Removed space from variable names.  (RWC, WRB)
 
   REAL eta
-  INTEGER INITDS
-  REAL(8) :: X, sqrtx, theta, xm, z, D1MACH, DCSEVL
+  REAL(8) :: X, sqrtx, theta, xm, z
   INTEGER, SAVE :: naif, naig, naip1, naip2
   REAL(8), SAVE :: x3sml, x32sml, xbig
   REAL(8), PARAMETER :: aifcs(13) = [ -.37971358496669997496197089469414D-1, &

@@ -1,6 +1,5 @@
 !** PCOEF
 SUBROUTINE PCOEF(L,C,Tc,A)
-  IMPLICIT NONE
   !>
   !***
   !  Convert the POLFIT coefficients to Taylor series form.

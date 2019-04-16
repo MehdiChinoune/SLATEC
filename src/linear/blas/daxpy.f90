@@ -1,6 +1,5 @@
 !** DAXPY
 SUBROUTINE DAXPY(N,Da,Dx,Incx,Dy,Incy)
-  IMPLICIT NONE
   !>
   !***
   !  Compute a constant times a vector plus a vector.

@@ -1,6 +1,5 @@
 !** TRISP
 SUBROUTINE TRISP(N,A,B,C,D,U,Z)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to SEPELI

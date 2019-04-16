@@ -1,6 +1,5 @@
 !** DSUDS
 SUBROUTINE DSUDS(A,X,B,Neq,Nuk,Nrda,Iflag,Mlso,Work,Iwork)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to DBVSUP

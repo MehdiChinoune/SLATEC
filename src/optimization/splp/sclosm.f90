@@ -1,6 +1,5 @@
 !** SCLOSM
 SUBROUTINE SCLOSM(Ipage)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to SPLP

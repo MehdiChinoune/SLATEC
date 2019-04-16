@@ -1,6 +1,5 @@
 !** BESKS
 SUBROUTINE BESKS(Xnu,X,Nin,Bk)
-  IMPLICIT NONE
   !>
   !***
   !  Compute a sequence of modified Bessel functions of the
@@ -40,7 +39,7 @@ SUBROUTINE BESKS(Xnu,X,Nin,Bk)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
 
-  REAL Bk(*), expxi, R1MACH, X, Xnu
+  REAL Bk(*), expxi, X, Xnu
   INTEGER i, n, Nin
   REAL :: xmax = 0.0
   !* FIRST EXECUTABLE STATEMENT  BESKS

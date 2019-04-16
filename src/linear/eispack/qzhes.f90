@@ -1,6 +1,5 @@
 !** QZHES
 SUBROUTINE QZHES(Nm,N,A,B,Matz,Z)
-  IMPLICIT NONE
   !>
   !***
   !  The first step of the QZ algorithm for solving generalized

@@ -1,6 +1,5 @@
 !** DPCHIA
 REAL(8) FUNCTION DPCHIA(N,X,F,D,Incfd,Skip,A,B,Ierr)
-  IMPLICIT NONE
   !>
   !***
   !  Evaluate the definite integral of a piecewise cubic
@@ -133,7 +132,6 @@ REAL(8) FUNCTION DPCHIA(N,X,F,D,Incfd,Skip,A,B,Ierr)
   !
   INTEGER i, ia, ib, ierd, il, ir
   REAL(8) :: value, xa, xb
-  REAL(8) :: DCHFIE, DPCHID
   !
   !  INITIALIZE.
   !

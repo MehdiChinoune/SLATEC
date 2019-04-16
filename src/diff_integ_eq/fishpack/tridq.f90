@@ -1,6 +1,5 @@
 !** TRIDQ
 SUBROUTINE TRIDQ(Mr,A,B,C,Y,D)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to POIS3D

@@ -1,7 +1,6 @@
 !** SSDCG
 SUBROUTINE SSDCG(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
     Iunit,Rwork,Lenw,Iwork,Leniw)
-  IMPLICIT NONE
   !>
   !***
   !  Diagonally Scaled Conjugate Gradient Sparse Ax=b Solver.
@@ -243,8 +242,6 @@ SUBROUTINE SSDCG(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
   INTEGER Ia(Nelt), Iwork(Leniw), Ja(Nelt)
   !     .. Local Scalars ..
   INTEGER locd, locdz, lociw, locp, locr, locw, locz
-  !     .. External Subroutines ..
-  EXTERNAL :: SCG, SCHKW, SS2Y, SSDI, SSDS, SSMV
   !* FIRST EXECUTABLE STATEMENT  SSDCG
   !
   Ierr = 0

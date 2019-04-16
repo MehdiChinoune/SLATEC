@@ -1,6 +1,5 @@
 !** POIS3D
 SUBROUTINE POIS3D(Lperod,L,C1,Mperod,M,C2,Nperod,N,A,B,C,Ldimf,Mdimf,F,Ierror,W)
-  IMPLICIT NONE
   !>
   !***
   !  Solve a three-dimensional block tridiagonal linear system

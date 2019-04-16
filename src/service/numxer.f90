@@ -1,6 +1,5 @@
 !** NUMXER
 INTEGER FUNCTION NUMXER(Nerr)
-  IMPLICIT NONE
   !>
   !***
   !  Return the most recent error number.
@@ -34,8 +33,8 @@ INTEGER FUNCTION NUMXER(Nerr)
   !   900402  Added TYPE section.  (WRB)
   !   910411  Made user-callable and added KEYWORDS section.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
-  INTEGER J4SAVE, Nerr
+
+  INTEGER Nerr
   !* FIRST EXECUTABLE STATEMENT  NUMXER
   Nerr = J4SAVE(1,0,.FALSE.)
   NUMXER = Nerr

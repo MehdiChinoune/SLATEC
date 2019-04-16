@@ -1,6 +1,5 @@
 !** E1
 REAL FUNCTION E1(X)
-  IMPLICIT NONE
   !>
   !***
   !  Compute the exponential integral E1(X).
@@ -83,8 +82,7 @@ REAL FUNCTION E1(X)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920618  Removed space from variable names.  (RWC, WRB)
 
-  REAL CSEVL, eta, R1MACH, X, xmaxt
-  INTEGER INITS
+  REAL eta, X, xmaxt
   INTEGER, SAVE :: ntae11, ntae12, nte11, nte12, ntae13, ntae14
   REAL, SAVE :: xmax
   REAL, PARAMETER :: ae11cs(39) = [ .12150323971606579E0, -.065088778513550150E0, &

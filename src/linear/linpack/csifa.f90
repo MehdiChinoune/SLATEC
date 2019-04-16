@@ -1,6 +1,5 @@
 !** CSIFA
 SUBROUTINE CSIFA(A,Lda,N,Kpvt,Info)
-  IMPLICIT NONE
   !>
   !***
   !  Factor a complex symmetric matrix by elimination with
@@ -81,9 +80,8 @@ SUBROUTINE CSIFA(A,Lda,N,Kpvt,Info)
   !
   COMPLEX ak, akm1, bk, bkm1, denom, mulk, mulkm1, t
   REAL absakk, alpha, colmax, rowmax
-  INTEGER imax, imaxp1, j, jj, jmax, k, km1, km2, kstep, ICAMAX
+  INTEGER imax, imaxp1, j, jj, jmax, k, km1, km2, kstep
   LOGICAL swap
-  REAL, EXTERNAL :: CABS1
   !* FIRST EXECUTABLE STATEMENT  CSIFA
   !
   !     INITIALIZE

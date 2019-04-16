@@ -1,6 +1,5 @@
 !** XERCNT
 SUBROUTINE XERCNT(Librar,Subrou,Messg,Nerr,Level,Kontrl)
-  IMPLICIT NONE
   !>
   !***
   !  Allow user control over handling of errors.

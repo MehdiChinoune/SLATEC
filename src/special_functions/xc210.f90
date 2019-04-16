@@ -1,7 +1,6 @@
 !** XC210
 SUBROUTINE XC210(K,Z,J,Ierror)
   USE XBLK ,ONLY: NLG102, MLG102, LG102
-  IMPLICIT NONE
   !>
   !***
   !  To provide single-precision floating-point arithmetic

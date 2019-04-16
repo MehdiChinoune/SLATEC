@@ -1,6 +1,5 @@
 !** RD
 REAL FUNCTION RD(X,Y,Z,Ier)
-  IMPLICIT NONE
   !>
   !***
   !  Compute the incomplete or complete elliptic integral of the
@@ -318,7 +317,6 @@ REAL FUNCTION RD(X,Y,Z,Ier)
   !   900510  Modify calls to XERMSG to put in standard form.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
-  REAL R1MACH
   CHARACTER(16) :: xern3, xern4, xern5, xern6
   INTEGER Ier
   REAL epslon, ea, eb, ec, ed, ef, lamda, mu, power4, sigma, s1, s2, X, xn, &

@@ -1,6 +1,5 @@
 !** HTRIB3
 SUBROUTINE HTRIB3(Nm,N,A,Tau,M,Zr,Zi)
-  IMPLICIT NONE
   !>
   !***
   !  Compute the eigenvectors of a complex Hermitian matrix from

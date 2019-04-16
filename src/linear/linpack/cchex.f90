@@ -1,6 +1,5 @@
 !** CCHEX
 SUBROUTINE CCHEX(R,Ldr,P,K,L,Z,Ldz,Nz,C,S,Job)
-  IMPLICIT NONE
   !>
   !***
   !  Update the Cholesky factorization  A=TRANS(R)*R  of a

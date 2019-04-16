@@ -1,6 +1,5 @@
 !** DCHDC
 SUBROUTINE DCHDC(A,Lda,P,Work,Jpvt,Job,Info)
-  IMPLICIT NONE
   !>
   !***
   !  Compute the Cholesky decomposition of a positive definite

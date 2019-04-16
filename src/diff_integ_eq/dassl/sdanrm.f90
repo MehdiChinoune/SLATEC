@@ -1,6 +1,5 @@
 !** SDANRM
 REAL FUNCTION SDANRM(Neq,V,Wt,Rpar,Ipar)
-  IMPLICIT NONE
   !>
   !***
   !  Compute vector norm for SDASSL.

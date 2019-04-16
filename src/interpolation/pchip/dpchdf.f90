@@ -1,6 +1,5 @@
 !** DPCHDF
 REAL(8) FUNCTION DPCHDF(K,X,S,Ierr)
-  IMPLICIT NONE
   !>
   !***
   !  Computes divided differences for DPCHCE and DPCHSP

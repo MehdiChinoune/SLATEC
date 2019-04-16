@@ -1,4 +1,5 @@
 MODULE TEST02_MOD
+  use slatec
   IMPLICIT NONE
 
 CONTAINS
@@ -50,12 +51,6 @@ CONTAINS
 
     INTEGER i, Lun, Kprint, Ipass
     REAL y(105), errmax, errtol, abserr, relerr
-    REAL, EXTERNAL :: ACOSH, AI, AIE, ALI, ALNREL, ASINH, ATANH, BESI0, BESI0E, &
-      BESI1, BESI1E, BESJ0, BESJ1, BESK0, BESK0E, BESK1, BESK1E, BESY0, BESY1, &
-      BETA, BETAI, BI, BIE, BINOM, CBRT, CHU, COSDG, COT, DAWS, E1, EI, ERF, &
-      EXPREL, FAC, GAMI, GAMIC, GAMIT, GAMR, POCH, POCH1, PSI, R1MACH, &
-      R9ATN1, R9LN2R, SINDG, SPENC
-    EXTERNAL :: BESKES, BESKS
     !
     !     Correct values through different calculations are stored in V(*)
     !
@@ -255,6 +250,7 @@ END MODULE TEST02_MOD
 !** TEST02
 PROGRAM TEST02
   USE TEST02_MOD
+  use slatec
   IMPLICIT NONE
   !>
   !***
@@ -304,8 +300,6 @@ PROGRAM TEST02
   !   890618  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900524  Cosmetic changes to code.  (WRB)
-
-  INTEGER I1MACH
   INTEGER ipass, kprint, lin, lun, nfail
   !* FIRST EXECUTABLE STATEMENT  TEST02
   lun = I1MACH(2)

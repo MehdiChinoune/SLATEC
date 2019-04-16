@@ -1,7 +1,6 @@
 !** XADD
 SUBROUTINE XADD(X,Ix,Y,Iy,Z,Iz,Ierror)
   USE XBLK ,ONLY: RADixx, RADixl, RAD2l, L
-  IMPLICIT NONE
   !>
   !***
   !  To provide single-precision floating-point arithmetic

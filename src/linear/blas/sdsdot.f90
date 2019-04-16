@@ -1,6 +1,5 @@
 !** SDSDOT
 REAL FUNCTION SDSDOT(N,Sb,Sx,Incx,Sy,Incy)
-  IMPLICIT NONE
   !>
   !***
   !  Compute the inner product of two vectors with extended

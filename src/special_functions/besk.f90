@@ -1,6 +1,5 @@
 !** BESK
 SUBROUTINE BESK(X,Fnu,Kode,N,Y,Nz)
-  IMPLICIT NONE
   !>
   !***
   !  Implement forward recursion on the three term recursion
@@ -86,10 +85,8 @@ SUBROUTINE BESK(X,Fnu,Kode,N,Y,Nz)
 
   !
   INTEGER i, j, k, Kode, mz, N, nb, nd, nn, nud, Nz
-  INTEGER I1MACH
   REAL cn, dnu, elim, etx, flgik, fn, fnn, Fnu, gln, gnu, rtz, &
     s, s1, s2, t, tm, trx, w(2), X, xlim, Y(*), zn
-  REAL BESK0, BESK1, BESK1E, BESK0E, R1MACH
   INTEGER, PARAMETER :: nulim(2) = [ 35, 70 ]
   !* FIRST EXECUTABLE STATEMENT  BESK
   nn = -I1MACH(12)

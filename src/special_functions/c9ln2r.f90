@@ -1,6 +1,5 @@
 !** C9LN2R
 COMPLEX FUNCTION C9LN2R(Z)
-  IMPLICIT NONE
   !>
   !***
   !  Evaluate LOG(1+Z) from second order relative accuracy so
@@ -55,7 +54,7 @@ COMPLEX FUNCTION C9LN2R(Z)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
 
-  REAL aipart, arg, cabsz, R9ATN1, R9LN2R, rpart, x, xz, y, y1x, yz
+  REAL aipart, arg, cabsz, rpart, x, xz, y, y1x, yz
   COMPLEX Z
   !* FIRST EXECUTABLE STATEMENT  C9LN2R
   x = REAL(Z)

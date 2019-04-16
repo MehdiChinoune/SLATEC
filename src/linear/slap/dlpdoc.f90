@@ -1,6 +1,5 @@
 !** DLPDOC
 SUBROUTINE DLPDOC
-  IMPLICIT NONE
   !>
   !***
   !  Sparse Linear Algebra Package Version 2.0.2 Documentation.

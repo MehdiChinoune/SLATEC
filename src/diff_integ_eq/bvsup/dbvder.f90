@@ -1,7 +1,6 @@
 !** DBVDER
 SUBROUTINE DBVDER(X,Y,Yp,G,Ipar)
   USE DML, ONLY : NOFst, C, XSAv, IGOfx, INHomo, IVP, NCOmp, NFC
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to DBVSUP

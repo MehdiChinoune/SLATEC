@@ -1,6 +1,5 @@
 !** DCOSDG
 REAL(8) FUNCTION DCOSDG(X)
-  IMPLICIT NONE
   !>
   !***
   !  Compute the cosine of an argument in degrees.

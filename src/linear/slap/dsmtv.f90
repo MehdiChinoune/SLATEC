@@ -1,6 +1,5 @@
 !** DSMTV
 SUBROUTINE DSMTV(N,X,Y,Nelt,Ia,Ja,A,Isym)
-  IMPLICIT NONE
   !>
   !***
   !  SLAP Column Format Sparse Matrix Transpose Vector Product.

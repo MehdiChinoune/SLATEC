@@ -1,6 +1,5 @@
 !** CUCHK
 SUBROUTINE CUCHK(Y,Nz,Ascle,Tol)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to SERI, CUOIK, CUNK1, CUNK2, CUNI1, CUNI2 and

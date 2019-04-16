@@ -1,4 +1,5 @@
 MODULE TEST21_MOD
+  use slatec
   IMPLICIT NONE
 
 CONTAINS
@@ -51,10 +52,6 @@ CONTAINS
     !     .. Local Arrays ..
     REAL atemp(5,4), btemp(4), work(20)
     INTEGER iwork(4)
-    !     .. External Functions ..
-    REAL, EXTERNAL :: R1MACH
-    !     .. External Subroutines ..
-    EXTERNAL :: SGEFS, SGEIR
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, MAX
     !     .. Data statements ..
@@ -197,10 +194,6 @@ CONTAINS
     !     .. Local Arrays ..
     REAL(8) :: atemp(5,4), btemp(4), work(20)
     INTEGER iwork(4)
-    !     .. External Functions ..
-    REAL(8), EXTERNAL :: D1MACH
-    !     .. External Subroutines ..
-    EXTERNAL :: DGEFS
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, MAX
     !     .. Data statements ..
@@ -332,11 +325,8 @@ CONTAINS
     !     .. Local Arrays ..
     COMPLEX atemp(5,3), btemp(3), work(12)
     INTEGER iwork(3)
-    !     .. External Subroutines ..
-    EXTERNAL :: CGEFS, CGEIR
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, AIMAG, REAL
-    REAL CABS1
     !     .. Data statements ..
     COMPLEX, PARAMETER :: a(3,3) = RESHAPE( [ (2.,3.), (1.,1.), (1.,2.), &
       (2.,0.), (1.,-1.), (0.,0.),   (0.,0.), (2.,5.), (3.,2.) ], [3,3] )
@@ -429,6 +419,7 @@ END MODULE TEST21_MOD
 !** TEST21
 PROGRAM TEST21
   USE TEST21_MOD
+  use slatec
   IMPLICIT NONE
   !>
   !***
@@ -480,8 +471,6 @@ PROGRAM TEST21
   !   890618  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900524  Cosmetic changes to code.  (WRB)
-
-  INTEGER I1MACH
   INTEGER kprint, lin, lun, nerr, nfail
   !* FIRST EXECUTABLE STATEMENT  TEST21
   lun = I1MACH(2)

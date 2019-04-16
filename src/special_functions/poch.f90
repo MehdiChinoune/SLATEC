@@ -1,6 +1,5 @@
 !** POCH
 REAL FUNCTION POCH(A,X)
-  IMPLICIT NONE
   !>
   !***
   !  Evaluate a generalization of Pochhammer's symbol.
@@ -39,7 +38,6 @@ REAL FUNCTION POCH(A,X)
 
   REAL A, absa, absax, alnga, alngax, ax, b, sgnga, sgngax, X
   INTEGER i, n
-  REAL, EXTERNAL :: ALNREL, COT, FAC, R9LGMC, GAMR
   REAL, PARAMETER :: pi = 3.141592653589793238E0
   !* FIRST EXECUTABLE STATEMENT  POCH
   ax = A + X

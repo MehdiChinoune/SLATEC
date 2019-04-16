@@ -1,6 +1,5 @@
 !** SNBIR
 SUBROUTINE SNBIR(Abe,Lda,N,Ml,Mu,V,Itask,Ind,Work,Iwork)
-  IMPLICIT NONE
   !>
   !***
   !  Solve a general nonsymmetric banded system of linear
@@ -183,7 +182,7 @@ SUBROUTINE SNBIR(Abe,Lda,N,Ml,Mu,V,Itask,Ind,Work,Iwork)
 
   !
   INTEGER Lda, N, Itask, Ind, Iwork(*), info, j, k, kk, l, m, Ml, Mu, nc
-  REAL Abe(Lda,*), V(*), Work(N,*), xnorm, dnorm, SDSDOT, SASUM, R1MACH
+  REAL Abe(Lda,*), V(*), Work(N,*), xnorm, dnorm
   CHARACTER(8) :: xern1, xern2
   !* FIRST EXECUTABLE STATEMENT  SNBIR
   IF ( Lda<N ) THEN

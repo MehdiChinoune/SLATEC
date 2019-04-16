@@ -1,6 +1,5 @@
 !** DPRVEC
 REAL(8) FUNCTION DPRVEC(M,U,V)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to DBVSUP
@@ -30,7 +29,6 @@ REAL(8) FUNCTION DPRVEC(M,U,V)
   !   910722  Updated AUTHOR section.  (ALS)
   
   !
-  REAL(8) :: DDOT
   INTEGER M, n, np
   REAL(8) :: U(*), V(*), vp
   !* FIRST EXECUTABLE STATEMENT  DPRVEC

@@ -1,7 +1,6 @@
 !** DPINIT
 SUBROUTINE DPINIT(Mrelas,Nvars,Costs,Bl,Bu,Ind,Primal,Info,Amat,Csc,&
     Costsc,Colnrm,Xlamda,Anorm,Rhs,Rhsnrm,Ibasis,Ibb,Imat,Lopt)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to DSPLP
@@ -41,7 +40,6 @@ SUBROUTINE DPINIT(Mrelas,Nvars,Costs,Bl,Bu,Ind,Primal,Info,Amat,Csc,&
     n20041, n20056, n20066, n20070, n20074, n20078, Nvars
   REAL(8) :: aij, Amat(*), Anorm, Bl(*), Bu(*), cmax, Colnrm(*), Costs(*), &
     Costsc, Csc(*), csum, Primal(*), Rhs(*), Rhsnrm, scalr, testsc, Xlamda
-  REAL(8) :: DASUM
   REAL(8), PARAMETER :: zero = 0.D0, one = 1.D0
   INTEGER Ibasis(*), Ibb(*), Imat(*), Ind(*)
   LOGICAL contin, usrbas, colscp, cstscp, minprb, Lopt(8)

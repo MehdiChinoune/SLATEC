@@ -1,6 +1,5 @@
 !** ZBIRY
 SUBROUTINE ZBIRY(Zr,Zi,Id,Kode,Bir,Bii,Ierr)
-  IMPLICIT NONE
   !>
   !***
   !  Compute the Airy function Bi(z) or its derivative dBi/dz
@@ -148,9 +147,7 @@ SUBROUTINE ZBIRY(Zr,Zi,Id,Kode,Bir,Bii,Ierr)
     csqi, csqr, cyi(2), cyr(2), dig, dk, d1, d2, eaa, elim, fid, fmr, &
     fnu, fnul, rl, r1m5, sfac, sti, str, s1i, s1r, s2i, s2r, tol, trm1i, &
     trm1r, trm2i, trm2r, Zi, Zr, ztai, ztar, z3i, z3r
-  INTEGER Id, Ierr, k, Kode, k1, k2, nz, I1MACH
-  REAL(8), EXTERNAL :: ZABS, D1MACH
-  EXTERNAL :: ZSQRT
+  INTEGER Id, Ierr, k, Kode, k1, k2, nz
   REAL(8), PARAMETER :: tth = 6.66666666666666667D-01, c1 = 6.14926627446000736D-01, &
     c2 = 4.48288357353826359D-01, coef = 5.77350269189625765D-01, &
     pi = 3.14159265358979324D+00

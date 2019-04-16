@@ -1,6 +1,5 @@
 !** QK15W
 SUBROUTINE QK15W(F,W,P1,P2,P3,P4,Kp,A,B,Result,Abserr,Resabs,Resasc)
-  IMPLICIT NONE
   !>
   !***
   !  To compute I = Integral of F*W over (A,B), with error
@@ -87,7 +86,6 @@ SUBROUTINE QK15W(F,W,P1,P2,P3,P4,Kp,A,B,Result,Abserr,Resabs,Resasc)
     Result, uflow
   INTEGER j, jtw, jtwm1, Kp
   REAL, EXTERNAL :: F, W
-  REAL, EXTERNAL :: R1MACH
   !
   !           THE ABSCISSAE AND WEIGHTS ARE GIVEN FOR THE INTERVAL (-1,1).
   !           BECAUSE OF SYMMETRY ONLY THE POSITIVE ABSCISSAE AND THEIR

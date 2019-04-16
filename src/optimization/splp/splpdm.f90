@@ -2,7 +2,6 @@
 SUBROUTINE SPLPDM(Mrelas,Nvars,Lmx,Lbm,Nredc,Info,Iopt,Ibasis,Imat,Ibrc,&
     Ipr,Iwr,Ind,Ibb,Anorm,Eps,Uu,Gg,Amat,Basmat,Csc,Wr,Singlr,Redbas)
   USE LA05DS
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to SPLP
@@ -37,7 +36,7 @@ SUBROUTINE SPLPDM(Mrelas,Nvars,Lmx,Lbm,Nredc,Info,Iopt,Ibasis,Imat,Ibrc,&
   !   900510  Convert XERRWV calls to XERMSG calls, changed do-it-yourself
   !           DO loops to DO loops.  (RWC)
 
-  REAL aij, SASUM
+  REAL aij
   INTEGER i, Info, Iopt, iplace, j, k, Lbm, Lmx, Mrelas, Nredc, Nvars, nzbm
   INTEGER Ibasis(*), Imat(*), Ibrc(Lbm,2), Ipr(*), Iwr(*), Ind(*), Ibb(*)
   REAL Amat(*), Basmat(*), Csc(*), Wr(*), Anorm, Eps, Gg, one, Uu, zero

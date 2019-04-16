@@ -1,6 +1,5 @@
 !** USRMAT
 SUBROUTINE USRMAT(I,J,Aij,Indcat,Prgopt,Dattrv,Iflag)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to SPLP

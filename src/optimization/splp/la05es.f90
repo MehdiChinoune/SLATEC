@@ -1,7 +1,6 @@
 !** LA05ES
 SUBROUTINE LA05ES(A,Irn,Ip,N,Iw,Ia,Reals)
   USE LA05DS
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to SPLP

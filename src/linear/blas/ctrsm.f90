@@ -1,6 +1,5 @@
 !** CTRSM
 SUBROUTINE CTRSM(Side,Uplo,Transa,Diag,M,N,Alpha,A,Lda,B,Ldb)
-  IMPLICIT NONE
   !>
   !***
   !  Solve a complex triangular system of equations with
@@ -144,10 +143,6 @@ SUBROUTINE CTRSM(Side,Uplo,Transa,Diag,M,N,Alpha,A,Lda,B,Ldb)
   COMPLEX Alpha
   !     .. Array Arguments ..
   COMPLEX A(Lda,*), B(Ldb,*)
-  !     .. External Functions ..
-  LOGICAL, EXTERNAL :: LSAME
-  !     .. External Subroutines ..
-  EXTERNAL :: XERBLA
   !     .. Intrinsic Functions ..
   INTRINSIC CONJG, MAX
   !     .. Local Scalars ..

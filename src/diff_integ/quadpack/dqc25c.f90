@@ -1,6 +1,5 @@
 !** DQC25C
 SUBROUTINE DQC25C(F,A,B,C,Result,Abserr,Krul,Neval)
-  IMPLICIT NONE
   !>
   !***
   !  To compute I = Integral of F*W over (A,B) with
@@ -82,7 +81,6 @@ SUBROUTINE DQC25C(F,A,B,C,Result,Abserr,Krul,Neval)
   INTEGER i, isym, k, kp, Krul, Neval
   !
   REAL(8), EXTERNAL :: F
-  REAL(8), EXTERNAL :: DQWGTC
   !
   !           THE VECTOR X CONTAINS THE VALUES COS(K*PI/24),
   !           K = 1, ..., 11, TO BE USED FOR THE CHEBYSHEV SERIES

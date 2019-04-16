@@ -1,6 +1,5 @@
 !** DVNRMS
 REAL(8) FUNCTION DVNRMS(N,V,W)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to DDEBDF

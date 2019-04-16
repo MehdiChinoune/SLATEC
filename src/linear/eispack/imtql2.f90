@@ -1,6 +1,5 @@
 !** IMTQL2
 SUBROUTINE IMTQL2(Nm,N,D,E,Z,Ierr)
-  IMPLICIT NONE
   !>
   !***
   !  Compute the eigenvalues and eigenvectors of a symmetric
@@ -100,7 +99,6 @@ SUBROUTINE IMTQL2(Nm,N,D,E,Z,Ierr)
   INTEGER i, j, k, l, m, N, ii, Nm, mml, Ierr
   REAL D(*), E(*), Z(Nm,*)
   REAL b, c, f, g, p, r, s, s1, s2
-  REAL PYTHAG
   !
   !* FIRST EXECUTABLE STATEMENT  IMTQL2
   Ierr = 0

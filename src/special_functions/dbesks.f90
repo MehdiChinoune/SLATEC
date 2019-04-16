@@ -1,6 +1,5 @@
 !** DBESKS
 SUBROUTINE DBESKS(Xnu,X,Nin,Bk)
-  IMPLICIT NONE
   !>
   !***
   !  Compute a sequence of modified Bessel functions of the
@@ -41,7 +40,7 @@ SUBROUTINE DBESKS(Xnu,X,Nin,Bk)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
 
   INTEGER i, n, Nin
-  REAL(8) :: Xnu, X, Bk(*), expxi, D1MACH
+  REAL(8) :: Xnu, X, Bk(*), expxi
   REAL(8) :: xmax = 0.D0
   !* FIRST EXECUTABLE STATEMENT  DBESKS
   IF ( xmax==0.D0 ) xmax = -LOG(D1MACH(1))

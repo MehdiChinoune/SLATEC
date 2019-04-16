@@ -1,6 +1,5 @@
 !** HQR
 SUBROUTINE HQR(Nm,N,Low,Igh,H,Wr,Wi,Ierr)
-  IMPLICIT NONE
   !>
   !***
   !  Compute the eigenvalues of a real upper Hessenberg matrix

@@ -1,6 +1,5 @@
 !** CSISL
 SUBROUTINE CSISL(A,Lda,N,Kpvt,B)
-  IMPLICIT NONE
   !>
   !***
   !  Solve a complex symmetric system using the factors obtained
@@ -77,7 +76,7 @@ SUBROUTINE CSISL(A,Lda,N,Kpvt,B)
   INTEGER Lda, N, Kpvt(*)
   COMPLEX A(Lda,*), B(*)
   !
-  COMPLEX ak, akm1, bk, bkm1, CDOTU, denom, temp
+  COMPLEX ak, akm1, bk, bkm1, denom, temp
   INTEGER k, kp
   !
   !     LOOP BACKWARD APPLYING THE TRANSFORMATIONS AND

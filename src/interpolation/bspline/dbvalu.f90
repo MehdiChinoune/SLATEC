@@ -1,6 +1,5 @@
 !** DBVALU
 REAL(8) FUNCTION DBVALU(T,A,N,K,Ideriv,X,Inbv,Work)
-  IMPLICIT NONE
   !>
   !***
   !  Evaluate the B-representation of a B-spline at X for the

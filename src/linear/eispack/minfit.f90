@@ -1,6 +1,5 @@
 !** MINFIT
 SUBROUTINE MINFIT(Nm,M,N,A,W,Ip,B,Ierr,Rv1)
-  IMPLICIT NONE
   !>
   !***
   !  Compute the singular value decomposition of a rectangular
@@ -106,7 +105,6 @@ SUBROUTINE MINFIT(Nm,M,N,A,W,Ip,B,Ierr,Rv1)
   INTEGER i, j, k, l, M, N, ii, Ip, i1, kk, k1, ll, l1, m1, Nm, its, Ierr
   REAL A(Nm,*), W(*), B(Nm,Ip), Rv1(*)
   REAL c, f, g, h, s, x, y, z, scalee, s1
-  REAL PYTHAG
   !
   !* FIRST EXECUTABLE STATEMENT  MINFIT
   Ierr = 0

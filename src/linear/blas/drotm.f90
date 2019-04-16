@@ -1,6 +1,5 @@
 !** DROTM
 SUBROUTINE DROTM(N,Dx,Incx,Dy,Incy,Dparam)
-  IMPLICIT NONE
   !>
   !***
   !  Apply a modified Givens transformation.

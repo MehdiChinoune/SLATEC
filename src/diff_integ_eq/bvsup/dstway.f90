@@ -1,7 +1,6 @@
 !** DSTWAY
 SUBROUTINE DSTWAY(U,V,Yhp,Inout,Stowa)
   USE DML, ONLY : NCOmp, NFC, X, XOP, INFo, ISTkop, KOP, NDIsk, NTApe, NEQivp
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to DBVSUP

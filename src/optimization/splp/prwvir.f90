@@ -1,6 +1,5 @@
 !** PRWVIR
 SUBROUTINE PRWVIR(Key,Ipage,Lpg,Sx,Ix)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to SPLP

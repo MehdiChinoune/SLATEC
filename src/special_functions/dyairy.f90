@@ -1,6 +1,5 @@
 !** DYAIRY
 SUBROUTINE DYAIRY(X,Rx,C,Bi,Dbi)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to DBESJ and DBESY

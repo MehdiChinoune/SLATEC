@@ -1,6 +1,5 @@
 !** DSPFA
 SUBROUTINE DSPFA(Ap,N,Kpvt,Info)
-  IMPLICIT NONE
   !>
   !***
   !  Factor a real symmetric matrix stored in packed form by
@@ -94,7 +93,7 @@ SUBROUTINE DSPFA(Ap,N,Kpvt,Info)
   !
   REAL(8) :: ak, akm1, bk, bkm1, denom, mulk, mulkm1, t
   REAL(8) :: absakk, alpha, colmax, rowmax
-  INTEGER IDAMAX, ij, ik, ikm1, im, imax, imaxp1, imim, imj, imk
+  INTEGER ij, ik, ikm1, im, imax, imaxp1, imim, imj, imk
   INTEGER j, jj, jk, jkm1, jmax, jmim, k, kk, km1, km1k, km1km1, km2, kstep
   LOGICAL swap
   !* FIRST EXECUTABLE STATEMENT  DSPFA

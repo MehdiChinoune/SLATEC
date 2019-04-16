@@ -1,6 +1,5 @@
 !** CBESH
 SUBROUTINE CBESH(Z,Fnu,Kode,M,N,Cy,Nz,Ierr)
-  IMPLICIT NONE
   !>
   !***
   !  Compute a sequence of the Hankel functions H(m,a,z)
@@ -164,10 +163,10 @@ SUBROUTINE CBESH(Z,Fnu,Kode,M,N,Cy,Nz,Ierr)
 
   !
   INTEGER i, Ierr, inu, inuh, ir, k, Kode, k1, k2, M, mm, mr, &
-    N, nn, nuf, nw, Nz, I1MACH
+    N, nn, nuf, nw, Nz
   COMPLEX Cy(N), Z, zn, zt, csgn
   REAL aa, alim, aln, arg, az, cpn, dig, elim, fmm, fn, Fnu, fnul, rhpi, rl, &
-    r1m5, sgn, spn, tol, ufl, xn, xx, yn, yy, R1MACH, bb, ascle, rtol, atol
+    r1m5, sgn, spn, tol, ufl, xn, xx, yn, yy, bb, ascle, rtol, atol
   !
   REAL, PARAMETER :: hpi = 1.57079632679489662E0
   !

@@ -1,6 +1,5 @@
 !** RST
 SUBROUTINE RST(Nm,N,W,E,Matz,Z,Ierr)
-  IMPLICIT NONE
   !>
   !***
   !  Compute the eigenvalues and, optionally, the eigenvectors

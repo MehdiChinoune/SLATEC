@@ -4,7 +4,6 @@ SUBROUTINE DLSOD(DF,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,&
   USE DDEBD1, ONLY : TOLd, H, HMIn, HMXi, X => TN, U => UROund, IQUit, INIt, &
     KSTeps, IBEgin, ITOl, IINteg, ITStop, IJAc, IBAnd, JSTart, KFLag, METh, &
     MITer, MAXord, N, NQ, NST, NFE, NJE
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to DDEBDF
@@ -38,7 +37,7 @@ SUBROUTINE DLSOD(DF,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,&
 
   !
   INTEGER Idid, intflg, Ipar(*), Iwm(*), k, l, ltol, natolp, Neq, nrtolp
-  REAL(8) :: absdel, Acor(*), Atol(*), big, D1MACH, del, Delsgn, dt, DVNRMS, &
+  REAL(8) :: absdel, Acor(*), Atol(*), big, del, Delsgn, dt, &
     Ewt(*), ha, Rpar(*), Rtol(*), Savf(*), T, tol, Tolfac, Tout, Tstop, Wm(*), &
     Y(*), Yh(Neq,6), Yh1(*), Ypout(*)
   LOGICAL Intout

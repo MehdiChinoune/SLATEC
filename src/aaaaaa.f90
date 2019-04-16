@@ -1,6 +1,5 @@
 !** AAAAAA
 SUBROUTINE AAAAAA(Ver)
-  IMPLICIT NONE
   !>
   !***
   !  SLATEC Common Mathematical Library disclaimer and version.

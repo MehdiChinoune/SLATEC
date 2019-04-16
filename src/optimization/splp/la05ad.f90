@@ -1,7 +1,6 @@
 !** LA05AD
 SUBROUTINE LA05AD(A,Ind,Nz,Ia,N,Ip,Iw,W,G,U)
   USE LA05DD
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to DSPLP
@@ -65,7 +64,7 @@ SUBROUTINE LA05AD(A,Ind,Nz,Ia,N,Ip,Iw,W,G,U)
     kcost, kj, kk, kl, klc, kn, knp, kp, kpc, kpl, kq, kr, krl, ks, l, mcp, N, &
     nc, Nz, nzc
   INTEGER Ip(N,2), Ind(Ia,2), Iw(N,8)
-  REAL(8) :: A(*), amax, au, am, D1MACH, G, U, W(*)
+  REAL(8) :: A(*), amax, au, am, G, U, W(*)
   CHARACTER(8) :: xern0, xern1, xern2
   ! EPS IS THE RELATIVE ACCURACY OF FLOATING-POINT COMPUTATION
   REAL(8) :: eps = 0.D0

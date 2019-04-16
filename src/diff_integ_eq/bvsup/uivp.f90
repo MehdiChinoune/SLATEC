@@ -1,6 +1,5 @@
 !** UIVP
 SUBROUTINE UIVP(X,Y,Yp)
-  IMPLICIT NONE
   !>
   !***
   !  Dummy routine for BVSUP quick check.

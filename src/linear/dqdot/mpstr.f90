@@ -1,7 +1,6 @@
 !** MPSTR
 SUBROUTINE MPSTR(X,Y)
   USE MPCOM
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to DQDOTA and DQDOTI

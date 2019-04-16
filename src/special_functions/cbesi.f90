@@ -1,6 +1,5 @@
 !** CBESI
 SUBROUTINE CBESI(Z,Fnu,Kode,N,Cy,Nz,Ierr)
-  IMPLICIT NONE
   !>
   !***
   !  Compute a sequence of the Bessel functions I(a,z) for
@@ -161,10 +160,10 @@ SUBROUTINE CBESI(Z,Fnu,Kode,N,Cy,Nz,Ierr)
   !   920128  Category corrected.  (WRB)
   !   920811  Prologue revised.  (DWL)
 
-  INTEGER i, Ierr, inu, k, Kode, k1, k2, N, nn, Nz, I1MACH
+  INTEGER i, Ierr, inu, k, Kode, k1, k2, N, nn, Nz
   COMPLEX csgn, Cy(N), Z, zn
   REAL aa, alim, arg, dig, elim, Fnu, fnul, rl, r1m5, s1, &
-    s2, tol, xx, yy, R1MACH, az, fn, bb, ascle, rtol, atol
+    s2, tol, xx, yy, az, fn, bb, ascle, rtol, atol
   REAL, PARAMETER :: pi = 3.14159265358979324E0
   COMPLEX, PARAMETER :: cone = (1.0E0,0.0E0)
   !

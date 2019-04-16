@@ -1,6 +1,5 @@
 !** DASYIK
 SUBROUTINE DASYIK(X,Fnu,Kode,Flgik,Ra,Arg,In,Y)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to DBESI and DBESK
@@ -63,7 +62,6 @@ SUBROUTINE DASYIK(X,Fnu,Kode,Flgik,Ra,Arg,In,Y)
   INTEGER In, j, jn, k, kk, Kode, l
   REAL(8) :: ak, ap, Arg, coef, etx, Flgik, fn, Fnu, &
     gln, Ra, s1, s2, t, tol, t2, X, Y(*), z
-  REAL(8) :: D1MACH
   REAL(8), PARAMETER :: con(2) = [ 3.98942280401432678D-01, 1.25331413731550025D+00 ]
   REAL(8), PARAMETER :: c(65) = [ -2.08333333333333D-01, 1.25000000000000D-01, &
     3.34201388888889D-01, -4.01041666666667D-01, 7.03125000000000D-02, &

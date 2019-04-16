@@ -1,6 +1,5 @@
 !** CAXPY
 SUBROUTINE CAXPY(N,Ca,Cx,Incx,Cy,Incy)
-  IMPLICIT NONE
   !>
   !***
   !  Compute a constant times a vector plus a vector.

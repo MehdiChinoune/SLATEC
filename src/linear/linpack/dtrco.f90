@@ -1,6 +1,5 @@
 !** DTRCO
 SUBROUTINE DTRCO(T,Ldt,N,Rcond,Z,Job)
-  IMPLICIT NONE
   !>
   !***
   !  Estimate the condition number of a triangular matrix.
@@ -80,7 +79,7 @@ SUBROUTINE DTRCO(T,Ldt,N,Rcond,Z,Job)
   REAL(8) :: Rcond
   !
   REAL(8) :: w, wk, wkm, ek
-  REAL(8) :: tnorm, ynorm, s, sm, DASUM
+  REAL(8) :: tnorm, ynorm, s, sm
   INTEGER i1, j, j1, j2, k, kk, l
   LOGICAL lower
   !* FIRST EXECUTABLE STATEMENT  DTRCO

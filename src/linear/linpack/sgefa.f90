@@ -1,6 +1,5 @@
 !** SGEFA
 SUBROUTINE SGEFA(A,Lda,N,Ipvt,Info)
-  IMPLICIT NONE
   !>
   !***
   !  Factor a matrix using Gaussian elimination.
@@ -73,7 +72,7 @@ SUBROUTINE SGEFA(A,Lda,N,Ipvt,Info)
   REAL A(Lda,*)
   !
   REAL t
-  INTEGER ISAMAX, j, k, kp1, l, nm1
+  INTEGER j, k, kp1, l, nm1
   !
   !     GAUSSIAN ELIMINATION WITH PARTIAL PIVOTING
   !

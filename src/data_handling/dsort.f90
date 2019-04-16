@@ -1,6 +1,5 @@
 !** DSORT
 SUBROUTINE DSORT(Dx,Dy,N,Kflag)
-  IMPLICIT NONE
   !>
   !***
   !  Sort an array and optionally make the same interchanges in
@@ -67,10 +66,7 @@ SUBROUTINE DSORT(Dx,Dy,N,Kflag)
   REAL(8) :: r, t, tt, tty, ty
   INTEGER i, ij, j, k, kk, l, m, nn
   !     .. Local Arrays ..
-  INTEGER il(21), iu(21)
-  !     .. External Subroutines ..
-  EXTERNAL :: XERMSG
-  !     .. Intrinsic Functions ..
+  INTEGER il(21), iu(21)  !     .. Intrinsic Functions ..
   INTRINSIC ABS, INT
   !* FIRST EXECUTABLE STATEMENT  DSORT
   nn = N

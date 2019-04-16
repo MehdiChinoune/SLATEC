@@ -1,6 +1,5 @@
 !** CUNIK
 SUBROUTINE CUNIK(Zr,Fnu,Ikflg,Ipmtr,Tol,Init,Phi,Zeta1,Zeta2,Summ,Cwrk)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to CBESI and CBESK
@@ -38,7 +37,7 @@ SUBROUTINE CUNIK(Zr,Fnu,Ikflg,Ipmtr,Tol,Init,Phi,Zeta1,Zeta2,Summ,Cwrk)
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
 
   COMPLEX cfn, crfn, Cwrk(16), Phi, s, sr, Summ, t, t2, Zeta1, Zeta2, zn, Zr
-  REAL ac, Fnu, rfn, test, Tol, tstr, tsti, R1MACH
+  REAL ac, Fnu, rfn, test, Tol, tstr, tsti
   INTEGER i, Ikflg, Init, Ipmtr, j, k, l
   COMPLEX, PARAMETER :: czero = (0.0E0,0.0E0), cone = (1.0E0,0.0E0)
   COMPLEX, PARAMETER :: con(2) = [ (3.98942280401432678E-01,0.0E0), &

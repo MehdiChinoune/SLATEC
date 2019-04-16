@@ -1,7 +1,6 @@
 !** PJAC
 SUBROUTINE PJAC(Neq,Y,Yh,Nyh,Ewt,Ftem,Savf,Wm,Iwm,F,JAC,Rpar,Ipar)
   USE DEBDF1, ONLY : EL0, H, TN, UROund, IER, MITer, N, NFE, NJE
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to DEBDF
@@ -40,7 +39,7 @@ SUBROUTINE PJAC(Neq,Y,Yh,Nyh,Ewt,Ftem,Savf,Wm,Iwm,F,JAC,Rpar,Ipar)
     meband, ml, ml3, mu
   EXTERNAL :: F, JAC
   REAL Y(*), Yh(Nyh,*), Ewt(*), Ftem(*), Savf(*), Wm(*), con, di, fac, hl0, r, &
-    r0, srur, yi, yj, yjj, VNWRMS
+    r0, srur, yi, yj, yjj
   !-----------------------------------------------------------------------
   ! PJAC IS CALLED BY STOD  TO COMPUTE AND PROCESS THE MATRIX
   ! P = I - H*EL(1)*J, WHERE J IS AN APPROXIMATION TO THE JACOBIAN.

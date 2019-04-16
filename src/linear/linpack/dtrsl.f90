@@ -1,6 +1,5 @@
 !** DTRSL
 SUBROUTINE DTRSL(T,Ldt,N,B,Job,Info)
-  IMPLICIT NONE
   !>
   !***
   !  Solve a system of the form  T*X=B or TRANS(T)*X=B, where
@@ -83,7 +82,7 @@ SUBROUTINE DTRSL(T,Ldt,N,B,Job,Info)
   REAL(8) :: T(Ldt,*), B(*)
   !
   !
-  REAL(8) :: DDOT, temp
+  REAL(8) :: temp
   INTEGER case, j, jj
   !* FIRST EXECUTABLE STATEMENT  DTRSL
   !

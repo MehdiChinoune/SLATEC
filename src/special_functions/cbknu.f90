@@ -1,6 +1,5 @@
 !** CBKNU
 SUBROUTINE CBKNU(Z,Fnu,Kode,N,Y,Nz,Tol,Elim,Alim)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to CAIRY, CBESH, CBESI and CBESK
@@ -25,13 +24,12 @@ SUBROUTINE CBKNU(Z,Fnu,Kode,N,Y,Nz,Tol,Elim,Alim)
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
 
   !
-  INTEGER i, idum, iflag, inu, k, kflag, kk, Kode, koded, &
-    N, Nz, I1MACH, nw, j, ic, inub
+  INTEGER i, idum, iflag, inu, k, kflag, kk, Kode, koded, N, Nz, nw, j, ic, inub
   COMPLEX cch, ck, coef, crsc, cs, cscl, csh, csr(3), css(3), cz, f, fmu, p, &
     pt, p1, p2, q, rz, smu, st, s1, s2, Y(N), Z, zd, celm, cy(2)
   REAL aa, ak, Alim, ascle, a1, a2, bb, bk, bry(3), caz, dnu, dnu2, Elim, &
     etest, fc, fhs, fk, fks, Fnu, g1, g2, p2i, p2m, p2r, rk, s, tm, Tol, &
-    t1, t2, xx, yy, GAMLN, R1MACH, helim, elm, xd, yd, alas, as
+    t1, t2, xx, yy, helim, elm, xd, yd, alas, as
   !
   INTEGER, PARAMETER :: kmax = 30
   REAL, PARAMETER ::  r1 = 2.0E0

@@ -1,6 +1,5 @@
 !** COST
 SUBROUTINE COST(N,X,Wsave)
-  IMPLICIT NONE
   !>
   !***
   !  Compute the cosine transform of a real, even sequence.

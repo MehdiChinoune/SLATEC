@@ -1,6 +1,5 @@
 !** DRC
 REAL(8) FUNCTION DRC(X,Y,Ier)
-  IMPLICIT NONE
   !>
   !***
   !  Calculate a double precision approximation to
@@ -274,7 +273,6 @@ REAL(8) FUNCTION DRC(X,Y,Ier)
 
   CHARACTER(16) :: xern3, xern4, xern5
   INTEGER Ier
-  REAL(8) :: D1MACH
   REAL(8) :: mu, s, sn, X, xn, Y, yn, lamda
   REAL(8), SAVE :: errtol, lolim, uplim
   REAL(8), PARAMETER :: c1 = 1.0D0/7.0D0, c2 = 9.0D0/22.0D0

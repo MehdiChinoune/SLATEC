@@ -1,6 +1,5 @@
 !** DSLI2
 SUBROUTINE DSLI2(N,B,X,Nel,Iel,Jel,El)
-  IMPLICIT NONE
   !>
   !***
   !  SLAP Lower Triangle Matrix Backsolve.

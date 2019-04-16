@@ -1,6 +1,5 @@
 !** CEXPRL
 COMPLEX FUNCTION CEXPRL(Z)
-  IMPLICIT NONE
   !>
   !***
   !  Calculate the relative error exponential (EXP(X)-1)/X.
@@ -34,7 +33,7 @@ COMPLEX FUNCTION CEXPRL(Z)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-  REAL alneps, r, R1MACH, xln, xn
+  REAL alneps, r, xln, xn
   INTEGER i
   COMPLEX Z
   INTEGER, SAVE :: nterms

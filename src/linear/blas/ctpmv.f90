@@ -1,6 +1,5 @@
 !** CTPMV
 SUBROUTINE CTPMV(Uplo,Trans,Diag,N,Ap,X,Incx)
-  IMPLICIT NONE
   !>
   !***
   !  Perform one of the matrix-vector operations.
@@ -119,10 +118,6 @@ SUBROUTINE CTPMV(Uplo,Trans,Diag,N,Ap,X,Incx)
   COMPLEX temp
   INTEGER i, info, ix, j, jx, k, kk, kx
   LOGICAL noconj, nounit
-  !     .. External Functions ..
-  LOGICAL, EXTERNAL :: LSAME
-  !     .. External Subroutines ..
-  EXTERNAL :: XERBLA
   !     .. Intrinsic Functions ..
   INTRINSIC CONJG
   !* FIRST EXECUTABLE STATEMENT  CTPMV

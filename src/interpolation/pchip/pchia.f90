@@ -1,6 +1,5 @@
 !** PCHIA
 REAL FUNCTION PCHIA(N,X,F,D,Incfd,Skip,A,B,Ierr)
-  IMPLICIT NONE
   !>
   !***
   !  Evaluate the definite integral of a piecewise cubic
@@ -130,7 +129,6 @@ REAL FUNCTION PCHIA(N,X,F,D,Incfd,Skip,A,B,Ierr)
   !
   INTEGER i, ia, ib, ierd, il, ir
   REAL value, xa, xb
-  REAL CHFIE, PCHID
   !
   !  INITIALIZE.
   !

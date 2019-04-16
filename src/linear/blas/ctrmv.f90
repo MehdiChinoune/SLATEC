@@ -1,6 +1,5 @@
 !** CTRMV
 SUBROUTINE CTRMV(Uplo,Trans,Diag,N,A,Lda,X,Incx)
-  IMPLICIT NONE
   !>
   !***
   !  Multiply a complex vector by a complex triangular matrix.
@@ -122,10 +121,6 @@ SUBROUTINE CTRMV(Uplo,Trans,Diag,N,A,Lda,X,Incx)
   COMPLEX temp
   INTEGER i, info, ix, j, jx, kx
   LOGICAL noconj, nounit
-  !     .. External Functions ..
-  LOGICAL, EXTERNAL :: LSAME
-  !     .. External Subroutines ..
-  EXTERNAL :: XERBLA
   !     .. Intrinsic Functions ..
   INTRINSIC CONJG, MAX
   !* FIRST EXECUTABLE STATEMENT  CTRMV

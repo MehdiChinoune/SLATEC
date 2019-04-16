@@ -1,6 +1,5 @@
 !** ZACON
 SUBROUTINE ZACON(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Rl,Fnul,Tol,Elim,Alim)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to ZBESH and ZBESK
@@ -38,7 +37,6 @@ SUBROUTINE ZACON(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Rl,Fnul,Tol,Elim,Alim)
     c1i, c1m, c1r, c2i, c2r, Elim, fmr, fn, Fnu, Fnul, pti, ptr, razn, Rl, rzi, &
     rzr, sc1i, sc1r, sc2i, sc2r, sgn, spn, sti, str, s1i, s1r, s2i, s2r, Tol, &
     Yi(N), Yr(N), yy, Zi, zni, znr, Zr
-  REAL(8), EXTERNAL :: D1MACH, ZABS
   REAL(8), PARAMETER :: pi = 3.14159265358979324D0
   REAL(8), PARAMETER :: zeror = 0.0D0, coner = 1.0D0
   !* FIRST EXECUTABLE STATEMENT  ZACON

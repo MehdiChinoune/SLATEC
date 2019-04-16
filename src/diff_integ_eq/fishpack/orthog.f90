@@ -1,7 +1,6 @@
 !** ORTHOG
 SUBROUTINE ORTHOG(Usol,Idmn,Zn,Zm,Pertrb)
   USE SPLPCM
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to SEPELI

@@ -1,6 +1,5 @@
 !** CGEDI
 SUBROUTINE CGEDI(A,Lda,N,Ipvt,Det,Work,Job)
-  IMPLICIT NONE
   !>
   !***
   !  Compute the determinant and inverse of a matrix using the
@@ -84,7 +83,6 @@ SUBROUTINE CGEDI(A,Lda,N,Ipvt,Det,Work,Job)
   COMPLEX t
   REAL ten
   INTEGER i, j, k, kb, kp1, l, nm1
-  REAL, EXTERNAL :: CABS1
   !* FIRST EXECUTABLE STATEMENT  CGEDI
   !
   !     COMPUTE DETERMINANT

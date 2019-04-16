@@ -1,6 +1,5 @@
 !** DHVNRM
 REAL(8) FUNCTION DHVNRM(V,Ncomp)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to DDEABM, DDEBDF and DDERKF

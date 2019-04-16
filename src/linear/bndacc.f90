@@ -1,6 +1,5 @@
 !** BNDACC
 SUBROUTINE BNDACC(G,Mdg,Nb,Ip,Ir,Mt,Jt)
-  IMPLICIT NONE
   !>
   !***
   !  Compute the LU factorization of a banded matrices using

@@ -1,6 +1,5 @@
 !** DSPR
 SUBROUTINE DSPR(Uplo,N,Alpha,X,Incx,Ap)
-  IMPLICIT NONE
   !>
   !***
   !  Perform the symmetric rank 1 operation.
@@ -104,10 +103,6 @@ SUBROUTINE DSPR(Uplo,N,Alpha,X,Incx,Ap)
   !     .. Local Scalars ..
   REAL(8) :: temp
   INTEGER i, info, ix, j, jx, k, kk, kx
-  !     .. External Functions ..
-  LOGICAL, EXTERNAL :: LSAME
-  !     .. External Subroutines ..
-  EXTERNAL :: XERBLA
   !* FIRST EXECUTABLE STATEMENT  DSPR
   !
   !     Test the input parameters.

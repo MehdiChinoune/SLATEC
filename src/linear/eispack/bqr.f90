@@ -1,6 +1,5 @@
 !** BQR
 SUBROUTINE BQR(Nm,N,Mb,A,T,R,Ierr,Nv,Rv)
-  IMPLICIT NONE
   !>
   !***
   !  Compute some of the eigenvalues of a real symmetric
@@ -125,7 +124,6 @@ SUBROUTINE BQR(Nm,N,Mb,A,T,R,Ierr,Nv,Rv)
   INTEGER m1, m2, m3, m4, ni, Nm, Nv, its, kj1, m21, m31, Ierr, imult
   REAL A(Nm,*), Rv(*)
   REAL f, g, q, R, s, T, scalee
-  REAL PYTHAG
   !
   !* FIRST EXECUTABLE STATEMENT  BQR
   Ierr = 0

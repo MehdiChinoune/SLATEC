@@ -1,4 +1,5 @@
 MODULE TEST48_MOD
+  use slatec
   IMPLICIT NONE
 
 CONTAINS
@@ -408,6 +409,7 @@ END MODULE TEST48_MOD
 !** TEST48
 PROGRAM TEST48
   USE TEST48_MOD
+  use slatec
   IMPLICIT NONE
   !>
   !***
@@ -456,8 +458,6 @@ PROGRAM TEST48
   !   891013  DATE WRITTEN
   !   901001  Converted prologue to 4.0 format.  (FNF)
   !   901009  Corrected GAMS classification code.  (FNF)
-
-  INTEGER I1MACH
   INTEGER ipass, kprint, lin, lun, nfail
   !* FIRST EXECUTABLE STATEMENT  TEST48
   lun = I1MACH(2)

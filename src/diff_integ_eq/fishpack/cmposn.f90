@@ -1,6 +1,5 @@
 !** CMPOSN
 SUBROUTINE CMPOSN(M,N,Istag,Mixbnd,A,Bb,C,Q,Idimq,B,B2,B3,W,W2,W3,D,Tcos,P)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to CMGNBN

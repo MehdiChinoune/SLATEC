@@ -1,7 +1,6 @@
 !** SLVS
 SUBROUTINE SLVS(Wm,Iwm,X,Tem)
   USE DEBDF1, ONLY : EL0, H, IER, MITer, N
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to DEBDF

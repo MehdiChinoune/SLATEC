@@ -1,6 +1,5 @@
 !** ISORT
 SUBROUTINE ISORT(Ix,Iy,N,Kflag)
-  IMPLICIT NONE
   !>
   !***
   !  Sort an array and optionally make the same interchanges in
@@ -66,10 +65,7 @@ SUBROUTINE ISORT(Ix,Iy,N,Kflag)
   REAL r
   INTEGER i, ij, j, k, kk, l, m, nn, t, tt, tty, ty
   !     .. Local Arrays ..
-  INTEGER il(21), iu(21)
-  !     .. External Subroutines ..
-  EXTERNAL :: XERMSG
-  !     .. Intrinsic Functions ..
+  INTEGER il(21), iu(21)  !     .. Intrinsic Functions ..
   INTRINSIC ABS, INT
   !* FIRST EXECUTABLE STATEMENT  ISORT
   nn = N

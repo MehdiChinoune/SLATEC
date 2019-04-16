@@ -1,6 +1,5 @@
 !** DSMV
 SUBROUTINE DSMV(N,X,Y,Nelt,Ia,Ja,A,Isym)
-  IMPLICIT NONE
   !>
   !***
   !  SLAP Column Format Sparse Matrix Vector Product.

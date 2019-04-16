@@ -1,6 +1,5 @@
 !** DWNLT1
 SUBROUTINE DWNLT1(I,Lend,Mend,Ir,Mdw,Recalc,Imax,Hbar,H,Scalee,W)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to WNLIT
@@ -31,8 +30,6 @@ SUBROUTINE DWNLT1(I,Lend,Mend,Ir,Mdw,Recalc,Imax,Hbar,H,Scalee,W)
   INTEGER I, Imax, Ir, Lend, Mdw, Mend
   REAL(8) :: H(*), Hbar, Scalee(*), W(Mdw,*)
   LOGICAL Recalc
-  !
-  INTEGER, EXTERNAL :: IDAMAX
   !
   INTEGER j, k
   !

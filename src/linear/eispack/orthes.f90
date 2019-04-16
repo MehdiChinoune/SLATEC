@@ -1,6 +1,5 @@
 !** ORTHES
 SUBROUTINE ORTHES(Nm,N,Low,Igh,A,Ort)
-  IMPLICIT NONE
   !>
   !***
   !  Reduce a real general matrix to upper Hessenberg form

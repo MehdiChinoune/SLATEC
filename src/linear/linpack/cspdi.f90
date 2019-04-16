@@ -1,6 +1,5 @@
 !** CSPDI
 SUBROUTINE CSPDI(Ap,N,Kpvt,Det,Work,Job)
-  IMPLICIT NONE
   !>
   !***
   !  Compute the determinant and inverse of a complex symmetric
@@ -87,12 +86,11 @@ SUBROUTINE CSPDI(Ap,N,Kpvt,Det,Work,Job)
   COMPLEX Ap(*), Work(*), Det(2)
   INTEGER Kpvt(*)
   !
-  COMPLEX ak, akkp1, akp1, CDOTU, d, t, temp
+  COMPLEX ak, akkp1, akp1, d, t, temp
   REAL ten
   INTEGER ij, ik, ikp1, iks, j, jb, jk, jkp1
   INTEGER k, kk, kkp1, km1, ks, ksj, kskp1, kstep
   LOGICAL noinv, nodet
-  REAL, EXTERNAL :: CABS1
   !
   !* FIRST EXECUTABLE STATEMENT  CSPDI
   noinv = MOD(Job,10)==0

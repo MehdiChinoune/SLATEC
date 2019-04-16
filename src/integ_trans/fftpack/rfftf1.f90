@@ -1,6 +1,5 @@
 !** RFFTF1
 SUBROUTINE RFFTF1(N,C,Ch,Wa,Ifac)
-  IMPLICIT NONE
   !>
   !***
   !  Compute the forward transform of a real, periodic sequence.

@@ -1,6 +1,5 @@
 !** EXINT
 SUBROUTINE EXINT(X,N,Kode,M,Tol,En,Nz,Ierr)
-  IMPLICIT NONE
   !>
   !***
   !  Compute an M member sequence of exponential integrals
@@ -106,10 +105,8 @@ SUBROUTINE EXINT(X,N,Kode,M,Tol,En,Nz,Ierr)
   REAL a(99), aa, aams, ah, ak, at, b(99), bk, bt, cc, cnorm, ct, em, &
     emx, En(*), etol, fnm, fx, pt, p1, p2, s, Tol, tx, X, xcut, &
     xlim, xtol, y(2), yt, y1, y2
-  REAL R1MACH, PSIXN
   INTEGER i, ic, icase, ict, Ierr, ik, ind, ix, i1m, jset, k, &
     kk, kn, Kode, ks, M, ml, mu, N, nd, nm, Nz
-  INTEGER I1MACH
   !* FIRST EXECUTABLE STATEMENT  EXINT
   Ierr = 0
   Nz = 0

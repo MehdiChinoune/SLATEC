@@ -1,6 +1,5 @@
 !** DUVEC
 SUBROUTINE DUVEC(X,Y,Yp)
-  IMPLICIT NONE
   !>
   !***
   !  Dummy routine for DBVSUP quick check.

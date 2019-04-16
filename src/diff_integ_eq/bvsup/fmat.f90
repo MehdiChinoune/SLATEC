@@ -1,7 +1,6 @@
 !** FMAT
 SUBROUTINE FMAT(X,Y,Yp)
   USE SAVEX
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to

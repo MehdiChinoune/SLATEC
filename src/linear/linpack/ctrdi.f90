@@ -1,6 +1,5 @@
 !** CTRDI
 SUBROUTINE CTRDI(T,Ldt,N,Det,Job,Info)
-  IMPLICIT NONE
   !>
   !***
   !  Compute the determinant and inverse of a triangular matrix.
@@ -82,7 +81,6 @@ SUBROUTINE CTRDI(T,Ldt,N,Det,Job,Info)
   COMPLEX temp
   REAL ten
   INTEGER i, j, k, kb, km1, kp1
-  REAL, EXTERNAL :: CABS1
   !* FIRST EXECUTABLE STATEMENT  CTRDI
   !
   !        COMPUTE DETERMINANT

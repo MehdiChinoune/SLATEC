@@ -1,7 +1,6 @@
 !** INTYD
 SUBROUTINE INTYD(T,K,Yh,Nyh,Dky,Iflag)
   USE DEBDF1, ONLY : H, HU, TN, UROund, L, N, NQ
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to DEBDF

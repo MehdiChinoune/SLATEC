@@ -1,6 +1,5 @@
 !** SBHIN
 SUBROUTINE SBHIN(N,Nelt,Ia,Ja,A,Isym,Soln,Rhs,Iunit,Job)
-  IMPLICIT NONE
   !>
   !***
   !  Read a Sparse Linear System in the Boeing/Harwell Format.

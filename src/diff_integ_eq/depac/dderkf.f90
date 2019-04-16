@@ -1,7 +1,6 @@
 !** DDERKF
 SUBROUTINE DDERKF(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,&
     Rpar,Ipar)
-  IMPLICIT NONE
   !>
   !***
   !  Solve an initial value problem in ordinary differential

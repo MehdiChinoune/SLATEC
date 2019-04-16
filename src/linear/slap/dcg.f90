@@ -1,7 +1,6 @@
 !** DCG
 SUBROUTINE DCG(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,Iter,&
     Err,Ierr,Iunit,R,Z,P,Dz,Rwork,Iwork)
-  IMPLICIT NONE
   !>
   !***
   !  Preconditioned Conjugate Gradient Sparse Ax=b Solver.
@@ -268,11 +267,6 @@ SUBROUTINE DCG(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,Iter,&
   !     .. Local Scalars ..
   REAL(8) :: ak, akden, bk, bkden, bknum, bnrm, solnrm, tolmin
   INTEGER i, k
-  !     .. External Functions ..
-  REAL(8), EXTERNAL :: D1MACH, DDOT
-  INTEGER, EXTERNAL :: ISDCG
-  !     .. External Subroutines ..
-  EXTERNAL :: DAXPY, DCOPY
   !* FIRST EXECUTABLE STATEMENT  DCG
   !
   !         Check some of the input data.

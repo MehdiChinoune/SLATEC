@@ -1,6 +1,5 @@
 !** SINQF
 SUBROUTINE SINQF(N,X,Wsave)
-  IMPLICIT NONE
   !>
   !***
   !  Compute the forward sine transform with odd wave numbers.

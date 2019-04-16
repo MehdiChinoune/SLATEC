@@ -1,6 +1,5 @@
 !** EFC
 SUBROUTINE EFC(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkpt,Mdein,Mdeout,Coeff,Lw,W)
-  IMPLICIT NONE
   !>
   !***
   !  Fit a piecewise polynomial curve to discrete data.
@@ -216,7 +215,7 @@ SUBROUTINE EFC(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkpt,Mdein,Mdeout,Coeff,Lw,W)
   !   900607  Editorial changes to Prologue to make Prologues for EFC,
   !           DEFC, FC, and DFC look as much the same as possible.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   !
   !      SUBROUTINE           FUNCTION/REMARKS
   !
@@ -241,8 +240,6 @@ SUBROUTINE EFC(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkpt,Mdein,Mdeout,Coeff,Lw,W)
   !
   REAL Bkpt(*), Coeff(*), Sddata(*), W(*), Xdata(*), Ydata(*)
   INTEGER Lw, Mdein, Mdeout, Nbkpt, Ndata, Nord
-  !
-  EXTERNAL :: EFCMN
   !
   INTEGER lbf, lbkpt, lg, lptemp, lww, lxtemp, mdg, mdw
   !

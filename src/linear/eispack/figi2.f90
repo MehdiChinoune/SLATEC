@@ -1,6 +1,5 @@
 !** FIGI2
 SUBROUTINE FIGI2(Nm,N,T,D,E,Z,Ierr)
-  IMPLICIT NONE
   !>
   !***
   !  Transforms certain real non-symmetric tridiagonal matrix

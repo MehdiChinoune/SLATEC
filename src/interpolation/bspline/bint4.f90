@@ -1,6 +1,5 @@
 !** BINT4
 SUBROUTINE BINT4(X,Y,Ndata,Ibcl,Ibcr,Fbcl,Fbcr,Kntopt,T,Bcoef,N,K,W)
-  IMPLICIT NONE
   !>
   !***
   !  Compute the B-representation of a cubic spline
@@ -112,7 +111,6 @@ SUBROUTINE BINT4(X,Y,Ndata,Ibcl,Ibcr,Fbcl,Fbcr,Kntopt,T,Bcoef,N,K,W)
     jw, K, Kntopt, N, Ndata, ndm, np, nwrow
   REAL Bcoef(*), Fbcl, Fbcr, T(*), tol, txn, tx1, vnikx(4,4), W(5,*), wdtol, &
     work(15), X(*), xl, Y(*)
-  REAL R1MACH
   !* FIRST EXECUTABLE STATEMENT  BINT4
   wdtol = R1MACH(4)
   tol = SQRT(wdtol)

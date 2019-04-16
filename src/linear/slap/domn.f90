@@ -1,7 +1,6 @@
 !** DOMN
 SUBROUTINE DOMN(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Nsave,Itol,Tol,&
     Itmax,Iter,Err,Ierr,Iunit,R,Z,P,Ap,Emap,Dz,Csav,Rwork,Iwork)
-  IMPLICIT NONE
   !>
   !***
   !  Preconditioned Orthomin Sparse Iterative Ax=b Solver.
@@ -266,11 +265,6 @@ SUBROUTINE DOMN(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Nsave,Itol,Tol,&
   !     .. Local Scalars ..
   REAL(8) :: ak, akden, aknum, bkl, bnrm, fuzz, solnrm
   INTEGER i, ip, ipo, k, l, lmax
-  !     .. External Functions ..
-  REAL(8), EXTERNAL :: D1MACH, DDOT
-  INTEGER, EXTERNAL :: ISDOMN
-  !     .. External Subroutines ..
-  EXTERNAL :: DAXPY, DCOPY
   !     .. Intrinsic Functions ..
   INTRINSIC ABS, MIN, MOD
   !* FIRST EXECUTABLE STATEMENT  DOMN

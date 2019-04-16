@@ -1,6 +1,5 @@
 !** EZFFTB
 SUBROUTINE EZFFTB(N,R,Azero,A,B,Wsave)
-  IMPLICIT NONE
   !>
   !***
   !  A simplified real, periodic, backward fast Fourier

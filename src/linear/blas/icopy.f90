@@ -1,6 +1,5 @@
 !** ICOPY
 SUBROUTINE ICOPY(N,Ix,Incx,Iy,Incy)
-  IMPLICIT NONE
   !>
   !***
   !  Copy a vector.

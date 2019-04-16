@@ -1,6 +1,5 @@
 !** CDZRO
 SUBROUTINE CDZRO(Ae,F,H,N,Nq,Iroot,Re,T,Yh,Uround,B,C,Fb,Fc,Y)
-  IMPLICIT NONE
   !>
   !***
   !  CDZRO searches for a zero of a function F(N, T, Y, IROOT)

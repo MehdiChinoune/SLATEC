@@ -1,6 +1,5 @@
 !** SVD
 SUBROUTINE SVD(Nm,M,N,A,W,Matu,U,Matv,V,Ierr,Rv1)
-  IMPLICIT NONE
   !>
   !***
   !  Perform the singular value decomposition of a rectangular
@@ -100,7 +99,6 @@ SUBROUTINE SVD(Nm,M,N,A,W,Matu,U,Matv,V,Ierr,Rv1)
   INTEGER i, j, k, l, M, N, ii, i1, kk, k1, ll, l1, mn, Nm, its, Ierr
   REAL A(Nm,*), W(*), U(Nm,*), V(Nm,*), Rv1(*)
   REAL c, f, g, h, s, x, y, z, scalee, s1
-  REAL PYTHAG
   LOGICAL Matu, Matv
   !
   !* FIRST EXECUTABLE STATEMENT  SVD

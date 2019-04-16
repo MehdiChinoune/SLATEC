@@ -1,4 +1,5 @@
 MODULE TEST30_MOD
+  use slatec
   IMPLICIT NONE
 
 CONTAINS
@@ -53,12 +54,6 @@ CONTAINS
     !     .. Local Arrays ..
     REAL adif(52), bc(13), c(4,10), cc(4,4), q(3), qq(77), qsave(2), &
       sv(4), t(17), w(65), x(11), xi(11), y(11)
-    !     .. External Functions ..
-    REAL, EXTERNAL :: BVALU, PPVAL, R1MACH
-    INTEGER, EXTERNAL :: NUMXER
-    !     .. External Subroutines ..
-    EXTERNAL :: BFQAD, BINT4, BINTK, BSPDR, BSPEV, BSPPP, BSPVD, BSPVN, &
-      BSQAD, INTRV, PFQAD, PPQAD, XGETF, XSETF
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, SIN
     !* FIRST EXECUTABLE STATEMENT  BSPCK
@@ -487,6 +482,7 @@ END MODULE TEST30_MOD
 !** TEST30
 PROGRAM TEST30
   USE TEST30_MOD
+  use slatec
   IMPLICIT NONE
   !>
   !***
@@ -538,8 +534,6 @@ PROGRAM TEST30
   !   890618  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900524  Cosmetic changes to code.  (WRB)
-
-  INTEGER I1MACH
   INTEGER ipass, kprint, lin, lun, nfail
   !* FIRST EXECUTABLE STATEMENT  TEST30
   lun = I1MACH(2)

@@ -1,6 +1,5 @@
 !** CQRSL
 SUBROUTINE CQRSL(X,Ldx,N,K,Qraux,Y,Qy,Qty,B,Rsd,Xb,Job,Info)
-  IMPLICIT NONE
   !>
   !***
   !  Apply the output of CQRDC to compute coordinate transfor-
@@ -169,9 +168,8 @@ SUBROUTINE CQRSL(X,Ldx,N,K,Qraux,Y,Qy,Qty,B,Rsd,Xb,Job,Info)
   COMPLEX X(Ldx,*), Qraux(*), Y(*), Qy(*), Qty(*), B(*), Rsd(*), Xb(*)
   !
   INTEGER i, j, jj, ju, kp1
-  COMPLEX CDOTC, t, temp
+  COMPLEX t, temp
   LOGICAL cb, cqy, cqty, cr, cxb
-  REAL, EXTERNAL :: CABS1
   !* FIRST EXECUTABLE STATEMENT  CQRSL
   !
   !     SET INFO FLAG.

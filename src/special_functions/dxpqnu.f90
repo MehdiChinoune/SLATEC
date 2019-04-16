@@ -1,7 +1,6 @@
 !** DXPQNU
 SUBROUTINE DXPQNU(Nu1,Nu2,Mu,Theta,Id,Pqa,Ipqa,Ierror)
   USE DXBLK ,ONLY: NBItsf
-  IMPLICIT NONE
   !>
   !***
   !  To compute the values of Legendre functions for DXLEGF.
@@ -35,7 +34,7 @@ SUBROUTINE DXPQNU(Nu1,Nu2,Mu,Theta,Id,Pqa,Ipqa,Ierror)
 
   INTEGER i, ia, Id, Ierror, if, ipq, ipq1, ipq2, Ipqa(*), ipsik, &
     ipsix, ix1, ixs, j, j0, k, Mu
-  REAL(8) :: a, nu, Nu1, Nu2, pq, Pqa(*), DXPSI, r, Theta, w, x, x1, x2, xs, y, z
+  REAL(8) :: a, nu, Nu1, Nu2, pq, Pqa(*), r, Theta, w, x, x1, x2, xs, y, z
   REAL(8) :: di, dmu, pq1, pq2, factmu, flok
   !
   !        J0, IPSIK, AND IPSIX ARE INITIALIZED IN THIS SUBROUTINE.

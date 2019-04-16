@@ -1,6 +1,5 @@
 !** DFDJC3
 SUBROUTINE DFDJC3(FCN,M,N,X,Fvec,Fjac,Ldfjac,Iflag,Epsfcn,Wa)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to DNLS1 and DNLS1E
@@ -94,7 +93,6 @@ SUBROUTINE DFDJC3(FCN,M,N,X,Fvec,Fjac,Ldfjac,Iflag,Epsfcn,Wa)
   REAL(8) :: X(*), Fvec(*), Fjac(Ldfjac,*), Wa(*)
   INTEGER i, j
   REAL(8) :: eps, epsmch, h, temp
-  REAL(8) :: D1MACH
   REAL(8), PARAMETER :: zero = 0.0D0
   !* FIRST EXECUTABLE STATEMENT  DFDJC3
   epsmch = D1MACH(4)

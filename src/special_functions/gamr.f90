@@ -1,6 +1,5 @@
 !** GAMR
 REAL FUNCTION GAMR(X)
-  IMPLICIT NONE
   !>
   !***
   !  Compute the reciprocal of the Gamma function.

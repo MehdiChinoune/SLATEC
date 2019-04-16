@@ -1,7 +1,6 @@
 !** DMGSBV
 SUBROUTINE DMGSBV(M,N,A,Ia,Niv,Iflag,S,P,Ip,Inhomo,V,W,Wcnd)
   USE DML, ONLY : SRU, EPS, INDpvt, NFCc
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to DBVSUP
@@ -74,7 +73,6 @@ SUBROUTINE DMGSBV(M,N,A,Ia,Niv,Iflag,S,P,Ip,Inhomo,V,W,Wcnd)
   !   910722  Updated AUTHOR section.  (ALS)
 
   !
-  REAL(8) :: DDOT, DPRVEC
   INTEGER i, Ia, Iflag, Inhomo, Ip(*), ip1, ix, iz, j, jk, jp, jq, jy, jz, k, kd, &
     kj, kp, l, lix, lr, M, m2, N, Niv, nivn, nmnr, nn, np1, nr, nrm1
   REAL(8) :: A(Ia,*), dot, P(*), pjp, psave, ry, S(*), sv, t, V(*), vl, vnorm, &

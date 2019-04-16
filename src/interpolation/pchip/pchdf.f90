@@ -1,6 +1,5 @@
 !** PCHDF
 REAL FUNCTION PCHDF(K,X,S,Ierr)
-  IMPLICIT NONE
   !>
   !***
   !  Computes divided differences for PCHCE and PCHSP

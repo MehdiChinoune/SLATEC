@@ -1,6 +1,5 @@
 !** CFFTF
 SUBROUTINE CFFTF(N,C,Wsave)
-  IMPLICIT NONE
   !>
   !***
   !  Compute the forward transform of a complex, periodic

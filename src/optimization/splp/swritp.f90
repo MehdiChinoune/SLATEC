@@ -1,6 +1,5 @@
 !** SWRITP
 SUBROUTINE SWRITP(Ipage,List,Rlist,Lpage,Irec)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to SPLP

@@ -1,6 +1,5 @@
 !** DROTG
 SUBROUTINE DROTG(Da,Db,Dc,Ds)
-  IMPLICIT NONE
   !>
   !***
   !  Construct a plane Givens rotation.

@@ -1,6 +1,5 @@
 !** SNBCO
 SUBROUTINE SNBCO(Abe,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
-  IMPLICIT NONE
   !>
   !***
   !  Factor a band matrix using Gaussian elimination and
@@ -140,8 +139,8 @@ SUBROUTINE SNBCO(Abe,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
   REAL Abe(Lda,*), Z(*)
   REAL Rcond
   !
-  REAL SDOT, ek, t, wk, wkm
-  REAL anorm, s, SASUM, sm, ynorm
+  REAL ek, t, wk, wkm
+  REAL anorm, s, sm, ynorm
   INTEGER i, info, j, ju, k, kb, kp1, l, ldb, lm, lz, m, ml1, mm, nl, nu
   !* FIRST EXECUTABLE STATEMENT  SNBCO
   ml1 = Ml + 1

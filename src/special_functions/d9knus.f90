@@ -1,6 +1,5 @@
 !** D9KNUS
 SUBROUTINE D9KNUS(Xnu,X,Bknu,Bknu1,Iswtch)
-  IMPLICIT NONE
   !>
   !***
   !  Compute Bessel functions EXP(X)*K-SUB-XNU(X) and EXP(X)*
@@ -54,8 +53,6 @@ SUBROUTINE D9KNUS(Xnu,X,Bknu,Bknu1,Iswtch)
   REAL(8) :: Xnu, X, Bknu, Bknu1, alpha(32), beta(32), a(32), alnz, a0, &
     bknud, bknu0, b0, c0, expx, p1, p2, p3, qq, result, sqrtx, v, &
     vlnz, xi, xmu, x2n, x2tov, z, ztov
-  INTEGER, EXTERNAL :: INITDS
-  REAL(8), EXTERNAL :: D1MACH, DCSEVL
   INTEGER, SAVE :: ntc0k, ntznu1
   REAL(8), SAVE :: xnusml, xsml, alnsml, alnbig
   REAL, SAVE :: alneps

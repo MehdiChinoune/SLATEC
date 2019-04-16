@@ -1,6 +1,5 @@
 !** CHISL
 SUBROUTINE CHISL(A,Lda,N,Kpvt,B)
-  IMPLICIT NONE
   !>
   !***
   !  Solve the complex Hermitian system using factors obtained
@@ -76,7 +75,7 @@ SUBROUTINE CHISL(A,Lda,N,Kpvt,B)
   INTEGER Lda, N, Kpvt(*)
   COMPLEX A(Lda,*), B(*)
   !
-  COMPLEX ak, akm1, bk, bkm1, CDOTC, denom, temp
+  COMPLEX ak, akm1, bk, bkm1, denom, temp
   INTEGER k, kp
   !
   !     LOOP BACKWARD APPLYING THE TRANSFORMATIONS AND

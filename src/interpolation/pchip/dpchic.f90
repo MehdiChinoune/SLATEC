@@ -1,6 +1,5 @@
 !** DPCHIC
 SUBROUTINE DPCHIC(Ic,Vc,Switch,N,X,F,D,Incfd,Wk,Nwk,Ierr)
-  IMPLICIT NONE
   !>
   !***
   !  Set derivatives needed to determine a piecewise monotone

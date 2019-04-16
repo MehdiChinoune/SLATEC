@@ -1,6 +1,5 @@
 !** BESY
 SUBROUTINE BESY(X,Fnu,N,Y)
-  IMPLICIT NONE
   !>
   !***
   !  Implement forward recursion on the three term recursion
@@ -79,9 +78,6 @@ SUBROUTINE BESY(X,Fnu,N,Y)
   INTEGER i, iflw, j, N, nb, nd, nn, nud
   REAL azn, cn, dnu, elim, flgjy, fn, Fnu, rann, s, s1, s2, tm, &
     trx, w(2), wk(7), w2n, X, xlim, xxn, Y(*)
-  INTEGER, EXTERNAL :: I1MACH
-  REAL, EXTERNAL :: BESY0, BESY1, R1MACH
-  EXTERNAL :: YAIRY
   INTEGER, PARAMETER :: nulim(2) = [ 70, 100 ]
   !* FIRST EXECUTABLE STATEMENT  BESY
   nn = -I1MACH(12)

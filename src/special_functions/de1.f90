@@ -1,6 +1,5 @@
 !** DE1
 REAL(8) FUNCTION DE1(X)
-  IMPLICIT NONE
   !>
   !***
   !  Compute the exponential integral E1(X).
@@ -91,8 +90,7 @@ REAL(8) FUNCTION DE1(X)
   !   920618  Removed space from variable names.  (RWC, WRB)
 
   REAL eta
-  INTEGER INITDS
-  REAL(8) :: X, xmaxt, D1MACH, DCSEVL
+  REAL(8) :: X, xmaxt
   INTEGER, SAVE :: ntae10, ntae11, ntae12, nte11, nte12, ntae13, ntae14
   REAL(8), SAVE :: xmax
   REAL(8), PARAMETER :: ae10cs(50)  = [ +.3284394579616699087873844201881D-1, &

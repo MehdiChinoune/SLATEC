@@ -1,6 +1,5 @@
 !** DS2Y
 SUBROUTINE DS2Y(N,Nelt,Ia,Ja,A,Isym)
-  IMPLICIT NONE
   !>
   !***
   !  SLAP Triad to SLAP Column Format Converter.
@@ -142,8 +141,6 @@ SUBROUTINE DS2Y(N,Nelt,Ia,Ja,A,Isym)
   !     .. Local Scalars ..
   REAL(8) :: temp
   INTEGER i, ibgn, icol, iend, itemp, j
-  !     .. External Subroutines ..
-  EXTERNAL :: QS2I1D
   !* FIRST EXECUTABLE STATEMENT  DS2Y
   !
   !         Check to see if the (IA,JA,A) arrays are in SLAP Column

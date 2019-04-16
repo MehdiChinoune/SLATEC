@@ -1,6 +1,5 @@
 !** STOUT
 SUBROUTINE STOUT(N,Nelt,Ia,Ja,A,Isym,Soln,Rhs,Iunit,Job)
-  IMPLICIT NONE
   !>
   !***
   !  Write out SLAP Triad Format Linear System.

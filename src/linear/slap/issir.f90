@@ -2,7 +2,6 @@
 INTEGER FUNCTION ISSIR(N,B,X,Nelt,Ia,Ja,A,Isym,MSOLVE,Itol,Tol,Itmax,Iter,&
     Err,Ierr,Iunit,R,Z,Dz,Rwork,Iwork,Bnrm,Solnrm)
   USE SSLBLK
-  IMPLICIT NONE
   !>
   !***
   !  Preconditioned Iterative Refinement Stop Test.
@@ -175,8 +174,6 @@ INTEGER FUNCTION ISSIR(N,B,X,Nelt,Ia,Ja,A,Isym,MSOLVE,Itol,Tol,Itmax,Iter,&
   EXTERNAL :: MSOLVE
   !     .. Local Scalars ..
   INTEGER i
-  !     .. External Functions ..
-  REAL, EXTERNAL :: R1MACH, SNRM2
   !* FIRST EXECUTABLE STATEMENT  ISSIR
   ISSIR = 0
   IF ( Itol==1 ) THEN

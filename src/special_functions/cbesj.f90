@@ -1,6 +1,5 @@
 !** CBESJ
 SUBROUTINE CBESJ(Z,Fnu,Kode,N,Cy,Nz,Ierr)
-  IMPLICIT NONE
   !>
   !***
   !  Compute a sequence of the Bessel functions J(a,z) for
@@ -159,10 +158,10 @@ SUBROUTINE CBESJ(Z,Fnu,Kode,N,Cy,Nz,Ierr)
   !   920811  Prologue revised.  (DWL)
 
   !
-  INTEGER i, Ierr, inu, inuh, ir, Kode, k1, k2, N, nl, Nz, I1MACH, k
+  INTEGER i, Ierr, inu, inuh, ir, Kode, k1, k2, N, nl, Nz, k
   COMPLEX ci, csgn, Cy(N), Z, zn
   REAL aa, alim, arg, dig, elim, Fnu, fnul, rl, r1, r1m5, &
-    r2, tol, yy, R1MACH, az, fn, bb, ascle, rtol, atol
+    r2, tol, yy, az, fn, bb, ascle, rtol, atol
   REAL, PARAMETER :: hpi = 1.57079632679489662E0
   !
   !* FIRST EXECUTABLE STATEMENT  CBESJ

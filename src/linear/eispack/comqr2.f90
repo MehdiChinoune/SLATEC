@@ -1,6 +1,5 @@
 !** COMQR2
 SUBROUTINE COMQR2(Nm,N,Low,Igh,Ortr,Orti,Hr,Hi,Wr,Wi,Zr,Zi,Ierr)
-  IMPLICIT NONE
   !>
   !***
   !  Compute the eigenvalues and eigenvectors of a complex upper
@@ -117,7 +116,6 @@ SUBROUTINE COMQR2(Nm,N,Low,Igh,Ortr,Orti,Hr,Hi,Wr,Wi,Zr,Zi,Ierr)
   REAL Hr(Nm,*), Hi(Nm,*), Wr(*), Wi(*), Zr(Nm,*), Zi(Nm,*)
   REAL Ortr(*), Orti(*)
   REAL si, sr, ti, tr, xi, xr, yi, yr, zzi, zzr, norm, s1, s2
-  REAL PYTHAG
   !
   !* FIRST EXECUTABLE STATEMENT  COMQR2
   Ierr = 0

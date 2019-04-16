@@ -1,6 +1,5 @@
 !** BI
 REAL FUNCTION BI(X)
-  IMPLICIT NONE
   !>
   !***
   !  Evaluate the Bairy function (the Airy function of the
@@ -59,8 +58,7 @@ REAL FUNCTION BI(X)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
 
-  REAL BIE, CSEVL, eta, R1MACH, theta, X, xm, z
-  INTEGER INITS
+  REAL eta, theta, X, xm, z
   INTEGER, SAVE :: nbif, nbig, nbif2, nbig2
   REAL, SAVE :: x3sml, xmax
   REAL, PARAMETER :: bifcs(9) = [ -.01673021647198664948E0, .1025233583424944561E0, &
@@ -105,8 +103,7 @@ REAL FUNCTION BI(X)
     !
   ELSEIF ( X>2.0 ) THEN
     !
-    IF ( X>xmax ) CALL XERMSG('SLATEC','BI','X SO BIG THAT BI OVERFLOWS',1,&
-      2)
+    IF ( X>xmax ) CALL XERMSG('SLATEC','BI','X SO BIG THAT BI OVERFLOWS',1,2)
     !
     BI = BIE(X)*EXP(2.0*X*SQRT(X)/3.0)
     RETURN

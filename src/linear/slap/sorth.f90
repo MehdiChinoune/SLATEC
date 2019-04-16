@@ -1,6 +1,5 @@
 !** SORTH
 SUBROUTINE SORTH(Vnew,V,Hes,N,Ll,Ldhes,Kmp,Snormw)
-  IMPLICIT NONE
   !>
   !***
   !  Internal routine for SGMRES.
@@ -86,10 +85,6 @@ SUBROUTINE SORTH(Vnew,V,Hes,N,Ll,Ldhes,Kmp,Snormw)
   !     .. Local Scalars ..
   REAL arg, sumdsq, tem, vnrm
   INTEGER i, i0
-  !     .. External Functions ..
-  REAL, EXTERNAL :: SDOT, SNRM2
-  !     .. External Subroutines ..
-  EXTERNAL :: SAXPY
   !     .. Intrinsic Functions ..
   INTRINSIC MAX, SQRT
   !* FIRST EXECUTABLE STATEMENT  SORTH

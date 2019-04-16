@@ -1,7 +1,6 @@
 !** BVDER
 SUBROUTINE BVDER(X,Y,Yp,G,Ipar)
   USE ML, ONLY : NOFst, C, XSAv, IGOfx, INHomo, IVP, NCOmp, NFC
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to BVSUP

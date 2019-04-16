@@ -1,6 +1,5 @@
 !** D9B0MP
 SUBROUTINE D9B0MP(X,Ampl,Theta)
-  IMPLICIT NONE
   !>
   !***
   !  Evaluate the modulus and phase for the J0 and Y0 Bessel
@@ -59,8 +58,7 @@ SUBROUTINE D9B0MP(X,Ampl,Theta)
   !   920618  Removed space from variable names.  (RWC, WRB)
 
   REAL eta
-  INTEGER INITDS
-  REAL(8) :: X, Ampl, Theta, z, D1MACH, DCSEVL
+  REAL(8) :: X, Ampl, Theta, z
   INTEGER, SAVE :: nbm0, nbt02, nbm02, nbth0
   REAL(8), SAVE :: xmax
   REAL(8), PARAMETER :: bm0cs(37) = [ +.9211656246827742712573767730182D-1, &

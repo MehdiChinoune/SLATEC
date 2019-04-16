@@ -1,6 +1,5 @@
 !** DPOSL
 SUBROUTINE DPOSL(A,Lda,N,B)
-  IMPLICIT NONE
   !>
   !***
   !  Solve the real symmetric positive definite linear system
@@ -70,11 +69,11 @@ SUBROUTINE DPOSL(A,Lda,N,B)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   INTEGER Lda, N
   REAL(8) :: A(Lda,*), B(*)
   !
-  REAL(8) :: DDOT, t
+  REAL(8) :: t
   INTEGER k, kb
   !
   !     SOLVE TRANS(R)*Y = B

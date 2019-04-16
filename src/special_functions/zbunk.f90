@@ -1,6 +1,5 @@
 !** ZBUNK
 SUBROUTINE ZBUNK(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Tol,Elim,Alim)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to ZBESH and ZBESK

@@ -1,6 +1,5 @@
 !** CNBDI
 SUBROUTINE CNBDI(Abe,Lda,N,Ml,Mu,Ipvt,Det)
-  IMPLICIT NONE
   !>
   !***
   !  Compute the determinant of a band matrix using the factors
@@ -63,13 +62,12 @@ SUBROUTINE CNBDI(Abe,Lda,N,Ml,Mu,Ipvt,Det)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   INTEGER Lda, N, Ml, Mu, Ipvt(*)
   COMPLEX Abe(Lda,*), Det(2)
   !
   REAL ten
   INTEGER i
-  REAL CABS1
   !
   !* FIRST EXECUTABLE STATEMENT  CNBDI
   Det(1) = (1.0E0,0.0E0)

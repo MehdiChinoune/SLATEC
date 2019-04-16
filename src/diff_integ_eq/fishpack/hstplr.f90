@@ -1,7 +1,6 @@
 !** HSTPLR
 SUBROUTINE HSTPLR(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
     Idimf,Pertrb,Ierror,W)
-  IMPLICIT NONE
   !>
   !***
   !  Solve the standard five-point finite difference

@@ -1,7 +1,6 @@
 !** DX
 SUBROUTINE DX(U,Idmn,I,J,Uxxx,Uxxxx)
   USE SPLPCM
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to SEPELI

@@ -1,6 +1,5 @@
 !** PCHKT
 SUBROUTINE PCHKT(N,X,Knotyp,T)
-  IMPLICIT NONE
   !>
   !***
   !  Compute B-spline knot sequence for PCHBS.

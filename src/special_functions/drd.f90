@@ -1,6 +1,5 @@
 !** DRD
 REAL(8) FUNCTION DRD(X,Y,Z,Ier)
-  IMPLICIT NONE
   !>
   !***
   !  Compute the incomplete or complete elliptic integral of
@@ -322,7 +321,7 @@ REAL(8) FUNCTION DRD(X,Y,Z,Ier)
 
   CHARACTER(16) :: xern3, xern4, xern5, xern6
   INTEGER Ier
-  REAL(8) :: tuplim, epslon, D1MACH, ea, eb, ec, ed, ef, lamda, mu, power4, &
+  REAL(8) :: tuplim, epslon, ea, eb, ec, ed, ef, lamda, mu, power4, &
     sigma, s1, s2, X, xn, xndev, xnroot, Y, yn, yndev, ynroot, Z, zn, zndev, znroot
   REAL(8), SAVE :: errtol, lolim, uplim
   REAL(8), PARAMETER :: c1 = 3.0D0/14.0D0, c2 = 1.0D0/6.0D0, c3 = 9.0D0/22.0D0, &

@@ -1,6 +1,5 @@
 !** DGER
 SUBROUTINE DGER(M,N,Alpha,X,Incx,Y,Incy,A,Lda)
-  IMPLICIT NONE
   !>
   !***
   !  Perform the rank 1 operation.
@@ -100,8 +99,7 @@ SUBROUTINE DGER(M,N,Alpha,X,Incx,Y,Incy,A,Lda)
   !     .. Local Scalars ..
   REAL(8) :: temp
   INTEGER i, info, ix, j, jy, kx
-  !     .. External Subroutines ..
-  EXTERNAL :: XERBLA
+
   !     .. Intrinsic Functions ..
   INTRINSIC MAX
   !* FIRST EXECUTABLE STATEMENT  DGER

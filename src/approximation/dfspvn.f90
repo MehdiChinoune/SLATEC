@@ -1,6 +1,5 @@
 !** DFSPVN
 SUBROUTINE DFSPVN(T,Jhigh,Indexx,X,Ileft,Vnikx)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to DFC

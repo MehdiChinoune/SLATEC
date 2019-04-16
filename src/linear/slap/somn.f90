@@ -1,7 +1,6 @@
 !** SOMN
 SUBROUTINE SOMN(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Nsave,Itol,Tol,&
     Itmax,Iter,Err,Ierr,Iunit,R,Z,P,Ap,Emap,Dz,Csav,Rwork,Iwork)
-  IMPLICIT NONE
   !>
   !***
   !  Preconditioned Orthomin Sparse Iterative Ax=b Solver.
@@ -265,11 +264,6 @@ SUBROUTINE SOMN(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Nsave,Itol,Tol,&
   !     .. Local Scalars ..
   REAL ak, akden, aknum, bkl, bnrm, fuzz, solnrm
   INTEGER i, ip, ipo, k, l, lmax
-  !     .. External Functions ..
-  REAL, EXTERNAL :: R1MACH, SDOT
-  INTEGER, EXTERNAL :: ISSOMN
-  !     .. External Subroutines ..
-  EXTERNAL :: SAXPY, SCOPY
   !     .. Intrinsic Functions ..
   INTRINSIC ABS, MIN, MOD
   !* FIRST EXECUTABLE STATEMENT  SOMN

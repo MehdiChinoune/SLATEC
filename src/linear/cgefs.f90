@@ -1,6 +1,5 @@
 !** CGEFS
 SUBROUTINE CGEFS(A,Lda,N,V,Itask,Ind,Work,Iwork)
-  IMPLICIT NONE
   !>
   !***
   !  Solve a general system of linear equations.
@@ -116,7 +115,6 @@ SUBROUTINE CGEFS(A,Lda,N,V,Itask,Ind,Work,Iwork)
   !
   INTEGER Lda, N, Itask, Ind, Iwork(*)
   COMPLEX A(Lda,*), V(*), Work(*)
-  REAL R1MACH
   REAL rcond
   CHARACTER(8) :: xern1, xern2
   !* FIRST EXECUTABLE STATEMENT  CGEFS

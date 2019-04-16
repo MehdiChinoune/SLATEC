@@ -1,6 +1,5 @@
 !** PCHCE
 SUBROUTINE PCHCE(Ic,Vc,N,X,H,Slope,D,Incfd,Ierr)
-  IMPLICIT NONE
   !>
   !***
   !  Set boundary conditions for PCHIC
@@ -124,7 +123,6 @@ SUBROUTINE PCHCE(Ic,Vc,N,X,H,Slope,D,Incfd,Ierr)
   !
   INTEGER ibeg, iend, ierf, indexx, j, k
   REAL stemp(3), xtemp(4)
-  REAL PCHDF, PCHST
   !
   !  INITIALIZE.
   !

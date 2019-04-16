@@ -1,6 +1,5 @@
 !** PPQAD
 SUBROUTINE PPQAD(Ldc,C,Xi,Lxi,K,X1,X2,Pquad)
-  IMPLICIT NONE
   !>
   !***
   !  Compute the integral on (X1,X2) of a K-th order B-spline

@@ -1,6 +1,5 @@
 !** ELTRAN
 SUBROUTINE ELTRAN(Nm,N,Low,Igh,A,Intt,Z)
-  IMPLICIT NONE
   !>
   !***
   !  Accumulates the stabilized elementary similarity

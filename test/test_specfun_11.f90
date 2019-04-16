@@ -1,4 +1,5 @@
 MODULE TEST12_MOD
+  use slatec
   IMPLICIT NONE
 
 CONTAINS
@@ -34,9 +35,9 @@ CONTAINS
     !   901106  Changed all specific intrinsics to generic.  (WRB)
     !   910104  Changed to print variable number of decimals. (DWL and JMS)
 
-    INTEGER i, I1MACH, ic1(10), ic2(10), id, ierr, ierror, ip(10), ipn(10), &
+    INTEGER i, ic1(10), ic2(10), id, ierr, ierror, ip(10), ipn(10), &
       iq(10), ir(10), irad, isig, isum, ix11, ix12, ix13, ix21, ix22, ix23
-    INTEGER mu, mu1, mu2, n, nbits, ndec, nerr, nradpl, nu1, nudiff, NUMXER
+    INTEGER mu, mu1, mu2, n, nbits, ndec, nerr, nradpl, nu1, nudiff
     CHARACTER(34) :: fmt, fmtf, fmti
     INTEGER Lun, Kprint, Ipass
     REAL(8) :: p(10), q(10), r(10), c1(10), c2(10), pn(10)
@@ -551,6 +552,7 @@ END MODULE TEST12_MOD
 !** TEST12
 PROGRAM TEST12
   USE TEST12_MOD
+  use slatec
   IMPLICIT NONE
   !>
   !***
@@ -597,8 +599,6 @@ PROGRAM TEST12
 
   !* REVISION HISTORY  (YYMMDD)
   !   901204  DATE WRITTEN
-
-  INTEGER I1MACH
   INTEGER ipass, kprint, lin, lun, nfail
   !* FIRST EXECUTABLE STATEMENT  TEST12
   lun = I1MACH(2)

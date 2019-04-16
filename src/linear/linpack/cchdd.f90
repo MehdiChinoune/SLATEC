@@ -1,6 +1,5 @@
 !** CCHDD
 SUBROUTINE CCHDD(R,Ldr,P,X,Z,Ldz,Nz,Y,Rho,C,S,Info)
-  IMPLICIT NONE
   !>
   !***
   !  Downdate an augmented Cholesky decomposition or the
@@ -143,8 +142,8 @@ SUBROUTINE CCHDD(R,Ldr,P,X,Z,Ldz,Nz,Y,Rho,C,S,Info)
   REAL Rho(*), C(*)
   !
   INTEGER i, ii, j
-  REAL a, alpha, azeta, norm, SCNRM2
-  COMPLEX CDOTC, t, zeta, b, xx
+  REAL a, alpha, azeta, norm
+  COMPLEX t, zeta, b, xx
   !
   !     SOLVE THE SYSTEM CTRANS(R)*A = X, PLACING THE RESULT
   !     IN THE ARRAY S.

@@ -1,6 +1,5 @@
 !** DNBSL
 SUBROUTINE DNBSL(Abe,Lda,N,Ml,Mu,Ipvt,B,Job)
-  IMPLICIT NONE
   !>
   !***
   !  Solve a real band system using the factors computed by
@@ -89,7 +88,7 @@ SUBROUTINE DNBSL(Abe,Lda,N,Ml,Mu,Ipvt,B,Job)
   INTEGER Lda, N, Ml, Mu, Ipvt(*), Job
   REAL(8) :: Abe(Lda,*), B(*)
   !
-  REAL(8) :: DDOT, t
+  REAL(8) :: t
   INTEGER k, kb, l, lb, ldb, lm, m, mlm, nm1
   !* FIRST EXECUTABLE STATEMENT  DNBSL
   m = Mu + Ml + 1

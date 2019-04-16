@@ -1,6 +1,5 @@
 !** XERDMP
 SUBROUTINE XERDMP
-  IMPLICIT NONE
   !>
   !***
   !  Print the error tables and then clear them.

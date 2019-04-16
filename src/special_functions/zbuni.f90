@@ -1,6 +1,5 @@
 !** ZBUNI
 SUBROUTINE ZBUNI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Nui,Nlast,Fnul,Tol,Elim,Alim)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to ZBESI and ZBESK
@@ -33,7 +32,6 @@ SUBROUTINE ZBUNI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Nui,Nlast,Fnul,Tol,Elim,Alim)
   REAL(8) :: Alim, ax, ay, csclr, cscrr, cyi(2), cyr(2), dfnu, &
     Elim, Fnu, fnui, Fnul, gnu, raz, rzi, rzr, sti, &
     str, s1i, s1r, s2i, s2r, Tol, Yi(N), Yr(N), Zi, Zr, ascle, bry(3), c1r, c1i, c1m
-  REAL(8), EXTERNAL :: ZABS, D1MACH
   !* FIRST EXECUTABLE STATEMENT  ZBUNI
   Nz = 0
   ax = ABS(Zr)*1.7321D0

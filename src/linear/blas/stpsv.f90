@@ -1,6 +1,5 @@
 !** STPSV
 SUBROUTINE STPSV(Uplo,Trans,Diag,N,Ap,X,Incx)
-  IMPLICIT NONE
   !>
   !***
   !  Solve one of the systems of equations.
@@ -122,10 +121,6 @@ SUBROUTINE STPSV(Uplo,Trans,Diag,N,Ap,X,Incx)
   REAL temp
   INTEGER i, info, ix, j, jx, k, kk, kx
   LOGICAL nounit
-  !     .. External Functions ..
-  LOGICAL, EXTERNAL :: LSAME
-  !     .. External Subroutines ..
-  EXTERNAL :: XERBLA
   !* FIRST EXECUTABLE STATEMENT  STPSV
   !
   !     Test the input parameters.

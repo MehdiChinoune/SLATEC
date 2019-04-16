@@ -1,6 +1,5 @@
 !** DBESK0
 REAL(8) FUNCTION DBESK0(X)
-  IMPLICIT NONE
   !>
   !***
   !  Compute the modified (hyperbolic) Bessel function of the
@@ -43,8 +42,7 @@ REAL(8) FUNCTION DBESK0(X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
 
-  INTEGER INITDS
-  REAL(8) :: X, xmaxt, y, D1MACH, DCSEVL, DBESI0, DBSK0E
+  REAL(8) :: X, xmaxt, y
   INTEGER, SAVE :: ntk0
   REAL(8), SAVE :: xsml, xmax
   REAL(8), PARAMETER :: bk0cs(16) = [ -.353273932339027687201140060063153D-1, &

@@ -1,6 +1,5 @@
 !** SS2LT
 SUBROUTINE SS2LT(N,Nelt,Ia,Ja,A,Isym,Nel,Iel,Jel,El)
-  IMPLICIT NONE
   !>
   !***
   !  Lower Triangle Preconditioner SLAP Set Up.

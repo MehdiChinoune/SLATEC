@@ -1,6 +1,5 @@
 !** R9GMIC
 REAL FUNCTION R9GMIC(A,X,Alx)
-  IMPLICIT NONE
   !>
   !***
   !  Compute the complementary incomplete Gamma function for A
@@ -35,7 +34,7 @@ REAL FUNCTION R9GMIC(A,X,Alx)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
 
-  REAL A, alng, Alx, fk, fkp1, fm, R1MACH, s, sgng, t, te, X
+  REAL A, alng, Alx, fk, fkp1, fm, s, sgng, t, te, X
   INTEGER k, m, ma, mm1
   REAL, PARAMETER :: euler = .5772156649015329E0
   REAL :: eps = 0., bot = 0.

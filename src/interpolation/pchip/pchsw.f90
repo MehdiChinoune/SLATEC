@@ -1,6 +1,5 @@
 !** PCHSW
 SUBROUTINE PCHSW(Dfmax,Iextrm,D1,D2,H,Slope,Ierr)
-  IMPLICIT NONE
   !>
   !***
   !  Limits excursion from data for PCHCS
@@ -87,7 +86,6 @@ SUBROUTINE PCHSW(Dfmax,Iextrm,D1,D2,H,Slope,Ierr)
   !  DECLARE LOCAL VARIABLES.
   !
   REAL cp, hphi, lambda, nu, phi, radcal, rho, sigma, small, that
-  REAL R1MACH
   !
   REAL, PARAMETER :: zero = 0., one = 1., two = 2., three = 3., fact = 100.
   !        THIRD SHOULD BE SLIGHTLY LESS THAN 1/3.

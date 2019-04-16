@@ -4,7 +4,6 @@ SUBROUTINE DDSTP(Eps,F,FA,Hmax,Impl,Ierror,JACOBN,Matdim,Maxord,Mint,&
     Jtask,Mntold,Mtrold,Nfe,Nje,Nqused,Nstep,T,Y,Yh,A,Convrg,&
     Dfdy,El,Fac,Hold,Ipvt,Jstate,Jstepl,Nq,Nwait,Rc,Rmax,&
     Save1,Save2,Tq,Trend,Iswflg,Mtrsv,Mxrdsv)
-  IMPLICIT NONE
   !>
   !***
   !  DDSTP performs one step of the integration of an initial
@@ -85,7 +84,6 @@ SUBROUTINE DDSTP(Eps,F,FA,Hmax,Impl,Ierror,JACOBN,Matdim,Maxord,Mint,&
     numer, Rc, rh, rh1, rh2, rh3, Rmax, Save1(*), Save2(*), T, told, &
     Tq(3,12), Trend, Uround, Y(*), Yh(N,*), Ywt(*), y0nrm
   LOGICAL Convrg, evalfa, evaljc, switch
-  REAL(8), EXTERNAL :: DNRM2
   INTEGER, PARAMETER :: MXFAIL = 3, MXITER = 3, MXTRY = 50
   REAL(8), PARAMETER :: BIAS1 = 1.3D0, BIAS2 = 1.2D0, BIAS3 = 1.4D0, RCTEST = 0.3D0, &
     RMFAIL = 2.D0, RMNORM = 10.D0, TRSHLD = 1.D0

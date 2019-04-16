@@ -1,6 +1,5 @@
 !** SGESL
 SUBROUTINE SGESL(A,Lda,N,Ipvt,B,Job)
-  IMPLICIT NONE
   !>
   !***
   !  Solve the real system A*X=B or TRANS(A)*X=B using the
@@ -83,7 +82,7 @@ SUBROUTINE SGESL(A,Lda,N,Ipvt,B,Job)
   INTEGER Lda, N, Ipvt(*), Job
   REAL A(Lda,*), B(*)
   !
-  REAL SDOT, t
+  REAL t
   INTEGER k, kb, l, nm1
   !* FIRST EXECUTABLE STATEMENT  SGESL
   nm1 = N - 1

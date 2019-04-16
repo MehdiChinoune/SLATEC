@@ -1,6 +1,5 @@
 !** BNSLV
 SUBROUTINE BNSLV(W,Nroww,Nrow,Nbandl,Nbandu,B)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to BINT4 and BINTK

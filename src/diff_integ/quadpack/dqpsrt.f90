@@ -1,6 +1,5 @@
 !** DQPSRT
 SUBROUTINE DQPSRT(Limit,Last,Maxerr,Ermax,Elist,Iord,Nrmax)
-  IMPLICIT NONE
   !>
   !***
   !  This routine maintains the descending ordering in the

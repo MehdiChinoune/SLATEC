@@ -1,6 +1,5 @@
 !** CTRSV
 SUBROUTINE CTRSV(Uplo,Trans,Diag,N,A,Lda,X,Incx)
-  IMPLICIT NONE
   !>
   !***
   !  Solve a complex triangular system of equations.
@@ -125,10 +124,6 @@ SUBROUTINE CTRSV(Uplo,Trans,Diag,N,A,Lda,X,Incx)
   COMPLEX temp
   INTEGER i, info, ix, j, jx, kx
   LOGICAL noconj, nounit
-  !     .. External Functions ..
-  LOGICAL, EXTERNAL :: LSAME
-  !     .. External Subroutines ..
-  EXTERNAL :: XERBLA
   !     .. Intrinsic Functions ..
   INTRINSIC CONJG, MAX
   !* FIRST EXECUTABLE STATEMENT  CTRSV

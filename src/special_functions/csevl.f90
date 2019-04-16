@@ -1,6 +1,5 @@
 !** CSEVL
 REAL FUNCTION CSEVL(X,Cs,N)
-  IMPLICIT NONE
   !>
   !***
   !  Evaluate a Chebyshev series.
@@ -46,7 +45,6 @@ REAL FUNCTION CSEVL(X,Cs,N)
   !           X to be slightly outside interval (-1,+1).  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
-  REAL R1MACH
   INTEGER i, N, ni
   REAL b0, b1, b2, Cs(*), twox, X
   REAL, SAVE :: onepl

@@ -1,7 +1,6 @@
 !** SSLUBC
 SUBROUTINE SSLUBC(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
     Iunit,Rwork,Lenw,Iwork,Leniw)
-  IMPLICIT NONE
   !>
   !***
   !  Incomplete LU BiConjugate Gradient Sparse Ax=b Solver.
@@ -247,8 +246,6 @@ SUBROUTINE SSLUBC(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
   INTEGER icol, j, jbgn, jend, locdin, locdz, locil, lociu, lociw, &
     locjl, locju, locl, locnc, locnr, locp, locpp, locr, &
     locrr, locu, locw, locz, loczz, nl, nu
-  !     .. External Subroutines ..
-  EXTERNAL :: SBCG, SCHKW, SS2Y, SSILUS, SSLUI, SSLUTI, SSMTV, SSMV
   !* FIRST EXECUTABLE STATEMENT  SSLUBC
   !
   Ierr = 0

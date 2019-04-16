@@ -2,7 +2,6 @@
 INTEGER FUNCTION ISDIR(N,B,X,Nelt,Ia,Ja,A,Isym,MSOLVE,Itol,Tol,Itmax,Iter,&
     Err,Ierr,Iunit,R,Z,Dz,Rwork,Iwork,Bnrm,Solnrm)
   USE DSLBLK
-  IMPLICIT NONE
   !>
   !***
   !  Preconditioned Iterative Refinement Stop Test.
@@ -176,8 +175,6 @@ INTEGER FUNCTION ISDIR(N,B,X,Nelt,Ia,Ja,A,Isym,MSOLVE,Itol,Tol,Itmax,Iter,&
   EXTERNAL :: MSOLVE
   !     .. Local Scalars ..
   INTEGER i
-  !     .. External Functions ..
-  REAL(8), EXTERNAL :: D1MACH, DNRM2
   !* FIRST EXECUTABLE STATEMENT  ISDIR
   ISDIR = 0
   IF ( Itol==1 ) THEN

@@ -1,6 +1,5 @@
 !** DCKDER
 SUBROUTINE DCKDER(M,N,X,Fvec,Fjac,Ldfjac,Xp,Fvecp,Mode,Err)
-  IMPLICIT NONE
   !>
   !***
   !  Check the gradients of M nonlinear functions in N
@@ -110,7 +109,7 @@ SUBROUTINE DCKDER(M,N,X,Fvec,Fjac,Ldfjac,Xp,Fvecp,Mode,Err)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER i, j, Ldfjac, M, Mode, N
-  REAL(8) :: D1MACH, eps, epsf, epslog, epsmch, Err(*), Fjac(Ldfjac,*), Fvec(*), &
+  REAL(8) :: eps, epsf, epslog, epsmch, Err(*), Fjac(Ldfjac,*), Fvec(*), &
     Fvecp(*), temp, X(*), Xp(*)
   REAL(8), PARAMETER :: factor = 1.0D2, one = 1.0D0, zero = 0.0D0
   !

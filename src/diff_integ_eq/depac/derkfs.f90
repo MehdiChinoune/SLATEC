@@ -2,7 +2,6 @@
 SUBROUTINE DERKFS(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
     F4,F5,Ys,Told,Dtsign,U26,Rer,Init,Ksteps,Kop,Iquit,&
     Stiff,Nonstf,Ntstep,Nstifs,Rpar,Ipar)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to DERKF
@@ -55,10 +54,10 @@ SUBROUTINE DERKFS(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
   !   910722  Updated AUTHOR section.  (ALS)
 
   REAL a, Atol(*), big, dt, Dtsign, dy, ee, eeoet, es, estiff, &
-    esttol, et, F1(*), F2(*), F3(*), F4(*), F5(*), H, hmin, HVNRM
+    esttol, et, F1(*), F2(*), F3(*), F4(*), F5(*), H, hmin
   INTEGER Idid, Info(15), Init, Ipar(*), Iquit, k, Kop, Ksteps, ktol, &
     natolp, Neq, nrtolp, Nstifs, Ntstep
-  REAL R1MACH, Rer, Rpar(*), Rtol(*), s, T, tol, Told, Tolfac, &
+  REAL Rer, Rpar(*), Rtol(*), s, T, tol, Told, Tolfac, &
     Tout, u, U26, ute, Y(*), yavg, Yp(*), Ys(*)
   LOGICAL hfaild, output, Stiff, Nonstf
   CHARACTER(8) :: xern1
@@ -153,7 +152,8 @@ SUBROUTINE DERKFS(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
     WRITE (xern1,'(I8)') Info(3)
     CALL XERMSG('SLATEC','DERKFS',&
       'IN DERKF, INFO(3) MUST BE 0 OR 1 INDICATING THE OR INTERMEDIATE-OUTPUT&
-      & MODE OF INTEGRATION, RESPECTIVELY.  YOU HAVE CALLED THE CODE WITH  INFO(3) = '//xern1,5,1)
+      & MODE OF INTEGRATION, RESPECTIVELY.  YOU HAVE CALLED THE CODE WITH  INFO(3) = '&
+      //xern1,5,1)
     Idid = -33
   END IF
   !

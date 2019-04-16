@@ -1,7 +1,6 @@
 !** QAWO
 SUBROUTINE QAWO(F,A,B,Omega,Integr,Epsabs,Epsrel,Result,Abserr,Neval,Ier,&
     Leniw,Maxp1,Lenw,Last,Iwork,Work)
-  IMPLICIT NONE
   !>
   !***
   !  Calculate an approximation to a given definite integral

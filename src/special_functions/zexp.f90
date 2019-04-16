@@ -1,6 +1,5 @@
 !** ZEXP
 SUBROUTINE ZEXP(Ar,Ai,Br,Bi)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to ZBESH, ZBESI, ZBESJ, ZBESK, ZBESY, ZAIRY and

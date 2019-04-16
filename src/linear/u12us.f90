@@ -1,6 +1,5 @@
 !** U12US
 SUBROUTINE U12US(A,Mda,M,N,B,Mdb,Nb,Mode,Krank,Rnorm,H,W,Ir,Ic)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to ULSIA
@@ -23,7 +22,7 @@ SUBROUTINE U12US(A,Mda,M,N,B,Mdb,Nb,Mode,Krank,Rnorm,H,W,Ir,Ic)
   !***
   ! **See also:**  ULSIA
   !***
-  ! **Routines called:**  SAXPY, SDOT, SNRM2, SSWAP
+  ! **Routines called:**  SAXPY, SNRM2, SSWAP
 
   !* REVISION HISTORY  (YYMMDD)
   !   810801  DATE WRITTEN
@@ -33,7 +32,7 @@ SUBROUTINE U12US(A,Mda,M,N,B,Mdb,Nb,Mode,Krank,Rnorm,H,W,Ir,Ic)
   !   900328  Added TYPE section.  (WRB)
 
   INTEGER i, ij, ip1, j, jb, k, kp1, Krank, M, Mda, Mdb, mmk, Mode, N, Nb
-  REAL A(Mda,*), B(Mdb,*), bb, H(*), Rnorm(*), SDOT, SNRM2, tt, W(*)
+  REAL A(Mda,*), B(Mdb,*), bb, H(*), Rnorm(*), tt, W(*)
   INTEGER Ic(*), Ir(*)
   !* FIRST EXECUTABLE STATEMENT  U12US
   k = Krank

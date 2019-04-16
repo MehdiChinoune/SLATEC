@@ -1,7 +1,6 @@
 !** BCRH
 REAL FUNCTION BCRH(Xll,Xrr,Iz,C,A,Bh,F,Sgn)
   USE CCBLK
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to CBLKTR

@@ -1,6 +1,5 @@
 !** CBRT
 REAL FUNCTION CBRT(X)
-  IMPLICIT NONE
   !>
   !***
   !  Compute the cube root.
@@ -30,7 +29,7 @@ REAL FUNCTION CBRT(X)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-  REAL cbrtsq, R1MACH, R9PAK, X, y
+  REAL cbrtsq, X, y
   INTEGER irem, iter, ixpnt, n
   REAL, PARAMETER :: cbrt2(5) = [ 0.62996052494743658E0,  0.79370052598409974E0, &
     1.0E0, 1.25992104989487316E0, 1.58740105196819947E0 ]

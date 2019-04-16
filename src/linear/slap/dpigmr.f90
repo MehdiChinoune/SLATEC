@@ -2,7 +2,6 @@
 SUBROUTINE DPIGMR(N,R0,Sr,Sz,Jscal,Maxl,Maxlp1,Kmp,Nrsts,Jpre,MATVEC,&
     MSOLVE,Nmsl,Z,V,Hes,Q,Lgmr,Rpar,Ipar,Wk,Dl,Rhol,Nrmax,B,&
     Bnrm,X,Xl,Itol,Tol,Nelt,Ia,Ja,A,Isym,Iunit,Iflag,Err)
-  IMPLICIT NONE
   !>
   !***
   !  Internal routine for DGMRES.
@@ -235,11 +234,6 @@ SUBROUTINE DPIGMR(N,R0,Sr,Sz,Jscal,Maxl,Maxlp1,Kmp,Nrsts,Jpre,MATVEC,&
   !     .. Local Scalars ..
   REAL(8) :: c, dlnrm, prod, r0nrm, rho, s, snormw, tem
   INTEGER i, i2, info, ip1, iter, itmax, j, k, ll, llp1
-  !     .. External Functions ..
-  REAL(8), EXTERNAL :: DNRM2
-  INTEGER, EXTERNAL :: ISDGMR
-  !     .. External Subroutines ..
-  EXTERNAL :: DAXPY, DCOPY, DHELS, DHEQR, DORTH, DRLCAL, DSCAL
   !     .. Intrinsic Functions ..
   INTRINSIC ABS
   !* FIRST EXECUTABLE STATEMENT  DPIGMR

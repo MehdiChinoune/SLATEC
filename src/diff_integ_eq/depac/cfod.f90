@@ -1,6 +1,5 @@
 !** CFOD
 SUBROUTINE CFOD(Meth,Elco,Tesco)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to DEBDF

@@ -1,6 +1,5 @@
 !** SSPR
 SUBROUTINE SSPR(Uplo,N,Alpha,X,Incx,Ap)
-  IMPLICIT NONE
   !>
   !***
   !  Performs the symmetric rank 1 operation.
@@ -104,10 +103,6 @@ SUBROUTINE SSPR(Uplo,N,Alpha,X,Incx,Ap)
   !     .. Local Scalars ..
   REAL temp
   INTEGER i, info, ix, j, jx, k, kk, kx
-  !     .. External Functions ..
-  LOGICAL, EXTERNAL :: LSAME
-  !     .. External Subroutines ..
-  EXTERNAL :: XERBLA
   !* FIRST EXECUTABLE STATEMENT  SSPR
   !
   !     Test the input parameters.

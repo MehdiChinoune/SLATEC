@@ -1,6 +1,5 @@
 !** SGBSL
 SUBROUTINE SGBSL(Abd,Lda,N,Ml,Mu,Ipvt,B,Job)
-  IMPLICIT NONE
   !>
   !***
   !  Solve the real band system A*X=B or TRANS(A)*X=B using
@@ -90,7 +89,7 @@ SUBROUTINE SGBSL(Abd,Lda,N,Ml,Mu,Ipvt,B,Job)
   INTEGER Lda, N, Ml, Mu, Ipvt(*), Job
   REAL Abd(Lda,*), B(*)
   !
-  REAL SDOT, t
+  REAL t
   INTEGER k, kb, l, la, lb, lm, m, nm1
   !* FIRST EXECUTABLE STATEMENT  SGBSL
   m = Mu + Ml + 1

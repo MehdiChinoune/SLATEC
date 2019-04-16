@@ -1,6 +1,5 @@
 !** R1MPYQ
 SUBROUTINE R1MPYQ(M,N,A,Lda,V,W)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to SNSQ and SNSQE

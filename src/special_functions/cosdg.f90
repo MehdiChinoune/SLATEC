@@ -1,6 +1,5 @@
 !** COSDG
 REAL FUNCTION COSDG(X)
-  IMPLICIT NONE
   !>
   !***
   !  Compute the cosine of an argument in degrees.

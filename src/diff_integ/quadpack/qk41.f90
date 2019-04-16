@@ -1,6 +1,5 @@
 !** QK41
 SUBROUTINE QK41(F,A,B,Result,Abserr,Resabs,Resasc)
-  IMPLICIT NONE
   !>
   !***
   !  To compute I = Integral of F over (A,B), with error
@@ -77,7 +76,6 @@ SUBROUTINE QK41(F,A,B,Result,Abserr,Resabs,Resasc)
     reskh, Result, uflow
   INTEGER j, jtw, jtwm1
   REAL, EXTERNAL :: F
-  REAL, EXTERNAL ::  R1MACH
   !
   !           THE ABSCISSAE AND WEIGHTS ARE GIVEN FOR THE INTERVAL (-1,1).
   !           BECAUSE OF SYMMETRY ONLY THE POSITIVE ABSCISSAE AND THEIR

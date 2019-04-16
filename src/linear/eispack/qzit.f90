@@ -1,6 +1,5 @@
 !** QZIT
 SUBROUTINE QZIT(Nm,N,A,B,Eps1,Matz,Z,Ierr)
-  IMPLICIT NONE
   !>
   !***
   !  The second step of the QZ algorithm for generalized

@@ -1,6 +1,5 @@
 !** POCH1
 REAL FUNCTION POCH1(A,X)
-  IMPLICIT NONE
   !>
   !***
   !  Calculate a generalization of Pochhammer's symbol starting
@@ -60,7 +59,6 @@ REAL FUNCTION POCH1(A,X)
   REAL A, absa, absx, alnvar, b, binv, bp, gbern(10), gbk, poly1, &
     q, rho, sinpx2, sinpxx, term, trig, var, var2, X
   INTEGER i, ii, incr, j, k, ndx, nterms
-  REAL, EXTERNAL :: EXPREL, COT, POCH, PSI, R1MACH
   REAL, SAVE :: sqtbig, alneps
   REAL, PARAMETER :: bern(9) = [ .83333333333333333E-01,-.13888888888888889E-02, &
     .33068783068783069E-04, -.82671957671957672E-06, .20876756987868099E-07, &

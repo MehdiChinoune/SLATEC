@@ -1,6 +1,5 @@
 !** CHKDER
 SUBROUTINE CHKDER(M,N,X,Fvec,Fjac,Ldfjac,Xp,Fvecp,Mode,Err)
-  IMPLICIT NONE
   !>
   !***
   !  Check the gradients of M nonlinear functions in N
@@ -113,7 +112,6 @@ SUBROUTINE CHKDER(M,N,X,Fvec,Fjac,Ldfjac,Xp,Fvecp,Mode,Err)
   REAL X(*), Fvec(*), Fjac(Ldfjac,*), Xp(*), Fvecp(*), Err(*)
   INTEGER i, j
   REAL eps, epsf, epslog, epsmch, temp
-  REAL R1MACH
   REAL, PARAMETER :: factor = 1.0E2, one = 1.0E0, zero = 0.0E0
   !* FIRST EXECUTABLE STATEMENT  CHKDER
   epsmch = R1MACH(4)

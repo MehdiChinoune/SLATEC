@@ -1,6 +1,5 @@
 !** PINITM
 SUBROUTINE PINITM(M,N,Sx,Ix,Lmx,Ipagef)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to SPLP

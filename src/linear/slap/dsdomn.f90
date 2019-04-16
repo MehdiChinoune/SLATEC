@@ -1,7 +1,6 @@
 !** DSDOMN
 SUBROUTINE DSDOMN(N,B,X,Nelt,Ia,Ja,A,Isym,Nsave,Itol,Tol,Itmax,Iter,Err,&
     Ierr,Iunit,Rwork,Lenw,Iwork,Leniw)
-  IMPLICIT NONE
   !>
   !***
   !  Diagonally Scaled Orthomin Sparse Iterative Ax=b Solver.
@@ -224,8 +223,6 @@ SUBROUTINE DSDOMN(N,B,X,Nelt,Ia,Ja,A,Isym,Nsave,Itol,Tol,Itmax,Iter,Err,&
   INTEGER Ia(Nelt), Iwork(Leniw), Ja(Nelt)
   !     .. Local Scalars ..
   INTEGER locap, loccsa, locdin, locdz, locema, lociw, locp, locr, locw, locz
-  !     .. External Subroutines ..
-  EXTERNAL :: DCHKW, DOMN, DS2Y, DSDI, DSDS, DSMV
   !* FIRST EXECUTABLE STATEMENT  DSDOMN
   !
   Ierr = 0

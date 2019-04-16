@@ -1,6 +1,5 @@
 !** PCHID
 REAL FUNCTION PCHID(N,X,F,D,Incfd,Skip,Ia,Ib,Ierr)
-  IMPLICIT NONE
   !>
   !***
   !  Evaluate the definite integral of a piecewise cubic

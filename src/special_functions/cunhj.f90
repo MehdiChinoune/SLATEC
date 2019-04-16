@@ -1,6 +1,5 @@
 !** CUNHJ
 SUBROUTINE CUNHJ(Z,Fnu,Ipmtr,Tol,Phi,Arg,Zeta1,Zeta2,Asum,Bsum)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to CBESI and CBESK
@@ -53,7 +52,7 @@ SUBROUTINE CUNHJ(Z,Fnu,Ipmtr,Tol,Phi,Arg,Zeta1,Zeta2,Asum,Bsum)
     up(14), w, w2, Z, za, zb, zc, zeta, Zeta1, Zeta2, zth
   REAL ang, ap(30), atol, aw2, azth, btol, Fnu, fn13, fn23, pp, rfnu, rfnu2, Tol, &
     wi, wr, zci, zcr, zetai, zetar, zthi, zthr, asumr, asumi, bsumr, bsumi, test, &
-    tstr, tsti, ac, R1MACH
+    tstr, tsti, ac
   INTEGER ias, ibs, Ipmtr, is, j, jr, ju, k, kmax, kp1, ks, l, &
     lr, lrp1, l1, l2, m
   REAL, PARAMETER :: ar(14) = [ 1.00000000000000000E+00, 1.04166666666666667E-01, &

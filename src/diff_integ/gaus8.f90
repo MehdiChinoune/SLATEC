@@ -1,6 +1,5 @@
 !** GAUS8
 SUBROUTINE GAUS8(FUN,A,B,Err,Ans,Ierr)
-  IMPLICIT NONE
   !>
   !***
   !  Integrate a real function of one variable over a finite
@@ -87,10 +86,8 @@ SUBROUTINE GAUS8(FUN,A,B,Err,Ans,Ierr)
     END FUNCTION
   END INTERFACE
   INTEGER Ierr, k, l, lmn, lmx, lr(30), mxl, nbits, nib, nlmx
-  INTEGER I1MACH
   REAL A, aa(30), ae, anib, Ans, area, B, c, ce, ee, ef, eps, Err, &
     est, gl, glr, gr(30), hh(30), tol, vl(30), vr
-  REAL R1MACH
   REAL, PARAMETER :: x1 = 1.83434642495649805E-01, x2 = 5.25532409916328986E-01, &
     x3 =7.96666477413626740E-01 , x4 = 9.60289856497536232E-01
   REAL, PARAMETER ::  w1 =3.62683783378361983E-01 , w2 = 3.13706645877887287E-01, &
@@ -128,7 +125,8 @@ SUBROUTINE GAUS8(FUN,A,B,Err,Ans,Ierr)
             IF ( lmx<1 ) THEN
               Ierr = -1
               CALL XERMSG('SLATEC','GAUS8',&
-                'A and B are too nearly equal to allow normal integration. $$ANS is set to zero and IERR to -1.',1,-1)
+                'A and B are too nearly equal to allow normal integration.&
+                & $$ANS is set to zero and IERR to -1.',1,-1)
               IF ( Err<0.0E0 ) Err = ce
               RETURN
             ELSE

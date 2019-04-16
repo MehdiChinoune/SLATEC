@@ -1,6 +1,5 @@
 !** COSQB1
 SUBROUTINE COSQB1(N,X,W,Xh)
-  IMPLICIT NONE
   !>
   !***
   !  Compute the unnormalized inverse of COSQF1.

@@ -1,6 +1,5 @@
 !** CSIDI
 SUBROUTINE CSIDI(A,Lda,N,Kpvt,Det,Work,Job)
-  IMPLICIT NONE
   !>
   !***
   !  Compute the determinant and inverse of a complex symmetric
@@ -88,11 +87,10 @@ SUBROUTINE CSIDI(A,Lda,N,Kpvt,Det,Work,Job)
   COMPLEX A(Lda,*), Det(2), Work(*)
   INTEGER Kpvt(*)
   !
-  COMPLEX ak, akp1, akkp1, CDOTU, d, t, temp
+  COMPLEX ak, akp1, akkp1, d, t, temp
   REAL ten
   INTEGER j, jb, k, km1, ks, kstep
   LOGICAL noinv, nodet
-  REAL, EXTERNAL :: CABS1
   !
   !* FIRST EXECUTABLE STATEMENT  CSIDI
   noinv = MOD(Job,10)==0

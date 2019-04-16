@@ -1,6 +1,5 @@
 !** XGETUA
 SUBROUTINE XGETUA(Iunita,N)
-  IMPLICIT NONE
   !>
   !***
   !  Return unit number(s) to which error messages are being
@@ -50,7 +49,7 @@ SUBROUTINE XGETUA(Iunita,N)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
-  INTEGER i, indexx, Iunita(5), J4SAVE, N
+  INTEGER i, indexx, Iunita(5), N
   !* FIRST EXECUTABLE STATEMENT  XGETUA
   N = J4SAVE(5,0,.FALSE.)
   DO i = 1, N

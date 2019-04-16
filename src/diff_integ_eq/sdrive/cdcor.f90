@@ -1,7 +1,6 @@
 !** CDCOR
 SUBROUTINE CDCOR(Dfdy,El,FA,H,Ierror,Impl,Ipvt,Matdim,Miter,Ml,Mu,N,Nde,&
     Nq,T,USERS,Y,Yh,Ywt,Evalfa,Save1,Save2,A,D,Jstate)
-  IMPLICIT NONE
   !>
   !***
   !  Subroutine CDCOR computes corrections to the Y array.
@@ -36,7 +35,7 @@ SUBROUTINE CDCOR(Dfdy,El,FA,H,Ierror,Impl,Ipvt,Matdim,Miter,Ml,Mu,N,Nde,&
 
   INTEGER i, Ierror, iflag, Impl, j, Jstate, Matdim, Miter, Ml, Mu, mw, N, Nde, Nq
   COMPLEX A(Matdim,*), Dfdy(Matdim,*), Save1(*), Save2(*), Y(*), Yh(N,*), Ywt(*)
-  REAL D, El(13,12), H, SCNRM2, T
+  REAL D, El(13,12), H, T
   INTEGER Ipvt(*)
   LOGICAL Evalfa
   !* FIRST EXECUTABLE STATEMENT  CDCOR

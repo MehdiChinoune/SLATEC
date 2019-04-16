@@ -1,6 +1,5 @@
 !** SCPPLT
 SUBROUTINE SCPPLT(N,Nelt,Ia,Ja,A,Isym,Iunit)
-  IMPLICIT NONE
   !>
   !***
   !  Printer Plot of SLAP Column Format Matrix.

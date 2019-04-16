@@ -1,7 +1,6 @@
 !** SSDBCG
 SUBROUTINE SSDBCG(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
     Iunit,Rwork,Lenw,Iwork,Leniw)
-  IMPLICIT NONE
   !>
   !***
   !  Diagonally Scaled BiConjugate Gradient Sparse Ax=b Solver.
@@ -232,8 +231,6 @@ SUBROUTINE SSDBCG(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
   INTEGER Ia(Nelt), Iwork(Leniw), Ja(Nelt)
   !     .. Local Scalars ..
   INTEGER locdin, locdz, lociw, locp, locpp, locr, locrr, locw, locz, loczz
-  !     .. External Subroutines ..
-  EXTERNAL :: SBCG, SCHKW, SS2Y, SSDI, SSDS, SSMTV, SSMV
   !* FIRST EXECUTABLE STATEMENT  SSDBCG
   !
   Ierr = 0

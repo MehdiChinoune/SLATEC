@@ -1,6 +1,5 @@
 !** CNBSL
 SUBROUTINE CNBSL(Abe,Lda,N,Ml,Mu,Ipvt,B,Job)
-  IMPLICIT NONE
   !>
   !***
   !  Solve a complex band system using the factors computed by
@@ -89,7 +88,7 @@ SUBROUTINE CNBSL(Abe,Lda,N,Ml,Mu,Ipvt,B,Job)
   INTEGER Lda, N, Ml, Mu, Ipvt(*), Job
   COMPLEX Abe(Lda,*), B(*)
   !
-  COMPLEX CDOTC, t
+  COMPLEX t
   INTEGER k, kb, l, lb, ldb, lm, m, mlm, nm1
   !* FIRST EXECUTABLE STATEMENT  CNBSL
   m = Mu + Ml + 1

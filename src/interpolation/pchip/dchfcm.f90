@@ -1,6 +1,5 @@
 !** DCHFCM
 INTEGER FUNCTION DCHFCM(D1,D2,Delta)
-  IMPLICIT NONE
   !>
   !***
   !  Check a single cubic for monotonicity.
@@ -93,7 +92,7 @@ INTEGER FUNCTION DCHFCM(D1,D2,Delta)
   !
   !  DECLARE ARGUMENTS.
   !
-  REAL(8) :: D1, D2, Delta, D1MACH
+  REAL(8) :: D1, D2, Delta
   !
   !  DECLARE LOCAL VARIABLES.
   !

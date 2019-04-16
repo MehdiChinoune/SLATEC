@@ -1,6 +1,5 @@
 !** DPCHIM
 SUBROUTINE DPCHIM(N,X,F,D,Incfd,Ierr)
-  IMPLICIT NONE
   !>
   !***
   !  Set derivatives needed to determine a monotone piecewise
@@ -156,7 +155,6 @@ SUBROUTINE DPCHIM(N,X,F,D,Incfd,Ierr)
   INTEGER i, nless1
   REAL(8) :: del1, del2, dmax, dmin, drat1, drat2, dsave, h1, &
     h2, hsum, hsumt3, w1, w2
-  REAL(8) :: DPCHST
   REAL(8), PARAMETER :: zero = 0.D0, three = 3.D0
   !
   !  VALIDITY-CHECK ARGUMENTS.

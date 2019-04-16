@@ -1,6 +1,5 @@
 !** DPCOEF
 SUBROUTINE DPCOEF(L,C,Tc,A)
-  IMPLICIT NONE
   !>
   !***
   !  Convert the DPOLFT coefficients to Taylor series form.

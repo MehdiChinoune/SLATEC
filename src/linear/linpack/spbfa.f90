@@ -1,6 +1,5 @@
 !** SPBFA
 SUBROUTINE SPBFA(Abd,Lda,N,M,Info)
-  IMPLICIT NONE
   !>
   !***
   !  Factor a real symmetric positive definite matrix stored in
@@ -87,7 +86,7 @@ SUBROUTINE SPBFA(Abd,Lda,N,M,Info)
   INTEGER Lda, N, M, Info
   REAL Abd(Lda,*)
   !
-  REAL SDOT, t
+  REAL t
   REAL s
   INTEGER ik, j, jk, k, mu
   !* FIRST EXECUTABLE STATEMENT  SPBFA

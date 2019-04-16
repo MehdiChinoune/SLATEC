@@ -1,6 +1,5 @@
 !** SDCST
 SUBROUTINE SDCST(Maxord,Mint,Iswflg,El,Tq)
-  IMPLICIT NONE
   !>
   !***
   !  SDCST sets coefficients used by the core integrator SDSTP.

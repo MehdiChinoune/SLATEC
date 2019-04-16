@@ -1,4 +1,5 @@
 MODULE TEST51_MOD
+  use slatec
   IMPLICIT NONE
 
 CONTAINS
@@ -97,11 +98,6 @@ CONTAINS
     !     .. Local Arrays ..
     COMPLEX cx(200), cy(200)
     REAL a(100), ah(100), b(100), bh(100), w(2000), x(200), xh(200), y(200)
-    !     .. External Functions ..
-    REAL, EXTERNAL :: R1MACH
-    !     .. External Subroutines ..
-    EXTERNAL :: CFFTB, CFFTF, CFFTI, COSQB, COSQF, COSQI, COST, COSTI, EZFFTB, &
-      EZFFTF, EZFFTI, RFFTB, RFFTF, RFFTI, SINQB, SINQF, SINQI, SINT, SINTI
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, CABS, CMPLX, COS, MAX, MOD, SIN, SQRT
     !     .. Data statements ..
@@ -641,6 +637,7 @@ END MODULE TEST51_MOD
 !** TEST51
 PROGRAM TEST51
   USE TEST51_MOD
+  use slatec
   IMPLICIT NONE
   !>
   !***
@@ -692,8 +689,6 @@ PROGRAM TEST51
   !   890618  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900524  Cosmetic changes to code.  (WRB)
-
-  INTEGER I1MACH
   INTEGER ipass, kprint, lin, lun, nfail
   !* FIRST EXECUTABLE STATEMENT  TEST51
   lun = I1MACH(2)

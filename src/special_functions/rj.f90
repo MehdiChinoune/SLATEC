@@ -1,6 +1,5 @@
 !** RJ
 REAL FUNCTION RJ(X,Y,Z,P,Ier)
-  IMPLICIT NONE
   !>
   !***
   !  Compute the incomplete or complete (X or Y or Z is zero)
@@ -310,11 +309,10 @@ REAL FUNCTION RJ(X,Y,Z,P,Ier)
   !           editorial changes.  (RWC)).
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
-  REAL R1MACH
   CHARACTER(16) :: xern3, xern4, xern5, xern6, xern7
   INTEGER Ier
   REAL alfa, beta, ea, eb, ec, e2, e3, epslon, lamda, mu, P, pn, pndev, power4, &
-    RC, sigma, s1, s2, s3, X, xn, xndev, xnroot, Y, yn, yndev, ynroot, Z, zn, &
+    sigma, s1, s2, s3, X, xn, xndev, xnroot, Y, yn, yndev, ynroot, Z, zn, &
     zndev, znroot
   REAL, SAVE :: errtol, lolim, uplim
   REAL, PARAMETER :: c1 = 3.0E0/14.0E0, c2 = 1.0E0/3.0E0, c3 = 3.0E0/22.0E0, &

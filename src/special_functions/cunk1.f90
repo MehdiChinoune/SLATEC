@@ -1,6 +1,5 @@
 !** CUNK1
 SUBROUTINE CUNK1(Z,Fnu,Kode,Mr,N,Y,Nz,Tol,Elim,Alim)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to CBESK
@@ -34,7 +33,7 @@ SUBROUTINE CUNK1(Z,Fnu,Kode,Mr,N,Y,Nz,Tol,Elim,Alim)
     cwrk(16,3), cy(2), c1, c2, phi(2), rz, summ(2), s1, s2, Y(N), Z, &
     zeta1(2), zeta2(2), zr, phid, zeta1d, zeta2d, sumd
   REAL Alim, ang, aphi, asc, ascle, bry(3), cpn, c2i, c2m, c2r, &
-    Elim, fmr, fn, fnf, Fnu, rs1, sgn, spn, Tol, x, R1MACH
+    Elim, fmr, fn, fnf, Fnu, rs1, sgn, spn, Tol, x
   COMPLEX, PARAMETER :: czero = (0.0E0,0.0E0), cone = (1.0E0,0.0E0)
   REAL, PARAMETER :: pi = 3.14159265358979324E0
   !* FIRST EXECUTABLE STATEMENT  CUNK1

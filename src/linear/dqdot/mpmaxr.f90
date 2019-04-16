@@ -1,7 +1,6 @@
 !** MPMAXR
 SUBROUTINE MPMAXR(X)
   USE MPCOM
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to DQDOTA and DQDOTI

@@ -2,7 +2,6 @@
 SUBROUTINE SCOEF(Yh,Yp,Ncomp,Nrowb,Nfc,Nic,B,Beta,Coef,Inhomo,Re,Ae,By,&
     Cvec,Work,Iwork,Iflag,Nfcc)
   USE ML, ONLY : EPS
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to BVSUP
@@ -83,7 +82,7 @@ SUBROUTINE SCOEF(Yh,Yp,Ncomp,Nrowb,Nfc,Nic,B,Beta,Coef,Inhomo,Re,Ae,By,&
   INTEGER i, Iflag, Inhomo, Iwork(*), j, k, kflag, ki, l, mlso, Ncomp, ncomp2, &
     nf, Nfc, Nfcc, nfccm1, Nic, Nrowb
   REAL Ae, B(Nrowb,*), bbn, Beta(*), bn, brn, By(Nfcc,*), bykl, bys, Coef(*), cons, &
-    Cvec(*), gam, un, Work(*), Yh(Ncomp,*), Yp(*), ypn, SDOT, Re
+    Cvec(*), gam, un, Work(*), Yh(Ncomp,*), Yp(*), ypn, Re
   !
   !     SET UP MATRIX  B*YH  AND VECTOR  BETA - B*YP
   !

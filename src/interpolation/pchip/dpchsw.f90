@@ -1,6 +1,5 @@
 !** DPCHSW
 SUBROUTINE DPCHSW(Dfmax,Iextrm,D1,D2,H,Slope,Ierr)
-  IMPLICIT NONE
   !>
   !***
   !  Limits excursion from data for DPCHCS
@@ -91,7 +90,6 @@ SUBROUTINE DPCHSW(Dfmax,Iextrm,D1,D2,H,Slope,Ierr)
   !  DECLARE LOCAL VARIABLES.
   !
   REAL(8) :: cp, hphi, lambda, nu, phi, radcal, rho, sigma, small, that
-  REAL(8) :: D1MACH
   !
   REAL(8), PARAMETER :: zero = 0.D0, one = 1.D0, two = 2.D0, three = 3.D0, &
     fact = 100.D0

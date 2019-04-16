@@ -1,6 +1,5 @@
 !** CPODI
 SUBROUTINE CPODI(A,Lda,N,Det,Job)
-  IMPLICIT NONE
   !>
   !***
   !  Compute the determinant and inverse of a certain complex

@@ -1,6 +1,5 @@
 !** CGAMR
 COMPLEX FUNCTION CGAMR(Z)
-  IMPLICIT NONE
   !>
   !***
   !  Compute the reciprocal of the Gamma function.
@@ -29,10 +28,10 @@ COMPLEX FUNCTION CGAMR(Z)
   !   770701  DATE WRITTEN
   !   861211  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
-  
+
   INTEGER irold
   REAL x
-  COMPLEX Z, CLNGAM
+  COMPLEX Z
   !* FIRST EXECUTABLE STATEMENT  CGAMR
   CGAMR = (0.0,0.0)
   x = REAL(Z)

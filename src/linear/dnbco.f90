@@ -1,6 +1,5 @@
 !** DNBCO
 SUBROUTINE DNBCO(Abe,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
-  IMPLICIT NONE
   !>
   !***
   !  Factor a band matrix using Gaussian elimination and
@@ -140,8 +139,8 @@ SUBROUTINE DNBCO(Abe,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
   REAL(8) :: Abe(Lda,*), Z(*)
   REAL(8) :: Rcond
   !
-  REAL(8) :: DDOT, ek, t, wk, wkm
-  REAL(8) :: anorm, s, DASUM, sm, ynorm
+  REAL(8) :: ek, t, wk, wkm
+  REAL(8) :: anorm, s, sm, ynorm
   INTEGER i, info, j, ju, k, kb, kp1, l, ldb, lm, lz, m, ml1, mm, nl, nu
   !* FIRST EXECUTABLE STATEMENT  DNBCO
   ml1 = Ml + 1

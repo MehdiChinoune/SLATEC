@@ -1,6 +1,5 @@
 !** JAIRY
 SUBROUTINE JAIRY(X,Rx,C,Ai,Dai)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to BESJ and BESY

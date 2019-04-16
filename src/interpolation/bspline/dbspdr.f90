@@ -1,6 +1,5 @@
 !** DBSPDR
 SUBROUTINE DBSPDR(T,A,N,K,Nderiv,Ad)
-  IMPLICIT NONE
   !>
   !***
   !  Use the B-representation to construct a divided difference

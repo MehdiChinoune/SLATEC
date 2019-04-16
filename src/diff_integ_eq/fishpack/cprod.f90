@@ -1,6 +1,5 @@
 !** CPROD
 SUBROUTINE CPROD(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Yy,M,A,B,C,D,W,Y)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to BLKTRI

@@ -1,6 +1,5 @@
 !** SROTM
 SUBROUTINE SROTM(N,Sx,Incx,Sy,Incy,Sparam)
-  IMPLICIT NONE
   !>
   !***
   !  Apply a modified Givens transformation.

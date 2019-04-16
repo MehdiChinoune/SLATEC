@@ -1,7 +1,6 @@
 !** DY4
 SUBROUTINE DY4(U,Idmn,I,J,Uyyy,Uyyyy)
   USE SPL4
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to SEPX4

@@ -2,7 +2,6 @@
 SUBROUTINE STEPS(F,Neqn,Y,X,H,Eps,Wt,Start,Hold,K,Kold,Crash,Phi,P,Yp,Psi,&
     Alpha,Beta,Sig,V,W,G,Phase1,Ns,Nornd,Ksteps,Twou,Fouru,&
     Xold,Kprev,Ivc,Iv,Kgi,Gi,Rpar,Ipar)
-  IMPLICIT NONE
   !>
   !***
   !  Integrate a system of first order ordinary differential
@@ -192,7 +191,6 @@ SUBROUTINE STEPS(F,Neqn,Y,X,H,Eps,Wt,Start,Hold,K,Kold,Crash,Phi,P,Yp,Psi,&
     km1, km2, knew, Kold, kp1, kp2, Kprev, Ksteps
   LOGICAL Start, Crash, Phase1, Nornd
   EXTERNAL :: F
-  REAL, EXTERNAL :: R1MACH
   !
   REAL, PARAMETER :: two(13) = [ 2.0, 4.0, 8.0, 16.0, 32.0, 64.0, 128.0, 256.0, &
     512.0, 1024.0, 2048.0, 4096.0, 8192.0 ]

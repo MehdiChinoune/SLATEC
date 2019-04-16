@@ -1,6 +1,5 @@
 !** REBAK
 SUBROUTINE REBAK(Nm,N,B,Dl,M,Z)
-  IMPLICIT NONE
   !>
   !***
   !  Form the eigenvectors of a generalized symmetric

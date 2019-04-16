@@ -1,6 +1,5 @@
 !** HPPERM
 SUBROUTINE HPPERM(Hx,N,Iperm,Work,Ier)
-  IMPLICIT NONE
   !>
   !***
   !  Rearrange a given array according to a prescribed

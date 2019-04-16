@@ -1,6 +1,5 @@
 !** HFTI
 SUBROUTINE HFTI(A,Mda,M,N,B,Mdb,Nb,Tau,Krank,Rnorm,H,G,Ip)
-  IMPLICIT NONE
   !>
   !***
   !  Solve a linear least squares problems by performing a QR
@@ -147,7 +146,7 @@ SUBROUTINE HFTI(A,Mda,M,N,B,Mdb,Nb,Tau,Krank,Rnorm,H,G,Ip)
 
   INTEGER i, ii, iopt, ip1, j, jb, jj, k, kp1, Krank, l, ldiag, &
     lmax, M, Mda, Mdb, N, Nb, nerr
-  REAL A(Mda,*), B(Mdb,*), factor, G(*), H(*), hmax, R1MACH, Rnorm(*), &
+  REAL A(Mda,*), B(Mdb,*), factor, G(*), H(*), hmax, Rnorm(*), &
     sm1, szero, Tau, tmp
   INTEGER Ip(*)
   REAL(8) :: sm, dzero

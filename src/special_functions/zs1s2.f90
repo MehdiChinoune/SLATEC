@@ -1,6 +1,5 @@
 !** ZS1S2
 SUBROUTINE ZS1S2(Zrr,Zri,S1r,S1i,S2r,S2i,Nz,Ascle,Alim,Iuf)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to ZAIRY and ZBESK
@@ -35,8 +34,6 @@ SUBROUTINE ZS1S2(Zrr,Zri,S1r,S1i,S2r,S2i,Nz,Ascle,Alim,Iuf)
   REAL(8) :: aa, Alim, aln, Ascle, as1, as2, c1i, c1r, s1di, s1dr, S1i, S1r, &
     S2i, S2r, Zri, Zrr
   INTEGER Iuf, idum, Nz
-  REAL(8), EXTERNAL :: ZABS
-  EXTERNAL :: ZEXP, ZLOG
   REAL(8), PARAMETER :: zeror = 0.0D0, zeroi = 0.0D0
   !* FIRST EXECUTABLE STATEMENT  ZS1S2
   Nz = 0

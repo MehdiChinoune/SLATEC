@@ -1,4 +1,5 @@
 MODULE TEST36_MOD
+  use slatec
   IMPLICIT NONE
 
 CONTAINS
@@ -39,10 +40,6 @@ CONTAINS
     !     .. Local Arrays ..
     REAL(8) :: fvec(2), wa(19), x(2)
     INTEGER itest(3)
-    !     .. External Functions ..
-    REAL(8), EXTERNAL :: D1MACH, DENORM
-    !     .. External Subroutines ..
-    EXTERNAL :: DNSQE, PASS
     !     .. Intrinsic Functions ..
     INTRINSIC SQRT
     !* FIRST EXECUTABLE STATEMENT  DNSQQK
@@ -189,10 +186,6 @@ CONTAINS
     !     .. Local Arrays ..
     REAL(8) :: fvec(2), wa(17), x(2)
     INTEGER itest(2), iw(6)
-    !     .. External Functions ..
-    REAL(8), EXTERNAL :: D1MACH, DNRM2
-    !     .. External Subroutines ..
-    EXTERNAL :: DSOS, PASS
     !     .. Intrinsic Functions ..
     INTRINSIC SQRT
     !* FIRST EXECUTABLE STATEMENT  DSOSQX
@@ -326,6 +319,7 @@ END MODULE TEST36_MOD
 !** TEST36
 PROGRAM TEST36
   USE TEST36_MOD
+  use slatec
   IMPLICIT NONE
   !>
   !***
@@ -375,8 +369,6 @@ PROGRAM TEST36
   !   890618  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900524  Cosmetic changes to code.  (WRB)
-
-  INTEGER I1MACH
   INTEGER ipass, kprint, lin, lun, nfail
   !* FIRST EXECUTABLE STATEMENT  TEST36
   lun = I1MACH(2)

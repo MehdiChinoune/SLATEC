@@ -2,7 +2,6 @@
 SUBROUTINE SPIGMR(N,R0,Sr,Sz,Jscal,Maxl,Maxlp1,Kmp,Nrsts,Jpre,MATVEC,&
     MSOLVE,Nmsl,Z,V,Hes,Q,Lgmr,Rpar,Ipar,Wk,Dl,Rhol,Nrmax,B,&
     Bnrm,X,Xl,Itol,Tol,Nelt,Ia,Ja,A,Isym,Iunit,Iflag,Err)
-  IMPLICIT NONE
   !>
   !***
   !  Internal routine for SGMRES.
@@ -231,11 +230,6 @@ SUBROUTINE SPIGMR(N,R0,Sr,Sz,Jscal,Maxl,Maxlp1,Kmp,Nrsts,Jpre,MATVEC,&
   !     .. Local Scalars ..
   REAL c, dlnrm, prod, r0nrm, rho, s, snormw, tem
   INTEGER i, i2, info, ip1, iter, itmax, j, k, ll, llp1
-  !     .. External Functions ..
-  REAL, EXTERNAL :: SNRM2
-  INTEGER, EXTERNAL :: ISSGMR
-  !     .. External Subroutines ..
-  EXTERNAL :: SAXPY, SCOPY, SHELS, SHEQR, SORTH, SRLCAL, SSCAL
   !     .. Intrinsic Functions ..
   INTRINSIC ABS
   !* FIRST EXECUTABLE STATEMENT  SPIGMR

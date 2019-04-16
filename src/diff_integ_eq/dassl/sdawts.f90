@@ -1,6 +1,5 @@
 !** SDAWTS
 SUBROUTINE SDAWTS(Neq,Iwt,Rtol,Atol,Y,Wt,Rpar,Ipar)
-  IMPLICIT NONE
   !>
   !***
   !  Set error weight vector for SDASSL.

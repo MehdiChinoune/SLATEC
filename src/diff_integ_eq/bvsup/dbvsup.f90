@@ -6,7 +6,6 @@ SUBROUTINE DBVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
     KKKint, LLLint, XBEg, XENd, MNSwot, AED => AE, RED => RE, NXPtsd => NXPts, &
     NICd => NIC, NOPg, MXNon, NDIsk, NTApe, INDpvt, INTeg, NPS, NTP, &
     NEQivd => NEQivp, NFCc, ICOco
-  IMPLICIT NONE
   !>
   !***
   !  Solve a linear two-point boundary value problem using

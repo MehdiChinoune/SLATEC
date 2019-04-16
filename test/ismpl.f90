@@ -1,5 +1,6 @@
 !** ISMPL
 SUBROUTINE ISMPL(N,M,Indx)
+  use SLATEC
   IMPLICIT NONE
   !>
   !***
@@ -33,8 +34,6 @@ SUBROUTINE ISMPL(N,M,Indx)
   !     .. Local Scalars ..
   REAL dummy
   INTEGER i, id, j
-  !     .. External Functions ..
-  REAL, EXTERNAL :: RAND
   !     .. Intrinsic Functions ..
   INTRINSIC INT
   !* FIRST EXECUTABLE STATEMENT  ISMPL

@@ -1,7 +1,6 @@
 !** DPLPFL
 SUBROUTINE DPLPFL(Mrelas,Nvars,Ienter,Ileave,Ibasis,Ind,Ibb,Theta,Dirnrm,&
     Rprnrm,Csc,Ww,Bl,Bu,Erp,Rprim,Primal,Finite,Zerolv)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to DSPLP

@@ -1,6 +1,5 @@
 !** CQRDC
 SUBROUTINE CQRDC(X,Ldx,N,P,Qraux,Jpvt,Work,Job)
-  IMPLICIT NONE
   !>
   !***
   !  Use Householder transformations to compute the QR
@@ -113,11 +112,9 @@ SUBROUTINE CQRDC(X,Ldx,N,P,Qraux,Jpvt,Work,Job)
   COMPLEX X(Ldx,*), Qraux(*), Work(*)
   !
   INTEGER j, jp, l, lp1, lup, maxj, pl, pu
-  REAL maxnrm, SCNRM2, tt
-  COMPLEX CDOTC, nrmxl, t
+  REAL maxnrm, tt
+  COMPLEX nrmxl, t
   LOGICAL negj, swapj
-  REAL, EXTERNAL :: CABS1
-  COMPLEX, EXTERNAL :: CSIGN
   !
   !* FIRST EXECUTABLE STATEMENT  CQRDC
   pl = 1

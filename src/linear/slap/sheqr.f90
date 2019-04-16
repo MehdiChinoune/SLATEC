@@ -1,6 +1,5 @@
 !** SHEQR
 SUBROUTINE SHEQR(A,Lda,N,Q,Info,Ijob)
-  IMPLICIT NONE
   !>
   !***
   !  Internal routine for SGMRES.

@@ -1,6 +1,5 @@
 !** SINQB
 SUBROUTINE SINQB(N,X,Wsave)
-  IMPLICIT NONE
   !>
   !***
   !  Compute the unnormalized inverse of SINQF.

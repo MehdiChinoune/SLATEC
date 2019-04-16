@@ -2,7 +2,6 @@
 INTEGER FUNCTION ISDBCG(N,B,X,Nelt,Ia,Ja,A,Isym,MSOLVE,Itol,Tol,Itmax,&
     Iter,Err,Ierr,Iunit,R,Z,P,Rr,Zz,Pp,Dz,Rwork,Iwork,Ak,Bk,Bnrm,Solnrm)
   USE DSLBLK
-  IMPLICIT NONE
   !>
   !***
   !  Preconditioned BiConjugate Gradient Stop Test.
@@ -195,8 +194,6 @@ INTEGER FUNCTION ISDBCG(N,B,X,Nelt,Ia,Ja,A,Isym,MSOLVE,Itol,Tol,Itmax,&
   EXTERNAL :: MSOLVE
   !     .. Local Scalars ..
   INTEGER i
-  !     .. External Functions ..
-  REAL(8), EXTERNAL :: D1MACH, DNRM2
   !* FIRST EXECUTABLE STATEMENT  ISDBCG
   ISDBCG = 0
   !

@@ -1,6 +1,5 @@
 !** DXNRMP
 SUBROUTINE DXNRMP(Nu,Mu1,Mu2,Darg,Mode,Dpn,Ipn,Isig,Ierror)
-  IMPLICIT NONE
   !>
   !***
   !  Compute normalized Legendre polynomials.

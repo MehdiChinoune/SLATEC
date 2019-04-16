@@ -1,6 +1,5 @@
 !** PGSF
 REAL FUNCTION PGSF(X,Iz,C,A,Bh)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to CBLKTR

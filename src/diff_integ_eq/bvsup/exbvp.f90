@@ -2,7 +2,6 @@
 SUBROUTINE EXBVP(Y,Nrowy,Xpts,A,Nrowa,Alpha,B,Nrowb,Beta,Iflag,Work,Iwork)
   USE ML, ONLY : NCOmp, NFC, TOL, NXPts, NIC, NOPg, MXNon, NDIsk, NTP, NFCc, X, &
     XBEg, XENd, KKKzpw, NEEdw, NEEdiw, K1, K2, K3, K4, K5, K6, K7, K8, K9, K10, L1, LPAr
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to BVSUP

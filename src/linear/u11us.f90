@@ -1,6 +1,5 @@
 !** U11US
 SUBROUTINE U11US(A,Mda,M,N,Ub,Db,Mode,Np,Krank,Ksure,H,W,Eb,Ir,Ic)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to ULSIA
@@ -34,9 +33,8 @@ SUBROUTINE U11US(A,Mda,M,N,Ub,Db,Mode,Np,Krank,Ksure,H,W,Eb,Ir,Ic)
   !   900328  Added TYPE section.  (WRB)
 
   INTEGER Mda, mmk, Mode, N, nn, Np
-  REAL A(Mda,*), bb, Db(*), Eb(*), H(*), r2, rmin, SDOT, SNRM2, summ, t, temp, &
-    tn, tt, Ub(*), W(*)
-  INTEGER i, ii, im1, imin, is, ISAMAX, j, jm1, jmax, jp1, kk, &
+  REAL A(Mda,*), bb, Db(*), Eb(*), H(*), r2, rmin, summ, t, temp, tn, tt, Ub(*), W(*)
+  INTEGER i, ii, im1, imin, is, j, jm1, jmax, jp1, kk, &
     km1, kmi, kp1, Krank, Ksure, kz, l, lm1, M
   INTEGER Ic(*), Ir(*)
   !

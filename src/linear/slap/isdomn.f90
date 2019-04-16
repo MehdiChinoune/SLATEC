@@ -3,7 +3,6 @@ INTEGER FUNCTION ISDOMN(N,B,X,Nelt,Ia,Ja,A,Isym,MSOLVE,Nsave,Itol,Tol,&
     Itmax,Iter,Err,Ierr,Iunit,R,Z,P,Ap,Emap,Dz,Csav,&
     Rwork,Iwork,Ak,Bnrm,Solnrm)
   USE DSLBLK
-  IMPLICIT NONE
   !>
   !***
   !  Preconditioned Orthomin Stop Test.
@@ -195,8 +194,6 @@ INTEGER FUNCTION ISDOMN(N,B,X,Nelt,Ia,Ja,A,Isym,MSOLVE,Nsave,Itol,Tol,&
   EXTERNAL :: MSOLVE
   !     .. Local Scalars ..
   INTEGER i
-  !     .. External Functions ..
-  REAL(8), EXTERNAL :: D1MACH, DNRM2
   !* FIRST EXECUTABLE STATEMENT  ISDOMN
   ISDOMN = 0
   !

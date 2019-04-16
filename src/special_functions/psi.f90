@@ -1,6 +1,5 @@
 !** PSI
 REAL FUNCTION PSI(X)
-  IMPLICIT NONE
   !>
   !***
   !  Compute the Psi (or Digamma) function.
@@ -48,8 +47,6 @@ REAL FUNCTION PSI(X)
 
   REAL aux, X, y
   INTEGER i, n
-  INTEGER, EXTERNAL :: INITS
-  REAL, EXTERNAL :: CSEVL, COT, R1MACH
   INTEGER, SAVE :: ntpsi, ntapsi
   REAL, SAVE :: xbig, dxrel
   REAL, PARAMETER :: psics(23) = [ -.038057080835217922E0, .49141539302938713E0, &

@@ -2,7 +2,6 @@
 SUBROUTINE DPLPDM(Mrelas,Nvars,Lmx,Lbm,Nredc,Info,Iopt,Ibasis,Imat,Ibrc,&
     Ipr,Iwr,Ind,Ibb,Anorm,Eps,Uu,Gg,Amat,Basmat,Csc,Wr,Singlr,Redbas)
   USE LA05DD
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to DSPLP
@@ -41,7 +40,7 @@ SUBROUTINE DPLPDM(Mrelas,Nvars,Lmx,Lbm,Nredc,Info,Iopt,Ibasis,Imat,Ibrc,&
   INTEGER i, Info, Iopt, iplace, j, k, Lbm, Lmx, Mrelas, Nredc, Nvars, nzbm
   INTEGER Ibasis(*), Imat(*), Ibrc(Lbm,2), Ipr(*), Iwr(*), Ind(*), Ibb(*)
   REAL(8) :: aij, Amat(*), Basmat(*), Csc(*), Wr(*), Anorm, &
-    DASUM, Eps, Gg, one, Uu, zero
+    Eps, Gg, one, Uu, zero
   LOGICAL Singlr, Redbas
   CHARACTER(16) :: xern3
   !

@@ -1,6 +1,5 @@
 !** STRCO
 SUBROUTINE STRCO(T,Ldt,N,Rcond,Z,Job)
-  IMPLICIT NONE
   !>
   !***
   !  Estimate the condition number of a triangular matrix.
@@ -79,7 +78,7 @@ SUBROUTINE STRCO(T,Ldt,N,Rcond,Z,Job)
   REAL Rcond
   !
   REAL w, wk, wkm, ek
-  REAL tnorm, ynorm, s, sm, SASUM
+  REAL tnorm, ynorm, s, sm
   INTEGER i1, j, j1, j2, k, kk, l
   LOGICAL lower
   !* FIRST EXECUTABLE STATEMENT  STRCO

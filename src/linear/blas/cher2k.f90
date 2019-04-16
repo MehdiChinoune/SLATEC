@@ -1,6 +1,5 @@
 !** CHER2K
 SUBROUTINE CHER2K(Uplo,Trans,N,K,Alpha,A,Lda,B,Ldb,Beta,C,Ldc)
-  IMPLICIT NONE
   !>
   !***
   !  Perform Hermitian rank 2k update of a complex.
@@ -154,10 +153,6 @@ SUBROUTINE CHER2K(Uplo,Trans,N,K,Alpha,A,Lda,B,Ldb,Beta,C,Ldc)
   COMPLEX Alpha
   !     .. Array Arguments ..
   COMPLEX A(Lda,*), B(Ldb,*), C(Ldc,*)
-  !     .. External Functions ..
-  LOGICAL, EXTERNAL :: LSAME
-  !     .. External Subroutines ..
-  EXTERNAL :: XERBLA
   !     .. Intrinsic Functions ..
   INTRINSIC CONJG, MAX, REAL
   !     .. Local Scalars ..

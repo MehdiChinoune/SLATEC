@@ -1,6 +1,5 @@
 !** BESJ
 SUBROUTINE BESJ(X,Alpha,N,Y,Nz)
-  IMPLICIT NONE
   !>
   !***
   !  Compute an N member sequence of J Bessel functions
@@ -89,9 +88,6 @@ SUBROUTINE BESJ(X,Alpha,N,Y,Nz)
     fidal, flgjy, fn, fnf, fni, fnp1, fnu, gln, rden, relb, rtx, rzden, s, sa, &
     sb, sxo2, s1, s2, t, ta, tau, tb, temp(3), tfn, tm, tol, tolln, trx, tx, t1, &
     t2, wk(7), X, xo2, xo2l, Y(*), rtol, slim
-  INTEGER, EXTERNAL :: I1MACH
-  REAL, EXTERNAL :: R1MACH
-  EXTERNAL :: JAIRY
   REAL, PARAMETER :: rtwo = 1.34839972492648E+00, pdf = 7.85398163397448E-01, &
     rttp = 7.97884560802865E-01, pidt = 1.57079632679490E+00
   REAL, PARAMETER :: pp(4) = [ 8.72909153935547E+00, 2.65693932265030E-01, &

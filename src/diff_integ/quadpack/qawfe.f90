@@ -1,7 +1,6 @@
 !** QAWFE
 SUBROUTINE QAWFE(F,A,Omega,Integr,Epsabs,Limlst,Limit,Maxp1,Result,Abserr,&
     Neval,Ier,Rslst,Erlst,Ierlst,Lst,Alist,Blist,Rlist,Elist,Iord,Nnlog,Chebmo)
-  IMPLICIT NONE
   !>
   !***
   !  The routine calculates an approximation result to a
@@ -224,7 +223,6 @@ SUBROUTINE QAWFE(F,A,Omega,Integr,Epsabs,Limlst,Limit,Maxp1,Result,Abserr,&
     Omega, p1, psum(52), reseps, Result, res3la(3), Rlist(*), Rslst(*), uflow
   !
   REAL, EXTERNAL :: F
-  REAL, EXTERNAL :: R1MACH
   !
   !
   !            THE DIMENSION OF  PSUM  IS DETERMINED BY THE VALUE OF

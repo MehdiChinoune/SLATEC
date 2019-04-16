@@ -1,6 +1,5 @@
 !** DQRDC
 SUBROUTINE DQRDC(X,Ldx,N,P,Qraux,Jpvt,Work,Job)
-  IMPLICIT NONE
   !>
   !***
   !  Use Householder transformations to compute the QR
@@ -113,8 +112,8 @@ SUBROUTINE DQRDC(X,Ldx,N,P,Qraux,Jpvt,Work,Job)
   REAL(8) :: X(Ldx,*), Qraux(*), Work(*)
   !
   INTEGER j, jp, l, lp1, lup, maxj, pl, pu
-  REAL(8) :: maxnrm, DNRM2, tt
-  REAL(8) :: DDOT, nrmxl, t
+  REAL(8) :: maxnrm, tt
+  REAL(8) :: nrmxl, t
   LOGICAL negj, swapj
   !
   !* FIRST EXECUTABLE STATEMENT  DQRDC

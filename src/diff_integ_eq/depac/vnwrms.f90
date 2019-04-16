@@ -1,6 +1,5 @@
 !** VNWRMS
 REAL FUNCTION VNWRMS(N,V,W)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to DEBDF

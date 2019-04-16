@@ -1,7 +1,6 @@
 !** DCGS
 SUBROUTINE DCGS(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,Iter,&
     Err,Ierr,Iunit,R,R0,P,Q,U,V1,V2,Rwork,Iwork)
-  IMPLICIT NONE
   !>
   !***
   !  Preconditioned BiConjugate Gradient Squared Ax=b Solver.
@@ -269,11 +268,6 @@ SUBROUTINE DCGS(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,Iter,&
   !     .. Local Scalars ..
   REAL(8) :: ak, akm, bk, bnrm, fuzz, rhon, rhonm1, sigma, solnrm, tolmin
   INTEGER i, k
-  !     .. External Functions ..
-  REAL(8), EXTERNAL :: D1MACH, DDOT
-  INTEGER, EXTERNAL :: ISDCGS
-  !     .. External Subroutines ..
-  EXTERNAL :: DAXPY
   !     .. Intrinsic Functions ..
   INTRINSIC ABS
   !* FIRST EXECUTABLE STATEMENT  DCGS

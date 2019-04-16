@@ -1,6 +1,5 @@
 !** DBSKES
 SUBROUTINE DBSKES(Xnu,X,Nin,Bke)
-  IMPLICIT NONE
   !>
   !***
   !  Compute a sequence of exponentially scaled modified Bessel
@@ -42,7 +41,7 @@ SUBROUTINE DBSKES(Xnu,X,Nin,Bke)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
 
   INTEGER i, iswtch, n, Nin
-  REAL(8) :: Xnu, X, Bke(*), bknu1, v, vincr, vend, D1MACH, direct
+  REAL(8) :: Xnu, X, Bke(*), bknu1, v, vincr, vend, direct
   REAL(8) :: alnbig = 0.D0
   !* FIRST EXECUTABLE STATEMENT  DBSKES
   IF ( alnbig==0.D0 ) alnbig = LOG(D1MACH(2))

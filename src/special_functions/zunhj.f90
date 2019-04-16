@@ -1,7 +1,6 @@
 !** ZUNHJ
 SUBROUTINE ZUNHJ(Zr,Zi,Fnu,Ipmtr,Tol,Phir,Phii,Argr,Argi,Zeta1r,Zeta1i,&
     Zeta2r,Zeta2i,Asumr,Asumi,Bsumr,Bsumi)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to ZBESI and ZBESK
@@ -62,8 +61,6 @@ SUBROUTINE ZUNHJ(Zr,Zi,Fnu,Ipmtr,Tol,Phir,Phii,Argr,Argi,Zeta1r,Zeta1i,&
     zetai, zetar, Zeta1i, Zeta1r, Zeta2i, Zeta2r, Zi, Zr, zthi, zthr, ac
   INTEGER ias, ibs, Ipmtr, is, j, jr, ju, k, kmax, kp1, ks, l, &
     lr, lrp1, l1, l2, m, idum
-  REAL(8), EXTERNAL :: ZABS, D1MACH
-  EXTERNAL :: ZLOG, ZSQRT
   REAL(8), PARAMETER :: ar(14) = [ 1.00000000000000000D+00, 1.04166666666666667D-01, &
     8.35503472222222222D-02, 1.28226574556327160D-01, 2.91849026464140464D-01, &
     8.81627267443757652D-01, 3.32140828186276754D+00, 1.49957629868625547D+01, &

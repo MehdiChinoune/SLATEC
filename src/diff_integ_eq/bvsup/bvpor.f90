@@ -3,7 +3,6 @@ SUBROUTINE BVPOR(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
     Nfc,Iflag,Z,Mxnon,P,Ntp,Ip,W,Niv,Yhp,U,V,Coef,S,Stowa,G,Work,Iwork,Nfcc)
   USE ML, ONLY : C, INHomo, IVP, PX, PWCnd, TND, X, XBEg, XENd, XOT, XOP, KNSwot, &
     KOP, LOTjp, NSWot, AE, RE, TOL, NDIsk, NTApe, NEQ, NEQivp, NUMort, ICOco
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to BVSUP
@@ -143,7 +142,7 @@ SUBROUTINE BVPOR(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
     Nfcc, nfcp1, nfcp2, Nic, Niv, nn, non, Nrowa, Nrowb, Nrowy, Ntp, i, i1, i2, &
     ic, Iflag, Ip(Nfcc,*), ira, isflg, Iwork(*), j, k, Nxpts
   REAL A(Nrowa,*), Alpha(*), B(Nrowb,*), Beta(*), Coef(*), G(*), P(Ntp,*), S(*), &
-    SDOT, Stowa(*), U(Ncomp,Nfc,*), V(Ncomp,*), W(Nfcc,*), Work(*), Xpts(*), &
+    Stowa(*), U(Ncomp,Nfc,*), V(Ncomp,*), W(Nfcc,*), Work(*), Xpts(*), &
     Y(Nrowy,*), Yhp(Ncomp,*), Z(*)
   !* FIRST EXECUTABLE STATEMENT  BVPOR
   nfcp1 = Nfc + 1

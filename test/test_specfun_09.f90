@@ -1,4 +1,5 @@
 MODULE TEST10_MOD
+  use slatec
   IMPLICIT NONE
 
 CONTAINS
@@ -80,12 +81,6 @@ CONTAINS
     !  Declare arguments.
     !
     INTEGER Lun, Kprint, Ipass
-    !
-    !  Declare external functions.
-    !
-    INTEGER, EXTERNAL :: I1MACH
-    REAL(8), EXTERNAL :: D1MACH, ZABS
-    EXTERNAL :: ZEXP, ZSQRT
     !
     !  Declare local variables.
     !
@@ -481,11 +476,6 @@ CONTAINS
     !
     INTEGER Lun, Kprint, Ipass
     !
-    !  Declare external functions.
-    !
-    INTEGER, EXTERNAL :: I1MACH
-    REAL(8), EXTERNAL :: D1MACH, ZABS
-    !
     !  Declare local variables.
     !
     REAL(8) :: cvr, cvi, cwr, cwi, cyr, cyi, wr(20), wi(20), yr(20), yi(20), &
@@ -851,11 +841,6 @@ CONTAINS
     !  Declare arguments.
     !
     INTEGER Lun, Kprint, Ipass
-    !
-    !  Declare external functions.
-    !
-    INTEGER, EXTERNAL :: I1MACH
-    REAL(8), EXTERNAL :: D1MACH, ZABS
     !
     !  Declare local variables.
     !
@@ -1383,12 +1368,6 @@ CONTAINS
     !
     INTEGER Lun, Kprint, Ipass
     !
-    !  Declare external functions.
-    !
-    INTEGER, EXTERNAL :: I1MACH
-    REAL(8), EXTERNAL :: D1MACH, ZABS
-    EXTERNAL :: ZEXP
-    !
     !  Declare local variables.
     !
     REAL(8) :: coe1r, coe1i, coe2r, coe2i, cwr, cwi, halfr, &
@@ -1793,12 +1772,6 @@ CONTAINS
     !
     INTEGER Lun, Kprint, Ipass
     !
-    !  Declare external functions.
-    !
-    INTEGER, EXTERNAL :: I1MACH
-    REAL(8), EXTERNAL :: D1MACH, ZABS
-    EXTERNAL :: ZEXP
-    !
     !  Declare local variables.
     !
     REAL(8) :: coner, conei, csgnr, csgni, cvr, cvi, cwr, cwi, &
@@ -2187,10 +2160,6 @@ CONTAINS
     INTEGER, PARAMETER :: MQC = 1
     !  Declare arguments.
     INTEGER Lun, Kprint, Ipass
-    !  Declare external functions.
-    INTEGER, EXTERNAL :: I1MACH
-    REAL(8), EXTERNAL :: D1MACH, ZABS
-    EXTERNAL :: ZEXP
     !
     !  Declare local variables.
     !
@@ -2537,6 +2506,7 @@ END MODULE TEST10_MOD
 !** TEST10
 PROGRAM TEST10
   USE TEST10_MOD
+  use slatec
   IMPLICIT NONE
   !>
   !***
@@ -2587,7 +2557,6 @@ PROGRAM TEST10
   !   910411  DATE WRITTEN
   !   920128  Category corrected.  (WRB)
 
-  INTEGER, EXTERNAL :: I1MACH
   INTEGER ipass, kprint, lin, lun, nfail
   !* FIRST EXECUTABLE STATEMENT  TEST10
   lun = I1MACH(2)

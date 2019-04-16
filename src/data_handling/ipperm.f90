@@ -1,6 +1,5 @@
 !** IPPERM
 SUBROUTINE IPPERM(Ix,N,Iperm,Ier)
-  IMPLICIT NONE
   !>
   !***
   !  Rearrange a given array according to a prescribed

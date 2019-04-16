@@ -1,6 +1,5 @@
 !** DNSQE
 SUBROUTINE DNSQE(FCN,JAC,Iopt,N,X,Fvec,Tol,Nprint,Info,Wa,Lwa)
-  IMPLICIT NONE
   !>
   !***
   !  An easy-to-use code to find a zero of a system of N

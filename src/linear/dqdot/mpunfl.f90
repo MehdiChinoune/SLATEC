@@ -1,6 +1,5 @@
 !** MPUNFL
 SUBROUTINE MPUNFL(X)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to DQDOTA and DQDOTI

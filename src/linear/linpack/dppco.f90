@@ -1,6 +1,5 @@
 !** DPPCO
 SUBROUTINE DPPCO(Ap,N,Rcond,Z,Info)
-  IMPLICIT NONE
   !>
   !***
   !  Factor a symmetric positive definite matrix stored in
@@ -104,8 +103,8 @@ SUBROUTINE DPPCO(Ap,N,Rcond,Z,Info)
   REAL(8) :: Ap(*), Z(*)
   REAL(8) :: Rcond
   !
-  REAL(8) :: DDOT, ek, t, wk, wkm
-  REAL(8) :: anorm, s, DASUM, sm, ynorm
+  REAL(8) :: ek, t, wk, wkm
+  REAL(8) :: anorm, s, sm, ynorm
   INTEGER i, ij, j, jm1, j1, k, kb, kj, kk, kp1
   !
   !     FIND NORM OF A

@@ -1,6 +1,5 @@
 !** CPOSL
 SUBROUTINE CPOSL(A,Lda,N,B)
-  IMPLICIT NONE
   !>
   !***
   !  Solve the complex Hermitian positive definite linear system
@@ -70,11 +69,11 @@ SUBROUTINE CPOSL(A,Lda,N,B)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   INTEGER Lda, N
   COMPLEX A(Lda,*), B(*)
   !
-  COMPLEX CDOTC, t
+  COMPLEX t
   INTEGER k, kb
   !
   !     SOLVE CTRANS(R)*Y = B

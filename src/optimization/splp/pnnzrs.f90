@@ -1,6 +1,5 @@
 !** PNNZRS
 SUBROUTINE PNNZRS(I,Xval,Iplace,Sx,Ix,Ircx)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to SPLP
@@ -63,7 +62,7 @@ SUBROUTINE PNNZRS(I,Xval,Iplace,Sx,Ix,Ircx)
   !   910403  Updated AUTHOR and DESCRIPTION sections.  (WRB)
 
   INTEGER I, i1, idiff, iend, ii, il, ilast, iopt, ipl, Iplace, &
-    IPLOC, ipploc, Ircx, istart, Ix(*), j, l, ll, lmx, lpg
+    ipploc, Ircx, istart, Ix(*), j, l, ll, lmx, lpg
   INTEGER n20046, nerr, np
   REAL Xval, Sx(*)
   REAL, PARAMETER :: zero = 0.E0

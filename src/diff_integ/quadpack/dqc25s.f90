@@ -1,7 +1,6 @@
 !** DQC25S
 SUBROUTINE DQC25S(F,A,B,Bl,Br,Alfa,Beta,Ri,Rj,Rg,Rh,Result,Abserr,Resasc,&
     Integr,Nev)
-  IMPLICIT NONE
   !>
   !***
   !  To compute I = Integral of F*W over (BL,BR), with error
@@ -104,7 +103,6 @@ SUBROUTINE DQC25S(F,A,B,Bl,Br,Alfa,Beta,Ri,Rj,Rg,Rh,Result,Abserr,Resasc,&
   INTEGER i, Integr, isym, Nev
   !
   REAL(8), EXTERNAL :: F
-  REAL(8), EXTERNAL :: DQWGTS
   !
   !           THE VECTOR X CONTAINS THE VALUES COS(K*PI/24)
   !           K = 1, ..., 11, TO BE USED FOR THE COMPUTATION OF THE

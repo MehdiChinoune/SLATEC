@@ -1,6 +1,5 @@
 !** LSAME
 LOGICAL FUNCTION LSAME(Ca,Cb)
-  IMPLICIT NONE
   !>
   !***
   !  Test two characters to determine if they are the same

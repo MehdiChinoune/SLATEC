@@ -1,6 +1,5 @@
 !** CARG
 REAL FUNCTION CARG(Z)
-  IMPLICIT NONE
   !>
   !***
   !  Compute the argument of a complex number.

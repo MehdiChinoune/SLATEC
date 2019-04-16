@@ -1,6 +1,5 @@
 !** DPBDI
 SUBROUTINE DPBDI(Abd,Lda,N,M,Det)
-  IMPLICIT NONE
   !>
   !***
   !  Compute the determinant of a symmetric positive definite

@@ -1,7 +1,6 @@
 !** DLSSUD
 SUBROUTINE DLSSUD(A,X,B,N,M,Nrda,U,Nrdu,Iflag,Mlso,Irank,Iscale,Q,Diag,&
     Kpivot,S,Div,Td,Isflg,Scales)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to DBVSUP and DSUDS
@@ -119,8 +118,6 @@ SUBROUTINE DLSSUD(A,X,B,N,M,Nrda,U,Nrdu,Iflag,Mlso,Irank,Iscale,Q,Diag,&
   !   910408  Updated the AUTHOR and REFERENCES sections.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
-  INTEGER J4SAVE
-  REAL(8) :: DDOT, D1MACH
   INTEGER i, Iflag, Irank, irp, Iscale, Isflg, j, jr, k, kp, &
     Kpivot(*), l, M, maxmes, mj, Mlso, N, nfat, nfatal, nmir, Nrda, Nrdu, nu
   REAL(8) :: A(Nrda,*), B(*), Diag(*), Div(*), gam, gama, &

@@ -1,6 +1,5 @@
 !** DSICO
 SUBROUTINE DSICO(A,Lda,N,Kpvt,Rcond,Z)
-  IMPLICIT NONE
   !>
   !***
   !  Factor a symmetric matrix by elimination with symmetric
@@ -94,8 +93,7 @@ SUBROUTINE DSICO(A,Lda,N,Kpvt,Rcond,Z)
   REAL(8) :: A(Lda,*), Z(*)
   REAL(8) :: Rcond
   !
-  REAL(8) :: ak, akm1, bk, bkm1, DDOT, denom, ek, t
-  REAL(8) :: anorm, s, DASUM, ynorm
+  REAL(8) :: ak, akm1, bk, bkm1, denom, ek, t, anorm, s, ynorm
   INTEGER i, info, j, jm1, k, kp, kps, ks
   !
   !     FIND NORM OF A USING ONLY UPPER HALF

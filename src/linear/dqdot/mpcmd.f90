@@ -1,7 +1,6 @@
 !** MPCMD
 SUBROUTINE MPCMD(X,Dz)
   USE MPCOM
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to DQDOTA and DQDOTI

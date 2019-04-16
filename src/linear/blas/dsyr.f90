@@ -1,6 +1,5 @@
 !** DSYR
 SUBROUTINE DSYR(Uplo,N,Alpha,X,Incx,A,Lda)
-  IMPLICIT NONE
   !>
   !***
   !  Perform the symmetric rank 1 operation.
@@ -107,10 +106,6 @@ SUBROUTINE DSYR(Uplo,N,Alpha,X,Incx,A,Lda)
   !     .. Local Scalars ..
   REAL(8) :: temp
   INTEGER i, info, ix, j, jx, kx
-  !     .. External Functions ..
-  LOGICAL, EXTERNAL :: LSAME
-  !     .. External Subroutines ..
-  EXTERNAL :: XERBLA
   !     .. Intrinsic Functions ..
   INTRINSIC MAX
   !* FIRST EXECUTABLE STATEMENT  DSYR

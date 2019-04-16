@@ -1,7 +1,6 @@
 !** DNSQ
 SUBROUTINE DNSQ(FCN,JAC,Iopt,N,X,Fvec,Fjac,Ldfjac,Xtol,Maxfev,Ml,Mu,&
     Epsfcn,Diag,Mode,Factor,Nprint,Info,Nfev,Njev,R,Lr,Qtf,Wa1,Wa2,Wa3,Wa4)
-  IMPLICIT NONE
   !>
   !***
   !  Find a zero of a system of a N nonlinear functions in N
@@ -430,7 +429,6 @@ SUBROUTINE DNSQ(FCN,JAC,Iopt,N,X,Fvec,Fjac,Ldfjac,Xtol,Maxfev,Ml,Mu,&
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
-  REAL(8) :: D1MACH, DENORM
   INTEGER i, iflag, Info, Iopt, iter, iwa(1), j, jm1, l, Ldfjac, &
     Lr, Maxfev, Ml, Mode, Mu, N, ncfail, ncsuc, Nfev, Njev, &
     Nprint, nslow1, nslow2

@@ -1,6 +1,5 @@
 !** QWGTS
 REAL FUNCTION QWGTS(X,A,B,Alfa,Beta,Integr)
-  IMPLICIT NONE
   !>
   !***
   !  This function subprogram is used together with the

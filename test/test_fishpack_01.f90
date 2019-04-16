@@ -1,4 +1,5 @@
 MODULE TEST50_MOD
+  use slatec
   IMPLICIT NONE
 
 CONTAINS
@@ -237,7 +238,7 @@ CONTAINS
     !   901010  Added PASS/FAIL message and cleaned up FORMATs.  (RWC)
 
     REAL a, b, bda(1), bdb(81), bdc(1), bdd(1), c, d, dum, elmbda, ermax, err, &
-      f(45,82), pertrb, pi, piby2, PIMACH, pisq, w(1200), x(41)
+      f(45,82), pertrb, pi, piby2, pisq, w(1200), x(41)
     REAL y(81), z
     INTEGER i, idimf, ierror, Ipass, j, Kprint, Lun, m, mbdcnd, mp1, &
       n, nbdcnd, np1
@@ -387,7 +388,7 @@ CONTAINS
     !   901010  Added PASS/FAIL message and cleaned up FORMATs.  (RWC)
 
     REAL bdrf(1), bdrs(1), bdtf(33), bdts(1), ci4, dphi, dr, dtheta, dum, elmbda, &
-      ermax, err, f(48,33), pertrb, pi, PIMACH, r(33), rf, rs, si
+      ermax, err, f(48,33), pertrb, pi, r(33), rf, rs, si
     REAL tf, theta(48), ts, w(1200), z
     INTEGER i, idimf, ierror, intl, Ipass, j, Kprint, Lun, m, &
       mbdcnd, mp1, n, nbdcnd, np1
@@ -767,7 +768,7 @@ CONTAINS
     !   901010  Added PASS/FAIL message and cleaned up FORMATs.  (RWC)
 
     REAL a(20), b(20), c(20), deltax, deltay, dum, dysq, ermax, err, f(25,130), pi, &
-      PIMACH, s, t, w(1200), x(20), y(120), z
+      s, t, w(1200), x(20), y(120), z
     INTEGER i, idimy, ierror, Ipass, j, Kprint, Lun, m, mm1, mperod, n, nperod
     !* FIRST EXECUTABLE STATEMENT  QXGBUN
     !
@@ -939,7 +940,7 @@ CONTAINS
     !   901010  Added PASS/FAIL message and cleaned up FORMATs.  (RWC)
 
     REAL a, b, bda(1), bdb(1), bdc(51), bdd(51), c, d, dum, elmbda, ermax, err, &
-      f(100,50), pertrb, pi, PIMACH, r(51), theta(49), w(1200), z
+      f(100,50), pertrb, pi, r(51), theta(49), w(1200), z
     INTEGER i, idimf, ierror, Ipass, j, Kprint, Lun, m, mbdcnd, mp1, &
       n, nbdcnd, np1
     !* FIRST EXECUTABLE STATEMENT  QXPLR
@@ -1088,7 +1089,7 @@ CONTAINS
     !   901010  Added PASS/FAIL message and cleaned up FORMATs.  (RWC)
 
     REAL bdpf(1), bdps(1), bdtf(73), bdts(1), dphi, dtheta, dum, elmbda, ermax, &
-      err, f(19,73), pertrb, pf, pi, PIMACH, ps, sinp(73), sint(19), tf, ts
+      err, f(19,73), pertrb, pf, pi, ps, sinp(73), sint(19), tf, ts
     REAL w(1200), z
     INTEGER i, idimf, ierror, Ipass, j, Kprint, Lun, m, mbdcnd, mp1, n, nbdcnd, np1
     !* FIRST EXECUTABLE STATEMENT  QXSSP
@@ -1177,6 +1178,7 @@ END MODULE TEST50_MOD
 !** TEST50
 PROGRAM TEST50
   USE TEST50_MOD
+  use slatec
   IMPLICIT NONE
   !>
   !***
@@ -1233,8 +1235,6 @@ PROGRAM TEST50
   !   890618  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900524  Cosmetic changes to code.  (WRB)
-
-  INTEGER I1MACH
   INTEGER ipass, kprint, lin, lun, nfail
   !* FIRST EXECUTABLE STATEMENT  TEST50
   lun = I1MACH(2)

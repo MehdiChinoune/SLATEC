@@ -1,6 +1,5 @@
 !** QWGTF
 REAL FUNCTION QWGTF(X,Omega,P2,P3,P4,Integr)
-  IMPLICIT NONE
   !>
   !***
   !  This function subprogram is used together with the

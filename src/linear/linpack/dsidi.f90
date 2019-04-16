@@ -1,6 +1,5 @@
 !** DSIDI
 SUBROUTINE DSIDI(A,Lda,N,Kpvt,Det,Inert,Work,Job)
-  IMPLICIT NONE
   !>
   !***
   !  Compute the determinant, inertia and inverse of a real
@@ -96,8 +95,7 @@ SUBROUTINE DSIDI(A,Lda,N,Kpvt,Det,Inert,Work,Job)
   REAL(8) :: Det(2)
   INTEGER Kpvt(*), Inert(3)
   !
-  REAL(8) :: akkp1, DDOT, temp
-  REAL(8) :: ten, d, t, ak, akp1
+  REAL(8) :: akkp1, temp, ten, d, t, ak, akp1
   INTEGER j, jb, k, km1, ks, kstep
   LOGICAL noinv, nodet, noert
   !* FIRST EXECUTABLE STATEMENT  DSIDI

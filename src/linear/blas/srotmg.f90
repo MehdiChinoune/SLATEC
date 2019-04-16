@@ -1,6 +1,5 @@
 !** SROTMG
 SUBROUTINE SROTMG(Sd1,Sd2,Sx1,Sy1,Sparam)
-  IMPLICIT NONE
   !>
   !***
   !  Construct a modified Givens transformation.

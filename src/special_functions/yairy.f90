@@ -1,6 +1,5 @@
 !** YAIRY
 SUBROUTINE YAIRY(X,Rx,C,Bi,Dbi)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to BESJ and BESY

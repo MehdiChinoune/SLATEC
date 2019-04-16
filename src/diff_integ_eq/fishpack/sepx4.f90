@@ -1,7 +1,6 @@
 !** SEPX4
 SUBROUTINE SEPX4(Iorder,A,B,M,Mbdcnd,Bda,Alpha,Bdb,Beta,C,D,N,Nbdcnd,Bdc,&
     Bdd,COFX,Grhs,Usol,Idmn,W,Pertrb,Ierror)
-  IMPLICIT NONE
   !>
   !***
   !  Solve for either the second or fourth order finite

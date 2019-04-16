@@ -1,6 +1,5 @@
 !** D1UPDT
 SUBROUTINE D1UPDT(M,N,S,Ls,U,V,W,Sing)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to DNSQ and DNSQE
@@ -80,7 +79,6 @@ SUBROUTINE D1UPDT(M,N,S,Ls,U,V,W,Sing)
   !           (WRB)
   !   900328  Added TYPE section.  (WRB)
 
-  REAL(8) :: D1MACH
   INTEGER i, j, jj, l, Ls, M, N, nm1, nmj
   REAL(8) :: coss, cotan, giant, S(*), sinn, tann, tau, temp, U(*), V(*), W(*)
   LOGICAL Sing

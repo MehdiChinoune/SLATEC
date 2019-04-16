@@ -1,6 +1,5 @@
 !** DPCHCI
 SUBROUTINE DPCHCI(N,H,Slope,D,Incfd)
-  IMPLICIT NONE
   !>
   !***
   !  Set interior derivatives for DPCHIC
@@ -105,7 +104,6 @@ SUBROUTINE DPCHCI(N,H,Slope,D,Incfd)
   !
   INTEGER i, nless1
   REAL(8) :: del1, del2, dmax, dmin, drat1, drat2, hsum, hsumt3, w1, w2
-  REAL(8) :: DPCHST
   !
   !  INITIALIZE.
   !

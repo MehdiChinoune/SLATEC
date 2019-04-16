@@ -1,7 +1,6 @@
 !** DSDGMR
 SUBROUTINE DSDGMR(N,B,X,Nelt,Ia,Ja,A,Isym,Nsave,Itol,Tol,Itmax,Iter,Err,&
     Ierr,Iunit,Rwork,Lenw,Iwork,Leniw)
-  IMPLICIT NONE
   !>
   !***
   !  Diagonally scaled GMRES iterative sparse Ax=b solver.
@@ -340,8 +339,6 @@ SUBROUTINE DSDGMR(N,B,X,Nelt,Ia,Ja,A,Isym,Nsave,Itol,Tol,Itmax,Iter,Err,&
   INTEGER Ia(Nelt), Iwork(Leniw), Ja(Nelt)
   !     .. Local Scalars ..
   INTEGER locdin, locigw, lociw, locrgw, locw, myitol
-  !     .. External Subroutines ..
-  EXTERNAL :: DCHKW, DGMRES, DS2Y, DSDI, DSDS, DSMV
   !* FIRST EXECUTABLE STATEMENT  DSDGMR
   !
   Ierr = 0

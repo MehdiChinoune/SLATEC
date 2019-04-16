@@ -1,6 +1,5 @@
 !** COSQF1
 SUBROUTINE COSQF1(N,X,W,Xh)
-  IMPLICIT NONE
   !>
   !***
   !  Compute the forward cosine transform with odd wave numbers.

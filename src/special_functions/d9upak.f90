@@ -1,6 +1,5 @@
 !** D9UPAK
 SUBROUTINE D9UPAK(X,Y,N)
-  IMPLICIT NONE
   !>
   !***
   !  Unpack a floating point number X so that X = Y*2**N.

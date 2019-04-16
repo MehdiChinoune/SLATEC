@@ -1,7 +1,6 @@
 !** MINSOL
 SUBROUTINE MINSOL(Usol,Idmn,Zn,Zm,Pertb)
   USE SPLPCM
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to SEPELI

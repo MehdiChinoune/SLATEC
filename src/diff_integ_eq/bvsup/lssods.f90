@@ -1,7 +1,6 @@
 !** LSSODS
 SUBROUTINE LSSODS(A,X,B,M,N,Nrda,Iflag,Irank,Iscale,Q,Diag,Kpivot,Iter,&
     Resnrm,Xnorm,Z,R,Div,Td,Scales)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to BVSUP
@@ -125,10 +124,10 @@ SUBROUTINE LSSODS(A,X,B,M,N,Nrda,Iflag,Irank,Iscale,Q,Diag,Kpivot,Iter,&
 
   INTEGER nfatal, nmir, Nrda
   REAL A(Nrda,*), acc, B(*), Diag(*), Div(*), gam, gama, Q(Nrda,*), R(*), &
-    R1MACH, Resnrm, Scales(*), SDOT, SDSDOT, Td(*), uro, X(*), Xnorm, Z(*), znorm
+    Resnrm, Scales(*), Td(*), uro, X(*), Xnorm, Z(*), znorm
   REAL znrm0
   INTEGER Iflag, Irank, irm, irp, Iscale, it, Iter, iterp, j, &
-    J4SAVE, k, kp, Kpivot(*), l, M, maxmes, mj, mmir, N, nfat
+    k, kp, Kpivot(*), l, M, maxmes, mj, mmir, N, nfat
   !
   !- *********************************************************************
   !

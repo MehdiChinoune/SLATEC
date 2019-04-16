@@ -1,7 +1,6 @@
 !** DBOLSM
 SUBROUTINE DBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
     Scl,Ibasis,Ibb)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to DBOCLS and DBOLS
@@ -431,7 +430,6 @@ SUBROUTINE DBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
   REAL(8) :: W(Mdw,*), Bl(*), Bu(*), X(*), Rw(*), Ww(*), Scl(*)
   REAL(8) :: alpha, beta, bou, colabv, colblo, cl1, cl2, cl3, big, fac, Rnorm, &
     sc, ss, t, tolind, wt, t1, t2, wbig, wlarge, wmag, xnew, tolsze
-  REAL(8) :: DDOT, DNRM2, D1MACH
   INTEGER Ibasis(*), Ibb(*), Ind(*), Iopt(*)
   LOGICAL found, constr
   CHARACTER(8) :: xern1, xern2

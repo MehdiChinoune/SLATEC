@@ -1,6 +1,5 @@
 !** COMBAK
 SUBROUTINE COMBAK(Nm,Low,Igh,Ar,Ai,Intt,M,Zr,Zi)
-  IMPLICIT NONE
   !>
   !***
   !  Form the eigenvectors of a complex general matrix from the

@@ -1,6 +1,5 @@
 !** HVNRM
 REAL FUNCTION HVNRM(V,Ncomp)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to DEABM, DEBDF and DERKF

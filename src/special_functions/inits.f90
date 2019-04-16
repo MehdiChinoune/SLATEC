@@ -1,6 +1,5 @@
 !** INITS
 INTEGER FUNCTION INITS(Os,Nos,Eta)
-  IMPLICIT NONE
   !>
   !***
   !  Determine the number of terms needed in an orthogonal

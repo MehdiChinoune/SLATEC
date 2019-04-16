@@ -1,6 +1,5 @@
 !** DBETAI
 REAL(8) FUNCTION DBETAI(X,Pin,Qin)
-  IMPLICIT NONE
   !>
   !***
   !  Calculate the incomplete Beta function.
@@ -45,7 +44,7 @@ REAL(8) FUNCTION DBETAI(X,Pin,Qin)
   !   920528  DESCRIPTION and REFERENCES sections revised.  (WRB)
 
   INTEGER i, ib, n
-  REAL(8) :: X, Pin, Qin, c, finsum, p, ps, q, term, xb, xi, y, D1MACH, DLBETA, p1
+  REAL(8) :: X, Pin, Qin, c, finsum, p, ps, q, term, xb, xi, y, p1
   REAL(8), SAVE :: eps, alneps, sml, alnsml
   LOGICAL :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  DBETAI

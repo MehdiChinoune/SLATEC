@@ -1,6 +1,5 @@
 !** PPGQ8
 SUBROUTINE PPGQ8(FUN,Ldc,C,Xi,Lxi,Kk,Id,A,B,Inppv,Err,Ans,Ierr)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to PFQAD
@@ -77,10 +76,8 @@ SUBROUTINE PPGQ8(FUN,Ldc,C,Xi,Lxi,Kk,Id,A,B,Inppv,Err,Ans,Ierr)
     END FUNCTION
   END INTERFACE
   INTEGER Id, Ierr, Inppv, k, Kk, l, Ldc, lmn, lmx, lr(30), Lxi, mxl, nbits, nib, nlmx
-  INTEGER I1MACH
   REAL A, aa(30), ae, anib, Ans, area, B, be, C(Ldc,*), cc, ee, ef, eps, &
     Err, est, gl, glr, gr(30), hh(30), tol, vl(30), vr, Xi(*)
-  REAL R1MACH
   REAL, PARAMETER :: x1 = 1.83434642495649805E-01, x2 = 5.25532409916328986E-01, &
     x3 =7.96666477413626740E-01 , x4 = 9.60289856497536232E-01
   REAL, PARAMETER ::  w1 =3.62683783378361983E-01 , w2 = 3.13706645877887287E-01, &
@@ -213,7 +210,6 @@ SUBROUTINE PPGQ8(FUN,Ldc,C,Xi,Lxi,Kk,Id,A,B,Inppv,Err,Ans,Ierr)
 CONTAINS
   REAL FUNCTION G8(x,h)
     REAL, INTENT(IN) :: x, h
-    REAL, EXTERNAL :: PPVAL
     G8 = h*((w1*(FUN(x-x1*h)*PPVAL(Ldc,C,Xi,Lxi,Kk,Id,x-x1*h,Inppv)+FUN(&
       x+x1*h)*PPVAL(Ldc,C,Xi,Lxi,Kk,Id,x+x1*h,Inppv))&
       +w2*(FUN(x-x2*h)*PPVAL(Ldc,C,Xi,Lxi,Kk,Id,x-x2*h,Inppv)&

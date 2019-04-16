@@ -1,6 +1,5 @@
 !** CHPR2
 SUBROUTINE CHPR2(Uplo,N,Alpha,X,Incx,Y,Incy,Ap)
-  IMPLICIT NONE
   !>
   !***
   !  Perform the hermitian rank 2 operation.
@@ -118,10 +117,6 @@ SUBROUTINE CHPR2(Uplo,N,Alpha,X,Incx,Y,Incy,Ap)
   !     .. Local Scalars ..
   COMPLEX temp1, temp2
   INTEGER i, info, ix, iy, j, jx, jy, k, kk, kx, ky
-  !     .. External Functions ..
-  LOGICAL, EXTERNAL :: LSAME
-  !     .. External Subroutines ..
-  EXTERNAL :: XERBLA
   !     .. Intrinsic Functions ..
   INTRINSIC CONJG, REAL
   !* FIRST EXECUTABLE STATEMENT  CHPR2

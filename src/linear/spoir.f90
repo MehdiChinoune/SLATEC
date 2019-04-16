@@ -1,6 +1,5 @@
 !** SPOIR
 SUBROUTINE SPOIR(A,Lda,N,V,Itask,Ind,Work)
-  IMPLICIT NONE
   !>
   !***
   !  Solve a positive definite symmetric system of linear
@@ -117,8 +116,7 @@ SUBROUTINE SPOIR(A,Lda,N,V,Itask,Ind,Work)
 
   !
   INTEGER Lda, N, Itask, Ind, info, j
-  REAL A(Lda,*), V(*), Work(N,*), SASUM, xnorm, dnorm, R1MACH
-  REAL(8) :: DSDOT
+  REAL A(Lda,*), V(*), Work(N,*), xnorm, dnorm
   CHARACTER(8) :: xern1, xern2
   !* FIRST EXECUTABLE STATEMENT  SPOIR
   IF ( Lda<N ) THEN

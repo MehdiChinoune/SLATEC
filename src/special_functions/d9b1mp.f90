@@ -1,6 +1,5 @@
 !** D9B1MP
 SUBROUTINE D9B1MP(X,Ampl,Theta)
-  IMPLICIT NONE
   !>
   !***
   !  Evaluate the modulus and phase for the J1 and Y1 Bessel
@@ -62,8 +61,7 @@ SUBROUTINE D9B1MP(X,Ampl,Theta)
   !           use IF-THEN-ELSE.  (RWC, WRB)
 
   REAL eta
-  INTEGER INITDS
-  REAL(8) :: X, Ampl, Theta, z, D1MACH, DCSEVL
+  REAL(8) :: X, Ampl, Theta, z
   INTEGER, SAVE :: nbm1, nbt12, nbm12, nbth1
   REAL(8), SAVE :: xmax
   REAL(8), PARAMETER :: bm1cs(37) = [ +.1069845452618063014969985308538D+0, &

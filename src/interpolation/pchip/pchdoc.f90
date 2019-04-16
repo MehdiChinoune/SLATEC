@@ -1,6 +1,5 @@
 !** PCHDOC
 SUBROUTINE PCHDOC
-  IMPLICIT NONE
   !>
   !***
   !  Documentation for PCHIP, a Fortran package for piecewise

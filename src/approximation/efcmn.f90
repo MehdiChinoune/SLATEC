@@ -1,7 +1,6 @@
 !** EFCMN
 SUBROUTINE EFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Mdein,Mdeout,&
     Coeff,Bf,Xtemp,Ptemp,Bkpt,G,Mdg,W,Mdw,Lw)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to EFC
@@ -37,8 +36,6 @@ SUBROUTINE EFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Mdein,Mdeout,&
   INTEGER Lw, Mdein, Mdeout, Mdg, Mdw, Nbkpt, Ndata, Nord
   REAL Bf(Nord,*), Bkpt(*), Bkptin(*), Coeff(*), G(Mdg,*), Ptemp(*), &
     Sddata(*), W(Mdw,*), Xdata(*), Xtemp(*), Ydata(*)
-  !
-  EXTERNAL :: BNDACC, BNDSOL, BSPLVN, SCOPY, SSCAL, SSORT, XERMSG
   !
   REAL dummy(1), rnorm, xmax, xmin, xval
   INTEGER i, idata, ileft, intseq, ip, ir, irow, l, mt, n, nb, nordm1, nordp1, np1

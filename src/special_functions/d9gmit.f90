@@ -1,6 +1,5 @@
 !** D9GMIT
 REAL(8) FUNCTION D9GMIT(A,X,Algap1,Sgngam,Alx)
-  IMPLICIT NONE
   !>
   !***
   !  Compute Tricomi's incomplete Gamma function for small
@@ -36,8 +35,7 @@ REAL(8) FUNCTION D9GMIT(A,X,Algap1,Sgngam,Alx)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
 
   INTEGER k, m, ma
-  REAL(8) :: A, X, Algap1, Sgngam, Alx, ae, aeps, algs, alg2, fk, s, sgng2, t, te, &
-    D1MACH
+  REAL(8) :: A, X, Algap1, Sgngam, Alx, ae, aeps, algs, alg2, fk, s, sgng2, t, te
   REAL(8), SAVE :: eps, bot
   LOGICAL :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  D9GMIT

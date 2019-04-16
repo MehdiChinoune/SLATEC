@@ -1,6 +1,5 @@
 !** SPOFA
 SUBROUTINE SPOFA(A,Lda,N,Info)
-  IMPLICIT NONE
   !>
   !***
   !  Factor a real symmetric positive definite matrix.
@@ -66,7 +65,7 @@ SUBROUTINE SPOFA(A,Lda,N,Info)
   INTEGER Lda, N, Info
   REAL A(Lda,*)
   !
-  REAL SDOT, t
+  REAL t
   REAL s
   INTEGER j, jm1, k
   !* FIRST EXECUTABLE STATEMENT  SPOFA

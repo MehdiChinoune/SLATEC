@@ -1,6 +1,5 @@
 !** HTRIBK
 SUBROUTINE HTRIBK(Nm,N,Ar,Ai,Tau,M,Zr,Zi)
-  IMPLICIT NONE
   !>
   !***
   !  Form the eigenvectors of a complex Hermitian matrix from

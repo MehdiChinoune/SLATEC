@@ -1,6 +1,5 @@
 !** ZBKNU
 SUBROUTINE ZBKNU(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol,Elim,Alim)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to ZAIRY, ZBESH, ZBESI and ZBESK
@@ -27,15 +26,13 @@ SUBROUTINE ZBKNU(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol,Elim,Alim)
   !   930122  Added ZEXP, ZLOG and ZSQRT to EXTERNAL statement.  (RWC)
 
   !
-  INTEGER i, iflag, inu, k, kflag, kk, Kode, koded, N, Nz, idum, j, ic, inub, nw, I1MACH
+  INTEGER i, iflag, inu, k, kflag, kk, Kode, koded, N, Nz, idum, j, ic, inub, nw
   REAL(8) :: aa, ak, Alim, ascle, a1, a2, bb, bk, bry(3), caz, cbi, cbr, cchi, &
     cchr, cki, ckr, coefi, coefr, crscr, csclr, cshi, cshr, csi, csr, csrr(3), &
     cssr(3), czi, czr, dnu, dnu2, Elim, etest, fc, fhs, fi, fk, fks, fmui, fmur, &
     Fnu, fr, g1, g2, pi, pr, pti, ptr, p1i, p1r, p2i, p2m, p2r, qi, qr, rak, &
     rcaz, rzi, rzr, s, smui, smur, sti, str, s1i, s1r, s2i, s2r, tm, Tol, t1, &
     t2, Yi(N), Yr(N), Zi, Zr, elm, celmr, zdr, zdi, as, alas, helim, cyr(2), cyi(2)
-  REAL(8), EXTERNAL :: D1MACH, DGAMLN, ZABS
-  EXTERNAL :: ZEXP, ZLOG, ZSQRT
   !     COMPLEX Z,Y,A,B,RZ,SMU,FU,FMU,F,FLRZ,CZ,S1,S2,CSH,CCH
   !     COMPLEX CK,P,Q,COEF,P1,P2,CBK,PT,CZERO,CONE,CTWO,ST,EZ,CS,DK
   !

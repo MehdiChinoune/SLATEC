@@ -1,6 +1,5 @@
 !** SPPFA
 SUBROUTINE SPPFA(Ap,N,Info)
-  IMPLICIT NONE
   !>
   !***
   !  Factor a real symmetric positive definite matrix stored in
@@ -79,7 +78,7 @@ SUBROUTINE SPPFA(Ap,N,Info)
   INTEGER N, Info
   REAL Ap(*)
   !
-  REAL SDOT, t
+  REAL t
   REAL s
   INTEGER j, jj, jm1, k, kj, kk
   !* FIRST EXECUTABLE STATEMENT  SPPFA

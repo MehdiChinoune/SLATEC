@@ -1,4 +1,5 @@
 MODULE TEST29_MOD
+  use slatec
   IMPLICIT NONE
 
 CONTAINS
@@ -36,11 +37,6 @@ CONTAINS
     LOGICAL fatal
     !     .. Local Arrays ..
     REAL c(6), d(6), w(12)
-    !     .. External Functions ..
-    REAL, EXTERNAL :: R1MACH
-    INTEGER, EXTERNAL :: NUMXER
-    !     .. External Subroutines ..
-    EXTERNAL :: POLCOF, POLINT, POLYVL, XERCLR, XGETF, XSETF
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, SQRT
     !     .. Data statements ..
@@ -183,11 +179,6 @@ CONTAINS
     REAL(8), PARAMETER :: y(6) = [ 0.0D0, 9.0D0, 64.0D0, 0.0D0, 9.0D0, 64.0D0 ]
     REAL(8), PARAMETER :: xchk(6) = [ 1.0D0, 0.0D0, -2.0D0, 0.0D0, 1.0D0, 0.0D0 ]
     REAL(8), PARAMETER :: dchk(6) = [ 1.0D0, 0.0D0, -4.0D0, 0.0D0, 24.0D0, 0.0D0 ]
-    !     .. External Functions ..
-    REAL(8), EXTERNAL :: D1MACH
-    INTEGER, EXTERNAL :: NUMXER
-    !     .. External Subroutines ..
-    EXTERNAL :: DPOLCF, DPLINT, DPOLVL, XERCLR, XGETF, XSETF
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, SQRT
     !* FIRST EXECUTABLE STATEMENT  DPNTCK
@@ -295,6 +286,7 @@ END MODULE TEST29_MOD
 !** TEST29
 PROGRAM TEST29
   USE TEST29_MOD
+  use slatec
   IMPLICIT NONE
   !>
   !***
@@ -346,8 +338,6 @@ PROGRAM TEST29
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900524  Cosmetic changes to code.  (WRB)
   !   920225  Added CALL to DPNTCK.  (WRB)
-
-  INTEGER I1MACH
   INTEGER ipass, kprint, lin, lun, nfail
   !* FIRST EXECUTABLE STATEMENT  TEST29
   lun = I1MACH(2)

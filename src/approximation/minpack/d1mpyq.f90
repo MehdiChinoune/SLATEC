@@ -1,6 +1,5 @@
 !** D1MPYQ
 SUBROUTINE D1MPYQ(M,N,A,Lda,V,W)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to DNSQ and DNSQE

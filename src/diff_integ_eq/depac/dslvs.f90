@@ -1,7 +1,6 @@
 !** DSLVS
 SUBROUTINE DSLVS(Wm,Iwm,X,Tem)
   USE DDEBD1, ONLY : EL0, H, IER, MITer, N
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to DDEBDF

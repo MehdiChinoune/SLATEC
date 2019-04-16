@@ -1,6 +1,5 @@
 !** CROTG
 SUBROUTINE CROTG(Ca,Cb,C,S)
-  IMPLICIT NONE
   !>
   !***
   !  Construct a Givens transformation.

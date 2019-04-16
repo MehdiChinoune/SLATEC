@@ -1,6 +1,5 @@
 !** CV
 REAL FUNCTION CV(Xval,Ndata,Nconst,Nord,Nbkpt,Bkpt,W)
-  IMPLICIT NONE
   !>
   !***
   !  Evaluate the variance function of the curve obtained
@@ -107,9 +106,9 @@ REAL FUNCTION CV(Xval,Ndata,Nconst,Nord,Nbkpt,Bkpt,W)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   INTEGER i, ileft, ip, is, last, mdg, mdw, n, Nbkpt, Nconst, Ndata, Nord
-  REAL Bkpt(Nbkpt), SDOT, v(40), W(*), Xval, zero
+  REAL Bkpt(Nbkpt), v(40), W(*), Xval, zero
   !* FIRST EXECUTABLE STATEMENT  CV
   zero = 0.
   mdg = Nbkpt - Nord + 3

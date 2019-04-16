@@ -1,6 +1,5 @@
 !** CHU
 REAL FUNCTION CHU(A,B,X)
-  IMPLICIT NONE
   !>
   !***
   !  Compute the logarithmic confluent hypergeometric function.
@@ -45,7 +44,6 @@ REAL FUNCTION CHU(A,B,X)
   REAL A, a0, aintb, alnx, B, b0, beps, c0, factor,gamri1, gamrni, pch1ai, &
     pch1i, pochai, summ, t, X, xeps1, xi, xi1, xn, xtoeps
   INTEGER i, istrt, m, n
-  REAL, EXTERNAL :: EXPREL, GAMR, POCH1, R1MACH, R9CHU, POCH
   REAL, PARAMETER :: pi = 3.14159265358979324E0
   REAL :: eps = 0.0
   !* FIRST EXECUTABLE STATEMENT  CHU

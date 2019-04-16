@@ -1,6 +1,5 @@
 !** DBINOM
 REAL(8) FUNCTION DBINOM(N,M)
-  IMPLICIT NONE
   !>
   !***
   !  Compute the binomial coefficients.
@@ -33,7 +32,7 @@ REAL(8) FUNCTION DBINOM(N,M)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
 
   INTEGER i, k, M, N
-  REAL(8) :: corr, xk, xn, xnk, D9LGMC, DLNREL, D1MACH
+  REAL(8) :: corr, xk, xn, xnk
   REAL(8), SAVE :: bilnmx, fintmx
   REAL(8), PARAMETER :: sq2pil = 0.91893853320467274178032973640562D0
   LOGICAL :: first = .TRUE.

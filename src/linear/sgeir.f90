@@ -1,6 +1,5 @@
 !** SGEIR
 SUBROUTINE SGEIR(A,Lda,N,V,Itask,Ind,Work,Iwork)
-  IMPLICIT NONE
   !>
   !***
   !  Solve a general system of linear equations.  Iterative
@@ -118,7 +117,7 @@ SUBROUTINE SGEIR(A,Lda,N,V,Itask,Ind,Work,Iwork)
 
   !
   INTEGER Lda, N, Itask, Ind, Iwork(*), info, j
-  REAL A(Lda,*), V(*), Work(N,*), xnorm, dnorm, SDSDOT, SASUM, R1MACH
+  REAL A(Lda,*), V(*), Work(N,*), xnorm, dnorm
   CHARACTER(8) :: xern1, xern2
   !* FIRST EXECUTABLE STATEMENT  SGEIR
   IF ( Lda<N ) THEN

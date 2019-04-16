@@ -1,6 +1,5 @@
 !** BKISR
 SUBROUTINE BKISR(X,N,Summ,Ierr)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to BSKIN
@@ -30,7 +29,6 @@ SUBROUTINE BKISR(X,N,Summ,Ierr)
 
   INTEGER i, Ierr, k, kk, kkn, k1, N, np
   REAL ak, atol, bk, fk, fn, hx, hxs, pol, pr, Summ, tkp, tol, trm, X, xln
-  REAL PSIXN, R1MACH
   !
   REAL, PARAMETER :: c(2) = [ 1.57079632679489662E+00, 1.0E0 ]
   !* FIRST EXECUTABLE STATEMENT  BKISR

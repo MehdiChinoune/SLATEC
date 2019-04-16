@@ -2,7 +2,6 @@
 SUBROUTINE STWAY(U,V,Yhp,Inout,Stowa)
   USE ML, ONLY: NCOmp, NFC, X, XOP, INFo, ISTkop, KOP, NDIsk, &
     NTApe, NEQivp
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to BVSUP

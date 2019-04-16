@@ -1,6 +1,5 @@
 !** FAC
 REAL FUNCTION FAC(N)
-  IMPLICIT NONE
   !>
   !***
   !  Compute the factorial function.
@@ -32,7 +31,7 @@ REAL FUNCTION FAC(N)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
 
-  REAL R9LGMC, x, xmax, xmin
+  REAL x, xmax, xmin
   INTEGER N
   REAL, PARAMETER :: facn(26) = [ 1.0E0, 1.0E0, 2.0E0, 6.0E0, 24.0E0, 120.0E0, &
     720.0E0, 5040.0E0, 40320.0E0, 362880.0E0, 3628800.0E0, 39916800.0E0, &
@@ -55,8 +54,7 @@ REAL FUNCTION FAC(N)
   IF ( N<=25 ) FAC = facn(N+1)
   IF ( N<=25 ) RETURN
   !
-  IF ( N>nmax ) CALL XERMSG('SLATEC','FAC','N SO BIG FACTORIAL(N) OVERFLOWS'&
-    ,2,2)
+  IF ( N>nmax ) CALL XERMSG('SLATEC','FAC','N SO BIG FACTORIAL(N) OVERFLOWS',2,2)
   !
   x = N + 1
   FAC = EXP((x-0.5)*LOG(x)-x+sq2pil+R9LGMC(x))

@@ -1,6 +1,5 @@
 !** SGECO
 SUBROUTINE SGECO(A,Lda,N,Ipvt,Rcond,Z)
-  IMPLICIT NONE
   !>
   !***
   !  Factor a matrix using Gaussian elimination and estimate
@@ -88,8 +87,8 @@ SUBROUTINE SGECO(A,Lda,N,Ipvt,Rcond,Z)
   REAL A(Lda,*), Z(*)
   REAL Rcond
   !
-  REAL SDOT, ek, t, wk, wkm
-  REAL anorm, s, SASUM, sm, ynorm
+  REAL ek, t, wk, wkm
+  REAL anorm, s, sm, ynorm
   INTEGER info, j, k, kb, kp1, l
   !
   !     COMPUTE 1-NORM OF A

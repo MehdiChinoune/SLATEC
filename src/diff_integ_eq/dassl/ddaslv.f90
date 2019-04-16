@@ -1,6 +1,5 @@
 !** DDASLV
 SUBROUTINE DDASLV(Neq,Delta,Wm,Iwm)
-  IMPLICIT NONE
   !>
   !***
   !  Linear system solver for DDASSL.
@@ -37,8 +36,6 @@ SUBROUTINE DDASLV(Neq,Delta,Wm,Iwm)
   !
   INTEGER Neq, Iwm(*)
   REAL(8) :: Delta(*), Wm(*)
-  !
-  EXTERNAL :: DGBSL, DGESL
   !
   INTEGER meband, mtype
   INTEGER, PARAMETER :: NPD = 1

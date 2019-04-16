@@ -1,7 +1,6 @@
 !** QC25F
 SUBROUTINE QC25F(F,A,B,Omega,Integr,Nrmom,Maxp1,Ksave,Result,Abserr,Neval,&
     Resabs,Resasc,Momcom,Chebmo)
-  IMPLICIT NONE
   !>
   !***
   !  To compute the integral I=Integral of F(X) over (A,B)
@@ -123,7 +122,6 @@ SUBROUTINE QC25F(F,A,B,Omega,Integr,Nrmom,Maxp1,Ksave,Result,Abserr,Neval,&
     ress24, Result, sinpar, v(28)
   !
   REAL, EXTERNAL :: F
-  REAL, EXTERNAL :: R1MACH, QWGTF
   !
   !           THE VECTOR X CONTAINS THE VALUES COS(K*PI/24)
   !           K = 1, ...,11, TO BE USED FOR THE CHEBYSHEV EXPANSION OF F

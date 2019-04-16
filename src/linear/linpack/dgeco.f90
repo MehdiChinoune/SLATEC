@@ -1,6 +1,5 @@
 !** DGECO
 SUBROUTINE DGECO(A,Lda,N,Ipvt,Rcond,Z)
-  IMPLICIT NONE
   !>
   !***
   !  Factor a matrix using Gaussian elimination and estimate
@@ -88,8 +87,8 @@ SUBROUTINE DGECO(A,Lda,N,Ipvt,Rcond,Z)
   REAL(8) :: A(Lda,*), Z(*)
   REAL(8) :: Rcond
   !
-  REAL(8) :: DDOT, ek, t, wk, wkm
-  REAL(8) :: anorm, s, DASUM, sm, ynorm
+  REAL(8) :: ek, t, wk, wkm
+  REAL(8) :: anorm, s, sm, ynorm
   INTEGER info, j, k, kb, kp1, l
   !
   !     COMPUTE 1-NORM OF A

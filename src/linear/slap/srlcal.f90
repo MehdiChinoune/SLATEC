@@ -1,6 +1,5 @@
 !** SRLCAL
 SUBROUTINE SRLCAL(N,Kmp,Ll,Maxl,V,Q,Rl,Snormw,Prod,R0nrm)
-  IMPLICIT NONE
   !>
   !***
   !  Internal routine for SGMRES.
@@ -88,8 +87,6 @@ SUBROUTINE SRLCAL(N,Kmp,Ll,Maxl,V,Q,Rl,Snormw,Prod,R0nrm)
   !     .. Local Scalars ..
   REAL c, s, tem
   INTEGER i, i2, ip1, k, llm1, llp1
-  !     .. External Subroutines ..
-  EXTERNAL :: SCOPY, SSCAL
   !* FIRST EXECUTABLE STATEMENT  SRLCAL
   IF ( Kmp==Maxl ) THEN
     !

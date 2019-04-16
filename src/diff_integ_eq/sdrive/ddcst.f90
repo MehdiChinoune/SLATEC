@@ -1,6 +1,5 @@
 !** DDCST
 SUBROUTINE DDCST(Maxord,Mint,Iswflg,El,Tq)
-  IMPLICIT NONE
   !>
   !***
   !  DDCST sets coefficients used by the core integrator DDSTP.

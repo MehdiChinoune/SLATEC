@@ -1,6 +1,5 @@
 !** PCHSP
 SUBROUTINE PCHSP(Ic,Vc,N,X,F,D,Incfd,Wk,Nwk,Ierr)
-  IMPLICIT NONE
   !>
   !***
   !  Set derivatives needed to determine the Hermite represen-
@@ -164,7 +163,6 @@ SUBROUTINE PCHSP(Ic,Vc,N,X,F,D,Incfd,Wk,Nwk,Ierr)
   !
   INTEGER ibeg, iend, indexx, j, nm1
   REAL g, stemp(3), xtemp(4)
-  REAL PCHDF
   !
   REAL, PARAMETER :: zero = 0., half = 0.5, one = 1., two = 2., three = 3.
   !

@@ -1,6 +1,5 @@
 !** DQRSLV
 SUBROUTINE DQRSLV(N,R,Ldr,Ipvt,Diag,Qtb,X,Sigma,Wa)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to DNLS1 and DNLS1E

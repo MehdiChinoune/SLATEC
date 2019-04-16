@@ -1,4 +1,5 @@
 MODULE TEST52_MOD
+  use slatec
   IMPLICIT NONE
   REAL EPS, RP, SVEps, TOL
   INTEGER IERp, IERr, NORd, NORdp
@@ -101,10 +102,6 @@ CONTAINS
     !     .. Local Arrays ..
     REAL a(97), tc(5), w(11), x(11), y(11), yp(5)
     INTEGER itest(9)
-    !     .. External Functions ..
-    REAL, EXTERNAL :: R1MACH
-    !     .. External Subroutines ..
-    EXTERNAL :: PASS, PCOEF, POLFIT, PVALUE
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, SQRT
     !* FIRST EXECUTABLE STATEMENT  PFITQX
@@ -483,11 +480,6 @@ CONTAINS
     !     .. Local Arrays ..
     REAL fjac(10,2), fjrow(2), fjtj(3), fvec(10), wa(40), x(2)
     INTEGER iw(2)
-    !     .. External Functions ..
-    REAL, EXTERNAL :: ENORM, R1MACH
-    INTEGER, EXTERNAL :: NUMXER
-    !     .. External Subroutines ..
-    EXTERNAL :: FDJAC3, PASS, SCOV, SNLS1E, XGETF, XSETF
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, SQRT
     !* FIRST EXECUTABLE STATEMENT  SNLS1Q
@@ -788,11 +780,6 @@ CONTAINS
     !     .. Local Arrays ..
     REAL coeff(9), v(51,5), w(529), work(12), xconst(11), yconst(11)
     INTEGER iw(30), nderiv(11)
-    !     .. External Functions ..
-    REAL, EXTERNAL :: BVALU, CV, R1MACH
-    INTEGER, EXTERNAL :: NUMXER
-    !     .. External Subroutines ..
-    EXTERNAL :: FC, IVOUT, SCOPY, SMOUT, SVOUT, XGETF, XSETF
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, REAL, SQRT
     !     .. Data statements ..
@@ -1249,6 +1236,7 @@ END MODULE TEST52_MOD
 !** TEST52
 PROGRAM TEST52
   USE TEST52_MOD
+  use slatec
   IMPLICIT NONE
   !>
   !***
@@ -1300,8 +1288,6 @@ PROGRAM TEST52
   !   890618  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900524  Cosmetic changes to code.  (WRB)
-
-  INTEGER I1MACH
   INTEGER ipass, kprint, lin, lun, nfail
   !* FIRST EXECUTABLE STATEMENT  TEST52
   lun = I1MACH(2)

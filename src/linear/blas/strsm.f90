@@ -1,6 +1,5 @@
 !** STRSM
 SUBROUTINE STRSM(Side,Uplo,Transa,Diag,M,N,Alpha,A,Lda,B,Ldb)
-  IMPLICIT NONE
   !>
   !***
   !  Solve a real triangular system of equations with multiple
@@ -145,10 +144,6 @@ SUBROUTINE STRSM(Side,Uplo,Transa,Diag,M,N,Alpha,A,Lda,B,Ldb)
   !     .. Array Arguments ..
   REAL A(Lda,*), B(Ldb,*)
   !
-  !     .. External Functions ..
-  LOGICAL, EXTERNAL :: LSAME
-  !     .. External Subroutines ..
-  EXTERNAL :: XERBLA
   !     .. Intrinsic Functions ..
   INTRINSIC MAX
   !     .. Local Scalars ..

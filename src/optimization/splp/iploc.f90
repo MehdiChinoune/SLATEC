@@ -1,6 +1,5 @@
 !** IPLOC
 INTEGER FUNCTION IPLOC(Locc,Sx,Ix)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to SPLP

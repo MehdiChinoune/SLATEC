@@ -1,6 +1,5 @@
 !** RF
 REAL FUNCTION RF(X,Y,Z,Ier)
-  IMPLICIT NONE
   !>
   !***
   !  Compute the incomplete or complete elliptic integral of the
@@ -254,7 +253,6 @@ REAL FUNCTION RF(X,Y,Z,Ier)
   !           editorial changes.  (RWC))
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
-  REAL R1MACH
   CHARACTER(16) :: xern3, xern4, xern5, xern6
   INTEGER Ier
   REAL epslon, e2, e3, lamda, mu, s, X, xn, xndev, xnroot, Y, yn, yndev, ynroot, &

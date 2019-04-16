@@ -1,6 +1,5 @@
 !** CTPSV
 SUBROUTINE CTPSV(Uplo,Trans,Diag,N,Ap,X,Incx)
-  IMPLICIT NONE
   !>
   !***
   !  Solve one of the systems of equations.
@@ -122,10 +121,6 @@ SUBROUTINE CTPSV(Uplo,Trans,Diag,N,Ap,X,Incx)
   COMPLEX temp
   INTEGER i, info, ix, j, jx, k, kk, kx
   LOGICAL noconj, nounit
-  !     .. External Functions ..
-  LOGICAL, EXTERNAL :: LSAME
-  !     .. External Subroutines ..
-  EXTERNAL :: XERBLA
   !     .. Intrinsic Functions ..
   INTRINSIC CONJG
   !* FIRST EXECUTABLE STATEMENT  CTPSV

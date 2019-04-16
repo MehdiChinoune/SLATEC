@@ -1,6 +1,5 @@
 !** CSICO
 SUBROUTINE CSICO(A,Lda,N,Kpvt,Rcond,Z)
-  IMPLICIT NONE
   !>
   !***
   !  Factor a complex symmetric matrix by elimination with
@@ -94,11 +93,9 @@ SUBROUTINE CSICO(A,Lda,N,Kpvt,Rcond,Z)
   COMPLEX A(Lda,*), Z(*)
   REAL Rcond
   !
-  COMPLEX ak, akm1, bk, bkm1, CDOTU, denom, ek, t
-  REAL anorm, s, SCASUM, ynorm
+  COMPLEX ak, akm1, bk, bkm1, denom, ek, t
+  REAL anorm, s, ynorm
   INTEGER i, info, j, jm1, k, kp, kps, ks
-  REAL, EXTERNAL :: CABS1
-  COMPLEX, EXTERNAL :: CSIGN1
   !
   !     FIND NORM OF A USING ONLY UPPER HALF
   !

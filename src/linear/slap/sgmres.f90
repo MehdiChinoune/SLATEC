@@ -1,7 +1,6 @@
 !** SGMRES
 SUBROUTINE SGMRES(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,&
     Iter,Err,Ierr,Iunit,Sb,Sx,Rgwk,Lrgw,Igwk,Ligw,Rwork,Iwork)
-  IMPLICIT NONE
   !>
   !***
   !  Preconditioned GMRES Iterative Sparse Ax=b Solver.
@@ -409,10 +408,6 @@ SUBROUTINE SGMRES(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,&
   REAL bnrm, rhol, summ
   INTEGER i, iflag, jpre, jscal, kmp, ldl, lgmr, lhes, lq, lr, &
     lv, lw, lxl, lz, lzm1, maxl, maxlp1, nms, nmsl, nrmax, nrsts
-  !     .. External Functions ..
-  REAL, EXTERNAL :: R1MACH, SNRM2
-  !     .. External Subroutines ..
-  EXTERNAL :: SCOPY, SPIGMR
   !     .. Intrinsic Functions ..
   INTRINSIC SQRT
   !* FIRST EXECUTABLE STATEMENT  SGMRES

@@ -1,7 +1,6 @@
 !** DQAGIE
 SUBROUTINE DQAGIE(F,Bound,Inf,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,&
     Alist,Blist,Rlist,Elist,Iord,Last)
-  IMPLICIT NONE
   !>
   !***
   !  The routine calculates an approximation result to a given
@@ -179,7 +178,6 @@ SUBROUTINE DQAGIE(F,Bound,Inf,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,&
   LOGICAL extrap, noext
   !
   REAL(8), EXTERNAL :: F
-  REAL(8), EXTERNAL :: D1MACH
   !
   !            THE DIMENSION OF RLIST2 IS DETERMINED BY THE VALUE OF
   !            LIMEXP IN SUBROUTINE DQELG.

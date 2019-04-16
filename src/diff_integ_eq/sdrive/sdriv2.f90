@@ -1,7 +1,6 @@
 !** SDRIV2
 SUBROUTINE SDRIV2(N,T,Y,F,Tout,Mstate,Nroot,Eps,Ewt,Mint,Work,Lenw,Iwork,&
     Leniw,G,Ierflg)
-  IMPLICIT NONE
   !>
   !***
   !  The function of SDRIV2 is to solve N ordinary differential

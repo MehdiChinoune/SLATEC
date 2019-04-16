@@ -1,7 +1,6 @@
 !** SSLUCS
 SUBROUTINE SSLUCS(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
     Iunit,Rwork,Lenw,Iwork,Leniw)
-  IMPLICIT NONE
   !>
   !***
   !  Incomplete LU BiConjugate Gradient Squared Ax=b Solver.
@@ -241,8 +240,6 @@ SUBROUTINE SSLUCS(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
   INTEGER icol, j, jbgn, jend, locdin, locil, lociu, lociw, locjl, &
     locju, locl, locnc, locnr, locp, locq, locr, locr0, locu, &
     locuu, locv1, locv2, locw, nl, nu
-  !     .. External Subroutines ..
-  EXTERNAL :: SCGS, SCHKW, SS2Y, SSILUS, SSLUI, SSMV
   !* FIRST EXECUTABLE STATEMENT  SSLUCS
   !
   Ierr = 0

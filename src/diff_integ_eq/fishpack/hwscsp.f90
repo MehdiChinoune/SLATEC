@@ -1,7 +1,6 @@
 !** HWSCSP
 SUBROUTINE HWSCSP(Intl,Ts,Tf,M,Mbdcnd,Bdts,Bdtf,Rs,Rf,N,Nbdcnd,Bdrs,Bdrf,&
     Elmbda,F,Idimf,Pertrb,Ierror,W)
-  IMPLICIT NONE
   !>
   !***
   !  Solve a finite difference approximation to the modified
@@ -357,7 +356,7 @@ SUBROUTINE HWSCSP(Intl,Ts,Tf,M,Mbdcnd,Bdts,Bdtf,Rs,Rf,N,Nbdcnd,Bdrs,Bdrf,&
 
   INTEGER i1, i10, i2, i3, i4, i5, i6, i7, i8, i9, Idimf, &
     Ierror, Intl, k, l, M, Mbdcnd, mp1, N, Nbdcnd
-  REAL Bdrf(*), Bdrs(*), Bdtf(*), Bdts(*), dum, Elmbda, F(Idimf,*), Pertrb, pi, PIMACH, &
+  REAL Bdrf(*), Bdrs(*), Bdtf(*), Bdts(*), dum, Elmbda, F(Idimf,*), Pertrb, pi, &
     Rf, Rs, Tf, Ts, W(*)
   INTEGER nck, np1
   !* FIRST EXECUTABLE STATEMENT  HWSCSP

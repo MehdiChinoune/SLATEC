@@ -1,6 +1,5 @@
 !** CSERI
 SUBROUTINE CSERI(Z,Fnu,Kode,N,Y,Nz,Tol,Elim,Alim)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to CBESI and CBESK
@@ -33,7 +32,7 @@ SUBROUTINE CSERI(Z,Fnu,Kode,N,Y,Nz,Tol,Elim,Alim)
   INTEGER i, ib, idum, iflag, il, k, Kode, l, m, N, nn, nw, Nz
   COMPLEX ak1, ck, coef, crsc, cz, hz, rz, s1, s2, w(2), Y(N), Z
   REAL aa, acz, ak, Alim, arm, ascle, atol, az, dfnu, Elim, Fnu, &
-    fnup, rak1, rs, rtr1, s, ss, Tol, x, GAMLN, R1MACH
+    fnup, rak1, rs, rtr1, s, ss, Tol, x
   COMPLEX, PARAMETER :: czero = (0.0E0,0.0E0), cone = (1.0E0,0.0E0)
   !* FIRST EXECUTABLE STATEMENT  CSERI
   Nz = 0

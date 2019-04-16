@@ -3,7 +3,6 @@ SUBROUTINE RKFAB(Ncomp,Xpts,Nxpts,Nfc,Iflag,Z,Mxnon,P,Ntp,Ip,Yhp,Niv,U,V,&
     W,S,Stowa,G,Work,Iwork,Nfcc)
   USE ML, ONLY : C, INHomo, X, XBEg, XENd, XOP, INFo, KOP, AE, RE, NOPg, NDIsk, &
     NTApe, NEQ, INTeg, NPS, NUMort, KKKint, LLLint
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to BVSUP
@@ -45,7 +44,6 @@ SUBROUTINE RKFAB(Ncomp,Xpts,Nxpts,Nfc,Iflag,Z,Mxnon,P,Ntp,Ip,Yhp,Niv,U,V,&
     Iwork(*), j, jflag, jon, kod, kopp, Mxnon, Nxpts
   REAL G(*), P(Ntp,*), S(*), Stowa(*), U(Ncomp,Nfc,*), V(Ncomp,*), W(Nfcc,*), &
     Work(*), Xpts(*), xxop, Yhp(Ncomp,*), Z(*), ret(1), aet(1)
-  EXTERNAL :: BVDER
   !
   !- *********************************************************************
   !  INITIALIZATION OF COUNTERS AND VARIABLES.

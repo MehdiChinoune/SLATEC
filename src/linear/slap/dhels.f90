@@ -1,6 +1,5 @@
 !** DHELS
 SUBROUTINE DHELS(A,Lda,N,Q,B)
-  IMPLICIT NONE
   !>
   !***
   !  Internal routine for DGMRES.
@@ -68,7 +67,7 @@ SUBROUTINE DHELS(A,Lda,N,Q,B)
   !   910502  Added C***FIRST EXECUTABLE STATEMENT line.  (FNF)
   !   910506  Made subsidiary to DGMRES.  (FNF)
   !   920511  Added complete declaration section.  (WRB)
-  
+
   !         The following is for optimized compilation on LLNL/LTSS Crays.
   !LLL. OPTIMIZE
   !     .. Scalar Arguments ..
@@ -78,8 +77,6 @@ SUBROUTINE DHELS(A,Lda,N,Q,B)
   !     .. Local Scalars ..
   REAL(8) :: c, s, t, t1, t2
   INTEGER iq, k, kb, kp1
-  !     .. External Subroutines ..
-  EXTERNAL :: DAXPY
   !* FIRST EXECUTABLE STATEMENT  DHELS
   !
   !         Minimize(B-A*X,B-A*X).  First form Q*B.

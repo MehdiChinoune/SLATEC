@@ -3,7 +3,6 @@ SUBROUTINE DPLPMN(DUSRMT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
     Primal,Duals,Amat,Csc,Colnrm,Erd,Erp,Basmat,Wr,Rz,Rg,&
     Rprim,Rhs,Ww,Lmx,Lbm,Ibasis,Ibb,Imat,Ibrc,Ipr,Iwr)
   USE LA05DD
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to DSPLP
@@ -55,7 +54,6 @@ SUBROUTINE DPLPMN(DUSRMT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
     Ww(*), xlamda, xval, zero, rdum(01)
   REAL(8), TARGET :: ropt(07)
   REAL(8), POINTER :: eps, asmall, abig, costsc, tolls, tune, tolabs
-  REAL(8) :: DDOT, DASUM
   !
   !
   !     ARRAY LOCAL VARIABLES
@@ -386,7 +384,8 @@ SUBROUTINE DPLPMN(DUSRMT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   ELSEIF ( (.NOT.feas).AND.unbnd ) THEN
     nerr = 3
     CALL XERMSG('SLATEC','DPLPMN',&
-      'IN DSPLP, THE PROBLEM APPEARS TO BE INFEASIBLE AND TO HAVE NO FINITE SOLN.',nerr,iopt)
+      'IN DSPLP, THE PROBLEM APPEARS TO BE INFEASIBLE AND TO HAVE NO FINITE SOLN.'&
+      ,nerr,iopt)
     Info = -nerr
   END IF
   !

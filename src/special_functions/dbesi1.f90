@@ -1,6 +1,5 @@
 !** DBESI1
 REAL(8) FUNCTION DBESI1(X)
-  IMPLICIT NONE
   !>
   !***
   !  Compute the modified (hyperbolic) Bessel function of the
@@ -41,8 +40,7 @@ REAL(8) FUNCTION DBESI1(X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
 
-  INTEGER INITDS
-  REAL(8) :: X, y, D1MACH, DCSEVL, DBSI1E
+  REAL(8) :: X, y
   INTEGER, SAVE :: nti1
   REAL(8), SAVE :: xmin, xsml, xmax
   REAL(8), PARAMETER :: bi1cs(17) = [ -.19717132610998597316138503218149D-2, &

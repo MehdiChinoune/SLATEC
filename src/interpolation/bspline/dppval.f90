@@ -1,6 +1,5 @@
 !** DPPVAL
 REAL(8) FUNCTION DPPVAL(Ldc,C,Xi,Lxi,K,Ideriv,X,Inppv)
-  IMPLICIT NONE
   !>
   !***
   !  Calculate the value of the IDERIV-th derivative of the

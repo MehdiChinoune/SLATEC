@@ -1,4 +1,5 @@
 MODULE TEST32_MOD
+  use slatec
   IMPLICIT NONE
 
 CONTAINS
@@ -128,10 +129,6 @@ CONTAINS
       red2, redmax, redmin, ref, ref2, refmax, refmin, tol1, tol2, x1, &
       x2, xadmax, xadmin, xafmax, xafmin, xrdmax, xrdmin, xrfmax, xrfmin
     LOGICAL failoc, failnx
-    !
-    REAL R1MACH
-    !       The following should stay REAL (no D.P. equivalent).
-    REAL, EXTERNAL :: RAND
     !
     !  INITIALIZE.
     !
@@ -643,7 +640,6 @@ CONTAINS
     LOGICAL faild, faile, failoc, skip
     REAL dermax, derr, dtrue, dx, fdiff, fdifmx, fermax, ferr, ftrue, &
       machep, tol, pdermx, pdifmx, pfermx
-    REAL R1MACH
     !
     INTEGER, PARAMETER :: nmax = 10, nx = 4, ny = 6
     INTEGER, PARAMETER :: ne = 51
@@ -1117,10 +1113,6 @@ CONTAINS
     REAL calc, d(7), errmax, error, f(7), machep, tol, true
     LOGICAL fail, skip
     !
-    !  DECLARE EXTERNALS.
-    !
-    REAL PCHIA, R1MACH
-    !
     !  INITIALIZE.
     !
     REAL, PARAMETER :: thrqtr = 0.75E0, one = 1.E0, two = 2.E0, three = 3.E0
@@ -1328,8 +1320,6 @@ CONTAINS
     !  Declare arguments.
     !
     INTEGER Lun, Kprint, Ipass
-    LOGICAL COMP
-    REAL R1MACH
     !
     !  Declare variables.
     !
@@ -1338,6 +1328,7 @@ CONTAINS
     REAL d(N), dc(N), err, f(N), tol, told, tolz, vc(2), wk(NWK)
     REAL, PARAMETER :: ZERO = 0.0E0, MONE = -1.0E0
     CHARACTER(6) :: result
+    LOGICAL, EXTERNAL :: COMP
     !
     !  Initialize.
     !
@@ -1897,11 +1888,6 @@ CONTAINS
     !
     INTEGER Lun, Kprint, Ipass
     !
-    !  Declare externals.
-    !
-    REAL, EXTERNAL :: BVALU, R1MACH
-    EXTERNAL :: PCHBS
-    !
     !  Declare variables.
     !
     INTEGER i, ierr, ifail, inbv, j, knotyp, k, ndim, nknots
@@ -2041,6 +2027,7 @@ END MODULE TEST32_MOD
 !** TEST32
 PROGRAM TEST32
   USE TEST32_MOD
+  use slatec
   IMPLICIT NONE
   !>
   !***
@@ -2094,8 +2081,6 @@ PROGRAM TEST32
   !   900321  Moved IPASS to call sequences for SLATEC standards.  (FNF)
   !   900524  Cosmetic changes to code.  (WRB)
   !   930318  Added new quick check PCHQK5.  (WRB,FNF)
-
-  INTEGER I1MACH
   INTEGER ipass, kprint, lin, lun, nfail
   !* FIRST EXECUTABLE STATEMENT  TEST32
   lun = I1MACH(2)

@@ -1,5 +1,6 @@
 !** CHKXER
 SUBROUTINE CHKXER(Srnamt,Infot,Nout,Fatal,Kprint)
+  use SLATEC
   IMPLICIT NONE
   !>
   !***
@@ -30,8 +31,6 @@ SUBROUTINE CHKXER(Srnamt,Infot,Nout,Fatal,Kprint)
   CHARACTER(6) :: Srnamt
   !     .. Local Scalars ..
   INTEGER nerr
-  !     .. External Functions ..
-  INTEGER, EXTERNAL :: NUMXER
   !* FIRST EXECUTABLE STATEMENT  CHKXER
   IF ( NUMXER(nerr)/=Infot ) THEN
     Fatal = .TRUE.

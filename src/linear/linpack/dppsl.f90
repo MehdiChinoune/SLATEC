@@ -1,6 +1,5 @@
 !** DPPSL
 SUBROUTINE DPPSL(Ap,N,B)
-  IMPLICIT NONE
   !>
   !***
   !  Solve the real symmetric positive definite system using
@@ -68,11 +67,11 @@ SUBROUTINE DPPSL(Ap,N,B)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   INTEGER N
   REAL(8) :: Ap(*), B(*)
   !
-  REAL(8) :: DDOT, t
+  REAL(8) :: t
   INTEGER k, kb, kk
   !* FIRST EXECUTABLE STATEMENT  DPPSL
   kk = 0

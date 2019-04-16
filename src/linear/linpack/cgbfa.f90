@@ -1,6 +1,5 @@
 !** CGBFA
 SUBROUTINE CGBFA(Abd,Lda,N,Ml,Mu,Ipvt,Info)
-  IMPLICIT NONE
   !>
   !***
   !  Factor a band matrix using Gaussian elimination.
@@ -109,8 +108,7 @@ SUBROUTINE CGBFA(Abd,Lda,N,Ml,Mu,Ipvt,Info)
   COMPLEX Abd(Lda,*)
   !
   COMPLEX t
-  INTEGER i, ICAMAX, i0, j, ju, jz, j0, j1, k, kp1, l, lm, m, mm, nm1
-  REAL, EXTERNAL :: CABS1
+  INTEGER i, i0, j, ju, jz, j0, j1, k, kp1, l, lm, m, mm, nm1
   !
   !* FIRST EXECUTABLE STATEMENT  CGBFA
   m = Ml + Mu + 1

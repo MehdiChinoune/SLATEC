@@ -1,7 +1,6 @@
 !** LA05BS
 SUBROUTINE LA05BS(A,Ind,Ia,N,Ip,Iw,W,G,B,Trans)
   USE LA05DS
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to SPLP

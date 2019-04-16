@@ -1,7 +1,6 @@
 !** LA05ED
 SUBROUTINE LA05ED(A,Irn,Ip,N,Iw,Ia,Reals)
   USE LA05DD
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to DSPLP

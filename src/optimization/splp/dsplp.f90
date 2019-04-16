@@ -1,7 +1,6 @@
 !** DSPLP
 SUBROUTINE DSPLP(DUSRMT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
     Primal,Duals,Ibasis,Work,Lw,Iwork,Liw)
-  IMPLICIT NONE
   !>
   !***
   !  Solve linear programming problems involving at most a few thousand

@@ -1,6 +1,5 @@
 !** LPDP
 SUBROUTINE LPDP(A,Mda,M,N1,N2,Prgopt,X,Wnorm,Mode,Ws,Is)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to LSEI
@@ -69,7 +68,6 @@ SUBROUTINE LPDP(A,Mda,M,N1,N2,Prgopt,X,Wnorm,Mode,Ws,Is)
   REAL A(Mda,*), Prgopt(*), Ws(*), Wnorm, X(*)
   INTEGER Is(*)
   REAL rnorm, sc, ynorm
-  REAL SDOT, SNRM2
   REAL, PARAMETER :: zero = 0.E0, one = 1.E0, fac = 0.1E0
   !* FIRST EXECUTABLE STATEMENT  LPDP
   n = N1 + N2

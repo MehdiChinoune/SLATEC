@@ -1,6 +1,5 @@
 !** BNFAC
 SUBROUTINE BNFAC(W,Nroww,Nrow,Nbandl,Nbandu,Iflag)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to BINT4 and BINTK

@@ -1,6 +1,5 @@
 !** SGEMV
 SUBROUTINE SGEMV(Trans,M,N,Alpha,A,Lda,X,Incx,Beta,Y,Incy)
-  IMPLICIT NONE
   !>
   !***
   !  Multiply a real vector by a real general matrix.
@@ -122,10 +121,6 @@ SUBROUTINE SGEMV(Trans,M,N,Alpha,A,Lda,X,Incx,Beta,Y,Incy)
   !     .. Local Scalars ..
   REAL temp
   INTEGER i, info, ix, iy, j, jx, jy, kx, ky, lenx, leny
-  !     .. External Functions ..
-  LOGICAL, EXTERNAL :: LSAME
-  !     .. External Subroutines ..
-  EXTERNAL :: XERBLA
   !     .. Intrinsic Functions ..
   INTRINSIC MAX
   !* FIRST EXECUTABLE STATEMENT  SGEMV

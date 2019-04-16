@@ -1,6 +1,5 @@
 !** CNBCO
 SUBROUTINE CNBCO(Abe,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
-  IMPLICIT NONE
   !>
   !***
   !  Factor a band matrix using Gaussian elimination and
@@ -140,11 +139,9 @@ SUBROUTINE CNBCO(Abe,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
   COMPLEX Abe(Lda,*), Z(*)
   REAL Rcond
   !
-  COMPLEX CDOTC, ek, t, wk, wkm
-  REAL anorm, s, SCASUM, sm, ynorm
+  COMPLEX ek, t, wk, wkm
+  REAL anorm, s, sm, ynorm
   INTEGER i, info, j, ju, k, kb, kp1, l, ldb, lm, lz, m, ml1, mm, nl, nu
-  COMPLEX CSIGN1
-  REAL CABS1
   !
   !     COMPUTE 1-NORM OF A
   !

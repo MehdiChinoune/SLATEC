@@ -1,6 +1,5 @@
 !** SSIEV
 SUBROUTINE SSIEV(A,Lda,N,E,Work,Job,Info)
-  IMPLICIT NONE
   !>
   !***
   !  Compute the eigenvalues and, optionally, the eigenvectors

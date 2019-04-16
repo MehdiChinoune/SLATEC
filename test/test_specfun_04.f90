@@ -1,4 +1,5 @@
 MODULE TEST05_MOD
+  use slatec
   IMPLICIT NONE
   REAL X, A, FKM
 
@@ -40,11 +41,10 @@ CONTAINS
     !   910708  Code revised to test error returns for all values of
     !           KPRINT.  (WRB)
 
-    INTEGER Ipass, Kprint, NUMXER
+    INTEGER Ipass, Kprint
     INTEGER i, ix, k, kontrl, kode, Lun, m, n, nerr, nu, nw, ny
     REAL alp, del, er, fnu, fnup, rx, tol, x
     REAL fn(3), w(5), xx(5), y(5)
-    REAL R1MACH
     LOGICAL fatal
     !* FIRST EXECUTABLE STATEMENT  BIKCK
     IF ( Kprint>=2 ) WRITE (Lun,99001)
@@ -309,11 +309,10 @@ CONTAINS
     !   910708  Code revised to test error returns for all values of
     !           KPRINT.  (WRB)
 
-    INTEGER Ipass, Kprint, NUMXER
+    INTEGER Ipass, Kprint
     INTEGER i, ix, k, kontrl, Lun, m, n, nerr, nu, ny
     REAL alp, del, er, fnu, fnup, rhpi, rx, tol, x
     REAL fn(3), w(5), xx(5), y(5)
-    REAL R1MACH
     LOGICAL fatal
     !* FIRST EXECUTABLE STATEMENT  BJYCK
     IF ( Kprint>=2 ) WRITE (Lun,99001)
@@ -547,7 +546,6 @@ CONTAINS
     INTEGER i, icase, ie, ierr, ii, ik, Ipass, ix, iy, k, ke, kk, &
       kode, kx, Lun, m, n, nm, nz
     REAL ans, atol, bb, en(4), er, ex, sig, summ, tol, t1, t2, xx(5), y(4)
-    REAL R1MACH
     LOGICAL fatal
     !* FIRST EXECUTABLE STATEMENT  EG8CK
     IF ( Kprint>=2 ) WRITE (Lun,99001)
@@ -723,6 +721,7 @@ END MODULE TEST05_MOD
 !** TEST05
 PROGRAM TEST05
   USE TEST05_MOD
+  use slatec
   IMPLICIT NONE
   !>
   !***
@@ -774,8 +773,6 @@ PROGRAM TEST05
   !   890618  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900524  Cosmetic changes to code.  (WRB)
-
-  INTEGER I1MACH
   INTEGER ipass, kprint, lin, lun, nfail
   !* FIRST EXECUTABLE STATEMENT  TEST05
   lun = I1MACH(2)

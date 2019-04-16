@@ -1,6 +1,5 @@
 !** DTPSV
 SUBROUTINE DTPSV(Uplo,Trans,Diag,N,Ap,X,Incx)
-  IMPLICIT NONE
   !>
   !***
   !  Solve one of the systems of equations.
@@ -122,10 +121,6 @@ SUBROUTINE DTPSV(Uplo,Trans,Diag,N,Ap,X,Incx)
   REAL(8) :: temp
   INTEGER i, info, ix, j, jx, k, kk, kx
   LOGICAL nounit
-  !     .. External Functions ..
-  LOGICAL, EXTERNAL :: LSAME
-  !     .. External Subroutines ..
-  EXTERNAL :: XERBLA
   !* FIRST EXECUTABLE STATEMENT  DTPSV
   !
   !     Test the input parameters.

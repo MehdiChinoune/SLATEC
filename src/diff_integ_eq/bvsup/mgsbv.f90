@@ -1,7 +1,6 @@
 !** MGSBV
 SUBROUTINE MGSBV(M,N,A,Ia,Niv,Iflag,S,P,Ip,Inhomo,V,W,Wcnd)
   USE ML, ONLY : EPS, INDpvt, NFCc, SRU
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to BVSUP
@@ -73,7 +72,7 @@ SUBROUTINE MGSBV(M,N,A,Ia,Niv,Iflag,S,P,Ip,Inhomo,V,W,Wcnd)
 
   INTEGER i, Ia, Iflag, Inhomo, Ip(*), ip1, ix, iz, j, jk, jp, jq, jy, jz, k, kd, &
     kj, kp, l, lix, lr, M, m2, N, Niv, nivn, nmnr, nn, np1, nr, nrm1
-  REAL A(Ia,*), dot, P(*), pjp, PRVEC, psave, ry, S(*), SDOT, sv, t, V(*), vl, &
+  REAL A(Ia,*), dot, P(*), pjp, psave, ry, S(*), sv, t, V(*), vl, &
     vnorm, W(*), Wcnd, y
   !* FIRST EXECUTABLE STATEMENT  MGSBV
   IF ( M>0.AND.N>0.AND.Ia>=M ) THEN

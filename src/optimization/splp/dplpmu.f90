@@ -4,7 +4,6 @@ SUBROUTINE DPLPMU(Mrelas,Nvars,Lmx,Lbm,Nredc,Info,Ienter,Ileave,Iopt,Npp,&
     Rprnrm,Erdnrm,Dulnrm,Theta,Costsc,Xlamda,Rhsnrm,Amat,&
     Basmat,Csc,Wr,Rprim,Ww,Bu,Bl,Rhs,Erd,Erp,Rz,Rg,Colnrm,&
     Costs,Primal,Duals,Singlr,Redbas,Zerolv,Stpedg)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to DSPLP
@@ -49,12 +48,12 @@ SUBROUTINE DPLPMU(Mrelas,Nvars,Lmx,Lbm,Nredc,Info,Ienter,Ileave,Iopt,Npp,&
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900328  Added TYPE section.  (WRB)
 
-  INTEGER i, ibas, IDLOC, Ienter, ihi, il1, Ileave, ilow, Info, Iopt, ipage, &
+  INTEGER i, ibas, Ienter, ihi, il1, Ileave, ilow, Info, Iopt, ipage, &
     iplace, iu1, j, Jstrt, k, key, Lbm, Lmx, lpg, Mrelas, n20002, n20018, n20121, &
     nerr, nnegrc, Npp, npr001, npr003, Nredc, Nvars
   INTEGER Ibasis(*), Imat(*), Ibrc(Lbm,2), Ipr(*), Iwr(*), Ind(*), Ibb(*)
   REAL(8) :: aij, alpha, Anorm, Costsc, Erdnrm, Dulnrm, Eps, gama, Gg, gq, &
-    Rprnrm, rzj, scalr, Theta, Uu, wp, Xlamda, Rhsnrm, rcost, DASUM, DDOT, cnorm
+    Rprnrm, rzj, scalr, Theta, Uu, wp, Xlamda, Rhsnrm, rcost, cnorm
   REAL(8) :: Amat(*), Basmat(*), Csc(*), Wr(*), Rprim(*), Ww(*), Bu(*), Bl(*), &
     Rhs(*), Erd(*), Erp(*), Rz(*), Rg(*), Costs(*), Primal(*), Duals(*), Colnrm(*)
   REAL(8), PARAMETER :: zero = 0.D0, one = 1.D0, two = 2.D0

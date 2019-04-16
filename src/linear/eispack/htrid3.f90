@@ -1,6 +1,5 @@
 !** HTRID3
 SUBROUTINE HTRID3(Nm,N,A,D,E,E2,Tau)
-  IMPLICIT NONE
   !>
   !***
   !  Reduce a complex Hermitian (packed) matrix to a real
@@ -91,7 +90,6 @@ SUBROUTINE HTRID3(Nm,N,A,D,E,E2,Tau)
   INTEGER i, j, k, l, N, ii, Nm, jm1, jp1
   REAL A(Nm,*), D(*), E(*), E2(*), Tau(2,*)
   REAL f, g, h, fi, gi, hh, si, scalee
-  REAL PYTHAG
   !
   !* FIRST EXECUTABLE STATEMENT  HTRID3
   Tau(1,N) = 1.0E0

@@ -1,6 +1,5 @@
 !** ZRATI
 SUBROUTINE ZRATI(Zr,Zi,Fnu,N,Cyr,Cyi,Tol)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to ZBESH, ZBESI and ZBESK
@@ -33,7 +32,6 @@ SUBROUTINE ZRATI(Zr,Zi,Fnu,N,Cyr,Cyi,Tol)
   REAL(8) :: ak, amagz, ap1, ap2, arg, az, cdfnui, cdfnur, Cyi(N), Cyr(N), dfnu, &
     fdnu, flam, Fnu, fnup, pti, ptr, p1i, p1r, p2i, p2r, rak, rap1, rho, rzi, &
     rzr, test, test1, Tol, tti, ttr, t1i, t1r, Zi, Zr
-  REAL(8), EXTERNAL :: ZABS
   REAL(8), PARAMETER :: czeror = 0.0D0, czeroi = 0.0D0, coner = 1.0D0, conei = 0.0D0, &
     rt2 = 1.41421356237309505D0
   !* FIRST EXECUTABLE STATEMENT  ZRATI

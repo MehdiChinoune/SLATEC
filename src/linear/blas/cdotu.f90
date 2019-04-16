@@ -1,6 +1,5 @@
 !** CDOTU
 COMPLEX FUNCTION CDOTU(N,Cx,Incx,Cy,Incy)
-  IMPLICIT NONE
   !>
   !***
   !  Compute the inner product of two vectors.

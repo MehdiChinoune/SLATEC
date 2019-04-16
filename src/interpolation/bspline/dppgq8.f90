@@ -1,6 +1,5 @@
 !** DPPGQ8
 SUBROUTINE DPPGQ8(FUN,Ldc,C,Xi,Lxi,Kk,Id,A,B,Inppv,Err,Ans,Ierr)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to DPFQAD
@@ -80,10 +79,8 @@ SUBROUTINE DPPGQ8(FUN,Ldc,C,Xi,Lxi,Kk,Id,A,B,Inppv,Err,Ans,Ierr)
     END FUNCTION
   END INTERFACE
   INTEGER Id, Ierr, Inppv, k, Kk, l, Ldc, lmn, lmx, lr(60), Lxi, mxl, nbits, nib, nlmx
-  INTEGER I1MACH
   REAL(8) :: A, aa(60), ae, anib, Ans, area, B, be, C(Ldc,*), cc, ee, &
     ef, eps, Err, est, gl, glr, gr(60), hh(60), tol, vl(60), vr, Xi(*)
-  REAL(8) :: D1MACH
   REAL(8), PARAMETER :: x1 = 1.83434642495649805D-01, x2 = 5.25532409916328986D-01, &
     x3 =7.96666477413626740D-01 , x4 = 9.60289856497536232D-01
   REAL(8), PARAMETER :: w1 = 3.62683783378361983D-01, w2 = 3.13706645877887287D-01, &
@@ -217,7 +214,6 @@ SUBROUTINE DPPGQ8(FUN,Ldc,C,Xi,Lxi,Kk,Id,A,B,Inppv,Err,Ans,Ierr)
 CONTAINS
   REAL(8) FUNCTION G8(x,h)
     REAL(8), INTENT(IN) :: x, h
-    REAL(8), EXTERNAL :: DPPVAL
     G8 = h*((w1*(FUN(x-x1*h)*DPPVAL(Ldc,C,Xi,Lxi,Kk,Id,x-x1*h,Inppv)+FUN(&
       x+x1*h)*DPPVAL(Ldc,C,Xi,Lxi,Kk,Id,x+x1*h,Inppv))&
       +w2*(FUN(x-x2*h)*DPPVAL(Ldc,C,Xi,Lxi,Kk,Id,x-x2*h,Inppv)&

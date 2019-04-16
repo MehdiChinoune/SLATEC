@@ -1,6 +1,5 @@
 !** AIE
 REAL FUNCTION AIE(X)
-  IMPLICIT NONE
   !>
   !***
   !  Calculate the Airy function for a negative argument and an
@@ -53,8 +52,7 @@ REAL FUNCTION AIE(X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920618  Removed space from variable names.  (RWC, WRB)
 
-  REAL CSEVL, eta, R1MACH, sqrtx, theta, X, xm, z
-  INTEGER INITS
+  REAL eta, sqrtx, theta, X, xm, z
   INTEGER, SAVE :: naif, naig, naip
   REAL, SAVE :: x3sml, x32sml, xbig
   REAL, PARAMETER :: aifcs(9) = [ -.03797135849666999750E0, .05919188853726363857E0, &

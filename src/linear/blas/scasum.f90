@@ -1,6 +1,5 @@
 !** SCASUM
 REAL FUNCTION SCASUM(N,Cx,Incx)
-  IMPLICIT NONE
   !>
   !***
   !  Compute the sum of the magnitudes of the real and

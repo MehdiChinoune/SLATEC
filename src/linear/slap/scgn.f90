@@ -1,7 +1,6 @@
 !** SCGN
 SUBROUTINE SCGN(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MTTVEC,MSOLVE,Itol,Tol,&
     Itmax,Iter,Err,Ierr,Iunit,R,Z,P,Atp,Atz,Dz,Atdz,Rwork,Iwork)
-  IMPLICIT NONE
   !>
   !***
   !  Preconditioned CG Sparse Ax=b Solver for Normal Equations.
@@ -291,11 +290,6 @@ SUBROUTINE SCGN(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MTTVEC,MSOLVE,Itol,Tol,&
   !     .. Local Scalars ..
   REAL ak, akden, bk, bkden, bknum, bnrm, solnrm, tolmin
   INTEGER i, k
-  !     .. External Functions ..
-  REAL, EXTERNAL :: R1MACH, SDOT
-  INTEGER, EXTERNAL :: ISSCGN
-  !     .. External Subroutines ..
-  EXTERNAL :: SAXPY, SCOPY
   !* FIRST EXECUTABLE STATEMENT  SCGN
   !
   !         Check user input.

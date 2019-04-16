@@ -1,6 +1,5 @@
 !** ALI
 REAL FUNCTION ALI(X)
-  IMPLICIT NONE
   !>
   !***
   !  Compute the logarithmic integral.
@@ -33,8 +32,8 @@ REAL FUNCTION ALI(X)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
-  
-  REAL EI, X
+
+  REAL X
   !* FIRST EXECUTABLE STATEMENT  ALI
   IF ( X<=0.0 ) CALL XERMSG('SLATEC','ALI', 'LOG INTEGRAL UNDEFINED FOR X LE 0',1,2)
   IF ( X==1.0 ) CALL XERMSG('SLATEC','ALI', 'LOG INTEGRAL UNDEFINED FOR X = 1',2,2)

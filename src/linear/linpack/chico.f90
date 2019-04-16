@@ -1,6 +1,5 @@
 !** CHICO
 SUBROUTINE CHICO(A,Lda,N,Kpvt,Rcond,Z)
-  IMPLICIT NONE
   !>
   !***
   !  Factor a complex Hermitian matrix by elimination with sym-
@@ -93,11 +92,9 @@ SUBROUTINE CHICO(A,Lda,N,Kpvt,Rcond,Z)
   COMPLEX A(Lda,*), Z(*)
   REAL Rcond
   !
-  COMPLEX ak, akm1, bk, bkm1, CDOTC, denom, ek, t
-  REAL anorm, s, SCASUM, ynorm
+  COMPLEX ak, akm1, bk, bkm1, denom, ek, t
+  REAL anorm, s, ynorm
   INTEGER i, info, j, jm1, k, kp, kps, ks
-  REAL, EXTERNAL :: CABS1
-  COMPLEX, EXTERNAL :: CSIGN1
   !
   !     FIND NORM OF A USING ONLY UPPER HALF
   !

@@ -1,7 +1,6 @@
 !** TEVLC
 SUBROUTINE TEVLC(N,D,E2,Ierr)
   USE CCBLK, MAChep => EPS
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to CBLKTR

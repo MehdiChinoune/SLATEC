@@ -1,6 +1,5 @@
 !** CDPSC
 SUBROUTINE CDPSC(Ksgn,N,Nq,Yh)
-  IMPLICIT NONE
   !>
   !***
   !  Subroutine CDPSC computes the predicted YH values by

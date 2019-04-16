@@ -1,7 +1,6 @@
 !** DSLUCS
 SUBROUTINE DSLUCS(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
     Iunit,Rwork,Lenw,Iwork,Leniw)
-  IMPLICIT NONE
   !>
   !***
   !  Incomplete LU BiConjugate Gradient Squared Ax=b Solver.
@@ -243,8 +242,6 @@ SUBROUTINE DSLUCS(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
   INTEGER icol, j, jbgn, jend, locdin, locil, lociu, lociw, locjl, &
     locju, locl, locnc, locnr, locp, locq, locr, locr0, locu, &
     locuu, locv1, locv2, locw, nl, nu
-  !     .. External Subroutines ..
-  EXTERNAL :: DCGS, DCHKW, DS2Y, DSILUS, DSLUI, DSMV
   !* FIRST EXECUTABLE STATEMENT  DSLUCS
   !
   Ierr = 0

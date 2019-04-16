@@ -1,6 +1,5 @@
 !** DBFQAD
 SUBROUTINE DBFQAD(F,T,Bcoef,N,K,Id,X1,X2,Tol,Quad,Ierr,Work)
-  IMPLICIT NONE
   !>
   !***
   !  Compute the integral of a product of a function and a
@@ -82,7 +81,6 @@ SUBROUTINE DBFQAD(F,T,Bcoef,N,K,Id,X1,X2,Tol,Quad,Ierr,Work)
   INTEGER Id, Ierr, iflg, ilo, il1, il2, K, left, mflag, N, npk, np1
   REAL(8) :: a, aa, ans, b, bb, Bcoef(*), q, Quad, T(*), ta, tb, &
     Tol, Work(*), wtol, X1, X2
-  REAL(8), EXTERNAL :: D1MACH
   REAL(8), EXTERNAL :: F
   !* FIRST EXECUTABLE STATEMENT  DBFQAD
   Ierr = 1

@@ -1,6 +1,5 @@
 !** DQCHEB
 SUBROUTINE DQCHEB(X,Fval,Cheb12,Cheb24)
-  IMPLICIT NONE
   !>
   !***
   !  This routine computes the CHEBYSHEV series expansion

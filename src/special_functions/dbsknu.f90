@@ -1,6 +1,5 @@
 !** DBSKNU
 SUBROUTINE DBSKNU(X,Fnu,Kode,N,Y,Nz)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to DBESK
@@ -97,8 +96,6 @@ SUBROUTINE DBSKNU(X,Fnu,Kode,N,Y,Nz)
   REAL(8) :: a(160), ak, a1, a2, b(160), bk, ck, coef, cx, dk, dnu, dnu2, elim, &
     etest, ex, f, fc, fhs, fk, fks, flrx, fmu, Fnu, g1, g2, p, pt, p1, p2, q, &
     rx, s, smu, sqk, st, s1, s2, tm, tol, t1, t2, X, Y(*)
-  INTEGER,EXTERNAL :: I1MACH
-  REAL(8), EXTERNAL :: D1MACH
   REAL(8), PARAMETER ::  x1 = 2.0D0, x2 = 17.0D0
   REAL(8), PARAMETER ::  pi = 3.14159265358979D+00, rthpi = 1.25331413731550D+00
   REAL(8), PARAMETER :: cc(8) = [ 5.77215664901533D-01, -4.20026350340952D-02, &

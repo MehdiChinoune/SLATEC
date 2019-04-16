@@ -1,6 +1,5 @@
 !** DNLS1E
 SUBROUTINE DNLS1E(FCN,Iopt,M,N,X,Fvec,Tol,Nprint,Info,Iw,Wa,Lwa)
-  IMPLICIT NONE
   !>
   !***
   !  An easy-to-use code which minimizes the sum of the squares

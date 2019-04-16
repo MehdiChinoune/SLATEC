@@ -1,6 +1,5 @@
 !** STRMM
 SUBROUTINE STRMM(Side,Uplo,Transa,Diag,M,N,Alpha,A,Lda,B,Ldb)
-  IMPLICIT NONE
   !>
   !***
   !  Multiply a real general matrix by a real triangular matrix.
@@ -141,10 +140,6 @@ SUBROUTINE STRMM(Side,Uplo,Transa,Diag,M,N,Alpha,A,Lda,B,Ldb)
   REAL Alpha
   !     .. Array Arguments ..
   REAL A(Lda,*), B(Ldb,*)
-  !     .. External Functions ..
-  LOGICAL, EXTERNAL :: LSAME
-  !     .. External Subroutines ..
-  EXTERNAL :: XERBLA
   !     .. Intrinsic Functions ..
   INTRINSIC MAX
   !     .. Local Scalars ..

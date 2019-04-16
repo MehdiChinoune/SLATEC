@@ -1,6 +1,5 @@
 !** PYTHAG
 REAL FUNCTION PYTHAG(A,B)
-  IMPLICIT NONE
   !>
   !***
   !  Compute the complex square root of a complex number without

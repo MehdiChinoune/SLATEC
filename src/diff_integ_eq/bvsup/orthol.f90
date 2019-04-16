@@ -1,6 +1,5 @@
 !** ORTHOL
 SUBROUTINE ORTHOL(A,M,N,Nrda,Iflag,Irank,Iscale,Diag,Kpivot,Scales,Cols,Cs)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to BVSUP
@@ -83,7 +82,7 @@ SUBROUTINE ORTHOL(A,M,N,Nrda,Iflag,Irank,Iscale,Diag,Kpivot,Scales,Cols,Cs)
 
   INTEGER Iflag, Irank, Iscale, j, jcol, k, kp, Kpivot(*), l, M, mk, N, Nrda
   REAL A(Nrda,*), acc, akk, anorm, as, asave, Cols(*), Cs(*), css, Diag(*), diagk, &
-    dum(1), R1MACH, sad, sc, Scales(*), SDOT, sig, sigma, sruro, uro
+    dum(1), sad, sc, Scales(*), sig, sigma, sruro, uro
   !
   !- *********************************************************************
   !

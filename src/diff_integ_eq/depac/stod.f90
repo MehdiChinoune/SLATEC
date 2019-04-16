@@ -3,7 +3,6 @@ SUBROUTINE STOD(Neq,Y,Yh,Nyh,Yh1,Ewt,Savf,Acor,Wm,Iwm,F,JAC,Rpar,Ipar)
   USE DEBDF1, ONLY : CONit, CRAte, EL, ELCo, HOLd, RC, RMAx, TESco, EL0, H, HMIn, &
     HMXi, HU, TN, KSTeps, IALth, IPUp, LMAx, MEO, NQNyh, NSTepj, IER, JSTart, &
     KFLag, L, METh, MITer, MAXord, N, NQ, NST, NFE, NQU
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to DEBDF
@@ -104,7 +103,7 @@ SUBROUTINE STOD(Neq,Y,Yh,Nyh,Yh1,Ewt,Savf,Acor,Wm,Iwm,F,JAC,Rpar,Ipar)
   !LLL. OPTIMIZE
   INTEGER Neq, Nyh, Iwm(*), i, i1, iredo, iret, j, jb, m, ncf, newq
   REAL Y(*), Yh(Nyh,*), Yh1(*), Ewt(*), Savf(*), Acor(*), Wm(*), dcon, ddn, del, &
-    delp, dsm, dup, exdn, exsm, exup, r, rh, rhdn, rhsm, rhup, told, VNWRMS
+    delp, dsm, dup, exdn, exsm, exup, r, rh, rhdn, rhsm, rhup, told
   !
   !
   !* FIRST EXECUTABLE STATEMENT  STOD

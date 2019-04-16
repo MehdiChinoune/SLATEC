@@ -1,6 +1,5 @@
 !** C9LGMC
 COMPLEX FUNCTION C9LGMC(Zin)
-  IMPLICIT NONE
   !>
   !***
   !  Compute the log gamma correction factor so that
@@ -40,7 +39,7 @@ COMPLEX FUNCTION C9LGMC(Zin)
   !           (WRB)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
 
-  REAL cabsz, R1MACH, x, y
+  REAL cabsz, x, y
   INTEGER i, ndx
   COMPLEX Zin, z, z2inv
   INTEGER, SAVE :: nterm

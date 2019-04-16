@@ -1,6 +1,5 @@
 !** SPENC
 REAL FUNCTION SPENC(X)
-  IMPLICIT NONE
   !>
   !***
   !  Compute a form of Spence's integral due to K. Mitchell.
@@ -49,8 +48,7 @@ REAL FUNCTION SPENC(X)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-  REAL aln, CSEVL, R1MACH, X
-  INTEGER INITS
+  REAL aln, X
   INTEGER, SAVE :: nspenc
   REAL, SAVE :: xbig
   REAL, PARAMETER :: spencs(19) = [ .1527365598892406E0, .08169658058051014E0, &

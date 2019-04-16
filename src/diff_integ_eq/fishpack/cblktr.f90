@@ -1,7 +1,6 @@
 !** CBLKTR
 SUBROUTINE CBLKTR(Iflg,Np,N,An,Bn,Cn,Mp,M,Am,Bm,Cm,Idimy,Y,Ierror,W)
   USE CCBLK
-  IMPLICIT NONE
   !>
   !***
   !  Solve a block tridiagonal system of linear equations
@@ -214,7 +213,6 @@ SUBROUTINE CBLKTR(Iflg,Np,N,An,Bn,Cn,Mp,M,Am,Bm,Cm,Idimy,Y,Ierror,W)
   REAL :: An(N), Bn(N), Cn(N), W(*)
   COMPLEX :: Am(M), Bm(M), Cm(M), Y(Idimy,N)
   COMPLEX :: WC(100)
-  EXTERNAL :: PROC, PROCP, CPROC, CPROCP
   !* FIRST EXECUTABLE STATEMENT  CBLKTR
   WC = [ ( CMPLX(W(i),W(i+1)), i=1,199,2 ) ]
   NM = N

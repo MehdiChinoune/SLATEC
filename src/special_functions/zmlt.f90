@@ -1,6 +1,5 @@
 !** ZMLT
 SUBROUTINE ZMLT(Ar,Ai,Br,Bi,Cr,Ci)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to ZBESH, ZBESI, ZBESJ, ZBESK, ZBESY, ZAIRY and

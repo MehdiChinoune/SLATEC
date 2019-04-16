@@ -1,6 +1,5 @@
 !** CPTSL
 SUBROUTINE CPTSL(N,D,E,B)
-  IMPLICIT NONE
   !>
   !***
   !  Solve a positive definite tridiagonal linear system.

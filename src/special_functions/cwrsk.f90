@@ -1,6 +1,5 @@
 !** CWRSK
 SUBROUTINE CWRSK(Zr,Fnu,Kode,N,Y,Nz,Cw,Tol,Elim,Alim)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to CBESI and CBESK
@@ -27,7 +26,7 @@ SUBROUTINE CWRSK(Zr,Fnu,Kode,N,Y,Nz,Cw,Tol,Elim,Alim)
 
   INTEGER i, Kode, N, nw, Nz
   COMPLEX cinu, cscl, ct, Cw(2), c1, c2, rct, st, Y(N), Zr
-  REAL act, acw, Alim, ascle, Elim, Fnu, s1, s2, Tol, yy, R1MACH
+  REAL act, acw, Alim, ascle, Elim, Fnu, s1, s2, Tol, yy
   !* FIRST EXECUTABLE STATEMENT  CWRSK
   !-----------------------------------------------------------------------
   !     I(FNU+I-1,Z) BY BACKWARD RECURRENCE FOR RATIOS

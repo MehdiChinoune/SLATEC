@@ -1,6 +1,5 @@
 !** UVEC
 SUBROUTINE UVEC(X,Y,Yp)
-  IMPLICIT NONE
   !>
   !***
   !  Dummy routine for BVSUP quick check.

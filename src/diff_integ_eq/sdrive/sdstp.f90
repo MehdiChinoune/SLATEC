@@ -4,7 +4,6 @@ SUBROUTINE SDSTP(Eps,F,FA,Hmax,Impl,Ierror,JACOBN,Matdim,Maxord,Mint,&
     Jtask,Mntold,Mtrold,Nfe,Nje,Nqused,Nstep,T,Y,Yh,A,Convrg,&
     Dfdy,El,Fac,Hold,Ipvt,Jstate,Jstepl,Nq,Nwait,Rc,Rmax,&
     Save1,Save2,Tq,Trend,Iswflg,Mtrsv,Mxrdsv)
-  IMPLICIT NONE
   !>
   !***
   !  SDSTP performs one step of the integration of an initial
@@ -84,7 +83,6 @@ SUBROUTINE SDSTP(Eps,F,FA,Hmax,Impl,Ierror,JACOBN,Matdim,Maxord,Mint,&
     numer, Rc, rh, rh1, rh2, rh3, Rmax, Save1(*), Save2(*), T, told, &
     Tq(3,12), Trend, Uround, Y(*), Yh(N,*), Ywt(*), y0nrm
   LOGICAL Convrg, evalfa, evaljc, switch
-  REAL, EXTERNAL :: SNRM2
   INTEGER, PARAMETER :: MXFAIL = 3, MXITER = 3, MXTRY = 50
   REAL, PARAMETER :: BIAS1 = 1.3E0, BIAS2 = 1.2E0, BIAS3 = 1.4E0, RCTEST = 0.3E0, &
     RMFAIL = 2.E0, RMNORM = 10.E0, TRSHLD = 1.E0

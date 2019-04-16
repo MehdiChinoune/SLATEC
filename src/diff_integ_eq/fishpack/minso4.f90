@@ -1,7 +1,6 @@
 !** MINSO4
 SUBROUTINE MINSO4(Usol,Idmn,Zn,Zm,Pertb)
   USE SPL4
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to SEPX4

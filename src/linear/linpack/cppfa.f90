@@ -1,6 +1,5 @@
 !** CPPFA
 SUBROUTINE CPPFA(Ap,N,Info)
-  IMPLICIT NONE
   !>
   !***
   !  Factor a complex Hermitian positive definite matrix stored
@@ -79,7 +78,7 @@ SUBROUTINE CPPFA(Ap,N,Info)
   INTEGER N, Info
   COMPLEX Ap(*)
   !
-  COMPLEX CDOTC, t
+  COMPLEX t
   REAL s
   INTEGER j, jj, jm1, k, kj, kk
   !* FIRST EXECUTABLE STATEMENT  CPPFA

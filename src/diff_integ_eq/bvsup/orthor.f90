@@ -1,6 +1,5 @@
 !** ORTHOR
 SUBROUTINE ORTHOR(A,N,M,Nrda,Iflag,Irank,Iscale,Diag,Kpivot,Scales,Rows,Rs)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to BVSUP
@@ -82,8 +81,8 @@ SUBROUTINE ORTHOR(A,N,M,Nrda,Iflag,Irank,Iscale,Diag,Kpivot,Scales,Rows,Rs)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER Iflag, Irank, Iscale, j, jrow, k, kp, Kpivot(*), l, M, mk, N, Nrda
-  REAL A(Nrda,*), acc, akk, anorm, as, asave, Diag(*), diagk, dum(1), R1MACH, &
-    Rows(*), Rs(*), rss, sad, Scales(*), SDOT, sig, sigma, sruro, uro
+  REAL A(Nrda,*), acc, akk, anorm, as, asave, Diag(*), diagk, dum(1), &
+    Rows(*), Rs(*), rss, sad, Scales(*), sig, sigma, sruro, uro
   !
   ! END OF ABSTRACT
   !

@@ -1,6 +1,5 @@
 !** DLSI
 SUBROUTINE DLSI(W,Mdw,Ma,Mg,N,Prgopt,X,Rnorm,Mode,Ws,Ip)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to DLSEI
@@ -65,9 +64,6 @@ SUBROUTINE DLSI(W,Mdw,Ma,Mg,N,Prgopt,X,Rnorm,Mode,Ws,Ip)
 
   INTEGER Ip(*), Ma, Mdw, Mg, Mode, N
   REAL(8) :: Prgopt(*), Rnorm, W(Mdw,*), Ws(*), X(*)
-  !
-  EXTERNAL :: DAXPY, DCOPY, DH12, DHFTI, DLPDP, DSCAL, DSWAP
-  REAL(8), EXTERNAL :: D1MACH, DASUM, DDOT
   !
   REAL(8) :: anorm, fac, gam, rb, tau, tol, xnorm, temp(1)
   INTEGER i, j, k, key, krank, krm1, krp1, l, last, link, m, map1, mdlpdp, minman, &

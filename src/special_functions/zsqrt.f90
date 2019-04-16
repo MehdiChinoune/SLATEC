@@ -1,6 +1,5 @@
 !** ZSQRT
 SUBROUTINE ZSQRT(Ar,Ai,Br,Bi)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to ZBESH, ZBESI, ZBESJ, ZBESK, ZBESY, ZAIRY and
@@ -26,7 +25,6 @@ SUBROUTINE ZSQRT(Ar,Ai,Br,Bi)
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
 
   REAL(8) :: Ar, Ai, Br, Bi, zm, dtheta
-  REAL(8), EXTERNAL :: ZABS
   REAL(8), PARAMETER :: drt = 7.071067811865475244008443621D-1, &
     dpi = 3.141592653589793238462643383D+0
   !* FIRST EXECUTABLE STATEMENT  ZSQRT

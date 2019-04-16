@@ -1,6 +1,5 @@
 !** GAMI
 REAL FUNCTION GAMI(A,X)
-  IMPLICIT NONE
   !>
   !***
   !  Evaluate the incomplete Gamma function.
@@ -38,7 +37,7 @@ REAL FUNCTION GAMI(A,X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
 
-  REAL A, factor, GAMIT, X
+  REAL A, factor, X
   !* FIRST EXECUTABLE STATEMENT  GAMI
   IF ( A<=0.0 ) CALL XERMSG('SLATEC','GAMI','A MUST BE GT ZERO',1,2)
   IF ( X<0.0 ) CALL XERMSG('SLATEC','GAMI','X MUST BE GE ZERO',2,2)

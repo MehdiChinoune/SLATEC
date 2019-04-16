@@ -1,6 +1,5 @@
 !** DMPAR
 SUBROUTINE DMPAR(N,R,Ldr,Ipvt,Diag,Qtb,Delta,Par,X,Sigma,Wa1,Wa2)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to DNLS1 and DNLS1E
@@ -115,7 +114,6 @@ SUBROUTINE DMPAR(N,R,Ldr,Ipvt,Diag,Qtb,Delta,Par,X,Sigma,Wa1,Wa2)
   REAL(8) :: R(Ldr,*), Diag(*), Qtb(*), X(*), Sigma(*), Wa1(*), Wa2(*)
   INTEGER i, iter, j, jm1, jp1, k, l, nsing
   REAL(8) :: dxnorm, dwarf, fp, gnorm, parc, parl, paru, summ, temp
-  REAL(8) :: D1MACH, DENORM
   REAL(8), PARAMETER :: p1 = 1.0D-1, p001 = 1.0D-3, zero = 0.0D0
   !* FIRST EXECUTABLE STATEMENT  DMPAR
   dwarf = D1MACH(1)

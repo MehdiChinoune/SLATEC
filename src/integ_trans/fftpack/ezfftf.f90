@@ -1,6 +1,5 @@
 !** EZFFTF
 SUBROUTINE EZFFTF(N,R,Azero,A,B,Wsave)
-  IMPLICIT NONE
   !>
   !***
   !  Compute a simplified real, periodic, fast Fourier forward

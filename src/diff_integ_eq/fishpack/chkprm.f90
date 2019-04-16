@@ -1,6 +1,5 @@
 !** CHKPRM
 SUBROUTINE CHKPRM(Intl,Iorder,A,B,M,Mbdcnd,C,D,N,Nbdcnd,COFX,COFY,Idmn,Ierror)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to SEPELI

@@ -3,7 +3,6 @@ SUBROUTINE DDNTL(Eps,F,FA,Hmax,Hold,Impl,Jtask,Matdim,Maxord,Mint,Miter,&
     Ml,Mu,N,Nde,Save1,T,Uround,USERS,Y,Ywt,H,Mntold,Mtrold,&
     Nfe,Rc,Yh,A,Convrg,El,Fac,Ier,Ipvt,Nq,Nwait,Rh,Rmax,&
     Save2,Tq,Trend,Iswflg,Jstate)
-  IMPLICIT NONE
   !>
   !***
   !  Subroutine DDNTL is called to set parameters on the first
@@ -48,7 +47,7 @@ SUBROUTINE DDNTL(Eps,F,FA,Hmax,Hold,Impl,Jtask,Matdim,Maxord,Mint,Miter,&
   INTEGER i, iflag, Impl, info, Iswflg, Jstate, Jtask, Matdim, &
     Maxord, Mint, Miter, Ml, Mntold, Mtrold, Mu, N, Nde, Nfe, Nq, Nwait
   REAL(8) :: A(Matdim,*), El(13,12), Eps, Fac(*), H, Hmax, Hold, oldl0, Rc, Rh, &
-    Rmax, Save1(*), Save2(*), DNRM2, summ, T, Tq(3,12), Trend, Uround, Y(*), &
+    Rmax, Save1(*), Save2(*), summ, T, Tq(3,12), Trend, Uround, Y(*), &
     Yh(N,*), Ywt(*)
   INTEGER Ipvt(*)
   LOGICAL Convrg, Ier

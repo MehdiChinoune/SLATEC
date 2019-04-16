@@ -1,6 +1,5 @@
 !** BIE
 REAL FUNCTION BIE(X)
-  IMPLICIT NONE
   !>
   !***
   !  Calculate the Bairy function for a negative argument and an
@@ -69,8 +68,7 @@ REAL FUNCTION BIE(X)
   !   890206  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-  REAL CSEVL, eta, R1MACH, sqrtx, theta, X, xm, z
-  INTEGER INITS
+  REAL eta, sqrtx, theta, X, xm, z
   INTEGER, SAVE :: nbif, nbig, nbif2, nbig2, nbip, nbip2
   REAL, SAVE :: x3sml, x32sml, xbig
   REAL, PARAMETER :: bifcs(9) = [ -.01673021647198664948E0, .1025233583424944561E0, &

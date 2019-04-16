@@ -1,6 +1,5 @@
 !** GAMLIM
 SUBROUTINE GAMLIM(Xmin,Xmax)
-  IMPLICIT NONE
   !>
   !***
   !  Compute the minimum and maximum bounds for the argument in
@@ -39,8 +38,8 @@ SUBROUTINE GAMLIM(Xmin,Xmax)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-  
-  REAL alnbig, alnsml, R1MACH, xln, Xmax, Xmin, xold
+
+  REAL alnbig, alnsml, xln, Xmax, Xmin, xold
   INTEGER i
   !* FIRST EXECUTABLE STATEMENT  GAMLIM
   alnsml = LOG(R1MACH(1))

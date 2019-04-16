@@ -1,6 +1,5 @@
 !** SPOCO
 SUBROUTINE SPOCO(A,Lda,N,Rcond,Z,Info)
-  IMPLICIT NONE
   !>
   !***
   !  Factor a real symmetric positive definite matrix
@@ -91,8 +90,8 @@ SUBROUTINE SPOCO(A,Lda,N,Rcond,Z,Info)
   REAL A(Lda,*), Z(*)
   REAL Rcond
   !
-  REAL SDOT, ek, t, wk, wkm
-  REAL anorm, s, SASUM, sm, ynorm
+  REAL ek, t, wk, wkm
+  REAL anorm, s, sm, ynorm
   INTEGER i, j, jm1, k, kb, kp1
   !
   !     FIND NORM OF A USING ONLY UPPER HALF

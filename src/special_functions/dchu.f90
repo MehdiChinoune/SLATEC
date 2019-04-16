@@ -1,6 +1,5 @@
 !** DCHU
 REAL(8) FUNCTION DCHU(A,B,X)
-  IMPLICIT NONE
   !>
   !***
   !  Compute the logarithmic confluent hypergeometric function.
@@ -41,7 +40,6 @@ REAL(8) FUNCTION DCHU(A,B,X)
   INTEGER i, istrt, m, n
   REAL(8) :: A, B, X, aintb, alnx, a0, beps, b0, c0, factor, gamri1, gamrni, &
     pch1ai, pch1i, pochai, summ, t, xeps1, xi, xi1, xn, xtoeps
-  REAL(8), EXTERNAL :: D1MACH, DPOCH, DGAMR, DPOCH1, DEXPRL, D9CHU
   REAL(8), PARAMETER :: pi = 3.141592653589793238462643383279503D0
   REAL(8) :: eps = 0.0D0
   !* FIRST EXECUTABLE STATEMENT  DCHU

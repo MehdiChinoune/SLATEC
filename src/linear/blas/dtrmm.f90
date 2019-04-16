@@ -1,6 +1,5 @@
 !** DTRMM
 SUBROUTINE DTRMM(Side,Uplo,Transa,Diag,M,N,Alpha,A,Lda,B,Ldb)
-  IMPLICIT NONE
   !>
   !***
   !  Perform one of the matrix-matrix operations.
@@ -141,10 +140,6 @@ SUBROUTINE DTRMM(Side,Uplo,Transa,Diag,M,N,Alpha,A,Lda,B,Ldb)
   REAL(8) :: Alpha
   !     .. Array Arguments ..
   REAL(8) :: A(Lda,*), B(Ldb,*)
-  !     .. External Functions ..
-  LOGICAL, EXTERNAL :: LSAME
-  !     .. External Subroutines ..
-  EXTERNAL :: XERBLA
   !     .. Intrinsic Functions ..
   INTRINSIC MAX
   !     .. Local Scalars ..

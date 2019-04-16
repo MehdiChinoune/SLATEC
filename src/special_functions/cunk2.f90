@@ -1,6 +1,5 @@
 !** CUNK2
 SUBROUTINE CUNK2(Z,Fnu,Kode,Mr,N,Y,Nz,Tol,Elim,Alim)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to CBESK
@@ -37,7 +36,7 @@ SUBROUTINE CUNK2(Z,Fnu,Kode,Mr,N,Y,Nz,Tol,Elim,Alim)
     csr(3), css(3), cy(2), c1, c2, dai, phi(2), rz, s1, s2, Y(N), Z, zb, zeta1(2), &
     zeta2(2), zn, zr, phid, argd, zeta1d, zeta2d, asumd, bsumd
   REAL aarg, Alim, ang, aphi, asc, ascle, bry(3), car, cpn, c2i, c2m, c2r, Elim, &
-    fmr, fn, fnf, Fnu, rs1, sar, sgn, spn, Tol, x, yy, R1MACH
+    fmr, fn, fnf, Fnu, rs1, sar, sgn, spn, Tol, x, yy
   COMPLEX, PARAMETER :: czero = (0.0E0,0.0E0), cone = (1.0E0,0.0E0), &
     ci = (0.0E0,1.0E0), cr1 = (1.0E0,1.73205080756887729E0), &
     cr2 = (-0.5E0,-8.66025403784438647E-01)

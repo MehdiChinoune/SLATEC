@@ -1,6 +1,5 @@
 !** GAMIC
 REAL FUNCTION GAMIC(A,X)
-  IMPLICIT NONE
   !>
   !***
   !  Calculate the complementary incomplete Gamma function.
@@ -54,8 +53,8 @@ REAL FUNCTION GAMIC(A,X)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920528  DESCRIPTION and REFERENCES sections revised.  (WRB)
 
-  REAL A, aeps, algap1, alngs, alx, e, fm, gstar, h, sga, sgng,  sgngam, sgngs, t, &
-    X, R1MACH, R9GMIC, R9GMIT, R9LGIC, R9LGIT
+  REAL A, aeps, algap1, alngs, alx, e, fm, gstar, h, sga, sgng,  sgngam, sgngs, &
+    t, X
   INTEGER izero, ma
   REAL, SAVE :: eps, sqeps, alneps, bot
   LOGICAL :: first = .TRUE.

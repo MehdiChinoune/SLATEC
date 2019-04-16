@@ -1,6 +1,5 @@
 !** SODS
 SUBROUTINE SODS(A,X,B,Neq,Nuk,Nrda,Iflag,Work,Iwork)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to BVSUP

@@ -1,6 +1,5 @@
 !** EXPREL
 REAL FUNCTION EXPREL(X)
-  IMPLICIT NONE
   !>
   !***
   !  Calculate the relative error exponential (EXP(X)-1)/X.
@@ -35,7 +34,7 @@ REAL FUNCTION EXPREL(X)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-  REAL absx, alneps, R1MACH, X, xln, xn
+  REAL absx, alneps, X, xln, xn
   INTEGER i
   INTEGER, SAVE :: nterms
   REAL, SAVE :: xbnd

@@ -1,6 +1,5 @@
 !** SSLUI4
 SUBROUTINE SSLUI4(N,B,X,Il,Jl,L,Dinv,Iu,Ju,U)
-  IMPLICIT NONE
   !>
   !***
   !  SLAP Backsolve for LDU Factorization.

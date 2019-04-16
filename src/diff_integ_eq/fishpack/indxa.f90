@@ -1,7 +1,6 @@
 !** INDXA
 SUBROUTINE INDXA(I,Ir,Idxa,Na)
   USE CBLKT
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to BLKTRI

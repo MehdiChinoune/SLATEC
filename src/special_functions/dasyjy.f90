@@ -1,6 +1,5 @@
 !** DASYJY
 SUBROUTINE DASYJY(FUNJY,X,Fnu,Flgjy,In,Y,Wk,Iflw)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to DBESJ and DBESY
@@ -70,11 +69,9 @@ SUBROUTINE DASYJY(FUNJY,X,Fnu,Flgjy,In,Y,Wk,Iflw)
 
   INTEGER i, Iflw, In, j, jn, jr, ju, k, kb, klast, kmax(5), kp1, &
     ks, ksp1, kstemp, l, lr, lrp1, iseta, isetb
-  INTEGER I1MACH
   REAL(8) :: abw2, akm, ap, asum, az, bsum, cr(10), crz32, dfi, elim, dr(10), fi, &
     Flgjy, fn, Fnu, fn2, phi, rcz, rden, relb, rfn2, rtz, rzden, sa, sb, suma, &
     sumb, s1, ta, tau, tb, tfn, tol, t2, upol(10), Wk(*), X, xx, Y(*), z, z32
-  REAL(8) :: D1MACH
   REAL(8), PARAMETER :: tols = -6.90775527898214D+00
   REAL(8), PARAMETER :: con1 = 6.66666666666667D-01, con2 = 3.33333333333333D-01, &
     con548 = 1.04166666666667D-01

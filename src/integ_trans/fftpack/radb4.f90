@@ -1,6 +1,5 @@
 !** RADB4
 SUBROUTINE RADB4(Ido,L1,Cc,Ch,Wa1,Wa2,Wa3)
-  IMPLICIT NONE
   !>
   !***
   !  Calculate the fast Fourier transform of subvectors of

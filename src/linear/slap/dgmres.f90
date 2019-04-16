@@ -1,7 +1,6 @@
 !** DGMRES
 SUBROUTINE DGMRES(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,&
     Iter,Err,Ierr,Iunit,Sb,Sx,Rgwk,Lrgw,Igwk,Ligw,Rwork,Iwork)
-  IMPLICIT NONE
   !>
   !***
   !  Preconditioned GMRES iterative sparse Ax=b solver.
@@ -411,10 +410,6 @@ SUBROUTINE DGMRES(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,&
   REAL(8) :: bnrm, rhol, summ
   INTEGER i, iflag, jpre, jscal, kmp, ldl, lgmr, lhes, lq, lr, &
     lv, lw, lxl, lz, lzm1, maxl, maxlp1, nms, nmsl, nrmax, nrsts
-  !     .. External Functions ..
-  REAL(8), EXTERNAL :: D1MACH, DNRM2
-  !     .. External Subroutines ..
-  EXTERNAL :: DCOPY, DPIGMR
   !     .. Intrinsic Functions ..
   INTRINSIC SQRT
   !* FIRST EXECUTABLE STATEMENT  DGMRES

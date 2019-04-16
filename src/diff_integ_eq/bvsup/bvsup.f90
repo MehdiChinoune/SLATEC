@@ -5,7 +5,6 @@ SUBROUTINE BVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
     K6, K7, K8, K9, K10, K11, KKKzpw, L1, L2, LLLint, MNSwot, ICOco, IGOfxd => IGOfx, &
     NDIsk, MXNon, NEEdw, NFCc, NCOmpd => NCOmp, NEEdiw, NEQivd => NEQivp, &
     NPS, NTP, XBEg, XSAv, XENd, NFCd => NFC, NICd => NIC, NOPg, NXPtsd => NXPts, NTApe, KKKint
-  IMPLICIT NONE
   !>
   !***
   !  Solve a linear two-point boundary value problem using

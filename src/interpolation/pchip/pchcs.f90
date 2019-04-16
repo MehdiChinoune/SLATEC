@@ -1,6 +1,5 @@
 !** PCHCS
 SUBROUTINE PCHCS(Switch,N,H,Slope,D,Incfd,Ierr)
-  IMPLICIT NONE
   !>
   !***
   !  Adjusts derivative values for PCHIC
@@ -105,7 +104,6 @@ SUBROUTINE PCHCS(Switch,N,H,Slope,D,Incfd,Ierr)
   !
   INTEGER i, indx, k, nless1
   REAL del(3), dext, dfloc, dfmx, fact, slmax, wtave(2)
-  REAL PCHST
   !
   !  INITIALIZE.
   !

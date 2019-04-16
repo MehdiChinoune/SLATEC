@@ -1,6 +1,5 @@
 !** CBINU
 SUBROUTINE CBINU(Z,Fnu,Kode,N,Cy,Nz,Rl,Fnul,Tol,Elim,Alim)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to CAIRY, CBESH, CBESI, CBESJ, CBESK and CBIRY

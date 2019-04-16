@@ -1,6 +1,5 @@
 !** BNDSOL
 SUBROUTINE BNDSOL(Mode,G,Mdg,Nb,Ip,Ir,X,N,Rnorm)
-  IMPLICIT NONE
   !>
   !***
   !  Solve the least squares problem for a banded matrix using

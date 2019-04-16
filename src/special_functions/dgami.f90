@@ -1,6 +1,5 @@
 !** DGAMI
 REAL(8) FUNCTION DGAMI(A,X)
-  IMPLICIT NONE
   !>
   !***
   !  Evaluate the incomplete Gamma function.
@@ -38,7 +37,7 @@ REAL(8) FUNCTION DGAMI(A,X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
 
-  REAL(8) :: A, X, factor, DGAMIT
+  REAL(8) :: A, X, factor
   !* FIRST EXECUTABLE STATEMENT  DGAMI
   IF ( A<=0.D0 ) CALL XERMSG('SLATEC','DGAMI','A MUST BE GT ZERO',1,2)
   IF ( X<0.D0 ) CALL XERMSG('SLATEC','DGAMI','X MUST BE GE ZERO',2,2)

@@ -1,6 +1,5 @@
 !** SGEEV
 SUBROUTINE SGEEV(A,Lda,N,E,V,Ldv,Work,Job,Info)
-  IMPLICIT NONE
   !>
   !***
   !  Compute the eigenvalues and, optionally, the eigenvectors

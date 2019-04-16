@@ -1,7 +1,6 @@
 !** SSDGMR
 SUBROUTINE SSDGMR(N,B,X,Nelt,Ia,Ja,A,Isym,Nsave,Itol,Tol,Itmax,Iter,Err,&
     Ierr,Iunit,Rwork,Lenw,Iwork,Leniw)
-  IMPLICIT NONE
   !>
   !***
   !  Diagonally Scaled GMRES Iterative Sparse Ax=b Solver.
@@ -339,8 +338,6 @@ SUBROUTINE SSDGMR(N,B,X,Nelt,Ia,Ja,A,Isym,Nsave,Itol,Tol,Itmax,Iter,Err,&
   INTEGER Ia(Nelt), Iwork(Leniw), Ja(Nelt)
   !     .. Local Scalars ..
   INTEGER locdin, locigw, lociw, locrgw, locw, myitol
-  !     .. External Subroutines ..
-  EXTERNAL :: SCHKW, SGMRES, SS2Y, SSDI, SSDS, SSMV
   !* FIRST EXECUTABLE STATEMENT  SSDGMR
   !
   Ierr = 0

@@ -1,6 +1,5 @@
 !** LSI
 SUBROUTINE LSI(W,Mdw,Ma,Mg,N,Prgopt,X,Rnorm,Mode,Ws,Ip)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to LSEI
@@ -64,9 +63,6 @@ SUBROUTINE LSI(W,Mdw,Ma,Mg,N,Prgopt,X,Rnorm,Mode,Ws,Ip)
 
   INTEGER Ip(*), Ma, Mdw, Mg, Mode, N
   REAL Prgopt(*), Rnorm, W(Mdw,*), Ws(*), X(*)
-  !
-  REAL, EXTERNAL :: R1MACH, SASUM, SDOT
-  EXTERNAL :: H12, HFTI, LPDP, SAXPY, SCOPY, SSCAL, SSWAP
   !
   REAL anorm, fac, gam, rb,tau, tol, xnorm, temp(1)
   INTEGER i, j, k, key, krank, krm1, krp1, l, last, link, m, map1, mdlpdp, minman, &

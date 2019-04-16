@@ -1,6 +1,5 @@
 !** FZERO
 SUBROUTINE FZERO(F,B,C,R,Re,Ae,Iflag)
-  IMPLICIT NONE
   !>
   !***
   !  Search for a zero of a function F(X) in a given interval
@@ -103,7 +102,7 @@ SUBROUTINE FZERO(F,B,C,R,Re,Ae,Iflag)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
-  REAL F, R1MACH
+  REAL F
   REAL a, acbs, acmb, Ae, aw, B, C, cmb, er, fa, fb, fc, fx, &
     fz, p, q, R, Re, rw, t, tol, z
   INTEGER ic, Iflag, kount

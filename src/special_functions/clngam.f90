@@ -1,6 +1,5 @@
 !** CLNGAM
 COMPLEX FUNCTION CLNGAM(Zin)
-  IMPLICIT NONE
   !>
   !***
   !  Compute the logarithm of the absolute value of the Gamma
@@ -35,9 +34,9 @@ COMPLEX FUNCTION CLNGAM(Zin)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
 
-  REAL argsum, cabsz, CARG, R1MACH, x, y
+  REAL argsum, cabsz, x, y
   INTEGER i, n
-  COMPLEX Zin, z, corr, CLNREL, C9LGMC
+  COMPLEX Zin, z, corr
   REAL, SAVE :: bound, dxrel
   REAL, PARAMETER :: pi = 3.14159265358979324E0
   REAL, PARAMETER :: sq2pil = 0.91893853320467274E0

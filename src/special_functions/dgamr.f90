@@ -1,6 +1,5 @@
 !** DGAMR
 REAL(8) FUNCTION DGAMR(X)
-  IMPLICIT NONE
   !>
   !***
   !  Compute the reciprocal of the Gamma function.

@@ -1,7 +1,6 @@
 !** DXSET
 SUBROUTINE DXSET(Irad,Nradpl,Dzero,Nbits,Ierror)
   USE DXBLK
-  IMPLICIT NONE
   !>
   !***
   !  To provide double-precision floating-point arithmetic
@@ -198,7 +197,7 @@ SUBROUTINE DXSET(Irad,Nradpl,Dzero,Nbits,Ierror)
   !           CALLs to XERROR changed to CALLs to XERMSG.  (WRB)
   !   920127  Revised PURPOSE section of prologue.  (DWL)
 
-  INTEGER i, I1MACH, ic, Ierror, ii, imaxex, iminex, iradx, it, j, &
+  INTEGER i, ic, Ierror, ii, imaxex, iminex, iradx, it, j, &
     k, kk, lg102x, lgtemp(20), log2r, lx, nb, nbitsx
   INTEGER np1, nrdplc
   INTEGER Irad, Nradpl, Nbits

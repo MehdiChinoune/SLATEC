@@ -1,7 +1,6 @@
 !** DIR
 SUBROUTINE DIR(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,Iter,&
     Err,Ierr,Iunit,R,Z,Dz,Rwork,Iwork)
-  IMPLICIT NONE
   !>
   !***
   !  Preconditioned Iterative Refinement Sparse Ax = b Solver.
@@ -277,9 +276,6 @@ SUBROUTINE DIR(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,Iter,&
   !     .. Local Scalars ..
   REAL(8) :: bnrm, solnrm, tolmin
   INTEGER i, k
-  !     .. External Functions ..
-  REAL(8), EXTERNAL :: D1MACH
-  INTEGER, EXTERNAL :: ISDIR
   !* FIRST EXECUTABLE STATEMENT  DIR
   !
   !         Check some of the input data.

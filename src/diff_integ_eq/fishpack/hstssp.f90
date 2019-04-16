@@ -1,7 +1,6 @@
 !** HSTSSP
 SUBROUTINE HSTSSP(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
     Idimf,Pertrb,Ierror,W)
-  IMPLICIT NONE
   !>
   !***
   !  Solve the standard five-point finite difference
@@ -380,7 +379,7 @@ SUBROUTINE HSTSSP(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
     jsw, k, lp, M, mb, Mbdcnd, mm1, N, Nbdcnd, np
   REAL A, a1, a2, a3, B, Bda(*), Bdb(*), Bdc(*), Bdd(*), C, D, deltar, &
     deltht, dlrsq, dlthsq, dum, Elmbda, F(Idimf,*), Pertrb, pi
-  REAL PIMACH, W(*)
+  REAL W(*)
   !* FIRST EXECUTABLE STATEMENT  HSTSSP
   Ierror = 0
   pi = PIMACH(dum)

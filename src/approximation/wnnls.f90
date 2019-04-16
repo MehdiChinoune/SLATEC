@@ -1,6 +1,5 @@
 !** WNNLS
 SUBROUTINE WNNLS(W,Mdw,Me,Ma,N,L,Prgopt,X,Rnorm,Mode,Iwork,Work)
-  IMPLICIT NONE
   !>
   !***
   !  Solve a linearly constrained least squares problem with

@@ -1,6 +1,5 @@
 !** DAWS
 REAL FUNCTION DAWS(X)
-  IMPLICIT NONE
   !>
   !***
   !  Compute Dawson's function.
@@ -50,8 +49,7 @@ REAL FUNCTION DAWS(X)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920618  Removed space from variable names.  (RWC, WRB)
 
-  REAL CSEVL, eps, R1MACH, X, y
-  INTEGER INITS
+  REAL eps, X, y
   INTEGER, SAVE :: ntdaw, ntdaw2, ntdawa
   REAL, SAVE :: xsml, xbig, xmax
   REAL, PARAMETER :: dawcs(13) = [ -.006351734375145949E0,-.22940714796773869E0, &

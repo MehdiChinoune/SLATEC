@@ -1,6 +1,5 @@
 !** SROT
 SUBROUTINE SROT(N,Sx,Incx,Sy,Incy,Sc,Ss)
-  IMPLICIT NONE
   !>
   !***
   !  Apply a plane Givens rotation.

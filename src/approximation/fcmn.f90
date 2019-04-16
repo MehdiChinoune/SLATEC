@@ -1,7 +1,6 @@
 !** FCMN
 SUBROUTINE FCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Nconst,Xconst,&
     Yconst,Nderiv,Mode,Coeff,Bf,Xtemp,Ptemp,Bkpt,G,Mdg,W,Mdw,Work,Iwork)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to FC
@@ -35,9 +34,6 @@ SUBROUTINE FCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Nconst,Xconst,&
   INTEGER Iwork(*), Mdg, Mdw, Mode, Nbkpt, Nconst, Ndata, Nderiv(*), Nord
   REAL Bf(Nord,*), Bkpt(*), Bkptin(*), Coeff(*), G(Mdg,*), Ptemp(*), Sddata(*), &
     W(Mdw,*), Work(*), Xconst(*), Xdata(*), Xtemp(*), Yconst(*), Ydata(*)
-  !
-  EXTERNAL :: BNDACC, BNDSOL, BSPLVD, BSPLVN, LSEI, SAXPY, SCOPY, &
-    SSCAL, SSORT, XERMSG
   !
   REAL dummy(1), prgopt(10), rnorm, rnorme, rnorml, xmax, xmin, xval, yval
   INTEGER i, idata, ideriv, ileft, intrvl, intw1, ip, ir, irow, itype, iw1, iw2, &

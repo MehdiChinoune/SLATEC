@@ -1,6 +1,5 @@
 !** CPBFA
 SUBROUTINE CPBFA(Abd,Lda,N,M,Info)
-  IMPLICIT NONE
   !>
   !***
   !  Factor a complex Hermitian positive definite matrix stored
@@ -87,7 +86,7 @@ SUBROUTINE CPBFA(Abd,Lda,N,M,Info)
   INTEGER Lda, N, M, Info
   COMPLEX Abd(Lda,*)
   !
-  COMPLEX CDOTC, t
+  COMPLEX t
   REAL s
   INTEGER ik, j, jk, k, mu
   !* FIRST EXECUTABLE STATEMENT  CPBFA

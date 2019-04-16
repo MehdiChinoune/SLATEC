@@ -1,6 +1,5 @@
 !** DCOPYM
 SUBROUTINE DCOPYM(N,Dx,Incx,Dy,Incy)
-  IMPLICIT NONE
   !>
   !***
   !  Copy the negative of a vector to a vector.

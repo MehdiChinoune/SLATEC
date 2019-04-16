@@ -1,6 +1,5 @@
 !** R1UPDT
 SUBROUTINE R1UPDT(M,N,S,Ls,U,V,W,Sing)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to SNSQ and SNSQE
@@ -84,7 +83,6 @@ SUBROUTINE R1UPDT(M,N,S,Ls,U,V,W,Sing)
   REAL S(*), U(*), V(*), W(*)
   INTEGER i, j, jj, l, nmj, nm1
   REAL coss, cotan, giant, sinn, tann, tau, temp
-  REAL R1MACH
   REAL, PARAMETER :: one = 1.0E0, p5 = 5.0E-1, p25 = 2.5E-1, zero = 0.0E0
   !* FIRST EXECUTABLE STATEMENT  R1UPDT
   giant = R1MACH(2)

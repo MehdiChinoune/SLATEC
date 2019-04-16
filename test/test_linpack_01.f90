@@ -1,4 +1,5 @@
 MODULE TEST23_MOD
+  use slatec
   IMPLICIT NONE
 
 CONTAINS
@@ -159,7 +160,7 @@ CONTAINS
 
     INTEGER Kprint, Lun
     COMPLEX at(7,4), bt(4), det(2), z(4)
-    REAL r, rcond, CABS1
+    REAL r, rcond
     INTEGER lda, n, ipvt(4), info, i, j, indx, Nerr
     INTEGER ml, mu
     COMPLEX, PARAMETER :: abd(6,4) = RESHAPE( [ &
@@ -303,7 +304,7 @@ CONTAINS
 
     INTEGER Kprint, Lun
     COMPLEX at(5,4), bt(4), det(2), z(4)
-    REAL r, rcond, CABS1
+    REAL r, rcond
     INTEGER lda, n, ipvt(4), info, i, j, indx, Nerr
     COMPLEX, PARAMETER :: a(4,4) = RESHAPE( [ &
       (2.E0,0.E0), (0.E0,1.E0), (0.E0,0.E0), (0.E0,0.E0), &
@@ -458,7 +459,7 @@ CONTAINS
     INTEGER Kprint, Lun
     COMPLEX ct(4), dt(4), et(4), bt(4)
     INTEGER n, info, i, indx, Nerr
-    REAL delx, CABS1
+    REAL delx
     COMPLEX, PARAMETER :: c(4) = [ (0.E0,0.E0), (0.E0,1.E0), (0.E0,0.E0), (0.E0,1.E0) ]
     COMPLEX, PARAMETER :: d(4) = [ (2.E0,0.E0), (2.E0,0.E0), (3.E0,0.E0), (4.E0,0.E0) ]
     COMPLEX, PARAMETER :: e(4) = [ (0.E0,-1.E0), (0.E0,0.E0), (0.E0,-1.E0), (0.E0,0.E0) ]
@@ -543,7 +544,7 @@ CONTAINS
 
     INTEGER Kprint, Lun
     COMPLEX at(5,4), bt(4), z(4)
-    REAL r, rcond, CABS1, det(2)
+    REAL r, rcond, det(2)
     INTEGER lda, n, ipvt(4), info, i, j, indx, Nerr, inert(3)
     COMPLEX, PARAMETER :: a(4,4) = RESHAPE( [ &
       (2.E0,0.E0), (0.E0,1.E0), (0.E0,0.E0), (0.E0,0.E0), &
@@ -697,7 +698,7 @@ CONTAINS
 
     INTEGER Kprint, Lun
     COMPLEX at(10), bt(4), z(4)
-    REAL r, rcond, CABS1, det(2)
+    REAL r, rcond, det(2)
     INTEGER n, ipvt(4), info, i, j, indx, Nerr, inert(3)
     COMPLEX, PARAMETER :: ap(10) = [ (2.E0,0.E0), (0.E0,-1.E0), (2.E0,0.E0), &
       (0.E0,0.E0), (0.E0,0.E0), (3.E0,0.E0), (0.E0,0.E0), (0.E0,0.E0), &
@@ -842,7 +843,7 @@ CONTAINS
 
     INTEGER Kprint, Lun
     COMPLEX at(3,4), bt(4), z(4)
-    REAL r, rcond, CABS1, det(2)
+    REAL r, rcond, det(2)
     INTEGER lda, n, info, i, j, indx, Nerr, m
     COMPLEX, PARAMETER :: abd(2,4) = RESHAPE( [ (0.E0,0.E0), (2.E0,0.E0), &
       (0.E0,-1.E0), (2.E0,0.E0),   (0.E0,0.E0), (3.E0,0.E0), &
@@ -972,7 +973,7 @@ CONTAINS
 
     INTEGER Kprint, Lun
     COMPLEX at(5,4), bt(4), z(4)
-    REAL r, rcond, CABS1, det(2)
+    REAL r, rcond, det(2)
     INTEGER lda, n, info, i, j, indx, Nerr
     COMPLEX, PARAMETER :: a(4,4) = RESHAPE( [ &
       (2.E0,0.E0), (0.E0,1.E0), (0.E0,0.E0), (0.E0,0.E0), &
@@ -1121,7 +1122,7 @@ CONTAINS
 
     INTEGER Kprint, Lun
     COMPLEX at(10), bt(4), z(4)
-    REAL r, rcond, CABS1, det(2)
+    REAL r, rcond, det(2)
     INTEGER n, info, i, j, indx, Nerr
     COMPLEX, PARAMETER :: ap(10) = [ (2.E0,0.E0), (0.E0,-1.E0), (2.E0,0.E0), &
       (0.E0,0.E0), (0.E0,0.E0), (3.E0,0.E0), (0.E0,0.E0), (0.E0,0.E0), &
@@ -1258,7 +1259,7 @@ CONTAINS
     INTEGER Kprint, Lun
     COMPLEX dt(4), et(4), bt(4)
     INTEGER n, i, indx, Nerr
-    REAL delx, CABS1
+    REAL delx
     COMPLEX, PARAMETER :: d(4) = [ (2.E0,0.E0), (2.E0,0.E0), (3.E0,0.E0), (4.E0,0.E0) ]
     COMPLEX, PARAMETER :: e(4) = [ (0.E0,-1.E0), (0.E0,0.E0), (0.E0,-1.E0), (0.E0,0.E0) ]
     COMPLEX, PARAMETER :: b(4) = [ (3.E0,2.E0), (-1.E0,3.E0), (0.E0,-4.E0), (5.E0,0.E0) ]
@@ -1333,7 +1334,6 @@ CONTAINS
     INTEGER Kprint, Lun
     COMPLEX qraux(4), work(4), qy(4), qty(4), b(4), rsd(4), xb(4), at(5,4)
     INTEGER ldx, n, p, job, k, infO, jpvtt(4), i, j, indx(5), Nerr, l
-    REAL CABS1
     COMPLEX, PARAMETER :: a(4,4) = RESHAPE( [ &
       (2.E0,0.E0), (0.E0,1.E0), (0.E0,0.E0), (0.E0,0.E0), &
       (0.E0,-1.E0), (2.E0,0.E0), (0.E0,0.E0), (0.E0,0.E0), &
@@ -1488,7 +1488,7 @@ CONTAINS
 
     INTEGER Kprint, Lun
     COMPLEX at(5,4), bt(4), det(2), z(4)
-    REAL r, rcond, CABS1
+    REAL r, rcond
     INTEGER lda, n, ipvt(4), info, i, j, indx, Nerr
     COMPLEX, PARAMETER :: a(4,4) = RESHAPE( [ &
       (2.E0,0.E0), (0.E0,1.E0), (0.E0,0.E0), (0.E0,0.E0), &
@@ -1631,7 +1631,7 @@ CONTAINS
 
     INTEGER Kprint, Lun
     COMPLEX at(10), bt(4), det(2), z(4)
-    REAL r, rcond, CABS1
+    REAL r, rcond
     INTEGER n, ipvt(4), info, i, j, indx, Nerr
     COMPLEX, PARAMETER :: ap(10) = [ (2.E0,0.E0), (0.E0,-1.E0), (2.E0,0.E0), &
       (0.E0,0.E0), (0.E0,0.E0), (3.E0,0.E0), (0.E0,0.E0), (0.E0,0.E0), &
@@ -1765,7 +1765,6 @@ CONTAINS
     COMPLEX work(4), s(4), e(4), u(4,4), v(4,4), at(5,4)
     INTEGER ldx, n, p, ldu, ldv, job, info
     INTEGER i, j, indx(4)
-    REAL CABS1
     COMPLEX, PARAMETER :: a(4,4) = RESHAPE( [ &
       (2.E0,0.E0), (0.E0,1.E0), (0.E0,0.E0), (0.E0,0.E0), &
       (0.E0,-1.E0), (2.E0,0.E0), (0.E0,0.E0), (0.E0,0.E0), &
@@ -1877,7 +1876,7 @@ CONTAINS
 
     INTEGER Kprint, Lun
     COMPLEX at(5,4), bt(4), det(2), z(4)
-    REAL r, rcond, CABS1
+    REAL r, rcond
     INTEGER lda, n, info, i, j, indx, Nerr
     INTEGER job, k, kk
     COMPLEX, PARAMETER :: a(4,4) = RESHAPE( [ &
@@ -2015,6 +2014,7 @@ END MODULE TEST23_MOD
 !** TEST23
 PROGRAM TEST23
   USE TEST23_MOD
+  use slatec
   IMPLICIT NONE
   !>
   !***
@@ -2080,8 +2080,6 @@ PROGRAM TEST23
   !   890618  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900524  Cosmetic changes to code.  (WRB)
-
-  INTEGER I1MACH
   INTEGER kprint, lin, lun, nerr, nfail
   !* FIRST EXECUTABLE STATEMENT  TEST23
   lun = I1MACH(2)

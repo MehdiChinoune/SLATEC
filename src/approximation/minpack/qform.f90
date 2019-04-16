@@ -1,6 +1,5 @@
 !** QFORM
 SUBROUTINE QFORM(M,N,Q,Ldq,Wa)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to SNSQ and SNSQE

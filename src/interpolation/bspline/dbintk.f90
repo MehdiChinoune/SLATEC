@@ -1,6 +1,5 @@
 !** DBINTK
 SUBROUTINE DBINTK(X,Y,T,N,K,Bcoef,Q,Work)
-  IMPLICIT NONE
   !>
   !***
   !  Compute the B-representation of a spline which interpolates

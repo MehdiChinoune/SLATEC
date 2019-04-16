@@ -1,6 +1,5 @@
 !** DNBFS
 SUBROUTINE DNBFS(Abe,Lda,N,Ml,Mu,V,Itask,Ind,Work,Iwork)
-  IMPLICIT NONE
   !>
   !***
   !  Solve a general nonsymmetric banded system of linear
@@ -183,7 +182,7 @@ SUBROUTINE DNBFS(Abe,Lda,N,Ml,Mu,V,Itask,Ind,Work,Iwork)
 
   !
   INTEGER Lda, N, Itask, Ind, Iwork(*), Ml, Mu
-  REAL(8) :: Abe(Lda,*), V(*), Work(*), D1MACH
+  REAL(8) :: Abe(Lda,*), V(*), Work(*)
   REAL(8) :: rcond
   CHARACTER(8) :: xern1, xern2
   !* FIRST EXECUTABLE STATEMENT  DNBFS

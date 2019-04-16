@@ -1,6 +1,5 @@
 !** DWNLIT
 SUBROUTINE DWNLIT(W,Mdw,M,N,L,Ipivot,Itype,H,Scalee,Rnorm,Idope,Dope,Done)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to DWNNLS
@@ -41,10 +40,6 @@ SUBROUTINE DWNLIT(W,Mdw,M,N,L,Ipivot,Itype,H,Scalee,Rnorm,Idope,Dope,Done)
   INTEGER Idope(*), Ipivot(*), Itype(*), L, M, Mdw, N
   REAL(8) :: Dope(*), H(*), Rnorm, Scalee(*), W(Mdw,*)
   LOGICAL Done
-  !
-  EXTERNAL :: DCOPY, DH12, DROTM, DROTMG, DSCAL, DSWAP, DWNLT1, DWNLT3
-  INTEGER, EXTERNAL :: IDAMAX
-  LOGICAL, EXTERNAL :: DWNLT2
   !
   REAL(8) :: alsq, amax, eanorm, factor, hbar, rn, sparam(5), t, tau
   INTEGER i, i1, imax, ir, j, j1, jj, jp, krank, l1, lb, lend, me, mend, niv, nsoln

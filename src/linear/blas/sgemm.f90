@@ -1,6 +1,5 @@
 !** SGEMM
 SUBROUTINE SGEMM(Transa,Transb,M,N,K,Alpha,A,Lda,B,Ldb,Beta,C,Ldc)
-  IMPLICIT NONE
   !>
   !***
   !  Multiply a real general matrix by a real general matrix.
@@ -145,10 +144,6 @@ SUBROUTINE SGEMM(Transa,Transb,M,N,K,Alpha,A,Lda,B,Ldb,Beta,C,Ldc)
   REAL Alpha, Beta
   !     .. Array Arguments ..
   REAL A(Lda,*), B(Ldb,*), C(Ldc,*)
-  !     .. External Functions ..
-  LOGICAL, EXTERNAL :: LSAME
-  !     .. External Subroutines ..
-  EXTERNAL :: XERBLA
   !     .. Intrinsic Functions ..
   INTRINSIC MAX
   !     .. Local Scalars ..

@@ -1,6 +1,5 @@
 !** CDIV
 SUBROUTINE CDIV(Ar,Ai,Br,Bi,Cr,Ci)
-  IMPLICIT NONE
   !>
   !***
   !  Compute the complex quotient of two complex numbers.

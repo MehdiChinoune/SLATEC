@@ -1,6 +1,5 @@
 !** GENBUN
 SUBROUTINE GENBUN(Nperod,N,Mperod,M,A,B,C,Idimy,Y,Ierror,W)
-  IMPLICIT NONE
   !>
   !***
   !  Solve by a cyclic reduction algorithm the linear system

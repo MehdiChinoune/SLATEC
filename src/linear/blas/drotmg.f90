@@ -1,6 +1,5 @@
 !** DROTMG
 SUBROUTINE DROTMG(Dd1,Dd2,Dx1,Dy1,Dparam)
-  IMPLICIT NONE
   !>
   !***
   !  Construct a modified Givens transformation.

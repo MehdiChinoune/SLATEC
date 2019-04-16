@@ -3,7 +3,6 @@ SUBROUTINE DEXBVP(Y,Nrowy,Xpts,A,Nrowa,Alpha,B,Nrowb,Beta,Iflag,Work,Iwork)
   USE DML, ONLY : LPAr, NCOmp, NFC, KKKzpw, NEEdw, NEEdiw, K1, K2, K3, K4, K5, K6, &
     K7, K8, K9, K10, L1, X, XBEg, XENd, TOL, NXPts, NIC, NOPg, MXNon, NDIsk, &
     NTP, NFCc
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to DBVSUP

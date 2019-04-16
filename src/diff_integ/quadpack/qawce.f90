@@ -1,7 +1,6 @@
 !** QAWCE
 SUBROUTINE QAWCE(F,A,B,C,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,&
     Alist,Blist,Rlist,Elist,Iord,Last)
-  IMPLICIT NONE
   !>
   !***
   !  The routine calculates an approximation result to a
@@ -166,7 +165,6 @@ SUBROUTINE QAWCE(F,A,B,C,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,&
     nev, Neval, nrmax
   !
   REAL, EXTERNAL :: F
-  REAL, EXTERNAL :: R1MACH
   !
   !            LIST OF MAJOR VARIABLES
   !            -----------------------

@@ -1,6 +1,5 @@
 !** DEFC
 SUBROUTINE DEFC(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkpt,Mdein,Mdeout,Coeff,Lw,W)
-  IMPLICIT NONE
   !>
   !***
   !  Fit a piecewise polynomial curve to discrete data.
@@ -241,8 +240,6 @@ SUBROUTINE DEFC(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkpt,Mdein,Mdeout,Coeff,Lw,W
   !
   REAL(8) :: Bkpt(*), Coeff(*), W(*), Sddata(*), Xdata(*), Ydata(*)
   INTEGER Lw, Mdein, Mdeout, Nbkpt, Ndata, Nord
-  !
-  EXTERNAL :: DEFCMN
   !
   INTEGER lbf, lbkpt, lg, lptemp, lww, lxtemp, mdg, mdw
   !

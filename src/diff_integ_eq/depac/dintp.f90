@@ -1,7 +1,6 @@
 !** DINTP
 SUBROUTINE DINTP(X,Y,Xout,Yout,Ypout,Neqn,Kold,Phi,Ivc,Iv,Kgi,Gi,Alpha,Og,&
     Ow,Ox,Oy)
-  IMPLICIT NONE
   !>
   !***
   !  Approximate the solution at XOUT by evaluating the

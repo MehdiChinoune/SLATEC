@@ -1,6 +1,5 @@
 !** PSGF
 REAL FUNCTION PSGF(X,Iz,C,A,Bh)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to BLKTRI

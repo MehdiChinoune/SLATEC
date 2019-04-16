@@ -1,6 +1,5 @@
 !** PPSPF
 REAL FUNCTION PPSPF(X,Iz,C,A,Bh)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to BLKTRI

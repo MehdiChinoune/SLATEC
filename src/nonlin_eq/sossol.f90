@@ -1,6 +1,5 @@
 !** SOSSOL
 SUBROUTINE SOSSOL(K,N,L,X,C,B,M)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to SOS

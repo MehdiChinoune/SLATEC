@@ -1,7 +1,6 @@
 !** DDPST
 SUBROUTINE DDPST(El,F,FA,H,Impl,JACOBN,Matdim,Miter,Ml,Mu,N,Nde,Nq,Save2,&
     T,USERS,Y,Yh,Ywt,Uround,Nfe,Nje,A,Dfdy,Fac,Ier,Ipvt,Save1,Iswflg,Bnd,Jstate)
-  IMPLICIT NONE
   !>
   !***
   !  Subroutine DDPST evaluates the Jacobian matrix of the right
@@ -36,7 +35,7 @@ SUBROUTINE DDPST(El,F,FA,H,Impl,JACOBN,Matdim,Miter,Ml,Mu,N,Nde,Nq,Save2,&
     Matdim, Miter, Ml, Mu, mw, N, Nde, Nfe, Nje, Nq
   REAL(8) :: A(Matdim,*), bl, Bnd, bp, br, Dfdy(Matdim,*), dfdymx, diff, dy, &
     El(13,12), Fac(*), facmin, factor, H, Save1(*), Save2(*), scalee, &
-    DNRM2, T, Uround, Y(*), Yh(N,*), yj, ys, Ywt(*)
+    T, Uround, Y(*), Yh(N,*), yj, ys, Ywt(*)
   INTEGER Ipvt(*)
   LOGICAL Ier
   REAL(8), PARAMETER :: FACMAX = 0.5D0, BU = 0.5D0

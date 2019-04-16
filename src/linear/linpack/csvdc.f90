@@ -1,6 +1,5 @@
 !** CSVDC
 SUBROUTINE CSVDC(X,Ldx,N,P,S,E,U,Ldu,V,Ldv,Work,Job,Info)
-  IMPLICIT NONE
   !>
   !***
   !  Perform the singular value decomposition of a rectangular
@@ -126,12 +125,10 @@ SUBROUTINE CSVDC(X,Ldx,N,P,S,E,U,Ldu,V,Ldv,Work,Job,Info)
   !
   INTEGER i, iter, j, jobu, k, kase, kk, l, ll, lls, lm1, lp1, &
     ls, lu, m, maxit, mm, mm1, mp1, nct, nctp1, ncu, nrt, nrtp1
-  COMPLEX CDOTC, t, r
-  REAL b, c, cs, el, emm1, f, g, SCNRM2, scalee, shiftt, sl, sm, &
+  COMPLEX t, r
+  REAL b, c, cs, el, emm1, f, g, scalee, shiftt, sl, sm, &
     sn, smm1, t1, test, ztest
   LOGICAL wantu, wantv
-  REAL, EXTERNAL :: CABS1
-  COMPLEX, EXTERNAL :: CSIGN
   !* FIRST EXECUTABLE STATEMENT  CSVDC
   !
   !     SET THE MAXIMUM NUMBER OF ITERATIONS.

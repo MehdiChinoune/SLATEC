@@ -1,4 +1,5 @@
 MODULE TEST07_MOD
+  use slatec
   IMPLICIT NONE
 
 CONTAINS
@@ -47,9 +48,7 @@ CONTAINS
 
     INTEGER Ipass, Kprint
     INTEGER i, ierr, iflg, ix, i1m12, j, k, kode, Lun, m, mdel, mm, n, ndel, nn, nz
-    INTEGER I1MACH
     REAL aix, er, tol, v(1), x, xinc, y(10)
-    REAL R1MACH
     !* FIRST EXECUTABLE STATEMENT  QCKIN
     tol = 1000.0E0*MAX(R1MACH(4),1.0E-18)
     iflg = 0
@@ -176,7 +175,6 @@ CONTAINS
     INTEGER Ipass, Kprint
     INTEGER i, ierr, iflg, ix, kode, Lun, m, n, nm, nn, nz
     REAL er, psi1(3), psi2(20), r1m4, s, tol, x
-    REAL R1MACH
     REAL, PARAMETER :: euler = 0.5772156649015328606E0
     !* FIRST EXECUTABLE STATEMENT  QCPSI
     r1m4 = R1MACH(4)
@@ -272,6 +270,7 @@ END MODULE TEST07_MOD
 !** TEST07
 PROGRAM TEST07
   USE TEST07_MOD
+  use slatec
   IMPLICIT NONE
   !>
   !***
@@ -321,8 +320,6 @@ PROGRAM TEST07
   !   890618  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900524  Cosmetic changes to code.  (WRB)
-
-  INTEGER I1MACH
   INTEGER ipass, kprint, lin, lun, nfail
   !* FIRST EXECUTABLE STATEMENT  TEST07
   lun = I1MACH(2)

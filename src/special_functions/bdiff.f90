@@ -1,6 +1,5 @@
 !** BDIFF
 SUBROUTINE BDIFF(L,V)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to BSKIN

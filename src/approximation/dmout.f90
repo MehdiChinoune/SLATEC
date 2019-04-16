@@ -1,6 +1,5 @@
 !** DMOUT
 SUBROUTINE DMOUT(M,N,Lda,A,Ifmt,Idigit)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to DBOCLS and DFC
@@ -65,7 +64,7 @@ SUBROUTINE DMOUT(M,N,Lda,A,Ifmt,Idigit)
   !   900328  Added TYPE section.  (WRB)
   !   910403  Updated AUTHOR section.  (WRB)
 
-  INTEGER i, I1MACH, Idigit, j, k1, k2, Lda, lout, M, N, ndigit
+  INTEGER i, Idigit, j, k1, k2, Lda, lout, M, N, ndigit
   REAL(8) :: A(Lda,*)
   CHARACTER Ifmt*(*)
   CHARACTER(3), PARAMETER :: icol = 'COL'

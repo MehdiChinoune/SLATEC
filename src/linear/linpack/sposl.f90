@@ -1,6 +1,5 @@
 !** SPOSL
 SUBROUTINE SPOSL(A,Lda,N,B)
-  IMPLICIT NONE
   !>
   !***
   !  Solve the real symmetric positive definite linear system
@@ -70,11 +69,11 @@ SUBROUTINE SPOSL(A,Lda,N,B)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   INTEGER Lda, N
   REAL A(Lda,*), B(*)
   !
-  REAL SDOT, t
+  REAL t
   INTEGER k, kb
   !
   !     SOLVE TRANS(R)*Y = B

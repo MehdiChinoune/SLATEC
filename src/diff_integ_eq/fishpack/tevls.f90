@@ -1,7 +1,6 @@
 !** TEVLS
 SUBROUTINE TEVLS(N,D,E2,Ierr)
   USE CBLKT, MAChep => EPS
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to BLKTRI

@@ -1,7 +1,6 @@
 !** DSLUGM
 SUBROUTINE DSLUGM(N,B,X,Nelt,Ia,Ja,A,Isym,Nsave,Itol,Tol,Itmax,Iter,Err,&
     Ierr,Iunit,Rwork,Lenw,Iwork,Leniw)
-  IMPLICIT NONE
   !>
   !***
   !  Incomplete LU GMRES iterative sparse Ax=b solver.
@@ -348,8 +347,6 @@ SUBROUTINE DSLUGM(N,B,X,Nelt,Ia,Ja,A,Isym,Nsave,Itol,Tol,Itmax,Iter,Err,&
   !     .. Local Scalars ..
   INTEGER icol, j, jbgn, jend, locdin, locigw, locil, lociu, lociw, &
     locjl, locju, locl, locnc, locnr, locrgw, locu, locw, myitol, nl, nu
-  !     .. External Subroutines ..
-  EXTERNAL :: DCHKW, DGMRES, DS2Y, DSILUS, DSLUI, DSMV
   !* FIRST EXECUTABLE STATEMENT  DSLUGM
   !
   Ierr = 0

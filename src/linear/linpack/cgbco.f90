@@ -1,6 +1,5 @@
 !** CGBCO
 SUBROUTINE CGBCO(Abd,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
-  IMPLICIT NONE
   !>
   !***
   !  Factor a band matrix by Gaussian elimination and
@@ -142,11 +141,9 @@ SUBROUTINE CGBCO(Abd,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
   COMPLEX Abd(Lda,*), Z(*)
   REAL Rcond
   !
-  COMPLEX CDOTC, ek, t, wk, wkm
-  REAL anorm, s, SCASUM, sm, ynorm
+  COMPLEX ek, t, wk, wkm
+  REAL anorm, s, sm, ynorm
   INTEGER is, info, j, ju, k, kb, kp1, l, la, lm, lz, m, mm
-  REAL, EXTERNAL :: CABS1
-  COMPLEX, EXTERNAL :: CSIGN1
   !
   !     COMPUTE 1-NORM OF A
   !

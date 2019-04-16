@@ -1,6 +1,5 @@
 !** DPOCH
 REAL(8) FUNCTION DPOCH(A,X)
-  IMPLICIT NONE
   !>
   !***
   !  Evaluate a generalization of Pochhammer's symbol.
@@ -40,7 +39,6 @@ REAL(8) FUNCTION DPOCH(A,X)
 
   INTEGER i, ia, n
   REAL(8) :: A, X, absa, absax, alnga, alngax, ax, b, sgnga, sgngax
-  REAL(8), EXTERNAL :: DFAC, DLNREL, D9LGMC, DGAMR, DCOT
   REAL(8), PARAMETER :: pi = 3.141592653589793238462643383279503D0
   !* FIRST EXECUTABLE STATEMENT  DPOCH
   ax = A + X

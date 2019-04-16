@@ -1,6 +1,5 @@
 !** CFFTB1
 SUBROUTINE CFFTB1(N,C,Ch,Wa,Ifac)
-  IMPLICIT NONE
   !>
   !***
   !  Compute the unnormalized inverse of CFFTF1.

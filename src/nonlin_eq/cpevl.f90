@@ -1,6 +1,5 @@
 !** CPEVL
 SUBROUTINE CPEVL(N,M,A,Z,C,B,Kbd)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to CPZERO
@@ -51,7 +50,7 @@ SUBROUTINE CPEVL(N,M,A,Z,C,B,Kbd)
   !   900402  Added TYPE section.  (WRB)
 
   REAL r, s
-  INTEGER i, I1MACH, j, M, mini, N, np1
+  INTEGER i, j, M, mini, N, np1
   COMPLEX A(*), C(*), Z, ci, cim1, B(*), bi, bim1, t
   LOGICAL Kbd
   REAL :: d1 = 0.0

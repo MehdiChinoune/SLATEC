@@ -1,4 +1,5 @@
 MODULE TEST17_MOD
+  use slatec
   IMPLICIT NONE
   INTEGER :: NPRint, ICAse, N, INCx, INCy, MODe
   LOGICAL :: PASs
@@ -303,10 +304,9 @@ CONTAINS
     !   890911  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-    INTEGER i, ICAMAX, IDAMAX, ISAMAX, jump, leng, np1, Kprint, itmp(1)
-    REAL SASUM, SCASUM, SCNRM2, Sfac, SNRM2
+    INTEGER i, jump, leng, np1, Kprint, itmp(1)
+    REAL Sfac
     REAL(8) :: dx(8), Dfac, dtmp(1)
-    REAL(8) :: DNRM2, DASUM
     REAL strue(8), sx(8), stmp(1), stmp2(1)
     COMPLEX cx(8)
     !
@@ -498,13 +498,12 @@ CONTAINS
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
     INTEGER i, j, ki, kn, kni, kpar, ksize, lenx, leny, mx, my, Kprint, qc_i(30)
-    REAL Sdfac, SDOT, SDSDOT, Sfac
+    REAL Sdfac, Sfac
     REAL sx(7), sy(7), stx(7), sty(7), ssize(7), sparam(5), stmp(1), stmp2(1)
     REAL(8) :: dx(7), dy(7), dparam(5), dsize(7), dtx(7), dty(7), dtmp(1)
-    REAL(8) :: DSDOT, DDOT, DQDOTI, DQDOTA, Dfac, Dqfac
+    REAL(8) :: Dfac, Dqfac
     !
     COMPLEX cx(7), cy(7), ctmp(1), ctmp2(4)
-    COMPLEX CDOTC, CDOTU
     REAL, PARAMETER :: sa = .3, sb = .1
     REAL(8), PARAMETER :: da = .3D0, db = .25D0
     COMPLEX, PARAMETER :: ca = (.4,-.7)
@@ -1201,7 +1200,7 @@ CONTAINS
     !           section.  (WRB)
 
     INTEGER i, Leng, Kprint
-    REAL Scomp(*), Strue(*), Ssize(*), Sfac, sd, R1MACH
+    REAL Scomp(*), Strue(*), Ssize(*), Sfac, sd
     REAL :: releps = 0.0E0
     !* FIRST EXECUTABLE STATEMENT  STEST
     IF ( releps==0.0E0 ) releps = R1MACH(4)
@@ -1269,7 +1268,7 @@ CONTAINS
     !           section.  (WRB)
 
     INTEGER i, Leng, Kprint
-    REAL(8) :: Dcomp(*), Dtrue(*), Dsize(*), Dfac, dd, D1MACH
+    REAL(8) :: Dcomp(*), Dtrue(*), Dsize(*), Dfac, dd
     REAL(8) :: releps = 0.0D0
     !* FIRST EXECUTABLE STATEMENT  DTEST
     IF ( releps==0.0D0 ) releps = D1MACH(4)
@@ -1338,7 +1337,7 @@ CONTAINS
 
     INTEGER i, Leng, Kprint
     COMPLEX :: Ccomp(*), Ctrue(*), Csize(*)
-    REAL :: Cfac, dd, R1MACH, CABS1
+    REAL :: Cfac, dd
     REAL :: releps = 0.0
     !* FIRST EXECUTABLE STATEMENT  DTEST
     IF ( releps==0.0 ) releps = R1MACH(4)
@@ -1372,6 +1371,7 @@ END MODULE TEST17_MOD
 !** TEST17
 PROGRAM TEST17
   USE TEST17_MOD
+  use slatec
   IMPLICIT NONE
   !>
   !***
@@ -1421,8 +1421,6 @@ PROGRAM TEST17
   !   890618  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900524  Cosmetic changes to code.  (WRB)
-
-  INTEGER I1MACH
   INTEGER ipass, kprint, lin, lun, nfail
   !* FIRST EXECUTABLE STATEMENT  TEST17
   lun = I1MACH(2)

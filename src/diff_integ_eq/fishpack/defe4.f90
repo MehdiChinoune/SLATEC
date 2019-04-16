@@ -1,7 +1,6 @@
 !** DEFE4
 SUBROUTINE DEFE4(COFX,Idmn,Usol,Grhs)
   USE SPL4
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to SEPX4

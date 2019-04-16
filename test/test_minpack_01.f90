@@ -1,4 +1,5 @@
 MODULE TEST35_MOD
+  use slatec
   IMPLICIT NONE
 
 CONTAINS
@@ -40,10 +41,6 @@ CONTAINS
     !     .. Local Arrays ..
     REAL fvec(2), wa(19), x(2)
     INTEGER itest(3)
-    !     .. External Functions ..
-    REAL, EXTERNAL :: ENORM, R1MACH
-    !     .. External Subroutines ..
-    EXTERNAL :: PASS, SNSQE
     !     .. Intrinsic Functions ..
     INTRINSIC SQRT
     !* FIRST EXECUTABLE STATEMENT  SNSQQK
@@ -190,10 +187,6 @@ CONTAINS
     !     .. Local Arrays ..
     REAL fvec(2), wa(17), x(2)
     INTEGER itest(2), iw(6)
-    !     .. External Functions ..
-    REAL, EXTERNAL :: R1MACH, SNRM2
-    !     .. External Subroutines ..
-    EXTERNAL :: PASS, SOS
     !     .. Intrinsic Functions ..
     INTRINSIC SQRT
     !* FIRST EXECUTABLE STATEMENT  SOSNQX
@@ -328,6 +321,7 @@ END MODULE TEST35_MOD
 !** TEST35
 PROGRAM TEST35
   USE TEST35_MOD
+  use slatec
   IMPLICIT NONE
   !>
   !***
@@ -377,8 +371,6 @@ PROGRAM TEST35
   !   890618  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900524  Cosmetic changes to code.  (WRB)
-
-  INTEGER I1MACH
   INTEGER ipass, kprint, lin, lun, nfail
   !* FIRST EXECUTABLE STATEMENT  TEST35
   lun = I1MACH(2)

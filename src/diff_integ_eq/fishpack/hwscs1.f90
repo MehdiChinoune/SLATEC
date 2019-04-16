@@ -1,7 +1,6 @@
 !** HWSCS1
 SUBROUTINE HWSCS1(Intl,Ts,Tf,M,Mbdcnd,Bdts,Bdtf,Rs,Rf,N,Nbdcnd,Bdrs,Bdrf,&
     Elmbda,F,Idimf,Pertrb,W,S,An,Bn,Cn,R,Am,Bm,Cm,Sint,Bmh)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to HWSCSP

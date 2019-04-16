@@ -1,6 +1,5 @@
 !** CGAMMA
 COMPLEX FUNCTION CGAMMA(Z)
-  IMPLICIT NONE
   !>
   !***
   !  Compute the complete Gamma function.
@@ -30,8 +29,8 @@ COMPLEX FUNCTION CGAMMA(Z)
   !   770701  DATE WRITTEN
   !   861211  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
-  
-  COMPLEX Z, CLNGAM
+
+  COMPLEX Z
   !* FIRST EXECUTABLE STATEMENT  CGAMMA
   CGAMMA = EXP(CLNGAM(Z))
   !

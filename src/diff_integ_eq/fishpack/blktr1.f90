@@ -1,7 +1,6 @@
 !** BLKTR1
 SUBROUTINE BLKTR1(N,An,Bn,Cn,M,Am,Bm,Cm,Idimy,Y,B,W1,W2,W3,Wd,Ww,Wu,PRDCT,CPRDCT)
   USE CBLKT
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to BLKTRI

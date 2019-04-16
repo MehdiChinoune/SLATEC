@@ -1,6 +1,5 @@
 !** DDATRP
 SUBROUTINE DDATRP(X,Xout,Yout,Ypout,Neq,Kold,Phi,Psi)
-  IMPLICIT NONE
   !>
   !***
   !  Interpolation routine for DDASSL.

@@ -1,6 +1,5 @@
 !** COMLR
 SUBROUTINE COMLR(Nm,N,Low,Igh,Hr,Hi,Wr,Wi,Ierr)
-  IMPLICIT NONE
   !>
   !***
   !  Compute the eigenvalues of a complex upper Hessenberg

@@ -3,7 +3,6 @@ SUBROUTINE DSTOD(Neq,Y,Yh,Nyh,Yh1,Ewt,Savf,Acor,Wm,Iwm,DF,DJAC,Rpar,Ipar)
   USE DDEBD1, ONLY : CONit, CRAte, EL, ELCo, HOLd, RC, RMAx, TESco, EL0, H, HMIn, &
     HMXi, HU, TN, KSTeps, IALth, IPUp, LMAx, MEO, NQNyh, NSTepj, IER, JSTart, &
     KFLag, L, METh, MITer, MAXord, N, NQ, NST, NFE, NQU
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to DDEBDF
@@ -100,8 +99,8 @@ SUBROUTINE DSTOD(Neq,Y,Yh,Nyh,Yh1,Ewt,Savf,Acor,Wm,Iwm,DF,DJAC,Rpar,Ipar)
 
   !
   INTEGER i, i1, Ipar(*), iredo, iret, Iwm(*), j, jb, m, ncf, Neq, newq, Nyh
-  REAL(8) :: Acor(*), dcon, ddn, del, delp, dsm, dup, DVNRMS, Ewt(*), exdn, exsm, &
-    exup, r, rh, rhdn, rhsm, rhup, Rpar(*), Savf(*), told, Wm(*), Y(*), Yh(Nyh,*), Yh1(*)
+  REAL(8) :: Acor(*), dcon, ddn, del, delp, dsm, dup, Ewt(*), exdn, exsm, exup, &
+    r, rh, rhdn, rhsm, rhup, Rpar(*), Savf(*), told, Wm(*), Y(*), Yh(Nyh,*), Yh1(*)
   EXTERNAL :: DF, DJAC
   !
   !

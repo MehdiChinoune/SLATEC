@@ -2,7 +2,6 @@
 SUBROUTINE DPINCW(Mrelas,Nvars,Lmx,Lbm,Npp,Jstrt,Ibasis,Imat,Ibrc,Ipr,Iwr,&
     Ind,Ibb,Costsc,Gg,Erdnrm,Dulnrm,Amat,Basmat,Csc,Wr,Ww,&
     Rz,Rg,Costs,Colnrm,Duals,Stpedg)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to DSPLP
@@ -38,13 +37,12 @@ SUBROUTINE DPINCW(Mrelas,Nvars,Lmx,Lbm,Npp,Jstrt,Ibasis,Imat,Ibrc,Ipr,Iwr,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
 
-  INTEGER i, IDLOC, ihi, il1, ilow, ipage, iu1, j, Jstrt, key, &
+  INTEGER i, ihi, il1, ilow, ipage, iu1, j, Jstrt, key, &
     Lbm, Lmx, lpg, Mrelas, nnegrc, Npp, Nvars
   INTEGER Ibasis(*), Imat(*), Ibrc(Lbm,2), Ipr(*), Iwr(*), Ind(*), Ibb(*)
   REAL(8) :: Amat(*), Basmat(*), Csc(*), Wr(*), Ww(*), Rz(*), &
     Rg(*), Costs(*), Colnrm(*), Duals(*), Costsc, &
     Erdnrm, Dulnrm, Gg, one, rzj, scalr, zero, rcost, cnorm
-  REAL(8) :: DDOT
   LOGICAL Stpedg, pagepl, trans
   !* FIRST EXECUTABLE STATEMENT  DPINCW
   lpg = Lmx - (Nvars+4)

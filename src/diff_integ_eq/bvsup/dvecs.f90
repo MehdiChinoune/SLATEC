@@ -1,7 +1,6 @@
 !** DVECS
 SUBROUTINE DVECS(Ncomp,Lnfc,Yhp,Work,Iwork,Inhomo,Iflag)
   USE DML, ONLY : INDpvt, LNFcc => NFCc
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to DBVSUP

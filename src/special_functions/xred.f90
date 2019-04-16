@@ -1,7 +1,6 @@
 !** XRED
 SUBROUTINE XRED(X,Ix,Ierror)
   USE XBLK, ONLY: RADixx, RAD2l, L2
-  IMPLICIT NONE
   !>
   !***
   !  To provide single-precision floating-point arithmetic

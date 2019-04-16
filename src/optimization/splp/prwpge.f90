@@ -1,6 +1,5 @@
 !** PRWPGE
 SUBROUTINE PRWPGE(Key,Ipage,Lpg,Sx,Ix)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to SPLP

@@ -1,7 +1,6 @@
 !** DX4
 SUBROUTINE DX4(U,Idmn,I,J,Uxxx,Uxxxx)
   USE SPL4
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to SEPX4

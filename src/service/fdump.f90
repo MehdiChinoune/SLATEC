@@ -1,6 +1,5 @@
 !** FDUMP
 SUBROUTINE FDUMP
-  IMPLICIT NONE
   !>
   !***
   !  Symbolic dump (should be locally written).

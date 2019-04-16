@@ -1,6 +1,5 @@
 !** CLNREL
 COMPLEX FUNCTION CLNREL(Z)
-  IMPLICIT NONE
   !>
   !***
   !  Evaluate ln(1+X) accurate in the sense of relative error.
@@ -37,7 +36,7 @@ COMPLEX FUNCTION CLNREL(Z)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
 
-  REAL ALNREL, CARG, R1MACH, rho, x
+  REAL rho, x
   COMPLEX Z
   REAL :: sqeps = 0.0
   !* FIRST EXECUTABLE STATEMENT  CLNREL

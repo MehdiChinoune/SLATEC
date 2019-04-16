@@ -1,6 +1,5 @@
 !** CRATI
 SUBROUTINE CRATI(Z,Fnu,N,Cy,Tol)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to CBESH, CBESI and CBESK

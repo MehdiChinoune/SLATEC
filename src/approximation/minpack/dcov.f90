@@ -1,6 +1,5 @@
 !** DCOV
 SUBROUTINE DCOV(FCN,Iopt,M,N,X,Fvec,R,Ldr,Info,Wa1,Wa2,Wa3,Wa4)
-  IMPLICIT NONE
   !>
   !***
   !  Calculate the covariance matrix for a nonlinear data
@@ -165,7 +164,7 @@ SUBROUTINE DCOV(FCN,Iopt,M,N,X,Fvec,R,Ldr,Info,Wa1,Wa2,Wa3,Wa4)
   INTEGER i, idum(1), iflag, Info, Iopt, j, k, kp1, Ldr, M, N, nm1, nrow
   REAL(8) :: X(*), R(Ldr,*), Fvec(*), Wa1(*), Wa2(*), Wa3(*), Wa4(*)
   EXTERNAL :: FCN
-  REAL(8) :: sigma, temp, DENORM
+  REAL(8) :: sigma, temp
   LOGICAL sing
   REAL(8), PARAMETER :: zero = 0.D0, one = 1.D0
   !* FIRST EXECUTABLE STATEMENT  DCOV

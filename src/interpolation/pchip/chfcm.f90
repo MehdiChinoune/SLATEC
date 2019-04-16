@@ -1,6 +1,5 @@
 !** CHFCM
 INTEGER FUNCTION CHFCM(D1,D2,Delta)
-  IMPLICIT NONE
   !>
   !***
   !  Check a single cubic for monotonicity.
@@ -75,7 +74,6 @@ INTEGER FUNCTION CHFCM(D1,D2,Delta)
   !   890407  Modified DESCRIPTION to LDOC format.
   !   891214  Moved SAVE statements.  (WRB)
 
-  REAL R1MACH
   !  Fortran intrinsics used:  SIGN.
   !  Other routines used:  R1MACH.
   ! ----------------------------------------------------------------------

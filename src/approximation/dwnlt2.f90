@@ -1,6 +1,5 @@
 !** DWNLT2
 LOGICAL FUNCTION DWNLT2(Me,Mend,Ir,Factor,Tau,Scalee,Wic)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to WNLIT

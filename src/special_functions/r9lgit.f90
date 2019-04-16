@@ -1,6 +1,5 @@
 !** R9LGIT
 REAL FUNCTION R9LGIT(A,X,Algap1)
-  IMPLICIT NONE
   !>
   !***
   !  Compute the logarithm of Tricomi's incomplete Gamma
@@ -36,7 +35,7 @@ REAL FUNCTION R9LGIT(A,X,Algap1)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
 
-  REAL A, a1x, Algap1, ax, fk, hstar, p, r, R1MACH, s, t, X
+  REAL A, a1x, Algap1, ax, fk, hstar, p, r, s, t, X
   INTEGER k
   REAL :: eps = 0., sqeps = 0.
   !* FIRST EXECUTABLE STATEMENT  R9LGIT

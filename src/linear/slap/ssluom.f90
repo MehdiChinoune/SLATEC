@@ -1,7 +1,6 @@
 !** SSLUOM
 SUBROUTINE SSLUOM(N,B,X,Nelt,Ia,Ja,A,Isym,Nsave,Itol,Tol,Itmax,Iter,Err,&
     Ierr,Iunit,Rwork,Lenw,Iwork,Leniw)
-  IMPLICIT NONE
   !>
   !***
   !  Incomplete LU Orthomin Sparse Iterative Ax=b Solver.
@@ -249,8 +248,6 @@ SUBROUTINE SSLUOM(N,B,X,Nelt,Ia,Ja,A,Isym,Nsave,Itol,Tol,Itmax,Iter,Err,&
   INTEGER icol, j, jbgn, jend, locap, loccsa, locdin, locdz, &
     locema, locil, lociu, lociw, locjl, locju, locl, locnc, &
     locnr, locp, locr, locu, locw, locz, nl, nu
-  !     .. External Subroutines ..
-  EXTERNAL :: SCHKW, SOMN, SS2Y, SSILUS, SSLUI, SSMV
   !* FIRST EXECUTABLE STATEMENT  SSLUOM
   !
   Ierr = 0

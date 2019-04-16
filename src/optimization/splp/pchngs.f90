@@ -1,6 +1,5 @@
 !** PCHNGS
 SUBROUTINE PCHNGS(Ii,Xval,Iplace,Sx,Ix,Ircx)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to SPLP
@@ -63,7 +62,6 @@ SUBROUTINE PCHNGS(Ii,Xval,Iplace,Sx,Ix,Ircx)
   INTEGER i, iend, Ii, il, ilast, iopt, ipl, Iplace, Ircx, istart, &
     Ix(*), ixlast, j, jj, jstart, k, key, ll, lmx, lpg
   INTEGER n20055, nerr, np
-  INTEGER IPLOC
   REAL Sx(*), Xval, sxlast, sxval
   REAL, PARAMETER :: zero = 0.E0, one = 1.E0
   !* FIRST EXECUTABLE STATEMENT  PCHNGS

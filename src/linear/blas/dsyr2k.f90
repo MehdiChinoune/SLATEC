@@ -1,6 +1,5 @@
 !** DSYR2K
 SUBROUTINE DSYR2K(Uplo,Trans,N,K,Alpha,A,Lda,B,Ldb,Beta,C,Ldc)
-  IMPLICIT NONE
   !>
   !***
   !  Perform one of the symmetric rank 2k operations.
@@ -152,10 +151,6 @@ SUBROUTINE DSYR2K(Uplo,Trans,N,K,Alpha,A,Lda,B,Ldb,Beta,C,Ldc)
   !     .. Array Arguments ..
   REAL(8) :: A(Lda,*), B(Ldb,*), C(Ldc,*)
   !
-  !     .. External Functions ..
-  LOGICAL, EXTERNAL :: LSAME
-  !     .. External Subroutines ..
-  EXTERNAL :: XERBLA
   !     .. Intrinsic Functions ..
   INTRINSIC MAX
   !     .. Local Scalars ..

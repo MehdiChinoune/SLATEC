@@ -2,7 +2,6 @@
 SUBROUTINE SPINCW(Mrelas,Nvars,Lmx,Lbm,Npp,Jstrt,Ibasis,Imat,Ibrc,Ipr,Iwr,&
     Ind,Ibb,Costsc,Gg,Erdnrm,Dulnrm,Amat,Basmat,Csc,Wr,Ww,&
     Rz,Rg,Costs,Colnrm,Duals,Stpedg)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to SPLP
@@ -37,8 +36,8 @@ SUBROUTINE SPINCW(Mrelas,Nvars,Lmx,Lbm,Npp,Jstrt,Ibasis,Imat,Ibrc,Ipr,Iwr,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
 
-  REAL cnorm, SDOT
-  INTEGER i, ihi, il1, ilow, ipage, IPLOC, iu1, j, Jstrt, key, &
+  REAL cnorm
+  INTEGER i, ihi, il1, ilow, ipage, iu1, j, Jstrt, key, &
     Lbm, Lmx, lpg, Mrelas, nnegrc, Npp, Nvars
   INTEGER Ibasis(*), Imat(*), Ibrc(Lbm,2), Ipr(*), Iwr(*), Ind(*), Ibb(*)
   REAL Amat(*), Basmat(*), Csc(*), Wr(*), Ww(*), Rz(*), Rg(*), &

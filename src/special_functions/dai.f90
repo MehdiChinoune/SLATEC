@@ -1,6 +1,5 @@
 !** DAI
 REAL(8) FUNCTION DAI(X)
-  IMPLICIT NONE
   !>
   !***
   !  Evaluate the Airy function.
@@ -45,8 +44,7 @@ REAL(8) FUNCTION DAI(X)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920618  Removed space from variable names.  (RWC, WRB)
 
-  INTEGER INITDS
-  REAL(8) :: X, theta, xm, z, D1MACH, DCSEVL, DAIE, xmaxt
+  REAL(8) :: X, theta, xm, z, xmaxt
   INTEGER, SAVE :: naif, naig
   REAL(8), SAVE :: x3sml, xmax
   REAL(8), PARAMETER :: aifcs(13) = [ -.37971358496669997496197089469414D-1, &

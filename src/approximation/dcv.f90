@@ -1,6 +1,5 @@
 !** DCV
 REAL(8) FUNCTION DCV(Xval,Ndata,Nconst,Nord,Nbkpt,Bkpt,W)
-  IMPLICIT NONE
   !>
   !***
   !  Evaluate the variance function of the curve obtained
@@ -111,9 +110,9 @@ REAL(8) FUNCTION DCV(Xval,Ndata,Nconst,Nord,Nbkpt,Bkpt,W)
   !   891006  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   INTEGER i, ileft, ip, is, last, mdg, mdw, n, Nbkpt, Nconst, Ndata, Nord
-  REAL(8) :: Bkpt(*), DDOT, v(40), W(*), Xval, zero
+  REAL(8) :: Bkpt(*), v(40), W(*), Xval, zero
   !* FIRST EXECUTABLE STATEMENT  DCV
   zero = 0.0D0
   mdg = Nbkpt - Nord + 3

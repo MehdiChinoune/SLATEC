@@ -1,6 +1,5 @@
 !** DRF
 REAL(8) FUNCTION DRF(X,Y,Z,Ier)
-  IMPLICIT NONE
   !>
   !***
   !  Compute the incomplete or complete elliptic integral of the
@@ -261,7 +260,7 @@ REAL(8) FUNCTION DRF(X,Y,Z,Ier)
 
   CHARACTER(16) :: xern3, xern4, xern5, xern6
   INTEGER Ier
-  REAL(8) :: epslon, D1MACH, e2, e3, lamda, mu, s, X, xn, xndev, xnroot, Y, yn, &
+  REAL(8) :: epslon, e2, e3, lamda, mu, s, X, xn, xndev, xnroot, Y, yn, &
     yndev, ynroot, Z, zn, zndev, znroot
   REAL(8), SAVE :: errtol, lolim, uplim
   REAL(8), PARAMETER :: c1 = 1.0D0/24.0D0, c2 = 3.0D0/44.0D0, c3 = 1.0D0/14.0D0

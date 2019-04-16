@@ -1,7 +1,6 @@
 !** QAGE
 SUBROUTINE QAGE(F,A,B,Epsabs,Epsrel,Key,Limit,Result,Abserr,Neval,Ier,&
     Alist,Blist,Rlist,Elist,Iord,Last)
-  IMPLICIT NONE
   !>
   !***
   !  The routine calculates an approximation result to a given
@@ -173,7 +172,6 @@ SUBROUTINE QAGE(F,A,B,Epsabs,Epsrel,Key,Limit,Result,Abserr,Neval,Ier,&
   INTEGER Ier, Iord(*), iroff1, iroff2, k, Key, keyf, Last, Limit, maxerr, Neval, nrmax
   !
   REAL, EXTERNAL :: F
-  REAL, EXTERNAL :: R1MACH
   !
   !            LIST OF MAJOR VARIABLES
   !            -----------------------

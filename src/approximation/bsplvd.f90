@@ -1,6 +1,5 @@
 !** BSPLVD
 SUBROUTINE BSPLVD(T,K,X,Ileft,Vnikx,Nderiv)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to FC

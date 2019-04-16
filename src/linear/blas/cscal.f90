@@ -1,6 +1,5 @@
 !** CSCAL
 SUBROUTINE CSCAL(N,Ca,Cx,Incx)
-  IMPLICIT NONE
   !>
   !***
   !  Multiply a vector by a constant.

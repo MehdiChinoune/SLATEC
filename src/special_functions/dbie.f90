@@ -1,6 +1,5 @@
 !** DBIE
 REAL(8) FUNCTION DBIE(X)
-  IMPLICIT NONE
   !>
   !***
   !  Calculate the Bairy function for a negative argument and an
@@ -82,8 +81,7 @@ REAL(8) FUNCTION DBIE(X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
   REAL eta
-  INTEGER INITDS
-  REAL(8) :: X, sqrtx, theta, xm, z, D1MACH, DCSEVL
+  REAL(8) :: X, sqrtx, theta, xm, z
   INTEGER, SAVE :: nbif, nbig, nbif2, nbig2, nbip1, nbip2
   REAL(8), SAVE :: x3sml, x32sml, xbig
   REAL(8), PARAMETER :: bifcs(13) = [ -.16730216471986649483537423928176D-1, &

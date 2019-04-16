@@ -1,6 +1,5 @@
 !** SDNTP
 SUBROUTINE SDNTP(H,K,N,Nq,T,Tout,Yh,Y)
-  IMPLICIT NONE
   !>
   !***
   !  Subroutine SDNTP interpolates the K-th derivative of Y at

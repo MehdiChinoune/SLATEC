@@ -1,6 +1,5 @@
 !** SSORT
 SUBROUTINE SSORT(X,Y,N,Kflag)
-  IMPLICIT NONE
   !>
   !***
   !  Sort an array and optionally make the same interchanges in
@@ -67,8 +66,6 @@ SUBROUTINE SSORT(X,Y,N,Kflag)
   INTEGER i, ij, j, k, kk, l, m, nn
   !     .. Local Arrays ..
   INTEGER il(21), iu(21)
-  !     .. External Subroutines ..
-  EXTERNAL :: XERMSG
   !     .. Intrinsic Functions ..
   INTRINSIC ABS, INT
   !* FIRST EXECUTABLE STATEMENT  SSORT

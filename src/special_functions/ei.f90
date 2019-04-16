@@ -1,6 +1,5 @@
 !** EI
 REAL FUNCTION EI(X)
-  IMPLICIT NONE
   !>
   !***
   !  Compute the exponential integral Ei(X).
@@ -37,8 +36,8 @@ REAL FUNCTION EI(X)
   !   891115  Modified prologue description.  (WRB)
   !   891115  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
-  
-  REAL E1, X
+
+  REAL X
   !* FIRST EXECUTABLE STATEMENT  EI
   EI = -E1(-X)
   !

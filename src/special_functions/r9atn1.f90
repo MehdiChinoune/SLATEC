@@ -1,6 +1,5 @@
 !** R9ATN1
 REAL FUNCTION R9ATN1(X)
-  IMPLICIT NONE
   !>
   !***
   !  Evaluate ATAN(X) from first order relative accuracy so that
@@ -41,8 +40,7 @@ REAL FUNCTION R9ATN1(X)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
 
-  REAL CSEVL, eps, R1MACH, X, y
-  INTEGER INITS
+  REAL eps, X, y
   INTEGER, SAVE :: ntatn1
   REAL, SAVE :: xsml, xbig, xmax
   REAL, PARAMETER :: atn1cs(21) = [ -.03283997535355202E0, .05833432343172412E0, &

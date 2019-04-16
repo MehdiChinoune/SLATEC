@@ -1,6 +1,5 @@
 !** DDANRM
 REAL(8) FUNCTION DDANRM(Neq,V,Wt,Rpar,Ipar)
-  IMPLICIT NONE
   !>
   !***
   !  Compute vector norm for DDASSL.

@@ -1,6 +1,5 @@
 !** ZBESI
 SUBROUTINE ZBESI(Zr,Zi,Fnu,Kode,N,Cyr,Cyi,Nz,Ierr)
-  IMPLICIT NONE
   !>
   !***
   !  Compute a sequence of the Bessel functions I(a,z) for
@@ -167,10 +166,9 @@ SUBROUTINE ZBESI(Zr,Zi,Fnu,Kode,N,Cyr,Cyi,Nz,Ierr)
   !   920811  Prologue revised.  (DWL)
 
   !     COMPLEX CONE,CSGN,CW,CY,CZERO,Z,ZN
-  INTEGER i, Ierr, inu, k, Kode, k1, k2, N, Nz, nn, I1MACH
+  INTEGER i, Ierr, inu, k, Kode, k1, k2, N, Nz, nn
   REAL(8) :: aa, alim, arg, csgni, csgnr, Cyi(N), Cyr(N), dig, elim, Fnu, fnul, &
     rl, r1m5, str, tol, Zi, zni, znr, Zr, az, bb, fn, ascle, rtol, atol, sti
-  REAL(8), EXTERNAL :: ZABS, D1MACH
   REAL(8), PARAMETER :: pi = 3.14159265358979324D0
   REAL(8), PARAMETER :: coner = 1.0D0, conei = 0.0D0
   !

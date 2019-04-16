@@ -1,6 +1,5 @@
 !** SSLI2
 SUBROUTINE SSLI2(N,B,X,Nel,Iel,Jel,El)
-  IMPLICIT NONE
   !>
   !***
   !  SLAP Lower Triangle Matrix Backsolve.

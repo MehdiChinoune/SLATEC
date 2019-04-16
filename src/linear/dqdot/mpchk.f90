@@ -1,7 +1,6 @@
 !** MPCHK
 SUBROUTINE MPCHK(I,J)
   USE MPCOM
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to DQDOTA and DQDOTI
@@ -35,7 +34,7 @@ SUBROUTINE MPCHK(I,J)
   !   900402  Added TYPE section.  (WRB)
   !   930124  Increased Array size in MPCON for SUN -r8.  (RWC)
 
-  INTEGER I, I1MACH, ib, J, mx
+  INTEGER I, ib, J, mx
   !* FIRST EXECUTABLE STATEMENT  MPCHK
   LUN = I1MACH(4)
   ! NOW CHECK LEGALITY OF B, T AND M

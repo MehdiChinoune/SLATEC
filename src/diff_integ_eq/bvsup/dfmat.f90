@@ -1,7 +1,6 @@
 !** DFMAT
 SUBROUTINE DFMAT(X,Y,Yp)
   USE DSAVEX
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to

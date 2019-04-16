@@ -1,6 +1,5 @@
 !** DBSKIN
 SUBROUTINE DBSKIN(X,N,Kode,M,Y,Nz,Ierr)
-  IMPLICIT NONE
   !>
   !***
   !  Compute repeated integrals of the K-zero Bessel function.
@@ -107,10 +106,8 @@ SUBROUTINE DBSKIN(X,N,Kode,M,Y,Nz,Ierr)
 
   INTEGER i, icase, Ierr, il, i1m, k, kk, Kode, ktrms, M, m3, N, &
     ne, nflg, nl, nlim, nn, np, ns, nt, Nz
-  INTEGER I1MACH
   REAL(8) :: enlim, exi(102), fn, gr, h(31), hn, ss, tol, &
     t1, t2, w, X, xlim, xnlim, xp, Y(*), ys(3), yss(3)
-  REAL(8) :: DGAMRN, D1MACH
   !-----------------------------------------------------------------------
   !             COEFFICIENTS IN SERIES OF EXPONENTIAL INTEGRALS
   !-----------------------------------------------------------------------

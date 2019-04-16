@@ -1,6 +1,5 @@
 !** RGAUSS
 REAL FUNCTION RGAUSS(Xmean,Sd)
-  IMPLICIT NONE
   !>
   !***
   !  Generate a normally distributed (Gaussian) random number.
@@ -40,10 +39,9 @@ REAL FUNCTION RGAUSS(Xmean,Sd)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   910819  Added EXTERNAL statement for RAND due to problem on IBM
   !           RS 6000.  (WRB)
-  
+
   INTEGER i
-  REAL RAND, Sd, Xmean
-  EXTERNAL :: RAND
+  REAL Sd, Xmean
   !* FIRST EXECUTABLE STATEMENT  RGAUSS
   RGAUSS = -6.0
   DO i = 1, 12

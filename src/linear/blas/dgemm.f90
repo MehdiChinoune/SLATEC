@@ -1,6 +1,5 @@
 !** DGEMM
 SUBROUTINE DGEMM(Transa,Transb,M,N,K,Alpha,A,Lda,B,Ldb,Beta,C,Ldc)
-  IMPLICIT NONE
   !>
   !***
   !  Perform one of the matrix-matrix operations.
@@ -145,10 +144,6 @@ SUBROUTINE DGEMM(Transa,Transb,M,N,K,Alpha,A,Lda,B,Ldb,Beta,C,Ldc)
   REAL(8) :: Alpha, Beta
   !     .. Array Arguments ..
   REAL(8) :: A(Lda,*), B(Ldb,*), C(Ldc,*)
-  !     .. External Functions ..
-  LOGICAL, EXTERNAL :: LSAME
-  !     .. External Subroutines ..
-  EXTERNAL :: XERBLA
   !     .. Intrinsic Functions ..
   INTRINSIC MAX
   !     .. Local Scalars ..

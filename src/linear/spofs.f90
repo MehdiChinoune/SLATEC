@@ -1,6 +1,5 @@
 !** SPOFS
 SUBROUTINE SPOFS(A,Lda,N,V,Itask,Ind,Work)
-  IMPLICIT NONE
   !>
   !***
   !  Solve a positive definite symmetric system of linear
@@ -112,7 +111,7 @@ SUBROUTINE SPOFS(A,Lda,N,V,Itask,Ind,Work)
 
   !
   INTEGER Lda, N, Itask, Ind, info
-  REAL A(Lda,*), V(*), Work(*), R1MACH
+  REAL A(Lda,*), V(*), Work(*)
   REAL rcond
   CHARACTER(8) :: xern1, xern2
   !* FIRST EXECUTABLE STATEMENT  SPOFS

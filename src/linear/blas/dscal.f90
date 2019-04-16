@@ -1,6 +1,5 @@
 !** DSCAL
 SUBROUTINE DSCAL(N,Da,Dx,Incx)
-  IMPLICIT NONE
   !>
   !***
   !  Multiply a vector by a constant.

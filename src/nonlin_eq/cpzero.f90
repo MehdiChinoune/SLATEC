@@ -1,6 +1,5 @@
 !** CPZERO
 SUBROUTINE CPZERO(In,A,R,T,Iflg,S)
-  IMPLICIT NONE
   !>
   !***
   !  Find the zeros of a polynomial with complex coefficients.

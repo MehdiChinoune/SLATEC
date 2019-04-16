@@ -1,7 +1,6 @@
 !** SXLCAL
 SUBROUTINE SXLCAL(N,Lgmr,X,Xl,Zl,Hes,Maxlp1,Q,V,R0nrm,Wk,Sz,Jscal,Jpre,&
     MSOLVE,Nmsl,Rpar,Ipar,Nelt,Ia,Ja,A,Isym)
-  IMPLICIT NONE
   !>
   !***
   !  Internal routine for SGMRES.
@@ -157,8 +156,6 @@ SUBROUTINE SXLCAL(N,Lgmr,X,Xl,Zl,Hes,Maxlp1,Q,V,R0nrm,Wk,Sz,Jscal,Jpre,&
   EXTERNAL :: MSOLVE
   !     .. Local Scalars ..
   INTEGER i, k, ll, llp1
-  !     .. External Subroutines ..
-  EXTERNAL :: SAXPY, SCOPY, SHELS
   !* FIRST EXECUTABLE STATEMENT  SXLCAL
   ll = Lgmr
   llp1 = ll + 1

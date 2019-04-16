@@ -1,7 +1,6 @@
 !** QAWF
 SUBROUTINE QAWF(F,A,Omega,Integr,Epsabs,Result,Abserr,Neval,Ier,Limlst,&
     Lst,Leniw,Maxp1,Lenw,Iwork,Work)
-  IMPLICIT NONE
   !>
   !***
   !  The routine calculates an approximation result to a given

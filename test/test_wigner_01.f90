@@ -1,4 +1,5 @@
 MODULE TEST15_MOD
+  use slatec
   IMPLICIT NONE
 
 CONTAINS
@@ -49,10 +50,10 @@ CONTAINS
     !
     CHARACTER string*36, fmt*30, fmt2*13
     INTEGER ipass1, ipass2, ipass3, ipass4, ipass5, ier, indexx, &
-      i, first, last, nsig, NUMXER, nerr, ierjj, ierjm
+      i, first, last, nsig, nerr, ierjj, ierjm
     INTEGER, PARAMETER :: NDIM=15
     REAL tol, l1, l2, l3, m1, m2, m3, l1min, l1max, m2min, m2max, &
-      diff(NDIM), R1MACH, x, jjval, jmval, thrcof(NDIM), sixcof(NDIM)
+      diff(NDIM), x, jjval, jmval, thrcof(NDIM), sixcof(NDIM)
     !
     REAL, PARAMETER :: r3jj(8) = [ 2.78886675511358515993E-1, &
       -9.53462589245592315447E-2, -6.74199862463242086246E-2, 1.53311035167966641297E-1, &
@@ -476,6 +477,7 @@ END MODULE TEST15_MOD
 !** TEST15
 PROGRAM TEST15
   USE TEST15_MOD
+  use slatec
   IMPLICIT NONE
   !>
   !***
@@ -526,8 +528,6 @@ PROGRAM TEST15
 
   !* REVISION HISTORY  (YYMMDD)
   !   891130  DATE WRITTEN
-
-  INTEGER I1MACH
   INTEGER ipass, kprint, lin, lun, nfail
   !* FIRST EXECUTABLE STATEMENT  TEST15
   lun = I1MACH(2)

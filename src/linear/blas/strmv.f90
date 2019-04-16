@@ -1,6 +1,5 @@
 !** STRMV
 SUBROUTINE STRMV(Uplo,Trans,Diag,N,A,Lda,X,Incx)
-  IMPLICIT NONE
   !>
   !***
   !  Multiply a real vector by a real triangular matrix.
@@ -122,10 +121,6 @@ SUBROUTINE STRMV(Uplo,Trans,Diag,N,A,Lda,X,Incx)
   REAL temp
   INTEGER i, info, ix, j, jx, kx
   LOGICAL nounit
-  !     .. External Functions ..
-  LOGICAL, EXTERNAL :: LSAME
-  !     .. External Subroutines ..
-  EXTERNAL :: XERBLA
   !     .. Intrinsic Functions ..
   INTRINSIC MAX
   !* FIRST EXECUTABLE STATEMENT  STRMV

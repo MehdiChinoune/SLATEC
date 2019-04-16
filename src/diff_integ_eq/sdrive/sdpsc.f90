@@ -1,6 +1,5 @@
 !** SDPSC
 SUBROUTINE SDPSC(Ksgn,N,Nq,Yh)
-  IMPLICIT NONE
   !>
   !***
   !  Subroutine SDPSC computes the predicted YH values by

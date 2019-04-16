@@ -1,6 +1,5 @@
 !** DRJ
 REAL(8) FUNCTION DRJ(X,Y,Z,P,Ier)
-  IMPLICIT NONE
   !>
   !***
   !  Compute the incomplete or complete (X or Y or Z is zero)
@@ -308,8 +307,8 @@ REAL(8) FUNCTION DRJ(X,Y,Z,P,Ier)
 
   INTEGER Ier
   CHARACTER(16) :: xern3, xern4, xern5, xern6, xern7
-  REAL(8) :: alfa, beta, ea, eb, ec, e2, e3, epslon, D1MACH, lamda, mu, P, pn, &
-    pndev, power4, DRC, sigma, s1, s2, s3, X, xn, xndev,xnroot, Y, yn, yndev, &
+  REAL(8) :: alfa, beta, ea, eb, ec, e2, e3, epslon, lamda, mu, P, pn, &
+    pndev, power4, sigma, s1, s2, s3, X, xn, xndev,xnroot, Y, yn, yndev, &
     ynroot, Z, zn, zndev, znroot
   REAL(8), SAVE :: errtol, lolim, uplim
   REAL(8), PARAMETER :: c1 = 3.0D0/14.0D0, c2 = 1.0D0/3.0D0, c3 = 3.0D0/22.0D0, &

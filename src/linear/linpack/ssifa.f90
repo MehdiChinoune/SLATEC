@@ -1,6 +1,5 @@
 !** SSIFA
 SUBROUTINE SSIFA(A,Lda,N,Kpvt,Info)
-  IMPLICIT NONE
   !>
   !***
   !  Factor a real symmetric matrix by elimination with
@@ -81,7 +80,7 @@ SUBROUTINE SSIFA(A,Lda,N,Kpvt,Info)
   !
   REAL ak, akm1, bk, bkm1, denom, mulk, mulkm1, t
   REAL absakk, alpha, colmax, rowmax
-  INTEGER imax, imaxp1, j, jj, jmax, k, km1, km2, kstep, ISAMAX
+  INTEGER imax, imaxp1, j, jj, jmax, k, km1, km2, kstep
   LOGICAL swap
   !* FIRST EXECUTABLE STATEMENT  SSIFA
   !

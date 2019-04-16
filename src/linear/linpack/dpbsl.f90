@@ -1,6 +1,5 @@
 !** DPBSL
 SUBROUTINE DPBSL(Abd,Lda,N,M,B)
-  IMPLICIT NONE
   !>
   !***
   !  Solve a real symmetric positive definite band system
@@ -75,11 +74,11 @@ SUBROUTINE DPBSL(Abd,Lda,N,M,B)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   INTEGER Lda, N, M
   REAL(8) :: Abd(Lda,*), B(*)
   !
-  REAL(8) :: DDOT, t
+  REAL(8) :: t
   INTEGER k, kb, la, lb, lm
   !
   !     SOLVE TRANS(R)*Y = B

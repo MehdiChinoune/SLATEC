@@ -1,7 +1,6 @@
 !** DQAWC
 SUBROUTINE DQAWC(F,A,B,C,Epsabs,Epsrel,Result,Abserr,Neval,Ier,Limit,Lenw,&
     Last,Iwork,Work)
-  IMPLICIT NONE
   !>
   !***
   !  The routine calculates an approximation result to a

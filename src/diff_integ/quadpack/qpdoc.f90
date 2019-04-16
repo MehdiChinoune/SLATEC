@@ -1,6 +1,5 @@
 !** QPDOC
 SUBROUTINE QPDOC
-  IMPLICIT NONE
   !>
   !***
   !  Documentation for QUADPACK, a package of subprograms for

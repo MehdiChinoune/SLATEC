@@ -1,6 +1,5 @@
 !** WNLIT
 SUBROUTINE WNLIT(W,Mdw,M,N,L,Ipivot,Itype,H,Scalee,Rnorm,Idope,Dope,Done)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to WNNLS
@@ -40,10 +39,6 @@ SUBROUTINE WNLIT(W,Mdw,M,N,L,Ipivot,Itype,H,Scalee,Rnorm,Idope,Dope,Done)
   INTEGER Idope(*), Ipivot(*), Itype(*), L, M, Mdw, N
   REAL Dope(*), H(*), Rnorm, Scalee(*), W(Mdw,*)
   LOGICAL Done
-  !
-  EXTERNAL :: H12, SCOPY, SROTM, SROTMG, SSCAL, SSWAP, WNLT1, WNLT3
-  INTEGER, EXTERNAL :: ISAMAX
-  LOGICAL, EXTERNAL :: WNLT2
   !
   REAL alsq, amax, eanorm, factor, hbar, rn, sparam(5), t, tau
   INTEGER i, i1, imax, ir, j, j1, jj, jp, krank, l1, lb, lend, &

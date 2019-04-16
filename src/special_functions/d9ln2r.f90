@@ -1,6 +1,5 @@
 !** D9LN2R
 REAL(8) FUNCTION D9LN2R(X)
-  IMPLICIT NONE
   !>
   !***
   !  Evaluate LOG(1+X) from second order relative accuracy so
@@ -48,8 +47,7 @@ REAL(8) FUNCTION D9LN2R(X)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
 
   REAL eps, sqeps
-  INTEGER INITDS
-  REAL(8) :: X, txbig, txmax, DCSEVL, D1MACH
+  REAL(8) :: X, txbig, txmax
   INTEGER, SAVE :: ntln21, ntln22
   REAL(8), SAVE :: xmin, xbig, xmax
   REAL(8), PARAMETER :: ln21cs(50) = [ +.18111962513478809875894953043071D+0, &

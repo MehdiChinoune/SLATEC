@@ -1,6 +1,5 @@
 !** R9LGMC
 REAL FUNCTION R9LGMC(X)
-  IMPLICIT NONE
   !>
   !***
   !  Compute the log Gamma correction factor so that
@@ -42,8 +41,7 @@ REAL FUNCTION R9LGMC(X)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
 
-  REAL CSEVL, R1MACH, X
-  INTEGER INITS
+  REAL X
   INTEGER, SAVE :: nalgm
   REAL, SAVE :: xbig, xmax
   REAL, PARAMETER :: algmcs(6) = [ .166638948045186E0,-.0000138494817606E0, &

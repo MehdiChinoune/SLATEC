@@ -1,6 +1,5 @@
 !** ISWAP
 SUBROUTINE ISWAP(N,Ix,Incx,Iy,Incy)
-  IMPLICIT NONE
   !>
   !***
   !  Interchange two vectors.

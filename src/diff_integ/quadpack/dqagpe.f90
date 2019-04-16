@@ -1,7 +1,6 @@
 !** DQAGPE
 SUBROUTINE DQAGPE(F,A,B,Npts2,Points,Epsabs,Epsrel,Limit,Result,Abserr,&
     Neval,Ier,Alist,Blist,Rlist,Elist,Pts,Iord,Level,Ndin,Last)
-  IMPLICIT NONE
   !>
   !***
   !  Approximate a given definite integral I = Integral of F
@@ -222,7 +221,6 @@ SUBROUTINE DQAGPE(F,A,B,Npts2,Points,Epsabs,Epsrel,Limit,Result,Abserr,&
   LOGICAL extrap, noext
   !
   REAL(8), EXTERNAL :: F
-  REAL(8), EXTERNAL :: D1MACH
   !
   !            THE DIMENSION OF RLIST2 IS DETERMINED BY THE VALUE OF
   !            LIMEXP IN SUBROUTINE EPSALG (RLIST2 SHOULD BE OF DIMENSION

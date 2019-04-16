@@ -1,7 +1,6 @@
 !** SOSEQS
 SUBROUTINE SOSEQS(FNC,N,S,Rtolx,Atolx,Tolf,Iflag,Mxit,Ncjs,Nsrrc,Nsri,&
     Iprint,Fmax,C,Nc,B,P,Temp,X,Y,Fac,Is)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to SOS
@@ -97,11 +96,10 @@ SUBROUTINE SOSEQS(FNC,N,S,Rtolx,Atolx,Tolf,Iflag,Mxit,Ncjs,Nsrrc,Nsri,&
   !   900328  Added TYPE section.  (WRB)
 
   INTEGER ksv, l, loun, ls, m, mit, mm, Mxit, N, Nc, Ncjs, np1, Nsri, Nsrrc
-  REAL Atolx, B(*), C(Nc), csv, f, Fac(*), fact, fdif, Fmax, fmin, fmxs, &
-    fn1, fn2, FNC, fp, h, hx, P(*), pmax, R1MACH
-  REAL re, Rtolx, S(*), sruro, Temp(*), test, Tolf, uro, X(*), xnorm, Y(*), &
-    yj, yn1, yn2, yn3, ynorm, yns, zero
-  INTEGER I1MACH, ic, icr, Iflag, Iprint, Is(*), isj, isv, it, item, &
+  REAL Atolx, B(*), C(Nc), csv, f, Fac(*), fact, fdif, Fmax, fmin, fmxs, fn1, &
+    fn2, FNC, fp, h, hx, P(*), pmax, re, Rtolx, S(*), sruro, Temp(*), test, Tolf, &
+    uro, X(*), xnorm, Y(*), yj, yn1, yn2, yn3, ynorm, yns, zero
+  INTEGER ic, icr, Iflag, Iprint, Is(*), isj, isv, it, item, &
     itry, j, jk, js, k, kd, kj, kk, km1, kn
   !* FIRST EXECUTABLE STATEMENT  SOSEQS
   uro = R1MACH(4)

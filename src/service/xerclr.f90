@@ -1,6 +1,5 @@
 !** XERCLR
 SUBROUTINE XERCLR
-  IMPLICIT NONE
   !>
   !***
   !  Reset current error number to zero.
@@ -35,8 +34,8 @@ SUBROUTINE XERCLR
   !   861211  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
-  INTEGER J4SAVE, junk
+
+  INTEGER junk
   !* FIRST EXECUTABLE STATEMENT  XERCLR
   junk = J4SAVE(1,0,.TRUE.)
 END SUBROUTINE XERCLR

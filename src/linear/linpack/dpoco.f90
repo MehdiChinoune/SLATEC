@@ -1,6 +1,5 @@
 !** DPOCO
 SUBROUTINE DPOCO(A,Lda,N,Rcond,Z,Info)
-  IMPLICIT NONE
   !>
   !***
   !  Factor a real symmetric positive definite matrix
@@ -91,8 +90,8 @@ SUBROUTINE DPOCO(A,Lda,N,Rcond,Z,Info)
   REAL(8) :: A(Lda,*), Z(*)
   REAL(8) :: Rcond
   !
-  REAL(8) :: DDOT, ek, t, wk, wkm
-  REAL(8) :: anorm, s, DASUM, sm, ynorm
+  REAL(8) :: ek, t, wk, wkm
+  REAL(8) :: anorm, s, sm, ynorm
   INTEGER i, j, jm1, k, kb, kp1
   !
   !     FIND NORM OF A USING ONLY UPPER HALF

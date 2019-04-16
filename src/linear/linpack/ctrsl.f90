@@ -1,6 +1,5 @@
 !** CTRSL
 SUBROUTINE CTRSL(T,Ldt,N,B,Job,Info)
-  IMPLICIT NONE
   !>
   !***
   !  Solve a system of the form  T*X=B or CTRANS(T)*X=B, where
@@ -84,9 +83,8 @@ SUBROUTINE CTRSL(T,Ldt,N,B,Job,Info)
   COMPLEX T(Ldt,*), B(*)
   !
   !
-  COMPLEX CDOTC, temp
+  COMPLEX temp
   INTEGER case, j, jj
-  REAL, EXTERNAL :: CABS1
   !* FIRST EXECUTABLE STATEMENT  CTRSL
   !
   !        CHECK FOR ZERO DIAGONAL ELEMENTS.

@@ -1,6 +1,5 @@
 !** DDAWTS
 SUBROUTINE DDAWTS(Neq,Iwt,Rtol,Atol,Y,Wt,Rpar,Ipar)
-  IMPLICIT NONE
   !>
   !***
   !  Set error weight vector for DDASSL.

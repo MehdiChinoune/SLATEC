@@ -1,6 +1,5 @@
 !** DGVEC
 SUBROUTINE DGVEC(X,G)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to

@@ -1,6 +1,5 @@
 !** SPOPT
 SUBROUTINE SPOPT(Prgopt,Mrelas,Nvars,Info,Csc,Ibasis,Ropt,Intopt,Lopt)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to SPLP
@@ -44,7 +43,7 @@ SUBROUTINE SPOPT(Prgopt,Mrelas,Nvars,Info,Csc,Ibasis,Ropt,Intopt,Lopt)
     Mrelas, mxitlp, n20043
   INTEGER n20053, n20096, nerr, next, npp, Nvars
   REAL abig, asmall, costsc, Csc(*), eps, one, Prgopt(*), Ropt(07), &
-    tolls, tune, zero, R1MACH, tolabs
+    tolls, tune, zero, tolabs
   INTEGER Ibasis(*), Intopt(08)
   LOGICAL contin, usrbas, sizeup, savedt, colscp, cstscp, minprb, stpedg, Lopt(8)
   !

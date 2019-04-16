@@ -1,6 +1,5 @@
 !** DBETA
 REAL(8) FUNCTION DBETA(A,B)
-  IMPLICIT NONE
   !>
   !***
   !  Compute the complete Beta function.
@@ -34,7 +33,6 @@ REAL(8) FUNCTION DBETA(A,B)
   !   900727  Added EXTERNAL statement.  (WRB)
 
   REAL(8) :: A, B, xmin
-  REAL(8), EXTERNAL :: DLBETA, D1MACH
   REAL(8), SAVE :: xmax, alnsml
   LOGICAL :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  DBETA

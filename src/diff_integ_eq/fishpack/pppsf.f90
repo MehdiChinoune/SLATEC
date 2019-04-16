@@ -1,6 +1,5 @@
 !** PPPSF
 REAL FUNCTION PPPSF(X,Iz,C,A,Bh)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to CBLKTR

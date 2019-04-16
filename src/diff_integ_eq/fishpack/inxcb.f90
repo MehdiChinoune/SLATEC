@@ -1,7 +1,6 @@
 !** INXCB
 SUBROUTINE INXCB(I,Ir,Idx,Idp)
   USE CCBLK
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to CBLKTR

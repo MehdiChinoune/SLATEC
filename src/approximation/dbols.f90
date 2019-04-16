@@ -1,6 +1,5 @@
 !** DBOLS
 SUBROUTINE DBOLS(W,Mdw,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Iw)
-  IMPLICIT NONE
   !>
   !***
   !  Solve the problem
@@ -433,10 +432,10 @@ SUBROUTINE DBOLS(W,Mdw,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Iw)
   !     /SROTG/ TO /DROTG/, /SROT/ TO /DROT/, /E0/ TO /D0/,
   !     /REAL            / TO /DOUBLE PRECISION/.
   ! ++
-  INTEGER i, ibig, IDAMAX, inrows, ip, j, jp, lds, lenx, liopt, llb, lliw, llrw, &
+  INTEGER i, ibig, inrows, ip, j, jp, lds, lenx, liopt, llb, lliw, llrw, &
     llx, lmdw, lndw, locdim, lp, Mdw, mnew, Mode, Mrows, Ncols, nerr
   REAL(8) :: W(Mdw,*), Bl(*), Bu(*), X(*), Rw(*)
-  REAL(8) :: sc, ss, one, DNRM2, Rnorm, zero
+  REAL(8) :: sc, ss, one, Rnorm, zero
   !
   !     THIS VARIABLE SHOULD REMAIN TYPE REAL.
   INTEGER Ind(*), Iopt(*), Iw(*)

@@ -1,6 +1,5 @@
 !** DPCHKT
 SUBROUTINE DPCHKT(N,X,Knotyp,T)
-  IMPLICIT NONE
   !>
   !***
   !  Compute B-spline knot sequence for DPCHBS.

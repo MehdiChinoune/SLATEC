@@ -1,6 +1,5 @@
 !** DLPDP
 SUBROUTINE DLPDP(A,Mda,M,N1,N2,Prgopt,X,Wnorm,Mode,Ws,Is)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to DLSEI
@@ -57,7 +56,7 @@ SUBROUTINE DLPDP(A,Mda,M,N1,N2,Prgopt,X,Wnorm,Mode,Ws,Is)
 
   !
   INTEGER i, Is(*), iw, ix, j, l, M, Mda, Mode, modew, n, N1, N2, np1
-  REAL(8) :: A(Mda,*), DDOT, DNRM2, Prgopt(*), rnorm, sc, Wnorm, Ws(*), X(*), ynorm
+  REAL(8) :: A(Mda,*), Prgopt(*), rnorm, sc, Wnorm, Ws(*), X(*), ynorm
   REAL(8), PARAMETER :: zero = 0.0D0, one = 1.0D0, fac = 0.1D0
   !* FIRST EXECUTABLE STATEMENT  DLPDP
   n = N1 + N2

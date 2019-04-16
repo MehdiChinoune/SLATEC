@@ -1,7 +1,6 @@
 !** SSILUR
 SUBROUTINE SSILUR(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
     Iunit,Rwork,Lenw,Iwork,Leniw)
-  IMPLICIT NONE
   !>
   !***
   !  Incomplete LU Iterative Refinement Sparse Ax = b Solver.
@@ -237,8 +236,6 @@ SUBROUTINE SSILUR(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
   !     .. Local Scalars ..
   INTEGER icol, j, jbgn, jend, locdin, locdz, locil, lociu, lociw, &
     locjl, locju, locl, locnc, locnr, locr, locu, locw, locz, nl, nu
-  !     .. External Subroutines ..
-  EXTERNAL :: SCHKW, SIR, SS2Y, SSILUS, SSLUI, SSMV
   !* FIRST EXECUTABLE STATEMENT  SSILUR
   !
   Ierr = 0

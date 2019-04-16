@@ -1,7 +1,6 @@
 !** MPERR
 SUBROUTINE MPERR
   USE MPCOM
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to DQDOTA and DQDOTI

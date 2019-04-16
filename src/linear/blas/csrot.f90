@@ -1,6 +1,5 @@
 !** CSROT
 SUBROUTINE CSROT(N,Cx,Incx,Cy,Incy,C,S)
-  IMPLICIT NONE
   !>
   !***
   !  Apply a plane Givens rotation.

@@ -1,6 +1,5 @@
 !** RPZERO
 SUBROUTINE RPZERO(N,A,R,T,Iflg,S)
-  IMPLICIT NONE
   !>
   !***
   !  Find the zeros of a polynomial with real coefficients.

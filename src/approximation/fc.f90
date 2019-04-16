@@ -1,7 +1,6 @@
 !** FC
 SUBROUTINE FC(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkpt,Nconst,Xconst,&
     Yconst,Nderiv,Mode,Coeff,W,Iw)
-  IMPLICIT NONE
   !>
   !***
   !  Fit a piecewise polynomial curve to discrete data.
@@ -384,8 +383,6 @@ SUBROUTINE FC(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkpt,Nconst,Xconst,&
 
   REAL Bkpt(*), Coeff(*), Sddata(*), W(*), Xconst(*), Xdata(*), Yconst(*), Ydata(*)
   INTEGER Iw(*), Mode, Nbkpt, Nconst, Ndata, Nderiv(*), Nord
-  !
-  EXTERNAL :: FCMN
   !
   INTEGER i1, i2, i3, i4, i5, i6, i7, mdg, mdw
   !

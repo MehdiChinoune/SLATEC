@@ -1,7 +1,6 @@
 !** DQAWSE
 SUBROUTINE DQAWSE(F,A,B,Alfa,Beta,Integr,Epsabs,Epsrel,Limit,Result,&
     Abserr,Neval,Ier,Alist,Blist,Rlist,Elist,Iord,Last)
-  IMPLICIT NONE
   !>
   !***
   !  The routine calculates an approximation result to a given
@@ -189,7 +188,6 @@ SUBROUTINE DQAWSE(F,A,B,Alfa,Beta,Integr,Epsabs,Epsrel,Limit,Result,&
     maxerr, nev, Neval, nrmax
   !
   REAL(8), EXTERNAL :: F
-  REAL(8), EXTERNAL :: D1MACH
   !
   !            LIST OF MAJOR VARIABLES
   !            -----------------------

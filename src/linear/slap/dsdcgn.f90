@@ -1,7 +1,6 @@
 !** DSDCGN
 SUBROUTINE DSDCGN(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
     Iunit,Rwork,Lenw,Iwork,Leniw)
-  IMPLICIT NONE
   !>
   !***
   !  Diagonally Scaled CG Sparse Ax=b Solver for Normal Eqn's.
@@ -235,8 +234,6 @@ SUBROUTINE DSDCGN(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
   INTEGER Ia(Nelt), Iwork(Leniw), Ja(Nelt)
   !     .. Local Scalars ..
   INTEGER locatd, locatp, locatz, locd, locdz, lociw, locp, locr, locw, locz
-  !     .. External Subroutines ..
-  EXTERNAL :: DCGN, DCHKW, DS2Y, DSD2S, DSDI, DSMTV, DSMV
   !* FIRST EXECUTABLE STATEMENT  DSDCGN
   !
   Ierr = 0

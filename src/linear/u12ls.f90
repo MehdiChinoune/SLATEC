@@ -1,6 +1,5 @@
 !** U12LS
 SUBROUTINE U12LS(A,Mda,M,N,B,Mdb,Nb,Mode,Krank,Rnorm,H,W,Ic,Ir)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to LLSIA
@@ -33,7 +32,7 @@ SUBROUTINE U12LS(A,Mda,M,N,B,Mdb,Nb,Mode,Krank,Rnorm,H,W,Ic,Ir)
   !   900328  Added TYPE section.  (WRB)
 
   INTEGER i, ij, im1, j, jb, k, kp1, Krank, M, Mda, Mdb, Mode, N, Nb, nmk
-  REAL A(Mda,*), B(Mdb,*), bb, H(*), Rnorm(*), SDOT, SNRM2, tt, W(*)
+  REAL A(Mda,*), B(Mdb,*), bb, H(*), Rnorm(*), tt, W(*)
   INTEGER Ic(*), Ir(*)
   !* FIRST EXECUTABLE STATEMENT  U12LS
   k = Krank

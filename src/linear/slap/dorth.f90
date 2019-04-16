@@ -1,6 +1,5 @@
 !** DORTH
 SUBROUTINE DORTH(Vnew,V,Hes,N,Ll,Ldhes,Kmp,Snormw)
-  IMPLICIT NONE
   !>
   !***
   !  Internal routine for DGMRES.
@@ -86,10 +85,6 @@ SUBROUTINE DORTH(Vnew,V,Hes,N,Ll,Ldhes,Kmp,Snormw)
   !     .. Local Scalars ..
   REAL(8) :: arg, sumdsq, tem, vnrm
   INTEGER i, i0
-  !     .. External Functions ..
-  REAL(8), EXTERNAL :: DDOT, DNRM2
-  !     .. External Subroutines ..
-  EXTERNAL :: DAXPY
   !     .. Intrinsic Functions ..
   INTRINSIC MAX, SQRT
   !* FIRST EXECUTABLE STATEMENT  DORTH

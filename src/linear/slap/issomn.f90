@@ -3,7 +3,6 @@ INTEGER FUNCTION ISSOMN(N,B,X,Nelt,Ia,Ja,A,Isym,MSOLVE,Nsave,Itol,Tol,&
     Itmax,Iter,Err,Ierr,Iunit,R,Z,P,Ap,Emap,Dz,Csav,&
     Rwork,Iwork,Ak,Bnrm,Solnrm)
   USE SSLBLK
-  IMPLICIT NONE
   !>
   !***
   !  Preconditioned Orthomin Stop Test.
@@ -193,8 +192,6 @@ INTEGER FUNCTION ISSOMN(N,B,X,Nelt,Ia,Ja,A,Isym,MSOLVE,Nsave,Itol,Tol,&
   EXTERNAL :: MSOLVE
   !     .. Local Scalars ..
   INTEGER i
-  !     .. External Functions ..
-  REAL, EXTERNAL :: R1MACH, SNRM2
   !* FIRST EXECUTABLE STATEMENT  ISSOMN
   ISSOMN = 0
   !

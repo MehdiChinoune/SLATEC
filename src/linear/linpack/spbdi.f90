@@ -1,6 +1,5 @@
 !** SPBDI
 SUBROUTINE SPBDI(Abd,Lda,N,M,Det)
-  IMPLICIT NONE
   !>
   !***
   !  Compute the determinant of a symmetric positive definite

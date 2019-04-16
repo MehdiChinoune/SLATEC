@@ -1,6 +1,5 @@
 !** DQK41
 SUBROUTINE DQK41(F,A,B,Result,Abserr,Resabs,Resasc)
-  IMPLICIT NONE
   !>
   !***
   !  To compute I = Integral of F over (A,B), with error
@@ -76,7 +75,6 @@ SUBROUTINE DQK41(F,A,B,Result,Abserr,Resabs,Resasc)
     fv1(20), fv2(20), hlgth, Resabs, Resasc, resg, resk, reskh, Result, uflow
   INTEGER j, jtw, jtwm1
   REAL(8), EXTERNAL :: F
-  REAL(8), EXTERNAL :: D1MACH
   !
   !           THE ABSCISSAE AND WEIGHTS ARE GIVEN FOR THE INTERVAL (-1,1).
   !           BECAUSE OF SYMMETRY ONLY THE POSITIVE ABSCISSAE AND THEIR

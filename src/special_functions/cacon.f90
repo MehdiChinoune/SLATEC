@@ -1,6 +1,5 @@
 !** CACON
 SUBROUTINE CACON(Z,Fnu,Kode,Mr,N,Y,Nz,Rl,Fnul,Tol,Elim,Alim)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to CBESH and CBESK
@@ -34,7 +33,7 @@ SUBROUTINE CACON(Z,Fnu,Kode,Mr,N,Y,Nz,Rl,Fnul,Tol,Elim,Alim)
   COMPLEX ck, cs, cscl, cscr, csgn, cspn, css(3), csr(3), c1, c2, &
     rz, sc1, sc2, st, s1, s2, Y(N), Z, zn, cy(2)
   REAL Alim, arg, ascle, as2, bscle, bry(3), cpn, c1i, c1m, c1r, &
-    Elim, fmr, Fnu, Fnul, Rl, sgn, spn, Tol, yy, R1MACH
+    Elim, fmr, Fnu, Fnul, Rl, sgn, spn, Tol, yy
   REAL, PARAMETER :: pi = 3.14159265358979324E0
   COMPLEX, PARAMETER :: cone = (1.0E0,0.0E0)
   !* FIRST EXECUTABLE STATEMENT  CACON

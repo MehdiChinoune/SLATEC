@@ -1,6 +1,5 @@
 !** TQLRAT
 SUBROUTINE TQLRAT(N,D,E2,Ierr)
-  IMPLICIT NONE
   !>
   !***
   !  Compute the eigenvalues of symmetric tridiagonal matrix
@@ -77,7 +76,6 @@ SUBROUTINE TQLRAT(N,D,E2,Ierr)
   INTEGER i, j, l, m, N, ii, l1, mml, Ierr
   REAL D(*), E2(*)
   REAL b, c, f, g, h, p, r, s
-  REAL PYTHAG, R1MACH
   !
   REAL, SAVE :: machep
   LOGICAL :: first = .TRUE.

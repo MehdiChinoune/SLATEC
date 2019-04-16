@@ -1,6 +1,5 @@
 !** DGAMIC
 REAL(8) FUNCTION DGAMIC(A,X)
-  IMPLICIT NONE
   !>
   !***
   !  Calculate the complementary incomplete Gamma function.
@@ -56,7 +55,7 @@ REAL(8) FUNCTION DGAMIC(A,X)
 
   INTEGER izero
   REAL(8) :: A, X, aeps, ainta, algap1, alngs, alx, e, gstar, h, sga, sgng, &
-    sgngam, sgngs, t, D1MACH, D9GMIC, D9GMIT, D9LGIC, D9LGIT
+    sgngam, sgngs, t
   REAL(8), SAVE :: eps, sqeps, alneps, bot
   LOGICAL :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  DGAMIC

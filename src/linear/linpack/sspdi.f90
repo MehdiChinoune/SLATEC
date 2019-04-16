@@ -1,6 +1,5 @@
 !** SSPDI
 SUBROUTINE SSPDI(Ap,N,Kpvt,Det,Inert,Work,Job)
-  IMPLICIT NONE
   !>
   !***
   !  Compute the determinant, inertia, inverse of a real
@@ -95,7 +94,7 @@ SUBROUTINE SSPDI(Ap,N,Kpvt,Det,Inert,Work,Job)
   REAL Det(2)
   INTEGER Kpvt(*), Inert(3)
   !
-  REAL akkp1, SDOT, temp
+  REAL akkp1, temp
   REAL ten, d, t, ak, akp1
   INTEGER ij, ik, ikp1, iks, j, jb, jk, jkp1
   INTEGER k, kk, kkp1, km1, ks, ksj, kskp1, kstep

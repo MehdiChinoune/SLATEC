@@ -1,6 +1,5 @@
 !** REDUC
 SUBROUTINE REDUC(Nm,N,A,B,Dl,Ierr)
-  IMPLICIT NONE
   !>
   !***
   !  Reduce a generalized symmetric eigenproblem to a standard

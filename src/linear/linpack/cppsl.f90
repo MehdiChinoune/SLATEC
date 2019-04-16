@@ -1,6 +1,5 @@
 !** CPPSL
 SUBROUTINE CPPSL(Ap,N,B)
-  IMPLICIT NONE
   !>
   !***
   !  Solve the complex Hermitian positive definite system using
@@ -68,11 +67,11 @@ SUBROUTINE CPPSL(Ap,N,B)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   INTEGER N
   COMPLEX Ap(*), B(*)
   !
-  COMPLEX CDOTC, t
+  COMPLEX t
   INTEGER k, kb, kk
   !* FIRST EXECUTABLE STATEMENT  CPPSL
   kk = 0

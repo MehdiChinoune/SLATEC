@@ -1,6 +1,5 @@
 !** DGEFA
 SUBROUTINE DGEFA(A,Lda,N,Ipvt,Info)
-  IMPLICIT NONE
   !>
   !***
   !  Factor a matrix using Gaussian elimination.
@@ -73,7 +72,7 @@ SUBROUTINE DGEFA(A,Lda,N,Ipvt,Info)
   REAL(8) :: A(Lda,*)
   !
   REAL(8) :: t
-  INTEGER IDAMAX, j, k, kp1, l, nm1
+  INTEGER j, k, kp1, l, nm1
   !
   !     GAUSSIAN ELIMINATION WITH PARTIAL PIVOTING
   !

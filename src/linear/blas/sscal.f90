@@ -1,6 +1,5 @@
 !** SSCAL
 SUBROUTINE SSCAL(N,Sa,Sx,Incx)
-  IMPLICIT NONE
   !>
   !***
   !  Multiply a vector by a constant.

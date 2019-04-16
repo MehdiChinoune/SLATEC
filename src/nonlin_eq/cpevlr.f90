@@ -1,6 +1,5 @@
 !** CPEVLR
 SUBROUTINE CPEVLR(N,M,A,X,C)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to CPZERO

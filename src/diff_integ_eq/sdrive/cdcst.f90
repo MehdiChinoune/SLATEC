@@ -1,6 +1,5 @@
 !** CDCST
 SUBROUTINE CDCST(Maxord,Mint,Iswflg,El,Tq)
-  IMPLICIT NONE
   !>
   !***
   !  CDCST sets coefficients used by the core integrator CDSTP.

@@ -1,6 +1,5 @@
 !** EZFFTI
 SUBROUTINE EZFFTI(N,Wsave)
-  IMPLICIT NONE
   !>
   !***
   !  Initialize a work array for EZFFTF and EZFFTB.

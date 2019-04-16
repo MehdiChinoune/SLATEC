@@ -1,7 +1,6 @@
 !** SBOCLS
 SUBROUTINE SBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,&
     Mode,Rw,Iw)
-  IMPLICIT NONE
   !>
   !***
   !  Solve the bounded and constrained least squares
@@ -568,8 +567,7 @@ SUBROUTINE SBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,&
     liopt, liw, llb, lliw, llrw, llx, lmdw, lndw, locacc, locdim, lopt, lp, lrw, &
     m, Mcon, Mdw, mdwl, mnew, Mode, modec, mopt, mout, Mrows, Ncols, nerr
   REAL W(Mdw,*), Bl(*), Bu(*), X(*), Rw(*)
-  REAL anorm, cnorm, one, Rnorm, Rnormc, srelpr, t, t1, t2, SDOT, SNRM2, wt, &
-    zero, SASUM, R1MACH
+  REAL anorm, cnorm, one, Rnorm, Rnormc, srelpr, t, t1, t2, wt, zero
   !     THIS VARIABLE REMAINS TYPED REAL.
   INTEGER Ind(*), Iopt(*), Iw(*), jopt(05)
   LOGICAL filter, pretri

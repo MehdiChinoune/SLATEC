@@ -1,7 +1,6 @@
 !** DBOCLS
 SUBROUTINE DBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,&
     Mode,Rw,Iw)
-  IMPLICIT NONE
   !>
   !***
   !  Solve the bounded and constrained least squares
@@ -570,8 +569,7 @@ SUBROUTINE DBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,&
     liopt, liw, llb, lliw, llrw, llx, lmdw, lndw, locacc, locdim, lopt, lp, lrw, &
     m, Mcon, Mdw, mdwl, mnew, Mode, modec, mopt, mout, Mrows, Ncols, nerr
   REAL(8) :: W(Mdw,*), Bl(*), Bu(*), X(*), Rw(*)
-  REAL(8) :: anorm, cnorm, one, Rnorm, Rnormc, drelpr, t, t1, t2, DDOT, DNRM2, &
-    wt, zero, DASUM, D1MACH
+  REAL(8) :: anorm, cnorm, one, Rnorm, Rnormc, drelpr, t, t1, t2, wt, zero
   !     THIS VARIABLE REMAINS TYPED REAL.
   INTEGER Ind(*), Iopt(*), Iw(*), jopt(05)
   LOGICAL filter, pretri

@@ -1,7 +1,6 @@
 !** DEFCMN
 SUBROUTINE DEFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Mdein,Mdeout,&
     Coeff,Bf,Xtemp,Ptemp,Bkpt,G,Mdg,W,Mdw,Lw)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to DEFC
@@ -37,8 +36,6 @@ SUBROUTINE DEFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Mdein,Mdeout,&
   INTEGER Lw, Mdein, Mdeout, Mdg, Mdw, Nbkpt, Ndata, Nord
   REAL(8) :: Bf(Nord,*), Bkpt(*), Bkptin(*), Coeff(*), G(Mdg,*), &
     Ptemp(*), Sddata(*), W(Mdw,*), Xdata(*), Xtemp(*), Ydata(*)
-  !
-  EXTERNAL :: DBNDAC, DBNDSL, DCOPY, DFSPVN, DSCAL, DSORT, XERMSG
   !
   REAL(8) :: dummy(1), rnorm, xmax, xmin, xval
   INTEGER i, idata, ileft, intseq, ip, ir, irow, l, mt, n, nb, nordm1, nordp1, np1
@@ -79,8 +76,8 @@ SUBROUTINE DEFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Mdein,Mdeout,&
   IF ( Lw<nb ) THEN
     WRITE (xern1,'(I8)') nb
     WRITE (xern2,'(I8)') Lw
-    CALL XERMSG('SLATEC','DEFCMN',&
-      'IN DEFC, INSUFFICIENT STORAGE FOR W(*).  CHECK FORMULA THAT READS LW.GE. ... .  NEED = '&
+    CALL XERMSG('SLATEC','DEFCMN','IN DEFC, INSUFFICIENT STORAGE FOR W(*).&
+      & CHECK FORMULA THAT READS LW.GE. ... .  NEED = '&
       //xern1//' GIVEN = '//xern2,6,1)
     Mdeout = -1
     RETURN

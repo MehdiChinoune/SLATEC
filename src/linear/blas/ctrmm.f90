@@ -1,6 +1,5 @@
 !** CTRMM
 SUBROUTINE CTRMM(Side,Uplo,Transa,Diag,M,N,Alpha,A,Lda,B,Ldb)
-  IMPLICIT NONE
   !>
   !***
   !  Multiply a complex general matrix by a complex triangular
@@ -142,10 +141,6 @@ SUBROUTINE CTRMM(Side,Uplo,Transa,Diag,M,N,Alpha,A,Lda,B,Ldb)
   COMPLEX Alpha
   !     .. Array Arguments ..
   COMPLEX A(Lda,*), B(Ldb,*)
-  !     .. External Functions ..
-  LOGICAL, EXTERNAL :: LSAME
-  !     .. External Subroutines ..
-  EXTERNAL :: XERBLA
   !     .. Intrinsic Functions ..
   INTRINSIC CONJG, MAX
   !     .. Local Scalars ..

@@ -1,6 +1,5 @@
 !** DPCHID
 REAL(8) FUNCTION DPCHID(N,X,F,D,Incfd,Skip,Ia,Ib,Ierr)
-  IMPLICIT NONE
   !>
   !***
   !  Evaluate the definite integral of a piecewise cubic

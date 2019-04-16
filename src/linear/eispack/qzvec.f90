@@ -1,6 +1,5 @@
 !** QZVEC
 SUBROUTINE QZVEC(Nm,N,A,B,Alfr,Alfi,Beta,Z)
-  IMPLICIT NONE
   !>
   !***
   !  The optional fourth step of the QZ algorithm for

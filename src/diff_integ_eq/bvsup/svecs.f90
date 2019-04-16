@@ -1,7 +1,6 @@
 !** SVECS
 SUBROUTINE SVECS(Ncomp,Lnfc,Yhp,Work,Iwork,Inhomo,Iflag)
   USE ML, ONLY: INDpvt, LNFcc => NFCc
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to BVSUP

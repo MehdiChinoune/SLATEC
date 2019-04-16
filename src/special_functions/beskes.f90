@@ -1,6 +1,5 @@
 !** BESKES
 SUBROUTINE BESKES(Xnu,X,Nin,Bke)
-  IMPLICIT NONE
   !>
   !***
   !  Compute a sequence of exponentially scaled modified Bessel
@@ -42,7 +41,7 @@ SUBROUTINE BESKES(Xnu,X,Nin,Bke)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
 
-  REAL Bke(*), bknu1, direct, R1MACH, v, vend, vincr, X, Xnu
+  REAL Bke(*), bknu1, direct, v, vend, vincr, X, Xnu
   INTEGER i, iswtch, n, Nin
   REAL :: alnbig = 0.
   !* FIRST EXECUTABLE STATEMENT  BESKES

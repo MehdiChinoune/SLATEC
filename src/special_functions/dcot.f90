@@ -1,6 +1,5 @@
 !** DCOT
 REAL(8) FUNCTION DCOT(X)
-  IMPLICIT NONE
   !>
   !***
   !  Compute the cotangent.
@@ -39,8 +38,8 @@ REAL(8) FUNCTION DCOT(X)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920618  Removed space from variable names.  (RWC, WRB)
 
-  INTEGER ifn, INITDS
-  REAL(8) :: X, ainty, ainty2, y, yrem, prodbg, DCSEVL, D1MACH
+  INTEGER ifn
+  REAL(8) :: X, ainty, ainty2, y, yrem, prodbg
   INTEGER, SAVE :: nterms
   REAL(8), SAVE :: xmax, xsml, xmin, sqeps
   REAL(8), PARAMETER :: cotcs(15) = [ +.240259160982956302509553617744970D+0, &

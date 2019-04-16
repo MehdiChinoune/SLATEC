@@ -1,7 +1,6 @@
 !** DDAINI
 SUBROUTINE DDAINI(X,Y,Yprime,Neq,RES,JAC,H,Wt,Idid,Rpar,Ipar,Phi,Delta,E,&
     Wm,Iwm,Hmin,Uround,Nonneg,Ntemp)
-  IMPLICIT NONE
   !>
   !***
   !  Initialization routine for DDASSL.
@@ -64,9 +63,6 @@ SUBROUTINE DDAINI(X,Y,Yprime,Neq,RES,JAC,H,Wt,Idid,Rpar,Ipar,Phi,Delta,E,&
   REAL(8) :: X, Y(*), Yprime(*), H, Wt(*), Rpar(*), Phi(Neq,*), &
     Delta(*), E(*), Wm(*), Hmin, Uround
   EXTERNAL :: RES, JAC
-  !
-  EXTERNAL :: DDAJAC, DDASLV
-  REAL(8), EXTERNAL :: DDANRM
   !
   INTEGER i, ier, ires, jcalc, m, ncf, nef, nsf
   REAL(8) :: cj, delnrm, err, oldnrm, r, rate, s, xold, ynorm

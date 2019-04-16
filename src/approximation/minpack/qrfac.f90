@@ -1,6 +1,5 @@
 !** QRFAC
 SUBROUTINE QRFAC(M,N,A,Lda,Pivot,Ipvt,Lipvt,Sigma,Acnorm,Wa)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to SNLS1, SNLS1E, SNSQ and SNSQE
@@ -94,7 +93,6 @@ SUBROUTINE QRFAC(M,N,A,Lda,Pivot,Ipvt,Lipvt,Sigma,Acnorm,Wa)
   REAL A(Lda,*), Sigma(*), Acnorm(*), Wa(*)
   INTEGER i, j, jp1, k, kmax, minmn
   REAL ajnorm, epsmch, summ, temp
-  REAL R1MACH, ENORM
   REAL, PARAMETER :: one = 1.0E0, p05 = 5.0E-2, zero = 0.0E0
   !* FIRST EXECUTABLE STATEMENT  QRFAC
   epsmch = R1MACH(4)

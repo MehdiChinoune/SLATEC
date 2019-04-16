@@ -1,7 +1,6 @@
 !** DMACON
 SUBROUTINE DMACON
   USE DML, ONLY : URO, SRU, EPS, SQOvfl, TWOu, FOUru, LPAr
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to DBVSUP
@@ -26,7 +25,6 @@ SUBROUTINE DMACON
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
 
-  REAL(8) :: D1MACH
   INTEGER ke
   REAL(8) :: dd
   !* FIRST EXECUTABLE STATEMENT  DMACON

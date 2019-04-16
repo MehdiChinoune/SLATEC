@@ -1,6 +1,5 @@
 !** INVIT
 SUBROUTINE INVIT(Nm,N,A,Wr,Wi,Select,Mm,M,Z,Ierr,Rm1,Rv1,Rv2)
-  IMPLICIT NONE
   !>
   !***
   !  Compute the eigenvectors of a real upper Hessenberg
@@ -140,7 +139,6 @@ SUBROUTINE INVIT(Nm,N,A,Wr,Wi,Select,Mm,M,Z,Ierr,Rm1,Rv1,Rv2)
   REAL Rm1(N,*), Rv1(*), Rv2(*)
   REAL t, w, x, y, eps3
   REAL norm, normv, growto, ilambd, rlambd, ukroot
-  REAL PYTHAG
   LOGICAL Select(N)
   !
   !* FIRST EXECUTABLE STATEMENT  INVIT

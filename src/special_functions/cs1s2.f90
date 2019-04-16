@@ -1,6 +1,5 @@
 !** CS1S2
 SUBROUTINE CS1S2(Zr,S1,S2,Nz,Ascle,Alim,Iuf)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to CAIRY and CBESK

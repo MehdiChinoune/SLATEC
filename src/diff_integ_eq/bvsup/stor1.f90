@@ -1,7 +1,6 @@
 !** STOR1
 SUBROUTINE STOR1(U,Yh,V,Yp,Ntemp,Ndisk,Ntape)
   USE ML, ONLY : C, INHomo, NCOmp, NFC
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to BVSUP

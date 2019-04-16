@@ -1,6 +1,5 @@
 !** CHEMM
 SUBROUTINE CHEMM(Side,Uplo,M,N,Alpha,A,Lda,B,Ldb,Beta,C,Ldc)
-  IMPLICIT NONE
   !>
   !***
   !  Multiply a complex general matrix by a complex Hermitian
@@ -152,10 +151,6 @@ SUBROUTINE CHEMM(Side,Uplo,M,N,Alpha,A,Lda,B,Ldb,Beta,C,Ldc)
   COMPLEX Alpha, Beta
   !     .. Array Arguments ..
   COMPLEX A(Lda,*), B(Ldb,*), C(Ldc,*)
-  !     .. External Functions ..
-  LOGICAL, EXTERNAL :: LSAME
-  !     .. External Subroutines ..
-  EXTERNAL :: XERBLA
   !     .. Intrinsic Functions ..
   INTRINSIC CONJG, MAX, REAL
   !     .. Local Scalars ..

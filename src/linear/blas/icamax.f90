@@ -1,6 +1,5 @@
 !** ICAMAX
 INTEGER FUNCTION ICAMAX(N,Cx,Incx)
-  IMPLICIT NONE
   !>
   !***
   !  Find the smallest index of the component of a complex
@@ -58,7 +57,6 @@ INTEGER FUNCTION ICAMAX(N,Cx,Incx)
   COMPLEX Cx(*)
   REAL smax, xmag
   INTEGER i, Incx, ix, N
-  REAL, EXTERNAL :: CABS1
   !* FIRST EXECUTABLE STATEMENT  ICAMAX
   ICAMAX = 0
   IF ( N<=0 ) RETURN

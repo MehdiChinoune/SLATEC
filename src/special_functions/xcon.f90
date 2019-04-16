@@ -1,7 +1,6 @@
 !** XCON
 SUBROUTINE XCON(X,Ix,Ierror)
   USE XBLK ,ONLY: RADixx, RADixl, DLG10r, L
-  IMPLICIT NONE
   !>
   !***
   !  To provide single-precision floating-point arithmetic
@@ -61,7 +60,6 @@ SUBROUTINE XCON(X,Ix,Ierror)
   ! THESE CONDITIONS MUST BE MET BY APPROPRIATE CODING
   ! IN SUBROUTINE XSET.
   !
-  INTEGER, EXTERNAL :: I1MACH
   !
   REAL a, b, z
   !

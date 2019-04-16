@@ -2,7 +2,6 @@
 INTEGER FUNCTION ISDCGS(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,&
     Itmax,Iter,Err,Ierr,Iunit,R,R0,P,Q,U,V1,V2,Rwork,Iwork,Ak,Bk,Bnrm,Solnrm)
   USE DSLBLK
-  IMPLICIT NONE
   !>
   !***
   !  Preconditioned BiConjugate Gradient Squared Stop Test.
@@ -210,8 +209,6 @@ INTEGER FUNCTION ISDCGS(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,&
   EXTERNAL :: MATVEC, MSOLVE
   !     .. Local Scalars ..
   INTEGER i
-  !     .. External Functions ..
-  REAL(8), EXTERNAL :: D1MACH, DNRM2
   !* FIRST EXECUTABLE STATEMENT  ISDCGS
   ISDCGS = 0
   !

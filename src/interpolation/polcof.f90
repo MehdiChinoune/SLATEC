@@ -1,6 +1,5 @@
 !** POLCOF
 SUBROUTINE POLCOF(Xx,N,X,C,D,Work)
-  IMPLICIT NONE
   !>
   !***
   !  Compute the coefficients of the polynomial fit (including

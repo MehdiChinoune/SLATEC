@@ -1,6 +1,5 @@
 !** SSPCO
 SUBROUTINE SSPCO(Ap,N,Kpvt,Rcond,Z)
-  IMPLICIT NONE
   !>
   !***
   !  Factor a real symmetric matrix stored in packed form
@@ -107,8 +106,8 @@ SUBROUTINE SSPCO(Ap,N,Kpvt,Rcond,Z)
   REAL Ap(*), Z(*)
   REAL Rcond
   !
-  REAL ak, akm1, bk, bkm1, SDOT, denom, ek, t
-  REAL anorm, s, SASUM, ynorm
+  REAL ak, akm1, bk, bkm1, denom, ek, t
+  REAL anorm, s, ynorm
   INTEGER i, ij, ik, ikm1, ikp1, info, j, jm1, j1
   INTEGER k, kk, km1k, km1km1, kp, kps, ks
   !

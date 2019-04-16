@@ -1,7 +1,6 @@
 !** DBCG
 SUBROUTINE DBCG(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MTTVEC,MSOLVE,MTSOLV,Itol,&
     Tol,Itmax,Iter,Err,Ierr,Iunit,R,Z,P,Rr,Zz,Pp,Dz,Rwork,Iwork)
-  IMPLICIT NONE
   !>
   !***
   !  Preconditioned BiConjugate Gradient Sparse Ax = b Solver.
@@ -287,11 +286,6 @@ SUBROUTINE DBCG(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MTTVEC,MSOLVE,MTSOLV,Itol,&
   !     .. Local Scalars ..
   REAL(8) :: ak, akden, bk, bkden, bknum, bnrm, fuzz, solnrm, tolmin
   INTEGER i, k
-  !     .. External Functions ..
-  REAL(8), EXTERNAL :: D1MACH, DDOT
-  INTEGER, EXTERNAL :: ISDBCG
-  !     .. External Subroutines ..
-  EXTERNAL :: DAXPY, DCOPY
   !     .. Intrinsic Functions ..
   INTRINSIC ABS
   !* FIRST EXECUTABLE STATEMENT  DBCG

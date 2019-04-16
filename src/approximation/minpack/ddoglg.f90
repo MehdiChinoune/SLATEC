@@ -1,6 +1,5 @@
 !** DDOGLG
 SUBROUTINE DDOGLG(N,R,Lr,Diag,Qtb,Delta,X,Wa1,Wa2)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to DNSQ and DNSQE
@@ -70,7 +69,6 @@ SUBROUTINE DDOGLG(N,R,Lr,Diag,Qtb,Delta,X,Wa1,Wa2)
   !           (WRB)
   !   900328  Added TYPE section.  (WRB)
 
-  REAL(8) :: D1MACH, DENORM
   INTEGER i, j, jj, jp1, k, l, Lr, N
   REAL(8) :: alpha, bnorm, Delta, Diag(*), epsmch, gnorm, qnorm, Qtb(*), R(*), &
     sgnorm, summ, temp, Wa1(*), Wa2(*), X(*)

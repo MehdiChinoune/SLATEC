@@ -1,6 +1,5 @@
 !** CBUNK
 SUBROUTINE CBUNK(Z,Fnu,Kode,Mr,N,Y,Nz,Tol,Elim,Alim)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to CBESH and CBESK

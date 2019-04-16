@@ -1,6 +1,5 @@
 !** DPRWVR
 SUBROUTINE DPRWVR(Key,Ipage,Lpg,Sx,Ix)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to DSPLP

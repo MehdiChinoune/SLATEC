@@ -1,4 +1,5 @@
 MODULE TEST14_MOD
+  use slatec
   IMPLICIT NONE
 
 CONTAINS
@@ -31,9 +32,6 @@ CONTAINS
     INTEGER Kprint, Ipass, contrl, kontrl, Lun, ier
     INTEGER ipass1, ipass2, ipass3, ipass4
     REAL(8) :: pi, trc, dif
-    REAL(8), EXTERNAL :: D1MACH, DRC
-    INTEGER, EXTERNAL :: NUMXER
-    EXTERNAL :: XERCLR, XGETF, XSETF
     !* FIRST EXECUTABLE STATEMENT  QCDRC
     CALL XERCLR
     CALL XGETF(contrl)
@@ -140,9 +138,6 @@ CONTAINS
     INTEGER Kprint, Ipass, contrl, kontrl, Lun, ier
     INTEGER ipass1, ipass2, ipass3, ipass4
     REAL(8) :: blem, trd, dif
-    REAL(8), EXTERNAL :: D1MACH, DRD
-    INTEGER, EXTERNAL :: NUMXER
-    EXTERNAL :: XERCLR, XGETF, XSETF
     !* FIRST EXECUTABLE STATEMENT  QCDRD
     CALL XERCLR
     CALL XGETF(contrl)
@@ -250,9 +245,6 @@ CONTAINS
     INTEGER Kprint, Ipass, contrl, kontrl, Lun, ier
     INTEGER ipass1, ipass2, ipass3, ipass4
     REAL(8) :: alem, trf, dif
-    REAL(8), EXTERNAL :: D1MACH, DRF
-    INTEGER, EXTERNAL :: NUMXER
-    EXTERNAL :: XERCLR, XGETF, XSETF
     !* FIRST EXECUTABLE STATEMENT  QCDRF
     CALL XERCLR
     CALL XGETF(contrl)
@@ -360,9 +352,6 @@ CONTAINS
     INTEGER Kprint, Ipass, contrl, kontrl, Lun, ier
     INTEGER ipass1, ipass2, ipass3, ipass4
     REAL(8) :: consj, trj, dif
-    REAL(8), EXTERNAL :: D1MACH, DRJ
-    INTEGER, EXTERNAL :: NUMXER
-    EXTERNAL :: XERCLR, XGETF, XSETF
     !* FIRST EXECUTABLE STATEMENT  QCDRJ
     CALL XERCLR
     CALL XGETF(contrl)
@@ -443,6 +432,7 @@ END MODULE TEST14_MOD
 !** TEST14
 PROGRAM TEST14
   USE TEST14_MOD
+  use slatec
   IMPLICIT NONE
   !>
   !***
@@ -493,8 +483,6 @@ PROGRAM TEST14
   !   890618  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900524  Cosmetic changes to code.  (WRB)
-
-  INTEGER I1MACH
   INTEGER ipass, kprint, lin, lun, nfail
   !* FIRST EXECUTABLE STATEMENT  TEST14
   lun = I1MACH(2)

@@ -1,6 +1,5 @@
 !** SCNRM2
 REAL FUNCTION SCNRM2(N,Cx,Incx)
-  IMPLICIT NONE
   !>
   !***
   !  Compute the unitary norm of a complex vector.

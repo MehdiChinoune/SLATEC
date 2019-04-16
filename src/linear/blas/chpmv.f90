@@ -1,6 +1,5 @@
 !** CHPMV
 SUBROUTINE CHPMV(Uplo,N,Alpha,Ap,X,Incx,Beta,Y,Incy)
-  IMPLICIT NONE
   !>
   !***
   !  Perform the matrix-vector operation.
@@ -120,10 +119,6 @@ SUBROUTINE CHPMV(Uplo,N,Alpha,Ap,X,Incx,Beta,Y,Incy)
   !     .. Local Scalars ..
   COMPLEX temp1, temp2
   INTEGER i, info, ix, iy, j, jx, jy, k, kk, kx, ky
-  !     .. External Functions ..
-  LOGICAL, EXTERNAL :: LSAME
-  !     .. External Subroutines ..
-  EXTERNAL :: XERBLA
   !     .. Intrinsic Functions ..
   INTRINSIC CONJG, REAL
   !* FIRST EXECUTABLE STATEMENT  CHPMV

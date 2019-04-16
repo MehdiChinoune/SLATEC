@@ -1,7 +1,6 @@
 !** HWSPLR
 SUBROUTINE HWSPLR(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
     Idimf,Pertrb,Ierror,W)
-  IMPLICIT NONE
   !>
   !***
   !  Solve a finite difference approximation to the Helmholtz

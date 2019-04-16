@@ -1,7 +1,6 @@
 !** SSLUGM
 SUBROUTINE SSLUGM(N,B,X,Nelt,Ia,Ja,A,Isym,Nsave,Itol,Tol,Itmax,Iter,Err,&
     Ierr,Iunit,Rwork,Lenw,Iwork,Leniw)
-  IMPLICIT NONE
   !>
   !***
   !  Incomplete LU GMRES Iterative Sparse Ax=b Solver.
@@ -347,8 +346,6 @@ SUBROUTINE SSLUGM(N,B,X,Nelt,Ia,Ja,A,Isym,Nsave,Itol,Tol,Itmax,Iter,Err,&
   !     .. Local Scalars ..
   INTEGER icol, j, jbgn, jend, locdin, locigw, locil, lociu, lociw, &
     locjl, locju, locl, locnc, locnr, locrgw, locu, locw, myitol, nl, nu
-  !     .. External Subroutines ..
-  EXTERNAL :: SCHKW, SGMRES, SS2Y, SSILUS, SSLUI, SSMV
   !* FIRST EXECUTABLE STATEMENT  SSLUGM
   !
   Ierr = 0

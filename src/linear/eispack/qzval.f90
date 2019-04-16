@@ -1,6 +1,5 @@
 !** QZVAL
 SUBROUTINE QZVAL(Nm,N,A,B,Alfr,Alfi,Beta,Matz,Z)
-  IMPLICIT NONE
   !>
   !***
   !  The third step of the QZ algorithm for generalized

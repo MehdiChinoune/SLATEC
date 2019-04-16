@@ -1,6 +1,5 @@
 !** CCOT
 COMPLEX FUNCTION CCOT(Z)
-  IMPLICIT NONE
   !>
   !***
   !  Compute the cotangent.
@@ -33,7 +32,7 @@ COMPLEX FUNCTION CCOT(Z)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
 
-  REAL den, R1MACH, sn2x, x2, y2
+  REAL den, sn2x, x2, y2
   COMPLEX Z
   REAL :: sqeps = 0.
   !* FIRST EXECUTABLE STATEMENT  CCOT

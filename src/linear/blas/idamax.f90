@@ -1,6 +1,5 @@
 !** IDAMAX
 INTEGER FUNCTION IDAMAX(N,Dx,Incx)
-  IMPLICIT NONE
   !>
   !***
   !  Find the smallest index of that component of a vector

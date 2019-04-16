@@ -1,6 +1,5 @@
 !** BETAI
 REAL FUNCTION BETAI(X,Pin,Qin)
-  IMPLICIT NONE
   !>
   !***
   !  Calculate the incomplete Beta function.
@@ -45,7 +44,7 @@ REAL FUNCTION BETAI(X,Pin,Qin)
   !           (WRB)
   !   920528  DESCRIPTION and REFERENCES sections revised.  (WRB)
 
-  REAL ALBETA, c, finsum, p, p1, Pin, ps, q, Qin, R1MACH, term, X, xb, y
+  REAL c, finsum, p, p1, Pin, ps, q, Qin, term, X, xb, y
   INTEGER i, ib, n
   REAL, SAVE :: eps, alneps, sml, alnsml
   LOGICAL :: first = .TRUE.

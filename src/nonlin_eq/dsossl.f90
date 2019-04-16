@@ -1,6 +1,5 @@
 !** DSOSSL
 SUBROUTINE DSOSSL(K,N,L,X,C,B,M)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to DSOS

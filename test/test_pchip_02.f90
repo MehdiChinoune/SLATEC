@@ -1,4 +1,5 @@
 MODULE TEST33_MOD
+  use slatec
   IMPLICIT NONE
 
 CONTAINS
@@ -132,10 +133,6 @@ CONTAINS
       ref, ref2, refmax, refmin, tol1, tol2, x1, x2, xadmax, xadmin, &
       xafmax, xafmin, xrdmax, xrdmin, xrfmax, xrfmin
     LOGICAL failoc, failnx
-    !
-    REAL(8) :: D1MACH
-    !       The following should stay REAL (no D.P. equivalent).
-    REAL, EXTERNAL :: RAND
     !
     !  INITIALIZE.
     !
@@ -644,7 +641,6 @@ CONTAINS
     LOGICAL faild, faile, failoc, skip
     REAL(8) :: dermax, derr, dtrue, dx, fdiff, fdifmx, fermax, &
       ferr, ftrue, machep, tol, pdermx, pdifmx, pfermx
-    REAL(8) :: D1MACH
     !
     INTEGER, PARAMETER :: nmax = 10, nx = 4, ny = 6
     INTEGER, PARAMETER :: ne = 51
@@ -1121,10 +1117,6 @@ CONTAINS
     REAL(8) :: calc, d(7), errmax, error, f(7), machep, tol, true
     LOGICAL fail, skip
     !
-    !  DECLARE EXTERNALS.
-    !
-    REAL(8) :: DPCHIA, D1MACH
-    !
     !  INITIALIZE.
     !
     REAL(8), PARAMETER :: thrqtr = 0.75D0, one = 1.D0, two = 2.D0, three = 3.D0
@@ -1334,7 +1326,6 @@ CONTAINS
     !
     INTEGER Lun, Kprint, Ipass
     LOGICAL COMP
-    REAL(8) :: D1MACH
     !
     !  Declare variables.
     !
@@ -1904,11 +1895,6 @@ CONTAINS
     !
     INTEGER Lun, Kprint, Ipass
     !
-    !  Declare externals.
-    !
-    REAL(8), EXTERNAL :: DBVALU, D1MACH
-    EXTERNAL :: DPCHBS
-    !
     !  Declare variables.
     !
     INTEGER i, ierr, ifail, inbv, j, knotyp, k, ndim, nknots
@@ -2048,6 +2034,7 @@ END MODULE TEST33_MOD
 !** TEST33
 PROGRAM TEST33
   USE TEST33_MOD
+  use slatec
   IMPLICIT NONE
   !>
   !***
@@ -2102,8 +2089,6 @@ PROGRAM TEST33
   !   900322  Corrected list of routines called.  (FNF)
   !   900524  Cosmetic changes to code.  (WRB)
   !   930318  Added new quick check DPCHQ5.  (WRB,FNF)
-
-  INTEGER I1MACH
   INTEGER ipass, kprint, lin, lun, nfail
   !* FIRST EXECUTABLE STATEMENT  TEST33
   lun = I1MACH(2)

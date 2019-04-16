@@ -1,4 +1,5 @@
 MODULE TEST41_MOD
+  use slatec
   IMPLICIT NONE
 
 CONTAINS
@@ -27,7 +28,7 @@ CONTAINS
     !   920210  Code restructured and revised to test error returns for all
     !           values of KPRINT.  (WRB)
 
-    REAL a, ans, b, del, R1MACH, rn1, sqb, tol, tol1, x(501), xint, y(501)
+    REAL a, ans, b, del, rn1, sqb, tol, tol1, x(501), xint, y(501)
     INTEGER i, ierr, Ipass, kontrl, Kprint, Lun, n
     LOGICAL fatal
     !* FIRST EXECUTABLE STATEMENT  AVNTST
@@ -240,10 +241,6 @@ CONTAINS
     INTEGER ierr, kontrl
     REAL a, ans, b, cor, err, req, tol
     LOGICAL fatal
-    !     .. External Functions ..
-    REAL, EXTERNAL :: R1MACH
-    !     .. External Subroutines ..
-    EXTERNAL :: GAUS8, XGETF, XSETF
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, ATAN, EXP, SQRT
     !* FIRST EXECUTABLE STATEMENT  QG8TST
@@ -390,10 +387,6 @@ CONTAINS
     INTEGER ierr, nfct
     REAL a, ans, b, cor, err, req, tol
     LOGICAL fatal
-    !     .. External Functions ..
-    REAL, EXTERNAL :: R1MACH
-    !     .. External Subroutines ..
-    EXTERNAL :: QNC79, XGETF, XSETF
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, MAX, SQRT
     !* FIRST EXECUTABLE STATEMENT  QN79QX
@@ -568,6 +561,7 @@ END MODULE TEST41_MOD
 !** TEST41
 PROGRAM TEST41
   USE TEST41_MOD
+  use slatec
   IMPLICIT NONE
   !>
   !***
@@ -618,8 +612,6 @@ PROGRAM TEST41
   !   890618  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900524  Cosmetic changes to code.  (WRB)
-
-  INTEGER I1MACH
   INTEGER ipass, kprint, lin, lun, nfail
   !* FIRST EXECUTABLE STATEMENT  TEST41
   lun = I1MACH(2)

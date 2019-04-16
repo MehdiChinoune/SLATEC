@@ -1,6 +1,5 @@
 !** CPROCP
 SUBROUTINE CPROCP(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Y,M,A,B,C,D,U,Yy)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to CBLKTR

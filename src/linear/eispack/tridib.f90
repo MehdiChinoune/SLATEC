@@ -1,6 +1,5 @@
 !** TRIDIB
 SUBROUTINE TRIDIB(N,Eps1,D,E,E2,Lb,Ub,M11,M,W,Ind,Ierr,Rv4,Rv5)
-  IMPLICIT NONE
   !>
   !***
   !  Compute the eigenvalues of a symmetric tridiagonal matrix
@@ -114,7 +113,6 @@ SUBROUTINE TRIDIB(N,Eps1,D,E,E2,Lb,Ub,M11,M,W,Ind,Ierr,Rv4,Rv5)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
-  REAL R1MACH
   INTEGER i, j, k, l, M, N, p, q, r, s, ii, m1, m2, M11, m22, tag, Ierr, isturm
   REAL D(*), E(*), E2(*), W(*), Rv4(*), Rv5(*)
   REAL u, v, Lb, t1, t2, Ub, xu, x0, x1, Eps1, s1, s2

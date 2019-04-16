@@ -1,7 +1,6 @@
 !** DQAWS
 SUBROUTINE DQAWS(F,A,B,Alfa,Beta,Integr,Epsabs,Epsrel,Result,Abserr,Neval,&
     Ier,Limit,Lenw,Last,Iwork,Work)
-  IMPLICIT NONE
   !>
   !***
   !  The routine calculates an approximation result to a given

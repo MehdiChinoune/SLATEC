@@ -1,6 +1,5 @@
 !** IDLOC
 INTEGER FUNCTION IDLOC(Locc,Sx,Ix)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to DSPLP

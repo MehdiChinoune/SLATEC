@@ -1,6 +1,5 @@
 !** SGBCO
 SUBROUTINE SGBCO(Abd,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
-  IMPLICIT NONE
   !>
   !***
   !  Factor a band matrix by Gaussian elimination and
@@ -142,8 +141,8 @@ SUBROUTINE SGBCO(Abd,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
   REAL Abd(Lda,*), Z(*)
   REAL Rcond
   !
-  REAL SDOT, ek, t, wk, wkm
-  REAL anorm, s, SASUM, sm, ynorm
+  REAL ek, t, wk, wkm
+  REAL anorm, s, sm, ynorm
   INTEGER is, info, j, ju, k, kb, kp1, l, la, lm, lz, m, mm
   !
   !     COMPUTE 1-NORM OF A

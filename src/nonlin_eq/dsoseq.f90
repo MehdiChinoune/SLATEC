@@ -1,7 +1,6 @@
 !** DSOSEQ
 SUBROUTINE DSOSEQ(FNC,N,S,Rtolx,Atolx,Tolf,Iflag,Mxit,Ncjs,Nsrrc,Nsri,&
     Iprint,Fmax,C,Nc,B,P,Temp,X,Y,Fac,Is)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to DSOS
@@ -97,8 +96,6 @@ SUBROUTINE DSOSEQ(FNC,N,S,Rtolx,Atolx,Tolf,Iflag,Mxit,Ncjs,Nsrrc,Nsri,&
 
   !
   !
-  INTEGER I1MACH
-  REAL(8) :: D1MACH
   INTEGER ic, icr, Iflag, Iprint, Is(*), isj, isv, it, item, itry, &
     j, jk, js, k, kd, kj, kk, km1, kn, ksv, l, loun, ls, &
     m, mit, mm, Mxit, N, Nc, Ncjs, np1, Nsri, Nsrrc

@@ -1,6 +1,5 @@
 !** BESI0
 REAL FUNCTION BESI0(X)
-  IMPLICIT NONE
   !>
   !***
   !  Compute the hyperbolic Bessel function of the first kind
@@ -42,8 +41,7 @@ REAL FUNCTION BESI0(X)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
 
-  REAL BESI0E, CSEVL, R1MACH, X, y
-  INTEGER INITS
+  REAL X, y
   INTEGER, SAVE :: nti0
   REAL, SAVE :: xsml, xmax
   REAL, PARAMETER :: bi0cs(12) = [ -.07660547252839144951E0, 1.927337953993808270E0, &
@@ -63,8 +61,7 @@ REAL FUNCTION BESI0(X)
   y = ABS(X)
   IF ( y>3.0 ) THEN
     !
-    IF ( y>xmax ) CALL XERMSG('SLATEC','BESI0','ABS(X) SO BIG I0 OVERFLOWS',&
-      1,2)
+    IF ( y>xmax ) CALL XERMSG('SLATEC','BESI0','ABS(X) SO BIG I0 OVERFLOWS',1,2)
     !
     BESI0 = EXP(y)*BESI0E(X)
     RETURN

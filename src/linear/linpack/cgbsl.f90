@@ -1,6 +1,5 @@
 !** CGBSL
 SUBROUTINE CGBSL(Abd,Lda,N,Ml,Mu,Ipvt,B,Job)
-  IMPLICIT NONE
   !>
   !***
   !  Solve the complex band system A*X=B or CTRANS(A)*X=B using
@@ -90,7 +89,7 @@ SUBROUTINE CGBSL(Abd,Lda,N,Ml,Mu,Ipvt,B,Job)
   INTEGER Lda, N, Ml, Mu, Ipvt(*), Job
   COMPLEX Abd(Lda,*), B(*)
   !
-  COMPLEX CDOTC, t
+  COMPLEX t
   INTEGER k, kb, l, la, lb, lm, m, nm1
   !* FIRST EXECUTABLE STATEMENT  CGBSL
   m = Mu + Ml + 1

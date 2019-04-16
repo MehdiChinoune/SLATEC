@@ -1,6 +1,5 @@
 !** DSYMV
 SUBROUTINE DSYMV(Uplo,N,Alpha,A,Lda,X,Incx,Beta,Y,Incy)
-  IMPLICIT NONE
   !>
   !***
   !  Perform the matrix-vector operation.
@@ -120,10 +119,6 @@ SUBROUTINE DSYMV(Uplo,N,Alpha,A,Lda,X,Incx,Beta,Y,Incy)
   !     .. Local Scalars ..
   REAL(8) :: temp1, temp2
   INTEGER i, info, ix, iy, j, jx, jy, kx, ky
-  !     .. External Functions ..
-  LOGICAL, EXTERNAL :: LSAME
-  !     .. External Subroutines ..
-  EXTERNAL :: XERBLA
   !     .. Intrinsic Functions ..
   INTRINSIC MAX
   !* FIRST EXECUTABLE STATEMENT  DSYMV

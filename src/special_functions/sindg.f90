@@ -1,6 +1,5 @@
 !** SINDG
 REAL FUNCTION SINDG(X)
-  IMPLICIT NONE
   !>
   !***
   !  Compute the sine of an argument in degrees.

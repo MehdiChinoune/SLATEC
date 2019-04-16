@@ -1,6 +1,5 @@
 !** QS2I1D
 SUBROUTINE QS2I1D(Ia,Ja,A,N,Kflag)
-  IMPLICIT NONE
   !>
   !***
   !  Sort an integer array, moving an integer and DP array.
@@ -92,10 +91,6 @@ SUBROUTINE QS2I1D(Ia,Ja,A,N,Kflag)
   INTEGER i, iit, ij, it, j, jjt, jt, k, kk, l, m, nn
   !     .. Local Arrays ..
   INTEGER il(21), iu(21)
-  !     .. External Subroutines ..
-  EXTERNAL :: XERMSG
-  !     .. Intrinsic Functions ..
-  INTRINSIC ABS, INT
   !* FIRST EXECUTABLE STATEMENT  QS2I1D
   nn = N
   IF ( nn<1 ) THEN

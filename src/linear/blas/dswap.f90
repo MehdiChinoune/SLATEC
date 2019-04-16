@@ -1,6 +1,5 @@
 !** DSWAP
 SUBROUTINE DSWAP(N,Dx,Incx,Dy,Incy)
-  IMPLICIT NONE
   !>
   !***
   !  Interchange two vectors.

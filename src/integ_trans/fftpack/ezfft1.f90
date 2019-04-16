@@ -1,6 +1,5 @@
 !** EZFFT1
 SUBROUTINE EZFFT1(N,Wa,Ifac)
-  IMPLICIT NONE
   !>
   !***
   !  EZFFTI calls EZFFT1 with appropriate work array

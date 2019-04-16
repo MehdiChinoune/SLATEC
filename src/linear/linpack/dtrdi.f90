@@ -1,6 +1,5 @@
 !** DTRDI
 SUBROUTINE DTRDI(T,Ldt,N,Det,Job,Info)
-  IMPLICIT NONE
   !>
   !***
   !  Compute the determinant and inverse of a triangular matrix.

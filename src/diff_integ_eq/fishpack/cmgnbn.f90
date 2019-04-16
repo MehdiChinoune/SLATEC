@@ -1,6 +1,5 @@
 !** CMGNBN
 SUBROUTINE CMGNBN(Nperod,N,Mperod,M,A,B,C,Idimy,Y,Ierror,W)
-  IMPLICIT NONE
   !>
   !***
   !  Solve a complex block tridiagonal linear system of

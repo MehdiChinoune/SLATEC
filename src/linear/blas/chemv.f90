@@ -1,6 +1,5 @@
 !** CHEMV
 SUBROUTINE CHEMV(Uplo,N,Alpha,A,Lda,X,Incx,Beta,Y,Incy)
-  IMPLICIT NONE
   !>
   !***
   !  Multiply a complex vector by a complex Hermitian matrix.
@@ -123,10 +122,6 @@ SUBROUTINE CHEMV(Uplo,N,Alpha,A,Lda,X,Incx,Beta,Y,Incy)
   !     .. Local Scalars ..
   COMPLEX temp1, temp2
   INTEGER i, info, ix, iy, j, jx, jy, kx, ky
-  !     .. External Functions ..
-  LOGICAL, EXTERNAL :: LSAME
-  !     .. External Subroutines ..
-  EXTERNAL :: XERBLA
   !     .. Intrinsic Functions ..
   INTRINSIC CONJG, MAX, REAL
   !* FIRST EXECUTABLE STATEMENT  CHEMV

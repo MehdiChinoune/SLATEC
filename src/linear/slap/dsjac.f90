@@ -1,7 +1,6 @@
 !** DSJAC
 SUBROUTINE DSJAC(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
     Iunit,Rwork,Lenw,Iwork,Leniw)
-  IMPLICIT NONE
   !>
   !***
   !  Jacobi's Method Iterative Sparse Ax = b Solver.
@@ -234,8 +233,6 @@ SUBROUTINE DSJAC(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
   INTEGER Ia(Nelt), Iwork(Leniw), Ja(Nelt)
   !     .. Local Scalars ..
   INTEGER locd, locdz, lociw, locr, locw, locz
-  !     .. External Subroutines ..
-  EXTERNAL :: DCHKW, DIR, DS2Y, DSDI, DSDS, DSMV
   !* FIRST EXECUTABLE STATEMENT  DSJAC
   !
   Ierr = 0

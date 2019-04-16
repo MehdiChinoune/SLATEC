@@ -1,7 +1,6 @@
 !** DEFER
 SUBROUTINE DEFER(COFX,COFY,Idmn,Usol,Grhs)
   USE SPLPCM
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to SEPELI

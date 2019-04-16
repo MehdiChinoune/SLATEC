@@ -1,6 +1,5 @@
 !** CGEMV
 SUBROUTINE CGEMV(Trans,M,N,Alpha,A,Lda,X,Incx,Beta,Y,Incy)
-  IMPLICIT NONE
   !>
   !***
   !  Multiply a complex vector by a complex general matrix.
@@ -126,10 +125,6 @@ SUBROUTINE CGEMV(Trans,M,N,Alpha,A,Lda,X,Incx,Beta,Y,Incy)
   COMPLEX temp
   INTEGER i, info, ix, iy, j, jx, jy, kx, ky, lenx, leny
   LOGICAL noconj
-  !     .. External Functions ..
-  LOGICAL, EXTERNAL :: LSAME
-  !     .. External Subroutines ..
-  EXTERNAL :: XERBLA
   !     .. Intrinsic Functions ..
   INTRINSIC CONJG, MAX
   !* FIRST EXECUTABLE STATEMENT  CGEMV

@@ -1,6 +1,5 @@
 !** DPCHFD
 SUBROUTINE DPCHFD(N,X,F,D,Incfd,Skip,Ne,Xe,Fe,De,Ierr)
-  IMPLICIT NONE
   !>
   !***
   !  Evaluate a piecewise cubic Hermite function and its first

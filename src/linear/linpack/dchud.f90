@@ -1,6 +1,5 @@
 !** DCHUD
 SUBROUTINE DCHUD(R,Ldr,P,X,Z,Ldz,Nz,Y,Rho,C,S)
-  IMPLICIT NONE
   !>
   !***
   !  Update an augmented Cholesky decomposition of the

@@ -2,7 +2,6 @@
 SUBROUTINE CDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
     Miter,Impl,Ml,Mu,Mxord,Hmax,Work,Lenw,Iwork,Leniw,&
     JACOBN,FA,Nde,Mxstep,G,USERS,Ierflg)
-  IMPLICIT NONE
   !>
   !***
   !  The function of CDRIV3 is to solve N ordinary differential
@@ -744,7 +743,6 @@ SUBROUTINE CDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
     Nde, ndecom, npar, Nroot, Nstate, nstepl, Ntask
   LOGICAL convrg
   CHARACTER intgr1*8, intgr2*8, rl1*16, rl2*16
-  REAL, EXTERNAL :: R1MACH, SCNRM2
   REAL, PARAMETER :: NROUND = 20.E0
   INTEGER, PARAMETER :: IAVGH = 1, IHUSED = 2, IAVGRD = 3, IEL = 4, IH = 160, &
     IHMAX = 161, IHOLD = 162, IHSIGN = 163, IRC = 164, IRMAX = 165, IT = 166, &

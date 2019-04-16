@@ -1,4 +1,5 @@
 MODULE TEST38_MOD
+  use slatec
   IMPLICIT NONE
 
 CONTAINS
@@ -23,7 +24,6 @@ CONTAINS
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   901013  Added additional printout on failure.  (RWC)
 
-    REAL(8), EXTERNAL :: DUSRMT
     INTEGER i, ic, iv, ivv, j, kk, kount, Kprint, Lun, mm
     INTEGER icnt, ind(60), ibasis(60), Ipass, iwork(900), isoln(14)
     REAL(8) :: costs(37)
@@ -285,7 +285,7 @@ CONTAINS
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   901010  Added PASS/FAIL message.  (RWC)
 
-    REAL(8) :: D1MACH, DNRM2, rnorm, rnormc, sr
+    REAL(8) :: rnorm, rnormc, sr
     INTEGER ib, Ipass, irhs, itest, j, Kprint, Lun, mcon, mdw, &
       mode, mpass, mrows, ncols
     REAL(8) :: w(11,11), x(30), rw(55), bl1(10), bu1(10)
@@ -424,6 +424,7 @@ END MODULE TEST38_MOD
 !** TEST38
 PROGRAM TEST38
   USE TEST38_MOD
+  use slatec
   IMPLICIT NONE
   !>
   !***
@@ -473,8 +474,6 @@ PROGRAM TEST38
   !   890618  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900524  Cosmetic changes to code.  (WRB)
-
-  INTEGER I1MACH
   INTEGER ipass, kprint, lin, lun, nfail
   !* FIRST EXECUTABLE STATEMENT  TEST38
   lun = I1MACH(2)

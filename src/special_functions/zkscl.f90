@@ -1,6 +1,5 @@
 !** ZKSCL
 SUBROUTINE ZKSCL(Zrr,Zri,Fnu,N,Yr,Yi,Nz,Rzr,Rzi,Ascle,Tol,Elim)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to ZBESK
@@ -32,8 +31,6 @@ SUBROUTINE ZKSCL(Zrr,Zri,Fnu,N,Yr,Yi,Nz,Rzr,Rzi,Ascle,Tol,Elim)
   REAL(8) :: acs, as, Ascle, cki, ckr, csi, csr, cyi(2), cyr(2), Elim, fn, Fnu, &
     Rzi, Rzr, str, s1i, s1r, s2i, s2r, Tol, Yi(N), Yr(N), Zri, Zrr, zdr, zdi, &
     celmr, elm, helim, alas
-  REAL(8), EXTERNAL :: ZABS
-  EXTERNAL :: ZLOG
   REAL(8), PARAMETER :: zeror = 0.0D0, zeroi = 0.0D0
   !* FIRST EXECUTABLE STATEMENT  ZKSCL
   Nz = 0

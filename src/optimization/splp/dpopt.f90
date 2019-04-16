@@ -1,6 +1,5 @@
 !** DPOPT
 SUBROUTINE DPOPT(Prgopt,Mrelas,Nvars,Info,Csc,Ibasis,Ropt,Intopt,Lopt)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to DSPLP
@@ -44,7 +43,7 @@ SUBROUTINE DPOPT(Prgopt,Mrelas,Nvars,Info,Csc,Ibasis,Ropt,Intopt,Lopt)
     Mrelas, mxitlp, n20043
   INTEGER n20053, n20096, nerr, next, npp, Nvars
   REAL(8) :: abig, asmall, costsc, Csc(*), eps, one, Prgopt(*), &
-    Ropt(07), tolls, tune, zero, D1MACH, tolabs
+    Ropt(07), tolls, tune, zero, tolabs
   INTEGER Ibasis(*), Intopt(08)
   LOGICAL contin, usrbas, sizeup, savedt, colscp, cstscp, minprb, stpedg, Lopt(8)
   !

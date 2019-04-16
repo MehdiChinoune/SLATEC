@@ -1,6 +1,5 @@
 !** XGETUN
 SUBROUTINE XGETUN(Iunit)
-  IMPLICIT NONE
   !>
   !***
   !  Return the (first) output file to which error messages
@@ -42,8 +41,8 @@ SUBROUTINE XGETUN(Iunit)
   !   861211  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
-  INTEGER Iunit, J4SAVE
+
+  INTEGER Iunit
   !* FIRST EXECUTABLE STATEMENT  XGETUN
   Iunit = J4SAVE(3,0,.FALSE.)
 END SUBROUTINE XGETUN

@@ -1,6 +1,5 @@
 !** DEI
 REAL(8) FUNCTION DEI(X)
-  IMPLICIT NONE
   !>
   !***
   !  Compute the exponential integral Ei(X).
@@ -37,8 +36,8 @@ REAL(8) FUNCTION DEI(X)
   !   891115  Modified prologue description.  (WRB)
   !   891115  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
-  
-  REAL(8) :: X, DE1
+
+  REAL(8) :: X
   !* FIRST EXECUTABLE STATEMENT  DEI
   DEI = -DE1(-X)
   !

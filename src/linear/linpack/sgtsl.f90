@@ -1,6 +1,5 @@
 !** SGTSL
 SUBROUTINE SGTSL(N,C,D,E,B,Info)
-  IMPLICIT NONE
   !>
   !***
   !  Solve a tridiagonal linear system.

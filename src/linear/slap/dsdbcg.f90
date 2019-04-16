@@ -1,7 +1,6 @@
 !** DSDBCG
 SUBROUTINE DSDBCG(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
     Iunit,Rwork,Lenw,Iwork,Leniw)
-  IMPLICIT NONE
   !>
   !***
   !  Diagonally Scaled BiConjugate Gradient Sparse Ax=b Solver.
@@ -234,8 +233,6 @@ SUBROUTINE DSDBCG(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
   INTEGER Ia(Nelt), Iwork(Leniw), Ja(Nelt)
   !     .. Local Scalars ..
   INTEGER locdin, locdz, lociw, locp, locpp, locr, locrr, locw, locz, loczz
-  !     .. External Subroutines ..
-  EXTERNAL :: DBCG, DCHKW, DS2Y, DSDI, DSDS, DSMTV, DSMV
   !* FIRST EXECUTABLE STATEMENT  DSDBCG
   !
   Ierr = 0

@@ -1,7 +1,6 @@
 !** INXCA
 SUBROUTINE INXCA(I,Ir,Idxa,Na)
   USE CCBLK
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to CBLKTR

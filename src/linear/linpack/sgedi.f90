@@ -1,6 +1,5 @@
 !** SGEDI
 SUBROUTINE SGEDI(A,Lda,N,Ipvt,Det,Work,Job)
-  IMPLICIT NONE
   !>
   !***
   !  Compute the determinant and inverse of a matrix using the

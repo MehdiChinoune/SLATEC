@@ -1,6 +1,5 @@
 !** XERMSG
 SUBROUTINE XERMSG(Librar,Subrou,Messg,Nerr,Level)
-  IMPLICIT NONE
   !>
   !***
   !  Process error messages for SLATEC and other libraries.
@@ -159,7 +158,7 @@ SUBROUTINE XERMSG(Librar,Subrou,Messg,Nerr,Level)
   !                 Error-handling Package, SAND82-0800, Sandia
   !                 Laboratories, 1982.
   !***
-  ! **Routines called:**  FDUMP, J4SAVE, XERCNT, XERHLT, XERPRN, XERSVE
+  ! **Routines called:**  FDUMP, XERCNT, XERHLT, XERPRN, XERSVE
 
   !* REVISION HISTORY  (YYMMDD)
   !   880101  DATE WRITTEN
@@ -195,7 +194,7 @@ SUBROUTINE XERMSG(Librar,Subrou,Messg,Nerr,Level)
   !           XERCTL to XERCNT.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
-  INTEGER i, J4SAVE, kdummy, kount, lerr, Level, lkntrl, llevel, &
+  INTEGER i, kdummy, kount, lerr, Level, lkntrl, llevel, &
     ltemp, maxmes, mkntrl, Nerr
   CHARACTER*(*) Librar, Subrou, Messg
   CHARACTER(8) :: xlibr, xsubr

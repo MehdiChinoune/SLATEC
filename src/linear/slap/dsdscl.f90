@@ -1,7 +1,6 @@
 !** DSDSCL
 SUBROUTINE DSDSCL(N,Nelt,Ia,Ja,A,Isym,X,B,Dinv,Job,Itol)
   USE DSLBLK
-  IMPLICIT NONE
   !>
   !***
   !  Diagonal Scaling of system Ax = b.

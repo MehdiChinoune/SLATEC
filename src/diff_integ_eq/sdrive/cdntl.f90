@@ -3,7 +3,6 @@ SUBROUTINE CDNTL(Eps,F,FA,Hmax,Hold,Impl,Jtask,Matdim,Maxord,Mint,Miter,&
     Ml,Mu,N,Nde,Save1,T,Uround,USERS,Y,Ywt,H,Mntold,Mtrold,&
     Nfe,Rc,Yh,A,Convrg,El,Fac,Ier,Ipvt,Nq,Nwait,Rh,Rmax,&
     Save2,Tq,Trend,Iswflg,Jstate)
-  IMPLICIT NONE
   !>
   !***
   !  Subroutine CDNTL is called to set parameters on the first
@@ -49,7 +48,7 @@ SUBROUTINE CDNTL(Eps,F,FA,Hmax,Hold,Impl,Jtask,Matdim,Maxord,Mint,Miter,&
     Maxord, Mint, Miter, Ml, Mntold, Mtrold, Mu, N, Nde, Nfe, Nq, Nwait
   COMPLEX A(Matdim,*), Fac(*), Save1(*), Save2(*), Y(*), Yh(N,*), Ywt(*)
   REAL El(13,12), Eps, H, Hmax, Hold, oldl0, Rc, Rh, Rmax, &
-    SCNRM2, summ, T, Tq(3,12), Trend, Uround
+    summ, T, Tq(3,12), Trend, Uround
   INTEGER Ipvt(*)
   LOGICAL Convrg, Ier
   REAL, PARAMETER :: RMINIT = 10000.E0

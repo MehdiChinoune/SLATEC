@@ -1,6 +1,5 @@
 !** SINQI
 SUBROUTINE SINQI(N,Wsave)
-  IMPLICIT NONE
   !>
   !***
   !  Initialize a work array for SINQF and SINQB.

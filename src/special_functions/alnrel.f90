@@ -1,6 +1,5 @@
 !** ALNREL
 REAL FUNCTION ALNREL(X)
-  IMPLICIT NONE
   !>
   !***
   !  Evaluate ln(1+X) accurate in the sense of relative error.
@@ -42,8 +41,7 @@ REAL FUNCTION ALNREL(X)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
 
-  REAL CSEVL, R1MACH, X
-  INTEGER INITS
+  REAL X
   INTEGER, SAVE :: nlnrel
   REAL, SAVE :: xmin
   REAL, PARAMETER :: alnrcs(23) = [ 1.0378693562743770E0, -.13364301504908918E0, &

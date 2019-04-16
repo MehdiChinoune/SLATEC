@@ -1,6 +1,5 @@
 !** DQRSL
 SUBROUTINE DQRSL(X,Ldx,N,K,Qraux,Y,Qy,Qty,B,Rsd,Xb,Job,Info)
-  IMPLICIT NONE
   !>
   !***
   !  Apply the output of DQRDC to compute coordinate transfor-
@@ -169,7 +168,7 @@ SUBROUTINE DQRSL(X,Ldx,N,K,Qraux,Y,Qy,Qty,B,Rsd,Xb,Job,Info)
   REAL(8) :: X(Ldx,*), Qraux(*), Y(*), Qy(*), Qty(*), B(*), Rsd(*), Xb(*)
   !
   INTEGER i, j, jj, ju, kp1
-  REAL(8) :: DDOT, t, temp
+  REAL(8) :: t, temp
   LOGICAL cb, cqy, cqty, cr, cxb
   !* FIRST EXECUTABLE STATEMENT  DQRSL
   !

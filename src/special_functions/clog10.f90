@@ -1,6 +1,5 @@
 !** CLOG10
 COMPLEX FUNCTION CLOG10(Z)
-  IMPLICIT NONE
   !>
   !***
   !  Compute the principal value of the complex base 10

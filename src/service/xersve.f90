@@ -1,6 +1,5 @@
 !** XERSVE
 SUBROUTINE XERSVE(Librar,Subrou,Messg,Kflag,Nerr,Level,Icount)
-  IMPLICIT NONE
   !>
   !***
   !  Record that an error has occurred.
@@ -67,7 +66,7 @@ SUBROUTINE XERSVE(Librar,Subrou,Messg,Kflag,Nerr,Level,Icount)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER, PARAMETER :: LENTAB = 10
-  INTEGER i, I1MACH, Icount, iunit, Kflag, kunit, Level, Nerr, nunit
+  INTEGER i, Icount, iunit, Kflag, kunit, Level, Nerr, nunit
   INTEGER lun(5)
   CHARACTER*(*) Librar, Subrou, Messg
   CHARACTER(8) :: lib, sub

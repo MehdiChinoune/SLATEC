@@ -1,6 +1,5 @@
 !** SCOPYM
 SUBROUTINE SCOPYM(N,Sx,Incx,Sy,Incy)
-  IMPLICIT NONE
   !>
   !***
   !  Copy the negative of a vector to a vector.

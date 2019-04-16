@@ -1,6 +1,5 @@
 !** CPSI
 COMPLEX FUNCTION CPSI(Zin)
-  IMPLICIT NONE
   !>
   !***
   !  Compute the Psi (or Digamma) function.
@@ -36,8 +35,6 @@ COMPLEX FUNCTION CPSI(Zin)
   REAL cabsz, x, y
   INTEGER i, n, ndx
   COMPLEX Zin, z, z2inv, corr
-  REAL, EXTERNAL :: R1MACH
-  COMPLEX, EXTERNAL :: CCOT
   INTEGER, SAVE :: nterm
   REAL, SAVE :: bound, dxrel, rmin, rbig
   REAL, PARAMETER :: bern(13) = [ .83333333333333333E-1,-.83333333333333333E-2, &

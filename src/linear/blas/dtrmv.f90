@@ -1,6 +1,5 @@
 !** DTRMV
 SUBROUTINE DTRMV(Uplo,Trans,Diag,N,A,Lda,X,Incx)
-  IMPLICIT NONE
   !>
   !***
   !  Perform one of the matrix-vector operations.
@@ -122,10 +121,6 @@ SUBROUTINE DTRMV(Uplo,Trans,Diag,N,A,Lda,X,Incx)
   REAL(8) :: temp
   INTEGER i, info, ix, j, jx, kx
   LOGICAL nounit
-  !     .. External Functions ..
-  LOGICAL, EXTERNAL :: LSAME
-  !     .. External Subroutines ..
-  EXTERNAL :: XERBLA
   !     .. Intrinsic Functions ..
   INTRINSIC MAX
   !* FIRST EXECUTABLE STATEMENT  DTRMV

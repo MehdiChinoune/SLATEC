@@ -1,6 +1,5 @@
 !** DDZRO
 SUBROUTINE DDZRO(Ae,F,H,N,Nq,Iroot,Re,T,Yh,Uround,B,C,Fb,Fc,Y)
-  IMPLICIT NONE
   !>
   !***
   !  DDZRO searches for a zero of a function F(N, T, Y, IROOT)

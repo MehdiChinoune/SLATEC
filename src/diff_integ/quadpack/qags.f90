@@ -1,7 +1,6 @@
 !** QAGS
 SUBROUTINE QAGS(F,A,B,Epsabs,Epsrel,Result,Abserr,Neval,Ier,Limit,Lenw,&
     Last,Iwork,Work)
-  IMPLICIT NONE
   !>
   !***
   !  The routine calculates an approximation result to a given

@@ -1,6 +1,5 @@
 !** DBDIFF
 SUBROUTINE DBDIFF(L,V)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to DBSKIN

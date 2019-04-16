@@ -1,6 +1,5 @@
 !** DU12US
 SUBROUTINE DU12US(A,Mda,M,N,B,Mdb,Nb,Mode,Krank,Rnorm,H,W,Ir,Ic)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to DULSIA
@@ -34,7 +33,6 @@ SUBROUTINE DU12US(A,Mda,M,N,B,Mdb,Nb,Mode,Krank,Rnorm,H,W,Ir,Ic)
 
   INTEGER i, ij, ip1, j, jb, k, kp1, Krank, M, Mda, Mdb, mmk, Mode, N, Nb
   REAL(8) :: A(Mda,*), B(Mdb,*), bb, H(*), Rnorm(*), tt, W(*)
-  REAL(8) :: DDOT, DNRM2
   INTEGER Ic(*), Ir(*)
   !* FIRST EXECUTABLE STATEMENT  DU12US
   k = Krank

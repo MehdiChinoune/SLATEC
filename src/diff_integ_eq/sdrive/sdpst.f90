@@ -1,7 +1,6 @@
 !** SDPST
 SUBROUTINE SDPST(El,F,FA,H,Impl,JACOBN,Matdim,Miter,Ml,Mu,N,Nde,Nq,Save2,&
     T,USERS,Y,Yh,Ywt,Uround,Nfe,Nje,A,Dfdy,Fac,Ier,Ipvt,Save1,Iswflg,Bnd,Jstate)
-  IMPLICIT NONE
   !>
   !***
   !  Subroutine SDPST evaluates the Jacobian matrix of the right
@@ -34,7 +33,7 @@ SUBROUTINE SDPST(El,F,FA,H,Impl,JACOBN,Matdim,Miter,Ml,Mu,N,Nde,Nq,Save2,&
   INTEGER i, iflag, imax, Impl, info, Iswflg, j, j2, Jstate, k, &
     Matdim, Miter, Ml, Mu, mw, N, Nde, Nfe, Nje, Nq
   REAL A(Matdim,*), bl, Bnd, bp, br, Dfdy(Matdim,*), dfdymx, diff, dy, El(13,12), &
-    Fac(*), facmin, factor, H, Save1(*), Save2(*), scalee, SNRM2, T, Uround, Y(*), &
+    Fac(*), facmin, factor, H, Save1(*), Save2(*), scalee, T, Uround, Y(*), &
     Yh(N,*), yj, ys, Ywt(*)
   INTEGER Ipvt(*)
   LOGICAL Ier

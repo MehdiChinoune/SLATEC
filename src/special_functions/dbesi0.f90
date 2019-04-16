@@ -1,6 +1,5 @@
 !** DBESI0
 REAL(8) FUNCTION DBESI0(X)
-  IMPLICIT NONE
   !>
   !***
   !  Compute the hyperbolic Bessel function of the first kind
@@ -41,8 +40,7 @@ REAL(8) FUNCTION DBESI0(X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
 
-  INTEGER INITDS
-  REAL(8) :: X, y, D1MACH, DCSEVL, DBSI0E
+  REAL(8) :: X, y
   INTEGER, SAVE :: nti0
   REAL(8), SAVE :: xsml, xmax
   REAL(8), PARAMETER :: bi0cs(18) = [ -.7660547252839144951081894976243285D-1, &

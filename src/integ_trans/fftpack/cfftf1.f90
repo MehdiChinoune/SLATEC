@@ -1,6 +1,5 @@
 !** CFFTF1
 SUBROUTINE CFFTF1(N,C,Ch,Wa,Ifac)
-  IMPLICIT NONE
   !>
   !***
   !  Compute the forward transform of a complex, periodic

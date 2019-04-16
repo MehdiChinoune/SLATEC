@@ -1,7 +1,6 @@
 !** DFC
 SUBROUTINE DFC(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkpt,Nconst,Xconst,&
     Yconst,Nderiv,Mode,Coeff,W,Iw)
-  IMPLICIT NONE
   !>
   !***
   !  Fit a piecewise polynomial curve to discrete data.
@@ -386,8 +385,6 @@ SUBROUTINE DFC(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkpt,Nconst,Xconst,&
   REAL(8) :: Bkpt(*), Coeff(*), Sddata(*), W(*), Xconst(*), &
     Xdata(*), Yconst(*), Ydata(*)
   INTEGER Iw(*), Mode, Nbkpt, Nconst, Ndata, Nderiv(*), Nord
-  !
-  EXTERNAL :: DFCMN
   !
   INTEGER i1, i2, i3, i4, i5, i6, i7, mdg, mdw
   !

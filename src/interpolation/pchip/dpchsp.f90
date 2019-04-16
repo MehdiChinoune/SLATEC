@@ -1,6 +1,5 @@
 !** DPCHSP
 SUBROUTINE DPCHSP(Ic,Vc,N,X,F,D,Incfd,Wk,Nwk,Ierr)
-  IMPLICIT NONE
   !>
   !***
   !  Set derivatives needed to determine the Hermite represen-
@@ -167,7 +166,6 @@ SUBROUTINE DPCHSP(Ic,Vc,N,X,F,D,Incfd,Wk,Nwk,Ierr)
   !
   INTEGER ibeg, iend, indexx, j, nm1
   REAL(8) :: g, stemp(3), xtemp(4)
-  REAL(8) :: DPCHDF
   !
   REAL(8), PARAMETER :: zero = 0.D0, half = .5D0, one = 1.D0, two = 2.D0, three = 3.D0
   !

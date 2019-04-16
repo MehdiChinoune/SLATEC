@@ -1,6 +1,5 @@
 !** CBETA
 COMPLEX FUNCTION CBETA(A,B)
-  IMPLICIT NONE
   !>
   !***
   !  Compute the complete Beta function.
@@ -39,7 +38,6 @@ COMPLEX FUNCTION CBETA(A,B)
 
   REAL xmaxt, xmin
   COMPLEX A, B
-  COMPLEX, EXTERNAL :: CGAMMA, CLBETA
   REAL :: xmax = 0.0
   !* FIRST EXECUTABLE STATEMENT  CBETA
   IF ( xmax==0.0 ) THEN

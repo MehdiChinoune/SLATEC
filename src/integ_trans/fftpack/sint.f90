@@ -1,6 +1,5 @@
 !** SINT
 SUBROUTINE SINT(N,X,Wsave)
-  IMPLICIT NONE
   !>
   !***
   !  Compute the sine transform of a real, odd sequence.

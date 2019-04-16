@@ -1,7 +1,6 @@
 !** LSSUDS
 SUBROUTINE LSSUDS(A,X,B,N,M,Nrda,U,Nrdu,Iflag,Mlso,Irank,Iscale,Q,Diag,&
     Kpivot,S,Div,Td,Isflg,Scales)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to BVSUP
@@ -122,9 +121,9 @@ SUBROUTINE LSSUDS(A,X,B,N,M,Nrda,U,Nrdu,Iflag,Mlso,Irank,Iscale,Q,Diag,&
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER nmir, Nrda, Nrdu, nu
-  REAL A(Nrda,*), B(*), Diag(*), Div(*), gam, gama, Q(Nrda,*), R1MACH, res, &
-    S(*), Scales(*), SDOT, ss, Td(*), U(Nrdu,*), uro, X(*)
-  INTEGER i, Iflag, Irank, irp, Iscale, Isflg, j, J4SAVE, jr, k, &
+  REAL A(Nrda,*), B(*), Diag(*), Div(*), gam, gama, Q(Nrda,*), res, &
+    S(*), Scales(*), ss, Td(*), U(Nrdu,*), uro, X(*)
+  INTEGER i, Iflag, Irank, irp, Iscale, Isflg, j, jr, k, &
     kp, Kpivot(*), l, M, maxmes, mj, Mlso, N, nfat, nfatal
   !
   !- *********************************************************************

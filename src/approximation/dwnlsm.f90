@@ -1,7 +1,6 @@
 !** DWNLSM
 SUBROUTINE DWNLSM(W,Mdw,Mme,Ma,N,L,Prgopt,X,Rnorm,Mode,Ipivot,Itype,Wd,H,&
     Scalee,Z,Temp,D)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to DWNNLS
@@ -80,10 +79,6 @@ SUBROUTINE DWNLSM(W,Mdw,Mme,Ma,N,L,Prgopt,X,Rnorm,Mode,Ipivot,Itype,Wd,H,&
   INTEGER Ipivot(*), Itype(*), L, Ma, Mdw, Mme, Mode, N
   REAL(8) :: D(*), H(*), Prgopt(*), Rnorm, Scalee(*), Temp(*), &
     W(Mdw,*), Wd(*), X(*), Z(*)
-  !
-  EXTERNAL :: DAXPY, DCOPY, DH12, DROTM, DROTMG, DSCAL, DSWAP, DWNLIT, XERMSG
-  REAL(8), EXTERNAL :: D1MACH, DASUM, DNRM2
-  INTEGER, EXTERNAL :: IDAMAX
   !
   REAL(8) :: alamda, alpha, alsq, amax, blowup, bnorm, dope(3), eanorm, fac, sm, &
     sparam(5), t, tau, wmax, z2, zz

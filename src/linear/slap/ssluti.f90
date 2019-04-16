@@ -1,6 +1,5 @@
 !** SSLUTI
 SUBROUTINE SSLUTI(N,B,X,Nelt,Ia,Ja,A,Isym,Rwork,Iwork)
-  IMPLICIT NONE
   !>
   !***
   !  SLAP MTSOLV for LDU Factorization.
@@ -51,7 +50,7 @@ SUBROUTINE SSLUTI(N,B,X,Nelt,Ia,Ja,A,Isym,Rwork,Iwork)
   !   920511  Added complete declaration section.  (WRB)
   !   921113  Corrected C***CATEGORY line.  (FNF)
   !   930701  Updated CATEGORY section.  (FNF, WRB)
-  
+
   !     .. Scalar Arguments ..
   INTEGER Isym, N, Nelt
   !     .. Array Arguments ..
@@ -59,8 +58,6 @@ SUBROUTINE SSLUTI(N,B,X,Nelt,Ia,Ja,A,Isym,Rwork,Iwork)
   INTEGER Ia(Nelt), Iwork(*), Ja(Nelt)
   !     .. Local Scalars ..
   INTEGER locdin, locil, lociu, locjl, locju, locl, locu
-  !     .. External Subroutines ..
-  EXTERNAL :: SSLUI4
   !* FIRST EXECUTABLE STATEMENT  SSLUTI
   !
   !         Pull out the pointers to the L, D and U matrices and call

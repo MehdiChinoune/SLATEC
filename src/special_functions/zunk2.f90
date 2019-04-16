@@ -1,6 +1,5 @@
 !** ZUNK2
 SUBROUTINE ZUNK2(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Tol,Elim,Alim)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to ZBESK
@@ -44,7 +43,6 @@ SUBROUTINE ZUNK2(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Tol,Elim,Alim)
     rs1, rzi, rzr, sar, sgn, sti, str, s1i, s1r, s2i, s2r, Tol, Yi(N), Yr(N), yy, &
     zbi, zbr, zeta1i(2), zeta1r(2), zeta2i(2), zeta2r(2), zet1di, zet1dr, zet2di, &
     zet2dr, Zi, zni, znr, Zr, zri, zrr
-  REAL(8), EXTERNAL :: D1MACH, ZABS
   REAL(8), PARAMETER :: zeror = 0.0D0, zeroi = 0.0D0, coner = 1.0D0, cr1r = 1.0D0, &
     cr1i = 1.73205080756887729D0, cr2r = -0.5D0, cr2i = -8.66025403784438647D-01
   REAL(8), PARAMETER :: hpi = 1.57079632679489662D+00, pi = 3.14159265358979324D+00, &

@@ -4,7 +4,6 @@ SUBROUTINE LSOD(F,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,Acor,&
   USE DEBDF1, ONLY : TOLd, H, HMIn, HMXi, X => TN, U => UROund, IQUit, INIt, &
     KSTeps, IBEgin, ITOl, IINteg, ITStop, IJAc, IBAnd, JSTart, KFLag, METh, &
     MITer, MAXord, N, NQ, NST, NFE, NJE
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to DEBDF
@@ -37,8 +36,8 @@ SUBROUTINE LSOD(F,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,Acor,&
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
 
   INTEGER :: ltol, natolp, Neq, nrtolp, Idid, intflg, Ipar(*), Iwm(*), k, l
-  REAL absdel, Acor(*), Atol(*), big, del, Delsgn, dt, Ewt(*), ha, R1MACH, &
-    Rpar(*), Rtol(*), Savf(*), T, tol, Tolfac, Tout, Tstop, VNWRMS, Wm(*), Y(*), &
+  REAL absdel, Acor(*), Atol(*), big, del, Delsgn, dt, Ewt(*), ha, &
+    Rpar(*), Rtol(*), Savf(*), T, tol, Tolfac, Tout, Tstop, Wm(*), Y(*), &
     Yh(Neq,6) , Yh1(*), Ypout(*)
   LOGICAL Intout
   CHARACTER(8) :: xern1

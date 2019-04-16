@@ -1,7 +1,6 @@
 !** DFCMN
 SUBROUTINE DFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Nconst,Xconst,&
     Yconst,Nderiv,Mode,Coeff,Bf,Xtemp,Ptemp,Bkpt,G,Mdg,W,Mdw,Work,Iwork)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to FC
@@ -37,9 +36,6 @@ SUBROUTINE DFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Nconst,Xconst,&
   REAL(8) :: Bf(Nord,*), Bkpt(*), Bkptin(*), Coeff(*), G(Mdg,*), &
     Ptemp(*), Sddata(*), W(Mdw,*), Work(*), Xconst(*), &
     Xdata(*), Xtemp(*), Yconst(*), Ydata(*)
-  !
-  EXTERNAL :: DAXPY, DBNDAC, DBNDSL, DCOPY, DFSPVD, DFSPVN, DLSEI, &
-    DSCAL, DSORT, XERMSG
   !
   REAL(8) :: dummy(1), prgopt(10), rnorm, rnorme, rnorml, xmax, xmin, xval, yval
   INTEGER i, idata, ideriv, ileft, intrvl, intw1, ip, ir, irow, &

@@ -1,7 +1,6 @@
 !** DNLS1
 SUBROUTINE DNLS1(FCN,Iopt,M,N,X,Fvec,Fjac,Ldfjac,Ftol,Xtol,Gtol,Maxfev,&
     Epsfcn,Diag,Mode,Factor,Nprint,Info,Nfev,Njev,Ipvt,Qtf,Wa1,Wa2,Wa3,Wa4)
-  IMPLICIT NONE
   !>
   !***
   !  Minimize the sum of the squares of M nonlinear functions
@@ -617,7 +616,6 @@ SUBROUTINE DNLS1(FCN,Iopt,M,N,X,Fvec,Fjac,Ldfjac,Ftol,Xtol,Gtol,Maxfev,&
   INTEGER i, iflag, iter, j, l, modech
   REAL(8) :: actred, delta, dirder, epsmch, fnorm, fnorm1, gnorm, par, &
     pnorm, prered, ratio, summ, temp, temp1, temp2, xnorm, err(1)
-  REAL(8) :: D1MACH, DENORM
   CHARACTER(8) :: xern1
   CHARACTER(16) :: xern3
   !

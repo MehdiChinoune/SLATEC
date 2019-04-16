@@ -1,6 +1,5 @@
 !** CSSCAL
 SUBROUTINE CSSCAL(N,Sa,Cx,Incx)
-  IMPLICIT NONE
   !>
   !***
   !  Scale a complex vector.

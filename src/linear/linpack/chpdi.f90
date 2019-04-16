@@ -1,6 +1,5 @@
 !** CHPDI
 SUBROUTINE CHPDI(Ap,N,Kpvt,Det,Inert,Work,Job)
-  IMPLICIT NONE
   !>
   !***
   !  Compute the determinant, inertia and inverse of a complex
@@ -95,7 +94,7 @@ SUBROUTINE CHPDI(Ap,N,Kpvt,Det,Inert,Work,Job)
   REAL Det(2)
   INTEGER Kpvt(*), Inert(3)
   !
-  COMPLEX akkp1, CDOTC, temp
+  COMPLEX akkp1, temp
   REAL ten, d, t, ak, akp1
   INTEGER ij, ik, ikp1, iks, j, jb, jk, jkp1
   INTEGER k, kk, kkp1, km1, ks, ksj, kskp1, kstep

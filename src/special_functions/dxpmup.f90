@@ -1,6 +1,5 @@
 !** DXPMUP
 SUBROUTINE DXPMUP(Nu1,Nu2,Mu1,Mu2,Pqa,Ipqa,Ierror)
-  IMPLICIT NONE
   !>
   !***
   !  To compute the values of Legendre functions for DXLEGF.

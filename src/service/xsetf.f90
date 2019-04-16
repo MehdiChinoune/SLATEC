@@ -1,6 +1,5 @@
 !** XSETF
 SUBROUTINE XSETF(Kontrl)
-  IMPLICIT NONE
   !>
   !***
   !  Set the error control flag.
@@ -47,7 +46,7 @@ SUBROUTINE XSETF(Kontrl)
   !                 Error-handling Package, SAND82-0800, Sandia
   !                 Laboratories, 1982.
   !***
-  ! **Routines called:**  J4SAVE, XERMSG
+  ! **Routines called:**  XERMSG
 
   !* REVISION HISTORY  (YYMMDD)
   !   790801  DATE WRITTEN
@@ -57,7 +56,7 @@ SUBROUTINE XSETF(Kontrl)
   !   900510  Change call to XERRWV to XERMSG.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
-  INTEGER J4SAVE, junk, Kontrl
+  INTEGER junk, Kontrl
   CHARACTER(8) :: xern1
   !* FIRST EXECUTABLE STATEMENT  XSETF
   IF ( ABS(Kontrl)>2 ) THEN

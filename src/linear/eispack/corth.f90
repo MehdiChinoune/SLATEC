@@ -1,6 +1,5 @@
 !** CORTH
 SUBROUTINE CORTH(Nm,N,Low,Igh,Ar,Ai,Ortr,Orti)
-  IMPLICIT NONE
   !>
   !***
   !  Reduce a complex general matrix to complex upper Hessenberg
@@ -82,7 +81,6 @@ SUBROUTINE CORTH(Nm,N,Low,Igh,Ar,Ai,Ortr,Orti)
   INTEGER i, j, m, N, ii, jj, la, mp, Nm, Igh, kp1, Low
   REAL Ar(Nm,*), Ai(Nm,*), Ortr(*), Orti(*)
   REAL f, g, h, fi, fr, scalee
-  REAL PYTHAG
   !
   !* FIRST EXECUTABLE STATEMENT  CORTH
   la = Igh - 1

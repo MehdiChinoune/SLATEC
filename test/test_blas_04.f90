@@ -1,4 +1,5 @@
 MODULE TEST20_MOD
+  use slatec
   IMPLICIT NONE
 
 CONTAINS
@@ -123,8 +124,6 @@ CONTAINS
       xx(NMAX*INCMAX), y(NMAX), ys(NMAX*INCMAX), yt(NMAX), yy(NMAX*INCMAX), z(2*NMAX)
     REAL g(NMAX)
     LOGICAL ltest(NSUBS)
-    !     .. External Functions ..
-    REAL, EXTERNAL :: R1MACH
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, MAX, MIN
     !     .. Data statements ..
@@ -328,8 +327,6 @@ CONTAINS
       bs(NMAX*NMAX), c(NMAX,NMAX), cc(NMAX*NMAX), cs(NMAX*NMAX), ct(NMAX), w(2*NMAX)
     REAL g(NMAX)
     LOGICAL ltest(NSUBS)
-    !     .. External Functions ..
-    REAL, EXTERNAL :: R1MACH
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, MAX, MIN
     !     .. Data statements ..
@@ -863,7 +860,6 @@ CONTAINS
     LOGICAL ctrana, ctranb, trana, tranb
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, AIMAG, CONJG, MAX, REAL, SQRT
-    REAL CABS1
     !* FIRST EXECUTABLE STATEMENT  CMMCH
     trana = Transa=='T' .OR. Transa=='C'
     tranb = Transb=='T' .OR. Transb=='C'
@@ -1034,7 +1030,6 @@ CONTAINS
     LOGICAL ctran, tran
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, AIMAG, CONJG, MAX, REAL, SQRT
-    REAL CABS1
     !* FIRST EXECUTABLE STATEMENT  CMVCH
     tran = Trans=='T'
     ctran = Trans=='C'
@@ -1292,10 +1287,6 @@ CONTAINS
     CHARACTER :: trans, transs
     !     .. Local Arrays ..
     LOGICAL isame(13)
-    !     .. External Functions ..
-    INTEGER, EXTERNAL :: NUMXER
-    !     .. External Subroutines ..
-    EXTERNAL :: CGBMV, CGEMV
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, MAX, MIN
     !     .. Data statements ..
@@ -1604,10 +1595,6 @@ CONTAINS
     CHARACTER :: tranas, tranbs, transa, transb
     !     .. Local Arrays ..
     LOGICAL isame(13)
-    !     .. External Functions ..
-    INTEGER, EXTERNAL :: NUMXER
-    !     .. External Subroutines ..
-    EXTERNAL :: CGEMM
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, MAX, MIN
     !     .. Data statements ..
@@ -1868,10 +1855,6 @@ CONTAINS
     CHARACTER :: uplo, uplos
     !     .. Local Arrays ..
     LOGICAL isame(13)
-    !     .. External Functions ..
-    INTEGER, EXTERNAL :: NUMXER
-    !     .. External Subroutines ..
-    EXTERNAL :: CHBMV, CHEMV, CHPMV
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, MAX
     !     .. Data statements ..
@@ -2179,10 +2162,6 @@ CONTAINS
     CHARACTER :: side, sides, uplo, uplos
     !     .. Local Arrays ..
     LOGICAL isame(13)
-    !     .. External Functions ..
-    INTEGER, EXTERNAL :: NUMXER
-    !     .. External Subroutines ..
-    EXTERNAL :: CHEMM, CSYMM
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, MAX, MIN
     !     .. Data statements ..
@@ -2437,10 +2416,6 @@ CONTAINS
     CHARACTER :: diag, diags, trans, transs, uplo, uplos
     !     .. Local Arrays ..
     LOGICAL isame(13)
-    !     .. External Functions ..
-    INTEGER, EXTERNAL :: NUMXER
-    !     .. External Subroutines ..
-    EXTERNAL :: CTBMV, CTBSV, CTPMV, CTPSV, CTRMV, CTRSV
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, MAX
     !     .. Data statements ..
@@ -2748,10 +2723,6 @@ CONTAINS
     CHARACTER :: diag, diags, side, sides, tranas, transa, uplo, uplos
     !     .. Local Arrays ..
     LOGICAL isame(13)
-    !     .. External Functions ..
-    INTEGER, EXTERNAL :: NUMXER
-    !     .. External Subroutines ..
-    EXTERNAL :: CTRMM, CTRSM
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, MAX, MIN
     !     .. Data statements ..
@@ -3019,10 +2990,6 @@ CONTAINS
     !     .. Local Arrays ..
     COMPLEX w(1)
     LOGICAL isame(13)
-    !     .. External Functions ..
-    INTEGER, EXTERNAL :: NUMXER
-    !     .. External Subroutines ..
-    EXTERNAL :: CGERC, CGERU
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, CONJG, MAX, MIN
     !* FIRST EXECUTABLE STATEMENT  CCHK42
@@ -3273,10 +3240,6 @@ CONTAINS
     CHARACTER :: trans, transs, uplo, transt, uplos
     !     .. Local Arrays ..
     LOGICAL isame(13)
-    !     .. External Functions ..
-    INTEGER, EXTERNAL :: NUMXER
-    !     .. External Subroutines ..
-    EXTERNAL :: CHERK, CSYRK
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, MAX, MIN
     !     .. Data statements ..
@@ -3572,10 +3535,6 @@ CONTAINS
     !     .. Local Arrays ..
     COMPLEX w(1)
     LOGICAL isame(13)
-    !     .. External Functions ..
-    INTEGER, EXTERNAL :: NUMXER
-    !     .. External Subroutines ..
-    EXTERNAL :: CHER, CHPR
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, CMPLX, CONJG, MAX, REAL
     !     .. Data statements ..
@@ -3830,10 +3789,6 @@ CONTAINS
     CHARACTER :: trans, transs, uplo, transt, uplos
     !     .. Local Arrays ..
     LOGICAL isame(13)
-    !     .. External Functions ..
-    INTEGER, EXTERNAL :: NUMXER
-    !     .. External Subroutines ..
-    EXTERNAL :: CHER2K, CSYR2K
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, MAX, MIN
     !     .. Data statements ..
@@ -4157,10 +4112,6 @@ CONTAINS
     !     .. Local Arrays ..
     COMPLEX w(2)
     LOGICAL isame(13)
-    !     .. External Functions ..
-    INTEGER, EXTERNAL :: NUMXER
-    !     .. External Subroutines ..
-    EXTERNAL :: CHER2, CHPR2
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, CONJG, MAX
     !     .. Data statements ..
@@ -4435,9 +4386,6 @@ CONTAINS
     INTEGER kontrl
     !     .. Local Arrays ..
     COMPLEX a(1,1), x(1), y(1)
-    !     .. External Subroutines ..
-    EXTERNAL :: CGBMV, CGEMV, CGERC, CGERU, CHBMV, CHEMV, CHER, CHER2, &
-      CHKXER, CHPMV, CHPR, CHPR2, CTBMV, CTBSV, CTPMV, CTPSV, CTRMV, CTRSV
     !* FIRST EXECUTABLE STATEMENT  CCHKE2
     CALL XGETF(kontrl)
     IF ( Kprint<=2 ) THEN
@@ -4888,9 +4836,6 @@ CONTAINS
     INTEGER kontrl
     !     .. Local Arrays ..
     COMPLEX a(2,1), b(2,1), c(2,1)
-    !     .. External Subroutines ..
-    EXTERNAL :: CGEMM, CHEMM, CHER2K, CHERK, CHKXER, CSYMM, CSYR2K, &
-      CSYRK, CTRMM, CTRSM
     !* FIRST EXECUTABLE STATEMENT  CCHKE3
     CALL XGETF(kontrl)
     IF ( Kprint<=2 ) THEN
@@ -6083,6 +6028,7 @@ END MODULE TEST20_MOD
 !** TEST20
 PROGRAM TEST20
   USE TEST20_MOD
+  use slatec
   IMPLICIT NONE
   !>
   !***
@@ -6131,8 +6077,6 @@ PROGRAM TEST20
   !   920601  DATE WRITTEN
 
   INTEGER ipass, kprint, lin, lun, nfail
-  !     .. External Functions ..
-  INTEGER, EXTERNAL :: I1MACH
   !* FIRST EXECUTABLE STATEMENT  TEST20
   lun = I1MACH(2)
   lin = I1MACH(1)

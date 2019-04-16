@@ -1,7 +1,6 @@
 !** SDCOR
 SUBROUTINE SDCOR(Dfdy,El,FA,H,Ierror,Impl,Ipvt,Matdim,Miter,Ml,Mu,N,Nde,&
     Nq,T,USERS,Y,Yh,Ywt,Evalfa,Save1,Save2,A,D,Jstate)
-  IMPLICIT NONE
   !>
   !***
   !  Subroutine SDCOR computes corrections to the Y array.
@@ -35,7 +34,7 @@ SUBROUTINE SDCOR(Dfdy,El,FA,H,Ierror,Impl,Ipvt,Matdim,Miter,Ml,Mu,N,Nde,&
 
   INTEGER i, Ierror, iflag, Impl, j, Jstate, Matdim, Miter, Ml, Mu, mw, N, Nde, Nq
   REAL A(Matdim,*), D, Dfdy(Matdim,*), El(13,12), H, Save1(*), &
-    Save2(*), SNRM2, T, Y(*), Yh(N,*), Ywt(*)
+    Save2(*), T, Y(*), Yh(N,*), Ywt(*)
   INTEGER Ipvt(*)
   LOGICAL Evalfa
   !* FIRST EXECUTABLE STATEMENT  SDCOR

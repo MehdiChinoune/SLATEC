@@ -1,6 +1,5 @@
 !** RADFG
 SUBROUTINE RADFG(Ido,Ip,L1,Idl1,Cc,C1,C2,Ch,Ch2,Wa)
-  IMPLICIT NONE
   !>
   !***
   !  Calculate the fast Fourier transform of subvectors of

@@ -1,6 +1,5 @@
 !** DGBMV
 SUBROUTINE DGBMV(Trans,M,N,Kl,Ku,Alpha,A,Lda,X,Incx,Beta,Y,Incy)
-  IMPLICIT NONE
   !>
   !***
   !  Perform one of the matrix-vector operations.
@@ -147,10 +146,6 @@ SUBROUTINE DGBMV(Trans,M,N,Kl,Ku,Alpha,A,Lda,X,Incx,Beta,Y,Incy)
   !     .. Local Scalars ..
   REAL(8) :: temp
   INTEGER i, info, ix, iy, j, jx, jy, k, kup1, kx, ky, lenx, leny
-  !     .. External Functions ..
-  LOGICAL, EXTERNAL :: LSAME
-  !     .. External Subroutines ..
-  EXTERNAL :: XERBLA
   !     .. Intrinsic Functions ..
   INTRINSIC MAX, MIN
   !* FIRST EXECUTABLE STATEMENT  DGBMV

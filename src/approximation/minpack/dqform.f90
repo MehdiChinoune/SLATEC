@@ -1,6 +1,5 @@
 !** DQFORM
 SUBROUTINE DQFORM(M,N,Q,Ldq,Wa)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to DNSQ and DNSQE

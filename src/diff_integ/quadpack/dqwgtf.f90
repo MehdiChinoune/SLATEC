@@ -1,6 +1,5 @@
 !** DQWGTF
 REAL(8) FUNCTION DQWGTF(X,Omega,P2,P3,P4,Integr)
-  IMPLICIT NONE
   !>
   !***
   !  This function subprogram is used together with the

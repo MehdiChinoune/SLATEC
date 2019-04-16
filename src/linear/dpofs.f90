@@ -1,6 +1,5 @@
 !** DPOFS
 SUBROUTINE DPOFS(A,Lda,N,V,Itask,Ind,Work)
-  IMPLICIT NONE
   !>
   !***
   !  Solve a positive definite symmetric system of linear
@@ -113,7 +112,7 @@ SUBROUTINE DPOFS(A,Lda,N,V,Itask,Ind,Work)
 
   !
   INTEGER Lda, N, Itask, Ind, info
-  REAL(8) :: A(Lda,*), V(*), Work(*), D1MACH
+  REAL(8) :: A(Lda,*), V(*), Work(*)
   REAL(8) :: rcond
   CHARACTER(8) :: xern1, xern2
   !* FIRST EXECUTABLE STATEMENT  DPOFS

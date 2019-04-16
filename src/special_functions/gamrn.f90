@@ -1,6 +1,5 @@
 !** GAMRN
 REAL FUNCTION GAMRN(X)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to BSKIN
@@ -55,9 +54,7 @@ REAL FUNCTION GAMRN(X)
   !   920520  Added REFERENCES section.  (WRB)
 
   INTEGER i, i1m11, k, mx, nx
-  INTEGER I1MACH
   REAL fln, rln, s, tol, trm, X, xdmy, xinc, xm, xmin, xp, xsq
-  REAL R1MACH
   !
   REAL, PARAMETER :: gr(12) = [ 1.00000000000000000E+00,-1.56250000000000000E-02, &
     2.56347656250000000E-03,-1.27983093261718750E-03,  1.34351104497909546E-03, &

@@ -1,6 +1,5 @@
 !** STIN
 SUBROUTINE STIN(N,Nelt,Ia,Ja,A,Isym,Soln,Rhs,Iunit,Job)
-  IMPLICIT NONE
   !>
   !***
   !  Read in SLAP Triad Format Linear System.

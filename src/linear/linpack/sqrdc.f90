@@ -1,6 +1,5 @@
 !** SQRDC
 SUBROUTINE SQRDC(X,Ldx,N,P,Qraux,Jpvt,Work,Job)
-  IMPLICIT NONE
   !>
   !***
   !  Use Householder transformations to compute the QR
@@ -113,8 +112,8 @@ SUBROUTINE SQRDC(X,Ldx,N,P,Qraux,Jpvt,Work,Job)
   REAL X(Ldx,*), Qraux(*), Work(*)
   !
   INTEGER j, jp, l, lp1, lup, maxj, pl, pu
-  REAL maxnrm, SNRM2, tt
-  REAL SDOT, nrmxl, t
+  REAL maxnrm, tt
+  REAL nrmxl, t
   LOGICAL negj, swapj
   !
   !* FIRST EXECUTABLE STATEMENT  SQRDC

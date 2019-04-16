@@ -1,6 +1,5 @@
 !** BESK1E
 REAL FUNCTION BESK1E(X)
-  IMPLICIT NONE
   !>
   !***
   !  Compute the exponentially scaled modified (hyperbolic)
@@ -56,8 +55,7 @@ REAL FUNCTION BESK1E(X)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
 
-  REAL BESI1, CSEVL, R1MACH, X, y
-  INTEGER INITS
+  REAL X, y
   INTEGER, SAVE :: ntk1, ntak1, ntak12
   REAL, SAVE :: xmin, xsml
   REAL, PARAMETER :: bk1cs(11) = [ .0253002273389477705E0,-.353155960776544876E0, &

@@ -1,6 +1,5 @@
 !** CFFTB
 SUBROUTINE CFFTB(N,C,Wsave)
-  IMPLICIT NONE
   !>
   !***
   !  Compute the unnormalized inverse of CFFTF.

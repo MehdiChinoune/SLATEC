@@ -1,6 +1,5 @@
 !** ZASYI
 SUBROUTINE ZASYI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Rl,Tol,Elim,Alim)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to ZBESI and ZBESK
@@ -34,8 +33,6 @@ SUBROUTINE ZASYI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Rl,Tol,Elim,Alim)
     ckr, cs1i, cs1r, cs2i, cs2r, czi, czr, dfnu, dki, dkr, dnu2, Elim, ezi, &
     ezr, fdn, Fnu, p1i, p1r, raz, Rl, rtr1, rzi, rzr, s, sgn, sqk, sti, str, &
     s2i, s2r, Tol, tzi, tzr, Yi(N), Yr(N), Zi, Zr
-  REAL(8), EXTERNAL :: ZABS, D1MACH
-  EXTERNAL :: ZEXP, ZSQRT
   REAL(8), PARAMETER :: pi = 3.14159265358979324D0, rtpi = 0.159154943091895336D0
   REAL(8), PARAMETER ::  zeror = 0.0D0, zeroi = 0.0D0, coner = 1.0D0, conei = 0.0D0
   !* FIRST EXECUTABLE STATEMENT  ZASYI

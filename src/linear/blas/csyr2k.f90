@@ -1,6 +1,5 @@
 !** CSYR2K
 SUBROUTINE CSYR2K(Uplo,Trans,N,K,Alpha,A,Lda,B,Ldb,Beta,C,Ldc)
-  IMPLICIT NONE
   !>
   !***
   !  Perform symmetric rank 2k update of a complex symmetric
@@ -149,10 +148,6 @@ SUBROUTINE CSYR2K(Uplo,Trans,N,K,Alpha,A,Lda,B,Ldb,Beta,C,Ldc)
   COMPLEX Alpha, Beta
   !     .. Array Arguments ..
   COMPLEX A(Lda,*), B(Ldb,*), C(Ldc,*)
-  !     .. External Functions ..
-  LOGICAL, EXTERNAL :: LSAME
-  !     .. External Subroutines ..
-  EXTERNAL :: XERBLA
   !     .. Intrinsic Functions ..
   INTRINSIC MAX
   !     .. Local Scalars ..

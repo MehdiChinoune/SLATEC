@@ -1,6 +1,5 @@
 !** CUNI1
 SUBROUTINE CUNI1(Z,Fnu,Kode,N,Y,Nz,Nlast,Fnul,Tol,Elim,Alim)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to CBESI and CBESK
@@ -35,7 +34,7 @@ SUBROUTINE CUNI1(Z,Fnu,Kode,N,Y,Nz,Nlast,Fnul,Tol,Elim,Alim)
   COMPLEX cfn, crsc, cscl, csr(3), css(3), cwrk(16), c1, c2, &
     phi, rz, summ, s1, s2, Y(N), Z, zeta1, zeta2, cy(2)
   REAL Alim, aphi, ascle, bry(3), c2i, c2m, c2r, Elim, fn, Fnu, &
-    Fnul, rs1, Tol, yy, R1MACH
+    Fnul, rs1, Tol, yy
   COMPLEX, PARAMETER :: czero = (0.0E0,0.0E0), cone = (1.0E0,0.0E0)
   !* FIRST EXECUTABLE STATEMENT  CUNI1
   Nz = 0

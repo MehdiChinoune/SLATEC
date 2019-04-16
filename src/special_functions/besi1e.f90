@@ -1,6 +1,5 @@
 !** BESI1E
 REAL FUNCTION BESI1E(X)
-  IMPLICIT NONE
   !>
   !***
   !  Compute the exponentially scaled modified (hyperbolic)
@@ -56,8 +55,7 @@ REAL FUNCTION BESI1E(X)
   !           (WRB)
   !   920618  Removed space from variable names.  (RWC, WRB)
 
-  REAL CSEVL, R1MACH, X, y
-  INTEGER INITS
+  REAL X, y
   INTEGER, SAVE :: nti1, ntai1, ntai12
   REAL, SAVE :: xmin, xsml
   REAL, PARAMETER :: bi1cs(11) = [ -.001971713261099859E0, .40734887667546481E0, &

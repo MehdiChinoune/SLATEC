@@ -1,6 +1,5 @@
 !** DOGLEG
 SUBROUTINE DOGLEG(N,R,Lr,Diag,Qtb,Delta,X,Wa1,Wa2)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to SNSQ and SNSQE
@@ -75,7 +74,6 @@ SUBROUTINE DOGLEG(N,R,Lr,Diag,Qtb,Delta,X,Wa1,Wa2)
   REAL R(Lr), Diag(*), Qtb(*), X(*), Wa1(*), Wa2(*)
   INTEGER i, j, jj, jp1, k, l
   REAL alpha, bnorm, epsmch, gnorm, qnorm, sgnorm, summ, temp
-  REAL R1MACH, ENORM
   REAL, PARAMETER :: one = 1.0E0, zero = 0.0E0
   !* FIRST EXECUTABLE STATEMENT  DOGLEG
   epsmch = R1MACH(4)

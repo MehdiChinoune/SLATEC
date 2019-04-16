@@ -1,6 +1,5 @@
 !** HKSEQ
 SUBROUTINE HKSEQ(X,M,H,Ierr)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to BSKIN
@@ -37,11 +36,9 @@ SUBROUTINE HKSEQ(X,M,H,Ierr)
   !   920528  DESCRIPTION and REFERENCES sections revised.  (WRB)
 
   INTEGER i, Ierr, j, k, M, mx, nx
-  INTEGER I1MACH
   REAL fk, fln, fn, fnp, H(*), hrx, rln, rxsq, r1m5, s, slope, &
     t, tk, trm(22), trmh(25), trmr(25), tst, u(25), v(25), wdtol, X, xdmy, xh, &
     xinc, xm, xmin, yint
-  REAL R1MACH
   !-----------------------------------------------------------------------
   !             SCALED BERNOULLI NUMBERS 2.0*B(2K)*(1-2**(-2K))
   !-----------------------------------------------------------------------

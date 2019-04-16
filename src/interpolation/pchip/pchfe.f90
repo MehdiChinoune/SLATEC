@@ -1,6 +1,5 @@
 !** PCHFE
 SUBROUTINE PCHFE(N,X,F,D,Incfd,Skip,Ne,Xe,Fe,Ierr)
-  IMPLICIT NONE
   !>
   !***
   !  Evaluate a piecewise cubic Hermite function at an array of

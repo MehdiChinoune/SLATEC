@@ -1,7 +1,6 @@
 !** DXADD
 SUBROUTINE DXADD(X,Ix,Y,Iy,Z,Iz,Ierror)
   USE DXBLK ,ONLY: RADixx, RADixl, RAD2l, L
-  IMPLICIT NONE
   !>
   !***
   !  To provide double-precision floating-point arithmetic

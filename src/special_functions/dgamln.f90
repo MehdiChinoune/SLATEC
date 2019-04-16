@@ -1,6 +1,5 @@
 !** DGAMLN
 REAL(8) FUNCTION DGAMLN(Z,Ierr)
-  IMPLICIT NONE
   !>
   !***
   !  Compute the logarithm of the Gamma function
@@ -55,8 +54,8 @@ REAL(8) FUNCTION DGAMLN(Z,Ierr)
   !   921215  DGAMLN defined for Z negative.  (WRB)
 
   REAL(8) :: fln, fz, rln, s, tlg, trm, tst, t1, wdtol, Z, zdmy, zinc, zm, &
-    zmin, zp, zsq, D1MACH
-  INTEGER i, Ierr, i1m, k, mz, nz, I1MACH
+    zmin, zp, zsq
+  INTEGER i, Ierr, i1m, k, mz, nz
   !           LNGAMMA(N), N=1,100
   REAL(8), PARAMETER :: gln(100) = [ 0.00000000000000000D+00, 0.00000000000000000D+00, &
     6.93147180559945309D-01, 1.79175946922805500D+00, 3.17805383034794562D+00, &

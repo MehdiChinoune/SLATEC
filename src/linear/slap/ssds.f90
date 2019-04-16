@@ -1,6 +1,5 @@
 !** SSDS
 SUBROUTINE SSDS(N,Nelt,Ia,Ja,A,Isym,Dinv)
-  IMPLICIT NONE
   !>
   !***
   !  Diagonal Scaling Preconditioner SLAP Set Up.

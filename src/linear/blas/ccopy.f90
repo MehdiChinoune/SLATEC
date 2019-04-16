@@ -1,6 +1,5 @@
 !** CCOPY
 SUBROUTINE CCOPY(N,Cx,Incx,Cy,Incy)
-  IMPLICIT NONE
   !>
   !***
   !  Copy a vector.

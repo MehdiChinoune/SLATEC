@@ -1,6 +1,5 @@
 !** CASYI
 SUBROUTINE CASYI(Z,Fnu,Kode,N,Y,Nz,Rl,Tol,Elim,Alim)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to CBESI and CBESK
@@ -30,7 +29,7 @@ SUBROUTINE CASYI(Z,Fnu,Kode,N,Y,Nz,Rl,Tol,Elim,Alim)
   INTEGER i, ib, il, inu, j, jl, k, Kode, koded, m, N, nn, Nz
   COMPLEX ak1, ck, cs1, cs2, cz, dk, ez, p1, rz, s2, Y(N), Z
   REAL aa, acz, aez, ak, Alim, arg, arm, atol, az, bb, bk, dfnu, &
-    dnu2, Elim, fdn, Fnu, Rl, rtr1, s, sgn, sqk, Tol, x, yy, R1MACH
+    dnu2, Elim, fdn, Fnu, Rl, rtr1, s, sgn, sqk, Tol, x, yy
   REAL, PARAMETER ::  pi = 3.14159265358979324E0, rtpi = 0.159154943091895336E0
   COMPLEX, PARAMETER ::  czero = (0.0E0,0.0E0), cone = (1.0E0,0.0E0)
   !* FIRST EXECUTABLE STATEMENT  CASYI

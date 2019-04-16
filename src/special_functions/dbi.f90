@@ -1,6 +1,5 @@
 !** DBI
 REAL(8) FUNCTION DBI(X)
-  IMPLICIT NONE
   !>
   !***
   !  Evaluate the Bairy function (the Airy function of the
@@ -58,8 +57,7 @@ REAL(8) FUNCTION DBI(X)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
 
   REAL eta
-  INTEGER INITDS
-  REAL(8) :: X, theta, xm, z, D1MACH, DCSEVL, DBIE
+  REAL(8) :: X, theta, xm, z
   INTEGER, SAVE :: nbif, nbig, nbif2, nbig2
   REAL(8), SAVE :: x3sml, xmax
   REAL(8), PARAMETER :: bifcs(13) = [ -.16730216471986649483537423928176D-1, &

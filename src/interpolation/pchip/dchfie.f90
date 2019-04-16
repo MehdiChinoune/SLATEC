@@ -1,6 +1,5 @@
 !** DCHFIE
 REAL(8) FUNCTION DCHFIE(X1,X2,F1,F2,D1,D2,A,B)
-  IMPLICIT NONE
   !>
   !***
   !  Evaluates integral of a single cubic for DPCHIA

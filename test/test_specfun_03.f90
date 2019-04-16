@@ -1,4 +1,5 @@
 MODULE TEST04_MOD
+  use slatec
   IMPLICIT NONE
 
 CONTAINS
@@ -47,11 +48,7 @@ CONTAINS
 
     INTEGER i, Lun, Kprint, Ipass
     REAL errmax, errtol, abserr, relerr
-    REAL, EXTERNAL :: R1MACH
     COMPLEX w(48)
-    COMPLEX, EXTERNAL :: C0LGMC, CACOS, CACOSH, CASIN, CASINH, CATAN, CATAN2, &
-      CATANH, CBETA, CCBRT, CCOSH, CCOT, CEXPRL, CGAMMA, CGAMR, CLBETA, CLNGAM, &
-      CLNREL, CLOG10, CPSI, CSINH, CTAN, CTANH
     !
     !     Constants to be used
     !
@@ -162,6 +159,7 @@ END MODULE TEST04_MOD
 !** TEST04
 PROGRAM TEST04
   USE TEST04_MOD
+  use slatec
   IMPLICIT NONE
   !>
   !***
@@ -211,8 +209,6 @@ PROGRAM TEST04
   !   890618  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900524  Cosmetic changes to code.  (WRB)
-
-  INTEGER I1MACH
   INTEGER ipass, kprint, lin, lun, nfail
   !* FIRST EXECUTABLE STATEMENT  TEST04
   lun = I1MACH(2)

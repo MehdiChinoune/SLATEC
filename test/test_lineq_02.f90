@@ -1,4 +1,5 @@
 MODULE TEST22_MOD
+  use slatec
   IMPLICIT NONE
 
 CONTAINS
@@ -54,7 +55,7 @@ CONTAINS
 
     INTEGER Kprint, Lun
     REAL at(5,4), abe(5,7), abet(5,7), b(4), bt(4), c(4), &
-      work(35), r, delx, delmax, signn, R1MACH
+      work(35), r, delx, delmax, signn
     INTEGER lda, n, ml, mu, ind, iwork(4), Nerr, i, j, j1, j2, jd, &
       mlp, k, kcase, kprog
     REAL, PARAMETER :: a(4,4) = RESHAPE( [ 5.0E0, 4.0E0, 1.0E0, 1.0E0, &
@@ -237,8 +238,7 @@ CONTAINS
     !           editorial changes.  (RWC)
 
     INTEGER Kprint, Lun
-    REAL(8) :: at(5,4), abe(5,7), abet(5,7), b(4), bt(4), &
-      c(4), work(35), signn, D1MACH
+    REAL(8) :: at(5,4), abe(5,7), abet(5,7), b(4), bt(4), c(4), work(35), signn
     REAL r, delx, delmax
     INTEGER lda, n, ml, mu, ind, iwork(4), Nerr, i, j, j1, j2, jd, &
       mlp, k, kcase, kprog
@@ -420,7 +420,7 @@ CONTAINS
     !           editorial changes.  (RWC)
 
     INTEGER Kprint, Lun
-    REAL r, delx, delmax, R1MACH
+    REAL r, delx, delmax
     COMPLEX at(5,4), abe(5,7), abet(5,7), bt(4), work(35)
     INTEGER lda, n, ml, mu, ind, iwork(4), Nerr, i, j, j1, j2, jd, &
       mlp, k, kcase, kprog
@@ -539,6 +539,7 @@ END MODULE TEST22_MOD
 !** TEST22
 PROGRAM TEST22
   USE TEST22_MOD
+  use slatec
   IMPLICIT NONE
   !>
   !***
@@ -590,8 +591,6 @@ PROGRAM TEST22
   !   890618  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900524  Cosmetic changes to code.  (WRB)
-
-  INTEGER I1MACH
   INTEGER kprint, lin, lun, nerr, nfail
   !* FIRST EXECUTABLE STATEMENT  TEST22
   lun = I1MACH(2)

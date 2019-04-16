@@ -1,4 +1,5 @@
 MODULE TEST42_MOD
+  use slatec
   IMPLICIT NONE
 
 CONTAINS
@@ -28,7 +29,6 @@ CONTAINS
     !           values of KPRINT.  (WRB)
 
     INTEGER kontrl
-    REAL(8) :: D1MACH
     INTEGER i, ierr, Ipass, Kprint, Lun, n
     REAL(8) :: a, ans, b, del, rn1, sqb, tol, tol1, x(501), xint, y(501)
     LOGICAL fatal
@@ -242,10 +242,6 @@ CONTAINS
     INTEGER ierr, kontrl
     REAL(8) :: a, ans, b, cor, err, req, tol
     LOGICAL fatal
-    !     .. External Functions ..
-    REAL(8), EXTERNAL :: D1MACH
-    !     .. External Subroutines ..
-    EXTERNAL :: DGAUS8, XGETF, XSETF
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, ATAN, EXP, SQRT
     !* FIRST EXECUTABLE STATEMENT  DQG8TS
@@ -391,10 +387,6 @@ CONTAINS
     INTEGER ierr, kontrl, nfct
     REAL(8) :: a, ans, b, cor, err, req, tol
     LOGICAL fatal
-    !     .. External Functions ..
-    REAL(8), EXTERNAL :: D1MACH
-    !     .. External Subroutines ..
-    EXTERNAL :: DQNC79, XGETF, XSETF
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, MAX, SQRT
     !* FIRST EXECUTABLE STATEMENT  DQN79Q
@@ -569,6 +561,7 @@ END MODULE TEST42_MOD
 !** TEST42
 PROGRAM TEST42
   USE TEST42_MOD
+  use slatec
   IMPLICIT NONE
   !>
   !***
@@ -619,8 +612,6 @@ PROGRAM TEST42
   !   890618  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900524  Cosmetic changes to code.  (WRB)
-
-  INTEGER I1MACH
   INTEGER ipass, kprint, lin, lun, nfail
   !* FIRST EXECUTABLE STATEMENT  TEST42
   lun = I1MACH(2)

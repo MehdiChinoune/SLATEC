@@ -1,6 +1,5 @@
 !** FUNDOC
 SUBROUTINE FUNDOC
-  IMPLICIT NONE
   !>
   !***
   !  Documentation for FNLIB, a collection of routines for

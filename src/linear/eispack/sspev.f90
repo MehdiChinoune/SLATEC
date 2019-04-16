@@ -1,6 +1,5 @@
 !** SSPEV
 SUBROUTINE SSPEV(A,N,E,V,Ldv,Work,Job,Info)
-  IMPLICIT NONE
   !>
   !***
   !  Compute the eigenvalues and, optionally, the eigenvectors

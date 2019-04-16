@@ -1,6 +1,5 @@
 !** DGAMRN
 REAL(8) FUNCTION DGAMRN(X)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to DBSKIN
@@ -56,9 +55,7 @@ REAL(8) FUNCTION DGAMRN(X)
   !   920520  Added REFERENCES section.  (WRB)
 
   INTEGER i, i1m11, k, mx, nx
-  INTEGER I1MACH
   REAL(8) :: fln, rln, s, tol, trm, X, xdmy, xinc, xm, xmin, xp, xsq
-  REAL(8) :: D1MACH
   !
   REAL(8), PARAMETER :: gr(12) = [ 1.00000000000000000D+00, -1.56250000000000000D-02, &
     2.56347656250000000D-03, -1.27983093261718750D-03, 1.34351104497909546D-03, &

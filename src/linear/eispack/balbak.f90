@@ -1,6 +1,5 @@
 !** BALBAK
 SUBROUTINE BALBAK(Nm,N,Low,Igh,Scalee,M,Z)
-  IMPLICIT NONE
   !>
   !***
   !  Form the eigenvectors of a real general matrix from the

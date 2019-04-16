@@ -1,6 +1,5 @@
 !** SCOPY
 SUBROUTINE SCOPY(N,Sx,Incx,Sy,Incy)
-  IMPLICIT NONE
   !>
   !***
   !  Copy a vector.

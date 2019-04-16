@@ -1,6 +1,5 @@
 !** CBESY
 SUBROUTINE CBESY(Z,Fnu,Kode,N,Cy,Nz,Cwrk,Ierr)
-  IMPLICIT NONE
   !>
   !***
   !  Compute a sequence of the Bessel functions Y(a,z) for
@@ -162,9 +161,9 @@ SUBROUTINE CBESY(Z,Fnu,Kode,N,Cy,Nz,Cwrk,Ierr)
   !   920811  Prologue revised.  (DWL)
 
   !
-  INTEGER i, Ierr, k, Kode, k1, k2, N, Nz, nz1, nz2, I1MACH
+  INTEGER i, Ierr, k, Kode, k1, k2, N, Nz, nz1, nz2
   COMPLEX Cwrk(N), Cy(N), c1, c2, ex, hci, Z, zu, zv
-  REAL elim, ey, Fnu, r1, r2, tay, xx, yy, R1MACH, r1m5, ascle, &
+  REAL elim, ey, Fnu, r1, r2, tay, xx, yy, r1m5, ascle, &
     rtol, atol, tol, aa, bb
   !* FIRST EXECUTABLE STATEMENT  CBESY
   xx = REAL(Z)

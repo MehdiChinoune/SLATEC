@@ -1,6 +1,5 @@
 !** CHER2
 SUBROUTINE CHER2(Uplo,N,Alpha,X,Incx,Y,Incy,A,Lda)
-  IMPLICIT NONE
   !>
   !***
   !  Perform Hermitian rank 2 update of a complex Hermitian
@@ -122,10 +121,6 @@ SUBROUTINE CHER2(Uplo,N,Alpha,X,Incx,Y,Incy,A,Lda)
   !     .. Local Scalars ..
   COMPLEX temp1, temp2
   INTEGER i, info, ix, iy, j, jx, jy, kx, ky
-  !     .. External Functions ..
-  LOGICAL, EXTERNAL :: LSAME
-  !     .. External Subroutines ..
-  EXTERNAL :: XERBLA
   !     .. Intrinsic Functions ..
   INTRINSIC CONJG, MAX, REAL
   !* FIRST EXECUTABLE STATEMENT  CHER2

@@ -1,6 +1,5 @@
 !** DBKISR
 SUBROUTINE DBKISR(X,N,Summ,Ierr)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to DBSKIN
@@ -30,9 +29,7 @@ SUBROUTINE DBKISR(X,N,Summ,Ierr)
   !   910722  Updated AUTHOR section.  (ALS)
 
   INTEGER i, Ierr, k, kk, kkn, k1, N, np
-  REAL(8) :: ak, atol, bk, fk, fn, hx, hxs, pol, pr, &
-    Summ, tkp, tol, trm, X, xln
-  REAL(8) :: DPSIXN, D1MACH
+  REAL(8) :: ak, atol, bk, fk, fn, hx, hxs, pol, pr, Summ, tkp, tol, trm, X, xln
   !
   REAL(8), PARAMETER :: c(2) = [ 1.57079632679489662D+00, 1.0D0 ]
   !* FIRST EXECUTABLE STATEMENT  DBKISR

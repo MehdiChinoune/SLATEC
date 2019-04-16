@@ -1,6 +1,5 @@
 !** S1MERG
 SUBROUTINE S1MERG(Tcos,I1,M1,I2,M2,I3)
-  IMPLICIT NONE
   !>
   !***
   !  Merge two strings of ascending real numbers.

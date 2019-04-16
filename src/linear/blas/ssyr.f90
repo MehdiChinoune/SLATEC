@@ -1,6 +1,5 @@
 !** SSYR
 SUBROUTINE SSYR(Uplo,N,Alpha,X,Incx,A,Lda)
-  IMPLICIT NONE
   !>
   !***
   !  Perform symmetric rank 1 update of a real symmetric matrix.
@@ -107,10 +106,6 @@ SUBROUTINE SSYR(Uplo,N,Alpha,X,Incx,A,Lda)
   !     .. Local Scalars ..
   REAL temp
   INTEGER i, info, ix, j, jx, kx
-  !     .. External Functions ..
-  LOGICAL, EXTERNAL :: LSAME
-  !     .. External Subroutines ..
-  EXTERNAL :: XERBLA
   !     .. Intrinsic Functions ..
   INTRINSIC MAX
   !* FIRST EXECUTABLE STATEMENT  SSYR

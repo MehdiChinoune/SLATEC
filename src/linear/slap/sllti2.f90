@@ -1,6 +1,5 @@
 !** SLLTI2
 SUBROUTINE SLLTI2(N,B,X,Nel,Iel,Jel,El,Dinv)
-  IMPLICIT NONE
   !>
   !***
   !  SLAP Backsolve routine for LDL' Factorization.

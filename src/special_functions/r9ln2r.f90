@@ -1,6 +1,5 @@
 !** R9LN2R
 REAL FUNCTION R9LN2R(X)
-  IMPLICIT NONE
   !>
   !***
   !  Evaluate LOG(1+X) from second order relative accuracy so
@@ -46,8 +45,7 @@ REAL FUNCTION R9LN2R(X)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
 
-  REAL CSEVL, eps, R1MACH, sqeps, txbig, txmax, X
-  INTEGER INITS
+  REAL eps, sqeps, txbig, txmax, X
   INTEGER, SAVE :: ntln21, ntln22
   REAL, SAVE :: xmin, xbig, xmax
   REAL, PARAMETER :: ln21cs(26) = [ .18111962513478810E0,-.15627123192872463E0, &

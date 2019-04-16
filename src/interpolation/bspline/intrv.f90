@@ -1,6 +1,5 @@
 !** INTRV
 SUBROUTINE INTRV(Xt,Lxt,X,Ilo,Ileft,Mflag)
-  IMPLICIT NONE
   !>
   !***
   !  Compute the largest integer ILEFT in 1 .LE. ILEFT .LE. LXT

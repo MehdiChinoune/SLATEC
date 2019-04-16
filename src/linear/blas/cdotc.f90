@@ -1,6 +1,5 @@
 !** CDOTC
 COMPLEX FUNCTION CDOTC(N,Cx,Incx,Cy,Incy)
-  IMPLICIT NONE
   !>
   !***
   !  Dot product of two complex vectors using the complex

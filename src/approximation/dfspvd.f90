@@ -1,6 +1,5 @@
 !** DFSPVD
 SUBROUTINE DFSPVD(T,K,X,Ileft,Vnikx,Nderiv)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to DFC

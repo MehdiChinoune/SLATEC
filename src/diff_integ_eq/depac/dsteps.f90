@@ -2,7 +2,6 @@
 SUBROUTINE DSTEPS(DF,Neqn,Y,X,H,Eps,Wt,Start,Hold,K,Kold,Crash,Phi,P,Yp,&
     Psi,Alpha,Beta,Sig,V,W,G,Phase1,Ns,Nornd,Ksteps,Twou,&
     Fouru,Xold,Kprev,Ivc,Iv,Kgi,Gi,Rpar,Ipar)
-  IMPLICIT NONE
   !>
   !***
   !  Integrate a system of first order ordinary differential
@@ -185,7 +184,7 @@ SUBROUTINE DSTEPS(DF,Neqn,Y,X,H,Eps,Wt,Start,Hold,K,Kold,Crash,Phi,P,Yp,&
   INTEGER Iv(10), Ivc, jv, Kgi, Kprev
   INTEGER i, ifail, im1, ip1, Ipar(*), iq, j, K, km1, km2, knew, &
     Kold, kp1, kp2, Ksteps, l, limit1, limit2, Neqn, Ns, nsm2, nsp1, nsp2
-  REAL(8) :: absh, Alpha(12), Beta(12), big, D1MACH, Eps, erk, erkm1, &
+  REAL(8) :: absh, Alpha(12), Beta(12), big, Eps, erk, erkm1, &
     erkm2, erkp1, err, Fouru, G(13), Gi(11), H, hnew, &
     Hold, P(*), p5eps, Phi(Neqn,16), Psi(12), r, reali, realns, rho, &
     round, Rpar(*), Sig(13), tau, temp1, temp2, temp3, &

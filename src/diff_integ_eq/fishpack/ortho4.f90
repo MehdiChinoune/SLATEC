@@ -1,7 +1,6 @@
 !** ORTHO4
 SUBROUTINE ORTHO4(Usol,Idmn,Zn,Zm,Pertrb)
   USE SPL4
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to SEPX4

@@ -1,6 +1,5 @@
 !** DGBFA
 SUBROUTINE DGBFA(Abd,Lda,N,Ml,Mu,Ipvt,Info)
-  IMPLICIT NONE
   !>
   !***
   !  Factor a band matrix using Gaussian elimination.
@@ -109,7 +108,7 @@ SUBROUTINE DGBFA(Abd,Lda,N,Ml,Mu,Ipvt,Info)
   REAL(8) :: Abd(Lda,*)
   !
   REAL(8) :: t
-  INTEGER i, IDAMAX, i0, j, ju, jz, j0, j1, k, kp1, l, lm, m, mm, nm1
+  INTEGER i, i0, j, ju, jz, j0, j1, k, kp1, l, lm, m, mm, nm1
   !
   !* FIRST EXECUTABLE STATEMENT  DGBFA
   m = Ml + Mu + 1

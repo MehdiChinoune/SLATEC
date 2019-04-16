@@ -1,6 +1,5 @@
 !** EISDOC
 SUBROUTINE EISDOC
-  IMPLICIT NONE
   !>
   !***
   !  Documentation for EISPACK, a collection of subprograms for

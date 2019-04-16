@@ -1,6 +1,5 @@
 !** SPPERM
 SUBROUTINE SPPERM(X,N,Iperm,Ier)
-  IMPLICIT NONE
   !>
   !***
   !  Rearrange a given array according to a prescribed

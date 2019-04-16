@@ -1,6 +1,5 @@
 !** DNRM2
 REAL(8) FUNCTION DNRM2(N,Dx,Incx)
-  IMPLICIT NONE
   !>
   !***
   !  Compute the Euclidean length (L2 norm) of a vector.

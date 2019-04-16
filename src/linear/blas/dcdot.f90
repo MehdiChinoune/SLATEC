@@ -1,6 +1,5 @@
 !** DCDOT
 SUBROUTINE DCDOT(N,Fm,Cx,Incx,Cy,Incy,Dcr,Dci)
-  IMPLICIT NONE
   !>
   !***
   !  Compute the inner product of two vectors with extended

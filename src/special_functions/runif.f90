@@ -1,6 +1,5 @@
 !** RUNIF
 REAL FUNCTION RUNIF(T,N)
-  IMPLICIT NONE
   !>
   !***
   !  Generate a uniformly distributed random number.
@@ -64,9 +63,8 @@ REAL FUNCTION RUNIF(T,N)
   !   910819  Added EXTERNAL statement for RAND due to problem on IBM
   !           RS 6000.  (WRB)
 
-  REAL dummy, RAND, T(*)
+  REAL dummy, T(*)
   INTEGER i, j, N
-  EXTERNAL :: RAND
   REAL, SAVE :: floatn
   INTEGER :: nold = -1
   !* FIRST EXECUTABLE STATEMENT  RUNIF

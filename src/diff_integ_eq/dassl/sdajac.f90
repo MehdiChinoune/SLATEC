@@ -1,7 +1,6 @@
 !** SDAJAC
 SUBROUTINE SDAJAC(Neq,X,Y,Yprime,Delta,Cj,H,Ier,Wt,E,Wm,Iwm,RES,Ires,&
     Uround,JAC,Rpar,Ipar,Ntemp)
-  IMPLICIT NONE
   !>
   !***
   !  Compute the iteration matrix for SDASSL and form the
@@ -65,8 +64,6 @@ SUBROUTINE SDAJAC(Neq,X,Y,Yprime,Delta,Cj,H,Ier,Wt,E,Wm,Iwm,RES,Ires,&
   INTEGER Neq, Ier, Iwm(*), Ires, Ipar(*), Ntemp
   REAL X, Y(*), Yprime(*), Delta(*), Cj, H, Wt(*), E(*), Wm(*), Uround, Rpar(*)
   EXTERNAL :: RES, JAC
-  !
-  EXTERNAL :: SGBFA, SGEFA
   !
   INTEGER i, i1, i2, ii, ipsave, isave, j, k, l, lenpd, mba, mband, meb1, meband, &
     msave, mtype, n, npdm1, nrow

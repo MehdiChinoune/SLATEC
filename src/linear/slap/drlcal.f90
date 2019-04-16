@@ -1,6 +1,5 @@
 !** DRLCAL
 SUBROUTINE DRLCAL(N,Kmp,Ll,Maxl,V,Q,Rl,Snormw,Prod,R0nrm)
-  IMPLICIT NONE
   !>
   !***
   !  Internal routine for DGMRES.
@@ -89,8 +88,6 @@ SUBROUTINE DRLCAL(N,Kmp,Ll,Maxl,V,Q,Rl,Snormw,Prod,R0nrm)
   !     .. Local Scalars ..
   REAL(8) :: c, s, tem
   INTEGER i, i2, ip1, k, llm1, llp1
-  !     .. External Subroutines ..
-  EXTERNAL :: DCOPY, DSCAL
   !* FIRST EXECUTABLE STATEMENT  DRLCAL
   IF ( Kmp==Maxl ) THEN
     !

@@ -1,6 +1,5 @@
 !** ZACAI
 SUBROUTINE ZACAI(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Rl,Tol,Elim,Alim)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to ZAIRY
@@ -38,7 +37,6 @@ SUBROUTINE ZACAI(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Rl,Tol,Elim,Alim)
   REAL(8) :: Alim, arg, ascle, az, csgnr, csgni, cspnr, cspni, &
     c1r, c1i, c2r, c2i, cyr(2), cyi(2), dfnu, Elim, fmr, &
     Fnu, Rl, sgn, Tol, yy, Yr(N), Yi(N), Zr, Zi, znr, zni
-  REAL(8), EXTERNAL :: D1MACH, ZABS
   REAL(8), PARAMETER :: pi = 3.14159265358979324D0
   !* FIRST EXECUTABLE STATEMENT  ZACAI
   Nz = 0

@@ -1,6 +1,5 @@
 !** DASUM
 REAL(8) FUNCTION DASUM(N,Dx,Incx)
-  IMPLICIT NONE
   !>
   !***
   !  Compute the sum of the magnitudes of the elements of a

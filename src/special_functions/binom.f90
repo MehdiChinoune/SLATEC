@@ -1,6 +1,5 @@
 !** BINOM
 REAL FUNCTION BINOM(N,M)
-  IMPLICIT NONE
   !>
   !***
   !  Compute the binomial coefficients.
@@ -33,7 +32,7 @@ REAL FUNCTION BINOM(N,M)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
 
-  REAL ALNREL, corr, R1MACH, R9LGMC, xk, xn, xnk
+  REAL corr, xk, xn, xnk
   INTEGER i, k, M, N
   REAL, SAVE :: bilnmx, fintmx
   REAL, PARAMETER :: sq2pil = 0.91893853320467274E0

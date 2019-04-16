@@ -1,6 +1,5 @@
 !** MC20AD
 SUBROUTINE MC20AD(Nc,Maxa,A,Inum,Jptr,Jnum,Jdisp)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to DSPLP

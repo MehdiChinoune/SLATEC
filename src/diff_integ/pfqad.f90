@@ -1,6 +1,5 @@
 !** PFQAD
 SUBROUTINE PFQAD(F,Ldc,C,Xi,Lxi,K,Id,X1,X2,Tol,Quad,Ierr)
-  IMPLICIT NONE
   !>
   !***
   !  Compute the integral on (X1,X2) of a product of a function
@@ -79,8 +78,7 @@ SUBROUTINE PFQAD(F,Ldc,C,Xi,Lxi,K,Id,X1,X2,Tol,Quad,Ierr)
   !
   INTEGER Id, Ierr, iflg, ilo, il1, il2, inppv, K, Ldc, left, Lxi, mf1, mf2
   REAL a, aa, ans, b, bb, C(Ldc,*), q, Quad, ta, tb, Tol, wtol, Xi(*), X1, X2
-  REAL R1MACH, F
-  EXTERNAL :: F
+  REAL, EXTERNAL :: F
   !
   !* FIRST EXECUTABLE STATEMENT  PFQAD
   Ierr = 1

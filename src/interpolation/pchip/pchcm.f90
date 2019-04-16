@@ -1,6 +1,5 @@
 !** PCHCM
 SUBROUTINE PCHCM(N,X,F,D,Incfd,Skip,Ismon,Ierr)
-  IMPLICIT NONE
   !>
   !***
   !  Check a cubic Hermite function for monotonicity.
@@ -156,7 +155,6 @@ SUBROUTINE PCHCM(N,X,F,D,Incfd,Skip,Ismon,Ierr)
   !
   INTEGER i, nseg
   REAL delta
-  INTEGER CHFCM
   !
   !  VALIDITY-CHECK ARGUMENTS.
   !

@@ -1,6 +1,5 @@
 !** R1MACH
 REAL FUNCTION R1MACH(I)
-  IMPLICIT NONE
   !>
   !***
   !  Return floating point machine dependent constants.

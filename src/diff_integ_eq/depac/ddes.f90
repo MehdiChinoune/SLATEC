@@ -3,7 +3,6 @@ SUBROUTINE DDES(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Ypout,Yp,Yy,Wt,P,Phi,&
     Alpha,Beta,Psi,V,W,Sig,G,Gi,H,Eps,X,Xold,Hold,Told,Delsgn,&
     Tstop,Twou,Fouru,Start,Phase1,Nornd,Stiff,Intout,Ns,Kord,&
     Kold,Init,Ksteps,Kle4,Iquit,Kprev,Ivc,Iv,Kgi,Rpar,Ipar)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to DDEABM
@@ -38,7 +37,7 @@ SUBROUTINE DDES(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Ypout,Yp,Yy,Wt,P,Phi,&
   !
   INTEGER Idid, Info(15), Init, Ipar(*), Iquit, Iv(10), Ivc, k, Kgi, Kle4, &
     Kold, Kord, Kprev, Ksteps, l, ltol, natolp, Neq, nrtolp, Ns
-  REAL(8) :: a, absdel, Alpha(12), Atol(*), Beta(12), D1MACH, del, &
+  REAL(8) :: a, absdel, Alpha(12), Atol(*), Beta(12), del, &
     Delsgn, dt, Eps, Fouru, G(13), Gi(11), H, ha, Hold, P(*), &
     Phi(Neq,16), Psi(12), Rpar(*), Rtol(*), Sig(13), T, Told, Tout, Tstop, &
     Twou, u, V(12), W(12), Wt(*), X, Xold, Y(*), Yp(*), Ypout(*), Yy(*)

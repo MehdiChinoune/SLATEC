@@ -1,6 +1,5 @@
 !** D9CHU
 REAL(8) FUNCTION D9CHU(A,B,Z)
-  IMPLICIT NONE
   !>
   !***
   !  Evaluate for large Z  Z**A * U(A,B,Z) where U is the
@@ -41,7 +40,7 @@ REAL(8) FUNCTION D9CHU(A,B,Z)
 
   INTEGER i, j
   REAL(8) :: A, B, Z, aa(4), bb(4), ab, anbn, bp, ct1, ct2, &
-    ct3, c2, d1z, g1, g2, g3, sab, x2i1, D1MACH
+    ct3, c2, d1z, g1, g2, g3, sab, x2i1
   REAL(8), SAVE :: eps, sqeps
   LOGICAL :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  D9CHU

@@ -1,6 +1,5 @@
 !** DPOFA
 SUBROUTINE DPOFA(A,Lda,N,Info)
-  IMPLICIT NONE
   !>
   !***
   !  Factor a real symmetric positive definite matrix.
@@ -68,7 +67,7 @@ SUBROUTINE DPOFA(A,Lda,N,Info)
   INTEGER Lda, N, Info
   REAL(8) :: A(Lda,*)
   !
-  REAL(8) :: DDOT, t
+  REAL(8) :: t
   REAL(8) :: s
   INTEGER j, jm1, k
   !* FIRST EXECUTABLE STATEMENT  DPOFA

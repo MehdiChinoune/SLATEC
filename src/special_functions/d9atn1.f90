@@ -1,6 +1,5 @@
 !** D9ATN1
 REAL(8) FUNCTION D9ATN1(X)
-  IMPLICIT NONE
   !>
   !***
   !  Evaluate DATAN(X) from first order relative accuracy so
@@ -43,8 +42,7 @@ REAL(8) FUNCTION D9ATN1(X)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
 
-  INTEGER INITDS
-  REAL(8) :: X, y, eps, DCSEVL, D1MACH
+  REAL(8) :: X, y, eps
   INTEGER, SAVE :: ntatn1
   REAL(8), SAVE :: xsml, xbig, xmax
   REAL(8), PARAMETER :: atn1cs(40) = [ -.3283997535355202356907939922990D-1, &

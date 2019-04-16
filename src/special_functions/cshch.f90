@@ -1,6 +1,5 @@
 !** CSHCH
 SUBROUTINE CSHCH(Z,Csh,Cch)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to CBESH and CBESK

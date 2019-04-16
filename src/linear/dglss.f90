@@ -1,6 +1,5 @@
 !** DGLSS
 SUBROUTINE DGLSS(A,Mda,M,N,B,Mdb,Nb,Rnorm,Work,Lw,Iwork,Liw,Info)
-  IMPLICIT NONE
   !>
   !***
   !  Solve a linear least squares problems by performing a QR

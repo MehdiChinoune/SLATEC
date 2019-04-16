@@ -1,7 +1,6 @@
 !** DQDOTI
 REAL(8) FUNCTION DQDOTI(N,Db,Qc,Dx,Incx,Dy,Incy)
   USE MPCOM, MPB => B, MPT => T, MPM => M, MPLun => LUN, MPMxr => MXR, MPR => R
-  IMPLICIT NONE
   !>
   !***
   !  Compute the inner product of two vectors with extended

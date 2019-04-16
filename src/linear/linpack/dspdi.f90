@@ -1,6 +1,5 @@
 !** DSPDI
 SUBROUTINE DSPDI(Ap,N,Kpvt,Det,Inert,Work,Job)
-  IMPLICIT NONE
   !>
   !***
   !  Compute the determinant, inertia, inverse of a real
@@ -95,10 +94,8 @@ SUBROUTINE DSPDI(Ap,N,Kpvt,Det,Inert,Work,Job)
   REAL(8) :: Det(2)
   INTEGER Kpvt(*), Inert(3)
   !
-  REAL(8) :: akkp1, DDOT, temp
-  REAL(8) :: ten, d, t, ak, akp1
-  INTEGER ij, ik, ikp1, iks, j, jb, jk, jkp1
-  INTEGER k, kk, kkp1, km1, ks, ksj, kskp1, kstep
+  REAL(8) :: akkp1, temp, ten, d, t, ak, akp1
+  INTEGER ij, ik, ikp1, iks, j, jb, jk, jkp1, k, kk, kkp1, km1, ks, ksj, kskp1, kstep
   LOGICAL noinv, nodet, noert
   !* FIRST EXECUTABLE STATEMENT  DSPDI
   noinv = MOD(Job,10)==0

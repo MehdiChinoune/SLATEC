@@ -1,6 +1,5 @@
 !** DNBDI
 SUBROUTINE DNBDI(Abe,Lda,N,Ml,Mu,Ipvt,Det)
-  IMPLICIT NONE
   !>
   !***
   !  Compute the determinant of a band matrix using the factors

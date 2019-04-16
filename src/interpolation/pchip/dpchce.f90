@@ -1,6 +1,5 @@
 !** DPCHCE
 SUBROUTINE DPCHCE(Ic,Vc,N,X,H,Slope,D,Incfd,Ierr)
-  IMPLICIT NONE
   !>
   !***
   !  Set boundary conditions for DPCHIC
@@ -125,7 +124,6 @@ SUBROUTINE DPCHCE(Ic,Vc,N,X,H,Slope,D,Incfd,Ierr)
   !
   INTEGER ibeg, iend, ierf, indexx, j, k
   REAL(8) :: stemp(3), xtemp(4)
-  REAL(8) :: DPCHDF, DPCHST
   !
   !  INITIALIZE.
   !

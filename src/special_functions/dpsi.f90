@@ -1,6 +1,5 @@
 !** DPSI
 REAL(8) FUNCTION DPSI(X)
-  IMPLICIT NONE
   !>
   !***
   !  Compute the Psi (or Digamma) function.
@@ -51,8 +50,6 @@ REAL(8) FUNCTION DPSI(X)
 
   INTEGER i, n
   REAL(8) :: X, aux, y
-  INTEGER, EXTERNAL :: INITDS
-  REAL(8), EXTERNAL :: DCOT, DCSEVL, D1MACH
   INTEGER, SAVE :: ntpsi, ntapsi
   REAL(8), SAVE :: xbig, dxrel
   REAL(8), PARAMETER :: psics(42) = [ -.38057080835217921520437677667039D-1, &

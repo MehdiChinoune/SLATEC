@@ -1,6 +1,5 @@
 !** CACAI
 SUBROUTINE CACAI(Z,Fnu,Kode,Mr,N,Y,Nz,Rl,Tol,Elim,Alim)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to CAIRY
@@ -36,7 +35,7 @@ SUBROUTINE CACAI(Z,Fnu,Kode,Mr,N,Y,Nz,Rl,Tol,Elim,Alim)
   INTEGER inu, iuf, Kode, Mr, N, nn, nw, Nz
   COMPLEX csgn, cspn, c1, c2, Y(N), Z, zn, cy(2)
   REAL Alim, arg, ascle, az, cpn, dfnu, Elim, fmr, Fnu, Rl, &
-    sgn, spn, Tol, yy, R1MACH
+    sgn, spn, Tol, yy
   REAL, PARAMETER :: pi = 3.14159265358979324E0
   !* FIRST EXECUTABLE STATEMENT  CACAI
   Nz = 0

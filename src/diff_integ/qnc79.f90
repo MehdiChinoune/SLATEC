@@ -1,6 +1,5 @@
 !** QNC79
 SUBROUTINE QNC79(FUN,A,B,Err,Ans,Ierr,K)
-  IMPLICIT NONE
   !>
   !***
   !  Integrate a function using a 7-point adaptive Newton-Cotes
@@ -92,11 +91,6 @@ SUBROUTINE QNC79(FUN,A,B,Err,Ans,Ierr,K)
   REAL aa(40), f(13), f1(40), f2(40), f3(40), f4(40), f5(40), f6(40), &
     f7(40), hh(40), q7r(40), vl(40)
   INTEGER lr(40)
-  !     .. External Functions ..
-  REAL, EXTERNAL :: R1MACH
-  INTEGER, EXTERNAL :: I1MACH
-  !     .. External Subroutines ..
-  EXTERNAL :: XERMSG
   !     .. Intrinsic Functions ..
   INTRINSIC ABS, LOG, MAX, MIN, SIGN, SQRT
   !     .. Save statement ..
@@ -285,6 +279,7 @@ SUBROUTINE QNC79(FUN,A,B,Err,Ans,Ierr,K)
   GOTO 100
   400  Ierr = -1
   CALL XERMSG('SLATEC','QNC79',&
-    'A and B are too nearly equal to allow normal integration. $$ANS is set to zero and IERR to -1.',-1,-1)
+    'A and B are too nearly equal to allow normal integration.&
+    & $$ANS is set to zero and IERR to -1.',-1,-1)
   RETURN
 END SUBROUTINE QNC79

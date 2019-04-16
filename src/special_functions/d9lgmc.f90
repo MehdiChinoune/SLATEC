@@ -1,6 +1,5 @@
 !** D9LGMC
 REAL(8) FUNCTION D9LGMC(X)
-  IMPLICIT NONE
   !>
   !***
   !  Compute the log Gamma correction factor so that
@@ -42,8 +41,7 @@ REAL(8) FUNCTION D9LGMC(X)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
 
-  INTEGER INITDS
-  REAL(8) :: X, DCSEVL, D1MACH
+  REAL(8) :: X
   INTEGER, SAVE :: nalgm
   REAL(8), SAVE :: xbig, xmax
   REAL(8), PARAMETER :: algmcs(15) = [ +.1666389480451863247205729650822D+0, &

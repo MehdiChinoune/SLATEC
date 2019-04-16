@@ -1,6 +1,5 @@
 !** CPOFS
 SUBROUTINE CPOFS(A,Lda,N,V,Itask,Ind,Work)
-  IMPLICIT NONE
   !>
   !***
   !  Solve a positive definite symmetric complex system of
@@ -117,7 +116,6 @@ SUBROUTINE CPOFS(A,Lda,N,V,Itask,Ind,Work)
   !
   INTEGER Lda, N, Itask, Ind, info
   COMPLEX A(Lda,*), V(*), Work(*)
-  REAL R1MACH
   REAL rcond
   CHARACTER(8) :: xern1, xern2
   !* FIRST EXECUTABLE STATEMENT  CPOFS

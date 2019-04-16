@@ -1,6 +1,5 @@
 !** SSPSL
 SUBROUTINE SSPSL(Ap,N,Kpvt,B)
-  IMPLICIT NONE
   !>
   !***
   !  Solve a real symmetric system using the factors obtained
@@ -73,7 +72,7 @@ SUBROUTINE SSPSL(Ap,N,Kpvt,B)
   INTEGER N, Kpvt(*)
   REAL Ap(*), B(*)
   !
-  REAL ak, akm1, bk, bkm1, SDOT, denom, temp
+  REAL ak, akm1, bk, bkm1, denom, temp
   INTEGER ik, ikm1, ikp1, k, kk, km1k, km1km1, kp
   !
   !     LOOP BACKWARD APPLYING THE TRANSFORMATIONS AND

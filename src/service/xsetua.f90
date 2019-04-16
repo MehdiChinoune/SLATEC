@@ -1,6 +1,5 @@
 !** XSETUA
 SUBROUTINE XSETUA(Iunita,N)
-  IMPLICIT NONE
   !>
   !***
   !  Set logical unit numbers (up to 5) to which error
@@ -40,7 +39,7 @@ SUBROUTINE XSETUA(Iunita,N)
   !                 Error-handling Package, SAND82-0800, Sandia
   !                 Laboratories, 1982.
   !***
-  ! **Routines called:**  J4SAVE, XERMSG
+  ! **Routines called:**  XERMSG
 
   !* REVISION HISTORY  (YYMMDD)
   !   790801  DATE WRITTEN
@@ -49,7 +48,7 @@ SUBROUTINE XSETUA(Iunita,N)
   !   900510  Change call to XERRWV to XERMSG.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
-  INTEGER i, indexx, Iunita(5), J4SAVE, junk, N
+  INTEGER i, indexx, Iunita(5), junk, N
   CHARACTER(8) :: xern1
   !* FIRST EXECUTABLE STATEMENT  XSETUA
   !

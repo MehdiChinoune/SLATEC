@@ -1,6 +1,5 @@
 !** SNRM2
 REAL FUNCTION SNRM2(N,Sx,Incx)
-  IMPLICIT NONE
   !>
   !***
   !  Compute the Euclidean length (L2 norm) of a vector.

@@ -1,6 +1,5 @@
 !** ZUCHK
 SUBROUTINE ZUCHK(Yr,Yi,Nz,Ascle,Tol)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to SERI, ZUOIK, ZUNK1, ZUNK2, ZUNI1, ZUNI2 and

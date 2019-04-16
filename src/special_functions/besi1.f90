@@ -1,6 +1,5 @@
 !** BESI1
 REAL FUNCTION BESI1(X)
-  IMPLICIT NONE
   !>
   !***
   !  Compute the modified (hyperbolic) Bessel function of the
@@ -42,8 +41,7 @@ REAL FUNCTION BESI1(X)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
 
-  REAL BESI1E, CSEVL, R1MACH, X, y
-  INTEGER INITS
+  REAL X, y
   INTEGER, SAVE :: nti1
   REAL, SAVE :: xmin, xsml, xmax
   REAL, PARAMETER :: bi1cs(11) = [ -.001971713261099859E0, .40734887667546481E0, &

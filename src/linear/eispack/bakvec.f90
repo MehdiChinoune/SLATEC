@@ -1,6 +1,5 @@
 !** BAKVEC
 SUBROUTINE BAKVEC(Nm,N,T,E,M,Z,Ierr)
-  IMPLICIT NONE
   !>
   !***
   !  Form the eigenvectors of a certain real non-symmetric

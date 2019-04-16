@@ -1,6 +1,5 @@
 !** SCHDD
 SUBROUTINE SCHDD(R,Ldr,P,X,Z,Ldz,Nz,Y,Rho,C,S,Info)
-  IMPLICIT NONE
   !>
   !***
   !  Downdate an augmented Cholesky decomposition or the
@@ -142,8 +141,8 @@ SUBROUTINE SCHDD(R,Ldr,P,X,Z,Ldz,Nz,Y,Rho,C,S,Info)
   REAL Rho(*), C(*)
   !
   INTEGER i, ii, j
-  REAL a, alpha, azeta, norm, SNRM2
-  REAL SDOT, t, zeta, b, xx
+  REAL a, alpha, azeta, norm
+  REAL t, zeta, b, xx
   !
   !     SOLVE THE SYSTEM TRANS(R)*A = X, PLACING THE RESULT
   !     IN THE ARRAY S.

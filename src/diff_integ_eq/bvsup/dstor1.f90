@@ -1,7 +1,6 @@
 !** DSTOR1
 SUBROUTINE DSTOR1(U,Yh,V,Yp,Ntemp,Ndisk,Ntape)
   USE DML, ONLY : C, INHomo, NCOmp, NFC
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to DBVSUP

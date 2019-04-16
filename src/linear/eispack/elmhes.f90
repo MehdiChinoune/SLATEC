@@ -1,6 +1,5 @@
 !** ELMHES
 SUBROUTINE ELMHES(Nm,N,Low,Igh,A,Intt)
-  IMPLICIT NONE
   !>
   !***
   !  Reduce a real general matrix to upper Hessenberg form

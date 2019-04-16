@@ -1,7 +1,6 @@
 !** HWSSSP
 SUBROUTINE HWSSSP(Ts,Tf,M,Mbdcnd,Bdts,Bdtf,Ps,Pf,N,Nbdcnd,Bdps,Bdpf,&
     Elmbda,F,Idimf,Pertrb,Ierror,W)
-  IMPLICIT NONE
   !>
   !***
   !  Solve a finite difference approximation to the Helmholtz
@@ -375,10 +374,10 @@ SUBROUTINE HWSSSP(Ts,Tf,M,Mbdcnd,Bdts,Bdtf,Ps,Pf,N,Nbdcnd,Bdps,Bdpf,&
   !   891009  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   INTEGER Idimf, Ierror, M, Mbdcnd, N, Nbdcnd
   REAL Bdpf(*), Bdps(*), Bdtf(*), Bdts(*), dum, Elmbda, F(Idimf,*), Pertrb, Pf, pi, &
-    PIMACH, Ps, Tf, tpi, Ts, W(*)
+    Ps, Tf, tpi, Ts, W(*)
   !* FIRST EXECUTABLE STATEMENT  HWSSSP
   pi = PIMACH(dum)
   tpi = 2.*pi

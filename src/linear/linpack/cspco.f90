@@ -1,6 +1,5 @@
 !** CSPCO
 SUBROUTINE CSPCO(Ap,N,Kpvt,Rcond,Z)
-  IMPLICIT NONE
   !>
   !***
   !  Factor a complex symmetric matrix stored in packed form
@@ -107,12 +106,10 @@ SUBROUTINE CSPCO(Ap,N,Kpvt,Rcond,Z)
   COMPLEX Ap(*), Z(*)
   REAL Rcond
   !
-  COMPLEX ak, akm1, bk, bkm1, CDOTU, denom, ek, t
-  REAL anorm, s, SCASUM, ynorm
+  COMPLEX ak, akm1, bk, bkm1, denom, ek, t
+  REAL anorm, s, ynorm
   INTEGER i, ij, ik, ikm1, ikp1, info, j, jm1, j1
   INTEGER k, kk, km1k, km1km1, kp, kps, ks
-  REAL, EXTERNAL :: CABS1
-  COMPLEX, EXTERNAL :: CSIGN1
   !
   !     FIND NORM OF A USING ONLY UPPER HALF
   !

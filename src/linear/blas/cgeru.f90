@@ -1,6 +1,5 @@
 !** CGERU
 SUBROUTINE CGERU(M,N,Alpha,X,Incx,Y,Incy,A,Lda)
-  IMPLICIT NONE
   !>
   !***
   !  Perform unconjugated rank 1 update of a complex general
@@ -101,8 +100,6 @@ SUBROUTINE CGERU(M,N,Alpha,X,Incx,Y,Incy,A,Lda)
   !     .. Local Scalars ..
   COMPLEX temp
   INTEGER i, info, ix, j, jy, kx
-  !     .. External Subroutines ..
-  EXTERNAL :: XERBLA
   !     .. Intrinsic Functions ..
   INTRINSIC MAX
   !* FIRST EXECUTABLE STATEMENT  CGERU

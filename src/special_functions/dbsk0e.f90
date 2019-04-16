@@ -1,6 +1,5 @@
 !** DBSK0E
 REAL(8) FUNCTION DBSK0E(X)
-  IMPLICIT NONE
   !>
   !***
   !  Compute the exponentially scaled modified (hyperbolic)
@@ -55,8 +54,7 @@ REAL(8) FUNCTION DBSK0E(X)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
 
   REAL eta
-  INTEGER INITDS
-  REAL(8) :: X, y, D1MACH, DCSEVL, DBESI0
+  REAL(8) :: X, y
   INTEGER, SAVE :: ntk0, ntak0, ntak02
   REAL(8), SAVE :: xsml
   REAL(8), PARAMETER :: bk0cs(16) = [ -.353273932339027687201140060063153D-1, &

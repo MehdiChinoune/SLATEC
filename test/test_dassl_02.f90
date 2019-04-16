@@ -1,4 +1,5 @@
 MODULE TEST49_MOD
+  use slatec
   IMPLICIT NONE
 
 CONTAINS
@@ -101,8 +102,6 @@ CONTAINS
 
     !
     INTEGER Lun, Kprint, Ipass
-    !
-    EXTERNAL :: DDASSL
     !
     INTEGER i, idid, info(15), iout, ipar(1), ires, iwork(45), j190, &
       j290, liw, lrw, ml, mu, neq, nerr, nfe, nje, nout, nqu, nst
@@ -411,6 +410,7 @@ END MODULE TEST49_MOD
 !** TEST49
 PROGRAM TEST49
   USE TEST49_MOD
+  use slatec
   IMPLICIT NONE
   !>
   !***
@@ -460,8 +460,6 @@ PROGRAM TEST49
   !   901001  Converted prologue to 4.0 format.  (FNF)
   !   901009  Corrected GAMS classification code.  (FNF)
   !   901009  Constructed double precision version.  (FNF)
-
-  INTEGER I1MACH
   INTEGER ipass, kprint, lin, lun, nfail
   !* FIRST EXECUTABLE STATEMENT  TEST49
   lun = I1MACH(2)

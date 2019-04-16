@@ -1,4 +1,5 @@
 MODULE TEST09_MOD
+  use slatec
   IMPLICIT NONE
 
 CONTAINS
@@ -78,11 +79,6 @@ CONTAINS
     !  Declare arguments.
     !
     INTEGER Lun, Kprint, Ipass
-    !
-    !  Declare external functions.
-    !
-    INTEGER, EXTERNAL :: I1MACH
-    REAL, EXTERNAL :: R1MACH
     !
     !  Declare local variables.
     !
@@ -452,11 +448,6 @@ CONTAINS
     !
     INTEGER Lun, Kprint, Ipass
     !
-    !  Declare external functions.
-    !
-    INTEGER, EXTERNAL :: I1MACH
-    REAL, EXTERNAL :: R1MACH
-    !
     !  Declare local variables.
     !
     COMPLEX cv, cw, cy, w(20), y(20), z, zn
@@ -813,11 +804,6 @@ CONTAINS
     !  Declare arguments.
     !
     INTEGER Lun, Kprint, Ipass
-    !
-    !  Declare external functions.
-    !
-    INTEGER, EXTERNAL :: I1MACH
-    REAL, EXTERNAL :: R1MACH
     !
     !  Declare local variables.
     !
@@ -1316,11 +1302,6 @@ CONTAINS
     !
     INTEGER Lun, Kprint, Ipass
     !
-    !  Declare external functions.
-    !
-    INTEGER, EXTERNAL :: I1MACH
-    REAL, EXTERNAL :: R1MACH
-    !
     !  Declare local variables.
     !
     COMPLEX chalf, coe1, coe2, cw, v(20), w(20), y(20), z
@@ -1710,11 +1691,6 @@ CONTAINS
     !
     INTEGER Lun, Kprint, Ipass
     !
-    !  Declare external functions.
-    !
-    INTEGER, EXTERNAL :: I1MACH
-    REAL, EXTERNAL :: R1MACH
-    !
     !  Declare local variables.
     !
     COMPLEX cone, csgn, cv, cw, cy, w(20), y(20), z, zn
@@ -2084,11 +2060,6 @@ CONTAINS
     !
     INTEGER Lun, Kprint, Ipass
     !
-    !  Declare external functions.
-    !
-    INTEGER, EXTERNAL :: I1MACH
-    REAL, EXTERNAL :: R1MACH
-    !
     !  Declare local variables.
     !
     COMPLEX ci, coe1, coe2, csgn, cspn, cw, cwrk(20), v(20), w(20), y(20), z, zn
@@ -2408,6 +2379,7 @@ END MODULE TEST09_MOD
 !** TEST09
 PROGRAM TEST09
   USE TEST09_MOD
+  use slatec
   IMPLICIT NONE
   !>
   !***
@@ -2456,8 +2428,6 @@ PROGRAM TEST09
   !* REVISION HISTORY  (YYMMDD)
   !   910411  DATE WRITTEN
   !   920128  Category corrected.  (WRB)
-
-  INTEGER I1MACH
   INTEGER ipass, kprint, lin, lun, nfail
   !* FIRST EXECUTABLE STATEMENT  TEST09
   lun = I1MACH(2)

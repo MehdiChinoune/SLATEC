@@ -1,6 +1,5 @@
 !** COSQB
 SUBROUTINE COSQB(N,X,Wsave)
-  IMPLICIT NONE
   !>
   !***
   !  Compute the unnormalized inverse cosine transform.

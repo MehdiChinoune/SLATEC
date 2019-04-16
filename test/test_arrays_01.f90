@@ -1,4 +1,5 @@
 MODULE TEST54_MOD
+  use slatec
   IMPLICIT NONE
 
 CONTAINS
@@ -33,7 +34,7 @@ CONTAINS
     !
     LOGICAL fail
     INTEGER y(N), yc(N), iy(N)
-    INTEGER Kprint, Lun, Ipass, j, i, kabs, ier, nerr, NUMXER, nn, kkflag
+    INTEGER Kprint, Lun, Ipass, j, i, kabs, ier, nerr, nn, kkflag
     !
     !     ---------
     !     TEST DATA
@@ -337,7 +338,7 @@ CONTAINS
     LOGICAL fail
     CHARACTER :: short
     CHARACTER(2) :: y(N), work
-    INTEGER iy(N), Kprint, Lun, Ipass, j, i, kabs, ier, nerr, NUMXER, nn, &
+    INTEGER iy(N), Kprint, Lun, Ipass, j, i, kabs, ier, nerr, nn, &
       kkflag, strbeg, strend
     !
     !     ---------
@@ -627,7 +628,7 @@ CONTAINS
     !
     LOGICAL fail
     REAL y(N), yc(N)
-    INTEGER iy(N), Kprint, Lun, Ipass, j, i, kabs, ier, nerr, NUMXER, nn, kkflag
+    INTEGER iy(N), Kprint, Lun, Ipass, j, i, kabs, ier, nerr, nn, kkflag
     !
     !     ---------
     !     TEST DATA
@@ -933,7 +934,7 @@ CONTAINS
     !
     LOGICAL fail
     REAL(8) :: y(N), yc(N)
-    INTEGER iy(N), Kprint, Lun, Ipass, j, i, kabs, ier, nerr, NUMXER, nn, kkflag
+    INTEGER iy(N), Kprint, Lun, Ipass, j, i, kabs, ier, nerr, nn, kkflag
     !
     !     ---------
     !     TEST DATA
@@ -1212,6 +1213,7 @@ END MODULE TEST54_MOD
 !** TEST54
 PROGRAM TEST54
   USE TEST54_MOD
+  use slatec
   IMPLICIT NONE
   !>
   !***
@@ -1262,7 +1264,7 @@ PROGRAM TEST54
   !* REVISION HISTORY  (YYMMDD)
   !   890620  DATE WRITTEN
 
-  INTEGER lun, I1MACH, lin, nfail, kprint, ipass
+  INTEGER lun, lin, nfail, kprint, ipass
   !* FIRST EXECUTABLE STATEMENT  TEST54
   lun = I1MACH(2)
   lin = I1MACH(1)

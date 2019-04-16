@@ -1,6 +1,5 @@
 !** DCOPY
 SUBROUTINE DCOPY(N,Dx,Incx,Dy,Incy)
-  IMPLICIT NONE
   !>
   !***
   !  Copy a vector.

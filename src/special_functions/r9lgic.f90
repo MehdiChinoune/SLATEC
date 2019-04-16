@@ -1,6 +1,5 @@
 !** R9LGIC
 REAL FUNCTION R9LGIC(A,X,Alx)
-  IMPLICIT NONE
   !>
   !***
   !  Compute the log complementary incomplete Gamma function
@@ -35,7 +34,7 @@ REAL FUNCTION R9LGIC(A,X,Alx)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
 
-  REAL A, Alx, fk, p, r, R1MACH, s, t, X, xma, xpa
+  REAL A, Alx, fk, p, r, s, t, X, xma, xpa
   INTEGER k
   REAL :: eps = 0.0
   !* FIRST EXECUTABLE STATEMENT  R9LGIC

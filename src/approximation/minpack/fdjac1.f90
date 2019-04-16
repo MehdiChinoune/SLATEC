@@ -1,6 +1,5 @@
 !** FDJAC1
 SUBROUTINE FDJAC1(FCN,N,X,Fvec,Fjac,Ldfjac,Iflag,Ml,Mu,Epsfcn,Wa1,Wa2)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to SNSQ and SNSQE
@@ -103,7 +102,6 @@ SUBROUTINE FDJAC1(FCN,N,X,Fvec,Fjac,Ldfjac,Iflag,Ml,Mu,Epsfcn,Wa1,Wa2)
   REAL X(*), Fvec(*), Fjac(Ldfjac,*), Wa1(*), Wa2(*)
   INTEGER i, j, k, msum
   REAL eps, epsmch, h, temp
-  REAL R1MACH
   REAL, PARAMETER :: zero = 0.0E0
   !* FIRST EXECUTABLE STATEMENT  FDJAC1
   epsmch = R1MACH(4)

@@ -1,6 +1,5 @@
 !** SSDI
 SUBROUTINE SSDI(N,B,X,Nelt,Ia,Ja,A,Isym,Rwork,Iwork)
-  IMPLICIT NONE
   !>
   !***
   !  Diagonal Matrix Vector Multiply.

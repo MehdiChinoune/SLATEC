@@ -1,7 +1,6 @@
 !** INDXB
 SUBROUTINE INDXB(I,Ir,Idx,Idp)
   USE CBLKT
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to BLKTRI

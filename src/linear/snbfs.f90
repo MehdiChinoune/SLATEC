@@ -1,6 +1,5 @@
 !** SNBFS
 SUBROUTINE SNBFS(Abe,Lda,N,Ml,Mu,V,Itask,Ind,Work,Iwork)
-  IMPLICIT NONE
   !>
   !***
   !  Solve a general nonsymmetric banded system of linear
@@ -182,7 +181,7 @@ SUBROUTINE SNBFS(Abe,Lda,N,Ml,Mu,V,Itask,Ind,Work,Iwork)
 
   !
   INTEGER Lda, N, Itask, Ind, Iwork(*), Ml, Mu
-  REAL Abe(Lda,*), V(*), Work(*), R1MACH
+  REAL Abe(Lda,*), V(*), Work(*)
   REAL rcond
   CHARACTER(8) :: xern1, xern2
   !* FIRST EXECUTABLE STATEMENT  SNBFS

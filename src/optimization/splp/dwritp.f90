@@ -1,6 +1,5 @@
 !** DWRITP
 SUBROUTINE DWRITP(Ipage,List,Rlist,Lpage,Irec)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to DSPLP

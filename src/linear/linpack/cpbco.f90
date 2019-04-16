@@ -1,6 +1,5 @@
 !** CPBCO
 SUBROUTINE CPBCO(Abd,Lda,N,M,Rcond,Z,Info)
-  IMPLICIT NONE
   !>
   !***
   !  Factor a complex Hermitian positive definite matrix stored
@@ -129,11 +128,9 @@ SUBROUTINE CPBCO(Abd,Lda,N,M,Rcond,Z,Info)
   COMPLEX Abd(Lda,*), Z(*)
   REAL Rcond
   !
-  COMPLEX CDOTC, ek, t, wk, wkm
-  REAL anorm, s, SCASUM, sm, ynorm
+  COMPLEX ek, t, wk, wkm
+  REAL anorm, s, sm, ynorm
   INTEGER i, j, j2, k, kb, kp1, l, la, lb, lm, mu
-  REAL, EXTERNAL :: CABS1
-  COMPLEX, EXTERNAL :: CSIGN1
   !
   !     FIND NORM OF A
   !

@@ -1,6 +1,5 @@
 !** ORTRAN
 SUBROUTINE ORTRAN(Nm,N,Low,Igh,A,Ort,Z)
-  IMPLICIT NONE
   !>
   !***
   !  Accumulate orthogonal similarity transformations in the

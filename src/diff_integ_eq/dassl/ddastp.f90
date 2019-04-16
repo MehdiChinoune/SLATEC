@@ -2,7 +2,6 @@
 SUBROUTINE DDASTP(X,Y,Yprime,Neq,RES,JAC,H,Wt,Jstart,Idid,Rpar,Ipar,Phi,&
     Delta,E,Wm,Iwm,Alpha,Beta,Gama,Psi,Sigma,Cj,Cjold,Hold,&
     S,Hmin,Uround,Iphase,Jcalc,K,Kold,Ns,Nonneg,Ntemp)
-  IMPLICIT NONE
   !>
   !***
   !  Perform one step of the DDASSL integration.
@@ -104,9 +103,6 @@ SUBROUTINE DDASTP(X,Y,Yprime,Neq,RES,JAC,H,Wt,Jstart,Idid,Rpar,Ipar,Phi,&
     Delta(*), E(*), Wm(*), Alpha(*), Beta(*), Gama(*), &
     Psi(*), Sigma(*), Cj, Cjold, Hold, S, Hmin, Uround
   EXTERNAL :: RES, JAC
-  !
-  EXTERNAL :: DDAJAC, DDASLV, DDATRP
-  REAL(8), EXTERNAL :: DDANRM
   !
   INTEGER i, ier, ires, j, j1, kdiff, km1, knew, kp1, kp2, m, ncf, nef, nsf, nsp1
   REAL(8) :: alpha0, alphas, cjlast, ck, delnrm, enorm, erk, erkm1, erkm2, erkp1, &

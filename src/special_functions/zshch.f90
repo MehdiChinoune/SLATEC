@@ -1,6 +1,5 @@
 !** ZSHCH
 SUBROUTINE ZSHCH(Zr,Zi,Cshr,Cshi,Cchr,Cchi)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to ZBESH and ZBESK

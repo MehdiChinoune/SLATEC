@@ -1,6 +1,5 @@
 !** XERHLT
 SUBROUTINE XERHLT(Messg)
-  IMPLICIT NONE
   !>
   !***
   !  Abort program execution and print error message.

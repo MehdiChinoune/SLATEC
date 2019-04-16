@@ -1,7 +1,6 @@
 !** DSGS
 SUBROUTINE DSGS(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
     Iunit,Rwork,Lenw,Iwork,Leniw)
-  IMPLICIT NONE
   !>
   !***
   !  Gauss-Seidel Method Iterative Sparse Ax = b Solver.
@@ -232,8 +231,6 @@ SUBROUTINE DSGS(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
   !     .. Local Scalars ..
   INTEGER icol, j, jbgn, jend, locdz, locel, lociel, lociw, locjel, &
     locr, locw, locz, nl
-  !     .. External Subroutines ..
-  EXTERNAL :: DCHKW, DIR, DS2LT, DS2Y, DSLI, DSMV
   !* FIRST EXECUTABLE STATEMENT  DSGS
   !
   IF ( N<1.OR.Nelt<1 ) THEN

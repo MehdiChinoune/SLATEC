@@ -1,6 +1,5 @@
 !** SSISL
 SUBROUTINE SSISL(A,Lda,N,Kpvt,B)
-  IMPLICIT NONE
   !>
   !***
   !  Solve a real symmetric system using the factors obtained
@@ -76,7 +75,7 @@ SUBROUTINE SSISL(A,Lda,N,Kpvt,B)
   INTEGER Lda, N, Kpvt(*)
   REAL A(Lda,*), B(*)
   !
-  REAL ak, akm1, bk, bkm1, SDOT, denom, temp
+  REAL ak, akm1, bk, bkm1, denom, temp
   INTEGER k, kp
   !
   !     LOOP BACKWARD APPLYING THE TRANSFORMATIONS AND

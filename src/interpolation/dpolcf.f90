@@ -1,6 +1,5 @@
 !** DPOLCF
 SUBROUTINE DPOLCF(Xx,N,X,C,D,Work)
-  IMPLICIT NONE
   !>
   !***
   !  Compute the coefficients of the polynomial fit (including

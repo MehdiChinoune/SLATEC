@@ -1,6 +1,5 @@
 !** DSICS
 SUBROUTINE DSICS(N,Nelt,Ia,Ja,A,Isym,Nel,Iel,Jel,El,D,R,Iwarn)
-  IMPLICIT NONE
   !>
   !***
   !  Incompl. Cholesky Decomposition Preconditioner SLAP Set Up.
@@ -178,8 +177,6 @@ SUBROUTINE DSICS(N,Nelt,Ia,Ja,A,Isym,Nel,Iel,Jel,El,D,R,Iwarn)
   INTEGER i, ibgn, ic, icbgn, icend, icol, iend, ir, irbgn, irend, &
     irow, irr, j, jbgn, jeltmp, jend
   CHARACTER xern1*8
-  !     .. External Subroutines ..
-  EXTERNAL :: XERMSG
   !* FIRST EXECUTABLE STATEMENT  DSICS
   !
   !         Set the lower triangle in IEL, JEL, EL

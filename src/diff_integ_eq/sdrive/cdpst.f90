@@ -1,7 +1,6 @@
 !** CDPST
 SUBROUTINE CDPST(El,F,FA,H,Impl,JACOBN,Matdim,Miter,Ml,Mu,N,Nde,Nq,Save2,&
     T,USERS,Y,Yh,Ywt,Uround,Nfe,Nje,A,Dfdy,Fac,Ier,Ipvt,Save1,Iswflg,Bnd,Jstate)
-  IMPLICIT NONE
   !>
   !***
   !  Subroutine CDPST evaluates the Jacobian matrix of the right
@@ -37,7 +36,7 @@ SUBROUTINE CDPST(El,F,FA,H,Impl,JACOBN,Matdim,Miter,Ml,Mu,N,Nde,Nq,Save2,&
   COMPLEX A(Matdim,*), cfctr, Dfdy(Matdim,*), dy, Fac(*), Save1(*), &
     Save2(*), Y(*), Yh(N,*), yj, ys, Ywt(*)
   REAL bl, Bnd, bp, br, dfdymx, diff, El(13,12), facmin, factor, H, scalee, &
-    SCNRM2, T, Uround, zmax, zmin
+    T, Uround, zmax, zmin
   INTEGER Ipvt(*)
   LOGICAL Ier
   REAL, PARAMETER :: FACMAX = 0.5E0, BU = 0.5E0

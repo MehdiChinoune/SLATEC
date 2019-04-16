@@ -1,7 +1,6 @@
 !** DQAWOE
 SUBROUTINE DQAWOE(F,A,B,Omega,Integr,Epsabs,Epsrel,Limit,Icall,Maxp1,Result,&
     Abserr,Neval,Ier,Last,Alist,Blist,Rlist,Elist,Iord,Nnlog,Momcom,Chebmo)
-  IMPLICIT NONE
   !>
   !***
   !  Calculate an approximation to a given definite integral
@@ -236,7 +235,6 @@ SUBROUTINE DQAWOE(F,A,B,Omega,Integr,Epsabs,Epsrel,Limit,Icall,Maxp1,Result,&
   LOGICAL extrap, noext, extall
   !
   REAL(8), EXTERNAL :: F
-  REAL(8), EXTERNAL :: D1MACH
   !
   !            THE DIMENSION OF RLIST2 IS DETERMINED BY  THE VALUE OF
   !            LIMEXP IN SUBROUTINE DQELG (RLIST2 SHOULD BE OF

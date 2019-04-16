@@ -1,6 +1,5 @@
 !** SNBSL
 SUBROUTINE SNBSL(Abe,Lda,N,Ml,Mu,Ipvt,B,Job)
-  IMPLICIT NONE
   !>
   !***
   !  Solve a real band system using the factors computed by
@@ -89,7 +88,7 @@ SUBROUTINE SNBSL(Abe,Lda,N,Ml,Mu,Ipvt,B,Job)
   INTEGER Lda, N, Ml, Mu, Ipvt(*), Job
   REAL Abe(Lda,*), B(*)
   !
-  REAL SDOT, t
+  REAL t
   INTEGER k, kb, l, lb, ldb, lm, m, mlm, nm1
   !* FIRST EXECUTABLE STATEMENT  SNBSL
   m = Mu + Ml + 1

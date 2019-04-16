@@ -2,7 +2,6 @@
 SUBROUTINE REORT(Ncomp,Y,Yp,Yhp,Niv,W,S,P,Ip,Stowa,Iflag)
   USE ML, ONLY : C, INHomo, NFC, PX, PWCnd, TND, X, XENd, XOT, KNSwot, &
     LOTjp, MNSwot, NSWot, TOL, NPS, NFCc
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to BVSUP
@@ -59,7 +58,7 @@ SUBROUTINE REORT(Ncomp,Y,Yp,Yhp,Niv,W,S,P,Ip,Stowa,Iflag)
   !   910722  Updated AUTHOR section.  (ALS)
 
   INTEGER Ncomp, nfcp, Niv, Iflag, ijk, Ip(*), j, k, kk, l, mflag
-  REAL dnd, dndt, dx, P(*), S(*), SDOT, srp, Stowa(*), vnorm, W(*), wcnd, &
+  REAL dnd, dndt, dx, P(*), S(*), srp, Stowa(*), vnorm, W(*), wcnd, &
     Y(Ncomp,*), Yhp(Ncomp,*), Yp(*), ypnm
   !
   !- *********************************************************************

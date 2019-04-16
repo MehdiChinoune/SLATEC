@@ -1,4 +1,5 @@
 MODULE TEST03_MOD
+  use slatec
   IMPLICIT NONE
 
 CONTAINS
@@ -51,12 +52,6 @@ CONTAINS
 
     INTEGER i, Lun, Kprint, Ipass
     REAL(8) :: y(105), errmax, errtol, abserr, relerr
-    REAL(8), EXTERNAL :: D1MACH, D9ATN1, D9LN2R, DACOSH, DAI, DAIE, DASINH, &
-      DATANH, DBESI0, DBESI1, DBESJ0, DBESJ1, DBESK0, DBESK1, DBESY0, DBESY1, &
-      DBETA, DBETAI, DBI, DBIE, DBINOM, DBSI0E, DBSI1E, DBSK0E, DBSK1E, DCBRT, &
-      DCHU, DCOSDG, DCOT, DDAWS, DE1, DEI, DERF, DEXPRL, DFAC, DGAMI, DGAMIC, &
-      DGAMIT, DGAMR, DLI, DLNREL, DPOCH, DPOCH1, DPSI, DSINDG, DSPENC
-    EXTERNAL :: DBESKS, DBSKES
     !
     !     Correct values through different calculations are stored in V(*)
     !
@@ -257,6 +252,7 @@ END MODULE TEST03_MOD
 !** TEST03
 PROGRAM TEST03
   USE TEST03_MOD
+  use slatec
   IMPLICIT NONE
   !>
   !***
@@ -306,8 +302,6 @@ PROGRAM TEST03
   !   890618  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900524  Cosmetic changes to code.  (WRB)
-
-  INTEGER I1MACH
   INTEGER ipass, kprint, lin, lun, nfail
   !* FIRST EXECUTABLE STATEMENT  TEST03
   lun = I1MACH(2)

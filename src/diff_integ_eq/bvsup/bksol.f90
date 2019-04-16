@@ -1,6 +1,5 @@
 !** BKSOL
 SUBROUTINE BKSOL(N,A,X)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to BVSUP
@@ -36,7 +35,7 @@ SUBROUTINE BKSOL(N,A,X)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
 
-  REAL A(*), SDOT, X(*)
+  REAL A(*), X(*)
   INTEGER j, k, m, N, nm1
   !* FIRST EXECUTABLE STATEMENT  BKSOL
   m = (N*(N+1))/2

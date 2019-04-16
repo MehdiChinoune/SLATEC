@@ -1,6 +1,5 @@
 !** PSIXN
 REAL FUNCTION PSIXN(N)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to EXINT
@@ -32,7 +31,6 @@ REAL FUNCTION PSIXN(N)
 
   INTEGER N, k
   REAL ax, fn, rfn2, trm, s, wdtol
-  REAL R1MACH
   !-----------------------------------------------------------------------
   !             PSIXN(N), N = 1,100
   !-----------------------------------------------------------------------

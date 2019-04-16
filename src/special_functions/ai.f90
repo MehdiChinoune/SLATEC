@@ -1,6 +1,5 @@
 !** AI
 REAL FUNCTION AI(X)
-  IMPLICIT NONE
   !>
   !***
   !  Evaluate the Airy function.
@@ -45,8 +44,7 @@ REAL FUNCTION AI(X)
   !           (WRB)
   !   920618  Removed space from variable names.  (RWC, WRB)
 
-  REAL AIE, CSEVL, R1MACH, theta, X, xm, xmaxt, z
-  INTEGER INITS
+  REAL theta, X, xm, xmaxt, z
   INTEGER, SAVE :: naif, naig
   REAL, SAVE :: x3sml, xmax
   REAL, PARAMETER :: aifcs(9) = [ -.03797135849666999750E0, .05919188853726363857E0, &

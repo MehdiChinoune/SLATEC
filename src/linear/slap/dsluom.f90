@@ -1,7 +1,6 @@
 !** DSLUOM
 SUBROUTINE DSLUOM(N,B,X,Nelt,Ia,Ja,A,Isym,Nsave,Itol,Tol,Itmax,Iter,Err,&
     Ierr,Iunit,Rwork,Lenw,Iwork,Leniw)
-  IMPLICIT NONE
   !>
   !***
   !  Incomplete LU Orthomin Sparse Iterative Ax=b Solver.
@@ -250,8 +249,6 @@ SUBROUTINE DSLUOM(N,B,X,Nelt,Ia,Ja,A,Isym,Nsave,Itol,Tol,Itmax,Iter,Err,&
   INTEGER icol, j, jbgn, jend, locap, loccsa, locdin, locdz, &
     locema, locil, lociu, lociw, locjl, locju, locl, locnc, &
     locnr, locp, locr, locu, locw, locz, nl, nu
-  !     .. External Subroutines ..
-  EXTERNAL :: DCHKW, DOMN, DS2Y, DSILUS, DSLUI, DSMV
   !* FIRST EXECUTABLE STATEMENT  DSLUOM
   !
   Ierr = 0

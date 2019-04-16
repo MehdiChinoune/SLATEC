@@ -1,6 +1,5 @@
 !** R9AIMP
 SUBROUTINE R9AIMP(X,Ampl,Theta)
-  IMPLICIT NONE
   !>
   !***
   !  Evaluate the Airy modulus and phase.
@@ -55,8 +54,7 @@ SUBROUTINE R9AIMP(X,Ampl,Theta)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
 
-  REAL Ampl, CSEVL, eta, R1MACH, sqrtx, Theta, X, z
-  INTEGER INITS
+  REAL Ampl, eta, sqrtx, Theta, X, z
   INTEGER, SAVE :: nam21, nath1, nam22, nath2
   REAL, SAVE :: xsml
   REAL, PARAMETER :: am21cs(40) = [ .0065809191761485E0, .0023675984685722E0, &

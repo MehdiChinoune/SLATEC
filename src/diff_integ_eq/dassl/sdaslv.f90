@@ -1,6 +1,5 @@
 !** SDASLV
 SUBROUTINE SDASLV(Neq,Delta,Wm,Iwm)
-  IMPLICIT NONE
   !>
   !***
   !  Linear system solver for SDASSL.
@@ -37,8 +36,6 @@ SUBROUTINE SDASLV(Neq,Delta,Wm,Iwm)
   !
   INTEGER Neq, Iwm(*)
   REAL Delta(*), Wm(*)
-  !
-  EXTERNAL :: SGBSL, SGESL
   !
   INTEGER meband, mtype
   INTEGER, PARAMETER :: NPD = 1

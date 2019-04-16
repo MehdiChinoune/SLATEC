@@ -2,7 +2,6 @@
 SUBROUTINE DCOEF(Yh,Yp,Ncomp,Nrowb,Nfc,Nic,B,Beta,Coef,Inhomo,Re,Ae,By,&
     Cvec,Work,Iwork,Iflag,Nfcc)
   USE DML, ONLY : EPS
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to DBVSUP
@@ -83,7 +82,6 @@ SUBROUTINE DCOEF(Yh,Yp,Ncomp,Nrowb,Nfc,Nic,B,Beta,Coef,Inhomo,Re,Ae,By,&
   !   910722  Updated AUTHOR section.  (ALS)
 
   !
-  REAL(8) :: DDOT
   INTEGER i, Iflag, Inhomo, Iwork(*), j, k, kflag, ki, l, mlso, Ncomp, ncomp2, &
     nf, Nfc, Nfcc, nfccm1, Nic, Nrowb
   REAL(8) :: Ae, B(Nrowb,*), bbn, Beta(*), bn, brn, By(Nfcc,*), bykl, bys, &

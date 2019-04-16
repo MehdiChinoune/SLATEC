@@ -1,6 +1,5 @@
 !** GAMLN
 REAL FUNCTION GAMLN(Z,Ierr)
-  IMPLICIT NONE
   !>
   !***
   !  Compute the logarithm of the Gamma function
@@ -53,9 +52,8 @@ REAL FUNCTION GAMLN(Z,Ierr)
   !   921215  GAMLN defined for Z negative.  (WRB)
 
   !
-  INTEGER i, i1m, k, mz, nz, Ierr, I1MACH
+  INTEGER i, i1m, k, mz, nz, Ierr
   REAL fln, fz, rln, s, tlg, trm, tst, t1, wdtol, Z, zdmy, zinc, zm, zmin, zp, zsq
-  REAL R1MACH
   !           LNGAMMA(N), N=1,100
   REAL, PARAMETER :: gln(100) = [ 0.00000000000000000E+00, 0.00000000000000000E+00, &
     6.93147180559945309E-01, 1.79175946922805500E+00, 3.17805383034794562E+00, &

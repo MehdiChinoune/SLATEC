@@ -1,6 +1,5 @@
 !** PPSGF
 REAL FUNCTION PPSGF(X,Iz,C,A,Bh)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to BLKTRI

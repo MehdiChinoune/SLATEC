@@ -1,6 +1,5 @@
 !** DENORM
 REAL(8) FUNCTION DENORM(N,X)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to DNSQ and DNSQE

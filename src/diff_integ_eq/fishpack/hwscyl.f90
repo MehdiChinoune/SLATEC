@@ -1,7 +1,6 @@
 !** HWSCYL
 SUBROUTINE HWSCYL(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
     Idimf,Pertrb,Ierror,W)
-  IMPLICIT NONE
   !>
   !***
   !  Solve a standard finite difference approximation

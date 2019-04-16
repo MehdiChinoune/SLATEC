@@ -1,6 +1,5 @@
 !** RWUPDT
 SUBROUTINE RWUPDT(N,R,Ldr,W,B,Alpha,Coss,Sinn)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to SNLS1 and SNLS1E

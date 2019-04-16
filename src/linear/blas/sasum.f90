@@ -1,6 +1,5 @@
 !** SASUM
 REAL FUNCTION SASUM(N,Sx,Incx)
-  IMPLICIT NONE
   !>
   !***
   !  Compute the sum of the magnitudes of the elements of a

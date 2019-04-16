@@ -1,6 +1,5 @@
 !** COSTI
 SUBROUTINE COSTI(N,Wsave)
-  IMPLICIT NONE
   !>
   !***
   !  Initialize a work array for COST.

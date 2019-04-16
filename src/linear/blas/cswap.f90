@@ -1,6 +1,5 @@
 !** CSWAP
 SUBROUTINE CSWAP(N,Cx,Incx,Cy,Incy)
-  IMPLICIT NONE
   !>
   !***
   !  Interchange two vectors.

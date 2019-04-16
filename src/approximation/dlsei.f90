@@ -1,6 +1,5 @@
 !** DLSEI
 SUBROUTINE DLSEI(W,Mdw,Me,Ma,Mg,N,Prgopt,X,Rnorme,Rnorml,Mode,Ws,Ip)
-  IMPLICIT NONE
   !>
   !***
   !  Solve a linearly constrained least squares problem with
@@ -395,9 +394,6 @@ SUBROUTINE DLSEI(W,Mdw,Me,Ma,Mg,N,Prgopt,X,Rnorme,Rnorml,Mode,Ws,Ip)
 
   INTEGER Ip(3), Ma, Mdw, Me, Mg, Mode, N
   REAL(8) :: Prgopt(*), Rnorme, Rnorml, W(Mdw,*), Ws(*), X(*)
-  !
-  EXTERNAL :: DAXPY, DCOPY, DH12, DLSI, DSCAL, DSWAP, XERMSG
-  REAL(8), EXTERNAL :: D1MACH, DASUM, DDOT, DNRM2
   !
   REAL(8) :: enorm, fnorm, gam, rb, rn, rnmax, sizee, sn, snmax, t, tau, uj, up, &
     vj, xnorm, xnrme

@@ -1,7 +1,6 @@
 !** DXRED
 SUBROUTINE DXRED(X,Ix,Ierror)
   USE DXBLK ,ONLY: RADixx, RAD2l, L2
-  IMPLICIT NONE
   !>
   !***
   !  To provide double-precision floating-point arithmetic

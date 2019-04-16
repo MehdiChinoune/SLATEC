@@ -1,7 +1,6 @@
 !** DSDCG
 SUBROUTINE DSDCG(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
     Iunit,Rwork,Lenw,Iwork,Leniw)
-  IMPLICIT NONE
   !>
   !***
   !  Diagonally Scaled Conjugate Gradient Sparse Ax=b Solver.
@@ -243,8 +242,6 @@ SUBROUTINE DSDCG(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
   INTEGER Ia(Nelt), Iwork(Leniw), Ja(Nelt)
   !     .. Local Scalars ..
   INTEGER locd, locdz, lociw, locp, locr, locw, locz
-  !     .. External Subroutines ..
-  EXTERNAL :: DCG, DCHKW, DS2Y, DSDI, DSDS, DSMV
   !* FIRST EXECUTABLE STATEMENT  DSDCG
   !
   Ierr = 0

@@ -1,6 +1,5 @@
 !** CPQR79
 SUBROUTINE CPQR79(Ndeg,Coeff,Root,Ierr,Work)
-  IMPLICIT NONE
   !>
   !***
   !  Find the zeros of a polynomial with complex coefficients.

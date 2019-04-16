@@ -4,7 +4,6 @@ SUBROUTINE SPLPMU(Mrelas,Nvars,Lmx,Lbm,Nredc,Info,Ienter,Ileave,Iopt,Npp,&
     Rprnrm,Erdnrm,Dulnrm,Theta,Costsc,Xlamda,Rhsnrm,Amat,&
     Basmat,Csc,Wr,Rprim,Ww,Bu,Bl,Rhs,Erd,Erp,Rz,Rg,Colnrm,&
     Costs,Primal,Duals,Singlr,Redbas,Zerolv,Stpedg)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to SPLP
@@ -49,14 +48,14 @@ SUBROUTINE SPLPMU(Mrelas,Nvars,Lmx,Lbm,Nredc,Info,Ienter,Ileave,Iopt,Npp,&
   !   900328  Added TYPE section.  (WRB)
 
   INTEGER i, ibas, Ienter, ihi, il1, Ileave, ilow, Info, Iopt, ipage, iplace, &
-    IPLOC, iu1, j, Jstrt, k, key, Lbm, Lmx, lpg, Mrelas, n20002, n20018, n20121, &
+    iu1, j, Jstrt, k, key, Lbm, Lmx, lpg, Mrelas, n20002, n20018, n20121, &
     nerr, nnegrc, Npp, npr001, npr003, Nredc, Nvars
   INTEGER Ibasis(*), Imat(*), Ibrc(Lbm,2), Ipr(*), Iwr(*), Ind(*), Ibb(*)
   REAL :: aij, alpha, Anorm, Costsc, Erdnrm, Dulnrm, Eps, gama, Gg, &
     gq, Rprnrm, rzj, scalr, Theta, Uu, wp, Xlamda, Rhsnrm, cnorm
   REAL :: Amat(*), Basmat(*), Csc(*), Wr(*), Rprim(*), Ww(*), Bu(*), Bl(*), &
     Rhs(*), Erd(*), Erp(*), Rz(*), Rg(*), Costs(*), Primal(*), Duals(*), &
-    Colnrm(*), rcost, SASUM, SDOT
+    Colnrm(*), rcost
   REAL, PARAMETER :: zero = 0.E0, one = 1.E0, two = 2.E0
   LOGICAL Singlr, Redbas, pagepl, trans, Zerolv, Stpedg
   !

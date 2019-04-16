@@ -1,6 +1,5 @@
 !** DCFOD
 SUBROUTINE DCFOD(Meth,Elco,Tesco)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to DDEBDF

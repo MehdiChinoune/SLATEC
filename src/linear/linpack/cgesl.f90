@@ -1,6 +1,5 @@
 !** CGESL
 SUBROUTINE CGESL(A,Lda,N,Ipvt,B,Job)
-  IMPLICIT NONE
   !>
   !***
   !  Solve the complex system A*X=B or CTRANS(A)*X=B using the
@@ -83,7 +82,7 @@ SUBROUTINE CGESL(A,Lda,N,Ipvt,B,Job)
   INTEGER Lda, N, Ipvt(*), Job
   COMPLEX A(Lda,*), B(*)
   !
-  COMPLEX CDOTC, t
+  COMPLEX t
   INTEGER k, kb, l, nm1
   !* FIRST EXECUTABLE STATEMENT  CGESL
   nm1 = N - 1

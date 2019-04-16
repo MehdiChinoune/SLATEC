@@ -1,6 +1,5 @@
 !** ALBETA
 REAL FUNCTION ALBETA(A,B)
-  IMPLICIT NONE
   !>
   !***
   !  Compute the natural logarithm of the complete Beta
@@ -41,7 +40,6 @@ REAL FUNCTION ALBETA(A,B)
   !   900727  Added EXTERNAL statement.  (WRB)
 
   REAL A, B, corr, p, q
-  REAL, EXTERNAL :: ALNREL, R9LGMC
   REAL, PARAMETER :: sq2pil = 0.91893853320467274E0
   !* FIRST EXECUTABLE STATEMENT  ALBETA
   p = MIN(A,B)

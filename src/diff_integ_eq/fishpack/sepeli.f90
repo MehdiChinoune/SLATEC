@@ -1,7 +1,6 @@
 !** SEPELI
 SUBROUTINE SEPELI(Intl,Iorder,A,B,M,Mbdcnd,Bda,Alpha,Bdb,Beta,C,D,N,&
     Nbdcnd,Bdc,Gama,Bdd,Xnu,COFX,COFY,Grhs,Usol,Idmn,W,Pertrb,Ierror)
-  IMPLICIT NONE
   !>
   !***
   !  Discretize and solve a second and, optionally, a fourth

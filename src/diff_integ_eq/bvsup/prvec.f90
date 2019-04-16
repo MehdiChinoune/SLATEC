@@ -1,6 +1,5 @@
 !** PRVEC
 REAL FUNCTION PRVEC(M,U,V)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to BVSUP
@@ -26,9 +25,9 @@ REAL FUNCTION PRVEC(M,U,V)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
-  
+
   INTEGER M, n, np
-  REAL SDOT, U(*), V(*), vp
+  REAL U(*), V(*), vp
   !* FIRST EXECUTABLE STATEMENT  PRVEC
   n = M/2
   np = n + 1

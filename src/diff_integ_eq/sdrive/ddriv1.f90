@@ -1,6 +1,5 @@
 !** DDRIV1
 SUBROUTINE DDRIV1(N,T,Y,F,Tout,Mstate,Eps,Work,Lenw,Ierflg)
-  IMPLICIT NONE
   !>
   !***
   !  The function of DDRIV1 is to solve N (200 or fewer)
@@ -303,7 +302,6 @@ SUBROUTINE DDRIV1(N,T,Y,F,Tout,Mstate,Eps,Work,Lenw,Ierflg)
   INTEGER, PARAMETER :: MXN = 200, IDLIW = 50
   INTEGER iwork(IDLIW+MXN)
   CHARACTER intgr1*8
-  REAL(8), EXTERNAL :: D1MACH
   INTEGER, PARAMETER :: NROOT = 0, IERROR = 2, MINT = 2, MITER = 2, IMPL = 0, &
     MXORD = 5, MXSTEP = 1000
   REAL(8), PARAMETER :: ewtcom(1)  = 1.D0

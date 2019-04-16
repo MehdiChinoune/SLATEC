@@ -1,6 +1,5 @@
 !** MPADD
 SUBROUTINE MPADD(X,Y,Z)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to DQDOTA and DQDOTI

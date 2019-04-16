@@ -1,6 +1,5 @@
 !** DBSQAD
 SUBROUTINE DBSQAD(T,Bcoef,N,K,X1,X2,Bquad,Work)
-  IMPLICIT NONE
   !>
   !***
   !  Compute the integral of a K-th order B-spline using the
@@ -70,7 +69,6 @@ SUBROUTINE DBSQAD(T,Bcoef,N,K,X1,X2,Bquad,Work)
   INTEGER i, il1, il2, ilo, inbv, jf, K, left, m, mf, mflag, N, npk, np1
   REAL(8) :: a, aa, b, bb, Bcoef(*), bma, bpa, Bquad, c1, gx, q, summ(5), T(*), &
     ta, tb, Work(*), X1, X2, y1, y2
-  REAL(8) :: DBVALU
   !
   REAL(8), PARAMETER :: gpts(9) = [ 5.77350269189625764D-01, 2.38619186083196909D-01, &
     6.61209386466264514D-01, 9.32469514203152028D-01, 1.48874338981631211D-01, &

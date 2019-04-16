@@ -1,6 +1,5 @@
 !** COT
 REAL FUNCTION COT(X)
-  IMPLICIT NONE
   !>
   !***
   !  Compute the cotangent.
@@ -39,8 +38,8 @@ REAL FUNCTION COT(X)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920618  Removed space from variable names.  (RWC, WRB)
 
-  REAL ainty, ainty2, CSEVL, prodbg, R1MACH, X, y, yrem
-  INTEGER ifn, INITS
+  REAL ainty, ainty2, prodbg, X, y, yrem
+  INTEGER ifn
   INTEGER, SAVE :: nterms
   REAL, SAVE :: xmax, xsml, xmin, sqeps
   REAL, PARAMETER :: cotcs(8) = [ .24025916098295630E0,-.016533031601500228E0, &

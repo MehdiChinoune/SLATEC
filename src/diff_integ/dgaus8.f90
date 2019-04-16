@@ -1,6 +1,5 @@
 !** DGAUS8
 SUBROUTINE DGAUS8(FUN,A,B,Err,Ans,Ierr)
-  IMPLICIT NONE
   !>
   !***
   !  Integrate a real function of one variable over a finite
@@ -93,10 +92,8 @@ SUBROUTINE DGAUS8(FUN,A,B,Err,Ans,Ierr)
     END FUNCTION
   END INTERFACE
   INTEGER Ierr, k, l, lmn, lmx, lr(60), mxl, nbits, nib, nlmx
-  INTEGER I1MACH
   REAL(8) :: A, aa(60), ae, anib, Ans, area, B, c, ce, ee, ef, &
     eps, Err, est, gl, glr, gr(60), hh(60), tol, vl(60), vr
-  REAL(8) :: D1MACH
   REAL(8), PARAMETER :: x1 = 1.83434642495649805D-01, x2 = 5.25532409916328986D-01, &
     x3 =7.96666477413626740D-01 , x4 = 9.60289856497536232D-01
   REAL(8), PARAMETER :: w1 = 3.62683783378361983D-01, w2 = 3.13706645877887287D-01, &
@@ -134,7 +131,8 @@ SUBROUTINE DGAUS8(FUN,A,B,Err,Ans,Ierr)
             IF ( lmx<1 ) THEN
               Ierr = -1
               CALL XERMSG('SLATEC','DGAUS8',&
-                'A and B are too nearly equal to allow normal integration. $$ANS is set to zero and IERR to -1.',1,-1)
+                'A and B are too nearly equal to allow normal integration.&
+                & $$ANS is set to zero and IERR to -1.',1,-1)
               IF ( Err<0.0D0 ) Err = ce
               RETURN
             ELSE

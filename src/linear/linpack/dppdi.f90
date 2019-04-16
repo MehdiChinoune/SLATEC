@@ -1,6 +1,5 @@
 !** DPPDI
 SUBROUTINE DPPDI(Ap,N,Det,Job)
-  IMPLICIT NONE
   !>
   !***
   !  Compute the determinant and inverse of a real symmetric

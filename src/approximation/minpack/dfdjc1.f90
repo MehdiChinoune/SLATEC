@@ -1,6 +1,5 @@
 !** DFDJC1
 SUBROUTINE DFDJC1(FCN,N,X,Fvec,Fjac,Ldfjac,Iflag,Ml,Mu,Epsfcn,Wa1,Wa2)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to DNSQ and DNSQE
@@ -97,7 +96,6 @@ SUBROUTINE DFDJC1(FCN,N,X,Fvec,Fjac,Ldfjac,Iflag,Ml,Mu,Epsfcn,Wa1,Wa2)
   !           (WRB)
   !   900328  Added TYPE section.  (WRB)
 
-  REAL(8) :: D1MACH
   INTEGER i, Iflag, j, k, Ldfjac, Ml, msum, Mu, N
   REAL(8) :: eps, Epsfcn, epsmch, Fjac(Ldfjac,*), Fvec(*), h, &
     temp, Wa1(*), Wa2(*), X(*)

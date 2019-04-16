@@ -1,6 +1,5 @@
 !** BSPPP
 SUBROUTINE BSPPP(T,A,N,K,Ldc,C,Xi,Lxi,Work)
-  IMPLICIT NONE
   !>
   !***
   !  Convert the B-representation of a B-spline to the piecewise

@@ -1,6 +1,5 @@
 !** BANDR
 SUBROUTINE BANDR(Nm,N,Mb,A,D,E,E2,Matz,Z)
-  IMPLICIT NONE
   !>
   !***
   !  Reduce a real symmetric band matrix to symmetric

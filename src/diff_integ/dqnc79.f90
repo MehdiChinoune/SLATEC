@@ -1,6 +1,5 @@
 !** DQNC79
 SUBROUTINE DQNC79(FUN,A,B,Err,Ans,Ierr,K)
-  IMPLICIT NONE
   !>
   !***
   !  Integrate a function using a 7-point adaptive Newton-Cotes
@@ -95,11 +94,6 @@ SUBROUTINE DQNC79(FUN,A,B,Err,Ans,Ierr,K)
   REAL(8) :: aa(99), f(13), f1(99), f2(99), f3(99), f4(99), f5(99), f6(99), &
     f7(99), hh(99), q7r(99), vl(99)
   INTEGER lr(99)
-  !     .. External Functions ..
-  REAL(8), EXTERNAL :: D1MACH
-  INTEGER, EXTERNAL :: I1MACH
-  !     .. External Subroutines ..
-  EXTERNAL :: XERMSG
   !     .. Intrinsic Functions ..
   INTRINSIC ABS, LOG, MAX, MIN, SIGN, SQRT
   !     .. Save statement ..

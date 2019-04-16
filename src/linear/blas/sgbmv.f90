@@ -1,6 +1,5 @@
 !** SGBMV
 SUBROUTINE SGBMV(Trans,M,N,Kl,Ku,Alpha,A,Lda,X,Incx,Beta,Y,Incy)
-  IMPLICIT NONE
   !>
   !***
   !  Multiply a real vector by a real general band matrix.
@@ -147,10 +146,6 @@ SUBROUTINE SGBMV(Trans,M,N,Kl,Ku,Alpha,A,Lda,X,Incx,Beta,Y,Incy)
   !     .. Local Scalars ..
   REAL temp
   INTEGER i, info, ix, iy, j, jx, jy, k, kup1, kx, ky, lenx, leny
-  !     .. External Functions ..
-  LOGICAL, EXTERNAL :: LSAME
-  !     .. External Subroutines ..
-  EXTERNAL :: XERBLA
   !     .. Intrinsic Functions ..
   INTRINSIC MAX, MIN
   !* FIRST EXECUTABLE STATEMENT  SGBMV

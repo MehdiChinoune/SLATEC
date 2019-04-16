@@ -1,6 +1,5 @@
 !** DPINTM
 SUBROUTINE DPINTM(M,N,Sx,Ix,Lmx,Ipagef)
-  IMPLICIT NONE
   !>
   !***
   !  Subsidiary to DSPLP

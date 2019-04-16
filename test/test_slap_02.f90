@@ -1,4 +1,5 @@
 MODULE TEST26_MOD
+  use slatec
   IMPLICIT NONE
 
 CONTAINS
@@ -107,11 +108,6 @@ CONTAINS
     !     .. Local Arrays ..
     REAL(8) :: a(MXNELT), f(MAXN), rwork(MAXRW), xiter(MAXN)
     INTEGER ia(MXNELT), iwork(MAXIW), ja(MXNELT)
-    !     .. External Functions ..
-    REAL(8), EXTERNAL :: D1MACH
-    !     .. External Subroutines ..
-    EXTERNAL :: DCPPLT, DS2Y, DSDBCG, DSDCG, DSDCGN, DSDCGS, DSDGMR, DSDOMN, DSGS, &
-      DSICCG, DSILUR, DSJAC, DSLUBC, DSLUCN, DSLUCS, DSLUGM, DSLUOM
     !     .. Intrinsic Functions ..
     INTRINSIC MAX, REAL
     !
@@ -482,10 +478,6 @@ CONTAINS
     !     .. Local Scalars ..
     REAL dummy
     INTEGER i, icol, inum, irow, iseed, k, nl
-    !     .. External Functions ..
-    REAL, EXTERNAL :: RAND
-    !     .. External Subroutines ..
-    EXTERNAL :: ISMPL
     !     .. Intrinsic Functions ..
     INTRINSIC INT
     !* FIRST EXECUTABLE STATEMENT  DRMGEN
@@ -742,6 +734,7 @@ END MODULE TEST26_MOD
 !** TEST26
 PROGRAM TEST26
   USE TEST26_MOD
+  use slatec
   IMPLICIT NONE
   !>
   !***
@@ -792,10 +785,6 @@ PROGRAM TEST26
 
   !     .. Local Scalars ..
   INTEGER ipass, kprint, lin, lun, nfail
-  !     .. External Functions ..
-  INTEGER, EXTERNAL :: I1MACH
-  !     .. External Subroutines ..
-  EXTERNAL :: XERMAX, XSETF, XSETUN
   !* FIRST EXECUTABLE STATEMENT  TEST26
   lun = I1MACH(2)
   lin = I1MACH(1)

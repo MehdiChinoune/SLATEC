@@ -1,6 +1,5 @@
 !** IMTQL1
 SUBROUTINE IMTQL1(N,D,E,Ierr)
-  IMPLICIT NONE
   !>
   !***
   !  Compute the eigenvalues of a symmetric tridiagonal matrix
@@ -80,7 +79,6 @@ SUBROUTINE IMTQL1(N,D,E,Ierr)
   INTEGER i, j, l, m, N, ii, mml, Ierr
   REAL D(*), E(*)
   REAL b, c, f, g, p, r, s, s1, s2
-  REAL PYTHAG
   !
   !* FIRST EXECUTABLE STATEMENT  IMTQL1
   Ierr = 0

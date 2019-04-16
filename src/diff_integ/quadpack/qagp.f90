@@ -1,7 +1,6 @@
 !** QAGP
 SUBROUTINE QAGP(F,A,B,Npts2,Points,Epsabs,Epsrel,Result,Abserr,Neval,Ier,&
     Leniw,Lenw,Last,Iwork,Work)
-  IMPLICIT NONE
   !>
   !***
   !  The routine calculates an approximation result to a given

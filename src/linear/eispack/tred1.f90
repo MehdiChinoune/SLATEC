@@ -1,6 +1,5 @@
 !** TRED1
 SUBROUTINE TRED1(Nm,N,A,D,E,E2)
-  IMPLICIT NONE
   !>
   !***
   !  Reduce a real symmetric matrix to symmetric tridiagonal

@@ -1,6 +1,5 @@
 !** SGEFS
 SUBROUTINE SGEFS(A,Lda,N,V,Itask,Ind,Work,Iwork)
-  IMPLICIT NONE
   !>
   !***
   !  Solve a general system of linear equations.
@@ -113,7 +112,7 @@ SUBROUTINE SGEFS(A,Lda,N,V,Itask,Ind,Work,Iwork)
 
   !
   INTEGER Lda, N, Itask, Ind, Iwork(*)
-  REAL A(Lda,*), V(*), Work(*), R1MACH
+  REAL A(Lda,*), V(*), Work(*)
   REAL rcond
   CHARACTER(8) :: xern1, xern2
   !* FIRST EXECUTABLE STATEMENT  SGEFS

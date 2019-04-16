@@ -1,6 +1,5 @@
 !** DBSPVN
 SUBROUTINE DBSPVN(T,Jhigh,K,Indexx,X,Ileft,Vnikx,Work,Iwork)
-  IMPLICIT NONE
   !>
   !***
   !  Calculate the value of all (possibly) nonzero basis

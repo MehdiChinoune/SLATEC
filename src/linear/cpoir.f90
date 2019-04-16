@@ -1,6 +1,5 @@
 !** CPOIR
 SUBROUTINE CPOIR(A,Lda,N,V,Itask,Ind,Work)
-  IMPLICIT NONE
   !>
   !***
   !  Solve a positive definite Hermitian system of linear
@@ -122,7 +121,7 @@ SUBROUTINE CPOIR(A,Lda,N,V,Itask,Ind,Work)
   !
   INTEGER Lda, N, Itask, Ind, info, j
   COMPLEX A(Lda,*), V(*), Work(N,*)
-  REAL SCASUM, xnorm, dnorm, R1MACH
+  REAL xnorm, dnorm
   REAL(8) :: dr1, di1, dr2, di2
   CHARACTER(8) :: xern1, xern2
   !* FIRST EXECUTABLE STATEMENT  CPOIR

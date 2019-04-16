@@ -1,6 +1,5 @@
 !** SQRSL
 SUBROUTINE SQRSL(X,Ldx,N,K,Qraux,Y,Qy,Qty,B,Rsd,Xb,Job,Info)
-  IMPLICIT NONE
   !>
   !***
   !  Apply the output of SQRDC to compute coordinate transfor-
@@ -169,7 +168,7 @@ SUBROUTINE SQRSL(X,Ldx,N,K,Qraux,Y,Qy,Qty,B,Rsd,Xb,Job,Info)
   REAL X(Ldx,*), Qraux(*), Y(*), Qy(*), Qty(*), B(*), Rsd(*), Xb(*)
   !
   INTEGER i, j, jj, ju, kp1
-  REAL SDOT, t, temp
+  REAL t, temp
   LOGICAL cb, cqy, cqty, cr, cxb
   !* FIRST EXECUTABLE STATEMENT  SQRSL
   !

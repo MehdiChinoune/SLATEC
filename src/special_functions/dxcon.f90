@@ -1,7 +1,6 @@
 !** DXCON
 SUBROUTINE DXCON(X,Ix,Ierror)
   USE DXBLK ,ONLY: RADixx, RADixl, DLG10r, L
-  IMPLICIT NONE
   !>
   !***
   !  To provide double-precision floating-point arithmetic
