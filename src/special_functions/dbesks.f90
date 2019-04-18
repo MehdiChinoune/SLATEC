@@ -1,7 +1,6 @@
 !** DBESKS
 SUBROUTINE DBESKS(Xnu,X,Nin,Bk)
   !>
-  !***
   !  Compute a sequence of modified Bessel functions of the
   !            third kind of fractional order.
   !***

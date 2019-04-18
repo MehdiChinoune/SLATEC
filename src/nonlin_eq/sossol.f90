@@ -1,7 +1,6 @@
 !** SOSSOL
 SUBROUTINE SOSSOL(K,N,L,X,C,B,M)
   !>
-  !***
   !  Subsidiary to SOS
   !***
   ! **Library:**   SLATEC

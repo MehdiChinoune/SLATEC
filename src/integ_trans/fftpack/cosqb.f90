@@ -1,7 +1,6 @@
 !** COSQB
 SUBROUTINE COSQB(N,X,Wsave)
   !>
-  !***
   !  Compute the unnormalized inverse cosine transform.
   !***
   ! **Library:**   SLATEC (FFTPACK)

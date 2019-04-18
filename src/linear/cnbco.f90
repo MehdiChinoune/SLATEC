@@ -1,7 +1,6 @@
 !** CNBCO
 SUBROUTINE CNBCO(Abe,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
   !>
-  !***
   !  Factor a band matrix using Gaussian elimination and
   !            estimate the condition number.
   !***

@@ -1,7 +1,6 @@
 !** HTRIB3
 SUBROUTINE HTRIB3(Nm,N,A,Tau,M,Zr,Zi)
   !>
-  !***
   !  Compute the eigenvectors of a complex Hermitian matrix from
   !            the eigenvectors of a real symmetric tridiagonal matrix
   !            output from HTRID3.

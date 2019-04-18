@@ -1,7 +1,6 @@
 !** PCHDF
 REAL FUNCTION PCHDF(K,X,S,Ierr)
   !>
-  !***
   !  Computes divided differences for PCHCE and PCHSP
   !***
   ! **Library:**   SLATEC (PCHIP)

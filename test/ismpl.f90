@@ -1,7 +1,6 @@
 !** ISMPL
 SUBROUTINE ISMPL(N,M,Indx)
   !>
-  !***
   !  Generate integer sample.
   !            This routine picks M "random" integers in the range 1 to
   !            N without any repetitions.

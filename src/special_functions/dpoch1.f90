@@ -1,7 +1,6 @@
 !** DPOCH1
 REAL(8) FUNCTION DPOCH1(A,X)
   !>
-  !***
   !  Calculate a generalization of Pochhammer's symbol starting
   !            from first order.
   !***

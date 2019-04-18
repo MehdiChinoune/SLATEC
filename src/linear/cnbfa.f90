@@ -1,7 +1,6 @@
 !** CNBFA
 SUBROUTINE CNBFA(Abe,Lda,N,Ml,Mu,Ipvt,Info)
   !>
-  !***
   !  Factor a band matrix by elimination.
   !***
   ! **Library:**   SLATEC

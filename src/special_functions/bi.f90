@@ -1,7 +1,6 @@
 !** BI
 REAL FUNCTION BI(X)
   !>
-  !***
   !  Evaluate the Bairy function (the Airy function of the
   !            second kind).
   !***

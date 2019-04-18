@@ -1,7 +1,6 @@
 !** GAMLN
 REAL FUNCTION GAMLN(Z,Ierr)
   !>
-  !***
   !  Compute the logarithm of the Gamma function
   !***
   ! **Library:**   SLATEC

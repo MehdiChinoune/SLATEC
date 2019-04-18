@@ -1,7 +1,6 @@
 !** DDSCL
 SUBROUTINE DDSCL(Hmax,N,Nq,Rmax,H,Rc,Rh,Yh)
   !>
-  !***
   !  Subroutine DDSCL rescales the YH array whenever the step
   !            size is changed.
   !***

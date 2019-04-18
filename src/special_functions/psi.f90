@@ -1,7 +1,6 @@
 !** PSI
 REAL FUNCTION PSI(X)
   !>
-  !***
   !  Compute the Psi (or Digamma) function.
   !***
   ! **Library:**   SLATEC (FNLIB)

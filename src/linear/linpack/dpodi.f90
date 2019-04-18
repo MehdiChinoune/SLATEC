@@ -1,7 +1,6 @@
 !** DPODI
 SUBROUTINE DPODI(A,Lda,N,Det,Job)
   !>
-  !***
   !  Compute the determinant and inverse of a certain real
   !            symmetric positive definite matrix using the factors
   !            computed by DPOCO, DPOFA or DQRDC.

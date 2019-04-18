@@ -2,7 +2,6 @@
 SUBROUTINE DQAGPE(F,A,B,Npts2,Points,Epsabs,Epsrel,Limit,Result,Abserr,&
     Neval,Ier,Alist,Blist,Rlist,Elist,Pts,Iord,Level,Ndin,Last)
   !>
-  !***
   !  Approximate a given definite integral I = Integral of F
   !            over (A,B), hopefully satisfying the accuracy claim:
   !                 ABS(I-RESULT).LE.MAX(EPSABS,EPSREL*ABS(I)).

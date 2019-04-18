@@ -1,7 +1,6 @@
 !** R9LGMC
 REAL FUNCTION R9LGMC(X)
   !>
-  !***
   !  Compute the log Gamma correction factor so that
   !            LOG(GAMMA(X)) = LOG(SQRT(2*PI)) + (X-.5)*LOG(X) - X
   !            + R9LGMC(X).

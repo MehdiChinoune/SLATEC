@@ -1,7 +1,6 @@
 !** DTRSV
 SUBROUTINE DTRSV(Uplo,Trans,Diag,N,A,Lda,X,Incx)
   !>
-  !***
   !  Solve one of the systems of equations.
   !***
   ! **Library:**   SLATEC (BLAS)

@@ -5,7 +5,6 @@ CONTAINS
   !** SPLPQX
   SUBROUTINE SPLPQX(Lun,Kprint,Ipass)
     !>
-    !***
     !  Quick check for SPLP.
     !***
     ! **Library:**   SLATEC
@@ -260,7 +259,6 @@ CONTAINS
   !** SBOCQX
   SUBROUTINE SBOCQX(Lun,Kprint,Ipass)
     !>
-    !***
     !  Quick check for SBOCLS.
     !***
     ! **Library:**   SLATEC
@@ -429,7 +427,6 @@ PROGRAM TEST37
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !>
-  !***
   !  Driver for testing SLATEC subprograms
   !***
   ! **Library:**   SLATEC

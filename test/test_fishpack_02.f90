@@ -5,7 +5,6 @@ CONTAINS
   !** FFTQX
   SUBROUTINE FFTQX(Lun,Kprint,Ipass)
     !>
-    !***
     !  Quick check for the NCAR FFT routines.
     !***
     ! **Library:**   SLATEC
@@ -641,7 +640,6 @@ PROGRAM TEST51
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !>
-  !***
   !  Driver for testing SLATEC subprograms
   !***
   ! **Library:**   SLATEC

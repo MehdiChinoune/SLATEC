@@ -1,7 +1,6 @@
 !** DGER
 SUBROUTINE DGER(M,N,Alpha,X,Incx,Y,Incy,A,Lda)
   !>
-  !***
   !  Perform the rank 1 operation.
   !***
   ! **Library:**   SLATEC (BLAS)

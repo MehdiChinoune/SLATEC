@@ -5,7 +5,6 @@ CONTAINS
   !** CCHQC
   SUBROUTINE CCHQC(Lun,Kprint,Nerr)
     !>
-    !***
     !  Quick check for CCHDC.
     !***
     ! **Library:**   SLATEC
@@ -116,7 +115,6 @@ CONTAINS
   !** CGBQC
   SUBROUTINE CGBQC(Lun,Kprint,Nerr)
     !>
-    !***
     !  Quick check for CGBFA, CGBCO, CGBSL and CGBDI.
     !***
     ! **Library:**   SLATEC
@@ -259,7 +257,6 @@ CONTAINS
   !** CGECK
   SUBROUTINE CGECK(Lun,Kprint,Nerr)
     !>
-    !***
     !  Quick check for CGEFA, CGECO, CGESL and CGEDI.
     !***
     ! **Library:**   SLATEC
@@ -415,7 +412,6 @@ CONTAINS
   !** CGTQC
   SUBROUTINE CGTQC(Lun,Kprint,Nerr)
     !>
-    !***
     !  Quick check for CGTSL.
     !***
     ! **Library:**   SLATEC
@@ -497,7 +493,6 @@ CONTAINS
   !** CHIQC
   SUBROUTINE CHIQC(Lun,Kprint,Nerr)
     !>
-    !***
     !  Quick check for CHIFA, CHICO, CHISL and CHIDI.
     !***
     ! **Library:**   SLATEC
@@ -650,7 +645,6 @@ CONTAINS
   !** CHPQC
   SUBROUTINE CHPQC(Lun,Kprint,Nerr)
     !>
-    !***
     !  Quick check for CHPFA, CHPCO, CHPSL and CHPDI.
     !***
     ! **Library:**   SLATEC
@@ -795,7 +789,6 @@ CONTAINS
   !** CPBQC
   SUBROUTINE CPBQC(Lun,Kprint,Nerr)
     !>
-    !***
     !  Quick check for CPBFA, CPBCO, CPBSL and CPBDI.
     !***
     ! **Library:**   SLATEC
@@ -923,7 +916,6 @@ CONTAINS
   !** CPOQC
   SUBROUTINE CPOQC(Lun,Kprint,Nerr)
     !>
-    !***
     !  Quick check for CPOFA, CPOCO, CPOSL and CPODI.
     !***
     ! **Library:**   SLATEC
@@ -1071,7 +1063,6 @@ CONTAINS
   !** CPPQC
   SUBROUTINE CPPQC(Lun,Kprint,Nerr)
     !>
-    !***
     !  Quick check for CPPFA, CPPCO, CPPSL and CPPDI.
     !***
     ! **Library:**   SLATEC
@@ -1210,7 +1201,6 @@ CONTAINS
   !** CPTQC
   SUBROUTINE CPTQC(Lun,Kprint,Nerr)
     !>
-    !***
     !  Quick check for CPTSL.
     !***
     ! **Library:**   SLATEC
@@ -1283,7 +1273,6 @@ CONTAINS
   !** CQRQC
   SUBROUTINE CQRQC(Lun,Kprint,Nerr)
     !>
-    !***
     !  Quick check for CQRDC and CQRSL.
     !***
     ! **Library:**   SLATEC
@@ -1434,7 +1423,6 @@ CONTAINS
   !** CSIQC
   SUBROUTINE CSIQC(Lun,Kprint,Nerr)
     !>
-    !***
     !  Quick check for CSIFA, CSICO, CSISL and CSIDI.
     !***
     ! **Library:**   SLATEC
@@ -1576,7 +1564,6 @@ CONTAINS
   !** CSPQC
   SUBROUTINE CSPQC(Lun,Kprint,Nerr)
     !>
-    !***
     !  Quick check for CSPFA, CSPCO, CSPSL and CSPDI.
     !***
     ! **Library:**   SLATEC
@@ -1710,7 +1697,6 @@ CONTAINS
   !** CSVQC
   SUBROUTINE CSVQC(Lun,Kprint,Nerr)
     !>
-    !***
     !  Quick check for CSVDC.
     !***
     ! **Library:**   SLATEC
@@ -1819,7 +1805,6 @@ CONTAINS
   !** CTRQC
   SUBROUTINE CTRQC(Lun,Kprint,Nerr)
     !>
-    !***
     !  Quick check for CTRFA, CTRCO, CTRSL and CTRDI.
     !***
     ! **Library:**   SLATEC
@@ -2003,7 +1988,6 @@ PROGRAM TEST23
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !>
-  !***
   !  Driver for testing SLATEC subprograms
   !***
   ! **Library:**   SLATEC

@@ -1,7 +1,6 @@
 !** ZMLRI
 SUBROUTINE ZMLRI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol)
   !>
-  !***
   !  Subsidiary to ZBESI and ZBESK
   !***
   ! **Library:**   SLATEC

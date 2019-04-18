@@ -1,7 +1,6 @@
 !** SGBMV
 SUBROUTINE SGBMV(Trans,M,N,Kl,Ku,Alpha,A,Lda,X,Incx,Beta,Y,Incy)
   !>
-  !***
   !  Multiply a real vector by a real general band matrix.
   !***
   ! **Library:**   SLATEC (BLAS)

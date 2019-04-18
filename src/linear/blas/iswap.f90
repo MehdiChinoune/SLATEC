@@ -1,7 +1,6 @@
 !** ISWAP
 SUBROUTINE ISWAP(N,Ix,Incx,Iy,Incy)
   !>
-  !***
   !  Interchange two vectors.
   !***
   ! **Library:**   SLATEC (BLAS)

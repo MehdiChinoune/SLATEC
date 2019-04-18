@@ -1,7 +1,6 @@
 !** LA05ES
 SUBROUTINE LA05ES(A,Irn,Ip,N,Iw,Ia,Reals)
   !>
-  !***
   !  Subsidiary to SPLP
   !***
   ! **Library:**   SLATEC

@@ -1,7 +1,6 @@
 !** OHTROR
 SUBROUTINE OHTROR(Q,N,Nrda,Diag,Irank,Div,Td)
   !>
-  !***
   !  Subsidiary to BVSUP
   !***
   ! **Library:**   SLATEC

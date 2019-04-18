@@ -1,7 +1,6 @@
 !** HQR2
 SUBROUTINE HQR2(Nm,N,Low,Igh,H,Wr,Wi,Z,Ierr)
   !>
-  !***
   !  Compute the eigenvalues and eigenvectors of a real upper
   !            Hessenberg matrix using QR method.
   !***

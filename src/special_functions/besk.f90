@@ -1,7 +1,6 @@
 !** BESK
 SUBROUTINE BESK(X,Fnu,Kode,N,Y,Nz)
   !>
-  !***
   !  Implement forward recursion on the three term recursion
   !            relation for a sequence of non-negative order Bessel
   !            functions K/SUB(FNU+I-1)/(X), or scaled Bessel functions

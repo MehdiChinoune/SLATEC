@@ -1,7 +1,6 @@
 !** DRC
 REAL(8) FUNCTION DRC(X,Y,Ier)
   !>
-  !***
   !  Calculate a double precision approximation to
   !             DRC(X,Y) = Integral from zero to infinity of
   !                              -1/2     -1

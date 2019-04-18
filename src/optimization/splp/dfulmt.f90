@@ -1,7 +1,6 @@
 !** DFULMT
 SUBROUTINE DFULMT(I,J,Aij,Indcat,Prgopt,Dattrv,Iflag)
   !>
-  !***
   !  Subsidiary to DSPLP
   !***
   ! **Library:**   SLATEC

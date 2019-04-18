@@ -2,7 +2,6 @@
 SUBROUTINE SBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
     Scl,Ibasis,Ibb)
   !>
-  !***
   !  Subsidiary to SBOCLS and SBOLS
   !***
   ! **Library:**   SLATEC

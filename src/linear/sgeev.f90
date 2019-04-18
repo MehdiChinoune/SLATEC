@@ -1,7 +1,6 @@
 !** SGEEV
 SUBROUTINE SGEEV(A,Lda,N,E,V,Ldv,Work,Job,Info)
   !>
-  !***
   !  Compute the eigenvalues and, optionally, the eigenvectors
   !            of a real general matrix.
   !***

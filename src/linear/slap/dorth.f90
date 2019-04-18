@@ -1,7 +1,6 @@
 !** DORTH
 SUBROUTINE DORTH(Vnew,V,Hes,N,Ll,Ldhes,Kmp,Snormw)
   !>
-  !***
   !  Internal routine for DGMRES.
   !***
   ! **Library:**   SLATEC (SLAP)

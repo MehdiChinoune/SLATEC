@@ -1,7 +1,6 @@
 !** SROT
 SUBROUTINE SROT(N,Sx,Incx,Sy,Incy,Sc,Ss)
   !>
-  !***
   !  Apply a plane Givens rotation.
   !***
   ! **Library:**   SLATEC (BLAS)

@@ -1,7 +1,6 @@
 !** QWGTF
 REAL FUNCTION QWGTF(X,Omega,P2,P3,P4,Integr)
   !>
-  !***
   !  This function subprogram is used together with the
   !            routine QAWF and defines the WEIGHT function.
   !***

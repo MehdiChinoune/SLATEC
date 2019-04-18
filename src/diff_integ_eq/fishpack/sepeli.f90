@@ -2,7 +2,6 @@
 SUBROUTINE SEPELI(Intl,Iorder,A,B,M,Mbdcnd,Bda,Alpha,Bdb,Beta,C,D,N,&
     Nbdcnd,Bdc,Gama,Bdd,Xnu,COFX,COFY,Grhs,Usol,Idmn,W,Pertrb,Ierror)
   !>
-  !***
   !  Discretize and solve a second and, optionally, a fourth
   !            order finite difference approximation on a uniform grid to
   !            the general separable elliptic partial differential

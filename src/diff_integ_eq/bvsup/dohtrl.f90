@@ -1,7 +1,6 @@
 !** DOHTRL
 SUBROUTINE DOHTRL(Q,N,Nrda,Diag,Irank,Div,Td)
   !>
-  !***
   !  Subsidiary to DBVSUP and DSUDS
   !***
   ! **Library:**   SLATEC

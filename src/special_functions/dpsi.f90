@@ -1,7 +1,6 @@
 !** DPSI
 REAL(8) FUNCTION DPSI(X)
   !>
-  !***
   !  Compute the Psi (or Digamma) function.
   !***
   ! **Library:**   SLATEC (FNLIB)

@@ -2,7 +2,6 @@
 SUBROUTINE HSTCS1(Intl,A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
     Idimf,Pertrb,Ierr1,Am,Bm,Cm,An,Bn,Cn,Snth,Rsq,Wrk)
   !>
-  !***
   !  Subsidiary to HSTCSP
   !***
   ! **Library:**   SLATEC

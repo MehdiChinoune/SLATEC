@@ -2,7 +2,6 @@
 SUBROUTINE CSCALE(A,Nrda,Nrow,Ncol,Cols,Colsav,Rows,Rowsav,Anorm,Scales,&
     Iscale,Ic)
   !>
-  !***
   !  Subsidiary to BVSUP
   !***
   ! **Library:**   SLATEC

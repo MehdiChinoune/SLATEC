@@ -1,7 +1,6 @@
 !** SPPFA
 SUBROUTINE SPPFA(Ap,N,Info)
   !>
-  !***
   !  Factor a real symmetric positive definite matrix stored in
   !            packed form.
   !***

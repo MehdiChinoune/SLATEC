@@ -1,7 +1,6 @@
 !** DTRMV
 SUBROUTINE DTRMV(Uplo,Trans,Diag,N,A,Lda,X,Incx)
   !>
-  !***
   !  Perform one of the matrix-vector operations.
   !***
   ! **Library:**   SLATEC (BLAS)

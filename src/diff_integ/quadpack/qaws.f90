@@ -2,7 +2,6 @@
 SUBROUTINE QAWS(F,A,B,Alfa,Beta,Integr,Epsabs,Epsrel,Result,Abserr,Neval,&
     Ier,Limit,Lenw,Last,Iwork,Work)
   !>
-  !***
   !  The routine calculates an approximation result to a given
   !            definite integral I = Integral of F*W over (A,B),
   !            (where W shows a singular behaviour at the end points

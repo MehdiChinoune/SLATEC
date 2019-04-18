@@ -1,7 +1,6 @@
 !** RAND
 REAL FUNCTION RAND(R)
   !>
-  !***
   !  Generate a uniformly distributed random number.
   !***
   ! **Library:**   SLATEC (FNLIB)

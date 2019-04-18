@@ -1,7 +1,6 @@
 !** DSDOT
 REAL(8) FUNCTION DSDOT(N,Sx,Incx,Sy,Incy)
   !>
-  !***
   !  Compute the inner product of two vectors with extended
   !            precision accumulation and result.
   !***

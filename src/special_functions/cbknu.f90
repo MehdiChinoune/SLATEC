@@ -1,7 +1,6 @@
 !** CBKNU
 SUBROUTINE CBKNU(Z,Fnu,Kode,N,Y,Nz,Tol,Elim,Alim)
   !>
-  !***
   !  Subsidiary to CAIRY, CBESH, CBESI and CBESK
   !***
   ! **Library:**   SLATEC

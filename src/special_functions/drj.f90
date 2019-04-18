@@ -1,7 +1,6 @@
 !** DRJ
 REAL(8) FUNCTION DRJ(X,Y,Z,P,Ier)
   !>
-  !***
   !  Compute the incomplete or complete (X or Y or Z is zero)
   !            elliptic integral of the 3rd kind.  For X, Y, and Z non-
   !            negative, at most one of them zero, and P positive,

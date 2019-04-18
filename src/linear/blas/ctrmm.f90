@@ -1,7 +1,6 @@
 !** CTRMM
 SUBROUTINE CTRMM(Side,Uplo,Transa,Diag,M,N,Alpha,A,Lda,B,Ldb)
   !>
-  !***
   !  Multiply a complex general matrix by a complex triangular
   !            matrix.
   !***

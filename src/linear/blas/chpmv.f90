@@ -1,7 +1,6 @@
 !** CHPMV
 SUBROUTINE CHPMV(Uplo,N,Alpha,Ap,X,Incx,Beta,Y,Incy)
   !>
-  !***
   !  Perform the matrix-vector operation.
   !***
   ! **Library:**   SLATEC (BLAS)

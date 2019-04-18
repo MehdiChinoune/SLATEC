@@ -1,7 +1,6 @@
 !** PCHSP
 SUBROUTINE PCHSP(Ic,Vc,N,X,F,D,Incfd,Wk,Nwk,Ierr)
   !>
-  !***
   !  Set derivatives needed to determine the Hermite represen-
   !            tation of the cubic spline interpolant to given data, with
   !            specified boundary conditions.

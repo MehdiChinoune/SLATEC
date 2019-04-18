@@ -1,7 +1,6 @@
 !** CINVIT
 SUBROUTINE CINVIT(Nm,N,Ar,Ai,Wr,Wi,Select,Mm,M,Zr,Zi,Ierr,Rm1,Rm2,Rv1,Rv2)
   !>
-  !***
   !  Compute the eigenvectors of a complex upper Hessenberg
   !            associated with specified eigenvalues using inverse
   !            iteration.

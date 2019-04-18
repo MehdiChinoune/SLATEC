@@ -1,7 +1,6 @@
 !** DSINDG
 REAL(8) FUNCTION DSINDG(X)
   !>
-  !***
   !  Compute the sine of an argument in degrees.
   !***
   ! **Library:**   SLATEC (FNLIB)

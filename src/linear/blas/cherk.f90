@@ -1,7 +1,6 @@
 !** CHERK
 SUBROUTINE CHERK(Uplo,Trans,N,K,Alpha,A,Lda,Beta,C,Ldc)
   !>
-  !***
   !  Perform Hermitian rank k update of a complex Hermitian
   !            matrix.
   !***

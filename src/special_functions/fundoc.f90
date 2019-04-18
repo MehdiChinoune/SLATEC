@@ -1,7 +1,6 @@
 !** FUNDOC
 SUBROUTINE FUNDOC
   !>
-  !***
   !  Documentation for FNLIB, a collection of routines for
   !            evaluating elementary and special functions.
   !***

@@ -1,7 +1,6 @@
 !** SUDS
 SUBROUTINE SUDS(A,X,B,Neq,Nuk,Nrda,Iflag,Mlso,Work,Iwork)
   !>
-  !***
   !  Subsidiary to BVSUP
   !***
   ! **Library:**   SLATEC

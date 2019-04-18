@@ -1,7 +1,6 @@
 !** DSMMI2
 SUBROUTINE DSMMI2(N,B,X,Il,Jl,L,Dinv,Iu,Ju,U)
   !>
-  !***
   !  SLAP Backsolve for LDU Factorization of Normal Equations.
   !            To solve a system of the form  (L*D*U)*(L*D*U)' X = B,
   !            where L is a unit lower triangular matrix, D is a diagonal

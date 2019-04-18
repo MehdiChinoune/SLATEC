@@ -1,7 +1,6 @@
 !** SNBSL
 SUBROUTINE SNBSL(Abe,Lda,N,Ml,Mu,Ipvt,B,Job)
   !>
-  !***
   !  Solve a real band system using the factors computed by
   !            SNBCO or SNBFA.
   !***

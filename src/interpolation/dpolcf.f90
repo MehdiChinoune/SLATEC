@@ -1,7 +1,6 @@
 !** DPOLCF
 SUBROUTINE DPOLCF(Xx,N,X,C,D,Work)
   !>
-  !***
   !  Compute the coefficients of the polynomial fit (including
   !            Hermite polynomial fits) produced by a previous call to
   !            POLINT.

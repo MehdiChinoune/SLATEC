@@ -1,7 +1,6 @@
 !** XERCNT
 SUBROUTINE XERCNT(Librar,Subrou,Messg,Nerr,Level,Kontrl)
   !>
-  !***
   !  Allow user control over handling of errors.
   !***
   ! **Library:**   SLATEC (XERROR)

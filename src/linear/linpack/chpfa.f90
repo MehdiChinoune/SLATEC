@@ -1,7 +1,6 @@
 !** CHPFA
 SUBROUTINE CHPFA(Ap,N,Kpvt,Info)
   !>
-  !***
   !  Factor a complex Hermitian matrix stored in packed form by
   !            elimination with symmetric pivoting.
   !***

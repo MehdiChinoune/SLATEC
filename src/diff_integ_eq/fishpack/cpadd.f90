@@ -1,7 +1,6 @@
 !** CPADD
 SUBROUTINE CPADD(N,Ierror,A,C,Cbp,Bp,Bh)
   !>
-  !***
   !  Subsidiary to CBLKTR
   !***
   ! **Library:**   SLATEC

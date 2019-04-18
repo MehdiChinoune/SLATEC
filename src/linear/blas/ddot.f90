@@ -1,7 +1,6 @@
 !** DDOT
 REAL(8) FUNCTION DDOT(N,Dx,Incx,Dy,Incy)
   !>
-  !***
   !  Compute the inner product of two vectors.
   !***
   ! **Library:**   SLATEC (BLAS)

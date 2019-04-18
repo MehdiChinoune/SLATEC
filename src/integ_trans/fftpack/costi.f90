@@ -1,7 +1,6 @@
 !** COSTI
 SUBROUTINE COSTI(N,Wsave)
   !>
-  !***
   !  Initialize a work array for COST.
   !***
   ! **Library:**   SLATEC (FFTPACK)

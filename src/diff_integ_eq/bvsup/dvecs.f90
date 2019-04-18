@@ -1,7 +1,6 @@
 !** DVECS
 SUBROUTINE DVECS(Ncomp,Lnfc,Yhp,Work,Iwork,Inhomo,Iflag)
   !>
-  !***
   !  Subsidiary to DBVSUP
   !***
   ! **Library:**   SLATEC

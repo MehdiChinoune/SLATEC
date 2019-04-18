@@ -1,7 +1,6 @@
 !** CHIDI
 SUBROUTINE CHIDI(A,Lda,N,Kpvt,Det,Inert,Work,Job)
   !>
-  !***
   !  Compute the determinant, inertia and inverse of a complex
   !            Hermitian matrix using the factors obtained from CHIFA.
   !***

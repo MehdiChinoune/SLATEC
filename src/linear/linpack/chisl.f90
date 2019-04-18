@@ -1,7 +1,6 @@
 !** CHISL
 SUBROUTINE CHISL(A,Lda,N,Kpvt,B)
   !>
-  !***
   !  Solve the complex Hermitian system using factors obtained
   !            from CHIFA.
   !***

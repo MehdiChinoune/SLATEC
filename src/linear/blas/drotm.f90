@@ -1,7 +1,6 @@
 !** DROTM
 SUBROUTINE DROTM(N,Dx,Incx,Dy,Incy,Dparam)
   !>
-  !***
   !  Apply a modified Givens transformation.
   !***
   ! **Library:**   SLATEC (BLAS)

@@ -1,7 +1,6 @@
 !** QPSRT
 SUBROUTINE QPSRT(Limit,Last,Maxerr,Ermax,Elist,Iord,Nrmax)
   !>
-  !***
   !  Subsidiary to QAGE, QAGIE, QAGPE, QAGSE, QAWCE, QAWOE and
   !            QAWSE
   !***

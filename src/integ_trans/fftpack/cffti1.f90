@@ -1,7 +1,6 @@
 !** CFFTI1
 SUBROUTINE CFFTI1(N,Wa,Ifac)
   !>
-  !***
   !  Initialize a real and an integer work array for CFFTF1 and
   !            CFFTB1.
   !***

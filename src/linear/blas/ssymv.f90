@@ -1,7 +1,6 @@
 !** SSYMV
 SUBROUTINE SSYMV(Uplo,N,Alpha,A,Lda,X,Incx,Beta,Y,Incy)
   !>
-  !***
   !  Multiply a real vector by a real symmetric matrix.
   !***
   ! **Library:**   SLATEC (BLAS)

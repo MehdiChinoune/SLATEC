@@ -1,7 +1,6 @@
 !** DGEMV
 SUBROUTINE DGEMV(Trans,M,N,Alpha,A,Lda,X,Incx,Beta,Y,Incy)
   !>
-  !***
   !  Perform one of the matrix-vector operations.
   !***
   ! **Library:**   SLATEC (BLAS)

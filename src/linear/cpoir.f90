@@ -1,7 +1,6 @@
 !** CPOIR
 SUBROUTINE CPOIR(A,Lda,N,V,Itask,Ind,Work)
   !>
-  !***
   !  Solve a positive definite Hermitian system of linear
   !            equations.  Iterative refinement is used to obtain an
   !            error estimate.

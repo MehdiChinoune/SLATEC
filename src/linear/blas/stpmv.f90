@@ -1,7 +1,6 @@
 !** STPMV
 SUBROUTINE STPMV(Uplo,Trans,Diag,N,Ap,X,Incx)
   !>
-  !***
   !  Perform one of the matrix-vector operations.
   !***
   ! **Library:**   SLATEC (BLAS)

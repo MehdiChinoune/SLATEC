@@ -1,7 +1,6 @@
 !** DBSKIN
 SUBROUTINE DBSKIN(X,N,Kode,M,Y,Nz,Ierr)
   !>
-  !***
   !  Compute repeated integrals of the K-zero Bessel function.
   !***
   ! **Library:**   SLATEC

@@ -1,7 +1,6 @@
 !** DORTHR
 SUBROUTINE DORTHR(A,N,M,Nrda,Iflag,Irank,Iscale,Diag,Kpivot,Scales,Rows,Rs)
   !>
-  !***
   !  Subsidiary to DBVSUP and DSUDS
   !***
   ! **Library:**   SLATEC

@@ -1,7 +1,6 @@
 !** DBVDER
 SUBROUTINE DBVDER(X,Y,Yp,G,Ipar)
   !>
-  !***
   !  Subsidiary to DBVSUP
   !***
   ! **Library:**   SLATEC

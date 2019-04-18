@@ -5,7 +5,6 @@ CONTAINS
   !** CQAG
   SUBROUTINE CQAG(Lun,Kprint,Ipass)
     !>
-    !***
     !  Quick check for QAG.
     !***
     ! **Library:**   SLATEC
@@ -118,7 +117,6 @@ CONTAINS
   !** CQAGI
   SUBROUTINE CQAGI(Lun,Kprint,Ipass)
     !>
-    !***
     !  Quick check for QAGI.
     !***
     ! **Library:**   SLATEC
@@ -250,7 +248,6 @@ CONTAINS
   !** CQAGP
   SUBROUTINE CQAGP(Lun,Kprint,Ipass)
     !>
-    !***
     !  Quick check for QAGP.
     !***
     ! **Library:**   SLATEC
@@ -395,7 +392,6 @@ CONTAINS
   !** CQAGS
   SUBROUTINE CQAGS(Lun,Kprint,Ipass)
     !>
-    !***
     !  Quick check for QAGS.
     !***
     ! **Library:**   SLATEC
@@ -535,7 +531,6 @@ CONTAINS
   !** CQAWC
   SUBROUTINE CQAWC(Lun,Kprint,Ipass)
     !>
-    !***
     !  Quick check for QAWC.
     !***
     ! **Library:**   SLATEC
@@ -639,7 +634,6 @@ CONTAINS
   !** CQAWF
   SUBROUTINE CQAWF(Lun,Kprint,Ipass)
     !>
-    !***
     !  Quick check for QAWF.
     !***
     ! **Library:**   SLATEC
@@ -754,7 +748,6 @@ CONTAINS
   !** CQAWO
   SUBROUTINE CQAWO(Lun,Kprint,Ipass)
     !>
-    !***
     !  Quick check for QAWO.
     !***
     ! **Library:**   SLATEC
@@ -883,7 +876,6 @@ CONTAINS
   !** CQAWS
   SUBROUTINE CQAWS(Lun,Kprint,Ipass)
     !>
-    !***
     !  Quick check for QAWS.
     !***
     ! **Library:**   SLATEC
@@ -989,7 +981,6 @@ CONTAINS
   !** CQNG
   SUBROUTINE CQNG(Lun,Kprint,Ipass)
     !>
-    !***
     !  Quick check for QNG.
     !***
     ! **Library:**   SLATEC
@@ -1065,7 +1056,6 @@ CONTAINS
   !** F0C
   REAL FUNCTION F0C(X)
     !>
-    !***
     !  Subsidiary to
     !***
     ! **Library:**   SLATEC
@@ -1085,7 +1075,6 @@ CONTAINS
   !** F0F
   REAL FUNCTION F0F(X)
     !>
-    !***
     !  Subsidiary to
     !***
     ! **Library:**   SLATEC
@@ -1106,7 +1095,6 @@ CONTAINS
   !** F0O
   REAL FUNCTION F0O(X)
     !>
-    !***
     !  Subsidiary to
     !***
     ! **Library:**   SLATEC
@@ -1126,7 +1114,6 @@ CONTAINS
   !** F0S
   REAL FUNCTION F0S(X)
     !>
-    !***
     !  Subsidiary to
     !***
     ! **Library:**   SLATEC
@@ -1147,7 +1134,6 @@ CONTAINS
   !** F0WS
   REAL FUNCTION F0WS(X)
     !>
-    !***
     !  Subsidiary to
     !***
     ! **Library:**   SLATEC
@@ -1167,7 +1153,6 @@ CONTAINS
   !** F1C
   REAL FUNCTION F1C(X)
     !>
-    !***
     !  Subsidiary to
     !***
     ! **Library:**   SLATEC
@@ -1188,7 +1173,6 @@ CONTAINS
   !** F1F
   REAL FUNCTION F1F(X)
     !>
-    !***
     !  Subsidiary to
     !***
     ! **Library:**   SLATEC
@@ -1211,7 +1195,6 @@ CONTAINS
   !** F1G
   REAL FUNCTION F1G(X)
     !>
-    !***
     !  Subsidiary to
     !***
     ! **Library:**   SLATEC
@@ -1232,7 +1215,6 @@ CONTAINS
   !** F1N
   REAL FUNCTION F1N(X)
     !>
-    !***
     !  Subsidiary to
     !***
     ! **Library:**   SLATEC
@@ -1252,7 +1234,6 @@ CONTAINS
   !** F1O
   REAL FUNCTION F1O(X)
     !>
-    !***
     !  Subsidiary to
     !***
     ! **Library:**   SLATEC
@@ -1273,7 +1254,6 @@ CONTAINS
   !** F1P
   REAL FUNCTION F1P(X)
     !>
-    !***
     !  Subsidiary to
     !***
     ! **Library:**   SLATEC
@@ -1301,7 +1281,6 @@ CONTAINS
   !** F1S
   REAL FUNCTION F1S(X)
     !>
-    !***
     !  Subsidiary to
     !***
     ! **Library:**   SLATEC
@@ -1321,7 +1300,6 @@ CONTAINS
   !** F1WS
   REAL FUNCTION F1WS(X)
     !>
-    !***
     !  Subsidiary to
     !***
     ! **Library:**   SLATEC
@@ -1341,7 +1319,6 @@ CONTAINS
   !** F2G
   REAL FUNCTION F2G(X)
     !>
-    !***
     !  Subsidiary to
     !***
     ! **Library:**   SLATEC
@@ -1361,7 +1338,6 @@ CONTAINS
   !** F2N
   REAL FUNCTION F2N(X)
     !>
-    !***
     !  Subsidiary to
     !***
     ! **Library:**   SLATEC
@@ -1381,7 +1357,6 @@ CONTAINS
   !** F2O
   REAL FUNCTION F2O(X)
     !>
-    !***
     !  Subsidiary to
     !***
     ! **Library:**   SLATEC
@@ -1402,7 +1377,6 @@ CONTAINS
   !** F2P
   REAL FUNCTION F2P(X)
     !>
-    !***
     !  Subsidiary to
     !***
     ! **Library:**   SLATEC
@@ -1422,7 +1396,6 @@ CONTAINS
   !** F2S
   REAL FUNCTION F2S(X)
     !>
-    !***
     !  Subsidiary to
     !***
     ! **Library:**   SLATEC
@@ -1443,7 +1416,6 @@ CONTAINS
   !** F3G
   REAL FUNCTION F3G(X)
     !>
-    !***
     !  Subsidiary to
     !***
     ! **Library:**   SLATEC
@@ -1463,7 +1435,6 @@ CONTAINS
   !** F3P
   REAL FUNCTION F3P(X)
     !>
-    !***
     !  Subsidiary to
     !***
     ! **Library:**   SLATEC
@@ -1484,7 +1455,6 @@ CONTAINS
   !** F3S
   REAL FUNCTION F3S(X)
     !>
-    !***
     !  Subsidiary to
     !***
     ! **Library:**   SLATEC
@@ -1505,7 +1475,6 @@ CONTAINS
   !** F4P
   REAL FUNCTION F4P(X)
     !>
-    !***
     !  Subsidiary to
     !***
     ! **Library:**   SLATEC
@@ -1526,7 +1495,6 @@ CONTAINS
   !** F4S
   REAL FUNCTION F4S(X)
     !>
-    !***
     !  Subsidiary to
     !***
     ! **Library:**   SLATEC
@@ -1552,7 +1520,6 @@ CONTAINS
   !** F5S
   REAL FUNCTION F5S(X)
     !>
-    !***
     !  Subsidiary to
     !***
     ! **Library:**   SLATEC
@@ -1573,7 +1540,6 @@ CONTAINS
   !** T0
   REAL FUNCTION T0(X)
     !>
-    !***
     !  Subsidiary to
     !***
     ! **Library:**   SLATEC
@@ -1597,7 +1563,6 @@ CONTAINS
   !** T1
   REAL FUNCTION T1(X)
     !>
-    !***
     !  Subsidiary to
     !***
     ! **Library:**   SLATEC
@@ -1621,7 +1586,6 @@ CONTAINS
   !** T2
   REAL FUNCTION T2(X)
     !>
-    !***
     !  Subsidiary to
     !***
     ! **Library:**   SLATEC
@@ -1645,7 +1609,6 @@ CONTAINS
   !** T3
   REAL FUNCTION T3(X)
     !>
-    !***
     !  Subsidiary to
     !***
     ! **Library:**   SLATEC
@@ -1669,7 +1632,6 @@ CONTAINS
   !** T4
   REAL FUNCTION T4(X)
     !>
-    !***
     !  Subsidiary to
     !***
     ! **Library:**   SLATEC
@@ -1693,7 +1655,6 @@ CONTAINS
   !** T5
   REAL FUNCTION T5(X)
     !>
-    !***
     !  Subsidiary to
     !***
     ! **Library:**   SLATEC
@@ -1717,7 +1678,6 @@ CONTAINS
   !** CPRIN
   SUBROUTINE CPRIN(Lun,Num1,Kprint,Ip,Exact,Result,Abserr,Neval,Ierv,Lierv)
     !>
-    !***
     !  Subsidiary to CQAG, CQAG, CQAGI, CQAGP, CQAGS, CQAWC,
     !            CQAWF, CQAWO, CQAWS, and CQNG.
     !***
@@ -1806,7 +1766,6 @@ PROGRAM TEST39
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !>
-  !***
   !  Driver for testing SLATEC subprograms
   !***
   ! **Library:**   SLATEC

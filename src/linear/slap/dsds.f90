@@ -1,7 +1,6 @@
 !** DSDS
 SUBROUTINE DSDS(N,Nelt,Ia,Ja,A,Isym,Dinv)
   !>
-  !***
   !  Diagonal Scaling Preconditioner SLAP Set Up.
   !            Routine to compute the inverse of the diagonal of a matrix
   !            stored in the SLAP Column format.

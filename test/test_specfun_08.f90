@@ -5,7 +5,6 @@ CONTAINS
   !** CQCAI
   SUBROUTINE CQCAI(Lun,Kprint,Ipass)
     !>
-    !***
     !  Quick check for SLATEC subroutines
     !            CAIRY, CBIRY
     !***
@@ -372,7 +371,6 @@ CONTAINS
   !** CQCBH
   SUBROUTINE CQCBH(Lun,Kprint,Ipass)
     !>
-    !***
     !  Quick check for SLATEC subroutine
     !            CBESH
     !***
@@ -727,7 +725,6 @@ CONTAINS
   !** CQCBI
   SUBROUTINE CQCBI(Lun,Kprint,Ipass)
     !>
-    !***
     !  Quick check for SLATEC subroutine
     !            CBESI
     !***
@@ -1217,7 +1214,6 @@ CONTAINS
   !** CQCBJ
   SUBROUTINE CQCBJ(Lun,Kprint,Ipass)
     !>
-    !***
     !  Quick check for SLATEC subroutine
     !            CBESJ
     !***
@@ -1612,7 +1608,6 @@ CONTAINS
   !** CQCBK
   SUBROUTINE CQCBK(Lun,Kprint,Ipass)
     !>
-    !***
     !  Quick check for SLATEC subroutine
     !            CBESK
     !***
@@ -1975,7 +1970,6 @@ CONTAINS
   !** CQCBY
   SUBROUTINE CQCBY(Lun,Kprint,Ipass)
     !>
-    !***
     !  Quick check for SLATEC subroutine
     !            CBESY
     !***
@@ -2376,7 +2370,6 @@ PROGRAM TEST09
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !>
-  !***
   !  Driver for testing SLATEC subprograms.
   !***
   ! **Library:**   SLATEC

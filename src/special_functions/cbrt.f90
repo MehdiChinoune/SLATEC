@@ -1,7 +1,6 @@
 !** CBRT
 REAL FUNCTION CBRT(X)
   !>
-  !***
   !  Compute the cube root.
   !***
   ! **Library:**   SLATEC (FNLIB)

@@ -5,7 +5,6 @@ CONTAINS
   !** DBEG
   REAL(8) FUNCTION DBEG(Reset)
     !>
-    !***
     !  Generate random numbers.
     !***
     ! **Library:**   SLATEC (BLAS)
@@ -66,7 +65,6 @@ CONTAINS
   !** DBLAT2
   SUBROUTINE DBLAT2(Nout,Kprint,Ipass)
     !>
-    !***
     !  Driver for testing Level 2 BLAS double precision
     !            subroutines.
     !***
@@ -266,7 +264,6 @@ CONTAINS
   !** DBLAT3
   SUBROUTINE DBLAT3(Nout,Kprint,Ipass)
     !>
-    !***
     !  Driver for testing Level 3 BLAS double precision
     !            subroutines.
     !***
@@ -481,7 +478,6 @@ CONTAINS
   !** DMAKE2
   SUBROUTINE DMAKE2(Type,Uplo,Diag,M,N,A,Nmax,Aa,Lda,Kl,Ku,Reset,Transl)
     !>
-    !***
     !  Generate values for an M by N matrix A.
     !***
     ! **Library:**   SLATEC (BLAS)
@@ -660,7 +656,6 @@ CONTAINS
   !** DMAKE3
   SUBROUTINE DMAKE3(Type,Uplo,Diag,M,N,A,Nmax,Aa,Lda,Reset,Transl)
     !>
-    !***
     !  Generate values for an M by N matrix A.
     !***
     ! **Library:**   SLATEC (BLAS)
@@ -781,7 +776,6 @@ CONTAINS
   SUBROUTINE DMMCH(Transa,Transb,M,N,Kk,Alpha,A,Lda,B,Ldb,Beta,C,Ldc,Ct,G,&
       Cc,Ldcc,Eps,Err,Ftl,Nout,Mv,Kprint)
     !>
-    !***
     !  Check the results of the computational tests.
     !***
     ! **Library:**   SLATEC (BLAS)
@@ -904,7 +898,6 @@ CONTAINS
   SUBROUTINE DMVCH(Trans,M,N,Alpha,A,Nmax,X,Incx,Beta,Y,Incy,Yt,G,Yy,Eps,&
       Err,Ftl,Nout,Mv,Kprint)
     !>
-    !***
     !  Check the results of the computational tests.
     !***
     ! **Library:**   SLATEC (BLAS)
@@ -1024,7 +1017,6 @@ CONTAINS
   !** LDE
   LOGICAL FUNCTION LDE(Ri,Rj,Lr)
     !>
-    !***
     !  Test if two arrays are identical.
     !***
     ! **Library:**   SLATEC (BLAS)
@@ -1067,7 +1059,6 @@ CONTAINS
   !** LDERES
   LOGICAL FUNCTION LDERES(Type,Uplo,M,N,Aa,As,Lda)
     !>
-    !***
     !  Test if selected elements in two arrays are equal.
     !***
     ! **Library:**   SLATEC (BLAS)
@@ -1138,7 +1129,6 @@ CONTAINS
   SUBROUTINE DCHK12(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idimm,Nkb,Kb,&
       Nalf,Alf,Nbet,Bet,Ninc,Inc,Nmax,Incmax,A,Aa,As,X,Xx,Xs,Y,Yy,Ys,Yt,G)
     !>
-    !***
     !  Test DGEMV and DGBMV.
     !***
     ! **Library:**   SLATEC (BLAS)
@@ -1440,7 +1430,6 @@ CONTAINS
   SUBROUTINE DCHK13(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idimm,Nalf,Alf,&
       Nbet,Bet,Nmax,A,Aa,As,B,Bb,Bs,C,Cc,Cs,Ct,G)
     !>
-    !***
     !  Test DGEMM.
     !***
     ! **Library:**   SLATEC (BLAS)
@@ -1700,7 +1689,6 @@ CONTAINS
   SUBROUTINE DCHK22(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idimm,Nkb,Kb,&
       Nalf,Alf,Nbet,Bet,Ninc,Inc,Nmax,Incmax,A,Aa,As,X,Xx,Xs,Y,Yy,Ys,Yt,G)
     !>
-    !***
     !  Test DSYMV, DSBMV and DSPMV.
     !***
     ! **Library:**   SLATEC (BLAS)
@@ -2004,7 +1992,6 @@ CONTAINS
   SUBROUTINE DCHK23(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idimm,Nalf,Alf,&
       Nbet,Bet,Nmax,A,Aa,As,B,Bb,Bs,C,Cc,Cs,Ct,G)
     !>
-    !***
     !  Test DSYMM.
     !***
     ! **Library:**   SLATEC (BLAS)
@@ -2250,7 +2237,6 @@ CONTAINS
   SUBROUTINE DCHK32(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idimm,Nkb,Kb,&
       Ninc,Inc,Nmax,Incmax,A,Aa,As,X,Xx,Xs,Xt,G,Z)
     !>
-    !***
     !  Test DTRMV, DTBMV, DTPMV, DTRSV, DTBSV and DTPSV.
     !***
     ! **Library:**   SLATEC (BLAS)
@@ -2555,7 +2541,6 @@ CONTAINS
   SUBROUTINE DCHK33(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idimm,Nalf,Alf,&
       Nmax,A,Aa,As,B,Bb,Bs,Ct,G,C)
     !>
-    !***
     !  Test DTRMM and DTRSM.
     !***
     ! **Library:**   SLATEC (BLAS)
@@ -2820,7 +2805,6 @@ CONTAINS
   SUBROUTINE DCHK42(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idimm,Nalf,Alf,&
       Ninc,Inc,Nmax,Incmax,A,Aa,As,X,Xx,Xs,Y,Yy,Ys,Yt,G,Z)
     !>
-    !***
     !  Test DGER.
     !***
     ! **Library:**   SLATEC (BLAS)
@@ -3058,7 +3042,6 @@ CONTAINS
   SUBROUTINE DCHK43(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idimm,Nalf,Alf,&
       Nbet,Bet,Nmax,A,Aa,As,B,Bb,Bs,C,Cc,Cs,Ct,G)
     !>
-    !***
     !  Test DSYRK.
     !***
     ! **Library:**   SLATEC (BLAS)
@@ -3305,7 +3288,6 @@ CONTAINS
   SUBROUTINE DCHK52(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idimm,Nalf,Alf,&
       Ninc,Inc,Nmax,Incmax,A,Aa,As,X,Xx,Xs,Y,Yy,Ys,Yt,G,Z)
     !>
-    !***
     !  Quick check for DSYR and DSPR.
     !***
     ! **Library:**   SLATEC (BLAS)
@@ -3555,7 +3537,6 @@ CONTAINS
   SUBROUTINE DCHK53(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idimm,Nalf,Alf,&
       Nbet,Bet,Nmax,Ab,Aa,As,Bb,Bs,C,Cc,Cs,Ct,G,W)
     !>
-    !***
     !  Test DSYR2K.
     !***
     ! **Library:**   SLATEC (BLAS)
@@ -3834,7 +3815,6 @@ CONTAINS
   SUBROUTINE DCHK62(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idimm,Nalf,Alf,&
       Ninc,Inc,Nmax,Incmax,A,Aa,As,X,Xx,Xs,Y,Yy,Ys,Yt,G,Z)
     !>
-    !***
     !  Test DSYR2 and DSPR2.
     !***
     ! **Library:**   SLATEC (BLAS)
@@ -4115,7 +4095,6 @@ CONTAINS
   !** DCHKE2
   SUBROUTINE DCHKE2(Isnum,Srnamt,Nout,Kprint,Fatal)
     !>
-    !***
     !  Test the error exits from the Level 2 Blas.
     !***
     ! **Library:**   SLATEC (BLAS)
@@ -4542,7 +4521,6 @@ CONTAINS
   !** DCHKE3
   SUBROUTINE DCHKE3(Isnum,Srnamt,Nout,Kprint,Fatal)
     !>
-    !***
     !  Test the error exits from the Level 3 Blas.
     !***
     ! **Library:**   SLATEC (BLAS)
@@ -5269,7 +5247,6 @@ PROGRAM TEST19
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !>
-  !***
   !  Driver for testing SLATEC subprograms
   !***
   ! **Library:**   SLATEC

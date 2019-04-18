@@ -1,7 +1,6 @@
 !** XERCLR
 SUBROUTINE XERCLR
   !>
-  !***
   !  Reset current error number to zero.
   !***
   ! **Library:**   SLATEC (XERROR)

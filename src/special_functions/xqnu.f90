@@ -1,7 +1,6 @@
 !** XQNU
 SUBROUTINE XQNU(Nu1,Nu2,Mu1,Theta,X,Sx,Id,Pqa,Ipqa,Ierror)
   !>
-  !***
   !  To compute the values of Legendre functions for XLEGF.
   !            Method: backward nu-wise recurrence for Q(MU,NU,X) for
   !            fixed mu to obtain Q(MU1,NU1,X), Q(MU1,NU1+1,X), ...,

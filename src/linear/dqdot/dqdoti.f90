@@ -1,7 +1,6 @@
 !** DQDOTI
 REAL(8) FUNCTION DQDOTI(N,Db,Qc,Dx,Incx,Dy,Incy)
   !>
-  !***
   !  Compute the inner product of two vectors with extended
   !            precision accumulation and result.
   !***

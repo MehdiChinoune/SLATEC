@@ -1,7 +1,6 @@
 !** DBSI1E
 REAL(8) FUNCTION DBSI1E(X)
   !>
-  !***
   !  Compute the exponentially scaled modified (hyperbolic)
   !            Bessel function of the first kind of order one.
   !***

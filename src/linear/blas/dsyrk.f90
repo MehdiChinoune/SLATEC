@@ -1,7 +1,6 @@
 !** DSYRK
 SUBROUTINE DSYRK(Uplo,Trans,N,K,Alpha,A,Lda,Beta,C,Ldc)
   !>
-  !***
   !  Perform one of the symmetric rank k operations.
   !***
   ! **Library:**   SLATEC (BLAS)

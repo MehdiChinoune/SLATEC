@@ -1,7 +1,6 @@
 !** CHER
 SUBROUTINE CHER(Uplo,N,Alpha,X,Incx,A,Lda)
   !>
-  !***
   !  Perform Hermitian rank 1 update of a complex Hermitian
   !            matrix.
   !***

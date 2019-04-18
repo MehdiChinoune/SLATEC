@@ -2,7 +2,6 @@
 SUBROUTINE DULSIA(A,Mda,M,N,B,Mdb,Nb,Re,Ae,Key,Mode,Np,Krank,Ksure,Rnorm,&
     W,Lw,Iwork,Liw,Info)
   !>
-  !***
   !  Solve an underdetermined linear system of equations by
   !            performing an LQ factorization of the matrix using
   !            Householder transformations.  Emphasis is put on detecting

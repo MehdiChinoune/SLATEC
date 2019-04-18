@@ -1,7 +1,6 @@
 !** TRED3
 SUBROUTINE TRED3(N,Nv,A,D,E,E2)
   !>
-  !***
   !  Reduce a real symmetric matrix stored in packed form to
   !            symmetric tridiagonal matrix using orthogonal
   !            transformations.

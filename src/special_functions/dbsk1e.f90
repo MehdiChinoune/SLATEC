@@ -1,7 +1,6 @@
 !** DBSK1E
 REAL(8) FUNCTION DBSK1E(X)
   !>
-  !***
   !  Compute the exponentially scaled modified (hyperbolic)
   !            Bessel function of the third kind of order one.
   !***

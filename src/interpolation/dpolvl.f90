@@ -1,7 +1,6 @@
 !** DPOLVL
 SUBROUTINE DPOLVL(Nder,Xx,Yfit,Yp,N,X,C,Work,Ierr)
   !>
-  !***
   !  Calculate the value of a polynomial and its first NDER
   !            derivatives where the polynomial was produced by a previous
   !            call to DPLINT.

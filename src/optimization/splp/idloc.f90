@@ -1,7 +1,6 @@
 !** IDLOC
 INTEGER FUNCTION IDLOC(Locc,Sx,Ix)
   !>
-  !***
   !  Subsidiary to DSPLP
   !***
   ! **Library:**   SLATEC

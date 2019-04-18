@@ -1,7 +1,6 @@
 !** MPBLAS
 SUBROUTINE MPBLAS(I1)
   !>
-  !***
   !  Subsidiary to DQDOTA and DQDOTI
   !***
   ! **Library:**   SLATEC

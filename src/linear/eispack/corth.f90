@@ -1,7 +1,6 @@
 !** CORTH
 SUBROUTINE CORTH(Nm,N,Low,Igh,Ar,Ai,Ortr,Orti)
   !>
-  !***
   !  Reduce a complex general matrix to complex upper Hessenberg
   !            form using unitary similarity transformations.
   !***

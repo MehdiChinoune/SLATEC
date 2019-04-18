@@ -8,7 +8,6 @@ CONTAINS
   !** DCMPAR
   SUBROUTINE DCMPAR(Icnt,Itest)
     !>
-    !***
     !  Compare values in COMMON block DCHECK for quick check
     !            routine DPFITT.
     !***
@@ -64,7 +63,6 @@ CONTAINS
   !** DPFITT
   SUBROUTINE DPFITT(Lun,Kprint,Ipass)
     !>
-    !***
     !  Quick check for DPOLFT, DPCOEF and DP1VLU.
     !***
     ! **Library:**   SLATEC
@@ -443,7 +441,6 @@ CONTAINS
   !** DNLS1Q
   SUBROUTINE DNLS1Q(Lun,Kprint,Ipass)
     !>
-    !***
     !  Quick check for DNLS1E, DNLS1 and DCOV.
     !***
     ! **Library:**   SLATEC
@@ -727,7 +724,6 @@ CONTAINS
   !** DFCQX
   SUBROUTINE DFCQX(Lun,Kprint,Ipass)
     !>
-    !***
     !  Quick check for DFC.
     !***
     ! **Library:**   SLATEC
@@ -1056,7 +1052,6 @@ CONTAINS
   !** DFCN1
   SUBROUTINE DFCN1(Iflag,M,N,X,Fvec,Fjac,Ldfjac)
     !>
-    !***
     !  Subsidiary to DNLS1Q.
     !***
     ! **Library:**   SLATEC
@@ -1106,7 +1101,6 @@ CONTAINS
   !** DFCN2
   SUBROUTINE DFCN2(Iflag,M,N,X,Fvec,Fjac,Ldfjac)
     !>
-    !***
     !  Subsidiary to DNLS1Q.
     !***
     ! **Library:**   SLATEC
@@ -1172,7 +1166,6 @@ CONTAINS
   !** DFCN3
   SUBROUTINE DFCN3(Iflag,M,N,X,Fvec,Fjrow,Nrow)
     !>
-    !***
     !  Subsidiary to DNLS1Q.
     !***
     ! **Library:**   SLATEC
@@ -1241,7 +1234,6 @@ PROGRAM TEST53
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !>
-  !***
   !  Driver for testing SLATEC subprograms
   !***
   ! **Library:**   SLATEC

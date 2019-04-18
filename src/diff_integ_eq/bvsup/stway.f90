@@ -1,7 +1,6 @@
 !** STWAY
 SUBROUTINE STWAY(U,V,Yhp,Inout,Stowa)
   !>
-  !***
   !  Subsidiary to BVSUP
   !***
   ! **Library:**   SLATEC

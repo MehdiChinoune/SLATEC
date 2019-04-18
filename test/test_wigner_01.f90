@@ -5,7 +5,6 @@ CONTAINS
   !** QC36J
   SUBROUTINE QC36J(Lun,Kprint,Ipass)
     !>
-    !***
     !  THIS IS A QUICK CHECK PROGRAM FOR THE SUBROUTINES RC3JJ,
     !            RC3JM, AND RC6J, WHICH CALCULATE THE WIGNER COEFFICIENTS,
     !            3J AND 6J.
@@ -479,7 +478,6 @@ PROGRAM TEST15
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !>
-  !***
   !  Driver for testing SLATEC subprograms
   !            RC3JJ    RC3JM    RC6J
   !***

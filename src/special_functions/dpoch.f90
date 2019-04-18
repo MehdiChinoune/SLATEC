@@ -1,7 +1,6 @@
 !** DPOCH
 REAL(8) FUNCTION DPOCH(A,X)
   !>
-  !***
   !  Evaluate a generalization of Pochhammer's symbol.
   !***
   ! **Library:**   SLATEC (FNLIB)

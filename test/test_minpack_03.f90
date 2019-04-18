@@ -8,7 +8,6 @@ CONTAINS
   !** CMPARE
   SUBROUTINE CMPARE(Icnt,Itest)
     !>
-    !***
     !  Compare values in COMMON block CHECK for quick check
     !            routine PFITQX.
     !***
@@ -63,7 +62,6 @@ CONTAINS
   !** PFITQX
   SUBROUTINE PFITQX(Lun,Kprint,Ipass)
     !>
-    !***
     !  Quick check for POLFIT, PCOEF and PVALUE.
     !***
     ! **Library:**   SLATEC
@@ -440,7 +438,6 @@ CONTAINS
   !** SNLS1Q
   SUBROUTINE SNLS1Q(Lun,Kprint,Ipass)
     !>
-    !***
     !  Quick check for SNLS1E, SNLS1 and SCOV.
     !***
     ! **Library:**   SLATEC
@@ -724,7 +721,6 @@ CONTAINS
   !** FCQX
   SUBROUTINE FCQX(Lun,Kprint,Ipass)
     !>
-    !***
     !  Quick check for FC.
     !***
     ! **Library:**   SLATEC
@@ -1052,7 +1048,6 @@ CONTAINS
   !** FCN1
   SUBROUTINE FCN1(Iflag,M,N,X,Fvec,Fjac,Ldfjac)
     !>
-    !***
     !  Subsidiary to SNLS1Q.
     !***
     ! **Library:**   SLATEC
@@ -1101,7 +1096,6 @@ CONTAINS
   !** FCN2
   SUBROUTINE FCN2(Iflag,M,N,X,Fvec,Fjac,Ldfjac)
     !>
-    !***
     !  Subsidiary to SNLS1Q.
     !***
     ! **Library:**   SLATEC
@@ -1167,7 +1161,6 @@ CONTAINS
   !** FCN3
   SUBROUTINE FCN3(Iflag,M,N,X,Fvec,Fjrow,Nrow)
     !>
-    !***
     !  Subsidiary to SNLS1Q.
     !***
     ! **Library:**   SLATEC
@@ -1236,7 +1229,6 @@ PROGRAM TEST52
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !>
-  !***
   !  Driver for testing SLATEC subprograms
   !***
   ! **Library:**   SLATEC

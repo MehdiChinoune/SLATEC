@@ -1,7 +1,6 @@
 !** ORTHO4
 SUBROUTINE ORTHO4(Usol,Idmn,Zn,Zm,Pertrb)
   !>
-  !***
   !  Subsidiary to SEPX4
   !***
   ! **Library:**   SLATEC

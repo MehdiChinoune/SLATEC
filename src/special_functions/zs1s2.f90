@@ -1,7 +1,6 @@
 !** ZS1S2
 SUBROUTINE ZS1S2(Zrr,Zri,S1r,S1i,S2r,S2i,Nz,Ascle,Alim,Iuf)
   !>
-  !***
   !  Subsidiary to ZAIRY and ZBESK
   !***
   ! **Library:**   SLATEC

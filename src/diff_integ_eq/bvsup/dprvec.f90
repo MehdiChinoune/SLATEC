@@ -1,7 +1,6 @@
 !** DPRVEC
 REAL(8) FUNCTION DPRVEC(M,U,V)
   !>
-  !***
   !  Subsidiary to DBVSUP
   !***
   ! **Library:**   SLATEC

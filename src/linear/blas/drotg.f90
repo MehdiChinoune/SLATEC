@@ -1,7 +1,6 @@
 !** DROTG
 SUBROUTINE DROTG(Da,Db,Dc,Ds)
   !>
-  !***
   !  Construct a plane Givens rotation.
   !***
   ! **Library:**   SLATEC (BLAS)

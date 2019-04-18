@@ -1,7 +1,6 @@
 !** DBESI
 SUBROUTINE DBESI(X,Alpha,Kode,N,Y,Nz)
   !>
-  !***
   !  Compute an N member sequence of I Bessel functions
   !            I/SUB(ALPHA+K-1)/(X), K=1,...,N or scaled Bessel functions
   !            EXP(-X)*I/SUB(ALPHA+K-1)/(X), K=1,...,N for nonnegative

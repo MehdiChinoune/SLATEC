@@ -1,7 +1,6 @@
 !** HTRID3
 SUBROUTINE HTRID3(Nm,N,A,D,E,E2,Tau)
   !>
-  !***
   !  Reduce a complex Hermitian (packed) matrix to a real
   !            symmetric tridiagonal matrix by unitary similarity
   !            transformations.

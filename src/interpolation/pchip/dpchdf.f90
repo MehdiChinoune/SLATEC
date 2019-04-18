@@ -1,7 +1,6 @@
 !** DPCHDF
 REAL(8) FUNCTION DPCHDF(K,X,S,Ierr)
   !>
-  !***
   !  Computes divided differences for DPCHCE and DPCHSP
   !***
   ! **Library:**   SLATEC (PCHIP)

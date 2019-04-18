@@ -5,7 +5,6 @@ CONTAINS
   !** CFNCK
   SUBROUTINE CFNCK(Lun,Kprint,Ipass)
     !>
-    !***
     !  Quick check for the complex Fullerton special functions.
     !***
     ! **Library:**   SLATEC
@@ -162,7 +161,6 @@ PROGRAM TEST04
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !>
-  !***
   !  Driver for testing SLATEC subprograms
   !***
   ! **Library:**   SLATEC

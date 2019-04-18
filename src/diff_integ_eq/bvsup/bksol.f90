@@ -1,7 +1,6 @@
 !** BKSOL
 SUBROUTINE BKSOL(N,A,X)
   !>
-  !***
   !  Subsidiary to BVSUP
   !***
   ! **Library:**   SLATEC

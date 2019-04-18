@@ -1,7 +1,6 @@
 !** U11US
 SUBROUTINE U11US(A,Mda,M,N,Ub,Db,Mode,Np,Krank,Ksure,H,W,Eb,Ir,Ic)
   !>
-  !***
   !  Subsidiary to ULSIA
   !***
   ! **Library:**   SLATEC

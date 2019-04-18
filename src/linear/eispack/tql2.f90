@@ -1,7 +1,6 @@
 !** TQL2
 SUBROUTINE TQL2(Nm,N,D,E,Z,Ierr)
   !>
-  !***
   !  Compute the eigenvalues and eigenvectors of symmetric
   !            tridiagonal matrix.
   !***

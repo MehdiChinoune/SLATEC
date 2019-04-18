@@ -6,7 +6,6 @@ CONTAINS
   !** DBIKCK
   SUBROUTINE DBIKCK(Lun,Kprint,Ipass)
     !>
-    !***
     !  Quick check for DBESI and DBESK.
     !***
     ! **Library:**   SLATEC
@@ -274,7 +273,6 @@ CONTAINS
   !** DBJYCK
   SUBROUTINE DBJYCK(Lun,Kprint,Ipass)
     !>
-    !***
     !  Quick check for DBESJ and DBESY.
     !***
     ! **Library:**   SLATEC
@@ -508,7 +506,6 @@ CONTAINS
   !** DEG8CK
   SUBROUTINE DEG8CK(Lun,Kprint,Ipass)
     !>
-    !***
     !  Quick check for DEXINT and DGAUS8.
     !***
     ! **Library:**   SLATEC
@@ -691,7 +688,6 @@ CONTAINS
   !** DFEIN
   REAL(8) FUNCTION DFEIN(T)
     !>
-    !***
     !  Subsidiary to DEG8CK.
     !***
     ! **Library:**   SLATEC
@@ -720,7 +716,6 @@ PROGRAM TEST06
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !>
-  !***
   !  Driver for testing SLATEC subprograms
   !***
   ! **Library:**   SLATEC

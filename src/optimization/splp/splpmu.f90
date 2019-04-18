@@ -5,7 +5,6 @@ SUBROUTINE SPLPMU(Mrelas,Nvars,Lmx,Lbm,Nredc,Info,Ienter,Ileave,Iopt,Npp,&
     Basmat,Csc,Wr,Rprim,Ww,Bu,Bl,Rhs,Erd,Erp,Rz,Rg,Colnrm,&
     Costs,Primal,Duals,Singlr,Redbas,Zerolv,Stpedg)
   !>
-  !***
   !  Subsidiary to SPLP
   !***
   ! **Library:**   SLATEC

@@ -1,7 +1,6 @@
 !** CLBETA
 COMPLEX FUNCTION CLBETA(A,B)
   !>
-  !***
   !  Compute the natural logarithm of the complete Beta
   !            function.
   !***

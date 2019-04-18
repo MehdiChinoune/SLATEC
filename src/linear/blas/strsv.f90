@@ -1,7 +1,6 @@
 !** STRSV
 SUBROUTINE STRSV(Uplo,Trans,Diag,N,A,Lda,X,Incx)
   !>
-  !***
   !  Solve a real triangular system of linear equations.
   !***
   ! **Library:**   SLATEC (BLAS)

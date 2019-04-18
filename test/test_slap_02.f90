@@ -5,7 +5,6 @@ CONTAINS
   !** DLAPQC
   SUBROUTINE DLAPQC(Lun,Kprint,Ipass)
     !>
-    !***
     !  Quick check for testing Sparse Linear Algebra Package
     !            (SLAP) Version 2.0.2.
     !***
@@ -386,7 +385,6 @@ CONTAINS
   !** DRMGEN
   SUBROUTINE DRMGEN(Neltmx,Factor,Ierr,N,Nelt,Isym,Ia,Ja,A,F,Soln,Dsum,Itmp,Idiag)
     !>
-    !***
     !  This routine generates a "Random" symmetric or non-symmetric matrix
     !  of size N for use in the SLAP Quick Checks.
     !***
@@ -591,7 +589,6 @@ CONTAINS
   !** DFILL
   SUBROUTINE DFILL(N,V,Val)
     !>
-    !***
     !  Fill a vector with a value.
     !***
     ! **Library:**   SLATEC (SLAP)
@@ -671,7 +668,6 @@ CONTAINS
   !** DUTERR
   SUBROUTINE DUTERR(Method,Ierr,Iout,Nfail,Istdo,Iter,Err)
     !>
-    !***
     !  Output error messages for the SLAP Quick Check.
     !***
     ! **Library:**   SLATEC (SLAP)
@@ -736,7 +732,6 @@ PROGRAM TEST26
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !>
-  !***
   !  Driver for testing SLATEC subprograms.
   !***
   ! **Library:**   SLATEC

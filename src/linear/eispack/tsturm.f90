@@ -1,7 +1,6 @@
 !** TSTURM
 SUBROUTINE TSTURM(Nm,N,Eps1,D,E,E2,Lb,Ub,Mm,M,W,Z,Ierr,Rv1,Rv2,Rv3,Rv4,Rv5,Rv6)
   !>
-  !***
   !  Find those eigenvalues of a symmetric tridiagonal matrix
   !            in a given interval and their associated eigenvectors by
   !            Sturm sequencing.

@@ -1,7 +1,6 @@
 !** QZHES
 SUBROUTINE QZHES(Nm,N,A,B,Matz,Z)
   !>
-  !***
   !  The first step of the QZ algorithm for solving generalized
   !            matrix eigenproblems.  Accepts a pair of real general
   !            matrices and reduces one of them to upper Hessenberg

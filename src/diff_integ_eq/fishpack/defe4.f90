@@ -1,7 +1,6 @@
 !** DEFE4
 SUBROUTINE DEFE4(COFX,Idmn,Usol,Grhs)
   !>
-  !***
   !  Subsidiary to SEPX4
   !***
   ! **Library:**   SLATEC

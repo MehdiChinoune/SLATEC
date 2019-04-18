@@ -1,7 +1,6 @@
 !** CPODI
 SUBROUTINE CPODI(A,Lda,N,Det,Job)
   !>
-  !***
   !  Compute the determinant and inverse of a certain complex
   !            Hermitian positive definite matrix using the factors
   !            computed by CPOCO, CPOFA, or CQRDC.

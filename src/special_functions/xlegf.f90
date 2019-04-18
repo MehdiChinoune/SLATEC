@@ -1,7 +1,6 @@
 !** XLEGF
 SUBROUTINE XLEGF(Dnu1,Nudiff,Mu1,Mu2,Theta,Id,Pqa,Ipqa,Ierror)
   !>
-  !***
   !  Compute normalized Legendre polynomials and associated
   !            Legendre functions.
   !***

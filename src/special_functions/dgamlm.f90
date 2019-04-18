@@ -1,7 +1,6 @@
 !** DGAMLM
 SUBROUTINE DGAMLM(Xmin,Xmax)
   !>
-  !***
   !  Compute the minimum and maximum bounds for the argument in
   !            the Gamma function.
   !***

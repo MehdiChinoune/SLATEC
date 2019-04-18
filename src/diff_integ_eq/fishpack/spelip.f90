@@ -3,7 +3,6 @@ SUBROUTINE SPELIP(Intl,Iorder,A,B,M,Mbdcnd,Bda,Alpha,Bdb,Beta,C,D,N,&
     Nbdcnd,Bdc,Gama,Bdd,Xnu,COFX,COFY,An,Bn,Cn,Dn,Un,Zn,Am,&
     Bm,Cm,Dm,Um,Zm,Grhs,Usol,Idmn,W,Pertrb,Ierror)
   !>
-  !***
   !  Subsidiary to SEPELI
   !***
   ! **Library:**   SLATEC

@@ -1,7 +1,6 @@
 !** XERSVE
 SUBROUTINE XERSVE(Librar,Subrou,Messg,Kflag,Nerr,Level,Icount)
   !>
-  !***
   !  Record that an error has occurred.
   !***
   ! **Library:**   SLATEC (XERROR)

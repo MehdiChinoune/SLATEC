@@ -3,7 +3,6 @@ INTEGER FUNCTION ISSCGN(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MTTVEC,MSOLVE,Itol,&
     Tol,Itmax,Iter,Err,Ierr,Iunit,R,Z,P,Atp,Atz,Dz,&
     Atdz,Rwork,Iwork,Ak,Bk,Bnrm,Solnrm)
   !>
-  !***
   !  Preconditioned CG on Normal Equations Stop Test.
   !            This routine calculates the stop test for the Conjugate
   !            Gradient iteration scheme applied to the normal equations.

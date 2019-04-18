@@ -1,7 +1,6 @@
 !** INVIT
 SUBROUTINE INVIT(Nm,N,A,Wr,Wi,Select,Mm,M,Z,Ierr,Rm1,Rv1,Rv2)
   !>
-  !***
   !  Compute the eigenvectors of a real upper Hessenberg
   !            matrix associated with specified eigenvalues by inverse
   !            iteration.

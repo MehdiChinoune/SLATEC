@@ -1,7 +1,6 @@
 !** CGEDI
 SUBROUTINE CGEDI(A,Lda,N,Ipvt,Det,Work,Job)
   !>
-  !***
   !  Compute the determinant and inverse of a matrix using the
   !            factors computed by CGECO or CGEFA.
   !***

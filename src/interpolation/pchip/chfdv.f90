@@ -1,7 +1,6 @@
 !** CHFDV
 SUBROUTINE CHFDV(X1,X2,F1,F2,D1,D2,Ne,Xe,Fe,De,Next,Ierr)
   !>
-  !***
   !  Evaluate a cubic polynomial given in Hermite form and its
   !            first derivative at an array of points.  While designed for
   !            use by PCHFD, it may be useful directly as an evaluator

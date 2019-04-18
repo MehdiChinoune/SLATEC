@@ -1,7 +1,6 @@
 !** RC
 REAL FUNCTION RC(X,Y,Ier)
   !>
-  !***
   !  Calculate an approximation to
   !             RC(X,Y) = Integral from zero to infinity of
   !                              -1/2     -1

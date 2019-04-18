@@ -1,7 +1,6 @@
 !** DE1
 REAL(8) FUNCTION DE1(X)
   !>
-  !***
   !  Compute the exponential integral E1(X).
   !***
   ! **Library:**   SLATEC (FNLIB)

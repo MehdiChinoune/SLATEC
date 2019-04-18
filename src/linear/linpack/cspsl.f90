@@ -1,7 +1,6 @@
 !** CSPSL
 SUBROUTINE CSPSL(Ap,N,Kpvt,B)
   !>
-  !***
   !  Solve a complex symmetric system using the factors obtained
   !            from CSPFA.
   !***

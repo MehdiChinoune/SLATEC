@@ -1,7 +1,6 @@
 !** DQPSRT
 SUBROUTINE DQPSRT(Limit,Last,Maxerr,Ermax,Elist,Iord,Nrmax)
   !>
-  !***
   !  This routine maintains the descending ordering in the
   !            list of the local error estimated resulting from the
   !            interval subdivision process. At each call two error

@@ -1,7 +1,6 @@
 !** ZBIRY
 SUBROUTINE ZBIRY(Zr,Zi,Id,Kode,Bir,Bii,Ierr)
   !>
-  !***
   !  Compute the Airy function Bi(z) or its derivative dBi/dz
   !            for complex argument z.  A scaling option is available
   !            to help avoid overflow.

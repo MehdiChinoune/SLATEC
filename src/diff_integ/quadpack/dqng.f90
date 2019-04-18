@@ -1,7 +1,6 @@
 !** DQNG
 SUBROUTINE DQNG(F,A,B,Epsabs,Epsrel,Result,Abserr,Neval,Ier)
   !>
-  !***
   !  The routine calculates an approximation result to a
   !            given definite integral I = integral of F over (A,B),
   !            hopefully satisfying following claim for accuracy

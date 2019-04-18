@@ -1,7 +1,6 @@
 !** H12
 SUBROUTINE H12(Mode,Lpivot,L1,M,U,Iue,Up,C,Ice,Icv,Ncv)
   !>
-  !***
   !  Subsidiary to HFTI, LSEI and WNNLS
   !***
   ! **Library:**   SLATEC

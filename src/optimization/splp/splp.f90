@@ -2,7 +2,6 @@
 SUBROUTINE SPLP(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
     Primal,Duals,Ibasis,Work,Lw,Iwork,Liw)
   !>
-  !***
   !  Solve linear programming problems involving at
   !            most a few thousand constraints and variables.
   !            Takes advantage of sparsity in the constraint matrix.

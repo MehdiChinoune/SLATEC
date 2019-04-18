@@ -1,7 +1,6 @@
 !** SROTG
 SUBROUTINE SROTG(Sa,Sb,Sc,Ss)
   !>
-  !***
   !  Construct a plane Givens rotation.
   !***
   ! **Library:**   SLATEC (BLAS)

@@ -1,7 +1,6 @@
 !** CHEMM
 SUBROUTINE CHEMM(Side,Uplo,M,N,Alpha,A,Lda,B,Ldb,Beta,C,Ldc)
   !>
-  !***
   !  Multiply a complex general matrix by a complex Hermitian
   !            matrix.
   !***

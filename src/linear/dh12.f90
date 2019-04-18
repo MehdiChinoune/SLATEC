@@ -1,7 +1,6 @@
 !** DH12
 SUBROUTINE DH12(Mode,Lpivot,L1,M,U,Iue,Up,C,Ice,Icv,Ncv)
   !>
-  !***
   !  Subsidiary to DHFTI, DLSEI and DWNNLS
   !***
   ! **Library:**   SLATEC

@@ -1,7 +1,6 @@
 !** XC210
 SUBROUTINE XC210(K,Z,J,Ierror)
   !>
-  !***
   !  To provide single-precision floating-point arithmetic
   !            with an extended exponent range.
   !***

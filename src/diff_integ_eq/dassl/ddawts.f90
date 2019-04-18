@@ -1,7 +1,6 @@
 !** DDAWTS
 SUBROUTINE DDAWTS(Neq,Iwt,Rtol,Atol,Y,Wt,Rpar,Ipar)
   !>
-  !***
   !  Set error weight vector for DDASSL.
   !***
   ! **Library:**   SLATEC (DASSL)

@@ -5,7 +5,6 @@ CONTAINS
   !** DDQCK
   SUBROUTINE DDQCK(Lun,Kprint,Ipass)
     !>
-    !***
     !  Quick check for SLATEC routines DDRIV1, DDRIV2 and DDRIV3.
     !***
     ! **Library:**   SLATEC (SDRIVE)
@@ -414,7 +413,6 @@ CONTAINS
   !** DDF
   SUBROUTINE DDF(N,T,Y,Yp)
     !>
-    !***
     !  Quick check for SLATEC routines DDRIV1, DDRIV2 and DDRIV3.
     !***
     ! **Library:**   SLATEC (SDRIVE)
@@ -457,7 +455,6 @@ PROGRAM TEST46
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !>
-  !***
   !  Driver for testing SLATEC subprograms
   !            DDRIV1  DDRIV2  DDRIV3
   !***

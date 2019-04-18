@@ -1,7 +1,6 @@
 !** CPOSL
 SUBROUTINE CPOSL(A,Lda,N,B)
   !>
-  !***
   !  Solve the complex Hermitian positive definite linear system
   !            using the factors computed by CPOCO or CPOFA.
   !***

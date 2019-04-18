@@ -1,7 +1,6 @@
 !** SPBSL
 SUBROUTINE SPBSL(Abd,Lda,N,M,B)
   !>
-  !***
   !  Solve a real symmetric positive definite band system
   !            using the factors computed by SPBCO or SPBFA.
   !***

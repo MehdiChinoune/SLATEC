@@ -1,7 +1,6 @@
 !** DREORT
 SUBROUTINE DREORT(Ncomp,Y,Yp,Yhp,Niv,W,S,P,Ip,Stowa,Iflag)
   !>
-  !***
   !  Subsidiary to DBVSUP
   !***
   ! **Library:**   SLATEC

@@ -1,7 +1,6 @@
 !** DOGLEG
 SUBROUTINE DOGLEG(N,R,Lr,Diag,Qtb,Delta,X,Wa1,Wa2)
   !>
-  !***
   !  Subsidiary to SNSQ and SNSQE
   !***
   ! **Library:**   SLATEC

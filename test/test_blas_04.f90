@@ -5,7 +5,6 @@ CONTAINS
   !** CBEG
   COMPLEX FUNCTION CBEG(Reset)
     !>
-    !***
     !  Generate random numbers.
     !***
     ! **Library:**   SLATEC (BLAS)
@@ -70,7 +69,6 @@ CONTAINS
   !** CBLAT2
   SUBROUTINE CBLAT2(Nout,Kprint,Ipass)
     !>
-    !***
     !  Driver for testing Level 2 BLAS complex subroutines.
     !***
     ! **Library:**   SLATEC (BLAS)
@@ -271,7 +269,6 @@ CONTAINS
   !** CBLAT3
   SUBROUTINE CBLAT3(Nout,Kprint,Ipass)
     !>
-    !***
     !  Driver for testing Level 3 BLAS complex subroutines.
     !***
     ! **Library:**   SLATEC (BLAS)
@@ -488,7 +485,6 @@ CONTAINS
   !** CMAKE2
   SUBROUTINE CMAKE2(Type,Uplo,Diag,M,N,A,Nmax,Aa,Lda,Kl,Ku,Reset,Transl)
     !>
-    !***
     !  Generate values for an M by N matrix A.
     !***
     ! **Library:**   SLATEC (BLAS)
@@ -679,7 +675,6 @@ CONTAINS
   !** CMAKE3
   SUBROUTINE CMAKE3(Type,Uplo,Diag,M,N,A,Nmax,Aa,Lda,Reset,Transl)
     !>
-    !***
     !  Generate values for an M by N matrix A.
     !***
     ! **Library:**   SLATEC (BLAS)
@@ -810,7 +805,6 @@ CONTAINS
   SUBROUTINE CMMCH(Transa,Transb,M,N,Kk,Alpha,A,Lda,B,Ldb,Beta,C,Ldc,Ct,G,&
       Cc,Ldcc,Eps,Err,Ftl,Nout,Mv,Kprint)
     !>
-    !***
     !  Check the results of the computational tests.
     !***
     ! **Library:**   SLATEC (BLAS)
@@ -982,7 +976,6 @@ CONTAINS
   SUBROUTINE CMVCH(Trans,M,N,Alpha,A,Nmax,X,Incx,Beta,Y,Incy,Yt,G,Yy,Eps,&
       Err,Ftl,Nout,Mv,Kprint)
     !>
-    !***
     !  Check the results of the computational tests.
     !***
     ! **Library:**   SLATEC (BLAS)
@@ -1114,7 +1107,6 @@ CONTAINS
   !** LCE
   LOGICAL FUNCTION LCE(Ri,Rj,Lr)
     !>
-    !***
     !  Test if two arrays are identical.
     !***
     ! **Library:**   SLATEC (BLAS)
@@ -1157,7 +1149,6 @@ CONTAINS
   !** LCERES
   LOGICAL FUNCTION LCERES(Type,Uplo,M,N,Aa,As,Lda)
     !>
-    !***
     !  Test if selected elements in two arrays are equal.
     !***
     ! **Library:**   SLATEC (BLAS)
@@ -1228,7 +1219,6 @@ CONTAINS
   SUBROUTINE CCHK12(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idimm,Nkb,Kb,&
       Nalf,Alf,Nbet,Bet,Ninc,Inc,Nmax,Incmax,A,Aa,As,X,Xx,Xs,Y,Yy,Ys,Yt,G)
     !>
-    !***
     !  Quick check for CGEMV and CGBMV.
     !***
     ! **Library:**   SLATEC (BLAS)
@@ -1533,7 +1523,6 @@ CONTAINS
   SUBROUTINE CCHK13(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idimm,Nalf,Alf,&
       Nbet,Bet,Nmax,A,Aa,As,B,Bb,Bs,C,Cc,Cs,Ct,G)
     !>
-    !***
     !  Quick check for CGEMM.
     !***
     ! **Library:**   SLATEC (BLAS)
@@ -1794,7 +1783,6 @@ CONTAINS
   SUBROUTINE CCHK22(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idimm,Nkb,Kb,&
       Nalf,Alf,Nbet,Bet,Ninc,Inc,Nmax,Incmax,A,Aa,As,X,Xx,Xs,Y,Yy,Ys,Yt,G)
     !>
-    !***
     !  Quick check for CHEMV, CHBMV, CHPMV.
     !***
     ! **Library:**   SLATEC (BLAS)
@@ -2099,7 +2087,6 @@ CONTAINS
   SUBROUTINE CCHK23(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idimm,Nalf,Alf,&
       Nbet,Bet,Nmax,A,Aa,As,B,Bb,Bs,C,Cc,Cs,Ct,G)
     !>
-    !***
     !  Quick check for CHEMM and CSYMM.
     !***
     ! **Library:**   SLATEC (BLAS)
@@ -2353,7 +2340,6 @@ CONTAINS
   SUBROUTINE CCHK32(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idimm,Nkb,Kb,&
       Ninc,Inc,Nmax,Incmax,A,Aa,As,X,Xx,Xs,Xt,G,Z)
     !>
-    !***
     !  Quick check for CTRMV, CTBMV, CTPMV, CTRSV, CTBSV and
     !            CTPSV.
     !***
@@ -2659,7 +2645,6 @@ CONTAINS
   SUBROUTINE CCHK33(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idimm,Nalf,Alf,&
       Nmax,A,Aa,As,B,Bb,Bs,Ct,G,C)
     !>
-    !***
     !  Quick check for CTRMM and CTRSM.
     !***
     ! **Library:**   SLATEC (BLAS)
@@ -2926,7 +2911,6 @@ CONTAINS
   SUBROUTINE CCHK42(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idimm,Nalf,Alf,&
       Ninc,Inc,Nmax,Incmax,A,Aa,As,X,Xx,Xs,Y,Yy,Ys,Yt,G,Z)
     !>
-    !***
     !  Quick check for CGERC and CGERU.
     !***
     ! **Library:**   SLATEC (BLAS)
@@ -3173,7 +3157,6 @@ CONTAINS
   SUBROUTINE CCHK43(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idimm,Nalf,Alf,&
       Nbet,Bet,Nmax,A,Aa,As,B,Bb,Bs,C,Cc,Cs,Ct,G)
     !>
-    !***
     !  Quick check for CHERK and CSYRK.
     !***
     ! **Library:**   SLATEC (BLAS)
@@ -3468,7 +3451,6 @@ CONTAINS
   SUBROUTINE CCHK52(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idimm,Nalf,Alf,&
       Ninc,Inc,Nmax,Incmax,A,Aa,As,X,Xx,Xs,Y,Yy,Ys,Yt,G,Z)
     !>
-    !***
     !  Quick check for CHER and CHPR.
     !***
     ! **Library:**   SLATEC (BLAS)
@@ -3719,7 +3701,6 @@ CONTAINS
   SUBROUTINE CCHK53(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idimm,Nalf,Alf,&
       Nbet,Bet,Nmax,Ab,Aa,As,Bb,Bs,C,Cc,Cs,Ct,G,W)
     !>
-    !***
     !  Quick check for CHER2K and CSYR2K.
     !***
     ! **Library:**   SLATEC (BLAS)
@@ -4043,7 +4024,6 @@ CONTAINS
   SUBROUTINE CCHK62(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idimm,Nalf,Alf,&
       Ninc,Inc,Nmax,Incmax,A,Aa,As,X,Xx,Xs,Y,Yy,Ys,Yt,G,Z)
     !>
-    !***
     !  Quick check for CHER2 and CHPR2.
     !***
     ! **Library:**   SLATEC (BLAS)
@@ -4326,7 +4306,6 @@ CONTAINS
   !** CCHKE2
   SUBROUTINE CCHKE2(Isnum,Srnamt,Nout,Kprint,Fatal)
     !>
-    !***
     !  Test the error exits from the Level 2 Blas.
     !***
     ! **Library:**   SLATEC (BLAS)
@@ -4778,7 +4757,6 @@ CONTAINS
   !** CCHKE3
   SUBROUTINE CCHKE3(Isnum,Srnamt,Nout,Kprint,Fatal)
     !>
-    !***
     !  Test the error exits from the Level 3 Blas.
     !***
     ! **Library:**   SLATEC (BLAS)
@@ -6014,7 +5992,6 @@ PROGRAM TEST20
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !>
-  !***
   !  Driver for testing SLATEC subprograms
   !***
   ! **Library:**   SLATEC

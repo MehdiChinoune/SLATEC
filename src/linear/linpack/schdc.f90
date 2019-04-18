@@ -1,7 +1,6 @@
 !** SCHDC
 SUBROUTINE SCHDC(A,Lda,P,Work,Jpvt,Job,Info)
   !>
-  !***
   !  Compute the Cholesky decomposition of a positive definite
   !            matrix.  A pivoting option allows the user to estimate the
   !            condition number of a positive definite matrix or determine

@@ -1,7 +1,6 @@
 !** DPOCO
 SUBROUTINE DPOCO(A,Lda,N,Rcond,Z,Info)
   !>
-  !***
   !  Factor a real symmetric positive definite matrix
   !            and estimate the condition of the matrix.
   !***

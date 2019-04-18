@@ -1,7 +1,6 @@
 !** GENBUN
 SUBROUTINE GENBUN(Nperod,N,Mperod,M,A,B,C,Idimy,Y,Ierror,W)
   !>
-  !***
   !  Solve by a cyclic reduction algorithm the linear system
   !            of equations that results from a finite difference
   !            approximation to certain 2-d elliptic PDE's on a centered

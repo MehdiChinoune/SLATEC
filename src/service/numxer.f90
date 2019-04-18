@@ -1,7 +1,6 @@
 !** NUMXER
 INTEGER FUNCTION NUMXER(Nerr)
   !>
-  !***
   !  Return the most recent error number.
   !***
   ! **Library:**   SLATEC (XERROR)

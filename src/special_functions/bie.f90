@@ -1,7 +1,6 @@
 !** BIE
 REAL FUNCTION BIE(X)
   !>
-  !***
   !  Calculate the Bairy function for a negative argument and an
   !            exponentially scaled Bairy function for a non-negative
   !            argument.

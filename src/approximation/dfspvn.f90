@@ -1,7 +1,6 @@
 !** DFSPVN
 SUBROUTINE DFSPVN(T,Jhigh,Indexx,X,Ileft,Vnikx)
   !>
-  !***
   !  Subsidiary to DFC
   !***
   ! **Library:**   SLATEC

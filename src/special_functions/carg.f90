@@ -1,7 +1,6 @@
 !** CARG
 REAL FUNCTION CARG(Z)
   !>
-  !***
   !  Compute the argument of a complex number.
   !***
   ! **Library:**   SLATEC (FNLIB)

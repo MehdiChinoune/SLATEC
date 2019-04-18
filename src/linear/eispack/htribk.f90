@@ -1,7 +1,6 @@
 !** HTRIBK
 SUBROUTINE HTRIBK(Nm,N,Ar,Ai,Tau,M,Zr,Zi)
   !>
-  !***
   !  Form the eigenvectors of a complex Hermitian matrix from
   !            the eigenvectors of a real symmetric tridiagonal matrix
   !            output from HTRIDI.

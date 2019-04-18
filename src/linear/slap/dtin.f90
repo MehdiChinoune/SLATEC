@@ -1,7 +1,6 @@
 !** DTIN
 SUBROUTINE DTIN(N,Nelt,Ia,Ja,A,Isym,Soln,Rhs,Iunit,Job)
   !>
-  !***
   !  Read in SLAP Triad Format Linear System.
   !            Routine to read in a SLAP Triad format matrix and right
   !            hand side and solution to the system, if known.

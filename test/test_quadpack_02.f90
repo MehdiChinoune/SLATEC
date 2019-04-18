@@ -5,7 +5,6 @@ CONTAINS
   !** CDQAG
   SUBROUTINE CDQAG(Lun,Kprint,Ipass)
     !>
-    !***
     !  Quick check for DQAG.
     !***
     ! **Library:**   SLATEC
@@ -117,7 +116,6 @@ CONTAINS
   !** CDQAGI
   SUBROUTINE CDQAGI(Lun,Kprint,Ipass)
     !>
-    !***
     !  Quick check for DQAGI.
     !***
     ! **Library:**   SLATEC
@@ -250,7 +248,6 @@ CONTAINS
   !** CDQAGP
   SUBROUTINE CDQAGP(Lun,Kprint,Ipass)
     !>
-    !***
     !  Quick check for DQAGP.
     !***
     ! **Library:**   SLATEC
@@ -395,7 +392,6 @@ CONTAINS
   !** CDQAGS
   SUBROUTINE CDQAGS(Lun,Kprint,Ipass)
     !>
-    !***
     !  Quick check for DQAGS.
     !***
     ! **Library:**   SLATEC
@@ -534,7 +530,6 @@ CONTAINS
   !** CDQAWC
   SUBROUTINE CDQAWC(Lun,Kprint,Ipass)
     !>
-    !***
     !  Quick check for DQAWC.
     !***
     ! **Library:**   SLATEC
@@ -639,7 +634,6 @@ CONTAINS
   !** CDQAWF
   SUBROUTINE CDQAWF(Lun,Kprint,Ipass)
     !>
-    !***
     !  Quick check for DQAWF.
     !***
     ! **Library:**   SLATEC
@@ -755,7 +749,6 @@ CONTAINS
   !** CDQAWO
   SUBROUTINE CDQAWO(Lun,Kprint,Ipass)
     !>
-    !***
     !  Quick check for DQAWO.
     !***
     ! **Library:**   SLATEC
@@ -885,7 +878,6 @@ CONTAINS
   !** CDQAWS
   SUBROUTINE CDQAWS(Lun,Kprint,Ipass)
     !>
-    !***
     !  Quick check for DQAWS.
     !***
     ! **Library:**   SLATEC
@@ -991,7 +983,6 @@ CONTAINS
   !** CDQNG
   SUBROUTINE CDQNG(Lun,Kprint,Ipass)
     !>
-    !***
     !  Quick check for DQNG.
     !***
     ! **Library:**   SLATEC
@@ -1068,7 +1059,6 @@ CONTAINS
   !** DF0C
   REAL(8) FUNCTION DF0C(X)
     !>
-    !***
     !  Subsidiary to
     !***
     ! **Library:**   SLATEC
@@ -1088,7 +1078,6 @@ CONTAINS
   !** DF0F
   REAL(8) FUNCTION DF0F(X)
     !>
-    !***
     !  Subsidiary to
     !***
     ! **Library:**   SLATEC
@@ -1109,7 +1098,6 @@ CONTAINS
   !** DF0O
   REAL(8) FUNCTION DF0O(X)
     !>
-    !***
     !  Subsidiary to
     !***
     ! **Library:**   SLATEC
@@ -1129,7 +1117,6 @@ CONTAINS
   !** DF0S
   REAL(8) FUNCTION DF0S(X)
     !>
-    !***
     !  Subsidiary to
     !***
     ! **Library:**   SLATEC
@@ -1150,7 +1137,6 @@ CONTAINS
   !** DF0WS
   REAL(8) FUNCTION DF0WS(X)
     !>
-    !***
     !  Subsidiary to
     !***
     ! **Library:**   SLATEC
@@ -1170,7 +1156,6 @@ CONTAINS
   !** DF1C
   REAL(8) FUNCTION DF1C(X)
     !>
-    !***
     !  Subsidiary to
     !***
     ! **Library:**   SLATEC
@@ -1191,7 +1176,6 @@ CONTAINS
   !** DF1F
   REAL(8) FUNCTION DF1F(X)
     !>
-    !***
     !  Subsidiary to
     !***
     ! **Library:**   SLATEC
@@ -1214,7 +1198,6 @@ CONTAINS
   !** DF1G
   REAL(8) FUNCTION DF1G(X)
     !>
-    !***
     !  Subsidiary to
     !***
     ! **Library:**   SLATEC
@@ -1235,7 +1218,6 @@ CONTAINS
   !** DF1N
   REAL(8) FUNCTION DF1N(X)
     !>
-    !***
     !  Subsidiary to
     !***
     ! **Library:**   SLATEC
@@ -1255,7 +1237,6 @@ CONTAINS
   !** DF1O
   REAL(8) FUNCTION DF1O(X)
     !>
-    !***
     !  Subsidiary to
     !***
     ! **Library:**   SLATEC
@@ -1276,7 +1257,6 @@ CONTAINS
   !** DF1P
   REAL(8) FUNCTION DF1P(X)
     !>
-    !***
     !  Subsidiary to
     !***
     ! **Library:**   SLATEC
@@ -1304,7 +1284,6 @@ CONTAINS
   !** DF1S
   REAL(8) FUNCTION DF1S(X)
     !>
-    !***
     !  Subsidiary to
     !***
     ! **Library:**   SLATEC
@@ -1324,7 +1303,6 @@ CONTAINS
   !** DF1WS
   REAL(8) FUNCTION DF1WS(X)
     !>
-    !***
     !  Subsidiary to
     !***
     ! **Library:**   SLATEC
@@ -1345,7 +1323,6 @@ CONTAINS
   !** DF2G
   REAL(8) FUNCTION DF2G(X)
     !>
-    !***
     !  Subsidiary to
     !***
     ! **Library:**   SLATEC
@@ -1365,7 +1342,6 @@ CONTAINS
   !** DF2N
   REAL(8) FUNCTION DF2N(X)
     !>
-    !***
     !  Subsidiary to
     !***
     ! **Library:**   SLATEC
@@ -1385,7 +1361,6 @@ CONTAINS
   !** DF2O
   REAL(8) FUNCTION DF2O(X)
     !>
-    !***
     !  Subsidiary to
     !***
     ! **Library:**   SLATEC
@@ -1406,7 +1381,6 @@ CONTAINS
   !** DF2P
   REAL(8) FUNCTION DF2P(X)
     !>
-    !***
     !  Subsidiary to
     !***
     ! **Library:**   SLATEC
@@ -1426,7 +1400,6 @@ CONTAINS
   !** DF2S
   REAL(8) FUNCTION DF2S(X)
     !>
-    !***
     !  Subsidiary to
     !***
     ! **Library:**   SLATEC
@@ -1447,7 +1420,6 @@ CONTAINS
   !** DF3G
   REAL(8) FUNCTION DF3G(X)
     !>
-    !***
     !  Subsidiary to
     !***
     ! **Library:**   SLATEC
@@ -1467,7 +1439,6 @@ CONTAINS
   !** DF3P
   REAL(8) FUNCTION DF3P(X)
     !>
-    !***
     !  Subsidiary to
     !***
     ! **Library:**   SLATEC
@@ -1488,7 +1459,6 @@ CONTAINS
   !** DF3S
   REAL(8) FUNCTION DF3S(X)
     !>
-    !***
     !  Subsidiary to
     !***
     ! **Library:**   SLATEC
@@ -1509,7 +1479,6 @@ CONTAINS
   !** DF4P
   REAL(8) FUNCTION DF4P(X)
     !>
-    !***
     !  Subsidiary to
     !***
     ! **Library:**   SLATEC
@@ -1530,7 +1499,6 @@ CONTAINS
   !** DF4S
   REAL(8) FUNCTION DF4S(X)
     !>
-    !***
     !  Subsidiary to
     !***
     ! **Library:**   SLATEC
@@ -1551,7 +1519,6 @@ CONTAINS
   !** DF5S
   REAL(8) FUNCTION DF5S(X)
     !>
-    !***
     !  Subsidiary to
     !***
     ! **Library:**   SLATEC
@@ -1572,7 +1539,6 @@ CONTAINS
   !** DT0
   REAL(8) FUNCTION DT0(X)
     !>
-    !***
     !  Subsidiary to
     !***
     ! **Library:**   SLATEC
@@ -1596,7 +1562,6 @@ CONTAINS
   !** DT1
   REAL(8) FUNCTION DT1(X)
     !>
-    !***
     !  Subsidiary to
     !***
     ! **Library:**   SLATEC
@@ -1620,7 +1585,6 @@ CONTAINS
   !** DT2
   REAL(8) FUNCTION DT2(X)
     !>
-    !***
     !  Subsidiary to
     !***
     ! **Library:**   SLATEC
@@ -1644,7 +1608,6 @@ CONTAINS
   !** DT3
   REAL(8) FUNCTION DT3(X)
     !>
-    !***
     !  Subsidiary to
     !***
     ! **Library:**   SLATEC
@@ -1668,7 +1631,6 @@ CONTAINS
   !** DT4
   REAL(8) FUNCTION DT4(X)
     !>
-    !***
     !  Subsidiary to
     !***
     ! **Library:**   SLATEC
@@ -1692,7 +1654,6 @@ CONTAINS
   !** DT5
   REAL(8) FUNCTION DT5(X)
     !>
-    !***
     !  Subsidiary to
     !***
     ! **Library:**   SLATEC
@@ -1716,7 +1677,6 @@ CONTAINS
   !** DPRIN
   SUBROUTINE DPRIN(Lun,Num1,Kprint,Ip,Exact,Result,Abserr,Neval,Ierv,Lierv)
     !>
-    !***
     !  Subsidiary to CDQAG, CDQAG, CDQAGI, CDQAGP, CDQAGS, CDQAWC,
     !            CDQAWF, CDQAWO, CDQAWS, and CDQNG.
     !***
@@ -1806,7 +1766,6 @@ PROGRAM TEST40
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !>
-  !***
   !  Driver for testing SLATEC subprograms
   !***
   ! **Library:**   SLATEC

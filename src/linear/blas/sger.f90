@@ -1,7 +1,6 @@
 !** SGER
 SUBROUTINE SGER(M,N,Alpha,X,Incx,Y,Incy,A,Lda)
   !>
-  !***
   !  Perform rank 1 update of a real general matrix.
   !***
   ! **Library:**   SLATEC (BLAS)

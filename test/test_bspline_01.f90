@@ -5,7 +5,6 @@ CONTAINS
   !** BSPCK
   SUBROUTINE BSPCK(Lun,Kprint,Ipass)
     !>
-    !***
     !  Quick check for the B-Spline package.
     !***
     ! **Library:**   SLATEC
@@ -456,7 +455,6 @@ CONTAINS
   !** FB
   REAL FUNCTION FB(X)
     !>
-    !***
     !  Subsidiary to BSPCK.
     !***
     ! **Library:**   SLATEC
@@ -484,7 +482,6 @@ PROGRAM TEST30
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !>
-  !***
   !  Driver for testing SLATEC subprograms
   !***
   ! **Library:**   SLATEC

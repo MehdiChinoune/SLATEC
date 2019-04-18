@@ -1,7 +1,6 @@
 !** QS2I1D
 SUBROUTINE QS2I1D(Ia,Ja,A,N,Kflag)
   !>
-  !***
   !  Sort an integer array, moving an integer and DP array.
   !            This routine sorts the integer array IA and makes the same
   !            interchanges in the integer array JA and the double pre-

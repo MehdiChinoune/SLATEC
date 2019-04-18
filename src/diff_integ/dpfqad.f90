@@ -1,7 +1,6 @@
 !** DPFQAD
 SUBROUTINE DPFQAD(F,Ldc,C,Xi,Lxi,K,Id,X1,X2,Tol,Quad,Ierr)
   !>
-  !***
   !  Compute the integral on (X1,X2) of a product of a
   !            function F and the ID-th derivative of a B-spline,
   !            (PP-representation).

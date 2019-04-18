@@ -1,7 +1,6 @@
 !** UIVP
 SUBROUTINE UIVP(X,Y,Yp)
   !>
-  !***
   !  Dummy routine for BVSUP quick check.
   !***
   ! **Library:**   SLATEC

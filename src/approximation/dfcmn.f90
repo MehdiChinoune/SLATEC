@@ -2,7 +2,6 @@
 SUBROUTINE DFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Nconst,Xconst,&
     Yconst,Nderiv,Mode,Coeff,Bf,Xtemp,Ptemp,Bkpt,G,Mdg,W,Mdw,Work,Iwork)
   !>
-  !***
   !  Subsidiary to FC
   !***
   ! **Library:**   SLATEC

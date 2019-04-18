@@ -1,7 +1,6 @@
 !** DFDJC1
 SUBROUTINE DFDJC1(FCN,N,X,Fvec,Fjac,Ldfjac,Iflag,Ml,Mu,Epsfcn,Wa1,Wa2)
   !>
-  !***
   !  Subsidiary to DNSQ and DNSQE
   !***
   ! **Library:**   SLATEC

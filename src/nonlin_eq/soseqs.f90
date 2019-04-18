@@ -2,7 +2,6 @@
 SUBROUTINE SOSEQS(FNC,N,S,Rtolx,Atolx,Tolf,Iflag,Mxit,Ncjs,Nsrrc,Nsri,&
     Iprint,Fmax,C,Nc,B,P,Temp,X,Y,Fac,Is)
   !>
-  !***
   !  Subsidiary to SOS
   !***
   ! **Library:**   SLATEC

@@ -1,7 +1,6 @@
 !** DCBRT
 REAL(8) FUNCTION DCBRT(X)
   !>
-  !***
   !  Compute the cube root.
   !***
   ! **Library:**   SLATEC (FNLIB)

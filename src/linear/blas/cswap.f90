@@ -1,7 +1,6 @@
 !** CSWAP
 SUBROUTINE CSWAP(N,Cx,Incx,Cy,Incy)
   !>
-  !***
   !  Interchange two vectors.
   !***
   ! **Library:**   SLATEC (BLAS)

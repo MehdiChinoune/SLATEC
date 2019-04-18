@@ -1,7 +1,6 @@
 !** SSDI
 SUBROUTINE SSDI(N,B,X,Nelt,Ia,Ja,A,Isym,Rwork,Iwork)
   !>
-  !***
   !  Diagonal Matrix Vector Multiply.
   !            Routine to calculate the product  X = DIAG*B, where DIAG
   !            is a diagonal matrix.

@@ -1,7 +1,6 @@
 !** SDANRM
 REAL FUNCTION SDANRM(Neq,V,Wt,Rpar,Ipar)
   !>
-  !***
   !  Compute vector norm for SDASSL.
   !***
   ! **Library:**   SLATEC (DASSL)

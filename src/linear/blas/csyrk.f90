@@ -1,7 +1,6 @@
 !** CSYRK
 SUBROUTINE CSYRK(Uplo,Trans,N,K,Alpha,A,Lda,Beta,C,Ldc)
   !>
-  !***
   !  Perform symmetric rank k update of a complex symmetric
   !            matrix.
   !***

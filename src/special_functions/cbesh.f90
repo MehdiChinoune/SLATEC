@@ -1,7 +1,6 @@
 !** CBESH
 SUBROUTINE CBESH(Z,Fnu,Kode,M,N,Cy,Nz,Ierr)
   !>
-  !***
   !  Compute a sequence of the Hankel functions H(m,a,z)
   !            for superscript m=1 or 2, real nonnegative orders a=b,
   !            b+1,... where b>0, and nonzero complex argument z.  A

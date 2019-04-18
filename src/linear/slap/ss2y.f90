@@ -1,7 +1,6 @@
 !** SS2Y
 SUBROUTINE SS2Y(N,Nelt,Ia,Ja,A,Isym)
   !>
-  !***
   !  SLAP Triad to SLAP Column Format Converter.
   !            Routine to convert from the SLAP Triad to SLAP Column
   !            format.

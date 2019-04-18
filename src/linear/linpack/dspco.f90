@@ -1,7 +1,6 @@
 !** DSPCO
 SUBROUTINE DSPCO(Ap,N,Kpvt,Rcond,Z)
   !>
-  !***
   !  Factor a real symmetric matrix stored in packed form
   !            by elimination with symmetric pivoting and estimate the
   !            condition number of the matrix.

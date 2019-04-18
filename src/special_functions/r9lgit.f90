@@ -1,7 +1,6 @@
 !** R9LGIT
 REAL FUNCTION R9LGIT(A,X,Algap1)
   !>
-  !***
   !  Compute the logarithm of Tricomi's incomplete Gamma
   !            function with Perron's continued fraction for large X and
   !            A .GE. X.

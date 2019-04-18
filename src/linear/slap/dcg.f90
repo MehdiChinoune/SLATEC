@@ -2,7 +2,6 @@
 SUBROUTINE DCG(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,Iter,&
     Err,Ierr,Iunit,R,Z,P,Dz,Rwork,Iwork)
   !>
-  !***
   !  Preconditioned Conjugate Gradient Sparse Ax=b Solver.
   !            Routine to solve a symmetric positive definite linear
   !            system  Ax = b  using the Preconditioned Conjugate

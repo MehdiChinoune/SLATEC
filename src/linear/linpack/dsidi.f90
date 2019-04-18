@@ -1,7 +1,6 @@
 !** DSIDI
 SUBROUTINE DSIDI(A,Lda,N,Kpvt,Det,Inert,Work,Job)
   !>
-  !***
   !  Compute the determinant, inertia and inverse of a real
   !            symmetric matrix using the factors from DSIFA.
   !***

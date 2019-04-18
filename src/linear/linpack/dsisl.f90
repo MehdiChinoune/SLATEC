@@ -1,7 +1,6 @@
 !** DSISL
 SUBROUTINE DSISL(A,Lda,N,Kpvt,B)
   !>
-  !***
   !  Solve a real symmetric system using the factors obtained
   !            from SSIFA.
   !***

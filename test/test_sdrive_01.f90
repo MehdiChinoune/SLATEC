@@ -5,7 +5,6 @@ CONTAINS
   !** SDQCK
   SUBROUTINE SDQCK(Lun,Kprint,Ipass)
     !>
-    !***
     !  Quick check for SLATEC routines SDRIV1, SDRIV2 and SDRIV3.
     !***
     ! **Library:**   SLATEC (SDRIVE)
@@ -413,7 +412,6 @@ CONTAINS
   !** SDF
   SUBROUTINE SDF(N,T,Y,Yp)
     !>
-    !***
     !  Quick check for SLATEC routines SDRIV1, SDRIV2 and SDRIV3.
     !***
     ! **Library:**   SLATEC (SDRIVE)
@@ -456,7 +454,6 @@ PROGRAM TEST45
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !>
-  !***
   !  Driver for testing SLATEC subprograms
   !            SDRIV1  SDRIV2  SDRIV3
   !***

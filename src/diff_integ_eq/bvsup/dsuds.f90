@@ -1,7 +1,6 @@
 !** DSUDS
 SUBROUTINE DSUDS(A,X,B,Neq,Nuk,Nrda,Iflag,Mlso,Work,Iwork)
   !>
-  !***
   !  Subsidiary to DBVSUP
   !***
   ! **Library:**   SLATEC

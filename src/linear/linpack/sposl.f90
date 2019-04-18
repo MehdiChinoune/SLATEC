@@ -1,7 +1,6 @@
 !** SPOSL
 SUBROUTINE SPOSL(A,Lda,N,B)
   !>
-  !***
   !  Solve the real symmetric positive definite linear system
   !            using the factors computed by SPOCO or SPOFA.
   !***

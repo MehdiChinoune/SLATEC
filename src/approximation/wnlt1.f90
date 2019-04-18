@@ -1,7 +1,6 @@
 !** WNLT1
 SUBROUTINE WNLT1(I,Lend,Mend,Ir,Mdw,Recalc,Imax,Hbar,H,Scalee,W)
   !>
-  !***
   !  Subsidiary to WNLIT
   !***
   ! **Library:**   SLATEC

@@ -1,7 +1,6 @@
 !** DBFQAD
 SUBROUTINE DBFQAD(F,T,Bcoef,N,K,Id,X1,X2,Tol,Quad,Ierr,Work)
   !>
-  !***
   !  Compute the integral of a product of a function and a
   !            derivative of a K-th order B-spline.
   !***

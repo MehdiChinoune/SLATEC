@@ -2,7 +2,6 @@
 SUBROUTINE QC25S(F,A,B,Bl,Br,Alfa,Beta,Ri,Rj,Rg,Rh,Result,Abserr,Resasc,&
     Integr,Nev)
   !>
-  !***
   !  To compute I = Integral of F*W over (BL,BR), with error
   !            estimate, where the weight function W has a singular
   !            behaviour of ALGEBRAICO-LOGARITHMIC type at the points

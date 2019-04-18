@@ -1,7 +1,6 @@
 !** DSYR
 SUBROUTINE DSYR(Uplo,N,Alpha,X,Incx,A,Lda)
   !>
-  !***
   !  Perform the symmetric rank 1 operation.
   !***
   ! **Library:**   SLATEC (BLAS)

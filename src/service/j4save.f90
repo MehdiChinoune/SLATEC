@@ -1,7 +1,6 @@
 !** J4SAVE
 INTEGER FUNCTION J4SAVE(Iwhich,Ivalue,Iset)
   !>
-  !***
   !  Save or recall global variables needed by error
   !            handling routines.
   !***

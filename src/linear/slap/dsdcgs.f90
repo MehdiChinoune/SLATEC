@@ -2,7 +2,6 @@
 SUBROUTINE DSDCGS(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
     Iunit,Rwork,Lenw,Iwork,Leniw)
   !>
-  !***
   !  Diagonally Scaled CGS Sparse Ax=b Solver.
   !            Routine to solve a linear system  Ax = b  using the
   !            BiConjugate Gradient Squared method with diagonal scaling.

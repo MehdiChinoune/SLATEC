@@ -1,7 +1,6 @@
 !** DQDOTA
 REAL(8) FUNCTION DQDOTA(N,Db,Qc,Dx,Incx,Dy,Incy)
   !>
-  !***
   !  Compute the inner product of two vectors with extended
   !            precision accumulation and result.
   !***

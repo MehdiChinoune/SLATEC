@@ -1,7 +1,6 @@
 !** SSWAP
 SUBROUTINE SSWAP(N,Sx,Incx,Sy,Incy)
   !>
-  !***
   !  Interchange two vectors.
   !***
   ! **Library:**   SLATEC (BLAS)

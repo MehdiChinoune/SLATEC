@@ -1,7 +1,6 @@
 !** PSGF
 REAL FUNCTION PSGF(X,Iz,C,A,Bh)
   !>
-  !***
   !  Subsidiary to BLKTRI
   !***
   ! **Library:**   SLATEC

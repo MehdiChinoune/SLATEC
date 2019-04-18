@@ -1,7 +1,6 @@
 !** QPDOC
 SUBROUTINE QPDOC
   !>
-  !***
   !  Documentation for QUADPACK, a package of subprograms for
   !            automatic evaluation of one-dimensional definite integrals.
   !***

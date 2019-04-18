@@ -1,7 +1,6 @@
 !** CPPFA
 SUBROUTINE CPPFA(Ap,N,Info)
   !>
-  !***
   !  Factor a complex Hermitian positive definite matrix stored
   !            in packed form.
   !***

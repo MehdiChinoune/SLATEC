@@ -1,7 +1,6 @@
 !** DBESI0
 REAL(8) FUNCTION DBESI0(X)
   !>
-  !***
   !  Compute the hyperbolic Bessel function of the first kind
   !            of order zero.
   !***

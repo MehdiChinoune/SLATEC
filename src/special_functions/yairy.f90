@@ -1,7 +1,6 @@
 !** YAIRY
 SUBROUTINE YAIRY(X,Rx,C,Bi,Dbi)
   !>
-  !***
   !  Subsidiary to BESJ and BESY
   !***
   ! **Library:**   SLATEC

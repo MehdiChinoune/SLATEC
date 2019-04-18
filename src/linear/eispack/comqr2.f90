@@ -1,7 +1,6 @@
 !** COMQR2
 SUBROUTINE COMQR2(Nm,N,Low,Igh,Ortr,Orti,Hr,Hi,Wr,Wi,Zr,Zi,Ierr)
   !>
-  !***
   !  Compute the eigenvalues and eigenvectors of a complex upper
   !            Hessenberg matrix.
   !***

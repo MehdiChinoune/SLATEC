@@ -1,7 +1,6 @@
 !** STOD
 SUBROUTINE STOD(Neq,Y,Yh,Nyh,Yh1,Ewt,Savf,Acor,Wm,Iwm,F,JAC,Rpar,Ipar)
   !>
-  !***
   !  Subsidiary to DEBDF
   !***
   ! **Library:**   SLATEC

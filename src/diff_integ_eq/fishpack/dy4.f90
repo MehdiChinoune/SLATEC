@@ -1,7 +1,6 @@
 !** DY4
 SUBROUTINE DY4(U,Idmn,I,J,Uyyy,Uyyyy)
   !>
-  !***
   !  Subsidiary to SEPX4
   !***
   ! **Library:**   SLATEC

@@ -1,7 +1,6 @@
 !** DPTSL
 SUBROUTINE DPTSL(N,D,E,B)
   !>
-  !***
   !  Solve a positive definite tridiagonal linear system.
   !***
   ! **Library:**   SLATEC (LINPACK)

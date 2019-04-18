@@ -1,7 +1,6 @@
 !** DLGAMS
 SUBROUTINE DLGAMS(X,Dlgam,Sgngam)
   !>
-  !***
   !  Compute the logarithm of the absolute value of the Gamma
   !            function.
   !***

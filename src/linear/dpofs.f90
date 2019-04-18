@@ -1,7 +1,6 @@
 !** DPOFS
 SUBROUTINE DPOFS(A,Lda,N,V,Itask,Ind,Work)
   !>
-  !***
   !  Solve a positive definite symmetric system of linear
   !            equations.
   !***

@@ -1,7 +1,6 @@
 !** CCOT
 COMPLEX FUNCTION CCOT(Z)
   !>
-  !***
   !  Compute the cotangent.
   !***
   ! **Library:**   SLATEC (FNLIB)

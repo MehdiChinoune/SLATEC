@@ -1,7 +1,6 @@
 !** CGBCO
 SUBROUTINE CGBCO(Abd,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
   !>
-  !***
   !  Factor a band matrix by Gaussian elimination and
   !            estimate the condition number of the matrix.
   !***

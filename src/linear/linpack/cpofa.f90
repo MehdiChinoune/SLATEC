@@ -1,7 +1,6 @@
 !** CPOFA
 SUBROUTINE CPOFA(A,Lda,N,Info)
   !>
-  !***
   !  Factor a complex Hermitian positive definite matrix.
   !***
   ! **Library:**   SLATEC (LINPACK)

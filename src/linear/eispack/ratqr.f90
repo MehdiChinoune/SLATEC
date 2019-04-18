@@ -1,7 +1,6 @@
 !** RATQR
 SUBROUTINE RATQR(N,Eps1,D,E,E2,M,W,Ind,Bd,Type,Idef,Ierr)
   !>
-  !***
   !  Compute the largest or smallest eigenvalues of a symmetric
   !            tridiagonal matrix using the rational QR method with Newton
   !            correction.

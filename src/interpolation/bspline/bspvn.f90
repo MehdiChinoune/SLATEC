@@ -1,7 +1,6 @@
 !** BSPVN
 SUBROUTINE BSPVN(T,Jhigh,K,Indexx,X,Ileft,Vnikx,Work,Iwork)
   !>
-  !***
   !  Calculate the value of all (possibly) nonzero basis
   !            functions at X.
   !***

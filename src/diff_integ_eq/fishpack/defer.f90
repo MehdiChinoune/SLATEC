@@ -1,7 +1,6 @@
 !** DEFER
 SUBROUTINE DEFER(COFX,COFY,Idmn,Usol,Grhs)
   !>
-  !***
   !  Subsidiary to SEPELI
   !***
   ! **Library:**   SLATEC

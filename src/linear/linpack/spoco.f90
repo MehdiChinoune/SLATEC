@@ -1,7 +1,6 @@
 !** SPOCO
 SUBROUTINE SPOCO(A,Lda,N,Rcond,Z,Info)
   !>
-  !***
   !  Factor a real symmetric positive definite matrix
   !            and estimate the condition number of the matrix.
   !***

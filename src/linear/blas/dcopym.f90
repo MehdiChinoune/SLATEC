@@ -1,7 +1,6 @@
 !** DCOPYM
 SUBROUTINE DCOPYM(N,Dx,Incx,Dy,Incy)
   !>
-  !***
   !  Copy the negative of a vector to a vector.
   !***
   ! **Library:**   SLATEC (BLAS)

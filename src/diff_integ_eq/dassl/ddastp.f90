@@ -3,7 +3,6 @@ SUBROUTINE DDASTP(X,Y,Yprime,Neq,RES,JAC,H,Wt,Jstart,Idid,Rpar,Ipar,Phi,&
     Delta,E,Wm,Iwm,Alpha,Beta,Gama,Psi,Sigma,Cj,Cjold,Hold,&
     S,Hmin,Uround,Iphase,Jcalc,K,Kold,Ns,Nonneg,Ntemp)
   !>
-  !***
   !  Perform one step of the DDASSL integration.
   !***
   ! **Library:**   SLATEC (DASSL)

@@ -1,7 +1,6 @@
 !** DWUPDT
 SUBROUTINE DWUPDT(N,R,Ldr,W,B,Alpha,Coss,Sinn)
   !>
-  !***
   !  Subsidiary to DNLS1 and DNLS1E
   !***
   ! **Library:**   SLATEC

@@ -1,7 +1,6 @@
 !** PYTHAG
 REAL FUNCTION PYTHAG(A,B)
   !>
-  !***
   !  Compute the complex square root of a complex number without
   !            destructive overflow or underflow.
   !***

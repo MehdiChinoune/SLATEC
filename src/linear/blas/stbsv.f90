@@ -1,7 +1,6 @@
 !** STBSV
 SUBROUTINE STBSV(Uplo,Trans,Diag,N,K,A,Lda,X,Incx)
   !>
-  !***
   !  Solve a real triangular banded system of linear equations.
   !***
   ! **Library:**   SLATEC (BLAS)

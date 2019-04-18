@@ -1,7 +1,6 @@
 !** SSYMM
 SUBROUTINE SSYMM(Side,Uplo,M,N,Alpha,A,Lda,B,Ldb,Beta,C,Ldc)
   !>
-  !***
   !  Multiply a real general matrix by a real symmetric matrix.
   !***
   ! **Library:**   SLATEC (BLAS)

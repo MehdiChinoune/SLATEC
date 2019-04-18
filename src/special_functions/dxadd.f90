@@ -1,7 +1,6 @@
 !** DXADD
 SUBROUTINE DXADD(X,Ix,Y,Iy,Z,Iz,Ierror)
   !>
-  !***
   !  To provide double-precision floating-point arithmetic
   !            with an extended exponent range.
   !***

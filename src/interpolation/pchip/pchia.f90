@@ -1,7 +1,6 @@
 !** PCHIA
 REAL FUNCTION PCHIA(N,X,F,D,Incfd,Skip,A,B,Ierr)
   !>
-  !***
   !  Evaluate the definite integral of a piecewise cubic
   !            Hermite function over an arbitrary interval.
   !***

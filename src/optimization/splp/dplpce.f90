@@ -3,7 +3,6 @@ SUBROUTINE DPLPCE(Mrelas,Nvars,Lmx,Lbm,Itlp,Itbrc,Ibasis,Imat,Ibrc,Ipr,&
     Iwr,Ind,Ibb,Erdnrm,Eps,Tune,Gg,Amat,Basmat,Csc,Wr,Ww,&
     Primal,Erd,Erp,Singlr,Redbas)
   !>
-  !***
   !  Subsidiary to DSPLP
   !***
   ! **Library:**   SLATEC

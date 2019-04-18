@@ -1,7 +1,6 @@
 !** DGAMIC
 REAL(8) FUNCTION DGAMIC(A,X)
   !>
-  !***
   !  Calculate the complementary incomplete Gamma function.
   !***
   ! **Library:**   SLATEC (FNLIB)

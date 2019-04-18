@@ -1,7 +1,6 @@
 !** CPPDI
 SUBROUTINE CPPDI(Ap,N,Det,Job)
   !>
-  !***
   !  Compute the determinant and inverse of a complex Hermitian
   !            positive definite matrix using factors from CPPCO or CPPFA.
   !***

@@ -5,7 +5,6 @@ CONTAINS
   !** AVNTST
   SUBROUTINE AVNTST(Lun,Kprint,Ipass)
     !>
-    !***
     !  Quick check for AVINT.
     !***
     ! **Library:**   SLATEC
@@ -211,7 +210,6 @@ CONTAINS
   !** QG8TST
   SUBROUTINE QG8TST(Lun,Kprint,Ipass)
     !>
-    !***
     !  Quick check for GAUS8.
     !***
     ! **Library:**   SLATEC
@@ -355,7 +353,6 @@ CONTAINS
   !** QN79QX
   SUBROUTINE QN79QX(Lun,Kprint,Ipass)
     !>
-    !***
     !  Quick check for QNC79.
     !***
     ! **Library:**   SLATEC
@@ -501,7 +498,6 @@ CONTAINS
   !** FQD1
   REAL FUNCTION FQD1(X)
     !>
-    !***
     !  Function evaluator for QNC79 and GAUS8 quick checks.
     !***
     ! **Library:**   SLATEC
@@ -528,7 +524,6 @@ CONTAINS
   !** FQD2
   REAL FUNCTION FQD2(X)
     !>
-    !***
     !  Function evaluator for QNC79 and GAUS8 quick checks.
     !***
     ! **Library:**   SLATEC
@@ -559,7 +554,6 @@ PROGRAM TEST41
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !>
-  !***
   !  Driver for testing SLATEC subprograms
   !***
   ! **Library:**   SLATEC

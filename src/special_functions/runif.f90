@@ -1,7 +1,6 @@
 !** RUNIF
 REAL FUNCTION RUNIF(T,N)
   !>
-  !***
   !  Generate a uniformly distributed random number.
   !***
   ! **Library:**   SLATEC (FNLIB)

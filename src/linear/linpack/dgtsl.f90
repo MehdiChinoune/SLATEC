@@ -1,7 +1,6 @@
 !** DGTSL
 SUBROUTINE DGTSL(N,C,D,E,B,Info)
   !>
-  !***
   !  Solve a tridiagonal linear system.
   !***
   ! **Library:**   SLATEC (LINPACK)

@@ -1,7 +1,6 @@
 !** SGBFA
 SUBROUTINE SGBFA(Abd,Lda,N,Ml,Mu,Ipvt,Info)
   !>
-  !***
   !  Factor a band matrix using Gaussian elimination.
   !***
   ! **Library:**   SLATEC (LINPACK)

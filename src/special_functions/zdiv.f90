@@ -1,7 +1,6 @@
 !** ZDIV
 SUBROUTINE ZDIV(Ar,Ai,Br,Bi,Cr,Ci)
   !>
-  !***
   !  Subsidiary to ZBESH, ZBESI, ZBESJ, ZBESK, ZBESY, ZAIRY and
   !            ZBIRY
   !***

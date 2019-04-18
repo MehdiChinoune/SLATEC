@@ -1,7 +1,6 @@
 !** SDOT
 REAL FUNCTION SDOT(N,Sx,Incx,Sy,Incy)
   !>
-  !***
   !  Compute the inner product of two vectors.
   !***
   ! **Library:**   SLATEC (BLAS)

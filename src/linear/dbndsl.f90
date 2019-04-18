@@ -1,7 +1,6 @@
 !** DBNDSL
 SUBROUTINE DBNDSL(Mode,G,Mdg,Nb,Ip,Ir,X,N,Rnorm)
   !>
-  !***
   !  Solve the least squares problem for a banded matrix using
   !            sequential accumulation of rows of the data matrix.
   !            Exactly one right-hand side vector is permitted.

@@ -1,7 +1,6 @@
 !** BESK1E
 REAL FUNCTION BESK1E(X)
   !>
-  !***
   !  Compute the exponentially scaled modified (hyperbolic)
   !            Bessel function of the third kind of order one.
   !***

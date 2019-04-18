@@ -1,7 +1,6 @@
 !** DROTMG
 SUBROUTINE DROTMG(Dd1,Dd2,Dx1,Dy1,Dparam)
   !>
-  !***
   !  Construct a modified Givens transformation.
   !***
   ! **Library:**   SLATEC (BLAS)

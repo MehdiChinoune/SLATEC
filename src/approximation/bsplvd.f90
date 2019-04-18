@@ -1,7 +1,6 @@
 !** BSPLVD
 SUBROUTINE BSPLVD(T,K,X,Ileft,Vnikx,Nderiv)
   !>
-  !***
   !  Subsidiary to FC
   !***
   ! **Library:**   SLATEC

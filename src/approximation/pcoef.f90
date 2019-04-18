@@ -1,7 +1,6 @@
 !** PCOEF
 SUBROUTINE PCOEF(L,C,Tc,A)
   !>
-  !***
   !  Convert the POLFIT coefficients to Taylor series form.
   !***
   ! **Library:**   SLATEC

@@ -1,7 +1,6 @@
 !** DMACON
 SUBROUTINE DMACON
   !>
-  !***
   !  Subsidiary to DBVSUP
   !***
   ! **Library:**   SLATEC

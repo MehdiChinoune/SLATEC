@@ -1,7 +1,6 @@
 !** OHTROL
 SUBROUTINE OHTROL(Q,N,Nrda,Diag,Irank,Div,Td)
   !>
-  !***
   !  Subsidiary to BVSUP
   !***
   ! **Library:**   SLATEC

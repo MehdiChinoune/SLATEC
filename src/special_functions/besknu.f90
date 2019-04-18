@@ -1,7 +1,6 @@
 !** BESKNU
 SUBROUTINE BESKNU(X,Fnu,Kode,N,Y,Nz)
   !>
-  !***
   !  Subsidiary to BESK
   !***
   ! **Library:**   SLATEC

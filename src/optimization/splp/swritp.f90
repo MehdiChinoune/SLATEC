@@ -1,7 +1,6 @@
 !** SWRITP
 SUBROUTINE SWRITP(Ipage,List,Rlist,Lpage,Irec)
   !>
-  !***
   !  Subsidiary to SPLP
   !***
   ! **Library:**   SLATEC

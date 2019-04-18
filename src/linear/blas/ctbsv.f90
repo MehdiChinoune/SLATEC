@@ -1,7 +1,6 @@
 !** CTBSV
 SUBROUTINE CTBSV(Uplo,Trans,Diag,N,K,A,Lda,X,Incx)
   !>
-  !***
   !  Solve a complex triangular banded system of equations.
   !***
   ! **Library:**   SLATEC (BLAS)

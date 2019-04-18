@@ -3,7 +3,6 @@ SUBROUTINE QAWOE(F,A,B,Omega,Integr,Epsabs,Epsrel,Limit,Icall,Maxp1,&
     Result,Abserr,Neval,Ier,Last,Alist,Blist,Rlist,Elist,&
     Iord,Nnlog,Momcom,Chebmo)
   !>
-  !***
   !  Calculate an approximation to a given definite integral
   !               I = Integral of F(X)*W(X) over (A,B), where
   !                  W(X) = COS(OMEGA*X)

@@ -1,7 +1,6 @@
 !** C9LN2R
 COMPLEX FUNCTION C9LN2R(Z)
   !>
-  !***
   !  Evaluate LOG(1+Z) from second order relative accuracy so
   !            that  LOG(1+Z) = Z - Z**2/2 + Z**3*C9LN2R(Z).
   !***

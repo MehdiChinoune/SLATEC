@@ -1,7 +1,6 @@
 !** DBDIFF
 SUBROUTINE DBDIFF(L,V)
   !>
-  !***
   !  Subsidiary to DBSKIN
   !***
   ! **Library:**   SLATEC

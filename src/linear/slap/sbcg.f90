@@ -2,7 +2,6 @@
 SUBROUTINE SBCG(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MTTVEC,MSOLVE,MTSOLV,Itol,&
     Tol,Itmax,Iter,Err,Ierr,Iunit,R,Z,P,Rr,Zz,Pp,Dz,Rwork,Iwork)
   !>
-  !***
   !  Preconditioned BiConjugate Gradient Sparse Ax = b Solver.
   !            Routine to solve a Non-Symmetric linear system  Ax = b
   !            using the Preconditioned BiConjugate Gradient method.

@@ -1,7 +1,6 @@
 !** ZRATI
 SUBROUTINE ZRATI(Zr,Zi,Fnu,N,Cyr,Cyi,Tol)
   !>
-  !***
   !  Subsidiary to ZBESH, ZBESI and ZBESK
   !***
   ! **Library:**   SLATEC

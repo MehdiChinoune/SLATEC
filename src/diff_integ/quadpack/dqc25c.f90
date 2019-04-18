@@ -1,7 +1,6 @@
 !** DQC25C
 SUBROUTINE DQC25C(F,A,B,C,Result,Abserr,Krul,Neval)
   !>
-  !***
   !  To compute I = Integral of F*W over (A,B) with
   !            error estimate, where W(X) = 1/(X-C)
   !***

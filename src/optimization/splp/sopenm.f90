@@ -1,7 +1,6 @@
 !** SOPENM
 SUBROUTINE SOPENM(Ipage,Lpage)
   !>
-  !***
   !  Subsidiary to SPLP
   !***
   ! **Library:**   SLATEC

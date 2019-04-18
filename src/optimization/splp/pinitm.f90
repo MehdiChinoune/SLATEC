@@ -1,7 +1,6 @@
 !** PINITM
 SUBROUTINE PINITM(M,N,Sx,Ix,Lmx,Ipagef)
   !>
-  !***
   !  Subsidiary to SPLP
   !***
   ! **Library:**   SLATEC

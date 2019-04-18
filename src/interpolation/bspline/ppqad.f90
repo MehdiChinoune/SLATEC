@@ -1,7 +1,6 @@
 !** PPQAD
 SUBROUTINE PPQAD(Ldc,C,Xi,Lxi,K,X1,X2,Pquad)
   !>
-  !***
   !  Compute the integral on (X1,X2) of a K-th order B-spline
   !            using the piecewise polynomial (PP) representation.
   !***

@@ -1,7 +1,6 @@
 !** DBNSLV
 SUBROUTINE DBNSLV(W,Nroww,Nrow,Nbandl,Nbandu,B)
   !>
-  !***
   !  Subsidiary to DBINT4 and DBINTK
   !***
   ! **Library:**   SLATEC

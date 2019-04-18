@@ -1,7 +1,6 @@
 !** DDOGLG
 SUBROUTINE DDOGLG(N,R,Lr,Diag,Qtb,Delta,X,Wa1,Wa2)
   !>
-  !***
   !  Subsidiary to DNSQ and DNSQE
   !***
   ! **Library:**   SLATEC

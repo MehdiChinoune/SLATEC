@@ -1,7 +1,6 @@
 !** CBUNK
 SUBROUTINE CBUNK(Z,Fnu,Kode,Mr,N,Y,Nz,Tol,Elim,Alim)
   !>
-  !***
   !  Subsidiary to CBESH and CBESK
   !***
   ! **Library:**   SLATEC

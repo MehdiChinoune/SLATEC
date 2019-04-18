@@ -1,7 +1,6 @@
 !** SDRIV1
 SUBROUTINE SDRIV1(N,T,Y,F,Tout,Mstate,Eps,Work,Lenw,Ierflg)
   !>
-  !***
   !  The function of SDRIV1 is to solve N (200 or fewer)
   !            ordinary differential equations of the form
   !            dY(I)/dT = F(Y(I),T), given the initial conditions

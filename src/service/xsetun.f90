@@ -1,7 +1,6 @@
 !** XSETUN
 SUBROUTINE XSETUN(Iunit)
   !>
-  !***
   !  Set output file to which error messages are to be sent.
   !***
   ! **Library:**   SLATEC (XERROR)

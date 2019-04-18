@@ -1,7 +1,6 @@
 !** SSYR2
 SUBROUTINE SSYR2(Uplo,N,Alpha,X,Incx,Y,Incy,A,Lda)
   !>
-  !***
   !  Perform symmetric rank 2 update of a real symmetric matrix.
   !***
   ! **Library:**   SLATEC (BLAS)

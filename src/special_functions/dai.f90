@@ -1,7 +1,6 @@
 !** DAI
 REAL(8) FUNCTION DAI(X)
   !>
-  !***
   !  Evaluate the Airy function.
   !***
   ! **Library:**   SLATEC (FNLIB)

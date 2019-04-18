@@ -1,7 +1,6 @@
 !** PCHKT
 SUBROUTINE PCHKT(N,X,Knotyp,T)
   !>
-  !***
   !  Compute B-spline knot sequence for PCHBS.
   !***
   ! **Library:**   SLATEC (PCHIP)

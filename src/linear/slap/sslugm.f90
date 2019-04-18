@@ -2,7 +2,6 @@
 SUBROUTINE SSLUGM(N,B,X,Nelt,Ia,Ja,A,Isym,Nsave,Itol,Tol,Itmax,Iter,Err,&
     Ierr,Iunit,Rwork,Lenw,Iwork,Leniw)
   !>
-  !***
   !  Incomplete LU GMRES Iterative Sparse Ax=b Solver.
   !            This routine uses the generalized minimum residual
   !            (GMRES) method with incomplete LU factorization for

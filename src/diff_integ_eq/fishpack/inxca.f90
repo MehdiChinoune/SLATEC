@@ -1,7 +1,6 @@
 !** INXCA
 SUBROUTINE INXCA(I,Ir,Idxa,Na)
   !>
-  !***
   !  Subsidiary to CBLKTR
   !***
   ! **Library:**   SLATEC

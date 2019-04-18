@@ -1,7 +1,6 @@
 !** BINTK
 SUBROUTINE BINTK(X,Y,T,N,K,Bcoef,Q,Work)
   !>
-  !***
   !  Compute the B-representation of a spline which interpolates
   !            given data.
   !***

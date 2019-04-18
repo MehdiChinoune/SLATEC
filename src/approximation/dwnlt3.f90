@@ -1,7 +1,6 @@
 !** DWNLT3
 SUBROUTINE DWNLT3(I,Imax,M,Mdw,Ipivot,H,W)
   !>
-  !***
   !  Subsidiary to WNLIT
   !***
   ! **Library:**   SLATEC

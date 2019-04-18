@@ -1,7 +1,6 @@
 !** DQK61
 SUBROUTINE DQK61(F,A,B,Result,Abserr,Resabs,Resasc)
   !>
-  !***
   !  To compute I = Integral of F over (A,B) with error
   !                           estimate
   !                       J = Integral of ABS(F) over (A,B)

@@ -1,7 +1,6 @@
 !** SAXPY
 SUBROUTINE SAXPY(N,Sa,Sx,Incx,Sy,Incy)
   !>
-  !***
   !  Compute a constant times a vector plus a vector.
   !***
   ! **Library:**   SLATEC (BLAS)

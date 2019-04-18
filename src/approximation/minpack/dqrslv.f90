@@ -1,7 +1,6 @@
 !** DQRSLV
 SUBROUTINE DQRSLV(N,R,Ldr,Ipvt,Diag,Qtb,X,Sigma,Wa)
   !>
-  !***
   !  Subsidiary to DNLS1 and DNLS1E
   !***
   ! **Library:**   SLATEC

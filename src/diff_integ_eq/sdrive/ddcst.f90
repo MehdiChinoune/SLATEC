@@ -1,7 +1,6 @@
 !** DDCST
 SUBROUTINE DDCST(Maxord,Mint,Iswflg,El,Tq)
   !>
-  !***
   !  DDCST sets coefficients used by the core integrator DDSTP.
   !***
   ! **Library:**   SLATEC (SDRIVE)

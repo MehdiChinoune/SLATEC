@@ -1,7 +1,6 @@
 !** RSGAB
 SUBROUTINE RSGAB(Nm,N,A,B,W,Matz,Z,Fv1,Fv2,Ierr)
   !>
-  !***
   !  Compute the eigenvalues and, optionally, the eigenvectors
   !            of a symmetric generalized eigenproblem.
   !***

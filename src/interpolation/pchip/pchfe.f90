@@ -1,7 +1,6 @@
 !** PCHFE
 SUBROUTINE PCHFE(N,X,F,D,Incfd,Skip,Ne,Xe,Fe,Ierr)
   !>
-  !***
   !  Evaluate a piecewise cubic Hermite function at an array of
   !            points.  May be used by itself for Hermite interpolation,
   !            or as an evaluator for PCHIM or PCHIC.

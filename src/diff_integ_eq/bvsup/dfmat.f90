@@ -1,7 +1,6 @@
 !** DFMAT
 SUBROUTINE DFMAT(X,Y,Yp)
   !>
-  !***
   !  Subsidiary to
   !***
   ! **Library:**   SLATEC

@@ -1,7 +1,6 @@
 !** DLPDP
 SUBROUTINE DLPDP(A,Mda,M,N1,N2,Prgopt,X,Wnorm,Mode,Ws,Is)
   !>
-  !***
   !  Subsidiary to DLSEI
   !***
   ! **Library:**   SLATEC

@@ -1,7 +1,6 @@
 !** EXPREL
 REAL FUNCTION EXPREL(X)
   !>
-  !***
   !  Calculate the relative error exponential (EXP(X)-1)/X.
   !***
   ! **Library:**   SLATEC (FNLIB)

@@ -1,7 +1,6 @@
 !** INTRV
 SUBROUTINE INTRV(Xt,Lxt,X,Ilo,Ileft,Mflag)
   !>
-  !***
   !  Compute the largest integer ILEFT in 1 .LE. ILEFT .LE. LXT
   !            such that XT(ILEFT) .LE. X where XT(*) is a subdivision
   !            of the X interval.

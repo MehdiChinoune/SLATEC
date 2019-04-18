@@ -6,7 +6,6 @@ CONTAINS
   !** BIKCK
   SUBROUTINE BIKCK(Lun,Kprint,Ipass)
     !>
-    !***
     !  Quick check for BESI and BESK.
     !***
     ! **Library:**   SLATEC
@@ -273,7 +272,6 @@ CONTAINS
   !** BJYCK
   SUBROUTINE BJYCK(Lun,Kprint,Ipass)
     !>
-    !***
     !  Quick check for BESJ and BESY.
     !***
     ! **Library:**   SLATEC
@@ -508,7 +506,6 @@ CONTAINS
   !** EG8CK
   SUBROUTINE EG8CK(Lun,Kprint,Ipass)
     !>
-    !***
     !  Quick check for EXINT and GAUS8.
     !***
     ! **Library:**   SLATEC
@@ -691,7 +688,6 @@ CONTAINS
   !** FEIN
   REAL FUNCTION FEIN(T)
     !>
-    !***
     !  Subsidiary to EG8CK.
     !***
     ! **Library:**   SLATEC
@@ -720,7 +716,6 @@ PROGRAM TEST05
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !>
-  !***
   !  Driver for testing SLATEC subprograms
   !***
   ! **Library:**   SLATEC

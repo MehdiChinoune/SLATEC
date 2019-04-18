@@ -1,7 +1,6 @@
 !** DVOUT
 SUBROUTINE DVOUT(N,Dx,Ifmt,Idigit)
   !>
-  !***
   !  Subsidiary to DSPLP
   !***
   ! **Library:**   SLATEC

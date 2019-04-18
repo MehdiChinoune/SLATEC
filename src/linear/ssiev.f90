@@ -1,7 +1,6 @@
 !** SSIEV
 SUBROUTINE SSIEV(A,Lda,N,E,Work,Job,Info)
   !>
-  !***
   !  Compute the eigenvalues and, optionally, the eigenvectors
   !            of a real symmetric matrix.
   !***

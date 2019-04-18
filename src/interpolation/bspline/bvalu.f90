@@ -1,7 +1,6 @@
 !** BVALU
 REAL FUNCTION BVALU(T,A,N,K,Ideriv,X,Inbv,Work)
   !>
-  !***
   !  Evaluate the B-representation of a B-spline at X for the
   !            function value or any of its derivatives.
   !***

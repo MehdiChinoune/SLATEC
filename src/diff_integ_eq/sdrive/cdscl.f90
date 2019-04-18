@@ -1,7 +1,6 @@
 !** CDSCL
 SUBROUTINE CDSCL(Hmax,N,Nq,Rmax,H,Rc,Rh,Yh)
   !>
-  !***
   !  Subroutine CDSCL rescales the YH array whenever the step
   !            size is changed.
   !***

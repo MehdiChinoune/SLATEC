@@ -2,7 +2,6 @@
 SUBROUTINE LLSIA(A,Mda,M,N,B,Mdb,Nb,Re,Ae,Key,Mode,Np,Krank,Ksure,Rnorm,W,&
     Lw,Iwork,Liw,Info)
   !>
-  !***
   !  Solve a linear least squares problems by performing a QR
   !            factorization of the matrix using Householder
   !            transformations.  Emphasis is put on detecting possible

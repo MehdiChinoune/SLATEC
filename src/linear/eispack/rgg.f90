@@ -1,7 +1,6 @@
 !** RGG
 SUBROUTINE RGG(Nm,N,A,B,Alfr,Alfi,Beta,Matz,Z,Ierr)
   !>
-  !***
   !  Compute the eigenvalues and eigenvectors for a real
   !            generalized eigenproblem.
   !***

@@ -3,7 +3,6 @@ INTEGER FUNCTION ISDOMN(N,B,X,Nelt,Ia,Ja,A,Isym,MSOLVE,Nsave,Itol,Tol,&
     Itmax,Iter,Err,Ierr,Iunit,R,Z,P,Ap,Emap,Dz,Csav,&
     Rwork,Iwork,Ak,Bnrm,Solnrm)
   !>
-  !***
   !  Preconditioned Orthomin Stop Test.
   !            This routine calculates the stop test for the Orthomin
   !            iteration scheme.  It returns a non-zero if the error

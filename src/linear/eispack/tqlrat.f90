@@ -1,7 +1,6 @@
 !** TQLRAT
 SUBROUTINE TQLRAT(N,D,E2,Ierr)
   !>
-  !***
   !  Compute the eigenvalues of symmetric tridiagonal matrix
   !            using a rational variant of the QL method.
   !***

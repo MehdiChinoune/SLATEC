@@ -1,7 +1,6 @@
 !** CBLKT1
 SUBROUTINE CBLKT1(N,An,Bn,Cn,M,Am,Bm,Cm,Idimy,Y,B,W1,W2,W3,Wd,Ww,Wu,PRDCT,CPRDCT)
   !>
-  !***
   !  Subsidiary to CBLKTR
   !***
   ! **Library:**   SLATEC

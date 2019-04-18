@@ -1,7 +1,6 @@
 !** CTBMV
 SUBROUTINE CTBMV(Uplo,Trans,Diag,N,K,A,Lda,X,Incx)
   !>
-  !***
   !  Multiply a complex vector by a complex triangular band
   !            matrix.
   !***

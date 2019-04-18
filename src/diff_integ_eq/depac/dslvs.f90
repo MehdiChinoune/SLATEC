@@ -1,7 +1,6 @@
 !** DSLVS
 SUBROUTINE DSLVS(Wm,Iwm,X,Tem)
   !>
-  !***
   !  Subsidiary to DDEBDF
   !***
   ! **Library:**   SLATEC

@@ -1,7 +1,6 @@
 !** BETA
 REAL FUNCTION BETA(A,B)
   !>
-  !***
   !  Compute the complete Beta function.
   !***
   ! **Library:**   SLATEC (FNLIB)

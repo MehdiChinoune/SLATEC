@@ -1,7 +1,6 @@
 !** DXSET
 SUBROUTINE DXSET(Irad,Nradpl,Dzero,Nbits,Ierror)
   !>
-  !***
   !  To provide double-precision floating-point arithmetic
   !            with an extended exponent range.
   !***

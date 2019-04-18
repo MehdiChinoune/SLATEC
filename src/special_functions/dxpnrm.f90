@@ -1,7 +1,6 @@
 !** DXPNRM
 SUBROUTINE DXPNRM(Nu1,Nu2,Mu1,Mu2,Pqa,Ipqa,Ierror)
   !>
-  !***
   !  To compute the values of Legendre functions for DXLEGF.
   !            This subroutine transforms an array of Legendre functions
   !            of the first kind of negative order stored in array PQA

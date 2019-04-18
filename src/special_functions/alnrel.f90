@@ -1,7 +1,6 @@
 !** ALNREL
 REAL FUNCTION ALNREL(X)
   !>
-  !***
   !  Evaluate ln(1+X) accurate in the sense of relative error.
   !***
   ! **Library:**   SLATEC (FNLIB)

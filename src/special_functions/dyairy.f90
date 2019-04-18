@@ -1,7 +1,6 @@
 !** DYAIRY
 SUBROUTINE DYAIRY(X,Rx,C,Bi,Dbi)
   !>
-  !***
   !  Subsidiary to DBESJ and DBESY
   !***
   ! **Library:**   SLATEC

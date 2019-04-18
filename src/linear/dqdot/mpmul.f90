@@ -1,7 +1,6 @@
 !** MPMUL
 SUBROUTINE MPMUL(X,Y,Z)
   !>
-  !***
   !  Subsidiary to DQDOTA and DQDOTI
   !***
   ! **Library:**   SLATEC

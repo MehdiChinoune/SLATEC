@@ -5,7 +5,6 @@ SUBROUTINE DDSTP(Eps,F,FA,Hmax,Impl,Ierror,JACOBN,Matdim,Maxord,Mint,&
     Dfdy,El,Fac,Hold,Ipvt,Jstate,Jstepl,Nq,Nwait,Rc,Rmax,&
     Save1,Save2,Tq,Trend,Iswflg,Mtrsv,Mxrdsv)
   !>
-  !***
   !  DDSTP performs one step of the integration of an initial
   !            value problem for a system of ordinary differential
   !            equations.

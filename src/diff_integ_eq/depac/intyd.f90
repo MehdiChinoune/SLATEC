@@ -1,7 +1,6 @@
 !** INTYD
 SUBROUTINE INTYD(T,K,Yh,Nyh,Dky,Iflag)
   !>
-  !***
   !  Subsidiary to DEBDF
   !***
   ! **Library:**   SLATEC

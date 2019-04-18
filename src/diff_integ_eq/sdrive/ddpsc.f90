@@ -1,7 +1,6 @@
 !** DDPSC
 SUBROUTINE DDPSC(Ksgn,N,Nq,Yh)
   !>
-  !***
   !  Subroutine DDPSC computes the predicted YH values by
   !            effectively multiplying the YH array by the Pascal triangle
   !            matrix when KSGN is +1, and performs the inverse function

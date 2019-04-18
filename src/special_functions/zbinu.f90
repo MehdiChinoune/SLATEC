@@ -1,7 +1,6 @@
 !** ZBINU
 SUBROUTINE ZBINU(Zr,Zi,Fnu,Kode,N,Cyr,Cyi,Nz,Rl,Fnul,Tol,Elim,Alim)
   !>
-  !***
   !  Subsidiary to ZAIRY, ZBESH, ZBESI, ZBESJ, ZBESK and ZBIRY
   !***
   ! **Library:**   SLATEC

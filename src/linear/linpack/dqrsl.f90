@@ -1,7 +1,6 @@
 !** DQRSL
 SUBROUTINE DQRSL(X,Ldx,N,K,Qraux,Y,Qy,Qty,B,Rsd,Xb,Job,Info)
   !>
-  !***
   !  Apply the output of DQRDC to compute coordinate transfor-
   !            mations, projections, and least squares solutions.
   !***

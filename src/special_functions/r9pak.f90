@@ -1,7 +1,6 @@
 !** R9PAK
 REAL FUNCTION R9PAK(Y,N)
   !>
-  !***
   !  Pack a base 2 exponent into a floating point number.
   !***
   ! **Library:**   SLATEC (FNLIB)

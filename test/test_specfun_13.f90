@@ -5,7 +5,6 @@ CONTAINS
   !** QCDRC
   SUBROUTINE QCDRC(Lun,Kprint,Ipass)
     !>
-    !***
     !  Quick check for DRC.
     !***
     ! **Library:**   SLATEC
@@ -109,7 +108,6 @@ CONTAINS
   !** QCDRD
   SUBROUTINE QCDRD(Lun,Kprint,Ipass)
     !>
-    !***
     !  Quick check for DRD.
     !***
     ! **Library:**   SLATEC
@@ -215,7 +213,6 @@ CONTAINS
   !** QCDRF
   SUBROUTINE QCDRF(Lun,Kprint,Ipass)
     !>
-    !***
     !  Quick check for DRF.
     !***
     ! **Library:**   SLATEC
@@ -321,7 +318,6 @@ CONTAINS
   !** QCDRJ
   SUBROUTINE QCDRJ(Lun,Kprint,Ipass)
     !>
-    !***
     !  Quick check for DRJ.
     !***
     ! **Library:**   SLATEC
@@ -431,7 +427,6 @@ PROGRAM TEST14
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !>
-  !***
   !  Driver for testing SLATEC subprograms
   !***
   ! **Library:**   SLATEC

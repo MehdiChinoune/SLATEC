@@ -2,7 +2,6 @@
 SUBROUTINE HWSSS1(Ts,Tf,M,Mbdcnd,Bdts,Bdtf,Ps,Pf,N,Nbdcnd,Bdps,Bdpf,&
     Elmbda,F,Idimf,Pertrb,Am,Bm,Cm,Sn,Ss,Sint,D)
   !>
-  !***
   !  Subsidiary to HWSSSP
   !***
   ! **Library:**   SLATEC

@@ -1,7 +1,6 @@
 !** SSLI2
 SUBROUTINE SSLI2(N,B,X,Nel,Iel,Jel,El)
   !>
-  !***
   !  SLAP Lower Triangle Matrix Backsolve.
   !            Routine to solve a system of the form  Lx = b, where L
   !            is a lower triangular matrix.

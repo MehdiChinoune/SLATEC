@@ -1,7 +1,6 @@
 !** ZLOG
 SUBROUTINE ZLOG(Ar,Ai,Br,Bi,Ierr)
   !>
-  !***
   !  Subsidiary to ZBESH, ZBESI, ZBESJ, ZBESK, ZBESY, ZAIRY and
   !            ZBIRY
   !***

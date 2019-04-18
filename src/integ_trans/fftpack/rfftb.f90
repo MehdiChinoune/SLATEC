@@ -1,7 +1,6 @@
 !** RFFTB
 SUBROUTINE RFFTB(N,R,Wsave)
   !>
-  !***
   !  Compute the backward fast Fourier transform of a real
   !            coefficient array.
   !***

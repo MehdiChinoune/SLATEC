@@ -1,7 +1,6 @@
 !** D1MPYQ
 SUBROUTINE D1MPYQ(M,N,A,Lda,V,W)
   !>
-  !***
   !  Subsidiary to DNSQ and DNSQE
   !***
   ! **Library:**   SLATEC

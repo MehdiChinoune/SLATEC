@@ -1,7 +1,6 @@
 !** CSIDI
 SUBROUTINE CSIDI(A,Lda,N,Kpvt,Det,Work,Job)
   !>
-  !***
   !  Compute the determinant and inverse of a complex symmetric
   !            matrix using the factors from CSIFA.
   !***

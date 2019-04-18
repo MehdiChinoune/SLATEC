@@ -1,7 +1,6 @@
 !** PCHCE
 SUBROUTINE PCHCE(Ic,Vc,N,X,H,Slope,D,Incfd,Ierr)
   !>
-  !***
   !  Set boundary conditions for PCHIC
   !***
   ! **Library:**   SLATEC (PCHIP)

@@ -1,7 +1,6 @@
 !** RC3JJ
 SUBROUTINE RC3JJ(L2,L3,M2,M3,L1min,L1max,Thrcof,Ndim,Ier)
   !>
-  !***
   !  Evaluate the 3j symbol f(L1) = (  L1   L2 L3)
   !                                           (-M2-M3 M2 M3)
   !            for all allowed values of L1, the other parameters

@@ -1,7 +1,6 @@
 !** CRATI
 SUBROUTINE CRATI(Z,Fnu,N,Cy,Tol)
   !>
-  !***
   !  Subsidiary to CBESH, CBESI and CBESK
   !***
   ! **Library:**   SLATEC

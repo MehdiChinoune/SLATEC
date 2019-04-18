@@ -1,7 +1,6 @@
 !** CFOD
 SUBROUTINE CFOD(Meth,Elco,Tesco)
   !>
-  !***
   !  Subsidiary to DEBDF
   !***
   ! **Library:**   SLATEC

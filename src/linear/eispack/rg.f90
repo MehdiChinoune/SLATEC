@@ -1,7 +1,6 @@
 !** RG
 SUBROUTINE RG(Nm,N,A,Wr,Wi,Matz,Z,Iv1,Fv1,Ierr)
   !>
-  !***
   !  Compute the eigenvalues and, optionally, the eigenvectors
   !            of a real general matrix.
   !***

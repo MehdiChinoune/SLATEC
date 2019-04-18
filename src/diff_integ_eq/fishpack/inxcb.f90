@@ -1,7 +1,6 @@
 !** INXCB
 SUBROUTINE INXCB(I,Ir,Idx,Idp)
   !>
-  !***
   !  Subsidiary to CBLKTR
   !***
   ! **Library:**   SLATEC

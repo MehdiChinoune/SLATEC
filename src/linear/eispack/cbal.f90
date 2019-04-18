@@ -1,7 +1,6 @@
 !** CBAL
 SUBROUTINE CBAL(Nm,N,Ar,Ai,Low,Igh,Scalee)
   !>
-  !***
   !  Balance a complex general matrix and isolate eigenvalues
   !            whenever possible.
   !***

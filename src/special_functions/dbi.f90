@@ -1,7 +1,6 @@
 !** DBI
 REAL(8) FUNCTION DBI(X)
   !>
-  !***
   !  Evaluate the Bairy function (the Airy function of the
   !            second kind).
   !***

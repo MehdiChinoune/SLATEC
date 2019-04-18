@@ -1,7 +1,6 @@
 !** DLI
 REAL(8) FUNCTION DLI(X)
   !>
-  !***
   !  Compute the logarithmic integral.
   !***
   ! **Library:**   SLATEC (FNLIB)

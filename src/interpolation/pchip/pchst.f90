@@ -1,7 +1,6 @@
 !** PCHST
 REAL FUNCTION PCHST(Arg1,Arg2)
   !>
-  !***
   !  PCHIP Sign-Testing Routine
   !***
   ! **Library:**   SLATEC (PCHIP)

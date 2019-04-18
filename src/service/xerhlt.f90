@@ -1,7 +1,6 @@
 !** XERHLT
 SUBROUTINE XERHLT(Messg)
   !>
-  !***
   !  Abort program execution and print error message.
   !***
   ! **Library:**   SLATEC (XERROR)

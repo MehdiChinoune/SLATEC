@@ -1,7 +1,6 @@
 !** PASSB2
 SUBROUTINE PASSB2(Ido,L1,Cc,Ch,Wa1)
   !>
-  !***
   !  Calculate the fast Fourier transform of subvectors of
   !            length two.
   !***

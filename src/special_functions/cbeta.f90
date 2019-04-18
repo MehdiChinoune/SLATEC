@@ -1,7 +1,6 @@
 !** CBETA
 COMPLEX FUNCTION CBETA(A,B)
   !>
-  !***
   !  Compute the complete Beta function.
   !***
   ! **Library:**   SLATEC (FNLIB)

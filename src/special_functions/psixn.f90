@@ -1,7 +1,6 @@
 !** PSIXN
 REAL FUNCTION PSIXN(N)
   !>
-  !***
   !  Subsidiary to EXINT
   !***
   ! **Library:**   SLATEC

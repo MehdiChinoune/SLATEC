@@ -2,7 +2,6 @@
 SUBROUTINE DQAWSE(F,A,B,Alfa,Beta,Integr,Epsabs,Epsrel,Limit,Result,&
     Abserr,Neval,Ier,Alist,Blist,Rlist,Elist,Iord,Last)
   !>
-  !***
   !  The routine calculates an approximation result to a given
   !            definite integral I = Integral of F*W over (A,B),
   !            (where W shows a singular behaviour at the end points,

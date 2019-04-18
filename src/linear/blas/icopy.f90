@@ -1,7 +1,6 @@
 !** ICOPY
 SUBROUTINE ICOPY(N,Ix,Incx,Iy,Incy)
   !>
-  !***
   !  Copy a vector.
   !***
   ! **Library:**   SLATEC (BLAS)

@@ -2,7 +2,6 @@
 SUBROUTINE DPINIT(Mrelas,Nvars,Costs,Bl,Bu,Ind,Primal,Info,Amat,Csc,&
     Costsc,Colnrm,Xlamda,Anorm,Rhs,Rhsnrm,Ibasis,Ibb,Imat,Lopt)
   !>
-  !***
   !  Subsidiary to DSPLP
   !***
   ! **Library:**   SLATEC

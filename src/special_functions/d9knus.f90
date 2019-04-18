@@ -1,7 +1,6 @@
 !** D9KNUS
 SUBROUTINE D9KNUS(Xnu,X,Bknu,Bknu1,Iswtch)
   !>
-  !***
   !  Compute Bessel functions EXP(X)*K-SUB-XNU(X) and EXP(X)*
   !            K-SUB-XNU+1(X) for 0.0 .LE. XNU .LT. 1.0.
   !***

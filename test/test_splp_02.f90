@@ -5,7 +5,6 @@ CONTAINS
   !** DPLPQX
   SUBROUTINE DPLPQX(Lun,Kprint,Ipass)
     !>
-    !***
     !  Quick check for DSPLP.
     !***
     ! **Library:**   SLATEC
@@ -254,7 +253,6 @@ CONTAINS
   !** DBOCQX
   SUBROUTINE DBOCQX(Lun,Kprint,Ipass)
     !>
-    !***
     !  Quick check for DBOCLS.
     !***
     ! **Library:**   SLATEC
@@ -426,7 +424,6 @@ PROGRAM TEST38
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !>
-  !***
   !  Driver for testing SLATEC subprograms
   !***
   ! **Library:**   SLATEC

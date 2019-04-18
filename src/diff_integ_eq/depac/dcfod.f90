@@ -1,7 +1,6 @@
 !** DCFOD
 SUBROUTINE DCFOD(Meth,Elco,Tesco)
   !>
-  !***
   !  Subsidiary to DDEBDF
   !***
   ! **Library:**   SLATEC

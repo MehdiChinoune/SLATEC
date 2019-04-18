@@ -1,7 +1,6 @@
 !** BANDV
 SUBROUTINE BANDV(Nm,N,Mbw,A,E21,M,W,Z,Ierr,Nv,Rv,Rv6)
   !>
-  !***
   !  Form the eigenvectors of a real symmetric band matrix
   !            associated with a set of ordered approximate eigenvalues
   !            by inverse iteration.

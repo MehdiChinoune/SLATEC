@@ -1,7 +1,6 @@
 !** DNRM2
 REAL(8) FUNCTION DNRM2(N,Dx,Incx)
   !>
-  !***
   !  Compute the Euclidean length (L2 norm) of a vector.
   !***
   ! **Library:**   SLATEC (BLAS)

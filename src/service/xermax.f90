@@ -1,7 +1,6 @@
 !** XERMAX
 SUBROUTINE XERMAX(Maxx)
   !>
-  !***
   !  Set maximum number of times any error message is to be
   !            printed.
   !***

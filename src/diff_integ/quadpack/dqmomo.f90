@@ -1,7 +1,6 @@
 !** DQMOMO
 SUBROUTINE DQMOMO(Alfa,Beta,Ri,Rj,Rg,Rh,Integr)
   !>
-  !***
   !  This routine computes modified Chebyshev moments.  The K-th
   !            modified Chebyshev moment is defined as the integral over
   !            (-1,1) of W(X)*T(K,X), where T(K,X) is the Chebyshev

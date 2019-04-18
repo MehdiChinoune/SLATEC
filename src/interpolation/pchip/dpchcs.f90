@@ -1,7 +1,6 @@
 !** DPCHCS
 SUBROUTINE DPCHCS(Switch,N,H,Slope,D,Incfd,Ierr)
   !>
-  !***
   !  Adjusts derivative values for DPCHIC
   !***
   ! **Library:**   SLATEC (PCHIP)

@@ -1,7 +1,6 @@
 !** SINQF
 SUBROUTINE SINQF(N,X,Wsave)
   !>
-  !***
   !  Compute the forward sine transform with odd wave numbers.
   !***
   ! **Library:**   SLATEC (FFTPACK)

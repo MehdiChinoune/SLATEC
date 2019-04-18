@@ -1,7 +1,6 @@
 !** REBAKB
 SUBROUTINE REBAKB(Nm,N,B,Dl,M,Z)
   !>
-  !***
   !  Form the eigenvectors of a generalized symmetric
   !            eigensystem from the eigenvectors of derived matrix output
   !            from REDUC2.

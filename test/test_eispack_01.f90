@@ -5,7 +5,6 @@ CONTAINS
   !** EISQX1
   SUBROUTINE EISQX1(Lun,Kprint,Ipass)
     !>
-    !***
     !  Quick check for SGEEV and CGEEV.
     !***
     ! **Library:**   SLATEC
@@ -98,7 +97,6 @@ CONTAINS
   !** EISQX2
   SUBROUTINE EISQX2(Lun,Kprint,Ipass)
     !>
-    !***
     !  Quick check for SSIEV, CHIEV and SSPEV.
     !***
     ! **Library:**   SLATEC
@@ -207,7 +205,6 @@ PROGRAM TEST24
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !>
-  !***
   !  Driver for testing SLATEC subprograms
   !***
   ! **Library:**   SLATEC

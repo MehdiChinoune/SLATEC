@@ -1,7 +1,6 @@
 !** CNBDI
 SUBROUTINE CNBDI(Abe,Lda,N,Ml,Mu,Ipvt,Det)
   !>
-  !***
   !  Compute the determinant of a band matrix using the factors
   !            computed by CNBCO or CNBFA.
   !***

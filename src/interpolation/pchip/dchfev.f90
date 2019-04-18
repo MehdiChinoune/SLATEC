@@ -1,7 +1,6 @@
 !** DCHFEV
 SUBROUTINE DCHFEV(X1,X2,F1,F2,D1,D2,Ne,Xe,Fe,Next,Ierr)
   !>
-  !***
   !  Evaluate a cubic polynomial given in Hermite form at an
   !            array of points.  While designed for use by DPCHFE, it may
   !            be useful directly as an evaluator for a piecewise cubic

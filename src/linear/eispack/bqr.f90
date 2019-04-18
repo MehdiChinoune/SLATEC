@@ -1,7 +1,6 @@
 !** BQR
 SUBROUTINE BQR(Nm,N,Mb,A,T,R,Ierr,Nv,Rv)
   !>
-  !***
   !  Compute some of the eigenvalues of a real symmetric
   !            matrix using the QR method with shifts of origin.
   !***

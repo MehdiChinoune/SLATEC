@@ -2,7 +2,6 @@
 SUBROUTINE SXLCAL(N,Lgmr,X,Xl,Zl,Hes,Maxlp1,Q,V,R0nrm,Wk,Sz,Jscal,Jpre,&
     MSOLVE,Nmsl,Rpar,Ipar,Nelt,Ia,Ja,A,Isym)
   !>
-  !***
   !  Internal routine for SGMRES.
   !***
   ! **Library:**   SLATEC (SLAP)

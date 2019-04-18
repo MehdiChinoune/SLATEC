@@ -1,7 +1,6 @@
 !** DINTYD
 SUBROUTINE DINTYD(T,K,Yh,Nyh,Dky,Iflag)
   !>
-  !***
   !  Subsidiary to DDEBDF
   !***
   ! **Library:**   SLATEC

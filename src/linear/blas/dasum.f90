@@ -1,7 +1,6 @@
 !** DASUM
 REAL(8) FUNCTION DASUM(N,Dx,Incx)
   !>
-  !***
   !  Compute the sum of the magnitudes of the elements of a
   !            vector.
   !***

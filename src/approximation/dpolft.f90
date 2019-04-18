@@ -1,7 +1,6 @@
 !** DPOLFT
 SUBROUTINE DPOLFT(N,X,Y,W,Maxdeg,Ndeg,Eps,R,Ierr,A)
   !>
-  !***
   !  Fit discrete data in a least squares sense by polynomials
   !            in one variable.
   !***

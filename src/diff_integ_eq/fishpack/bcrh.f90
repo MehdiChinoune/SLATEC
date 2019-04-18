@@ -1,7 +1,6 @@
 !** BCRH
 REAL FUNCTION BCRH(Xll,Xrr,Iz,C,A,Bh,F,Sgn)
   !>
-  !***
   !  Subsidiary to CBLKTR
   !***
   ! **Library:**   SLATEC

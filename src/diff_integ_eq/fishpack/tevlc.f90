@@ -1,7 +1,6 @@
 !** TEVLC
 SUBROUTINE TEVLC(N,D,E2,Ierr)
   !>
-  !***
   !  Subsidiary to CBLKTR
   !***
   ! **Library:**   SLATEC

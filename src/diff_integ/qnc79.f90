@@ -1,7 +1,6 @@
 !** QNC79
 SUBROUTINE QNC79(FUN,A,B,Err,Ans,Ierr,K)
   !>
-  !***
   !  Integrate a function using a 7-point adaptive Newton-Cotes
   !            quadrature rule.
   !***

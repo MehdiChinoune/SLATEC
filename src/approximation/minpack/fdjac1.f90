@@ -1,7 +1,6 @@
 !** FDJAC1
 SUBROUTINE FDJAC1(FCN,N,X,Fvec,Fjac,Ldfjac,Iflag,Ml,Mu,Epsfcn,Wa1,Wa2)
   !>
-  !***
   !  Subsidiary to SNSQ and SNSQE
   !***
   ! **Library:**   SLATEC

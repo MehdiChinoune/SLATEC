@@ -1,7 +1,6 @@
 !** RWUPDT
 SUBROUTINE RWUPDT(N,R,Ldr,W,B,Alpha,Coss,Sinn)
   !>
-  !***
   !  Subsidiary to SNLS1 and SNLS1E
   !***
   ! **Library:**   SLATEC

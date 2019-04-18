@@ -2,7 +2,6 @@
 SUBROUTINE ZUNIK(Zrr,Zri,Fnu,Ikflg,Ipmtr,Tol,Init,Phir,Phii,Zeta1r,Zeta1i,&
     Zeta2r,Zeta2i,Sumr,Sumi,Cwrkr,Cwrki)
   !>
-  !***
   !  Subsidiary to ZBESI and ZBESK
   !***
   ! **Library:**   SLATEC

@@ -1,7 +1,6 @@
 !** POSTG2
 SUBROUTINE POSTG2(Nperod,N,M,A,Bb,C,Idimq,Q,B,B2,B3,W,W2,W3,D,Tcos,P)
   !>
-  !***
   !  Subsidiary to POISTG
   !***
   ! **Library:**   SLATEC

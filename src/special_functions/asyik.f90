@@ -1,7 +1,6 @@
 !** ASYIK
 SUBROUTINE ASYIK(X,Fnu,Kode,Flgik,Ra,Arg,In,Y)
   !>
-  !***
   !  Subsidiary to BESI and BESK
   !***
   ! **Library:**   SLATEC

@@ -2,7 +2,6 @@
 SUBROUTINE QAGS(F,A,B,Epsabs,Epsrel,Result,Abserr,Neval,Ier,Limit,Lenw,&
     Last,Iwork,Work)
   !>
-  !***
   !  The routine calculates an approximation result to a given
   !            Definite integral  I = Integral of F over (A,B),
   !            Hopefully satisfying following claim for accuracy

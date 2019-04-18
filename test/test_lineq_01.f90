@@ -5,7 +5,6 @@ CONTAINS
   !** SGEQC
   SUBROUTINE SGEQC(Lun,Kprint,Nerr)
     !>
-    !***
     !  Quick check for SGEFS and SGEIR.
     !***
     ! **Library:**   SLATEC
@@ -146,7 +145,6 @@ CONTAINS
   !** DGEQC
   SUBROUTINE DGEQC(Lun,Kprint,Nerr)
     !>
-    !***
     !  Quick check for DGEFS.
     !***
     ! **Library:**   SLATEC
@@ -278,7 +276,6 @@ CONTAINS
   !** CGEQC
   SUBROUTINE CGEQC(Lun,Kprint,Nerr)
     !>
-    !***
     !  Quick check for CGEFS and CGEIR.
     !***
     ! **Library:**   SLATEC
@@ -419,7 +416,6 @@ PROGRAM TEST21
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !>
-  !***
   !  Driver for testing SLATEC subprograms
   !***
   ! **Library:**   SLATEC

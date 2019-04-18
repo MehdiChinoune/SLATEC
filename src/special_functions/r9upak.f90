@@ -1,7 +1,6 @@
 !** R9UPAK
 SUBROUTINE R9UPAK(X,Y,N)
   !>
-  !***
   !  Unpack a floating point number X so that X = Y*2**N.
   !***
   ! **Library:**   SLATEC (FNLIB)

@@ -2,7 +2,6 @@
 SUBROUTINE DQAG(F,A,B,Epsabs,Epsrel,Key,Result,Abserr,Neval,Ier,Limit,&
     Lenw,Last,Iwork,Work)
   !>
-  !***
   !  The routine calculates an approximation result to a given
   !            definite integral I = integral of F over (A,B),
   !            hopefully satisfying following claim for accuracy

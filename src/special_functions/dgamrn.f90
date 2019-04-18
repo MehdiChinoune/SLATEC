@@ -1,7 +1,6 @@
 !** DGAMRN
 REAL(8) FUNCTION DGAMRN(X)
   !>
-  !***
   !  Subsidiary to DBSKIN
   !***
   ! **Library:**   SLATEC

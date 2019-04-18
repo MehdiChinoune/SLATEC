@@ -1,7 +1,6 @@
 !** DU12US
 SUBROUTINE DU12US(A,Mda,M,N,B,Mdb,Nb,Mode,Krank,Rnorm,H,W,Ir,Ic)
   !>
-  !***
   !  Subsidiary to DULSIA
   !***
   ! **Library:**   SLATEC

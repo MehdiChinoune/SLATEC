@@ -1,7 +1,6 @@
 !** CPBCO
 SUBROUTINE CPBCO(Abd,Lda,N,M,Rcond,Z,Info)
   !>
-  !***
   !  Factor a complex Hermitian positive definite matrix stored
   !            in band form and estimate the condition number of the
   !            matrix.

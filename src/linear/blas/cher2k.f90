@@ -1,7 +1,6 @@
 !** CHER2K
 SUBROUTINE CHER2K(Uplo,Trans,N,K,Alpha,A,Lda,B,Ldb,Beta,C,Ldc)
   !>
-  !***
   !  Perform Hermitian rank 2k update of a complex.
   !***
   ! **Library:**   SLATEC (BLAS)

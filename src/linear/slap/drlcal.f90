@@ -1,7 +1,6 @@
 !** DRLCAL
 SUBROUTINE DRLCAL(N,Kmp,Ll,Maxl,V,Q,Rl,Snormw,Prod,R0nrm)
   !>
-  !***
   !  Internal routine for DGMRES.
   !***
   ! **Library:**   SLATEC (SLAP)

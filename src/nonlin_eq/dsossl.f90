@@ -1,7 +1,6 @@
 !** DSOSSL
 SUBROUTINE DSOSSL(K,N,L,X,C,B,M)
   !>
-  !***
   !  Subsidiary to DSOS
   !***
   ! **Library:**   SLATEC

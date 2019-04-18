@@ -1,7 +1,6 @@
 !** XADD
 SUBROUTINE XADD(X,Ix,Y,Iy,Z,Iz,Ierror)
   !>
-  !***
   !  To provide single-precision floating-point arithmetic
   !            with an extended exponent range.
   !***

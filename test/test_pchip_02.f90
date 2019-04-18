@@ -5,7 +5,6 @@ CONTAINS
   !** DFDTRU
   SUBROUTINE DFDTRU(X,F,D)
     !>
-    !***
     !  Compute exact function values for DEVCHK.
     !***
     ! **Library:**   SLATEC (PCHIP)
@@ -49,7 +48,6 @@ CONTAINS
   !** DEVCHK
   SUBROUTINE DEVCHK(Lout,Kprint,Npts,Xev,Fev,Dev,Fev2,Fail)
     !>
-    !***
     !  Test evaluation accuracy of DCHFDV and DCHFEV for DPCHQ1.
     !***
     ! **Library:**   SLATEC (PCHIP)
@@ -399,7 +397,6 @@ CONTAINS
   !** DEVERK
   SUBROUTINE DEVERK(Lout,Kprint,Fail)
     !>
-    !***
     !  Test error returns from DPCHIP evaluators for DPCHQ1.
     !***
     ! **Library:**   SLATEC (PCHIP)
@@ -561,7 +558,6 @@ CONTAINS
   !** DEVPCK
   SUBROUTINE DEVPCK(Lout,Kprint,X,Y,F,Fx,Fy,Xe,Ye,Fe,De,Fe2,Fail)
     !>
-    !***
     !  Test usage of increment argument in DPCHFD and DPCHFE for
     !            DPCHQ1.
     !***
@@ -906,7 +902,6 @@ CONTAINS
   !** DPCHQ1
   SUBROUTINE DPCHQ1(Lun,Kprint,Ipass)
     !>
-    !***
     !  Test the PCHIP evaluators DCHFDV, DCHFEV, DPCHFD, DPCHFE.
     !***
     ! **Library:**   SLATEC (PCHIP)
@@ -1041,7 +1036,6 @@ CONTAINS
   !** DPCHQ2
   SUBROUTINE DPCHQ2(Lun,Kprint,Ipass)
     !>
-    !***
     !  Test the PCHIP integrators DPCHIA and DPCHID.
     !***
     ! **Library:**   SLATEC (PCHIP)
@@ -1234,7 +1228,6 @@ CONTAINS
   !** DPCHQ3
   SUBROUTINE DPCHQ3(Lun,Kprint,Ipass)
     !>
-    !***
     !  Test the PCHIP interpolators DPCHIC, DPCHIM, DPCHSP.
     !***
     ! **Library:**   SLATEC (PCHIP)
@@ -1566,7 +1559,6 @@ CONTAINS
   !** DPCHQ4
   SUBROUTINE DPCHQ4(Lun,Kprint,Ipass)
     !>
-    !***
     !  Test the PCHIP monotonicity checker DPCHCM.
     !***
     ! **Library:**   SLATEC (PCHIP)
@@ -1822,7 +1814,6 @@ CONTAINS
   !** DPCHQ5
   SUBROUTINE DPCHQ5(Lun,Kprint,Ipass)
     !>
-    !***
     !  Test the PCH to B-spline conversion routine DPCHBS.
     !***
     ! **Library:**   SLATEC (PCHIP)
@@ -2029,7 +2020,6 @@ PROGRAM TEST33
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !>
-  !***
   !  Driver for testing SLATEC subprograms
   !***
   ! **Library:**   SLATEC

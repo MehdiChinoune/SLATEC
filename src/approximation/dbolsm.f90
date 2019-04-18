@@ -2,7 +2,6 @@
 SUBROUTINE DBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
     Scl,Ibasis,Ibb)
   !>
-  !***
   !  Subsidiary to DBOCLS and DBOLS
   !***
   ! **Library:**   SLATEC

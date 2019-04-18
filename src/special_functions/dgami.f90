@@ -1,7 +1,6 @@
 !** DGAMI
 REAL(8) FUNCTION DGAMI(A,X)
   !>
-  !***
   !  Evaluate the incomplete Gamma function.
   !***
   ! **Library:**   SLATEC (FNLIB)

@@ -1,7 +1,6 @@
 !** DPCHCE
 SUBROUTINE DPCHCE(Ic,Vc,N,X,H,Slope,D,Incfd,Ierr)
   !>
-  !***
   !  Set boundary conditions for DPCHIC
   !***
   ! **Library:**   SLATEC (PCHIP)

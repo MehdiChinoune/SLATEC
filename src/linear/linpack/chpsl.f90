@@ -1,7 +1,6 @@
 !** CHPSL
 SUBROUTINE CHPSL(Ap,N,Kpvt,B)
   !>
-  !***
   !  Solve a complex Hermitian system using factors obtained
   !            from CHPFA.
   !***

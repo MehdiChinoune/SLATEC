@@ -5,7 +5,6 @@ CONTAINS
   !** SBEG
   REAL FUNCTION SBEG(Reset)
     !>
-    !***
     !  Generate random numbers.
     !***
     ! **Library:**   SLATEC (BLAS)
@@ -66,7 +65,6 @@ CONTAINS
   !** SBLAT2
   SUBROUTINE SBLAT2(Nout,Kprint,Ipass)
     !>
-    !***
     !  Driver for testing Level 2 BLAS single precision
     !            subroutines.
     !***
@@ -271,7 +269,6 @@ CONTAINS
   !** SBLAT3
   SUBROUTINE SBLAT3(Nout,Kprint,Ipass)
     !>
-    !***
     !  Driver for testing Level 3 BLAS single precision
     !            subroutines.
     !***
@@ -490,7 +487,6 @@ CONTAINS
   !** SMAKE2
   SUBROUTINE SMAKE2(Type,Uplo,Diag,M,N,A,Nmax,Aa,Lda,Kl,Ku,Reset,Transl)
     !>
-    !***
     !  Generate values for an M by N matrix A.
     !***
     ! **Library:**   SLATEC (BLAS)
@@ -669,7 +665,6 @@ CONTAINS
   !** SMAKE3
   SUBROUTINE SMAKE3(Type,Uplo,Diag,M,N,A,Nmax,Aa,Lda,Reset,Transl)
     !>
-    !***
     !  Generate values for an M by N matrix A.
     !***
     ! **Library:**   SLATEC (BLAS)
@@ -788,7 +783,6 @@ CONTAINS
   SUBROUTINE SMMCH(Transa,Transb,M,N,Kk,Alpha,A,Lda,B,Ldb,Beta,C,Ldc,Ct,G,&
       Cc,Ldcc,Eps,Err,Ftl,Nout,Mv,Kprint)
     !>
-    !***
     !  Check the results of the computational tests.
     !***
     ! **Library:**   SLATEC (BLAS)
@@ -910,7 +904,6 @@ CONTAINS
   SUBROUTINE SMVCH(Trans,M,N,Alpha,A,Nmax,X,Incx,Beta,Y,Incy,Yt,G,Yy,Eps,&
       Err,Ftl,Nout,Mv,Kprint)
     !>
-    !***
     !  Check the results of the computational tests.
     !***
     ! **Library:**   SLATEC (BLAS)
@@ -1030,7 +1023,6 @@ CONTAINS
   !** LSE
   LOGICAL FUNCTION LSE(Ri,Rj,Lr)
     !>
-    !***
     !  Test if two arrays are identical.
     !***
     ! **Library:**   SLATEC (BLAS)
@@ -1073,7 +1065,6 @@ CONTAINS
   !** LSERES
   LOGICAL FUNCTION LSERES(Type,Uplo,M,N,Aa,As,Lda)
     !>
-    !***
     !  Test if selected elements in two arrays are equal.
     !***
     ! **Library:**   SLATEC (BLAS)
@@ -1144,7 +1135,6 @@ CONTAINS
   SUBROUTINE SCHK12(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idimm,Nkb,Kb,&
       Nalf,Alf,Nbet,Bet,Ninc,Inc,Nmax,Incmax,A,Aa,As,X,Xx,Xs,Y,Yy,Ys,Yt,G)
     !>
-    !***
     !  Quick check for SGEMV and SGBMV.
     !***
     ! **Library:**   SLATEC (BLAS)
@@ -1446,7 +1436,6 @@ CONTAINS
   SUBROUTINE SCHK13(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idimm,Nalf,Alf,&
       Nbet,Bet,Nmax,A,Aa,As,B,Bb,Bs,C,Cc,Cs,Ct,G)
     !>
-    !***
     !  Quick check for SGEMM.
     !***
     ! **Library:**   SLATEC (BLAS)
@@ -1708,7 +1697,6 @@ CONTAINS
   SUBROUTINE SCHK22(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idimm,Nkb,Kb,&
       Nalf,Alf,Nbet,Bet,Ninc,Inc,Nmax,Incmax,A,Aa,As,X,Xx,Xs,Y,Yy,Ys,Yt,G)
     !>
-    !***
     !  Quick check for SSYMV, SSBMV and SSPMV.
     !***
     ! **Library:**   SLATEC (BLAS)
@@ -2012,7 +2000,6 @@ CONTAINS
   SUBROUTINE SCHK23(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idimm,Nalf,Alf,&
       Nbet,Bet,Nmax,A,Aa,As,B,Bb,Bs,C,Cc,Cs,Ct,G)
     !>
-    !***
     !  Quick check for SSYMM.
     !***
     ! **Library:**   SLATEC (BLAS)
@@ -2259,7 +2246,6 @@ CONTAINS
   SUBROUTINE SCHK32(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idimm,Nkb,Kb,&
       Ninc,Inc,Nmax,Incmax,A,Aa,As,X,Xx,Xs,Xt,G,Z)
     !>
-    !***
     !  Quick check for STRMV, STBMV, STPMV, STRSV, STBSV and
     !            STPSV.
     !***
@@ -2565,7 +2551,6 @@ CONTAINS
   SUBROUTINE SCHK33(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idimm,Nalf,Alf,&
       Nmax,A,Aa,As,B,Bb,Bs,Ct,G,C)
     !>
-    !***
     !  Quick check for STRMM and STRSM.
     !***
     ! **Library:**   SLATEC (BLAS)
@@ -2832,7 +2817,6 @@ CONTAINS
   SUBROUTINE SCHK42(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idimm,Nalf,Alf,&
       Ninc,Inc,Nmax,Incmax,A,Aa,As,X,Xx,Xs,Y,Yy,Ys,Yt,G,Z)
     !>
-    !***
     !  Quick check for SGER.
     !***
     ! **Library:**   SLATEC (BLAS)
@@ -3070,7 +3054,6 @@ CONTAINS
   SUBROUTINE SCHK43(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idimm,Nalf,Alf,&
       Nbet,Bet,Nmax,A,Aa,As,B,Bb,Bs,C,Cc,Cs,Ct,G)
     !>
-    !***
     !  Quick check for SSYRK.
     !***
     ! **Library:**   SLATEC (BLAS)
@@ -3319,7 +3302,6 @@ CONTAINS
   SUBROUTINE SCHK52(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idimm,Nalf,Alf,&
       Ninc,Inc,Nmax,Incmax,A,Aa,As,X,Xx,Xs,Y,Yy,Ys,Yt,G,Z)
     !>
-    !***
     !  Quick check for SSYR and SSPR.
     !***
     ! **Library:**   SLATEC (BLAS)
@@ -3568,7 +3550,6 @@ CONTAINS
   SUBROUTINE SCHK53(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idimm,Nalf,Alf,&
       Nbet,Bet,Nmax,Ab,Aa,As,Bb,Bs,C,Cc,Cs,Ct,G,W)
     !>
-    !***
     !  Quick check for SSYR2K.
     !***
     ! **Library:**   SLATEC (BLAS)
@@ -3850,7 +3831,6 @@ CONTAINS
   SUBROUTINE SCHK62(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idimm,Nalf,Alf,&
       Ninc,Inc,Nmax,Incmax,A,Aa,As,X,Xx,Xs,Y,Yy,Ys,Yt,G,Z)
     !>
-    !***
     !  Quick check for SSYR2 and SSPR2.
     !***
     ! **Library:**   SLATEC (BLAS)
@@ -4131,7 +4111,6 @@ CONTAINS
   !** SCHKE2
   SUBROUTINE SCHKE2(Isnum,Srnamt,Nout,Kprint,Fatal)
     !>
-    !***
     !  Test the error exits from the Level 2 Blas.
     !***
     ! **Library:**   SLATEC (BLAS)
@@ -4559,7 +4538,6 @@ CONTAINS
   !** SCHKE3
   SUBROUTINE SCHKE3(Isnum,Srnamt,Nout,Kprint,Fatal)
     !>
-    !***
     !  Test the error exits from the Level 3 Blas.
     !***
     ! **Library:**   SLATEC (BLAS)
@@ -5288,7 +5266,6 @@ PROGRAM TEST18
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !>
-  !***
   !  Driver for testing SLATEC subprograms
   !***
   ! **Library:**   SLATEC

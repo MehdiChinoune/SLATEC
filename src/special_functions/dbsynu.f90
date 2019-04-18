@@ -1,7 +1,6 @@
 !** DBSYNU
 SUBROUTINE DBSYNU(X,Fnu,N,Y)
   !>
-  !***
   !  Subsidiary to DBESY
   !***
   ! **Library:**   SLATEC

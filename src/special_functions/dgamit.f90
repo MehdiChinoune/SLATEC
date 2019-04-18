@@ -1,7 +1,6 @@
 !** DGAMIT
 REAL(8) FUNCTION DGAMIT(A,X)
   !>
-  !***
   !  Calculate Tricomi's form of the incomplete Gamma function.
   !***
   ! **Library:**   SLATEC (FNLIB)

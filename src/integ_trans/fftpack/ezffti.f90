@@ -1,7 +1,6 @@
 !** EZFFTI
 SUBROUTINE EZFFTI(N,Wsave)
   !>
-  !***
   !  Initialize a work array for EZFFTF and EZFFTB.
   !***
   ! **Library:**   SLATEC (FFTPACK)

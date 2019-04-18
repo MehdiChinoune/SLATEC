@@ -1,7 +1,6 @@
 !** DQELG
 SUBROUTINE DQELG(N,Epstab,Result,Abserr,Res3la,Nres)
   !>
-  !***
   !  The routine determines the limit of a given sequence of
   !            approximations, by means of the Epsilon algorithm of
   !            P.Wynn. An estimate of the absolute error is also given.

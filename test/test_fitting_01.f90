@@ -5,7 +5,6 @@ CONTAINS
   !** LSEIQX
   SUBROUTINE LSEIQX(Lun,Kprint,Ipass)
     !>
-    !***
     !  Quick check for LSEI.
     !***
     ! **Library:**   SLATEC
@@ -245,7 +244,6 @@ CONTAINS
   !** QCGLSS
   SUBROUTINE QCGLSS(Lun,Kprint,Ipass)
     !>
-    !***
     !  Quick check for SGLSS.
     !***
     ! **Library:**   SLATEC
@@ -392,7 +390,6 @@ PROGRAM TEST27
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !>
-  !***
   !  Driver for testing SLATEC subprograms
   !***
   ! **Library:**   SLATEC

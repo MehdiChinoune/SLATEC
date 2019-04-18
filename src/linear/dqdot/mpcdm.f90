@@ -1,7 +1,6 @@
 !** MPCDM
 SUBROUTINE MPCDM(Dx,Z)
   !>
-  !***
   !  Subsidiary to DQDOTA and DQDOTI
   !***
   ! **Library:**   SLATEC

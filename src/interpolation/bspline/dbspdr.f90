@@ -1,7 +1,6 @@
 !** DBSPDR
 SUBROUTINE DBSPDR(T,A,N,K,Nderiv,Ad)
   !>
-  !***
   !  Use the B-representation to construct a divided difference
   !            table preparatory to a (right) derivative calculation.
   !***

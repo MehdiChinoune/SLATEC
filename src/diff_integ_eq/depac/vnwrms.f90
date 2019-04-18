@@ -1,7 +1,6 @@
 !** VNWRMS
 REAL FUNCTION VNWRMS(N,V,W)
   !>
-  !***
   !  Subsidiary to DEBDF
   !***
   ! **Library:**   SLATEC

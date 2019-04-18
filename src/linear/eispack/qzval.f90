@@ -1,7 +1,6 @@
 !** QZVAL
 SUBROUTINE QZVAL(Nm,N,A,B,Alfr,Alfi,Beta,Matz,Z)
   !>
-  !***
   !  The third step of the QZ algorithm for generalized
   !            eigenproblems.  Accepts a pair of real matrices, one in
   !            quasi-triangular form and the other in upper triangular

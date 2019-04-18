@@ -1,7 +1,6 @@
 !** CWRSK
 SUBROUTINE CWRSK(Zr,Fnu,Kode,N,Y,Nz,Cw,Tol,Elim,Alim)
   !>
-  !***
   !  Subsidiary to CBESI and CBESK
   !***
   ! **Library:**   SLATEC

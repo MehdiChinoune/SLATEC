@@ -1,7 +1,6 @@
 !** COSQB1
 SUBROUTINE COSQB1(N,X,W,Xh)
   !>
-  !***
   !  Compute the unnormalized inverse of COSQF1.
   !***
   ! **Library:**   SLATEC (FFTPACK)

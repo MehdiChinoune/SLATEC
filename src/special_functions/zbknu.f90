@@ -1,7 +1,6 @@
 !** ZBKNU
 SUBROUTINE ZBKNU(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol,Elim,Alim)
   !>
-  !***
   !  Subsidiary to ZAIRY, ZBESH, ZBESI and ZBESK
   !***
   ! **Library:**   SLATEC

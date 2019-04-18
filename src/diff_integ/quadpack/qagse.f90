@@ -2,7 +2,6 @@
 SUBROUTINE QAGSE(F,A,B,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,Alist,&
     Blist,Rlist,Elist,Iord,Last)
   !>
-  !***
   !  The routine calculates an approximation result to a given
   !            definite integral I = Integral of F over (A,B),
   !            hopefully satisfying following claim for accuracy

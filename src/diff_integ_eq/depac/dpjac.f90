@@ -1,7 +1,6 @@
 !** DPJAC
 SUBROUTINE DPJAC(Neq,Y,Yh,Nyh,Ewt,Ftem,Savf,Wm,Iwm,DF,DJAC,Rpar,Ipar)
   !>
-  !***
   !  Subsidiary to DDEBDF
   !***
   ! **Library:**   SLATEC

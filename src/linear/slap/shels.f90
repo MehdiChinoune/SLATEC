@@ -1,7 +1,6 @@
 !** SHELS
 SUBROUTINE SHELS(A,Lda,N,Q,B)
   !>
-  !***
   !  Internal routine for SGMRES.
   !***
   ! **Library:**   SLATEC (SLAP)

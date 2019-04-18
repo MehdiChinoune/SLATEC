@@ -1,7 +1,6 @@
 !** BSGQ8
 SUBROUTINE BSGQ8(FUN,Xt,Bc,N,Kk,Id,A,B,Inbv,Err,Ans,Ierr,Work)
   !>
-  !***
   !  Subsidiary to BFQAD
   !***
   ! **Library:**   SLATEC

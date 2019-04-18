@@ -1,7 +1,6 @@
 !** DFSPVD
 SUBROUTINE DFSPVD(T,K,X,Ileft,Vnikx,Nderiv)
   !>
-  !***
   !  Subsidiary to DFC
   !***
   ! **Library:**   SLATEC

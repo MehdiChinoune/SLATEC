@@ -1,7 +1,6 @@
 !** GAMRN
 REAL FUNCTION GAMRN(X)
   !>
-  !***
   !  Subsidiary to BSKIN
   !***
   ! **Library:**   SLATEC

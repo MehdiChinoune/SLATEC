@@ -1,7 +1,6 @@
 !** XNRMP
 SUBROUTINE XNRMP(Nu,Mu1,Mu2,Sarg,Mode,Spn,Ipn,Isig,Ierror)
   !>
-  !***
   !  Compute normalized Legendre polynomials.
   !***
   ! **Library:**   SLATEC

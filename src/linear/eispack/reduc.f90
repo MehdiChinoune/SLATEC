@@ -1,7 +1,6 @@
 !** REDUC
 SUBROUTINE REDUC(Nm,N,A,B,Dl,Ierr)
   !>
-  !***
   !  Reduce a generalized symmetric eigenproblem to a standard
   !            symmetric eigenproblem using Cholesky factorization.
   !***

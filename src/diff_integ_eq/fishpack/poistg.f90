@@ -1,7 +1,6 @@
 !** POISTG
 SUBROUTINE POISTG(Nperod,N,Mperod,M,A,B,C,Idimy,Y,Ierror,W)
   !>
-  !***
   !  Solve a block tridiagonal system of linear equations
   !            that results from a staggered grid finite difference
   !            approximation to 2-D elliptic PDE's.

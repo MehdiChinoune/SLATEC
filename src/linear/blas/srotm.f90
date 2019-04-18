@@ -1,7 +1,6 @@
 !** SROTM
 SUBROUTINE SROTM(N,Sx,Incx,Sy,Incy,Sparam)
   !>
-  !***
   !  Apply a modified Givens transformation.
   !***
   ! **Library:**   SLATEC (BLAS)

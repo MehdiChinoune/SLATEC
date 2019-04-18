@@ -1,7 +1,6 @@
 !** BSPEV
 SUBROUTINE BSPEV(T,Ad,N,K,Nderiv,X,Inev,Svalue,Work)
   !>
-  !***
   !  Calculate the value of the spline and its derivatives from
   !            the B-representation.
   !***

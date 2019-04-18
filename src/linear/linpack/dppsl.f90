@@ -1,7 +1,6 @@
 !** DPPSL
 SUBROUTINE DPPSL(Ap,N,B)
   !>
-  !***
   !  Solve the real symmetric positive definite system using
   !            the factors computed by DPPCO or DPPFA.
   !***

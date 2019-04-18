@@ -1,7 +1,6 @@
 !** R1MACH
 REAL FUNCTION R1MACH(I)
   !>
-  !***
   !  Return floating point machine dependent constants.
   !***
   ! **Library:**   SLATEC

@@ -1,7 +1,6 @@
 !** BKISR
 SUBROUTINE BKISR(X,N,Summ,Ierr)
   !>
-  !***
   !  Subsidiary to BSKIN
   !***
   ! **Library:**   SLATEC

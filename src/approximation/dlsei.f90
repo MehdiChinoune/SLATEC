@@ -1,7 +1,6 @@
 !** DLSEI
 SUBROUTINE DLSEI(W,Mdw,Me,Ma,Mg,N,Prgopt,X,Rnorme,Rnorml,Mode,Ws,Ip)
   !>
-  !***
   !  Solve a linearly constrained least squares problem with
   !            equality and inequality constraints, and optionally compute
   !            a covariance matrix.

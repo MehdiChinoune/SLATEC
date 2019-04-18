@@ -1,7 +1,6 @@
 !** DPBFA
 SUBROUTINE DPBFA(Abd,Lda,N,M,Info)
   !>
-  !***
   !  Factor a real symmetric positive definite matrix stored in
   !            in band form.
   !***

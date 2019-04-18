@@ -2,7 +2,6 @@
 SUBROUTINE SIR(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,Iter,&
     Err,Ierr,Iunit,R,Z,Dz,Rwork,Iwork)
   !>
-  !***
   !  Preconditioned Iterative Refinement Sparse Ax = b Solver.
   !            Routine to solve a general linear system  Ax = b  using
   !            iterative refinement with a matrix splitting.

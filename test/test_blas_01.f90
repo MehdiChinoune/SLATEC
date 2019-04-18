@@ -7,7 +7,6 @@ CONTAINS
   !** BLACHK
   SUBROUTINE BLACHK(Lun,Kprint,Ipass)
     !>
-    !***
     !  Quick check for Basic Linear Algebra Subprograms.
     !***
     ! **Library:**   SLATEC
@@ -84,7 +83,6 @@ CONTAINS
   !** HEADER
   SUBROUTINE HEADER(Kprint)
     !>
-    !***
     !  Print header for BLAS quick checks.
     !***
     ! **Library:**   SLATEC
@@ -116,7 +114,6 @@ CONTAINS
   !** CHECK0
   SUBROUTINE CHECK0(Sfac,Dfac,Kprint)
     !>
-    !***
     !  (UNKNOWN)
     !***
     ! **Library:**   SLATEC
@@ -267,7 +264,6 @@ CONTAINS
   !** CHECK1
   SUBROUTINE CHECK1(Sfac,Dfac,Kprint)
     !>
-    !***
     !  (UNKNOWN)
     !***
     ! **Library:**   SLATEC
@@ -463,7 +459,6 @@ CONTAINS
   !** CHECK2
   SUBROUTINE CHECK2(Sfac,Sdfac,Dfac,Dqfac,Kprint)
     !>
-    !***
     !  (UNKNOWN)
     !***
     ! **Library:**   SLATEC
@@ -1096,7 +1091,6 @@ CONTAINS
   !** ITEST
   SUBROUTINE ITEST(Leng,Icomp,Itrue,Kprint)
     !>
-    !***
     !  Compare arrays ICOMP and ITRUE.
     !***
     ! **Library:**   SLATEC
@@ -1159,7 +1153,6 @@ CONTAINS
   !** STEST
   SUBROUTINE STEST(Leng,Scomp,Strue,Ssize,Sfac,Kprint)
     !>
-    !***
     !  Compare arrays SCOMP and STRUE.
     !***
     ! **Library:**   SLATEC
@@ -1228,7 +1221,6 @@ CONTAINS
   !** DTEST
   SUBROUTINE DTEST(Leng,Dcomp,Dtrue,Dsize,Dfac,Kprint)
     !>
-    !***
     !  Compare arrays DCOMP and DTRUE.
     !***
     ! **Library:**   SLATEC
@@ -1295,7 +1287,6 @@ CONTAINS
 
   SUBROUTINE CTEST(Leng,Ccomp,Ctrue,Csize,Cfac,Kprint)
     !>
-    !***
     !  Compare arrays DCOMP and DTRUE.
     !***
     ! **Library:**   SLATEC
@@ -1368,7 +1359,6 @@ PROGRAM TEST17
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !>
-  !***
   !  Driver for testing SLATEC subprograms
   !***
   ! **Library:**   SLATEC

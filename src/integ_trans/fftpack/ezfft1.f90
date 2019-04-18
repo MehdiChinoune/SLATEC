@@ -1,7 +1,6 @@
 !** EZFFT1
 SUBROUTINE EZFFT1(N,Wa,Ifac)
   !>
-  !***
   !  EZFFTI calls EZFFT1 with appropriate work array
   !            partitioning.
   !***

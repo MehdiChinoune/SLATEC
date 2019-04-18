@@ -1,7 +1,6 @@
 !** SINTI
 SUBROUTINE SINTI(N,Wsave)
   !>
-  !***
   !  Initialize a work array for SINT.
   !***
   ! **Library:**   SLATEC (FFTPACK)

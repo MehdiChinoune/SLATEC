@@ -1,7 +1,6 @@
 !** SPOFA
 SUBROUTINE SPOFA(A,Lda,N,Info)
   !>
-  !***
   !  Factor a real symmetric positive definite matrix.
   !***
   ! **Library:**   SLATEC (LINPACK)

@@ -1,7 +1,6 @@
 !** PJAC
 SUBROUTINE PJAC(Neq,Y,Yh,Nyh,Ewt,Ftem,Savf,Wm,Iwm,F,JAC,Rpar,Ipar)
   !>
-  !***
   !  Subsidiary to DEBDF
   !***
   ! **Library:**   SLATEC

@@ -1,7 +1,6 @@
 !** CUOIK
 SUBROUTINE CUOIK(Z,Fnu,Kode,Ikflg,N,Y,Nuf,Tol,Elim,Alim)
   !>
-  !***
   !  Subsidiary to CBESH, CBESI and CBESK
   !***
   ! **Library:**   SLATEC

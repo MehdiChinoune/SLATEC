@@ -1,7 +1,6 @@
 !** D9CHU
 REAL(8) FUNCTION D9CHU(A,B,Z)
   !>
-  !***
   !  Evaluate for large Z  Z**A * U(A,B,Z) where U is the
   !            logarithmic confluent hypergeometric function.
   !***

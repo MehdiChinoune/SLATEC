@@ -1,7 +1,6 @@
 !** CNBIR
 SUBROUTINE CNBIR(Abe,Lda,N,Ml,Mu,V,Itask,Ind,Work,Iwork)
   !>
-  !***
   !  Solve a general nonsymmetric banded system of linear
   !            equations.  Iterative refinement is used to obtain an error
   !            estimate.

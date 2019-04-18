@@ -2,7 +2,6 @@
 SUBROUTINE SSDCGN(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
     Iunit,Rwork,Lenw,Iwork,Leniw)
   !>
-  !***
   !  Diagonally Scaled CG Sparse Ax=b Solver for Normal Eqn's.
   !            Routine to solve a general linear system  Ax = b  using
   !            diagonal scaling with the Conjugate Gradient method

@@ -1,7 +1,6 @@
 !** DPBCO
 SUBROUTINE DPBCO(Abd,Lda,N,M,Rcond,Z,Info)
   !>
-  !***
   !  Factor a real symmetric positive definite matrix stored in
   !            band form and estimate the condition number of the matrix.
   !***

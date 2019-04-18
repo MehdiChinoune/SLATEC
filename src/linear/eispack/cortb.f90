@@ -1,7 +1,6 @@
 !** CORTB
 SUBROUTINE CORTB(Nm,Low,Igh,Ar,Ai,Ortr,Orti,M,Zr,Zi)
   !>
-  !***
   !  Form the eigenvectors of a complex general matrix from
   !            eigenvectors of upper Hessenberg matrix output from
   !            CORTH.

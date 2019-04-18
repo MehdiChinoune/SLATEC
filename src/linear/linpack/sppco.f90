@@ -1,7 +1,6 @@
 !** SPPCO
 SUBROUTINE SPPCO(Ap,N,Rcond,Z,Info)
   !>
-  !***
   !  Factor a symmetric positive definite matrix stored in
   !            packed form and estimate the condition number of the
   !            matrix.

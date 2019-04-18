@@ -1,7 +1,6 @@
 !** RST
 SUBROUTINE RST(Nm,N,W,E,Matz,Z,Ierr)
   !>
-  !***
   !  Compute the eigenvalues and, optionally, the eigenvectors
   !            of a real symmetric tridiagonal matrix.
   !***

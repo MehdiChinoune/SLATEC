@@ -2,7 +2,6 @@
 SUBROUTINE WNLSM(W,Mdw,Mme,Ma,N,L,Prgopt,X,Rnorm,Mode,Ipivot,Itype,Wd,H,&
     Scalee,Z,Temp,D)
   !>
-  !***
   !  Subsidiary to WNNLS
   !***
   ! **Library:**   SLATEC

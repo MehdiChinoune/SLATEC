@@ -1,7 +1,6 @@
 !** DCSCAL
 SUBROUTINE DCSCAL(A,Nrda,Nrow,Ncol,Cols,Colsav,Rows,Rowsav,Anorm,Scales,Iscale,Ic)
   !>
-  !***
   !  Subsidiary to DBVSUP and DSUDS
   !***
   ! **Library:**   SLATEC

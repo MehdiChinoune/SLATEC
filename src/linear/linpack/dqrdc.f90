@@ -1,7 +1,6 @@
 !** DQRDC
 SUBROUTINE DQRDC(X,Ldx,N,P,Qraux,Jpvt,Work,Job)
   !>
-  !***
   !  Use Householder transformations to compute the QR
   !            factorization of an N by P matrix.  Column pivoting is a
   !            users option.

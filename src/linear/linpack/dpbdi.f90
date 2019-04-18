@@ -1,7 +1,6 @@
 !** DPBDI
 SUBROUTINE DPBDI(Abd,Lda,N,M,Det)
   !>
-  !***
   !  Compute the determinant of a symmetric positive definite
   !            band matrix using the factors computed by DPBCO or DPBFA.
   !***

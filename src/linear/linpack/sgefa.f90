@@ -1,7 +1,6 @@
 !** SGEFA
 SUBROUTINE SGEFA(A,Lda,N,Ipvt,Info)
   !>
-  !***
   !  Factor a matrix using Gaussian elimination.
   !***
   ! **Library:**   SLATEC (LINPACK)

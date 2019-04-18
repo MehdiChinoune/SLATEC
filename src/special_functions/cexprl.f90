@@ -1,7 +1,6 @@
 !** CEXPRL
 COMPLEX FUNCTION CEXPRL(Z)
   !>
-  !***
   !  Calculate the relative error exponential (EXP(X)-1)/X.
   !***
   ! **Library:**   SLATEC (FNLIB)

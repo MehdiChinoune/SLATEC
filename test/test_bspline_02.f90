@@ -5,7 +5,6 @@ CONTAINS
   !** DBSPCK
   SUBROUTINE DBSPCK(Lun,Kprint,Ipass)
     !>
-    !***
     !  Quick check for the B-Spline package.
     !***
     ! **Library:**   SLATEC
@@ -457,7 +456,6 @@ CONTAINS
   !** DFB
   REAL(8) FUNCTION DFB(X)
     !>
-    !***
     !  Subsidiary to DBSPCK.
     !***
     ! **Library:**   SLATEC
@@ -485,7 +483,6 @@ PROGRAM TEST31
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !>
-  !***
   !  Driver for testing SLATEC subprograms
   !***
   ! **Library:**   SLATEC

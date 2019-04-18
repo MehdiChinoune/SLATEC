@@ -1,7 +1,6 @@
 !** PCHNGS
 SUBROUTINE PCHNGS(Ii,Xval,Iplace,Sx,Ix,Ircx)
   !>
-  !***
   !  Subsidiary to SPLP
   !***
   ! **Library:**   SLATEC

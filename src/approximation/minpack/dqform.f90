@@ -1,7 +1,6 @@
 !** DQFORM
 SUBROUTINE DQFORM(M,N,Q,Ldq,Wa)
   !>
-  !***
   !  Subsidiary to DNSQ and DNSQE
   !***
   ! **Library:**   SLATEC

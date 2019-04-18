@@ -1,7 +1,6 @@
 !** SNBDI
 SUBROUTINE SNBDI(Abe,Lda,N,Ml,Mu,Ipvt,Det)
   !>
-  !***
   !  Compute the determinant of a band matrix using the factors
   !            computed by SNBCO or SNBFA.
   !***

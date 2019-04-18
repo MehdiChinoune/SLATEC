@@ -1,7 +1,6 @@
 !** IMTQL2
 SUBROUTINE IMTQL2(Nm,N,D,E,Z,Ierr)
   !>
-  !***
   !  Compute the eigenvalues and eigenvectors of a symmetric
   !            tridiagonal matrix using the implicit QL method.
   !***

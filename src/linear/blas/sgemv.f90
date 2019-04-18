@@ -1,7 +1,6 @@
 !** SGEMV
 SUBROUTINE SGEMV(Trans,M,N,Alpha,A,Lda,X,Incx,Beta,Y,Incy)
   !>
-  !***
   !  Multiply a real vector by a real general matrix.
   !***
   ! **Library:**   SLATEC (BLAS)

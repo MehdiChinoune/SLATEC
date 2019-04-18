@@ -1,7 +1,6 @@
 !** SSCAL
 SUBROUTINE SSCAL(N,Sa,Sx,Incx)
   !>
-  !***
   !  Multiply a vector by a constant.
   !***
   ! **Library:**   SLATEC (BLAS)

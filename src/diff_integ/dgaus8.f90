@@ -1,7 +1,6 @@
 !** DGAUS8
 SUBROUTINE DGAUS8(FUN,A,B,Err,Ans,Ierr)
   !>
-  !***
   !  Integrate a real function of one variable over a finite
   !            interval using an adaptive 8-point Legendre-Gauss
   !            algorithm.  Intended primarily for high accuracy

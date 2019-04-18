@@ -1,7 +1,6 @@
 !** CAXPY
 SUBROUTINE CAXPY(N,Ca,Cx,Incx,Cy,Incy)
   !>
-  !***
   !  Compute a constant times a vector plus a vector.
   !***
   ! **Library:**   SLATEC (BLAS)

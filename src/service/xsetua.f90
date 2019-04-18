@@ -1,7 +1,6 @@
 !** XSETUA
 SUBROUTINE XSETUA(Iunita,N)
   !>
-  !***
   !  Set logical unit numbers (up to 5) to which error
   !            messages are to be sent.
   !***

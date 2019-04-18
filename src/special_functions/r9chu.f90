@@ -1,7 +1,6 @@
 !** R9CHU
 REAL FUNCTION R9CHU(A,B,Z)
   !>
-  !***
   !  Evaluate for large Z  Z**A * U(A,B,Z) where U is the
   !            logarithmic confluent hypergeometric function.
   !***

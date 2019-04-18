@@ -1,7 +1,6 @@
 !** ENORM
 REAL FUNCTION ENORM(N,X)
   !>
-  !***
   !  Subsidiary to SNLS1, SNLS1E, SNSQ and SNSQE
   !***
   ! **Library:**   SLATEC

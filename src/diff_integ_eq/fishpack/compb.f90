@@ -1,7 +1,6 @@
 !** COMPB
 SUBROUTINE COMPB(N,Ierror,An,Bn,Cn,B,Ah,Bh)
   !>
-  !***
   !  Subsidiary to BLKTRI
   !***
   ! **Library:**   SLATEC

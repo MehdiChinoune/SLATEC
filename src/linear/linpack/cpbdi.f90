@@ -1,7 +1,6 @@
 !** CPBDI
 SUBROUTINE CPBDI(Abd,Lda,N,M,Det)
   !>
-  !***
   !  Compute the determinant of a complex Hermitian positive
   !            definite band matrix using the factors computed by CPBCO or
   !            CPBFA.

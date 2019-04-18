@@ -1,7 +1,6 @@
 !** SSPR2
 SUBROUTINE SSPR2(Uplo,N,Alpha,X,Incx,Y,Incy,Ap)
   !>
-  !***
   !  Perform the symmetric rank 2 operation.
   !***
   ! **Library:**   SLATEC (BLAS)

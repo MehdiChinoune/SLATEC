@@ -1,7 +1,6 @@
 !** BESYNU
 SUBROUTINE BESYNU(X,Fnu,N,Y)
   !>
-  !***
   !  Subsidiary to BESY
   !***
   ! **Library:**   SLATEC

@@ -1,7 +1,6 @@
 !** GAMR
 REAL FUNCTION GAMR(X)
   !>
-  !***
   !  Compute the reciprocal of the Gamma function.
   !***
   ! **Library:**   SLATEC (FNLIB)

@@ -1,7 +1,6 @@
 !** CHPR2
 SUBROUTINE CHPR2(Uplo,N,Alpha,X,Incx,Y,Incy,Ap)
   !>
-  !***
   !  Perform the hermitian rank 2 operation.
   !***
   ! **Library:**   SLATEC (BLAS)

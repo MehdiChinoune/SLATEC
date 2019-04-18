@@ -1,7 +1,6 @@
 !** CPBFA
 SUBROUTINE CPBFA(Abd,Lda,N,M,Info)
   !>
-  !***
   !  Factor a complex Hermitian positive definite matrix stored
   !            in band form.
   !***

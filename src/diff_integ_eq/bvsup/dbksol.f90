@@ -1,7 +1,6 @@
 !** DBKSOL
 SUBROUTINE DBKSOL(N,A,X)
   !>
-  !***
   !  Subsidiary to DBVSUP
   !***
   ! **Library:**   SLATEC

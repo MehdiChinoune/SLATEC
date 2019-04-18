@@ -1,7 +1,6 @@
 !** DHKSEQ
 SUBROUTINE DHKSEQ(X,M,H,Ierr)
   !>
-  !***
   !  Subsidiary to DBSKIN
   !***
   ! **Library:**   SLATEC

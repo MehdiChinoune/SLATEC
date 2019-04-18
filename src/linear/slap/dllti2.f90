@@ -1,7 +1,6 @@
 !** DLLTI2
 SUBROUTINE DLLTI2(N,B,X,Nel,Iel,Jel,El,Dinv)
   !>
-  !***
   !  SLAP Backsolve routine for LDL' Factorization.
   !            Routine to solve a system of the form  L*D*L' X = B,
   !            where L is a unit lower triangular matrix and D is a

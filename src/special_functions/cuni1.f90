@@ -1,7 +1,6 @@
 !** CUNI1
 SUBROUTINE CUNI1(Z,Fnu,Kode,N,Y,Nz,Nlast,Fnul,Tol,Elim,Alim)
   !>
-  !***
   !  Subsidiary to CBESI and CBESK
   !***
   ! **Library:**   SLATEC

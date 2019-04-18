@@ -1,7 +1,6 @@
 !** CMPTRX
 SUBROUTINE CMPTRX(Idegbr,Idegcr,M,A,B,C,Y,Tcos,D,W)
   !>
-  !***
   !  Subsidiary to CMGNBN
   !***
   ! **Library:**   SLATEC

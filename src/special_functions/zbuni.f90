@@ -1,7 +1,6 @@
 !** ZBUNI
 SUBROUTINE ZBUNI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Nui,Nlast,Fnul,Tol,Elim,Alim)
   !>
-  !***
   !  Subsidiary to ZBESI and ZBESK
   !***
   ! **Library:**   SLATEC

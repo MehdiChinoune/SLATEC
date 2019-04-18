@@ -1,7 +1,6 @@
 !** STRMV
 SUBROUTINE STRMV(Uplo,Trans,Diag,N,A,Lda,X,Incx)
   !>
-  !***
   !  Multiply a real vector by a real triangular matrix.
   !***
   ! **Library:**   SLATEC (BLAS)

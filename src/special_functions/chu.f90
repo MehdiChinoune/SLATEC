@@ -1,7 +1,6 @@
 !** CHU
 REAL FUNCTION CHU(A,B,X)
   !>
-  !***
   !  Compute the logarithmic confluent hypergeometric function.
   !***
   ! **Library:**   SLATEC (FNLIB)

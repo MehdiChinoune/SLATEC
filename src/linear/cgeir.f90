@@ -1,7 +1,6 @@
 !** CGEIR
 SUBROUTINE CGEIR(A,Lda,N,V,Itask,Ind,Work,Iwork)
   !>
-  !***
   !  Solve a general system of linear equations.  Iterative
   !            refinement is used to obtain an error estimate.
   !***

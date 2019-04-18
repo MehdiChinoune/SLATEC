@@ -1,7 +1,6 @@
 !** SINT
 SUBROUTINE SINT(N,X,Wsave)
   !>
-  !***
   !  Compute the sine transform of a real, odd sequence.
   !***
   ! **Library:**   SLATEC (FFTPACK)

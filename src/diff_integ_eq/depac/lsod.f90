@@ -2,7 +2,6 @@
 SUBROUTINE LSOD(F,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,Acor,&
     Wm,Iwm,JAC,Intout,Tstop,Tolfac,Delsgn,Rpar,Ipar)
   !>
-  !***
   !  Subsidiary to DEBDF
   !***
   ! **Library:**   SLATEC

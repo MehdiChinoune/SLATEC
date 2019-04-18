@@ -1,7 +1,6 @@
 !** DPSIFN
 SUBROUTINE DPSIFN(X,N,Kode,M,Ans,Nz,Ierr)
   !>
-  !***
   !  Compute derivatives of the Psi function.
   !***
   ! **Library:**   SLATEC

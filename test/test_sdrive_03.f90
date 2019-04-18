@@ -5,7 +5,6 @@ CONTAINS
   !** CDQCK
   SUBROUTINE CDQCK(Lun,Kprint,Ipass)
     !>
-    !***
     !  Quick check for SLATEC routines CDRIV1, CDRIV2 and CDRIV3.
     !***
     ! **Library:**   SLATEC (SDRIVE)
@@ -417,7 +416,6 @@ CONTAINS
   !** CDF
   SUBROUTINE CDF(N,T,Y,Yp)
     !>
-    !***
     !  Quick check for SLATEC routines CDRIV1, CDRIV2 and CDRIV3.
     !***
     ! **Library:**   SLATEC (SDRIVE)
@@ -461,7 +459,6 @@ PROGRAM TEST47
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !>
-  !***
   !  Driver for testing SLATEC subprograms
   !            CDRIV1  CDRIV2  CDRIV3
   !***

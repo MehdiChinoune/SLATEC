@@ -1,7 +1,6 @@
 !** DCV
 REAL(8) FUNCTION DCV(Xval,Ndata,Nconst,Nord,Nbkpt,Bkpt,W)
   !>
-  !***
   !  Evaluate the variance function of the curve obtained
   !            by the constrained B-spline fitting subprogram DFC.
   !***

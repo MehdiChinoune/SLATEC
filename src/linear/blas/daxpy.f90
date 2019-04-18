@@ -1,7 +1,6 @@
 !** DAXPY
 SUBROUTINE DAXPY(N,Da,Dx,Incx,Dy,Incy)
   !>
-  !***
   !  Compute a constant times a vector plus a vector.
   !***
   ! **Library:**   SLATEC (BLAS)

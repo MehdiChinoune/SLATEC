@@ -1,7 +1,6 @@
 !** CSEVL
 REAL FUNCTION CSEVL(X,Cs,N)
   !>
-  !***
   !  Evaluate a Chebyshev series.
   !***
   ! **Library:**   SLATEC (FNLIB)

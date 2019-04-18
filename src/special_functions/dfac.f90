@@ -1,7 +1,6 @@
 !** DFAC
 REAL(8) FUNCTION DFAC(N)
   !>
-  !***
   !  Compute the factorial function.
   !***
   ! **Library:**   SLATEC (FNLIB)

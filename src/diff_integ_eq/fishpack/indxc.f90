@@ -1,7 +1,6 @@
 !** INDXC
 SUBROUTINE INDXC(I,Ir,Idxc,Nc)
   !>
-  !***
   !  Subsidiary to BLKTRI
   !***
   ! **Library:**   SLATEC

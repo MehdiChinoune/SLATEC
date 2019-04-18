@@ -1,7 +1,6 @@
 !** I1MERG
 SUBROUTINE I1MERG(Icos,I1,M1,I2,M2,I3)
   !>
-  !***
   !  Merge two strings of ascending integers.
   !***
   ! **Library:**   SLATEC

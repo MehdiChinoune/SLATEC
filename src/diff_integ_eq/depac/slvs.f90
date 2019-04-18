@@ -1,7 +1,6 @@
 !** SLVS
 SUBROUTINE SLVS(Wm,Iwm,X,Tem)
   !>
-  !***
   !  Subsidiary to DEBDF
   !***
   ! **Library:**   SLATEC

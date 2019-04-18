@@ -1,7 +1,6 @@
 !** DBESI1
 REAL(8) FUNCTION DBESI1(X)
   !>
-  !***
   !  Compute the modified (hyperbolic) Bessel function of the
   !            first kind of order one.
   !***

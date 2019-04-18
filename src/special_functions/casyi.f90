@@ -1,7 +1,6 @@
 !** CASYI
 SUBROUTINE CASYI(Z,Fnu,Kode,N,Y,Nz,Rl,Tol,Elim,Alim)
   !>
-  !***
   !  Subsidiary to CBESI and CBESK
   !***
   ! **Library:**   SLATEC

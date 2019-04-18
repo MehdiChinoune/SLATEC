@@ -5,7 +5,6 @@ CONTAINS
   !** ISRTQC
   SUBROUTINE ISRTQC(Lun,Kprint,Ipass)
     !>
-    !***
     !  Quick check for SLATEC routines ISORT, IPSORT, IPPERM
     !***
     ! **Library:**   SLATEC
@@ -307,7 +306,6 @@ CONTAINS
   !** HSRTQC
   SUBROUTINE HSRTQC(Lun,Kprint,Ipass)
     !>
-    !***
     !  Quick check for SLATEC routine HPSORT, HPPERM
     !***
     ! **Library:**   SLATEC
@@ -597,7 +595,6 @@ CONTAINS
   !** SSRTQC
   SUBROUTINE SSRTQC(Lun,Kprint,Ipass)
     !>
-    !***
     !  Quick check for SLATEC routines SSORT, SPSORT, SPPERM
     !***
     ! **Library:**   SLATEC
@@ -902,7 +899,6 @@ CONTAINS
   !** DSRTQC
   SUBROUTINE DSRTQC(Lun,Kprint,Ipass)
     !>
-    !***
     !  Quick check for SLATEC routines DSORT, DPSORT, DPPERM
     !***
     ! **Library:**   SLATEC
@@ -1212,7 +1208,6 @@ PROGRAM TEST54
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !>
-  !***
   !  Driver for testing SLATEC subprograms
   !***
   ! **Library:**   SLATEC

@@ -1,7 +1,6 @@
 !** SBOLS
 SUBROUTINE SBOLS(W,Mdw,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Iw)
   !>
-  !***
   !  Solve the problem
   !                 E*X = F (in the least  squares  sense)
   !            with bounds on selected X values.

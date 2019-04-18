@@ -1,7 +1,6 @@
 !** D1UPDT
 SUBROUTINE D1UPDT(M,N,S,Ls,U,V,W,Sing)
   !>
-  !***
   !  Subsidiary to DNSQ and DNSQE
   !***
   ! **Library:**   SLATEC

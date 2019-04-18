@@ -1,7 +1,6 @@
 !** ZSQRT
 SUBROUTINE ZSQRT(Ar,Ai,Br,Bi)
   !>
-  !***
   !  Subsidiary to ZBESH, ZBESI, ZBESJ, ZBESK, ZBESY, ZAIRY and
   !            ZBIRY
   !***

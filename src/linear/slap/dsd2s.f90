@@ -1,7 +1,6 @@
 !** DSD2S
 SUBROUTINE DSD2S(N,Nelt,Ia,Ja,A,Isym,Dinv)
   !>
-  !***
   !  Diagonal Scaling Preconditioner SLAP Normal Eqns Set Up.
   !            Routine to compute the inverse of the diagonal of the
   !            matrix A*A', where A is stored in SLAP-Column format.

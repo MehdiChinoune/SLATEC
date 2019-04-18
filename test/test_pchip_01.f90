@@ -5,7 +5,6 @@ CONTAINS
   !** FDTRUE
   SUBROUTINE FDTRUE(X,F,D)
     !>
-    !***
     !  Compute exact function values for EVCHCK.
     !***
     ! **Library:**   SLATEC (PCHIP)
@@ -49,7 +48,6 @@ CONTAINS
   !** EVCHCK
   SUBROUTINE EVCHCK(Lout,Kprint,Npts,Xev,Fev,Dev,Fev2,Fail)
     !>
-    !***
     !  Test evaluation accuracy of CHFDV and CHFEV for PCHQK1.
     !***
     ! **Library:**   SLATEC (PCHIP)
@@ -395,7 +393,6 @@ CONTAINS
   !** EVERCK
   SUBROUTINE EVERCK(Lout,Kprint,Fail)
     !>
-    !***
     !  Test error returns from PCHIP evaluators for PCHQK1.
     !***
     ! **Library:**   SLATEC (PCHIP)
@@ -560,7 +557,6 @@ CONTAINS
   !** EVPCCK
   SUBROUTINE EVPCCK(Lout,Kprint,X,Y,F,Fx,Fy,Xe,Ye,Fe,De,Fe2,Fail)
     !>
-    !***
     !  Test usage of increment argument in PCHFD and PCHFE for
     !            PCHQK1.
     !***
@@ -903,7 +899,6 @@ CONTAINS
   !** PCHQK1
   SUBROUTINE PCHQK1(Lun,Kprint,Ipass)
     !>
-    !***
     !  Test the PCHIP evaluators CHFDV, CHFEV, PCHFD and PCHFE.
     !***
     ! **Library:**   SLATEC (PCHIP)
@@ -1037,7 +1032,6 @@ CONTAINS
   !** PCHQK2
   SUBROUTINE PCHQK2(Lun,Kprint,Ipass)
     !>
-    !***
     !  Test the PCHIP integrators PCHIA and PCHID.
     !***
     ! **Library:**   SLATEC (PCHIP)
@@ -1230,7 +1224,6 @@ CONTAINS
   !** PCHQK3
   SUBROUTINE PCHQK3(Lun,Kprint,Ipass)
     !>
-    !***
     !  Test the PCHIP interpolators PCHIC, PCHIM, PCHSP.
     !***
     ! **Library:**   SLATEC (PCHIP)
@@ -1560,7 +1553,6 @@ CONTAINS
   !** PCHQK4
   SUBROUTINE PCHQK4(Lun,Kprint,Ipass)
     !>
-    !***
     !  Test the PCHIP monotonicity checker PCHCM.
     !***
     ! **Library:**   SLATEC (PCHIP)
@@ -1815,7 +1807,6 @@ CONTAINS
   !** PCHQK5
   SUBROUTINE PCHQK5(Lun,Kprint,Ipass)
     !>
-    !***
     !  Test the PCH to B-spline conversion routine PCHBS.
     !***
     ! **Library:**   SLATEC (PCHIP)
@@ -2022,7 +2013,6 @@ PROGRAM TEST32
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !>
-  !***
   !  Driver for testing SLATEC subprograms
   !***
   ! **Library:**   SLATEC

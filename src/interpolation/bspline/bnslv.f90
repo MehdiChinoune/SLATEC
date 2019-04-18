@@ -1,7 +1,6 @@
 !** BNSLV
 SUBROUTINE BNSLV(W,Nroww,Nrow,Nbandl,Nbandu,B)
   !>
-  !***
   !  Subsidiary to BINT4 and BINTK
   !***
   ! **Library:**   SLATEC

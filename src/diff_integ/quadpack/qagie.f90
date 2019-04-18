@@ -2,7 +2,6 @@
 SUBROUTINE QAGIE(F,Bound,Inf,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,&
     Alist,Blist,Rlist,Elist,Iord,Last)
   !>
-  !***
   !  The routine calculates an approximation result to a given
   !            integral   I = Integral of F over (BOUND,+INFINITY)
   !                    or I = Integral of F over (-INFINITY,BOUND)

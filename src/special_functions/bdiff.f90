@@ -1,7 +1,6 @@
 !** BDIFF
 SUBROUTINE BDIFF(L,V)
   !>
-  !***
   !  Subsidiary to BSKIN
   !***
   ! **Library:**   SLATEC

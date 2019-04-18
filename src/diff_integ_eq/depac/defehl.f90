@@ -1,7 +1,6 @@
 !** DEFEHL
 SUBROUTINE DEFEHL(F,Neq,T,Y,H,Yp,F1,F2,F3,F4,F5,Ys,Rpar,Ipar)
   !>
-  !***
   !  Subsidiary to DERKF
   !***
   ! **Library:**   SLATEC

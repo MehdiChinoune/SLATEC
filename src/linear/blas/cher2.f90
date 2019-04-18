@@ -1,7 +1,6 @@
 !** CHER2
 SUBROUTINE CHER2(Uplo,N,Alpha,X,Incx,Y,Incy,A,Lda)
   !>
-  !***
   !  Perform Hermitian rank 2 update of a complex Hermitian
   !            matrix.
   !***

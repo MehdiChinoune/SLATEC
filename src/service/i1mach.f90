@@ -1,7 +1,6 @@
 !** I1MACH
 INTEGER FUNCTION I1MACH(I)
   !>
-  !***
   !  Return integer machine dependent constants.
   !***
   ! **Library:**   SLATEC

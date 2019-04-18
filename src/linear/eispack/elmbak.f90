@@ -1,7 +1,6 @@
 !** ELMBAK
 SUBROUTINE ELMBAK(Nm,Low,Igh,A,Intt,M,Z)
   !>
-  !***
   !  Form the eigenvectors of a real general matrix from the
   !            eigenvectors of the upper Hessenberg matrix output from
   !            ELMHES.

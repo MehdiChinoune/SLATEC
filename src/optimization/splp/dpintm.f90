@@ -1,7 +1,6 @@
 !** DPINTM
 SUBROUTINE DPINTM(M,N,Sx,Ix,Lmx,Ipagef)
   !>
-  !***
   !  Subsidiary to DSPLP
   !***
   ! **Library:**   SLATEC

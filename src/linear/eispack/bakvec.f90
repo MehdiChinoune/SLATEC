@@ -1,7 +1,6 @@
 !** BAKVEC
 SUBROUTINE BAKVEC(Nm,N,T,E,M,Z,Ierr)
   !>
-  !***
   !  Form the eigenvectors of a certain real non-symmetric
   !            tridiagonal matrix from a symmetric tridiagonal matrix
   !            output from FIGI.

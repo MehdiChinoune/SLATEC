@@ -1,7 +1,6 @@
 !** CTRSV
 SUBROUTINE CTRSV(Uplo,Trans,Diag,N,A,Lda,X,Incx)
   !>
-  !***
   !  Solve a complex triangular system of equations.
   !***
   ! **Library:**   SLATEC (BLAS)

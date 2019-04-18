@@ -1,7 +1,6 @@
 !** ZKSCL
 SUBROUTINE ZKSCL(Zrr,Zri,Fnu,N,Yr,Yi,Nz,Rzr,Rzi,Ascle,Tol,Elim)
   !>
-  !***
   !  Subsidiary to ZBESK
   !***
   ! **Library:**   SLATEC

@@ -1,7 +1,6 @@
 !** POCH
 REAL FUNCTION POCH(A,X)
   !>
-  !***
   !  Evaluate a generalization of Pochhammer's symbol.
   !***
   ! **Library:**   SLATEC (FNLIB)

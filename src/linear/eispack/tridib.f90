@@ -1,7 +1,6 @@
 !** TRIDIB
 SUBROUTINE TRIDIB(N,Eps1,D,E,E2,Lb,Ub,M11,M,W,Ind,Ierr,Rv4,Rv5)
   !>
-  !***
   !  Compute the eigenvalues of a symmetric tridiagonal matrix
   !            in a given interval using Sturm sequencing.
   !***

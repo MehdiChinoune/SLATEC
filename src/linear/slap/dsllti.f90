@@ -1,7 +1,6 @@
 !** DSLLTI
 SUBROUTINE DSLLTI(N,B,X,Nelt,Ia,Ja,A,Isym,Rwork,Iwork)
   !>
-  !***
   !  SLAP MSOLVE for LDL' (IC) Factorization.
   !            This routine acts as an interface between the SLAP generic
   !            MSOLVE calling convention and the routine that actually

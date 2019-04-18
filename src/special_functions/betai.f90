@@ -1,7 +1,6 @@
 !** BETAI
 REAL FUNCTION BETAI(X,Pin,Qin)
   !>
-  !***
   !  Calculate the incomplete Beta function.
   !***
   ! **Library:**   SLATEC (FNLIB)

@@ -5,7 +5,6 @@ CONTAINS
   !** FCNQX2
   SUBROUTINE FCNQX2(Lun,Kprint,Ipass)
     !>
-    !***
     !  THIS IS A QUICK CHECK PROGRAM FOR THE SUBROUTINES DXLEGF
     !            AND DXNRMP WHICH CALCULATE LEGENDRE FUNCTIONS
     !***
@@ -348,7 +347,6 @@ CONTAINS
   !** DXCSRT
   SUBROUTINE DXCSRT(Dnu1,Nudiff,Mu1,Mu2,Theta,P,Q,R,Ip,Iq,Ir,C1,Ic1,C2,Ic2,Ierror)
     !>
-    !***
     !  TO COMPUTE CHECK VALUES FOR LEGENDRE FUNCTIONS
     !***
     ! **Library:**   SLATEC
@@ -553,7 +551,6 @@ PROGRAM TEST12
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !>
-  !***
   !  Driver for testing SLATEC subprograms
   !***
   ! **Library:**   SLATEC

@@ -1,7 +1,6 @@
 !** DMPAR
 SUBROUTINE DMPAR(N,R,Ldr,Ipvt,Diag,Qtb,Delta,Par,X,Sigma,Wa1,Wa2)
   !>
-  !***
   !  Subsidiary to DNLS1 and DNLS1E
   !***
   ! **Library:**   SLATEC

@@ -2,7 +2,6 @@
 INTEGER FUNCTION ISDCG(N,B,X,Nelt,Ia,Ja,A,Isym,MSOLVE,Itol,Tol,Itmax,Iter,&
     Err,Ierr,Iunit,R,Z,P,Dz,Rwork,Iwork,Ak,Bk,Bnrm,Solnrm)
   !>
-  !***
   !  Preconditioned Conjugate Gradient Stop Test.
   !            This routine calculates the stop test for the Conjugate
   !            Gradient iteration scheme.  It returns a non-zero if the

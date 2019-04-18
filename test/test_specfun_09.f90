@@ -5,7 +5,6 @@ CONTAINS
   !** ZQCAI
   SUBROUTINE ZQCAI(Lun,Kprint,Ipass)
     !>
-    !***
     !  Quick check for SLATEC subroutines
     !            ZAIRY, ZBIRY
     !***
@@ -399,7 +398,6 @@ CONTAINS
   !** ZQCBH
   SUBROUTINE ZQCBH(Lun,Kprint,Ipass)
     !>
-    !***
     !  Quick check for SLATEC subroutine
     !            ZBESH
     !***
@@ -763,7 +761,6 @@ CONTAINS
   !** ZQCBI
   SUBROUTINE ZQCBI(Lun,Kprint,Ipass)
     !>
-    !***
     !  Quick check for SLATEC subroutine
     !            ZBESI
     !***
@@ -1281,7 +1278,6 @@ CONTAINS
   !** ZQCBJ
   SUBROUTINE ZQCBJ(Lun,Kprint,Ipass)
     !>
-    !***
     !  Quick check for SLATEC subroutine
     !            ZBESJ
     !***
@@ -1691,7 +1687,6 @@ CONTAINS
   !** ZQCBK
   SUBROUTINE ZQCBK(Lun,Kprint,Ipass)
     !>
-    !***
     !  Quick check for SLATEC subroutine
     !            ZBESK
     !***
@@ -2075,7 +2070,6 @@ CONTAINS
   !** ZQCBY
   SUBROUTINE ZQCBY(Lun,Kprint,Ipass)
     !>
-    !***
     !  Quick check for SLATEC subroutine
     !            ZBESY
     !***
@@ -2503,7 +2497,6 @@ PROGRAM TEST10
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !>
-  !***
   !  Driver for testing SLATEC subprograms.
   !***
   ! **Library:**   SLATEC

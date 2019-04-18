@@ -1,7 +1,6 @@
 !** SPOIR
 SUBROUTINE SPOIR(A,Lda,N,V,Itask,Ind,Work)
   !>
-  !***
   !  Solve a positive definite symmetric system of linear
   !            equations.  Iterative refinement is used to obtain an error
   !            estimate.

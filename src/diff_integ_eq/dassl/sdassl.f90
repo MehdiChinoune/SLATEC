@@ -2,7 +2,6 @@
 SUBROUTINE SDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
     Iwork,Liw,Rpar,Ipar,JAC)
   !>
-  !***
   !  This code solves a system of differential/algebraic
   !            equations of the form G(T,Y,YPRIME) = 0.
   !***

@@ -1,7 +1,6 @@
 !** CBLKTR
 SUBROUTINE CBLKTR(Iflg,Np,N,An,Bn,Cn,Mp,M,Am,Bm,Cm,Idimy,Y,Ierror,W)
   !>
-  !***
   !  Solve a block tridiagonal system of linear equations
   !            (usually resulting from the discretization of separable
   !            two-dimensional elliptic equations).

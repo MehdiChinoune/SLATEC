@@ -1,7 +1,6 @@
 !** PPSGF
 REAL FUNCTION PPSGF(X,Iz,C,A,Bh)
   !>
-  !***
   !  Subsidiary to BLKTRI
   !***
   ! **Library:**   SLATEC

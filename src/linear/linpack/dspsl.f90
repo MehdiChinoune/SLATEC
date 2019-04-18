@@ -1,7 +1,6 @@
 !** DSPSL
 SUBROUTINE DSPSL(Ap,N,Kpvt,B)
   !>
-  !***
   !  Solve a real symmetric system using the factors obtained
   !            from DSPFA.
   !***

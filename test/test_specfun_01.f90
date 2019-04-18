@@ -5,7 +5,6 @@ CONTAINS
   !** SFNCK
   SUBROUTINE SFNCK(Lun,Kprint,Ipass)
     !>
-    !***
     !  Quick check for the single precision Fullerton
     !            special functions.
     !***
@@ -255,7 +254,6 @@ PROGRAM TEST02
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !>
-  !***
   !  Driver for testing SLATEC subprograms
   !***
   ! **Library:**   SLATEC

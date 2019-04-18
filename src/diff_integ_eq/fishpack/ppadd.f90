@@ -1,7 +1,6 @@
 !** PPADD
 SUBROUTINE PPADD(N,Ierror,A,C,Cbp,Bp,Bh)
   !>
-  !***
   !  Subsidiary to BLKTRI
   !***
   ! **Library:**   SLATEC

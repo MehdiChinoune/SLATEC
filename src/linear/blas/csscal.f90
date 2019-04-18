@@ -1,7 +1,6 @@
 !** CSSCAL
 SUBROUTINE CSSCAL(N,Sa,Cx,Incx)
   !>
-  !***
   !  Scale a complex vector.
   !***
   ! **Library:**   SLATEC (BLAS)

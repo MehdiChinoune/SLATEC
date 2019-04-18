@@ -1,7 +1,6 @@
 !** QFORM
 SUBROUTINE QFORM(M,N,Q,Ldq,Wa)
   !>
-  !***
   !  Subsidiary to SNSQ and SNSQE
   !***
   ! **Library:**   SLATEC

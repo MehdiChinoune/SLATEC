@@ -1,7 +1,6 @@
 !** CMPOSD
 SUBROUTINE CMPOSD(Mr,Nr,Istag,Ba,Bb,Bc,Q,Idimq,B,W,D,Tcos,P)
   !>
-  !***
   !  Subsidiary to CMGNBN
   !***
   ! **Library:**   SLATEC

@@ -1,7 +1,6 @@
 !** DBETAI
 REAL(8) FUNCTION DBETAI(X,Pin,Qin)
   !>
-  !***
   !  Calculate the incomplete Beta function.
   !***
   ! **Library:**   SLATEC (FNLIB)

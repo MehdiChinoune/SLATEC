@@ -1,7 +1,6 @@
 !** TRBAK1
 SUBROUTINE TRBAK1(Nm,N,A,E,M,Z)
   !>
-  !***
   !  Form the eigenvectors of real symmetric matrix from
   !            the eigenvectors of a symmetric tridiagonal matrix formed
   !            by TRED1.

@@ -1,7 +1,6 @@
 !** DXADJ
 SUBROUTINE DXADJ(X,Ix,Ierror)
   !>
-  !***
   !  To provide double-precision floating-point arithmetic
   !            with an extended exponent range.
   !***

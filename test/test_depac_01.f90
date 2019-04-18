@@ -5,7 +5,6 @@ CONTAINS
   !** JAC
   SUBROUTINE JAC(T,U,Pd,Nrowpd,Rpar,Ipar)
     !>
-    !***
     !  Evaluate Jacobian for DEBDF quick check.
     !***
     ! **Library:**   SLATEC
@@ -40,7 +39,6 @@ CONTAINS
   !** FDEQC
   SUBROUTINE FDEQC(T,U,Uprime,Rpar,Ipar)
     !>
-    !***
     !  Derivative evaluator for DEPAC quick checks.
     !***
     ! **Library:**   SLATEC
@@ -77,7 +75,6 @@ CONTAINS
   !** QXABM
   SUBROUTINE QXABM(Lun,Kprint,Ipass)
     !>
-    !***
     !  Test the DEPAC routine DEABM.
     !***
     ! **Library:**   SLATEC
@@ -191,7 +188,6 @@ CONTAINS
   !** QXBDF
   SUBROUTINE QXBDF(Lun,Kprint,Ipass)
     !>
-    !***
     !  Test the DEPAC routine DEBDF.
     !***
     ! **Library:**   SLATEC
@@ -307,7 +303,6 @@ CONTAINS
   !** QXRKF
   SUBROUTINE QXRKF(Lun,Kprint,Ipass)
     !>
-    !***
     !  Test the DEPAC routine DERKF.
     !***
     ! **Library:**   SLATEC
@@ -421,7 +416,6 @@ CONTAINS
   !** QXBVSP
   SUBROUTINE QXBVSP(Lun,Kprint,Ipass)
     !>
-    !***
     !  Quick check for BVSUP.
     !***
     ! **Library:**   SLATEC
@@ -684,7 +678,6 @@ PROGRAM TEST43
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !>
-  !***
   !  Driver for testing SLATEC subprograms
   !***
   ! **Library:**   SLATEC

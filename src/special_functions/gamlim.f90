@@ -1,7 +1,6 @@
 !** GAMLIM
 SUBROUTINE GAMLIM(Xmin,Xmax)
   !>
-  !***
   !  Compute the minimum and maximum bounds for the argument in
   !            the Gamma function.
   !***

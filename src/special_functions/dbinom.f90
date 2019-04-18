@@ -1,7 +1,6 @@
 !** DBINOM
 REAL(8) FUNCTION DBINOM(N,M)
   !>
-  !***
   !  Compute the binomial coefficients.
   !***
   ! **Library:**   SLATEC (FNLIB)

@@ -1,7 +1,6 @@
 !** DRD
 REAL(8) FUNCTION DRD(X,Y,Z,Ier)
   !>
-  !***
   !  Compute the incomplete or complete elliptic integral of
   !            the 2nd kind. For X and Y nonnegative, X+Y and Z positive,
   !            DRD(X,Y,Z) = Integral from zero to infinity of

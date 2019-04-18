@@ -1,7 +1,6 @@
 !** CHKSNG
 SUBROUTINE CHKSNG(Mbdcnd,Nbdcnd,Alpha,Beta,Gama,Xnu,COFX,COFY,Singlr)
   !>
-  !***
   !  Subsidiary to SEPELI
   !***
   ! **Library:**   SLATEC

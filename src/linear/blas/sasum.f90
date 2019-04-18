@@ -1,7 +1,6 @@
 !** SASUM
 REAL FUNCTION SASUM(N,Sx,Incx)
   !>
-  !***
   !  Compute the sum of the magnitudes of the elements of a
   !            vector.
   !***

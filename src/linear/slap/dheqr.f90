@@ -1,7 +1,6 @@
 !** DHEQR
 SUBROUTINE DHEQR(A,Lda,N,Q,Info,Ijob)
   !>
-  !***
   !  Internal routine for DGMRES.
   !***
   ! **Library:**   SLATEC (SLAP)

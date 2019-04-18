@@ -5,7 +5,6 @@ CONTAINS
   !** QCKIN
   SUBROUTINE QCKIN(Lun,Kprint,Ipass)
     !>
-    !***
     !  Quick check for BSKIN.
     !***
     ! **Library:**   SLATEC
@@ -131,7 +130,6 @@ CONTAINS
   !** QCPSI
   SUBROUTINE QCPSI(Lun,Kprint,Ipass)
     !>
-    !***
     !  Quick check for PSIFN.
     !***
     ! **Library:**   SLATEC
@@ -271,7 +269,6 @@ PROGRAM TEST07
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !>
-  !***
   !  Driver for testing SLATEC subprograms
   !***
   ! **Library:**   SLATEC

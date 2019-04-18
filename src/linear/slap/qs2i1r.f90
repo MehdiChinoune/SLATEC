@@ -1,7 +1,6 @@
 !** QS2I1R
 SUBROUTINE QS2I1R(Ia,Ja,A,N,Kflag)
   !>
-  !***
   !  Sort an integer array, moving an integer and real array.
   !            This routine sorts the integer array IA and makes the same
   !            interchanges in the integer array JA and the real array A.

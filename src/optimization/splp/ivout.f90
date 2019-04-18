@@ -1,7 +1,6 @@
 !** IVOUT
 SUBROUTINE IVOUT(N,Ix,Ifmt,Idigit)
   !>
-  !***
   !  Subsidiary to SPLP
   !***
   ! **Library:**   SLATEC

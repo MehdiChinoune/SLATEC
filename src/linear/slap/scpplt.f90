@@ -1,7 +1,6 @@
 !** SCPPLT
 SUBROUTINE SCPPLT(N,Nelt,Ia,Ja,A,Isym,Iunit)
   !>
-  !***
   !  Printer Plot of SLAP Column Format Matrix.
   !            Routine to print out a SLAP Column format matrix in a
   !            "printer plot" graphical representation.

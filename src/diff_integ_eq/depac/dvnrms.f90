@@ -1,7 +1,6 @@
 !** DVNRMS
 REAL(8) FUNCTION DVNRMS(N,V,W)
   !>
-  !***
   !  Subsidiary to DDEBDF
   !***
   ! **Library:**   SLATEC

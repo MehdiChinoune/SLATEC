@@ -1,7 +1,6 @@
 !** DBETA
 REAL(8) FUNCTION DBETA(A,B)
   !>
-  !***
   !  Compute the complete Beta function.
   !***
   ! **Library:**   SLATEC (FNLIB)

@@ -1,7 +1,6 @@
 !** PCHSW
 SUBROUTINE PCHSW(Dfmax,Iextrm,D1,D2,H,Slope,Ierr)
   !>
-  !***
   !  Limits excursion from data for PCHCS
   !***
   ! **Library:**   SLATEC (PCHIP)

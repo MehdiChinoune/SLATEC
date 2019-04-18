@@ -1,7 +1,6 @@
 !** COT
 REAL FUNCTION COT(X)
   !>
-  !***
   !  Compute the cotangent.
   !***
   ! **Library:**   SLATEC (FNLIB)

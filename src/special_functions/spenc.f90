@@ -1,7 +1,6 @@
 !** SPENC
 REAL FUNCTION SPENC(X)
   !>
-  !***
   !  Compute a form of Spence's integral due to K. Mitchell.
   !***
   ! **Library:**   SLATEC (FNLIB)

@@ -2,7 +2,6 @@
 SUBROUTINE DEBDF(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,&
     Rpar,Ipar,JAC)
   !>
-  !***
   !  Solve an initial value problem in ordinary differential
   !            equations using backward differentiation formulas.  It is
   !            intended primarily for stiff problems.

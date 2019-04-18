@@ -1,7 +1,6 @@
 !** ZASYI
 SUBROUTINE ZASYI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Rl,Tol,Elim,Alim)
   !>
-  !***
   !  Subsidiary to ZBESI and ZBESK
   !***
   ! **Library:**   SLATEC

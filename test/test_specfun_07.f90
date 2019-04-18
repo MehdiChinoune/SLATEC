@@ -5,7 +5,6 @@ CONTAINS
   !** DQCKIN
   SUBROUTINE DQCKIN(Lun,Kprint,Ipass)
     !>
-    !***
     !  Quick check for DBSKIN.
     !***
     ! **Library:**   SLATEC
@@ -130,7 +129,6 @@ CONTAINS
   !** DQCPSI
   SUBROUTINE DQCPSI(Lun,Kprint,Ipass)
     !>
-    !***
     !  Quick check for DPSIFN.
     !***
     ! **Library:**   SLATEC
@@ -270,7 +268,6 @@ PROGRAM TEST08
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !>
-  !***
   !  Driver for testing SLATEC subprograms
   !***
   ! **Library:**   SLATEC

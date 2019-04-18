@@ -1,7 +1,6 @@
 !** CLNREL
 COMPLEX FUNCTION CLNREL(Z)
   !>
-  !***
   !  Evaluate ln(1+X) accurate in the sense of relative error.
   !***
   ! **Library:**   SLATEC (FNLIB)

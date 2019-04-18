@@ -1,7 +1,6 @@
 !** R9LN2R
 REAL FUNCTION R9LN2R(X)
   !>
-  !***
   !  Evaluate LOG(1+X) from second order relative accuracy so
   !            that LOG(1+X) = X - X**2/2 + X**3*R9LN2R(X).
   !***

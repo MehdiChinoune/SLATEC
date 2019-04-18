@@ -1,7 +1,6 @@
 !** R9GMIT
 REAL FUNCTION R9GMIT(A,X,Algap1,Sgngam,Alx)
   !>
-  !***
   !  Compute Tricomi's incomplete Gamma function for small
   !            arguments.
   !***

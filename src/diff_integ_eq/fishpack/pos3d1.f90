@@ -1,7 +1,6 @@
 !** POS3D1
 SUBROUTINE POS3D1(Lp,L,Mp,M,N,A,B,C,Ldimf,Mdimf,F,Xrt,Yrt,T,D,Wx,Wy,C1,C2,Bb)
   !>
-  !***
   !  Subsidiary to POIS3D
   !***
   ! **Library:**   SLATEC

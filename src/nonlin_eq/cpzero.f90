@@ -1,7 +1,6 @@
 !** CPZERO
 SUBROUTINE CPZERO(In,A,R,T,Iflg,S)
   !>
-  !***
   !  Find the zeros of a polynomial with complex coefficients.
   !***
   ! **Library:**   SLATEC

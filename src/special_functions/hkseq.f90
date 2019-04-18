@@ -1,7 +1,6 @@
 !** HKSEQ
 SUBROUTINE HKSEQ(X,M,H,Ierr)
   !>
-  !***
   !  Subsidiary to BSKIN
   !***
   ! **Library:**   SLATEC

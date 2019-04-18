@@ -1,7 +1,6 @@
 !** FMAT
 SUBROUTINE FMAT(X,Y,Yp)
   !>
-  !***
   !  Subsidiary to
   !***
   ! **Library:**   SLATEC

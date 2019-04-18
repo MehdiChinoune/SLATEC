@@ -1,7 +1,6 @@
 !** DPRWPG
 SUBROUTINE DPRWPG(Key,Ipage,Lpg,Sx,Ix)
   !>
-  !***
   !  Subsidiary to DSPLP
   !***
   ! **Library:**   SLATEC

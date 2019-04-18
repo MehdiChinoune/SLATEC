@@ -1,7 +1,6 @@
 !** DHVNRM
 REAL(8) FUNCTION DHVNRM(V,Ncomp)
   !>
-  !***
   !  Subsidiary to DDEABM, DDEBDF and DDERKF
   !***
   ! **Library:**   SLATEC

@@ -1,7 +1,6 @@
 !** CPOFS
 SUBROUTINE CPOFS(A,Lda,N,V,Itask,Ind,Work)
   !>
-  !***
   !  Solve a positive definite symmetric complex system of
   !            linear equations.
   !***

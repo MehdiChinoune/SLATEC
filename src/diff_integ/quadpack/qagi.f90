@@ -2,7 +2,6 @@
 SUBROUTINE QAGI(F,Bound,Inf,Epsabs,Epsrel,Result,Abserr,Neval,Ier,Limit,&
     Lenw,Last,Iwork,Work)
   !>
-  !***
   !  The routine calculates an approximation result to a given
   !            INTEGRAL   I = Integral of F over (BOUND,+INFINITY)
   !                    OR I = Integral of F over (-INFINITY,BOUND)

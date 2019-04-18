@@ -1,7 +1,6 @@
 !** PNNZRS
 SUBROUTINE PNNZRS(I,Xval,Iplace,Sx,Ix,Ircx)
   !>
-  !***
   !  Subsidiary to SPLP
   !***
   ! **Library:**   SLATEC

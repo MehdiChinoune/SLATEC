@@ -1,7 +1,6 @@
 !** SCHEX
 SUBROUTINE SCHEX(R,Ldr,P,K,L,Z,Ldz,Nz,C,S,Job)
   !>
-  !***
   !  Update the Cholesky factorization  A=TRANS(R)*R  of A
   !            positive definite matrix A of order P under diagonal
   !            permutations of the form TRANS(E)*A*E, where E is a

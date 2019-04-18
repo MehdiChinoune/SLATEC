@@ -1,7 +1,6 @@
 !** DQWGTS
 REAL(8) FUNCTION DQWGTS(X,A,B,Alfa,Beta,Integr)
   !>
-  !***
   !  This function subprogram is used together with the
   !            routine DQAWS and defines the WEIGHT function.
   !***

@@ -1,7 +1,6 @@
 !** FZERO
 SUBROUTINE FZERO(F,B,C,R,Re,Ae,Iflag)
   !>
-  !***
   !  Search for a zero of a function F(X) in a given interval
   !            (B,C).  It is designed primarily for problems where F(B)
   !            and F(C) have opposite signs.

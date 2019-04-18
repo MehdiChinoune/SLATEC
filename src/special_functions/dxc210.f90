@@ -1,7 +1,6 @@
 !** DXC210
 SUBROUTINE DXC210(K,Z,J,Ierror)
   !>
-  !***
   !  To provide double-precision floating-point arithmetic
   !            with an extended exponent range.
   !***

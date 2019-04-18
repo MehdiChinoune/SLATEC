@@ -2,7 +2,6 @@
 SUBROUTINE SINTRP(X,Y,Xout,Yout,Ypout,Neqn,Kold,Phi,Ivc,Iv,Kgi,Gi,Alpha,&
     Og,Ow,Ox,Oy)
   !>
-  !***
   !  Approximate the solution at XOUT by evaluating the
   !            polynomial computed in STEPS at XOUT.  Must be used in
   !            conjunction with STEPS.

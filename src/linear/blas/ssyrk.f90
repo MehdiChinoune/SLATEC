@@ -1,7 +1,6 @@
 !** SSYRK
 SUBROUTINE SSYRK(Uplo,Trans,N,K,Alpha,A,Lda,Beta,C,Ldc)
   !>
-  !***
   !  Perform symmetric rank k update of a real symmetric matrix.
   !***
   ! **Library:**   SLATEC (BLAS)

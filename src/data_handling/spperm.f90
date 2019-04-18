@@ -1,7 +1,6 @@
 !** SPPERM
 SUBROUTINE SPPERM(X,N,Iperm,Ier)
   !>
-  !***
   !  Rearrange a given array according to a prescribed
   !            permutation vector.
   !***

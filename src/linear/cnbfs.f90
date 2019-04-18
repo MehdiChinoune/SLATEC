@@ -1,7 +1,6 @@
 !** CNBFS
 SUBROUTINE CNBFS(Abe,Lda,N,Ml,Mu,V,Itask,Ind,Work,Iwork)
   !>
-  !***
   !  Solve a general nonsymmetric banded system of linear
   !            equations.
   !***

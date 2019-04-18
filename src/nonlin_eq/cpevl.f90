@@ -1,7 +1,6 @@
 !** CPEVL
 SUBROUTINE CPEVL(N,M,A,Z,C,B,Kbd)
   !>
-  !***
   !  Subsidiary to CPZERO
   !***
   ! **Library:**   SLATEC

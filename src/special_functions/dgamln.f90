@@ -1,7 +1,6 @@
 !** DGAMLN
 REAL(8) FUNCTION DGAMLN(Z,Ierr)
   !>
-  !***
   !  Compute the logarithm of the Gamma function
   !***
   ! **Library:**   SLATEC

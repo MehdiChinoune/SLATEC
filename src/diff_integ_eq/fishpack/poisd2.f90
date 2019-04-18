@@ -1,7 +1,6 @@
 !** POISD2
 SUBROUTINE POISD2(Mr,Nr,Istag,Ba,Bb,Bc,Q,Idimq,B,W,D,Tcos,P)
   !>
-  !***
   !  Subsidiary to GENBUN
   !***
   ! **Library:**   SLATEC

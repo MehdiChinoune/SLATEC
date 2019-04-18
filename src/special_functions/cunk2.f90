@@ -1,7 +1,6 @@
 !** CUNK2
 SUBROUTINE CUNK2(Z,Fnu,Kode,Mr,N,Y,Nz,Tol,Elim,Alim)
   !>
-  !***
   !  Subsidiary to CBESK
   !***
   ! **Library:**   SLATEC

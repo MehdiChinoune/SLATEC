@@ -5,7 +5,6 @@ CONTAINS
   !** SQCK
   SUBROUTINE SQCK(Lun,Kprint,Nerr)
     !>
-    !***
     !  Quick check for SPOFS, SPOIR, SNBFS and SNBIR.
     !***
     ! **Library:**   SLATEC
@@ -192,7 +191,6 @@ CONTAINS
   !** DQCK
   SUBROUTINE DQCK(Lun,Kprint,Nerr)
     !>
-    !***
     !  Quick check for DPOFS AND DNBFS.
     !***
     ! **Library:**   SLATEC
@@ -373,7 +371,6 @@ CONTAINS
   !** CQCK
   SUBROUTINE CQCK(Lun,Kprint,Nerr)
     !>
-    !***
     !  Quick check for CPOFS, CPOIR, CNBFS and CNBIR.
     !***
     ! **Library:**   SLATEC
@@ -539,7 +536,6 @@ PROGRAM TEST22
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !>
-  !***
   !  Driver for testing SLATEC subprograms
   !***
   ! **Library:**   SLATEC

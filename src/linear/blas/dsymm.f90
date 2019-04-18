@@ -1,7 +1,6 @@
 !** DSYMM
 SUBROUTINE DSYMM(Side,Uplo,M,N,Alpha,A,Lda,B,Ldb,Beta,C,Ldc)
   !>
-  !***
   !  Perform one of the matrix-matrix operations.
   !***
   ! **Library:**   SLATEC (BLAS)

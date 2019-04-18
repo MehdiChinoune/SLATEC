@@ -1,7 +1,6 @@
 !** CHKPR4
 SUBROUTINE CHKPR4(Iorder,A,B,M,Mbdcnd,C,D,N,Nbdcnd,COFX,Idmn,Ierror)
   !>
-  !***
   !  Subsidiary to SEPX4
   !***
   ! **Library:**   SLATEC

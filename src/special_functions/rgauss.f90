@@ -1,7 +1,6 @@
 !** RGAUSS
 REAL FUNCTION RGAUSS(Xmean,Sd)
   !>
-  !***
   !  Generate a normally distributed (Gaussian) random number.
   !***
   ! **Library:**   SLATEC (FNLIB)

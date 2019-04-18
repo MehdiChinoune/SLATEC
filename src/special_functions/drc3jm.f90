@@ -1,7 +1,6 @@
 !** DRC3JM
 SUBROUTINE DRC3JM(L1,L2,L3,M1,M2min,M2max,Thrcof,Ndim,Ier)
   !>
-  !***
   !  Evaluate the 3j symbol g(M2) = (L1 L2   L3  )
   !                                           (M1 M2 -M1-M2)
   !            for all allowed values of M2, the other parameters

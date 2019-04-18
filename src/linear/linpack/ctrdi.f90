@@ -1,7 +1,6 @@
 !** CTRDI
 SUBROUTINE CTRDI(T,Ldt,N,Det,Job,Info)
   !>
-  !***
   !  Compute the determinant and inverse of a triangular matrix.
   !***
   ! **Library:**   SLATEC (LINPACK)

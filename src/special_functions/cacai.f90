@@ -1,7 +1,6 @@
 !** CACAI
 SUBROUTINE CACAI(Z,Fnu,Kode,Mr,N,Y,Nz,Rl,Tol,Elim,Alim)
   !>
-  !***
   !  Subsidiary to CAIRY
   !***
   ! **Library:**   SLATEC

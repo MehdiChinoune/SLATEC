@@ -1,7 +1,6 @@
 !** SSICS
 SUBROUTINE SSICS(N,Nelt,Ia,Ja,A,Isym,Nel,Iel,Jel,El,D,R,Iwarn)
   !>
-  !***
   !  Incompl. Cholesky Decomposition Preconditioner SLAP Set Up.
   !            Routine to generate the Incomplete Cholesky decomposition,
   !            L*D*L-trans, of a symmetric positive definite matrix, A,

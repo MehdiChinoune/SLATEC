@@ -1,7 +1,6 @@
 !** CHKXER
 SUBROUTINE CHKXER(Srnamt,Infot,Nout,Fatal,Kprint)
   !>
-  !***
   !  Test whether an error has been detected.
   !***
   ! **Library:**   SLATEC (BLAS)

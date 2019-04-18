@@ -1,7 +1,6 @@
 !** D9AIMP
 SUBROUTINE D9AIMP(X,Ampl,Theta)
   !>
-  !***
   !  Evaluate the Airy modulus and phase.
   !***
   ! **Library:**   SLATEC (FNLIB)

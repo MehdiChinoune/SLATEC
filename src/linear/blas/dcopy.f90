@@ -1,7 +1,6 @@
 !** DCOPY
 SUBROUTINE DCOPY(N,Dx,Incx,Dy,Incy)
   !>
-  !***
   !  Copy a vector.
   !***
   ! **Library:**   SLATEC (BLAS)

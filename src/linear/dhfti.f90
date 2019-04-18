@@ -1,7 +1,6 @@
 !** DHFTI
 SUBROUTINE DHFTI(A,Mda,M,N,B,Mdb,Nb,Tau,Krank,Rnorm,H,G,Ip)
   !>
-  !***
   !  Solve a least squares problem for banded matrices using
   !            sequential accumulation of rows of the data matrix.
   !            Exactly one right-hand side vector is permitted.

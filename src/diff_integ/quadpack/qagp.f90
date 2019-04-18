@@ -2,7 +2,6 @@
 SUBROUTINE QAGP(F,A,B,Npts2,Points,Epsabs,Epsrel,Result,Abserr,Neval,Ier,&
     Leniw,Lenw,Last,Iwork,Work)
   !>
-  !***
   !  The routine calculates an approximation result to a given
   !            definite integral I = Integral of F over (A,B),
   !            hopefully satisfying following claim for accuracy

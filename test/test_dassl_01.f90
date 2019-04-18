@@ -5,7 +5,6 @@ CONTAINS
   !** EDIT2
   SUBROUTINE EDIT2(Y,T,Erm)
     !>
-    !***
     !  Subsidiary to SDASQC.
     !***
     ! **Library:**   SLATEC (DASSL)
@@ -51,7 +50,6 @@ CONTAINS
   !** SDASQC
   SUBROUTINE SDASQC(Lun,Kprint,Ipass)
     !>
-    !***
     !  Quick check for SLATEC routine SDASSL.
     !***
     ! **Library:**   SLATEC (DASSL)
@@ -262,7 +260,6 @@ CONTAINS
   !** SDJAC1
   SUBROUTINE SDJAC1(T,Y,Yprime,Pd,Cj,Rpar,Ipar)
     !>
-    !***
     !  First Jacobian evaluator for SDASQC.
     !***
     ! **Library:**   SLATEC (DASSL)
@@ -291,7 +288,6 @@ CONTAINS
   !** SDJAC2
   SUBROUTINE SDJAC2(T,Y,Yprime,Pd,Cj,Rpar,Ipar)
     !>
-    !***
     !  Second Jacobian evaluator for SDASQC.
     !***
     ! **Library:**   SLATEC (DASSL)
@@ -335,7 +331,6 @@ CONTAINS
   !** SDRES1
   SUBROUTINE SDRES1(T,Y,Yprime,Delta,Ires,Rpar,Ipar)
     !>
-    !***
     !  First residual evaluator for SDASQC.
     !***
     ! **Library:**   SLATEC (DASSL)
@@ -362,7 +357,6 @@ CONTAINS
   !** SDRES2
   SUBROUTINE SDRES2(T,Y,Yprime,Delta,Ires,Rpar,Ipar)
     !>
-    !***
     !  Second residual evaluator for SDASQC.
     !***
     ! **Library:**   SLATEC (DASSL)
@@ -406,7 +400,6 @@ PROGRAM TEST48
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !>
-  !***
   !  Driver for testing SLATEC subprograms
   !***
   ! **Library:**   SLATEC

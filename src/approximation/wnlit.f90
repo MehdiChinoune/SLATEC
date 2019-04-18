@@ -1,7 +1,6 @@
 !** WNLIT
 SUBROUTINE WNLIT(W,Mdw,M,N,L,Ipivot,Itype,H,Scalee,Rnorm,Idope,Dope,Done)
   !>
-  !***
   !  Subsidiary to WNNLS
   !***
   ! **Library:**   SLATEC

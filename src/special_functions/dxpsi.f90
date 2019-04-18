@@ -1,7 +1,6 @@
 !** DXPSI
 REAL(8) FUNCTION DXPSI(A,Ipsik,Ipsix)
   !>
-  !***
   !  To compute values of the Psi function for DXLEGF.
   !***
   ! **Library:**   SLATEC

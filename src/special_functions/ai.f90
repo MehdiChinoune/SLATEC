@@ -1,7 +1,6 @@
 !** AI
 REAL FUNCTION AI(X)
   !>
-  !***
   !  Evaluate the Airy function.
   !***
   ! **Library:**   SLATEC (FNLIB)

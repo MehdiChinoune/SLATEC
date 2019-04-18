@@ -1,7 +1,6 @@
 !** DCHU
 REAL(8) FUNCTION DCHU(A,B,X)
   !>
-  !***
   !  Compute the logarithmic confluent hypergeometric function.
   !***
   ! **Library:**   SLATEC (FNLIB)

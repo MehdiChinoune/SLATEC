@@ -1,7 +1,6 @@
 !** SSBMV
 SUBROUTINE SSBMV(Uplo,N,K,Alpha,A,Lda,X,Incx,Beta,Y,Incy)
   !>
-  !***
   !  Multiply a real vector by a real symmetric band matrix.
   !***
   ! **Library:**   SLATEC (BLAS)

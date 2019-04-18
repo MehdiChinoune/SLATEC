@@ -1,7 +1,6 @@
 !** DSPR
 SUBROUTINE DSPR(Uplo,N,Alpha,X,Incx,Ap)
   !>
-  !***
   !  Perform the symmetric rank 1 operation.
   !***
   ! **Library:**   SLATEC (BLAS)

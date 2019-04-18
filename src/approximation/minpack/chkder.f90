@@ -1,7 +1,6 @@
 !** CHKDER
 SUBROUTINE CHKDER(M,N,X,Fvec,Fjac,Ldfjac,Xp,Fvecp,Mode,Err)
   !>
-  !***
   !  Check the gradients of M nonlinear functions in N
   !            variables, evaluated at a point X, for consistency
   !            with the functions themselves.

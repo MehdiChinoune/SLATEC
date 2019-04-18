@@ -1,7 +1,6 @@
 !** RFFTB1
 SUBROUTINE RFFTB1(N,C,Ch,Wa,Ifac)
   !>
-  !***
   !  Compute the backward fast Fourier transform of a real
   !            coefficient array.
   !***

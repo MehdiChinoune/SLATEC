@@ -1,7 +1,6 @@
 !** CSIFA
 SUBROUTINE CSIFA(A,Lda,N,Kpvt,Info)
   !>
-  !***
   !  Factor a complex symmetric matrix by elimination with
   !            symmetric pivoting.
   !***

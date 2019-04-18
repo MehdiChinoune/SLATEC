@@ -1,7 +1,6 @@
 !** HFTI
 SUBROUTINE HFTI(A,Mda,M,N,B,Mdb,Nb,Tau,Krank,Rnorm,H,G,Ip)
   !>
-  !***
   !  Solve a linear least squares problems by performing a QR
   !            factorization of the matrix using Householder
   !            transformations.

@@ -1,7 +1,6 @@
 !** GAMI
 REAL FUNCTION GAMI(A,X)
   !>
-  !***
   !  Evaluate the incomplete Gamma function.
   !***
   ! **Library:**   SLATEC (FNLIB)

@@ -1,7 +1,6 @@
 !** DBSQAD
 SUBROUTINE DBSQAD(T,Bcoef,N,K,X1,X2,Bquad,Work)
   !>
-  !***
   !  Compute the integral of a K-th order B-spline using the
   !            B-representation.
   !***

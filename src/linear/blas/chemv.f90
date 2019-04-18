@@ -1,7 +1,6 @@
 !** CHEMV
 SUBROUTINE CHEMV(Uplo,N,Alpha,A,Lda,X,Incx,Beta,Y,Incy)
   !>
-  !***
   !  Multiply a complex vector by a complex Hermitian matrix.
   !***
   ! **Library:**   SLATEC (BLAS)

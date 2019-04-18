@@ -1,7 +1,6 @@
 !** TEVLS
 SUBROUTINE TEVLS(N,D,E2,Ierr)
   !>
-  !***
   !  Subsidiary to BLKTRI
   !***
   ! **Library:**   SLATEC

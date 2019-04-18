@@ -1,7 +1,6 @@
 !** DY
 SUBROUTINE DY(U,Idmn,I,J,Uyyy,Uyyyy)
   !>
-  !***
   !  Subsidiary to SEPELI
   !***
   ! **Library:**   SLATEC

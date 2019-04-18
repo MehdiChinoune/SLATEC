@@ -1,7 +1,6 @@
 !** DJAIRY
 SUBROUTINE DJAIRY(X,Rx,C,Ai,Dai)
   !>
-  !***
   !  Subsidiary to DBESJ and DBESY
   !***
   ! **Library:**   SLATEC

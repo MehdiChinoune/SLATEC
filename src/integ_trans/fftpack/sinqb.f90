@@ -1,7 +1,6 @@
 !** SINQB
 SUBROUTINE SINQB(N,X,Wsave)
   !>
-  !***
   !  Compute the unnormalized inverse of SINQF.
   !***
   ! **Library:**   SLATEC (FFTPACK)

@@ -2,7 +2,6 @@
 SUBROUTINE SBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,&
     Mode,Rw,Iw)
   !>
-  !***
   !  Solve the bounded and constrained least squares
   !            problem consisting of solving the equation
   !                      E*X = F  (in the least squares sense)

@@ -1,7 +1,6 @@
 !** ZBESY
 SUBROUTINE ZBESY(Zr,Zi,Fnu,Kode,N,Cyr,Cyi,Nz,Cwrkr,Cwrki,Ierr)
   !>
-  !***
   !  Compute a sequence of the Bessel functions Y(a,z) for
   !            complex argument z and real nonnegative orders a=b,b+1,
   !            b+2,... where b>0.  A scaling option is available to

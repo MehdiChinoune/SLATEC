@@ -1,7 +1,6 @@
 !** CFFTB1
 SUBROUTINE CFFTB1(N,C,Ch,Wa,Ifac)
   !>
-  !***
   !  Compute the unnormalized inverse of CFFTF1.
   !***
   ! **Library:**   SLATEC (FFTPACK)

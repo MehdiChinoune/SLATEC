@@ -1,7 +1,6 @@
 !** GAMIT
 REAL FUNCTION GAMIT(A,X)
   !>
-  !***
   !  Calculate Tricomi's form of the incomplete Gamma function.
   !***
   ! **Library:**   SLATEC (FNLIB)

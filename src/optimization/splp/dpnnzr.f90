@@ -1,7 +1,6 @@
 !** DPNNZR
 SUBROUTINE DPNNZR(I,Xval,Iplace,Sx,Ix,Ircx)
   !>
-  !***
   !  Subsidiary to DSPLP
   !***
   ! **Library:**   SLATEC

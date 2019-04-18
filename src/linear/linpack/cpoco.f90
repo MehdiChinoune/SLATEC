@@ -1,7 +1,6 @@
 !** CPOCO
 SUBROUTINE CPOCO(A,Lda,N,Rcond,Z,Info)
   !>
-  !***
   !  Factor a complex Hermitian positive definite matrix
   !            and estimate the condition number of the matrix.
   !***

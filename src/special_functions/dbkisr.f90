@@ -1,7 +1,6 @@
 !** DBKISR
 SUBROUTINE DBKISR(X,N,Summ,Ierr)
   !>
-  !***
   !  Subsidiary to DBSKIN
   !***
   ! **Library:**   SLATEC

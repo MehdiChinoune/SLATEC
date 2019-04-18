@@ -1,7 +1,6 @@
 !** QZVEC
 SUBROUTINE QZVEC(Nm,N,A,B,Alfr,Alfi,Beta,Z)
   !>
-  !***
   !  The optional fourth step of the QZ algorithm for
   !            generalized eigenproblems.  Accepts a matrix in
   !            quasi-triangular form and another in upper triangular

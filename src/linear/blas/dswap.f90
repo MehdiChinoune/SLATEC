@@ -1,7 +1,6 @@
 !** DSWAP
 SUBROUTINE DSWAP(N,Dx,Incx,Dy,Incy)
   !>
-  !***
   !  Interchange two vectors.
   !***
   ! **Library:**   SLATEC (BLAS)

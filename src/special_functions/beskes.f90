@@ -1,7 +1,6 @@
 !** BESKES
 SUBROUTINE BESKES(Xnu,X,Nin,Bke)
   !>
-  !***
   !  Compute a sequence of exponentially scaled modified Bessel
   !            functions of the third kind of fractional order.
   !***

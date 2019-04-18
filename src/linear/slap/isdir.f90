@@ -2,7 +2,6 @@
 INTEGER FUNCTION ISDIR(N,B,X,Nelt,Ia,Ja,A,Isym,MSOLVE,Itol,Tol,Itmax,Iter,&
     Err,Ierr,Iunit,R,Z,Dz,Rwork,Iwork,Bnrm,Solnrm)
   !>
-  !***
   !  Preconditioned Iterative Refinement Stop Test.
   !            This routine calculates the stop test for the iterative
   !            refinement iteration scheme.  It returns a non-zero if the

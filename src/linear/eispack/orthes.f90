@@ -1,7 +1,6 @@
 !** ORTHES
 SUBROUTINE ORTHES(Nm,N,Low,Igh,A,Ort)
   !>
-  !***
   !  Reduce a real general matrix to upper Hessenberg form
   !            using orthogonal similarity transformations.
   !***

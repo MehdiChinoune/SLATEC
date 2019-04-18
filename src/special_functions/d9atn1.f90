@@ -1,7 +1,6 @@
 !** D9ATN1
 REAL(8) FUNCTION D9ATN1(X)
   !>
-  !***
   !  Evaluate DATAN(X) from first order relative accuracy so
   !            that DATAN(X) = X + X**3*D9ATN1(X).
   !***

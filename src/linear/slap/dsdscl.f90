@@ -1,7 +1,6 @@
 !** DSDSCL
 SUBROUTINE DSDSCL(N,Nelt,Ia,Ja,A,Isym,X,B,Dinv,Job,Itol)
   !>
-  !***
   !  Diagonal Scaling of system Ax = b.
   !            This routine scales (and unscales) the system  Ax = b
   !            by symmetric diagonal scaling.

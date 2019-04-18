@@ -1,7 +1,6 @@
 !** DSORT
 SUBROUTINE DSORT(Dx,Dy,N,Kflag)
   !>
-  !***
   !  Sort an array and optionally make the same interchanges in
   !            an auxiliary array.  The array may be sorted in increasing
   !            or decreasing order.  A slightly modified QUICKSORT

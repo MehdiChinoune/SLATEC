@@ -1,7 +1,6 @@
 !** CUNIK
 SUBROUTINE CUNIK(Zr,Fnu,Ikflg,Ipmtr,Tol,Init,Phi,Zeta1,Zeta2,Summ,Cwrk)
   !>
-  !***
   !  Subsidiary to CBESI and CBESK
   !***
   ! **Library:**   SLATEC

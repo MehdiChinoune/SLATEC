@@ -1,7 +1,6 @@
 !** BSPPP
 SUBROUTINE BSPPP(T,A,N,K,Ldc,C,Xi,Lxi,Work)
   !>
-  !***
   !  Convert the B-representation of a B-spline to the piecewise
   !            polynomial (PP) form.
   !***

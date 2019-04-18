@@ -1,7 +1,6 @@
 !** DBNFAC
 SUBROUTINE DBNFAC(W,Nroww,Nrow,Nbandl,Nbandu,Iflag)
   !>
-  !***
   !  Subsidiary to DBINT4 and DBINTK
   !***
   ! **Library:**   SLATEC

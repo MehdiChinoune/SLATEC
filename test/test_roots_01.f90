@@ -5,7 +5,6 @@ CONTAINS
   !** CPRPQX
   SUBROUTINE CPRPQX(Lun,Kprint,Ipass)
     !>
-    !***
     !  Quick check for CPZERO and RPZERO.
     !***
     ! **Library:**   SLATEC
@@ -97,7 +96,6 @@ CONTAINS
   !** FZTEST
   SUBROUTINE FZTEST(Lun,Kprint,Ipass)
     !>
-    !***
     !  Quick check for FZERO.
     !***
     ! **Library:**   SLATEC
@@ -214,7 +212,6 @@ CONTAINS
   !** DFZTST
   SUBROUTINE DFZTST(Lun,Kprint,Ipass)
     !>
-    !***
     !  Quick check for DFZERO.
     !***
     ! **Library:**   SLATEC
@@ -325,7 +322,6 @@ CONTAINS
   !** RQRTST
   SUBROUTINE RQRTST(Lun,Kprint,Ipass)
     !>
-    !***
     !  Quick check for RPQR79.
     !***
     ! **Library:**   SLATEC
@@ -459,7 +455,6 @@ CONTAINS
   !** CQRTST
   SUBROUTINE CQRTST(Lun,Kprint,Ipass)
     !>
-    !***
     !  Quick check for CPQR79.
     !***
     ! **Library:**   SLATEC
@@ -617,7 +612,6 @@ PROGRAM TEST34
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !>
-  !***
   !  Driver for testing SLATEC subprograms
   !***
   ! **Library:**   SLATEC

@@ -1,7 +1,6 @@
 !** DWNNLS
 SUBROUTINE DWNNLS(W,Mdw,Me,Ma,N,L,Prgopt,X,Rnorm,Mode,Iwork,Work)
   !>
-  !***
   !  Solve a linearly constrained least squares problem with
   !            equality constraints and nonnegativity constraints on
   !            selected variables.

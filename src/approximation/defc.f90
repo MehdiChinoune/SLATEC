@@ -1,7 +1,6 @@
 !** DEFC
 SUBROUTINE DEFC(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkpt,Mdein,Mdeout,Coeff,Lw,W)
   !>
-  !***
   !  Fit a piecewise polynomial curve to discrete data.
   !            The piecewise polynomials are represented as B-splines.
   !            The fitting is done in a weighted least squares sense.

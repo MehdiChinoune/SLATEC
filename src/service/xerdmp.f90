@@ -1,7 +1,6 @@
 !** XERDMP
 SUBROUTINE XERDMP
   !>
-  !***
   !  Print the error tables and then clear them.
   !***
   ! **Library:**   SLATEC (XERROR)

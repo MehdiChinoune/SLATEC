@@ -1,7 +1,6 @@
 !** DCHUD
 SUBROUTINE DCHUD(R,Ldr,P,X,Z,Ldz,Nz,Y,Rho,C,S)
   !>
-  !***
   !  Update an augmented Cholesky decomposition of the
   !            triangular part of an augmented QR decomposition.
   !***

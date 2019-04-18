@@ -1,7 +1,6 @@
 !** RFFTI
 SUBROUTINE RFFTI(N,Wsave)
   !>
-  !***
   !  Initialize a work array for RFFTF and RFFTB.
   !***
   ! **Library:**   SLATEC (FFTPACK)

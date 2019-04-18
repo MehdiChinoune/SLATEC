@@ -1,7 +1,6 @@
 !** CAIRY
 SUBROUTINE CAIRY(Z,Id,Kode,Ai,Nz,Ierr)
   !>
-  !***
   !  Compute the Airy function Ai(z) or its derivative dAi/dz
   !            for complex argument z.  A scaling option is available
   !            to help avoid underflow and overflow.

@@ -1,7 +1,6 @@
 !** DSIFA
 SUBROUTINE DSIFA(A,Lda,N,Kpvt,Info)
   !>
-  !***
   !  Factor a real symmetric matrix by elimination with
   !            symmetric pivoting.
   !***

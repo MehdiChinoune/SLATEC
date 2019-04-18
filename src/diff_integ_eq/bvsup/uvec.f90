@@ -1,7 +1,6 @@
 !** UVEC
 SUBROUTINE UVEC(X,Y,Yp)
   !>
-  !***
   !  Dummy routine for BVSUP quick check.
   !***
   ! **Library:**   SLATEC

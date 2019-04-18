@@ -1,7 +1,6 @@
 !** DCHKW
 SUBROUTINE DCHKW(Name,Lociw,Leniw,Locw,Lenw,Ierr,Iter,Err)
   !>
-  !***
   !  SLAP WORK/IWORK Array Bounds Checker.
   !            This routine checks the work array lengths and interfaces
   !            to the SLATEC error handler if a problem is found.

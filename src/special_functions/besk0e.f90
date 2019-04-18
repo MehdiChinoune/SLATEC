@@ -1,7 +1,6 @@
 !** BESK0E
 REAL FUNCTION BESK0E(X)
   !>
-  !***
   !  Compute the exponentially scaled modified (hyperbolic)
   !            Bessel function of the third kind of order zero.
   !***

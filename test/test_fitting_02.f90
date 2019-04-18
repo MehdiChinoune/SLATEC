@@ -5,7 +5,6 @@ CONTAINS
   !** DLSEIT
   SUBROUTINE DLSEIT(Lun,Kprint,Ipass)
     !>
-    !***
     !  Quick check for DLSEI.
     !***
     ! **Library:**   SLATEC
@@ -245,7 +244,6 @@ CONTAINS
   !** DQCGLS
   SUBROUTINE DQCGLS(Lun,Kprint,Ipass)
     !>
-    !***
     !  Quick check for DGLSS.
     !***
     ! **Library:**   SLATEC
@@ -394,7 +392,6 @@ PROGRAM TEST28
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !>
-  !***
   !  Driver for testing SLATEC subprograms
   !***
   ! **Library:**   SLATEC

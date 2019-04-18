@@ -1,7 +1,6 @@
 !** SSMV
 SUBROUTINE SSMV(N,X,Y,Nelt,Ia,Ja,A,Isym)
   !>
-  !***
   !  SLAP Column Format Sparse Matrix Vector Product.
   !            Routine to calculate the sparse matrix vector product:
   !            Y = A*X.

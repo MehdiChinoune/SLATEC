@@ -2,7 +2,6 @@
 SUBROUTINE QC25F(F,A,B,Omega,Integr,Nrmom,Maxp1,Ksave,Result,Abserr,Neval,&
     Resabs,Resasc,Momcom,Chebmo)
   !>
-  !***
   !  To compute the integral I=Integral of F(X) over (A,B)
   !            Where W(X) = COS(OMEGA*X) Or (WX)=SIN(OMEGA*X)
   !            and to compute J=Integral of ABS(F) over (A,B). For small

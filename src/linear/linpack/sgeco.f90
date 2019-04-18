@@ -1,7 +1,6 @@
 !** SGECO
 SUBROUTINE SGECO(A,Lda,N,Ipvt,Rcond,Z)
   !>
-  !***
   !  Factor a matrix using Gaussian elimination and estimate
   !            the condition number of the matrix.
   !***

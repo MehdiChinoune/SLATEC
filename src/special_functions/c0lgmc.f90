@@ -1,7 +1,6 @@
 !** C0LGMC
 COMPLEX FUNCTION C0LGMC(Z)
   !>
-  !***
   !  Evaluate (Z+0.5)*LOG((Z+1.)/Z) - 1.0 with relative
   !            accuracy.
   !***

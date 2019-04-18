@@ -1,7 +1,6 @@
 !** QK15I
 SUBROUTINE QK15I(F,Boun,Inf,A,B,Result,Abserr,Resabs,Resasc)
   !>
-  !***
   !  The original (infinite integration range is mapped
   !            onto the interval (0,1) and (A,B) is a part of (0,1).
   !            it is the purpose to compute

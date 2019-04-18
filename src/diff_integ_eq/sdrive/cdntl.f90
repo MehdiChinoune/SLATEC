@@ -4,7 +4,6 @@ SUBROUTINE CDNTL(Eps,F,FA,Hmax,Hold,Impl,Jtask,Matdim,Maxord,Mint,Miter,&
     Nfe,Rc,Yh,A,Convrg,El,Fac,Ier,Ipvt,Nq,Nwait,Rh,Rmax,&
     Save2,Tq,Trend,Iswflg,Jstate)
   !>
-  !***
   !  Subroutine CDNTL is called to set parameters on the first
   !            call to CDSTP, on an internal restart, or when the user has
   !            altered MINT, MITER, and/or H.

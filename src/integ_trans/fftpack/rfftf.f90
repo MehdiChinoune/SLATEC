@@ -1,7 +1,6 @@
 !** RFFTF
 SUBROUTINE RFFTF(N,R,Wsave)
   !>
-  !***
   !  Compute the forward transform of a real, periodic sequence.
   !***
   ! **Library:**   SLATEC (FFTPACK)

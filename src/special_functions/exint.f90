@@ -1,7 +1,6 @@
 !** EXINT
 SUBROUTINE EXINT(X,N,Kode,M,Tol,En,Nz,Ierr)
   !>
-  !***
   !  Compute an M member sequence of exponential integrals
   !            E(N+K,X), K=0,1,...,M-1 for N .GE. 1 and X .GE. 0.
   !***

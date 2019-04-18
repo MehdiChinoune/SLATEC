@@ -1,7 +1,6 @@
 !** DCOSDG
 REAL(8) FUNCTION DCOSDG(X)
   !>
-  !***
   !  Compute the cosine of an argument in degrees.
   !***
   ! **Library:**   SLATEC (FNLIB)

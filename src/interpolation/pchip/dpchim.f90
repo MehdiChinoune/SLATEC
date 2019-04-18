@@ -1,7 +1,6 @@
 !** DPCHIM
 SUBROUTINE DPCHIM(N,X,F,D,Incfd,Ierr)
   !>
-  !***
   !  Set derivatives needed to determine a monotone piecewise
   !            cubic Hermite interpolant to given data.  Boundary values
   !            are provided which are compatible with monotonicity.  The

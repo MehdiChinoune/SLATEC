@@ -2,7 +2,6 @@
 SUBROUTINE DOMN(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Nsave,Itol,Tol,&
     Itmax,Iter,Err,Ierr,Iunit,R,Z,P,Ap,Emap,Dz,Csav,Rwork,Iwork)
   !>
-  !***
   !  Preconditioned Orthomin Sparse Iterative Ax=b Solver.
   !            Routine to solve a general linear system  Ax = b  using
   !            the Preconditioned Orthomin method.

@@ -2,7 +2,6 @@
 SUBROUTINE EFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Mdein,Mdeout,&
     Coeff,Bf,Xtemp,Ptemp,Bkpt,G,Mdg,W,Mdw,Lw)
   !>
-  !***
   !  Subsidiary to EFC
   !***
   ! **Library:**   SLATEC

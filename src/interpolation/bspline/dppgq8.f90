@@ -1,7 +1,6 @@
 !** DPPGQ8
 SUBROUTINE DPPGQ8(FUN,Ldc,C,Xi,Lxi,Kk,Id,A,B,Inppv,Err,Ans,Ierr)
   !>
-  !***
   !  Subsidiary to DPFQAD
   !***
   ! **Library:**   SLATEC

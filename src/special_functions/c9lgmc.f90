@@ -1,7 +1,6 @@
 !** C9LGMC
 COMPLEX FUNCTION C9LGMC(Zin)
   !>
-  !***
   !  Compute the log gamma correction factor so that
   !            LOG(CGAMMA(Z)) = 0.5*LOG(2.*PI) + (Z-0.5)*LOG(Z) - Z
   !            + C9LGMC(Z).

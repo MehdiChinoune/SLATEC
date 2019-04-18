@@ -1,7 +1,6 @@
 !** FDJAC3
 SUBROUTINE FDJAC3(FCN,M,N,X,Fvec,Fjac,Ldfjac,Iflag,Epsfcn,Wa)
   !>
-  !***
   !  Subsidiary to SNLS1 and SNLS1E
   !***
   ! **Library:**   SLATEC

@@ -1,7 +1,6 @@
 !** DWNLIT
 SUBROUTINE DWNLIT(W,Mdw,M,N,L,Ipivot,Itype,H,Scalee,Rnorm,Idope,Dope,Done)
   !>
-  !***
   !  Subsidiary to DWNNLS
   !***
   ! **Library:**   SLATEC

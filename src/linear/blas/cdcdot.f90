@@ -1,7 +1,6 @@
 !** CDCDOT
 COMPLEX FUNCTION CDCDOT(N,Cb,Cx,Incx,Cy,Incy)
   !>
-  !***
   !  Compute the inner product of two vectors with extended
   !            precision accumulation.
   !***

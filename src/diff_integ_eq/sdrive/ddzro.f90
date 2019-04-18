@@ -1,7 +1,6 @@
 !** DDZRO
 SUBROUTINE DDZRO(Ae,F,H,N,Nq,Iroot,Re,T,Yh,Uround,B,C,Fb,Fc,Y)
   !>
-  !***
   !  DDZRO searches for a zero of a function F(N, T, Y, IROOT)
   !            between the given values B and C until the width of the
   !            interval (B, C) has collapsed to within a tolerance

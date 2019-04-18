@@ -1,7 +1,6 @@
 !** PCHCI
 SUBROUTINE PCHCI(N,H,Slope,D,Incfd)
   !>
-  !***
   !  Set interior derivatives for PCHIC
   !***
   ! **Library:**   SLATEC (PCHIP)

@@ -1,7 +1,6 @@
 !** STBMV
 SUBROUTINE STBMV(Uplo,Trans,Diag,N,K,A,Lda,X,Incx)
   !>
-  !***
   !  Multiply a real vector by a real triangular band matrix.
   !***
   ! **Library:**   SLATEC (BLAS)

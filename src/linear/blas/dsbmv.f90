@@ -1,7 +1,6 @@
 !** DSBMV
 SUBROUTINE DSBMV(Uplo,N,K,Alpha,A,Lda,X,Incx,Beta,Y,Incy)
   !>
-  !***
   !  Perform the matrix-vector operation.
   !***
   ! **Library:**   SLATEC (BLAS)

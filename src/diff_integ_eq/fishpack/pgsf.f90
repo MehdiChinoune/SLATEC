@@ -1,7 +1,6 @@
 !** PGSF
 REAL FUNCTION PGSF(X,Iz,C,A,Bh)
   !>
-  !***
   !  Subsidiary to CBLKTR
   !***
   ! **Library:**   SLATEC

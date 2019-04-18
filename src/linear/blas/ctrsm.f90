@@ -1,7 +1,6 @@
 !** CTRSM
 SUBROUTINE CTRSM(Side,Uplo,Transa,Diag,M,N,Alpha,A,Lda,B,Ldb)
   !>
-  !***
   !  Solve a complex triangular system of equations with
   !            multiple right-hand sides.
   !***

@@ -1,7 +1,6 @@
 !** SOS
 SUBROUTINE SOS(FNC,Neq,X,Rtolx,Atolx,Tolf,Iflag,Rw,Lrw,Iw,Liw)
   !>
-  !***
   !  Solve a square system of nonlinear equations.
   !***
   ! **Library:**   SLATEC

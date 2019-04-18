@@ -1,7 +1,6 @@
 !** DCHDD
 SUBROUTINE DCHDD(R,Ldr,P,X,Z,Ldz,Nz,Y,Rho,C,S,Info)
   !>
-  !***
   !  Downdate an augmented Cholesky decomposition or the
   !            triangular factor of an augmented QR decomposition.
   !***

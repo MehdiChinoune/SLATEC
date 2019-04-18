@@ -1,7 +1,6 @@
 !** CGEMM
 SUBROUTINE CGEMM(Transa,Transb,M,N,K,Alpha,A,Lda,B,Ldb,Beta,C,Ldc)
   !>
-  !***
   !  Multiply a complex general matrix by a complex general
   !            matrix.
   !***

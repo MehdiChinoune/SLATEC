@@ -1,7 +1,6 @@
 !** MC20AS
 SUBROUTINE MC20AS(Nc,Maxa,A,Inum,Jptr,Jnum,Jdisp)
   !>
-  !***
   !  Subsidiary to SPLP
   !***
   ! **Library:**   SLATEC

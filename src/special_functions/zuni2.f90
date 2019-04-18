@@ -1,7 +1,6 @@
 !** ZUNI2
 SUBROUTINE ZUNI2(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Nlast,Fnul,Tol,Elim,Alim)
   !>
-  !***
   !  Subsidiary to ZBESI and ZBESK
   !***
   ! **Library:**   SLATEC

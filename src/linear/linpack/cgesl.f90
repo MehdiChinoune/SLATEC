@@ -1,7 +1,6 @@
 !** CGESL
 SUBROUTINE CGESL(A,Lda,N,Ipvt,B,Job)
   !>
-  !***
   !  Solve the complex system A*X=B or CTRANS(A)*X=B using the
   !            factors computed by CGECO or CGEFA.
   !***

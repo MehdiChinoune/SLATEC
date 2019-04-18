@@ -1,7 +1,6 @@
 !** STRCO
 SUBROUTINE STRCO(T,Ldt,N,Rcond,Z,Job)
   !>
-  !***
   !  Estimate the condition number of a triangular matrix.
   !***
   ! **Library:**   SLATEC (LINPACK)

@@ -1,7 +1,6 @@
 !** ASYJY
 SUBROUTINE ASYJY(FUNJY,X,Fnu,Flgjy,In,Y,Wk,Iflw)
   !>
-  !***
   !  Subsidiary to BESJ and BESY
   !***
   ! **Library:**   SLATEC

@@ -1,7 +1,6 @@
 !** CUNHJ
 SUBROUTINE CUNHJ(Z,Fnu,Ipmtr,Tol,Phi,Arg,Zeta1,Zeta2,Asum,Bsum)
   !>
-  !***
   !  Subsidiary to CBESI and CBESK
   !***
   ! **Library:**   SLATEC

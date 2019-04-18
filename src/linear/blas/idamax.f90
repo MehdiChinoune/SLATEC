@@ -1,7 +1,6 @@
 !** IDAMAX
 INTEGER FUNCTION IDAMAX(N,Dx,Incx)
   !>
-  !***
   !  Find the smallest index of that component of a vector
   !            having the maximum magnitude.
   !***

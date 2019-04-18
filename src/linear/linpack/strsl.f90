@@ -1,7 +1,6 @@
 !** STRSL
 SUBROUTINE STRSL(T,Ldt,N,B,Job,Info)
   !>
-  !***
   !  Solve a system of the form  T*X=B or TRANS(T)*X=B, where
   !            T is a triangular matrix.
   !***

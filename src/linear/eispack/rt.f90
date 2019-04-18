@@ -1,7 +1,6 @@
 !** RT
 SUBROUTINE RT(Nm,N,A,W,Matz,Z,Fv1,Ierr)
   !>
-  !***
   !  Compute the eigenvalues and eigenvectors of a special real
   !            tridiagonal matrix.
   !***

@@ -1,7 +1,6 @@
 !** DBKIAS
 SUBROUTINE DBKIAS(X,N,Ktrms,T,Ans,Ind,Ms,Gmrn,H,Ierr)
   !>
-  !***
   !  Subsidiary to DBSKIN
   !***
   ! **Library:**   SLATEC

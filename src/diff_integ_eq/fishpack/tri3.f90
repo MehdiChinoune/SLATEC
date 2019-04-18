@@ -1,7 +1,6 @@
 !** TRI3
 SUBROUTINE TRI3(M,A,B,C,K,Y1,Y2,Y3,Tcos,D,W1,W2,W3)
   !>
-  !***
   !  Subsidiary to GENBUN
   !***
   ! **Library:**   SLATEC

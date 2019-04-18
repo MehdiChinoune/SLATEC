@@ -1,7 +1,6 @@
 !** CFFTB
 SUBROUTINE CFFTB(N,C,Wsave)
   !>
-  !***
   !  Compute the unnormalized inverse of CFFTF.
   !***
   ! **Library:**   SLATEC (FFTPACK)

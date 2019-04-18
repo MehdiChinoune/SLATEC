@@ -1,7 +1,6 @@
 !** CSPFA
 SUBROUTINE CSPFA(Ap,N,Kpvt,Info)
   !>
-  !***
   !  Factor a complex symmetric matrix stored in packed form by
   !            elimination with symmetric pivoting.
   !***

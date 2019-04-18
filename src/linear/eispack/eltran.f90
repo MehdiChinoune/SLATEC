@@ -1,7 +1,6 @@
 !** ELTRAN
 SUBROUTINE ELTRAN(Nm,N,Low,Igh,A,Intt,Z)
   !>
-  !***
   !  Accumulates the stabilized elementary similarity
   !            transformations used in the reduction of a real general
   !            matrix to upper Hessenberg form by ELMHES.

@@ -1,7 +1,6 @@
 !** COMLR
 SUBROUTINE COMLR(Nm,N,Low,Igh,Hr,Hi,Wr,Wi,Ierr)
   !>
-  !***
   !  Compute the eigenvalues of a complex upper Hessenberg
   !            matrix using the modified LR method.
   !***

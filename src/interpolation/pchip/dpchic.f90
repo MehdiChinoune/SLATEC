@@ -1,7 +1,6 @@
 !** DPCHIC
 SUBROUTINE DPCHIC(Ic,Vc,Switch,N,X,F,D,Incfd,Wk,Nwk,Ierr)
   !>
-  !***
   !  Set derivatives needed to determine a piecewise monotone
   !            piecewise cubic Hermite interpolant to given data.
   !            User control is available over boundary conditions and/or

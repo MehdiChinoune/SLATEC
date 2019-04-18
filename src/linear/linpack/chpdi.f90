@@ -1,7 +1,6 @@
 !** CHPDI
 SUBROUTINE CHPDI(Ap,N,Kpvt,Det,Inert,Work,Job)
   !>
-  !***
   !  Compute the determinant, inertia and inverse of a complex
   !            Hermitian matrix stored in packed form using the factors
   !            obtained from CHPFA.

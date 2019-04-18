@@ -2,7 +2,6 @@
 SUBROUTINE DHSTRT(DF,Neq,A,B,Y,Yprime,Etol,Morder,Small,Big,Spy,Pv,Yp,Sf,&
     Rpar,Ipar,H)
   !>
-  !***
   !  Subsidiary to DDEABM, DDEBDF and DDERKF
   !***
   ! **Library:**   SLATEC

@@ -2,7 +2,6 @@
 SUBROUTINE SDAJAC(Neq,X,Y,Yprime,Delta,Cj,H,Ier,Wt,E,Wm,Iwm,RES,Ires,&
     Uround,JAC,Rpar,Ipar,Ntemp)
   !>
-  !***
   !  Compute the iteration matrix for SDASSL and form the
   !            LU-decomposition.
   !***

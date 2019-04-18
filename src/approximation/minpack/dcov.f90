@@ -1,7 +1,6 @@
 !** DCOV
 SUBROUTINE DCOV(FCN,Iopt,M,N,X,Fvec,R,Ldr,Info,Wa1,Wa2,Wa3,Wa4)
   !>
-  !***
   !  Calculate the covariance matrix for a nonlinear data
   !            fitting problem.  It is intended to be used after a
   !            successful return from either DNLS1 or DNLS1E.

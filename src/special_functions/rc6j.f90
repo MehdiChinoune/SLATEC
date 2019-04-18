@@ -1,7 +1,6 @@
 !** RC6J
 SUBROUTINE RC6J(L2,L3,L4,L5,L6,L1min,L1max,Sixcof,Ndim,Ier)
   !>
-  !***
   !  Evaluate the 6j symbol h(L1) = {L1 L2 L3}
   !                                           {L4 L5 L6}
   !            for all allowed values of L1, the other parameters

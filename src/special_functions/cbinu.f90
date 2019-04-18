@@ -1,7 +1,6 @@
 !** CBINU
 SUBROUTINE CBINU(Z,Fnu,Kode,N,Cy,Nz,Rl,Fnul,Tol,Elim,Alim)
   !>
-  !***
   !  Subsidiary to CAIRY, CBESH, CBESI, CBESJ, CBESK and CBIRY
   !***
   ! **Library:**   SLATEC

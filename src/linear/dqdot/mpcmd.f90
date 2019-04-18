@@ -1,7 +1,6 @@
 !** MPCMD
 SUBROUTINE MPCMD(X,Dz)
   !>
-  !***
   !  Subsidiary to DQDOTA and DQDOTI
   !***
   ! **Library:**   SLATEC

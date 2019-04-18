@@ -1,7 +1,6 @@
 !** XERBLA
 SUBROUTINE XERBLA(Srname,Info)
   !>
-  !***
   !  Error handler for the Level 2 and Level 3 BLAS Routines.
   !***
   ! **Library:**   SLATEC (BLAS)

@@ -1,7 +1,6 @@
 !** SINDG
 REAL FUNCTION SINDG(X)
   !>
-  !***
   !  Compute the sine of an argument in degrees.
   !***
   ! **Library:**   SLATEC (FNLIB)

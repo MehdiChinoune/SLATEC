@@ -1,7 +1,6 @@
 !** BESK0
 REAL FUNCTION BESK0(X)
   !>
-  !***
   !  Compute the modified (hyperbolic) Bessel function of the
   !            third kind of order zero.
   !***

@@ -1,7 +1,6 @@
 !** SVD
 SUBROUTINE SVD(Nm,M,N,A,W,Matu,U,Matv,V,Ierr,Rv1)
   !>
-  !***
   !  Perform the singular value decomposition of a rectangular
   !            matrix.
   !***

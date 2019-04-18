@@ -1,7 +1,6 @@
 !** DGVEC
 SUBROUTINE DGVEC(X,G)
   !>
-  !***
   !  Subsidiary to
   !***
   ! **Library:**   SLATEC

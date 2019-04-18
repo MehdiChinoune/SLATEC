@@ -1,7 +1,6 @@
 !** DBESK1
 REAL(8) FUNCTION DBESK1(X)
   !>
-  !***
   !  Compute the modified (hyperbolic) Bessel function of the
   !            third kind of order one.
   !***

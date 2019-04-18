@@ -1,7 +1,6 @@
 !** R1UPDT
 SUBROUTINE R1UPDT(M,N,S,Ls,U,V,W,Sing)
   !>
-  !***
   !  Subsidiary to SNSQ and SNSQE
   !***
   ! **Library:**   SLATEC

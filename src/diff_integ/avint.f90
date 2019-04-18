@@ -1,7 +1,6 @@
 !** AVINT
 SUBROUTINE AVINT(X,Y,N,Xlo,Xup,Ans,Ierr)
   !>
-  !***
   !  Integrate a function tabulated at arbitrarily spaced
   !            abscissas using overlapping parabolas.
   !***

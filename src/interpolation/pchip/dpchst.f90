@@ -1,7 +1,6 @@
 !** DPCHST
 REAL(8) FUNCTION DPCHST(Arg1,Arg2)
   !>
-  !***
   !  DPCHIP Sign-Testing Routine
   !***
   ! **Library:**   SLATEC (PCHIP)

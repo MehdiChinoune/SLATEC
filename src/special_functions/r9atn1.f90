@@ -1,7 +1,6 @@
 !** R9ATN1
 REAL FUNCTION R9ATN1(X)
   !>
-  !***
   !  Evaluate ATAN(X) from first order relative accuracy so that
   !            ATAN(X) = X + X**3*R9ATN1(X).
   !***

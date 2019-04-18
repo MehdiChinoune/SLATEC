@@ -1,7 +1,6 @@
 !** COSQI
 SUBROUTINE COSQI(N,Wsave)
   !>
-  !***
   !  Initialize a work array for COSQF and COSQB.
   !***
   ! **Library:**   SLATEC (FFTPACK)

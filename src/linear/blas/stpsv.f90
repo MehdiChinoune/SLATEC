@@ -1,7 +1,6 @@
 !** STPSV
 SUBROUTINE STPSV(Uplo,Trans,Diag,N,Ap,X,Incx)
   !>
-  !***
   !  Solve one of the systems of equations.
   !***
   ! **Library:**   SLATEC (BLAS)

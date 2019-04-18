@@ -1,7 +1,6 @@
 !** DCOT
 REAL(8) FUNCTION DCOT(X)
   !>
-  !***
   !  Compute the cotangent.
   !***
   ! **Library:**   SLATEC (FNLIB)

@@ -1,7 +1,6 @@
 !** BINT4
 SUBROUTINE BINT4(X,Y,Ndata,Ibcl,Ibcr,Fbcl,Fbcr,Kntopt,T,Bcoef,N,K,W)
   !>
-  !***
   !  Compute the B-representation of a cubic spline
   !            which interpolates given data.
   !***

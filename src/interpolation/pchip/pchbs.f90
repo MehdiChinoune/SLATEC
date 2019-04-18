@@ -1,7 +1,6 @@
 !** PCHBS
 SUBROUTINE PCHBS(N,X,F,D,Incfd,Knotyp,Nknots,T,Bcoef,Ndim,Kord,Ierr)
   !>
-  !***
   !  Piecewise Cubic Hermite to B-Spline converter.
   !***
   ! **Library:**   SLATEC (PCHIP)

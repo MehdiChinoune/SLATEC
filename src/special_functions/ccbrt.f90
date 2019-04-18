@@ -1,7 +1,6 @@
 !** CCBRT
 COMPLEX FUNCTION CCBRT(Z)
   !>
-  !***
   !  Compute the cube root.
   !***
   ! **Library:**   SLATEC (FNLIB)

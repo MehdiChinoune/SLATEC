@@ -1,7 +1,6 @@
 !** PRVEC
 REAL FUNCTION PRVEC(M,U,V)
   !>
-  !***
   !  Subsidiary to BVSUP
   !***
   ! **Library:**   SLATEC

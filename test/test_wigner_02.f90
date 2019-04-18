@@ -5,7 +5,6 @@ CONTAINS
   !** DQC36J
   SUBROUTINE DQC36J(Lun,Kprint,Ipass)
     !>
-    !***
     !  THIS IS A QUICK CHECK PROGRAM FOR THE SUBROUTINES DRC3JJ,
     !            DRC3JM, AND DRC6J, WHICH CALCULATE THE WIGNER COEFFICIENTS,
     !            3J AND 6J.
@@ -501,7 +500,6 @@ PROGRAM TEST16
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !>
-  !***
   !  Driver for testing SLATEC subprograms
   !            DRC3JJ   DRC3JM   DRC6J
   !***

@@ -1,7 +1,6 @@
 !** CHBMV
 SUBROUTINE CHBMV(Uplo,N,K,Alpha,A,Lda,X,Incx,Beta,Y,Incy)
   !>
-  !***
   !  Multiply a complex vector by a complex Hermitian band
   !            matrix.
   !***

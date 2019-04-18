@@ -1,7 +1,6 @@
 !** DGLSS
 SUBROUTINE DGLSS(A,Mda,M,N,B,Mdb,Nb,Rnorm,Work,Lw,Iwork,Liw,Info)
   !>
-  !***
   !  Solve a linear least squares problems by performing a QR
   !            factorization of the input matrix using Householder
   !            transformations.  Emphasis is put on detecting possible

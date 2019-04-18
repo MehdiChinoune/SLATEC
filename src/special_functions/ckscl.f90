@@ -1,7 +1,6 @@
 !** CKSCL
 SUBROUTINE CKSCL(Zr,Fnu,N,Y,Nz,Rz,Ascle,Tol,Elim)
   !>
-  !***
   !  Subsidiary to CBKNU, CUNK1 and CUNK2
   !***
   ! **Library:**   SLATEC

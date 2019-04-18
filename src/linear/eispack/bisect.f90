@@ -1,7 +1,6 @@
 !** BISECT
 SUBROUTINE BISECT(N,Eps1,D,E,E2,Lb,Ub,Mm,M,W,Ind,Ierr,Rv4,Rv5)
   !>
-  !***
   !  Compute the eigenvalues of a symmetric tridiagonal matrix
   !            in a given interval using Sturm sequencing.
   !***

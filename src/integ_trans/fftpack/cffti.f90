@@ -1,7 +1,6 @@
 !** CFFTI
 SUBROUTINE CFFTI(N,Wsave)
   !>
-  !***
   !  Initialize a work array for CFFTF and CFFTB.
   !***
   ! **Library:**   SLATEC (FFTPACK)

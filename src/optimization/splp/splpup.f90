@@ -2,7 +2,6 @@
 SUBROUTINE SPLPUP(USRMAT,Mrelas,Nvars,Prgopt,Dattrv,Bl,Bu,Ind,Info,Amat,&
     Imat,Sizeup,Asmall,Abig)
   !>
-  !***
   !  Subsidiary to SPLP
   !***
   ! **Library:**   SLATEC

@@ -1,7 +1,6 @@
 !** CGAMMA
 COMPLEX FUNCTION CGAMMA(Z)
   !>
-  !***
   !  Compute the complete Gamma function.
   !***
   ! **Library:**   SLATEC (FNLIB)

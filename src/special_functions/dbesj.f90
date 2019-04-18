@@ -1,7 +1,6 @@
 !** DBESJ
 SUBROUTINE DBESJ(X,Alpha,N,Y,Nz)
   !>
-  !***
   !  Compute an N member sequence of J Bessel functions
   !            J/SUB(ALPHA+K-1)/(X), K=1,...,N for non-negative ALPHA
   !            and X.

@@ -1,7 +1,6 @@
 !** DSTWAY
 SUBROUTINE DSTWAY(U,V,Yhp,Inout,Stowa)
   !>
-  !***
   !  Subsidiary to DBVSUP
   !***
   ! **Library:**   SLATEC

@@ -1,7 +1,6 @@
 !** CPPCO
 SUBROUTINE CPPCO(Ap,N,Rcond,Z,Info)
   !>
-  !***
   !  Factor a complex Hermitian positive definite matrix stored
   !            in packed form and estimate the condition number of the
   !            matrix.

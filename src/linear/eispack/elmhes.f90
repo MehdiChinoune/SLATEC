@@ -1,7 +1,6 @@
 !** ELMHES
 SUBROUTINE ELMHES(Nm,N,Low,Igh,A,Intt)
   !>
-  !***
   !  Reduce a real general matrix to upper Hessenberg form
   !            using stabilized elementary similarity transformations.
   !***

@@ -1,7 +1,6 @@
 !** COMP
 LOGICAL FUNCTION COMP(Ieract,Ierexp,Lout,Kprint)
   !>
-  !***
   !  Compare actual and expected values of error flag.
   !***
   ! **Library:**   SLATEC

@@ -3,7 +3,6 @@ SUBROUTINE DERKFS(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
     F4,F5,Ys,Told,Dtsign,U26,Rer,Init,Ksteps,Kop,Iquit,&
     Stiff,Nonstf,Ntstep,Nstifs,Rpar,Ipar)
   !>
-  !***
   !  Subsidiary to DERKF
   !***
   ! **Library:**   SLATEC

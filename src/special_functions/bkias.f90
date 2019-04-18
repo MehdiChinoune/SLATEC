@@ -1,7 +1,6 @@
 !** BKIAS
 SUBROUTINE BKIAS(X,N,Ktrms,T,Ans,Ind,Ms,Gmrn,H,Ierr)
   !>
-  !***
   !  Subsidiary to BSKIN
   !***
   ! **Library:**   SLATEC

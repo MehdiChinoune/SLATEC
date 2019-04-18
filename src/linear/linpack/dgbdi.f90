@@ -1,7 +1,6 @@
 !** DGBDI
 SUBROUTINE DGBDI(Abd,Lda,N,Ml,Mu,Ipvt,Det)
   !>
-  !***
   !  Compute the determinant of a band matrix using the factors
   !            computed by DGBCO or DGBFA.
   !***

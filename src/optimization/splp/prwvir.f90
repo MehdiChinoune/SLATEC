@@ -1,7 +1,6 @@
 !** PRWVIR
 SUBROUTINE PRWVIR(Key,Ipage,Lpg,Sx,Ix)
   !>
-  !***
   !  Subsidiary to SPLP
   !***
   ! **Library:**   SLATEC

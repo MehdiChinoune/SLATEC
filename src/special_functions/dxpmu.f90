@@ -1,7 +1,6 @@
 !** DXPMU
 SUBROUTINE DXPMU(Nu1,Nu2,Mu1,Mu2,Theta,X,Sx,Id,Pqa,Ipqa,Ierror)
   !>
-  !***
   !  To compute the values of Legendre functions for DXLEGF.
   !            Method: backward mu-wise recurrence for P(-MU,NU,X) for
   !            fixed nu to obtain P(-MU2,NU1,X), P(-(MU2-1),NU1,X), ...,

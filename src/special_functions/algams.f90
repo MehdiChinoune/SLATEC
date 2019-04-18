@@ -1,7 +1,6 @@
 !** ALGAMS
 SUBROUTINE ALGAMS(X,Algam,Sgngam)
   !>
-  !***
   !  Compute the logarithm of the absolute value of the Gamma
   !            function.
   !***

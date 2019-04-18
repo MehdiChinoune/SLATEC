@@ -2,7 +2,6 @@
 SUBROUTINE SEPX4(Iorder,A,B,M,Mbdcnd,Bda,Alpha,Bdb,Beta,C,D,N,Nbdcnd,Bdc,&
     Bdd,COFX,Grhs,Usol,Idmn,W,Pertrb,Ierror)
   !>
-  !***
   !  Solve for either the second or fourth order finite
   !            difference approximation to the solution of a separable
   !            elliptic partial differential equation on a rectangle.

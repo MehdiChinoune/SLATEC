@@ -1,7 +1,6 @@
 !** QRFAC
 SUBROUTINE QRFAC(M,N,A,Lda,Pivot,Ipvt,Lipvt,Sigma,Acnorm,Wa)
   !>
-  !***
   !  Subsidiary to SNLS1, SNLS1E, SNSQ and SNSQE
   !***
   ! **Library:**   SLATEC

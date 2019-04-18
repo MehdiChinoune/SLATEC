@@ -1,7 +1,6 @@
 !** XSETF
 SUBROUTINE XSETF(Kontrl)
   !>
-  !***
   !  Set the error control flag.
   !***
   ! **Library:**   SLATEC (XERROR)

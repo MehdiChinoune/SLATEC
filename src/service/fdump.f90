@@ -1,7 +1,6 @@
 !** FDUMP
 SUBROUTINE FDUMP
   !>
-  !***
   !  Symbolic dump (should be locally written).
   !***
   ! **Library:**   SLATEC (XERROR)

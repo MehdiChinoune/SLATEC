@@ -1,7 +1,6 @@
 !** SHEQR
 SUBROUTINE SHEQR(A,Lda,N,Q,Info,Ijob)
   !>
-  !***
   !  Internal routine for SGMRES.
   !***
   ! **Library:**   SLATEC (SLAP)

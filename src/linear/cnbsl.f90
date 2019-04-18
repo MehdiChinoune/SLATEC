@@ -1,7 +1,6 @@
 !** CNBSL
 SUBROUTINE CNBSL(Abe,Lda,N,Ml,Mu,Ipvt,B,Job)
   !>
-  !***
   !  Solve a complex band system using the factors computed by
   !            CNBCO or CNBFA.
   !***

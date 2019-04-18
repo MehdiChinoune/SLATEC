@@ -1,7 +1,6 @@
 !** DUIVP
 SUBROUTINE DUIVP(X,Y,Yp)
   !>
-  !***
   !  Dummy routine for DBVSUP quick check.
   !***
   ! **Library:**   SLATEC

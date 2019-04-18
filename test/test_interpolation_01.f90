@@ -5,7 +5,6 @@ CONTAINS
   !** PNTCHK
   SUBROUTINE PNTCHK(Lun,Kprint,Ipass)
     !>
-    !***
     !  Quick check for POLINT, POLCOF and POLYVL
     !***
     ! **Library:**   SLATEC
@@ -146,7 +145,6 @@ CONTAINS
   !** DPNTCK
   SUBROUTINE DPNTCK(Lun,Kprint,Ipass)
     !>
-    !***
     !  Quick check for DPLINT, DPOLCF and DPOLVL
     !***
     ! **Library:**   SLATEC
@@ -287,7 +285,6 @@ PROGRAM TEST29
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !>
-  !***
   !  Driver for testing SLATEC subprograms
   !***
   ! **Library:**   SLATEC

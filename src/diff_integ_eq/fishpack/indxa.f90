@@ -1,7 +1,6 @@
 !** INDXA
 SUBROUTINE INDXA(I,Ir,Idxa,Na)
   !>
-  !***
   !  Subsidiary to BLKTRI
   !***
   ! **Library:**   SLATEC

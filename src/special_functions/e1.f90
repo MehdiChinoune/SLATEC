@@ -1,7 +1,6 @@
 !** E1
 REAL FUNCTION E1(X)
   !>
-  !***
   !  Compute the exponential integral E1(X).
   !***
   ! **Library:**   SLATEC (FNLIB)

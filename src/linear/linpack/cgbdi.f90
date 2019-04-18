@@ -1,7 +1,6 @@
 !** CGBDI
 SUBROUTINE CGBDI(Abd,Lda,N,Ml,Mu,Ipvt,Det)
   !>
-  !***
   !  Compute the determinant of a complex band matrix using the
   !            factors from CGBCO or CGBFA.
   !***

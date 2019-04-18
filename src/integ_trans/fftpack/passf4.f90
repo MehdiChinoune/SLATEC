@@ -1,7 +1,6 @@
 !** PASSF4
 SUBROUTINE PASSF4(Ido,L1,Cc,Ch,Wa1,Wa2,Wa3)
   !>
-  !***
   !  Calculate the fast Fourier transform of subvectors of
   !            length four.
   !***

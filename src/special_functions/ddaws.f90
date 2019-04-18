@@ -1,7 +1,6 @@
 !** DDAWS
 REAL(8) FUNCTION DDAWS(X)
   !>
-  !***
   !  Compute Dawson's function.
   !***
   ! **Library:**   SLATEC (FNLIB)

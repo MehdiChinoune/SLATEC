@@ -1,7 +1,6 @@
 !** BESI1E
 REAL FUNCTION BESI1E(X)
   !>
-  !***
   !  Compute the exponentially scaled modified (hyperbolic)
   !            Bessel function of the first kind of order one.
   !***

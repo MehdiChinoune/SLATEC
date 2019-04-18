@@ -1,7 +1,6 @@
 !** RPZERO
 SUBROUTINE RPZERO(N,A,R,T,Iflg,S)
   !>
-  !***
   !  Find the zeros of a polynomial with real coefficients.
   !***
   ! **Library:**   SLATEC

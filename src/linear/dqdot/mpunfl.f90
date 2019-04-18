@@ -1,7 +1,6 @@
 !** MPUNFL
 SUBROUTINE MPUNFL(X)
   !>
-  !***
   !  Subsidiary to DQDOTA and DQDOTI
   !***
   ! **Library:**   SLATEC

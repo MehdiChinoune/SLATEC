@@ -1,7 +1,6 @@
 !** BINOM
 REAL FUNCTION BINOM(N,M)
   !>
-  !***
   !  Compute the binomial coefficients.
   !***
   ! **Library:**   SLATEC (FNLIB)

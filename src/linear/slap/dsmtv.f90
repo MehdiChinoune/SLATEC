@@ -1,7 +1,6 @@
 !** DSMTV
 SUBROUTINE DSMTV(N,X,Y,Nelt,Ia,Ja,A,Isym)
   !>
-  !***
   !  SLAP Column Format Sparse Matrix Transpose Vector Product.
   !            Routine to calculate the sparse matrix vector product:
   !            Y = A'*X, where ' denotes transpose.

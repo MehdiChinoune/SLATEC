@@ -1,7 +1,6 @@
 !** DSCAL
 SUBROUTINE DSCAL(N,Da,Dx,Incx)
   !>
-  !***
   !  Multiply a vector by a constant.
   !***
   ! **Library:**   SLATEC (BLAS)

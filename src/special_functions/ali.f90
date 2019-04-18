@@ -1,7 +1,6 @@
 !** ALI
 REAL FUNCTION ALI(X)
   !>
-  !***
   !  Compute the logarithmic integral.
   !***
   ! **Library:**   SLATEC (FNLIB)

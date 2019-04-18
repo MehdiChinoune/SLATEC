@@ -1,7 +1,6 @@
 !** DQRFAC
 SUBROUTINE DQRFAC(M,N,A,Lda,Pivot,Ipvt,Lipvt,Sigma,Acnorm,Wa)
   !>
-  !***
   !  Subsidiary to DNLS1, DNLS1E, DNSQ and DNSQE
   !***
   ! **Library:**   SLATEC

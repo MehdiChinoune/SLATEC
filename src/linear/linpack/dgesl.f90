@@ -1,7 +1,6 @@
 !** DGESL
 SUBROUTINE DGESL(A,Lda,N,Ipvt,B,Job)
   !>
-  !***
   !  Solve the real system A*X=B or TRANS(A)*X=B using the
   !            factors computed by DGECO or DGEFA.
   !***

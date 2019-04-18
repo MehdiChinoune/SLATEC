@@ -2,7 +2,6 @@
 SUBROUTINE CDRIV2(N,T,Y,F,Tout,Mstate,Nroot,Eps,Ewt,Mint,Work,Lenw,Iwork,&
     Leniw,G,Ierflg)
   !>
-  !***
   !  The function of CDRIV2 is to solve N ordinary differential
   !            equations of the form dY(I)/dT = F(Y(I),T), given the
   !            initial conditions Y(I) = YI.  The program has options to

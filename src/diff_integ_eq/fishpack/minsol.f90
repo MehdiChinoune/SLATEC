@@ -1,7 +1,6 @@
 !** MINSOL
 SUBROUTINE MINSOL(Usol,Idmn,Zn,Zm,Pertb)
   !>
-  !***
   !  Subsidiary to SEPELI
   !***
   ! **Library:**   SLATEC

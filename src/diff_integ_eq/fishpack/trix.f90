@@ -1,7 +1,6 @@
 !** TRIX
 SUBROUTINE TRIX(Idegbr,Idegcr,M,A,B,C,Y,Tcos,D,W)
   !>
-  !***
   !  Subsidiary to GENBUN
   !***
   ! **Library:**   SLATEC

@@ -1,7 +1,6 @@
 !** DQK15W
 SUBROUTINE DQK15W(F,W,P1,P2,P3,P4,Kp,A,B,Result,Abserr,Resabs,Resasc)
   !>
-  !***
   !  To compute I = Integral of F*W over (A,B), with error
   !                           estimate
   !                       J = Integral of ABS(F*W) over (A,B)

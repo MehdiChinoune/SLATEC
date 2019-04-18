@@ -1,7 +1,6 @@
 !** DHELS
 SUBROUTINE DHELS(A,Lda,N,Q,B)
   !>
-  !***
   !  Internal routine for DGMRES.
   !***
   ! **Library:**   SLATEC (SLAP)

@@ -1,7 +1,6 @@
 !** DPCHKT
 SUBROUTINE DPCHKT(N,X,Knotyp,T)
   !>
-  !***
   !  Compute B-spline knot sequence for DPCHBS.
   !***
   ! **Library:**   SLATEC (PCHIP)

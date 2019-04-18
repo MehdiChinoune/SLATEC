@@ -1,7 +1,6 @@
 !** COSQF1
 SUBROUTINE COSQF1(N,X,W,Xh)
   !>
-  !***
   !  Compute the forward cosine transform with odd wave numbers.
   !***
   ! **Library:**   SLATEC (FFTPACK)

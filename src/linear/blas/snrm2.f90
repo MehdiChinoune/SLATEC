@@ -1,7 +1,6 @@
 !** SNRM2
 REAL FUNCTION SNRM2(N,Sx,Incx)
   !>
-  !***
   !  Compute the Euclidean length (L2 norm) of a vector.
   !***
   ! **Library:**   SLATEC (BLAS)

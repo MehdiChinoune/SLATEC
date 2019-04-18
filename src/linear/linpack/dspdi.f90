@@ -1,7 +1,6 @@
 !** DSPDI
 SUBROUTINE DSPDI(Ap,N,Kpvt,Det,Inert,Work,Job)
   !>
-  !***
   !  Compute the determinant, inertia, inverse of a real
   !            symmetric matrix stored in packed form using the factors
   !            from DSPFA.

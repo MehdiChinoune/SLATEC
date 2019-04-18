@@ -1,7 +1,6 @@
 !** CSISL
 SUBROUTINE CSISL(A,Lda,N,Kpvt,B)
   !>
-  !***
   !  Solve a complex symmetric system using the factors obtained
   !            from CSIFA.
   !***

@@ -1,7 +1,6 @@
 !** CMPCSG
 SUBROUTINE CMPCSG(N,Ijump,Fnum,Fden,A)
   !>
-  !***
   !  Subsidiary to CMGNBN
   !***
   ! **Library:**   SLATEC

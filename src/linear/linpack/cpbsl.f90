@@ -1,7 +1,6 @@
 !** CPBSL
 SUBROUTINE CPBSL(Abd,Lda,N,M,B)
   !>
-  !***
   !  Solve the complex Hermitian positive definite band system
   !            using the factors computed by CPBCO or CPBFA.
   !***

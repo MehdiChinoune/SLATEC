@@ -1,7 +1,6 @@
 !** SGBSL
 SUBROUTINE SGBSL(Abd,Lda,N,Ml,Mu,Ipvt,B,Job)
   !>
-  !***
   !  Solve the real band system A*X=B or TRANS(A)*X=B using
   !            the factors computed by SGBCO or SGBFA.
   !***

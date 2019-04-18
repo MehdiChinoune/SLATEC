@@ -1,7 +1,6 @@
 !** BESI1
 REAL FUNCTION BESI1(X)
   !>
-  !***
   !  Compute the modified (hyperbolic) Bessel function of the
   !            first kind of order one.
   !***

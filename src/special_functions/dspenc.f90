@@ -1,7 +1,6 @@
 !** DSPENC
 REAL(8) FUNCTION DSPENC(X)
   !>
-  !***
   !  Compute a form of Spence's integral due to K. Mitchell.
   !***
   ! **Library:**   SLATEC (FNLIB)

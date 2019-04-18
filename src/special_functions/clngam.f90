@@ -1,7 +1,6 @@
 !** CLNGAM
 COMPLEX FUNCTION CLNGAM(Zin)
   !>
-  !***
   !  Compute the logarithm of the absolute value of the Gamma
   !            function.
   !***

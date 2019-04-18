@@ -1,7 +1,6 @@
 !** HTRIDI
 SUBROUTINE HTRIDI(Nm,N,Ar,Ai,D,E,E2,Tau)
   !>
-  !***
   !  Reduce a complex Hermitian matrix to a real symmetric
   !            tridiagonal matrix using unitary similarity
   !            transformations.

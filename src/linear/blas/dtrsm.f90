@@ -1,7 +1,6 @@
 !** DTRSM
 SUBROUTINE DTRSM(Side,Uplo,Transa,Diag,M,N,Alpha,A,Lda,B,Ldb)
   !>
-  !***
   !  Solve one of the matrix equations.
   !***
   ! **Library:**   SLATEC (BLAS)

@@ -1,7 +1,6 @@
 !** PASS
 SUBROUTINE PASS(Lun,Icnt,Itest)
   !>
-  !***
   !  Print a PASS/FAIL message for a particular quick check
   !            test.
   !***

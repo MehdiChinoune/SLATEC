@@ -1,7 +1,6 @@
 !** ORTBAK
 SUBROUTINE ORTBAK(Nm,Low,Igh,A,Ort,M,Z)
   !>
-  !***
   !  Form the eigenvectors of a general real matrix from the
   !            eigenvectors of the upper Hessenberg matrix output from
   !            ORTHES.

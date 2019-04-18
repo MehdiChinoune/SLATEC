@@ -1,7 +1,6 @@
 !** EZFFTF
 SUBROUTINE EZFFTF(N,R,Azero,A,B,Wsave)
   !>
-  !***
   !  Compute a simplified real, periodic, fast Fourier forward
   !            transform.
   !***

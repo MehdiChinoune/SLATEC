@@ -1,7 +1,6 @@
 !** INITDS
 INTEGER FUNCTION INITDS(Os,Nos,Eta)
   !>
-  !***
   !  Determine the number of terms needed in an orthogonal
   !            polynomial series so that it meets a specified accuracy.
   !***

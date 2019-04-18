@@ -1,7 +1,6 @@
 !** QRSOLV
 SUBROUTINE QRSOLV(N,R,Ldr,Ipvt,Diag,Qtb,X,Sigma,Wa)
   !>
-  !***
   !  Subsidiary to SNLS1 and SNLS1E
   !***
   ! **Library:**   SLATEC

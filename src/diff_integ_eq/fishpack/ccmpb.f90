@@ -1,7 +1,6 @@
 !** CCMPB
 SUBROUTINE CCMPB(N,Ierror,An,Bn,Cn,B,Ah,Bh)
   !>
-  !***
   !  Subsidiary to CBLKTR
   !***
   ! **Library:**   SLATEC

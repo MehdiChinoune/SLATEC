@@ -1,7 +1,6 @@
 !** CATAN2
 COMPLEX FUNCTION CATAN2(Csn,Ccs)
   !>
-  !***
   !  Compute the complex arc tangent in the proper quadrant.
   !***
   ! **Library:**   SLATEC (FNLIB)

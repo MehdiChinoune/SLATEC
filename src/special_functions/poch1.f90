@@ -1,7 +1,6 @@
 !** POCH1
 REAL FUNCTION POCH1(A,X)
   !>
-  !***
   !  Calculate a generalization of Pochhammer's symbol starting
   !            from first order.
   !***

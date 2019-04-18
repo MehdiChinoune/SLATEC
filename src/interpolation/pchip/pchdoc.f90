@@ -1,7 +1,6 @@
 !** PCHDOC
 SUBROUTINE PCHDOC
   !>
-  !***
   !  Documentation for PCHIP, a Fortran package for piecewise
   !            cubic Hermite interpolation of data.
   !***

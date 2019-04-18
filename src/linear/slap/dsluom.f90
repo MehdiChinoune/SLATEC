@@ -2,7 +2,6 @@
 SUBROUTINE DSLUOM(N,B,X,Nelt,Ia,Ja,A,Isym,Nsave,Itol,Tol,Itmax,Iter,Err,&
     Ierr,Iunit,Rwork,Lenw,Iwork,Leniw)
   !>
-  !***
   !  Incomplete LU Orthomin Sparse Iterative Ax=b Solver.
   !            Routine to solve a general linear system  Ax = b  using
   !            the Orthomin method with Incomplete LU decomposition.

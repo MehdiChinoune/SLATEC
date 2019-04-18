@@ -1,7 +1,6 @@
 !** EI
 REAL FUNCTION EI(X)
   !>
-  !***
   !  Compute the exponential integral Ei(X).
   !***
   ! **Library:**   SLATEC (FNLIB)

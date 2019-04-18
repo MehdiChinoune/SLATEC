@@ -1,7 +1,6 @@
 !** CTRMV
 SUBROUTINE CTRMV(Uplo,Trans,Diag,N,A,Lda,X,Incx)
   !>
-  !***
   !  Multiply a complex vector by a complex triangular matrix.
   !***
   ! **Library:**   SLATEC (BLAS)

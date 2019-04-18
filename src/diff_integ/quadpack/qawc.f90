@@ -2,7 +2,6 @@
 SUBROUTINE QAWC(F,A,B,C,Epsabs,Epsrel,Result,Abserr,Neval,Ier,Limit,Lenw,&
     Last,Iwork,Work)
   !>
-  !***
   !  The routine calculates an approximation result to a
   !            Cauchy principal value I = INTEGRAL of F*W over (A,B)
   !            (W(X) = 1/((X-C), C.NE.A, C.NE.B), hopefully satisfying

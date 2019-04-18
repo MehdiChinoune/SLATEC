@@ -1,7 +1,6 @@
 !** SCASUM
 REAL FUNCTION SCASUM(N,Cx,Incx)
   !>
-  !***
   !  Compute the sum of the magnitudes of the real and
   !            imaginary elements of a complex vector.
   !***

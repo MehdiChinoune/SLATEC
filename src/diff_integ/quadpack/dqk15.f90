@@ -1,7 +1,6 @@
 !** DQK15
 SUBROUTINE DQK15(F,A,B,Result,Abserr,Resabs,Resasc)
   !>
-  !***
   !  To compute I = Integral of F over (A,B), with error
   !                           estimate
   !                       J = integral of ABS(F) over (A,B)

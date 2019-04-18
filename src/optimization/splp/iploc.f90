@@ -1,7 +1,6 @@
 !** IPLOC
 INTEGER FUNCTION IPLOC(Locc,Sx,Ix)
   !>
-  !***
   !  Subsidiary to SPLP
   !***
   ! **Library:**   SLATEC

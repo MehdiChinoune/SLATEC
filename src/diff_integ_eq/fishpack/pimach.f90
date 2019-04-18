@@ -1,7 +1,6 @@
 !** PIMACH
 REAL FUNCTION PIMACH(Dum)
   !>
-  !***
   !  Subsidiary to HSTCSP, HSTSSP and HWSCSP
   !***
   ! **Library:**   SLATEC

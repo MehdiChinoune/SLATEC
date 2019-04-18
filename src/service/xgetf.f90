@@ -1,7 +1,6 @@
 !** XGETF
 SUBROUTINE XGETF(Kontrl)
   !>
-  !***
   !  Return the current value of the error control flag.
   !***
   ! **Library:**   SLATEC (XERROR)

@@ -1,7 +1,6 @@
 !** CSYMM
 SUBROUTINE CSYMM(Side,Uplo,M,N,Alpha,A,Lda,B,Ldb,Beta,C,Ldc)
   !>
-  !***
   !  Multiply a complex general matrix by a complex symmetric
   !            matrix.
   !***

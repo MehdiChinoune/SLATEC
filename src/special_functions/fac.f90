@@ -1,7 +1,6 @@
 !** FAC
 REAL FUNCTION FAC(N)
   !>
-  !***
   !  Compute the factorial function.
   !***
   ! **Library:**   SLATEC (FNLIB)

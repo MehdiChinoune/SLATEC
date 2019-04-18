@@ -1,7 +1,6 @@
 !** CSHCH
 SUBROUTINE CSHCH(Z,Csh,Cch)
   !>
-  !***
   !  Subsidiary to CBESH and CBESK
   !***
   ! **Library:**   SLATEC

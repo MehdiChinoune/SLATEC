@@ -1,7 +1,6 @@
 !** CMLRI
 SUBROUTINE CMLRI(Z,Fnu,Kode,N,Y,Nz,Tol)
   !>
-  !***
   !  Subsidiary to CBESI and CBESK
   !***
   ! **Library:**   SLATEC

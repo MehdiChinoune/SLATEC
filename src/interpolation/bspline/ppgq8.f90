@@ -1,7 +1,6 @@
 !** PPGQ8
 SUBROUTINE PPGQ8(FUN,Ldc,C,Xi,Lxi,Kk,Id,A,B,Inppv,Err,Ans,Ierr)
   !>
-  !***
   !  Subsidiary to PFQAD
   !***
   ! **Library:**   SLATEC

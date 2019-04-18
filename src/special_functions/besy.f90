@@ -1,7 +1,6 @@
 !** BESY
 SUBROUTINE BESY(X,Fnu,N,Y)
   !>
-  !***
   !  Implement forward recursion on the three term recursion
   !            relation for a sequence of non-negative order Bessel
   !            functions Y/SUB(FNU+I-1)/(X), I=1,...,N for real, positive

@@ -1,7 +1,6 @@
 !** POIS3D
 SUBROUTINE POIS3D(Lperod,L,C1,Mperod,M,C2,Nperod,N,A,B,C,Ldimf,Mdimf,F,Ierror,W)
   !>
-  !***
   !  Solve a three-dimensional block tridiagonal linear system
   !            which arises from a finite difference approximation to a
   !            three-dimensional Poisson equation using the Fourier

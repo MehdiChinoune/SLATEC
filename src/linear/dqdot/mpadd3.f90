@@ -1,7 +1,6 @@
 !** MPADD3
 SUBROUTINE MPADD3(X,Y,S,Med,Re)
   !>
-  !***
   !  Subsidiary to DQDOTA and DQDOTI
   !***
   ! **Library:**   SLATEC

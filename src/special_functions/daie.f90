@@ -1,7 +1,6 @@
 !** DAIE
 REAL(8) FUNCTION DAIE(X)
   !>
-  !***
   !  Calculate the Airy function for a negative argument and an
   !            exponentially scaled Airy function for a non-negative
   !            argument.

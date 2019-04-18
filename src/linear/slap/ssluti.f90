@@ -1,7 +1,6 @@
 !** SSLUTI
 SUBROUTINE SSLUTI(N,B,X,Nelt,Ia,Ja,A,Isym,Rwork,Iwork)
   !>
-  !***
   !  SLAP MTSOLV for LDU Factorization.
   !            This routine acts as an interface between the SLAP generic
   !            MTSOLV calling convention and the routine that actually

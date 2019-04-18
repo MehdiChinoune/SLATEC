@@ -1,7 +1,6 @@
 !** MPSTR
 SUBROUTINE MPSTR(X,Y)
   !>
-  !***
   !  Subsidiary to DQDOTA and DQDOTI
   !***
   ! **Library:**   SLATEC

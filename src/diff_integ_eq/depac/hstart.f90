@@ -2,7 +2,6 @@
 SUBROUTINE HSTART(F,Neq,A,B,Y,Yprime,Etol,Morder,Small,Big,Spy,Pv,Yp,Sf,&
     Rpar,Ipar,H)
   !>
-  !***
   !  Subsidiary to DEABM, DEBDF and DERKF
   !***
   ! **Library:**   SLATEC

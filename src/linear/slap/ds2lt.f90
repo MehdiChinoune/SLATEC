@@ -1,7 +1,6 @@
 !** DS2LT
 SUBROUTINE DS2LT(N,Nelt,Ia,Ja,A,Isym,Nel,Iel,Jel,El)
   !>
-  !***
   !  Lower Triangle Preconditioner SLAP Set Up.
   !            Routine to store the lower triangle of a matrix stored
   !            in the SLAP Column format.

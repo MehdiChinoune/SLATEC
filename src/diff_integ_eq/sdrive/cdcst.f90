@@ -1,7 +1,6 @@
 !** CDCST
 SUBROUTINE CDCST(Maxord,Mint,Iswflg,El,Tq)
   !>
-  !***
   !  CDCST sets coefficients used by the core integrator CDSTP.
   !***
   ! **Library:**   SLATEC (SDRIVE)

@@ -1,7 +1,6 @@
 !** ZABS
 REAL(8) FUNCTION ZABS(Zr,Zi)
   !>
-  !***
   !  Subsidiary to ZBESH, ZBESI, ZBESJ, ZBESK, ZBESY, ZAIRY and
   !            ZBIRY
   !***

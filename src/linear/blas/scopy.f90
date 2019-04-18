@@ -1,7 +1,6 @@
 !** SCOPY
 SUBROUTINE SCOPY(N,Sx,Incx,Sy,Incy)
   !>
-  !***
   !  Copy a vector.
   !***
   ! **Library:**   SLATEC (BLAS)

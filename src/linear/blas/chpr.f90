@@ -1,7 +1,6 @@
 !** CHPR
 SUBROUTINE CHPR(Uplo,N,Alpha,X,Incx,Ap)
   !>
-  !***
   !  Perform the hermitian rank 1 operation.
   !***
   ! **Library:**   SLATEC (BLAS)

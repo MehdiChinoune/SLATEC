@@ -1,7 +1,6 @@
 !** RPQR79
 SUBROUTINE RPQR79(Ndeg,Coeff,Root,Ierr,Work)
   !>
-  !***
   !  Find the zeros of a polynomial with real coefficients.
   !***
   ! **Library:**   SLATEC

@@ -1,7 +1,6 @@
 !** CHICO
 SUBROUTINE CHICO(A,Lda,N,Kpvt,Rcond,Z)
   !>
-  !***
   !  Factor a complex Hermitian matrix by elimination with sym-
   !            metric pivoting and estimate the condition of the matrix.
   !***

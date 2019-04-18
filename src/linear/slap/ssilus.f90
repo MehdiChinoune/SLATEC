@@ -1,7 +1,6 @@
 !** SSILUS
 SUBROUTINE SSILUS(N,Nelt,Ia,Ja,A,Isym,Nl,Il,Jl,L,Dinv,Nu,Iu,Ju,U,Nrow,Ncol)
   !>
-  !***
   !  Incomplete LU Decomposition Preconditioner SLAP Set Up.
   !            Routine to generate the incomplete LDU decomposition of a
   !            matrix.  The unit lower triangular factor L is stored by

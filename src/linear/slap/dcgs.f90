@@ -2,7 +2,6 @@
 SUBROUTINE DCGS(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,Iter,&
     Err,Ierr,Iunit,R,R0,P,Q,U,V1,V2,Rwork,Iwork)
   !>
-  !***
   !  Preconditioned BiConjugate Gradient Squared Ax=b Solver.
   !            Routine to solve a Non-Symmetric linear system  Ax = b
   !            using the Preconditioned BiConjugate Gradient Squared

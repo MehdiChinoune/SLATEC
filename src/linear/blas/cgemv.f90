@@ -1,7 +1,6 @@
 !** CGEMV
 SUBROUTINE CGEMV(Trans,M,N,Alpha,A,Lda,X,Incx,Beta,Y,Incy)
   !>
-  !***
   !  Multiply a complex vector by a complex general matrix.
   !***
   ! **Library:**   SLATEC (BLAS)

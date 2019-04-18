@@ -5,7 +5,6 @@ CONTAINS
   !** DAVNTS
   SUBROUTINE DAVNTS(Lun,Kprint,Ipass)
     !>
-    !***
     !  Quick check for DAVINT.
     !***
     ! **Library:**   SLATEC
@@ -212,7 +211,6 @@ CONTAINS
   !** DQG8TS
   SUBROUTINE DQG8TS(Lun,Kprint,Ipass)
     !>
-    !***
     !  Quick check for DGAUS8.
     !***
     ! **Library:**   SLATEC
@@ -356,7 +354,6 @@ CONTAINS
   !** DQN79Q
   SUBROUTINE DQN79Q(Lun,Kprint,Ipass)
     !>
-    !***
     !  Quick check for DQNC79.
     !***
     ! **Library:**   SLATEC
@@ -501,7 +498,6 @@ CONTAINS
   !** DFQD1
   REAL(8) FUNCTION DFQD1(X)
     !>
-    !***
     !  Function evaluator for DQNC79 and DGAUS8 quick checks.
     !***
     ! **Library:**   SLATEC
@@ -528,7 +524,6 @@ CONTAINS
   !** DFQD2
   REAL(8) FUNCTION DFQD2(X)
     !>
-    !***
     !  Function evaluator for DQNC79 and DGAUS8 quick checks.
     !***
     ! **Library:**   SLATEC
@@ -559,7 +554,6 @@ PROGRAM TEST42
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !>
-  !***
   !  Driver for testing SLATEC subprograms
   !***
   ! **Library:**   SLATEC

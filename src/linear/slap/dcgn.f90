@@ -2,7 +2,6 @@
 SUBROUTINE DCGN(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MTTVEC,MSOLVE,Itol,Tol,&
     Itmax,Iter,Err,Ierr,Iunit,R,Z,P,Atp,Atz,Dz,Atdz,Rwork,Iwork)
   !>
-  !***
   !  Preconditioned CG Sparse Ax=b Solver for Normal Equations.
   !            Routine to solve a general linear system  Ax = b  using the
   !            Preconditioned Conjugate Gradient method applied to the

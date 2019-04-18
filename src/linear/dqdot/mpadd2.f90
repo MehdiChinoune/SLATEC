@@ -1,7 +1,6 @@
 !** MPADD2
 SUBROUTINE MPADD2(X,Y,Z,Y1,Trunc)
   !>
-  !***
   !  Subsidiary to DQDOTA and DQDOTI
   !***
   ! **Library:**   SLATEC

@@ -1,7 +1,6 @@
 !** U12LS
 SUBROUTINE U12LS(A,Mda,M,N,B,Mdb,Nb,Mode,Krank,Rnorm,H,W,Ic,Ir)
   !>
-  !***
   !  Subsidiary to LLSIA
   !***
   ! **Library:**   SLATEC

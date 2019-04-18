@@ -1,7 +1,6 @@
 !** CHFIE
 REAL FUNCTION CHFIE(X1,X2,F1,F2,D1,D2,A,B)
   !>
-  !***
   !  Evaluates integral of a single cubic for PCHIA
   !***
   ! **Library:**   SLATEC (PCHIP)

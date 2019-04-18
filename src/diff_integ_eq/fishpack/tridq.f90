@@ -1,7 +1,6 @@
 !** TRIDQ
 SUBROUTINE TRIDQ(Mr,A,B,C,Y,D)
   !>
-  !***
   !  Subsidiary to POIS3D
   !***
   ! **Library:**   SLATEC

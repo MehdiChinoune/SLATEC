@@ -1,7 +1,6 @@
 !** XERMSG
 SUBROUTINE XERMSG(Librar,Subrou,Messg,Nerr,Level)
   !>
-  !***
   !  Process error messages for SLATEC and other libraries.
   !***
   ! **Library:**   SLATEC (XERROR)

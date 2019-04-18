@@ -1,7 +1,6 @@
 !** SMOUT
 SUBROUTINE SMOUT(M,N,Lda,A,Ifmt,Idigit)
   !>
-  !***
   !  Subsidiary to FC and SBOCLS
   !***
   ! **Library:**   SLATEC

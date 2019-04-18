@@ -1,7 +1,6 @@
 !** SSPFA
 SUBROUTINE SSPFA(Ap,N,Kpvt,Info)
   !>
-  !***
   !  Factor a real symmetric matrix stored in packed form by
   !            elimination with symmetric pivoting.
   !***

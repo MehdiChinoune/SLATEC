@@ -1,7 +1,6 @@
 !** CGERC
 SUBROUTINE CGERC(M,N,Alpha,X,Incx,Y,Incy,A,Lda)
   !>
-  !***
   !  Perform conjugated rank 1 update of a complex general
   !            matrix.
   !***

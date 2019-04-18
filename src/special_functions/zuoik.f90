@@ -1,7 +1,6 @@
 !** ZUOIK
 SUBROUTINE ZUOIK(Zr,Zi,Fnu,Kode,Ikflg,N,Yr,Yi,Nuf,Tol,Elim,Alim)
   !>
-  !***
   !  Subsidiary to ZBESH, ZBESI and ZBESK
   !***
   ! **Library:**   SLATEC

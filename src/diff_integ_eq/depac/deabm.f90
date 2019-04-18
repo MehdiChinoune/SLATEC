@@ -1,7 +1,6 @@
 !** DEABM
 SUBROUTINE DEABM(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,Rpar,Ipar)
   !>
-  !***
   !  Solve an initial value problem in ordinary differential
   !            equations using an Adams-Bashforth method.
   !***

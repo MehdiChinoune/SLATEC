@@ -1,7 +1,6 @@
 !** WNLT2
 LOGICAL FUNCTION WNLT2(Me,Mend,Ir,Factor,Tau,Scalee,Wic)
   !>
-  !***
   !  Subsidiary to WNLIT
   !***
   ! **Library:**   SLATEC

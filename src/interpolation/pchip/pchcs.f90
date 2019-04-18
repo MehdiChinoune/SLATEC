@@ -1,7 +1,6 @@
 !** PCHCS
 SUBROUTINE PCHCS(Switch,N,H,Slope,D,Incfd,Ierr)
   !>
-  !***
   !  Adjusts derivative values for PCHIC
   !***
   ! **Library:**   SLATEC (PCHIP)

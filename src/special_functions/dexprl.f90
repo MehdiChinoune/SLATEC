@@ -1,7 +1,6 @@
 !** DEXPRL
 REAL(8) FUNCTION DEXPRL(X)
   !>
-  !***
   !  Calculate the relative error exponential (EXP(X)-1)/X.
   !***
   ! **Library:**   SLATEC (FNLIB)

@@ -1,7 +1,6 @@
 !** COMQR
 SUBROUTINE COMQR(Nm,N,Low,Igh,Hr,Hi,Wr,Wi,Ierr)
   !>
-  !***
   !  Compute the eigenvalues of complex upper Hessenberg matrix
   !            using the QR method.
   !***

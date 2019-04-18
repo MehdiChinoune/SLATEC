@@ -2,7 +2,6 @@
 SUBROUTINE HSTCSP(Intl,A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
     Idimf,Pertrb,Ierror,W)
   !>
-  !***
   !  Solve the standard five-point finite difference
   !            approximation on a staggered grid to the modified Helmholtz
   !            equation in spherical coordinates assuming axisymmetry

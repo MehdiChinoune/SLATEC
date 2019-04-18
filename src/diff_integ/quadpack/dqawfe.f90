@@ -3,7 +3,6 @@ SUBROUTINE DQAWFE(F,A,Omega,Integr,Epsabs,Limlst,Limit,Maxp1,Result,&
     Abserr,Neval,Ier,Rslst,Erlst,Ierlst,Lst,Alist,Blist,&
     Rlist,Elist,Iord,Nnlog,Chebmo)
   !>
-  !***
   !  The routine calculates an approximation result to a
   !            given Fourier integral
   !            I = Integral of F(X)*W(X) over (A,INFINITY)

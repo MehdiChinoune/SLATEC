@@ -2,7 +2,6 @@
 SUBROUTINE HWSCSP(Intl,Ts,Tf,M,Mbdcnd,Bdts,Bdtf,Rs,Rf,N,Nbdcnd,Bdrs,Bdrf,&
     Elmbda,F,Idimf,Pertrb,Ierror,W)
   !>
-  !***
   !  Solve a finite difference approximation to the modified
   !            Helmholtz equation in spherical coordinates assuming
   !            axisymmetry  (no dependence on longitude).

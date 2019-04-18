@@ -1,7 +1,6 @@
 !** DQWGTC
 REAL(8) FUNCTION DQWGTC(X,C,P2,P3,P4,Kp)
   !>
-  !***
   !  This function subprogram is used together with the
   !            routine DQAWC and defines the WEIGHT function.
   !***

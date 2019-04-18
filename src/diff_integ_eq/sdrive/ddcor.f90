@@ -2,7 +2,6 @@
 SUBROUTINE DDCOR(Dfdy,El,FA,H,Ierror,Impl,Ipvt,Matdim,Miter,Ml,Mu,N,Nde,&
     Nq,T,USERS,Y,Yh,Ywt,Evalfa,Save1,Save2,A,D,Jstate)
   !>
-  !***
   !  Subroutine DDCOR computes corrections to the Y array.
   !***
   ! **Library:**   SLATEC (SDRIVE)

@@ -1,7 +1,6 @@
 !** SSPR
 SUBROUTINE SSPR(Uplo,N,Alpha,X,Incx,Ap)
   !>
-  !***
   !  Performs the symmetric rank 1 operation.
   !***
   ! **Library:**   SLATEC (BLAS)

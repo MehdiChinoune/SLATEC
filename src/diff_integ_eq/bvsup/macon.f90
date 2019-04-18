@@ -1,7 +1,6 @@
 !** MACON
 SUBROUTINE MACON
   !>
-  !***
   !  Subsidiary to BVSUP
   !***
   ! **Library:**   SLATEC

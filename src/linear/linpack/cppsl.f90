@@ -1,7 +1,6 @@
 !** CPPSL
 SUBROUTINE CPPSL(Ap,N,B)
   !>
-  !***
   !  Solve the complex Hermitian positive definite system using
   !            the factors computed by CPPCO or CPPFA.
   !***

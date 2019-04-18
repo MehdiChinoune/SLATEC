@@ -1,7 +1,6 @@
 !** SORTH
 SUBROUTINE SORTH(Vnew,V,Hes,N,Ll,Ldhes,Kmp,Snormw)
   !>
-  !***
   !  Internal routine for SGMRES.
   !***
   ! **Library:**   SLATEC (SLAP)

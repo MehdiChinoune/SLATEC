@@ -1,7 +1,6 @@
 !** COMHES
 SUBROUTINE COMHES(Nm,N,Low,Igh,Ar,Ai,Intt)
   !>
-  !***
   !  Reduce a complex general matrix to complex upper Hessenberg
   !            form using stabilized elementary similarity
   !            transformations.

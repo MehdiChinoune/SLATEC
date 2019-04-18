@@ -1,7 +1,6 @@
 !** XGETUA
 SUBROUTINE XGETUA(Iunita,N)
   !>
-  !***
   !  Return unit number(s) to which error messages are being
   !            sent.
   !***

@@ -2,7 +2,6 @@
 SUBROUTINE HWSCRT(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
     Idimf,Pertrb,Ierror,W)
   !>
-  !***
   !  Solves the standard five-point finite difference
   !            approximation to the Helmholtz equation in Cartesian
   !            coordinates.

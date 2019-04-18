@@ -2,7 +2,6 @@
 SUBROUTINE QAWCE(F,A,B,C,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,&
     Alist,Blist,Rlist,Elist,Iord,Last)
   !>
-  !***
   !  The routine calculates an approximation result to a
   !            CAUCHY PRINCIPAL VALUE I = Integral of F*W over (A,B)
   !            (W(X) = 1/(X-C), (C.NE.A, C.NE.B), hopefully satisfying

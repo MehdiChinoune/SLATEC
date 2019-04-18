@@ -1,7 +1,6 @@
 !** LA05CS
 SUBROUTINE LA05CS(A,Ind,Ia,N,Ip,Iw,W,G,U,Mm)
   !>
-  !***
   !  Subsidiary to SPLP
   !***
   ! **Library:**   SLATEC

@@ -1,7 +1,6 @@
 !** DPSIXN
 REAL(8) FUNCTION DPSIXN(N)
   !>
-  !***
   !  Subsidiary to DEXINT
   !***
   ! **Library:**   SLATEC

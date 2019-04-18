@@ -1,7 +1,6 @@
 !** MPNZR
 SUBROUTINE MPNZR(Rs,Re,Z,Trunc)
   !>
-  !***
   !  Subsidiary to DQDOTA and DQDOTI
   !***
   ! **Library:**   SLATEC

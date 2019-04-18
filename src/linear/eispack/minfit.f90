@@ -1,7 +1,6 @@
 !** MINFIT
 SUBROUTINE MINFIT(Nm,M,N,A,W,Ip,B,Ierr,Rv1)
   !>
-  !***
   !  Compute the singular value decomposition of a rectangular
   !            matrix and solve the related linear least squares problem.
   !***

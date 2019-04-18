@@ -1,7 +1,6 @@
 !** COSDG
 REAL FUNCTION COSDG(X)
   !>
-  !***
   !  Compute the cosine of an argument in degrees.
   !***
   ! **Library:**   SLATEC (FNLIB)

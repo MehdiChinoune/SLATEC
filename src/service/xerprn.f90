@@ -1,7 +1,6 @@
 !** XERPRN
 SUBROUTINE XERPRN(Prefix,Npref,Messg,Nwrap)
   !>
-  !***
   !  Print error messages processed by XERMSG.
   !***
   ! **Library:**   SLATEC (XERROR)

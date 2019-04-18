@@ -1,7 +1,6 @@
 !** CSPDI
 SUBROUTINE CSPDI(Ap,N,Kpvt,Det,Work,Job)
   !>
-  !***
   !  Compute the determinant and inverse of a complex symmetric
   !            matrix stored in packed form using the factors from CSPFA.
   !***

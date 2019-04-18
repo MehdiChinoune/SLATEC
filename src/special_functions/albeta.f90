@@ -1,7 +1,6 @@
 !** ALBETA
 REAL FUNCTION ALBETA(A,B)
   !>
-  !***
   !  Compute the natural logarithm of the complete Beta
   !            function.
   !***

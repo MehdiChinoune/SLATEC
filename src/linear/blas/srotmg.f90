@@ -1,7 +1,6 @@
 !** SROTMG
 SUBROUTINE SROTMG(Sd1,Sd2,Sx1,Sy1,Sparam)
   !>
-  !***
   !  Construct a modified Givens transformation.
   !***
   ! **Library:**   SLATEC (BLAS)

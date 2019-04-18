@@ -1,7 +1,6 @@
 !** CACON
 SUBROUTINE CACON(Z,Fnu,Kode,Mr,N,Y,Nz,Rl,Fnul,Tol,Elim,Alim)
   !>
-  !***
   !  Subsidiary to CBESH and CBESK
   !***
   ! **Library:**   SLATEC

@@ -1,7 +1,6 @@
 !** BSPDOC
 SUBROUTINE BSPDOC
   !>
-  !***
   !  Documentation for BSPLINE, a package of subprograms for
   !            working with piecewise polynomial functions
   !            in B-representation.

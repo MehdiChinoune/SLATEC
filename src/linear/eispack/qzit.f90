@@ -1,7 +1,6 @@
 !** QZIT
 SUBROUTINE QZIT(Nm,N,A,B,Eps1,Matz,Z,Ierr)
   !>
-  !***
   !  The second step of the QZ algorithm for generalized
   !            eigenproblems.  Accepts an upper Hessenberg and an upper
   !            triangular matrix and reduces the former to

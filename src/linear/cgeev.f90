@@ -1,7 +1,6 @@
 !** CGEEV
 SUBROUTINE CGEEV(A,Lda,N,E,V,Ldv,Work,Job,Info)
   !>
-  !***
   !  Compute the eigenvalues and, optionally, the eigenvectors
   !            of a complex general matrix.
   !***

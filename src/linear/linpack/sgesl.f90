@@ -1,7 +1,6 @@
 !** SGESL
 SUBROUTINE SGESL(A,Lda,N,Ipvt,B,Job)
   !>
-  !***
   !  Solve the real system A*X=B or TRANS(A)*X=B using the
   !            factors of SGECO or SGEFA.
   !***

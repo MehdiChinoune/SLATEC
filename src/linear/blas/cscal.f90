@@ -1,7 +1,6 @@
 !** CSCAL
 SUBROUTINE CSCAL(N,Ca,Cx,Incx)
   !>
-  !***
   !  Multiply a vector by a constant.
   !***
   ! **Library:**   SLATEC (BLAS)

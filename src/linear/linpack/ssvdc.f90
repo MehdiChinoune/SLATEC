@@ -1,7 +1,6 @@
 !** SSVDC
 SUBROUTINE SSVDC(X,Ldx,N,P,S,E,U,Ldu,V,Ldv,Work,Job,Info)
   !>
-  !***
   !  Perform the singular value decomposition of a rectangular
   !            matrix.
   !***

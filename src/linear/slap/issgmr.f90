@@ -3,7 +3,6 @@ INTEGER FUNCTION ISSGMR(N,B,X,Xl,Nelt,Ia,Ja,A,Isym,MSOLVE,Nmsl,Itol,Tol,&
     Itmax,Iter,Err,Iunit,R,Z,Dz,Rwork,Iwork,Rnrm,Bnrm,&
     Sb,Sx,Jscal,Kmp,Lgmr,Maxl,Maxlp1,V,Q,Snormw,Prod,R0nrm,Hes,Jpre)
   !>
-  !***
   !  Generalized Minimum Residual Stop Test.
   !            This routine calculates the stop test for the Generalized
   !            Minimum RESidual (GMRES) iteration scheme.  It returns a

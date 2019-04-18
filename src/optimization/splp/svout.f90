@@ -1,7 +1,6 @@
 !** SVOUT
 SUBROUTINE SVOUT(N,Sx,Ifmt,Idigit)
   !>
-  !***
   !  Subsidiary to SPLP
   !***
   ! **Library:**   SLATEC

@@ -3,7 +3,6 @@ SUBROUTINE STEPS(F,Neqn,Y,X,H,Eps,Wt,Start,Hold,K,Kold,Crash,Phi,P,Yp,Psi,&
     Alpha,Beta,Sig,V,W,G,Phase1,Ns,Nornd,Ksteps,Twou,Fouru,&
     Xold,Kprev,Ivc,Iv,Kgi,Gi,Rpar,Ipar)
   !>
-  !***
   !  Integrate a system of first order ordinary differential
   !            equations one step.
   !***

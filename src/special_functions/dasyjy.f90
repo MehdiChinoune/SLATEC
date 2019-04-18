@@ -1,7 +1,6 @@
 !** DASYJY
 SUBROUTINE DASYJY(FUNJY,X,Fnu,Flgjy,In,Y,Wk,Iflw)
   !>
-  !***
   !  Subsidiary to DBESJ and DBESY
   !***
   ! **Library:**   SLATEC

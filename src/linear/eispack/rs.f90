@@ -1,7 +1,6 @@
 !** RS
 SUBROUTINE RS(Nm,N,A,W,Matz,Z,Fv1,Fv2,Ierr)
   !>
-  !***
   !  Compute the eigenvalues and, optionally, the eigenvectors
   !            of a real symmetric matrix.
   !***

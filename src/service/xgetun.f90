@@ -1,7 +1,6 @@
 !** XGETUN
 SUBROUTINE XGETUN(Iunit)
   !>
-  !***
   !  Return the (first) output file to which error messages
   !            are being sent.
   !***

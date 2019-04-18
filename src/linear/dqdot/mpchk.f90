@@ -1,7 +1,6 @@
 !** MPCHK
 SUBROUTINE MPCHK(I,J)
   !>
-  !***
   !  Subsidiary to DQDOTA and DQDOTI
   !***
   ! **Library:**   SLATEC

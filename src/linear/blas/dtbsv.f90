@@ -1,7 +1,6 @@
 !** DTBSV
 SUBROUTINE DTBSV(Uplo,Trans,Diag,N,K,A,Lda,X,Incx)
   !>
-  !***
   !  Solve one of the systems of equations.
   !***
   ! **Library:**   SLATEC (BLAS)

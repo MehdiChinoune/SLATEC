@@ -1,7 +1,6 @@
 !** BSPLVN
 SUBROUTINE BSPLVN(T,Jhigh,Indexx,X,Ileft,Vnikx)
   !>
-  !***
   !  Subsidiary to FC
   !***
   ! **Library:**   SLATEC

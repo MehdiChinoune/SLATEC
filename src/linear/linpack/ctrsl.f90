@@ -1,7 +1,6 @@
 !** CTRSL
 SUBROUTINE CTRSL(T,Ldt,N,B,Job,Info)
   !>
-  !***
   !  Solve a system of the form  T*X=B or CTRANS(T)*X=B, where
   !            T is a triangular matrix.  Here CTRANS(T) is the conjugate
   !            transpose.

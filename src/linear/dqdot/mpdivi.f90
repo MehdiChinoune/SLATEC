@@ -1,7 +1,6 @@
 !** MPDIVI
 SUBROUTINE MPDIVI(X,Iy,Z)
   !>
-  !***
   !  Subsidiary to DQDOTA and DQDOTI
   !***
   ! **Library:**   SLATEC

@@ -1,7 +1,6 @@
 !** GAMIC
 REAL FUNCTION GAMIC(A,X)
   !>
-  !***
   !  Calculate the complementary incomplete Gamma function.
   !***
   ! **Library:**   SLATEC (FNLIB)

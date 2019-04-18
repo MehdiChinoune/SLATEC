@@ -2,7 +2,6 @@
 INTEGER FUNCTION ISSBCG(N,B,X,Nelt,Ia,Ja,A,Isym,MSOLVE,Itol,Tol,Itmax,&
     Iter,Err,Ierr,Iunit,R,Z,P,Rr,Zz,Pp,Dz,Rwork,Iwork,Ak,Bk,Bnrm,Solnrm)
   !>
-  !***
   !  Preconditioned BiConjugate Gradient Stop Test.
   !            This routine calculates the stop test for the BiConjugate
   !            Gradient iteration scheme.  It returns a non-zero if the

@@ -1,7 +1,6 @@
 !** DBNDAC
 SUBROUTINE DBNDAC(G,Mdg,Nb,Ip,Ir,Mt,Jt)
   !>
-  !***
   !  Compute the LU factorization of a  banded matrices using
   !            sequential accumulation of rows of the data matrix.
   !            Exactly one right-hand side vector is permitted.

@@ -1,7 +1,6 @@
 !** DDANRM
 REAL(8) FUNCTION DDANRM(Neq,V,Wt,Rpar,Ipar)
   !>
-  !***
   !  Compute vector norm for DDASSL.
   !***
   ! **Library:**   SLATEC (DASSL)

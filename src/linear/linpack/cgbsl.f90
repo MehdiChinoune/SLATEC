@@ -1,7 +1,6 @@
 !** CGBSL
 SUBROUTINE CGBSL(Abd,Lda,N,Ml,Mu,Ipvt,B,Job)
   !>
-  !***
   !  Solve the complex band system A*X=B or CTRANS(A)*X=B using
   !            the factors computed by CGBCO or CGBFA.
   !***

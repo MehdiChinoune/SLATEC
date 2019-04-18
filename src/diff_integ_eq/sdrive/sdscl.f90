@@ -1,7 +1,6 @@
 !** SDSCL
 SUBROUTINE SDSCL(Hmax,N,Nq,Rmax,H,Rc,Rh,Yh)
   !>
-  !***
   !  Subroutine SDSCL rescales the YH array whenever the step
   !            size is changed.
   !***

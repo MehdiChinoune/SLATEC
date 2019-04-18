@@ -1,7 +1,6 @@
 !** DXNRMP
 SUBROUTINE DXNRMP(Nu,Mu1,Mu2,Darg,Mode,Dpn,Ipn,Isig,Ierror)
   !>
-  !***
   !  Compute normalized Legendre polynomials.
   !***
   ! **Library:**   SLATEC

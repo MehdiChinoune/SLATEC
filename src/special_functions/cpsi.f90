@@ -1,7 +1,6 @@
 !** CPSI
 COMPLEX FUNCTION CPSI(Zin)
   !>
-  !***
   !  Compute the Psi (or Digamma) function.
   !***
   ! **Library:**   SLATEC (FNLIB)

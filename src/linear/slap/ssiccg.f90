@@ -2,7 +2,6 @@
 SUBROUTINE SSICCG(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
     Iunit,Rwork,Lenw,Iwork,Leniw)
   !>
-  !***
   !  Incomplete Cholesky Conjugate Gradient Sparse Ax=b Solver.
   !            Routine to solve a symmetric positive definite linear
   !            system  Ax = b  using the incomplete Cholesky

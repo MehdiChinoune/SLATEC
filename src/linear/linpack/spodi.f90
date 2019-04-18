@@ -1,7 +1,6 @@
 !** SPODI
 SUBROUTINE SPODI(A,Lda,N,Det,Job)
   !>
-  !***
   !  Compute the determinant and inverse of a certain real
   !            symmetric positive definite matrix using the factors
   !            computed by SPOCO, SPOFA or SQRDC.

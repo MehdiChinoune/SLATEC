@@ -1,7 +1,6 @@
 !** DSMMTI
 SUBROUTINE DSMMTI(N,B,X,Nelt,Ia,Ja,A,Isym,Rwork,Iwork)
   !>
-  !***
   !  SLAP MSOLVE for LDU Factorization of Normal Equations.
   !            This routine acts as an interface between the SLAP generic
   !            MMTSLV calling convention and the routine that actually

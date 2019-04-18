@@ -1,7 +1,6 @@
 !** CGERU
 SUBROUTINE CGERU(M,N,Alpha,X,Incx,Y,Incy,A,Lda)
   !>
-  !***
   !  Perform unconjugated rank 1 update of a complex general
   !            matrix.
   !***

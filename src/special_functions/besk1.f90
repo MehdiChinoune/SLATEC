@@ -1,7 +1,6 @@
 !** BESK1
 REAL FUNCTION BESK1(X)
   !>
-  !***
   !  Compute the modified (hyperbolic) Bessel function of the
   !            third kind of order one.
   !***

@@ -1,7 +1,6 @@
 !** BVDER
 SUBROUTINE BVDER(X,Y,Yp,G,Ipar)
   !>
-  !***
   !  Subsidiary to BVSUP
   !***
   ! **Library:**   SLATEC

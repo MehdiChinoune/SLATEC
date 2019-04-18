@@ -1,7 +1,6 @@
 !** CSROOT
 SUBROUTINE CSROOT(Xr,Xi,Yr,Yi)
   !>
-  !***
   !  Compute the complex square root of a complex number.
   !***
   ! **Library:**   SLATEC

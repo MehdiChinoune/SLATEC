@@ -1,7 +1,6 @@
 !** DXPQNU
 SUBROUTINE DXPQNU(Nu1,Nu2,Mu,Theta,Id,Pqa,Ipqa,Ierror)
   !>
-  !***
   !  To compute the values of Legendre functions for DXLEGF.
   !            This subroutine calculates initial values of P or Q using
   !            power series, then performs forward nu-wise recurrence to

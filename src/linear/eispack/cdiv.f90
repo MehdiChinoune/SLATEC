@@ -1,7 +1,6 @@
 !** CDIV
 SUBROUTINE CDIV(Ar,Ai,Br,Bi,Cr,Ci)
   !>
-  !***
   !  Compute the complex quotient of two complex numbers.
   !***
   ! **Library:**   SLATEC

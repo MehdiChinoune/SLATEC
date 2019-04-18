@@ -1,7 +1,6 @@
 !** DSYR2K
 SUBROUTINE DSYR2K(Uplo,Trans,N,K,Alpha,A,Lda,B,Ldb,Beta,C,Ldc)
   !>
-  !***
   !  Perform one of the symmetric rank 2k operations.
   !***
   ! **Library:**   SLATEC (BLAS)

@@ -5,7 +5,6 @@ CONTAINS
   !** DNSQQK
   SUBROUTINE DNSQQK(Lun,Kprint,Ipass)
     !>
-    !***
     !  Quick check for DNSQE and DNSQ.
     !***
     ! **Library:**   SLATEC
@@ -115,7 +114,6 @@ CONTAINS
   !** DSOSFN
   REAL(8) FUNCTION DSOSFN(X,K)
     !>
-    !***
     !  Function evaluator for DSOS quick check.
     !***
     ! **Library:**   SLATEC
@@ -151,7 +149,6 @@ CONTAINS
   !** DSOSQX
   SUBROUTINE DSOSQX(Lun,Kprint,Ipass)
     !>
-    !***
     !  Quick check for DSOS.
     !***
     ! **Library:**   SLATEC
@@ -245,7 +242,6 @@ CONTAINS
   !** DQFCN2
   SUBROUTINE DQFCN2(N,X,Fvec,Iflag)
     !>
-    !***
     !  Evaluate function used in DNSQE.
     !***
     ! **Library:**   SLATEC
@@ -282,7 +278,6 @@ CONTAINS
   !** DQJAC2
   SUBROUTINE DQJAC2(N,X,Fvec,Fjac,Ldfjac,Iflag)
     !>
-    !***
     ! **Library:**   SLATEC
     !***
     ! **Keywords:**  QUICK CHECK
@@ -319,7 +314,6 @@ PROGRAM TEST36
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !>
-  !***
   !  Driver for testing SLATEC subprograms
   !***
   ! **Library:**   SLATEC

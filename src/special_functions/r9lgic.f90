@@ -1,7 +1,6 @@
 !** R9LGIC
 REAL FUNCTION R9LGIC(A,X,Alx)
   !>
-  !***
   !  Compute the log complementary incomplete Gamma function
   !            for large X and for A .LE. X.
   !***

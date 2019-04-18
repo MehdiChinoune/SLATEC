@@ -1,7 +1,6 @@
 !** DMOUT
 SUBROUTINE DMOUT(M,N,Lda,A,Ifmt,Idigit)
   !>
-  !***
   !  Subsidiary to DBOCLS and DFC
   !***
   ! **Library:**   SLATEC

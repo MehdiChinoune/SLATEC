@@ -1,7 +1,6 @@
 !** SSYR2K
 SUBROUTINE SSYR2K(Uplo,Trans,N,K,Alpha,A,Lda,B,Ldb,Beta,C,Ldc)
   !>
-  !***
   !  Perform symmetric rank 2k update of a real symmetric matrix
   !***
   ! **Library:**   SLATEC (BLAS)

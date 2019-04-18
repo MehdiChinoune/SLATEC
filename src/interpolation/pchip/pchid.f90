@@ -1,7 +1,6 @@
 !** PCHID
 REAL FUNCTION PCHID(N,X,F,D,Incfd,Skip,Ia,Ib,Ierr)
   !>
-  !***
   !  Evaluate the definite integral of a piecewise cubic
   !            Hermite function over an interval whose endpoints are data
   !            points.

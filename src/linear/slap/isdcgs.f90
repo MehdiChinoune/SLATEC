@@ -2,7 +2,6 @@
 INTEGER FUNCTION ISDCGS(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,&
     Itmax,Iter,Err,Ierr,Iunit,R,R0,P,Q,U,V1,V2,Rwork,Iwork,Ak,Bk,Bnrm,Solnrm)
   !>
-  !***
   !  Preconditioned BiConjugate Gradient Squared Stop Test.
   !            This routine calculates the stop test for the BiConjugate
   !            Gradient Squared iteration scheme.  It returns a non-zero

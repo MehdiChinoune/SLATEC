@@ -1,7 +1,6 @@
 !** LSI
 SUBROUTINE LSI(W,Mdw,Ma,Mg,N,Prgopt,X,Rnorm,Mode,Ws,Ip)
   !>
-  !***
   !  Subsidiary to LSEI
   !***
   ! **Library:**   SLATEC

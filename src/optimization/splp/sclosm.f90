@@ -1,7 +1,6 @@
 !** SCLOSM
 SUBROUTINE SCLOSM(Ipage)
   !>
-  !***
   !  Subsidiary to SPLP
   !***
   ! **Library:**   SLATEC

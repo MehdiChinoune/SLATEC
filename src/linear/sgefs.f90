@@ -1,7 +1,6 @@
 !** SGEFS
 SUBROUTINE SGEFS(A,Lda,N,V,Itask,Ind,Work,Iwork)
   !>
-  !***
   !  Solve a general system of linear equations.
   !***
   ! **Library:**   SLATEC

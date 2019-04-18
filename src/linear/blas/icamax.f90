@@ -1,7 +1,6 @@
 !** ICAMAX
 INTEGER FUNCTION ICAMAX(N,Cx,Incx)
   !>
-  !***
   !  Find the smallest index of the component of a complex
   !            vector having the maximum sum of magnitudes of real
   !            and imaginary parts.

@@ -1,7 +1,6 @@
 !** D9B0MP
 SUBROUTINE D9B0MP(X,Ampl,Theta)
   !>
-  !***
   !  Evaluate the modulus and phase for the J0 and Y0 Bessel
   !            functions.
   !***

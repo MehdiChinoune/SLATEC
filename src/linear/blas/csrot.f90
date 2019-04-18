@@ -1,7 +1,6 @@
 !** CSROT
 SUBROUTINE CSROT(N,Cx,Incx,Cy,Incy,C,S)
   !>
-  !***
   !  Apply a plane Givens rotation.
   !***
   ! **Library:**   SLATEC (BLAS)

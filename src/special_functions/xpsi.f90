@@ -1,7 +1,6 @@
 !** XPSI
 REAL FUNCTION XPSI(A,Ipsik,Ipsix)
   !>
-  !***
   !  To compute values of the Psi function for XLEGF.
   !***
   ! **Library:**   SLATEC

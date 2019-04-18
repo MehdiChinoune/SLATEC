@@ -5,7 +5,6 @@ CONTAINS
   !** QC6A
   SUBROUTINE QC6A(Lun,Kprint,Ipass)
     !>
-    !***
     !  Test subroutine AAAAAA.
     !***
     ! **Library:**   SLATEC
@@ -102,7 +101,6 @@ PROGRAM TEST01
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !>
-  !***
   !  Driver for testing SLATEC subprogram  AAAAAA
   !***
   ! **Library:**   SLATEC

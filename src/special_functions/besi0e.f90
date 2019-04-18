@@ -1,7 +1,6 @@
 !** BESI0E
 REAL FUNCTION BESI0E(X)
   !>
-  !***
   !  Compute the exponentially scaled modified (hyperbolic)
   !            Bessel function of the first kind of order zero.
   !***

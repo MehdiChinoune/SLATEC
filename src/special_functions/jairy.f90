@@ -1,7 +1,6 @@
 !** JAIRY
 SUBROUTINE JAIRY(X,Rx,C,Ai,Dai)
   !>
-  !***
   !  Subsidiary to BESJ and BESY
   !***
   ! **Library:**   SLATEC

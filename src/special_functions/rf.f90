@@ -1,7 +1,6 @@
 !** RF
 REAL FUNCTION RF(X,Y,Z,Ier)
   !>
-  !***
   !  Compute the incomplete or complete elliptic integral of the
   !            1st kind.  For X, Y, and Z non-negative and at most one of
   !            them zero, RF(X,Y,Z) = Integral from zero to infinity of

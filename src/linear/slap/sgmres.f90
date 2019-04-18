@@ -2,7 +2,6 @@
 SUBROUTINE SGMRES(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,&
     Iter,Err,Ierr,Iunit,Sb,Sx,Rgwk,Lrgw,Igwk,Ligw,Rwork,Iwork)
   !>
-  !***
   !  Preconditioned GMRES Iterative Sparse Ax=b Solver.
   !            This routine uses the generalized minimum residual
   !            (GMRES) method with preconditioning to solve

@@ -1,7 +1,6 @@
 !** SNLS1E
 SUBROUTINE SNLS1E(FCN,Iopt,M,N,X,Fvec,Tol,Nprint,Info,Iw,Wa,Lwa)
   !>
-  !***
   !  An easy-to-use code which minimizes the sum of the squares
   !            of M nonlinear functions in N variables by a modification
   !            of the Levenberg-Marquardt algorithm.

@@ -1,7 +1,6 @@
 !** CROTG
 SUBROUTINE CROTG(Ca,Cb,C,S)
   !>
-  !***
   !  Construct a Givens transformation.
   !***
   ! **Library:**   SLATEC (BLAS)

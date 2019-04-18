@@ -2,7 +2,6 @@
 SUBROUTINE ZUNHJ(Zr,Zi,Fnu,Ipmtr,Tol,Phir,Phii,Argr,Argi,Zeta1r,Zeta1i,&
     Zeta2r,Zeta2i,Asumr,Asumi,Bsumr,Bsumi)
   !>
-  !***
   !  Subsidiary to ZBESI and ZBESK
   !***
   ! **Library:**   SLATEC

@@ -1,7 +1,6 @@
 !** COSGEN
 SUBROUTINE COSGEN(N,Ijump,Fnum,Fden,A)
   !>
-  !***
   !  Subsidiary to GENBUN
   !***
   ! **Library:**   SLATEC

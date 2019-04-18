@@ -1,7 +1,6 @@
 !** COST
 SUBROUTINE COST(N,X,Wsave)
   !>
-  !***
   !  Compute the cosine transform of a real, even sequence.
   !***
   ! **Library:**   SLATEC (FFTPACK)

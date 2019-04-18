@@ -1,7 +1,6 @@
 !** RSP
 SUBROUTINE RSP(Nm,N,Nv,A,W,Matz,Z,Fv1,Fv2,Ierr)
   !>
-  !***
   !  Compute the eigenvalues and, optionally, the eigenvectors
   !            of a real symmetric matrix packed into a one dimensional
   !            array.

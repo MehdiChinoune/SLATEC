@@ -2,7 +2,6 @@
 SUBROUTINE DSDGMR(N,B,X,Nelt,Ia,Ja,A,Isym,Nsave,Itol,Tol,Itmax,Iter,Err,&
     Ierr,Iunit,Rwork,Lenw,Iwork,Leniw)
   !>
-  !***
   !  Diagonally scaled GMRES iterative sparse Ax=b solver.
   !            This routine uses the generalized minimum residual
   !            (GMRES) method with diagonal scaling to solve possibly

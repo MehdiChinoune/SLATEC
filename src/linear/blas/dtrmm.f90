@@ -1,7 +1,6 @@
 !** DTRMM
 SUBROUTINE DTRMM(Side,Uplo,Transa,Diag,M,N,Alpha,A,Lda,B,Ldb)
   !>
-  !***
   !  Perform one of the matrix-matrix operations.
   !***
   ! **Library:**   SLATEC (BLAS)

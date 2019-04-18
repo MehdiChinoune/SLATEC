@@ -1,7 +1,6 @@
 !** CPEVLR
 SUBROUTINE CPEVLR(N,M,A,X,C)
   !>
-  !***
   !  Subsidiary to CPZERO
   !***
   ! **Library:**   SLATEC

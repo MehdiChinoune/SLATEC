@@ -1,7 +1,6 @@
 !** SNBFA
 SUBROUTINE SNBFA(Abe,Lda,N,Ml,Mu,Ipvt,Info)
   !>
-  !***
   !  Factor a real band matrix by elimination.
   !***
   ! **Library:**   SLATEC

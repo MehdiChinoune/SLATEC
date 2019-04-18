@@ -1,7 +1,6 @@
 !** DPCHCM
 SUBROUTINE DPCHCM(N,X,F,D,Incfd,Skip,Ismon,Ierr)
   !>
-  !***
   !  Check a cubic Hermite function for monotonicity.
   !***
   ! **Library:**   SLATEC (PCHIP)

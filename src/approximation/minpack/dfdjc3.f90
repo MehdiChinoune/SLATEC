@@ -1,7 +1,6 @@
 !** DFDJC3
 SUBROUTINE DFDJC3(FCN,M,N,X,Fvec,Fjac,Ldfjac,Iflag,Epsfcn,Wa)
   !>
-  !***
   !  Subsidiary to DNLS1 and DNLS1E
   !***
   ! **Library:**   SLATEC

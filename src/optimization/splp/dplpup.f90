@@ -2,7 +2,6 @@
 SUBROUTINE DPLPUP(DUSRMT,Mrelas,Nvars,Prgopt,Dattrv,Bl,Bu,Ind,Info,Amat,&
     Imat,Sizeup,Asmall,Abig)
   !>
-  !***
   !  Subsidiary to DSPLP
   !***
   ! **Library:**   SLATEC

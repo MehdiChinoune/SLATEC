@@ -1,7 +1,6 @@
 !** CMGNBN
 SUBROUTINE CMGNBN(Nperod,N,Mperod,M,A,B,C,Idimy,Y,Ierror,W)
   !>
-  !***
   !  Solve a complex block tridiagonal linear system of
   !            equations by a cyclic reduction algorithm.
   !***

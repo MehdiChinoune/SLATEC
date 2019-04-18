@@ -1,7 +1,6 @@
 !** DROT
 SUBROUTINE DROT(N,Dx,Incx,Dy,Incy,Dc,Ds)
   !>
-  !***
   !  Apply a plane Givens rotation.
   !***
   ! **Library:**   SLATEC (BLAS)

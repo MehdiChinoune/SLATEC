@@ -1,7 +1,6 @@
 !** ZUNK1
 SUBROUTINE ZUNK1(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Tol,Elim,Alim)
   !>
-  !***
   !  Subsidiary to ZBESK
   !***
   ! **Library:**   SLATEC

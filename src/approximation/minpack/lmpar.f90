@@ -1,7 +1,6 @@
 !** LMPAR
 SUBROUTINE LMPAR(N,R,Ldr,Ipvt,Diag,Qtb,Delta,Par,X,Sigma,Wa1,Wa2)
   !>
-  !***
   !  Subsidiary to SNLS1 and SNLS1E
   !***
   ! **Library:**   SLATEC

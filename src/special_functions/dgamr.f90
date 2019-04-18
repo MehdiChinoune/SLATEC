@@ -1,7 +1,6 @@
 !** DGAMR
 REAL(8) FUNCTION DGAMR(X)
   !>
-  !***
   !  Compute the reciprocal of the Gamma function.
   !***
   ! **Library:**   SLATEC (FNLIB)

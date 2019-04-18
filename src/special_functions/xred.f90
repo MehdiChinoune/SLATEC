@@ -1,7 +1,6 @@
 !** XRED
 SUBROUTINE XRED(X,Ix,Ierror)
   !>
-  !***
   !  To provide single-precision floating-point arithmetic
   !            with an extended exponent range.
   !***

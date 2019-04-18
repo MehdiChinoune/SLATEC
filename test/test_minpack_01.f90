@@ -5,7 +5,6 @@ CONTAINS
   !** SNSQQK
   SUBROUTINE SNSQQK(Lun,Kprint,Ipass)
     !>
-    !***
     !  Quick check for SNSQE and SNSQ.
     !***
     ! **Library:**   SLATEC
@@ -116,7 +115,6 @@ CONTAINS
   !** SOSFNC
   REAL FUNCTION SOSFNC(X,K)
     !>
-    !***
     !  Function evaluator for SOS quick check.
     !***
     ! **Library:**   SLATEC
@@ -152,7 +150,6 @@ CONTAINS
   !** SOSNQX
   SUBROUTINE SOSNQX(Lun,Kprint,Ipass)
     !>
-    !***
     !  Quick check for SOS.
     !***
     ! **Library:**   SLATEC
@@ -246,7 +243,6 @@ CONTAINS
   !** SQFCN2
   SUBROUTINE SQFCN2(N,X,Fvec,Iflag)
     !>
-    !***
     !  Evaluate function used in SNSQE.
     !***
     ! **Library:**   SLATEC
@@ -282,7 +278,6 @@ CONTAINS
   !** SQJAC2
   SUBROUTINE SQJAC2(N,X,Fvec,Fjac,Ldfjac,Iflag)
     !>
-    !***
     !  Evaluate full Jacobian for SNSQE test.
     !***
     ! **Library:**   SLATEC
@@ -321,7 +316,6 @@ PROGRAM TEST35
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !>
-  !***
   !  Driver for testing SLATEC subprograms
   !***
   ! **Library:**   SLATEC

@@ -1,7 +1,6 @@
 !** DASYIK
 SUBROUTINE DASYIK(X,Fnu,Kode,Flgik,Ra,Arg,In,Y)
   !>
-  !***
   !  Subsidiary to DBESI and DBESK
   !***
   ! **Library:**   SLATEC

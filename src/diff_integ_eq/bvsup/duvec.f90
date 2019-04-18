@@ -1,7 +1,6 @@
 !** DUVEC
 SUBROUTINE DUVEC(X,Y,Yp)
   !>
-  !***
   !  Dummy routine for DBVSUP quick check.
   !***
   ! **Library:**   SLATEC

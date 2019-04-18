@@ -2,7 +2,6 @@
 SUBROUTINE HWSSSP(Ts,Tf,M,Mbdcnd,Bdts,Bdtf,Ps,Pf,N,Nbdcnd,Bdps,Bdpf,&
     Elmbda,F,Idimf,Pertrb,Ierror,W)
   !>
-  !***
   !  Solve a finite difference approximation to the Helmholtz
   !            equation in spherical coordinates and on the surface of the
   !            unit sphere (radius of 1).

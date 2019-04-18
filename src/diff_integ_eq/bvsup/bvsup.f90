@@ -2,7 +2,6 @@
 SUBROUTINE BVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
     Nfc,Igofx,Re,Ae,Iflag,Work,Ndw,Iwork,Ndiw,Neqivp)
   !>
-  !***
   !  Solve a linear two-point boundary value problem using
   !            superposition coupled with an orthonormalization procedure
   !            and a variable-step integration scheme.

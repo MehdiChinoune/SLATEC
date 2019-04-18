@@ -1,7 +1,6 @@
 !** SSICO
 SUBROUTINE SSICO(A,Lda,N,Kpvt,Rcond,Z)
   !>
-  !***
   !  Factor a symmetric matrix by elimination with symmetric
   !            pivoting and estimate the condition number of the matrix.
   !***

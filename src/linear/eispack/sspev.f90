@@ -1,7 +1,6 @@
 !** SSPEV
 SUBROUTINE SSPEV(A,N,E,V,Ldv,Work,Job,Info)
   !>
-  !***
   !  Compute the eigenvalues and, optionally, the eigenvectors
   !            of a real symmetric matrix stored in packed form.
   !***

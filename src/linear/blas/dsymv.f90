@@ -1,7 +1,6 @@
 !** DSYMV
 SUBROUTINE DSYMV(Uplo,N,Alpha,A,Lda,X,Incx,Beta,Y,Incy)
   !>
-  !***
   !  Perform the matrix-vector operation.
   !***
   ! **Library:**   SLATEC (BLAS)

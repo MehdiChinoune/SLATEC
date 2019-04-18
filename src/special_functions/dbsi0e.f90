@@ -1,7 +1,6 @@
 !** DBSI0E
 REAL(8) FUNCTION DBSI0E(X)
   !>
-  !***
   !  Compute the exponentially scaled modified (hyperbolic)
   !            Bessel function of the first kind of order zero.
   !***

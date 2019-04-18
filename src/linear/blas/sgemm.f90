@@ -1,7 +1,6 @@
 !** SGEMM
 SUBROUTINE SGEMM(Transa,Transb,M,N,K,Alpha,A,Lda,B,Ldb,Beta,C,Ldc)
   !>
-  !***
   !  Multiply a real general matrix by a real general matrix.
   !***
   ! **Library:**   SLATEC (BLAS)

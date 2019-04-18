@@ -1,7 +1,6 @@
 !** CGBMV
 SUBROUTINE CGBMV(Trans,M,N,Kl,Ku,Alpha,A,Lda,X,Incx,Beta,Y,Incy)
   !>
-  !***
   !  Multiply a complex vector by a complex general band matrix.
   !***
   ! **Library:**   SLATEC (BLAS)

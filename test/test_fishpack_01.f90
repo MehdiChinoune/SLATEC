@@ -5,7 +5,6 @@ CONTAINS
   !** QXBLKT
   SUBROUTINE QXBLKT(Lun,Kprint,Ipass)
     !>
-    !***
     ! **Library:**   SLATEC
     !***
     ! **Keywords:**  QUICK CHECK
@@ -168,7 +167,6 @@ CONTAINS
   !** QXCRT
   SUBROUTINE QXCRT(Lun,Kprint,Ipass)
     !>
-    !***
     ! **Library:**   SLATEC
     !***
     ! **Keywords:**  QUICK CHECK
@@ -333,7 +331,6 @@ CONTAINS
   !** QXCSP
   SUBROUTINE QXCSP(Lun,Kprint,Ipass)
     !>
-    !***
     ! **Library:**   SLATEC
     !***
     ! **Keywords:**  QUICK CHECK
@@ -538,7 +535,6 @@ CONTAINS
   !** QXCYL
   SUBROUTINE QXCYL(Lun,Kprint,Ipass)
     !>
-    !***
     ! **Library:**   SLATEC
     !***
     ! **Keywords:**  QUICK CHECK
@@ -711,7 +707,6 @@ CONTAINS
   !** QXGBUN
   SUBROUTINE QXGBUN(Lun,Kprint,Ipass)
     !>
-    !***
     ! **Library:**   SLATEC
     !***
     ! **Keywords:**  QUICK CHECK
@@ -866,7 +861,6 @@ CONTAINS
   !** QXPLR
   SUBROUTINE QXPLR(Lun,Kprint,Ipass)
     !>
-    !***
     ! **Library:**   SLATEC
     !***
     ! **Keywords:**  QUICK CHECK
@@ -1029,7 +1023,6 @@ CONTAINS
   !** QXSSP
   SUBROUTINE QXSSP(Lun,Kprint,Ipass)
     !>
-    !***
     ! **Library:**   SLATEC
     !***
     ! **Keywords:**  QUICK CHECK
@@ -1174,7 +1167,6 @@ PROGRAM TEST50
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !>
-  !***
   !  Driver for testing SLATEC subprograms
   !***
   ! **Library:**   SLATEC

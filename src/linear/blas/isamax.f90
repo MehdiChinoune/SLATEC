@@ -1,7 +1,6 @@
 !** ISAMAX
 INTEGER FUNCTION ISAMAX(N,Sx,Incx)
   !>
-  !***
   !  Find the smallest index of that component of a vector
   !            having the maximum magnitude.
   !***

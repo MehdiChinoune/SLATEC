@@ -1,7 +1,6 @@
 !** DLSI
 SUBROUTINE DLSI(W,Mdw,Ma,Mg,N,Prgopt,X,Rnorm,Mode,Ws,Ip)
   !>
-  !***
   !  Subsidiary to DLSEI
   !***
   ! **Library:**   SLATEC

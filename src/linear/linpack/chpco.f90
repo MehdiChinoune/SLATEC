@@ -1,7 +1,6 @@
 !** CHPCO
 SUBROUTINE CHPCO(Ap,N,Kpvt,Rcond,Z)
   !>
-  !***
   !  Factor a complex Hermitian matrix stored in packed form by
   !            elimination with symmetric pivoting and estimate the
   !            condition number of the matrix.

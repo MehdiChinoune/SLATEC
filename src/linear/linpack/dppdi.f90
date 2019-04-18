@@ -1,7 +1,6 @@
 !** DPPDI
 SUBROUTINE DPPDI(Ap,N,Det,Job)
   !>
-  !***
   !  Compute the determinant and inverse of a real symmetric
   !            positive definite matrix using factors from DPPCO or DPPFA.
   !***

@@ -1,7 +1,6 @@
 !** CHIFA
 SUBROUTINE CHIFA(A,Lda,N,Kpvt,Info)
   !>
-  !***
   !  Factor a complex Hermitian matrix by elimination
   !            (symmetric pivoting).
   !***

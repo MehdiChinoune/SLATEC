@@ -1,7 +1,6 @@
 !** STRMM
 SUBROUTINE STRMM(Side,Uplo,Transa,Diag,M,N,Alpha,A,Lda,B,Ldb)
   !>
-  !***
   !  Multiply a real general matrix by a real triangular matrix.
   !***
   ! **Library:**   SLATEC (BLAS)

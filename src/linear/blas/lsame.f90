@@ -1,7 +1,6 @@
 !** LSAME
 LOGICAL FUNCTION LSAME(Ca,Cb)
   !>
-  !***
   !  Test two characters to determine if they are the same
   !            letter, except for case.
   !***

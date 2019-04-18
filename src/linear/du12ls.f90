@@ -1,7 +1,6 @@
 !** DU12LS
 SUBROUTINE DU12LS(A,Mda,M,N,B,Mdb,Nb,Mode,Krank,Rnorm,H,W,Ic,Ir)
   !>
-  !***
   !  Subsidiary to DLLSIA
   !***
   ! **Library:**   SLATEC

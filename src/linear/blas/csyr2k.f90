@@ -1,7 +1,6 @@
 !** CSYR2K
 SUBROUTINE CSYR2K(Uplo,Trans,N,K,Alpha,A,Lda,B,Ldb,Beta,C,Ldc)
   !>
-  !***
   !  Perform symmetric rank 2k update of a complex symmetric
   !            matrix.
   !***

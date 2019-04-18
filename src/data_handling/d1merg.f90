@@ -1,7 +1,6 @@
 !** D1MERG
 SUBROUTINE D1MERG(Tcos,I1,M1,I2,M2,I3)
   !>
-  !***
   !  Merge two strings of ascending double precision numbers.
   !***
   ! **Library:**   SLATEC

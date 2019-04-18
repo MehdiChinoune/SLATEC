@@ -1,7 +1,6 @@
 !** BALBAK
 SUBROUTINE BALBAK(Nm,N,Low,Igh,Scalee,M,Z)
   !>
-  !***
   !  Form the eigenvectors of a real general matrix from the
   !            eigenvectors of matrix output from BALANC.
   !***

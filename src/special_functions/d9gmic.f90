@@ -1,7 +1,6 @@
 !** D9GMIC
 REAL(8) FUNCTION D9GMIC(A,X,Alx)
   !>
-  !***
   !  Compute the complementary incomplete Gamma function for A
   !            near a negative integer and X small.
   !***

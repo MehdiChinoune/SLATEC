@@ -1,7 +1,6 @@
 !** DX4
 SUBROUTINE DX4(U,Idmn,I,J,Uxxx,Uxxxx)
   !>
-  !***
   !  Subsidiary to SEPX4
   !***
   ! **Library:**   SLATEC

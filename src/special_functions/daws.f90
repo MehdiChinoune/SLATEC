@@ -1,7 +1,6 @@
 !** DAWS
 REAL FUNCTION DAWS(X)
   !>
-  !***
   !  Compute Dawson's function.
   !***
   ! **Library:**   SLATEC (FNLIB)

@@ -1,7 +1,6 @@
 !** DBSKNU
 SUBROUTINE DBSKNU(X,Fnu,Kode,N,Y,Nz)
   !>
-  !***
   !  Subsidiary to DBESK
   !***
   ! **Library:**   SLATEC

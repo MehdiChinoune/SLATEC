@@ -1,7 +1,6 @@
 !** U11LS
 SUBROUTINE U11LS(A,Mda,M,N,Ub,Db,Mode,Np,Krank,Ksure,H,W,Eb,Ic,Ir)
   !>
-  !***
   !  Subsidiary to LLSIA
   !***
   ! **Library:**   SLATEC

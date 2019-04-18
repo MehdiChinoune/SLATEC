@@ -1,7 +1,6 @@
 !** SSLUI
 SUBROUTINE SSLUI(N,B,X,Nelt,Ia,Ja,A,Isym,Rwork,Iwork)
   !>
-  !***
   !  SLAP MSOLVE for LDU Factorization.
   !            This routine acts as an interface between the SLAP generic
   !            MSOLVE calling convention and the routine that actually

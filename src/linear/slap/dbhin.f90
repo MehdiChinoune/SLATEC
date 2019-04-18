@@ -1,7 +1,6 @@
 !** DBHIN
 SUBROUTINE DBHIN(N,Nelt,Ia,Ja,A,Isym,Soln,Rhs,Iunit,Job)
   !>
-  !***
   !  Read a Sparse Linear System in the Boeing/Harwell Format.
   !            The matrix is read in and if the right hand side is also
   !            present in the input file then it too is read in.  The

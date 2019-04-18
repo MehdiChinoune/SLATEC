@@ -1,7 +1,6 @@
 !** EISDOC
 SUBROUTINE EISDOC
   !>
-  !***
   !  Documentation for EISPACK, a collection of subprograms for
   !            solving matrix eigen-problems.
   !***

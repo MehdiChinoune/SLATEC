@@ -1,7 +1,6 @@
 !** DTOUT
 SUBROUTINE DTOUT(N,Nelt,Ia,Ja,A,Isym,Soln,Rhs,Iunit,Job)
   !>
-  !***
   !  Write out SLAP Triad Format Linear System.
   !            Routine to write out a SLAP Triad format matrix and right
   !            hand side and solution to the system, if known.

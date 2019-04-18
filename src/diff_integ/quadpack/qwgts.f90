@@ -1,7 +1,6 @@
 !** QWGTS
 REAL FUNCTION QWGTS(X,A,B,Alfa,Beta,Integr)
   !>
-  !***
   !  This function subprogram is used together with the
   !            routine QAWS and defines the WEIGHT function.
   !***

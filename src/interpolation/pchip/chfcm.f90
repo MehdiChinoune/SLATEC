@@ -1,7 +1,6 @@
 !** CHFCM
 INTEGER FUNCTION CHFCM(D1,D2,Delta)
   !>
-  !***
   !  Check a single cubic for monotonicity.
   !***
   ! **Library:**   SLATEC (PCHIP)

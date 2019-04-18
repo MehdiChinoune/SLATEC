@@ -1,7 +1,6 @@
 !** TQL1
 SUBROUTINE TQL1(N,D,E,Ierr)
   !>
-  !***
   !  Compute the eigenvalues of symmetric tridiagonal matrix by
   !            the QL method.
   !***

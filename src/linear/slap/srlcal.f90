@@ -1,7 +1,6 @@
 !** SRLCAL
 SUBROUTINE SRLCAL(N,Kmp,Ll,Maxl,V,Q,Rl,Snormw,Prod,R0nrm)
   !>
-  !***
   !  Internal routine for SGMRES.
   !***
   ! **Library:**   SLATEC (SLAP)

@@ -1,7 +1,6 @@
 !** D1MACH
 REAL(8) FUNCTION D1MACH(I)
   !>
-  !***
   !  Return floating point machine dependent constants.
   !***
   ! **Library:**   SLATEC

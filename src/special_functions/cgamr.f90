@@ -1,7 +1,6 @@
 !** CGAMR
 COMPLEX FUNCTION CGAMR(Z)
   !>
-  !***
   !  Compute the reciprocal of the Gamma function.
   !***
   ! **Library:**   SLATEC (FNLIB)

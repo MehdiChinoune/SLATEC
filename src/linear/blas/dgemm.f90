@@ -1,7 +1,6 @@
 !** DGEMM
 SUBROUTINE DGEMM(Transa,Transb,M,N,K,Alpha,A,Lda,B,Ldb,Beta,C,Ldc)
   !>
-  !***
   !  Perform one of the matrix-matrix operations.
   !***
   ! **Library:**   SLATEC (BLAS)

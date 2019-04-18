@@ -1,7 +1,6 @@
 !** DCSEVL
 REAL(8) FUNCTION DCSEVL(X,Cs,N)
   !>
-  !***
   !  Evaluate a Chebyshev series.
   !***
   ! **Library:**   SLATEC (FNLIB)

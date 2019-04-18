@@ -1,7 +1,6 @@
 !** ORTRAN
 SUBROUTINE ORTRAN(Nm,N,Low,Igh,A,Ort,Z)
   !>
-  !***
   !  Accumulate orthogonal similarity transformations in the
   !            reduction of real general matrix by ORTHES.
   !***

@@ -1,7 +1,6 @@
 !** CQRSL
 SUBROUTINE CQRSL(X,Ldx,N,K,Qraux,Y,Qy,Qty,B,Rsd,Xb,Job,Info)
   !>
-  !***
   !  Apply the output of CQRDC to compute coordinate transfor-
   !            mations, projections, and least squares solutions.
   !***
