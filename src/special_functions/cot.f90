@@ -37,7 +37,7 @@ REAL FUNCTION COT(X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920618  Removed space from variable names.  (RWC, WRB)
-
+  USE service, ONLY : XERMSG, R1MACH
   REAL ainty, ainty2, prodbg, X, y, yrem
   INTEGER ifn
   INTEGER, SAVE :: nterms

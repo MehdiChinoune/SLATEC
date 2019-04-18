@@ -84,7 +84,7 @@ SUBROUTINE SSIEV(A,Lda,N,E,Work,Job,Info)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
-
+  USE service, ONLY : XERMSG
   INTEGER i, j
   INTEGER Info, Job, Lda, N
   REAL A(Lda,*), E(*), Work(*)

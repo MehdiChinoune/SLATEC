@@ -29,7 +29,7 @@ SUBROUTINE CUNK2(Z,Fnu,Kode,Mr,N,Y,Nz,Tol,Elim,Alim)
   !* REVISION HISTORY  (YYMMDD)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
-
+  USE service, ONLY : R1MACH
   INTEGER i, ib, iflag, ifn, il, in, inu, iuf, k, kdflg, kflag, &
     kk, Kode, Mr, N, nai, ndai, nw, Nz, idum, j, ipard, ic
   COMPLEX ai, arg(2), asum(2), bsum(2), cfn, ck, crsc, cs, cscl, csgn, cspn, &

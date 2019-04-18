@@ -214,7 +214,7 @@ SUBROUTINE QAWFE(F,A,Omega,Integr,Epsabs,Limlst,Limit,Maxp1,Result,Abserr,&
   !   891009  Removed unreferenced variable.  (WRB)
   !   891009  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
-
+  USE service, ONLY : R1MACH
   INTEGER last, Limlst, momcom
   INTEGER Ier, Ierlst(*), Integr, Iord(*), ktmin, l, Lst, Limit, ll, &
     Maxp1, nev, Neval, Nnlog(*), nres, numrl2

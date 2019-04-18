@@ -1,6 +1,5 @@
 !** DX
 SUBROUTINE DX(U,Idmn,I,J,Uxxx,Uxxxx)
-  USE SPLPCM
   !>
   !***
   !  Subsidiary to SEPELI
@@ -28,7 +27,7 @@ SUBROUTINE DX(U,Idmn,I,J,Uxxx,Uxxxx)
   !   801001  DATE WRITTEN
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
-
+  USE SPLPCM, ONLY : DLX4, KSWx, TDLx3, K
   INTEGER I, Idmn, J
   REAL U(Idmn,*), Uxxx, Uxxxx
   !* FIRST EXECUTABLE STATEMENT  DX

@@ -36,7 +36,7 @@ SUBROUTINE DWNLIT(W,Mdw,M,N,L,Ipivot,Itype,H,Scalee,Rnorm,Idope,Dope,Done)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   900604  DP version created from SP version. .  (RWC)
-
+  USE linear, ONLY : DCOPY, DH12, DROTM, DROTMG, DSCAL, DSWAP, IDAMAX
   INTEGER Idope(*), Ipivot(*), Itype(*), L, M, Mdw, N
   REAL(8) :: Dope(*), H(*), Rnorm, Scalee(*), W(Mdw,*)
   LOGICAL Done

@@ -36,7 +36,7 @@ COMPLEX FUNCTION CATAN2(Csn,Ccs)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
-
+  USE service, ONLY : XERMSG
   COMPLEX Csn, Ccs
   REAL, PARAMETER :: pi = 3.14159265358979323846E0
   !* FIRST EXECUTABLE STATEMENT  CATAN2

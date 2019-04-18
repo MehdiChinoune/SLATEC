@@ -1,6 +1,5 @@
 !** MPOVFL
 SUBROUTINE MPOVFL(X)
-  USE MPCOM
   !>
   !***
   !  Subsidiary to DQDOTA and DQDOTI
@@ -38,7 +37,7 @@ SUBROUTINE MPOVFL(X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   !   930124  Increased Array size in MPCON for SUN -r8.  (RWC)
-
+  USE MPCOM, ONLY : LUN
   INTEGER X(*)
   !* FIRST EXECUTABLE STATEMENT  MPOVFL
   CALL MPCHK(1,4)

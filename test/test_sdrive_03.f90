@@ -1,11 +1,9 @@
 MODULE TEST47_MOD
-  use slatec
   IMPLICIT NONE
 
 CONTAINS
   !** CDQCK
   SUBROUTINE CDQCK(Lun,Kprint,Ipass)
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for SLATEC routines CDRIV1, CDRIV2 and CDRIV3.
@@ -39,7 +37,7 @@ CONTAINS
     !* REVISION HISTORY  (YYMMDD)
     !   890405  DATE WRITTEN
     !   890405  Revised to meet SLATEC standards.
-
+    USE slatec, ONLY : CDRIV1, CDRIV2, CDRIV3, R1MACH, XERCLR
     REAL eps, t, tout
     INTEGER ierflg, Ipass, Kprint, leniw, leniwx, lenw, lenwx, Lun, mint, &
       mstate, nde, nfe, nje, nstate, nstep, nx
@@ -418,7 +416,6 @@ CONTAINS
   END SUBROUTINE CDQCK
   !** CDF
   SUBROUTINE CDF(N,T,Y,Yp)
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for SLATEC routines CDRIV1, CDRIV2 and CDRIV3.
@@ -459,8 +456,9 @@ CONTAINS
 END MODULE TEST47_MOD
 !** TEST47
 PROGRAM TEST47
-  USE TEST47_MOD
-  use slatec
+  USE TEST47_MOD, ONLY : CDQCK
+  USE slatec, ONLY : I1MACH, XSETF, XSETUN, XERMAX
+  USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !>
   !***

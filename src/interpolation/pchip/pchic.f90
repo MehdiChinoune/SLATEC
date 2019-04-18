@@ -207,7 +207,7 @@ SUBROUTINE PCHIC(Ic,Vc,Switch,N,X,F,D,Incfd,Wk,Nwk,Ierr)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920429  Revised format and order of references.  (WRB,FNF)
-
+  USE service, ONLY : XERMSG
   !  Programming notes:
   !
   !     To produce a double precision version, simply:

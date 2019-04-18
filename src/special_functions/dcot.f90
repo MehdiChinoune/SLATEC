@@ -37,7 +37,7 @@ REAL(8) FUNCTION DCOT(X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920618  Removed space from variable names.  (RWC, WRB)
-
+  USE service, ONLY : XERMSG, D1MACH
   INTEGER ifn
   REAL(8) :: X, ainty, ainty2, y, yrem, prodbg
   INTEGER, SAVE :: nterms

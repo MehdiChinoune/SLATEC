@@ -31,7 +31,7 @@ SUBROUTINE ZACAI(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Rl,Tol,Elim,Alim)
   !* REVISION HISTORY  (YYMMDD)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
-
+  USE service, ONLY : D1MACH
   !     COMPLEX CSGN,CSPN,C1,C2,Y,Z,ZN,CY
   INTEGER inu, iuf, Kode, Mr, N, nn, nw, Nz
   REAL(8) :: Alim, arg, ascle, az, csgnr, csgni, cspnr, cspni, &

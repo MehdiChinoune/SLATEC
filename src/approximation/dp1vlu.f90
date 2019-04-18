@@ -64,7 +64,7 @@ SUBROUTINE DP1VLU(L,Nder,X,Yfit,Yp,A)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-
+  USE service, ONLY : XERMSG
   INTEGER i, ic, ilo, in, inp1, iup, k1, k1i, k2, k3, k3p1, &
     k3pn, k4, k4p1, k4pn, kc, L, lm1, lp1, maxord, n, Nder, ndo, ndp1, nord
   REAL(8) :: A(*), cc, dif, val, X, Yfit, Yp(*)

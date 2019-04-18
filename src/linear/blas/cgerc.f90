@@ -89,7 +89,7 @@ SUBROUTINE CGERC(M,N,Alpha,X,Incx,Y,Incy,A,Lda)
   !   861022  DATE WRITTEN
   !   910605  Modified to meet SLATEC prologue standards.  Only comment
   !           lines were modified.  (BKS)
-
+  USE service, ONLY : XERBLA
   !     .. Scalar Arguments ..
   COMPLEX Alpha
   INTEGER Incx, Incy, Lda, M, N

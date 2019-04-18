@@ -1,6 +1,5 @@
 !** MGSBV
 SUBROUTINE MGSBV(M,N,A,Ia,Niv,Iflag,S,P,Ip,Inhomo,V,W,Wcnd)
-  USE ML, ONLY : EPS, INDpvt, NFCc, SRU
   !>
   !***
   !  Subsidiary to BVSUP
@@ -69,7 +68,8 @@ SUBROUTINE MGSBV(M,N,A,Ia,Niv,Iflag,S,P,Ip,Inhomo,V,W,Wcnd)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
-
+  USE ML, ONLY : EPS, INDpvt, NFCc, SRU
+  USE linear, ONLY : SDOT
   INTEGER i, Ia, Iflag, Inhomo, Ip(*), ip1, ix, iz, j, jk, jp, jq, jy, jz, k, kd, &
     kj, kp, l, lix, lr, M, m2, N, Niv, nivn, nmnr, nn, np1, nr, nrm1
   REAL A(Ia,*), dot, P(*), pjp, psave, ry, S(*), sv, t, V(*), vl, &

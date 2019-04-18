@@ -2,7 +2,6 @@
 SUBROUTINE SPLPMN(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
     Primal,Duals,Amat,Csc,Colnrm,Erd,Erp,Basmat,Wr,Rz,Rg,&
     Rprim,Rhs,Ww,Lmx,Lbm,Ibasis,Ibb,Imat,Ibrc,Ipr,Iwr)
-  USE LA05DS
   !>
   !***
   !  Subsidiary to SPLP
@@ -40,7 +39,9 @@ SUBROUTINE SPLPMN(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900328  Added TYPE section.  (WRB)
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
-
+  USE LA05DS, ONLY : LP
+  USE service, ONLY : XERMSG
+  USE linear, ONLY : SCOPY, SASUM, SDOT
   INTEGER i, ibas, ienter, ileave, Info, iopt, ipage, iplace, itlp, j, jstrt, k, &
     key, Lbm, Lmx, lpg, lpr, lpr1, Mrelas, n20046, n20058, n20080, n20098, n20119, &
     n20172, n20206, n20247, n20252, n20271, n20276, n20283, n20290, nerr, np, &

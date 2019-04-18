@@ -75,7 +75,7 @@ REAL(8) FUNCTION DBVALU(T,A,N,K,Ideriv,X,Inbv,Work)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-
+  USE service, ONLY : XERMSG
   !
   INTEGER i, Ideriv, iderp1, ihi, ihmkmj, ilo, imk, imkpj, Inbv, &
     ipj, ip1, ip1mj, j, jj, j1, j2, K, kmider, kmj, km1, kpk, mflag, N

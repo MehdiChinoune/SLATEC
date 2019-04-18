@@ -28,7 +28,7 @@ SUBROUTINE CACON(Z,Fnu,Kode,Mr,N,Y,Nz,Rl,Fnul,Tol,Elim,Alim)
   !* REVISION HISTORY  (YYMMDD)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
-
+  USE service, ONLY : R1MACH
   INTEGER i, inu, iuf, kflag, Kode, Mr, N, nn, nw, Nz
   COMPLEX ck, cs, cscl, cscr, csgn, cspn, css(3), csr(3), c1, c2, &
     rz, sc1, sc2, st, s1, s2, Y(N), Z, zn, cy(2)

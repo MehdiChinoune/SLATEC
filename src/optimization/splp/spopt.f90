@@ -37,7 +37,7 @@ SUBROUTINE SPOPT(Prgopt,Mrelas,Nvars,Info,Csc,Ibasis,Ropt,Intopt,Lopt)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900328  Added TYPE section.  (WRB)
-
+  USE service, ONLY : XERMSG, R1MACH
   INTEGER i, iadbig, ictmax, ictopt, idg, Info, iopt, ipagef, &
     isave, itbrc, itest, j, key, kprint, last, lds, lprg, &
     Mrelas, mxitlp, n20043

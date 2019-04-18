@@ -1,11 +1,9 @@
 MODULE TEST33_MOD
-  use slatec
   IMPLICIT NONE
 
 CONTAINS
   !** DFDTRU
   SUBROUTINE DFDTRU(X,F,D)
-    IMPLICIT NONE
     !>
     !***
     !  Compute exact function values for DEVCHK.
@@ -50,7 +48,6 @@ CONTAINS
   END SUBROUTINE DFDTRU
   !** DEVCHK
   SUBROUTINE DEVCHK(Lout,Kprint,Npts,Xev,Fev,Dev,Fev2,Fail)
-    IMPLICIT NONE
     !>
     !***
     !  Test evaluation accuracy of DCHFDV and DCHFEV for DPCHQ1.
@@ -116,7 +113,7 @@ CONTAINS
     !           RS 6000.  (WRB)
     !   910819  Changed argument to RAND function from a D.P. zero to a
     !           S.P. zero.  (WRB)
-
+    USE slatec, ONLY : D1MACH, DCHFDV, DCHFEV, RAND
     !
     !  Declare arguments.
     !
@@ -401,7 +398,6 @@ CONTAINS
   END SUBROUTINE DEVCHK
   !** DEVERK
   SUBROUTINE DEVERK(Lout,Kprint,Fail)
-    IMPLICIT NONE
     !>
     !***
     !  Test error returns from DPCHIP evaluators for DPCHQ1.
@@ -444,7 +440,8 @@ CONTAINS
     !   900322  Made miscellaneous cosmetic changes.  (FNF)
     !   910708  Minor modifications in use of KPRINT.  (WRB)
     !   930504  Removed parens from constants in WRITE statements.  (FNF)
-
+    USE slatec, ONLY : DCHFDV, DCHFEV, DPCHFD, DPCHFE, XERDMP, XGETF, XSETF
+    USE common_mod, ONLY : COMP
     !
     !  Declare arguments.
     !
@@ -455,7 +452,7 @@ CONTAINS
     !
     INTEGER i, ierr, kontrl, nerr, next(2)
     REAL(8) :: d(10), dum(1), f(10), temp, x(10)
-    LOGICAL COMP, skip
+    LOGICAL skip
     !  INITIALIZE.
     INTEGER, PARAMETER :: N = 10
     !* FIRST EXECUTABLE STATEMENT  DEVERK
@@ -563,7 +560,6 @@ CONTAINS
   END SUBROUTINE DEVERK
   !** DEVPCK
   SUBROUTINE DEVPCK(Lout,Kprint,X,Y,F,Fx,Fy,Xe,Ye,Fe,De,Fe2,Fail)
-    IMPLICIT NONE
     !>
     !***
     !  Test usage of increment argument in DPCHFD and DPCHFE for
@@ -626,7 +622,7 @@ CONTAINS
     !              line length.
     !   910708  Minor modifications in use of KPRINT.  (WRB)
     !   930317  Improved output formats.  (FNF)
-
+    USE slatec, ONLY : D1MACH, DPCHFD, DPCHFE
     !
     !  Declare arguments.
     !
@@ -909,7 +905,6 @@ CONTAINS
   END SUBROUTINE DEVPCK
   !** DPCHQ1
   SUBROUTINE DPCHQ1(Lun,Kprint,Ipass)
-    IMPLICIT NONE
     !>
     !***
     !  Test the PCHIP evaluators DCHFDV, DCHFEV, DPCHFD, DPCHFE.
@@ -1045,7 +1040,6 @@ CONTAINS
   END SUBROUTINE DPCHQ1
   !** DPCHQ2
   SUBROUTINE DPCHQ2(Lun,Kprint,Ipass)
-    IMPLICIT NONE
     !>
     !***
     !  Test the PCHIP integrators DPCHIA and DPCHID.
@@ -1105,7 +1099,7 @@ CONTAINS
     !   901130  Added 1P's to formats; changed to allow KPRINT.gt.3.  (FNF)
     !   910708  Minor modifications in use of KPRINT.  (WRB)
     !   930317  Improved output formats.  (FNF)
-
+    USE slatec, ONLY : D1MACH, DPCHIA
     !
     !  Declare arguments.
     !
@@ -1239,7 +1233,6 @@ CONTAINS
   END SUBROUTINE DPCHQ2
   !** DPCHQ3
   SUBROUTINE DPCHQ3(Lun,Kprint,Ipass)
-    IMPLICIT NONE
     !>
     !***
     !  Test the PCHIP interpolators DPCHIC, DPCHIM, DPCHSP.
@@ -1311,7 +1304,8 @@ CONTAINS
     !           3. Added 1P's to formats.
     !   910708  Minor modifications in use of KPRINT.  (WRB)
     !   930317  Improved output formats.  (FNF)
-
+    USE slatec, ONLY : D1MACH, DPCHIC, DPCHIM, DPCHSP
+    USE common_mod, ONLY : COMP
     !
     !*Internal Notes:
     !
@@ -1325,7 +1319,6 @@ CONTAINS
     !  Declare arguments.
     !
     INTEGER Lun, Kprint, Ipass
-    LOGICAL COMP
     !
     !  Declare variables.
     !
@@ -1572,7 +1565,6 @@ CONTAINS
   END SUBROUTINE DPCHQ3
   !** DPCHQ4
   SUBROUTINE DPCHQ4(Lun,Kprint,Ipass)
-    IMPLICIT NONE
     !>
     !***
     !  Test the PCHIP monotonicity checker DPCHCM.
@@ -1631,7 +1623,7 @@ CONTAINS
     !   900322  Added declarations so all variables are declared.  (FNF)
     !   910708  Minor modifications in use of KPRINT.  (WRB)
     !   930317  Improved output formats.  (FNF)
-
+    USE slatec, ONLY : DPCHCM
     !
     !*Internal Notes:
     !
@@ -1829,7 +1821,6 @@ CONTAINS
   END SUBROUTINE DPCHQ4
   !** DPCHQ5
   SUBROUTINE DPCHQ5(Lun,Kprint,Ipass)
-    IMPLICIT NONE
     !>
     !***
     !  Test the PCH to B-spline conversion routine DPCHBS.
@@ -1881,7 +1872,7 @@ CONTAINS
     !   900430  Produced double precision version.
     !   900501  Corrected declarations.
     !   930317  Improved output formats.  (FNF)
-
+    USE slatec, ONLY : DBVALU, DPCHBS, D1MACH
     !
     !*Internal Notes:
     !  TOL  is the tolerance to use for quantities that should only
@@ -2033,8 +2024,9 @@ CONTAINS
 END MODULE TEST33_MOD
 !** TEST33
 PROGRAM TEST33
-  USE TEST33_MOD
-  use slatec
+  USE TEST33_MOD, ONLY : DPCHQ1, DPCHQ2, DPCHQ3, DPCHQ4, DPCHQ5
+  USE slatec, ONLY : I1MACH, XSETF, XSETUN, XERMAX
+  USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !>
   !***

@@ -1,7 +1,6 @@
 !** ISSBCG
 INTEGER FUNCTION ISSBCG(N,B,X,Nelt,Ia,Ja,A,Isym,MSOLVE,Itol,Tol,Itmax,&
     Iter,Err,Ierr,Iunit,R,Z,P,Rr,Zz,Pp,Dz,Rwork,Iwork,Ak,Bk,Bnrm,Solnrm)
-  USE SSLBLK
   !>
   !***
   !  Preconditioned BiConjugate Gradient Stop Test.
@@ -180,7 +179,8 @@ INTEGER FUNCTION ISSBCG(N,B,X,Nelt,Ia,Ja,A,Isym,MSOLVE,Itol,Tol,Itmax,&
   !   920930  Corrected to not print AK,BK when ITER=0.  (FNF)
   !   921026  Changed 1.0E10 to R1MACH(2).  (FNF)
   !   921113  Corrected C***CATEGORY line.  (FNF)
-
+  USE SSLBLK, ONLY : SOLn
+  USE service, ONLY : R1MACH
   !     .. Scalar Arguments ..
   REAL Ak, Bk, Bnrm, Err, Solnrm, Tol
   INTEGER Ierr, Isym, Iter, Itmax, Itol, Iunit, N, Nelt

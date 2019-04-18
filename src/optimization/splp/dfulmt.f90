@@ -40,7 +40,7 @@ SUBROUTINE DFULMT(I,J,Aij,Indcat,Prgopt,Dattrv,Iflag)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900328  Added TYPE section.  (WRB)
-
+  USE service, ONLY : XERMSG
   INTEGER I, Indcat, J, key, level, lp, nerr, next
   REAL(8) :: Aij, Dattrv(*), Prgopt(*)
   INTEGER Iflag(10)

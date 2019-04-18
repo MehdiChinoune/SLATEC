@@ -127,7 +127,7 @@ SUBROUTINE CHERK(Uplo,Trans,N,K,Alpha,A,Lda,Beta,C,Ldc)
   !   890208  DATE WRITTEN
   !   910605  Modified to meet SLATEC prologue standards.  Only comment
   !           lines were modified.  (BKS)
-
+  USE service, ONLY : XERBLA
   !     .. Scalar Arguments ..
   CHARACTER :: Uplo, Trans
   INTEGER N, K, Lda, Ldc

@@ -88,7 +88,7 @@ REAL(8) FUNCTION DE1(X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920618  Removed space from variable names.  (RWC, WRB)
-
+  USE service, ONLY : XERMSG, D1MACH
   REAL eta
   REAL(8) :: X, xmaxt
   INTEGER, SAVE :: ntae10, ntae11, ntae12, nte11, nte12, ntae13, ntae14

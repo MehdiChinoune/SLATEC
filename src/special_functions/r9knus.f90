@@ -46,7 +46,7 @@ SUBROUTINE R9KNUS(Xnu,X,Bknu,Bknu1,Iswtch)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
   !   900727  Added EXTERNAL statement.  (WRB)
   !   920618  Removed space from variable names.  (RWC, WRB)
-
+  USE service, ONLY : XERMSG, R1MACH
   REAL a(15), a0, alnz, alpha(15), an, b0, beta(15), Bknu, bknu0, Bknu1, bknud, &
     bn, c0, expx, p1, p2, p3, qq, result, sqrtx, v, vlnz, X, x2n, x2tov, &
     xi, xmu, Xnu, z, ztov

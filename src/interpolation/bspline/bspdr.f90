@@ -67,7 +67,7 @@ SUBROUTINE BSPDR(T,A,N,K,Nderiv,Ad)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-
+  USE service, ONLY : XERMSG
   !
   INTEGER i, id, ii, ipkmid, jj, jm, K, kmid, N, Nderiv
   REAL A(*), Ad(*), diff, fkmid, T(*)

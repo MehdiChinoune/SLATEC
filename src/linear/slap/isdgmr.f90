@@ -2,7 +2,6 @@
 INTEGER FUNCTION ISDGMR(N,B,X,Xl,Nelt,Ia,Ja,A,Isym,MSOLVE,Nmsl,Itol,Tol,&
     Itmax,Iter,Err,Iunit,R,Z,Dz,Rwork,Iwork,Rnrm,Bnrm,&
     Sb,Sx,Jscal,Kmp,Lgmr,Maxl,Maxlp1,V,Q,Snormw,Prod,R0nrm,Hes,Jpre)
-  USE DSLBLK
   !>
   !***
   !  Generalized Minimum Residual Stop Test.
@@ -268,7 +267,8 @@ INTEGER FUNCTION ISDGMR(N,B,X,Xl,Nelt,Ia,Ja,A,Isym,MSOLVE,Nmsl,Itol,Tol,&
   !   920511  Added complete declaration section.  (WRB)
   !   921026  Corrected D to E in output format.  (FNF)
   !   921113  Corrected C***CATEGORY line.  (FNF)
-
+  USE DSLBLK, ONLY : SOLn
+  USE service, ONLY : D1MACH
   !     .. Scalar Arguments ..
   REAL(8) :: Bnrm, Err, Prod, R0nrm, Rnrm, Snormw, Tol
   INTEGER Isym, Iter, Itmax, Itol, Iunit, Jpre, Jscal, Kmp, Lgmr, &

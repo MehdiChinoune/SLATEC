@@ -48,7 +48,7 @@ SUBROUTINE POLINT(N,X,Y,C)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-
+  USE service, ONLY : XERMSG
   REAL C(*), dif, X(*), Y(*)
   INTEGER i, k, km1, N
   !* FIRST EXECUTABLE STATEMENT  POLINT

@@ -395,7 +395,7 @@ SUBROUTINE DGMRES(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,&
   !   920929  Corrected format of references.  (FNF)
   !   921019  Changed 500.0 to 500 to reduce SP/DP differences.  (FNF)
   !   921026  Added check for valid value of ITOL.  (FNF)
-
+  USE service, ONLY : D1MACH
   !         The following is for optimized compilation on LLNL/LTSS Crays.
   !LLL. OPTIMIZE
   !     .. Scalar Arguments ..

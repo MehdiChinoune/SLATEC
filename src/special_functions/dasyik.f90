@@ -57,7 +57,7 @@ SUBROUTINE DASYIK(X,Fnu,Kode,Flgik,Ra,Arg,In,Y)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910408  Updated the AUTHOR section.  (WRB)
-
+  USE service, ONLY : D1MACH
   !
   INTEGER In, j, jn, k, kk, Kode, l
   REAL(8) :: ak, ap, Arg, coef, etx, Flgik, fn, Fnu, &

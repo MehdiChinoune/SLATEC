@@ -1,6 +1,5 @@
 !** COMP
 LOGICAL FUNCTION COMP(Ieract,Ierexp,Lout,Kprint)
-  IMPLICIT NONE
   !>
   !***
   !  Compare actual and expected values of error flag.

@@ -1,6 +1,5 @@
 !** LA05AS
 SUBROUTINE LA05AS(A,Ind,Nz,Ia,N,Ip,Iw,W,G,U)
-  USE LA05DS
   !>
   !***
   !  Subsidiary to SPLP
@@ -57,7 +56,8 @@ SUBROUTINE LA05AS(A,Ind,Nz,Ia,N,Ip,Iw,W,G,U)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900402  Added TYPE section.  (WRB)
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
-
+  USE LA05DS, ONLY : LP, LCOl, LENl, LENu, NCP, LROw, SMAll
+  USE service, ONLY : XERMSG, XSETUN, R1MACH
   INTEGER i, Ia, idummy, ii, il, in, ipp, ipv, ir, j, jcost, jp, k, k1, k2, kc, &
     kcost, kj, kk, kl, klc, kn, knp, kp, kpc, kpl, kq, kr, krl, ks, l, mcp, N, &
     nc, Nz, nzc

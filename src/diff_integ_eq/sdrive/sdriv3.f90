@@ -728,7 +728,8 @@ SUBROUTINE SDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
   !* REVISION HISTORY  (YYMMDD)
   !   790601  DATE WRITTEN
   !   900329  Initial submission to SLATEC.
-
+  USE service, ONLY : XERMSG, R1MACH
+  USE linear, ONLY : SNRM2, SGBSL, SGESL, SGBFA, SGEFA
   EXTERNAL :: F, JACOBN, FA, G, USERS
   REAL ae, big, Eps, Ewt(*), G, glast, gnow, h, Hmax, hsign, hused, re, &
     sizee, summ, T, tlast, Tout, troot, uround, Work(*), Y(*)

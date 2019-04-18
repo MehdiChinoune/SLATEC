@@ -26,7 +26,7 @@ SUBROUTINE BKIAS(X,N,Ktrms,T,Ans,Ind,Ms,Gmrn,H,Ierr)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
-
+  USE service, ONLY : R1MACH
   INTEGER i, ii, Ind, j, jmi, jn, k, kk, km, Ktrms, mm, mp, Ms, N, Ierr
   REAL Ans, den1, den2, den3, er, err, fj, fk, fln, fm1, Gmrn, g1, gs, H(*), hn, &
     rat, rg1, rxp, rz, rzx, s(31), ss, sumi, sumj, T(50), tol, v(52), w(52), &

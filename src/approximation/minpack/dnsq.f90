@@ -428,7 +428,7 @@ SUBROUTINE DNSQ(FCN,JAC,Iopt,N,X,Fvec,Fjac,Ldfjac,Xtol,Maxfev,Ml,Mu,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-
+  USE service, ONLY : XERMSG, D1MACH
   INTEGER i, iflag, Info, Iopt, iter, iwa(1), j, jm1, l, Ldfjac, &
     Lr, Maxfev, Ml, Mode, Mu, N, ncfail, ncsuc, Nfev, Njev, &
     Nprint, nslow1, nslow2

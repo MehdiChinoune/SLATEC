@@ -1,6 +1,5 @@
 !** DMGSBV
 SUBROUTINE DMGSBV(M,N,A,Ia,Niv,Iflag,S,P,Ip,Inhomo,V,W,Wcnd)
-  USE DML, ONLY : SRU, EPS, INDpvt, NFCc
   !>
   !***
   !  Subsidiary to DBVSUP
@@ -71,7 +70,8 @@ SUBROUTINE DMGSBV(M,N,A,Ia,Niv,Iflag,S,P,Ip,Inhomo,V,W,Wcnd)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
-
+  USE DML, ONLY : SRU, EPS, INDpvt, NFCc
+  USE linear, ONLY : DDOT
   !
   INTEGER i, Ia, Iflag, Inhomo, Ip(*), ip1, ix, iz, j, jk, jp, jq, jy, jz, k, kd, &
     kj, kp, l, lix, lr, M, m2, N, Niv, nivn, nmnr, nn, np1, nr, nrm1

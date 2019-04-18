@@ -1,5 +1,4 @@
 MODULE TEST53_MOD
-  use slatec
   IMPLICIT NONE
   REAL(8) :: EPS, RP, SVEps, TOL
   INTEGER IERp, IERr, NORd, NORdp
@@ -8,7 +7,6 @@ MODULE TEST53_MOD
 CONTAINS
   !** DCMPAR
   SUBROUTINE DCMPAR(Icnt,Itest)
-    IMPLICIT NONE
     !>
     !***
     !  Compare values in COMMON block DCHECK for quick check
@@ -65,7 +63,6 @@ CONTAINS
   END SUBROUTINE DCMPAR
   !** DPFITT
   SUBROUTINE DPFITT(Lun,Kprint,Ipass)
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for DPOLFT, DPCOEF and DP1VLU.
@@ -95,7 +92,8 @@ CONTAINS
     !   900911  Test problem changed and cosmetic changes to code.  (WRB)
     !   920214  Code restructured to test for all values of KPRINT and to
     !           provide more PASS/FAIL information.  (WRB)
-
+    USE slatec, ONLY : D1MACH, DP1VLU, DPCOEF, DPOLFT, XERCLR, XGETF, XSETF
+    USE common_mod, ONLY : PASS
     INTEGER kontrl
     !     .. Scalar Arguments ..
     INTEGER Ipass, Kprint, Lun
@@ -444,7 +442,6 @@ CONTAINS
   END SUBROUTINE DPFITT
   !** DNLS1Q
   SUBROUTINE DNLS1Q(Lun,Kprint,Ipass)
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for DNLS1E, DNLS1 and DCOV.
@@ -473,7 +470,9 @@ CONTAINS
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   930214  Declarations sections added, code revised to test error
     !           returns for all values of KPRINT and code polished.  (WRB)
-
+    USE slatec, ONLY : DENORM, DFDJC3, D1MACH, DCOV, DNLS1E, XGETF, XSETF, &
+      XERCLR, NUMXER
+    USE common_mod, ONLY : PASS
     !     .. Scalar Arguments ..
     INTEGER Ipass, Kprint, Lun
     !     .. Local Scalars ..
@@ -727,7 +726,6 @@ CONTAINS
   END SUBROUTINE DNLS1Q
   !** DFCQX
   SUBROUTINE DFCQX(Lun,Kprint,Ipass)
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for DFC.
@@ -774,7 +772,8 @@ CONTAINS
     !           FORMATs.  (RWC)
     !   930214  Declarations sections added, code revised to test error
     !           returns for all values of KPRINT and code polished.  (WRB)
-
+    USE slatec, ONLY : D1MACH, DBVALU, DCOPY, DCV, DFC, DMOUT, DVOUT, IVOUT, &
+      XGETF, XSETF, XERCLR, NUMXER
     !     .. Scalar Arguments ..
     INTEGER Ipass, Kprint, Lun
     !     .. Local Scalars ..
@@ -1056,7 +1055,6 @@ CONTAINS
   END SUBROUTINE DFCQX
   !** DFCN1
   SUBROUTINE DFCN1(Iflag,M,N,X,Fvec,Fjac,Ldfjac)
-    IMPLICIT NONE
     !>
     !***
     !  Subsidiary to DNLS1Q.
@@ -1107,7 +1105,6 @@ CONTAINS
   END SUBROUTINE DFCN1
   !** DFCN2
   SUBROUTINE DFCN2(Iflag,M,N,X,Fvec,Fjac,Ldfjac)
-    IMPLICIT NONE
     !>
     !***
     !  Subsidiary to DNLS1Q.
@@ -1174,7 +1171,6 @@ CONTAINS
   END SUBROUTINE DFCN2
   !** DFCN3
   SUBROUTINE DFCN3(Iflag,M,N,X,Fvec,Fjrow,Nrow)
-    IMPLICIT NONE
     !>
     !***
     !  Subsidiary to DNLS1Q.
@@ -1240,8 +1236,9 @@ CONTAINS
 END MODULE TEST53_MOD
 !** TEST53
 PROGRAM TEST53
-  USE TEST53_MOD
-  use slatec
+  USE TEST53_MOD, ONLY : DFCQX, DNLS1Q, DPFITT
+  USE slatec, ONLY : I1MACH, XSETF, XSETUN, XERMAX
+  USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !>
   !***

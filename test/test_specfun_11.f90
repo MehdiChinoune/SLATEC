@@ -1,11 +1,9 @@
 MODULE TEST12_MOD
-  use slatec
   IMPLICIT NONE
 
 CONTAINS
   !** FCNQX2
   SUBROUTINE FCNQX2(Lun,Kprint,Ipass)
-    IMPLICIT NONE
     !>
     !***
     !  THIS IS A QUICK CHECK PROGRAM FOR THE SUBROUTINES DXLEGF
@@ -34,7 +32,7 @@ CONTAINS
     !   901019  Revisions to prologue.  (DWL and WRB)
     !   901106  Changed all specific intrinsics to generic.  (WRB)
     !   910104  Changed to print variable number of decimals. (DWL and JMS)
-
+    USE slatec, ONLY : DXCON, XERCLR, DXLEGF, DXNRMP, DXSET, XSETF, I1MACH, NUMXER
     INTEGER i, ic1(10), ic2(10), id, ierr, ierror, ip(10), ipn(10), &
       iq(10), ir(10), irad, isig, isum, ix11, ix12, ix13, ix21, ix22, ix23
     INTEGER mu, mu1, mu2, n, nbits, ndec, nerr, nradpl, nu1, nudiff
@@ -349,7 +347,6 @@ CONTAINS
   END SUBROUTINE FCNQX2
   !** DXCSRT
   SUBROUTINE DXCSRT(Dnu1,Nudiff,Mu1,Mu2,Theta,P,Q,R,Ip,Iq,Ir,C1,Ic1,C2,Ic2,Ierror)
-    IMPLICIT NONE
     !>
     !***
     !  TO COMPUTE CHECK VALUES FOR LEGENDRE FUNCTIONS
@@ -386,7 +383,7 @@ CONTAINS
     !   890126  Revised to meet SLATEC CML recommendations.  (DWL and JMS)
     !   901019  Revisions to prologue.  (DWL and WRB)
     !   901106  Changed all specific intrinsics to generic.  (WRB)
-
+    USE slatec, ONLY : DXADD, DXADJ, DXRED
     INTEGER i, Ic1(*), Ic2(*), Ierror, Ip(*), Iq(*), Ir(*), ix1, ix2, j, k, l, &
       lm1, mu, Mu1, Mu2, Nudiff
     REAL(8) :: C1(*), C2(*), dmu, dmu1, nu, Dnu1, P(*), Q(*), R(*), Theta, sx, x1, x2
@@ -551,8 +548,9 @@ CONTAINS
 END MODULE TEST12_MOD
 !** TEST12
 PROGRAM TEST12
-  USE TEST12_MOD
-  use slatec
+  USE TEST12_MOD, ONLY : FCNQX2
+  USE slatec, ONLY : I1MACH, XSETF, XSETUN, XERMAX
+  USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !>
   !***

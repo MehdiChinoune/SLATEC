@@ -1,6 +1,5 @@
 !** MACON
 SUBROUTINE MACON
-  USE ML, ONLY : URO, SRU, EPS, SQOvfl, TWOu, FOUru, LPAr
   !>
   !***
   !  Subsidiary to BVSUP
@@ -29,7 +28,8 @@ SUBROUTINE MACON
   !           (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
-
+  USE ML, ONLY : URO, SRU, EPS, SQOvfl, TWOu, FOUru, LPAr
+  USE service, ONLY : R1MACH
   REAL dd
   INTEGER ke
   !* FIRST EXECUTABLE STATEMENT  MACON

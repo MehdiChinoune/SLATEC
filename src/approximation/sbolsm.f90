@@ -422,6 +422,9 @@ SUBROUTINE SBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
   !     /REAL            / TO /DOUBLE PRECISION/.
   !++
   !
+  USE service, ONLY : XERMSG, R1MACH
+  USE linear, ONLY : SAXPY, SCOPY, SDOT, SNRM2, SROT, SROTG, SSWAP
+  USE optimization, ONLY : SVOUT, IVOUT
   INTEGER i, igopr, ioff, ip, iprint, itemp, iter, itmax, j, jbig, jcol, &
     jdrop, jdrop1, jdrop2, jlarge, jmag, jp, lds, lgopr, lp, Mdw, Minput, Mode, &
     mrows, mval, Ncols, nsetb, i2(1), jbig2(1)

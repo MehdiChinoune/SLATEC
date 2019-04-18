@@ -1,11 +1,9 @@
 MODULE TEST09_MOD
-  use slatec
   IMPLICIT NONE
 
 CONTAINS
   !** CQCAI
   SUBROUTINE CQCAI(Lun,Kprint,Ipass)
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for SLATEC subroutines
@@ -64,7 +62,7 @@ CONTAINS
     !   830501  DATE WRITTEN
     !   890831  Revised to meet new SLATEC standards
     !
-
+    USE slatec, ONLY : CAIRY, CBIRY, I1MACH, R1MACH
     !
     !*Internal Notes:
     !   Machine constants are defined by functions I1MACH and R1MACH.
@@ -373,7 +371,6 @@ CONTAINS
   END SUBROUTINE CQCAI
   !** CQCBH
   SUBROUTINE CQCBH(Lun,Kprint,Ipass)
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for SLATEC subroutine
@@ -432,7 +429,7 @@ CONTAINS
     !   830501  DATE WRITTEN
     !   890831  Revised to meet new SLATEC standards
     !
-
+    USE slatec, ONLY : CBESH, CUOIK, I1MACH, R1MACH
     !
     !*Internal Notes:
     !   Machine constants are defined by functions I1MACH and R1MACH.
@@ -729,7 +726,6 @@ CONTAINS
   END SUBROUTINE CQCBH
   !** CQCBI
   SUBROUTINE CQCBI(Lun,Kprint,Ipass)
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for SLATEC subroutine
@@ -789,7 +785,7 @@ CONTAINS
     !   830501  DATE WRITTEN
     !   890831  Revised to meet new SLATEC standards
     !
-
+    USE slatec, ONLY : CBESI, CBESK, CWRSK, I1MACH, R1MACH
     !
     !*Internal Notes:
     !   Machine constants are defined by functions I1MACH and R1MACH.
@@ -1220,7 +1216,6 @@ CONTAINS
   END SUBROUTINE CQCBI
   !** CQCBJ
   SUBROUTINE CQCBJ(Lun,Kprint,Ipass)
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for SLATEC subroutine
@@ -1286,7 +1281,7 @@ CONTAINS
     !   830501  DATE WRITTEN
     !   890831  Revised to meet new SLATEC standards
     !
-
+    USE slatec, ONLY : CBESH, CBESJ, I1MACH, R1MACH
     !
     !*Internal Notes:
     !   Machine constants are defined by functions I1MACH and R1MACH.
@@ -1616,7 +1611,6 @@ CONTAINS
   END SUBROUTINE CQCBJ
   !** CQCBK
   SUBROUTINE CQCBK(Lun,Kprint,Ipass)
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for SLATEC subroutine
@@ -1675,7 +1669,7 @@ CONTAINS
     !   830501  DATE WRITTEN
     !   890831  Revised to meet new SLATEC standard
     !
-
+    USE slatec, ONLY : CBESI, CBESK, I1MACH, R1MACH
     !
     !*Internal Notes:
     !   Machine constants are defined by functions I1MACH and R1MACH.
@@ -1980,7 +1974,6 @@ CONTAINS
   END SUBROUTINE CQCBK
   !** CQCBY
   SUBROUTINE CQCBY(Lun,Kprint,Ipass)
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for SLATEC subroutine
@@ -2044,7 +2037,7 @@ CONTAINS
     !   830501  DATE WRITTEN
     !   890831  Revised to meet new SLATEC standards
     !
-
+    USE slatec, ONLY : CBESI, CBESK, CBESY, I1MACH, R1MACH
     !
     !*Internal Notes:
     !   Machine constants are defined by functions I1MACH and R1MACH.
@@ -2378,8 +2371,9 @@ CONTAINS
 END MODULE TEST09_MOD
 !** TEST09
 PROGRAM TEST09
-  USE TEST09_MOD
-  use slatec
+  USE TEST09_MOD, ONLY : CQCAI, CQCBH, CQCBI, CQCBJ, CQCBK, CQCBY
+  USE slatec, ONLY : I1MACH, XSETF, XSETUN, XERMAX
+  USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !>
   !***

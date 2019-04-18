@@ -165,7 +165,7 @@ SUBROUTINE QAGSE(F,A,B,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,Alist,&
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
-
+  USE service, ONLY : R1MACH
   !
   REAL A, abseps, Abserr, Alist(*), area, area1, area12, area2, a1, &
     a2, B, Blist(*), b1, b2, correc, defabs, defab1, defab2, &

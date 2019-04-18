@@ -42,7 +42,7 @@ SUBROUTINE SDNTL(Eps,F,FA,Hmax,Hold,Impl,Jtask,Matdim,Maxord,Mint,Miter,&
   !* REVISION HISTORY  (YYMMDD)
   !   790601  DATE WRITTEN
   !   900329  Initial submission to SLATEC.
-
+  USE linear, ONLY : SNRM2, SGBFA, SGBSL, SGEFA, SGESL
   INTEGER i, iflag, Impl, info, Iswflg, Jstate, Jtask, Matdim, &
     Maxord, Mint, Miter, Ml, Mntold, Mtrold, Mu, N, Nde, Nfe, Nq, Nwait
   REAL A(Matdim,*), El(13,12), Eps, Fac(*), H, Hmax, Hold, oldl0, Rc, Rh, Rmax, &

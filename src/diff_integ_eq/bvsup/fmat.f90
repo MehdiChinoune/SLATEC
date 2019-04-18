@@ -1,6 +1,5 @@
 !** FMAT
 SUBROUTINE FMAT(X,Y,Yp)
-  USE SAVEX
   !>
   !***
   !  Subsidiary to
@@ -16,7 +15,7 @@ SUBROUTINE FMAT(X,Y,Yp)
   !* REVISION HISTORY  (YYMMDD)
   !   ??????  DATE WRITTEN
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
-
+  USE SAVEX, ONLY : XSAve, TERm
   REAL tanx, X, Y(*), Yp(*)
   !* FIRST EXECUTABLE STATEMENT  FMAT
   Yp(1) = Y(2)

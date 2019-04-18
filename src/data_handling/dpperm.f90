@@ -41,7 +41,7 @@ SUBROUTINE DPPERM(Dx,N,Iperm,Ier)
   !* REVISION HISTORY  (YYMMDD)
   !   901004  DATE WRITTEN
   !   920507  Modified by M. McClain to revise prologue text.
-
+  USE service, ONLY : XERMSG
   INTEGER N, Iperm(*), i, Ier, indx, indx0, istrt
   REAL(8) :: Dx(*), dtemp
   !* FIRST EXECUTABLE STATEMENT  DPPERM

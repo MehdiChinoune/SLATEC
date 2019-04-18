@@ -2,7 +2,6 @@
 INTEGER FUNCTION ISSGMR(N,B,X,Xl,Nelt,Ia,Ja,A,Isym,MSOLVE,Nmsl,Itol,Tol,&
     Itmax,Iter,Err,Iunit,R,Z,Dz,Rwork,Iwork,Rnrm,Bnrm,&
     Sb,Sx,Jscal,Kmp,Lgmr,Maxl,Maxlp1,V,Q,Snormw,Prod,R0nrm,Hes,Jpre)
-  USE SSLBLK
   !>
   !***
   !  Generalized Minimum Residual Stop Test.
@@ -266,7 +265,8 @@ INTEGER FUNCTION ISSGMR(N,B,X,Xl,Nelt,Ia,Ja,A,Isym,MSOLVE,Nmsl,Itol,Tol,&
   !   920407  COMMON BLOCK renamed SSLBLK.  (WRB)
   !   920511  Added complete declaration section.  (WRB)
   !   921113  Corrected C***CATEGORY line.  (FNF)
-
+  USE SSLBLK, ONLY : SOLn
+  USE service, ONLY : R1MACH
   !     .. Scalar Arguments ..
   REAL Bnrm, Err, Prod, R0nrm, Rnrm, Snormw, Tol
   INTEGER Isym, Iter, Itmax, Itol, Iunit, Jpre, Jscal, Kmp, Lgmr, &

@@ -1,11 +1,9 @@
 MODULE TEST51_MOD
-  use slatec
   IMPLICIT NONE
 
 CONTAINS
   !** FFTQX
   SUBROUTINE FFTQX(Lun,Kprint,Ipass)
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for the NCAR FFT routines.
@@ -86,7 +84,9 @@ CONTAINS
     !   920618  Code upgraded to "Version 4".  (BKS, WRB)
     !   930315  Modified RFFT* tests to compute "slow-transform" in DOUBLE
     !           PRECISION.  (WRB)
-
+    USE slatec, ONLY : CFFTB, CFFTF, CFFTI, COSQB, COSQF, COSQI, COST, COSTI, &
+      EZFFTB, EZFFTF, EZFFTI, PIMACH, R1MACH, RFFTB, RFFTF, RFFTI, SINQB, SINQF, &
+      SINQI, SINT, SINTI
     !     .. Scalar Arguments ..
     INTEGER Ipass, Kprint, Lun
     !     .. Local Scalars ..
@@ -636,8 +636,9 @@ CONTAINS
 END MODULE TEST51_MOD
 !** TEST51
 PROGRAM TEST51
-  USE TEST51_MOD
-  use slatec
+  USE TEST51_MOD, ONLY : FFTQX
+  USE slatec, ONLY : I1MACH, XSETF, XSETUN, XERMAX
+  USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !>
   !***

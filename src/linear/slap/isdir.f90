@@ -1,7 +1,6 @@
 !** ISDIR
 INTEGER FUNCTION ISDIR(N,B,X,Nelt,Ia,Ja,A,Isym,MSOLVE,Itol,Tol,Itmax,Iter,&
     Err,Ierr,Iunit,R,Z,Dz,Rwork,Iwork,Bnrm,Solnrm)
-  USE DSLBLK
   !>
   !***
   !  Preconditioned Iterative Refinement Stop Test.
@@ -164,7 +163,8 @@ INTEGER FUNCTION ISDIR(N,B,X,Nelt,Ia,Ja,A,Isym,MSOLVE,Itol,Tol,Itmax,Iter,&
   !   920511  Added complete declaration section.  (WRB)
   !   921026  Changed 1.0E10 to D1MACH(2) and corrected E to D in
   !           output format.  (FNF)
-
+  USE DSLBLK, ONLY : SOLn
+  USE service, ONLY : D1MACH
   !     .. Scalar Arguments ..
   REAL(8) :: Bnrm, Err, Solnrm, Tol
   INTEGER Ierr, Isym, Iter, Itmax, Itol, Iunit, N, Nelt

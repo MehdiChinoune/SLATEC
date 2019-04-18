@@ -150,7 +150,7 @@ SUBROUTINE DTBSV(Uplo,Trans,Diag,N,K,A,Lda,X,Incx)
   !   861022  DATE WRITTEN
   !   910605  Modified to meet SLATEC prologue standards.  Only comment
   !           lines were modified.  (BKS)
-
+  USE service, ONLY : XERBLA
   !     .. Scalar Arguments ..
   INTEGER Incx, K, Lda, N
   CHARACTER :: Diag, Trans, Uplo

@@ -1,6 +1,5 @@
 !** MINSOL
 SUBROUTINE MINSOL(Usol,Idmn,Zn,Zm,Pertb)
-  USE SPLPCM
   !>
   !***
   !  Subsidiary to SEPELI
@@ -31,7 +30,7 @@ SUBROUTINE MINSOL(Usol,Idmn,Zn,Zm,Pertb)
   !   801001  DATE WRITTEN
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
-
+  USE SPLPCM, ONLY : L, IS, JS, K, MS, NS
   INTEGER i, Idmn, ifnl, ii, istr, j, jfnl, jj, jstr
   REAL ete, Pertb, pertrb, Usol(Idmn,*), ute, Zm(*), Zn(*)
   !* FIRST EXECUTABLE STATEMENT  MINSOL

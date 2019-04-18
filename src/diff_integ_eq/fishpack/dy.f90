@@ -1,6 +1,5 @@
 !** DY
 SUBROUTINE DY(U,Idmn,I,J,Uyyy,Uyyyy)
-  USE SPLPCM
   !>
   !***
   !  Subsidiary to SEPELI
@@ -28,7 +27,7 @@ SUBROUTINE DY(U,Idmn,I,J,Uyyy,Uyyyy)
   !   801001  DATE WRITTEN
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
-
+  USE SPLPCM, ONLY : L, DLY4, KSWy, TDLy3
   INTEGER I, Idmn, J
   REAL U(Idmn,*), Uyyy, Uyyyy
   !* FIRST EXECUTABLE STATEMENT  DY

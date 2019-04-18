@@ -109,7 +109,7 @@ SUBROUTINE CHEMV(Uplo,N,Alpha,A,Lda,X,Incx,Beta,Y,Incy)
   !   861022  DATE WRITTEN
   !   910605  Modified to meet SLATEC prologue standards.  Only comment
   !           lines were modified.  (BKS)
-
+  USE service, ONLY : XERBLA
   !     .. Scalar Arguments ..
   COMPLEX Alpha, Beta
   INTEGER Incx, Incy, Lda, N

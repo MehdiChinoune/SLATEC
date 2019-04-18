@@ -34,7 +34,7 @@ REAL(8) FUNCTION D9LGIT(A,X,Algap1)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
-
+  USE service, ONLY : XERMSG, D1MACH
   INTEGER k
   REAL(8) :: A, X, Algap1, ax, a1x, fk, hstar, p, r, s, t
   REAL(8), SAVE :: eps, sqeps

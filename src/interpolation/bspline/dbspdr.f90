@@ -67,7 +67,7 @@ SUBROUTINE DBSPDR(T,A,N,K,Nderiv,Ad)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-
+  USE service, ONLY : XERMSG
   !
   !
   INTEGER i, id, ii, ipkmid, jj, jm, K, kmid, N, Nderiv

@@ -25,7 +25,7 @@ SUBROUTINE CASYI(Z,Fnu,Kode,N,Y,Nz,Rl,Tol,Elim,Alim)
   !* REVISION HISTORY  (YYMMDD)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
-
+  USE service, ONLY : R1MACH
   INTEGER i, ib, il, inu, j, jl, k, Kode, koded, m, N, nn, Nz
   COMPLEX ak1, ck, cs1, cs2, cz, dk, ez, p1, rz, s2, Y(N), Z
   REAL aa, acz, aez, ak, Alim, arg, arm, atol, az, bb, bk, dfnu, &

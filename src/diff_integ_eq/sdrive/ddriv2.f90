@@ -349,7 +349,7 @@ SUBROUTINE DDRIV2(N,T,Y,F,Tout,Mstate,Nroot,Eps,Ewt,Mint,Work,Lenw,Iwork,&
   !* REVISION HISTORY  (YYMMDD)
   !   790601  DATE WRITTEN
   !   900329  Initial submission to SLATEC.
-
+  USE service, ONLY : XERMSG
   EXTERNAL :: F, G
   REAL(8) :: Eps, Ewt, ewtcom(1), G, hmax, T, Tout, Work(*), Y(*)
   INTEGER Iwork(*)

@@ -1,9 +1,6 @@
 !** LSOD
 SUBROUTINE LSOD(F,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,Acor,&
     Wm,Iwm,JAC,Intout,Tstop,Tolfac,Delsgn,Rpar,Ipar)
-  USE DEBDF1, ONLY : TOLd, H, HMIn, HMXi, X => TN, U => UROund, IQUit, INIt, &
-    KSTeps, IBEgin, ITOl, IINteg, ITStop, IJAc, IBAnd, JSTart, KFLag, METh, &
-    MITer, MAXord, N, NQ, NST, NFE, NJE
   !>
   !***
   !  Subsidiary to DEBDF
@@ -34,7 +31,10 @@ SUBROUTINE LSOD(F,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,Acor,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
-
+  USE DEBDF1, ONLY : TOLd, H, HMIn, HMXi, X => TN, U => UROund, IQUit, INIt, &
+    KSTeps, IBEgin, ITOl, IINteg, ITStop, IJAc, IBAnd, JSTart, KFLag, METh, &
+    MITer, MAXord, N, NQ, NST, NFE, NJE
+  USE service, ONLY : XERMSG, R1MACH
   INTEGER :: ltol, natolp, Neq, nrtolp, Idid, intflg, Ipar(*), Iwm(*), k, l
   REAL absdel, Acor(*), Atol(*), big, del, Delsgn, dt, Ewt(*), ha, &
     Rpar(*), Rtol(*), Savf(*), T, tol, Tolfac, Tout, Tstop, Wm(*), Y(*), &

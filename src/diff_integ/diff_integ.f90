@@ -1,7 +1,4 @@
 MODULE diff_integ
-  use service
-  use linear
-  use interpolation
   IMPLICIT NONE
 
 CONTAINS

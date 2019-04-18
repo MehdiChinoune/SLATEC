@@ -79,7 +79,7 @@ SUBROUTINE DQK15W(F,W,P1,P2,P3,P4,Kp,A,B,Result,Abserr,Resabs,Resasc)
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
-
+  USE service, ONLY : D1MACH
   !
   REAL(8) :: A, absc, absc1, absc2, Abserr, B, centr, dhlgth, epmach, fc, fsum, &
     fval1, fval2, fv1(7), fv2(7), hlgth, P1, P2, P3, P4, Resabs, Resasc, &

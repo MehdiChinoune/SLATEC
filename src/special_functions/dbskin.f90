@@ -103,7 +103,7 @@ SUBROUTINE DBSKIN(X,N,Kode,M,Y,Nz,Ierr)
   !   891009  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-
+  USE service, ONLY : D1MACH, I1MACH
   INTEGER i, icase, Ierr, il, i1m, k, kk, Kode, ktrms, M, m3, N, &
     ne, nflg, nl, nlim, nn, np, ns, nt, Nz
   REAL(8) :: enlim, exi(102), fn, gr, h(31), hn, ss, tol, &

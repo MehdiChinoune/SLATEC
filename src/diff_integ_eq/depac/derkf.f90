@@ -602,7 +602,7 @@ SUBROUTINE DERKF(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,Rpar,Ipa
   !   900510  Convert XERRWV calls to XERMSG calls, change Prologue
   !           comments to agree with DDERKF.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-
+  USE service, ONLY : XERMSG
   REAL Atol(*), Rpar(*), Rtol(*), Rwork(*), T, Tout, Y(*)
   INTEGER Idid, Info(15), Ipar(*), Iwork(*), kdi, kf1, kf2, kf3, kf4, kf5, &
     kh, krer, ktf, kto, ktstar, ku, kyp, kys, Liw, Lrw

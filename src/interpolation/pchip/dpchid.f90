@@ -105,7 +105,7 @@ REAL(8) FUNCTION DPCHID(N,X,F,D,Incfd,Skip,Ia,Ib,Ierr)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   930504  Corrected to set VALUE=0 when IERR.ne.0.  (FNF)
-
+  USE service, ONLY : XERMSG
   !
   !  Programming notes:
   !  1. This routine uses a special formula that is valid only for

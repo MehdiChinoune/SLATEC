@@ -1,6 +1,5 @@
 !** INXCA
 SUBROUTINE INXCA(I,Ir,Idxa,Na)
-  USE CCBLK
   !>
   !***
   !  Subsidiary to CBLKTR
@@ -21,7 +20,7 @@ SUBROUTINE INXCA(I,Ir,Idxa,Na)
   !   801001  DATE WRITTEN
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
-
+  USE CCBLK, ONLY : NM
   INTEGER I, Idxa, Ir, Na
   !* FIRST EXECUTABLE STATEMENT  INXCA
   Na = 2**Ir

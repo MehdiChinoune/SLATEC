@@ -1,11 +1,9 @@
 MODULE TEST21_MOD
-  use slatec
   IMPLICIT NONE
 
 CONTAINS
   !** SGEQC
   SUBROUTINE SGEQC(Lun,Kprint,Nerr)
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for SGEFS and SGEIR.
@@ -43,7 +41,7 @@ CONTAINS
     !   891009  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   920601  Code reworked and TYPE section added.  (RWC, WRB)
-
+    USE slatec, ONLY : R1MACH, SGEFS, SGEIR
     !     .. Scalar Arguments ..
     INTEGER Kprint, Lun, Nerr
     !     .. Local Scalars ..
@@ -147,7 +145,6 @@ CONTAINS
   END SUBROUTINE SGEQC
   !** DGEQC
   SUBROUTINE DGEQC(Lun,Kprint,Nerr)
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for DGEFS.
@@ -185,7 +182,7 @@ CONTAINS
     !   891009  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   920601  Code reworked and TYPE section added.  (RWC, WRB)
-
+    USE slatec, ONLY : D1MACH, DGEFS
     !     .. Scalar Arguments ..
     INTEGER Kprint, Lun, Nerr
     !     .. Local Scalars ..
@@ -280,7 +277,6 @@ CONTAINS
   END SUBROUTINE DGEQC
   !** CGEQC
   SUBROUTINE CGEQC(Lun,Kprint,Nerr)
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for CGEFS and CGEIR.
@@ -317,7 +313,7 @@ CONTAINS
     !   890618  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   920601  Code reworked and TYPE section added.  (RWC, WRB)
-
+    USE slatec, ONLY : CGEFS, CGEIR, CABS1
     !     .. Scalar Arguments ..
     INTEGER Kprint, Lun, Nerr
     !     .. Local Scalars ..
@@ -418,8 +414,9 @@ CONTAINS
 END MODULE TEST21_MOD
 !** TEST21
 PROGRAM TEST21
-  USE TEST21_MOD
-  use slatec
+  USE TEST21_MOD, ONLY : CGEQC, DGEQC, SGEQC
+  USE slatec, ONLY : I1MACH, XSETF, XSETUN, XERMAX
+  USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !>
   !***

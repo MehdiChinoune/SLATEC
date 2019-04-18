@@ -35,7 +35,7 @@ SUBROUTINE CUNIK(Zr,Fnu,Ikflg,Ipmtr,Tol,Init,Phi,Zeta1,Zeta2,Summ,Cwrk)
   !* REVISION HISTORY  (YYMMDD)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
-
+  USE service, ONLY : R1MACH
   COMPLEX cfn, crfn, Cwrk(16), Phi, s, sr, Summ, t, t2, Zeta1, Zeta2, zn, Zr
   REAL ac, Fnu, rfn, test, Tol, tstr, tsti
   INTEGER i, Ikflg, Init, Ipmtr, j, k, l

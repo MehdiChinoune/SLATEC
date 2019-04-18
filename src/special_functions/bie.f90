@@ -67,7 +67,7 @@ REAL FUNCTION BIE(X)
   !   770701  DATE WRITTEN
   !   890206  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
-
+  USE service, ONLY : R1MACH
   REAL eta, sqrtx, theta, X, xm, z
   INTEGER, SAVE :: nbif, nbig, nbif2, nbig2, nbip, nbip2
   REAL, SAVE :: x3sml, x32sml, xbig

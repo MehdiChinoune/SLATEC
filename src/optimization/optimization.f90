@@ -2,8 +2,6 @@ include"splp/la05ds.f90"
 include"splp/la05dd.f90"
 
 MODULE optimization
-  use service
-  use linear
   IMPLICIT NONE
 
 CONTAINS

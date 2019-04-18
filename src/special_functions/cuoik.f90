@@ -40,7 +40,7 @@ SUBROUTINE CUOIK(Z,Fnu,Kode,Ikflg,N,Y,Nuf,Tol,Elim,Alim)
   !* REVISION HISTORY  (YYMMDD)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
-
+  USE service, ONLY : R1MACH
   INTEGER i, iform, Ikflg, init, Kode, N, nn, Nuf, nw
   COMPLEX arg, asum, bsum, cwrk(16), cz, phi, summ, Y(N), Z, zb, zeta1, zeta2, zn, zr
   REAL aarg, Alim, aphi, ascle, ax, ay, Elim, fnn, Fnu, gnn, gnu, rcz, Tol, x, yy

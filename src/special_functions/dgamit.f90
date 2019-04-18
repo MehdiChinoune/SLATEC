@@ -57,7 +57,7 @@ REAL(8) FUNCTION DGAMIT(A,X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920528  DESCRIPTION and REFERENCES sections revised.  (WRB)
-
+  USE service, ONLY : XERMSG, XERCLR, D1MACH
   REAL(8) :: A, X, aeps, ainta, algap1, alng, alx, h, sga, sgngam, t
   REAL(8), SAVE :: alneps, sqeps, bot
   LOGICAL :: first = .TRUE.

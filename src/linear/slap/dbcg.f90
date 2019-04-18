@@ -273,7 +273,7 @@ SUBROUTINE DBCG(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MTTVEC,MSOLVE,MTSOLV,Itol,&
   !   920929  Corrected format of reference.  (FNF)
   !   921019  Changed 500.0 to 500 to reduce SP/DP differences.  (FNF)
   !   921113  Corrected C***CATEGORY line.  (FNF)
-
+  USE service, ONLY : D1MACH
   !     .. Scalar Arguments ..
   REAL(8) :: Err, Tol
   INTEGER Ierr, Isym, Iter, Itmax, Itol, Iunit, N, Nelt

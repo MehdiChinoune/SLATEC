@@ -34,7 +34,7 @@ REAL(8) FUNCTION DEXPRL(X)
   !   890911  Removed unnecessary intrinsics.  (WRB)
   !   890911  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
-
+  USE service, ONLY : D1MACH
   INTEGER i
   REAL(8) :: X, absx, alneps, xln, xn
   INTEGER, SAVE :: nterms

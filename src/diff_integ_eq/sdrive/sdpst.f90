@@ -29,7 +29,7 @@ SUBROUTINE SDPST(El,F,FA,H,Impl,JACOBN,Matdim,Miter,Ml,Mu,N,Nde,Nq,Save2,&
   !* REVISION HISTORY  (YYMMDD)
   !   790601  DATE WRITTEN
   !   900329  Initial submission to SLATEC.
-
+  USE linear, ONLY : SNRM2, SGBFA, SGEFA
   INTEGER i, iflag, imax, Impl, info, Iswflg, j, j2, Jstate, k, &
     Matdim, Miter, Ml, Mu, mw, N, Nde, Nfe, Nje, Nq
   REAL A(Matdim,*), bl, Bnd, bp, br, Dfdy(Matdim,*), dfdymx, diff, dy, El(13,12), &

@@ -1,6 +1,5 @@
 !** INDXC
 SUBROUTINE INDXC(I,Ir,Idxc,Nc)
-  USE CBLKT
   !>
   !***
   !  Subsidiary to BLKTRI
@@ -21,7 +20,7 @@ SUBROUTINE INDXC(I,Ir,Idxc,Nc)
   !   801001  DATE WRITTEN
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
-
+  USE CBLKT, ONLY : NM
   INTEGER I, Idxc, Ir, Nc
   !* FIRST EXECUTABLE STATEMENT  INDXC
   Nc = 2**Ir

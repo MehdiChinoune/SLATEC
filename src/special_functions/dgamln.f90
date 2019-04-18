@@ -52,7 +52,7 @@ REAL(8) FUNCTION DGAMLN(Z,Ierr)
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
   !   920128  Category corrected.  (WRB)
   !   921215  DGAMLN defined for Z negative.  (WRB)
-
+  USE service, ONLY : D1MACH, I1MACH
   REAL(8) :: fln, fz, rln, s, tlg, trm, tst, t1, wdtol, Z, zdmy, zinc, zm, &
     zmin, zp, zsq
   INTEGER i, Ierr, i1m, k, mz, nz

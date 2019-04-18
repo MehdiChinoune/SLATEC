@@ -159,7 +159,7 @@ SUBROUTINE CBESI(Z,Fnu,Kode,N,Cy,Nz,Ierr)
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
   !   920128  Category corrected.  (WRB)
   !   920811  Prologue revised.  (DWL)
-
+  USE service, ONLY : R1MACH, I1MACH
   INTEGER i, Ierr, inu, k, Kode, k1, k2, N, nn, Nz
   COMPLEX csgn, Cy(N), Z, zn
   REAL aa, alim, arg, dig, elim, Fnu, fnul, rl, r1m5, s1, &

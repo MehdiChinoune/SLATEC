@@ -1,11 +1,9 @@
 MODULE TEST24_MOD
-  use slatec
   IMPLICIT NONE
 
 CONTAINS
   !** EISQX1
   SUBROUTINE EISQX1(Lun,Kprint,Ipass)
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for SGEEV and CGEEV.
@@ -31,7 +29,7 @@ CONTAINS
     !   890618  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   900405  CALL to XERROR replaced by message to LUN.  (WRB)
-
+    USE slatec, ONLY : CGEEV, R1MACH, SGEEV
     INTEGER Kprint, Ipass, Lun
     INTEGER job, i, j, id, info
     REAL w(9)
@@ -99,7 +97,6 @@ CONTAINS
   END SUBROUTINE EISQX1
   !** EISQX2
   SUBROUTINE EISQX2(Lun,Kprint,Ipass)
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for SSIEV, CHIEV and SSPEV.
@@ -125,7 +122,7 @@ CONTAINS
     !   890618  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   900405  CALL to XERROR replaced by message to LUN.  (WRB)
-
+    USE slatec, ONLY : CHIEV, R1MACH, SSIEV, SSPEV
     INTEGER Kprint, Ipass, Lun
     INTEGER job, i, j, id, info
     REAL a1(4,4), a2(10), e(4), v(4,4), w(16)
@@ -205,8 +202,9 @@ CONTAINS
 END MODULE TEST24_MOD
 !** TEST24
 PROGRAM TEST24
-  USE TEST24_MOD
-  use slatec
+  USE TEST24_MOD, ONLY : EISQX1, EISQX2
+  USE slatec, ONLY : I1MACH, XSETF, XSETUN, XERMAX
+  USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !>
   !***

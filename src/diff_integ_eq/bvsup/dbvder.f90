@@ -1,6 +1,5 @@
 !** DBVDER
 SUBROUTINE DBVDER(X,Y,Yp,G,Ipar)
-  USE DML, ONLY : NOFst, C, XSAv, IGOfx, INHomo, IVP, NCOmp, NFC
   !>
   !***
   !  Subsidiary to DBVSUP
@@ -63,7 +62,7 @@ SUBROUTINE DBVDER(X,Y,Yp,G,Ipar)
   !   910701  Corrected ROUTINES CALLED section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
   !   920618  Minor restructuring of code.  (RWC, WRB)
-
+  USE DML, ONLY : NOFst, C, XSAv, IGOfx, INHomo, IVP, NCOmp, NFC
   INTEGER Ipar, j, k, l, na
   REAL(8) :: G(*), X, Y(*), Yp(*)
   !- *********************************************************************

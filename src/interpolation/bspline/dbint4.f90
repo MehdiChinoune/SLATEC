@@ -107,7 +107,7 @@ SUBROUTINE DBINT4(X,Y,Ndata,Ibcl,Ibcr,Fbcl,Fbcr,Kntopt,T,Bcoef,N,K,W)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-
+  USE service, ONLY : XERMSG, D1MACH
   !
   INTEGER i, Ibcl, Ibcr, iflag, ilb, ileft, it, iub, iw, iwp, j, &
     jw, K, Kntopt, N, Ndata, ndm, np, nwrow

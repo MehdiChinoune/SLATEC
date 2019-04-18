@@ -52,7 +52,7 @@ REAL(8) FUNCTION DBSI0E(X)
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
-
+  USE service, ONLY : D1MACH
   REAL eta
   REAL(8) :: X, y
   INTEGER, SAVE :: nti0, ntai0, ntai02

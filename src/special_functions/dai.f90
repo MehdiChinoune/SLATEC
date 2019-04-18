@@ -43,7 +43,7 @@ REAL(8) FUNCTION DAI(X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920618  Removed space from variable names.  (RWC, WRB)
-
+  USE service, ONLY : XERMSG, D1MACH
   REAL(8) :: X, theta, xm, z, xmaxt
   INTEGER, SAVE :: naif, naig
   REAL(8), SAVE :: x3sml, xmax

@@ -1,7 +1,6 @@
 !** ISDCGS
 INTEGER FUNCTION ISDCGS(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,&
     Itmax,Iter,Err,Ierr,Iunit,R,R0,P,Q,U,V1,V2,Rwork,Iwork,Ak,Bk,Bnrm,Solnrm)
-  USE DSLBLK
   !>
   !***
   !  Preconditioned BiConjugate Gradient Squared Stop Test.
@@ -197,7 +196,8 @@ INTEGER FUNCTION ISDCGS(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,&
   !   921026  Changed 1.0E10 to D1MACH(2) and corrected D to E in
   !           output format.  (FNF)
   !   921113  Corrected C***CATEGORY line.  (FNF)
-
+  USE DSLBLK, ONLY : SOLn
+  USE service, ONLY : D1MACH
   !     .. Scalar Arguments ..
   REAL(8) :: Ak, Bk, Bnrm, Err, Solnrm, Tol
   INTEGER Ierr, Isym, Iter, Itmax, Itol, Iunit, N, Nelt

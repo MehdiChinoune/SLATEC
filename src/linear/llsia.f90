@@ -168,7 +168,7 @@ SUBROUTINE LLSIA(A,Mda,M,N,B,Mdb,Nb,Re,Ae,Key,Mode,Np,Krank,Ksure,Rnorm,W,&
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900510  Fixed an error message.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-
+  USE service, ONLY : R1MACH, XERMSG
   INTEGER i, Info, it, Key, Krank, Ksure, Liw, Lw, M, Mda, Mdb, &
     Mode, N, n1, n2, n3, n4, n5, Nb, Np
   REAL A(Mda,*), Ae(*), B(Mdb,*), eps, Re(*), Rnorm(*), W(*)

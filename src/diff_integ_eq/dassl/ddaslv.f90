@@ -32,7 +32,7 @@ SUBROUTINE DDASLV(Neq,Delta,Wm,Iwm)
   !   901019  Merged changes made by C. Ulrich with SLATEC 4.0 format.
   !   901026  Added explicit declarations for all variables and minor
   !           cosmetic changes to prologue.  (FNF)
-
+  USE linear, ONLY : DGBSL, DGESL
   !
   INTEGER Neq, Iwm(*)
   REAL(8) :: Delta(*), Wm(*)

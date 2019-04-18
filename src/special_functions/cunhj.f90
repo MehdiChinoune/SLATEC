@@ -46,7 +46,7 @@ SUBROUTINE CUNHJ(Z,Fnu,Ipmtr,Tol,Phi,Arg,Zeta1,Zeta2,Asum,Bsum)
   !* REVISION HISTORY  (YYMMDD)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
-
+  USE service, ONLY : R1MACH
   COMPLEX Arg, Asum, Bsum, cfnu, cr(14), dr(14), p(30), Phi, &
     przth, ptfn, rfn13, rtzta, rzth, suma, sumb, tfn, t2, &
     up(14), w, w2, Z, za, zb, zc, zeta, Zeta1, Zeta2, zth

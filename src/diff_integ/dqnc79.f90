@@ -81,7 +81,7 @@ SUBROUTINE DQNC79(FUN,A,B,Err,Ans,Ierr,K)
   !   920218  Code redone to parallel QNC79.  (WRB)
   !   930120  Increase array size 80->99, and KMX 2000->5000 for SUN -r8
   !           wordlength.  (RWC)
-
+  USE service, ONLY : XERMSG, D1MACH, I1MACH
   !     .. Scalar Arguments ..
   REAL(8) :: A, Ans, B, Err
   INTEGER Ierr, K

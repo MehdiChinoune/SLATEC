@@ -26,7 +26,7 @@ SUBROUTINE ZBUNI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Nui,Nlast,Fnul,Tol,Elim,Alim)
   !* REVISION HISTORY  (YYMMDD)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
-
+  USE service, ONLY : D1MACH
   !     COMPLEX CSCL,CSCR,CY,RZ,ST,S1,S2,Y,Z
   INTEGER i, iflag, iform, k, Kode, N, nl, Nlast, Nui, nw, Nz
   REAL(8) :: Alim, ax, ay, csclr, cscrr, cyi(2), cyr(2), dfnu, &

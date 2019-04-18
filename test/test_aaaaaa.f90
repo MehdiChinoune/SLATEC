@@ -1,11 +1,9 @@
 MODULE TEST01_MOD
-  use slatec
   IMPLICIT NONE
 
 CONTAINS
   !** QC6A
   SUBROUTINE QC6A(Lun,Kprint,Ipass)
-    IMPLICIT NONE
     !>
     !***
     !  Test subroutine AAAAAA.
@@ -47,7 +45,7 @@ CONTAINS
     !   890713  DATE WRITTEN
     !   921215  Updated for Version 4.0.  (WRB)
     !   930701  Updated for Version 4.1.  (WRB)
-
+    USE slatec, ONLY : AAAAAA
     !
     !*Internal Notes:
     !
@@ -99,8 +97,9 @@ CONTAINS
 END MODULE TEST01_MOD
 !** TEST01
 PROGRAM TEST01
-  USE TEST01_MOD
-  use slatec
+  USE TEST01_MOD, ONLY : QC6A
+  USE slatec, ONLY : I1MACH, XSETF, XSETUN, XERMAX
+  USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !>
   !***

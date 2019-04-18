@@ -40,7 +40,7 @@ SUBROUTINE SPPERM(X,N,Iperm,Ier)
   !* REVISION HISTORY  (YYMMDD)
   !   901004  DATE WRITTEN
   !   920507  Modified by M. McClain to revise prologue text.
-
+  USE service, ONLY : XERMSG
   INTEGER N, Iperm(*), i, Ier, indx, indx0, istrt
   REAL X(*), temp
   !* FIRST EXECUTABLE STATEMENT  SPPERM

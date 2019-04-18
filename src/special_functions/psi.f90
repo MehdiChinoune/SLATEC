@@ -44,7 +44,7 @@ REAL FUNCTION PSI(X)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900727  Added EXTERNAL statement.  (WRB)
   !   920618  Removed space from variable names.  (RWC, WRB)
-
+  USE service, ONLY : XERMSG, R1MACH
   REAL aux, X, y
   INTEGER i, n
   INTEGER, SAVE :: ntpsi, ntapsi

@@ -610,7 +610,7 @@ SUBROUTINE SNLS1(FCN,Iopt,M,N,X,Fvec,Fjac,Ldfjac,Ftol,Xtol,Gtol,Maxfev,&
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-
+  USE service, ONLY : XERMSG, R1MACH
   INTEGER Iopt, M, N, Ldfjac, Maxfev, Mode, Nprint, Info, Nfev, Njev
   INTEGER ijunk, nrow, Ipvt(*)
   REAL Ftol, Xtol, Gtol, Factor, Epsfcn

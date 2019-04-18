@@ -1,6 +1,5 @@
 !** LA05BD
 SUBROUTINE LA05BD(A,Ind,Ia,N,Ip,Iw,W,G,B,Trans)
-  USE LA05DD
   !>
   !***
   !  Subsidiary to DSPLP
@@ -44,7 +43,8 @@ SUBROUTINE LA05BD(A,Ind,Ia,N,Ip,Iw,W,G,B,Trans)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900402  Added TYPE section.  (WRB)
   !   920410  Corrected second dimension on IW declaration.  (WRB)
-
+  USE LA05DD, ONLY : LP, LENl
+  USE service, ONLY : XERMSG, XSETUN
   INTEGER i, Ia, ii, j, k, k2, kk, kl, kll, kp, kpc, l1, N, n1, nz
   REAL(8) :: A(*), B(*), am, W(*), G
   LOGICAL Trans

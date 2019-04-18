@@ -1,6 +1,5 @@
 !** LA05BS
 SUBROUTINE LA05BS(A,Ind,Ia,N,Ip,Iw,W,G,B,Trans)
-  USE LA05DS
   !>
   !***
   !  Subsidiary to SPLP
@@ -44,7 +43,8 @@ SUBROUTINE LA05BS(A,Ind,Ia,N,Ip,Iw,W,G,B,Trans)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900402  Added TYPE section.  (WRB)
   !   920410  Corrected second dimension on IW declaration.  (WRB)
-
+  USE LA05DS, ONLY : LP, LENl
+  USE service, ONLY : XERMSG, XSETUN
   INTEGER i, Ia, ii, j, k, k2, kk, kl, kll, kp, kpc, l1, N, n1, nz
   REAL A(Ia), B(*), am, W(*), G
   LOGICAL Trans

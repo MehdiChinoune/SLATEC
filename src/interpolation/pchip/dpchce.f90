@@ -99,7 +99,7 @@ SUBROUTINE DPCHCE(Ic,Vc,N,X,H,Slope,D,Incfd,Ierr)
   !   900328  Added TYPE section.  (WRB)
   !   910408  Updated AUTHOR section in prologue.  (WRB)
   !   930503  Improved purpose.  (FNF)
-
+  USE service, ONLY : XERMSG
   !
   !  Programming notes:
   !     1. The function DPCHST(ARG1,ARG2)  is assumed to return zero if

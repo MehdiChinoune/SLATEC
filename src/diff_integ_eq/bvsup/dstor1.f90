@@ -1,6 +1,5 @@
 !** DSTOR1
 SUBROUTINE DSTOR1(U,Yh,V,Yp,Ntemp,Ndisk,Ntape)
-  USE DML, ONLY : C, INHomo, NCOmp, NFC
   !>
   !***
   !  Subsidiary to DBVSUP
@@ -34,7 +33,7 @@ SUBROUTINE DSTOR1(U,Yh,V,Yp,Ntemp,Ndisk,Ntape)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
-
+  USE DML, ONLY : C, INHomo, NCOmp, NFC
   INTEGER j, nctnf, Ndisk, Ntape, Ntemp
   REAL(8) :: U(*), V(*), Yh(*), Yp(*)
   !     BEGIN BLOCK PERMITTING ...EXITS TO 80

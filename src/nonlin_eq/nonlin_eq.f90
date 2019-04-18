@@ -1,6 +1,4 @@
 MODULE nonlin_eq
-  use service
-  use linear
   IMPLICIT NONE
 
 CONTAINS

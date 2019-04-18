@@ -180,7 +180,7 @@ SUBROUTINE STEPS(F,Neqn,Y,X,H,Eps,Wt,Start,Hold,K,Kold,Crash,Phi,P,Yp,Psi,&
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-
+  USE service, ONLY : R1MACH
   INTEGER l, limit1, limit2, Neqn, Ns, nsm2, nsp1, nsp2
   REAL absh, Alpha(12), Beta(12), big, Eps, erk, erkm1, erkm2, erkp1, err, &
     Fouru, G(13), Gi(11), H, hnew, Hold, P(*), p5eps, Phi(Neqn,16)

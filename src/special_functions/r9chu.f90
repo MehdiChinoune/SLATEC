@@ -36,9 +36,8 @@ REAL FUNCTION R9CHU(A,B,Z)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
-
-  REAL A, aa(4), ab, anbn, B, bb(4), bp, c2, ct1, ct2, ct3, d1z, &
-    g1, g2, g3, sab
+  USE service, ONLY : XERMSG, R1MACH
+  REAL A, aa(4), ab, anbn, B, bb(4), bp, c2, ct1, ct2, ct3, d1z, g1, g2, g3, sab
   REAL x2i1, Z
   INTEGER i, j
   REAL, SAVE :: eps, sqeps

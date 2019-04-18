@@ -1,6 +1,5 @@
 !** DVECS
 SUBROUTINE DVECS(Ncomp,Lnfc,Yhp,Work,Iwork,Inhomo,Iflag)
-  USE DML, ONLY : INDpvt, LNFcc => NFCc
   !>
   !***
   !  Subsidiary to DBVSUP
@@ -35,7 +34,7 @@ SUBROUTINE DVECS(Ncomp,Lnfc,Yhp,Work,Iwork,Inhomo,Iflag)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
-
+  USE DML, ONLY : INDpvt, LNFcc => NFCc
   !
   INTEGER idp, Iflag, Inhomo, Iwork(*), k, kp, Lnfc, Ncomp, niv
   REAL(8) :: dum, Work(*), Yhp(Ncomp,*)

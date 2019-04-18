@@ -41,7 +41,7 @@ REAL FUNCTION BESK0(X)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
-
+  USE service, ONLY : XERMSG, R1MACH
   REAL X, xmaxt, y
   INTEGER, SAVE :: ntk0
   REAL, SAVE :: xsml, xmax

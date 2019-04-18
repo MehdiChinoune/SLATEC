@@ -162,8 +162,7 @@ SUBROUTINE ZBESK(Zr,Zi,Fnu,Kode,N,Cyr,Cyi,Nz,Ierr)
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
   !   920128  Category corrected.  (WRB)
   !   920811  Prologue revised.  (DWL)
-
-  !
+  USE service, ONLY : XERMSG, D1MACH, I1MACH
   !     COMPLEX CY,Z
   INTEGER Ierr, k, Kode, k1, k2, mr, N, nn, nuf, nw, Nz
   REAL(8) :: aa, alim, aln, arg, az, Cyi(N), Cyr(N), dig, elim, &

@@ -60,7 +60,8 @@ SUBROUTINE LSI(W,Mdw,Ma,Mg,N,Prgopt,X,Rnorm,Mode,Ws,Ip)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   920422  Changed CALL to HFTI to include variable MA.  (WRB)
-
+  USE service, ONLY : R1MACH
+  USE linear, ONLY : H12, HFTI, SASUM, SAXPY, SCOPY, SDOT, SSCAL, SSWAP
   INTEGER Ip(*), Ma, Mdw, Mg, Mode, N
   REAL Prgopt(*), Rnorm, W(Mdw,*), Ws(*), X(*)
   !

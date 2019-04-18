@@ -76,7 +76,7 @@ SUBROUTINE DBESY(X,Fnu,N,Y)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-
+  USE service, ONLY : XERMSG, D1MACH, I1MACH
   !
   INTEGER i, iflw, j, N, nb, nd, nn, nud
   REAL(8) :: azn, cn, dnu, elim, flgjy, fn, Fnu, rann, s, s1, &

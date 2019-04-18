@@ -1,11 +1,9 @@
 MODULE TEST43_MOD
-  use slatec
   IMPLICIT NONE
 
 CONTAINS
   !** JAC
   SUBROUTINE JAC(T,U,Pd,Nrowpd,Rpar,Ipar)
-    IMPLICIT NONE
     !>
     !***
     !  Evaluate Jacobian for DEBDF quick check.
@@ -41,7 +39,6 @@ CONTAINS
   END SUBROUTINE JAC
   !** FDEQC
   SUBROUTINE FDEQC(T,U,Uprime,Rpar,Ipar)
-    IMPLICIT NONE
     !>
     !***
     !  Derivative evaluator for DEPAC quick checks.
@@ -79,7 +76,6 @@ CONTAINS
   END SUBROUTINE FDEQC
   !** QXABM
   SUBROUTINE QXABM(Lun,Kprint,Ipass)
-    IMPLICIT NONE
     !>
     !***
     !  Test the DEPAC routine DEABM.
@@ -130,7 +126,7 @@ CONTAINS
     !   890618  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   900415  Code extensively revised.  (WRB)
-
+    USE slatec, ONLY : DEABM, R1MACH
     !
     !     Declare arguments.
     !
@@ -194,7 +190,6 @@ CONTAINS
   END SUBROUTINE QXABM
   !** QXBDF
   SUBROUTINE QXBDF(Lun,Kprint,Ipass)
-    IMPLICIT NONE
     !>
     !***
     !  Test the DEPAC routine DEBDF.
@@ -245,7 +240,7 @@ CONTAINS
     !   890618  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   900415  Code extensively revised.  (WRB)
-
+    USE slatec, ONLY : DEBDF, R1MACH
     !
     !     Declare arguments.
     !
@@ -311,7 +306,6 @@ CONTAINS
   END SUBROUTINE QXBDF
   !** QXRKF
   SUBROUTINE QXRKF(Lun,Kprint,Ipass)
-    IMPLICIT NONE
     !>
     !***
     !  Test the DEPAC routine DERKF.
@@ -362,7 +356,7 @@ CONTAINS
     !   890618  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   900415  Code extensively revised.  (WRB)
-
+    USE slatec, ONLY : DERKF, R1MACH
     !
     !     Declare arguments.
     !
@@ -426,8 +420,6 @@ CONTAINS
   END SUBROUTINE QXRKF
   !** QXBVSP
   SUBROUTINE QXBVSP(Lun,Kprint,Ipass)
-    USE SAVEX
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for BVSUP.
@@ -448,7 +440,9 @@ CONTAINS
     !   901014  Made editorial changes and added correct result to
     !           output.  (RWC)
     !   910708  Minor modifications in use of KPRINT.  (WRB)
-
+    USE SAVEX, ONLY : XSAve
+    USE slatec, ONLY : BVSUP
+    USE common_mod, ONLY : PASS
     INTEGER numort, nxpts
     REAL a(2,4), abser, ae, alpha(2), b(2,4), beta(2), re, reler, sve, tol, &
       work(1000), y(4,15)
@@ -685,8 +679,9 @@ CONTAINS
 END MODULE TEST43_MOD
 !** TEST43
 PROGRAM TEST43
-  USE TEST43_MOD
-  use slatec
+  USE TEST43_MOD, ONLY :  QXABM, QXBDF, QXBVSP, QXRKF
+  USE slatec, ONLY : I1MACH, XSETF, XSETUN, XERMAX
+  USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !>
   !***

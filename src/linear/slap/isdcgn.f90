@@ -2,7 +2,6 @@
 INTEGER FUNCTION ISDCGN(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MTTVEC,MSOLVE,Itol,&
     Tol,Itmax,Iter,Err,Ierr,Iunit,R,Z,P,Atp,Atz,Dz,&
     Atdz,Rwork,Iwork,Ak,Bk,Bnrm,Solnrm)
-  USE DSLBLK
   !>
   !***
   !  Preconditioned CG on Normal Equations Stop Test.
@@ -206,7 +205,8 @@ INTEGER FUNCTION ISDCGN(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MTTVEC,MSOLVE,Itol,&
   !   921026  Changed 1.0E10 to D1MACH(2) and corrected D to E in
   !           output format.  (FNF)
   !   921113  Corrected C***CATEGORY line.  (FNF)
-
+  USE DSLBLK, ONLY : SOLn
+  USE service, ONLY : D1MACH
   !     .. Scalar Arguments ..
   REAL(8) :: Ak, Bk, Bnrm, Err, Solnrm, Tol
   INTEGER Ierr, Isym, Iter, Itmax, Itol, Iunit, N, Nelt

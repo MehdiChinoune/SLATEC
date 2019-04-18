@@ -105,7 +105,7 @@ SUBROUTINE CHIEV(A,Lda,N,E,V,Ldv,Work,Job,Info)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-
+  USE service, ONLY : XERMSG
   INTEGER i, Info, j, Job, k, l, Lda, Ldv, m, mdim, N
   REAL A(*), E(*), Work(*), V(*)
   !* FIRST EXECUTABLE STATEMENT  CHIEV

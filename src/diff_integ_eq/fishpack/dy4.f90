@@ -1,6 +1,5 @@
 !** DY4
 SUBROUTINE DY4(U,Idmn,I,J,Uyyy,Uyyyy)
-  USE SPL4
   !>
   !***
   !  Subsidiary to SEPX4
@@ -28,7 +27,7 @@ SUBROUTINE DY4(U,Idmn,I,J,Uyyy,Uyyyy)
   !   801001  DATE WRITTEN
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
-
+  USE SPL4, ONLY : L, DLY4, KSWy, TDLy3
   INTEGER I, Idmn, J
   REAL U(Idmn,*), Uyyy, Uyyyy
   !* FIRST EXECUTABLE STATEMENT  DY4

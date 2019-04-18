@@ -54,7 +54,7 @@ REAL FUNCTION BESI1E(X)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920618  Removed space from variable names.  (RWC, WRB)
-
+  USE service, ONLY : XERMSG, R1MACH
   REAL X, y
   INTEGER, SAVE :: nti1, ntai1, ntai12
   REAL, SAVE :: xmin, xsml

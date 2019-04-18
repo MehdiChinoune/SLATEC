@@ -731,7 +731,8 @@ SUBROUTINE CDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
   !* REVISION HISTORY  (YYMMDD)
   !   790601  DATE WRITTEN
   !   900329  Initial submission to SLATEC.
-
+  USE service, ONLY : XERMSG, R1MACH
+  USE linear, ONLY : SCNRM2, CGBSL, CGESL, CGBFA, CGEFA
   EXTERNAL :: F, JACOBN, FA, G, USERS
   COMPLEX Work(*), Y(*)
   REAL ae, avgh, avgord, big, el(13,12), Eps, Ewt(*), G, glast, gnow, h, Hmax, &

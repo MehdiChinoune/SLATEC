@@ -53,7 +53,7 @@ SUBROUTINE DLPDP(A,Mda,M,N1,N2,Prgopt,X,Wnorm,Mode,Ws,Is)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910408  Updated the AUTHOR section.  (WRB)
-
+  USE linear, ONLY : DCOPY, DNRM2, DSCAL, DDOT
   !
   INTEGER i, Is(*), iw, ix, j, l, M, Mda, Mode, modew, n, N1, N2, np1
   REAL(8) :: A(Mda,*), Prgopt(*), rnorm, sc, Wnorm, Ws(*), X(*), ynorm

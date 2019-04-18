@@ -1,6 +1,5 @@
 !** MPMAXR
 SUBROUTINE MPMAXR(X)
-  USE MPCOM
   !>
   !***
   !  Subsidiary to DQDOTA and DQDOTI
@@ -32,7 +31,7 @@ SUBROUTINE MPMAXR(X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   !   930124  Increased Array size in MPCON for SUN -r8.  (RWC)
-
+  USE MPCOM, ONLY : B, M, T
   INTEGER i, it, X(*)
   !* FIRST EXECUTABLE STATEMENT  MPMAXR
   CALL MPCHK(1,4)

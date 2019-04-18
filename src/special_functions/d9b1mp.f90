@@ -59,7 +59,7 @@ SUBROUTINE D9B1MP(X,Ampl,Theta)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
   !   920618  Removed space from variable name and code restructured to
   !           use IF-THEN-ELSE.  (RWC, WRB)
-
+  USE service, ONLY : XERMSG, D1MACH
   REAL eta
   REAL(8) :: X, Ampl, Theta, z
   INTEGER, SAVE :: nbm1, nbt12, nbm12, nbth1

@@ -79,7 +79,7 @@ REAL(8) FUNCTION DBIE(X)
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
-
+  USE service, ONLY : D1MACH
   REAL eta
   REAL(8) :: X, sqrtx, theta, xm, z
   INTEGER, SAVE :: nbif, nbig, nbif2, nbig2, nbip1, nbip2

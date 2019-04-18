@@ -78,7 +78,8 @@ SUBROUTINE DPFQAD(F,Ldc,C,Xi,Lxi,K,Id,X1,X2,Tol,Quad,Ierr)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-
+  USE service, ONLY : XERMSG, D1MACH
+  USE interpolation, ONLY : DPPGQ8, DINTRV
   !
   INTEGER Id, Ierr, iflg, ilo, il1, il2, inppv, K, Ldc, left, Lxi, mf1, mf2
   REAL(8) :: a, aa, ans, b, bb, C(Ldc,*), q, Quad, ta, tb, Tol, wtol, Xi(*), X1, X2

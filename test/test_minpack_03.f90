@@ -1,5 +1,4 @@
 MODULE TEST52_MOD
-  use slatec
   IMPLICIT NONE
   REAL EPS, RP, SVEps, TOL
   INTEGER IERp, IERr, NORd, NORdp
@@ -8,7 +7,6 @@ MODULE TEST52_MOD
 CONTAINS
   !** CMPARE
   SUBROUTINE CMPARE(Icnt,Itest)
-    IMPLICIT NONE
     !>
     !***
     !  Compare values in COMMON block CHECK for quick check
@@ -64,7 +62,6 @@ CONTAINS
   END SUBROUTINE CMPARE
   !** PFITQX
   SUBROUTINE PFITQX(Lun,Kprint,Ipass)
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for POLFIT, PCOEF and PVALUE.
@@ -92,7 +89,8 @@ CONTAINS
     !   910708  Minor modifications in use of KPRINT.  (WRB)
     !   920214  Code restructured to test for all values of KPRINT and to
     !           provide more PASS/FAIL information.  (WRB)
-
+    USE slatec, ONLY : PCOEF, POLFIT, PVALUE, R1MACH, XERCLR, XGETF, XSETF
+    USE common_mod, ONLY : PASS
     INTEGER kontrl
     !     .. Scalar Arguments ..
     INTEGER Ipass, Kprint, Lun
@@ -441,7 +439,6 @@ CONTAINS
   END SUBROUTINE PFITQX
   !** SNLS1Q
   SUBROUTINE SNLS1Q(Lun,Kprint,Ipass)
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for SNLS1E, SNLS1 and SCOV.
@@ -470,7 +467,9 @@ CONTAINS
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   930214  Declarations sections added, code revised to test error
     !           returns for all values of KPRINT and code polished.  (WRB)
-
+    USE slatec, ONLY : ENORM, FDJAC3, R1MACH, SCOV, SNLS1E, XGETF, XSETF, XERCLR, &
+      NUMXER
+    USE common_mod, ONLY : PASS
     !     .. Scalar Arguments ..
     INTEGER Ipass, Kprint, Lun
     !     .. Local Scalars ..
@@ -724,7 +723,6 @@ CONTAINS
   END SUBROUTINE SNLS1Q
   !** FCQX
   SUBROUTINE FCQX(Lun,Kprint,Ipass)
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for FC.
@@ -770,7 +768,8 @@ CONTAINS
     !           FORMATs.  (RWC)
     !   930214  Declarations sections added, code revised to test error
     !           returns for all values of KPRINT and code polished.  (WRB)
-
+    USE slatec, ONLY : BVALU, CV, FC, IVOUT, R1MACH, SCOPY, SMOUT, SVOUT, XGETF, &
+      XSETF, XERCLR, NUMXER
     !     .. Scalar Arguments ..
     INTEGER Ipass, Kprint, Lun
     !     .. Local Scalars ..
@@ -1052,7 +1051,6 @@ CONTAINS
   END SUBROUTINE FCQX
   !** FCN1
   SUBROUTINE FCN1(Iflag,M,N,X,Fvec,Fjac,Ldfjac)
-    IMPLICIT NONE
     !>
     !***
     !  Subsidiary to SNLS1Q.
@@ -1102,7 +1100,6 @@ CONTAINS
   END SUBROUTINE FCN1
   !** FCN2
   SUBROUTINE FCN2(Iflag,M,N,X,Fvec,Fjac,Ldfjac)
-    IMPLICIT NONE
     !>
     !***
     !  Subsidiary to SNLS1Q.
@@ -1169,7 +1166,6 @@ CONTAINS
   END SUBROUTINE FCN2
   !** FCN3
   SUBROUTINE FCN3(Iflag,M,N,X,Fvec,Fjrow,Nrow)
-    IMPLICIT NONE
     !>
     !***
     !  Subsidiary to SNLS1Q.
@@ -1235,8 +1231,9 @@ CONTAINS
 END MODULE TEST52_MOD
 !** TEST52
 PROGRAM TEST52
-  USE TEST52_MOD
-  use slatec
+  USE TEST52_MOD, ONLY : FCQX, PFITQX, SNLS1Q
+  USE slatec, ONLY : I1MACH, XSETF, XSETUN, XERMAX
+  USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !>
   !***

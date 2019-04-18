@@ -37,7 +37,7 @@ REAL(8) FUNCTION D9CHU(A,B,Z)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
-
+  USE service, ONLY : XERMSG, D1MACH
   INTEGER i, j
   REAL(8) :: A, B, Z, aa(4), bb(4), ab, anbn, bp, ct1, ct2, &
     ct3, c2, d1z, g1, g2, g3, sab, x2i1

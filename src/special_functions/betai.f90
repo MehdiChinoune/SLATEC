@@ -43,7 +43,7 @@ REAL FUNCTION BETAI(X,Pin,Qin)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920528  DESCRIPTION and REFERENCES sections revised.  (WRB)
-
+  USE service, ONLY : XERMSG, R1MACH
   REAL c, finsum, p, p1, Pin, ps, q, Qin, term, X, xb, y
   INTEGER i, ib, n
   REAL, SAVE :: eps, alneps, sml, alnsml

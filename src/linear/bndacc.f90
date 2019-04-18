@@ -199,7 +199,7 @@ SUBROUTINE BNDACC(G,Mdg,Nb,Ip,Ir,Mt,Jt)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-
+  USE service, ONLY : XERMSG
   INTEGER i, ie, ig, ig1, ig2, iopt, Ip, Ir, j, jg, Jt, k, kh, &
     l, lp1, Mdg, mh, Mt, mu, Nb
   REAL G(Mdg,*), rho, zero

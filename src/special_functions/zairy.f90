@@ -145,7 +145,7 @@ SUBROUTINE ZAIRY(Zr,Zi,Id,Kode,Air,Aii,Nz,Ierr)
   !   920128  Category corrected.  (WRB)
   !   920811  Prologue revised.  (DWL)
   !   930122  Added ZEXP and ZSQRT to EXTERNAL statement.  (RWC)
-
+  USE service, ONLY : D1MACH, I1MACH
   !     COMPLEX AI,CONE,CSQ,CY,S1,S2,TRM1,TRM2,Z,ZTA,Z3
   REAL(8) :: aa, ad, Aii, Air, ak, alim, atrm, az, az3, bk, cc, ck, csqi, csqr, &
     cyi(1), cyr(1), dig, dk, d1, d2, elim, fid, fnu, ptr, rl, r1m5, sfac, sti, &

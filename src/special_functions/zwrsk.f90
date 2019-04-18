@@ -23,7 +23,7 @@ SUBROUTINE ZWRSK(Zrr,Zri,Fnu,Kode,N,Yr,Yi,Nz,Cwr,Cwi,Tol,Elim,Alim)
   !* REVISION HISTORY  (YYMMDD)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
-
+  USE service, ONLY : D1MACH
   !     COMPLEX CINU,CSCL,CT,CW,C1,C2,RCT,ST,Y,ZR
   INTEGER i, Kode, N, nw, Nz
   REAL(8) :: act, acw, Alim, ascle, cinui, cinur, csclr, cti, &

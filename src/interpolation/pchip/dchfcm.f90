@@ -73,7 +73,7 @@ INTEGER FUNCTION DCHFCM(D1,D2,Delta)
   !   890407  Converted to new SLATEC format.
   !   890407  Modified DESCRIPTION to LDOC format.
   !   891214  Moved SAVE statements.  (WRB)
-
+  USE service, ONLY : D1MACH
   !
   !  Fortran intrinsics used:  DSIGN.
   !  Other routines used:  D1MACH.

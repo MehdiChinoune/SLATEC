@@ -1,6 +1,5 @@
 !** MPADD3
 SUBROUTINE MPADD3(X,Y,S,Med,Re)
-  USE MPCOM
   !>
   !***
   !  Subsidiary to DQDOTA and DQDOTI
@@ -34,7 +33,7 @@ SUBROUTINE MPADD3(X,Y,S,Med,Re)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   !   930124  Increased Array size in MPCON for SUN -r8.  (RWC)
-
+  USE MPCOM, ONLY : B, T, R
   INTEGER i, i2, i2p, j, Med, X(*), Y(*), S, Re, c, ted
   !* FIRST EXECUTABLE STATEMENT  MPADD3
   ted = T + Med

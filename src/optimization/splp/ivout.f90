@@ -56,7 +56,7 @@ SUBROUTINE IVOUT(N,Ix,Ifmt,Idigit)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   !   910403  Updated AUTHOR section.  (WRB)
-
+  USE service, ONLY : I1MACH
   INTEGER i, Idigit, Ix(*), j, k1, k2, lout, N, ndigit
   CHARACTER Ifmt*(*)
   !

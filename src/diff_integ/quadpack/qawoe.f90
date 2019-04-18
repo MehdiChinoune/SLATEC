@@ -221,7 +221,7 @@ SUBROUTINE QAWOE(F,A,B,Omega,Integr,Epsabs,Epsrel,Limit,Icall,Maxp1,&
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
-
+  USE service, ONLY : R1MACH
   !
   INTEGER Icall, id, Ier, ierro, Integr, Iord(*), iroff1, iroff2, &
     iroff3, jupbnd, k, ksgn, ktmin, Last, Limit, maxerr, &

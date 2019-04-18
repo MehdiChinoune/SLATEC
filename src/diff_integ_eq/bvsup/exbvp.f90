@@ -1,7 +1,5 @@
 !** EXBVP
 SUBROUTINE EXBVP(Y,Nrowy,Xpts,A,Nrowa,Alpha,B,Nrowb,Beta,Iflag,Work,Iwork)
-  USE ML, ONLY : NCOmp, NFC, TOL, NXPts, NIC, NOPg, MXNon, NDIsk, NTP, NFCc, X, &
-    XBEg, XENd, KKKzpw, NEEdw, NEEdiw, K1, K2, K3, K4, K5, K6, K7, K8, K9, K10, L1, LPAr
   !>
   !***
   !  Subsidiary to BVSUP
@@ -32,7 +30,9 @@ SUBROUTINE EXBVP(Y,Nrowy,Xpts,A,Nrowa,Alpha,B,Nrowb,Beta,Iflag,Work,Iwork)
   !   900328  Added TYPE section.  (WRB)
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
   !   910722  Updated AUTHOR section.  (ALS)
-
+  USE ML, ONLY : NCOmp, NFC, TOL, NXPts, NIC, NOPg, MXNon, NDIsk, NTP, NFCc, X, &
+    XBEg, XENd, KKKzpw, NEEdw, NEEdiw, K1, K2, K3, K4, K5, K6, K7, K8, K9, K10, L1, LPAr
+  USE service, ONLY : XERMSG
   INTEGER Nrowa, Nrowb, Nrowy, nsafiw, nsafw, iexp, Iflag, inc, Iwork(*), kotc
   REAL A(Nrowa,*), Alpha(*), B(Nrowb,*), Beta(*), Work(*), xl, Xpts(*), Y(Nrowy,*), zquit
   CHARACTER(8) :: xern1, xern2

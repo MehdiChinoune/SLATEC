@@ -36,7 +36,7 @@ REAL(8) FUNCTION DGAMI(A,X)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-
+  USE service, ONLY : XERMSG
   REAL(8) :: A, X, factor
   !* FIRST EXECUTABLE STATEMENT  DGAMI
   IF ( A<=0.D0 ) CALL XERMSG('SLATEC','DGAMI','A MUST BE GT ZERO',1,2)

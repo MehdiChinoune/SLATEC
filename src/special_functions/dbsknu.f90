@@ -90,7 +90,7 @@ SUBROUTINE DBSKNU(X,Fnu,Kode,N,Y,Nz)
   !   900727  Added EXTERNAL statement.  (WRB)
   !   910408  Updated the AUTHOR and REFERENCES sections.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-
+  USE service, ONLY : XERMSG, D1MACH, I1MACH
   !
   INTEGER i, iflag, inu, j, k, kk, Kode, koded, N, nn, Nz
   REAL(8) :: a(160), ak, a1, a2, b(160), bk, ck, coef, cx, dk, dnu, dnu2, elim, &

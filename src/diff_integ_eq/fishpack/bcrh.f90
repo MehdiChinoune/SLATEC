@@ -1,6 +1,5 @@
 !** BCRH
 REAL FUNCTION BCRH(Xll,Xrr,Iz,C,A,Bh,F,Sgn)
-  USE CCBLK
   !>
   !***
   !  Subsidiary to CBLKTR
@@ -21,7 +20,7 @@ REAL FUNCTION BCRH(Xll,Xrr,Iz,C,A,Bh,F,Sgn)
   !   801001  DATE WRITTEN
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
-
+  USE CCBLK, ONLY : CNV
   REAL A(*), Bh(*), C(*), dx, F, Sgn, x, xl, Xll, xr, Xrr
   INTEGER Iz
   !* FIRST EXECUTABLE STATEMENT  BCRH

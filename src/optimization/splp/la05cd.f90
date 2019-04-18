@@ -1,6 +1,5 @@
 !** LA05CD
 SUBROUTINE LA05CD(A,Ind,Ia,N,Ip,Iw,W,G,U,Mm)
-  USE LA05DD
   !>
   !***
   !  Subsidiary to DSPLP
@@ -42,7 +41,8 @@ SUBROUTINE LA05CD(A,Ind,Ia,N,Ip,Iw,W,G,U,Mm)
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
   !   920410  Corrected second dimension on IW declaration.  (WRB)
   !   920422  Changed upper limit on DO from LAST to LAST-1.  (WRB)
-
+  USE LA05DD, ONLY : LP, LCOl, LENl, LENu, NCP, LROw, SMAll
+  USE service, ONLY : XERMSG, XSETUN
   INTEGER i, Ia, ii, ij, im, in, ins, ipp, ir, is, j, jm, jns, jp, k, kj, kk, kl, &
     km, knp, kp, kpl, kq, kr, krl, ks, l, last, last1, last2, m, m1, mcp, Mm, N, nz
   REAL(8) :: A(*), G, U, am, W(*), au

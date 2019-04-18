@@ -34,7 +34,7 @@ REAL(8) FUNCTION DLBETA(A,B)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900727  Added EXTERNAL statement.  (WRB)
-
+  USE service, ONLY : XERMSG
   REAL(8) :: A, B, p, q, corr
   REAL(8), PARAMETER :: sq2pil = 0.91893853320467274178032973640562D0
   !* FIRST EXECUTABLE STATEMENT  DLBETA

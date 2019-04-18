@@ -1,7 +1,5 @@
 !** CHKXER
 SUBROUTINE CHKXER(Srnamt,Infot,Nout,Fatal,Kprint)
-  use SLATEC
-  IMPLICIT NONE
   !>
   !***
   !  Test whether an error has been detected.
@@ -24,7 +22,7 @@ SUBROUTINE CHKXER(Srnamt,Infot,Nout,Fatal,Kprint)
   !* REVISION HISTORY  (YYMMDD)
   !   870810  DATE WRITTEN
   !   910620  Modified to meet SLATEC code and prologue standards.  (BKS)
-
+  USE slatec, ONLY : NUMXER
   !     .. Scalar Arguments ..
   LOGICAL Fatal
   INTEGER Infot, Kprint, Nout

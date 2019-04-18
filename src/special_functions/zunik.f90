@@ -37,7 +37,7 @@ SUBROUTINE ZUNIK(Zrr,Zri,Fnu,Ikflg,Ipmtr,Tol,Init,Phir,Phii,Zeta1r,Zeta1i,&
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
   !   930122  Added EXTERNAL statement with ZLOG and ZSQRT.  (RWC)
-
+  USE service, ONLY : D1MACH
   !     COMPLEX CFN,CON,CONE,CRFN,CWRK,CZERO,PHI,S,SR,SUM,T,T2,ZETA1,
   !    *ZETA2,ZN,ZR
   REAL(8) :: ac, crfni, crfnr, Cwrki(16), Cwrkr(16), Fnu, Phii, Phir, rfn, si, sr, &

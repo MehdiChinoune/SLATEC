@@ -1,6 +1,5 @@
 !** DFMAT
 SUBROUTINE DFMAT(X,Y,Yp)
-  USE DSAVEX
   !>
   !***
   !  Subsidiary to
@@ -16,7 +15,7 @@ SUBROUTINE DFMAT(X,Y,Yp)
   !* REVISION HISTORY  (YYMMDD)
   !   ??????  DATE WRITTEN
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
-
+  USE DSAVEX, ONLY : XSAve, TERm
   REAL(8) :: X, Y(*), Yp(*), tanx
   !* FIRST EXECUTABLE STATEMENT  DFMAT
   Yp(1) = Y(2)

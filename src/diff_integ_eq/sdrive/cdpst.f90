@@ -30,7 +30,7 @@ SUBROUTINE CDPST(El,F,FA,H,Impl,JACOBN,Matdim,Miter,Ml,Mu,N,Nde,Nq,Save2,&
   !* REVISION HISTORY  (YYMMDD)
   !   790601  DATE WRITTEN
   !   900329  Initial submission to SLATEC.
-
+  USE linear, ONLY : SCNRM2, CGBFA, CGEFA
   INTEGER i, iflag, imax, Impl, info, Iswflg, j, j2, Jstate, k, &
     Matdim, Miter, Ml, Mu, mw, N, Nde, Nfe, Nje, Nq
   COMPLEX A(Matdim,*), cfctr, Dfdy(Matdim,*), dy, Fac(*), Save1(*), &

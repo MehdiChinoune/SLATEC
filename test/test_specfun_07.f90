@@ -1,11 +1,9 @@
 MODULE TEST08_MOD
-  use slatec
   IMPLICIT NONE
 
 CONTAINS
   !** DQCKIN
   SUBROUTINE DQCKIN(Lun,Kprint,Ipass)
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for DBSKIN.
@@ -45,7 +43,7 @@ CONTAINS
     !   890911  Removed unnecessary intrinsics.  (WRB)
     !   890911  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
-
+    USE slatec, ONLY : D1MACH, DBSKIN, I1MACH
     INTEGER Ipass, Kprint, nz
     INTEGER i, ierr, iflg, ix, i1m12, j, k, kode, Lun, m, mdel, mm, n, ndel, nn
     REAL(8) :: aix, er, tol, v(1), x, xinc, y(10)
@@ -131,7 +129,6 @@ CONTAINS
   END SUBROUTINE DQCKIN
   !** DQCPSI
   SUBROUTINE DQCPSI(Lun,Kprint,Ipass)
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for DPSIFN.
@@ -170,7 +167,7 @@ CONTAINS
     !   890911  Removed unnecessary intrinsics.  (WRB)
     !   890911  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
-
+    USE slatec, ONLY : D1MACH, DPSIFN
     INTEGER Ipass, Kprint
     INTEGER i, ierr, iflg, ix, kode, Lun, m, n, nm, nn, nz
     REAL(8) :: er, psi1(3), psi2(20), r1m4, s, tol, x
@@ -268,8 +265,9 @@ CONTAINS
 END MODULE TEST08_MOD
 !** TEST08
 PROGRAM TEST08
-  USE TEST08_MOD
-  use slatec
+  USE TEST08_MOD, ONLY : DQCKIN, DQCPSI
+  USE slatec, ONLY : I1MACH, XSETF, XSETUN, XERMAX
+  USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !>
   !***

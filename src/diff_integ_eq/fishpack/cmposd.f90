@@ -30,7 +30,7 @@ SUBROUTINE CMPOSD(Mr,Nr,Istag,Ba,Bb,Bc,Q,Idimq,B,W,D,Tcos,P)
   !   900402  Added TYPE section.  (WRB)
   !   920130  Modified to use merge routine C1MERG rather than deleted
   !           routine CMPMRG.  (WRB)
-
+  USE data_handling, ONLY : C1MERG
   REAL fi
   INTEGER i, ideg, Idimq, ip, ip1, ipstor, irreg, Istag, j, jdeg, &
     jm1, jm2, jm3, jp1, jp2, jp3, jsh, jsp, jst, jstsav

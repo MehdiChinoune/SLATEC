@@ -308,7 +308,7 @@ REAL FUNCTION RJ(X,Y,Z,P,Ier)
   !   900510  Changed calls to XERMSG to standard form, and some
   !           editorial changes.  (RWC)).
   !   920501  Reformatted the REFERENCES section.  (WRB)
-
+  USE service, ONLY : XERMSG, R1MACH
   CHARACTER(16) :: xern3, xern4, xern5, xern6, xern7
   INTEGER Ier
   REAL alfa, beta, ea, eb, ec, e2, e3, epslon, lamda, mu, P, pn, pndev, power4, &

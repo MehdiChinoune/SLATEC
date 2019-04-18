@@ -161,6 +161,7 @@ SUBROUTINE DCOV(FCN,Iopt,M,N,X,Fvec,R,Ldr,Info,Wa1,Wa2,Wa3,Wa4)
   !     REVISED 850601-1100
   !     REVISED YYMMDD HHMM
   !
+  USE service, ONLY : XERMSG
   INTEGER i, idum(1), iflag, Info, Iopt, j, k, kp1, Ldr, M, N, nm1, nrow
   REAL(8) :: X(*), R(Ldr,*), Fvec(*), Wa1(*), Wa2(*), Wa3(*), Wa4(*)
   EXTERNAL :: FCN

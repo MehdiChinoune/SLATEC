@@ -26,7 +26,7 @@ SUBROUTINE BKISR(X,N,Summ,Ierr)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
-
+  USE service, ONLY : R1MACH
   INTEGER i, Ierr, k, kk, kkn, k1, N, np
   REAL ak, atol, bk, fk, fn, hx, hxs, pol, pr, Summ, tkp, tol, trm, X, xln
   !

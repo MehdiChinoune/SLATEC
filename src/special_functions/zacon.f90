@@ -28,7 +28,7 @@ SUBROUTINE ZACON(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Rl,Fnul,Tol,Elim,Alim)
   !* REVISION HISTORY  (YYMMDD)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
-
+  USE service, ONLY : XERMSG, D1MACH
   !     COMPLEX CK,CONE,CSCL,CSCR,CSGN,CSPN,CY,CZERO,C1,C2,RZ,SC1,SC2,ST,
   !    *S1,S2,Y,Z,ZN
   INTEGER i, inu, iuf, kflag, Kode, Mr, N, nn, nw, Nz

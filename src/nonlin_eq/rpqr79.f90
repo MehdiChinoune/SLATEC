@@ -56,7 +56,8 @@ SUBROUTINE RPQR79(Ndeg,Coeff,Root,Ierr,Work)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   911010  Code reworked and simplified.  (RWC and WRB)
-
+  USE service, ONLY : XERMSG
+  USE linear, ONLY : HQR
   INTEGER km1, kwend
   REAL Coeff(*), Work(*), scalee
   COMPLEX Root(*)

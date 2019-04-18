@@ -33,7 +33,7 @@ REAL FUNCTION EXPREL(X)
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
-
+  USE service, ONLY : R1MACH, I1MACH
   REAL absx, alneps, X, xln, xn
   INTEGER i
   INTEGER, SAVE :: nterms

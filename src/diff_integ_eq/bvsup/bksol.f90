@@ -34,7 +34,7 @@ SUBROUTINE BKSOL(N,A,X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
-
+  USE linear, ONLY : SDOT
   REAL A(*), X(*)
   INTEGER j, k, m, N, nm1
   !* FIRST EXECUTABLE STATEMENT  BKSOL

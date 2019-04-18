@@ -133,7 +133,7 @@ SUBROUTINE DTRMM(Side,Uplo,Transa,Diag,M,N,Alpha,A,Lda,B,Ldb)
   !   890208  DATE WRITTEN
   !   910605  Modified to meet SLATEC prologue standards.  Only comment
   !           lines were modified.  (BKS)
-
+  USE service, ONLY : XERBLA
   !     .. Scalar Arguments ..
   CHARACTER :: Side, Uplo, Transa, Diag
   INTEGER M, N, Lda, Ldb

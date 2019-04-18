@@ -42,7 +42,7 @@ INTEGER FUNCTION INITS(Os,Nos,Eta)
   !   891115  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-  
+  USE service, ONLY : XERMSG
   REAL err, Eta
   INTEGER i, ii, Nos
   REAL Os(*)

@@ -126,7 +126,7 @@ SUBROUTINE DPCHCM(N,X,F,D,Incfd,Skip,Ismon,Ierr)
   !   890407  Modified DESCRIPTION to LDOC format.
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920429  Revised format and order of references.  (WRB,FNF)
-
+  USE service, ONLY : XERMSG
   !
   !  Fortran intrinsics used:  ISIGN.
   !  Other routines used:  CHFCM, XERMSG.

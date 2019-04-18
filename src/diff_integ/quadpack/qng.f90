@@ -93,7 +93,7 @@ SUBROUTINE QNG(F,A,B,Epsabs,Epsrel,Result,Abserr,Neval,Ier)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-
+  USE service, ONLY : XERMSG, R1MACH
   REAL A, absc, Abserr, B, centr, dhlgth, epmach, Epsabs, Epsrel, &
     fcentr, fval, fval1, fval2, fv1(5), fv2(5), fv3(5), fv4(5), hlgth, &
     Result, res10, res21, res43, res87, resabs, resasc, reskh, savfun(21), uflow

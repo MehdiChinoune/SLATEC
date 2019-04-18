@@ -37,7 +37,7 @@ REAL(8) FUNCTION D9PAK(Y,N)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   901009  Routine used I1MACH(7) where it should use I1MACH(10),
   !           Corrected (RWC)
-
+  USE service, ONLY : XERMSG, D1MACH, I1MACH
   INTEGER N, nsum, ny
   REAL(8) :: Y, a1n2b
   INTEGER, SAVE :: nmin, nmax

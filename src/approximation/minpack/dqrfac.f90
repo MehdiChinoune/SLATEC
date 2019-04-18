@@ -88,7 +88,7 @@ SUBROUTINE DQRFAC(M,N,A,Lda,Pivot,Ipvt,Lipvt,Sigma,Acnorm,Wa)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   900328  Added TYPE section.  (WRB)
-
+  USE service, ONLY : D1MACH
   INTEGER M, N, Lda, Lipvt
   INTEGER Ipvt(*)
   LOGICAL Pivot

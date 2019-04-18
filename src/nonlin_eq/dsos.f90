@@ -189,7 +189,7 @@ SUBROUTINE DSOS(FNC,Neq,X,Rtolx,Atolx,Tolf,Iflag,Rw,Lrw,Iw,Liw)
   !   900510  Convert XERRWV calls to XERMSG calls, change Prologue
   !           comments to agree with SOS.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-
+  USE service, ONLY : XERMSG
   INTEGER Iflag, inpflg, iprint, Iw(*), k1, k2, k3, k4, k5, k6, &
     Liw, Lrw, mxit, nc, ncjs, Neq, nsri, nsrrc
   REAL(8) :: Atolx, Rtolx, Rw(*), Tolf, X(*)

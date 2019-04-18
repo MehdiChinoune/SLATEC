@@ -30,7 +30,7 @@ SUBROUTINE POISD2(Mr,Nr,Istag,Ba,Bb,Bc,Q,Idimq,B,W,D,Tcos,P)
   !   900402  Added TYPE section.  (WRB)
   !   920130  Modified to use merge routine S1MERG rather than deleted
   !           routine MERGE.  (WRB)
-
+  USE data_handling, ONLY : S1MERG
   INTEGER i, ideg, Idimq, ip, ip1, ipstor, irreg, Istag, j, jdeg, &
     jm1, jm2, jm3, jp1, jp2, jp3, jsh, jsp, jst, jstsav
   REAL B(*), Ba(*), Bb(*), Bc(*), D(*), fi, P(*), Q(Idimq,*), t, Tcos(*), W(*)

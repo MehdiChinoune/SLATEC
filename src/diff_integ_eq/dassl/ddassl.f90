@@ -932,7 +932,7 @@ SUBROUTINE DDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
   !           be of more uniform format.  (FNF)
   !   910624  Fixed minor bug related to HMAX (six lines after label
   !           525).  (LRP)
-
+  USE service, ONLY : XERMSG, D1MACH
   !
   !**End
   !

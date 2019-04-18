@@ -33,7 +33,7 @@ REAL(8) FUNCTION D9GMIT(A,X,Algap1,Sgngam,Alx)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
-
+  USE service, ONLY : XERMSG, D1MACH
   INTEGER k, m, ma
   REAL(8) :: A, X, Algap1, Sgngam, Alx, ae, aeps, algs, alg2, fk, s, sgng2, t, te
   REAL(8), SAVE :: eps, bot

@@ -57,7 +57,7 @@ SUBROUTINE DSORT(Dx,Dy,N,Kflag)
   !   920519  Clarified error messages.  (DWL)
   !   920801  Declarations section rebuilt and code restructured to use
   !           IF-THEN-ELSE-ENDIF.  (RWC, WRB)
-
+  USE service, ONLY : XERMSG
   !     .. Scalar Arguments ..
   INTEGER Kflag, N
   !     .. Array Arguments ..

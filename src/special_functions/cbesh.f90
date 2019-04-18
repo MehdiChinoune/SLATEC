@@ -160,7 +160,7 @@ SUBROUTINE CBESH(Z,Fnu,Kode,M,N,Cy,Nz,Ierr)
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
   !   920128  Category corrected.  (WRB)
   !   920811  Prologue revised.  (DWL)
-
+  USE service, ONLY : R1MACH, I1MACH
   !
   INTEGER i, Ierr, inu, inuh, ir, k, Kode, k1, k2, M, mm, mr, &
     N, nn, nuf, nw, Nz

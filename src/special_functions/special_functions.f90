@@ -2,7 +2,6 @@ include"xblk.f90"
 include"dxblk.f90"
 
 MODULE special_functions
-  use service
   IMPLICIT NONE
 
 CONTAINS

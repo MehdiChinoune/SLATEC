@@ -1,6 +1,5 @@
 !** MPERR
 SUBROUTINE MPERR
-  USE MPCOM
   !>
   !***
   !  Subsidiary to DQDOTA and DQDOTI
@@ -31,7 +30,7 @@ SUBROUTINE MPERR
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   !   930124  Increased Array size in MPCON for SUN -r8.  (RWC)
-
+  USE service, ONLY : XERMSG
   !* FIRST EXECUTABLE STATEMENT  MPERR
   CALL XERMSG('SLATEC','MPERR', &
     ' *** EXECUTION TERMINATED BY CALL TO MPERR IN MP VERSION 770217 ***',1,2)

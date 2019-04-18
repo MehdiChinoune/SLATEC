@@ -1,11 +1,9 @@
 MODULE TEST10_MOD
-  use slatec
   IMPLICIT NONE
 
 CONTAINS
   !** ZQCAI
   SUBROUTINE ZQCAI(Lun,Kprint,Ipass)
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for SLATEC subroutines
@@ -66,7 +64,7 @@ CONTAINS
     !   830501  DATE WRITTEN
     !   890831  Revised to meet new SLATEC standards
     !   930122  Added ZEXP and ZSQRT to EXTERNAL statement.  (RWC)
-
+    USE slatec, ONLY : ZAIRY, ZBIRY, ZABS, ZSQRT, ZEXP, I1MACH, D1MACH
     !
     !*Internal Notes:
     !   Machine constants are defined by functions I1MACH and D1MACH.
@@ -400,7 +398,6 @@ CONTAINS
   END SUBROUTINE ZQCAI
   !** ZQCBH
   SUBROUTINE ZQCBH(Lun,Kprint,Ipass)
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for SLATEC subroutine
@@ -460,7 +457,7 @@ CONTAINS
     !* REVISION HISTORY  (YYMMDD)
     !   830501  DATE WRITTEN
     !   890831  Revised to meet new SLATEC standards
-
+    USE slatec, ONLY : ZBESH, ZUOIK, ZABS, ZDIV, I1MACH, D1MACH
     !
     !*Internal Notes:
     !   Machine constants are defined by functions I1MACH and D1MACH.
@@ -765,7 +762,6 @@ CONTAINS
   END SUBROUTINE ZQCBH
   !** ZQCBI
   SUBROUTINE ZQCBI(Lun,Kprint,Ipass)
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for SLATEC subroutine
@@ -826,7 +822,7 @@ CONTAINS
     !* REVISION HISTORY  (YYMMDD)
     !   830501  DATE WRITTEN
     !   890831  Revised to meet new SLATEC standards
-
+    USE slatec, ONLY : ZBESI, ZBESK, ZWRSK, ZABS, ZDIV, I1MACH, D1MACH
     !
     !*Internal Notes:
     !   Machine constants are defined by functions I1MACH and D1MACH.
@@ -1284,7 +1280,6 @@ CONTAINS
   END SUBROUTINE ZQCBI
   !** ZQCBJ
   SUBROUTINE ZQCBJ(Lun,Kprint,Ipass)
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for SLATEC subroutine
@@ -1352,7 +1347,7 @@ CONTAINS
     !   830501  DATE WRITTEN
     !   890831  Revised to meet new SLATEC standards
     !   930122  Added ZEXP to EXTERNAL statement.  (RWC)
-
+    USE slatec, ONLY : ZBESH, ZBESJ, ZABS, ZEXP, I1MACH, D1MACH
     !
     !*Internal Notes:
     !   Machine constants are defined by functions I1MACH and D1MACH.
@@ -1695,7 +1690,6 @@ CONTAINS
   END SUBROUTINE ZQCBJ
   !** ZQCBK
   SUBROUTINE ZQCBK(Lun,Kprint,Ipass)
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for SLATEC subroutine
@@ -1756,7 +1750,7 @@ CONTAINS
     !   830501  DATE WRITTEN
     !   890831  Revised to meet new SLATEC standard
     !   930122  Added ZEXP to EXTERNAL Statement.  (RWC)
-
+    USE slatec, ONLY : ZBESI, ZBESK, ZABS, ZDIV, ZEXP, I1MACH, D1MACH
     !
     !*Internal Notes:
     !   Machine constants are defined by functions I1MACH and D1MACH.
@@ -2080,7 +2074,6 @@ CONTAINS
   END SUBROUTINE ZQCBK
   !** ZQCBY
   SUBROUTINE ZQCBY(Lun,Kprint,Ipass)
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for SLATEC subroutine
@@ -2146,7 +2139,7 @@ CONTAINS
     !   830501  DATE WRITTEN
     !   890831  Revised to meet new SLATEC standards
     !   930122  Added ZEXP to EXTERNAL Statement.  (RWC)
-
+    USE slatec, ONLY : ZBESI, ZBESK, ZBESY, ZABS, ZEXP, I1MACH, D1MACH
     !
     !*Internal Notes:
     !   Machine constants are defined by functions I1MACH and D1MACH.
@@ -2505,8 +2498,9 @@ CONTAINS
 END MODULE TEST10_MOD
 !** TEST10
 PROGRAM TEST10
-  USE TEST10_MOD
-  use slatec
+  USE TEST10_MOD, ONLY : ZQCAI, ZQCBH, ZQCBI, ZQCBJ, ZQCBK, ZQCBY
+  USE slatec, ONLY : I1MACH, XSETF, XSETUN, XERMAX
+  USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !>
   !***

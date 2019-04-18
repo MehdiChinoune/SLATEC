@@ -52,7 +52,7 @@ REAL(8) FUNCTION DGAMIC(A,X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920528  DESCRIPTION and REFERENCES sections revised.  (WRB)
-
+  USE service, ONLY : XERMSG, XERCLR, D1MACH
   INTEGER izero
   REAL(8) :: A, X, aeps, ainta, algap1, alngs, alx, e, gstar, h, sga, sgng, &
     sgngam, sgngs, t

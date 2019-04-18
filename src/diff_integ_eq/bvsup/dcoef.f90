@@ -1,7 +1,6 @@
 !** DCOEF
 SUBROUTINE DCOEF(Yh,Yp,Ncomp,Nrowb,Nfc,Nic,B,Beta,Coef,Inhomo,Re,Ae,By,&
     Cvec,Work,Iwork,Iflag,Nfcc)
-  USE DML, ONLY : EPS
   !>
   !***
   !  Subsidiary to DBVSUP
@@ -80,7 +79,9 @@ SUBROUTINE DCOEF(Yh,Yp,Ncomp,Nrowb,Nfc,Nic,B,Beta,Coef,Inhomo,Re,Ae,By,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
-
+  USE DML, ONLY : EPS
+  USE service, ONLY : XGETF, XSETF
+  USE linear, ONLY : DDOT
   !
   INTEGER i, Iflag, Inhomo, Iwork(*), j, k, kflag, ki, l, mlso, Ncomp, ncomp2, &
     nf, Nfc, Nfcc, nfccm1, Nic, Nrowb

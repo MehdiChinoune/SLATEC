@@ -270,7 +270,7 @@ REAL(8) FUNCTION DRC(X,Y,Ier)
   !   900510  Changed calls to XERMSG to standard form, and some
   !           editorial changes.  (RWC))
   !   920501  Reformatted the REFERENCES section.  (WRB)
-
+  USE service, ONLY : XERMSG, D1MACH
   CHARACTER(16) :: xern3, xern4, xern5
   INTEGER Ier
   REAL(8) :: mu, s, sn, X, xn, Y, yn, lamda

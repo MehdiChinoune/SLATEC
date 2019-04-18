@@ -136,7 +136,7 @@ SUBROUTINE XNRMP(Nu,Mu1,Mu2,Sarg,Mode,Spn,Ipn,Isig,Ierror)
   !           section.  (WRB)
   !           CALLs to XERROR changed to CALLs to XERMSG.  (WRB)
   !   920127  Revised PURPOSE section of prologue.  (DWL)
-
+  USE service, ONLY : XERMSG
   INTEGER i, Ierror, ip, ip1, ip2, j, k, mu
   INTEGER Nu, Mu1, Mu2, Mode, Ipn(*), Isig
   REAL Sarg, Spn(*)

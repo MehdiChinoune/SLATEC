@@ -36,7 +36,7 @@ SUBROUTINE DPINCW(Mrelas,Nvars,Lmx,Lbm,Npp,Jstrt,Ibasis,Imat,Ibrc,Ipr,Iwr,&
   !   890606  Changed references from IPLOC to IDLOC.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
-
+  USE linear, ONLY : DCOPY, DDOT
   INTEGER i, ihi, il1, ilow, ipage, iu1, j, Jstrt, key, &
     Lbm, Lmx, lpg, Mrelas, nnegrc, Npp, Nvars
   INTEGER Ibasis(*), Imat(*), Ibrc(Lbm,2), Ipr(*), Iwr(*), Ind(*), Ibb(*)

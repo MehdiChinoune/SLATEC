@@ -1,8 +1,4 @@
 MODULE approximation
-  use service
-  use linear
-  use optimization
-  use data_handling
   IMPLICIT NONE
 
 CONTAINS

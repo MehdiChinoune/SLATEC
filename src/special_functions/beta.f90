@@ -36,7 +36,7 @@ REAL FUNCTION BETA(A,B)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   900727  Added EXTERNAL statement.  (WRB)
-
+  USE service, ONLY : XERMSG, R1MACH
   REAL A, B, xmin
   REAL :: xmax = 0., alnsml = 0.
   !* FIRST EXECUTABLE STATEMENT  BETA

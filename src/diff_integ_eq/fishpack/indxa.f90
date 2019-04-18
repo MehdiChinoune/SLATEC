@@ -1,6 +1,5 @@
 !** INDXA
 SUBROUTINE INDXA(I,Ir,Idxa,Na)
-  USE CBLKT
   !>
   !***
   !  Subsidiary to BLKTRI
@@ -21,7 +20,7 @@ SUBROUTINE INDXA(I,Ir,Idxa,Na)
   !   801001  DATE WRITTEN
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
-
+  USE CBLKT, ONLY : NM
   INTEGER I, Idxa, Ir, Na
   !* FIRST EXECUTABLE STATEMENT  INDXA
   Na = 2**Ir

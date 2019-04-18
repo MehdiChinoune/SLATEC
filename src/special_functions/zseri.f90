@@ -29,7 +29,7 @@ SUBROUTINE ZSERI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol,Elim,Alim)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
   !   930122  Added ZLOG to EXTERNAL statement.  (RWC)
-
+  USE service, ONLY : D1MACH
   !     COMPLEX AK1,CK,COEF,CONE,CRSC,CSCL,CZ,CZERO,HZ,RZ,S1,S2,Y,Z
   INTEGER i, ib, idum, iflag, il, k, Kode, l, m, N, nn, Nz, nw
   REAL(8) :: aa, acz, ak, ak1i, ak1r, Alim, arm, ascle, atol, az, cki, ckr, &

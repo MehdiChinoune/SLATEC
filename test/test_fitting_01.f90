@@ -1,11 +1,9 @@
 MODULE TEST27_MOD
-  use slatec
   IMPLICIT NONE
 
 CONTAINS
   !** LSEIQX
   SUBROUTINE LSEIQX(Lun,Kprint,Ipass)
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for LSEI.
@@ -37,7 +35,8 @@ CONTAINS
     !   920722  Initialized IP(1) and IP(2) for CALL to LSEI.  (BKS, WRB)
     !   930214  Declarations sections added, code revised to test error
     !           returns for all values of KPRINT and code polished.  (WRB)
-
+    USE slatec, ONLY : LSEI, R1MACH, SAXPY, SCOPY, SDOT, SNRM2, SVOUT, XGETF, &
+      XSETF, XERCLR, NUMXER
     !     .. Scalar Arguments ..
     INTEGER Ipass, Kprint, Lun
     !     .. Local Scalars ..
@@ -245,7 +244,6 @@ CONTAINS
   END SUBROUTINE LSEIQX
   !** QCGLSS
   SUBROUTINE QCGLSS(Lun,Kprint,Ipass)
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for SGLSS.
@@ -288,7 +286,7 @@ CONTAINS
     !   901010  Restructured using IF-THEN-ELSE-ENDIF, cleaned up FORMATs,
     !           including removing an illegal character from column 1, and
     !           editorial changes.  (RWC)
-
+    USE slatec, ONLY : R1MACH, SGLSS
     INTEGER i, Ipass, j, kk, Kprint, nerr, kprog, kcase, iwork(7), info, Lun
     REAL rnorm(1), a(4,4), b(4), delmax, delx, r, work(20)
     REAL, PARAMETER :: aa(4,4,2) = RESHAPE( [ 1., .5, 1., .25, 0., 2., 0., 1., 2., &
@@ -389,8 +387,9 @@ CONTAINS
 END MODULE TEST27_MOD
 !** TEST27
 PROGRAM TEST27
-  USE TEST27_MOD
-  use slatec
+  USE TEST27_MOD, ONLY : LSEIQX, QCGLSS
+  USE slatec, ONLY : I1MACH, XSETF, XSETUN, XERMAX
+  USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !>
   !***

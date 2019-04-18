@@ -42,7 +42,7 @@ REAL(8) FUNCTION DBETAI(X,Pin,Qin)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920528  DESCRIPTION and REFERENCES sections revised.  (WRB)
-
+  USE service, ONLY : XERMSG, D1MACH
   INTEGER i, ib, n
   REAL(8) :: X, Pin, Qin, c, finsum, p, ps, q, term, xb, xi, y, p1
   REAL(8), SAVE :: eps, alneps, sml, alnsml

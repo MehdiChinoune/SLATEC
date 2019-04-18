@@ -23,7 +23,7 @@ SUBROUTINE CMLRI(Z,Fnu,Kode,N,Y,Nz,Tol)
   !* REVISION HISTORY  (YYMMDD)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
-
+  USE service, ONLY : R1MACH
   INTEGER i, iaz, idum, ifnu, inu, itime, k, kk, km, Kode, m, N, Nz
   COMPLEX ck, cnorm, pt, p1, p2, rz, summ, Y(N), Z
   REAL ack, ak, ap, at, az, bk, fkap, fkk, flam, fnf, Fnu, rho, &

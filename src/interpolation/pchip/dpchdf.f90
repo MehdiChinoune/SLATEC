@@ -62,7 +62,7 @@ REAL(8) FUNCTION DPCHDF(K,X,S,Ierr)
   !   910408  Updated AUTHOR and DATE WRITTEN sections in prologue.  (WRB)
   !   920429  Revised format and order of references.  (WRB,FNF)
   !   930503  Improved purpose.  (FNF)
-
+  USE service, ONLY : XERMSG
   !
   !**End
   !

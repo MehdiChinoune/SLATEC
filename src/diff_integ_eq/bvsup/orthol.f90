@@ -79,7 +79,8 @@ SUBROUTINE ORTHOL(A,M,N,Nrda,Iflag,Irank,Iscale,Diag,Kpivot,Scales,Cols,Cs)
   !   900402  Added TYPE section.  (WRB)
   !   910408  Updated the AUTHOR and REFERENCES sections.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-
+  USE service, ONLY : XERMSG, R1MACH
+  USE linear, ONLY : SDOT
   INTEGER Iflag, Irank, Iscale, j, jcol, k, kp, Kpivot(*), l, M, mk, N, Nrda
   REAL A(Nrda,*), acc, akk, anorm, as, asave, Cols(*), Cs(*), css, Diag(*), diagk, &
     dum(1), sad, sc, Scales(*), sig, sigma, sruro, uro

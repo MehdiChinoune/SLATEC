@@ -61,7 +61,8 @@ SUBROUTINE DLSI(W,Mdw,Ma,Mg,N,Prgopt,X,Rnorm,Mode,Ws,Ip)
   !   900328  Added TYPE section.  (WRB)
   !   900604  DP version created from SP version.  (RWC)
   !   920422  Changed CALL to DHFTI to include variable MA.  (WRB)
-
+  USE service, ONLY : D1MACH
+  USE linear, ONLY : DCOPY, DSCAL, DSWAP, DDOT, DH12, DHFTI, DASUM, DAXPY
   INTEGER Ip(*), Ma, Mdw, Mg, Mode, N
   REAL(8) :: Prgopt(*), Rnorm, W(Mdw,*), Ws(*), X(*)
   !

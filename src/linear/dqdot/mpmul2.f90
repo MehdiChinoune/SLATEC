@@ -1,6 +1,5 @@
 !** MPMUL2
 SUBROUTINE MPMUL2(X,Iy,Z,Trunc)
-  USE MPCOM
   !>
   !***
   !  Subsidiary to DQDOTA and DQDOTI
@@ -37,7 +36,7 @@ SUBROUTINE MPMUL2(X,Iy,Z,Trunc)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   !   930124  Increased Array size in MPCON for SUN -r8.  (RWC)
-
+  USE MPCOM, ONLY : B, LUN, M, T, R
   INTEGER i, ij, is, ix, Iy, j, j1, j2, X(*), Z(*), Trunc, re, rs
   INTEGER c, c1, c2, ri, t1, t3, t4
   !* FIRST EXECUTABLE STATEMENT  MPMUL2

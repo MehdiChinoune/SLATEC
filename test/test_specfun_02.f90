@@ -1,11 +1,9 @@
 MODULE TEST03_MOD
-  use slatec
   IMPLICIT NONE
 
 CONTAINS
   !** DFNCK
   SUBROUTINE DFNCK(Lun,Kprint,Ipass)
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for the double precision Fullerton
@@ -49,7 +47,10 @@ CONTAINS
     !           reorganized.  (WRB)
     !   900330  Prologue converted to Version 4.0 format.  (BAB)
     !   900727  Added EXTERNAL statement.  (WRB)
-
+    USE slatec, ONLY : D1MACH, D9ATN1, D9LN2R, DAI, DAIE, DBESI0, DBESI1, DBESK0, &
+      DBESK1, DBESKS, DBETA, DBETAI, DBI, DBIE, DBINOM, DBSI0E, DBSI1E, DBSK0E, &
+      DBSK1E, DBSKES, DCBRT, DCHU, DCOSDG, DCOT, DDAWS, DE1, DEI, DEXPRL, DFAC, &
+      DGAMI, DGAMIC, DGAMIT, DGAMR, DLI, DLNREL, DPOCH, DPOCH1, DPSI, DSINDG, DSPENC
     INTEGER i, Lun, Kprint, Ipass
     REAL(8) :: y(105), errmax, errtol, abserr, relerr
     !
@@ -251,8 +252,9 @@ CONTAINS
 END MODULE TEST03_MOD
 !** TEST03
 PROGRAM TEST03
-  USE TEST03_MOD
-  use slatec
+  USE TEST03_MOD, ONLY : DFNCK
+  USE slatec, ONLY : I1MACH, XSETF, XSETUN, XERMAX
+  USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !>
   !***

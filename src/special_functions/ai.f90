@@ -43,7 +43,7 @@ REAL FUNCTION AI(X)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920618  Removed space from variable names.  (RWC, WRB)
-
+  USE service, ONLY : XERMSG, R1MACH
   REAL theta, X, xm, xmaxt, z
   INTEGER, SAVE :: naif, naig
   REAL, SAVE :: x3sml, xmax

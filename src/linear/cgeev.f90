@@ -103,7 +103,7 @@ SUBROUTINE CGEEV(A,Lda,N,E,V,Ldv,Work,Job,Info)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
-
+  USE service, ONLY : XERMSG
   INTEGER Job, m
   INTEGER i, ihi, ilo, Info, j, k, l, Lda, Ldv, mdim, N
   REAL A(*), E(*), Work(*), V(*)

@@ -46,7 +46,7 @@ SUBROUTINE DPRWPG(Key,Ipage,Lpg,Sx,Ix)
   !   900510  Fixed error messages and replaced GOTOs with
   !           IF-THEN-ELSE.  (RWC)
   !   910403  Updated AUTHOR and DESCRIPTION sections.  (WRB)
-
+  USE service, ONLY : XERMSG
   INTEGER Ipage, Ix(*), Key, Lpg
   REAL(8) :: Sx(*)
   !* FIRST EXECUTABLE STATEMENT  DPRWPG

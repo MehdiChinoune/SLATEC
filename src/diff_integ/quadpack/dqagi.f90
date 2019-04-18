@@ -176,7 +176,7 @@ SUBROUTINE DQAGI(F,Bound,Inf,Epsabs,Epsrel,Result,Abserr,Neval,Ier,Limit,&
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-
+  USE service, ONLY : XERMSG
   !
   REAL(8) :: Abserr, Bound, Epsabs, Epsrel, Result, Work(*)
   INTEGER Ier, Inf, Iwork(*), Last, Lenw, Limit, lvl, l1, l2, l3, Neval

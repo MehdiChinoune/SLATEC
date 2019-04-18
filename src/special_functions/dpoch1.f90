@@ -57,7 +57,7 @@ REAL(8) FUNCTION DPOCH1(A,X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900727  Added EXTERNAL statement.  (WRB)
-
+  USE service, ONLY : XERMSG, D1MACH
   INTEGER i, ii, incr, j, k, ndx, nterms
   REAL(8) :: A, X, absa, absx, alnvar, b, binv, bp, gbern(21), &
     gbk, poly1, q, rho, sinpxx, sinpx2, term, trig, var, var2

@@ -33,7 +33,7 @@ SUBROUTINE DES(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Ypout,Yp,Yy,Wt,P,Phi,&
   !   900510  Convert XERRWV calls to XERMSG calls, replace GOTOs with
   !           IF-THEN-ELSEs.  (RWC)
   !   910722  Updated AUTHOR section.  (ALS)
-
+  USE service, ONLY : XERMSG, R1MACH
   INTEGER Idid, Info(15), Init, Ipar(*), Iquit, Iv(10), Ivc, k, Kgi, Kle4, &
     Kold, Kord, Kprev, Ksteps, l, ltol, natolp, Neq, nrtolp
   REAL a, absdel, Alpha(12), Atol(*), Beta(12), del, Delsgn, dt, Eps, Fouru, &

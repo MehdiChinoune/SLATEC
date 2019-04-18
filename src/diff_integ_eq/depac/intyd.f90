@@ -1,6 +1,5 @@
 !** INTYD
 SUBROUTINE INTYD(T,K,Yh,Nyh,Dky,Iflag)
-  USE DEBDF1, ONLY : H, HU, TN, UROund, L, N, NQ
   !>
   !***
   !  Subsidiary to DEBDF
@@ -50,7 +49,7 @@ SUBROUTINE INTYD(T,K,Yh,Nyh,Dky,Iflag)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
-
+  USE DEBDF1, ONLY : H, HU, TN, UROund, L, N, NQ
   !
   !LLL. OPTIMIZE
   INTEGER K, Nyh, Iflag, i, ic, j, jb, jb2, jj, jj1, jp1

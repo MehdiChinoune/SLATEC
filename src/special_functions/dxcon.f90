@@ -1,6 +1,5 @@
 !** DXCON
 SUBROUTINE DXCON(X,Ix,Ierror)
-  USE DXBLK ,ONLY: RADixx, RADixl, DLG10r, L
   !>
   !***
   !  To provide double-precision floating-point arithmetic
@@ -47,7 +46,7 @@ SUBROUTINE DXCON(X,Ix,Ierror)
   !           Corrected order of sections in prologue and added TYPE
   !           section.  (WRB)
   !   920127  Revised PURPOSE section of prologue.  (DWL)
-
+  USE DXBLK ,ONLY: RADixx, RADixl, DLG10r, L
   INTEGER i, i1, icase, Ierror, itemp, j, j1, j2
   REAL(8) :: X
   INTEGER Ix

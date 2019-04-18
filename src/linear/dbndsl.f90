@@ -196,7 +196,7 @@ SUBROUTINE DBNDSL(Mode,G,Mdg,Nb,Ip,Ir,X,N,Rnorm)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-
+  USE service, ONLY : XERMSG
   INTEGER i, i1, i2, ie, ii, iopt, Ip, Ir, irm1, ix, j, jg, l, &
     Mdg, Mode, N, Nb, nerr, np1
   REAL(8) :: G(Mdg,*), Rnorm, rsq, s, X(*), zero

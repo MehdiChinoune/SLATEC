@@ -180,7 +180,7 @@ SUBROUTINE DSTEPS(DF,Neqn,Y,X,H,Eps,Wt,Start,Hold,K,Kold,Crash,Phi,P,Yp,&
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-
+  USE service, ONLY : XERMSG, D1MACH
   INTEGER Iv(10), Ivc, jv, Kgi, Kprev
   INTEGER i, ifail, im1, ip1, Ipar(*), iq, j, K, km1, km2, knew, &
     Kold, kp1, kp2, Ksteps, l, limit1, limit2, Neqn, Ns, nsm2, nsp1, nsp2

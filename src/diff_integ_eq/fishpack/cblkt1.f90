@@ -1,6 +1,5 @@
 !** CBLKT1
 SUBROUTINE CBLKT1(N,An,Bn,Cn,M,Am,Bm,Cm,Idimy,Y,B,W1,W2,W3,Wd,Ww,Wu,PRDCT,CPRDCT)
-  USE CCBLK
   !>
   !***
   !  Subsidiary to CBLKTR
@@ -33,7 +32,7 @@ SUBROUTINE CBLKT1(N,An,Bn,Cn,M,Am,Bm,Cm,Idimy,Y,B,W1,W2,W3,Wd,Ww,Wu,PRDCT,CPRDCT
   !   801001  DATE WRITTEN
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
-
+  USE CCBLK, ONLY : K, NCMplx, NM, NPP
   !
   EXTERNAL :: PRDCT, CPRDCT
   REAL dum

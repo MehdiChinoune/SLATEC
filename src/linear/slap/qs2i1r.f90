@@ -76,7 +76,7 @@ SUBROUTINE QS2I1R(Ia,Ja,A,N,Kflag)
   !   920511  Added complete declaration section.  (WRB)
   !   920929  Corrected format of reference.  (FNF)
   !   921012  Added E0's to f.p. constants.  (FNF)
-
+  USE service, ONLY : XERMSG
   !VD$R NOVECTOR
   !VD$R NOCONCUR
   !     .. Scalar Arguments ..

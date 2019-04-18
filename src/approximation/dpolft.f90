@@ -132,7 +132,7 @@ SUBROUTINE DPOLFT(N,X,Y,W,Maxdeg,Ndeg,Eps,R,Ierr,A)
   !   900911  Added variable YP to DOUBLE PRECISION declaration.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !   920527  Corrected erroneous statements in DESCRIPTION.  (WRB)
-
+  USE service, ONLY : XERMSG
   INTEGER N, i, idegf, Ierr, j, jp1, jpas, k1, k1pj, k2, k2pj, k3, &
     k3pi, k4, k4pi, k5, k5pi, ksig, m, Maxdeg, mop1, Ndeg, nder, nfail
   REAL(8) :: temd1, temd2, A(*), degf, den, Eps, etst, f, fcrit, R(*), sig, &

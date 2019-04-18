@@ -1,11 +1,9 @@
 MODULE TEST18_MOD
-  use slatec
   IMPLICIT NONE
 
 CONTAINS
   !** SBEG
   REAL FUNCTION SBEG(Reset)
-    IMPLICIT NONE
     !>
     !***
     !  Generate random numbers.
@@ -67,7 +65,6 @@ CONTAINS
   END FUNCTION SBEG
   !** SBLAT2
   SUBROUTINE SBLAT2(Nout,Kprint,Ipass)
-    IMPLICIT NONE
     !>
     !***
     !  Driver for testing Level 2 BLAS single precision
@@ -102,7 +99,7 @@ CONTAINS
     !   910619  Modified to meet SLATEC code and prologue standards.  (BKS)
     !   930315  Removed unused variables.  (WRB)
     !   930618  Code modified to improve PASS/FAIL reporting.  (BKS, WRB)
-
+    USE slatec, ONLY : R1MACH, XERCLR
     !     .. Parameters ..
     INTEGER, PARAMETER :: NSUBS = 16
     REAL, PARAMETER :: ZERO = 0.0, ONE = 1.0
@@ -273,7 +270,6 @@ CONTAINS
   END SUBROUTINE SBLAT2
   !** SBLAT3
   SUBROUTINE SBLAT3(Nout,Kprint,Ipass)
-    IMPLICIT NONE
     !>
     !***
     !  Driver for testing Level 3 BLAS single precision
@@ -310,7 +306,7 @@ CONTAINS
     !   930315  Removed unused variables.  (WRB)
     !   930618  Code modified to improve PASS/FAIL reporting.  (BKS, WRB)
     !   930701  Call to SCHKE5 changed to call to SCHKE3.  (BKS)
-
+    USE slatec, ONLY : R1MACH, XERCLR
     !     .. Parameters ..
     INTEGER, PARAMETER :: NSUBS = 6
     REAL, PARAMETER :: ZERO = 0.0, ONE = 1.0
@@ -493,7 +489,6 @@ CONTAINS
   END SUBROUTINE SBLAT3
   !** SMAKE2
   SUBROUTINE SMAKE2(Type,Uplo,Diag,M,N,A,Nmax,Aa,Lda,Kl,Ku,Reset,Transl)
-    IMPLICIT NONE
     !>
     !***
     !  Generate values for an M by N matrix A.
@@ -673,7 +668,6 @@ CONTAINS
   END SUBROUTINE SMAKE2
   !** SMAKE3
   SUBROUTINE SMAKE3(Type,Uplo,Diag,M,N,A,Nmax,Aa,Lda,Reset,Transl)
-    IMPLICIT NONE
     !>
     !***
     !  Generate values for an M by N matrix A.
@@ -793,7 +787,6 @@ CONTAINS
   !** SMMCH
   SUBROUTINE SMMCH(Transa,Transb,M,N,Kk,Alpha,A,Lda,B,Ldb,Beta,C,Ldc,Ct,G,&
       Cc,Ldcc,Eps,Err,Ftl,Nout,Mv,Kprint)
-    IMPLICIT NONE
     !>
     !***
     !  Check the results of the computational tests.
@@ -916,7 +909,6 @@ CONTAINS
   !** SMVCH
   SUBROUTINE SMVCH(Trans,M,N,Alpha,A,Nmax,X,Incx,Beta,Y,Incy,Yt,G,Yy,Eps,&
       Err,Ftl,Nout,Mv,Kprint)
-    IMPLICIT NONE
     !>
     !***
     !  Check the results of the computational tests.
@@ -1037,7 +1029,6 @@ CONTAINS
   END SUBROUTINE SMVCH
   !** LSE
   LOGICAL FUNCTION LSE(Ri,Rj,Lr)
-    IMPLICIT NONE
     !>
     !***
     !  Test if two arrays are identical.
@@ -1081,7 +1072,6 @@ CONTAINS
   END FUNCTION LSE
   !** LSERES
   LOGICAL FUNCTION LSERES(Type,Uplo,M,N,Aa,As,Lda)
-    IMPLICIT NONE
     !>
     !***
     !  Test if selected elements in two arrays are equal.
@@ -1153,7 +1143,6 @@ CONTAINS
   !** SCHK12
   SUBROUTINE SCHK12(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idimm,Nkb,Kb,&
       Nalf,Alf,Nbet,Bet,Ninc,Inc,Nmax,Incmax,A,Aa,As,X,Xx,Xs,Y,Yy,Ys,Yt,G)
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for SGEMV and SGBMV.
@@ -1178,7 +1167,7 @@ CONTAINS
     !* REVISION HISTORY  (YYMMDD)
     !   870810  DATE WRITTEN
     !   910619  Modified to meet SLATEC code and prologue standards.  (BKS)
-
+    USE slatec, ONLY : NUMXER, SGBMV, SGEMV
     !     .. Parameters ..
     REAL, PARAMETER :: ZERO = 0.0, HALF = 0.5
     !     .. Scalar Arguments ..
@@ -1456,7 +1445,6 @@ CONTAINS
   !** SCHK13
   SUBROUTINE SCHK13(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idimm,Nalf,Alf,&
       Nbet,Bet,Nmax,A,Aa,As,B,Bb,Bs,C,Cc,Cs,Ct,G)
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for SGEMM.
@@ -1483,7 +1471,7 @@ CONTAINS
     !* REVISION HISTORY  (YYMMDD)
     !   890208  DATE WRITTEN
     !   910619  Modified to meet SLATEC code and prologue standards.  (BKS)
-
+    USE slatec, ONLY : NUMXER, SGEMM
     !     .. Parameters ..
     REAL, PARAMETER :: ZERO = 0.0
     !     .. Scalar Arguments ..
@@ -1719,7 +1707,6 @@ CONTAINS
   !** SCHK22
   SUBROUTINE SCHK22(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idimm,Nkb,Kb,&
       Nalf,Alf,Nbet,Bet,Ninc,Inc,Nmax,Incmax,A,Aa,As,X,Xx,Xs,Y,Yy,Ys,Yt,G)
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for SSYMV, SSBMV and SSPMV.
@@ -1745,7 +1732,7 @@ CONTAINS
     !* REVISION HISTORY  (YYMMDD)
     !   870810  DATE WRITTEN
     !   910619  Modified to meet SLATEC code and prologue standards.  (BKS)
-
+    USE slatec, ONLY : NUMXER, SSBMV, SSPMV, SSYMV
     !     .. Parameters ..
     REAL, PARAMETER :: ZERO = 0.0, HALF = 0.5
     !     .. Scalar Arguments ..
@@ -2024,7 +2011,6 @@ CONTAINS
   !** SCHK23
   SUBROUTINE SCHK23(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idimm,Nalf,Alf,&
       Nbet,Bet,Nmax,A,Aa,As,B,Bb,Bs,C,Cc,Cs,Ct,G)
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for SSYMM.
@@ -2051,7 +2037,7 @@ CONTAINS
     !* REVISION HISTORY  (YYMMDD)
     !   890208  DATE WRITTEN
     !   910619  Modified to meet SLATEC code and prologue standards.  (BKS)
-
+    USE slatec, ONLY : NUMXER, SSYMM
     !     .. Parameters ..
     REAL, PARAMETER :: ZERO = 0.0
     !     .. Scalar Arguments ..
@@ -2272,7 +2258,6 @@ CONTAINS
   !** SCHK32
   SUBROUTINE SCHK32(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idimm,Nkb,Kb,&
       Ninc,Inc,Nmax,Incmax,A,Aa,As,X,Xx,Xs,Xt,G,Z)
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for STRMV, STBMV, STPMV, STRSV, STBSV and
@@ -2299,7 +2284,7 @@ CONTAINS
     !* REVISION HISTORY  (YYMMDD)
     !   870810  DATE WRITTEN
     !   910619  Modified to meet SLATEC code and prologue standards.  (BKS)
-
+    USE slatec, ONLY : NUMXER, STBMV, STBSV, STPMV, STPSV, STRMV, STRSV
     !     .. Parameters ..
     REAL, PARAMETER :: ZERO = 0.0, HALF = 0.5, ONE = 1.0
     !     .. Scalar Arguments ..
@@ -2579,7 +2564,6 @@ CONTAINS
   !** SCHK33
   SUBROUTINE SCHK33(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idimm,Nalf,Alf,&
       Nmax,A,Aa,As,B,Bb,Bs,Ct,G,C)
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for STRMM and STRSM.
@@ -2606,7 +2590,7 @@ CONTAINS
     !* REVISION HISTORY  (YYMMDD)
     !   890208  DATE WRITTEN
     !   910619  Modified to meet SLATEC code and prologue standards.  (BKS)
-
+    USE slatec, ONLY : NUMXER, STRMM, STRSM
     !     .. Parameters ..
     REAL, PARAMETER :: ZERO = 0.0, ONE = 1.0
     !     .. Scalar Arguments ..
@@ -2847,7 +2831,6 @@ CONTAINS
   !** SCHK42
   SUBROUTINE SCHK42(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idimm,Nalf,Alf,&
       Ninc,Inc,Nmax,Incmax,A,Aa,As,X,Xx,Xs,Y,Yy,Ys,Yt,G,Z)
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for SGER.
@@ -2872,7 +2855,7 @@ CONTAINS
     !* REVISION HISTORY  (YYMMDD)
     !   870810  DATE WRITTEN
     !   910619  Modified to meet SLATEC code and prologue standards.  (BKS)
-
+    USE slatec, ONLY : NUMXER, SGER
     !     .. Parameters ..
     REAL, PARAMETER :: ZERO = 0.0, HALF = 0.5, ONE = 1.0
     !     .. Scalar Arguments ..
@@ -3086,7 +3069,6 @@ CONTAINS
   !** SCHK43
   SUBROUTINE SCHK43(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idimm,Nalf,Alf,&
       Nbet,Bet,Nmax,A,Aa,As,B,Bb,Bs,C,Cc,Cs,Ct,G)
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for SSYRK.
@@ -3113,7 +3095,7 @@ CONTAINS
     !* REVISION HISTORY  (YYMMDD)
     !   890208  DATE WRITTEN
     !   910619  Modified to meet SLATEC code and prologue standards.  (BKS)
-
+    USE slatec, ONLY : NUMXER, SSYRK
     !     .. Parameters ..
     REAL, PARAMETER :: ZERO = 0.0
     !     .. Scalar Arguments ..
@@ -3336,7 +3318,6 @@ CONTAINS
   !** SCHK52
   SUBROUTINE SCHK52(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idimm,Nalf,Alf,&
       Ninc,Inc,Nmax,Incmax,A,Aa,As,X,Xx,Xs,Y,Yy,Ys,Yt,G,Z)
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for SSYR and SSPR.
@@ -3361,7 +3342,7 @@ CONTAINS
     !* REVISION HISTORY  (YYMMDD)
     !   870810  DATE WRITTEN
     !   910619  Modified to meet SLATEC code and prologue standards.  (BKS)
-
+    USE slatec, ONLY : NUMXER, SSPR, SSYR
     !     .. Parameters ..
     REAL, PARAMETER :: ZERO = 0.0, HALF = 0.5, ONE = 1.0
     !     .. Scalar Arguments ..
@@ -3586,7 +3567,6 @@ CONTAINS
   !** SCHK53
   SUBROUTINE SCHK53(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idimm,Nalf,Alf,&
       Nbet,Bet,Nmax,Ab,Aa,As,Bb,Bs,C,Cc,Cs,Ct,G,W)
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for SSYR2K.
@@ -3613,7 +3593,7 @@ CONTAINS
     !* REVISION HISTORY  (YYMMDD)
     !   890208  DATE WRITTEN
     !   910619  Modified to meet SLATEC code and prologue standards.  (BKS)
-
+    USE slatec, ONLY : NUMXER, SSYR2K
     !     .. Parameters ..
     REAL, PARAMETER :: ZERO = 0.0
     !     .. Scalar Arguments ..
@@ -3869,7 +3849,6 @@ CONTAINS
   !** SCHK62
   SUBROUTINE SCHK62(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idimm,Nalf,Alf,&
       Ninc,Inc,Nmax,Incmax,A,Aa,As,X,Xx,Xs,Y,Yy,Ys,Yt,G,Z)
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for SSYR2 and SSPR2.
@@ -3894,7 +3873,7 @@ CONTAINS
     !* REVISION HISTORY  (YYMMDD)
     !   870810  DATE WRITTEN
     !   910619  Modified to meet SLATEC code and prologue standards.  (BKS)
-
+    USE slatec, ONLY : NUMXER, SSPR2, SSYR2
     !     .. Parameters ..
     REAL, PARAMETER :: ZERO = 0.0, HALF = 0.5, ONE = 1.0
     !     .. Scalar Arguments ..
@@ -4151,7 +4130,6 @@ CONTAINS
   END SUBROUTINE SCHK62
   !** SCHKE2
   SUBROUTINE SCHKE2(Isnum,Srnamt,Nout,Kprint,Fatal)
-    IMPLICIT NONE
     !>
     !***
     !  Test the error exits from the Level 2 Blas.
@@ -4173,7 +4151,9 @@ CONTAINS
     ! **Routines called:**  CHKXER, SGBMV, SGEMV, SGER, SSBMV, SSPMV, SSPR,
     !                    SSPR2, SSYMV, SSYR, SSYR2, STBMV, STBSV, STPMV,
     !                    STPSV, STRMV, STRSV, XERCLR, XERDMP, XGETF, XSETF
-
+    USE slatec, ONLY : SGBMV, SGEMV, SGER, SSBMV, SSPMV, SSPR, SSPR2, SSYMV, SSYR, &
+      SSYR2, STBMV, STBSV, STPMV, STPSV, STRMV, STRSV, XERCLR, XERDMP, XGETF, XSETF
+    USE common_mod, ONLY : CHKXER
     !* REVISION HISTORY  (YYMMDD)
     !   870810  DATE WRITTEN
     !   910620  Modified to meet SLATEC code and prologue standards.  (BKS)
@@ -4578,7 +4558,6 @@ CONTAINS
   END SUBROUTINE SCHKE2
   !** SCHKE3
   SUBROUTINE SCHKE3(Isnum,Srnamt,Nout,Kprint,Fatal)
-    IMPLICIT NONE
     !>
     !***
     !  Test the error exits from the Level 3 Blas.
@@ -4606,7 +4585,9 @@ CONTAINS
     !   890208  DATE WRITTEN
     !   910620  Modified to meet SLATEC code and prologue standards.  (BKS)
     !   930701  Name changed from SCHKE5 to SCHKE3.  (BKS)
-
+    USE slatec, ONLY : SGEMM, SSYMM, SSYR2K, SSYRK, STRMM, STRSM, XERCLR, XERDMP, &
+      XGETF, XSETF
+    USE common_mod, ONLY : CHKXER
     !     .. Scalar Arguments ..
     LOGICAL Fatal
     INTEGER Isnum, Kprint, Nout
@@ -5302,8 +5283,9 @@ CONTAINS
 END MODULE TEST18_MOD
 !** TEST18
 PROGRAM TEST18
-  USE TEST18_MOD
-  use slatec
+  USE TEST18_MOD, ONLY : SBLAT2, SBLAT3
+  USE slatec, ONLY : I1MACH, XSETF, XSETUN, XERMAX
+  USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !>
   !***

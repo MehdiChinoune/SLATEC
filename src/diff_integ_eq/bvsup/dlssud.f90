@@ -117,7 +117,8 @@ SUBROUTINE DLSSUD(A,X,B,N,M,Nrda,U,Nrdu,Iflag,Mlso,Irank,Iscale,Q,Diag,&
   !   900328  Added TYPE section.  (WRB)
   !   910408  Updated the AUTHOR and REFERENCES sections.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-
+  USE service, ONLY : XERMSG, XGETF, XSETF, XERMAX, J4SAVE, D1MACH
+  USE linear, ONLY : DDOT
   INTEGER i, Iflag, Irank, irp, Iscale, Isflg, j, jr, k, kp, &
     Kpivot(*), l, M, maxmes, mj, Mlso, N, nfat, nfatal, nmir, Nrda, Nrdu, nu
   REAL(8) :: A(Nrda,*), B(*), Diag(*), Div(*), gam, gama, &

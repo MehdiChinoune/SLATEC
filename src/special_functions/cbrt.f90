@@ -28,7 +28,7 @@ REAL FUNCTION CBRT(X)
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
-
+  USE service, ONLY : R1MACH
   REAL cbrtsq, X, y
   INTEGER irem, iter, ixpnt, n
   REAL, PARAMETER :: cbrt2(5) = [ 0.62996052494743658E0,  0.79370052598409974E0, &

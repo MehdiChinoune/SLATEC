@@ -1,6 +1,5 @@
 !** CHKSNG
 SUBROUTINE CHKSNG(Mbdcnd,Nbdcnd,Alpha,Beta,Gama,Xnu,COFX,COFY,Singlr)
-  USE SPLPCM
   !>
   !***
   !  Subsidiary to SEPELI
@@ -28,7 +27,7 @@ SUBROUTINE CHKSNG(Mbdcnd,Nbdcnd,Alpha,Beta,Gama,Xnu,COFX,COFY,Singlr)
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
-
+  USE SPLPCM, ONLY : AIT, CIT, DLX, DLY, IS, JS, MS, NS
   REAL ai, Alpha, Beta, bi, ci, dj, ej, fj, Gama, xi, Xnu, yj
   INTEGER i, j, Mbdcnd, Nbdcnd
   LOGICAL Singlr

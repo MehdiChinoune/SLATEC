@@ -179,7 +179,7 @@ SUBROUTINE DNBFS(Abe,Lda,N,Ml,Mu,V,Itask,Ind,Work,Iwork)
   !   900510  Convert XERRWV calls to XERMSG calls, changed GOTOs to
   !           IF-THEN-ELSEs.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-
+  USE service, ONLY : D1MACH, XERMSG
   !
   INTEGER Lda, N, Itask, Ind, Iwork(*), Ml, Mu
   REAL(8) :: Abe(Lda,*), V(*), Work(*)

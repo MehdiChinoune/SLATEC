@@ -41,7 +41,7 @@ REAL(8) FUNCTION D9ATN1(X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
-
+  USE service, ONLY : XERMSG, D1MACH
   REAL(8) :: X, y, eps
   INTEGER, SAVE :: ntatn1
   REAL(8), SAVE :: xsml, xbig, xmax

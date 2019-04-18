@@ -28,7 +28,7 @@ COMPLEX FUNCTION CGAMR(Z)
   !   770701  DATE WRITTEN
   !   861211  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
-
+  USE service, ONLY : XGETF, XSETF, XERCLR
   INTEGER irold
   REAL x
   COMPLEX Z

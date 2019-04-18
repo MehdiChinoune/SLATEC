@@ -67,7 +67,7 @@ SUBROUTINE BSPPP(T,A,N,K,Ldc,C,Xi,Lxi,Work)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-
+  USE service, ONLY : XERMSG
   !
   INTEGER ileft, inev, K, Ldc, Lxi, N, nk
   REAL A(*), C(Ldc,*), T(*), Work(*), Xi(*)

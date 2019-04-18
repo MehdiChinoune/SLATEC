@@ -391,7 +391,8 @@ SUBROUTINE DLSEI(W,Mdw,Me,Ma,Mg,N,Prgopt,X,Rnorme,Rnorml,Mode,Ws,Ip)
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
   !   900604  DP version created from SP version.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-
+  USE service, ONLY : XERMSG, D1MACH
+  USE linear, ONLY : DSCAL, DCOPY, DAXPY, DDOT, DH12, DASUM, DNRM2, DSWAP
   INTEGER Ip(3), Ma, Mdw, Me, Mg, Mode, N
   REAL(8) :: Prgopt(*), Rnorme, Rnorml, W(Mdw,*), Ws(*), X(*)
   !

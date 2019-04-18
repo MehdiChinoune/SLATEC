@@ -29,7 +29,7 @@ SUBROUTINE CUNI1(Z,Fnu,Kode,N,Y,Nz,Nlast,Fnul,Tol,Elim,Alim)
   !* REVISION HISTORY  (YYMMDD)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
-
+  USE service, ONLY : R1MACH
   INTEGER i, iflag, init, k, Kode, m, N, nd, Nlast, nn, nuf, nw, Nz
   COMPLEX cfn, crsc, cscl, csr(3), css(3), cwrk(16), c1, c2, &
     phi, rz, summ, s1, s2, Y(N), Z, zeta1, zeta2, cy(2)

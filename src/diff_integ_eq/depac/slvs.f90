@@ -1,6 +1,5 @@
 !** SLVS
 SUBROUTINE SLVS(Wm,Iwm,X,Tem)
-  USE DEBDF1, ONLY : EL0, H, IER, MITer, N
   !>
   !***
   !  Subsidiary to DEBDF
@@ -29,7 +28,8 @@ SUBROUTINE SLVS(Wm,Iwm,X,Tem)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
   !   920422  Changed DIMENSION statement.  (WRB)
-
+  USE DEBDF1, ONLY : EL0, H, IER, MITer, N
+  USE linear, ONLY : SGBSL, SGESL
   !
   !LLL. OPTIMIZE
   INTEGER Iwm(*), i, meband, ml, mu

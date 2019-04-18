@@ -1,12 +1,9 @@
 MODULE TEST25_MOD
-  use slatec
   IMPLICIT NONE
 
 CONTAINS
   !** SLAPQC
   SUBROUTINE SLAPQC(Lun,Kprint,Ipass)
-    USE SSLBLK
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for testing Sparse Linear Algebra Package
@@ -89,7 +86,10 @@ CONTAINS
     !   920602  Reduced problem size for a shorter-running test and
     !           corrected lower limit in "DO 80" statement.  (FNF)
     !   921021  Added 1P's to output formats.  (FNF)
-
+    USE SSLBLK, ONLY : SOLn
+    USE slatec, ONLY : R1MACH, SCPPLT, SS2Y, SSDBCG, SSDCG, SSDCGN, SSDCGS, SSDGMR, &
+      SSDOMN, SSGS, SSICCG, SSILUR, SSJAC, SSLUBC, SSLUCN, SSLUCS, SSLUGM, SSLUOM, &
+      XERMAX, XSETF, XSETUN
     !
     !     The problem size, MAXN, should be large enough that the
     !     iterative methods do 10-15 iterations, just to be sure that
@@ -386,7 +386,6 @@ CONTAINS
   END SUBROUTINE SLAPQC
   !** SRMGEN
   SUBROUTINE SRMGEN(Neltmx,Factor,Ierr,N,Nelt,Isym,Ia,Ja,A,F,Soln,Dsum,Itmp,Idiag)
-    IMPLICIT NONE
     !>
     !***
     !  This routine generates a "Random" symmetric or non-symmetric matrix of
@@ -469,7 +468,8 @@ CONTAINS
     !   890919  Replaced SMPL with ISMPL.  (MKS)
     !   890920  Minor changes to reduce single/double differences.  (FNF)
     !   920511  Added complete declaration section.  (WRB)
-
+    USE slatec, ONLY : RAND
+    USE common_mod, ONLY : ISMPL
     !     .. Scalar Arguments ..
     REAL Factor
     INTEGER Ierr, Isym, N, Nelt, Neltmx
@@ -591,7 +591,6 @@ CONTAINS
   END SUBROUTINE SRMGEN
   !** VFILL
   SUBROUTINE VFILL(N,V,Val)
-    IMPLICIT NONE
     !>
     !***
     !  Fill a vector with a value.
@@ -673,7 +672,6 @@ CONTAINS
   END SUBROUTINE VFILL
   !** OUTERR
   SUBROUTINE OUTERR(Method,Ierr,Iout,Nfail,Istdo,Iter,Err)
-    IMPLICIT NONE
     !>
     !***
     !  Output error messages for the SLAP Quick Check.
@@ -736,8 +734,9 @@ CONTAINS
 END MODULE TEST25_MOD
 !** TEST25
 PROGRAM TEST25
-  USE TEST25_MOD
-  use slatec
+  USE TEST25_MOD, ONLY : SLAPQC
+  USE slatec, ONLY : I1MACH, XSETF, XSETUN, XERMAX
+  USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !>
   !***

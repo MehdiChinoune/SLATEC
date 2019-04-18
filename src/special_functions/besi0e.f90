@@ -53,7 +53,7 @@ REAL FUNCTION BESI0E(X)
   !   770701  DATE WRITTEN
   !   890313  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
-
+  USE service, ONLY : R1MACH
   REAL X, y
   INTEGER, SAVE :: nti0, ntai0, ntai02
   REAL, SAVE :: xsml

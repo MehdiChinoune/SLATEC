@@ -30,7 +30,7 @@ REAL(8) FUNCTION DGAMR(X)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900727  Added EXTERNAL statement.  (WRB)
-
+  USE service, ONLY : XGETF, XSETF, XERCLR
   INTEGER irold
   REAL(8) :: X, alngx, sgngx
   !* FIRST EXECUTABLE STATEMENT  DGAMR

@@ -1,11 +1,9 @@
 MODULE TEST34_MOD
-  use slatec
   IMPLICIT NONE
 
 CONTAINS
   !** CPRPQX
   SUBROUTINE CPRPQX(Lun,Kprint,Ipass)
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for CPZERO and RPZERO.
@@ -30,7 +28,7 @@ CONTAINS
     !   810223  DATE WRITTEN
     !   890618  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
-
+    USE slatec, ONLY : CPZERO, R1MACH, RPZERO
     INTEGER Kprint, Ipass, Lun
     INTEGER idegp1, info, i, j, id
     REAL err, erri, relerr
@@ -98,7 +96,6 @@ CONTAINS
   END SUBROUTINE CPRPQX
   !** FZTEST
   SUBROUTINE FZTEST(Lun,Kprint,Ipass)
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for FZERO.
@@ -119,7 +116,7 @@ CONTAINS
     !   910708  Minor modifications in use of KPRINT.  (WRB)
     !   920212  Code completely restructured to test IFLAG for all values
     !           of KPRINT.  (WRB)
-
+    USE slatec, ONLY : FZERO, R1MACH, XERCLR, XGETF, XSETF
     !     .. Scalar Arguments ..
     INTEGER Ipass, Kprint, Lun
     !     .. Local Scalars ..
@@ -216,7 +213,6 @@ CONTAINS
   END SUBROUTINE FZTEST
   !** DFZTST
   SUBROUTINE DFZTST(Lun,Kprint,Ipass)
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for DFZERO.
@@ -231,7 +227,7 @@ CONTAINS
 
     !* REVISION HISTORY  (YYMMDD)
     !   920212  DATE WRITTEN
-
+    USE slatec, ONLY : D1MACH, DFZERO, XERCLR, XGETF, XSETF
     !     .. Scalar Arguments ..
     INTEGER Ipass, Kprint, Lun
     !     .. Local Scalars ..
@@ -328,7 +324,6 @@ CONTAINS
   END SUBROUTINE DFZTST
   !** RQRTST
   SUBROUTINE RQRTST(Lun,Kprint,Ipass)
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for RPQR79.
@@ -348,7 +343,8 @@ CONTAINS
     !           and changed TOL from sqrt R1MACH(3) to sqrt R1MACH(4) for
     !           the IBM 370 mainframes.  (RWC)
     !   911010  Code reworked and simplified.  (RWC and WRB)
-
+    USE slatec, ONLY : NUMXER, R1MACH, RPQR79, XERCLR, XGETF, XSETF
+    USE common_mod, ONLY : PASS
     REAL beta, tol, work(63)
     INTEGER i, ierr, Ipass, j, kontrl, Kprint, Lun, nerr
     INTEGER itmp(7)
@@ -462,7 +458,6 @@ CONTAINS
   END SUBROUTINE RQRTST
   !** CQRTST
   SUBROUTINE CQRTST(Lun,Kprint,Ipass)
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for CPQR79.
@@ -480,7 +475,8 @@ CONTAINS
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   901205  Changed usage of R1MACH(3) to R1MACH(4).  (RWC)
     !   911010  Code reworked and simplified.  (RWC and WRB)
-
+    USE slatec, ONLY : CPQR79, NUMXER, R1MACH, XERCLR, XGETF, XSETF
+    USE common_mod, ONLY : PASS
     INTEGER i, ierr, Ipass, j, kontrl, Kprint, Lun, nerr
     REAL tol
     INTEGER itest(2), itmp(7)
@@ -616,8 +612,9 @@ CONTAINS
 END MODULE TEST34_MOD
 !** TEST34
 PROGRAM TEST34
-  USE TEST34_MOD
-  use slatec
+  USE TEST34_MOD, ONLY : CPRPQX, CQRTST, DFZTST, FZTEST, RQRTST
+  USE slatec, ONLY : I1MACH, XSETF, XSETUN, XERMAX
+  USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !>
   !***

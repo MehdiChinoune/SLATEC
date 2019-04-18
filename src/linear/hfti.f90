@@ -143,7 +143,7 @@ SUBROUTINE HFTI(A,Mda,M,N,B,Mdb,Nb,Tau,Krank,Rnorm,H,G,Ip)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   901005  Replace usage of DIFF with usage of R1MACH.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-
+  USE service, ONLY : R1MACH, XERMSG
   INTEGER i, ii, iopt, ip1, j, jb, jj, k, kp1, Krank, l, ldiag, &
     lmax, M, Mda, Mdb, N, Nb, nerr
   REAL A(Mda,*), B(Mdb,*), factor, G(*), H(*), hmax, Rnorm(*), &

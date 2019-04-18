@@ -1,11 +1,9 @@
 MODULE TEST07_MOD
-  use slatec
   IMPLICIT NONE
 
 CONTAINS
   !** QCKIN
   SUBROUTINE QCKIN(Lun,Kprint,Ipass)
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for BSKIN.
@@ -45,7 +43,7 @@ CONTAINS
     !   890911  Removed unnecessary intrinsics.  (WRB)
     !   890911  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
-
+    USE slatec, ONLY : BSKIN, I1MACH, R1MACH
     INTEGER Ipass, Kprint
     INTEGER i, ierr, iflg, ix, i1m12, j, k, kode, Lun, m, mdel, mm, n, ndel, nn, nz
     REAL aix, er, tol, v(1), x, xinc, y(10)
@@ -132,7 +130,6 @@ CONTAINS
   END SUBROUTINE QCKIN
   !** QCPSI
   SUBROUTINE QCPSI(Lun,Kprint,Ipass)
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for PSIFN.
@@ -171,7 +168,7 @@ CONTAINS
     !   890911  Removed unnecessary intrinsics.  (WRB)
     !   890911  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
-
+    USE slatec, ONLY : PSIFN, R1MACH
     INTEGER Ipass, Kprint
     INTEGER i, ierr, iflg, ix, kode, Lun, m, n, nm, nn, nz
     REAL er, psi1(3), psi2(20), r1m4, s, tol, x
@@ -269,8 +266,9 @@ CONTAINS
 END MODULE TEST07_MOD
 !** TEST07
 PROGRAM TEST07
-  USE TEST07_MOD
-  use slatec
+  USE TEST07_MOD, ONLY : QCKIN, QCPSI
+  USE slatec, ONLY : I1MACH, XSETF, XSETUN, XERMAX
+  USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !>
   !***

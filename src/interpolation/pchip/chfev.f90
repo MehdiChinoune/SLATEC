@@ -86,7 +86,7 @@ SUBROUTINE CHFEV(X1,X2,F1,F2,D1,D2,Ne,Xe,Fe,Next,Ierr)
   !   890703  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-
+  USE service, ONLY : XERMSG
   !  Programming notes:
   !
   !     To produce a double precision version, simply:

@@ -77,7 +77,7 @@ SUBROUTINE DBSPVN(T,Jhigh,K,Indexx,X,Ileft,Vnikx,Work,Iwork)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-
+  USE service, ONLY : XERMSG
   !
   INTEGER Ileft, imjp1, Indexx, ipj, Iwork, Jhigh, jp1, jp1ml, K, l
   REAL(8) :: T(*), vm, vmprev, Vnikx(*), Work(*), X

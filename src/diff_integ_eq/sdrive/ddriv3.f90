@@ -730,7 +730,8 @@ SUBROUTINE DDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
   !* REVISION HISTORY  (YYMMDD)
   !   790601  DATE WRITTEN
   !   900329  Initial submission to SLATEC.
-
+  USE service, ONLY : XERMSG, D1MACH
+  USE linear, ONLY : DNRM2, DGBSL, DGESL, DGBFA, DGEFA
   EXTERNAL :: F, JACOBN, FA, G, USERS
   REAL(8) :: ae, big, Eps, Ewt(*), G, glast, gnow, h, Hmax, hsign, hused, re, &
     sizee, summ, T, tlast, Tout, troot, uround, Work(*), Y(*)

@@ -1,7 +1,5 @@
 !** STWAY
 SUBROUTINE STWAY(U,V,Yhp,Inout,Stowa)
-  USE ML, ONLY: NCOmp, NFC, X, XOP, INFo, ISTkop, KOP, NDIsk, &
-    NTApe, NEQivp
   !>
   !***
   !  Subsidiary to BVSUP
@@ -32,7 +30,7 @@ SUBROUTINE STWAY(U,V,Yhp,Inout,Stowa)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
-
+  USE ML, ONLY: NCOmp, NFC, X, XOP, INFo, ISTkop, KOP, NDIsk, NTApe, NEQivp
   REAL Stowa(*), U(*), V(*), Yhp(*)
   INTEGER Inout, j, k, ko, ks, ksj
   !

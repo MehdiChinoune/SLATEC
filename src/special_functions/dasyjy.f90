@@ -66,7 +66,8 @@ SUBROUTINE DASYJY(FUNJY,X,Fnu,Flgjy,In,Y,Wk,Iflw)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910408  Updated the AUTHOR section.  (WRB)
-
+  USE service, ONLY : D1MACH, I1MACH
+  EXTERNAL :: FUNJY
   INTEGER i, Iflw, In, j, jn, jr, ju, k, kb, klast, kmax(5), kp1, &
     ks, ksp1, kstemp, l, lr, lrp1, iseta, isetb
   REAL(8) :: abw2, akm, ap, asum, az, bsum, cr(10), crz32, dfi, elim, dr(10), fi, &

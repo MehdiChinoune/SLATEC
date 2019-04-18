@@ -1,8 +1,6 @@
 !** RKFAB
 SUBROUTINE RKFAB(Ncomp,Xpts,Nxpts,Nfc,Iflag,Z,Mxnon,P,Ntp,Ip,Yhp,Niv,U,V,&
     W,S,Stowa,G,Work,Iwork,Nfcc)
-  USE ML, ONLY : C, INHomo, X, XBEg, XENd, XOP, INFo, KOP, AE, RE, NOPg, NDIsk, &
-    NTApe, NEQ, INTeg, NPS, NUMort, KKKint, LLLint
   !>
   !***
   !  Subsidiary to BVSUP
@@ -39,7 +37,8 @@ SUBROUTINE RKFAB(Ncomp,Xpts,Nxpts,Nfc,Iflag,Z,Mxnon,P,Ntp,Ip,Yhp,Niv,U,V,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
-
+  USE ML, ONLY : C, INHomo, X, XBEg, XENd, XOP, INFo, KOP, AE, RE, NOPg, NDIsk, &
+    NTApe, NEQ, INTeg, NPS, NUMort, KKKint, LLLint
   INTEGER Ncomp, Nfc, Nfcc, nfcp1, Niv, non, Ntp, idid, Iflag, Ip(Nfcc,*), ipar(1), &
     Iwork(*), j, jflag, jon, kod, kopp, Mxnon, Nxpts
   REAL G(*), P(Ntp,*), S(*), Stowa(*), U(Ncomp,Nfc,*), V(Ncomp,*), W(Nfcc,*), &

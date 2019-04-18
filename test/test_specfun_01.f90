@@ -1,11 +1,9 @@
 MODULE TEST02_MOD
-  use slatec
   IMPLICIT NONE
 
 CONTAINS
   !** SFNCK
   SUBROUTINE SFNCK(Lun,Kprint,Ipass)
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for the single precision Fullerton
@@ -48,7 +46,10 @@ CONTAINS
     !           reorganized.  (WRB)
     !   900330  Prologue converted to Version 4.0 format.  (BAB)
     !   900727  Added EXTERNAL statement.  (WRB)
-
+    USE slatec, ONLY : AI, AIE, ALI, ALNREL, BESI0, BESI0E, BESI1, BESI1E, BESK0, &
+      BESK0E, BESK1, BESK1E, BESKES, BESKS, BETA, BETAI, BI, BIE, BINOM, CBRT, CHU, &
+      COSDG, COT, DAWS, E1, EI, EXPREL, FAC, GAMI, GAMIC, GAMIT, GAMR, POCH, POCH1, &
+      PSI, R1MACH, R9ATN1, R9LN2R, SINDG, SPENC
     INTEGER i, Lun, Kprint, Ipass
     REAL y(105), errmax, errtol, abserr, relerr
     !
@@ -249,8 +250,9 @@ CONTAINS
 END MODULE TEST02_MOD
 !** TEST02
 PROGRAM TEST02
-  USE TEST02_MOD
-  use slatec
+  USE TEST02_MOD, ONLY : SFNCK
+  USE slatec, ONLY : I1MACH, XSETF, XSETUN, XERMAX
+  USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !>
   !***

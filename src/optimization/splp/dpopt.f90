@@ -37,7 +37,7 @@ SUBROUTINE DPOPT(Prgopt,Mrelas,Nvars,Info,Csc,Ibasis,Ropt,Intopt,Lopt)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900328  Added TYPE section.  (WRB)
   !   900510  Fixed an error message.  (RWC)
-
+  USE service, ONLY : XERMSG, D1MACH
   INTEGER i, iadbig, ictmax, ictopt, idg, Info, iopt, ipagef, &
     isave, itbrc, itest, j, key, kprint, last, lds, lprg, &
     Mrelas, mxitlp, n20043

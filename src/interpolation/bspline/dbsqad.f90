@@ -64,7 +64,7 @@ SUBROUTINE DBSQAD(T,Bcoef,N,K,X1,X2,Bquad,Work)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-
+  USE service, ONLY : XERMSG
   !
   INTEGER i, il1, il2, ilo, inbv, jf, K, left, m, mf, mflag, N, npk, np1
   REAL(8) :: a, aa, b, bb, Bcoef(*), bma, bpa, Bquad, c1, gx, q, summ(5), T(*), &

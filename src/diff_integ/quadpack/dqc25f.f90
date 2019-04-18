@@ -115,7 +115,8 @@ SUBROUTINE DQC25F(F,A,B,Omega,Integr,Nrmom,Maxp1,Ksave,Result,Abserr,&
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
-
+  USE service, ONLY : D1MACH
+  USE linear, ONLY : DGTSL
   !
   INTEGER i, iers, Integr, isym, j, k, Ksave, m, Momcom, Neval, &
     Maxp1, noequ, noeq1, Nrmom

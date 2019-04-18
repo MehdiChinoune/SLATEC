@@ -61,7 +61,7 @@ SUBROUTINE SMOUT(M,N,Lda,A,Ifmt,Idigit)
   !           statements.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
-
+  USE service, ONLY : I1MACH
   INTEGER i, Idigit, j, k1, k2, Lda, lout, M, N, ndigit
   REAL A(Lda,*)
   CHARACTER Ifmt*(*)

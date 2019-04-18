@@ -53,7 +53,7 @@ REAL(8) FUNCTION DGAMRN(X)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
   !   920520  Added REFERENCES section.  (WRB)
-
+  USE service, ONLY : D1MACH, I1MACH
   INTEGER i, i1m11, k, mx, nx
   REAL(8) :: fln, rln, s, tol, trm, X, xdmy, xinc, xm, xmin, xp, xsq
   !

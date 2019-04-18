@@ -42,7 +42,7 @@ SUBROUTINE SPLPUP(USRMAT,Mrelas,Nvars,Prgopt,Dattrv,Bl,Bu,Ind,Info,Amat,&
   !   900510  Convert XERRWV calls to XERMSG calls, changed do-it-yourself
   !           DO loops to DO loops.  (RWC)
   !   900602  Get rid of ASSIGNed GOTOs.  (RWC)
-
+  USE service, ONLY : XERMSG
   INTEGER i, indcat, indexx, Info, iplace, itcnt, itmax, j, Mrelas, Nvars
   REAL Abig, aij, Amat(*), amn, amx, Asmall, Bl(*), Bu(*), Dattrv(*), &
     Prgopt(*), xval, zero

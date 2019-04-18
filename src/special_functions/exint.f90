@@ -101,7 +101,7 @@ SUBROUTINE EXINT(X,N,Kode,M,Tol,En,Nz,Ierr)
   !   920207  Updated with code with a revision date of 880811 from
   !           D. Amos.  Included correction of argument list.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-
+  USE service, ONLY : R1MACH, I1MACH
   REAL a(99), aa, aams, ah, ak, at, b(99), bk, bt, cc, cnorm, ct, em, &
     emx, En(*), etol, fnm, fx, pt, p1, p2, s, Tol, tx, X, xcut, &
     xlim, xtol, y(2), yt, y1, y2

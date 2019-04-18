@@ -1,6 +1,5 @@
 !** MPCDM
 SUBROUTINE MPCDM(Dx,Z)
-  USE MPCOM
   !>
   !***
   !  Subsidiary to DQDOTA and DQDOTI
@@ -39,7 +38,7 @@ SUBROUTINE MPCDM(Dx,Z)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   !   930124  Increased Array size in MPCON for SUN -r8.  (RWC)
-
+  USE MPCOM, ONLY : B, T, R
   INTEGER i, i2, ib, ie, k, Z(*), rs, re, tp
   REAL(8) :: db, dj, Dx
   !* FIRST EXECUTABLE STATEMENT  MPCDM

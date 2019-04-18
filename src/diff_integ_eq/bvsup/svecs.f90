@@ -1,6 +1,5 @@
 !** SVECS
 SUBROUTINE SVECS(Ncomp,Lnfc,Yhp,Work,Iwork,Inhomo,Iflag)
-  USE ML, ONLY: INDpvt, LNFcc => NFCc
   !>
   !***
   !  Subsidiary to BVSUP
@@ -33,7 +32,7 @@ SUBROUTINE SVECS(Ncomp,Lnfc,Yhp,Work,Iwork,Inhomo,Iflag)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
-
+  USE ML, ONLY: INDpvt, LNFcc => NFCc
   INTEGER idp, Iflag, Inhomo, Iwork(*), k, kp, Lnfc, Ncomp, niv
   REAL dum, Work(*), Yhp(Ncomp,*)
   !* FIRST EXECUTABLE STATEMENT  SVECS

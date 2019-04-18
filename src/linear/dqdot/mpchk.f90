@@ -1,6 +1,5 @@
 !** MPCHK
 SUBROUTINE MPCHK(I,J)
-  USE MPCOM
   !>
   !***
   !  Subsidiary to DQDOTA and DQDOTI
@@ -33,7 +32,8 @@ SUBROUTINE MPCHK(I,J)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   !   930124  Increased Array size in MPCON for SUN -r8.  (RWC)
-
+  USE MPCOM, ONLY : B, LUN, M, T, MXR
+  USE service, ONLY : I1MACH
   INTEGER I, ib, J, mx
   !* FIRST EXECUTABLE STATEMENT  MPCHK
   LUN = I1MACH(4)

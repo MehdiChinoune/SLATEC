@@ -39,7 +39,7 @@ REAL FUNCTION R9ATN1(X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
-
+  USE service, ONLY : XERMSG, R1MACH
   REAL eps, X, y
   INTEGER, SAVE :: ntatn1
   REAL, SAVE :: xsml, xbig, xmax

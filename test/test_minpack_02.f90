@@ -1,11 +1,9 @@
 MODULE TEST36_MOD
-  use slatec
   IMPLICIT NONE
 
 CONTAINS
   !** DNSQQK
   SUBROUTINE DNSQQK(Lun,Kprint,Ipass)
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for DNSQE and DNSQ.
@@ -31,7 +29,8 @@ CONTAINS
     !   890618  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   920310  Code cleaned up and TYPE section added.  (RWC, WRB)
-
+    USE slatec, ONLY : D1MACH, DENORM, DNSQE
+    USE common_mod, ONLY : PASS
     !     .. Scalar Arguments ..
     INTEGER Ipass, Kprint, Lun
     !     .. Local Scalars ..
@@ -115,7 +114,6 @@ CONTAINS
   END SUBROUTINE DNSQQK
   !** DSOSFN
   REAL(8) FUNCTION DSOSFN(X,K)
-    IMPLICIT NONE
     !>
     !***
     !  Function evaluator for DSOS quick check.
@@ -152,7 +150,6 @@ CONTAINS
   END FUNCTION DSOSFN
   !** DSOSQX
   SUBROUTINE DSOSQX(Lun,Kprint,Ipass)
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for DSOS.
@@ -177,7 +174,8 @@ CONTAINS
     !   890618  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   920310  Code cleaned up and TYPE section added.  (RWC, WRB)
-
+    USE slatec, ONLY : D1MACH, DNRM2, DSOS
+    USE common_mod, ONLY : PASS
     !     .. Scalar Arguments ..
     INTEGER Ipass, Kprint, Lun
     !     .. Local Scalars ..
@@ -246,7 +244,6 @@ CONTAINS
   END SUBROUTINE DSOSQX
   !** DQFCN2
   SUBROUTINE DQFCN2(N,X,Fvec,Iflag)
-    IMPLICIT NONE
     !>
     !***
     !  Evaluate function used in DNSQE.
@@ -284,7 +281,6 @@ CONTAINS
   END SUBROUTINE DQFCN2
   !** DQJAC2
   SUBROUTINE DQJAC2(N,X,Fvec,Fjac,Ldfjac,Iflag)
-    IMPLICIT NONE
     !>
     !***
     ! **Library:**   SLATEC
@@ -318,8 +314,9 @@ CONTAINS
 END MODULE TEST36_MOD
 !** TEST36
 PROGRAM TEST36
-  USE TEST36_MOD
-  use slatec
+  USE TEST36_MOD, ONLY : DNSQQK, DSOSQX
+  USE slatec, ONLY : I1MACH, XSETF, XSETUN, XERMAX
+  USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !>
   !***

@@ -40,7 +40,7 @@ SUBROUTINE IPPERM(Ix,N,Iperm,Ier)
   !* REVISION HISTORY  (YYMMDD)
   !   900618  DATE WRITTEN
   !   920507  Modified by M. McClain to revise prologue text.
-
+  USE service, ONLY : XERMSG
   INTEGER Ix(*), N, Iperm(*), i, Ier, indx, indx0, itemp, istrt
   !* FIRST EXECUTABLE STATEMENT  IPPERM
   Ier = 0

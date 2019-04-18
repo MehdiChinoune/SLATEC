@@ -1,6 +1,4 @@
 MODULE data_handling
-  use service
-  use linear
   IMPLICIT NONE
 
 CONTAINS

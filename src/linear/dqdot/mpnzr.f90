@@ -1,6 +1,5 @@
 !** MPNZR
 SUBROUTINE MPNZR(Rs,Re,Z,Trunc)
-  USE MPCOM
   !>
   !***
   !  Subsidiary to DQDOTA and DQDOTI
@@ -35,7 +34,7 @@ SUBROUTINE MPNZR(Rs,Re,Z,Trunc)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   !   930124  Increased Array size in MPCON for SUN -r8.  (RWC)
-
+  USE MPCOM, ONLY : B, LUN, M, T, R
   INTEGER i, i2, i2m, i2p, is, it, j, k, Z(*), Re, Rs, Trunc, b2
   !* FIRST EXECUTABLE STATEMENT  MPNZR
   i2 = T + 4

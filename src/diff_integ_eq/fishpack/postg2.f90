@@ -26,7 +26,7 @@ SUBROUTINE POSTG2(Nperod,N,M,A,Bb,C,Idimq,Q,B,B2,B3,W,W2,W3,D,Tcos,P)
   !   900402  Added TYPE section.  (WRB)
   !   920130  Modified to use merge routine S1MERG rather than deleted
   !           routine MERGE.  (WRB)
-
+  USE data_handling, ONLY : S1MERG
   INTEGER kr, lr, M, mr, N, nlast, nlastp, np, Nperod, nr, nrod, nrodpr, i, i2r, &
     i2rby2, Idimq, ii, ijump, ip, ipstor, j, jm1, jm2, jm3, jp1, jp2, jp3, jr, &
     jstart, jstep, jstop, k(4)

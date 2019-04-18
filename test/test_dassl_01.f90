@@ -1,11 +1,9 @@
 MODULE TEST48_MOD
-  use slatec
   IMPLICIT NONE
 
 CONTAINS
   !** EDIT2
   SUBROUTINE EDIT2(Y,T,Erm)
-    IMPLICIT NONE
     !>
     !***
     !  Subsidiary to SDASQC.
@@ -52,7 +50,6 @@ CONTAINS
   END SUBROUTINE EDIT2
   !** SDASQC
   SUBROUTINE SDASQC(Lun,Kprint,Ipass)
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for SLATEC routine SDASSL.
@@ -98,7 +95,7 @@ CONTAINS
     !   901009  Corrected GAMS classification code.  (FNF)
     !   901009  Changed AMAX1 to MAX.  (FNF)
     !   901030  Made all declarations explicit; added 1P's to formats. (FNF)
-
+    USE slatec, ONLY : SDASSL
     !
     INTEGER Lun, Kprint, Ipass
     !
@@ -264,7 +261,6 @@ CONTAINS
   END SUBROUTINE SDASQC
   !** SDJAC1
   SUBROUTINE SDJAC1(T,Y,Yprime,Pd,Cj,Rpar,Ipar)
-    IMPLICIT NONE
     !>
     !***
     !  First Jacobian evaluator for SDASQC.
@@ -294,7 +290,6 @@ CONTAINS
   END SUBROUTINE SDJAC1
   !** SDJAC2
   SUBROUTINE SDJAC2(T,Y,Yprime,Pd,Cj,Rpar,Ipar)
-    IMPLICIT NONE
     !>
     !***
     !  Second Jacobian evaluator for SDASQC.
@@ -339,7 +334,6 @@ CONTAINS
   END SUBROUTINE SDJAC2
   !** SDRES1
   SUBROUTINE SDRES1(T,Y,Yprime,Delta,Ires,Rpar,Ipar)
-    IMPLICIT NONE
     !>
     !***
     !  First residual evaluator for SDASQC.
@@ -367,7 +361,6 @@ CONTAINS
   END SUBROUTINE SDRES1
   !** SDRES2
   SUBROUTINE SDRES2(T,Y,Yprime,Delta,Ires,Rpar,Ipar)
-    IMPLICIT NONE
     !>
     !***
     !  Second residual evaluator for SDASQC.
@@ -408,8 +401,9 @@ CONTAINS
 END MODULE TEST48_MOD
 !** TEST48
 PROGRAM TEST48
-  USE TEST48_MOD
-  use slatec
+  USE TEST48_MOD, ONLY : SDASQC
+  USE slatec, ONLY : I1MACH, XSETF, XSETUN, XERMAX
+  USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !>
   !***

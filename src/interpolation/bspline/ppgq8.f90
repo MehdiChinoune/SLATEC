@@ -68,7 +68,7 @@ SUBROUTINE PPGQ8(FUN,Ldc,C,Xi,Lxi,Kk,Id,A,B,Inppv,Err,Ans,Ierr)
   !           (WRB)
   !   900328  Added TYPE section.  (WRB)
   !   910408  Updated the AUTHOR section.  (WRB)
-
+  USE service, ONLY : XERMSG, R1MACH, I1MACH
   !
   INTERFACE
     REAL FUNCTION FUN(X)

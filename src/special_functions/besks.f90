@@ -38,7 +38,7 @@ SUBROUTINE BESKS(Xnu,X,Nin,Bk)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
-
+  USE service, ONLY : XERMSG, R1MACH
   REAL Bk(*), expxi, X, Xnu
   INTEGER i, n, Nin
   REAL :: xmax = 0.0

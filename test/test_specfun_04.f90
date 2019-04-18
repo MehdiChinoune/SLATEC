@@ -1,12 +1,10 @@
 MODULE TEST05_MOD
-  use slatec
   IMPLICIT NONE
   REAL X, A, FKM
 
 CONTAINS
   !** BIKCK
   SUBROUTINE BIKCK(Lun,Kprint,Ipass)
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for BESI and BESK.
@@ -40,7 +38,7 @@ CONTAINS
     !   910501  Added PURPOSE and TYPE records.  (WRB)
     !   910708  Code revised to test error returns for all values of
     !           KPRINT.  (WRB)
-
+    USE slatec, ONLY : BESI, BESK, NUMXER, R1MACH, XERCLR, XGETF, XSETF
     INTEGER Ipass, Kprint
     INTEGER i, ix, k, kontrl, kode, Lun, m, n, nerr, nu, nw, ny
     REAL alp, del, er, fnu, fnup, rx, tol, x
@@ -274,7 +272,6 @@ CONTAINS
   END SUBROUTINE BIKCK
   !** BJYCK
   SUBROUTINE BJYCK(Lun,Kprint,Ipass)
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for BESJ and BESY.
@@ -308,7 +305,7 @@ CONTAINS
     !   910501  Added PURPOSE and TYPE records.  (WRB)
     !   910708  Code revised to test error returns for all values of
     !           KPRINT.  (WRB)
-
+    USE slatec, ONLY : BESJ, BESY, NUMXER, R1MACH, XERCLR, XGETF, XSETF
     INTEGER Ipass, Kprint
     INTEGER i, ix, k, kontrl, Lun, m, n, nerr, nu, ny
     REAL alp, del, er, fnu, fnup, rhpi, rx, tol, x
@@ -510,7 +507,6 @@ CONTAINS
   END SUBROUTINE BJYCK
   !** EG8CK
   SUBROUTINE EG8CK(Lun,Kprint,Ipass)
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for EXINT and GAUS8.
@@ -541,7 +537,7 @@ CONTAINS
     !   910708  Code revised to test error returns for all values of
     !           KPRINT.  (WRB)
     !   920206  Corrected argument list in CALL to EXINT.  (WRB)
-
+    USE slatec, ONLY : EXINT, GAUS8, R1MACH
     INTEGER Kprint
     INTEGER i, icase, ie, ierr, ii, ik, Ipass, ix, iy, k, ke, kk, &
       kode, kx, Lun, m, n, nm, nz
@@ -694,7 +690,6 @@ CONTAINS
   END SUBROUTINE EG8CK
   !** FEIN
   REAL FUNCTION FEIN(T)
-    IMPLICIT NONE
     !>
     !***
     !  Subsidiary to EG8CK.
@@ -720,8 +715,9 @@ CONTAINS
 END MODULE TEST05_MOD
 !** TEST05
 PROGRAM TEST05
-  USE TEST05_MOD
-  use slatec
+  USE TEST05_MOD, ONLY : BIKCK, BJYCK, EG8CK
+  USE slatec, ONLY : I1MACH, XSETF, XSETUN, XERMAX
+  USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !>
   !***

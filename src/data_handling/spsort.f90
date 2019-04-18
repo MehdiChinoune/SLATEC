@@ -77,7 +77,7 @@ SUBROUTINE SPSORT(X,N,Iperm,Kflag,Ier)
   !   920507  Modified by M. McClain to revise prologue text.
   !   920818  Declarations section rebuilt and code restructured to use
   !           IF-THEN-ELSE-ENDIF.  (SMR, WRB)
-
+  USE service, ONLY : XERMSG
   !     .. Scalar Arguments ..
   INTEGER Ier, Kflag, N
   !     .. Array Arguments ..

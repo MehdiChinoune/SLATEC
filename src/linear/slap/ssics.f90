@@ -164,7 +164,7 @@ SUBROUTINE SSICS(N,Nelt,Ia,Ja,A,Isym,Nel,Iel,Jel,El,D,R,Iwarn)
   !   920511  Added complete declaration section.  (WRB)
   !   920929  Corrected format of reference.  (FNF)
   !   930701  Updated CATEGORY section.  (FNF, WRB)
-
+  USE service, ONLY : XERMSG
   !     .. Scalar Arguments ..
   INTEGER Isym, Iwarn, N, Nel, Nelt
   !     .. Array Arguments ..

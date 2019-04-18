@@ -1,11 +1,6 @@
 !** DBVSUP
 SUBROUTINE DBVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
     Nfc,Igofx,Re,Ae,Iflag,Work,Ndw,Iwork,Ndiw,Neqivp)
-  USE DML, ONLY : XSAv, IGOfxd => IGOfx, INHomo, NCOmpd => NCOmp, NFCd => NFC, &
-    KKKzpw, NEEdw, NEEdiw, K1, K2, K3, K4, K5, K6, K7, K8, K9, K10, K11, L1, L2, &
-    KKKint, LLLint, XBEg, XENd, MNSwot, AED => AE, RED => RE, NXPtsd => NXPts, &
-    NICd => NIC, NOPg, MXNon, NDIsk, NTApe, INDpvt, INTeg, NPS, NTP, &
-    NEQivd => NEQivp, NFCc, ICOco
   !>
   !***
   !  Solve a linear two-point boundary value problem using
@@ -418,7 +413,12 @@ SUBROUTINE DBVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
   !   900510  Convert XERRWV calls to XERMSG calls, remove some extraneous
   !           comments.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-
+  USE DML, ONLY : XSAv, IGOfxd => IGOfx, INHomo, NCOmpd => NCOmp, NFCd => NFC, &
+    KKKzpw, NEEdw, NEEdiw, K1, K2, K3, K4, K5, K6, K7, K8, K9, K10, K11, L1, L2, &
+    KKKint, LLLint, XBEg, XENd, MNSwot, AED => AE, RED => RE, NXPtsd => NXPts, &
+    NICd => NIC, NOPg, MXNon, NDIsk, NTApe, INDpvt, INTeg, NPS, NTP, &
+    NEQivd => NEQivp, NFCc, ICOco
+  USE service, ONLY : XERMSG
   !- *********************************************************************
   !
   INTEGER Iflag, Igofx, is, Iwork(*), j, k, kkkcoe, kkkcof, kkkg, kkks, kkksto, &

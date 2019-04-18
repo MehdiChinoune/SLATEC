@@ -344,7 +344,7 @@ SUBROUTINE SNSQE(FCN,JAC,Iopt,N,X,Fvec,Tol,Nprint,Info,Wa,Lwa)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-
+  USE service, ONLY : XERMSG
   INTEGER Iopt, N, Nprint, Info, Lwa
   REAL Tol
   REAL X(*), Fvec(*), Wa(Lwa)

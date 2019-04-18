@@ -75,7 +75,7 @@ REAL FUNCTION BVALU(T,A,N,K,Ideriv,X,Inbv,Work)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-
+  USE service, ONLY : XERMSG
   INTEGER i, Ideriv, iderp1, ihi, ihmkmj, ilo, imk, imkpj, Inbv, &
     ipj, ip1, ip1mj, j, jj, j1, j2, K, kmider, kmj, km1, kpk, mflag, N
   REAL A(*), fkmj, T(*), Work(*), X

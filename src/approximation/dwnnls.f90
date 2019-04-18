@@ -274,7 +274,7 @@ SUBROUTINE DWNNLS(W,Mdw,Me,Ma,N,L,Prgopt,X,Rnorm,Mode,Iwork,Work)
   !   900510  Convert XERRWV calls to XERMSG calls, change Prologue
   !           comments to agree with WNNLS.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-
+  USE service, ONLY : XERMSG
   INTEGER Iwork(*), L, l1, l2, l3, l4, l5, liw, lw, Ma, Mdw, Me, Mode, N
   REAL(8) :: Prgopt(*), Rnorm, W(Mdw,*), Work(*), X(*)
   CHARACTER(8) :: xern1

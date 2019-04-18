@@ -1,6 +1,5 @@
 !** DPJAC
 SUBROUTINE DPJAC(Neq,Y,Yh,Nyh,Ewt,Ftem,Savf,Wm,Iwm,DF,DJAC,Rpar,Ipar)
-  USE DDEBD1, ONLY : EL0, H, TN, UROund, IER, MITer, N, NFE, NJE
   !>
   !***
   !  Subsidiary to DDEBDF
@@ -31,7 +30,8 @@ SUBROUTINE DPJAC(Neq,Y,Yh,Nyh,Ewt,Ftem,Savf,Wm,Iwm,DF,DJAC,Rpar,Ipar)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
   !   920422  Changed DIMENSION statement.  (WRB)
-
+  USE DDEBD1, ONLY : EL0, H, TN, UROund, IER, MITer, N, NFE, NJE
+  USE linear, ONLY : DGBFA, DGEFA
   !
   INTEGER i, i1, i2, ii, Ipar(*), Iwm(*), j, j1, jj, lenp, mba, mband, meb1, &
     meband, ml, ml3, mu, Neq, Nyh

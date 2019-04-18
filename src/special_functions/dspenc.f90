@@ -51,7 +51,7 @@ REAL(8) FUNCTION DSPENC(X)
   !   891115  Corrected third argument in reference to INITDS.  (WRB)
   !   891115  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
-
+  USE service, ONLY : D1MACH
   REAL(8) :: X, aln
   INTEGER, SAVE :: nspenc
   REAL(8), SAVE :: xbig

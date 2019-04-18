@@ -48,7 +48,7 @@ SUBROUTINE DPLINT(N,X,Y,C)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-
+  USE service, ONLY : XERMSG
   INTEGER i, k, km1, N
   REAL(8) :: dif, C(*), X(*), Y(*)
   !* FIRST EXECUTABLE STATEMENT  DPLINT

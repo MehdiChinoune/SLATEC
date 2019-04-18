@@ -38,7 +38,7 @@ REAL FUNCTION ALBETA(A,B)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   900727  Added EXTERNAL statement.  (WRB)
-
+  USE service, ONLY : XERMSG
   REAL A, B, corr, p, q
   REAL, PARAMETER :: sq2pil = 0.91893853320467274E0
   !* FIRST EXECUTABLE STATEMENT  ALBETA

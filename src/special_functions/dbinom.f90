@@ -30,7 +30,7 @@ REAL(8) FUNCTION DBINOM(N,M)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-
+  USE service, ONLY : XERMSG, D1MACH
   INTEGER i, k, M, N
   REAL(8) :: corr, xk, xn, xnk
   REAL(8), SAVE :: bilnmx, fintmx

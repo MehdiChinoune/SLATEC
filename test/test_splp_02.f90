@@ -1,11 +1,9 @@
 MODULE TEST38_MOD
-  use slatec
   IMPLICIT NONE
 
 CONTAINS
   !** DPLPQX
   SUBROUTINE DPLPQX(Lun,Kprint,Ipass)
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for DSPLP.
@@ -23,7 +21,8 @@ CONTAINS
     !   890911  Removed unnecessary intrinsics.  (WRB)
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   901013  Added additional printout on failure.  (RWC)
-
+    USE slatec, ONLY : DCOPY, DSPLP, DUSRMT
+    USE common_mod, ONLY : PASS
     INTEGER i, ic, iv, ivv, j, kk, kount, Kprint, Lun, mm
     INTEGER icnt, ind(60), ibasis(60), Ipass, iwork(900), isoln(14)
     REAL(8) :: costs(37)
@@ -254,7 +253,6 @@ CONTAINS
   END SUBROUTINE DPLPQX
   !** DBOCQX
   SUBROUTINE DBOCQX(Lun,Kprint,Ipass)
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for DBOCLS.
@@ -284,7 +282,7 @@ CONTAINS
     !   890618  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   901010  Added PASS/FAIL message.  (RWC)
-
+    USE slatec, ONLY : D1MACH, DBOCLS, DBOLS, DCOPY, DNRM2
     REAL(8) :: rnorm, rnormc, sr
     INTEGER ib, Ipass, irhs, itest, j, Kprint, Lun, mcon, mdw, &
       mode, mpass, mrows, ncols
@@ -423,8 +421,9 @@ CONTAINS
 END MODULE TEST38_MOD
 !** TEST38
 PROGRAM TEST38
-  USE TEST38_MOD
-  use slatec
+  USE TEST38_MOD, ONLY : DBOCQX, DPLPQX
+  USE slatec, ONLY : I1MACH, XSETF, XSETUN, XERMAX
+  USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !>
   !***

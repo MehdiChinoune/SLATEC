@@ -43,7 +43,7 @@ SUBROUTINE DDNTL(Eps,F,FA,Hmax,Hold,Impl,Jtask,Matdim,Maxord,Mint,Miter,&
   !* REVISION HISTORY  (YYMMDD)
   !   790601  DATE WRITTEN
   !   900329  Initial submission to SLATEC.
-
+  USE linear, ONLY : DNRM2, DGBSL, DGESL, DGBFA, DGEFA
   INTEGER i, iflag, Impl, info, Iswflg, Jstate, Jtask, Matdim, &
     Maxord, Mint, Miter, Ml, Mntold, Mtrold, Mu, N, Nde, Nfe, Nq, Nwait
   REAL(8) :: A(Matdim,*), El(13,12), Eps, Fac(*), H, Hmax, Hold, oldl0, Rc, Rh, &

@@ -87,7 +87,7 @@ SUBROUTINE DBESJ(X,Alpha,N,Y,Nz)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-
+  USE service, ONLY : XERMSG, D1MACH, I1MACH
   INTEGER i, ialp, idalp, iflw, in, is, i1, i2, k, kk, km, kt, N, nn, ns, Nz
   REAL(8) :: ak, akm, Alpha, ans, ap, arg, coef, dalpha, dfn, dtm, earg, elim1, &
     etx, fidal, flgjy, fn, fnf, fni, fnp1, fnu, gln, rden, relb, &

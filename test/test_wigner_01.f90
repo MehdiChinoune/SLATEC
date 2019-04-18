@@ -1,11 +1,9 @@
 MODULE TEST15_MOD
-  use slatec
   IMPLICIT NONE
 
 CONTAINS
   !** QC36J
   SUBROUTINE QC36J(Lun,Kprint,Ipass)
-    IMPLICIT NONE
     !>
     !***
     !  THIS IS A QUICK CHECK PROGRAM FOR THE SUBROUTINES RC3JJ,
@@ -44,7 +42,7 @@ CONTAINS
     !           and 4 with values stored in data statements.  This involved
     !           removing all calls to subroutine RACAH.  These changes were
     !           made by M. McClain.
-
+    USE slatec, ONLY : NUMXER, R1MACH, RC3JJ, RC3JM, RC6J, XERCLR, XSETF
     !
     INTEGER Lun, Kprint, Ipass
     !
@@ -476,8 +474,9 @@ CONTAINS
 END MODULE TEST15_MOD
 !** TEST15
 PROGRAM TEST15
-  USE TEST15_MOD
-  use slatec
+  USE TEST15_MOD, ONLY : QC36J
+  USE slatec, ONLY : I1MACH, XSETF, XSETUN, XERMAX
+  USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !>
   !***

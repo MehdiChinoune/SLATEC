@@ -31,7 +31,7 @@ SUBROUTINE SDCOR(Dfdy,El,FA,H,Ierror,Impl,Ipvt,Matdim,Miter,Ml,Mu,N,Nde,&
   !* REVISION HISTORY  (YYMMDD)
   !   790601  DATE WRITTEN
   !   900329  Initial submission to SLATEC.
-
+  USE linear, ONLY : SNRM2, SGBSL, SGESL
   INTEGER i, Ierror, iflag, Impl, j, Jstate, Matdim, Miter, Ml, Mu, mw, N, Nde, Nq
   REAL A(Matdim,*), D, Dfdy(Matdim,*), El(13,12), H, Save1(*), &
     Save2(*), T, Y(*), Yh(N,*), Ywt(*)

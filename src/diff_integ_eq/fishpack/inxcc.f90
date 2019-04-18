@@ -1,6 +1,5 @@
 !** INXCC
 SUBROUTINE INXCC(I,Ir,Idxc,Nc)
-  USE CCBLK
   !>
   !***
   !  Subsidiary to CBLKTR
@@ -21,7 +20,7 @@ SUBROUTINE INXCC(I,Ir,Idxc,Nc)
   !   801001  DATE WRITTEN
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
-
+  USE CCBLK, ONLY : NM
   INTEGER I, Idxc, Ir, Nc
   !* FIRST EXECUTABLE STATEMENT  INXCC
   Nc = 2**Ir

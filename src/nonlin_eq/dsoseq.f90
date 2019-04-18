@@ -93,8 +93,7 @@ SUBROUTINE DSOSEQ(FNC,N,S,Rtolx,Atolx,Tolf,Iflag,Mxit,Ncjs,Nsrrc,Nsri,&
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
-
-  !
+  USE service, ONLY : D1MACH, I1MACH
   !
   INTEGER ic, icr, Iflag, Iprint, Is(*), isj, isv, it, item, itry, &
     j, jk, js, k, kd, kj, kk, km1, kn, ksv, l, loun, ls, &

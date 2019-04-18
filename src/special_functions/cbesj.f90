@@ -156,7 +156,7 @@ SUBROUTINE CBESJ(Z,Fnu,Kode,N,Cy,Nz,Ierr)
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
   !   920128  Category corrected.  (WRB)
   !   920811  Prologue revised.  (DWL)
-
+  USE service, ONLY : R1MACH, I1MACH
   !
   INTEGER i, Ierr, inu, inuh, ir, Kode, k1, k2, N, nl, Nz, k
   COMPLEX ci, csgn, Cy(N), Z, zn

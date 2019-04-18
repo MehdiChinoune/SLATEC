@@ -1,6 +1,5 @@
 !** SSDSCL
 SUBROUTINE SSDSCL(N,Nelt,Ia,Ja,A,Isym,X,B,Dinv,Job,Itol)
-  USE SSLBLK
   !>
   !***
   !  Diagonal Scaling of system Ax = b.
@@ -147,7 +146,7 @@ SUBROUTINE SSDSCL(N,Nelt,Ia,Ja,A,Isym,X,B,Dinv,Job,Itol)
   !   920511  Added complete declaration section.  (WRB)
   !   921113  Corrected C***CATEGORY line.  (FNF)
   !   930701  Updated CATEGORY section.  (FNF, WRB)
-
+  USE SSLBLK, ONLY : SOLn
   !     .. Scalar Arguments ..
   INTEGER Isym, Itol, Job, N, Nelt
   !     .. Array Arguments ..

@@ -1,6 +1,5 @@
 !** ORTHO4
 SUBROUTINE ORTHO4(Usol,Idmn,Zn,Zm,Pertrb)
-  USE SPL4
   !>
   !***
   !  Subsidiary to SEPX4
@@ -27,7 +26,7 @@ SUBROUTINE ORTHO4(Usol,Idmn,Zn,Zm,Pertrb)
   !   801001  DATE WRITTEN
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
-
+  USE SPL4, ONLY : IS, JS, MS, NS
   INTEGER i, Idmn, ifnl, ii, istr, j, jfnl, jj, jstr
   REAL ete, Pertrb, Usol(Idmn,*), ute, Zm(*), Zn(*)
   !* FIRST EXECUTABLE STATEMENT  ORTHO4

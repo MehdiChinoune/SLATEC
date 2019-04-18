@@ -92,7 +92,7 @@ SUBROUTINE BESI(X,Alpha,Kode,N,Y,Nz)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-
+  USE service, ONLY : XERMSG, R1MACH, I1MACH
   !
   INTEGER i, ialp, in, is, i1, k, kk, km, Kode, kt, N, nn, ns, Nz
   REAL ain, ak, akm, Alpha, ans, ap, arg, atol, tolln, dfn, dtm, dx, earg, elim, &

@@ -110,7 +110,7 @@ SUBROUTINE DGEFS(A,Lda,N,V,Itask,Ind,Work,Iwork)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-
+  USE service, ONLY : D1MACH, XERMSG
   !
   INTEGER Lda, N, Itask, Ind, Iwork(*)
   REAL(8) :: A(Lda,*), V(*), Work(*)

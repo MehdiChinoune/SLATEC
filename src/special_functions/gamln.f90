@@ -50,7 +50,7 @@ REAL FUNCTION GAMLN(Z,Ierr)
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
   !   920128  Category corrected.  (WRB)
   !   921215  GAMLN defined for Z negative.  (WRB)
-
+  USE service, ONLY : R1MACH, I1MACH
   !
   INTEGER i, i1m, k, mz, nz, Ierr
   REAL fln, fz, rln, s, tlg, trm, tst, t1, wdtol, Z, zdmy, zinc, zm, zmin, zp, zsq

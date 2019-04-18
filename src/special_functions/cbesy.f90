@@ -159,7 +159,7 @@ SUBROUTINE CBESY(Z,Fnu,Kode,N,Cy,Nz,Cwrk,Ierr)
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
   !   920128  Category corrected.  (WRB)
   !   920811  Prologue revised.  (DWL)
-
+  USE service, ONLY : R1MACH, I1MACH
   !
   INTEGER i, Ierr, k, Kode, k1, k2, N, Nz, nz1, nz2
   COMPLEX Cwrk(N), Cy(N), c1, c2, ex, hci, Z, zu, zv

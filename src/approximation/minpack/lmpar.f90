@@ -105,7 +105,7 @@ SUBROUTINE LMPAR(N,R,Ldr,Ipvt,Diag,Qtb,Delta,Par,X,Sigma,Wa1,Wa2)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   900328  Added TYPE section.  (WRB)
-
+  USE service, ONLY : R1MACH
   INTEGER N, Ldr
   INTEGER Ipvt(*)
   REAL Delta, Par

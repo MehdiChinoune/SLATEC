@@ -31,7 +31,7 @@ COMPLEX FUNCTION CPSI(Zin)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900727  Added EXTERNAL statement.  (WRB)
-
+  USE service, ONLY : XERMSG, R1MACH
   REAL cabsz, x, y
   INTEGER i, n, ndx
   COMPLEX Zin, z, z2inv, corr

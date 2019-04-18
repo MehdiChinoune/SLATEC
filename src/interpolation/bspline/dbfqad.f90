@@ -76,7 +76,7 @@ SUBROUTINE DBFQAD(F,T,Bcoef,N,K,Id,X1,X2,Tol,Quad,Ierr,Work)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-
+  USE service, ONLY : XERMSG, D1MACH
   INTEGER inbv
   INTEGER Id, Ierr, iflg, ilo, il1, il2, K, left, mflag, N, npk, np1
   REAL(8) :: a, aa, ans, b, bb, Bcoef(*), q, Quad, T(*), ta, tb, &

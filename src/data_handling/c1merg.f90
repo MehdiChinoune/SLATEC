@@ -32,7 +32,7 @@ SUBROUTINE C1MERG(Tcos,I1,M1,I2,M2,I3)
   !           which was modified earlier due to compiler problems on
   !           the IBM RS6000.  (RWC)
   !   920130  Code name changed from CMPMRG to C1MERG.  (WRB)
-
+  USE linear, ONLY : CCOPY
   INTEGER I1, I2, I3, M1, M2
   COMPLEX Tcos(*)
   !

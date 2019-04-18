@@ -1,11 +1,9 @@
 MODULE TEST22_MOD
-  use slatec
   IMPLICIT NONE
 
 CONTAINS
   !** SQCK
   SUBROUTINE SQCK(Lun,Kprint,Nerr)
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for SPOFS, SPOIR, SNBFS and SNBIR.
@@ -52,7 +50,7 @@ CONTAINS
     !   901009  Restructured using IF-THEN-ELSE-ENDIF, cleaned up FORMATs,
     !           including removing an illegal character from column 1, and
     !           fixed code to test all four routines.  (RWC)
-
+    USE slatec, ONLY : R1MACH, SNBFS, SNBIR, SPOFS, SPOIR
     INTEGER Kprint, Lun
     REAL at(5,4), abe(5,7), abet(5,7), b(4), bt(4), c(4), &
       work(35), r, delx, delmax, signn
@@ -193,7 +191,6 @@ CONTAINS
   END SUBROUTINE SQCK
   !** DQCK
   SUBROUTINE DQCK(Lun,Kprint,Nerr)
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for DPOFS AND DNBFS.
@@ -236,7 +233,7 @@ CONTAINS
     !   901009  Restructured using IF-THEN-ELSE-ENDIF, cleaned up FORMATs,
     !           including removing an illegal character from column 1, and
     !           editorial changes.  (RWC)
-
+    USE slatec, ONLY : D1MACH, DNBFS, DPOFS
     INTEGER Kprint, Lun
     REAL(8) :: at(5,4), abe(5,7), abet(5,7), b(4), bt(4), c(4), work(35), signn
     REAL r, delx, delmax
@@ -375,7 +372,6 @@ CONTAINS
   END SUBROUTINE DQCK
   !** CQCK
   SUBROUTINE CQCK(Lun,Kprint,Nerr)
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for CPOFS, CPOIR, CNBFS and CNBIR.
@@ -418,7 +414,7 @@ CONTAINS
     !   901009  Restructured using IF-THEN-ELSE-ENDIF, cleaned up FORMATs,
     !           including removing an illegal character from column 1, and
     !           editorial changes.  (RWC)
-
+    USE slatec, ONLY : CNBFS, CNBIR, CPOFS, CPOIR, R1MACH
     INTEGER Kprint, Lun
     REAL r, delx, delmax
     COMPLEX at(5,4), abe(5,7), abet(5,7), bt(4), work(35)
@@ -538,8 +534,9 @@ CONTAINS
 END MODULE TEST22_MOD
 !** TEST22
 PROGRAM TEST22
-  USE TEST22_MOD
-  use slatec
+  USE TEST22_MOD, ONLY : CQCK, DQCK, SQCK
+  USE slatec, ONLY : I1MACH, XSETF, XSETUN, XERMAX
+  USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !>
   !***

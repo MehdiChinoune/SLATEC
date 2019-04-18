@@ -68,7 +68,7 @@ SUBROUTINE DQK21(F,A,B,Result,Abserr,Resabs,Resasc)
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
-
+  USE service, ONLY : D1MACH
   !
   REAL(8) :: A, absc, Abserr, B, centr, dhlgth, epmach, fc, fsum, fval1, fval2, &
     fv1(10), fv2(10), hlgth, Resabs, Resasc, resg, resk, reskh, Result, uflow

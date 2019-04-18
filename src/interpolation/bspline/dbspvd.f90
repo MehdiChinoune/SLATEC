@@ -80,7 +80,7 @@ SUBROUTINE DBSPVD(T,K,Nderiv,X,Ileft,Ldvnik,Vnikx,Work)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-
+  USE service, ONLY : XERMSG
   INTEGER iwork, Ldvnik
   INTEGER i, ideriv, Ileft, ipkmd, j, jj, jlow, jm, jp1mid, K, &
     kmd, kp1, l, ldummy, m, mhigh, Nderiv

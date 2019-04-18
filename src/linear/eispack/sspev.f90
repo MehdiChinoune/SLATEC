@@ -91,7 +91,7 @@ SUBROUTINE SSPEV(A,N,E,V,Ldv,Work,Job,Info)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
-
+  USE service, ONLY : XERMSG
   INTEGER Job
   INTEGER i, Info, j, Ldv, m, N
   REAL A(*), E(*), V(Ldv,*), Work(*)

@@ -1548,7 +1548,7 @@ SUBROUTINE DSPLP(DUSRMT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-
+  USE service, ONLY : XERMSG
   INTEGER iadbig, ictmax, ictopt, Info, iopt, key, lamat, last, &
     lbasma, lbm, lcolnr, lcsc, lerd, lerp, libb, librc, &
     limat, lipr, Liw, liwork

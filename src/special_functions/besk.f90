@@ -82,7 +82,7 @@ SUBROUTINE BESK(X,Fnu,Kode,N,Y,Nz)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-
+  USE service, ONLY : XERMSG, R1MACH, I1MACH
   !
   INTEGER i, j, k, Kode, mz, N, nb, nd, nn, nud, Nz
   REAL cn, dnu, elim, etx, flgik, fn, fnn, Fnu, gln, gnu, rtz, &

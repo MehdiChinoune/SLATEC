@@ -68,7 +68,7 @@ SUBROUTINE DOGLEG(N,R,Lr,Diag,Qtb,Delta,X,Wa1,Wa2)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   900328  Added TYPE section.  (WRB)
-
+  USE service, ONLY : R1MACH
   INTEGER N, Lr
   REAL Delta
   REAL R(Lr), Diag(*), Qtb(*), X(*), Wa1(*), Wa2(*)

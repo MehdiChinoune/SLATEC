@@ -26,7 +26,7 @@ SUBROUTINE ZASYI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Rl,Tol,Elim,Alim)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
   !   930122  Added ZEXP and ZSQRT to EXTERNAL statement.  (RWC)
-
+  USE service, ONLY : D1MACH
   !     COMPLEX AK1,CK,CONE,CS1,CS2,CZ,CZERO,DK,EZ,P1,RZ,S2,Y,Z
   INTEGER i, ib, il, inu, j, jl, k, Kode, koded, m, N, nn, Nz
   REAL(8) :: aa, aez, ak, ak1i, ak1r, Alim, arg, arm, atol, az, bb, bk, cki, &

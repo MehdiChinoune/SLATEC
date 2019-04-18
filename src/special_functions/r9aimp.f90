@@ -53,7 +53,7 @@ SUBROUTINE R9AIMP(X,Ampl,Theta)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
-
+  USE service, ONLY : XERMSG, R1MACH
   REAL Ampl, eta, sqrtx, Theta, X, z
   INTEGER, SAVE :: nam21, nath1, nam22, nath2
   REAL, SAVE :: xsml

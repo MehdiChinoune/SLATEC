@@ -198,7 +198,7 @@ SUBROUTINE BNDSOL(Mode,G,Mdg,Nb,Ip,Ir,X,N,Rnorm)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-
+  USE service, ONLY : XERMSG
   INTEGER i, i1, i2, ie, ii, iopt, Ip, Ir, irm1, ix, j, jg, l, &
     Mdg, Mode, N, Nb, nerr, np1
   REAL G(Mdg,*), Rnorm, rsq, s, X(*), zero

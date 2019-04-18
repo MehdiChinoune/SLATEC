@@ -93,7 +93,7 @@ SUBROUTINE DQNG(F,A,B,Epsabs,Epsrel,Result,Abserr,Neval,Ier)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-
+  USE service, ONLY : XERMSG, D1MACH
   !
   REAL(8) :: A, absc, Abserr, B, centr, dhlgth, &
     epmach, Epsabs, Epsrel, fcentr, fval, fval1, &

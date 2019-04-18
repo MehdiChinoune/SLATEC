@@ -59,7 +59,7 @@ SUBROUTINE DDAJAC(Neq,X,Y,Yprime,Delta,Cj,H,Ier,Wt,E,Wm,Iwm,RES,Ires,&
   !   901026  Added explicit declarations for all variables and minor
   !           cosmetic changes to prologue.  (FNF)
   !   901101  Corrected PURPOSE.  (FNF)
-
+  USE linear, ONLY : DGBFA, DGEFA
   !
   INTEGER Neq, Ier, Iwm(*), Ires, Ipar(*), Ntemp
   REAL(8) :: X, Y(*), Yprime(*), Delta(*), Cj, H, Wt(*), E(*), Wm(*), Uround, Rpar(*)

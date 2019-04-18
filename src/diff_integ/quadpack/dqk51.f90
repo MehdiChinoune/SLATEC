@@ -69,7 +69,7 @@ SUBROUTINE DQK51(F,A,B,Result,Abserr,Resabs,Resasc)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   910819  Added WGK(26) to code.  (WRB)
-
+  USE service, ONLY : D1MACH
   !
   REAL(8) :: A, absc, Abserr, B, centr, dhlgth, epmach, fc, fsum, fval1, fval2, &
     fv1(25), fv2(25), hlgth, Resabs, Resasc, resg, resk, reskh, Result, uflow

@@ -47,7 +47,7 @@ REAL(8) FUNCTION DPSI(X)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900727  Added EXTERNAL statement.  (WRB)
   !   920618  Removed space from variable name.  (RWC, WRB)
-
+  USE service, ONLY : XERMSG, D1MACH
   INTEGER i, n
   REAL(8) :: X, aux, y
   INTEGER, SAVE :: ntpsi, ntapsi

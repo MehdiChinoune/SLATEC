@@ -68,7 +68,7 @@ SUBROUTINE DDOGLG(N,R,Lr,Diag,Qtb,Delta,X,Wa1,Wa2)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   900328  Added TYPE section.  (WRB)
-
+  USE service, ONLY : D1MACH
   INTEGER i, j, jj, jp1, k, l, Lr, N
   REAL(8) :: alpha, bnorm, Delta, Diag(*), epsmch, gnorm, qnorm, Qtb(*), R(*), &
     sgnorm, summ, temp, Wa1(*), Wa2(*), X(*)

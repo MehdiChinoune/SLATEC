@@ -296,7 +296,7 @@ SUBROUTINE CDRIV1(N,T,Y,F,Tout,Mstate,Eps,Work,Lenw,Ierflg)
   !* REVISION HISTORY  (YYMMDD)
   !   790601  DATE WRITTEN
   !   900329  Initial submission to SLATEC.
-
+  USE service, ONLY : XERMSG, R1MACH
   EXTERNAL :: F
   COMPLEX Work(*), Y(*)
   REAL Eps, hmax, T, Tout

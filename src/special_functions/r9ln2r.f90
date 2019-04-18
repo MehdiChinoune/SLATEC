@@ -44,7 +44,7 @@ REAL FUNCTION R9LN2R(X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
-
+  USE service, ONLY : XERMSG, R1MACH
   REAL eps, sqeps, txbig, txmax, X
   INTEGER, SAVE :: ntln21, ntln22
   REAL, SAVE :: xmin, xbig, xmax

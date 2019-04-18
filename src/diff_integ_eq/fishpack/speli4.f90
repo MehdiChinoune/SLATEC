@@ -1,7 +1,6 @@
 !** SPELI4
 SUBROUTINE SPELI4(Iorder,A,B,M,Mbdcnd,Bda,Alpha,Bdb,Beta,C,D,N,Nbdcnd,Bdc,&
     Bdd,COFX,An,Bn,Cn,Dn,Un,Zn,Am,Bm,Cm,Dm,Um,Zm,Grhs,Usol,Idmn,W,Pertrb,Ierror)
-  USE SPL4
   !>
   !***
   !  Subsidiary to SEPX4
@@ -32,7 +31,8 @@ SUBROUTINE SPELI4(Iorder,A,B,M,Mbdcnd,Bda,Alpha,Bdb,Beta,C,D,N,Nbdcnd,Bdc,&
   !   891009  Removed unreferenced variable.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
-
+  USE SPL4, ONLY : L, AIT, BIT, CIT, DIT, DLX, DLX4, DLY, DLY4, IS, JS, K, KSWx, &
+    KSWy, MIT, MS, NIT, NS, TDLx3, TDLy3
   INTEGER i, Idmn, ieror, Ierror, iord, Iorder, j, M, Mbdcnd, mp, N, Nbdcnd, np
   REAL A, ai, Alpha, Am(*), An(*), ax1, axi, B, Bda(*), Bdb(*), Bdc(*), Bdd(*), &
     Beta, bi, Bm(*), Bn(*), bxi, C, ci, Cm(*), Cn(*), cxi, cxm, D, Dm(*), Dn(*), &

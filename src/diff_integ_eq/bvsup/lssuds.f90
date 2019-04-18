@@ -119,7 +119,8 @@ SUBROUTINE LSSUDS(A,X,B,N,M,Nrda,U,Nrdu,Iflag,Mlso,Irank,Iscale,Q,Diag,&
   !   900510  Fixed an error message.  (RWC)
   !   910408  Updated the AUTHOR and REFERENCES sections.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-
+  USE service, ONLY : XERMSG, XGETF, XSETF, XERMAX, J4SAVE, R1MACH
+  USE linear, ONLY : SDOT
   INTEGER nmir, Nrda, Nrdu, nu
   REAL A(Nrda,*), B(*), Diag(*), Div(*), gam, gama, Q(Nrda,*), res, &
     S(*), Scales(*), ss, Td(*), U(Nrdu,*), uro, X(*)

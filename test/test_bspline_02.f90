@@ -1,11 +1,9 @@
 MODULE TEST31_MOD
-  use slatec
   IMPLICIT NONE
 
 CONTAINS
   !** DBSPCK
   SUBROUTINE DBSPCK(Lun,Kprint,Ipass)
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for the B-Spline package.
@@ -41,7 +39,9 @@ CONTAINS
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   930214  Declarations sections added, code revised to test error
     !           returns for all values of KPRINT and code polished.  (WRB)
-
+    USE slatec, ONLY : D1MACH, DBFQAD, DBINT4, DBINTK, DBSPDR, DBSPEV, DBSPPP, &
+      DBSPVD, DBSPVN, DBSQAD, DBVALU, DINTRV, DPFQAD, DPPQAD, DPPVAL, NUMXER, &
+      XSETF, XERCLR, XGETF
     !     .. Scalar Arguments ..
     INTEGER Ipass, Kprint, Lun
     !     .. Local Scalars ..
@@ -456,7 +456,6 @@ CONTAINS
   END SUBROUTINE DBSPCK
   !** DFB
   REAL(8) FUNCTION DFB(X)
-    IMPLICIT NONE
     !>
     !***
     !  Subsidiary to DBSPCK.
@@ -481,8 +480,9 @@ CONTAINS
 END MODULE TEST31_MOD
 !** TEST31
 PROGRAM TEST31
-  USE TEST31_MOD
-  use slatec
+  USE TEST31_MOD, ONLY : DBSPCK
+  USE slatec, ONLY : I1MACH, XSETF, XSETUN, XERMAX
+  USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !>
   !***

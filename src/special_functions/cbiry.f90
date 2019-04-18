@@ -136,7 +136,7 @@ SUBROUTINE CBIRY(Z,Id,Kode,Bi,Ierr)
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
   !   920128  Category corrected.  (WRB)
   !   920811  Prologue revised.  (DWL)
-
+  USE service, ONLY : R1MACH, I1MACH
   COMPLEX Bi, csq, cy(2), s1, s2, trm1, trm2, Z, zta, z3
   REAL aa, ad, ak, alim, atrm, az, az3, bb, bk, ck, dig, dk, d1, d2, elim, fid, &
     fmr, fnu, fnul, rl, r1m5, sfac, tol, zi, zr, z3i, z3r

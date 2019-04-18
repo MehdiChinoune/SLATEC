@@ -1,11 +1,9 @@
 MODULE TEST32_MOD
-  use slatec
   IMPLICIT NONE
 
 CONTAINS
   !** FDTRUE
   SUBROUTINE FDTRUE(X,F,D)
-    IMPLICIT NONE
     !>
     !***
     !  Compute exact function values for EVCHCK.
@@ -50,7 +48,6 @@ CONTAINS
   END SUBROUTINE FDTRUE
   !** EVCHCK
   SUBROUTINE EVCHCK(Lout,Kprint,Npts,Xev,Fev,Dev,Fev2,Fail)
-    IMPLICIT NONE
     !>
     !***
     !  Test evaluation accuracy of CHFDV and CHFEV for PCHQK1.
@@ -112,7 +109,7 @@ CONTAINS
     !   910708  Minor modifications in use of KPRINT.  (WRB)
     !   910801  Added EXTERNAL statement for RAND due to problem on IBM
     !           RS 6000.  (WRB)
-
+    USE slatec, ONLY : CHFDV, CHFEV, R1MACH, RAND
     !
     !  Declare arguments.
     !
@@ -397,7 +394,6 @@ CONTAINS
   END SUBROUTINE EVCHCK
   !** EVERCK
   SUBROUTINE EVERCK(Lout,Kprint,Fail)
-    IMPLICIT NONE
     !>
     !***
     !  Test error returns from PCHIP evaluators for PCHQK1.
@@ -441,7 +437,8 @@ CONTAINS
     !   900322  Made miscellaneous cosmetic changes.  (FNF)
     !   910708  Minor modifications in use of KPRINT.  (WRB)
     !   930504  Removed parens from constants in WRITE statements.  (FNF)
-
+    USE slatec, ONLY : CHFDV, CHFEV, PCHFD, PCHFE, XERDMP, XGETF, XSETF
+    USE common_mod, ONLY : COMP
     !
     !  Declare arguments.
     !
@@ -452,7 +449,7 @@ CONTAINS
     !
     INTEGER i, ierr, kontrl, nerr, next(2)
     REAL d(10), dum(1), f(10), temp, x(10)
-    LOGICAL COMP, skip
+    LOGICAL skip
     !
     !  INITIALIZE.
     !
@@ -562,7 +559,6 @@ CONTAINS
   END SUBROUTINE EVERCK
   !** EVPCCK
   SUBROUTINE EVPCCK(Lout,Kprint,X,Y,F,Fx,Fy,Xe,Ye,Fe,De,Fe2,Fail)
-    IMPLICIT NONE
     !>
     !***
     !  Test usage of increment argument in PCHFD and PCHFE for
@@ -625,7 +621,7 @@ CONTAINS
     !              line length.
     !   910708  Minor modifications in use of KPRINT.  (WRB)
     !   930317  Improved output formats.  (FNF)
-
+    USE slatec, ONLY : PCHFD, PCHFE, R1MACH
     !
     !  Declare arguments.
     !
@@ -906,7 +902,6 @@ CONTAINS
   END SUBROUTINE EVPCCK
   !** PCHQK1
   SUBROUTINE PCHQK1(Lun,Kprint,Ipass)
-    IMPLICIT NONE
     !>
     !***
     !  Test the PCHIP evaluators CHFDV, CHFEV, PCHFD and PCHFE.
@@ -1041,7 +1036,6 @@ CONTAINS
   END SUBROUTINE PCHQK1
   !** PCHQK2
   SUBROUTINE PCHQK2(Lun,Kprint,Ipass)
-    IMPLICIT NONE
     !>
     !***
     !  Test the PCHIP integrators PCHIA and PCHID.
@@ -1101,7 +1095,7 @@ CONTAINS
     !   901130  Added 1P's to formats; changed to allow KPRINT.gt.3.  (FNF)
     !   910708  Minor modifications in use of KPRINT.  (WRB)
     !   930317  Improved output formats.  (FNF)
-
+    USE slatec, ONLY : PCHIA, R1MACH
     !
     !  Declare arguments.
     !
@@ -1235,7 +1229,6 @@ CONTAINS
   END SUBROUTINE PCHQK2
   !** PCHQK3
   SUBROUTINE PCHQK3(Lun,Kprint,Ipass)
-    IMPLICIT NONE
     !>
     !***
     !  Test the PCHIP interpolators PCHIC, PCHIM, PCHSP.
@@ -1306,7 +1299,8 @@ CONTAINS
     !           3. Added 1P's to formats.
     !   910708  Minor modifications in use of KPRINT.  (WRB)
     !   930317  Improved output formats.  (FNF)
-
+    USE slatec, ONLY : PCHIC, PCHIM, PCHSP, R1MACH
+    USE common_mod, ONLY : COMP
     !
     !*Internal Notes:
     !
@@ -1328,7 +1322,6 @@ CONTAINS
     REAL d(N), dc(N), err, f(N), tol, told, tolz, vc(2), wk(NWK)
     REAL, PARAMETER :: ZERO = 0.0E0, MONE = -1.0E0
     CHARACTER(6) :: result
-    LOGICAL, EXTERNAL :: COMP
     !
     !  Initialize.
     !
@@ -1566,7 +1559,6 @@ CONTAINS
   END SUBROUTINE PCHQK3
   !** PCHQK4
   SUBROUTINE PCHQK4(Lun,Kprint,Ipass)
-    IMPLICIT NONE
     !>
     !***
     !  Test the PCHIP monotonicity checker PCHCM.
@@ -1624,7 +1616,7 @@ CONTAINS
     !   900322  Added declarations so all variables are declared.  (FNF)
     !   910708  Minor modifications in use of KPRINT.  (WRB)
     !   930317  Improved output formats.  (FNF)
-
+    USE slatec, ONLY : PCHCM
     !
     !*Internal Notes:
     !
@@ -1822,7 +1814,6 @@ CONTAINS
   END SUBROUTINE PCHQK4
   !** PCHQK5
   SUBROUTINE PCHQK5(Lun,Kprint,Ipass)
-    IMPLICIT NONE
     !>
     !***
     !  Test the PCH to B-spline conversion routine PCHBS.
@@ -1874,7 +1865,7 @@ CONTAINS
     !   900430  Corrected errors in prologue.
     !   900501  Corrected declarations.
     !   930317  Improved output formats.  (FNF)
-
+    USE slatec, ONLY : BVALU, PCHBS, R1MACH
     !
     !*Internal Notes:
     !  TOL  is the tolerance to use for quantities that should only
@@ -2026,8 +2017,9 @@ CONTAINS
 END MODULE TEST32_MOD
 !** TEST32
 PROGRAM TEST32
-  USE TEST32_MOD
-  use slatec
+  USE TEST32_MOD, ONLY : PCHQK1, PCHQK2, PCHQK3, PCHQK4, PCHQK5
+  USE slatec, ONLY : I1MACH, XSETF, XSETUN, XERMAX
+  USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !>
   !***

@@ -133,7 +133,7 @@ SUBROUTINE DRC3JM(L1,L2,L3,M1,M2min,M2max,Thrcof,Ndim,Ier)
   !   910415  Mixed type expressions eliminated; variable C1 initialized;
   !           description of THRCOF expanded. These changes were done by
   !           D. W. Lozier.
-
+  USE service, ONLY : XERMSG, D1MACH
   !
   INTEGER Ndim, Ier
   REAL(8) :: L1, L2, L3, M1, M2min, M2max, Thrcof(Ndim)

@@ -1,11 +1,9 @@
 MODULE TEST54_MOD
-  use slatec
   IMPLICIT NONE
 
 CONTAINS
   !** ISRTQC
   SUBROUTINE ISRTQC(Lun,Kprint,Ipass)
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for SLATEC routines ISORT, IPSORT, IPPERM
@@ -28,7 +26,7 @@ CONTAINS
     !   890620  DATE WRITTEN
     !   901005  Included test of IPPERM.  (MAM)
     !   920511  Added error message tests.  (MAM)
-
+    USE slatec, ONLY : IPPERM, IPSORT, ISORT, NUMXER, XSETF, XERCLR
     !
     INTEGER , PARAMETER :: N = 9, NTEST = 4
     !
@@ -308,7 +306,6 @@ CONTAINS
   END SUBROUTINE ISRTQC
   !** HSRTQC
   SUBROUTINE HSRTQC(Lun,Kprint,Ipass)
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for SLATEC routine HPSORT, HPPERM
@@ -331,7 +328,7 @@ CONTAINS
     !   890620  DATE WRITTEN
     !   901005  Included test of HPPERM.  (MAM)
     !   920511  Added error message tests.  (MAM)
-
+    USE slatec, ONLY : HPPERM, HPSORT, NUMXER, XSETF, XERCLR
     !
     INTEGER , PARAMETER :: N = 9, NTEST = 4
     !
@@ -599,7 +596,6 @@ CONTAINS
   END SUBROUTINE HSRTQC
   !** SSRTQC
   SUBROUTINE SSRTQC(Lun,Kprint,Ipass)
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for SLATEC routines SSORT, SPSORT, SPPERM
@@ -622,7 +618,7 @@ CONTAINS
     !   890620  DATE WRITTEN
     !   901005  Included test of SPPERM.  (MAM)
     !   920511  Added error message tests.  (MAM)
-
+    USE slatec, ONLY : SPPERM, SPSORT, SSORT, NUMXER, XSETF, XERCLR
     !
     INTEGER , PARAMETER :: N = 9, NTEST = 4
     !
@@ -905,7 +901,6 @@ CONTAINS
   END SUBROUTINE SSRTQC
   !** DSRTQC
   SUBROUTINE DSRTQC(Lun,Kprint,Ipass)
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for SLATEC routines DSORT, DPSORT, DPPERM
@@ -928,7 +923,7 @@ CONTAINS
     !   890620  DATE WRITTEN
     !   901005  Included test of DPPERM.  (MAM)
     !   920511  Added error message tests.  (MAM)
-
+    USE slatec, ONLY : DPPERM, DPSORT, DSORT, NUMXER, XSETF, XERCLR
     !
     INTEGER , PARAMETER :: N = 9, NTEST = 4
     !
@@ -1212,8 +1207,9 @@ CONTAINS
 END MODULE TEST54_MOD
 !** TEST54
 PROGRAM TEST54
-  USE TEST54_MOD
-  use slatec
+  USE TEST54_MOD, ONLY : DSRTQC, HSRTQC, ISRTQC, SSRTQC
+  USE slatec, ONLY : I1MACH, XSETF, XSETUN, XERMAX
+  USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !>
   !***

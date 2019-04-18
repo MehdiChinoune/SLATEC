@@ -272,7 +272,7 @@ SUBROUTINE WNNLS(W,Mdw,Me,Ma,N,L,Prgopt,X,Rnorm,Mode,Iwork,Work)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-
+  USE service, ONLY : XERMSG
   INTEGER L, l1, l2, l3, l4, l5, liw, lw, Ma, Mdw, Me, Mode, N
   REAL Prgopt(*), Rnorm, W(Mdw,*), Work(*), X(*)
   INTEGER Iwork(*)

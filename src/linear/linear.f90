@@ -3,7 +3,6 @@ include"slap/sslblk.f90"
 include"slap/dslblk.f90"
 
 MODULE linear
-  use service
   IMPLICIT NONE
 
 CONTAINS

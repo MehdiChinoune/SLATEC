@@ -380,7 +380,7 @@ SUBROUTINE FC(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkpt,Nconst,Xconst,&
   !   900607  Editorial changes to Prologue to make Prologues for EFC,
   !           DEFC, FC, and DFC look as much the same as possible.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-
+  USE service, ONLY : XERMSG
   REAL Bkpt(*), Coeff(*), Sddata(*), W(*), Xconst(*), Xdata(*), Yconst(*), Ydata(*)
   INTEGER Iw(*), Mode, Nbkpt, Nconst, Ndata, Nderiv(*), Nord
   !

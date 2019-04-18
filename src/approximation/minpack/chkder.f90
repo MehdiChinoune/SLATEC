@@ -107,7 +107,7 @@ SUBROUTINE CHKDER(M,N,X,Fvec,Fjac,Ldfjac,Xp,Fvecp,Mode,Err)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-
+  USE service, ONLY : R1MACH
   INTEGER M, N, Ldfjac, Mode
   REAL X(*), Fvec(*), Fjac(Ldfjac,*), Xp(*), Fvecp(*), Err(*)
   INTEGER i, j

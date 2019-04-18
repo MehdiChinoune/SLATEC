@@ -28,7 +28,7 @@ SUBROUTINE CSERI(Z,Fnu,Kode,N,Y,Nz,Tol,Elim,Alim)
   !* REVISION HISTORY  (YYMMDD)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
-
+  USE service, ONLY : R1MACH
   INTEGER i, ib, idum, iflag, il, k, Kode, l, m, N, nn, nw, Nz
   COMPLEX ak1, ck, coef, crsc, cz, hz, rz, s1, s2, w(2), Y(N), Z
   REAL aa, acz, ak, Alim, arm, ascle, atol, az, dfnu, Elim, Fnu, &

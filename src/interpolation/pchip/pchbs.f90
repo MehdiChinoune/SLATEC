@@ -158,7 +158,7 @@ SUBROUTINE PCHBS(N,X,F,D,Incfd,Knotyp,Nknots,T,Bcoef,Ndim,Kord,Ierr)
   !   930514  Corrected problems with dimensioning of arguments and
   !           clarified DESCRIPTION.  (FNF)
   !   930604  Removed  NKNOTS from PCHKT call list.  (FNF)
-
+  USE service, ONLY : XERMSG
   !
   !*Internal Notes:
   !

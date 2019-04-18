@@ -91,7 +91,7 @@ SUBROUTINE DSPR(Uplo,N,Alpha,X,Incx,Ap)
   !   861022  DATE WRITTEN
   !   910605  Modified to meet SLATEC prologue standards.  Only comment
   !           lines were modified.  (BKS)
-
+  USE service, ONLY : XERBLA
   !     .. Scalar Arguments ..
   REAL(8) :: Alpha
   INTEGER Incx, N

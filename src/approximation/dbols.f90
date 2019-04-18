@@ -432,6 +432,8 @@ SUBROUTINE DBOLS(W,Mdw,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Iw)
   !     /SROTG/ TO /DROTG/, /SROT/ TO /DROT/, /E0/ TO /D0/,
   !     /REAL            / TO /DOUBLE PRECISION/.
   ! ++
+  USE service, ONLY : XERMSG
+  USE linear, ONLY : DCOPY, DNRM2, IDAMAX, DROT, DROTG
   INTEGER i, ibig, inrows, ip, j, jp, lds, lenx, liopt, llb, lliw, llrw, &
     llx, lmdw, lndw, locdim, lp, Mdw, mnew, Mode, Mrows, Ncols, nerr
   REAL(8) :: W(Mdw,*), Bl(*), Bu(*), X(*), Rw(*)

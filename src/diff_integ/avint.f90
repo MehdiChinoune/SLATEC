@@ -80,7 +80,7 @@ SUBROUTINE AVINT(X,Y,N,Xlo,Xup,Ans,Ierr)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-
+  USE service, ONLY : XERMSG
   REAL Ans, fl, fr, slope, X(*), Xlo, Xup, Y(*)
   INTEGER i, Ierr, inlft, inrt, istart, istop, N
   REAL(8) :: r3, rp5, summ, syl, syl2, syl3, syu, syu2, syu3, &

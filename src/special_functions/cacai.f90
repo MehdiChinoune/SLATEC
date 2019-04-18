@@ -31,7 +31,7 @@ SUBROUTINE CACAI(Z,Fnu,Kode,Mr,N,Y,Nz,Rl,Tol,Elim,Alim)
   !* REVISION HISTORY  (YYMMDD)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
-
+  USE service, ONLY : R1MACH
   INTEGER inu, iuf, Kode, Mr, N, nn, nw, Nz
   COMPLEX csgn, cspn, c1, c2, Y(N), Z, zn, cy(2)
   REAL Alim, arg, ascle, az, cpn, dfnu, Elim, fmr, Fnu, Rl, &

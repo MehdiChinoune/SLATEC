@@ -71,7 +71,7 @@ REAL(8) FUNCTION DPPVAL(Ldc,C,Xi,Lxi,K,Ideriv,X,Inppv)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-
+  USE service, ONLY : XERMSG
   !
   INTEGER i, Ideriv, Inppv, j, K, Ldc, Lxi, ndummy, kk
   REAL(8) :: C(Ldc,*), dx, X, Xi(*)

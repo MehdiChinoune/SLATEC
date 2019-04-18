@@ -107,7 +107,7 @@ SUBROUTINE DCKDER(M,N,X,Fvec,Fjac,Ldfjac,Xp,Fvecp,Mode,Err)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-
+  USE service, ONLY : D1MACH
   INTEGER i, j, Ldfjac, M, Mode, N
   REAL(8) :: eps, epsf, epslog, epsmch, Err(*), Fjac(Ldfjac,*), Fvec(*), &
     Fvecp(*), temp, X(*), Xp(*)

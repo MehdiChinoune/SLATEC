@@ -204,7 +204,7 @@ SUBROUTINE DQAGP(F,A,B,Npts2,Points,Epsabs,Epsrel,Result,Abserr,Neval,Ier,&
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-
+  USE service, ONLY : XERMSG
   !
   REAL(8) :: A, Abserr, B, Epsabs, Epsrel, Points(*), Result, Work(*)
   INTEGER Ier, Iwork(*), Last, Leniw, Lenw, limit, lvl, l1, l2, l3, l4, Neval, Npts2

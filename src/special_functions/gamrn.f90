@@ -52,7 +52,7 @@ REAL FUNCTION GAMRN(X)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
   !   920520  Added REFERENCES section.  (WRB)
-
+  USE service, ONLY : R1MACH, I1MACH
   INTEGER i, i1m11, k, mx, nx
   REAL fln, rln, s, tol, trm, X, xdmy, xinc, xm, xmin, xp, xsq
   !

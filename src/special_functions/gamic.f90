@@ -52,7 +52,7 @@ REAL FUNCTION GAMIC(A,X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920528  DESCRIPTION and REFERENCES sections revised.  (WRB)
-
+  USE service, ONLY : XERMSG, XERCLR, R1MACH
   REAL A, aeps, algap1, alngs, alx, e, fm, gstar, h, sga, sgng,  sgngam, sgngs, &
     t, X
   INTEGER izero, ma

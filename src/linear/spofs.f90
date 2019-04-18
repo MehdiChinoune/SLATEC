@@ -108,7 +108,7 @@ SUBROUTINE SPOFS(A,Lda,N,V,Itask,Ind,Work)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-
+  USE service, ONLY : R1MACH, XERMSG
   !
   INTEGER Lda, N, Itask, Ind, info
   REAL A(Lda,*), V(*), Work(*)

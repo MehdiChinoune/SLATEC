@@ -28,7 +28,7 @@ REAL FUNCTION PSIXN(N)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
-
+  USE service, ONLY : R1MACH
   INTEGER N, k
   REAL ax, fn, rfn2, trm, s, wdtol
   !-----------------------------------------------------------------------

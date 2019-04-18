@@ -1,6 +1,5 @@
 !** DXADJ
 SUBROUTINE DXADJ(X,Ix,Ierror)
-  USE DXBLK ,ONLY: RADixl, RAD2l, L2, KMAx
   !>
   !***
   !  To provide double-precision floating-point arithmetic
@@ -45,7 +44,8 @@ SUBROUTINE DXADJ(X,Ix,Ierror)
   !           section.  (WRB)
   !           CALLs to XERROR changed to CALLs to XERMSG.  (WRB)
   !   920127  Revised PURPOSE section of prologue.  (DWL)
-
+  USE DXBLK ,ONLY: RADixl, RAD2l, L2, KMAx
+  USE service, ONLY : XERMSG
   INTEGER Ierror, Ix
   REAL(8) :: X
   !

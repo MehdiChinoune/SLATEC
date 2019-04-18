@@ -1,12 +1,10 @@
 MODULE TEST06_MOD
-  use slatec
   IMPLICIT NONE
   REAL(8) :: X, A, FKM
 
 CONTAINS
   !** DBIKCK
   SUBROUTINE DBIKCK(Lun,Kprint,Ipass)
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for DBESI and DBESK.
@@ -42,7 +40,7 @@ CONTAINS
     !   910801  Editorial changes, some restructing and modifications to
     !           obtain more information when there is failure of the
     !           Wronskian.  (WRB)
-
+    USE slatec, ONLY : D1MACH, DBESI, DBESK, NUMXER, XERCLR, XGETF, XSETF
     INTEGER Kprint
     INTEGER i, Ipass, ix, k, kode, kontrl, Lun, m, n, nerr, nu, nw, ny
     REAL(8) :: alp, del, er, fnu, fnup, rx, tol, x
@@ -275,7 +273,6 @@ CONTAINS
   END SUBROUTINE DBIKCK
   !** DBJYCK
   SUBROUTINE DBJYCK(Lun,Kprint,Ipass)
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for DBESJ and DBESY.
@@ -311,7 +308,7 @@ CONTAINS
     !   910801  Editorial changes, some restructing and modifications to
     !           obtain more information when there is failure of the
     !           Wronskian.  (WRB)
-
+    USE slatec, ONLY : D1MACH, DBESJ, DBESY, NUMXER, XERCLR, XGETF, XSETF
     INTEGER Kprint
     INTEGER i, Ipass, ix, k, kontrl, Lun, m, n, nerr, nu, ny
     REAL(8) :: alp, del, er, fnu, fnup, rhpi, rx, tol, x
@@ -510,7 +507,6 @@ CONTAINS
   END SUBROUTINE DBJYCK
   !** DEG8CK
   SUBROUTINE DEG8CK(Lun,Kprint,Ipass)
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for DEXINT and DGAUS8.
@@ -541,7 +537,7 @@ CONTAINS
     !   910708  Code revised to test error returns for all values of
     !           KPRINT.  (WRB)
     !   920206  Corrected argument list in CALL to DEXINT.  (WRB)
-
+    USE slatec, ONLY : D1MACH, DEXINT, DGAUS8
     INTEGER Kprint
     INTEGER i, icase, ie, ierr, ii, ik, Ipass, ix, iy, k, ke, kk, &
       kode, kx, Lun, m, n, nm, nz
@@ -694,7 +690,6 @@ CONTAINS
   END SUBROUTINE DEG8CK
   !** DFEIN
   REAL(8) FUNCTION DFEIN(T)
-    IMPLICIT NONE
     !>
     !***
     !  Subsidiary to DEG8CK.
@@ -720,8 +715,9 @@ CONTAINS
 END MODULE TEST06_MOD
 !** TEST06
 PROGRAM TEST06
-  USE TEST06_MOD
-  use slatec
+  USE TEST06_MOD, ONLY : DBIKCK, DBJYCK, DEG8CK
+  USE slatec, ONLY : I1MACH, XSETF, XSETUN, XERMAX
+  USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !>
   !***

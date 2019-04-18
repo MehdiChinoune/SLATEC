@@ -32,7 +32,7 @@ SUBROUTINE DOHTRL(Q,N,Nrda,Diag,Irank,Div,Td)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
-
+  USE linear, ONLY : DDOT
   INTEGER Irank, irp, j, k, kir, kirm, l, N, nmir, Nrda
   REAL(8) :: dd, Diag(*), diagk, Div(*), Q(Nrda,*), qs, sig, sqd, Td(*), tdv
   !* FIRST EXECUTABLE STATEMENT  DOHTRL

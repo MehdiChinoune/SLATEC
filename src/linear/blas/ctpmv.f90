@@ -106,7 +106,7 @@ SUBROUTINE CTPMV(Uplo,Trans,Diag,N,Ap,X,Incx)
   !   861022  DATE WRITTEN
   !   910605  Modified to meet SLATEC prologue standards.  Only comment
   !           lines were modified.  (BKS)
-
+  USE service, ONLY : XERBLA
   !     .. Scalar Arguments ..
   INTEGER Incx, N
   CHARACTER :: Diag, Trans, Uplo

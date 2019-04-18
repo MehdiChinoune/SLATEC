@@ -1,5 +1,4 @@
 MODULE TEST17_MOD
-  use slatec
   IMPLICIT NONE
   INTEGER :: NPRint, ICAse, N, INCx, INCy, MODe
   LOGICAL :: PASs
@@ -7,7 +6,6 @@ MODULE TEST17_MOD
 CONTAINS
   !** BLACHK
   SUBROUTINE BLACHK(Lun,Kprint,Ipass)
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for Basic Linear Algebra Subprograms.
@@ -85,7 +83,6 @@ CONTAINS
   END SUBROUTINE BLACHK
   !** HEADER
   SUBROUTINE HEADER(Kprint)
-    IMPLICIT NONE
     !>
     !***
     !  Print header for BLAS quick checks.
@@ -118,7 +115,6 @@ CONTAINS
   END SUBROUTINE HEADER
   !** CHECK0
   SUBROUTINE CHECK0(Sfac,Dfac,Kprint)
-    IMPLICIT NONE
     !>
     !***
     !  (UNKNOWN)
@@ -147,7 +143,7 @@ CONTAINS
     !   890911  Removed unnecessary intrinsics.  (WRB)
     !   890911  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
-
+    USE slatec, ONLY : DROTG, DROTMG, SROTG, SROTMG
     INTEGER i, jump, k, Kprint
     REAL sa(1), sb(1), sc(1), Sfac, ss(1)
     REAL strue(9), stemp(9), stmp(1)
@@ -270,7 +266,6 @@ CONTAINS
   END SUBROUTINE CHECK0
   !** CHECK1
   SUBROUTINE CHECK1(Sfac,Dfac,Kprint)
-    IMPLICIT NONE
     !>
     !***
     !  (UNKNOWN)
@@ -297,7 +292,8 @@ CONTAINS
     !                    SNRM2, SSCAL, STEST
     !***
     ! COMMON BLOCKS    COMBLA
-
+    USE slatec, ONLY : CSCAL, CSSCAL, DASUM, DNRM2, DSCAL, ICAMAX, IDAMAX, &
+      ISAMAX, SASUM, SCASUM, SCNRM2, SNRM2, SSCAL
     !* REVISION HISTORY  (YYMMDD)
     !   741210  DATE WRITTEN
     !   890911  Removed unnecessary intrinsics.  (WRB)
@@ -466,7 +462,6 @@ CONTAINS
   END SUBROUTINE CHECK1
   !** CHECK2
   SUBROUTINE CHECK2(Sfac,Sdfac,Dfac,Dqfac,Kprint)
-    IMPLICIT NONE
     !>
     !***
     !  (UNKNOWN)
@@ -496,7 +491,9 @@ CONTAINS
     !   890911  Removed unnecessary intrinsics.  (WRB)
     !   890911  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
-
+    USE slatec, ONLY : CAXPY, CCOPY, CDOTC, CDOTU, CSWAP, DAXPY, DCOPY, DDOT, &
+      DQDOTA, DQDOTI, DROT, DROTM, DSDOT, DSWAP, SAXPY, SCOPY, SDOT, SDSDOT, &
+      SROT, SROTM, SSWAP
     INTEGER i, j, ki, kn, kni, kpar, ksize, lenx, leny, mx, my, Kprint, qc_i(30)
     REAL Sdfac, Sfac
     REAL sx(7), sy(7), stx(7), sty(7), ssize(7), sparam(5), stmp(1), stmp2(1)
@@ -1098,7 +1095,6 @@ CONTAINS
   END SUBROUTINE CHECK2
   !** ITEST
   SUBROUTINE ITEST(Leng,Icomp,Itrue,Kprint)
-    IMPLICIT NONE
     !>
     !***
     !  Compare arrays ICOMP and ITRUE.
@@ -1162,7 +1158,6 @@ CONTAINS
   END SUBROUTINE ITEST
   !** STEST
   SUBROUTINE STEST(Leng,Scomp,Strue,Ssize,Sfac,Kprint)
-    IMPLICIT NONE
     !>
     !***
     !  Compare arrays SCOMP and STRUE.
@@ -1198,7 +1193,7 @@ CONTAINS
     !   910501  Added TYPE record.  (WRB)
     !   920211  Code restructured and information added to the DESCRIPTION
     !           section.  (WRB)
-
+    USE slatec, ONLY : R1MACH
     INTEGER i, Leng, Kprint
     REAL Scomp(*), Strue(*), Ssize(*), Sfac, sd
     REAL :: releps = 0.0E0
@@ -1232,7 +1227,6 @@ CONTAINS
   END SUBROUTINE STEST
   !** DTEST
   SUBROUTINE DTEST(Leng,Dcomp,Dtrue,Dsize,Dfac,Kprint)
-    IMPLICIT NONE
     !>
     !***
     !  Compare arrays DCOMP and DTRUE.
@@ -1266,7 +1260,7 @@ CONTAINS
     !   910501  Added TYPE record.  (WRB)
     !   920211  Code restructured and information added to the DESCRIPTION
     !           section.  (WRB)
-
+    USE slatec, ONLY : D1MACH
     INTEGER i, Leng, Kprint
     REAL(8) :: Dcomp(*), Dtrue(*), Dsize(*), Dfac, dd
     REAL(8) :: releps = 0.0D0
@@ -1300,7 +1294,6 @@ CONTAINS
   END SUBROUTINE DTEST
 
   SUBROUTINE CTEST(Leng,Ccomp,Ctrue,Csize,Cfac,Kprint)
-    IMPLICIT NONE
     !>
     !***
     !  Compare arrays DCOMP and DTRUE.
@@ -1321,7 +1314,7 @@ CONTAINS
     !   messages are written.
     !
     !***
-    ! **Routines called:**  D1MACH
+    ! **Routines called:**  R1MACH
     !***
     ! COMMON BLOCKS    COMBLA
 
@@ -1334,7 +1327,7 @@ CONTAINS
     !   910501  Added TYPE record.  (WRB)
     !   920211  Code restructured and information added to the DESCRIPTION
     !           section.  (WRB)
-
+    USE slatec, ONLY : R1MACH, CABS1
     INTEGER i, Leng, Kprint
     COMPLEX :: Ccomp(*), Ctrue(*), Csize(*)
     REAL :: Cfac, dd
@@ -1370,8 +1363,9 @@ CONTAINS
 END MODULE TEST17_MOD
 !** TEST17
 PROGRAM TEST17
-  USE TEST17_MOD
-  use slatec
+  USE TEST17_MOD, ONLY : BLACHK
+  USE slatec, ONLY : I1MACH, XSETF, XSETUN, XERMAX
+  USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !>
   !***

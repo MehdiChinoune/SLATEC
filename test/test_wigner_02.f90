@@ -1,11 +1,9 @@
 MODULE TEST16_MOD
-  use slatec
   IMPLICIT NONE
 
 CONTAINS
   !** DQC36J
   SUBROUTINE DQC36J(Lun,Kprint,Ipass)
-    IMPLICIT NONE
     !>
     !***
     !  THIS IS A QUICK CHECK PROGRAM FOR THE SUBROUTINES DRC3JJ,
@@ -45,7 +43,7 @@ CONTAINS
     !           and 4 with values stored in data statements.  This involved
     !           removing all calls to subroutine DRACAH.  These changes were
     !           made by M. McClain.
-
+    USE slatec, ONLY : D1MACH, DRC3JJ, DRC3JM, DRC6J, NUMXER, XERCLR, XSETF
     !
     INTEGER Lun, Kprint, Ipass
     !
@@ -498,8 +496,9 @@ CONTAINS
 END MODULE TEST16_MOD
 !** TEST16
 PROGRAM TEST16
-  USE TEST16_MOD
-  use slatec
+  USE TEST16_MOD, ONLY : DQC36J
+  USE slatec, ONLY : I1MACH, XSETF, XSETUN, XERMAX
+  USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !>
   !***

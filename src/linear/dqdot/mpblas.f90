@@ -1,6 +1,5 @@
 !** MPBLAS
 SUBROUTINE MPBLAS(I1)
-  USE MPCOM, MPB => B, MPT => T, MPM => M, MPLun => LUN, MPMxr => MXR, MPR => R
   !>
   !***
   !  Subsidiary to DQDOTA and DQDOTI
@@ -47,7 +46,8 @@ SUBROUTINE MPBLAS(I1)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !   930124  Increased Array size in MPCON for SUN -r8, and calculate
   !               size for Quad Precision for 2x DP.  (RWC)
-
+  USE MPCOM, ONLY : MPB => B, MPT => T, MPM => M, MPLun => LUN, MPMxr => MXR
+  USE service, ONLY : I1MACH, XERMSG
   INTEGER I1, mpbexp
   !* FIRST EXECUTABLE STATEMENT  MPBLAS
   I1 = 1

@@ -97,7 +97,7 @@ SUBROUTINE BINTK(X,Y,T,N,K,Bcoef,Q,Work)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-
+  USE service, ONLY : XERMSG
   !
   INTEGER iflag, iwork, K, N, i, ilp1mx, j, jj, km1, kpkm2, left, lenq, np1
   REAL Bcoef(*), Y(*), Q(*), T(*), X(*), xi, Work(*)

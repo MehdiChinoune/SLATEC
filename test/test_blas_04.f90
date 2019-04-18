@@ -1,11 +1,9 @@
 MODULE TEST20_MOD
-  use slatec
   IMPLICIT NONE
 
 CONTAINS
   !** CBEG
   COMPLEX FUNCTION CBEG(Reset)
-    IMPLICIT NONE
     !>
     !***
     !  Generate random numbers.
@@ -71,7 +69,6 @@ CONTAINS
   END FUNCTION CBEG
   !** CBLAT2
   SUBROUTINE CBLAT2(Nout,Kprint,Ipass)
-    IMPLICIT NONE
     !>
     !***
     !  Driver for testing Level 2 BLAS complex subroutines.
@@ -105,7 +102,7 @@ CONTAINS
     !   910619  Modified to meet SLATEC code and prologue standards.  (BKS)
     !   930315  Removed unused variables.  (WRB)
     !   930618  Code modified to improve PASS/FAIL reporting.  (BKS, WRB)
-
+    USE slatec, ONLY : R1MACH, XERCLR
     !     .. Parameters ..
     INTEGER, PARAMETER :: NSUBS = 17
     COMPLEX, PARAMETER :: ZERO = (0.0,0.0), ONE = (1.0,0.0)
@@ -273,7 +270,6 @@ CONTAINS
   END SUBROUTINE CBLAT2
   !** CBLAT3
   SUBROUTINE CBLAT3(Nout,Kprint,Ipass)
-    IMPLICIT NONE
     !>
     !***
     !  Driver for testing Level 3 BLAS complex subroutines.
@@ -308,7 +304,7 @@ CONTAINS
     !   910619  Modified to meet SLATEC code and prologue standards.  (BKS)
     !   930315  Removed unused variables.  (WRB)
     !   930618  Code modified to improve PASS/FAIL reporting.  (BKS, WRB)
-
+    USE slatec, ONLY : R1MACH, XERCLR
     !     .. Parameters ..
     INTEGER, PARAMETER :: NSUBS = 9
     COMPLEX, PARAMETER :: ZERO = (0.0,0.0), ONE = (1.0,0.0)
@@ -491,7 +487,6 @@ CONTAINS
   END SUBROUTINE CBLAT3
   !** CMAKE2
   SUBROUTINE CMAKE2(Type,Uplo,Diag,M,N,A,Nmax,Aa,Lda,Kl,Ku,Reset,Transl)
-    IMPLICIT NONE
     !>
     !***
     !  Generate values for an M by N matrix A.
@@ -683,7 +678,6 @@ CONTAINS
   END SUBROUTINE CMAKE2
   !** CMAKE3
   SUBROUTINE CMAKE3(Type,Uplo,Diag,M,N,A,Nmax,Aa,Lda,Reset,Transl)
-    IMPLICIT NONE
     !>
     !***
     !  Generate values for an M by N matrix A.
@@ -815,7 +809,6 @@ CONTAINS
   !** CMMCH
   SUBROUTINE CMMCH(Transa,Transb,M,N,Kk,Alpha,A,Lda,B,Ldb,Beta,C,Ldc,Ct,G,&
       Cc,Ldcc,Eps,Err,Ftl,Nout,Mv,Kprint)
-    IMPLICIT NONE
     !>
     !***
     !  Check the results of the computational tests.
@@ -840,7 +833,7 @@ CONTAINS
     !* REVISION HISTORY  (YYMMDD)
     !   890208  DATE WRITTEN
     !   910620  Modified to meet SLATEC code and prologue standards.  (BKS)
-
+    USE slatec, ONLY : CABS1
     !     .. Parameters ..
     COMPLEX, PARAMETER :: ZERO = (0.0,0.0)
     REAL, PARAMETER :: RZERO = 0.0, RONE = 1.0
@@ -988,7 +981,6 @@ CONTAINS
   !** CMVCH
   SUBROUTINE CMVCH(Trans,M,N,Alpha,A,Nmax,X,Incx,Beta,Y,Incy,Yt,G,Yy,Eps,&
       Err,Ftl,Nout,Mv,Kprint)
-    IMPLICIT NONE
     !>
     !***
     !  Check the results of the computational tests.
@@ -1011,7 +1003,7 @@ CONTAINS
     !* REVISION HISTORY  (YYMMDD)
     !   870810  DATE WRITTEN
     !   910620  Modified to meet SLATEC code and prologue standards.  (BKS)
-
+    USE slatec, ONLY : CABS1
     !     .. Parameters ..
     COMPLEX, PARAMETER :: ZERO = (0.0,0.0)
     REAL, PARAMETER :: RZERO = 0.0, RONE = 1.0
@@ -1121,7 +1113,6 @@ CONTAINS
   END SUBROUTINE CMVCH
   !** LCE
   LOGICAL FUNCTION LCE(Ri,Rj,Lr)
-    IMPLICIT NONE
     !>
     !***
     !  Test if two arrays are identical.
@@ -1165,7 +1156,6 @@ CONTAINS
   END FUNCTION LCE
   !** LCERES
   LOGICAL FUNCTION LCERES(Type,Uplo,M,N,Aa,As,Lda)
-    IMPLICIT NONE
     !>
     !***
     !  Test if selected elements in two arrays are equal.
@@ -1237,7 +1227,6 @@ CONTAINS
   !** CCHK12
   SUBROUTINE CCHK12(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idimm,Nkb,Kb,&
       Nalf,Alf,Nbet,Bet,Ninc,Inc,Nmax,Incmax,A,Aa,As,X,Xx,Xs,Y,Yy,Ys,Yt,G)
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for CGEMV and CGBMV.
@@ -1262,7 +1251,7 @@ CONTAINS
     !* REVISION HISTORY  (YYMMDD)
     !   870810  DATE WRITTEN
     !   910619  Modified to meet SLATEC code and prologue standards.  (BKS)
-
+    USE slatec, ONLY : CGBMV, CGEMV, NUMXER
     !     .. Parameters ..
     COMPLEX, PARAMETER :: ZERO = (0.0,0.0), HALF = (0.5,0.0)
     REAL, PARAMETER :: RZERO = 0.0
@@ -1543,7 +1532,6 @@ CONTAINS
   !** CCHK13
   SUBROUTINE CCHK13(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idimm,Nalf,Alf,&
       Nbet,Bet,Nmax,A,Aa,As,B,Bb,Bs,C,Cc,Cs,Ct,G)
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for CGEMM.
@@ -1570,7 +1558,7 @@ CONTAINS
     !* REVISION HISTORY  (YYMMDD)
     !   890208  DATE WRITTEN
     !   910619  Modified to meet SLATEC code and prologue standards.  (BKS)
-
+    USE slatec, ONLY : CGEMM, NUMXER
     !     .. Parameters ..
     COMPLEX, PARAMETER :: ZERO = (0.0,0.0)
     REAL, PARAMETER :: RZERO = 0.0
@@ -1805,7 +1793,6 @@ CONTAINS
   !** CCHK22
   SUBROUTINE CCHK22(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idimm,Nkb,Kb,&
       Nalf,Alf,Nbet,Bet,Ninc,Inc,Nmax,Incmax,A,Aa,As,X,Xx,Xs,Y,Yy,Ys,Yt,G)
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for CHEMV, CHBMV, CHPMV.
@@ -1831,7 +1818,7 @@ CONTAINS
     !* REVISION HISTORY  (YYMMDD)
     !   870810  DATE WRITTEN
     !   910619  Modified to meet SLATEC code and prologue standards.  (BKS)
-
+    USE slatec, ONLY : CHBMV, CHEMV, CHPMV, NUMXER
     !     .. Parameters ..
     COMPLEX, PARAMETER :: ZERO = (0.0,0.0), HALF = (0.5,0.0)
     REAL, PARAMETER :: RZERO = 0.0
@@ -2111,7 +2098,6 @@ CONTAINS
   !** CCHK23
   SUBROUTINE CCHK23(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idimm,Nalf,Alf,&
       Nbet,Bet,Nmax,A,Aa,As,B,Bb,Bs,C,Cc,Cs,Ct,G)
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for CHEMM and CSYMM.
@@ -2138,7 +2124,7 @@ CONTAINS
     !* REVISION HISTORY  (YYMMDD)
     !   890208  DATE WRITTEN
     !   910619  Modified to meet SLATEC code and prologue standards.  (BKS)
-
+    USE slatec, ONLY : CHEMM, CSYMM, NUMXER
     !     .. Parameters ..
     COMPLEX, PARAMETER :: ZERO = (0.0,0.0)
     REAL, PARAMETER :: RZERO = 0.0
@@ -2366,7 +2352,6 @@ CONTAINS
   !** CCHK32
   SUBROUTINE CCHK32(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idimm,Nkb,Kb,&
       Ninc,Inc,Nmax,Incmax,A,Aa,As,X,Xx,Xs,Xt,G,Z)
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for CTRMV, CTBMV, CTPMV, CTRSV, CTBSV and
@@ -2393,7 +2378,7 @@ CONTAINS
     !* REVISION HISTORY  (YYMMDD)
     !   870810  DATE WRITTEN
     !   910619  Modified to meet SLATEC code and prologue standards.  (BKS)
-
+    USE slatec, ONLY : CTBMV, CTBSV, CTPMV, CTPSV, CTRMV, CTRSV, NUMXER
     !     .. Parameters ..
     COMPLEX, PARAMETER :: ZERO = (0.0,0.0), HALF = (0.5,0.0), ONE = (1.0,0.0)
     REAL, PARAMETER :: RZERO = 0.0
@@ -2673,7 +2658,6 @@ CONTAINS
   !** CCHK33
   SUBROUTINE CCHK33(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idimm,Nalf,Alf,&
       Nmax,A,Aa,As,B,Bb,Bs,Ct,G,C)
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for CTRMM and CTRSM.
@@ -2700,7 +2684,7 @@ CONTAINS
     !* REVISION HISTORY  (YYMMDD)
     !   890208  DATE WRITTEN
     !   910619  Modified to meet SLATEC code and prologue standards.  (BKS)
-
+    USE slatec, ONLY : CTRMM, CTRSM, NUMXER
     !     .. Parameters ..
     COMPLEX, PARAMETER :: ZERO = (0.0,0.0), ONE = (1.0,0.0)
     REAL, PARAMETER :: RZERO = 0.0
@@ -2941,7 +2925,6 @@ CONTAINS
   !** CCHK42
   SUBROUTINE CCHK42(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idimm,Nalf,Alf,&
       Ninc,Inc,Nmax,Incmax,A,Aa,As,X,Xx,Xs,Y,Yy,Ys,Yt,G,Z)
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for CGERC and CGERU.
@@ -2966,7 +2949,7 @@ CONTAINS
     !* REVISION HISTORY  (YYMMDD)
     !   870810  DATE WRITTEN
     !   910619  Modified to meet SLATEC code and prologue standards.  (BKS)
-
+    USE slatec, ONLY : CGERC, CGERU, NUMXER
     !     .. Parameters ..
     COMPLEX, PARAMETER :: ZERO = (0.0,0.0), HALF = (0.5,0.0), ONE = (1.0,0.0)
     REAL, PARAMETER :: RZERO = 0.0
@@ -3189,7 +3172,6 @@ CONTAINS
   !** CCHK43
   SUBROUTINE CCHK43(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idimm,Nalf,Alf,&
       Nbet,Bet,Nmax,A,Aa,As,B,Bb,Bs,C,Cc,Cs,Ct,G)
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for CHERK and CSYRK.
@@ -3216,7 +3198,7 @@ CONTAINS
     !* REVISION HISTORY  (YYMMDD)
     !   890208  DATE WRITTEN
     !   910619  Modified to meet SLATEC code and prologue standards.  (BKS)
-
+    USE slatec, ONLY : CHERK, CSYRK, NUMXER
     !     .. Parameters ..
     COMPLEX, PARAMETER :: ZERO = (0.0,0.0)
     REAL, PARAMETER :: RZERO = 0.0, RONE = 1.0
@@ -3485,7 +3467,6 @@ CONTAINS
   !** CCHK52
   SUBROUTINE CCHK52(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idimm,Nalf,Alf,&
       Ninc,Inc,Nmax,Incmax,A,Aa,As,X,Xx,Xs,Y,Yy,Ys,Yt,G,Z)
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for CHER and CHPR.
@@ -3510,7 +3491,7 @@ CONTAINS
     !* REVISION HISTORY  (YYMMDD)
     !   870810  DATE WRITTEN
     !   910619  Modified to meet SLATEC code and prologue standards.  (BKS)
-
+    USE slatec, ONLY : CHER, CHPR, NUMXER
     !     .. Parameters ..
     COMPLEX, PARAMETER :: ZERO = (0.0,0.0), HALF = (0.5,0.0), ONE = (1.0,0.0)
     REAL, PARAMETER :: RZERO = 0.0
@@ -3737,7 +3718,6 @@ CONTAINS
   !** CCHK53
   SUBROUTINE CCHK53(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idimm,Nalf,Alf,&
       Nbet,Bet,Nmax,Ab,Aa,As,Bb,Bs,C,Cc,Cs,Ct,G,W)
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for CHER2K and CSYR2K.
@@ -3764,7 +3744,7 @@ CONTAINS
     !* REVISION HISTORY  (YYMMDD)
     !   890208  DATE WRITTEN
     !   910619  Modified to meet SLATEC code and prologue standards.  (BKS)
-
+    USE slatec, ONLY : CHER2K, CSYR2K, NUMXER
     !     .. Parameters ..
     COMPLEX, PARAMETER :: ZERO = (0.0,0.0), ONE = (1.0,0.0)
     REAL, PARAMETER :: RZERO = 0.0, RONE = 1.0
@@ -4062,7 +4042,6 @@ CONTAINS
   !** CCHK62
   SUBROUTINE CCHK62(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idimm,Nalf,Alf,&
       Ninc,Inc,Nmax,Incmax,A,Aa,As,X,Xx,Xs,Y,Yy,Ys,Yt,G,Z)
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for CHER2 and CHPR2.
@@ -4087,7 +4066,7 @@ CONTAINS
     !* REVISION HISTORY  (YYMMDD)
     !   870810  DATE WRITTEN
     !   910619  Modified to meet SLATEC code and prologue standards.  (BKS)
-
+    USE slatec, ONLY : CHER2, CHPR2, NUMXER
     !     .. Parameters ..
     COMPLEX, PARAMETER :: ZERO = (0.0,0.0), HALF = (0.5,0.0), ONE = (1.0,0.0)
     REAL, PARAMETER :: RZERO = 0.0
@@ -4346,7 +4325,6 @@ CONTAINS
   END SUBROUTINE CCHK62
   !** CCHKE2
   SUBROUTINE CCHKE2(Isnum,Srnamt,Nout,Kprint,Fatal)
-    IMPLICIT NONE
     !>
     !***
     !  Test the error exits from the Level 2 Blas.
@@ -4373,7 +4351,10 @@ CONTAINS
     !* REVISION HISTORY  (YYMMDD)
     !   870810  DATE WRITTEN
     !   910620  Modified to meet SLATEC code and prologue standards.  (BKS)
-
+    USE slatec, ONLY : CGBMV, CGEMV, CGERC, CGERU, CHBMV, CHEMV, CHER, CHER2, &
+      CHPMV, CHPR, CHPR2, CTBMV, CTBSV, CTPMV, CTPSV, CTRMV, CTRSV, XERCLR, &
+      XERDMP, XGETF, XSETF
+    USE common_mod, ONLY : CHKXER
     !     .. Scalar Arguments ..
     LOGICAL Fatal
     INTEGER Isnum, Kprint, Nout
@@ -4796,7 +4777,6 @@ CONTAINS
   END SUBROUTINE CCHKE2
   !** CCHKE3
   SUBROUTINE CCHKE3(Isnum,Srnamt,Nout,Kprint,Fatal)
-    IMPLICIT NONE
     !>
     !***
     !  Test the error exits from the Level 3 Blas.
@@ -4823,7 +4803,9 @@ CONTAINS
     !* REVISION HISTORY  (YYMMDD)
     !   890208  DATE WRITTEN
     !   910620  Modified to meet SLATEC code and prologue standards.  (BKS)
-
+    USE slatec, ONLY : CGEMM, CHEMM, CHER2K, CHERK, CSYMM, CSYR2K, CSYRK, CTRMM, &
+      CTRSM, XERCLR, XERDMP, XGETF, XSETF
+    USE common_mod, ONLY : CHKXER
     !     .. Scalar Arguments ..
     LOGICAL Fatal
     INTEGER Isnum, Kprint, Nout
@@ -6027,8 +6009,9 @@ CONTAINS
 END MODULE TEST20_MOD
 !** TEST20
 PROGRAM TEST20
-  USE TEST20_MOD
-  use slatec
+  USE TEST20_MOD, ONLY : CBLAT2, CBLAT3
+  USE slatec, ONLY : I1MACH, XSETF, XSETUN, XERMAX
+  USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !>
   !***

@@ -571,7 +571,7 @@ SUBROUTINE DEABM(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,Rpar,Ipa
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-
+  USE service, ONLY : XERMSG
   REAL Atol(*), Rpar(*), Rtol(*), Rwork(*), T, Tout, Y(*)
   INTEGER ialpha, ibeta, idelsn, Idid, ifouru, ig, igi, ihold, &
     Info(15), ip, Ipar(*), iphi, ipsi, isig, itold, itstar, itwou, iv, iw, Iwork(*)

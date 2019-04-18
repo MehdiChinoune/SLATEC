@@ -66,7 +66,7 @@ SUBROUTINE DBSPPP(T,A,N,K,Ldc,C,Xi,Lxi,Work)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-
+  USE service, ONLY : XERMSG
   !
   INTEGER ileft, inev, K, Ldc, Lxi, N, nk
   REAL(8) :: A(*), C(Ldc,*), T(*), Work(*), Xi(*)

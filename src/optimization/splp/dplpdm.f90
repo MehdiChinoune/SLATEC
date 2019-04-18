@@ -1,7 +1,6 @@
 !** DPLPDM
 SUBROUTINE DPLPDM(Mrelas,Nvars,Lmx,Lbm,Nredc,Info,Iopt,Ibasis,Imat,Ibrc,&
     Ipr,Iwr,Ind,Ibb,Anorm,Eps,Uu,Gg,Amat,Basmat,Csc,Wr,Singlr,Redbas)
-  USE LA05DD
   !>
   !***
   !  Subsidiary to DSPLP
@@ -36,7 +35,9 @@ SUBROUTINE DPLPDM(Mrelas,Nvars,Lmx,Lbm,Nredc,Info,Iopt,Ibasis,Imat,Ibrc,&
   !   900328  Added TYPE section.  (WRB)
   !   900510  Convert XERRWV calls to XERMSG calls, convert do-it-yourself
   !           DO loops to DO loops.  (RWC)
-
+  USE LA05DD, ONLY : SMAll
+  USE service, ONLY : XERMSG
+  USE linear, ONLY : DASUM
   INTEGER i, Info, Iopt, iplace, j, k, Lbm, Lmx, Mrelas, Nredc, Nvars, nzbm
   INTEGER Ibasis(*), Imat(*), Ibrc(Lbm,2), Ipr(*), Iwr(*), Ind(*), Ibb(*)
   REAL(8) :: aij, Amat(*), Basmat(*), Csc(*), Wr(*), Anorm, &

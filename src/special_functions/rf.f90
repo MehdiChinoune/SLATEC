@@ -252,7 +252,7 @@ REAL FUNCTION RF(X,Y,Z,Ier)
   !   900510  Changed calls to XERMSG to standard form, and some
   !           editorial changes.  (RWC))
   !   920501  Reformatted the REFERENCES section.  (WRB)
-
+  USE service, ONLY : XERMSG, R1MACH
   CHARACTER(16) :: xern3, xern4, xern5, xern6
   INTEGER Ier
   REAL epslon, e2, e3, lamda, mu, s, X, xn, xndev, xnroot, Y, yn, yndev, ynroot, &

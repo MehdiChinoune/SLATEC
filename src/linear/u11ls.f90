@@ -32,7 +32,7 @@ SUBROUTINE U11LS(A,Mda,M,N,Ub,Db,Mode,Np,Krank,Ksure,H,W,Eb,Ic,Ir)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900328  Added TYPE section.  (WRB)
-
+  USE service, ONLY : XERMSG
   INTEGER Mda, mm, Mode, N, nmk, Np
   REAL A(Mda,*), bb, Db(*), Eb(*), H(*), r2, rmin, summ, t, temp, &
     tn, tt, Ub(*), W(*)
@@ -91,8 +91,7 @@ SUBROUTINE U11LS(A,Mda,M,N,Ub,Db,Mode,Np,Krank,Ksure,H,W,Eb,Ic,Ir)
         CALL ISWAP(1,Ic(i),1,Ic(kk),1)
         CALL SSWAP(M,A(1,i),1,A(1,kk),1)
       ELSE
-        CALL XERMSG('SLATEC','U11LS',&
-          'FIRST NP COLUMNS ARE LINEARLY DEPENDENT',8,0)
+        CALL XERMSG('SLATEC','U11LS','FIRST NP COLUMNS ARE LINEARLY DEPENDENT',8,0)
         Krank = i - 1
         RETURN
       END IF

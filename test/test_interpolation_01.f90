@@ -1,11 +1,9 @@
 MODULE TEST29_MOD
-  use slatec
   IMPLICIT NONE
 
 CONTAINS
   !** PNTCHK
   SUBROUTINE PNTCHK(Lun,Kprint,Ipass)
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for POLINT, POLCOF and POLYVL
@@ -28,7 +26,7 @@ CONTAINS
     !   910708  Minor modifications in use of KPRINT.  (WRB)
     !   920212  Code completely restructured to test errors for all values
     !           of KPRINT.  (WRB)
-
+    USE slatec, ONLY : NUMXER, POLCOF, POLINT, POLYVL, R1MACH, XERCLR, XGETF, XSETF
     !     .. Scalar Arguments ..
     INTEGER Ipass, Kprint, Lun
     !     .. Local Scalars ..
@@ -147,7 +145,6 @@ CONTAINS
   END SUBROUTINE PNTCHK
   !** DPNTCK
   SUBROUTINE DPNTCK(Lun,Kprint,Ipass)
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for DPLINT, DPOLCF and DPOLVL
@@ -165,7 +162,7 @@ CONTAINS
 
     !* REVISION HISTORY  (YYMMDD)
     !   920212  DATE WRITTEN
-
+    USE slatec, ONLY : D1MACH, DPLINT, DPOLCF, DPOLVL, NUMXER, XERCLR, XGETF, XSETF
     !     .. Scalar Arguments ..
     INTEGER Ipass, Kprint, Lun
     !     .. Local Scalars ..
@@ -285,8 +282,9 @@ CONTAINS
 END MODULE TEST29_MOD
 !** TEST29
 PROGRAM TEST29
-  USE TEST29_MOD
-  use slatec
+  USE TEST29_MOD, ONLY : DPNTCK, PNTCHK
+  USE slatec, ONLY : I1MACH, XSETF, XSETUN, XERMAX
+  USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !>
   !***

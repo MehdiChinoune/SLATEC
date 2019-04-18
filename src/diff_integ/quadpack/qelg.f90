@@ -66,7 +66,7 @@ SUBROUTINE QELG(N,Epstab,Result,Abserr,Res3la,Nres)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
-
+  USE service, ONLY : R1MACH
   !
   REAL Abserr, delta1, delta2, delta3, epmach, epsinf, &
     Epstab(52), error, err1, err2, err3, e0, e1, e1abs, e2, e3, &

@@ -1,6 +1,5 @@
 !** MPDIVI
 SUBROUTINE MPDIVI(X,Iy,Z)
-  USE MPCOM
   !>
   !***
   !  Subsidiary to DQDOTA and DQDOTI
@@ -35,7 +34,7 @@ SUBROUTINE MPDIVI(X,Iy,Z)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   !   930124  Increased Array size in MPCON for SUN -r8.  (RWC)
-
+  USE MPCOM, ONLY : B, LUN, M, T, R
   INTEGER i, i2, iq, iqj, ir, Iy, j, j1, j11, j2, k, kh, X(*), Z(*), rs, re, r1, &
     c, c2, b2
   !* FIRST EXECUTABLE STATEMENT  MPDIVI

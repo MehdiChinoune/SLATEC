@@ -1,11 +1,9 @@
 MODULE TEST49_MOD
-  use slatec
   IMPLICIT NONE
 
 CONTAINS
   !** DEDIT2
   SUBROUTINE DEDIT2(Y,T,Erm)
-    IMPLICIT NONE
     !>
     !***
     !  Subsidiary to DDASQC.
@@ -52,7 +50,6 @@ CONTAINS
   END SUBROUTINE DEDIT2
   !** DDASQC
   SUBROUTINE DDASQC(Lun,Kprint,Ipass)
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for SLATEC routine DDASSL.
@@ -99,7 +96,7 @@ CONTAINS
     !   901009  Changed AMAX1 to MAX.  (FNF)
     !   901009  Constructed double precision version.  (FNF)
     !   901030  Made all declarations explicit; added 1P's to formats. (FNF)
-
+    USE slatec, ONLY : DDASSL
     !
     INTEGER Lun, Kprint, Ipass
     !
@@ -265,7 +262,6 @@ CONTAINS
   END SUBROUTINE DDASQC
   !** DDJAC1
   SUBROUTINE DDJAC1(T,Y,Yprime,Pd,Cj,Rpar,Ipar)
-    IMPLICIT NONE
     !>
     !***
     !  First Jacobian evaluator for DDASQC.
@@ -295,7 +291,6 @@ CONTAINS
   END SUBROUTINE DDJAC1
   !** DDJAC2
   SUBROUTINE DDJAC2(T,Y,Yprime,Pd,Cj,Rpar,Ipar)
-    IMPLICIT NONE
     !>
     !***
     !  Second Jacobian evaluator for DDASQC.
@@ -340,7 +335,6 @@ CONTAINS
   END SUBROUTINE DDJAC2
   !** DDRES1
   SUBROUTINE DDRES1(T,Y,Yprime,Delta,Ires,Rpar,Ipar)
-    IMPLICIT NONE
     !>
     !***
     !  First residual evaluator for DDASQC.
@@ -368,7 +362,6 @@ CONTAINS
   END SUBROUTINE DDRES1
   !** DDRES2
   SUBROUTINE DDRES2(T,Y,Yprime,Delta,Ires,Rpar,Ipar)
-    IMPLICIT NONE
     !>
     !***
     !  Second residual evaluator for DDASQC.
@@ -409,8 +402,9 @@ CONTAINS
 END MODULE TEST49_MOD
 !** TEST49
 PROGRAM TEST49
-  USE TEST49_MOD
-  use slatec
+  USE TEST49_MOD, ONLY : DDASQC
+  USE slatec, ONLY : I1MACH, XSETF, XSETUN, XERMAX
+  USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !>
   !***

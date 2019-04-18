@@ -73,7 +73,7 @@ SUBROUTINE BESY(X,Fnu,N,Y)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-
+  USE service, ONLY : XERMSG, R1MACH, I1MACH
   !
   INTEGER i, iflw, j, N, nb, nd, nn, nud
   REAL azn, cn, dnu, elim, flgjy, fn, Fnu, rann, s, s1, s2, tm, &

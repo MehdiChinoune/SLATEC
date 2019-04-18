@@ -1,6 +1,5 @@
 !** LA05ED
 SUBROUTINE LA05ED(A,Irn,Ip,N,Iw,Ia,Reals)
-  USE LA05DD
   !>
   !***
   !  Subsidiary to DSPLP
@@ -37,7 +36,7 @@ SUBROUTINE LA05ED(A,Irn,Ip,N,Iw,Ia,Reals)
   !   890831  Modified array declarations.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
-
+  USE LA05DD, ONLY : LCOl, LROw, NCP
   INTEGER Ia, ipi, j, k, kl, kn, N, nz
   LOGICAL Reals
   REAL(8) :: A(*)

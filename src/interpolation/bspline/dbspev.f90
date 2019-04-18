@@ -78,7 +78,7 @@ SUBROUTINE DBSPEV(T,Ad,N,K,Nderiv,X,Inev,Svalue,Work)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-
+  USE service, ONLY : XERMSG
   !
   INTEGER i, id, Inev, iwork, jj, K, kp1, kp1mn, l, left, ll, mflag, N, Nderiv
   REAL(8) :: Ad(*), Svalue(*), summ, T(*), Work(*), X

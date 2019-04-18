@@ -1,11 +1,9 @@
 MODULE TEST19_MOD
-  use slatec
   IMPLICIT NONE
 
 CONTAINS
   !** DBEG
   REAL(8) FUNCTION DBEG(Reset)
-    IMPLICIT NONE
     !>
     !***
     !  Generate random numbers.
@@ -67,7 +65,6 @@ CONTAINS
   END FUNCTION DBEG
   !** DBLAT2
   SUBROUTINE DBLAT2(Nout,Kprint,Ipass)
-    IMPLICIT NONE
     !>
     !***
     !  Driver for testing Level 2 BLAS double precision
@@ -102,7 +99,7 @@ CONTAINS
     !   910619  Modified to meet SLATEC code and prologue standards. (BKS)
     !   930315  Removed unused variables.  (WRB)
     !   930618  Code modified to improve PASS/FAIL reporting.  (BKS, WRB)
-
+    USE slatec, ONLY : R1MACH, XERCLR
     !     .. Parameters ..
     INTEGER, PARAMETER :: NSUBS = 16
     REAL(8), PARAMETER :: ZERO = 0.0D0, ONE = 1.0D0
@@ -268,7 +265,6 @@ CONTAINS
   END SUBROUTINE DBLAT2
   !** DBLAT3
   SUBROUTINE DBLAT3(Nout,Kprint,Ipass)
-    IMPLICIT NONE
     !>
     !***
     !  Driver for testing Level 3 BLAS double precision
@@ -304,7 +300,7 @@ CONTAINS
     !   910619  Modified to meet SLATEC code and prologue standards. (BKS)
     !   930315  Removed unused variables.  (WRB)
     !   930618  Code modified to improve PASS/FAIL reporting.  (BKS, WRB)
-
+    USE slatec, ONLY : R1MACH, XERCLR
     !     .. Parameters ..
     INTEGER, PARAMETER :: NSUBS = 6
     REAL(8), PARAMETER :: ZERO = 0.0D0, ONE = 1.0D0
@@ -484,7 +480,6 @@ CONTAINS
   END SUBROUTINE DBLAT3
   !** DMAKE2
   SUBROUTINE DMAKE2(Type,Uplo,Diag,M,N,A,Nmax,Aa,Lda,Kl,Ku,Reset,Transl)
-    IMPLICIT NONE
     !>
     !***
     !  Generate values for an M by N matrix A.
@@ -664,7 +659,6 @@ CONTAINS
   END SUBROUTINE DMAKE2
   !** DMAKE3
   SUBROUTINE DMAKE3(Type,Uplo,Diag,M,N,A,Nmax,Aa,Lda,Reset,Transl)
-    IMPLICIT NONE
     !>
     !***
     !  Generate values for an M by N matrix A.
@@ -786,7 +780,6 @@ CONTAINS
   !** DMMCH
   SUBROUTINE DMMCH(Transa,Transb,M,N,Kk,Alpha,A,Lda,B,Ldb,Beta,C,Ldc,Ct,G,&
       Cc,Ldcc,Eps,Err,Ftl,Nout,Mv,Kprint)
-    IMPLICIT NONE
     !>
     !***
     !  Check the results of the computational tests.
@@ -910,7 +903,6 @@ CONTAINS
   !** DMVCH
   SUBROUTINE DMVCH(Trans,M,N,Alpha,A,Nmax,X,Incx,Beta,Y,Incy,Yt,G,Yy,Eps,&
       Err,Ftl,Nout,Mv,Kprint)
-    IMPLICIT NONE
     !>
     !***
     !  Check the results of the computational tests.
@@ -1031,7 +1023,6 @@ CONTAINS
   END SUBROUTINE DMVCH
   !** LDE
   LOGICAL FUNCTION LDE(Ri,Rj,Lr)
-    IMPLICIT NONE
     !>
     !***
     !  Test if two arrays are identical.
@@ -1075,7 +1066,6 @@ CONTAINS
   END FUNCTION LDE
   !** LDERES
   LOGICAL FUNCTION LDERES(Type,Uplo,M,N,Aa,As,Lda)
-    IMPLICIT NONE
     !>
     !***
     !  Test if selected elements in two arrays are equal.
@@ -1147,7 +1137,6 @@ CONTAINS
   !** DCHK12
   SUBROUTINE DCHK12(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idimm,Nkb,Kb,&
       Nalf,Alf,Nbet,Bet,Ninc,Inc,Nmax,Incmax,A,Aa,As,X,Xx,Xs,Y,Yy,Ys,Yt,G)
-    IMPLICIT NONE
     !>
     !***
     !  Test DGEMV and DGBMV.
@@ -1172,7 +1161,7 @@ CONTAINS
     !* REVISION HISTORY  (YYMMDD)
     !   870810  DATE WRITTEN
     !   910619  Modified to meet SLATEC code and prologue standards. (BKS)
-
+    USE slatec, ONLY : DGBMV, DGEMV, NUMXER
     !     .. Parameters ..
     REAL(8), PARAMETER :: ZERO = 0.0D0, HALF = 0.5D0
     !     .. Scalar Arguments ..
@@ -1450,7 +1439,6 @@ CONTAINS
   !** DCHK13
   SUBROUTINE DCHK13(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idimm,Nalf,Alf,&
       Nbet,Bet,Nmax,A,Aa,As,B,Bb,Bs,C,Cc,Cs,Ct,G)
-    IMPLICIT NONE
     !>
     !***
     !  Test DGEMM.
@@ -1477,7 +1465,7 @@ CONTAINS
     !* REVISION HISTORY  (YYMMDD)
     !   890208  DATE WRITTEN
     !   910619  Modified to meet SLATEC code and prologue standards. (BKS)
-
+    USE slatec, ONLY : DGEMM, NUMXER
     !     .. Parameters ..
     REAL(8), PARAMETER :: ZERO = 0.0D0
     !     .. Scalar Arguments ..
@@ -1711,7 +1699,6 @@ CONTAINS
   !** DCHK22
   SUBROUTINE DCHK22(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idimm,Nkb,Kb,&
       Nalf,Alf,Nbet,Bet,Ninc,Inc,Nmax,Incmax,A,Aa,As,X,Xx,Xs,Y,Yy,Ys,Yt,G)
-    IMPLICIT NONE
     !>
     !***
     !  Test DSYMV, DSBMV and DSPMV.
@@ -1737,7 +1724,7 @@ CONTAINS
     !* REVISION HISTORY  (YYMMDD)
     !   870810  DATE WRITTEN
     !   910619  Modified to meet SLATEC code and prologue standards. (BKS)
-
+    USE slatec, ONLY : DSBMV, DSPMV, DSYMV, NUMXER
     !     .. Parameters ..
     REAL(8), PARAMETER :: ZERO = 0.0D0, HALF = 0.5D0
     !     .. Scalar Arguments ..
@@ -2016,7 +2003,6 @@ CONTAINS
   !** DCHK23
   SUBROUTINE DCHK23(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idimm,Nalf,Alf,&
       Nbet,Bet,Nmax,A,Aa,As,B,Bb,Bs,C,Cc,Cs,Ct,G)
-    IMPLICIT NONE
     !>
     !***
     !  Test DSYMM.
@@ -2043,7 +2029,7 @@ CONTAINS
     !* REVISION HISTORY  (YYMMDD)
     !   890208  DATE WRITTEN
     !   910619  Modified to meet SLATEC code and prologue standards. (BKS)
-
+    USE slatec, ONLY : DSYMM, NUMXER
     !     .. Parameters ..
     REAL(8), PARAMETER :: ZERO = 0.0D0
     !     .. Scalar Arguments ..
@@ -2263,7 +2249,6 @@ CONTAINS
   !** DCHK32
   SUBROUTINE DCHK32(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idimm,Nkb,Kb,&
       Ninc,Inc,Nmax,Incmax,A,Aa,As,X,Xx,Xs,Xt,G,Z)
-    IMPLICIT NONE
     !>
     !***
     !  Test DTRMV, DTBMV, DTPMV, DTRSV, DTBSV and DTPSV.
@@ -2289,7 +2274,7 @@ CONTAINS
     !* REVISION HISTORY  (YYMMDD)
     !   870810  DATE WRITTEN
     !   910619  Modified to meet SLATEC code and prologue standards. (BKS)
-
+    USE slatec, ONLY : DTBMV, DTBSV, DTPMV, DTPSV, DTRMV, DTRSV, NUMXER
     !     .. Parameters ..
     REAL(8), PARAMETER :: ZERO = 0.0D0, HALF = 0.5D0, ONE = 1.0D0
     !     .. Scalar Arguments ..
@@ -2569,7 +2554,6 @@ CONTAINS
   !** DCHK33
   SUBROUTINE DCHK33(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idimm,Nalf,Alf,&
       Nmax,A,Aa,As,B,Bb,Bs,Ct,G,C)
-    IMPLICIT NONE
     !>
     !***
     !  Test DTRMM and DTRSM.
@@ -2596,7 +2580,7 @@ CONTAINS
     !* REVISION HISTORY  (YYMMDD)
     !   890208  DATE WRITTEN
     !   910619  Modified to meet SLATEC code and prologue standards. (BKS)
-
+    USE slatec, ONLY : DTRMM, DTRSM, NUMXER
     !     .. Parameters ..
     REAL(8), PARAMETER :: ZERO = 0.0D0, ONE = 1.0D0
     !     .. Scalar Arguments ..
@@ -2835,7 +2819,6 @@ CONTAINS
   !** DCHK42
   SUBROUTINE DCHK42(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idimm,Nalf,Alf,&
       Ninc,Inc,Nmax,Incmax,A,Aa,As,X,Xx,Xs,Y,Yy,Ys,Yt,G,Z)
-    IMPLICIT NONE
     !>
     !***
     !  Test DGER.
@@ -2860,7 +2843,7 @@ CONTAINS
     !* REVISION HISTORY  (YYMMDD)
     !   870810  DATE WRITTEN
     !   910619  Modified to meet SLATEC code and prologue standards. (BKS)
-
+    USE slatec, ONLY : DGER, NUMXER
     !     .. Parameters ..
     REAL(8), PARAMETER :: ZERO = 0.0D0, HALF = 0.5D0, ONE = 1.0D0
     !     .. Scalar Arguments ..
@@ -3074,7 +3057,6 @@ CONTAINS
   !** DCHK43
   SUBROUTINE DCHK43(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idimm,Nalf,Alf,&
       Nbet,Bet,Nmax,A,Aa,As,B,Bb,Bs,C,Cc,Cs,Ct,G)
-    IMPLICIT NONE
     !>
     !***
     !  Test DSYRK.
@@ -3101,7 +3083,7 @@ CONTAINS
     !* REVISION HISTORY  (YYMMDD)
     !   890208  DATE WRITTEN
     !   910619  Modified to meet SLATEC code and prologue standards. (BKS)
-
+    USE slatec, ONLY : DSYRK, NUMXER
     !     .. Parameters ..
     REAL(8), PARAMETER :: ZERO = 0.0D0
     !     .. Scalar Arguments ..
@@ -3322,7 +3304,6 @@ CONTAINS
   !** DCHK52
   SUBROUTINE DCHK52(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idimm,Nalf,Alf,&
       Ninc,Inc,Nmax,Incmax,A,Aa,As,X,Xx,Xs,Y,Yy,Ys,Yt,G,Z)
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for DSYR and DSPR.
@@ -3347,7 +3328,7 @@ CONTAINS
     !* REVISION HISTORY  (YYMMDD)
     !   870810  DATE WRITTEN
     !   910619  Modified to meet SLATEC code and prologue standards. (BKS)
-
+    USE slatec, ONLY : DSPR, DSYR, NUMXER
     !     .. Parameters ..
     REAL(8), PARAMETER :: ZERO = 0.0D0, HALF = 0.5D0, ONE = 1.0D0
     !     .. Scalar Arguments ..
@@ -3573,7 +3554,6 @@ CONTAINS
   !** DCHK53
   SUBROUTINE DCHK53(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idimm,Nalf,Alf,&
       Nbet,Bet,Nmax,Ab,Aa,As,Bb,Bs,C,Cc,Cs,Ct,G,W)
-    IMPLICIT NONE
     !>
     !***
     !  Test DSYR2K.
@@ -3600,7 +3580,7 @@ CONTAINS
     !* REVISION HISTORY  (YYMMDD)
     !   890208  DATE WRITTEN
     !   910619  Modified to meet SLATEC code and prologue standards. (BKS)
-
+    USE slatec, ONLY : DSYR2K, NUMXER
     !     .. Parameters ..
     REAL(8), PARAMETER :: ZERO = 0.0D0
     !     .. Scalar Arguments ..
@@ -3853,7 +3833,6 @@ CONTAINS
   !** DCHK62
   SUBROUTINE DCHK62(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idimm,Nalf,Alf,&
       Ninc,Inc,Nmax,Incmax,A,Aa,As,X,Xx,Xs,Y,Yy,Ys,Yt,G,Z)
-    IMPLICIT NONE
     !>
     !***
     !  Test DSYR2 and DSPR2.
@@ -3878,7 +3857,7 @@ CONTAINS
     !* REVISION HISTORY  (YYMMDD)
     !   870810  DATE WRITTEN
     !   910619  Modified to meet SLATEC code and prologue standards. (BKS)
-
+    USE slatec, ONLY : DSPR2, DSYR2, NUMXER
     !     .. Parameters ..
     REAL(8), PARAMETER :: ZERO = 0.0D0, HALF = 0.5D0, ONE = 1.0D0
     !     .. Scalar Arguments ..
@@ -4135,7 +4114,6 @@ CONTAINS
   END SUBROUTINE DCHK62
   !** DCHKE2
   SUBROUTINE DCHKE2(Isnum,Srnamt,Nout,Kprint,Fatal)
-    IMPLICIT NONE
     !>
     !***
     !  Test the error exits from the Level 2 Blas.
@@ -4161,7 +4139,9 @@ CONTAINS
     !* REVISION HISTORY  (YYMMDD)
     !   870810  DATE WRITTEN
     !   910620  Modified to meet SLATEC code and prologue standards.  (BKS)
-
+    USE slatec, ONLY : DGBMV, DGEMV, DGER, DSBMV, DSPMV, DSPR, DSPR2, DSYMV, DSYR, &
+      DSYR2, DTBMV, DTBSV, DTPMV, DTPSV, DTRMV, DTRSV, XERCLR, XERDMP, XGETF, XSETF
+    USE common_mod, ONLY : CHKXER
     !     .. Scalar Arguments ..
     INTEGER Isnum, Nout
     LOGICAL Fatal
@@ -4561,7 +4541,6 @@ CONTAINS
   END SUBROUTINE DCHKE2
   !** DCHKE3
   SUBROUTINE DCHKE3(Isnum,Srnamt,Nout,Kprint,Fatal)
-    IMPLICIT NONE
     !>
     !***
     !  Test the error exits from the Level 3 Blas.
@@ -4588,7 +4567,9 @@ CONTAINS
     !* REVISION HISTORY  (YYMMDD)
     !   890208  DATE WRITTEN
     !   910620  Modified to meet SLATEC code and prologue standards.  (BKS)
-
+    USE slatec, ONLY : DGEMM, DSYMM, DSYR2K, DSYRK, DTRMM, DTRSM, XERCLR, XERDMP, &
+      XGETF, XSETF
+    USE common_mod, ONLY : CHKXER
     !     .. Scalar Arguments ..
     LOGICAL Fatal
     INTEGER Isnum, Nout
@@ -5283,8 +5264,9 @@ CONTAINS
 END MODULE TEST19_MOD
 !** TEST19
 PROGRAM TEST19
-  USE TEST19_MOD
-  use slatec
+  USE TEST19_MOD, ONLY : DBLAT2, DBLAT3
+  USE slatec, ONLY : I1MACH, XSETF, XSETUN, XERMAX
+  USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !>
   !***

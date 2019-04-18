@@ -1,11 +1,9 @@
 MODULE TEST39_MOD
-  use slatec
   IMPLICIT NONE
 
 CONTAINS
   !** CQAG
   SUBROUTINE CQAG(Lun,Kprint,Ipass)
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for QAG.
@@ -24,7 +22,7 @@ CONTAINS
     !   901205  Added PASS/FAIL message and changed the name of the first
     !           argument.  (RWC)
     !   910501  Added PURPOSE and TYPE records.  (WRB)
-
+    USE slatec, ONLY : QAG, R1MACH
 
     ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
     INTEGER ierv(2), Lun
@@ -119,7 +117,6 @@ CONTAINS
   END SUBROUTINE CQAG
   !** CQAGI
   SUBROUTINE CQAGI(Lun,Kprint,Ipass)
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for QAGI.
@@ -139,7 +136,7 @@ CONTAINS
     !   901205  Added PASS/FAIL message and changed the name of the first
     !           argument.  (RWC)
     !   910501  Added PURPOSE and TYPE records.  (WRB)
-
+    USE slatec, ONLY : QAGI, R1MACH
 
     ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
     INTEGER ierv(4), inf
@@ -252,7 +249,6 @@ CONTAINS
   END SUBROUTINE CQAGI
   !** CQAGP
   SUBROUTINE CQAGP(Lun,Kprint,Ipass)
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for QAGP.
@@ -271,7 +267,7 @@ CONTAINS
     !   901205  Added PASS/FAIL message and changed the name of the first
     !           argument.  (RWC)
     !   910501  Added PURPOSE and TYPE records.  (WRB)
-
+    USE slatec, ONLY : QAGP, R1MACH
 
     ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
     INTEGER ierv(4)
@@ -398,7 +394,6 @@ CONTAINS
   END SUBROUTINE CQAGP
   !** CQAGS
   SUBROUTINE CQAGS(Lun,Kprint,Ipass)
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for QAGS.
@@ -418,7 +413,7 @@ CONTAINS
     !           argument.  (RWC)
     !   910501  Added PURPOSE and TYPE records.  (WRB)
     !   911114  Modified test on IER=4 to allow IER=5.  (WRB)
-
+    USE slatec, ONLY : QAGS, R1MACH
 
     ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
     INTEGER ierv(5), Lun
@@ -539,7 +534,6 @@ CONTAINS
   END SUBROUTINE CQAGS
   !** CQAWC
   SUBROUTINE CQAWC(Lun,Kprint,Ipass)
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for QAWC.
@@ -558,7 +552,7 @@ CONTAINS
     !   901205  Added PASS/FAIL message and changed the name of the first
     !           argument.  (RWC)
     !   910501  Added PURPOSE and TYPE records.  (WRB)
-
+    USE slatec, ONLY : QAWC, R1MACH
     !
     ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
     INTEGER ierv(2), Lun
@@ -644,7 +638,6 @@ CONTAINS
   END SUBROUTINE CQAWC
   !** CQAWF
   SUBROUTINE CQAWF(Lun,Kprint,Ipass)
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for QAWF.
@@ -663,7 +656,7 @@ CONTAINS
     !   901205  Added PASS/FAIL message and changed the name of the first
     !           argument.  (RWC)
     !   910501  Added PURPOSE and TYPE records.  (WRB)
-
+    USE slatec, ONLY : QAWF, R1MACH
     !
     ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
     INTEGER ierv(3), integr, iwork(450), leniw, Lun, maxp1
@@ -760,7 +753,6 @@ CONTAINS
   END SUBROUTINE CQAWF
   !** CQAWO
   SUBROUTINE CQAWO(Lun,Kprint,Ipass)
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for QAWO.
@@ -779,7 +771,7 @@ CONTAINS
     !   901205  Added PASS/FAIL message and changed the name of the first
     !           argument.  (RWC)
     !   910501  Added PURPOSE and TYPE records.  (WRB)
-
+    USE slatec, ONLY : QAWO, R1MACH
     !
     ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
     INTEGER leniw
@@ -890,7 +882,6 @@ CONTAINS
   END SUBROUTINE CQAWO
   !** CQAWS
   SUBROUTINE CQAWS(Lun,Kprint,Ipass)
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for QAWS.
@@ -909,7 +900,7 @@ CONTAINS
     !   901205  Added PASS/FAIL message and changed the name of the first
     !           argument.  (RWC)
     !   910501  Added PURPOSE and TYPE records.  (WRB)
-
+    USE slatec, ONLY : QAWS, R1MACH
 
     ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
     INTEGER ierv(2), Lun
@@ -997,7 +988,6 @@ CONTAINS
   END SUBROUTINE CQAWS
   !** CQNG
   SUBROUTINE CQNG(Lun,Kprint,Ipass)
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for QNG.
@@ -1016,7 +1006,7 @@ CONTAINS
     !   901205  Added PASS/FAIL message and changed the name of the first
     !           argument.  (RWC)
     !   910501  Added PURPOSE and TYPE records.  (WRB)
-
+    USE slatec, ONLY : QNG, R1MACH
 
     ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
     INTEGER Lun
@@ -1074,7 +1064,6 @@ CONTAINS
   END SUBROUTINE CQNG
   !** F0C
   REAL FUNCTION F0C(X)
-    IMPLICIT NONE
     !>
     !***
     !  Subsidiary to
@@ -1095,7 +1084,6 @@ CONTAINS
   END FUNCTION F0C
   !** F0F
   REAL FUNCTION F0F(X)
-    IMPLICIT NONE
     !>
     !***
     !  Subsidiary to
@@ -1117,7 +1105,6 @@ CONTAINS
   END FUNCTION F0F
   !** F0O
   REAL FUNCTION F0O(X)
-    IMPLICIT NONE
     !>
     !***
     !  Subsidiary to
@@ -1138,7 +1125,6 @@ CONTAINS
   END FUNCTION F0O
   !** F0S
   REAL FUNCTION F0S(X)
-    IMPLICIT NONE
     !>
     !***
     !  Subsidiary to
@@ -1160,7 +1146,6 @@ CONTAINS
   END FUNCTION F0S
   !** F0WS
   REAL FUNCTION F0WS(X)
-    IMPLICIT NONE
     !>
     !***
     !  Subsidiary to
@@ -1181,7 +1166,6 @@ CONTAINS
   END FUNCTION F0WS
   !** F1C
   REAL FUNCTION F1C(X)
-    IMPLICIT NONE
     !>
     !***
     !  Subsidiary to
@@ -1203,7 +1187,6 @@ CONTAINS
   END FUNCTION F1C
   !** F1F
   REAL FUNCTION F1F(X)
-    IMPLICIT NONE
     !>
     !***
     !  Subsidiary to
@@ -1227,7 +1210,6 @@ CONTAINS
   END FUNCTION F1F
   !** F1G
   REAL FUNCTION F1G(X)
-    IMPLICIT NONE
     !>
     !***
     !  Subsidiary to
@@ -1249,7 +1231,6 @@ CONTAINS
   END FUNCTION F1G
   !** F1N
   REAL FUNCTION F1N(X)
-    IMPLICIT NONE
     !>
     !***
     !  Subsidiary to
@@ -1270,7 +1251,6 @@ CONTAINS
   END FUNCTION F1N
   !** F1O
   REAL FUNCTION F1O(X)
-    IMPLICIT NONE
     !>
     !***
     !  Subsidiary to
@@ -1292,7 +1272,6 @@ CONTAINS
   END FUNCTION F1O
   !** F1P
   REAL FUNCTION F1P(X)
-    IMPLICIT NONE
     !>
     !***
     !  Subsidiary to
@@ -1321,7 +1300,6 @@ CONTAINS
   END FUNCTION F1P
   !** F1S
   REAL FUNCTION F1S(X)
-    IMPLICIT NONE
     !>
     !***
     !  Subsidiary to
@@ -1342,7 +1320,6 @@ CONTAINS
   END FUNCTION F1S
   !** F1WS
   REAL FUNCTION F1WS(X)
-    IMPLICIT NONE
     !>
     !***
     !  Subsidiary to
@@ -1363,7 +1340,6 @@ CONTAINS
   END FUNCTION F1WS
   !** F2G
   REAL FUNCTION F2G(X)
-    IMPLICIT NONE
     !>
     !***
     !  Subsidiary to
@@ -1384,7 +1360,6 @@ CONTAINS
   END FUNCTION F2G
   !** F2N
   REAL FUNCTION F2N(X)
-    IMPLICIT NONE
     !>
     !***
     !  Subsidiary to
@@ -1405,7 +1380,6 @@ CONTAINS
   END FUNCTION F2N
   !** F2O
   REAL FUNCTION F2O(X)
-    IMPLICIT NONE
     !>
     !***
     !  Subsidiary to
@@ -1427,7 +1401,6 @@ CONTAINS
   END FUNCTION F2O
   !** F2P
   REAL FUNCTION F2P(X)
-    IMPLICIT NONE
     !>
     !***
     !  Subsidiary to
@@ -1448,7 +1421,6 @@ CONTAINS
   END FUNCTION F2P
   !** F2S
   REAL FUNCTION F2S(X)
-    IMPLICIT NONE
     !>
     !***
     !  Subsidiary to
@@ -1470,7 +1442,6 @@ CONTAINS
   END FUNCTION F2S
   !** F3G
   REAL FUNCTION F3G(X)
-    IMPLICIT NONE
     !>
     !***
     !  Subsidiary to
@@ -1491,7 +1462,6 @@ CONTAINS
   END FUNCTION F3G
   !** F3P
   REAL FUNCTION F3P(X)
-    IMPLICIT NONE
     !>
     !***
     !  Subsidiary to
@@ -1513,7 +1483,6 @@ CONTAINS
   END FUNCTION F3P
   !** F3S
   REAL FUNCTION F3S(X)
-    IMPLICIT NONE
     !>
     !***
     !  Subsidiary to
@@ -1535,7 +1504,6 @@ CONTAINS
   END FUNCTION F3S
   !** F4P
   REAL FUNCTION F4P(X)
-    IMPLICIT NONE
     !>
     !***
     !  Subsidiary to
@@ -1557,7 +1525,6 @@ CONTAINS
   END FUNCTION F4P
   !** F4S
   REAL FUNCTION F4S(X)
-    IMPLICIT NONE
     !>
     !***
     !  Subsidiary to
@@ -1584,7 +1551,6 @@ CONTAINS
   END FUNCTION F4S
   !** F5S
   REAL FUNCTION F5S(X)
-    IMPLICIT NONE
     !>
     !***
     !  Subsidiary to
@@ -1606,7 +1572,6 @@ CONTAINS
   END FUNCTION F5S
   !** T0
   REAL FUNCTION T0(X)
-    IMPLICIT NONE
     !>
     !***
     !  Subsidiary to
@@ -1631,7 +1596,6 @@ CONTAINS
   END FUNCTION T0
   !** T1
   REAL FUNCTION T1(X)
-    IMPLICIT NONE
     !>
     !***
     !  Subsidiary to
@@ -1656,7 +1620,6 @@ CONTAINS
   END FUNCTION T1
   !** T2
   REAL FUNCTION T2(X)
-    IMPLICIT NONE
     !>
     !***
     !  Subsidiary to
@@ -1681,7 +1644,6 @@ CONTAINS
   END FUNCTION T2
   !** T3
   REAL FUNCTION T3(X)
-    IMPLICIT NONE
     !>
     !***
     !  Subsidiary to
@@ -1706,7 +1668,6 @@ CONTAINS
   END FUNCTION T3
   !** T4
   REAL FUNCTION T4(X)
-    IMPLICIT NONE
     !>
     !***
     !  Subsidiary to
@@ -1731,7 +1692,6 @@ CONTAINS
   END FUNCTION T4
   !** T5
   REAL FUNCTION T5(X)
-    IMPLICIT NONE
     !>
     !***
     !  Subsidiary to
@@ -1756,7 +1716,6 @@ CONTAINS
   END FUNCTION T5
   !** CPRIN
   SUBROUTINE CPRIN(Lun,Num1,Kprint,Ip,Exact,Result,Abserr,Neval,Ierv,Lierv)
-    IMPLICIT NONE
     !>
     !***
     !  Subsidiary to CQAG, CQAG, CQAGI, CQAGP, CQAGS, CQAWC,
@@ -1842,8 +1801,9 @@ CONTAINS
 END MODULE TEST39_MOD
 !** TEST39
 PROGRAM TEST39
-  USE TEST39_MOD
-  use slatec
+  USE TEST39_MOD, ONLY : CQAG, CQAGI, CQAGP, CQAGS, CQAWC, CQAWF, CQAWO, CQAWS, CQNG
+  USE slatec, ONLY : I1MACH, XSETF, XSETUN, XERMAX
+  USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !>
   !***

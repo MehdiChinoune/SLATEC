@@ -30,7 +30,7 @@ REAL FUNCTION FAC(N)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-
+  USE service, ONLY : XERMSG
   REAL x, xmax, xmin
   INTEGER N
   REAL, PARAMETER :: facn(26) = [ 1.0E0, 1.0E0, 2.0E0, 6.0E0, 24.0E0, 120.0E0, &

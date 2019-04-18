@@ -215,7 +215,7 @@ SUBROUTINE DQAWFE(F,A,Omega,Integr,Epsabs,Limlst,Limit,Maxp1,Result,&
   !   891009  Removed unreferenced variable.  (WRB)
   !   891009  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
-
+  USE service, ONLY : D1MACH
   !
   INTEGER Ier, Ierlst(*), Integr, Iord(*), ktmin, l, last, Lst, Limit, &
     Limlst, ll, Maxp1, momcom, nev, Neval, Nnlog(*), nres, numrl2

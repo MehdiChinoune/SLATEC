@@ -33,7 +33,7 @@ REAL FUNCTION R9LGIC(A,X,Alx)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
-
+  USE service, ONLY : XERMSG, R1MACH
   REAL A, Alx, fk, p, r, s, t, X, xma, xpa
   INTEGER k
   REAL :: eps = 0.0

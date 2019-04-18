@@ -1,6 +1,5 @@
 !** XRED
 SUBROUTINE XRED(X,Ix,Ierror)
-  USE XBLK, ONLY: RADixx, RAD2l, L2
   !>
   !***
   !  To provide single-precision floating-point arithmetic
@@ -48,7 +47,7 @@ SUBROUTINE XRED(X,Ix,Ierror)
   !           Corrected order of sections in prologue and added TYPE
   !           section.  (WRB)
   !   920127  Revised PURPOSE section of prologue.  (DWL)
-
+  USE XBLK, ONLY: RADixx, RAD2l, L2
   INTEGER i, Ierror, ixa, ixa1, ixa2, Ix
   REAL X
   REAL :: xa

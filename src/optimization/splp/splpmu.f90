@@ -46,7 +46,8 @@ SUBROUTINE SPLPMU(Mrelas,Nvars,Lmx,Lbm,Nredc,Info,Ienter,Ileave,Iopt,Npp,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900328  Added TYPE section.  (WRB)
-
+  USE service, ONLY : XERMSG
+  USE linear, ONLY : SCOPY, SASUM, SDOT
   INTEGER i, ibas, Ienter, ihi, il1, Ileave, ilow, Info, Iopt, ipage, iplace, &
     iu1, j, Jstrt, k, key, Lbm, Lmx, lpg, Mrelas, n20002, n20018, n20121, &
     nerr, nnegrc, Npp, npr001, npr003, Nredc, Nvars

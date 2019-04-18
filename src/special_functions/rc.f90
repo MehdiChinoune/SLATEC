@@ -273,7 +273,7 @@ REAL FUNCTION RC(X,Y,Ier)
   !   900510  Changed calls to XERMSG to standard form, and some
   !           editorial changes.  (RWC))
   !   920501  Reformatted the REFERENCES section.  (WRB)
-
+  USE service, ONLY : XERMSG, R1MACH
   CHARACTER(16) :: xern3, xern4, xern5
   INTEGER Ier
   REAL lamda, mu, s, sn, X, xn, Y, yn

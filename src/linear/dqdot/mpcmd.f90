@@ -1,6 +1,5 @@
 !** MPCMD
 SUBROUTINE MPCMD(X,Dz)
-  USE MPCOM
   !>
   !***
   !  Subsidiary to DQDOTA and DQDOTI
@@ -35,7 +34,7 @@ SUBROUTINE MPCMD(X,Dz)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   !   930124  Increased Array size in MPCON for SUN -r8.  (RWC)
-
+  USE MPCOM, ONLY : B, LUN, T
   INTEGER i, X(*), tm
   REAL(8) :: db, Dz, dz2
   !* FIRST EXECUTABLE STATEMENT  MPCMD

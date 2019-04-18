@@ -1,7 +1,5 @@
 !** ISMPL
 SUBROUTINE ISMPL(N,M,Indx)
-  use SLATEC
-  IMPLICIT NONE
   !>
   !***
   !  Generate integer sample.
@@ -26,7 +24,7 @@ SUBROUTINE ISMPL(N,M,Indx)
   !   890919  Changed to integer name ISMPL.  (MKS)
   !   890920  Converted prologue to SLATEC 4.0 format.  (FNF)
   !   920511  Added complete declaration section.  (WRB)
-
+  USE slatec, ONLY : RAND
   !     .. Scalar Arguments ..
   INTEGER M, N
   !     .. Array Arguments ..

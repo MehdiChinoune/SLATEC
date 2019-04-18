@@ -73,7 +73,7 @@ SUBROUTINE DCHKW(Name,Lociw,Leniw,Locw,Lenw,Ierr,Iter,Err)
   !   910506  Made subsidiary.  (FNF)
   !   920511  Added complete declaration section.  (WRB)
   !   921015  Added code to initialize ITER and ERR when IERR=0.  (FNF)
-
+  USE service, ONLY : D1MACH, XERMSG
   !     .. Scalar Arguments ..
   REAL(8) :: Err
   INTEGER Ierr, Iter, Leniw, Lenw, Lociw, Locw

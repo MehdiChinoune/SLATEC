@@ -72,7 +72,7 @@ SUBROUTINE TQLRAT(N,D,E2,Ierr)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-
+  USE service, ONLY : R1MACH
   INTEGER i, j, l, m, N, ii, l1, mml, Ierr
   REAL D(*), E2(*)
   REAL b, c, f, g, h, p, r, s

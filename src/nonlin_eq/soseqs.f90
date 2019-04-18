@@ -94,7 +94,7 @@ SUBROUTINE SOSEQS(FNC,N,S,Rtolx,Atolx,Tolf,Iflag,Mxit,Ncjs,Nsrrc,Nsri,&
   !   890831  Modified array declarations.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
-
+  USE service, ONLY : R1MACH, I1MACH
   INTEGER ksv, l, loun, ls, m, mit, mm, Mxit, N, Nc, Ncjs, np1, Nsri, Nsrrc
   REAL Atolx, B(*), C(Nc), csv, f, Fac(*), fact, fdif, Fmax, fmin, fmxs, fn1, &
     fn2, FNC, fp, h, hx, P(*), pmax, re, Rtolx, S(*), sruro, Temp(*), test, Tolf, &

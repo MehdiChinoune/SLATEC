@@ -1,6 +1,5 @@
 !** XADJ
 SUBROUTINE XADJ(X,Ix,Ierror)
-  USE XBLK ,ONLY: RADixl, RAD2l, L2, KMAx
   !>
   !***
   !  To provide single-precision floating-point arithmetic
@@ -45,7 +44,8 @@ SUBROUTINE XADJ(X,Ix,Ierror)
   !           section.  (WRB)
   !           CALLs to XERROR changed to CALLs to XERMSG.  (WRB)
   !   920127  Revised PURPOSE section of prologue.  (DWL)
-
+  USE XBLK ,ONLY: RADixl, RAD2l, L2, KMAx
+  USE service, ONLY : XERMSG
   INTEGER Ierror, Ix
   REAL X
   !

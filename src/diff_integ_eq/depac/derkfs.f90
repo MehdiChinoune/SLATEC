@@ -52,7 +52,7 @@ SUBROUTINE DERKFS(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
   !   900510  Convert XERRWV calls to XERMSG calls, replace GOTOs with
   !           IF-THEN-ELSEs.  (RWC)
   !   910722  Updated AUTHOR section.  (ALS)
-
+  USE service, ONLY : XERMSG, R1MACH
   REAL a, Atol(*), big, dt, Dtsign, dy, ee, eeoet, es, estiff, &
     esttol, et, F1(*), F2(*), F3(*), F4(*), F5(*), H, hmin
   INTEGER Idid, Info(15), Init, Ipar(*), Iquit, k, Kop, Ksteps, ktol, &

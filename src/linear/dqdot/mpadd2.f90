@@ -1,6 +1,5 @@
 !** MPADD2
 SUBROUTINE MPADD2(X,Y,Z,Y1,Trunc)
-  USE MPCOM
   !>
   !***
   !  Subsidiary to DQDOTA and DQDOTI
@@ -54,7 +53,7 @@ SUBROUTINE MPADD2(X,Y,Z,Y1,Trunc)
   !   900402  Added TYPE section.  (WRB)
   !   920528  Added a REFERENCES section revised.  (WRB)
   !   930124  Increased Array size in MPCON for SUN -r8.  (RWC)
-
+  USE MPCOM, ONLY : LUN, T
   INTEGER j, med, X(*), Y(*), Z(*), Y1(*), Trunc, s, ed, rs, re
   !* FIRST EXECUTABLE STATEMENT  MPADD2
   IF ( X(1)/=0 ) THEN

@@ -424,6 +424,9 @@ SUBROUTINE DBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
   !     /SSWAP/ TO /DSWAP/, /E0/ TO /D0/,
   !     /REAL            / TO /DOUBLE PRECISION/.
   !++
+  USE service, ONLY : XERMSG, D1MACH
+  USE linear, ONLY : DCOPY, DROT, DROTG, DSWAP, DAXPY, DNRM2, DDOT
+  USE optimization, ONLY : DVOUT, IVOUT
   INTEGER i, igopr, ioff, ip, iprint, itemp, iter, itmax, j, jbig, jcol, &
     jdrop, jdrop1, jdrop2, jlarge, jmag, jp, lds, lgopr, lp, Mdw, Minput, Mode, &
     mrows, mval, Ncols, nsetb, i2(1), jbig2(1)
@@ -712,7 +715,8 @@ SUBROUTINE DBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
         IF ( fac<ZERO ) THEN
           WRITE (xern3,'(1PD15.6)') fac
           CALL XERMSG('SLATEC','DBOLSM',&
-            'THE FACTOR (NCOLS/MINPUT) WHERE PRE-TRIANGULARIZING IS PERFORMED MUST BE NON-NEGATIVE.$$NOW = '//xern3,30,0)
+            'THE FACTOR (NCOLS/MINPUT) WHERE PRE-TRIANGULARIZING IS PERFORMED&
+            & MUST BE NON-NEGATIVE.$$NOW = '//xern3,30,0)
           Mode = -30
           RETURN
         END IF

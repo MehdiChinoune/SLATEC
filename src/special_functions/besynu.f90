@@ -71,7 +71,7 @@ SUBROUTINE BESYNU(X,Fnu,N,Y)
   !   900727  Added EXTERNAL statement.  (WRB)
   !   910408  Updated the AUTHOR and REFERENCES sections.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-
+  USE service, ONLY : XERMSG, R1MACH
   !
   INTEGER i, inu, j, k, kk, N, nn
   REAL a(120), ak, arg, a1, a2, bk, cb(120), cbk, cck, ck, coef, cpt, &

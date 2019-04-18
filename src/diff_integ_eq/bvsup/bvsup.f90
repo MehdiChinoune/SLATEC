@@ -1,10 +1,6 @@
 !** BVSUP
 SUBROUTINE BVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
     Nfc,Igofx,Re,Ae,Iflag,Work,Ndw,Iwork,Ndiw,Neqivp)
-  USE ML, ONLY : RED => RE, AED => AE, INDpvt, INHomo, INTeg, K1, K2, K3, K4, K5, &
-    K6, K7, K8, K9, K10, K11, KKKzpw, L1, L2, LLLint, MNSwot, ICOco, IGOfxd => IGOfx, &
-    NDIsk, MXNon, NEEdw, NFCc, NCOmpd => NCOmp, NEEdiw, NEQivd => NEQivp, &
-    NPS, NTP, XBEg, XSAv, XENd, NFCd => NFC, NICd => NIC, NOPg, NXPtsd => NXPts, NTApe, KKKint
   !>
   !***
   !  Solve a linear two-point boundary value problem using
@@ -413,7 +409,11 @@ SUBROUTINE BVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-
+  USE ML, ONLY : RED => RE, AED => AE, INDpvt, INHomo, INTeg, K1, K2, K3, K4, K5, &
+    K6, K7, K8, K9, K10, K11, KKKzpw, L1, L2, LLLint, MNSwot, ICOco, IGOfxd => IGOfx, &
+    NDIsk, MXNon, NEEdw, NFCc, NCOmpd => NCOmp, NEEdiw, NEQivd => NEQivp, NPS, NTP, &
+    XBEg, XSAv, XENd, NFCd => NFC, NICd => NIC, NOPg, NXPtsd => NXPts, NTApe, KKKint
+  USE service, ONLY : XERMSG
   INTEGER Ndw, Neqivp, Nfc, Nic, nitemp, non, Nrowa, Nrowb, Nrowy, nrtemp, Iflag, &
     Igofx, is, Iwork(*), j, k, kkkcoe, kkkcof, kkkg, kkks, kkksto, kkksud, &
     kkksvc, kkku, kkkv, kkkws, kkkyhp, kpts, lllcof, lllip, llliws, lllsud, lllsvc, &

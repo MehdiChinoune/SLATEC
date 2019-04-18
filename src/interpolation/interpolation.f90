@@ -1,5 +1,4 @@
 MODULE interpolation
-  use service
   IMPLICIT NONE
 
 CONTAINS

@@ -25,7 +25,7 @@ SUBROUTINE WNLT1(I,Lend,Mend,Ir,Mdw,Recalc,Imax,Hbar,H,Scalee,W)
   !* REVISION HISTORY  (YYMMDD)
   !   790701  DATE WRITTEN
   !   890620  Code extracted from WNLIT and made a subroutine.  (RWC))
-
+  USE linear, ONLY : ISAMAX
   INTEGER I, Imax, Ir, Lend, Mdw, Mend
   REAL H(*), Hbar, Scalee(*), W(Mdw,*)
   LOGICAL Recalc

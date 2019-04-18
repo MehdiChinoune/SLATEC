@@ -2,7 +2,6 @@
 INTEGER FUNCTION ISSOMN(N,B,X,Nelt,Ia,Ja,A,Isym,MSOLVE,Nsave,Itol,Tol,&
     Itmax,Iter,Err,Ierr,Iunit,R,Z,P,Ap,Emap,Dz,Csav,&
     Rwork,Iwork,Ak,Bnrm,Solnrm)
-  USE SSLBLK
   !>
   !***
   !  Preconditioned Orthomin Stop Test.
@@ -180,7 +179,8 @@ INTEGER FUNCTION ISSOMN(N,B,X,Nelt,Ia,Ja,A,Isym,MSOLVE,Nsave,Itol,Tol,&
   !   920930  Corrected to not print AK when ITER=0.  (FNF)
   !   921026  Changed 1.0E10 to R1MACH(2).  (FNF)
   !   921113  Corrected C***CATEGORY line.  (FNF)
-
+  USE SSLBLK, ONLY : SOLn
+  USE service, ONLY : R1MACH
   !     .. Scalar Arguments ..
   REAL Ak, Bnrm, Err, Solnrm, Tol
   INTEGER Ierr, Isym, Iter, Itmax, Itol, Iunit, N, Nelt, Nsave

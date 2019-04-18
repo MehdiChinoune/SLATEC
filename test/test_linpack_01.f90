@@ -1,11 +1,9 @@
 MODULE TEST23_MOD
-  use slatec
   IMPLICIT NONE
 
 CONTAINS
   !** CCHQC
   SUBROUTINE CCHQC(Lun,Kprint,Nerr)
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for CCHDC.
@@ -42,7 +40,7 @@ CONTAINS
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   901010  Restructured using IF-THEN-ELSE-ENDIF and cleaned up
     !           FORMATs.  (RWC)
-
+    USE slatec, ONLY : CCHDC
     INTEGER Kprint, Lun, Nerr
     COMPLEX work(4), at(5,4)
     INTEGER lda, p, job, info, jpvtt(4), i, j
@@ -117,7 +115,6 @@ CONTAINS
   END SUBROUTINE CCHQC
   !** CGBQC
   SUBROUTINE CGBQC(Lun,Kprint,Nerr)
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for CGBFA, CGBCO, CGBSL and CGBDI.
@@ -157,7 +154,7 @@ CONTAINS
     !   901010  Restructured using IF-THEN-ELSE-ENDIF, moved an ARITHMETIC
     !           STATEMENT FUNCTION ahead of the FIRST EXECUTABLE STATEMENT
     !           record and cleaned up FORMATs.  (RWC)
-
+    USE slatec, ONLY : CGBCO, CGBDI, CGBFA, CGBSL, CABS1
     INTEGER Kprint, Lun
     COMPLEX at(7,4), bt(4), det(2), z(4)
     REAL r, rcond
@@ -261,7 +258,6 @@ CONTAINS
   END SUBROUTINE CGBQC
   !** CGECK
   SUBROUTINE CGECK(Lun,Kprint,Nerr)
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for CGEFA, CGECO, CGESL and CGEDI.
@@ -301,7 +297,7 @@ CONTAINS
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   901010  Restructured using IF-THEN-ELSE-ENDIF and cleaned up
     !           FORMATs.  (RWC)
-
+    USE slatec, ONLY : CGECO, CGEDI, CGEFA, CGESL, CABS1
     INTEGER Kprint, Lun
     COMPLEX at(5,4), bt(4), det(2), z(4)
     REAL r, rcond
@@ -418,7 +414,6 @@ CONTAINS
   END SUBROUTINE CGECK
   !** CGTQC
   SUBROUTINE CGTQC(Lun,Kprint,Nerr)
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for CGTSL.
@@ -455,7 +450,7 @@ CONTAINS
     !   901010  Restructured using IF-THEN-ELSE-ENDIF, moved an ARITHMETIC
     !           STATEMENT FUNCTION ahead of the FIRST EXECUTABLE STATEMENT
     !           record and cleaned up FORMATs.  (RWC)
-
+    USE slatec, ONLY : CGTSL, CABS1
     INTEGER Kprint, Lun
     COMPLEX ct(4), dt(4), et(4), bt(4)
     INTEGER n, info, i, indx, Nerr
@@ -501,7 +496,6 @@ CONTAINS
   END SUBROUTINE CGTQC
   !** CHIQC
   SUBROUTINE CHIQC(Lun,Kprint,Nerr)
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for CHIFA, CHICO, CHISL and CHIDI.
@@ -541,7 +535,7 @@ CONTAINS
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   901010  Restructured using IF-THEN-ELSE-ENDIF and cleaned up
     !           FORMATs.  (RWC)
-
+    USE slatec, ONLY : CHICO, CHIDI, CHIFA, CHISL, CABS1
     INTEGER Kprint, Lun
     COMPLEX at(5,4), bt(4), z(4)
     REAL r, rcond, det(2)
@@ -655,7 +649,6 @@ CONTAINS
   END SUBROUTINE CHIQC
   !** CHPQC
   SUBROUTINE CHPQC(Lun,Kprint,Nerr)
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for CHPFA, CHPCO, CHPSL and CHPDI.
@@ -695,7 +688,7 @@ CONTAINS
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   901010  Restructured using IF-THEN-ELSE-ENDIF and cleaned up
     !           FORMATs.  (RWC)
-
+    USE slatec, ONLY : CHPCO, CHPDI, CHPFA, CHPSL, CABS1
     INTEGER Kprint, Lun
     COMPLEX at(10), bt(4), z(4)
     REAL r, rcond, det(2)
@@ -801,7 +794,6 @@ CONTAINS
   END SUBROUTINE CHPQC
   !** CPBQC
   SUBROUTINE CPBQC(Lun,Kprint,Nerr)
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for CPBFA, CPBCO, CPBSL and CPBDI.
@@ -840,7 +832,7 @@ CONTAINS
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   901010  Restructured using IF-THEN-ELSE-ENDIF and cleaned up
     !           FORMATs.  (RWC)
-
+    USE slatec, ONLY : CPBCO, CPBDI, CPBFA, CPBSL, CABS1
     INTEGER Kprint, Lun
     COMPLEX at(3,4), bt(4), z(4)
     REAL r, rcond, det(2)
@@ -930,7 +922,6 @@ CONTAINS
   END SUBROUTINE CPBQC
   !** CPOQC
   SUBROUTINE CPOQC(Lun,Kprint,Nerr)
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for CPOFA, CPOCO, CPOSL and CPODI.
@@ -970,7 +961,7 @@ CONTAINS
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   901010  Restructured using IF-THEN-ELSE-ENDIF and cleaned up
     !           FORMATs.  (RWC)
-
+    USE slatec, ONLY : CPOCO, CPODI, CPOFA, CPOSL, CABS1
     INTEGER Kprint, Lun
     COMPLEX at(5,4), bt(4), z(4)
     REAL r, rcond, det(2)
@@ -1079,7 +1070,6 @@ CONTAINS
   END SUBROUTINE CPOQC
   !** CPPQC
   SUBROUTINE CPPQC(Lun,Kprint,Nerr)
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for CPPFA, CPPCO, CPPSL and CPPDI.
@@ -1119,7 +1109,7 @@ CONTAINS
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   901010  Restructured using IF-THEN-ELSE-ENDIF and cleaned up
     !           FORMATs.  (RWC)
-
+    USE slatec, ONLY : CPPCO, CPPDI, CPPFA, CPPSL, CABS1
     INTEGER Kprint, Lun
     COMPLEX at(10), bt(4), z(4)
     REAL r, rcond, det(2)
@@ -1219,7 +1209,6 @@ CONTAINS
   END SUBROUTINE CPPQC
   !** CPTQC
   SUBROUTINE CPTQC(Lun,Kprint,Nerr)
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for CPTSL.
@@ -1255,7 +1244,7 @@ CONTAINS
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   901010  Restructured using IF-THEN-ELSE-ENDIF and cleaned up
     !           FORMATs.  (RWC)
-
+    USE slatec, ONLY : CPTSL, CABS1
     INTEGER Kprint, Lun
     COMPLEX dt(4), et(4), bt(4)
     INTEGER n, i, indx, Nerr
@@ -1293,7 +1282,6 @@ CONTAINS
   END SUBROUTINE CPTQC
   !** CQRQC
   SUBROUTINE CQRQC(Lun,Kprint,Nerr)
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for CQRDC and CQRSL.
@@ -1330,7 +1318,7 @@ CONTAINS
     !   901010  Restructured using IF-THEN-ELSE-ENDIF, moved an ARITHMETIC
     !           STATEMENT FUNCTION ahead of the FIRST EXECUTABLE STATEMENT
     !           record and cleaned up FORMATs.  (RWC)
-
+    USE slatec, ONLY : CQRDC, CQRSL, CABS1
     INTEGER Kprint, Lun
     COMPLEX qraux(4), work(4), qy(4), qty(4), b(4), rsd(4), xb(4), at(5,4)
     INTEGER ldx, n, p, job, k, infO, jpvtt(4), i, j, indx(5), Nerr, l
@@ -1445,7 +1433,6 @@ CONTAINS
   END SUBROUTINE CQRQC
   !** CSIQC
   SUBROUTINE CSIQC(Lun,Kprint,Nerr)
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for CSIFA, CSICO, CSISL and CSIDI.
@@ -1485,7 +1472,7 @@ CONTAINS
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   901010  Restructured using IF-THEN-ELSE-ENDIF and cleaned up
     !           FORMATs.  (RWC)
-
+    USE slatec, ONLY : CSICO, CSIDI, CSIFA, CSISL, CABS1
     INTEGER Kprint, Lun
     COMPLEX at(5,4), bt(4), det(2), z(4)
     REAL r, rcond
@@ -1588,7 +1575,6 @@ CONTAINS
   END SUBROUTINE CSIQC
   !** CSPQC
   SUBROUTINE CSPQC(Lun,Kprint,Nerr)
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for CSPFA, CSPCO, CSPSL and CSPDI.
@@ -1628,7 +1614,7 @@ CONTAINS
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   901010  Restructured using IF-THEN-ELSE-ENDIF and cleaned up
     !           FORMATs.  (RWC)
-
+    USE slatec, ONLY : CSPCO, CSPDI, CSPFA, CSPSL, CABS1
     INTEGER Kprint, Lun
     COMPLEX at(10), bt(4), det(2), z(4)
     REAL r, rcond
@@ -1723,7 +1709,6 @@ CONTAINS
   END SUBROUTINE CSPQC
   !** CSVQC
   SUBROUTINE CSVQC(Lun,Kprint,Nerr)
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for CSVDC.
@@ -1760,7 +1745,7 @@ CONTAINS
     !   901010  Restructured using IF-THEN-ELSE-ENDIF, moved an ARITHMETIC
     !           STATEMENT FUNCTION ahead of the FIRST EXECUTABLE STATEMENT
     !           record and cleaned up FORMATs.  (RWC)
-
+    USE slatec, ONLY : CSVDC, CABS1
     INTEGER kone, Kprint, Lun, Nerr
     COMPLEX work(4), s(4), e(4), u(4,4), v(4,4), at(5,4)
     INTEGER ldx, n, p, ldu, ldv, job, info
@@ -1833,7 +1818,6 @@ CONTAINS
   END SUBROUTINE CSVQC
   !** CTRQC
   SUBROUTINE CTRQC(Lun,Kprint,Nerr)
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for CTRFA, CTRCO, CTRSL and CTRDI.
@@ -1873,7 +1857,7 @@ CONTAINS
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   901010  Restructured using IF-THEN-ELSE-ENDIF and cleaned up
     !           FORMATs.  (RWC)
-
+    USE slatec, ONLY : CTRCO, CTRDI, CTRSL, CABS1
     INTEGER Kprint, Lun
     COMPLEX at(5,4), bt(4), det(2), z(4)
     REAL r, rcond
@@ -2013,8 +1997,10 @@ CONTAINS
 END MODULE TEST23_MOD
 !** TEST23
 PROGRAM TEST23
-  USE TEST23_MOD
-  use slatec
+  USE TEST23_MOD, ONLY : CCHQC, CGBQC, CGECK, CGTQC, CHIQC, CHPQC, CPBQC, CPOQC, &
+    CPPQC, CPTQC, CQRQC, CSIQC, CSPQC, CSVQC, CTRQC
+  USE slatec, ONLY : I1MACH, XSETF, XSETUN, XERMAX
+  USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !>
   !***

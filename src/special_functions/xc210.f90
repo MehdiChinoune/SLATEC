@@ -1,6 +1,5 @@
 !** XC210
 SUBROUTINE XC210(K,Z,J,Ierror)
-  USE XBLK ,ONLY: NLG102, MLG102, LG102
   !>
   !***
   !  To provide single-precision floating-point arithmetic
@@ -51,7 +50,8 @@ SUBROUTINE XC210(K,Z,J,Ierror)
   !           section.  (WRB)
   !           CALLs to XERROR changed to CALLs to XERMSG.  (WRB)
   !   920127  Revised PURPOSE section of prologue.  (DWL)
-
+  USE XBLK ,ONLY: NLG102, MLG102, LG102
+  USE service, ONLY : XERMSG
   INTEGER i, ic, id, Ierror, ii, it, ja, ka, ka1, ka2, m, nm1, np1, K, J
   REAL Z
   !

@@ -36,7 +36,7 @@ REAL(8) FUNCTION DPOCH(A,X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900727  Added EXTERNAL statement.  (WRB)
-
+  USE service, ONLY : XERMSG
   INTEGER i, ia, n
   REAL(8) :: A, X, absa, absax, alnga, alngax, ax, b, sgnga, sgngax
   REAL(8), PARAMETER :: pi = 3.141592653589793238462643383279503D0

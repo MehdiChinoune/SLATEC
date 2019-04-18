@@ -41,7 +41,7 @@ REAL(8) FUNCTION DBESK0(X)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-
+  USE service, ONLY : XERMSG, D1MACH
   REAL(8) :: X, xmaxt, y
   INTEGER, SAVE :: ntk0
   REAL(8), SAVE :: xsml, xmax

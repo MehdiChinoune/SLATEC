@@ -59,7 +59,8 @@ SUBROUTINE CPQR79(Ndeg,Coeff,Root,Ierr,Work)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   911010  Code reworked and simplified.  (RWC and WRB)
-
+  USE service, ONLY : XERMSG
+  USE linear, ONLY : COMQR
   INTEGER km1
   COMPLEX Coeff(*), Root(*), scalee, c
   REAL Work(*)

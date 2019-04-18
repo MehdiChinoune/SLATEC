@@ -1,11 +1,9 @@
 MODULE TEST46_MOD
-  use slatec
   IMPLICIT NONE
 
 CONTAINS
   !** DDQCK
   SUBROUTINE DDQCK(Lun,Kprint,Ipass)
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for SLATEC routines DDRIV1, DDRIV2 and DDRIV3.
@@ -39,7 +37,7 @@ CONTAINS
     !* REVISION HISTORY  (YYMMDD)
     !   890405  DATE WRITTEN
     !   890405  Revised to meet SLATEC standards.
-
+    USE slatec, ONLY : D1MACH, DDRIV1, DDRIV2, DDRIV3, XERCLR
     REAL(8) :: eps, t, tout
     INTEGER ierflg, Ipass, Kprint, leniw, leniwx, lenw, lenwx, Lun, mint, &
       mstate, nde, nfe, nje, nstate, nstep, nx
@@ -415,7 +413,6 @@ CONTAINS
   END SUBROUTINE DDQCK
   !** DDF
   SUBROUTINE DDF(N,T,Y,Yp)
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for SLATEC routines DDRIV1, DDRIV2 and DDRIV3.
@@ -455,8 +452,9 @@ CONTAINS
 END MODULE TEST46_MOD
 !** TEST46
 PROGRAM TEST46
-  USE TEST46_MOD
-  use slatec
+  USE TEST46_MOD, ONLY : DDQCK
+  USE slatec, ONLY : I1MACH, XSETF, XSETUN, XERMAX
+  USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !>
   !***

@@ -68,7 +68,7 @@ SUBROUTINE BSGQ8(FUN,Xt,Bc,N,Kk,Id,A,B,Inbv,Err,Ans,Ierr,Work)
   !           (WRB)
   !   900328  Added TYPE section.  (WRB)
   !   910408  Updated the AUTHOR section.  (WRB)
-
+  USE service, ONLY : XERMSG, R1MACH, I1MACH
   !
   INTERFACE
     REAL FUNCTION FUN(X)

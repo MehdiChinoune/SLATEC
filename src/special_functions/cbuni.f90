@@ -26,7 +26,7 @@ SUBROUTINE CBUNI(Z,Fnu,Kode,N,Y,Nz,Nui,Nlast,Fnul,Tol,Elim,Alim)
   !* REVISION HISTORY  (YYMMDD)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
-
+  USE service, ONLY : R1MACH
   INTEGER i, iflag, iform, k, Kode, N, nl, Nlast, Nui, nw, Nz
   COMPLEX cscl, cscr, cy(2), rz, st, s1, s2, Y(N), Z
   REAL Alim, ax, ay, dfnu, Elim, Fnu, fnui, Fnul, gnu, Tol, xx, &

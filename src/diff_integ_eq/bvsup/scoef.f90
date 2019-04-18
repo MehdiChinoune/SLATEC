@@ -1,7 +1,6 @@
 !** SCOEF
 SUBROUTINE SCOEF(Yh,Yp,Ncomp,Nrowb,Nfc,Nic,B,Beta,Coef,Inhomo,Re,Ae,By,&
     Cvec,Work,Iwork,Iflag,Nfcc)
-  USE ML, ONLY : EPS
   !>
   !***
   !  Subsidiary to BVSUP
@@ -78,7 +77,9 @@ SUBROUTINE SCOEF(Yh,Yp,Ncomp,Nrowb,Nfc,Nic,B,Beta,Coef,Inhomo,Re,Ae,By,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
-
+  USE ML, ONLY : EPS
+  USE service, ONLY : XGETF, XSETF
+  USE linear, ONLY : SDOT
   INTEGER i, Iflag, Inhomo, Iwork(*), j, k, kflag, ki, l, mlso, Ncomp, ncomp2, &
     nf, Nfc, Nfcc, nfccm1, Nic, Nrowb
   REAL Ae, B(Nrowb,*), bbn, Beta(*), bn, brn, By(Nfcc,*), bykl, bys, Coef(*), cons, &

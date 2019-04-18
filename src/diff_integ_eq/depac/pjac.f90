@@ -1,6 +1,5 @@
 !** PJAC
 SUBROUTINE PJAC(Neq,Y,Yh,Nyh,Ewt,Ftem,Savf,Wm,Iwm,F,JAC,Rpar,Ipar)
-  USE DEBDF1, ONLY : EL0, H, TN, UROund, IER, MITer, N, NFE, NJE
   !>
   !***
   !  Subsidiary to DEBDF
@@ -30,7 +29,8 @@ SUBROUTINE PJAC(Neq,Y,Yh,Nyh,Ewt,Ftem,Savf,Wm,Iwm,F,JAC,Rpar,Ipar)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
   !   920422  Changed DIMENSION statement.  (WRB)
-
+  USE DEBDF1, ONLY : EL0, H, TN, UROund, IER, MITer, N, NFE, NJE
+  USE linear, ONLY : SGBFA, SGEFA
   INTEGER Ipar(*)
   REAL Rpar(*)
   !

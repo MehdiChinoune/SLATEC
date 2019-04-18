@@ -563,6 +563,8 @@ SUBROUTINE SBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,&
   !     /SSCAL/ TO /DSCAL/, /SASUM/ TO /DASUM/, /SBOLS/ TO /DBOLS/,
   !     /REAL            / TO /DOUBLE PRECISION/.
   ! ++
+  USE linear, ONLY : SASUM, SCOPY, SDOT, SNRM2, SSCAL
+  USE service, ONLY : XERMSG, R1MACH
   INTEGER i, icase, iiw, inrows, ip, irw, iscale, j, jp, lbou, lboum, lds, lenx, &
     liopt, liw, llb, lliw, llrw, llx, lmdw, lndw, locacc, locdim, lopt, lp, lrw, &
     m, Mcon, Mdw, mdwl, mnew, Mode, modec, mopt, mout, Mrows, Ncols, nerr

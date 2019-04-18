@@ -1,8 +1,5 @@
 !** STOD
 SUBROUTINE STOD(Neq,Y,Yh,Nyh,Yh1,Ewt,Savf,Acor,Wm,Iwm,F,JAC,Rpar,Ipar)
-  USE DEBDF1, ONLY : CONit, CRAte, EL, ELCo, HOLd, RC, RMAx, TESco, EL0, H, HMIn, &
-    HMXi, HU, TN, KSTeps, IALth, IPUp, LMAx, MEO, NQNyh, NSTepj, IER, JSTart, &
-    KFLag, L, METh, MITer, MAXord, N, NQ, NST, NFE, NQU
   !>
   !***
   !  Subsidiary to DEBDF
@@ -95,7 +92,9 @@ SUBROUTINE STOD(Neq,Y,Yh,Nyh,Yh1,Ewt,Savf,Acor,Wm,Iwm,F,JAC,Rpar,Ipar)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
   !   920422  Changed DIMENSION statement.  (WRB)
-
+  USE DEBDF1, ONLY : CONit, CRAte, EL, ELCo, HOLd, RC, RMAx, TESco, EL0, H, HMIn, &
+    HMXi, HU, TN, KSTeps, IALth, IPUp, LMAx, MEO, NQNyh, NSTepj, IER, JSTart, &
+    KFLag, L, METh, MITer, MAXord, N, NQ, NST, NFE, NQU
   INTEGER Ipar(*)
   REAL Rpar(*)
   EXTERNAL :: F, JAC

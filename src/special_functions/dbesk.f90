@@ -85,7 +85,7 @@ SUBROUTINE DBESK(X,Fnu,Kode,N,Y,Nz)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-
+  USE service, ONLY : XERMSG, D1MACH, I1MACH
   !
   INTEGER i, j, k, Kode, mz, N, nb, nd, nn, nud, Nz
   REAL(8) :: cn, dnu, elim, etx, flgik, fn, fnn, Fnu, gln, &

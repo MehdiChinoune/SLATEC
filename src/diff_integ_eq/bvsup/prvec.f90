@@ -25,7 +25,7 @@ REAL FUNCTION PRVEC(M,U,V)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
-
+  USE linear, ONLY : SDOT
   INTEGER M, n, np
   REAL U(*), V(*), vp
   !* FIRST EXECUTABLE STATEMENT  PRVEC

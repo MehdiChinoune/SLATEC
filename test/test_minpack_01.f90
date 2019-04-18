@@ -1,11 +1,9 @@
 MODULE TEST35_MOD
-  use slatec
   IMPLICIT NONE
 
 CONTAINS
   !** SNSQQK
   SUBROUTINE SNSQQK(Lun,Kprint,Ipass)
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for SNSQE and SNSQ.
@@ -32,7 +30,8 @@ CONTAINS
     !   891009  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   920310  Code cleaned up and TYPE section added.  (RWC, WRB)
-
+    USE slatec, ONLY : ENORM, R1MACH, SNSQE
+    USE common_mod, ONLY : PASS
     !     .. Scalar Arguments ..
     INTEGER Ipass, Kprint, Lun
     !     .. Local Scalars ..
@@ -116,7 +115,6 @@ CONTAINS
   END SUBROUTINE SNSQQK
   !** SOSFNC
   REAL FUNCTION SOSFNC(X,K)
-    IMPLICIT NONE
     !>
     !***
     !  Function evaluator for SOS quick check.
@@ -153,7 +151,6 @@ CONTAINS
   END FUNCTION SOSFNC
   !** SOSNQX
   SUBROUTINE SOSNQX(Lun,Kprint,Ipass)
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for SOS.
@@ -178,7 +175,8 @@ CONTAINS
     !   890618  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   920310  Code cleaned up and TYPE section added.  (RWC, WRB)
-
+    USE slatec, ONLY : R1MACH, SNRM2, SOS
+    USE common_mod, ONLY : PASS
     !     .. Scalar Arguments ..
     INTEGER Ipass, Kprint, Lun
     !     .. Local Scalars ..
@@ -247,7 +245,6 @@ CONTAINS
   END SUBROUTINE SOSNQX
   !** SQFCN2
   SUBROUTINE SQFCN2(N,X,Fvec,Iflag)
-    IMPLICIT NONE
     !>
     !***
     !  Evaluate function used in SNSQE.
@@ -284,7 +281,6 @@ CONTAINS
   END SUBROUTINE SQFCN2
   !** SQJAC2
   SUBROUTINE SQJAC2(N,X,Fvec,Fjac,Ldfjac,Iflag)
-    IMPLICIT NONE
     !>
     !***
     !  Evaluate full Jacobian for SNSQE test.
@@ -320,8 +316,9 @@ CONTAINS
 END MODULE TEST35_MOD
 !** TEST35
 PROGRAM TEST35
-  USE TEST35_MOD
-  use slatec
+  USE TEST35_MOD, ONLY : SNSQQK, SOSNQX
+  USE slatec, ONLY : I1MACH, XSETF, XSETUN, XERMAX
+  USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !>
   !***

@@ -56,7 +56,7 @@ SUBROUTINE D9B0MP(X,Ampl,Theta)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
   !   920618  Removed space from variable names.  (RWC, WRB)
-
+  USE service, ONLY : XERMSG, D1MACH
   REAL eta
   REAL(8) :: X, Ampl, Theta, z
   INTEGER, SAVE :: nbm0, nbt02, nbm02, nbth0

@@ -1,6 +1,5 @@
 !** DINTYD
 SUBROUTINE DINTYD(T,K,Yh,Nyh,Dky,Iflag)
-  USE DDEBD1, ONLY : H, HU, TN, UROund, L, N, NQ
   !>
   !***
   !  Subsidiary to DDEBDF
@@ -50,7 +49,7 @@ SUBROUTINE DINTYD(T,K,Yh,Nyh,Dky,Iflag)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
-
+  USE DDEBD1, ONLY : H, HU, TN, UROund, L, N, NQ
   !
   INTEGER i, ic, Iflag, j, jb, jb2, jj, jj1, jp1, K, Nyh
   REAL(8) :: c, Dky(*), r, s, T, tp, Yh(Nyh,*)

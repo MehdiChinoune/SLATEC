@@ -111,7 +111,8 @@ SUBROUTINE QC25F(F,A,B,Omega,Integr,Nrmom,Maxp1,Ksave,Result,Abserr,Neval,&
   !   810101  DATE WRITTEN
   !   861211  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
-
+  USE service, ONLY : R1MACH
+  USE linear, ONLY : SGTSL
   !
   INTEGER i, iers, Integr, isym, j, k, Ksave, m, Maxp1, Momcom, &
     Neval, noequ, noeq1, Nrmom

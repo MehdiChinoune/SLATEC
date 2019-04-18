@@ -40,7 +40,7 @@ SUBROUTINE SPLPCE(Mrelas,Nvars,Lmx,Lbm,Itlp,Itbrc,Ibasis,Imat,Ibrc,Ipr,&
   !   890605  Removed unreferenced labels.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
-
+  USE linear, ONLY : SCOPY, SASUM
   INTEGER i, ihi, il1, ilow, ipage, Itbrc, Itlp, iu1, j, key, l, Lbm, Lmx, lpg, &
     Mrelas, n20002, n20012, n20016, n20023, n20047, n20057, n20061, Nvars
   INTEGER Ibasis(*), Imat(*), Ibrc(Lbm,2), Ipr(*), Iwr(*), Ind(*), Ibb(*)

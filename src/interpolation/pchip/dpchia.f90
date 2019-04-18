@@ -115,7 +115,7 @@ REAL(8) FUNCTION DPCHIA(N,X,F,D,Incfd,Skip,A,B,Ierr)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   930503  Corrected to set VALUE=0 when IERR.lt.0.  (FNF)
   !   930504  Changed DCHFIV to DCHFIE.  (FNF)
-
+  USE service, ONLY : XERMSG
   !
   !  Programming notes:
   !  1. The error flag from DPCHID is tested, because a logic flaw

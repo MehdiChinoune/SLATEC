@@ -31,7 +31,7 @@ SUBROUTINE DWRITP(Ipage,List,Rlist,Lpage,Irec)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
-  
+  USE service, ONLY : XERMSG
   INTEGER i, Ipage, ipagef, Irec, irecn, Lpage, lpg
   INTEGER List(*)
   REAL(8) :: Rlist(*)

@@ -121,7 +121,8 @@ SUBROUTINE LSSODS(A,X,B,M,N,Nrda,Iflag,Irank,Iscale,Q,Diag,Kpivot,Iter,&
   !   900402  Added TYPE section.  (WRB)
   !   910408  Updated the REFERENCES section.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-
+  USE service, ONLY : XERMSG, XGETF, XSETF, XERMAX, J4SAVE, R1MACH
+  USE linear, ONLY : SDOT, SDSDOT
   INTEGER nfatal, nmir, Nrda
   REAL A(Nrda,*), acc, B(*), Diag(*), Div(*), gam, gama, Q(Nrda,*), R(*), &
     Resnrm, Scales(*), Td(*), uro, X(*), Xnorm, Z(*), znorm

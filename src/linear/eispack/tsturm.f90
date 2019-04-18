@@ -122,7 +122,7 @@ SUBROUTINE TSTURM(Nm,N,Eps1,D,E,E2,Lb,Ub,Mm,M,W,Z,Ierr,Rv1,Rv2,Rv3,Rv4,Rv5,Rv6)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-
+  USE service, ONLY : R1MACH
   INTEGER :: i, j, k, M, N, p, q, r, s, ii, ip, jj, Mm, m1, m2, Nm, its, Ierr, &
     group, isturm
   REAL :: D(*), E(*), E2(*), W(*), Z(Nm,*), Rv1(*), Rv2(*), Rv3(*), Rv4(*), &

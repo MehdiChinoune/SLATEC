@@ -1,7 +1,6 @@
 !** ISSIR
 INTEGER FUNCTION ISSIR(N,B,X,Nelt,Ia,Ja,A,Isym,MSOLVE,Itol,Tol,Itmax,Iter,&
     Err,Ierr,Iunit,R,Z,Dz,Rwork,Iwork,Bnrm,Solnrm)
-  USE SSLBLK
   !>
   !***
   !  Preconditioned Iterative Refinement Stop Test.
@@ -163,7 +162,8 @@ INTEGER FUNCTION ISSIR(N,B,X,Nelt,Ia,Ja,A,Isym,MSOLVE,Itol,Tol,Itmax,Iter,&
   !   920407  COMMON BLOCK renamed SSLBLK.  (WRB)
   !   920511  Added complete declaration section.  (WRB)
   !   921026  Changed 1.0E10 to R1MACH(2).  (FNF)
-
+  USE SSLBLK, ONLY : SOLn
+  USE service, ONLY : R1MACH
   !     .. Scalar Arguments ..
   REAL Bnrm, Err, Solnrm, Tol
   INTEGER Ierr, Isym, Iter, Itmax, Itol, Iunit, N, Nelt

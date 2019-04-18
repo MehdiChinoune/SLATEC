@@ -22,7 +22,7 @@ SUBROUTINE CBKNU(Z,Fnu,Kode,N,Y,Nz,Tol,Elim,Alim)
   !* REVISION HISTORY  (YYMMDD)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
-
+  USE service, ONLY : R1MACH, I1MACH
   !
   INTEGER i, idum, iflag, inu, k, kflag, kk, Kode, koded, N, Nz, nw, j, ic, inub
   COMPLEX cch, ck, coef, crsc, cs, cscl, csh, csr(3), css(3), cz, f, fmu, p, &

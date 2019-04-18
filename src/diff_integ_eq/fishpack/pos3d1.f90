@@ -23,7 +23,8 @@ SUBROUTINE POS3D1(Lp,L,Mp,M,N,A,B,C,Ldimf,Mdimf,F,Xrt,Yrt,T,D,Wx,Wy,C1,C2,Bb)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900308  Changed call to TRID to call to TRIDQ.  (WRB)
   !   900402  Added TYPE section.  (WRB)
-
+  USE integ_trans, ONLY : COSQB, COSQF, COSQI, COST, COSTI, RFFTB, RFFTF, RFFTI, &
+    SINQB, SINQF, SINQI, SINT, SINTI
   INTEGER i, ifwrd, j, k, L, Ldimf, Lp, lr, lrdel, M, Mdimf, Mp, mr, mrdel, N, nr
   REAL A(*), B(*), Bb(*), C(*), C1, C2, D(*), di, dj, dum, dx, dy, F(Ldimf,Mdimf,*), pi, &
     scalx, scaly, T(*), Wx(*), Wy(*)

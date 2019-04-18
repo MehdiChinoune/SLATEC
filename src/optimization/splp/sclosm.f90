@@ -25,7 +25,7 @@ SUBROUTINE SCLOSM(Ipage)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
-  
+  USE service, ONLY : XERMSG
   INTEGER ios, Ipage, ipagef
   CHARACTER(8) :: xern1
   !

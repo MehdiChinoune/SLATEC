@@ -34,7 +34,7 @@ SUBROUTINE HKSEQ(X,M,H,Ierr)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
   !   920528  DESCRIPTION and REFERENCES sections revised.  (WRB)
-
+  USE service, ONLY : R1MACH, I1MACH
   INTEGER i, Ierr, j, k, M, mx, nx
   REAL fk, fln, fn, fnp, H(*), hrx, rln, rxsq, r1m5, s, slope, &
     t, tk, trm(22), trmh(25), trmr(25), tst, u(25), v(25), wdtol, X, xdmy, xh, &

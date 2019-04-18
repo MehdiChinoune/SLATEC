@@ -141,7 +141,7 @@ SUBROUTINE ZBIRY(Zr,Zi,Id,Kode,Bir,Bii,Ierr)
   !   920128  Category corrected.  (WRB)
   !   920811  Prologue revised.  (DWL)
   !   930122  Added ZSQRT to EXTERNAL statement.  (RWC)
-
+  USE service, ONLY : D1MACH, I1MACH
   !     COMPLEX BI,CONE,CSQ,CY,S1,S2,TRM1,TRM2,Z,ZTA,Z3
   REAL(8) :: aa, ad, ak, alim, atrm, az, az3, bb, Bii, Bir, bk, cc, ck, &
     csqi, csqr, cyi(2), cyr(2), dig, dk, d1, d2, eaa, elim, fid, fmr, &

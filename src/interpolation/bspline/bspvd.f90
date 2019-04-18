@@ -81,7 +81,7 @@ SUBROUTINE BSPVD(T,K,Nderiv,X,Ileft,Ldvnik,Vnikx,Work)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-
+  USE service, ONLY : XERMSG
   INTEGER iwork, Ldvnik
   INTEGER i, ideriv, Ileft, ipkmd, j, jj, jlow, jm, jp1mid, K, &
     kmd, kp1, l, ldummy, m, mhigh, Nderiv

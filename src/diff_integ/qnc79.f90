@@ -78,7 +78,7 @@ SUBROUTINE QNC79(FUN,A,B,Err,Ans,Ierr,K)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920218  Code and prologue polished.  (WRB)
-
+  USE service, ONLY : XERMSG, R1MACH, I1MACH
   !     .. Scalar Arguments ..
   REAL A, Ans, B, Err
   INTEGER Ierr, K

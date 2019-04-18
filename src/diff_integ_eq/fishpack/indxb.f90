@@ -1,6 +1,5 @@
 !** INDXB
 SUBROUTINE INDXB(I,Ir,Idx,Idp)
-  USE CBLKT
   !>
   !***
   !  Subsidiary to BLKTRI
@@ -22,7 +21,7 @@ SUBROUTINE INDXB(I,Ir,Idx,Idp)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   !   920422  Added statement so IDX would always be defined.  (WRB)
-
+  USE CBLKT, ONLY : IK, NM
   INTEGER I, id, Idp, Idx, ipl, Ir, izh
   !* FIRST EXECUTABLE STATEMENT  INDXB
   Idx = max(I,1)

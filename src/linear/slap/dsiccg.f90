@@ -243,7 +243,7 @@ SUBROUTINE DSICCG(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
   !   920511  Added complete declaration section.  (WRB)
   !   920929  Corrected format of references.  (FNF)
   !   921019  Corrected NEL to NL.  (FNF)
-
+  USE service, ONLY : XERMSG
   !     .. Parameters ..
   INTEGER, PARAMETER :: LOCRB = 1, LOCIB = 11
   !     .. Scalar Arguments ..

@@ -1,11 +1,9 @@
 MODULE TEST28_MOD
-  use slatec
   IMPLICIT NONE
 
 CONTAINS
   !** DLSEIT
   SUBROUTINE DLSEIT(Lun,Kprint,Ipass)
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for DLSEI.
@@ -37,7 +35,8 @@ CONTAINS
     !   920722  Initialized IP(1) and IP(2) for CALL to DLSEI.  (BKS, WRB)
     !   930214  Declarations sections added, code revised to test error
     !           returns for all values of KPRINT and code polished.  (WRB)
-
+    USE slatec, ONLY : D1MACH, DAXPY, DCOPY, DDOT, DLSEI, DNRM2, DVOUT, XGETF, &
+      XSETF, XERCLR, NUMXER
     !     .. Scalar Arguments ..
     INTEGER Ipass, Kprint, Lun
     !     .. Local Scalars ..
@@ -245,7 +244,6 @@ CONTAINS
   END SUBROUTINE DLSEIT
   !** DQCGLS
   SUBROUTINE DQCGLS(Lun,Kprint,Ipass)
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for DGLSS.
@@ -288,7 +286,7 @@ CONTAINS
     !   901010  Restructured using IF-THEN-ELSE-ENDIF, cleaned up FORMATs,
     !           including removing an illegal character from column 1, and
     !           editorial changes.  (RWC)
-
+    USE slatec, ONLY : D1MACH, DGLSS
     REAL(8) :: a(4,4), b(4), delmax, delx, r, rnorm(1), work(50)
     INTEGER i, Ipass, j, kk, Kprint, nerr, kprog, kcase, iwork(20), info, Lun
     REAL(8), PARAMETER :: aa(4,4,2) = RESHAPE( [1.D0, .5D0, 1.D0, .25D0, &
@@ -391,8 +389,9 @@ CONTAINS
 END MODULE TEST28_MOD
 !** TEST28
 PROGRAM TEST28
-  USE TEST28_MOD
-  use slatec
+  USE TEST28_MOD, ONLY : DLSEIT, DQCGLS
+  USE slatec, ONLY : I1MACH, XSETF, XSETUN, XERMAX
+  USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !>
   !***

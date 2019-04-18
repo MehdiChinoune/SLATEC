@@ -75,7 +75,9 @@ SUBROUTINE DWNLSM(W,Mdw,Mme,Ma,N,L,Prgopt,X,Rnorm,Mode,Ipivot,Itype,Wd,H,&
   !   900510  Fixed an error message.  (RWC)
   !   900604  DP version created from SP version.  (RWC)
   !   900911  Restriction on value of ALAMDA included.  (WRB)
-
+  USE service, ONLY : XERMSG, D1MACH
+  USE linear, ONLY : DASUM, DAXPY, DCOPY, DH12, DNRM2, DROTM, DROTMG, DSCAL, &
+    DSWAP, IDAMAX
   INTEGER Ipivot(*), Itype(*), L, Ma, Mdw, Mme, Mode, N
   REAL(8) :: D(*), H(*), Prgopt(*), Rnorm, Scalee(*), Temp(*), &
     W(Mdw,*), Wd(*), X(*), Z(*)

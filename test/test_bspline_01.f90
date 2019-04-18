@@ -1,11 +1,9 @@
 MODULE TEST30_MOD
-  use slatec
   IMPLICIT NONE
 
 CONTAINS
   !** BSPCK
   SUBROUTINE BSPCK(Lun,Kprint,Ipass)
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for the B-Spline package.
@@ -41,7 +39,8 @@ CONTAINS
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   930214  Declarations sections added, code revised to test error
     !           returns for all values of KPRINT and code polished.  (WRB)
-
+    USE slatec, ONLY : BFQAD, BINT4, BINTK, BSPDR, BSPEV, BSPPP, BSPVD, BSPVN, &
+      BSQAD, BVALU, INTRV, PFQAD, PPQAD, PPVAL, R1MACH, XGETF, XSETF, XERCLR, NUMXER
     !     .. Scalar Arguments ..
     INTEGER Ipass, Kprint, Lun
     !     .. Local Scalars ..
@@ -456,7 +455,6 @@ CONTAINS
   END SUBROUTINE BSPCK
   !** FB
   REAL FUNCTION FB(X)
-    IMPLICIT NONE
     !>
     !***
     !  Subsidiary to BSPCK.
@@ -481,8 +479,9 @@ CONTAINS
 END MODULE TEST30_MOD
 !** TEST30
 PROGRAM TEST30
-  USE TEST30_MOD
-  use slatec
+  USE TEST30_MOD, ONLY : BSPCK
+  USE slatec, ONLY : I1MACH, XSETF, XSETUN, XERMAX
+  USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !>
   !***

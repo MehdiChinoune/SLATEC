@@ -264,7 +264,7 @@ SUBROUTINE DIR(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,Iter,&
   !   920511  Added complete declaration section.  (WRB)
   !   920929  Corrected format of references.  (FNF)
   !   921019  Changed 500.0 to 500 to reduce SP/DP differences.  (FNF)
-
+  USE service, ONLY : D1MACH
   !     .. Scalar Arguments ..
   REAL(8) :: Err, Tol
   INTEGER Ierr, Isym, Iter, Itmax, Itol, Iunit, N, Nelt

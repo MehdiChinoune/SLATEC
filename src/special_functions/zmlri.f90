@@ -24,7 +24,7 @@ SUBROUTINE ZMLRI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
   !   930122  Added ZEXP and ZLOG to EXTERNAL statement.  (RWC)
-
+  USE service, ONLY : D1MACH
   !     COMPLEX CK,CNORM,CONE,CTWO,CZERO,PT,P1,P2,RZ,SUM,Y,Z
   INTEGER i, iaz, idum, ifnu, inu, itime, k, kk, km, Kode, m, N, Nz
   REAL(8) :: ack, ak, ap, at, az, bk, cki, ckr, cnormi, cnormr, fkap, fkk, flam, &

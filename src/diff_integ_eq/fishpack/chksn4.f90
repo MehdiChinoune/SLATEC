@@ -1,6 +1,5 @@
 !** CHKSN4
 SUBROUTINE CHKSN4(Mbdcnd,Nbdcnd,Alpha,Beta,COFX,Singlr)
-  USE SPL4
   !>
   !***
   !  Subsidiary to SEPX4
@@ -28,7 +27,7 @@ SUBROUTINE CHKSN4(Mbdcnd,Nbdcnd,Alpha,Beta,COFX,Singlr)
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
-
+  USE SPL4, ONLY : AIT, DLX, IS, MS
   REAL ai, Alpha, Beta, bi, ci, xi
   INTEGER i, Mbdcnd, Nbdcnd
   LOGICAL Singlr

@@ -1,6 +1,5 @@
 !** CCMPB
 SUBROUTINE CCMPB(N,Ierror,An,Bn,Cn,B,Ah,Bh)
-  USE CCBLK
   !>
   !***
   !  Subsidiary to CBLKTR
@@ -30,7 +29,8 @@ SUBROUTINE CCMPB(N,Ierror,An,Bn,Cn,B,Ah,Bh)
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
-
+  USE CCBLK, ONLY : K, CNV, EPS, NM, NPP
+  USE service, ONLY : R1MACH
   REAL Ah(*), An(*), arg, B(*), Bh(*), Bn(*), bnorm, Cn(*), d1, d2, d3
   INTEGER i, i2, i4, ib, Ierror, if, ifd, ipl, ir, j, j1, j2, jf, js, kdo, l, l1, &
     l2, lh, ls, N, n2m2, nb, nmp

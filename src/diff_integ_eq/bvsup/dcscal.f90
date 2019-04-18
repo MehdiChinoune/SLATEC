@@ -28,7 +28,7 @@ SUBROUTINE DCSCAL(A,Nrda,Nrow,Ncol,Cols,Colsav,Rows,Rowsav,Anorm,Scales,Iscale,I
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
-
+  USE linear, ONLY : DDOT
   INTEGER Ic, ip, Iscale, j, k, Ncol, Nrda, Nrow
   REAL(8) :: A(Nrda,*), alog2, Anorm, ascale, Cols(*), Colsav(*), &
     cs, p, Rows(*), Rowsav(*), s, Scales(*)

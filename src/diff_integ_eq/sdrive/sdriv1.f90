@@ -292,7 +292,7 @@ SUBROUTINE SDRIV1(N,T,Y,F,Tout,Mstate,Eps,Work,Lenw,Ierflg)
   !* REVISION HISTORY  (YYMMDD)
   !   790601  DATE WRITTEN
   !   900329  Initial submission to SLATEC.
-
+  USE service, ONLY : XERMSG, R1MACH
   EXTERNAL :: F
   REAL Eps, hmax, T, Tout, Work(*), Y(*)
   INTEGER i, Ierflg, leniw, Lenw, lenwcm, lnwchk, ml, Mstate, mu, N, nde, nstate, ntask

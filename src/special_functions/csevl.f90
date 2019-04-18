@@ -44,7 +44,7 @@ REAL FUNCTION CSEVL(X,Cs,N)
   !   900329  Prologued revised extensively and code rewritten to allow
   !           X to be slightly outside interval (-1,+1).  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-
+  USE service, ONLY : XERMSG, R1MACH
   INTEGER i, N, ni
   REAL b0, b1, b2, Cs(*), twox, X
   REAL, SAVE :: onepl

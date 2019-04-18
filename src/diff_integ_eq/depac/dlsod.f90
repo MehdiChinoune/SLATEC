@@ -1,9 +1,6 @@
 !** DLSOD
 SUBROUTINE DLSOD(DF,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,&
     Acor,Wm,Iwm,DJAC,Intout,Tstop,Tolfac,Delsgn,Rpar,Ipar)
-  USE DDEBD1, ONLY : TOLd, H, HMIn, HMXi, X => TN, U => UROund, IQUit, INIt, &
-    KSTeps, IBEgin, ITOl, IINteg, ITStop, IJAc, IBAnd, JSTart, KFLag, METh, &
-    MITer, MAXord, N, NQ, NST, NFE, NJE
   !>
   !***
   !  Subsidiary to DDEBDF
@@ -34,7 +31,10 @@ SUBROUTINE DLSOD(DF,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
-
+  USE DDEBD1, ONLY : TOLd, H, HMIn, HMXi, X => TN, U => UROund, IQUit, INIt, &
+    KSTeps, IBEgin, ITOl, IINteg, ITStop, IJAc, IBAnd, JSTart, KFLag, METh, &
+    MITer, MAXord, N, NQ, NST, NFE, NJE
+  USE service, ONLY : XERMSG, D1MACH
   !
   INTEGER Idid, intflg, Ipar(*), Iwm(*), k, l, ltol, natolp, Neq, nrtolp
   REAL(8) :: absdel, Acor(*), Atol(*), big, del, Delsgn, dt, &

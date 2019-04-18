@@ -1,11 +1,9 @@
 MODULE TEST13_MOD
-  use slatec
   IMPLICIT NONE
 
 CONTAINS
   !** QCRC
   SUBROUTINE QCRC(Lun,Kprint,Ipass)
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for RC.
@@ -28,7 +26,7 @@ CONTAINS
     !   890618  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   910708  Minor modifications in use of KPRINT.  (WRB)
-
+    USE slatec, ONLY : NUMXER, R1MACH, RC, XERCLR, XGETF, XSETF
     INTEGER Kprint, Ipass, contrl, kontrl, Lun, ier
     INTEGER ipass1, ipass2, ipass3, ipass4
     REAL pi, trc, dif
@@ -110,7 +108,6 @@ CONTAINS
   END SUBROUTINE QCRC
   !** QCRD
   SUBROUTINE QCRD(Lun,Kprint,Ipass)
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for RD.
@@ -133,7 +130,7 @@ CONTAINS
     !   890618  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   910708  Minor modifications in use of KPRINT.  (WRB)
-
+    USE slatec, ONLY : NUMXER, R1MACH, RD, XERCLR, XGETF, XSETF
     INTEGER Kprint, Ipass, contrl, kontrl, Lun, ier
     INTEGER ipass1, ipass2, ipass3, ipass4
     REAL blem, trd, dif
@@ -216,7 +213,6 @@ CONTAINS
   END SUBROUTINE QCRD
   !** QCRF
   SUBROUTINE QCRF(Lun,Kprint,Ipass)
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for RF.
@@ -239,7 +235,7 @@ CONTAINS
     !   890618  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   910708  Minor modifications in use of KPRINT.  (WRB)
-
+    USE slatec, ONLY : NUMXER, R1MACH, RF, XERCLR, XGETF, XSETF
     INTEGER Kprint, Ipass, contrl, kontrl, Lun, ier
     INTEGER ipass1, ipass2, ipass3, ipass4
     REAL alem, trf, dif
@@ -322,7 +318,6 @@ CONTAINS
   END SUBROUTINE QCRF
   !** QCRJ
   SUBROUTINE QCRJ(Lun,Kprint,Ipass)
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for RJ.
@@ -345,7 +340,7 @@ CONTAINS
     !   890618  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   910708  Minor modifications in use of KPRINT.  (WRB)
-
+    USE slatec, ONLY : NUMXER, R1MACH, RJ, XERCLR, XGETF, XSETF
     INTEGER Kprint, Ipass, contrl, kontrl, Lun, ier
     INTEGER ipass1, ipass2, ipass3, ipass4
     REAL consj, trj, dif
@@ -428,8 +423,9 @@ CONTAINS
 END MODULE TEST13_MOD
 !** TEST13
 PROGRAM TEST13
-  USE TEST13_MOD
-  use slatec
+  USE TEST13_MOD, ONLY : QCRC, QCRD, QCRF, QCRJ
+  USE slatec, ONLY : I1MACH, XSETF, XSETUN, XERMAX
+  USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !>
   !***

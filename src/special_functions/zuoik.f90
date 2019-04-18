@@ -41,7 +41,7 @@ SUBROUTINE ZUOIK(Zr,Zi,Fnu,Kode,Ikflg,N,Yr,Yi,Nuf,Tol,Elim,Alim)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
   !   930122  Added ZLOG to EXTERNAL statement.  (RWC)
-
+  USE service, ONLY : D1MACH
   !     COMPLEX ARG,ASUM,BSUM,CWRK,CZ,CZERO,PHI,SUM,Y,Z,ZB,ZETA1,ZETA2,ZN,
   !    *ZR
   INTEGER i, idum, iform, Ikflg, init, Kode, N, nn, Nuf, nw

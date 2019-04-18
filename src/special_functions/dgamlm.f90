@@ -38,7 +38,7 @@ SUBROUTINE DGAMLM(Xmin,Xmax)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-
+  USE service, ONLY : XERMSG, D1MACH
   INTEGER i
   REAL(8) :: Xmin, Xmax, alnbig, alnsml, xln, xold
   !* FIRST EXECUTABLE STATEMENT  DGAMLM

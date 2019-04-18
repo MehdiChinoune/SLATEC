@@ -24,7 +24,7 @@ SUBROUTINE ZBKNU(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol,Elim,Alim)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
   !   930122  Added ZEXP, ZLOG and ZSQRT to EXTERNAL statement.  (RWC)
-
+  USE service, ONLY : D1MACH, I1MACH
   !
   INTEGER i, iflag, inu, k, kflag, kk, Kode, koded, N, Nz, idum, j, ic, inub, nw
   REAL(8) :: aa, ak, Alim, ascle, a1, a2, bb, bk, bry(3), caz, cbi, cbr, cchi, &

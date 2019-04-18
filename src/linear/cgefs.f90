@@ -111,7 +111,7 @@ SUBROUTINE CGEFS(A,Lda,N,V,Itask,Ind,Work,Iwork)
   !   900510  Convert XERRWV calls to XERMSG calls, cvt GOTO's to
   !           IF-THEN-ELSE.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-
+  USE service, ONLY : R1MACH, XERMSG
   !
   INTEGER Lda, N, Itask, Ind, Iwork(*)
   COMPLEX A(Lda,*), V(*), Work(*)

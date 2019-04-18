@@ -1,6 +1,5 @@
 !** DEFE4
 SUBROUTINE DEFE4(COFX,Idmn,Usol,Grhs)
-  USE SPL4
   !>
   !***
   !  Subsidiary to SEPX4
@@ -40,7 +39,7 @@ SUBROUTINE DEFE4(COFX,Idmn,Usol,Grhs)
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
-
+  USE SPL4, ONLY : L, AIT, DLX, DLY, IS, JS, K, KSWx, KSWy, MS, NS
   INTEGER i, Idmn, j
   REAL ai, bi, ci, Grhs(Idmn,*), tx, ty, Usol(Idmn,*), uxxx, uxxxx, uyyy, uyyyy, xi
   EXTERNAL :: COFX

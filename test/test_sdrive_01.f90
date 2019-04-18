@@ -1,11 +1,9 @@
 MODULE TEST45_MOD
-  use slatec
   IMPLICIT NONE
 
 CONTAINS
   !** SDQCK
   SUBROUTINE SDQCK(Lun,Kprint,Ipass)
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for SLATEC routines SDRIV1, SDRIV2 and SDRIV3.
@@ -39,7 +37,7 @@ CONTAINS
     !* REVISION HISTORY  (YYMMDD)
     !   890405  DATE WRITTEN
     !   890405  Revised to meet SLATEC standards.
-
+    USE slatec, ONLY : R1MACH, SDRIV1, SDRIV2, SDRIV3, XERCLR
     REAL eps, t, tout
     INTEGER ierflg, Ipass, Kprint, leniw, leniwx, lenw, lenwx, &
       Lun, mint, mstate, nde, nfe, nje, nstate, nstep, nx
@@ -414,7 +412,6 @@ CONTAINS
   END SUBROUTINE SDQCK
   !** SDF
   SUBROUTINE SDF(N,T,Y,Yp)
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for SLATEC routines SDRIV1, SDRIV2 and SDRIV3.
@@ -454,8 +451,9 @@ CONTAINS
 END MODULE TEST45_MOD
 !** TEST45
 PROGRAM TEST45
-  USE TEST45_MOD
-  use slatec
+  USE TEST45_MOD, ONLY : SDQCK
+  USE slatec, ONLY : I1MACH, XSETF, XSETUN, XERMAX
+  USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !>
   !***

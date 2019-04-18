@@ -1,8 +1,6 @@
 !** DDEBDF
 SUBROUTINE DDEBDF(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,&
     Rpar,Ipar,DJAC)
-  USE DDEBD1, ONLY : H, TN, IYH, IEWt, IACor, ISAvf, IWM, IBEgin, ITOl, IINteg, &
-    ITStop, IJAc, IBAnd
   !>
   !***
   !  Solve an initial value problem in ordinary differential
@@ -750,7 +748,9 @@ SUBROUTINE DDEBDF(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,&
   !   900510  Convert XERRWV calls to XERMSG calls, make Prologue comments
   !           consistent with DEBDF.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-
+  USE DDEBD1, ONLY : H, TN, IYH, IEWt, IACor, ISAvf, IWM, IBEgin, ITOl, IINteg, &
+    ITStop, IJAc, IBAnd
+  USE service, ONLY : XERMSG
   INTEGER icomi, icomr, idelsn, Idid, iinout, ilrw, Info(15), Ipar(*), itstar, &
     Iwork(*), iypout, Liw, Lrw, ml, mu, Neq
   REAL(8) :: Atol(*), Rpar(*), Rtol(*), Rwork(*), T, Tout, Y(*)

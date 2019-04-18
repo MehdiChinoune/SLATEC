@@ -153,6 +153,7 @@ SUBROUTINE SCOV(FCN,Iopt,M,N,X,Fvec,R,Ldr,Info,Wa1,Wa2,Wa3,Wa4)
   !     REVISED 820707-1100
   !     REVISED YYMMDD HHMM
   !
+  USE service, ONLY : XERMSG
   INTEGER i, idum(1), iflag, Info, Iopt, j, k, kp1, Ldr, M, N, nm1, nrow
   REAL X(*), R(Ldr,*), Fvec(*), Wa1(*), Wa2(*), Wa3(*), Wa4(*)
   EXTERNAL :: FCN

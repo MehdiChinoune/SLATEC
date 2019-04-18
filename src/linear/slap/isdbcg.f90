@@ -1,7 +1,6 @@
 !** ISDBCG
 INTEGER FUNCTION ISDBCG(N,B,X,Nelt,Ia,Ja,A,Isym,MSOLVE,Itol,Tol,Itmax,&
     Iter,Err,Ierr,Iunit,R,Z,P,Rr,Zz,Pp,Dz,Rwork,Iwork,Ak,Bk,Bnrm,Solnrm)
-  USE DSLBLK
   !>
   !***
   !  Preconditioned BiConjugate Gradient Stop Test.
@@ -182,7 +181,8 @@ INTEGER FUNCTION ISDBCG(N,B,X,Nelt,Ia,Ja,A,Isym,MSOLVE,Itol,Tol,Itmax,&
   !   921026  Changed 1.0E10 to D1MACH(2) and corrected D to E in
   !           output format.  (FNF)
   !   921113  Corrected C***CATEGORY line.  (FNF)
-
+  USE DSLBLK, ONLY : SOLn
+  USE service, ONLY : D1MACH
   !     .. Scalar Arguments ..
   REAL(8) :: Ak, Bk, Bnrm, Err, Solnrm, Tol
   INTEGER Ierr, Isym, Iter, Itmax, Itol, Iunit, N, Nelt

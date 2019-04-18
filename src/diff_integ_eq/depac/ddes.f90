@@ -33,7 +33,7 @@ SUBROUTINE DDES(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Ypout,Yp,Yy,Wt,P,Phi,&
   !   900510  Convert XERRWV calls to XERMSG calls, cvt GOTOs to
   !           IF-THEN-ELSE.  (RWC)
   !   910722  Updated AUTHOR section.  (ALS)
-
+  USE service, ONLY : XERMSG, D1MACH
   !
   INTEGER Idid, Info(15), Init, Ipar(*), Iquit, Iv(10), Ivc, k, Kgi, Kle4, &
     Kold, Kord, Kprev, Ksteps, l, ltol, natolp, Neq, nrtolp, Ns

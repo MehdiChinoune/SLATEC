@@ -79,7 +79,7 @@ SUBROUTINE BSPEV(T,Ad,N,K,Nderiv,X,Inev,Svalue,Work)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-
+  USE service, ONLY : XERMSG
   !
   INTEGER i, id, Inev, iwork, jj, K, kp1, kp1mn, l, left, ll, mflag, N, Nderiv
   REAL Ad(*), Svalue(*), summ, T(*), Work(*), X

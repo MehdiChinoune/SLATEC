@@ -113,7 +113,7 @@ SUBROUTINE PSIFN(X,N,Kode,M,Ans,Nz,Ierr)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-
+  USE service, ONLY : R1MACH, I1MACH
   INTEGER i, Ierr, j, k, Kode, M, mm, mx, N, nn, np, nx, Nz
   REAL Ans(*), arg, den, elim, eps, fln, fn, fnp, fns, fx, rln, &
     rxsq, r1m4, r1m5, s, slope, t, ta, tk, tol, tols, trm(22), &

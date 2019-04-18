@@ -102,7 +102,7 @@ SUBROUTINE DFZERO(F,B,C,R,Re,Ae,Iflag)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-
+  USE service, ONLY : D1MACH
   REAL(8) :: a, acbs, acmb, Ae, aw, B, C, cmb, er, &
     F, fa, fb, fc, fx, fz, p, q, R, Re, rw, t, tol, z
   INTEGER ic, Iflag, kount

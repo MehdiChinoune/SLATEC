@@ -48,7 +48,7 @@ SUBROUTINE CPEVL(N,M,A,Z,C,B,Kbd)
   !   890831  Modified array declarations.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
-
+  USE service, ONLY : I1MACH
   REAL r, s
   INTEGER i, j, M, mini, N, np1
   COMPLEX A(*), C(*), Z, ci, cim1, B(*), bi, bim1, t

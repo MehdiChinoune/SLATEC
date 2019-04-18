@@ -74,7 +74,7 @@ SUBROUTINE CDSTP(Eps,F,FA,Hmax,Impl,Ierror,JACOBN,Matdim,Maxord,Mint,&
   !* REVISION HISTORY  (YYMMDD)
   !   790601  DATE WRITTEN
   !   900329  Initial submission to SLATEC.
-
+  USE linear, ONLY : SCNRM2
   EXTERNAL :: F, JACOBN, FA, USERS
   INTEGER i, Ierror, Impl, Ipvt(*), Iswflg, iter, j, Jstate, Jstepl, Jtask, &
     Matdim, Maxord, Mint, Miter, Ml, Mntold, Mtrold, Mtrsv, Mu, Mxrdsv, N, Nde, &

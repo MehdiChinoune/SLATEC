@@ -10,10 +10,6 @@ include"fishpack/spl4.f90"
 include"fishpack/splpcm.f90"
 
 MODULE diff_integ_eq
-  use service
-  use linear
-  use data_handling
-  use integ_trans
   IMPLICIT NONE
 
 CONTAINS

@@ -605,7 +605,7 @@ SUBROUTINE DNLS1(FCN,Iopt,M,N,X,Fvec,Fjac,Ldfjac,Ftol,Xtol,Gtol,Maxfev,&
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
   !   920205  Corrected XERN1 declaration.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-
+  USE service, ONLY : XERMSG, D1MACH
   INTEGER Iopt, M, N, Ldfjac, Maxfev, Mode, Nprint, Info, Nfev, Njev
   INTEGER ijunk, nrow, Ipvt(*)
   REAL(8) :: Ftol, Xtol, Gtol, Factor, Epsfcn

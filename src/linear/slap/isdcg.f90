@@ -1,7 +1,6 @@
 !** ISDCG
 INTEGER FUNCTION ISDCG(N,B,X,Nelt,Ia,Ja,A,Isym,MSOLVE,Itol,Tol,Itmax,Iter,&
     Err,Ierr,Iunit,R,Z,P,Dz,Rwork,Iwork,Ak,Bk,Bnrm,Solnrm)
-  USE DSLBLK
   !>
   !***
   !  Preconditioned Conjugate Gradient Stop Test.
@@ -172,7 +171,8 @@ INTEGER FUNCTION ISDCG(N,B,X,Nelt,Ia,Ja,A,Isym,MSOLVE,Itol,Tol,Itmax,Iter,&
   !   920930  Corrected to not print AK,BK when ITER=0.  (FNF)
   !   921026  Changed 1.0E10 to D1MACH(2) and corrected D to E in
   !           output format.  (FNF)
-
+  USE DSLBLK, ONLY : SOLn
+  USE service, ONLY : D1MACH
   !     .. Scalar Arguments ..
   REAL(8) :: Ak, Bk, Bnrm, Err, Solnrm, Tol
   INTEGER Ierr, Isym, Iter, Itmax, Itol, Iunit, N, Nelt

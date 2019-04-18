@@ -133,7 +133,7 @@ SUBROUTINE DRC6J(L2,L3,L4,L5,L6,L1min,L1max,Sixcof,Ndim,Ier)
   !   910415  Mixed type expressions eliminated; variable C1 initialized;
   !           description of SIXCOF expanded. These changes were done by
   !           D. W. Lozier.
-
+  USE service, ONLY : XERMSG, D1MACH
   !
   INTEGER Ndim, Ier
   REAL(8) :: L2, L3, L4, L5, L6, L1min, L1max, Sixcof(Ndim)

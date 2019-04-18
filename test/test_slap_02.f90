@@ -1,12 +1,9 @@
 MODULE TEST26_MOD
-  use slatec
   IMPLICIT NONE
 
 CONTAINS
   !** DLAPQC
   SUBROUTINE DLAPQC(Lun,Kprint,Ipass)
-    USE DSLBLK
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for testing Sparse Linear Algebra Package
@@ -88,7 +85,10 @@ CONTAINS
     !   920602  Reduced problem size for a shorter-running test and
     !           corrected lower limit in "DO 80" statement.  (FNF)
     !   921021  Changed E's to 1P,D's in output formats.  (FNF)
-
+    USE DSLBLK, ONLY : SOLn
+    USE slatec, ONLY : D1MACH, DCPPLT, DS2Y, DSDBCG, DSDCG, DSDCGN, DSDCGS, DSDGMR, &
+      DSDOMN, DSGS, DSICCG, DSILUR, DSJAC, DSLUBC, DSLUCN, DSLUCS, DSLUGM, DSLUOM, &
+      XERMAX, XSETF, XSETUN
     !
     !     The problem size, MAXN, should be large enough that the
     !     iterative methods do 10-15 iterations, just to be sure that
@@ -385,7 +385,6 @@ CONTAINS
   END SUBROUTINE DLAPQC
   !** DRMGEN
   SUBROUTINE DRMGEN(Neltmx,Factor,Ierr,N,Nelt,Isym,Ia,Ja,A,F,Soln,Dsum,Itmp,Idiag)
-    IMPLICIT NONE
     !>
     !***
     !  This routine generates a "Random" symmetric or non-symmetric matrix
@@ -468,7 +467,8 @@ CONTAINS
     !   890919  Replaced DMPL with ISMPL.  (MKS)
     !   890920  Minor changes to reduce single/double differences.  (FNF)
     !   920511  Added complete declaration section.  (WRB)
-
+    USE slatec, ONLY : RAND
+    USE common_mod, ONLY : ISMPL
     !     .. Scalar Arguments ..
     REAL(8) :: Factor
     INTEGER Ierr, Isym, N, Nelt, Neltmx
@@ -590,7 +590,6 @@ CONTAINS
   END SUBROUTINE DRMGEN
   !** DFILL
   SUBROUTINE DFILL(N,V,Val)
-    IMPLICIT NONE
     !>
     !***
     !  Fill a vector with a value.
@@ -671,7 +670,6 @@ CONTAINS
   END SUBROUTINE DFILL
   !** DUTERR
   SUBROUTINE DUTERR(Method,Ierr,Iout,Nfail,Istdo,Iter,Err)
-    IMPLICIT NONE
     !>
     !***
     !  Output error messages for the SLAP Quick Check.
@@ -733,8 +731,9 @@ CONTAINS
 END MODULE TEST26_MOD
 !** TEST26
 PROGRAM TEST26
-  USE TEST26_MOD
-  use slatec
+  USE TEST26_MOD, ONLY : DLAPQC
+  USE slatec, ONLY : I1MACH, XSETF, XSETUN, XERMAX
+  USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !>
   !***

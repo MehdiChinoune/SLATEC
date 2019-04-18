@@ -1,6 +1,5 @@
 !** TEVLC
 SUBROUTINE TEVLC(N,D,E2,Ierr)
-  USE CCBLK, MAChep => EPS
   !>
   !***
   !  Subsidiary to CBLKTR
@@ -56,7 +55,7 @@ SUBROUTINE TEVLC(N,D,E2,Ierr)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   !   920528  DESCRIPTION revised and REFERENCES section added.  (WRB)
-
+  USE CCBLK, ONLY : MAChep => EPS
   REAL dhold, b, c, f, g, h, p, r, s
   INTEGER nhalf, ntop, i, j, l, m, N, ii, l1, mml, Ierr
   REAL D(*), E2(*)

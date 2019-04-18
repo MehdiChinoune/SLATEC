@@ -61,7 +61,7 @@ REAL(8) FUNCTION DAIE(X)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920618  Removed space from variable names.  (RWC, WRB)
-
+  USE service, ONLY : D1MACH
   REAL eta
   REAL(8) :: X, sqrtx, theta, xm, z
   INTEGER, SAVE :: naif, naig, naip1, naip2

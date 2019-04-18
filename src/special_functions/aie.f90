@@ -51,7 +51,7 @@ REAL FUNCTION AIE(X)
   !   890206  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920618  Removed space from variable names.  (RWC, WRB)
-
+  USE service, ONLY : R1MACH
   REAL eta, sqrtx, theta, X, xm, z
   INTEGER, SAVE :: naif, naig, naip
   REAL, SAVE :: x3sml, x32sml, xbig

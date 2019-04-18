@@ -1,6 +1,5 @@
 !** DSLVS
 SUBROUTINE DSLVS(Wm,Iwm,X,Tem)
-  USE DDEBD1, ONLY : EL0, H, IER, MITer, N
   !>
   !***
   !  Subsidiary to DDEBDF
@@ -30,7 +29,8 @@ SUBROUTINE DSLVS(Wm,Iwm,X,Tem)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
   !   920422  Changed DIMENSION statement.  (WRB)
-
+  USE DDEBD1, ONLY : EL0, H, IER, MITer, N
+  USE linear, ONLY : DGBSL, DGESL
   !
   INTEGER i, Iwm(*), meband, ml, mu
   REAL(8) :: di, hl0, phl0, r, Tem(*), Wm(*), X(*)

@@ -171,7 +171,7 @@ SUBROUTINE QAGS(F,A,B,Epsabs,Epsrel,Result,Abserr,Neval,Ier,Limit,Lenw,&
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-
+  USE service, ONLY : XERMSG
   INTEGER Last
   REAL A, Abserr, B, Epsabs, Epsrel, Result, Work(*)
   INTEGER Ier, Iwork(*), Lenw, Limit, lvl, l1, l2, l3, Neval

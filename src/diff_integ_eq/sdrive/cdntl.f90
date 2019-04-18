@@ -43,7 +43,7 @@ SUBROUTINE CDNTL(Eps,F,FA,Hmax,Hold,Impl,Jtask,Matdim,Maxord,Mint,Miter,&
   !* REVISION HISTORY  (YYMMDD)
   !   790601  DATE WRITTEN
   !   900329  Initial submission to SLATEC.
-
+  USE linear, ONLY : SCNRM2, CGBSL, CGESL, CGBFA, CGEFA
   INTEGER i, iflag, Impl, info, Iswflg, Jstate, Jtask, Matdim, &
     Maxord, Mint, Miter, Ml, Mntold, Mtrold, Mu, N, Nde, Nfe, Nq, Nwait
   COMPLEX A(Matdim,*), Fac(*), Save1(*), Save2(*), Y(*), Yh(N,*), Ywt(*)

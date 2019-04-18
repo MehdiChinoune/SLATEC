@@ -1,11 +1,9 @@
 MODULE TEST42_MOD
-  use slatec
   IMPLICIT NONE
 
 CONTAINS
   !** DAVNTS
   SUBROUTINE DAVNTS(Lun,Kprint,Ipass)
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for DAVINT.
@@ -27,7 +25,7 @@ CONTAINS
     !   910708  Minor modifications in use of KPRINT.  (WRB)
     !   920210  Code restructured and revised to test error returns for all
     !           values of KPRINT.  (WRB)
-
+    USE slatec, ONLY : D1MACH, DAVINT, XERCLR, XGETF, XSETF
     INTEGER kontrl
     INTEGER i, ierr, Ipass, Kprint, Lun, n
     REAL(8) :: a, ans, b, del, rn1, sqb, tol, tol1, x(501), xint, y(501)
@@ -213,7 +211,6 @@ CONTAINS
   END SUBROUTINE DAVNTS
   !** DQG8TS
   SUBROUTINE DQG8TS(Lun,Kprint,Ipass)
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for DGAUS8.
@@ -235,7 +232,7 @@ CONTAINS
     !   920213  Code restructured to test DGAUS8 for all values of KPRINT,
     !           second accuracy test added and testing of error returns
     !           revised.  (WRB)
-
+    USE slatec, ONLY : D1MACH, DGAUS8, XGETF, XSETF
     !     .. Scalar Arguments ..
     INTEGER Ipass, Kprint, Lun
     !     .. Local Scalars ..
@@ -358,7 +355,6 @@ CONTAINS
   END SUBROUTINE DQG8TS
   !** DQN79Q
   SUBROUTINE DQN79Q(Lun,Kprint,Ipass)
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for DQNC79.
@@ -380,7 +376,7 @@ CONTAINS
     !   920213  Code restructured to test DQNC79 for all values of KPRINT,
     !           second accuracy test added and testing of error returns
     !           revised.  (WRB)
-
+    USE slatec, ONLY : D1MACH, DQNC79, XGETF, XSETF
     !     .. Scalar Arguments ..
     INTEGER Ipass, Kprint, Lun
     !     .. Local Scalars ..
@@ -504,7 +500,6 @@ CONTAINS
   END SUBROUTINE DQN79Q
   !** DFQD1
   REAL(8) FUNCTION DFQD1(X)
-    IMPLICIT NONE
     !>
     !***
     !  Function evaluator for DQNC79 and DGAUS8 quick checks.
@@ -532,7 +527,6 @@ CONTAINS
   END FUNCTION DFQD1
   !** DFQD2
   REAL(8) FUNCTION DFQD2(X)
-    IMPLICIT NONE
     !>
     !***
     !  Function evaluator for DQNC79 and DGAUS8 quick checks.
@@ -560,8 +554,9 @@ CONTAINS
 END MODULE TEST42_MOD
 !** TEST42
 PROGRAM TEST42
-  USE TEST42_MOD
-  use slatec
+  USE TEST42_MOD, ONLY : DAVNTS, DQG8TS, DQN79Q
+  USE slatec, ONLY : I1MACH, XSETF, XSETUN, XERMAX
+  USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !>
   !***

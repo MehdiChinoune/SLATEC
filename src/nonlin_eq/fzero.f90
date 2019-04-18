@@ -101,7 +101,7 @@ SUBROUTINE FZERO(F,B,C,R,Re,Ae,Iflag)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-
+  USE service, ONLY : R1MACH
   REAL F
   REAL a, acbs, acmb, Ae, aw, B, C, cmb, er, fa, fb, fc, fx, &
     fz, p, q, R, Re, rw, t, tol, z

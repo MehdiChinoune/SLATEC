@@ -31,7 +31,7 @@ COMPLEX FUNCTION CCOT(Z)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
-
+  USE service, ONLY : XERMSG, XERCLR, R1MACH
   REAL den, sn2x, x2, y2
   COMPLEX Z
   REAL :: sqeps = 0.

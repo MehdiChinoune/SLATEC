@@ -29,7 +29,7 @@ REAL(8) FUNCTION DCBRT(X)
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
-
+  USE service, ONLY : D1MACH
   INTEGER irem, iter, ixpnt, n
   REAL z
   REAL(8) :: X, y, cbrtsq

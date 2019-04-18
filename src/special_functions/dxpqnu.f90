@@ -1,6 +1,5 @@
 !** DXPQNU
 SUBROUTINE DXPQNU(Nu1,Nu2,Mu,Theta,Id,Pqa,Ipqa,Ierror)
-  USE DXBLK ,ONLY: NBItsf
   !>
   !***
   !  To compute the values of Legendre functions for DXLEGF.
@@ -31,7 +30,7 @@ SUBROUTINE DXPQNU(Nu1,Nu2,Mu,Theta,Id,Pqa,Ipqa,Ierror)
   !           Corrected order of sections in prologue and added TYPE
   !           section.  (WRB)
   !   920127  Revised PURPOSE section of prologue.  (DWL)
-
+  USE DXBLK ,ONLY: NBItsf
   INTEGER i, ia, Id, Ierror, if, ipq, ipq1, ipq2, Ipqa(*), ipsik, &
     ipsix, ix1, ixs, j, j0, k, Mu
   REAL(8) :: a, nu, Nu1, Nu2, pq, Pqa(*), r, Theta, w, x, x1, x2, xs, y, z

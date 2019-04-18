@@ -36,7 +36,7 @@ INTEGER FUNCTION IPLOC(Locc,Sx,Ix)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   910731  Added code to set IPLOC to 0 if LOC is non-positive.  (WRB)
-
+  USE service, ONLY : XERMSG
   INTEGER ipage, itemp, k, key, lmx, lmxm1, Locc, lpg, np
   REAL Sx(*)
   INTEGER Ix(*)

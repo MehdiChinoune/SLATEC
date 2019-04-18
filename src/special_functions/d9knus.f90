@@ -47,7 +47,7 @@ SUBROUTINE D9KNUS(Xnu,X,Bknu,Bknu1,Iswtch)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
   !   900727  Added EXTERNAL statement.  (WRB)
   !   920618  Removed space from variable names.  (RWC, WRB)
-
+  USE service, ONLY : XERMSG, D1MACH
   REAL an, bn, eta
   INTEGER i, ii, inu, Iswtch, n, nterms
   REAL(8) :: Xnu, X, Bknu, Bknu1, alpha(32), beta(32), a(32), alnz, a0, &

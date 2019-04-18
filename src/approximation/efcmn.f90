@@ -32,7 +32,9 @@ SUBROUTINE EFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Mdein,Mdeout,&
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900328  Added TYPE section.  (WRB)
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
-
+  USE service, ONLY : XERMSG
+  USE linear, ONLY : BNDSOL, BNDACC, SCOPY, SSCAL
+  USE data_handling, ONLY : SSORT
   INTEGER Lw, Mdein, Mdeout, Mdg, Mdw, Nbkpt, Ndata, Nord
   REAL Bf(Nord,*), Bkpt(*), Bkptin(*), Coeff(*), G(Mdg,*), Ptemp(*), &
     Sddata(*), W(Mdw,*), Xdata(*), Xtemp(*), Ydata(*)

@@ -96,7 +96,7 @@ SUBROUTINE FDJAC1(FCN,N,X,Fvec,Fjac,Ldfjac,Iflag,Ml,Mu,Epsfcn,Wa1,Wa2)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   900328  Added TYPE section.  (WRB)
-
+  USE service, ONLY : R1MACH
   INTEGER N, Ldfjac, Iflag, Ml, Mu
   REAL Epsfcn
   REAL X(*), Fvec(*), Fjac(Ldfjac,*), Wa1(*), Wa2(*)

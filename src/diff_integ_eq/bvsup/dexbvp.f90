@@ -1,8 +1,5 @@
 !** DEXBVP
 SUBROUTINE DEXBVP(Y,Nrowy,Xpts,A,Nrowa,Alpha,B,Nrowb,Beta,Iflag,Work,Iwork)
-  USE DML, ONLY : LPAr, NCOmp, NFC, KKKzpw, NEEdw, NEEdiw, K1, K2, K3, K4, K5, K6, &
-    K7, K8, K9, K10, L1, X, XBEg, XENd, TOL, NXPts, NIC, NOPg, MXNon, NDIsk, &
-    NTP, NFCc
   !>
   !***
   !  Subsidiary to DBVSUP
@@ -37,7 +34,10 @@ SUBROUTINE DEXBVP(Y,Nrowy,Xpts,A,Nrowa,Alpha,B,Nrowb,Beta,Iflag,Work,Iwork)
   !   900328  Added TYPE section.  (WRB)
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
   !   910722  Updated AUTHOR section.  (ALS)
-
+  USE DML, ONLY : LPAr, NCOmp, NFC, KKKzpw, NEEdw, NEEdiw, K1, K2, K3, K4, K5, K6, &
+    K7, K8, K9, K10, L1, X, XBEg, XENd, TOL, NXPts, NIC, NOPg, MXNon, NDIsk, &
+    NTP, NFCc
+  USE service, ONLY : XERMSG
   !
   INTEGER iexp, Iflag, inc, Iwork(*), kotc, Nrowa, Nrowb, Nrowy, nsafiw, nsafw
   REAL(8) :: A(Nrowa,*), Alpha(*), B(Nrowb,*), Beta(*), Work(*), xl, Xpts(*), &

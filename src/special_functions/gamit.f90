@@ -57,7 +57,7 @@ REAL FUNCTION GAMIT(A,X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920528  DESCRIPTION and REFERENCES sections revised.  (WRB)
-
+  USE service, ONLY : XERMSG, XERCLR, R1MACH
   REAL :: A, aeps, ainta, algap1, alng, alx, h, sga, sgngam, t, X
   REAL, SAVE :: alneps, sqeps, bot
   LOGICAL :: first = .TRUE.

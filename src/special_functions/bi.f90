@@ -57,7 +57,7 @@ REAL FUNCTION BI(X)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
-
+  USE service, ONLY : XERMSG, R1MACH
   REAL eta, theta, X, xm, z
   INTEGER, SAVE :: nbif, nbig, nbif2, nbig2
   REAL, SAVE :: x3sml, xmax

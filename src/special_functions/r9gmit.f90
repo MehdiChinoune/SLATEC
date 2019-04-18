@@ -32,9 +32,8 @@ REAL FUNCTION R9GMIT(A,X,Algap1,Sgngam,Alx)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
-
-  REAL A, ae, aeps, alg2, Algap1, algs, Alx, fk, s, sgng2, &
-    Sgngam, t, te, X
+  USE service, ONLY : XERMSG, R1MACH
+  REAL A, ae, aeps, alg2, Algap1, algs, Alx, fk, s, sgng2, Sgngam, t, te, X
   INTEGER k, m, ma
   REAL :: eps = 0., bot = 0.
   !* FIRST EXECUTABLE STATEMENT  R9GMIT

@@ -38,7 +38,7 @@ COMPLEX FUNCTION C9LGMC(Zin)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
-
+  USE service, ONLY : XERMSG, R1MACH
   REAL cabsz, x, y
   INTEGER i, ndx
   COMPLEX Zin, z, z2inv

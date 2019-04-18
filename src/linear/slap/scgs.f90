@@ -253,7 +253,7 @@ SUBROUTINE SCGS(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,Iter,&
   !   920929  Corrected format of references.  (FNF)
   !   921019  Changed 500.0 to 500 to reduce SP/DP differences.  (FNF)
   !   921113  Corrected C***CATEGORY line.  (FNF)
-
+  USE service, ONLY : R1MACH
   !     .. Scalar Arguments ..
   REAL Err, Tol
   INTEGER Ierr, Isym, Iter, Itmax, Itol, Iunit, N, Nelt

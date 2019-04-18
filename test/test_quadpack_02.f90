@@ -1,11 +1,9 @@
 MODULE TEST40_MOD
-  use slatec
   IMPLICIT NONE
 
 CONTAINS
   !** CDQAG
   SUBROUTINE CDQAG(Lun,Kprint,Ipass)
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for DQAG.
@@ -24,7 +22,7 @@ CONTAINS
     !   901205  Added PASS/FAIL message and changed the name of the first
     !           argument.  (RWC)
     !   910501  Added PURPOSE and TYPE records.  (WRB)
-
+    USE slatec, ONLY : D1MACH, DQAG
 
     ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
     INTEGER ierv(2), Lun
@@ -118,7 +116,6 @@ CONTAINS
   END SUBROUTINE CDQAG
   !** CDQAGI
   SUBROUTINE CDQAGI(Lun,Kprint,Ipass)
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for DQAGI.
@@ -138,7 +135,7 @@ CONTAINS
     !   901205  Added PASS/FAIL message and changed the name of the first
     !           argument.  (RWC)
     !   910501  Added PURPOSE and TYPE records.  (WRB)
-
+    USE slatec, ONLY : D1MACH, DQAGI
     !
     ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
     INTEGER ierv(4), inf
@@ -252,7 +249,6 @@ CONTAINS
   END SUBROUTINE CDQAGI
   !** CDQAGP
   SUBROUTINE CDQAGP(Lun,Kprint,Ipass)
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for DQAGP.
@@ -271,7 +267,7 @@ CONTAINS
     !   901205  Added PASS/FAIL message and changed the name of the first
     !           argument.  (RWC)
     !   910501  Added PURPOSE and TYPE records.  (WRB)
-
+    USE slatec, ONLY : D1MACH, DQAGP
 
     ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
     INTEGER ierv(4)
@@ -398,7 +394,6 @@ CONTAINS
   END SUBROUTINE CDQAGP
   !** CDQAGS
   SUBROUTINE CDQAGS(Lun,Kprint,Ipass)
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for DQAGS.
@@ -419,7 +414,7 @@ CONTAINS
     !           argument.  (RWC)
     !   910501  Added PURPOSE and TYPE records.  (WRB)
     !   911114  Modified test on IER=4 to allow IER=5.  (WRB)
-
+    USE slatec, ONLY : D1MACH, DQAGS
 
     ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
     INTEGER ierv(5), Lun
@@ -538,7 +533,6 @@ CONTAINS
   END SUBROUTINE CDQAGS
   !** CDQAWC
   SUBROUTINE CDQAWC(Lun,Kprint,Ipass)
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for DQAWC.
@@ -557,7 +551,7 @@ CONTAINS
     !   901205  Added PASS/FAIL message and changed the name of the first
     !           argument.  (RWC)
     !   910501  Added PURPOSE and TYPE records.  (WRB)
-
+    USE slatec, ONLY : D1MACH, DQAWC
 
     ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
     INTEGER ierv(2), Lun
@@ -644,7 +638,6 @@ CONTAINS
   END SUBROUTINE CDQAWC
   !** CDQAWF
   SUBROUTINE CDQAWF(Lun,Kprint,Ipass)
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for DQAWF.
@@ -663,7 +656,7 @@ CONTAINS
     !   901205  Added PASS/FAIL message and changed the name of the first
     !           argument.  (RWC)
     !   910501  Added PURPOSE and TYPE records.  (WRB)
-
+    USE slatec, ONLY : D1MACH, DQAWF
 
     ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
     INTEGER ierv(4), integr, iwork(450), leniw, Lun, maxp1
@@ -761,7 +754,6 @@ CONTAINS
   END SUBROUTINE CDQAWF
   !** CDQAWO
   SUBROUTINE CDQAWO(Lun,Kprint,Ipass)
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for DQAWO.
@@ -780,7 +772,7 @@ CONTAINS
     !   901205  Added PASS/FAIL message and changed the name of the first
     !           argument.  (RWC)
     !   910501  Added PURPOSE and TYPE records.  (WRB)
-
+    USE slatec, ONLY : D1MACH, DQAWO
 
     ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
     INTEGER leniw
@@ -892,7 +884,6 @@ CONTAINS
   END SUBROUTINE CDQAWO
   !** CDQAWS
   SUBROUTINE CDQAWS(Lun,Kprint,Ipass)
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for DQAWS.
@@ -911,7 +902,7 @@ CONTAINS
     !   901205  Added PASS/FAIL message and changed the name of the first
     !           argument.  (RWC)
     !   910501  Added PURPOSE and TYPE records.  (WRB)
-
+    USE slatec, ONLY : D1MACH, DQAWS
 
     ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
     INTEGER ierv(2), Lun
@@ -999,7 +990,6 @@ CONTAINS
   END SUBROUTINE CDQAWS
   !** CDQNG
   SUBROUTINE CDQNG(Lun,Kprint,Ipass)
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for DQNG.
@@ -1018,7 +1008,7 @@ CONTAINS
     !   901205  Added PASS/FAIL message and changed the name of the first
     !           argument.  (RWC)
     !   910501  Added PURPOSE and TYPE records.  (WRB)
-
+    USE slatec, ONLY : D1MACH, DQNG
 
     ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
     INTEGER Lun
@@ -1077,7 +1067,6 @@ CONTAINS
   END SUBROUTINE CDQNG
   !** DF0C
   REAL(8) FUNCTION DF0C(X)
-    IMPLICIT NONE
     !>
     !***
     !  Subsidiary to
@@ -1098,7 +1087,6 @@ CONTAINS
   END FUNCTION DF0C
   !** DF0F
   REAL(8) FUNCTION DF0F(X)
-    IMPLICIT NONE
     !>
     !***
     !  Subsidiary to
@@ -1120,7 +1108,6 @@ CONTAINS
   END FUNCTION DF0F
   !** DF0O
   REAL(8) FUNCTION DF0O(X)
-    IMPLICIT NONE
     !>
     !***
     !  Subsidiary to
@@ -1141,7 +1128,6 @@ CONTAINS
   END FUNCTION DF0O
   !** DF0S
   REAL(8) FUNCTION DF0S(X)
-    IMPLICIT NONE
     !>
     !***
     !  Subsidiary to
@@ -1163,7 +1149,6 @@ CONTAINS
   END FUNCTION DF0S
   !** DF0WS
   REAL(8) FUNCTION DF0WS(X)
-    IMPLICIT NONE
     !>
     !***
     !  Subsidiary to
@@ -1184,7 +1169,6 @@ CONTAINS
   END FUNCTION DF0WS
   !** DF1C
   REAL(8) FUNCTION DF1C(X)
-    IMPLICIT NONE
     !>
     !***
     !  Subsidiary to
@@ -1206,7 +1190,6 @@ CONTAINS
   END FUNCTION DF1C
   !** DF1F
   REAL(8) FUNCTION DF1F(X)
-    IMPLICIT NONE
     !>
     !***
     !  Subsidiary to
@@ -1230,7 +1213,6 @@ CONTAINS
   END FUNCTION DF1F
   !** DF1G
   REAL(8) FUNCTION DF1G(X)
-    IMPLICIT NONE
     !>
     !***
     !  Subsidiary to
@@ -1252,7 +1234,6 @@ CONTAINS
   END FUNCTION DF1G
   !** DF1N
   REAL(8) FUNCTION DF1N(X)
-    IMPLICIT NONE
     !>
     !***
     !  Subsidiary to
@@ -1273,7 +1254,6 @@ CONTAINS
   END FUNCTION DF1N
   !** DF1O
   REAL(8) FUNCTION DF1O(X)
-    IMPLICIT NONE
     !>
     !***
     !  Subsidiary to
@@ -1295,7 +1275,6 @@ CONTAINS
   END FUNCTION DF1O
   !** DF1P
   REAL(8) FUNCTION DF1P(X)
-    IMPLICIT NONE
     !>
     !***
     !  Subsidiary to
@@ -1324,7 +1303,6 @@ CONTAINS
   END FUNCTION DF1P
   !** DF1S
   REAL(8) FUNCTION DF1S(X)
-    IMPLICIT NONE
     !>
     !***
     !  Subsidiary to
@@ -1345,7 +1323,6 @@ CONTAINS
   END FUNCTION DF1S
   !** DF1WS
   REAL(8) FUNCTION DF1WS(X)
-    IMPLICIT NONE
     !>
     !***
     !  Subsidiary to
@@ -1367,7 +1344,6 @@ CONTAINS
   END FUNCTION DF1WS
   !** DF2G
   REAL(8) FUNCTION DF2G(X)
-    IMPLICIT NONE
     !>
     !***
     !  Subsidiary to
@@ -1388,7 +1364,6 @@ CONTAINS
   END FUNCTION DF2G
   !** DF2N
   REAL(8) FUNCTION DF2N(X)
-    IMPLICIT NONE
     !>
     !***
     !  Subsidiary to
@@ -1409,7 +1384,6 @@ CONTAINS
   END FUNCTION DF2N
   !** DF2O
   REAL(8) FUNCTION DF2O(X)
-    IMPLICIT NONE
     !>
     !***
     !  Subsidiary to
@@ -1431,7 +1405,6 @@ CONTAINS
   END FUNCTION DF2O
   !** DF2P
   REAL(8) FUNCTION DF2P(X)
-    IMPLICIT NONE
     !>
     !***
     !  Subsidiary to
@@ -1452,7 +1425,6 @@ CONTAINS
   END FUNCTION DF2P
   !** DF2S
   REAL(8) FUNCTION DF2S(X)
-    IMPLICIT NONE
     !>
     !***
     !  Subsidiary to
@@ -1474,7 +1446,6 @@ CONTAINS
   END FUNCTION DF2S
   !** DF3G
   REAL(8) FUNCTION DF3G(X)
-    IMPLICIT NONE
     !>
     !***
     !  Subsidiary to
@@ -1495,7 +1466,6 @@ CONTAINS
   END FUNCTION DF3G
   !** DF3P
   REAL(8) FUNCTION DF3P(X)
-    IMPLICIT NONE
     !>
     !***
     !  Subsidiary to
@@ -1517,7 +1487,6 @@ CONTAINS
   END FUNCTION DF3P
   !** DF3S
   REAL(8) FUNCTION DF3S(X)
-    IMPLICIT NONE
     !>
     !***
     !  Subsidiary to
@@ -1539,7 +1508,6 @@ CONTAINS
   END FUNCTION DF3S
   !** DF4P
   REAL(8) FUNCTION DF4P(X)
-    IMPLICIT NONE
     !>
     !***
     !  Subsidiary to
@@ -1561,7 +1529,6 @@ CONTAINS
   END FUNCTION DF4P
   !** DF4S
   REAL(8) FUNCTION DF4S(X)
-    IMPLICIT NONE
     !>
     !***
     !  Subsidiary to
@@ -1583,7 +1550,6 @@ CONTAINS
   END FUNCTION DF4S
   !** DF5S
   REAL(8) FUNCTION DF5S(X)
-    IMPLICIT NONE
     !>
     !***
     !  Subsidiary to
@@ -1605,7 +1571,6 @@ CONTAINS
   END FUNCTION DF5S
   !** DT0
   REAL(8) FUNCTION DT0(X)
-    IMPLICIT NONE
     !>
     !***
     !  Subsidiary to
@@ -1630,7 +1595,6 @@ CONTAINS
   END FUNCTION DT0
   !** DT1
   REAL(8) FUNCTION DT1(X)
-    IMPLICIT NONE
     !>
     !***
     !  Subsidiary to
@@ -1655,7 +1619,6 @@ CONTAINS
   END FUNCTION DT1
   !** DT2
   REAL(8) FUNCTION DT2(X)
-    IMPLICIT NONE
     !>
     !***
     !  Subsidiary to
@@ -1680,7 +1643,6 @@ CONTAINS
   END FUNCTION DT2
   !** DT3
   REAL(8) FUNCTION DT3(X)
-    IMPLICIT NONE
     !>
     !***
     !  Subsidiary to
@@ -1705,7 +1667,6 @@ CONTAINS
   END FUNCTION DT3
   !** DT4
   REAL(8) FUNCTION DT4(X)
-    IMPLICIT NONE
     !>
     !***
     !  Subsidiary to
@@ -1730,7 +1691,6 @@ CONTAINS
   END FUNCTION DT4
   !** DT5
   REAL(8) FUNCTION DT5(X)
-    IMPLICIT NONE
     !>
     !***
     !  Subsidiary to
@@ -1755,7 +1715,6 @@ CONTAINS
   END FUNCTION DT5
   !** DPRIN
   SUBROUTINE DPRIN(Lun,Num1,Kprint,Ip,Exact,Result,Abserr,Neval,Ierv,Lierv)
-    IMPLICIT NONE
     !>
     !***
     !  Subsidiary to CDQAG, CDQAG, CDQAGI, CDQAGP, CDQAGS, CDQAWC,
@@ -1841,8 +1800,10 @@ CONTAINS
 END MODULE TEST40_MOD
 !** TEST40
 PROGRAM TEST40
-  USE TEST40_MOD
-  use slatec
+  USE TEST40_MOD, ONLY : CDQAG, CDQAGI, CDQAGP, CDQAGS, CDQAWC, CDQAWF, CDQAWO, &
+    CDQAWS, CDQNG
+  USE slatec, ONLY : I1MACH, XSETF, XSETUN, XERMAX
+  USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !>
   !***

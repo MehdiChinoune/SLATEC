@@ -1,11 +1,9 @@
 MODULE TEST04_MOD
-  use slatec
   IMPLICIT NONE
 
 CONTAINS
   !** CFNCK
   SUBROUTINE CFNCK(Lun,Kprint,Ipass)
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for the complex Fullerton special functions.
@@ -45,7 +43,8 @@ CONTAINS
     !           reorganized.  (WRB)
     !   900330  Prologue converted to Version 4.0 format.  (BAB)
     !   900727  Added EXTERNAL statement.  (WRB)
-
+    USE slatec, ONLY : C0LGMC, CATAN2, CBETA, CCBRT, CCOT, CEXPRL, CGAMMA, CGAMR, &
+      CLBETA, CLNGAM, CLNREL, CLOG10, CPSI, R1MACH
     INTEGER i, Lun, Kprint, Ipass
     REAL errmax, errtol, abserr, relerr
     COMPLEX w(48)
@@ -158,8 +157,9 @@ CONTAINS
 END MODULE TEST04_MOD
 !** TEST04
 PROGRAM TEST04
-  USE TEST04_MOD
-  use slatec
+  USE TEST04_MOD, ONLY : CFNCK
+  USE slatec, ONLY : I1MACH, XSETF, XSETUN, XERMAX
+  USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !>
   !***

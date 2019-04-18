@@ -1,6 +1,5 @@
 !** MPSTR
 SUBROUTINE MPSTR(X,Y)
-  USE MPCOM
   !>
   !***
   !  Subsidiary to DQDOTA and DQDOTI
@@ -33,7 +32,7 @@ SUBROUTINE MPSTR(X,Y)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   !   930124  Increased Array size in MPCON for SUN -r8.  (RWC)
-
+  USE MPCOM, ONLY : T
   INTEGER i, X(*), Y(*)
   !* FIRST EXECUTABLE STATEMENT  MPSTR
   DO i = 1, T + 2

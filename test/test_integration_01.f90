@@ -1,11 +1,9 @@
 MODULE TEST41_MOD
-  use slatec
   IMPLICIT NONE
 
 CONTAINS
   !** AVNTST
   SUBROUTINE AVNTST(Lun,Kprint,Ipass)
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for AVINT.
@@ -27,7 +25,7 @@ CONTAINS
     !   910708  Minor modifications in use of KPRINT.  (WRB)
     !   920210  Code restructured and revised to test error returns for all
     !           values of KPRINT.  (WRB)
-
+    USE slatec, ONLY : AVINT, R1MACH, XERCLR, XGETF, XSETF
     REAL a, ans, b, del, rn1, sqb, tol, tol1, x(501), xint, y(501)
     INTEGER i, ierr, Ipass, kontrl, Kprint, Lun, n
     LOGICAL fatal
@@ -212,7 +210,6 @@ CONTAINS
   END SUBROUTINE AVNTST
   !** QG8TST
   SUBROUTINE QG8TST(Lun,Kprint,Ipass)
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for GAUS8.
@@ -234,7 +231,7 @@ CONTAINS
     !   920213  Code restructured to test GAUS8 for all values of KPRINT,
     !           second accuracy test added and testing of error returns
     !           revised.  (WRB)
-
+    USE slatec, ONLY : GAUS8, R1MACH, XGETF, XSETF
     !     .. Scalar Arguments ..
     INTEGER Ipass, Kprint, Lun
     !     .. Local Scalars ..
@@ -357,7 +354,6 @@ CONTAINS
   END SUBROUTINE QG8TST
   !** QN79QX
   SUBROUTINE QN79QX(Lun,Kprint,Ipass)
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for QNC79.
@@ -379,7 +375,7 @@ CONTAINS
     !   920213  Code restructured to test QNC79 for all values of KPRINT,
     !           second accuracy test added and testing of error returns
     !           revised.  (WRB)
-
+    USE slatec, ONLY : QNC79, R1MACH, XGETF, XSETF
     INTEGER kontrl
     !     .. Scalar Arguments ..
     INTEGER Ipass, Kprint, Lun
@@ -504,7 +500,6 @@ CONTAINS
   END SUBROUTINE QN79QX
   !** FQD1
   REAL FUNCTION FQD1(X)
-    IMPLICIT NONE
     !>
     !***
     !  Function evaluator for QNC79 and GAUS8 quick checks.
@@ -532,7 +527,6 @@ CONTAINS
   END FUNCTION FQD1
   !** FQD2
   REAL FUNCTION FQD2(X)
-    IMPLICIT NONE
     !>
     !***
     !  Function evaluator for QNC79 and GAUS8 quick checks.
@@ -560,8 +554,9 @@ CONTAINS
 END MODULE TEST41_MOD
 !** TEST41
 PROGRAM TEST41
-  USE TEST41_MOD
-  use slatec
+  USE TEST41_MOD, ONLY : AVNTST, QG8TST, QN79QX
+  USE slatec, ONLY : I1MACH, XSETF, XSETUN, XERMAX
+  USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !>
   !***

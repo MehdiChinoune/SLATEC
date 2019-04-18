@@ -1,6 +1,5 @@
 !** DSTWAY
 SUBROUTINE DSTWAY(U,V,Yhp,Inout,Stowa)
-  USE DML, ONLY : NCOmp, NFC, X, XOP, INFo, ISTkop, KOP, NDIsk, NTApe, NEQivp
   !>
   !***
   !  Subsidiary to DBVSUP
@@ -32,7 +31,7 @@ SUBROUTINE DSTWAY(U,V,Yhp,Inout,Stowa)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
-
+  USE DML, ONLY : NCOmp, NFC, X, XOP, INFo, ISTkop, KOP, NDIsk, NTApe, NEQivp
   !
   INTEGER Inout, j, k, ko, ks, ksj
   REAL(8) :: Stowa(*), U(*), V(*), Yhp(*)

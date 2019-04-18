@@ -1,6 +1,5 @@
 !** INXCB
 SUBROUTINE INXCB(I,Ir,Idx,Idp)
-  USE CCBLK
   !>
   !***
   !  Subsidiary to CBLKTR
@@ -21,7 +20,7 @@ SUBROUTINE INXCB(I,Ir,Idx,Idp)
   !   801001  DATE WRITTEN
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
-
+  USE CCBLK, ONLY : IK, NM
   INTEGER I, id, Idp, Idx, ipl, Ir, izh
   !* FIRST EXECUTABLE STATEMENT  INXCB
   Idp = 0

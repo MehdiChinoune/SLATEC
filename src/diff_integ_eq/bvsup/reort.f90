@@ -1,7 +1,5 @@
 !** REORT
 SUBROUTINE REORT(Ncomp,Y,Yp,Yhp,Niv,W,S,P,Ip,Stowa,Iflag)
-  USE ML, ONLY : C, INHomo, NFC, PX, PWCnd, TND, X, XENd, XOT, KNSwot, &
-    LOTjp, MNSwot, NSWot, TOL, NPS, NFCc
   !>
   !***
   !  Subsidiary to BVSUP
@@ -56,7 +54,9 @@ SUBROUTINE REORT(Ncomp,Y,Yp,Yhp,Niv,W,S,P,Ip,Stowa,Iflag)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
-
+  USE ML, ONLY : C, INHomo, NFC, PX, PWCnd, TND, X, XENd, XOT, KNSwot, &
+    LOTjp, MNSwot, NSWot, TOL, NPS, NFCc
+  USE linear, ONLY : SDOT
   INTEGER Ncomp, nfcp, Niv, Iflag, ijk, Ip(*), j, k, kk, l, mflag
   REAL dnd, dndt, dx, P(*), S(*), srp, Stowa(*), vnorm, W(*), wcnd, &
     Y(Ncomp,*), Yhp(Ncomp,*), Yp(*), ypnm

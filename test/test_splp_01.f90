@@ -1,11 +1,9 @@
 MODULE TEST37_MOD
-  use slatec
   IMPLICIT NONE
 
 CONTAINS
   !** SPLPQX
   SUBROUTINE SPLPQX(Lun,Kprint,Ipass)
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for SPLP.
@@ -23,7 +21,8 @@ CONTAINS
     !   890911  Removed unnecessary intrinsics.  (WRB)
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   901013  Added additional printout on failure.  (RWC)
-
+    USE slatec, ONLY : USRMAT, SPLP
+    USE common_mod, ONLY : PASS
     REAL bl(60), bu(60), d(14,37), dattrv(210), duals(60), prgopt(50), &
       primal(60), work(800), zero
     INTEGER i, ibasis(60), ic, icnt, ind(60), info, Ipass, isoln(14), iv, ivv, &
@@ -260,7 +259,6 @@ CONTAINS
   END SUBROUTINE SPLPQX
   !** SBOCQX
   SUBROUTINE SBOCQX(Lun,Kprint,Ipass)
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for SBOCLS.
@@ -290,7 +288,7 @@ CONTAINS
     !   890618  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   901013  Added PASS/FAIL message and cleaned up FORMATs.  (RWC)
-
+    USE slatec, ONLY : SCOPY, SBOLS, SNRM2, SBOCLS, R1MACH
     INTEGER ib, Ipass, irhs, itest, j, Kprint, Lun, mcon, mdw, &
       mode, mpass, mrows, ncols
     REAL rnorm, rnormc, sr
@@ -426,8 +424,9 @@ CONTAINS
 END MODULE TEST37_MOD
 !** TEST37
 PROGRAM TEST37
-  USE TEST37_MOD
-  use slatec
+  USE TEST37_MOD, ONLY : SBOCQX, SPLPQX
+  USE slatec, ONLY : I1MACH, XSETF, XSETUN, XERMAX
+  USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !>
   !***

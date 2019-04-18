@@ -143,7 +143,7 @@ SUBROUTINE DHFTI(A,Mda,M,N,B,Mdb,Nb,Tau,Krank,Rnorm,H,G,Ip)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   901005  Replace usage of DDIFF with usage of D1MACH.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-
+  USE service, ONLY : D1MACH, XERMSG
   INTEGER i, ii, iopt, Ip(*), ip1, j, jb, jj, k, kp1, Krank, l, &
     ldiag, lmax, M, Mda, Mdb, N, Nb, nerr
   REAL(8) :: A(Mda,*), B(Mdb,*), dzero, factor, G(*), H(*), hmax, &

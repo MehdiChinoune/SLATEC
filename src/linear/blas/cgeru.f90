@@ -84,7 +84,7 @@ SUBROUTINE CGERU(M,N,Alpha,X,Incx,Y,Incy,A,Lda)
   !                 pp. 1-17, March 1988.
   !***
   ! **Routines called:**  XERBLA
-
+  USE service, ONLY : XERBLA
   !* REVISION HISTORY  (YYMMDD)
   !   861022  DATE WRITTEN
   !   910605  Modified to meet SLATEC prologue standards.  Only comment

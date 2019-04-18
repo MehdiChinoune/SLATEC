@@ -130,7 +130,7 @@ SUBROUTINE POLFIT(N,X,Y,W,Maxdeg,Ndeg,Eps,R,Ierr,A)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !   920527  Corrected erroneous statements in DESCRIPTION.  (WRB)
-
+  USE service, ONLY : XERMSG
   REAL A(*), degf, den, Eps, etst, f, fcrit, R(*), sig, sigj, sigjm1, sigpas, &
     temp, W(*), w1, w11, X(*), xm, Y(*), yp(1)
   INTEGER i, idegf, Ierr, j, jp1, jpas, k1, k1pj, k2, k2pj, k3, k3pi, k4, k4pi, &

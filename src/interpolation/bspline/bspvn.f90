@@ -78,7 +78,7 @@ SUBROUTINE BSPVN(T,Jhigh,K,Indexx,X,Ileft,Vnikx,Work,Iwork)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-
+  USE service, ONLY : XERMSG
   !
   INTEGER Ileft, imjp1, Indexx, ipj, Iwork, Jhigh, jp1, jp1ml, K, l
   REAL T(*), vm, vmprev, Vnikx(*), Work(*), X

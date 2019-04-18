@@ -97,7 +97,7 @@ SUBROUTINE DBESI(X,Alpha,Kode,N,Y,Nz)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-
+  USE service, ONLY : XERMSG, D1MACH, I1MACH
   !
   INTEGER i, ialp, in, is, i1, k, kk, km, Kode, kt, N, nn, ns, Nz
   REAL(8) :: ain, ak, akm, Alpha, ans, ap, arg, atol, tolln, dfn, dtm, dx, earg, &

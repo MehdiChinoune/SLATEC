@@ -1,6 +1,5 @@
 !** DEFER
 SUBROUTINE DEFER(COFX,COFY,Idmn,Usol,Grhs)
-  USE SPLPCM
   !>
   !***
   !  Subsidiary to SEPELI
@@ -40,7 +39,7 @@ SUBROUTINE DEFER(COFX,COFY,Idmn,Usol,Grhs)
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
-
+  USE SPLPCM, ONLY : L, AIT, CIT, DLX, DLY, IS, JS, K, KSWx, KSWy, MS, NS
   INTEGER i, Idmn, j
   REAL ai, bi, ci, dj, ej, fj, Grhs(Idmn,*), tx, ty, Usol(Idmn,*), uxxx, uxxxx, &
     uyyy, uyyyy, xi, yj

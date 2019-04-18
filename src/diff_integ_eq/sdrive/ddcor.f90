@@ -32,7 +32,7 @@ SUBROUTINE DDCOR(Dfdy,El,FA,H,Ierror,Impl,Ipvt,Matdim,Miter,Ml,Mu,N,Nde,&
   !* REVISION HISTORY  (YYMMDD)
   !   790601  DATE WRITTEN
   !   900329  Initial submission to SLATEC.
-
+  USE linear, ONLY : DNRM2, DGBSL, DGESL
   INTEGER i, Ierror, iflag, Impl, j, Jstate, Matdim, Miter, Ml, Mu, mw, N, Nde, Nq
   REAL(8) :: A(Matdim,*), D, Dfdy(Matdim,*), El(13,12), H, &
     Save1(*), Save2(*), T, Y(*), Yh(N,*), Ywt(*)

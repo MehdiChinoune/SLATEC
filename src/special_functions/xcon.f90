@@ -1,6 +1,5 @@
 !** XCON
 SUBROUTINE XCON(X,Ix,Ierror)
-  USE XBLK ,ONLY: RADixx, RADixl, DLG10r, L
   !>
   !***
   !  To provide single-precision floating-point arithmetic
@@ -47,7 +46,7 @@ SUBROUTINE XCON(X,Ix,Ierror)
   !           Corrected order of sections in prologue and added TYPE
   !           section.  (WRB)
   !   920127  Revised PURPOSE section of prologue.  (DWL)
-
+  USE XBLK ,ONLY: RADixx, RADixl, DLG10r, L
   INTEGER i, i1, icase, Ierror, itemp, j, j1, j2, Ix
   REAL X
   !

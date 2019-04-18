@@ -1,11 +1,9 @@
 MODULE TEST14_MOD
-  use slatec
   IMPLICIT NONE
 
 CONTAINS
   !** QCDRC
   SUBROUTINE QCDRC(Lun,Kprint,Ipass)
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for DRC.
@@ -28,7 +26,7 @@ CONTAINS
     !   890618  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   910708  Minor modifications in use of KPRINT.  (WRB)
-
+    USE slatec, ONLY : D1MACH, DRC, NUMXER, XERCLR, XGETF, XSETF
     INTEGER Kprint, Ipass, contrl, kontrl, Lun, ier
     INTEGER ipass1, ipass2, ipass3, ipass4
     REAL(8) :: pi, trc, dif
@@ -110,7 +108,6 @@ CONTAINS
   END SUBROUTINE QCDRC
   !** QCDRD
   SUBROUTINE QCDRD(Lun,Kprint,Ipass)
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for DRD.
@@ -134,7 +131,7 @@ CONTAINS
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   910708  Minor modifications in use of KPRINT.  (WRB)
     !   930214  Added more digits to BLEM.  (WRB)
-
+    USE slatec, ONLY : D1MACH, DRD, NUMXER, XERCLR, XGETF, XSETF
     INTEGER Kprint, Ipass, contrl, kontrl, Lun, ier
     INTEGER ipass1, ipass2, ipass3, ipass4
     REAL(8) :: blem, trd, dif
@@ -217,7 +214,6 @@ CONTAINS
   END SUBROUTINE QCDRD
   !** QCDRF
   SUBROUTINE QCDRF(Lun,Kprint,Ipass)
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for DRF.
@@ -241,7 +237,7 @@ CONTAINS
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   910708  Minor modifications in use of KPRINT.  (WRB)
     !   930214  Added more digits to ALEM.  (WRB)
-
+    USE slatec, ONLY : D1MACH, DRF, NUMXER, XERCLR, XGETF, XSETF
     INTEGER Kprint, Ipass, contrl, kontrl, Lun, ier
     INTEGER ipass1, ipass2, ipass3, ipass4
     REAL(8) :: alem, trf, dif
@@ -324,7 +320,6 @@ CONTAINS
   END SUBROUTINE QCDRF
   !** QCDRJ
   SUBROUTINE QCDRJ(Lun,Kprint,Ipass)
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for DRJ.
@@ -348,7 +343,7 @@ CONTAINS
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   910708  Minor modifications in use of KPRINT.  (WRB)
     !   930214  Added more digits to CONSJ.  (WRB)
-
+    USE slatec, ONLY : D1MACH, DRJ, NUMXER, XERCLR, XGETF, XSETF
     INTEGER Kprint, Ipass, contrl, kontrl, Lun, ier
     INTEGER ipass1, ipass2, ipass3, ipass4
     REAL(8) :: consj, trj, dif
@@ -431,8 +426,9 @@ CONTAINS
 END MODULE TEST14_MOD
 !** TEST14
 PROGRAM TEST14
-  USE TEST14_MOD
-  use slatec
+  USE TEST14_MOD, ONLY : QCDRC, QCDRD, QCDRF, QCDRJ
+  USE slatec, ONLY : I1MACH, XSETF, XSETUN, XERMAX
+  USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !>
   !***

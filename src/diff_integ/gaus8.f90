@@ -79,7 +79,7 @@ SUBROUTINE GAUS8(FUN,A,B,Err,Ans,Ierr)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
-
+  USE service, ONLY : XERMSG, R1MACH, I1MACH
   INTERFACE
     REAL FUNCTION FUN(X)
       REAL, INTENT(IN) :: X

@@ -77,7 +77,7 @@ SUBROUTINE R1UPDT(M,N,S,Ls,U,V,W,Sing)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   900328  Added TYPE section.  (WRB)
-
+  USE service, ONLY : R1MACH
   INTEGER M, N, Ls
   LOGICAL Sing
   REAL S(*), U(*), V(*), W(*)

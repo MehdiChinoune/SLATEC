@@ -64,6 +64,7 @@ SUBROUTINE LPDP(A,Mda,M,N1,N2,Prgopt,X,Wnorm,Mode,Ws,Is)
   !     SSCAL,SNRM2,  SEE TRANS. MATH. SOFT., VOL. 5, NO. 3, P. 308.
   !     SCOPY
   !
+  USE linear, ONLY : SCOPY, SDOT, SSCAL, SNRM2
   INTEGER i, iw, ix, j, l, M, Mda, Mode, modew, n, N1, N2, np1
   REAL A(Mda,*), Prgopt(*), Ws(*), Wnorm, X(*)
   INTEGER Is(*)

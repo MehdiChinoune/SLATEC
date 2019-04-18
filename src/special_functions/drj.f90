@@ -304,7 +304,7 @@ REAL(8) FUNCTION DRJ(X,Y,Z,P,Ier)
   !   900510  Changed calls to XERMSG to standard form, and some
   !           editorial changes.  (RWC)).
   !   920501  Reformatted the REFERENCES section.  (WRB)
-
+  USE service, ONLY : XERMSG, D1MACH
   INTEGER Ier
   CHARACTER(16) :: xern3, xern4, xern5, xern6, xern7
   REAL(8) :: alfa, beta, ea, eb, ec, e2, e3, epslon, lamda, mu, P, pn, &

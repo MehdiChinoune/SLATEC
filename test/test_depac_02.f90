@@ -1,11 +1,9 @@
 MODULE TEST44_MOD
-  use slatec
   IMPLICIT NONE
 
 CONTAINS
   !** DJAC
   SUBROUTINE DJAC(T,U,Pd,Nrowpd,Rpar,Ipar)
-    IMPLICIT NONE
     !>
     !***
     !  Evaluate Jacobian for DDEBDF quick check.
@@ -42,7 +40,6 @@ CONTAINS
   END SUBROUTINE DJAC
   !** DFDEQC
   SUBROUTINE DFDEQC(T,U,Uprime,Rpar,Ipar)
-    IMPLICIT NONE
     !>
     !***
     !  Derivative evaluator for DDEPAC quick checks.
@@ -80,7 +77,6 @@ CONTAINS
   END SUBROUTINE DFDEQC
   !** QXDABM
   SUBROUTINE QXDABM(Lun,Kprint,Ipass)
-    IMPLICIT NONE
     !>
     !***
     !  Test the DEPAC routine DDEABM.
@@ -131,7 +127,7 @@ CONTAINS
     !   890618  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   900415  Code extensively revised.  (WRB)
-
+    USE slatec, ONLY : D1MACH, DDEABM
     !
     !     Declare arguments.
     !
@@ -204,7 +200,6 @@ CONTAINS
   END SUBROUTINE QXDABM
   !** QXDBDF
   SUBROUTINE QXDBDF(Lun,Kprint,Ipass)
-    IMPLICIT NONE
     !>
     !***
     !  Test the DEPAC routine DDEBDF.
@@ -255,7 +250,7 @@ CONTAINS
     !   890618  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   900415  Code extensively revised.  (WRB)
-
+    USE slatec, ONLY : D1MACH, DDEBDF
     !
     !     Declare arguments.
     !
@@ -330,8 +325,6 @@ CONTAINS
   END SUBROUTINE QXDBDF
   !** QXDBVS
   SUBROUTINE QXDBVS(Lun,Kprint,Ipass)
-    USE DSAVEX
-    IMPLICIT NONE
     !>
     !***
     !  Quick check for DBVSUP.
@@ -352,7 +345,9 @@ CONTAINS
     !   901014  Made editorial changes and added correct result to
     !           output. (RWC)
     !   910708  Minor modifications in use of KPRINT.  (WRB)
-
+    USE DSAVEX, ONLY : XSAve
+    USE slatec, ONLY : DBVSUP
+    USE common_mod, ONLY : PASS
     INTEGER i, iflag, igofx, Ipass, ipss, j, kont, kount, Kprint, l, &
       Lun, ncomp, ndiw, ndw, neqivp, nfc, nic, nrowa, nrowb, nrowy
     INTEGER numort, nxpts
@@ -590,7 +585,6 @@ CONTAINS
   END SUBROUTINE QXDBVS
   !** QXDRKF
   SUBROUTINE QXDRKF(Lun,Kprint,Ipass)
-    IMPLICIT NONE
     !>
     !***
     !  Test the DEPAC routine DDERKF.
@@ -641,7 +635,7 @@ CONTAINS
     !   890618  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   900415  Code extensively revised.  (WRB)
-
+    USE slatec, ONLY : D1MACH, DDERKF
     !
     !     Declare arguments.
     !
@@ -715,8 +709,9 @@ CONTAINS
 END MODULE TEST44_MOD
 !** TEST44
 PROGRAM TEST44
-  USE TEST44_MOD
-  use slatec
+  USE TEST44_MOD, ONLY : QXDABM, QXDBDF, QXDBVS, QXDRKF
+  USE slatec, ONLY : I1MACH, XSETF, XSETUN, XERMAX
+  USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !>
   !***

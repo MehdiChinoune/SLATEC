@@ -209,7 +209,7 @@ SUBROUTINE DQAWF(F,A,Omega,Integr,Epsabs,Result,Abserr,Neval,Ier,Limlst,&
   !   891009  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-
+  USE service, ONLY : XERMSG
   !
   REAL(8) :: A, Abserr, Epsabs, Omega, Result, Work(*)
   INTEGER Ier, Integr, Iwork(*), Leniw, Lenw, limit, Limlst, ll2, lvl, &

@@ -47,7 +47,7 @@ REAL FUNCTION PCHDF(K,X,S,Ierr)
   !                 Verlag, New York, 1978, pp. 10-16.
   !***
   ! **Routines called:**  XERMSG
-
+  USE service, ONLY : XERMSG
   !* REVISION HISTORY  (YYMMDD)
   !   820503  DATE WRITTEN
   !   820805  Converted to SLATEC library version.

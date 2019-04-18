@@ -35,7 +35,7 @@ COMPLEX FUNCTION CBETA(A,B)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   900727  Added EXTERNAL statement.  (WRB)
-
+  USE service, ONLY : XERMSG
   REAL xmaxt, xmin
   COMPLEX A, B
   REAL :: xmax = 0.0

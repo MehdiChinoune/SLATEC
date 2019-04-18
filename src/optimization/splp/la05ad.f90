@@ -1,6 +1,5 @@
 !** LA05AD
 SUBROUTINE LA05AD(A,Ind,Nz,Ia,N,Ip,Iw,W,G,U)
-  USE LA05DD
   !>
   !***
   !  Subsidiary to DSPLP
@@ -59,7 +58,8 @@ SUBROUTINE LA05AD(A,Ind,Nz,Ia,N,Ip,Iw,W,G,U)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900402  Added TYPE section.  (WRB)
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
-
+  USE LA05DD, ONLY : LP, LCOl, LENl, LENu, LROw, NCP, LROW, SMAll
+  USE service, ONLY : XERMSG, XSETUN, D1MACH
   INTEGER i, Ia, idummy, ii, il, in, ipp, ipv, ir, j, jcost, jp, k, k1, k2, kc, &
     kcost, kj, kk, kl, klc, kn, knp, kp, kpc, kpl, kq, kr, krl, ks, l, mcp, N, &
     nc, Nz, nzc

@@ -32,7 +32,7 @@ SUBROUTINE CDCOR(Dfdy,El,FA,H,Ierror,Impl,Ipvt,Matdim,Miter,Ml,Mu,N,Nde,&
   !* REVISION HISTORY  (YYMMDD)
   !   790601  DATE WRITTEN
   !   900329  Initial submission to SLATEC.
-
+  USE linear, ONLY : SCNRM2, CGBSL, CGESL
   INTEGER i, Ierror, iflag, Impl, j, Jstate, Matdim, Miter, Ml, Mu, mw, N, Nde, Nq
   COMPLEX A(Matdim,*), Dfdy(Matdim,*), Save1(*), Save2(*), Y(*), Yh(N,*), Ywt(*)
   REAL D, El(13,12), H, T
