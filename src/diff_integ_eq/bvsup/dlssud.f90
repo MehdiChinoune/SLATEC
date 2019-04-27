@@ -117,9 +117,8 @@ SUBROUTINE DLSSUD(A,X,B,N,M,Nrda,U,Nrdu,Iflag,Mlso,Irank,Iscale,Q,Diag,&
   !   910408  Updated the AUTHOR and REFERENCES sections.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   USE service, ONLY : XERMSG, XGETF, XSETF, XERMAX, J4SAVE, D1MACH
-  USE linear, ONLY : DDOT
   INTEGER i, Iflag, Irank, irp, Iscale, Isflg, j, jr, k, kp, &
-    Kpivot(*), l, M, maxmes, mj, Mlso, N, nfat, nfatal, nmir, Nrda, Nrdu, nu
+    Kpivot(*), l, M, maxmes, Mlso, N, nfat, nfatal, nmir, Nrda, Nrdu, nu
   REAL(8) :: A(Nrda,*), B(*), Diag(*), Div(*), gam, gama, &
     Q(Nrda,*), res, S(*), Scales(*), ss, Td(*), U(Nrdu,*), uro, X(*)
   !
@@ -224,16 +223,17 @@ SUBROUTINE DLSSUD(A,X,B,N,M,Nrda,U,Nrdu,Iflag,Mlso,Irank,Iscale,Q,Diag,&
       !              INCONSISTENT
       !
       nmir = N - Irank
-      ss = DDOT(N,S(1),1,S(1),1)
+      ss = NORM2(S(1:N))**2
       DO l = 1, Irank
         k = irp - l
-        gam = ((Td(k)*S(k))+DDOT(nmir,Q(irp,k),1,S(irp),1))/(Td(k)*Div(k))
+        gam = ((Td(k)*S(k))+DOT_PRODUCT(Q(irp:N,k),S(irp:N))) &
+          /(Td(k)*Div(k))
         S(k) = S(k) + gam*Td(k)
         DO j = irp, N
           S(j) = S(j) + gam*Q(j,k)
         END DO
       END DO
-      res = DDOT(nmir,S(irp),1,S(irp),1)
+      res = NORM2(S(irp:irp+nmir-1))**2
       !           ...EXIT
       IF ( res>ss*(10.0D0*MAX(10.0D0**Isflg,10.0D0*uro))**2 ) THEN
         !
@@ -248,7 +248,7 @@ SUBROUTINE DLSSUD(A,X,B,N,M,Nrda,U,Nrdu,Iflag,Mlso,Irank,Iscale,Q,Diag,&
     S(1) = S(1)/Div(1)
     IF ( Irank>=2 ) THEN
       DO k = 2, Irank
-        S(k) = (S(k)-DDOT(k-1,Q(k,1),Nrda,S(1),1))/Div(k)
+        S(k) = (S(k)-DOT_PRODUCT(Q(k,1:k-1),S(1:k-1)))/Div(k)
       END DO
     END IF
     !
@@ -261,8 +261,7 @@ SUBROUTINE DLSSUD(A,X,B,N,M,Nrda,U,Nrdu,Iflag,Mlso,Irank,Iscale,Q,Diag,&
     !
     DO jr = 1, Irank
       j = irp - jr
-      mj = M - j + 1
-      gama = DDOT(mj,Q(j,j),Nrda,X(j),1)/(Diag(j)*Q(j,j))
+      gama = DOT_PRODUCT(Q(j,j:M),X(j:M))/(Diag(j)*Q(j,j))
       DO k = j, M
         X(k) = X(k) + gama*Q(j,k)
       END DO
@@ -288,8 +287,7 @@ SUBROUTINE DLSSUD(A,X,B,N,M,Nrda,U,Nrdu,Iflag,Mlso,Irank,Iscale,Q,Diag,&
         !
         DO jr = 1, Irank
           j = irp - jr
-          mj = M - j + 1
-          gama = DDOT(mj,Q(j,j),Nrda,U(j,k),1)/(Diag(j)*Q(j,j))
+          gama = DOT_PRODUCT(Q(j,j:M),U(j:M,k))/(Diag(j)*Q(j,j))
           DO i = j, M
             U(i,k) = U(i,k) + gama*Q(j,i)
           END DO

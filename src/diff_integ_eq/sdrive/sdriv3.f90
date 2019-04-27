@@ -728,7 +728,7 @@ SUBROUTINE SDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
   !   790601  DATE WRITTEN
   !   900329  Initial submission to SLATEC.
   USE service, ONLY : XERMSG, R1MACH
-  USE linear, ONLY : SNRM2, SGBSL, SGESL, SGBFA, SGEFA
+  USE linear, ONLY : SGBSL, SGESL, SGBFA, SGEFA
   EXTERNAL :: F, JACOBN, FA, G, USERS
   REAL ae, big, Eps, Ewt(*), G, glast, gnow, h, Hmax, hsign, hused, re, &
     sizee, summ, T, tlast, Tout, troot, uround, Work(*), Y(*)
@@ -1280,7 +1280,7 @@ SUBROUTINE SDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
   DO i = 1, N
     Work(i+isave2-1) = Y(i)/Work(i+iywt-1)
   END DO
-  summ = SNRM2(N,Work(isave2),1)/SQRT(REAL(N))
+  summ = NORM2(Work(isave2:isave2+N))/SQRT(REAL(N))
   summ = MAX(1.E0,summ)
   IF ( Eps<summ*uround ) THEN
     Eps = summ*uround*(1.E0+10.E0*uround)

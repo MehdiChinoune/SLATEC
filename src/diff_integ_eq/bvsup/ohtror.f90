@@ -30,7 +30,6 @@ SUBROUTINE OHTROR(Q,N,Nrda,Diag,Irank,Div,Td)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
-  USE linear, ONLY : SDOT
   INTEGER Irank, irp, j, k, kir, kirm, l, N, nmir, Nrda
   REAL dd, Diag(*), diagk, Div(*), Q(Nrda,*), qs, sig, sqd, Td(*), tdv
   !* FIRST EXECUTABLE STATEMENT  OHTROR
@@ -39,7 +38,7 @@ SUBROUTINE OHTROR(Q,N,Nrda,Diag,Irank,Div,Td)
   DO k = 1, Irank
     kir = irp - k
     diagk = Diag(kir)
-    sig = (diagk*diagk) + SDOT(nmir,Q(kir,irp),Nrda,Q(kir,irp),Nrda)
+    sig = (diagk*diagk) + DOT_PRODUCT(Q(kir,irp:N),Q(kir,irp:N))
     dd = SIGN(SQRT(sig),-diagk)
     Div(kir) = dd
     tdv = diagk - dd
@@ -48,7 +47,7 @@ SUBROUTINE OHTROR(Q,N,Nrda,Diag,Irank,Div,Td)
       kirm = kir - 1
       sqd = dd*diagk - sig
       DO j = 1, kirm
-        qs = ((tdv*Q(j,kir))+SDOT(nmir,Q(j,irp),Nrda,Q(kir,irp),Nrda))/sqd
+        qs = ((tdv*Q(j,kir))+DOT_PRODUCT(Q(j,irp:N),Q(kir,irp:N)))/sqd
         Q(j,kir) = Q(j,kir) + qs*tdv
         DO l = irp, N
           Q(j,l) = Q(j,l) + qs*Q(kir,l)

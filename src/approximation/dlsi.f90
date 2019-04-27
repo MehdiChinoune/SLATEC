@@ -61,7 +61,7 @@ SUBROUTINE DLSI(W,Mdw,Ma,Mg,N,Prgopt,X,Rnorm,Mode,Ws,Ip)
   !   900604  DP version created from SP version.  (RWC)
   !   920422  Changed CALL to DHFTI to include variable MA.  (WRB)
   USE service, ONLY : D1MACH
-  USE linear, ONLY : DCOPY, DSCAL, DSWAP, DDOT, DH12, DHFTI, DASUM, DAXPY
+  USE linear, ONLY : DSWAP, DH12, DHFTI, DAXPY
   INTEGER Ip(*), Ma, Mdw, Mg, Mode, N
   REAL(8) :: Prgopt(*), Rnorm, W(Mdw,*), Ws(*), X(*)
   !
@@ -111,7 +111,7 @@ SUBROUTINE DLSI(W,Mdw,Ma,Mg,N,Prgopt,X,Rnorm,Mode,Ws,Ip)
       !
       anorm = 0.D0
       DO j = 1, N
-        anorm = MAX(anorm,DASUM(Ma,W(1,j),1))
+        anorm = MAX(anorm,SUM(ABS(W(1:Ma,j))))
       END DO
       !
       !     Set tolerance for DHFTI( ) rank test.
@@ -121,7 +121,7 @@ SUBROUTINE DLSI(W,Mdw,Ma,Mg,N,Prgopt,X,Rnorm,Mode,Ws,Ip)
       !     Compute Householder orthogonal decomposition of matrix.
       !
       Ws(1:N) = 0.D0
-      CALL DCOPY(Ma,W(1,np1),1,Ws,1)
+      Ws(1:Ma) = W(1:Ma,np1)
       k = MAX(m,N)
       minman = MIN(Ma,N)
       n1 = k + 1
@@ -141,7 +141,7 @@ SUBROUTINE DLSI(W,Mdw,Ma,Mg,N,Prgopt,X,Rnorm,Mode,Ws,Ip)
       IF ( Ma<m ) THEN
         IF ( minman>0 ) THEN
           DO i = map1, m
-            W(i,np1) = W(i,np1) - DDOT(N,W(i,1),Mdw,Ws,1)
+            W(i,np1) = W(i,np1) - DOT_PRODUCT(W(i,1:N),Ws(1:N))
           END DO
           !
           !           Apply permutations to col. of inequality constraint matrix.
@@ -162,7 +162,7 @@ SUBROUTINE DLSI(W,Mdw,Ma,Mg,N,Prgopt,X,Rnorm,Mode,Ws,Ip)
           !
           DO i = map1, m
             DO j = 1, krank
-              W(i,j) = (W(i,j)-DDOT(j-1,W(1,j),1,W(i,1),Mdw))/W(j,j)
+              W(i,j) = (W(i,j)-DOT_PRODUCT(W(1:j-1,j),W(i,1:j-1)))/W(j,j)
             END DO
           END DO
         END IF
@@ -177,7 +177,7 @@ SUBROUTINE DLSI(W,Mdw,Ma,Mg,N,Prgopt,X,Rnorm,Mode,Ws,Ip)
         !
         IF ( mdlpdp==1 ) THEN
           DO i = krank, 1, -1
-            X(i) = (X(i)-DDOT(krank-i,W(i,i+1),Mdw,X(i+1),1))/W(i,i)
+            X(i) = (X(i)-DOT_PRODUCT(W(i,i+1:krank),X(i+1:krank)))/W(i,i)
           END DO
           !
           !           Apply Householder transformation to solution vector.
@@ -210,7 +210,7 @@ SUBROUTINE DLSI(W,Mdw,Ma,Mg,N,Prgopt,X,Rnorm,Mode,Ws,Ip)
           Mode = 2
         END IF
       ELSE
-        CALL DCOPY(N,Ws,1,X,1)
+        X(1:N) = Ws(1:N)
       END IF
       !
       !     Compute covariance matrix based on the orthogonal decomposition
@@ -222,7 +222,9 @@ SUBROUTINE DLSI(W,Mdw,Ma,Mg,N,Prgopt,X,Rnorm,Mode,Ws,Ip)
         !
         !     Copy diagonal terms to working array.
         !
-        CALL DCOPY(krank,W,Mdw+1,Ws(n2),1)
+        DO j = 1, krank
+          Ws(n2+j-1) = W(j,j)
+        END DO
         !
         !     Reciprocate diagonal terms.
         !
@@ -235,7 +237,7 @@ SUBROUTINE DLSI(W,Mdw,Ma,Mg,N,Prgopt,X,Rnorm,Mode,Ws,Ip)
         IF ( krank>1 ) THEN
           DO i = 1, krm1
             DO j = i + 1, krank
-              W(i,j) = -DDOT(j-i,W(i,i),Mdw,W(i,j),1)*W(j,j)
+              W(i,j) = -DOT_PRODUCT(W(i,i:j-1),W(i:j-1,j))*W(j,j)
             END DO
           END DO
         END IF
@@ -244,7 +246,7 @@ SUBROUTINE DLSI(W,Mdw,Ma,Mg,N,Prgopt,X,Rnorm,Mode,Ws,Ip)
         !
         DO i = 1, krank
           DO j = i, krank
-            W(i,j) = DDOT(krank+1-j,W(i,j),Mdw,W(j,j),Mdw)
+            W(i,j) = DOT_PRODUCT(W(i,j:krank),W(j,j:krank))
           END DO
         END DO
         !
@@ -253,7 +255,7 @@ SUBROUTINE DLSI(W,Mdw,Ma,Mg,N,Prgopt,X,Rnorm,Mode,Ws,Ip)
         !
         IF ( krank<N ) THEN
           DO j = 1, krank
-            CALL DCOPY(j,W(1,j),1,W(j,1),Mdw)
+            W(j,1:j-1) = W(1:j-1,j)
           END DO
           !
           DO i = krp1, N
@@ -285,12 +287,12 @@ SUBROUTINE DLSI(W,Mdw,Ma,Mg,N,Prgopt,X,Rnorm,Mode,Ws,Ip)
               END DO
               !
               DO j = 1, N
-                Ws(j) = rb*(DDOT(j-i,W(j,i),Mdw,Ws(n3+i-1),1)+DDOT(N-j+1,W(j&
-                  ,j),1,Ws(n3+j-1),1))
+                Ws(j) = rb*(DOT_PRODUCT(W(j,i:j-1),Ws(n3+i-1:n3+j-2)) &
+                  +DOT_PRODUCT(W(j:N,j),Ws(n3+j-1:n3+N-1)))
               END DO
               !
               l = n3 + i
-              gam = 0.5D0*rb*DDOT(N-i+1,Ws(l-1),1,Ws(i),1)
+              gam = 0.5D0*rb*DOT_PRODUCT(Ws(l-1:l+N-i-1),Ws(i:N))
               CALL DAXPY(N-i+1,gam,Ws(l-1),1,Ws(i),1)
               DO j = i, N
                 DO l = 1, i - 1
@@ -308,7 +310,7 @@ SUBROUTINE DLSI(W,Mdw,Ma,Mg,N,Prgopt,X,Rnorm,Mode,Ws,Ip)
           !        covariance matrix.
           !
           DO i = 1, N
-            CALL DCOPY(i,W(i,1),Mdw,W(1,i),1)
+            W(1:i-1,i) = W(i,1:i-1)
           END DO
         END IF
         !
@@ -328,8 +330,8 @@ SUBROUTINE DLSI(W,Mdw,Ma,Mg,N,Prgopt,X,Rnorm,Mode,Ws,Ip)
         !     and symmetrize the resulting covariance matrix.
         !
         DO j = 1, N
-          CALL DSCAL(j,fac,W(1,j),1)
-          CALL DCOPY(j,W(1,j),1,W(j,1),Mdw)
+          W(1:j,j) = W(1:j,j)*fac
+          W(j,1:j-1) = W(1:j-1,j)
         END DO
       END IF
       EXIT

@@ -105,7 +105,6 @@ REAL FUNCTION CV(Xval,Ndata,Nconst,Nord,Nbkpt,Bkpt,W)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  USE linear, ONLY : SDOT
   INTEGER i, ileft, ip, is, last, mdg, mdw, n, Nbkpt, Nconst, Ndata, Nord
   REAL Bkpt(Nbkpt), v(40), W(*), Xval, zero
   !* FIRST EXECUTABLE STATEMENT  CV
@@ -123,10 +122,10 @@ REAL FUNCTION CV(Xval,Ndata,Nconst,Nord,Nbkpt,Bkpt,W)
   ip = mdw*(ileft-1) + ileft + is
   n = Nbkpt - Nord
   DO i = 1, Nord
-    v(i) = SDOT(Nord,W(ip),1,v(Nord+1),1)
+    v(i) = DOT_PRODUCT(W(ip:ip+Nord-1),v(Nord+1:2*Nord))
     ip = ip + mdw
   END DO
-  CV = MAX(SDOT(Nord,v,1,v(Nord+1),1),zero)
+  CV = MAX(DOT_PRODUCT(v(1:Nord),v(Nord+1:2*Nord)),zero)
   !
   !     SCALE THE VARIANCE SO IT IS AN UNBIASED ESTIMATE.
   CV = CV/MAX(Ndata-n,1)

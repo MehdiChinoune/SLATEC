@@ -31,7 +31,7 @@ SUBROUTINE DDCOR(Dfdy,El,FA,H,Ierror,Impl,Ipvt,Matdim,Miter,Ml,Mu,N,Nde,&
   !* REVISION HISTORY  (YYMMDD)
   !   790601  DATE WRITTEN
   !   900329  Initial submission to SLATEC.
-  USE linear, ONLY : DNRM2, DGBSL, DGESL
+  USE linear, ONLY : DGBSL, DGESL
   INTEGER i, Ierror, iflag, Impl, j, Jstate, Matdim, Miter, Ml, Mu, mw, N, Nde, Nq
   REAL(8) :: A(Matdim,*), D, Dfdy(Matdim,*), El(13,12), H, &
     Save1(*), Save2(*), T, Y(*), Yh(N,*), Ywt(*)
@@ -48,7 +48,7 @@ SUBROUTINE DDCOR(Dfdy,El,FA,H,Ierror,Impl,Ipvt,Matdim,Miter,Ml,Mu,N,Nde,&
         Save1(i) = (H*Save2(i)-Yh(i,2)-Save1(i))/MAX(ABS(Y(i)),Ywt(i))
       END DO
     END IF
-    D = DNRM2(N,Save1,1)/SQRT(REAL(N, 8))
+    D = NORM2(Save1(1:N))/SQRT(REAL(N, 8))
     DO i = 1, N
       Save1(i) = H*Save2(i) - Yh(i,2)
     END DO
@@ -119,7 +119,7 @@ SUBROUTINE DDCOR(Dfdy,El,FA,H,Ierror,Impl,Ipvt,Matdim,Miter,Ml,Mu,N,Nde,&
         Save2(i) = Save2(i)/MAX(ABS(Y(i)),Ywt(i))
       END DO
     END IF
-    D = DNRM2(N,Save2,1)/SQRT(REAL(N, 8))
+    D = NORM2(Save2(1:N))/SQRT(REAL(N, 8))
   ELSEIF ( Miter==4.OR.Miter==5 ) THEN
     IF ( Impl==0 ) THEN
       DO i = 1, N
@@ -189,7 +189,7 @@ SUBROUTINE DDCOR(Dfdy,El,FA,H,Ierror,Impl,Ipvt,Matdim,Miter,Ml,Mu,N,Nde,&
         Save2(i) = Save2(i)/MAX(ABS(Y(i)),Ywt(i))
       END DO
     END IF
-    D = DNRM2(N,Save2,1)/SQRT(REAL(N, 8))
+    D = NORM2(Save2(1:N))/SQRT(REAL(N, 8))
   ELSEIF ( Miter==3 ) THEN
     iflag = 2
     CALL USERS(Y,Yh(1,2),Ywt,Save1,Save2,T,H,El(1,Nq),Impl,N,Nde,iflag)
@@ -208,6 +208,6 @@ SUBROUTINE DDCOR(Dfdy,El,FA,H,Ierror,Impl,Ipvt,Matdim,Miter,Ml,Mu,N,Nde,&
         Save2(i) = Save2(i)/MAX(ABS(Y(i)),Ywt(i))
       END DO
     END IF
-    D = DNRM2(N,Save2,1)/SQRT(REAL(N, 8))
+    D = NORM2(Save2(1:N))/SQRT(REAL(N, 8))
   END IF
 END SUBROUTINE DDCOR

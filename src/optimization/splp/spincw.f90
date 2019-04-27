@@ -34,7 +34,6 @@ SUBROUTINE SPINCW(Mrelas,Nvars,Lmx,Lbm,Npp,Jstrt,Ibasis,Imat,Ibrc,Ipr,Iwr,&
   !   890605  Removed unreferenced labels.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
-  USE linear, ONLY : SCOPY, SDOT
   REAL cnorm
   INTEGER i, ihi, il1, ilow, ipage, iu1, j, Jstrt, key, &
     Lbm, Lmx, lpg, Mrelas, nnegrc, Npp, Nvars
@@ -50,10 +49,8 @@ SUBROUTINE SPINCW(Mrelas,Nvars,Lmx,Lbm,Npp,Jstrt,Ibasis,Imat,Ibrc,Ipr,Iwr,&
   !
   !     FORM REDUCED COSTS, RZ(*), AND STEEPEST EDGE WEIGHTS, RG(*).
   pagepl = .TRUE.
-  Rz(1) = zero
-  CALL SCOPY(Nvars+Mrelas,Rz,0,Rz,1)
-  Rg(1) = one
-  CALL SCOPY(Nvars+Mrelas,Rg,0,Rg,1)
+  Rz(1:Nvars+Mrelas) = zero
+  Rg(1:Nvars+Mrelas) = one
   nnegrc = 0
   j = Jstrt
   100 CONTINUE
@@ -64,8 +61,7 @@ SUBROUTINE SPINCW(Mrelas,Nvars,Lmx,Lbm,Npp,Jstrt,Ibasis,Imat,Ibrc,Ipr,Iwr,&
     !     MATRIX FORMAT.
   ELSEIF ( j>Nvars ) THEN
     pagepl = .TRUE.
-    Ww(1) = zero
-    CALL SCOPY(Mrelas,Ww,0,Ww,1)
+    Ww(1:Mrelas) = zero
     scalr = -one
     IF ( Ind(j)==2 ) scalr = one
     i = j - Nvars
@@ -74,12 +70,11 @@ SUBROUTINE SPINCW(Mrelas,Nvars,Lmx,Lbm,Npp,Jstrt,Ibasis,Imat,Ibrc,Ipr,Iwr,&
     IF ( Stpedg ) THEN
       trans = .FALSE.
       CALL LA05BS(Basmat,Ibrc,Lbm,Mrelas,Ipr,Iwr,Wr,Gg,Ww,trans)
-      Rg(j) = SDOT(Mrelas,Ww,1,Ww,1) + one
+      Rg(j) = NORM2(Ww(1:Mrelas)) + one
     END IF
   ELSE
     rzj = Costsc*Costs(j)
-    Ww(1) = zero
-    CALL SCOPY(Mrelas,Ww,0,Ww,1)
+    Ww(1:Mrelas) = zero
     IF ( j/=1 ) THEN
       ilow = Imat(j+3) + 1
     ELSE
@@ -118,7 +113,7 @@ SUBROUTINE SPINCW(Mrelas,Nvars,Lmx,Lbm,Npp,Jstrt,Ibasis,Imat,Ibrc,Ipr,Iwr,&
       !
       !     THESE ARE NONBASIC DEPENDENT VARIABLES. THE COLS. ARE IMPLICITLY
       !     DEFINED.
-      Rg(j) = SDOT(Mrelas,Ww,1,Ww,1) + one
+      Rg(j) = NORM2(Ww(1:Mrelas))**2 + one
     END IF
   END IF
   !

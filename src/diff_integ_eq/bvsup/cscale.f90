@@ -26,7 +26,6 @@ SUBROUTINE CSCALE(A,Nrda,Nrow,Ncol,Cols,Colsav,Rows,Rowsav,Anorm,Scales,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
-  USE linear, ONLY : SDOT
   INTEGER Ic, ip, Iscale, j, k, Ncol, Nrda, Nrow
   REAL A(Nrda,*), alog2, Anorm, ascale, Cols(*), Colsav(*), cs, p, Rows(*), Rowsav(*), &
     s, Scales(*)
@@ -38,7 +37,7 @@ SUBROUTINE CSCALE(A,Nrda,Nrow,Ncol,Cols,Colsav,Rows,Rowsav,Anorm,Scales,&
     !
     IF ( Ic/=0 ) THEN
       DO k = 1, Ncol
-        Cols(k) = SDOT(Nrow,A(1,k),1,A(1,k),1)
+        Cols(k) = NORM2(A(1:Nrow,k))**2
       END DO
     END IF
     !
@@ -80,7 +79,7 @@ SUBROUTINE CSCALE(A,Nrda,Nrow,Ncol,Cols,Colsav,Rows,Rowsav,Anorm,Scales,&
   IF ( Ic==0 ) RETURN
   !
   DO k = 1, Nrow
-    Rows(k) = SDOT(Ncol,A(k,1),Nrda,A(k,1),Nrda)
+    Rows(k) = NORM2(A(k,1:Ncol))**2
     Rowsav(k) = Rows(k)
     Anorm = Anorm + Rows(k)
   END DO

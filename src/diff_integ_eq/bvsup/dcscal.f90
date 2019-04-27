@@ -27,7 +27,6 @@ SUBROUTINE DCSCAL(A,Nrda,Nrow,Ncol,Cols,Colsav,Rows,Rowsav,Anorm,Scales,Iscale,I
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
-  USE linear, ONLY : DDOT
   INTEGER Ic, ip, Iscale, j, k, Ncol, Nrda, Nrow
   REAL(8) :: A(Nrda,*), alog2, Anorm, ascale, Cols(*), Colsav(*), &
     cs, p, Rows(*), Rowsav(*), s, Scales(*)
@@ -41,7 +40,7 @@ SUBROUTINE DCSCAL(A,Nrda,Nrow,Ncol,Cols,Colsav,Rows,Rowsav,Anorm,Scales,Iscale,I
     !
     IF ( Ic/=0 ) THEN
       DO k = 1, Ncol
-        Cols(k) = DDOT(Nrow,A(1,k),1,A(1,k),1)
+        Cols(k) = NORM2(A(1:Nrow,k))**2
       END DO
     END IF
     !
@@ -87,7 +86,7 @@ SUBROUTINE DCSCAL(A,Nrda,Nrow,Ncol,Cols,Colsav,Rows,Rowsav,Anorm,Scales,Iscale,I
   IF ( Ic/=0 ) THEN
     !
     DO k = 1, Nrow
-      Rows(k) = DDOT(Ncol,A(k,1),Nrda,A(k,1),Nrda)
+      Rows(k) = NORM2(A(k,1:Ncol))**2
       Rowsav(k) = Rows(k)
       Anorm = Anorm + Rows(k)
     END DO

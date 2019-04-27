@@ -75,7 +75,6 @@ SUBROUTINE DORTHR(A,N,M,Nrda,Iflag,Irank,Iscale,Diag,Kpivot,Scales,Rows,Rs)
   !   910408  Updated the AUTHOR and REFERENCES sections.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   USE service, ONLY : XERMSG, D1MACH
-  USE linear, ONLY : DDOT
   INTEGER Iflag, Irank, Iscale, j, jrow, k, kp, Kpivot(*), l, M, mk, N, Nrda
   REAL(8) :: A(Nrda,*), acc, akk, anorm, as, asave, Diag(*), diagk, dum(1), &
     Rows(*), Rs(*), rss, sad, Scales(*), sig, sigma, sruro, uro
@@ -103,7 +102,7 @@ SUBROUTINE DORTHR(A,N,M,Nrda,Iflag,Irank,Iscale,Diag,Kpivot,Scales,Rows,Rs)
     anorm = 0.0D0
     DO j = 1, N
       Kpivot(j) = j
-      Rows(j) = DDOT(M,A(j,1),Nrda,A(j,1),Nrda)
+      Rows(j) = NORM2(A(j,1:M))
       Rs(j) = Rows(j)
       anorm = anorm + Rows(j)
     END DO
@@ -131,7 +130,7 @@ SUBROUTINE DORTHR(A,N,M,Nrda,Iflag,Irank,Iscale,Diag,Kpivot,Scales,Rows,Rs)
         DO j = k, N
           !                 BEGIN BLOCK PERMITTING ...EXITS TO 50
           IF ( Rows(j)<sruro*Rs(j) ) THEN
-            Rows(j) = DDOT(mk,A(j,k),Nrda,A(j,k),Nrda)
+            Rows(j) = NORM2(A(j,k:k+mk-1))**2
             Rs(j) = Rows(j)
           END IF
           IF ( j/=k ) THEN
@@ -164,7 +163,7 @@ SUBROUTINE DORTHR(A,N,M,Nrda,Iflag,Irank,Iscale,Diag,Kpivot,Scales,Rows,Rs)
       !
       !           CHECK RANK OF THE MATRIX
       !
-      sig = DDOT(mk,A(k,k),Nrda,A(k,k),Nrda)
+      sig = NORM2(A(k,k:k+mk-1))**2
       diagk = SQRT(sig)
       IF ( diagk>acc*anorm ) THEN
         !
@@ -177,7 +176,7 @@ SUBROUTINE DORTHR(A,N,M,Nrda,Iflag,Irank,Iscale,Diag,Kpivot,Scales,Rows,Rs)
         IF ( k/=N ) THEN
           sad = diagk*akk - sig
           DO j = kp, N
-            as = DDOT(mk,A(k,k),Nrda,A(j,k),Nrda)/sad
+            as = NORM2(A(k,k:k+mk-1))**2/sad
             DO l = k, M
               A(j,l) = A(j,l) + as*A(k,l)
             END DO

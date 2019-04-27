@@ -32,7 +32,7 @@ SUBROUTINE DEFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Mdein,Mdeout,&
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
   !   900604  DP version created from SP version.  (RWC)
   USE service, ONLY : XERMSG
-  USE linear, ONLY : DBNDSL, DBNDAC, DCOPY, DSCAL
+  USE linear, ONLY : DBNDSL, DBNDAC
   USE data_handling, ONLY : DSORT
   INTEGER Lw, Mdein, Mdeout, Mdg, Mdw, Nbkpt, Ndata, Nord
   REAL(8) :: Bf(Nord,*), Bkpt(*), Bkptin(*), Coeff(*), G(Mdg,*), &
@@ -92,7 +92,7 @@ SUBROUTINE DEFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Mdein,Mdeout,&
   !
   !     Sort the breakpoints.
   !
-  CALL DCOPY(Nbkpt,Bkptin,1,Bkpt,1)
+  Bkpt(1:Nbkpt) = Bkptin(1:Nbkpt)
   CALL DSORT(Bkpt,dummy,Nbkpt,1)
   !
   !     Save interval containing knots.
@@ -106,7 +106,7 @@ SUBROUTINE DEFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Mdein,Mdeout,&
   !
   !     Sort data and an array of pointers.
   !
-  CALL DCOPY(Ndata,Xdata,1,Xtemp,1)
+  Xtemp(1:Ndata) = Xdata(1:Ndata)
   DO i = 1, Ndata
     Ptemp(i) = i
   END DO
@@ -158,7 +158,7 @@ SUBROUTINE DEFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Mdein,Mdeout,&
           !                 Transfer previously accumulated rows from W(*,*) to
           !                 G(*,*) and process them.
           !
-          CALL DCOPY(nordp1,W(intseq,1),Mdw,G(ir,1),Mdg)
+          G(ir,1:nordp1) = W(intseq,1:nordp1)
           CALL DBNDAC(G,Mdg,Nord,ip,ir,1,intseq)
           intseq = intseq + 1
         END IF
@@ -173,12 +173,12 @@ SUBROUTINE DEFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Mdein,Mdeout,&
     !
     irow = ir + mt
     mt = mt + 1
-    CALL DCOPY(Nord,Bf,1,G(irow,1),Mdg)
+    G(irow,1:Nord) = Bf(1:Nord,1)
     G(irow,nordp1) = Ydata(l)
     !
     !        Scale data if uncertainty is nonzero.
     !
-    IF ( Sddata(l)/=0.D0 ) CALL DSCAL(nordp1,1.D0/Sddata(l),G(irow,1),Mdg)
+    IF ( Sddata(l)/=0.D0 ) G(irow,1:nordp1) = G(irow,1:nordp1)/Sddata(l)
     !
     !        When staging work area is exhausted, process rows.
     !
@@ -197,7 +197,7 @@ SUBROUTINE DEFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Mdein,Mdeout,&
   !
   IF ( Mdein==2 ) THEN
     DO i = intseq, np1
-      CALL DCOPY(nordp1,W(i,1),Mdw,G(ir,1),Mdg)
+      G(ir,1:nordp1) = W(i,1:nordp1)
       CALL DBNDAC(G,Mdg,Nord,ip,ir,1,MIN(n,i))
     END DO
   END IF
@@ -211,7 +211,7 @@ SUBROUTINE DEFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Mdein,Mdeout,&
   !     possible later sequential accumulation.
   !
   DO i = 1, np1
-    CALL DCOPY(nordp1,G(i,1),Mdg,W(i,1),Mdw)
+    W(i,1:nordp1) = G(i,1:nordp1)
   END DO
   !
   !     Solve for coefficients when possible.

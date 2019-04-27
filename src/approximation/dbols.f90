@@ -432,7 +432,7 @@ SUBROUTINE DBOLS(W,Mdw,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Iw)
   !     /REAL            / TO /DOUBLE PRECISION/.
   ! ++
   USE service, ONLY : XERMSG
-  USE linear, ONLY : DCOPY, DNRM2, IDAMAX, DROT, DROTG
+  USE linear, ONLY : DROT, DROTG
   INTEGER i, ibig, inrows, ip, j, jp, lds, lenx, liopt, llb, lliw, llrw, &
     llx, lmdw, lndw, locdim, lp, Mdw, mnew, Mode, Mrows, Ncols, nerr
   REAL(8) :: W(Mdw,*), Bl(*), Bu(*), X(*), Rw(*)
@@ -672,7 +672,7 @@ SUBROUTINE DBOLS(W,Mdw,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Iw)
             !     DO(RETURN TO USER PROGRAM UNIT)
             GOTO 100
           END IF
-          CALL DCOPY(Ncols,X(Ncols+Iopt(lp+2)),1,Rw,1)
+          Rw(1:Ncols) = X(Ncols+Iopt(lp+2):2*Ncols+Iopt(lp+2)-1)
           lenx = lenx + Ncols
           DO j = 1, Ncols
             IF ( Rw(j)<=zero ) THEN
@@ -735,7 +735,7 @@ SUBROUTINE DBOLS(W,Mdw,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Iw)
     END IF
     DO j = 1, MIN(Ncols+1,mnew)
       DO i = mnew, MAX(Mrows,j) + 1, -1
-        ibig = IDAMAX(i-j,W(j,j),1) + j - 1
+        ibig = MAXLOC(W(j:i-1,j),1) + j - 1
         !
         !     PIVOT FOR INCREASED STABILITY.
         CALL DROTG(W(ibig,j),W(i,j),sc,ss)
@@ -759,7 +759,7 @@ SUBROUTINE DBOLS(W,Mdw,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Iw)
           !
           !     THIS IS THE NOMINAL SCALING. EACH NONZERO
           !     COL. HAS MAX. NORM EQUAL TO ONE.
-          ibig = IDAMAX(Mrows,W(1,j),1)
+          ibig = MAXLOC(W(1:Mrows,j),1)
           Rw(j) = ABS(W(ibig,j))
           IF ( Rw(j)==zero ) THEN
             Rw(j) = one
@@ -771,7 +771,7 @@ SUBROUTINE DBOLS(W,Mdw,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Iw)
           !
           !     THIS CHOICE OF SCALING MAKES EACH NONZERO COLUMN
           !     HAVE EUCLIDEAN LENGTH EQUAL TO ONE.
-          Rw(j) = DNRM2(Mrows,W(1,j),1)
+          Rw(j) = NORM2(W(1:Mrows,j))
           IF ( Rw(j)==zero ) THEN
             Rw(j) = one
           ELSE
@@ -782,8 +782,7 @@ SUBROUTINE DBOLS(W,Mdw,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Iw)
           !
           !     THIS CASE EFFECTIVELY SUPPRESSES SCALING BY SETTING
           !     THE SCALING MATRIX TO THE IDENTITY MATRIX.
-          Rw(1) = one
-          CALL DCOPY(Ncols,Rw,0,Rw,1)
+          Rw(1:Ncols) = one
           !     CASE 4
           EXIT
         CASE (4)

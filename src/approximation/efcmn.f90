@@ -32,7 +32,7 @@ SUBROUTINE EFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Mdein,Mdeout,&
   !   900328  Added TYPE section.  (WRB)
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
   USE service, ONLY : XERMSG
-  USE linear, ONLY : BNDSOL, BNDACC, SCOPY, SSCAL
+  USE linear, ONLY : BNDSOL, BNDACC
   USE data_handling, ONLY : SSORT
   INTEGER Lw, Mdein, Mdeout, Mdg, Mdw, Nbkpt, Ndata, Nord
   REAL Bf(Nord,*), Bkpt(*), Bkptin(*), Coeff(*), G(Mdg,*), Ptemp(*), &
@@ -91,7 +91,7 @@ SUBROUTINE EFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Mdein,Mdeout,&
   !
   !     Sort the breakpoints.
   !
-  CALL SCOPY(Nbkpt,Bkptin,1,Bkpt,1)
+  Bkpt(1:Nbkpt) = Bkptin(1:Nbkpt)
   CALL SSORT(Bkpt,dummy,Nbkpt,1)
   !
   !     Save interval containing knots.
@@ -105,7 +105,7 @@ SUBROUTINE EFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Mdein,Mdeout,&
   !
   !     Sort data and an array of pointers.
   !
-  CALL SCOPY(Ndata,Xdata,1,Xtemp,1)
+  Xtemp(1:Ndata) = Xdata(1:Ndata)
   DO i = 1, Ndata
     Ptemp(i) = i
   END DO
@@ -157,7 +157,7 @@ SUBROUTINE EFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Mdein,Mdeout,&
           !                 Transfer previously accumulated rows from W(*,*) to
           !                 G(*,*) and process them.
           !
-          CALL SCOPY(nordp1,W(intseq,1),Mdw,G(ir,1),Mdg)
+          G(ir,1:nordp1) = W(intseq,1:nordp1)
           CALL BNDACC(G,Mdg,Nord,ip,ir,1,intseq)
           intseq = intseq + 1
         END IF
@@ -172,12 +172,12 @@ SUBROUTINE EFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Mdein,Mdeout,&
     !
     irow = ir + mt
     mt = mt + 1
-    CALL SCOPY(Nord,Bf,1,G(irow,1),Mdg)
+    G(irow,1:Nord) = Bf(1:Nord,1)
     G(irow,nordp1) = Ydata(l)
     !
     !        Scale data if uncertainty is nonzero.
     !
-    IF ( Sddata(l)/=0.E0 ) CALL SSCAL(nordp1,1.E0/Sddata(l),G(irow,1),Mdg)
+    IF ( Sddata(l)/=0.E0 ) G(irow,1:nordp1) = G(irow,1:nordp1)/Sddata(l)
     !
     !        When staging work area is exhausted, process rows.
     !
@@ -196,7 +196,7 @@ SUBROUTINE EFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Mdein,Mdeout,&
   !
   IF ( Mdein==2 ) THEN
     DO i = intseq, np1
-      CALL SCOPY(nordp1,W(i,1),Mdw,G(ir,1),Mdg)
+      G(ir,1:nordp1) = W(i,1:nordp1)
       CALL BNDACC(G,Mdg,Nord,ip,ir,1,MIN(n,i))
     END DO
   END IF
@@ -210,7 +210,7 @@ SUBROUTINE EFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Mdein,Mdeout,&
   !     possible later sequential accumulation.
   !
   DO i = 1, np1
-    CALL SCOPY(nordp1,G(i,1),Mdg,W(i,1),Mdw)
+    W(i,1:nordp1) = G(i,1:nordp1)
   END DO
   !
   !     Solve for coefficients when possible.

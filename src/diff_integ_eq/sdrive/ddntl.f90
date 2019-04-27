@@ -42,7 +42,7 @@ SUBROUTINE DDNTL(Eps,F,FA,Hmax,Hold,Impl,Jtask,Matdim,Maxord,Mint,Miter,&
   !* REVISION HISTORY  (YYMMDD)
   !   790601  DATE WRITTEN
   !   900329  Initial submission to SLATEC.
-  USE linear, ONLY : DNRM2, DGBSL, DGESL, DGBFA, DGEFA
+  USE linear, ONLY : DGBSL, DGESL, DGBFA, DGEFA
   INTEGER i, iflag, Impl, info, Iswflg, Jstate, Jtask, Matdim, &
     Maxord, Mint, Miter, Ml, Mntold, Mtrold, Mu, N, Nde, Nfe, Nq, Nwait
   REAL(8) :: A(Matdim,*), El(13,12), Eps, Fac(*), H, Hmax, Hold, oldl0, Rc, Rh, &
@@ -155,7 +155,7 @@ SUBROUTINE DDNTL(Eps,F,FA,Hmax,Hold,Impl,Jtask,Matdim,Maxord,Mint,Miter,&
     DO i = 1, Nde
       Save1(i) = Save2(i)/MAX(1.D0,Ywt(i))
     END DO
-    summ = DNRM2(Nde,Save1,1)/SQRT(REAL(Nde, 8))
+    summ = NORM2(Save1(1:Nde))/SQRT(REAL(Nde, 8))
     IF ( summ>Eps/ABS(H) ) H = SIGN(Eps/summ,H)
     DO i = 1, N
       Yh(i,2) = H*Save2(i)

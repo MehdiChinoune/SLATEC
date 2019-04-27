@@ -24,12 +24,9 @@ REAL FUNCTION PRVEC(M,U,V)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
-  USE linear, ONLY : SDOT
-  INTEGER M, n, np
-  REAL U(*), V(*), vp
+  INTEGER M, n
+  REAL U(*), V(*)
   !* FIRST EXECUTABLE STATEMENT  PRVEC
   n = M/2
-  np = n + 1
-  vp = SDOT(n,U(1),1,V(np),1)
-  PRVEC = SDOT(n,U(np),1,V(1),1) - vp
+  PRVEC = DOT_PRODUCT(U(n+1:2*n),V(1:n)) - DOT_PRODUCT(U(1:n),V(n+1:2*n))
 END FUNCTION PRVEC

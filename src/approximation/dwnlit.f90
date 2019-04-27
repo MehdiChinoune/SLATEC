@@ -35,7 +35,7 @@ SUBROUTINE DWNLIT(W,Mdw,M,N,L,Ipivot,Itype,H,Scalee,Rnorm,Idope,Dope,Done)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   900604  DP version created from SP version. .  (RWC)
-  USE linear, ONLY : DCOPY, DH12, DROTM, DROTMG, DSCAL, DSWAP, IDAMAX
+  USE linear, ONLY : DH12, DROTM, DROTMG, DSWAP
   INTEGER Idope(*), Ipivot(*), Itype(*), L, M, Mdw, N
   REAL(8) :: Dope(*), H(*), Rnorm, Scalee(*), W(Mdw,*)
   LOGICAL Done
@@ -116,7 +116,7 @@ SUBROUTINE DWNLIT(W,Mdw,M,N,L,Ipivot,Itype,H,Scalee,Rnorm,Idope,Dope,Done)
         !
         CALL DWNLT3(i,lend,M,Mdw,Ipivot,H,W)
         lend = lend - 1
-        imax = IDAMAX(lend-i+1,H(i),1) + i - 1
+        imax = MAXLOC(H(i:lend),1) + i - 1
         hbar = H(imax)
         CYCLE
       ELSE
@@ -252,7 +252,7 @@ SUBROUTINE DWNLIT(W,Mdw,M,N,L,Ipivot,Itype,H,Scalee,Rnorm,Idope,Dope,Done)
       !
       Itype(ir) = 0
       t = SQRT(Scalee(krank+1))
-      CALL DSCAL(N+1,t,W(krank+1,1),Mdw)
+      W(krank+1,1:N+1) = W(krank+1,1:N+1)*t
       Scalee(krank+1) = alsq
       me = me + 1
       krank = krank + 1

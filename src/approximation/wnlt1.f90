@@ -24,7 +24,6 @@ SUBROUTINE WNLT1(I,Lend,Mend,Ir,Mdw,Recalc,Imax,Hbar,H,Scalee,W)
   !* REVISION HISTORY  (YYMMDD)
   !   790701  DATE WRITTEN
   !   890620  Code extracted from WNLIT and made a subroutine.  (RWC))
-  USE linear, ONLY : ISAMAX
   INTEGER I, Imax, Ir, Lend, Mdw, Mend
   REAL H(*), Hbar, Scalee(*), W(Mdw,*)
   LOGICAL Recalc
@@ -42,7 +41,7 @@ SUBROUTINE WNLT1(I,Lend,Mend,Ir,Mdw,Recalc,Imax,Hbar,H,Scalee,W)
     !
     !        Test for numerical accuracy.
     !
-    Imax = ISAMAX(Lend-I+1,H(I),1) + I - 1
+    Imax = MAXLOC(H(I:Lend),1) + I - 1
     Recalc = (Hbar+1.E-3*H(Imax))==Hbar
   END IF
   !
@@ -58,7 +57,7 @@ SUBROUTINE WNLT1(I,Lend,Mend,Ir,Mdw,Recalc,Imax,Hbar,H,Scalee,W)
     !
     !        Find column with largest SS.
     !
-    Imax = ISAMAX(Lend-I+1,H(I),1) + I - 1
+    Imax = MAXLOC(H(I:Lend),1) + I - 1
     Hbar = H(Imax)
   END IF
 END SUBROUTINE WNLT1

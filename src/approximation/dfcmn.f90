@@ -31,7 +31,7 @@ SUBROUTINE DFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Nconst,Xconst,&
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
   !   900604  DP version created from SP version.  (RWC)
   USE service, ONLY : XERMSG
-  USE linear, ONLY : DSCAL, DCOPY, DAXPY, DBNDSL, DBNDAC
+  USE linear, ONLY : DAXPY, DBNDSL, DBNDAC
   USE data_handling, ONLY : DSORT
   INTEGER Iwork(*), Mdg, Mdw, Mode, Nbkpt, Nconst, Ndata, Nderiv(*), Nord
   REAL(8) :: Bf(Nord,*), Bkpt(*), Bkptin(*), Coeff(*), G(Mdg,*), &
@@ -110,7 +110,7 @@ SUBROUTINE DFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Nconst,Xconst,&
   !
   !     Sort the breakpoints.
   !
-  CALL DCOPY(Nbkpt,Bkptin,1,Bkpt,1)
+  Bkpt(1:Nbkpt) = Bkptin(1:Nbkpt)
   CALL DSORT(Bkpt,dummy,Nbkpt,1)
   !
   !     Initialize variables.
@@ -187,7 +187,7 @@ SUBROUTINE DFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Nconst,Xconst,&
     !        To process least squares equations sort data and an array of
     !        pointers.
     !
-    CALL DCOPY(Ndata,Xdata,1,Xtemp,1)
+    Xtemp(1:Ndata) = Xdata(1:Ndata)
     DO i = 1, Ndata
       Ptemp(i) = i
     END DO
@@ -243,12 +243,12 @@ SUBROUTINE DFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Nconst,Xconst,&
       !
       irow = ir + mt
       mt = mt + 1
-      CALL DCOPY(Nord,Bf,1,G(irow,1),Mdg)
+      G(irow,1:Nord) = Bf(1:Nord,1)
       G(irow,nordp1) = Ydata(l)
       !
       !           Scale data if uncertainty is nonzero.
       !
-      IF ( Sddata(l)/=0.D0 ) CALL DSCAL(nordp1,1.D0/Sddata(l),G(irow,1),Mdg)
+      IF ( Sddata(l)/=0.D0 ) G(irow,1:nordp1) = G(irow,1:nordp1)/Sddata(l)
       !
       !           When staging work area is exhausted, process rows.
       !
@@ -317,7 +317,7 @@ SUBROUTINE DFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Nconst,Xconst,&
       !
       CALL DFSPVD(Bkpt,Nord,xval,ileft,Bf,ideriv+1)
       W(neqcon,1:np1) = 0.D0
-      CALL DCOPY(Nord,Bf(1,ideriv+1),1,W(neqcon,ileft-nordm1),Mdw)
+      W(neqcon,ileft-nordm1:ileft) = Bf(1:Nord,ideriv+1)
       !
       IF ( itype==2 ) THEN
         W(neqcon,np1) = Yconst(idata)
@@ -340,7 +340,7 @@ SUBROUTINE DFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Nconst,Xconst,&
   DO i = 1, np1
     irow = i + neqcon
     W(irow,1:n) = 0.D0
-    CALL DCOPY(MIN(np1-i,Nord),G(i,1),Mdg,W(irow,i),Mdw)
+    W(irow,i:i+MIN(np1-i,Nord)-1) = G(i,1:MIN(np1-i,Nord))
     W(irow,np1) = G(i,nordp1)
   END DO
   !
@@ -365,13 +365,13 @@ SUBROUTINE DFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Nconst,Xconst,&
       irow = neqcon + np1 + nincon
       W(irow,1:n) = 0.D0
       intrvl = ileft - nordm1
-      CALL DCOPY(Nord,Bf(1,ideriv+1),1,W(irow,intrvl),Mdw)
+      W(irow,intrvl:intrvl+Nord-1) = Bf(1:Nord,ideriv+1)
       !
       IF ( itype==1 ) THEN
         W(irow,np1) = Yconst(idata)
       ELSE
         W(irow,np1) = -Yconst(idata)
-        CALL DSCAL(Nord,-1.D0,W(irow,intrvl),Mdw)
+        W(irow,intrvl:intrvl+Nord-1) = -W(irow,intrvl:intrvl+Nord-1)
       END IF
     END IF
   END DO

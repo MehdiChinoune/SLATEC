@@ -1,4 +1,4 @@
 
 add_library( optimization SHARED optimization.f90 )
 
-target_link_libraries( optimization linear )
+target_link_libraries( optimization service )

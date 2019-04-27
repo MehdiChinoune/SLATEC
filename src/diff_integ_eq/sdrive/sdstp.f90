@@ -72,7 +72,6 @@ SUBROUTINE SDSTP(Eps,F,FA,Hmax,Impl,Ierror,JACOBN,Matdim,Maxord,Mint,&
   !* REVISION HISTORY  (YYMMDD)
   !   790601  DATE WRITTEN
   !   900329  Initial submission to SLATEC.
-  USE linear, ONLY : SNRM2
   EXTERNAL :: F, JACOBN, FA, USERS
   INTEGER i, Ierror, Impl, Ipvt(*), Iswflg, iter, j, Jstate, Jstepl, Jtask, Matdim, &
     Maxord, Mint, Miter, Ml, Mntold, Mtrold, Mtrsv, Mu, Mxrdsv, N, Nde, nfail, Nfe, &
@@ -158,17 +157,17 @@ SUBROUTINE SDSTP(Eps,F,FA,Hmax,Impl,Ierror,JACOBN,Matdim,Maxord,Mint,&
     IF ( N==0 ) GOTO 700
     IF ( Iswflg==3.AND.Mint==1 ) THEN
       IF ( iter==0 ) THEN
-        numer = SNRM2(N,Save1,1)
+        numer = NORM2(Save1(1:N))
         DO i = 1, N
           Dfdy(1,i) = Save1(i)
         END DO
-        y0nrm = SNRM2(N,Yh,1)
+        y0nrm = NORM2(Yh(1:N,1))
       ELSE
         denom = numer
         DO i = 1, N
           Dfdy(1,i) = Save1(i) - Dfdy(1,i)
         END DO
-        numer = SNRM2(N,Dfdy,Matdim)
+        numer = NORM2(Dfdy(1,1:N))
         IF ( El(1,Nq)*numer<=100.E0*Uround*y0nrm ) THEN
           IF ( Rmax==RMFAIL ) THEN
             switch = .TRUE.
@@ -237,7 +236,7 @@ SUBROUTINE SDSTP(Eps,F,FA,Hmax,Impl,Ierror,JACOBN,Matdim,Maxord,Mint,&
       Save2(i) = Save1(i)/MAX(ABS(Y(i)),Ywt(i))
     END DO
   END IF
-  etest = SNRM2(Nde,Save2,1)/(Tq(2,Nq)*SQRT(REAL(Nde)))
+  etest = NORM2(Save2(1:Nde))/(Tq(2,Nq)*SQRT(REAL(Nde)))
   !
   !                           The error test failed.  NFAIL keeps track of
   !                           multiple failures.  Restore T and the YH
@@ -261,7 +260,7 @@ SUBROUTINE SDSTP(Eps,F,FA,Hmax,Impl,Ierror,JACOBN,Matdim,Maxord,Mint,&
             Save2(i) = Yh(i,Nq+1)/MAX(ABS(Y(i)),Ywt(i))
           END DO
         END IF
-        erdn = SNRM2(Nde,Save2,1)/(Tq(1,Nq)*SQRT(REAL(Nde)))
+        erdn = NORM2(Save2(1:Nde))/(Tq(1,Nq)*SQRT(REAL(Nde)))
         rh1 = 1.E0/MAX(1.E0,BIAS1*(erdn/Eps)**(1.E0/Nq))
         IF ( rh2<rh1 ) THEN
           Nq = Nq - 1
@@ -403,7 +402,7 @@ SUBROUTINE SDSTP(Eps,F,FA,Hmax,Impl,Ierror,JACOBN,Matdim,Maxord,Mint,&
           Save2(i) = Yh(i,Nq+1)/MAX(ABS(Y(i)),Ywt(i))
         END DO
       END IF
-      erdn = SNRM2(Nde,Save2,1)/(Tq(1,Nq)*SQRT(REAL(Nde)))
+      erdn = NORM2(Save2(1:Nde))/(Tq(1,Nq)*SQRT(REAL(Nde)))
       rh1 = 1.E0/MAX(Uround,BIAS1*(erdn/Eps)**(1.E0/Nq))
     END IF
     rh2 = 1.E0/MAX(Uround,BIAS2*(etest/Eps)**(1.E0/(Nq+1)))
@@ -419,7 +418,7 @@ SUBROUTINE SDSTP(Eps,F,FA,Hmax,Impl,Ierror,JACOBN,Matdim,Maxord,Mint,&
           Save2(i) = (Save1(i)-Yh(i,Maxord+1))/MAX(ABS(Y(i)),Ywt(i))
         END DO
       END IF
-      erup = SNRM2(Nde,Save2,1)/(Tq(3,Nq)*SQRT(REAL(Nde)))
+      erup = NORM2(Save2(1:Nde))/(Tq(3,Nq)*SQRT(REAL(Nde)))
       rh3 = 1.E0/MAX(Uround,BIAS3*(erup/Eps)**(1.E0/(Nq+2)))
     END IF
     IF ( rh1>rh2.AND.rh1>=rh3 ) THEN

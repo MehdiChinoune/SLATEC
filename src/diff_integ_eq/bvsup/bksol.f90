@@ -33,18 +33,16 @@ SUBROUTINE BKSOL(N,A,X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
-  USE linear, ONLY : SDOT
   REAL A(*), X(*)
-  INTEGER j, k, m, N, nm1
+  INTEGER j, k, m, N
   !* FIRST EXECUTABLE STATEMENT  BKSOL
   m = (N*(N+1))/2
   X(N) = X(N)*A(m)
   IF ( N/=1 ) THEN
-    nm1 = N - 1
-    DO k = 1, nm1
+    DO k = 1, N - 1
       j = N - k
       m = m - k - 1
-      X(j) = X(j)*A(m) - SDOT(k,A(m+1),1,X(j+1),1)
+      X(j) = X(j)*A(m) - DOT_PRODUCT(A(m+1:m+k),X(j+1:N))
     END DO
   END IF
   !

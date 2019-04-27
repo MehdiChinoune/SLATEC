@@ -36,7 +36,6 @@ SUBROUTINE DPLPDM(Mrelas,Nvars,Lmx,Lbm,Nredc,Info,Iopt,Ibasis,Imat,Ibrc,&
   !           DO loops to DO loops.  (RWC)
   USE LA05DD, ONLY : SMAll
   USE service, ONLY : XERMSG
-  USE linear, ONLY : DASUM
   INTEGER i, Info, Iopt, iplace, j, k, Lbm, Lmx, Mrelas, Nredc, Nvars, nzbm
   INTEGER Ibasis(*), Imat(*), Ibrc(Lbm,2), Ipr(*), Iwr(*), Ind(*), Ibb(*)
   REAL(8) :: aij, Amat(*), Basmat(*), Csc(*), Wr(*), Anorm, &
@@ -92,7 +91,7 @@ SUBROUTINE DPLPDM(Mrelas,Nvars,Lmx,Lbm,Nredc,Info,Iopt,Ibasis,Imat,Ibrc,&
   !
   !     RECOMPUTE MATRIX NORM USING CRUDE NORM  =  SUM OF MAGNITUDES.
   !
-  Anorm = DASUM(nzbm,Basmat,1)
+  Anorm = SUM(ABS(Basmat(1:nzbm)))
   SMAll = Eps*Anorm
   !
   !     GET AN L-U FACTORIZATION OF THE BASIS MATRIX.

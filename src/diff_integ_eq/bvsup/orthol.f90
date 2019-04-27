@@ -79,7 +79,6 @@ SUBROUTINE ORTHOL(A,M,N,Nrda,Iflag,Irank,Iscale,Diag,Kpivot,Scales,Cols,Cs)
   !   910408  Updated the AUTHOR and REFERENCES sections.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   USE service, ONLY : XERMSG, R1MACH
-  USE linear, ONLY : SDOT
   INTEGER Iflag, Irank, Iscale, j, jcol, k, kp, Kpivot(*), l, M, mk, N, Nrda
   REAL A(Nrda,*), acc, akk, anorm, as, asave, Cols(*), Cs(*), css, Diag(*), diagk, &
     dum(1), sad, sc, Scales(*), sig, sigma, sruro, uro
@@ -108,7 +107,7 @@ SUBROUTINE ORTHOL(A,M,N,Nrda,Iflag,Irank,Iscale,Diag,Kpivot,Scales,Cols,Cs)
     anorm = 0.
     DO j = 1, N
       Kpivot(j) = j
-      Cols(j) = SDOT(M,A(1,j),1,A(1,j),1)
+      Cols(j) = NORM2(A(1:M,j))**2
       Cs(j) = Cols(j)
       anorm = anorm + Cols(j)
     END DO
@@ -133,7 +132,7 @@ SUBROUTINE ORTHOL(A,M,N,Nrda,Iflag,Irank,Iscale,Diag,Kpivot,Scales,Cols,Cs)
         !
         DO j = k, N
           IF ( Cols(j)<sruro*Cs(j) ) THEN
-            Cols(j) = SDOT(mk,A(k,j),1,A(k,j),1)
+            Cols(j) = NORM2(A(k:k+mk-1,j))**2
             Cs(j) = Cols(j)
           END IF
           IF ( j/=k ) THEN
@@ -167,7 +166,7 @@ SUBROUTINE ORTHOL(A,M,N,Nrda,Iflag,Irank,Iscale,Diag,Kpivot,Scales,Cols,Cs)
       !
       !        CHECK RANK OF THE MATRIX
       !
-      sig = SDOT(mk,A(k,k),1,A(k,k),1)
+      sig = NORM2(A(k:k+mk-1,k))**2
       diagk = SQRT(sig)
       IF ( diagk>acc*anorm ) THEN
         !
@@ -180,7 +179,7 @@ SUBROUTINE ORTHOL(A,M,N,Nrda,Iflag,Irank,Iscale,Diag,Kpivot,Scales,Cols,Cs)
         IF ( k/=N ) THEN
           sad = diagk*akk - sig
           DO j = kp, N
-            as = SDOT(mk,A(k,k),1,A(k,j),1)/sad
+            as = DOT_PRODUCT(A(k:M,k),A(k:M,j))/sad
             DO l = k, M
               A(l,j) = A(l,j) + as*A(l,k)
             END DO

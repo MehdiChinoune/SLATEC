@@ -424,7 +424,7 @@ SUBROUTINE DBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
   !     /REAL            / TO /DOUBLE PRECISION/.
   !++
   USE service, ONLY : XERMSG, D1MACH
-  USE linear, ONLY : DCOPY, DROT, DROTG, DSWAP, DAXPY, DNRM2, DDOT
+  USE linear, ONLY : DROT, DROTG, DSWAP, DAXPY
   USE optimization, ONLY : DVOUT, IVOUT
   INTEGER i, igopr, ioff, ip, iprint, itemp, iter, itmax, j, jbig, jcol, &
     jdrop, jdrop1, jdrop2, jlarge, jmag, jp, lds, lgopr, lp, Mdw, Minput, Mode, &
@@ -781,8 +781,8 @@ SUBROUTINE DBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
   Ww(1:Ncols) = ZERO
   DO j = nsetb + 1, Ncols
     jcol = ABS(Ibasis(j))
-    Ww(j) = DDOT(mrows-nsetb,W(INEXT(nsetb),j),1,W(INEXT(nsetb),Ncols+1),1)&
-      *ABS(Scl(jcol))
+    Ww(j) = DOT_PRODUCT(W(INEXT(nsetb):INEXT(nsetb)+mrows-nsetb-1,j), &
+      W(INEXT(nsetb):INEXT(nsetb)+mrows-nsetb-1,Ncols+1)) *ABS(Scl(jcol))
   END DO
   !
   IF ( iprint>0 ) THEN
@@ -809,7 +809,7 @@ SUBROUTINE DBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
       IF ( t/=big ) THEN
         itemp = Ibasis(j)
         jcol = ABS(itemp)
-        t1 = DNRM2(mval-nsetb,W(INEXT(nsetb),j),1)
+        t1 = NORM2(W(INEXT(nsetb):INEXT(nsetb)+mval-nsetb-1,j))
         IF ( itemp<0 ) THEN
           IF ( MOD(Ibb(jcol),2)==0 ) t = -t
           IF ( t>=ZERO ) THEN
@@ -855,16 +855,16 @@ SUBROUTINE DBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
     IF ( iprint>0 ) CALL IVOUT(1,jbig2,'('' TRY TO BRING IN THIS COL.'')',-4)
     !
     IF ( mval<=nsetb ) THEN
-      cl1 = DNRM2(mval,W(1,jbig),1)
-      cl2 = ABS(wt)*DNRM2(nsetb-mval,W(INEXT(mval),jbig),1)
-      cl3 = ABS(wt)*DNRM2(mrows-nsetb,W(INEXT(nsetb),jbig),1)
+      cl1 = NORM2(W(1:mval,jbig))
+      cl2 = ABS(wt)*NORM2(W(INEXT(mval):INEXT(mval)+nsetb-mval-1,jbig))
+      cl3 = ABS(wt)*NORM2(W(INEXT(nsetb):INEXT(nsetb)+mrows-nsetb-1,jbig))
       CALL DROTG(cl1,cl2,sc,ss)
       colabv = ABS(cl1)
       colblo = cl3
     ELSE
-      cl1 = DNRM2(nsetb,W(1,jbig),1)
-      cl2 = DNRM2(mval-nsetb,W(INEXT(nsetb),jbig),1)
-      cl3 = ABS(wt)*DNRM2(mrows-mval,W(INEXT(mval),jbig),1)
+      cl1 = NORM2(W(1:nsetb,jbig))
+      cl2 = NORM2(W(INEXT(nsetb):INEXT(nsetb)+mval-nsetb-1,jbig))
+      cl3 = ABS(wt)*NORM2(W(INEXT(mval):INEXT(mval)+mrows-mval-1,jbig))
       colabv = cl1
       CALL DROTG(cl2,cl3,sc,ss)
       colblo = ABS(cl2)
@@ -941,7 +941,7 @@ SUBROUTINE DBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
   !
   !     Solve the triangular system.
   !
-  200  CALL DCOPY(nsetb,W(1,Ncols+1),1,Rw,1)
+  200  Rw(1:nsetb) = W(1:nsetb,Ncols+1)
   DO j = nsetb, 1, -1
     Rw(j) = Rw(j)/W(j,j)
     jcol = ABS(Ibasis(j))
@@ -957,7 +957,7 @@ SUBROUTINE DBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
   END IF
   !
   IF ( lgopr==2 ) THEN
-    CALL DCOPY(nsetb,Rw,1,X,1)
+    X(1:nsetb) = Rw(1:nsetb)
     DO j = 1, nsetb
       itemp = Ibasis(j)
       jcol = ABS(itemp)
@@ -1025,7 +1025,7 @@ SUBROUTINE DBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
     !         Accept the candidate because it satisfies the stated bounds
     !         on the variables.
     !
-    CALL DCOPY(nsetb,Rw,1,X,1)
+    X(1:nsetb) = Rw(1:nsetb)
     GOTO 100
   END IF
   !
@@ -1080,17 +1080,17 @@ SUBROUTINE DBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
   !
   !     Move certain columns left to achieve upper Hessenberg form.
   !
-  CALL DCOPY(jdrop,W(1,jdrop),1,Rw,1)
+  Rw(1:jdrop) = W(1:jdrop,jdrop)
   DO j = jdrop + 1, nsetb
     Ibasis(j-1) = Ibasis(j)
     X(j-1) = X(j)
-    CALL DCOPY(j,W(1,j),1,W(1,j-1),1)
+    W(1:j,j-1) = W(1:j,j)
   END DO
   !
   Ibasis(nsetb) = itemp
   W(1,nsetb) = ZERO
-  CALL DCOPY(mrows-jdrop,W(1,nsetb),0,W(jdrop+1,nsetb),1)
-  CALL DCOPY(jdrop,Rw,1,W(1,nsetb),1)
+  W(jdrop+1:mrows,nsetb) = ZERO
+  W(1:jdrop,nsetb) = Rw(1:jdrop)
   !
   !     Transform the matrix from upper Hessenberg form to upper
   !     triangular form.
@@ -1157,7 +1157,7 @@ SUBROUTINE DBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
   !     Rescale and translate variables.
   !
   igopr = 2
-  700  CALL DCOPY(nsetb,X,1,Rw,1)
+  700  Rw(1:nsetb) = X(1:nsetb)
   X(1:Ncols) = ZERO
   DO j = 1, nsetb
     jcol = ABS(Ibasis(j))
@@ -1178,7 +1178,7 @@ SUBROUTINE DBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
   END DO
   !
   i = MAX(nsetb,mval)
-  Rnorm = DNRM2(mrows-i,W(INEXT(i),Ncols+1),1)
+  Rnorm = NORM2(W(INEXT(i):INEXT(i)+mrows-i-1,Ncols+1))
   !
   IF ( igopr==2 ) Mode = nsetb
 CONTAINS

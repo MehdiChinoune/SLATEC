@@ -25,7 +25,6 @@ SUBROUTINE D1MERG(Tcos,I1,M1,I2,M2,I3)
 
   !* REVISION HISTORY  (YYMMDD)
   !   910819  DATE WRITTEN
-  USE linear, ONLY : DCOPY
   INTEGER I1, I2, I3, M1, M2
   REAL(8) :: Tcos(*)
   !
@@ -35,12 +34,12 @@ SUBROUTINE D1MERG(Tcos,I1,M1,I2,M2,I3)
   IF ( M1==0.AND.M2==0 ) RETURN
   !
   IF ( M1==0.AND.M2/=0 ) THEN
-    CALL DCOPY(M2,Tcos(I2+1),1,Tcos(I3+1),1)
+    Tcos(I3+1:I3+M2) = Tcos(I2+1:I2+M2)
     RETURN
   END IF
   !
   IF ( M1/=0.AND.M2==0 ) THEN
-    CALL DCOPY(M1,Tcos(I1+1),1,Tcos(I3+1),1)
+    Tcos(I3+1:I3+M1) = Tcos(I1+1:I1+M1)
     RETURN
   END IF
   !
@@ -53,14 +52,14 @@ SUBROUTINE D1MERG(Tcos,I1,M1,I2,M2,I3)
       Tcos(I3+j3) = Tcos(I1+j1)
       j1 = j1 + 1
       IF ( j1>M1 ) THEN
-        CALL DCOPY(M2-j2+1,Tcos(I2+j2),1,Tcos(I3+j3+1),1)
+        Tcos(I3+j3+1:I3+j3-j2+M2+1) = Tcos(I2+j2:I2+M2)
         RETURN
       END IF
     ELSE
       Tcos(I3+j3) = Tcos(I2+j2)
       j2 = j2 + 1
       IF ( j2>M2 ) THEN
-        CALL DCOPY(M1-j1+1,Tcos(I1+j1),1,Tcos(I3+j3+1),1)
+        Tcos(I3+j3+1:I3+j3-j1+M1+1) = Tcos(I1+j1:I1+M1)
         RETURN
       END IF
     END IF

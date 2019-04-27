@@ -135,7 +135,6 @@ SUBROUTINE DBVPOR(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
   !   910722  Updated AUTHOR section.  (ALS)
   USE DML, ONLY : C, INHomo, IVP, PX, PWCnd, TND, X, XBEg, XENd, XOT, XOP, KNSwot, &
     KOP, LOTjp, NSWot, AE, RE, TOL, NDIsk, NTApe, NEQ, NEQivp, NUMort, ICOco
-  USE linear, ONLY : DDOT
   !
   INTEGER i, i1, i2, ic, Iflag, ira, isflg, j, k, kod, kpts, kwc, kwd, kws, kwt, &
     l, m, Mxnon, n, Ncomp, ncomp2, ndw, Nfc, Nfcc, nfcp1, nfcp2, Nic, Niv, nn, &
@@ -289,13 +288,13 @@ SUBROUTINE DBVPOR(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
             BACKSPACE NTApe
           END IF
           DO n = 1, Ncomp
-            Y(n,kpts) = V(n,kod) + DDOT(Nfc,U(n,1,kod),Ncomp,Coef,ic)
+            Y(n,kpts) = V(n,kod) + DOT_PRODUCT(U(n,1:Nfc,kod),Coef(1:Nfc*ic:ic))
           END DO
           IF ( Nfc/=Nfcc ) THEN
             DO n = 1, ncomp2
               nn = ncomp2 + n
-              Y(n,kpts) = Y(n,kpts) - DDOT(Nfc,U(nn,1,kod),Ncomp,Coef(2),2)
-              Y(nn,kpts) = Y(nn,kpts) + DDOT(Nfc,U(n,1,kod),Ncomp,Coef(2),2)
+              Y(n,kpts) = Y(n,kpts) - DOT_PRODUCT(U(nn,1:Nfc,kod),Coef(2:2*Nfc))
+              Y(nn,kpts) = Y(nn,kpts) + DOT_PRODUCT(U(n,1:Nfc,kod),Coef(2:2*Nfc))
             END DO
           END IF
         END DO

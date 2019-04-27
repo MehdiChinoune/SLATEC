@@ -730,7 +730,7 @@ SUBROUTINE DDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
   !   790601  DATE WRITTEN
   !   900329  Initial submission to SLATEC.
   USE service, ONLY : XERMSG, D1MACH
-  USE linear, ONLY : DNRM2, DGBSL, DGESL, DGBFA, DGEFA
+  USE linear, ONLY : DGBSL, DGESL, DGBFA, DGEFA
   EXTERNAL :: F, JACOBN, FA, G, USERS
   REAL(8) :: ae, big, Eps, Ewt(*), G, glast, gnow, h, Hmax, hsign, hused, re, &
     sizee, summ, T, tlast, Tout, troot, uround, Work(*), Y(*)
@@ -1282,7 +1282,7 @@ SUBROUTINE DDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
   DO i = 1, N
     Work(i+isave2-1) = Y(i)/Work(i+iywt-1)
   END DO
-  summ = DNRM2(N,Work(isave2),1)/SQRT(REAL(N, 8))
+  summ = NORM2(Work(isave2:isave2+N))/SQRT(REAL(N, 8))
   summ = MAX(1.D0,summ)
   IF ( Eps<summ*uround ) THEN
     Eps = summ*uround*(1.D0+10.D0*uround)

@@ -391,7 +391,7 @@ SUBROUTINE DLSEI(W,Mdw,Me,Ma,Mg,N,Prgopt,X,Rnorme,Rnorml,Mode,Ws,Ip)
   !   900604  DP version created from SP version.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   USE service, ONLY : XERMSG, D1MACH
-  USE linear, ONLY : DSCAL, DCOPY, DAXPY, DDOT, DH12, DASUM, DNRM2, DSWAP
+  USE linear, ONLY : DAXPY, DH12, DSWAP
   INTEGER Ip(3), Ma, Mdw, Me, Mg, Mode, N
   REAL(8) :: Prgopt(*), Rnorme, Rnorml, W(Mdw,*), Ws(*), X(*)
   !
@@ -507,12 +507,12 @@ SUBROUTINE DLSEI(W,Mdw,Me,Ma,Mg,N,Prgopt,X,Rnorme,Rnorml,Mode,Ws,Ip)
         cov = Prgopt(last+2)/=0.D0
       ELSEIF ( key==2.AND.Prgopt(last+2)/=0.D0 ) THEN
         DO j = 1, N
-          t = DNRM2(m,W(1,j),1)
+          t = NORM2(W(1:m,j))
           IF ( t/=0.D0 ) t = 1.D0/t
           Ws(j+n1-1) = t
         END DO
       ELSEIF ( key==3 ) THEN
-        CALL DCOPY(N,Prgopt(last+2),1,Ws(n1),1)
+        Ws(n1:n1+N-1) = Prgopt(last+2:last+N+1)
       ELSEIF ( key==4 ) THEN
         tau = MAX(drelpr,Prgopt(last+2))
       END IF
@@ -529,7 +529,7 @@ SUBROUTINE DLSEI(W,Mdw,Me,Ma,Mg,N,Prgopt,X,Rnorme,Rnorml,Mode,Ws,Ip)
     END IF
     !
     DO j = 1, N
-      CALL DSCAL(m,Ws(n1+j-1),W(1,j),1)
+      W(1:m,j) = W(1:m,j)*Ws(n1+j-1)
     END DO
     !
     IF ( cov.AND.Mdw<N ) THEN
@@ -546,10 +546,10 @@ SUBROUTINE DLSEI(W,Mdw,Me,Ma,Mg,N,Prgopt,X,Rnorme,Rnorml,Mode,Ws,Ip)
     !
     enorm = 0.D0
     DO j = 1, N
-      enorm = MAX(enorm,DASUM(Me,W(1,j),1))
+      enorm = MAX(enorm,SUM(ABS(W(1:Me,j))))
     END DO
     !
-    fnorm = DASUM(Me,W(1,np1),1)
+    fnorm = SUM(ABS(W(1:Me,np1)))
     snmax = 0.D0
     rnmax = 0.D0
     DO i = 1, kranke
@@ -558,8 +558,8 @@ SUBROUTINE DLSEI(W,Mdw,Me,Ma,Mg,N,Prgopt,X,Rnorme,Rnorml,Mode,Ws,Ip)
       !        column I.
       !
       DO k = i, Me
-        sn = DDOT(N-i+1,W(k,i),Mdw,W(k,i),Mdw)
-        rn = DDOT(i-1,W(k,1),Mdw,W(k,1),Mdw)
+        sn = NORM2(W(k,i:N))**2
+        rn = NORM2(W(k,1:i-1))**2
         IF ( rn==0.D0.AND.sn>snmax ) THEN
           snmax = sn
           imax = k
@@ -588,7 +588,9 @@ SUBROUTINE DLSEI(W,Mdw,Me,Ma,Mg,N,Prgopt,X,Rnorme,Rnorml,Mode,Ws,Ip)
   !
   !     Save diagonal terms of lower trapezoidal matrix.
   !
-  CALL DCOPY(kranke,W,Mdw+1,Ws(kranke+1),1)
+  DO k = 1, kranke
+    Ws(kranke+k) = W(k,k)
+  END DO
   !
   !     Use Householder transformation from left to achieve
   !     KRANKE by KRANKE upper triangular form.
@@ -608,9 +610,9 @@ SUBROUTINE DLSEI(W,Mdw,Me,Ma,Mg,N,Prgopt,X,Rnorme,Rnorml,Mode,Ws,Ip)
   !
   !     Solve for variables 1,...,KRANKE in new coordinates.
   !
-  CALL DCOPY(kranke,W(1,np1),1,X,1)
+  X(1:kranke) = W(1:kranke,np1)
   DO i = 1, kranke
-    X(i) = (X(i)-DDOT(i-1,W(i,1),Mdw,X,1))/W(i,i)
+    X(i) = (X(i)-DOT_PRODUCT(W(i,1:i-1),X(1:i-1)))/W(i,i)
   END DO
   !
   !     Compute residuals for reduced problem.
@@ -618,21 +620,21 @@ SUBROUTINE DLSEI(W,Mdw,Me,Ma,Mg,N,Prgopt,X,Rnorme,Rnorml,Mode,Ws,Ip)
   mep1 = Me + 1
   Rnorml = 0.D0
   DO i = mep1, m
-    W(i,np1) = W(i,np1) - DDOT(kranke,W(i,1),Mdw,X,1)
-    sn = DDOT(kranke,W(i,1),Mdw,W(i,1),Mdw)
-    rn = DDOT(N-kranke,W(i,kranke+1),Mdw,W(i,kranke+1),Mdw)
+    W(i,np1) = W(i,np1) - DOT_PRODUCT(W(i,1:kranke),X(1:kranke))
+    sn = NORM2(W(i,1:kranke))**2
+    rn = NORM2(W(i,kranke+1:N))**2
     IF ( rn<=sn*tau**2.AND.kranke<N ) W(i,kranke+1:N) = 0.D0
   END DO
   !
   !     Compute equality constraint equations residual length.
   !
-  Rnorme = DNRM2(Me-kranke,W(kranke+1,np1),1)
+  Rnorme = NORM2(W(kranke+1:Me,np1))
   !
   !     Move reduced problem data upward if KRANKE.LT.ME.
   !
   IF ( kranke<Me ) THEN
     DO j = 1, np1
-      CALL DCOPY(m-Me,W(Me+1,j),1,W(kranke+1,j),1)
+      W(kranke+1:kranke+m-Me,j) = W(Me+1:m,j)
     END DO
   END IF
   !
@@ -645,7 +647,7 @@ SUBROUTINE DLSEI(W,Mdw,Me,Ma,Mg,N,Prgopt,X,Rnorme,Rnorml,Mode,Ws,Ip)
   !
   IF ( Me>0 ) THEN
     mdeqc = 0
-    xnrme = DASUM(kranke,W(1,np1),1)
+    xnrme = SUM(ABS(W(1:kranke,np1)))
     IF ( Rnorme>tau*(enorm*xnrme+fnorm) ) mdeqc = 1
     Mode = Mode + mdeqc
     !
@@ -653,11 +655,11 @@ SUBROUTINE DLSEI(W,Mdw,Me,Ma,Mg,N,Prgopt,X,Rnorme,Rnorml,Mode,Ws,Ip)
     !        constraints when there are no degrees of freedom left.
     !
     IF ( kranke==N.AND.Mg>0 ) THEN
-      xnorm = DASUM(N,X,1)
+      xnorm = SUM(ABS(X(1:N)))
       mapke1 = Ma + kranke + 1
       mend = Ma + kranke + Mg
       DO i = mapke1, mend
-        sizee = DASUM(N,W(i,1),Mdw)*xnorm + ABS(W(i,np1))
+        sizee = SUM(ABS(W(i,1:N)))*xnorm + ABS(W(i,np1))
         IF ( W(i,np1)>tau*sizee ) THEN
           Mode = Mode + 2
           GOTO 100
@@ -669,7 +671,9 @@ SUBROUTINE DLSEI(W,Mdw,Me,Ma,Mg,N,Prgopt,X,Rnorme,Rnorml,Mode,Ws,Ip)
   !     Replace diagonal terms of lower trapezoidal matrix.
   !
   IF ( kranke>0 ) THEN
-    CALL DCOPY(kranke,Ws(kranke+1),1,W,Mdw+1)
+    DO i = 1, kranke
+      W(i,i) = Ws(kranke+i)
+    END DO
     !
     !        Reapply transformation to put solution in original coordinates.
     !
@@ -685,10 +689,10 @@ SUBROUTINE DLSEI(W,Mdw,Me,Ma,Mg,N,Prgopt,X,Rnorme,Rnorml,Mode,Ws,Ip)
         IF ( rb/=0.D0 ) rb = 1.D0/rb
         jp1 = j + 1
         DO i = jp1, N
-          W(i,j) = rb*DDOT(N-j,W(i,jp1),Mdw,W(j,jp1),Mdw)
+          W(i,j) = rb*DOT_PRODUCT(W(i,j+1:N),W(j,j+1:N))
         END DO
         !
-        gam = 0.5D0*rb*DDOT(N-j,W(jp1,j),1,W(j,jp1),Mdw)
+        gam = 0.5D0*rb*DOT_PRODUCT(W(j+1:N,j),W(j,j+1:N))
         CALL DAXPY(N-j,gam,W(j,jp1),Mdw,W(jp1,j),1)
         DO i = jp1, N
           DO k = i, N
@@ -702,7 +706,7 @@ SUBROUTINE DLSEI(W,Mdw,Me,Ma,Mg,N,Prgopt,X,Rnorme,Rnorml,Mode,Ws,Ip)
         DO i = jp1, N
           W(j,i) = uj*W(i,j) + vj*W(j,i)
         END DO
-        CALL DCOPY(N-j,W(j,jp1),Mdw,W(jp1,j),1)
+        W(j+1:N,j) = W(j,j+1:N)
       END DO
     END IF
   END IF
@@ -711,8 +715,8 @@ SUBROUTINE DLSEI(W,Mdw,Me,Ma,Mg,N,Prgopt,X,Rnorme,Rnorml,Mode,Ws,Ip)
   !
   IF ( cov ) THEN
     DO i = 1, N
-      CALL DSCAL(N,Ws(i+n1-1),W(i,1),Mdw)
-      CALL DSCAL(N,Ws(i+n1-1),W(1,i),1)
+      W(i,1:N) = W(i,1:N)*Ws(i+n1-1)
+      W(1:N,i) = W(1:N,i)*Ws(i+n1-1)
     END DO
   END IF
   !

@@ -75,8 +75,7 @@ SUBROUTINE DWNLSM(W,Mdw,Mme,Ma,N,L,Prgopt,X,Rnorm,Mode,Ipivot,Itype,Wd,H,&
   !   900604  DP version created from SP version.  (RWC)
   !   900911  Restriction on value of ALAMDA included.  (WRB)
   USE service, ONLY : XERMSG, D1MACH
-  USE linear, ONLY : DASUM, DAXPY, DCOPY, DH12, DNRM2, DROTM, DROTMG, DSCAL, &
-    DSWAP, IDAMAX
+  USE linear, ONLY : DAXPY, DH12, DROTM, DROTMG, DSWAP
   INTEGER Ipivot(*), Itype(*), L, Ma, Mdw, Mme, Mode, N
   REAL(8) :: D(*), H(*), Prgopt(*), Rnorm, Scalee(*), Temp(*), &
     W(Mdw,*), Wd(*), X(*), Z(*)
@@ -147,13 +146,13 @@ SUBROUTINE DWNLSM(W,Mdw,Mme,Ma,N,L,Prgopt,X,Rnorm,Mode,Ipivot,Itype,Wd,H,&
       key = INT( Prgopt(last+1) )
       IF ( key==6.AND.Prgopt(last+2)/=0.D0 ) THEN
         DO j = 1, N
-          t = DNRM2(m,W(1,j),1)
+          t = NORM2(W(1:m,j))
           IF ( t/=0.D0 ) t = 1.D0/t
           D(j) = t
         END DO
       END IF
       !
-      IF ( key==7 ) CALL DCOPY(N,Prgopt(last+2),1,D,1)
+      IF ( key==7 ) D(1:N) = Prgopt(last+2:last+N+1)
       IF ( key==8 ) tau = MAX(drelpr,Prgopt(last+2))
       IF ( key==9 ) blowup = MAX(drelpr,Prgopt(last+2))
       !
@@ -170,7 +169,7 @@ SUBROUTINE DWNLSM(W,Mdw,Mme,Ma,N,L,Prgopt,X,Rnorm,Mode,Ipivot,Itype,Wd,H,&
     END IF
     !
     DO j = 1, N
-      CALL DSCAL(m,D(j),W(1,j),1)
+      W(1:m,j) = W(1:m,j)*D(j)
     END DO
     !
     !     Process option vector
@@ -185,12 +184,12 @@ SUBROUTINE DWNLSM(W,Mdw,Mme,Ma,N,L,Prgopt,X,Rnorm,Mode,Ipivot,Itype,Wd,H,&
     !     Compute scalee factor to apply to equality constraint equations.
     !
     DO j = 1, N
-      Wd(j) = DASUM(m,W(1,j),1)
+      Wd(j) = SUM(ABS(W(1:m,j)))
     END DO
     !
-    imax = IDAMAX(N,Wd,1)
+    imax = MAXLOC(Wd(1:N),1)
     eanorm = Wd(imax)
-    bnorm = DASUM(m,W(1,N+1),1)
+    bnorm = SUM(ABS(W(1:m,N+1)))
     alamda = eanorm/(drelpr*fac)
     !
     !     On machines, such as the VAXes using D floating, with a very
@@ -272,7 +271,7 @@ SUBROUTINE DWNLSM(W,Mdw,Mme,Ma,N,L,Prgopt,X,Rnorm,Mode,Ipivot,Itype,Wd,H,&
   DO WHILE ( .NOT.(done) )
     isol = L + 1
     IF ( nsoln>=isol ) THEN
-      CALL DCOPY(niv,W(1,N+1),1,Temp,1)
+      Temp(1:niv) = W(1:niv,N+1)
       DO j = nsoln, isol, -1
         IF ( j>krank ) THEN
           i = niv - nsoln + j
@@ -337,7 +336,7 @@ SUBROUTINE DWNLSM(W,Mdw,Mme,Ma,N,L,Prgopt,X,Rnorm,Mode,Ipivot,Itype,Wd,H,&
       20 CONTINUE
       DO i = 1, m
         t = W(i,jcon)
-        CALL DCOPY(N-jcon,W(i,jcon+1),Mdw,W(i,jcon),Mdw)
+        W(i,jcon:N-1) = W(i,jcon+1:N)
         W(i,N) = t
       END DO
       !
@@ -351,7 +350,7 @@ SUBROUTINE DWNLSM(W,Mdw,Mme,Ma,N,L,Prgopt,X,Rnorm,Mode,Ipivot,Itype,Wd,H,&
       !
       !        Similarly permute X(*) vector.
       !
-      CALL DCOPY(N-jcon,X(jcon+1),1,X(jcon),1)
+      X(jcon:N-1) = X(jcon+1:N)
       X(N) = 0.D0
       nsoln = nsoln - 1
       niv = niv - 1
@@ -430,7 +429,7 @@ SUBROUTINE DWNLSM(W,Mdw,Mme,Ma,N,L,Prgopt,X,Rnorm,Mode,Ipivot,Itype,Wd,H,&
       !
       !        To perform multiplier test and drop a constraint.
       !
-      CALL DCOPY(nsoln,Z,1,X,1)
+      X(1:nsoln) = Z(1:nsoln)
       IF ( nsoln<N ) X(nsoln+1:N) = 0.D0
       !
       !        Reclassify least squares equations as equalities as necessary.
@@ -581,7 +580,7 @@ SUBROUTINE DWNLSM(W,Mdw,Mme,Ma,N,L,Prgopt,X,Rnorm,Mode,Ipivot,Itype,Wd,H,&
   !
   100  isol = 1
   IF ( nsoln>=isol ) THEN
-    CALL DCOPY(niv,W(1,N+1),1,Temp,1)
+    Temp(1:niv) = W(1:niv,N+1)
     DO j = nsoln, isol, -1
       IF ( j>krank ) THEN
         i = niv - nsoln + j
@@ -600,7 +599,7 @@ SUBROUTINE DWNLSM(W,Mdw,Mme,Ma,N,L,Prgopt,X,Rnorm,Mode,Ipivot,Itype,Wd,H,&
   !
   !     Solve system.
   !
-  CALL DCOPY(nsoln,Z,1,X,1)
+  X(1:nsoln) = Z(1:nsoln)
   !
   !     Apply Householder transformations to X(*) if KRANK.LT.L
   !

@@ -63,7 +63,6 @@ SUBROUTINE LPDP(A,Mda,M,N1,N2,Prgopt,X,Wnorm,Mode,Ws,Is)
   !     SSCAL,SNRM2,  SEE TRANS. MATH. SOFT., VOL. 5, NO. 3, P. 308.
   !     SCOPY
   !
-  USE linear, ONLY : SCOPY, SDOT, SSCAL, SNRM2
   INTEGER i, iw, ix, j, l, M, Mda, Mode, modew, n, N1, N2, np1
   REAL A(Mda,*), Prgopt(*), Ws(*), Wnorm, X(*)
   INTEGER Is(*)
@@ -77,26 +76,26 @@ SUBROUTINE LPDP(A,Mda,M,N1,N2,Prgopt,X,Wnorm,Mode,Ws,Is)
     !
     !     SCALE NONZERO ROWS OF INEQUALITY MATRIX TO HAVE LENGTH ONE.
     DO i = 1, M
-      sc = SNRM2(n,A(i,1),Mda)
+      sc = NORM2(A(i,1:n))
       IF ( sc/=zero ) THEN
         sc = one/sc
-        CALL SSCAL(np1,sc,A(i,1),Mda)
+        A(i,1:np1) = A(i,1:np1)*sc
       END IF
     END DO
     !
     !     SCALE RT.-SIDE VECTOR TO HAVE LENGTH ONE (OR ZERO).
-    ynorm = SNRM2(M,A(1,np1),1)
+    ynorm = NORM2(A(1:M,np1))
     IF ( ynorm/=zero ) THEN
       sc = one/ynorm
-      CALL SSCAL(M,sc,A(1,np1),1)
+      A(1:M,np1) = A(1:M,np1)*sc
     END IF
     !
     !     SCALE COLS OF MATRIX H.
     j = N1 + 1
     DO WHILE ( j<=n )
-      sc = SNRM2(M,A(1,j),1)
+      sc = NORM2(A(1:M,j))
       IF ( sc/=zero ) sc = one/sc
-      CALL SSCAL(M,sc,A(1,j),1)
+      A(1:M,j) = A(1:M,j)*sc
       X(j) = sc
       j = j + 1
     END DO
@@ -107,19 +106,18 @@ SUBROUTINE LPDP(A,Mda,M,N1,N2,Prgopt,X,Wnorm,Mode,Ws,Is)
       DO i = 1, M
         !
         !     MOVE COL OF TRANSPOSE OF H INTO WORK ARRAY.
-        CALL SCOPY(N2,A(i,N1+1),Mda,Ws(iw+1),1)
+        Ws(iw+1:iw+N2) = A(i,N1+1:N1+N2)
         iw = iw + N2
         !
         !     MOVE COL OF TRANSPOSE OF G INTO WORK ARRAY.
-        CALL SCOPY(N1,A(i,1),Mda,Ws(iw+1),1)
+        Ws(iw+1:iw+N1) = A(i,1:N1)
         iw = iw + N1
         !
         !     MOVE COMPONENT OF VECTOR Y INTO WORK ARRAY.
         Ws(iw+1) = A(i,np1)
         iw = iw + 1
       END DO
-      Ws(iw+1) = zero
-      CALL SCOPY(n,Ws(iw+1),0,Ws(iw+1),1)
+      Ws(iw+1:iw+n) = zero
       iw = iw + n
       Ws(iw+1) = one
       iw = iw + 1
@@ -136,19 +134,19 @@ SUBROUTINE LPDP(A,Mda,M,N1,N2,Prgopt,X,Wnorm,Mode,Ws,Is)
       CALL WNNLS(Ws,np1,N2,np1-N2,M,0,Prgopt,Ws(ix),rnorm,modew,Is,Ws(iw+1))
       !
       !     COMPUTE THE COMPONENTS OF THE SOLN DENOTED ABOVE BY W.
-      sc = one - SDOT(M,A(1,np1),1,Ws(ix),1)
+      sc = one - DOT_PRODUCT(A(1:M,np1),Ws(ix:ix+M-1))
       IF ( one+fac*ABS(sc)==one.OR.rnorm<=zero ) THEN
         Mode = 2
         RETURN
       ELSE
         sc = one/sc
         DO j = 1, N1
-          X(j) = sc*SDOT(M,A(1,j),1,Ws(ix),1)
+          X(j) = sc*DOT_PRODUCT(A(1:M,j),Ws(ix:ix+M-1))
         END DO
         !
         !     COMPUTE THE VECTOR Q=Y-GW.  OVERWRITE Y WITH THIS VECTOR.
         DO i = 1, M
-          A(i,np1) = A(i,np1) - SDOT(N1,A(i,1),Mda,X,1)
+          A(i,np1) = A(i,np1) - DOT_PRODUCT(A(i,1:N1),X(1:N1))
         END DO
       END IF
     END IF
@@ -157,13 +155,12 @@ SUBROUTINE LPDP(A,Mda,M,N1,N2,Prgopt,X,Wnorm,Mode,Ws,Is)
       !     COPY TRANSPOSE OF (H Q) TO WORK ARRAY WS(*).
       iw = 0
       DO i = 1, M
-        CALL SCOPY(N2,A(i,N1+1),Mda,Ws(iw+1),1)
+        Ws(iw+1:iw+N2) = A(i,N1+1:N1+N2)
         iw = iw + N2
         Ws(iw+1) = A(i,np1)
         iw = iw + 1
       END DO
-      Ws(iw+1) = zero
-      CALL SCOPY(N2,Ws(iw+1),0,Ws(iw+1),1)
+      Ws(iw+1:iw+N2) = zero
       iw = iw + N2
       Ws(iw+1) = one
       iw = iw + 1
@@ -180,7 +177,7 @@ SUBROUTINE LPDP(A,Mda,M,N1,N2,Prgopt,X,Wnorm,Mode,Ws,Is)
       CALL WNNLS(Ws,N2+1,0,N2+1,M,0,Prgopt,Ws(ix),rnorm,modew,Is,Ws(iw+1))
       !
       !     COMPUTE THE COMPONENTS OF THE SOLN DENOTED ABOVE BY Z.
-      sc = one - SDOT(M,A(1,np1),1,Ws(ix),1)
+      sc = one - DOT_PRODUCT(A(1:M,np1),Ws(ix:ix+M-1))
       IF ( one+fac*ABS(sc)==one.OR.rnorm<=zero ) THEN
         Mode = 2
         RETURN
@@ -188,18 +185,17 @@ SUBROUTINE LPDP(A,Mda,M,N1,N2,Prgopt,X,Wnorm,Mode,Ws,Is)
         sc = one/sc
         DO j = 1, N2
           l = N1 + j
-          X(l) = sc*SDOT(M,A(1,l),1,Ws(ix),1)*X(l)
+          X(l) = sc*DOT_PRODUCT(A(1:M,l),Ws(ix:ix+M-1))*X(l)
         END DO
       END IF
     END IF
     !
     !     ACCOUNT FOR SCALING OF RT.-SIDE VECTOR IN SOLUTION.
-    CALL SSCAL(n,ynorm,X,1)
-    Wnorm = SNRM2(N1,X,1)
+    X(1:n) = X(1:n)*ynorm
+    Wnorm = NORM2(X(1:N1))
   ELSE
     IF ( n>0 ) THEN
-      X(1) = zero
-      CALL SCOPY(n,X,0,X,1)
+      X(1:n) = zero
     END IF
     Wnorm = zero
     RETURN

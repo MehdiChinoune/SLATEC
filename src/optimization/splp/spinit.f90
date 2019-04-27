@@ -33,7 +33,6 @@ SUBROUTINE SPINIT(Mrelas,Nvars,Costs,Bl,Bu,Ind,Primal,Info,Amat,Csc,&
   !   890605  Removed unreferenced labels.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
-  USE linear, ONLY : SASUM
   INTEGER i, Info, ip, iplace, j, Mrelas, n20007, n20019, n20028, &
     n20041, n20056, n20066, n20070, n20074, n20078, Nvars
   REAL aij, Amat(*), Anorm, Bl(*), Bu(*), cmax, Colnrm(*), Costs(*), &
@@ -176,7 +175,7 @@ SUBROUTINE SPINIT(Mrelas,Nvars,Costs,Bl,Bu,Ind,Primal,Info,Amat,Csc,&
     Rhs(i-Nvars) = Rhs(i-Nvars) + scalr
     i = i + 1
   END DO
-  Rhsnrm = SASUM(Mrelas,Rhs,1)
+  Rhsnrm = SUM(ABS(Rhs(1:Mrelas)))
   !
   !     IF THIS IS NOT A CONTINUATION OR THE USER HAS NOT PROVIDED THE
   !     INITIAL BASIS, THEN THE INITIAL BASIS IS COMPRISED OF THE

@@ -119,12 +119,11 @@ SUBROUTINE LSSUDS(A,X,B,N,M,Nrda,U,Nrdu,Iflag,Mlso,Irank,Iscale,Q,Diag,&
   !   910408  Updated the AUTHOR and REFERENCES sections.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   USE service, ONLY : XERMSG, XGETF, XSETF, XERMAX, J4SAVE, R1MACH
-  USE linear, ONLY : SDOT
   INTEGER nmir, Nrda, Nrdu, nu
   REAL A(Nrda,*), B(*), Diag(*), Div(*), gam, gama, Q(Nrda,*), res, &
     S(*), Scales(*), ss, Td(*), U(Nrdu,*), uro, X(*)
   INTEGER i, Iflag, Irank, irp, Iscale, Isflg, j, jr, k, &
-    kp, Kpivot(*), l, M, maxmes, mj, Mlso, N, nfat, nfatal
+    kp, Kpivot(*), l, M, maxmes, Mlso, N, nfat, nfatal
   !
   !- *********************************************************************
   !
@@ -218,16 +217,17 @@ SUBROUTINE LSSUDS(A,X,B,N,M,Nrda,U,Nrdu,Iflag,Mlso,Irank,Iscale,Q,Diag,&
       !     WE ALSO CHECK TO SEE IF THE SYSTEM APPEARS TO BE INCONSISTENT
       !
       nmir = N - Irank
-      ss = SDOT(N,S(1),1,S(1),1)
+      ss = NORM2(S(1:N))**2
       DO l = 1, Irank
         k = irp - l
-        gam = ((Td(k)*S(k))+SDOT(nmir,Q(irp,k),1,S(irp),1))/(Td(k)*Div(k))
+        gam = ((Td(k)*S(k))+DOT_PRODUCT(Q(irp:N,k),S(irp:N))) &
+          /(Td(k)*Div(k))
         S(k) = S(k) + gam*Td(k)
         DO j = irp, N
           S(j) = S(j) + gam*Q(j,k)
         END DO
       END DO
-      res = SDOT(nmir,S(irp),1,S(irp),1)
+      res = NORM2(S(irp:irp+nmir-1))**2
       IF ( res>ss*(10.*MAX(10.**Isflg,10.*uro))**2 ) THEN
         !
         !     INCONSISTENT SYSTEM
@@ -241,7 +241,7 @@ SUBROUTINE LSSUDS(A,X,B,N,M,Nrda,U,Nrdu,Iflag,Mlso,Irank,Iscale,Q,Diag,&
     S(1) = S(1)/Div(1)
     IF ( Irank/=1 ) THEN
       DO k = 2, Irank
-        S(k) = (S(k)-SDOT(k-1,Q(k,1),Nrda,S(1),1))/Div(k)
+        S(k) = (S(k)-DOT_PRODUCT(Q(k,1:k-1),S(1:k-1)))/Div(k)
       END DO
     END IF
     !
@@ -254,8 +254,7 @@ SUBROUTINE LSSUDS(A,X,B,N,M,Nrda,U,Nrdu,Iflag,Mlso,Irank,Iscale,Q,Diag,&
     !
     DO jr = 1, Irank
       j = irp - jr
-      mj = M - j + 1
-      gama = SDOT(mj,Q(j,j),Nrda,X(j),1)/(Diag(j)*Q(j,j))
+      gama = DOT_PRODUCT(Q(j,j:M),X(j:M))/(Diag(j)*Q(j,j))
       DO k = j, M
         X(k) = X(k) + gama*Q(j,k)
       END DO
@@ -280,8 +279,7 @@ SUBROUTINE LSSUDS(A,X,B,N,M,Nrda,U,Nrdu,Iflag,Mlso,Irank,Iscale,Q,Diag,&
       !
       DO jr = 1, Irank
         j = irp - jr
-        mj = M - j + 1
-        gama = SDOT(mj,Q(j,j),Nrda,U(j,k),1)/(Diag(j)*Q(j,j))
+        gama = DOT_PRODUCT(Q(j,j:M),U(j:M,k))/(Diag(j)*Q(j,j))
         DO i = j, M
           U(i,k) = U(i,k) + gama*Q(j,i)
         END DO

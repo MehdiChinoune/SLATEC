@@ -46,7 +46,6 @@ SUBROUTINE SPLPMU(Mrelas,Nvars,Lmx,Lbm,Nredc,Info,Ienter,Ileave,Iopt,Npp,&
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900328  Added TYPE section.  (WRB)
   USE service, ONLY : XERMSG
-  USE linear, ONLY : SCOPY, SASUM, SDOT
   INTEGER i, ibas, Ienter, ihi, il1, Ileave, ilow, Info, Iopt, ipage, iplace, &
     iu1, j, Jstrt, k, key, Lbm, Lmx, lpg, Mrelas, n20002, n20018, n20121, &
     nerr, nnegrc, Npp, npr001, npr003, Nredc, Nvars
@@ -119,7 +118,7 @@ SUBROUTINE SPLPMU(Mrelas,Nvars,Lmx,Lbm,Nredc,Info,Ienter,Ileave,Iopt,Npp,&
   !     IF VARIABLE WAS EXCHANGED AT A ZERO LEVEL, MARK IT SO THAT
   !     IT CAN'T BE BROUGHT BACK IN.  THIS IS TO HELP PREVENT CYCLING.
   IF ( Zerolv ) Ibasis(Ienter) = -ABS(Ibasis(Ienter))
-  Rprnrm = MAX(Rprnrm,SASUM(Mrelas,Rprim,1))
+  Rprnrm = MAX(Rprnrm,SUM(ABS(Rprim(1:Mrelas))) )
   k = 1
   n20018 = Mrelas
   700 CONTINUE
@@ -152,7 +151,7 @@ SUBROUTINE SPLPMU(Mrelas,Nvars,Lmx,Lbm,Nredc,Info,Ienter,Ileave,Iopt,Npp,&
     Primal(ABS(Ileave)+Nvars) = zero
     !
     wp = Ww(ABS(Ileave))
-    gq = SDOT(Mrelas,Ww,1,Ww,1) + one
+    gq = NORM2(Ww(1:Mrelas))**2 + one
     !
     !     COMPUTE INVERSE (TRANSPOSE) TIMES SEARCH DIRECTION.
     trans = .TRUE.
@@ -174,11 +173,11 @@ SUBROUTINE SPLPMU(Mrelas,Nvars,Lmx,Lbm,Nredc,Info,Ienter,Ileave,Iopt,Npp,&
       !     PROCEDURE (COMPUTE NEW PRIMAL)
       !
       !     COPY RHS INTO WW(*), SOLVE SYSTEM.
-      CALL SCOPY(Mrelas,Rhs,1,Ww,1)
+      Ww(1:Mrelas) = Rhs(1:Mrelas)
       trans = .FALSE.
       CALL LA05BS(Basmat,Ibrc,Lbm,Mrelas,Ipr,Iwr,Wr,Gg,Ww,trans)
-      CALL SCOPY(Mrelas,Ww,1,Rprim,1)
-      Rprnrm = SASUM(Mrelas,Rprim,1)
+      Rprim(1:Mrelas) = Ww(1:Mrelas)
+      Rprnrm = SUM(ABS(Rprim(1:Mrelas)))
       GOTO 1000
     ELSE
       nerr = 26
@@ -401,7 +400,7 @@ SUBROUTINE SPLPMU(Mrelas,Nvars,Lmx,Lbm,Nredc,Info,Ienter,Ileave,Iopt,Npp,&
       Rhs(i) = Rhs(i) - scalr*aij*Csc(ibas)
     END DO
   END IF
-  Rhsnrm = MAX(Rhsnrm,SASUM(Mrelas,Rhs,1))
+  Rhsnrm = MAX(Rhsnrm,SUM(ABS(Rhs(1:Mrelas))) )
   SELECT CASE(npr001)
     CASE(100)
       GOTO 100
@@ -429,7 +428,7 @@ SUBROUTINE SPLPMU(Mrelas,Nvars,Lmx,Lbm,Nredc,Info,Ienter,Ileave,Iopt,Npp,&
   !
   trans = .TRUE.
   CALL LA05BS(Basmat,Ibrc,Lbm,Mrelas,Ipr,Iwr,Wr,Gg,Duals,trans)
-  Dulnrm = SASUM(Mrelas,Duals,1)
+  Dulnrm = SUM(ABS(Duals(1:Mrelas)))
   SELECT CASE(npr003)
     CASE(1100)
       GOTO 1100

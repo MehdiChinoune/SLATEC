@@ -30,7 +30,7 @@ SUBROUTINE FCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Nconst,Xconst,&
   !   900328  Added TYPE section.  (WRB)
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
   USE service, ONLY : XERMSG
-  USE linear, ONLY : SSCAL, SCOPY, SAXPY, BNDSOL, BNDACC
+  USE linear, ONLY : SAXPY, BNDSOL, BNDACC
   USE data_handling, ONLY : SSORT
   INTEGER Iwork(*), Mdg, Mdw, Mode, Nbkpt, Nconst, Ndata, Nderiv(*), Nord
   REAL Bf(Nord,*), Bkpt(*), Bkptin(*), Coeff(*), G(Mdg,*), Ptemp(*), Sddata(*), &
@@ -108,7 +108,7 @@ SUBROUTINE FCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Nconst,Xconst,&
   !
   !     Sort the breakpoints.
   !
-  CALL SCOPY(Nbkpt,Bkptin,1,Bkpt,1)
+  Bkpt(1:Nbkpt) = Bkptin(1:Nbkpt)
   CALL SSORT(Bkpt,dummy,Nbkpt,1)
   !
   !     Initialize variables.
@@ -185,7 +185,7 @@ SUBROUTINE FCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Nconst,Xconst,&
     !        To process least squares equations sort data and an array of
     !        pointers.
     !
-    CALL SCOPY(Ndata,Xdata,1,Xtemp,1)
+    Xtemp(1:Ndata) = Xdata(1:Ndata)
     DO i = 1, Ndata
       Ptemp(i) = i
     END DO
@@ -241,12 +241,12 @@ SUBROUTINE FCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Nconst,Xconst,&
       !
       irow = ir + mt
       mt = mt + 1
-      CALL SCOPY(Nord,Bf,1,G(irow,1),Mdg)
+      G(irow,1:Nord) = Bf(1:Nord,1)
       G(irow,nordp1) = Ydata(l)
       !
       !           Scale data if uncertainty is nonzero.
       !
-      IF ( Sddata(l)/=0.E0 ) CALL SSCAL(nordp1,1.E0/Sddata(l),G(irow,1),Mdg)
+      IF ( Sddata(l)/=0.E0 ) G(irow,1:nordp1) = G(irow,1:nordp1)/Sddata(l)
       !
       !           When staging work area is exhausted, process rows.
       !
@@ -315,7 +315,7 @@ SUBROUTINE FCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Nconst,Xconst,&
       !
       CALL BSPLVD(Bkpt,Nord,xval,ileft,Bf,ideriv+1)
       W(neqcon,1:np1) = 0.E0
-      CALL SCOPY(Nord,Bf(1,ideriv+1),1,W(neqcon,ileft-nordm1),Mdw)
+      W(neqcon,ileft-nordm1:ileft) = Bf(1:Nord,ideriv+1)
       !
       IF ( itype==2 ) THEN
         W(neqcon,np1) = Yconst(idata)
@@ -338,7 +338,7 @@ SUBROUTINE FCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Nconst,Xconst,&
   DO i = 1, np1
     irow = i + neqcon
     W(irow,1:n) = 0.E0
-    CALL SCOPY(MIN(np1-i,Nord),G(i,1),Mdg,W(irow,i),Mdw)
+    W(irow,i:i+MIN(np1-i,Nord)-1) = G(i,1:MIN(np1-i,Nord))
     W(irow,np1) = G(i,nordp1)
   END DO
   !
@@ -363,13 +363,13 @@ SUBROUTINE FCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Nconst,Xconst,&
       irow = neqcon + np1 + nincon
       W(irow,1:n) = 0.E0
       intrvl = ileft - nordm1
-      CALL SCOPY(Nord,Bf(1,ideriv+1),1,W(irow,intrvl),Mdw)
+      W(irow,intrvl:intrvl+Nord-1) = Bf(1:Nord,ideriv+1)
       !
       IF ( itype==1 ) THEN
         W(irow,np1) = Yconst(idata)
       ELSE
         W(irow,np1) = -Yconst(idata)
-        CALL SSCAL(Nord,-1.E0,W(irow,intrvl),Mdw)
+        W(irow,intrvl:intrvl+Nord-1) = -W(irow,intrvl:intrvl+Nord-1)
       END IF
     END IF
   END DO

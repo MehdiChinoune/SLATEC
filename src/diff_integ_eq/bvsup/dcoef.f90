@@ -80,7 +80,6 @@ SUBROUTINE DCOEF(Yh,Yp,Ncomp,Nrowb,Nfc,Nic,B,Beta,Coef,Inhomo,Re,Ae,By,&
   !   910722  Updated AUTHOR section.  (ALS)
   USE DML, ONLY : EPS
   USE service, ONLY : XGETF, XSETF
-  USE linear, ONLY : DDOT
   !
   INTEGER i, Iflag, Inhomo, Iwork(*), j, k, kflag, ki, l, mlso, Ncomp, ncomp2, &
     nf, Nfc, Nfcc, nfccm1, Nic, Nrowb
@@ -95,13 +94,13 @@ SUBROUTINE DCOEF(Yh,Yp,Ncomp,Nrowb,Nfc,Nic,B,Beta,Coef,Inhomo,Re,Ae,By,&
     DO j = 1, Nfc
       l = j
       IF ( Nfc/=Nfcc ) l = 2*j - 1
-      By(k,l) = DDOT(Ncomp,B(k,1),Nrowb,Yh(1,j),1)
+      By(k,l) = DOT_PRODUCT(B(k,1:Ncomp),Yh(1:Ncomp,j))
     END DO
     IF ( Nfc/=Nfcc ) THEN
       DO j = 1, Nfc
         l = 2*j
-        bykl = DDOT(ncomp2,B(k,1),Nrowb,Yh(ncomp2+1,j),1)
-        By(k,l) = DDOT(ncomp2,B(k,ncomp2+1),Nrowb,Yh(1,j),1) - bykl
+        bykl = DOT_PRODUCT(B(k,1:ncomp2),Yh(ncomp2+1:2*ncomp2,j))
+        By(k,l) = DOT_PRODUCT(B(k,ncomp2+1:2*ncomp2),Yh(1:ncomp2,j)) - bykl
       END DO
     END IF
     SELECT CASE (Inhomo)
@@ -113,7 +112,7 @@ SUBROUTINE DCOEF(Yh,Yp,Ncomp,Nrowb,Nfc,Nic,B,Beta,Coef,Inhomo,Re,Ae,By,&
         Cvec(k) = 0.0D0
       CASE DEFAULT
         !        CASE 1
-        Cvec(k) = Beta(k) - DDOT(Ncomp,B(k,1),Nrowb,Yp,1)
+        Cvec(k) = Beta(k) - DOT_PRODUCT(B(k,1:Ncomp),Yp(1:Ncomp))
     END SELECT
   END DO
   cons = ABS(Cvec(1))
@@ -173,8 +172,7 @@ SUBROUTINE DCOEF(Yh,Yp,Ncomp,Nrowb,Nfc,Nic,B,Beta,Coef,Inhomo,Re,Ae,By,&
           nfccm1 = Nfcc - 1
           DO k = 1, nfccm1
             j = Nfcc - k
-            l = Nfcc - j + 1
-            gam = DDOT(l,By(j,j),Nfcc,Coef(j),1)/(Work(j)*By(j,j))
+            gam = DOT_PRODUCT(By(j,j:Nfcc),Coef(j:Nfcc))/(Work(j)*By(j,j))
             DO i = j, Nfcc
               Coef(i) = Coef(i) + gam*By(j,i)
             END DO

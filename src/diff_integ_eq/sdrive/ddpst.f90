@@ -29,7 +29,7 @@ SUBROUTINE DDPST(El,F,FA,H,Impl,JACOBN,Matdim,Miter,Ml,Mu,N,Nde,Nq,Save2,&
   !* REVISION HISTORY  (YYMMDD)
   !   790601  DATE WRITTEN
   !   900329  Initial submission to SLATEC.
-  USE linear, ONLY : DNRM2, DGBFA, DGEFA
+  USE linear, ONLY : DGBFA, DGEFA
   INTEGER i, iflag, imax, Impl, info, Iswflg, j, j2, Jstate, k, &
     Matdim, Miter, Ml, Mu, mw, N, Nde, Nfe, Nje, Nq
   REAL(8) :: A(Matdim,*), bl, Bnd, bp, br, Dfdy(Matdim,*), dfdymx, diff, dy, &
@@ -48,7 +48,7 @@ SUBROUTINE DDPST(El,F,FA,H,Impl,JACOBN,Matdim,Miter,Ml,Mu,N,Nde,Nq,Save2,&
         Jstate = 8
         RETURN
       END IF
-      IF ( Iswflg==3 ) Bnd = DNRM2(N*N,Dfdy,1)
+      IF ( Iswflg==3 ) Bnd = NORM2(Dfdy(1:N,1:N))
       factor = -El(1,Nq)*H
       DO j = 1, N
         DO i = 1, N
@@ -115,7 +115,7 @@ SUBROUTINE DDPST(El,F,FA,H,Impl,JACOBN,Matdim,Miter,Ml,Mu,N,Nde,Nq,Save2,&
           EXIT
         END DO
       END DO
-      IF ( Iswflg==3 ) Bnd = DNRM2(N*N,Dfdy,1)/(-El(1,Nq)*H)
+      IF ( Iswflg==3 ) Bnd = NORM2(Dfdy(1:N,1:N))/(-El(1,Nq)*H)
       Nfe = Nfe + N
     END IF
     IF ( Impl==0 ) THEN

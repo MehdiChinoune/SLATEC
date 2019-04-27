@@ -121,13 +121,12 @@ SUBROUTINE LSSODS(A,X,B,M,N,Nrda,Iflag,Irank,Iscale,Q,Diag,Kpivot,Iter,&
   !   910408  Updated the REFERENCES section.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   USE service, ONLY : XERMSG, XGETF, XSETF, XERMAX, J4SAVE, R1MACH
-  USE linear, ONLY : SDOT, SDSDOT
   INTEGER nfatal, nmir, Nrda
   REAL A(Nrda,*), acc, B(*), Diag(*), Div(*), gam, gama, Q(Nrda,*), R(*), &
     Resnrm, Scales(*), Td(*), uro, X(*), Xnorm, Z(*), znorm
   REAL znrm0
   INTEGER Iflag, Irank, irm, irp, Iscale, it, Iter, iterp, j, &
-    k, kp, Kpivot(*), l, M, maxmes, mj, mmir, N, nfat
+    k, kp, Kpivot(*), l, M, maxmes, mmir, N, nfat
   !
   !- *********************************************************************
   !
@@ -224,8 +223,7 @@ SUBROUTINE LSSODS(A,X,B,M,N,Nrda,Iflag,Irank,Iscale,Q,Diag,Kpivot,Iter,&
       !        APPLY ORTHOGONAL TRANSFORMATION TO R
       !
       DO j = 1, Irank
-        mj = M - j + 1
-        gama = SDOT(mj,Q(j,j),1,R(j),1)/(Diag(j)*Q(j,j))
+        gama = DOT_PRODUCT(Q(j:M,j),R(j:M))/(Diag(j)*Q(j,j))
         DO k = j, M
           R(k) = R(k) + gama*Q(k,j)
         END DO
@@ -238,7 +236,7 @@ SUBROUTINE LSSODS(A,X,B,M,N,Nrda,Iflag,Irank,Iscale,Q,Diag,Kpivot,Iter,&
         DO l = 1, irm
           k = Irank - l
           kp = k + 1
-          Z(k) = (R(k)-SDOT(l,Q(k,kp),Nrda,Z(kp),1))/Div(k)
+          Z(k) = (R(k)-DOT_PRODUCT(Q(k,kp:Irank),Z(kp:Irank)))/Div(k)
         END DO
       END IF
       !
@@ -252,7 +250,7 @@ SUBROUTINE LSSODS(A,X,B,M,N,Nrda,Iflag,Irank,Iscale,Q,Diag,Kpivot,Iter,&
           Z(k) = 0.
         END DO
         DO k = 1, Irank
-          gam = ((Td(k)*Z(k))+SDOT(nmir,Q(k,irp),Nrda,Z(irp),1))/(Td(k)*Div(k))
+          gam = ((Td(k)*Z(k))+DOT_PRODUCT(Q(k,irp:N),Z(irp:N)))/(Td(k)*Div(k))
           Z(k) = Z(k) + gam*Td(k)
           DO j = irp, N
             Z(j) = Z(j) + gam*Q(k,j)
@@ -271,16 +269,16 @@ SUBROUTINE LSSODS(A,X,B,M,N,Nrda,Iflag,Irank,Iscale,Q,Diag,Kpivot,Iter,&
       !
       !        COMPUTE CORRECTION VECTOR NORM (SOLUTION NORM)
       !
-      znorm = SQRT(SDOT(N,Z(1),1,Z(1),1))
+      znorm = NORM2(Z(1:N))
       IF ( it==1 ) Xnorm = znorm
       IF ( iterp>1 ) THEN
         !
         !        COMPUTE RESIDUAL VECTOR FOR THE ITERATIVE IMPROVEMENT PROCESS
         !
         DO k = 1, M
-          R(k) = -SDSDOT(N,-B(k),A(k,1),Nrda,X(1),1)
+          R(k) = -DOT_PRODUCT(A(k,1:N),X(1:N)) + B(k)
         END DO
-        Resnrm = SQRT(SDOT(M,R(1),1,R(1),1))
+        Resnrm = NORM2(R(1:M))
         IF ( it/=1 ) THEN
           !
           !        TEST FOR CONVERGENCE
@@ -320,7 +318,7 @@ SUBROUTINE LSSODS(A,X,B,M,N,Nrda,Iflag,Irank,Iscale,Q,Diag,Kpivot,Iter,&
           Resnrm = 0.
           RETURN
         ELSE
-          Resnrm = SQRT(SDOT(mmir,R(irp),1,R(irp),1))
+          Resnrm = NORM2(R(irp:irp+mmir-1))
           RETURN
         END IF
       END IF
@@ -337,6 +335,6 @@ SUBROUTINE LSSODS(A,X,B,M,N,Nrda,Iflag,Irank,Iscale,Q,Diag,Kpivot,Iter,&
   !     SPECIAL CASE FOR THE NULL MATRIX
   Iter = 0
   Xnorm = 0.
-  Resnrm = SQRT(SDOT(M,B(1),1,B(1),1))
+  Resnrm = NORM2(B(1:M))
   RETURN
 END SUBROUTINE LSSODS

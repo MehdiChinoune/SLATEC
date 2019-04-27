@@ -40,7 +40,6 @@ SUBROUTINE DPLPCE(Mrelas,Nvars,Lmx,Lbm,Itlp,Itbrc,Ibasis,Imat,Ibrc,Ipr,&
   !   890606  Changed references from IPLOC to IDLOC.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
-  USE linear, ONLY : DCOPY, DASUM
   INTEGER i, ihi, il1, ilow, ipage, Itbrc, Itlp, iu1, j, &
     key, l, Lbm, Lmx, lpg, Mrelas, n20002, n20012, n20016, n20023
   INTEGER n20047, n20057, n20061, Nvars
@@ -91,15 +90,14 @@ SUBROUTINE DPLPCE(Mrelas,Nvars,Lmx,Lbm,Itlp,Itbrc,Ibasis,Imat,Ibrc,Ipr,&
     Singlr = Singlr .OR. (Erd(i)>=factor)
     i = i + 1
   END DO
-  Erdnrm = DASUM(Mrelas,Erd,1)
+  Erdnrm = SUM(ABS(Erd(1:Mrelas)))
   !
   !     RECALCULATE ROW CHECK SUMS EVERY ITBRC ITERATIONS OR WHEN
   !     A REDECOMPOSITION HAS OCCURRED.
   IF ( MOD(Itlp,Itbrc)==0.OR.Redbas ) THEN
     !
     !     COMPUTE ROW SUMS, STORE IN WW(*), SOLVE PRIMAL SYSTEM.
-    Ww(1) = zero
-    CALL DCOPY(Mrelas,Ww,0,Ww,1)
+    Ww(1:Mrelas) = zero
     pagepl = .TRUE.
     j = 1
     n20023 = Nvars

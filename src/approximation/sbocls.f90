@@ -562,7 +562,6 @@ SUBROUTINE SBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,&
   !     /SSCAL/ TO /DSCAL/, /SASUM/ TO /DASUM/, /SBOLS/ TO /DBOLS/,
   !     /REAL            / TO /DOUBLE PRECISION/.
   ! ++
-  USE linear, ONLY : SASUM, SCOPY, SDOT, SNRM2, SSCAL
   USE service, ONLY : XERMSG, R1MACH
   INTEGER i, icase, iiw, inrows, ip, irw, iscale, j, jp, lbou, lboum, lds, lenx, &
     liopt, liw, llb, lliw, llrw, llx, lmdw, lndw, locacc, locdim, lopt, lp, lrw, &
@@ -808,7 +807,7 @@ SUBROUTINE SBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,&
             !     DO(RETURN TO USER PROGRAM UNIT)
             GOTO 100
           END IF
-          CALL SCOPY(Ncols,X(Ncols+Iopt(lp+2)),1,Rw,1)
+          Rw(1:Ncols) = X(Ncols+Iopt(lp+2):2*Ncols+Iopt(lp+2)-1)
           lenx = lenx + Ncols
           DO j = 1, Ncols
             IF ( Rw(j)<=zero ) THEN
@@ -990,21 +989,21 @@ SUBROUTINE SBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,&
   !     PROCEDURE(SOLVE CONSTRAINED AND BOUNDED LEAST SQUARES PROBLEM)
   !
   !     MOVE RIGHT HAND SIDE OF LEAST SQUARES EQUATIONS.
-  CALL SCOPY(mout,W(Mcon+1,Ncols+1),1,W(Mcon+1,Ncols+Mcon+1),1)
+  W(Mcon+1:Mcon+mout,Ncols+Mcon+1) = W(Mcon+1:Mcon+mout,Ncols+1)
   IF ( Mcon>0.AND.filter ) THEN
     !
     !     PROJECT THE LINEAR CONSTRAINTS INTO A REACHABLE SET.
     DO i = 1, Mcon
-      CALL SCOPY(Ncols,W(i,1),Mdw,W(Mcon+1,Ncols+i),1)
+      W(Mcon+1:Mcon+Ncols,Ncols+i) = W(i,1:Ncols)
     END DO
     !
     !      PLACE (-)IDENTITY MATRIX AFTER CONSTRAINT DATA.
     DO j = Ncols + 1, Ncols + Mcon + 1
-      W(1,j) = zero
-      CALL SCOPY(Mcon,W(1,j),0,W(1,j),1)
+      W(1:Mcon,j) = zero
     END DO
-    W(1,Ncols+1) = -one
-    CALL SCOPY(Mcon,W(1,Ncols+1),0,W(1,Ncols+1),Mdw+1)
+    DO j = 1, Mcon
+      W(j,Ncols+j) = -one
+    END DO
     !
     !     OBTAIN A 'FEASIBLE POINT' FOR THE LINEAR CONSTRAINTS.
     jopt(01) = 99
@@ -1016,7 +1015,7 @@ SUBROUTINE SBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,&
     !     CAN BE REACHED.
     DO j = Ncols + 1, Ncols + Mcon
       icase = Ind(j)
-      IF ( icase<4 ) t = SDOT(Ncols,W(Mcon+1,j),1,X,1)
+      IF ( icase<4 ) t = DOT_PRODUCT(W(Mcon+1:Mcon+Ncols,j),X(1:Ncols))
       SELECT CASE (icase)
         CASE (1)
           !     CASE 1
@@ -1035,30 +1034,29 @@ SUBROUTINE SBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,&
     !
     !     MOVE CONSTRAINT DATA BACK TO THE ORIGINAL AREA.
     DO j = Ncols + 1, Ncols + Mcon
-      CALL SCOPY(Ncols,W(Mcon+1,j),1,W(j-Ncols,1),Mdw)
+      W(j-Ncols,1:Ncols) = W(Mcon+1:Mcon+Ncols,j)
     END DO
   END IF
   IF ( Mcon>0 ) THEN
     DO j = Ncols + 1, Ncols + Mcon
-      W(Mcon+1,j) = zero
-      CALL SCOPY(mout,W(Mcon+1,j),0,W(Mcon+1,j),1)
+      W(Mcon+1:Mcon+mout,j) = zero
     END DO
     !
     !     PUT IN (-)IDENTITY MATRIX (POSSIBLY) ONCE AGAIN.
     DO j = Ncols + 1, Ncols + Mcon + 1
-      W(1,j) = zero
-      CALL SCOPY(Mcon,W(1,j),0,W(1,j),1)
+      W(1:Mcon,j) = zero
     END DO
-    W(1,Ncols+1) = -one
-    CALL SCOPY(Mcon,W(1,Ncols+1),0,W(1,Ncols+1),Mdw+1)
+    DO j = 1, Mcon
+      W(j,Ncols+j) = -one
+    END DO
   END IF
   !
   !     COMPUTE NOMINAL COLUMN SCALING FOR THE UNWEIGHTED MATRIX.
   cnorm = zero
   anorm = zero
   DO j = 1, Ncols
-    t1 = SASUM(Mcon,W(1,j),1)
-    t2 = SASUM(mout,W(Mcon+1,1),1)
+    t1 = SUM(ABS(W(1:Mcon,j)))
+    t2 = SUM(ABS(W(Mcon+1:Mcon+mout,1)))
     t = t1 + t2
     IF ( t==zero ) t = one
     cnorm = MAX(cnorm,t1)
@@ -1071,7 +1069,7 @@ SUBROUTINE SBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,&
       !
       !     SCALE COLS. (BEFORE WEIGHTING) TO HAVE LENGTH ONE.
       DO j = 1, Ncols
-        t = SNRM2(Mcon+mout,W(1,j),1)
+        t = NORM2(W(1:Mcon+mout,j))
         IF ( t==zero ) t = one
         X(Ncols+Mcon+j) = one/t
       END DO
@@ -1079,13 +1077,12 @@ SUBROUTINE SBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,&
       !     CASE 3
       !
       !     SUPPRESS SCALING (USE UNIT MATRIX).
-      X(Ncols+Mcon+1) = one
-      CALL SCOPY(Ncols,X(Ncols+Mcon+1),0,X(Ncols+Mcon+1),1)
+      X(Ncols+Mcon+1:2*Ncols+Mcon) = one
     CASE (4)
       !     CASE 4
       !
       !     THE USER HAS PROVIDED SCALING.
-      CALL SCOPY(Ncols,Rw,1,X(Ncols+Mcon+1),1)
+      X(Ncols+Mcon+1:2*Ncols+Mcon) = Rw(1:Ncols)
     CASE DEFAULT
       !     CASE 1
   END SELECT
@@ -1098,9 +1095,9 @@ SUBROUTINE SBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,&
   IF ( anorm>zero ) wt = wt/anorm
   IF ( cnorm>zero ) wt = wt*cnorm
   DO i = 1, mout
-    CALL SSCAL(Ncols,wt,W(i+Mcon,1),Mdw)
+    W(i+Mcon,1:Ncols) = W(i+Mcon,1:Ncols)*wt
   END DO
-  CALL SSCAL(mout,wt,W(Mcon+1,Mcon+Ncols+1),1)
+  W(Mcon+1:Mcon+mout,Mcon+Ncols+1) = W(Mcon+1:Mcon+mout,Mcon+Ncols+1)*wt
   lrw = 1
   liw = 1
   !

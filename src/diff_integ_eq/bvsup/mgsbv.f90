@@ -68,7 +68,6 @@ SUBROUTINE MGSBV(M,N,A,Ia,Niv,Iflag,S,P,Ip,Inhomo,V,W,Wcnd)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
   USE ML, ONLY : EPS, INDpvt, NFCc, SRU
-  USE linear, ONLY : SDOT
   INTEGER i, Ia, Iflag, Inhomo, Ip(*), ip1, ix, iz, j, jk, jp, jq, jy, jz, k, kd, &
     kj, kp, l, lix, lr, M, m2, N, Niv, nivn, nmnr, nn, np1, nr, nrm1
   REAL A(Ia,*), dot, P(*), pjp, psave, ry, S(*), sv, t, V(*), vl, &
@@ -87,7 +86,7 @@ SUBROUTINE MGSBV(M,N,A,Ia,Niv,Iflag,S,P,Ip,Inhomo,V,W,Wcnd)
     !
     j = 0
     DO i = 1, N
-      vl = SDOT(M,A(1,i),1,A(1,i),1)
+      vl = NORM2(A(1:M,i))**2
       S(i) = vl
       IF ( N/=NFCc ) THEN
         j = 2*i - 1
@@ -110,7 +109,7 @@ SUBROUTINE MGSBV(M,N,A,Ia,Niv,Iflag,S,P,Ip,Inhomo,V,W,Wcnd)
     IF ( N/=NFCc ) lix = 2*ix - 1
     P(lix) = P(1)
     S(np1) = 0.
-    IF ( Inhomo==1 ) S(np1) = SDOT(M,V,1,V,1)
+    IF ( Inhomo==1 ) S(np1) = NORM2(V(1:M))**2
     Wcnd = 1.
     nivn = Niv
     Niv = 0
@@ -200,7 +199,7 @@ SUBROUTINE MGSBV(M,N,A,Ia,Niv,Iflag,S,P,Ip,Inhomo,V,W,Wcnd)
           ix = ip1
           !     ****************************************
           DO j = ip1, N
-            dot = SDOT(M,A(1,nr),1,A(1,j),1)
+            dot = DOT_PRODUCT(A(1:M,nr),A(1:M,j))
             jp = jp + 1
             jq = jp + nmnr
             IF ( N/=NFCc ) jq = jq + nmnr - 1
@@ -227,7 +226,7 @@ SUBROUTINE MGSBV(M,N,A,Ia,Niv,Iflag,S,P,Ip,Inhomo,V,W,Wcnd)
             !
             !     TEST FOR CANCELLATION IN RECURRENCE RELATION
             !
-            IF ( P(jq)<=S(j)*SRU ) P(jq) = SDOT(M,A(1,j),1,A(1,j),1)
+            IF ( P(jq)<=S(j)*SRU ) P(jq) = NORM2(A(1:M,j))**2
             IF ( P(jq)>y ) THEN
               y = P(jq)
               ix = j
@@ -239,7 +238,7 @@ SUBROUTINE MGSBV(M,N,A,Ia,Niv,Iflag,S,P,Ip,Inhomo,V,W,Wcnd)
           !
           !     RECOMPUTE NORM SQUARED OF PIVOTAL VECTOR WITH SCALAR PRODUCT
           !
-          y = SDOT(M,A(1,ix),1,A(1,ix),1)
+          y = NORM2(A(1:M,ix))**2
           IF ( y<=EPS*S(ix) ) GOTO 50
           Wcnd = MIN(Wcnd,y/S(ix))
         END IF
@@ -249,7 +248,7 @@ SUBROUTINE MGSBV(M,N,A,Ia,Niv,Iflag,S,P,Ip,Inhomo,V,W,Wcnd)
         IF ( Inhomo==1 ) THEN
           lr = nr
           IF ( N/=NFCc ) lr = 2*nr - 1
-          W(lr) = SDOT(M,A(1,nr),1,V,1)*ry
+          W(lr) = DOT_PRODUCT(A(1:M,nr),V(1:M))*ry
           DO i = 1, M
             V(i) = V(i) - W(lr)*A(i,nr)
           END DO
@@ -270,7 +269,7 @@ SUBROUTINE MGSBV(M,N,A,Ia,Niv,Iflag,S,P,Ip,Inhomo,V,W,Wcnd)
       !
       IF ( Inhomo/=1 ) RETURN
       IF ( (N>1).AND.(S(np1)<1.0) ) RETURN
-      vnorm = SDOT(M,V,1,V,1)
+      vnorm = NORM2(V(1:M))**2
       IF ( S(np1)/=0. ) Wcnd = MIN(Wcnd,vnorm/S(np1))
       IF ( vnorm>=EPS*S(np1) ) RETURN
     END IF

@@ -38,7 +38,6 @@ SUBROUTINE DPLPMN(DUSRMT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
   USE LA05DD, ONLY : LP
   USE service, ONLY : XERMSG
-  USE linear, ONLY : DCOPY, DASUM, DDOT
   INTEGER i, ibas, ienter, ileave, Info, iopt, ipage, iplace, itlp, j, jstrt, k, &
     key, Lbm, Lmx, lpg, lpr, lpr1, Mrelas, n20046, n20058, n20080, n20098, n20119, &
     n20172, n20206, n20247, n20252, n20271, n20276, n20283, n20290, nerr, np, &
@@ -390,9 +389,9 @@ SUBROUTINE DPLPMN(DUSRMT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   END IF
   !
   IF ( Info==(-1).OR.Info==(-3) ) THEN
-    sizee = DASUM(Nvars,Primal,1)*anorm
-    sizee = sizee/DASUM(Nvars,Csc,1)
-    sizee = sizee + DASUM(Mrelas,Primal(Nvars+1),1)
+    sizee = SUM(ABS(Primal(1:Nvars)))*anorm
+    sizee = sizee/SUM(ABS(Csc(1:Nvars)))
+    sizee = sizee + SUM(ABS(Primal(Nvars+1:Nvars+Mrelas)))
     i = 1
     n20058 = Nvars + Mrelas
     DO WHILE ( (n20058-i)>=0 )
@@ -455,8 +454,7 @@ SUBROUTINE DPLPMN(DUSRMT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   GOTO 4500
   ! CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
   !     PROCEDURE (COMPUTE RIGHT HAND SIDE)
-  1900 Rhs(1) = zero
-  CALL DCOPY(Mrelas,Rhs,0,Rhs,1)
+  1900 Rhs(1:Mrelas) = zero
   j = 1
   n20098 = Nvars + Mrelas
   DO WHILE ( (n20098-j)>=0 )
@@ -657,8 +655,7 @@ SUBROUTINE DPLPMN(DUSRMT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   !     -1 VIOLATES LOWER BOUND, 0 FEASIBLE, +1 VIOLATES UPPER BOUND.
   !     (THIS INFO IS STORED IN PRIMAL(NVARS+1)-PRIMAL(NVARS+MRELAS))
   !     TRANSLATE VARIABLE TO ITS UPPER BOUND, IF .GT. UPPER BOUND
-  2800 Primal(Nvars+1) = zero
-  CALL DCOPY(Mrelas,Primal(Nvars+1),0,Primal(Nvars+1),1)
+  2800 Primal(Nvars+1:Nvars+Mrelas) = zero
   i = 1
   n20172 = Mrelas
   DO WHILE ( (n20172-i)>=0 )
@@ -731,7 +728,7 @@ SUBROUTINE DPLPMN(DUSRMT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   !     EQUATIONS.
   !
   !     COPY RHS INTO WW(*), THEN UPDATE WW(*).
-  3100 CALL DCOPY(Mrelas,Rhs,1,Ww,1)
+  3100 Ww(1:Mrelas) = Rhs(1:Mrelas)
   j = 1
   n20206 = Mrelas
   DO WHILE ( (n20206-j)>=0 )
@@ -773,14 +770,13 @@ SUBROUTINE DPLPMN(DUSRMT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   END DO
   !
   !   COMPUTE NORM OF DIFFERENCE AND CHECK FOR FEASIBILITY.
-  resnrm = DASUM(Mrelas,Ww,1)
+  resnrm = SUM(ABS(Ww(1:Mrelas)))
   feas = resnrm<=tolls*(rprnrm*anorm+rhsnrm)
   !
   !     TRY AN ABSOLUTE ERROR TEST IF THE RELATIVE TEST FAILS.
   IF ( .NOT.feas ) feas = resnrm<=tolabs
   IF ( feas ) THEN
-    Primal(Nvars+1) = zero
-    CALL DCOPY(Mrelas,Primal(Nvars+1),0,Primal(Nvars+1),1)
+    Primal(Nvars+1:Nvars+Mrelas) = zero
   END IF
   SELECT CASE(npr008)
     CASE(600)
@@ -841,11 +837,11 @@ SUBROUTINE DPLPMN(DUSRMT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   !     PROCEDURE (COMPUTE NEW PRIMAL)
   !
   !     COPY RHS INTO WW(*), SOLVE SYSTEM.
-  4000 CALL DCOPY(Mrelas,Rhs,1,Ww,1)
+  4000 Ww(1:Mrelas) = Rhs(1:Mrelas)
   trans = .FALSE.
   CALL LA05BD(Basmat,Ibrc,Lbm,Mrelas,Ipr,Iwr,Wr,gg,Ww,trans)
-  CALL DCOPY(Mrelas,Ww,1,Rprim,1)
-  rprnrm = DASUM(Mrelas,Rprim,1)
+  Rprim(1:Mrelas) = Ww(1:Mrelas)
+  rprnrm = SUM(ABS(Rprim(1:Mrelas)))
   SELECT CASE(npr006)
     CASE(400)
       GOTO 400
@@ -876,7 +872,7 @@ SUBROUTINE DPLPMN(DUSRMT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   !
   trans = .TRUE.
   CALL LA05BD(Basmat,Ibrc,Lbm,Mrelas,Ipr,Iwr,Wr,gg,Duals,trans)
-  dulnrm = DASUM(Mrelas,Duals,1)
+  dulnrm = SUM(ABS(Duals(1:Mrelas)))
   SELECT CASE(npr013)
     CASE(2000)
       GOTO 2000
@@ -924,8 +920,7 @@ SUBROUTINE DPLPMN(DUSRMT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   END DO
   !
   !     REPLACE TRANSLATED BASIC VARIABLES INTO ARRAY PRIMAL(*)
-  Primal(1) = zero
-  CALL DCOPY(Nvars+Mrelas,Primal,0,Primal,1)
+  Primal(1:Nvars+Mrelas) = zero
   j = 1
   n20283 = Nvars + Mrelas
   DO WHILE ( (n20283-j)>=0 )
@@ -980,7 +975,7 @@ SUBROUTINE DPLPMN(DUSRMT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   ELSE
     CALL IVOUT(0,idum,'('' STEEPEST EDGE PRICING WAS USED.'')',idg)
   END IF
-  rdum(1) = DDOT(Nvars,Costs,1,Primal,1)
+  rdum(1) = DOT_PRODUCT(Costs(1:Nvars),Primal(1:Nvars))
   CALL DVOUT(1,rdum,'('' OUTPUT VALUE OF THE OBJECTIVE FUNCTION'')',idg)
   CALL DVOUT(Nvars+Mrelas,Primal,&
     '('' THE OUTPUT INDEPENDENT AND DEPENDENT VARIABLES'')',idg)

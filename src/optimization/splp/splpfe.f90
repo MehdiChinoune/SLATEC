@@ -37,7 +37,6 @@ SUBROUTINE SPLPFE(Mrelas,Nvars,Lmx,Lbm,Ienter,Ibasis,Imat,Ibrc,Ipr,Iwr,&
   !   890605  Removed unreferenced labels.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
-  USE linear, ONLY : SCOPY, SASUM
   INTEGER i, Ienter, ihi, il1, ilow, ipage, iu1, j, key, &
     Lbm, Lmx, lpg, Mrelas, n20002, n20050, Nvars
   INTEGER Ibasis(*), Imat(*), Ibrc(Lbm,2), Ipr(*), Iwr(*), Ind(*), Ibb(*)
@@ -97,8 +96,7 @@ SUBROUTINE SPLPFE(Mrelas,Nvars,Lmx,Lbm,Ienter,Ibasis,Imat,Ibrc,Ipr,Iwr,&
   !     USE COL. CHOSEN TO COMPUTE SEARCH DIRECTION.
   IF ( Found ) THEN
     j = Ibasis(Ienter)
-    Ww(1) = zero
-    CALL SCOPY(Mrelas,Ww,0,Ww,1)
+    Ww(1:Mrelas) = zero
     IF ( j<=Nvars ) THEN
       IF ( j/=1 ) THEN
         ilow = Imat(j+3) + 1
@@ -146,10 +144,10 @@ SUBROUTINE SPLPFE(Mrelas,Nvars,Lmx,Lbm,Ienter,Ibasis,Imat,Ibrc,Ipr,Iwr,&
         i = i + 1
       END DO
     END IF
-    Dirnrm = SASUM(Mrelas,Ww,1)
+    Dirnrm = SUM(ABS(Ww(1:Mrelas)))
     !
     !     COPY CONTENTS OF WR(*) TO DUALS(*) FOR USE IN
     !     ADD-DROP (EXCHANGE) STEP, LA05CS( ).
-    CALL SCOPY(Mrelas,Wr,1,Duals,1)
+    Duals(1:Mrelas) = Wr(1:Mrelas)
   END IF
 END SUBROUTINE SPLPFE

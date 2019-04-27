@@ -34,7 +34,7 @@ SUBROUTINE WNLIT(W,Mdw,M,N,L,Ipivot,Itype,H,Scalee,Rnorm,Idope,Dope,Done)
   !   890620  Revised to make WNLT1, WNLT2, and WNLT3 subroutines.  (RWC)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
-  USE linear, ONLY : H12, ISAMAX, SCOPY, SROTM, SROTMG, SSCAL, SSWAP
+  USE linear, ONLY : H12, SROTM, SROTMG, SSWAP
   INTEGER Idope(*), Ipivot(*), Itype(*), L, M, Mdw, N
   REAL Dope(*), H(*), Rnorm, Scalee(*), W(Mdw,*)
   LOGICAL Done
@@ -116,7 +116,7 @@ SUBROUTINE WNLIT(W,Mdw,M,N,L,Ipivot,Itype,H,Scalee,Rnorm,Idope,Dope,Done)
         !
         CALL WNLT3(i,lend,M,Mdw,Ipivot,H,W)
         lend = lend - 1
-        imax = ISAMAX(lend-i+1,H(i),1) + i - 1
+        imax = MAXLOC(H(i:lend),1) + i - 1
         hbar = H(imax)
         CYCLE
       ELSE
@@ -252,7 +252,7 @@ SUBROUTINE WNLIT(W,Mdw,M,N,L,Ipivot,Itype,H,Scalee,Rnorm,Idope,Dope,Done)
       !
       Itype(ir) = 0
       t = SQRT(Scalee(krank+1))
-      CALL SSCAL(N+1,t,W(krank+1,1),Mdw)
+      W(krank+1,1:N+1) = W(krank+1,1:N+1)*t
       Scalee(krank+1) = alsq
       me = me + 1
       krank = krank + 1
