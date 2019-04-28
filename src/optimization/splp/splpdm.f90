@@ -1,6 +1,6 @@
 !** SPLPDM
-SUBROUTINE SPLPDM(Mrelas,Nvars,Lmx,Lbm,Nredc,Info,Iopt,Ibasis,Imat,Ibrc,&
-    Ipr,Iwr,Ind,Ibb,Anorm,Eps,Uu,Gg,Amat,Basmat,Csc,Wr,Singlr,Redbas)
+SUBROUTINE SPLPDM(Mrelas,Nvars,Lbm,Nredc,Info,Iopt,Ibasis,Imat,Ibrc,&
+    Ipr,Iwr,Ind,Anorm,Eps,Uu,Gg,Amat,Basmat,Csc,Wr,Singlr,Redbas)
   !>
   !  Subsidiary to SPLP
   !***
@@ -36,8 +36,8 @@ SUBROUTINE SPLPDM(Mrelas,Nvars,Lmx,Lbm,Nredc,Info,Iopt,Ibasis,Imat,Ibrc,&
   USE LA05DS, ONLY : SMAll
   USE service, ONLY : XERMSG
   REAL aij
-  INTEGER i, Info, Iopt, iplace, j, k, Lbm, Lmx, Mrelas, Nredc, Nvars, nzbm
-  INTEGER Ibasis(*), Imat(*), Ibrc(Lbm,2), Ipr(*), Iwr(*), Ind(*), Ibb(*)
+  INTEGER i, Info, Iopt, iplace, j, k, Lbm, Mrelas, Nredc, Nvars, nzbm
+  INTEGER Ibasis(*), Imat(*), Ibrc(Lbm,2), Ipr(*), Iwr(*), Ind(*)
   REAL Amat(*), Basmat(*), Csc(*), Wr(*), Anorm, Eps, Gg, one, Uu, zero
   LOGICAL Singlr, Redbas
   CHARACTER(16) :: xern3

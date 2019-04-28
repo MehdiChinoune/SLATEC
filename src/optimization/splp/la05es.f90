@@ -1,5 +1,5 @@
 !** LA05ES
-SUBROUTINE LA05ES(A,Irn,Ip,N,Iw,Ia,Reals)
+SUBROUTINE LA05ES(A,Irn,Ip,N,Iw,Reals)
   !>
   !  Subsidiary to SPLP
   !***
@@ -36,7 +36,7 @@ SUBROUTINE LA05ES(A,Irn,Ip,N,Iw,Ia,Reals)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   USE LA05DS, ONLY : LCOl, LROw, NCP
-  INTEGER Ia, ipi, j, k, kl, kn, N, nz
+  INTEGER ipi, j, k, kl, kn, N, nz
   LOGICAL Reals
   REAL A(*)
   INTEGER Irn(*), Iw(*), Ip(*)

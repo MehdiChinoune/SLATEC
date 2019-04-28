@@ -1,5 +1,5 @@
 !** DCOEF
-SUBROUTINE DCOEF(Yh,Yp,Ncomp,Nrowb,Nfc,Nic,B,Beta,Coef,Inhomo,Re,Ae,By,&
+SUBROUTINE DCOEF(Yh,Yp,Ncomp,Nrowb,Nfc,B,Beta,Coef,Inhomo,Re,Ae,By,&
     Cvec,Work,Iwork,Iflag,Nfcc)
   !>
   !  Subsidiary to DBVSUP
@@ -82,7 +82,7 @@ SUBROUTINE DCOEF(Yh,Yp,Ncomp,Nrowb,Nfc,Nic,B,Beta,Coef,Inhomo,Re,Ae,By,&
   USE service, ONLY : XGETF, XSETF
   !
   INTEGER i, Iflag, Inhomo, Iwork(*), j, k, kflag, ki, l, mlso, Ncomp, ncomp2, &
-    nf, Nfc, Nfcc, nfccm1, Nic, Nrowb
+    nf, Nfc, Nfcc, nfccm1, Nrowb
   REAL(8) :: Ae, B(Nrowb,*), bbn, Beta(*), bn, brn, By(Nfcc,*), bykl, bys, &
     Coef(*), cons, Cvec(*), gam, Re, un, Work(*), Yh(Ncomp,*), Yp(*), ypn
   !* FIRST EXECUTABLE STATEMENT  DCOEF

@@ -40,6 +40,12 @@ SUBROUTINE SPLPMN(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
   USE LA05DS, ONLY : LP
   USE service, ONLY : XERMSG
+  INTERFACE
+    SUBROUTINE USRMAT(I,J,Aij,Indcat,Dattrv,Iflag)
+      INTEGER :: I, J, indcat, iflag(10)
+      REAL :: Dattrv(*), Aij
+    END SUBROUTINE
+  END INTERFACE
   INTEGER i, ibas, ienter, ileave, Info, iopt, ipage, iplace, itlp, j, jstrt, k, &
     key, Lbm, Lmx, lpg, lpr, lpr1, Mrelas, n20046, n20058, n20080, n20098, n20119, &
     n20172, n20206, n20247, n20252, n20271, n20276, n20283, n20290, nerr, np, &
@@ -214,7 +220,7 @@ SUBROUTINE SPLPMN(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   END IF
   !
   !     UPDATE MATRIX DATA AND CHECK BOUNDS FOR CONSISTENCY.
-  100  CALL SPLPUP(USRMAT,Mrelas,Nvars,Prgopt,Dattrv,Bl,Bu,Ind,Info,Amat,Imat,&
+  100  CALL SPLPUP(USRMAT,Mrelas,Nvars,Dattrv,Bl,Bu,Ind,Info,Amat,Imat,&
     sizeup,asmall,abig)
   IF ( Info<0 ) GOTO 4600
   !
@@ -263,7 +269,7 @@ SUBROUTINE SPLPMN(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   !
   !     INITIALIZATION. SCALE DATA, NORMALIZE BOUNDS, FORM COLUMN
   !     CHECK SUMS, AND FORM INITIAL BASIS MATRIX.
-  CALL SPINIT(Mrelas,Nvars,Costs,Bl,Bu,Ind,Primal,Info,Amat,Csc,costsc,&
+  CALL SPINIT(Mrelas,Nvars,Costs,Bl,Bu,Ind,Primal,Amat,Csc,costsc,&
     Colnrm,xlamda,anorm,Rhs,rhsnrm,Ibasis,Ibb,Imat,lopt)
   IF ( Info<0 ) GOTO 4600
   !
@@ -552,7 +558,7 @@ SUBROUTINE SPLPMN(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
     IF ( kprint>=3 ) CALL SVOUT(Mrelas,Ww,'('' SEARCH DIRECTION'')',idg)
     ! CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
     !     PROCEDURE (CHOOSE VARIABLE TO LEAVE BASIS)
-    CALL SPLPFL(Mrelas,Nvars,ienter,ileave,Ibasis,Ind,Ibb,theta,dirnrm,&
+    CALL SPLPFL(Mrelas,Nvars,ienter,ileave,Ibasis,Ind,theta,dirnrm,&
       rprnrm,Csc,Ww,Bl,Bu,Erp,Rprim,Primal,finite,zerolv)
     IF ( .NOT.(finite) ) THEN
       unbnd = .TRUE.
@@ -640,8 +646,8 @@ SUBROUTINE SPLPMN(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   !
   !     SET RELATIVE PIVOTING FACTOR FOR USE IN LA05 () PACKAGE.
   uu = 0.1
-  CALL SPLPDM(Mrelas,Nvars,Lmx,Lbm,nredc,Info,iopt,Ibasis,Imat,Ibrc,Ipr,Iwr,&
-    Ind,Ibb,anorm,eps,uu,gg,Amat,Basmat,Csc,Wr,singlr,redbas)
+  CALL SPLPDM(Mrelas,Nvars,Lbm,nredc,Info,iopt,Ibasis,Imat,Ibrc,Ipr,Iwr,&
+    Ind,anorm,eps,uu,gg,Amat,Basmat,Csc,Wr,singlr,redbas)
   IF ( Info<0 ) GOTO 4600
   SELECT CASE(npr004)
     CASE(200)
@@ -791,7 +797,7 @@ SUBROUTINE SPLPMN(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   END SELECT
   ! CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
   !     PROCEDURE (INITIALIZE REDUCED COSTS AND STEEPEST EDGE WEIGHTS)
-  3200 CALL SPINCW(Mrelas,Nvars,Lmx,Lbm,npp,jstrt,Ibasis,Imat,Ibrc,Ipr,Iwr,Ind,&
+  3200 CALL SPINCW(Mrelas,Nvars,Lmx,Lbm,npp,jstrt,Imat,Ibrc,Ipr,Iwr,Ind,&
     Ibb,costsc,gg,erdnrm,dulnrm,Amat,Basmat,Csc,Wr,Ww,Rz,Rg,Costs,Colnrm,Duals,stpedg)
   !
   SELECT CASE(npr014)

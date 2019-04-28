@@ -1225,7 +1225,7 @@ SUBROUTINE SDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
       Idid = 1
       !
       !     SET ERROR WEIGHT VECTOR WT
-      CALL SDAWTS(Neq,Info(2),Rtol,Atol,Y,Rwork(lwt),Rpar,Ipar)
+      CALL SDAWTS(Neq,Info(2),Rtol,Atol,Y,Rwork(lwt))
       DO i = 1, Neq
         IF ( Rwork(lwt+i-1)<=0.0E0 ) GOTO 900
       END DO
@@ -1252,7 +1252,7 @@ SUBROUTINE SDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
           !     COMPUTE INITIAL STEPSIZE, TO BE USED BY EITHER
           !     SDASTP OR SDAINI, DEPENDING ON INFO(11)
           ho = 0.001E0*tdist
-          ypnorm = SDANRM(Neq,Yprime,Rwork(lwt),Rpar,Ipar)
+          ypnorm = SDANRM(Neq,Yprime,Rwork(lwt))
           IF ( ypnorm>0.5E0/ho ) ho = 0.5E0/ypnorm
           ho = SIGN(ho,Tout-T)
         ELSE
@@ -1318,7 +1318,7 @@ SUBROUTINE SDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
     IF ( (Iwork(LNST)-Iwork(LNSTL))<500 ) THEN
       !
       !     UPDATE WT
-      CALL SDAWTS(Neq,Info(2),Rtol,Atol,Rwork(lphi),Rwork(lwt),Rpar,Ipar)
+      CALL SDAWTS(Neq,Info(2),Rtol,Atol,Rwork(lphi),Rwork(lwt))
       DO i = 1, Neq
         IF ( Rwork(i+lwt-1)<=0.0E0 ) THEN
           Idid = -3
@@ -1327,7 +1327,7 @@ SUBROUTINE SDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
       END DO
       !
       !     TEST FOR TOO MUCH ACCURACY REQUESTED.
-      r = SDANRM(Neq,Rwork(lphi),Rwork(lwt),Rpar,Ipar)*100.0E0*uround
+      r = SDANRM(Neq,Rwork(lphi),Rwork(lwt))*100.0E0*uround
       IF ( r<=1.0E0 ) THEN
         !
         !     COMPUTE MINIMUM STEPSIZE

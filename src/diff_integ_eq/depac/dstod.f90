@@ -316,7 +316,7 @@ SUBROUTINE DSTOD(Neq,Y,Yh,Nyh,Yh1,Ewt,Savf,Acor,Wm,Iwm,DF,DJAC,Rpar,Ipar)
     DO i = 1, N
       Y(i) = H*Savf(i) - (Yh(i,2)+Acor(i))
     END DO
-    CALL DSLVS(Wm,Iwm,Y,Savf)
+    CALL DSLVS(Wm,Iwm,Y)
     !                             ......EXIT
     IF ( IER/=0 ) GOTO 700
     del = DVNRMS(N,Y,Ewt)

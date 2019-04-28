@@ -41,10 +41,10 @@ SUBROUTINE COSGEN(N,Ijump,Fnum,Fden,A)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
 
-  REAL A(*), dum, Fden, Fnum, pi, pibyn, x, y
+  REAL A(*), Fden, Fnum, pi, pibyn, x, y
   INTEGER i, Ijump, k, k1, k2, k3, k4, k5, N, np1
   !* FIRST EXECUTABLE STATEMENT  COSGEN
-  pi = PIMACH(dum)
+  pi = PIMACH()
   IF ( N/=0 ) THEN
     IF ( Ijump==1 ) THEN
       np1 = N + 1

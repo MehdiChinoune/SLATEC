@@ -355,11 +355,11 @@ SUBROUTINE HWSCSP(Intl,Ts,Tf,M,Mbdcnd,Bdts,Bdtf,Rs,Rf,N,Nbdcnd,Bdrs,Bdrf,&
 
   INTEGER i1, i10, i2, i3, i4, i5, i6, i7, i8, i9, Idimf, &
     Ierror, Intl, k, l, M, Mbdcnd, mp1, N, Nbdcnd
-  REAL Bdrf(*), Bdrs(*), Bdtf(*), Bdts(*), dum, Elmbda, F(Idimf,*), Pertrb, pi, &
+  REAL Bdrf(*), Bdrs(*), Bdtf(*), Bdts(*), Elmbda, F(Idimf,*), Pertrb, pi, &
     Rf, Rs, Tf, Ts, W(*)
   INTEGER nck, np1
   !* FIRST EXECUTABLE STATEMENT  HWSCSP
-  pi = PIMACH(dum)
+  pi = PIMACH()
   Ierror = 0
   IF ( Ts<0..OR.Tf>pi ) Ierror = 1
   IF ( Ts>=Tf ) Ierror = 2

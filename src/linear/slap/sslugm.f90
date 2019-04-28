@@ -1,5 +1,5 @@
 !** SSLUGM
-SUBROUTINE SSLUGM(N,B,X,Nelt,Ia,Ja,A,Isym,Nsave,Itol,Tol,Itmax,Iter,Err,&
+SUBROUTINE SSLUGM(N,B,X,Nelt,Ia,Ja,A,Isym,Nsave,Tol,Itmax,Iter,Err,&
     Ierr,Iunit,Rwork,Lenw,Iwork,Leniw)
   !>
   !  Incomplete LU GMRES Iterative Sparse Ax=b Solver.
@@ -338,7 +338,7 @@ SUBROUTINE SSLUGM(N,B,X,Nelt,Ia,Ja,A,Isym,Nsave,Itol,Tol,Itmax,Iter,Err,&
   INTEGER , PARAMETER :: LOCRB = 1, LOCIB = 11
   !     .. Scalar Arguments ..
   REAL Err, Tol
-  INTEGER Ierr, Isym, Iter, Itmax, Itol, Iunit, Leniw, Lenw, N, Nelt, Nsave
+  INTEGER Ierr, Isym, Iter, Itmax, Iunit, Leniw, Lenw, N, Nelt, Nsave
   !     .. Array Arguments ..
   REAL A(Nelt), B(N), Rwork(Lenw), X(N)
   INTEGER Ia(Nelt), Iwork(Leniw), Ja(Nelt)
@@ -355,7 +355,7 @@ SUBROUTINE SSLUGM(N,B,X,Nelt,Ia,Ja,A,Isym,Nsave,Itol,Tol,Itmax,Iter,Err,&
   END IF
   !
   !         Change the SLAP input matrix IA, JA, A to SLAP-Column format.
-  CALL SS2Y(N,Nelt,Ia,Ja,A,Isym)
+  CALL SS2Y(N,Nelt,Ia,Ja,A)
   !
   !         Count number of Non-Zero elements preconditioner ILU matrix.
   !         Then set up the work arrays.  We assume MAXL=KMP=NSAVE.
@@ -423,7 +423,7 @@ SUBROUTINE SSLUGM(N,B,X,Nelt,Ia,Ja,A,Isym,Nsave,Itol,Tol,Itmax,Iter,Err,&
   Iwork(locigw+4) = Itmax/Nsave
   myitol = 0
   !
-  CALL SGMRES(N,B,X,Nelt,Ia,Ja,A,Isym,SSMV,SSLUI,myitol,Tol,Itmax,Iter,Err,&
+  CALL SGMRES(N,B,X,Nelt,Ia,Ja,A,Isym,SSMV,SSLUI,myitol,Tol,Iter,Err,&
     Ierr,Iunit,Rwork,Rwork,Rwork(locrgw),Lenw-locrgw,Iwork(locigw),20,Rwork,Iwork)
   !
   IF ( Iter>Itmax ) Ierr = 2

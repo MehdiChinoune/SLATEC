@@ -225,7 +225,7 @@ CONTAINS
           CASE (13,14)
             !           Test DSYR, 13, and DSPR, 14.
             CALL DCHK52(snames(isnum),eps,thresh,Nout,Kprint,ftl2,NIDIM,idimm,&
-              NALF,alf,NINC,inc,NMAX,INCMAX,a,aa,as,x,xx,xs,y,yy,ys,yt,g,z)
+              NALF,alf,NINC,inc,NMAX,INCMAX,a,aa,as,x,xx,xs,yt,g,z)
           CASE (15,16)
             !           Test DSYR2, 15, and DSPR2, 16.
             CALL DCHK62(snames(isnum),eps,thresh,Nout,Kprint,ftl2,NIDIM,idimm,&
@@ -441,7 +441,7 @@ CONTAINS
           CASE (5)
             !           Test DSYRK, 05.
             CALL DCHK43(snames(isnum),eps,thresh,Nout,Kprint,ftl2,NIDIM,idimm,&
-              NALF,alf,NBET,bet,NMAX,ab,aa,as,ab(1,NMAX+1),bb,bs,c,cc,cs,ct,g)
+              NALF,alf,NBET,bet,NMAX,ab,aa,as,c,cc,cs,ct,g)
           CASE (6)
             !           Test DSYR2K, 06.
             CALL DCHK53(snames(isnum),eps,thresh,Nout,Kprint,ftl2,NIDIM,idimm,&
@@ -3040,7 +3040,7 @@ CONTAINS
   END SUBROUTINE DCHK42
   !** DCHK43
   SUBROUTINE DCHK43(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idimm,Nalf,Alf,&
-      Nbet,Bet,Nmax,A,Aa,As,B,Bb,Bs,C,Cc,Cs,Ct,G)
+      Nbet,Bet,Nmax,A,Aa,As,C,Cc,Cs,Ct,G)
     !>
     !  Test DSYRK.
     !***
@@ -3076,8 +3076,7 @@ CONTAINS
     CHARACTER(6) :: Sname
     !     .. Array Arguments ..
     REAL(8) :: A(Nmax,Nmax), Aa(Nmax*Nmax), Alf(Nalf), As(Nmax*Nmax), &
-      G(Nmax), Bb(Nmax*Nmax), Bet(Nbet), Bs(Nmax*Nmax), &
-      C(Nmax,Nmax), Cc(Nmax*Nmax), Ct(Nmax), B(Nmax,Nmax), Cs(Nmax*Nmax)
+      G(Nmax), Bet(Nbet), C(Nmax,Nmax), Cc(Nmax*Nmax), Ct(Nmax), Cs(Nmax*Nmax)
     INTEGER Idimm(Nidim)
     !     .. Local Scalars ..
     REAL(8) :: alpha, als, beta, bets, err, errmax
@@ -3286,7 +3285,7 @@ CONTAINS
   END SUBROUTINE DCHK43
   !** DCHK52
   SUBROUTINE DCHK52(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idimm,Nalf,Alf,&
-      Ninc,Inc,Nmax,Incmax,A,Aa,As,X,Xx,Xs,Y,Yy,Ys,Yt,G,Z)
+      Ninc,Inc,Nmax,Incmax,A,Aa,As,X,Xx,Xs,Yt,G,Z)
     !>
     !  Quick check for DSYR and DSPR.
     !***
@@ -3320,8 +3319,7 @@ CONTAINS
     CHARACTER(6) :: Sname
     !     .. Array Arguments ..
     REAL(8) :: A(Nmax,Nmax), Aa(Nmax*Nmax), Alf(Nalf), As(Nmax*Nmax), &
-      G(Nmax), X(Nmax), Xs(Nmax*Incmax), Xx(Nmax*Incmax), &
-      Y(Nmax), Ys(Nmax*Incmax), Yt(Nmax), Yy(Nmax*Incmax), Z(Nmax)
+      G(Nmax), X(Nmax), Xs(Nmax*Incmax), Xx(Nmax*Incmax), Yt(Nmax), Z(Nmax)
     INTEGER Idimm(Nidim), Inc(Ninc)
     !     .. Local Scalars ..
     REAL(8) :: alpha, als, err, errmax, transl

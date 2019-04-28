@@ -60,7 +60,7 @@ CONTAINS
         SELECT CASE (ICAse)
           CASE (1,2,3,4,5,6,7,8,9,10,11,14,15,18,19,20,21,22,23,24,25)
             ! ICASE =  1-11, 14-15, OR 18-25
-            CALL CHECK2(sfac,sdfac,dfac,dqfac,Kprint)
+            CALL CHECK2(sfac,dfac,dqfac,Kprint)
           CASE (26,27,28,29,30,31,32,33,34,35,36,37,38)
             ! ICASE = 26-38
             CALL CHECK1(sfac,dfac,Kprint)
@@ -457,7 +457,7 @@ CONTAINS
     END DO
   END SUBROUTINE CHECK1
   !** CHECK2
-  SUBROUTINE CHECK2(Sfac,Sdfac,Dfac,Dqfac,Kprint)
+  SUBROUTINE CHECK2(Sfac,Dfac,Dqfac,Kprint)
     !>
     !  (UNKNOWN)
     !***
@@ -490,7 +490,7 @@ CONTAINS
       DQDOTA, DQDOTI, DROT, DROTM, DSDOT, DSWAP, SAXPY, SCOPY, SDOT, SDSDOT, &
       SROT, SROTM, SSWAP
     INTEGER i, j, ki, kn, kni, kpar, ksize, lenx, leny, mx, my, Kprint, qc_i(30)
-    REAL Sdfac, Sfac
+    REAL Sfac
     REAL sx(7), sy(7), stx(7), sty(7), ssize(7), sparam(5), stmp(1), stmp2(1)
     REAL(8) :: dx(7), dy(7), dparam(5), dsize(7), dtx(7), dty(7), dtmp(1)
     REAL(8) :: Dfac, Dqfac

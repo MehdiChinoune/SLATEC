@@ -1546,6 +1546,12 @@ SUBROUTINE SPLP(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   USE service, ONLY : XERMSG
+  INTERFACE
+    SUBROUTINE USRMAT(I,J,Aij,Indcat,Dattrv,Iflag)
+      INTEGER :: I, J, indcat, iflag(10)
+      REAL :: Dattrv(*), Aij
+    END SUBROUTINE
+  END INTERFACE
   INTEGER iadbig, ictmax, ictopt, Info, iopt, key, lamat, last, &
     lbasma, lbm, lcolnr, lcsc, lerd, lerp, libb, librc, &
     limat, lipr, Liw, liwork

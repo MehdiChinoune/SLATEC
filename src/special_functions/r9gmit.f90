@@ -1,5 +1,5 @@
 !** R9GMIT
-REAL FUNCTION R9GMIT(A,X,Algap1,Sgngam,Alx)
+REAL FUNCTION R9GMIT(A,X,Algap1,Sgngam)
   !>
   !  Compute Tricomi's incomplete Gamma function for small
   !            arguments.
@@ -32,7 +32,7 @@ REAL FUNCTION R9GMIT(A,X,Algap1,Sgngam,Alx)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
   USE service, ONLY : XERMSG, R1MACH
-  REAL A, ae, aeps, alg2, Algap1, algs, Alx, fk, s, sgng2, Sgngam, t, te, X
+  REAL A, ae, aeps, alg2, Algap1, algs, fk, s, sgng2, Sgngam, t, te, X
   INTEGER k, m, ma
   REAL :: eps = 0., bot = 0.
   !* FIRST EXECUTABLE STATEMENT  R9GMIT

@@ -256,11 +256,11 @@ SUBROUTINE SSJAC(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
   Iwork(10) = locw
   !
   !         Convert to SLAP column format.
-  CALL SS2Y(N,Nelt,Ia,Ja,A,Isym)
+  CALL SS2Y(N,Nelt,Ia,Ja,A)
   !
   !         Compute the inverse of the diagonal of the matrix.  This
   !         will be used as the preconditioner.
-  CALL SSDS(N,Nelt,Ia,Ja,A,Isym,Rwork(locd))
+  CALL SSDS(N,Nelt,Ja,A,Rwork(locd))
   !
   !         Set up the work array and perform the iterative refinement.
   CALL SIR(N,B,X,Nelt,Ia,Ja,A,Isym,SSMV,SSDI,Itol,Tol,Itmax,Iter,Err,Ierr,&

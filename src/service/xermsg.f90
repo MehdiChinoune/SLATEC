@@ -214,7 +214,7 @@ SUBROUTINE XERMSG(Librar,Subrou,Messg,Nerr,Level)
   IF ( Nerr<-9999999.OR.Nerr>99999999.OR.Nerr==0.OR.Level<-1.OR.Level>2 ) THEN
     CALL XERPRN(' ***',-1,'FATAL ERROR IN...$$ XERMSG -- INVALID ERROR NUMBER OR LEVEL$$ JOB ABORT DUE TO FATAL ERROR.',72)
     CALL XERSVE(' ',' ',' ',0,0,0,kdummy)
-    CALL XERHLT(' ***XERMSG -- INVALID INPUT')
+    PRINT*,' ***XERMSG -- INVALID INPUT'
     RETURN
   END IF
   !
@@ -234,7 +234,7 @@ SUBROUTINE XERMSG(Librar,Subrou,Messg,Nerr,Level)
   lfirst = Messg
   lerr = Nerr
   llevel = Level
-  CALL XERCNT(xlibr,xsubr,lfirst,lerr,llevel,lkntrl)
+  !CALL XERCNT(xlibr,xsubr,lfirst,lerr,llevel,lkntrl)
   !
   lkntrl = MAX(-2,MIN(2,lkntrl))
   mkntrl = ABS(lkntrl)
@@ -366,8 +366,8 @@ SUBROUTINE XERMSG(Librar,Subrou,Messg,Nerr,Level)
       CALL XERPRN(' ***',-1,'JOB ABORT DUE TO FATAL ERROR.',72)
     END IF
     CALL XERSVE(' ',' ',' ',-1,0,0,kdummy)
-    CALL XERHLT(' ')
+    PRINT*,' '
   ELSE
-    CALL XERHLT(Messg)
+    PRINT*,Messg
   END IF
 END SUBROUTINE XERMSG

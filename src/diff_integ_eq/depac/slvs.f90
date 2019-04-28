@@ -1,5 +1,5 @@
 !** SLVS
-SUBROUTINE SLVS(Wm,Iwm,X,Tem)
+SUBROUTINE SLVS(Wm,Iwm,X)
   !>
   !  Subsidiary to DEBDF
   !***
@@ -32,7 +32,7 @@ SUBROUTINE SLVS(Wm,Iwm,X,Tem)
   !
   !LLL. OPTIMIZE
   INTEGER Iwm(*), i, meband, ml, mu
-  REAL Wm(*), X(*), Tem(*), di, hl0, phl0, r
+  REAL Wm(*), X(*), di, hl0, phl0, r
   !-----------------------------------------------------------------------
   ! THIS ROUTINE MANAGES THE SOLUTION OF THE LINEAR SYSTEM ARISING FROM
   ! A CHORD ITERATION.  IT IS CALLED BY STOD  IF MITER .NE. 0.

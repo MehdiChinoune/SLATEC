@@ -1,5 +1,5 @@
 !** DGMRES
-SUBROUTINE DGMRES(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,&
+SUBROUTINE DGMRES(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,&
     Iter,Err,Ierr,Iunit,Sb,Sx,Rgwk,Lrgw,Igwk,Ligw,Rwork,Iwork)
   !>
   !  Preconditioned GMRES iterative sparse Ax=b solver.
@@ -395,11 +395,21 @@ SUBROUTINE DGMRES(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,&
   !   921019  Changed 500.0 to 500 to reduce SP/DP differences.  (FNF)
   !   921026  Added check for valid value of ITOL.  (FNF)
   USE service, ONLY : D1MACH
+  INTERFACE
+    SUBROUTINE MSOLVE(N,R,Z,Rwork,Iwork)
+      INTEGER :: N, Iwork(*)
+      REAL(8) :: R(N), Z(N), Rwork(*)
+    END SUBROUTINE
+    SUBROUTINE MATVEC(N,X,R,Nelt,Ia,Ja,A,Isym)
+      INTEGER :: N, Nelt, Isym, Ia(Nelt), Ja(Nelt)
+      REAL(8) :: X(N), R(N), A(Nelt)
+    END SUBROUTINE
+  END INTERFACE
   !         The following is for optimized compilation on LLNL/LTSS Crays.
   !LLL. OPTIMIZE
   !     .. Scalar Arguments ..
   REAL(8) :: Err, Tol
-  INTEGER Ierr, Isym, Iter, Itmax, Itol, Iunit, Ligw, Lrgw, N, Nelt
+  INTEGER Ierr, Isym, Iter, Itol, Iunit, Ligw, Lrgw, N, Nelt
   !     .. Array Arguments ..
   REAL(8) :: A(Nelt), B(N), Rgwk(Lrgw), Rwork(*), Sb(N), Sx(N), X(N)
   INTEGER Ia(Nelt), Igwk(Ligw), Iwork(*), Ja(Nelt)
@@ -465,7 +475,7 @@ SUBROUTINE DGMRES(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,&
           !         Calculate scaled-preconditioned norm of RHS vector b.
           !   ------------------------------------------------------------------
           IF ( jpre<0 ) THEN
-            CALL MSOLVE(N,B,Rgwk(lr),Nelt,Ia,Ja,A,Isym,Rwork,Iwork)
+            CALL MSOLVE(N,B,Rgwk(lr),Rwork,Iwork)
             nms = nms + 1
           ELSE
             CALL DCOPY(N,B,1,Rgwk(lr),1)
@@ -500,7 +510,7 @@ SUBROUTINE DGMRES(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,&
             CALL DPIGMR(N,Rgwk(lr),Sb,Sx,jscal,maxl,maxlp1,kmp,nrsts,jpre,&
               MATVEC,MSOLVE,nmsl,Rgwk(lz),Rgwk(lv),Rgwk(lhes),&
               Rgwk(lq),lgmr,Rwork,Iwork,Rgwk(lw),Rgwk(ldl),rhol,&
-              nrmax,B,bnrm,X,Rgwk(lxl),Itol,Tol,Nelt,Ia,Ja,A,Isym,&
+              nrmax,bnrm,X,Rgwk(lxl),Itol,Tol,Nelt,Ia,Ja,A,Isym,&
               Iunit,iflag,Err)
             Iter = Iter + lgmr
             nms = nms + nmsl

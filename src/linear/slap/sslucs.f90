@@ -248,7 +248,7 @@ SUBROUTINE SSLUCS(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
   END IF
   !
   !         Change the SLAP input matrix IA, JA, A to SLAP-Column format.
-  CALL SS2Y(N,Nelt,Ia,Ja,A,Isym)
+  CALL SS2Y(N,Nelt,Ia,Ja,A)
   !
   !         Count number of Non-Zero elements preconditioner ILU matrix.
   !         Then set up the work arrays.

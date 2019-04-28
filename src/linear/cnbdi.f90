@@ -62,8 +62,8 @@ SUBROUTINE CNBDI(Abe,Lda,N,Ml,Mu,Ipvt,Det)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
-  INTEGER Lda, N, Ml, Mu, Ipvt(*)
-  COMPLEX Abe(Lda,*), Det(2)
+  INTEGER Lda, N, Ml, Mu, Ipvt(N)
+  COMPLEX Abe(Lda,2*Ml+Mu+1), Det(2)
   !
   REAL ten
   INTEGER i

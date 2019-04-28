@@ -250,7 +250,7 @@ SUBROUTINE DSDCG(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
   END IF
   !
   !         Modify the SLAP matrix data structure to YSMP-Column.
-  CALL DS2Y(N,Nelt,Ia,Ja,A,Isym)
+  CALL DS2Y(N,Nelt,Ia,Ja,A)
   !
   !         Set up the work arrays.
   lociw = LOCIB
@@ -272,7 +272,7 @@ SUBROUTINE DSDCG(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
   !
   !         Compute the inverse of the diagonal of the matrix.  This
   !         will be used as the preconditioner.
-  CALL DSDS(N,Nelt,Ia,Ja,A,Isym,Rwork(locd))
+  CALL DSDS(N,Nelt,Ja,A,Rwork(locd))
   !
   !         Do the Preconditioned Conjugate Gradient.
   CALL DCG(N,B,X,Nelt,Ia,Ja,A,Isym,DSMV,DSDI,Itol,Tol,Itmax,Iter,Err,Ierr,&

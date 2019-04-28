@@ -1,5 +1,5 @@
 !** SPLPFL
-SUBROUTINE SPLPFL(Mrelas,Nvars,Ienter,Ileave,Ibasis,Ind,Ibb,Theta,Dirnrm,&
+SUBROUTINE SPLPFL(Mrelas,Nvars,Ienter,Ileave,Ibasis,Ind,Theta,Dirnrm,&
     Rprnrm,Csc,Ww,Bl,Bu,Erp,Rprim,Primal,Finite,Zerolv)
   !>
   !  Subsidiary to SPLP
@@ -36,7 +36,7 @@ SUBROUTINE SPLPFL(Mrelas,Nvars,Ienter,Ileave,Ibasis,Ind,Ibb,Theta,Dirnrm,&
   !   900328  Added TYPE section.  (WRB)
 
   INTEGER i, Ienter, Ileave, j, Mrelas, n20005, n20036, Nvars
-  INTEGER Ibasis(*), Ind(*), Ibb(*)
+  INTEGER Ibasis(*), Ind(*)
   REAL Csc(*), Ww(*), Bl(*), Bu(*), Erp(*), Rprim(*), Primal(*), &
     bound, Dirnrm, ratio, Rprnrm, Theta, zero
   LOGICAL Finite, Zerolv

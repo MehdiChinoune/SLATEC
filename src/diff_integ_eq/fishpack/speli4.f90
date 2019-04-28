@@ -35,7 +35,7 @@ SUBROUTINE SPELI4(Iorder,A,B,M,Mbdcnd,Bda,Alpha,Bdb,Beta,C,D,N,Nbdcnd,Bdc,&
   INTEGER i, Idmn, ieror, Ierror, iord, Iorder, j, M, Mbdcnd, mp, N, Nbdcnd, np
   REAL A, ai, Alpha, Am(*), An(*), ax1, axi, B, Bda(*), Bdb(*), Bdc(*), Bdd(*), &
     Beta, bi, Bm(*), Bn(*), bxi, C, ci, Cm(*), Cn(*), cxi, cxm, D, Dm(*), Dn(*), &
-    dy1, dyj, eyj, fyj, fyn, gama, Grhs(Idmn,*), Pertrb, prtrb, Um(*), Un(*), &
+    dy1, dyj, eyj, fyj, fyn, gama, Grhs(Idmn,*), Pertrb, Um(*), Un(*), &
     Usol(Idmn,*), W(*), xi, xnu, Zm(*), Zn(*)
   LOGICAL singlr
   EXTERNAL :: COFX
@@ -314,7 +314,7 @@ SUBROUTINE SPELI4(Iorder,A,B,M,Mbdcnd,Bda,Alpha,Bdb,Beta,C,D,N,Nbdcnd,Bdc,&
       !     MINIMIZE SOLUTION WITH RESPECT TO WEIGHTED LEAST SQUARES
       !     NORM IF OPERATOR IS SINGULAR
       !
-      IF ( singlr ) CALL MINSO4(Usol,Idmn,Zn,Zm,prtrb)
+      IF ( singlr ) CALL MINSO4(Usol,Idmn,Zn,Zm)
       !
       !     RETURN IF DEFERRED CORRECTIONS AND A FOURTH ORDER SOLUTION ARE
       !     NOT FLAGGED

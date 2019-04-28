@@ -1,5 +1,5 @@
 !** DS2Y
-SUBROUTINE DS2Y(N,Nelt,Ia,Ja,A,Isym)
+SUBROUTINE DS2Y(N,Nelt,Ia,Ja,A)
   !>
   !  SLAP Triad to SLAP Column Format Converter.
   !            Routine to convert from the SLAP Triad to SLAP Column
@@ -133,7 +133,7 @@ SUBROUTINE DS2Y(N,Nelt,Ia,Ja,A,Isym)
   !   930701  Updated CATEGORY section.  (FNF, WRB)
 
   !     .. Scalar Arguments ..
-  INTEGER Isym, N, Nelt
+  INTEGER N, Nelt
   !     .. Array Arguments ..
   REAL(8) :: A(Nelt)
   INTEGER Ia(Nelt), Ja(Nelt)

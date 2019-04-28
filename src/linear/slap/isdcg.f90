@@ -1,6 +1,6 @@
 !** ISDCG
-INTEGER FUNCTION ISDCG(N,B,X,Nelt,Ia,Ja,A,Isym,MSOLVE,Itol,Tol,Itmax,Iter,&
-    Err,Ierr,Iunit,R,Z,P,Dz,Rwork,Iwork,Ak,Bk,Bnrm,Solnrm)
+INTEGER FUNCTION ISDCG(N,B,X,MSOLVE,Itol,Tol,Iter,&
+    Err,Ierr,Iunit,R,Z,Dz,Rwork,Iwork,Ak,Bk,Bnrm,Solnrm)
   !>
   !  Preconditioned Conjugate Gradient Stop Test.
   !            This routine calculates the stop test for the Conjugate
@@ -172,12 +172,18 @@ INTEGER FUNCTION ISDCG(N,B,X,Nelt,Ia,Ja,A,Isym,MSOLVE,Itol,Tol,Itmax,Iter,&
   !           output format.  (FNF)
   USE DSLBLK, ONLY : SOLn
   USE service, ONLY : D1MACH
+  INTERFACE
+    SUBROUTINE MSOLVE(N,R,Z,Rwork,Iwork)
+      INTEGER :: N, Iwork(*)
+      REAL(8) :: R(N), Z(N), Rwork(*)
+    END SUBROUTINE
+  END INTERFACE
   !     .. Scalar Arguments ..
   REAL(8) :: Ak, Bk, Bnrm, Err, Solnrm, Tol
-  INTEGER Ierr, Isym, Iter, Itmax, Itol, Iunit, N, Nelt
+  INTEGER Ierr, Iter, Itol, Iunit, N
   !     .. Array Arguments ..
-  REAL(8) :: A(Nelt), B(N), Dz(N), P(N), R(N), Rwork(*), X(N), Z(N)
-  INTEGER Ia(Nelt), Iwork(*), Ja(Nelt)
+  REAL(8) :: B(N), Dz(N), R(N), Rwork(*), X(N), Z(N)
+  INTEGER Iwork(*)
   !     .. Subroutine Arguments ..
   EXTERNAL :: MSOLVE
   !     .. Local Scalars ..
@@ -193,7 +199,7 @@ INTEGER FUNCTION ISDCG(N,B,X,Nelt,Ia,Ja,A,Isym,MSOLVE,Itol,Tol,Itmax,Iter,&
     !                  -1              -1
     !         err = ||M  Residual||/||M  RightHandSide|| (2-Norms).
     IF ( Iter==0 ) THEN
-      CALL MSOLVE(N,R,Z,Nelt,Ia,Ja,A,Isym,Rwork,Iwork)
+      CALL MSOLVE(N,R,Z,Rwork,Iwork)
       Bnrm = DNRM2(N,Dz,1)
     END IF
     Err = DNRM2(N,Z,1)/Bnrm

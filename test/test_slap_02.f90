@@ -186,7 +186,7 @@ CONTAINS
         !         Convert to the SLAP-Column format and
         !         write out matrix in SLAP-Column format, if desired.
         !
-        CALL DS2Y(n,nelt,ia,ja,a,isym)
+        CALL DS2Y(n,nelt,ia,ja,a)
         IF ( Kprint>=4 ) THEN
           WRITE (Lun,99005) (k,ia(k),ja(k),a(k),k=1,nelt)
           99005 FORMAT (/'  ***** SLAP Column Matrix *****'/' Indx   ia   ja     a'/&
@@ -346,7 +346,7 @@ CONTAINS
           CALL DFILL(n,xiter,0.0D0)
           itolgm = 0
           !
-          CALL DSDGMR(n,f,xiter,nelt,ia,ja,a,isym,nsave,itolgm,tol,itmax,iter,&
+          CALL DSDGMR(n,f,xiter,nelt,ia,ja,a,isym,nsave,tol,itmax,iter,&
             err,ierr,iunit,rwork,lenw,iwork,leniw)
           !
           CALL DUTERR('DSDGMR',ierr,Kprint,nfail,Lun,iter,err)
@@ -359,7 +359,7 @@ CONTAINS
           IF ( Kprint>=3 ) WRITE (Lun,99009) 'DSLUGM', itol, isym, nsave
           CALL DFILL(n,xiter,0.0D0)
           !
-          CALL DSLUGM(n,f,xiter,nelt,ia,ja,a,isym,nsave,itol,tol,itmax,iter,&
+          CALL DSLUGM(n,f,xiter,nelt,ia,ja,a,isym,nsave,tol,itmax,iter,&
             err,ierr,iunit,rwork,lenw,iwork,leniw)
           !
           CALL DUTERR('DSLUGM',ierr,Kprint,nfail,Lun,iter,err)

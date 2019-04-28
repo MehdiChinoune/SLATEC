@@ -1,5 +1,5 @@
 !** SPLPUP
-SUBROUTINE SPLPUP(USRMAT,Mrelas,Nvars,Prgopt,Dattrv,Bl,Bu,Ind,Info,Amat,&
+SUBROUTINE SPLPUP(USRMAT,Mrelas,Nvars,Dattrv,Bl,Bu,Ind,Info,Amat,&
     Imat,Sizeup,Asmall,Abig)
   !>
   !  Subsidiary to SPLP
@@ -42,9 +42,15 @@ SUBROUTINE SPLPUP(USRMAT,Mrelas,Nvars,Prgopt,Dattrv,Bl,Bu,Ind,Info,Amat,&
   !           DO loops to DO loops.  (RWC)
   !   900602  Get rid of ASSIGNed GOTOs.  (RWC)
   USE service, ONLY : XERMSG
+  INTERFACE
+    SUBROUTINE USRMAT(I,J,Aij,Indcat,Dattrv,Iflag)
+      INTEGER :: I, J, indcat, iflag(10)
+      REAL :: Dattrv(*), Aij
+    END SUBROUTINE
+  END INTERFACE
   INTEGER i, indcat, indexx, Info, iplace, itcnt, itmax, j, Mrelas, Nvars
   REAL Abig, aij, Amat(*), amn, amx, Asmall, Bl(*), Bu(*), Dattrv(*), &
-    Prgopt(*), xval, zero
+    xval, zero
   INTEGER iflag(10), Imat(*), Ind(*)
   LOGICAL Sizeup, first
   CHARACTER(8) :: xern1, xern2
@@ -132,7 +138,7 @@ SUBROUTINE SPLPUP(USRMAT,Mrelas,Nvars,Prgopt,Dattrv,Bl,Bu,Ind,Info,Amat,&
     END IF
     !
     aij = zero
-    CALL USRMAT(i,j,aij,indcat,Prgopt,Dattrv,iflag)
+    CALL USRMAT(i,j,aij,indcat,Dattrv,iflag)
     IF ( iflag(1)==1 ) THEN
       iflag(1) = 2
       CYCLE

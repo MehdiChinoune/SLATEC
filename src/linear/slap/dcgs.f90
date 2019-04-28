@@ -255,6 +255,16 @@ SUBROUTINE DCGS(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,Iter,&
   !   921019  Changed 500.0 to 500 to reduce SP/DP differences.  (FNF)
   !   921113  Corrected C***CATEGORY line.  (FNF)
   USE service, ONLY : D1MACH
+  INTERFACE
+    SUBROUTINE MSOLVE(N,R,Z,Rwork,Iwork)
+      INTEGER :: N, Iwork(*)
+      REAL(8) :: R(N), Z(N), Rwork(*)
+    END SUBROUTINE
+    SUBROUTINE MATVEC(N,X,R,Nelt,Ia,Ja,A,Isym)
+      INTEGER :: N, Nelt, Isym, Ia(Nelt), Ja(Nelt)
+      REAL(8) :: X(N), R(N), A(Nelt)
+    END SUBROUTINE
+  END INTERFACE
   !     .. Scalar Arguments ..
   REAL(8) :: Err, Tol
   INTEGER Ierr, Isym, Iter, Itmax, Itol, Iunit, N, Nelt
@@ -291,10 +301,10 @@ SUBROUTINE DCGS(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,Iter,&
   DO i = 1, N
     V1(i) = R(i) - B(i)
   END DO
-  CALL MSOLVE(N,V1,R,Nelt,Ia,Ja,A,Isym,Rwork,Iwork)
+  CALL MSOLVE(N,V1,R,Rwork,Iwork)
   !
-  IF ( ISDCGS(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,Iter,Err,&
-      Ierr,Iunit,R,R0,P,Q,U,V1,V2,Rwork,Iwork,ak,bk,bnrm,solnrm)==0 ) THEN
+  IF ( ISDCGS(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Iter,Err,&
+      Ierr,Iunit,R,V2,Rwork,Iwork,ak,bk,bnrm,solnrm)==0 ) THEN
     IF ( Ierr/=0 ) RETURN
     !
     !         Set initial values.
@@ -331,7 +341,7 @@ SUBROUTINE DCGS(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,Iter,&
       !
       !         Calculate coefficient AK, new iterate X, Q
       CALL MATVEC(N,P,V2,Nelt,Ia,Ja,A,Isym)
-      CALL MSOLVE(N,V2,V1,Nelt,Ia,Ja,A,Isym,Rwork,Iwork)
+      CALL MSOLVE(N,V2,V1,Rwork,Iwork)
       sigma = DDOT(N,R0,1,V1,1)
       IF ( ABS(sigma)<fuzz ) GOTO 300
       ak = rhon/sigma
@@ -347,12 +357,12 @@ SUBROUTINE DCGS(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,Iter,&
       !                     -1
       !         R = R - ak*M  *A*V1
       CALL MATVEC(N,V1,V2,Nelt,Ia,Ja,A,Isym)
-      CALL MSOLVE(N,V2,V1,Nelt,Ia,Ja,A,Isym,Rwork,Iwork)
+      CALL MSOLVE(N,V2,V1,Rwork,Iwork)
       CALL DAXPY(N,akm,V1,1,R,1)
       !
       !         check stopping criterion.
-      IF ( ISDCGS(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,Iter,&
-        Err,Ierr,Iunit,R,R0,P,Q,U,V1,V2,Rwork,Iwork,ak,bk,bnrm,solnrm)&
+      IF ( ISDCGS(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Iter,&
+        Err,Ierr,Iunit,R,V2,Rwork,Iwork,ak,bk,bnrm,solnrm)&
         /=0 ) GOTO 100
       !
       !         Update RHO.

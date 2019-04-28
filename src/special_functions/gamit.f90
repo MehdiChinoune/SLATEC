@@ -83,7 +83,7 @@ REAL FUNCTION GAMIT(A,X)
     !
   ELSEIF ( X<=1.0 ) THEN
     IF ( A>=(-0.5).OR.aeps/=0.0 ) CALL ALGAMS(A+1.0,algap1,sgngam)
-    GAMIT = R9GMIT(A,X,algap1,sgngam,alx)
+    GAMIT = R9GMIT(A,X,algap1,sgngam)
     RETURN
     !
   ELSEIF ( A<X ) THEN

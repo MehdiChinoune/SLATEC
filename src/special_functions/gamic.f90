@@ -103,7 +103,7 @@ REAL FUNCTION GAMIC(A,X)
       END IF
       !
       CALL ALGAMS(A+1.0,algap1,sgngam)
-      gstar = R9GMIT(A,X,algap1,sgngam,alx)
+      gstar = R9GMIT(A,X,algap1,sgngam)
       IF ( gstar==0.0 ) izero = 1
       IF ( gstar/=0.0 ) alngs = LOG(ABS(gstar))
       IF ( gstar/=0.0 ) sgngs = SIGN(1.0,gstar)

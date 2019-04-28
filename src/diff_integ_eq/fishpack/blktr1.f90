@@ -1,5 +1,5 @@
 !** BLKTR1
-SUBROUTINE BLKTR1(N,An,Bn,Cn,M,Am,Bm,Cm,Idimy,Y,B,W1,W2,W3,Wd,Ww,Wu,PRDCT,CPRDCT)
+SUBROUTINE BLKTR1(An,Cn,M,Am,Bm,Cm,Idimy,Y,B,W1,W2,W3,Wd,Ww,Wu,PRDCT,CPRDCT)
   !>
   !  Subsidiary to BLKTRI
   !***
@@ -35,8 +35,8 @@ SUBROUTINE BLKTR1(N,An,Bn,Cn,M,Am,Bm,Cm,Idimy,Y,B,W1,W2,W3,Wd,Ww,Wu,PRDCT,CPRDCT
   USE CBLKT, ONLY : K, NCMplx, NM, NPP
   INTEGER i, i1, i2, i3, i4, Idimy, idxa, idxc, if, ifd, im1, im2, im3, imi1, &
     imi2, ip, ip1, ip2, ip3, ipi1, ipi2, ipi3, ir, irm1, iz, izr, j, kdo, l, &
-    ll, M, N, na, nc, nm1, nm2, nm3, np, np1, np2, np3, nz
-  REAL Am(*), An(*), B(*), Bm(*), Bn(*), Cm(*), Cn(*), dum, W1(*), &
+    ll, M, na, nc, nm1, nm2, nm3, np, np1, np2, np3, nz
+  REAL Am(*), An(*), B(*), Bm(*), Cm(*), Cn(*), dum, W1(*), &
     W2(*), W3(*), Wd(*), Wu(*), Ww(*), Y(Idimy,*)
   !* FIRST EXECUTABLE STATEMENT  BLKTR1
   kdo = K - 1

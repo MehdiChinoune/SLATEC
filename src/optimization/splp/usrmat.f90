@@ -1,5 +1,5 @@
 !** USRMAT
-SUBROUTINE USRMAT(I,J,Aij,Indcat,Prgopt,Dattrv,Iflag)
+SUBROUTINE USRMAT(I,J,Aij,Indcat,Dattrv,Iflag)
   !>
   !  Subsidiary to SPLP
   !***
@@ -23,7 +23,7 @@ SUBROUTINE USRMAT(I,J,Aij,Indcat,Prgopt,Dattrv,Iflag)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
 
-  REAL Aij, Dattrv(*), Prgopt(*)
+  REAL Aij, Dattrv(*)
   INTEGER I, Iflag(10), Indcat, J, l
   !
   !* FIRST EXECUTABLE STATEMENT  USRMAT

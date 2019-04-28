@@ -79,12 +79,20 @@ SUBROUTINE QK15W(F,W,P1,P2,P3,P4,Kp,A,B,Result,Abserr,Resabs,Resasc)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   USE service, ONLY : R1MACH
+  INTERFACE
+    REAL FUNCTION F(X)
+      REAL :: X
+    END FUNCTION F
+    REAL FUNCTION W(X,P1,P2,P3,P4,Kp)
+      REAL :: X, P1, P2, P3, P4
+      INTEGER :: Kp
+    END FUNCTION
+  END INTERFACE
   !
   REAL A, absc, absc1, absc2, Abserr, B, centr, dhlgth, epmach, fc, fsum, fval1, &
     fval2, fv1(7), fv2(7), hlgth, P1, P2, P3, P4, Resabs, Resasc, resg, resk, reskh, &
     Result, uflow
   INTEGER j, jtw, jtwm1, Kp
-  REAL, EXTERNAL :: F, W
   !
   !           THE ABSCISSAE AND WEIGHTS ARE GIVEN FOR THE INTERVAL (-1,1).
   !           BECAUSE OF SYMMETRY ONLY THE POSITIVE ABSCISSAE AND THEIR

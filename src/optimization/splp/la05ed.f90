@@ -1,5 +1,5 @@
 !** LA05ED
-SUBROUTINE LA05ED(A,Irn,Ip,N,Iw,Ia,Reals)
+SUBROUTINE LA05ED(A,Irn,Ip,N,Iw,Reals)
   !>
   !  Subsidiary to DSPLP
   !***
@@ -36,7 +36,7 @@ SUBROUTINE LA05ED(A,Irn,Ip,N,Iw,Ia,Reals)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   USE LA05DD, ONLY : LCOl, LROw, NCP
-  INTEGER Ia, ipi, j, k, kl, kn, N, nz
+  INTEGER ipi, j, k, kl, kn, N, nz
   LOGICAL Reals
   REAL(8) :: A(*)
   INTEGER Irn(*), Iw(*)

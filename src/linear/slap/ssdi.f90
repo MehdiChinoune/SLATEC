@@ -1,5 +1,5 @@
 !** SSDI
-SUBROUTINE SSDI(N,B,X,Nelt,Ia,Ja,A,Isym,Rwork,Iwork)
+SUBROUTINE SSDI(N,B,X,Rwork,Iwork)
   !>
   !  Diagonal Matrix Vector Multiply.
   !            Routine to calculate the product  X = DIAG*B, where DIAG
@@ -76,12 +76,12 @@ SUBROUTINE SSDI(N,B,X,Nelt,Ia,Ja,A,Isym,Rwork,Iwork)
   !   910411  Prologue converted to Version 4.0 format.  (BAB)
   !   920511  Added complete declaration section.  (WRB)
   !   930701  Updated CATEGORY section.  (FNF, WRB)
-  
+
   !     .. Scalar Arguments ..
-  INTEGER Isym, N, Nelt
+  INTEGER N
   !     .. Array Arguments ..
-  REAL A(Nelt), B(N), Rwork(*), X(N)
-  INTEGER Ia(Nelt), Iwork(*), Ja(Nelt)
+  REAL B(N), Rwork(*), X(N)
+  INTEGER Iwork(*)
   !     .. Local Scalars ..
   INTEGER i, locd
   !* FIRST EXECUTABLE STATEMENT  SSDI

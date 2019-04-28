@@ -1,6 +1,6 @@
 MODULE service
   IMPLICIT NONE
-  
+
 CONTAINS
   include"d1mach.f90"
   include"fdump.f90"
@@ -10,9 +10,7 @@ CONTAINS
   include"r1mach.f90"
   include"xerbla.f90"
   include"xerclr.f90"
-  include"xercnt.f90"
   include"xerdmp.f90"
-  include"xerhlt.f90"
   include"xermax.f90"
   include"xermsg.f90"
   include"xerprn.f90"

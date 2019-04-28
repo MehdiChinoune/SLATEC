@@ -83,7 +83,7 @@ REAL(8) FUNCTION DGAMIT(A,X)
     !
   ELSEIF ( X<=1.D0 ) THEN
     IF ( A>=(-0.5D0).OR.aeps/=0.D0 ) CALL DLGAMS(A+1.0D0,algap1,sgngam)
-    DGAMIT = D9GMIT(A,X,algap1,sgngam,alx)
+    DGAMIT = D9GMIT(A,X,algap1,sgngam)
     RETURN
     !
   ELSEIF ( A<X ) THEN

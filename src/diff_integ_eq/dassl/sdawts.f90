@@ -1,5 +1,5 @@
 !** SDAWTS
-SUBROUTINE SDAWTS(Neq,Iwt,Rtol,Atol,Y,Wt,Rpar,Ipar)
+SUBROUTINE SDAWTS(Neq,Iwt,Rtol,Atol,Y,Wt)
   !>
   !  Set error weight vector for SDASSL.
   !***
@@ -28,8 +28,8 @@ SUBROUTINE SDAWTS(Neq,Iwt,Rtol,Atol,Y,Wt,Rpar,Ipar)
   !           cosmetic changes to prologue.  (FNF)
 
   !
-  INTEGER Neq, Iwt, Ipar(*)
-  REAL Rtol(*), Atol(*), Y(*), Wt(*), Rpar(*)
+  INTEGER Neq, Iwt
+  REAL Rtol(*), Atol(*), Y(*), Wt(*)
   !
   INTEGER i
   REAL atoli, rtoli

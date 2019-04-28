@@ -102,7 +102,7 @@ REAL(8) FUNCTION DGAMIC(A,X)
       END IF
       !
       CALL DLGAMS(A+1.0D0,algap1,sgngam)
-      gstar = D9GMIT(A,X,algap1,sgngam,alx)
+      gstar = D9GMIT(A,X,algap1,sgngam)
       IF ( gstar==0.D0 ) izero = 1
       IF ( gstar/=0.D0 ) alngs = LOG(ABS(gstar))
       IF ( gstar/=0.D0 ) sgngs = SIGN(1.0D0,gstar)

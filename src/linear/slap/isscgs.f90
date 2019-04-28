@@ -1,6 +1,6 @@
 !** ISSCGS
 INTEGER FUNCTION ISSCGS(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,&
-    Itmax,Iter,Err,Ierr,Iunit,R,R0,P,Q,U,V1,V2,Rwork,Iwork,Ak,Bk,Bnrm,Solnrm)
+    Iter,Err,Ierr,Iunit,R,V2,Rwork,Iwork,Ak,Bk,Bnrm,Solnrm)
   !>
   !  Preconditioned BiConjugate Gradient Squared Stop Test.
   !            This routine calculates the stop test for the BiConjugate
@@ -193,11 +193,21 @@ INTEGER FUNCTION ISSCGS(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,&
   !   921113  Corrected C***CATEGORY line.  (FNF)
   USE SSLBLK, ONLY : SOLn
   USE service, ONLY : R1MACH
+  INTERFACE
+    SUBROUTINE MSOLVE(N,R,Z,Rwork,Iwork)
+      INTEGER :: N, Iwork(*)
+      REAL :: R(N), Z(N), Rwork(*)
+    END SUBROUTINE
+    SUBROUTINE MATVEC(N,X,R,Nelt,Ia,Ja,A,Isym)
+      INTEGER :: N, Nelt, Isym, Ia(Nelt), Ja(Nelt)
+      REAL :: X(N), R(N), A(Nelt)
+    END SUBROUTINE
+  END INTERFACE
   !     .. Scalar Arguments ..
   REAL Ak, Bk, Bnrm, Err, Solnrm, Tol
-  INTEGER Ierr, Isym, Iter, Itmax, Itol, Iunit, N, Nelt
+  INTEGER Ierr, Isym, Iter, Itol, Iunit, N, Nelt
   !     .. Array Arguments ..
-  REAL A(Nelt), B(N), P(N), Q(N), R(N), R0(N), Rwork(*), U(N), V1(N), V2(N), X(N)
+  REAL A(Nelt), B(N), R(N), Rwork(*), V2(N), X(N)
   INTEGER Ia(Nelt), Iwork(*), Ja(Nelt)
   !     .. Subroutine Arguments ..
   EXTERNAL :: MATVEC, MSOLVE
@@ -218,7 +228,7 @@ INTEGER FUNCTION ISSCGS(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,&
     !                  -1              -1
     !         err = ||M  Residual||/||M  RightHandSide|| (2-Norms).
     IF ( Iter==0 ) THEN
-      CALL MSOLVE(N,B,V2,Nelt,Ia,Ja,A,Isym,Rwork,Iwork)
+      CALL MSOLVE(N,B,V2,Rwork,Iwork)
       Bnrm = SNRM2(N,V2,1)
     END IF
     Err = SNRM2(N,R,1)/Bnrm

@@ -167,8 +167,8 @@ SUBROUTINE SPLPMU(Mrelas,Nvars,Lmx,Lbm,Nredc,Info,Ienter,Ileave,Iopt,Npp,&
     !     REDECOMPOSE BASIS MATRIX WHEN AN ERROR RETURN FROM
     !     LA05CS( ) IS NOTED.  THIS WILL PROBABLY BE DUE TO
     !     SPACE BEING EXHAUSTED, GG=-7.
-    CALL SPLPDM(Mrelas,Nvars,Lmx,Lbm,Nredc,Info,Iopt,Ibasis,Imat,Ibrc,Ipr,&
-      Iwr,Ind,Ibb,Anorm,Eps,Uu,Gg,Amat,Basmat,Csc,Wr,Singlr,Redbas)
+    CALL SPLPDM(Mrelas,Nvars,Lbm,Nredc,Info,Iopt,Ibasis,Imat,Ibrc,Ipr,&
+      Iwr,Ind,Anorm,Eps,Uu,Gg,Amat,Basmat,Csc,Wr,Singlr,Redbas)
     IF ( .NOT.(Singlr) ) THEN
       !     PROCEDURE (COMPUTE NEW PRIMAL)
       !

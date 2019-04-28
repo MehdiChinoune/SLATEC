@@ -230,7 +230,7 @@ CONTAINS
           CASE (14,15)
             !           Test CHER, 14, and CHPR, 15.
             CALL CCHK52(snames(isnum),eps,thresh,Nout,Kprint,ftl2,NIDIM,idimm,&
-              NALF,alf,NINC,inc,NMAX,INCMAX,a,aa,as,x,xx,xs,y,yy,ys,yt,g,z)
+              NALF,alf,NINC,inc,NMAX,INCMAX,a,aa,as,x,xx,xs,yt,g,z)
           CASE (16,17)
             !           Test CHER2, 16, and CHPR2, 17.
             CALL CCHK62(snames(isnum),eps,thresh,Nout,Kprint,ftl2,NIDIM,idimm,&
@@ -448,7 +448,7 @@ CONTAINS
           CASE (6,7)
             !           Test CHERK, 06, CSYRK, 07.
             CALL CCHK43(snames(isnum),eps,thresh,Nout,Kprint,ftl2,NIDIM,idimm,&
-              NALF,alf,NBET,bet,NMAX,ab,aa,as,ab(1,NMAX+1),bb,bs,c,cc,cs,ct,g)
+              NALF,alf,NBET,bet,NMAX,ab,aa,as,c,cc,cs,ct,g)
           CASE (8,9)
             !           Test CHER2K, 08, CSYR2K, 09.
             CALL CCHK53(snames(isnum),eps,thresh,Nout,Kprint,ftl2,NIDIM,idimm,&
@@ -3155,7 +3155,7 @@ CONTAINS
   END SUBROUTINE CCHK42
   !** CCHK43
   SUBROUTINE CCHK43(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idimm,Nalf,Alf,&
-      Nbet,Bet,Nmax,A,Aa,As,B,Bb,Bs,C,Cc,Cs,Ct,G)
+      Nbet,Bet,Nmax,A,Aa,As,C,Cc,Cs,Ct,G)
     !>
     !  Quick check for CHERK and CSYRK.
     !***
@@ -3192,8 +3192,7 @@ CONTAINS
     CHARACTER(6) :: Sname
     !     .. Array Arguments ..
     COMPLEX A(Nmax,Nmax), Aa(Nmax*Nmax), Alf(Nalf), As(Nmax*Nmax), &
-      B(Nmax,Nmax), Bb(Nmax*Nmax), Bs(Nmax*Nmax), Bet(Nbet), &
-      C(Nmax,Nmax), Cc(Nmax*Nmax), Ct(Nmax), Cs(Nmax*Nmax)
+      Bet(Nbet), C(Nmax,Nmax), Cc(Nmax*Nmax), Ct(Nmax), Cs(Nmax*Nmax)
     REAL G(Nmax)
     INTEGER Idimm(Nidim)
     !     .. Local Scalars ..
@@ -3449,7 +3448,7 @@ CONTAINS
   END SUBROUTINE CCHK43
   !** CCHK52
   SUBROUTINE CCHK52(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idimm,Nalf,Alf,&
-      Ninc,Inc,Nmax,Incmax,A,Aa,As,X,Xx,Xs,Y,Yy,Ys,Yt,G,Z)
+      Ninc,Inc,Nmax,Incmax,A,Aa,As,X,Xx,Xs,Yt,G,Z)
     !>
     !  Quick check for CHER and CHPR.
     !***
@@ -3484,8 +3483,7 @@ CONTAINS
     CHARACTER(6) :: Sname
     !     .. Array Arguments ..
     COMPLEX A(Nmax,Nmax), Aa(Nmax*Nmax), Alf(Nalf), As(Nmax*Nmax), X(Nmax), &
-      Xs(Nmax*Incmax), Xx(Nmax*Incmax), Y(Nmax), Ys(Nmax*Incmax), &
-      Yt(Nmax), Yy(Nmax*Incmax), Z(Nmax)
+      Xs(Nmax*Incmax), Xx(Nmax*Incmax), Yt(Nmax), Z(Nmax)
     REAL G(Nmax)
     INTEGER Idimm(Nidim), Inc(Ninc)
     !     .. Local Scalars ..

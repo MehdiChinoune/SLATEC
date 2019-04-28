@@ -121,7 +121,7 @@ SUBROUTINE BQR(Nm,N,Mb,A,T,R,Ierr,Nv,Rv)
   !
   INTEGER i, j, k, l, m, N, ii, ik, jk, jm, kj, kk, km, ll, Mb, mk, mn, mz
   INTEGER m1, m2, m3, m4, ni, Nm, Nv, its, kj1, m21, m31, Ierr, imult
-  REAL A(Nm,*), Rv(*)
+  REAL A(Nm,Mb), Rv(Nv)
   REAL f, g, q, R, s, T, scalee
   !
   !* FIRST EXECUTABLE STATEMENT  BQR

@@ -1,6 +1,6 @@
 !** DPLPDM
-SUBROUTINE DPLPDM(Mrelas,Nvars,Lmx,Lbm,Nredc,Info,Iopt,Ibasis,Imat,Ibrc,&
-    Ipr,Iwr,Ind,Ibb,Anorm,Eps,Uu,Gg,Amat,Basmat,Csc,Wr,Singlr,Redbas)
+SUBROUTINE DPLPDM(Mrelas,Nvars,Lbm,Nredc,Info,Iopt,Ibasis,Imat,Ibrc,&
+    Ipr,Iwr,Ind,Anorm,Eps,Uu,Gg,Amat,Basmat,Csc,Wr,Singlr,Redbas)
   !>
   !  Subsidiary to DSPLP
   !***
@@ -36,8 +36,8 @@ SUBROUTINE DPLPDM(Mrelas,Nvars,Lmx,Lbm,Nredc,Info,Iopt,Ibasis,Imat,Ibrc,&
   !           DO loops to DO loops.  (RWC)
   USE LA05DD, ONLY : SMAll
   USE service, ONLY : XERMSG
-  INTEGER i, Info, Iopt, iplace, j, k, Lbm, Lmx, Mrelas, Nredc, Nvars, nzbm
-  INTEGER Ibasis(*), Imat(*), Ibrc(Lbm,2), Ipr(*), Iwr(*), Ind(*), Ibb(*)
+  INTEGER i, Info, Iopt, iplace, j, k, Lbm, Mrelas, Nredc, Nvars, nzbm
+  INTEGER Ibasis(*), Imat(*), Ibrc(Lbm,2), Ipr(*), Iwr(*), Ind(*)
   REAL(8) :: aij, Amat(*), Basmat(*), Csc(*), Wr(*), Anorm, &
     Eps, Gg, one, Uu, zero
   LOGICAL Singlr, Redbas

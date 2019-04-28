@@ -253,7 +253,7 @@ SUBROUTINE SSDCGS(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
   END IF
   !
   !         Change the SLAP input matrix IA, JA, A to SLAP-Column format.
-  CALL SS2Y(N,Nelt,Ia,Ja,A,Isym)
+  CALL SS2Y(N,Nelt,Ia,Ja,A)
   !
   !         Set up the workspace.
   lociw = LOCIB
@@ -277,7 +277,7 @@ SUBROUTINE SSDCGS(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
   Iwork(10) = locw
   !
   !         Compute the inverse of the diagonal of the matrix.
-  CALL SSDS(N,Nelt,Ia,Ja,A,Isym,Rwork(locdin))
+  CALL SSDS(N,Nelt,Ja,A,Rwork(locdin))
   !
   !         Perform the Diagonally Scaled
   !         BiConjugate Gradient Squared algorithm.

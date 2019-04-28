@@ -1,7 +1,6 @@
 !** ISDGMR
-INTEGER FUNCTION ISDGMR(N,B,X,Xl,Nelt,Ia,Ja,A,Isym,MSOLVE,Nmsl,Itol,Tol,&
-    Itmax,Iter,Err,Iunit,R,Z,Dz,Rwork,Iwork,Rnrm,Bnrm,&
-    Sb,Sx,Jscal,Kmp,Lgmr,Maxl,Maxlp1,V,Q,Snormw,Prod,R0nrm,Hes,Jpre)
+INTEGER FUNCTION ISDGMR(N,X,Xl,MSOLVE,Nmsl,Itol,Tol,Iter,Err,Iunit,R,Dz,Rwork, &
+  Iwork,Rnrm,Bnrm,Sx,Jscal,Kmp,Lgmr,Maxl,Maxlp1,V,Q,Snormw,Prod,R0nrm,Hes,Jpre)
   !>
   !  Generalized Minimum Residual Stop Test.
   !            This routine calculates the stop test for the Generalized
@@ -268,14 +267,19 @@ INTEGER FUNCTION ISDGMR(N,B,X,Xl,Nelt,Ia,Ja,A,Isym,MSOLVE,Nmsl,Itol,Tol,&
   !   921113  Corrected C***CATEGORY line.  (FNF)
   USE DSLBLK, ONLY : SOLn
   USE service, ONLY : D1MACH
+  INTERFACE
+    SUBROUTINE MSOLVE(N,R,Z,Rwork,Iwork)
+      INTEGER :: N, Iwork(*)
+      REAL(8) :: R(N), Z(N), Rwork(*)
+    END SUBROUTINE
+  END INTERFACE
   !     .. Scalar Arguments ..
   REAL(8) :: Bnrm, Err, Prod, R0nrm, Rnrm, Snormw, Tol
-  INTEGER Isym, Iter, Itmax, Itol, Iunit, Jpre, Jscal, Kmp, Lgmr, &
-    Maxl, Maxlp1, N, Nelt, Nmsl
+  INTEGER Iter, Itol, Iunit, Jpre, Jscal, Kmp, Lgmr, Maxl, Maxlp1, N, Nmsl
   !     .. Array Arguments ..
-  REAL(8) :: A(*), B(*), Dz(*), Hes(Maxlp1,Maxl), Q(*), R(*), &
-    Rwork(*), Sb(*), Sx(*), V(N,*), X(*), Xl(*), Z(*)
-  INTEGER Ia(*), Iwork(*), Ja(*)
+  REAL(8) :: Dz(*), Hes(Maxlp1,Maxl), Q(*), R(*), Rwork(*), Sx(*), V(N,*), &
+    X(*), Xl(*)
+  INTEGER Iwork(*)
   !     .. Subroutine Arguments ..
   EXTERNAL :: MSOLVE
   !     .. Local Scalars ..
@@ -311,7 +315,7 @@ INTEGER FUNCTION ISDGMR(N,B,X,Xl,Nelt,Ia,Ja,A,Isym,MSOLVE,Nmsl,Itol,Tol,&
       !         err = Max |(Minv*Residual)(i)/x(i)|
       !         When JPRE .lt. 0, R already contains Minv*Residual.
       IF ( Jpre>0 ) THEN
-        CALL MSOLVE(N,R,Dz,Nelt,Ia,Ja,A,Isym,Rwork,Iwork)
+        CALL MSOLVE(N,R,Dz,Rwork,Iwork)
         Nmsl = Nmsl + 1
       END IF
       !
@@ -346,7 +350,7 @@ INTEGER FUNCTION ISDGMR(N,B,X,Xl,Nelt,Ia,Ja,A,Isym,MSOLVE,Nmsl,Itol,Tol,&
     !
     IF ( (Lgmr/=0).AND.(Iter>0) ) THEN
       CALL DXLCAL(N,Lgmr,X,Xl,Xl,Hes,Maxlp1,Q,V,R0nrm,Dz,Sx,Jscal,Jpre,&
-        MSOLVE,Nmsl,Rwork,Iwork,Nelt,Ia,Ja,A,Isym)
+        MSOLVE,Nmsl,Rwork,Iwork)
     ELSEIF ( Iter==0 ) THEN
       !         Copy X to XL to check if initial guess is good enough.
       CALL DCOPY(N,X,1,Xl,1)

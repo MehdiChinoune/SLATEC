@@ -79,7 +79,7 @@ SUBROUTINE R1UPDT(M,N,S,Ls,U,V,W,Sing)
   USE service, ONLY : R1MACH
   INTEGER M, N, Ls
   LOGICAL Sing
-  REAL S(*), U(*), V(*), W(*)
+  REAL S(Ls), U(*), V(*), W(*)
   INTEGER i, j, jj, l, nmj, nm1
   REAL coss, cotan, giant, sinn, tann, tau, temp
   REAL, PARAMETER :: one = 1.0E0, p5 = 5.0E-1, p25 = 2.5E-1, zero = 0.0E0

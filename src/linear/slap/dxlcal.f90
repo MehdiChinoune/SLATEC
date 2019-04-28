@@ -1,6 +1,6 @@
 !** DXLCAL
 SUBROUTINE DXLCAL(N,Lgmr,X,Xl,Zl,Hes,Maxlp1,Q,V,R0nrm,Wk,Sz,Jscal,Jpre,&
-    MSOLVE,Nmsl,Rpar,Ipar,Nelt,Ia,Ja,A,Isym)
+    MSOLVE,Nmsl,Rpar,Ipar)
   !>
   !  Internal routine for DGMRES.
   !***
@@ -143,16 +143,20 @@ SUBROUTINE DXLCAL(N,Lgmr,X,Xl,Zl,Hes,Maxlp1,Q,V,R0nrm,Wk,Sz,Jscal,Jpre,&
   !   910502  Removed MSOLVE from ROUTINES CALLED list.  (FNF)
   !   910506  Made subsidiary to DGMRES.  (FNF)
   !   920511  Added complete declaration section.  (WRB)
-
+  INTERFACE
+    SUBROUTINE MSOLVE(N,R,Z,Rwork,Iwork)
+      INTEGER :: N, Iwork(*)
+      REAL(8) :: R(N), Z(N), Rwork(*)
+    END SUBROUTINE
+  END INTERFACE
   !         The following is for optimized compilation on LLNL/LTSS Crays.
   !LLL. OPTIMIZE
   !     .. Scalar Arguments ..
   REAL(8) :: R0nrm
-  INTEGER Isym, Jpre, Jscal, Lgmr, Maxlp1, N, Nelt, Nmsl
+  INTEGER Jpre, Jscal, Lgmr, Maxlp1, N, Nmsl
   !     .. Array Arguments ..
-  REAL(8) :: A(Nelt), Hes(Maxlp1,*), Q(*), Rpar(*), Sz(*), V(N,*), &
-    Wk(N), X(N), Xl(N), Zl(N)
-  INTEGER Ia(Nelt), Ipar(*), Ja(Nelt)
+  REAL(8) :: Hes(Maxlp1,*), Q(*), Rpar(*), Sz(*), V(N,*), Wk(N), X(N), Xl(N), Zl(N)
+  INTEGER Ipar(*)
   !     .. Subroutine Arguments ..
   EXTERNAL :: MSOLVE
   !     .. Local Scalars ..
@@ -178,7 +182,7 @@ SUBROUTINE DXLCAL(N,Lgmr,X,Xl,Zl,Hes,Maxlp1,Q,V,R0nrm,Wk,Sz,Jscal,Jpre,&
   END IF
   IF ( Jpre>0 ) THEN
     CALL DCOPY(N,Zl,1,Wk,1)
-    CALL MSOLVE(N,Wk,Zl,Nelt,Ia,Ja,A,Isym,Rpar,Ipar)
+    CALL MSOLVE(N,Wk,Zl,Rpar,Ipar)
     Nmsl = Nmsl + 1
   END IF
   !         calculate XL from X and ZL.

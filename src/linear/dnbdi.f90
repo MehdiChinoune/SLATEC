@@ -62,9 +62,9 @@ SUBROUTINE DNBDI(Abe,Lda,N,Ml,Mu,Ipvt,Det)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
-  INTEGER Lda, N, Ml, Mu, Ipvt(*)
-  REAL(8) :: Abe(Lda,*), Det(2)
+
+  INTEGER Lda, N, Ml, Mu, Ipvt(N)
+  REAL(8) :: Abe(Lda,2*Ml+Mu+1), Det(2)
   !
   REAL(8) :: ten
   INTEGER i

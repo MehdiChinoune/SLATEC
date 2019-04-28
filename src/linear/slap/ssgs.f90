@@ -236,7 +236,7 @@ SUBROUTINE SSGS(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
   END IF
   !
   !         Modify the SLAP matrix data structure to YSMP-Column.
-  CALL SS2Y(N,Nelt,Ia,Ja,A,Isym)
+  CALL SS2Y(N,Nelt,Ia,Ja,A)
   !
   !         Count number of elements in lower triangle of the matrix.
   IF ( Isym==0 ) THEN

@@ -1,5 +1,5 @@
 !** CBLKT1
-SUBROUTINE CBLKT1(N,An,Bn,Cn,M,Am,Bm,Cm,Idimy,Y,B,W1,W2,W3,Wd,Ww,Wu,PRDCT,CPRDCT)
+SUBROUTINE CBLKT1(An,Cn,M,Am,Bm,Cm,Idimy,Y,B,W1,W2,W3,Wd,Ww,Wu,PRDCT,CPRDCT)
   !>
   !  Subsidiary to CBLKTR
   !***
@@ -37,8 +37,8 @@ SUBROUTINE CBLKT1(N,An,Bn,Cn,M,Am,Bm,Cm,Idimy,Y,B,W1,W2,W3,Wd,Ww,Wu,PRDCT,CPRDCT
   REAL dum
   INTEGER i, i1, i2, i3, i4, Idimy, idxa, idxc, if, ifd, im1, im2, im3, imi1, &
     imi2, ip, ip1, ip2, ip3, ipi1, ipi2, ipi3, ir, irm1, iz, izr, j, kdo, l, ll, &
-    M, N, na, nc, nm1, nm2, nm3, np, np1, np2, np3, nz
-  REAL :: An(*), Bn(*), Cn(*),  B(*)
+    M, na, nc, nm1, nm2, nm3, np, np1, np2, np3, nz
+  REAL :: An(*), Cn(*),  B(*)
   COMPLEX Am(*), Bm(*), Cm(*), W1(*), W2(*), W3(*), Wd(*), Ww(*), Wu(*), Y(Idimy,*)
   !* FIRST EXECUTABLE STATEMENT  CBLKT1
   kdo = K - 1

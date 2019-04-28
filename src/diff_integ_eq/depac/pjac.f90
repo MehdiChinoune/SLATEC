@@ -37,7 +37,7 @@ SUBROUTINE PJAC(Neq,Y,Yh,Nyh,Ewt,Ftem,Savf,Wm,Iwm,F,JAC,Rpar,Ipar)
   INTEGER Neq, Nyh, Iwm(*), i, i1, i2, ii, j, j1, jj, lenp, mba, mband, meb1, &
     meband, ml, ml3, mu
   EXTERNAL :: F, JAC
-  REAL Y(*), Yh(Nyh,*), Ewt(*), Ftem(*), Savf(*), Wm(*), con, di, fac, hl0, r, &
+  REAL Y(Neq), Yh(Nyh,*), Ewt(*), Ftem(*), Savf(*), Wm(*), con, di, fac, hl0, r, &
     r0, srur, yi, yj, yjj
   !-----------------------------------------------------------------------
   ! PJAC IS CALLED BY STOD  TO COMPUTE AND PROCESS THE MATRIX

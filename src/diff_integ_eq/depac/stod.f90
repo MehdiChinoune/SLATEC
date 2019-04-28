@@ -289,7 +289,7 @@ SUBROUTINE STOD(Neq,Y,Yh,Nyh,Yh1,Ewt,Savf,Acor,Wm,Iwm,F,JAC,Rpar,Ipar)
     DO i = 1, N
       Y(i) = H*Savf(i) - (Yh(i,2)+Acor(i))
     END DO
-    CALL SLVS(Wm,Iwm,Y,Savf)
+    CALL SLVS(Wm,Iwm,Y)
     IF ( IER/=0 ) GOTO 700
     del = VNWRMS(N,Y,Ewt)
     DO i = 1, N

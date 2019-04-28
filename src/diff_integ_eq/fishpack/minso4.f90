@@ -1,5 +1,5 @@
 !** MINSO4
-SUBROUTINE MINSO4(Usol,Idmn,Zn,Zm,Pertb)
+SUBROUTINE MINSO4(Usol,Idmn,Zn,Zm)
   !>
   !  Subsidiary to SEPX4
   !***
@@ -31,7 +31,7 @@ SUBROUTINE MINSO4(Usol,Idmn,Zn,Zm,Pertb)
   !   900402  Added TYPE section.  (WRB)
   USE SPL4, ONLY : L, IS, JS, K, MS, NS
   INTEGER i, Idmn, ifnl, ii, istr, j, jfnl, jj, jstr
-  REAL ete, Pertb, pertrb, Usol(Idmn,*), ute, Zm(*), Zn(*)
+  REAL ete, pertrb, Usol(Idmn,*), ute, Zm(*), Zn(*)
   !* FIRST EXECUTABLE STATEMENT  MINSO4
   istr = 1
   ifnl = K

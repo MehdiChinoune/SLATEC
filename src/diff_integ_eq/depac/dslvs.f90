@@ -1,5 +1,5 @@
 !** DSLVS
-SUBROUTINE DSLVS(Wm,Iwm,X,Tem)
+SUBROUTINE DSLVS(Wm,Iwm,X)
   !>
   !  Subsidiary to DDEBDF
   !***
@@ -32,7 +32,7 @@ SUBROUTINE DSLVS(Wm,Iwm,X,Tem)
   USE linear, ONLY : DGBSL, DGESL
   !
   INTEGER i, Iwm(*), meband, ml, mu
-  REAL(8) :: di, hl0, phl0, r, Tem(*), Wm(*), X(*)
+  REAL(8) :: di, hl0, phl0, r, Wm(*), X(*)
   !     ------------------------------------------------------------------
   !      THIS ROUTINE MANAGES THE SOLUTION OF THE LINEAR SYSTEM ARISING
   !      FROM A CHORD ITERATION.  IT IS CALLED BY DSTOD  IF MITER .NE. 0.

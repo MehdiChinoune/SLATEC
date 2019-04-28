@@ -35,7 +35,7 @@ SUBROUTINE SPELIP(Intl,Iorder,A,B,M,Mbdcnd,Bda,Alpha,Bdb,Beta,C,D,N,&
   INTEGER i, i1, Idmn, Ierror, Intl, iord, Iorder, j, M, Mbdcnd, mp, N, Nbdcnd, np
   REAL A, ai, Alpha, Am(*), An(*), ax1, axi, B, Bda(*), Bdb(*), Bdc(*), Bdd(*), &
     Beta, bi, Bm(*), Bn(*), bxi, C, ci, Cm(*), Cn(*), cxi, cxm, D, dj, Dm(*), &
-    Dn(*), dy1, dyj, ej, eyj, fj, fyj, fyn, Gama, Grhs(Idmn,*), Pertrb, prtrb, &
+    Dn(*), dy1, dyj, ej, eyj, fj, fyj, fyn, Gama, Grhs(Idmn,*), Pertrb, &
     Um(*), Un(*), Usol(Idmn,*), W(*), xi, Xnu, yj, Zm(*), Zn(*)
   LOGICAL singlr
   EXTERNAL :: COFX, COFY
@@ -312,7 +312,7 @@ SUBROUTINE SPELIP(Intl,Iorder,A,B,M,Mbdcnd,Bda,Alpha,Bdb,Beta,C,D,N,&
   !     MINIMIZE SOLUTION WITH RESPECT TO WEIGHTED LEAST SQUARES
   !     NORM IF OPERATOR IS SINGULAR
   !
-  IF ( singlr ) CALL MINSOL(Usol,Idmn,Zn,Zm,prtrb)
+  IF ( singlr ) CALL MINSOL(Usol,Idmn,Zn,Zm)
   !
   !     RETURN IF DEFERRED CORRECTIONS AND A FOURTH ORDER SOLUTION ARE
   !     NOT FLAGGED

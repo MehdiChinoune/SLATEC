@@ -1,5 +1,5 @@
 !** SDANRM
-REAL FUNCTION SDANRM(Neq,V,Wt,Rpar,Ipar)
+REAL FUNCTION SDANRM(Neq,V,Wt)
   !>
   !  Compute vector norm for SDASSL.
   !***
@@ -28,8 +28,8 @@ REAL FUNCTION SDANRM(Neq,V,Wt,Rpar,Ipar)
   !           cosmetic changes to prologue.  (FNF)
 
   !
-  INTEGER Neq, Ipar(*)
-  REAL V(Neq), Wt(Neq), Rpar(*)
+  INTEGER Neq
+  REAL V(Neq), Wt(Neq)
   !
   INTEGER i
   REAL summ, vmax

@@ -1,7 +1,6 @@
 !** ISSCGN
-INTEGER FUNCTION ISSCGN(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MTTVEC,MSOLVE,Itol,&
-    Tol,Itmax,Iter,Err,Ierr,Iunit,R,Z,P,Atp,Atz,Dz,&
-    Atdz,Rwork,Iwork,Ak,Bk,Bnrm,Solnrm)
+INTEGER FUNCTION ISSCGN(N,B,X,Nelt,Ia,Ja,A,Isym,MTTVEC,MSOLVE,Itol,&
+    Tol,Iter,Err,Ierr,Iunit,R,Atz,Dz,Atdz,Rwork,Iwork,Ak,Bk,Bnrm,Solnrm)
   !>
   !  Preconditioned CG on Normal Equations Stop Test.
   !            This routine calculates the stop test for the Conjugate
@@ -205,11 +204,17 @@ INTEGER FUNCTION ISSCGN(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MTTVEC,MSOLVE,Itol,&
   !   921113  Corrected C***CATEGORY line.  (FNF)
   USE SSLBLK, ONLY : SOLn
   USE service, ONLY : R1MACH
+  INTERFACE
+    SUBROUTINE MSOLVE(N,R,Z,Rwork,Iwork)
+      INTEGER :: N, Iwork(*)
+      REAL :: R(N), Z(N), Rwork(*)
+    END SUBROUTINE
+  END INTERFACE
   !     .. Scalar Arguments ..
   REAL Ak, Bk, Bnrm, Err, Solnrm, Tol
-  INTEGER Ierr, Isym, Iter, Itmax, Itol, Iunit, N, Nelt
+  INTEGER Ierr, Isym, Iter, Itol, Iunit, N, Nelt
   !     .. Array Arguments ..
-  REAL A(N), Atdz(N), Atp(N), Atz(N), B(N), Dz(N), P(N), R(N), Rwork(*), X(N), Z(N)
+  REAL A(N), Atdz(N), Atz(N), B(N), Dz(N), R(N), Rwork(*), X(N)
   INTEGER Ia(Nelt), Iwork(*), Ja(Nelt)
   !     .. Subroutine Arguments ..
   EXTERNAL :: MATVEC, MSOLVE, MTTVEC
@@ -226,7 +231,7 @@ INTEGER FUNCTION ISSCGN(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MTTVEC,MSOLVE,Itol,&
     !                  -1              -1
     !         err = ||M  Residual||/||M  RightHandSide|| (2-Norms).
     IF ( Iter==0 ) THEN
-      CALL MSOLVE(N,B,Dz,Nelt,Ia,Ja,A,Isym,Rwork,Iwork)
+      CALL MSOLVE(N,B,Dz,Rwork,Iwork)
       CALL MTTVEC(N,Dz,Atdz,Nelt,Ia,Ja,A,Isym)
       Bnrm = SNRM2(N,Atdz,1)
     END IF

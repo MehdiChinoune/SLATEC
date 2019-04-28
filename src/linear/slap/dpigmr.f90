@@ -1,6 +1,6 @@
 !** DPIGMR
 SUBROUTINE DPIGMR(N,R0,Sr,Sz,Jscal,Maxl,Maxlp1,Kmp,Nrsts,Jpre,MATVEC,&
-    MSOLVE,Nmsl,Z,V,Hes,Q,Lgmr,Rpar,Ipar,Wk,Dl,Rhol,Nrmax,B,&
+    MSOLVE,Nmsl,Z,V,Hes,Q,Lgmr,Rpar,Ipar,Wk,Dl,Rhol,Nrmax,&
     Bnrm,X,Xl,Itol,Tol,Nelt,Ia,Ja,A,Isym,Iunit,Iflag,Err)
   !>
   !  Internal routine for DGMRES.
@@ -217,7 +217,16 @@ SUBROUTINE DPIGMR(N,R0,Sr,Sz,Jscal,Maxl,Maxlp1,Kmp,Nrsts,Jpre,MATVEC,&
   !   910502  Removed MATVEC and MSOLVE from ROUTINES CALLED list.  (FNF)
   !   910506  Made subsidiary to DGMRES.  (FNF)
   !   920511  Added complete declaration section.  (WRB)
-
+  INTERFACE
+    SUBROUTINE MSOLVE(N,R,Z,Rwork,Iwork)
+      INTEGER :: N, Iwork(*)
+      REAL(8) :: R(N), Z(N), Rwork(*)
+    END SUBROUTINE
+    SUBROUTINE MATVEC(N,X,R,Nelt,Ia,Ja,A,Isym)
+      INTEGER :: N, Nelt, Isym, Ia(Nelt), Ja(Nelt)
+      REAL(8) :: X(N), R(N), A(Nelt)
+    END SUBROUTINE
+  END INTERFACE
   !         The following is for optimized compilation on LLNL/LTSS Crays.
   !LLL. OPTIMIZE
   !     .. Scalar Arguments ..
@@ -225,7 +234,7 @@ SUBROUTINE DPIGMR(N,R0,Sr,Sz,Jscal,Maxl,Maxlp1,Kmp,Nrsts,Jpre,MATVEC,&
   INTEGER Iflag, Isym, Itol, Iunit, Jpre, Jscal, Kmp, Lgmr, Maxl, &
     Maxlp1, N, Nelt, Nmsl, Nrmax, Nrsts
   !     .. Array Arguments ..
-  REAL(8) :: A(Nelt), B(*), Dl(*), Hes(Maxlp1,*), Q(*), R0(*), &
+  REAL(8) :: A(Nelt), Dl(*), Hes(Maxlp1,*), Q(*), R0(*), &
     Rpar(*), Sr(*), Sz(*), V(N,*), Wk(*), X(*), Xl(*), Z(*)
   INTEGER Ia(Nelt), Ipar(*), Ja(Nelt)
   !     .. Subroutine Arguments ..
@@ -255,7 +264,7 @@ SUBROUTINE DPIGMR(N,R0,Sr,Sz,Jscal,Maxl,Maxlp1,Kmp,Nrsts,Jpre,MATVEC,&
   !   -------------------------------------------------------------------
   IF ( (Jpre<0).AND.(Nrsts==0) ) THEN
     CALL DCOPY(N,R0,1,Wk,1)
-    CALL MSOLVE(N,Wk,R0,Nelt,Ia,Ja,A,Isym,Rpar,Ipar)
+    CALL MSOLVE(N,Wk,R0,Rpar,Ipar)
     Nmsl = Nmsl + 1
   END IF
   IF ( ((Jscal==2).OR.(Jscal==3)).AND.(Nrsts==0) ) THEN
@@ -272,9 +281,8 @@ SUBROUTINE DPIGMR(N,R0,Sr,Sz,Jscal,Maxl,Maxlp1,Kmp,Nrsts,Jpre,MATVEC,&
   !
   !         Call stopping routine ISDGMR.
   !
-  IF ( ISDGMR(N,B,X,Xl,Nelt,Ia,Ja,A,Isym,MSOLVE,Nmsl,Itol,Tol,itmax,iter,&
-    Err,Iunit,V(1,1),Z,Wk,Rpar,Ipar,r0nrm,Bnrm,Sr,Sz,Jscal,Kmp,Lgmr,Maxl,&
-    Maxlp1,V,Q,snormw,prod,r0nrm,Hes,Jpre)/=0 ) RETURN
+  IF ( ISDGMR(N,X,Xl,MSOLVE,Nmsl,Itol,Tol,iter,Err,Iunit,V(1,1),Wk,Rpar,Ipar,r0nrm, &
+    Bnrm,Sz,Jscal,Kmp,Lgmr,Maxl,Maxlp1,V,Q,snormw,prod,r0nrm,Hes,Jpre)/=0 ) RETURN
   tem = 1.0D0/r0nrm
   CALL DSCAL(N,tem,V(1,1),1)
   !
@@ -309,7 +317,7 @@ SUBROUTINE DPIGMR(N,R0,Sr,Sz,Jscal,Maxl,Maxlp1,Kmp,Nrsts,Jpre,MATVEC,&
       CALL DCOPY(N,V(1,ll),1,Wk,1)
     END IF
     IF ( Jpre>0 ) THEN
-      CALL MSOLVE(N,Wk,Z,Nelt,Ia,Ja,A,Isym,Rpar,Ipar)
+      CALL MSOLVE(N,Wk,Z,Rpar,Ipar)
       Nmsl = Nmsl + 1
       CALL MATVEC(N,Z,V(1,ll+1),Nelt,Ia,Ja,A,Isym)
     ELSE
@@ -317,7 +325,7 @@ SUBROUTINE DPIGMR(N,R0,Sr,Sz,Jscal,Maxl,Maxlp1,Kmp,Nrsts,Jpre,MATVEC,&
     END IF
     IF ( Jpre<0 ) THEN
       CALL DCOPY(N,V(1,ll+1),1,Wk,1)
-      CALL MSOLVE(N,Wk,V(1,ll+1),Nelt,Ia,Ja,A,Isym,Rpar,Ipar)
+      CALL MSOLVE(N,Wk,V(1,ll+1),Rpar,Ipar)
       Nmsl = Nmsl + 1
     END IF
     IF ( (Jscal==2).OR.(Jscal==3) ) THEN
@@ -365,9 +373,8 @@ SUBROUTINE DPIGMR(N,R0,Sr,Sz,Jscal,Maxl,Maxlp1,Kmp,Nrsts,Jpre,MATVEC,&
     !         If failed and LL < MAXL, then continue iterating.
     !   -------------------------------------------------------------------
     iter = Nrsts*Maxl + Lgmr
-    IF ( ISDGMR(N,B,X,Xl,Nelt,Ia,Ja,A,Isym,MSOLVE,Nmsl,Itol,Tol,itmax,iter,&
-      Err,Iunit,Dl,Z,Wk,Rpar,Ipar,Rhol,Bnrm,Sr,Sz,Jscal,Kmp,Lgmr,Maxl,&
-      Maxlp1,V,Q,snormw,prod,r0nrm,Hes,Jpre)/=0 ) GOTO 200
+    IF ( ISDGMR(N,X,Xl,MSOLVE,Nmsl,Itol,Tol,iter,Err,Iunit,Dl,Wk,Rpar,Ipar,Rhol, &
+      Bnrm,Sz,Jscal,Kmp,Lgmr,Maxl,Maxlp1,V,Q,snormw,prod,r0nrm,Hes,Jpre)/=0 ) GOTO 200
     IF ( ll==Maxl ) EXIT
     !   -------------------------------------------------------------------
     !         Rescale so that the norm of V(1,LL+1) is one.
@@ -424,7 +431,7 @@ SUBROUTINE DPIGMR(N,R0,Sr,Sz,Jscal,Maxl,Maxlp1,Kmp,Nrsts,Jpre,MATVEC,&
   END IF
   IF ( Jpre>0 ) THEN
     CALL DCOPY(N,Z,1,Wk,1)
-    CALL MSOLVE(N,Wk,Z,Nelt,Ia,Ja,A,Isym,Rpar,Ipar)
+    CALL MSOLVE(N,Wk,Z,Rpar,Ipar)
     Nmsl = Nmsl + 1
   END IF
   !------------- LAST LINE OF DPIGMR FOLLOWS ----------------------------

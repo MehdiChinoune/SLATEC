@@ -251,6 +251,16 @@ SUBROUTINE SOMN(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Nsave,Itol,Tol,&
   !   921113  Corrected C***CATEGORY line.  (FNF)
   !   930326  Removed unused variable.  (FNF)
   USE service, ONLY : R1MACH
+  INTERFACE
+    SUBROUTINE MSOLVE(N,R,Z,Rwork,Iwork)
+      INTEGER :: N, Iwork(*)
+      REAL :: R(N), Z(N), Rwork(*)
+    END SUBROUTINE
+    SUBROUTINE MATVEC(N,X,R,Nelt,Ia,Ja,A,Isym)
+      INTEGER :: N, Nelt, Isym, Ia(Nelt), Ja(Nelt)
+      REAL :: X(N), R(N), A(Nelt)
+    END SUBROUTINE
+  END INTERFACE
   !     .. Scalar Arguments ..
   REAL Err, Tol
   INTEGER Ierr, Isym, Iter, Itmax, Itol, Iunit, N, Nelt, Nsave
@@ -288,10 +298,10 @@ SUBROUTINE SOMN(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Nsave,Itol,Tol,&
   DO i = 1, N
     R(i) = B(i) - R(i)
   END DO
-  CALL MSOLVE(N,R,Z,Nelt,Ia,Ja,A,Isym,Rwork,Iwork)
+  CALL MSOLVE(N,R,Z,Rwork,Iwork)
   !
-  IF ( ISSOMN(N,B,X,Nelt,Ia,Ja,A,Isym,MSOLVE,Nsave,Itol,Tol,Itmax,Iter,Err,&
-      Ierr,Iunit,R,Z,P,Ap,Emap,Dz,Csav,Rwork,Iwork,ak,bnrm,solnrm)==0 ) THEN
+  IF ( ISSOMN(N,B,X,MSOLVE,Nsave,Itol,Tol,Iter,Err,&
+      Ierr,Iunit,R,Z,Dz,Rwork,Iwork,ak,bnrm,solnrm)==0 ) THEN
     IF ( Ierr/=0 ) RETURN
     !
     !
@@ -307,7 +317,7 @@ SUBROUTINE SOMN(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Nsave,Itol,Tol,&
       !         and save if desired.
       CALL SCOPY(N,Z,1,P(1,ip),1)
       CALL MATVEC(N,P(1,ip),Ap(1,ip),Nelt,Ia,Ja,A,Isym)
-      CALL MSOLVE(N,Ap(1,ip),Emap(1,ip),Nelt,Ia,Ja,A,Isym,Rwork,Iwork)
+      CALL MSOLVE(N,Ap(1,ip),Emap(1,ip),Rwork,Iwork)
       IF ( Nsave==0 ) THEN
         akden = SDOT(N,Emap,1,Emap,1)
       ELSE
@@ -344,8 +354,8 @@ SUBROUTINE SOMN(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Nsave,Itol,Tol,&
       CALL SAXPY(N,-ak,Emap(1,ip),1,Z,1)
       !
       !         check stopping criterion.
-      IF ( ISSOMN(N,B,X,Nelt,Ia,Ja,A,Isym,MSOLVE,Nsave,Itol,Tol,Itmax,Iter,&
-        Err,Ierr,Iunit,R,Z,P,Ap,Emap,Dz,Csav,Rwork,Iwork,ak,bnrm,solnrm)&
+      IF ( ISSOMN(N,B,X,MSOLVE,Nsave,Itol,Tol,Iter,&
+        Err,Ierr,Iunit,R,Z,Dz,Rwork,Iwork,ak,bnrm,solnrm)&
         /=0 ) RETURN
       !
     END DO

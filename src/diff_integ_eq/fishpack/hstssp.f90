@@ -377,11 +377,11 @@ SUBROUTINE HSTSSP(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   INTEGER i, Idimf, ierr1, Ierror, isw, iwb, iwc, iwr, iws, j, &
     jsw, k, lp, M, mb, Mbdcnd, mm1, N, Nbdcnd, np
   REAL A, a1, a2, a3, B, Bda(*), Bdb(*), Bdc(*), Bdd(*), C, D, deltar, &
-    deltht, dlrsq, dlthsq, dum, Elmbda, F(Idimf,*), Pertrb, pi
+    deltht, dlrsq, dlthsq, Elmbda, F(Idimf,*), Pertrb, pi
   REAL W(*)
   !* FIRST EXECUTABLE STATEMENT  HSTSSP
   Ierror = 0
-  pi = PIMACH(dum)
+  pi = PIMACH()
   IF ( A<0..OR.B>pi ) Ierror = 1
   IF ( A>=B ) Ierror = 2
   IF ( Mbdcnd<=0.OR.Mbdcnd>9 ) Ierror = 3

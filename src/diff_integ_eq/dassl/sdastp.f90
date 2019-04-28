@@ -248,7 +248,7 @@ SUBROUTINE SDASTP(X,Y,Yprime,Neq,RES,JAC,H,Wt,Jstart,Idid,Rpar,Ipar,Phi,&
         Yprime(i) = Yprime(i) + Gama(j)*Phi(i,j)
       END DO
     END DO
-    pnorm = SDANRM(Neq,Y,Wt,Rpar,Ipar)
+    pnorm = SDANRM(Neq,Y,Wt)
     !
     !
     !
@@ -321,7 +321,7 @@ SUBROUTINE SDASTP(X,Y,Yprime,Neq,RES,JAC,H,Wt,Jstart,Idid,Rpar,Ipar,Phi,&
         END DO
         !
         !     TEST FOR CONVERGENCE OF THE ITERATION
-        delnrm = SDANRM(Neq,Delta,Wt,Rpar,Ipar)
+        delnrm = SDANRM(Neq,Delta,Wt)
         IF ( delnrm<=100.E0*Uround*pnorm ) GOTO 200
         IF ( m>0 ) THEN
           rate = (delnrm/oldnrm)**(1.0E0/m)
@@ -374,7 +374,7 @@ SUBROUTINE SDASTP(X,Y,Yprime,Neq,RES,JAC,H,Wt,Jstart,Idid,Rpar,Ipar,Phi,&
     DO i = 1, Neq
       Delta(i) = MIN(Y(i),0.0E0)
     END DO
-    delnrm = SDANRM(Neq,Delta,Wt,Rpar,Ipar)
+    delnrm = SDANRM(Neq,Delta,Wt)
     IF ( delnrm>0.33E0 ) THEN
       convgd = .FALSE.
     ELSE
@@ -399,7 +399,7 @@ SUBROUTINE SDASTP(X,Y,Yprime,Neq,RES,JAC,H,Wt,Jstart,Idid,Rpar,Ipar,Phi,&
     !-----------------------------------------------------------------------
     !
     !     ESTIMATE ERRORS AT ORDERS K,K-1,K-2
-    enorm = SDANRM(Neq,E,Wt,Rpar,Ipar)
+    enorm = SDANRM(Neq,E,Wt)
     erk = Sigma(K+1)*enorm
     terk = (K+1)*erk
     est = erk
@@ -408,13 +408,13 @@ SUBROUTINE SDASTP(X,Y,Yprime,Neq,RES,JAC,H,Wt,Jstart,Idid,Rpar,Ipar,Phi,&
       DO i = 1, Neq
         Delta(i) = Phi(i,kp1) + E(i)
       END DO
-      erkm1 = Sigma(K)*SDANRM(Neq,Delta,Wt,Rpar,Ipar)
+      erkm1 = Sigma(K)*SDANRM(Neq,Delta,Wt)
       terkm1 = K*erkm1
       IF ( K>2 ) THEN
         DO i = 1, Neq
           Delta(i) = Phi(i,K) + Delta(i)
         END DO
-        erkm2 = Sigma(K-1)*SDANRM(Neq,Delta,Wt,Rpar,Ipar)
+        erkm2 = Sigma(K-1)*SDANRM(Neq,Delta,Wt)
         terkm2 = (K-1)*erkm2
         IF ( MAX(terkm1,terkm2)>terk ) GOTO 350
       ELSEIF ( terkm1>0.5E0*terk ) THEN
@@ -470,7 +470,7 @@ SUBROUTINE SDASTP(X,Y,Yprime,Neq,RES,JAC,H,Wt,Jstart,Idid,Rpar,Ipar,Phi,&
             DO i = 1, Neq
               Delta(i) = E(i) - Phi(i,kp2)
             END DO
-            erkp1 = (1.0E0/(K+2))*SDANRM(Neq,Delta,Wt,Rpar,Ipar)
+            erkp1 = (1.0E0/(K+2))*SDANRM(Neq,Delta,Wt)
             terkp1 = (K+2)*erkp1
             IF ( K>1 ) THEN
               IF ( terkm1<=MIN(terk,terkp1) ) GOTO 360

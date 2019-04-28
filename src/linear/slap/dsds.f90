@@ -1,5 +1,5 @@
 !** DSDS
-SUBROUTINE DSDS(N,Nelt,Ia,Ja,A,Isym,Dinv)
+SUBROUTINE DSDS(N,Nelt,Ja,A,Dinv)
   !>
   !  Diagonal Scaling Preconditioner SLAP Set Up.
   !            Routine to compute the inverse of the diagonal of a matrix
@@ -108,12 +108,12 @@ SUBROUTINE DSDS(N,Nelt,Ia,Ja,A,Isym,Dinv)
   !   910411  Prologue converted to Version 4.0 format.  (BAB)
   !   920511  Added complete declaration section.  (WRB)
   !   930701  Updated CATEGORY section.  (FNF, WRB)
-  
+
   !     .. Scalar Arguments ..
-  INTEGER Isym, N, Nelt
+  INTEGER N, Nelt
   !     .. Array Arguments ..
   REAL(8) :: A(Nelt), Dinv(N)
-  INTEGER Ia(Nelt), Ja(Nelt)
+  INTEGER Ja(Nelt)
   !     .. Local Scalars ..
   INTEGER icol
   !* FIRST EXECUTABLE STATEMENT  DSDS

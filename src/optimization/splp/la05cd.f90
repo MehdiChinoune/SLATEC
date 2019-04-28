@@ -90,7 +90,7 @@ SUBROUTINE LA05CD(A,Ind,Ia,N,Ip,Iw,W,G,U,Mm)
       IF ( LCOl+LENl>=Ia ) THEN
         ! COMPRESS COLUMN FILE IF NECESSARY.
         IF ( NCP>=mcp.OR.LENl+LENu>=Ia ) GOTO 300
-        CALL LA05ED(A,Ind,Ip(1,2),N,Iw(1,2),Ia,.FALSE.)
+        CALL LA05ED(A,Ind,Ip(1,2),N,Iw(1,2),.FALSE.)
       END IF
       LCOl = LCOl + 1
       nz = Iw(jm,2)
@@ -106,7 +106,7 @@ SUBROUTINE LA05CD(A,Ind,Ia,N,Ip,Iw,W,G,U,Mm)
       IF ( LENl+LROw+nz>=Ia ) THEN
         IF ( NCP>=mcp.OR.LENl+LENu+nz>=Ia ) GOTO 300
         ! COMPRESS ROW FILE IF NECESSARY.
-        CALL LA05ED(A,Ind(1,2),Ip,N,Iw,Ia,.TRUE.)
+        CALL LA05ED(A,Ind(1,2),Ip,N,Iw,.TRUE.)
       END IF
       kp = Ip(i,1)
       Ip(i,1) = LROw + 1
@@ -296,7 +296,7 @@ SUBROUTINE LA05CD(A,Ind,Ia,N,Ip,Iw,W,G,U,Mm)
           ! COMPRESS ROW FILE UNLESS IT IS CERTAIN THAT THERE IS ROOM FOR NEW ROW.
           IF ( LROw+Iw(ir,1)+Iw(ipp,1)+LENl>Ia ) THEN
             IF ( NCP>=mcp.OR.LENu+Iw(ir,1)+Iw(ipp,1)+LENl>Ia ) GOTO 300
-            CALL LA05ED(A,Ind(1,2),Ip,N,Iw,Ia,.TRUE.)
+            CALL LA05ED(A,Ind(1,2),Ip,N,Iw,.TRUE.)
             kp = Ip(ipp,1)
             kr = Ip(ir,1)
           END IF
@@ -372,7 +372,7 @@ SUBROUTINE LA05CD(A,Ind,Ia,N,Ip,Iw,W,G,U,Mm)
               IF ( LCOl+LENl+nz+1>=Ia ) THEN
                 ! COMPRESS COLUMN FILE IF THERE IS NOT ROOM FOR NEW ENTRY.
                 IF ( NCP>=mcp.OR.LENu+LENl+nz+1>=Ia ) GOTO 300
-                CALL LA05ED(A,Ind,Ip(1,2),N,Iw(1,2),Ia,.FALSE.)
+                CALL LA05ED(A,Ind,Ip(1,2),N,Iw(1,2),.FALSE.)
                 k = Ip(j,2)
                 kl = k + nz - 1
               END IF
@@ -397,7 +397,7 @@ SUBROUTINE LA05CD(A,Ind,Ia,N,Ip,Iw,W,G,U,Mm)
           IF ( LENl+LCOl+1>Ia ) THEN
             ! COMPRESS COL FILE IF NECESSARY.
             IF ( NCP>=mcp ) GOTO 300
-            CALL LA05ED(A,Ind,Ip(1,2),N,Iw(1,2),Ia,.FALSE.)
+            CALL LA05ED(A,Ind,Ip(1,2),N,Iw(1,2),.FALSE.)
           END IF
           k = Ia - LENl
           LENl = LENl + 1

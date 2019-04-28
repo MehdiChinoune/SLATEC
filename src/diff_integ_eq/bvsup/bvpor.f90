@@ -223,7 +223,7 @@ SUBROUTINE BVPOR(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
         IF ( NDIsk==0 ) kod = Nxpts
         i1 = 1 + Nfcc*Nfcc
         i2 = i1 + Nfcc
-        CALL SCOEF(U(1,1,kod),V(1,kod),Ncomp,Nrowb,Nfc,Nic,B,Beta,Coef,&
+        CALL SCOEF(U(1,1,kod),V(1,kod),Ncomp,Nrowb,Nfc,B,Beta,Coef,&
           INHomo,RE,AE,Work,Work(i1),Work(i2),Iwork,Iflag,Nfcc)
         !
         !- *********************************************************************

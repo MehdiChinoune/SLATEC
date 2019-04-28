@@ -1,5 +1,5 @@
 !** SSLUI
-SUBROUTINE SSLUI(N,B,X,Nelt,Ia,Ja,A,Isym,Rwork,Iwork)
+SUBROUTINE SSLUI(N,B,X,Rwork,Iwork)
   !>
   !  SLAP MSOLVE for LDU Factorization.
   !            This routine acts as an interface between the SLAP generic
@@ -52,10 +52,10 @@ SUBROUTINE SSLUI(N,B,X,Nelt,Ia,Ja,A,Isym,Rwork,Iwork)
   !   930701  Updated CATEGORY section.  (FNF, WRB)
 
   !     .. Scalar Arguments ..
-  INTEGER Isym, N, Nelt
+  INTEGER N
   !     .. Array Arguments ..
-  REAL A(Nelt), B(N), Rwork(*), X(N)
-  INTEGER Ia(Nelt), Iwork(*), Ja(Nelt)
+  REAL B(N), Rwork(*), X(N)
+  INTEGER Iwork(*)
   !     .. Local Scalars ..
   INTEGER locdin, locil, lociu, locjl, locju, locl, locu
   !* FIRST EXECUTABLE STATEMENT  SSLUI

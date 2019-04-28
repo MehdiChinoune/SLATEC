@@ -230,7 +230,7 @@ SUBROUTINE SSDOMN(N,B,X,Nelt,Ia,Ja,A,Isym,Nsave,Itol,Tol,Itmax,Iter,Err,&
   END IF
   !
   !         Change the SLAP input matrix IA, JA, A to SLAP-Column format.
-  CALL SS2Y(N,Nelt,Ia,Ja,A,Isym)
+  CALL SS2Y(N,Nelt,Ia,Ja,A)
   !
   !         Set up the workspace.
   lociw = LOCIB
@@ -254,7 +254,7 @@ SUBROUTINE SSDOMN(N,B,X,Nelt,Ia,Ja,A,Isym,Nsave,Itol,Tol,Itmax,Iter,Err,&
   Iwork(10) = locw
   !
   !         Compute the inverse of the diagonal of the matrix.
-  CALL SSDS(N,Nelt,Ia,Ja,A,Isym,Rwork(locdin))
+  CALL SSDS(N,Nelt,Ja,A,Rwork(locdin))
   !
   !         Perform the Diagonally Scaled Orthomin iteration algorithm.
   CALL SOMN(N,B,X,Nelt,Ia,Ja,A,Isym,SSMV,SSDI,Nsave,Itol,Tol,Itmax,Iter,Err,&

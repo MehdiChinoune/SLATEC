@@ -69,7 +69,7 @@ SUBROUTINE DDOGLG(N,R,Lr,Diag,Qtb,Delta,X,Wa1,Wa2)
   !   900328  Added TYPE section.  (WRB)
   USE service, ONLY : D1MACH
   INTEGER i, j, jj, jp1, k, l, Lr, N
-  REAL(8) :: alpha, bnorm, Delta, Diag(*), epsmch, gnorm, qnorm, Qtb(*), R(*), &
+  REAL(8) :: alpha, bnorm, Delta, Diag(*), epsmch, gnorm, qnorm, Qtb(*), R(Lr), &
     sgnorm, summ, temp, Wa1(*), Wa2(*), X(*)
   REAL(8), PARAMETER :: one = 1.0D0, zero = 0.0D0
   !

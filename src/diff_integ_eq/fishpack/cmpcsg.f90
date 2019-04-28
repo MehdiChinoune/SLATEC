@@ -41,13 +41,13 @@ SUBROUTINE CMPCSG(N,Ijump,Fnum,Fden,A)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
 
-  REAL dum, Fden, Fnum, pi, pibyn, x, y
+  REAL Fden, Fnum, pi, pibyn, x, y
   INTEGER i, Ijump, k, k1, k2, k3, k4, k5, N, np1
   COMPLEX A(*)
   !
   !
   !* FIRST EXECUTABLE STATEMENT  CMPCSG
-  pi = PIMACH(dum)
+  pi = PIMACH()
   IF ( N/=0 ) THEN
     IF ( Ijump==1 ) THEN
       np1 = N + 1

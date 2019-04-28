@@ -1,7 +1,6 @@
 !** ISSOMN
-INTEGER FUNCTION ISSOMN(N,B,X,Nelt,Ia,Ja,A,Isym,MSOLVE,Nsave,Itol,Tol,&
-    Itmax,Iter,Err,Ierr,Iunit,R,Z,P,Ap,Emap,Dz,Csav,&
-    Rwork,Iwork,Ak,Bnrm,Solnrm)
+INTEGER FUNCTION ISSOMN(N,B,X,MSOLVE,Nsave,Itol,Tol,&
+    Iter,Err,Ierr,Iunit,R,Z,Dz,Rwork,Iwork,Ak,Bnrm,Solnrm)
   !>
   !  Preconditioned Orthomin Stop Test.
   !            This routine calculates the stop test for the Orthomin
@@ -180,13 +179,18 @@ INTEGER FUNCTION ISSOMN(N,B,X,Nelt,Ia,Ja,A,Isym,MSOLVE,Nsave,Itol,Tol,&
   !   921113  Corrected C***CATEGORY line.  (FNF)
   USE SSLBLK, ONLY : SOLn
   USE service, ONLY : R1MACH
+  INTERFACE
+    SUBROUTINE MSOLVE(N,R,Z,Rwork,Iwork)
+      INTEGER :: N, Iwork(*)
+      REAL :: R(N), Z(N), Rwork(*)
+    END SUBROUTINE
+  END INTERFACE
   !     .. Scalar Arguments ..
   REAL Ak, Bnrm, Err, Solnrm, Tol
-  INTEGER Ierr, Isym, Iter, Itmax, Itol, Iunit, N, Nelt, Nsave
+  INTEGER Ierr, Iter, Itol, Iunit, N, Nsave
   !     .. Array Arguments ..
-  REAL A(Nelt), Ap(N,0:Nsave), B(N), Csav(Nsave), Dz(N), &
-    Emap(N,0:Nsave), P(N,0:Nsave), R(N), Rwork(*), X(N), Z(N)
-  INTEGER Ia(Nelt), Iwork(*), Ja(Nelt)
+  REAL B(N), Dz(N), R(N), Rwork(*), X(N), Z(N)
+  INTEGER Iwork(*)
   !     .. Subroutine Arguments ..
   EXTERNAL :: MSOLVE
   !     .. Local Scalars ..
@@ -202,7 +206,7 @@ INTEGER FUNCTION ISSOMN(N,B,X,Nelt,Ia,Ja,A,Isym,MSOLVE,Nsave,Itol,Tol,&
     !                  -1              -1
     !         err = ||M  Residual||/||M  RightHandSide|| (2-Norms).
     IF ( Iter==0 ) THEN
-      CALL MSOLVE(N,B,Dz,Nelt,Ia,Ja,A,Isym,Rwork,Iwork)
+      CALL MSOLVE(N,B,Dz,Rwork,Iwork)
       Bnrm = SNRM2(N,Dz,1)
     END IF
     Err = SNRM2(N,Z,1)/Bnrm

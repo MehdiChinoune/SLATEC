@@ -1,5 +1,5 @@
 !** DSDGMR
-SUBROUTINE DSDGMR(N,B,X,Nelt,Ia,Ja,A,Isym,Nsave,Itol,Tol,Itmax,Iter,Err,&
+SUBROUTINE DSDGMR(N,B,X,Nelt,Ia,Ja,A,Isym,Nsave,Tol,Itmax,Iter,Err,&
     Ierr,Iunit,Rwork,Lenw,Iwork,Leniw)
   !>
   !  Diagonally scaled GMRES iterative sparse Ax=b solver.
@@ -332,7 +332,7 @@ SUBROUTINE DSDGMR(N,B,X,Nelt,Ia,Ja,A,Isym,Nsave,Itol,Tol,Itmax,Iter,Err,&
   INTEGER , PARAMETER :: LOCRB = 1, LOCIB = 11
   !     .. Scalar Arguments ..
   REAL(8) :: Err, Tol
-  INTEGER Ierr, Isym, Iter, Itmax, Itol, Iunit, Leniw, Lenw, N, Nelt, Nsave
+  INTEGER Ierr, Isym, Iter, Itmax, Iunit, Leniw, Lenw, N, Nelt, Nsave
   !     .. Array Arguments ..
   REAL(8) :: A(Nelt), B(N), Rwork(Lenw), X(N)
   INTEGER Ia(Nelt), Iwork(Leniw), Ja(Nelt)
@@ -348,7 +348,7 @@ SUBROUTINE DSDGMR(N,B,X,Nelt,Ia,Ja,A,Isym,Nsave,Itol,Tol,Itmax,Iter,Err,&
   END IF
   !
   !         Change the SLAP input matrix IA, JA, A to SLAP-Column format.
-  CALL DS2Y(N,Nelt,Ia,Ja,A,Isym)
+  CALL DS2Y(N,Nelt,Ia,Ja,A)
   !
   !         Set up the workspace.  We assume MAXL=KMP=NSAVE.
   locigw = LOCIB
@@ -367,7 +367,7 @@ SUBROUTINE DSDGMR(N,B,X,Nelt,Ia,Ja,A,Isym,Nsave,Itol,Tol,Itmax,Iter,Err,&
   IF ( Ierr/=0 ) RETURN
   !
   !         Compute the inverse of the diagonal of the matrix.
-  CALL DSDS(N,Nelt,Ia,Ja,A,Isym,Rwork(locdin))
+  CALL DSDS(N,Nelt,Ja,A,Rwork(locdin))
   !
   !         Perform the Diagonally Scaled Generalized Minimum
   !         Residual iteration algorithm.  The following DGMRES
@@ -380,7 +380,7 @@ SUBROUTINE DSDGMR(N,B,X,Nelt,Ia,Ja,A,Isym,Nsave,Itol,Tol,Itmax,Iter,Err,&
   Iwork(locigw+4) = Itmax/Nsave
   myitol = 0
   !
-  CALL DGMRES(N,B,X,Nelt,Ia,Ja,A,Isym,DSMV,DSDI,myitol,Tol,Itmax,Iter,Err,&
+  CALL DGMRES(N,B,X,Nelt,Ia,Ja,A,Isym,DSMV,DSDI,myitol,Tol,Iter,Err,&
     Ierr,Iunit,Rwork,Rwork,Rwork(locrgw),Lenw-locrgw,Iwork(locigw)&
     ,20,Rwork,Iwork)
   !

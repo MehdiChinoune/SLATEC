@@ -1,5 +1,5 @@
 !** BVDER
-SUBROUTINE BVDER(X,Y,Yp,G,Ipar)
+SUBROUTINE BVDER(X,Y,Yp,G)
   !>
   !  Subsidiary to BVSUP
   !***
@@ -62,9 +62,9 @@ SUBROUTINE BVDER(X,Y,Yp,G,Ipar)
   !   920618  Minor restructuring of code.  (RWC, WRB)
   USE ML, ONLY : NOFst, C, XSAv, IGOfx, INHomo, IVP, NCOmp, NFC
   REAL G(*), Y(*), Yp(*), X
-  INTEGER Ipar, j, k, l, na
+  INTEGER j, k, l, na
   !* FIRST EXECUTABLE STATEMENT  BVDER
-  IF ( IVP>0 ) CALL UIVP(X,Y(IVP+1),Yp(IVP+1))
+  IF ( IVP>0 ) STOP
   NOFst = IVP
   na = 1
   DO k = 1, NFC
@@ -79,7 +79,7 @@ SUBROUTINE BVDER(X,Y,Yp,G,Ipar)
   IF ( IGOfx==0 ) RETURN
   IF ( X/=XSAv ) THEN
     IF ( IVP==0 ) CALL GVEC(X,G)
-    IF ( IVP>0 ) CALL UVEC(X,Y(IVP+1),G)
+    IF ( IVP>0 ) STOP
     XSAv = X
   END IF
   !

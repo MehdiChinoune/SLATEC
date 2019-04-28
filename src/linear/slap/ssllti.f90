@@ -1,5 +1,5 @@
 !** SSLLTI
-SUBROUTINE SSLLTI(N,B,X,Nelt,Ia,Ja,A,Isym,Rwork,Iwork)
+SUBROUTINE SSLLTI(N,B,X,Rwork,Iwork)
   !>
   !  SLAP MSOLVE for LDL' (IC) Factorization.
   !            This routine acts as an interface between the SLAP generic
@@ -50,10 +50,10 @@ SUBROUTINE SSLLTI(N,B,X,Nelt,Ia,Ja,A,Isym,Rwork,Iwork)
   !   930701  Updated CATEGORY section.  (FNF, WRB)
 
   !     .. Scalar Arguments ..
-  INTEGER Isym, N, Nelt
+  INTEGER N
   !     .. Array Arguments ..
-  REAL A(Nelt), B(*), Rwork(*), X(*)
-  INTEGER Ia(Nelt), Iwork(*), Ja(Nelt)
+  REAL B(N), Rwork(*), X(N)
+  INTEGER Iwork(*)
   !     .. Local Scalars ..
   INTEGER locdin, locel, lociel, locjel, nel
   !* FIRST EXECUTABLE STATEMENT  SSLLTI

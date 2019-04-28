@@ -230,7 +230,7 @@ CONTAINS
           CASE (13,14)
             !           Test SSYR, 13, and SSPR, 14.
             CALL SCHK52(snames(isnum),eps,thresh,Nout,Kprint,ftl2,NIDIM,idimm,&
-              NALF,alf,NINC,inc,NMAX,INCMAX,a,aa,as,x,xx,xs,y,yy,ys,yt,g,z)
+              NALF,alf,NINC,inc,NMAX,INCMAX,a,aa,as,x,xx,xs,yt,g,z)
           CASE (15,16)
             !           Test SSYR2, 15, and SSPR2, 16.
             CALL SCHK62(snames(isnum),eps,thresh,Nout,Kprint,ftl2,NIDIM,idimm,&
@@ -452,7 +452,7 @@ CONTAINS
           CASE (5)
             !           Test SSYRK, 05.
             CALL SCHK43(snames(isnum),eps,thresh,Nout,Kprint,ftl2,NIDIM,idimm,&
-              NALF,alf,NBET,bet,NMAX,ab,aa,as,ab(1,NMAX+1),bb,bs,c,cc,cs,ct,g)
+              NALF,alf,NBET,bet,NMAX,ab,aa,as,c,cc,cs,ct,g)
           CASE (6)
             !           Test SSYR2K, 06.
             CALL SCHK53(snames(isnum),eps,thresh,Nout,Kprint,ftl2,NIDIM,idimm,&
@@ -3052,7 +3052,7 @@ CONTAINS
   END SUBROUTINE SCHK42
   !** SCHK43
   SUBROUTINE SCHK43(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idimm,Nalf,Alf,&
-      Nbet,Bet,Nmax,A,Aa,As,B,Bb,Bs,C,Cc,Cs,Ct,G)
+      Nbet,Bet,Nmax,A,Aa,As,C,Cc,Cs,Ct,G)
     !>
     !  Quick check for SSYRK.
     !***
@@ -3088,8 +3088,7 @@ CONTAINS
     CHARACTER(6) :: Sname
     !     .. Array Arguments ..
     REAL A(Nmax,Nmax), Aa(Nmax*Nmax), Alf(Nalf), As(Nmax*Nmax), Bet(Nbet), &
-      G(Nmax), B(Nmax,Nmax), Bb(Nmax*Nmax), Bs(Nmax*Nmax), &
-      C(Nmax,Nmax), Cc(Nmax*Nmax), Cs(Nmax*Nmax), Ct(Nmax)
+      G(Nmax), C(Nmax,Nmax), Cc(Nmax*Nmax), Cs(Nmax*Nmax), Ct(Nmax)
     INTEGER Idimm(Nidim)
     !     .. Local Scalars ..
     REAL alpha, als, beta, bets, err, errmax
@@ -3300,7 +3299,7 @@ CONTAINS
   END SUBROUTINE SCHK43
   !** SCHK52
   SUBROUTINE SCHK52(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idimm,Nalf,Alf,&
-      Ninc,Inc,Nmax,Incmax,A,Aa,As,X,Xx,Xs,Y,Yy,Ys,Yt,G,Z)
+      Ninc,Inc,Nmax,Incmax,A,Aa,As,X,Xx,Xs,Yt,G,Z)
     !>
     !  Quick check for SSYR and SSPR.
     !***
@@ -3334,8 +3333,7 @@ CONTAINS
     CHARACTER(6) :: Sname
     !     .. Array Arguments ..
     REAL A(Nmax,Nmax), Aa(Nmax*Nmax), Alf(Nalf), As(Nmax*Nmax), G(Nmax), &
-      X(Nmax), Xs(Nmax*Incmax), Xx(Nmax*Incmax), Y(Nmax), &
-      Ys(Nmax*Incmax), Yt(Nmax), Yy(Nmax*Incmax), Z(Nmax)
+      X(Nmax), Xs(Nmax*Incmax), Xx(Nmax*Incmax), Yt(Nmax), Z(Nmax)
     INTEGER Idimm(Nidim), Inc(Ninc)
     !     .. Local Scalars ..
     REAL alpha, als, err, errmax, transl

@@ -85,7 +85,7 @@ SUBROUTINE DDAINI(X,Y,Yprime,Neq,RES,JAC,H,Wt,Idid,Rpar,Ipar,Phi,Delta,E,&
   ncf = 0
   nsf = 0
   xold = X
-  ynorm = DDANRM(Neq,Y,Wt,Rpar,Ipar)
+  ynorm = DDANRM(Neq,Y,Wt)
   !
   !     SAVE Y AND YPRIME IN PHI
   DO i = 1, Neq
@@ -166,7 +166,7 @@ SUBROUTINE DDAINI(X,Y,Yprime,Neq,RES,JAC,H,Wt,Idid,Rpar,Ipar,Phi,Delta,E,&
       !
       !     TEST FOR CONVERGENCE OF THE ITERATION.
       !
-      delnrm = DDANRM(Neq,Delta,Wt,Rpar,Ipar)
+      delnrm = DDANRM(Neq,Delta,Wt)
       IF ( delnrm>100.D0*Uround*ynorm ) THEN
         !
         IF ( m>0 ) THEN
@@ -211,7 +211,7 @@ SUBROUTINE DDAINI(X,Y,Yprime,Neq,RES,JAC,H,Wt,Idid,Rpar,Ipar,Phi,Delta,E,&
           Delta(i) = MIN(Y(i),0.0D0)
         END DO
         !
-        delnrm = DDANRM(Neq,Delta,Wt,Rpar,Ipar)
+        delnrm = DDANRM(Neq,Delta,Wt)
         IF ( delnrm>0.33D0 ) THEN
           convgd = .FALSE.
         ELSE
@@ -238,7 +238,7 @@ SUBROUTINE DDAINI(X,Y,Yprime,Neq,RES,JAC,H,Wt,Idid,Rpar,Ipar,Phi,Delta,E,&
     DO i = 1, Neq
       E(i) = Y(i) - Phi(i,1)
     END DO
-    err = DDANRM(Neq,E,Wt,Rpar,Ipar)
+    err = DDANRM(Neq,E,Wt)
     !
     IF ( err<=1.0D0 ) RETURN
   END IF

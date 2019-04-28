@@ -1,5 +1,5 @@
 !** DBVDER
-SUBROUTINE DBVDER(X,Y,Yp,G,Ipar)
+SUBROUTINE DBVDER(X,Y,Yp,G)
   !>
   !  Subsidiary to DBVSUP
   !***
@@ -62,12 +62,12 @@ SUBROUTINE DBVDER(X,Y,Yp,G,Ipar)
   !   910722  Updated AUTHOR section.  (ALS)
   !   920618  Minor restructuring of code.  (RWC, WRB)
   USE DML, ONLY : NOFst, C, XSAv, IGOfx, INHomo, IVP, NCOmp, NFC
-  INTEGER Ipar, j, k, l, na
+  INTEGER j, k, l, na
   REAL(8) :: G(*), X, Y(*), Yp(*)
   !- *********************************************************************
   !
   !* FIRST EXECUTABLE STATEMENT  DBVDER
-  IF ( IVP>0 ) CALL DUIVP(X,Y(IVP+1),Yp(IVP+1))
+  IF ( IVP>0 ) STOP
   NOFst = IVP
   na = 1
   DO k = 1, NFC
@@ -82,7 +82,7 @@ SUBROUTINE DBVDER(X,Y,Yp,G,Ipar)
   IF ( IGOfx==0 ) RETURN
   IF ( X/=XSAv ) THEN
     IF ( IVP==0 ) CALL DGVEC(X,G)
-    IF ( IVP>0 ) CALL DUVEC(X,Y(IVP+1),G)
+    IF ( IVP>0 ) STOP
     XSAv = X
   END IF
   !

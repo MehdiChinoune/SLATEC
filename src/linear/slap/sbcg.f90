@@ -272,6 +272,20 @@ SUBROUTINE SBCG(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MTTVEC,MSOLVE,MTSOLV,Itol,&
   !   921019  Changed 500.0 to 500 to reduce SP/DP differences.  (FNF)
   !   921113  Corrected C***CATEGORY line.  (FNF)
   USE service, ONLY : R1MACH
+  INTERFACE
+    SUBROUTINE MSOLVE(N,R,Z,Rwork,Iwork)
+      INTEGER :: N, Iwork(*)
+      REAL :: R(N), Z(N), Rwork(*)
+    END SUBROUTINE
+    SUBROUTINE MTSOLV(N,Rr,Zz,Rwork,Iwork)
+      INTEGER :: N, Iwork(*)
+      REAL :: Rr(N), Zz(N), Rwork(*)
+    END SUBROUTINE
+    SUBROUTINE MATVEC(N,X,R,Nelt,Ia,Ja,A,Isym)
+      INTEGER :: N, Nelt, Isym, Ia(Nelt), Ja(Nelt)
+      REAL :: X(N), R(N), A(Nelt)
+    END SUBROUTINE
+  END INTERFACE
   !     .. Scalar Arguments ..
   REAL Err, Tol
   INTEGER Ierr, Isym, Iter, Itmax, Itol, Iunit, N, Nelt
@@ -310,11 +324,11 @@ SUBROUTINE SBCG(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MTTVEC,MSOLVE,MTSOLV,Itol,&
     R(i) = B(i) - R(i)
     Rr(i) = R(i)
   END DO
-  CALL MSOLVE(N,R,Z,Nelt,Ia,Ja,A,Isym,Rwork,Iwork)
-  CALL MTSOLV(N,Rr,Zz,Nelt,Ia,Ja,A,Isym,Rwork,Iwork)
+  CALL MSOLVE(N,R,Z,Rwork,Iwork)
+  CALL MTSOLV(N,Rr,Zz,Rwork,Iwork)
   !
-  IF ( ISSBCG(N,B,X,Nelt,Ia,Ja,A,Isym,MSOLVE,Itol,Tol,Itmax,Iter,Err,Ierr,&
-      Iunit,R,Z,P,Rr,Zz,Pp,Dz,Rwork,Iwork,ak,bk,bnrm,solnrm)==0 ) THEN
+  IF ( ISSBCG(N,B,X,MSOLVE,Itol,Tol,Iter,Err,Ierr,&
+      Iunit,R,Z,Dz,Rwork,Iwork,ak,bk,bnrm,solnrm)==0 ) THEN
     IF ( Ierr/=0 ) RETURN
     !
     !         ***** iteration loop *****
@@ -353,12 +367,12 @@ SUBROUTINE SBCG(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MTTVEC,MSOLVE,MTSOLV,Itol,&
       CALL SAXPY(N,-ak,Z,1,R,1)
       CALL MTTVEC(N,Pp,Zz,Nelt,Ia,Ja,A,Isym)
       CALL SAXPY(N,-ak,Zz,1,Rr,1)
-      CALL MSOLVE(N,R,Z,Nelt,Ia,Ja,A,Isym,Rwork,Iwork)
-      CALL MTSOLV(N,Rr,Zz,Nelt,Ia,Ja,A,Isym,Rwork,Iwork)
+      CALL MSOLVE(N,R,Z,Rwork,Iwork)
+      CALL MTSOLV(N,Rr,Zz,Rwork,Iwork)
       !
       !         check stopping criterion.
-      IF ( ISSBCG(N,B,X,Nelt,Ia,Ja,A,Isym,MSOLVE,Itol,Tol,Itmax,Iter,Err,&
-        Ierr,Iunit,R,Z,P,Rr,Zz,Pp,Dz,Rwork,Iwork,ak,bk,bnrm,solnrm)/=0 )&
+      IF ( ISSBCG(N,B,X,MSOLVE,Itol,Tol,Iter,Err,&
+        Ierr,Iunit,R,Z,Dz,Rwork,Iwork,ak,bk,bnrm,solnrm)/=0 )&
         RETURN
       !
     END DO

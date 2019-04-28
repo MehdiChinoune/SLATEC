@@ -264,6 +264,16 @@ SUBROUTINE DIR(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,Iter,&
   !   920929  Corrected format of references.  (FNF)
   !   921019  Changed 500.0 to 500 to reduce SP/DP differences.  (FNF)
   USE service, ONLY : D1MACH
+  INTERFACE
+    SUBROUTINE MSOLVE(N,R,Z,Rwork,Iwork)
+      INTEGER :: N, Iwork(*)
+      REAL(8) :: R(N), Z(N), Rwork(*)
+    END SUBROUTINE
+    SUBROUTINE MATVEC(N,X,R,Nelt,Ia,Ja,A,Isym)
+      INTEGER :: N, Nelt, Isym, Ia(Nelt), Ja(Nelt)
+      REAL(8) :: X(N), R(N), A(Nelt)
+    END SUBROUTINE
+  END INTERFACE
   !     .. Scalar Arguments ..
   REAL(8) :: Err, Tol
   INTEGER Ierr, Isym, Iter, Itmax, Itol, Iunit, N, Nelt
@@ -297,9 +307,9 @@ SUBROUTINE DIR(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,Iter,&
   DO i = 1, N
     R(i) = B(i) - R(i)
   END DO
-  CALL MSOLVE(N,R,Z,Nelt,Ia,Ja,A,Isym,Rwork,Iwork)
+  CALL MSOLVE(N,R,Z,Rwork,Iwork)
   !
-  IF ( ISDIR(N,B,X,Nelt,Ia,Ja,A,Isym,MSOLVE,Itol,Tol,Itmax,Iter,Err,Ierr,&
+  IF ( ISDIR(N,B,X,MSOLVE,Itol,Tol,Iter,Err,Ierr,&
       Iunit,R,Z,Dz,Rwork,Iwork,bnrm,solnrm)==0 ) THEN
     IF ( Ierr/=0 ) RETURN
     !
@@ -317,10 +327,10 @@ SUBROUTINE DIR(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,Iter,&
       DO i = 1, N
         R(i) = B(i) - R(i)
       END DO
-      CALL MSOLVE(N,R,Z,Nelt,Ia,Ja,A,Isym,Rwork,Iwork)
+      CALL MSOLVE(N,R,Z,Rwork,Iwork)
       !
       !         check stopping criterion.
-      IF ( ISDIR(N,B,X,Nelt,Ia,Ja,A,Isym,MSOLVE,Itol,Tol,Itmax,Iter,Err,&
+      IF ( ISDIR(N,B,X,MSOLVE,Itol,Tol,Iter,Err,&
         Ierr,Iunit,R,Z,Dz,Rwork,Iwork,bnrm,solnrm)/=0 ) RETURN
       !
     END DO

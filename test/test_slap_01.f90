@@ -187,7 +187,7 @@ CONTAINS
         !         Convert to the SLAP-Column format and
         !         write out matrix in SLAP-Column format, if desired.
         !
-        CALL SS2Y(n,nelt,ia,ja,a,isym)
+        CALL SS2Y(n,nelt,ia,ja,a)
         IF ( Kprint>=4 ) THEN
           WRITE (Lun,99005) (k,ia(k),ja(k),a(k),k=1,nelt)
           99005 FORMAT (/'  ***** SLAP Column Matrix *****'/' Indx   ia   ja     a'/&
@@ -347,7 +347,7 @@ CONTAINS
           CALL VFILL(n,xiter,0.0E0)
           itolgm = 0
           !
-          CALL SSDGMR(n,f,xiter,nelt,ia,ja,a,isym,nsave,itolgm,tol,itmax,iter,&
+          CALL SSDGMR(n,f,xiter,nelt,ia,ja,a,isym,nsave,tol,itmax,iter,&
             err,ierr,iunit,rwork,lenw,iwork,leniw)
           !
           CALL OUTERR('SSDGMR',ierr,Kprint,nfail,Lun,iter,err)
@@ -360,7 +360,7 @@ CONTAINS
           IF ( Kprint>=3 ) WRITE (Lun,99009) 'SSLUGM', itol, isym, nsave
           CALL VFILL(n,xiter,0.0E0)
           !
-          CALL SSLUGM(n,f,xiter,nelt,ia,ja,a,isym,nsave,itol,tol,itmax,iter,&
+          CALL SSLUGM(n,f,xiter,nelt,ia,ja,a,isym,nsave,tol,itmax,iter,&
             err,ierr,iunit,rwork,lenw,iwork,leniw)
           !
           CALL OUTERR('SSLUGM',ierr,Kprint,nfail,Lun,iter,err)

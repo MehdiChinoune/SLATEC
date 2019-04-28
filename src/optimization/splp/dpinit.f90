@@ -1,5 +1,5 @@
 !** DPINIT
-SUBROUTINE DPINIT(Mrelas,Nvars,Costs,Bl,Bu,Ind,Primal,Info,Amat,Csc,&
+SUBROUTINE DPINIT(Mrelas,Nvars,Costs,Bl,Bu,Ind,Primal,Amat,Csc,&
     Costsc,Colnrm,Xlamda,Anorm,Rhs,Rhsnrm,Ibasis,Ibb,Imat,Lopt)
   !>
   !  Subsidiary to DSPLP
@@ -34,7 +34,7 @@ SUBROUTINE DPINIT(Mrelas,Nvars,Costs,Bl,Bu,Ind,Primal,Info,Amat,Csc,&
   !   891009  Removed unreferenced variable.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
-  INTEGER i, Info, ip, iplace, j, Mrelas, n20007, n20019, n20028, &
+  INTEGER i, ip, iplace, j, Mrelas, n20007, n20019, n20028, &
     n20041, n20056, n20066, n20070, n20074, n20078, Nvars
   REAL(8) :: aij, Amat(*), Anorm, Bl(*), Bu(*), cmax, Colnrm(*), Costs(*), &
     Costsc, Csc(*), csum, Primal(*), Rhs(*), Rhsnrm, scalr, testsc, Xlamda

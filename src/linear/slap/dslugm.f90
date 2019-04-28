@@ -1,5 +1,5 @@
 !** DSLUGM
-SUBROUTINE DSLUGM(N,B,X,Nelt,Ia,Ja,A,Isym,Nsave,Itol,Tol,Itmax,Iter,Err,&
+SUBROUTINE DSLUGM(N,B,X,Nelt,Ia,Ja,A,Isym,Nsave,Tol,Itmax,Iter,Err,&
     Ierr,Iunit,Rwork,Lenw,Iwork,Leniw)
   !>
   !  Incomplete LU GMRES iterative sparse Ax=b solver.
@@ -339,7 +339,7 @@ SUBROUTINE DSLUGM(N,B,X,Nelt,Ia,Ja,A,Isym,Nsave,Itol,Tol,Itmax,Iter,Err,&
   INTEGER , PARAMETER :: LOCRB = 1, LOCIB = 11
   !     .. Scalar Arguments ..
   REAL(8) :: Err, Tol
-  INTEGER Ierr, Isym, Iter, Itmax, Itol, Iunit, Leniw, Lenw, N, Nelt, Nsave
+  INTEGER Ierr, Isym, Iter, Itmax, Iunit, Leniw, Lenw, N, Nelt, Nsave
   !     .. Array Arguments ..
   REAL(8) :: A(Nelt), B(N), Rwork(Lenw), X(N)
   INTEGER Ia(Nelt), Iwork(Leniw), Ja(Nelt)
@@ -356,7 +356,7 @@ SUBROUTINE DSLUGM(N,B,X,Nelt,Ia,Ja,A,Isym,Nsave,Itol,Tol,Itmax,Iter,Err,&
   END IF
   !
   !         Change the SLAP input matrix IA, JA, A to SLAP-Column format.
-  CALL DS2Y(N,Nelt,Ia,Ja,A,Isym)
+  CALL DS2Y(N,Nelt,Ia,Ja,A)
   !
   !         Count number of Non-Zero elements preconditioner ILU matrix.
   !         Then set up the work arrays.  We assume MAXL=KMP=NSAVE.
@@ -424,7 +424,7 @@ SUBROUTINE DSLUGM(N,B,X,Nelt,Ia,Ja,A,Isym,Nsave,Itol,Tol,Itmax,Iter,Err,&
   Iwork(locigw+4) = Itmax/Nsave
   myitol = 0
   !
-  CALL DGMRES(N,B,X,Nelt,Ia,Ja,A,Isym,DSMV,DSLUI,myitol,Tol,Itmax,Iter,Err,&
+  CALL DGMRES(N,B,X,Nelt,Ia,Ja,A,Isym,DSMV,DSLUI,myitol,Tol,Iter,Err,&
     Ierr,Iunit,Rwork,Rwork,Rwork(locrgw),Lenw-locrgw,Iwork(locigw),20,Rwork,Iwork)
   !
   IF ( Iter>Itmax ) Ierr = 2

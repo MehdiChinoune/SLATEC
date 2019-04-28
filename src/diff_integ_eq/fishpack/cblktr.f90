@@ -259,16 +259,16 @@ SUBROUTINE CBLKTR(Iflg,Np,N,An,Bn,Cn,Mp,M,Am,Bm,Cm,Idimy,Y,Ierror,W)
           iww = iwd + m2
           iwu = iww + m2
           IF ( Iflg==0 ) THEN
-            CALL CCMPB(nl,Ierror,An,Bn,Cn,W(2),W(iwah),W(iwbh))
+            CALL CCMPB(Ierror,An,Bn,Cn,W(2),W(iwah),W(iwbh))
           ELSEIF ( Mp/=0 ) THEN
             !
             ! SUBROUTINE CBLKT1 SOLVES THE LINEAR SYSTEM
             !
-            CALL CBLKT1(nl,An,Bn,Cn,M,Am,Bm,Cm,Idimy,Y,W(2),Wc(iw1/2),Wc(iw2/2),&
+            CALL CBLKT1(An,Cn,M,Am,Bm,Cm,Idimy,Y,W(2),Wc(iw1/2),Wc(iw2/2),&
               Wc(iw3/2),Wc(iwd),Wc(iww),Wc(iwu),PROC,CPROC)
             W(1:200) = [ ( [REAL(Wc(i)),AIMAG(Wc(i))], i=1,100 ) ]
           ELSE
-            CALL CBLKT1(nl,An,Bn,Cn,M,Am,Bm,Cm,Idimy,Y,W(2),Wc(iw1/2),Wc(iw2/2),&
+            CALL CBLKT1(An,Cn,M,Am,Bm,Cm,Idimy,Y,W(2),Wc(iw1/2),Wc(iw2/2),&
               Wc(iw3/2),Wc(iwd),Wc(iww),Wc(iwu),PROCP,CPROCP)
             W(1:200) = [ ( [REAL(Wc(i)),AIMAG(Wc(i))], i=1,100 ) ]
           END IF

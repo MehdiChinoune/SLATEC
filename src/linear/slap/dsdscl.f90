@@ -1,5 +1,5 @@
 !** DSDSCL
-SUBROUTINE DSDSCL(N,Nelt,Ia,Ja,A,Isym,X,B,Dinv,Job,Itol)
+SUBROUTINE DSDSCL(N,Nelt,Ia,Ja,A,X,B,Dinv,Job,Itol)
   !>
   !  Diagonal Scaling of system Ax = b.
   !            This routine scales (and unscales) the system  Ax = b
@@ -148,7 +148,7 @@ SUBROUTINE DSDSCL(N,Nelt,Ia,Ja,A,Isym,X,B,Dinv,Job,Itol)
   !   930701  Updated CATEGORY section.  (FNF, WRB)
   USE DSLBLK, ONLY : SOLn
   !     .. Scalar Arguments ..
-  INTEGER Isym, Itol, Job, N, Nelt
+  INTEGER Itol, Job, N, Nelt
   !     .. Array Arguments ..
   REAL(8) :: A(Nelt), B(N), Dinv(N), X(N)
   INTEGER Ia(Nelt), Ja(Nelt)

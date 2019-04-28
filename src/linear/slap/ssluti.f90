@@ -1,5 +1,5 @@
 !** SSLUTI
-SUBROUTINE SSLUTI(N,B,X,Nelt,Ia,Ja,A,Isym,Rwork,Iwork)
+SUBROUTINE SSLUTI(N,B,X,Rwork,Iwork)
   !>
   !  SLAP MTSOLV for LDU Factorization.
   !            This routine acts as an interface between the SLAP generic
@@ -51,10 +51,10 @@ SUBROUTINE SSLUTI(N,B,X,Nelt,Ia,Ja,A,Isym,Rwork,Iwork)
   !   930701  Updated CATEGORY section.  (FNF, WRB)
 
   !     .. Scalar Arguments ..
-  INTEGER Isym, N, Nelt
+  INTEGER N
   !     .. Array Arguments ..
-  REAL A(N), B(N), Rwork(*), X(N)
-  INTEGER Ia(Nelt), Iwork(*), Ja(Nelt)
+  REAL B(N), Rwork(*), X(N)
+  INTEGER Iwork(*)
   !     .. Local Scalars ..
   INTEGER locdin, locil, lociu, locjl, locju, locl, locu
   !* FIRST EXECUTABLE STATEMENT  SSLUTI

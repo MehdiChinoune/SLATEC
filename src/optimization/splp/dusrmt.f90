@@ -1,5 +1,5 @@
 !** DUSRMT
-SUBROUTINE DUSRMT(I,J,Aij,Indcat,Prgopt,Dattrv,Iflag)
+SUBROUTINE DUSRMT(I,J,Aij,Indcat,Dattrv,Iflag)
   !>
   !  Subsidiary to DSPLP
   !***
@@ -24,8 +24,8 @@ SUBROUTINE DUSRMT(I,J,Aij,Indcat,Prgopt,Dattrv,Iflag)
   !   900328  Added TYPE section.  (WRB)
 
   INTEGER I, Indcat, J, l
-  REAL(8) :: Prgopt(*), Dattrv(*), Aij
-  INTEGER Iflag(*)
+  REAL(8) :: Dattrv(*), Aij
+  INTEGER Iflag(10)
   !
   !* FIRST EXECUTABLE STATEMENT  DUSRMT
   IF ( Iflag(1)==1 ) THEN

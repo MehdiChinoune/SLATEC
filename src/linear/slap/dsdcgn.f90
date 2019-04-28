@@ -242,7 +242,7 @@ SUBROUTINE DSDCGN(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
   END IF
   !
   !         Modify the SLAP matrix data structure to YSMP-Column.
-  CALL DS2Y(N,Nelt,Ia,Ja,A,Isym)
+  CALL DS2Y(N,Nelt,Ia,Ja,A)
   !
   !         Set up the work arrays.
   lociw = LOCIB

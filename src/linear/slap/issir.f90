@@ -1,5 +1,5 @@
 !** ISSIR
-INTEGER FUNCTION ISSIR(N,B,X,Nelt,Ia,Ja,A,Isym,MSOLVE,Itol,Tol,Itmax,Iter,&
+INTEGER FUNCTION ISSIR(N,B,X,MSOLVE,Itol,Tol,Iter,&
     Err,Ierr,Iunit,R,Z,Dz,Rwork,Iwork,Bnrm,Solnrm)
   !>
   !  Preconditioned Iterative Refinement Stop Test.
@@ -163,12 +163,18 @@ INTEGER FUNCTION ISSIR(N,B,X,Nelt,Ia,Ja,A,Isym,MSOLVE,Itol,Tol,Itmax,Iter,&
   !   921026  Changed 1.0E10 to R1MACH(2).  (FNF)
   USE SSLBLK, ONLY : SOLn
   USE service, ONLY : R1MACH
+  INTERFACE
+    SUBROUTINE MSOLVE(N,R,Z,Rwork,Iwork)
+      INTEGER :: N, Iwork(*)
+      REAL :: R(N), Z(N), Rwork(*)
+    END SUBROUTINE
+  END INTERFACE
   !     .. Scalar Arguments ..
   REAL Bnrm, Err, Solnrm, Tol
-  INTEGER Ierr, Isym, Iter, Itmax, Itol, Iunit, N, Nelt
+  INTEGER Ierr, Iter, Itol, Iunit, N
   !     .. Array Arguments ..
-  REAL A(Nelt), B(N), Dz(N), R(N), Rwork(*), X(N), Z(N)
-  INTEGER Ia(Nelt), Iwork(*), Ja(Nelt)
+  REAL B(N), Dz(N), R(N), Rwork(*), X(N), Z(N)
+  INTEGER Iwork(*)
   !     .. Subroutine Arguments ..
   EXTERNAL :: MSOLVE
   !     .. Local Scalars ..
@@ -183,7 +189,7 @@ INTEGER FUNCTION ISSIR(N,B,X,Nelt,Ia,Ja,A,Isym,MSOLVE,Itol,Tol,Itmax,Iter,&
     !                  -1              -1
     !         err = ||M  Residual||/||M  RightHandSide|| (2-Norms).
     IF ( Iter==0 ) THEN
-      CALL MSOLVE(N,B,Dz,Nelt,Ia,Ja,A,Isym,Rwork,Iwork)
+      CALL MSOLVE(N,B,Dz,Rwork,Iwork)
       Bnrm = SNRM2(N,Dz,1)
     END IF
     Err = SNRM2(N,Z,1)/Bnrm

@@ -1,5 +1,5 @@
 !** DDAWTS
-SUBROUTINE DDAWTS(Neq,Iwt,Rtol,Atol,Y,Wt,Rpar,Ipar)
+SUBROUTINE DDAWTS(Neq,Iwt,Rtol,Atol,Y,Wt)
   !>
   !  Set error weight vector for DDASSL.
   !***
@@ -28,8 +28,8 @@ SUBROUTINE DDAWTS(Neq,Iwt,Rtol,Atol,Y,Wt,Rpar,Ipar)
   !           cosmetic changes to prologue.  (FNF)
 
   !
-  INTEGER Neq, Iwt, Ipar(*)
-  REAL(8) :: Rtol(*), Atol(*), Y(*), Wt(*), Rpar(*)
+  INTEGER Neq, Iwt
+  REAL(8) :: Rtol(*), Atol(*), Y(*), Wt(*)
   !
   INTEGER i
   REAL(8) :: atoli, rtoli
