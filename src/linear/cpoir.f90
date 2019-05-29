@@ -118,8 +118,9 @@ SUBROUTINE CPOIR(A,Lda,N,V,Itask,Ind,Work)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   USE service, ONLY : R1MACH, XERMSG
   !
-  INTEGER Lda, N, Itask, Ind, info, j
-  COMPLEX A(Lda,*), V(*), Work(N,*)
+  INTEGER :: Lda, N, Itask, Ind
+  COMPLEX :: A(Lda,N), V(N), Work(N,N+1)
+  INTEGER :: info, j
   REAL xnorm, dnorm
   REAL(8) :: dr1, di1, dr2, di2
   CHARACTER(8) :: xern1, xern2

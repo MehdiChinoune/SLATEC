@@ -165,10 +165,13 @@ SUBROUTINE DQAGE(F,A,B,Epsabs,Epsrel,Key,Limit,Result,Abserr,Neval,Ier,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   USE service, ONLY : D1MACH
   !
-  REAL(8) :: A, Abserr, Alist(*), area, area1, area12, area2, a1, a2, B, Blist(*), b1, &
-    b2, defabs, defab1, defab2, Elist(*), epmach, Epsabs, Epsrel, errbnd, &
-    errmax, error1, error2, erro12, errsum, resabs, Result, Rlist(*), uflow
-  INTEGER Ier, Iord(*), iroff1, iroff2, k, Key, keyf, Last, Limit, maxerr, Neval, nrmax
+  INTEGER :: Ier, Key, Last, Limit, Neval
+  INTEGER :: Iord(Limit)
+  REAL(8) :: A, Abserr, B, Epsabs, Epsrel, Result
+  REAL(8) :: Alist(Limit), Blist(Limit), Elist(Limit), Rlist(Limit)
+  INTEGER :: iroff1, iroff2, k, keyf, maxerr, nrmax
+  REAL(8) :: area, area1, area12, area2, a1, a2, b1, b2, defabs, defab1, defab2, &
+    epmach, errbnd, errmax, error1, error2, erro12, errsum, resabs, uflow
   !
   REAL(8), EXTERNAL :: F
   !

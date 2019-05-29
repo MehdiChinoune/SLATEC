@@ -40,8 +40,10 @@ SUBROUTINE BESKES(Xnu,X,Nin,Bke)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   USE service, ONLY : XERMSG, R1MACH
-  REAL Bke(*), bknu1, direct, v, vend, vincr, X, Xnu
-  INTEGER i, iswtch, n, Nin
+  INTEGER :: Nin
+  REAL :: Bke(Nin), X, Xnu
+  INTEGER :: i, iswtch, n
+  REAL :: bknu1, direct, v, vend, vincr
   REAL :: alnbig = 0.
   !* FIRST EXECUTABLE STATEMENT  BESKES
   IF ( alnbig==0. ) alnbig = LOG(R1MACH(2))

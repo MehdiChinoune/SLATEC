@@ -40,13 +40,17 @@ SUBROUTINE DPLPCE(Mrelas,Nvars,Lmx,Lbm,Itlp,Itbrc,Ibasis,Imat,Ibrc,Ipr,&
   !   890606  Changed references from IPLOC to IDLOC.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
-  INTEGER i, ihi, il1, ilow, ipage, Itbrc, Itlp, iu1, j, &
-    key, l, Lbm, Lmx, lpg, Mrelas, n20002, n20012, n20016, n20023
-  INTEGER n20047, n20057, n20061, Nvars
-  INTEGER Ibasis(*), Imat(*), Ibrc(Lbm,2), Ipr(*), Iwr(*), Ind(*), Ibb(*)
-  REAL(8) :: Amat(*), Basmat(*), Csc(*), Wr(*), Ww(*), Primal(*), &
-    Erd(*), Erp(*), Eps, Erdnrm, factor, Gg, one, zero, ten, Tune
-  LOGICAL Singlr, Redbas, trans, pagepl
+  INTEGER :: Itbrc, Itlp, Lbm, Lmx, Mrelas, Nvars
+  REAL(8) :: Eps, Erdnrm, Gg, Tune
+  LOGICAL :: Singlr, Redbas
+  INTEGER :: Ibasis(Nvars+Mrelas), Imat(Lmx), Ibrc(Lbm,2), Ipr(2*Mrelas), &
+    Iwr(8*Mrelas), Ind(Nvars+Mrelas), Ibb(Nvars+Mrelas)
+  REAL(8) :: Amat(Lmx), Basmat(Lbm), Csc(Nvars), Wr(Mrelas), Ww(Mrelas), &
+    Primal(Nvars+Mrelas), Erd(Mrelas), Erp(Mrelas)
+  INTEGER :: i, ihi, il1, ilow, ipage, iu1, j, key, l, lpg, n20002, n20012, &
+    n20016, n20023, n20047, n20057, n20061
+  REAL(8) :: factor, one, zero, ten
+  LOGICAL :: trans, pagepl
   !* FIRST EXECUTABLE STATEMENT  DPLPCE
   zero = 0.D0
   one = 1.D0

@@ -44,8 +44,10 @@ REAL FUNCTION CSEVL(X,Cs,N)
   !           X to be slightly outside interval (-1,+1).  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   USE service, ONLY : XERMSG, R1MACH
-  INTEGER i, N, ni
-  REAL b0, b1, b2, Cs(*), twox, X
+  INTEGER :: N
+  REAL :: Cs(N), X
+  INTEGER :: i, ni
+  REAL :: b0, b1, b2, twox
   REAL, SAVE :: onepl
   LOGICAL :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  CSEVL

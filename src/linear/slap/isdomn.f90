@@ -193,8 +193,6 @@ INTEGER FUNCTION ISDOMN(N,B,X,MSOLVE,Nsave,Itol,Tol,&
   !     .. Array Arguments ..
   REAL(8) :: B(N), Dz(N), R(N), Rwork(*), X(N), Z(N)
   INTEGER Iwork(*)
-  !     .. Subroutine Arguments ..
-  EXTERNAL :: MSOLVE
   !     .. Local Scalars ..
   INTEGER i
   !* FIRST EXECUTABLE STATEMENT  ISDOMN

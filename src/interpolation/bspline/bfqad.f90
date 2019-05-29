@@ -73,9 +73,10 @@ SUBROUTINE BFQAD(F,T,Bcoef,N,K,Id,X1,X2,Tol,Quad,Ierr,Work)
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   USE service, ONLY : XERMSG, R1MACH
-  INTEGER inbv
-  INTEGER Id, Ierr, iflg, ilo, il1, il2, K, left, mflag, N, npk, np1
-  REAL a, aa, ans, b, bb, Bcoef(*), q, Quad, T(*), ta, tb, Tol, Work(*), wtol, X1, X2
+  INTEGER :: Id, Ierr, K, N
+  REAL :: Bcoef(N), Quad, T(N+K), Tol, Work(3*K), X1, X2
+  INTEGER :: inbv, iflg, ilo, il1, il2, left, mflag, npk, np1
+  REAL :: a, aa, ans, b, bb, q, ta, tb, wtol
   REAL, EXTERNAL :: F
   !* FIRST EXECUTABLE STATEMENT  BFQAD
   Ierr = 1

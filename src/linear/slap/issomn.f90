@@ -191,8 +191,6 @@ INTEGER FUNCTION ISSOMN(N,B,X,MSOLVE,Nsave,Itol,Tol,&
   !     .. Array Arguments ..
   REAL B(N), Dz(N), R(N), Rwork(*), X(N), Z(N)
   INTEGER Iwork(*)
-  !     .. Subroutine Arguments ..
-  EXTERNAL :: MSOLVE
   !     .. Local Scalars ..
   INTEGER i
   !* FIRST EXECUTABLE STATEMENT  ISSOMN

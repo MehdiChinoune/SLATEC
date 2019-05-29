@@ -35,8 +35,10 @@ SUBROUTINE DVECS(Ncomp,Lnfc,Yhp,Work,Iwork,Inhomo,Iflag)
   !   910722  Updated AUTHOR section.  (ALS)
   USE DML, ONLY : INDpvt, LNFcc => NFCc
   !
-  INTEGER idp, Iflag, Inhomo, Iwork(*), k, kp, Lnfc, Ncomp, niv
-  REAL(8) :: dum, Work(*), Yhp(Ncomp,*)
+  INTEGER :: Iflag, Inhomo, Iwork(*), Lnfc, Ncomp
+  REAL(8) :: Work(*), Yhp(:,:)
+  INTEGER :: idp, k, kp, niv
+  REAL(8) :: dum
   !* FIRST EXECUTABLE STATEMENT  DVECS
   IF ( Lnfc/=1 ) THEN
     niv = Lnfc
@@ -46,7 +48,7 @@ SUBROUTINE DVECS(Ncomp,Lnfc,Yhp,Work,Iwork,Inhomo,Iflag)
     idp = INDpvt
     INDpvt = 0
     CALL DMGSBV(Ncomp,Lnfc,Yhp,Ncomp,niv,Iflag,Work(1),Work(kp),Iwork(1),&
-      Inhomo,Yhp(1,Lnfc+1),Work(Lnfc+2),dum)
+      Inhomo,Yhp(:,Lnfc+1),Work(Lnfc+2),dum)
     Lnfc = Lnfc/2
     LNFcc = LNFcc/2
     INDpvt = idp

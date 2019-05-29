@@ -35,13 +35,17 @@ SUBROUTINE DPINCW(Mrelas,Nvars,Lmx,Lbm,Npp,Jstrt,Imat,Ibrc,Ipr,Iwr,&
   !   890606  Changed references from IPLOC to IDLOC.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
-  INTEGER i, ihi, il1, ilow, ipage, iu1, j, Jstrt, key, &
-    Lbm, Lmx, lpg, Mrelas, nnegrc, Npp, Nvars
-  INTEGER Imat(*), Ibrc(Lbm,2), Ipr(*), Iwr(*), Ind(*), Ibb(*)
-  REAL(8) :: Amat(*), Basmat(*), Csc(*), Wr(*), Ww(*), Rz(*), &
-    Rg(*), Costs(*), Colnrm(*), Duals(*), Costsc, &
-    Erdnrm, Dulnrm, Gg, one, rzj, scalr, zero, rcost, cnorm
-  LOGICAL Stpedg, pagepl, trans
+  INTEGER :: Jstrt, Lbm, Lmx, Mrelas, Npp, Nvars
+  REAL(8) :: Costsc, Erdnrm, Dulnrm, Gg
+  LOGICAL :: Stpedg
+  INTEGER :: Imat(Lmx), Ibrc(Lbm,2), Ipr(2*Mrelas), Iwr(8*Mrelas), &
+    Ind(Nvars+Mrelas), Ibb(Nvars+Mrelas)
+  REAL(8) :: Amat(Lmx), Basmat(Lbm), Csc(Nvars), Wr(Mrelas), Ww(Mrelas), &
+    Rz(Nvars+Mrelas), Rg(Nvars+Mrelas), Costs(Nvars), Colnrm(Nvars), &
+    Duals(Nvars+Mrelas)
+  INTEGER :: i, ihi, il1, ilow, ipage, iu1, j, key, lpg, nnegrc
+  REAL(8) :: one, rzj, scalr, zero, rcost, cnorm
+  LOGICAL :: pagepl, trans
   !* FIRST EXECUTABLE STATEMENT  DPINCW
   lpg = Lmx - (Nvars+4)
   zero = 0.D0

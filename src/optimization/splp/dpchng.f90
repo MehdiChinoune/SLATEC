@@ -58,9 +58,11 @@ SUBROUTINE DPCHNG(Ii,Xval,Iplace,Sx,Ix,Ircx)
   !   900328  Added TYPE section.  (WRB)
   !   910403  Updated AUTHOR and DESCRIPTION sections.  (WRB)
   USE service, ONLY : XERMSG
-  INTEGER i, iend, Ii, il, ilast, iopt, ipl, Iplace, Ircx, istart, &
-    Ix(*), ixlast, j, jj, jstart, k, key, ll, lmx, lpg, n20055, nerr, np
-  REAL(8) :: Sx(*), Xval, sxlast, sxval
+  INTEGER :: Ii, Iplace, Ircx, Ix(:)
+  REAL(8) :: Sx(:), Xval
+  INTEGER :: i, iend, il, ilast, iopt, ipl, istart, ixlast, j, jj, jstart, k, &
+    key, ll, lmx, lpg, n20055, nerr, np
+  REAL(8) :: sxlast, sxval
   REAL(8), PARAMETER :: zero = 0.D0, one = 1.D0
   !* FIRST EXECUTABLE STATEMENT  DPCHNG
   iopt = 1

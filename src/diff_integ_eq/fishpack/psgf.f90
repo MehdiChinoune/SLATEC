@@ -18,8 +18,10 @@ REAL FUNCTION PSGF(X,Iz,C,A,Bh)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
 
-  REAL A(*), Bh(*), C(*), dd, fsg, hsg, X
-  INTEGER Iz, j
+  INTEGER :: Iz
+  REAL :: X, A(Iz), Bh(Iz), C(Iz)
+  INTEGER :: j
+  REAL :: dd, fsg, hsg
   !* FIRST EXECUTABLE STATEMENT  PSGF
   fsg = 1.
   hsg = 1.

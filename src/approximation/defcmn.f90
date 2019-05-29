@@ -34,9 +34,10 @@ SUBROUTINE DEFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Mdein,Mdeout,&
   USE service, ONLY : XERMSG
   USE linear, ONLY : DBNDSL, DBNDAC
   USE data_handling, ONLY : DSORT
-  INTEGER Lw, Mdein, Mdeout, Mdg, Mdw, Nbkpt, Ndata, Nord
-  REAL(8) :: Bf(Nord,*), Bkpt(*), Bkptin(*), Coeff(*), G(Mdg,*), &
-    Ptemp(*), Sddata(*), W(Mdw,*), Xdata(*), Xtemp(*), Ydata(*)
+  INTEGER :: Lw, Mdein, Mdeout, Mdg, Mdw, Nbkpt, Ndata, Nord
+  REAL(8) :: Bf(Nord,Nord), Bkpt(Nbkpt), Bkptin(Nbkpt), Coeff(Nbkpt-Nord+1), &
+    G(Mdg,Nord+1), Ptemp(MAX(Nbkpt,Ndata)), Sddata(Ndata), W(Mdw,Nord+1), &
+    Xdata(Ndata), Xtemp(MAX(Nbkpt,Ndata)), Ydata(Ndata)
   !
   REAL(8) :: dummy(1), rnorm, xmax, xmin, xval
   INTEGER i, idata, ileft, intseq, ip, ir, irow, l, mt, n, nb, nordm1, nordp1, np1

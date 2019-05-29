@@ -206,11 +206,10 @@ SUBROUTINE CBLKTR(Iflg,Np,N,An,Bn,Cn,Mp,M,Am,Bm,Cm,Idimy,Y,Ierror,W)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   USE CCBLK, ONLY : K, IK, NM, NPP
   !
-  INTEGER Idimy, Ierror, Iflg, iw1, iw2, iw3, iwah, iwbh, iwd, i, iwu, iww, M, &
-    m2, Mp, N, nh, nl, Np
-  REAL :: An(N), Bn(N), Cn(N), W(*)
-  COMPLEX :: Am(M), Bm(M), Cm(M), Y(Idimy,N)
-  COMPLEX :: WC(100)
+  INTEGER :: Idimy, Ierror, Iflg, M, Mp, N, Np
+  REAL :: An(N), Bn(N), Cn(N), W(:)
+  COMPLEX :: Am(M), Bm(M), Cm(M), Y(Idimy,N), WC(100)
+  INTEGER :: iw1, iw2, iw3, iwah, iwbh, iwd, i, iwu, iww, m2, nh, nl
   !* FIRST EXECUTABLE STATEMENT  CBLKTR
   WC = [ ( CMPLX(W(i),W(i+1)), i=1,199,2 ) ]
   NM = N
@@ -259,17 +258,19 @@ SUBROUTINE CBLKTR(Iflg,Np,N,An,Bn,Cn,Mp,M,Am,Bm,Cm,Idimy,Y,Ierror,W)
           iww = iwd + m2
           iwu = iww + m2
           IF ( Iflg==0 ) THEN
-            CALL CCMPB(Ierror,An,Bn,Cn,W(2),W(iwah),W(iwbh))
+            CALL CCMPB(Ierror,An,Bn,Cn,W(2:iwah),W(iwah:iwbh-1),W(iwbh:))
           ELSEIF ( Mp/=0 ) THEN
             !
             ! SUBROUTINE CBLKT1 SOLVES THE LINEAR SYSTEM
             !
-            CALL CBLKT1(An,Cn,M,Am,Bm,Cm,Idimy,Y,W(2),Wc(iw1/2),Wc(iw2/2),&
-              Wc(iw3/2),Wc(iwd),Wc(iww),Wc(iwu),PROC,CPROC)
+            CALL CBLKT1(An,Cn,M,Am,Bm,Cm,Idimy,Y,W(2:iw1/2-1),Wc(iw1/2:iw2/2-1),&
+              Wc(iw2/2:iw3/2-1),Wc(iw3/2:iwd-1),Wc(iwd:iww-1),Wc(iww:iwu-1),&
+              Wc(iwu:),PROC,CPROC)
             W(1:200) = [ ( [REAL(Wc(i)),AIMAG(Wc(i))], i=1,100 ) ]
           ELSE
-            CALL CBLKT1(An,Cn,M,Am,Bm,Cm,Idimy,Y,W(2),Wc(iw1/2),Wc(iw2/2),&
-              Wc(iw3/2),Wc(iwd),Wc(iww),Wc(iwu),PROCP,CPROCP)
+            CALL CBLKT1(An,Cn,M,Am,Bm,Cm,Idimy,Y,W(2:iw1/2-1),Wc(iw1/2:iw2/2-1),&
+              Wc(iw2/2:iw3/2-1),Wc(iw3/2:iwd-1),Wc(iwd:iww-1),Wc(iww:iwu-1),&
+              Wc(iwu:),PROCP,CPROCP)
             W(1:200) = [ ( [REAL(Wc(i)),AIMAG(Wc(i))], i=1,100 ) ]
           END IF
         END IF

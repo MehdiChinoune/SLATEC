@@ -296,11 +296,14 @@ SUBROUTINE DDRIV1(N,T,Y,F,Tout,Mstate,Eps,Work,Lenw,Ierflg)
   !   900329  Initial submission to SLATEC.
   USE service, ONLY : XERMSG, D1MACH
   EXTERNAL :: F
-  REAL(8) :: Eps, hmax, T, Tout, Work(*), Y(*)
-  INTEGER i, Ierflg, leniw, Lenw, lenwcm, lnwchk, ml, Mstate, mu, N, nde, nstate, ntask
+  INTEGER :: Ierflg, Lenw, Mstate, N
+  REAL(8) :: Eps, T, Tout
+  REAL(8) :: Work(Lenw), Y(N+1)
+  INTEGER :: i, leniw, lenwcm, lnwchk, ml, mu, nde, nstate, ntask
+  REAL(8) :: hmax
+  CHARACTER(8) :: intgr1
   INTEGER, PARAMETER :: MXN = 200, IDLIW = 50
-  INTEGER iwork(IDLIW+MXN)
-  CHARACTER intgr1*8
+  INTEGER :: iwork(IDLIW+MXN)
   INTEGER, PARAMETER :: NROOT = 0, IERROR = 2, MINT = 2, MITER = 2, IMPL = 0, &
     MXORD = 5, MXSTEP = 1000
   REAL(8), PARAMETER :: ewtcom(1)  = 1.D0

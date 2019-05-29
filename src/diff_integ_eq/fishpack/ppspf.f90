@@ -18,8 +18,10 @@ REAL FUNCTION PPSPF(X,Iz,C,A,Bh)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
 
-  REAL A(*), Bh(*), C(*), summ, X
-  INTEGER Iz, j
+  INTEGER :: Iz
+  REAL :: X, A(Iz), Bh(Iz), C(Iz)
+  INTEGER :: j
+  REAL :: summ
   !* FIRST EXECUTABLE STATEMENT  PPSPF
   summ = 0.
   DO j = 1, Iz

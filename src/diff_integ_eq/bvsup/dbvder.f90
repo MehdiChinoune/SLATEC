@@ -62,8 +62,8 @@ SUBROUTINE DBVDER(X,Y,Yp,G)
   !   910722  Updated AUTHOR section.  (ALS)
   !   920618  Minor restructuring of code.  (RWC, WRB)
   USE DML, ONLY : NOFst, C, XSAv, IGOfx, INHomo, IVP, NCOmp, NFC
-  INTEGER j, k, l, na
-  REAL(8) :: G(*), X, Y(*), Yp(*)
+  REAL(8) :: X, G(*), Y(*), Yp(*)
+  INTEGER :: j, k, l, na
   !- *********************************************************************
   !
   !* FIRST EXECUTABLE STATEMENT  DBVDER

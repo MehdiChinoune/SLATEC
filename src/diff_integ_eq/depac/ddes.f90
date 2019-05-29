@@ -34,17 +34,19 @@ SUBROUTINE DDES(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Ypout,Yp,Yy,Wt,P,Phi,&
   !   910722  Updated AUTHOR section.  (ALS)
   USE service, ONLY : XERMSG, D1MACH
   !
-  INTEGER Idid, Info(15), Init, Ipar(*), Iquit, Iv(10), Ivc, k, Kgi, Kle4, &
-    Kold, Kord, Kprev, Ksteps, l, ltol, natolp, Neq, nrtolp, Ns
-  REAL(8) :: a, absdel, Alpha(12), Atol(*), Beta(12), del, &
-    Delsgn, dt, Eps, Fouru, G(13), Gi(11), H, ha, Hold, P(*), &
-    Phi(Neq,16), Psi(12), Rpar(*), Rtol(*), Sig(13), T, Told, Tout, Tstop, &
-    Twou, u, V(12), W(12), Wt(*), X, Xold, Y(*), Yp(*), Ypout(*), Yy(*)
-  LOGICAL Stiff, crash, Start, Phase1, Nornd, Intout
+  INTEGER :: Idid, Init, Iquit, Ivc, Kgi, Kle4, Kold, Kord, Kprev, Ksteps, Neq, Ns
+  INTEGER :: Info(15), Ipar(:), Iv(10)
+  REAL(8) :: Delsgn, Eps, Fouru, H, Hold, T, Told, Tout, Tstop, Twou, X, Xold
+  REAL(8) :: Alpha(12), Atol(:), Beta(12), G(13), Gi(11), P(Neq), Phi(Neq,16), &
+    Psi(12), Rpar(:), Rtol(:), Sig(13), V(12), W(12), Wt(Neq), Y(Neq), Yp(Neq), &
+    Ypout(Neq), Yy(Neq)
+  LOGICAL :: Stiff, Start, Phase1, Nornd, Intout
+  EXTERNAL :: DF
+  INTEGER :: k, l, ltol, natolp, nrtolp
+  REAL(8) :: a, absdel, del, dt, ha, u
+  LOGICAL :: crash
   CHARACTER(8) :: xern1
   CHARACTER(16) :: xern3, xern4
-  !
-  EXTERNAL :: DF
   !
   !.......................................................................
   !

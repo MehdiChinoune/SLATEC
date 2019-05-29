@@ -209,8 +209,6 @@ INTEGER FUNCTION ISSCGS(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,&
   !     .. Array Arguments ..
   REAL A(Nelt), B(N), R(N), Rwork(*), V2(N), X(N)
   INTEGER Ia(Nelt), Iwork(*), Ja(Nelt)
-  !     .. Subroutine Arguments ..
-  EXTERNAL :: MATVEC, MSOLVE
   !     .. Local Scalars ..
   INTEGER i
   !* FIRST EXECUTABLE STATEMENT  ISSCGS

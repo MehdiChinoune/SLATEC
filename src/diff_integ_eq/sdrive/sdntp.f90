@@ -23,8 +23,11 @@ SUBROUTINE SDNTP(H,K,N,Nq,T,Tout,Yh,Y)
   !   790601  DATE WRITTEN
   !   900329  Initial submission to SLATEC.
 
-  INTEGER i, j, jj, K, kk, kused, N, Nq
-  REAL factor, H, r, T, Tout, Y(*), Yh(N,*)
+  INTEGER :: K, N, Nq
+  REAL :: H, T, Tout
+  REAL :: Y(N), Yh(N,Nq+1)
+  INTEGER :: i, j, jj, kk, kused
+  REAL :: factor, r
   !* FIRST EXECUTABLE STATEMENT  SDNTP
   IF ( K==0 ) THEN
     DO i = 1, N

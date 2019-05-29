@@ -33,13 +33,17 @@ SUBROUTINE SPINIT(Mrelas,Nvars,Costs,Bl,Bu,Ind,Primal,Amat,Csc,&
   !   890605  Removed unreferenced labels.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
-  INTEGER i, ip, iplace, j, Mrelas, n20007, n20019, n20028, &
-    n20041, n20056, n20066, n20070, n20074, n20078, Nvars
-  REAL aij, Amat(*), Anorm, Bl(*), Bu(*), cmax, Colnrm(*), Costs(*), &
-    Costsc, Csc(*), csum, Primal(*), Rhs(*), Rhsnrm, scalr, testsc, Xlamda
+  INTEGER :: Mrelas, Nvars
+  REAL :: Anorm, Costsc, Rhsnrm, Xlamda
+  INTEGER :: Ibasis(Nvars+Mrelas), Ibb(Nvars+Mrelas), Imat(:), Ind(Nvars+Mrelas)
+  REAL :: Amat(:), Bl(Nvars+Mrelas), Bu(Nvars+Mrelas), Colnrm(Nvars), Costs(Nvars), &
+    Csc(Nvars), Primal(Nvars+Mrelas), Rhs(Mrelas)
+  LOGICAL :: Lopt(8)
+  INTEGER :: i, ip, iplace, j, n20007, n20019, n20028, n20041, n20056, n20066, &
+    n20070, n20074, n20078
+  REAL :: aij, cmax, csum, scalr, testsc
+  LOGICAL :: contin, usrbas, colscp, cstscp, minprb
   REAL, PARAMETER :: zero = 0., one = 1.
-  INTEGER Ibasis(*), Ibb(*), Imat(*), Ind(*)
-  LOGICAL contin, usrbas, colscp, cstscp, minprb, Lopt(8)
   !
   !* FIRST EXECUTABLE STATEMENT  SPINIT
   contin = Lopt(1)

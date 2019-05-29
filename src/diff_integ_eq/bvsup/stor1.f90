@@ -32,8 +32,9 @@ SUBROUTINE STOR1(U,Yh,V,Yp,Ntemp,Ndisk,Ntape)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
   USE ML, ONLY : C, INHomo, NCOmp, NFC
-  REAL U(*), V(*), Yh(*), Yp(*)
-  INTEGER j, nctnf, Ndisk, Ntape, Ntemp
+  INTEGER :: Ndisk, Ntape, Ntemp
+  REAL :: U(:), V(:), Yh(:), Yp(:)
+  INTEGER :: j, nctnf
   !
   !- *********************************************************************
   !

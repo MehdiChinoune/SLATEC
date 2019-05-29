@@ -199,10 +199,10 @@ SUBROUTINE BNDACC(G,Mdg,Nb,Ip,Ir,Mt,Jt)
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   USE service, ONLY : XERMSG
-  INTEGER i, ie, ig, ig1, ig2, iopt, Ip, Ir, j, jg, Jt, k, kh, &
-    l, lp1, Mdg, mh, Mt, mu, Nb
-  REAL G(Mdg,*), rho, zero
-  INTEGER nbp1, nerr
+  INTEGER :: Ip, Ir, Jt, Mdg, Mt, Nb
+  REAL :: G(Mdg,Nb+1)
+  INTEGER :: i, ie, ig, ig1, ig2, iopt, j, jg, k, kh, l, lp1, mh, mu, nbp1, nerr
+  REAL :: rho, zero
   !* FIRST EXECUTABLE STATEMENT  BNDACC
   zero = 0.
   !
@@ -213,11 +213,11 @@ SUBROUTINE BNDACC(G,Mdg,Nb,Ip,Ir,Mt,Jt)
   !
   IF ( .NOT.Mdg<Ir ) THEN
     !
-    !                                             ALG. STEP 5
+    !  ALG. STEP 5
     IF ( Jt/=Ip ) THEN
-      !                                             ALG. STEPS 6-7
+      !  ALG. STEPS 6-7
       IF ( Jt>Ir ) THEN
-        !                                             ALG. STEPS 8-9
+        !  ALG. STEPS 8-9
         DO i = 1, Mt
           ig1 = Jt + Mt - i
           ig2 = Ir + Mt - i
@@ -225,7 +225,7 @@ SUBROUTINE BNDACC(G,Mdg,Nb,Ip,Ir,Mt,Jt)
             G(ig1,j) = G(ig2,j)
           END DO
         END DO
-        !                                             ALG. STEP 10
+        !  ALG. STEP 10
         ie = Jt - Ir
         DO i = 1, ie
           ig = Ir + i - 1
@@ -233,45 +233,46 @@ SUBROUTINE BNDACC(G,Mdg,Nb,Ip,Ir,Mt,Jt)
             G(ig,j) = zero
           END DO
         END DO
-        !                                             ALG. STEP 11
+        !  ALG. STEP 11
         Ir = Jt
       END IF
-      !                                             ALG. STEP 12
+      !  ALG. STEP 12
       mu = MIN(Nb-1,Ir-Ip-1)
       IF ( mu/=0 ) THEN
-        !                                             ALG. STEP 13
+        !  ALG. STEP 13
         DO l = 1, mu
-          !                                             ALG. STEP 14
+          !  ALG. STEP 14
           k = MIN(l,Jt-Ip)
-          !                                             ALG. STEP 15
+          !  ALG. STEP 15
           lp1 = l + 1
           ig = Ip + l
           DO i = lp1, Nb
             jg = i - k
             G(ig,jg) = G(ig,i)
           END DO
-          !                                             ALG. STEP 16
+          !  ALG. STEP 16
           DO i = 1, k
             jg = nbp1 - i
             G(ig,jg) = zero
           END DO
         END DO
       END IF
-      !                                             ALG. STEP 17
+      !  ALG. STEP 17
       Ip = Jt
     END IF
-    !                                             ALG. STEPS 18-19
+    !  ALG. STEPS 18-19
     mh = Ir + Mt - Ip
     kh = MIN(nbp1,mh)
-    !                                             ALG. STEP 20
+    !  ALG. STEP 20
     DO i = 1, kh
+      IF(i==nbp1) CYCLE
       CALL H12(1,i,MAX(i+1,Ir-Ip+1),mh,G(Ip,i),1,rho,G(Ip,i+1),1,Mdg,nbp1-i)
     END DO
-    !                                             ALG. STEP 21
+    !  ALG. STEP 21
     Ir = Ip + kh
-    !                                             ALG. STEP 22
+    !  ALG. STEP 22
     IF ( kh>=nbp1 ) THEN
-      !                                             ALG. STEP 23
+      !  ALG. STEP 23
       DO i = 1, Nb
         G(Ir-1,i) = zero
       END DO
@@ -282,6 +283,6 @@ SUBROUTINE BNDACC(G,Mdg,Nb,Ip,Ir,Mt,Jt)
     CALL XERMSG('SLATEC','BNDACC','MDG.LT.IR, PROBABLE ERROR.',nerr,iopt)
     RETURN
   END IF
-  !                                             ALG. STEP 24
-  !                                             ALG. STEP 25
+  !  ALG. STEP 24
+  !  ALG. STEP 25
 END SUBROUTINE BNDACC

@@ -381,11 +381,11 @@ SUBROUTINE DFC(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkpt,Nconst,Xconst,&
   !           DEFC, FC, and DFC look as much the same as possible.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   USE service, ONLY : XERMSG
-  REAL(8) :: Bkpt(*), Coeff(*), Sddata(*), W(*), Xconst(*), &
-    Xdata(*), Yconst(*), Ydata(*)
-  INTEGER Iw(*), Mode, Nbkpt, Nconst, Ndata, Nderiv(*), Nord
+  INTEGER :: Mode, Nbkpt, Nconst, Ndata, Nord, Nderiv(Nconst), Iw(:)
+  REAL(8) :: Bkpt(Nbkpt), Coeff(:), Sddata(Ndata), W(*), Xconst(Nconst), &
+    Xdata(Ndata), Yconst(Nconst), Ydata(Ndata)
   !
-  INTEGER i1, i2, i3, i4, i5, i6, i7, mdg, mdw
+  INTEGER :: i1, i2, i3, i4, i5, i6, i7, mdg, mdw
   !
   !* FIRST EXECUTABLE STATEMENT  DFC
   IF ( Nord<1.OR.Nord>20 ) THEN

@@ -585,17 +585,16 @@ SUBROUTINE DDEABM(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,&
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   USE service, ONLY : XERMSG
-  INTEGER igi, ixold
-  INTEGER ialpha, ibeta, idelsn, Idid, ifouru, ig, ihold, Info(15), ip, &
-    Ipar(*), iphi, ipsi, isig, itold, itstar, itwou, iv, iw, &
-    Iwork(*), iwt, iyp, iypout, iyy, Liw, Lrw, Neq
-  REAL(8) :: Atol(*), Rpar(*), Rtol(*), Rwork(*), T, Tout, Y(*)
+  INTEGER :: Idid, Liw, Lrw, Neq
+  INTEGER :: Info(15), Ipar(:), Iwork(Liw)
+  REAL(8) :: T, Tout
+  REAL(8) :: Atol(:), Rpar(:), Rtol(:), Rwork(Lrw), Y(Neq)
+  EXTERNAL :: DF
+  INTEGER :: igi, ixold, ialpha, ibeta, idelsn, ifouru, ig, ihold, ip, iphi, &
+    ipsi, isig, itold, itstar, itwou, iv, iw, iwt, iyp, iypout, iyy
   LOGICAL start, phase1, nornd, stiff, intout
-  !
   CHARACTER(8) :: xern1
   CHARACTER(16) :: xern3
-  !
-  EXTERNAL :: DF
   !
   !     CHECK FOR AN APPARENT INFINITE LOOP
   !

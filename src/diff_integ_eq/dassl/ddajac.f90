@@ -60,8 +60,10 @@ SUBROUTINE DDAJAC(Neq,X,Y,Yprime,Delta,Cj,H,Ier,Wt,E,Wm,Iwm,RES,Ires,&
   !   901101  Corrected PURPOSE.  (FNF)
   USE linear, ONLY : DGBFA, DGEFA
   !
-  INTEGER Neq, Ier, Iwm(*), Ires, Ipar(*), Ntemp
-  REAL(8) :: X, Y(*), Yprime(*), Delta(*), Cj, H, Wt(*), E(*), Wm(*), Uround, Rpar(*)
+  INTEGER :: Neq, Ier, Ires
+  INTEGER :: Iwm(:), Ipar(:), Ntemp
+  REAL(8) :: X, Cj, H, Uround
+  REAL(8) :: Y(Neq), Yprime(Neq), Delta(:), Wt(:), E(:), Wm(:), Rpar(:)
   EXTERNAL :: RES, JAC
   !
   INTEGER i, i1, i2, ii, ipsave, isave, j, k, l, lenpd, mba, mband, meb1, &
@@ -122,7 +124,7 @@ SUBROUTINE DDAJAC(Neq,X,Y,Yprime,Delta,Cj,H,Ier,Wt,E,Wm,Iwm,RES,Ires,&
       !
       !
       !     DO LU DECOMPOSITION OF BANDED PD
-      CALL DGBFA(Wm(NPD),meband,Neq,Iwm(LML),Iwm(LMU),Iwm(LIPVT),Ier)
+      CALL DGBFA(Wm,meband,Neq,Iwm(LML),Iwm(LMU),Iwm(LIPVT:),Ier)
       RETURN
     CASE (5)
       !
@@ -166,7 +168,7 @@ SUBROUTINE DDAJAC(Neq,X,Y,Yprime,Delta,Cj,H,Ier,Wt,E,Wm,Iwm,RES,Ires,&
           END DO
         END DO
       END DO
-      CALL DGBFA(Wm(NPD),meband,Neq,Iwm(LML),Iwm(LMU),Iwm(LIPVT),Ier)
+      CALL DGBFA(Wm,meband,Neq,Iwm(LML),Iwm(LMU),Iwm(LIPVT:),Ier)
       RETURN
     CASE DEFAULT
       !
@@ -181,7 +183,7 @@ SUBROUTINE DDAJAC(Neq,X,Y,Yprime,Delta,Cj,H,Ier,Wt,E,Wm,Iwm,RES,Ires,&
   !
   !
   !     DO DENSE-MATRIX LU DECOMPOSITION ON PD
-  CALL DGEFA(Wm(NPD),Neq,Neq,Iwm(LIPVT),Ier)
+  CALL DGEFA(Wm,Neq,Neq,Iwm(LIPVT:),Ier)
   RETURN
   !------END OF SUBROUTINE DDAJAC------
   RETURN

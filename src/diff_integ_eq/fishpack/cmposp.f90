@@ -25,9 +25,11 @@ SUBROUTINE CMPOSP(M,N,A,Bb,C,Q,Idimq,B,B2,B3,W,W2,W3,D,Tcos,P)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
 
-  INTEGER i, Idimq, ipstor, j, lh, M, mr, N, nr, nrm1, nrmj, nrpj
-  COMPLEX A(*), Bb(*), C(*), Q(Idimq,*), B(*), B2(*), B3(*), W(*), W2(*), &
-    W3(*), D(*), Tcos(*), P(*), s, t
+  INTEGER :: Idimq, M, N
+  COMPLEX :: A(M), Bb(M), C(M), Q(Idimq,N), B(M), B2(M), B3(M), W(M), W2(M), &
+    W3(M), D(M), Tcos(4*N), P(:)
+  INTEGER :: i, ipstor, j, lh, mr, nr, nrm1, nrmj, nrpj
+  COMPLEX :: s, t
   !* FIRST EXECUTABLE STATEMENT  CMPOSP
   mr = M
   nr = (N+1)/2

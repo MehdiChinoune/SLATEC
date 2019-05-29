@@ -26,8 +26,10 @@ SUBROUTINE ORTHOG(Usol,Idmn,Zn,Zm,Pertrb)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   USE SPLPCM, ONLY : IS, JS, MS, NS
-  INTEGER i, Idmn, ifnl, ii, istr, j, jfnl, jj, jstr
-  REAL ete, Pertrb, Usol(Idmn,*), ute, Zm(*), Zn(*)
+  INTEGER :: Idmn
+  REAL :: Pertrb, Usol(Idmn,NS), Zm(MS), Zn(NS)
+  INTEGER :: i, ifnl, ii, istr, j, jfnl, jj, jstr
+  REAL :: ete, ute
   !* FIRST EXECUTABLE STATEMENT  ORTHOG
   istr = IS
   ifnl = MS

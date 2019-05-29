@@ -25,10 +25,11 @@ SUBROUTINE DBDIFF(L,V)
   !   820601  DATE WRITTEN
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
-  
+
   !
-  INTEGER i, j, k, L
-  REAL(8) :: V(*)
+  INTEGER :: L
+  REAL(8) :: V(L)
+  INTEGER :: i, j, k
   !* FIRST EXECUTABLE STATEMENT  DBDIFF
   IF ( L==1 ) RETURN
   DO j = 2, L

@@ -374,11 +374,12 @@ SUBROUTINE HWSSSP(Ts,Tf,M,Mbdcnd,Bdts,Bdtf,Ps,Pf,N,Nbdcnd,Bdps,Bdpf,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
-  INTEGER Idimf, Ierror, M, Mbdcnd, N, Nbdcnd
-  REAL Bdpf(*), Bdps(*), Bdtf(*), Bdts(*), Elmbda, F(Idimf,*), Pertrb, Pf, pi, &
-    Ps, Tf, tpi, Ts, W(*)
+  INTEGER :: Idimf, Ierror, M, Mbdcnd, N, Nbdcnd
+  REAL ::Elmbda, Pertrb, Pf, Ps, Tf, Ts
+  REAL :: Bdpf(M+1), Bdps(M+1), Bdtf(N+1), Bdts(N+1), F(Idimf,N+1), W(:)
+  REAL :: tpi
+  REAL, PARAMETER :: pi = 3.14159265358979
   !* FIRST EXECUTABLE STATEMENT  HWSSSP
-  pi = PIMACH()
   tpi = 2.*pi
   Ierror = 0
   IF ( Ts<0..OR.Tf>pi ) Ierror = 1
@@ -398,6 +399,7 @@ SUBROUTINE HWSSSP(Ts,Tf,M,Mbdcnd,Bdts,Bdtf,Ps,Pf,N,Nbdcnd,Bdps,Bdpf,&
   IF ( Mbdcnd>=7.AND.Tf/=pi ) Ierror = 15
   IF ( Ierror/=0.AND.Ierror/=9 ) RETURN
   CALL HWSSS1(Ts,Tf,M,Mbdcnd,Bdts,Bdtf,Ps,Pf,N,Nbdcnd,Bdps,Bdpf,Elmbda,F,&
-    Idimf,Pertrb,W,W(M+2),W(2*M+3),W(3*M+4),W(4*M+5),W(5*M+6),W(6*M+7))
+    Idimf,Pertrb,W,W(M+2:2*M+2),W(2*M+3:3*M+3),W(3*M+4:4*M+4),W(4*M+5:5*M+5),&
+    W(5*M+6:6*M+6),W(6*M+7:))
   W(1) = W(6*M+7) + 6*(M+1)
 END SUBROUTINE HWSSSP

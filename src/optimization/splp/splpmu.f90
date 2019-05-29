@@ -46,15 +46,17 @@ SUBROUTINE SPLPMU(Mrelas,Nvars,Lmx,Lbm,Nredc,Info,Ienter,Ileave,Iopt,Npp,&
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900328  Added TYPE section.  (WRB)
   USE service, ONLY : XERMSG
-  INTEGER i, ibas, Ienter, ihi, il1, Ileave, ilow, Info, Iopt, ipage, iplace, &
-    iu1, j, Jstrt, k, key, Lbm, Lmx, lpg, Mrelas, n20002, n20018, n20121, &
-    nerr, nnegrc, Npp, npr001, npr003, Nredc, Nvars
-  INTEGER Ibasis(*), Imat(*), Ibrc(Lbm,2), Ipr(*), Iwr(*), Ind(*), Ibb(*)
-  REAL :: aij, alpha, Anorm, Costsc, Erdnrm, Dulnrm, Eps, gama, Gg, &
-    gq, Rprnrm, rzj, scalr, Theta, Uu, wp, Xlamda, Rhsnrm, cnorm
-  REAL :: Amat(*), Basmat(*), Csc(*), Wr(*), Rprim(*), Ww(*), Bu(*), Bl(*), &
-    Rhs(*), Erd(*), Erp(*), Rz(*), Rg(*), Costs(*), Primal(*), Duals(*), &
-    Colnrm(*), rcost
+  INTEGER :: Ienter, Ileave, Info, Iopt, Jstrt, Lbm, Lmx, Mrelas, Npp, Nredc, Nvars
+  REAL :: Anorm, Costsc, Erdnrm, Dulnrm, Eps, Gg, Rprnrm, Theta, Uu, Xlamda, Rhsnrm
+  INTEGER :: Ibasis(Nvars+Mrelas), Imat(Lmx), Ibrc(Lbm,2), Ipr(2*Mrelas), &
+    Iwr(8*Mrelas), Ind(Nvars+Mrelas), Ibb(Nvars+Mrelas)
+  REAL :: Amat(Lmx), Basmat(Lbm), Csc(Nvars), Wr(Mrelas), Rprim(Mrelas), &
+    Ww(Mrelas), Bu(Nvars+Mrelas), Bl(Nvars+Mrelas), Rhs(Mrelas), Erd(Mrelas), &
+    Erp(Mrelas), Rz(Nvars+Mrelas), Rg(Nvars+Mrelas), Costs(Nvars), &
+    Primal(Nvars+Mrelas), Duals(Nvars+Mrelas), Colnrm(Nvars)
+  INTEGER :: i, ibas, ihi, il1, ilow, ipage, iplace, iu1, j, k, key, lpg, n20002, &
+    n20018, n20121, nerr, nnegrc, npr001, npr003
+  REAL :: aij, alpha, gama, gq, rzj, scalr, wp, cnorm, rcost
   REAL, PARAMETER :: zero = 0.E0, one = 1.E0, two = 2.E0
   LOGICAL Singlr, Redbas, pagepl, trans, Zerolv, Stpedg
   !

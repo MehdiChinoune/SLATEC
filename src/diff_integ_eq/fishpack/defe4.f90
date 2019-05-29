@@ -39,9 +39,11 @@ SUBROUTINE DEFE4(COFX,Idmn,Usol,Grhs)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   USE SPL4, ONLY : L, AIT, DLX, DLY, IS, JS, K, KSWx, KSWy, MS, NS
-  INTEGER i, Idmn, j
-  REAL ai, bi, ci, Grhs(Idmn,*), tx, ty, Usol(Idmn,*), uxxx, uxxxx, uyyy, uyyyy, xi
+  INTEGER :: Idmn
+  REAL :: Grhs(Idmn,NS), Usol(Idmn,NS)
   EXTERNAL :: COFX
+  INTEGER :: i, j
+  REAL :: ai, bi, ci, tx, ty, uxxx, uxxxx, uyyy, uyyyy, xi
   !* FIRST EXECUTABLE STATEMENT  DEFE4
   DO i = IS, MS
     xi = AIT + (i-1)*DLX

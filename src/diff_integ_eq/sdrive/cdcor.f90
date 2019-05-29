@@ -32,11 +32,12 @@ SUBROUTINE CDCOR(Dfdy,El,FA,H,Ierror,Impl,Ipvt,Matdim,Miter,Ml,Mu,N,Nde,&
   !   790601  DATE WRITTEN
   !   900329  Initial submission to SLATEC.
   USE linear, ONLY : SCNRM2, CGBSL, CGESL
-  INTEGER i, Ierror, iflag, Impl, j, Jstate, Matdim, Miter, Ml, Mu, mw, N, Nde, Nq
-  COMPLEX A(Matdim,*), Dfdy(Matdim,*), Save1(*), Save2(*), Y(*), Yh(N,*), Ywt(*)
-  REAL D, El(13,12), H, T
-  INTEGER Ipvt(*)
-  LOGICAL Evalfa
+  INTEGER :: Ierror, Impl, Jstate, Matdim, Miter, Ml, Mu, N, Nde, Nq
+  INTEGER :: Ipvt(N)
+  REAL :: D, H, T, El(13,12)
+  COMPLEX :: A(Matdim,N), Dfdy(Matdim,N), Save1(N), Save2(N), Y(N), Yh(N,13), Ywt(N)
+  LOGICAL :: Evalfa
+  INTEGER :: i, iflag, j, mw
   !* FIRST EXECUTABLE STATEMENT  CDCOR
   IF ( Miter==0 ) THEN
     IF ( Ierror==1.OR.Ierror==5 ) THEN

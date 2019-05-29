@@ -32,8 +32,10 @@ SUBROUTINE SVECS(Ncomp,Lnfc,Yhp,Work,Iwork,Inhomo,Iflag)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
   USE ML, ONLY: INDpvt, LNFcc => NFCc
-  INTEGER idp, Iflag, Inhomo, Iwork(*), k, kp, Lnfc, Ncomp, niv
-  REAL dum, Work(*), Yhp(Ncomp,*)
+  INTEGER :: Iflag, Inhomo, Lnfc, Ncomp, Iwork(*)
+  REAL :: Work(*), Yhp(:,:)
+  INTEGER :: idp, k, kp, niv
+  REAL :: dum
   !* FIRST EXECUTABLE STATEMENT  SVECS
   IF ( Lnfc/=1 ) THEN
     niv = Lnfc
@@ -43,7 +45,7 @@ SUBROUTINE SVECS(Ncomp,Lnfc,Yhp,Work,Iwork,Inhomo,Iflag)
     idp = INDpvt
     INDpvt = 0
     CALL MGSBV(Ncomp,Lnfc,Yhp,Ncomp,niv,Iflag,Work(1),Work(kp),Iwork(1),&
-      Inhomo,Yhp(1,Lnfc+1),Work(Lnfc+2),dum)
+      Inhomo,Yhp(:,Lnfc+1),Work(Lnfc+2),dum)
     Lnfc = Lnfc/2
     LNFcc = LNFcc/2
     INDpvt = idp

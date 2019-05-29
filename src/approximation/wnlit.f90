@@ -35,14 +35,14 @@ SUBROUTINE WNLIT(W,Mdw,M,N,L,Ipivot,Itype,H,Scalee,Rnorm,Idope,Dope,Done)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   USE linear, ONLY : H12, SROTM, SROTMG, SSWAP
-  INTEGER Idope(*), Ipivot(*), Itype(*), L, M, Mdw, N
-  REAL Dope(*), H(*), Rnorm, Scalee(*), W(Mdw,*)
-  LOGICAL Done
+  INTEGER :: L, M, Mdw, N, Idope(3), Ipivot(N), Itype(M)
+  REAL :: Rnorm, Dope(3), H(N), Scalee(M), W(Mdw,M)
+  LOGICAL :: Done
   !
-  REAL alsq, amax, eanorm, factor, hbar, rn, sparam(5), t, tau
-  INTEGER i, i1, imax, ir, j, j1, jj, jp, krank, l1, lb, lend, &
+  INTEGER :: i, i1, imax, ir, j, j1, jj, jp, krank, l1, lb, lend, &
     me, mend, niv, nsoln
-  LOGICAL indep, recalc
+  REAL :: alsq, amax, eanorm, factor, hbar, rn, sparam(5), t, tau
+  LOGICAL :: indep, recalc
   !
   !* FIRST EXECUTABLE STATEMENT  WNLIT
   me = Idope(1)
@@ -79,7 +79,7 @@ SUBROUTINE WNLIT(W,Mdw,M,N,L,Ipivot,Itype,H,Scalee,Rnorm,Idope,Dope,Done)
       !        Perform column interchange.
       !        Test independence of incoming column.
       !
-      IF ( WNLT2(me,mend,ir,factor,tau,Scalee,W(1,i)) ) THEN
+      IF ( WNLT2(me,mend,ir,factor,tau,Scalee,W(:,i)) ) THEN
         !
         !           Eliminate I-th column below diagonal using modified Givens
         !           transformations applied to (A B).
@@ -166,7 +166,7 @@ SUBROUTINE WNLIT(W,Mdw,M,N,L,Ipivot,Itype,H,Scalee,Rnorm,Idope,Dope,Done)
       !           Test independence of incoming column.
       !           Remove any redundant or dependent equality constraints.
       !
-      IF ( .NOT.WNLT2(me,mend,ir,factor,tau,Scalee,W(1,i)) ) THEN
+      IF ( .NOT.WNLT2(me,mend,ir,factor,tau,Scalee,W(:,i)) ) THEN
         jj = ir
         DO ir = jj, me
           W(ir,1:N) = 0.E0

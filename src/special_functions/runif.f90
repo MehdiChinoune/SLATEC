@@ -62,8 +62,10 @@ REAL FUNCTION RUNIF(T,N)
   !   910819  Added EXTERNAL statement for RAND due to problem on IBM
   !           RS 6000.  (WRB)
 
-  REAL dummy, T(*)
-  INTEGER i, j, N
+  INTEGER :: N
+  REAL :: T(ABS(N)+1)
+  INTEGER i, j
+  REAL dummy
   REAL, SAVE :: floatn
   INTEGER :: nold = -1
   !* FIRST EXECUTABLE STATEMENT  RUNIF

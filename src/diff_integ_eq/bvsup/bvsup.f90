@@ -413,11 +413,14 @@ SUBROUTINE BVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
     NDIsk, MXNon, NEEdw, NFCc, NCOmpd => NCOmp, NEEdiw, NEQivd => NEQivp, NPS, NTP, &
     XBEg, XSAv, XENd, NFCd => NFC, NICd => NIC, NOPg, NXPtsd => NXPts, NTApe, KKKint
   USE service, ONLY : XERMSG
-  INTEGER Ndw, Neqivp, Nfc, Nic, nitemp, non, Nrowa, Nrowb, Nrowy, nrtemp, Iflag, &
-    Igofx, is, Iwork(*), j, k, kkkcoe, kkkcof, kkkg, kkks, kkksto, kkksud, &
-    kkksvc, kkku, kkkv, kkkws, kkkyhp, kpts, lllcof, lllip, llliws, lllsud, lllsvc, &
-    mxnoni, mxnonr, Ncomp, ndeq, Ndiw, Nxpts, nxptsm
-  REAL A(Nrowa,*), Ae, Alpha(*), B(Nrowb,*), Beta(*), Re, Work(*), Xpts(*), Y(Nrowy,*)
+  INTEGER :: Ndw, Neqivp, Nfc, Nic, Nrowa, Nrowb, Nrowy, Iflag, Igofx, Ncomp, &
+    Ndiw, Nxpts, Iwork(Ndiw)
+  REAL :: Ae, Re
+  REAL :: A(Nrowa,Ncomp), Alpha(:), B(Nrowb,Ncomp), Beta(Nxpts), Work(Ndw), &
+    Xpts(Nxpts), Y(Nrowy,Nxpts)
+  INTEGER :: nitemp, non, nrtemp, is, j, k, kkkcoe, kkkcof, kkkg, kkks, kkksto, &
+    kkksud, kkksvc, kkku, kkkv, kkkws, kkkyhp, kpts, lllcof, lllip, llliws, &
+    lllsud, lllsvc, mxnoni, mxnonr, ndeq, nxptsm
   CHARACTER(8) :: xern1, xern2, xern3, xern4
   !* FIRST EXECUTABLE STATEMENT  BVSUP
   CALL MACON

@@ -36,10 +36,11 @@ SUBROUTINE LA05ES(A,Irn,Ip,N,Iw,Reals)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   USE LA05DS, ONLY : LCOl, LROw, NCP
-  INTEGER ipi, j, k, kl, kn, N, nz
-  LOGICAL Reals
-  REAL A(*)
-  INTEGER Irn(*), Iw(*), Ip(*)
+  INTEGER :: N
+  LOGICAL :: Reals
+  INTEGER :: Irn(*), Iw(N), Ip(N)
+  REAL :: A(:)
+  INTEGER :: ipi, j, k, kl, kn, nz
   !* FIRST EXECUTABLE STATEMENT  LA05ES
   NCP = NCP + 1
   !     COMPRESS FILE OF POSITIVE INTEGERS. ENTRY J STARTS AT IRN(IP(J))

@@ -42,12 +42,15 @@ SUBROUTINE SDNTL(Eps,F,FA,Hmax,Hold,Impl,Jtask,Matdim,Maxord,Mint,Miter,&
   !   790601  DATE WRITTEN
   !   900329  Initial submission to SLATEC.
   USE linear, ONLY : SGBFA, SGBSL, SGEFA, SGESL
-  INTEGER i, iflag, Impl, info, Iswflg, Jstate, Jtask, Matdim, &
-    Maxord, Mint, Miter, Ml, Mntold, Mtrold, Mu, N, Nde, Nfe, Nq, Nwait
-  REAL A(Matdim,*), El(13,12), Eps, Fac(*), H, Hmax, Hold, oldl0, Rc, Rh, Rmax, &
-    Save1(*), Save2(*), summ, T, Tq(3,12), Trend, Uround, Y(*), Yh(N,*), Ywt(*)
-  INTEGER Ipvt(*)
-  LOGICAL Convrg, Ier
+  INTEGER :: Impl, Iswflg, Jstate, Jtask, Matdim, Maxord, Mint, Miter, Ml, &
+    Mntold, Mtrold, Mu, N, Nde, Nfe, Nq, Nwait
+  INTEGER :: Ipvt(N)
+  REAL :: Eps, H, Hmax, Hold, Rc, Rh, Rmax, T, Trend, Uround
+  REAL :: A(Matdim,N), El(13,12), Fac(N), Save1(N), Save2(N), Tq(3,12), Y(N), &
+    Yh(N,13), Ywt(N)
+  LOGICAL :: Convrg, Ier
+  INTEGER :: i, iflag, info
+  REAL :: oldl0, summ
   REAL, PARAMETER :: RMINIT = 10000.E0
   !* FIRST EXECUTABLE STATEMENT  SDNTL
   Ier = .FALSE.

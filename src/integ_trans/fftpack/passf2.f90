@@ -22,8 +22,10 @@ SUBROUTINE PASSF2(Ido,L1,Cc,Ch,Wa1)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
 
-  INTEGER i, Ido, k, L1
-  REAL Cc(Ido,2,*), Ch(Ido,L1,2), ti2, tr2, Wa1(*)
+  INTEGER :: Ido, L1
+  REAL :: Cc(Ido,2,L1), Ch(Ido,L1,2), Wa1(Ido)
+  INTEGER :: i, k
+  REAL :: ti2, tr2
   !* FIRST EXECUTABLE STATEMENT  PASSF2
   IF ( Ido<=2 ) THEN
     DO k = 1, L1

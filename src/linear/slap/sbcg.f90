@@ -293,7 +293,7 @@ SUBROUTINE SBCG(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MTTVEC,MSOLVE,MTSOLV,Itol,&
   REAL A(Nelt), B(N), Dz(N), P(N), Pp(N), R(N), Rr(N), Rwork(*), X(N), Z(N), Zz(N)
   INTEGER Ia(Nelt), Iwork(*), Ja(Nelt)
   !     .. Subroutine Arguments ..
-  EXTERNAL :: MATVEC, MSOLVE, MTSOLV, MTTVEC
+  EXTERNAL :: MTTVEC
   !     .. Local Scalars ..
   REAL ak, akden, bk, bkden, bknum, bnrm, fuzz, solnrm, tolmin
   INTEGER i, k

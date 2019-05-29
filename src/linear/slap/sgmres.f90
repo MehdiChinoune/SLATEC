@@ -411,8 +411,6 @@ SUBROUTINE SGMRES(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,&
   !     .. Array Arguments ..
   REAL A(Nelt), B(N), Rgwk(Lrgw), Rwork(*), Sb(N), Sx(N), X(N)
   INTEGER Ia(Nelt), Igwk(Ligw), Iwork(*), Ja(Nelt)
-  !     .. Subroutine Arguments ..
-  EXTERNAL :: MATVEC, MSOLVE
   !     .. Local Scalars ..
   REAL bnrm, rhol, summ
   INTEGER i, iflag, jpre, jscal, kmp, ldl, lgmr, lhes, lq, lr, &

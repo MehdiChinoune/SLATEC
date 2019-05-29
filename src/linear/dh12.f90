@@ -53,9 +53,10 @@ SUBROUTINE DH12(Mode,Lpivot,L1,M,U,Iue,Up,C,Ice,Icv,Ncv)
   !   900328  Added TYPE section.  (WRB)
   !   900911  Added DDOT to DOUBLE PRECISION statement.  (WRB)
 
-  INTEGER i, i2, i3, i4, Ice, Icv, incr, Iue, j, kl1, kl2, klp, &
-    L1, l1m1, Lpivot, M, mml1p2, Mode, Ncv
-  REAL(8) :: b, C(*), cl, clinv, one, ul1m1, sm, U(Iue,*), Up
+  INTEGER :: Ice, Icv, Iue, L1, Lpivot, M, Mode, Ncv
+  REAL(8) :: C(Icv*Ncv+M*Ice), U(Iue,M), Up
+  INTEGER :: i, i2, i3, i4, incr, j, kl1, kl2, klp, l1m1, mml1p2
+  REAL(8) :: b, cl, clinv, one, ul1m1, sm
   !     BEGIN BLOCK PERMITTING ...EXITS TO 140
   !* FIRST EXECUTABLE STATEMENT  DH12
   one = 1.0D0

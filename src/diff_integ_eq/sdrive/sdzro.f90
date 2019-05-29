@@ -59,9 +59,11 @@ SUBROUTINE SDZRO(Ae,F,H,N,Nq,Iroot,Re,T,Yh,Uround,B,C,Fb,Fc,Y)
   !   790601  DATE WRITTEN
   !   900329  Initial submission to SLATEC.
 
-  INTEGER ic, Iroot, kount, N, Nq
-  REAL a, acbs, acmb, Ae, B, C, cmb, er, F, fa, Fb, Fc, H, p, &
-    q, Re, rw, T, tol, Uround, Y(*), Yh(N,*)
+  INTEGER :: Iroot, N, Nq
+  REAL :: Ae, B, C, F, Fb, Fc, H, Re, T, Uround
+  REAL :: Y(N), Yh(N,Nq+1)
+  INTEGER :: ic, kount
+  REAL :: a, acbs, acmb, cmb, er, fa, p, q, rw, tol
   !* FIRST EXECUTABLE STATEMENT  SDZRO
   er = 4.E0*Uround
   rw = MAX(Re,er)

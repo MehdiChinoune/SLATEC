@@ -143,11 +143,10 @@ SUBROUTINE HFTI(A,Mda,M,N,B,Mdb,Nb,Tau,Krank,Rnorm,H,G,Ip)
   !   901005  Replace usage of DIFF with usage of R1MACH.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   USE service, ONLY : R1MACH, XERMSG
-  INTEGER i, ii, iopt, ip1, j, jb, jj, k, kp1, Krank, l, ldiag, &
-    lmax, M, Mda, Mdb, N, Nb, nerr
-  REAL A(Mda,*), B(Mdb,*), factor, G(*), H(*), hmax, Rnorm(*), &
-    sm1, szero, Tau, tmp
-  INTEGER Ip(*)
+  INTEGER :: Krank, M, Mda, Mdb, N, Nb, Ip(N)
+  REAL :: A(Mda,N+1), B(Mdb,Nb), G(N), H(N), Rnorm(Nb), Tau
+  INTEGER :: i, ii, iopt, ip1, j, jb, jj, k, kp1, l, ldiag, lmax, nerr
+  REAL :: factor, hmax, sm1, szero, tmp
   REAL(8) :: sm, dzero
   REAL :: releps = 0.E0
   !* FIRST EXECUTABLE STATEMENT  HFTI

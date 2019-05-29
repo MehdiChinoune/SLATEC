@@ -231,12 +231,13 @@ CONTAINS
     !   890911  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   901010  Added PASS/FAIL message and cleaned up FORMATs.  (RWC)
-    USE slatec, ONLY : HWSCRT, PIMACH
+    USE slatec, ONLY : HWSCRT
     REAL a, b, bda(1), bdb(81), bdc(1), bdd(1), c, d, elmbda, ermax, err, &
-      f(45,82), pertrb, pi, piby2, pisq, w(1200), x(41)
+      f(45,82), pertrb, piby2, pisq, w(1200), x(41)
     REAL y(81), z
     INTEGER i, idimf, ierror, Ipass, j, Kprint, Lun, m, mbdcnd, mp1, &
       n, nbdcnd, np1
+    REAL, PARAMETER :: pi = 3.14159265358979
     !* FIRST EXECUTABLE STATEMENT  QXCRT
     !
     !     FROM DIMENSION STATEMENT WE GET VALUE OF IDIMF.  ALSO NOTE THAT W
@@ -256,7 +257,6 @@ CONTAINS
     !
     !     AUXILIARY QUANTITIES.
     !
-    pi = PIMACH()
     piby2 = pi/2.
     pisq = pi**2
     mp1 = m + 1
@@ -379,12 +379,13 @@ CONTAINS
     !   890911  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   901010  Added PASS/FAIL message and cleaned up FORMATs.  (RWC)
-    USE slatec, ONLY : HWSCSP, PIMACH
+    USE slatec, ONLY : HWSCSP
     REAL bdrf(1), bdrs(1), bdtf(33), bdts(1), ci4, dphi, dr, dtheta, elmbda, &
-      ermax, err, f(48,33), pertrb, pi, r(33), rf, rs, si
+      ermax, err, f(48,33), pertrb, r(33), rf, rs, si
     REAL tf, theta(48), ts, w(1200), z
     INTEGER i, idimf, ierror, intl, Ipass, j, Kprint, Lun, m, &
       mbdcnd, mp1, n, nbdcnd, np1
+    REAL, PARAMETER :: pi = 3.14159265358979
     !* FIRST EXECUTABLE STATEMENT  QXCSP
     !
     !     THE VALUE OF IDIMF IS THE FIRST DIMENSION OF F.  SINCE M=36, N=32,
@@ -392,7 +393,6 @@ CONTAINS
     !     + MAX(4*N,6*M) + 14 = 902.
     !
     ermax = 1.E-3
-    pi = PIMACH()
     intl = 0
     ts = 0.
     tf = pi/2.
@@ -755,10 +755,11 @@ CONTAINS
     !   891009  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   901010  Added PASS/FAIL message and cleaned up FORMATs.  (RWC)
-    USE slatec, ONLY : GENBUN, PIMACH
-    REAL a(20), b(20), c(20), deltax, deltay, dysq, ermax, err, f(25,130), pi, &
+    USE slatec, ONLY : GENBUN
+    REAL a(20), b(20), c(20), deltax, deltay, dysq, ermax, err, f(25,130), &
       s, t, w(1200), x(20), y(120), z
     INTEGER i, idimy, ierror, Ipass, j, Kprint, Lun, m, mm1, mperod, n, nperod
+    REAL, PARAMETER :: pi = 3.14159265358979
     !* FIRST EXECUTABLE STATEMENT  QXGBUN
     !
     !     FROM DIMENSION STATEMENT WE GET VALUE OF IDIMY.  ALSO NOTE THAT
@@ -771,7 +772,6 @@ CONTAINS
     deltax = 1.0E0/m
     nperod = 0
     n = 120
-    pi = PIMACH()
     deltay = 2.0E0*pi/n
     !
     !     GENERATE AND STORE GRID POINTS FOR THE PURPOSE OF COMPUTING
@@ -925,11 +925,12 @@ CONTAINS
     !   890911  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   901010  Added PASS/FAIL message and cleaned up FORMATs.  (RWC)
-    USE slatec, ONLY : HWSPLR, PIMACH
+    USE slatec, ONLY : HWSPLR
     REAL a, b, bda(1), bdb(1), bdc(51), bdd(51), c, d, elmbda, ermax, err, &
-      f(100,50), pertrb, pi, r(51), theta(49), w(1200), z
+      f(100,50), pertrb, r(51), theta(49), w(1200), z
     INTEGER i, idimf, ierror, Ipass, j, Kprint, Lun, m, mbdcnd, mp1, &
       n, nbdcnd, np1
+    REAL, PARAMETER :: pi = 3.14159265358979
     !* FIRST EXECUTABLE STATEMENT  QXPLR
     !
     !     FROM DIMENSION STATEMENT WE GET VALUE OF IDIMF.  ALSO NOTE THAT W
@@ -942,7 +943,6 @@ CONTAINS
     m = 50
     mbdcnd = 5
     c = 0.
-    pi = PIMACH()
     d = pi/2.
     n = 48
     nbdcnd = 3
@@ -1072,17 +1072,17 @@ CONTAINS
     !   890911  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   901010  Added PASS/FAIL message and cleaned up FORMATs.  (RWC)
-    USE slatec, ONLY : HWSSSP, PIMACH
+    USE slatec, ONLY : HWSSSP
     REAL bdpf(1), bdps(1), bdtf(73), bdts(1), dphi, dtheta, elmbda, ermax, &
-      err, f(19,73), pertrb, pf, pi, ps, sinp(73), sint(19), tf, ts
+      err, f(19,73), pertrb, pf, ps, sinp(73), sint(19), tf, ts
     REAL w(1200), z
     INTEGER i, idimf, ierror, Ipass, j, Kprint, Lun, m, mbdcnd, mp1, n, nbdcnd, np1
+    REAL, PARAMETER :: pi = 3.14159265358979
     !* FIRST EXECUTABLE STATEMENT  QXSSP
     !
     !     THE VALUE OF IDIMF IS THE FIRST DIMENSION OF F.  W IS
     !     DIMENSIONED 11*(M+1)+6*(N+1)=647 SINCE M=18 AND N=72.
     !
-    pi = PIMACH()
     ermax = 5.E-3
     ts = 0.0
     tf = pi/2.

@@ -78,9 +78,11 @@ SUBROUTINE D1UPDT(M,N,S,Ls,U,V,W,Sing)
   !           (WRB)
   !   900328  Added TYPE section.  (WRB)
   USE service, ONLY : D1MACH
-  INTEGER i, j, jj, l, Ls, M, N, nm1, nmj
-  REAL(8) :: coss, cotan, giant, S(Ls), sinn, tann, tau, temp, U(*), V(*), W(*)
-  LOGICAL Sing
+  INTEGER :: Ls, M, N
+  REAL(8) :: S(Ls), U(M), V(N), W(M)
+  LOGICAL :: Sing
+  INTEGER :: i, j, jj, l, nm1, nmj
+  REAL(8) :: coss, cotan, giant, sinn, tann, tau, temp
   REAL(8), PARAMETER :: one = 1.0D0, p5 = 5.0D-1, p25 = 2.5D-1, zero = 0.0D0
   !
   !     GIANT IS THE LARGEST MAGNITUDE.

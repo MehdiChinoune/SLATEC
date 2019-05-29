@@ -38,9 +38,10 @@ SUBROUTINE DEXBVP(Y,Nrowy,Xpts,A,Nrowa,Alpha,B,Nrowb,Beta,Iflag,Work,Iwork)
     NTP, NFCc
   USE service, ONLY : XERMSG
   !
-  INTEGER iexp, Iflag, inc, Iwork(*), kotc, Nrowa, Nrowb, Nrowy, nsafiw, nsafw
-  REAL(8) :: A(Nrowa,*), Alpha(*), B(Nrowb,*), Beta(*), Work(*), xl, Xpts(*), &
-    Y(Nrowy,*), zquit
+  INTEGER :: Iflag, Nrowa, Nrowb, Nrowy, Iwork(*)
+  REAL(8) :: A(:,:), Alpha(:), B(:,:), Beta(:), Work(*), Xpts(:), Y(:,:)
+  INTEGER :: iexp, inc, kotc, nsafiw, nsafw
+  REAL(8) :: xl, zquit
   CHARACTER(8) :: xern1, xern2
   !* FIRST EXECUTABLE STATEMENT  DEXBVP
   kotc = 1
@@ -61,7 +62,7 @@ SUBROUTINE DEXBVP(Y,Nrowy,Xpts,A,Nrowa,Alpha,B,Nrowb,Beta,Iflag,Work,Iwork)
     CALL DBVPOR(Y,Nrowy,NCOmp,Xpts,NXPts,A,Nrowa,Alpha,NIC,B,Nrowb,Beta,NFC,&
       Iflag,Work(1),MXNon,Work(K1),NTP,Iwork(18),Work(K2),&
       Iwork(16),Work(K3),Work(K4),Work(K5),Work(K6),Work(K7),&
-      Work(K8),Work(K9),Work(K10),Iwork(L1),NFCc)
+      Work(K8:K9-1),Work(K9),Work(K10),Iwork(L1),NFCc)
     !
     !- *********************************************************************
     !- *********************************************************************

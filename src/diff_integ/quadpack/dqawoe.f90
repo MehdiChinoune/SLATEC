@@ -221,19 +221,18 @@ SUBROUTINE DQAWOE(F,A,B,Omega,Integr,Epsabs,Epsrel,Limit,Icall,Maxp1,Result,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   USE service, ONLY : D1MACH
   !
-  INTEGER Icall, id, Ier, ierro, Integr, Iord(*), iroff1, iroff2, &
-    iroff3, jupbnd, k, ksgn, ktmin, Last, Limit, maxerr, &
-    Maxp1, Momcom, nev, Neval, Nnlog(*), nres, nrmax, nrmom, numrl2
-  REAL(8) :: A, abseps, Abserr, Alist(*), area, area1, area12, &
-    area2, a1, a2, B, Blist(*), b1, b2, Chebmo(Maxp1,25), correc, &
-    defab1, defab2, defabs, domega, dres, &
-    Elist(*), epmach, Epsabs, Epsrel, erlarg, erlast, &
-    errbnd, errmax, error1, erro12, error2, errsum, &
-    ertest, oflow, Omega, resabs, reseps, Result, &
-    res3la(3), Rlist(*), rlist2(52), small, uflow, width
-  LOGICAL extrap, noext, extall
-  !
+  INTEGER :: Icall, Ier, Integr, Last, Limit, Maxp1, Momcom, Neval
+  INTEGER :: Iord(Limit), Nnlog(Limit)
+  REAL(8) :: A, Abserr, B, Epsabs, Epsrel, Omega, Result
+  REAL(8) :: Alist(Limit), Blist(Limit), Chebmo(Maxp1,25), Elist(Limit), Rlist(Limit)
   REAL(8), EXTERNAL :: F
+  INTEGER :: id, ierro, iroff1, iroff2, iroff3, jupbnd, k, ksgn, ktmin, maxerr, &
+    nev, nres, nrmax, nrmom, numrl2
+  REAL(8) :: abseps, area, area1, area12, area2, a1, a2, b1, b2, correc, defab1, &
+    defab2, defabs, domega, dres, epmach, erlarg, erlast, errbnd, errmax, error1, &
+    erro12, error2, errsum, ertest, oflow, resabs, reseps, res3la(3), rlist2(52), &
+    small, uflow, width
+  LOGICAL :: extrap, noext, extall
   !
   !            THE DIMENSION OF RLIST2 IS DETERMINED BY  THE VALUE OF
   !            LIMEXP IN SUBROUTINE DQELG (RLIST2 SHOULD BE OF

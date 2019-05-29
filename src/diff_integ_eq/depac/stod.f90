@@ -94,15 +94,15 @@ SUBROUTINE STOD(Neq,Y,Yh,Nyh,Yh1,Ewt,Savf,Acor,Wm,Iwm,F,JAC,Rpar,Ipar)
   USE DEBDF1, ONLY : CONit, CRAte, EL, ELCo, HOLd, RC, RMAx, TESco, EL0, H, HMIn, &
     HMXi, HU, TN, KSTeps, IALth, IPUp, LMAx, MEO, NQNyh, NSTepj, IER, JSTart, &
     KFLag, L, METh, MITer, MAXord, N, NQ, NST, NFE, NQU
-  INTEGER Ipar(*)
-  REAL Rpar(*)
+  INTEGER :: Neq, Nyh
+  INTEGER :: Iwm(:), Ipar(:)
+  REAL :: Y(N), Yh(Nyh,MAXord+1), Yh1(Nyh*MAXord+Nyh), Ewt(N), Savf(N), Acor(N), &
+    Wm(:), Rpar(:)
   EXTERNAL :: F, JAC
   !
-  !LLL. OPTIMIZE
-  INTEGER Neq, Nyh, Iwm(*), i, i1, iredo, iret, j, jb, m, ncf, newq
-  REAL Y(*), Yh(Nyh,*), Yh1(*), Ewt(*), Savf(*), Acor(*), Wm(*), dcon, ddn, del, &
-    delp, dsm, dup, exdn, exsm, exup, r, rh, rhdn, rhsm, rhup, told
-  !
+  INTEGER :: i, i1, iredo, iret, j, jb, m, ncf, newq
+  REAL :: dcon, ddn, del, delp, dsm, dup, exdn, exsm, exup, r, rh, rhdn, rhsm, &
+    rhup, told
   !
   !* FIRST EXECUTABLE STATEMENT  STOD
   KFLag = 0
@@ -493,7 +493,7 @@ SUBROUTINE STOD(Neq,Y,Yh,Nyh,Yh1,Ewt,Savf,Acor,Wm,Iwm,F,JAC,Rpar,Ipar)
   rhsm = 1.0E0/(1.2E0*dsm**exsm+0.0000012E0)
   rhdn = 0.0E0
   IF ( NQ/=1 ) THEN
-    ddn = VNWRMS(N,Yh(1,L),Ewt)/TESco(1,NQ)
+    ddn = VNWRMS(N,Yh(:,L),Ewt)/TESco(1,NQ)
     exdn = 1.0E0/NQ
     rhdn = 1.0E0/(1.3E0*ddn**exdn+0.0000013E0)
   END IF

@@ -26,9 +26,11 @@ REAL(8) FUNCTION DVNRMS(N,V,W)
   !   890911  Removed unnecessary intrinsics.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
-  
-  INTEGER i, N
-  REAL(8) :: summ, V(*), W(*)
+
+  INTEGER :: N
+  REAL(8) :: V(N), W(N)
+  INTEGER :: i
+  REAL(8) :: summ
   !* FIRST EXECUTABLE STATEMENT  DVNRMS
   summ = 0.0D0
   DO i = 1, N

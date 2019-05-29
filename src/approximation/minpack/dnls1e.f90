@@ -500,12 +500,12 @@ SUBROUTINE DNLS1E(FCN,Iopt,M,N,X,Fvec,Tol,Nprint,Info,Iw,Wa,Lwa)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   USE service, ONLY : XERMSG
-  INTEGER M, N, Nprint, Info, Lwa, Iopt
-  INTEGER indexx, Iw(*)
+  INTEGER :: M, N, Nprint, Info, Lwa, Iopt
+  INTEGER :: Iw(N)
   REAL(8) :: Tol
-  REAL(8) :: X(*), Fvec(*), Wa(*)
+  REAL(8) :: X(N), Fvec(M), Wa(Lwa)
   EXTERNAL :: FCN
-  INTEGER maxfev, mode, nfev, njev
+  INTEGER :: indexx, maxfev, mode, nfev, njev
   REAL(8) :: ftol, gtol, xtol, epsfcn
   REAL(8), PARAMETER :: factor = 1.0D2, zero = 0.0D0
   !* FIRST EXECUTABLE STATEMENT  DNLS1E

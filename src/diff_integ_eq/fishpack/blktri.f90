@@ -204,9 +204,9 @@ SUBROUTINE BLKTRI(Iflg,Np,N,An,Bn,Cn,Mp,M,Am,Bm,Cm,Idimy,Y,Ierror,W)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   USE CBLKT, ONLY : K, IK, NM, NPP
-  INTEGER Idimy, Ierror, Iflg, iw1, iw2, iw3, iwah, iwbh, iwd, iwu, iww, M, Mp, &
-    N, nh, nl, Np
-  REAL Am(M), An(N), Bm(M), Bn(N), Cm(M), Cn(N), W(*), Y(Idimy,*)
+  INTEGER :: Idimy, Ierror, Iflg, M, Mp, N, Np
+  REAL :: Am(M), An(N), Bm(M), Bn(N), Cm(M), Cn(N), W(:), Y(Idimy,N)
+  INTEGER :: iw1, iw2, iw3, iwah, iwbh, iwd, iwu, iww, nh, nl
   !* FIRST EXECUTABLE STATEMENT  BLKTRI
   NM = N
   Ierror = 0
@@ -253,16 +253,16 @@ SUBROUTINE BLKTRI(Iflg,Np,N,An,Bn,Cn,Mp,M,Am,Bm,Cm,Idimy,Y,Ierror,W)
           iww = iwd + M
           iwu = iww + M
           IF ( Iflg==0 ) THEN
-            CALL COMPB(Ierror,An,Bn,Cn,W(2),W(iwah),W(iwbh))
+            CALL COMPB(Ierror,An,Bn,Cn,W(2:iwah-1),W(iwah:iwbh-1),W(iwbh:))
           ELSEIF ( Mp/=0 ) THEN
             !
             ! SUBROUTINE BLKTR1 SOLVES THE LINEAR SYSTEM
             !
-            CALL BLKTR1(An,Cn,M,Am,Bm,Cm,Idimy,Y,W(2),W(iw1),W(iw2),&
-              W(iw3),W(iwd),W(iww),W(iwu),PROD,CPROD)
+            CALL BLKTR1(An,Cn,M,Am,Bm,Cm,Idimy,Y,W(2:iw1-1),W(iw1:iw2-1),W(iw2:iw3-1),&
+              W(iw3:iwd-1),W(iwd:iww-1),W(iww:iwu-1),W(iwu:),PROD,CPROD)
           ELSE
-            CALL BLKTR1(An,Cn,M,Am,Bm,Cm,Idimy,Y,W(2),W(iw1),W(iw2),&
-              W(iw3),W(iwd),W(iww),W(iwu),PRODP,CPRODP)
+            CALL BLKTR1(An,Cn,M,Am,Bm,Cm,Idimy,Y,W(2:iw1-1),W(iw1:iw2-1),W(iw2:iw3-1),&
+              W(iw3:iwd-1),W(iwd:iww-1),W(iww:iwu-1),W(iwu:),PRODP,CPRODP)
           END IF
         END IF
         EXIT

@@ -91,8 +91,9 @@ SUBROUTINE RFFTB1(N,C,Ch,Wa,Ifac)
   !   900131  Routine changed from subsidiary to user-callable.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
-  REAL C(*), Ch(*), Wa(*)
-  INTEGER i, idl1, ido, Ifac(*), ip, iw, ix2, ix3, ix4, k1, l1, l2, N, na, nf
+  INTEGER :: N, Ifac(15)
+  REAL :: C(N), Ch(N), Wa(N)
+  INTEGER :: i, idl1, ido, ip, iw, ix2, ix3, ix4, k1, l1, l2, na, nf
   !* FIRST EXECUTABLE STATEMENT  RFFTB1
   nf = Ifac(2)
   na = 0
@@ -129,9 +130,9 @@ SUBROUTINE RFFTB1(N,C,Ch,Wa,Ifac)
       na = 1 - na
     ELSEIF ( ip/=5 ) THEN
       IF ( na/=0 ) THEN
-        CALL RADBG(ido,ip,l1,idl1,Ch,Ch,Ch,C,C,Wa(iw))
+        CALL RADBG(ido,ip,l1,idl1,Ch,Ch,Ch,C,C,Wa(iw:))
       ELSE
-        CALL RADBG(ido,ip,l1,idl1,C,C,C,Ch,Ch,Wa(iw))
+        CALL RADBG(ido,ip,l1,idl1,C,C,C,Ch,Ch,Wa(iw:))
       END IF
       IF ( ido==1 ) na = 1 - na
     ELSE

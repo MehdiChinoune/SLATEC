@@ -341,10 +341,12 @@ SUBROUTINE DNSQE(FCN,JAC,Iopt,N,X,Fvec,Tol,Nprint,Info,Wa,Lwa)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   USE service, ONLY : XERMSG
-  INTEGER indexx, Info, Iopt, j, lr, Lwa, maxfev, ml, mode, mu, N, &
-    nfev, njev, Nprint
-  REAL(8) :: epsfcn, Fvec(*), Tol, Wa(*), X(*), xtol
+  INTEGER :: Info, Iopt, Lwa, N, Nprint
+  REAL(8) :: Tol
+  REAL(8) :: Fvec(N), Wa(Lwa), X(N)
   EXTERNAL :: FCN, JAC
+  INTEGER :: indexx, j, lr, maxfev, ml, mode, mu, nfev, njev
+  REAL(8) :: epsfcn, xtol
   REAL(8), PARAMETER :: factor = 1.0D2, one = 1.0D0, zero = 0.0D0
   !     BEGIN BLOCK PERMITTING ...EXITS TO 20
   !* FIRST EXECUTABLE STATEMENT  DNSQE

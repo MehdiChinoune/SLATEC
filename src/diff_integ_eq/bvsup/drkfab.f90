@@ -38,10 +38,12 @@ SUBROUTINE DRKFAB(Ncomp,Xpts,Nxpts,Nfc,Iflag,Z,Mxnon,P,Ntp,Ip,Yhp,Niv,U,V,&
   USE DML, ONLY : C, INHomo, KKKint, LLLint, X, XBEg, XENd, XOP, INFo, KOP, &
     AE, RE, NOPg, NDIsk, NTApe, NEQ, INTeg, NPS, NUMort
   !
-  INTEGER idid, Iflag, ipar(1), j, jflag, jon, kod, kopp, Mxnon, Ncomp, Nfc, Nfcc, &
-    nfcp1, Niv, non, Ntp, Nxpts, Ip(Nfcc,*), Iwork(*)
-  REAL(8) :: G(*), P(Ntp,*), S(*), Stowa(*), U(Ncomp,Nfc,*), V(Ncomp,*), &
-    W(Nfcc,*), Work(*), Xpts(*), xxop, Yhp(Ncomp,*), Z(*), ret(1), aet(1)
+  INTEGER :: Iflag, Mxnon, Ncomp, Nfc, Nfcc, Niv, Ntp, Nxpts
+  INTEGER :: Ip(Nfcc,Mxnon+1), Iwork(*)
+  REAL(8) :: G(Ncomp), P(Ntp,Mxnon+1), S(Nfc+1), Stowa(:), U(Ncomp,Nfc,Nxpts), &
+    V(Ncomp,Nxpts), W(Nfcc,Mxnon+1), Work(*), Xpts(Nxpts), Yhp(Ncomp,Nfc+1), Z(Mxnon+1)
+  INTEGER :: idid, ipar(1), j, jflag, jon, kod, kopp, nfcp1, non
+  REAL(8) :: xxop, ret(1), aet(1)
   !
   !      *****************************************************************
   !       INITIALIZATION OF COUNTERS AND VARIABLES.
@@ -131,8 +133,8 @@ SUBROUTINE DRKFAB(Ncomp,Xpts,Nxpts,Nfc,Iflag,Z,Mxnon,P,Ntp,Ip,Yhp,Niv,U,V,&
         END IF
         !
         IF ( NDIsk==0 ) non = NUMort + 1
-        CALL DREORT(Ncomp,U(1,1,kod),V(1,kod),Yhp,Niv,W(1,non),S,P(1,non),&
-          Ip(1,non),Stowa,jflag)
+        CALL DREORT(Ncomp,U(:,:,kod),V(:,kod),Yhp,Niv,W(:,non),S,P(:,non),&
+          Ip(:,non),Stowa,jflag)
         !
         IF ( jflag==30 ) THEN
           Iflag = 30
@@ -160,7 +162,7 @@ SUBROUTINE DRKFAB(Ncomp,Xpts,Nxpts,Nfc,Iflag,Z,Mxnon,P,Ntp,Ip,Yhp,Niv,U,V,&
           END IF
           !
           NUMort = NUMort + 1
-          CALL DSTOR1(Yhp,U(1,1,kod),Yhp(1,nfcp1),V(1,kod),1,NDIsk,NTApe)
+          CALL DSTOR1(Yhp(:,1),U(:,1,kod),Yhp(:,nfcp1),V(:,kod),1,NDIsk,NTApe)
           !
           !                       ************************************************
           !                           STORE ORTHONORMALIZATION INFORMATION,
@@ -209,7 +211,7 @@ SUBROUTINE DRKFAB(Ncomp,Xpts,Nxpts,Nfc,Iflag,Z,Mxnon,P,Ntp,Ip,Yhp,Niv,U,V,&
     !           STORAGE OF HOMOGENEOUS SOLUTIONS IN U AND THE PARTICULAR
     !           SOLUTION IN V AT THE OUTPUT POINTS.
     !
-    CALL DSTOR1(U(1,1,kod),Yhp,V(1,kod),Yhp(1,nfcp1),0,NDIsk,NTApe)
+    CALL DSTOR1(U(:,1,kod),Yhp(:,1),V(:,kod),Yhp(:,nfcp1),0,NDIsk,NTApe)
   END DO
   !        ***************************************************************
   !        ***************************************************************

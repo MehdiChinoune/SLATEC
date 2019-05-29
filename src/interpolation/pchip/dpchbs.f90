@@ -167,7 +167,7 @@ SUBROUTINE DPCHBS(N,X,F,D,Incfd,Knotyp,Nknots,T,Bcoef,Ndim,Kord,Ierr)
   !  Declare arguments.
   !
   INTEGER N, Incfd, Knotyp, Nknots, Ndim, Kord, Ierr
-  REAL(8) :: X(*), F(Incfd,*), D(Incfd,*), T(*), Bcoef(*)
+  REAL(8) :: X(N), F(Incfd,N), D(Incfd,N), T(2*N+4), Bcoef(2*N)
   !
   !  Declare local variables.
   !

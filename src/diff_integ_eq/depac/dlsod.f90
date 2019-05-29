@@ -35,11 +35,15 @@ SUBROUTINE DLSOD(DF,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,&
     MITer, MAXord, N, NQ, NST, NFE, NJE
   USE service, ONLY : XERMSG, D1MACH
   !
-  INTEGER Idid, intflg, Ipar(*), Iwm(*), k, l, ltol, natolp, Neq, nrtolp
-  REAL(8) :: absdel, Acor(*), Atol(*), big, del, Delsgn, dt, &
-    Ewt(*), ha, Rpar(*), Rtol(*), Savf(*), T, tol, Tolfac, Tout, Tstop, Wm(*), &
-    Y(*), Yh(Neq,6), Yh1(*), Ypout(*)
-  LOGICAL Intout
+  INTEGER :: Idid, Neq
+  INTEGER :: Ipar(:), Iwm(:)
+  REAL(8) :: Delsgn, T, Tolfac, Tout, Tstop
+  REAL(8) :: Acor(Neq), Atol(:), Ewt(Neq), Rpar(:), Rtol(:), Savf(Neq), Wm(:), Y(Neq), &
+    Yh(Neq,6), Yh1(6*Neq), Ypout(Neq)
+  LOGICAL :: Intout
+  INTEGER intflg, k, l, ltol, natolp, nrtolp
+  REAL(8) :: absdel, big, del, dt, ha, tol
+
   CHARACTER(8) :: xern1
   CHARACTER(16) :: xern3, xern4
   !

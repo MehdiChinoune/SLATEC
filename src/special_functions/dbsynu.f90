@@ -77,11 +77,13 @@ SUBROUTINE DBSYNU(X,Fnu,N,Y)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   USE service, ONLY : XERMSG, D1MACH
   !
-  INTEGER i, inu, j, k, kk, N, nn
+  INTEGER :: N
+  REAL(8) :: Fnu, X, Y(N)
+  INTEGER :: i, inu, j, k, kk, nn
   REAL(8) :: a(120), ak, arg, a1, a2, bk, cb(120), cbk, cck, ck, coef, cpt, cp1, cp2, &
     cs, cs1, cs2, cx, dnu, dnu2, etest, etx, f, fc, fhs, fk, fks, flrx, fmu, fn, &
-    Fnu, fx, g, g1, g2, p, pt, q, rb(120), rbk, rck, relb, rpt, rp1, rp2, rs, &
-    rs1, rs2, rx, s, sa, sb, smu, ss, st, s1, s2, tb, tm, tol, t1, t2, X, Y(*)
+    fx, g, g1, g2, p, pt, q, rb(120), rbk, rck, relb, rpt, rp1, rp2, rs, &
+    rs1, rs2, rx, s, sa, sb, smu, ss, st, s1, s2, tb, tm, tol, t1, t2
   REAL(8), PARAMETER ::  x1 = 3.0D0, x2 = 20.0D0
   REAL(8), PARAMETER ::  pi = 3.14159265358979D+00, rthpi = 7.97884560802865D-01
   REAL(8), PARAMETER ::  hpi = 1.57079632679490D+00

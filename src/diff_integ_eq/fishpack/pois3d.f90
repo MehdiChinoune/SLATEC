@@ -238,10 +238,12 @@ SUBROUTINE POIS3D(Lperod,L,C1,Mperod,M,C2,Nperod,N,A,B,C,Ldimf,Mdimf,F,Ierror,W)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-  INTEGER i, Ierror, iwbb, iwd, iwt, iwx, iwy, iwyrt, j, k, L, &
-    Ldimf, lp, Lperod, M, Mdimf, mp, Mperod, N, nh
-  REAL A(*), B(*), C(*), C1, C2, F(Ldimf,Mdimf,*), save(6), W(*)
-  INTEGER nhm1, nhmk, nhpk, nodd, np, Nperod
+  INTEGER :: Ierror, L, Ldimf, Lperod, M, Mdimf, Mperod, N
+  REAL :: C1, C2
+  REAL :: A(N), B(N), C(N), F(Ldimf,Mdimf,N), W(:)
+  INTEGER :: i, iwbb, iwd, iwt, iwx, iwy, iwyrt, j, k, lp, mp, nh, nhm1, nhmk, &
+    nhpk, nodd, np, Nperod
+  REAL :: save(6)
   !* FIRST EXECUTABLE STATEMENT  POIS3D
   lp = Lperod + 1
   mp = Mperod + 1
@@ -315,8 +317,8 @@ SUBROUTINE POIS3D(Lperod,L,C1,Mperod,M,C2,Nperod,N,A,B,C,Ldimf,Mdimf,F,Ierror,W)
         B(N) = B(N) + A(N)
       END IF
     END IF
-    CALL POS3D1(lp,L,mp,M,N,A,B,C,Ldimf,Mdimf,F,W,W(iwyrt),W(iwt),W(iwd),&
-      W(iwx),W(iwy),C1,C2,W(iwbb))
+    CALL POS3D1(lp,L,mp,M,N,A,B,C,Ldimf,Mdimf,F,W,W(iwyrt:iwt-1),W(iwt:iwd-1),&
+      W(iwd:iwbb-1),W(iwx:iwy-1),W(iwy:),C1,C2,W(iwbb:iwx-1))
     IF ( np/=2 ) THEN
       DO i = 1, L
         DO j = 1, M

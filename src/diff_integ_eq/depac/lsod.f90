@@ -34,15 +34,17 @@ SUBROUTINE LSOD(F,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,Acor,&
     KSTeps, IBEgin, ITOl, IINteg, ITStop, IJAc, IBAnd, JSTart, KFLag, METh, &
     MITer, MAXord, N, NQ, NST, NFE, NJE
   USE service, ONLY : XERMSG, R1MACH
-  INTEGER :: ltol, natolp, Neq, nrtolp, Idid, intflg, Ipar(*), Iwm(*), k, l
-  REAL absdel, Acor(*), Atol(*), big, del, Delsgn, dt, Ewt(*), ha, &
-    Rpar(*), Rtol(*), Savf(*), T, tol, Tolfac, Tout, Tstop, Wm(*), Y(*), &
-    Yh(Neq,6) , Yh1(*), Ypout(*)
-  LOGICAL Intout
+  INTEGER :: Neq, Idid
+  INTEGER :: Ipar(:), Iwm(:)
+  REAL :: Delsgn, T, Tolfac, Tout, Tstop
+  REAL :: Acor(Neq), Atol(:), Ewt(Neq), Rpar(:), Rtol(:), Savf(Neq), Wm(:), Y(Neq), &
+    Yh(Neq,6) , Yh1(6*Neq), Ypout(Neq)
+  LOGICAL :: Intout
+  EXTERNAL :: F, JAC
+  INTEGER :: ltol, natolp, nrtolp, intflg, k, l
+  REAL :: absdel, big, del, dt, ha, tol
   CHARACTER(8) :: xern1
   CHARACTER(16) :: xern3, xern4
-  !
-  EXTERNAL :: F, JAC
   !
   !.......................................................................
   !

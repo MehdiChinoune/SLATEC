@@ -33,10 +33,10 @@ SUBROUTINE DDASLV(Neq,Delta,Wm,Iwm)
   !           cosmetic changes to prologue.  (FNF)
   USE linear, ONLY : DGBSL, DGESL
   !
-  INTEGER Neq, Iwm(*)
-  REAL(8) :: Delta(*), Wm(*)
+  INTEGER :: Neq, Iwm(:)
+  REAL(8) :: Delta(Neq), Wm(Neq)
   !
-  INTEGER meband, mtype
+  INTEGER :: meband, mtype
   INTEGER, PARAMETER :: NPD = 1
   INTEGER, PARAMETER :: LML = 1
   INTEGER, PARAMETER :: LMU = 2
@@ -54,13 +54,13 @@ SUBROUTINE DDASLV(Neq,Delta,Wm,Iwm)
       !
       !     BANDED MATRIX
       meband = 2*Iwm(LML) + Iwm(LMU) + 1
-      CALL DGBSL(Wm(NPD),meband,Neq,Iwm(LML),Iwm(LMU),Iwm(LIPVT),Delta,0)
+      CALL DGBSL(Wm(NPD),meband,Neq,Iwm(LML),Iwm(LMU),Iwm(LIPVT:),Delta,0)
       RETURN
     CASE DEFAULT
   END SELECT
   !
   !     DENSE MATRIX
-  CALL DGESL(Wm(NPD),Neq,Neq,Iwm(LIPVT),Delta,0)
+  CALL DGESL(Wm(NPD),Neq,Neq,Iwm(LIPVT:),Delta,0)
   RETURN
   !------END OF SUBROUTINE DDASLV------
   RETURN

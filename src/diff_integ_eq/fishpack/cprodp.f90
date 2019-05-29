@@ -36,9 +36,12 @@ SUBROUTINE CPRODP(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Yy,M,A,B,C,D,U,Y)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
 
-  REAL A(*), Aa(*), B(*), Bm1(*), Bm2(*), C(*), rt, X(*), Yy(*)
-  INTEGER ia, id, iflg, j, k, M, m1, m2, mm, mm2, Na, Nd, Nm1, Nm2
-  COMPLEX Y(*), D(*), U(*), v, den, bh, ym, am, y1, y2, yh, Bd(*), crt
+  INTEGER :: M, Na, Nd, Nm1, Nm2
+  REAL :: A(M), Aa(Na), B(M), Bm1(Nm1), Bm2(Nm2), C(M), X(M), Yy(M)
+  COMPLEX :: Y(M), D(:), U(:), Bd(Nd)
+  INTEGER :: ia, id, iflg, j, k, m1, m2, mm, mm2
+  REAL :: rt
+  COMPLEX :: v, den, bh, ym, am, y1, y2, yh, crt
   !* FIRST EXECUTABLE STATEMENT  CPRODP
   DO j = 1, M
     Y(j) = CMPLX(X(j),0.)

@@ -271,8 +271,6 @@ SUBROUTINE DCG(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,Iter,&
   !     .. Array Arguments ..
   REAL(8) :: A(Nelt), B(N), Dz(N), P(N), R(N), Rwork(*), X(N), Z(N)
   INTEGER Ia(Nelt), Iwork(*), Ja(Nelt)
-  !     .. Subroutine Arguments ..
-  EXTERNAL :: MATVEC, MSOLVE
   !     .. Local Scalars ..
   REAL(8) :: ak, akden, bk, bkden, bknum, bnrm, solnrm, tolmin
   INTEGER i, k

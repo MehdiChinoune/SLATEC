@@ -189,9 +189,9 @@ SUBROUTINE DSOS(FNC,Neq,X,Rtolx,Atolx,Tolf,Iflag,Rw,Lrw,Iw,Liw)
   !           comments to agree with SOS.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   USE service, ONLY : XERMSG
-  INTEGER Iflag, inpflg, iprint, Iw(*), k1, k2, k3, k4, k5, k6, &
-    Liw, Lrw, mxit, nc, ncjs, Neq, nsri, nsrrc
-  REAL(8) :: Atolx, Rtolx, Rw(*), Tolf, X(*)
+  INTEGER :: Iflag, Liw, Lrw, Iw(Liw), Neq
+  REAL(8) :: Atolx, Rtolx, Rw(Lrw), Tolf, X(Neq)
+  INTEGER :: inpflg, iprint, k1, k2, k3, k4, k5, k6, mxit, nc, ncjs, nsri, nsrrc
   CHARACTER(8) :: xern1
   CHARACTER(16) :: xern3, xern4
   REAL(8), EXTERNAL :: FNC

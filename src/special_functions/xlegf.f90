@@ -133,8 +133,10 @@ SUBROUTINE XLEGF(Dnu1,Nudiff,Mu1,Mu2,Theta,Id,Pqa,Ipqa,Ierror)
   !           CALLs to XERROR changed to CALLs to XERMSG.  (WRB)
   !   920127  Revised PURPOSE section of prologue.  (DWL)
   USE service, ONLY : XERMSG
-  INTEGER i, Id, Ierror, Ipqa(*), l, Mu1, Mu2, Nudiff
-  REAL Pqa(*), Dnu1, dnu2, sx, Theta, x, pi2
+  INTEGER :: Id, Ierror, Mu1, Mu2, Nudiff, Ipqa(Nudiff+Mu2-Mu1+1)
+  REAL :: Pqa(Nudiff+Mu2-Mu1+1), Dnu1, Theta
+  INTEGER :: i, l
+  REAL :: dnu2, sx, x, pi2
   !
   !* FIRST EXECUTABLE STATEMENT  XLEGF
   Ierror = 0

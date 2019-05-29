@@ -33,11 +33,13 @@ SUBROUTINE BLKTR1(An,Cn,M,Am,Bm,Cm,Idimy,Y,B,W1,W2,W3,Wd,Ww,Wu,PRDCT,CPRDCT)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   USE CBLKT, ONLY : K, NCMplx, NM, NPP
-  INTEGER i, i1, i2, i3, i4, Idimy, idxa, idxc, if, ifd, im1, im2, im3, imi1, &
+  INTEGER :: Idimy, M
+  REAL :: Am(M), An(NM), B(:), Bm(M), Cm(M), Cn(NM), W1(M), W2(M), W3(M), Wd(M), &
+    Wu(M), Ww(M), Y(Idimy,NM)
+  INTEGER i, i1, i2, i3, i4, idxa, idxc, if, ifd, im1, im2, im3, imi1, &
     imi2, ip, ip1, ip2, ip3, ipi1, ipi2, ipi3, ir, irm1, iz, izr, j, kdo, l, &
-    ll, M, na, nc, nm1, nm2, nm3, np, np1, np2, np3, nz
-  REAL Am(*), An(*), B(*), Bm(*), Cm(*), Cn(*), dum, W1(*), &
-    W2(*), W3(*), Wd(*), Wu(*), Ww(*), Y(Idimy,*)
+    ll, na, nc, nm1, nm2, nm3, np, np1, np2, np3, nz
+  REAL :: dum
   !* FIRST EXECUTABLE STATEMENT  BLKTR1
   kdo = K - 1
   DO l = 1, kdo

@@ -26,11 +26,13 @@ SUBROUTINE CSCALE(A,Nrda,Nrow,Ncol,Cols,Colsav,Rows,Rowsav,Anorm,Scales,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
-  INTEGER Ic, ip, Iscale, j, k, Ncol, Nrda, Nrow
-  REAL A(Nrda,*), alog2, Anorm, ascale, Cols(*), Colsav(*), cs, p, Rows(*), Rowsav(*), &
-    s, Scales(*)
+  INTEGER :: Ic, Iscale, Ncol, Nrda, Nrow
+  REAL :: Anorm, A(Nrda,Ncol), Cols(Ncol), Colsav(Ncol), Rows(Nrow), Rowsav(Nrow), &
+    Scales(Ncol)
+  INTEGER :: ip, j, k
+  REAL :: alog2, ascale, cs, p, s
   !
-  REAL(8), PARAMETER :: ten4 = 1.E+4, ten20 = 1.E+20
+  REAL, PARAMETER :: ten4 = 1.E+4, ten20 = 1.E+20
   !
   !* FIRST EXECUTABLE STATEMENT  CSCALE
   IF ( Iscale==(-1) ) THEN

@@ -30,8 +30,9 @@ SUBROUTINE STWAY(U,V,Yhp,Inout,Stowa)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
   USE ML, ONLY: NCOmp, NFC, X, XOP, INFo, ISTkop, KOP, NDIsk, NTApe, NEQivp
-  REAL Stowa(*), U(*), V(*), Yhp(*)
-  INTEGER Inout, j, k, ko, ks, ksj
+  INTEGER :: Inout
+  REAL :: Stowa(:), U(:), V(:), Yhp(:)
+  INTEGER :: j, k, ko, ks, ksj
   !
   !* FIRST EXECUTABLE STATEMENT  STWAY
   IF ( Inout==1 ) THEN
@@ -39,7 +40,7 @@ SUBROUTINE STWAY(U,V,Yhp,Inout,Stowa)
     !     RECALL FROM STOWA ARRAY AND ISTKOP
     !
     ks = NFC*NCOmp
-    CALL STOR1(Yhp,Stowa,Yhp(ks+1),Stowa(ks+1),1,0,0)
+    CALL STOR1(Yhp,Stowa,Yhp(ks+1:),Stowa(ks+1:),1,0,0)
     ks = ks + NCOmp
     IF ( NEQivp/=0 ) THEN
       DO j = 1, NEQivp
@@ -61,7 +62,7 @@ SUBROUTINE STWAY(U,V,Yhp,Inout,Stowa)
     !     SAVE IN STOWA ARRAY AND ISTKOP
     !
     ks = NFC*NCOmp
-    CALL STOR1(Stowa,U,Stowa(ks+1),V,1,0,0)
+    CALL STOR1(Stowa,U,Stowa(ks+1:),V,1,0,0)
     ks = ks + NCOmp
     IF ( NEQivp/=0 ) THEN
       DO j = 1, NEQivp

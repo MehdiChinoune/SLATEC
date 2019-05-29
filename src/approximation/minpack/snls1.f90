@@ -610,16 +610,16 @@ SUBROUTINE SNLS1(FCN,Iopt,M,N,X,Fvec,Fjac,Ldfjac,Ftol,Xtol,Gtol,Maxfev,&
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   USE service, ONLY : XERMSG, R1MACH
-  INTEGER Iopt, M, N, Ldfjac, Maxfev, Mode, Nprint, Info, Nfev, Njev
-  INTEGER ijunk, nrow, Ipvt(*)
-  REAL Ftol, Xtol, Gtol, Factor, Epsfcn
-  REAL X(*), Fvec(*), Fjac(Ldfjac,*), Diag(*), Qtf(*), Wa1(*), Wa2(*), &
-    Wa3(*), Wa4(*)
-  LOGICAL sing
+  INTEGER :: Iopt, M, N, Ldfjac, Maxfev, Mode, Nprint, Info, Nfev, Njev
+  INTEGER :: Ipvt(N)
+  REAL :: Ftol, Xtol, Gtol, Factor, Epsfcn
+  REAL :: X(N), Fvec(M), Fjac(Ldfjac,N), Diag(N), Qtf(N), Wa1(N), Wa2(N), &
+    Wa3(N), Wa4(M)
   EXTERNAL :: FCN
-  INTEGER i, iflag, iter, j, l, modech
-  REAL actred, delta, dirder, epsmch, fnorm, fnorm1, gnorm, par, pnorm, prered, &
+  INTEGER :: ijunk, nrow, i, iflag, iter, j, l, modech
+  REAL :: actred, delta, dirder, epsmch, fnorm, fnorm1, gnorm, par, pnorm, prered, &
     ratio, summ, temp, temp1, temp2, xnorm, err(1)
+  LOGICAL :: sing
   CHARACTER(8) :: xern1
   CHARACTER(16) :: xern3
   !

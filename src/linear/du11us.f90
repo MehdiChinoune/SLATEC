@@ -31,11 +31,13 @@ SUBROUTINE DU11US(A,Mda,M,N,Ub,Db,Mode,Np,Krank,Ksure,H,W,Eb,Ir,Ic)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900328  Added TYPE section.  (WRB)
   USE service, ONLY : XERMSG
-  INTEGER Mda, mmk, Mode, N, nn, Np
-  REAL(8) :: A(Mda,*), bb, Db(*), Eb(*), H(*), r2, rmin, summ, t, temp, tn, tt, Ub(*), W(*)
-  INTEGER i, ii, im1, imin, is, j, jm1, jmax, jp1, kk, &
-    km1, kmi, kp1, Krank, Ksure, kz, l, lm1, M
-  INTEGER Ic(*), Ir(*)
+  INTEGER :: Mda, Mode, N, Np, Krank, Ksure, M
+  INTEGER :: Ic(N), Ir(M)
+  REAL(8) :: A(Mda,N), Db(N), Eb(N), H(N), Ub(N), W(N)
+  INTEGER :: mmk, nn, i, ii, im1, imin, is, j, jm1, jmax, jp1, kk, km1, kmi, kp1, &
+    kz, l, lm1
+  REAL(8) :: bb, r2, rmin, summ, t, temp, tn, tt
+
   !
   !        INITIALIZATION
   !

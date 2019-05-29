@@ -25,9 +25,10 @@ SUBROUTINE XQMU(Nu1,Nu2,Mu1,Mu2,Theta,X,Sx,Id,Pqa,Ipqa,Ierror)
   !           section.  (WRB)
   !   920127  Revised PURPOSE section of prologue.  (DWL)
 
-  INTEGER Id, Ierror, ipq, ipq1, ipq2, Ipqa(*), k, mu, Mu1, Mu2
-  REAL dmu, nu, Nu1, Nu2, pq, Pqa(*), pq1, pq2, Sx, X, x1, x2
-  REAL Theta
+  INTEGER Id, Ierror, Mu1, Mu2, Ipqa(Mu2-Mu1+1)
+  REAL :: Nu1, Nu2, Pqa(Mu2-Mu1+1), Sx, X, Theta
+  INTEGER :: ipq, ipq1, ipq2, k, mu
+  REAL :: dmu, nu, pq, pq1, pq2, x1, x2
   !* FIRST EXECUTABLE STATEMENT  XQMU
   Ierror = 0
   mu = 0

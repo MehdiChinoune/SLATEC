@@ -24,8 +24,10 @@ SUBROUTINE BSPLVN(T,Jhigh,Indexx,X,Ileft,Vnikx)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
 
-  REAL T(*), vm, vmprev, Vnikx(*), X
-  INTEGER Ileft, imjp1, Indexx, ipj, Jhigh, jp1, jp1ml, l
+  INTEGER :: Ileft, Indexx, Jhigh
+  REAL :: T(:), Vnikx(*), X
+  REAL :: vm, vmprev
+  INTEGER :: imjp1, ipj, jp1, jp1ml, l
   INTEGER :: j = 1
   REAL :: deltam(20) = 0., deltap(20) = 0.
   !* FIRST EXECUTABLE STATEMENT  BSPLVN

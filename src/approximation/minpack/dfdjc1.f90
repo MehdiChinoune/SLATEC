@@ -95,9 +95,11 @@ SUBROUTINE DFDJC1(FCN,N,X,Fvec,Fjac,Ldfjac,Iflag,Ml,Mu,Epsfcn,Wa1,Wa2)
   !           (WRB)
   !   900328  Added TYPE section.  (WRB)
   USE service, ONLY : D1MACH
-  INTEGER i, Iflag, j, k, Ldfjac, Ml, msum, Mu, N
-  REAL(8) :: eps, Epsfcn, epsmch, Fjac(Ldfjac,*), Fvec(*), h, &
-    temp, Wa1(*), Wa2(*), X(*)
+  INTEGER :: Iflag, Ldfjac, Ml, Mu, N
+  REAL(8) :: Epsfcn
+  REAL(8) :: Fjac(Ldfjac,N), Fvec(N), Wa1(N), Wa2(N), X(N)
+  INTEGER :: i, j, k, msum
+  REAL(8) :: eps, epsmch, h, temp
   REAL(8), PARAMETER :: zero = 0.0D0
   !
   !     EPSMCH IS THE MACHINE PRECISION.

@@ -53,7 +53,7 @@ SUBROUTINE DPCHKT(N,X,Knotyp,T)
   !  Declare arguments.
   !
   INTEGER N, Knotyp
-  REAL(8) :: X(*), T(*)
+  REAL(8) :: X(N), T(2*N+4)
   !
   !  Declare local variables.
   !

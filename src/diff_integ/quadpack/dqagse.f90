@@ -166,17 +166,16 @@ SUBROUTINE DQAGSE(F,A,B,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,Alist,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   USE service, ONLY : D1MACH
   !
-  REAL(8) :: A, abseps, Abserr, Alist(*), area, area1, area12, &
-    area2, a1, a2, B, Blist(*), b1, b2, correc, defabs, &
-    defab1, defab2, dres, Elist(*), epmach, &
-    Epsabs, Epsrel, erlarg, erlast, errbnd, errmax, &
-    error1, error2, erro12, errsum, ertest,oflow, &
-    resabs, reseps, Result, res3la(3), Rlist(*), rlist2(52), small, uflow
-  INTEGER id, Ier, ierro, Iord(*), iroff1, iroff2, iroff3, jupbnd, k, &
-    ksgn, ktmin, Last, Limit, maxerr, Neval, nres, nrmax, numrl2
-  LOGICAL extrap, noext
-  !
+  INTEGER :: Ier, Last, Limit, Neval, Iord(Limit)
+  REAL(8) :: A, Abserr, B, Epsabs, Epsrel, Result
+  REAL(8) :: Alist(Limit), Blist(Limit), Elist(Limit), Rlist(Limit)
   REAL(8), EXTERNAL :: F
+  INTEGER :: id, ierro, iroff1, iroff2, iroff3, jupbnd, k, ksgn, ktmin, maxerr, &
+    nres, nrmax, numrl2
+  REAL(8) :: abseps, area, area1, area12, area2, a1, a2, b1, b2, correc, defabs, &
+    defab1, defab2, dres, epmach, erlarg, erlast, errbnd, errmax, error1, error2, &
+    erro12, errsum, ertest,oflow, resabs, reseps, res3la(3), rlist2(52), small, uflow
+  LOGICAL :: extrap, noext
   !
   !            THE DIMENSION OF RLIST2 IS DETERMINED BY THE VALUE OF
   !            LIMEXP IN SUBROUTINE DQELG (RLIST2 SHOULD BE OF DIMENSION

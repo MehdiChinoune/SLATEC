@@ -30,15 +30,12 @@ SUBROUTINE PJAC(Neq,Y,Yh,Nyh,Ewt,Ftem,Savf,Wm,Iwm,F,JAC,Rpar,Ipar)
   !   920422  Changed DIMENSION statement.  (WRB)
   USE DEBDF1, ONLY : EL0, H, TN, UROund, IER, MITer, N, NFE, NJE
   USE linear, ONLY : SGBFA, SGEFA
-  INTEGER Ipar(*)
-  REAL Rpar(*)
-  !
-  !LLL. OPTIMIZE
-  INTEGER Neq, Nyh, Iwm(*), i, i1, i2, ii, j, j1, jj, lenp, mba, mband, meb1, &
-    meband, ml, ml3, mu
+  INTEGER :: Neq, Nyh
+  INTEGER :: Iwm(:), Ipar(:)
+  REAL :: Y(Neq), Yh(Nyh,N), Ewt(N), Ftem(N), Savf(N), Wm(:), Rpar(:)
   EXTERNAL :: F, JAC
-  REAL Y(Neq), Yh(Nyh,*), Ewt(*), Ftem(*), Savf(*), Wm(*), con, di, fac, hl0, r, &
-    r0, srur, yi, yj, yjj
+  INTEGER :: i, i1, i2, ii, j, j1, jj, lenp, mba, mband, meb1, meband, ml, ml3, mu
+  REAL :: con, di, fac, hl0, r, r0, srur, yi, yj, yjj
   !-----------------------------------------------------------------------
   ! PJAC IS CALLED BY STOD  TO COMPUTE AND PROCESS THE MATRIX
   ! P = I - H*EL(1)*J, WHERE J IS AN APPROXIMATION TO THE JACOBIAN.
@@ -185,7 +182,7 @@ SUBROUTINE PJAC(Neq,Y,Yh,Nyh,Ewt,Ftem,Savf,Wm,Iwm,F,JAC,Rpar,Ipar)
     j = j + (N+1)
   END DO
   ! DO LU DECOMPOSITION ON P. --------------------------------------------
-  CALL SGEFA(Wm(3),N,N,Iwm(21),IER)
+  CALL SGEFA(Wm(3:N**2+2),N,N,Iwm(21:N+20),IER)
   RETURN
   100  IER = -1
   RETURN
@@ -196,6 +193,6 @@ SUBROUTINE PJAC(Neq,Y,Yh,Nyh,Ewt,Ftem,Savf,Wm,Iwm,F,JAC,Rpar,Ipar)
     ii = ii + meband
   END DO
   ! DO LU DECOMPOSITION OF P. --------------------------------------------
-  CALL SGBFA(Wm(3),meband,N,ml,mu,Iwm(21),IER)
+  CALL SGBFA(Wm(3:meband*N+2),meband,N,ml,mu,Iwm(21:N+20),IER)
   !----------------------- END OF SUBROUTINE PJAC -----------------------
 END SUBROUTINE PJAC

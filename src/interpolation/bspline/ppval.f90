@@ -71,8 +71,10 @@ REAL FUNCTION PPVAL(Ldc,C,Xi,Lxi,K,Ideriv,X,Inppv)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   USE service, ONLY : XERMSG
-  INTEGER i, Ideriv, Inppv, j, K, Ldc, Lxi, ndummy
-  REAL C(Ldc,*), dx, fltk, X, Xi(*)
+  INTEGER :: Ideriv, Inppv, K, Ldc, Lxi
+  REAL :: C(Ldc,Lxi), X, Xi(Lxi+1)
+  INTEGER :: i, j, ndummy
+  REAL :: dx, fltk
   !* FIRST EXECUTABLE STATEMENT  PPVAL
   PPVAL = 0.0E0
   IF ( K<1 ) THEN

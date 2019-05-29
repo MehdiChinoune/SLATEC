@@ -57,9 +57,10 @@ SUBROUTINE ASYIK(X,Fnu,Kode,Flgik,Ra,Arg,In,Y)
   !   910408  Updated the AUTHOR section.  (WRB)
   USE service, ONLY : R1MACH
   !
-  INTEGER In, j, jn, k, kk, Kode, l
-  REAL ak, ap, Arg, coef, etx, Flgik, fn, Fnu, gln, Ra, &
-    s1, s2, t, tol, t2, X, Y(*), z
+  INTEGER :: In, Kode
+  REAL :: Arg, Flgik, Fnu, Ra, X, Y(In)
+  INTEGER :: j, jn, k, kk, l
+  REAL :: ak, ap, coef, etx, fn, gln, s1, s2, t, tol, t2, z
   REAL, PARAMETER :: con(2) = [ 3.98942280401432678E-01, 1.25331413731550025E+00 ]
   REAL, PARAMETER :: c(65) = [ -2.08333333333333E-01, 1.25000000000000E-01, &
     3.34201388888889E-01, -4.01041666666667E-01, 7.03125000000000E-02, &

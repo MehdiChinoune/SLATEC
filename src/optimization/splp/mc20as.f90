@@ -34,11 +34,11 @@ SUBROUTINE MC20AS(Nc,Maxa,A,Inum,Jptr,Jnum,Jdisp)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
 
-  REAL ace, acep
-  INTEGER i, ice, icep, j, ja, jb, jce, jcep, Nc, Jdisp, Jptr(Nc), k, &
-    kr, locc, Maxa, nul
-  INTEGER Inum(*), Jnum(*)
-  REAL A(*)
+  INTEGER :: Nc, Jdisp, Jptr(Nc), Maxa
+  INTEGER :: Inum(Maxa), Jnum(Maxa)
+  REAL :: A(Maxa)
+  INTEGER :: i, ice, icep, j, ja, jb, jce, jcep, k, kr, locc, nul
+  REAL :: ace, acep
   !* FIRST EXECUTABLE STATEMENT  MC20AS
   nul = -Jdisp
   !**      CLEAR JPTR

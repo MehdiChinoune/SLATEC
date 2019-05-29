@@ -59,9 +59,10 @@ SUBROUTINE RFFTI1(N,Wa,Ifac)
   !   900131  Routine changed from subsidiary to user-callable.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
-  REAL arg, argh, argld, fi, tpi, Wa(*)
-  INTEGER i, ib, ido, Ifac(*), ii, ip, ipm, is, j, k1, l1, l2, ld, &
-    N, nf, nfm1, nl, nq, nr, ntry
+  INTEGER :: N, Ifac(15)
+  REAL :: Wa(N)
+  INTEGER :: i, ib, ido, ii, ip, ipm, is, j, k1, l1, l2, ld, nf, nfm1, nl, nq, nr, ntry
+  REAL :: arg, argh, argld, fi, tpi
   INTEGER, PARAMETER :: ntryh(4) = [ 4, 2, 3, 5 ]
   !* FIRST EXECUTABLE STATEMENT  RFFTI1
   nl = N

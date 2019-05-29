@@ -33,9 +33,12 @@ SUBROUTINE PPADD(N,Ierror,A,C,Cbp,Bp,Bh)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   USE CBLKT, ONLY : CNV, EPS, NCMplx
-  REAL A(*), Bh(*), Bp(*), C(*), db, psg, scnv, sgn, xl, xm, xr
-  INTEGER i3, icv, Ierror, if, ig, is, it, iz, j, modiz, N, nhalf, nt
-  COMPLEX cx, fsg, hsg, dd, f, fp, fpp, cdis, r1, r2, r3, Cbp(*)
+  INTEGER :: Ierror, N
+  REAL :: A(N), Bh(N), Bp(N), C(N)
+  COMPLEX :: Cbp(N)
+  INTEGER :: i3, icv, if, ig, is, it, iz, j, modiz, nhalf, nt
+  REAL :: db, psg, scnv, sgn, xl, xm, xr
+  COMPLEX :: cx, fsg, hsg, dd, f, fp, fpp, cdis, r1, r2, r3
   !* FIRST EXECUTABLE STATEMENT  PPADD
   scnv = SQRT(CNV)
   iz = N

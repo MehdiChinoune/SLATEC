@@ -97,7 +97,7 @@ SUBROUTINE DPCHCI(N,H,Slope,D,Incfd)
   !  DECLARE ARGUMENTS.
   !
   INTEGER N, Incfd
-  REAL(8) :: H(*), Slope(*), D(Incfd,*)
+  REAL(8) :: H(N), Slope(N), D(Incfd,N)
   !
   !  DECLARE LOCAL VARIABLES.
   !

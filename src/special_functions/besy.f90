@@ -74,9 +74,11 @@ SUBROUTINE BESY(X,Fnu,N,Y)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   USE service, ONLY : XERMSG, R1MACH, I1MACH
   !
-  INTEGER i, iflw, j, N, nb, nd, nn, nud
-  REAL azn, cn, dnu, elim, flgjy, fn, Fnu, rann, s, s1, s2, tm, &
-    trx, w(2), wk(7), w2n, X, xlim, xxn, Y(*)
+  INTEGER :: N
+  REAL :: Fnu, X, Y(N)
+  INTEGER :: i, iflw, j, nb, nd, nn, nud
+  REAL :: azn, cn, dnu, elim, flgjy, fn, rann, s, s1, s2, tm, &
+    trx, w(2), wk(7), w2n, xlim, xxn
   INTEGER, PARAMETER :: nulim(2) = [ 70, 100 ]
   !* FIRST EXECUTABLE STATEMENT  BESY
   nn = -I1MACH(12)

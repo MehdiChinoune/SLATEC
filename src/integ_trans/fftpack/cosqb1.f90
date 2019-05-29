@@ -35,9 +35,11 @@ SUBROUTINE COSQB1(N,X,W,Xh)
   !   881128  Modified by Dick Valent to meet prologue standards.
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
-  INTEGER i, k, kc, modn, N, np2, ns2
-  REAL W(*), X(*), Xh(*), xim1
+
+  INTEGER :: N
+  REAL :: W(N), X(N), Xh(2*N+15)
+  INTEGER :: i, k, kc, modn, np2, ns2
+  REAL :: xim1
   !* FIRST EXECUTABLE STATEMENT  COSQB1
   ns2 = (N+1)/2
   np2 = N + 2

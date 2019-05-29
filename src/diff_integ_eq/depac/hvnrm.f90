@@ -27,9 +27,10 @@ REAL FUNCTION HVNRM(V,Ncomp)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
-  
-  REAL V(*)
-  INTEGER k, Ncomp
+
+  INTEGER :: Ncomp
+  REAL :: V(Ncomp)
+  INTEGER :: k
   !* FIRST EXECUTABLE STATEMENT  HVNRM
   HVNRM = 0.
   DO k = 1, Ncomp

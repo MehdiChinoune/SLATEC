@@ -307,12 +307,12 @@ SUBROUTINE HWSCYL(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
-  INTEGER i, id2, id3, id4, id5, id6, Idimf, ierr1, Ierror, ij, &
-    istart, j, k, l, M, Mbdcnd, mp1, mstart, mstop, munk
-  REAL A, a1, a2, B, Bda(*), Bdb(*), Bdc(*), Bdd(*), C, D, deltar, deltht, &
-    dlrby2, dlrsq, dlthsq, Elmbda, F(Idimf,*), Pertrb, r, s
-  REAL s1, s2, W(*)
-  INTEGER N, Nbdcnd, np, np1, nsp1, nstart, nstm1, nstop, nunk
+  INTEGER :: Idimf, Ierror, M, Mbdcnd, N, Nbdcnd
+  REAL :: A, B, C, D, Elmbda, Pertrb
+  REAL :: Bda(N+1), Bdb(N+1), Bdc(M+1), Bdd(M+1), F(Idimf,N+1), W(:)
+  INTEGER :: i, id2, id3, id4, id5, id6, ierr1, ij, istart, j, k, l, mp1, mstart, &
+    mstop, munk, np, np1, nsp1, nstart, nstm1, nstop, nunk
+  REAL :: a1, a2, deltar, deltht, dlrby2, dlrsq, dlthsq, r, s, s1, s2
   !* FIRST EXECUTABLE STATEMENT  HWSCYL
   Ierror = 0
   IF ( A<0. ) Ierror = 1
@@ -534,8 +534,8 @@ SUBROUTINE HWSCYL(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   !
   !     CALL GENBUN TO SOLVE THE SYSTEM OF EQUATIONS.
   !
-  CALL GENBUN(Nbdcnd,nunk,1,munk,W(1),W(id2+1),W(id3+1),Idimf,&
-    F(mstart,nstart),ierr1,W(id4+1))
+  CALL GENBUN(Nbdcnd,nunk,1,munk,W(1:munk),W(id2+1:id3),W(id3+1:id4),Idimf,&
+    F(mstart,nstart),ierr1,W(id4+1:))
   W(1) = W(id4+1) + 3*munk
   IF ( Nbdcnd==0 ) THEN
     DO i = mstart, mstop

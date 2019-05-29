@@ -103,9 +103,9 @@ SUBROUTINE CGEEV(A,Lda,N,E,V,Ldv,Work,Job,Info)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   USE service, ONLY : XERMSG
-  INTEGER Job, m
-  INTEGER i, ihi, ilo, Info, j, k, l, Lda, Ldv, mdim, N
-  REAL A(*), E(*), Work(*), V(*)
+  INTEGER :: Info, Job, Lda, Ldv, N
+  REAL :: A(2*Lda*N), E(2*N), Work(3*N), V(2*Ldv*N)
+  INTEGER :: i, ihi, ilo, j, k, l, mdim, m
   !* FIRST EXECUTABLE STATEMENT  CGEEV
   IF ( N>Lda ) CALL XERMSG('SLATEC','CGEEV','N .GT. LDA.',1,1)
   IF ( N>Lda ) RETURN

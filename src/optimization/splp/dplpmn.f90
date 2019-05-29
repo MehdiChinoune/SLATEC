@@ -41,22 +41,26 @@ SUBROUTINE DPLPMN(DUSRMT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   INTERFACE
     SUBROUTINE DUSRMT(I,J,Aij,Indcat,Dattrv,Iflag)
       INTEGER :: I, J, indcat, iflag(10)
-      REAL(8) :: Dattrv(*), Aij
+      REAL(8) :: Dattrv(:), Aij
     END SUBROUTINE
   END INTERFACE
-  INTEGER i, ibas, ienter, ileave, Info, iopt, ipage, iplace, itlp, j, jstrt, k, &
-    key, Lbm, Lmx, lpg, lpr, lpr1, Mrelas, n20046, n20058, n20080, n20098, n20119, &
-    n20172, n20206, n20247, n20252, n20271, n20276, n20283, n20290, nerr, np, &
-    nparm, npr004, npr005, npr006, npr007, npr008, npr009, npr010, npr011, npr012, &
-    npr013, npr014, npr015, nredc, ntries, Nvars, nx0066, nx0091, nx0106, &
-    Ibasis(*), Ibb(*), Ibrc(Lbm,2), Imat(*), Ind(*), Ipr(*), Iwr(*), idum(01)
+  EXTERNAL :: DUSRMT
+  INTEGER :: Info, Lbm, Lmx, Mrelas, Nvars
+  INTEGER :: Ibasis(Nvars+Mrelas), Ibb(Nvars+Mrelas), Ibrc(Lbm,2), Imat(Lmx), &
+    Ind(Nvars+Mrelas), Ipr(2*Mrelas), Iwr(8*Mrelas)
+  REAL(8) :: Amat(Lmx), Basmat(Lbm), Bl(Nvars+Mrelas), Bu(Nvars+Mrelas), &
+    Colnrm(Nvars), Costs(Nvars), Csc(Nvars), Dattrv(:), Duals(Nvars+Mrelas), &
+    Erd(Mrelas), Erp(Mrelas), Prgopt(:), Primal(Nvars+Mrelas), Rg(Nvars+Mrelas), &
+    Rhs(Mrelas), Rprim(Mrelas), Rz(Nvars+Mrelas), Wr(Mrelas), Ww(Mrelas)
+  INTEGER :: i, ibas, ienter, ileave, iopt, ipage, iplace, itlp, j, jstrt, k, &
+    key, lpg, lpr, lpr1, n20046, n20058, n20080, n20098, n20119, n20172, n20206, &
+    n20247, n20252, n20271, n20276, n20283, n20290, nerr, np, nparm, npr004, &
+    npr005, npr006, npr007, npr008, npr009, npr010, npr011, npr012, npr013, &
+    npr014, npr015, nredc, ntries, nx0066, nx0091, nx0106, idum(01)
   INTEGER, TARGET :: intopt(08)
   INTEGER, POINTER :: idg, ipagef, isave, mxitlp, kprint, itbrc, npp, lprg
-  REAL(8) :: aij, Amat(*), anorm, Basmat(*), Bl(*), Bu(*), Colnrm(*), Costs(*), &
-    Csc(*), Dattrv(*), dirnrm, Duals(*), dulnrm, Erd(*), erdnrm, Erp(*), factor, &
-    gg, one, Prgopt(*), Primal(*), resnrm, Rg(*), Rhs(*), rhsnrm, Rprim(*), &
-    rprnrm, Rz(*), rzj, scalr, scosts, sizee, theta, upbnd, uu, Wr(*), &
-    Ww(*), xlamda, xval, zero, rdum(01)
+  REAL(8) :: aij, anorm, dirnrm, dulnrm, erdnrm, factor, gg, one, resnrm, rhsnrm, &
+    rprnrm, rzj, scalr, scosts, sizee, theta, upbnd, uu, xlamda, xval, zero, rdum(01)
   REAL(8), TARGET :: ropt(07)
   REAL(8), POINTER :: eps, asmall, abig, costsc, tolls, tune, tolabs
   !
@@ -158,7 +162,6 @@ SUBROUTINE DPLPMN(DUSRMT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   LOGICAL, POINTER :: colscp, savedt, contin, cstscp, minprb, sizeup, stpedg, usrbas
   LOGICAL :: unbnd, feas, finite, found, redbas, singlr, trans, zerolv
   CHARACTER(8) :: xern1, xern2
-  EXTERNAL :: DUSRMT
 
   contin => lopt(1)
   usrbas => lopt(2)

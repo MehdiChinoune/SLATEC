@@ -65,9 +65,10 @@ SUBROUTINE DBSQAD(T,Bcoef,N,K,X1,X2,Bquad,Work)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   USE service, ONLY : XERMSG
   !
-  INTEGER i, il1, il2, ilo, inbv, jf, K, left, m, mf, mflag, N, npk, np1
-  REAL(8) :: a, aa, b, bb, Bcoef(*), bma, bpa, Bquad, c1, gx, q, summ(5), T(*), &
-    ta, tb, Work(*), X1, X2, y1, y2
+  INTEGER :: K, N
+  REAL(8) :: Bcoef(N), Bquad, T(N+K), Work(3*K), X1, X2
+  INTEGER :: i, il1, il2, ilo, inbv, jf, left, m, mf, mflag, npk, np1
+  REAL(8) :: a, aa, b, bb, bma, bpa, c1, gx, q, summ(5), ta, tb, y1, y2
   !
   REAL(8), PARAMETER :: gpts(9) = [ 5.77350269189625764D-01, 2.38619186083196909D-01, &
     6.61209386466264514D-01, 9.32469514203152028D-01, 1.48874338981631211D-01, &

@@ -33,11 +33,13 @@ SUBROUTINE POISN2(M,N,Istag,Mixbnd,A,Bb,C,Q,Idimq,B,B2,B3,W,W2,W3,D,Tcos,P)
   !   920130  Modified to use merge routine S1MERG rather than deleted
   !           routine MERGE.  (WRB)
   USE data_handling, ONLY : S1MERG
-  INTEGER i, i1, i2, i2r, i2rby2, Idimq, ii, ip, ipstor, Istag, j, jm1, jm2, jm3, &
-    jp1, jp2, jp3, jr, jr2, jstart, jstep, jstop, k(4), kr, lr, M, Mixbnd, mr, N, &
-    nlast, nlastp, nr, nrod, nrodpr
-  REAL A(*), B(*), B2(*), B3(*), Bb(*), C(*), D(*), fden, fi, fistag, fnum, &
-    P(*), Q(Idimq,*), t, Tcos(*), W(*), W2(*), W3(*)
+  INTEGER :: Idimq, Istag, M, Mixbnd, N
+  REAL :: A(M), B(M), B2(M), B3(M), Bb(M), C(M), D(M), P(:), Q(Idimq,N), &
+    Tcos(4*N), W(M), W2(M), W3(M)
+  INTEGER :: i, i1, i2, i2r, i2rby2, ii, ip, ipstor, j, jm1, jm2, jm3, jp1, jp2, &
+    jp3, jr, jr2, jstart, jstep, jstop, k(4), kr, lr, mr, nlast, nlastp, nr, &
+    nrod, nrodpr
+  REAL :: fden, fi, fistag, fnum, t
   !* FIRST EXECUTABLE STATEMENT  POISN2
   fistag = 3 - Istag
   fnum = 1./Istag

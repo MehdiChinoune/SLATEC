@@ -68,10 +68,12 @@ SUBROUTINE DPOLCF(Xx,N,X,C,D,Work)
   !   891024  Corrected KEYWORD section.  (WRB)
   !   891024  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
-  
+
   !
-  INTEGER i, im1, k, km1, km1pi, km2n, km2npi, N, nm1, nmkp1, npkm1
-  REAL(8) :: C(*), D(*), pone, ptwo, X(*), Xx, Work(*)
+  INTEGER :: N
+  REAL(8) :: C(N), D(N), X(N), Xx, Work(2*N)
+  INTEGER :: i, im1, k, km1, km1pi, km2n, km2npi, nm1, nmkp1, npkm1
+  REAL(8) :: pone, ptwo
   !* FIRST EXECUTABLE STATEMENT  DPOLCF
   DO k = 1, N
     D(k) = C(k)

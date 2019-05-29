@@ -78,11 +78,11 @@ SUBROUTINE DGESL(A,Lda,N,Ipvt,B,Job)
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
-  INTEGER Lda, N, Ipvt(*), Job
-  REAL(8) :: A(Lda,*), B(*)
+  INTEGER :: Lda, N, Job, Ipvt(N)
+  REAL(8) :: A(Lda,N), B(N)
   !
+  INTEGER :: k, kb, l, nm1
   REAL(8) :: t
-  INTEGER k, kb, l, nm1
   !* FIRST EXECUTABLE STATEMENT  DGESL
   nm1 = N - 1
   IF ( Job/=0 ) THEN

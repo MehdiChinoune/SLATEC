@@ -23,9 +23,10 @@ SUBROUTINE DUSRMT(I,J,Aij,Indcat,Dattrv,Iflag)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
 
-  INTEGER I, Indcat, J, l
-  REAL(8) :: Dattrv(*), Aij
-  INTEGER Iflag(10)
+  INTEGER :: I, Indcat, J
+  INTEGER :: Iflag(10)
+  REAL(8) :: Dattrv(:), Aij
+  INTEGER :: l
   !
   !* FIRST EXECUTABLE STATEMENT  DUSRMT
   IF ( Iflag(1)==1 ) THEN

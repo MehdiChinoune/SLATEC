@@ -1707,7 +1707,7 @@ CONTAINS
     REAL(8) :: Abserr, Exact, Result
     INTEGER Ip, Kprint, Lierv, Lun, Neval, Num1
     !     .. Array Arguments ..
-    INTEGER Ierv(*)
+    INTEGER Ierv(Lierv)
     !     .. Local Scalars ..
     REAL(8) :: error
     INTEGER ier, k

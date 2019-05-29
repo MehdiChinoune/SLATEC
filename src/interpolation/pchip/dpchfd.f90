@@ -154,7 +154,7 @@ SUBROUTINE DPCHFD(N,X,F,D,Incfd,Skip,Ne,Xe,Fe,De,Ierr)
   !  DECLARE ARGUMENTS.
   !
   INTEGER N, Incfd, Ne, Ierr
-  REAL(8) :: X(*), F(Incfd,*), D(Incfd,*), Xe(*), Fe(*), De(*)
+  REAL(8) :: X(N), F(Incfd,N), D(Incfd,N), Xe(Ne), Fe(Ne), De(Ne)
   LOGICAL Skip
   !
   !  DECLARE LOCAL VARIABLES.

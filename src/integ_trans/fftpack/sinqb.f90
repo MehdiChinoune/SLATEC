@@ -75,8 +75,10 @@ SUBROUTINE SINQB(N,X,Wsave)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
-  INTEGER k, kc, N, ns2
-  REAL Wsave(*), X(*), xhold
+  INTEGER :: N
+  REAL :: Wsave(3*N+15), X(N)
+  INTEGER :: k, kc, ns2
+  REAL :: xhold
   !* FIRST EXECUTABLE STATEMENT  SINQB
   IF ( N>1 ) THEN
     ns2 = N/2

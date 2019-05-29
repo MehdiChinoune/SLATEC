@@ -107,9 +107,10 @@ SUBROUTINE DCKDER(M,N,X,Fvec,Fjac,Ldfjac,Xp,Fvecp,Mode,Err)
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   USE service, ONLY : D1MACH
-  INTEGER i, j, Ldfjac, M, Mode, N
-  REAL(8) :: eps, epsf, epslog, epsmch, Err(*), Fjac(Ldfjac,*), Fvec(*), &
-    Fvecp(*), temp, X(*), Xp(*)
+  INTEGER :: Ldfjac, M, Mode, N
+  REAL(8) :: Err(M), Fjac(Ldfjac,N), Fvec(M), Fvecp(M), X(N), Xp(N)
+  INTEGER :: i, j
+  REAL(8) :: eps, epsf, epslog, epsmch, temp
   REAL(8), PARAMETER :: factor = 1.0D2, one = 1.0D0, zero = 0.0D0
   !
   !     EPSMCH IS THE MACHINE PRECISION.

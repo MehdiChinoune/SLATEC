@@ -424,14 +424,15 @@ SUBROUTINE SBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
   USE service, ONLY : XERMSG, R1MACH
   USE linear, ONLY : SAXPY, SROT, SROTG, SSWAP
   USE optimization, ONLY : SVOUT, IVOUT
-  INTEGER i, igopr, ioff, ip, iprint, itemp, iter, itmax, j, jbig, jcol, &
-    jdrop, jdrop1, jdrop2, jlarge, jmag, jp, lds, lgopr, lp, Mdw, Minput, Mode, &
-    mrows, mval, Ncols, nsetb, i2(1), jbig2(1)
-  REAL W(Mdw,*), Bl(*), Bu(*), X(*), Rw(*), Ww(*), Scl(*)
-  REAL alpha, beta, bou, colabv, colblo, cl1, cl2, cl3, big, fac, Rnorm, sc, ss, &
+  INTEGER :: Mdw, Minput, Mode, Ncols
+  INTEGER :: Ibasis(Ncols), Ibb(Ncols), Ind(Ncols), Iopt(*)
+  REAL :: Rnorm, W(Mdw,Ncols+1), Bl(Ncols), Bu(Ncols), X(2*Ncols+7), Rw(Ncols), &
+    Ww(Ncols), Scl(Ncols)
+  INTEGER :: i, igopr, ioff, ip, iprint, itemp, iter, itmax, j, jbig, jcol, jdrop, &
+    jdrop1, jdrop2, jlarge, jmag, jp, lds, lgopr, lp, mrows, mval, nsetb, i2(1), jbig2(1)
+  REAL :: alpha, beta, bou, colabv, colblo, cl1, cl2, cl3, big, fac, sc, ss, &
     t, tolind, wt, t1, t2, wbig, wlarge, wmag, xnew, tolsze
-  INTEGER Ibasis(*), Ibb(*), Ind(*), Iopt(*)
-  LOGICAL found, constr
+  LOGICAL :: found, constr
   CHARACTER(8) :: xern1, xern2
   CHARACTER(16) :: xern3, xern4
   !

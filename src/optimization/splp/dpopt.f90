@@ -37,14 +37,14 @@ SUBROUTINE DPOPT(Prgopt,Mrelas,Nvars,Info,Csc,Ibasis,Ropt,Intopt,Lopt)
   !   900328  Added TYPE section.  (WRB)
   !   900510  Fixed an error message.  (RWC)
   USE service, ONLY : XERMSG, D1MACH
-  INTEGER i, iadbig, ictmax, ictopt, idg, Info, iopt, ipagef, &
-    isave, itbrc, itest, j, key, kprint, last, lds, lprg, &
-    Mrelas, mxitlp, n20043
-  INTEGER n20053, n20096, nerr, next, npp, Nvars
-  REAL(8) :: abig, asmall, costsc, Csc(*), eps, one, Prgopt(*), &
-    Ropt(07), tolls, tune, zero, tolabs
-  INTEGER Ibasis(*), Intopt(08)
-  LOGICAL contin, usrbas, sizeup, savedt, colscp, cstscp, minprb, stpedg, Lopt(8)
+  INTEGER :: Info, Mrelas, Nvars
+  INTEGER :: Ibasis(Nvars+Mrelas), Intopt(08)
+  REAL(8) :: Csc(Nvars), Prgopt(:), Ropt(07)
+  LOGICAL :: Lopt(8)
+  INTEGER :: i, iadbig, ictmax, ictopt, idg, iopt, ipagef, isave, itbrc, itest, &
+    j, key, kprint, last, lds, lprg, mxitlp, n20043, n20053, n20096, nerr, next, npp
+  REAL(8) :: abig, asmall, costsc, eps, one, tolls, tune, zero, tolabs
+  LOGICAL :: contin, usrbas, sizeup, savedt, colscp, cstscp, minprb, stpedg
   !
   !* FIRST EXECUTABLE STATEMENT  DPOPT
   iopt = 1

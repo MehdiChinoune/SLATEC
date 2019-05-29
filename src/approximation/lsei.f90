@@ -391,14 +391,14 @@ SUBROUTINE LSEI(W,Mdw,Me,Ma,Mg,N,Prgopt,X,Rnorme,Rnorml,Mode,Ws,Ip)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   USE service, ONLY : XERMSG, R1MACH
   USE linear, ONLY : H12, SAXPY, SSWAP
-  INTEGER Ip(3), Ma, Mdw, Me, Mg, Mode, N
-  REAL Prgopt(*), Rnorme, Rnorml, W(Mdw,*), Ws(*), X(*)
+  INTEGER :: Ma, Mdw, Me, Mg, Mode, N, Ip(Mg+2*N+2)
+  REAL :: Prgopt(:), Rnorme, Rnorml, W(Mdw,N+1), Ws(*), X(N)
   !
-  REAL enorm, fnorm, gam, rb, rn, rnmax, sizee, sn, snmax, t, tau, uj, up, vj, &
+  REAL :: enorm, fnorm, gam, rb, rn, rnmax, sizee, sn, snmax, t, tau, uj, up, vj, &
     xnorm, xnrme
-  INTEGER i, imax, j, jp1, k, key, kranke, last, lchk, link, m,  mapke1, mdeqc, &
+  INTEGER :: i, imax, j, jp1, k, key, kranke, last, lchk, link, m,  mapke1, mdeqc, &
     mend, mep1, n1, n2, next, nlink, nopt, np1, ntimes
-  LOGICAL cov
+  LOGICAL :: cov
   CHARACTER(8) :: xern1, xern2, xern3, xern4
   !
   REAL, SAVE :: srelpr

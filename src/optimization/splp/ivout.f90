@@ -56,8 +56,9 @@ SUBROUTINE IVOUT(N,Ix,Ifmt,Idigit)
   !   900402  Added TYPE section.  (WRB)
   !   910403  Updated AUTHOR section.  (WRB)
   USE service, ONLY : I1MACH
-  INTEGER i, Idigit, Ix(*), j, k1, k2, lout, N, ndigit
-  CHARACTER Ifmt*(*)
+  INTEGER :: Idigit, N, Ix(N)
+  CHARACTER :: Ifmt*(*)
+  INTEGER :: i, j, k1, k2, lout, ndigit
   !
   !     GET THE UNIT NUMBER WHERE OUTPUT WILL BE WRITTEN.
   !* FIRST EXECUTABLE STATEMENT  IVOUT

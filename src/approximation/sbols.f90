@@ -430,14 +430,13 @@ SUBROUTINE SBOLS(W,Mdw,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Iw)
   ! ++
   USE service, ONLY : XERMSG
   USE linear, ONLY : SROT, SROTG
+  INTEGER :: Mdw, Mode, Mrows, Ncols
+  INTEGER :: Ind(Ncols), Iw(2*Ncols), Iopt(*)
+  REAL :: Rnorm, W(Mdw,Ncols+1), Bl(Ncols), Bu(Ncols), X(2*Ncols), Rw(5*Ncols)
   INTEGER i, ibig, inrows, ip, j, jp, lds, lenx, liopt, llb, lliw, llrw, &
-    llx, lmdw, lndw, locdim, lp, Mdw, mnew, Mode, Mrows, Ncols, nerr
-  REAL W(Mdw,*), Bl(*), Bu(*), X(*), Rw(*)
-  REAL sc, ss, one, Rnorm, zero
-  !
-  !     THIS VARIABLE SHOULD REMAIN TYPE REAL.
-  INTEGER Ind(*), Iopt(*), Iw(*)
-  LOGICAL checkl
+    llx, lmdw, lndw, locdim, lp, mnew, nerr
+  REAL :: sc, ss, one, zero
+  LOGICAL :: checkl
   CHARACTER(8) :: xern1, xern2
   CHARACTER(16) :: xern3, xern4
   INTEGER, SAVE :: locacc, lopt, iscale

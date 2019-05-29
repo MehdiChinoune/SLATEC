@@ -81,10 +81,12 @@ SUBROUTINE DCOEF(Yh,Yp,Ncomp,Nrowb,Nfc,B,Beta,Coef,Inhomo,Re,Ae,By,&
   USE DML, ONLY : EPS
   USE service, ONLY : XGETF, XSETF
   !
-  INTEGER i, Iflag, Inhomo, Iwork(*), j, k, kflag, ki, l, mlso, Ncomp, ncomp2, &
-    nf, Nfc, Nfcc, nfccm1, Nrowb
-  REAL(8) :: Ae, B(Nrowb,*), bbn, Beta(*), bn, brn, By(Nfcc,*), bykl, bys, &
-    Coef(*), cons, Cvec(*), gam, Re, un, Work(*), Yh(Ncomp,*), Yp(*), ypn
+  INTEGER :: Iflag, Inhomo, Ncomp, Nfc, Nfcc, Nrowb, Iwork(*)
+  REAL(8) :: Ae, Re
+  REAL(8) :: B(Nrowb,Ncomp), Beta(Nrowb), By(Nfcc,Ncomp), Coef(Nfcc), Cvec(Nrowb), &
+    Work(*), Yh(Ncomp,Nfcc), Yp(Ncomp)
+  INTEGER :: i, j, k, kflag, ki, l, mlso, ncomp2, nf, nfccm1
+  REAL(8) :: bbn, bn, brn, bykl, bys, cons, gam, un, ypn
   !* FIRST EXECUTABLE STATEMENT  DCOEF
   !
   !     SET UP MATRIX  B*YH  AND VECTOR  BETA - B*YP

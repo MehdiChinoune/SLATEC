@@ -116,7 +116,7 @@ REAL(8) FUNCTION DPCHID(N,X,F,D,Incfd,Skip,Ia,Ib,Ierr)
   !  DECLARE ARGUMENTS.
   !
   INTEGER N, Incfd, Ia, Ib, Ierr
-  REAL(8) :: X(*), F(Incfd,*), D(Incfd,*)
+  REAL(8) :: X(N), F(Incfd,N), D(Incfd,N)
   LOGICAL Skip
   !
   !  DECLARE LOCAL VARIABLES.

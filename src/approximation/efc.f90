@@ -237,8 +237,9 @@ SUBROUTINE EFC(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkpt,Mdein,Mdeout,Coeff,Lw,W)
   !                         WRITTEN BY R. HANSON, SANDIA NATL. LABS.,
   !                         ALB., N. M., AUGUST-SEPTEMBER, 1980.
   !
-  REAL Bkpt(*), Coeff(*), Sddata(*), W(*), Xdata(*), Ydata(*)
-  INTEGER Lw, Mdein, Mdeout, Nbkpt, Ndata, Nord
+  INTEGER :: Lw, Mdein, Mdeout, Nbkpt, Ndata, Nord
+  REAL :: Bkpt(Nbkpt), Coeff(Nbkpt-Nord), Sddata(Ndata), W(Lw), Xdata(Ndata), &
+    Ydata(Ndata)
   !
   INTEGER lbf, lbkpt, lg, lptemp, lww, lxtemp, mdg, mdw
   !

@@ -39,9 +39,10 @@ SUBROUTINE FULMAT(I,J,Aij,Indcat,Prgopt,Dattrv,Iflag)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900328  Added TYPE section.  (WRB)
   USE service, ONLY : XERMSG
-  INTEGER I, Indcat, J, key, level, lp, nerr, next
-  REAL Aij, Dattrv(*), Prgopt(*)
-  INTEGER Iflag(10)
+  INTEGER :: I, Indcat, J
+  INTEGER :: Iflag(10)
+  REAL :: Aij, Dattrv(:), Prgopt(:)
+  INTEGER :: key, level, lp, nerr, next
   REAL, PARAMETER :: zero = 0.
   !* FIRST EXECUTABLE STATEMENT  FULMAT
   IF ( Iflag(1)==1 ) THEN

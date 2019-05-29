@@ -747,14 +747,15 @@ SUBROUTINE DEBDF(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,&
     ITStop, IJAc, IBAnd
   USE service, ONLY : XERMSG
   !
-  REAL Atol(*), Rpar(*), Rtol(*), Rwork(*), T, Tout, Y(*)
-  INTEGER :: icomi, icomr, idelsn, Idid, iinout, ilrw, Info(15), Ipar(*), itstar, &
-    Iwork(*), iypout, Liw, Lrw, ml, mu, Neq
-  LOGICAL intout
+  INTEGER :: Idid, Liw, Lrw, Neq
+  INTEGER :: Info(15), Ipar(:), Iwork(Liw)
+  REAL :: T, Tout
+  REAL :: Atol(:), Rpar(:), Rtol(:), Rwork(Lrw), Y(Neq)
+  EXTERNAL :: F, JAC
+  INTEGER :: icomi, icomr, idelsn, iinout, ilrw, itstar, iypout, ml, mu
+  LOGICAL :: intout
   CHARACTER(8) :: xern1, xern2
   CHARACTER(16) :: xern3
-  !
-  EXTERNAL :: F, JAC
   !
   !        CHECK FOR AN APPARENT INFINITE LOOP
   !
@@ -897,8 +898,8 @@ SUBROUTINE DEBDF(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,&
   Rwork(itstar) = T
   !
   CALL LSOD(F,Neq,T,Y,Tout,Rtol,Atol,Idid,Rwork(iypout),Rwork(IYH),&
-    Rwork(IYH),Rwork(IEWt),Rwork(ISAvf),Rwork(IACor),Rwork(IWM),&
-    Iwork(1),JAC,intout,Rwork(1),Rwork(12),Rwork(idelsn),Rpar,Ipar)
+    Rwork(IYH),Rwork(IEWt:ISAvf-1),Rwork(ISAvf:IACor-1),Rwork(IACor:IWM-1),&
+    Rwork(IWM:idelsn),Iwork,JAC,intout,Rwork(1),Rwork(12),Rwork(idelsn),Rpar,Ipar)
   !
   Iwork(iinout) = -1
   IF ( intout ) Iwork(iinout) = 1

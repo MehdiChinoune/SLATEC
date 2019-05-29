@@ -27,8 +27,8 @@ SUBROUTINE DY(U,Idmn,I,J,Uyyy,Uyyyy)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   USE SPLPCM, ONLY : L, DLY4, KSWy, TDLy3
-  INTEGER I, Idmn, J
-  REAL U(Idmn,*), Uyyy, Uyyyy
+  INTEGER :: I, Idmn, J
+  REAL :: U(Idmn,L), Uyyy, Uyyyy
   !* FIRST EXECUTABLE STATEMENT  DY
   IF ( J>2.AND.J<(L-1) ) THEN
     !

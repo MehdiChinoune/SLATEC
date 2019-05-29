@@ -49,10 +49,10 @@ REAL FUNCTION ENORM(N,X)
   !           (WRB)
   !   900328  Added TYPE section.  (WRB)
 
-  INTEGER N
-  REAL X(*)
-  INTEGER i
-  REAL agiant, floatn, s1, s2, s3, xabs, x1max, x3max
+  INTEGER :: N
+  REAL :: X(N)
+  INTEGER :: i
+  REAL :: agiant, floatn, s1, s2, s3, xabs, x1max, x3max
   REAL, PARAMETER :: one = 1.0E0, zero = 0.0E0, rdwarf = 3.834E-20, rgiant = 1.304E19
   !* FIRST EXECUTABLE STATEMENT  ENORM
   s1 = zero

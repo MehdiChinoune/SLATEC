@@ -96,7 +96,7 @@ SUBROUTINE CHFEV(X1,X2,F1,F2,D1,D2,Ne,Xe,Fe,Next,Ierr)
   !  DECLARE ARGUMENTS.
   !
   INTEGER Ne, Next(2), Ierr
-  REAL X1, X2, F1, F2, D1, D2, Xe(*), Fe(*)
+  REAL X1, X2, F1, F2, D1, D2, Xe(Ne), Fe(Ne)
   !
   !  DECLARE LOCAL VARIABLES.
   !

@@ -116,9 +116,10 @@ SUBROUTINE CGEIR(A,Lda,N,V,Itask,Ind,Work,Iwork)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   USE service, ONLY : R1MACH, XERMSG
   !
-  INTEGER Lda, N, Itask, Ind, Iwork(*), info, j
-  COMPLEX A(Lda,*), V(*), Work(N,*)
-  REAL xnorm, dnorm
+  INTEGER :: Lda, N, Itask, Ind, Iwork(N)
+  COMPLEX :: A(Lda,N), V(N), Work(N,N+1)
+  INTEGER :: info, j
+  REAL :: xnorm, dnorm
   CHARACTER(8) :: xern1, xern2
   !* FIRST EXECUTABLE STATEMENT  CGEIR
   IF ( Lda<N ) THEN

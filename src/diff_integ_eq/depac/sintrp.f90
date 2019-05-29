@@ -60,10 +60,13 @@ SUBROUTINE SINTRP(X,Y,Xout,Yout,Ypout,Neqn,Kold,Phi,Ivc,Iv,Kgi,Gi,Alpha,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
-  INTEGER i, iq, Iv(10), Ivc, iw, j, jq, Kgi, Kold, kp1, kp2, l, m, Neqn
-  REAL alp, Alpha(12), c(13), g(13), gama, gdi, gdif, Gi(11), h, hi, hmu, Og(13), &
-    Ow(12), Ox, Oy(*), Phi(Neqn,16), rmu, sigma, temp1, temp2
-  REAL temp3, w(13), X, xi, xim1, xiq, Xout, Y(*), Yout(*), Ypout(*)
+  INTEGER :: Ivc, Kgi, Kold, Neqn, Iv(10)
+  REAL :: Ox, X, Xout
+  REAL :: Alpha(12), Gi(11), Og(13), Ow(12), Oy(Neqn), Phi(Neqn,16), Y(Neqn), &
+    Yout(Neqn), Ypout(Neqn)
+  INTEGER :: i, iq, iw, j, jq, kp1, kp2, l, m
+  REAL :: alp, c(13), g(13), gama, gdi, gdif, h, hi, hmu, rmu, sigma, temp1, &
+    temp2, temp3, w(13), xi, xim1, xiq
   !
   !* FIRST EXECUTABLE STATEMENT  SINTRP
   kp1 = Kold + 1

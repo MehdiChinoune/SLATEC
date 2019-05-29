@@ -47,13 +47,13 @@ SUBROUTINE EZFFTI(N,Wsave)
   !   881128  Modified by Dick Valent to meet prologue standards.
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
-  INTEGER N
-  REAL Wsave(*)
+
+  INTEGER :: N
+  REAL :: Wsave(3*N+15)
   INTEGER :: ifac(15)
   !* FIRST EXECUTABLE STATEMENT  EZFFTI
   IF ( N==1 ) RETURN
-  ifac = INT( Wsave(2*N+1:2*N+15) )
+  ifac = INT( Wsave(3*N+1:3*N+15) )
   CALL EZFFT1(N,Wsave(2*N+1),ifac)
   Wsave(3*N+1:3*N+15) = ifac
 END SUBROUTINE EZFFTI

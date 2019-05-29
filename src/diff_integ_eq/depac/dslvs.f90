@@ -31,8 +31,10 @@ SUBROUTINE DSLVS(Wm,Iwm,X)
   USE DDEBD1, ONLY : EL0, H, IER, MITer, N
   USE linear, ONLY : DGBSL, DGESL
   !
-  INTEGER i, Iwm(*), meband, ml, mu
-  REAL(8) :: di, hl0, phl0, r, Wm(*), X(*)
+  INTEGER :: Iwm(:)
+  REAL(8) :: Wm(:), X(N)
+  INTEGER :: i, meband, ml, mu
+  REAL(8) :: di, hl0, phl0, r
   !     ------------------------------------------------------------------
   !      THIS ROUTINE MANAGES THE SOLUTION OF THE LINEAR SYSTEM ARISING
   !      FROM A CHORD ITERATION.  IT IS CALLED BY DSTOD  IF MITER .NE. 0.
@@ -88,10 +90,10 @@ SUBROUTINE DSLVS(Wm,Iwm,X)
       ml = Iwm(1)
       mu = Iwm(2)
       meband = 2*ml + mu + 1
-      CALL DGBSL(Wm(3),meband,N,ml,mu,Iwm(21),X,0)
+      CALL DGBSL(Wm(3:meband*N+2),meband,N,ml,mu,Iwm(21:N+20),X,0)
     CASE DEFAULT
       !     ......EXIT
-      CALL DGESL(Wm(3),N,N,Iwm(21),X,0)
+      CALL DGESL(Wm(3:N**2+2),N,N,Iwm(21:N+20),X,0)
   END SELECT
   RETURN
   !     ...EXIT

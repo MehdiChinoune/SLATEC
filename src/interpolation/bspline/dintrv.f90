@@ -69,8 +69,9 @@ SUBROUTINE DINTRV(Xt,Lxt,X,Ilo,Ileft,Mflag)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   !
-  INTEGER ihi, Ileft, Ilo, istep, Lxt, Mflag, middle
-  REAL(8) :: X, Xt(*)
+  INTEGER :: Ileft, Ilo, Lxt, Mflag
+  REAL(8) :: X, Xt(Lxt)
+  INTEGER :: ihi, istep, middle
   !* FIRST EXECUTABLE STATEMENT  DINTRV
   ihi = Ilo + 1
   IF ( ihi>=Lxt ) THEN

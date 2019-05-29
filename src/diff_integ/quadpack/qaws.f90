@@ -184,11 +184,10 @@ SUBROUTINE QAWS(F,A,B,Alfa,Beta,Integr,Epsabs,Epsrel,Result,Abserr,Neval,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   USE service, ONLY : XERMSG
-  INTEGER Last
-  REAL A, Abserr, Alfa, B, Beta, Epsabs, Epsrel, Result, Work(*)
-  INTEGER Ier, Integr, Iwork(*), Lenw, Limit, lvl, l1, l2, l3, Neval
-  !
+  INTEGER :: Ier, Integr, Lenw, Limit, Last, Neval, Iwork(Limit)
+  REAL :: A, Abserr, Alfa, B, Beta, Epsabs, Epsrel, Result, Work(Lenw)
   REAL, EXTERNAL :: F
+  INTEGER :: lvl, l1, l2, l3
   !
   !         CHECK VALIDITY OF LIMIT AND LENW.
   !

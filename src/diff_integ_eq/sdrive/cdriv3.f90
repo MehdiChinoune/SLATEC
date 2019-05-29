@@ -733,16 +733,18 @@ SUBROUTINE CDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
   USE service, ONLY : XERMSG, R1MACH
   USE linear, ONLY : SCNRM2, CGBSL, CGESL, CGBFA, CGEFA
   EXTERNAL :: F, JACOBN, FA, G, USERS
-  COMPLEX Work(*), Y(*)
-  REAL ae, avgh, avgord, big, el(13,12), Eps, Ewt(*), G, glast, gnow, h, Hmax, &
-    hold, hsign, hused, rc, re, rmax, sizee, summ, T, tlast, Tout, &
-    tq(3,12), trend, troot, uround
-  INTEGER i, ia, idfdy, Ierflg, Ierror, ifac, iflag, ignow, Impl, imxerr, info, &
-    iroot, isave1, isave2, itroot, Iwork(*), iywt, j, jstate, jtroot, lenchk, &
-    Leniw, Lenw, liwchk, matdim, maxord, Mint, Miter, Ml, Mu, Mxord, Mxstep, N, &
-    Nde, ndecom, npar, Nroot, Nstate, nstepl, Ntask
-  LOGICAL convrg
-  CHARACTER intgr1*8, intgr2*8, rl1*16, rl2*16
+  INTEGER :: Ierflg, Ierror, Impl, Leniw, Lenw, Mint, Miter, Ml, Mu, Mxord, &
+    Mxstep, N, Nde, Nroot, Nstate, Ntask, Iwork(Leniw+N)
+  REAL :: Eps, G, Hmax, T, Tout, Ewt(N)
+  COMPLEX :: Work(Lenw+Leniw), Y(N)
+  INTEGER :: i, ia, idfdy, ifac, iflag, ignow, imxerr, info, iroot, isave1, &
+    isave2, itroot, iywt, j, jstate, jtroot, lenchk, liwchk, matdim, maxord, &
+    ndecom, npar, nstepl
+  REAL :: ae, avgh, avgord, big, glast, gnow, h, hold, hsign, hused, rc, re, &
+    rmax, sizee, summ, tlast, trend, troot, uround, el(13,12), tq(3,12)
+  LOGICAL :: convrg
+  CHARACTER(8) :: intgr1, intgr2
+  CHARACTER(16) :: rl1, rl2
   REAL, PARAMETER :: NROUND = 20.E0
   INTEGER, PARAMETER :: IAVGH = 1, IHUSED = 2, IAVGRD = 3, IEL = 4, IH = 160, &
     IHMAX = 161, IHOLD = 162, IHSIGN = 163, IRC = 164, IRMAX = 165, IT = 166, &

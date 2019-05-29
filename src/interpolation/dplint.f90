@@ -48,8 +48,10 @@ SUBROUTINE DPLINT(N,X,Y,C)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   USE service, ONLY : XERMSG
-  INTEGER i, k, km1, N
-  REAL(8) :: dif, C(*), X(*), Y(*)
+  INTEGER :: N
+  REAL(8) :: C(N), X(N), Y(N)
+  INTEGER :: i, k, km1
+  REAL(8) :: dif
   !* FIRST EXECUTABLE STATEMENT  DPLINT
   IF ( N<=0 ) THEN
     CALL XERMSG('SLATEC','DPLINT','N IS ZERO OR NEGATIVE.',2,1)

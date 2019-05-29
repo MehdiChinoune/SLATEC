@@ -28,10 +28,11 @@ REAL(8) FUNCTION DHVNRM(V,Ncomp)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
-  
+
   !
-  INTEGER k, Ncomp
-  REAL(8) :: V(*)
+  INTEGER :: Ncomp
+  REAL(8) :: V(Ncomp)
+  INTEGER :: k
   !* FIRST EXECUTABLE STATEMENT  DHVNRM
   DHVNRM = 0.0D0
   DO k = 1, Ncomp

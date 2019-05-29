@@ -25,9 +25,10 @@ SUBROUTINE BDIFF(L,V)
   !   820601  DATE WRITTEN
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
-  
-  INTEGER i, j, k, L
-  REAL V(*)
+
+  INTEGER :: L
+  REAL :: V(L)
+  INTEGER :: i, j, k
   !* FIRST EXECUTABLE STATEMENT  BDIFF
   IF ( L==1 ) RETURN
   DO j = 2, L

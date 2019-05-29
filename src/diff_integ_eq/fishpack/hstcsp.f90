@@ -404,12 +404,12 @@ SUBROUTINE HSTCSP(Intl,A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
-  INTEGER Idimf, ierr1, Ierror, Intl, iwan, iwbm, iwbn, iwcm, iwcn, &
-    iwrsq, iwsnth, iwwrk, M, Mbdcnd, N, Nbdcnd
-  REAL A, B, Bda(*), Bdb(*), Bdc(*), Bdd(*), C, D, Elmbda, F(Idimf,*), &
-    Pertrb, pi, W(*)
+  INTEGER :: Idimf, Ierror, Intl, M, Mbdcnd, N, Nbdcnd
+  REAL :: A, B, C, D, Elmbda, Pertrb
+  REAL :: Bda(N), Bdb(N), Bdc(M), Bdd(M), F(Idimf,N), W(:)
+  INTEGER :: ierr1, iwan, iwbm, iwbn, iwcm, iwcn, iwrsq, iwsnth, iwwrk
+  REAL, PARAMETER :: pi = 3.14159265358979
   !* FIRST EXECUTABLE STATEMENT  HSTCSP
-  pi = PIMACH()
   !
   !     CHECK FOR INVALID INPUT PARAMETERS
   !
@@ -442,8 +442,8 @@ SUBROUTINE HSTCSP(Intl,A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
     iwwrk = iwrsq + N
     ierr1 = 0
     CALL HSTCS1(Intl,A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
-      Idimf,Pertrb,ierr1,W,W(iwbm),W(iwcm),W(iwan),W(iwbn),W(iwcn)&
-      ,W(iwsnth),W(iwrsq),W(iwwrk))
+      Idimf,Pertrb,ierr1,W(1:iwbm-1),W(iwbm:iwcm-1),W(iwcm:iwan-1),W(iwan:iwbn-1),&
+      W(iwbn:iwcn-1),W(iwcn:iwsnth-1),W(iwsnth:iwrsq-1),W(iwrsq:iwwrk-1),W(iwwrk:))
     W(1) = W(iwwrk) + iwwrk - 1
     Ierror = ierr1
   END IF

@@ -26,8 +26,10 @@ SUBROUTINE DFSPVN(T,Jhigh,Indexx,X,Ileft,Vnikx)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
 
-  REAL(8) :: T(*), vm, vmprev, Vnikx(*), X
-  INTEGER Ileft, imjp1, Indexx, ipj, Jhigh, jp1, jp1ml, l
+  INTEGER :: Ileft, Indexx, Jhigh
+  REAL(8) :: T(:), Vnikx(*), X
+  REAL(8) :: vm, vmprev
+  INTEGER :: imjp1, ipj, jp1, jp1ml, l
   INTEGER :: j = 1
   REAL(8) :: deltam(20) = 0.0D0, deltap(20) = 0.0D0
   !* FIRST EXECUTABLE STATEMENT  DFSPVN

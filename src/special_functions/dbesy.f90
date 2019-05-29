@@ -77,9 +77,11 @@ SUBROUTINE DBESY(X,Fnu,N,Y)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   USE service, ONLY : XERMSG, D1MACH, I1MACH
   !
-  INTEGER i, iflw, j, N, nb, nd, nn, nud
-  REAL(8) :: azn, cn, dnu, elim, flgjy, fn, Fnu, rann, s, s1, &
-    s2, tm, trx, w(2), wk(7), w2n, X, xlim, xxn, Y(*)
+  INTEGER :: N
+  REAL(8) :: Fnu, X, Y(N)
+  INTEGER :: i, iflw, j, nb, nd, nn, nud
+  REAL(8) :: azn, cn, dnu, elim, flgjy, fn, rann, s, s1, s2, tm, trx, w(2), &
+    wk(7), w2n, xlim, xxn
   INTEGER, PARAMETER :: nulim(2) = [ 70, 100 ]
   !* FIRST EXECUTABLE STATEMENT  DBESY
   nn = -I1MACH(15)

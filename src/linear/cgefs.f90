@@ -112,8 +112,8 @@ SUBROUTINE CGEFS(A,Lda,N,V,Itask,Ind,Work,Iwork)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   USE service, ONLY : R1MACH, XERMSG
   !
-  INTEGER Lda, N, Itask, Ind, Iwork(*)
-  COMPLEX A(Lda,*), V(*), Work(*)
+  INTEGER Lda, N, Itask, Ind, Iwork(N)
+  COMPLEX A(Lda,N), V(N), Work(N)
   REAL rcond
   CHARACTER(8) :: xern1, xern2
   !* FIRST EXECUTABLE STATEMENT  CGEFS

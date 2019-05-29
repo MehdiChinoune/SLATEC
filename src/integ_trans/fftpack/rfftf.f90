@@ -96,9 +96,9 @@ SUBROUTINE RFFTF(N,R,Wsave)
   !           because of non-standard Fortran 77 arguments in the
   !           call to CFFTB1.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
-  INTEGER N
-  REAL R(*), Wsave(*)
+
+  INTEGER :: N
+  REAL :: R(N), Wsave(2*N+15)
   INTEGER :: ifac(15)
   !* FIRST EXECUTABLE STATEMENT  RFFTF
   IF ( N==1 ) RETURN

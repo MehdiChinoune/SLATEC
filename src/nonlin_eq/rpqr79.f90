@@ -57,10 +57,11 @@ SUBROUTINE RPQR79(Ndeg,Coeff,Root,Ierr,Work)
   !   911010  Code reworked and simplified.  (RWC and WRB)
   USE service, ONLY : XERMSG
   USE linear, ONLY : HQR
-  INTEGER km1, kwend
-  REAL Coeff(*), Work(*), scalee
-  COMPLEX Root(*)
-  INTEGER Ndeg, Ierr, k, kh, kwr, kwi, kcol
+  INTEGER :: Ndeg, Ierr
+  REAL :: Coeff(Ndeg+1), Work(Ndeg*(Ndeg+2))
+  COMPLEX :: Root(Ndeg)
+  INTEGER :: km1, kwend, k, kh, kwr, kwi, kcol
+  REAL :: scalee
   !* FIRST EXECUTABLE STATEMENT  RPQR79
   Ierr = 0
   IF ( ABS(Coeff(1))==0.0 ) THEN

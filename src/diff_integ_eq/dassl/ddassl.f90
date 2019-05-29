@@ -933,21 +933,18 @@ SUBROUTINE DDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
   !           525).  (LRP)
   USE service, ONLY : XERMSG, D1MACH
   !
-  !**End
-  !
   !     Declare arguments.
-  !
-  INTEGER Neq, Info(15), Idid, Lrw, Iwork(*), Liw, Ipar(*)
-  REAL(8) :: T, Y(*), Yprime(*), Tout, Rtol(*), Atol(*), Rwork(*), Rpar(*)
+  INTEGER :: Neq, Idid, Lrw, Liw
+  INTEGER :: Info(15), Iwork(Liw), Ipar(:)
+  REAL(8) :: T, Y(Neq), Yprime(Neq), Tout, Rtol(:), Atol(:), Rwork(Lrw), Rpar(:)
   EXTERNAL :: RES, JAC
   !
   !     Declare local variables.
-  !
-  INTEGER i, itemp, leniw, lenpd, lenrw, le, lpd, lphi, lwm, lwt, mband, &
+  INTEGER :: i, itemp, leniw, lenpd, lenrw, le, lpd, lphi, lwm, lwt, mband, &
     msave, mxord, ntemp, nzflg
   REAL(8) :: atoli, h, hmax, hmin, ho, r, rh, rtoli, tdist, &
     tn, tnext, tstop, uround, ypnorm
-  LOGICAL done
+  LOGICAL :: done
   !       Auxiliary variables for conversion of values to be included in
   !       error messages.
   CHARACTER(8) :: xern1, xern2
@@ -1284,9 +1281,9 @@ SUBROUTINE DDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
         !
         !     COMPUTE INITIAL DERIVATIVE, UPDATING TN AND Y, IF APPLICABLE
         IF ( Info(11)/=0 ) THEN
-          CALL DDAINI(tn,Y,Yprime,Neq,RES,JAC,ho,Rwork(lwt),Idid,Rpar,Ipar,&
-            Rwork(lphi),Rwork(LDELTA),Rwork(le),Rwork(lwm),&
-            Iwork(LIWM),hmin,Rwork(LROUND),Info(10),ntemp)
+          CALL DDAINI(tn,Y,Yprime,Neq,RES,JAC,ho,Rwork(lwt:lphi-1),Idid,Rpar,Ipar,&
+            Rwork(lphi:lpd-1),Rwork(LDELTA:le-1),Rwork(le:lwt-1),Rwork(lwm:),&
+            Iwork,hmin,Rwork(LROUND),Info(10),ntemp)
           IF ( Idid<0 ) GOTO 100
         END IF
         !
@@ -1344,10 +1341,10 @@ SUBROUTINE DDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
           IF ( rh>1.0D0 ) h = h/rh
         END IF
         !
-        CALL DDASTP(tn,Y,Yprime,Neq,RES,JAC,h,Rwork(lwt),Info(1),Idid,Rpar,&
-          Ipar,Rwork(lphi),Rwork(LDELTA),Rwork(le),Rwork(lwm),&
-          Iwork(LIWM),Rwork(LALPHA),Rwork(LBETA),Rwork(LGAMMA),&
-          Rwork(LPSI),Rwork(LSIGMA),Rwork(LCJ),Rwork(LCJOLD),&
+        CALL DDASTP(tn,Y,Yprime,Neq,RES,JAC,h,Rwork(lwt:lphi-1),Info(1),Idid,Rpar,&
+          Ipar,Rwork(lphi:lpd-1),Rwork(LDELTA:le-1),Rwork(le:lwt-1),Rwork(lwm:),&
+          Iwork,Rwork(LALPHA:LBETA-1),Rwork(LBETA:LGAMMA-1),Rwork(LGAMMA:LPSI-1),&
+          Rwork(LPSI:LSIGMA-1),Rwork(LSIGMA:LDELTA-1),Rwork(LCJ),Rwork(LCJOLD),&
           Rwork(LHOLD),Rwork(LS),hmin,Rwork(LROUND),Iwork(LPHASE),&
           Iwork(LJCALC),Iwork(LK),Iwork(LKOLD),Iwork(LNS),Info(10),ntemp)
         !     MULTIPLY RTOL AND ATOL BY R AND RETURN

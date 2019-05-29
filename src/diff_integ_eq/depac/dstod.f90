@@ -96,11 +96,14 @@ SUBROUTINE DSTOD(Neq,Y,Yh,Nyh,Yh1,Ewt,Savf,Acor,Wm,Iwm,DF,DJAC,Rpar,Ipar)
     HMXi, HU, TN, KSTeps, IALth, IPUp, LMAx, MEO, NQNyh, NSTepj, IER, JSTart, &
     KFLag, L, METh, MITer, MAXord, N, NQ, NST, NFE, NQU
   !
-  INTEGER i, i1, Ipar(*), iredo, iret, Iwm(*), j, jb, m, ncf, Neq, newq, Nyh
-  REAL(8) :: Acor(*), dcon, ddn, del, delp, dsm, dup, Ewt(*), exdn, exsm, exup, &
-    r, rh, rhdn, rhsm, rhup, Rpar(*), Savf(*), told, Wm(*), Y(*), Yh(Nyh,*), Yh1(*)
+  INTEGER :: Neq, Nyh
+  INTEGER :: Ipar(:), Iwm(:)
+  REAL(8) :: Acor(N), Ewt(N), Rpar(:), Savf(N), Wm(:), Y(N), Yh(Nyh,MAXord+1), &
+    Yh1(Nyh*MAXord+Nyh)
   EXTERNAL :: DF, DJAC
-  !
+  INTEGER :: i, i1, iredo, iret, j, jb, m, ncf, newq
+  REAL(8) :: dcon, ddn, del, delp, dsm, dup, exdn, exsm, exup, r, rh, rhdn, &
+    rhsm, rhup, told
   !
   !     BEGIN BLOCK PERMITTING ...EXITS TO 690
   !        BEGIN BLOCK PERMITTING ...EXITS TO 60
@@ -584,7 +587,7 @@ SUBROUTINE DSTOD(Neq,Y,Yh,Nyh,Yh1,Ewt,Savf,Acor,Wm,Iwm,DF,DJAC,Rpar,Ipar)
   rhsm = 1.0D0/(1.2D0*dsm**exsm+0.0000012D0)
   rhdn = 0.0D0
   IF ( NQ/=1 ) THEN
-    ddn = DVNRMS(N,Yh(1,L),Ewt)/TESco(1,NQ)
+    ddn = DVNRMS(N,Yh(:,L),Ewt)/TESco(1,NQ)
     exdn = 1.0D0/NQ
     rhdn = 1.0D0/(1.3D0*ddn**exdn+0.0000013D0)
   END IF

@@ -42,9 +42,10 @@ INTEGER FUNCTION INITS(Os,Nos,Eta)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   USE service, ONLY : XERMSG
-  REAL err, Eta
-  INTEGER i, ii, Nos
-  REAL Os(*)
+  INTEGER :: Nos
+  REAL :: Os(Nos), Eta
+  INTEGER i, ii
+  REAL err
   !* FIRST EXECUTABLE STATEMENT  INITS
   IF ( Nos<1 ) CALL XERMSG('SLATEC','INITS',&
     'Number of coefficients is less than 1',2,1)

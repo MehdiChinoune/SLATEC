@@ -30,9 +30,11 @@ SUBROUTINE DU12LS(A,Mda,M,N,B,Mdb,Nb,Mode,Krank,Rnorm,H,W,Ic,Ir)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
 
-  INTEGER i, ij, im1, j, jb, k, kp1, Krank, M, Mda, Mdb, Mode, N, Nb, nmk
-  REAL(8) :: A(Mda,*), B(Mdb,*), bb, H(*), Rnorm(*), tt, W(*)
-  INTEGER Ic(*), Ir(*)
+  INTEGER :: Krank, M, Mda, Mdb, Mode, N, Nb
+  INTEGER :: Ic(N), Ir(M)
+  REAL(8) :: A(Mda,N), B(Mdb,Nb), H(N), Rnorm(N), W(4*N)
+  INTEGER :: i, ij, im1, j, jb, k, kp1, nmk
+  REAL(8) :: bb, tt
   !* FIRST EXECUTABLE STATEMENT  DU12LS
   k = Krank
   kp1 = k + 1

@@ -104,9 +104,9 @@ SUBROUTINE SGEEV(A,Lda,N,E,V,Ldv,Work,Job,Info)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   USE service, ONLY : XERMSG
-  INTEGER m
-  INTEGER i, ihi, ilo, Info, j, jb, Job, k, km, kp, l, Lda, Ldv, mdim, N
-  REAL A(*), E(*), Work(*), V(*)
+  INTEGER :: Info, Job, Lda, Ldv, N
+  REAL :: A(2*Lda*N), E(2*N), Work(2*N), V(2*Ldv*N)
+  INTEGER :: m, i, ihi, ilo, j, jb, k, km, kp, l, mdim
   !* FIRST EXECUTABLE STATEMENT  SGEEV
   IF ( N>Lda ) CALL XERMSG('SLATEC','SGEEV','N .GT. LDA.',1,1)
   IF ( N>Lda ) RETURN

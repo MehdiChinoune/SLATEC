@@ -32,15 +32,16 @@ SUBROUTINE DSTWAY(U,V,Yhp,Inout,Stowa)
   !   910722  Updated AUTHOR section.  (ALS)
   USE DML, ONLY : NCOmp, NFC, X, XOP, INFo, ISTkop, KOP, NDIsk, NTApe, NEQivp
   !
-  INTEGER Inout, j, k, ko, ks, ksj
-  REAL(8) :: Stowa(*), U(*), V(*), Yhp(*)
+  INTEGER :: Inout
+  REAL(8) :: Stowa(:), U(:), V(:), Yhp(:)
+  INTEGER :: j, k, ko, ks, ksj
   !* FIRST EXECUTABLE STATEMENT  DSTWAY
   IF ( Inout==1 ) THEN
     !
     !        RECALL FROM STOWA ARRAY AND ISTKOP
     !
     ks = NFC*NCOmp
-    CALL DSTOR1(Yhp,Stowa,Yhp(ks+1),Stowa(ks+1),1,0,0)
+    CALL DSTOR1(Yhp,Stowa,Yhp(ks+1:),Stowa(ks+1:),1,0,0)
     ks = ks + NCOmp
     IF ( NEQivp>=1 ) THEN
       DO j = 1, NEQivp
@@ -63,7 +64,7 @@ SUBROUTINE DSTWAY(U,V,Yhp,Inout,Stowa)
     !        SAVE IN STOWA ARRAY AND ISTKOP
     !
     ks = NFC*NCOmp
-    CALL DSTOR1(Stowa,U,Stowa(ks+1),V,1,0,0)
+    CALL DSTOR1(Stowa,U,Stowa(ks+1:),V,1,0,0)
     ks = ks + NCOmp
     IF ( NEQivp>=1 ) THEN
       DO j = 1, NEQivp

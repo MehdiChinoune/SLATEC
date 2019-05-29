@@ -79,9 +79,11 @@ SUBROUTINE ORTHOL(A,M,N,Nrda,Iflag,Irank,Iscale,Diag,Kpivot,Scales,Cols,Cs)
   !   910408  Updated the AUTHOR and REFERENCES sections.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   USE service, ONLY : XERMSG, R1MACH
-  INTEGER Iflag, Irank, Iscale, j, jcol, k, kp, Kpivot(*), l, M, mk, N, Nrda
-  REAL A(Nrda,*), acc, akk, anorm, as, asave, Cols(*), Cs(*), css, Diag(*), diagk, &
-    dum(1), sad, sc, Scales(*), sig, sigma, sruro, uro
+  INTEGER :: Iflag, Irank, Iscale, M, N, Nrda, Kpivot(N)
+  REAL :: A(Nrda,N), Cols(N), Cs(N), Diag(N), Scales(N)
+  INTEGER :: j, jcol, k, kp, l, mk
+  REAL :: acc, akk, anorm, as, asave, css, diagk, dum(1), sad, sc, sig, sigma, &
+    sruro, uro
   !
   !- *********************************************************************
   !

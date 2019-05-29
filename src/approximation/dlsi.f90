@@ -62,13 +62,13 @@ SUBROUTINE DLSI(W,Mdw,Ma,Mg,N,Prgopt,X,Rnorm,Mode,Ws,Ip)
   !   920422  Changed CALL to DHFTI to include variable MA.  (WRB)
   USE service, ONLY : D1MACH
   USE linear, ONLY : DSWAP, DH12, DHFTI, DAXPY
-  INTEGER Ip(*), Ma, Mdw, Mg, Mode, N
-  REAL(8) :: Prgopt(*), Rnorm, W(Mdw,*), Ws(*), X(*)
+  INTEGER :: Ma, Mdw, Mg, Mode, N, Ip(Mg+2*N+1)
+  REAL(8) :: Rnorm, Prgopt(:), W(Mdw,N+1), Ws(*), X(N)
   !
   REAL(8) :: anorm, fac, gam, rb, tau, tol, xnorm, temp(1)
-  INTEGER i, j, k, key, krank, krm1, krp1, l, last, link, m, map1, mdlpdp, minman, &
+  INTEGER :: i, j, k, key, krank, krm1, krp1, l, last, link, m, map1, mdlpdp, minman, &
     n1, n2, n3, next, np1
-  LOGICAL cov, sclcov
+  LOGICAL :: cov, sclcov
   !
   REAL(8), SAVE :: drelpr
   LOGICAL :: first = .TRUE.

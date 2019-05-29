@@ -40,11 +40,11 @@ LOGICAL FUNCTION DWNLT2(Me,Mend,Ir,Factor,Tau,Scalee,Wic)
   !   890620  Code extracted from WNLIT and made a subroutine.  (RWC))
   !   900604  DP version created from SP version.  (RWC)
 
-  REAL(8) :: Factor, Scalee(*), Tau, Wic(*)
-  INTEGER Ir, Me, Mend
+  INTEGER :: Ir, Me, Mend
+  REAL(8) :: Factor, Tau, Scalee(Mend), Wic(:)
   !
+  INTEGER :: j
   REAL(8) :: rn, sn, t
-  INTEGER j
   !
   !* FIRST EXECUTABLE STATEMENT  DWNLT2
   sn = 0.E0

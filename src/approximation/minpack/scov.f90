@@ -153,11 +153,12 @@ SUBROUTINE SCOV(FCN,Iopt,M,N,X,Fvec,R,Ldr,Info,Wa1,Wa2,Wa3,Wa4)
   !     REVISED YYMMDD HHMM
   !
   USE service, ONLY : XERMSG
-  INTEGER i, idum(1), iflag, Info, Iopt, j, k, kp1, Ldr, M, N, nm1, nrow
-  REAL X(*), R(Ldr,*), Fvec(*), Wa1(*), Wa2(*), Wa3(*), Wa4(*)
+  INTEGER :: Info, Iopt, Ldr, M, N
+  REAL :: X(N), R(Ldr,N), Fvec(M), Wa1(N), Wa2(N), Wa3(N), Wa4(M)
   EXTERNAL :: FCN
-  REAL sigma, temp
-  LOGICAL sing
+  INTEGER :: i, idum(1), iflag, j, k, kp1, nm1, nrow
+  REAL :: sigma, temp
+  LOGICAL :: sing
   REAL, PARAMETER :: zero = 0.E0, one = 1.E0
   !* FIRST EXECUTABLE STATEMENT  SCOV
   sing = .FALSE.

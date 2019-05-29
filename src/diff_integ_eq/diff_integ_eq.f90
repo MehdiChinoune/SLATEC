@@ -166,7 +166,6 @@ CONTAINS
   include"fishpack/ortho4.f90"
   include"fishpack/orthog.f90"
   include"fishpack/pgsf.f90"
-  include"fishpack/pimach.f90"
   include"fishpack/pois3d.f90"
   include"fishpack/poisd2.f90"
   include"fishpack/poisn2.f90"

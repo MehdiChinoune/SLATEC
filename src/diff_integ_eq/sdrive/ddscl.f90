@@ -22,8 +22,10 @@ SUBROUTINE DDSCL(Hmax,N,Nq,Rmax,H,Rc,Rh,Yh)
   !   790601  DATE WRITTEN
   !   900329  Initial submission to SLATEC.
 
-  INTEGER i, j, N, Nq
-  REAL(8) :: H, Hmax, Rc, Rh, Rmax, r1, Yh(N,*)
+  INTEGER :: N, Nq
+  REAL(8) :: H, Hmax, Rc, Rh, Rmax, Yh(N,Nq+1)
+  INTEGER :: i, j
+  REAL(8) :: r1
   !* FIRST EXECUTABLE STATEMENT  DDSCL
   IF ( H<1.D0 ) THEN
     Rh = MIN(ABS(H)*Rh,ABS(H)*Rmax,Hmax)/ABS(H)

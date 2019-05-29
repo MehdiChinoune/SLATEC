@@ -79,8 +79,10 @@ SUBROUTINE SINT(N,X,Wsave)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
-  INTEGER i, k, kc, kw, modn, N, nf, np1, ns2
-  REAL sqrt3, t1, t2, Wsave(*), X(*), xh
+  INTEGER :: N
+  REAL :: Wsave(7*N/2+15), X(N)
+  INTEGER :: i, k, kc, kw, modn, nf, np1, ns2
+  REAL :: sqrt3, t1, t2, xh
   !* FIRST EXECUTABLE STATEMENT  SINT
   sqrt3 = SQRT(3.)
   IF ( N<2 ) THEN

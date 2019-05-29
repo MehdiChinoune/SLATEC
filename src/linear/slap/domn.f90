@@ -269,8 +269,6 @@ SUBROUTINE DOMN(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Nsave,Itol,Tol,&
   REAL(8) :: A(Nelt), Ap(N,0:Nsave), B(N), Csav(Nsave), Dz(N), &
     Emap(N,0:Nsave), P(N,0:Nsave), R(N), Rwork(*), X(N), Z(N)
   INTEGER Ia(Nelt), Iwork(*), Ja(Nelt)
-  !     .. Subroutine Arguments ..
-  EXTERNAL :: MATVEC, MSOLVE
   !     .. Local Scalars ..
   REAL(8) :: ak, akden, aknum, bkl, bnrm, fuzz, solnrm
   INTEGER i, ip, ipo, k, l, lmax

@@ -54,9 +54,11 @@ SUBROUTINE SINTI(N,Wsave)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
-  REAL dt, fk, pi, Wsave(*)
-  INTEGER k, kf, ks, N, np1, ns2
+
+  INTEGER :: N
+  REAL :: Wsave(7*N/2+16)
+  INTEGER :: k, kf, ks, np1, ns2
+  REAL :: dt, fk, pi
   !* FIRST EXECUTABLE STATEMENT  SINTI
   IF ( N<=1 ) RETURN
   pi = 4.*ATAN(1.)

@@ -1551,22 +1551,19 @@ SUBROUTINE DSPLP(DUSRMT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   INTERFACE
     SUBROUTINE DUSRMT(I,J,Aij,Indcat,Dattrv,Iflag)
       INTEGER :: I, J, indcat, iflag(10)
-      REAL(8) :: Dattrv(*), Aij
+      REAL(8) :: Dattrv(:), Aij
     END SUBROUTINE
   END INTERFACE
-  INTEGER iadbig, ictmax, ictopt, Info, iopt, key, lamat, last, &
-    lbasma, lbm, lcolnr, lcsc, lerd, lerp, libb, librc, &
-    limat, lipr, Liw, liwork
-  INTEGER liwr, lmx, lrg, lrhs, lrprim, lrz, Lw, lwork, lwr, lww, &
-    Mrelas, nerr, next, Nvars
-  REAL(8) :: Bl(*), Bu(*), Costs(*), Dattrv(*), Duals(*), &
-    Prgopt(*), Primal(*), Work(*), zero
-  !
-  INTEGER Ibasis(*), Ind(*), Iwork(*)
-  CHARACTER(8) :: xern1, xern2
-  !
   EXTERNAL :: DUSRMT
-  !
+  INTEGER :: Info, Liw, Lw, Mrelas, Nvars
+  INTEGER :: Ibasis(Nvars+Mrelas), Ind(Nvars+Mrelas), Iwork(Liw)
+  REAL(8) :: Bl(Nvars+Mrelas), Bu(Nvars+Mrelas), Costs(Nvars), Dattrv(:), &
+    Duals(Nvars+Mrelas), Prgopt(:), Primal(Nvars+Mrelas), Work(Lw)
+  INTEGER :: iadbig, ictmax, ictopt, iopt, key, lamat, last, lbasma, lbm, lcolnr, &
+    lcsc, lerd, lerp, libb, librc, limat, lipr, liwork, liwr, lmx, lrg, lrhs, &
+    lrprim, lrz, lwork, lwr, lww, nerr, next
+  REAL(8) :: zero
+  CHARACTER(8) :: xern1, xern2
   !* FIRST EXECUTABLE STATEMENT  DSPLP
   zero = 0.D0
   iopt = 1

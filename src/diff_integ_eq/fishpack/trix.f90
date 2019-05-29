@@ -25,9 +25,10 @@ SUBROUTINE TRIX(Idegbr,Idegcr,M,A,B,C,Y,Tcos,D,W)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
 
-  REAL A(*), B(*), C(*), D(*), Tcos(*), W(*), x, xx, Y(*), z
-  INTEGER i, Idegbr, Idegcr, ip, k, l, lint, M, mm1
-  INTEGER kb, kc
+  INTEGER :: Idegbr, Idegcr, M
+  REAL :: A(M), B(M), C(M), D(M), Tcos(:), W(M), Y(:)
+  INTEGER :: i, ip, k, l, lint, mm1, kb, kc
+  REAL :: x, xx, z
   !* FIRST EXECUTABLE STATEMENT  TRIX
   mm1 = M - 1
   kb = Idegbr + 1

@@ -72,8 +72,10 @@ REAL(8) FUNCTION DPPVAL(Ldc,C,Xi,Lxi,K,Ideriv,X,Inppv)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   USE service, ONLY : XERMSG
   !
-  INTEGER i, Ideriv, Inppv, j, K, Ldc, Lxi, ndummy, kk
-  REAL(8) :: C(Ldc,*), dx, X, Xi(*)
+  INTEGER :: Ideriv, Inppv, K, Ldc, Lxi
+  REAL(8) :: C(Ldc,Lxi), X, Xi(Lxi+1)
+  INTEGER :: i, j, ndummy, kk
+  REAL(8) :: dx
   !* FIRST EXECUTABLE STATEMENT  DPPVAL
   DPPVAL = 0.0D0
   IF ( K<1 ) THEN

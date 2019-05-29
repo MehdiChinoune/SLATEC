@@ -32,14 +32,14 @@ SUBROUTINE FCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Nconst,Xconst,&
   USE service, ONLY : XERMSG
   USE linear, ONLY : SAXPY, BNDSOL, BNDACC
   USE data_handling, ONLY : SSORT
-  INTEGER Iwork(*), Mdg, Mdw, Mode, Nbkpt, Nconst, Ndata, Nderiv(*), Nord
-  REAL Bf(Nord,*), Bkpt(*), Bkptin(*), Coeff(*), G(Mdg,*), Ptemp(*), Sddata(*), &
-    W(Mdw,*), Work(*), Xconst(*), Xdata(*), Xtemp(*), Yconst(*), Ydata(*)
-  !
-  REAL dummy(1), prgopt(10), rnorm, rnorme, rnorml, xmax, xmin, xval, yval
-  INTEGER i, idata, ideriv, ileft, intrvl, intw1, ip, ir, irow, itype, iw1, iw2, &
+  INTEGER :: Mdg, Mdw, Mode, Nbkpt, Nconst, Ndata, Nord, Iwork(:), Nderiv(Nconst)
+  REAL :: Bf(Nord,Nord), Bkpt(Nbkpt), Bkptin(:), Coeff(:), G(Mdg,Nord+1), &
+    Ptemp(MAX(Nbkpt,Ndata)), Sddata(Ndata), W(Mdw,Nbkpt-Nord+1), Work(*), &
+    Xconst(Nconst), Xdata(Ndata), Xtemp(MAX(Nbkpt,Ndata)), Yconst(Nconst), Ydata(Ndata)
+  REAL :: dummy(1), prgopt(10), rnorm, rnorme, rnorml, xmax, xmin, xval, yval
+  INTEGER :: i, idata, ideriv, ileft, intrvl, intw1, ip, ir, irow, itype, iw1, iw2, &
     l, lw, mt, n, nb, neqcon, nincon, nordm1, nordp1, np1
-  LOGICAL band, new, var
+  LOGICAL :: band, new, var
   CHARACTER(8) :: xern1
   !
   !* FIRST EXECUTABLE STATEMENT  FCMN

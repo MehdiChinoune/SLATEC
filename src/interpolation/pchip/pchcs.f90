@@ -97,7 +97,7 @@ SUBROUTINE PCHCS(Switch,N,H,Slope,D,Incfd,Ierr)
   !  DECLARE ARGUMENTS.
   !
   INTEGER N, Incfd, Ierr
-  REAL Switch, H(*), Slope(*), D(Incfd,*)
+  REAL Switch, H(N), Slope(N), D(Incfd,N)
   !
   !  DECLARE LOCAL VARIABLES.
   !

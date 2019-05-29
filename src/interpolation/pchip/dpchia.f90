@@ -124,7 +124,7 @@ REAL(8) FUNCTION DPCHIA(N,X,F,D,Incfd,Skip,A,B,Ierr)
   !  DECLARE ARGUMENTS.
   !
   INTEGER N, Incfd, Ierr
-  REAL(8) :: X(*), F(Incfd,*), D(Incfd,*), A, B
+  REAL(8) :: X(N), F(Incfd,N), D(Incfd,N), A, B
   LOGICAL Skip
   !
   !  DECLARE LOCAL VARIABLES.

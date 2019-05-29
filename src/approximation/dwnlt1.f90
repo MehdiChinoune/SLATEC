@@ -25,11 +25,11 @@ SUBROUTINE DWNLT1(I,Lend,Mend,Ir,Mdw,Recalc,Imax,Hbar,H,Scalee,W)
   !   790701  DATE WRITTEN
   !   890620  Code extracted from WNLIT and made a subroutine.  (RWC))
   !   900604  DP version created from SP version.  (RWC)
-  INTEGER I, Imax, Ir, Lend, Mdw, Mend
-  REAL(8) :: H(*), Hbar, Scalee(*), W(Mdw,*)
-  LOGICAL Recalc
+  INTEGER :: I, Imax, Ir, Lend, Mdw, Mend
+  REAL(8) :: Hbar, H(:), Scalee(Mend), W(Mdw,Mend)
+  LOGICAL :: Recalc
   !
-  INTEGER j, k
+  INTEGER :: j, k
   !
   !* FIRST EXECUTABLE STATEMENT  DWNLT1
   IF ( Ir/=1.AND.(.NOT.Recalc) ) THEN

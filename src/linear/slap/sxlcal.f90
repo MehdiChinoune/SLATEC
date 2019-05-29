@@ -155,8 +155,6 @@ SUBROUTINE SXLCAL(N,Lgmr,X,Xl,Zl,Hes,Maxlp1,Q,V,R0nrm,Wk,Sz,Jscal,Jpre,&
   !     .. Array Arguments ..
   REAL Hes(Maxlp1,*), Q(*), Rpar(*), Sz(*), V(N,*), Wk(N), X(N), Xl(N), Zl(N)
   INTEGER Ipar(*)
-  !     .. Subroutine Arguments ..
-  EXTERNAL :: MSOLVE
   !     .. Local Scalars ..
   INTEGER i, k, ll, llp1
   !* FIRST EXECUTABLE STATEMENT  SXLCAL

@@ -84,8 +84,8 @@ SUBROUTINE DNBSL(Abe,Lda,N,Ml,Mu,Ipvt,B,Job)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
-  INTEGER Lda, N, Ml, Mu, Ipvt(*), Job
-  REAL(8) :: Abe(Lda,*), B(*)
+  INTEGER :: Lda, N, Ml, Mu, Ipvt(N), Job
+  REAL(8) :: Abe(Lda,2*Ml+Mu+1), B(N)
   !
   REAL(8) :: t
   INTEGER k, kb, l, lb, ldb, lm, m, mlm, nm1

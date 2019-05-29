@@ -58,14 +58,15 @@ SUBROUTINE DDAINI(X,Y,Yprime,Neq,RES,JAC,H,Wt,Idid,Rpar,Ipar,Phi,Delta,E,&
   !   901030  Minor corrections to declarations.  (FNF)
 
   !
-  INTEGER Neq, Idid, Ipar(*), Iwm(*), Nonneg, Ntemp
-  REAL(8) :: X, Y(*), Yprime(*), H, Wt(*), Rpar(*), Phi(Neq,*), &
-    Delta(*), E(*), Wm(*), Hmin, Uround
+  INTEGER :: Neq, Idid, Nonneg, Ntemp
+  INTEGER :: Ipar(:), Iwm(:)
+  REAL(8) :: X, H, Hmin, Uround
+  REAL(8) :: Y(Neq), Yprime(Neq), Wt(:), Rpar(:), Phi(Neq,*), Delta(:), E(:), Wm(:)
   EXTERNAL :: RES, JAC
   !
-  INTEGER i, ier, ires, jcalc, m, ncf, nef, nsf
+  INTEGER :: i, ier, ires, jcalc, m, ncf, nef, nsf
   REAL(8) :: cj, delnrm, err, oldnrm, r, rate, s, xold, ynorm
-  LOGICAL convgd
+  LOGICAL :: convgd
   !
   INTEGER, PARAMETER :: LNRE = 12
   INTEGER, PARAMETER :: LNJE = 13

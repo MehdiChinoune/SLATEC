@@ -180,16 +180,18 @@ SUBROUTINE STEPS(F,Neqn,Y,X,H,Eps,Wt,Start,Hold,K,Kold,Crash,Phi,P,Yp,Psi,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   USE service, ONLY : R1MACH
-  INTEGER l, limit1, limit2, Neqn, Ns, nsm2, nsp1, nsp2
-  REAL absh, Alpha(12), Beta(12), big, Eps, erk, erkm1, erkm2, erkp1, err, &
-    Fouru, G(13), Gi(11), H, hnew, Hold, P(*), p5eps, Phi(Neqn,16)
-  REAL Psi(12), r, reali, realns, rho, round, Rpar(*), Sig(13), tau, &
-    temp1, temp2, temp3, temp4, temp5, temp6, Twou, u, V(12)
-  REAL W(12), Wt(*), X, Xold, Y(*), Yp(*)
-  INTEGER i, ifail, im1, ip1, Ipar(*), iq, Iv(10), Ivc, j, jv, K, Kgi, &
-    km1, km2, knew, Kold, kp1, kp2, Kprev, Ksteps
-  LOGICAL Start, Crash, Phase1, Nornd
+  INTEGER :: Neqn, Ns, Ivc, K, Kgi, Kold, Kprev, Ksteps
+  INTEGER :: Ipar(:), Iv(10)
+  REAL :: Eps, Fouru, H, Hold, Twou, X, Xold
+  REAL :: Alpha(12), Beta(12), G(13), Gi(11), P(Neqn), Phi(Neqn,16), Psi(12), &
+    Rpar(:), Sig(13), W(12), V(12), Wt(Neqn), Y(Neqn), Yp(Neqn)
+  LOGICAL :: Start, Crash, Phase1, Nornd
   EXTERNAL :: F
+  !
+  INTEGER :: i, ifail, im1, ip1, iq, j, jv, km1, km2, knew, kp1, kp2, l, limit1, &
+    limit2, nsm2, nsp1, nsp2
+  REAL :: absh, big, erk, erkm1, erkm2, erkp1, err, hnew, p5eps, r, reali, realns, &
+    rho, round, tau, temp1, temp2, temp3, temp4, temp5, temp6, u
   !
   REAL, PARAMETER :: two(13) = [ 2.0, 4.0, 8.0, 16.0, 32.0, 64.0, 128.0, 256.0, &
     512.0, 1024.0, 2048.0, 4096.0, 8192.0 ]

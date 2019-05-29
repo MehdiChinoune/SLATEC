@@ -184,8 +184,6 @@ INTEGER FUNCTION ISDCG(N,B,X,MSOLVE,Itol,Tol,Iter,&
   !     .. Array Arguments ..
   REAL(8) :: B(N), Dz(N), R(N), Rwork(*), X(N), Z(N)
   INTEGER Iwork(*)
-  !     .. Subroutine Arguments ..
-  EXTERNAL :: MSOLVE
   !     .. Local Scalars ..
   INTEGER i
   !* FIRST EXECUTABLE STATEMENT  ISDCG

@@ -233,8 +233,6 @@ SUBROUTINE SPIGMR(N,R0,Sr,Sz,Jscal,Maxl,Maxlp1,Kmp,Nrsts,Jpre,MATVEC,&
   REAL A(Nelt), Dl(*), Hes(Maxlp1,*), Q(*), R0(*), Rpar(*), &
     Sr(*), Sz(*), V(N,*), Wk(*), X(*), Xl(*), Z(*)
   INTEGER Ia(Nelt), Ipar(*), Ja(Nelt)
-  !     .. Subroutine Arguments ..
-  EXTERNAL :: MATVEC, MSOLVE
   !     .. Local Scalars ..
   REAL c, dlnrm, prod, r0nrm, rho, s, snormw, tem
   INTEGER i, i2, info, ip1, iter, itmax, j, k, ll, llp1

@@ -30,10 +30,12 @@ SUBROUTINE COMPB(Ierror,An,Bn,Cn,B,Ah,Bh)
   !   900402  Added TYPE section.  (WRB)
   USE CBLKT, ONLY : K, CNV, EPS, NM, NPP
   USE service, ONLY : R1MACH
-  REAL Ah(*), An(*), arg, B(*), Bh(*), Bn(*), bnorm, Cn(*), d1, d2, d3
-  INTEGER i, i2, i4, ib, Ierror, if, ifd, ipl, ir, j, j1, j2, jf, js, kdo, l, &
-    l1, l2, lh, ls, n2m2, nb, nmp
+  INTEGER :: Ierror
+  REAL :: Ah(:), An(NM), B(:), Bh(:), Bn(NM), Cn(NM)
   COMPLEX :: Bc(500)
+  INTEGER :: i, i2, i4, ib, if, ifd, ipl, ir, j, j1, j2, jf, js, kdo, l, &
+    l1, l2, lh, ls, n2m2, nb, nmp
+  REAL :: arg, bnorm, d1, d2, d3
   !* FIRST EXECUTABLE STATEMENT  COMPB
   EPS = R1MACH(4)
   bnorm = ABS(Bn(1))
@@ -111,7 +113,7 @@ SUBROUTINE COMPB(Ierror,An,Bn,Cn,B,Ah,Bh)
     B(lh) = B(n2m2+1)
     CALL INDXB(if,K-1,j1,j2)
     j2 = j1 + nmp + nmp
-    CALL PPADD(NM+1,Ierror,An,Cn,Bc(j1),B(j1),B(j2))
+    CALL PPADD(NM+1,Ierror,An,Cn,Bc(j1),B(j1:j2-1),B(j2:))
   END IF
   RETURN
   100  Ierror = 4

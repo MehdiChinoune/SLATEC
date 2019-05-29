@@ -79,9 +79,9 @@ SUBROUTINE CFFTF1(N,C,Ch,Wa,Ifac)
   !   900131  Routine changed from subsidiary to user-callable.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
-  REAL C(*), Ch(*), Wa(*)
-  INTEGER i, idl1, ido, idot, Ifac(*), ip, iw, ix2, ix3, ix4, k1, &
-    l1, l2, N, n2, na, nac, nf
+  INTEGER :: N, Ifac(15)
+  REAL :: C(2*N), Ch(2*N), Wa(2*N)
+  INTEGER :: i, idl1, ido, idot, ip, iw, ix2, ix3, ix4, k1, l1, l2, n2, na, nac, nf
   !* FIRST EXECUTABLE STATEMENT  CFFTF1
   nf = Ifac(2)
   na = 0
@@ -119,9 +119,9 @@ SUBROUTINE CFFTF1(N,C,Ch,Wa,Ifac)
       na = 1 - na
     ELSEIF ( ip/=5 ) THEN
       IF ( na/=0 ) THEN
-        CALL PASSF(nac,idot,ip,l1,idl1,Ch,Ch,Ch,C,C,Wa(iw))
+        CALL PASSF(nac,idot,ip,l1,idl1,Ch,Ch,Ch,C,C,Wa(iw:))
       ELSE
-        CALL PASSF(nac,idot,ip,l1,idl1,C,C,C,Ch,Ch,Wa(iw))
+        CALL PASSF(nac,idot,ip,l1,idl1,C,C,C,Ch,Ch,Wa(iw:))
       END IF
       IF ( nac/=0 ) na = 1 - na
     ELSE

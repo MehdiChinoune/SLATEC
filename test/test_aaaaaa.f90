@@ -58,8 +58,8 @@ CONTAINS
     !
     !  DECLARE VARIABLES.
     !
-    CHARACTER(16) :: ver
-    CHARACTER(16), PARAMETER :: VERSN = ' 4.2'
+    CHARACTER(3) :: ver
+    CHARACTER(3), PARAMETER :: VERSN = '4.2'
     !
     !* FIRST EXECUTABLE STATEMENT  QC6A
     IF ( Kprint>=3 ) WRITE (Lun,99001)

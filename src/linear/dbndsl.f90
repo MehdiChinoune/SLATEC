@@ -196,9 +196,10 @@ SUBROUTINE DBNDSL(Mode,G,Mdg,Nb,Ip,Ir,X,N,Rnorm)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   USE service, ONLY : XERMSG
-  INTEGER i, i1, i2, ie, ii, iopt, Ip, Ir, irm1, ix, j, jg, l, &
-    Mdg, Mode, N, Nb, nerr, np1
-  REAL(8) :: G(Mdg,*), Rnorm, rsq, s, X(*), zero
+  INTEGER :: Ip, Ir, Mdg, Mode, N, Nb
+  REAL(8) :: G(Mdg,Nb+1), Rnorm, X(N)
+  INTEGER i, i1, i2, ie, ii, iopt, irm1, ix, j, jg, l, nerr, np1
+  REAL(8) :: rsq, s, zero
   !* FIRST EXECUTABLE STATEMENT  DBNDSL
   zero = 0.D0
   !

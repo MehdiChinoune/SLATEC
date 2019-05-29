@@ -632,7 +632,7 @@ CONTAINS
     REAL Val
     INTEGER N
     !     .. Array Arguments ..
-    REAL V(*)
+    REAL V(N)
     !     .. Local Scalars ..
     INTEGER i, is, nr
     !     .. Intrinsic Functions ..

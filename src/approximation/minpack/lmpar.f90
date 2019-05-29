@@ -105,12 +105,12 @@ SUBROUTINE LMPAR(N,R,Ldr,Ipvt,Diag,Qtb,Delta,Par,X,Sigma,Wa1,Wa2)
   !           (WRB)
   !   900328  Added TYPE section.  (WRB)
   USE service, ONLY : R1MACH
-  INTEGER N, Ldr
-  INTEGER Ipvt(*)
-  REAL Delta, Par
-  REAL R(Ldr,*), Diag(*), Qtb(*), X(*), Sigma(*), Wa1(*), Wa2(*)
-  INTEGER i, iter, j, jm1, jp1, k, l, nsing
-  REAL dxnorm, dwarf, fp, gnorm, parc, parl, paru, summ, temp
+  INTEGER :: N, Ldr
+  INTEGER :: Ipvt(N)
+  REAL :: Delta, Par
+  REAL :: R(Ldr,N), Diag(N), Qtb(N), X(N), Sigma(N), Wa1(N), Wa2(N)
+  INTEGER :: i, iter, j, jm1, jp1, k, l, nsing
+  REAL :: dxnorm, dwarf, fp, gnorm, parc, parl, paru, summ, temp
   REAL, PARAMETER :: p1 = 1.0E-1, p001 = 1.0E-3, zero = 0.0E0
   !* FIRST EXECUTABLE STATEMENT  LMPAR
   dwarf = R1MACH(1)

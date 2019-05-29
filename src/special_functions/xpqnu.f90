@@ -30,10 +30,10 @@ SUBROUTINE XPQNU(Nu1,Nu2,Mu,Theta,Id,Pqa,Ipqa,Ierror)
   !           section.  (WRB)
   !   920127  Revised PURPOSE section of prologue.  (DWL)
   USE XBLK ,ONLY: NBItsf
-  INTEGER i, ia, Id, Ierror, if, ipq, ipq1, ipq2, Ipqa(*), ipsik, &
-    ipsix, ix1, ixs, j, j0, k, Mu
-  REAL a, nu, Nu1, Nu2, pq, Pqa(*), r, Theta, w, x, x1, x2, xs, y, z
-  REAL di, dmu, pq1, pq2, factmu, flok
+  INTEGER :: Id, Ierror, Ipqa(*), Mu
+  REAL :: Nu1, Nu2, Pqa(*), Theta
+  INTEGER :: i, ia, if, ipq, ipq1, ipq2, ipsik, ipsix, ix1, ixs, j, j0, k
+  REAL :: a, nu, pq, r, w, x, x1, x2, xs, y, z, di, dmu, pq1, pq2, factmu, flok
   !
   !        J0, IPSIK, AND IPSIX ARE INITIALIZED IN THIS SUBROUTINE.
   !        J0 IS THE NUMBER OF TERMS USED IN SERIES EXPANSION

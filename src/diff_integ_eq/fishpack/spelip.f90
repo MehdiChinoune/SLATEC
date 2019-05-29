@@ -32,13 +32,16 @@ SUBROUTINE SPELIP(Intl,Iorder,A,B,M,Mbdcnd,Bda,Alpha,Bdb,Beta,C,D,N,&
   !   900402  Added TYPE section.  (WRB)
   USE SPLPCM, ONLY : L, AIT, BIT, CIT, DIT, DLX, DLX4, DLY, DLY4, IS, JS, K, KSWx, &
     KSWy, MIT, MS, NIT, NS, TDLx3, TDLy3
-  INTEGER i, i1, Idmn, Ierror, Intl, iord, Iorder, j, M, Mbdcnd, mp, N, Nbdcnd, np
-  REAL A, ai, Alpha, Am(*), An(*), ax1, axi, B, Bda(*), Bdb(*), Bdc(*), Bdd(*), &
-    Beta, bi, Bm(*), Bn(*), bxi, C, ci, Cm(*), Cn(*), cxi, cxm, D, dj, Dm(*), &
-    Dn(*), dy1, dyj, ej, eyj, fj, fyj, fyn, Gama, Grhs(Idmn,*), Pertrb, &
-    Um(*), Un(*), Usol(Idmn,*), W(*), xi, Xnu, yj, Zm(*), Zn(*)
-  LOGICAL singlr
+  INTEGER :: Idmn, Ierror, Intl, Iorder, M, Mbdcnd, N, Nbdcnd
+  REAL :: A, Alpha, B, Beta, C, D, Gama, Pertrb, Xnu
+  REAL :: Am(M), An(N), Bda(N+1), Bdb(N+1), Bdc(M+1), Bdd(M+1), Bm(M), Bn(N), Cm(M), &
+    Cn(N), Dm(M), Dn(N), Grhs(Idmn,N+1), Um(M), Un(N), Usol(Idmn,N+1), W(:), &
+    Zm(M), Zn(N)
   EXTERNAL :: COFX, COFY
+  INTEGER :: i, i1, iord, j, mp, np
+  REAL :: ai, ax1, axi, bi, bxi, ci, cxi, cxm, dj, dy1, dyj, ej, eyj, fj, fyj, &
+    fyn, xi, yj
+  LOGICAL :: singlr
   !* FIRST EXECUTABLE STATEMENT  SPELIP
   KSWx = Mbdcnd + 1
   KSWy = Nbdcnd + 1

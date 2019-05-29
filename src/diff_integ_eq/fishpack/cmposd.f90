@@ -30,11 +30,12 @@ SUBROUTINE CMPOSD(Mr,Nr,Istag,Ba,Bb,Bc,Q,Idimq,B,W,D,Tcos,P)
   !   920130  Modified to use merge routine C1MERG rather than deleted
   !           routine CMPMRG.  (WRB)
   USE data_handling, ONLY : C1MERG
-  REAL fi
-  INTEGER i, ideg, Idimq, ip, ip1, ipstor, irreg, Istag, j, jdeg, &
-    jm1, jm2, jm3, jp1, jp2, jp3, jsh, jsp, jst, jstsav
-  INTEGER kr, krpi, l, lr, m, Mr, n, nodd, noddpr, Nr, nun
-  COMPLEX Ba(*), Bb(*), Bc(*), Q(Idimq,*), B(*), W(*), D(*), Tcos(*), P(*), t
+  INTEGER :: Idimq, Mr, Nr
+  COMPLEX :: Ba(Mr), Bb(Mr), Bc(Mr), Q(Idimq,Nr), B(:), W(Mr), D(Mr), Tcos(4*Nr), P(:)
+  INTEGER :: i, ideg, ip, ip1, ipstor, irreg, Istag, j, jdeg, jm1, jm2, jm3, &
+    jp1, jp2, jp3, jsh, jsp, jst, jstsav, kr, krpi, l, lr, m, n, nodd, noddpr, nun
+  REAL :: fi
+  COMPLEX :: t
   !* FIRST EXECUTABLE STATEMENT  CMPOSD
   m = Mr
   n = Nr

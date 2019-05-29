@@ -180,16 +180,17 @@ SUBROUTINE DSTEPS(DF,Neqn,Y,X,H,Eps,Wt,Start,Hold,K,Kold,Crash,Phi,P,Yp,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   USE service, ONLY : XERMSG, D1MACH
-  INTEGER Iv(10), Ivc, jv, Kgi, Kprev
-  INTEGER i, ifail, im1, ip1, Ipar(*), iq, j, K, km1, km2, knew, &
-    Kold, kp1, kp2, Ksteps, l, limit1, limit2, Neqn, Ns, nsm2, nsp1, nsp2
-  REAL(8) :: absh, Alpha(12), Beta(12), big, Eps, erk, erkm1, &
-    erkm2, erkp1, err, Fouru, G(13), Gi(11), H, hnew, &
-    Hold, P(*), p5eps, Phi(Neqn,16), Psi(12), r, reali, realns, rho, &
-    round, Rpar(*), Sig(13), tau, temp1, temp2, temp3, &
-    temp4, temp5, temp6, Twou, u, V(12), W(12), Wt(*), X, Xold, Y(*), Yp(*)
-  LOGICAL Start, Crash, Phase1, Nornd
+  INTEGER :: Ivc, K, Kgi, Kold, Kprev, Ksteps, Neqn, Ns
+  INTEGER :: Iv(10), Ipar(:)
+  REAL(8) :: Eps, Fouru, H, Hold, Twou, X, Xold
+  REAL(8) :: Alpha(12), Beta(12), G(13), Gi(11), P(Neqn), Phi(Neqn,16), Psi(12), &
+    Rpar(:), Sig(13), V(12), W(12), Wt(Neqn), Y(Neqn), Yp(Neqn)
+  LOGICAL :: Start, Crash, Phase1, Nornd
   EXTERNAL :: DF
+  INTEGER :: i, ifail, im1, ip1, jv, iq, j, km1, km2, knew, &
+    kp1, kp2, l, limit1, limit2, nsm2, nsp1, nsp2
+  REAL(8) :: absh, big, erk, erkm1, erkm2, erkp1, err, hnew, p5eps, r, reali, &
+    realns, rho, round, tau, temp1, temp2, temp3, temp4, temp5, temp6, u
   !
   REAL(8), PARAMETER :: two(13) = [ 2.0D0, 4.0D0, 8.0D0, 16.0D0, 32.0D0, 64.0D0, &
     128.0D0, 256.0D0, 512.0D0, 1024.0D0, 2048.0D0, 4096.0D0, 8192.0D0 ]

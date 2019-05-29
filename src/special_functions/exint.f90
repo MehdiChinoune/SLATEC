@@ -101,11 +101,11 @@ SUBROUTINE EXINT(X,N,Kode,M,Tol,En,Nz,Ierr)
   !           D. Amos.  Included correction of argument list.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   USE service, ONLY : R1MACH, I1MACH
-  REAL a(99), aa, aams, ah, ak, at, b(99), bk, bt, cc, cnorm, ct, em, &
-    emx, En(*), etol, fnm, fx, pt, p1, p2, s, Tol, tx, X, xcut, &
-    xlim, xtol, y(2), yt, y1, y2
-  INTEGER i, ic, icase, ict, Ierr, ik, ind, ix, i1m, jset, k, &
-    kk, kn, Kode, ks, M, ml, mu, N, nd, nm, Nz
+  INTEGER :: Kode, M, N, Nz, Ierr
+  REAL :: En(M), X, Tol
+  REAL :: a(99), aa, aams, ah, ak, at, b(99), bk, bt, cc, cnorm, ct, em, emx, &
+    etol, fnm, fx, pt, p1, p2, s, tx, xcut, xlim, xtol, y(2), yt, y1, y2
+  INTEGER i, ic, icase, ict, ik, ind, ix, i1m, jset, k, kk, kn, ks, ml, mu, nd, nm
   !* FIRST EXECUTABLE STATEMENT  EXINT
   Ierr = 0
   Nz = 0

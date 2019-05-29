@@ -83,9 +83,10 @@ SUBROUTINE DPOLVL(Nder,Xx,Yfit,Yp,N,X,C,Work,Ierr)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
-  INTEGER i, Ierr, im1, izero, k, km1, km1pi, km2pn, km2pni, m, &
-    mm, N, ndr, Nder, nmkp1, npkm1
-  REAL(8) :: C(*), fac, pione, pitwo, pone, ptwo, X(*), xk, Xx, Yfit, Yp(*), Work(*)
+  INTEGER :: Ierr, N, Nder
+  REAL(8) :: C(N), X(N), Xx, Yfit, Yp(Nder), Work(2*N)
+  INTEGER :: i, im1, izero, k, km1, km1pi, km2pn, km2pni, m, mm, ndr, nmkp1, npkm1
+  REAL(8) :: fac, pione, pitwo, pone, ptwo, xk
   !* FIRST EXECUTABLE STATEMENT  DPOLVL
   Ierr = 1
   IF ( Nder<=0 ) THEN

@@ -28,11 +28,11 @@ SUBROUTINE SDAWTS(Neq,Iwt,Rtol,Atol,Y,Wt)
   !           cosmetic changes to prologue.  (FNF)
 
   !
-  INTEGER Neq, Iwt
-  REAL Rtol(*), Atol(*), Y(*), Wt(*)
+  INTEGER::  Neq, Iwt
+  REAL :: Rtol(Neq), Atol(Neq), Y(Neq), Wt(Neq)
   !
-  INTEGER i
-  REAL atoli, rtoli
+  INTEGER :: i
+  REAL :: atoli, rtoli
   !
   !* FIRST EXECUTABLE STATEMENT  SDAWTS
   rtoli = Rtol(1)

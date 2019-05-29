@@ -120,8 +120,8 @@ SUBROUTINE SNBFA(Abe,Lda,N,Ml,Mu,Ipvt,Info)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
-  INTEGER Lda, N, Ml, Mu, Ipvt(*), Info
-  REAL Abe(Lda,*)
+  INTEGER Lda, N, Ml, Mu, Ipvt(N), Info
+  REAL Abe(Lda,2*Ml+Mu+1)
   !
   INTEGER ml1, mb, m, n1, ldb, i, j, k, l, lm, lm1, lm2, mp
   REAL t

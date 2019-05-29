@@ -55,9 +55,10 @@ SUBROUTINE REORT(Ncomp,Y,Yp,Yhp,Niv,W,S,P,Ip,Stowa,Iflag)
   !   910722  Updated AUTHOR section.  (ALS)
   USE ML, ONLY : C, INHomo, NFC, PX, PWCnd, TND, X, XENd, XOT, KNSwot, &
     LOTjp, MNSwot, NSWot, TOL, NPS, NFCc
-  INTEGER Ncomp, nfcp, Niv, Iflag, ijk, Ip(*), j, k, kk, l, mflag
-  REAL dnd, dndt, dx, P(*), S(*), srp, Stowa(*), vnorm, W(*), wcnd, &
-    Y(Ncomp,*), Yhp(Ncomp,*), Yp(*), ypnm
+  INTEGER :: Ncomp,  Niv, Iflag, Ip(:)
+  REAL :: P(:), S(:), Stowa(:), W(:), Y(:,:), Yhp(:,:), Yp(:)
+  INTEGER :: nfcp,ijk, j, k, kk, l, mflag
+  REAL :: dnd, dndt, dx, srp, vnorm, wcnd, ypnm
   !
   !- *********************************************************************
   !* FIRST EXECUTABLE STATEMENT  REORT
@@ -71,7 +72,7 @@ SUBROUTINE REORT(Ncomp,Y,Yp,Yhp,Niv,W,S,P,Ip,Stowa,Iflag)
       IF ( (XENd-X)*(X-XOT)<0. ) RETURN
     END IF
   END IF
-  CALL STOR1(Y,Yhp,Yp,Yhp(1,nfcp),1,0,0)
+  CALL STOR1(Y(:,1),Yhp(:,1),Yp,Yhp(:,nfcp),1,0,0)
   !
   !     ****************************************
   !
@@ -169,7 +170,7 @@ SUBROUTINE REORT(Ncomp,Y,Yp,Yhp,Niv,W,S,P,Ip,Stowa,Iflag)
       END DO
     END IF
     !
-    IF ( Iflag==1 ) CALL STWAY(Y,Yp,Yhp,0,Stowa)
+    IF ( Iflag==1 ) CALL STWAY(Y(:,1),Yp,Yhp(:,1),0,Stowa)
     Iflag = 0
   ELSE
     IF ( Iflag/=2 ) THEN
@@ -177,7 +178,7 @@ SUBROUTINE REORT(Ncomp,Y,Yp,Yhp,Niv,W,S,P,Ip,Stowa,Iflag)
         !
         !     RETRIEVE DATA FOR A RESTART AT LAST ORTHONORMALIZATION POINT
         !
-        CALL STWAY(Y,Yp,Yhp,1,Stowa)
+        CALL STWAY(Y(:,1),Yp,Yhp(:,1),1,Stowa)
         LOTjp = 1
         NSWot = 1
         KNSwot = 0

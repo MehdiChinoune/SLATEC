@@ -94,12 +94,14 @@ SUBROUTINE SOSEQS(FNC,N,S,Rtolx,Atolx,Tolf,Iflag,Mxit,Ncjs,Nsrrc,Nsri,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   USE service, ONLY : R1MACH, I1MACH
-  INTEGER ksv, l, loun, ls, m, mit, mm, Mxit, N, Nc, Ncjs, np1, Nsri, Nsrrc
-  REAL Atolx, B(*), C(Nc), csv, f, Fac(*), fact, fdif, Fmax, fmin, fmxs, fn1, &
-    fn2, FNC, fp, h, hx, P(*), pmax, re, Rtolx, S(*), sruro, Temp(*), test, Tolf, &
-    uro, X(*), xnorm, Y(*), yj, yn1, yn2, yn3, ynorm, yns, zero
-  INTEGER ic, icr, Iflag, Iprint, Is(*), isj, isv, it, item, &
+  REAL, EXTERNAL :: FNC
+  INTEGER :: Mxit, N, Nc, Ncjs, Nsri, Nsrrc, Iflag, Iprint, Is(N)
+  REAL :: Atolx, Fmax, Rtolx, Tolf, C(Nc), B(N), Fac(N), P(N), S(N), Temp(N), &
+    X(N), Y(N)
+  INTEGER :: ksv, l, loun, ls, m, mit, mm, np1, ic, icr, isj, isv, it, item, &
     itry, j, jk, js, k, kd, kj, kk, km1, kn
+  REAL :: csv, f, fact, fdif, fmin, fmxs, fn1, fn2, fp, h, hx, pmax, re, &
+    sruro, test, uro, xnorm, yj, yn1, yn2, yn3, ynorm, yns, zero
   !* FIRST EXECUTABLE STATEMENT  SOSEQS
   uro = R1MACH(4)
   loun = I1MACH(2)

@@ -72,8 +72,8 @@ SUBROUTINE AAAAAA(Ver)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !   921215  Updated for Version 4.0.  (WRB)
   !   930701  Updated for Version 4.1.  (WRB)
-  
-  CHARACTER*(*) Ver
+
+  CHARACTER(3) :: Ver
   !* FIRST EXECUTABLE STATEMENT  AAAAAA
-  Ver = ' 4.2'
+  Ver = '4.2'
 END SUBROUTINE AAAAAA

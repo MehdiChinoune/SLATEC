@@ -26,9 +26,9 @@ SUBROUTINE DX4(U,Idmn,I,J,Uxxx,Uxxxx)
   !   801001  DATE WRITTEN
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
-  USE SPL4, ONLY : DLX4, KSWx, TDLx3, K
-  INTEGER I, Idmn, J
-  REAL U(Idmn,*), Uxxx, Uxxxx
+  USE SPL4, ONLY : DLX4, KSWx, TDLx3, K, L
+  INTEGER :: I, Idmn, J
+  REAL :: U(Idmn,L), Uxxx, Uxxxx
   !* FIRST EXECUTABLE STATEMENT  DX4
   IF ( I>2.AND.I<(K-1) ) THEN
     !

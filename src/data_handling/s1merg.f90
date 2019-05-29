@@ -30,7 +30,7 @@ SUBROUTINE S1MERG(Tcos,I1,M1,I2,M2,I3)
   !           (RWC)
   !   920130  Code name changed from MERGE to S1MERG.  (WRB)
   INTEGER I1, I2, I3, M1, M2
-  REAL Tcos(*)
+  REAL Tcos( MAX(I1+M1,I2+M2,I3+M1+M2) )
   !
   INTEGER j1, j2, j3
   !

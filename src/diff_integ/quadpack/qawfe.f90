@@ -214,15 +214,15 @@ SUBROUTINE QAWFE(F,A,Omega,Integr,Epsabs,Limlst,Limit,Maxp1,Result,Abserr,&
   !   891009  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   USE service, ONLY : R1MACH
-  INTEGER last, Limlst, momcom
-  INTEGER Ier, Ierlst(*), Integr, Iord(*), ktmin, l, Lst, Limit, ll, &
-    Maxp1, nev, Neval, Nnlog(*), nres, numrl2
-  REAL A, abseps, Abserr, Alist(*), Blist(*), Chebmo(Maxp1,25), correc, cycle, &
-    c1, c2, dl, drl, Elist(*), ep, eps, epsa, Epsabs, Erlst(*), errsum, fact, &
-    Omega, p1, psum(52), reseps, Result, res3la(3), Rlist(*), Rslst(*), uflow
-  !
+  INTEGER :: Ier, Integr, Lst, Limit, Limlst, Maxp1, Neval
+  INTEGER :: Ierlst(Limlst), Iord(Limit), Nnlog(Limit)
+  REAL :: A, Abserr, Epsabs, Omega, Result
+  REAL :: Alist(Limit), Blist(Limit), Chebmo(Maxp1,25), Elist(Limit), &
+    Erlst(Limlst), Rlist(Limit), Rslst(Limlst)
   REAL, EXTERNAL :: F
-  !
+  INTEGER :: ktmin, l, last, ll, momcom, nev, nres, numrl2
+  REAL :: abseps, correc, cycle, c1, c2, dl, drl, ep, eps, epsa, errsum, fact, &
+    p1, psum(52), reseps, res3la(3), uflow
   !
   !            THE DIMENSION OF  PSUM  IS DETERMINED BY THE VALUE OF
   !            LIMEXP IN SUBROUTINE QELG (PSUM MUST BE

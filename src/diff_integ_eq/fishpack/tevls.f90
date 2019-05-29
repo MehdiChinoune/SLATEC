@@ -55,9 +55,10 @@ SUBROUTINE TEVLS(N,D,E2,Ierr)
   !   900402  Added TYPE section.  (WRB)
   !   920528  DESCRIPTION revised and REFERENCES section added.  (WRB)
   USE CBLKT, ONLY : MAChep => EPS
-  REAL dhold, b, c, f, g, h, p, r, s
-  INTEGER nhalf, ntop, i, j, l, m, N, ii, l1, mml, Ierr
-  REAL D(*), E2(*)
+  INTEGER :: N, Ierr
+  REAL :: D(N), E2(N)
+  INTEGER :: nhalf, ntop, i, j, l, m, ii, l1, mml
+  REAL :: dhold, b, c, f, g, h, p, r, s
   !* FIRST EXECUTABLE STATEMENT  TEVLS
   Ierr = 0
   IF ( N/=1 ) THEN

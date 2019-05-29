@@ -136,12 +136,15 @@ SUBROUTINE BVPOR(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
   !   910722  Updated AUTHOR section.  (ALS)
   USE ML, ONLY : C, INHomo, IVP, PX, PWCnd, TND, X, XBEg, XENd, XOT, XOP, KNSwot, &
     KOP, LOTjp, NSWot, AE, RE, TOL, NDIsk, NTApe, NEQ, NEQivp, NUMort, ICOco
-  INTEGER kod, kpts, kwc, kwd, kws, kwt, l, m, Mxnon, n, Ncomp, ncomp2, ndw, Nfc, &
-    Nfcc, nfcp1, nfcp2, Nic, Niv, nn, non, Nrowa, Nrowb, Nrowy, Ntp, i, i1, i2, &
-    ic, Iflag, Ip(Nfcc,*), ira, isflg, Iwork(*), j, k, Nxpts
-  REAL A(Nrowa,*), Alpha(*), B(Nrowb,*), Beta(*), Coef(*), G(*), P(Ntp,*), S(*), &
-    Stowa(*), U(Ncomp,Nfc,*), V(Ncomp,*), W(Nfcc,*), Work(*), Xpts(*), &
-    Y(Nrowy,*), Yhp(Ncomp,*), Z(*)
+  INTEGER :: Mxnon, Ncomp, Nfc, Nfcc, Nic, Niv, Nrowa, Nrowb, Nrowy, Ntp, Iflag, &
+    Nxpts
+  INTEGER :: Ip(Nfcc,Mxnon+1), Iwork(*)
+  REAL :: A(Nrowa,Ncomp), Alpha(:), B(Nrowb,Ncomp), Beta(Nfc), Coef(Nfcc), &
+    G(Ncomp), P(Ntp,Mxnon+1), S(Nfc+1), Stowa(:), U(Ncomp,Nfc,Nxpts), &
+    V(Ncomp,Nxpts), W(Nfcc,Mxnon+1), Work(*), Xpts(Nxpts), Y(Nrowy,Nxpts), &
+    Yhp(Ncomp,Nfc+1), Z(Mxnon+1)
+  INTEGER kod, kpts, kwc, kwd, kws, kwt, l, m, n, ncomp2, ndw, &
+    nfcp1, nfcp2, nn, non, i, i1, i2, ic, ira, isflg, j, k
   !* FIRST EXECUTABLE STATEMENT  BVPOR
   nfcp1 = Nfc + 1
   NUMort = 0
@@ -184,7 +187,7 @@ SUBROUTINE BVPOR(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
           Yhp(k,nfcp2) = Alpha(Nic+k)
         END DO
       END IF
-      CALL STOR1(U,Yhp,V,Yhp(1,nfcp1),0,NDIsk,NTApe)
+      CALL STOR1(U(:,1,1),Yhp(:,1),V(:,1),Yhp(:,nfcp1),0,NDIsk,NTApe)
       !
       !- *********************************************************************
       !     SET UP DATA FOR THE ORTHONORMALIZATION TESTING PROCEDURE AND
@@ -200,7 +203,7 @@ SUBROUTINE BVPOR(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
       XOT = XENd
       XOP = X
       KOP = 1
-      CALL STWAY(U,V,Yhp,0,Stowa)
+      CALL STWAY(U(:,1,1),V(:,1),Yhp(:,1),0,Stowa)
       !
       !- *********************************************************************
       !- ******* FORWARD INTEGRATION OF ALL INITIAL VALUE EQUATIONS **********

@@ -132,10 +132,13 @@ SUBROUTINE DPOLFT(N,X,Y,W,Maxdeg,Ndeg,Eps,R,Ierr,A)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !   920527  Corrected erroneous statements in DESCRIPTION.  (WRB)
   USE service, ONLY : XERMSG
-  INTEGER N, i, idegf, Ierr, j, jp1, jpas, k1, k1pj, k2, k2pj, k3, &
-    k3pi, k4, k4pi, k5, k5pi, ksig, m, Maxdeg, mop1, Ndeg, nder, nfail
-  REAL(8) :: temd1, temd2, A(*), degf, den, Eps, etst, f, fcrit, R(*), sig, &
-    sigj, sigjm1, sigpas, temp, X(*), xm, Y(*), yp(1), W(*), w1, w11
+  INTEGER :: N, Ierr, Maxdeg, Ndeg
+  REAL(8) :: Eps
+  REAL(8) :: A(3*(N+Maxdeg+1)), R(N), X(N), Y(N), W(N)
+  INTEGER :: i, idegf, j, jp1, jpas, k1, k1pj, k2, k2pj, k3, k3pi, k4, k4pi, k5, &
+    k5pi, ksig, m, mop1, nder, nfail
+  REAL(8) :: temd1, temd2, degf, den, etst, f, fcrit, sig, sigj, sigjm1, sigpas, &
+    temp, xm, yp(1), w1, w11
   REAL(8), PARAMETER :: co(4,3)= RESHAPE( [ &
     -13.086850D0, -2.4648165D0, -3.3846535D0, -1.2973162D0, &
     -3.3381146D0, -1.7812271D0, -3.2578406D0, -1.6589279D0, &

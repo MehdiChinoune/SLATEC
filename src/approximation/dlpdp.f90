@@ -53,8 +53,11 @@ SUBROUTINE DLPDP(A,Mda,M,N1,N2,Prgopt,X,Wnorm,Mode,Ws,Is)
   !   900328  Added TYPE section.  (WRB)
   !   910408  Updated the AUTHOR section.  (WRB)
   !
-  INTEGER i, Is(*), iw, ix, j, l, M, Mda, Mode, modew, n, N1, N2, np1
-  REAL(8) :: A(Mda,*), Prgopt(*), rnorm, sc, Wnorm, Ws(*), X(*), ynorm
+  INTEGER :: M, Mda, Mode, N1, N2
+  INTEGER :: Is(M+N1+N2+1)
+  REAL(8) :: Wnorm, A(Mda,N1+N2+1), Prgopt(:), Ws((M+2)*(N1+N2+7)), X(N1+N2)
+  INTEGER :: i, iw, ix, j, l, modew, n, np1
+  REAL(8) :: rnorm, sc, ynorm
   REAL(8), PARAMETER :: zero = 0.0D0, one = 1.0D0, fac = 0.1D0
   !* FIRST EXECUTABLE STATEMENT  DLPDP
   n = N1 + N2

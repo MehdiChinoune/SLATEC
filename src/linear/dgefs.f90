@@ -111,8 +111,8 @@ SUBROUTINE DGEFS(A,Lda,N,V,Itask,Ind,Work,Iwork)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   USE service, ONLY : D1MACH, XERMSG
   !
-  INTEGER Lda, N, Itask, Ind, Iwork(*)
-  REAL(8) :: A(Lda,*), V(*), Work(*)
+  INTEGER :: Lda, N, Itask, Ind, Iwork(N)
+  REAL(8) :: A(Lda,N), V(N), Work(N)
   REAL(8) :: rcond
   CHARACTER(8) :: xern1, xern2
   !* FIRST EXECUTABLE STATEMENT  DGEFS

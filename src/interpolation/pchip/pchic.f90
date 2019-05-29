@@ -220,7 +220,7 @@ SUBROUTINE PCHIC(Ic,Vc,Switch,N,X,F,D,Incfd,Wk,Nwk,Ierr)
   !  DECLARE ARGUMENTS.
   !
   INTEGER Ic(2), N, Incfd, Nwk, Ierr
-  REAL Vc(2), Switch, X(*), F(Incfd,*), D(Incfd,*), Wk(Nwk)
+  REAL Vc(2), Switch, X(N), F(Incfd,N), D(Incfd,N), Wk(Nwk)
   !
   !  DECLARE LOCAL VARIABLES.
   !

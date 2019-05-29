@@ -71,10 +71,11 @@ SUBROUTINE DMGSBV(M,N,A,Ia,Niv,Iflag,S,P,Ip,Inhomo,V,W,Wcnd)
   !   910722  Updated AUTHOR section.  (ALS)
   USE DML, ONLY : SRU, EPS, INDpvt, NFCc
   !
-  INTEGER i, Ia, Iflag, Inhomo, Ip(*), ip1, ix, iz, j, jk, jp, jq, jy, jz, k, kd, &
-    kj, kp, l, lix, lr, M, m2, N, Niv, nivn, nmnr, nn, np1, nr, nrm1
-  REAL(8) :: A(Ia,*), dot, P(*), pjp, psave, ry, S(*), sv, t, V(*), vl, vnorm, &
-    W(*), Wcnd, y
+  INTEGER :: Ia, Iflag, Inhomo, M, N, Niv, Ip(2*N)
+  REAL(8) :: Wcnd, A(Ia,M), P(N*(2*N+1)), S(M), V(M), W(M)
+  INTEGER :: i, ip1, ix, iz, j, jk, jp, jq, jy, jz, k, kd, kj, kp, l, lix, lr, &
+    m2, nivn, nmnr, nn, np1, nr, nrm1
+  REAL(8) :: dot, pjp, psave, ry, sv, t, vl, vnorm, y
   !
   !* FIRST EXECUTABLE STATEMENT  DMGSBV
   IF ( M>0.AND.N>0.AND.Ia>=M ) THEN

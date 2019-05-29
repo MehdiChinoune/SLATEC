@@ -34,12 +34,13 @@ SUBROUTINE CBLKT1(An,Cn,M,Am,Bm,Cm,Idimy,Y,B,W1,W2,W3,Wd,Ww,Wu,PRDCT,CPRDCT)
   USE CCBLK, ONLY : K, NCMplx, NM, NPP
   !
   EXTERNAL :: PRDCT, CPRDCT
-  REAL dum
-  INTEGER i, i1, i2, i3, i4, Idimy, idxa, idxc, if, ifd, im1, im2, im3, imi1, &
+  INTEGER :: Idimy, M
+  REAL :: An(NM), Cn(NM), B(:)
+  COMPLEX :: Am(M), Bm(M), Cm(M), W1(M), W2(M), W3(M), Wd(M), Ww(M), Wu(M), Y(Idimy,NM)
+  INTEGER :: i, i1, i2, i3, i4, idxa, idxc, if, ifd, im1, im2, im3, imi1, &
     imi2, ip, ip1, ip2, ip3, ipi1, ipi2, ipi3, ir, irm1, iz, izr, j, kdo, l, ll, &
-    M, na, nc, nm1, nm2, nm3, np, np1, np2, np3, nz
-  REAL :: An(*), Cn(*),  B(*)
-  COMPLEX Am(*), Bm(*), Cm(*), W1(*), W2(*), W3(*), Wd(*), Ww(*), Wu(*), Y(Idimy,*)
+    na, nc, nm1, nm2, nm3, np, np1, np2, np3, nz
+  REAL dum
   !* FIRST EXECUTABLE STATEMENT  CBLKT1
   kdo = K - 1
   DO l = 1, kdo

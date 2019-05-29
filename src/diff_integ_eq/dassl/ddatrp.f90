@@ -39,10 +39,11 @@ SUBROUTINE DDATRP(X,Xout,Yout,Ypout,Neq,Kold,Phi,Psi)
   !   901019  Merged changes made by C. Ulrich with SLATEC 4.0 format.
   !   901026  Added explicit declarations for all variables and minor
   !           cosmetic changes to prologue.  (FNF)
-  
+
   !
-  INTEGER Neq, Kold
-  REAL(8) :: X, Xout, Yout(*), Ypout(*), Phi(Neq,*), Psi(*)
+  INTEGER :: Neq, Kold
+  REAL(8) :: X, Xout
+  REAL(8) :: Yout(Neq), Ypout(Neq), Phi(Neq,Kold+1), Psi(Kold+1)
   !
   INTEGER i, j, koldp1
   REAL(8) :: c, d, gama, temp1

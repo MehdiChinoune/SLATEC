@@ -80,8 +80,10 @@ SUBROUTINE BSPEV(T,Ad,N,K,Nderiv,X,Inev,Svalue,Work)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   USE service, ONLY : XERMSG
   !
-  INTEGER i, id, Inev, iwork, jj, K, kp1, kp1mn, l, left, ll, mflag, N, Nderiv
-  REAL Ad(*), Svalue(*), summ, T(*), Work(*), X
+  INTEGER :: Inev, K, N, Nderiv
+  REAL :: Ad((2*N-Nderiv+1)*Nderiv/2), Svalue(Nderiv), T(N+K), Work(3*K), X
+  INTEGER :: i, id, iwork, jj, kp1, kp1mn, l, left, ll, mflag
+  REAL :: summ
   !     DIMENSION T(N+K)
   !* FIRST EXECUTABLE STATEMENT  BSPEV
   IF ( K<1 ) THEN

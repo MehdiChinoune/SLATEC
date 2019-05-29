@@ -79,9 +79,11 @@ SUBROUTINE ORTHOR(A,N,M,Nrda,Iflag,Irank,Iscale,Diag,Kpivot,Scales,Rows,Rs)
   !   910408  Updated the AUTHOR and REFERENCES sections.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   USE service, ONLY : XERMSG, R1MACH
-  INTEGER Iflag, Irank, Iscale, j, jrow, k, kp, Kpivot(*), l, M, mk, N, Nrda
-  REAL A(Nrda,*), acc, akk, anorm, as, asave, Diag(*), diagk, dum(1), &
-    Rows(*), Rs(*), rss, sad, Scales(*), sig, sigma, sruro, uro
+  INTEGER :: Iflag, Irank, Iscale, M, N, Nrda, Kpivot(N)
+  REAL :: A(Nrda,M), Diag(N), Rows(N), Rs(N), Scales(M)
+  INTEGER :: j, jrow, k, kp, l, mk
+  REAL :: acc, akk, anorm, as, asave, diagk, dum(1), rss, sad, sig, sigma, &
+    sruro, uro
   !
   ! END OF ABSTRACT
   !

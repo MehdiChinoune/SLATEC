@@ -217,7 +217,7 @@ INTEGER FUNCTION ISSCGN(N,B,X,Nelt,Ia,Ja,A,Isym,MTTVEC,MSOLVE,Itol,&
   REAL A(N), Atdz(N), Atz(N), B(N), Dz(N), R(N), Rwork(*), X(N)
   INTEGER Ia(Nelt), Iwork(*), Ja(Nelt)
   !     .. Subroutine Arguments ..
-  EXTERNAL :: MATVEC, MSOLVE, MTTVEC
+  EXTERNAL :: MTTVEC
   !     .. Local Scalars ..
   INTEGER i
   !* FIRST EXECUTABLE STATEMENT  ISSCGN

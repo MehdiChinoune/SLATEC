@@ -48,8 +48,9 @@ SUBROUTINE DBNSLV(W,Nroww,Nrow,Nbandl,Nbandu,B)
   !   900328  Added TYPE section.  (WRB)
 
   !
-  INTEGER Nbandl, Nbandu, Nrow, Nroww, i, j, jmax, middle, nrowm1
-  REAL(8) :: W(Nroww,*), B(*)
+  INTEGER :: Nbandl, Nbandu, Nrow, Nroww
+  REAL(8) :: W(Nroww,Nrow), B(Nrow)
+  INTEGER :: i, j, jmax, middle, nrowm1
   !* FIRST EXECUTABLE STATEMENT  DBNSLV
   middle = Nbandu + 1
   IF ( Nrow==1 ) THEN

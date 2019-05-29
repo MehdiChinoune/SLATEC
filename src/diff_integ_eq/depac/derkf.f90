@@ -602,15 +602,15 @@ SUBROUTINE DERKF(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,Rpar,Ipa
   !           comments to agree with DDERKF.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   USE service, ONLY : XERMSG
-  REAL Atol(*), Rpar(*), Rtol(*), Rwork(*), T, Tout, Y(*)
-  INTEGER Idid, Info(15), Ipar(*), Iwork(*), kdi, kf1, kf2, kf3, kf4, kf5, &
-    kh, krer, ktf, kto, ktstar, ku, kyp, kys, Liw, Lrw
-  INTEGER Neq
-  LOGICAL stiff, nonstf
+  INTEGER :: Idid, Liw, Lrw, Neq
+  INTEGER :: Info(15), Ipar(:), Iwork(Liw)
+  REAL :: T, Tout
+  REAL :: Atol(:), Rpar(:), Rtol(:), Rwork(Lrw), Y(Neq)
+  EXTERNAL :: F
+  INTEGER :: kdi, kf1, kf2, kf3, kf4, kf5, kh, krer, ktf, kto, ktstar, ku, kyp, kys
+  LOGICAL :: stiff, nonstf
   CHARACTER(8) :: xern1
   CHARACTER(16) :: xern3
-  !
-  EXTERNAL :: F
   !
   !     CHECK FOR AN APPARENT INFINITE LOOP
   !

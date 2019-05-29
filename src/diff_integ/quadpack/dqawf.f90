@@ -210,11 +210,10 @@ SUBROUTINE DQAWF(F,A,Omega,Integr,Epsabs,Result,Abserr,Neval,Ier,Limlst,&
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   USE service, ONLY : XERMSG
   !
-  REAL(8) :: A, Abserr, Epsabs, Omega, Result, Work(*)
-  INTEGER Ier, Integr, Iwork(*), Leniw, Lenw, limit, Limlst, ll2, lvl, &
-    Lst, l1, l2, l3, l4, l5, l6, Maxp1, Neval
-  !
+  INTEGER :: Ier, Integr, Leniw, Lenw, Limlst, Lst, Maxp1, Neval, Iwork(Leniw)
+  REAL(8) :: A, Abserr, Epsabs, Omega, Result, Work(Lenw)
   REAL(8), EXTERNAL :: F
+  INTEGER :: limit, ll2, lvl, l1, l2, l3, l4, l5, l6
   !
   !         CHECK VALIDITY OF LIMLST, LENIW, MAXP1 AND LENW.
   !

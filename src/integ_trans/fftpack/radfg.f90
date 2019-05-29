@@ -28,10 +28,10 @@ SUBROUTINE RADFG(Ido,Ip,L1,Idl1,Cc,C1,C2,Ch,Ch2,Wa)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
 
-  INTEGER i, ic, idij, Idl1, Ido, idp2, ik, Ip, ipp2, ipph, is, &
-    j, j2, jc, k, l, L1, lc, nbd
-  REAL ai1, ai2, ar1, ar1h, ar2, ar2h, arg, C1(Ido,L1,*), C2(Idl1,*), &
-    Cc(Ido,Ip,*), Ch(Ido,L1,*), Ch2(Idl1,*), dc2, dcp, ds2, dsp, tpi, Wa(*)
+  INTEGER :: Idl1, Ido, Ip, L1
+  REAL :: C1(Ido,L1,Ip), C2(Idl1,Ip), Cc(Ido,Ip,L1), Ch(Ido,L1,Ip), Ch2(Idl1,Ip), Wa(:)
+  INTEGER :: i, ic, idij, idp2, ik, ipp2, ipph, is, j, j2, jc, k, l, lc, nbd
+  REAL :: ai1, ai2, ar1, ar1h, ar2, ar2h, arg, dc2, dcp, ds2, dsp, tpi
   !* FIRST EXECUTABLE STATEMENT  RADFG
   tpi = 8.*ATAN(1.)
   arg = tpi/Ip

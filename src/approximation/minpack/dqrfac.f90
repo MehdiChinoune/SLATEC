@@ -88,11 +88,11 @@ SUBROUTINE DQRFAC(M,N,A,Lda,Pivot,Ipvt,Lipvt,Sigma,Acnorm,Wa)
   !           (WRB)
   !   900328  Added TYPE section.  (WRB)
   USE service, ONLY : D1MACH
-  INTEGER M, N, Lda, Lipvt
-  INTEGER Ipvt(Lipvt)
-  LOGICAL Pivot
-  REAL(8) :: A(Lda,*), Sigma(*), Acnorm(*), Wa(*)
-  INTEGER i, j, jp1, k, kmax, minmn
+  INTEGER :: M, N, Lda, Lipvt
+  INTEGER :: Ipvt(Lipvt)
+  LOGICAL :: Pivot
+  REAL(8) :: A(Lda,N), Sigma(N), Acnorm(N), Wa(N)
+  INTEGER :: i, j, jp1, k, kmax, minmn
   REAL(8) :: ajnorm, epsmch, summ, temp
   REAL(8), PARAMETER :: one = 1.0D0, p05 = 5.0D-2, zero = 0.0D0
   !* FIRST EXECUTABLE STATEMENT  DQRFAC

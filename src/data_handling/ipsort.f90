@@ -82,7 +82,7 @@ SUBROUTINE IPSORT(Ix,N,Iperm,Kflag,Ier)
   !     .. Scalar Arguments ..
   INTEGER Ier, Kflag, N
   !     .. Array Arguments ..
-  INTEGER Iperm(*), Ix(*)
+  INTEGER Iperm(N), Ix(N)
   !     .. Local Scalars ..
   REAL r
   INTEGER i, ij, indx, indx0, istrt, itemp, j, k, kk, l, lm, lmt, m, nn

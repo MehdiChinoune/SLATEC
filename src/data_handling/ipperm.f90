@@ -40,7 +40,8 @@ SUBROUTINE IPPERM(Ix,N,Iperm,Ier)
   !   900618  DATE WRITTEN
   !   920507  Modified by M. McClain to revise prologue text.
   USE service, ONLY : XERMSG
-  INTEGER Ix(*), N, Iperm(*), i, Ier, indx, indx0, itemp, istrt
+  INTEGER :: N, Ix(N), Iperm(N), Ier
+  INTEGER :: i, indx, indx0, itemp, istrt
   !* FIRST EXECUTABLE STATEMENT  IPPERM
   Ier = 0
   IF ( N<1 ) THEN

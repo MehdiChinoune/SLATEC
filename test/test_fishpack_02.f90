@@ -84,12 +84,12 @@ CONTAINS
     !   930315  Modified RFFT* tests to compute "slow-transform" in DOUBLE
     !           PRECISION.  (WRB)
     USE slatec, ONLY : CFFTB, CFFTF, CFFTI, COSQB, COSQF, COSQI, COST, COSTI, &
-      EZFFTB, EZFFTF, EZFFTI, PIMACH, R1MACH, RFFTB, RFFTF, RFFTI, SINQB, SINQF, &
+      EZFFTB, EZFFTF, EZFFTI, R1MACH, RFFTB, RFFTF, RFFTI, SINQB, SINQF, &
       SINQI, SINT, SINTI
     !     .. Scalar Arguments ..
     INTEGER Ipass, Kprint, Lun
     !     .. Local Scalars ..
-    REAL(8) :: arg, arg1, arg2, dt, pi, summ, sum1, sum2
+    REAL(8) :: arg, arg1, arg2, dt, summ, sum1, sum2
     REAL azero, azeroh, cf, cosqbt, cosqfb, cosqft, costfb, costt, &
       dcfb, dcfftb, dcfftf, dezb1, dezf1, dezfb, errmax, rftb, &
       rftf, rftfb, signn, sinqbt, sinqfb, sinqft, sintfb, sintt, sqrt2, tpi
@@ -101,11 +101,11 @@ CONTAINS
     INTRINSIC ABS, CABS, CMPLX, COS, MAX, MOD, SIN, SQRT
     !     .. Data statements ..
     INTEGER, PARAMETER :: nd(7) = [ 120, 54, 49, 32, 4, 3, 2 ]
+    REAL(8), PARAMETER :: pi = 3.14159265358979D0
     !* FIRST EXECUTABLE STATEMENT  FFTQX
     sqrt2 = SQRT(2.0)
     errmax = 2.0*SQRT(R1MACH(4))
     nns = 7
-    pi = 4.0D0*ATAN(1.0D0)
     IF ( Kprint>=2 ) WRITE (Lun,99001)
     !
     99001 FORMAT ('1'/' FFT QUICK CHECK')

@@ -144,7 +144,7 @@ SUBROUTINE PCHIM(N,X,F,D,Incfd,Ierr)
   !  DECLARE ARGUMENTS.
   !
   INTEGER N, Incfd, Ierr
-  REAL X(*), F(Incfd,*), D(Incfd,*)
+  REAL X(N), F(Incfd,N), D(Incfd,N)
   !
   !  DECLARE LOCAL VARIABLES.
   !

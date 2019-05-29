@@ -368,14 +368,13 @@ SUBROUTINE HW3CRT(Xs,Xf,L,Lbdcnd,Bdxs,Bdxf,Ys,Yf,M,Mbdcnd,Bdys,Bdyf,Zs,Zf,&
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-  INTEGER i, Ierror, ir, iwb, iwc, iww, j, k, L, Lbdcnd, Ldimf, &
-    lp, lp1, lstart, lstop, lstpm1, lunk, M, Mbdcnd, Mdimf
-  REAL Bdxf(Mdimf,*), Bdxs(Mdimf,*), Bdyf(Ldimf,*), Bdys(Ldimf,*), &
-    Bdzf(Ldimf,*), Bdzs(Ldimf,*), c1, c2, c3, dx, dy, &
-    dz, Elmbda, F(Ldimf,Mdimf,*), Pertrb, s, s1, s2, twbydx, twbydy
-  REAL twbydz, W(*), Xf, xlp, Xs, Yf, ylp, Ys, Zf, zlp, Zs
-  INTEGER mp, mp1, mstart, mstop, mstpm1, munk, N, Nbdcnd, np, &
-    np1, nperod, nstart, nstop, nstpm1, nunk
+  INTEGER :: Ierror, L, Lbdcnd, Ldimf, M, Mbdcnd, Mdimf, N, Nbdcnd
+  REAL :: Elmbda, Pertrb, Xf, Xs, Yf, Ys, Zf, Zs
+  REAL :: Bdxf(Mdimf,N+1), Bdxs(Mdimf,N+1), Bdyf(Ldimf,N+1), Bdys(Ldimf,N+1), &
+    Bdzf(Ldimf,M+1), Bdzs(Ldimf,M+1), F(Ldimf,Mdimf,N+1), W(:)
+  INTEGER :: i, ir, iwb, iwc, iww, j, k, lp, lp1, lstart, lstop, lstpm1, lunk, &
+    mp, mp1, mstart, mstop, mstpm1, munk, np, np1, nperod, nstart, nstop, nstpm1, nunk
+  REAL :: c1, c2, c3, dx, dy, dz, s, s1, s2, twbydx, twbydy, twbydz, xlp, ylp, zlp
   !* FIRST EXECUTABLE STATEMENT  HW3CRT
   Ierror = 0
   IF ( Xf<=Xs ) Ierror = 1
@@ -645,8 +644,8 @@ SUBROUTINE HW3CRT(Xs,Xf,L,Lbdcnd,Bdxs,Bdxf,Ys,Yf,M,Mbdcnd,Bdys,Bdyf,Zs,Zf,&
       W(1) = 0.
       W(iww-1) = 0.
     END IF
-    CALL POIS3D(Lbdcnd,lunk,c1,Mbdcnd,munk,c2,nperod,nunk,W,W(iwb),W(iwc),&
-      Ldimf,Mdimf,F(lstart,mstart,nstart),ir,W(iww))
+    CALL POIS3D(Lbdcnd,lunk,c1,Mbdcnd,munk,c2,nperod,nunk,W,W(iwb:iwc-1),W(iwc:iww-1),&
+      Ldimf,Mdimf,F(lstart,mstart,nstart),ir,W(iww:))
     !
     !     FILL IN SIDES FOR PERIODIC BOUNDARY CONDITIONS.
     !

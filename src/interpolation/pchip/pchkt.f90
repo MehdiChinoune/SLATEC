@@ -52,7 +52,7 @@ SUBROUTINE PCHKT(N,X,Knotyp,T)
   !  Declare arguments.
   !
   INTEGER N, Knotyp
-  REAL X(*), T(*)
+  REAL X(N), T(2*N+4)
   !
   !  Declare local variables.
   !

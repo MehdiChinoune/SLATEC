@@ -31,9 +31,10 @@ SUBROUTINE SREADP(Ipage,List,Rlist,Lpage,Irec)
   !   900328  Added TYPE section.  (WRB)
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
   USE service, ONLY : XERMSG
-  INTEGER i, Ipage, ipagef, Irec, irecn, Lpage, lpg
-  INTEGER List(*)
-  REAL Rlist(*)
+  INTEGER :: Ipage, Irec, Lpage
+  INTEGER :: List(Lpage)
+  REAL :: Rlist(Lpage)
+  INTEGER :: i, ipagef, irecn, lpg
   CHARACTER(8) :: xern1, xern2
   !* FIRST EXECUTABLE STATEMENT  SREADP
   ipagef = Ipage

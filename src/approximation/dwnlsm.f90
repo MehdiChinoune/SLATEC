@@ -76,15 +76,15 @@ SUBROUTINE DWNLSM(W,Mdw,Mme,Ma,N,L,Prgopt,X,Rnorm,Mode,Ipivot,Itype,Wd,H,&
   !   900911  Restriction on value of ALAMDA included.  (WRB)
   USE service, ONLY : XERMSG, D1MACH
   USE linear, ONLY : DAXPY, DH12, DROTM, DROTMG, DSWAP
-  INTEGER Ipivot(*), Itype(*), L, Ma, Mdw, Mme, Mode, N
-  REAL(8) :: D(*), H(*), Prgopt(*), Rnorm, Scalee(*), Temp(*), &
-    W(Mdw,*), Wd(*), X(*), Z(*)
+  INTEGER :: L, Ma, Mdw, Mme, Mode, N, Ipivot(N), Itype(Mme+Ma)
+  REAL(8) :: Rnorm, D(N), H(N), Prgopt(:), Scalee(Mme+Ma), Temp(N), W(Mdw,N+1), &
+    Wd(N), X(N), Z(N)
   !
+  INTEGER :: i, idope(3), imax, isol, itemp, iter, itmax, iwmax, j, jcon, jp, key, &
+    krank, l1, last, link, m, me, next, niv, nlink, nopt, nsoln, ntimes
   REAL(8) :: alamda, alpha, alsq, amax, blowup, bnorm, dope(3), eanorm, fac, sm, &
     sparam(5), t, tau, wmax, z2, zz
-  INTEGER i, idope(3), imax, isol, itemp, iter, itmax, iwmax, j, jcon, jp, key, &
-    krank, l1, last, link, m, me, next, niv, nlink, nopt, nsoln, ntimes
-  LOGICAL done, feasbl, hitcon, pos
+  LOGICAL :: done, feasbl, hitcon, pos
   !
   REAL(8), SAVE :: drelpr
   LOGICAL :: first = .TRUE.

@@ -103,10 +103,11 @@ SUBROUTINE DBSKIN(X,N,Kode,M,Y,Nz,Ierr)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   USE service, ONLY : D1MACH, I1MACH
-  INTEGER i, icase, Ierr, il, i1m, k, kk, Kode, ktrms, M, m3, N, &
-    ne, nflg, nl, nlim, nn, np, ns, nt, Nz
-  REAL(8) :: enlim, exi(102), fn, gr, h(31), hn, ss, tol, &
-    t1, t2, w, X, xlim, xnlim, xp, Y(*), ys(3), yss(3)
+  INTEGER :: Ierr, Kode, M, N, Nz
+  REAL(8) :: X, Y(M)
+  INTEGER :: i, icase, il, i1m, k, kk, ktrms, m3, ne, nflg, nl, nlim, nn, np, ns, nt
+  REAL(8) :: enlim, exi(102), fn, gr, h(31), hn, ss, tol, t1, t2, w, xlim, xnlim, &
+    xp, ys(3), yss(3)
   !-----------------------------------------------------------------------
   !             COEFFICIENTS IN SERIES OF EXPONENTIAL INTEGRALS
   !-----------------------------------------------------------------------

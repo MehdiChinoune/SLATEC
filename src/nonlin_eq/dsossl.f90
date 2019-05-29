@@ -37,36 +37,37 @@ SUBROUTINE DSOSSL(K,N,L,X,C,B,M)
 
   !
   !
-  INTEGER j, jkm, K, kj, km, km1, kmm1, kn, L, lk, M, N, np1
-  REAL(8) :: B(*), C(*), X(*), xmax
+  INTEGER :: K, L, M, N
+  REAL(8) :: B(:), C(:), X(:)
+  INTEGER :: j, j1, k1, k2, k3, km1, kn, lk
+  REAL(8) :: xmax
   !
   !* FIRST EXECUTABLE STATEMENT  DSOSSL
-  np1 = N + 1
   km1 = K - 1
   lk = km1
   IF ( L==K ) lk = K
   kn = M
   !
   !
-  DO kj = 1, km1
-    kmm1 = K - kj
-    km = kmm1 + 1
+  DO k1 = 1, km1
+    k2 = K - k1
+    k3 = k2 + 1
     xmax = 0.0D0
-    kn = kn - np1 + kmm1
-    IF ( km<=lk ) THEN
-      jkm = kn
+    kn = kn - N + k2 - 1
+    IF ( k3<=lk ) THEN
+      j1 = kn
       !
-      DO j = km, lk
-        jkm = jkm + 1
-        xmax = xmax + C(jkm)*X(j)
+      DO j = k3, lk
+        j1 = j1 + 1
+        xmax = xmax + C(j1)*X(j)
       END DO
     END IF
     !
     IF ( L>K ) THEN
-      jkm = kn + L - kmm1
-      xmax = xmax + C(jkm)*X(L)
+      j1 = kn + L - k2
+      xmax = xmax + C(j1)*X(L)
     END IF
-    X(kmm1) = xmax + B(kmm1)
+    X(k2) = xmax + B(k2)
   END DO
   !
 END SUBROUTINE DSOSSL

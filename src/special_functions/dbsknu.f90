@@ -91,10 +91,12 @@ SUBROUTINE DBSKNU(X,Fnu,Kode,N,Y,Nz)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   USE service, ONLY : XERMSG, D1MACH, I1MACH
   !
-  INTEGER i, iflag, inu, j, k, kk, Kode, koded, N, nn, Nz
+  INTEGER :: Kode, N, Nz
+  REAL(8) :: Fnu, X, Y(N)
+  INTEGER :: i, iflag, inu, j, k, kk, koded, nn
   REAL(8) :: a(160), ak, a1, a2, b(160), bk, ck, coef, cx, dk, dnu, dnu2, elim, &
-    etest, ex, f, fc, fhs, fk, fks, flrx, fmu, Fnu, g1, g2, p, pt, p1, p2, q, &
-    rx, s, smu, sqk, st, s1, s2, tm, tol, t1, t2, X, Y(*)
+    etest, ex, f, fc, fhs, fk, fks, flrx, fmu, g1, g2, p, pt, p1, p2, q, &
+    rx, s, smu, sqk, st, s1, s2, tm, tol, t1, t2
   REAL(8), PARAMETER ::  x1 = 2.0D0, x2 = 17.0D0
   REAL(8), PARAMETER ::  pi = 3.14159265358979D+00, rthpi = 1.25331413731550D+00
   REAL(8), PARAMETER :: cc(8) = [ 5.77215664901533D-01, -4.20026350340952D-02, &

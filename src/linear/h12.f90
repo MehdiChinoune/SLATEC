@@ -50,9 +50,10 @@ SUBROUTINE H12(Mode,Lpivot,L1,M,U,Iue,Up,C,Ice,Icv,Ncv)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
 
-  INTEGER i, i2, i3, i4, Ice, Icv, incr, Iue, j, kl1, kl2, klp, &
-    L1, l1m1, Lpivot, M, mml1p2, Mode, Ncv
-  REAL b, C(*), cl, clinv, one, sm, U(Iue,*), ul1m1, Up
+  INTEGER :: Ice, Icv, Iue, L1, Lpivot, M, Mode, Ncv
+  REAL :: C(Icv*Ncv+M*Ice), U(Iue,M), Up
+  INTEGER :: i, i2, i3, i4, incr, j, kl1, kl2, klp, l1m1, mml1p2
+  REAL :: b, cl, clinv, one, sm, ul1m1
   !* FIRST EXECUTABLE STATEMENT  H12
   one = 1.
   !

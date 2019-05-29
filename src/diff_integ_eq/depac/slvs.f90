@@ -31,8 +31,10 @@ SUBROUTINE SLVS(Wm,Iwm,X)
   USE linear, ONLY : SGBSL, SGESL
   !
   !LLL. OPTIMIZE
-  INTEGER Iwm(*), i, meband, ml, mu
-  REAL Wm(*), X(*), di, hl0, phl0, r
+  INTEGER :: Iwm(:)
+  REAL :: Wm(:), X(N)
+  INTEGER :: i, meband, ml, mu
+  REAL :: di, hl0, phl0, r
   !-----------------------------------------------------------------------
   ! THIS ROUTINE MANAGES THE SOLUTION OF THE LINEAR SYSTEM ARISING FROM
   ! A CHORD ITERATION.  IT IS CALLED BY STOD  IF MITER .NE. 0.
@@ -82,10 +84,10 @@ SUBROUTINE SLVS(Wm,Iwm,X)
       ml = Iwm(1)
       mu = Iwm(2)
       meband = 2*ml + mu + 1
-      CALL SGBSL(Wm(3),meband,N,ml,mu,Iwm(21),X,0)
+      CALL SGBSL(Wm(3:meband*N+2),meband,N,ml,mu,Iwm(21:N+20),X,0)
       RETURN
     CASE DEFAULT
-      CALL SGESL(Wm(3),N,N,Iwm(21),X,0)
+      CALL SGESL(Wm(3:N**2+2),N,N,Iwm(21:N+20),X,0)
       RETURN
   END SELECT
   100  IER = -1

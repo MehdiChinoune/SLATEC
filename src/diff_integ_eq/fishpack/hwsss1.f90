@@ -20,16 +20,15 @@ SUBROUTINE HWSSS1(Ts,Tf,M,Mbdcnd,Bdts,Bdtf,Ps,Pf,N,Nbdcnd,Bdps,Bdpf,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
 
-  INTEGER i, Idimf, ierror, ii, iid, inp, ising, isp, itf, itfm, &
-    its, itsp, j, jpf, jpfm, jps, jpsp, M, Mbdcnd, mbr
-  REAL Am(*), at, Bdpf(*), Bdps(*), Bdtf(*), Bdts(*), Bm(*), cf, Cm(*), cnp, cp, csp, &
-    ct, D(*), den, dfn, dfs, dnn, dns, dphi
-  REAL dphi2, dsn, dss, dth, dth2, Elmbda, F(Idimf,*), fim1, fjj, fm, fn, &
-    hdth, hld, hne, Pertrb, Pf, Ps, rtn, rts, Sint(*)
-  REAL Sn(*), Ss(*), summ, sum1, sum2, t1, tdp, tdt, Tf, theta, Ts, wp, &
-    wpf, wps, wtf, wts, yhld
-  INTEGER mp1, munk, N, Nbdcnd, nbr, np1, nunk
-  !
+  INTEGER :: Idimf, M, Mbdcnd, N, Nbdcnd
+  REAL :: Elmbda, Pertrb, Pf, Ps, Tf, Ts
+  REAL :: Am(M+1), Bdpf(M+1), Bdps(M+1), Bdtf(N+1), Bdts(N+1), Bm(M+1), Cm(M+1), &
+    D(:), F(Idimf,N+1), Sint(M+1), Sn(M+1), Ss(M+1)
+  INTEGER :: i, ierror, ii, iid, inp, ising, isp, itf, itfm, its, itsp, j, jpf, &
+    jpfm, jps, jpsp, mbr, mp1, munk, nbr, np1, nunk
+  REAL :: at, cf, cnp, cp, csp, ct, den, dfn, dfs, dnn, dns, dphi, dphi2, dsn, &
+    dss, dth, dth2, fim1, fjj, fm, fn, hdth, hld, hne, rtn, rts, summ, sum1, sum2, &
+    t1, tdp, tdt, theta, wp, wpf, wps, wtf, wts, yhld
   !* FIRST EXECUTABLE STATEMENT  HWSSS1
   mp1 = M + 1
   np1 = N + 1

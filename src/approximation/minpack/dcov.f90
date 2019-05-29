@@ -161,11 +161,12 @@ SUBROUTINE DCOV(FCN,Iopt,M,N,X,Fvec,R,Ldr,Info,Wa1,Wa2,Wa3,Wa4)
   !     REVISED YYMMDD HHMM
   !
   USE service, ONLY : XERMSG
-  INTEGER i, idum(1), iflag, Info, Iopt, j, k, kp1, Ldr, M, N, nm1, nrow
-  REAL(8) :: X(*), R(Ldr,*), Fvec(*), Wa1(*), Wa2(*), Wa3(*), Wa4(*)
+  INTEGER :: Info, Iopt, Ldr, M, N
+  REAL(8) :: X(N), R(Ldr,N), Fvec(M), Wa1(N), Wa2(N), Wa3(N), Wa4(M)
   EXTERNAL :: FCN
+  INTEGER :: i, idum(1), iflag, j, k, kp1, nm1, nrow
   REAL(8) :: sigma, temp
-  LOGICAL sing
+  LOGICAL :: sing
   REAL(8), PARAMETER :: zero = 0.D0, one = 1.D0
   !* FIRST EXECUTABLE STATEMENT  DCOV
   sing = .FALSE.

@@ -76,9 +76,11 @@ SUBROUTINE DBSGQ8(FUN,Xt,Bc,N,Kk,Id,A,B,Inbv,Err,Ans,Ierr,Work)
       REAL(8), INTENT(IN) :: X
     END FUNCTION
   END INTERFACE
-  INTEGER Id, Ierr, Inbv, k, Kk, l, lmn, lmx, lr(60), mxl, N, nbits, nib, nlmx
-  REAL(8) :: A, aa(60), ae, anib, Ans, area, B, Bc(*), c, ce, ee, &
-    ef, eps, Err, est, gl, glr, gr(60), hh(60), tol, vl(60), vr, Work(*), Xt(*)
+  INTEGER :: Id, Ierr, Inbv, Kk, N
+  REAL(8) :: A, Ans, B, Bc(N), Err, Work(3*Kk), Xt(N+Kk)
+  INTEGER :: k, l, lmn, lmx, lr(60), mxl, nbits, nib, nlmx
+  REAL(8) :: aa(60), ae, anib, area, c, ce, ee, ef, eps, est, gl, glr, gr(60), &
+    hh(60), tol, vl(60), vr
   REAL(8), PARAMETER :: x1 = 1.83434642495649805D-01, x2 = 5.25532409916328986D-01, &
     x3 =7.96666477413626740D-01 , x4 = 9.60289856497536232D-01
   REAL(8), PARAMETER :: w1 = 3.62683783378361983D-01, w2 = 3.13706645877887287D-01, &
@@ -116,7 +118,8 @@ SUBROUTINE DBSGQ8(FUN,Xt,Bc,N,Kk,Id,A,B,Inbv,Err,Ans,Ierr,Work)
             IF ( lmx<1 ) THEN
               Ierr = -1
               CALL XERMSG('SLATEC','DBSGQ8',&
-                'A AND B ARE TOO NEARLY EQUAL TO ALLOW NORMAL INTEGRATION.  ANS IS SET TO ZERO AND IERR TO -1.',1,-1)
+                'A AND B ARE TOO NEARLY EQUAL TO ALLOW NORMAL INTEGRATION.&
+                & ANS IS SET TO ZERO AND IERR TO -1.',1,-1)
               IF ( Err<0.0D0 ) Err = ce
               RETURN
             ELSE

@@ -63,9 +63,10 @@ SUBROUTINE DMOUT(M,N,Lda,A,Ifmt,Idigit)
   !   900328  Added TYPE section.  (WRB)
   !   910403  Updated AUTHOR section.  (WRB)
   USE service, ONLY : I1MACH
-  INTEGER i, Idigit, j, k1, k2, Lda, lout, M, N, ndigit
-  REAL(8) :: A(Lda,*)
-  CHARACTER Ifmt*(*)
+  INTEGER :: Idigit, Lda, M, N
+  REAL(8) :: A(Lda,N)
+  CHARACTER*(*) Ifmt
+  INTEGER :: i, j, k1, k2, lout, ndigit
   CHARACTER(3), PARAMETER :: icol = 'COL'
   !* FIRST EXECUTABLE STATEMENT  DMOUT
   lout = I1MACH(2)

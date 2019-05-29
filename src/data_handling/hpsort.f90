@@ -118,8 +118,8 @@ SUBROUTINE HPSORT(Hx,N,Strbeg,Strend,Iperm,Kflag,Work,Ier)
   INTEGER Ier, Kflag, N, Strbeg, Strend
   CHARACTER*(*) Work
   !     .. Array Arguments ..
-  INTEGER Iperm(*)
-  CHARACTER*(*) Hx(*)
+  INTEGER Iperm(N)
+  CHARACTER*(*) Hx(N)
   !     .. Local Scalars ..
   REAL r
   INTEGER i, ij, indx, indx0, ir, istrt, j, k, kk, l, lm, lmt, m, nn, nn2

@@ -98,10 +98,12 @@ SUBROUTINE DBESI(X,Alpha,Kode,N,Y,Nz)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   USE service, ONLY : XERMSG, D1MACH, I1MACH
   !
-  INTEGER i, ialp, in, is, i1, k, kk, km, Kode, kt, N, nn, ns, Nz
-  REAL(8) :: ain, ak, akm, Alpha, ans, ap, arg, atol, tolln, dfn, dtm, dx, earg, &
+  INTEGER :: Kode, N, Nz
+  REAL(8) :: Alpha, X, Y(N)
+  INTEGER :: i, ialp, in, is, i1, k, kk, km, kt, nn, ns
+  REAL(8) :: ain, ak, akm, ans, ap, arg, atol, tolln, dfn, dtm, dx, earg, &
     elim, etx, flgik, fn, fnf, fni, fnp1, fnu, gln, ra, s, sx, sxo2, s1, s2, t, &
-    ta, tb, temp(3), tfn, tm, tol, trx, t2, X, xo2, xo2l, Y(*), z
+    ta, tb, temp(3), tfn, tm, tol, trx, t2, xo2, xo2l, z
   REAL(8), PARAMETER :: rttpi = 3.98942280401433D-01
   INTEGER, PARAMETER :: inlim = 80
   !* FIRST EXECUTABLE STATEMENT  DBESI

@@ -142,12 +142,13 @@ SUBROUTINE HSTART(F,Neq,A,B,Y,Yprime,Etol,Morder,Small,Big,Spy,Pv,Yp,Sf,&
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
 
-  REAL A, absdx, B, Big, da, delf, delx, delxb, dely, dfdub, &
-    dfdxb, dx, dy, Etol(*), fbnd, H, power, Pv(*), relper
-  REAL Rpar(*), Sf(*), Small, Spy(*), srydpb, wtj, Y(*), ydpb, ynorm, &
-    Yp(*), ypnorm, Yprime(*)
-  INTEGER icase, Ipar(*), j, k, lk, Morder, Neq
+  INTEGER :: Morder, Neq, Ipar(:)
+  REAL :: A, B, Big, H, Small
+  REAL :: Etol(Neq), Pv(Neq), Rpar(:), Sf(Neq), Spy(Neq), Y(Neq), Yp(Neq), Yprime(Neq)
   EXTERNAL :: F
+  REAL :: absdx, da, delf, delx, delxb, dely, dfdub, dfdxb, dx, dy, fbnd, power, &
+    relper, srydpb, wtj, ydpb, ynorm, ypnorm
+  INTEGER :: icase, j, k, lk
   !
   !.......................................................................
   !

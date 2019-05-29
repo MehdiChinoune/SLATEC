@@ -121,7 +121,7 @@ REAL FUNCTION PCHIA(N,X,F,D,Incfd,Skip,A,B,Ierr)
   !  DECLARE ARGUMENTS.
   !
   INTEGER N, Incfd, Ierr
-  REAL X(*), F(Incfd,*), D(Incfd,*), A, B
+  REAL X(N), F(Incfd,N), D(Incfd,N), A, B
   LOGICAL Skip
   !
   !  DECLARE LOCAL VARIABLES.

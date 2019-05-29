@@ -27,10 +27,11 @@ SUBROUTINE DCSCAL(A,Nrda,Nrow,Ncol,Cols,Colsav,Rows,Rowsav,Anorm,Scales,Iscale,I
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
-  INTEGER Ic, ip, Iscale, j, k, Ncol, Nrda, Nrow
-  REAL(8) :: A(Nrda,*), alog2, Anorm, ascale, Cols(*), Colsav(*), &
-    cs, p, Rows(*), Rowsav(*), s, Scales(*)
-  !
+  INTEGER :: Ic, Iscale, Ncol, Nrda, Nrow
+  REAL(8) :: Anorm, A(Nrda,Ncol), Cols(Ncol), Colsav(Ncol), Rows(Nrow), Rowsav(Nrow), &
+    Scales(Ncol)
+  INTEGER :: ip, j, k
+  REAL(8) :: alog2, ascale, cs, p, s
   REAL(8), PARAMETER :: ten4 = 1.0D4, ten20 = 1.0D20
   !
   !     BEGIN BLOCK PERMITTING ...EXITS TO 130

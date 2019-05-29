@@ -19,10 +19,11 @@ SUBROUTINE CPEVLR(N,M,A,X,C)
   !   890831  Modified array declarations.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
-  
-  REAL ci, cim1, X
-  INTEGER i, j, M, mini, N, np1
-  REAL A(*), C(*)
+
+  INTEGER :: M, N
+  REAL :: X, A(N+1), C(MIN(M+1,N+1))
+  INTEGER :: i, j, mini, np1
+  REAL :: ci, cim1
   !* FIRST EXECUTABLE STATEMENT  CPEVLR
   np1 = N + 1
   DO j = 1, np1

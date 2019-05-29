@@ -34,13 +34,17 @@ SUBROUTINE DPINIT(Mrelas,Nvars,Costs,Bl,Bu,Ind,Primal,Amat,Csc,&
   !   891009  Removed unreferenced variable.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
-  INTEGER i, ip, iplace, j, Mrelas, n20007, n20019, n20028, &
-    n20041, n20056, n20066, n20070, n20074, n20078, Nvars
-  REAL(8) :: aij, Amat(*), Anorm, Bl(*), Bu(*), cmax, Colnrm(*), Costs(*), &
-    Costsc, Csc(*), csum, Primal(*), Rhs(*), Rhsnrm, scalr, testsc, Xlamda
+  INTEGER :: Mrelas, Nvars
+  REAL(8) :: Anorm, Costsc, Rhsnrm, Xlamda
+  INTEGER :: Ibasis(Nvars+Mrelas), Ibb(Nvars+Mrelas), Imat(:), Ind(Nvars+Mrelas)
+  REAL(8) :: Amat(:), Bl(Nvars+Mrelas), Bu(Nvars+Mrelas), Colnrm(Nvars), Costs(Nvars), &
+    Csc(Nvars), Primal(Nvars+Mrelas), Rhs(Mrelas)
+  LOGICAL :: Lopt(8)
+  INTEGER :: i, ip, iplace, j, n20007, n20019, n20028, n20041, n20056, n20066, &
+    n20070, n20074, n20078
+  REAL(8) :: aij, cmax, csum, scalr, testsc
   REAL(8), PARAMETER :: zero = 0.D0, one = 1.D0
-  INTEGER Ibasis(*), Ibb(*), Imat(*), Ind(*)
-  LOGICAL contin, usrbas, colscp, cstscp, minprb, Lopt(8)
+  LOGICAL :: contin, usrbas, colscp, cstscp, minprb
   !
   !* FIRST EXECUTABLE STATEMENT  DPINIT
   contin = Lopt(1)

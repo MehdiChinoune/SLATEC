@@ -41,8 +41,10 @@ SUBROUTINE DPPERM(Dx,N,Iperm,Ier)
   !   901004  DATE WRITTEN
   !   920507  Modified by M. McClain to revise prologue text.
   USE service, ONLY : XERMSG
-  INTEGER N, Iperm(*), i, Ier, indx, indx0, istrt
-  REAL(8) :: Dx(*), dtemp
+  INTEGER :: N, Iperm(N), Ier
+  REAL(8) :: Dx(N)
+  INTEGER :: i, indx, indx0, istrt
+  REAL(8) :: dtemp
   !* FIRST EXECUTABLE STATEMENT  DPPERM
   Ier = 0
   IF ( N<1 ) THEN

@@ -32,11 +32,13 @@ SUBROUTINE DDCOR(Dfdy,El,FA,H,Ierror,Impl,Ipvt,Matdim,Miter,Ml,Mu,N,Nde,&
   !   790601  DATE WRITTEN
   !   900329  Initial submission to SLATEC.
   USE linear, ONLY : DGBSL, DGESL
-  INTEGER i, Ierror, iflag, Impl, j, Jstate, Matdim, Miter, Ml, Mu, mw, N, Nde, Nq
-  REAL(8) :: A(Matdim,*), D, Dfdy(Matdim,*), El(13,12), H, &
-    Save1(*), Save2(*), T, Y(*), Yh(N,*), Ywt(*)
-  INTEGER Ipvt(*)
-  LOGICAL Evalfa
+  INTEGER :: Ierror, Impl, Jstate, Matdim, Miter, Ml, Mu, N, Nde, Nq
+  INTEGER :: Ipvt(N)
+  REAL(8) :: D, H, T
+  REAL(8) :: A(Matdim,N), Dfdy(Matdim,N), El(13,12), Save1(N), Save2(N), Y(N), &
+    Yh(N,13), Ywt(N)
+  LOGICAL :: Evalfa
+  INTEGER :: i, iflag, j, mw
   !* FIRST EXECUTABLE STATEMENT  DDCOR
   IF ( Miter==0 ) THEN
     IF ( Ierror==1.OR.Ierror==5 ) THEN

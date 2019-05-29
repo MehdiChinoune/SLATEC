@@ -35,11 +35,14 @@ SUBROUTINE SPLPDM(Mrelas,Nvars,Lbm,Nredc,Info,Iopt,Ibasis,Imat,Ibrc,&
   !           DO loops to DO loops.  (RWC)
   USE LA05DS, ONLY : SMAll
   USE service, ONLY : XERMSG
-  REAL aij
-  INTEGER i, Info, Iopt, iplace, j, k, Lbm, Mrelas, Nredc, Nvars, nzbm
-  INTEGER Ibasis(*), Imat(*), Ibrc(Lbm,2), Ipr(*), Iwr(*), Ind(*)
-  REAL Amat(*), Basmat(*), Csc(*), Wr(*), Anorm, Eps, Gg, one, Uu, zero
-  LOGICAL Singlr, Redbas
+  INTEGER :: Info, Iopt, Lbm, Mrelas, Nredc, Nvars
+  REAL :: Anorm, Eps, Gg, Uu
+  LOGICAL :: Singlr, Redbas
+  INTEGER :: Ibasis(Nvars+Mrelas), Imat(:), Ibrc(Lbm,2), Ipr(2*Mrelas), &
+    Iwr(8*Mrelas), Ind(Nvars+Mrelas)
+  REAL :: Amat(:), Basmat(Lbm), Csc(Nvars), Wr(Mrelas)
+  INTEGER :: i, iplace, j, k, nzbm
+  REAL :: aij, one, zero
   CHARACTER(16) :: xern3
   !
   !* FIRST EXECUTABLE STATEMENT  SPLPDM

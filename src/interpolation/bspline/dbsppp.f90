@@ -67,8 +67,9 @@ SUBROUTINE DBSPPP(T,A,N,K,Ldc,C,Xi,Lxi,Work)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   USE service, ONLY : XERMSG
   !
-  INTEGER ileft, inev, K, Ldc, Lxi, N, nk
-  REAL(8) :: A(*), C(Ldc,*), T(*), Work(*), Xi(*)
+  INTEGER :: K, Ldc, Lxi, N
+  REAL(8) :: A(N), C(Ldc,N-K+1), T(N+K), Work(K*(N+3)), Xi(N-K+2)
+  INTEGER :: ileft, inev, nk
   !     DIMENSION T(N+K),XI(LXI+1),C(LDC,*)
   !     HERE, * = THE FINAL VALUE OF THE OUTPUT PARAMETER LXI.
   !* FIRST EXECUTABLE STATEMENT  DBSPPP

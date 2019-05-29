@@ -25,9 +25,10 @@ SUBROUTINE RADB4(Ido,L1,Cc,Ch,Wa1,Wa2,Wa3)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
 
-  INTEGER i, ic, Ido, idp2, k, L1
-  REAL Cc(Ido,4,*), Ch(Ido,L1,4), ci2, ci3, ci4, cr2, cr3, cr4, sqrt2, ti1, ti2, &
-    ti3, ti4, tr1, tr2, tr3, tr4, Wa1(*), Wa2(*), Wa3(*)
+  INTEGER :: Ido, L1
+  REAL :: Cc(Ido,4,L1), Ch(Ido,L1,4), Wa1(Ido), Wa2(Ido), Wa3(Ido)
+  INTEGER :: i, ic, idp2, k
+  REAL :: ci2, ci3, ci4, cr2, cr3, cr4, sqrt2, ti1, ti2, ti3, ti4, tr1, tr2, tr3, tr4
   !* FIRST EXECUTABLE STATEMENT  RADB4
   sqrt2 = SQRT(2.)
   DO k = 1, L1

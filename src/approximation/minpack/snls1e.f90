@@ -509,13 +509,13 @@ SUBROUTINE SNLS1E(FCN,Iopt,M,N,X,Fvec,Tol,Nprint,Info,Iw,Wa,Lwa)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   USE service, ONLY : XERMSG
-  INTEGER M, N, Nprint, Info, Lwa, Iopt
-  INTEGER indexx, Iw(*)
-  REAL Tol
-  REAL X(*), Fvec(*), Wa(*)
+  INTEGER :: M, N, Nprint, Info, Lwa, Iopt
+  INTEGER :: Iw(N)
+  REAL :: Tol
+  REAL :: X(N), Fvec(M), Wa(Lwa)
   EXTERNAL :: FCN
-  INTEGER maxfev, mode, nfev, njev
-  REAL ftol, gtol, xtol, epsfcn
+  INTEGER :: indexx, maxfev, mode, nfev, njev
+  REAL :: ftol, gtol, xtol, epsfcn
   REAL, PARAMETER :: factor = 1.0E2, zero = 0.0E0
   !* FIRST EXECUTABLE STATEMENT  SNLS1E
   Info = 0

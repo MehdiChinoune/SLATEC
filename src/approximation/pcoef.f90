@@ -64,8 +64,10 @@ SUBROUTINE PCOEF(L,C,Tc,A)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
-  REAL A(*), C, fac, save, Tc(*)
-  INTEGER i, L, ll, llp1, llp2, new, nr
+  INTEGER :: L
+  REAL :: C, A(:), Tc(ABS(L)+1)
+  REAL :: fac, save
+  INTEGER :: i, ll, llp1, llp2, new, nr
   !* FIRST EXECUTABLE STATEMENT  PCOEF
   ll = ABS(L)
   llp1 = ll + 1

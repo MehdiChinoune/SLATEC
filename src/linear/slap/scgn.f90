@@ -295,7 +295,7 @@ SUBROUTINE SCGN(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MTTVEC,MSOLVE,Itol,Tol,&
     Rwork(*), X(N), Z(N)
   INTEGER Ia(Nelt), Iwork(*), Ja(Nelt)
   !     .. Subroutine Arguments ..
-  EXTERNAL :: MATVEC, MSOLVE, MTTVEC
+  EXTERNAL :: MTTVEC
   !     .. Local Scalars ..
   REAL ak, akden, bk, bkden, bknum, bnrm, solnrm, tolmin
   INTEGER i, k

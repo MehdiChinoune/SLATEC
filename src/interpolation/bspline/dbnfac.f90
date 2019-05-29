@@ -83,9 +83,10 @@ SUBROUTINE DBNFAC(W,Nroww,Nrow,Nbandl,Nbandu,Iflag)
   !   900328  Added TYPE section.  (WRB)
 
   !
-  INTEGER Iflag, Nbandl, Nbandu, Nrow, Nroww, i, ipk, j, jmax, k, &
-    kmax, middle, midmk, nrowm1
-  REAL(8) :: W(Nroww,*), factor, pivot
+  INTEGER :: Iflag, Nbandl, Nbandu, Nrow, Nroww
+  REAL(8) :: W(Nroww,Nrow)
+  INTEGER :: i, ipk, j, jmax, k, kmax, middle, midmk, nrowm1
+  REAL(8) :: factor, pivot
   !
   !* FIRST EXECUTABLE STATEMENT  DBNFAC
   Iflag = 1

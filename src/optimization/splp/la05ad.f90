@@ -59,11 +59,12 @@ SUBROUTINE LA05AD(A,Ind,Nz,Ia,N,Ip,Iw,W,G,U)
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
   USE LA05DD, ONLY : LP, LCOl, LENl, LENu, LROw, NCP, LROW, SMAll
   USE service, ONLY : XERMSG, XSETUN, D1MACH
-  INTEGER i, Ia, idummy, ii, il, in, ipp, ipv, ir, j, jcost, jp, k, k1, k2, kc, &
-    kcost, kj, kk, kl, klc, kn, knp, kp, kpc, kpl, kq, kr, krl, ks, l, mcp, N, &
-    nc, Nz, nzc
-  INTEGER Ip(N,2), Ind(Ia,2), Iw(N,8)
-  REAL(8) :: A(*), amax, au, am, G, U, W(*)
+  INTEGER :: Ia, N, Nz
+  INTEGER :: Ip(N,2), Ind(Ia,2), Iw(N,8)
+  REAL(8) :: G, U, W(:), A(:)
+  INTEGER :: i, idummy, ii, il, in, ipp, ipv, ir, j, jcost, jp, k, k1, k2, kc, &
+    kcost, kj, kk, kl, klc, kn, knp, kp, kpc, kpl, kq, kr, krl, ks, l, mcp, nc, nzc
+  REAL(8) :: amax, au, am
   CHARACTER(8) :: xern0, xern1, xern2
   ! EPS IS THE RELATIVE ACCURACY OF FLOATING-POINT COMPUTATION
   REAL(8) :: eps = 0.D0
@@ -299,7 +300,7 @@ SUBROUTINE LA05AD(A,Ind,Nz,Ia,N,Ip,Iw,W,G,U)
           ! COMPRESS ROW FILE UNLESS IT IS CERTAIN THAT THERE IS ROOM FOR NEW ROW.
           IF ( LROw+Iw(ir,1)+Iw(ipp,1)+LENl>Ia ) THEN
             IF ( NCP>=mcp.OR.LENu+Iw(ir,1)+Iw(ipp,1)+LENl>Ia ) GOTO 400
-            CALL LA05ED(A,Ind(1,2),Ip,N,Iw,.TRUE.)
+            CALL LA05ED(A,Ind(1,2),Ip(:,1),N,Iw,.TRUE.)
             kp = Ip(ipp,1)
             kr = Ip(ir,1)
           END IF
@@ -377,7 +378,7 @@ SUBROUTINE LA05AD(A,Ind,Nz,Ia,N,Ip,Iw,W,G,U)
               IF ( LCOl+LENl+Nz+1>=Ia ) THEN
                 ! COMPRESS COLUMN FILE IF THERE IS NOT ROOM FOR NEW ENTRY.
                 IF ( NCP>=mcp.OR.LENu+LENl+Nz+1>=Ia ) GOTO 400
-                CALL LA05ED(A,Ind,Ip(1,2),N,Iw(1,2),.FALSE.)
+                CALL LA05ED(A,Ind,Ip(:,2),N,Iw(1,2),.FALSE.)
                 k = Ip(j,2)
                 kl = k + Nz - 1
               END IF
@@ -404,7 +405,7 @@ SUBROUTINE LA05AD(A,Ind,Nz,Ia,N,Ip,Iw,W,G,U)
           IF ( LENl+LCOl+1>Ia ) THEN
             ! COMPRESS COL FILE IF NECESSARY.
             IF ( NCP>=mcp ) GOTO 400
-            CALL LA05ED(A,Ind,Ip(1,2),N,Iw(1,2),.FALSE.)
+            CALL LA05ED(A,Ind,Ip(:,2),N,Iw(1,2),.FALSE.)
           END IF
           k = Ia - LENl
           LENl = LENl + 1

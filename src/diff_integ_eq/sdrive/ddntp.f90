@@ -23,8 +23,11 @@ SUBROUTINE DDNTP(H,K,N,Nq,T,Tout,Yh,Y)
   !   790601  DATE WRITTEN
   !   900329  Initial submission to SLATEC.
 
-  INTEGER i, j, jj, K, kk, kused, N, Nq
-  REAL(8) :: factor, H, r, T, Tout, Y(*), Yh(N,*)
+  INTEGER :: K, N, Nq
+  REAL(8) :: H, T, Tout
+  REAL(8) :: Y(N), Yh(N,Nq+1)
+  INTEGER :: i, j, jj, kk, kused
+  REAL(8) :: factor, r
   !* FIRST EXECUTABLE STATEMENT  DDNTP
   IF ( K==0 ) THEN
     DO i = 1, N

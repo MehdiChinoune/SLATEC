@@ -27,9 +27,11 @@ SUBROUTINE TRIS4(N,A,B,C,D,U,Z)
   !   890831  Modified array declarations.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
-  
-  REAL A(*), an, B(*), bn, C(*), D(*), den, U(*), v, Z(*)
-  INTEGER j, k, N, nm1, nm2
+
+  INTEGER :: N
+  REAL :: A(N), B(N), C(N), D(N), U(N), Z(N)
+  INTEGER :: j, k, nm1, nm2
+  REAL :: an, bn, den, v
   !* FIRST EXECUTABLE STATEMENT  TRIS4
   bn = B(N)
   D(1) = A(2)/B(1)

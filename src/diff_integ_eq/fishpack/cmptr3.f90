@@ -24,11 +24,12 @@ SUBROUTINE CMPTR3(M,A,B,C,K,Y1,Y2,Y3,Tcos,D,W1,W2,W3)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
 
-  INTEGER i, ip, K(4), k1, k2, k2k3k4, k3, k4, kint1, kint2, kint3, &
-    l1, l2, l3, lint1, lint2, lint3, M, mm1, n
-  COMPLEX A(*), B(*), C(*), Y1(*), Y2(*), Y3(*), Tcos(*), D(*), W1(*), W2(*), &
-    W3(*), x, xx, z
-  INTEGER k1p1, k2p1, k3p1, k4p1
+  INTEGER :: K(4), M
+  COMPLEX :: A(M), B(M), C(M), Y1(M), Y2(M), Y3(M), Tcos(:), D(M), W1(M), W2(M), &
+    W3(M)
+  COMPLEX :: x, xx, z
+  INTEGER :: i, ip, k1, k2, k2k3k4, k3, k4, kint1, kint2, kint3, l1, l2, l3, &
+    lint1, lint2, lint3, mm1, n, k1p1, k2p1, k3p1, k4p1
   !
   !* FIRST EXECUTABLE STATEMENT  CMPTR3
   mm1 = M - 1

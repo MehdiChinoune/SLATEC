@@ -73,14 +73,17 @@ SUBROUTINE SDSTP(Eps,F,FA,Hmax,Impl,Ierror,JACOBN,Matdim,Maxord,Mint,&
   !   790601  DATE WRITTEN
   !   900329  Initial submission to SLATEC.
   EXTERNAL :: F, JACOBN, FA, USERS
-  INTEGER i, Ierror, Impl, Ipvt(*), Iswflg, iter, j, Jstate, Jstepl, Jtask, Matdim, &
-    Maxord, Mint, Miter, Ml, Mntold, Mtrold, Mtrsv, Mu, Mxrdsv, N, Nde, nfail, Nfe, &
-    Nje, Nq, Nqused, Nstep, nsv, ntry, Nwait
-  REAL A(Matdim,*), Avgh, Avgord, bnd, ctest, d, denom, Dfdy(Matdim,*), d1, &
-    El(13,12), Eps, erdn, erup, etest, Fac(*), H, Hmax, hn, Hold, hs, Hused, &
-    numer, Rc, rh, rh1, rh2, rh3, Rmax, Save1(*), Save2(*), T, told, &
-    Tq(3,12), Trend, Uround, Y(*), Yh(N,*), Ywt(*), y0nrm
-  LOGICAL Convrg, evalfa, evaljc, switch
+  INTEGER :: Ierror, Impl, Iswflg, Jstate, Jstepl, Jtask, Matdim, Maxord, Mint, &
+    Miter, Ml, Mntold, Mtrold, Mtrsv, Mu, Mxrdsv, N, Nde, Nfe, Nje, Nq, Nqused, &
+    Nstep, Nwait, Ipvt(N)
+  REAL :: Avgh, Avgord, Eps, H, Hmax, Hold, Hused, Rc, Rmax, T, Trend, Uround
+  REAL :: A(Matdim,N), Dfdy(Matdim,N), El(13,12), Fac(N), Save1(N), Save2(N), &
+    Tq(3,12), Y(N), Yh(N,13), Ywt(N)
+  LOGICAL :: Convrg
+  INTEGER :: i, iter, j, nfail, nsv, ntry
+  REAL :: bnd, ctest, d, denom, d1, erdn, erup, etest, hn, hs, numer, rh, rh1, &
+    rh2, rh3, told, y0nrm
+  LOGICAL :: evalfa, evaljc, switch
   INTEGER, PARAMETER :: MXFAIL = 3, MXITER = 3, MXTRY = 50
   REAL, PARAMETER :: BIAS1 = 1.3E0, BIAS2 = 1.2E0, BIAS3 = 1.4E0, RCTEST = 0.3E0, &
     RMFAIL = 2.E0, RMNORM = 10.E0, TRSHLD = 1.E0

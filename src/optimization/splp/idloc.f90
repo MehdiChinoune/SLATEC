@@ -34,9 +34,10 @@ INTEGER FUNCTION IDLOC(Locc,Sx,Ix)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   910731  Added code to set IDLOC to 0 if LOC is non-positive.  (WRB)
   USE service, ONLY : XERMSG
-  INTEGER ipage, itemp, k, key, lmx, lmxm1, Locc, lpg, np
-  REAL(8) :: Sx(*)
-  INTEGER Ix(*)
+  INTEGER :: Locc
+  INTEGER :: Ix(:)
+  REAL(8) :: Sx(:)
+  INTEGER :: ipage, itemp, k, key, lmx, lmxm1, lpg, np
   !* FIRST EXECUTABLE STATEMENT  IDLOC
   IF ( Locc<=0 ) THEN
     CALL XERMSG('SLATEC','IDLOC',&

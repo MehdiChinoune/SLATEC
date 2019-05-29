@@ -24,8 +24,9 @@ SUBROUTINE CDPSC(Ksgn,N,Nq,Yh)
   !   790601  DATE WRITTEN
   !   900329  Initial submission to SLATEC.
 
-  INTEGER i, j, j1, j2, Ksgn, N, Nq
-  COMPLEX Yh(N,*)
+  INTEGER :: Ksgn, N, Nq
+  COMPLEX :: Yh(N,Nq+1)
+  INTEGER :: i, j, j1, j2
   !* FIRST EXECUTABLE STATEMENT  CDPSC
   IF ( Ksgn>0 ) THEN
     DO j1 = 1, Nq

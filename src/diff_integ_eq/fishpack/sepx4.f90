@@ -411,12 +411,12 @@ SUBROUTINE SEPX4(Iorder,A,B,M,Mbdcnd,Bda,Alpha,Bdb,Beta,C,D,N,Nbdcnd,Bdc,&
   !   920122  Minor corrections and modifications to prologue.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
-  INTEGER i1, i10, i11, i12, i13, i2, i3, i4, i5, i6, i7, i8, &
-    i9, Idmn, Ierror, Iorder, k, l, length, linput
-  REAL A, Alpha, B, Bda(*), Bdb(*), Bdc(*), Bdd(*), Beta, C, D, Grhs(Idmn,*), &
-    Pertrb, Usol(Idmn,*), W(*)
-  INTEGER log2n, loutpt, M, Mbdcnd, N, Nbdcnd
+  INTEGER :: Idmn, Ierror, Iorder, M, Mbdcnd, N, Nbdcnd
+  REAL :: A, Alpha, B, Beta, C, D, Pertrb
+  REAL :: Bda(N+1), Bdb(N+1), Bdc(M+1), Bdd(M+1), Grhs(Idmn,N), Usol(Idmn,N+1), W(:)
   EXTERNAL :: COFX
+  INTEGER :: i1, i10, i11, i12, i13, i2, i3, i4, i5, i6, i7, i8, &
+    i9, k, l, length, linput, log2n, loutpt
   !* FIRST EXECUTABLE STATEMENT  SEPX4
   CALL CHKPR4(Iorder,A,B,M,Mbdcnd,C,D,N,Nbdcnd,COFX,Idmn,Ierror)
   IF ( Ierror/=0 ) RETURN
@@ -453,6 +453,7 @@ SUBROUTINE SEPX4(Iorder,A,B,M,Mbdcnd,Bda,Alpha,Bdb,Beta,C,D,N,Nbdcnd,Bdc,&
   i12 = i11 + k
   i13 = 2
   CALL SPELI4(Iorder,A,B,M,Mbdcnd,Bda,Alpha,Bdb,Beta,C,D,N,Nbdcnd,Bdc,Bdd,&
-    COFX,W(i1),W(i2),W(i3),W(i4),W(i5),W(i6),W(i7),W(i8),W(i9),&
-    W(i10),W(i11),W(i12),Grhs,Usol,Idmn,W(i13),Pertrb,Ierror)
+    COFX,W(i1:i2-1),W(i2:i3-1),W(i3:i4-1),W(i4:i5-1),W(i5:i6-1),W(i6:i7-1),W(i7:i8-1),&
+    W(i8:i9-1),W(i9:i10-1),W(i10:i11-1),W(i11:i12-1),W(i12:i13-1),Grhs,Usol,Idmn,&
+    W(i13:),Pertrb,Ierror)
 END SUBROUTINE SEPX4

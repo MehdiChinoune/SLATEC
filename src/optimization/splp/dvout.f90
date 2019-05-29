@@ -58,9 +58,10 @@ SUBROUTINE DVOUT(N,Dx,Ifmt,Idigit)
   !   900328  Added TYPE section.  (WRB)
   !   910403  Updated AUTHOR section.  (WRB)
   USE service, ONLY : I1MACH
-  INTEGER i, Idigit, k1, k2, lout, N, ndigit
-  REAL(8) :: Dx(*)
-  CHARACTER Ifmt*(*)
+  INTEGER :: Idigit, N
+  REAL(8) :: Dx(N)
+  CHARACTER :: Ifmt*(*)
+  INTEGER :: i, k1, k2, lout, ndigit
   !* FIRST EXECUTABLE STATEMENT  DVOUT
   lout = I1MACH(2)
   WRITE (lout,Ifmt)

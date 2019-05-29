@@ -30,15 +30,17 @@ SUBROUTINE OHTROR(Q,N,Nrda,Diag,Irank,Div,Td)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
-  INTEGER Irank, irp, j, k, kir, kirm, l, N, nmir, Nrda
-  REAL dd, Diag(*), diagk, Div(*), Q(Nrda,*), qs, sig, sqd, Td(*), tdv
+  INTEGER :: Irank, N, Nrda
+  REAL :: Diag(Irank), Div(Irank), Q(Nrda,Irank), Td(Irank)
+  INTEGER :: irp, j, k, kir, kirm, l, nmir
+  REAL :: dd, diagk, qs, sig, sqd, tdv
   !* FIRST EXECUTABLE STATEMENT  OHTROR
   nmir = N - Irank
   irp = Irank + 1
   DO k = 1, Irank
     kir = irp - k
     diagk = Diag(kir)
-    sig = (diagk*diagk) + DOT_PRODUCT(Q(kir,irp:N),Q(kir,irp:N))
+    sig = diagk**2 + NORM2(Q(kir,irp:N))**2
     dd = SIGN(SQRT(sig),-diagk)
     Div(kir) = dd
     tdv = diagk - dd

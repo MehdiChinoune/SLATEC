@@ -60,7 +60,7 @@ SUBROUTINE DSORT(Dx,Dy,N,Kflag)
   !     .. Scalar Arguments ..
   INTEGER Kflag, N
   !     .. Array Arguments ..
-  REAL(8) :: Dx(*), Dy(*)
+  REAL(8) :: Dx(N), Dy(N)
   !     .. Local Scalars ..
   REAL(8) :: r, t, tt, tty, ty
   INTEGER i, ij, j, k, kk, l, m, nn

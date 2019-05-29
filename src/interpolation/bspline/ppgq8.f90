@@ -74,9 +74,11 @@ SUBROUTINE PPGQ8(FUN,Ldc,C,Xi,Lxi,Kk,Id,A,B,Inppv,Err,Ans,Ierr)
       REAL, INTENT(IN) :: X
     END FUNCTION
   END INTERFACE
-  INTEGER Id, Ierr, Inppv, k, Kk, l, Ldc, lmn, lmx, lr(30), Lxi, mxl, nbits, nib, nlmx
-  REAL A, aa(30), ae, anib, Ans, area, B, be, C(Ldc,*), cc, ee, ef, eps, &
-    Err, est, gl, glr, gr(30), hh(30), tol, vl(30), vr, Xi(*)
+  INTEGER :: Id, Ierr, Inppv, Kk, Ldc, Lxi
+  REAL :: A, Ans, B, C(Ldc,Lxi), Err, Xi(Lxi+1)
+  INTEGER :: k, l, lmn, lmx, lr(30), mxl, nbits, nib, nlmx
+  REAL :: aa(30), ae, anib, area, be, cc, ee, ef, eps, est, gl, glr, gr(30), &
+    hh(30), tol, vl(30), vr
   REAL, PARAMETER :: x1 = 1.83434642495649805E-01, x2 = 5.25532409916328986E-01, &
     x3 =7.96666477413626740E-01 , x4 = 9.60289856497536232E-01
   REAL, PARAMETER ::  w1 =3.62683783378361983E-01 , w2 = 3.13706645877887287E-01, &

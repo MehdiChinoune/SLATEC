@@ -50,8 +50,11 @@ SUBROUTINE DINTYD(T,K,Yh,Nyh,Dky,Iflag)
   !   910722  Updated AUTHOR section.  (ALS)
   USE DDEBD1, ONLY : H, HU, TN, UROund, L, N, NQ
   !
-  INTEGER i, ic, Iflag, j, jb, jb2, jj, jj1, jp1, K, Nyh
-  REAL(8) :: c, Dky(*), r, s, T, tp, Yh(Nyh,*)
+  INTEGER :: Iflag, K, Nyh
+  REAL(8) :: T
+  REAL(8) :: Dky(Nyh), Yh(Nyh,NQ+1)
+  INTEGER :: i, ic, j, jb, jb2, jj, jj1, jp1
+  REAL(8) :: c, r, s, tp
   !
   !     BEGIN BLOCK PERMITTING ...EXITS TO 130
   !* FIRST EXECUTABLE STATEMENT  DINTYD

@@ -30,10 +30,11 @@ SUBROUTINE POISD2(Mr,Nr,Istag,Ba,Bb,Bc,Q,Idimq,B,W,D,Tcos,P)
   !   920130  Modified to use merge routine S1MERG rather than deleted
   !           routine MERGE.  (WRB)
   USE data_handling, ONLY : S1MERG
-  INTEGER i, ideg, Idimq, ip, ip1, ipstor, irreg, Istag, j, jdeg, &
-    jm1, jm2, jm3, jp1, jp2, jp3, jsh, jsp, jst, jstsav
-  REAL B(*), Ba(*), Bb(*), Bc(*), D(*), fi, P(*), Q(Idimq,*), t, Tcos(*), W(*)
-  INTEGER kr, krpi, l, lr, m, Mr, n, nodd, noddpr, Nr, nun
+  INTEGER :: Idimq, Istag, Mr, Nr
+  REAL :: B(Mr), Ba(Mr), Bb(Mr), Bc(Mr), D(Mr), P(:), Q(Idimq,Nr), Tcos(4*Nr), W(Mr)
+  INTEGER :: i, ideg, ip, ip1, ipstor, irreg, j, jdeg, jm1, jm2, jm3, jp1, jp2, &
+    jp3, jsh, jsp, jst, jstsav, kr, krpi, l, lr, m, n, nodd, noddpr, nun
+  REAL :: fi, t
   !* FIRST EXECUTABLE STATEMENT  POISD2
   m = Mr
   n = Nr

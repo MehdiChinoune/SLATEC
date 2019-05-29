@@ -75,8 +75,10 @@ SUBROUTINE QPSRT(Limit,Last,Maxerr,Ermax,Elist,Iord,Nrmax)
   !   900328  Added TYPE section.  (WRB)
 
   !
-  REAL Elist(*), Ermax, errmax, errmin
-  INTEGER i, ibeg, ido, Iord(*), isucc, j, jbnd, jupbn, k, Last, Limit, Maxerr, Nrmax
+  INTEGER :: Last, Limit, Maxerr, Nrmax, Iord(Last)
+  REAL :: Ermax, Elist(Last)
+  INTEGER :: i, ibeg, ido, isucc, j, jbnd, jupbn, k
+  REAL :: errmax, errmin
   !
   !           CHECK WHETHER THE LIST CONTAINS MORE THAN
   !           TWO ERROR ESTIMATES.

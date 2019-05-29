@@ -50,10 +50,14 @@ SUBROUTINE DFEHL(DF,Neq,T,Y,H,Yp,F1,F2,F3,F4,F5,Ys,Rpar,Ipar)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
-  
+
   !
-  INTEGER Ipar(*), k, Neq
-  REAL(8) :: ch, F1(*), F2(*), F3(*), F4(*), F5(*), H, Rpar(*), T, Y(*), Yp(*), Ys(*)
+  INTEGER :: Neq, Ipar(:)
+  REAL(8) :: H, T
+  REAL(8) :: F1(Neq), F2(Neq), F3(Neq), F4(Neq), F5(Neq), Rpar(Neq), Y(Neq), &
+    Yp(Neq), Ys(Neq)
+  INTEGER :: k
+  REAL(8) :: ch
   !
   !* FIRST EXECUTABLE STATEMENT  DFEHL
   ch = H/4.0D0

@@ -44,10 +44,12 @@ SUBROUTINE LA05BD(A,Ind,Ia,N,Ip,Iw,W,G,B,Trans)
   !   920410  Corrected second dimension on IW declaration.  (WRB)
   USE LA05DD, ONLY : LP, LENl
   USE service, ONLY : XERMSG, XSETUN
-  INTEGER i, Ia, ii, j, k, k2, kk, kl, kll, kp, kpc, l1, N, n1, nz
-  REAL(8) :: A(*), B(*), am, W(*), G
-  LOGICAL Trans
-  INTEGER Ind(Ia,2), Iw(N,8), Ip(N,2)
+  INTEGER :: Ia, N
+  LOGICAL :: Trans
+  INTEGER :: Ind(Ia,2), Iw(N,8), Ip(N,2)
+  REAL(8) :: G, A(Ia), B(:), W(:)
+  INTEGER :: i, ii, j, k, k2, kk, kl, kll, kp, kpc, l1, n1, nz
+  REAL(8) :: am
   !* FIRST EXECUTABLE STATEMENT  LA05BD
   IF ( G<0.D0 ) THEN
     !

@@ -44,8 +44,10 @@ REAL(8) FUNCTION DCSEVL(X,Cs,N)
   !           X to be slightly outside interval (-1,+1).  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   USE service, ONLY : XERMSG, D1MACH
-  INTEGER i, N, ni
-  REAL(8) :: b0, b1, b2, Cs(*), twox, X
+  INTEGER :: N
+  REAL(8) :: Cs(N), X
+  INTEGER :: i, ni
+  REAL(8) :: b0, b1, b2, twox
   REAL(8), SAVE :: onepl
   LOGICAL :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  DCSEVL

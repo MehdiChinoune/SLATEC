@@ -32,8 +32,10 @@ SUBROUTINE EXBVP(Y,Nrowy,Xpts,A,Nrowa,Alpha,B,Nrowb,Beta,Iflag,Work,Iwork)
   USE ML, ONLY : NCOmp, NFC, TOL, NXPts, NIC, NOPg, MXNon, NDIsk, NTP, NFCc, X, &
     XBEg, XENd, KKKzpw, NEEdw, NEEdiw, K1, K2, K3, K4, K5, K6, K7, K8, K9, K10, L1, LPAr
   USE service, ONLY : XERMSG
-  INTEGER Nrowa, Nrowb, Nrowy, nsafiw, nsafw, iexp, Iflag, inc, Iwork(*), kotc
-  REAL A(Nrowa,*), Alpha(*), B(Nrowb,*), Beta(*), Work(*), xl, Xpts(*), Y(Nrowy,*), zquit
+  INTEGER :: Nrowa, Nrowb, Nrowy, Iflag, Iwork(*)
+  REAL :: A(:,:), Alpha(:), B(:,:), Beta(:), Work(*), Xpts(:), Y(:,:)
+  INTEGER :: nsafiw, nsafw, iexp, inc, kotc
+  REAL :: xl, zquit
   CHARACTER(8) :: xern1, xern2
   !* FIRST EXECUTABLE STATEMENT  EXBVP
   kotc = 1
@@ -53,7 +55,7 @@ SUBROUTINE EXBVP(Y,Nrowy,Xpts,A,Nrowa,Alpha,B,Nrowb,Beta,Iflag,Work,Iwork)
     !
     CALL BVPOR(Y,Nrowy,NCOmp,Xpts,NXPts,A,Nrowa,Alpha,NIC,B,Nrowb,Beta,NFC,&
       Iflag,Work(1),MXNon,Work(K1),NTP,Iwork(18),Work(K2),Iwork(16)&
-      ,Work(K3),Work(K4),Work(K5),Work(K6),Work(K7),Work(K8),&
+      ,Work(K3),Work(K4),Work(K5),Work(K6),Work(K7),Work(K8:K9-1),&
       Work(K9),Work(K10),Iwork(L1),NFCc)
     !
     !- *********************************************************************

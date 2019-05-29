@@ -216,14 +216,15 @@ SUBROUTINE DQAWFE(F,A,Omega,Integr,Epsabs,Limlst,Limit,Maxp1,Result,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   USE service, ONLY : D1MACH
   !
-  INTEGER Ier, Ierlst(*), Integr, Iord(*), ktmin, l, last, Lst, Limit, &
-    Limlst, ll, Maxp1, momcom, nev, Neval, Nnlog(*), nres, numrl2
-  REAL(8) :: A, abseps, Abserr, Alist(*), Blist(*), Chebmo(Maxp1,25), correc, &
-    cycle, c1, c2, dl, drl, Elist(*), Erlst(*), ep, eps, epsa, Epsabs, errsum, &
-    fact, Omega, p1, psum(52), reseps, Result, res3la(3), Rlist(*), Rslst(*), uflow
-  !
+  INTEGER :: Ier, Integr, Lst, Limit, Limlst, Maxp1, Neval
+  INTEGER :: Iord(Limit), Ierlst(Limlst), Nnlog(Limit)
+  REAL(8) :: A, Abserr, Epsabs, Omega, Result
+  REAL(8) :: Alist(Limit), Blist(Limit), Chebmo(Maxp1,25), Elist(Limit), &
+    Erlst(Limlst), Rlist(Limit), Rslst(Limlst)
   REAL(8), EXTERNAL :: F
-  !
+  INTEGER :: ktmin, l, last, ll, momcom, nev, nres, numrl2
+  REAL(8) :: abseps, correc, cycle, c1, c2, dl, drl, ep, eps, epsa, errsum, &
+    fact, p1, psum(52), reseps, res3la(3), uflow
   !
   !            THE DIMENSION OF  PSUM  IS DETERMINED BY THE VALUE OF
   !            LIMEXP IN SUBROUTINE DQELG (PSUM MUST BE OF DIMENSION

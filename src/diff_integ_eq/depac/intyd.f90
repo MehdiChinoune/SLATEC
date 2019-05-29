@@ -50,9 +50,11 @@ SUBROUTINE INTYD(T,K,Yh,Nyh,Dky,Iflag)
   !   910722  Updated AUTHOR section.  (ALS)
   USE DEBDF1, ONLY : H, HU, TN, UROund, L, N, NQ
   !
-  !LLL. OPTIMIZE
-  INTEGER K, Nyh, Iflag, i, ic, j, jb, jb2, jj, jj1, jp1
-  REAL T, Yh(Nyh,*), Dky(*), c, r, s, tp
+  INTEGER :: K, Nyh, Iflag
+  REAL :: T
+  REAL :: Yh(Nyh,NQ+1), Dky(Nyh)
+  INTEGER :: i, ic, j, jb, jb2, jj, jj1, jp1
+  REAL :: c, r, s, tp
   !
   !* FIRST EXECUTABLE STATEMENT  INTYD
   Iflag = 0

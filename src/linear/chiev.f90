@@ -105,8 +105,9 @@ SUBROUTINE CHIEV(A,Lda,N,E,V,Ldv,Work,Job,Info)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   USE service, ONLY : XERMSG
-  INTEGER i, Info, j, Job, k, l, Lda, Ldv, m, mdim, N
-  REAL A(*), E(*), Work(*), V(*)
+  INTEGER :: Info, Job, Lda, Ldv, N
+  REAL :: A(2*Lda*N), E(N), Work(4*N), V(2*Ldv*N)
+  INTEGER :: i, j, k, l, m, mdim
   !* FIRST EXECUTABLE STATEMENT  CHIEV
   IF ( N>Lda ) CALL XERMSG('SLATEC','CHIEV','N .GT. LDA.',1,1)
   IF ( N>Lda ) RETURN

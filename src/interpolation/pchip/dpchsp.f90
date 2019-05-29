@@ -159,7 +159,7 @@ SUBROUTINE DPCHSP(Ic,Vc,N,X,F,D,Incfd,Wk,Nwk,Ierr)
   !  DECLARE ARGUMENTS.
   !
   INTEGER Ic(2), N, Incfd, Nwk, Ierr
-  REAL(8) :: Vc(2), X(*), F(Incfd,*), D(Incfd,*), Wk(2,*)
+  REAL(8) :: Vc(2), X(N), F(Incfd,N), D(Incfd,N), Wk(2,Nwk)
   !
   !  DECLARE LOCAL VARIABLES.
   !

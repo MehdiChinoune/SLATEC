@@ -83,9 +83,11 @@ SUBROUTINE BESK(X,Fnu,Kode,N,Y,Nz)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   USE service, ONLY : XERMSG, R1MACH, I1MACH
   !
-  INTEGER i, j, k, Kode, mz, N, nb, nd, nn, nud, Nz
-  REAL cn, dnu, elim, etx, flgik, fn, fnn, Fnu, gln, gnu, rtz, &
-    s, s1, s2, t, tm, trx, w(2), X, xlim, Y(*), zn
+  INTEGER :: Kode, N, Nz
+  REAL :: Fnu, X, Y(N)
+  INTEGER :: i, j, k, mz, nb, nd, nn, nud
+  REAL :: cn, dnu, elim, etx, flgik, fn, fnn, gln, gnu, rtz, &
+    s, s1, s2, t, tm, trx, w(2), xlim, zn
   INTEGER, PARAMETER :: nulim(2) = [ 35, 70 ]
   !* FIRST EXECUTABLE STATEMENT  BESK
   nn = -I1MACH(12)

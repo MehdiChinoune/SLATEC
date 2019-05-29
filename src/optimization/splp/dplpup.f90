@@ -45,14 +45,17 @@ SUBROUTINE DPLPUP(DUSRMT,Mrelas,Nvars,Dattrv,Bl,Bu,Ind,Info,Amat,&
   INTERFACE
     SUBROUTINE DUSRMT(I,J,Aij,Indcat,Dattrv,Iflag)
       INTEGER :: I, J, indcat, iflag(10)
-      REAL(8) :: Dattrv(*), Aij
+      REAL(8) :: Dattrv(:), Aij
     END SUBROUTINE
   END INTERFACE
-  INTEGER i, indcat, indexx, Info, iplace, itcnt, itmax, j, Mrelas, Nvars
-  REAL(8) :: Abig, aij, Amat(*), amn, amx, Asmall, Bl(*), &
-    Bu(*), Dattrv(*), xval, zero
-  INTEGER iflag(10), Imat(*), Ind(*)
-  LOGICAL Sizeup, first
+  INTEGER :: Info, Mrelas, Nvars
+  REAL(8) :: Abig, Asmall
+  LOGICAL :: Sizeup
+  INTEGER :: Imat(:), Ind(Nvars+Mrelas)
+  REAL(8) :: Amat(:), Bl(Nvars+Mrelas), Bu(Nvars+Mrelas), Dattrv(:)
+  INTEGER :: iflag(10), i, indcat, indexx, iplace, itcnt, itmax, j
+  REAL(8) :: aij, amn, amx, xval, zero
+  LOGICAL :: first
   CHARACTER(8) :: xern1, xern2
   CHARACTER(16) :: xern3, xern4
   !

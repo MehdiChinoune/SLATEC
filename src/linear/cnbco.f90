@@ -134,8 +134,8 @@ SUBROUTINE CNBCO(Abe,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
-  INTEGER Lda, N, Ml, Mu, Ipvt(*)
-  COMPLEX Abe(Lda,*), Z(*)
+  INTEGER Lda, N, Ml, Mu, Ipvt(N)
+  COMPLEX Abe(Lda,2*Ml+Mu+1), Z(N)
   REAL Rcond
   !
   COMPLEX ek, t, wk, wkm

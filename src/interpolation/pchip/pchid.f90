@@ -113,7 +113,7 @@ REAL FUNCTION PCHID(N,X,F,D,Incfd,Skip,Ia,Ib,Ierr)
   !  DECLARE ARGUMENTS.
   !
   INTEGER N, Incfd, Ia, Ib, Ierr
-  REAL X(*), F(Incfd,*), D(Incfd,*)
+  REAL X(N), F(Incfd,N), D(Incfd,N)
   LOGICAL Skip
   !
   !  DECLARE LOCAL VARIABLES.

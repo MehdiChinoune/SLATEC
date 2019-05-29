@@ -24,12 +24,14 @@ SUBROUTINE POS3D1(Lp,L,Mp,M,N,A,B,C,Ldimf,Mdimf,F,Xrt,Yrt,T,D,Wx,Wy,C1,C2,Bb)
   !   900402  Added TYPE section.  (WRB)
   USE integ_trans, ONLY : COSQB, COSQF, COSQI, COST, COSTI, RFFTB, RFFTF, RFFTI, &
     SINQB, SINQF, SINQI, SINT, SINTI
-  INTEGER i, ifwrd, j, k, L, Ldimf, Lp, lr, lrdel, M, Mdimf, Mp, mr, mrdel, N, nr
-  REAL A(*), B(*), Bb(*), C(*), C1, C2, D(*), di, dj, dx, dy, F(Ldimf,Mdimf,*), pi, &
-    scalx, scaly, T(*), Wx(*), Wy(*)
-  REAL Xrt(*), Yrt(*)
+  INTEGER :: L, Ldimf, Lp, M, Mdimf, Mp, N
+  REAL :: C1, C2
+  REAL :: A(N), B(N), Bb(N), C(N), D(N), F(Ldimf,Mdimf,N), T(:), Wx(:), Wy(:), &
+    Xrt(L), Yrt(M)
+  INTEGER :: i, ifwrd, j, k, lr, lrdel, mr, mrdel, nr
+  REAL :: di, dj, dx, dy, scalx, scaly
+  REAL, PARAMETER :: pi = 3.14159265358979
   !* FIRST EXECUTABLE STATEMENT  POS3D1
-  pi = PIMACH()
   lr = L
   mr = M
   nr = N

@@ -48,10 +48,12 @@ SUBROUTINE CPEVL(N,M,A,Z,C,B,Kbd)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   USE service, ONLY : I1MACH
-  REAL r, s
-  INTEGER i, j, M, mini, N, np1
-  COMPLEX A(*), C(*), Z, ci, cim1, B(*), bi, bim1, t
-  LOGICAL Kbd
+  INTEGER :: M, N
+  LOGICAL :: Kbd
+  COMPLEX :: Z, A(N+1), C(2*(M+1)), B(2*(M+1))
+  INTEGER :: i, j, mini, np1
+  REAL :: r, s
+  COMPLEX :: ci, cim1, bi, bim1, t
   REAL :: d1 = 0.0
   !* FIRST EXECUTABLE STATEMENT  CPEVL
   IF ( d1==0.0 ) d1 = REAL(I1MACH(10))**(1-I1MACH(11))

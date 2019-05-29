@@ -353,13 +353,12 @@ SUBROUTINE HWSCSP(Intl,Ts,Tf,M,Mbdcnd,Bdts,Bdtf,Rs,Rf,N,Nbdcnd,Bdrs,Bdrf,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
-  INTEGER i1, i10, i2, i3, i4, i5, i6, i7, i8, i9, Idimf, &
-    Ierror, Intl, k, l, M, Mbdcnd, mp1, N, Nbdcnd
-  REAL Bdrf(*), Bdrs(*), Bdtf(*), Bdts(*), Elmbda, F(Idimf,*), Pertrb, pi, &
-    Rf, Rs, Tf, Ts, W(*)
-  INTEGER nck, np1
+  INTEGER :: Idimf, Ierror, Intl, M, Mbdcnd, N, Nbdcnd
+  REAL :: Elmbda, Pertrb, Rf, Rs, Tf, Ts
+  REAL :: Bdrf(M+1), Bdrs(M+1), Bdtf(N+1), Bdts(N+1), F(Idimf,N+1), W(:)
+  INTEGER :: i1, i10, i2, i3, i4, i5, i6, i7, i8, i9, k, l, mp1, nck, np1
+  REAL, PARAMETER :: pi = 3.14159265358979
   !* FIRST EXECUTABLE STATEMENT  HWSCSP
-  pi = PIMACH()
   Ierror = 0
   IF ( Ts<0..OR.Tf>pi ) Ierror = 1
   IF ( Ts>=Tf ) Ierror = 2
@@ -410,8 +409,8 @@ SUBROUTINE HWSCSP(Intl,Ts,Tf,M,Mbdcnd,Bdts,Bdtf,Rs,Rf,N,Nbdcnd,Bdrs,Bdrf,&
       i10 = i9 + mp1
       W(1) = i10 + M
       CALL HWSCS1(Intl,Ts,Tf,M,Mbdcnd,Bdts,Bdtf,Rs,Rf,N,Nbdcnd,Bdrs,Bdrf,&
-        Elmbda,F,Idimf,Pertrb,W(2),W(i1),W(i2),W(i3),W(i4),W(i5),&
-        W(i6),W(i7),W(i8),W(i9),W(i10))
+        Elmbda,F,Idimf,Pertrb,W(2:i1),W(i1:i2-1),W(i2:i3-1),W(i3:i4-1),W(i4:i5-1),&
+        W(i5:i6-1),W(i6:i7-1),W(i7:i8-1),W(i8:i9-1),W(i9:i10-1),W(i10:))
       EXIT
     END IF
   END DO

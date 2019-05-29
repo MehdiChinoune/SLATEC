@@ -133,8 +133,10 @@ SUBROUTINE DXLEGF(Dnu1,Nudiff,Mu1,Mu2,Theta,Id,Pqa,Ipqa,Ierror)
   !           CALLs to XERROR changed to CALLs to XERMSG.  (WRB)
   !   920127  Revised PURPOSE section of prologue.  (DWL)
   USE service, ONLY : XERMSG
-  INTEGER i, Id, Ierror, Ipqa(*), l, Mu1, Mu2, Nudiff
-  REAL(8) :: Pqa(*), Dnu1, dnu2, sx, Theta, x, pi2
+  INTEGER :: Id, Ierror, Mu1, Mu2, Nudiff, Ipqa(Nudiff+Mu2-Mu1+1)
+  INTEGER :: i, l
+  REAL(8) :: Pqa(Nudiff+Mu2-Mu1+1), Dnu1, Theta
+  REAL(8) :: dnu2, sx, x, pi2
   !
   !* FIRST EXECUTABLE STATEMENT  DXLEGF
   Ierror = 0
@@ -144,7 +146,7 @@ SUBROUTINE DXLEGF(Dnu1,Nudiff,Mu1,Mu2,Theta,Id,Pqa,Ipqa,Ierror)
   !
   !        ZERO OUTPUT ARRAYS
   !
-  l = (Mu2-Mu1) + Nudiff + 1
+  l = Nudiff + Mu2 - Mu1 + 1
   DO i = 1, l
     Pqa(i) = 0.D0
     Ipqa(i) = 0

@@ -290,11 +290,11 @@ SUBROUTINE HSTCRT(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
-  INTEGER i, id2, id3, id4, Idimf, ierr1, Ierror, j, M, Mbdcnd, &
-    mp, mperod, N, Nbdcnd, np, nperod
-  REAL A, B, Bda(*), Bdb(*), Bdc(*), Bdd(*), C, D, deltax, deltay, delxsq, &
-    delysq, Elmbda, F(Idimf,*), Pertrb, s, st2, twdelx, twdely, twdysq
-  REAL W(*)
+  INTEGER :: Idimf, Ierror, M, Mbdcnd, N, Nbdcnd
+  REAL :: A, B, C, D, Elmbda, Pertrb
+  REAL :: Bda(N+1), Bdb(N+1), Bdc(M+1), Bdd(M+1), F(Idimf,N+1), W(:)
+  INTEGER :: i, id2, id3, id4, ierr1, j, mp, mperod, np, nperod
+  REAL :: deltax, deltay, delxsq, delysq, s, st2, twdelx, twdely, twdysq
   !* FIRST EXECUTABLE STATEMENT  HSTCRT
   Ierror = 0
   IF ( A>=B ) Ierror = 1
@@ -434,9 +434,11 @@ SUBROUTINE HSTCRT(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   !     SOLVE THE EQUATION.
   !
   IF ( nperod==0 ) THEN
-    CALL GENBUN(nperod,N,mperod,M,W(1),W(id2+1),W(id3+1),Idimf,F,ierr1,W(id4+1))
+    CALL GENBUN(nperod,N,mperod,M,W(1:id2),W(id2+1:id3),W(id3+1:id4),Idimf,F,&
+      ierr1,W(id4+1:))
   ELSE
-    CALL POISTG(nperod,N,mperod,M,W(1),W(id2+1),W(id3+1),Idimf,F,ierr1,W(id4+1))
+    CALL POISTG(nperod,N,mperod,M,W(1:id2),W(id2+1:id3),W(id3+1:id4),Idimf,F,&
+      ierr1,W(id4+1:))
   END IF
   W(1) = W(id4+1) + 3*M
 END SUBROUTINE HSTCRT

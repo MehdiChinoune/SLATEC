@@ -38,8 +38,10 @@ SUBROUTINE BESKS(Xnu,X,Nin,Bk)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   USE service, ONLY : XERMSG, R1MACH
-  REAL Bk(*), expxi, X, Xnu
-  INTEGER i, n, Nin
+  INTEGER :: Nin
+  REAL :: Bk(Nin), X, Xnu
+  REAL :: expxi
+  INTEGER i, n
   REAL :: xmax = 0.0
   !* FIRST EXECUTABLE STATEMENT  BESKS
   IF ( xmax==0.0 ) xmax = -LOG(R1MACH(1))

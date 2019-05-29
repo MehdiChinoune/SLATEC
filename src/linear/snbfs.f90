@@ -179,8 +179,8 @@ SUBROUTINE SNBFS(Abe,Lda,N,Ml,Mu,V,Itask,Ind,Work,Iwork)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   USE service, ONLY : R1MACH, XERMSG
   !
-  INTEGER Lda, N, Itask, Ind, Iwork(*), Ml, Mu
-  REAL Abe(Lda,*), V(*), Work(*)
+  INTEGER Lda, N, Itask, Ind, Iwork(N), Ml, Mu
+  REAL Abe(Lda,2*Ml+Mu+1), V(N), Work(N)
   REAL rcond
   CHARACTER(8) :: xern1, xern2
   !* FIRST EXECUTABLE STATEMENT  SNBFS

@@ -55,10 +55,11 @@ SUBROUTINE RPZERO(N,A,R,T,Iflg,S)
   !   810223  DATE WRITTEN
   !   890206  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
-  
-  INTEGER i, Iflg, N, n1
-  COMPLEX R(*), T(*)
-  REAL A(*), S(*)
+
+  INTEGER :: Iflg, N
+  REAL :: A(N+1), S(N)
+  COMPLEX :: R(N), T(6*N+6)
+  INTEGER :: i, n1
   !* FIRST EXECUTABLE STATEMENT  RPZERO
   n1 = N + 1
   DO i = 1, n1

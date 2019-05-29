@@ -289,12 +289,12 @@ SUBROUTINE HWSCRT(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
-  INTEGER i, id2, id3, id4, Idimf, ierr1, Ierror, j, M, Mbdcnd, &
-    mp, mp1, mperod, mskip, msp1, mstart, mstm1, mstop, munk, N
-  REAL A, a1, a2, B, Bda(*), Bdb(*), Bdc(*), Bdd(*), C, D, deltax, deltay, &
-    delxsq, delysq, Elmbda, F(Idimf,*), Pertrb, s, s1, st2
-  REAL twdelx, twdely, W(*)
-  INTEGER Nbdcnd, np, np1, nperod, nskip, nsp1, nstart, nstm1, nstop, nunk
+  INTEGER :: Idimf, Ierror, M, Mbdcnd, N, Nbdcnd
+  REAL :: A, B, C, D, Elmbda, Pertrb
+  REAL :: Bda(N+1), Bdb(N+1), Bdc(M+1), Bdd(M+1), W(:), F(Idimf,N+1)
+  REAL :: a1, a2, deltax, deltay, delxsq, delysq, s, s1, st2, twdelx, twdely
+  INTEGER :: i, id2, id3, id4, ierr1, j, mp, mp1, mperod, mskip, msp1, mstart, &
+    mstm1, mstop, munk, np, np1, nperod, nskip, nsp1, nstart, nstm1, nstop, nunk
   !* FIRST EXECUTABLE STATEMENT  HWSCRT
   Ierror = 0
   IF ( A>=B ) Ierror = 1
@@ -484,8 +484,8 @@ SUBROUTINE HWSCRT(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   !
   !     SOLVE THE EQUATION.
   !
-  CALL GENBUN(nperod,nunk,mperod,munk,W(1),W(id2+1),W(id3+1),Idimf,&
-    F(mstart,nstart),ierr1,W(id4+1))
+  CALL GENBUN(nperod,nunk,mperod,munk,W(1:id2),W(id2+1:id3),W(id3+1:id4),Idimf,&
+    F(mstart,nstart),ierr1,W(id4+1:))
   W(1) = W(id4+1) + 3*munk
   !
   !     FILL IN IDENTICAL VALUES WHEN HAVE PERIODIC BOUNDARY CONDITIONS.

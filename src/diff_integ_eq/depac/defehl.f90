@@ -51,9 +51,12 @@ SUBROUTINE DEFEHL(F,Neq,T,Y,H,Yp,F1,F2,F3,F4,F5,Ys,Rpar,Ipar)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
-  
-  REAL ch, F1(*), F2(*), F3(*), F4(*), F5(*), H, Rpar(*), T, Y(*), Yp(*), Ys(*)
-  INTEGER Ipar(*), k, Neq
+
+  INTEGER :: Neq, Ipar(:)
+  REAL :: H, T
+  REAL :: F1(Neq), F2(Neq), F3(Neq), F4(Neq), F5(Neq), Rpar(:), Y(Neq), Yp(Neq), Ys(Neq)
+  INTEGER :: k
+  REAL :: ch
   !
   !* FIRST EXECUTABLE STATEMENT  DEFEHL
   ch = H/4.

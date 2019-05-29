@@ -27,9 +27,10 @@ SUBROUTINE CMPTRX(Idegbr,Idegcr,M,A,B,C,Y,Tcos,D,W)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
 
-  INTEGER i, Idegbr, Idegcr, ip, k, l, lint, M, mm1
-  COMPLEX A(*), B(*), C(*), Y(*), Tcos(*), D(*), W(*), x, xx, z
-  INTEGER kb, kc
+  INTEGER :: Idegbr, Idegcr, M
+  COMPLEX :: A(M), B(M), C(M), Y(:), Tcos(:), D(M), W(M)
+  INTEGER :: i, ip, k, l, lint, mm1, kb, kc
+  COMPLEX :: x, xx, z
   !* FIRST EXECUTABLE STATEMENT  CMPTRX
   mm1 = M - 1
   kb = Idegbr + 1

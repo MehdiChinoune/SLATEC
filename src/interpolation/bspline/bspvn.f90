@@ -79,8 +79,10 @@ SUBROUTINE BSPVN(T,Jhigh,K,Indexx,X,Ileft,Vnikx,Work,Iwork)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   USE service, ONLY : XERMSG
   !
-  INTEGER Ileft, imjp1, Indexx, ipj, Iwork, Jhigh, jp1, jp1ml, K, l
-  REAL T(*), vm, vmprev, Vnikx(*), Work(*), X
+  INTEGER :: Ileft, Indexx, Iwork, Jhigh, K
+  REAL :: T(Ileft+Jhigh), Vnikx(K), Work(2*K), X
+  INTEGER :: imjp1, ipj, jp1, jp1ml, l
+  REAL :: vm, vmprev
   !     DIMENSION T(ILEFT+JHIGH)
   !     CONTENT OF J, DELTAM, DELTAP IS EXPECTED UNCHANGED BETWEEN CALLS.
   !     WORK(I) = DELTAP(I), WORK(K+I) = DELTAM(I), I = 1,K

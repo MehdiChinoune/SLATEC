@@ -277,8 +277,6 @@ INTEGER FUNCTION ISSGMR(N,X,Xl,MSOLVE,Nmsl,Itol,Tol,Iter,Err,Iunit,R,Dz,Rwork, &
   !     .. Array Arguments ..
   REAL Dz(*), Hes(Maxlp1,Maxl), Q(*), R(*), Rwork(*), Sx(*), V(N,*), X(*), Xl(*)
   INTEGER Iwork(*)
-  !     .. Subroutine Arguments ..
-  EXTERNAL :: MSOLVE
   !     .. Local Scalars ..
   REAL dxnrm, fuzz, rat, ratmax, tem
   INTEGER i, ielmax

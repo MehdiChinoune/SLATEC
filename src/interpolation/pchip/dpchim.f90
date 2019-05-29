@@ -147,7 +147,7 @@ SUBROUTINE DPCHIM(N,X,F,D,Incfd,Ierr)
   !  DECLARE ARGUMENTS.
   !
   INTEGER N, Incfd, Ierr
-  REAL(8) :: X(*), F(Incfd,*), D(Incfd,*)
+  REAL(8) :: X(N), F(Incfd,N), D(Incfd,N)
   !
   !  DECLARE LOCAL VARIABLES.
   !

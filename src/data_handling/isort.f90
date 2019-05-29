@@ -59,7 +59,7 @@ SUBROUTINE ISORT(Ix,Iy,N,Kflag)
   !     .. Scalar Arguments ..
   INTEGER Kflag, N
   !     .. Array Arguments ..
-  INTEGER Ix(*), Iy(*)
+  INTEGER Ix(N), Iy(N)
   !     .. Local Scalars ..
   REAL r
   INTEGER i, ij, j, k, kk, l, m, nn, t, tt, tty, ty

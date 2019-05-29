@@ -87,10 +87,10 @@ SUBROUTINE DFDJC3(FCN,M,N,X,Fvec,Fjac,Ldfjac,Iflag,Epsfcn,Wa)
   !   900328  Added TYPE section.  (WRB)
   USE service, ONLY : D1MACH
   EXTERNAL :: FCN
-  INTEGER M, N, Ldfjac, Iflag
+  INTEGER :: M, N, Ldfjac, Iflag
   REAL(8) :: Epsfcn
-  REAL(8) :: X(*), Fvec(*), Fjac(Ldfjac,*), Wa(*)
-  INTEGER i, j
+  REAL(8) :: X(N), Fvec(M), Fjac(Ldfjac,N), Wa(M)
+  INTEGER :: i, j
   REAL(8) :: eps, epsmch, h, temp
   REAL(8), PARAMETER :: zero = 0.0D0
   !* FIRST EXECUTABLE STATEMENT  DFDJC3

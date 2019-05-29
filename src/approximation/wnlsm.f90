@@ -72,13 +72,14 @@ SUBROUTINE WNLSM(W,Mdw,Mme,Ma,N,L,Prgopt,X,Rnorm,Mode,Ipivot,Itype,Wd,H,&
   !   900510  Fixed an error message.  (RWC)
   USE service, ONLY : XERMSG, R1MACH
   USE linear, ONLY : H12, SAXPY, SROTM, SROTMG, SSWAP
-  INTEGER Ipivot(*), Itype(*), L, Ma, Mdw, Mme, Mode, N
-  REAL D(*), H(*), Prgopt(*), Rnorm, Scalee(*), Temp(*), W(Mdw,*), Wd(*), X(*), Z(*)
+  INTEGER :: L, Ma, Mdw, Mme, Mode, N, Ipivot(N), Itype(Mme+Ma)
+  REAL :: Rnorm, D(N), H(N), Prgopt(:), Scalee(Mme+Ma), Temp(N), W(Mdw,N+1), &
+    Wd(N), X(N), Z(N)
   !
-  REAL alamda, alpha, alsq, amax, blowup, bnorm, dope(3), eanorm, fac, sm, &
-    sparam(5), t, tau, wmax, z2, zz
   INTEGER i, idope(3), imax, isol, itemp, iter, itmax, iwmax, j, jcon, jp, key, &
     krank, l1, last, link, m, me, next, niv, nlink, nopt, nsoln, ntimes
+  REAL alamda, alpha, alsq, amax, blowup, bnorm, dope(3), eanorm, fac, sm, &
+    sparam(5), t, tau, wmax, z2, zz
   LOGICAL done, feasbl, hitcon, pos
   !
   REAL, SAVE :: srelpr

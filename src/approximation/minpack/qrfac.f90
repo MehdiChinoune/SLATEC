@@ -86,12 +86,12 @@ SUBROUTINE QRFAC(M,N,A,Lda,Pivot,Ipvt,Lipvt,Sigma,Acnorm,Wa)
   !           (WRB)
   !   900328  Added TYPE section.  (WRB)
   USE service, ONLY : R1MACH
-  INTEGER M, N, Lda, Lipvt
-  INTEGER Ipvt(Lipvt)
-  LOGICAL Pivot
-  REAL A(Lda,*), Sigma(*), Acnorm(*), Wa(*)
-  INTEGER i, j, jp1, k, kmax, minmn
-  REAL ajnorm, epsmch, summ, temp
+  INTEGER :: M, N, Lda, Lipvt
+  INTEGER :: Ipvt(Lipvt)
+  LOGICAL :: Pivot
+  REAL :: A(Lda,N), Sigma(N), Acnorm(N), Wa(n)
+  INTEGER :: i, j, jp1, k, kmax, minmn
+  REAL :: ajnorm, epsmch, summ, temp
   REAL, PARAMETER :: one = 1.0E0, p05 = 5.0E-2, zero = 0.0E0
   !* FIRST EXECUTABLE STATEMENT  QRFAC
   epsmch = R1MACH(4)

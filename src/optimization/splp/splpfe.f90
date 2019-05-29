@@ -37,13 +37,17 @@ SUBROUTINE SPLPFE(Mrelas,Nvars,Lmx,Lbm,Ienter,Ibasis,Imat,Ibrc,Ipr,Iwr,&
   !   890605  Removed unreferenced labels.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
-  INTEGER i, Ienter, ihi, il1, ilow, ipage, iu1, j, key, &
-    Lbm, Lmx, lpg, Mrelas, n20002, n20050, Nvars
-  INTEGER Ibasis(*), Imat(*), Ibrc(Lbm,2), Ipr(*), Iwr(*), Ind(*), Ibb(*)
-  REAL Amat(*), Basmat(*), Csc(*), Wr(*), Ww(*), Bl(*), Bu(*), &
-    Rz(*), Rg(*), Colnrm(*), Duals(*), cnorm, Dirnrm, Dulnrm, &
-    Eps, Erdnrm, Gg, one, ratio, rcost, rmax, zero
-  LOGICAL Found, trans
+  INTEGER :: Ienter, Lbm, Lmx, Mrelas, Nvars
+  REAL :: Dirnrm, Dulnrm, Eps, Erdnrm, Gg
+  LOGICAL :: Found
+  INTEGER :: Ibasis(Nvars+Mrelas), Imat(Lmx), Ibrc(Lbm,2), Ipr(2*Mrelas), &
+    Iwr(8*Mrelas), Ind(Nvars+Mrelas), Ibb(Nvars+Mrelas)
+  REAL :: Amat(Lmx), Basmat(Lbm), Csc(Nvars), Wr(Mrelas), Ww(Mrelas), &
+    Bl(Nvars+Mrelas), Bu(Nvars+Mrelas), Rz(Nvars+Mrelas), Rg(Nvars+Mrelas), &
+    Colnrm(Nvars), Duals(Nvars+Mrelas)
+  INTEGER :: i, ihi, il1, ilow, ipage, iu1, j, key, lpg, n20002, n20050
+  REAL :: cnorm, one, ratio, rcost, rmax, zero
+  LOGICAL :: trans
   !* FIRST EXECUTABLE STATEMENT  SPLPFE
   lpg = Lmx - (Nvars+4)
   zero = 0.E0

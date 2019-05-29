@@ -630,7 +630,7 @@ CONTAINS
     REAL(8) :: Val
     INTEGER N
     !     .. Array Arguments ..
-    REAL(8) :: V(*)
+    REAL(8) :: V(N)
     !     .. Local Scalars ..
     INTEGER i, is, nr
     !     .. Intrinsic Functions ..

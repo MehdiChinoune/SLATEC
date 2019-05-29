@@ -750,14 +750,15 @@ SUBROUTINE DDEBDF(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,&
   USE DDEBD1, ONLY : H, TN, IYH, IEWt, IACor, ISAvf, IWM, IBEgin, ITOl, IINteg, &
     ITStop, IJAc, IBAnd
   USE service, ONLY : XERMSG
-  INTEGER icomi, icomr, idelsn, Idid, iinout, ilrw, Info(15), Ipar(*), itstar, &
-    Iwork(*), iypout, Liw, Lrw, ml, mu, Neq
-  REAL(8) :: Atol(*), Rpar(*), Rtol(*), Rwork(*), T, Tout, Y(*)
-  LOGICAL intout
+  INTEGER :: Idid, Liw, Lrw, Neq
+  INTEGER :: Info(15), Ipar(:), Iwork(Liw)
+  REAL(8) :: T, Tout
+  REAL(8) :: Atol(:), Rpar(:), Rtol(:), Rwork(Lrw), Y(Neq)
+  EXTERNAL :: DF, DJAC
+  INTEGER :: icomi, icomr, idelsn, iinout, ilrw, itstar, iypout, ml, mu
+  LOGICAL :: intout
   CHARACTER(8) :: xern1, xern2
   CHARACTER(16) :: xern3
-  !
-  EXTERNAL :: DF, DJAC
   !
   !        CHECK FOR AN APPARENT INFINITE LOOP
   !
@@ -899,8 +900,8 @@ SUBROUTINE DDEBDF(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,&
   Rwork(itstar) = T
   !
   CALL DLSOD(DF,Neq,T,Y,Tout,Rtol,Atol,Idid,Rwork(iypout),Rwork(IYH),&
-    Rwork(IYH),Rwork(IEWt),Rwork(ISAvf),Rwork(IACor),Rwork(IWM),&
-    Iwork(1),DJAC,intout,Rwork(1),Rwork(12),Rwork(idelsn),Rpar,Ipar)
+    Rwork(IYH),Rwork(IEWt:ISAvf-1),Rwork(ISAvf:IACor-1),Rwork(IACor:IWM-1),&
+    Rwork(IWM:idelsn),Iwork,DJAC,intout,Rwork(1),Rwork(12),Rwork(idelsn),Rpar,Ipar)
   !
   Iwork(iinout) = -1
   IF ( intout ) Iwork(iinout) = 1

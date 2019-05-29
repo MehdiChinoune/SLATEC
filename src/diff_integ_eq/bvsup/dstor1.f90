@@ -33,8 +33,9 @@ SUBROUTINE DSTOR1(U,Yh,V,Yp,Ntemp,Ndisk,Ntape)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
   USE DML, ONLY : C, INHomo, NCOmp, NFC
-  INTEGER j, nctnf, Ndisk, Ntape, Ntemp
-  REAL(8) :: U(*), V(*), Yh(*), Yp(*)
+  INTEGER :: Ndisk, Ntape, Ntemp
+  REAL(8) :: U(:), V(:), Yh(:), Yp(:)
+  INTEGER :: j, nctnf
   !     BEGIN BLOCK PERMITTING ...EXITS TO 80
   !* FIRST EXECUTABLE STATEMENT  DSTOR1
   nctnf = NCOmp*NFC

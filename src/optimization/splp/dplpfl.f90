@@ -35,11 +35,14 @@ SUBROUTINE DPLPFL(Mrelas,Nvars,Ienter,Ileave,Ibasis,Ind,Theta,Dirnrm,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
 
-  INTEGER i, Ienter, Ileave, j, Mrelas, n20005, n20036, Nvars
-  INTEGER Ibasis(*), Ind(*)
-  REAL(8) :: Csc(*), Ww(*), Bl(*), Bu(*), Erp(*), Rprim(*), &
-    Primal(*), bound, Dirnrm, ratio, Rprnrm, Theta, zero
-  LOGICAL Finite, Zerolv
+  INTEGER :: Ienter, Ileave, Mrelas, Nvars
+  REAL(8) :: Dirnrm, Rprnrm, Theta
+  LOGICAL :: Finite, Zerolv
+  INTEGER :: Ibasis(Nvars+Mrelas), Ind(Nvars+Mrelas)
+  REAL(8) :: Csc(Nvars), Ww(Mrelas), Bl(Nvars+Mrelas), Bu(Nvars+Mrelas), &
+    Erp(Mrelas), Rprim(Mrelas), Primal(Nvars+Mrelas)
+  INTEGER :: i, j, n20005, n20036
+  REAL(8) :: bound, ratio, zero
   !* FIRST EXECUTABLE STATEMENT  DPLPFL
   zero = 0.D0
   !

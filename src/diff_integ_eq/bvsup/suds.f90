@@ -109,9 +109,10 @@ SUBROUTINE SUDS(A,X,B,Neq,Nuk,Nrda,Iflag,Mlso,Work,Iwork)
   !   900328  Added TYPE section.  (WRB)
   !   910408  Updated the AUTHOR and REFERENCES sections.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
-  INTEGER Iflag, il, ip, is, Iwork(*), ks, kt, ku, kv, Mlso, Neq, Nrda, Nuk
-  REAL A(Nrda,*), B(*), Work(*), X(*)
+
+  INTEGER :: Iflag, Mlso, Neq, Nrda, Nuk, Iwork(*)
+  REAL :: A(Nrda,Nuk), B(Neq), Work(*), X(Nuk)
+  INTEGER :: il, ip, is, ks, kt, ku, kv
   !* FIRST EXECUTABLE STATEMENT  SUDS
   is = 2
   ip = 3

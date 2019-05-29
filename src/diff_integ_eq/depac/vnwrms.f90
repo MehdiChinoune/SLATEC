@@ -35,8 +35,10 @@ REAL FUNCTION VNWRMS(N,V,W)
   ! CONTAINED IN THE ARRAY W OF LENGTH N..
   !   VNWRMS = SQRT( (1/N) * SUM( V(I)/W(I) )**2 )
   !-----------------------------------------------------------------------
-  INTEGER N, i
-  REAL V(*), W(*), summ
+  INTEGER ::N
+  REAL :: V(N), W(N)
+  INTEGER :: i
+  REAL :: summ
   !* FIRST EXECUTABLE STATEMENT  VNWRMS
   summ = 0.0E0
   DO i = 1, N

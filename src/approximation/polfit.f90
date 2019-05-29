@@ -130,10 +130,13 @@ SUBROUTINE POLFIT(N,X,Y,W,Maxdeg,Ndeg,Eps,R,Ierr,A)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !   920527  Corrected erroneous statements in DESCRIPTION.  (WRB)
   USE service, ONLY : XERMSG
-  REAL A(*), degf, den, Eps, etst, f, fcrit, R(*), sig, sigj, sigjm1, sigpas, &
-    temp, W(*), w1, w11, X(*), xm, Y(*), yp(1)
-  INTEGER i, idegf, Ierr, j, jp1, jpas, k1, k1pj, k2, k2pj, k3, k3pi, k4, k4pi, &
-    k5, k5pi, ksig, m, Maxdeg, mop1, N, Ndeg, nder, nfail
+  INTEGER :: Ierr, Maxdeg, N, Ndeg
+  REAL :: Eps
+  REAL :: A(3*(N+Maxdeg+1)), R(N), W(N), X(N), Y(N)
+  REAL :: degf, den, etst, f, fcrit, sig, sigj, sigjm1, sigpas, temp, w1, w11, &
+    xm, yp(1)
+  INTEGER :: i, idegf, j, jp1, jpas, k1, k1pj, k2, k2pj, k3, k3pi, k4, k4pi, &
+    k5, k5pi, ksig, m, mop1, nder, nfail
   REAL(8) :: temd1, temd2
   REAL, PARAMETER :: co(4,3) = RESHAPE( [ &
     -13.086850, -2.4648165, -3.3846535, -1.2973162, &

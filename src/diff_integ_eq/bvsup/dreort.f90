@@ -56,9 +56,10 @@ SUBROUTINE DREORT(Ncomp,Y,Yp,Yhp,Niv,W,S,P,Ip,Stowa,Iflag)
   USE DML, ONLY : C, INHomo, NFC, PX, PWCnd, TND, X, XENd, XOT, KNSwot, LOTjp, &
     MNSwot, NSWot, TOL, NPS, NFCc
   !
-  INTEGER Iflag, ijk, Ip(*), j, k, kk, l, mflag, Ncomp, nfcp, Niv
-  REAL(8) :: dnd, dndt, dx, P(*), S(*), srp, Stowa(*), vnorm, W(*), wcnd, &
-    Y(Ncomp,*), Yhp(Ncomp,*), Yp(*), ypnm
+  INTEGER :: Iflag, Ncomp, Niv, Ip(:)
+  REAL(8) :: P(:), S(:), Stowa(:), W(:), Y(:,:), Yhp(:,:), Yp(:)
+  INTEGER :: ijk, j, k, kk, l, mflag, nfcp
+  REAL(8) :: dnd, dndt, dx, srp, vnorm, wcnd, ypnm
   !
   !- *********************************************************************
   !     BEGIN BLOCK PERMITTING ...EXITS TO 210
@@ -77,7 +78,7 @@ SUBROUTINE DREORT(Ncomp,Y,Yp,Yhp,Niv,W,S,P,Ip,Stowa,Iflag)
       IF ( (XENd-X)*(X-XOT)<0.0D0 ) RETURN
     END IF
   END IF
-  CALL DSTOR1(Y,Yhp,Yp,Yhp(1,nfcp),1,0,0)
+  CALL DSTOR1(Y(:,1),Yhp(:,1),Yp,Yhp(:,nfcp),1,0,0)
   !
   !        ***************************************************************
   !
@@ -189,7 +190,7 @@ SUBROUTINE DREORT(Ncomp,Y,Yp,Yhp,Niv,W,S,P,Ip,Stowa,Iflag)
       END DO
     END IF
     !
-    IF ( Iflag==1 ) CALL DSTWAY(Y,Yp,Yhp,0,Stowa)
+    IF ( Iflag==1 ) CALL DSTWAY(Y(:,1),Yp,Yhp(:,1),0,Stowa)
     Iflag = 0
     !           BEGIN BLOCK PERMITTING ...EXITS TO 40
   ELSEIF ( Iflag==2 ) THEN
@@ -201,7 +202,7 @@ SUBROUTINE DREORT(Ncomp,Y,Yp,Yhp,Niv,W,S,P,Ip,Stowa,Iflag)
     !                    RETRIEVE DATA FOR A RESTART AT LAST
     !                    ORTHONORMALIZATION POINT
     !
-    CALL DSTWAY(Y,Yp,Yhp,1,Stowa)
+    CALL DSTWAY(Y(:,1),Yp,Yhp(:,1),1,Stowa)
     LOTjp = 1
     NSWot = 1
     KNSwot = 0

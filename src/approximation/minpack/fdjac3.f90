@@ -84,11 +84,11 @@ SUBROUTINE FDJAC3(FCN,M,N,X,Fvec,Fjac,Ldfjac,Iflag,Epsfcn,Wa)
   !           (WRB)
   !   900328  Added TYPE section.  (WRB)
   USE service, ONLY : R1MACH
-  INTEGER M, N, Ldfjac, Iflag
-  REAL Epsfcn
-  REAL X(*), Fvec(*), Fjac(Ldfjac,*), Wa(*)
-  INTEGER i, j
-  REAL eps, epsmch, h, temp
+  INTEGER :: M, N, Ldfjac, Iflag
+  REAL :: Epsfcn
+  REAL :: X(N), Fvec(M), Fjac(Ldfjac,N), Wa(M)
+  INTEGER :: i, j
+  REAL :: eps, epsmch, h, temp
   REAL, PARAMETER :: zero = 0.0E0
   !* FIRST EXECUTABLE STATEMENT  FDJAC3
   epsmch = R1MACH(4)

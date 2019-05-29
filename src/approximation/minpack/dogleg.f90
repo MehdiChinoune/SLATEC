@@ -68,11 +68,11 @@ SUBROUTINE DOGLEG(N,R,Lr,Diag,Qtb,Delta,X,Wa1,Wa2)
   !           (WRB)
   !   900328  Added TYPE section.  (WRB)
   USE service, ONLY : R1MACH
-  INTEGER N, Lr
-  REAL Delta
-  REAL R(Lr), Diag(*), Qtb(*), X(*), Wa1(*), Wa2(*)
-  INTEGER i, j, jj, jp1, k, l
-  REAL alpha, bnorm, epsmch, gnorm, qnorm, sgnorm, summ, temp
+  INTEGER :: N, Lr
+  REAL :: Delta
+  REAL :: R(Lr), Diag(N), Qtb(N), X(N), Wa1(N), Wa2(N)
+  INTEGER :: i, j, jj, jp1, k, l
+  REAL :: alpha, bnorm, epsmch, gnorm, qnorm, sgnorm, summ, temp
   REAL, PARAMETER :: one = 1.0E0, zero = 0.0E0
   !* FIRST EXECUTABLE STATEMENT  DOGLEG
   epsmch = R1MACH(4)

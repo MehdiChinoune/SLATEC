@@ -40,9 +40,10 @@ SUBROUTINE DFULMT(I,J,Aij,Indcat,Prgopt,Dattrv,Iflag)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900328  Added TYPE section.  (WRB)
   USE service, ONLY : XERMSG
-  INTEGER I, Indcat, J, key, level, lp, nerr, next
-  REAL(8) :: Aij, Dattrv(*), Prgopt(*)
-  INTEGER Iflag(10)
+  INTEGER :: I, Indcat, J
+  INTEGER :: Iflag(10)
+  REAL(8) :: Aij, Dattrv(:), Prgopt(:)
+  INTEGER :: key, level, lp, nerr, next
   REAL(8), PARAMETER :: zero = 0.D0
   !* FIRST EXECUTABLE STATEMENT  DFULMT
   IF ( Iflag(1)==1 ) THEN

@@ -46,8 +46,8 @@ SUBROUTINE DPRWPG(Key,Ipage,Lpg,Sx,Ix)
   !           IF-THEN-ELSE.  (RWC)
   !   910403  Updated AUTHOR and DESCRIPTION sections.  (WRB)
   USE service, ONLY : XERMSG
-  INTEGER Ipage, Ix(*), Key, Lpg
-  REAL(8) :: Sx(*)
+  INTEGER :: Ipage, Lpg, Ix(Lpg), Key
+  REAL(8) :: Sx(Lpg)
   !* FIRST EXECUTABLE STATEMENT  DPRWPG
   !
   !     CHECK IF IPAGE IS IN RANGE.

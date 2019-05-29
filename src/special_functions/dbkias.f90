@@ -27,10 +27,11 @@ SUBROUTINE DBKIAS(X,N,Ktrms,T,Ans,Ind,Ms,Gmrn,H,Ierr)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
   USE service, ONLY : D1MACH
-  INTEGER i, ii, Ind, j, jmi, jn, k, kk, km, Ktrms, mm, mp, Ms, N, Ierr
-  REAL(8) :: Ans, den1, den2, den3, er, err, fj, fk, fln, fm1, Gmrn, g1, gs, &
-    H(*), hn, rat, rg1, rxp, rz, rzx, s(31), ss, sumi, sumj, T(50), &
-    tol, v(52), w(52), X, xp(16), z
+  INTEGER :: Ind, Ktrms, Ms, N, Ierr
+  REAL(8) :: Ans, Gmrn, H(30), T(50)
+  INTEGER i, ii, j, jmi, jn, k, kk, km, mm, mp
+  REAL(8) :: den1, den2, den3, er, err, fj, fk, fln, fm1, g1, gs, hn, rat, rg1, &
+    rxp, rz, rzx, s(31), ss, sumi, sumj, tol, v(52), w(52), X, xp(16), z
   !-----------------------------------------------------------------------
   !             COEFFICIENTS OF POLYNOMIAL P(J-1,X), J=1,15
   !-----------------------------------------------------------------------

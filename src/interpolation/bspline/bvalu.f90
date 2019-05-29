@@ -75,9 +75,11 @@ REAL FUNCTION BVALU(T,A,N,K,Ideriv,X,Inbv,Work)
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   USE service, ONLY : XERMSG
-  INTEGER i, Ideriv, iderp1, ihi, ihmkmj, ilo, imk, imkpj, Inbv, &
-    ipj, ip1, ip1mj, j, jj, j1, j2, K, kmider, kmj, km1, kpk, mflag, N
-  REAL A(*), fkmj, T(*), Work(*), X
+  INTEGER :: Ideriv, Inbv, K, N
+  REAL :: A(N), T(N+K), Work(3*K), X
+  INTEGER :: i, iderp1, ihi, ihmkmj, ilo, imk, imkpj, &
+    ipj, ip1, ip1mj, j, jj, j1, j2, kmider, kmj, km1, kpk, mflag
+  REAL :: fkmj
   !     DIMENSION T(N+K), WORK(3*K)
   !* FIRST EXECUTABLE STATEMENT  BVALU
   BVALU = 0.0E0

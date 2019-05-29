@@ -76,9 +76,11 @@ SUBROUTINE SINQF(N,X,Wsave)
   !   881128  Modified by Dick Valent to meet prologue standards.
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
-  INTEGER k, kc, N, ns2
-  REAL Wsave(*), X(*), xhold
+
+  INTEGER :: N
+  REAL :: Wsave(N), X(N)
+  INTEGER :: k, kc, ns2
+  REAL :: xhold
   !* FIRST EXECUTABLE STATEMENT  SINQF
   IF ( N==1 ) RETURN
   ns2 = N/2

@@ -117,7 +117,7 @@ SUBROUTINE DPCHCE(Ic,Vc,N,X,H,Slope,D,Incfd,Ierr)
   !  DECLARE ARGUMENTS.
   !
   INTEGER Ic(2), N, Incfd, Ierr
-  REAL(8) :: Vc(2), X(*), H(*), Slope(*), D(Incfd,*)
+  REAL(8) :: Vc(2), X(N), H(N), Slope(N), D(Incfd,N)
   !
   !  DECLARE LOCAL VARIABLES.
   !

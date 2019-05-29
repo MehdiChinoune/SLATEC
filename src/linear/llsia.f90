@@ -168,10 +168,11 @@ SUBROUTINE LLSIA(A,Mda,M,N,B,Mdb,Nb,Re,Ae,Key,Mode,Np,Krank,Ksure,Rnorm,W,&
   !   900510  Fixed an error message.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   USE service, ONLY : R1MACH, XERMSG
-  INTEGER i, Info, it, Key, Krank, Ksure, Liw, Lw, M, Mda, Mdb, &
-    Mode, N, n1, n2, n3, n4, n5, Nb, Np
-  REAL A(Mda,*), Ae(*), B(Mdb,*), eps, Re(*), Rnorm(*), W(*)
-  INTEGER Iwork(*)
+  INTEGER :: Info, Key, Krank, Ksure, Liw, Lw, M, Mda, Mdb, Mode, N, Nb, Np
+  INTEGER :: Iwork(N+M)
+  REAL :: A(Mda,N), Ae(N), B(Mdb,Nb), Re(N), Rnorm(Nb), W(5*N)
+  INTEGER :: i, it, n1, n2, n3, n4, n5
+  REAL :: eps
   !
   !* FIRST EXECUTABLE STATEMENT  LLSIA
   IF ( Info<0.OR.Info>1 ) THEN

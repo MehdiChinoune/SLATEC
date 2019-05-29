@@ -99,7 +99,7 @@ SUBROUTINE DPCHCS(Switch,N,H,Slope,D,Incfd,Ierr)
   !  DECLARE ARGUMENTS.
   !
   INTEGER N, Incfd, Ierr
-  REAL(8) :: Switch, H(*), Slope(*), D(Incfd,*)
+  REAL(8) :: Switch, H(N), Slope(N), D(Incfd,N)
   !
   !  DECLARE LOCAL VARIABLES.
   !

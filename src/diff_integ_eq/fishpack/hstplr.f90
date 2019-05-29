@@ -327,10 +327,11 @@ SUBROUTINE HSTPLR(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
-  INTEGER i, Idimf, ierr1, Ierror, isw, iwb, iwc, iwr, j, k, lp, &
-    M, mb, Mbdcnd, N, Nbdcnd, np
-  REAL A, a1, a2, B, Bda(*), Bdb(*), Bdc(*), Bdd(*), C, D, deltar, deltht, &
-    dlrsq, dlthsq, Elmbda, F(Idimf,*), Pertrb, W(*)
+  INTEGER :: Idimf, Ierror, M, Mbdcnd, N, Nbdcnd
+  REAL :: A, B, C, D, Elmbda, Pertrb
+  REAL :: Bda(N+1), Bdb(N+1), Bdc(M+1), Bdd(M+1), F(Idimf,N+1), W(:)
+  INTEGER :: i, ierr1, isw, iwb, iwc, iwr, j, k, lp, mb, np
+  REAL :: a1, a2, deltar, deltht, dlrsq, dlthsq
   !* FIRST EXECUTABLE STATEMENT  HSTPLR
   Ierror = 0
   IF ( A<0. ) Ierror = 1
@@ -500,9 +501,9 @@ SUBROUTINE HSTPLR(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   !     CALL POISTG OR GENBUN TO SOLVE THE SYSTEM OF EQUATIONS.
   !
   IF ( lp==0 ) THEN
-    CALL GENBUN(lp,N,1,M,W,W(iwb+1),W(iwc+1),Idimf,F,ierr1,W(iwr+1))
+    CALL GENBUN(lp,N,1,M,W(1:iwb),W(iwb+1:iwc),W(iwc+1:iwr),Idimf,F,ierr1,W(iwr+1:))
   ELSE
-    CALL POISTG(lp,N,1,M,W,W(iwb+1),W(iwc+1),Idimf,F,ierr1,W(iwr+1))
+    CALL POISTG(lp,N,1,M,W(1:iwb),W(iwb+1:iwc),W(iwc+1:iwr),Idimf,F,ierr1,W(iwr+1:))
   END IF
   W(1) = W(iwr+1) + 3*M
   IF ( A==0..AND.Mbdcnd==2.AND.isw==2 ) THEN

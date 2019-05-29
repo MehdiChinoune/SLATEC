@@ -76,9 +76,11 @@ REAL(8) FUNCTION DBVALU(T,A,N,K,Ideriv,X,Inbv,Work)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   USE service, ONLY : XERMSG
   !
-  INTEGER i, Ideriv, iderp1, ihi, ihmkmj, ilo, imk, imkpj, Inbv, &
-    ipj, ip1, ip1mj, j, jj, j1, j2, K, kmider, kmj, km1, kpk, mflag, N
-  REAL(8) :: A(*), fkmj, T(*), Work(*), X
+  INTEGER :: Ideriv, Inbv, K, N
+  REAL(8) :: A(N), T(N+K), Work(3*K), X
+  INTEGER i, iderp1, ihi, ihmkmj, ilo, imk, imkpj, &
+    ipj, ip1, ip1mj, j, jj, j1, j2, kmider, kmj, km1, kpk, mflag
+  REAL(8) :: fkmj
   !* FIRST EXECUTABLE STATEMENT  DBVALU
   DBVALU = 0.0D0
   IF ( K<1 ) THEN

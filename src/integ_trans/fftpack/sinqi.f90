@@ -49,9 +49,9 @@ SUBROUTINE SINQI(N,Wsave)
   !   881128  Modified by Dick Valent to meet prologue standards.
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
-  INTEGER N
-  REAL Wsave(*)
+
+  INTEGER :: N
+  REAL :: Wsave(3*N+15)
   !* FIRST EXECUTABLE STATEMENT  SINQI
   CALL COSQI(N,Wsave)
 END SUBROUTINE SINQI

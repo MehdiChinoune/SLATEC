@@ -121,12 +121,13 @@ SUBROUTINE LSSODS(A,X,B,M,N,Nrda,Iflag,Irank,Iscale,Q,Diag,Kpivot,Iter,&
   !   910408  Updated the REFERENCES section.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   USE service, ONLY : XERMSG, XGETF, XSETF, XERMAX, J4SAVE, R1MACH
-  INTEGER nfatal, nmir, Nrda
-  REAL A(Nrda,*), acc, B(*), Diag(*), Div(*), gam, gama, Q(Nrda,*), R(*), &
-    Resnrm, Scales(*), Td(*), uro, X(*), Xnorm, Z(*), znorm
-  REAL znrm0
-  INTEGER Iflag, Irank, irm, irp, Iscale, it, Iter, iterp, j, &
-    k, kp, Kpivot(*), l, M, maxmes, mmir, N, nfat
+  INTEGER :: Iflag, Irank, Iter, M, N, Nrda, Kpivot(N)
+  REAL :: Resnrm, Xnorm
+  REAL :: A(Nrda,N), B(M), Diag(N), Div(N), Q(Nrda,N), R(M), Scales(N), Td(N), &
+    X(N), Z(N)
+  INTEGER :: irm, irp, Iscale, it, iterp, j, k, kp, l, nfatal, nmir, maxmes, &
+    mmir, nfat
+  REAL :: acc, gam, gama, uro, znrm0, znorm
   !
   !- *********************************************************************
   !

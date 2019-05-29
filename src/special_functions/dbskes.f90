@@ -39,8 +39,10 @@ SUBROUTINE DBSKES(Xnu,X,Nin,Bke)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   USE service, ONLY : XERMSG, D1MACH
-  INTEGER i, iswtch, n, Nin
-  REAL(8) :: Xnu, X, Bke(*), bknu1, v, vincr, vend, direct
+  INTEGER :: Nin
+  REAL(8) :: Xnu, X, Bke(Nin)
+  INTEGER :: i, iswtch, n
+  REAL(8) :: bknu1, v, vincr, vend, direct
   REAL(8) :: alnbig = 0.D0
   !* FIRST EXECUTABLE STATEMENT  DBSKES
   IF ( alnbig==0.D0 ) alnbig = LOG(D1MACH(2))

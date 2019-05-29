@@ -172,10 +172,10 @@ SUBROUTINE DQAGS(F,A,B,Epsabs,Epsrel,Result,Abserr,Neval,Ier,Limit,Lenw,&
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   USE service, ONLY : XERMSG
   !
-  REAL(8) :: A, Abserr, B, Epsabs, Epsrel, Result, Work(*)
-  INTEGER Ier, Iwork(*), Last, Lenw, Limit, lvl, l1, l2, l3, Neval
-  !
+  INTEGER :: Ier, Last, Lenw, Limit, Neval, Iwork(Limit)
+  REAL(8) :: A, Abserr, B, Epsabs, Epsrel, Result, Work(Lenw)
   REAL(8), EXTERNAL :: F
+  INTEGER :: lvl, l1, l2, l3
   !
   !         CHECK VALIDITY OF LIMIT AND LENW.
   !

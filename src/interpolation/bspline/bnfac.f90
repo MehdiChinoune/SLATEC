@@ -81,9 +81,10 @@ SUBROUTINE BNFAC(W,Nroww,Nrow,Nbandl,Nbandu,Iflag)
   !   900328  Added TYPE section.  (WRB)
 
   !
-  INTEGER Iflag, Nbandl, Nbandu, Nrow, Nroww, i, ipk, j, jmax, k, &
-    kmax, middle, midmk, nrowm1
-  REAL W(Nroww,*), factor, pivot
+  INTEGER :: Iflag, Nbandl, Nbandu, Nrow, Nroww
+  REAL :: W(Nroww,Nrow)
+  INTEGER :: i, ipk, j, jmax, k, kmax, middle, midmk, nrowm1
+  REAL :: factor, pivot
   !
   !* FIRST EXECUTABLE STATEMENT  BNFAC
   Iflag = 1

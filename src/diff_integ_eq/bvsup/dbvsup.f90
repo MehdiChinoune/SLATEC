@@ -419,13 +419,14 @@ SUBROUTINE DBVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
     NEQivd => NEQivp, NFCc, ICOco
   USE service, ONLY : XERMSG
   !- *********************************************************************
-  !
-  INTEGER Iflag, Igofx, is, Iwork(*), j, k, kkkcoe, kkkcof, kkkg, kkks, kkksto, &
-    kkksud, kkksvc, kkku, kkkv, kkkws, kkkyhp, kpts, lllcof, lllip, llliws, &
-    lllsud, lllsvc, mxnoni, mxnonr, Ncomp, ndeq, Ndiw, Ndw, Neqivp, Nfc, Nic, &
-    nitemp, non, Nrowa, Nrowb, Nrowy, nrtemp, Nxpts, nxptsm
-  REAL(8) :: A(Nrowa,*), Ae, Alpha(*), B(Nrowb,*), Beta(*), Re, Work(Ndw), &
-    Xpts(*), Y(Nrowy,*)
+  INTEGER :: Iflag, Igofx, Ncomp, Ndiw, Ndw, Neqivp, Nfc, Nic, Nrowa, Nrowb, &
+    Nrowy, Nxpts, Iwork(Ndiw)
+  REAL(8) :: Ae, Re
+  REAL(8) :: A(Nrowa,Ncomp), Alpha(:), B(Nrowb,Ncomp), Beta(Nxpts), Work(Ndw), &
+    Xpts(Nxpts), Y(Nrowy,Nxpts)
+  INTEGER :: is, j, k, kkkcoe, kkkcof, kkkg, kkks, kkksto, kkksud, kkksvc, kkku, &
+    kkkv, kkkws, kkkyhp, kpts, lllcof, lllip, llliws, lllsud, lllsvc, mxnoni, &
+    mxnonr, ndeq, nitemp, non, nrtemp, nxptsm
   CHARACTER(8) :: xern1, xern2, xern3, xern4
   !
   !      *****************************************************************

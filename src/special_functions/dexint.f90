@@ -106,10 +106,11 @@ SUBROUTINE DEXINT(X,N,Kode,M,Tol,En,Nz,Ierr)
   !           D. Amos.  Included correction of argument list.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   USE service, ONLY : D1MACH, I1MACH
+  INTEGER :: Ierr, Kode, M, N, Nz
+  REAL(8) :: En(M), X, Tol
   REAL(8) :: a(99), aa, aams, ah, ak, at, b(99), bk, bt, cc, cnorm, ct, em, emx, &
-    En(*), etol, fnm, fx, pt, p1, p2, s, Tol, tx, X, xlim, xtol, y(2), yt, y1, y2
-  INTEGER i, ic, icase, ict, Ierr, ik, ind, ix, i1m, jset, k, kk, kn, Kode, ks, &
-    M, ml, mu, N, nd, nm, Nz
+    etol, fnm, fx, pt, p1, p2, s, tx, xlim, xtol, y(2), yt, y1, y2
+  INTEGER i, ic, icase, ict, ik, ind, ix, i1m, jset, k, kk, kn, ks, ml, mu, nd, nm
   REAL(8), PARAMETER :: xcut = 2.0D0
   !* FIRST EXECUTABLE STATEMENT  DEXINT
   Ierr = 0

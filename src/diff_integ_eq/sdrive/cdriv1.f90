@@ -297,12 +297,14 @@ SUBROUTINE CDRIV1(N,T,Y,F,Tout,Mstate,Eps,Work,Lenw,Ierflg)
   !   900329  Initial submission to SLATEC.
   USE service, ONLY : XERMSG, R1MACH
   EXTERNAL :: F
-  COMPLEX Work(*), Y(*)
-  REAL Eps, hmax, T, Tout
-  INTEGER i, Ierflg, leniw, Lenw, lenwcm, lnwchk, ml, Mstate, mu, N, nde, nstate, ntask
+  INTEGER :: Ierflg, Lenw, Mstate, N
+  REAL :: Eps, T, Tout
+  COMPLEX :: Work(Lenw), Y(N+1)
+  INTEGER :: i, leniw, lenwcm, lnwchk, ml, mu, nde, nstate, ntask
+  REAL :: hmax
+  CHARACTER(8) :: intgr1
   INTEGER, PARAMETER :: MXN = 200, IDLIW = 50
-  INTEGER iwork(IDLIW+MXN)
-  CHARACTER intgr1*8
+  INTEGER :: iwork(IDLIW+MXN)
   INTEGER, PARAMETER :: NROOT = 0, IERROR = 2, MINT = 2, MITER = 2, IMPL = 0, &
     MXORD = 5, MXSTEP = 1000
   REAL, PARAMETER :: ewtcom(1) = 1.E0

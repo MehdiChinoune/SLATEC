@@ -110,9 +110,9 @@ SUBROUTINE SGEFS(A,Lda,N,V,Itask,Ind,Work,Iwork)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   USE service, ONLY : R1MACH, XERMSG
   !
-  INTEGER Lda, N, Itask, Ind, Iwork(*)
-  REAL A(Lda,*), V(*), Work(*)
-  REAL rcond
+  INTEGER :: Lda, N, Itask, Ind, Iwork(N)
+  REAL :: A(Lda,N), V(N), Work(N)
+  REAL :: rcond
   CHARACTER(8) :: xern1, xern2
   !* FIRST EXECUTABLE STATEMENT  SGEFS
   IF ( Lda<N ) THEN

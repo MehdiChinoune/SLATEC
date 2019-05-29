@@ -39,9 +39,10 @@ SUBROUTINE DPRWVR(Key,Ipage,Lpg,Sx,Ix)
   !   900328  Added TYPE section.  (WRB)
   !   910403  Updated AUTHOR and DESCRIPTION sections.  (WRB)
 
-  INTEGER iaddr, Ipage, ipagef, istart, Ix(*), Key, Lpg
+  INTEGER :: Ipage, Lpg, Ix(Lpg), Key
+  REAL(8) :: Sx(Lpg)
+  INTEGER :: iaddr, ipagef, istart
   LOGICAL :: first
-  REAL(8) :: Sx(*)
   REAL(8), PARAMETER :: zero = 0.D0, one = 1.D0
   !* FIRST EXECUTABLE STATEMENT  DPRWVR
   !

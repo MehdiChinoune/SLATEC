@@ -933,8 +933,10 @@ SUBROUTINE SDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
   !
   !     Declare arguments.
   !
-  INTEGER Neq, Info(15), Idid, Lrw, Iwork(*), Liw, Ipar(*)
-  REAL T, Y(*), Yprime(*), Tout, Rtol(*), Atol(*), Rwork(*), Rpar(*)
+  INTEGER :: Neq, Idid, Lrw, Liw
+  INTEGER :: Info(15), Iwork(Liw), Ipar(:)
+  REAL :: T, Tout
+  REAL :: Y(Neq), Yprime(Neq), Rtol(:), Atol(:), Rwork(Lrw), Rpar(:)
   EXTERNAL :: RES, JAC
   !
   !     Declare local variables.
@@ -1279,9 +1281,9 @@ SUBROUTINE SDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
         !
         !     COMPUTE INITIAL DERIVATIVE, UPDATING TN AND Y, IF APPLICABLE
         IF ( Info(11)/=0 ) THEN
-          CALL SDAINI(tn,Y,Yprime,Neq,RES,JAC,ho,Rwork(lwt),Idid,Rpar,Ipar,&
-            Rwork(lphi),Rwork(LDELTA),Rwork(le),Rwork(lwm),&
-            Iwork(LIWM),hmin,Rwork(LROUND),Info(10),ntemp)
+          CALL SDAINI(tn,Y,Yprime,Neq,RES,JAC,ho,Rwork(lwt:lphi-1),Idid,Rpar,Ipar,&
+            Rwork(lphi:lpd-1),Rwork(LDELTA:lwt-1),Rwork(le:lwt-1),Rwork(lwm:),&
+            Iwork,hmin,Rwork(LROUND),Info(10),ntemp)
           IF ( Idid<0 ) GOTO 100
         END IF
         !
@@ -1339,10 +1341,10 @@ SUBROUTINE SDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
           IF ( rh>1.0E0 ) h = h/rh
         END IF
         !
-        CALL SDASTP(tn,Y,Yprime,Neq,RES,JAC,h,Rwork(lwt),Info(1),Idid,Rpar,&
-          Ipar,Rwork(lphi),Rwork(LDELTA),Rwork(le),Rwork(lwm),&
-          Iwork(LIWM),Rwork(LALPHA),Rwork(LBETA),Rwork(LGAMMA),&
-          Rwork(LPSI),Rwork(LSIGMA),Rwork(LCJ),Rwork(LCJOLD),&
+        CALL SDASTP(tn,Y,Yprime,Neq,RES,JAC,h,Rwork(lwt:lphi-1),Info(1),Idid,Rpar,&
+          Ipar,Rwork(lphi:lpd-1),Rwork(LDELTA:le-1),Rwork(le:lwt-1),Rwork(lwm:),&
+          Iwork,Rwork(LALPHA:LBETA-1),Rwork(LBETA:LGAMMA-1),Rwork(LGAMMA:LPSI-1),&
+          Rwork(LPSI:LSIGMA-1),Rwork(LSIGMA:LDELTA-1),Rwork(LCJ),Rwork(LCJOLD),&
           Rwork(LHOLD),Rwork(LS),hmin,Rwork(LROUND),Iwork(LPHASE),&
           Iwork(LJCALC),Iwork(LK),Iwork(LKOLD),Iwork(LNS),Info(10),ntemp)
         !     MULTIPLY RTOL AND ATOL BY R AND RETURN

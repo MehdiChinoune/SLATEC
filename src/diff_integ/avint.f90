@@ -80,8 +80,10 @@ SUBROUTINE AVINT(X,Y,N,Xlo,Xup,Ans,Ierr)
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   USE service, ONLY : XERMSG
-  REAL Ans, fl, fr, slope, X(*), Xlo, Xup, Y(*)
-  INTEGER i, Ierr, inlft, inrt, istart, istop, N
+  INTEGER :: N, Ierr
+  REAL :: Ans, Xlo, Xup, X(N), Y(N)
+  INTEGER :: i, inlft, inrt, istart, istop
+  REAL :: fl, fr, slope
   REAL(8) :: r3, rp5, summ, syl, syl2, syl3, syu, syu2, syu3, &
     x1, x2, x3, x12, x13, x23, term1, term2, term3, a, b, c, ca, cb, cc
   !* FIRST EXECUTABLE STATEMENT  AVINT

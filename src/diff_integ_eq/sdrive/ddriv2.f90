@@ -350,11 +350,13 @@ SUBROUTINE DDRIV2(N,T,Y,F,Tout,Mstate,Nroot,Eps,Ewt,Mint,Work,Lenw,Iwork,&
   !   900329  Initial submission to SLATEC.
   USE service, ONLY : XERMSG
   EXTERNAL :: F, G
-  REAL(8) :: Eps, Ewt, ewtcom(1), G, hmax, T, Tout, Work(*), Y(*)
-  INTEGER Iwork(*)
-  INTEGER Ierflg, ierror, Leniw, Lenw, Mint, miter, ml, Mstate, mu, mxord, N, &
-    nde, Nroot, nstate, ntask
-  CHARACTER intgr1*8
+  INTEGER :: Ierflg, Leniw, Lenw, Mint, Mstate, N, Nroot
+  INTEGER :: Iwork(Leniw+N)
+  REAL(8) :: Eps, Ewt, G, T, Tout
+  REAL(8) :: Work(Lenw), Y(N+1)
+  REAL(8) :: ewtcom(1), hmax
+  INTEGER :: ierror, miter, ml, mu, mxord, nde, nstate, ntask
+  CHARACTER(8) :: intgr1
   INTEGER, PARAMETER :: IMPL = 0, MXSTEP = 1000
   !* FIRST EXECUTABLE STATEMENT  DDRIV2
   IF ( ABS(Mstate)==9 ) THEN

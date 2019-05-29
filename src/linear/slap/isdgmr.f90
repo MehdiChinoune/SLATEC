@@ -280,8 +280,6 @@ INTEGER FUNCTION ISDGMR(N,X,Xl,MSOLVE,Nmsl,Itol,Tol,Iter,Err,Iunit,R,Dz,Rwork, &
   REAL(8) :: Dz(*), Hes(Maxlp1,Maxl), Q(*), R(*), Rwork(*), Sx(*), V(N,*), &
     X(*), Xl(*)
   INTEGER Iwork(*)
-  !     .. Subroutine Arguments ..
-  EXTERNAL :: MSOLVE
   !     .. Local Scalars ..
   REAL(8) :: dxnrm, fuzz, rat, ratmax, tem
   INTEGER i, ielmax

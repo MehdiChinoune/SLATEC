@@ -134,8 +134,8 @@ SUBROUTINE SNBCO(Abe,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
-  INTEGER Lda, N, Ml, Mu, Ipvt(*)
-  REAL Abe(Lda,*), Z(*)
+  INTEGER Lda, N, Ml, Mu, Ipvt(N)
+  REAL Abe(Lda,2*Ml+Mu+1), Z(N)
   REAL Rcond
   !
   REAL ek, t, wk, wkm

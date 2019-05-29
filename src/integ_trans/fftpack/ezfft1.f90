@@ -28,9 +28,10 @@ SUBROUTINE EZFFT1(N,Wa,Ifac)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
 
-  REAL arg1, argh, ch1, ch1h, dch1, dsh1, sh1, tpi, Wa(*)
-  INTEGER i, ib, ido, Ifac(*), ii, ip, ipm, is, j, k1, l1, l2, N, &
-    nf, nfm1, nl, nq, nr, ntry
+  INTEGER :: N, Ifac(15)
+  REAL :: Wa(N)
+  INTEGER :: i, ib, ido, ii, ip, ipm, is, j, k1, l1, l2, nf, nfm1, nl, nq, nr, ntry
+  REAL :: arg1, argh, ch1, ch1h, dch1, dsh1, sh1, tpi
   INTEGER, PARAMETER :: ntryh(4) = [ 4, 2, 3, 5 ]
   !* FIRST EXECUTABLE STATEMENT  EZFFT1
   tpi = 8.*ATAN(1.)

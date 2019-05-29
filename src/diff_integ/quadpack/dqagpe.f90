@@ -206,20 +206,20 @@ SUBROUTINE DQAGPE(F,A,B,Npts2,Points,Epsabs,Epsrel,Limit,Result,Abserr,&
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   USE service, ONLY : D1MACH
-  REAL(8) :: A, abseps, Abserr, Alist(*), area, area1, area12, &
-    area2, a1, a2, B, Blist(*), b1, b2, correc, defabs, &
-    defab1, defab2, dres, Elist(*), epmach, &
-    Epsabs, Epsrel, erlarg, erlast, errbnd, errmax, &
-    error1, erro12, error2, errsum, ertest, oflow, &
-    Points(*), Pts(*), resa, resabs, reseps, Result, res3la(3), &
-    Rlist(*), rlist2(52), signn, temp, uflow
-  INTEGER i, id, Ier, ierro, ind1, ind2, Iord(*), ip1, iroff1, &
-    iroff2, iroff3, j, jlow, jupbnd, k, ksgn, ktmin, Last, &
-    levcur, Level(*), levmax, Limit, maxerr, Ndin(*), Neval, nintt, &
-    nintp1, npts, Npts2, nres, nrmax, numrl2
-  LOGICAL extrap, noext
-  !
+  INTEGER :: Ier, Last, Limit, Neval, Npts2
+  INTEGER :: Iord(Limit), Level(Limit), Ndin(Npts2)
+  REAL(8) :: A, Abserr, B, Epsabs, Epsrel, Result
+  REAL(8) :: Alist(Limit), Blist(Limit), Elist(Limit), Points(Npts2), Pts(Npts2), &
+    Rlist(Limit)
   REAL(8), EXTERNAL :: F
+  INTEGER :: i, id, ierro, ind1, ind2, ip1, iroff1, iroff2, iroff3, j, jlow, &
+    jupbnd, k, ksgn, ktmin, levcur, levmax, maxerr, nintt, nintp1, npts, &
+    nres, nrmax, numrl2
+  REAL(8) :: abseps, area, area1, area12, area2, a1, a2, b1, b2, correc, defabs, &
+    defab1, defab2, dres, epmach, erlarg, erlast, errbnd, errmax, error1, erro12, &
+    error2, errsum, ertest, oflow, resa, resabs, reseps, res3la(3), rlist2(52), &
+    signn, temp, uflow
+  LOGICAL :: extrap, noext
   !
   !            THE DIMENSION OF RLIST2 IS DETERMINED BY THE VALUE OF
   !            LIMEXP IN SUBROUTINE EPSALG (RLIST2 SHOULD BE OF DIMENSION

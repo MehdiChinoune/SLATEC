@@ -96,7 +96,7 @@ SUBROUTINE PCHCI(N,H,Slope,D,Incfd)
   !  DECLARE ARGUMENTS.
   !
   INTEGER N, Incfd
-  REAL H(*), Slope(*), D(Incfd,*)
+  REAL H(N), Slope(N), D(Incfd,N)
   !
   !  DECLARE LOCAL VARIABLES.
   !

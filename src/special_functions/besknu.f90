@@ -86,10 +86,12 @@ SUBROUTINE BESKNU(X,Fnu,Kode,N,Y,Nz)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   USE service, ONLY : XERMSG, R1MACH, I1MACH
   !
-  INTEGER i, iflag, inu, j, k, kk, Kode, koded, N, nn, Nz
-  REAL a(160), ak, a1, a2, b(160), bk, ck, coef, cx, dk, dnu, dnu2, &
-    elim, etest, ex, f, fc, fhs, fk, fks, flrx, fmu, Fnu, g1, &
-    g2, p, pt, p1, p2, q, rx, s, smu, sqk, st, s1, s2, tm, tol, t1, t2, X, Y(*)
+  INTEGER :: N, Nz, Kode
+  REAL :: Fnu, X, Y(N)
+  INTEGER :: i, iflag, inu, j, k, kk, koded, nn
+  REAL :: a(160), ak, a1, a2, b(160), bk, ck, coef, cx, dk, dnu, dnu2, elim, etest, &
+    ex, f, fc, fhs, fk, fks, flrx, fmu, g1, g2, p, pt, p1, p2, q, rx, s, smu, sqk, &
+    st, s1, s2, tm, tol, t1, t2
   REAL, PARAMETER :: x1 = 2.0E0, x2 = 17.0E0
   REAL, PARAMETER :: pi = 3.14159265358979E+00, rthpi = 1.25331413731550E+00
   REAL, PARAMETER :: cc(8) = [ 5.77215664901533E-01, -4.20026350340952E-02, &

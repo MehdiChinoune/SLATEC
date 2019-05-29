@@ -75,14 +75,18 @@ SUBROUTINE CDSTP(Eps,F,FA,Hmax,Impl,Ierror,JACOBN,Matdim,Maxord,Mint,&
   !   900329  Initial submission to SLATEC.
   USE linear, ONLY : SCNRM2
   EXTERNAL :: F, JACOBN, FA, USERS
-  INTEGER i, Ierror, Impl, Ipvt(*), Iswflg, iter, j, Jstate, Jstepl, Jtask, &
-    Matdim, Maxord, Mint, Miter, Ml, Mntold, Mtrold, Mtrsv, Mu, Mxrdsv, N, Nde, &
-    nfail, Nfe, Nje, Nq, Nqused, Nstep, nsv, ntry, Nwait
-  COMPLEX A(Matdim,*), Dfdy(Matdim,*), Fac(*), Save1(*), Save2(*), Y(*), Yh(N,*), Ywt(*)
-  REAL Avgh, Avgord, bnd, ctest, d, denom, d1, El(13,12), Eps, erdn, erup, etest, &
-    H, Hmax, hn, Hold, hs, Hused, numer, Rc, rh, rh1, rh2, rh3, Rmax, T, &
-    told, Tq(3,12), Trend, Uround, y0nrm
-  LOGICAL Convrg, evalfa, evaljc, switch
+  INTEGER :: Ierror, Impl, Iswflg, Jstate, Jstepl, Jtask, Matdim, Maxord, Mint, &
+    Miter, Ml, Mntold, Mtrold, Mtrsv, Mu, Mxrdsv, N, Nde, Nfe, Nje, Nq, Nqused, &
+    Nstep, Nwait, Ipvt(N)
+  REAL :: Avgh, Avgord, Eps, H, Hmax, Hold, Hused, Rc, Rmax, T, Trend, Uround
+  REAL :: Tq(3,12), El(13,12)
+  COMPLEX :: A(Matdim,N), Dfdy(Matdim,N), Fac(N), Save1(N), Save2(N), Y(N), &
+    Yh(N,13), Ywt(N)
+  LOGICAL :: Convrg
+  INTEGER :: i, iter, j, nfail, nsv, ntry
+  REAL :: bnd, ctest, d, denom, d1, erdn, erup, etest, hn, hs, numer, rh, rh1, &
+    rh2, rh3, told, y0nrm
+  LOGICAL :: evalfa, evaljc, switch
   INTEGER, PARAMETER :: MXFAIL = 3, MXITER = 3, MXTRY = 50
   REAL, PARAMETER :: BIAS1 = 1.3E0, BIAS2 = 1.2E0, BIAS3 = 1.4E0, RCTEST = 0.3E0, &
     RMFAIL = 2.E0, RMNORM = 10.E0, TRSHLD = 1.E0

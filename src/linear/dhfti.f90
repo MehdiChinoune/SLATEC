@@ -143,10 +143,10 @@ SUBROUTINE DHFTI(A,Mda,M,N,B,Mdb,Nb,Tau,Krank,Rnorm,H,G,Ip)
   !   901005  Replace usage of DDIFF with usage of D1MACH.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   USE service, ONLY : D1MACH, XERMSG
-  INTEGER i, ii, iopt, Ip(*), ip1, j, jb, jj, k, kp1, Krank, l, &
-    ldiag, lmax, M, Mda, Mdb, N, Nb, nerr
-  REAL(8) :: A(Mda,*), B(Mdb,*), dzero, factor, G(*), H(*), hmax, &
-    Rnorm(*), sm, sm1, szero, Tau, tmp
+  INTEGER :: Krank, M, Mda, Mdb, N, Nb, Ip(N)
+  REAL(8) :: A(Mda,N+1), B(Mdb,Nb), G(N), H(N), Rnorm(Nb), Tau
+  INTEGER :: i, ii, iopt, ip1, j, jb, jj, k, kp1, l, ldiag, lmax, nerr
+  REAL(8) :: dzero, factor, hmax, sm, sm1, szero, tmp
   REAL(8) :: releps = 0.D0
   !     BEGIN BLOCK PERMITTING ...EXITS TO 360
   !* FIRST EXECUTABLE STATEMENT  DHFTI

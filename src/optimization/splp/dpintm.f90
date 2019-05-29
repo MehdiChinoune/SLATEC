@@ -50,8 +50,9 @@ SUBROUTINE DPINTM(M,N,Sx,Ix,Lmx,Ipagef)
   !   900328  Added TYPE section.  (WRB)
   !   910403  Updated AUTHOR and DESCRIPTION sections.  (WRB)
   USE service, ONLY : XERMSG
-  INTEGER i, iopt, Ipagef, Ix(*), Lmx, lp4, M, N, n20008, n20012, nerr
-  REAL(8) :: Sx(*)
+  INTEGER :: Ipagef, Lmx, Ix(Lmx), M, N
+  REAL(8) :: Sx(Lmx)
+  INTEGER :: i, iopt, lp4, n20008, n20012, nerr
   REAL(8), PARAMETER :: zero = 0.D0, one = 1.D0
   !* FIRST EXECUTABLE STATEMENT  DPINTM
   iopt = 1

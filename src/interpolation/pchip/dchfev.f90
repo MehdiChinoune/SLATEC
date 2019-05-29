@@ -100,7 +100,7 @@ SUBROUTINE DCHFEV(X1,X2,F1,F2,D1,D2,Ne,Xe,Fe,Next,Ierr)
   !  DECLARE ARGUMENTS.
   !
   INTEGER Ne, Next(2), Ierr
-  REAL(8) :: X1, X2, F1, F2, D1, D2, Xe(*), Fe(*)
+  REAL(8) :: X1, X2, F1, F2, D1, D2, Xe(Ne), Fe(Ne)
   !
   !  DECLARE LOCAL VARIABLES.
   !

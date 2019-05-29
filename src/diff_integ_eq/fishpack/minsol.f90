@@ -30,8 +30,10 @@ SUBROUTINE MINSOL(Usol,Idmn,Zn,Zm)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   USE SPLPCM, ONLY : L, IS, JS, K, MS, NS
-  INTEGER i, Idmn, ifnl, ii, istr, j, jfnl, jj, jstr
-  REAL ete, pertrb, Usol(Idmn,*), ute, Zm(*), Zn(*)
+  INTEGER :: Idmn
+  REAL :: Usol(Idmn,L), Zm(MS), Zn(NS)
+  INTEGER :: i, ifnl, ii, istr, j, jfnl, jj, jstr
+  REAL :: ete, pertrb, ute
   !* FIRST EXECUTABLE STATEMENT  MINSOL
   istr = 1
   ifnl = K

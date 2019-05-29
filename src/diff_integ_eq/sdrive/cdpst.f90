@@ -30,14 +30,15 @@ SUBROUTINE CDPST(El,F,FA,H,Impl,JACOBN,Matdim,Miter,Ml,Mu,N,Nde,Nq,Save2,&
   !   790601  DATE WRITTEN
   !   900329  Initial submission to SLATEC.
   USE linear, ONLY : SCNRM2, CGBFA, CGEFA
-  INTEGER i, iflag, imax, Impl, info, Iswflg, j, j2, Jstate, k, &
-    Matdim, Miter, Ml, Mu, mw, N, Nde, Nfe, Nje, Nq
-  COMPLEX A(Matdim,*), cfctr, Dfdy(Matdim,*), dy, Fac(*), Save1(*), &
-    Save2(*), Y(*), Yh(N,*), yj, ys, Ywt(*)
-  REAL bl, Bnd, bp, br, dfdymx, diff, El(13,12), facmin, factor, H, scalee, &
-    T, Uround, zmax, zmin
-  INTEGER Ipvt(*)
-  LOGICAL Ier
+  INTEGER :: Impl, info, Iswflg, Jstate, Matdim, Miter, Ml, Mu, N, Nde, Nfe, Nje, Nq
+  INTEGER :: Ipvt(N)
+  REAL :: Bnd, H, T, Uround, El(13,12)
+  COMPLEX :: A(Matdim,N), Dfdy(Matdim,N), Fac(N), Save1(N), Save2(N), Y(N), &
+    Yh(N,Nq+1), Ywt(N)
+  LOGICAL :: Ier
+  INTEGER :: i, iflag, imax, j, j2, k, mw
+  REAL :: bl, bp, br, dfdymx, diff, facmin, factor, scalee, zmax, zmin
+  COMPLEX :: cfctr, dy, yj, ys
   REAL, PARAMETER :: FACMAX = 0.5E0, BU = 0.5E0
   !* FIRST EXECUTABLE STATEMENT  CDPST
   Nje = Nje + 1

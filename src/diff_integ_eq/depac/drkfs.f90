@@ -52,17 +52,19 @@ SUBROUTINE DRKFS(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
   !   910722  Updated AUTHOR section.  (ALS)
   USE service, ONLY : XERMSG, D1MACH
   !
-  INTEGER Idid, Info(15), Init, Ipar(*), Iquit, k, Kop, Ksteps, ktol, &
-    natolp, Neq, nrtolp, Nstifs, Ntstep
-  REAL(8) :: a, Atol(*), big, dt, Dtsign, dy, &
-    ee, eeoet, es, estiff, esttol, et, F1(*), F2(*), F3(*), &
-    F4(*), F5(*), H, hmin, Rer, Rpar(*), Rtol(*), s, T, &
-    tol, Told, Tolfac, Tout, u, U26, ute, Y(*), yavg, Yp(*), Ys(*)
-  LOGICAL hfaild, output, Stiff, Nonstf
+  INTEGER :: Idid, Init, Iquit, Kop, Ksteps, Neq, Nstifs, Ntstep
+  INTEGER :: Info(15), Ipar(:)
+  REAL(8) :: Dtsign, H, Rer, T, Told, Tolfac, Tout, U26
+  REAL(8) :: Atol(:), F1(Neq), F2(Neq), F3(Neq), F4(Neq), F5(Neq), Rpar(:), &
+    Rtol(:), Y(Neq), Yp(Neq), Ys(Neq)
+  LOGICAL :: Stiff, Nonstf
+  EXTERNAL :: DF
+  INTEGER :: k, ktol, natolp, nrtolp
+  REAL(8) :: a, big, dt, dy, ee, eeoet, es, estiff, esttol, et, hmin, s, &
+    tol, u, ute, yavg
+  LOGICAL :: hfaild, output
   CHARACTER(8) :: xern1
   CHARACTER(16) :: xern3, xern4
-  !
-  EXTERNAL :: DF
   !
   !     ..................................................................
   !

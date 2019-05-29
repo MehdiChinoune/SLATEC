@@ -134,12 +134,11 @@ SUBROUTINE DNBCO(Abe,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
-  INTEGER Lda, N, Ml, Mu, Ipvt(*)
-  REAL(8) :: Abe(Lda,*), Z(*)
+  INTEGER :: Lda, N, Ml, Mu, Ipvt(N)
+  REAL(8) :: Abe(Lda,2*Ml+Mu+1), Z(N)
   REAL(8) :: Rcond
   !
-  REAL(8) :: ek, t, wk, wkm
-  REAL(8) :: anorm, s, sm, ynorm
+  REAL(8) :: ek, t, wk, wkm, anorm, s, sm, ynorm
   INTEGER i, info, j, ju, k, kb, kp1, l, ldb, lm, lz, m, ml1, mm, nl, nu
   !* FIRST EXECUTABLE STATEMENT  DNBCO
   ml1 = Ml + 1

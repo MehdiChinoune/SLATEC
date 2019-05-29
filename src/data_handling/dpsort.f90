@@ -81,8 +81,8 @@ SUBROUTINE DPSORT(Dx,N,Iperm,Kflag,Ier)
   !     .. Scalar Arguments ..
   INTEGER Ier, Kflag, N
   !     .. Array Arguments ..
-  REAL(8) :: Dx(*)
-  INTEGER Iperm(*)
+  REAL(8) :: Dx(N)
+  INTEGER :: Iperm(N)
   !     .. Local Scalars ..
   REAL(8) :: r, temp
   INTEGER i, ij, indx, indx0, istrt, j, k, kk, l, lm, lmt, m, nn

@@ -55,9 +55,11 @@ SUBROUTINE COSQI(N,Wsave)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
-  REAL dt, fk, pih, Wsave(*)
-  INTEGER k, N
+
+  INTEGER :: N
+  REAL :: Wsave(3*N+15)
+  INTEGER :: k
+  REAL :: dt, fk, pih
   !* FIRST EXECUTABLE STATEMENT  COSQI
   pih = 2.*ATAN(1.)
   dt = pih/N

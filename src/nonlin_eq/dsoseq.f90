@@ -94,13 +94,15 @@ SUBROUTINE DSOSEQ(FNC,N,S,Rtolx,Atolx,Tolf,Iflag,Mxit,Ncjs,Nsrrc,Nsri,&
   !   900328  Added TYPE section.  (WRB)
   USE service, ONLY : D1MACH, I1MACH
   !
-  INTEGER ic, icr, Iflag, Iprint, Is(*), isj, isv, it, item, itry, &
-    j, jk, js, k, kd, kj, kk, km1, kn, ksv, l, loun, ls, &
-    m, mit, mm, Mxit, N, Nc, Ncjs, np1, Nsri, Nsrrc
-  REAL(8) :: Atolx, B(*), C(Nc), csv, f, Fac(*), fact, fdif, &
-    Fmax, fmin, fmxs, fn1, fn2, FNC, fp, h, hx, &
-    P(*), pmax, re, Rtolx, S(*), sruro, Temp(*), &
-    test, Tolf, uro, X(*), xnorm, Y(*), yj, yn1, &
+  REAL(8), EXTERNAL :: FNC
+  INTEGER :: Iflag, Iprint, Mxit, N, Nc, Ncjs, Nsri, Nsrrc, Is(N)
+  REAL(8) :: Atolx, Fmax, Rtolx, Tolf, C(Nc), B(N), Fac(N), P(N), S(N), Temp(N), &
+    X(N), Y(N)
+  INTEGER :: ic, icr, isj, isv, it, item, itry, j, jk, js, k, kd, kj, kk, km1, &
+    kn, ksv, l, loun, ls, m, mit, mm, np1
+  REAL(8) :: csv, f, fact, fdif, fmin, fmxs, fn1, fn2, fp, h, hx, &
+    pmax, re, sruro, &
+    test, uro, xnorm, yj, yn1, &
     yn2, yn3, ynorm, yns, zero
   !
   !     BEGIN BLOCK PERMITTING ...EXITS TO 430

@@ -43,13 +43,14 @@ SUBROUTINE CDNTL(Eps,F,FA,Hmax,Hold,Impl,Jtask,Matdim,Maxord,Mint,Miter,&
   !   790601  DATE WRITTEN
   !   900329  Initial submission to SLATEC.
   USE linear, ONLY : SCNRM2, CGBSL, CGESL, CGBFA, CGEFA
-  INTEGER i, iflag, Impl, info, Iswflg, Jstate, Jtask, Matdim, &
-    Maxord, Mint, Miter, Ml, Mntold, Mtrold, Mu, N, Nde, Nfe, Nq, Nwait
-  COMPLEX A(Matdim,*), Fac(*), Save1(*), Save2(*), Y(*), Yh(N,*), Ywt(*)
-  REAL El(13,12), Eps, H, Hmax, Hold, oldl0, Rc, Rh, Rmax, &
-    summ, T, Tq(3,12), Trend, Uround
-  INTEGER Ipvt(*)
-  LOGICAL Convrg, Ier
+  INTEGER :: Impl, Iswflg, Jstate, Jtask, Matdim, Maxord, Mint, Miter, Ml, &
+    Mntold, Mtrold, Mu, N, Nde, Nfe, Nq, Nwait
+  REAL :: Eps, H, Hmax, Hold, Rc, Rh, Rmax, T, Trend, Uround, El(13,12), Tq(3,12)
+  COMPLEX :: A(Matdim,N), Fac(N), Save1(N), Save2(N), Y(N), Yh(N,13), Ywt(N)
+  INTEGER :: Ipvt(N)
+  LOGICAL :: Convrg, Ier
+  INTEGER :: i, iflag, info
+  REAL :: oldl0, summ
   REAL, PARAMETER :: RMINIT = 10000.E0
   !* FIRST EXECUTABLE STATEMENT  CDNTL
   Ier = .FALSE.

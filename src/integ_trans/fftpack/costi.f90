@@ -54,9 +54,11 @@ SUBROUTINE COSTI(N,Wsave)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
-  REAL dt, fk, pi, Wsave(*)
-  INTEGER k, kc, N, nm1, np1, ns2
+
+  INTEGER :: N
+  REAL :: Wsave(3*N+15)
+  INTEGER :: k, kc, nm1, np1, ns2
+  REAL :: dt, fk, pi
   !* FIRST EXECUTABLE STATEMENT  COSTI
   IF ( N<=3 ) RETURN
   pi = 4.*ATAN(1.)

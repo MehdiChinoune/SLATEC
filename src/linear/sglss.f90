@@ -125,9 +125,11 @@ SUBROUTINE SGLSS(A,Mda,M,N,B,Mdb,Nb,Rnorm,Work,Lw,Iwork,Liw,Info)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
-  INTEGER Info, key, krank, ksure, Liw, Lw, M, Mda, Mdb, mode, N, Nb, np
-  REAL A(Mda,*), ae(1), B(Mdb,*), re(1), Rnorm(*), Work(*)
-  INTEGER Iwork(*)
+  INTEGER :: Info, Liw, Lw, M, Mda, Mdb, N, Nb
+  INTEGER :: Iwork(M+N)
+  REAL :: A(Mda,MIN(N,M)), B(Mdb,Nb), Rnorm(Nb), Work(2*MIN(N,M))
+  INTEGER :: key, krank, ksure, mode, np
+  REAL :: ae(1), re(1)
   !
   !* FIRST EXECUTABLE STATEMENT  SGLSS
   re = 0.

@@ -56,9 +56,10 @@ SUBROUTINE SVOUT(N,Sx,Ifmt,Idigit)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   USE service, ONLY : I1MACH
-  INTEGER i, Idigit, j, k1, k2, lout, N, ndigit
-  REAL Sx(*)
-  CHARACTER Ifmt*(*)
+  INTEGER :: Idigit, N
+  REAL :: Sx(N)
+  CHARACTER :: Ifmt*(*)
+  INTEGER :: i, j, k1, k2, lout, ndigit
   !
   !     GET THE UNIT NUMBER WHERE OUTPUT WILL BE WRITTEN.
   !* FIRST EXECUTABLE STATEMENT  SVOUT

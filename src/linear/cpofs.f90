@@ -113,8 +113,9 @@ SUBROUTINE CPOFS(A,Lda,N,V,Itask,Ind,Work)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   USE service, ONLY : R1MACH, XERMSG
   !
-  INTEGER Lda, N, Itask, Ind, info
-  COMPLEX A(Lda,*), V(*), Work(*)
+  INTEGER :: Lda, N, Itask, Ind
+  COMPLEX :: A(Lda,N), V(N), Work(N)
+  INTEGER :: info
   REAL rcond
   CHARACTER(8) :: xern1, xern2
   !* FIRST EXECUTABLE STATEMENT  CPOFS

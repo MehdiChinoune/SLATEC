@@ -32,11 +32,12 @@ SUBROUTINE DPJAC(Neq,Y,Yh,Nyh,Ewt,Ftem,Savf,Wm,Iwm,DF,DJAC,Rpar,Ipar)
   USE DDEBD1, ONLY : EL0, H, TN, UROund, IER, MITer, N, NFE, NJE
   USE linear, ONLY : DGBFA, DGEFA
   !
-  INTEGER i, i1, i2, ii, Ipar(*), Iwm(*), j, j1, jj, lenp, mba, mband, meb1, &
-    meband, ml, ml3, mu, Neq, Nyh
-  REAL(8) :: con, di, Ewt(*), fac, Ftem(*), hl0, r, r0, Rpar(*), Savf(*), &
-    srur, Wm(*), Y(Neq), Yh(Nyh,*), yi, yj, yjj
+  INTEGER :: Neq, Nyh
+  INTEGER :: Ipar(:), Iwm(:)
+  REAL(8) :: Ewt(N), Ftem(N), Rpar(:), Savf(N), Wm(:), Y(Neq), Yh(Nyh,N)
   EXTERNAL :: DF, DJAC
+  INTEGER :: i, i1, i2, ii, j, j1, jj, lenp, mba, mband, meb1, meband, ml, ml3, mu
+  REAL(8) :: con, di, fac, hl0, r, r0, srur, yi, yj, yjj
   !     ------------------------------------------------------------------
   !      DPJAC IS CALLED BY DSTOD  TO COMPUTE AND PROCESS THE MATRIX
   !      P = I - H*EL(1)*J, WHERE J IS AN APPROXIMATION TO THE JACOBIAN.
@@ -201,7 +202,7 @@ SUBROUTINE DPJAC(Neq,Y,Yh,Nyh,Ewt,Ftem,Savf,Wm,Iwm,DF,DJAC,Rpar,Ipar)
   END DO
   !              DO LU DECOMPOSITION ON P.
   !              --------------------------------------------
-  CALL DGEFA(Wm(3),N,N,Iwm(21),IER)
+  CALL DGEFA(Wm(3:N**2+2),N,N,Iwm(21:N+20),IER)
   !     .........EXIT
   RETURN
   100  IER = -1
@@ -216,7 +217,7 @@ SUBROUTINE DPJAC(Neq,Y,Yh,Nyh,Ewt,Ftem,Savf,Wm,Iwm,DF,DJAC,Rpar,Ipar)
   END DO
   !        DO LU DECOMPOSITION OF P.
   !        --------------------------------------------
-  CALL DGBFA(Wm(3),meband,N,ml,mu,Iwm(21),IER)
+  CALL DGBFA(Wm(3:meband*N+2),meband,N,ml,mu,Iwm(21:N+20),IER)
   !     ----------------------- END OF SUBROUTINE DPJAC
   !     -----------------------
   RETURN

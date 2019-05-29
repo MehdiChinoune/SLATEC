@@ -92,10 +92,10 @@ SUBROUTINE DQRSLV(N,R,Ldr,Ipvt,Diag,Qtb,X,Sigma,Wa)
   !           (WRB)
   !   900328  Added TYPE section.  (WRB)
 
-  INTEGER N, Ldr
-  INTEGER Ipvt(*)
-  REAL(8) :: R(Ldr,*), Diag(*), Qtb(*), X(*), Sigma(*), Wa(*)
-  INTEGER i, j, jp1, k, kp1, l, nsing
+  INTEGER :: N, Ldr
+  INTEGER :: Ipvt(N)
+  REAL(8) :: R(Ldr,N), Diag(N), Qtb(N), X(N), Sigma(N), Wa(N)
+  INTEGER :: i, j, jp1, k, kp1, l, nsing
   REAL(8) :: coss, cotan, qtbpj, sinn, summ, tann, temp
   REAL(8), PARAMETER :: p5 = 5.0D-1, p25 = 2.5D-1, zero = 0.0D0
   !* FIRST EXECUTABLE STATEMENT  DQRSLV

@@ -732,14 +732,18 @@ SUBROUTINE DDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
   USE service, ONLY : XERMSG, D1MACH
   USE linear, ONLY : DGBSL, DGESL, DGBFA, DGEFA
   EXTERNAL :: F, JACOBN, FA, G, USERS
-  REAL(8) :: ae, big, Eps, Ewt(*), G, glast, gnow, h, Hmax, hsign, hused, re, &
-    sizee, summ, T, tlast, Tout, troot, uround, Work(*), Y(*)
-  INTEGER i, ia, idfdy, Ierflg, Ierror, ifac, iflag, ignow, Impl, imxerr, info, &
-    iroot, isave1, isave2, itroot, Iwork(*), iywt, j, jstate, jtroot, lenchk, &
-    Leniw, Lenw, liwchk, matdim, maxord, Mint, Miter, Ml, Mu, Mxord, Mxstep, N, &
-    Nde, ndecom, npar, Nroot, Nstate, nstepl, Ntask
-  LOGICAL convrg
-  CHARACTER intgr1*8, intgr2*8, rl1*16, rl2*16
+  INTEGER :: Ierflg, Ierror, Impl, Leniw, Lenw, Mint, Miter, Ml, Mu, Mxord, &
+    Mxstep, N, Nde, Nroot, Nstate, Ntask, Iwork(Leniw+N)
+  REAL(8) :: Eps, G, Hmax, T, Tout
+  REAL(8) :: Ewt(N), Work(Lenw+Leniw), Y(N)
+  INTEGER :: i, ia, idfdy, ifac, iflag, ignow, imxerr, info, iroot, isave1, &
+    isave2, itroot, iywt, j, jstate, jtroot, lenchk, liwchk, matdim, maxord, &
+    ndecom, npar, nstepl
+  REAL(8) :: ae, big, glast, gnow, h, hsign, hused, re, sizee, summ, tlast, &
+    troot, uround
+  LOGICAL :: convrg
+  CHARACTER(8) :: intgr1, intgr2
+  CHARACTER(16) :: rl1, rl2
   REAL(8), PARAMETER :: NROUND = 20.D0
   INTEGER, PARAMETER :: IAVGH = 1, IHUSED = 2, IAVGRD = 3, IEL = 4, IH = 160, &
     IHMAX = 161, IHOLD = 162, IHSIGN = 163, IRC = 164, IRMAX = 165, IT = 166, &

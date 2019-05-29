@@ -178,14 +178,14 @@ SUBROUTINE QAWSE(F,A,B,Alfa,Beta,Integr,Epsabs,Epsrel,Limit,Result,Abserr,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   USE service, ONLY : R1MACH
   !
-  REAL A, Abserr, Alfa, Alist(*), area, area1, area12, area2, a1, a2, &
-    B, Beta, Blist(*), b1, b2, centre, Elist(*), epmach, &
-    Epsabs, Epsrel, errbnd, errmax, error1, erro12, error2, &
-    errsum, resas1, resas2, Result, rg(25), rh(25), ri(25), rj(25), Rlist(*), uflow
-  INTEGER Ier, Integr, Iord(*), iroff1, iroff2, k, Last, Limit, &
-    maxerr, nev, Neval, nrmax
-  !
+  INTEGER :: Ier, Integr, Last, Limit, Neval, Iord(Limit)
+  REAL :: A, Abserr, Alfa, B, Beta, Epsabs, Epsrel, Result
+  REAL :: Alist(Limit), Blist(Limit), Elist(Limit), Rlist(Limit)
   REAL, EXTERNAL :: F
+  INTEGER :: iroff1, iroff2, k, maxerr, nev, nrmax
+  REAL :: area, area1, area12, area2, a1, a2, b1, b2, centre, epmach, errbnd, &
+    errmax, error1, erro12, error2, errsum, resas1, resas2, rg(25), rh(25), &
+    ri(25), rj(25), uflow
   !
   !            LIST OF MAJOR VARIABLES
   !            -----------------------

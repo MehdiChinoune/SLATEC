@@ -37,14 +37,14 @@ SUBROUTINE SPOPT(Prgopt,Mrelas,Nvars,Info,Csc,Ibasis,Ropt,Intopt,Lopt)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900328  Added TYPE section.  (WRB)
   USE service, ONLY : XERMSG, R1MACH
-  INTEGER i, iadbig, ictmax, ictopt, idg, Info, iopt, ipagef, &
-    isave, itbrc, itest, j, key, kprint, last, lds, lprg, &
-    Mrelas, mxitlp, n20043
-  INTEGER n20053, n20096, nerr, next, npp, Nvars
-  REAL abig, asmall, costsc, Csc(*), eps, one, Prgopt(*), Ropt(07), &
-    tolls, tune, zero, tolabs
-  INTEGER Ibasis(*), Intopt(08)
-  LOGICAL contin, usrbas, sizeup, savedt, colscp, cstscp, minprb, stpedg, Lopt(8)
+  INTEGER :: Info, Mrelas, Nvars
+  INTEGER :: Ibasis(Nvars+Mrelas), Intopt(08)
+  LOGICAL :: Lopt(8)
+  REAL :: Csc(Nvars), Prgopt(:), Ropt(07)
+  INTEGER :: i, iadbig, ictmax, ictopt, idg, iopt, ipagef, isave, itbrc, itest, j, &
+    key, kprint, last, lds, lprg, mxitlp, n20043, n20053, n20096, nerr, next, npp
+  REAL :: abig, asmall, costsc, eps, one, tolls, tune, zero, tolabs
+  LOGICAL :: contin, usrbas, sizeup, savedt, colscp, cstscp, minprb, stpedg
   !
   !* FIRST EXECUTABLE STATEMENT  SPOPT
   iopt = 1

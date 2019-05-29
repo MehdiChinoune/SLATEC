@@ -67,9 +67,11 @@ SUBROUTINE POLCOF(Xx,N,X,C,D,Work)
   !   891024  Corrected KEYWORD section.  (WRB)
   !   891024  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
-  
-  REAL C(*), D(*), pone, ptwo, Work(*), X(*), Xx
-  INTEGER i, im1, k, km1, km1pi, km2n, km2npi, N, nm1, nmkp1, npkm1
+
+  INTEGER :: N
+  REAL :: C(N), D(N), Work(2*N), X(N), Xx
+  REAL :: pone, ptwo
+  INTEGER :: i, im1, k, km1, km1pi, km2n, km2npi, nm1, nmkp1, npkm1
   !* FIRST EXECUTABLE STATEMENT  POLCOF
   DO k = 1, N
     D(k) = C(k)

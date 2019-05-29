@@ -84,8 +84,8 @@ SUBROUTINE CNBSL(Abe,Lda,N,Ml,Mu,Ipvt,B,Job)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
-  INTEGER Lda, N, Ml, Mu, Ipvt(*), Job
-  COMPLEX Abe(Lda,*), B(*)
+  INTEGER Lda, N, Ml, Mu, Ipvt(N), Job
+  COMPLEX Abe(Lda,2*Ml+Mu+1), B(N)
   !
   COMPLEX t
   INTEGER k, kb, l, lb, ldb, lm, m, mlm, nm1

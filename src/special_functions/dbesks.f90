@@ -38,8 +38,10 @@ SUBROUTINE DBESKS(Xnu,X,Nin,Bk)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   USE service, ONLY : XERMSG, D1MACH
-  INTEGER i, n, Nin
-  REAL(8) :: Xnu, X, Bk(*), expxi
+  INTEGER :: Nin
+  REAL(8) :: Xnu, X, Bk(Nin)
+  INTEGER :: i, n
+  REAL(8) :: expxi
   REAL(8) :: xmax = 0.D0
   !* FIRST EXECUTABLE STATEMENT  DBESKS
   IF ( xmax==0.D0 ) xmax = -LOG(D1MACH(1))

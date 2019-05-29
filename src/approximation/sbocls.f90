@@ -563,15 +563,18 @@ SUBROUTINE SBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,&
   !     /REAL            / TO /DOUBLE PRECISION/.
   ! ++
   USE service, ONLY : XERMSG, R1MACH
-  INTEGER i, icase, iiw, inrows, ip, irw, iscale, j, jp, lbou, lboum, lds, lenx, &
+  INTEGER :: Mcon, Mdw, Mode, Mrows, Ncols
+  REAL :: Rnorm, Rnormc
+  INTEGER :: Ind(Ncols+Mcon), Iw(2*(Ncols+Mcon)), Iopt(*)
+  REAL :: W(Mdw,Ncols+Mcon+1), Bl(Ncols+Mcon), Bu(Ncols+Mcon), X(2*(Ncols+Mcon)+7), &
+    Rw(6*Ncols+5*Mcon)
+  INTEGER :: i, icase, iiw, inrows, ip, irw, iscale, j, jp, lbou, lboum, lds, lenx, &
     liopt, liw, llb, lliw, llrw, llx, lmdw, lndw, locacc, locdim, lopt, lp, lrw, &
-    m, Mcon, Mdw, mdwl, mnew, Mode, modec, mopt, mout, Mrows, Ncols, nerr
-  REAL W(Mdw,*), Bl(*), Bu(*), X(*), Rw(*)
-  REAL anorm, cnorm, one, Rnorm, Rnormc, srelpr, t, t1, t2, wt, zero
-  !     THIS VARIABLE REMAINS TYPED REAL.
-  INTEGER Ind(*), Iopt(*), Iw(*), jopt(05)
-  LOGICAL filter, pretri
+    m, mdwl, mnew, modec, mopt, mout, nerr
+  REAL :: anorm, cnorm, one, srelpr, t, t1, t2, wt, zero
+  LOGICAL :: filter, pretri
   CHARACTER(8) :: xern1, xern2
+  INTEGER :: jopt(05)
   CHARACTER(16) :: xern3, xern4
   LOGICAL, SAVE :: accum, checkl
   INTEGER :: igo = 0

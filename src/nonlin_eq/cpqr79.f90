@@ -60,10 +60,11 @@ SUBROUTINE CPQR79(Ndeg,Coeff,Root,Ierr,Work)
   !   911010  Code reworked and simplified.  (RWC and WRB)
   USE service, ONLY : XERMSG
   USE linear, ONLY : COMQR
-  INTEGER km1
-  COMPLEX Coeff(*), Root(*), scalee, c
-  REAL Work(*)
-  INTEGER Ndeg, Ierr, k, khr, khi, kwr, kwi, kad, kj
+  INTEGER :: Ndeg, Ierr
+  REAL :: Work(2*Ndeg*(Ndeg+1))
+  COMPLEX :: Coeff(Ndeg+1), Root(Ndeg)
+  INTEGER :: km1, k, khr, khi, kwr, kwi, kad, kj
+  COMPLEX :: scalee, c
   !* FIRST EXECUTABLE STATEMENT  CPQR79
   Ierr = 0
   IF ( ABS(Coeff(1))==0.0 ) THEN

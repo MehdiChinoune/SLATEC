@@ -115,11 +115,12 @@ SUBROUTINE DPSIFN(X,N,Kode,M,Ans,Nz,Ierr)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   USE service, ONLY : D1MACH, I1MACH
-  INTEGER i, Ierr, j, k, Kode, M, mm, mx, N, nn, np, nx, Nz, fn
-  REAL(8) :: Ans(*), arg, den, elim, eps, fln, fx, rln, &
-    rxsq, r1m4, r1m5, s, slope, t, ta, tk, tol, &
-    tols, trm(22), trmr(100), tss, tst, tt, t1, t2, wdtol, &
-    X, xdmln, xdmy, xinc, xln, xm, xmin, xq, yint
+  INTEGER :: Ierr, Kode, M, N, Nz
+  REAL(8) :: X, Ans(M)
+  INTEGER :: i, j, k, mm, mx, nn, np, nx, fn
+  REAL(8) :: arg, den, elim, eps, fln, fx, rln, rxsq, r1m4, r1m5, s, slope, t, ta, &
+    tk, tol, tols, trm(22), trmr(100), tss, tst, tt, t1, t2, wdtol, xdmln, xdmy, &
+    xinc, xln, xm, xmin, xq, yint
   INTEGER, PARAMETER :: nmax = 100
   !-----------------------------------------------------------------------
   !             BERNOULLI NUMBERS

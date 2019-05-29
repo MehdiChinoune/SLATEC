@@ -46,8 +46,9 @@ SUBROUTINE BNSLV(W,Nroww,Nrow,Nbandl,Nbandu,B)
   !   900328  Added TYPE section.  (WRB)
 
   !
-  INTEGER Nbandl, Nbandu, Nrow, Nroww, i, j, jmax, middle, nrowm1
-  REAL W(Nroww,*), B(*)
+  INTEGER :: Nbandl, Nbandu, Nrow, Nroww
+  REAL :: W(Nroww,Nrow), B(Nrow)
+  INTEGER :: i, j, jmax, middle, nrowm1
   !* FIRST EXECUTABLE STATEMENT  BNSLV
   middle = Nbandu + 1
   IF ( Nrow==1 ) THEN

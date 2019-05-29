@@ -60,10 +60,10 @@ SUBROUTINE PNNZRS(I,Xval,Iplace,Sx,Ix,Ircx)
   !   900328  Added TYPE section.  (WRB)
   !   910403  Updated AUTHOR and DESCRIPTION sections.  (WRB)
   USE service, ONLY : XERMSG
-  INTEGER I, i1, idiff, iend, ii, il, ilast, iopt, ipl, Iplace, &
-    ipploc, Ircx, istart, Ix(*), j, l, ll, lmx, lpg
-  INTEGER n20046, nerr, np
-  REAL Xval, Sx(*)
+  INTEGER :: I, Iplace, Ircx, Ix(:)
+  REAL :: Xval, Sx(:)
+  INTEGER :: i1, idiff, iend, ii, il, ilast, iopt, ipl, ipploc, istart,  j, l, &
+    ll, lmx, lpg, n20046, nerr, np
   REAL, PARAMETER :: zero = 0.E0
   !* FIRST EXECUTABLE STATEMENT  PNNZRS
   iopt = 1

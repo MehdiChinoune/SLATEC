@@ -61,13 +61,13 @@ SUBROUTINE LSI(W,Mdw,Ma,Mg,N,Prgopt,X,Rnorm,Mode,Ws,Ip)
   !   920422  Changed CALL to HFTI to include variable MA.  (WRB)
   USE service, ONLY : R1MACH
   USE linear, ONLY : H12, HFTI, SAXPY, SSWAP
-  INTEGER Ip(*), Ma, Mdw, Mg, Mode, N
-  REAL Prgopt(*), Rnorm, W(Mdw,*), Ws(*), X(*)
+  INTEGER :: Ma, Mdw, Mg, Mode, N, Ip(Mg+2*N+1)
+  REAL :: Rnorm, Prgopt(:), W(Mdw,N+1), Ws(*), X(N)
   !
-  REAL anorm, fac, gam, rb,tau, tol, xnorm, temp(1)
-  INTEGER i, j, k, key, krank, krm1, krp1, l, last, link, m, map1, mdlpdp, minman, &
+  REAL :: anorm, fac, gam, rb,tau, tol, xnorm, temp(1)
+  INTEGER :: i, j, k, key, krank, krm1, krp1, l, last, link, m, map1, mdlpdp, minman, &
     n1, n2, n3, next, np1
-  LOGICAL cov, sclcov
+  LOGICAL :: cov, sclcov
   !
   REAL, SAVE :: srelpr
   LOGICAL :: first = .TRUE.
@@ -292,7 +292,7 @@ SUBROUTINE LSI(W,Mdw,Ma,Mg,N,Prgopt,X,Rnorm,Mode,Ws,Ip)
               !
               l = n3 + i
               gam = 0.5E0*rb*DOT_PRODUCT(Ws(l-1:l+N-i-1),Ws(i:N))
-              CALL SAXPY(N-i+1,gam,Ws(l-1),1,Ws(i),1)
+              CALL SAXPY(N-i+1,gam,Ws(l-1:l+N-i-1),1,Ws(i:N),1)
               DO j = i, N
                 DO l = 1, i - 1
                   W(j,l) = W(j,l) + Ws(n3+j-1)*Ws(l)

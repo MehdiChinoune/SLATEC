@@ -96,11 +96,11 @@ SUBROUTINE SDASTP(X,Y,Yprime,Neq,RES,JAC,H,Wt,Jstart,Idid,Rpar,Ipar,Phi,&
   !           cosmetic changes to prologue.  (FNF)
 
   !
-  INTEGER Neq, Jstart, Idid, Ipar(*), Iwm(*), Iphase, Jcalc, K, &
-    Kold, Ns, Nonneg, Ntemp
-  REAL X, Y(*), Yprime(*), H, Wt(*), Rpar(*), Phi(Neq,*), Delta(*), &
-    E(*), Wm(*), Alpha(*), Beta(*), Gama(*), Psi(*), Sigma(*), &
-    Cj, Cjold, Hold, S, Hmin, Uround
+  INTEGER :: Neq, Jstart, Idid, Iphase, Jcalc, K, Kold, Ns, Nonneg, Ntemp
+  INTEGER :: Ipar(:), Iwm(:)
+  REAL :: X, H, Cj, Cjold, Hold, S, Hmin, Uround
+  REAL :: Y(Neq), Yprime(Neq), Wt(:), Rpar(:), Phi(Neq,*), Delta(:), E(:), Wm(:), &
+    Alpha(:), Beta(:), Gama(:), Psi(:), Sigma(:)
   EXTERNAL :: RES, JAC
   !
   INTEGER i, ier, ires, j, j1, kdiff, km1, knew, kp1, kp2, m, ncf, nef, nsf, nsp1

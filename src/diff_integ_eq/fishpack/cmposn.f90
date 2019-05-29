@@ -33,12 +33,14 @@ SUBROUTINE CMPOSN(M,N,Istag,Mixbnd,A,Bb,C,Q,Idimq,B,B2,B3,W,W2,W3,D,Tcos,P)
   !   920130  Modified to use merge routine C1MERG rather than deleted
   !           routine CMPMRG.  (WRB)
   USE data_handling, ONLY : C1MERG
-  REAL fden, fistag, fnum
-  INTEGER i, i1, i2, i2r, i2rby2, Idimq, ii, ip, ipstor, Istag, j, jm1, jm2, jm3, &
-    jp1, jp2, jp3, jr, jr2, jstart, jstep, jstop, k(4), kr, lr, M, Mixbnd, mr, N, &
-    nlast, nlastp, nr, nrod, nrodpr
-  COMPLEX A(*), Bb(*), C(*), Q(Idimq,*), B(*), B2(*), B3(*), W(*), W2(*), &
-    W3(*), D(*), Tcos(*), P(*), fi, t
+  INTEGER :: Idimq, Istag, M, Mixbnd, N
+  COMPLEX :: A(M), Bb(M), C(M), Q(Idimq,N), B(M), B2(M), B3(M), W(M), W2(M), &
+    W3(M), D(M), Tcos(4*N), P(:)
+  INTEGER :: i, i1, i2, i2r, i2rby2, ii, ip, ipstor, j, jm1, jm2, jm3, jp1, jp2, &
+    jp3, jr, jr2, jstart, jstep, jstop, k(4), kr, lr, mr, nlast, nlastp, nr, &
+    nrod, nrodpr
+  REAL :: fden, fistag, fnum
+  COMPLEX :: fi, t
   !* FIRST EXECUTABLE STATEMENT  CMPOSN
   fistag = 3 - Istag
   fnum = 1./Istag

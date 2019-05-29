@@ -19,8 +19,10 @@ SUBROUTINE TRIDQ(Mr,A,B,C,Y,D)
   !   900308  Renamed routine from TRID to TRIDQ.  (WRB)
   !   900402  Added TYPE section.  (WRB)
 
-  REAL A(*), B(*), C(*), D(*), Y(*), z
-  INTEGER i, ip, m, mm1, Mr
+  INTEGER :: Mr
+  REAL :: A(Mr), B(Mr), C(Mr), D(Mr), Y(Mr)
+  INTEGER :: i, ip, m, mm1
+  REAL :: z
   !* FIRST EXECUTABLE STATEMENT  TRIDQ
   m = Mr
   mm1 = m - 1

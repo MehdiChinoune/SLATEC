@@ -348,12 +348,13 @@ SUBROUTINE CDRIV2(N,T,Y,F,Tout,Mstate,Nroot,Eps,Ewt,Mint,Work,Lenw,Iwork,&
   !   900329  Initial submission to SLATEC.
   USE service, ONLY : XERMSG
   EXTERNAL :: F, G
-  COMPLEX Work(*), Y(*)
-  REAL Eps, Ewt, ewtcom(1), G, hmax, T, Tout
-  INTEGER Iwork(*)
-  INTEGER Ierflg, ierror, Leniw, Lenw, Mint, miter, ml, Mstate, mu, mxord, N, &
-    nde, Nroot, nstate, ntask
-  CHARACTER intgr1*8
+  INTEGER :: Ierflg, Leniw, Lenw, Mint, Mstate, N, Nroot
+  INTEGER :: Iwork(Leniw+N)
+  REAL :: Eps, Ewt, G, T, Tout
+  COMPLEX :: Work(Lenw), Y(N+1)
+  INTEGER :: ierror, miter, ml, mu, mxord, nde, nstate, ntask
+  REAL :: ewtcom(1), hmax
+  CHARACTER(8) :: intgr1
   INTEGER, PARAMETER :: IMPL = 0, MXSTEP = 1000
   !* FIRST EXECUTABLE STATEMENT  CDRIV2
   IF ( ABS(Mstate)==9 ) THEN
