@@ -150,7 +150,7 @@ REAL FUNCTION GAMLN(Z,Ierr)
       END DO
     END IF
     IF ( zinc==0.0E0 ) THEN
-      tlg = ALOG(Z)
+      tlg = LOG(Z)
       GAMLN = Z*(tlg-1.0E0) + 0.5E0*(con-tlg) + s
       RETURN
     END IF
@@ -160,7 +160,7 @@ REAL FUNCTION GAMLN(Z,Ierr)
   DO i = 1, nz
     zp = zp*(Z+(i-1))
   END DO
-  tlg = ALOG(zdmy)
-  GAMLN = zdmy*(tlg-1.0E0) - ALOG(zp) + 0.5E0*(con-tlg) + s
+  tlg = LOG(zdmy)
+  GAMLN = zdmy*(tlg-1.0E0) - LOG(zp) + 0.5E0*(con-tlg) + s
   RETURN
 END FUNCTION GAMLN

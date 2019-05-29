@@ -562,7 +562,7 @@ CONTAINS
       CALL CFFTF(n,cx,w)
       dcfftf = 0.0
       DO i = 1, n
-        dcfftf = MAX(dcfftf,CABS(cx(i)-cy(i)))
+        dcfftf = MAX(dcfftf,ABS(cx(i)-cy(i)))
         cx(i) = cx(i)/n
       END DO
       dcfftf = dcfftf/n
@@ -586,7 +586,7 @@ CONTAINS
       CALL CFFTB(n,cx,w)
       dcfftb = 0.0
       DO i = 1, n
-        dcfftb = MAX(dcfftb,CABS(cx(i)-cy(i)))
+        dcfftb = MAX(dcfftb,ABS(cx(i)-cy(i)))
         cx(i) = cy(i)
       END DO
       IF ( dcfftb<=errmax ) THEN
@@ -603,7 +603,7 @@ CONTAINS
       CALL CFFTB(n,cx,w)
       dcfb = 0.0
       DO i = 1, n
-        dcfb = MAX(dcfb,CABS(cf*cx(i)-cy(i)))
+        dcfb = MAX(dcfb,ABS(cf*cx(i)-cy(i)))
       END DO
       IF ( dcfb<=errmax ) THEN
         IF ( Kprint>=3 ) WRITE (Lun,99039)

@@ -100,14 +100,14 @@ SUBROUTINE CUNIK(Zr,Fnu,Ikflg,Ipmtr,Tol,Init,Phi,Zeta1,Zeta2,Summ,Cwrk)
     IF ( ABS(tstr)>ac.OR.ABS(tsti)>ac ) THEN
       t = Zr*crfn
       s = cone + t*t
-      sr = CSQRT(s)
+      sr = SQRT(s)
       cfn = CMPLX(Fnu,0.0E0)
       zn = (cone+sr)/t
-      Zeta1 = cfn*CLOG(zn)
+      Zeta1 = cfn*LOG(zn)
       Zeta2 = cfn*sr
       t = cone/sr
       sr = t*crfn
-      Cwrk(16) = CSQRT(sr)
+      Cwrk(16) = SQRT(sr)
       Phi = Cwrk(16)*con(Ikflg)
       IF ( Ipmtr/=0 ) RETURN
       t2 = cone/s
@@ -132,7 +132,7 @@ SUBROUTINE CUNIK(Zr,Fnu,Ikflg,Ipmtr,Tol,Init,Phi,Zeta1,Zeta2,Summ,Cwrk)
       k = 15
       20  Init = k
     ELSE
-      ac = 2.0E0*ABS(ALOG(test)) + Fnu
+      ac = 2.0E0*ABS(LOG(test)) + Fnu
       Zeta1 = CMPLX(ac,0.0E0)
       Zeta2 = CMPLX(Fnu,0.0E0)
       Phi = cone

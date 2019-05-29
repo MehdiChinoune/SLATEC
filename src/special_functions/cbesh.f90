@@ -257,7 +257,7 @@ SUBROUTINE CBESH(Z,Fnu,Kode,M,N,Cy,Nz,Ierr)
           END IF
         ELSEIF ( az<=tol ) THEN
           arg = 0.5E0*az
-          aln = -fn*ALOG(arg)
+          aln = -fn*LOG(arg)
           IF ( aln>elim ) GOTO 100
         END IF
       END IF

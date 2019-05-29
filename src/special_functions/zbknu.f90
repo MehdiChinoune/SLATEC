@@ -260,7 +260,7 @@ SUBROUTINE ZBKNU(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol,Elim,Alim)
   t1 = MIN(t1,60.0D0)
   t2 = tth*t1 - 6.0D0
   IF ( Zr/=0.0D0 ) THEN
-    t1 = DATAN(Zi/Zr)
+    t1 = ATAN(Zi/Zr)
     t1 = ABS(t1)
   ELSE
     t1 = hpi

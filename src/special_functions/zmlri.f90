@@ -195,7 +195,7 @@ SUBROUTINE ZMLRI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol)
   ptr = p1r - ap
   pti = p1i
   !-----------------------------------------------------------------------
-  !     THE DIVISION CEXP(PT)/(SUM+P2) IS ALTERED TO AVOID OVERFLOW
+  !     THE DIVISION EXP(PT)/(SUM+P2) IS ALTERED TO AVOID OVERFLOW
   !     IN THE DENOMINATOR BY SQUARING LARGE QUANTITIES
   !-----------------------------------------------------------------------
   p2r = p2r + sumr

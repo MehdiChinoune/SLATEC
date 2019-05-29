@@ -182,7 +182,7 @@ SUBROUTINE CAIRY(Z,Id,Kode,Ai,Nz,Ierr)
     aa = aa*2.303E0
     alim = elim + MAX(-aa,-41.45E0)
     rl = 1.2E0*dig + 3.0E0
-    alaz = ALOG(az)
+    alaz = LOG(az)
     !-----------------------------------------------------------------------
     !     TEST FOR RANGE
     !-----------------------------------------------------------------------
@@ -197,7 +197,7 @@ SUBROUTINE CAIRY(Z,Id,Kode,Ai,Nz,Ierr)
     ELSE
       aa = SQRT(aa)
       IF ( az>aa ) Ierr = 3
-      csq = CSQRT(Z)
+      csq = SQRT(Z)
       zta = Z*csq*CMPLX(tth,0.0E0)
       !-----------------------------------------------------------------------
       !     RE(ZTA).LE.0 WHEN RE(Z).LT.0, ESPECIALLY WHEN IM(Z) IS SMALL
@@ -339,14 +339,14 @@ SUBROUTINE CAIRY(Z,Id,Kode,Ai,Nz,Ierr)
         Ai = -s2*CMPLX(c2,0.0E0)
         IF ( az>tol ) Ai = Ai + Z*Z*s1*CMPLX(c1/(1.0E0+fid),0.0E0)
         IF ( Kode==1 ) RETURN
-        zta = Z*CSQRT(Z)*CMPLX(tth,0.0E0)
-        Ai = Ai*CEXP(zta)
+        zta = Z*SQRT(Z)*CMPLX(tth,0.0E0)
+        Ai = Ai*EXP(zta)
         RETURN
       ELSE
         Ai = s1*CMPLX(c1,0.0E0) - Z*s2*CMPLX(c2,0.0E0)
         IF ( Kode==1 ) RETURN
-        zta = Z*CSQRT(Z)*CMPLX(tth,0.0E0)
-        Ai = Ai*CEXP(zta)
+        zta = Z*SQRT(Z)*CMPLX(tth,0.0E0)
+        Ai = Ai*EXP(zta)
         RETURN
       END IF
     END IF

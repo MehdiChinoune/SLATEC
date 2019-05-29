@@ -195,7 +195,7 @@ SUBROUTINE CBIRY(Z,Id,Kode,Bi,Ierr)
     ELSE
       aa = SQRT(aa)
       IF ( az>aa ) Ierr = 3
-      csq = CSQRT(Z)
+      csq = SQRT(Z)
       zta = Z*csq*CMPLX(tth,0.0E0)
       !-----------------------------------------------------------------------
       !     RE(ZTA).LE.0 WHEN RE(Z).LT.0, ESPECIALLY WHEN IM(Z) IS SMALL
@@ -217,7 +217,7 @@ SUBROUTINE CBIRY(Z,Id,Kode,Bi,Ierr)
         !-----------------------------------------------------------------------
         bb = ABS(aa)
         IF ( bb>=alim ) THEN
-          bb = bb + 0.25E0*ALOG(az)
+          bb = bb + 0.25E0*LOG(az)
           sfac = tol
           IF ( bb>elim ) GOTO 50
         END IF
@@ -310,7 +310,7 @@ SUBROUTINE CBIRY(Z,Id,Kode,Bi,Ierr)
         Bi = s2*CMPLX(c2,0.0E0)
         IF ( az>tol ) Bi = Bi + Z*Z*s1*CMPLX(c1/(1.0E0+fid),0.0E0)
         IF ( Kode==1 ) RETURN
-        zta = Z*CSQRT(Z)*CMPLX(tth,0.0E0)
+        zta = Z*SQRT(Z)*CMPLX(tth,0.0E0)
         aa = REAL(zta)
         aa = -ABS(aa)
         Bi = Bi*CMPLX(EXP(aa),0.0E0)
@@ -318,7 +318,7 @@ SUBROUTINE CBIRY(Z,Id,Kode,Bi,Ierr)
       ELSE
         Bi = s1*CMPLX(c1,0.0E0) + Z*s2*CMPLX(c2,0.0E0)
         IF ( Kode==1 ) RETURN
-        zta = Z*CSQRT(Z)*CMPLX(tth,0.0E0)
+        zta = Z*SQRT(Z)*CMPLX(tth,0.0E0)
         aa = REAL(zta)
         aa = -ABS(aa)
         Bi = Bi*CMPLX(EXP(aa),0.0E0)

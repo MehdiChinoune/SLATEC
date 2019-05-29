@@ -244,7 +244,7 @@ SUBROUTINE ZUNK1(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Tol,Elim,Alim)
   !-----------------------------------------------------------------------
   Nz = 0
   fmr = Mr
-  sgn = -DSIGN(pi,fmr)
+  sgn = -SIGN(pi,fmr)
   !-----------------------------------------------------------------------
   !     CSPN AND CSGN ARE COEFF OF K AND I FUNCTIONS RESP.
   !-----------------------------------------------------------------------

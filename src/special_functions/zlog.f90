@@ -12,7 +12,7 @@ SUBROUTINE ZLOG(Ar,Ai,Br,Bi,Ierr)
   !***
   ! **Description:**
   !
-  !     DOUBLE PRECISION COMPLEX LOGARITHM B=CLOG(A)
+  !     DOUBLE PRECISION COMPLEX LOGARITHM B=LOG(A)
   !     IERR=0,NORMAL RETURN      IERR=1, Z=CMPLX(0.0,0.0)
   !***
   ! **See also:**  ZAIRY, ZBESH, ZBESI, ZBESJ, ZBESK, ZBESY, ZBIRY
@@ -50,7 +50,7 @@ SUBROUTINE ZLOG(Ar,Ai,Br,Bi,Ierr)
       RETURN
     END IF
   ELSE
-    dtheta = DATAN(Ai/Ar)
+    dtheta = ATAN(Ai/Ar)
     IF ( dtheta<=0.0D+0 ) THEN
       IF ( Ar<0.0D+0 ) dtheta = dtheta + dpi
     ELSE

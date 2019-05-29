@@ -31,7 +31,7 @@ SUBROUTINE ZUNHJ(Zr,Zi,Fnu,Ipmtr,Tol,Phir,Phii,Argr,Argi,Zeta1r,Zeta1i,&
   !
   !               (2/3)*FNU*ZETA**1.5 = ZETA1-ZETA2,
   !
-  !         ZETA1=0.5*FNU*CLOG((1+W)/(1-W)), ZETA2=FNU*W FOR SCALING
+  !         ZETA1=0.5*FNU*LOG((1+W)/(1-W)), ZETA2=FNU*W FOR SCALING
   !         PURPOSES IN AIRY FUNCTIONS FROM CAIRY OR CBIRY.
   !
   !         MCONJ=SIGN OF AIMAG(Z), BUT IS AMBIGUOUS WHEN Z IS REAL AND
@@ -298,7 +298,7 @@ SUBROUTINE ZUNHJ(Zr,Zi,Fnu,Ipmtr,Tol,Phir,Phii,Argr,Argi,Zeta1r,Zeta1i,&
       IF ( zthr<0.0D0.OR.zthi>=0.0D0 ) THEN
         ang = hpi
         IF ( zthr/=0.0D0 ) THEN
-          ang = DATAN(zthi/zthr)
+          ang = ATAN(zthi/zthr)
           IF ( zthr<0.0D0 ) ang = ang + gpi
         END IF
       END IF

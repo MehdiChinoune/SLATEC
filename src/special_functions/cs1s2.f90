@@ -41,13 +41,13 @@ SUBROUTINE CS1S2(Zr,S1,S2,Nz,Ascle,Alim,Iuf)
   IF ( aa/=0.0E0.OR.aln/=0.0E0 ) THEN
     IF ( as1/=0.0E0 ) THEN
       xx = REAL(Zr)
-      aln = -xx - xx + ALOG(as1)
+      aln = -xx - xx + LOG(as1)
       s1d = S1
       S1 = czero
       as1 = 0.0E0
       IF ( aln>=(-Alim) ) THEN
-        c1 = CLOG(s1d) - Zr - Zr
-        S1 = CEXP(c1)
+        c1 = LOG(s1d) - Zr - Zr
+        S1 = EXP(c1)
         as1 = ABS(S1)
         Iuf = Iuf + 1
       END IF

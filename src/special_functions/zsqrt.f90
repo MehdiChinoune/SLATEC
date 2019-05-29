@@ -12,7 +12,7 @@ SUBROUTINE ZSQRT(Ar,Ai,Br,Bi)
   !***
   ! **Description:**
   !
-  !     DOUBLE PRECISION COMPLEX SQUARE ROOT, B=CSQRT(A)
+  !     DOUBLE PRECISION COMPLEX SQUARE ROOT, B=SQRT(A)
   !
   !***
   ! **See also:**  ZAIRY, ZBESH, ZBESI, ZBESJ, ZBESK, ZBESY, ZBIRY
@@ -54,7 +54,7 @@ SUBROUTINE ZSQRT(Ar,Ai,Br,Bi)
       RETURN
     END IF
   ELSE
-    dtheta = DATAN(Ai/Ar)
+    dtheta = ATAN(Ai/Ar)
     IF ( dtheta<=0.0D+0 ) THEN
       IF ( Ar<0.0D+0 ) dtheta = dtheta + dpi
     ELSE

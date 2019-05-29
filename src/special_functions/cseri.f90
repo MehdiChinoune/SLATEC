@@ -52,7 +52,7 @@ SUBROUTINE CSERI(Z,Fnu,Kode,N,Y,Nz,Tol,Elim,Alim)
     IF ( az>rtr1 ) cz = hz*hz
     acz = ABS(cz)
     nn = N
-    ck = CLOG(hz)
+    ck = LOG(hz)
   END IF
   100  dfnu = Fnu + (nn-1)
   fnup = dfnu + 1.0E0

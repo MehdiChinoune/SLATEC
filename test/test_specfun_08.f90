@@ -1003,7 +1003,7 @@ CONTAINS
                   ab = fnu + i - 1
                   aa = MAX(2.0E0,ab)
                   zt = w(i)
-                  IF ( CABS(zt)>1.0E0 ) THEN
+                  IF ( ABS(zt)>1.0E0 ) THEN
                     zsc = CMPLX(tol,0.0E0)
                   ELSE
                     zsc = zz
@@ -1011,16 +1011,16 @@ CONTAINS
                   END IF
                   cw = w(i)*zsc
                   cy = y(i)*zsc
-                  er = CABS(cy-cw)
-                  aw = CABS(cw)
+                  er = ABS(cy-cw)
+                  aw = ABS(cw)
                   IF ( aw==0.0E0 ) THEN
-                    er = CABS(y(i))
+                    er = ABS(y(i))
                   ELSEIF ( xx/=0.0E0 ) THEN
                     er = er/aw
                   ELSEIF ( ABS(yy)<aa ) THEN
                     er = er/aw
                   ELSE
-                    er = CABS(w(i)-y(i))
+                    er = ABS(w(i)-y(i))
                   END IF
                   aer(i) = er
                   IF ( er>=ertol ) mflg = 1
@@ -1512,8 +1512,8 @@ CONTAINS
                   ab = fnu + i - 1
                   aa = MAX(2.0E0,ab)
                   cw = (w(i)+y(i))*chalf
-                  av = CABS(v(i))
-                  er = CABS(cw-v(i))
+                  av = ABS(v(i))
+                  er = ABS(cw-v(i))
                   IF ( av/=0.0E0 ) THEN
                     IF ( yy==0.0E0 ) THEN
                       IF ( ABS(xx)<aa ) er = er/av
@@ -2270,8 +2270,8 @@ CONTAINS
                         ab = fnu + i - 1
                         aa = MAX(0.5E0,ab)
                         cw = w(i) - y(i)
-                        av = CABS(v(i))
-                        er = CABS(cw-v(i))
+                        av = ABS(v(i))
+                        er = ABS(cw-v(i))
                         IF ( av/=0.0E0 ) THEN
                           IF ( yn/=0.0E0 ) THEN
                             er = er/av

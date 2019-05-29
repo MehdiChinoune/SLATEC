@@ -54,7 +54,7 @@ SUBROUTINE ZACON(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Rl,Fnul,Tol,Elim,Alim)
       s1r = cyr(1)
       s1i = cyi(1)
       fmr = Mr
-      sgn = -DSIGN(pi,fmr)
+      sgn = -SIGN(pi,fmr)
       csgnr = zeror
       csgni = sgn
       IF ( Kode/=1 ) THEN

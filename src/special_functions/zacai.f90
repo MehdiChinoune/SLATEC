@@ -72,7 +72,7 @@ SUBROUTINE ZACAI(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Rl,Tol,Elim,Alim)
   CALL ZBKNU(znr,zni,Fnu,Kode,1,cyr,cyi,nw,Tol,Elim,Alim)
   IF ( nw==0 ) THEN
     fmr = Mr
-    sgn = -DSIGN(pi,fmr)
+    sgn = -SIGN(pi,fmr)
     csgnr = 0.0D0
     csgni = sgn
     IF ( Kode/=1 ) THEN

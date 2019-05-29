@@ -82,7 +82,7 @@ SUBROUTINE CUNK1(Z,Fnu,Kode,Mr,N,Y,Nz,Tol,Elim,Alim)
         !     REFINE  TEST AND SCALE
         !-----------------------------------------------------------------------
         aphi = ABS(phi(j))
-        rs1 = rs1 + ALOG(aphi)
+        rs1 = rs1 + LOG(aphi)
         IF ( ABS(rs1)>Elim ) GOTO 50
         IF ( kdflg==1 ) kflag = 1
         IF ( rs1>=0.0E0 ) THEN
@@ -151,7 +151,7 @@ SUBROUTINE CUNK1(Z,Fnu,Kode,Mr,N,Y,Nz,Tol,Elim,Alim)
     !     REFINE ESTIMATE AND TEST
     !-----------------------------------------------------------------------
     aphi = ABS(phid)
-    rs1 = rs1 + ALOG(aphi)
+    rs1 = rs1 + LOG(aphi)
     IF ( ABS(rs1)<Elim ) GOTO 200
   END IF
   IF ( rs1>0.0E0 ) GOTO 600
@@ -260,7 +260,7 @@ SUBROUTINE CUNK1(Z,Fnu,Kode,Mr,N,Y,Nz,Tol,Elim,Alim)
       !     REFINE  TEST AND SCALE
       !-----------------------------------------------------------------------
       aphi = ABS(phid)
-      rs1 = rs1 + ALOG(aphi)
+      rs1 = rs1 + LOG(aphi)
       IF ( ABS(rs1)>Elim ) GOTO 450
       IF ( kdflg==1 ) iflag = 1
       IF ( rs1>=0.0E0 ) THEN

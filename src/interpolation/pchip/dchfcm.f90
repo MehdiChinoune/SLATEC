@@ -111,7 +111,7 @@ INTEGER FUNCTION DCHFCM(D1,D2,Delta)
   !
   IF ( Delta/=zero ) THEN
     !        DATA IS NOT CONSTANT -- PICK UP SIGN.
-    itrue = INT( DSIGN(one,Delta) )
+    itrue = INT( SIGN(one,Delta) )
     a = D1/Delta
     b = D2/Delta
     IF ( (a<zero).OR.(b<zero) ) THEN

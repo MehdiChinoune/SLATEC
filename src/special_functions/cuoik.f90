@@ -96,12 +96,12 @@ SUBROUTINE CUOIK(Z,Fnu,Kode,Ikflg,N,Y,Nuf,Tol,Elim,Alim)
       !-----------------------------------------------------------------------
       IF ( rcz>=(-Elim) ) THEN
         IF ( rcz>(-Alim) ) GOTO 50
-        rcz = rcz + ALOG(aphi)
-        IF ( iform==2 ) rcz = rcz - 0.25E0*ALOG(aarg) - aic
+        rcz = rcz + LOG(aphi)
+        IF ( iform==2 ) rcz = rcz - 0.25E0*LOG(aarg) - aic
         IF ( rcz>(-Elim) ) THEN
           ascle = 1.0E+3*R1MACH(1)/Tol
-          cz = cz + CLOG(phi)
-          IF ( iform/=1 ) cz = cz - CMPLX(0.25E0,0.0E0)*CLOG(arg)- CMPLX(aic,0.0E0)
+          cz = cz + LOG(phi)
+          IF ( iform/=1 ) cz = cz - CMPLX(0.25E0,0.0E0)*LOG(arg)- CMPLX(aic,0.0E0)
           ax = EXP(rcz)/Tol
           ay = AIMAG(cz)
           cz = CMPLX(ax,0.0E0)*CMPLX(COS(ay),SIN(ay))
@@ -115,8 +115,8 @@ SUBROUTINE CUOIK(Z,Fnu,Kode,Ikflg,N,Y,Nuf,Tol,Elim,Alim)
       Nuf = nn
       RETURN
     ELSE
-      rcz = rcz + ALOG(aphi)
-      IF ( iform==2 ) rcz = rcz - 0.25E0*ALOG(aarg) - aic
+      rcz = rcz + LOG(aphi)
+      IF ( iform==2 ) rcz = rcz - 0.25E0*LOG(aarg) - aic
       IF ( rcz>Elim ) THEN
         Nuf = -1
         RETURN
@@ -143,12 +143,12 @@ SUBROUTINE CUOIK(Z,Fnu,Kode,Ikflg,N,Y,Nuf,Tol,Elim,Alim)
   rcz = REAL(cz)
   IF ( rcz>=(-Elim) ) THEN
     IF ( rcz>(-Alim) ) RETURN
-    rcz = rcz + ALOG(aphi)
-    IF ( iform==2 ) rcz = rcz - 0.25E0*ALOG(aarg) - aic
+    rcz = rcz + LOG(aphi)
+    IF ( iform==2 ) rcz = rcz - 0.25E0*LOG(aarg) - aic
     IF ( rcz>(-Elim) ) THEN
       ascle = 1.0E+3*R1MACH(1)/Tol
-      cz = cz + CLOG(phi)
-      IF ( iform/=1 ) cz = cz - CMPLX(0.25E0,0.0E0)*CLOG(arg)- CMPLX(aic,0.0E0)
+      cz = cz + LOG(phi)
+      IF ( iform/=1 ) cz = cz - CMPLX(0.25E0,0.0E0)*LOG(arg)- CMPLX(aic,0.0E0)
       ax = EXP(rcz)/Tol
       ay = AIMAG(cz)
       cz = CMPLX(ax,0.0E0)*CMPLX(COS(ay),SIN(ay))

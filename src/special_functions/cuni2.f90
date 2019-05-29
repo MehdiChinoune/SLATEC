@@ -123,7 +123,7 @@ SUBROUTINE CUNI2(Z,Fnu,Kode,N,Y,Nz,Nlast,Fnul,Tol,Elim,Alim)
       !-----------------------------------------------------------------------
       aphi = ABS(phi)
       aarg = ABS(arg)
-      rs1 = rs1 + ALOG(aphi) - 0.25E0*ALOG(aarg) - aic
+      rs1 = rs1 + LOG(aphi) - 0.25E0*LOG(aarg) - aic
       IF ( ABS(rs1)>Elim ) GOTO 300
       IF ( i==1 ) iflag = 1
       IF ( rs1>=0.0E0 ) THEN

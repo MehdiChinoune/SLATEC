@@ -30,7 +30,7 @@ SUBROUTINE CUNHJ(Z,Fnu,Ipmtr,Tol,Phi,Arg,Zeta1,Zeta2,Asum,Bsum)
   !
   !               (2/3)*FNU*ZETA**1.5 = ZETA1-ZETA2,
   !
-  !         ZETA1=0.5*FNU*CLOG((1+W)/(1-W)), ZETA2=FNU*W FOR SCALING
+  !         ZETA1=0.5*FNU*LOG((1+W)/(1-W)), ZETA2=FNU*W FOR SCALING
   !         PURPOSES IN AIRY FUNCTIONS FROM CAIRY OR CBIRY.
   !
   !         MCONJ=SIGN OF AIMAG(Z), BUT IS AMBIGUOUS WHEN Z IS REAL AND
@@ -272,14 +272,14 @@ SUBROUTINE CUNHJ(Z,Fnu,Ipmtr,Tol,Phi,Arg,Zeta1,Zeta2,Asum,Bsum)
       !-----------------------------------------------------------------------
       !     ABS(W2).GT.0.25E0
       !-----------------------------------------------------------------------
-      w = CSQRT(w2)
+      w = SQRT(w2)
       wr = REAL(w)
       wi = AIMAG(w)
       IF ( wr<0.0E0 ) wr = 0.0E0
       IF ( wi<0.0E0 ) wi = 0.0E0
       w = CMPLX(wr,wi)
       za = (cone+w)/zb
-      zc = CLOG(za)
+      zc = LOG(za)
       zcr = REAL(zc)
       zci = AIMAG(zc)
       IF ( zci<0.0E0 ) zci = 0.0E0
@@ -310,7 +310,7 @@ SUBROUTINE CUNHJ(Z,Fnu,Ipmtr,Tol,Phi,Arg,Zeta1,Zeta2,Asum,Bsum)
       Arg = zeta*CMPLX(fn23,0.0E0)
       rtzta = zth/zeta
       za = rtzta/w
-      Phi = CSQRT(za+za)*rfn13
+      Phi = SQRT(za+za)*rfn13
       IF ( Ipmtr/=1 ) THEN
         tfn = CMPLX(rfnu,0.0E0)/w
         rzth = CMPLX(rfnu,0.0E0)/zth
@@ -406,11 +406,11 @@ SUBROUTINE CUNHJ(Z,Fnu,Ipmtr,Tol,Phi,Arg,Zeta1,Zeta2,Asum,Bsum)
       20  kmax = k
       zeta = w2*suma
       Arg = zeta*CMPLX(fn23,0.0E0)
-      za = CSQRT(suma)
-      Zeta2 = CSQRT(w2)*CMPLX(Fnu,0.0E0)
+      za = SQRT(suma)
+      Zeta2 = SQRT(w2)*CMPLX(Fnu,0.0E0)
       Zeta1 = Zeta2*(cone+zeta*za*CMPLX(ex2,0.0E0))
       za = za + za
-      Phi = CSQRT(za)*rfn13
+      Phi = SQRT(za)*rfn13
       IF ( Ipmtr/=1 ) THEN
         !-----------------------------------------------------------------------
         !     SUM SERIES FOR ASUM AND BSUM
@@ -463,7 +463,7 @@ SUBROUTINE CUNHJ(Z,Fnu,Ipmtr,Tol,Phi,Arg,Zeta1,Zeta2,Asum,Bsum)
       END IF
     END IF
   ELSE
-    ac = 2.0E0*ABS(ALOG(test)) + Fnu
+    ac = 2.0E0*ABS(LOG(test)) + Fnu
     Zeta1 = CMPLX(ac,0.0E0)
     Zeta2 = CMPLX(Fnu,0.0E0)
     Phi = cone

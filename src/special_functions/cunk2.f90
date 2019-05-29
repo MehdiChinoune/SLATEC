@@ -112,7 +112,7 @@ SUBROUTINE CUNK2(Z,Fnu,Kode,Mr,N,Y,Nz,Tol,Elim,Alim)
         !-----------------------------------------------------------------------
         aphi = ABS(phi(j))
         aarg = ABS(arg(j))
-        rs1 = rs1 + ALOG(aphi) - 0.25E0*ALOG(aarg) - aic
+        rs1 = rs1 + LOG(aphi) - 0.25E0*LOG(aarg) - aic
         IF ( ABS(rs1)>Elim ) GOTO 50
         IF ( kdflg==1 ) kflag = 1
         IF ( rs1>=0.0E0 ) THEN
@@ -187,7 +187,7 @@ SUBROUTINE CUNK2(Z,Fnu,Kode,Mr,N,Y,Nz,Tol,Elim,Alim)
     !-----------------------------------------------------------------------
     aphi = ABS(phid)
     aarg = ABS(argd)
-    rs1 = rs1 + ALOG(aphi) - 0.25E0*ALOG(aarg) - aic
+    rs1 = rs1 + LOG(aphi) - 0.25E0*LOG(aarg) - aic
     IF ( ABS(rs1)<Elim ) GOTO 200
   END IF
   IF ( rs1>0.0E0 ) GOTO 600
@@ -305,7 +305,7 @@ SUBROUTINE CUNK2(Z,Fnu,Kode,Mr,N,Y,Nz,Tol,Elim,Alim)
       !-----------------------------------------------------------------------
       aphi = ABS(phid)
       aarg = ABS(argd)
-      rs1 = rs1 + ALOG(aphi) - 0.25E0*ALOG(aarg) - aic
+      rs1 = rs1 + LOG(aphi) - 0.25E0*LOG(aarg) - aic
       IF ( ABS(rs1)>Elim ) GOTO 450
       IF ( kdflg==1 ) iflag = 1
       IF ( rs1>=0.0E0 ) THEN

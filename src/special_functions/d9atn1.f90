@@ -1,8 +1,8 @@
 !** D9ATN1
 REAL(8) FUNCTION D9ATN1(X)
   !>
-  !  Evaluate DATAN(X) from first order relative accuracy so
-  !            that DATAN(X) = X + X**3*D9ATN1(X).
+  !  Evaluate ATAN(X) from first order relative accuracy so
+  !            that ATAN(X) = X + X**3*D9ATN1(X).
   !***
   ! **Library:**   SLATEC (FNLIB)
   !***
@@ -17,9 +17,9 @@ REAL(8) FUNCTION D9ATN1(X)
   !***
   ! **Description:**
   !
-  ! Evaluate  DATAN(X)  from first order, that is, evaluate
-  ! (DATAN(X)-X)/X**3  with relative error accuracy so that
-  !        DATAN(X) = X + X**3*D9ATN1(X).
+  ! Evaluate  ATAN(X)  from first order, that is, evaluate
+  ! (ATAN(X)-X)/X**3  with relative error accuracy so that
+  !        ATAN(X) = X + X**3*D9ATN1(X).
   !
   ! Series for ATN1       on the interval  0.          to  1.00000E+00
   !                                        with weighted error   3.39E-32

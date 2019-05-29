@@ -219,7 +219,7 @@ SUBROUTINE PCHCM(N,X,F,D,Incfd,Skip,Ismon,Ierr)
       ELSE
         !                 At this point, both are nonzero with same sign, and
         !                 we have already eliminated case both +-1.
-        Ismon(N) = ISIGN(3,Ismon(N))
+        Ismon(N) = SIGN(3,Ismon(N))
       END IF
     END IF
   END DO

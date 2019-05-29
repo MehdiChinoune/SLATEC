@@ -97,7 +97,7 @@ SUBROUTINE CUNI1(Z,Fnu,Kode,N,Y,Nz,Nlast,Fnul,Tol,Elim,Alim)
       !     REFINE  TEST AND SCALE
       !-----------------------------------------------------------------------
       aphi = ABS(phi)
-      rs1 = rs1 + ALOG(aphi)
+      rs1 = rs1 + LOG(aphi)
       IF ( ABS(rs1)>Elim ) GOTO 300
       IF ( i==1 ) iflag = 1
       IF ( rs1>=0.0E0 ) THEN

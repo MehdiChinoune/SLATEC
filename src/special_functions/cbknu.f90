@@ -72,7 +72,7 @@ SUBROUTINE CBKNU(Z,Fnu,Kode,N,Y,Nz,Tol,Elim,Alim)
       !     SERIES FOR ABS(Z).LE.R1
       !-----------------------------------------------------------------------
       fc = 1.0E0
-      smu = CLOG(rz)
+      smu = LOG(rz)
       fmu = smu*CMPLX(dnu,0.0E0)
       CALL CSHCH(fmu,csh,cch)
       IF ( dnu/=0.0E0 ) THEN
@@ -105,7 +105,7 @@ SUBROUTINE CBKNU(Z,Fnu,Kode,N,Y,Nz,Tol,Elim,Alim)
       g2 = 0.5E0*(t1+t2)*fc
       g1 = g1*fc
       f = CMPLX(g1,0.0E0)*cch + smu*CMPLX(g2,0.0E0)
-      pt = CEXP(fmu)
+      pt = EXP(fmu)
       p = CMPLX(0.5E0/t2,0.0E0)*pt
       q = CMPLX(0.5E0/t1,0.0E0)/pt
       s1 = f
@@ -144,7 +144,7 @@ SUBROUTINE CBKNU(Z,Fnu,Kode,N,Y,Nz,Tol,Elim,Alim)
         s2 = p2*rz
         s1 = s1*css(kflag)
         IF ( koded/=1 ) THEN
-          f = CEXP(Z)
+          f = EXP(Z)
           s1 = s1*f
           s2 = s2*f
         END IF
@@ -171,7 +171,7 @@ SUBROUTINE CBKNU(Z,Fnu,Kode,N,Y,Nz,Tol,Elim,Alim)
         END IF
         Y(1) = s1
         IF ( koded==1 ) RETURN
-        Y(1) = s1*CEXP(Z)
+        Y(1) = s1*EXP(Z)
         RETURN
       END IF
     END IF
@@ -182,7 +182,7 @@ SUBROUTINE CBKNU(Z,Fnu,Kode,N,Y,Nz,Tol,Elim,Alim)
   !     KODED=2 AND A TEST FOR ON SCALE VALUES IS MADE DURING FORWARD
   !     RECURSION
   !-----------------------------------------------------------------------
-  coef = CMPLX(rthpi,0.0E0)/CSQRT(Z)
+  coef = CMPLX(rthpi,0.0E0)/SQRT(Z)
   kflag = 2
   IF ( koded/=2 ) THEN
     IF ( xx>Alim ) THEN
@@ -232,7 +232,7 @@ SUBROUTINE CBKNU(Z,Fnu,Kode,N,Y,Nz,Tol,Elim,Alim)
     ak = fpi*ak/(Tol*SQRT(a2))
     aa = 3.0E0*t1/(1.0E0+caz)
     bb = 14.7E0*t1/(28.0E0+caz)
-    ak = (ALOG(ak)+caz*COS(aa)/(1.0E0+0.008E0*caz))/COS(bb)
+    ak = (LOG(ak)+caz*COS(aa)/(1.0E0+0.008E0*caz))/COS(bb)
     fk = 0.12125E0*ak*ak/caz + 1.5E0
   ELSE
     !-----------------------------------------------------------------------
@@ -336,10 +336,10 @@ SUBROUTINE CBKNU(Z,Fnu,Kode,N,Y,Nz,Tol,Elim,Alim)
         s1 = st
         ck = ck + rz
         as = ABS(s2)
-        alas = ALOG(as)
+        alas = LOG(as)
         p2r = -xd + alas
         IF ( p2r>=(-Elim) ) THEN
-          p2 = -zd + CLOG(s2)
+          p2 = -zd + LOG(s2)
           p2r = REAL(p2)
           p2i = AIMAG(p2)
           p2m = EXP(p2r)/Tol

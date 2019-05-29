@@ -286,7 +286,7 @@ SUBROUTINE ZBESH(Zr,Zi,Fnu,Kode,M,N,Cyr,Cyi,Nz,Ierr)
     !
     !     ZT=EXP(-FMM*HPI*I) = CMPLX(0.0,-FMM), FMM=3-2*M, M=1,2
     !-----------------------------------------------------------------------
-    sgn = DSIGN(hpi,-fmm)
+    sgn = SIGN(hpi,-fmm)
     !-----------------------------------------------------------------------
     !     CALCULATE EXP(FNU*HPI*I) TO MINIMIZE LOSSES OF SIGNIFICANCE
     !     WHEN FNU IS LARGE

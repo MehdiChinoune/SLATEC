@@ -1595,7 +1595,7 @@ CONTAINS
                   er = ZABS(ar,ai)
                   IF ( av/=0.0D0 ) THEN
                     IF ( zi==0.0D0 ) THEN
-                      IF ( DABS(zr)<aa ) er = er/av
+                      IF ( ABS(zr)<aa ) er = er/av
                     ELSE
                       er = er/av
                     END IF
@@ -2402,9 +2402,9 @@ CONTAINS
                           IF ( zni/=0.0D0 ) THEN
                             er = er/av
                           ELSEIF ( znr>0.0D0 ) THEN
-                            IF ( DABS(znr)<aa ) er = er/av
-                          ELSEIF ( DABS(ffnu-0.5D0)<0.125D0 ) THEN
-                            IF ( DABS(znr)<aa ) er = er/av
+                            IF ( ABS(znr)<aa ) er = er/av
+                          ELSEIF ( ABS(ffnu-0.5D0)<0.125D0 ) THEN
+                            IF ( ABS(znr)<aa ) er = er/av
                           ELSE
                             er = er/av
                           END IF

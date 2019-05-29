@@ -43,7 +43,7 @@ SUBROUTINE CASYI(Z,Fnu,Kode,N,Y,Nz,Rl,Tol,Elim,Alim)
   !     OVERFLOW TEST
   !-----------------------------------------------------------------------
   ak1 = CMPLX(rtpi,0.0E0)/Z
-  ak1 = CSQRT(ak1)
+  ak1 = SQRT(ak1)
   cz = Z
   IF ( Kode==2 ) cz = Z - CMPLX(x,0.0E0)
   acz = REAL(cz)
@@ -55,7 +55,7 @@ SUBROUTINE CASYI(Z,Fnu,Kode,N,Y,Nz,Rl,Tol,Elim,Alim)
     koded = 1
     IF ( (ABS(acz)<=Alim).OR.(N<=2) ) THEN
       koded = 0
-      ak1 = ak1*CEXP(cz)
+      ak1 = ak1*EXP(cz)
     END IF
     fdn = 0.0E0
     IF ( dnu2>rtr1 ) fdn = dnu2*dnu2
@@ -109,7 +109,7 @@ SUBROUTINE CASYI(Z,Fnu,Kode,N,Y,Nz,Rl,Tol,Elim,Alim)
       END DO
       GOTO 100
       20  s2 = cs1
-      IF ( x+x<Elim ) s2 = s2 + p1*cs2*CEXP(-Z-Z)
+      IF ( x+x<Elim ) s2 = s2 + p1*cs2*EXP(-Z-Z)
       fdn = fdn + 8.0E0*dfnu + 4.0E0
       p1 = -p1
       m = N - il + k
@@ -127,7 +127,7 @@ SUBROUTINE CASYI(Z,Fnu,Kode,N,Y,Nz,Rl,Tol,Elim,Alim)
       k = k - 1
     END DO
     IF ( koded==0 ) RETURN
-    ck = CEXP(cz)
+    ck = EXP(cz)
     DO i = 1, nn
       Y(i) = Y(i)*ck
     END DO

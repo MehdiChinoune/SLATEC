@@ -149,17 +149,17 @@ SUBROUTINE CMLRI(Z,Fnu,Kode,N,Y,Nz,Tol)
   END IF
   pt = Z
   IF ( Kode==2 ) pt = pt - CMPLX(x,0.0E0)
-  p1 = -CMPLX(fnf,0.0E0)*CLOG(rz) + pt
+  p1 = -CMPLX(fnf,0.0E0)*LOG(rz) + pt
   ap = GAMLN(1.0E0+fnf,idum)
   pt = p1 - CMPLX(ap,0.0E0)
   !-----------------------------------------------------------------------
-  !     THE DIVISION CEXP(PT)/(SUM+P2) IS ALTERED TO AVOID OVERFLOW
+  !     THE DIVISION EXP(PT)/(SUM+P2) IS ALTERED TO AVOID OVERFLOW
   !     IN THE DENOMINATOR BY SQUARING LARGE QUANTITIES
   !-----------------------------------------------------------------------
   p2 = p2 + summ
   ap = ABS(p2)
   p1 = CMPLX(1.0E0/ap,0.0E0)
-  ck = CEXP(pt)*p1
+  ck = EXP(pt)*p1
   pt = CONJG(p2)*p1
   cnorm = ck*pt
   DO i = 1, N
