@@ -315,7 +315,6 @@ CONTAINS
         !
         !         * * * * * *    SSDOMN   * * * * * *
         !
-        !VD$ NOVECTOR
         DO nsave = 0, 3
           IF ( Kprint>=3 ) WRITE (Lun,99009) 'SSDOMN', itol, isym, nsave
           CALL VFILL(n,xiter,0.0E0)
@@ -328,7 +327,6 @@ CONTAINS
         !
         !         * * * * * *   SSLUOM   * * * * * *
         !
-        !VD$ NOVECTOR
         DO nsave = 0, 3
           IF ( Kprint>=3 ) WRITE (Lun,99009) 'SSLUOM', itol, isym, nsave
           CALL VFILL(n,xiter,0.0E0)
@@ -341,7 +339,6 @@ CONTAINS
         !
         !         * * * * * *   SSDGMR   * * * * * *
         !
-        !VD$ NOVECTOR
         DO nsave = 5, 12
           IF ( Kprint>=3 ) WRITE (Lun,99009) 'SSDGMR', itol, isym, nsave
           CALL VFILL(n,xiter,0.0E0)
@@ -355,7 +352,6 @@ CONTAINS
         !
         !         * * * * * *   SSLUGM   * * * * * *
         !
-        !VD$ NOVECTOR
         DO nsave = 5, 12
           IF ( Kprint>=3 ) WRITE (Lun,99009) 'SSLUGM', itol, isym, nsave
           CALL VFILL(n,xiter,0.0E0)
@@ -502,7 +498,6 @@ CONTAINS
     !     Set the matrix elements.
     !     Loop over the columns.
     !
-    !VD$ NOCONCUR
     DO icol = 1, N
       nl = N + 1 - icol
       !
@@ -512,8 +507,6 @@ CONTAINS
       CALL ISMPL(nl,inum,Itmp)
       !
       !         Set up this column (and row, if non-symmetric structure).
-      !VD$ NOVECTOR
-      !VD$ NOCONCUR
       DO irow = 1, inum
         Nelt = Nelt + 1
         IF ( Nelt>Neltmx ) THEN
@@ -563,24 +556,17 @@ CONTAINS
     !
     !         Clean up the diagonals.
     !
-    !VD$ NODEPCHK
-    !LLL. OPTION ASSERT (NOHAZARD)
-    !DIR$ IVDEP
     DO i = 1, N
       A(Idiag(i)) = -1.0001E0*Dsum(i)
     END DO
     !
     !         Set a random solution and determine the right-hand side.
     !
-    !VD$ NOVECTOR
-    !VD$ NOCONCUR
     DO i = 1, N
       SOLn(i) = RAND(dummy)
       F(i) = 0.0E0
     END DO
     !
-    !VD$ NOVECTOR
-    !VD$ NOCONCUR
     DO k = 1, Nelt
       F(Ia(k)) = F(Ia(k)) + A(k)*SOLn(Ja(k))
       IF ( Isym/=0.AND.Ia(k)/=Ja(k) ) F(Ja(k)) = F(Ja(k)) + A(k)*SOLn(Ia(k))

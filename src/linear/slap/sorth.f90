@@ -74,8 +74,6 @@ SUBROUTINE SORTH(Vnew,V,Hes,N,Ll,Ldhes,Kmp,Snormw)
   !   910506  Made subsidiary to SGMRES.  (FNF)
   !   920511  Added complete declaration section.  (WRB)
 
-  !         The following is for optimized compilation on LLNL/LTSS Crays.
-  !LLL. OPTIMIZE
   !     .. Scalar Arguments ..
   REAL Snormw
   INTEGER Kmp, Ldhes, Ll, N

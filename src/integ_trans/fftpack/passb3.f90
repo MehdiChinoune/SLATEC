@@ -50,7 +50,6 @@ SUBROUTINE PASSB3(Ido,L1,Cc,Ch,Wa1,Wa2)
     RETURN
   ELSEIF ( Ido/2<L1 ) THEN
     DO i = 2, Ido, 2
-      !DIR$ IVDEP
       DO k = 1, L1
         tr2 = Cc(i-1,2,k) + Cc(i-1,3,k)
         cr2 = Cc(i-1,1,k) + taur*tr2
@@ -73,7 +72,6 @@ SUBROUTINE PASSB3(Ido,L1,Cc,Ch,Wa1,Wa2)
     RETURN
   END IF
   DO k = 1, L1
-    !DIR$ IVDEP
     DO i = 2, Ido, 2
       tr2 = Cc(i-1,2,k) + Cc(i-1,3,k)
       cr2 = Cc(i-1,1,k) + taur*tr2

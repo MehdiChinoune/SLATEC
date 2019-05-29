@@ -37,7 +37,6 @@ SUBROUTINE PASSB2(Ido,L1,Cc,Ch,Wa1)
     RETURN
   ELSEIF ( Ido/2<L1 ) THEN
     DO i = 2, Ido, 2
-      !DIR$ IVDEP
       DO k = 1, L1
         Ch(i-1,k,1) = Cc(i-1,1,k) + Cc(i-1,2,k)
         tr2 = Cc(i-1,1,k) - Cc(i-1,2,k)
@@ -50,7 +49,6 @@ SUBROUTINE PASSB2(Ido,L1,Cc,Ch,Wa1)
     RETURN
   END IF
   DO k = 1, L1
-    !DIR$ IVDEP
     DO i = 2, Ido, 2
       Ch(i-1,k,1) = Cc(i-1,1,k) + Cc(i-1,2,k)
       tr2 = Cc(i-1,1,k) - Cc(i-1,2,k)

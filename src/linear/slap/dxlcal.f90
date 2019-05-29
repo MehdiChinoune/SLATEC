@@ -149,8 +149,6 @@ SUBROUTINE DXLCAL(N,Lgmr,X,Xl,Zl,Hes,Maxlp1,Q,V,R0nrm,Wk,Sz,Jscal,Jpre,&
       REAL(8) :: R(N), Z(N), Rwork(*)
     END SUBROUTINE
   END INTERFACE
-  !         The following is for optimized compilation on LLNL/LTSS Crays.
-  !LLL. OPTIMIZE
   !     .. Scalar Arguments ..
   REAL(8) :: R0nrm
   INTEGER Jpre, Jscal, Lgmr, Maxlp1, N, Nmsl

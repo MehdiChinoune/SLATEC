@@ -74,8 +74,6 @@ SUBROUTINE DORTH(Vnew,V,Hes,N,Ll,Ldhes,Kmp,Snormw)
   !   910506  Made subsidiary to DGMRES.  (FNF)
   !   920511  Added complete declaration section.  (WRB)
 
-  !         The following is for optimized compilation on LLNL/LTSS Crays.
-  !LLL. OPTIMIZE
   !     .. Scalar Arguments ..
   REAL(8) :: Snormw
   INTEGER Kmp, Ldhes, Ll, N

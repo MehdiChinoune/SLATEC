@@ -68,7 +68,6 @@ SUBROUTINE PASSF5(Ido,L1,Cc,Ch,Wa1,Wa2,Wa3,Wa4)
     RETURN
   ELSEIF ( Ido/2<L1 ) THEN
     DO i = 2, Ido, 2
-      !DIR$ IVDEP
       DO k = 1, L1
         ti5 = Cc(i,2,k) - Cc(i,5,k)
         ti2 = Cc(i,2,k) + Cc(i,5,k)
@@ -109,7 +108,6 @@ SUBROUTINE PASSF5(Ido,L1,Cc,Ch,Wa1,Wa2,Wa3,Wa4)
     RETURN
   END IF
   DO k = 1, L1
-    !DIR$ IVDEP
     DO i = 2, Ido, 2
       ti5 = Cc(i,2,k) - Cc(i,5,k)
       ti2 = Cc(i,2,k) + Cc(i,5,k)

@@ -60,7 +60,6 @@ SUBROUTINE RADFG(Ido,Ip,L1,Idl1,Cc,C1,C2,Ch,Ch2,Wa)
         is = is + Ido
         DO k = 1, L1
           idij = is
-          !DIR$ IVDEP
           DO i = 3, Ido, 2
             idij = idij + 2
             Ch(i-1,k,j) = Wa(idij-1)*C1(i-1,k,j) + Wa(idij)*C1(i,k,j)
@@ -98,7 +97,6 @@ SUBROUTINE RADFG(Ido,Ip,L1,Idl1,Cc,C1,C2,Ch,Ch2,Wa)
       DO j = 2, ipph
         jc = ipp2 - j
         DO k = 1, L1
-          !DIR$ IVDEP
           DO i = 3, Ido, 2
             C1(i-1,k,j) = Ch(i-1,k,j) + Ch(i-1,k,jc)
             C1(i-1,k,jc) = Ch(i,k,j) - Ch(i,k,jc)
@@ -191,7 +189,6 @@ SUBROUTINE RADFG(Ido,Ip,L1,Idl1,Cc,C1,C2,Ch,Ch2,Wa)
     jc = ipp2 - j
     j2 = j + j
     DO k = 1, L1
-      !DIR$ IVDEP
       DO i = 3, Ido, 2
         ic = idp2 - i
         Cc(i-1,j2-1,k) = Ch(i-1,k,j) + Ch(i-1,k,jc)

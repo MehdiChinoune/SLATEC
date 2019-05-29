@@ -78,8 +78,6 @@ SUBROUTINE QS2I1D(Ia,Ja,A,N,Kflag)
   !   920929  Corrected format of reference.  (FNF)
   !   921012  Corrected all f.p. constants to double precision.  (FNF)
   USE service, ONLY : XERMSG
-  !VD$R NOVECTOR
-  !VD$R NOCONCUR
   !     .. Scalar Arguments ..
   INTEGER Kflag, N
   !     .. Array Arguments ..

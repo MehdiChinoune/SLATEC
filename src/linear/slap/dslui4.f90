@@ -181,10 +181,6 @@ SUBROUTINE DSLUI4(N,B,X,Il,Jl,L,Dinv,Iu,Ju,U)
     jbgn = Ju(irow)
     jend = Ju(irow+1) - 1
     IF ( jbgn<=jend ) THEN
-      !LLL. OPTION ASSERT (NOHAZARD)
-      !DIR$ IVDEP
-      !VD$ ASSOC
-      !VD$ NODEPCHK
       DO j = jbgn, jend
         X(irow) = X(irow) - U(j)*X(Iu(j))
       END DO
@@ -201,9 +197,6 @@ SUBROUTINE DSLUI4(N,B,X,Il,Jl,L,Dinv,Iu,Ju,U)
     jbgn = Il(icol)
     jend = Il(icol+1) - 1
     IF ( jbgn<=jend ) THEN
-      !LLL. OPTION ASSERT (NOHAZARD)
-      !DIR$ IVDEP
-      !VD$ NODEPCHK
       DO j = jbgn, jend
         X(Jl(j)) = X(Jl(j)) - L(j)*X(icol)
       END DO

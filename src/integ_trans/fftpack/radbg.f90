@@ -66,7 +66,6 @@ SUBROUTINE RADBG(Ido,Ip,L1,Idl1,Cc,C1,C2,Ch,Ch2,Wa)
     IF ( nbd<L1 ) THEN
       DO j = 2, ipph
         jc = ipp2 - j
-        !DIR$ IVDEP
         DO i = 3, Ido, 2
           ic = idp2 - i
           DO k = 1, L1
@@ -81,7 +80,6 @@ SUBROUTINE RADBG(Ido,Ip,L1,Idl1,Cc,C1,C2,Ch,Ch2,Wa)
       DO j = 2, ipph
         jc = ipp2 - j
         DO k = 1, L1
-          !DIR$ IVDEP
           DO i = 3, Ido, 2
             ic = idp2 - i
             Ch(i-1,k,j) = Cc(i-1,2*j-1,k) + Cc(ic-1,2*j-2,k)
@@ -148,7 +146,6 @@ SUBROUTINE RADBG(Ido,Ip,L1,Idl1,Cc,C1,C2,Ch,Ch2,Wa)
       DO j = 2, ipph
         jc = ipp2 - j
         DO k = 1, L1
-          !DIR$ IVDEP
           DO i = 3, Ido, 2
             Ch(i-1,k,j) = C1(i-1,k,j) - C1(i,k,jc)
             Ch(i-1,k,jc) = C1(i-1,k,j) + C1(i,k,jc)
@@ -174,7 +171,6 @@ SUBROUTINE RADBG(Ido,Ip,L1,Idl1,Cc,C1,C2,Ch,Ch2,Wa)
       is = is + Ido
       DO k = 1, L1
         idij = is
-        !DIR$ IVDEP
         DO i = 3, Ido, 2
           idij = idij + 2
           C1(i-1,k,j) = Wa(idij-1)*Ch(i-1,k,j) - Wa(idij)*Ch(i,k,j)

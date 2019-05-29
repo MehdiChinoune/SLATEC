@@ -189,7 +189,6 @@ SUBROUTINE SSICS(N,Nelt,Ia,Ja,A,Isym,Nel,Iel,Jel,El,D,R,Iwarn)
   Jel(1) = 1
   El(1) = 1
   D(1) = A(1)
-  !VD$R NOCONCUR
   DO irow = 2, N
     !         Put in the Diagonal.
     Nel = Nel + 1
@@ -219,7 +218,6 @@ SUBROUTINE SSICS(N,Nelt,Ia,Ja,A,Isym,Nel,Iel,Jel,El,D,R,Iwarn)
       jbgn = Ja(icol) + 1
       jend = Ja(icol+1) - 1
       IF ( jbgn<=jend.AND.Ia(jend)>=irow ) THEN
-        !VD$ NOVECTOR
         DO j = jbgn, jend
           IF ( Ia(j)==irow ) THEN
             Nel = Nel + 1
@@ -241,7 +239,6 @@ SUBROUTINE SSICS(N,Nelt,Ia,Ja,A,Isym,Nel,Iel,Jel,El,D,R,Iwarn)
     iend = Iel(irow+1) - 1
     IF ( ibgn<iend ) THEN
       DO i = ibgn, iend - 1
-        !VD$ NOVECTOR
         DO j = i + 1, iend
           IF ( Jel(i)>Jel(j) ) THEN
             jeltmp = Jel(j)
@@ -281,9 +278,6 @@ SUBROUTINE SSICS(N,Nelt,Ia,Ja,A,Isym,Nel,Iel,Jel,El,D,R,Iwarn)
     ibgn = Iel(irow) + 1
     iend = Iel(irow+1) - 1
     IF ( ibgn<=iend ) THEN
-      !LLL. OPTION ASSERT (NOHAZARD)
-      !DIR$ IVDEP
-      !VD$ NODEPCHK
       DO i = ibgn, iend
         R(Jel(i)) = El(i)*D(Jel(i))
         D(irow) = D(irow) - El(i)*R(Jel(i))
@@ -319,9 +313,6 @@ SUBROUTINE SSICS(N,Nelt,Ia,Ja,A,Isym,Nel,Iel,Jel,El,D,R,Iwarn)
                   CYCLE
                 END IF
                 !         Sum up the EL(IR,1:IROW-1)*R(1:IROW-1) contributions.
-                !LLL. OPTION ASSERT (NOHAZARD)
-                !DIR$ IVDEP
-                !VD$ NODEPCHK
                 DO ic = ibgn, icend
                   El(i) = El(i) - El(ic)*R(Jel(ic))
                 END DO
@@ -343,7 +334,6 @@ SUBROUTINE SSICS(N,Nelt,Ia,Ja,A,Isym,Nel,Iel,Jel,El,D,R,Iwarn)
   !
   !         Replace diagonals by their inverses.
   !
-  !VD$ CONCUR
   DO i = 1, N
     D(i) = 1.0E0/D(i)
   END DO

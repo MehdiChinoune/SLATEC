@@ -30,7 +30,6 @@ SUBROUTINE SLVS(Wm,Iwm,X)
   USE DEBDF1, ONLY : EL0, H, IER, MITer, N
   USE linear, ONLY : SGBSL, SGESL
   !
-  !LLL. OPTIMIZE
   INTEGER :: Iwm(:)
   REAL :: Wm(:), X(N)
   INTEGER :: i, meband, ml, mu

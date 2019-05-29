@@ -141,10 +141,6 @@ SUBROUTINE SLLTI2(N,B,X,Nel,Iel,Jel,El,Dinv)
     ibgn = Iel(irow) + 1
     iend = Iel(irow+1) - 1
     IF ( ibgn<=iend ) THEN
-      !LLL. OPTION ASSERT (NOHAZARD)
-      !DIR$ IVDEP
-      !VD$ NOCONCUR
-      !VD$ NODEPCHK
       DO i = ibgn, iend
         X(irow) = X(irow) - El(i)*X(Jel(i))
       END DO
@@ -163,10 +159,6 @@ SUBROUTINE SLLTI2(N,B,X,Nel,Iel,Jel,El,Dinv)
     ibgn = Iel(irow) + 1
     iend = Iel(irow+1) - 1
     IF ( ibgn<=iend ) THEN
-      !LLL. OPTION ASSERT (NOHAZARD)
-      !DIR$ IVDEP
-      !VD$ NOCONCUR
-      !VD$ NODEPCHK
       DO i = ibgn, iend
         X(Jel(i)) = X(Jel(i)) - El(i)*X(irow)
       END DO

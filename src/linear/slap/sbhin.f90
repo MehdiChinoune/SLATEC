@@ -250,8 +250,6 @@ SUBROUTINE SBHIN(N,Nelt,Ia,Ja,A,Isym,Soln,Rhs,Iunit,Job)
   !         matrix element appears first in the column.  Then sort the
   !         rest of the column in ascending order.
   !
-  !VD$R NOCONCUR
-  !VD$R NOVECTOR
   DO icol = 1, N
     ibgn = Ja(icol)
     iend = Ja(icol+1) - 1

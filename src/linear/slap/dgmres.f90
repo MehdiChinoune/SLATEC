@@ -405,8 +405,6 @@ SUBROUTINE DGMRES(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,&
       REAL(8) :: X(N), R(N), A(Nelt)
     END SUBROUTINE
   END INTERFACE
-  !         The following is for optimized compilation on LLNL/LTSS Crays.
-  !LLL. OPTIMIZE
   !     .. Scalar Arguments ..
   REAL(8) :: Err, Tol
   INTEGER Ierr, Isym, Iter, Itol, Iunit, Ligw, Lrgw, N, Nelt

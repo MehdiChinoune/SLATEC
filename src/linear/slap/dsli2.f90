@@ -128,16 +128,11 @@ SUBROUTINE DSLI2(N,B,X,Nel,Iel,Jel,El)
     X(i) = B(i)
   END DO
   !
-  !VD$ NOCONCUR
   DO icol = 1, N
     X(icol) = X(icol)/El(Jel(icol))
     jbgn = Jel(icol) + 1
     jend = Jel(icol+1) - 1
     IF ( jbgn<=jend ) THEN
-      !LLL. OPTION ASSERT (NOHAZARD)
-      !DIR$ IVDEP
-      !VD$ NOCONCUR
-      !VD$ NODEPCHK
       DO j = jbgn, jend
         X(Iel(j)) = X(Iel(j)) - El(j)*X(icol)
       END DO

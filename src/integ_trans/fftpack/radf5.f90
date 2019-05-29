@@ -52,7 +52,6 @@ SUBROUTINE RADF5(Ido,L1,Cc,Ch,Wa1,Wa2,Wa3,Wa4)
   IF ( (Ido-1)/2<L1 ) THEN
     DO i = 3, Ido, 2
       ic = idp2 - i
-      !DIR$ IVDEP
       DO k = 1, L1
         dr2 = Wa1(i-2)*Cc(i-1,k,2) + Wa1(i-1)*Cc(i,k,2)
         di2 = Wa1(i-2)*Cc(i,k,2) - Wa1(i-1)*Cc(i-1,k,2)
@@ -93,7 +92,6 @@ SUBROUTINE RADF5(Ido,L1,Cc,Ch,Wa1,Wa2,Wa3,Wa4)
     RETURN
   END IF
   DO k = 1, L1
-    !DIR$ IVDEP
     DO i = 3, Ido, 2
       ic = idp2 - i
       dr2 = Wa1(i-2)*Cc(i-1,k,2) + Wa1(i-1)*Cc(i,k,2)

@@ -126,16 +126,12 @@ SUBROUTINE DSD2S(N,Nelt,Ia,Ja,A,Isym,Dinv)
   END DO
   !
   !         Loop over each column.
-  !VD$R NOCONCUR
   DO i = 1, N
     kbgn = Ja(i)
     kend = Ja(i+1) - 1
     !
     !         Add in the contributions for each row that has a non-zero
     !         in this column.
-    !LLL. OPTION ASSERT (NOHAZARD)
-    !DIR$ IVDEP
-    !VD$ NODEPCHK
     DO k = kbgn, kend
       Dinv(Ia(k)) = Dinv(Ia(k)) + A(k)**2
     END DO

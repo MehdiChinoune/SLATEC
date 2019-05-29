@@ -265,7 +265,6 @@ SUBROUTINE SSLUBC(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
     jbgn = Ja(icol) + 1
     jend = Ja(icol+1) - 1
     IF ( jbgn<=jend ) THEN
-      !VD$ NOVECTOR
       DO j = jbgn, jend
         IF ( Ia(j)>icol ) THEN
           nl = nl + 1

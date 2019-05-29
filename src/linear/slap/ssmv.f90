@@ -128,13 +128,9 @@ SUBROUTINE SSMV(N,X,Y,Nelt,Ia,Ja,A,Isym)
   !
   !         Multiply by A.
   !
-  !VD$R NOCONCUR
   DO icol = 1, N
     ibgn = Ja(icol)
     iend = Ja(icol+1) - 1
-    !LLL. OPTION ASSERT (NOHAZARD)
-    !DIR$ IVDEP
-    !VD$ NODEPCHK
     DO i = ibgn, iend
       Y(Ia(i)) = Y(Ia(i)) + A(i)*X(icol)
     END DO

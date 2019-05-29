@@ -155,7 +155,6 @@ SUBROUTINE SS2Y(N,Nelt,Ia,Ja,A)
   !         in the column index array ja.  This marks the beginning of the
   !         next column.
   !
-  !VD$R NOVECTOR
   Ja(1) = 1
   DO icol = 1, N - 1
     DO j = Ja(icol) + 1, Nelt

@@ -76,8 +76,6 @@ SUBROUTINE SRLCAL(N,Kmp,Ll,Maxl,V,Q,Rl,Snormw,Prod,R0nrm)
   !   910506  Made subsidiary to SGMRES.  (FNF)
   !   920511  Added complete declaration section.  (WRB)
 
-  !         The following is for optimized compilation on LLNL/LTSS Crays.
-  !LLL. OPTIMIZE
   !     .. Scalar Arguments ..
   REAL Prod, R0nrm, Snormw
   INTEGER Kmp, Ll, Maxl, N

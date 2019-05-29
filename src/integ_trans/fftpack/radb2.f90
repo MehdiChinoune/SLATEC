@@ -37,7 +37,6 @@ SUBROUTINE RADB2(Ido,L1,Cc,Ch,Wa1)
     IF ( (Ido-1)/2<L1 ) THEN
       DO i = 3, Ido, 2
         ic = idp2 - i
-        !DIR$ IVDEP
         DO k = 1, L1
           Ch(i-1,k,1) = Cc(i-1,1,k) + Cc(ic-1,2,k)
           tr2 = Cc(i-1,1,k) - Cc(ic-1,2,k)
@@ -49,7 +48,6 @@ SUBROUTINE RADB2(Ido,L1,Cc,Ch,Wa1)
       END DO
     ELSE
       DO k = 1, L1
-        !DIR$ IVDEP
         DO i = 3, Ido, 2
           ic = idp2 - i
           Ch(i-1,k,1) = Cc(i-1,1,k) + Cc(ic-1,2,k)

@@ -223,8 +223,6 @@ SUBROUTINE SPIGMR(N,R0,Sr,Sz,Jscal,Maxl,Maxlp1,Kmp,Nrsts,Jpre,MATVEC,&
       REAL :: X(N), R(N), A(Nelt)
     END SUBROUTINE
   END INTERFACE
-  !         The following is for optimized compilation on LLNL/LTSS Crays.
-  !LLL. OPTIMIZE
   !     .. Scalar Arguments ..
   REAL Bnrm, Err, Rhol, Tol
   INTEGER Iflag, Isym, Itol, Iunit, Jpre, Jscal, Kmp, Lgmr, Maxl, &

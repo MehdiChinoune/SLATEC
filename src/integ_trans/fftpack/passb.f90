@@ -37,7 +37,6 @@ SUBROUTINE PASSB(Nac,Ido,Ip,L1,Idl1,Cc,C1,C2,Ch,Ch2,Wa)
     DO j = 2, ipph
       jc = ipp2 - j
       DO i = 1, Ido
-        !DIR$ IVDEP
         DO k = 1, L1
           Ch(i,k,j) = Cc(i,j,k) + Cc(i,jc,k)
           Ch(i,k,jc) = Cc(i,j,k) - Cc(i,jc,k)
@@ -45,7 +44,6 @@ SUBROUTINE PASSB(Nac,Ido,Ip,L1,Idl1,Cc,C1,C2,Ch,Ch2,Wa)
       END DO
     END DO
     DO i = 1, Ido
-      !DIR$ IVDEP
       DO k = 1, L1
         Ch(i,k,1) = Cc(i,1,k)
       END DO
@@ -54,7 +52,6 @@ SUBROUTINE PASSB(Nac,Ido,Ip,L1,Idl1,Cc,C1,C2,Ch,Ch2,Wa)
     DO j = 2, ipph
       jc = ipp2 - j
       DO k = 1, L1
-        !DIR$ IVDEP
         DO i = 1, Ido
           Ch(i,k,j) = Cc(i,j,k) + Cc(i,jc,k)
           Ch(i,k,jc) = Cc(i,j,k) - Cc(i,jc,k)
@@ -62,7 +59,6 @@ SUBROUTINE PASSB(Nac,Ido,Ip,L1,Idl1,Cc,C1,C2,Ch,Ch2,Wa)
       END DO
     END DO
     DO k = 1, L1
-      !DIR$ IVDEP
       DO i = 1, Ido
         Ch(i,k,1) = Cc(i,1,k)
       END DO
@@ -73,7 +69,6 @@ SUBROUTINE PASSB(Nac,Ido,Ip,L1,Idl1,Cc,C1,C2,Ch,Ch2,Wa)
   DO l = 2, ipph
     lc = ipp2 - l
     idl = idl + Ido
-    !DIR$ IVDEP
     DO ik = 1, Idl1
       C2(ik,l) = Ch2(ik,1) + Wa(idl-1)*Ch2(ik,2)
       C2(ik,lc) = Wa(idl)*Ch2(ik,Ip)
@@ -86,7 +81,6 @@ SUBROUTINE PASSB(Nac,Ido,Ip,L1,Idl1,Cc,C1,C2,Ch,Ch2,Wa)
       IF ( idlj>idp ) idlj = idlj - idp
       war = Wa(idlj-1)
       wai = Wa(idlj)
-      !DIR$ IVDEP
       DO ik = 1, Idl1
         C2(ik,l) = C2(ik,l) + war*Ch2(ik,j)
         C2(ik,lc) = C2(ik,lc) + wai*Ch2(ik,jc)
@@ -94,14 +88,12 @@ SUBROUTINE PASSB(Nac,Ido,Ip,L1,Idl1,Cc,C1,C2,Ch,Ch2,Wa)
     END DO
   END DO
   DO j = 2, ipph
-    !DIR$ IVDEP
     DO ik = 1, Idl1
       Ch2(ik,1) = Ch2(ik,1) + Ch2(ik,j)
     END DO
   END DO
   DO j = 2, ipph
     jc = ipp2 - j
-    !DIR$ IVDEP
     DO ik = 2, Idl1, 2
       Ch2(ik-1,j) = C2(ik-1,j) - C2(ik,jc)
       Ch2(ik-1,jc) = C2(ik-1,j) + C2(ik,jc)
@@ -116,7 +108,6 @@ SUBROUTINE PASSB(Nac,Ido,Ip,L1,Idl1,Cc,C1,C2,Ch,Ch2,Wa)
     C2(ik,1) = Ch2(ik,1)
   END DO
   DO j = 2, Ip
-    !DIR$ IVDEP
     DO k = 1, L1
       C1(1,k,j) = Ch(1,k,j)
       C1(2,k,j) = Ch(2,k,j)
@@ -128,7 +119,6 @@ SUBROUTINE PASSB(Nac,Ido,Ip,L1,Idl1,Cc,C1,C2,Ch,Ch2,Wa)
       idj = idj + Ido
       DO k = 1, L1
         idij = idj
-        !DIR$ IVDEP
         DO i = 4, Ido, 2
           idij = idij + 2
           C1(i-1,k,j) = Wa(idij-1)*Ch(i-1,k,j) - Wa(idij)*Ch(i,k,j)
@@ -143,7 +133,6 @@ SUBROUTINE PASSB(Nac,Ido,Ip,L1,Idl1,Cc,C1,C2,Ch,Ch2,Wa)
     idij = idij + 2
     DO i = 4, Ido, 2
       idij = idij + 2
-      !DIR$ IVDEP
       DO k = 1, L1
         C1(i-1,k,j) = Wa(idij-1)*Ch(i-1,k,j) - Wa(idij)*Ch(i,k,j)
         C1(i,k,j) = Wa(idij-1)*Ch(i,k,j) + Wa(idij)*Ch(i-1,k,j)

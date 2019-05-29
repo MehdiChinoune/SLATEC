@@ -28,7 +28,6 @@ REAL FUNCTION VNWRMS(N,V,W)
 
   !
   !
-  !LLL. OPTIMIZE
   !-----------------------------------------------------------------------
   ! THIS FUNCTION ROUTINE COMPUTES THE WEIGHTED ROOT-MEAN-SQUARE NORM
   ! OF THE VECTOR OF LENGTH N CONTAINED IN THE ARRAY V, WITH WEIGHTS

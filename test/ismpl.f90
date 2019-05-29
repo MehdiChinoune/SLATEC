@@ -42,14 +42,11 @@ SUBROUTINE ISMPL(N,M,Indx)
   !
   !     Set the indices.
   Indx(1) = INT(RAND(dummy)*N) + 1
-  !VD$ NOCONCUR
   DO i = 2, M
     DO
       id = INT(RAND(dummy)*N) + 1
       !
       !        Check to see if ID has already been chosen.
-      !VD$ NOVECTOR
-      !VD$ NOCONCUR
       DO j = 1, i - 1
         IF ( id==Indx(j) ) GOTO 50
       END DO

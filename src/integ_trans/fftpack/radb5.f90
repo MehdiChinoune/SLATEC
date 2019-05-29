@@ -56,7 +56,6 @@ SUBROUTINE RADB5(Ido,L1,Cc,Ch,Wa1,Wa2,Wa3,Wa4)
   IF ( (Ido-1)/2<L1 ) THEN
     DO i = 3, Ido, 2
       ic = idp2 - i
-      !DIR$ IVDEP
       DO k = 1, L1
         ti5 = Cc(i,3,k) + Cc(ic,2,k)
         ti2 = Cc(i,3,k) - Cc(ic,2,k)
@@ -97,7 +96,6 @@ SUBROUTINE RADB5(Ido,L1,Cc,Ch,Wa1,Wa2,Wa3,Wa4)
     RETURN
   END IF
   DO k = 1, L1
-    !DIR$ IVDEP
     DO i = 3, Ido, 2
       ic = idp2 - i
       ti5 = Cc(i,3,k) + Cc(ic,2,k)

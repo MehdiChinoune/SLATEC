@@ -75,8 +75,6 @@ SUBROUTINE SHEQR(A,Lda,N,Q,Info,Ijob)
   !   910506  Made subsidiary to SGMRES.  (FNF)
   !   920511  Added complete declaration section.  (WRB)
 
-  !         The following is for optimized compilation on LLNL/LTSS Crays.
-  !LLL. OPTIMIZE
   !     .. Scalar Arguments ..
   INTEGER Ijob, Info, Lda, N
   !     .. Array Arguments ..

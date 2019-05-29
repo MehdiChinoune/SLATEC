@@ -119,7 +119,6 @@ SUBROUTINE DS2LT(N,Nelt,Ia,Ja,A,Isym,Nel,Iel,Jel,El)
       Jel(icol) = Nel + 1
       jbgn = Ja(icol)
       jend = Ja(icol+1) - 1
-      !VD$ NOVECTOR
       DO j = jbgn, jend
         IF ( Ia(j)>=icol ) THEN
           Nel = Nel + 1

@@ -305,8 +305,6 @@ SUBROUTINE SOMN(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Nsave,Itol,Tol,&
     !
     !         ***** iteration loop *****
     !
-    !VD$R NOVECTOR
-    !VD$R NOCONCUR
     DO k = 1, Itmax
       Iter = k
       ip = MOD(Iter-1,Nsave+1)

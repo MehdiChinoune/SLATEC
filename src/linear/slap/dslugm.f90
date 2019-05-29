@@ -333,8 +333,6 @@ SUBROUTINE DSLUGM(N,B,X,Nelt,Ia,Ja,A,Isym,Nsave,Tol,Itmax,Iter,Err,&
   !   920929  Corrected format of references.  (FNF)
   !   921019  Corrected NEL to NL.  (FNF)
 
-  !         The following is for optimized compilation on LLNL/LTSS Crays.
-  !LLL. OPTIMIZE
   !     .. Parameters ..
   INTEGER , PARAMETER :: LOCRB = 1, LOCIB = 11
   !     .. Scalar Arguments ..
@@ -367,7 +365,6 @@ SUBROUTINE DSLUGM(N,B,X,Nelt,Ia,Ja,A,Isym,Nsave,Tol,Itmax,Iter,Err,&
     jbgn = Ja(icol) + 1
     jend = Ja(icol+1) - 1
     IF ( jbgn<=jend ) THEN
-      !VD$ NOVECTOR
       DO j = jbgn, jend
         IF ( Ia(j)>icol ) THEN
           nl = nl + 1

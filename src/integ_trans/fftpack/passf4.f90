@@ -49,7 +49,6 @@ SUBROUTINE PASSF4(Ido,L1,Cc,Ch,Wa1,Wa2,Wa3)
     RETURN
   ELSEIF ( Ido/2<L1 ) THEN
     DO i = 2, Ido, 2
-      !DIR$ IVDEP
       DO k = 1, L1
         ti1 = Cc(i,1,k) - Cc(i,3,k)
         ti2 = Cc(i,1,k) + Cc(i,3,k)
@@ -78,7 +77,6 @@ SUBROUTINE PASSF4(Ido,L1,Cc,Ch,Wa1,Wa2,Wa3)
     RETURN
   END IF
   DO k = 1, L1
-    !DIR$ IVDEP
     DO i = 2, Ido, 2
       ti1 = Cc(i,1,k) - Cc(i,3,k)
       ti2 = Cc(i,1,k) + Cc(i,3,k)

@@ -129,11 +129,9 @@ SUBROUTINE SSMTV(N,X,Y,Nelt,Ia,Ja,A,Isym)
   !
   !         Multiply by A-Transpose.
   !         A-Transpose is stored by rows...
-  !VD$R NOCONCUR
   DO irow = 1, N
     ibgn = Ja(irow)
     iend = Ja(irow+1) - 1
-    !VD$ ASSOC
     DO i = ibgn, iend
       Y(irow) = Y(irow) + A(i)*X(Ia(i))
     END DO
@@ -149,9 +147,6 @@ SUBROUTINE SSMTV(N,X,Y,Nelt,Ia,Ja,A,Isym)
       jbgn = Ja(icol) + 1
       jend = Ja(icol+1) - 1
       IF ( jbgn<=jend ) THEN
-        !LLL. OPTION ASSERT (NOHAZARD)
-        !DIR$ IVDEP
-        !VD$ NODEPCHK
         DO j = jbgn, jend
           Y(Ia(j)) = Y(Ia(j)) + A(j)*X(icol)
         END DO

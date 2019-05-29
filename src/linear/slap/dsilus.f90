@@ -184,8 +184,6 @@ SUBROUTINE DSILUS(N,Nelt,Ia,Ja,A,Isym,Nl,Il,Jl,L,Dinv,Nu,Iu,Ju,U,Nrow,Ncol)
     Nrow(i) = 0
     Ncol(i) = 0
   END DO
-  !VD$R NOCONCUR
-  !VD$R NOVECTOR
   DO icol = 1, N
     jbgn = Ja(icol) + 1
     jend = Ja(icol+1) - 1
@@ -393,7 +391,6 @@ SUBROUTINE DSILUS(N,Nelt,Ia,Ja,A,Isym,Nl,Il,Jl,L,Dinv,Nu,Iu,Ju,U,Nrow,Ncol)
   END DO
   !
   !         Replace diagonal elements by their inverses.
-  !VD$ VECTOR
   DO i = 1, N
     Dinv(i) = 1.0D0/Dinv(i)
   END DO
