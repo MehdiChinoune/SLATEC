@@ -46,7 +46,7 @@ SUBROUTINE HPPERM(Hx,N,Iperm,Work,Ier)
   !           check for length of work array.
   USE service, ONLY : XERMSG
   INTEGER :: N, Iperm(N), Ier
-  CHARACTER*(*) Hx(N), Work
+  CHARACTER(*) Hx(N), Work
   INTEGER :: i, indx, indx0, istrt
   !* FIRST EXECUTABLE STATEMENT  HPPERM
   Ier = 0

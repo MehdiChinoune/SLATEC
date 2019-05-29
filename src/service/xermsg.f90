@@ -195,7 +195,7 @@ SUBROUTINE XERMSG(Librar,Subrou,Messg,Nerr,Level)
 
   INTEGER i, kdummy, kount, lerr, Level, lkntrl, llevel, &
     ltemp, maxmes, mkntrl, Nerr
-  CHARACTER*(*) Librar, Subrou, Messg
+  CHARACTER(*) :: Librar, Subrou, Messg
   CHARACTER(8) :: xlibr, xsubr
   CHARACTER(72) :: temp
   CHARACTER(20) :: lfirst

@@ -22,7 +22,7 @@ SUBROUTINE DCHKW(Name,Lociw,Leniw,Locw,Lenw,Ierr,Iter,Err)
   ! **Description:**
   !
   !- Usage:
-  !     CHARACTER*(*) NAME
+  !     CHARACTER(*) NAME
   !     INTEGER LOCIW, LENIW, LOCW, LENW, IERR, ITER
   !     DOUBLE PRECISION ERR
   !

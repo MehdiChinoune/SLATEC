@@ -65,7 +65,7 @@ SUBROUTINE DMOUT(M,N,Lda,A,Ifmt,Idigit)
   USE service, ONLY : I1MACH
   INTEGER :: Idigit, Lda, M, N
   REAL(8) :: A(Lda,N)
-  CHARACTER*(*) Ifmt
+  CHARACTER(*) Ifmt
   INTEGER :: i, j, k1, k2, lout, ndigit
   CHARACTER(3), PARAMETER :: icol = 'COL'
   !* FIRST EXECUTABLE STATEMENT  DMOUT

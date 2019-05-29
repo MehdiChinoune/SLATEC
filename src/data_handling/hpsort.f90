@@ -116,10 +116,10 @@ SUBROUTINE HPSORT(Hx,N,Strbeg,Strend,Iperm,Kflag,Work,Ier)
   USE service, ONLY : XERMSG
   !     .. Scalar Arguments ..
   INTEGER Ier, Kflag, N, Strbeg, Strend
-  CHARACTER*(*) Work
+  CHARACTER(*) Work
   !     .. Array Arguments ..
   INTEGER Iperm(N)
-  CHARACTER*(*) Hx(N)
+  CHARACTER(*) Hx(N)
   !     .. Local Scalars ..
   REAL r
   INTEGER i, ij, indx, indx0, ir, istrt, j, k, kk, l, lm, lmt, m, nn, nn2

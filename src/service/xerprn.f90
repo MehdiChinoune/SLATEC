@@ -83,7 +83,7 @@ SUBROUTINE XERPRN(Prefix,Npref,Messg,Nwrap)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER i, idelta, lenmsg, lpiece, lpref, lwrap, n, nextc
-  CHARACTER*(*) Prefix, Messg
+  CHARACTER(*) Prefix, Messg
   INTEGER Npref, Nwrap
   CHARACTER(148) :: cbuff
   INTEGER iu(5), nunit

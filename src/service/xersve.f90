@@ -67,7 +67,7 @@ SUBROUTINE XERSVE(Librar,Subrou,Messg,Kflag,Nerr,Level,Icount)
   INTEGER, PARAMETER :: LENTAB = 10
   INTEGER i, Icount, iunit, Kflag, kunit, Level, Nerr, nunit
   INTEGER lun(5)
-  CHARACTER*(*) Librar, Subrou, Messg
+  CHARACTER(*) Librar, Subrou, Messg
   CHARACTER(8) :: lib, sub
   CHARACTER(20) :: mes
   CHARACTER(8), SAVE :: libtab(LENTAB), subtab(LENTAB)
