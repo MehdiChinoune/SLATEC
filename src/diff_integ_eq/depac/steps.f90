@@ -1,7 +1,7 @@
 !** STEPS
 SUBROUTINE STEPS(F,Neqn,Y,X,H,Eps,Wt,Start,Hold,K,Kold,Crash,Phi,P,Yp,Psi,&
     Alpha,Beta,Sig,V,W,G,Phase1,Ns,Nornd,Ksteps,Twou,Fouru,&
-    Xold,Kprev,Ivc,Iv,Kgi,Gi,Rpar,Ipar)
+    Xold,Kprev,Ivc,Iv,Kgi,Gi)
   !>
   !  Integrate a system of first order ordinary differential
   !            equations one step.
@@ -180,13 +180,18 @@ SUBROUTINE STEPS(F,Neqn,Y,X,H,Eps,Wt,Start,Hold,K,Kold,Crash,Phi,P,Yp,Psi,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   USE service, ONLY : R1MACH
+  INTERFACE
+    SUBROUTINE F(X,U,Uprime)
+      REAL :: X
+      REAL :: U(:), Uprime(:)
+    END SUBROUTINE F
+  END INTERFACE
   INTEGER :: Neqn, Ns, Ivc, K, Kgi, Kold, Kprev, Ksteps
-  INTEGER :: Ipar(:), Iv(10)
+  INTEGER :: Iv(10)
   REAL :: Eps, Fouru, H, Hold, Twou, X, Xold
   REAL :: Alpha(12), Beta(12), G(13), Gi(11), P(Neqn), Phi(Neqn,16), Psi(12), &
-    Rpar(:), Sig(13), W(12), V(12), Wt(Neqn), Y(Neqn), Yp(Neqn)
+    Sig(13), W(12), V(12), Wt(Neqn), Y(Neqn), Yp(Neqn)
   LOGICAL :: Start, Crash, Phase1, Nornd
-  EXTERNAL :: F
   !
   INTEGER :: i, ifail, im1, ip1, iq, j, jv, km1, km2, knew, kp1, kp2, l, limit1, &
     limit2, nsm2, nsp1, nsp2
@@ -243,7 +248,7 @@ SUBROUTINE STEPS(F,Neqn,Y,X,H,Eps,Wt,Start,Hold,K,Kold,Crash,Phi,P,Yp,Psi,&
         u = R1MACH(4)
         big = SQRT(R1MACH(2))
         CALL HSTART(F,Neqn,X,X+H,Y,Yp,Wt,1,u,big,Phi(1,3),Phi(1,4),Phi(1,5),&
-          Phi(1,6),Rpar,Ipar,H)
+          Phi(1,6),H)
         !
         Hold = 0.0
         K = 1
@@ -446,7 +451,7 @@ SUBROUTINE STEPS(F,Neqn,Y,X,H,Eps,Wt,Start,Hold,K,Kold,Crash,Phi,P,Yp,Psi,&
   Xold = X
   X = X + H
   absh = ABS(H)
-  CALL F(X,P,Yp,Rpar,Ipar)
+  CALL F(X,P,Yp)
   !
   !   ESTIMATE ERRORS AT ORDERS K,K-1,K-2
   !
@@ -509,7 +514,7 @@ SUBROUTINE STEPS(F,Neqn,Y,X,H,Eps,Wt,Start,Hold,K,Kold,Crash,Phi,P,Yp,Psi,&
         P(l) = temp3
       END DO
     END IF
-    CALL F(X,Y,Yp,Rpar,Ipar)
+    CALL F(X,Y,Yp)
     !
     !   UPDATE DIFFERENCES FOR NEXT STEP
     !

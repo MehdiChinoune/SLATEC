@@ -164,11 +164,15 @@ SUBROUTINE QAGE(F,A,B,Epsabs,Epsrel,Key,Limit,Result,Abserr,Neval,Ier,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   USE service, ONLY : R1MACH
   !
+  INTERFACE
+    REAL FUNCTION F(X)
+      REAL :: X
+    END FUNCTION F
+  END INTERFACE
   INTEGER :: Ier, Key, Last, Limit, Neval
   INTEGER :: Iord(Limit)
   REAL :: A, Abserr, B, Epsabs, Epsrel, Result
   REAL :: Alist(Limit), Blist(Limit), Elist(Limit), Rlist(Limit)
-  REAL, EXTERNAL :: F
   INTEGER :: iroff1, iroff2, k, keyf, maxerr, nrmax
   REAL :: area, area1, area12, area2, a1, a2, b1, b2, defabs, defab1, defab2, &
     epmach, errbnd, errmax, error1, error2, erro12, errsum, resabs, uflow

@@ -3,7 +3,7 @@ MODULE TEST43_MOD
 
 CONTAINS
   !** JAC
-  SUBROUTINE JAC(T,U,Pd,Nrowpd,Rpar,Ipar)
+  SUBROUTINE JAC(T,U,Pd,Nrowpd)
     !>
     !  Evaluate Jacobian for DEBDF quick check.
     !***
@@ -20,8 +20,9 @@ CONTAINS
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   900415  Minor clean-up of prologue and code.  (WRB)
 
-    INTEGER Ipar(*), Nrowpd
-    REAL Pd(Nrowpd,*), r, r5, Rpar(*), rsq, T, U(*), u1sq, u2sq, u1u2
+    INTEGER :: Nrowpd
+    REAL :: T, U(:), Pd(:,:)
+    REAL :: r, r5, rsq, u1sq, u2sq, u1u2
     !* FIRST EXECUTABLE STATEMENT  JAC
     u1sq = U(1)*U(1)
     u2sq = U(2)*U(2)
@@ -37,7 +38,7 @@ CONTAINS
     Pd(2,4) = 1.E0
   END SUBROUTINE JAC
   !** FDEQC
-  SUBROUTINE FDEQC(T,U,Uprime,Rpar,Ipar)
+  SUBROUTINE FDEQC(T,U,Uprime)
     !>
     !  Derivative evaluator for DEPAC quick checks.
     !***
@@ -57,8 +58,7 @@ CONTAINS
     !
     !     Declare arguments.
     !
-    INTEGER Ipar(*)
-    REAL Rpar(*), T, U(*), Uprime(*)
+    REAL :: T, U(:), Uprime(:)
     !
     !     Declare local variables.
     !
@@ -131,8 +131,8 @@ CONTAINS
     !
     !     Declare local variables.
     !
-    INTEGER idid, info(15), ipar(1), iwork(51), n, liw, lrw
-    REAL abserr(1), r, relerr(1), reltol, rpar(1), rwork(214), t, tout, u(4)
+    INTEGER idid, info(15), iwork(51), n, liw, lrw
+    REAL abserr(1), r, relerr(1), reltol, rwork(214), t, tout, u(4)
     !* FIRST EXECUTABLE STATEMENT  QXABM
     IF ( Kprint>=2 ) WRITE (Lun,99001)
     !
@@ -163,8 +163,7 @@ CONTAINS
     99002 FORMAT (/' RELERR = ',E16.8,'   ABSERR =',E16.8/12X,'T',19X,'R'/2E20.8)
     DO
       !
-      CALL DEABM(FDEQC,n,t,u,tout,info,relerr,abserr,idid,rwork,lrw,iwork,liw,&
-        rpar,ipar)
+      CALL DEABM(FDEQC,n,t,u,tout,info,relerr,abserr,idid,rwork,lrw,iwork,liw)
       r = SQRT(u(1)*u(1)+u(2)*u(2))
       IF ( ABS(r-1.0E0)>reltol ) Ipass = 0
       IF ( Kprint>2 ) WRITE (Lun,99003) t, r
@@ -244,8 +243,8 @@ CONTAINS
     !
     !     Declare local variables.
     !
-    INTEGER idid, info(15), ipar(1), iwork(60), n, liw, lrw
-    REAL abserr(1), r, relerr(1), reltol, rpar(1), rwork(306), t, tout, u(4)
+    INTEGER idid, info(15), iwork(60), n, liw, lrw
+    REAL abserr(1), r, relerr(1), reltol, rwork(306), t, tout, u(4)
     !* FIRST EXECUTABLE STATEMENT  QXBDF
     IF ( Kprint>=2 ) WRITE (Lun,99001)
     !
@@ -278,8 +277,7 @@ CONTAINS
     99002 FORMAT (/' RELERR = ',E16.8,'   ABSERR =',E16.8/12X,'T',19X,'R'/2E20.8)
     DO
       !
-      CALL DEBDF(FDEQC,n,t,u,tout,info,relerr,abserr,idid,rwork,lrw,iwork,liw,&
-        rpar,ipar,JAC)
+      CALL DEBDF(FDEQC,n,t,u,tout,info,relerr,abserr,idid,rwork,lrw,iwork,liw,JAC)
       r = SQRT(u(1)*u(1)+u(2)*u(2))
       IF ( ABS(r-1.0E0)>reltol ) Ipass = 0
       IF ( Kprint>2 ) WRITE (Lun,99003) t, r
@@ -359,8 +357,8 @@ CONTAINS
     !
     !     Declare local variables.
     !
-    INTEGER idid, info(15), ipar(1), iwork(34), n, liw, lrw
-    REAL abserr(1), r, relerr(1), reltol, rpar(1), rwork(61), t, tout, u(4)
+    INTEGER idid, info(15), iwork(34), n, liw, lrw
+    REAL abserr(1), r, relerr(1), reltol, rwork(61), t, tout, u(4)
     !* FIRST EXECUTABLE STATEMENT  QXRKF
     IF ( Kprint>=2 ) WRITE (Lun,99001)
     !
@@ -391,8 +389,7 @@ CONTAINS
     99002 FORMAT (/' RELERR = ',E16.8,'   ABSERR =',E16.8/12X,'T',19X,'R'/2E20.8)
     DO
       !
-      CALL DERKF(FDEQC,n,t,u,tout,info,relerr,abserr,idid,rwork,lrw,iwork,liw,&
-        rpar,ipar)
+      CALL DERKF(FDEQC,n,t,u,tout,info,relerr,abserr,idid,rwork,lrw,iwork,liw)
       r = SQRT(u(1)*u(1)+u(2)*u(2))
       IF ( ABS(r-1.0E0)>reltol ) Ipass = 0
       IF ( Kprint>2 ) WRITE (Lun,99003) t, r

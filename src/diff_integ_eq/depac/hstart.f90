@@ -1,6 +1,5 @@
 !** HSTART
-SUBROUTINE HSTART(F,Neq,A,B,Y,Yprime,Etol,Morder,Small,Big,Spy,Pv,Yp,Sf,&
-    Rpar,Ipar,H)
+SUBROUTINE HSTART(F,Neq,A,B,Y,Yprime,Etol,Morder,Small,Big,Spy,Pv,Yp,Sf,H)
   !>
   !  Subsidiary to DEABM, DEBDF and DERKF
   !***
@@ -142,10 +141,15 @@ SUBROUTINE HSTART(F,Neq,A,B,Y,Yprime,Etol,Morder,Small,Big,Spy,Pv,Yp,Sf,&
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
 
-  INTEGER :: Morder, Neq, Ipar(:)
+  INTERFACE
+    SUBROUTINE F(X,U,Uprime)
+      REAL :: X
+      REAL :: U(:), Uprime(:)
+    END SUBROUTINE F
+  END INTERFACE
+  INTEGER :: Morder, Neq
   REAL :: A, B, Big, H, Small
-  REAL :: Etol(Neq), Pv(Neq), Rpar(:), Sf(Neq), Spy(Neq), Y(Neq), Yp(Neq), Yprime(Neq)
-  EXTERNAL :: F
+  REAL :: Etol(Neq), Pv(Neq), Sf(Neq), Spy(Neq), Y(Neq), Yp(Neq), Yprime(Neq)
   REAL :: absdx, da, delf, delx, delxb, dely, dfdub, dfdxb, dx, dy, fbnd, power, &
     relper, srydpb, wtj, ydpb, ynorm, ypnorm
   INTEGER :: icase, j, k, lk
@@ -167,7 +171,7 @@ SUBROUTINE HSTART(F,Neq,A,B,Y,Yprime,Etol,Morder,Small,Big,Spy,Pv,Yp,Sf,&
   !
   da = SIGN(MAX(MIN(relper*ABS(A),absdx),100.*Small*ABS(A)),dx)
   IF ( da==0. ) da = relper*dx
-  CALL F(A+da,Y,Sf,Rpar,Ipar)
+  CALL F(A+da,Y,Sf)
   !
   IF ( Morder==1 ) THEN
     !
@@ -253,14 +257,14 @@ SUBROUTINE HSTART(F,Neq,A,B,Y,Yprime,Etol,Morder,Small,Big,Spy,Pv,Yp,Sf,&
     IF ( k==2 ) THEN
       !                       USE A SHIFTED VALUE OF THE INDEPENDENT VARIABLE
       !                                             IN COMPUTING ONE ESTIMATE
-      CALL F(A+da,Pv,Yp,Rpar,Ipar)
+      CALL F(A+da,Pv,Yp)
       DO j = 1, Neq
         Pv(j) = Yp(j) - Sf(j)
       END DO
     ELSE
       !                       EVALUATE DERIVATIVES ASSOCIATED WITH PERTURBED
       !                       VECTOR  AND  COMPUTE CORRESPONDING DIFFERENCES
-      CALL F(A,Pv,Yp,Rpar,Ipar)
+      CALL F(A,Pv,Yp)
       DO j = 1, Neq
         Pv(j) = Yp(j) - Yprime(j)
       END DO

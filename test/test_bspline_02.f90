@@ -471,7 +471,7 @@ CONTAINS
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   930214  Added TYPE statement.  (WRB)
 
-    REAL(8) :: X
+    REAL(8), INTENT(IN) :: X
     !* FIRST EXECUTABLE STATEMENT  DFB
     DFB = 1.0D0
   END FUNCTION DFB

@@ -29,11 +29,30 @@ SUBROUTINE SDPST(El,F,FA,H,Impl,JACOBN,Matdim,Miter,Ml,Mu,N,Nde,Nq,Save2,&
   !   790601  DATE WRITTEN
   !   900329  Initial submission to SLATEC.
   USE linear, ONLY : SGBFA, SGEFA
+  INTERFACE
+    SUBROUTINE F(N,T,Y,Ydot)
+      INTEGER :: N
+      REAL :: T, Y(:), Ydot(:)
+    END SUBROUTINE F
+    SUBROUTINE JACOBN(N,T,Y,Dfdy,Matdim,Ml,Mu)
+      INTEGER :: N, Matdim, Ml, Mu
+      REAL :: T, Y(N), Dfdy(Matdim,N)
+    END SUBROUTINE JACOBN
+    SUBROUTINE USERS(Y,Yh,Ywt,Save1,Save2,T,H,El,Impl,N,Nde,Iflag)
+      INTEGER :: Impl, N, Nde, iflag
+      REAL :: T, H, El
+      REAL :: Y(N), Yh(N,13), Ywt(N), Save1(N), Save2(N)
+    END SUBROUTINE USERS
+    SUBROUTINE FA(N,T,Y,A,Matdim,Ml,Mu,Nde)
+      INTEGER :: N, Matdim, Ml, Mu, Nde
+      REAL :: T, Y(N), A(:,:)
+    END SUBROUTINE FA
+  END INTERFACE
   INTEGER :: Impl, Iswflg, Jstate, Matdim, Miter, Ml, Mu, N, Nde, Nfe, Nje, Nq
   INTEGER :: Ipvt(N)
   REAL :: Bnd, H, T, Uround
   REAL :: A(Matdim,N), Dfdy(Matdim,N), El(13,12), Fac(N), Save1(N), Save2(N), &
-    Y(N), Yh(N,Nq+1), Ywt(N)
+    Y(N+1), Yh(N,Nq+1), Ywt(N)
   LOGICAL :: Ier
   INTEGER :: i, iflag, imax, info, j, j2, k, mw
   REAL :: bl, bp, br, dfdymx, diff, dy, facmin, factor, scalee, yj, ys
@@ -269,7 +288,7 @@ SUBROUTINE SDPST(El,F,FA,H,Impl,JACOBN,Matdim,Miter,Ml,Mu,N,Nde,Nq,Save2,&
         Dfdy(mw,j) = Dfdy(mw,j) + 1.E0
       END DO
     ELSEIF ( Impl==1 ) THEN
-      CALL FA(N,T,Y,A(Ml+1,1),Matdim,Ml,Mu,Nde)
+      CALL FA(N,T,Y,A(Ml+1:,:),Matdim,Ml,Mu,Nde)
       IF ( N==0 ) THEN
         Jstate = 9
         RETURN
@@ -289,7 +308,7 @@ SUBROUTINE SDPST(El,F,FA,H,Impl,JACOBN,Matdim,Miter,Ml,Mu,N,Nde,Nq,Save2,&
         Dfdy(mw,j) = Dfdy(mw,j) + A(j,1)
       END DO
     ELSEIF ( Impl==3 ) THEN
-      CALL FA(N,T,Y,A(Ml+1,1),Matdim,Ml,Mu,Nde)
+      CALL FA(N,T,Y,A(Ml+1:,:),Matdim,Ml,Mu,Nde)
       IF ( N==0 ) THEN
         Jstate = 9
         RETURN

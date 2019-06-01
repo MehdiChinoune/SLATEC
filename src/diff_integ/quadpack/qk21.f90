@@ -68,12 +68,15 @@ SUBROUTINE QK21(F,A,B,Result,Abserr,Resabs,Resasc)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   USE service, ONLY : R1MACH
-  REAL Resasc
-  REAL A, absc, Abserr, B, centr, dhlgth, epmach, fc, fsum, &
-    fval1, fval2, fv1(10), fv2(10), hlgth, Resabs, resg, resk, reskh, &
-    Result, uflow
+  INTERFACE
+    REAL FUNCTION F(X)
+      REAL :: X
+    END FUNCTION F
+  END INTERFACE
+  REAL :: A, Abserr, B, Resabs, Result, Resasc
+  REAL :: absc, centr, dhlgth, epmach, fc, fsum, fval1, fval2, fv1(10), &
+    fv2(10), hlgth, resg, resk, reskh, uflow
   INTEGER j, jtw, jtwm1
-  REAL, EXTERNAL :: F
   !
   !           THE ABSCISSAE AND WEIGHTS ARE GIVEN FOR THE INTERVAL (-1,1).
   !           BECAUSE OF SYMMETRY ONLY THE POSITIVE ABSCISSAE AND THEIR

@@ -216,12 +216,16 @@ SUBROUTINE DQAWFE(F,A,Omega,Integr,Epsabs,Limlst,Limit,Maxp1,Result,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   USE service, ONLY : D1MACH
   !
+  INTERFACE
+    REAL(8) FUNCTION F(X)
+      REAL(8) :: X
+    END FUNCTION F
+  END INTERFACE
   INTEGER :: Ier, Integr, Lst, Limit, Limlst, Maxp1, Neval
   INTEGER :: Iord(Limit), Ierlst(Limlst), Nnlog(Limit)
   REAL(8) :: A, Abserr, Epsabs, Omega, Result
   REAL(8) :: Alist(Limit), Blist(Limit), Chebmo(Maxp1,25), Elist(Limit), &
     Erlst(Limlst), Rlist(Limit), Rslst(Limlst)
-  REAL(8), EXTERNAL :: F
   INTEGER :: ktmin, l, last, ll, momcom, nev, nres, numrl2
   REAL(8) :: abseps, correc, cycle, c1, c2, dl, drl, ep, eps, epsa, errsum, &
     fact, p1, psum(52), reseps, res3la(3), uflow

@@ -45,7 +45,7 @@ SUBROUTINE DDATRP(X,Xout,Yout,Ypout,Neq,Kold,Phi,Psi)
   REAL(8) :: X, Xout
   REAL(8) :: Yout(Neq), Ypout(Neq), Phi(Neq,Kold+1), Psi(Kold+1)
   !
-  INTEGER i, j, koldp1
+  INTEGER :: i, j, koldp1
   REAL(8) :: c, d, gama, temp1
   !
   !* FIRST EXECUTABLE STATEMENT  DDATRP

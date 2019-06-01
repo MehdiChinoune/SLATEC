@@ -1,5 +1,5 @@
 !** DSTOD
-SUBROUTINE DSTOD(Neq,Y,Yh,Nyh,Yh1,Ewt,Savf,Acor,Wm,Iwm,DF,DJAC,Rpar,Ipar)
+SUBROUTINE DSTOD(Neq,Y,Yh,Nyh,Yh1,Ewt,Savf,Acor,Wm,Iwm,DF,DJAC)
   !>
   !  Subsidiary to DDEBDF
   !***
@@ -96,11 +96,21 @@ SUBROUTINE DSTOD(Neq,Y,Yh,Nyh,Yh1,Ewt,Savf,Acor,Wm,Iwm,DF,DJAC,Rpar,Ipar)
     HMXi, HU, TN, KSTeps, IALth, IPUp, LMAx, MEO, NQNyh, NSTepj, IER, JSTart, &
     KFLag, L, METh, MITer, MAXord, N, NQ, NST, NFE, NQU
   !
+  INTERFACE
+    SUBROUTINE DF(X,U,Uprime)
+      REAL(8) :: X
+      REAL(8) :: U(:), Uprime(:)
+    END SUBROUTINE DF
+    SUBROUTINE DJAC(X,U,Pd,Nrowpd)
+      INTEGER :: Nrowpd
+      REAL(8) :: X
+      REAL(8) :: U(:), Pd(:,:)
+    END SUBROUTINE DJAC
+  END INTERFACE
   INTEGER :: Neq, Nyh
-  INTEGER :: Ipar(:), Iwm(:)
-  REAL(8) :: Acor(N), Ewt(N), Rpar(:), Savf(N), Wm(:), Y(N), Yh(Nyh,MAXord+1), &
+  INTEGER :: Iwm(:)
+  REAL(8) :: Acor(N), Ewt(N), Savf(N), Wm(:), Y(N), Yh(Nyh,MAXord+1), &
     Yh1(Nyh*MAXord+Nyh)
-  EXTERNAL :: DF, DJAC
   INTEGER :: i, i1, iredo, iret, j, jb, m, ncf, newq
   REAL(8) :: dcon, ddn, del, delp, dsm, dup, exdn, exsm, exup, r, rh, rhdn, &
     rhsm, rhup, told
@@ -285,7 +295,7 @@ SUBROUTINE DSTOD(Neq,Y,Yh,Nyh,Yh1,Ewt,Savf,Acor,Wm,Iwm,DF,DJAC,Rpar,Ipar)
   DO i = 1, N
     Y(i) = Yh(i,1)
   END DO
-  CALL DF(TN,Y,Savf,Rpar,Ipar)
+  CALL DF(TN,Y,Savf)
   NFE = NFE + 1
   IF ( IPUp>0 ) THEN
     !                                ---------------------------------------
@@ -300,7 +310,7 @@ SUBROUTINE DSTOD(Neq,Y,Yh,Nyh,Yh1,Ewt,Savf,Acor,Wm,Iwm,DF,DJAC,Rpar,Ipar)
     RC = 1.0D0
     NSTepj = NST
     CRAte = 0.7D0
-    CALL DPJAC(Neq,Y,Yh,Nyh,Ewt,Acor,Savf,Wm,Iwm,DF,DJAC,Rpar,Ipar)
+    CALL DPJAC(Neq,Y,Yh,Nyh,Ewt,Acor,Savf,Wm,Iwm,DF,DJAC)
     !                          ......EXIT
     IF ( IER/=0 ) GOTO 800
   END IF
@@ -359,7 +369,7 @@ SUBROUTINE DSTOD(Neq,Y,Yh,Nyh,Yh1,Ewt,Savf,Acor,Wm,Iwm,DF,DJAC,Rpar,Ipar)
       !                             ...EXIT
       IF ( m<2.OR.del<=2.0D0*delp ) THEN
         delp = del
-        CALL DF(TN,Y,Savf,Rpar,Ipar)
+        CALL DF(TN,Y,Savf)
         NFE = NFE + 1
         GOTO 600
       END IF
@@ -433,7 +443,7 @@ SUBROUTINE DSTOD(Neq,Y,Yh,Nyh,Yh1,Ewt,Savf,Acor,Wm,Iwm,DF,DJAC,Rpar,Ipar)
         DO i = 1, N
           Y(i) = Yh(i,1)
         END DO
-        CALL DF(TN,Y,Savf,Rpar,Ipar)
+        CALL DF(TN,Y,Savf)
         NFE = NFE + 1
         DO i = 1, N
           Yh(i,2) = H*Savf(i)

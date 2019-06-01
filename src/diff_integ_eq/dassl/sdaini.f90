@@ -1,5 +1,5 @@
 !** SDAINI
-SUBROUTINE SDAINI(X,Y,Yprime,Neq,RES,JAC,H,Wt,Idid,Rpar,Ipar,Phi,Delta,E,&
+SUBROUTINE SDAINI(X,Y,Yprime,Neq,RES,JAC,H,Wt,Idid,Phi,Delta,E,&
     Wm,Iwm,Hmin,Uround,Nonneg,Ntemp)
   !>
   !  Initialization routine for SDASSL.
@@ -58,11 +58,19 @@ SUBROUTINE SDAINI(X,Y,Yprime,Neq,RES,JAC,H,Wt,Idid,Rpar,Ipar,Phi,Delta,E,&
   !   901030  Minor corrections to declarations.  (FNF)
 
   !
+  INTERFACE
+    SUBROUTINE RES(T,Y,Yprime,Delta,Ires)
+      INTEGER :: Ires
+      REAL :: T, Y(:), Yprime(:), Delta(:)
+    END SUBROUTINE
+    SUBROUTINE JAC(T,Y,Yprime,Pd,Cj)
+      REAL :: T, Cj, Pd(:,:), Y(:), Yprime(:)
+    END SUBROUTINE
+  END INTERFACE
   INTEGER :: Neq, Idid, Nonneg, Ntemp
-  INTEGER :: Ipar(:), Iwm(:)
+  INTEGER :: Iwm(:)
   REAL :: X, H, Hmin, Uround
-  REAL :: Y(Neq), Yprime(Neq), Wt(:), Rpar(:), Phi(Neq,*), Delta(:), E(:), Wm(:)
-  EXTERNAL :: RES, JAC
+  REAL :: Y(Neq), Yprime(Neq), Wt(:), Phi(Neq,*), Delta(:), E(:), Wm(:)
   !
   INTEGER :: i, ier, ires, jcalc, m, ncf, nef, nsf
   REAL :: cj, delnrm, err, oldnrm, r, rate, s, xold, ynorm
@@ -119,7 +127,7 @@ SUBROUTINE SDAINI(X,Y,Yprime,Neq,RES,JAC,H,Wt,Idid,Rpar,Ipar,Phi,Delta,E,&
     Iwm(LNRE) = Iwm(LNRE) + 1
     ires = 0
     !
-    CALL RES(X,Y,Yprime,Delta,ires,Rpar,Ipar)
+    CALL RES(X,Y,Yprime,Delta,ires)
     IF ( ires<0 ) THEN
       !
       !
@@ -133,7 +141,7 @@ SUBROUTINE SDAINI(X,Y,Yprime,Neq,RES,JAC,H,Wt,Idid,Rpar,Ipar,Phi,Delta,E,&
         Iwm(LNJE) = Iwm(LNJE) + 1
         jcalc = 0
         CALL SDAJAC(Neq,X,Y,Yprime,Delta,cj,H,ier,Wt,E,Wm,Iwm,RES,ires,&
-          Uround,JAC,Rpar,Ipar,Ntemp)
+          Uround,JAC,Ntemp)
         !
         s = 1000000.E0
         IF ( ires<0 ) THEN

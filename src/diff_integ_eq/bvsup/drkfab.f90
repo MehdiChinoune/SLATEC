@@ -1,6 +1,6 @@
 !** DRKFAB
 SUBROUTINE DRKFAB(Ncomp,Xpts,Nxpts,Nfc,Iflag,Z,Mxnon,P,Ntp,Ip,Yhp,Niv,U,V,&
-    W,S,Stowa,G,Work,Iwork,Nfcc)
+    W,S,Stowa,Work,Iwork,Nfcc)
   !>
   !  Subsidiary to DBVSUP
   !***
@@ -40,7 +40,7 @@ SUBROUTINE DRKFAB(Ncomp,Xpts,Nxpts,Nfc,Iflag,Z,Mxnon,P,Ntp,Ip,Yhp,Niv,U,V,&
   !
   INTEGER :: Iflag, Mxnon, Ncomp, Nfc, Nfcc, Niv, Ntp, Nxpts
   INTEGER :: Ip(Nfcc,Mxnon+1), Iwork(*)
-  REAL(8) :: G(Ncomp), P(Ntp,Mxnon+1), S(Nfc+1), Stowa(:), U(Ncomp,Nfc,Nxpts), &
+  REAL(8) :: P(Ntp,Mxnon+1), S(Nfc+1), Stowa(:), U(Ncomp,Nfc,Nxpts), &
     V(Ncomp,Nxpts), W(Nfcc,Mxnon+1), Work(*), Xpts(Nxpts), Yhp(Ncomp,Nfc+1), Z(Mxnon+1)
   INTEGER :: idid, ipar(1), j, jflag, jon, kod, kopp, nfcp1, non
   REAL(8) :: xxop, ret(1), aet(1)
@@ -98,15 +98,15 @@ SUBROUTINE DRKFAB(Ncomp,Xpts,Nxpts,Nfc,Iflag,Z,Mxnon,P,Ntp,Ip,Yhp,Niv,U,V,&
         !
         ret(1) = RE
         aet(1) = AE
-        CALL DDEABM(DBVDER,NEQ,X,Yhp,xxop,INFo,ret,aet,idid,Work,KKKint,Iwork,&
-          LLLint,G,ipar)
+        CALL DDEABM(DBVDER_2,NEQ,X,Yhp,xxop,INFo,ret,aet,idid,Work,KKKint,Iwork,&
+          LLLint)
       ELSE
         !                       DDERKF INTEGRATOR
         !
         ret(1) = RE
         aet(1) = AE
-        CALL DDERKF(DBVDER,NEQ,X,Yhp,xxop,INFo,ret,aet,idid,Work,KKKint,Iwork,&
-          LLLint,G,ipar)
+        CALL DDERKF(DBVDER_2,NEQ,X,Yhp,xxop,INFo,ret,aet,idid,Work,KKKint,Iwork,&
+          LLLint)
       END IF
       IF ( idid>=1 ) THEN
         !
@@ -218,4 +218,14 @@ SUBROUTINE DRKFAB(Ncomp,Xpts,Nxpts,Nfc,Iflag,Z,Mxnon,P,Ntp,Ip,Yhp,Niv,U,V,&
   !
   Iflag = 0
   RETURN
+
+CONTAINS
+  SUBROUTINE DBVDER_2(X,Y,Yp)
+    REAL(8) :: X
+    REAL(8) :: Y(:), Yp(:)
+    REAL(8) :: g(SIZE(Y))
+
+    g = 0.
+    CALL DBVDER(X,Y,Yp,G)
+  END SUBROUTINE DBVDER_2
 END SUBROUTINE DRKFAB

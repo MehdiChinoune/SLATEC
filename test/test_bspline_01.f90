@@ -470,7 +470,7 @@ CONTAINS
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   930214  Added TYPE statement.  (WRB)
 
-    REAL X
+    REAL, INTENT(IN) :: X
     !* FIRST EXECUTABLE STATEMENT  FB
     FB = 1.0E0
   END FUNCTION FB

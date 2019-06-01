@@ -1,5 +1,5 @@
 !** PJAC
-SUBROUTINE PJAC(Neq,Y,Yh,Nyh,Ewt,Ftem,Savf,Wm,Iwm,F,JAC,Rpar,Ipar)
+SUBROUTINE PJAC(Neq,Y,Yh,Nyh,Ewt,Ftem,Savf,Wm,Iwm,F,JAC)
   !>
   !  Subsidiary to DEBDF
   !***
@@ -30,12 +30,23 @@ SUBROUTINE PJAC(Neq,Y,Yh,Nyh,Ewt,Ftem,Savf,Wm,Iwm,F,JAC,Rpar,Ipar)
   !   920422  Changed DIMENSION statement.  (WRB)
   USE DEBDF1, ONLY : EL0, H, TN, UROund, IER, MITer, N, NFE, NJE
   USE linear, ONLY : SGBFA, SGEFA
+  INTERFACE
+    SUBROUTINE F(X,U,Uprime)
+      REAL :: X
+      REAL :: U(:), Uprime(:)
+    END SUBROUTINE F
+    SUBROUTINE JAC(X,U,Pd,Nrowpd)
+      INTEGER :: Nrowpd
+      REAL :: X
+      REAL :: U(:), Pd(:,:)
+    END SUBROUTINE JAC
+  END INTERFACE
   INTEGER :: Neq, Nyh
-  INTEGER :: Iwm(:), Ipar(:)
-  REAL :: Y(Neq), Yh(Nyh,N), Ewt(N), Ftem(N), Savf(N), Wm(:), Rpar(:)
-  EXTERNAL :: F, JAC
-  INTEGER :: i, i1, i2, ii, j, j1, jj, lenp, mba, mband, meb1, meband, ml, ml3, mu
+  INTEGER :: Iwm(:)
+  REAL :: Y(Neq), Yh(Nyh,N), Ewt(N), Ftem(N), Savf(N), Wm(:)
+  INTEGER :: i, i1, i2, ii, j, j1, jj, mba, mband, meb1, meband, ml, ml3, mu
   REAL :: con, di, fac, hl0, r, r0, srur, yi, yj, yjj
+  REAL, ALLOCATABLE :: pd(:,:)
   !-----------------------------------------------------------------------
   ! PJAC IS CALLED BY STOD  TO COMPUTE AND PROCESS THE MATRIX
   ! P = I - H*EL(1)*J, WHERE J IS AN APPROXIMATION TO THE JACOBIAN.
@@ -84,7 +95,7 @@ SUBROUTINE PJAC(Neq,Y,Yh,Nyh,Ewt,Ftem,Savf,Wm,Iwm,F,JAC,Rpar,Ipar)
         r = MAX(srur*ABS(yj),r0*Ewt(j))
         Y(j) = Y(j) + r
         fac = -hl0/r
-        CALL F(TN,Y,Ftem,Rpar,Ipar)
+        CALL F(TN,Y,Ftem)
         DO i = 1, N
           Wm(i+j1) = (Ftem(i)-Savf(i))*fac
         END DO
@@ -100,7 +111,7 @@ SUBROUTINE PJAC(Neq,Y,Yh,Nyh,Ewt,Ftem,Savf,Wm,Iwm,F,JAC,Rpar,Ipar)
       DO i = 1, N
         Y(i) = Y(i) + r*(H*Savf(i)-Yh(i,2))
       END DO
-      CALL F(TN,Y,Wm(3),Rpar,Ipar)
+      CALL F(TN,Y,Wm(3:Neq+2))
       NFE = NFE + 1
       DO i = 1, N
         r0 = H*Savf(i) - Yh(i,2)
@@ -118,15 +129,15 @@ SUBROUTINE PJAC(Neq,Y,Yh,Nyh,Ewt,Ftem,Savf,Wm,Iwm,F,JAC,Rpar,Ipar)
       mu = Iwm(2)
       ml3 = 3
       mband = ml + mu + 1
-      meband = mband + ml
-      lenp = meband*N
-      DO i = 1, lenp
-        Wm(i+2) = 0.0E0
-      END DO
-      CALL JAC(TN,Y,Wm(ml3),meband,Rpar,Ipar)
+      meband = 2*ml + mu + 1
+      ALLOCATE( pd(meband,N) )
+      pd = 0.E0
+      CALL JAC(TN,Y,pd,meband)
       con = -hl0
-      DO i = 1, lenp
-        Wm(i+2) = Wm(i+2)*con
+      DO j = 1, N
+        DO i = 1, meband
+          Wm( 2+(j-1)*meband+i ) = pd(i,j)*con
+        END DO
       END DO
       GOTO 200
     CASE (5)
@@ -147,7 +158,7 @@ SUBROUTINE PJAC(Neq,Y,Yh,Nyh,Ewt,Ftem,Savf,Wm,Iwm,F,JAC,Rpar,Ipar)
           r = MAX(srur*ABS(yi),r0*Ewt(i))
           Y(i) = Y(i) + r
         END DO
-        CALL F(TN,Y,Ftem,Rpar,Ipar)
+        CALL F(TN,Y,Ftem)
         DO jj = j, N, mband
           Y(jj) = Yh(jj,1)
           yjj = Y(jj)
@@ -165,14 +176,14 @@ SUBROUTINE PJAC(Neq,Y,Yh,Nyh,Ewt,Ftem,Savf,Wm,Iwm,F,JAC,Rpar,Ipar)
       GOTO 200
     CASE DEFAULT
       ! IF MITER = 1, CALL JAC AND MULTIPLY BY SCALAR. -----------------------
-      lenp = N*N
-      DO i = 1, lenp
-        Wm(i+2) = 0.0E0
-      END DO
-      CALL JAC(TN,Y,Wm(3),N,Rpar,Ipar)
+      ALLOCATE( pd(N,N) )
+      pd = 0.E0
+      CALL JAC(TN,Y,pd,N)
       con = -hl0
-      DO i = 1, lenp
-        Wm(i+2) = Wm(i+2)*con
+      DO j = 1, N
+        DO i = 1, N
+          Wm( 2+(j-1)*N+i ) = pd(i,j)*con
+        END DO
       END DO
   END SELECT
   ! ADD IDENTITY MATRIX. -------------------------------------------------

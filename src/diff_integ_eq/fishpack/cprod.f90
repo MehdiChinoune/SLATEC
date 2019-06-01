@@ -36,7 +36,7 @@ SUBROUTINE CPROD(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Yy,M,A,B,C,D,W,Y)
 
   INTEGER :: M, Na, Nd, Nm1, Nm2
   REAL :: A(M), Aa(Na), B(M), Bm1(Nm1), Bm2(Nm2), C(M), X(M), Yy(M)
-  COMPLEX :: Y(M), D(:), W(:), Bd(Nd)
+  COMPLEX :: Y(M), D(M), W(M), Bd(Nd)
   INTEGER :: ia, id, iflg, j, k, m1, m2, mm
   REAL :: rt
   COMPLEX :: crt, den, y1, y2

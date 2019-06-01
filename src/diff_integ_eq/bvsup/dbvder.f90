@@ -62,7 +62,7 @@ SUBROUTINE DBVDER(X,Y,Yp,G)
   !   910722  Updated AUTHOR section.  (ALS)
   !   920618  Minor restructuring of code.  (RWC, WRB)
   USE DML, ONLY : NOFst, C, XSAv, IGOfx, INHomo, IVP, NCOmp, NFC
-  REAL(8) :: X, G(*), Y(*), Yp(*)
+  REAL(8) :: X, Y(:), Yp(:), G(:)
   INTEGER :: j, k, l, na
   !- *********************************************************************
   !
@@ -71,13 +71,13 @@ SUBROUTINE DBVDER(X,Y,Yp,G)
   NOFst = IVP
   na = 1
   DO k = 1, NFC
-    CALL DFMAT(X,Y(na),Yp(na))
+    CALL DFMAT(X,Y(na:),Yp(na:))
     NOFst = NOFst - NCOmp
     na = na + NCOmp
   END DO
   !
   IF ( INHomo/=1 ) RETURN
-  CALL DFMAT(X,Y(na),Yp(na))
+  CALL DFMAT(X,Y(na:),Yp(na:))
   !
   IF ( IGOfx==0 ) RETURN
   IF ( X/=XSAv ) THEN

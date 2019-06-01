@@ -1,5 +1,5 @@
 !** STOD
-SUBROUTINE STOD(Neq,Y,Yh,Nyh,Yh1,Ewt,Savf,Acor,Wm,Iwm,F,JAC,Rpar,Ipar)
+SUBROUTINE STOD(Neq,Y,Yh,Nyh,Yh1,Ewt,Savf,Acor,Wm,Iwm,F,JAC)
   !>
   !  Subsidiary to DEBDF
   !***
@@ -94,11 +94,21 @@ SUBROUTINE STOD(Neq,Y,Yh,Nyh,Yh1,Ewt,Savf,Acor,Wm,Iwm,F,JAC,Rpar,Ipar)
   USE DEBDF1, ONLY : CONit, CRAte, EL, ELCo, HOLd, RC, RMAx, TESco, EL0, H, HMIn, &
     HMXi, HU, TN, KSTeps, IALth, IPUp, LMAx, MEO, NQNyh, NSTepj, IER, JSTart, &
     KFLag, L, METh, MITer, MAXord, N, NQ, NST, NFE, NQU
+  INTERFACE
+    SUBROUTINE F(X,U,Uprime)
+      REAL :: X
+      REAL :: U(:), Uprime(:)
+    END SUBROUTINE F
+    SUBROUTINE JAC(X,U,Pd,Nrowpd)
+      INTEGER :: Nrowpd
+      REAL :: X
+      REAL :: U(:), Pd(:,:)
+    END SUBROUTINE JAC
+  END INTERFACE
   INTEGER :: Neq, Nyh
-  INTEGER :: Iwm(:), Ipar(:)
+  INTEGER :: Iwm(:)
   REAL :: Y(N), Yh(Nyh,MAXord+1), Yh1(Nyh*MAXord+Nyh), Ewt(N), Savf(N), Acor(N), &
-    Wm(:), Rpar(:)
-  EXTERNAL :: F, JAC
+    Wm(:)
   !
   INTEGER :: i, i1, iredo, iret, j, jb, m, ncf, newq
   REAL :: dcon, ddn, del, delp, dsm, dup, exdn, exsm, exup, r, rh, rhdn, rhsm, &
@@ -261,7 +271,7 @@ SUBROUTINE STOD(Neq,Y,Yh,Nyh,Yh1,Ewt,Savf,Acor,Wm,Iwm,F,JAC,Rpar,Ipar)
   DO i = 1, N
     Y(i) = Yh(i,1)
   END DO
-  CALL F(TN,Y,Savf,Rpar,Ipar)
+  CALL F(TN,Y,Savf)
   NFE = NFE + 1
   IF ( IPUp>0 ) THEN
     !-----------------------------------------------------------------------
@@ -273,7 +283,7 @@ SUBROUTINE STOD(Neq,Y,Yh,Nyh,Yh1,Ewt,Savf,Acor,Wm,Iwm,F,JAC,Rpar,Ipar)
     RC = 1.0E0
     NSTepj = NST
     CRAte = 0.7E0
-    CALL PJAC(Neq,Y,Yh,Nyh,Ewt,Acor,Savf,Wm,Iwm,F,JAC,Rpar,Ipar)
+    CALL PJAC(Neq,Y,Yh,Nyh,Ewt,Acor,Savf,Wm,Iwm,F,JAC)
     IF ( IER/=0 ) GOTO 800
   END IF
   DO i = 1, N
@@ -372,7 +382,7 @@ SUBROUTINE STOD(Neq,Y,Yh,Nyh,Yh1,Ewt,Savf,Acor,Wm,Iwm,F,JAC,Rpar,Ipar)
           DO i = 1, N
             Y(i) = Yh(i,1)
           END DO
-          CALL F(TN,Y,Savf,Rpar,Ipar)
+          CALL F(TN,Y,Savf)
           NFE = NFE + 1
           DO i = 1, N
             Yh(i,2) = H*Savf(i)
@@ -448,7 +458,7 @@ SUBROUTINE STOD(Neq,Y,Yh,Nyh,Yh1,Ewt,Savf,Acor,Wm,Iwm,F,JAC,Rpar,Ipar)
     IF ( m/=3 ) THEN
       IF ( m<2.OR.del<=2.0E0*delp ) THEN
         delp = del
-        CALL F(TN,Y,Savf,Rpar,Ipar)
+        CALL F(TN,Y,Savf)
         NFE = NFE + 1
         GOTO 600
       END IF

@@ -76,11 +76,15 @@ SUBROUTINE DBFQAD(F,T,Bcoef,N,K,Id,X1,X2,Tol,Quad,Ierr,Work)
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   USE service, ONLY : XERMSG, D1MACH
+  INTERFACE
+    REAL(8) FUNCTION F(X)
+      REAL(8), INTENT(IN) :: X
+    END FUNCTION F
+  END INTERFACE
   INTEGER :: Id, Ierr, K, N
   REAL(8) :: Bcoef(N), Quad, T(N+K), Tol, Work(3*K), X1, X2
   INTEGER :: inbv, iflg, ilo, il1, il2, left, mflag, npk, np1
   REAL(8) :: a, aa, ans, b, bb, q, ta, tb, wtol
-  REAL(8), EXTERNAL :: F
   !* FIRST EXECUTABLE STATEMENT  DBFQAD
   Ierr = 1
   Quad = 0.0D0

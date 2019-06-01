@@ -38,7 +38,7 @@ SUBROUTINE CPRODP(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Yy,M,A,B,C,D,U,Y)
 
   INTEGER :: M, Na, Nd, Nm1, Nm2
   REAL :: A(M), Aa(Na), B(M), Bm1(Nm1), Bm2(Nm2), C(M), X(M), Yy(M)
-  COMPLEX :: Y(M), D(:), U(:), Bd(Nd)
+  COMPLEX :: Y(M), D(M), U(M), Bd(Nd)
   INTEGER :: ia, id, iflg, j, k, m1, m2, mm, mm2
   REAL :: rt
   COMPLEX :: v, den, bh, ym, am, y1, y2, yh, crt

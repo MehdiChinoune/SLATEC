@@ -59,8 +59,15 @@ SUBROUTINE CDZRO(Ae,F,H,N,Nq,Iroot,Re,T,Yh,Uround,B,C,Fb,Fc,Y)
   !   790601  DATE WRITTEN
   !   900329  Initial submission to SLATEC.
 
+  INTERFACE
+    REAL FUNCTION F(N,T,Y,Iroot)
+      INTEGER :: N, Iroot
+      REAL :: T
+      COMPLEX :: Y(N)
+    END FUNCTION F
+  END INTERFACE
   INTEGER :: Iroot, N, Nq
-  REAL :: Ae, B, C, F, Fb, Fc, H, Re, T, Uround
+  REAL :: Ae, B, C, Fb, Fc, H, Re, T, Uround
   COMPLEX :: Y(N), Yh(N,Nq+1)
   INTEGER :: ic, kount
   REAL :: a, acbs, acmb, cmb, er, fa, p, q, rw, tol

@@ -24,9 +24,15 @@ SUBROUTINE CHKPR4(Iorder,A,B,M,Mbdcnd,C,D,N,Nbdcnd,COFX,Idmn,Ierror)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
 
-  REAL A, ai, B, bi, C, ci, D, dlx, xi
-  INTEGER i, Idmn, Ierror, Iorder, M, Mbdcnd, N, Nbdcnd
-  EXTERNAL :: COFX
+  INTERFACE
+    SUBROUTINE COFX(X,A,B,C)
+      REAL :: X, A, B, C
+    END SUBROUTINE COFX
+  END INTERFACE
+  INTEGER :: Idmn, Ierror, Iorder, M, Mbdcnd, N, Nbdcnd
+  REAL :: A, B, C, D
+  INTEGER :: i
+  REAL :: ai, bi, ci, dlx, xi
   !* FIRST EXECUTABLE STATEMENT  CHKPR4
   Ierror = 1
   IF ( A>=B.OR.C>=D ) RETURN

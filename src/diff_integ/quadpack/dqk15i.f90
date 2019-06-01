@@ -88,11 +88,16 @@ SUBROUTINE DQK15I(F,Boun,Inf,A,B,Result,Abserr,Resabs,Resasc)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   USE service, ONLY : D1MACH
   !
-  REAL(8) :: A, absc, absc1, absc2, Abserr, B, Boun, centr, dinf, epmach, fc, &
-    fsum, fval1, fval2, fv1(7), fv2(7), hlgth, Resabs, Resasc, resg, resk, &
-    reskh, Result, tabsc1, tabsc2, uflow
-  INTEGER Inf, j
-  REAL(8), EXTERNAL :: F
+  INTERFACE
+    REAL(8) FUNCTION F(X)
+      REAL(8) :: X
+    END FUNCTION F
+  END INTERFACE
+  INTEGER :: Inf
+  REAL(8) :: A, Abserr, B, Boun, Resabs, Resasc, Result
+  INTEGER :: j
+  REAL(8) :: absc, absc1, absc2, centr, dinf, epmach, fc, fsum, fval1, fval2, &
+    fv1(7), fv2(7), hlgth, resg, resk, reskh, tabsc1, tabsc2, uflow
   !
   !           THE ABSCISSAE AND WEIGHTS ARE SUPPLIED FOR THE INTERVAL
   !           (-1,1).  BECAUSE OF SYMMETRY ONLY THE POSITIVE ABSCISSAE AND

@@ -1,5 +1,5 @@
 !** DEABM
-SUBROUTINE DEABM(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,Rpar,Ipar)
+SUBROUTINE DEABM(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw)
   !>
   !  Solve an initial value problem in ordinary differential
   !            equations using an Adams-Bashforth method.
@@ -571,11 +571,16 @@ SUBROUTINE DEABM(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,Rpar,Ipa
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   USE service, ONLY : XERMSG
+  INTERFACE
+    SUBROUTINE F(X,U,Uprime)
+      REAL :: X
+      REAL :: U(:), Uprime(:)
+    END SUBROUTINE F
+  END INTERFACE
   INTEGER :: Idid, Liw, Lrw, Neq
-  INTEGER :: Info(15), Ipar(:), Iwork(Liw)
+  INTEGER :: Info(15), Iwork(Liw)
   REAL :: T, Tout
-  REAL :: Atol(:), Rpar(:), Rtol(:), Rwork(Lrw), Y(Neq)
-  EXTERNAL :: F
+  REAL :: Atol(:), Rtol(:), Rwork(Lrw), Y(Neq)
   INTEGER :: ialpha, ibeta, idelsn, ifouru, ig, igi, ihold, ip, iphi, ipsi, isig, &
     itold, itstar, itwou, iv, iw, iwt, ixold, iyp, iypout, iyy
   LOGICAL start, phase1, nornd, stiff, intout
@@ -654,7 +659,7 @@ SUBROUTINE DEABM(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,Rpar,Ipa
     Rwork(ihold),Rwork(itold),Rwork(idelsn),Rwork(1),Rwork(itwou),&
     Rwork(ifouru),start,phase1,nornd,stiff,intout,Iwork(26),Iwork(27)&
     ,Iwork(28),Iwork(29),Iwork(30),Iwork(31),Iwork(32),Iwork(33),&
-    Iwork(34),Iwork(35),Iwork(45),Rpar,Ipar)
+    Iwork(34),Iwork(35),Iwork(45))
   !
   Iwork(21) = -1
   IF ( start ) Iwork(21) = 1

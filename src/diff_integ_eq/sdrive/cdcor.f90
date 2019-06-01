@@ -32,6 +32,18 @@ SUBROUTINE CDCOR(Dfdy,El,FA,H,Ierror,Impl,Ipvt,Matdim,Miter,Ml,Mu,N,Nde,&
   !   790601  DATE WRITTEN
   !   900329  Initial submission to SLATEC.
   USE linear, ONLY : SCNRM2, CGBSL, CGESL
+  INTERFACE
+    SUBROUTINE USERS(Y,Yh,Ywt,Save1,Save2,T,H,El,Impl,N,Nde,Iflag)
+      INTEGER :: Impl, N, Nde, iflag
+      REAL :: T, H, El
+      COMPLEX :: Y(N), Yh(N,13), Ywt(N), Save1(N), Save2(N)
+    END SUBROUTINE USERS
+    SUBROUTINE FA(N,T,Y,A,Matdim,Ml,Mu,Nde)
+      INTEGER :: N, Matdim, Ml, Mu, Nde
+      REAL :: T
+      COMPLEX :: Y(N), A(:,:)
+    END SUBROUTINE FA
+  END INTERFACE
   INTEGER :: Ierror, Impl, Jstate, Matdim, Miter, Ml, Mu, N, Nde, Nq
   INTEGER :: Ipvt(N)
   REAL :: D, H, T, El(13,12)
@@ -128,7 +140,7 @@ SUBROUTINE CDCOR(Dfdy,El,FA,H,Ierror,Impl,Ipvt,Matdim,Miter,Ml,Mu,N,Nde,&
       END DO
     ELSEIF ( Impl==1 ) THEN
       IF ( Evalfa ) THEN
-        CALL FA(N,T,Y,A(Ml+1,1),Matdim,Ml,Mu,Nde)
+        CALL FA(N,T,Y,A(Ml+1:,:),Matdim,Ml,Mu,Nde)
         IF ( N==0 ) THEN
           Jstate = 9
           RETURN
@@ -160,7 +172,7 @@ SUBROUTINE CDCOR(Dfdy,El,FA,H,Ierror,Impl,Ipvt,Matdim,Miter,Ml,Mu,N,Nde,&
       END DO
     ELSEIF ( Impl==3 ) THEN
       IF ( Evalfa ) THEN
-        CALL FA(N,T,Y,A(Ml+1,1),Matdim,Ml,Mu,Nde)
+        CALL FA(N,T,Y,A(Ml+1:,:),Matdim,Ml,Mu,Nde)
         IF ( N==0 ) THEN
           Jstate = 9
           RETURN

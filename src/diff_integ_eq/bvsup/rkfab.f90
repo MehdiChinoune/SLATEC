@@ -1,6 +1,6 @@
 !** RKFAB
 SUBROUTINE RKFAB(Ncomp,Xpts,Nxpts,Nfc,Iflag,Z,Mxnon,P,Ntp,Ip,Yhp,Niv,U,V,&
-    W,S,Stowa,G,Work,Iwork,Nfcc)
+    W,S,Stowa,Work,Iwork,Nfcc)
   !>
   !  Subsidiary to BVSUP
   !***
@@ -40,7 +40,7 @@ SUBROUTINE RKFAB(Ncomp,Xpts,Nxpts,Nfc,Iflag,Z,Mxnon,P,Ntp,Ip,Yhp,Niv,U,V,&
     NTApe, NEQ, INTeg, NPS, NUMort, KKKint, LLLint
   INTEGER :: Ncomp, Nfc, Nfcc, Niv, Ntp, Iflag, Mxnon, Nxpts
   INTEGER :: Iwork(*), Ip(Nfcc,Mxnon+1)
-  REAL :: G(Ncomp), P(Ntp,Mxnon+1), S(Nfc+1), Stowa(:), U(Ncomp,Nfc,Nxpts), &
+  REAL :: P(Ntp,Mxnon+1), S(Nfc+1), Stowa(:), U(Ncomp,Nfc,Nxpts), &
     V(Ncomp,Nxpts), W(Nfcc,Mxnon+1), Work(*), Xpts(Nxpts), Yhp(Ncomp,Nfc+1), Z(Mxnon+1)
   INTEGER :: nfcp1, non, idid, ipar(1), j, jflag, jon, kod, kopp
   REAL :: xxop, ret(1), aet(1)
@@ -90,15 +90,15 @@ SUBROUTINE RKFAB(Ncomp,Xpts,Nxpts,Nfc,Iflag,Z,Mxnon,P,Ntp,Ip,Yhp,Niv,U,V,&
       !
       ret(1) = RE
       aet(1) = AE
-      CALL DEABM(BVDER,NEQ,X,Yhp,xxop,INFo,ret,aet,idid,Work,KKKint,Iwork,&
-        LLLint,G,ipar)
+      CALL DEABM(BVDER_2,NEQ,X,Yhp,xxop,INFo,ret,aet,idid,Work,KKKint,Iwork,&
+        LLLint)
     ELSE
       !     DERKF INTEGRATOR
       !
       ret(1) = RE
       aet(1) = AE
-      CALL DERKF(BVDER,NEQ,X,Yhp,xxop,INFo,ret,aet,idid,Work,KKKint,Iwork,&
-        LLLint,G,ipar)
+      CALL DERKF(BVDER_2,NEQ,X,Yhp,xxop,INFo,ret,aet,idid,Work,KKKint,Iwork,&
+        LLLint)
     END IF
     IF ( idid>=1 ) THEN
       !
@@ -177,4 +177,14 @@ SUBROUTINE RKFAB(Ncomp,Xpts,Nxpts,Nfc,Iflag,Z,Mxnon,P,Ntp,Ip,Yhp,Niv,U,V,&
   !- *********************************************************************
   !
   Iflag = 0
+
+CONTAINS
+  SUBROUTINE BVDER_2(X,Y,Yp)
+    REAL :: X
+    REAL :: Y(:), Yp(:)
+    REAL :: g(SIZE(Y))
+
+    g = 0.
+    CALL BVDER(X,Y,Yp,G)
+  END SUBROUTINE BVDER_2
 END SUBROUTINE RKFAB

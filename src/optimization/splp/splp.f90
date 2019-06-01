@@ -1550,9 +1550,8 @@ SUBROUTINE SPLP(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
     SUBROUTINE USRMAT(I,J,Aij,Indcat,Dattrv,Iflag)
       INTEGER :: I, J, indcat, iflag(10)
       REAL :: Dattrv(:), Aij
-    END SUBROUTINE
+    END SUBROUTINE USRMAT
   END INTERFACE
-  EXTERNAL :: USRMAT
   INTEGER :: Info, Liw, Lw, Mrelas, Nvars
   INTEGER :: Ibasis(Nvars+Mrelas), Ind(Nvars+Mrelas), Iwork(Liw)
   REAL :: Bl(Nvars+Mrelas), Bu(Nvars+Mrelas), Costs(Nvars), Dattrv(:), &

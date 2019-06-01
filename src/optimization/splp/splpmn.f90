@@ -44,9 +44,8 @@ SUBROUTINE SPLPMN(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
     SUBROUTINE USRMAT(I,J,Aij,Indcat,Dattrv,Iflag)
       INTEGER :: I, J, indcat, iflag(10)
       REAL :: Dattrv(:), Aij
-    END SUBROUTINE
+    END SUBROUTINE USRMAT
   END INTERFACE
-  EXTERNAL :: USRMAT
   INTEGER :: Info, Lbm, Lmx, Mrelas, Nvars
   INTEGER :: Ibasis(Nvars+Mrelas), Ibb(Nvars+Mrelas), Ibrc(Lbm,2), Imat(Lmx), &
     Ind(Nvars+Mrelas), Ipr(2*Mrelas), Iwr(8*Mrelas)

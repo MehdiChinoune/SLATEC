@@ -96,6 +96,12 @@ SUBROUTINE FDJAC1(FCN,N,X,Fvec,Fjac,Ldfjac,Iflag,Ml,Mu,Epsfcn,Wa1,Wa2)
   !           (WRB)
   !   900328  Added TYPE section.  (WRB)
   USE service, ONLY : R1MACH
+  INTERFACE
+    SUBROUTINE FCN(N,X,Fvec,iflag)
+      INTEGER :: N, Iflag
+      REAL :: X(N), Fvec(N)
+    END SUBROUTINE FCN
+  END INTERFACE
   INTEGER :: N, Ldfjac, Iflag, Ml, Mu
   REAL :: Epsfcn
   REAL :: X(N), Fvec(N), Fjac(Ldfjac,N), Wa1(N), Wa2(N)

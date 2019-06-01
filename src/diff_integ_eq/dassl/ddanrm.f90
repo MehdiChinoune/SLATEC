@@ -28,10 +28,10 @@ REAL(8) FUNCTION DDANRM(Neq,V,Wt)
   !           cosmetic changes to prologue.  (FNF)
 
   !
-  INTEGER Neq
+  INTEGER :: Neq
   REAL(8) :: V(Neq), Wt(Neq)
   !
-  INTEGER i
+  INTEGER :: i
   REAL(8) :: summ, vmax
   !
   !* FIRST EXECUTABLE STATEMENT  DDANRM

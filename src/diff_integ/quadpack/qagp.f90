@@ -204,9 +204,13 @@ SUBROUTINE QAGP(F,A,B,Npts2,Points,Epsabs,Epsrel,Result,Abserr,Neval,Ier,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   USE service, ONLY : XERMSG
+  INTERFACE
+    REAL FUNCTION F(X)
+      REAL :: X
+    END FUNCTION F
+  END INTERFACE
   INTEGER :: Ier, Leniw, Lenw, Neval, Npts2, Last, Iwork(Leniw)
   REAL :: A, Abserr, B, Epsabs, Epsrel, Result, Points(Npts2), Work(Lenw)
-  REAL, EXTERNAL :: F
   INTEGER :: l4, limit, lvl, l1, l2, l3
   !
   !         CHECK VALIDITY OF LIMIT AND LENW.

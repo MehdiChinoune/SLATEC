@@ -474,10 +474,17 @@ SUBROUTINE SEPELI(Intl,Iorder,A,B,M,Mbdcnd,Bda,Alpha,Bdb,Beta,C,D,N,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
+  INTERFACE
+    SUBROUTINE COFX(X,A,B,C)
+      REAL :: X, A, B, C
+    END SUBROUTINE COFX
+    SUBROUTINE COFY(Y,D,E,F)
+      REAL :: Y, D, E, F
+    END SUBROUTINE COFY
+  END INTERFACE
   INTEGER :: Idmn, Ierror, Intl, Iorder, M, Mbdcnd, N, Nbdcnd
   REAL :: A, Alpha, B, Beta, C, D, Gama, Pertrb, Xnu
   REAL :: Bda(N+1), Bdb(N+1), Bdc(M+1), Bdd(M+1), Grhs(Idmn,N+1), Usol(Idmn,N+1), W(:)
-  EXTERNAL :: COFX, COFY
   INTEGER i1, i10, i11, i12, i13, i2, i3, i4, i5, i6, i7, i8, &
     i9, k, l, length, linput, ll, logb2n, loutpt
   !* FIRST EXECUTABLE STATEMENT  SEPELI

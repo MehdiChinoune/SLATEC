@@ -1,5 +1,5 @@
 !** DFEHL
-SUBROUTINE DFEHL(DF,Neq,T,Y,H,Yp,F1,F2,F3,F4,F5,Ys,Rpar,Ipar)
+SUBROUTINE DFEHL(DF,Neq,T,Y,H,Yp,F1,F2,F3,F4,F5,Ys)
   !>
   !  Subsidiary to DDERKF
   !***
@@ -52,10 +52,15 @@ SUBROUTINE DFEHL(DF,Neq,T,Y,H,Yp,F1,F2,F3,F4,F5,Ys,Rpar,Ipar)
   !   910722  Updated AUTHOR section.  (ALS)
 
   !
-  INTEGER :: Neq, Ipar(:)
+  INTERFACE
+    SUBROUTINE DF(X,U,Uprime)
+      REAL(8) :: X
+      REAL(8) :: U(:), Uprime(:)
+    END SUBROUTINE DF
+  END INTERFACE
+  INTEGER :: Neq
   REAL(8) :: H, T
-  REAL(8) :: F1(Neq), F2(Neq), F3(Neq), F4(Neq), F5(Neq), Rpar(Neq), Y(Neq), &
-    Yp(Neq), Ys(Neq)
+  REAL(8) :: F1(Neq), F2(Neq), F3(Neq), F4(Neq), F5(Neq), Y(Neq), Yp(Neq), Ys(Neq)
   INTEGER :: k
   REAL(8) :: ch
   !
@@ -64,32 +69,32 @@ SUBROUTINE DFEHL(DF,Neq,T,Y,H,Yp,F1,F2,F3,F4,F5,Ys,Rpar,Ipar)
   DO k = 1, Neq
     Ys(k) = Y(k) + ch*Yp(k)
   END DO
-  CALL DF(T+ch,Ys,F1,Rpar,Ipar)
+  CALL DF(T+ch,Ys,F1)
   !
   ch = 3.0D0*H/32.0D0
   DO k = 1, Neq
     Ys(k) = Y(k) + ch*(Yp(k)+3.0D0*F1(k))
   END DO
-  CALL DF(T+3.0D0*H/8.0D0,Ys,F2,Rpar,Ipar)
+  CALL DF(T+3.0D0*H/8.0D0,Ys,F2)
   !
   ch = H/2197.0D0
   DO k = 1, Neq
     Ys(k) = Y(k) + ch*(1932.0D0*Yp(k)+(7296.0D0*F2(k)-7200.0D0*F1(k)))
   END DO
-  CALL DF(T+12.0D0*H/13.0D0,Ys,F3,Rpar,Ipar)
+  CALL DF(T+12.0D0*H/13.0D0,Ys,F3)
   !
   ch = H/4104.0D0
   DO k = 1, Neq
     Ys(k) = Y(k) + ch*((8341.0D0*Yp(k)-845.0D0*F3(k))+(29440.0D0*F2(k)-32832.0D0*F1(k)))
   END DO
-  CALL DF(T+H,Ys,F4,Rpar,Ipar)
+  CALL DF(T+H,Ys,F4)
   !
   ch = H/20520.0D0
   DO k = 1, Neq
     Ys(k) = Y(k) + ch*((-6080.0D0*Yp(k)+(9295.0D0*F3(k)-5643.0D0*F4(k)))&
       +(41040.0D0*F1(k)-28352.0D0*F2(k)))
   END DO
-  CALL DF(T+H/2.0D0,Ys,F5,Rpar,Ipar)
+  CALL DF(T+H/2.0D0,Ys,F5)
   !
   !     COMPUTE APPROXIMATE SOLUTION AT T+H
   !

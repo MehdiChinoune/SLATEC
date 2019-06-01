@@ -1,6 +1,6 @@
 !** DLSOD
 SUBROUTINE DLSOD(DF,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,&
-    Acor,Wm,Iwm,DJAC,Intout,Tstop,Tolfac,Delsgn,Rpar,Ipar)
+    Acor,Wm,Iwm,DJAC,Intout,Tstop,Tolfac,Delsgn)
   !>
   !  Subsidiary to DDEBDF
   !***
@@ -35,19 +35,28 @@ SUBROUTINE DLSOD(DF,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,&
     MITer, MAXord, N, NQ, NST, NFE, NJE
   USE service, ONLY : XERMSG, D1MACH
   !
+  INTERFACE
+    SUBROUTINE DF(X,U,Uprime)
+      REAL(8) :: X
+      REAL(8) :: U(:), Uprime(:)
+    END SUBROUTINE DF
+    SUBROUTINE DJAC(X,U,Pd,Nrowpd)
+      INTEGER :: Nrowpd
+      REAL(8) :: X
+      REAL(8) :: U(:), Pd(:,:)
+    END SUBROUTINE DJAC
+  END INTERFACE
   INTEGER :: Idid, Neq
-  INTEGER :: Ipar(:), Iwm(:)
+  INTEGER :: Iwm(:)
   REAL(8) :: Delsgn, T, Tolfac, Tout, Tstop
-  REAL(8) :: Acor(Neq), Atol(:), Ewt(Neq), Rpar(:), Rtol(:), Savf(Neq), Wm(:), Y(Neq), &
+  REAL(8) :: Acor(Neq), Atol(:), Ewt(Neq), Rtol(:), Savf(Neq), Wm(:), Y(Neq), &
     Yh(Neq,6), Yh1(6*Neq), Ypout(Neq)
   LOGICAL :: Intout
-  INTEGER intflg, k, l, ltol, natolp, nrtolp
+  INTEGER :: intflg, k, l, ltol, natolp, nrtolp
   REAL(8) :: absdel, big, del, dt, ha, tol
 
   CHARACTER(8) :: xern1
   CHARACTER(16) :: xern3, xern4
-  !
-  EXTERNAL :: DF, DJAC
   !
   !     ..................................................................
   !
@@ -242,7 +251,7 @@ SUBROUTINE DLSOD(DF,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,&
       !                                             DERIVATIVES
       !
       INIt = 1
-      CALL DF(T,Y,Yh(1,2),Rpar,Ipar)
+      CALL DF(T,Y,Yh(:,2))
       NFE = 1
       !                 ...EXIT
       IF ( T==Tout ) THEN
@@ -275,7 +284,7 @@ SUBROUTINE DLSOD(DF,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,&
     !
     big = SQRT(D1MACH(2))
     CALL DHSTRT(DF,Neq,T,Tout,Y,Yh(1,2),Ewt,1,U,big,Yh(1,3),Yh(1,4),Yh(1,5),&
-      Yh(1,6),Rpar,Ipar,H)
+      Yh(1,6),H)
     !
     Delsgn = SIGN(1.0D0,Tout-T)
     X = T
@@ -318,7 +327,7 @@ SUBROUTINE DLSOD(DF,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,&
         DO l = 1, Neq
           Y(l) = Yh(l,1) + (dt/H)*Yh(l,2)
         END DO
-        CALL DF(Tout,Y,Ypout,Rpar,Ipar)
+        CALL DF(Tout,Y,Ypout)
         NFE = NFE + 1
         Idid = 3
         T = Tout
@@ -364,7 +373,7 @@ SUBROUTINE DLSOD(DF,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,&
         !
         !                      TAKE A STEP
         !
-        CALL DSTOD(Neq,Y,Yh,Neq,Yh1,Ewt,Savf,Acor,Wm,Iwm,DF,DJAC,Rpar,Ipar)
+        CALL DSTOD(Neq,Y,Yh,Neq,Yh1,Ewt,Savf,Acor,Wm,Iwm,DF,DJAC)
         !
         JSTart = -2
         Intout = .TRUE.

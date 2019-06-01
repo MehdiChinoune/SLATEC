@@ -75,7 +75,7 @@ SUBROUTINE DPPGQ8(FUN,Ldc,C,Xi,Lxi,Kk,Id,A,B,Inppv,Err,Ans,Ierr)
   INTERFACE
     REAL(8) FUNCTION FUN(X)
       REAL(8), INTENT(IN) :: X
-    END FUNCTION
+    END FUNCTION FUN
   END INTERFACE
   INTEGER :: Id, Ierr, Inppv, Kk, Ldc, Lxi
   REAL(8) :: A, Ans, B, C(Ldc,Lxi), Err, Xi(Lxi+1)

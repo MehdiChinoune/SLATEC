@@ -61,20 +61,20 @@ SUBROUTINE BVDER(X,Y,Yp,G)
   !   910722  Updated AUTHOR section.  (ALS)
   !   920618  Minor restructuring of code.  (RWC, WRB)
   USE ML, ONLY : NOFst, C, XSAv, IGOfx, INHomo, IVP, NCOmp, NFC
-  REAL :: G(*), Y(*), Yp(*), X
+  REAL :: G(:), Y(:), Yp(:), X
   INTEGER :: j, k, l, na
   !* FIRST EXECUTABLE STATEMENT  BVDER
   IF ( IVP>0 ) STOP
   NOFst = IVP
   na = 1
   DO k = 1, NFC
-    CALL FMAT(X,Y(na),Yp(na))
+    CALL FMAT(X,Y(na:),Yp(na:))
     NOFst = NOFst - NCOmp
     na = na + NCOmp
   END DO
   !
   IF ( INHomo/=1 ) RETURN
-  CALL FMAT(X,Y(na),Yp(na))
+  CALL FMAT(X,Y(na:),Yp(na:))
   !
   IF ( IGOfx==0 ) RETURN
   IF ( X/=XSAv ) THEN

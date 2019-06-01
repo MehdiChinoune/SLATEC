@@ -135,8 +135,8 @@ CONTAINS
     !   890618  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-    INTEGER K
-    REAL(8) :: X(2)
+    INTEGER :: K
+    REAL(8) :: X(:)
     !* FIRST EXECUTABLE STATEMENT  DSOSFN
     IF ( K==1 ) THEN
       DSOSFN = 1.0D0 - X(1)
@@ -268,9 +268,9 @@ CONTAINS
     !   930214  TYPE and declarations sections added.  (WRB)
 
     !     .. Scalar Arguments ..
-    INTEGER Iflag, N
+    INTEGER :: Iflag, N
     !     .. Array Arguments ..
-    REAL(8) :: Fvec(*), X(*)
+    REAL(8) :: Fvec(N), X(N)
     !* FIRST EXECUTABLE STATEMENT  DQFCN2
     Fvec(1) = 1.0D0 - X(1)
     Fvec(2) = 10.0D0*(X(2)-X(1)**2)
@@ -298,8 +298,8 @@ CONTAINS
     !   890831  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-    INTEGER Iflag, Ldfjac, N
-    REAL(8) :: Fjac(Ldfjac,*), Fvec(*), X(*)
+    INTEGER :: Iflag, Ldfjac, N
+    REAL(8) :: Fjac(Ldfjac,N), Fvec(N), X(N)
     !* FIRST EXECUTABLE STATEMENT  DQJAC2
     Fjac(1,1) = -1.0D0
     Fjac(1,2) = 0.0D0

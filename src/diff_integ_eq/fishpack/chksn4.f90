@@ -27,10 +27,16 @@ SUBROUTINE CHKSN4(Mbdcnd,Nbdcnd,Alpha,Beta,COFX,Singlr)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   USE SPL4, ONLY : AIT, DLX, IS, MS
-  REAL ai, Alpha, Beta, bi, ci, xi
-  INTEGER i, Mbdcnd, Nbdcnd
-  LOGICAL Singlr
-  EXTERNAL :: COFX
+  INTERFACE
+    SUBROUTINE COFX(X,A,B,C)
+      REAL :: X, A, B, C
+    END SUBROUTINE COFX
+  END INTERFACE
+  INTEGER :: Mbdcnd, Nbdcnd
+  REAL :: Alpha, Beta
+  LOGICAL :: Singlr
+  INTEGER :: i
+  REAL :: ai, bi, ci, xi
   !* FIRST EXECUTABLE STATEMENT  CHKSN4
   Singlr = .FALSE.
   !

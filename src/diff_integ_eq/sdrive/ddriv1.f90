@@ -295,7 +295,12 @@ SUBROUTINE DDRIV1(N,T,Y,F,Tout,Mstate,Eps,Work,Lenw,Ierflg)
   !   790601  DATE WRITTEN
   !   900329  Initial submission to SLATEC.
   USE service, ONLY : XERMSG, D1MACH
-  EXTERNAL :: F
+  INTERFACE
+    SUBROUTINE F(N,T,Y,Ydot)
+      INTEGER :: N
+      REAL(8) :: T, Y(:), Ydot(:)
+    END SUBROUTINE F
+  END INTERFACE
   INTEGER :: Ierflg, Lenw, Mstate, N
   REAL(8) :: Eps, T, Tout
   REAL(8) :: Work(Lenw), Y(N+1)
@@ -356,7 +361,8 @@ SUBROUTINE DDRIV1(N,T,Y,F,Tout,Mstate,Eps,Work,Lenw,Ierflg)
     END DO
   END IF
   CALL DDRIV3(N,T,Y,F,nstate,Tout,ntask,NROOT,Eps,ewtcom,IERROR,MINT,MITER,&
-    IMPL,ml,mu,MXORD,hmax,Work,lenwcm,iwork,leniw,F,F,nde,MXSTEP,D1MACH,F,Ierflg)
+    IMPL,ml,mu,MXORD,hmax,Work,lenwcm,iwork,leniw,dum_JACOBN,dum_FA,nde,MXSTEP,&
+    dum_G,dum_USERS,Ierflg)
   DO i = 1, leniw
     Work(i+lenwcm) = iwork(i)
   END DO
@@ -369,4 +375,35 @@ SUBROUTINE DDRIV1(N,T,Y,F,Tout,Mstate,Eps,Work,Lenw,Ierflg)
   ELSEIF ( Ierflg>11 ) THEN
     Mstate = SIGN(7,Mstate)
   END IF
+
+CONTAINS
+  REAL(8) FUNCTION dum_G(N,T,Y,Iroot)
+    INTEGER :: N, Iroot
+    REAL(8) :: T
+    REAL(8) :: Y(N)
+    Iroot = 0
+    dum_G = SUM(Y) + T
+  END FUNCTION dum_G
+  SUBROUTINE dum_JACOBN(N,T,Y,Dfdy,Matdim,Ml,Mu)
+    INTEGER :: N, Matdim, Ml, Mu
+    REAL(8) :: T
+    REAL(8) :: Y(N), Dfdy(Matdim,N)
+    Dfdy = T
+    Y = Ml + Mu
+  END SUBROUTINE dum_JACOBN
+  SUBROUTINE dum_USERS(Y,Yh,Ywt,Save1,Save2,T,H,El,Impl,N,Nde,Iflag)
+    INTEGER :: Impl, N, Nde, Iflag
+    REAL(8) :: T, H, El
+    REAL(8) :: Y(N), Yh(N,13), Ywt(N), Save1(N), Save2(N)
+    Y = Ywt + Save1 + Save2
+    Yh = T + H + El
+    Impl = Nde + Iflag
+  END SUBROUTINE dum_USERS
+  SUBROUTINE dum_FA(N,T,Y,A,Matdim,Ml,Mu,Nde)
+    INTEGER :: N, Matdim, Ml, Mu, Nde
+    REAL(8) :: T, Y(N), A(:,:)
+    T = Matdim + Ml + Mu + Nde
+    Y = 0.D0
+    A = 0.D0
+  END SUBROUTINE dum_FA
 END SUBROUTINE DDRIV1

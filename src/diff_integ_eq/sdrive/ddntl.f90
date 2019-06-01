@@ -43,11 +43,26 @@ SUBROUTINE DDNTL(Eps,F,FA,Hmax,Hold,Impl,Jtask,Matdim,Maxord,Mint,Miter,&
   !   790601  DATE WRITTEN
   !   900329  Initial submission to SLATEC.
   USE linear, ONLY : DGBSL, DGESL, DGBFA, DGEFA
+  INTERFACE
+    SUBROUTINE F(N,T,Y,Ydot)
+      INTEGER :: N
+      REAL(8) :: T, Y(:), Ydot(:)
+    END SUBROUTINE F
+    SUBROUTINE USERS(Y,Yh,Ywt,Save1,Save2,T,H,El,Impl,N,Nde,Iflag)
+      INTEGER :: Impl, N, Nde, iflag
+      REAL(8) :: T, H, El
+      REAL(8) :: Y(N), Yh(N,13), Ywt(N), Save1(N), Save2(N)
+    END SUBROUTINE USERS
+    SUBROUTINE FA(N,T,Y,A,Matdim,Ml,Mu,Nde)
+      INTEGER :: N, Matdim, Ml, Mu, Nde
+      REAL(8) :: T, Y(N), A(:,:)
+    END SUBROUTINE FA
+  END INTERFACE
   INTEGER :: Impl, Iswflg, Jstate, Jtask, Matdim, Maxord, Mint, Miter, Ml, &
     Mntold, Mtrold, Mu, N, Nde, Nfe, Nq, Nwait
   INTEGER :: Ipvt(N)
   REAL(8) :: Eps, H, Hmax, Hold, Rc, Rh, Rmax, T, Trend, Uround
-  REAL(8) :: A(Matdim,N), El(13,12), Fac(N), Save1(N), Save2(N), Tq(3,12), Y(N), &
+  REAL(8) :: A(Matdim,N), El(13,12), Fac(N), Save1(N), Save2(N), Tq(3,12), Y(N+1), &
     Yh(N,13), Ywt(N)
   LOGICAL :: Convrg, Ier
   INTEGER :: i, iflag, info
@@ -74,7 +89,7 @@ SUBROUTINE DDNTL(Eps,F,FA,Hmax,Hold,Impl,Jtask,Matdim,Maxord,Mint,Miter,&
     IF ( Impl/=0 ) THEN
       IF ( Miter==3 ) THEN
         iflag = 0
-        CALL USERS(Y,Yh,Ywt,Save1,Save2,T,H,El,Impl,N,Nde,iflag)
+        CALL USERS(Y,Yh,Ywt,Save1,Save2,T,H,El(1,1),Impl,N,Nde,iflag)
         IF ( iflag==-1 ) THEN
           Ier = .TRUE.
           RETURN
@@ -97,7 +112,7 @@ SUBROUTINE DDNTL(Eps,F,FA,Hmax,Hold,Impl,Jtask,Matdim,Maxord,Mint,Miter,&
           END IF
           CALL DGESL(A,Matdim,N,Ipvt,Save2,0)
         ELSEIF ( Miter==4.OR.Miter==5 ) THEN
-          CALL FA(N,T,Y,A(Ml+1,1),Matdim,Ml,Mu,Nde)
+          CALL FA(N,T,Y,A(Ml+1:,:),Matdim,Ml,Mu,Nde)
           IF ( N==0 ) THEN
             Jstate = 9
             RETURN
@@ -140,7 +155,7 @@ SUBROUTINE DDNTL(Eps,F,FA,Hmax,Hold,Impl,Jtask,Matdim,Maxord,Mint,Miter,&
           END IF
           CALL DGESL(A,Matdim,Nde,Ipvt,Save2,0)
         ELSEIF ( Miter==4.OR.Miter==5 ) THEN
-          CALL FA(N,T,Y,A(Ml+1,1),Matdim,Ml,Mu,Nde)
+          CALL FA(N,T,Y,A(Ml+1:,:),Matdim,Ml,Mu,Nde)
           IF ( N==0 ) THEN
             Jstate = 9
             RETURN

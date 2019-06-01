@@ -171,9 +171,13 @@ SUBROUTINE QAGS(F,A,B,Epsabs,Epsrel,Result,Abserr,Neval,Ier,Limit,Lenw,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   USE service, ONLY : XERMSG
+  INTERFACE
+    REAL FUNCTION F(X)
+      REAL :: X
+    END FUNCTION F
+  END INTERFACE
   INTEGER :: Ier, Lenw, Limit, Last, Neval, Iwork(Limit)
   REAL :: A, Abserr, B, Epsabs, Epsrel, Result, Work(Lenw)
-  REAL, EXTERNAL :: F
   INTEGER :: lvl, l1, l2, l3
   !
   !         CHECK VALIDITY OF LIMIT AND LENW.

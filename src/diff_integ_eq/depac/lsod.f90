@@ -1,6 +1,6 @@
 !** LSOD
 SUBROUTINE LSOD(F,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,Acor,&
-    Wm,Iwm,JAC,Intout,Tstop,Tolfac,Delsgn,Rpar,Ipar)
+    Wm,Iwm,JAC,Intout,Tstop,Tolfac,Delsgn)
   !>
   !  Subsidiary to DEBDF
   !***
@@ -34,13 +34,23 @@ SUBROUTINE LSOD(F,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,Acor,&
     KSTeps, IBEgin, ITOl, IINteg, ITStop, IJAc, IBAnd, JSTart, KFLag, METh, &
     MITer, MAXord, N, NQ, NST, NFE, NJE
   USE service, ONLY : XERMSG, R1MACH
+  INTERFACE
+    SUBROUTINE F(X,U,Uprime)
+      REAL :: X
+      REAL :: U(:), Uprime(:)
+    END SUBROUTINE F
+    SUBROUTINE JAC(X,U,Pd,Nrowpd)
+      INTEGER :: Nrowpd
+      REAL :: X
+      REAL :: U(:), Pd(:,:)
+    END SUBROUTINE JAC
+  END INTERFACE
   INTEGER :: Neq, Idid
-  INTEGER :: Ipar(:), Iwm(:)
+  INTEGER :: Iwm(:)
   REAL :: Delsgn, T, Tolfac, Tout, Tstop
-  REAL :: Acor(Neq), Atol(:), Ewt(Neq), Rpar(:), Rtol(:), Savf(Neq), Wm(:), Y(Neq), &
+  REAL :: Acor(Neq), Atol(:), Ewt(Neq), Rtol(:), Savf(Neq), Wm(:), Y(Neq), &
     Yh(Neq,6) , Yh1(6*Neq), Ypout(Neq)
   LOGICAL :: Intout
-  EXTERNAL :: F, JAC
   INTEGER :: ltol, natolp, nrtolp, intflg, k, l
   REAL :: absdel, big, del, dt, ha, tol
   CHARACTER(8) :: xern1
@@ -230,7 +240,7 @@ SUBROUTINE LSOD(F,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,Acor,&
       !                         -- EVALUATE INITIAL DERIVATIVES
       !
       INIt = 1
-      CALL F(T,Y,Yh(1,2),Rpar,Ipar)
+      CALL F(T,Y,Yh(:,2))
       NFE = 1
       IF ( T==Tout ) THEN
         Idid = 2
@@ -259,7 +269,7 @@ SUBROUTINE LSOD(F,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,Acor,&
     !
     big = SQRT(R1MACH(2))
     CALL HSTART(F,Neq,T,Tout,Y,Yh(1,2),Ewt,1,U,big,Yh(1,3),Yh(1,4),Yh(1,5),&
-      Yh(1,6),Rpar,Ipar,H)
+      Yh(1,6),H)
     !
     Delsgn = SIGN(1.0,Tout-T)
     X = T
@@ -298,7 +308,7 @@ SUBROUTINE LSOD(F,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,Acor,&
         DO l = 1, Neq
           Y(l) = Yh(l,1) + (dt/H)*Yh(l,2)
         END DO
-        CALL F(Tout,Y,Ypout,Rpar,Ipar)
+        CALL F(Tout,Y,Ypout)
         NFE = NFE + 1
         Idid = 3
         T = Tout
@@ -341,7 +351,7 @@ SUBROUTINE LSOD(F,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,Acor,&
         !
         !     TAKE A STEP
         !
-        CALL STOD(Neq,Y,Yh,Neq,Yh1,Ewt,Savf,Acor,Wm,Iwm,F,JAC,Rpar,Ipar)
+        CALL STOD(Neq,Y,Yh,Neq,Yh1,Ewt,Savf,Acor,Wm,Iwm,F,JAC)
         !
         JSTart = -2
         Intout = .TRUE.

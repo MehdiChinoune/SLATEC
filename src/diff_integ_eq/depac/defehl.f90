@@ -1,5 +1,5 @@
 !** DEFEHL
-SUBROUTINE DEFEHL(F,Neq,T,Y,H,Yp,F1,F2,F3,F4,F5,Ys,Rpar,Ipar)
+SUBROUTINE DEFEHL(F,Neq,T,Y,H,Yp,F1,F2,F3,F4,F5,Ys)
   !>
   !  Subsidiary to DERKF
   !***
@@ -52,9 +52,15 @@ SUBROUTINE DEFEHL(F,Neq,T,Y,H,Yp,F1,F2,F3,F4,F5,Ys,Rpar,Ipar)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
 
-  INTEGER :: Neq, Ipar(:)
+  INTERFACE
+    SUBROUTINE F(X,U,Uprime)
+      REAL :: X
+      REAL :: U(:), Uprime(:)
+    END SUBROUTINE F
+  END INTERFACE
+  INTEGER :: Neq
   REAL :: H, T
-  REAL :: F1(Neq), F2(Neq), F3(Neq), F4(Neq), F5(Neq), Rpar(:), Y(Neq), Yp(Neq), Ys(Neq)
+  REAL :: F1(Neq), F2(Neq), F3(Neq), F4(Neq), F5(Neq), Y(Neq), Yp(Neq), Ys(Neq)
   INTEGER :: k
   REAL :: ch
   !
@@ -63,32 +69,32 @@ SUBROUTINE DEFEHL(F,Neq,T,Y,H,Yp,F1,F2,F3,F4,F5,Ys,Rpar,Ipar)
   DO k = 1, Neq
     Ys(k) = Y(k) + ch*Yp(k)
   END DO
-  CALL F(T+ch,Ys,F1,Rpar,Ipar)
+  CALL F(T+ch,Ys,F1)
   !
   ch = 3.*H/32.
   DO k = 1, Neq
     Ys(k) = Y(k) + ch*(Yp(k)+3.*F1(k))
   END DO
-  CALL F(T+3.*H/8.,Ys,F2,Rpar,Ipar)
+  CALL F(T+3.*H/8.,Ys,F2)
   !
   ch = H/2197.
   DO k = 1, Neq
     Ys(k) = Y(k) + ch*(1932.*Yp(k)+(7296.*F2(k)-7200.*F1(k)))
   END DO
-  CALL F(T+12.*H/13.,Ys,F3,Rpar,Ipar)
+  CALL F(T+12.*H/13.,Ys,F3)
   !
   ch = H/4104.
   DO k = 1, Neq
     Ys(k) = Y(k) + ch*((8341.*Yp(k)-845.*F3(k))+(29440.*F2(k)-32832.*F1(k)))
   END DO
-  CALL F(T+H,Ys,F4,Rpar,Ipar)
+  CALL F(T+H,Ys,F4)
   !
   ch = H/20520.
   DO k = 1, Neq
     Ys(k) = Y(k) + ch*((-6080.*Yp(k)+(9295.*F3(k)-5643.*F4(k)))&
       +(41040.*F1(k)-28352.*F2(k)))
   END DO
-  CALL F(T+H/2.,Ys,F5,Rpar,Ipar)
+  CALL F(T+H/2.,Ys,F5)
   !
   !     COMPUTE APPROXIMATE SOLUTION AT T+H
   !

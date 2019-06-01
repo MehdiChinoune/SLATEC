@@ -24,9 +24,18 @@ SUBROUTINE CHKPRM(Intl,Iorder,A,B,M,Mbdcnd,C,D,N,Nbdcnd,COFX,COFY,Idmn,Ierror)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
 
-  REAL A, ai, B, bi, C, ci, D, dj, dlx, dly, ej, fj, xi, yj
-  INTEGER i, Idmn, Ierror, Intl, Iorder, j, M, Mbdcnd, N, Nbdcnd
-  EXTERNAL :: COFX, COFY
+  INTERFACE
+    SUBROUTINE COFX(X,A,B,C)
+      REAL :: X, A, B, C
+    END SUBROUTINE COFX
+    SUBROUTINE COFY(Y,D,E,F)
+      REAL :: Y, D, E, F
+    END SUBROUTINE COFY
+  END INTERFACE
+  INTEGER :: Idmn, Ierror, Intl, Iorder, M, Mbdcnd, Nbdcnd, N
+  REAL :: A, B, C, D
+  INTEGER :: i, j
+  REAL :: ai, bi, ci, dj, dlx, dly, ej, fj, xi, yj
   !* FIRST EXECUTABLE STATEMENT  CHKPRM
   Ierror = 1
   IF ( A>=B.OR.C>=D ) RETURN

@@ -39,9 +39,16 @@ SUBROUTINE DEFER(COFX,COFY,Idmn,Usol,Grhs)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   USE SPLPCM, ONLY : L, AIT, CIT, DLX, DLY, IS, JS, K, KSWx, KSWy, MS, NS
+  INTERFACE
+    SUBROUTINE COFX(X,A,B,C)
+      REAL :: X, A, B, C
+    END SUBROUTINE COFX
+    SUBROUTINE COFY(Y,D,E,F)
+      REAL :: Y, D, E, F
+    END SUBROUTINE COFY
+  END INTERFACE
   INTEGER :: Idmn
   REAL :: Grhs(Idmn,NS), Usol(Idmn,NS)
-  EXTERNAL :: COFX, COFY
   INTEGER :: i, j
   REAL :: ai, bi, ci, dj, ej, fj, tx, ty, uxxx, uxxxx, uyyy, uyyyy, xi, yj
   !* FIRST EXECUTABLE STATEMENT  DEFER

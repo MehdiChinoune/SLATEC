@@ -86,7 +86,12 @@ SUBROUTINE DFDJC3(FCN,M,N,X,Fvec,Fjac,Ldfjac,Iflag,Epsfcn,Wa)
   !           (WRB)
   !   900328  Added TYPE section.  (WRB)
   USE service, ONLY : D1MACH
-  EXTERNAL :: FCN
+  INTERFACE
+    SUBROUTINE FCN(Iflag,M,N,X,Fvec,Fjac,Ldfjac)
+      INTEGER :: Ldfjac, M, N, Iflag
+      REAL(8) :: X(N), Fvec(M), Fjac(:,:)
+    END SUBROUTINE FCN
+  END INTERFACE
   INTEGER :: M, N, Ldfjac, Iflag
   REAL(8) :: Epsfcn
   REAL(8) :: X(N), Fvec(M), Fjac(Ldfjac,N), Wa(M)

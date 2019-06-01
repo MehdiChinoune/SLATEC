@@ -210,8 +210,12 @@ SUBROUTINE QAWF(F,A,Omega,Integr,Epsabs,Result,Abserr,Neval,Ier,Limlst,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   USE service, ONLY : XERMSG
+  INTERFACE
+    REAL FUNCTION F(X)
+      REAL :: X
+    END FUNCTION F
+  END INTERFACE
   INTEGER :: Ier, Integr, Leniw, limit, Limlst, Lenw, Lst, Maxp1, Neval, Iwork(Leniw)
-  REAL, EXTERNAL :: F
   REAL :: A, Abserr, Epsabs, Omega, Result, Work(Lenw)
   INTEGER :: lvl, l1, l2, l3, l4, l5, l6, ll2
   !

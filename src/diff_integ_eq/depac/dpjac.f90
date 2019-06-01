@@ -1,5 +1,5 @@
 !** DPJAC
-SUBROUTINE DPJAC(Neq,Y,Yh,Nyh,Ewt,Ftem,Savf,Wm,Iwm,DF,DJAC,Rpar,Ipar)
+SUBROUTINE DPJAC(Neq,Y,Yh,Nyh,Ewt,Ftem,Savf,Wm,Iwm,DF,DJAC)
   !>
   !  Subsidiary to DDEBDF
   !***
@@ -32,12 +32,23 @@ SUBROUTINE DPJAC(Neq,Y,Yh,Nyh,Ewt,Ftem,Savf,Wm,Iwm,DF,DJAC,Rpar,Ipar)
   USE DDEBD1, ONLY : EL0, H, TN, UROund, IER, MITer, N, NFE, NJE
   USE linear, ONLY : DGBFA, DGEFA
   !
+  INTERFACE
+    SUBROUTINE DF(X,U,Uprime)
+      REAL(8) :: X
+      REAL(8) :: U(:), Uprime(:)
+    END SUBROUTINE DF
+    SUBROUTINE DJAC(X,U,Pd,Nrowpd)
+      INTEGER :: Nrowpd
+      REAL(8) :: X
+      REAL(8) :: U(:), Pd(:,:)
+    END SUBROUTINE DJAC
+  END INTERFACE
   INTEGER :: Neq, Nyh
-  INTEGER :: Ipar(:), Iwm(:)
-  REAL(8) :: Ewt(N), Ftem(N), Rpar(:), Savf(N), Wm(:), Y(Neq), Yh(Nyh,N)
-  EXTERNAL :: DF, DJAC
-  INTEGER :: i, i1, i2, ii, j, j1, jj, lenp, mba, mband, meb1, meband, ml, ml3, mu
+  INTEGER :: Iwm(:)
+  REAL(8) :: Ewt(N), Ftem(N), Savf(N), Wm(:), Y(Neq), Yh(Nyh,N)
+  INTEGER :: i, i1, i2, ii, j, j1, jj, mba, mband, meb1, meband, ml, ml3, mu
   REAL(8) :: con, di, fac, hl0, r, r0, srur, yi, yj, yjj
+  REAL(8), ALLOCATABLE :: pd(:,:)
   !     ------------------------------------------------------------------
   !      DPJAC IS CALLED BY DSTOD  TO COMPUTE AND PROCESS THE MATRIX
   !      P = I - H*EL(1)*J, WHERE J IS AN APPROXIMATION TO THE JACOBIAN.
@@ -94,7 +105,7 @@ SUBROUTINE DPJAC(Neq,Y,Yh,Nyh,Ewt,Ftem,Savf,Wm,Iwm,DF,DJAC,Rpar,Ipar)
         r = MAX(srur*ABS(yj),r0*Ewt(j))
         Y(j) = Y(j) + r
         fac = -hl0/r
-        CALL DF(TN,Y,Ftem,Rpar,Ipar)
+        CALL DF(TN,Y,Ftem)
         DO i = 1, N
           Wm(i+j1) = (Ftem(i)-Savf(i))*fac
         END DO
@@ -111,7 +122,7 @@ SUBROUTINE DPJAC(Neq,Y,Yh,Nyh,Ewt,Ftem,Savf,Wm,Iwm,DF,DJAC,Rpar,Ipar)
       DO i = 1, N
         Y(i) = Y(i) + r*(H*Savf(i)-Yh(i,2))
       END DO
-      CALL DF(TN,Y,Wm(3),Rpar,Ipar)
+      CALL DF(TN,Y,Wm(3:Neq+2))
       NFE = NFE + 1
       DO i = 1, N
         r0 = H*Savf(i) - Yh(i,2)
@@ -132,17 +143,16 @@ SUBROUTINE DPJAC(Neq,Y,Yh,Nyh,Ewt,Ftem,Savf,Wm,Iwm,DF,DJAC,Rpar,Ipar)
       mu = Iwm(2)
       ml3 = 3
       mband = ml + mu + 1
-      meband = mband + ml
-      lenp = meband*N
-      DO i = 1, lenp
-        Wm(i+2) = 0.0D0
-      END DO
-      CALL DJAC(TN,Y,Wm(ml3),meband,Rpar,Ipar)
+      meband = 2*ml + mu + 1
+      ALLOCATE( pd(meband,N) )
+      pd = 0.D0
+      CALL DJAC(TN,Y,pd,meband)
       con = -hl0
-      DO i = 1, lenp
-        Wm(i+2) = Wm(i+2)*con
+      DO j = 1, N
+        DO i = 1, meband
+          Wm( 2+(j-1)*meband+i ) = pd(i,j)*con
+        END DO
       END DO
-      !        ...EXIT
       GOTO 200
     CASE (5)
       !           IF MITER = 5, MAKE MBAND CALLS TO DF TO APPROXIMATE J.
@@ -163,7 +173,7 @@ SUBROUTINE DPJAC(Neq,Y,Yh,Nyh,Ewt,Ftem,Savf,Wm,Iwm,DF,DJAC,Rpar,Ipar)
           r = MAX(srur*ABS(yi),r0*Ewt(i))
           Y(i) = Y(i) + r
         END DO
-        CALL DF(TN,Y,Ftem,Rpar,Ipar)
+        CALL DF(TN,Y,Ftem)
         DO jj = j, N, mband
           Y(jj) = Yh(jj,1)
           yjj = Y(jj)
@@ -182,15 +192,14 @@ SUBROUTINE DPJAC(Neq,Y,Yh,Nyh,Ewt,Ftem,Savf,Wm,Iwm,DF,DJAC,Rpar,Ipar)
     CASE DEFAULT
       !                 IF MITER = 1, CALL DJAC AND MULTIPLY BY SCALAR.
       !                 -----------------------
-      lenp = N*N
-      DO i = 1, lenp
-        Wm(i+2) = 0.0D0
-      END DO
-      CALL DJAC(TN,Y,Wm(3),N,Rpar,Ipar)
+      ALLOCATE( pd(N,N) )
+      pd = 0.D0
+      CALL DJAC(TN,Y,pd,N)
       con = -hl0
-      DO i = 1, lenp
-        Wm(i+2) = Wm(i+2)*con
-        !              ...EXIT
+      DO j = 1, N
+        DO i = 1, N
+          Wm( 2+(j-1)*N+i ) = pd(i,j)*con
+        END DO
       END DO
   END SELECT
   !              ADD IDENTITY MATRIX.

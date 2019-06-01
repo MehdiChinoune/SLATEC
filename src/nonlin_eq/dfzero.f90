@@ -102,9 +102,15 @@ SUBROUTINE DFZERO(F,B,C,R,Re,Ae,Iflag)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   USE service, ONLY : D1MACH
-  REAL(8) :: a, acbs, acmb, Ae, aw, B, C, cmb, er, &
-    F, fa, fb, fc, fx, fz, p, q, R, Re, rw, t, tol, z
-  INTEGER ic, Iflag, kount
+  INTERFACE
+    REAL(8) FUNCTION F(X)
+      REAL(8), INTENT(IN) :: X
+    END FUNCTION F
+  END INTERFACE
+  INTEGER :: Iflag
+  REAL(8) :: Ae, B, C, R, Re
+  INTEGER :: ic, kount
+  REAL(8) :: a, acbs, acmb, aw, cmb, er, fa, fb, fc, fx, fz, p, q, rw, t, tol, z
   !
   !* FIRST EXECUTABLE STATEMENT  DFZERO
   !

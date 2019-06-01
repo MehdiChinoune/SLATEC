@@ -1,6 +1,6 @@
 !** BVPOR
 SUBROUTINE BVPOR(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
-    Nfc,Iflag,Z,Mxnon,P,Ntp,Ip,W,Niv,Yhp,U,V,Coef,S,Stowa,G,Work,Iwork,Nfcc)
+    Nfc,Iflag,Z,Mxnon,P,Ntp,Ip,W,Niv,Yhp,U,V,Coef,S,Stowa,Work,Iwork,Nfcc)
   !>
   !  Subsidiary to BVSUP
   !***
@@ -140,7 +140,7 @@ SUBROUTINE BVPOR(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
     Nxpts
   INTEGER :: Ip(Nfcc,Mxnon+1), Iwork(*)
   REAL :: A(Nrowa,Ncomp), Alpha(:), B(Nrowb,Ncomp), Beta(Nfc), Coef(Nfcc), &
-    G(Ncomp), P(Ntp,Mxnon+1), S(Nfc+1), Stowa(:), U(Ncomp,Nfc,Nxpts), &
+    P(Ntp,Mxnon+1), S(Nfc+1), Stowa(:), U(Ncomp,Nfc,Nxpts), &
     V(Ncomp,Nxpts), W(Nfcc,Mxnon+1), Work(*), Xpts(Nxpts), Y(Nrowy,Nxpts), &
     Yhp(Ncomp,Nfc+1), Z(Mxnon+1)
   INTEGER kod, kpts, kwc, kwd, kws, kwt, l, m, n, ncomp2, ndw, &
@@ -210,7 +210,7 @@ SUBROUTINE BVPOR(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
       !- *********************************************************************
       !
       CALL RKFAB(Ncomp,Xpts,Nxpts,Nfc,Iflag,Z,Mxnon,P,Ntp,Ip,Yhp,Niv,U,V,W,&
-        S,Stowa,G,Work,Iwork,Nfcc)
+        S,Stowa,Work,Iwork,Nfcc)
       IF ( Iflag==0.AND.ICOco/=0 ) THEN
         !
         !- *********************************************************************

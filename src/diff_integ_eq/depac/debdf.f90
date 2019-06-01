@@ -1,6 +1,5 @@
 !** DEBDF
-SUBROUTINE DEBDF(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,&
-    Rpar,Ipar,JAC)
+SUBROUTINE DEBDF(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,JAC)
   !>
   !  Solve an initial value problem in ordinary differential
   !            equations using backward differentiation formulas.  It is
@@ -747,11 +746,21 @@ SUBROUTINE DEBDF(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,&
     ITStop, IJAc, IBAnd
   USE service, ONLY : XERMSG
   !
+  INTERFACE
+    SUBROUTINE F(X,U,Uprime)
+      REAL :: X
+      REAL :: U(:), Uprime(:)
+    END SUBROUTINE F
+    SUBROUTINE JAC(X,U,Pd,Nrowpd)
+      INTEGER :: Nrowpd
+      REAL :: X
+      REAL :: U(:), Pd(:,:)
+    END SUBROUTINE JAC
+  END INTERFACE
   INTEGER :: Idid, Liw, Lrw, Neq
-  INTEGER :: Info(15), Ipar(:), Iwork(Liw)
+  INTEGER :: Info(15), Iwork(Liw)
   REAL :: T, Tout
-  REAL :: Atol(:), Rpar(:), Rtol(:), Rwork(Lrw), Y(Neq)
-  EXTERNAL :: F, JAC
+  REAL :: Atol(:), Rtol(:), Rwork(Lrw), Y(Neq)
   INTEGER :: icomi, icomr, idelsn, iinout, ilrw, itstar, iypout, ml, mu
   LOGICAL :: intout
   CHARACTER(8) :: xern1, xern2
@@ -899,7 +908,7 @@ SUBROUTINE DEBDF(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,&
   !
   CALL LSOD(F,Neq,T,Y,Tout,Rtol,Atol,Idid,Rwork(iypout),Rwork(IYH),&
     Rwork(IYH),Rwork(IEWt:ISAvf-1),Rwork(ISAvf:IACor-1),Rwork(IACor:IWM-1),&
-    Rwork(IWM:idelsn),Iwork,JAC,intout,Rwork(1),Rwork(12),Rwork(idelsn),Rpar,Ipar)
+    Rwork(IWM:idelsn),Iwork,JAC,intout,Rwork(1),Rwork(12),Rwork(idelsn))
   !
   Iwork(iinout) = -1
   IF ( intout ) Iwork(iinout) = 1

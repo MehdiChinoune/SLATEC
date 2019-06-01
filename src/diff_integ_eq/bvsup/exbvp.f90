@@ -56,7 +56,7 @@ SUBROUTINE EXBVP(Y,Nrowy,Xpts,A,Nrowa,Alpha,B,Nrowb,Beta,Iflag,Work,Iwork)
     CALL BVPOR(Y,Nrowy,NCOmp,Xpts,NXPts,A,Nrowa,Alpha,NIC,B,Nrowb,Beta,NFC,&
       Iflag,Work(1),MXNon,Work(K1),NTP,Iwork(18),Work(K2),Iwork(16)&
       ,Work(K3),Work(K4),Work(K5),Work(K6),Work(K7),Work(K8:K9-1),&
-      Work(K9),Work(K10),Iwork(L1),NFCc)
+      Work(K10),Iwork(L1),NFCc)
     !
     !- *********************************************************************
     !- *********************************************************************

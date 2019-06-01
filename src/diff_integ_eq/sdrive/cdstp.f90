@@ -74,13 +74,34 @@ SUBROUTINE CDSTP(Eps,F,FA,Hmax,Impl,Ierror,JACOBN,Matdim,Maxord,Mint,&
   !   790601  DATE WRITTEN
   !   900329  Initial submission to SLATEC.
   USE linear, ONLY : SCNRM2
-  EXTERNAL :: F, JACOBN, FA, USERS
+  INTERFACE
+    SUBROUTINE F(N,T,Y,Ydot)
+      INTEGER :: N
+      REAL :: T
+      COMPLEX :: Y(:), Ydot(:)
+    END SUBROUTINE F
+    SUBROUTINE JACOBN(N,T,Y,Dfdy,Matdim,Ml,Mu)
+      INTEGER :: N, Matdim, Ml, Mu
+      REAL :: T
+      COMPLEX :: Y(N), Dfdy(Matdim,N)
+    END SUBROUTINE JACOBN
+    SUBROUTINE USERS(Y,Yh,Ywt,Save1,Save2,T,H,El,Impl,N,Nde,Iflag)
+      INTEGER :: Impl, N, Nde, iflag
+      REAL :: T, H, El
+      COMPLEX :: Y(N), Yh(N,13), Ywt(N), Save1(N), Save2(N)
+    END SUBROUTINE USERS
+    SUBROUTINE FA(N,T,Y,A,Matdim,Ml,Mu,Nde)
+      INTEGER :: N, Matdim, Ml, Mu, Nde
+      REAL :: T
+      COMPLEX :: Y(N), A(:,:)
+    END SUBROUTINE FA
+  END INTERFACE
   INTEGER :: Ierror, Impl, Iswflg, Jstate, Jstepl, Jtask, Matdim, Maxord, Mint, &
     Miter, Ml, Mntold, Mtrold, Mtrsv, Mu, Mxrdsv, N, Nde, Nfe, Nje, Nq, Nqused, &
     Nstep, Nwait, Ipvt(N)
   REAL :: Avgh, Avgord, Eps, H, Hmax, Hold, Hused, Rc, Rmax, T, Trend, Uround
   REAL :: Tq(3,12), El(13,12)
-  COMPLEX :: A(Matdim,N), Dfdy(Matdim,N), Fac(N), Save1(N), Save2(N), Y(N), &
+  COMPLEX :: A(Matdim,N), Dfdy(Matdim,N), Fac(N), Save1(N), Save2(N), Y(N+1), &
     Yh(N,13), Ywt(N)
   LOGICAL :: Convrg
   INTEGER :: i, iter, j, nfail, nsv, ntry

@@ -83,16 +83,20 @@ SUBROUTINE DQNC79(FUN,A,B,Err,Ans,Ierr,K)
   USE service, ONLY : XERMSG, D1MACH, I1MACH
   !     .. Scalar Arguments ..
   REAL(8) :: A, Ans, B, Err
-  INTEGER Ierr, K
+  INTEGER :: Ierr, K
   !     .. Function Arguments ..
-  REAL(8), EXTERNAL :: FUN
+  INTERFACE
+    REAL(8) FUNCTION FUN(X)
+      REAL(8), INTENT(IN) :: X
+    END FUNCTION FUN
+  END INTERFACE
   !     .. Local Scalars ..
   REAL(8) :: ae, area, bank, blocal, c, ce, ee, ef, eps, q13, q7, q7l, test, tol, vr
-  INTEGER i, l, lmn, lmx, nib
+  INTEGER :: i, l, lmn, lmx, nib
   !     .. Local Arrays ..
   REAL(8) :: aa(99), f(13), f1(99), f2(99), f3(99), f4(99), f5(99), f6(99), &
     f7(99), hh(99), q7r(99), vl(99)
-  INTEGER lr(99)
+  INTEGER :: lr(99)
   !     .. Intrinsic Functions ..
   INTRINSIC ABS, LOG, MAX, MIN, SIGN, SQRT
   !     .. Save statement ..

@@ -477,7 +477,7 @@ CONTAINS
     INTEGER i, iflag, info, infos, iopt, kontrl, ldfjac, lwa, m, n, nerr, nprint
     LOGICAL fatal
     !     .. Local Arrays ..
-    REAL(8) :: fjac(10,2), fjrow(2), fjtj(3), fvec(10), wa(40), x(2)
+    REAL(8) :: fjac(10,2), fjrow(2,1), fjtj(3), fvec(10), wa(40), x(2)
     INTEGER iw(2)
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, SQRT
@@ -639,9 +639,9 @@ CONTAINS
     iflag = 3
     DO i = 1, m
       CALL DFCN3(iflag,m,n,x,fvec,fjrow,i)
-      fjtj(1) = fjtj(1) + fjrow(1)**2
-      fjtj(2) = fjtj(2) + fjrow(1)*fjrow(2)
-      fjtj(3) = fjtj(3) + fjrow(2)**2
+      fjtj(1) = fjtj(1) + fjrow(1,1)**2
+      fjtj(2) = fjtj(2) + fjrow(1,1)*fjrow(2,1)
+      fjtj(3) = fjtj(3) + fjrow(2,1)**2
     END DO
     !
     !     Calculate the covariance matrix.
@@ -1080,13 +1080,12 @@ CONTAINS
     !   930214  TYPE and declarations sections added.  (WRB)
 
     !     .. Scalar Arguments ..
-    REAL(8) :: Fjac
-    INTEGER Iflag, Ldfjac, M, N
+    INTEGER :: Iflag, Ldfjac, M, N
     !     .. Array Arguments ..
-    REAL(8) :: Fvec(*), X(*)
+    REAL(8) :: Fvec(M), X(N), Fjac(:,:)
     !     .. Local Scalars ..
+    INTEGER :: i
     REAL(8) :: temp
-    INTEGER i
     !     .. Intrinsic Functions ..
     INTRINSIC EXP
     !     .. Data statements ..
@@ -1128,12 +1127,12 @@ CONTAINS
     !           (WRB)
 
     !     .. Scalar Arguments ..
-    INTEGER Iflag, Ldfjac, M, N
+    INTEGER :: Iflag, Ldfjac, M, N
     !     .. Array Arguments ..
-    REAL(8) :: Fjac(Ldfjac,*), Fvec(*), X(*)
+    REAL(8) :: Fjac(:,:), Fvec(M), X(N)
     !     .. Local Scalars ..
     REAL(8) :: temp
-    INTEGER i
+    INTEGER :: i
     !     .. Intrinsic Functions ..
     INTRINSIC EXP
     !     .. Data statements ..
@@ -1193,9 +1192,9 @@ CONTAINS
     !           (WRB)
 
     !     .. Scalar Arguments ..
-    INTEGER Iflag, M, N, Nrow
+    INTEGER :: Iflag, M, N, Nrow
     !     .. Array Arguments ..
-    REAL(8) :: Fjrow(*), Fvec(*), X(*)
+    REAL(8) :: Fjrow(:,:), Fvec(M), X(N)
     !     .. Local Scalars ..
     REAL(8) :: temp
     INTEGER i
@@ -1222,8 +1221,8 @@ CONTAINS
       !
       IF ( Iflag/=3 ) RETURN
       temp = Nrow
-      Fjrow(1) = -temp*EXP(temp*X(1))
-      Fjrow(2) = -temp*EXP(temp*X(2))
+      Fjrow(1,1) = -temp*EXP(temp*X(1))
+      Fjrow(2,1) = -temp*EXP(temp*X(2))
     END IF
   END SUBROUTINE DFCN3
 END MODULE TEST53_MOD

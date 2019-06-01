@@ -176,7 +176,7 @@ CONTAINS
     lenw = 298
     leniw = 50
     CALL SDRIV2(N,t,y,SDF,tout,mstate,NROOT,eps,ewt(1),mint,work,lenw,iwork,&
-      leniw,R1MACH,ierflg)
+      leniw,dum_G,ierflg)
     nstep = iwork(3)
     nfe = iwork(4)
     nje = iwork(5)
@@ -249,7 +249,7 @@ CONTAINS
     lenwx = 1
     leniw = 50
     CALL SDRIV2(N,t,y,SDF,tout,mstate,NROOT,eps,ewt(1),mint,work,lenwx,iwork,&
-      leniw,R1MACH,ierflg)
+      leniw,dum_G,ierflg)
     IF ( ierflg/=32 ) THEN
       IF ( Kprint==1 ) THEN
         WRITE (Lun,&
@@ -297,8 +297,8 @@ CONTAINS
     lenw = 301
     leniw = 53
     CALL SDRIV3(N,t,y,SDF,nstate,tout,NTASK,NROOT,eps,ewt,IERROR,mint,MITER,&
-      IMPL,ML,MU,MXORD,HMAX,work,lenw,iwork,leniw,SDF,SDF,nde,&
-      MXSTEP,R1MACH,SDF,ierflg)
+      IMPL,ML,MU,MXORD,HMAX,work,lenw,iwork,leniw,dum_JACOBN,dum_FA,nde,&
+      MXSTEP,dum_G,dum_USERS,ierflg)
     nstep = iwork(3)
     nfe = iwork(4)
     nje = iwork(5)
@@ -372,8 +372,8 @@ CONTAINS
     lenw = 301
     leniwx = 1
     CALL SDRIV3(N,t,y,SDF,nstate,tout,NTASK,NROOT,eps,ewt,IERROR,mint,MITER,&
-      IMPL,ML,MU,MXORD,HMAX,work,lenw,iwork,leniwx,SDF,SDF,nde,&
-      MXSTEP,R1MACH,SDF,ierflg)
+      IMPL,ML,MU,MXORD,HMAX,work,lenw,iwork,leniwx,dum_JACOBN,dum_FA,nde,&
+      MXSTEP,dum_G,dum_USERS,ierflg)
     IF ( ierflg/=33 ) THEN
       IF ( Kprint==1 ) THEN
         WRITE (Lun,&
@@ -408,6 +408,36 @@ CONTAINS
       WRITE (Lun,'(/)')
     END IF
     CALL XERCLR
+
+  CONTAINS
+    REAL FUNCTION dum_G(N,T,Y,Iroot)
+      INTEGER :: N, Iroot
+      REAL :: T
+      REAL :: Y(N)
+      dum_G = SUM(Y) + T
+    END FUNCTION dum_G
+    SUBROUTINE dum_JACOBN(N,T,Y,Dfdy,Matdim,Ml,Mu)
+      INTEGER :: N, Matdim, Ml, Mu
+      REAL :: T
+      REAL :: Y(N), Dfdy(Matdim,N)
+      Dfdy = T
+      Y = Ml + Mu
+    END SUBROUTINE dum_JACOBN
+    SUBROUTINE dum_USERS(Y,Yh,Ywt,Save1,Save2,T,H,El,Impl,N,Nde,Iflag)
+      INTEGER :: Impl, N, Nde, Iflag
+      REAL :: T, H, El
+      REAL :: Y(N), Yh(N,13), Ywt(N), Save1(N), Save2(N)
+      Y = Ywt + Save1 + Save2
+      Yh = T + H + El
+      Impl = Nde + Iflag
+    END SUBROUTINE dum_USERS
+    SUBROUTINE dum_FA(N,T,Y,A,Matdim,Ml,Mu,Nde)
+      INTEGER :: N, Matdim, Ml, Mu, Nde
+      REAL :: T, Y(N), A(:,:)
+      T = Matdim + Ml + Mu + Nde
+      Y = 0.
+      A = 0.
+    END SUBROUTINE dum_FA
   END SUBROUTINE SDQCK
   !** SDF
   SUBROUTINE SDF(N,T,Y,Yp)
@@ -438,8 +468,9 @@ CONTAINS
     !   890405  DATE WRITTEN
     !   890405  Revised to meet SLATEC standards.
 
-    REAL alfa, T, Y(*), Yp(*)
-    INTEGER N
+    INTEGER :: N
+    REAL :: T, Y(:), Yp(:)
+    REAL :: alfa
     !* FIRST EXECUTABLE STATEMENT  SDF
     alfa = Y(N+1)
     Yp(1) = 1.E0 + alfa*(Y(2)-Y(1)) - Y(1)*Y(3)

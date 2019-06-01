@@ -40,8 +40,9 @@ SUBROUTINE JAIRY(X,Rx,C,Ai,Dai)
   !   910408  Updated the AUTHOR section.  (WRB)
 
   !
-  INTEGER i, j
-  REAL Ai, C, ccv, cv, Dai, ec, e1, e2, f1, f2, rtrx, Rx, scv, t, temp1, temp2, tt, X
+  REAL :: Ai, C, Dai, Rx, X
+  INTEGER :: i, j
+  REAL :: ccv, cv, ec, e1, e2, f1, f2, rtrx, scv, t, temp1, temp2, tt
   INTEGER, PARAMETER :: n1 = 14, n2 = 23, n3 = 19, n4 = 15
   INTEGER, PARAMETER :: m1 = 12, m2 = 21, m3 = 17, m4 = 13
   INTEGER, PARAMETER :: n1d = 14, n2d = 24, n3d = 19, n4d = 15

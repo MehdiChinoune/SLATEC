@@ -427,11 +427,20 @@ SUBROUTINE SNSQ(FCN,JAC,Iopt,N,X,Fvec,Fjac,Ldfjac,Xtol,Maxfev,Ml,Mu,&
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   USE service, ONLY : XERMSG, R1MACH
+  INTERFACE
+    SUBROUTINE FCN(N,X,Fvec,iflag)
+      INTEGER :: N, Iflag
+      REAL :: X(N), Fvec(N)
+    END SUBROUTINE FCN
+    SUBROUTINE JAC(N,X,Fvec,Fjac,Ldfjac,Iflag)
+      INTEGER :: N, Ldfjac, Iflag
+      REAL :: X(N), Fvec(N),Fjac(Ldfjac,N)
+    END SUBROUTINE JAC
+  END INTERFACE
   INTEGER :: Iopt, N, Maxfev, Ml, Mu, Mode, Nprint, Info, Nfev, Ldfjac, Lr, Njev
   REAL :: Xtol, Epsfcn, Factor
   REAL :: X(N), Fvec(N), Diag(N), Fjac(Ldfjac,N), R(Lr), Qtf(N), Wa1(N), &
     Wa2(N), Wa3(N), Wa4(N)
-  EXTERNAL :: FCN
   INTEGER :: i, iflag, iter, j, jm1, l, ncfail, ncsuc, nslow1, nslow2
   INTEGER :: iwa(1)
   LOGICAL :: jeval, sing

@@ -94,7 +94,12 @@ SUBROUTINE SOSEQS(FNC,N,S,Rtolx,Atolx,Tolf,Iflag,Mxit,Ncjs,Nsrrc,Nsri,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   USE service, ONLY : R1MACH, I1MACH
-  REAL, EXTERNAL :: FNC
+  INTERFACE
+    REAL FUNCTION FNC(X,K)
+      INTEGER :: K
+      REAL :: X(:)
+    END FUNCTION FNC
+  END INTERFACE
   INTEGER :: Mxit, N, Nc, Ncjs, Nsri, Nsrrc, Iflag, Iprint, Is(N)
   REAL :: Atolx, Fmax, Rtolx, Tolf, C(Nc), B(N), Fac(N), P(N), S(N), Temp(N), &
     X(N), Y(N)

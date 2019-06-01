@@ -209,6 +209,10 @@ INTEGER FUNCTION ISSCGN(N,B,X,Nelt,Ia,Ja,A,Isym,MTTVEC,MSOLVE,Itol,&
       INTEGER :: N, Iwork(*)
       REAL :: R(N), Z(N), Rwork(*)
     END SUBROUTINE
+    SUBROUTINE MTTVEC(N,X,Y,Nelt,Ia,Ja,A,Isym)
+      INTEGER :: N, Nelt, Isym, Ia(Nelt), Ja(Nelt)
+      REAL :: X(N), Y(N), A(Nelt)
+    END SUBROUTINE
   END INTERFACE
   !     .. Scalar Arguments ..
   REAL Ak, Bk, Bnrm, Err, Solnrm, Tol
@@ -216,8 +220,6 @@ INTEGER FUNCTION ISSCGN(N,B,X,Nelt,Ia,Ja,A,Isym,MTTVEC,MSOLVE,Itol,&
   !     .. Array Arguments ..
   REAL A(N), Atdz(N), Atz(N), B(N), Dz(N), R(N), Rwork(*), X(N)
   INTEGER Ia(Nelt), Iwork(*), Ja(Nelt)
-  !     .. Subroutine Arguments ..
-  EXTERNAL :: MTTVEC
   !     .. Local Scalars ..
   INTEGER i
   !* FIRST EXECUTABLE STATEMENT  ISSCGN

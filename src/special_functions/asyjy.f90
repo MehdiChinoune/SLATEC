@@ -64,7 +64,11 @@ SUBROUTINE ASYJY(FUNJY,X,Fnu,Flgjy,In,Y,Wk,Iflw)
   !   900328  Added TYPE section.  (WRB)
   !   910408  Updated the AUTHOR section.  (WRB)
   USE service, ONLY : R1MACH, I1MACH
-  EXTERNAL :: FUNJY
+  INTERFACE
+    SUBROUTINE FUNJY(A,B,C,D,E)
+      REAL :: A, B, C, D, E
+    END SUBROUTINE
+  END INTERFACE
   INTEGER :: Iflw, In
   REAL :: Flgjy, Fnu, Wk(7), X, Y(In)
   INTEGER :: i, j, jn, jr, ju, k, kb, klast, kmax(5), kp1, &

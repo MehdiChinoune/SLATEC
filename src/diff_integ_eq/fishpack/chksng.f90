@@ -27,9 +27,19 @@ SUBROUTINE CHKSNG(Mbdcnd,Nbdcnd,Alpha,Beta,Gama,Xnu,COFX,COFY,Singlr)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   USE SPLPCM, ONLY : AIT, CIT, DLX, DLY, IS, JS, MS, NS
-  REAL ai, Alpha, Beta, bi, ci, dj, ej, fj, Gama, xi, Xnu, yj
-  INTEGER i, j, Mbdcnd, Nbdcnd
-  LOGICAL Singlr
+  INTERFACE
+    SUBROUTINE COFX(X,A,B,C)
+      REAL :: X, A, B, C
+    END SUBROUTINE COFX
+    SUBROUTINE COFY(Y,D,E,F)
+      REAL :: Y, D, E, F
+    END SUBROUTINE COFY
+  END INTERFACE
+  INTEGER :: Mbdcnd, Nbdcnd
+  REAL :: Alpha, Beta, Gama, Xnu
+  LOGICAL :: Singlr
+  INTEGER :: i, j
+  REAL :: ai, bi, ci, dj, ej, fj, xi, yj
   !* FIRST EXECUTABLE STATEMENT  CHKSNG
   Singlr = .FALSE.
   !

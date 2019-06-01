@@ -157,10 +157,14 @@ SUBROUTINE DQAWCE(F,A,B,C,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   USE service, ONLY : D1MACH
   !
+  INTERFACE
+    REAL(8) FUNCTION F(X)
+      REAL(8) :: X
+    END FUNCTION F
+  END INTERFACE
   INTEGER :: Ier, Last, Limit, Neval, Iord(Limit)
   REAL(8) :: A, Abserr, B, C, Epsabs, Epsrel, Result
   REAL(8) :: Alist(Limit), Blist(Limit), Elist(Limit), Rlist(Limit)
-  REAL(8), EXTERNAL :: F
   INTEGER :: iroff1, iroff2, k, krule, maxerr, nev, nrmax
   REAL(8) :: aa, area, area1, area12, area2, a1, a2, bb, b1, b2, epmach, errbnd, &
     errmax, error1, erro12, error2, errsum, uflow

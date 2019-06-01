@@ -37,9 +37,9 @@ SUBROUTINE YAIRY(X,Rx,C,Bi,Dbi)
   !   910408  Updated the AUTHOR section.  (WRB)
 
   !
-  INTEGER i, j
-  REAL ax, Bi, C, cv, Dbi, d1, d2, ex, e1, e2, f1, f2, rtrx, Rx, s1, s2, t, tc, &
-    temp1, temp2, tt, X
+  REAL :: Bi, C, Dbi, Rx, X
+  INTEGER :: i, j
+  REAL :: ax, cv, d1, d2, ex, e1, e2, f1, f2, rtrx, s1, s2, t, tc, temp1, temp2, tt
   INTEGER, PARAMETER :: n1 = 20, n2 = 19, n3 = 14
   INTEGER, PARAMETER :: m1 = 18, m2 = 17, m3 = 12
   INTEGER, PARAMETER :: n1d = 21, n2d = 20, n3d = 19, n4d = 14

@@ -474,7 +474,7 @@ CONTAINS
     INTEGER i, iflag, info, infos, iopt, kontrl, ldfjac, lwa, m, n, nerr, nprint
     LOGICAL fatal
     !     .. Local Arrays ..
-    REAL fjac(10,2), fjrow(2), fjtj(3), fvec(10), wa(40), x(2)
+    REAL fjac(10,2), fjrow(2,1), fjtj(3), fvec(10), wa(40), x(2)
     INTEGER iw(2)
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, SQRT
@@ -636,9 +636,9 @@ CONTAINS
     iflag = 3
     DO i = 1, m
       CALL FCN3(iflag,m,n,x,fvec,fjrow,i)
-      fjtj(1) = fjtj(1) + fjrow(1)**2
-      fjtj(2) = fjtj(2) + fjrow(1)*fjrow(2)
-      fjtj(3) = fjtj(3) + fjrow(2)**2
+      fjtj(1) = fjtj(1) + fjrow(1,1)**2
+      fjtj(2) = fjtj(2) + fjrow(1,1)*fjrow(2,1)
+      fjtj(3) = fjtj(3) + fjrow(2,1)**2
     END DO
     !
     !     Calculate the covariance matrix.
@@ -1075,13 +1075,12 @@ CONTAINS
     !   930214  TYPE and declarations sections added.  (WRB)
 
     !     .. Scalar Arguments ..
-    REAL Fjac
-    INTEGER Iflag, Ldfjac, M, N
+    INTEGER :: Iflag, Ldfjac, M, N
     !     .. Array Arguments ..
-    REAL Fvec(*), X(*)
+    REAL :: Fvec(M), X(N), Fjac(:,:)
     !     .. Local Scalars ..
-    REAL temp
-    INTEGER i
+    INTEGER :: i
+    REAL :: temp
     !     .. Intrinsic Functions ..
     INTRINSIC EXP
     !     .. Data statements ..
@@ -1123,12 +1122,12 @@ CONTAINS
     !           (WRB)
 
     !     .. Scalar Arguments ..
-    INTEGER Iflag, Ldfjac, M, N
+    INTEGER :: Iflag, Ldfjac, M, N
     !     .. Array Arguments ..
-    REAL Fjac(Ldfjac,*), Fvec(*), X(*)
+    REAL :: Fjac(:,:), Fvec(M), X(N)
     !     .. Local Scalars ..
-    REAL temp
-    INTEGER i
+    REAL :: temp
+    INTEGER :: i
     !     .. Intrinsic Functions ..
     INTRINSIC EXP
     !     .. Data statements ..
@@ -1188,12 +1187,12 @@ CONTAINS
     !           (WRB)
 
     !     .. Scalar Arguments ..
-    INTEGER Iflag, M, N, Nrow
+    INTEGER :: Iflag, M, N, Nrow
     !     .. Array Arguments ..
-    REAL Fjrow(*), Fvec(*), X(*)
+    REAL :: Fjrow(:,:), Fvec(M), X(N)
     !     .. Local Scalars ..
-    REAL temp
-    INTEGER i
+    REAL :: temp
+    INTEGER :: i
     !     .. Intrinsic Functions ..
     INTRINSIC EXP
     !     .. Data statements ..
@@ -1217,8 +1216,8 @@ CONTAINS
       !
       IF ( Iflag/=3 ) RETURN
       temp = Nrow
-      Fjrow(1) = -temp*EXP(temp*X(1))
-      Fjrow(2) = -temp*EXP(temp*X(2))
+      Fjrow(1,1) = -temp*EXP(temp*X(1))
+      Fjrow(2,1) = -temp*EXP(temp*X(2))
     END IF
   END SUBROUTINE FCN3
 END MODULE TEST52_MOD

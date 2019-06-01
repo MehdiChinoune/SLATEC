@@ -605,12 +605,17 @@ SUBROUTINE DNLS1(FCN,Iopt,M,N,X,Fvec,Fjac,Ldfjac,Ftol,Xtol,Gtol,Maxfev,&
   !   920205  Corrected XERN1 declaration.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   USE service, ONLY : XERMSG, D1MACH
+  INTERFACE
+    SUBROUTINE FCN(Iflag,M,N,X,Fvec,Fjac,Ldfjac)
+      INTEGER :: Ldfjac, M, N, Iflag
+      REAL(8) :: X(N), Fvec(M), Fjac(:,:)
+    END SUBROUTINE FCN
+  END INTERFACE
   INTEGER :: Iopt, M, N, Ldfjac, Maxfev, Mode, Nprint, Info, Nfev, Njev
   INTEGER :: Ipvt(N)
   REAL(8) :: Ftol, Xtol, Gtol, Factor, Epsfcn
   REAL(8) :: X(N), Fvec(M), Fjac(Ldfjac,N), Diag(N), Qtf(N), &
-    Wa1(N), Wa2(N), Wa3(N), Wa4(M)
-  EXTERNAL :: FCN
+    Wa1(N), Wa2(N), Wa3(N,1), Wa4(M)
   INTEGER :: ijunk, nrow, i, iflag, iter, j, l, modech
   REAL(8) :: actred, delta, dirder, epsmch, fnorm, fnorm1, gnorm, par, &
     pnorm, prered, ratio, summ, temp, temp1, temp2, xnorm, err(1)
@@ -841,7 +846,7 @@ SUBROUTINE DNLS1(FCN,Iopt,M,N,X,Fvec,Fjac,Ldfjac,Ftol,Xtol,Gtol,Maxfev,&
     !        AND INITIALIZE THE STEP BOUND DELTA.
     !
     DO j = 1, N
-      Wa3(j) = Diag(j)*X(j)
+      Wa3(j,1) = Diag(j)*X(j)
     END DO
     xnorm = DENORM(N,Wa3)
     delta = Factor*xnorm
@@ -890,7 +895,7 @@ SUBROUTINE DNLS1(FCN,Iopt,M,N,X,Fvec,Fjac,Ldfjac,Ftol,Xtol,Gtol,Maxfev,&
       DO j = 1, N
         Wa1(j) = -Wa1(j)
         Wa2(j) = X(j) + Wa1(j)
-        Wa3(j) = Diag(j)*Wa1(j)
+        Wa3(j,1) = Diag(j)*Wa1(j)
       END DO
       pnorm = DENORM(N,Wa3)
       !
@@ -915,11 +920,11 @@ SUBROUTINE DNLS1(FCN,Iopt,M,N,X,Fvec,Fjac,Ldfjac,Ftol,Xtol,Gtol,Maxfev,&
       !           THE SCALED DIRECTIONAL DERIVATIVE.
       !
       DO j = 1, N
-        Wa3(j) = zero
+        Wa3(j,1) = zero
         l = Ipvt(j)
         temp = Wa1(l)
         DO i = 1, j
-          Wa3(i) = Wa3(i) + Fjac(i,j)*temp
+          Wa3(i,1) = Wa3(i,1) + Fjac(i,j)*temp
         END DO
       END DO
       temp1 = DENORM(N,Wa3)/fnorm

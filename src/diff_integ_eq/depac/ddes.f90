@@ -2,7 +2,7 @@
 SUBROUTINE DDES(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Ypout,Yp,Yy,Wt,P,Phi,&
     Alpha,Beta,Psi,V,W,Sig,G,Gi,H,Eps,X,Xold,Hold,Told,Delsgn,&
     Tstop,Twou,Fouru,Start,Phase1,Nornd,Stiff,Intout,Ns,Kord,&
-    Kold,Init,Ksteps,Kle4,Iquit,Kprev,Ivc,Iv,Kgi,Rpar,Ipar)
+    Kold,Init,Ksteps,Kle4,Iquit,Kprev,Ivc,Iv,Kgi)
   !>
   !  Subsidiary to DDEABM
   !***
@@ -34,14 +34,19 @@ SUBROUTINE DDES(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Ypout,Yp,Yy,Wt,P,Phi,&
   !   910722  Updated AUTHOR section.  (ALS)
   USE service, ONLY : XERMSG, D1MACH
   !
+  INTERFACE
+    SUBROUTINE DF(X,U,Uprime)
+      REAL(8) :: X
+      REAL(8) :: U(:), Uprime(:)
+    END SUBROUTINE DF
+  END INTERFACE
   INTEGER :: Idid, Init, Iquit, Ivc, Kgi, Kle4, Kold, Kord, Kprev, Ksteps, Neq, Ns
-  INTEGER :: Info(15), Ipar(:), Iv(10)
+  INTEGER :: Info(15), Iv(10)
   REAL(8) :: Delsgn, Eps, Fouru, H, Hold, T, Told, Tout, Tstop, Twou, X, Xold
   REAL(8) :: Alpha(12), Atol(:), Beta(12), G(13), Gi(11), P(Neq), Phi(Neq,16), &
-    Psi(12), Rpar(:), Rtol(:), Sig(13), V(12), W(12), Wt(Neq), Y(Neq), Yp(Neq), &
+    Psi(12), Rtol(:), Sig(13), V(12), W(12), Wt(Neq), Y(Neq), Yp(Neq), &
     Ypout(Neq), Yy(Neq)
   LOGICAL :: Stiff, Start, Phase1, Nornd, Intout
-  EXTERNAL :: DF
   INTEGER :: k, l, ltol, natolp, nrtolp
   REAL(8) :: a, absdel, del, dt, ha, u
   LOGICAL :: crash
@@ -249,7 +254,7 @@ SUBROUTINE DDES(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Ypout,Yp,Yy,Wt,P,Phi,&
       !
       Init = 1
       a = T
-      CALL DF(a,Y,Yp,Rpar,Ipar)
+      CALL DF(a,Y,Yp)
       IF ( T==Tout ) THEN
         Idid = 2
         DO l = 1, Neq
@@ -304,7 +309,7 @@ SUBROUTINE DDES(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Ypout,Yp,Yy,Wt,P,Phi,&
         DO l = 1, Neq
           Y(l) = Yy(l) + dt*Yp(l)
         END DO
-        CALL DF(Tout,Y,Ypout,Rpar,Ipar)
+        CALL DF(Tout,Y,Ypout)
         Idid = 3
         T = Tout
         Told = T
@@ -349,7 +354,7 @@ SUBROUTINE DDES(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Ypout,Yp,Yy,Wt,P,Phi,&
       !
       CALL DSTEPS(DF,Neq,Yy,X,H,Eps,Wt,Start,Hold,Kord,Kold,crash,Phi,P,Yp,&
         Psi,Alpha,Beta,Sig,V,W,G,Phase1,Ns,Nornd,Ksteps,Twou,&
-        Fouru,Xold,Kprev,Ivc,Iv,Kgi,Gi,Rpar,Ipar)
+        Fouru,Xold,Kprev,Ivc,Iv,Kgi,Gi)
       !
       !.......................................................................
       !

@@ -1,5 +1,5 @@
 !** SDASTP
-SUBROUTINE SDASTP(X,Y,Yprime,Neq,RES,JAC,H,Wt,Jstart,Idid,Rpar,Ipar,Phi,&
+SUBROUTINE SDASTP(X,Y,Yprime,Neq,RES,JAC,H,Wt,Jstart,Idid,Phi,&
     Delta,E,Wm,Iwm,Alpha,Beta,Gama,Psi,Sigma,Cj,Cjold,Hold,&
     S,Hmin,Uround,Iphase,Jcalc,K,Kold,Ns,Nonneg,Ntemp)
   !>
@@ -96,18 +96,26 @@ SUBROUTINE SDASTP(X,Y,Yprime,Neq,RES,JAC,H,Wt,Jstart,Idid,Rpar,Ipar,Phi,&
   !           cosmetic changes to prologue.  (FNF)
 
   !
+  INTERFACE
+    SUBROUTINE RES(T,Y,Yprime,Delta,Ires)
+      INTEGER :: Ires
+      REAL :: T, Y(:), Yprime(:), Delta(:)
+    END SUBROUTINE
+    SUBROUTINE JAC(T,Y,Yprime,Pd,Cj)
+      REAL :: T, Cj, Pd(:,:), Y(:), Yprime(:)
+    END SUBROUTINE
+  END INTERFACE
   INTEGER :: Neq, Jstart, Idid, Iphase, Jcalc, K, Kold, Ns, Nonneg, Ntemp
-  INTEGER :: Ipar(:), Iwm(:)
+  INTEGER :: Iwm(:)
   REAL :: X, H, Cj, Cjold, Hold, S, Hmin, Uround
-  REAL :: Y(Neq), Yprime(Neq), Wt(:), Rpar(:), Phi(Neq,*), Delta(:), E(:), Wm(:), &
+  REAL :: Y(Neq), Yprime(Neq), Wt(:), Phi(Neq,*), Delta(:), E(:), Wm(:), &
     Alpha(:), Beta(:), Gama(:), Psi(:), Sigma(:)
-  EXTERNAL :: RES, JAC
   !
-  INTEGER i, ier, ires, j, j1, kdiff, km1, knew, kp1, kp2, m, ncf, nef, nsf, nsp1
-  REAL alpha0, alphas, cjlast, ck, delnrm, enorm, erk, erkm1, &
+  INTEGER :: i, ier, ires, j, j1, kdiff, km1, knew, kp1, kp2, m, ncf, nef, nsf, nsp1
+  REAL :: alpha0, alphas, cjlast, ck, delnrm, enorm, erk, erkm1, &
     erkm2, erkp1, err, est, hnew, oldnrm, pnorm, r, rate, &
     temp1, temp2, terk, terkm1, terkm2, terkp1, xold
-  LOGICAL convgd
+  LOGICAL :: convgd
   !
   INTEGER, PARAMETER :: LMXORD = 3
   INTEGER, PARAMETER :: LNST = 11
@@ -258,7 +266,7 @@ SUBROUTINE SDASTP(X,Y,Yprime,Neq,RES,JAC,H,Wt,Jstart,Idid,Rpar,Ipar,Phi,&
     m = 0
     Iwm(LNRE) = Iwm(LNRE) + 1
     ires = 0
-    CALL RES(X,Y,Yprime,Delta,ires,Rpar,Ipar)
+    CALL RES(X,Y,Yprime,Delta,ires)
     IF ( ires<0 ) THEN
       !
       !
@@ -279,7 +287,7 @@ SUBROUTINE SDASTP(X,Y,Yprime,Neq,RES,JAC,H,Wt,Jstart,Idid,Rpar,Ipar,Phi,&
         Iwm(LNJE) = Iwm(LNJE) + 1
         Jcalc = 0
         CALL SDAJAC(Neq,X,Y,Yprime,Delta,Cj,H,ier,Wt,E,Wm,Iwm,RES,ires,&
-          Uround,JAC,Rpar,Ipar,Ntemp)
+          Uround,JAC,Ntemp)
         Cjold = Cj
         S = 100.E0
         IF ( ires<0 ) THEN
@@ -343,7 +351,7 @@ SUBROUTINE SDASTP(X,Y,Yprime,Neq,RES,JAC,H,Wt,Jstart,Idid,Rpar,Ipar,Phi,&
         !     AND GO BACK TO DO ANOTHER ITERATION
         Iwm(LNRE) = Iwm(LNRE) + 1
         ires = 0
-        CALL RES(X,Y,Yprime,Delta,ires,Rpar,Ipar)
+        CALL RES(X,Y,Yprime,Delta,ires)
         IF ( ires<0 ) THEN
           convgd = .FALSE.
           GOTO 300

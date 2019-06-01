@@ -1,6 +1,6 @@
 !** SDAJAC
 SUBROUTINE SDAJAC(Neq,X,Y,Yprime,Delta,Cj,H,Ier,Wt,E,Wm,Iwm,RES,Ires,&
-    Uround,JAC,Rpar,Ipar,Ntemp)
+    Uround,JAC,Ntemp)
   !>
   !  Compute the iteration matrix for SDASSL and form the
   !            LU-decomposition.
@@ -60,15 +60,24 @@ SUBROUTINE SDAJAC(Neq,X,Y,Yprime,Delta,Cj,H,Ier,Wt,E,Wm,Iwm,RES,Ires,&
   !   901101  Corrected PURPOSE.  (FNF)
   USE linear, ONLY : SGBFA, SGEFA
   !
+  INTERFACE
+    SUBROUTINE RES(T,Y,Yprime,Delta,Ires)
+      INTEGER :: Ires
+      REAL :: T, Y(:), Yprime(:), Delta(:)
+    END SUBROUTINE
+    SUBROUTINE JAC(T,Y,Yprime,Pd,Cj)
+      REAL :: T, Cj, Pd(:,:), Y(:), Yprime(:)
+    END SUBROUTINE
+  END INTERFACE
   INTEGER :: Neq, Ier, Ires
-  INTEGER :: Iwm(:), Ipar(:), Ntemp
+  INTEGER :: Iwm(:), Ntemp
   REAL :: X, Cj, H, Uround
-  REAL :: Y(Neq), Yprime(Neq), Delta(:), Wt(:), E(:), Wm(:), Rpar(:)
-  EXTERNAL :: RES, JAC
+  REAL :: Y(Neq), Yprime(Neq), Delta(:), Wt(:), E(:), Wm(:)
   !
-  INTEGER i, i1, i2, ii, ipsave, isave, j, k, l, lenpd, mba, mband, meb1, meband, &
+  INTEGER :: i, i1, i2, ii, ipsave, isave, j, k, l, mba, mband, meb1, meband, &
     msave, mtype, n, npdm1, nrow
-  REAL del, delinv, squr, ypsave, ysave
+  REAL :: del, delinv, squr, ypsave, ysave
+  REAL, ALLOCATABLE :: Pd(:,:)
   !
   INTEGER, PARAMETER :: NPD = 1
   INTEGER, PARAMETER :: LML = 1
@@ -96,7 +105,7 @@ SUBROUTINE SDAJAC(Neq,X,Y,Yprime,Delta,Cj,H,Ier,Wt,E,Wm,Iwm,RES,Ires,&
         ypsave = Yprime(i)
         Y(i) = Y(i) + del
         Yprime(i) = Yprime(i) + Cj*del
-        CALL RES(X,Y,Yprime,E,Ires,Rpar,Ipar)
+        CALL RES(X,Y,Yprime,E,Ires)
         IF ( Ires<0 ) RETURN
         delinv = 1.0E0/del
         DO l = 1, Neq
@@ -115,12 +124,15 @@ SUBROUTINE SDAJAC(Neq,X,Y,Yprime,Delta,Cj,H,Ier,Wt,E,Wm,Iwm,RES,Ires,&
       !
       !
       !     BANDED USER-SUPPLIED MATRIX
-      lenpd = (2*Iwm(LML)+Iwm(LMU)+1)*Neq
-      DO i = 1, lenpd
-        Wm(npdm1+i) = 0.0E0
-      END DO
-      CALL JAC(X,Y,Yprime,Wm(NPD),Cj,Rpar,Ipar)
       meband = 2*Iwm(LML) + Iwm(LMU) + 1
+      ALLOCATE( Pd(meband,Neq) )
+      Pd = 0.E0
+      CALL JAC(X,Y,Yprime,Pd,Cj)
+      DO j = 1, Neq
+        DO i = 1, meband
+          Wm( npdm1+(j-1)*meband+i ) = Pd(i,j)
+        END DO
+      END DO
       !
       !
       !     DO LU DECOMPOSITION OF BANDED PD
@@ -150,7 +162,7 @@ SUBROUTINE SDAJAC(Neq,X,Y,Yprime,Delta,Cj,H,Ier,Wt,E,Wm,Iwm,RES,Ires,&
           Y(n) = Y(n) + del
           Yprime(n) = Yprime(n) + Cj*del
         END DO
-        CALL RES(X,Y,Yprime,E,Ires,Rpar,Ipar)
+        CALL RES(X,Y,Yprime,E,Ires)
         IF ( Ires<0 ) RETURN
         DO n = j, Neq, mband
           k = (n-j)/mband + 1
@@ -174,11 +186,14 @@ SUBROUTINE SDAJAC(Neq,X,Y,Yprime,Delta,Cj,H,Ier,Wt,E,Wm,Iwm,RES,Ires,&
       !
       !
       !     DENSE USER-SUPPLIED MATRIX
-      lenpd = Neq*Neq
-      DO i = 1, lenpd
-        Wm(npdm1+i) = 0.0E0
+      ALLOCATE( Pd(Neq,Neq) )
+      Pd = 0.E0
+      CALL JAC(X,Y,Yprime,Pd,Cj)
+      DO j = 1, Neq
+        DO i = 1, Neq
+          Wm( npdm1+(j-1)*Neq+i ) = Pd(i,j)
+        END DO
       END DO
-      CALL JAC(X,Y,Yprime,Wm(NPD),Cj,Rpar,Ipar)
   END SELECT
   !
   !

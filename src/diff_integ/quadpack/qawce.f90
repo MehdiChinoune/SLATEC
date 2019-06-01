@@ -156,10 +156,14 @@ SUBROUTINE QAWCE(F,A,B,C,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,&
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   USE service, ONLY : R1MACH
+  INTERFACE
+    REAL FUNCTION F(X)
+      REAL :: X
+    END FUNCTION F
+  END INTERFACE
   INTEGER :: Ier, Last, Limit, Neval, Iord(Limit)
   REAL :: A, Abserr, B, C, Epsabs, Epsrel, Result
   REAL :: Alist(Limit), Blist(Limit), Elist(Limit), Rlist(Limit)
-  REAL, EXTERNAL :: F
   INTEGER :: iroff1, iroff2, k, krule, maxerr, nev, nrmax
   REAL :: aa, area, area1, area12, area2, a1, a2, bb, b1, b2, epmach, erro12, &
     errbnd, errmax, error1, error2, errsum, uflow

@@ -205,9 +205,13 @@ SUBROUTINE QAWO(F,A,B,Omega,Integr,Epsabs,Epsrel,Result,Abserr,Neval,Ier,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   USE service, ONLY : XERMSG
+  INTERFACE
+    REAL FUNCTION F(X)
+      REAL :: X
+    END FUNCTION F
+  END INTERFACE
   INTEGER :: Ier, Integr, Leniw, Last, Lenw, limit, Maxp1, Neval, Iwork(Leniw)
   REAL :: A, Abserr, B, Epsabs, Epsrel, Omega, Result, Work(Lenw)
-  REAL, EXTERNAL :: F
   INTEGER :: lvl, l1, l2, l3, l4, momcom
   !
   !         CHECK VALIDITY OF LENIW, MAXP1 AND LENW.

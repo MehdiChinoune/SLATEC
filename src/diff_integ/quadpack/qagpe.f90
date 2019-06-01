@@ -206,12 +206,16 @@ SUBROUTINE QAGPE(F,A,B,Npts2,Points,Epsabs,Epsrel,Limit,Result,Abserr,&
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   USE service, ONLY : R1MACH
+  INTERFACE
+    REAL FUNCTION F(X)
+      REAL :: X
+    END FUNCTION F
+  END INTERFACE
   INTEGER :: Ier, Last, Limit, Neval, Npts2
   INTEGER :: Iord(Limit), Level(Limit), Ndin(Npts2)
   REAL :: A, Abserr, Epsabs, Epsrel, Result
   REAL :: Alist(Limit), Blist(Limit), Elist(Limit), Points(Npts2), Pts(Npts2), &
     Rlist(Limit)
-  REAL, EXTERNAL :: F
   INTEGER :: i, id, ierro, ind1, ind2, ip1, iroff1, iroff2, iroff3, j, jlow, &
     jupbnd, k, ksgn, ktmin, levcur, levmax, maxerr, nintt, nintp1, npts, nres, &
     nrmax, numrl2

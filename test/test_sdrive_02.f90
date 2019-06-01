@@ -176,7 +176,7 @@ CONTAINS
     lenw = 298
     leniw = 50
     CALL DDRIV2(N,t,y,DDF,tout,mstate,NROOT,eps,ewt(1),mint,work,lenw,iwork,&
-      leniw,D1MACH,ierflg)
+      leniw,dum_G,ierflg)
     nstep = iwork(3)
     nfe = iwork(4)
     nje = iwork(5)
@@ -250,7 +250,7 @@ CONTAINS
     lenwx = 1
     leniw = 50
     CALL DDRIV2(N,t,y,DDF,tout,mstate,NROOT,eps,ewt(1),mint,work,lenwx,iwork,&
-      leniw,D1MACH,ierflg)
+      leniw,dum_G,ierflg)
     IF ( ierflg/=32 ) THEN
       IF ( Kprint==1 ) THEN
         WRITE (Lun,&
@@ -298,8 +298,8 @@ CONTAINS
     lenw = 301
     leniw = 53
     CALL DDRIV3(N,t,y,DDF,nstate,tout,NTASK,NROOT,eps,ewt,IERROR,mint,MITER,&
-      IMPL,ML,MU,MXORD,HMAX,work,lenw,iwork,leniw,DDF,DDF,nde,&
-      MXSTEP,D1MACH,DDF,ierflg)
+      IMPL,ML,MU,MXORD,HMAX,work,lenw,iwork,leniw,dum_JACOBN,dum_FA,nde,&
+      MXSTEP,dum_G,dum_USERS,ierflg)
     nstep = iwork(3)
     nfe = iwork(4)
     nje = iwork(5)
@@ -373,8 +373,8 @@ CONTAINS
     lenw = 301
     leniwx = 1
     CALL DDRIV3(N,t,y,DDF,nstate,tout,NTASK,NROOT,eps,ewt,IERROR,mint,MITER,&
-      IMPL,ML,MU,MXORD,HMAX,work,lenw,iwork,leniwx,DDF,DDF,nde,&
-      MXSTEP,D1MACH,DDF,ierflg)
+      IMPL,ML,MU,MXORD,HMAX,work,lenw,iwork,leniwx,dum_JACOBN,dum_FA,nde,&
+      MXSTEP,dum_G,dum_USERS,ierflg)
     IF ( ierflg/=33 ) THEN
       IF ( Kprint==1 ) THEN
         WRITE (Lun,&
@@ -409,6 +409,36 @@ CONTAINS
       WRITE (Lun,'(/)')
     END IF
     CALL XERCLR
+
+  CONTAINS
+    REAL(8) FUNCTION dum_G(N,T,Y,Iroot)
+      INTEGER :: N, Iroot
+      REAL(8) :: T
+      REAL(8) :: Y(N)
+      dum_G = SUM(Y) + T
+    END FUNCTION dum_G
+    SUBROUTINE dum_JACOBN(N,T,Y,Dfdy,Matdim,Ml,Mu)
+      INTEGER :: N, Matdim, Ml, Mu
+      REAL(8) :: T
+      REAL(8) :: Y(N), Dfdy(Matdim,N)
+      Dfdy = T
+      Y = Ml + Mu
+    END SUBROUTINE dum_JACOBN
+    SUBROUTINE dum_USERS(Y,Yh,Ywt,Save1,Save2,T,H,El,Impl,N,Nde,Iflag)
+      INTEGER :: Impl, N, Nde, Iflag
+      REAL(8) :: T, H, El
+      REAL(8) :: Y(N), Yh(N,13), Ywt(N), Save1(N), Save2(N)
+      Y = Ywt + Save1 + Save2
+      Yh = T + H + El
+      Impl = Nde + Iflag
+    END SUBROUTINE dum_USERS
+    SUBROUTINE dum_FA(N,T,Y,A,Matdim,Ml,Mu,Nde)
+      INTEGER :: N, Matdim, Ml, Mu, Nde
+      REAL(8) :: T, Y(N), A(:,:)
+      T = Matdim + Ml + Mu + Nde
+      Y = 0.D0
+      A = 0.D0
+    END SUBROUTINE dum_FA
   END SUBROUTINE DDQCK
   !** DDF
   SUBROUTINE DDF(N,T,Y,Yp)
@@ -439,8 +469,9 @@ CONTAINS
     !   890405  DATE WRITTEN
     !   890405  Revised to meet SLATEC standards.
 
-    REAL(8) :: alfa, T, Y(*), Yp(*)
-    INTEGER N
+    INTEGER :: N
+    REAL(8) :: T, Y(:), Yp(:)
+    REAL(8) :: alfa
     !* FIRST EXECUTABLE STATEMENT  DDF
     alfa = Y(N+1)
     Yp(1) = 1.D0 + alfa*(Y(2)-Y(1)) - Y(1)*Y(3)

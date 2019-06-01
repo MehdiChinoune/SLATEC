@@ -166,10 +166,14 @@ SUBROUTINE DQAGSE(F,A,B,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,Alist,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   USE service, ONLY : D1MACH
   !
+  INTERFACE
+    REAL(8) FUNCTION F(X)
+      REAL(8) :: X
+    END FUNCTION F
+  END INTERFACE
   INTEGER :: Ier, Last, Limit, Neval, Iord(Limit)
   REAL(8) :: A, Abserr, B, Epsabs, Epsrel, Result
   REAL(8) :: Alist(Limit), Blist(Limit), Elist(Limit), Rlist(Limit)
-  REAL(8), EXTERNAL :: F
   INTEGER :: id, ierro, iroff1, iroff2, iroff3, jupbnd, k, ksgn, ktmin, maxerr, &
     nres, nrmax, numrl2
   REAL(8) :: abseps, area, area1, area12, area2, a1, a2, b1, b2, correc, defabs, &

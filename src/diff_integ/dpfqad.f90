@@ -80,11 +80,15 @@ SUBROUTINE DPFQAD(F,Ldc,C,Xi,Lxi,K,Id,X1,X2,Tol,Quad,Ierr)
   USE service, ONLY : XERMSG, D1MACH
   USE interpolation, ONLY : DPPGQ8, DINTRV
   !
+  INTERFACE
+    REAL(8) FUNCTION F(X)
+      REAL(8), INTENT(IN) :: X
+    END FUNCTION F
+  END INTERFACE
   INTEGER :: Id, Ierr, K, Ldc, Lxi
   REAL(8) :: Quad, Tol, X1, X2, C(Ldc,Lxi), Xi(Lxi+1)
   INTEGER :: iflg, ilo, il1, il2, inppv, left, mf1, mf2
   REAL(8) :: a, aa, ans, b, bb, q, ta, tb, wtol
-  REAL(8), EXTERNAL :: F
   !
   !* FIRST EXECUTABLE STATEMENT  DPFQAD
   Ierr = 1

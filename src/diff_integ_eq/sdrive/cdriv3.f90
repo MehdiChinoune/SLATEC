@@ -732,17 +732,44 @@ SUBROUTINE CDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
   !   900329  Initial submission to SLATEC.
   USE service, ONLY : XERMSG, R1MACH
   USE linear, ONLY : SCNRM2, CGBSL, CGESL, CGBFA, CGEFA
-  EXTERNAL :: F, JACOBN, FA, G, USERS
+  INTERFACE
+    REAL FUNCTION G(N,T,Y,Iroot)
+      INTEGER :: N, Iroot
+      REAL :: T
+      COMPLEX :: Y(N)
+    END FUNCTION G
+    SUBROUTINE F(N,T,Y,Ydot)
+      INTEGER :: N
+      REAL :: T
+      COMPLEX :: Y(:), Ydot(:)
+    END SUBROUTINE F
+    SUBROUTINE JACOBN(N,T,Y,Dfdy,Matdim,Ml,Mu)
+      INTEGER :: N, Matdim, Ml, Mu
+      REAL :: T
+      COMPLEX :: Y(N), Dfdy(Matdim,N)
+    END SUBROUTINE JACOBN
+    SUBROUTINE USERS(Y,Yh,Ywt,Save1,Save2,T,H,El,Impl,N,Nde,Iflag)
+      INTEGER :: Impl, N, Nde, iflag
+      REAL :: T, H, El
+      COMPLEX :: Y(N), Yh(N,13), Ywt(N), Save1(N), Save2(N)
+    END SUBROUTINE USERS
+    SUBROUTINE FA(N,T,Y,A,Matdim,Ml,Mu,Nde)
+      INTEGER :: N, Matdim, Ml, Mu, Nde
+      REAL :: T
+      COMPLEX :: Y(N), A(:,:)
+    END SUBROUTINE FA
+  END INTERFACE
   INTEGER :: Ierflg, Ierror, Impl, Leniw, Lenw, Mint, Miter, Ml, Mu, Mxord, &
     Mxstep, N, Nde, Nroot, Nstate, Ntask, Iwork(Leniw+N)
-  REAL :: Eps, G, Hmax, T, Tout, Ewt(N)
-  COMPLEX :: Work(Lenw+Leniw), Y(N)
+  REAL :: Eps, Hmax, T, Tout, Ewt(N)
+  COMPLEX :: Work(Lenw+Leniw), Y(N+1)
   INTEGER :: i, ia, idfdy, ifac, iflag, ignow, imxerr, info, iroot, isave1, &
     isave2, itroot, iywt, j, jstate, jtroot, lenchk, liwchk, matdim, maxord, &
     ndecom, npar, nstepl
   REAL :: ae, avgh, avgord, big, glast, gnow, h, hold, hsign, hused, rc, re, &
     rmax, sizee, summ, tlast, trend, troot, uround, el(13,12), tq(3,12)
   LOGICAL :: convrg
+  COMPLEX, ALLOCATABLE :: a(:,:)
   CHARACTER(8) :: intgr1, intgr2
   CHARACTER(16) :: rl1, rl2
   REAL, PARAMETER :: NROUND = 20.E0
@@ -901,6 +928,15 @@ SUBROUTINE CDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
   ELSEIF ( Impl==3.AND.(Miter==4.OR.Miter==5) ) THEN
     lenchk = ia - 1 + (2*Ml+Mu+1)*Nde
   END IF
+  IF( Impl==0 .OR. Miter==3 ) THEN
+    ALLOCATE( a(0,0) )
+  ELSEIF( Impl==1 ) THEN
+    ALLOCATE( a( (lenchk-ia+1)/N, N ) )
+  ELSEIF( Impl==2 ) THEN
+    ALLOCATE( a(N,1) )
+  ELSEIF( Impl==3 ) THEN
+    ALLOCATE( a( (lenchk-ia+1)/Nde, Nde ) )
+  ENDIF
   IF ( Lenw<lenchk ) THEN
     WRITE (intgr1,'(I8)') lenchk
     Ierflg = 32
@@ -1216,7 +1252,7 @@ SUBROUTINE CDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
     GOTO 300
     250 CONTINUE
     IF ( Iwork(IJTASK)==0 ) THEN
-      CALL F(npar,T,Y,Work(isave2))
+      CALL F(npar,T,Y,Work(isave2:))
       IF ( npar==0 ) THEN
         Nstate = 6
         RETURN
@@ -1233,26 +1269,26 @@ SUBROUTINE CDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
         END IF
       ELSEIF ( Impl==1 ) THEN
         IF ( Miter==1.OR.Miter==2 ) THEN
-          CALL FA(npar,T,Y,Work(ia),matdim,Ml,Mu,ndecom)
+          CALL FA(npar,T,Y,a,matdim,Ml,Mu,ndecom)
           IF ( npar==0 ) THEN
             Nstate = 9
             RETURN
           END IF
-          CALL CGEFA(Work(ia),matdim,N,Iwork(INDPVT),info)
+          CALL CGEFA(a,matdim,N,Iwork(INDPVT),info)
           IF ( info/=0 ) GOTO 700
-          CALL CGESL(Work(ia),matdim,N,Iwork(INDPVT),Work(isave2),0)
+          CALL CGESL(a,matdim,N,Iwork(INDPVT),Work(isave2),0)
         ELSEIF ( Miter==4.OR.Miter==5 ) THEN
-          CALL FA(npar,T,Y,Work(ia+Ml),matdim,Ml,Mu,ndecom)
+          CALL FA(npar,T,Y,a(Ml+1:,:),matdim,Ml,Mu,ndecom)
           IF ( npar==0 ) THEN
             Nstate = 9
             RETURN
           END IF
-          CALL CGBFA(Work(ia),matdim,N,Ml,Mu,Iwork(INDPVT),info)
+          CALL CGBFA(a,matdim,N,Ml,Mu,Iwork(INDPVT),info)
           IF ( info/=0 ) GOTO 700
-          CALL CGBSL(Work(ia),matdim,N,Ml,Mu,Iwork(INDPVT),Work(isave2),0)
+          CALL CGBSL(a,matdim,N,Ml,Mu,Iwork(INDPVT),Work(isave2),0)
         END IF
       ELSEIF ( Impl==2 ) THEN
-        CALL FA(npar,T,Y,Work(ia),matdim,Ml,Mu,ndecom)
+        CALL FA(npar,T,Y,a,matdim,Ml,Mu,ndecom)
         IF ( npar==0 ) THEN
           Nstate = 9
           RETURN
@@ -1263,23 +1299,23 @@ SUBROUTINE CDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
         END DO
       ELSEIF ( Impl==3 ) THEN
         IF ( Miter==1.OR.Miter==2 ) THEN
-          CALL FA(npar,T,Y,Work(ia),matdim,Ml,Mu,ndecom)
+          CALL FA(npar,T,Y,a,matdim,Ml,Mu,ndecom)
           IF ( npar==0 ) THEN
             Nstate = 9
             RETURN
           END IF
-          CALL CGEFA(Work(ia),matdim,Nde,Iwork(INDPVT),info)
+          CALL CGEFA(a,matdim,Nde,Iwork(INDPVT),info)
           IF ( info/=0 ) GOTO 700
-          CALL CGESL(Work(ia),matdim,Nde,Iwork(INDPVT),Work(isave2),0)
+          CALL CGESL(a,matdim,Nde,Iwork(INDPVT),Work(isave2),0)
         ELSEIF ( Miter==4.OR.Miter==5 ) THEN
-          CALL FA(npar,T,Y,Work(ia+Ml),matdim,Ml,Mu,ndecom)
+          CALL FA(npar,T,Y,a(Ml+1:,:),matdim,Ml,Mu,ndecom)
           IF ( npar==0 ) THEN
             Nstate = 9
             RETURN
           END IF
-          CALL CGBFA(Work(ia),matdim,Nde,Ml,Mu,Iwork(INDPVT),info)
+          CALL CGBFA(a,matdim,Nde,Ml,Mu,Iwork(INDPVT),info)
           IF ( info/=0 ) GOTO 700
-          CALL CGBSL(Work(ia),matdim,Nde,Ml,Mu,Iwork(INDPVT),Work(isave2),0)
+          CALL CGBSL(a,matdim,Nde,Ml,Mu,Iwork(INDPVT),Work(isave2),0)
         END IF
       END IF
     END IF
@@ -1356,7 +1392,7 @@ SUBROUTINE CDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
     Iwork(IMNT),Iwork(IMTR),Ml,Mu,npar,ndecom,Work(iywt),uround,&
     USERS,avgh,avgord,h,hused,Iwork(IJTASK),Iwork(IMNTLD),&
     Iwork(IMTRLD),Iwork(INFE),Iwork(INJE),Iwork(INQUSE),&
-    Iwork(INSTEP),T,Y,Work(IYH),Work(ia),convrg,Work(idfdy),el,&
+    Iwork(INSTEP),T,Y,Work(IYH),a,convrg,Work(idfdy),el,&
     Work(ifac),hold,Iwork(INDPVT),jstate,Iwork(IJSTPL),Iwork(INQ),&
     Iwork(INWAIT),rc,rmax,Work(isave1),Work(isave2),tq,trend,Mint,&
     Iwork(IMTRSV),Iwork(IMXRDS))

@@ -1,6 +1,6 @@
 !** SDASSL
 SUBROUTINE SDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
-    Iwork,Liw,Rpar,Ipar,JAC)
+    Iwork,Liw,JAC)
   !>
   !  This code solves a system of differential/algebraic
   !            equations of the form G(T,Y,YPRIME) = 0.
@@ -928,16 +928,20 @@ SUBROUTINE SDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
   !   910624  Fixed minor bug related to HMAX (six lines after label
   !           525).  (LRP)
   USE service, ONLY : XERMSG, R1MACH
-  !
-  !**End
-  !
   !     Declare arguments.
-  !
+  INTERFACE
+    SUBROUTINE RES(T,Y,Yprime,Delta,Ires)
+      INTEGER :: Ires
+      REAL :: T, Y(:), Yprime(:), Delta(:)
+    END SUBROUTINE
+    SUBROUTINE JAC(T,Y,Yprime,Pd,Cj)
+      REAL :: T, Cj, Pd(:,:), Y(:), Yprime(:)
+    END SUBROUTINE
+  END INTERFACE
   INTEGER :: Neq, Idid, Lrw, Liw
-  INTEGER :: Info(15), Iwork(Liw), Ipar(:)
+  INTEGER :: Info(15), Iwork(Liw)
   REAL :: T, Tout
-  REAL :: Y(Neq), Yprime(Neq), Rtol(:), Atol(:), Rwork(Lrw), Rpar(:)
-  EXTERNAL :: RES, JAC
+  REAL :: Y(Neq), Yprime(Neq), Rtol(:), Atol(:), Rwork(Lrw)
   !
   !     Declare local variables.
   !
@@ -1281,7 +1285,7 @@ SUBROUTINE SDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
         !
         !     COMPUTE INITIAL DERIVATIVE, UPDATING TN AND Y, IF APPLICABLE
         IF ( Info(11)/=0 ) THEN
-          CALL SDAINI(tn,Y,Yprime,Neq,RES,JAC,ho,Rwork(lwt:lphi-1),Idid,Rpar,Ipar,&
+          CALL SDAINI(tn,Y,Yprime,Neq,RES,JAC,ho,Rwork(lwt:lphi-1),Idid,&
             Rwork(lphi:lpd-1),Rwork(LDELTA:lwt-1),Rwork(le:lwt-1),Rwork(lwm:),&
             Iwork,hmin,Rwork(LROUND),Info(10),ntemp)
           IF ( Idid<0 ) GOTO 100
@@ -1341,8 +1345,8 @@ SUBROUTINE SDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
           IF ( rh>1.0E0 ) h = h/rh
         END IF
         !
-        CALL SDASTP(tn,Y,Yprime,Neq,RES,JAC,h,Rwork(lwt:lphi-1),Info(1),Idid,Rpar,&
-          Ipar,Rwork(lphi:lpd-1),Rwork(LDELTA:le-1),Rwork(le:lwt-1),Rwork(lwm:),&
+        CALL SDASTP(tn,Y,Yprime,Neq,RES,JAC,h,Rwork(lwt:lphi-1),Info(1),Idid,&
+          Rwork(lphi:lpd-1),Rwork(LDELTA:le-1),Rwork(le:lwt-1),Rwork(lwm:),&
           Iwork,Rwork(LALPHA:LBETA-1),Rwork(LBETA:LGAMMA-1),Rwork(LGAMMA:LPSI-1),&
           Rwork(LPSI:LSIGMA-1),Rwork(LSIGMA:LDELTA-1),Rwork(LCJ),Rwork(LCJOLD),&
           Rwork(LHOLD),Rwork(LS),hmin,Rwork(LROUND),Iwork(LPHASE),&

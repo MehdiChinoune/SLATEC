@@ -188,12 +188,17 @@ SUBROUTINE SOS(FNC,Neq,X,Rtolx,Atolx,Tolf,Iflag,Rw,Lrw,Iw,Liw)
   !           comments to agree with DSOS.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   USE service, ONLY : XERMSG
+  INTERFACE
+    REAL FUNCTION FNC(X,K)
+      INTEGER :: K
+      REAL :: X(:)
+    END FUNCTION FNC
+  END INTERFACE
   INTEGER :: Iflag, Liw, Lrw, Neq, Iw(Liw)
   REAL :: Atolx, Rtolx, Rw(Lrw), Tolf, X(Neq)
   INTEGER :: inpflg, iprint, k1, k2, k3, k4, k5, k6, mxit, nc, ncjs, nsri, nsrrc
   CHARACTER(8) :: xern1
   CHARACTER(16) :: xern3, xern4
-  REAL, EXTERNAL :: FNC
   !* FIRST EXECUTABLE STATEMENT  SOS
   inpflg = Iflag
   !

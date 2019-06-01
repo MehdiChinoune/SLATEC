@@ -1,6 +1,5 @@
 !** DDERKF
-SUBROUTINE DDERKF(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,&
-    Rpar,Ipar)
+SUBROUTINE DDERKF(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw)
   !>
   !  Solve an initial value problem in ordinary differential
   !            equations using a Runge-Kutta-Fehlberg scheme.
@@ -611,11 +610,16 @@ SUBROUTINE DDERKF(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,&
   !   920501  Reformatted the REFERENCES section.  (WRB)
   USE service, ONLY : XERMSG
   !
+  INTERFACE
+    SUBROUTINE DF(X,U,Uprime)
+      REAL(8) :: X
+      REAL(8) :: U(:), Uprime(:)
+    END SUBROUTINE DF
+  END INTERFACE
   INTEGER :: Idid, Liw, Lrw, Neq
-  INTEGER :: Info(15), Ipar(:), Iwork(Liw)
+  INTEGER :: Info(15), Iwork(Liw)
   REAL(8) :: T, Tout
-  REAL(8) :: Atol(:), Rpar(:), Rtol(:), Rwork(Lrw), Y(Neq)
-  EXTERNAL :: DF
+  REAL(8) :: Atol(:), Rtol(:), Rwork(Lrw), Y(Neq)
   INTEGER ::  kdi, kf1, kf2, kf3, kf4, kf5, kh, krer, ktf, kto, ktstar, ku, kyp, kys
   LOGICAL :: stiff, nonstf
   CHARACTER(8) :: xern1
@@ -686,7 +690,7 @@ SUBROUTINE DDERKF(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,&
     Rwork(kyp),Rwork(kf1),Rwork(kf2),Rwork(kf3),Rwork(kf4),&
     Rwork(kf5),Rwork(kys),Rwork(kto),Rwork(kdi),Rwork(ku),&
     Rwork(krer),Iwork(21),Iwork(22),Iwork(23),Iwork(24),stiff,&
-    nonstf,Iwork(27),Iwork(28),Rpar,Ipar)
+    nonstf,Iwork(27),Iwork(28))
   !
   Iwork(25) = 1
   IF ( stiff ) Iwork(25) = 0

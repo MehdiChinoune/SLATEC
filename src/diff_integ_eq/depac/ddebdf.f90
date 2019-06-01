@@ -1,6 +1,5 @@
 !** DDEBDF
-SUBROUTINE DDEBDF(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,&
-    Rpar,Ipar,DJAC)
+SUBROUTINE DDEBDF(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,DJAC)
   !>
   !  Solve an initial value problem in ordinary differential
   !            equations using backward differentiation formulas.  It is
@@ -750,11 +749,21 @@ SUBROUTINE DDEBDF(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,&
   USE DDEBD1, ONLY : H, TN, IYH, IEWt, IACor, ISAvf, IWM, IBEgin, ITOl, IINteg, &
     ITStop, IJAc, IBAnd
   USE service, ONLY : XERMSG
+  INTERFACE
+    SUBROUTINE DF(X,U,Uprime)
+      REAL(8) :: X
+      REAL(8) :: U(:), Uprime(:)
+    END SUBROUTINE DF
+    SUBROUTINE DJAC(X,U,Pd,Nrowpd)
+      INTEGER :: Nrowpd
+      REAL(8) :: X
+      REAL(8) :: U(:), Pd(:,:)
+    END SUBROUTINE DJAC
+  END INTERFACE
   INTEGER :: Idid, Liw, Lrw, Neq
-  INTEGER :: Info(15), Ipar(:), Iwork(Liw)
+  INTEGER :: Info(15), Iwork(Liw)
   REAL(8) :: T, Tout
-  REAL(8) :: Atol(:), Rpar(:), Rtol(:), Rwork(Lrw), Y(Neq)
-  EXTERNAL :: DF, DJAC
+  REAL(8) :: Atol(:), Rtol(:), Rwork(Lrw), Y(Neq)
   INTEGER :: icomi, icomr, idelsn, iinout, ilrw, itstar, iypout, ml, mu
   LOGICAL :: intout
   CHARACTER(8) :: xern1, xern2
@@ -901,7 +910,7 @@ SUBROUTINE DDEBDF(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,&
   !
   CALL DLSOD(DF,Neq,T,Y,Tout,Rtol,Atol,Idid,Rwork(iypout),Rwork(IYH),&
     Rwork(IYH),Rwork(IEWt:ISAvf-1),Rwork(ISAvf:IACor-1),Rwork(IACor:IWM-1),&
-    Rwork(IWM:idelsn),Iwork,DJAC,intout,Rwork(1),Rwork(12),Rwork(idelsn),Rpar,Ipar)
+    Rwork(IWM:idelsn),Iwork,DJAC,intout,Rwork(1),Rwork(12),Rwork(idelsn))
   !
   Iwork(iinout) = -1
   IF ( intout ) Iwork(iinout) = 1

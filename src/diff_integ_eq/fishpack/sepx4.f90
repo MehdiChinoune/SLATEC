@@ -411,10 +411,14 @@ SUBROUTINE SEPX4(Iorder,A,B,M,Mbdcnd,Bda,Alpha,Bdb,Beta,C,D,N,Nbdcnd,Bdc,&
   !   920122  Minor corrections and modifications to prologue.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
+  INTERFACE
+    SUBROUTINE COFX(X,A,B,C)
+      REAL :: X, A, B, C
+    END SUBROUTINE COFX
+  END INTERFACE
   INTEGER :: Idmn, Ierror, Iorder, M, Mbdcnd, N, Nbdcnd
   REAL :: A, Alpha, B, Beta, C, D, Pertrb
   REAL :: Bda(N+1), Bdb(N+1), Bdc(M+1), Bdd(M+1), Grhs(Idmn,N), Usol(Idmn,N+1), W(:)
-  EXTERNAL :: COFX
   INTEGER :: i1, i10, i11, i12, i13, i2, i3, i4, i5, i6, i7, i8, &
     i9, k, l, length, linput, log2n, loutpt
   !* FIRST EXECUTABLE STATEMENT  SEPX4

@@ -96,12 +96,17 @@ SUBROUTINE QC25S(F,A,B,Bl,Br,Alfa,Beta,Ri,Rj,Rg,Rh,Result,Abserr,Resasc,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
   !
-  REAL A, Abserr, Alfa, B, Beta, Bl, Br, centr, cheb12(13), cheb24(25), &
-    dc, factor, fix, fval(25), hlgth, resabs, Resasc, Result, &
-    res12, res24, Rg(25), Rh(25), Ri(25), Rj(25), u
-  INTEGER i, Integr, isym, Nev
-  !
-  REAL, EXTERNAL :: F
+  INTERFACE
+    REAL FUNCTION F(X)
+      REAL :: X
+    END FUNCTION F
+  END INTERFACE
+  INTEGER :: Integr, Nev
+  REAL :: A, Abserr, Alfa, B, Beta, Bl, Br, Resasc, Result, Rg(25), Rh(25), &
+    Ri(25), Rj(25)
+  INTEGER :: i, isym
+  REAL :: centr, cheb12(13), cheb24(25), dc, factor, fix, fval(25), hlgth, resabs, &
+    res12, res24, u
   !
   !           THE VECTOR X CONTAINS THE VALUES COS(K*PI/24)
   !           K = 1, ..., 11, TO BE USED FOR THE COMPUTATION OF THE

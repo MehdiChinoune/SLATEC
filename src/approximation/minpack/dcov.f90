@@ -161,9 +161,14 @@ SUBROUTINE DCOV(FCN,Iopt,M,N,X,Fvec,R,Ldr,Info,Wa1,Wa2,Wa3,Wa4)
   !     REVISED YYMMDD HHMM
   !
   USE service, ONLY : XERMSG
+  INTERFACE
+    SUBROUTINE FCN(Iflag,M,N,X,Fvec,Fjac,Ldfjac)
+      INTEGER :: Ldfjac, M, N, Iflag
+      REAL(8) :: X(N), Fvec(M), Fjac(:,:)
+    END SUBROUTINE FCN
+  END INTERFACE
   INTEGER :: Info, Iopt, Ldr, M, N
-  REAL(8) :: X(N), R(Ldr,N), Fvec(M), Wa1(N), Wa2(N), Wa3(N), Wa4(M)
-  EXTERNAL :: FCN
+  REAL(8) :: X(N), R(Ldr,N), Fvec(M), Wa1(N,1), Wa2(N), Wa3(N), Wa4(M)
   INTEGER :: i, idum(1), iflag, j, k, kp1, nm1, nrow
   REAL(8) :: sigma, temp
   LOGICAL :: sing
@@ -220,7 +225,7 @@ SUBROUTINE DCOV(FCN,Iopt,M,N,X,Fvec,R,Ldr,Info,Wa1,Wa2,Wa3,Wa4)
         !     COMPUTE THE QR DECOMPOSITION
         CALL DQRFAC(M,N,R,Ldr,.FALSE.,idum,1,Wa1,Wa1,Wa1)
         DO i = 1, N
-          R(i,i) = Wa1(i)
+          R(i,i) = Wa1(i,1)
         END DO
       END IF
       !
@@ -238,20 +243,18 @@ SUBROUTINE DCOV(FCN,Iopt,M,N,X,Fvec,R,Ldr,Info,Wa1,Wa2,Wa3,Wa4)
             !
             !     INITIALIZE THE RIGHT-HAND SIDE (WA1(*)) AS THE K-TH COLUMN OF THE
             !     IDENTITY MATRIX.
-            DO i = 1, N
-              Wa1(i) = zero
-            END DO
-            Wa1(k) = one
+            Wa1 = zero
+            Wa1(k,1) = one
             !
-            R(k,k) = Wa1(k)/R(k,k)
+            R(k,k) = Wa1(k,1)/R(k,k)
             kp1 = k + 1
             DO i = kp1, N
               !
               !     SUBTRACT R(K,I-1)*R(I-1,*) FROM THE RIGHT-HAND SIDE, WA1(*).
               DO j = i, N
-                Wa1(j) = Wa1(j) - R(k,i-1)*R(i-1,j)
+                Wa1(j,1) = Wa1(j,1) - R(k,i-1)*R(i-1,j)
               END DO
-              R(k,i) = Wa1(i)/R(i,i)
+              R(k,i) = Wa1(i,1)/R(i,i)
             END DO
           END DO
         END IF

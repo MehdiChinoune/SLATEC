@@ -287,6 +287,10 @@ SUBROUTINE DCGN(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MTTVEC,MSOLVE,Itol,Tol,&
       INTEGER :: N, Nelt, Isym, Ia(Nelt), Ja(Nelt)
       REAL(8) :: X(N), R(N), A(Nelt)
     END SUBROUTINE
+    SUBROUTINE MTTVEC(N,X,Y,Nelt,Ia,Ja,A,Isym)
+      INTEGER :: N, Nelt, Isym, Ia(Nelt), Ja(Nelt)
+      REAL(8) :: X(N), Y(N), A(Nelt)
+    END SUBROUTINE MTTVEC
   END INTERFACE
   !     .. Scalar Arguments ..
   REAL(8) :: Err, Tol
@@ -295,8 +299,6 @@ SUBROUTINE DCGN(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MTTVEC,MSOLVE,Itol,Tol,&
   REAL(8) :: A(N), Atdz(N), Atp(N), Atz(N), B(N), Dz(N), P(N), &
     R(N), Rwork(*), X(N), Z(N)
   INTEGER Ia(Nelt), Iwork(*), Ja(Nelt)
-  !     .. Subroutine Arguments ..
-  EXTERNAL :: MTTVEC
   !     .. Local Scalars ..
   REAL(8) :: ak, akden, bk, bkden, bknum, bnrm, solnrm, tolmin
   INTEGER i, k

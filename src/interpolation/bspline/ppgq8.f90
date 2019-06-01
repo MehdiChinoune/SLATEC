@@ -72,7 +72,7 @@ SUBROUTINE PPGQ8(FUN,Ldc,C,Xi,Lxi,Kk,Id,A,B,Inppv,Err,Ans,Ierr)
   INTERFACE
     REAL FUNCTION FUN(X)
       REAL, INTENT(IN) :: X
-    END FUNCTION
+    END FUNCTION FUN
   END INTERFACE
   INTEGER :: Id, Ierr, Inppv, Kk, Ldc, Lxi
   REAL :: A, Ans, B, C(Ldc,Lxi), Err, Xi(Lxi+1)

@@ -222,11 +222,15 @@ SUBROUTINE QAWOE(F,A,B,Omega,Integr,Epsabs,Epsrel,Limit,Icall,Maxp1,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   USE service, ONLY : R1MACH
   !
+  INTERFACE
+    REAL FUNCTION F(X)
+      REAL :: X
+    END FUNCTION F
+  END INTERFACE
   INTEGER :: Icall, Ier, Integr, Last, Limit, Maxp1, Momcom, Neval
   INTEGER :: Iord(Limit), Nnlog(Limit)
   REAL :: A, Abserr, B, Epsabs, Epsrel, Omega, Result
   REAL :: Alist(Limit), Blist(Limit), Chebmo(Maxp1,25), Elist(Limit), Rlist(Limit)
-  REAL, EXTERNAL :: F
   INTEGER :: id, ierro, iroff1, iroff2, iroff3, jupbnd, k, ksgn, ktmin, maxerr, &
     nev, nres, nrmax, nrmom, numrl2
   REAL :: abseps, area, area1, area12, area2, a1, a2, b1, b2, correc, defab1, &

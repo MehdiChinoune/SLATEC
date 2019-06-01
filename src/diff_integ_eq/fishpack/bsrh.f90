@@ -20,10 +20,15 @@ REAL FUNCTION BSRH(Xll,Xrr,Iz,C,A,Bh,F,Sgn)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   USE CBLKT, ONLY : CNV
+  INTERFACE
+    REAL FUNCTION F(X,Iz,C,A,Bh)
+      INTEGER :: Iz
+      REAL :: X, A(Iz), Bh(Iz), C(Iz)
+    END FUNCTION F
+  END INTERFACE
   INTEGER :: Iz
-  REAL A(:), Bh(:), C(:)
+  REAL A(Iz), Bh(Iz), C(Iz)
   REAL :: Sgn, Xll, Xrr
-  REAL, EXTERNAL :: F
   REAL :: dx, x, xl, xr
   !* FIRST EXECUTABLE STATEMENT  BSRH
   xl = Xll

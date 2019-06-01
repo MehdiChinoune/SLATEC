@@ -136,8 +136,8 @@ CONTAINS
     !   890618  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-    INTEGER K
-    REAL X(2)
+    INTEGER :: K
+    REAL :: X(:)
     !* FIRST EXECUTABLE STATEMENT  SOSFNC
     IF ( K==1 ) THEN
       SOSFNC = 1.E0 - X(1)
@@ -270,7 +270,7 @@ CONTAINS
     !     .. Scalar Arguments ..
     INTEGER Iflag, N
     !     .. Array Arguments ..
-    REAL Fvec(*), X(*)
+    REAL :: Fvec(N), X(N)
     !* FIRST EXECUTABLE STATEMENT  SQFCN2
     Fvec(1) = 1.0E0 - X(1)
     Fvec(2) = 10.0E0*(X(2)-X(1)**2)
@@ -300,8 +300,8 @@ CONTAINS
     !   890831  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-    INTEGER Iflag, Ldfjac, N
-    REAL Fjac(Ldfjac,*), Fvec(*), X(*)
+    INTEGER :: Iflag, Ldfjac, N
+    REAL :: Fjac(Ldfjac,N), Fvec(N), X(N)
     !* FIRST EXECUTABLE STATEMENT  SQJAC2
     Fjac(1,1) = -1.E0
     Fjac(1,2) = 0.E0

@@ -221,11 +221,15 @@ SUBROUTINE DQAWOE(F,A,B,Omega,Integr,Epsabs,Epsrel,Limit,Icall,Maxp1,Result,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   USE service, ONLY : D1MACH
   !
+  INTERFACE
+    REAL(8) FUNCTION F(X)
+      REAL(8) :: X
+    END FUNCTION F
+  END INTERFACE
   INTEGER :: Icall, Ier, Integr, Last, Limit, Maxp1, Momcom, Neval
   INTEGER :: Iord(Limit), Nnlog(Limit)
   REAL(8) :: A, Abserr, B, Epsabs, Epsrel, Omega, Result
   REAL(8) :: Alist(Limit), Blist(Limit), Chebmo(Maxp1,25), Elist(Limit), Rlist(Limit)
-  REAL(8), EXTERNAL :: F
   INTEGER :: id, ierro, iroff1, iroff2, iroff3, jupbnd, k, ksgn, ktmin, maxerr, &
     nev, nres, nrmax, nrmom, numrl2
   REAL(8) :: abseps, area, area1, area12, area2, a1, a2, b1, b2, correc, defab1, &

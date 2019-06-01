@@ -28,11 +28,11 @@ REAL FUNCTION SDANRM(Neq,V,Wt)
   !           cosmetic changes to prologue.  (FNF)
 
   !
-  INTEGER Neq
-  REAL V(Neq), Wt(Neq)
+  INTEGER :: Neq
+  REAL :: V(Neq), Wt(Neq)
   !
-  INTEGER i
-  REAL summ, vmax
+  INTEGER :: i
+  REAL :: summ, vmax
   !
   !* FIRST EXECUTABLE STATEMENT  SDANRM
   SDANRM = 0.0E0

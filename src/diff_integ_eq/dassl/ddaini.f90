@@ -1,5 +1,5 @@
 !** DDAINI
-SUBROUTINE DDAINI(X,Y,Yprime,Neq,RES,JAC,H,Wt,Idid,Rpar,Ipar,Phi,Delta,E,&
+SUBROUTINE DDAINI(X,Y,Yprime,Neq,RES,JAC,H,Wt,Idid,Phi,Delta,E,&
     Wm,Iwm,Hmin,Uround,Nonneg,Ntemp)
   !>
   !  Initialization routine for DDASSL.
@@ -58,11 +58,19 @@ SUBROUTINE DDAINI(X,Y,Yprime,Neq,RES,JAC,H,Wt,Idid,Rpar,Ipar,Phi,Delta,E,&
   !   901030  Minor corrections to declarations.  (FNF)
 
   !
+  INTERFACE
+    SUBROUTINE RES(T,Y,Yprime,Delta,Ires)
+      INTEGER :: Ires
+      REAL(8) :: T, Y(:), Yprime(:), Delta(:)
+    END SUBROUTINE
+    SUBROUTINE JAC(T,Y,Yprime,Pd,Cj)
+      REAL(8) :: T, Cj, Pd(:,:), Y(:), Yprime(:)
+    END SUBROUTINE
+  END INTERFACE
   INTEGER :: Neq, Idid, Nonneg, Ntemp
-  INTEGER :: Ipar(:), Iwm(:)
+  INTEGER :: Iwm(:)
   REAL(8) :: X, H, Hmin, Uround
-  REAL(8) :: Y(Neq), Yprime(Neq), Wt(:), Rpar(:), Phi(Neq,*), Delta(:), E(:), Wm(:)
-  EXTERNAL :: RES, JAC
+  REAL(8) :: Y(Neq), Yprime(Neq), Wt(:), Phi(Neq,*), Delta(:), E(:), Wm(:)
   !
   INTEGER :: i, ier, ires, jcalc, m, ncf, nef, nsf
   REAL(8) :: cj, delnrm, err, oldnrm, r, rate, s, xold, ynorm
@@ -119,7 +127,7 @@ SUBROUTINE DDAINI(X,Y,Yprime,Neq,RES,JAC,H,Wt,Idid,Rpar,Ipar,Phi,Delta,E,&
     Iwm(LNRE) = Iwm(LNRE) + 1
     ires = 0
     !
-    CALL RES(X,Y,Yprime,Delta,ires,Rpar,Ipar)
+    CALL RES(X,Y,Yprime,Delta,ires)
     IF ( ires<0 ) THEN
       !
       !
@@ -133,7 +141,7 @@ SUBROUTINE DDAINI(X,Y,Yprime,Neq,RES,JAC,H,Wt,Idid,Rpar,Ipar,Phi,Delta,E,&
         Iwm(LNJE) = Iwm(LNJE) + 1
         jcalc = 0
         CALL DDAJAC(Neq,X,Y,Yprime,Delta,cj,H,ier,Wt,E,Wm,Iwm,RES,ires,&
-          Uround,JAC,Rpar,Ipar,Ntemp)
+          Uround,JAC,Ntemp)
         !
         s = 1000000.D0
         IF ( ires<0 ) THEN

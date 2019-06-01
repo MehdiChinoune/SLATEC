@@ -94,7 +94,12 @@ SUBROUTINE DSOSEQ(FNC,N,S,Rtolx,Atolx,Tolf,Iflag,Mxit,Ncjs,Nsrrc,Nsri,&
   !   900328  Added TYPE section.  (WRB)
   USE service, ONLY : D1MACH, I1MACH
   !
-  REAL(8), EXTERNAL :: FNC
+  INTERFACE
+    REAL(8) FUNCTION FNC(X,K)
+      INTEGER :: K
+      REAL(8) :: X(:)
+    END FUNCTION FNC
+  END INTERFACE
   INTEGER :: Iflag, Iprint, Mxit, N, Nc, Ncjs, Nsri, Nsrrc, Is(N)
   REAL(8) :: Atolx, Fmax, Rtolx, Tolf, C(Nc), B(N), Fac(N), P(N), S(N), Temp(N), &
     X(N), Y(N)

@@ -89,11 +89,11 @@ CONTAINS
     !     .. Scalar Arguments ..
     INTEGER Ipass, Kprint, Lun
     !     .. Local Scalars ..
-    REAL(8) :: arg, arg1, arg2, dt, summ, sum1, sum2
-    REAL azero, azeroh, cf, cosqbt, cosqfb, cosqft, costfb, costt, &
+    REAL(8) :: arg, arg1, arg2, dt, summ, sum1, sum2, tpi
+    REAL :: azero, azeroh, cf, cosqbt, cosqfb, cosqft, costfb, costt, &
       dcfb, dcfftb, dcfftf, dezb1, dezf1, dezfb, errmax, rftb, &
-      rftf, rftfb, signn, sinqbt, sinqfb, sinqft, sintfb, sintt, sqrt2, tpi
-    INTEGER i, j, k, modn, n, nm1, nns, np1, ns2, ns2m, nz
+      rftf, rftfb, signn, sinqbt, sinqfb, sinqft, sintfb, sintt, sqrt2
+    INTEGER :: i, j, k, modn, n, nm1, nns, np1, ns2, ns2m, nz
     !     .. Local Arrays ..
     COMPLEX cx(200), cy(200)
     REAL a(100), ah(100), b(100), bh(100), w(2000), x(200), xh(200), y(200)
@@ -457,7 +457,7 @@ CONTAINS
       DO i = 1, n
         x(i) = xh(i)
       END DO
-      tpi = REAL( 2.0*pi, 4 )
+      tpi = 2.0*pi
       dt = tpi/n
       ns2 = (n+1)/2
       cf = 2.0/n

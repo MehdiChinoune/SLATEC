@@ -1,7 +1,7 @@
 !** DSTEPS
 SUBROUTINE DSTEPS(DF,Neqn,Y,X,H,Eps,Wt,Start,Hold,K,Kold,Crash,Phi,P,Yp,&
     Psi,Alpha,Beta,Sig,V,W,G,Phase1,Ns,Nornd,Ksteps,Twou,&
-    Fouru,Xold,Kprev,Ivc,Iv,Kgi,Gi,Rpar,Ipar)
+    Fouru,Xold,Kprev,Ivc,Iv,Kgi,Gi)
   !>
   !  Integrate a system of first order ordinary differential
   !            equations one step.
@@ -180,13 +180,18 @@ SUBROUTINE DSTEPS(DF,Neqn,Y,X,H,Eps,Wt,Start,Hold,K,Kold,Crash,Phi,P,Yp,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   USE service, ONLY : XERMSG, D1MACH
+  INTERFACE
+    SUBROUTINE DF(X,U,Uprime)
+      REAL(8) :: X
+      REAL(8) :: U(:), Uprime(:)
+    END SUBROUTINE DF
+  END INTERFACE
   INTEGER :: Ivc, K, Kgi, Kold, Kprev, Ksteps, Neqn, Ns
-  INTEGER :: Iv(10), Ipar(:)
+  INTEGER :: Iv(10)
   REAL(8) :: Eps, Fouru, H, Hold, Twou, X, Xold
   REAL(8) :: Alpha(12), Beta(12), G(13), Gi(11), P(Neqn), Phi(Neqn,16), Psi(12), &
-    Rpar(:), Sig(13), V(12), W(12), Wt(Neqn), Y(Neqn), Yp(Neqn)
+    Sig(13), V(12), W(12), Wt(Neqn), Y(Neqn), Yp(Neqn)
   LOGICAL :: Start, Crash, Phase1, Nornd
-  EXTERNAL :: DF
   INTEGER :: i, ifail, im1, ip1, jv, iq, j, km1, km2, knew, &
     kp1, kp2, l, limit1, limit2, nsm2, nsp1, nsp2
   REAL(8) :: absh, big, erk, erkm1, erkm2, erkp1, err, hnew, p5eps, r, reali, &
@@ -242,7 +247,7 @@ SUBROUTINE DSTEPS(DF,Neqn,Y,X,H,Eps,Wt,Start,Hold,K,Kold,Crash,Phi,P,Yp,&
         u = D1MACH(4)
         big = SQRT(D1MACH(2))
         CALL DHSTRT(DF,Neqn,X,X+H,Y,Yp,Wt,1,u,big,Phi(1,3),Phi(1,4),Phi(1,5)&
-          ,Phi(1,6),Rpar,Ipar,H)
+          ,Phi(1,6),H)
         !
         Hold = 0.0D0
         K = 1
@@ -445,7 +450,7 @@ SUBROUTINE DSTEPS(DF,Neqn,Y,X,H,Eps,Wt,Start,Hold,K,Kold,Crash,Phi,P,Yp,&
   Xold = X
   X = X + H
   absh = ABS(H)
-  CALL DF(X,P,Yp,Rpar,Ipar)
+  CALL DF(X,P,Yp)
   !
   !   ESTIMATE ERRORS AT ORDERS K,K-1,K-2
   !
@@ -508,7 +513,7 @@ SUBROUTINE DSTEPS(DF,Neqn,Y,X,H,Eps,Wt,Start,Hold,K,Kold,Crash,Phi,P,Yp,&
         P(l) = temp3
       END DO
     END IF
-    CALL DF(X,Y,Yp,Rpar,Ipar)
+    CALL DF(X,Y,Yp)
     !
     !   UPDATE DIFFERENCES FOR NEXT STEP
     !

@@ -168,10 +168,14 @@ SUBROUTINE QAGIE(F,Bound,Inf,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   USE service, ONLY : R1MACH
   !
+  INTERFACE
+    REAL FUNCTION F(X)
+      REAL :: X
+    END FUNCTION F
+  END INTERFACE
   INTEGER :: Ier, Inf, Last, Limit, Neval, Iord(Limit)
   REAL :: Abserr, Bound, Epsabs, Epsrel, Result
   REAL :: Alist(Limit), Blist(Limit), Elist(Limit), Rlist(Limit)
-  REAL, EXTERNAL :: F
   INTEGER :: id, ierro, iroff1, iroff2, iroff3, jupbnd, k, ksgn, ktmin, maxerr, &
   nres, nrmax, numrl2
   REAL :: abseps, area, area1, area12, area2, a1, a2, boun, b1, b2, correc, &

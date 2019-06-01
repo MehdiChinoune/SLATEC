@@ -30,10 +30,32 @@ SUBROUTINE CDPST(El,F,FA,H,Impl,JACOBN,Matdim,Miter,Ml,Mu,N,Nde,Nq,Save2,&
   !   790601  DATE WRITTEN
   !   900329  Initial submission to SLATEC.
   USE linear, ONLY : SCNRM2, CGBFA, CGEFA
+  INTERFACE
+    SUBROUTINE F(N,T,Y,Ydot)
+      INTEGER :: N
+      REAL :: T
+      COMPLEX :: Y(:), Ydot(:)
+    END SUBROUTINE F
+    SUBROUTINE JACOBN(N,T,Y,Dfdy,Matdim,Ml,Mu)
+      INTEGER :: N, Matdim, Ml, Mu
+      REAL :: T
+      COMPLEX :: Y(N), Dfdy(Matdim,N)
+    END SUBROUTINE JACOBN
+    SUBROUTINE USERS(Y,Yh,Ywt,Save1,Save2,T,H,El,Impl,N,Nde,Iflag)
+      INTEGER :: Impl, N, Nde, iflag
+      REAL :: T, H, El
+      COMPLEX :: Y(N), Yh(N,13), Ywt(N), Save1(N), Save2(N)
+    END SUBROUTINE USERS
+    SUBROUTINE FA(N,T,Y,A,Matdim,Ml,Mu,Nde)
+      INTEGER :: N, Matdim, Ml, Mu, Nde
+      REAL :: T
+      COMPLEX :: Y(N), A(:,:)
+    END SUBROUTINE FA
+  END INTERFACE
   INTEGER :: Impl, info, Iswflg, Jstate, Matdim, Miter, Ml, Mu, N, Nde, Nfe, Nje, Nq
   INTEGER :: Ipvt(N)
   REAL :: Bnd, H, T, Uround, El(13,12)
-  COMPLEX :: A(Matdim,N), Dfdy(Matdim,N), Fac(N), Save1(N), Save2(N), Y(N), &
+  COMPLEX :: A(Matdim,N), Dfdy(Matdim,N), Fac(N), Save1(N), Save2(N), Y(N+1), &
     Yh(N,Nq+1), Ywt(N)
   LOGICAL :: Ier
   INTEGER :: i, iflag, imax, j, j2, k, mw
@@ -265,7 +287,7 @@ SUBROUTINE CDPST(El,F,FA,H,Impl,JACOBN,Matdim,Miter,Ml,Mu,N,Nde,Nq,Save2,&
         Dfdy(mw,j) = Dfdy(mw,j) + 1.E0
       END DO
     ELSEIF ( Impl==1 ) THEN
-      CALL FA(N,T,Y,A(Ml+1,1),Matdim,Ml,Mu,Nde)
+      CALL FA(N,T,Y,A(Ml+1:,:),Matdim,Ml,Mu,Nde)
       IF ( N==0 ) THEN
         Jstate = 9
         RETURN
@@ -285,7 +307,7 @@ SUBROUTINE CDPST(El,F,FA,H,Impl,JACOBN,Matdim,Miter,Ml,Mu,N,Nde,Nq,Save2,&
         Dfdy(mw,j) = Dfdy(mw,j) + A(j,1)
       END DO
     ELSEIF ( Impl==3 ) THEN
-      CALL FA(N,T,Y,A(Ml+1,1),Matdim,Ml,Mu,Nde)
+      CALL FA(N,T,Y,A(Ml+1:,:),Matdim,Ml,Mu,Nde)
       IF ( N==0 ) THEN
         Jstate = 9
         RETURN

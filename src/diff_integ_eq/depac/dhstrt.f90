@@ -1,6 +1,5 @@
 !** DHSTRT
-SUBROUTINE DHSTRT(DF,Neq,A,B,Y,Yprime,Etol,Morder,Small,Big,Spy,Pv,Yp,Sf,&
-    Rpar,Ipar,H)
+SUBROUTINE DHSTRT(DF,Neq,A,B,Y,Yprime,Etol,Morder,Small,Big,Spy,Pv,Yp,Sf,H)
   !>
   !  Subsidiary to DDEABM, DDEBDF and DDERKF
   !***
@@ -148,11 +147,16 @@ SUBROUTINE DHSTRT(DF,Neq,A,B,Y,Yprime,Etol,Morder,Small,Big,Spy,Pv,Yp,Sf,&
   !   910722  Updated AUTHOR section.  (ALS)
 
   !
-  INTEGER :: Morder, Neq, Ipar(:)
+  INTERFACE
+    SUBROUTINE DF(X,U,Uprime)
+      REAL(8) :: X
+      REAL(8) :: U(:), Uprime(:)
+    END SUBROUTINE DF
+  END INTERFACE
+  INTEGER :: Morder, Neq
   REAL(8) :: A, B, Big, H, Small
-  REAL(8) :: Etol(Neq), Pv(Neq), Rpar(:), Sf(Neq), Spy(Neq), Y(Neq), Yp(Neq), &
+  REAL(8) :: Etol(Neq), Pv(Neq), Sf(Neq), Spy(Neq), Y(Neq), Yp(Neq), &
     Yprime(Neq)
-  EXTERNAL :: DF
   INTEGER :: j, k, lk
   REAL(8) :: absdx, da, delf, dely, dfdub, dfdxb, dx, dy, fbnd, relper, srydpb, &
     tolexp, tolmin, tolp, tolsum, ydpb
@@ -175,7 +179,7 @@ SUBROUTINE DHSTRT(DF,Neq,A,B,Y,Yprime,Etol,Morder,Small,Big,Spy,Pv,Yp,Sf,&
   !
   da = SIGN(MAX(MIN(relper*ABS(A),absdx),100.0D0*Small*ABS(A)),dx)
   IF ( da==0.0D0 ) da = relper*dx
-  CALL DF(A+da,Y,Sf,Rpar,Ipar)
+  CALL DF(A+da,Y,Sf)
   DO j = 1, Neq
     Yp(j) = Sf(j) - Yprime(j)
   END DO
@@ -239,14 +243,14 @@ SUBROUTINE DHSTRT(DF,Neq,A,B,Y,Yprime,Etol,Morder,Small,Big,Spy,Pv,Yp,Sf,&
     IF ( k==2 ) THEN
       !              USE A SHIFTED VALUE OF THE INDEPENDENT VARIABLE
       !                                    IN COMPUTING ONE ESTIMATE
-      CALL DF(A+da,Pv,Yp,Rpar,Ipar)
+      CALL DF(A+da,Pv,Yp)
       DO j = 1, Neq
         Pv(j) = Yp(j) - Sf(j)
       END DO
     ELSE
       !              EVALUATE DERIVATIVES ASSOCIATED WITH PERTURBED
       !              VECTOR  AND  COMPUTE CORRESPONDING DIFFERENCES
-      CALL DF(A,Pv,Yp,Rpar,Ipar)
+      CALL DF(A,Pv,Yp)
       DO j = 1, Neq
         Pv(j) = Yp(j) - Yprime(j)
       END DO

@@ -43,10 +43,27 @@ SUBROUTINE CDNTL(Eps,F,FA,Hmax,Hold,Impl,Jtask,Matdim,Maxord,Mint,Miter,&
   !   790601  DATE WRITTEN
   !   900329  Initial submission to SLATEC.
   USE linear, ONLY : SCNRM2, CGBSL, CGESL, CGBFA, CGEFA
+  INTERFACE
+    SUBROUTINE F(N,T,Y,Ydot)
+      INTEGER :: N
+      REAL :: T
+      COMPLEX :: Y(:), Ydot(:)
+    END SUBROUTINE F
+    SUBROUTINE USERS(Y,Yh,Ywt,Save1,Save2,T,H,El,Impl,N,Nde,Iflag)
+      INTEGER :: Impl, N, Nde, iflag
+      REAL :: T, H, El
+      COMPLEX :: Y(N), Yh(N,13), Ywt(N), Save1(N), Save2(N)
+    END SUBROUTINE USERS
+    SUBROUTINE FA(N,T,Y,A,Matdim,Ml,Mu,Nde)
+      INTEGER :: N, Matdim, Ml, Mu, Nde
+      REAL :: T
+      COMPLEX :: Y(N), A(:,:)
+    END SUBROUTINE FA
+  END INTERFACE
   INTEGER :: Impl, Iswflg, Jstate, Jtask, Matdim, Maxord, Mint, Miter, Ml, &
     Mntold, Mtrold, Mu, N, Nde, Nfe, Nq, Nwait
   REAL :: Eps, H, Hmax, Hold, Rc, Rh, Rmax, T, Trend, Uround, El(13,12), Tq(3,12)
-  COMPLEX :: A(Matdim,N), Fac(N), Save1(N), Save2(N), Y(N), Yh(N,13), Ywt(N)
+  COMPLEX :: A(Matdim,N), Fac(N), Save1(N), Save2(N), Y(N+1), Yh(N,13), Ywt(N)
   INTEGER :: Ipvt(N)
   LOGICAL :: Convrg, Ier
   INTEGER :: i, iflag, info
@@ -73,7 +90,7 @@ SUBROUTINE CDNTL(Eps,F,FA,Hmax,Hold,Impl,Jtask,Matdim,Maxord,Mint,Miter,&
     IF ( Impl/=0 ) THEN
       IF ( Miter==3 ) THEN
         iflag = 0
-        CALL USERS(Y,Yh,Ywt,Save1,Save2,T,H,El,Impl,N,Nde,iflag)
+        CALL USERS(Y,Yh,Ywt,Save1,Save2,T,H,El(1,1),Impl,N,Nde,iflag)
         IF ( iflag==-1 ) THEN
           Ier = .TRUE.
           RETURN
@@ -96,7 +113,7 @@ SUBROUTINE CDNTL(Eps,F,FA,Hmax,Hold,Impl,Jtask,Matdim,Maxord,Mint,Miter,&
           END IF
           CALL CGESL(A,Matdim,N,Ipvt,Save2,0)
         ELSEIF ( Miter==4.OR.Miter==5 ) THEN
-          CALL FA(N,T,Y,A(Ml+1,1),Matdim,Ml,Mu,Nde)
+          CALL FA(N,T,Y,A(Ml+1:,:),Matdim,Ml,Mu,Nde)
           IF ( N==0 ) THEN
             Jstate = 9
             RETURN
@@ -139,7 +156,7 @@ SUBROUTINE CDNTL(Eps,F,FA,Hmax,Hold,Impl,Jtask,Matdim,Maxord,Mint,Miter,&
           END IF
           CALL CGESL(A,Matdim,Nde,Ipvt,Save2,0)
         ELSEIF ( Miter==4.OR.Miter==5 ) THEN
-          CALL FA(N,T,Y,A(Ml+1,1),Matdim,Ml,Mu,Nde)
+          CALL FA(N,T,Y,A(Ml+1:,:),Matdim,Ml,Mu,Nde)
           IF ( N==0 ) THEN
             Jstate = 9
             RETURN

@@ -1,7 +1,7 @@
 !** DERKFS
 SUBROUTINE DERKFS(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
     F4,F5,Ys,Told,Dtsign,U26,Rer,Init,Ksteps,Kop,Iquit,&
-    Stiff,Nonstf,Ntstep,Nstifs,Rpar,Ipar)
+    Stiff,Nonstf,Ntstep,Nstifs)
   !>
   !  Subsidiary to DERKF
   !***
@@ -52,13 +52,18 @@ SUBROUTINE DERKFS(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
   !           IF-THEN-ELSEs.  (RWC)
   !   910722  Updated AUTHOR section.  (ALS)
   USE service, ONLY : XERMSG, R1MACH
+  INTERFACE
+    SUBROUTINE F(X,U,Uprime)
+      REAL :: X
+      REAL :: U(:), Uprime(:)
+    END SUBROUTINE F
+  END INTERFACE
   INTEGER :: Idid, Init, Iquit, Kop, Ksteps, Neq, Nstifs, Ntstep
-  INTEGER :: Info(15), Ipar(:)
+  INTEGER :: Info(15)
   REAL :: Dtsign, H, Rer, T, Told, Tolfac, Tout, U26
-  REAL :: Atol(:), F1(Neq), F2(Neq), F3(Neq), F4(Neq), F5(Neq), Rpar(:), Rtol(:), &
+  REAL :: Atol(:), F1(Neq), F2(Neq), F3(Neq), F4(Neq), F5(Neq), Rtol(:), &
     Y(Neq), Yp(Neq), Ys(Neq)
   LOGICAL :: Stiff, Nonstf
-  EXTERNAL :: F
   REAL :: a, big, dt, dy, ee, eeoet, es, estiff, esttol, et, hmin
   INTEGER :: k, ktol, natolp, nrtolp
   REAL :: s, tol, u, ute, yavg
@@ -270,7 +275,7 @@ SUBROUTINE DERKFS(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
       !
       Init = 1
       a = T
-      CALL F(a,Y,Yp,Rpar,Ipar)
+      CALL F(a,Y,Yp)
       IF ( T==Tout ) GOTO 200
     ELSEIF ( Init/=1 ) THEN
       GOTO 100
@@ -294,7 +299,7 @@ SUBROUTINE DERKFS(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
       F1(k) = tol
     END DO
     !
-    CALL HSTART(F,Neq,T,Tout,Y,Yp,F1,4,u,big,F2,F3,F4,F5,Rpar,Ipar,H)
+    CALL HSTART(F,Neq,T,Tout,Y,Yp,F1,4,u,big,F2,F3,F4,F5,H)
   ELSE
     !
     !                       RTOL=ATOL=0 ON INPUT, SO RTOL WAS CHANGED TO A
@@ -407,7 +412,7 @@ SUBROUTINE DERKFS(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
           !
           !     ADVANCE AN APPROXIMATE SOLUTION OVER ONE STEP OF LENGTH H
           !
-          CALL DEFEHL(F,Neq,T,Y,H,Yp,F1,F2,F3,F4,F5,Ys,Rpar,Ipar)
+          CALL DEFEHL(F,Neq,T,Y,H,Yp,F1,F2,F3,F4,F5,Ys)
           Ksteps = Ksteps + 1
           !
           !.......................................................................
@@ -460,7 +465,7 @@ SUBROUTINE DERKFS(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
               Y(k) = Ys(k)
             END DO
             a = T
-            CALL F(a,Y,Yp,Rpar,Ipar)
+            CALL F(a,Y,Yp)
             !
             !                       CHOOSE NEXT STEP SIZE
             !                       THE INCREASE IS LIMITED TO A FACTOR OF 5
@@ -579,7 +584,7 @@ SUBROUTINE DERKFS(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
       Y(k) = Y(k) + dt*Yp(k)
     END DO
     a = Tout
-    CALL F(a,Y,Yp,Rpar,Ipar)
+    CALL F(a,Y,Yp)
     Ksteps = Ksteps + 1
   END IF
   !

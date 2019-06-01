@@ -69,10 +69,15 @@ SUBROUTINE DQK61(F,A,B,Result,Abserr,Resabs,Resasc)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   USE service, ONLY : D1MACH
   !
-  REAL(8) :: A, dabsc, Abserr, B, centr, dhlgth, epmach, fc, fsum, fval1, fval2, &
-    fv1(30), fv2(30), hlgth, Resabs, Resasc, resg, resk, reskh, Result, uflow
-  INTEGER j, jtw, jtwm1
-  REAL(8), EXTERNAL :: F
+  INTERFACE
+    REAL(8) FUNCTION F(X)
+      REAL(8) :: X
+    END FUNCTION F
+  END INTERFACE
+  REAL(8) :: A, Abserr, B, Resabs, Resasc, Result
+  INTEGER :: j, jtw, jtwm1
+  REAL(8) :: dabsc, centr, dhlgth, epmach, fc, fsum, fval1, fval2, fv1(30), &
+    fv2(30), hlgth, resg, resk, reskh, uflow
   !
   !           THE ABSCISSAE AND WEIGHTS ARE GIVEN FOR THE
   !           INTERVAL (-1,1). BECAUSE OF SYMMETRY ONLY THE POSITIVE

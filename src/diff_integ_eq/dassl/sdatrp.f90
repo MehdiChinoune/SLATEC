@@ -45,8 +45,8 @@ SUBROUTINE SDATRP(X,Xout,Yout,Ypout,Neq,Kold,Phi,Psi)
   REAL :: X, Xout
   REAL :: Yout(Neq), Ypout(Neq), Phi(Neq,Kold+1), Psi(Kold+1)
   !
-  INTEGER i, j, koldp1
-  REAL c, d, gama, temp1
+  INTEGER :: i, j, koldp1
+  REAL :: c, d, gama, temp1
   !
   !* FIRST EXECUTABLE STATEMENT  SDATRP
   koldp1 = Kold + 1

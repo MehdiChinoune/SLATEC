@@ -69,10 +69,15 @@ SUBROUTINE QK61(F,A,B,Result,Abserr,Resabs,Resasc)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   USE service, ONLY : R1MACH
   !
-  REAL A, absc, Abserr, B, centr, dhlgth, epmach, fc, fsum, fval1, fval2, fv1(30), &
-    fv2(30), hlgth, Resabs, Resasc, resg, resk, reskh, Result, uflow
-  INTEGER j, jtw, jtwm1
-  REAL, EXTERNAL :: F
+  INTERFACE
+    REAL FUNCTION F(X)
+      REAL :: X
+    END FUNCTION F
+  END INTERFACE
+  REAL :: Abserr, B, A, Resabs, Resasc, Result
+  INTEGER :: j, jtw, jtwm1
+  REAL :: absc, centr, dhlgth, epmach, fc, fsum, fval1, fval2, fv1(30), &
+    fv2(30), hlgth, resg, resk, reskh, uflow
   !
   !           THE ABSCISSAE AND WEIGHTS ARE GIVEN FOR THE
   !           INTERVAL (-1,1). BECAUSE OF SYMMETRY ONLY THE POSITIVE

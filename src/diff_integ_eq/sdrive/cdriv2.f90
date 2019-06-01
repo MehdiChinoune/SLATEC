@@ -347,10 +347,21 @@ SUBROUTINE CDRIV2(N,T,Y,F,Tout,Mstate,Nroot,Eps,Ewt,Mint,Work,Lenw,Iwork,&
   !   790601  DATE WRITTEN
   !   900329  Initial submission to SLATEC.
   USE service, ONLY : XERMSG
-  EXTERNAL :: F, G
+  INTERFACE
+    REAL FUNCTION G(N,T,Y,Iroot)
+      INTEGER :: N, Iroot
+      REAL :: T
+      COMPLEX :: Y(N)
+    END FUNCTION G
+    SUBROUTINE F(N,T,Y,Ydot)
+      INTEGER :: N
+      REAL :: T
+      COMPLEX :: Y(:), Ydot(:)
+    END SUBROUTINE F
+  END INTERFACE
   INTEGER :: Ierflg, Leniw, Lenw, Mint, Mstate, N, Nroot
   INTEGER :: Iwork(Leniw+N)
-  REAL :: Eps, Ewt, G, T, Tout
+  REAL :: Eps, Ewt, T, Tout
   COMPLEX :: Work(Lenw), Y(N+1)
   INTEGER :: ierror, miter, ml, mu, mxord, nde, nstate, ntask
   REAL :: ewtcom(1), hmax
@@ -404,7 +415,8 @@ SUBROUTINE CDRIV2(N,T,Y,F,Tout,Mstate,Nroot,Eps,Ewt,Mint,Work,Lenw,Iwork,&
   END IF
   hmax = 2.E0*ABS(Tout-T)
   CALL CDRIV3(N,T,Y,F,nstate,Tout,ntask,Nroot,Eps,ewtcom,ierror,Mint,miter,&
-    IMPL,ml,mu,mxord,hmax,Work,Lenw,Iwork,Leniw,F,F,nde,MXSTEP,G,F,Ierflg)
+    IMPL,ml,mu,mxord,hmax,Work,Lenw,Iwork,Leniw,dum_JACOBN,dum_FA,nde,MXSTEP,G,&
+    dum_USERS,Ierflg)
   IF ( nstate<=7 ) THEN
     Mstate = SIGN(nstate,Mstate)
   ELSEIF ( nstate==11 ) THEN
@@ -412,4 +424,29 @@ SUBROUTINE CDRIV2(N,T,Y,F,Tout,Mstate,Nroot,Eps,Ewt,Mint,Work,Lenw,Iwork,&
   ELSEIF ( nstate>11 ) THEN
     Mstate = SIGN(9,Mstate)
   END IF
+
+CONTAINS
+  SUBROUTINE dum_JACOBN(N,T,Y,Dfdy,Matdim,Ml,Mu)
+    INTEGER :: N, Matdim, Ml, Mu
+    REAL :: T
+    COMPLEX :: Y(N), Dfdy(Matdim,N)
+    Dfdy = T
+    Y = Ml + Mu
+  END SUBROUTINE dum_JACOBN
+  SUBROUTINE dum_USERS(Y,Yh,Ywt,Save1,Save2,T,H,El,Impl,N,Nde,Iflag)
+    INTEGER :: Impl, N, Nde, Iflag
+    REAL :: T, H, El
+    COMPLEX :: Y(N), Yh(N,13), Ywt(N), Save1(N), Save2(N)
+    Y = Ywt + Save1 + Save2
+    Yh = T + H + El
+    Impl = Nde + Iflag
+  END SUBROUTINE dum_USERS
+  SUBROUTINE dum_FA(N,T,Y,A,Matdim,Ml,Mu,Nde)
+    INTEGER :: N, Matdim, Ml, Mu, Nde
+    REAL :: T
+    COMPLEX :: Y(N), A(:,:)
+    T = Matdim + Ml + Mu + Nde
+    Y = 0.
+    A = 0.
+  END SUBROUTINE dum_FA
 END SUBROUTINE CDRIV2

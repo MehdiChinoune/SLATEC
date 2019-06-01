@@ -1552,9 +1552,8 @@ SUBROUTINE DSPLP(DUSRMT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
     SUBROUTINE DUSRMT(I,J,Aij,Indcat,Dattrv,Iflag)
       INTEGER :: I, J, indcat, iflag(10)
       REAL(8) :: Dattrv(:), Aij
-    END SUBROUTINE
+    END SUBROUTINE DUSRMT
   END INTERFACE
-  EXTERNAL :: DUSRMT
   INTEGER :: Info, Liw, Lw, Mrelas, Nvars
   INTEGER :: Ibasis(Nvars+Mrelas), Ind(Nvars+Mrelas), Iwork(Liw)
   REAL(8) :: Bl(Nvars+Mrelas), Bu(Nvars+Mrelas), Costs(Nvars), Dattrv(:), &

@@ -79,13 +79,17 @@ SUBROUTINE QNC79(FUN,A,B,Err,Ans,Ierr,K)
   !   920218  Code and prologue polished.  (WRB)
   USE service, ONLY : XERMSG, R1MACH, I1MACH
   !     .. Scalar Arguments ..
-  REAL A, Ans, B, Err
-  INTEGER Ierr, K
+  REAL :: A, Ans, B, Err
+  INTEGER :: Ierr, K
   !     .. Function Arguments ..
-  REAL, EXTERNAL :: FUN
+  INTERFACE
+    REAL FUNCTION FUN(X)
+      REAL, INTENT(IN) :: X
+    END FUNCTION FUN
+  END INTERFACE
   !     .. Local Scalars ..
-  REAL ae, area, bank, blocal, c, ce, ee, ef, eps, q13, q7, q7l, test, tol, vr
-  INTEGER i, l, lmn, lmx, nib
+  REAL :: ae, area, bank, blocal, c, ce, ee, ef, eps, q13, q7, q7l, test, tol, vr
+  INTEGER :: i, l, lmn, lmx, nib
   !     .. Local Arrays ..
   REAL aa(40), f(13), f1(40), f2(40), f3(40), f4(40), f5(40), f6(40), &
     f7(40), hh(40), q7r(40), vl(40)

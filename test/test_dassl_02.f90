@@ -98,9 +98,9 @@ CONTAINS
     !
     INTEGER Lun, Kprint, Ipass
     !
-    INTEGER i, idid, info(15), iout, ipar(1), ires, iwork(45), j190, &
+    INTEGER i, idid, info(15), iout, ires, iwork(45), j190, &
       j290, liw, lrw, ml, mu, neq, nerr, nfe, nje, nout, nqu, nst
-    REAL(8) :: atol(1), delta(25), er, er1, er2, erm, ero, hu, rpar(1), rtol(1), &
+    REAL(8) :: atol(1), delta(25), er, er1, er2, erm, ero, hu, rtol(1), &
       rwork(550), t, tout, y(25), yprime(25), yt1, yt2
     !
     REAL(8), PARAMETER :: tout1 = 1.0D0, dtout = 1.0D0
@@ -143,7 +143,7 @@ CONTAINS
       ero = 0.0D0
       DO iout = 1, nout
         CALL DDASSL(DDRES1,neq,t,y,yprime,tout,info,rtol,atol,idid,rwork,lrw,&
-          iwork,liw,rpar,ipar,DDJAC1)
+          iwork,liw,DDJAC1)
         hu = rwork(7)
         nqu = iwork(8)
         IF ( Kprint>2 ) THEN
@@ -211,12 +211,12 @@ CONTAINS
         delta(i) = 0.0D0
       END DO
       !        Following is to initialize YPRIME.
-      CALL DDRES2(t,y,delta,yprime,ires,rpar,ipar)
+      CALL DDRES2(t,y,delta,yprime,ires)
       tout = 0.01D0
       ero = 0.0D0
       DO iout = 1, nout
         CALL DDASSL(DDRES2,neq,t,y,yprime,tout,info,rtol,atol,idid,rwork,lrw,&
-          iwork,liw,rpar,ipar,DDJAC2)
+          iwork,liw,DDJAC2)
         CALL DEDIT2(y,t,erm)
         hu = rwork(7)
         nqu = iwork(8)
@@ -259,7 +259,7 @@ CONTAINS
       ' ERROR OVERRUN =',1P,D10.2)
   END SUBROUTINE DDASQC
   !** DDJAC1
-  SUBROUTINE DDJAC1(T,Y,Yprime,Pd,Cj,Rpar,Ipar)
+  SUBROUTINE DDJAC1(T,Y,Yprime,Pd,Cj)
     !>
     !  First Jacobian evaluator for DDASQC.
     !***
@@ -278,8 +278,7 @@ CONTAINS
     !   901001  Converted prologue to 4.0 format and made all argument
     !           declarations explicit.  (FNF)
 
-    INTEGER Ipar(*)
-    REAL(8) :: T, Y(*), Yprime(*), Pd(2,2), Cj, Rpar(*)
+    REAL(8) :: T, Y(:), Yprime(:), Pd(:,:), Cj
     !* FIRST EXECUTABLE STATEMENT  DDJAC1
     Pd(1,1) = Cj + 10.0D0
     Pd(1,2) = 0.0D0
@@ -287,7 +286,7 @@ CONTAINS
     Pd(2,2) = 1.0D0
   END SUBROUTINE DDJAC1
   !** DDJAC2
-  SUBROUTINE DDJAC2(T,Y,Yprime,Pd,Cj,Rpar,Ipar)
+  SUBROUTINE DDJAC2(T,Y,Yprime,Pd,Cj)
     !>
     !  Second Jacobian evaluator for DDASQC.
     !***
@@ -309,9 +308,8 @@ CONTAINS
     !           including MBAND+n in expressions.  (FNF)
     !   901030  Made all local declarations explicit.  (FNF)
 
-    INTEGER Ipar(*)
-    REAL(8) :: T, Y(*), Yprime(*), Pd(11,25), Cj, Rpar(*)
-    INTEGER j, mband
+    REAL(8) :: T, Y(:), Yprime(:), Pd(:,:), Cj
+    INTEGER :: j, mband
     REAL(8), PARAMETER :: alph1 = 1.0D0, alph2 = 1.0D0
     INTEGER, PARAMETER :: ng = 5
     INTEGER, PARAMETER :: ml = 5, mu = 0, neq = 25
@@ -330,7 +328,7 @@ CONTAINS
     END DO
   END SUBROUTINE DDJAC2
   !** DDRES1
-  SUBROUTINE DDRES1(T,Y,Yprime,Delta,Ires,Rpar,Ipar)
+  SUBROUTINE DDRES1(T,Y,Yprime,Delta,Ires)
     !>
     !  First residual evaluator for DDASQC.
     !***
@@ -349,14 +347,14 @@ CONTAINS
     !   901001  Converted prologue to 4.0 format and made all argument
     !           declarations explicit.  (FNF)
 
-    INTEGER Ires, Ipar(*)
-    REAL(8) :: T, Y(*), Yprime(*), Delta(*), Rpar(*)
+    INTEGER :: Ires
+    REAL(8) :: T, Y(:), Yprime(:), Delta(:)
     !* FIRST EXECUTABLE STATEMENT  DDRES1
     Delta(1) = Yprime(1) + 10.0D0*Y(1)
     Delta(2) = Y(2) + Y(1) - 1.0D0
   END SUBROUTINE DDRES1
   !** DDRES2
-  SUBROUTINE DDRES2(T,Y,Yprime,Delta,Ires,Rpar,Ipar)
+  SUBROUTINE DDRES2(T,Y,Yprime,Delta,Ires)
     !>
     !  Second residual evaluator for DDASQC.
     !***
@@ -376,9 +374,9 @@ CONTAINS
     !           declarations explicit.  (FNF)
     !   901030  Made all local declarations explicit.  (FNF)
 
-    INTEGER Ires, Ipar(*)
-    REAL(8) :: T, Y(*), Yprime(*), Delta(*), Rpar(*)
-    INTEGER i, j, k
+    INTEGER :: Ires
+    REAL(8) :: T, Y(:), Yprime(:), Delta(:)
+    INTEGER :: i, j, k
     REAL(8) :: d
     REAL(8), PARAMETER :: alph1 = 1.0D0, alph2 = 1.0D0
     INTEGER, PARAMETER :: ng = 5

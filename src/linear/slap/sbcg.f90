@@ -285,6 +285,10 @@ SUBROUTINE SBCG(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MTTVEC,MSOLVE,MTSOLV,Itol,&
       INTEGER :: N, Nelt, Isym, Ia(Nelt), Ja(Nelt)
       REAL :: X(N), R(N), A(Nelt)
     END SUBROUTINE
+    SUBROUTINE MTTVEC(N,X,Y,Nelt,Ia,Ja,A,Isym)
+      INTEGER :: N, Nelt, Isym, Ia(Nelt), Ja(Nelt)
+      REAL :: X(N), Y(N), A(Nelt)
+    END SUBROUTINE
   END INTERFACE
   !     .. Scalar Arguments ..
   REAL Err, Tol
@@ -292,8 +296,6 @@ SUBROUTINE SBCG(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MTTVEC,MSOLVE,MTSOLV,Itol,&
   !     .. Array Arguments ..
   REAL A(Nelt), B(N), Dz(N), P(N), Pp(N), R(N), Rr(N), Rwork(*), X(N), Z(N), Zz(N)
   INTEGER Ia(Nelt), Iwork(*), Ja(Nelt)
-  !     .. Subroutine Arguments ..
-  EXTERNAL :: MTTVEC
   !     .. Local Scalars ..
   REAL ak, akden, bk, bkden, bknum, bnrm, fuzz, solnrm, tolmin
   INTEGER i, k

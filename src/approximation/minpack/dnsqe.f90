@@ -341,10 +341,19 @@ SUBROUTINE DNSQE(FCN,JAC,Iopt,N,X,Fvec,Tol,Nprint,Info,Wa,Lwa)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   USE service, ONLY : XERMSG
+  INTERFACE
+    SUBROUTINE FCN(N,X,Fvec,iflag)
+      INTEGER :: N, Iflag
+      REAL(8) :: X(N), Fvec(N)
+    END SUBROUTINE FCN
+    SUBROUTINE JAC(N,X,Fvec,Fjac,Ldfjac,Iflag)
+      INTEGER :: N, Ldfjac, Iflag
+      REAL(8) :: X(N), Fvec(N),Fjac(Ldfjac,N)
+    END SUBROUTINE JAC
+  END INTERFACE
   INTEGER :: Info, Iopt, Lwa, N, Nprint
   REAL(8) :: Tol
   REAL(8) :: Fvec(N), Wa(Lwa), X(N)
-  EXTERNAL :: FCN, JAC
   INTEGER :: indexx, j, lr, maxfev, ml, mode, mu, nfev, njev
   REAL(8) :: epsfcn, xtol
   REAL(8), PARAMETER :: factor = 1.0D2, one = 1.0D0, zero = 0.0D0

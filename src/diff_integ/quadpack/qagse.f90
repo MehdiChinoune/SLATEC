@@ -166,10 +166,14 @@ SUBROUTINE QAGSE(F,A,B,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,Alist,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   USE service, ONLY : R1MACH
   !
+  INTERFACE
+    REAL FUNCTION F(X)
+      REAL :: X
+    END FUNCTION F
+  END INTERFACE
   INTEGER :: Ier, Last, Limit, Neval, Iord(Limit)
   REAL :: A, Abserr, B, Epsabs, Epsrel, Result
   REAL :: Alist(Limit), Blist(Limit), Elist(Limit), Rlist(Limit)
-  REAL, EXTERNAL :: F
   INTEGER :: id, ierro, iroff1, iroff2, iroff3, jupbnd, k, &
     ksgn, ktmin, maxerr, nres, nrmax, numrl2
   REAL :: abseps, area, area1, area12, area2, a1, a2, b1, b2, correc, defabs, &

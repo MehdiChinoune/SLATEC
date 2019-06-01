@@ -1,7 +1,7 @@
 !** DRKFS
 SUBROUTINE DRKFS(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
     F4,F5,Ys,Told,Dtsign,U26,Rer,Init,Ksteps,Kop,Iquit,Stiff,&
-    Nonstf,Ntstep,Nstifs,Rpar,Ipar)
+    Nonstf,Ntstep,Nstifs)
   !>
   !  Subsidiary to DDERKF
   !***
@@ -52,13 +52,18 @@ SUBROUTINE DRKFS(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
   !   910722  Updated AUTHOR section.  (ALS)
   USE service, ONLY : XERMSG, D1MACH
   !
+  INTERFACE
+    SUBROUTINE DF(X,U,Uprime)
+      REAL(8) :: X
+      REAL(8) :: U(:), Uprime(:)
+    END SUBROUTINE DF
+  END INTERFACE
   INTEGER :: Idid, Init, Iquit, Kop, Ksteps, Neq, Nstifs, Ntstep
-  INTEGER :: Info(15), Ipar(:)
+  INTEGER :: Info(15)
   REAL(8) :: Dtsign, H, Rer, T, Told, Tolfac, Tout, U26
-  REAL(8) :: Atol(:), F1(Neq), F2(Neq), F3(Neq), F4(Neq), F5(Neq), Rpar(:), &
+  REAL(8) :: Atol(:), F1(Neq), F2(Neq), F3(Neq), F4(Neq), F5(Neq), &
     Rtol(:), Y(Neq), Yp(Neq), Ys(Neq)
   LOGICAL :: Stiff, Nonstf
-  EXTERNAL :: DF
   INTEGER :: k, ktol, natolp, nrtolp
   REAL(8) :: a, big, dt, dy, ee, eeoet, es, estiff, esttol, et, hmin, s, &
     tol, u, ute, yavg
@@ -274,7 +279,7 @@ SUBROUTINE DRKFS(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
       !
       Init = 1
       a = T
-      CALL DF(a,Y,Yp,Rpar,Ipar)
+      CALL DF(a,Y,Yp)
       IF ( T==Tout ) THEN
         !
         !                          INTERVAL MODE
@@ -308,7 +313,7 @@ SUBROUTINE DRKFS(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
       F1(k) = tol
     END DO
     !
-    CALL DHSTRT(DF,Neq,T,Tout,Y,Yp,F1,4,u,big,F2,F3,F4,F5,Rpar,Ipar,H)
+    CALL DHSTRT(DF,Neq,T,Tout,Y,Yp,F1,4,u,big,F2,F3,F4,F5,H)
   ELSE
     !
     !              RTOL=ATOL=0 ON INPUT, SO RTOL WAS CHANGED TO A
@@ -438,7 +443,7 @@ SUBROUTINE DRKFS(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
             !                                   ADVANCE AN APPROXIMATE SOLUTION OVER
             !                                   ONE STEP OF LENGTH H
             !
-            CALL DFEHL(DF,Neq,T,Y,H,Yp,F1,F2,F3,F4,F5,Ys,Rpar,Ipar)
+            CALL DFEHL(DF,Neq,T,Y,H,Yp,F1,F2,F3,F4,F5,Ys)
             Ksteps = Ksteps + 1
             !
             !                                   ....................................
@@ -501,7 +506,7 @@ SUBROUTINE DRKFS(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
                 Y(k) = Ys(k)
               END DO
               a = T
-              CALL DF(a,Y,Yp,Rpar,Ipar)
+              CALL DF(a,Y,Yp)
               !
               !                                CHOOSE NEXT STEP SIZE
               !                                THE INCREASE IS LIMITED TO A FACTOR OF
@@ -640,7 +645,7 @@ SUBROUTINE DRKFS(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
         Y(k) = Y(k) + dt*Yp(k)
       END DO
       a = Tout
-      CALL DF(a,Y,Yp,Rpar,Ipar)
+      CALL DF(a,Y,Yp)
       Ksteps = Ksteps + 1
     END IF
     !
