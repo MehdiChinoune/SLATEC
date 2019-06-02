@@ -46,7 +46,7 @@ SUBROUTINE IPPERM(Ix,N,Iperm,Ier)
   Ier = 0
   IF ( N<1 ) THEN
     Ier = 1
-    CALL XERMSG('SLATEC','IPPERM',&
+    CALL XERMSG('IPPERM',&
       'The number of values to be rearranged, N, is not positive.',Ier,1)
     RETURN
   END IF
@@ -62,7 +62,7 @@ SUBROUTINE IPPERM(Ix,N,Iperm,Ier)
       END IF
     END IF
     Ier = 2
-    CALL XERMSG('SLATEC','IPPERM',&
+    CALL XERMSG('IPPERM',&
       'The permutation vector, IPERM, is not valid.',Ier,1)
     RETURN
   END DO

@@ -88,9 +88,9 @@ SUBROUTINE SSIEV(A,Lda,N,E,Work,Job,Info)
   REAL :: A(Lda,N), E(N), Work(2*N)
   INTEGER i, j
   !* FIRST EXECUTABLE STATEMENT  SSIEV
-  IF ( N>Lda ) CALL XERMSG('SLATEC','SSIEV','N .GT. LDA.',1,1)
+  IF ( N>Lda ) CALL XERMSG('SSIEV','N .GT. LDA.',1,1)
   IF ( N>Lda ) RETURN
-  IF ( N<1 ) CALL XERMSG('SLATEC','SSIEV','N .LT. 1',2,1)
+  IF ( N<1 ) CALL XERMSG('SSIEV','N .LT. 1',2,1)
   IF ( N<1 ) RETURN
   !
   !       CHECK N=1 CASE

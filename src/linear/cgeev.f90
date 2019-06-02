@@ -107,24 +107,24 @@ SUBROUTINE CGEEV(A,Lda,N,E,V,Ldv,Work,Job,Info)
   REAL :: A(2*Lda*N), E(2*N), Work(3*N), V(2*Ldv*N)
   INTEGER :: i, ihi, ilo, j, k, l, mdim, m
   !* FIRST EXECUTABLE STATEMENT  CGEEV
-  IF ( N>Lda ) CALL XERMSG('SLATEC','CGEEV','N .GT. LDA.',1,1)
+  IF ( N>Lda ) CALL XERMSG('CGEEV','N .GT. LDA.',1,1)
   IF ( N>Lda ) RETURN
-  IF ( N<1 ) CALL XERMSG('SLATEC','CGEEV','N .LT. 1',2,1)
+  IF ( N<1 ) CALL XERMSG('CGEEV','N .LT. 1',2,1)
   IF ( N<1 ) RETURN
   IF ( N/=1.OR.Job/=0 ) THEN
     mdim = 2*Lda
     IF ( Job/=0 ) THEN
-      IF ( N>Ldv ) CALL XERMSG('SLATEC','CGEEV','JOB .NE. 0 AND N .GT. LDV.',3,1)
+      IF ( N>Ldv ) CALL XERMSG('CGEEV','JOB .NE. 0 AND N .GT. LDV.',3,1)
       IF ( N>Ldv ) RETURN
       IF ( N==1 ) GOTO 100
       !
       !       REARRANGE A IF NECESSARY WHEN LDA.GT.LDV AND JOB .NE.0
       !
       mdim = MIN(mdim,2*Ldv)
-      IF ( Lda<Ldv ) CALL XERMSG('SLATEC','CGEEV',&
+      IF ( Lda<Ldv ) CALL XERMSG('CGEEV',&
         'LDA.LT.LDV,  ELEMENTS OF V OTHER THAN THE N BY N OUTPUT ELEMENTS HAVE BEEN CHANGED.',5,0)
       IF ( Lda>Ldv ) THEN
-        CALL XERMSG('SLATEC','CGEEV',&
+        CALL XERMSG('CGEEV',&
           'LDA.GT.LDV, ELEMENTS OF A OTHER THAN THE N BY N INPUT ELEMENTS HAVE BEEN CHANGED.',4,0)
         l = N - 1
         DO j = 1, l

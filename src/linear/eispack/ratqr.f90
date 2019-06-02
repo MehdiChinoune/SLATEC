@@ -138,11 +138,8 @@ SUBROUTINE RATQR(N,Eps1,D,E,E2,M,W,Ind,Bd,Type,Idef,Ierr)
   INTEGER Ind(*)
   LOGICAL :: Type
   !
-  REAL, SAVE :: machep
-  LOGICAL :: first = .TRUE.
+  REAL, PARAMETER :: machep = R1MACH(4)
   !* FIRST EXECUTABLE STATEMENT  RATQR
-  IF ( first ) machep = R1MACH(4)
-  first = .FALSE.
   !
   Ierr = 0
   jdef = Idef

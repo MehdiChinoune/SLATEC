@@ -118,7 +118,7 @@ SUBROUTINE DPPGQ8(FUN,Ldc,C,Xi,Lxi,Kk,Id,A,B,Inppv,Err,Ans,Ierr)
             lmx = MIN(nlmx,nbits-nib-7)
             IF ( lmx<1 ) THEN
               Ierr = -1
-              CALL XERMSG('SLATEC','DPPGQ8',&
+              CALL XERMSG('DPPGQ8',&
                 'A AND B ARE TOO NEARLY EQUAL TO ALLOW NORMAL INTEGRATION. &
                 &ANSWER IS SET TO ZERO, AND IERR=-1.',1,-1)
               IF ( Err<0.0D0 ) Err = be
@@ -201,7 +201,7 @@ SUBROUTINE DPPGQ8(FUN,Ldc,C,Xi,Lxi,Kk,Id,A,B,Inppv,Err,Ans,Ierr)
     Ans = vr
     IF ( (mxl/=0).AND.(ABS(be)>2.0D0*tol*area) ) THEN
       Ierr = 2
-      CALL XERMSG('SLATEC','DPPGQ8',&
+      CALL XERMSG('DPPGQ8',&
         'ANS IS PROBABLY INSUFFICIENTLY ACCURATE.',3,1)
     END IF
     IF ( Err<0.0D0 ) Err = be

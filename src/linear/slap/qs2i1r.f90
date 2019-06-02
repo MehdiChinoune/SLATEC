@@ -91,14 +91,14 @@ SUBROUTINE QS2I1R(Ia,Ja,A,N,Kflag)
   !* FIRST EXECUTABLE STATEMENT  QS2I1R
   nn = N
   IF ( nn<1 ) THEN
-    CALL XERMSG('SLATEC','QS2I1R',&
+    CALL XERMSG('QS2I1R',&
       'The number of values to be sorted was not positive.',1,1)
     RETURN
   END IF
   IF ( N==1 ) RETURN
   kk = ABS(Kflag)
   IF ( kk/=1 ) THEN
-    CALL XERMSG('SLATEC','QS2I1R',&
+    CALL XERMSG('QS2I1R',&
       'The sort control parameter, K, was not 1 or -1.',2,1)
     RETURN
   END IF

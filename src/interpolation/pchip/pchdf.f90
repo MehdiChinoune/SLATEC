@@ -83,7 +83,7 @@ REAL FUNCTION PCHDF(K,X,S,Ierr)
     !
     !     K.LT.3 RETURN.
     Ierr = -1
-    CALL XERMSG('SLATEC','PCHDF','K LESS THAN THREE',Ierr,1)
+    CALL XERMSG('PCHDF','K LESS THAN THREE',Ierr,1)
     PCHDF = zero
     RETURN
   END IF

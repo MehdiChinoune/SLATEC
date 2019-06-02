@@ -49,7 +49,7 @@ INTEGER FUNCTION INITDS(Os,Nos,Eta)
   REAL err
   INTEGER i, ii
   !* FIRST EXECUTABLE STATEMENT  INITDS
-  IF ( Nos<1 ) CALL XERMSG('SLATEC','INITDS',&
+  IF ( Nos<1 ) CALL XERMSG('INITDS',&
     'Number of coefficients is less than 1',2,1)
   !
   err = 0.
@@ -59,7 +59,7 @@ INTEGER FUNCTION INITDS(Os,Nos,Eta)
     IF ( err>Eta ) EXIT
   END DO
   !
-  IF ( i==Nos ) CALL XERMSG('SLATEC','INITDS',&
+  IF ( i==Nos ) CALL XERMSG('INITDS',&
     'Chebyshev series too short for specified accuracy',1,1)
   INITDS = i
   !

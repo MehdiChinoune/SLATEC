@@ -100,20 +100,20 @@ SUBROUTINE DBESK(X,Fnu,Kode,N,Y,Nz)
     !
     !
     !
-    CALL XERMSG('SLATEC','DBESK','SCALING OPTION, KODE, NOT 1 OR 2',2,1)
+    CALL XERMSG('DBESK','SCALING OPTION, KODE, NOT 1 OR 2',2,1)
     RETURN
   ELSEIF ( Fnu<0.0D0 ) THEN
-    CALL XERMSG('SLATEC','DBESK','ORDER, FNU, LESS THAN ZERO',2,1)
+    CALL XERMSG('DBESK','ORDER, FNU, LESS THAN ZERO',2,1)
     RETURN
   ELSEIF ( X<=0.0D0 ) THEN
-    CALL XERMSG('SLATEC','DBESK','X LESS THAN OR EQUAL TO ZERO',2,1)
+    CALL XERMSG('DBESK','X LESS THAN OR EQUAL TO ZERO',2,1)
     RETURN
   ELSEIF ( X<xlim ) THEN
-    CALL XERMSG('SLATEC','DBESK',&
+    CALL XERMSG('DBESK',&
       'OVERFLOW, FNU OR N TOO LARGE OR X TOO SMALL',6,1)
     RETURN
   ELSEIF ( N<1 ) THEN
-    CALL XERMSG('SLATEC','DBESK','N LESS THAN ONE',2,1)
+    CALL XERMSG('DBESK','N LESS THAN ONE',2,1)
     RETURN
   ELSE
     etx = Kode - 1
@@ -143,7 +143,7 @@ SUBROUTINE DBESK(X,Fnu,Kode,N,Y,Nz)
       !
       zn = X/fn
       IF ( zn==0.0D0 ) THEN
-        CALL XERMSG('SLATEC','DBESK',&
+        CALL XERMSG('DBESK',&
           'OVERFLOW, FNU OR N TOO LARGE OR X TOO SMALL',6,1)
         RETURN
       ELSE
@@ -152,7 +152,7 @@ SUBROUTINE DBESK(X,Fnu,Kode,N,Y,Nz)
         t = rtz*(1.0D0-etx) + etx/(zn+rtz)
         cn = -fn*(t-gln)
         IF ( cn>elim ) THEN
-          CALL XERMSG('SLATEC','DBESK',&
+          CALL XERMSG('DBESK',&
             'OVERFLOW, FNU OR N TOO LARGE OR X TOO SMALL',6,1)
           RETURN
         ELSEIF ( nud<nulim(nn) ) THEN
@@ -243,7 +243,7 @@ SUBROUTINE DBESK(X,Fnu,Kode,N,Y,Nz)
   600 CONTINUE
   IF ( fn>1.0D0 ) THEN
     IF ( -fn*(LOG(X)-0.693D0)>elim ) THEN
-      CALL XERMSG('SLATEC','DBESK',&
+      CALL XERMSG('DBESK',&
         'OVERFLOW, FNU OR N TOO LARGE OR X TOO SMALL',6,1)
       RETURN
     END IF

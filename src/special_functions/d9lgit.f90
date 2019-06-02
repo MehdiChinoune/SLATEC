@@ -45,7 +45,7 @@ REAL(8) FUNCTION D9LGIT(A,X,Algap1)
     first = .FALSE.
   END IF
   !
-  IF ( X<=0.D0.OR.A<X ) CALL XERMSG('SLATEC','D9LGIT',&
+  IF ( X<=0.D0.OR.A<X ) CALL XERMSG('D9LGIT',&
     'X SHOULD BE GT 0.0 AND LE A',2,2)
   !
   ax = A + X
@@ -61,11 +61,11 @@ REAL(8) FUNCTION D9LGIT(A,X,Algap1)
     s = s + p
     IF ( ABS(p)<eps*s ) GOTO 100
   END DO
-  CALL XERMSG('SLATEC','D9LGIT',&
+  CALL XERMSG('D9LGIT',&
     'NO CONVERGENCE IN 200 TERMS OF CONTINUED FRACTION',3,2)
   !
   100  hstar = 1.0D0 - X*s/a1x
-  IF ( hstar<sqeps ) CALL XERMSG('SLATEC','D9LGIT',&
+  IF ( hstar<sqeps ) CALL XERMSG('D9LGIT',&
     'RESULT LESS THAN HALF PRECISION',1,1)
   !
   D9LGIT = -X - Algap1 - LOG(hstar)

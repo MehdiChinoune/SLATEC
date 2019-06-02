@@ -92,7 +92,7 @@ SUBROUTINE SCHKW(Name,Lociw,Leniw,Locw,Lenw,Ierr,Iter,Err)
     xernam = Name
     WRITE (xern1,'(I8)') Lociw
     WRITE (xern2,'(I8)') Leniw
-    CALL XERMSG('SLATEC','SCHKW',&
+    CALL XERMSG('SCHKW',&
       'In '//xernam//', INTEGER work array too short.  '//&
       'IWORK needs '//xern1//'; have allocated '//xern2,1,1)
   END IF
@@ -104,7 +104,7 @@ SUBROUTINE SCHKW(Name,Lociw,Leniw,Locw,Lenw,Ierr,Iter,Err)
     xernam = Name
     WRITE (xern1,'(I8)') Locw
     WRITE (xern2,'(I8)') Lenw
-    CALL XERMSG('SLATEC','SCHKW',&
+    CALL XERMSG('SCHKW',&
       'In '//xernam//', REAL work array too short.  '//&
       'RWORK needs '//xern1//'; have allocated '//xern2,1,1)
   END IF

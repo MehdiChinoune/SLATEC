@@ -316,21 +316,21 @@ SUBROUTINE DDRIV1(N,T,Y,F,Tout,Mstate,Eps,Work,Lenw,Ierflg)
   IF ( ABS(Mstate)==0.OR.ABS(Mstate)>7 ) THEN
     WRITE (intgr1,'(I8)') Mstate
     Ierflg = 26
-    CALL XERMSG('SLATEC','DDRIV1',&
+    CALL XERMSG('DDRIV1',&
       'Illegal input.  The magnitude of MSTATE, '//intgr1//&
       ', is not in the range 1 to 6 .',Ierflg,1)
     Mstate = SIGN(7,Mstate)
     RETURN
   ELSEIF ( ABS(Mstate)==7 ) THEN
     Ierflg = 999
-    CALL XERMSG('SLATEC','DDRIV1',&
+    CALL XERMSG('DDRIV1',&
       'Illegal input.  The magnitude of MSTATE is 7 .',Ierflg,2)
     RETURN
   END IF
   IF ( N>MXN ) THEN
     WRITE (intgr1,'(I8)') N
     Ierflg = 21
-    CALL XERMSG('SLATEC','DDRIV1',&
+    CALL XERMSG('DDRIV1',&
       'Illegal input.  The number of equations, '//intgr1//&
       ', is greater than the maximum allowed: 200 .',Ierflg,1)
     Mstate = SIGN(7,Mstate)
@@ -350,7 +350,7 @@ SUBROUTINE DDRIV1(N,T,Y,F,Tout,Mstate,Eps,Work,Lenw,Ierflg)
     lnwchk = N*N + 10*N + 250 + leniw
     WRITE (intgr1,'(I8)') lnwchk
     Ierflg = 32
-    CALL XERMSG('SLATEC','DDRIV1',&
+    CALL XERMSG('DDRIV1',&
       'Insufficient storage allocated for the work array.  The required storage is at least '//intgr1//' .',Ierflg,1)
     Mstate = SIGN(7,Mstate)
     RETURN

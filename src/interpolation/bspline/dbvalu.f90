@@ -84,15 +84,15 @@ REAL(8) FUNCTION DBVALU(T,A,N,K,Ideriv,X,Inbv,Work)
   !* FIRST EXECUTABLE STATEMENT  DBVALU
   DBVALU = 0.0D0
   IF ( K<1 ) THEN
-    CALL XERMSG('SLATEC','DBVALU','K DOES NOT SATISFY K.GE.1',2,1)
+    CALL XERMSG('DBVALU','K DOES NOT SATISFY K.GE.1',2,1)
     RETURN
   ELSEIF ( N<K ) THEN
     !
     !
-    CALL XERMSG('SLATEC','DBVALU','N DOES NOT SATISFY N.GE.K',2,1)
+    CALL XERMSG('DBVALU','N DOES NOT SATISFY N.GE.K',2,1)
     RETURN
   ELSEIF ( Ideriv<0.OR.Ideriv>=K ) THEN
-    CALL XERMSG('SLATEC','DBVALU','IDERIV DOES NOT SATISFY 0.LE.IDERIV.LT.K',2,1)
+    CALL XERMSG('DBVALU','IDERIV DOES NOT SATISFY 0.LE.IDERIV.LT.K',2,1)
     RETURN
   ELSE
     kmider = K - Ideriv
@@ -102,13 +102,13 @@ REAL(8) FUNCTION DBVALU(T,A,N,K,Ideriv,X,Inbv,Work)
     km1 = K - 1
     CALL DINTRV(T,N+1,X,Inbv,i,mflag)
     IF ( X<T(K) ) THEN
-      CALL XERMSG('SLATEC','DBVALU',&
+      CALL XERMSG('DBVALU',&
         'X IS N0T GREATER THAN OR EQUAL TO T(K)',2,1)
       RETURN
     ELSE
       IF ( mflag/=0 ) THEN
         IF ( X>T(i) ) THEN
-          CALL XERMSG('SLATEC','DBVALU',&
+          CALL XERMSG('DBVALU',&
             'X IS NOT LESS THAN OR EQUAL TO T(N+1)',2,1)
           RETURN
         ELSE
@@ -116,7 +116,7 @@ REAL(8) FUNCTION DBVALU(T,A,N,K,Ideriv,X,Inbv,Work)
             i = i - 1
             IF ( X/=T(i) ) GOTO 20
           END DO
-          CALL XERMSG('SLATEC','DBVALU',&
+          CALL XERMSG('DBVALU',&
             'A LEFT LIMITING VALUE CANNOT BE OBTAINED AT T(K)',2,1)
           RETURN
         END IF

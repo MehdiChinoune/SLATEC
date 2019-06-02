@@ -42,7 +42,7 @@ SUBROUTINE XERBLA(Srname,Info)
   !   910610  Routine rewritten to serve as an interface between the
   !           Level 2 and Level 3 BLAS routines and the SLATEC error
   !           handler XERMSG.  (BKS)
-  
+
   !
   !     ..    Scalar Arguments ..
   INTEGER Info
@@ -52,7 +52,7 @@ SUBROUTINE XERBLA(Srname,Info)
   !* FIRST EXECUTABLE STATEMENT  XERBLA
   !
   WRITE (xern1,'(I2)') Info
-  CALL XERMSG('SLATEC',Srname,'On entry to '//Srname//' parameter number '//&
+  CALL XERMSG(Srname,'On entry to '//Srname//' parameter number '//&
     xern1//' had an illegal value',Info,1)
   !
   !

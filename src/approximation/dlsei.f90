@@ -401,16 +401,12 @@ SUBROUTINE DLSEI(W,Mdw,Me,Ma,Mg,N,Prgopt,X,Rnorme,Rnorml,Mode,Ws,Ip)
     mapke1, mdeqc, mend, mep1, n1, n2, next, nlink, nopt, np1, ntimes
   LOGICAL :: cov
   CHARACTER(8) :: xern1, xern2, xern3, xern4
-  REAL(8), SAVE :: drelpr
-  !
-  LOGICAL :: first = .TRUE.
+  REAL(8), PARAMETER :: drelpr = D1MACH(4)
   !* FIRST EXECUTABLE STATEMENT  DLSEI
   !
   !     Set the nominal tolerance used in the code for the equality
   !     constraint equations.
   !
-  IF ( first ) drelpr = D1MACH(4)
-  first = .FALSE.
   tau = SQRT(drelpr)
   !
   !     Check that enough storage was allocated in WS(*) and IP(*).
@@ -421,7 +417,7 @@ SUBROUTINE DLSEI(W,Mdw,Me,Ma,Mg,N,Prgopt,X,Rnorme,Rnorml,Mode,Ws,Ip)
     WRITE (xern2,'(I8)') Me
     WRITE (xern3,'(I8)') Ma
     WRITE (xern4,'(I8)') Mg
-    CALL XERMSG('SLATEC','LSEI', &
+    CALL XERMSG('LSEI', &
       'ALL OF THE VARIABLES N, ME, MA, MG MUST BE .GE. 0$$ENTERED ROUTINE WITH$$N  = '//&
       xern1//'$$ME = '//xern2//'$$MA = '//xern3//'$$MG = '//xern4,2,1)
     RETURN
@@ -431,7 +427,7 @@ SUBROUTINE DLSEI(W,Mdw,Me,Ma,Mg,N,Prgopt,X,Rnorme,Rnorml,Mode,Ws,Ip)
     lchk = 2*(Me+N) + MAX(Ma+Mg,N) + (Mg+2)*(N+7)
     IF ( Ip(1)<lchk ) THEN
       WRITE (xern1,'(I8)') lchk
-      CALL XERMSG('SLATEC','DLSEI','INSUFFICIENT STORAGE ALLOCATED FOR WS(*), NEED LW = '//xern1,2,1)
+      CALL XERMSG('DLSEI','INSUFFICIENT STORAGE ALLOCATED FOR WS(*), NEED LW = '//xern1,2,1)
       RETURN
     END IF
   END IF
@@ -440,7 +436,7 @@ SUBROUTINE DLSEI(W,Mdw,Me,Ma,Mg,N,Prgopt,X,Rnorme,Rnorml,Mode,Ws,Ip)
     lchk = Mg + 2*N + 2
     IF ( Ip(2)<lchk ) THEN
       WRITE (xern1,'(I8)') lchk
-      CALL XERMSG('SLATEC','DLSEI','INSUFFICIENT STORAGE ALLOCATED FOR IP(*), NEED LIP = '//xern1,2,1)
+      CALL XERMSG('DLSEI','INSUFFICIENT STORAGE ALLOCATED FOR IP(*), NEED LIP = '//xern1,2,1)
       RETURN
     END IF
   END IF
@@ -457,7 +453,7 @@ SUBROUTINE DLSEI(W,Mdw,Me,Ma,Mg,N,Prgopt,X,Rnorme,Rnorml,Mode,Ws,Ip)
   END IF
   !
   IF ( Mdw<m ) THEN
-    CALL XERMSG('SLATEC','DLSEI','MDW.LT.ME+MA+MG IS AN ERROR',2,1)
+    CALL XERMSG('DLSEI','MDW.LT.ME+MA+MG IS AN ERROR',2,1)
     RETURN
   END IF
   !
@@ -489,7 +485,7 @@ SUBROUTINE DLSEI(W,Mdw,Me,Ma,Mg,N,Prgopt,X,Rnorme,Rnorml,Mode,Ws,Ip)
   last = 1
   link = INT( Prgopt(1) )
   IF ( link==0.OR.link>nlink ) THEN
-    CALL XERMSG('SLATEC','DLSEI','THE OPTION VECTOR IS UNDEFINED',2,1)
+    CALL XERMSG('DLSEI','THE OPTION VECTOR IS UNDEFINED',2,1)
     RETURN
   END IF
   DO
@@ -497,7 +493,7 @@ SUBROUTINE DLSEI(W,Mdw,Me,Ma,Mg,N,Prgopt,X,Rnorme,Rnorml,Mode,Ws,Ip)
     IF ( link>1 ) THEN
       ntimes = ntimes + 1
       IF ( ntimes>nopt ) THEN
-        CALL XERMSG('SLATEC','DLSEI',&
+        CALL XERMSG('DLSEI',&
           'THE LINKS IN THE OPTION VECTOR ARE CYCLING.',2,1)
         RETURN
       END IF
@@ -519,7 +515,7 @@ SUBROUTINE DLSEI(W,Mdw,Me,Ma,Mg,N,Prgopt,X,Rnorme,Rnorml,Mode,Ws,Ip)
       !
       next = INT( Prgopt(link) )
       IF ( next<=0.OR.next>nlink ) THEN
-        CALL XERMSG('SLATEC','DLSEI','THE OPTION VECTOR IS UNDEFINED',2,1)
+        CALL XERMSG('DLSEI','THE OPTION VECTOR IS UNDEFINED',2,1)
         RETURN
       END IF
       !
@@ -533,7 +529,7 @@ SUBROUTINE DLSEI(W,Mdw,Me,Ma,Mg,N,Prgopt,X,Rnorme,Rnorml,Mode,Ws,Ip)
     END DO
     !
     IF ( cov.AND.Mdw<N ) THEN
-      CALL XERMSG('SLATEC','DLSEI',&
+      CALL XERMSG('DLSEI',&
         'MDW .LT. N WHEN COV MATRIX NEEDED, IS AN ERROR',2,1)
       RETURN
     END IF

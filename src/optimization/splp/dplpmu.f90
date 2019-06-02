@@ -185,7 +185,7 @@ SUBROUTINE DPLPMU(Mrelas,Nvars,Lmx,Lbm,Nredc,Info,Ienter,Ileave,Iopt,Npp,&
       GOTO 1000
     ELSE
       nerr = 26
-      CALL XERMSG('SLATEC','DPLPMU',&
+      CALL XERMSG('DPLPMU',&
         'IN DSPLP, MOVED TO A SINGULAR POINT. THIS SHOULD NOT HAPPEN.',nerr,Iopt)
       Info = -nerr
       RETURN

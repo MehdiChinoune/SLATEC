@@ -93,7 +93,7 @@ SUBROUTINE DPOPT(Prgopt,Mrelas,Nvars,Info,Csc,Ibasis,Ropt,Intopt,Lopt)
       !     THE CHECKS FOR SMALL OR LARGE VALUES OF NEXT ARE TO PREVENT
       !     WORKING WITH UNDEFINED DATA.
       nerr = 14
-      CALL XERMSG('SLATEC','DPOPT',&
+      CALL XERMSG('DPOPT',&
         'IN DSPLP, THE USER OPTION ARRAY HAS UNDEFINED DATA.',nerr,iopt)
       Info = -nerr
       RETURN
@@ -111,7 +111,7 @@ SUBROUTINE DPOPT(Prgopt,Mrelas,Nvars,Info,Csc,Ibasis,Ropt,Intopt,Lopt)
             i = i + 1
           ELSE
             nerr = 16
-            CALL XERMSG('SLATEC','DPOPT',&
+            CALL XERMSG('DPOPT',&
               'IN DSPLP, AN INDEX OF USER-SUPPLIED BASIS IS OUT OF RANGE.'&
               ,nerr,iopt)
             Info = -nerr
@@ -125,7 +125,7 @@ SUBROUTINE DPOPT(Prgopt,Mrelas,Nvars,Info,Csc,Ibasis,Ropt,Intopt,Lopt)
       IF ( sizeup ) THEN
         IF ( asmall<=zero.OR.abig<asmall ) THEN
           nerr = 17
-          CALL XERMSG('SLATEC','DPOPT',&
+          CALL XERMSG('DPOPT',&
             'IN DSPLP, SIZE PARAMETERS FOR MATRIX MUST BE SMALLEST AND LARGEST MAGNITUDES OF NONZERO ENTRIES.',nerr,iopt)
           Info = -nerr
           RETURN
@@ -166,7 +166,7 @@ SUBROUTINE DPOPT(Prgopt,Mrelas,Nvars,Info,Csc,Ibasis,Ropt,Intopt,Lopt)
         RETURN
       ELSE
         nerr = 18
-        CALL XERMSG('SLATEC','DPOPT',&
+        CALL XERMSG('DPOPT',&
           'IN DSPLP, THE NUMBER OF REVISED SIMPLEX STEPS BETWEEN CHECK-POINTS MUST BE POSITIVE.',nerr,iopt)
         Info = -nerr
         RETURN
@@ -322,14 +322,14 @@ SUBROUTINE DPOPT(Prgopt,Mrelas,Nvars,Info,Csc,Ibasis,Ropt,Intopt,Lopt)
       lprg = lprg + lds
     ELSE
       nerr = 15
-      CALL XERMSG('SLATEC','DPOPT',&
+      CALL XERMSG('DPOPT',&
         'IN DSPLP, OPTION ARRAY PROCESSING IS CYCLING.',nerr,iopt)
       Info = -nerr
       RETURN
     END IF
   END DO
   nerr = 19
-  CALL XERMSG('SLATEC','DPOPT',&
+  CALL XERMSG('DPOPT',&
     'IN DSPLP, FILE NUMBERS FOR SAVED DATA AND MATRIX PAGES MUST BE POSITIVE AND NOT EQUAL.',nerr,iopt)
   Info = -nerr
   RETURN

@@ -190,7 +190,7 @@ SUBROUTINE SNBIR(Abe,Lda,N,Ml,Mu,V,Itask,Ind,Work,Iwork)
     Ind = -1
     WRITE (xern1,'(I8)') Lda
     WRITE (xern2,'(I8)') N
-    CALL XERMSG('SLATEC','SNBIR','LDA = '//xern1//' IS LESS THAN N = '//&
+    CALL XERMSG('SNBIR','LDA = '//xern1//' IS LESS THAN N = '//&
       xern2,-1,1)
     RETURN
   END IF
@@ -198,28 +198,28 @@ SUBROUTINE SNBIR(Abe,Lda,N,Ml,Mu,V,Itask,Ind,Work,Iwork)
   IF ( N<=0 ) THEN
     Ind = -2
     WRITE (xern1,'(I8)') N
-    CALL XERMSG('SLATEC','SNBIR','N = '//xern1//' IS LESS THAN 1',-2,1)
+    CALL XERMSG('SNBIR','N = '//xern1//' IS LESS THAN 1',-2,1)
     RETURN
   END IF
   !
   IF ( Itask<1 ) THEN
     Ind = -3
     WRITE (xern1,'(I8)') Itask
-    CALL XERMSG('SLATEC','SNBIR','ITASK = '//xern1//' IS LESS THAN 1',-3,1)
+    CALL XERMSG('SNBIR','ITASK = '//xern1//' IS LESS THAN 1',-3,1)
     RETURN
   END IF
   !
   IF ( Ml<0.OR.Ml>=N ) THEN
     Ind = -5
     WRITE (xern1,'(I8)') Ml
-    CALL XERMSG('SLATEC','SNBIR','ML = '//xern1//' IS OUT OF RANGE',-5,1)
+    CALL XERMSG('SNBIR','ML = '//xern1//' IS OUT OF RANGE',-5,1)
     RETURN
   END IF
   !
   IF ( Mu<0.OR.Mu>=N ) THEN
     Ind = -6
     WRITE (xern1,'(I8)') Mu
-    CALL XERMSG('SLATEC','SNBIR','MU = '//xern1//' IS OUT OF RANGE',-6,1)
+    CALL XERMSG('SNBIR','MU = '//xern1//' IS OUT OF RANGE',-6,1)
     RETURN
   END IF
   !
@@ -241,7 +241,7 @@ SUBROUTINE SNBIR(Abe,Lda,N,Ml,Mu,V,Itask,Ind,Work,Iwork)
     !
     IF ( info/=0 ) THEN
       Ind = -4
-      CALL XERMSG('SLATEC','SNBIR','SINGULAR MATRIX A - NO SOLUTION',-4,1)
+      CALL XERMSG('SNBIR','SINGULAR MATRIX A - NO SOLUTION',-4,1)
       RETURN
     END IF
   END IF
@@ -283,6 +283,6 @@ SUBROUTINE SNBIR(Abe,Lda,N,Ml,Mu,V,Itask,Ind,Work,Iwork)
   Ind = INT( -LOG10(MAX(R1MACH(4),dnorm/xnorm)) )
   IF ( Ind<=0 ) THEN
     Ind = -10
-    CALL XERMSG('SLATEC','SNBIR','SOLUTION MAY HAVE NO SIGNIFICANCE',-10,0)
+    CALL XERMSG('SNBIR','SOLUTION MAY HAVE NO SIGNIFICANCE',-10,0)
   END IF
 END SUBROUTINE SNBIR

@@ -266,10 +266,10 @@ SUBROUTINE DXNRMP(Nu,Mu1,Mu2,Darg,Mode,Dpn,Ipn,Isig,Ierror)
   !
   !          ERROR PRINTOUTS AND TERMINATION.
   !
-  300  CALL XERMSG('SLATEC','DXNRMP','NU, MU1, MU2 or MODE not valid',212,1)
+  300  CALL XERMSG('DXNRMP','NU, MU1, MU2 or MODE not valid',212,1)
   Ierror = 212
   RETURN
-  400  CALL XERMSG('SLATEC','DXNRMP','DARG out of range',213,1)
+  400  CALL XERMSG('DXNRMP','DARG out of range',213,1)
   Ierror = 213
   RETURN
   !

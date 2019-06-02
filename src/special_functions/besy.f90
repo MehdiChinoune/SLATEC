@@ -88,17 +88,17 @@ SUBROUTINE BESY(X,Fnu,N,Y)
     !
     !
     !
-    CALL XERMSG('SLATEC','BESY','ORDER, FNU, LESS THAN ZERO',2,1)
+    CALL XERMSG('BESY','ORDER, FNU, LESS THAN ZERO',2,1)
     RETURN
   ELSEIF ( X<=0.0E0 ) THEN
-    CALL XERMSG('SLATEC','BESY','X LESS THAN OR EQUAL TO ZERO',2,1)
+    CALL XERMSG('BESY','X LESS THAN OR EQUAL TO ZERO',2,1)
     RETURN
   ELSEIF ( X<xlim ) THEN
-    CALL XERMSG('SLATEC','BESY',&
+    CALL XERMSG('BESY',&
       'OVERFLOW, FNU OR N TOO LARGE OR X TOO SMALL',6,1)
     RETURN
   ELSEIF ( N<1 ) THEN
-    CALL XERMSG('SLATEC','BESY','N LESS THAN ONE',2,1)
+    CALL XERMSG('BESY','N LESS THAN ONE',2,1)
     RETURN
   ELSE
     !
@@ -114,7 +114,7 @@ SUBROUTINE BESY(X,Fnu,N,Y)
       !     OVERFLOW TEST
       IF ( fn<=1.0E0 ) GOTO 200
       IF ( -fn*(LOG(X)-0.693E0)<=elim ) GOTO 200
-      CALL XERMSG('SLATEC','BESY',&
+      CALL XERMSG('BESY',&
         'OVERFLOW, FNU OR N TOO LARGE OR X TOO SMALL',6,1)
       RETURN
     ELSE
@@ -129,7 +129,7 @@ SUBROUTINE BESY(X,Fnu,N,Y)
         azn = LOG((1.0E0+rann)/xxn) - rann
         cn = fn*azn
         IF ( cn>elim ) THEN
-          CALL XERMSG('SLATEC','BESY',&
+          CALL XERMSG('BESY',&
             'OVERFLOW, FNU OR N TOO LARGE OR X TOO SMALL',6,1)
           RETURN
         END IF
@@ -170,7 +170,7 @@ SUBROUTINE BESY(X,Fnu,N,Y)
         flgjy = -1.0E0
         CALL ASYJY(YAIRY,X,Fnu,flgjy,nn,Y,wk,iflw)
         IF ( iflw/=0 ) THEN
-          CALL XERMSG('SLATEC','BESY',&
+          CALL XERMSG('BESY',&
             'OVERFLOW, FNU OR N TOO LARGE OR X TOO SMALL',6,1)
           RETURN
         ELSE

@@ -447,7 +447,7 @@ SUBROUTINE DBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
   !
   IF ( Minput<=0 ) THEN
     WRITE (xern1,'(I8)') Minput
-    CALL XERMSG('SLATEC','DBOLSM','THE NUMBER OF ROWS = '//xern1//&
+    CALL XERMSG('DBOLSM','THE NUMBER OF ROWS = '//xern1//&
       ' MUST BE POSITIVE.',31,1)
     Mode = -31
     RETURN
@@ -455,7 +455,7 @@ SUBROUTINE DBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
   !
   IF ( Ncols<=0 ) THEN
     WRITE (xern1,'(I8)') Ncols
-    CALL XERMSG('SLATEC','DBOLSM','THE NUMBER OF COLUMNS = '//xern1//&
+    CALL XERMSG('DBOLSM','THE NUMBER OF COLUMNS = '//xern1//&
       ' MUST BE POSITIVE.',32,1)
     Mode = -32
     RETURN
@@ -464,7 +464,7 @@ SUBROUTINE DBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
   IF ( Mdw<Minput ) THEN
     WRITE (xern1,'(I8)') Mdw
     WRITE (xern2,'(I8)') Minput
-    CALL XERMSG('SLATEC','DBOLSM','THE ROW DIMENSION OF W(,) = '//xern1//&
+    CALL XERMSG('DBOLSM','THE ROW DIMENSION OF W(,) = '//xern1//&
       ' MUST BE .GE. THE NUMBER OF ROWS = '//xern2,33,1)
     Mode = -33
     RETURN
@@ -476,7 +476,7 @@ SUBROUTINE DBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
     IF ( Ind(j)<1.OR.Ind(j)>4 ) THEN
       WRITE (xern1,'(I8)') j
       WRITE (xern2,'(I8)') Ind(j)
-      CALL XERMSG('SLATEC','DBOLSM','FOR J = '//xern1//&
+      CALL XERMSG('DBOLSM','FOR J = '//xern1//&
         ' THE CONSTRAINT INDICATOR MUST BE 1-4',34,1)
       Mode = -34
       RETURN
@@ -489,7 +489,7 @@ SUBROUTINE DBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
         WRITE (xern1,'(I8)') j
         WRITE (xern3,'(1PD15.6)') Bl(j)
         WRITE (xern4,'(1PD15.6)') Bu(j)
-        CALL XERMSG('SLATEC','DBOLSM','FOR J = '//xern1//&
+        CALL XERMSG('DBOLSM','FOR J = '//xern1//&
           ' THE LOWER BOUND = '//xern3//&
           ' IS .GT. THE UPPER BOUND = '//xern4,35,1)
         Mode = -35
@@ -504,7 +504,7 @@ SUBROUTINE DBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
     IF ( Ibasis(j)<1.OR.Ibasis(j)>Ncols ) THEN
       WRITE (xern1,'(I8)') Ibasis(j)
       WRITE (xern2,'(I8)') Ncols
-      CALL XERMSG('SLATEC','DBOLSM','THE INPUT ORDER OF COLUMNS = '//xern1//&
+      CALL XERMSG('DBOLSM','THE INPUT ORDER OF COLUMNS = '//xern1//&
         ' IS NOT BETWEEN 1 AND NCOLS = '//xern2,36,1)
       Mode = -36
       RETURN
@@ -513,7 +513,7 @@ SUBROUTINE DBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
     IF ( Ibb(j)<=0 ) THEN
       WRITE (xern1,'(I8)') j
       WRITE (xern2,'(I8)') Ibb(j)
-      CALL XERMSG('SLATEC','DBOLSM',&
+      CALL XERMSG('DBOLSM',&
         'THE BOUND POLARITY FLAG IN COMPONENT J = '//xern1//&
         ' MUST BE POSITIVE.$$NOW = '//xern2,37,1)
       Mode = -37
@@ -635,7 +635,7 @@ SUBROUTINE DBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
         IF ( ioff<=0 ) THEN
           WRITE (xern1,'(I8)') ioff
           WRITE (xern2,'(I8)') Ncols
-          CALL XERMSG('SLATEC','DBOLSM','THE OFFSET = '//xern1//&
+          CALL XERMSG('DBOLSM','THE OFFSET = '//xern1//&
             ' BEYOND POSITION NCOLS = '//xern2//&
             ' MUST BE POSITIVE FOR OPTION NUMBER 2.',24,1)
           Mode = -24
@@ -646,7 +646,7 @@ SUBROUTINE DBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
         IF ( tolind<D1MACH(4) ) THEN
           WRITE (xern3,'(1PD15.6)') tolind
           WRITE (xern4,'(1PD15.6)') D1MACH(4)
-          CALL XERMSG('SLATEC','DBOLSM',&
+          CALL XERMSG('DBOLSM',&
             'THE TOLERANCE FOR RANK DETERMINATION = '//xern3//&
             ' IS LESS THAN MACHINE PRECISION = '//xern4,25,0)
           Mode = -25
@@ -663,7 +663,7 @@ SUBROUTINE DBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
         IF ( ioff<=0 ) THEN
           WRITE (xern1,'(I8)') ioff
           WRITE (xern2,'(I8)') Ncols
-          CALL XERMSG('SLATEC','DBOLSM','THE OFFSET = '//xern1//&
+          CALL XERMSG('DBOLSM','THE OFFSET = '//xern1//&
             ' BEYOND POSITION NCOLS = '//xern2//&
             ' MUST BE POSITIVE FOR OPTION NUMBER 3.',26,1)
           Mode = -26
@@ -673,7 +673,7 @@ SUBROUTINE DBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
         tolsze = X(Ncols+ioff)
         IF ( tolsze<=ZERO ) THEN
           WRITE (xern3,'(1PD15.6)') tolsze
-          CALL XERMSG('SLATEC','DBOLSM','THE RECIPROCAL OF THE BLOW-UP FACTOR&
+          CALL XERMSG('DBOLSM','THE RECIPROCAL OF THE BLOW-UP FACTOR&
             & FOR REJECTING VARIABLES MUST BE POSITIVE.$$NOW = '//xern3,27,1)
           Mode = -27
           RETURN
@@ -688,7 +688,7 @@ SUBROUTINE DBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
         itmax = Iopt(lp+2)
         IF ( itmax<=0 ) THEN
           WRITE (xern1,'(I8)') itmax
-          CALL XERMSG('SLATEC','DBOLSM',&
+          CALL XERMSG('DBOLSM',&
             'THE MAXIMUM NUMBER OF ITERATIONS = '//xern1//&
             ' MUST BE POSITIVE.',28,1)
           Mode = -28
@@ -705,7 +705,7 @@ SUBROUTINE DBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
         IF ( ioff<=0 ) THEN
           WRITE (xern1,'(I8)') ioff
           WRITE (xern2,'(I8)') Ncols
-          CALL XERMSG('SLATEC','DBOLSM','THE OFFSET = '//xern1//&
+          CALL XERMSG('DBOLSM','THE OFFSET = '//xern1//&
             ' BEYOND POSITION NCOLS = '//xern2//&
             ' MUST BE POSITIVE FOR OPTION NUMBER 5.',29,1)
           Mode = -29
@@ -715,7 +715,7 @@ SUBROUTINE DBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
         fac = X(Ncols+ioff)
         IF ( fac<ZERO ) THEN
           WRITE (xern3,'(1PD15.6)') fac
-          CALL XERMSG('SLATEC','DBOLSM',&
+          CALL XERMSG('DBOLSM',&
             'THE FACTOR (NCOLS/MINPUT) WHERE PRE-TRIANGULARIZING IS PERFORMED&
             & MUST BE NON-NEGATIVE.$$NOW = '//xern3,30,0)
           Mode = -30
@@ -740,7 +740,7 @@ SUBROUTINE DBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
         WRITE (xern1,'(I8)') mval
         WRITE (xern2,'(I8)') Minput
         WRITE (xern3,'(1PD15.6)') wt
-        CALL XERMSG('SLATEC','DBOLSM',&
+        CALL XERMSG('DBOLSM',&
           'THE ROW SEPARATOR TO APPLY WEIGHTING ('//xern1//&
           ') MUST LIE BETWEEN 0 AND MINPUT = '//xern2//&
           '.$$WEIGHT = '//xern3//' MUST BE POSITIVE.',38,0)
@@ -756,7 +756,7 @@ SUBROUTINE DBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
       lds = 2
     ELSE
       WRITE (xern1,'(I8)') ip
-      CALL XERMSG('SLATEC','DBOLSM','THE OPTION NUMBER = '//xern1//&
+      CALL XERMSG('DBOLSM','THE OPTION NUMBER = '//xern1//&
         ' IS NOT DEFINED.',23,1)
       Mode = -23
       RETURN
@@ -766,7 +766,7 @@ SUBROUTINE DBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
   100  iter = iter + 1
   IF ( iter>itmax ) THEN
     WRITE (xern1,'(I8)') itmax
-    CALL XERMSG('SLATEC','DBOLSM','MORE THAN ITMAX = '//xern1//&
+    CALL XERMSG('DBOLSM','MORE THAN ITMAX = '//xern1//&
       ' ITERATIONS SOLVING BOUNDED LEAST SQUARES PROBLEM.',22,1)
     Mode = -22
     !

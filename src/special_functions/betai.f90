@@ -56,10 +56,10 @@ REAL FUNCTION BETAI(X,Pin,Qin)
     first = .FALSE.
   END IF
   !
-  IF ( X<0..OR.X>1.0 ) CALL XERMSG('SLATEC','BETAI',&
+  IF ( X<0..OR.X>1.0 ) CALL XERMSG('BETAI',&
     'X IS NOT IN THE RANGE (0,1)',1,2)
   IF ( Pin<=0..OR.Qin<=0. )&
-    CALL XERMSG('SLATEC','BETAI','P AND/OR Q IS LE ZERO',2,2)
+    CALL XERMSG('BETAI','P AND/OR Q IS LE ZERO',2,2)
   !
   y = X
   p = Pin

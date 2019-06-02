@@ -70,14 +70,14 @@ SUBROUTINE SSORT(X,Y,N,Kflag)
   !* FIRST EXECUTABLE STATEMENT  SSORT
   nn = N
   IF ( nn<1 ) THEN
-    CALL XERMSG('SLATEC','SSORT',&
+    CALL XERMSG('SSORT',&
       'The number of values to be sorted is not positive.',1,1)
     RETURN
   END IF
   !
   kk = ABS(Kflag)
   IF ( kk/=1.AND.kk/=2 ) THEN
-    CALL XERMSG('SLATEC','SSORT',&
+    CALL XERMSG('SSORT',&
       'The sort control parameter, K, is not 2, 1, -1, or -2.',2,1)
     RETURN
   END IF

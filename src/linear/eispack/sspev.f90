@@ -95,9 +95,9 @@ SUBROUTINE SSPEV(A,N,E,V,Ldv,Work,Job,Info)
   INTEGER i, Info, j, Ldv, m, N
   REAL A(N*(N+1)/2), E(N), V(Ldv,N), Work(2*N)
   !* FIRST EXECUTABLE STATEMENT  SSPEV
-  IF ( N>Ldv ) CALL XERMSG('SLATEC','SSPEV','N .GT. LDV.',1,1)
+  IF ( N>Ldv ) CALL XERMSG('SSPEV','N .GT. LDV.',1,1)
   IF ( N>Ldv ) RETURN
-  IF ( N<1 ) CALL XERMSG('SLATEC','SSPEV','N .LT. 1',2,1)
+  IF ( N<1 ) CALL XERMSG('SSPEV','N .LT. 1',2,1)
   IF ( N<1 ) RETURN
   !
   !       CHECK N=1 CASE

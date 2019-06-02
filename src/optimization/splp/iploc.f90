@@ -42,7 +42,7 @@ INTEGER FUNCTION IPLOC(Locc,Sx,Ix)
   INTEGER :: ipage, itemp, k, key, lmx, lmxm1, lpg, np
   !* FIRST EXECUTABLE STATEMENT  IPLOC
   IF ( Locc<=0 ) THEN
-    CALL XERMSG('SLATEC','IPLOC',&
+    CALL XERMSG('IPLOC',&
       'A value of LOC, the first argument, .LE. 0 was encountered',55,1)
     IPLOC = 0
     RETURN

@@ -86,16 +86,8 @@ SUBROUTINE DWNLSM(W,Mdw,Mme,Ma,N,L,Prgopt,X,Rnorm,Mode,Ipivot,Itype,Wd,H,&
     sparam(5), t, tau, wmax, z2, zz
   LOGICAL :: done, feasbl, hitcon, pos
   !
-  REAL(8), SAVE :: drelpr
-  LOGICAL :: first = .TRUE.
+  REAL(8), PARAMETER :: drelpr = D1MACH(4)
   !* FIRST EXECUTABLE STATEMENT  DWNLSM
-  !
-  !     Initialize variables.
-  !     DRELPR is the precision for the particular machine
-  !     being used.  This logic avoids resetting it every entry.
-  !
-  IF ( first ) drelpr = D1MACH(4)
-  first = .FALSE.
   !
   !     Set the nominal tolerance used in the code.
   !
@@ -129,7 +121,7 @@ SUBROUTINE DWNLSM(W,Mdw,Mme,Ma,N,L,Prgopt,X,Rnorm,Mode,Ipivot,Itype,Wd,H,&
   last = 1
   link = INT( Prgopt(1) )
   IF ( link<=0.OR.link>nlink ) THEN
-    CALL XERMSG('SLATEC','DWNLSM',&
+    CALL XERMSG('DWNLSM',&
       'IN DWNNLS, THE OPTION VECTOR IS UNDEFINED',3,1)
     RETURN
   END IF
@@ -138,7 +130,7 @@ SUBROUTINE DWNLSM(W,Mdw,Mme,Ma,N,L,Prgopt,X,Rnorm,Mode,Ipivot,Itype,Wd,H,&
     IF ( link>1 ) THEN
       ntimes = ntimes + 1
       IF ( ntimes>nopt ) THEN
-        CALL XERMSG('SLATEC','DWNLSM',&
+        CALL XERMSG('DWNLSM',&
           'IN DWNNLS, THE LINKS IN THE OPTION VECTOR ARE CYCLING.',3,1)
         RETURN
       END IF
@@ -158,7 +150,7 @@ SUBROUTINE DWNLSM(W,Mdw,Mme,Ma,N,L,Prgopt,X,Rnorm,Mode,Ipivot,Itype,Wd,H,&
       !
       next = INT( Prgopt(link) )
       IF ( next<=0.OR.next>nlink ) THEN
-        CALL XERMSG('SLATEC','DWNLSM',&
+        CALL XERMSG('DWNLSM',&
           'IN DWNNLS, THE OPTION VECTOR IS UNDEFINED',3,1)
         RETURN
       END IF

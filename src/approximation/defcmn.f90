@@ -56,19 +56,19 @@ SUBROUTINE DEFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Mdein,Mdeout,&
   Coeff(1:n) = 0.D0
   Mdeout = -1
   IF ( Nord<1.OR.Nord>20 ) THEN
-    CALL XERMSG('SLATEC','DEFCMN',&
+    CALL XERMSG('DEFCMN',&
       'IN DEFC, THE ORDER OF THE B-SPLINE MUST BE 1 THRU 20.',3,1)
     RETURN
   END IF
   !
   IF ( Nbkpt<2*Nord ) THEN
-    CALL XERMSG('SLATEC','DEFCMN',&
+    CALL XERMSG('DEFCMN',&
       'IN DEFC, THE NUMBER OF KNOTS MUST BE AT LEAST TWICE THE B-SPLINE ORDER.',4,1)
     RETURN
   END IF
   !
   IF ( Ndata<0 ) THEN
-    CALL XERMSG('SLATEC','DEFCMN',&
+    CALL XERMSG('DEFCMN',&
       'IN DEFC, THE NUMBER OF DATA POINTS MUST BE NONNEGATIVE.',5,1)
     RETURN
   END IF
@@ -78,7 +78,7 @@ SUBROUTINE DEFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Mdein,Mdeout,&
   IF ( Lw<nb ) THEN
     WRITE (xern1,'(I8)') nb
     WRITE (xern2,'(I8)') Lw
-    CALL XERMSG('SLATEC','DEFCMN','IN DEFC, INSUFFICIENT STORAGE FOR W(*).&
+    CALL XERMSG('DEFCMN','IN DEFC, INSUFFICIENT STORAGE FOR W(*).&
       & CHECK FORMULA THAT READS LW.GE. ... .  NEED = '&
       //xern1//' GIVEN = '//xern2,6,1)
     Mdeout = -1
@@ -86,7 +86,7 @@ SUBROUTINE DEFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Mdein,Mdeout,&
   END IF
   !
   IF ( Mdein/=1.AND.Mdein/=2 ) THEN
-    CALL XERMSG('SLATEC','DEFCMN',&
+    CALL XERMSG('DEFCMN',&
       'IN DEFC, INPUT VALUE OF MDEIN MUST BE 1-2.',7,1)
     RETURN
   END IF

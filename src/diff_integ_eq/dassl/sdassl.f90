@@ -984,7 +984,7 @@ SUBROUTINE SDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
     IF ( Neq<=0 ) THEN
       !
       WRITE (xern1,'(I8)') Neq
-      CALL XERMSG('SLATEC','SDASSL','NEQ = '//xern1//' .LE. 0',2,1)
+      CALL XERMSG('SDASSL','NEQ = '//xern1//' .LE. 0',2,1)
       GOTO 1200
     ELSE
       !
@@ -995,7 +995,7 @@ SUBROUTINE SDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
         IF ( mxord<1.OR.mxord>5 ) THEN
           !
           WRITE (xern1,'(I8)') mxord
-          CALL XERMSG('SLATEC','SDASSL','MAXORD = '//xern1//' NOT IN RANGE',3,1)
+          CALL XERMSG('SDASSL','MAXORD = '//xern1//' NOT IN RANGE',3,1)
           GOTO 1200
         END IF
       END IF
@@ -1013,13 +1013,13 @@ SUBROUTINE SDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
       ELSEIF ( Iwork(LML)<0.OR.Iwork(LML)>=Neq ) THEN
         !
         WRITE (xern1,'(I8)') Iwork(LML)
-        CALL XERMSG('SLATEC','SDASSL','ML = '//xern1//&
+        CALL XERMSG('SDASSL','ML = '//xern1//&
           ' ILLEGAL.  EITHER .LT. 0 OR .GT. NEQ',17,1)
         GOTO 1200
       ELSEIF ( Iwork(LMU)<0.OR.Iwork(LMU)>=Neq ) THEN
         !
         WRITE (xern1,'(I8)') Iwork(LMU)
-        CALL XERMSG('SLATEC','SDASSL','MU = '//xern1//&
+        CALL XERMSG('SDASSL','MU = '//xern1//&
           ' ILLEGAL.  EITHER .LT. 0 OR .GT. NEQ',18,1)
         GOTO 1200
       ELSE
@@ -1042,14 +1042,14 @@ SUBROUTINE SDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
         !
         WRITE (xern1,'(I8)') lenrw
         WRITE (xern2,'(I8)') Lrw
-        CALL XERMSG('SLATEC','SDASSL','RWORK LENGTH NEEDED, LENRW = '//&
+        CALL XERMSG('SDASSL','RWORK LENGTH NEEDED, LENRW = '//&
           xern1//', EXCEEDS LRW = '//xern2,4,1)
         GOTO 1200
       ELSEIF ( Liw<leniw ) THEN
         !
         WRITE (xern1,'(I8)') leniw
         WRITE (xern2,'(I8)') Liw
-        CALL XERMSG('SLATEC','SDASSL','IWORK LENGTH NEEDED, LENIW = '//&
+        CALL XERMSG('SDASSL','IWORK LENGTH NEEDED, LENIW = '//&
           xern1//', EXCEEDS LIW = '//xern2,5,1)
         GOTO 1200
       ELSE
@@ -1063,7 +1063,7 @@ SUBROUTINE SDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
           IF ( hmax<=0.0E0 ) THEN
             !
             WRITE (xern3,'(1P,E15.6)') hmax
-            CALL XERMSG('SLATEC','SDASSL','HMAX = '//xern3//' .LT. 0.0',10,1)
+            CALL XERMSG('SDASSL','HMAX = '//xern3//' .LT. 0.0',10,1)
             GOTO 1200
           END IF
         END IF
@@ -1095,7 +1095,7 @@ SUBROUTINE SDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
     !     APPROPRIATE ACTION WAS NOT TAKEN. THIS
     !     IS A FATAL ERROR.
     WRITE (xern1,'(I8)') Idid
-    CALL XERMSG('SLATEC','SDASSL',&
+    CALL XERMSG('SDASSL',&
       'THE LAST STEP TERMINATED WITH A NEGATIVE VALUE OF IDID = '&
       //xern1//' AND NO APPROPRIATE ACTION WAS TAKEN.  RUN TERMINATED',-998,2)
     RETURN
@@ -1121,7 +1121,7 @@ SUBROUTINE SDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
   END DO
   IF ( nzflg==0 ) THEN
     !
-    CALL XERMSG('SLATEC','SDASSL','ALL ELEMENTS OF RTOL AND ATOL ARE ZERO',8,1)
+    CALL XERMSG('SDASSL','ALL ELEMENTS OF RTOL AND ATOL ARE ZERO',8,1)
     GOTO 1200
   ELSE
     !
@@ -1247,7 +1247,7 @@ SUBROUTINE SDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
         !
         WRITE (xern3,'(1P,E15.6)') Tout
         WRITE (xern4,'(1P,E15.6)') T
-        CALL XERMSG('SLATEC','SDASSL','TOUT = '//xern3//&
+        CALL XERMSG('SDASSL','TOUT = '//xern3//&
           ' TOO CLOSE TO T = '//xern4//' TO START INTEGRATION',14,1)
         GOTO 1200
       ELSE
@@ -1266,7 +1266,7 @@ SUBROUTINE SDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
           IF ( (Tout-T)*ho<0.0E0 ) GOTO 800
           IF ( ho==0.0E0 ) THEN
             !
-            CALL XERMSG('SLATEC','SDASSL','INFO(8)=1 AND H0=0.0',12,1)
+            CALL XERMSG('SDASSL','INFO(8)=1 AND H0=0.0',12,1)
             GOTO 1200
           END IF
         END IF
@@ -1381,13 +1381,13 @@ SUBROUTINE SDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
         !
         !     TOO MUCH ACCURACY FOR MACHINE PRECISION
         WRITE (xern3,'(1P,E15.6)') tn
-        CALL XERMSG('SLATEC','SDASSL','AT T = '//xern3//&
+        CALL XERMSG('SDASSL','AT T = '//xern3//&
           ' TOO MUCH ACCURACY REQUESTED FOR PRECISION OF MACHINE. RTOL AND ATOL WERE INCREASED TO APPROPRIATE VALUES',Idid,1)
       CASE (3)
         !
         !     WT(I) .LE. 0.0 FOR SOME I (NOT AT START OF PROBLEM)
         WRITE (xern3,'(1P,E15.6)') tn
-        CALL XERMSG('SLATEC','SDASSL','AT T = '//xern3//&
+        CALL XERMSG('SDASSL','AT T = '//xern3//&
           ' SOME ELEMENT OF WT HAS BECOME .LE. 0.0',Idid,1)
       CASE (4,5)
       CASE (6)
@@ -1395,56 +1395,56 @@ SUBROUTINE SDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
         !     ERROR TEST FAILED REPEATEDLY OR WITH H=HMIN
         WRITE (xern3,'(1P,E15.6)') tn
         WRITE (xern4,'(1P,E15.6)') h
-        CALL XERMSG('SLATEC','SDASSL','AT T = '//xern3//' AND STEPSIZE H = '//&
+        CALL XERMSG('SDASSL','AT T = '//xern3//' AND STEPSIZE H = '//&
           xern4//' THE ERROR TEST FAILED REPEATEDLY OR WITH ABS(H)=HMIN',Idid,1)
       CASE (7)
         !
         !     CORRECTOR CONVERGENCE FAILED REPEATEDLY OR WITH H=HMIN
         WRITE (xern3,'(1P,E15.6)') tn
         WRITE (xern4,'(1P,E15.6)') h
-        CALL XERMSG('SLATEC','SDASSL','AT T = '//xern3//' AND STEPSIZE H = '//xern4//&
+        CALL XERMSG('SDASSL','AT T = '//xern3//' AND STEPSIZE H = '//xern4//&
           ' THE CORRECTOR FAILED TO CONVERGE REPEATEDLY OR WITH ABS(H)=HMIN',Idid,1)
       CASE (8)
         !
         !     THE ITERATION MATRIX IS SINGULAR
         WRITE (xern3,'(1P,E15.6)') tn
         WRITE (xern4,'(1P,E15.6)') h
-        CALL XERMSG('SLATEC','SDASSL','AT T = '//xern3//' AND STEPSIZE H = '//&
+        CALL XERMSG('SDASSL','AT T = '//xern3//' AND STEPSIZE H = '//&
           xern4//' THE ITERATION MATRIX IS SINGULAR',Idid,1)
       CASE (9)
         !
         !     CORRECTOR FAILURE PRECEDED BY ERROR TEST FAILURES.
         WRITE (xern3,'(1P,E15.6)') tn
         WRITE (xern4,'(1P,E15.6)') h
-        CALL XERMSG('SLATEC','SDASSL','AT T = '//xern3//' AND STEPSIZE H = '//xern4//&
+        CALL XERMSG('SDASSL','AT T = '//xern3//' AND STEPSIZE H = '//xern4//&
           ' THE CORRECTOR COULD NOT CONVERGE.  ALSO, THE ERROR TEST FAILED REPEATEDLY.',Idid,1)
       CASE (10)
         !
         !     CORRECTOR FAILURE BECAUSE IRES = -1
         WRITE (xern3,'(1P,E15.6)') tn
         WRITE (xern4,'(1P,E15.6)') h
-        CALL XERMSG('SLATEC','SDASSL','AT T = '//xern3//' AND STEPSIZE H = '//xern4//&
+        CALL XERMSG('SDASSL','AT T = '//xern3//' AND STEPSIZE H = '//xern4//&
           ' THE CORRECTOR COULD NOT CONVERGE BECAUSE IRES WAS EQUAL TO MINUS ONE',Idid,1)
       CASE (11)
         !
         !     FAILURE BECAUSE IRES = -2
         WRITE (xern3,'(1P,E15.6)') tn
         WRITE (xern4,'(1P,E15.6)') h
-        CALL XERMSG('SLATEC','SDASSL','AT T = '//xern3//' AND STEPSIZE H = '//&
+        CALL XERMSG('SDASSL','AT T = '//xern3//' AND STEPSIZE H = '//&
           xern4//' IRES WAS EQUAL TO MINUS TWO',Idid,1)
       CASE (12)
         !
         !     FAILED TO COMPUTE INITIAL YPRIME
         WRITE (xern3,'(1P,E15.6)') tn
         WRITE (xern4,'(1P,E15.6)') ho
-        CALL XERMSG('SLATEC','SDASSL','AT T = '//xern3//' AND STEPSIZE H = '//&
+        CALL XERMSG('SDASSL','AT T = '//xern3//' AND STEPSIZE H = '//&
           xern4//' THE INITIAL YPRIME COULD NOT BE COMPUTED',Idid,1)
       CASE DEFAULT
         !
         !     THE MAXIMUM NUMBER OF STEPS WAS TAKEN BEFORE
         !     REACHING TOUT
         WRITE (xern3,'(1P,E15.6)') tn
-        CALL XERMSG('SLATEC','SDASSL','AT CURRENT T = '//xern3//&
+        CALL XERMSG('SDASSL','AT CURRENT T = '//xern3//&
           ' 500 STEPS TAKEN ON THIS CALL BEFORE REACHING TOUT',Idid,1)
     END SELECT
     !
@@ -1522,41 +1522,41 @@ SUBROUTINE SDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
   !     SUCCESSION, EXECUTION IS TERMINATED
   !
   !-----------------------------------------------------------------------
-  400  CALL XERMSG('SLATEC','SDASSL',&
+  400  CALL XERMSG('SDASSL',&
     'SOME ELEMENT OF INFO VECTOR IS NOT ZERO OR ONE',1,1)
   GOTO 1200
   !
-  500  CALL XERMSG('SLATEC','SDASSL','SOME ELEMENT OF RTOL IS .LT. 0',6,1)
+  500  CALL XERMSG('SDASSL','SOME ELEMENT OF RTOL IS .LT. 0',6,1)
   GOTO 1200
   !
-  600  CALL XERMSG('SLATEC','SDASSL','SOME ELEMENT OF ATOL IS .LT. 0',7,1)
+  600  CALL XERMSG('SDASSL','SOME ELEMENT OF ATOL IS .LT. 0',7,1)
   GOTO 1200
   !
   700  WRITE (xern3,'(1P,E15.6)') tstop
   WRITE (xern4,'(1P,E15.6)') Tout
-  CALL XERMSG('SLATEC','SDASSL','INFO(4) = 1 AND TSTOP = '//xern3//&
+  CALL XERMSG('SDASSL','INFO(4) = 1 AND TSTOP = '//xern3//&
     ' BEHIND TOUT = '//xern4,9,1)
   GOTO 1200
   !
   800  WRITE (xern3,'(1P,E15.6)') Tout
   WRITE (xern4,'(1P,E15.6)') T
-  CALL XERMSG('SLATEC','SDASSL','TOUT = '//xern3//' BEHIND T = '//xern4,11,1)
+  CALL XERMSG('SDASSL','TOUT = '//xern3//' BEHIND T = '//xern4,11,1)
   GOTO 1200
   !
-  900  CALL XERMSG('SLATEC','SDASSL','SOME ELEMENT OF WT IS .LE. 0.0',13,1)
+  900  CALL XERMSG('SDASSL','SOME ELEMENT OF WT IS .LE. 0.0',13,1)
   GOTO 1200
   !
   1000 WRITE (xern3,'(1P,E15.6)') tstop
   WRITE (xern4,'(1P,E15.6)') T
-  CALL XERMSG('SLATEC','SDASSL','INFO(4)=1 AND TSTOP = '//xern3//&
+  CALL XERMSG('SDASSL','INFO(4)=1 AND TSTOP = '//xern3//&
     ' BEHIND T = '//xern4,15,1)
   GOTO 1200
   !
   1100 WRITE (xern3,'(1P,E15.6)') Tout
-  CALL XERMSG('SLATEC','SDASSL','TOUT = T = '//xern3,19,1)
+  CALL XERMSG('SDASSL','TOUT = T = '//xern3,19,1)
   !
   1200 Idid = -33
-  IF ( Info(1)==-1 ) CALL XERMSG('SLATEC','SDASSL',&
+  IF ( Info(1)==-1 ) CALL XERMSG('SDASSL',&
     'REPEATED OCCURRENCES OF ILLEGAL INPUT$$RUN TERMINATED. APPARENT INFINITE LOOP',&
     -999,2)
   !

@@ -277,7 +277,7 @@ REAL(8) FUNCTION DE1(X)
   IF ( X>(-1.D0) ) THEN
     !
     IF ( X<=1.0D0 ) THEN
-      IF ( X==0.D0 ) CALL XERMSG('SLATEC','DE1','X IS 0',2,2)
+      IF ( X==0.D0 ) CALL XERMSG('DE1','X IS 0',2,2)
       DE1 = (-LOG(ABS(X))-0.6875D0+X) + DCSEVL(X,e12cs,nte12)
       RETURN
       !
@@ -287,7 +287,7 @@ REAL(8) FUNCTION DE1(X)
       !
     ELSEIF ( X>xmax ) THEN
       !
-      CALL XERMSG('SLATEC','DE1','X SO BIG E1 UNDERFLOWS',1,1)
+      CALL XERMSG('DE1','X SO BIG E1 UNDERFLOWS',1,1)
       DE1 = 0.D0
       RETURN
     END IF

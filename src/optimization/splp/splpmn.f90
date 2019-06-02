@@ -287,7 +287,7 @@ SUBROUTINE SPLPMN(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
     GOTO 3000
   ELSE
     nerr = 23
-    CALL XERMSG('SLATEC','SPLPMN',&
+    CALL XERMSG('SPLPMN',&
       'IN SPLP,  A SINGULAR INITIAL BASIS WAS ENCOUNTERED.',nerr,iopt)
     Info = -nerr
     GOTO 4600
@@ -303,7 +303,7 @@ SUBROUTINE SPLPMN(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   600 CONTINUE
   IF ( .NOT.feas ) THEN
     nerr = 24
-    CALL XERMSG('SLATEC','SPLPMN',&
+    CALL XERMSG('SPLPMN',&
       'IN SPLP, AN INFEASIBLE INITIAL BASIS WAS ENCOUNTERED.',nerr,iopt)
     Info = -nerr
     GOTO 4600
@@ -383,17 +383,17 @@ SUBROUTINE SPLPMN(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
     Info = 1
   ELSEIF ( (.NOT.feas).AND.(.NOT.unbnd) ) THEN
     nerr = 1
-    CALL XERMSG('SLATEC','SPLPMN',&
+    CALL XERMSG('SPLPMN',&
       'IN SPLP, THE PROBLEM APPEARS TO BE INFEASIBLE',nerr,iopt)
     Info = -nerr
   ELSEIF ( feas.AND.unbnd ) THEN
     nerr = 2
-    CALL XERMSG('SLATEC','SPLPMN',&
+    CALL XERMSG('SPLPMN',&
       'IN SPLP, THE PROBLEM APPEARS TO HAVE NO FINITE SOLUTION.',nerr,iopt)
     Info = -nerr
   ELSEIF ( (.NOT.feas).AND.unbnd ) THEN
     nerr = 3
-    CALL XERMSG('SLATEC','SPLPMN',&
+    CALL XERMSG('SPLPMN',&
       'IN SPLP, THE PROBLEM APPEARS TO BE INFEASIBLE AND TO HAVE NO FINITE SOLUTION.'&
       ,nerr,iopt)
     Info = -nerr
@@ -728,7 +728,7 @@ SUBROUTINE SPLPMN(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
     END IF
   END IF
   nerr = 26
-  CALL XERMSG('SLATEC','SPLPMN',&
+  CALL XERMSG('SPLPMN',&
     'IN SPLP, MOVED TO A SINGULAR POINT.  THIS SHOULD NOT HAPPEN.',nerr,iopt)
   Info = -nerr
   GOTO 4600
@@ -820,7 +820,7 @@ SUBROUTINE SPLPMN(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   IF ( savedt ) idum(1) = isave
   WRITE (xern1,'(I8)') mxitlp
   WRITE (xern2,'(I8)') idum(1)
-  CALL XERMSG('SLATEC','SPLPMN','IN SPLP, MAX ITERATIONS = '//xern1//&
+  CALL XERMSG('SPLPMN','IN SPLP, MAX ITERATIONS = '//xern1//&
     ' TAKEN.  UP-TO-DATE RESULTS SAVED ON FILE NO. '//xern2//&
     '.  IF FILE NO. = 0, NO SAVE.',nerr,iopt)
   Info = -nerr

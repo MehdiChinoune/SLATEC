@@ -193,7 +193,7 @@ SUBROUTINE ORTHOL(A,M,N,Nrda,Iflag,Irank,Iscale,Diag,Kpivot,Scales,Cols,Cs)
         !        RANK DEFICIENT PROBLEM
         Iflag = 3
         Irank = k - 1
-        CALL XERMSG('SLATEC','ORTHOL',&
+        CALL XERMSG('ORTHOL',&
           'RANK OF MATRIX IS LESS THAN THE NUMBER OF COLUMNS.',1,1)
         RETURN
       END IF
@@ -201,7 +201,7 @@ SUBROUTINE ORTHOL(A,M,N,Nrda,Iflag,Irank,Iscale,Diag,Kpivot,Scales,Cols,Cs)
     RETURN
   END IF
   Iflag = 2
-  CALL XERMSG('SLATEC','ORTHOL','INVALID INPUT PARAMETERS.',2,1)
+  CALL XERMSG('ORTHOL','INVALID INPUT PARAMETERS.',2,1)
   RETURN
   !
   !

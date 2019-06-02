@@ -44,7 +44,7 @@ REAL FUNCTION ALBETA(A,B)
   p = MIN(A,B)
   q = MAX(A,B)
   !
-  IF ( p<=0.0 ) CALL XERMSG('SLATEC','ALBETA',&
+  IF ( p<=0.0 ) CALL XERMSG('ALBETA',&
     'BOTH ARGUMENTS MUST BE GT ZERO',1,2)
   IF ( p>=10.0 ) THEN
     !

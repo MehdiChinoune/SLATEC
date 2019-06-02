@@ -74,7 +74,7 @@ SUBROUTINE PCHNGS(Ii,Xval,Iplace,Sx,Ix,Ircx)
   !
   IF ( Ircx==0 ) THEN
     nerr = 55
-    CALL XERMSG('SLATEC','PCHNGS','IRCX=0.',nerr,iopt)
+    CALL XERMSG('PCHNGS','IRCX=0.',nerr,iopt)
   END IF
   lmx = Ix(1)
   !
@@ -87,7 +87,7 @@ SUBROUTINE PCHNGS(Ii,Xval,Iplace,Sx,Ix,Ircx)
     !
     IF ( Ix(3)<Ircx.OR.Ix(2)<ABS(Ii) ) THEN
       nerr = 55
-      CALL XERMSG('SLATEC','PCHNGS',&
+      CALL XERMSG('PCHNGS',&
         'SUBSCRIPTS FOR ARRAY ELEMENT TO BE ACCESSED WERE OUT OF BOUNDS.',nerr,iopt)
     END IF
     !
@@ -96,7 +96,7 @@ SUBROUTINE PCHNGS(Ii,Xval,Iplace,Sx,Ix,Ircx)
     !
   ELSEIF ( Ix(2)<-Ircx.OR.Ix(3)<ABS(Ii) ) THEN
     nerr = 55
-    CALL XERMSG('SLATEC','PCHNGS',&
+    CALL XERMSG('PCHNGS',&
       'SUBSCRIPTS FOR ARRAY ELEMENT TO BE ACCESSED WERE OUT OF BOUNDS.',nerr,iopt)
   END IF
   !

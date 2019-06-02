@@ -123,11 +123,11 @@ REAL(8) FUNCTION DPSI(X)
     IF ( n<=0 ) THEN
       !
       n = -n
-      IF ( X==0.D0 ) CALL XERMSG('SLATEC','DPSI','X IS 0',2,2)
+      IF ( X==0.D0 ) CALL XERMSG('DPSI','X IS 0',2,2)
       IF ( X<0.D0.AND.X+n-2==0.D0 )&
-        CALL XERMSG('SLATEC','DPSI','X IS A NEGATIVE INTEGER',3,2)
+        CALL XERMSG('DPSI','X IS A NEGATIVE INTEGER',3,2)
       IF ( X<(-0.5D0).AND.ABS((X-AINT(X-0.5D0))/X)<dxrel )&
-        CALL XERMSG('SLATEC','DPSI',&
+        CALL XERMSG('DPSI',&
         'ANSWER LT HALF PRECISION BECAUSE X TOO NEAR NEGATIVE INTEGER',1,1)
       !
       DO i = 1, n

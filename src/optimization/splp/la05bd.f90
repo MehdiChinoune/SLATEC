@@ -54,7 +54,7 @@ SUBROUTINE LA05BD(A,Ind,Ia,N,Ip,Iw,W,G,B,Trans)
   IF ( G<0.D0 ) THEN
     !
     CALL XSETUN(lp_com)
-    IF ( lp_com>0 ) CALL XERMSG('SLATEC','LA05BD',&
+    IF ( lp_com>0 ) CALL XERMSG('LA05BD',&
       'EARLIER ENTRY GAVE ERROR RETURN.',-8,2)
   ELSE
     kll = Ia - lenl_com + 1

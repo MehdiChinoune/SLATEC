@@ -69,7 +69,7 @@ SUBROUTINE DFULMT(I,J,Aij,Indcat,Prgopt,Dattrv,Iflag)
       ELSE
         nerr = 29
         level = 1
-        CALL XERMSG('SLATEC','DFULMT',&
+        CALL XERMSG('DFULMT',&
           'IN DSPLP, ROW DIM., MRELAS, NVARS ARE MISSING FROM PRGOPT.',nerr,level)
         Iflag(1) = 3
         EXIT

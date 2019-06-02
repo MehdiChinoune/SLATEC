@@ -129,7 +129,7 @@ SUBROUTINE CPOIR(A,Lda,N,V,Itask,Ind,Work)
     Ind = -1
     WRITE (xern1,'(I8)') Lda
     WRITE (xern2,'(I8)') N
-    CALL XERMSG('SLATEC','CPOIR','LDA = '//xern1//' IS LESS THAN N = '//&
+    CALL XERMSG('CPOIR','LDA = '//xern1//' IS LESS THAN N = '//&
       xern2,-1,1)
     RETURN
   END IF
@@ -137,14 +137,14 @@ SUBROUTINE CPOIR(A,Lda,N,V,Itask,Ind,Work)
   IF ( N<=0 ) THEN
     Ind = -2
     WRITE (xern1,'(I8)') N
-    CALL XERMSG('SLATEC','CPOIR','N = '//xern1//' IS LESS THAN 1',-2,1)
+    CALL XERMSG('CPOIR','N = '//xern1//' IS LESS THAN 1',-2,1)
     RETURN
   END IF
   !
   IF ( Itask<1 ) THEN
     Ind = -3
     WRITE (xern1,'(I8)') Itask
-    CALL XERMSG('SLATEC','CPOIR','ITASK = '//xern1//' IS LESS THAN 1',-3,1)
+    CALL XERMSG('CPOIR','ITASK = '//xern1//' IS LESS THAN 1',-3,1)
     RETURN
   END IF
   !
@@ -164,7 +164,7 @@ SUBROUTINE CPOIR(A,Lda,N,V,Itask,Ind,Work)
     !
     IF ( info/=0 ) THEN
       Ind = -4
-      CALL XERMSG('SLATEC','CPOIR',&
+      CALL XERMSG('CPOIR',&
         'SINGULAR OR NOT POSITIVE DEFINITE - NO SOLUTION',-4,1)
       RETURN
     END IF
@@ -208,6 +208,6 @@ SUBROUTINE CPOIR(A,Lda,N,V,Itask,Ind,Work)
   Ind = INT( -LOG10(MAX(R1MACH(4),dnorm/xnorm)) )
   IF ( Ind<=0 ) THEN
     Ind = -10
-    CALL XERMSG('SLATEC','CPOIR','SOLUTION MAY HAVE NO SIGNIFICANCE',-10,0)
+    CALL XERMSG('CPOIR','SOLUTION MAY HAVE NO SIGNIFICANCE',-10,0)
   END IF
 END SUBROUTINE CPOIR

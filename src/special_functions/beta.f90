@@ -44,7 +44,7 @@ REAL FUNCTION BETA(A,B)
     alnsml = LOG(R1MACH(1))
   END IF
   !
-  IF ( A<=0..OR.B<=0. ) CALL XERMSG('SLATEC','BETA',&
+  IF ( A<=0..OR.B<=0. ) CALL XERMSG('BETA',&
     'BOTH ARGUMENTS MUST BE GT 0',2,2)
   !
   IF ( A+B<xmax ) THEN
@@ -53,7 +53,7 @@ REAL FUNCTION BETA(A,B)
   END IF
   !
   BETA = ALBETA(A,B)
-  IF ( BETA<alnsml ) CALL XERMSG('SLATEC','BETA',&
+  IF ( BETA<alnsml ) CALL XERMSG('BETA',&
     'A AND/OR B SO BIG BETA UNDERFLOWS',1,2)
   !
   BETA = EXP(BETA)

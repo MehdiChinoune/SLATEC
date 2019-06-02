@@ -52,13 +52,13 @@ SUBROUTINE HPPERM(Hx,N,Iperm,Work,Ier)
   Ier = 0
   IF ( N<1 ) THEN
     Ier = 1
-    CALL XERMSG('SLATEC','HPPERM',&
+    CALL XERMSG('HPPERM',&
       'The number of values to be rearranged, N, is not positive.',Ier,1)
     RETURN
   END IF
   IF ( LEN(Work)<LEN(Hx(1)) ) THEN
     Ier = 2
-    CALL XERMSG('SLATEC','HPPERM',&
+    CALL XERMSG('HPPERM',&
       'The length of the work variable, WORK, is too short.',Ier,1)
     RETURN
   END IF
@@ -74,7 +74,7 @@ SUBROUTINE HPPERM(Hx,N,Iperm,Work,Ier)
       END IF
     END IF
     Ier = 3
-    CALL XERMSG('SLATEC','HPPERM',&
+    CALL XERMSG('HPPERM',&
       'The permutation vector, IPERM, is not valid.',Ier,1)
     RETURN
   END DO

@@ -217,5 +217,5 @@ SUBROUTINE QAWS(F,A,B,Alfa,Beta,Integr,Epsabs,Epsrel,Result,Abserr,Neval,&
     lvl = 0
   END IF
   IF ( Ier==6 ) lvl = 1
-  IF ( Ier/=0 ) CALL XERMSG('SLATEC','QAWS','ABNORMAL RETURN',Ier,lvl)
+  IF ( Ier/=0 ) CALL XERMSG('QAWS','ABNORMAL RETURN',Ier,lvl)
 END SUBROUTINE QAWS

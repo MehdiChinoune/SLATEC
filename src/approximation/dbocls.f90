@@ -590,7 +590,7 @@ SUBROUTINE DBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,&
     !     SEE THAT MDW IS .GT.0. GROSS CHECK ONLY.
     IF ( Mdw<=0 ) THEN
       WRITE (xern1,'(I8)') Mdw
-      CALL XERMSG('SLATEC','DBOCLS','MDW = '//xern1//' MUST BE POSITIVE.',53,1)
+      CALL XERMSG('DBOCLS','MDW = '//xern1//' MUST BE POSITIVE.',53,1)
       !     DO(RETURN TO USER PROGRAM UNIT)
       GOTO 100
     END IF
@@ -598,7 +598,7 @@ SUBROUTINE DBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,&
     !     SEE THAT NUMBER OF CONSTRAINTS IS NONNEGATIVE.
     IF ( Mcon<0 ) THEN
       WRITE (xern1,'(I8)') Mcon
-      CALL XERMSG('SLATEC','DBOCLS','MCON = '//xern1//&
+      CALL XERMSG('DBOCLS','MCON = '//xern1//&
         ' MUST BE NON-NEGATIVE',54,1)
       !     DO(RETURN TO USER PROGRAM UNIT)
       GOTO 100
@@ -607,7 +607,7 @@ SUBROUTINE DBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,&
     !     SEE THAT NUMBER OF UNKNOWNS IS POSITIVE.
     IF ( Ncols<=0 ) THEN
       WRITE (xern1,'(I8)') Ncols
-      CALL XERMSG('SLATEC','DBOCLS','NCOLS = '//xern1//&
+      CALL XERMSG('DBOCLS','NCOLS = '//xern1//&
         ' THE NO. OF VARIABLES, MUST BE POSITIVE.',55,1)
       !     DO(RETURN TO USER PROGRAM UNIT)
       GOTO 100
@@ -618,7 +618,7 @@ SUBROUTINE DBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,&
       IF ( Ind(j)<1.OR.Ind(j)>4 ) THEN
         WRITE (xern1,'(I8)') j
         WRITE (xern2,'(I8)') Ind(j)
-        CALL XERMSG('SLATEC','DBOCLS','IND('//xern1//') = '//xern2//&
+        CALL XERMSG('DBOCLS','IND('//xern1//') = '//xern2//&
           ' MUST BE 1-4.',56,1)
         !     DO(RETURN TO USER PROGRAM UNIT)
         GOTO 100
@@ -632,7 +632,7 @@ SUBROUTINE DBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,&
           WRITE (xern1,'(I8)') j
           WRITE (xern3,'(1PE15.6)') Bl(j)
           WRITE (xern4,'(1PE15.6)') Bu(j)
-          CALL XERMSG('SLATEC','DBOCLS','BOUND BL('//xern1//') = '//xern3//&
+          CALL XERMSG('DBOCLS','BOUND BL('//xern1//') = '//xern3//&
             ' IS .GT. BU('//xern1//') = '//xern4,57,1)
           !     DO(RETURN TO USER PROGRAM UNIT)
           GOTO 100
@@ -791,7 +791,7 @@ SUBROUTINE DBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,&
           !     SEE THAT ISCALE IS 1 THRU 3.
           IF ( iscale<1.OR.iscale>3 ) THEN
             WRITE (xern1,'(I8)') iscale
-            CALL XERMSG('SLATEC','DBOCLS','ISCALE OPTION = '//xern1//&
+            CALL XERMSG('DBOCLS','ISCALE OPTION = '//xern1//&
               ' MUST BE 1-3',48,1)
             !     DO(RETURN TO USER PROGRAM UNIT)
             GOTO 100
@@ -807,7 +807,7 @@ SUBROUTINE DBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,&
           iscale = 4
           IF ( Iopt(lp+2)<=0 ) THEN
             WRITE (xern1,'(I8)') Iopt(lp+2)
-            CALL XERMSG('SLATEC','DBOCLS','OFFSET PAST X(NCOLS) ('//xern1//&
+            CALL XERMSG('DBOCLS','OFFSET PAST X(NCOLS) ('//xern1//&
               ') FOR USER-PROVIDED COLUMN SCALING MUST BE POSITIVE.',49,1)
             !     DO(RETURN TO USER PROGRAM UNIT)
             GOTO 100
@@ -818,7 +818,7 @@ SUBROUTINE DBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,&
             IF ( Rw(j)<=zero ) THEN
               WRITE (xern1,'(I8)') j
               WRITE (xern3,'(1PE15.6)') Rw(j)
-              CALL XERMSG('SLATEC','DBOCLS',&
+              CALL XERMSG('DBOCLS',&
                 'EACH PROVIDED COLUMN SCALE FACTOR MUST BE POSITIVE.$$COMPONENT '&
                 //xern1//' NOW = '//xern3,50,1)
               !     DO(RETURN TO USER PROGRAM UNIT)
@@ -869,7 +869,7 @@ SUBROUTINE DBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,&
         !     NO VALID OPTION NUMBER WAS NOTED. THIS IS AN ERROR CONDITION.
       ELSE
         WRITE (xern1,'(I8)') jp
-        CALL XERMSG('SLATEC','DBOCLS','OPTION NUMBER = '//xern1//&
+        CALL XERMSG('DBOCLS','OPTION NUMBER = '//xern1//&
           ' IS NOT DEFINED.',51,1)
         !     DO(RETURN TO USER PROGRAM UNIT)
         GOTO 100
@@ -891,7 +891,7 @@ SUBROUTINE DBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,&
       IF ( lmdw<mdwl ) THEN
         WRITE (xern1,'(I8)') lmdw
         WRITE (xern2,'(I8)') mdwl
-        CALL XERMSG('SLATEC','DBOCLS','THE ROW DIMENSION OF W(,) = '//&
+        CALL XERMSG('DBOCLS','THE ROW DIMENSION OF W(,) = '//&
           xern1//' MUST BE .GE. THE NUMBER OF EFFECTIVE ROWS = '//xern2,41,1)
         !     DO(RETURN TO USER PROGRAM UNIT)
         GOTO 100
@@ -899,7 +899,7 @@ SUBROUTINE DBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,&
       IF ( lndw<Ncols+Mcon+1 ) THEN
         WRITE (xern1,'(I8)') lndw
         WRITE (xern2,'(I8)') Ncols + Mcon + 1
-        CALL XERMSG('SLATEC','DBOCLS','THE COLUMN DIMENSION OF W(,) = '//&
+        CALL XERMSG('DBOCLS','THE COLUMN DIMENSION OF W(,) = '//&
           xern1//' MUST BE .GE. NCOLS+MCON+1 = '//xern2,42,1)
         !     DO(RETURN TO USER PROGRAM UNIT)
         GOTO 100
@@ -907,7 +907,7 @@ SUBROUTINE DBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,&
       IF ( llb<Ncols+Mcon ) THEN
         WRITE (xern1,'(I8)') llb
         WRITE (xern2,'(I8)') Ncols + Mcon
-        CALL XERMSG('SLATEC','DBOCLS',&
+        CALL XERMSG('DBOCLS',&
           'THE DIMENSIONS OF THE ARRAYS BS(), BU(), AND IND() = '&
           //xern1//' MUST BE .GE. NCOLS+MCON = '//xern2,43,1)
         !     DO(RETURN TO USER PROGRAM UNIT)
@@ -916,7 +916,7 @@ SUBROUTINE DBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,&
       IF ( llx<lenx ) THEN
         WRITE (xern1,'(I8)') llx
         WRITE (xern2,'(I8)') lenx
-        CALL XERMSG('SLATEC','DBOCLS','THE DIMENSION OF X() = '//xern1//&
+        CALL XERMSG('DBOCLS','THE DIMENSION OF X() = '//xern1//&
           ' MUST BE .GE. THE REQUIRED LENGTH = '//xern2,44,1)
         !     DO(RETURN TO USER PROGRAM UNIT)
         GOTO 100
@@ -924,7 +924,7 @@ SUBROUTINE DBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,&
       IF ( llrw<6*Ncols+5*Mcon ) THEN
         WRITE (xern1,'(I8)') llrw
         WRITE (xern2,'(I8)') 6*Ncols + 5*Mcon
-        CALL XERMSG('SLATEC','DBOCLS','THE DIMENSION OF RW() = '//xern1//&
+        CALL XERMSG('DBOCLS','THE DIMENSION OF RW() = '//xern1//&
           ' MUST BE .GE. 6*NCOLS+5*MCON = '//xern2,45,1)
         !     DO(RETURN TO USER PROGRAM UNIT)
         GOTO 100
@@ -932,7 +932,7 @@ SUBROUTINE DBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,&
       IF ( lliw<2*Ncols+2*Mcon ) THEN
         WRITE (xern1,'(I8)') lliw
         WRITE (xern2,'(I8)') 2*Ncols + 2*Mcon
-        CALL XERMSG('SLATEC','DBOCLS','THE DIMENSION OF IW() = '//xern1//&
+        CALL XERMSG('DBOCLS','THE DIMENSION OF IW() = '//xern1//&
           ' MUST BE .GE. 2*NCOLS+2*MCON = '//xern2,46,1)
         !     DO(RETURN TO USER PROGRAM UNIT)
         GOTO 100
@@ -940,7 +940,7 @@ SUBROUTINE DBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,&
       IF ( liopt<lp+17 ) THEN
         WRITE (xern1,'(I8)') liopt
         WRITE (xern2,'(I8)') lp + 17
-        CALL XERMSG('SLATEC','DBOCLS','THE DIMENSION OF IOPT() = '//xern1//&
+        CALL XERMSG('DBOCLS','THE DIMENSION OF IOPT() = '//xern1//&
           ' MUST BE .GE. THE REQUIRED LEN = '//xern2,47,1)
         !     DO(RETURN TO USER PROGRAM UNIT)
         GOTO 100
@@ -960,7 +960,7 @@ SUBROUTINE DBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,&
     IF ( mnew<0.OR.mnew+Mcon>Mdw ) THEN
       WRITE (xern1,'(I8)') mnew
       WRITE (xern2,'(I8)') Mdw - Mcon
-      CALL XERMSG('SLATEC','DBOCLS','NO. OF ROWS = '//xern1//&
+      CALL XERMSG('DBOCLS','NO. OF ROWS = '//xern1//&
         ' MUST BE .GE. 0 .AND. .LE. MDW-MCON = '//xern2,52,1)
       !    (RETURN TO USER PROGRAM UNIT)
       GOTO 100

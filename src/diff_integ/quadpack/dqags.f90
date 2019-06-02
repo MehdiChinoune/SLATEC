@@ -205,5 +205,5 @@ SUBROUTINE DQAGS(F,A,B,Epsabs,Epsrel,Result,Abserr,Neval,Ier,Limit,Lenw,&
     lvl = 0
   END IF
   IF ( Ier==6 ) lvl = 1
-  IF ( Ier/=0 ) CALL XERMSG('SLATEC','DQAGS','ABNORMAL RETURN',Ier,lvl)
+  IF ( Ier/=0 ) CALL XERMSG('DQAGS','ABNORMAL RETURN',Ier,lvl)
 END SUBROUTINE DQAGS

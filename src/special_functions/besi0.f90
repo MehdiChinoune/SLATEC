@@ -60,7 +60,7 @@ REAL FUNCTION BESI0(X)
   y = ABS(X)
   IF ( y>3.0 ) THEN
     !
-    IF ( y>xmax ) CALL XERMSG('SLATEC','BESI0','ABS(X) SO BIG I0 OVERFLOWS',1,2)
+    IF ( y>xmax ) CALL XERMSG('BESI0','ABS(X) SO BIG I0 OVERFLOWS',1,2)
     !
     BESI0 = EXP(y)*BESI0E(X)
     RETURN

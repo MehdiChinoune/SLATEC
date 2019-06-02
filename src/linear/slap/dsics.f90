@@ -326,7 +326,7 @@ SUBROUTINE DSICS(N,Nelt,Ia,Ja,A,Isym,Nel,Iel,Jel,El,D,R,Iwarn)
           !
           !         If we get here, we have real problems...
           WRITE (xern1,'(I8)') irow
-          CALL XERMSG('SLATEC','DSICS',&
+          CALL XERMSG('DSICS',&
             'A and EL data structure mismatch in row '//xern1,1,2)
         END IF
       END IF

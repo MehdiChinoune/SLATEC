@@ -726,7 +726,7 @@ SUBROUTINE SNLS1(FCN,Iopt,M,N,X,Fvec,Fjac,Ldfjac,Ftol,Xtol,Gtol,Maxfev,&
         IF ( err(1)<chklim ) THEN
           WRITE (xern1,'(I8)') i
           WRITE (xern3,'(1PE15.6)') err
-          CALL XERMSG('SLATEC','SNLS1','DERIVATIVE OF FUNCTION '//xern1//&
+          CALL XERMSG('SNLS1','DERIVATIVE OF FUNCTION '//xern1//&
             ' MAY BE WRONG, ERR = '//xern3//' TOO CLOSE TO 0.',7,0)
         END IF
       END IF
@@ -802,7 +802,7 @@ SUBROUTINE SNLS1(FCN,Iopt,M,N,X,Fvec,Fjac,Ldfjac,Ftol,Xtol,Gtol,Maxfev,&
           IF ( err(1)<chklim ) THEN
             WRITE (xern1,'(I8)') i
             WRITE (xern3,'(1PE15.6)') err
-            CALL XERMSG('SLATEC','SNLS1','DERIVATIVE OF FUNCTION '//&
+            CALL XERMSG('SNLS1','DERIVATIVE OF FUNCTION '//&
               xern1//' MAY BE WRONG, ERR = '//xern3//' TOO CLOSE TO 0.',7,0)
           END IF
         END DO
@@ -1005,14 +1005,14 @@ SUBROUTINE SNLS1(FCN,Iopt,M,N,X,Fvec,Fjac,Ldfjac,Ftol,Xtol,Gtol,Maxfev,&
   IF ( iflag<0 ) Info = iflag
   iflag = 0
   IF ( Nprint>0 ) CALL FCN(iflag,M,N,X,Fvec,Fjac,ijunk)
-  IF ( Info<0 ) CALL XERMSG('SLATEC','SNLS1',&
+  IF ( Info<0 ) CALL XERMSG('SNLS1',&
     'EXECUTION TERMINATED BECAUSE USER SET IFLAG NEGATIVE.',1,1)
-  IF ( Info==0 ) CALL XERMSG('SLATEC','SNLS1','INVALID INPUT PARAMETER.',2,1)
-  IF ( Info==4 ) CALL XERMSG('SLATEC','SNLS1',&
+  IF ( Info==0 ) CALL XERMSG('SNLS1','INVALID INPUT PARAMETER.',2,1)
+  IF ( Info==4 ) CALL XERMSG('SNLS1',&
     'THIRD CONVERGENCE CONDITION, CHECK RESULTS BEFORE ACCEPTING.' ,1,1)
-  IF ( Info==5 ) CALL XERMSG('SLATEC','SNLS1',&
+  IF ( Info==5 ) CALL XERMSG('SNLS1',&
     'TOO MANY FUNCTION EVALUATIONS.',9,1)
-  IF ( Info>=6 ) CALL XERMSG('SLATEC','SNLS1',&
+  IF ( Info>=6 ) CALL XERMSG('SNLS1',&
     'TOLERANCES TOO SMALL, NO FURTHER IMPROVEMENT POSSIBLE.',3,1)
   !
   !     LAST CARD OF SUBROUTINE SNLS1.

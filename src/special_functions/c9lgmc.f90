@@ -62,15 +62,15 @@ COMPLEX FUNCTION C9LGMC(Zin)
   y = AIMAG(z)
   cabsz = ABS(z)
   !
-  IF ( x<0.0.AND.ABS(y)<bound ) CALL XERMSG('SLATEC','C9LGMC',&
+  IF ( x<0.0.AND.ABS(y)<bound ) CALL XERMSG('C9LGMC',&
     'NOT VALID FOR NEGATIVE REAL(Z) AND SMALL ABS(AIMAG(Z))',2,2)
-  IF ( cabsz<bound ) CALL XERMSG('SLATEC','C9LGMC',&
+  IF ( cabsz<bound ) CALL XERMSG('C9LGMC',&
     'NOT VALID FOR SMALL ABS(Z)',3,2)
   !
   IF ( cabsz>=xmax ) THEN
     !
     C9LGMC = (0.0,0.0)
-    CALL XERMSG('SLATEC','C9LGMC','Z SO BIG C9LGMC UNDERFLOWS',1,1)
+    CALL XERMSG('C9LGMC','Z SO BIG C9LGMC UNDERFLOWS',1,1)
     RETURN
   END IF
   !

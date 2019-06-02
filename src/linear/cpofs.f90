@@ -123,7 +123,7 @@ SUBROUTINE CPOFS(A,Lda,N,V,Itask,Ind,Work)
     Ind = -1
     WRITE (xern1,'(I8)') Lda
     WRITE (xern2,'(I8)') N
-    CALL XERMSG('SLATEC','CPOFS','LDA = '//xern1//' IS LESS THAN N = '//&
+    CALL XERMSG('CPOFS','LDA = '//xern1//' IS LESS THAN N = '//&
       xern2,-1,1)
     RETURN
   END IF
@@ -131,14 +131,14 @@ SUBROUTINE CPOFS(A,Lda,N,V,Itask,Ind,Work)
   IF ( N<=0 ) THEN
     Ind = -2
     WRITE (xern1,'(I8)') N
-    CALL XERMSG('SLATEC','CPOFS','N = '//xern1//' IS LESS THAN 1',-2,1)
+    CALL XERMSG('CPOFS','N = '//xern1//' IS LESS THAN 1',-2,1)
     RETURN
   END IF
   !
   IF ( Itask<1 ) THEN
     Ind = -3
     WRITE (xern1,'(I8)') Itask
-    CALL XERMSG('SLATEC','CPOFS','ITASK = '//xern1//' IS LESS THAN 1',-3,1)
+    CALL XERMSG('CPOFS','ITASK = '//xern1//' IS LESS THAN 1',-3,1)
     RETURN
   END IF
   !
@@ -152,7 +152,7 @@ SUBROUTINE CPOFS(A,Lda,N,V,Itask,Ind,Work)
     !
     IF ( info/=0 ) THEN
       Ind = -4
-      CALL XERMSG('SLATEC','CPOFS',&
+      CALL XERMSG('CPOFS',&
         'SINGULAR OR NOT POSITIVE DEFINITE - NO SOLUTION',-4,1)
       RETURN
     END IF
@@ -163,7 +163,7 @@ SUBROUTINE CPOFS(A,Lda,N,V,Itask,Ind,Work)
     Ind = INT( -LOG10(R1MACH(4)/rcond) )
     IF ( Ind<=0 ) THEN
       Ind = -10
-      CALL XERMSG('SLATEC','CPOFS','SOLUTION MAY HAVE NO SIGNIFICANCE',-10,0)
+      CALL XERMSG('CPOFS','SOLUTION MAY HAVE NO SIGNIFICANCE',-10,0)
     END IF
   END IF
   !

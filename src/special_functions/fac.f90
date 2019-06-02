@@ -47,13 +47,13 @@ REAL FUNCTION FAC(N)
     nmax = INT( xmax ) - 1
   END IF
   !
-  IF ( N<0 ) CALL XERMSG('SLATEC','FAC',&
+  IF ( N<0 ) CALL XERMSG('FAC',&
     'FACTORIAL OF NEGATIVE INTEGER UNDEFINED',1,2)
   !
   IF ( N<=25 ) FAC = facn(N+1)
   IF ( N<=25 ) RETURN
   !
-  IF ( N>nmax ) CALL XERMSG('SLATEC','FAC','N SO BIG FACTORIAL(N) OVERFLOWS',2,2)
+  IF ( N>nmax ) CALL XERMSG('FAC','N SO BIG FACTORIAL(N) OVERFLOWS',2,2)
   !
   x = N + 1
   FAC = EXP((x-0.5)*LOG(x)-x+sq2pil+R9LGMC(x))

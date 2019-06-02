@@ -342,7 +342,7 @@ REAL FUNCTION RD(X,Y,Z,Ier)
     Ier = 1
     WRITE (xern3,'(1PE15.6)') X
     WRITE (xern4,'(1PE15.6)') Y
-    CALL XERMSG('SLATEC','RD','MIN(X,Y).LT.0 WHERE X = '//xern3//&
+    CALL XERMSG('RD','MIN(X,Y).LT.0 WHERE X = '//xern3//&
       ' AND Y = '//xern4,1,1)
     RETURN
   END IF
@@ -353,7 +353,7 @@ REAL FUNCTION RD(X,Y,Z,Ier)
     WRITE (xern4,'(1PE15.6)') Y
     WRITE (xern5,'(1PE15.6)') Z
     WRITE (xern6,'(1PE15.6)') uplim
-    CALL XERMSG('SLATEC','RD','MAX(X,Y,Z).GT.UPLIM WHERE X = '//xern3//&
+    CALL XERMSG('RD','MAX(X,Y,Z).GT.UPLIM WHERE X = '//xern3//&
       ' Y = '//xern4//' Z = '//xern5//' AND UPLIM = '//xern6,3,1)
     RETURN
   END IF
@@ -364,7 +364,7 @@ REAL FUNCTION RD(X,Y,Z,Ier)
     WRITE (xern4,'(1PE15.6)') Y
     WRITE (xern5,'(1PE15.6)') Z
     WRITE (xern6,'(1PE15.6)') lolim
-    CALL XERMSG('SLATEC','RD','MIN(X+Y,Z).LT.LOLIM WHERE X = '//xern3//&
+    CALL XERMSG('RD','MIN(X+Y,Z).LT.LOLIM WHERE X = '//xern3//&
       ' Y = '//xern4//' Z = '//xern5//' AND LOLIM = '//xern6,2,1)
     RETURN
   END IF

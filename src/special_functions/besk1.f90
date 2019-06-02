@@ -59,18 +59,18 @@ REAL FUNCTION BESK1(X)
     first = .FALSE.
   END IF
   !
-  IF ( X<=0. ) CALL XERMSG('SLATEC','BESK1','X IS ZERO OR NEGATIVE',2,2)
+  IF ( X<=0. ) CALL XERMSG('BESK1','X IS ZERO OR NEGATIVE',2,2)
   IF ( X>2.0 ) THEN
     !
     BESK1 = 0.
-    IF ( X>xmax ) CALL XERMSG('SLATEC','BESK1','X SO BIG K1 UNDERFLOWS',1,1)
+    IF ( X>xmax ) CALL XERMSG('BESK1','X SO BIG K1 UNDERFLOWS',1,1)
     IF ( X>xmax ) RETURN
     !
     BESK1 = EXP(-X)*BESK1E(X)
     RETURN
   END IF
   !
-  IF ( X<xmin ) CALL XERMSG('SLATEC','BESK1','X SO SMALL K1 OVERFLOWS',3,2)
+  IF ( X<xmin ) CALL XERMSG('BESK1','X SO SMALL K1 OVERFLOWS',3,2)
   y = 0.
   IF ( X>xsml ) y = X*X
   BESK1 = LOG(0.5*X)*BESI1(X) + (0.75+CSEVL(.5*y-1.,bk1cs,ntk1))/X

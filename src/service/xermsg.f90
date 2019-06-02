@@ -1,5 +1,5 @@
 !** XERMSG
-SUBROUTINE XERMSG(Librar,Subrou,Messg,Nerr,Level)
+SUBROUTINE XERMSG(Subrou,Messg,Nerr,Level)
   !>
   !  Process error messages for SLATEC and other libraries.
   !***
@@ -195,8 +195,8 @@ SUBROUTINE XERMSG(Librar,Subrou,Messg,Nerr,Level)
 
   INTEGER :: i, kdummy, kount, lerr, Level, lkntrl, llevel, &
     ltemp, maxmes, mkntrl, Nerr
-  CHARACTER(*) :: Librar, Subrou, Messg
-  CHARACTER(8) :: xlibr, xsubr
+  CHARACTER(*) :: Subrou, Messg
+  CHARACTER(8) :: xsubr
   CHARACTER(72) :: temp
   CHARACTER(20) :: lfirst
   !* FIRST EXECUTABLE STATEMENT  XERMSG
@@ -213,7 +213,7 @@ SUBROUTINE XERMSG(Librar,Subrou,Messg,Nerr,Level)
   !
   IF ( Nerr<-9999999.OR.Nerr>99999999.OR.Nerr==0.OR.Level<-1.OR.Level>2 ) THEN
     CALL XERPRN(' ***',-1,'FATAL ERROR IN...$$ XERMSG -- INVALID ERROR NUMBER OR LEVEL$$ JOB ABORT DUE TO FATAL ERROR.',72)
-    CALL XERSVE(' ',' ',' ',0,0,0,kdummy)
+    CALL XERSVE(' ',' ',0,0,0,kdummy)
     PRINT*,' ***XERMSG -- INVALID INPUT'
     RETURN
   END IF
@@ -221,7 +221,7 @@ SUBROUTINE XERMSG(Librar,Subrou,Messg,Nerr,Level)
   !       RECORD THE MESSAGE.
   !
   i = J4SAVE(1,Nerr,.TRUE.)
-  CALL XERSVE(Librar,Subrou,Messg,1,Nerr,Level,kount)
+  CALL XERSVE(Subrou,Messg,1,Nerr,Level,kount)
   !
   !       HANDLE PRINT-ONCE WARNING MESSAGES.
   !
@@ -229,7 +229,6 @@ SUBROUTINE XERMSG(Librar,Subrou,Messg,Nerr,Level)
   !
   !       ALLOW TEMPORARY USER OVERRIDE OF THE CONTROL FLAG.
   !
-  xlibr = Librar
   xsubr = Subrou
   lfirst = Messg
   lerr = Nerr
@@ -256,12 +255,8 @@ SUBROUTINE XERMSG(Librar,Subrou,Messg,Nerr,Level)
             temp(1:21) = 'MESSAGE FROM ROUTINE '
             i = MIN(LEN(Subrou),16)
             temp(22:21+i) = Subrou(1:i)
-            temp(22+i:33+i) = ' IN LIBRARY '
-            ltemp = 33 + i
-            i = MIN(LEN(Librar),16)
-            temp(ltemp+1:ltemp+i) = Librar(1:i)
-            temp(ltemp+i+1:ltemp+i+1) = '.'
-            ltemp = ltemp + i + 1
+            ltemp = 21 + i + 1
+            temp(ltemp:ltemp) = '.'
             CALL XERPRN(' ***',-1,temp(1:ltemp),72)
           END IF
           !
@@ -365,7 +360,7 @@ SUBROUTINE XERMSG(Librar,Subrou,Messg,Nerr,Level)
     ELSE
       CALL XERPRN(' ***',-1,'JOB ABORT DUE TO FATAL ERROR.',72)
     END IF
-    CALL XERSVE(' ',' ',' ',-1,0,0,kdummy)
+    CALL XERSVE(' ',' ',-1,0,0,kdummy)
     PRINT*,' '
   ELSE
     PRINT*,Messg

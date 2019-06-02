@@ -159,15 +159,15 @@ SUBROUTINE DRC6J(L2,L3,L4,L5,L6,L1min,L1max,Sixcof,Ndim,Ier)
   IF ( (MOD(L2+L3+L5+L6+eps,one)>=eps+eps).OR.&
       (MOD(L4+L2+L6+eps,one)>=eps+eps) ) THEN
     Ier = 1
-    CALL XERMSG('SLATEC','DRC6J','L2+L3+L5+L6 or L4+L2+L6 not integer.',Ier,1)
+    CALL XERMSG('DRC6J','L2+L3+L5+L6 or L4+L2+L6 not integer.',Ier,1)
     RETURN
   ELSEIF ( (L4+L2-L6<zero).OR.(L4-L2+L6<zero).OR.(-L4+L2+L6<zero) ) THEN
     Ier = 2
-    CALL XERMSG('SLATEC','DRC6J','L4, L2, L6 triangular condition not satisfied.',Ier,1)
+    CALL XERMSG('DRC6J','L4, L2, L6 triangular condition not satisfied.',Ier,1)
     RETURN
   ELSEIF ( (L4-L5+L3<zero).OR.(L4+L5-L3<zero).OR.(-L4+L5+L3<zero) ) THEN
     Ier = 3
-    CALL XERMSG('SLATEC','DRC6J','L4, L5, L3 triangular condition not satisfied.',Ier,1)
+    CALL XERMSG('DRC6J','L4, L5, L3 triangular condition not satisfied.',Ier,1)
     RETURN
   END IF
   !
@@ -179,7 +179,7 @@ SUBROUTINE DRC6J(L2,L3,L4,L5,L6,L1min,L1max,Sixcof,Ndim,Ier)
   !  Check error condition 4.
   IF ( MOD(L1max-L1min+eps,one)>=eps+eps ) THEN
     Ier = 4
-    CALL XERMSG('SLATEC','DRC6J','L1MAX-L1MIN not integer.',Ier,1)
+    CALL XERMSG('DRC6J','L1MAX-L1MIN not integer.',Ier,1)
     RETURN
   END IF
   IF ( L1min<L1max-eps ) THEN
@@ -193,7 +193,7 @@ SUBROUTINE DRC6J(L2,L3,L4,L5,L6,L1min,L1max,Sixcof,Ndim,Ier)
       !
       !  Check error condition 6.
       Ier = 6
-      CALL XERMSG('SLATEC','DRC6J','Dimension of result array for 6j coefficients too small.',Ier,1)
+      CALL XERMSG('DRC6J','Dimension of result array for 6j coefficients too small.',Ier,1)
       RETURN
     ELSE
       !
@@ -221,7 +221,7 @@ SUBROUTINE DRC6J(L2,L3,L4,L5,L6,L1min,L1max,Sixcof,Ndim,Ier)
     !
     !  Check error condition 5.
     Ier = 5
-    CALL XERMSG('SLATEC','DRC6J','L1MIN greater than L1MAX.',Ier,1)
+    CALL XERMSG('DRC6J','L1MIN greater than L1MAX.',Ier,1)
     RETURN
   END IF
   100  lstep = lstep + 1

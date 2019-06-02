@@ -121,7 +121,7 @@ SUBROUTINE DBESI(X,Alpha,Kode,N,Y,Nz)
   tolln = 2.303D0*gln*i1
   tolln = MIN(tolln,34.5388D0)
   IF ( N<1 ) THEN
-    CALL XERMSG('SLATEC','DBESI','N LESS THAN ONE.',2,1)
+    CALL XERMSG('DBESI','N LESS THAN ONE.',2,1)
     RETURN
   ELSEIF ( N==1 ) THEN
     kt = 2
@@ -131,10 +131,10 @@ SUBROUTINE DBESI(X,Alpha,Kode,N,Y,Nz)
     !
     !
     !
-    CALL XERMSG('SLATEC','DBESI','SCALING OPTION, KODE, NOT 1 OR 2.',2,1)
+    CALL XERMSG('DBESI','SCALING OPTION, KODE, NOT 1 OR 2.',2,1)
     RETURN
   ELSEIF ( X<0 ) THEN
-    CALL XERMSG('SLATEC','DBESI','X LESS THAN ZERO.',2,1)
+    CALL XERMSG('DBESI','X LESS THAN ZERO.',2,1)
     RETURN
   ELSEIF ( X==0 ) THEN
     IF ( Alpha<0 ) GOTO 1300
@@ -187,7 +187,7 @@ SUBROUTINE DBESI(X,Alpha,Kode,N,Y,Nz)
         earg = rttpi/SQRT(X)
         IF ( Kode==2 ) GOTO 1000
         IF ( X>elim ) THEN
-          CALL XERMSG('SLATEC','DBESI',&
+          CALL XERMSG('DBESI',&
             'OVERFLOW, X TOO LARGE FOR KODE = 1.',6,1)
           RETURN
         ELSE
@@ -209,7 +209,7 @@ SUBROUTINE DBESI(X,Alpha,Kode,N,Y,Nz)
         IF ( Kode==2 ) GOTO 100
         IF ( Alpha<1.0D0 ) THEN
           IF ( X<=elim ) GOTO 100
-          CALL XERMSG('SLATEC','DBESI',&
+          CALL XERMSG('DBESI',&
             'OVERFLOW, X TOO LARGE FOR KODE = 1.',6,1)
           RETURN
         ELSE
@@ -219,7 +219,7 @@ SUBROUTINE DBESI(X,Alpha,Kode,N,Y,Nz)
           t = ra*(1.0D0-etx) + etx/(z+ra)
           arg = Alpha*(t-gln)
           IF ( arg>elim ) THEN
-            CALL XERMSG('SLATEC','DBESI',&
+            CALL XERMSG('DBESI',&
               'OVERFLOW, X TOO LARGE FOR KODE = 1.',6,1)
             RETURN
           ELSE
@@ -494,6 +494,6 @@ SUBROUTINE DBESI(X,Alpha,Kode,N,Y,Nz)
     k = k - 1
   END DO
   RETURN
-  1300 CALL XERMSG('SLATEC','DBESI','ORDER, ALPHA, LESS THAN ZERO.',2,1)
+  1300 CALL XERMSG('DBESI','ORDER, ALPHA, LESS THAN ZERO.',2,1)
   RETURN
 END SUBROUTINE DBESI

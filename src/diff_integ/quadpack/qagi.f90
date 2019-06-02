@@ -209,5 +209,5 @@ SUBROUTINE QAGI(F,Bound,Inf,Epsabs,Epsrel,Result,Abserr,Neval,Ier,Limit,&
     lvl = 0
   END IF
   IF ( Ier==6 ) lvl = 1
-  IF ( Ier/=0 ) CALL XERMSG('SLATEC','QAGI','ABNORMAL RETURN',Ier,lvl)
+  IF ( Ier/=0 ) CALL XERMSG('QAGI','ABNORMAL RETURN',Ier,lvl)
 END SUBROUTINE QAGI

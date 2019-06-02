@@ -278,7 +278,7 @@ SUBROUTINE DBNDAC(G,Mdg,Nb,Ip,Ir,Mt,Jt)
   ELSE
     nerr = 1
     iopt = 2
-    CALL XERMSG('SLATEC','DBNDAC','MDG.LT.IR, PROBABLE ERROR.',nerr,iopt)
+    CALL XERMSG('DBNDAC','MDG.LT.IR, PROBABLE ERROR.',nerr,iopt)
     RETURN
   END IF
   !  ALG. STEP 24

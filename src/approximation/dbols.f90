@@ -454,7 +454,7 @@ SUBROUTINE DBOLS(W,Mdw,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Iw)
     !     SEE THAT MDW IS .GT.0. GROSS CHECK ONLY.
     IF ( Mdw<=0 ) THEN
       WRITE (xern1,'(I8)') Mdw
-      CALL XERMSG('SLATEC','DBOLS','MDW = '//xern1//' MUST BE POSITIVE.',2,1)
+      CALL XERMSG('DBOLS','MDW = '//xern1//' MUST BE POSITIVE.',2,1)
       !     DO(RETURN TO USER PROGRAM UNIT)
       GOTO 100
     END IF
@@ -462,7 +462,7 @@ SUBROUTINE DBOLS(W,Mdw,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Iw)
     !     SEE THAT NUMBER OF UNKNOWNS IS POSITIVE.
     IF ( Ncols<=0 ) THEN
       WRITE (xern1,'(I8)') Ncols
-      CALL XERMSG('SLATEC','DBOLS','NCOLS = '//xern1//&
+      CALL XERMSG('DBOLS','NCOLS = '//xern1//&
         ' THE NO. OF VARIABLES MUST BE POSITIVE.',3,1)
       !     DO(RETURN TO USER PROGRAM UNIT)
       GOTO 100
@@ -473,7 +473,7 @@ SUBROUTINE DBOLS(W,Mdw,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Iw)
       IF ( Ind(j)<1.OR.Ind(j)>4 ) THEN
         WRITE (xern1,'(I8)') j
         WRITE (xern2,'(I8)') Ind(j)
-        CALL XERMSG('SLATEC','DBOLS','IND('//xern1//') = '//xern2//&
+        CALL XERMSG('DBOLS','IND('//xern1//') = '//xern2//&
           ' MUST BE 1-4.',4,1)
         !     DO(RETURN TO USER PROGRAM UNIT)
         GOTO 100
@@ -487,7 +487,7 @@ SUBROUTINE DBOLS(W,Mdw,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Iw)
           WRITE (xern1,'(I8)') j
           WRITE (xern3,'(1PE15.6)') Bl(j)
           WRITE (xern4,'(1PE15.6)') Bu(j)
-          CALL XERMSG('SLATEC','DBOLS','BOUND BL('//xern1//') = '//xern3//&
+          CALL XERMSG('DBOLS','BOUND BL('//xern1//') = '//xern3//&
             ' IS .GT. BU('//xern1//') = '//xern4,5,1)
           !     DO(RETURN TO USER PROGRAM UNIT)
           GOTO 100
@@ -524,7 +524,7 @@ SUBROUTINE DBOLS(W,Mdw,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Iw)
           IF ( lmdw<Mrows ) THEN
             WRITE (xern1,'(I8)') lmdw
             WRITE (xern2,'(I8)') Mrows
-            CALL XERMSG('SLATEC','DBOLS','THE ROW DIMENSION OF W(,) = '//&
+            CALL XERMSG('DBOLS','THE ROW DIMENSION OF W(,) = '//&
               xern1//' MUST BE .GE. THE NUMBER OF ROWS = '//xern2,11,1)
             !     DO(RETURN TO USER PROGRAM UNIT)
             GOTO 100
@@ -532,14 +532,14 @@ SUBROUTINE DBOLS(W,Mdw,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Iw)
           IF ( lndw<Ncols+1 ) THEN
             WRITE (xern1,'(I8)') lndw
             WRITE (xern2,'(I8)') Ncols + 1
-            CALL XERMSG('SLATEC','DBOLS','THE COLUMN DIMENSION OF W(,) = '//&
+            CALL XERMSG('DBOLS','THE COLUMN DIMENSION OF W(,) = '//&
               xern1//' MUST BE .GE. NCOLS+1 = '//xern2,12,1)
             GOTO 100
           END IF
           IF ( llb<Ncols ) THEN
             WRITE (xern1,'(I8)') llb
             WRITE (xern2,'(I8)') Ncols
-            CALL XERMSG('SLATEC','DBOLS',&
+            CALL XERMSG('DBOLS',&
               'THE DIMENSIONS OF THE ARRAYS BL(), BU(), AND IND() = '&
               //xern1//' MUST BE .GE. NCOLS = '//xern2,13,1)
             !     DO(RETURN TO USER PROGRAM UNIT)
@@ -548,7 +548,7 @@ SUBROUTINE DBOLS(W,Mdw,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Iw)
           IF ( llx<lenx ) THEN
             WRITE (xern1,'(I8)') llx
             WRITE (xern2,'(I8)') lenx
-            CALL XERMSG('SLATEC','DBOLS','THE DIMENSION OF X() = '//xern1//&
+            CALL XERMSG('DBOLS','THE DIMENSION OF X() = '//xern1//&
               ' MUST BE .GE. THE REQUIRED LENGTH = '//xern2,14,1)
             !     DO(RETURN TO USER PROGRAM UNIT)
             GOTO 100
@@ -556,7 +556,7 @@ SUBROUTINE DBOLS(W,Mdw,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Iw)
           IF ( llrw<5*Ncols ) THEN
             WRITE (xern1,'(I8)') llrw
             WRITE (xern2,'(I8)') 5*Ncols
-            CALL XERMSG('SLATEC','DBOLS','THE DIMENSION OF RW() = '//xern1//&
+            CALL XERMSG('DBOLS','THE DIMENSION OF RW() = '//xern1//&
               ' MUST BE .GE. 5*NCOLS = '//xern2,15,1)
             !     DO(RETURN TO USER PROGRAM UNIT)
             GOTO 100
@@ -564,7 +564,7 @@ SUBROUTINE DBOLS(W,Mdw,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Iw)
           IF ( lliw<2*Ncols ) THEN
             WRITE (xern1,'(I8)') lliw
             WRITE (xern2,'(I8)') 2*Ncols
-            CALL XERMSG('SLATEC','DBOLS','THE DIMENSION OF IW() = '//xern1//&
+            CALL XERMSG('DBOLS','THE DIMENSION OF IW() = '//xern1//&
               ' MUST BE .GE. 2*NCOLS = '//xern2,16,1)
             !     DO(RETURN TO USER PROGRAM UNIT)
             GOTO 100
@@ -572,7 +572,7 @@ SUBROUTINE DBOLS(W,Mdw,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Iw)
           IF ( liopt<lp+1 ) THEN
             WRITE (xern1,'(I8)') liopt
             WRITE (xern2,'(I8)') lp + 1
-            CALL XERMSG('SLATEC','DBOLS','THE DIMENSION OF IOPT() = '//&
+            CALL XERMSG('DBOLS','THE DIMENSION OF IOPT() = '//&
               xern1//' MUST BE .GE. THE REQUIRED LEN = '//xern2,17,1)
             !     DO(RETURN TO USER PROGRAM UNIT)
             GOTO 100
@@ -650,7 +650,7 @@ SUBROUTINE DBOLS(W,Mdw,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Iw)
           !     SEE THAT ISCALE IS 1 THRU 3.
           IF ( iscale<1.OR.iscale>3 ) THEN
             WRITE (xern1,'(I8)') iscale
-            CALL XERMSG('SLATEC','DBOLS','ISCALE OPTION = '//xern1//&
+            CALL XERMSG('DBOLS','ISCALE OPTION = '//xern1//&
               ' MUST BE 1-3',7,1)
             !     DO(RETURN TO USER PROGRAM UNIT)
             GOTO 100
@@ -666,7 +666,7 @@ SUBROUTINE DBOLS(W,Mdw,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Iw)
           iscale = 4
           IF ( Iopt(lp+2)<=0 ) THEN
             WRITE (xern1,'(I8)') Iopt(lp+2)
-            CALL XERMSG('SLATEC','DBOLS','OFFSET PAST X(NCOLS) ('//xern1//&
+            CALL XERMSG('DBOLS','OFFSET PAST X(NCOLS) ('//xern1//&
               ') FOR USER-PROVIDED COLUMN SCALING MUST BE POSITIVE.',8,1)
             !     DO(RETURN TO USER PROGRAM UNIT)
             GOTO 100
@@ -677,7 +677,7 @@ SUBROUTINE DBOLS(W,Mdw,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Iw)
             IF ( Rw(j)<=zero ) THEN
               WRITE (xern1,'(I8)') j
               WRITE (xern3,'(1PE15.6)') Rw(j)
-              CALL XERMSG('SLATEC','DBOLS',&
+              CALL XERMSG('DBOLS',&
                 'EACH PROVIDED COLUMN SCALE FACTOR MUST BE POSITIVE.$$COMPONENT '&
                 //xern1//' NOW = '//xern3,9,1)
               GOTO 100
@@ -707,7 +707,7 @@ SUBROUTINE DBOLS(W,Mdw,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Iw)
         !     NO VALID OPTION NUMBER WAS NOTED. THIS IS AN ERROR CONDITION.
       ELSE
         WRITE (xern1,'(I8)') jp
-        CALL XERMSG('SLATEC','DBOLS','THE OPTION NUMBER = '//xern1//&
+        CALL XERMSG('DBOLS','THE OPTION NUMBER = '//xern1//&
           ' IS NOT DEFINED.',6,1)
         !     DO(RETURN TO USER PROGRAM UNIT)
         GOTO 100
@@ -727,7 +727,7 @@ SUBROUTINE DBOLS(W,Mdw,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Iw)
     IF ( mnew<0.OR.mnew>Mdw ) THEN
       WRITE (xern1,'(I8)') mnew
       WRITE (xern2,'(I8)') Mdw
-      CALL XERMSG('SLATEC','DBOLS','NO. OF ROWS = '//xern1//&
+      CALL XERMSG('DBOLS','NO. OF ROWS = '//xern1//&
         ' MUST BE .GE. 0 .AND. .LE. MDW = '//xern2,10,1)
       !     DO(RETURN TO USER PROGRAM UNIT)
       GOTO 100

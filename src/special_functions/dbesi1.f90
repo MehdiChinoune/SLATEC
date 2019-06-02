@@ -64,7 +64,7 @@ REAL(8) FUNCTION DBESI1(X)
   y = ABS(X)
   IF ( y>3.0D0 ) THEN
     !
-    IF ( y>xmax ) CALL XERMSG('SLATEC','DBESI1','ABS(X) SO BIG I1 OVERFLOWS',2,2)
+    IF ( y>xmax ) CALL XERMSG('DBESI1','ABS(X) SO BIG I1 OVERFLOWS',2,2)
     !
     DBESI1 = EXP(y)*DBSI1E(X)
     RETURN
@@ -73,7 +73,7 @@ REAL(8) FUNCTION DBESI1(X)
   DBESI1 = 0.D0
   IF ( y==0.D0 ) RETURN
   !
-  IF ( y<=xmin ) CALL XERMSG('SLATEC','DBESI1',&
+  IF ( y<=xmin ) CALL XERMSG('DBESI1',&
     'ABS(X) SO SMALL I1 UNDERFLOWS',1,1)
   IF ( y>xmin ) DBESI1 = 0.5D0*X
   IF ( y>xsml ) DBESI1 = X*(0.875D0+DCSEVL(y*y/4.5D0-1.D0,bi1cs,nti1))

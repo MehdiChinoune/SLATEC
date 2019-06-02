@@ -282,7 +282,7 @@ REAL(8) FUNCTION DRF(X,Y,Z,Ier)
     WRITE (xern3,'(1PE15.6)') X
     WRITE (xern4,'(1PE15.6)') Y
     WRITE (xern5,'(1PE15.6)') Z
-    CALL XERMSG('SLATEC','DRF','MIN(X,Y,Z).LT.0 WHERE X = '//xern3//&
+    CALL XERMSG('DRF','MIN(X,Y,Z).LT.0 WHERE X = '//xern3//&
       ' Y = '//xern4//' AND Z = '//xern5,1,1)
     RETURN
   END IF
@@ -293,7 +293,7 @@ REAL(8) FUNCTION DRF(X,Y,Z,Ier)
     WRITE (xern4,'(1PE15.6)') Y
     WRITE (xern5,'(1PE15.6)') Z
     WRITE (xern6,'(1PE15.6)') uplim
-    CALL XERMSG('SLATEC','DRF','MAX(X,Y,Z).GT.UPLIM WHERE X = '//xern3//&
+    CALL XERMSG('DRF','MAX(X,Y,Z).GT.UPLIM WHERE X = '//xern3//&
       ' Y = '//xern4//' Z = '//xern5//' AND UPLIM = '//xern6,3,1)
     RETURN
   END IF
@@ -304,7 +304,7 @@ REAL(8) FUNCTION DRF(X,Y,Z,Ier)
     WRITE (xern4,'(1PE15.6)') Y
     WRITE (xern5,'(1PE15.6)') Z
     WRITE (xern6,'(1PE15.6)') lolim
-    CALL XERMSG('SLATEC','DRF','MIN(X+Y,X+Z,Y+Z).LT.LOLIM WHERE X = '//&
+    CALL XERMSG('DRF','MIN(X+Y,X+Z,Y+Z).LT.LOLIM WHERE X = '//&
       xern3//' Y = '//xern4//' Z = '//xern5//' AND LOLIM = '//xern6,2,1)
     RETURN
   END IF

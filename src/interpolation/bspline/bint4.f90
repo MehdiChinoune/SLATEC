@@ -114,7 +114,7 @@ SUBROUTINE BINT4(X,Y,Ndata,Ibcl,Ibcr,Fbcl,Fbcr,Kntopt,T,Bcoef,N,K,W)
   wdtol = R1MACH(4)
   tol = SQRT(wdtol)
   IF ( Ndata<2 ) THEN
-    CALL XERMSG('SLATEC','BINT4','NDATA IS LESS THAN 2',2,1)
+    CALL XERMSG('BINT4','NDATA IS LESS THAN 2',2,1)
     RETURN
   ELSE
     ndm = Ndata - 1
@@ -122,13 +122,13 @@ SUBROUTINE BINT4(X,Y,Ndata,Ibcl,Ibcr,Fbcl,Fbcr,Kntopt,T,Bcoef,N,K,W)
       IF ( X(i)>=X(i+1) ) GOTO 50
     END DO
     IF ( Ibcl<1.OR.Ibcl>2 ) THEN
-      CALL XERMSG('SLATEC','BINT4','IBCL IS NOT 1 OR 2',2,1)
+      CALL XERMSG('BINT4','IBCL IS NOT 1 OR 2',2,1)
       RETURN
     ELSEIF ( Ibcr<1.OR.Ibcr>2 ) THEN
-      CALL XERMSG('SLATEC','BINT4','IBCR IS NOT 1 OR 2',2,1)
+      CALL XERMSG('BINT4','IBCR IS NOT 1 OR 2',2,1)
       RETURN
     ELSEIF ( Kntopt<1.OR.Kntopt>3 ) THEN
-      CALL XERMSG('SLATEC','BINT4','KNTOPT IS NOT 1, 2, OR 3',2,1)
+      CALL XERMSG('BINT4','KNTOPT IS NOT 1, 2, OR 3',2,1)
       RETURN
     ELSE
       K = 4
@@ -223,17 +223,17 @@ SUBROUTINE BINT4(X,Y,Ndata,Ibcl,Ibcr,Fbcl,Fbcr,Kntopt,T,Bcoef,N,K,W)
       IF ( iflag==2 ) THEN
         !
         !
-        CALL XERMSG('SLATEC','BINT4','THE SYSTEM OF EQUATIONS IS SINGULAR', 2,1)
+        CALL XERMSG('BINT4','THE SYSTEM OF EQUATIONS IS SINGULAR', 2,1)
         RETURN
       ELSE
         CALL BNSLV(W(iwp,1),nwrow,N,ilb,iub,Bcoef)
         RETURN
       END IF
     END IF
-    50 CALL XERMSG('SLATEC','BINT4','X VALUES ARE NOT DISTINCT OR NOT ORDERED',&
+    50 CALL XERMSG('BINT4','X VALUES ARE NOT DISTINCT OR NOT ORDERED',&
       2,1)
     RETURN
   END IF
-  100  CALL XERMSG('SLATEC','BINT4',&
+  100  CALL XERMSG('BINT4',&
     'KNOT INPUT THROUGH W ARRAY IS NOT ORDERED PROPERLY',2,1)
 END SUBROUTINE BINT4

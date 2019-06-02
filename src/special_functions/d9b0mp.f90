@@ -157,11 +157,11 @@ SUBROUTINE D9B0MP(X,Ampl,Theta)
     first = .FALSE.
   END IF
   !
-  IF ( X<4.D0 ) CALL XERMSG('SLATEC','D9B0MP','X MUST BE GE 4',1,2)
+  IF ( X<4.D0 ) CALL XERMSG('D9B0MP','X MUST BE GE 4',1,2)
   !
   IF ( X>8.D0 ) THEN
     !
-    IF ( X>xmax ) CALL XERMSG('SLATEC','D9B0MP',&
+    IF ( X>xmax ) CALL XERMSG('D9B0MP',&
       'NO PRECISION BECAUSE X IS BIG',2,2)
     !
     z = 128.D0/(X*X) - 1.D0

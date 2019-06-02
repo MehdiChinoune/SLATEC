@@ -183,7 +183,7 @@ SUBROUTINE SPLPMU(Mrelas,Nvars,Lmx,Lbm,Nredc,Info,Ienter,Ileave,Iopt,Npp,&
       GOTO 1000
     ELSE
       nerr = 26
-      CALL XERMSG('SLATEC','SPLPMU',&
+      CALL XERMSG('SPLPMU',&
         'IN SPLP, MOVED TO A SINGULAR POINT.  THIS SHOULD NOT HAPPEN.',nerr,Iopt)
       Info = -nerr
       RETURN

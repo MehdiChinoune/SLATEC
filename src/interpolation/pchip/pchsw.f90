@@ -154,7 +154,7 @@ SUBROUTINE PCHSW(Dfmax,Iextrm,D1,D2,H,Slope,Ierr)
           !
           !     NEGATIVE VALUE OF RADICAL (SHOULD NEVER OCCUR).
           Ierr = -2
-          CALL XERMSG('SLATEC','PCHSW','NEGATIVE RADICAL',Ierr,1)
+          CALL XERMSG('PCHSW','NEGATIVE RADICAL',Ierr,1)
           RETURN
         ELSE
           that = (cp-SQRT(radcal))/(three*nu)
@@ -186,7 +186,7 @@ SUBROUTINE PCHSW(Dfmax,Iextrm,D1,D2,H,Slope,Ierr)
   !
   !     D1 AND D2 BOTH ZERO, OR BOTH NONZERO AND SAME SIGN.
   200  Ierr = -1
-  CALL XERMSG('SLATEC','PCHSW','D1 AND/OR D2 INVALID',Ierr,1)
+  CALL XERMSG('PCHSW','D1 AND/OR D2 INVALID',Ierr,1)
   RETURN
   !------------- LAST LINE OF PCHSW FOLLOWS ------------------------------
   RETURN

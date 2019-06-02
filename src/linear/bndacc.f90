@@ -280,7 +280,7 @@ SUBROUTINE BNDACC(G,Mdg,Nb,Ip,Ir,Mt,Jt)
   ELSE
     nerr = 1
     iopt = 2
-    CALL XERMSG('SLATEC','BNDACC','MDG.LT.IR, PROBABLE ERROR.',nerr,iopt)
+    CALL XERMSG('BNDACC','MDG.LT.IR, PROBABLE ERROR.',nerr,iopt)
     RETURN
   END IF
   !  ALG. STEP 24

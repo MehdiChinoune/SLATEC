@@ -63,7 +63,7 @@ COMPLEX FUNCTION CLNGAM(Zin)
         ! USE THE RECURSION RELATION FOR ABS(Z) SMALL.
         !
         IF ( x<(-0.5).AND.ABS(y)<=dxrel ) THEN
-          IF ( ABS((z-AINT(x-0.5))/x)<dxrel ) CALL XERMSG('SLATEC','CLNGAM',&
+          IF ( ABS((z-AINT(x-0.5))/x)<dxrel ) CALL XERMSG('CLNGAM',&
             'ANSWER LT HALF PRECISION BECAUSE Z TOO NEAR NEGATIVE INTEGER',1,1)
         END IF
         !
@@ -77,7 +77,7 @@ COMPLEX FUNCTION CLNGAM(Zin)
         END DO
         !
         IF ( REAL(corr)==0.0.AND.AIMAG(corr)==0.0 )&
-          CALL XERMSG('SLATEC','CLNGAM','Z IS A NEGATIVE INTEGER',3,2)
+          CALL XERMSG('CLNGAM','Z IS A NEGATIVE INTEGER',3,2)
         corr = -CMPLX(LOG(ABS(corr)),argsum)
       ELSE
         !
@@ -87,7 +87,7 @@ COMPLEX FUNCTION CLNGAM(Zin)
         IF ( y>0.0 ) z = CONJG(z)
         corr = EXP(-CMPLX(0.0,2.0*pi)*z)
         IF ( REAL(corr)==1.0.AND.AIMAG(corr)==0.0 )&
-          CALL XERMSG('SLATEC','CLNGAM','Z IS A NEGATIVE INTEGER',3,2)
+          CALL XERMSG('CLNGAM','Z IS A NEGATIVE INTEGER',3,2)
         !
         CLNGAM = sq2pil + 1.0 - CMPLX(0.0,pi)*(z-0.5) - CLNREL(-corr)&
           + (z-0.5)*LOG(1.0-z) - z - C9LGMC(1.0-z)

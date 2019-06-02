@@ -1,5 +1,5 @@
 !** XERSVE
-SUBROUTINE XERSVE(Librar,Subrou,Messg,Kflag,Nerr,Level,Icount)
+SUBROUTINE XERSVE(Subrou,Messg,Kflag,Nerr,Level,Icount)
   !>
   !  Record that an error has occurred.
   !***
@@ -67,10 +67,10 @@ SUBROUTINE XERSVE(Librar,Subrou,Messg,Kflag,Nerr,Level,Icount)
   INTEGER, PARAMETER :: LENTAB = 10
   INTEGER i, Icount, iunit, Kflag, kunit, Level, Nerr, nunit
   INTEGER lun(5)
-  CHARACTER(*) Librar, Subrou, Messg
-  CHARACTER(8) :: lib, sub
+  CHARACTER(*) :: Subrou, Messg
+  CHARACTER(8) :: sub
   CHARACTER(60) :: mes
-  CHARACTER(8), SAVE :: libtab(LENTAB), subtab(LENTAB)
+  CHARACTER(8), SAVE :: subtab(LENTAB)
   CHARACTER(60), SAVE :: mestab(LENTAB)
   INTEGER, SAVE :: nertab(LENTAB), levtab(LENTAB), kount(LENTAB)
   INTEGER :: kountx = 0, nmsg = 0
@@ -96,15 +96,15 @@ SUBROUTINE XERSVE(Librar,Subrou,Messg,Kflag,Nerr,Level,Icount)
       ! FORMATs.
       !
       99001 FORMAT ('0          ERROR MESSAGE SUMMARY'/&
-        ' LIBRARY    SUBROUTINE MESSAGE START                                             &
+        ' SUBROUTINE MESSAGE START                                             &
         &  NERR      LEVEL     COUNT')
       !
       !           Print body of table.
       !
       DO i = 1, nmsg
-        WRITE (iunit,99002) libtab(i), subtab(i), mestab(i), nertab(i), &
+        WRITE (iunit,99002) subtab(i), mestab(i), nertab(i), &
           levtab(i), kount(i)
-        99002 FORMAT (1X,A,3X,A,3X,A,3I10)
+        99002 FORMAT (1X,A,3X,A,3I10)
       END DO
       !
       !           Print number of other errors.
@@ -127,11 +127,10 @@ SUBROUTINE XERSVE(Librar,Subrou,Messg,Kflag,Nerr,Level,Icount)
     !        SEARCH FOR THIS MESSG, OR ELSE AN EMPTY SLOT FOR THIS MESSG,
     !        OR ELSE DETERMINE THAT THE ERROR TABLE IS FULL.
     !
-    lib = Librar
     sub = Subrou
     mes = Messg
     DO i = 1, nmsg
-      IF ( lib==libtab(i).AND.sub==subtab(i).AND.mes==mestab(i).AND.&
+      IF ( sub==subtab(i).AND.mes==mestab(i).AND.&
           Nerr==nertab(i).AND.Level==levtab(i) ) THEN
         kount(i) = kount(i) + 1
         Icount = kount(i)
@@ -144,7 +143,6 @@ SUBROUTINE XERSVE(Librar,Subrou,Messg,Kflag,Nerr,Level,Icount)
       !           Empty slot found for new message.
       !
       nmsg = nmsg + 1
-      libtab(i) = lib
       subtab(i) = sub
       mestab(i) = mes
       nertab(i) = Nerr

@@ -286,7 +286,7 @@ SUBROUTINE DWNNLS(W,Mdw,Me,Ma,N,L,Prgopt,X,Rnorm,Mode,Iwork,Work)
     lw = Me + Ma + 5*N
     IF ( Iwork(1)<lw ) THEN
       WRITE (xern1,'(I8)') lw
-      CALL XERMSG('SLATEC','DWNNLS','INSUFFICIENT STORAGE ALLOCATED FOR WORK(*), NEED LW = '//xern1,2,1)
+      CALL XERMSG('DWNNLS','INSUFFICIENT STORAGE ALLOCATED FOR WORK(*), NEED LW = '//xern1,2,1)
       Mode = 2
       RETURN
     END IF
@@ -296,20 +296,20 @@ SUBROUTINE DWNNLS(W,Mdw,Me,Ma,N,L,Prgopt,X,Rnorm,Mode,Iwork,Work)
     liw = Me + Ma + N
     IF ( Iwork(2)<liw ) THEN
       WRITE (xern1,'(I8)') liw
-      CALL XERMSG('SLATEC','DWNNLS','INSUFFICIENT STORAGE ALLOCATED FOR IWORK(*), NEED LIW = '//xern1,2,1)
+      CALL XERMSG('DWNNLS','INSUFFICIENT STORAGE ALLOCATED FOR IWORK(*), NEED LIW = '//xern1,2,1)
       Mode = 2
       RETURN
     END IF
   END IF
   !
   IF ( Mdw<Me+Ma ) THEN
-    CALL XERMSG('SLATEC','DWNNLS','THE VALUE MDW.LT.ME+MA IS AN ERROR',1,1)
+    CALL XERMSG('DWNNLS','THE VALUE MDW.LT.ME+MA IS AN ERROR',1,1)
     Mode = 2
     RETURN
   END IF
   !
   IF ( L<0.OR.L>N ) THEN
-    CALL XERMSG('SLATEC','DWNNLS','L.GE.0 .AND. L.LE.N IS REQUIRED',2,1)
+    CALL XERMSG('DWNNLS','L.GE.0 .AND. L.LE.N IS REQUIRED',2,1)
     Mode = 2
     RETURN
   END IF

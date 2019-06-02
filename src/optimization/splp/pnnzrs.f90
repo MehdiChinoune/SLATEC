@@ -72,7 +72,7 @@ SUBROUTINE PNNZRS(I,Xval,Iplace,Sx,Ix,Ircx)
   !
   IF ( Ircx==0 ) THEN
     nerr = 55
-    CALL XERMSG('SLATEC','PNNZRS','IRCX=0.',nerr,iopt)
+    CALL XERMSG('PNNZRS','IRCX=0.',nerr,iopt)
   END IF
   !
   !     LMX IS THE LENGTH OF THE IN-MEMORY STORAGE AREA.
@@ -85,7 +85,7 @@ SUBROUTINE PNNZRS(I,Xval,Iplace,Sx,Ix,Ircx)
     !
     IF ( Ircx>Ix(3).OR.ABS(I)>Ix(2) ) THEN
       nerr = 55
-      CALL XERMSG('SLATEC','PNNZRS',&
+      CALL XERMSG('PNNZRS',&
         'SUBSCRIPTS FOR ARRAY ELEMENT TO BE ACCESSED WERE OUT OF BOUNDS.',nerr,iopt)
     END IF
     l = Ix(2)
@@ -96,7 +96,7 @@ SUBROUTINE PNNZRS(I,Xval,Iplace,Sx,Ix,Ircx)
     !
     IF ( Ix(2)<-Ircx.OR.Ix(3)<ABS(I) ) THEN
       nerr = 55
-      CALL XERMSG('SLATEC','PNNZRS',&
+      CALL XERMSG('PNNZRS',&
         'SUBSCRIPTS FOR ARRAY ELEMENT TO BE ACCESSED WERE OUT OF BOUNDS.',nerr,iopt)
     END IF
     l = Ix(3)

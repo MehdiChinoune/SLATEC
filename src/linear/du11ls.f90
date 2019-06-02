@@ -92,7 +92,7 @@ SUBROUTINE DU11LS(A,Mda,M,N,Ub,Db,Mode,Np,Krank,Ksure,H,W,Eb,Ic,Ir)
         CALL ISWAP(1,Ic(i),1,Ic(kk),1)
         CALL DSWAP(M,A(1,i),1,A(1,kk),1)
       ELSE
-        CALL XERMSG('SLATEC','DU11LS',&
+        CALL XERMSG('DU11LS',&
           'FIRST NP COLUMNS ARE LINEARLY DEPENDENT',8,0)
         Krank = i - 1
         RETURN
@@ -185,7 +185,7 @@ SUBROUTINE DU11LS(A,Mda,M,N,Ub,Db,Mode,Np,Krank,Ksure,H,W,Eb,Ic,Ir)
     IF ( j<=Krank ) GOTO 200
     GOTO 500
   ELSE
-    CALL XERMSG('SLATEC','DU11LS','FIRST NP COLUMNS ARE LINEARLY DEPENDENT',&
+    CALL XERMSG('DU11LS','FIRST NP COLUMNS ARE LINEARLY DEPENDENT',&
       8,0)
     Krank = j - 1
     RETURN

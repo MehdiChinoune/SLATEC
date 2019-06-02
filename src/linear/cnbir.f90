@@ -191,7 +191,7 @@ SUBROUTINE CNBIR(Abe,Lda,N,Ml,Mu,V,Itask,Ind,Work,Iwork)
     Ind = -1
     WRITE (xern1,'(I8)') Lda
     WRITE (xern2,'(I8)') N
-    CALL XERMSG('SLATEC','CNBIR','LDA = '//xern1//' IS LESS THAN N = '//&
+    CALL XERMSG('CNBIR','LDA = '//xern1//' IS LESS THAN N = '//&
       xern2,-1,1)
     RETURN
   END IF
@@ -199,28 +199,28 @@ SUBROUTINE CNBIR(Abe,Lda,N,Ml,Mu,V,Itask,Ind,Work,Iwork)
   IF ( N<=0 ) THEN
     Ind = -2
     WRITE (xern1,'(I8)') N
-    CALL XERMSG('SLATEC','CNBIR','N = '//xern1//' IS LESS THAN 1',-2,1)
+    CALL XERMSG('CNBIR','N = '//xern1//' IS LESS THAN 1',-2,1)
     RETURN
   END IF
   !
   IF ( Itask<1 ) THEN
     Ind = -3
     WRITE (xern1,'(I8)') Itask
-    CALL XERMSG('SLATEC','CNBIR','ITASK = '//xern1//' IS LESS THAN 1',-3,1)
+    CALL XERMSG('CNBIR','ITASK = '//xern1//' IS LESS THAN 1',-3,1)
     RETURN
   END IF
   !
   IF ( Ml<0.OR.Ml>=N ) THEN
     Ind = -5
     WRITE (xern1,'(I8)') Ml
-    CALL XERMSG('SLATEC','CNBIR','ML = '//xern1//' IS OUT OF RANGE',-5,1)
+    CALL XERMSG('CNBIR','ML = '//xern1//' IS OUT OF RANGE',-5,1)
     RETURN
   END IF
   !
   IF ( Mu<0.OR.Mu>=N ) THEN
     Ind = -6
     WRITE (xern1,'(I8)') Mu
-    CALL XERMSG('SLATEC','CNBIR','MU = '//xern1//' IS OUT OF RANGE',-6,1)
+    CALL XERMSG('CNBIR','MU = '//xern1//' IS OUT OF RANGE',-6,1)
     RETURN
   END IF
   !
@@ -240,7 +240,7 @@ SUBROUTINE CNBIR(Abe,Lda,N,Ml,Mu,V,Itask,Ind,Work,Iwork)
     !        CHECK FOR COMPUTATIONALLY SINGULAR MATRIX
     IF ( info/=0 ) THEN
       Ind = -4
-      CALL XERMSG('SLATEC','CNBIR','SINGULAR MATRIX A - NO SOLUTION',-4,1)
+      CALL XERMSG('CNBIR','SINGULAR MATRIX A - NO SOLUTION',-4,1)
       RETURN
     END IF
   END IF
@@ -282,6 +282,6 @@ SUBROUTINE CNBIR(Abe,Lda,N,Ml,Mu,V,Itask,Ind,Work,Iwork)
   Ind = INT( -LOG10(MAX(R1MACH(4),dnorm/xnorm)) )
   IF ( Ind<=0 ) THEN
     Ind = -10
-    CALL XERMSG('SLATEC','CNBIR','SOLUTION MAY HAVE NO SIGNIFICANCE',-10,0)
+    CALL XERMSG('CNBIR','SOLUTION MAY HAVE NO SIGNIFICANCE',-10,0)
   END IF
 END SUBROUTINE CNBIR

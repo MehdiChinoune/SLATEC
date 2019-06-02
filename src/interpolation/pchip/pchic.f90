@@ -236,13 +236,13 @@ SUBROUTINE PCHIC(Ic,Vc,Switch,N,X,F,D,Incfd,Wk,Nwk,Ierr)
     !
     !     N.LT.2 RETURN.
     Ierr = -1
-    CALL XERMSG('SLATEC','PCHIC','NUMBER OF DATA POINTS LESS THAN TWO',Ierr,1)
+    CALL XERMSG('PCHIC','NUMBER OF DATA POINTS LESS THAN TWO',Ierr,1)
     RETURN
   ELSEIF ( Incfd<1 ) THEN
     !
     !     INCFD.LT.1 RETURN.
     Ierr = -2
-    CALL XERMSG('SLATEC','PCHIC','INCREMENT LESS THAN ONE',Ierr,1)
+    CALL XERMSG('PCHIC','INCREMENT LESS THAN ONE',Ierr,1)
     RETURN
   ELSE
     DO i = 2, N
@@ -258,7 +258,7 @@ SUBROUTINE PCHIC(Ic,Vc,Switch,N,X,F,D,Incfd,Wk,Nwk,Ierr)
       !
       !     IC OUT OF RANGE RETURN.
       Ierr = Ierr - 3
-      CALL XERMSG('SLATEC','PCHIC','IC OUT OF RANGE',Ierr,1)
+      CALL XERMSG('PCHIC','IC OUT OF RANGE',Ierr,1)
       RETURN
     ELSE
       !
@@ -269,7 +269,7 @@ SUBROUTINE PCHIC(Ic,Vc,Switch,N,X,F,D,Incfd,Wk,Nwk,Ierr)
         !
         !     NWK .LT. 2*(N-1)  RETURN.
         Ierr = -7
-        CALL XERMSG('SLATEC','PCHIC','WORK ARRAY TOO SMALL',Ierr,1)
+        CALL XERMSG('PCHIC','WORK ARRAY TOO SMALL',Ierr,1)
         RETURN
       ELSE
         !
@@ -303,7 +303,7 @@ SUBROUTINE PCHIC(Ic,Vc,Switch,N,X,F,D,Incfd,Wk,Nwk,Ierr)
               !
               !     ERROR RETURN FROM PCHCS.
               Ierr = -8
-              CALL XERMSG('SLATEC','PCHIC','ERROR RETURN FROM PCHCS',Ierr,1)
+              CALL XERMSG('PCHIC','ERROR RETURN FROM PCHCS',Ierr,1)
               RETURN
             END IF
           END IF
@@ -323,7 +323,7 @@ SUBROUTINE PCHIC(Ic,Vc,Switch,N,X,F,D,Incfd,Wk,Nwk,Ierr)
             !     ERROR RETURN FROM PCHCE.
             !   *** THIS CASE SHOULD NEVER OCCUR ***
             Ierr = -9
-            CALL XERMSG('SLATEC','PCHIC','ERROR RETURN FROM PCHCE',Ierr,1)
+            CALL XERMSG('PCHIC','ERROR RETURN FROM PCHCE',Ierr,1)
             RETURN
           END IF
         END IF
@@ -337,7 +337,7 @@ SUBROUTINE PCHIC(Ic,Vc,Switch,N,X,F,D,Incfd,Wk,Nwk,Ierr)
   !
   !     X-ARRAY NOT STRICTLY INCREASING.
   100  Ierr = -3
-  CALL XERMSG('SLATEC','PCHIC','X-ARRAY NOT STRICTLY INCREASING',Ierr,1)
+  CALL XERMSG('PCHIC','X-ARRAY NOT STRICTLY INCREASING',Ierr,1)
   RETURN
   !------------- LAST LINE OF PCHIC FOLLOWS ------------------------------
   RETURN

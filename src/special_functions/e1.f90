@@ -176,7 +176,7 @@ REAL FUNCTION E1(X)
     RETURN
     !
   ELSEIF ( X<=1. ) THEN
-    IF ( X==0. ) CALL XERMSG('SLATEC','E1','X IS 0',2,2)
+    IF ( X==0. ) CALL XERMSG('E1','X IS 0',2,2)
     !
     ! E1(X) = -EI(-X) FOR -1. .LT. X .LE. 1.,  X .NE. 0.
     !
@@ -194,7 +194,7 @@ REAL FUNCTION E1(X)
     !
     ! E1(X) = -EI(-X) FOR X .GT. XMAX
     !
-    CALL XERMSG('SLATEC','E1','X SO BIG E1 UNDERFLOWS',1,1)
+    CALL XERMSG('E1','X SO BIG E1 UNDERFLOWS',1,1)
     E1 = 0.
     RETURN
   END IF

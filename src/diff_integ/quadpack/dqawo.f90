@@ -241,5 +241,5 @@ SUBROUTINE DQAWO(F,A,B,Omega,Integr,Epsabs,Epsrel,Result,Abserr,Neval,Ier,&
     lvl = 0
   END IF
   IF ( Ier==6 ) lvl = 0
-  IF ( Ier/=0 ) CALL XERMSG('SLATEC','DQAWO','ABNORMAL RETURN',Ier,lvl)
+  IF ( Ier/=0 ) CALL XERMSG('DQAWO','ABNORMAL RETURN',Ier,lvl)
 END SUBROUTINE DQAWO

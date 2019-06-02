@@ -46,6 +46,6 @@ SUBROUTINE SWRITP(Ipage,List,Rlist,Lpage,Irec)
   !
   100  WRITE (xern1,'(I8)') lpg
   WRITE (xern2,'(I8)') irecn
-  CALL XERMSG('SLATEC','SWRITP','IN SPLP, LGP = '//xern1//' IRECN = '//&
+  CALL XERMSG('SWRITP','IN SPLP, LGP = '//xern1//' IRECN = '//&
     xern2,100,1)
 END SUBROUTINE SWRITP

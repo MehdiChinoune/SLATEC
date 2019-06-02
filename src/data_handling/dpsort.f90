@@ -94,7 +94,7 @@ SUBROUTINE DPSORT(Dx,N,Iperm,Kflag,Ier)
   nn = N
   IF ( nn<1 ) THEN
     Ier = 1
-    CALL XERMSG('SLATEC','DPSORT',&
+    CALL XERMSG('DPSORT',&
       'The number of values to be sorted, N, is not positive.',Ier,1)
     RETURN
   END IF
@@ -102,7 +102,7 @@ SUBROUTINE DPSORT(Dx,N,Iperm,Kflag,Ier)
   kk = ABS(Kflag)
   IF ( kk/=1.AND.kk/=2 ) THEN
     Ier = 2
-    CALL XERMSG('SLATEC','DPSORT',&
+    CALL XERMSG('DPSORT',&
       'The sort control parameter, KFLAG, is not 2, 1, -1, or -2.',Ier,1)
     RETURN
   END IF

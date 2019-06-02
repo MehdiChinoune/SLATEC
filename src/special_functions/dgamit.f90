@@ -68,7 +68,7 @@ REAL(8) FUNCTION DGAMIT(A,X)
     first = .FALSE.
   END IF
   !
-  IF ( X<0.D0 ) CALL XERMSG('SLATEC','DGAMIT','X IS NEGATIVE',2,2)
+  IF ( X<0.D0 ) CALL XERMSG('DGAMIT','X IS NEGATIVE',2,2)
   !
   IF ( X/=0.D0 ) alx = LOG(X)
   sga = 1.0D0
@@ -109,7 +109,7 @@ REAL(8) FUNCTION DGAMIT(A,X)
         IF ( ABS(h)<=sqeps ) THEN
           !
           CALL XERCLR
-          CALL XERMSG('SLATEC','DGAMIT','RESULT LT HALF PRECISION',1,1)
+          CALL XERMSG('DGAMIT','RESULT LT HALF PRECISION',1,1)
         END IF
       END IF
     END IF

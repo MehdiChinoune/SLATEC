@@ -79,7 +79,7 @@ SUBROUTINE LA05AD(A,Ind,Nz,Ia,N,Ip,Iw,W,G,U)
   IF ( U<eps ) U = eps
   IF ( N<1 ) THEN
     !
-    IF ( lp_com>0 ) CALL XERMSG('SLATEC','LA05AD',&
+    IF ( lp_com>0 ) CALL XERMSG('LA05AD',&
       'THE ORDER OF THE SYSTEM, N, IS NOT POSITIVE.',-1,1)
     G = -1.0D0
     RETURN
@@ -483,7 +483,7 @@ SUBROUTINE LA05AD(A,Ind,Nz,Ia,N,Ip,Iw,W,G,U)
   IF ( lp_com>0 ) THEN
     WRITE (xern1,'(I8)') ir
     WRITE (xern2,'(I8)') j
-    CALL XERMSG('SLATEC','LA05AD','MORE THAN ONE MATRIX ENTRY.  HERE ROW = '//xern1//' AND COL = '//xern2,-4,1)
+    CALL XERMSG('LA05AD','MORE THAN ONE MATRIX ENTRY.  HERE ROW = '//xern1//' AND COL = '//xern2,-4,1)
   END IF
   G = -4.
   RETURN
@@ -493,7 +493,7 @@ SUBROUTINE LA05AD(A,Ind,Nz,Ia,N,Ip,Iw,W,G,U)
     WRITE (xern0,'(I8)') k
     WRITE (xern1,'(I8)') i
     WRITE (xern2,'(I8)') j
-    CALL XERMSG('SLATEC','LA05AD','ELEMENT K = '//xern0//&
+    CALL XERMSG('LA05AD','ELEMENT K = '//xern0//&
       ' IS OUT OF BOUNDS.$$HERE ROW = '//xern1//' AND COL = '//xern2,-3,1)
   END IF
   G = -3.
@@ -502,13 +502,13 @@ SUBROUTINE LA05AD(A,Ind,Nz,Ia,N,Ip,Iw,W,G,U)
   300 CONTINUE
   IF ( lp_com>0 ) THEN
     WRITE (xern1,'(I8)') l
-    CALL XERMSG('SLATEC','LA05AD','ROW OR COLUMN HAS NO ELEMENTS.  HERE INDEX = '//xern1,-2,1)
+    CALL XERMSG('LA05AD','ROW OR COLUMN HAS NO ELEMENTS.  HERE INDEX = '//xern1,-2,1)
   END IF
   G = -2.
   RETURN
   !
   400 CONTINUE
-  IF ( lp_com>0 ) CALL XERMSG('SLATEC','LA05AD',&
+  IF ( lp_com>0 ) CALL XERMSG('LA05AD',&
     'LENGTHS OF ARRAYS A(*) AND IND(*,2) ARE TOO SMALL.',-7,1)
   G = -7.
   RETURN
@@ -523,13 +523,13 @@ SUBROUTINE LA05AD(A,Ind,Nz,Ia,N,Ip,Iw,W,G,U)
   IF ( lp_com>0 ) THEN
     xern1 = 'ROWS'
     IF ( l==2 ) xern1 = 'COLUMNS'
-    CALL XERMSG('SLATEC','LA05AD','DEPENDANT '//xern1,-5,1)
+    CALL XERMSG('LA05AD','DEPENDANT '//xern1,-5,1)
     DO
       !
       WRITE (xern1,'(I8)') Iw(i,1)
       xern2 = ' '
       IF ( i+1<=ipv ) WRITE (xern2,'(I8)') Iw(i+1,1)
-      CALL XERMSG('SLATEC','LA05AD','DEPENDENT VECTOR INDICES ARE '//xern1//&
+      CALL XERMSG('LA05AD','DEPENDENT VECTOR INDICES ARE '//xern1//&
         ' AND '//xern2,-5,1)
       i = i + 2
       IF ( i>ipv ) EXIT

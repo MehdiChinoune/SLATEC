@@ -69,15 +69,12 @@ SUBROUTINE LSI(W,Mdw,Ma,Mg,N,Prgopt,X,Rnorm,Mode,Ws,Ip)
     n1, n2, n3, next, np1
   LOGICAL :: cov, sclcov
   !
-  REAL, SAVE :: srelpr
-  LOGICAL :: first = .TRUE.
+  REAL, PARAMETER :: srelpr = R1MACH(4)
   !
   !* FIRST EXECUTABLE STATEMENT  LSI
   !
   !     Set the nominal tolerance used in the code.
   !
-  IF ( first ) srelpr = R1MACH(4)
-  first = .FALSE.
   tol = SQRT(srelpr)
   !
   Mode = 0

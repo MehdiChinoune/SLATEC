@@ -76,7 +76,7 @@ SUBROUTINE MPBLAS(I1)
   mxr_com = t_com + 4
   !
   IF ( mxr_com>30 ) THEN
-    CALL XERMSG('SLATEC','MPBLAS',&
+    CALL XERMSG('MPBLAS',&
       'Array space not sufficient for Quad Precision 2x Double Precision, Proceeding.',1,1)
     t_com = 26
     mxr_com = 30

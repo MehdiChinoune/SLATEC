@@ -57,9 +57,9 @@ REAL FUNCTION COT(X)
   END IF
   !
   y = ABS(X)
-  IF ( ABS(X)<xmin ) CALL XERMSG('SLATEC','COT',&
+  IF ( ABS(X)<xmin ) CALL XERMSG('COT',&
     'ABS(X) IS ZERO OR SO SMALL COT OVERFLOWS',2,2)
-  IF ( y>xmax ) CALL XERMSG('SLATEC','COT',&
+  IF ( y>xmax ) CALL XERMSG('COT',&
     'NO PRECISION BECAUSE ABS(X) IS TOO BIG',3,2)
   !
   ! CAREFULLY COMPUTE Y * (2/PI) = (AINT(Y) + REM(Y)) * (.625 + PI2REC)
@@ -78,7 +78,7 @@ REAL FUNCTION COT(X)
   ifn = INT( MOD(ainty,2.) )
   IF ( ifn==1 ) y = 1.0 - y
   !
-  IF ( ABS(X)>0.5.AND.y<ABS(X)*sqeps ) CALL XERMSG('SLATEC','COT',&
+  IF ( ABS(X)>0.5.AND.y<ABS(X)*sqeps ) CALL XERMSG('COT',&
     'ANSWER LT HALF PRECISION, ABS(X) TOO BIG OR X NEAR N*PI (N.NE.0)',1,1)
   !
   IF ( y<=0.25 ) THEN

@@ -46,6 +46,6 @@ SUBROUTINE DWRITP(Ipage,List,Rlist,Lpage,Irec)
   !
   100  WRITE (xern1,'(I8)') lpg
   WRITE (xern2,'(I8)') irecn
-  CALL XERMSG('SLATEC','DWRITP','IN DSPLP, LGP = '//xern1//' IRECN = '//&
+  CALL XERMSG('DWRITP','IN DSPLP, LGP = '//xern1//' IRECN = '//&
     xern2,100,1)
 END SUBROUTINE DWRITP

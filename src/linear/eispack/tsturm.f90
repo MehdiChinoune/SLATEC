@@ -128,12 +128,8 @@ SUBROUTINE TSTURM(Nm,N,Eps1,D,E,E2,Lb,Ub,Mm,M,W,Z,Ierr,Rv1,Rv2,Rv3,Rv4,Rv5,Rv6)
     Rv5(*), Rv6(*)
   REAL u, v, Lb, t1, t2, Ub, uk, xu, x0, x1, Eps1, eps2, eps3, eps4, norm, s1, s2
   !
-  REAL, SAVE :: machep
-  LOGICAL :: first = .TRUE.
+  REAL, PARAMETER :: machep = R1MACH(4)
   !* FIRST EXECUTABLE STATEMENT  TSTURM
-  IF ( first ) machep = R1MACH(4)
-  first = .FALSE.
-  !
   Ierr = 0
   t1 = Lb
   t2 = Ub

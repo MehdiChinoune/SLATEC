@@ -117,11 +117,8 @@ SUBROUTINE TRIDIB(N,Eps1,D,E,E2,Lb,Ub,M11,M,W,Ind,Ierr,Rv4,Rv5)
   REAL u, v, Lb, t1, t2, Ub, xu, x0, x1, Eps1, s1, s2
   INTEGER Ind(*)
   !
-  REAL, SAVE :: machep
-  LOGICAL :: first = .TRUE.
+  REAL, PARAMETER :: machep = R1MACH(4)
   !* FIRST EXECUTABLE STATEMENT  TRIDIB
-  IF ( first ) machep = R1MACH(4)
-  first = .FALSE.
   !
   Ierr = 0
   tag = 0

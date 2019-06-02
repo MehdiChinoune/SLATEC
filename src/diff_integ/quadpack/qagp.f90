@@ -240,5 +240,5 @@ SUBROUTINE QAGP(F,A,B,Npts2,Points,Epsabs,Epsrel,Result,Abserr,Neval,Ier,&
     lvl = 0
   END IF
   IF ( Ier==6 ) lvl = 1
-  IF ( Ier/=0 ) CALL XERMSG('SLATEC','QAGP','ABNORMAL RETURN',Ier,lvl)
+  IF ( Ier/=0 ) CALL XERMSG('QAGP','ABNORMAL RETURN',Ier,lvl)
 END SUBROUTINE QAGP

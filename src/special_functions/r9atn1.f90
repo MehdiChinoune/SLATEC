@@ -65,9 +65,9 @@ REAL FUNCTION R9ATN1(X)
   y = ABS(X)
   IF ( y>1.0 ) THEN
     !
-    IF ( y>xmax ) CALL XERMSG('SLATEC','R9ATN1',&
+    IF ( y>xmax ) CALL XERMSG('R9ATN1',&
       'NO PRECISION IN ANSWER BECAUSE X IS TOO BIG',2,2)
-    IF ( y>xbig ) CALL XERMSG('SLATEC','R9ATN1',&
+    IF ( y>xbig ) CALL XERMSG('R9ATN1',&
       'ANSWER LT HALF PRECISION BECAUSE X IS TOO BIG',1,1)
     !
     R9ATN1 = (ATAN(X)-X)/X**3

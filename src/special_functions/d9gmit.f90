@@ -44,7 +44,7 @@ REAL(8) FUNCTION D9GMIT(A,X,Algap1,Sgngam)
     first = .FALSE.
   END IF
   !
-  IF ( X<=0.D0 ) CALL XERMSG('SLATEC','D9GMIT','X SHOULD BE GT 0',1,2)
+  IF ( X<=0.D0 ) CALL XERMSG('D9GMIT','X SHOULD BE GT 0',1,2)
   !
   ma = INT( A + 0.5D0 )
   IF ( A<0.D0 ) ma = INT( A - 0.5D0 )
@@ -63,7 +63,7 @@ REAL(8) FUNCTION D9GMIT(A,X,Algap1,Sgngam)
     s = s + t
     IF ( ABS(t)<eps*ABS(s) ) GOTO 100
   END DO
-  CALL XERMSG('SLATEC','D9GMIT',&
+  CALL XERMSG('D9GMIT',&
     'NO CONVERGENCE IN 200 TERMS OF TAYLOR-S SERIES',2,2)
   !
   100 CONTINUE

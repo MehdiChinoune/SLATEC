@@ -116,7 +116,7 @@ SUBROUTINE BESI(X,Alpha,Kode,N,Y,Nz)
   tolln = 2.303E0*gln*i1
   tolln = MIN(tolln,34.5388E0)
   IF ( N<1 ) THEN
-    CALL XERMSG('SLATEC','BESI','N LESS THAN ONE.',2,1)
+    CALL XERMSG('BESI','N LESS THAN ONE.',2,1)
     RETURN
   ELSEIF ( N==1 ) THEN
     kt = 2
@@ -126,10 +126,10 @@ SUBROUTINE BESI(X,Alpha,Kode,N,Y,Nz)
     !
     !
     !
-    CALL XERMSG('SLATEC','BESI','SCALING OPTION, KODE, NOT 1 OR 2.',2,1)
+    CALL XERMSG('BESI','SCALING OPTION, KODE, NOT 1 OR 2.',2,1)
     RETURN
   ELSEIF ( X<0 ) THEN
-    CALL XERMSG('SLATEC','BESI','X LESS THAN ZERO.',2,1)
+    CALL XERMSG('BESI','X LESS THAN ZERO.',2,1)
     RETURN
   ELSEIF ( X==0 ) THEN
     IF ( Alpha<0 ) GOTO 1300
@@ -182,7 +182,7 @@ SUBROUTINE BESI(X,Alpha,Kode,N,Y,Nz)
         earg = rttpi/SQRT(X)
         IF ( Kode==2 ) GOTO 1000
         IF ( X>elim ) THEN
-          CALL XERMSG('SLATEC','BESI','OVERFLOW, X TOO LARGE FOR KODE = 1.',6,1)
+          CALL XERMSG('BESI','OVERFLOW, X TOO LARGE FOR KODE = 1.',6,1)
           RETURN
         ELSE
           earg = earg*EXP(X)
@@ -203,7 +203,7 @@ SUBROUTINE BESI(X,Alpha,Kode,N,Y,Nz)
         IF ( Kode==2 ) GOTO 100
         IF ( Alpha<1.0E0 ) THEN
           IF ( X<=elim ) GOTO 100
-          CALL XERMSG('SLATEC','BESI','OVERFLOW, X TOO LARGE FOR KODE = 1.',6,1)
+          CALL XERMSG('BESI','OVERFLOW, X TOO LARGE FOR KODE = 1.',6,1)
           RETURN
         ELSE
           z = X/Alpha
@@ -212,7 +212,7 @@ SUBROUTINE BESI(X,Alpha,Kode,N,Y,Nz)
           t = ra*(1.0E0-etx) + etx/(z+ra)
           arg = Alpha*(t-gln)
           IF ( arg>elim ) THEN
-            CALL XERMSG('SLATEC','BESI',&
+            CALL XERMSG('BESI',&
               'OVERFLOW, X TOO LARGE FOR KODE = 1.',6,1)
             RETURN
           ELSE
@@ -487,6 +487,6 @@ SUBROUTINE BESI(X,Alpha,Kode,N,Y,Nz)
     k = k - 1
   END DO
   RETURN
-  1300 CALL XERMSG('SLATEC','BESI','ORDER, ALPHA, LESS THAN ZERO.',2,1)
+  1300 CALL XERMSG('BESI','ORDER, ALPHA, LESS THAN ZERO.',2,1)
   RETURN
 END SUBROUTINE BESI

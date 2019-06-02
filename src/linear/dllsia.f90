@@ -176,7 +176,7 @@ SUBROUTINE DLLSIA(A,Mda,M,N,B,Mdb,Nb,Re,Ae,Key,Mode,Np,Krank,Ksure,Rnorm,&
   !
   !* FIRST EXECUTABLE STATEMENT  DLLSIA
   IF ( Info<0.OR.Info>1 ) THEN
-    CALL XERMSG('SLATEC','DLLSIA','INFO OUT OF RANGE',2,1)
+    CALL XERMSG('DLLSIA','INFO OUT OF RANGE',2,1)
     RETURN
   ELSE
     it = Info
@@ -185,45 +185,45 @@ SUBROUTINE DLLSIA(A,Mda,M,N,B,Mdb,Nb,Re,Ae,Key,Mode,Np,Krank,Ksure,Rnorm,&
       !
       !     ERROR MESSAGES
       !
-      CALL XERMSG('SLATEC','DLLSIA',&
+      CALL XERMSG('DLLSIA',&
         'SOLUTION ONLY (INFO=1) BUT NO RIGHT HAND SIDE (NB=0)',1,0)
       RETURN
     ELSEIF ( M<1 ) THEN
-      CALL XERMSG('SLATEC','DLLSIA','M.LT.1',2,1)
+      CALL XERMSG('DLLSIA','M.LT.1',2,1)
       RETURN
     ELSEIF ( N<1 ) THEN
-      CALL XERMSG('SLATEC','DLLSIA','N.LT.1',2,1)
+      CALL XERMSG('DLLSIA','N.LT.1',2,1)
       RETURN
     ELSE
       IF ( N>M ) THEN
-        CALL XERMSG('SLATEC','DLLSIA','N.GT.M',2,1)
+        CALL XERMSG('DLLSIA','N.GT.M',2,1)
         RETURN
       ELSE
         IF ( Mda<M ) THEN
-          CALL XERMSG('SLATEC','DLLSIA','MDA.LT.M',2,1)
+          CALL XERMSG('DLLSIA','MDA.LT.M',2,1)
           RETURN
         ELSE
           IF ( Liw<M+N ) THEN
-            CALL XERMSG('SLATEC','DLLSIA','LIW.LT.M+N',2,1)
+            CALL XERMSG('DLLSIA','LIW.LT.M+N',2,1)
             RETURN
           ELSE
             IF ( Mode<0.OR.Mode>3 ) THEN
-              CALL XERMSG('SLATEC','DLLSIA','MODE OUT OF RANGE',2,1)
+              CALL XERMSG('DLLSIA','MODE OUT OF RANGE',2,1)
               RETURN
             ELSE
               IF ( Nb/=0 ) THEN
                 IF ( Nb<0 ) THEN
-                  CALL XERMSG('SLATEC','DLLSIA','NB.LT.0',2,1)
+                  CALL XERMSG('DLLSIA','NB.LT.0',2,1)
                   RETURN
                 ELSEIF ( Mdb<M ) THEN
-                  CALL XERMSG('SLATEC','DLLSIA','MDB.LT.M',2,1)
+                  CALL XERMSG('DLLSIA','MDB.LT.M',2,1)
                   RETURN
                 ELSEIF ( it/=0 ) THEN
                   GOTO 2
                 END IF
               END IF
               IF ( Key<0.OR.Key>3 ) THEN
-                CALL XERMSG('SLATEC','DLLSIA','KEY OUT OF RANGE',2,1)
+                CALL XERMSG('DLLSIA','KEY OUT OF RANGE',2,1)
                 RETURN
               ELSE
                 IF ( Key==0.AND.Lw<5*N ) GOTO 5
@@ -231,7 +231,7 @@ SUBROUTINE DLLSIA(A,Mda,M,N,B,Mdb,Nb,Re,Ae,Key,Mode,Np,Krank,Ksure,Rnorm,&
                 IF ( Key==2.AND.Lw<4*N ) GOTO 5
                 IF ( Key==3.AND.Lw<3*N ) GOTO 5
                 IF ( Np<0.OR.Np>N ) THEN
-                  CALL XERMSG('SLATEC','DLLSIA','NP OUT OF RANGE',2,1)
+                  CALL XERMSG('DLLSIA','NP OUT OF RANGE',2,1)
                   RETURN
                 ELSE
                   !
@@ -325,17 +325,17 @@ SUBROUTINE DLLSIA(A,Mda,M,N,B,Mdb,Nb,Re,Ae,Key,Mode,Np,Krank,Ksure,Rnorm,&
               RETURN
             END IF
           END IF
-          5  CALL XERMSG('SLATEC','DLLSIA','INSUFFICIENT WORK SPACE',8,1)
+          5  CALL XERMSG('DLLSIA','INSUFFICIENT WORK SPACE',8,1)
           Info = -1
           RETURN
         END IF
-        10  CALL XERMSG('SLATEC','DLLSIA','RE(I) .LT. 0',2,1)
+        10  CALL XERMSG('DLLSIA','RE(I) .LT. 0',2,1)
         RETURN
       END IF
-      20  CALL XERMSG('SLATEC','DLLSIA','RE(I) .GT. 1',2,1)
+      20  CALL XERMSG('DLLSIA','RE(I) .GT. 1',2,1)
       RETURN
     END IF
   END IF
-  100  CALL XERMSG('SLATEC','DLLSIA','AE(I) .LT. 0',2,1)
+  100  CALL XERMSG('DLLSIA','AE(I) .LT. 0',2,1)
   RETURN
 END SUBROUTINE DLLSIA

@@ -183,7 +183,7 @@ SUBROUTINE ULSIA(A,Mda,M,N,B,Mdb,Nb,Re,Ae,Key,Mode,Np,Krank,Ksure,Rnorm,W,&
   !
   !* FIRST EXECUTABLE STATEMENT  ULSIA
   IF ( Info<0.OR.Info>1 ) THEN
-    CALL XERMSG('SLATEC','ULSIA','INFO OUT OF RANGE',2,1)
+    CALL XERMSG('ULSIA','INFO OUT OF RANGE',2,1)
     RETURN
   ELSE
     it = Info
@@ -192,45 +192,45 @@ SUBROUTINE ULSIA(A,Mda,M,N,B,Mdb,Nb,Re,Ae,Key,Mode,Np,Krank,Ksure,Rnorm,W,&
       !
       !     ERROR MESSAGES
       !
-      CALL XERMSG('SLATEC','ULSIA',&
+      CALL XERMSG('ULSIA',&
         'SOLUTION ONLY (INFO=1) BUT NO RIGHT HAND SIDE (NB=0)',1,0)
       RETURN
     ELSEIF ( M<1 ) THEN
-      CALL XERMSG('SLATEC','ULSIA','M.LT.1',2,1)
+      CALL XERMSG('ULSIA','M.LT.1',2,1)
       RETURN
     ELSEIF ( N<1 ) THEN
-      CALL XERMSG('SLATEC','ULSIA','N.LT.1',2,1)
+      CALL XERMSG('ULSIA','N.LT.1',2,1)
       RETURN
     ELSE
       IF ( N<M ) THEN
-        CALL XERMSG('SLATEC','ULSIA','N.LT.M',2,1)
+        CALL XERMSG('ULSIA','N.LT.M',2,1)
         RETURN
       ELSE
         IF ( Mda<M ) THEN
-          CALL XERMSG('SLATEC','ULSIA','MDA.LT.M',2,1)
+          CALL XERMSG('ULSIA','MDA.LT.M',2,1)
           RETURN
         ELSE
           IF ( Liw<M+N ) THEN
-            CALL XERMSG('SLATEC','ULSIA','LIW.LT.M+N',2,1)
+            CALL XERMSG('ULSIA','LIW.LT.M+N',2,1)
             RETURN
           ELSE
             IF ( Mode<0.OR.Mode>3 ) THEN
-              CALL XERMSG('SLATEC','ULSIA','MODE OUT OF RANGE',2,1)
+              CALL XERMSG('ULSIA','MODE OUT OF RANGE',2,1)
               RETURN
             ELSE
               IF ( Nb/=0 ) THEN
                 IF ( Nb<0 ) THEN
-                  CALL XERMSG('SLATEC','ULSIA','NB.LT.0',2,1)
+                  CALL XERMSG('ULSIA','NB.LT.0',2,1)
                   RETURN
                 ELSEIF ( Mdb<N ) THEN
-                  CALL XERMSG('SLATEC','ULSIA','MDB.LT.N',2,1)
+                  CALL XERMSG('ULSIA','MDB.LT.N',2,1)
                   RETURN
                 ELSEIF ( it/=0 ) THEN
                   GOTO 2
                 END IF
               END IF
               IF ( Key<0.OR.Key>3 ) THEN
-                CALL XERMSG('SLATEC','ULSIA','KEY OUT OF RANGE',2,1)
+                CALL XERMSG('ULSIA','KEY OUT OF RANGE',2,1)
                 RETURN
               ELSE
                 IF ( Key==0.AND.Lw<5*M ) GOTO 5
@@ -238,7 +238,7 @@ SUBROUTINE ULSIA(A,Mda,M,N,B,Mdb,Nb,Re,Ae,Key,Mode,Np,Krank,Ksure,Rnorm,W,&
                 IF ( Key==2.AND.Lw<4*M ) GOTO 5
                 IF ( Key==3.AND.Lw<3*M ) GOTO 5
                 IF ( Np<0.OR.Np>M ) THEN
-                  CALL XERMSG('SLATEC','ULSIA','NP OUT OF RANGE',2,1)
+                  CALL XERMSG('ULSIA','NP OUT OF RANGE',2,1)
                   RETURN
                 ELSE
                   !
@@ -333,17 +333,17 @@ SUBROUTINE ULSIA(A,Mda,M,N,B,Mdb,Nb,Re,Ae,Key,Mode,Np,Krank,Ksure,Rnorm,W,&
               RETURN
             END IF
           END IF
-          5  CALL XERMSG('SLATEC','ULSIA','INSUFFICIENT WORK SPACE',8,1)
+          5  CALL XERMSG('ULSIA','INSUFFICIENT WORK SPACE',8,1)
           Info = -1
           RETURN
         END IF
-        10  CALL XERMSG('SLATEC','ULSIA','RE(I) .LT. 0',2,1)
+        10  CALL XERMSG('ULSIA','RE(I) .LT. 0',2,1)
         RETURN
       END IF
-      20  CALL XERMSG('SLATEC','ULSIA','RE(I) .GT. 1',2,1)
+      20  CALL XERMSG('ULSIA','RE(I) .GT. 1',2,1)
       RETURN
     END IF
   END IF
-  100  CALL XERMSG('SLATEC','ULSIA','AE(I) .LT. 0',2,1)
+  100  CALL XERMSG('ULSIA','AE(I) .LT. 0',2,1)
   RETURN
 END SUBROUTINE ULSIA

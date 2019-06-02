@@ -118,7 +118,7 @@ SUBROUTINE DLSOD(DF,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,&
   !
   IF ( Neq<1 ) THEN
     WRITE (xern1,'(I8)') Neq
-    CALL XERMSG('SLATEC','DLSOD',&
+    CALL XERMSG('DLSOD',&
       'IN DDEBDF, THE NUMBER OF EQUATIONS MUST BE A POSITIVE INTEGER.$$YOU HAVE CALLED THE CODE WITH NEQ = '//xern1,6,1)
     Idid = -33
   END IF
@@ -130,7 +130,7 @@ SUBROUTINE DLSOD(DF,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,&
       IF ( Rtol(k)<0. ) THEN
         WRITE (xern1,'(I8)') k
         WRITE (xern3,'(1PE15.6)') Rtol(k)
-        CALL XERMSG('SLATEC','DLSOD','IN DDEBDF, THE RELATIVE ERROR TOLERANCES&
+        CALL XERMSG('DLSOD','IN DDEBDF, THE RELATIVE ERROR TOLERANCES&
           & MUST BE NON-NEGATIVE.$$YOU HAVE CALLED THE CODE WITH&
           & RTOL('//xern1//') = '//xern3//'$$IN THE CASE OF VECTOR ERROR&
           & TOLERANCES, NO FURTHER CHECKING OF RTOL COMPONENTS IS DONE.',7,1)
@@ -145,7 +145,7 @@ SUBROUTINE DLSOD(DF,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,&
     IF ( Atol(k)<0. ) THEN
       WRITE (xern1,'(I8)') k
       WRITE (xern3,'(1PE15.6)') Atol(k)
-      CALL XERMSG('SLATEC','DLSOD','IN DDEBDF, THE ABSOLUTE ERROR TOLERANCES&
+      CALL XERMSG('DLSOD','IN DDEBDF, THE ABSOLUTE ERROR TOLERANCES&
         & MUST BE NON-NEGATIVE.$$YOU HAVE CALLED THE CODE WITH ATOL('//xern1//') = '&
         //xern3// '$$IN THE CASE OF VECTOR ERROR TOLERANCES,&
         & NO FURTHER CHECKING OF ATOL COMPONENTS IS DONE.',8,1)
@@ -161,7 +161,7 @@ SUBROUTINE DLSOD(DF,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,&
         ) THEN
       WRITE (xern3,'(1PE15.6)') Tout
       WRITE (xern4,'(1PE15.6)') Tstop
-      CALL XERMSG('SLATEC','DLSOD','IN DDEBDF, YOU HAVE CALLED THE CODE WITH&
+      CALL XERMSG('DLSOD','IN DDEBDF, YOU HAVE CALLED THE CODE WITH&
         & TOUT = '//xern3//'$$BUT YOU HAVE ALSO TOLD THE CODE NOT TO INTEGRATE&
         & PAST THE POINT TSTOP = '//xern4//' BY SETTING INFO(4) = 1.$$THESE INSTRUCTIONS CONFLICT.',14,1)
       Idid = -33
@@ -173,7 +173,7 @@ SUBROUTINE DLSOD(DF,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,&
   IF ( init_com/=0 ) THEN
     IF ( T==Tout ) THEN
       WRITE (xern3,'(1PE15.6)') T
-      CALL XERMSG('SLATEC','DLSOD',&
+      CALL XERMSG('DLSOD',&
         'IN DDEBDF, YOU HAVE CALLED THE CODE WITH T = TOUT = '//&
         xern3//'$$THIS IS NOT ALLOWED ON CONTINUATION CALLS.',9,1)
       Idid = -33
@@ -182,7 +182,7 @@ SUBROUTINE DLSOD(DF,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,&
     IF ( T/=told_com ) THEN
       WRITE (xern3,'(1PE15.6)') told_com
       WRITE (xern4,'(1PE15.6)') T
-      CALL XERMSG('SLATEC','DLSOD',&
+      CALL XERMSG('DLSOD',&
         'IN DDEBDF, YOU HAVE CHANGED THE VALUE OF T FROM '//xern3//' TO '&
         //xern4//'  THIS IS NOT ALLOWED ON CONTINUATION CALLS.',10,1)
       Idid = -33
@@ -191,7 +191,7 @@ SUBROUTINE DLSOD(DF,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,&
     IF ( init_com/=1 ) THEN
       IF ( Delsgn*(Tout-T)<0.0D0 ) THEN
         WRITE (xern3,'(1PE15.6)') Tout
-        CALL XERMSG('SLATEC','DLSOD',&
+        CALL XERMSG('DLSOD',&
           'IN DDEBDF, BY CALLING THE CODE WITH TOUT = '//xern3//&
           ' YOU ARE ATTEMPTING TO CHANGE THE DIRECTION OF INTEGRATION.$$THIS IS NOT ALLOWED WITHOUT RESTARTING.',11,1)
         Idid = -33
@@ -205,7 +205,7 @@ SUBROUTINE DLSOD(DF,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,&
       iquit_com = -33
       ibegin_com = -1
     ELSE
-      CALL XERMSG('SLATEC','DLSOD','IN DDEBDF, INVALID INPUT WAS DETECTED ON&
+      CALL XERMSG('DLSOD','IN DDEBDF, INVALID INPUT WAS DETECTED ON&
         & SUCCESSIVE ENTRIES.  IT IS IMPOSSIBLE TO PROCEED BECAUSE YOU HAVE NOT&
         & CORRECTED THE PROBLEM, SO EXECUTION IS BEING TERMINATED.',12,2)
     END IF

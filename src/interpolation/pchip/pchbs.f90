@@ -187,7 +187,7 @@ SUBROUTINE PCHBS(N,X,F,D,Incfd,Knotyp,Nknots,T,Bcoef,Ndim,Kord,Ierr)
   !
   IF ( Knotyp>2 ) THEN
     Ierr = -1
-    CALL XERMSG(libnam,subnam,'KNOTYP GREATER THAN 2',Ierr,1)
+    CALL XERMSG(subnam,'KNOTYP GREATER THAN 2',Ierr,1)
     RETURN
   END IF
   IF ( Knotyp>=0 ) THEN
@@ -196,7 +196,7 @@ SUBROUTINE PCHBS(N,X,F,D,Incfd,Knotyp,Nknots,T,Bcoef,Ndim,Kord,Ierr)
     CALL PCHKT(N,X,Knotyp,T)
   ELSEIF ( Nknots/=Ndim+4 ) THEN
     Ierr = -2
-    CALL XERMSG(libnam,subnam,'KNOTYP.LT.0 AND NKNOTS.NE.(2*N+4)',Ierr,1)
+    CALL XERMSG(subnam,'KNOTYP.LT.0 AND NKNOTS.NE.(2*N+4)',Ierr,1)
     RETURN
   END IF
   !

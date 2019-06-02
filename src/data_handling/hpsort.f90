@@ -131,39 +131,39 @@ SUBROUTINE HPSORT(Hx,N,Strbeg,Strend,Iperm,Kflag,Work,Ier)
   nn = N
   IF ( nn<1 ) THEN
     Ier = 1
-    CALL XERMSG('SLATEC','HPSORT',&
+    CALL XERMSG('HPSORT',&
       'The number of values to be sorted, N, is not positive.',Ier,1)
     RETURN
   END IF
   kk = ABS(Kflag)
   IF ( kk/=1.AND.kk/=2 ) THEN
     Ier = 2
-    CALL XERMSG('SLATEC','HPSORT',&
+    CALL XERMSG('HPSORT',&
       'The sort control parameter, KFLAG, is not 2, 1, -1, or -2.',Ier,1)
     RETURN
   END IF
   !
   IF ( LEN(Work)<LEN(Hx(1)) ) THEN
     Ier = 3
-    CALL XERMSG('SLATEC',' HPSORT',&
+    CALL XERMSG(' HPSORT',&
       'The length of the work variable, WORK, is too short.',Ier,1)
     RETURN
   END IF
   IF ( Strbeg>Strend ) THEN
     Ier = 4
-    CALL XERMSG('SLATEC','HPSORT',&
+    CALL XERMSG('HPSORT',&
       'The string beginning, STRBEG, is beyond its end, STREND.',Ier,1)
     RETURN
   END IF
   IF ( Strbeg<1.OR.Strbeg>LEN(Hx(1)) ) THEN
     Ier = 5
-    CALL XERMSG('SLATEC','HPSORT',&
+    CALL XERMSG('HPSORT',&
       'The string beginning, STRBEG, is out-of-range.',Ier,1)
     RETURN
   END IF
   IF ( Strend<1.OR.Strend>LEN(Hx(1)) ) THEN
     Ier = 6
-    CALL XERMSG('SLATEC','HPSORT','The string end, STREND, is out-of-range.',Ier,1)
+    CALL XERMSG('HPSORT','The string end, STREND, is out-of-range.',Ier,1)
     RETURN
   END IF
   !

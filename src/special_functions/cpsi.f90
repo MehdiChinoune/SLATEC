@@ -68,14 +68,14 @@ COMPLEX FUNCTION CPSI(Zin)
         !
         ! USE THE RECURSION RELATION FOR ABS(Z) SMALL.
         !
-        IF ( cabsz<rmin ) CALL XERMSG('SLATEC','CPSI',&
+        IF ( cabsz<rmin ) CALL XERMSG('CPSI',&
           'CPSI CALLED WITH Z SO NEAR 0 THAT CPSI OVERFLOWS',2,2)
         !
         IF ( x<(-0.5).AND.ABS(y)<=dxrel ) THEN
-          IF ( ABS((z-AINT(x-0.5))/x)<dxrel ) CALL XERMSG('SLATEC','CPSI',&
+          IF ( ABS((z-AINT(x-0.5))/x)<dxrel ) CALL XERMSG('CPSI',&
             'ANSWER LT HALF PRECISION BECAUSE Z TOO NEAR NEGATIVE INTEGER',1,1)
           IF ( y==0.0.AND.x==AINT(x) )&
-            CALL XERMSG('SLATEC','CPSI','Z IS A NEGATIVE INTEGER',3,2)
+            CALL XERMSG('CPSI','Z IS A NEGATIVE INTEGER',3,2)
         END IF
         !
         n = INT( SQRT(bound**2-y**2) - x ) + 1

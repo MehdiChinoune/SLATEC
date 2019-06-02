@@ -370,13 +370,13 @@ SUBROUTINE DDRIV2(N,T,Y,F,Tout,Mstate,Nroot,Eps,Ewt,Mint,Work,Lenw,Iwork,&
   !* FIRST EXECUTABLE STATEMENT  DDRIV2
   IF ( ABS(Mstate)==9 ) THEN
     Ierflg = 999
-    CALL XERMSG('SLATEC','DDRIV2',&
+    CALL XERMSG('DDRIV2',&
       'Illegal input.  The magnitude of MSTATE IS 9 .',Ierflg,2)
     RETURN
   ELSEIF ( ABS(Mstate)==0.OR.ABS(Mstate)>9 ) THEN
     WRITE (intgr1,'(I8)') Mstate
     Ierflg = 26
-    CALL XERMSG('SLATEC','DDRIV2',&
+    CALL XERMSG('DDRIV2',&
       'Illegal input.  The magnitude of MSTATE, '//intgr1//&
       ' is not in the range 1 to 8 .',Ierflg,1)
     Mstate = SIGN(9,Mstate)
@@ -385,7 +385,7 @@ SUBROUTINE DDRIV2(N,T,Y,F,Tout,Mstate,Nroot,Eps,Ewt,Mint,Work,Lenw,Iwork,&
   IF ( Mint<1.OR.Mint>3 ) THEN
     WRITE (intgr1,'(I8)') Mint
     Ierflg = 23
-    CALL XERMSG('SLATEC','DDRIV2',&
+    CALL XERMSG('DDRIV2',&
       'Illegal input.  Improper value for the integration method flag, '//intgr1//' .',Ierflg,1)
     Mstate = SIGN(9,Mstate)
     RETURN

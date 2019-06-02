@@ -62,9 +62,9 @@ REAL(8) FUNCTION DCOT(X)
   END IF
   !
   y = ABS(X)
-  IF ( y<xmin ) CALL XERMSG('SLATEC','DCOT',&
+  IF ( y<xmin ) CALL XERMSG('DCOT',&
     'ABS(X) IS ZERO OR SO SMALL DCOT OVERFLOWS',2,2)
-  IF ( y>xmax ) CALL XERMSG('SLATEC','DCOT',&
+  IF ( y>xmax ) CALL XERMSG('DCOT',&
     'NO PRECISION BECAUSE ABS(X) IS TOO BIG',3,2)
   !
   ! CAREFULLY COMPUTE Y * (2/PI) = (AINT(Y) + REM(Y)) * (.625 + PI2REC)
@@ -83,7 +83,7 @@ REAL(8) FUNCTION DCOT(X)
   ifn = INT( MOD(ainty,2.0D0) )
   IF ( ifn==1 ) y = 1.0D0 - y
   !
-  IF ( ABS(X)>0.5D0.AND.y<ABS(X)*sqeps ) CALL XERMSG('SLATEC','DCOT',&
+  IF ( ABS(X)>0.5D0.AND.y<ABS(X)*sqeps ) CALL XERMSG('DCOT',&
     'ANSWER LT HALF PRECISION, ABS(X) TOO BIG OR X NEAR N*PI (N.NE.0)',1,1)
   !
   IF ( y<=0.25D0 ) THEN

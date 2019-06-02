@@ -286,7 +286,7 @@ SUBROUTINE D9AIMP(X,Ampl,Theta)
     !
   ELSEIF ( X>=(-2.0D0) ) THEN
     !
-    IF ( X>=(-1.0D0) ) CALL XERMSG('SLATEC','D9AIMP','X MUST BE LE -1.0',1,2)
+    IF ( X>=(-1.0D0) ) CALL XERMSG('D9AIMP','X MUST BE LE -1.0',1,2)
     !
     z = (16.D0/X**3+9.0D0)/7.0D0
     Ampl = 0.3125D0 + DCSEVL(z,am22cs,nam22)

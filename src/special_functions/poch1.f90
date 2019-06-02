@@ -107,7 +107,7 @@ REAL FUNCTION POCH1(A,X)
       poly1 = gbern(2)*term
       !
       nterms = INT( -0.5*alneps/alnvar ) + 1
-      IF ( nterms>9 ) CALL XERMSG('SLATEC','POCH1',&
+      IF ( nterms>9 ) CALL XERMSG('POCH1',&
         'NTERMS IS TOO BIG, MAYBE R1MACH(3) IS BAD',1,2)
       IF ( nterms>=2 ) THEN
         !

@@ -301,7 +301,7 @@ SUBROUTINE SSICCG(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
     ,Rwork(locdin),Rwork(locr),Ierr)
   IF ( Ierr/=0 ) THEN
     WRITE (xern1,'(I8)') Ierr
-    CALL XERMSG('SLATEC','SSICCG','IC factorization broke down on step '//&
+    CALL XERMSG('SSICCG','IC factorization broke down on step '//&
       xern1//'.  Diagonal was set to unity and factorization proceeded.',1,1)
     Ierr = 7
   END IF

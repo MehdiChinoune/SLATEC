@@ -217,7 +217,7 @@ SUBROUTINE HFTI(A,Mda,M,N,B,Mdb,Nb,Tau,Krank,Rnorm,H,G,Ip)
       ELSE
         nerr = 2
         iopt = 2
-        CALL XERMSG('SLATEC','HFTI',&
+        CALL XERMSG('HFTI',&
           'MDB.LT.MAX(M,N).AND.NB.GT.1. PROBABLE ERROR.',nerr,iopt)
         RETURN
       END IF
@@ -225,7 +225,7 @@ SUBROUTINE HFTI(A,Mda,M,N,B,Mdb,Nb,Tau,Krank,Rnorm,H,G,Ip)
     ELSE
       nerr = 1
       iopt = 2
-      CALL XERMSG('SLATEC','HFTI','MDA.LT.M, PROBABLE ERROR.',nerr,iopt)
+      CALL XERMSG('HFTI','MDA.LT.M, PROBABLE ERROR.',nerr,iopt)
       RETURN
     END IF
     50  kp1 = k + 1

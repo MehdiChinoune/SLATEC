@@ -99,23 +99,13 @@ SUBROUTINE DQNC79(FUN,A,B,Err,Ans,Ierr,K)
   INTEGER :: lr(99)
   !     .. Intrinsic Functions ..
   INTRINSIC ABS, LOG, MAX, MIN, SIGN, SQRT
-  !     .. Save statement ..
-  INTEGER, SAVE :: nbits, nlmx
-  REAL(8), SAVE :: sq2, w1, w2, w3, w4
   !     .. Data statements ..
-  INTEGER, PARAMETER :: kml = 7, kmx = 5000, nlmn = 2
-  LOGICAL :: first = .TRUE.
-  !* FIRST EXECUTABLE STATEMENT  DQNC79
-  IF ( first ) THEN
-    w1 = 41.0D0/140.0D0
-    w2 = 216.0D0/140.0D0
-    w3 = 27.0D0/140.0D0
-    w4 = 272.0D0/140.0D0
-    nbits = INT( D1MACH(5)*I1MACH(14)/0.30102000D0 )
+  INTEGER, PARAMETER :: nbits = INT( D1MACH(5)*I1MACH(14)/0.30102000D0 ), &
     nlmx = MIN(99,(nbits*4)/5)
-    sq2 = SQRT(2.0D0)
-    first = .FALSE.
-  END IF
+  REAL(8), PARAMETER :: sq2 = SQRT(2.0D0), w1 = 41.0D0/140.0D0, w2 = 216.0D0/140.0D0, &
+    w3 = 27.0D0/140.0D0, w4 = 272.0D0/140.0D0
+  INTEGER, PARAMETER :: kml = 7, kmx = 5000, nlmn = 2
+  !* FIRST EXECUTABLE STATEMENT  DQNC79
   Ans = 0.0D0
   Ierr = 1
   ce = 0.0D0
@@ -245,7 +235,7 @@ SUBROUTINE DQNC79(FUN,A,B,Err,Ans,Ierr,K)
       Ans = vr
       IF ( ABS(ce)>2.0D0*tol*area ) THEN
         Ierr = 2
-        CALL XERMSG('SLATEC','DQNC79',&
+        CALL XERMSG('DQNC79',&
           'ANS is probably insufficiently accurate.',2,1)
       END IF
       RETURN
@@ -284,7 +274,7 @@ SUBROUTINE DQNC79(FUN,A,B,Err,Ans,Ierr,K)
   f(13) = f7(l)
   GOTO 100
   400  Ierr = -1
-  CALL XERMSG('SLATEC','DQNC79',&
+  CALL XERMSG('DQNC79',&
     'A and B are too nearly equal to allow normal integration. $$ANS is set to zero and IERR to -1.',-1,-1)
   RETURN
 END SUBROUTINE DQNC79

@@ -241,13 +241,13 @@ SUBROUTINE DPCHIC(Ic,Vc,Switch,N,X,F,D,Incfd,Wk,Nwk,Ierr)
     !
     !     N.LT.2 RETURN.
     Ierr = -1
-    CALL XERMSG('SLATEC','DPCHIC','NUMBER OF DATA POINTS LESS THAN TWO',Ierr,1)
+    CALL XERMSG('DPCHIC','NUMBER OF DATA POINTS LESS THAN TWO',Ierr,1)
     RETURN
   ELSEIF ( Incfd<1 ) THEN
     !
     !     INCFD.LT.1 RETURN.
     Ierr = -2
-    CALL XERMSG('SLATEC','DPCHIC','INCREMENT LESS THAN ONE',Ierr,1)
+    CALL XERMSG('DPCHIC','INCREMENT LESS THAN ONE',Ierr,1)
     RETURN
   ELSE
     DO i = 2, N
@@ -263,7 +263,7 @@ SUBROUTINE DPCHIC(Ic,Vc,Switch,N,X,F,D,Incfd,Wk,Nwk,Ierr)
       !
       !     IC OUT OF RANGE RETURN.
       Ierr = Ierr - 3
-      CALL XERMSG('SLATEC','DPCHIC','IC OUT OF RANGE',Ierr,1)
+      CALL XERMSG('DPCHIC','IC OUT OF RANGE',Ierr,1)
       RETURN
     ELSE
       !
@@ -274,7 +274,7 @@ SUBROUTINE DPCHIC(Ic,Vc,Switch,N,X,F,D,Incfd,Wk,Nwk,Ierr)
         !
         !     NWK .LT. 2*(N-1)  RETURN.
         Ierr = -7
-        CALL XERMSG('SLATEC','DPCHIC','WORK ARRAY TOO SMALL',Ierr,1)
+        CALL XERMSG('DPCHIC','WORK ARRAY TOO SMALL',Ierr,1)
         RETURN
       ELSE
         !
@@ -308,7 +308,7 @@ SUBROUTINE DPCHIC(Ic,Vc,Switch,N,X,F,D,Incfd,Wk,Nwk,Ierr)
               !
               !     ERROR RETURN FROM DPCHCS.
               Ierr = -8
-              CALL XERMSG('SLATEC','DPCHIC','ERROR RETURN FROM DPCHCS',Ierr,1)
+              CALL XERMSG('DPCHIC','ERROR RETURN FROM DPCHCS',Ierr,1)
               RETURN
             END IF
           END IF
@@ -328,7 +328,7 @@ SUBROUTINE DPCHIC(Ic,Vc,Switch,N,X,F,D,Incfd,Wk,Nwk,Ierr)
             !     ERROR RETURN FROM DPCHCE.
             !   *** THIS CASE SHOULD NEVER OCCUR ***
             Ierr = -9
-            CALL XERMSG('SLATEC','DPCHIC','ERROR RETURN FROM DPCHCE',Ierr,1)
+            CALL XERMSG('DPCHIC','ERROR RETURN FROM DPCHCE',Ierr,1)
             RETURN
           END IF
         END IF
@@ -342,7 +342,7 @@ SUBROUTINE DPCHIC(Ic,Vc,Switch,N,X,F,D,Incfd,Wk,Nwk,Ierr)
   !
   !     X-ARRAY NOT STRICTLY INCREASING.
   100  Ierr = -3
-  CALL XERMSG('SLATEC','DPCHIC','X-ARRAY NOT STRICTLY INCREASING',Ierr,1)
+  CALL XERMSG('DPCHIC','X-ARRAY NOT STRICTLY INCREASING',Ierr,1)
   RETURN
   !------------- LAST LINE OF DPCHIC FOLLOWS -----------------------------
   RETURN

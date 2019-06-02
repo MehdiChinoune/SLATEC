@@ -70,7 +70,7 @@ SUBROUTINE DPLPUP(DUSRMT,Mrelas,Nvars,Dattrv,Bl,Bu,Ind,Info,Amat,&
   DO j = 1, Nvars
     IF ( Ind(j)<1.OR.Ind(j)>4 ) THEN
       WRITE (xern1,'(I8)') j
-      CALL XERMSG('SLATEC','DPLPUP','IN DSPLP, INDEPENDENT VARIABLE = '//&
+      CALL XERMSG('DPLPUP','IN DSPLP, INDEPENDENT VARIABLE = '//&
         xern1//' IS NOT DEFINED.',10,1)
       Info = -10
       RETURN
@@ -81,7 +81,7 @@ SUBROUTINE DPLPUP(DUSRMT,Mrelas,Nvars,Dattrv,Bl,Bu,Ind,Info,Amat,&
         WRITE (xern1,'(I8)') j
         WRITE (xern3,'(1PE15.6)') Bl(j)
         WRITE (xern4,'(1PE15.6)') Bu(j)
-        CALL XERMSG('SLATEC','DPLPUP','IN DSPLP, LOWER BOUND = '//xern3//&
+        CALL XERMSG('DPLPUP','IN DSPLP, LOWER BOUND = '//xern3//&
           ' AND UPPER BOUND = '//xern4//&
           ' FOR INDEPENDENT VARIABLE = '//xern1//&
           ' ARE NOT CONSISTENT.',11,1)
@@ -93,7 +93,7 @@ SUBROUTINE DPLPUP(DUSRMT,Mrelas,Nvars,Dattrv,Bl,Bu,Ind,Info,Amat,&
   DO i = Nvars + 1, Nvars + Mrelas
     IF ( Ind(i)<1.OR.Ind(i)>4 ) THEN
       WRITE (xern1,'(I8)') i - Nvars
-      CALL XERMSG('SLATEC','DPLPUP','IN DSPLP, DEPENDENT VARIABLE = '//&
+      CALL XERMSG('DPLPUP','IN DSPLP, DEPENDENT VARIABLE = '//&
         xern1//' IS NOT DEFINED.',12,1)
       Info = -12
       RETURN
@@ -104,7 +104,7 @@ SUBROUTINE DPLPUP(DUSRMT,Mrelas,Nvars,Dattrv,Bl,Bu,Ind,Info,Amat,&
         WRITE (xern1,'(I8)') i
         WRITE (xern3,'(1PE15.6)') Bl(i)
         WRITE (xern4,'(1PE15.6)') Bu(i)
-        CALL XERMSG('SLATEC','DPLPUP','IN DSPLP, LOWER BOUND = '//xern3//&
+        CALL XERMSG('DPLPUP','IN DSPLP, LOWER BOUND = '//xern3//&
           ' AND UPPER BOUND = '//xern4//&
           ' FOR DEPENDANT VARIABLE = '//xern1//&
           ' ARE NOT CONSISTENT.',13,1)
@@ -134,7 +134,7 @@ SUBROUTINE DPLPUP(DUSRMT,Mrelas,Nvars,Dattrv,Bl,Bu,Ind,Info,Amat,&
     !
     itcnt = itcnt + 1
     IF ( itcnt>itmax ) THEN
-      CALL XERMSG('SLATEC','DPLPUP',&
+      CALL XERMSG('DPLPUP',&
         'IN DSPLP, MORE THAN 2*NVARS*MRELAS ITERATIONS DEFINING OR UPDATING MATRIX DATA.',7,1)
       Info = -7
       RETURN
@@ -171,7 +171,7 @@ SUBROUTINE DPLPUP(DUSRMT,Mrelas,Nvars,Dattrv,Bl,Bu,Ind,Info,Amat,&
       !
       WRITE (xern1,'(I8)') i
       WRITE (xern2,'(I8)') j
-      CALL XERMSG('SLATEC','DPLPUP','IN DSPLP, ROW INDEX = '//xern1//&
+      CALL XERMSG('DPLPUP','IN DSPLP, ROW INDEX = '//xern1//&
         ' OR COLUMN INDEX = '//xern2//' IS OUT OF RANGE.',8,1)
       Info = -8
       RETURN
@@ -189,7 +189,7 @@ SUBROUTINE DPLPUP(DUSRMT,Mrelas,Nvars,Dattrv,Bl,Bu,Ind,Info,Amat,&
       CALL DPCHNG(i,aij,iplace,Amat,Imat,j)
     ELSE
       WRITE (xern1,'(I8)') indcat
-      CALL XERMSG('SLATEC','DPLPUP','IN DSPLP, INDICATION FLAG = '//xern1//&
+      CALL XERMSG('DPLPUP','IN DSPLP, INDICATION FLAG = '//xern1//&
         ' FOR MATRIX DATA MUST BE EITHER 0 OR 1.',9,1)
       Info = -9
       RETURN
@@ -214,7 +214,7 @@ SUBROUTINE DPLPUP(DUSRMT,Mrelas,Nvars,Dattrv,Bl,Bu,Ind,Info,Amat,&
   !
   IF ( Sizeup.AND..NOT.first ) THEN
     IF ( amn<Asmall.OR.amx>Abig ) THEN
-      CALL XERMSG('SLATEC','DPLPUP',&
+      CALL XERMSG('DPLPUP',&
         'IN DSPLP, A MATRIX ELEMENT''S SIZE IS OUT OF THE SPECIFIED RANGE.',22,1)
       Info = -22
       RETURN

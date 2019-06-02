@@ -148,13 +148,13 @@ REAL(8) FUNCTION DPCHIA(N,X,F,D,Incfd,Skip,A,B,Ierr)
       !
       !     N.LT.2 RETURN.
       Ierr = -1
-      CALL XERMSG('SLATEC','DPCHIA','NUMBER OF DATA POINTS LESS THAN TWO',Ierr,1)
+      CALL XERMSG('DPCHIA','NUMBER OF DATA POINTS LESS THAN TWO',Ierr,1)
       GOTO 100
     ELSEIF ( Incfd<1 ) THEN
       !
       !     INCFD.LT.1 RETURN.
       Ierr = -2
-      CALL XERMSG('SLATEC','DPCHIA','INCREMENT LESS THAN ONE',Ierr,1)
+      CALL XERMSG('DPCHIA','INCREMENT LESS THAN ONE',Ierr,1)
       GOTO 100
     ELSE
       DO i = 2, N
@@ -223,7 +223,7 @@ REAL(8) FUNCTION DPCHIA(N,X,F,D,Incfd,Skip,A,B,Ierr)
             !
             !     TROUBLE IN DPCHID.  (SHOULD NEVER OCCUR.)
             Ierr = -4
-            CALL XERMSG('SLATEC','DPCHIA','TROUBLE IN DPCHID',Ierr,1)
+            CALL XERMSG('DPCHIA','TROUBLE IN DPCHID',Ierr,1)
             GOTO 100
           END IF
         END IF
@@ -261,7 +261,7 @@ REAL(8) FUNCTION DPCHIA(N,X,F,D,Incfd,Skip,A,B,Ierr)
   !
   !     X-ARRAY NOT STRICTLY INCREASING.
   200  Ierr = -3
-  CALL XERMSG('SLATEC','DPCHIA','X-ARRAY NOT STRICTLY INCREASING',Ierr,1)
+  CALL XERMSG('DPCHIA','X-ARRAY NOT STRICTLY INCREASING',Ierr,1)
   GOTO 100
   !------------- LAST LINE OF DPCHIA FOLLOWS -----------------------------
 END FUNCTION DPCHIA

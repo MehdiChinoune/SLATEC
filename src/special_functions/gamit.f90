@@ -68,7 +68,7 @@ REAL FUNCTION GAMIT(A,X)
     first = .FALSE.
   END IF
   !
-  IF ( X<0.0 ) CALL XERMSG('SLATEC','GAMIT','X IS NEGATIVE',2,2)
+  IF ( X<0.0 ) CALL XERMSG('GAMIT','X IS NEGATIVE',2,2)
   !
   IF ( X/=0.0 ) alx = LOG(X)
   sga = 1.0
@@ -106,7 +106,7 @@ REAL FUNCTION GAMIT(A,X)
         IF ( t>(-alneps) ) h = 1.0 - sga*sgngam*EXP(t)
         IF ( ABS(h)<=sqeps ) THEN
           CALL XERCLR
-          CALL XERMSG('SLATEC','GAMIT','RESULT LT HALF PRECISION',1,1)
+          CALL XERMSG('GAMIT','RESULT LT HALF PRECISION',1,1)
         END IF
       END IF
     END IF

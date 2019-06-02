@@ -66,7 +66,7 @@ REAL FUNCTION GAMIC(A,X)
     first = .FALSE.
   END IF
   !
-  IF ( X<0.0 ) CALL XERMSG('SLATEC','GAMIC','X IS NEGATIVE',2,2)
+  IF ( X<0.0 ) CALL XERMSG('GAMIC','X IS NEGATIVE',2,2)
   !
   IF ( X>0.0 ) THEN
     !
@@ -127,11 +127,11 @@ REAL FUNCTION GAMIC(A,X)
         !
         IF ( ABS(h)<sqeps ) CALL XERCLR
         IF ( ABS(h)<sqeps )&
-          CALL XERMSG('SLATEC','GAMIC','RESULT LT HALF PRECISION',1,1)
+          CALL XERMSG('GAMIC','RESULT LT HALF PRECISION',1,1)
       END IF
     END IF
   ELSE
-    IF ( A<=0.0 ) CALL XERMSG('SLATEC','GAMIC',&
+    IF ( A<=0.0 ) CALL XERMSG('GAMIC',&
       'X = 0 AND A LE 0 SO GAMIC IS UNDEFINED',3,2)
     !
     GAMIC = EXP(LOG_GAMMA(A+1.0)-LOG(A))

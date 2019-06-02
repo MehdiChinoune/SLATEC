@@ -49,20 +49,20 @@ SUBROUTINE DFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Nconst,Xconst,&
   !
   dummy = 0.D0
   IF ( Nord<1.OR.Nord>20 ) THEN
-    CALL XERMSG('SLATEC','DFCMN',&
+    CALL XERMSG('DFCMN',&
       'IN DFC, THE ORDER OF THE B-SPLINE MUST BE 1 THRU 20.',2,1)
     Mode = -1
     RETURN
     !
   ELSEIF ( Nbkpt<2*Nord ) THEN
-    CALL XERMSG('SLATEC','DFCMN',&
+    CALL XERMSG('DFCMN',&
       'IN DFC, THE NUMBER OF KNOTS MUST BE AT LEAST TWICE THE B-SPLINE ORDER.',2,1)
     Mode = -1
     RETURN
   END IF
   !
   IF ( Ndata<0 ) THEN
-    CALL XERMSG('SLATEC','DFCMN',&
+    CALL XERMSG('DFCMN',&
       'IN DFC, THE NUMBER OF DATA POINTS MUST BE NONNEGATIVE.',2,1)
     Mode = -1
     RETURN
@@ -78,7 +78,7 @@ SUBROUTINE DFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Nconst,Xconst,&
   !
   IF ( iw1<nb ) THEN
     WRITE (xern1,'(I8)') nb
-    CALL XERMSG('SLATEC','DFCMN',&
+    CALL XERMSG('DFCMN',&
       'IN DFC, INSUFFICIENT STORAGE FOR W(*).  CHECK NB = '//xern1,2,1)
     Mode = -1
     RETURN
@@ -101,7 +101,7 @@ SUBROUTINE DFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Nconst,Xconst,&
     var = .TRUE.
     new = .FALSE.
   ELSE
-    CALL XERMSG('SLATEC','DFCMN','IN DFC, INPUT VALUE OF MODE MUST BE 1-4.',2,1)
+    CALL XERMSG('DFCMN','IN DFC, INPUT VALUE OF MODE MUST BE 1-4.',2,1)
     Mode = -1
     RETURN
   END IF
@@ -283,7 +283,7 @@ SUBROUTINE DFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Nconst,Xconst,&
   !
   IF ( iw1<lw ) THEN
     WRITE (xern1,'(I8)') lw
-    CALL XERMSG('SLATEC','DFCMN',&
+    CALL XERMSG('DFCMN',&
       'IN DFC, INSUFFICIENT STORAGE FOR W(*).  CHECK LW = '//xern1,2,1)
     Mode = -1
     RETURN
@@ -291,7 +291,7 @@ SUBROUTINE DFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Nconst,Xconst,&
   !
   IF ( iw2<intw1 ) THEN
     WRITE (xern1,'(I8)') intw1
-    CALL XERMSG('SLATEC','DFCMN',&
+    CALL XERMSG('DFCMN',&
       'IN DFC, INSUFFICIENT STORAGE FOR IW(*).  CHECK IW1 = '//xern1,2,1)
     Mode = -1
     RETURN

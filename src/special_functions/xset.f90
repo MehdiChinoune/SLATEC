@@ -235,7 +235,7 @@ SUBROUTINE XSET(Irad,Nradpl,Dzero,Nbits,Ierror)
     IF ( iradx/=4 ) THEN
       IF ( iradx/=8 ) THEN
         IF ( iradx/=16 ) THEN
-          CALL XERMSG('SLATEC','XSET','IMPROPER VALUE OF IRAD',101,1)
+          CALL XERMSG('XSET','IMPROPER VALUE OF IRAD',101,1)
           Ierror = 101
           RETURN
         END IF
@@ -311,7 +311,7 @@ SUBROUTINE XSET(Irad,Nradpl,Dzero,Nbits,Ierror)
         !
         ! CHECK SPECIAL CONDITIONS REQUIRED BY SUBROUTINES...
         IF ( nrdplc>=l_com ) THEN
-          CALL XERMSG('SLATEC','XSET','NRADPL .GE. l_com',105,1)
+          CALL XERMSG('XSET','NRADPL .GE. l_com',105,1)
           Ierror = 105
           RETURN
         ELSEIF ( 6*l_com<=kmax_com ) THEN
@@ -319,21 +319,21 @@ SUBROUTINE XSET(Irad,Nradpl,Dzero,Nbits,Ierror)
           RETURN
         END IF
       ELSE
-        CALL XERMSG('SLATEC','XSET','IMPROPER VALUE OF NRADPL',104,1)
+        CALL XERMSG('XSET','IMPROPER VALUE OF NRADPL',104,1)
         Ierror = 104
         RETURN
       END IF
     ELSE
-      CALL XERMSG('SLATEC','XSET','IMPROPER VALUE OF NBITS',103,1)
+      CALL XERMSG('XSET','IMPROPER VALUE OF NBITS',103,1)
       Ierror = 103
       RETURN
     END IF
   ELSE
-    CALL XERMSG('SLATEC','XSET','IMPROPER VALUE OF DZERO',102,1)
+    CALL XERMSG('XSET','IMPROPER VALUE OF DZERO',102,1)
     Ierror = 102
     RETURN
   END IF
-  CALL XERMSG('SLATEC','XSET','6*l_com .GT. KMAX',106,1)
+  CALL XERMSG('XSET','6*l_com .GT. KMAX',106,1)
   Ierror = 106
   RETURN
 END SUBROUTINE XSET

@@ -122,7 +122,7 @@ SUBROUTINE R9AIMP(X,Ampl,Theta)
   !
   IF ( X>=(-2.0) ) THEN
     !
-    IF ( X>(-1.0) ) CALL XERMSG('SLATEC','R9AIMP','X MUST BE LE -1.0',1,2)
+    IF ( X>(-1.0) ) CALL XERMSG('R9AIMP','X MUST BE LE -1.0',1,2)
     !
     z = (16.0/X**3+9.0)/7.0
     Ampl = 0.3125 + CSEVL(z,am22cs,nam22)

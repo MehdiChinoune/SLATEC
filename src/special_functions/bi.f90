@@ -102,7 +102,7 @@ REAL FUNCTION BI(X)
     !
   ELSEIF ( X>2.0 ) THEN
     !
-    IF ( X>xmax ) CALL XERMSG('SLATEC','BI','X SO BIG THAT BI OVERFLOWS',1,2)
+    IF ( X>xmax ) CALL XERMSG('BI','X SO BIG THAT BI OVERFLOWS',1,2)
     !
     BI = BIE(X)*EXP(2.0*X*SQRT(X)/3.0)
     RETURN

@@ -156,12 +156,12 @@ SUBROUTINE RC3JJ(L2,L3,M2,M3,L1min,L1max,Thrcof,Ndim,Ier)
   !  Check error conditions 1 and 2.
   IF ( (L2-ABS(M2)+eps<zero).OR.(L3-ABS(M3)+eps<zero) ) THEN
     Ier = 1
-    CALL XERMSG('SLATEC','RC3JJ','L2-ABS(M2) or L3-ABS(M3) less than zero.',Ier,1)
+    CALL XERMSG('RC3JJ','L2-ABS(M2) or L3-ABS(M3) less than zero.',Ier,1)
     RETURN
   ELSEIF ( (MOD(L2+ABS(M2)+eps,one)>=eps+eps).OR.&
       (MOD(L3+ABS(M3)+eps,one)>=eps+eps) ) THEN
     Ier = 2
-    CALL XERMSG('SLATEC','RC3JJ','L2+ABS(M2) or L3+ABS(M3) not integer.',Ier,1)
+    CALL XERMSG('RC3JJ','L2+ABS(M2) or L3+ABS(M3) not integer.',Ier,1)
     RETURN
   END IF
   !
@@ -175,7 +175,7 @@ SUBROUTINE RC3JJ(L2,L3,M2,M3,L1min,L1max,Thrcof,Ndim,Ier)
   !  Check error condition 3.
   IF ( MOD(L1max-L1min+eps,one)>=eps+eps ) THEN
     Ier = 3
-    CALL XERMSG('SLATEC','RC3JJ','L1MAX-L1MIN not integer.',Ier,1)
+    CALL XERMSG('RC3JJ','L1MAX-L1MIN not integer.',Ier,1)
     RETURN
   END IF
   IF ( L1min<L1max-eps ) THEN
@@ -189,7 +189,7 @@ SUBROUTINE RC3JJ(L2,L3,M2,M3,L1min,L1max,Thrcof,Ndim,Ier)
       !
       !  Check error condition 5.
       Ier = 5
-      CALL XERMSG('SLATEC','RC3JJ','Dimension of result array for 3j coefficients too small.',Ier,1)
+      CALL XERMSG('RC3JJ','Dimension of result array for 3j coefficients too small.',Ier,1)
       RETURN
     ELSE
       !
@@ -217,7 +217,7 @@ SUBROUTINE RC3JJ(L2,L3,M2,M3,L1min,L1max,Thrcof,Ndim,Ier)
     !
     !  Check error condition 4.
     Ier = 4
-    CALL XERMSG('SLATEC','RC3JJ','L1MIN greater than L1MAX.',Ier,1)
+    CALL XERMSG('RC3JJ','L1MIN greater than L1MAX.',Ier,1)
     RETURN
   END IF
   100  lstep = lstep + 1

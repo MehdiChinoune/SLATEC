@@ -76,11 +76,8 @@ SUBROUTINE TQLRAT(N,D,E2,Ierr)
   REAL D(*), E2(*)
   REAL b, c, f, g, h, p, r, s
   !
-  REAL, SAVE :: machep
-  LOGICAL :: first = .TRUE.
+  REAL, PARAMETER :: machep = R1MACH(4)
   !* FIRST EXECUTABLE STATEMENT  TQLRAT
-  IF ( first ) machep = R1MACH(4)
-  first = .FALSE.
   !
   Ierr = 0
   IF ( N/=1 ) THEN

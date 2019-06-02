@@ -40,7 +40,7 @@ INTEGER FUNCTION IDLOC(Locc,Sx,Ix)
   INTEGER :: ipage, itemp, k, key, lmx, lmxm1, lpg, np
   !* FIRST EXECUTABLE STATEMENT  IDLOC
   IF ( Locc<=0 ) THEN
-    CALL XERMSG('SLATEC','IDLOC',&
+    CALL XERMSG('IDLOC',&
       'A value of LOC, the first argument, .LE. 0 was encountered',55,1)
     IDLOC = 0
     RETURN

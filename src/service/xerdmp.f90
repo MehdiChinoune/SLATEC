@@ -31,8 +31,8 @@ SUBROUTINE XERDMP
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900510  Changed call of XERSAV to XERSVE.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   INTEGER kount
   !* FIRST EXECUTABLE STATEMENT  XERDMP
-  CALL XERSVE(' ',' ',' ',0,0,0,kount)
+  CALL XERSVE(' ',' ',0,0,0,kount)
 END SUBROUTINE XERDMP

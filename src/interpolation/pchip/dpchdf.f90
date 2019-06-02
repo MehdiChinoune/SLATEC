@@ -85,7 +85,7 @@ REAL(8) FUNCTION DPCHDF(K,X,S,Ierr)
     !
     !     K.LT.3 RETURN.
     Ierr = -1
-    CALL XERMSG('SLATEC','DPCHDF','K LESS THAN THREE',Ierr,1)
+    CALL XERMSG('DPCHDF','K LESS THAN THREE',Ierr,1)
     DPCHDF = zero
     RETURN
   END IF

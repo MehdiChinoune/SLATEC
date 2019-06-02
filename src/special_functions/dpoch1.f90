@@ -116,7 +116,7 @@ REAL(8) FUNCTION DPOCH1(A,X)
       poly1 = gbern(2)*term
       !
       nterms = INT( -0.5D0*alneps/alnvar ) + 1
-      IF ( nterms>20 ) CALL XERMSG('SLATEC','DPOCH1',&
+      IF ( nterms>20 ) CALL XERMSG('DPOCH1',&
         'NTERMS IS TOO BIG, MAYBE D1MACH(3) IS BAD',1,2)
       IF ( nterms>=2 ) THEN
         !

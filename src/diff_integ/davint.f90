@@ -92,7 +92,7 @@ SUBROUTINE DAVINT(X,Y,N,Xlo,Xup,Ans,Ierr)
   IF ( Xlo>Xup ) THEN
     Ierr = 2
     !     ......EXIT
-    CALL XERMSG('SLATEC','DAVINT',&
+    CALL XERMSG('DAVINT',&
       'THE UPPER LIMIT OF INTEGRATION WAS NOT GREATER THAN THE LOWER LIMIT.',4,1)
   ELSEIF ( Xlo/=Xup ) THEN
     IF ( N>=2 ) THEN
@@ -113,7 +113,7 @@ SUBROUTINE DAVINT(X,Y,N,Xlo,Xup,Ans,Ierr)
         RETURN
       ELSEIF ( X(N-2)<Xlo ) THEN
         Ierr = 3
-        CALL XERMSG('SLATEC','DAVINT',&
+        CALL XERMSG('DAVINT',&
           'THERE WERE LESS THAN THREE FUNCTION VALUES BETWEEN THE LIMITS OF INTEGRATION.',4,1)
         !     ...............EXIT
         RETURN
@@ -179,26 +179,26 @@ SUBROUTINE DAVINT(X,Y,N,Xlo,Xup,Ans,Ierr)
         ELSE
           Ierr = 3
           !     ...............EXIT
-          CALL XERMSG('SLATEC','DAVINT',&
+          CALL XERMSG('DAVINT',&
             'THERE WERE LESS THAN THREE FUNCTION VALUES BETWEEN THE LIMITS OF INTEGRATION.',4,1)
         END IF
         RETURN
       ELSE
         Ierr = 3
-        CALL XERMSG('SLATEC','DAVINT',&
+        CALL XERMSG('DAVINT',&
           'THERE WERE LESS THAN THREE FUNCTION VALUES BETWEEN THE LIMITS OF INTEGRATION.',4,1)
         !     ...............EXIT
         RETURN
       END IF
     ELSE
       Ierr = 5
-      CALL XERMSG('SLATEC','DAVINT',&
+      CALL XERMSG('DAVINT',&
         'LESS THAN TWO FUNCTION VALUES WERE SUPPLIED.',4,1)
       !     ...............EXIT
       RETURN
     END IF
     50  Ierr = 4
-    CALL XERMSG('SLATEC','DAVINT',&
+    CALL XERMSG('DAVINT',&
       'THE ABSCISSAS WERE NOT STRICTLY INCREASING.  MUST HAVE X(I-1) .LT. X(I) FOR ALL I.',4,1)
   END IF
   RETURN

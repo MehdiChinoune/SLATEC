@@ -89,7 +89,7 @@ SUBROUTINE U11US(A,Mda,M,N,Ub,Db,Mode,Np,Krank,Ksure,H,W,Eb,Ir,Ic)
         CALL ISWAP(1,Ir(i),1,Ir(kk),1)
         CALL SSWAP(N,A(i,1),Mda,A(kk,1),Mda)
       ELSE
-        CALL XERMSG('SLATEC','U11US','FIRST NP ROWS ARE LINEARLY DEPENDENT',8,0)
+        CALL XERMSG('U11US','FIRST NP ROWS ARE LINEARLY DEPENDENT',8,0)
         Krank = i - 1
         RETURN
       END IF
@@ -181,7 +181,7 @@ SUBROUTINE U11US(A,Mda,M,N,Ub,Db,Mode,Np,Krank,Ksure,H,W,Eb,Ir,Ic)
     IF ( j<=Krank ) GOTO 200
     GOTO 500
   ELSE
-    CALL XERMSG('SLATEC','U11US','FIRST NP ROWS ARE LINEARLY DEPENDENT',8,0)
+    CALL XERMSG('U11US','FIRST NP ROWS ARE LINEARLY DEPENDENT',8,0)
     Krank = j - 1
     RETURN
   END IF

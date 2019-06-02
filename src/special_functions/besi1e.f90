@@ -101,7 +101,7 @@ REAL FUNCTION BESI1E(X)
   BESI1E = 0.0
   IF ( y==0.0 ) RETURN
   !
-  IF ( y<=xmin ) CALL XERMSG('SLATEC','BESI1E',&
+  IF ( y<=xmin ) CALL XERMSG('BESI1E',&
     'ABS(X) SO SMALL I1 UNDERFLOWS',1,1)
   IF ( y>xmin ) BESI1E = 0.5*X
   IF ( y>xsml ) BESI1E = X*(.875+CSEVL(y*y/4.5-1.,bi1cs,nti1))

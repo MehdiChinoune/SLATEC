@@ -109,24 +109,24 @@ SUBROUTINE CHIEV(A,Lda,N,E,V,Ldv,Work,Job,Info)
   REAL :: A(2*Lda*N), E(N), Work(4*N), V(2*Ldv*N)
   INTEGER :: i, j, k, l, m, mdim
   !* FIRST EXECUTABLE STATEMENT  CHIEV
-  IF ( N>Lda ) CALL XERMSG('SLATEC','CHIEV','N .GT. LDA.',1,1)
+  IF ( N>Lda ) CALL XERMSG('CHIEV','N .GT. LDA.',1,1)
   IF ( N>Lda ) RETURN
-  IF ( N<1 ) CALL XERMSG('SLATEC','CHIEV','N .LT. 1',2,1)
+  IF ( N<1 ) CALL XERMSG('CHIEV','N .LT. 1',2,1)
   IF ( N<1 ) RETURN
   IF ( N/=1.OR.Job/=0 ) THEN
     mdim = 2*Lda
     IF ( Job/=0 ) THEN
-      IF ( N>Ldv ) CALL XERMSG('SLATEC','CHIEV','JOB .NE. 0 AND N .GT. LDV.',3,1)
+      IF ( N>Ldv ) CALL XERMSG('CHIEV','JOB .NE. 0 AND N .GT. LDV.',3,1)
       IF ( N>Ldv ) RETURN
       IF ( N==1 ) GOTO 100
       !
       !       REARRANGE A IF NECESSARY WHEN LDA.GT.LDV AND JOB .NE.0
       !
       mdim = MIN(mdim,2*Ldv)
-      IF ( Lda<Ldv ) CALL XERMSG('SLATEC','CHIEV',&
+      IF ( Lda<Ldv ) CALL XERMSG('CHIEV',&
         'LDA.LT.LDV,  ELEMENTS OF V OTHER THAN THE N BY N OUTPUT ELEMENTS HAVE BEEN CHANGED.',5,0)
       IF ( Lda>Ldv ) THEN
-        CALL XERMSG('SLATEC','CHIEV',&
+        CALL XERMSG('CHIEV',&
           'LDA.GT.LDV, ELEMENTS OF A OTHER THAN THE N BY N INPUT ELEMENTS HAVE BEEN CHANGED.',4,0)
         l = N - 1
         DO j = 1, l
@@ -142,7 +142,7 @@ SUBROUTINE CHIEV(A,Lda,N,E,V,Ldv,Work,Job,Info)
     DO j = 1, N
       k = (j-1)*(mdim+2) + 1
       IF ( A(k+1)/=0.0 )&
-        CALL XERMSG('SLATEC','CHIEV','NONREAL ELEMENT ON DIAGONAL OF A',6,1)
+        CALL XERMSG('CHIEV','NONREAL ELEMENT ON DIAGONAL OF A',6,1)
       IF ( A(k+1)/=0.0 ) RETURN
       CALL SCOPY(N-j+1,A(k),mdim,A(k),2)
       CALL SCOPYM(N-j+1,A(k+1),mdim,A(k+1),2)
@@ -201,7 +201,7 @@ SUBROUTINE CHIEV(A,Lda,N,E,V,Ldv,Work,Job,Info)
   !     TAKE CARE OF N=1 CASE.
   !
   100 CONTINUE
-  IF ( A(2)/=0. ) CALL XERMSG('SLATEC','CHIEV',&
+  IF ( A(2)/=0. ) CALL XERMSG('CHIEV',&
     'NONREAL ELEMENT ON DIAGONAL OF A',6,1)
   IF ( A(2)/=0. ) RETURN
   E(1) = A(1)

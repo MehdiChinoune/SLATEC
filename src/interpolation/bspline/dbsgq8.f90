@@ -117,7 +117,7 @@ SUBROUTINE DBSGQ8(FUN,Xt,Bc,N,Kk,Id,A,B,Inbv,Err,Ans,Ierr,Work)
             lmx = MIN(nlmx,nbits-nib-7)
             IF ( lmx<1 ) THEN
               Ierr = -1
-              CALL XERMSG('SLATEC','DBSGQ8',&
+              CALL XERMSG('DBSGQ8',&
                 'A AND B ARE TOO NEARLY EQUAL TO ALLOW NORMAL INTEGRATION.&
                 & ANS IS SET TO ZERO AND IERR TO -1.',1,-1)
               IF ( Err<0.0D0 ) Err = ce
@@ -200,7 +200,7 @@ SUBROUTINE DBSGQ8(FUN,Xt,Bc,N,Kk,Id,A,B,Inbv,Err,Ans,Ierr,Work)
     Ans = vr
     IF ( (mxl/=0).AND.(ABS(ce)>2.0D0*tol*area) ) THEN
       Ierr = 2
-      CALL XERMSG('SLATEC','DBSGQ8',&
+      CALL XERMSG('DBSGQ8',&
         'ANS IS PROBABLY INSUFFICIENTLY ACCURATE.',3,1)
     END IF
     IF ( Err<0.0D0 ) Err = ce

@@ -81,8 +81,8 @@ SUBROUTINE R9KNUS(Xnu,X,Bknu,Bknu1,Iswtch)
   END IF
   !
   IF ( Xnu<0..OR.Xnu>=1.0 )&
-    CALL XERMSG('SLATEC','R9KNUS','XNU MUST BE GE 0 AND LT 1',1,2)
-  IF ( X<=0. ) CALL XERMSG('SLATEC','R9KNUS','X MUST BE GT 0',2,2)
+    CALL XERMSG('R9KNUS','XNU MUST BE GE 0 AND LT 1',1,2)
+  IF ( X<=0. ) CALL XERMSG('R9KNUS','X MUST BE GT 0',2,2)
   !
   Iswtch = 0
   IF ( X>2.0 ) THEN
@@ -112,7 +112,7 @@ SUBROUTINE R9KNUS(Xnu,X,Bknu,Bknu1,Iswtch)
     !
     IF ( X<=Xnu ) THEN
       IF ( -0.5*Xnu*alnz-aln2-LOG(Xnu)>alnbig )&
-        CALL XERMSG('SLATEC','R9KNUS',&
+        CALL XERMSG('R9KNUS',&
         'X SO SMALL BESSEL K-SUB-XNU OVERFLOWS',3,2)
     END IF
     !

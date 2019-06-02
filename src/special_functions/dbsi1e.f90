@@ -150,7 +150,7 @@ REAL(8) FUNCTION DBSI1E(X)
   DBSI1E = 0.0D0
   IF ( y==0.D0 ) RETURN
   !
-  IF ( y<=xmin ) CALL XERMSG('SLATEC','DBSI1E',&
+  IF ( y<=xmin ) CALL XERMSG('DBSI1E',&
     'ABS(X) SO SMALL I1 UNDERFLOWS',1,1)
   IF ( y>xmin ) DBSI1E = 0.5D0*X
   IF ( y>xsml ) DBSI1E = X*(0.875D0+DCSEVL(y*y/4.5D0-1.D0,bi1cs,nti1))

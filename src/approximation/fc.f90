@@ -388,12 +388,12 @@ SUBROUTINE FC(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkpt,Nconst,Xconst,&
   !
   !* FIRST EXECUTABLE STATEMENT  FC
   IF ( Nord<1 .OR. Nord>20 ) THEN
-    CALL XERMSG('SLATEC','FCMN',&
+    CALL XERMSG('FCMN',&
       'IN FC, THE ORDER OF THE B-SPLINE MUST BE 1 THRU 20.',2,1)
     Mode = -1
     RETURN
   ELSEIF ( Nbkpt<2*Nord ) THEN
-    CALL XERMSG('SLATEC','FCMN',&
+    CALL XERMSG('FCMN',&
       'IN FC, THE NUMBER OF KNOTS MUST BE AT LEAST TWICE THE B-SPLINE ORDER.',2,1)
     Mode = -1
     RETURN

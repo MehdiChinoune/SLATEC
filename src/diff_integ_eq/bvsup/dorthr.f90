@@ -190,7 +190,7 @@ SUBROUTINE DORTHR(A,N,M,Nrda,Iflag,Irank,Iscale,Diag,Kpivot,Scales,Rows,Rs)
         !              RANK DEFICIENT PROBLEM
         Iflag = 3
         Irank = k - 1
-        CALL XERMSG('SLATEC','DORTHR',&
+        CALL XERMSG('DORTHR',&
           'RANK OF MATRIX IS LESS THAN THE NUMBER OF ROWS.',1,1)
         !        ......EXIT
         EXIT
@@ -198,7 +198,7 @@ SUBROUTINE DORTHR(A,N,M,Nrda,Iflag,Irank,Iscale,Diag,Kpivot,Scales,Rows,Rs)
     END DO
   ELSE
     Iflag = 2
-    CALL XERMSG('SLATEC','DORTHR','INVALID INPUT PARAMETERS.',2,1)
+    CALL XERMSG('DORTHR','INVALID INPUT PARAMETERS.',2,1)
   END IF
   !
   !

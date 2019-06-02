@@ -41,7 +41,7 @@ REAL FUNCTION R9LGIT(A,X,Algap1)
   IF ( eps==0.0 ) eps = 0.5*R1MACH(3)
   IF ( sqeps==0.0 ) sqeps = SQRT(R1MACH(4))
   !
-  IF ( X<=0.0.OR.A<X ) CALL XERMSG('SLATEC','R9LGIT',&
+  IF ( X<=0.0.OR.A<X ) CALL XERMSG('R9LGIT',&
     'X SHOULD BE GT 0.0 AND LE A',2,2)
   !
   ax = A + X
@@ -57,11 +57,11 @@ REAL FUNCTION R9LGIT(A,X,Algap1)
     s = s + p
     IF ( ABS(p)<eps*s ) GOTO 100
   END DO
-  CALL XERMSG('SLATEC','R9LGIT',&
+  CALL XERMSG('R9LGIT',&
     'NO CONVERGENCE IN 200 TERMS OF CONTINUED FRACTION',3,2)
   !
   100  hstar = 1.0 - X*s/a1x
-  IF ( hstar<sqeps ) CALL XERMSG('SLATEC','R9LGIT',&
+  IF ( hstar<sqeps ) CALL XERMSG('R9LGIT',&
     'RESULT LESS THAN HALF PRECISION',1,1)
   !
   R9LGIT = -X - Algap1 - LOG(hstar)

@@ -129,7 +129,7 @@ SUBROUTINE DGAUS8(FUN,A,B,Err,Ans,Ierr)
             lmx = MIN(nlmx,nbits-nib-7)
             IF ( lmx<1 ) THEN
               Ierr = -1
-              CALL XERMSG('SLATEC','DGAUS8',&
+              CALL XERMSG('DGAUS8',&
                 'A and B are too nearly equal to allow normal integration.&
                 & $$ANS is set to zero and IERR to -1.',1,-1)
               IF ( Err<0.0D0 ) Err = ce
@@ -213,7 +213,7 @@ SUBROUTINE DGAUS8(FUN,A,B,Err,Ans,Ierr)
     Ans = vr
     IF ( (mxl/=0).AND.(ABS(ce)>2.0D0*tol*area) ) THEN
       Ierr = 2
-      CALL XERMSG('SLATEC','DGAUS8',&
+      CALL XERMSG('DGAUS8',&
         'ANS is probably insufficiently accurate.',3,1)
     END IF
     IF ( Err<0.0D0 ) Err = ce

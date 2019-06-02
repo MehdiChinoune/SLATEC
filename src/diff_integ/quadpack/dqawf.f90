@@ -248,5 +248,5 @@ SUBROUTINE DQAWF(F,A,Omega,Integr,Epsabs,Result,Abserr,Neval,Ier,Limlst,&
     lvl = 0
   END IF
   IF ( Ier==6 ) lvl = 1
-  IF ( Ier/=0 ) CALL XERMSG('SLATEC','DQAWF','ABNORMAL RETURN',Ier,lvl)
+  IF ( Ier/=0 ) CALL XERMSG('DQAWF','ABNORMAL RETURN',Ier,lvl)
 END SUBROUTINE DQAWF

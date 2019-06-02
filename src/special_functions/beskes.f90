@@ -51,9 +51,9 @@ SUBROUTINE BESKES(Xnu,X,Nin,Bke)
   v = ABS(Xnu)
   n = ABS(Nin)
   !
-  IF ( v>=1. ) CALL XERMSG('SLATEC','BESKES','ABS(XNU) MUST BE LT 1',2,2)
-  IF ( X<=0. ) CALL XERMSG('SLATEC','BESKES','X IS LE 0',3,2)
-  IF ( n==0 ) CALL XERMSG('SLATEC','BESKES',&
+  IF ( v>=1. ) CALL XERMSG('BESKES','ABS(XNU) MUST BE LT 1',2,2)
+  IF ( X<=0. ) CALL XERMSG('BESKES','X IS LE 0',3,2)
+  IF ( n==0 ) CALL XERMSG('BESKES',&
     'N THE NUMBER IN THE SEQUENCE IS 0',4,2)
   !
   CALL R9KNUS(v,X,Bke(1),bknu1,iswtch)
@@ -62,7 +62,7 @@ SUBROUTINE BESKES(Xnu,X,Nin,Bke)
   vincr = SIGN(1.0,REAL(Nin))
   direct = vincr
   IF ( Xnu/=0. ) direct = vincr*SIGN(1.0,Xnu)
-  IF ( iswtch==1.AND.direct>0. ) CALL XERMSG('SLATEC','BESKES',&
+  IF ( iswtch==1.AND.direct>0. ) CALL XERMSG('BESKES',&
     'X SO SMALL BESSEL K-SUB-XNU+1 OVERFLOWS',5,2)
   Bke(2) = bknu1
   !
@@ -71,7 +71,7 @@ SUBROUTINE BESKES(Xnu,X,Nin,Bke)
   !
   vend = ABS(Xnu+Nin) - 1.0
   IF ( (vend-0.5)*LOG(vend)+0.27-vend*(LOG(X)-.694)>alnbig )&
-    CALL XERMSG('SLATEC','BESKES',&
+    CALL XERMSG('BESKES',&
     'X SO SMALL OR ABS(NU) SO BIG THAT BESSEL K-SUB-NU OVERFLOWS',5,2)
   !
   v = Xnu

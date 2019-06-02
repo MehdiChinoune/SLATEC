@@ -191,7 +191,7 @@ SUBROUTINE LSSODS(A,X,B,M,N,Nrda,Iflag,Irank,Iscale,Q,Diag,Kpivot,Iter,&
   !
   !     INVALID INPUT FOR LSSODS
   Iflag = 2
-  CALL XERMSG('SLATEC','LSSODS','INVALID INPUT PARAMETERS.',2,1)
+  CALL XERMSG('LSSODS','INVALID INPUT PARAMETERS.',2,1)
   RETURN
   !
   100  irm = Irank - 1
@@ -293,13 +293,13 @@ SUBROUTINE LSSODS(A,X,B,M,N,Nrda,Iflag,Irank,Iscale,Q,Diag,Kpivot,Iter,&
             IF ( it==2 ) THEN
               !
               Iflag = 5
-              CALL XERMSG('SLATEC','LSSODS',&
+              CALL XERMSG('LSSODS',&
                 'PROBLEM IS VERY ILL-CONDITIONED.  ITERATIVE IMPROVEMENT IS INEFFECTIVE.',8,1)
               RETURN
             ELSE
               !
               Iflag = 4
-              CALL XERMSG('SLATEC','LSSODS',&
+              CALL XERMSG('LSSODS',&
                 'PROBLEM MAY BE ILL-CONDITIONED.  MAXIMAL MACHINE ACCURACY IS NOT ACHIEVABLE.',3,1)
               RETURN
             END IF
@@ -328,7 +328,7 @@ SUBROUTINE LSSODS(A,X,B,M,N,Nrda,Iflag,Irank,Iscale,Q,Diag,Kpivot,Iter,&
     !
     !- *********************************************************************
     Iflag = 6
-    CALL XERMSG('SLATEC','LSSODS',&
+    CALL XERMSG('LSSODS',&
       'CONVERGENCE HAS NOT BEEN OBTAINED WITH ALLOWABLE NUMBER OF ITERATIVE IMPROVEMENT STEPS.',8,1)
     RETURN
   END IF

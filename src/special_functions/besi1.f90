@@ -60,7 +60,7 @@ REAL FUNCTION BESI1(X)
   y = ABS(X)
   IF ( y>3.0 ) THEN
     !
-    IF ( y>xmax ) CALL XERMSG('SLATEC','BESI1','ABS(X) SO BIG I1 OVERFLOWS',&
+    IF ( y>xmax ) CALL XERMSG('BESI1','ABS(X) SO BIG I1 OVERFLOWS',&
       2,2)
     !
     BESI1 = EXP(y)*BESI1E(X)
@@ -70,7 +70,7 @@ REAL FUNCTION BESI1(X)
   BESI1 = 0.0
   IF ( y==0.0 ) RETURN
   !
-  IF ( y<=xmin ) CALL XERMSG('SLATEC','BESI1',&
+  IF ( y<=xmin ) CALL XERMSG('BESI1',&
     'ABS(X) SO SMALL I1 UNDERFLOWS',1,1)
   IF ( y>xmin ) BESI1 = 0.5*X
   IF ( y>xsml ) BESI1 = X*(.875+CSEVL(y*y/4.5-1.,bi1cs,nti1))

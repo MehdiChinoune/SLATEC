@@ -56,13 +56,13 @@ REAL(8) FUNCTION DFAC(N)
     nmax = INT( xmax ) - 1
   END IF
   !
-  IF ( N<0 ) CALL XERMSG('SLATEC','DFAC',&
+  IF ( N<0 ) CALL XERMSG('DFAC',&
     'FACTORIAL OF NEGATIVE INTEGER UNDEFINED',1,2)
   !
   IF ( N<=30 ) DFAC = facn(N+1)
   IF ( N<=30 ) RETURN
   !
-  IF ( N>nmax ) CALL XERMSG('SLATEC','DFAC',&
+  IF ( N>nmax ) CALL XERMSG('DFAC',&
     'N SO BIG FACTORIAL(N) OVERFLOWS',2,2)
   !
   x = N + 1

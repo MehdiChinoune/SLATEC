@@ -1571,14 +1571,14 @@ SUBROUTINE DSPLP(DUSRMT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   !
   IF ( Mrelas<=0 ) THEN
     WRITE (xern1,'(I8)') Mrelas
-    CALL XERMSG('SLATEC','DSPLP','VALUE OF MRELAS MUST BE .GT. 0.  NOW = '//xern1,5,1)
+    CALL XERMSG('DSPLP','VALUE OF MRELAS MUST BE .GT. 0.  NOW = '//xern1,5,1)
     Info = -5
     RETURN
   END IF
   !
   IF ( Nvars<=0 ) THEN
     WRITE (xern1,'(I8)') Nvars
-    CALL XERMSG('SLATEC','DSPLP','VALUE OF NVARS MUST BE .GT. 0.  NOW = '//xern1,6,1)
+    CALL XERMSG('DSPLP','VALUE OF NVARS MUST BE .GT. 0.  NOW = '//xern1,6,1)
     Info = -6
     RETURN
   END IF
@@ -1598,7 +1598,7 @@ SUBROUTINE DSPLP(DUSRMT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
       !     THE CHECKS FOR SMALL OR LARGE VALUES OF NEXT ARE TO PREVENT
       !     WORKING WITH UNDEFINED DATA.
       nerr = 14
-      CALL XERMSG('SLATEC','DSPLP',&
+      CALL XERMSG('DSPLP',&
         'THE USER OPTION ARRAY HAS UNDEFINED DATA.',nerr,iopt)
       Info = -nerr
       RETURN
@@ -1608,7 +1608,7 @@ SUBROUTINE DSPLP(DUSRMT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
       !
       IF ( lmx<Nvars+7 ) THEN
         WRITE (xern1,'(I8)') lmx
-        CALL XERMSG('SLATEC','DSPLP','USER-DEFINED VALUE OF LAMAT = '//&
+        CALL XERMSG('DSPLP','USER-DEFINED VALUE OF LAMAT = '//&
           xern1//' MUST BE .GE. NVARS+7.',20,1)
         Info = -20
         RETURN
@@ -1645,7 +1645,7 @@ SUBROUTINE DSPLP(DUSRMT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
       IF ( Lw<lwork.OR.Liw<liwork ) THEN
         WRITE (xern1,'(I8)') lwork
         WRITE (xern2,'(I8)') liwork
-        CALL XERMSG('SLATEC','DSPLP','WORK OR IWORK IS NOT LONG ENOUGH. LW MUST BE = '&
+        CALL XERMSG('DSPLP','WORK OR IWORK IS NOT LONG ENOUGH. LW MUST BE = '&
           //xern1//' AND LIW MUST BE = '//xern2,4,1)
         Info = -4
         RETURN
@@ -1674,13 +1674,13 @@ SUBROUTINE DSPLP(DUSRMT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
       last = next
     ELSE
       nerr = 15
-      CALL XERMSG('SLATEC','DSPLP','OPTION ARRAY PROCESSING IS CYCLING.',nerr,iopt)
+      CALL XERMSG('DSPLP','OPTION ARRAY PROCESSING IS CYCLING.',nerr,iopt)
       Info = -nerr
       RETURN
     END IF
   END DO
   nerr = 21
-  CALL XERMSG('SLATEC','DSPLP','USER-DEFINED VALUE OF LBM MUST BE .GE. 0.',&
+  CALL XERMSG('DSPLP','USER-DEFINED VALUE OF LBM MUST BE .GE. 0.',&
     nerr,iopt)
   Info = -nerr
   RETURN

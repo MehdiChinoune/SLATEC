@@ -225,7 +225,7 @@ SUBROUTINE DHFTI(A,Mda,M,N,B,Mdb,Nb,Tau,Krank,Rnorm,H,G,Ip)
       ELSE
         nerr = 2
         iopt = 2
-        CALL XERMSG('SLATEC','DHFTI',&
+        CALL XERMSG('DHFTI',&
           'MDB.LT.MAX(M,N).AND.NB.GT.1. PROBABLE ERROR.',nerr,iopt)
         !     ...............EXIT
         RETURN
@@ -234,7 +234,7 @@ SUBROUTINE DHFTI(A,Mda,M,N,B,Mdb,Nb,Tau,Krank,Rnorm,H,G,Ip)
     ELSE
       nerr = 1
       iopt = 2
-      CALL XERMSG('SLATEC','DHFTI','MDA.LT.M, PROBABLE ERROR.',nerr,iopt)
+      CALL XERMSG('DHFTI','MDA.LT.M, PROBABLE ERROR.',nerr,iopt)
       !     ...............EXIT
       RETURN
     END IF

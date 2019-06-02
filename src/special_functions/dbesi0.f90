@@ -64,7 +64,7 @@ REAL(8) FUNCTION DBESI0(X)
   y = ABS(X)
   IF ( y>3.0D0 ) THEN
     !
-    IF ( y>xmax ) CALL XERMSG('SLATEC','DBESI0','ABS(X) SO BIG I0 OVERFLOWS',2,2)
+    IF ( y>xmax ) CALL XERMSG('DBESI0','ABS(X) SO BIG I0 OVERFLOWS',2,2)
     !
     DBESI0 = EXP(y)*DBSI0E(X)
     RETURN

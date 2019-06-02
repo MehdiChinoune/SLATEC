@@ -40,7 +40,7 @@ REAL(8) FUNCTION DLBETA(A,B)
   p = MIN(A,B)
   q = MAX(A,B)
   !
-  IF ( p<=0.D0 ) CALL XERMSG('SLATEC','DLBETA',&
+  IF ( p<=0.D0 ) CALL XERMSG('DLBETA',&
     'BOTH ARGUMENTS MUST BE GT ZERO',1,2)
   !
   IF ( p>=10.D0 ) THEN

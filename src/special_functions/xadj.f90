@@ -81,7 +81,7 @@ SUBROUTINE XADJ(X,Ix,Ierror)
       RETURN
     END IF
   END IF
-  100  CALL XERMSG('SLATEC','XADJ','overflow in auxiliary index',107,1)
+  100  CALL XERMSG('XADJ','overflow in auxiliary index',107,1)
   Ierror = 107
   RETURN
   200 CONTINUE

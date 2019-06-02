@@ -198,5 +198,5 @@ SUBROUTINE QAG(F,A,B,Epsabs,Epsrel,Key,Result,Abserr,Neval,Ier,Limit,Lenw,&
   END IF
   !
   IF ( Ier==6 ) lvl = 1
-  IF ( Ier/=0 ) CALL XERMSG('SLATEC','QAG','ABNORMAL RETURN',Ier,lvl)
+  IF ( Ier/=0 ) CALL XERMSG('QAG','ABNORMAL RETURN',Ier,lvl)
 END SUBROUTINE QAG

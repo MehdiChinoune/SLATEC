@@ -120,7 +120,7 @@ SUBROUTINE DGEFS(A,Lda,N,V,Itask,Ind,Work,Iwork)
     Ind = -1
     WRITE (xern1,'(I8)') Lda
     WRITE (xern2,'(I8)') N
-    CALL XERMSG('SLATEC','DGEFS','LDA = '//xern1//' IS LESS THAN N = '//&
+    CALL XERMSG('DGEFS','LDA = '//xern1//' IS LESS THAN N = '//&
       xern2,-1,1)
     RETURN
   END IF
@@ -128,14 +128,14 @@ SUBROUTINE DGEFS(A,Lda,N,V,Itask,Ind,Work,Iwork)
   IF ( N<=0 ) THEN
     Ind = -2
     WRITE (xern1,'(I8)') N
-    CALL XERMSG('SLATEC','DGEFS','N = '//xern1//' IS LESS THAN 1',-2,1)
+    CALL XERMSG('DGEFS','N = '//xern1//' IS LESS THAN 1',-2,1)
     RETURN
   END IF
   !
   IF ( Itask<1 ) THEN
     Ind = -3
     WRITE (xern1,'(I8)') Itask
-    CALL XERMSG('SLATEC','DGEFS','ITASK = '//xern1//' IS LESS THAN 1',-3,1)
+    CALL XERMSG('DGEFS','ITASK = '//xern1//' IS LESS THAN 1',-3,1)
     RETURN
   END IF
   !
@@ -149,7 +149,7 @@ SUBROUTINE DGEFS(A,Lda,N,V,Itask,Ind,Work,Iwork)
     !
     IF ( rcond==0.0D0 ) THEN
       Ind = -4
-      CALL XERMSG('SLATEC','DGEFS','SINGULAR MATRIX A - NO SOLUTION',-4,1)
+      CALL XERMSG('DGEFS','SINGULAR MATRIX A - NO SOLUTION',-4,1)
       RETURN
     END IF
     !
@@ -159,7 +159,7 @@ SUBROUTINE DGEFS(A,Lda,N,V,Itask,Ind,Work,Iwork)
     Ind = INT( -LOG10(D1MACH(4)/rcond) )
     IF ( Ind<=0 ) THEN
       Ind = -10
-      CALL XERMSG('SLATEC','DGEFS','SOLUTION MAY HAVE NO SIGNIFICANCE',-10,0)
+      CALL XERMSG('DGEFS','SOLUTION MAY HAVE NO SIGNIFICANCE',-10,0)
     END IF
   END IF
   !

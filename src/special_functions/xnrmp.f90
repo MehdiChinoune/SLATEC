@@ -266,10 +266,10 @@ SUBROUTINE XNRMP(Nu,Mu1,Mu2,Sarg,Mode,Spn,Ipn,Isig,Ierror)
   !
   !          ERROR PRINTOUTS AND TERMINATION.
   !
-  300  CALL XERMSG('SLATEC','XNRMP','NU, MU1, MU2 or MODE not valid',112,1)
+  300  CALL XERMSG('XNRMP','NU, MU1, MU2 or MODE not valid',112,1)
   Ierror = 112
   RETURN
-  400  CALL XERMSG('SLATEC','XNRMP','SARG out of range',113,1)
+  400  CALL XERMSG('XNRMP','SARG out of range',113,1)
   Ierror = 113
   RETURN
   !

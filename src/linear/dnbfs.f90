@@ -189,7 +189,7 @@ SUBROUTINE DNBFS(Abe,Lda,N,Ml,Mu,V,Itask,Ind,Work,Iwork)
     Ind = -1
     WRITE (xern1,'(I8)') Lda
     WRITE (xern2,'(I8)') N
-    CALL XERMSG('SLATEC','DNBFS','LDA = '//xern1//' IS LESS THAN N = '//&
+    CALL XERMSG('DNBFS','LDA = '//xern1//' IS LESS THAN N = '//&
       xern2,-1,1)
     RETURN
   END IF
@@ -197,28 +197,28 @@ SUBROUTINE DNBFS(Abe,Lda,N,Ml,Mu,V,Itask,Ind,Work,Iwork)
   IF ( N<=0 ) THEN
     Ind = -2
     WRITE (xern1,'(I8)') N
-    CALL XERMSG('SLATEC','DNBFS','N = '//xern1//' IS LESS THAN 1',-2,1)
+    CALL XERMSG('DNBFS','N = '//xern1//' IS LESS THAN 1',-2,1)
     RETURN
   END IF
   !
   IF ( Itask<1 ) THEN
     Ind = -3
     WRITE (xern1,'(I8)') Itask
-    CALL XERMSG('SLATEC','DNBFS','ITASK = '//xern1//' IS LESS THAN 1',-3,1)
+    CALL XERMSG('DNBFS','ITASK = '//xern1//' IS LESS THAN 1',-3,1)
     RETURN
   END IF
   !
   IF ( Ml<0.OR.Ml>=N ) THEN
     Ind = -5
     WRITE (xern1,'(I8)') Ml
-    CALL XERMSG('SLATEC','DNBFS','ML = '//xern1//' IS OUT OF RANGE',-5,1)
+    CALL XERMSG('DNBFS','ML = '//xern1//' IS OUT OF RANGE',-5,1)
     RETURN
   END IF
   !
   IF ( Mu<0.OR.Mu>=N ) THEN
     Ind = -6
     WRITE (xern1,'(I8)') Mu
-    CALL XERMSG('SLATEC','DNBFS','MU = '//xern1//' IS OUT OF RANGE',-6,1)
+    CALL XERMSG('DNBFS','MU = '//xern1//' IS OUT OF RANGE',-6,1)
     RETURN
   END IF
   !
@@ -232,7 +232,7 @@ SUBROUTINE DNBFS(Abe,Lda,N,Ml,Mu,V,Itask,Ind,Work,Iwork)
     !
     IF ( rcond==0.0D0 ) THEN
       Ind = -4
-      CALL XERMSG('SLATEC','DNBFS','SINGULAR MATRIX A - NO SOLUTION',-4,1)
+      CALL XERMSG('DNBFS','SINGULAR MATRIX A - NO SOLUTION',-4,1)
       RETURN
     END IF
     !
@@ -242,7 +242,7 @@ SUBROUTINE DNBFS(Abe,Lda,N,Ml,Mu,V,Itask,Ind,Work,Iwork)
     Ind = INT( -LOG10(D1MACH(4)/rcond) )
     IF ( Ind<=0 ) THEN
       Ind = -10
-      CALL XERMSG('SLATEC','DNBFS','SOLUTION MAY HAVE NO SIGNIFICANCE',-10,0)
+      CALL XERMSG('DNBFS','SOLUTION MAY HAVE NO SIGNIFICANCE',-10,0)
     END IF
   END IF
   !

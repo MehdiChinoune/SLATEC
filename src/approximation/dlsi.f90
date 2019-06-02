@@ -70,15 +70,12 @@ SUBROUTINE DLSI(W,Mdw,Ma,Mg,N,Prgopt,X,Rnorm,Mode,Ws,Ip)
     n1, n2, n3, next, np1
   LOGICAL :: cov, sclcov
   !
-  REAL(8), SAVE :: drelpr
-  LOGICAL :: first = .TRUE.
+  REAL(8), PARAMETER :: drelpr = D1MACH(4)
   !
   !* FIRST EXECUTABLE STATEMENT  DLSI
   !
   !     Set the nominal tolerance used in the code.
   !
-  IF ( first ) drelpr = D1MACH(4)
-  first = .FALSE.
   tol = SQRT(drelpr)
   !
   Mode = 0

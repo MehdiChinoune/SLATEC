@@ -39,7 +39,7 @@ REAL FUNCTION R9GMIT(A,X,Algap1,Sgngam)
   IF ( eps==0.0 ) eps = 0.5*R1MACH(3)
   IF ( bot==0.0 ) bot = LOG(R1MACH(1))
   !
-  IF ( X<=0.0 ) CALL XERMSG('SLATEC','R9GMIT','X SHOULD BE GT 0',1,2)
+  IF ( X<=0.0 ) CALL XERMSG('R9GMIT','X SHOULD BE GT 0',1,2)
   !
   ma = INT( A + 0.5 )
   IF ( A<0.0 ) ma = INT( A - 0.5 )
@@ -58,7 +58,7 @@ REAL FUNCTION R9GMIT(A,X,Algap1,Sgngam)
     s = s + t
     IF ( ABS(t)<eps*ABS(s) ) GOTO 100
   END DO
-  CALL XERMSG('SLATEC','R9GMIT',&
+  CALL XERMSG('R9GMIT',&
     'NO CONVERGENCE IN 200 TERMS OF TAYLOR-S SERIES',2,2)
   !
   100 CONTINUE

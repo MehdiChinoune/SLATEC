@@ -778,13 +778,13 @@ SUBROUTINE DDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
   !* FIRST EXECUTABLE STATEMENT  DDRIV3
   IF ( Nstate==12 ) THEN
     Ierflg = 999
-    CALL XERMSG('SLATEC','DDRIV3',&
+    CALL XERMSG('DDRIV3',&
       'Illegal input.  The value of NSTATE is 12 .',Ierflg,2)
     RETURN
   ELSEIF ( Nstate<1.OR.Nstate>12 ) THEN
     WRITE (intgr1,'(I8)') Nstate
     Ierflg = 26
-    CALL XERMSG('SLATEC','DDRIV3',&
+    CALL XERMSG('DDRIV3',&
       'Illegal input.  Improper value for NSTATE(= '//intgr1//').',Ierflg,1)
     Nstate = 12
     RETURN
@@ -793,7 +793,7 @@ SUBROUTINE DDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
   IF ( Eps<0.D0 ) THEN
     WRITE (rl1,'(D16.8)') Eps
     Ierflg = 27
-    CALL XERMSG('SLATEC','DDRIV3','Illegal input.  EPS, '//rl1//&
+    CALL XERMSG('DDRIV3','Illegal input.  EPS, '//rl1//&
       ', is negative.',Ierflg,1)
     Nstate = 12
     RETURN
@@ -801,7 +801,7 @@ SUBROUTINE DDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
   IF ( N<=0 ) THEN
     WRITE (intgr1,'(I8)') N
     Ierflg = 22
-    CALL XERMSG('SLATEC','DDRIV3','Illegal input.  Number of equations, '//&
+    CALL XERMSG('DDRIV3','Illegal input.  Number of equations, '//&
       intgr1//', is not positive.',Ierflg,1)
     Nstate = 12
     RETURN
@@ -809,7 +809,7 @@ SUBROUTINE DDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
   IF ( Mxord<=0 ) THEN
     WRITE (intgr1,'(I8)') Mxord
     Ierflg = 28
-    CALL XERMSG('SLATEC','DDRIV3','Illegal input.  Maximum order, '//&
+    CALL XERMSG('DDRIV3','Illegal input.  Maximum order, '//&
       intgr1//', is not positive.',Ierflg,1)
     Nstate = 12
     RETURN
@@ -817,21 +817,21 @@ SUBROUTINE DDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
   IF ( Mint<1.OR.Mint>3 ) THEN
     WRITE (intgr1,'(I8)') Mint
     Ierflg = 23
-    CALL XERMSG('SLATEC','DDRIV3',&
+    CALL XERMSG('DDRIV3',&
       'Illegal input.  Improper value for the integration method flag, '//intgr1//' .',Ierflg,1)
     Nstate = 12
     RETURN
   ELSEIF ( Miter<0.OR.Miter>5 ) THEN
     WRITE (intgr1,'(I8)') Miter
     Ierflg = 24
-    CALL XERMSG('SLATEC','DDRIV3',&
+    CALL XERMSG('DDRIV3',&
       'Illegal input.  Improper value for MITER(= '//intgr1//').',Ierflg,1)
     Nstate = 12
     RETURN
   ELSEIF ( Impl<0.OR.Impl>3 ) THEN
     WRITE (intgr1,'(I8)') Impl
     Ierflg = 25
-    CALL XERMSG('SLATEC','DDRIV3',&
+    CALL XERMSG('DDRIV3',&
       'Illegal input.  Improper value for IMPL(= '//intgr1//').',Ierflg,1)
     Nstate = 12
     RETURN
@@ -839,7 +839,7 @@ SUBROUTINE DDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
     WRITE (intgr1,'(I8)') Miter
     WRITE (intgr2,'(I8)') Impl
     Ierflg = 29
-    CALL XERMSG('SLATEC','DDRIV3',&
+    CALL XERMSG('DDRIV3',&
       'Illegal input.  For MINT = 3, the value of MITER, '//&
       intgr1//', and/or IMPL, '//intgr2//', is not allowed.',Ierflg,1)
     Nstate = 12
@@ -847,7 +847,7 @@ SUBROUTINE DDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
   ELSEIF ( (Impl>=1.AND.Impl<=3).AND.Miter==0 ) THEN
     WRITE (intgr1,'(I8)') Impl
     Ierflg = 30
-    CALL XERMSG('SLATEC','DDRIV3',&
+    CALL XERMSG('DDRIV3',&
       'Illegal input.  For MITER = 0, the value of IMPL, '//&
       intgr1//', is not allowed.',Ierflg,1)
     Nstate = 12
@@ -855,7 +855,7 @@ SUBROUTINE DDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
   ELSEIF ( (Impl==2.OR.Impl==3).AND.Mint==1 ) THEN
     WRITE (intgr1,'(I8)') Impl
     Ierflg = 31
-    CALL XERMSG('SLATEC','DDRIV3',&
+    CALL XERMSG('DDRIV3',&
       'Illegal input.  For MINT = 1, the value of IMPL, '//&
       intgr1//', is not allowed.',Ierflg,1)
     Nstate = 12
@@ -869,7 +869,7 @@ SUBROUTINE DDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
   IF ( Leniw<liwchk ) THEN
     WRITE (intgr1,'(I8)') liwchk
     Ierflg = 33
-    CALL XERMSG('SLATEC','DDRIV3','Illegal input.  Insufficient storage&
+    CALL XERMSG('DDRIV3','Illegal input.  Insufficient storage&
       & allocated for the IWORK array. Based on the value of the input&
       & parameters involved, the required storage is '//intgr1//' .',Ierflg,1)
     Nstate = 12
@@ -934,7 +934,7 @@ SUBROUTINE DDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
   IF ( Lenw<lenchk ) THEN
     WRITE (intgr1,'(I8)') lenchk
     Ierflg = 32
-    CALL XERMSG('SLATEC','DDRIV3','Illegal input.  Insufficient storage&
+    CALL XERMSG('DDRIV3','Illegal input.  Insufficient storage&
       & allocated for the WORK array.  Based on the value of the input parameters&
       & involved, the required storage is '//intgr1//' .',Ierflg,1)
     Nstate = 12
@@ -1118,7 +1118,7 @@ SUBROUTINE DDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
         WRITE (rl1,'(D16.8)') T
         WRITE (rl2,'(D16.8)') Tout
         Ierflg = 11
-        CALL XERMSG('SLATEC','DDRIV3',&
+        CALL XERMSG('DDRIV3',&
           'While integrating exactly to TOUT, T, '//rl1//&
           ', was beyond TOUT, '//rl2//' .  Solution obtained by interpolation.',Ierflg,0)
         Nstate = 11
@@ -1157,7 +1157,7 @@ SUBROUTINE DDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
         WRITE (rl1,'(D16.8)') T
         WRITE (rl2,'(D16.8)') Tout
         Ierflg = 11
-        CALL XERMSG('SLATEC','DDRIV3',&
+        CALL XERMSG('DDRIV3',&
           'While integrating exactly to TOUT, T, '//rl1//&
           ', was beyond TOUT, '//rl2//' .  Solution obtained by interpolation.',Ierflg,0)
         Nstate = 11
@@ -1325,7 +1325,7 @@ SUBROUTINE DDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
     WRITE (rl1,'(D16.8)') T
     WRITE (rl2,'(D16.8)') Eps
     Ierflg = 4
-    CALL XERMSG('SLATEC','DDRIV3','At T, '//rl1//', the requested accuracy,&
+    CALL XERMSG('DDRIV3','At T, '//rl1//', the requested accuracy,&
       & EPS, was not obtainable with the machine precision.&
       & EPS has been increased to '//rl2//' .',Ierflg,0)
     Nstate = 4
@@ -1337,7 +1337,7 @@ SUBROUTINE DDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
     WRITE (rl1,'(D16.8)') T
     WRITE (rl2,'(D16.8)') h
     Ierflg = 15
-    CALL XERMSG('SLATEC','DDRIV3','At T, '//rl1//', the step size, '//rl2//&
+    CALL XERMSG('DDRIV3','At T, '//rl1//', the step size, '//rl2//&
       ', is smaller than the roundoff level of T.  This may occur if there is&
       & an abrupt change in the right hand side of the differential equations.',Ierflg,0)
     Iwork(INDPRT) = 1
@@ -1348,7 +1348,7 @@ SUBROUTINE DDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
       WRITE (intgr1,'(I8)') Mxstep
       WRITE (rl2,'(D16.8)') Tout
       Ierflg = 3
-      CALL XERMSG('SLATEC','DDRIV3','At T, '//rl1//', '//intgr1//&
+      CALL XERMSG('DDRIV3','At T, '//rl1//', '//intgr1//&
         ' steps have been taken without reaching TOUT, '//rl2//' .',Ierflg,0)
       Nstate = 3
       GOTO 400
@@ -1386,7 +1386,7 @@ SUBROUTINE DDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
       !
       WRITE (rl1,'(D16.8)') T
       Ierflg = 42
-      CALL XERMSG('SLATEC','DDRIV3','At T, '//rl1//&
+      CALL XERMSG('DDRIV3','At T, '//rl1//&
         ', the step size has been reduced about 50 '//&
         'times without advancing the solution.&
         & Often this occurs if the problem setup is incorrect.',Ierflg,1)
@@ -1527,7 +1527,7 @@ SUBROUTINE DDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
   !
   600  WRITE (rl1,'(D16.8)') T
   Ierflg = 41
-  CALL XERMSG('SLATEC','DDRIV3',&
+  CALL XERMSG('DDRIV3',&
     'At T, '//rl1//', the attempted step size has gone to zero.&
     & Often this occurs if the problem setup is incorrect.',Ierflg,1)
   Nstate = 12
@@ -1535,7 +1535,7 @@ SUBROUTINE DDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
   !
   700  WRITE (rl1,'(D16.8)') T
   Ierflg = 43
-  CALL XERMSG('SLATEC','DDRIV3',&
+  CALL XERMSG('DDRIV3',&
     'At T, '//rl1//', while solving A*YDOT = F, A is singular.',Ierflg,1)
   Nstate = 12
 END SUBROUTINE DDRIV3
