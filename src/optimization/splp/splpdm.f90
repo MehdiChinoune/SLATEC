@@ -33,7 +33,7 @@ SUBROUTINE SPLPDM(Mrelas,Nvars,Lbm,Nredc,Info,Iopt,Ibasis,Imat,Ibrc,&
   !   900328  Added TYPE section.  (WRB)
   !   900510  Convert XERRWV calls to XERMSG calls, changed do-it-yourself
   !           DO loops to DO loops.  (RWC)
-  USE LA05DS, ONLY : SMAll
+  USE LA05DS, ONLY : small_com
   USE service, ONLY : XERMSG
   INTEGER :: Info, Iopt, Lbm, Mrelas, Nredc, Nvars
   REAL :: Anorm, Eps, Gg, Uu
@@ -94,7 +94,7 @@ SUBROUTINE SPLPDM(Mrelas,Nvars,Lbm,Nredc,Info,Iopt,Ibasis,Imat,Ibrc,&
   !     RECOMPUTE MATRIX NORM USING CRUDE NORM  =  SUM OF MAGNITUDES.
   !
   Anorm = SUM(ABS(Basmat(1:nzbm)))
-  SMAll = Eps*Anorm
+  small_com = Eps*Anorm
   !
   !     GET AN L-U FACTORIZATION OF THE BASIS MATRIX.
   !

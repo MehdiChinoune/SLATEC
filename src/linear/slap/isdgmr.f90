@@ -265,7 +265,7 @@ INTEGER FUNCTION ISDGMR(N,X,Xl,MSOLVE,Nmsl,Itol,Tol,Iter,Err,Iunit,R,Dz,Rwork, &
   !   920511  Added complete declaration section.  (WRB)
   !   921026  Corrected D to E in output format.  (FNF)
   !   921113  Corrected C***CATEGORY line.  (FNF)
-  USE DSLBLK, ONLY : SOLn
+  USE DSLBLK, ONLY : soln_com
   USE service, ONLY : D1MACH
   INTERFACE
     SUBROUTINE MSOLVE(N,R,Z,Rwork,Iwork)
@@ -359,22 +359,22 @@ INTEGER FUNCTION ISDGMR(N,X,Xl,MSOLVE,Nmsl,Itol,Tol,Iter,Err,Iunit,R,Dz,Rwork, &
     !
     IF ( (Jscal==0).OR.(Jscal==2) ) THEN
       !         err = ||x-TrueSolution||/||TrueSolution||(2-Norms).
-      IF ( Iter==0 ) solnrm = DNRM2(N,SOLn,1)
+      IF ( Iter==0 ) solnrm = DNRM2(N,soln_com,1)
       DO i = 1, N
-        Dz(i) = Xl(i) - SOLn(i)
+        Dz(i) = Xl(i) - soln_com(i)
       END DO
       Err = DNRM2(N,Dz,1)/solnrm
     ELSE
       IF ( Iter==0 ) THEN
         solnrm = 0
         DO i = 1, N
-          solnrm = solnrm + (Sx(i)*SOLn(i))**2
+          solnrm = solnrm + (Sx(i)*soln_com(i))**2
         END DO
         solnrm = SQRT(solnrm)
       END IF
       dxnrm = 0
       DO i = 1, N
-        dxnrm = dxnrm + (Sx(i)*(Xl(i)-SOLn(i)))**2
+        dxnrm = dxnrm + (Sx(i)*(Xl(i)-soln_com(i)))**2
       END DO
       dxnrm = SQRT(dxnrm)
       !         err = ||SX*(x-TrueSolution)||/||SX*TrueSolution|| (2-Norms).

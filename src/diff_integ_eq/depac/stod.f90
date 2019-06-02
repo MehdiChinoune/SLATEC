@@ -91,9 +91,11 @@ SUBROUTINE STOD(Neq,Y,Yh,Nyh,Yh1,Ewt,Savf,Acor,Wm,Iwm,F,JAC)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
   !   920422  Changed DIMENSION statement.  (WRB)
-  USE DEBDF1, ONLY : CONit, CRAte, EL, ELCo, HOLd, RC, RMAx, TESco, EL0, H, HMIn, &
-    HMXi, HU, TN, KSTeps, IALth, IPUp, LMAx, MEO, NQNyh, NSTepj, IER, JSTart, &
-    KFLag, L, METh, MITer, MAXord, N, NQ, NST, NFE, NQU
+  USE DEBDF1, ONLY : conit_com, crate_com, el_com, elco_com, hold_com, rc_com, &
+    rmax_com, tesco_com, el0_com, h_com, hmin_com, hmxi_com, hu_com, tn_com, &
+    ksteps_com, ialth_com, ipup_com, lmax_com, meo_com, nqnyh_com, nstepj_com, &
+    ier_com, jstart_com, kflag_com, l_com, meth_com, miter_com, maxord_com, n_com, &
+    nq_com, nst_com, nfe_com, nqu_com
   INTERFACE
     SUBROUTINE F(X,U,Uprime)
       REAL :: X
@@ -107,19 +109,19 @@ SUBROUTINE STOD(Neq,Y,Yh,Nyh,Yh1,Ewt,Savf,Acor,Wm,Iwm,F,JAC)
   END INTERFACE
   INTEGER :: Neq, Nyh
   INTEGER :: Iwm(:)
-  REAL :: Y(N), Yh(Nyh,MAXord+1), Yh1(Nyh*MAXord+Nyh), Ewt(N), Savf(N), Acor(N), &
-    Wm(:)
+  REAL :: Y(n_com), Yh(Nyh,maxord_com+1), Yh1(Nyh*maxord_com+Nyh), Ewt(n_com), &
+    Savf(n_com), Acor(n_com), Wm(:)
   !
   INTEGER :: i, i1, iredo, iret, j, jb, m, ncf, newq
   REAL :: dcon, ddn, del, delp, dsm, dup, exdn, exsm, exup, r, rh, rhdn, rhsm, &
     rhup, told
   !
   !* FIRST EXECUTABLE STATEMENT  STOD
-  KFLag = 0
-  told = TN
+  kflag_com = 0
+  told = tn_com
   ncf = 0
-  IF ( JSTart>0 ) GOTO 400
-  IF ( JSTart==-1 ) THEN
+  IF ( jstart_com>0 ) GOTO 400
+  IF ( jstart_com==-1 ) THEN
     !-----------------------------------------------------------------------
     ! THE FOLLOWING BLOCK HANDLES PRELIMINARIES NEEDED WHEN JSTART = -1.
     ! IPUP IS SET TO MITER TO FORCE A MATRIX UPDATE.
@@ -133,43 +135,43 @@ SUBROUTINE STOD(Neq,Y,Yh,Nyh,Yh1,Ewt,Savf,Acor,Wm,Iwm,F,JAC)
     ! IF H OR METH IS BEING CHANGED, IALTH IS RESET TO L = NQ + 1
     ! TO PREVENT FURTHER CHANGES IN H FOR THAT MANY STEPS.
     !-----------------------------------------------------------------------
-    IPUp = MITer
-    LMAx = MAXord + 1
-    IF ( IALth==1 ) IALth = 2
-    IF ( METh/=MEO ) THEN
-      CALL CFOD(METh,ELCo,TESco)
-      MEO = METh
-      IF ( NQ<=MAXord ) THEN
-        IALth = L
+    ipup_com = miter_com
+    lmax_com = maxord_com + 1
+    IF ( ialth_com==1 ) ialth_com = 2
+    IF ( meth_com/=meo_com ) THEN
+      CALL CFOD(meth_com,elco_com,tesco_com)
+      meo_com = meth_com
+      IF ( nq_com<=maxord_com ) THEN
+        ialth_com = l_com
         iret = 1
         GOTO 100
       END IF
-    ELSEIF ( NQ<=MAXord ) THEN
+    ELSEIF ( nq_com<=maxord_com ) THEN
       GOTO 200
     END IF
-    NQ = MAXord
-    L = LMAx
-    DO i = 1, L
-      EL(i) = ELCo(i,NQ)
+    nq_com = maxord_com
+    l_com = lmax_com
+    DO i = 1, l_com
+      el_com(i) = elco_com(i,nq_com)
     END DO
-    NQNyh = NQ*Nyh
-    RC = RC*EL(1)/EL0
-    EL0 = EL(1)
-    CONit = 0.5E0/(NQ+2)
-    ddn = VNWRMS(N,Savf,Ewt)/TESco(1,L)
-    exdn = 1.0E0/L
+    nqnyh_com = nq_com*Nyh
+    rc_com = rc_com*el_com(1)/el0_com
+    el0_com = el_com(1)
+    conit_com = 0.5E0/(nq_com+2)
+    ddn = VNWRMS(n_com,Savf,Ewt)/tesco_com(1,l_com)
+    exdn = 1.0E0/l_com
     rhdn = 1.0E0/(1.3E0*ddn**exdn+0.0000013E0)
     rh = MIN(rhdn,1.0E0)
     iredo = 3
-    IF ( H==HOLd ) THEN
-      rh = MAX(rh,HMIn/ABS(H))
+    IF ( h_com==hold_com ) THEN
+      rh = MAX(rh,hmin_com/ABS(h_com))
     ELSE
-      rh = MIN(rh,ABS(H/HOLd))
-      H = HOLd
+      rh = MIN(rh,ABS(h_com/hold_com))
+      h_com = hold_com
     END IF
     GOTO 300
   ELSE
-    IF ( JSTart==-2 ) GOTO 200
+    IF ( jstart_com==-2 ) GOTO 200
     !-----------------------------------------------------------------------
     ! ON THE FIRST CALL, THE ORDER IS SET TO 1, AND OTHER VARIABLES ARE
     ! INITIALIZED.  RMAX IS THE MAXIMUM RATIO BY WHICH H CAN BE INCREASED
@@ -178,37 +180,37 @@ SUBROUTINE STOD(Neq,Y,Yh,Nyh,Yh1,Ewt,Savf,Acor,Wm,Iwm,F,JAC)
     ! OCCURS (IN CORRECTOR CONVERGENCE OR ERROR TEST), RMAX IS SET AT 2
     ! FOR THE NEXT INCREASE.
     !-----------------------------------------------------------------------
-    LMAx = MAXord + 1
-    NQ = 1
-    L = 2
-    IALth = 2
-    RMAx = 10000.0E0
-    RC = 0.0E0
-    EL0 = 1.0E0
-    CRAte = 0.7E0
+    lmax_com = maxord_com + 1
+    nq_com = 1
+    l_com = 2
+    ialth_com = 2
+    rmax_com = 10000.0E0
+    rc_com = 0.0E0
+    el0_com = 1.0E0
+    crate_com = 0.7E0
     delp = 0.0E0
-    HOLd = H
-    MEO = METh
-    NSTepj = 0
+    hold_com = h_com
+    meo_com = meth_com
+    nstepj_com = 0
     iret = 3
     !-----------------------------------------------------------------------
     ! CFOD  IS CALLED TO GET ALL THE INTEGRATION COEFFICIENTS FOR THE
     ! CURRENT METH.  THEN THE EL VECTOR AND RELATED CONSTANTS ARE RESET
     ! WHENEVER THE ORDER NQ IS CHANGED, OR AT THE START OF THE PROBLEM.
     !-----------------------------------------------------------------------
-    CALL CFOD(METh,ELCo,TESco)
+    CALL CFOD(meth_com,elco_com,tesco_com)
   END IF
   100 CONTINUE
-  DO i = 1, L
-    EL(i) = ELCo(i,NQ)
+  DO i = 1, l_com
+    el_com(i) = elco_com(i,nq_com)
   END DO
-  NQNyh = NQ*Nyh
-  RC = RC*EL(1)/EL0
-  EL0 = EL(1)
-  CONit = 0.5E0/(NQ+2)
+  nqnyh_com = nq_com*Nyh
+  rc_com = rc_com*el_com(1)/el0_com
+  el0_com = el_com(1)
+  conit_com = 0.5E0/(nq_com+2)
   SELECT CASE (iret)
     CASE (2)
-      rh = MAX(rh,HMIn/ABS(H))
+      rh = MAX(rh,hmin_com/ABS(h_com))
       GOTO 300
     CASE (3)
       GOTO 400
@@ -221,24 +223,24 @@ SUBROUTINE STOD(Neq,Y,Yh,Nyh,Yh1,Ewt,Savf,Acor,Wm,Iwm,F,JAC)
   ! FORCED BY A CONVERGENCE OR ERROR TEST FAILURE.
   !-----------------------------------------------------------------------
   200 CONTINUE
-  IF ( H==HOLd ) GOTO 400
-  rh = H/HOLd
-  H = HOLd
+  IF ( h_com==hold_com ) GOTO 400
+  rh = h_com/hold_com
+  h_com = hold_com
   iredo = 3
-  300  rh = MIN(rh,RMAx)
-  rh = rh/MAX(1.0E0,ABS(H)*HMXi*rh)
+  300  rh = MIN(rh,rmax_com)
+  rh = rh/MAX(1.0E0,ABS(h_com)*hmxi_com*rh)
   r = 1.0E0
-  DO j = 2, L
+  DO j = 2, l_com
     r = r*rh
-    DO i = 1, N
+    DO i = 1, n_com
       Yh(i,j) = Yh(i,j)*r
     END DO
   END DO
-  H = H*rh
-  RC = RC*rh
-  IALth = L
+  h_com = h_com*rh
+  rc_com = rc_com*rh
+  ialth_com = l_com
   IF ( iredo==0 ) THEN
-    RMAx = 10.0E0
+    rmax_com = 10.0E0
     GOTO 1200
   END IF
   !-----------------------------------------------------------------------
@@ -250,17 +252,17 @@ SUBROUTINE STOD(Neq,Y,Yh,Nyh,Yh1,Ewt,Savf,Acor,Wm,Iwm,F,JAC)
   ! IN ANY CASE, PJAC IS CALLED AT LEAST EVERY 20-TH STEP.
   !-----------------------------------------------------------------------
   400 CONTINUE
-  IF ( ABS(RC-1.0E0)>0.3E0 ) IPUp = MITer
-  IF ( NST>=NSTepj+20 ) IPUp = MITer
-  TN = TN + H
-  i1 = NQNyh + 1
-  DO jb = 1, NQ
+  IF ( ABS(rc_com-1.0E0)>0.3E0 ) ipup_com = miter_com
+  IF ( nst_com>=nstepj_com+20 ) ipup_com = miter_com
+  tn_com = tn_com + h_com
+  i1 = nqnyh_com + 1
+  DO jb = 1, nq_com
     i1 = i1 - Nyh
-    DO i = i1, NQNyh
+    DO i = i1, nqnyh_com
       Yh1(i) = Yh1(i) + Yh1(i+Nyh)
     END DO
   END DO
-  KSTeps = KSTeps + 1
+  ksteps_com = ksteps_com + 1
   !-----------------------------------------------------------------------
   ! UP TO 3 CORRECTOR ITERATIONS ARE TAKEN.  A CONVERGENCE TEST IS
   ! MADE ON THE R.M.S. NORM OF EACH CORRECTION, WEIGHTED BY THE ERROR
@@ -268,56 +270,56 @@ SUBROUTINE STOD(Neq,Y,Yh,Nyh,Yh1,Ewt,Savf,Acor,Wm,Iwm,F,JAC)
   ! VECTOR ACOR(I).  THE YH ARRAY IS NOT ALTERED IN THE CORRECTOR LOOP.
   !-----------------------------------------------------------------------
   500  m = 0
-  DO i = 1, N
+  DO i = 1, n_com
     Y(i) = Yh(i,1)
   END DO
-  CALL F(TN,Y,Savf)
-  NFE = NFE + 1
-  IF ( IPUp>0 ) THEN
+  CALL F(tn_com,Y,Savf)
+  nfe_com = nfe_com + 1
+  IF ( ipup_com>0 ) THEN
     !-----------------------------------------------------------------------
     ! IF INDICATED, THE MATRIX P = I - H*EL(1)*J IS REEVALUATED AND
     ! PREPROCESSED BEFORE STARTING THE CORRECTOR ITERATION.  IPUP IS SET
     ! TO 0 AS AN INDICATOR THAT THIS HAS BEEN DONE.
     !-----------------------------------------------------------------------
-    IPUp = 0
-    RC = 1.0E0
-    NSTepj = NST
-    CRAte = 0.7E0
+    ipup_com = 0
+    rc_com = 1.0E0
+    nstepj_com = nst_com
+    crate_com = 0.7E0
     CALL PJAC(Neq,Y,Yh,Nyh,Ewt,Acor,Savf,Wm,Iwm,F,JAC)
-    IF ( IER/=0 ) GOTO 800
+    IF ( ier_com/=0 ) GOTO 800
   END IF
-  DO i = 1, N
+  DO i = 1, n_com
     Acor(i) = 0.0E0
   END DO
   600 CONTINUE
-  IF ( MITer/=0 ) THEN
+  IF ( miter_com/=0 ) THEN
     !-----------------------------------------------------------------------
     ! IN THE CASE OF THE CHORD METHOD, COMPUTE THE CORRECTOR ERROR,
     ! AND SOLVE THE LINEAR SYSTEM WITH THAT AS RIGHT-HAND SIDE AND
     ! P AS COEFFICIENT MATRIX.
     !-----------------------------------------------------------------------
-    DO i = 1, N
-      Y(i) = H*Savf(i) - (Yh(i,2)+Acor(i))
+    DO i = 1, n_com
+      Y(i) = h_com*Savf(i) - (Yh(i,2)+Acor(i))
     END DO
     CALL SLVS(Wm,Iwm,Y)
-    IF ( IER/=0 ) GOTO 700
-    del = VNWRMS(N,Y,Ewt)
-    DO i = 1, N
+    IF ( ier_com/=0 ) GOTO 700
+    del = VNWRMS(n_com,Y,Ewt)
+    DO i = 1, n_com
       Acor(i) = Acor(i) + Y(i)
-      Y(i) = Yh(i,1) + EL(1)*Acor(i)
+      Y(i) = Yh(i,1) + el_com(1)*Acor(i)
     END DO
   ELSE
     !-----------------------------------------------------------------------
     ! IN THE CASE OF FUNCTIONAL ITERATION, UPDATE Y DIRECTLY FROM
     ! THE RESULT OF THE LAST FUNCTION EVALUATION.
     !-----------------------------------------------------------------------
-    DO i = 1, N
-      Savf(i) = H*Savf(i) - Yh(i,2)
+    DO i = 1, n_com
+      Savf(i) = h_com*Savf(i) - Yh(i,2)
       Y(i) = Savf(i) - Acor(i)
     END DO
-    del = VNWRMS(N,Y,Ewt)
-    DO i = 1, N
-      Y(i) = Yh(i,1) + EL(1)*Savf(i)
+    del = VNWRMS(n_com,Y,Ewt)
+    DO i = 1, n_com
+      Y(i) = Yh(i,1) + el_com(1)*Savf(i)
       Acor(i) = Savf(i)
     END DO
   END IF
@@ -325,8 +327,8 @@ SUBROUTINE STOD(Neq,Y,Yh,Nyh,Yh1,Ewt,Savf,Acor,Wm,Iwm,F,JAC)
   ! TEST FOR CONVERGENCE.  IF M.GT.0, AN ESTIMATE OF THE CONVERGENCE
   ! RATE CONSTANT IS STORED IN CRATE, AND THIS IS USED IN THE TEST.
   !-----------------------------------------------------------------------
-  IF ( m/=0 ) CRAte = MAX(0.2E0*CRAte,del/delp)
-  dcon = del*MIN(1.0E0,1.5E0*CRAte)/(TESco(2,NQ)*CONit)
+  IF ( m/=0 ) crate_com = MAX(0.2E0*crate_com,del/delp)
+  dcon = del*MIN(1.0E0,1.5E0*crate_com)/(tesco_com(2,nq_com)*conit_com)
   IF ( dcon<=1.0E0 ) THEN
     !-----------------------------------------------------------------------
     ! THE CORRECTOR HAS CONVERGED.  IPUP IS SET TO -1 IF MITER .NE. 0,
@@ -334,9 +336,9 @@ SUBROUTINE STOD(Neq,Y,Yh,Nyh,Yh1,Ewt,Savf,Acor,Wm,Iwm,F,JAC)
     ! THE LOCAL ERROR TEST IS MADE AND CONTROL PASSES TO STATEMENT 500
     ! IF IT FAILS.
     !-----------------------------------------------------------------------
-    IF ( MITer/=0 ) IPUp = -1
-    IF ( m==0 ) dsm = del/TESco(2,NQ)
-    IF ( m>0 ) dsm = VNWRMS(N,Acor,Ewt)/TESco(2,NQ)
+    IF ( miter_com/=0 ) ipup_com = -1
+    IF ( m==0 ) dsm = del/tesco_com(2,nq_com)
+    IF ( m>0 ) dsm = VNWRMS(n_com,Acor,Ewt)/tesco_com(2,nq_com)
     IF ( dsm>1.0E0 ) THEN
       !-----------------------------------------------------------------------
       ! THE ERROR TEST FAILED.  KFLAG KEEPS TRACK OF MULTIPLE FAILURES.
@@ -345,24 +347,24 @@ SUBROUTINE STOD(Neq,Y,Yh,Nyh,Yh1,Ewt,Savf,Acor,Wm,Iwm,F,JAC)
       ! ONE LOWER ORDER.  AFTER 2 OR MORE FAILURES, H IS FORCED TO DECREASE
       ! BY A FACTOR OF 0.2 OR LESS.
       !-----------------------------------------------------------------------
-      KFLag = KFLag - 1
-      TN = told
-      i1 = NQNyh + 1
-      DO jb = 1, NQ
+      kflag_com = kflag_com - 1
+      tn_com = told
+      i1 = nqnyh_com + 1
+      DO jb = 1, nq_com
         i1 = i1 - Nyh
-        DO i = i1, NQNyh
+        DO i = i1, nqnyh_com
           Yh1(i) = Yh1(i) - Yh1(i+Nyh)
         END DO
       END DO
-      RMAx = 2.0E0
-      IF ( ABS(H)<=HMIn*1.00001E0 ) THEN
+      rmax_com = 2.0E0
+      IF ( ABS(h_com)<=hmin_com*1.00001E0 ) THEN
         !-----------------------------------------------------------------------
         ! ALL RETURNS ARE MADE THROUGH THIS SECTION.  H IS SAVED IN HOLD
         ! TO ALLOW THE CALLER TO CHANGE H ON THE NEXT STEP.
         !-----------------------------------------------------------------------
-        KFLag = -1
+        kflag_com = -1
         GOTO 1300
-      ELSEIF ( KFLag<=-3 ) THEN
+      ELSEIF ( kflag_com<=-3 ) THEN
         !-----------------------------------------------------------------------
         ! CONTROL REACHES THIS SECTION IF 3 OR MORE FAILURES HAVE OCCURRED.
         ! IF 10 FAILURES HAVE OCCURRED, EXIT WITH KFLAG = -1.
@@ -372,26 +374,26 @@ SUBROUTINE STOD(Neq,Y,Yh,Nyh,Yh1,Ewt,Savf,Acor,Wm,Iwm,F,JAC)
         ! H IS REDUCED BY A FACTOR OF 10, AND THE STEP IS RETRIED,
         ! UNTIL IT SUCCEEDS OR H REACHES HMIN.
         !-----------------------------------------------------------------------
-        IF ( KFLag==-10 ) THEN
-          KFLag = -1
+        IF ( kflag_com==-10 ) THEN
+          kflag_com = -1
           GOTO 1300
         ELSE
           rh = 0.1E0
-          rh = MAX(HMIn/ABS(H),rh)
-          H = H*rh
-          DO i = 1, N
+          rh = MAX(hmin_com/ABS(h_com),rh)
+          h_com = h_com*rh
+          DO i = 1, n_com
             Y(i) = Yh(i,1)
           END DO
-          CALL F(TN,Y,Savf)
-          NFE = NFE + 1
-          DO i = 1, N
-            Yh(i,2) = H*Savf(i)
+          CALL F(tn_com,Y,Savf)
+          nfe_com = nfe_com + 1
+          DO i = 1, n_com
+            Yh(i,2) = h_com*Savf(i)
           END DO
-          IPUp = MITer
-          IALth = 5
-          IF ( NQ==1 ) GOTO 400
-          NQ = 1
-          L = 2
+          ipup_com = miter_com
+          ialth_com = 5
+          IF ( nq_com==1 ) GOTO 400
+          nq_com = 1
+          l_com = 2
           iret = 3
           GOTO 100
         END IF
@@ -411,18 +413,18 @@ SUBROUTINE STOD(Neq,Y,Yh,Nyh,Yh1,Ewt,Savf,Acor,Wm,Iwm,F,JAC)
       ! FACTOR OF AT LEAST 1.1.  IF NOT, IALTH IS SET TO 3 TO PREVENT
       ! TESTING FOR THAT MANY STEPS.
       !-----------------------------------------------------------------------
-      KFLag = 0
+      kflag_com = 0
       iredo = 0
-      NST = NST + 1
-      HU = H
-      NQU = NQ
-      DO j = 1, L
-        DO i = 1, N
-          Yh(i,j) = Yh(i,j) + EL(j)*Acor(i)
+      nst_com = nst_com + 1
+      hu_com = h_com
+      nqu_com = nq_com
+      DO j = 1, l_com
+        DO i = 1, n_com
+          Yh(i,j) = Yh(i,j) + el_com(j)*Acor(i)
         END DO
       END DO
-      IALth = IALth - 1
-      IF ( IALth==0 ) THEN
+      ialth_com = ialth_com - 1
+      IF ( ialth_com==0 ) THEN
         !-----------------------------------------------------------------------
         ! REGARDLESS OF THE SUCCESS OR FAILURE OF THE STEP, FACTORS
         ! RHDN, RHSM, AND RHUP ARE COMPUTED, BY WHICH H COULD BE MULTIPLIED
@@ -433,20 +435,20 @@ SUBROUTINE STOD(Neq,Y,Yh,Nyh,Yh1,Ewt,Savf,Acor,Wm,Iwm,F,JAC)
         ! ADDITIONAL SCALED DERIVATIVE.
         !-----------------------------------------------------------------------
         rhup = 0.0E0
-        IF ( L/=LMAx ) THEN
-          DO i = 1, N
-            Savf(i) = Acor(i) - Yh(i,LMAx)
+        IF ( l_com/=lmax_com ) THEN
+          DO i = 1, n_com
+            Savf(i) = Acor(i) - Yh(i,lmax_com)
           END DO
-          dup = VNWRMS(N,Savf,Ewt)/TESco(3,NQ)
-          exup = 1.0E0/(L+1)
+          dup = VNWRMS(n_com,Savf,Ewt)/tesco_com(3,nq_com)
+          exup = 1.0E0/(l_com+1)
           rhup = 1.0E0/(1.4E0*dup**exup+0.0000014E0)
         END IF
         GOTO 900
       ELSE
-        IF ( IALth<=1 ) THEN
-          IF ( L/=LMAx ) THEN
-            DO i = 1, N
-              Yh(i,LMAx) = Acor(i)
+        IF ( ialth_com<=1 ) THEN
+          IF ( l_com/=lmax_com ) THEN
+            DO i = 1, n_com
+              Yh(i,lmax_com) = Acor(i)
             END DO
           END IF
         END IF
@@ -458,8 +460,8 @@ SUBROUTINE STOD(Neq,Y,Yh,Nyh,Yh1,Ewt,Savf,Acor,Wm,Iwm,F,JAC)
     IF ( m/=3 ) THEN
       IF ( m<2.OR.del<=2.0E0*delp ) THEN
         delp = del
-        CALL F(TN,Y,Savf)
-        NFE = NFE + 1
+        CALL F(tn_com,Y,Savf)
+        nfe_com = nfe_com + 1
         GOTO 600
       END IF
     END IF
@@ -472,89 +474,89 @@ SUBROUTINE STOD(Neq,Y,Yh,Nyh,Yh1,Ewt,Savf,Acor,Wm,Iwm,F,JAC)
   ! REDUCED OR 10 FAILURES HAVE OCCURRED, EXIT WITH KFLAG = -2.
   !-----------------------------------------------------------------------
   700 CONTINUE
-  IF ( IPUp/=0 ) THEN
-    IPUp = MITer
+  IF ( ipup_com/=0 ) THEN
+    ipup_com = miter_com
     GOTO 500
   END IF
-  800  TN = told
+  800  tn_com = told
   ncf = ncf + 1
-  RMAx = 2.0E0
-  i1 = NQNyh + 1
-  DO jb = 1, NQ
+  rmax_com = 2.0E0
+  i1 = nqnyh_com + 1
+  DO jb = 1, nq_com
     i1 = i1 - Nyh
-    DO i = i1, NQNyh
+    DO i = i1, nqnyh_com
       Yh1(i) = Yh1(i) - Yh1(i+Nyh)
     END DO
   END DO
-  IF ( ABS(H)<=HMIn*1.00001E0 ) THEN
-    KFLag = -2
+  IF ( ABS(h_com)<=hmin_com*1.00001E0 ) THEN
+    kflag_com = -2
     GOTO 1300
   ELSEIF ( ncf==10 ) THEN
-    KFLag = -2
+    kflag_com = -2
     GOTO 1300
   ELSE
     rh = 0.25E0
-    IPUp = MITer
+    ipup_com = miter_com
     iredo = 1
-    rh = MAX(rh,HMIn/ABS(H))
+    rh = MAX(rh,hmin_com/ABS(h_com))
     GOTO 300
   END IF
-  900  exsm = 1.0E0/L
+  900  exsm = 1.0E0/l_com
   rhsm = 1.0E0/(1.2E0*dsm**exsm+0.0000012E0)
   rhdn = 0.0E0
-  IF ( NQ/=1 ) THEN
-    ddn = VNWRMS(N,Yh(:,L),Ewt)/TESco(1,NQ)
-    exdn = 1.0E0/NQ
+  IF ( nq_com/=1 ) THEN
+    ddn = VNWRMS(n_com,Yh(:,l_com),Ewt)/tesco_com(1,nq_com)
+    exdn = 1.0E0/nq_com
     rhdn = 1.0E0/(1.3E0*ddn**exdn+0.0000013E0)
   END IF
   IF ( rhsm>=rhup ) THEN
     IF ( rhsm>=rhdn ) THEN
-      newq = NQ
+      newq = nq_com
       rh = rhsm
       GOTO 1000
     END IF
   ELSEIF ( rhup>rhdn ) THEN
-    newq = L
+    newq = l_com
     rh = rhup
     IF ( rh<1.1E0 ) THEN
-      IALth = 3
+      ialth_com = 3
       GOTO 1200
     ELSE
-      r = EL(L)/L
-      DO i = 1, N
+      r = el_com(l_com)/l_com
+      DO i = 1, n_com
         Yh(i,newq+1) = Acor(i)*r
       END DO
       GOTO 1100
     END IF
   END IF
-  newq = NQ - 1
+  newq = nq_com - 1
   rh = rhdn
-  IF ( KFLag<0.AND.rh>1.0E0 ) rh = 1.0E0
+  IF ( kflag_com<0.AND.rh>1.0E0 ) rh = 1.0E0
   1000 CONTINUE
-  IF ( (KFLag==0).AND.(rh<1.1E0) ) THEN
-    IALth = 3
+  IF ( (kflag_com==0).AND.(rh<1.1E0) ) THEN
+    ialth_com = 3
     GOTO 1200
   ELSE
-    IF ( KFLag<=-2 ) rh = MIN(rh,0.2E0)
+    IF ( kflag_com<=-2 ) rh = MIN(rh,0.2E0)
     !-----------------------------------------------------------------------
     ! IF THERE IS A CHANGE OF ORDER, RESET NQ, L, AND THE COEFFICIENTS.
     ! IN ANY CASE H IS RESET ACCORDING TO RH AND THE YH ARRAY IS RESCALED.
     ! THEN EXIT FROM 680 IF THE STEP WAS OK, OR REDO THE STEP OTHERWISE.
     !-----------------------------------------------------------------------
-    IF ( newq==NQ ) THEN
-      rh = MAX(rh,HMIn/ABS(H))
+    IF ( newq==nq_com ) THEN
+      rh = MAX(rh,hmin_com/ABS(h_com))
       GOTO 300
     END IF
   END IF
-  1100 NQ = newq
-  L = NQ + 1
+  1100 nq_com = newq
+  l_com = nq_com + 1
   iret = 2
   GOTO 100
-  1200 r = 1.0E0/TESco(2,NQU)
-  DO i = 1, N
+  1200 r = 1.0E0/tesco_com(2,nqu_com)
+  DO i = 1, n_com
     Acor(i) = Acor(i)*r
   END DO
-  1300 HOLd = H
-  JSTart = 1
+  1300 hold_com = h_com
+  jstart_com = 1
   !----------------------- END OF SUBROUTINE STOD  -----------------------
 END SUBROUTINE STOD

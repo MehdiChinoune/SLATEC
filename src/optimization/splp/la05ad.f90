@@ -57,7 +57,7 @@ SUBROUTINE LA05AD(A,Ind,Nz,Ia,N,Ip,Iw,W,G,U)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900402  Added TYPE section.  (WRB)
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
-  USE LA05DD, ONLY : LP, LCOl, LENl, LENu, LROw, NCP, LROW, SMAll
+  USE LA05DD, ONLY : lp_com, lcol_com, lenl_com, lenu_com, lrow_com, ncp_com, small_com
   USE service, ONLY : XERMSG, XSETUN, D1MACH
   INTEGER :: Ia, N, Nz
   INTEGER :: Ip(N,2), Ind(Ia,2), Iw(N,8)
@@ -74,12 +74,12 @@ SUBROUTINE LA05AD(A,Ind,Nz,Ia,N,Ip,Iw,W,G,U)
   !     SET THE OUTPUT UNIT NUMBER FOR THE ERROR PROCESSOR.
   !     THE USAGE OF THIS ERROR PROCESSOR IS DOCUMENTED IN THE
   !     SANDIA LABS. TECH. REPT. SAND78-1189, BY R E JONES.
-  CALL XSETUN(LP)
+  CALL XSETUN(lp_com)
   IF ( U>1.0D0 ) U = 1.0D0
   IF ( U<eps ) U = eps
   IF ( N<1 ) THEN
     !
-    IF ( LP>0 ) CALL XERMSG('SLATEC','LA05AD',&
+    IF ( lp_com>0 ) CALL XERMSG('SLATEC','LA05AD',&
       'THE ORDER OF THE SYSTEM, N, IS NOT POSITIVE.',-1,1)
     G = -1.0D0
     RETURN
@@ -94,11 +94,11 @@ SUBROUTINE LA05AD(A,Ind,Nz,Ia,N,Ip,Iw,W,G,U)
     !
     ! FLUSH OUT SMALL ENTRIES, COUNT ELEMENTS IN ROWS AND COLUMNS
     l = 1
-    LENu = Nz
+    lenu_com = Nz
     DO idummy = 1, Nz
-      IF ( l<=LENu ) THEN
-        DO k = l, LENu
-          IF ( ABS(A(k))<=SMAll ) GOTO 20
+      IF ( l<=lenu_com ) THEN
+        DO k = l, lenu_com
+          IF ( ABS(A(k))<=small_com ) GOTO 20
           i = Ind(k,1)
           j = Ind(k,2)
           G = MAX(ABS(A(k)),G)
@@ -110,19 +110,19 @@ SUBROUTINE LA05AD(A,Ind,Nz,Ia,N,Ip,Iw,W,G,U)
       END IF
       EXIT
       20  l = k
-      A(l) = A(LENu)
-      Ind(l,1) = Ind(LENu,1)
-      Ind(l,2) = Ind(LENu,2)
-      LENu = LENu - 1
+      A(l) = A(lenu_com)
+      Ind(l,1) = Ind(lenu_com,1)
+      Ind(l,2) = Ind(lenu_com,2)
+      lenu_com = lenu_com - 1
     END DO
     !
-    LENl = 0
-    LROw = LENu
-    LCOl = LROw
+    lenl_com = 0
+    lrow_com = lenu_com
+    lcol_com = lrow_com
     ! MCP IS THE MAXIMUM NUMBER OF COMPRESSES PERMITTED BEFORE AN
     !     ERROR RETURN RESULTS.
     mcp = MAX(N/10,20)
-    NCP = 0
+    ncp_com = 0
     ! CHECK FOR NULL ROW OR COLUMN AND INITIALIZE IP(I,2) TO POINT
     !     JUST BEYOND WHERE THE LAST COMPONENT OF COLUMN I OF A WILL
     !     BE STORED.
@@ -139,8 +139,8 @@ SUBROUTINE LA05AD(A,Ind,Nz,Ia,N,Ip,Iw,W,G,U)
     !     ROW FILE TO CONSTRUCT THE COLUMN FILE. NOTE THAT BY PUTTING
     !    THE ENTRIES IN BACKWARDS AND DECREASING IP(J,2) EACH TIME IT
     !     IS USED WE AUTOMATICALLY LEAVE IT POINTING TO THE FIRST ELEMENT.
-    CALL MC20AD(N,LENu,A,Ind(1,2),Ip,Ind(1,1),0)
-    kl = LENu
+    CALL MC20AD(N,lenu_com,A,Ind(1,2),Ip,Ind(1,1),0)
+    kl = lenu_com
     DO ii = 1, N
       ir = N + 1 - ii
       kp = Ip(ir,1)
@@ -298,8 +298,8 @@ SUBROUTINE LA05AD(A,Ind,Nz,Ia,N,Ip,Iw,W,G,U)
           Ind(kr,2) = jp
           am = -A(kr)/A(kp)
           ! COMPRESS ROW FILE UNLESS IT IS CERTAIN THAT THERE IS ROOM FOR NEW ROW.
-          IF ( LROw+Iw(ir,1)+Iw(ipp,1)+LENl>Ia ) THEN
-            IF ( NCP>=mcp.OR.LENu+Iw(ir,1)+Iw(ipp,1)+LENl>Ia ) GOTO 400
+          IF ( lrow_com+Iw(ir,1)+Iw(ipp,1)+lenl_com>Ia ) THEN
+            IF ( ncp_com>=mcp.OR.lenu_com+Iw(ir,1)+Iw(ipp,1)+lenl_com>Ia ) GOTO 400
             CALL LA05ED(A,Ind(1,2),Ip(:,1),N,Iw,.TRUE.)
             kp = Ip(ipp,1)
             kr = Ip(ir,1)
@@ -314,7 +314,7 @@ SUBROUTINE LA05AD(A,Ind,Nz,Ia,N,Ip,Iw,W,G,U)
               W(j) = A(k)
             END DO
           END IF
-          Ip(ir,1) = LROw + 1
+          Ip(ir,1) = lrow_com + 1
           !
           ! TRANSFER MODIFIED ELEMENTS.
           Ind(kr,2) = 0
@@ -325,8 +325,8 @@ SUBROUTINE LA05AD(A,Ind,Nz,Ia,N,Ip,Iw,W,G,U)
               au = A(ks) + am*W(j)
               Ind(ks,2) = 0
               ! IF ELEMENT IS VERY SMALL REMOVE IT FROM U.
-              IF ( ABS(au)<=SMAll ) THEN
-                LENu = LENu - 1
+              IF ( ABS(au)<=small_com ) THEN
+                lenu_com = lenu_com - 1
                 ! REMOVE ELEMENT FROM COL FILE.
                 k = Ip(j,2)
                 kl = k + Iw(j,2) - 1
@@ -338,9 +338,9 @@ SUBROUTINE LA05AD(A,Ind,Nz,Ia,N,Ip,Iw,W,G,U)
                 Ind(kl,1) = 0
               ELSE
                 G = MAX(G,ABS(au))
-                LROw = LROw + 1
-                A(LROw) = au
-                Ind(LROw,2) = j
+                lrow_com = lrow_com + 1
+                A(lrow_com) = au
+                Ind(lrow_com,2) = j
               END IF
               W(j) = 0.
             END DO
@@ -351,11 +351,11 @@ SUBROUTINE LA05AD(A,Ind,Nz,Ia,N,Ip,Iw,W,G,U)
             DO ks = kq, kpl
               j = Ind(ks,2)
               au = am*W(j)
-              IF ( ABS(au)<=SMAll ) GOTO 44
-              LROw = LROw + 1
-              A(LROw) = au
-              Ind(LROw,2) = j
-              LENu = LENu + 1
+              IF ( ABS(au)<=small_com ) GOTO 44
+              lrow_com = lrow_com + 1
+              A(lrow_com) = au
+              Ind(lrow_com,2) = j
+              lenu_com = lenu_com + 1
               !
               ! CREATE FILL IN COLUMN FILE.
               Nz = Iw(j,2)
@@ -363,56 +363,56 @@ SUBROUTINE LA05AD(A,Ind,Nz,Ia,N,Ip,Iw,W,G,U)
               kl = k + Nz - 1
               IF ( Nz/=0 ) THEN
                 ! IF POSSIBLE PLACE NEW ELEMENT AT END OF PRESENT ENTRY.
-                IF ( kl/=LCOl ) THEN
+                IF ( kl/=lcol_com ) THEN
                   IF ( Ind(kl+1,1)==0 ) THEN
                     Ind(kl+1,1) = ir
                     GOTO 42
                   END IF
-                ELSEIF ( LCOl+LENl<Ia ) THEN
-                  LCOl = LCOl + 1
+                ELSEIF ( lcol_com+lenl_com<Ia ) THEN
+                  lcol_com = lcol_com + 1
                   Ind(kl+1,1) = ir
                   GOTO 42
                 END IF
               END IF
               ! NEW ENTRY HAS TO BE CREATED.
-              IF ( LCOl+LENl+Nz+1>=Ia ) THEN
+              IF ( lcol_com+lenl_com+Nz+1>=Ia ) THEN
                 ! COMPRESS COLUMN FILE IF THERE IS NOT ROOM FOR NEW ENTRY.
-                IF ( NCP>=mcp.OR.LENu+LENl+Nz+1>=Ia ) GOTO 400
+                IF ( ncp_com>=mcp.OR.lenu_com+lenl_com+Nz+1>=Ia ) GOTO 400
                 CALL LA05ED(A,Ind,Ip(:,2),N,Iw(1,2),.FALSE.)
                 k = Ip(j,2)
                 kl = k + Nz - 1
               END IF
               ! TRANSFER OLD ENTRY INTO NEW.
-              Ip(j,2) = LCOl + 1
+              Ip(j,2) = lcol_com + 1
               IF ( kl>=k ) THEN
                 DO kk = k, kl
-                  LCOl = LCOl + 1
-                  Ind(LCOl,1) = Ind(kk,1)
+                  lcol_com = lcol_com + 1
+                  Ind(lcol_com,1) = Ind(kk,1)
                   Ind(kk,1) = 0
                 END DO
               END IF
               ! ADD NEW ELEMENT.
-              LCOl = LCOl + 1
-              Ind(LCOl,1) = ir
+              lcol_com = lcol_com + 1
+              Ind(lcol_com,1) = ir
               42  G = MAX(G,ABS(au))
               Iw(j,2) = Nz + 1
               44  W(j) = 0.
             END DO
           END IF
-          Iw(ir,1) = LROw + 1 - Ip(ir,1)
+          Iw(ir,1) = lrow_com + 1 - Ip(ir,1)
           !
           ! STORE MULTIPLIER
-          IF ( LENl+LCOl+1>Ia ) THEN
+          IF ( lenl_com+lcol_com+1>Ia ) THEN
             ! COMPRESS COL FILE IF NECESSARY.
-            IF ( NCP>=mcp ) GOTO 400
+            IF ( ncp_com>=mcp ) GOTO 400
             CALL LA05ED(A,Ind,Ip(:,2),N,Iw(1,2),.FALSE.)
           END IF
-          k = Ia - LENl
-          LENl = LENl + 1
+          k = Ia - lenl_com
+          lenl_com = lenl_com + 1
           A(k) = am
           Ind(k,1) = ipp
           Ind(k,2) = ir
-          LENu = LENu - 1
+          lenu_com = lenu_com - 1
         END DO
       END IF
       !
@@ -462,7 +462,7 @@ SUBROUTINE LA05AD(A,Ind,Nz,Ia,N,Ip,Iw,W,G,U)
       k = k + Iw(i,2)
       Ip(i,2) = k
     END DO
-    LCOl = k - 1
+    lcol_com = k - 1
     DO ii = 1, N
       i = Iw(ii,3)
       kp = Ip(i,1)
@@ -480,7 +480,7 @@ SUBROUTINE LA05AD(A,Ind,Nz,Ia,N,Ip,Iw,W,G,U)
   !     THE FOLLOWING INSTRUCTIONS IMPLEMENT THE FAILURE EXITS.
   !
   100 CONTINUE
-  IF ( LP>0 ) THEN
+  IF ( lp_com>0 ) THEN
     WRITE (xern1,'(I8)') ir
     WRITE (xern2,'(I8)') j
     CALL XERMSG('SLATEC','LA05AD','MORE THAN ONE MATRIX ENTRY.  HERE ROW = '//xern1//' AND COL = '//xern2,-4,1)
@@ -489,7 +489,7 @@ SUBROUTINE LA05AD(A,Ind,Nz,Ia,N,Ip,Iw,W,G,U)
   RETURN
   !
   200 CONTINUE
-  IF ( LP>0 ) THEN
+  IF ( lp_com>0 ) THEN
     WRITE (xern0,'(I8)') k
     WRITE (xern1,'(I8)') i
     WRITE (xern2,'(I8)') j
@@ -500,7 +500,7 @@ SUBROUTINE LA05AD(A,Ind,Nz,Ia,N,Ip,Iw,W,G,U)
   RETURN
   !
   300 CONTINUE
-  IF ( LP>0 ) THEN
+  IF ( lp_com>0 ) THEN
     WRITE (xern1,'(I8)') l
     CALL XERMSG('SLATEC','LA05AD','ROW OR COLUMN HAS NO ELEMENTS.  HERE INDEX = '//xern1,-2,1)
   END IF
@@ -508,7 +508,7 @@ SUBROUTINE LA05AD(A,Ind,Nz,Ia,N,Ip,Iw,W,G,U)
   RETURN
   !
   400 CONTINUE
-  IF ( LP>0 ) CALL XERMSG('SLATEC','LA05AD',&
+  IF ( lp_com>0 ) CALL XERMSG('SLATEC','LA05AD',&
     'LENGTHS OF ARRAYS A(*) AND IND(*,2) ARE TOO SMALL.',-7,1)
   G = -7.
   RETURN
@@ -520,7 +520,7 @@ SUBROUTINE LA05AD(A,Ind,Nz,Ia,N,Ip,Iw,W,G,U)
     IF ( ii>0 ) Iw(ii,1) = i
   END DO
   !
-  IF ( LP>0 ) THEN
+  IF ( lp_com>0 ) THEN
     xern1 = 'ROWS'
     IF ( l==2 ) xern1 = 'COLUMNS'
     CALL XERMSG('SLATEC','LA05AD','DEPENDANT '//xern1,-5,1)

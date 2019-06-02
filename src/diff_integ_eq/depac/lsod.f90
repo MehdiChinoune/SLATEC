@@ -30,9 +30,10 @@ SUBROUTINE LSOD(F,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,Acor,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
-  USE DEBDF1, ONLY : TOLd, H, HMIn, HMXi, X => TN, U => UROund, IQUit, INIt, &
-    KSTeps, IBEgin, ITOl, IINteg, ITStop, IJAc, IBAnd, JSTart, KFLag, METh, &
-    MITer, MAXord, N, NQ, NST, NFE, NJE
+  USE DEBDF1, ONLY : told_com, h_com, hmin_com, hmxi_com, tn_com, uround_com, &
+    iquit_com, init_com, ksteps_com, ibegin_com, itol_com, iinteg_com, itstop_com, &
+    ijac_com, iband_com, jstart_com, kflag_com, meth_com, miter_com, maxord_com, &
+    n_com, nq_com, nst_com, nfe_com, nje_com
   USE service, ONLY : XERMSG, R1MACH
   INTERFACE
     SUBROUTINE F(X,U,Uprime)
@@ -68,46 +69,46 @@ SUBROUTINE LSOD(F,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,Acor,&
   !.......................................................................
   !
   !* FIRST EXECUTABLE STATEMENT  LSOD
-  IF ( IBEgin==0 ) THEN
+  IF ( ibegin_com==0 ) THEN
     !
     !        ON THE FIRST CALL, PERFORM INITIALIZATION --
     !        DEFINE THE MACHINE UNIT ROUNDOFF QUANTITY  U  BY CALLING THE
     !        FUNCTION ROUTINE R1MACH. THE USER MUST MAKE SURE THAT THE
     !        VALUES SET IN R1MACH ARE RELEVANT TO THE COMPUTER BEING USED.
     !
-    U = R1MACH(4)
+    uround_com = R1MACH(4)
     !                          -- SET ASSOCIATED MACHINE DEPENDENT PARAMETER
-    Wm(1) = SQRT(U)
+    Wm(1) = SQRT(uround_com)
     !                          -- SET TERMINATION FLAG
-    IQUit = 0
+    iquit_com = 0
     !                          -- SET INITIALIZATION INDICATOR
-    INIt = 0
+    init_com = 0
     !                          -- SET COUNTER FOR ATTEMPTED STEPS
-    KSTeps = 0
+    ksteps_com = 0
     !                          -- SET INDICATOR FOR INTERMEDIATE-OUTPUT
     Intout = .FALSE.
     !                          -- SET START INDICATOR FOR STOD CODE
-    JSTart = 0
+    jstart_com = 0
     !                          -- SET BDF METHOD INDICATOR
-    METh = 2
+    meth_com = 2
     !                          -- SET MAXIMUM ORDER FOR BDF METHOD
-    MAXord = 5
+    maxord_com = 5
     !                          -- SET ITERATION MATRIX INDICATOR
     !
-    IF ( IJAc==0.AND.IBAnd==0 ) MITer = 2
-    IF ( IJAc==1.AND.IBAnd==0 ) MITer = 1
-    IF ( IJAc==0.AND.IBAnd==1 ) MITer = 5
-    IF ( IJAc==1.AND.IBAnd==1 ) MITer = 4
+    IF ( ijac_com==0.AND.iband_com==0 ) miter_com = 2
+    IF ( ijac_com==1.AND.iband_com==0 ) miter_com = 1
+    IF ( ijac_com==0.AND.iband_com==1 ) miter_com = 5
+    IF ( ijac_com==1.AND.iband_com==1 ) miter_com = 4
     !
     !                          -- SET OTHER NECESSARY ITEMS IN COMMON BLOCK
-    N = Neq
-    NST = 0
-    NJE = 0
-    HMXi = 0.
-    NQ = 1
-    H = 1.
+    n_com = Neq
+    nst_com = 0
+    nje_com = 0
+    hmxi_com = 0.
+    nq_com = 1
+    h_com = 1.
     !                          -- RESET IBEGIN FOR SUBSEQUENT CALLS
-    IBEgin = 1
+    ibegin_com = 1
   END IF
   !
   !.......................................................................
@@ -151,10 +152,10 @@ SUBROUTINE LSOD(F,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,Acor,&
       IF ( nrtolp>0 ) EXIT
       natolp = 1
     END IF
-    50  IF ( ITOl==0 ) EXIT
+    50  IF ( itol_com==0 ) EXIT
   END DO
   !
-  IF ( ITStop==1 ) THEN
+  IF ( itstop_com==1 ) THEN
     IF ( SIGN(1.,Tout-T)/=SIGN(1.,Tstop-T).OR.ABS(Tout-T)>ABS(Tstop-T) ) THEN
       WRITE (xern3,'(1PE15.6)') Tout
       WRITE (xern4,'(1PE15.6)') Tstop
@@ -167,7 +168,7 @@ SUBROUTINE LSOD(F,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,Acor,&
   !
   !        CHECK SOME CONTINUATION POSSIBILITIES
   !
-  IF ( INIt/=0 ) THEN
+  IF ( init_com/=0 ) THEN
     IF ( T==Tout ) THEN
       WRITE (xern3,'(1PE15.6)') T
       CALL XERMSG('SLATEC','LSOD',&
@@ -176,8 +177,8 @@ SUBROUTINE LSOD(F,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,Acor,&
       Idid = -33
     END IF
     !
-    IF ( T/=TOLd ) THEN
-      WRITE (xern3,'(1PE15.6)') TOLd
+    IF ( T/=told_com ) THEN
+      WRITE (xern3,'(1PE15.6)') told_com
       WRITE (xern4,'(1PE15.6)') T
       CALL XERMSG('SLATEC','LSOD',&
         'IN DEBDF, YOU HAVE CHANGED THE VALUE OF T FROM '//xern3//' TO '//xern4//&
@@ -185,7 +186,7 @@ SUBROUTINE LSOD(F,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,Acor,&
       Idid = -33
     END IF
     !
-    IF ( INIt/=1 ) THEN
+    IF ( init_com/=1 ) THEN
       IF ( Delsgn*(Tout-T)<0. ) THEN
         WRITE (xern3,'(1PE15.6)') Tout
         CALL XERMSG('SLATEC','LSOD',&
@@ -197,10 +198,10 @@ SUBROUTINE LSOD(F,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,Acor,&
   END IF
   !
   IF ( Idid==(-33) ) THEN
-    IF ( IQUit/=(-33) ) THEN
+    IF ( iquit_com/=(-33) ) THEN
       !                       INVALID INPUT DETECTED
-      IQUit = -33
-      IBEgin = -1
+      iquit_com = -33
+      ibegin_com = -1
     ELSE
       CALL XERMSG('SLATEC','LSOD','IN DEBDF, INVALID INPUT WAS DETECTED ON&
         & SUCCESSIVE ENTRIES.  IT IS IMPOSSIBLE TO PROCEED BECAUSE YOU HAVE NOT&
@@ -218,10 +219,10 @@ SUBROUTINE LSOD(F,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,Acor,&
   !
   DO k = 1, Neq
     IF ( Rtol(k)+Atol(k)<=0. ) THEN
-      Rtol(k) = 100.*U
+      Rtol(k) = 100.*uround_com
       Idid = -2
     END IF
-    IF ( ITOl==0 ) EXIT
+    IF ( itol_com==0 ) EXIT
   END DO
   !
   IF ( Idid/=(-2) ) THEN
@@ -232,25 +233,25 @@ SUBROUTINE LSOD(F,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,Acor,&
     !            INIT=1 MEANS NOMINAL STEP SIZE AND DIRECTION NOT YET SET
     !            INIT=2 MEANS NO FURTHER INITIALIZATION REQUIRED
     !
-    IF ( INIt==0 ) THEN
+    IF ( init_com==0 ) THEN
       !
       !.......................................................................
       !
       !     MORE INITIALIZATION --
       !                         -- EVALUATE INITIAL DERIVATIVES
       !
-      INIt = 1
+      init_com = 1
       CALL F(T,Y,Yh(:,2))
-      NFE = 1
+      nfe_com = 1
       IF ( T==Tout ) THEN
         Idid = 2
         DO l = 1, Neq
           Ypout(l) = Yh(l,2)
         END DO
-        TOLd = T
+        told_com = T
         RETURN
       END IF
-    ELSEIF ( INIt/=1 ) THEN
+    ELSEIF ( init_com/=1 ) THEN
       GOTO 100
     END IF
     !
@@ -261,27 +262,27 @@ SUBROUTINE LSOD(F,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,Acor,&
     !
     ltol = 1
     DO l = 1, Neq
-      IF ( ITOl==1 ) ltol = l
+      IF ( itol_com==1 ) ltol = l
       tol = Rtol(ltol)*ABS(Y(l)) + Atol(ltol)
       IF ( tol==0. ) GOTO 200
       Ewt(l) = tol
     END DO
     !
     big = SQRT(R1MACH(2))
-    CALL HSTART(F,Neq,T,Tout,Y,Yh(1,2),Ewt,1,U,big,Yh(1,3),Yh(1,4),Yh(1,5),&
-      Yh(1,6),H)
+    CALL HSTART(F,Neq,T,Tout,Y,Yh(1,2),Ewt,1,uround_com,big,Yh(1,3),Yh(1,4),Yh(1,5),&
+      Yh(1,6),h_com)
     !
     Delsgn = SIGN(1.0,Tout-T)
-    X = T
+    tn_com = T
     DO l = 1, Neq
       Yh(l,1) = Y(l)
-      Yh(l,2) = H*Yh(l,2)
+      Yh(l,2) = h_com*Yh(l,2)
     END DO
-    INIt = 2
+    init_com = 2
   ELSE
     !                       RTOL=ATOL=0 ON INPUT, SO RTOL IS CHANGED TO A
     !                                                SMALL POSITIVE VALUE
-    IBEgin = -1
+    ibegin_com = -1
     RETURN
   END IF
   !
@@ -297,27 +298,27 @@ SUBROUTINE LSOD(F,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,Acor,&
   !
   !   IF ALREADY PAST OUTPUT POINT, INTERPOLATE AND RETURN
   !
-  DO WHILE ( ABS(X-T)<absdel )
+  DO WHILE ( ABS(tn_com-T)<absdel )
     !
     !   IF CANNOT GO PAST TSTOP AND SUFFICIENTLY CLOSE,
     !   EXTRAPOLATE AND RETURN
     !
-    IF ( ITStop==1 ) THEN
-      IF ( ABS(Tstop-X)<100.*U*ABS(X) ) THEN
-        dt = Tout - X
+    IF ( itstop_com==1 ) THEN
+      IF ( ABS(Tstop-tn_com)<100.*uround_com*ABS(tn_com) ) THEN
+        dt = Tout - tn_com
         DO l = 1, Neq
-          Y(l) = Yh(l,1) + (dt/H)*Yh(l,2)
+          Y(l) = Yh(l,1) + (dt/h_com)*Yh(l,2)
         END DO
         CALL F(Tout,Y,Ypout)
-        NFE = NFE + 1
+        nfe_com = nfe_com + 1
         Idid = 3
         T = Tout
-        TOLd = T
+        told_com = T
         RETURN
       END IF
     END IF
     !
-    IF ( .NOT.(IINteg==0.OR..NOT.Intout) ) THEN
+    IF ( .NOT.(iinteg_com==0.OR..NOT.Intout) ) THEN
       !
       !   INTERMEDIATE-OUTPUT MODE
       !
@@ -328,23 +329,23 @@ SUBROUTINE LSOD(F,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,Acor,&
       !
       !     MONITOR NUMBER OF STEPS ATTEMPTED
       !
-    ELSEIF ( KSTeps<=maxnum ) THEN
+    ELSEIF ( ksteps_com<=maxnum ) THEN
       !
       !.......................................................................
       !
       !   LIMIT STEP SIZE AND SET WEIGHT VECTOR
       !
-      HMIn = 100.*U*ABS(X)
-      ha = MAX(ABS(H),HMIn)
-      IF ( ITStop==1 ) ha = MIN(ha,ABS(Tstop-X))
-      H = SIGN(ha,H)
+      hmin_com = 100.*uround_com*ABS(tn_com)
+      ha = MAX(ABS(h_com),hmin_com)
+      IF ( itstop_com==1 ) ha = MIN(ha,ABS(Tstop-tn_com))
+      h_com = SIGN(ha,h_com)
       ltol = 1
       DO l = 1, Neq
-        IF ( ITOl==1 ) ltol = l
+        IF ( itol_com==1 ) ltol = l
         Ewt(l) = Rtol(ltol)*ABS(Yh(l,1)) + Atol(ltol)
         IF ( Ewt(l)<=0.0 ) GOTO 200
       END DO
-      Tolfac = U*VNWRMS(Neq,Yh,Ewt)
+      Tolfac = uround_com*VNWRMS(Neq,Yh,Ewt)
       IF ( Tolfac<=1. ) THEN
         !
         !.......................................................................
@@ -353,22 +354,22 @@ SUBROUTINE LSOD(F,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,Acor,&
         !
         CALL STOD(Neq,Y,Yh,Neq,Yh1,Ewt,Savf,Acor,Wm,Iwm,F,JAC)
         !
-        JSTart = -2
+        jstart_com = -2
         Intout = .TRUE.
-        IF ( KFLag/=0 ) THEN
+        IF ( kflag_com/=0 ) THEN
           !
           !.......................................................................
           !
-          IF ( KFLag==-1 ) THEN
+          IF ( kflag_com==-1 ) THEN
             !
             !                       REPEATED ERROR TEST FAILURES
             Idid = -7
-            IBEgin = -1
+            ibegin_com = -1
           ELSE
             !
             !                       REPEATED CORRECTOR CONVERGENCE FAILURES
             Idid = -6
-            IBEgin = -1
+            ibegin_com = -1
           END IF
           GOTO 300
         END IF
@@ -379,38 +380,38 @@ SUBROUTINE LSOD(F,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,Acor,&
         Tolfac = 2.*Tolfac
         Rtol(1) = Tolfac*Rtol(1)
         Atol(1) = Tolfac*Atol(1)
-        IF ( ITOl/=0 ) THEN
+        IF ( itol_com/=0 ) THEN
           DO l = 2, Neq
             Rtol(l) = Tolfac*Rtol(l)
             Atol(l) = Tolfac*Atol(l)
           END DO
         END IF
-        IBEgin = -1
+        ibegin_com = -1
         GOTO 300
       END IF
     ELSE
       !
       !                       A SIGNIFICANT AMOUNT OF WORK HAS BEEN EXPENDED
       Idid = -1
-      KSTeps = 0
-      IBEgin = -1
+      ksteps_com = 0
+      ibegin_com = -1
       GOTO 300
     END IF
   END DO
   CALL INTYD(Tout,0,Yh,Neq,Y,intflg)
   CALL INTYD(Tout,1,Yh,Neq,Ypout,intflg)
   Idid = 3
-  IF ( X==Tout ) THEN
+  IF ( tn_com==Tout ) THEN
     Idid = 2
     Intout = .FALSE.
   END IF
   T = Tout
-  TOLd = T
+  told_com = T
   RETURN
   !
   !                       RELATIVE ERROR CRITERION INAPPROPRIATE
   200  Idid = -3
-  IBEgin = -1
+  ibegin_com = -1
   !
   !.......................................................................
   !
@@ -418,9 +419,9 @@ SUBROUTINE LSOD(F,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,Acor,&
   300 CONTINUE
   DO l = 1, Neq
     Y(l) = Yh(l,1)
-    Ypout(l) = Yh(l,2)/H
+    Ypout(l) = Yh(l,2)/h_com
   END DO
-  T = X
-  TOLd = T
+  T = tn_com
+  told_com = T
   Intout = .FALSE.
 END SUBROUTINE LSOD

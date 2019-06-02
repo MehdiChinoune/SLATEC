@@ -177,7 +177,7 @@ INTEGER FUNCTION ISSOMN(N,B,X,MSOLVE,Nsave,Itol,Tol,&
   !   920930  Corrected to not print AK when ITER=0.  (FNF)
   !   921026  Changed 1.0E10 to R1MACH(2).  (FNF)
   !   921113  Corrected C***CATEGORY line.  (FNF)
-  USE SSLBLK, ONLY : SOLn
+  USE SSLBLK, ONLY : soln_com
   USE service, ONLY : R1MACH
   INTERFACE
     SUBROUTINE MSOLVE(N,R,Z,Rwork,Iwork)
@@ -210,9 +210,9 @@ INTEGER FUNCTION ISSOMN(N,B,X,MSOLVE,Nsave,Itol,Tol,&
     Err = SNRM2(N,Z,1)/Bnrm
   ELSEIF ( Itol==11 ) THEN
     !         err = ||x-TrueSolution||/||TrueSolution|| (2-Norms).
-    IF ( Iter==0 ) Solnrm = SNRM2(N,SOLn,1)
+    IF ( Iter==0 ) Solnrm = SNRM2(N,soln_com,1)
     DO i = 1, N
-      Dz(i) = X(i) - SOLn(i)
+      Dz(i) = X(i) - soln_com(i)
     END DO
     Err = SNRM2(N,Dz,1)/Solnrm
   ELSE

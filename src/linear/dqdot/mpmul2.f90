@@ -35,9 +35,10 @@ SUBROUTINE MPMUL2(X,Iy,Z,Trunc)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   !   930124  Increased Array size in MPCON for SUN -r8.  (RWC)
-  USE MPCOM, ONLY : B, LUN, M, T, R
-  INTEGER i, ij, is, ix, Iy, j, j1, j2, X(*), Z(*), Trunc, re, rs
-  INTEGER c, c1, c2, ri, t1, t3, t4
+  USE MPCOM, ONLY : b_com, lun_com, m_com, t_com, r_com
+  INTEGER :: Iy, Trunc
+  INTEGER :: X(30), Z(30)
+  INTEGER :: i, ij, is, ix, j, j1, j2, re, rs, c, c1, c2, ri, t1, t3, t4
   !* FIRST EXECUTABLE STATEMENT  MPMUL2
   rs = X(1)
   IF ( rs/=0 ) THEN
@@ -46,15 +47,15 @@ SUBROUTINE MPMUL2(X,Iy,Z,Trunc)
       j = -j
       rs = -rs
       ! CHECK FOR MULTIPLICATION BY B
-      IF ( j/=B ) GOTO 200
-      IF ( X(2)<M ) THEN
+      IF ( j/=b_com ) GOTO 200
+      IF ( X(2)<m_com ) THEN
         CALL MPSTR(X,Z)
         Z(1) = rs
         Z(2) = X(2) + 1
         RETURN
       ELSE
         CALL MPCHK(1,4)
-        WRITE (LUN,99001)
+        WRITE (lun_com,99001)
         99001 FORMAT (' *** OVERFLOW OCCURRED IN MPMUL2 ***')
         CALL MPOVFL(Z)
         RETURN
@@ -70,35 +71,35 @@ SUBROUTINE MPMUL2(X,Iy,Z,Trunc)
   200  re = X(2) + 4
   ! FORM PRODUCT IN ACCUMULATOR
   c = 0
-  t1 = T + 1
-  t3 = T + 3
-  t4 = T + 4
+  t1 = t_com + 1
+  t3 = t_com + 3
+  t4 = t_com + 4
   ! IF J*B NOT REPRESENTABLE AS AN INTEGER WE HAVE TO SIMULATE
   ! DOUBLE-PRECISION MULTIPLICATION.
-  IF ( j>=MAX(8*B,32767/B) ) THEN
+  IF ( j>=MAX(8*b_com,32767/b_com) ) THEN
     ! HERE J IS TOO LARGE FOR SINGLE-PRECISION MULTIPLICATION
-    j1 = j/B
-    j2 = j - j1*B
+    j1 = j/b_com
+    j2 = j - j1*b_com
     ! FORM PRODUCT
     DO ij = 1, t4
-      c1 = c/B
-      c2 = c - B*c1
+      c1 = c/b_com
+      c2 = c - b_com*c1
       i = t1 - ij
       ix = 0
       IF ( i>0 ) ix = X(i+2)
       ri = j2*ix + c2
-      is = ri/B
+      is = ri/b_com
       c = j1*ix + c1 + is
-      R(i+4) = ri - B*is
+      r_com(i+4) = ri - b_com*is
     END DO
     IF ( c<0 ) GOTO 400
     IF ( c==0 ) GOTO 300
   ELSE
-    DO ij = 1, T
+    DO ij = 1, t_com
       i = t1 - ij
       ri = j*X(i+2) + c
-      c = ri/B
-      R(i+4) = ri - B*c
+      c = ri/b_com
+      r_com(i+4) = ri - b_com*c
     END DO
     ! CHECK FOR INTEGER OVERFLOW
     IF ( ri<0 ) GOTO 400
@@ -106,8 +107,8 @@ SUBROUTINE MPMUL2(X,Iy,Z,Trunc)
     DO ij = 1, 4
       i = 5 - ij
       ri = c
-      c = ri/B
-      R(i) = ri - B*c
+      c = ri/b_com
+      r_com(i) = ri - b_com*c
     END DO
     IF ( c==0 ) GOTO 300
   END IF
@@ -115,11 +116,11 @@ SUBROUTINE MPMUL2(X,Iy,Z,Trunc)
     ! HAVE TO SHIFT RIGHT HERE AS CARRY OFF END
     DO ij = 1, t3
       i = t4 - ij
-      R(i+1) = R(i)
+      r_com(i+1) = r_com(i)
     END DO
     ri = c
-    c = ri/B
-    R(1) = ri - B*c
+    c = ri/b_com
+    r_com(1) = ri - b_com*c
     re = re + 1
     IF ( c<0 ) GOTO 400
     IF ( c==0 ) EXIT
@@ -129,8 +130,8 @@ SUBROUTINE MPMUL2(X,Iy,Z,Trunc)
   RETURN
   ! CAN ONLY GET HERE IF INTEGER OVERFLOW OCCURRED
   400  CALL MPCHK(1,4)
-  WRITE (LUN,99002)
-  99002 FORMAT (' *** INTEGER OVERFLOW IN MPMUL2, B TOO LARGE ***')
+  WRITE (lun_com,99002)
+  99002 FORMAT (' *** INTEGER OVERFLOW IN MPMUL2, b_com TOO LARGE ***')
   CALL MPERR
   GOTO 100
 END SUBROUTINE MPMUL2

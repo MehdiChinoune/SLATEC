@@ -33,9 +33,10 @@ SUBROUTINE DEXBVP(Y,Nrowy,Xpts,A,Nrowa,Alpha,B,Nrowb,Beta,Iflag,Work,Iwork)
   !   900328  Added TYPE section.  (WRB)
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
   !   910722  Updated AUTHOR section.  (ALS)
-  USE DML, ONLY : LPAr, NCOmp, NFC, KKKzpw, NEEdw, NEEdiw, K1, K2, K3, K4, K5, K6, &
-    K7, K8, K9, K10, L1, X, XBEg, XENd, TOL, NXPts, NIC, NOPg, MXNon, NDIsk, &
-    NTP, NFCc
+  USE DML, ONLY : lpar_com, ncomp_com, nfc_com, kkkzpw_com, needw_com, neediw_com, &
+    k1_com, k2_com, k3_com, k4_com, k5_com, k6_com, k7_com, k8_com, k9_com, k10_com, &
+    l1_com, x_com, xbeg_com, xend_com, tol_com, nxpts_com, nic_com, nopg_com, &
+    mxnon_com, ndisk_com, ntp_com, nfcc_com
   USE service, ONLY : XERMSG
   !
   INTEGER :: Iflag, Nrowa, Nrowb, Nrowy, Iwork(*)
@@ -51,18 +52,18 @@ SUBROUTINE DEXBVP(Y,Nrowy,Xpts,A,Nrowa,Alpha,B,Nrowb,Beta,Iflag,Work,Iwork)
     !
     !     COMPUTE ORTHONORMALIZATION TOLERANCES.
     !
-    TOL = 10.0D0**((-LPAr-iexp)*2)
+    tol_com = 10.0D0**((-lpar_com-iexp)*2)
     !
     Iwork(8) = iexp
-    MXNon = Iwork(2)
+    mxnon_com = Iwork(2)
     !
     !- *********************************************************************
     !- *********************************************************************
     !
-    CALL DBVPOR(Y,Nrowy,NCOmp,Xpts,NXPts,A,Nrowa,Alpha,NIC,B,Nrowb,Beta,NFC,&
-      Iflag,Work(1),MXNon,Work(K1),NTP,Iwork(18),Work(K2),&
-      Iwork(16),Work(K3),Work(K4),Work(K5),Work(K6),Work(K7),&
-      Work(K8:K9-1),Work(K10),Iwork(L1),NFCc)
+    CALL DBVPOR(Y,Nrowy,ncomp_com,Xpts,nxpts_com,A,Nrowa,Alpha,nic_com,B,Nrowb,Beta,nfc_com,&
+      Iflag,Work(1),mxnon_com,Work(k1_com),ntp_com,Iwork(18),Work(k2_com),&
+      Iwork(16),Work(k3_com),Work(k4_com),Work(k5_com),Work(k6_com),Work(k7_com),&
+      Work(k8_com:k9_com-1),Work(k10_com),Iwork(l1_com),nfcc_com)
     !
     !- *********************************************************************
     !- *********************************************************************
@@ -78,15 +79,15 @@ SUBROUTINE DEXBVP(Y,Nrowy,Xpts,A,Nrowa,Alpha,B,Nrowb,Beta,Iflag,Work,Iwork)
       !     WE ESTIMATE THE NEW STORAGE REQUIREMENTS IN ORDER TO SOLVE PROBLEM
       !
       IF ( Iflag==13 ) THEN
-        xl = ABS(XENd-XBEg)
-        zquit = ABS(X-XBEg)
-        inc = INT( 1.5D0*xl/zquit*(MXNon+1) )
-        IF ( NDIsk/=1 ) THEN
-          nsafw = inc*KKKzpw + NEEdw
-          nsafiw = inc*NFCc + NEEdiw
+        xl = ABS(xend_com-xbeg_com)
+        zquit = ABS(x_com-xbeg_com)
+        inc = INT( 1.5D0*xl/zquit*(mxnon_com+1) )
+        IF ( ndisk_com/=1 ) THEN
+          nsafw = inc*kkkzpw_com + needw_com
+          nsafiw = inc*nfcc_com + neediw_com
         ELSE
-          nsafw = NEEdw + inc
-          nsafiw = NEEdiw
+          nsafw = needw_com + inc
+          nsafiw = neediw_com
         END IF
         !
         WRITE (xern1,'(I8)') nsafw
@@ -96,10 +97,10 @@ SUBROUTINE DEXBVP(Y,Nrowy,Xpts,A,Nrowa,Alpha,B,Nrowb,Beta,Iflag,Work,Iwork)
           //xern1//', PREDICTED STORAGE ALLOCATION FOR IWORK ARRAY IS '//xern2,1,0)
       END IF
       !
-      Iwork(1) = MXNon
+      Iwork(1) = mxnon_com
       EXIT
-    ELSEIF ( kotc==3.OR.NOPg==1 ) THEN
-      Iwork(1) = MXNon
+    ELSEIF ( kotc==3.OR.nopg_com==1 ) THEN
+      Iwork(1) = mxnon_com
       EXIT
     ELSE
       kotc = kotc + 1

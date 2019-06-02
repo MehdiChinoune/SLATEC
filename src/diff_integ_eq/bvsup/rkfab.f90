@@ -36,8 +36,9 @@ SUBROUTINE RKFAB(Ncomp,Xpts,Nxpts,Nfc,Iflag,Z,Mxnon,P,Ntp,Ip,Yhp,Niv,U,V,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
-  USE ML, ONLY : C, INHomo, X, XBEg, XENd, XOP, INFo, KOP, AE, RE, NOPg, NDIsk, &
-    NTApe, NEQ, INTeg, NPS, NUMort, KKKint, LLLint
+  USE ML, ONLY : c_com, inhomo_com, x_com, xbeg_com, xend_com, xop_com, info_com, &
+    kop_com, ae_com, re_com, nopg_com, ndisk_com, ntape_com, neq_com, integ_com, &
+    nps_com, numort_com, kkkint_com, lllint_com
   INTEGER :: Ncomp, Nfc, Nfcc, Niv, Ntp, Iflag, Mxnon, Nxpts
   INTEGER :: Iwork(*), Ip(Nfcc,Mxnon+1)
   REAL :: P(Ntp,Mxnon+1), S(Nfc+1), Stowa(:), U(Ncomp,Nfc,Nxpts), &
@@ -51,17 +52,17 @@ SUBROUTINE RKFAB(Ncomp,Xpts,Nxpts,Nfc,Iflag,Z,Mxnon,P,Ntp,Ip,Yhp,Niv,U,V,&
   !* FIRST EXECUTABLE STATEMENT  RKFAB
   kod = 1
   non = 1
-  X = XBEg
+  x_com = xbeg_com
   jon = 1
-  INFo(1) = 0
-  INFo(2) = 0
-  INFo(3) = 1
-  INFo(4) = 1
-  Work(1) = XENd
+  info_com(1) = 0
+  info_com(2) = 0
+  info_com(3) = 1
+  info_com(4) = 1
+  Work(1) = xend_com
   ipar = 0
-  IF ( NOPg/=0 ) THEN
-    INFo(3) = 0
-    IF ( X==Z(1) ) jon = 2
+  IF ( nopg_com/=0 ) THEN
+    info_com(3) = 0
+    IF ( x_com==Z(1) ) jon = 2
   END IF
   nfcp1 = Nfc + 1
   !
@@ -70,35 +71,35 @@ SUBROUTINE RKFAB(Ncomp,Xpts,Nxpts,Nfc,Iflag,Z,Mxnon,P,Ntp,Ip,Yhp,Niv,U,V,&
   !- *********************************************************************
   !
   DO kopp = 2, Nxpts
-    KOP = kopp
+    kop_com = kopp
     !
-    50  XOP = Xpts(KOP)
-    IF ( NDIsk==0 ) kod = KOP
+    50  xop_com = Xpts(kop_com)
+    IF ( ndisk_com==0 ) kod = kop_com
     !
     !     STEP BY STEP INTEGRATION LOOP BETWEEN OUTPUT POINTS.
     !
-    100  xxop = XOP
-    IF ( NOPg/=0 ) THEN
-      IF ( XENd>XBEg.AND.XOP>Z(jon) ) xxop = Z(jon)
-      IF ( XENd<XBEg.AND.XOP<Z(jon) ) xxop = Z(jon)
+    100  xxop = xop_com
+    IF ( nopg_com/=0 ) THEN
+      IF ( xend_com>xbeg_com.AND.xop_com>Z(jon) ) xxop = Z(jon)
+      IF ( xend_com<xbeg_com.AND.xop_com<Z(jon) ) xxop = Z(jon)
     END IF
     !
     !- *********************************************************************
     150 CONTINUE
-    IF ( INTeg==2 ) THEN
+    IF ( integ_com==2 ) THEN
       !     DEABM INTEGRATOR
       !
-      ret(1) = RE
-      aet(1) = AE
-      CALL DEABM(BVDER_2,NEQ,X,Yhp,xxop,INFo,ret,aet,idid,Work,KKKint,Iwork,&
-        LLLint)
+      ret(1) = re_com
+      aet(1) = ae_com
+      CALL DEABM(BVDER_2,neq_com,x_com,Yhp,xxop,info_com,ret,aet,idid,Work,kkkint_com,Iwork,&
+        lllint_com)
     ELSE
       !     DERKF INTEGRATOR
       !
-      ret(1) = RE
-      aet(1) = AE
-      CALL DERKF(BVDER_2,NEQ,X,Yhp,xxop,INFo,ret,aet,idid,Work,KKKint,Iwork,&
-        LLLint)
+      ret(1) = re_com
+      aet(1) = ae_com
+      CALL DERKF(BVDER_2,neq_com,x_com,Yhp,xxop,info_com,ret,aet,idid,Work,kkkint_com,Iwork,&
+        lllint_com)
     END IF
     IF ( idid>=1 ) THEN
       !
@@ -106,15 +107,15 @@ SUBROUTINE RKFAB(Ncomp,Xpts,Nxpts,Nfc,Iflag,Z,Mxnon,P,Ntp,Ip,Yhp,Niv,U,V,&
       !     GRAM-SCHMIDT ORTHOGONALIZATION TEST FOR ORTHONORMALIZATION
       !     (TEMPORARILY USING U AND V IN THE TEST)
       !
-      IF ( NOPg==0 ) THEN
+      IF ( nopg_com==0 ) THEN
         jflag = 1
-        IF ( INHomo==3.AND.X==XENd ) jflag = 3
+        IF ( inhomo_com==3.AND.x_com==xend_com ) jflag = 3
       ELSE
         IF ( xxop/=Z(jon) ) GOTO 200
         jflag = 2
       END IF
       !
-      IF ( NDIsk==0 ) non = NUMort + 1
+      IF ( ndisk_com==0 ) non = numort_com + 1
       CALL REORT(Ncomp,U(:,:,kod),V(:,kod),Yhp,Niv,W(:,non),S,P(:,non),&
         Ip(:,non),Stowa,jflag)
       !
@@ -127,37 +128,37 @@ SUBROUTINE RKFAB(Ncomp,Xpts,Nxpts,Nfc,Iflag,Z,Mxnon,P,Ntp,Ip,Yhp,Niv,U,V,&
           !- *********************************************************************
           !     STORE ORTHONORMALIZED VECTORS INTO SOLUTION VECTORS.
           !
-          IF ( NUMort>=Mxnon ) THEN
-            IF ( X/=XENd ) THEN
+          IF ( numort_com>=Mxnon ) THEN
+            IF ( x_com/=xend_com ) THEN
               Iflag = 13
               RETURN
             END IF
           END IF
           !
-          NUMort = NUMort + 1
-          CALL STOR1(Yhp(:,1),U(:,1,kod),Yhp(:,nfcp1),V(:,kod),1,NDIsk,NTApe)
+          numort_com = numort_com + 1
+          CALL STOR1(Yhp(:,1),U(:,1,kod),Yhp(:,nfcp1),V(:,kod),1,ndisk_com,ntape_com)
           !
           !- *********************************************************************
           !     STORE ORTHONORMALIZATION INFORMATION, INITIALIZE
           !     INTEGRATION FLAG, AND CONTINUE INTEGRATION TO THE NEXT
           !     ORTHONORMALIZATION POINT OR OUTPUT POINT.
           !
-          Z(NUMort) = X
-          IF ( INHomo==1.AND.NPS==0 ) C = S(nfcp1)*C
-          IF ( NDIsk/=0 ) THEN
-            IF ( INHomo==1 ) WRITE (NTApe) (W(j,1),j=1,Nfcc)
-            WRITE (NTApe) (Ip(j,1),j=1,Nfcc), (P(j,1),j=1,Ntp)
+          Z(numort_com) = x_com
+          IF ( inhomo_com==1.AND.nps_com==0 ) c_com = S(nfcp1)*c_com
+          IF ( ndisk_com/=0 ) THEN
+            IF ( inhomo_com==1 ) WRITE (ntape_com) (W(j,1),j=1,Nfcc)
+            WRITE (ntape_com) (Ip(j,1),j=1,Nfcc), (P(j,1),j=1,Ntp)
           END IF
-          INFo(1) = 0
+          info_com(1) = 0
           jon = jon + 1
-          IF ( NOPg==1.AND.X/=XOP ) GOTO 100
+          IF ( nopg_com==1.AND.x_com/=xop_com ) GOTO 100
         END IF
       ELSE
         Iflag = 30
         RETURN
       END IF
     ELSE
-      INFo(1) = 1
+      info_com(1) = 1
       IF ( idid==-1 ) GOTO 150
       Iflag = 20 - idid
       RETURN
@@ -171,7 +172,7 @@ SUBROUTINE RKFAB(Ncomp,Xpts,Nxpts,Nfc,Iflag,Z,Mxnon,P,Ntp,Ip,Yhp,Niv,U,V,&
     !     STORAGE OF HOMOGENEOUS SOLUTIONS IN U AND THE PARTICULAR
     !     SOLUTION IN V AT THE OUTPUT POINTS.
     !
-    CALL STOR1(U(:,1,kod),Yhp(:,1),V(:,kod),Yhp(:,nfcp1),0,NDIsk,NTApe)
+    CALL STOR1(U(:,1,kod),Yhp(:,1),V(:,kod),Yhp(:,nfcp1),0,ndisk_com,ntape_com)
   END DO
   !- *********************************************************************
   !- *********************************************************************

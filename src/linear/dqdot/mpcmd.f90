@@ -33,15 +33,17 @@ SUBROUTINE MPCMD(X,Dz)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   !   930124  Increased Array size in MPCON for SUN -r8.  (RWC)
-  USE MPCOM, ONLY : B, LUN, T
-  INTEGER i, X(*), tm
-  REAL(8) :: db, Dz, dz2
+  USE MPCOM, ONLY : b_com, lun_com, t_com
+  INTEGER :: X(30)
+  REAL(8) :: Dz
+  INTEGER :: i, tm
+  REAL(8) :: db, dz2
   !* FIRST EXECUTABLE STATEMENT  MPCMD
   CALL MPCHK(1,4)
   Dz = 0D0
   IF ( X(1)==0 ) RETURN
-  db = REAL(B, 8)
-  DO i = 1, T
+  db = REAL(b_com, 8)
+  DO i = 1, t_com
     Dz = db*Dz + REAL(X(i+2), 8)
     tm = i
     ! CHECK IF FULL DOUBLE-PRECISION ACCURACY ATTAINED
@@ -55,14 +57,14 @@ SUBROUTINE MPCMD(X,Dz)
   ! CHECK REASONABLENESS OF RESULT.
   IF ( Dz>0D0 ) THEN
     ! LHS SHOULD BE .LE. 0.5 BUT ALLOW FOR SOME ERROR IN LOG
-    IF ( ABS(REAL(X(2), 8)-(LOG(Dz)/LOG(REAL(B, 8))+0.5D0))<=0.6D0 ) THEN
+    IF ( ABS(REAL(X(2), 8)-(LOG(Dz)/LOG(REAL(b_com, 8))+0.5D0))<=0.6D0 ) THEN
       IF ( X(1)<0 ) Dz = -Dz
       RETURN
     END IF
   END IF
   ! FOLLOWING MESSAGE INDICATES THAT X IS TOO LARGE OR SMALL -
   ! TRY USING MPCMDE INSTEAD.
-  WRITE (LUN,99001)
+  WRITE (lun_com,99001)
   99001 FORMAT (' *** FLOATING-POINT OVER/UNDER-FLOW IN MPCMD ***')
   CALL MPERR
 END SUBROUTINE MPCMD

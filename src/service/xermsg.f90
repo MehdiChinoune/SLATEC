@@ -193,7 +193,7 @@ SUBROUTINE XERMSG(Librar,Subrou,Messg,Nerr,Level)
   !           XERCTL to XERCNT.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
-  INTEGER i, kdummy, kount, lerr, Level, lkntrl, llevel, &
+  INTEGER :: i, kdummy, kount, lerr, Level, lkntrl, llevel, &
     ltemp, maxmes, mkntrl, Nerr
   CHARACTER(*) :: Librar, Subrou, Messg
   CHARACTER(8) :: xlibr, xsubr

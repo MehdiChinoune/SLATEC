@@ -45,9 +45,10 @@ SUBROUTINE MPBLAS(I1)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !   930124  Increased Array size in MPCON for SUN -r8, and calculate
   !               size for Quad Precision for 2x DP.  (RWC)
-  USE MPCOM, ONLY : MPB => B, MPT => T, MPM => M, MPLun => LUN, MPMxr => MXR
+  USE MPCOM, ONLY : b_com, t_com, m_com, lun_com, mxr_com
   USE service, ONLY : I1MACH, XERMSG
-  INTEGER I1, mpbexp
+  INTEGER :: I1
+  INTEGER :: mpbexp
   !* FIRST EXECUTABLE STATEMENT  MPBLAS
   I1 = 1
   !
@@ -64,22 +65,22 @@ SUBROUTINE MPBLAS(I1)
   !       16     MPB =      64
   !
   mpbexp = I1MACH(8)/2 - 2
-  MPB = 2**mpbexp
+  b_com = 2**mpbexp
   !
   !     Set up remaining parameters
   !                  UNIT FOR ERROR MESSAGES
-  MPLun = I1MACH(4)
+  lun_com = I1MACH(4)
   !                  NUMBER OF MP DIGITS
-  MPT = (2*I1MACH(14)+mpbexp-1)/mpbexp
+  t_com = (2*I1MACH(14)+mpbexp-1)/mpbexp
   !                  DIMENSION OF R
-  MPMxr = MPT + 4
+  mxr_com = t_com + 4
   !
-  IF ( MPMxr>30 ) THEN
+  IF ( mxr_com>30 ) THEN
     CALL XERMSG('SLATEC','MPBLAS',&
       'Array space not sufficient for Quad Precision 2x Double Precision, Proceeding.',1,1)
-    MPT = 26
-    MPMxr = 30
+    t_com = 26
+    mxr_com = 30
   END IF
   !                  EXPONENT RANGE
-  MPM = MIN(32767,I1MACH(9)/4-1)
+  m_com = MIN(32767,I1MACH(9)/4-1)
 END SUBROUTINE MPBLAS

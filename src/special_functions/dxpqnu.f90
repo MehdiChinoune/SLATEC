@@ -29,11 +29,11 @@ SUBROUTINE DXPQNU(Nu1,Nu2,Mu,Theta,Id,Pqa,Ipqa,Ierror)
   !           Corrected order of sections in prologue and added TYPE
   !           section.  (WRB)
   !   920127  Revised PURPOSE section of prologue.  (DWL)
-  USE DXBLK ,ONLY: NBItsf
-  INTEGER i, ia, Id, Ierror, if, ipq, ipq1, ipq2, Ipqa(*), ipsik, &
-    ipsix, ix1, ixs, j, j0, k, Mu
-  REAL(8) :: a, nu, Nu1, Nu2, pq, Pqa(*), r, Theta, w, x, x1, x2, xs, y, z
-  REAL(8) :: di, dmu, pq1, pq2, factmu, flok
+  USE DXBLK ,ONLY: nbitsf_com
+  INTEGER :: Id, Ierror, Mu, Ipqa(*)
+  REAL(8) :: Nu1, Nu2, Theta, Pqa(*)
+  INTEGER :: i, ia, if, ipq, ipq1, ipq2, ipsik, ipsix, ix1, ixs, j, j0, k
+  REAL(8) :: a, nu, pq, r, w, x, x1, x2, xs, y, z, di, dmu, pq1, pq2, factmu, flok
   !
   !        J0, IPSIK, AND IPSIX ARE INITIALIZED IN THIS SUBROUTINE.
   !        J0 IS THE NUMBER OF TERMS USED IN SERIES EXPANSION
@@ -43,8 +43,8 @@ SUBROUTINE DXPQNU(Nu1,Nu2,Mu,Theta,Id,Pqa,Ipqa,Ierror)
   !
   !* FIRST EXECUTABLE STATEMENT  DXPQNU
   Ierror = 0
-  j0 = NBItsf
-  ipsik = 1 + (NBItsf/10)
+  j0 = nbitsf_com
+  ipsik = 1 + (nbitsf_com/10)
   ipsix = 5*ipsik
   ipq = 0
   !        FIND NU IN INTERVAL [-.5,.5) IF ID=2  ( CALCULATION OF Q )

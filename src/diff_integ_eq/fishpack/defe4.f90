@@ -38,21 +38,22 @@ SUBROUTINE DEFE4(COFX,Idmn,Usol,Grhs)
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
-  USE SPL4, ONLY : L, AIT, DLX, DLY, IS, JS, K, KSWx, KSWy, MS, NS
+  USE SPL4, ONLY : l_com, ait_com, dlx_com, dly_com, is_com, js_com, k_com, &
+    kswx_com, kswy_com, ms_com, ns_com
   INTERFACE
     SUBROUTINE COFX(X,A,B,C)
       REAL :: X, A, B, C
     END SUBROUTINE COFX
   END INTERFACE
   INTEGER :: Idmn
-  REAL :: Grhs(Idmn,NS), Usol(Idmn,NS)
+  REAL :: Grhs(Idmn,ns_com), Usol(Idmn,ns_com)
   INTEGER :: i, j
   REAL :: ai, bi, ci, tx, ty, uxxx, uxxxx, uyyy, uyyyy, xi
   !* FIRST EXECUTABLE STATEMENT  DEFE4
-  DO i = IS, MS
-    xi = AIT + (i-1)*DLX
+  DO i = is_com, ms_com
+    xi = ait_com + (i-1)*dlx_com
     CALL COFX(xi,ai,bi,ci)
-    DO j = JS, NS
+    DO j = js_com, ns_com
       !
       !     COMPUTE PARTIAL DERIVATIVE APPROXIMATIONS AT (XI,YJ)
       !
@@ -63,17 +64,17 @@ SUBROUTINE DEFE4(COFX,Idmn,Usol,Grhs)
       !
       !     RESET FORM OF TRUNCATION IF AT BOUNDARY WHICH IS NON-PERIODIC
       !
-      IF ( .NOT.(KSWx==1.OR.(i>1.AND.i<K)) )&
-        tx = ai/3.0*(uxxxx/4.0+uxxx/DLX)
-      IF ( .NOT.(KSWy==1.OR.(j>1.AND.j<L)) ) ty = (uyyyy/4.0+uyyy/DLY)/3.0
-      Grhs(i,j) = Grhs(i,j) + DLY**2*(DLX**2*tx+DLY**2*ty)
+      IF ( .NOT.(kswx_com==1.OR.(i>1.AND.i<k_com)) )&
+        tx = ai/3.0*(uxxxx/4.0+uxxx/dlx_com)
+      IF ( .NOT.(kswy_com==1.OR.(j>1.AND.j<l_com)) ) ty = (uyyyy/4.0+uyyy/dly_com)/3.0
+      Grhs(i,j) = Grhs(i,j) + dly_com**2*(dlx_com**2*tx+dly_com**2*ty)
     END DO
   END DO
   !
   !     RESET THE RIGHT HAND SIDE IN USOL
   !
-  DO i = IS, MS
-    DO j = JS, NS
+  DO i = is_com, ms_com
+    DO j = js_com, ns_com
       Usol(i,j) = Grhs(i,j)
     END DO
   END DO

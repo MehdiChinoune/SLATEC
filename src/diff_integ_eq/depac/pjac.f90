@@ -28,7 +28,8 @@ SUBROUTINE PJAC(Neq,Y,Yh,Nyh,Ewt,Ftem,Savf,Wm,Iwm,F,JAC)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
   !   920422  Changed DIMENSION statement.  (WRB)
-  USE DEBDF1, ONLY : EL0, H, TN, UROund, IER, MITer, N, NFE, NJE
+  USE DEBDF1, ONLY : el0_com, h_com, tn_com, uround_com, ier_com, miter_com, &
+    n_com, nfe_com, nje_com
   USE linear, ONLY : SGBFA, SGEFA
   INTERFACE
     SUBROUTINE F(X,U,Uprime)
@@ -43,7 +44,7 @@ SUBROUTINE PJAC(Neq,Y,Yh,Nyh,Ewt,Ftem,Savf,Wm,Iwm,F,JAC)
   END INTERFACE
   INTEGER :: Neq, Nyh
   INTEGER :: Iwm(:)
-  REAL :: Y(Neq), Yh(Nyh,N), Ewt(N), Ftem(N), Savf(N), Wm(:)
+  REAL :: Y(Neq), Yh(Nyh,n_com), Ewt(n_com), Ftem(n_com), Savf(n_com), Wm(:)
   INTEGER :: i, i1, i2, ii, j, j1, jj, mba, mband, meb1, meband, ml, ml3, mu
   REAL :: con, di, fac, hl0, r, r0, srur, yi, yj, yjj
   REAL, ALLOCATABLE :: pd(:,:)
@@ -80,44 +81,44 @@ SUBROUTINE PJAC(Neq,Y,Yh,Nyh,Ewt,Ftem,Savf,Wm,Iwm,F,JAC)
   ! MITER, N, NFE, AND NJE.
   !-----------------------------------------------------------------------
   !* FIRST EXECUTABLE STATEMENT  PJAC
-  NJE = NJE + 1
-  hl0 = H*EL0
-  SELECT CASE (MITer)
+  nje_com = nje_com + 1
+  hl0 = h_com*el0_com
+  SELECT CASE (miter_com)
     CASE (2)
       ! IF MITER = 2, MAKE N CALLS TO F TO APPROXIMATE J. --------------------
-      fac = VNWRMS(N,Savf,Ewt)
-      r0 = 1000.0E0*ABS(H)*UROund*N*fac
+      fac = VNWRMS(n_com,Savf,Ewt)
+      r0 = 1000.0E0*ABS(h_com)*uround_com*n_com*fac
       IF ( r0==0.0E0 ) r0 = 1.0E0
       srur = Wm(1)
       j1 = 2
-      DO j = 1, N
+      DO j = 1, n_com
         yj = Y(j)
         r = MAX(srur*ABS(yj),r0*Ewt(j))
         Y(j) = Y(j) + r
         fac = -hl0/r
-        CALL F(TN,Y,Ftem)
-        DO i = 1, N
+        CALL F(tn_com,Y,Ftem)
+        DO i = 1, n_com
           Wm(i+j1) = (Ftem(i)-Savf(i))*fac
         END DO
         Y(j) = yj
-        j1 = j1 + N
+        j1 = j1 + n_com
       END DO
-      NFE = NFE + N
+      nfe_com = nfe_com + n_com
     CASE (3)
       ! IF MITER = 3, CONSTRUCT A DIAGONAL APPROXIMATION TO J AND P. ---------
       Wm(2) = hl0
-      IER = 0
-      r = EL0*0.1E0
-      DO i = 1, N
-        Y(i) = Y(i) + r*(H*Savf(i)-Yh(i,2))
+      ier_com = 0
+      r = el0_com*0.1E0
+      DO i = 1, n_com
+        Y(i) = Y(i) + r*(h_com*Savf(i)-Yh(i,2))
       END DO
-      CALL F(TN,Y,Wm(3:Neq+2))
-      NFE = NFE + 1
-      DO i = 1, N
-        r0 = H*Savf(i) - Yh(i,2)
-        di = 0.1E0*r0 - H*(Wm(i+2)-Savf(i))
+      CALL F(tn_com,Y,Wm(3:Neq+2))
+      nfe_com = nfe_com + 1
+      DO i = 1, n_com
+        r0 = h_com*Savf(i) - Yh(i,2)
+        di = 0.1E0*r0 - h_com*(Wm(i+2)-Savf(i))
         Wm(i+2) = 1.0E0
-        IF ( ABS(r0)>=UROund*Ewt(i) ) THEN
+        IF ( ABS(r0)>=uround_com*Ewt(i) ) THEN
           IF ( ABS(di)==0.0E0 ) GOTO 100
           Wm(i+2) = 0.1E0*r0/di
         END IF
@@ -130,11 +131,11 @@ SUBROUTINE PJAC(Neq,Y,Yh,Nyh,Ewt,Ftem,Savf,Wm,Iwm,F,JAC)
       ml3 = 3
       mband = ml + mu + 1
       meband = 2*ml + mu + 1
-      ALLOCATE( pd(meband,N) )
+      ALLOCATE( pd(meband,n_com) )
       pd = 0.E0
-      CALL JAC(TN,Y,pd,meband)
+      CALL JAC(tn_com,Y,pd,meband)
       con = -hl0
-      DO j = 1, N
+      DO j = 1, n_com
         DO i = 1, meband
           Wm( 2+(j-1)*meband+i ) = pd(i,j)*con
         END DO
@@ -145,65 +146,65 @@ SUBROUTINE PJAC(Neq,Y,Yh,Nyh,Ewt,Ftem,Savf,Wm,Iwm,F,JAC)
       ml = Iwm(1)
       mu = Iwm(2)
       mband = ml + mu + 1
-      mba = MIN(mband,N)
+      mba = MIN(mband,n_com)
       meband = mband + ml
       meb1 = meband - 1
       srur = Wm(1)
-      fac = VNWRMS(N,Savf,Ewt)
-      r0 = 1000.0E0*ABS(H)*UROund*N*fac
+      fac = VNWRMS(n_com,Savf,Ewt)
+      r0 = 1000.0E0*ABS(h_com)*uround_com*n_com*fac
       IF ( r0==0.0E0 ) r0 = 1.0E0
       DO j = 1, mba
-        DO i = j, N, mband
+        DO i = j, n_com, mband
           yi = Y(i)
           r = MAX(srur*ABS(yi),r0*Ewt(i))
           Y(i) = Y(i) + r
         END DO
-        CALL F(TN,Y,Ftem)
-        DO jj = j, N, mband
+        CALL F(tn_com,Y,Ftem)
+        DO jj = j, n_com, mband
           Y(jj) = Yh(jj,1)
           yjj = Y(jj)
           r = MAX(srur*ABS(yjj),r0*Ewt(jj))
           fac = -hl0/r
           i1 = MAX(jj-mu,1)
-          i2 = MIN(jj+ml,N)
+          i2 = MIN(jj+ml,n_com)
           ii = jj*meb1 - ml + 2
           DO i = i1, i2
             Wm(ii+i) = (Ftem(i)-Savf(i))*fac
           END DO
         END DO
       END DO
-      NFE = NFE + mba
+      nfe_com = nfe_com + mba
       GOTO 200
     CASE DEFAULT
       ! IF MITER = 1, CALL JAC AND MULTIPLY BY SCALAR. -----------------------
-      ALLOCATE( pd(N,N) )
+      ALLOCATE( pd(n_com,n_com) )
       pd = 0.E0
-      CALL JAC(TN,Y,pd,N)
+      CALL JAC(tn_com,Y,pd,n_com)
       con = -hl0
-      DO j = 1, N
-        DO i = 1, N
-          Wm( 2+(j-1)*N+i ) = pd(i,j)*con
+      DO j = 1, n_com
+        DO i = 1, n_com
+          Wm( 2+(j-1)*n_com+i ) = pd(i,j)*con
         END DO
       END DO
   END SELECT
   ! ADD IDENTITY MATRIX. -------------------------------------------------
   j = 3
-  DO i = 1, N
+  DO i = 1, n_com
     Wm(j) = Wm(j) + 1.0E0
-    j = j + (N+1)
+    j = j + (n_com+1)
   END DO
   ! DO LU DECOMPOSITION ON P. --------------------------------------------
-  CALL SGEFA(Wm(3:N**2+2),N,N,Iwm(21:N+20),IER)
+  CALL SGEFA(Wm(3:n_com**2+2),n_com,n_com,Iwm(21:n_com+20),ier_com)
   RETURN
-  100  IER = -1
+  100  ier_com = -1
   RETURN
   ! ADD IDENTITY MATRIX. -------------------------------------------------
   200  ii = mband + 2
-  DO i = 1, N
+  DO i = 1, n_com
     Wm(ii) = Wm(ii) + 1.0E0
     ii = ii + meband
   END DO
   ! DO LU DECOMPOSITION OF P. --------------------------------------------
-  CALL SGBFA(Wm(3:meband*N+2),meband,N,ml,mu,Iwm(21:N+20),IER)
+  CALL SGBFA(Wm(3:meband*n_com+2),meband,n_com,ml,mu,Iwm(21:n_com+20),ier_com)
   !----------------------- END OF SUBROUTINE PJAC -----------------------
 END SUBROUTINE PJAC

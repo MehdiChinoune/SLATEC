@@ -19,7 +19,7 @@ REAL FUNCTION BCRH(Xll,Xrr,Iz,C,A,Bh,F,Sgn)
   !   801001  DATE WRITTEN
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
-  USE CCBLK, ONLY : CNV
+  USE CCBLK, ONLY : cnv_com
   INTERFACE
     REAL FUNCTION F(X,Iz,C,A,Bh)
       INTEGER :: Iz
@@ -44,7 +44,7 @@ REAL FUNCTION BCRH(Xll,Xrr,Iz,C,A,Bh,F,Sgn)
     xr = x
   END IF
   dx = .5*dx
-  IF ( dx>CNV ) GOTO 100
+  IF ( dx>cnv_com ) GOTO 100
   BCRH = .5*(xl+xr)
   RETURN
 END FUNCTION BCRH

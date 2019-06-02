@@ -339,7 +339,7 @@ CONTAINS
     !   901014  Made editorial changes and added correct result to
     !           output. (RWC)
     !   910708  Minor modifications in use of KPRINT.  (WRB)
-    USE DSAVEX, ONLY : XSAve
+    USE DSAVEX, ONLY : xsave_com
     USE slatec, ONLY : DBVSUP
     USE common_mod, ONLY : PASS
     INTEGER i, iflag, igofx, Ipass, ipss, j, kont, kount, Kprint, l, &
@@ -377,7 +377,7 @@ CONTAINS
     END DO
     !
     tol = 1.0D-03
-    XSAve = 0.0D+00
+    xsave_com = 0.0D+00
     nrowy = 4
     ncomp = 2
     nxpts = 15

@@ -92,9 +92,11 @@ SUBROUTINE DSTOD(Neq,Y,Yh,Nyh,Yh1,Ewt,Savf,Acor,Wm,Iwm,DF,DJAC)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
   !   920422  Changed DIMENSION statement.  (WRB)
-  USE DDEBD1, ONLY : CONit, CRAte, EL, ELCo, HOLd, RC, RMAx, TESco, EL0, H, HMIn, &
-    HMXi, HU, TN, KSTeps, IALth, IPUp, LMAx, MEO, NQNyh, NSTepj, IER, JSTart, &
-    KFLag, L, METh, MITer, MAXord, N, NQ, NST, NFE, NQU
+  USE DDEBD1, ONLY : conit_com, crate_com, el_com, elco_com, hold_com, rc_com, &
+    rmax_com, tesco_com, el0_com, h_com, hmin_com, hmxi_com, hu_com, tn_com, &
+    ksteps_com, ialth_com, ipup_com, lmax_com, meo_com, nqnyh_com, nstepj_com, &
+    ier_com, jstart_com, kflag_com, l_com, meth_com, miter_com, maxord_com, n_com, &
+    nq_com, nst_com, nfe_com, nqu_com
   !
   INTERFACE
     SUBROUTINE DF(X,U,Uprime)
@@ -109,8 +111,8 @@ SUBROUTINE DSTOD(Neq,Y,Yh,Nyh,Yh1,Ewt,Savf,Acor,Wm,Iwm,DF,DJAC)
   END INTERFACE
   INTEGER :: Neq, Nyh
   INTEGER :: Iwm(:)
-  REAL(8) :: Acor(N), Ewt(N), Savf(N), Wm(:), Y(N), Yh(Nyh,MAXord+1), &
-    Yh1(Nyh*MAXord+Nyh)
+  REAL(8) :: Acor(n_com), Ewt(n_com), Savf(n_com), Wm(:), Y(n_com), Yh(Nyh,maxord_com+1), &
+    Yh1(Nyh*maxord_com+Nyh)
   INTEGER :: i, i1, iredo, iret, j, jb, m, ncf, newq
   REAL(8) :: dcon, ddn, del, delp, dsm, dup, exdn, exsm, exup, r, rh, rhdn, &
     rhsm, rhup, told
@@ -118,11 +120,11 @@ SUBROUTINE DSTOD(Neq,Y,Yh,Nyh,Yh1,Ewt,Savf,Acor,Wm,Iwm,DF,DJAC)
   !     BEGIN BLOCK PERMITTING ...EXITS TO 690
   !        BEGIN BLOCK PERMITTING ...EXITS TO 60
   !* FIRST EXECUTABLE STATEMENT  DSTOD
-  KFLag = 0
-  told = TN
+  kflag_com = 0
+  told = tn_com
   ncf = 0
-  IF ( JSTart>0 ) GOTO 400
-  IF ( JSTart==-1 ) THEN
+  IF ( jstart_com>0 ) GOTO 400
+  IF ( jstart_com==-1 ) THEN
     !              BEGIN BLOCK PERMITTING ...EXITS TO 30
     !                 ------------------------------------------------------
     !                  THE FOLLOWING BLOCK HANDLES PRELIMINARIES NEEDED WHEN
@@ -139,45 +141,45 @@ SUBROUTINE DSTOD(Neq,Y,Yh,Nyh,Yh1,Ewt,Savf,Acor,Wm,Iwm,DF,DJAC)
     !                  RESET TO L = NQ + 1 TO PREVENT FURTHER CHANGES IN H
     !                  FOR THAT MANY STEPS.
     !                 ------------------------------------------------------
-    IPUp = MITer
-    LMAx = MAXord + 1
-    IF ( IALth==1 ) IALth = 2
-    IF ( METh/=MEO ) THEN
-      CALL DCFOD(METh,ELCo,TESco)
-      MEO = METh
+    ipup_com = miter_com
+    lmax_com = maxord_com + 1
+    IF ( ialth_com==1 ) ialth_com = 2
+    IF ( meth_com/=meo_com ) THEN
+      CALL DCFOD(meth_com,elco_com,tesco_com)
+      meo_com = meth_com
       !              ......EXIT
-      IF ( NQ<=MAXord ) THEN
-        IALth = L
+      IF ( nq_com<=maxord_com ) THEN
+        ialth_com = l_com
         iret = 1
         !        ............EXIT
         GOTO 100
       END IF
-    ELSEIF ( NQ<=MAXord ) THEN
+    ELSEIF ( nq_com<=maxord_com ) THEN
       GOTO 200
     END IF
-    NQ = MAXord
-    L = LMAx
-    DO i = 1, L
-      EL(i) = ELCo(i,NQ)
+    nq_com = maxord_com
+    l_com = lmax_com
+    DO i = 1, l_com
+      el_com(i) = elco_com(i,nq_com)
     END DO
-    NQNyh = NQ*Nyh
-    RC = RC*EL(1)/EL0
-    EL0 = EL(1)
-    CONit = 0.5D0/(NQ+2)
-    ddn = DVNRMS(N,Savf,Ewt)/TESco(1,L)
-    exdn = 1.0D0/L
+    nqnyh_com = nq_com*Nyh
+    rc_com = rc_com*el_com(1)/el0_com
+    el0_com = el_com(1)
+    conit_com = 0.5D0/(nq_com+2)
+    ddn = DVNRMS(n_com,Savf,Ewt)/tesco_com(1,l_com)
+    exdn = 1.0D0/l_com
     rhdn = 1.0D0/(1.3D0*ddn**exdn+0.0000013D0)
     rh = MIN(rhdn,1.0D0)
     iredo = 3
-    IF ( H==HOLd ) THEN
-      rh = MAX(rh,HMIn/ABS(H))
+    IF ( h_com==hold_com ) THEN
+      rh = MAX(rh,hmin_com/ABS(h_com))
     ELSE
-      rh = MIN(rh,ABS(H/HOLd))
-      H = HOLd
+      rh = MIN(rh,ABS(h_com/hold_com))
+      h_com = hold_com
     END IF
     GOTO 300
   ELSE
-    IF ( JSTart==-2 ) GOTO 200
+    IF ( jstart_com==-2 ) GOTO 200
     !              ---------------------------------------------------------
     !               ON THE FIRST CALL, THE ORDER IS SET TO 1, AND OTHER
     !               VARIABLES ARE INITIALIZED.  RMAX IS THE MAXIMUM RATIO BY
@@ -187,18 +189,18 @@ SUBROUTINE DSTOD(Neq,Y,Yh,Nyh,Yh1,Ewt,Savf,Acor,Wm,Iwm,DF,DJAC)
     !               (IN CORRECTOR CONVERGENCE OR ERROR TEST), RMAX IS SET AT
     !               2 FOR THE NEXT INCREASE.
     !              ---------------------------------------------------------
-    LMAx = MAXord + 1
-    NQ = 1
-    L = 2
-    IALth = 2
-    RMAx = 10000.0D0
-    RC = 0.0D0
-    EL0 = 1.0D0
-    CRAte = 0.7D0
+    lmax_com = maxord_com + 1
+    nq_com = 1
+    l_com = 2
+    ialth_com = 2
+    rmax_com = 10000.0D0
+    rc_com = 0.0D0
+    el0_com = 1.0D0
+    crate_com = 0.7D0
     delp = 0.0D0
-    HOLd = H
-    MEO = METh
-    NSTepj = 0
+    hold_com = h_com
+    meo_com = meth_com
+    nstepj_com = 0
     iret = 3
     !           ------------------------------------------------------------
     !            DCFOD  IS CALLED TO GET ALL THE INTEGRATION COEFFICIENTS
@@ -206,20 +208,20 @@ SUBROUTINE DSTOD(Neq,Y,Yh,Nyh,Yh1,Ewt,Savf,Acor,Wm,Iwm,DF,DJAC)
     !            CONSTANTS ARE RESET WHENEVER THE ORDER NQ IS CHANGED, OR AT
     !            THE START OF THE PROBLEM.
     !           ------------------------------------------------------------
-    CALL DCFOD(METh,ELCo,TESco)
+    CALL DCFOD(meth_com,elco_com,tesco_com)
   END IF
   !           BEGIN BLOCK PERMITTING ...EXITS TO 680
   100 CONTINUE
-  DO i = 1, L
-    EL(i) = ELCo(i,NQ)
+  DO i = 1, l_com
+    el_com(i) = elco_com(i,nq_com)
   END DO
-  NQNyh = NQ*Nyh
-  RC = RC*EL(1)/EL0
-  EL0 = EL(1)
-  CONit = 0.5D0/(NQ+2)
+  nqnyh_com = nq_com*Nyh
+  rc_com = rc_com*el_com(1)/el0_com
+  el0_com = el_com(1)
+  conit_com = 0.5D0/(nq_com+2)
   SELECT CASE (iret)
     CASE (2)
-      rh = MAX(rh,HMIn/ABS(H))
+      rh = MAX(rh,hmin_com/ABS(h_com))
       GOTO 300
     CASE (3)
       GOTO 400
@@ -233,26 +235,26 @@ SUBROUTINE DSTOD(Neq,Y,Yh,Nyh,Yh1,Ewt,Savf,Acor,Wm,Iwm,DF,DJAC)
   !               FAILURE.
   !              ---------------------------------------------------------
   200 CONTINUE
-  IF ( H==HOLd ) GOTO 400
-  rh = H/HOLd
-  H = HOLd
+  IF ( h_com==hold_com ) GOTO 400
+  rh = h_com/hold_com
+  h_com = hold_com
   iredo = 3
-  300  rh = MIN(rh,RMAx)
-  rh = rh/MAX(1.0D0,ABS(H)*HMXi*rh)
+  300  rh = MIN(rh,rmax_com)
+  rh = rh/MAX(1.0D0,ABS(h_com)*hmxi_com*rh)
   r = 1.0D0
-  DO j = 2, L
+  DO j = 2, l_com
     r = r*rh
-    DO i = 1, N
+    DO i = 1, n_com
       Yh(i,j) = Yh(i,j)*r
     END DO
   END DO
-  H = H*rh
-  RC = RC*rh
-  IALth = L
+  h_com = h_com*rh
+  rc_com = rc_com*rh
+  ialth_com = l_com
   IF ( iredo==0 ) THEN
-    RMAx = 10.0D0
-    r = 1.0D0/TESco(2,NQU)
-    DO i = 1, N
+    rmax_com = 10.0D0
+    r = 1.0D0/tesco_com(2,nqu_com)
+    DO i = 1, n_com
       Acor(i) = Acor(i)*r
     END DO
     !     ...............EXIT
@@ -271,17 +273,17 @@ SUBROUTINE DSTOD(Neq,Y,Yh,Nyh,Yh1,Ewt,Savf,Acor,Wm,Iwm,DF,DJAC)
   !                    BEGIN BLOCK PERMITTING ...EXITS TO 610
   !                       BEGIN BLOCK PERMITTING ...EXITS TO 490
   400 CONTINUE
-  IF ( ABS(RC-1.0D0)>0.3D0 ) IPUp = MITer
-  IF ( NST>=NSTepj+20 ) IPUp = MITer
-  TN = TN + H
-  i1 = NQNyh + 1
-  DO jb = 1, NQ
+  IF ( ABS(rc_com-1.0D0)>0.3D0 ) ipup_com = miter_com
+  IF ( nst_com>=nstepj_com+20 ) ipup_com = miter_com
+  tn_com = tn_com + h_com
+  i1 = nqnyh_com + 1
+  DO jb = 1, nq_com
     i1 = i1 - Nyh
-    DO i = i1, NQNyh
+    DO i = i1, nqnyh_com
       Yh1(i) = Yh1(i) + Yh1(i+Nyh)
     END DO
   END DO
-  KSTeps = KSTeps + 1
+  ksteps_com = ksteps_com + 1
   !                          ---------------------------------------------
   !                           UP TO 3 CORRECTOR ITERATIONS ARE TAKEN.  A
   !                           CONVERGENCE TEST IS MADE ON THE R.M.S. NORM
@@ -292,12 +294,12 @@ SUBROUTINE DSTOD(Neq,Y,Yh,Nyh,Yh1,Ewt,Savf,Acor,Wm,Iwm,DF,DJAC)
   !                           CORRECTOR LOOP.
   !                          ---------------------------------------------
   500  m = 0
-  DO i = 1, N
+  DO i = 1, n_com
     Y(i) = Yh(i,1)
   END DO
-  CALL DF(TN,Y,Savf)
-  NFE = NFE + 1
-  IF ( IPUp>0 ) THEN
+  CALL DF(tn_com,Y,Savf)
+  nfe_com = nfe_com + 1
+  IF ( ipup_com>0 ) THEN
     !                                ---------------------------------------
     !                                 IF INDICATED, THE MATRIX P = I -
     !                                 H*EL(1)*J IS REEVALUATED AND
@@ -306,19 +308,19 @@ SUBROUTINE DSTOD(Neq,Y,Yh,Nyh,Yh1,Ewt,Savf,Acor,Wm,Iwm,DF,DJAC)
     !                                 AS AN INDICATOR THAT THIS HAS BEEN
     !                                 DONE.
     !                                ---------------------------------------
-    IPUp = 0
-    RC = 1.0D0
-    NSTepj = NST
-    CRAte = 0.7D0
+    ipup_com = 0
+    rc_com = 1.0D0
+    nstepj_com = nst_com
+    crate_com = 0.7D0
     CALL DPJAC(Neq,Y,Yh,Nyh,Ewt,Acor,Savf,Wm,Iwm,DF,DJAC)
     !                          ......EXIT
-    IF ( IER/=0 ) GOTO 800
+    IF ( ier_com/=0 ) GOTO 800
   END IF
-  DO i = 1, N
+  DO i = 1, n_com
     Acor(i) = 0.0D0
   END DO
   600 CONTINUE
-  IF ( MITer/=0 ) THEN
+  IF ( miter_com/=0 ) THEN
     !                                   ------------------------------------
     !                                    IN THE CASE OF THE CHORD METHOD,
     !                                    COMPUTE THE CORRECTOR ERROR, AND
@@ -326,16 +328,16 @@ SUBROUTINE DSTOD(Neq,Y,Yh,Nyh,Yh1,Ewt,Savf,Acor,Wm,Iwm,DF,DJAC)
     !                                    AS RIGHT-HAND SIDE AND P AS
     !                                    COEFFICIENT MATRIX.
     !                                   ------------------------------------
-    DO i = 1, N
-      Y(i) = H*Savf(i) - (Yh(i,2)+Acor(i))
+    DO i = 1, n_com
+      Y(i) = h_com*Savf(i) - (Yh(i,2)+Acor(i))
     END DO
     CALL DSLVS(Wm,Iwm,Y)
     !                             ......EXIT
-    IF ( IER/=0 ) GOTO 700
-    del = DVNRMS(N,Y,Ewt)
-    DO i = 1, N
+    IF ( ier_com/=0 ) GOTO 700
+    del = DVNRMS(n_com,Y,Ewt)
+    DO i = 1, n_com
       Acor(i) = Acor(i) + Y(i)
-      Y(i) = Yh(i,1) + EL(1)*Acor(i)
+      Y(i) = Yh(i,1) + el_com(1)*Acor(i)
     END DO
   ELSE
     !                                   ------------------------------------
@@ -344,13 +346,13 @@ SUBROUTINE DSTOD(Neq,Y,Yh,Nyh,Yh1,Ewt,Savf,Acor,Wm,Iwm,DF,DJAC)
     !                                    THE RESULT OF THE LAST FUNCTION
     !                                    EVALUATION.
     !                                   ------------------------------------
-    DO i = 1, N
-      Savf(i) = H*Savf(i) - Yh(i,2)
+    DO i = 1, n_com
+      Savf(i) = h_com*Savf(i) - Yh(i,2)
       Y(i) = Savf(i) - Acor(i)
     END DO
-    del = DVNRMS(N,Y,Ewt)
-    DO i = 1, N
-      Y(i) = Yh(i,1) + EL(1)*Savf(i)
+    del = DVNRMS(n_com,Y,Ewt)
+    DO i = 1, n_com
+      Y(i) = Yh(i,1) + el_com(1)*Savf(i)
       Acor(i) = Savf(i)
     END DO
   END IF
@@ -360,8 +362,8 @@ SUBROUTINE DSTOD(Neq,Y,Yh,Nyh,Yh1,Ewt,Savf,Acor,Wm,Iwm,DF,DJAC)
   !                                 CONSTANT IS STORED IN CRATE, AND THIS
   !                                 IS USED IN THE TEST.
   !                                ---------------------------------------
-  IF ( m/=0 ) CRAte = MAX(0.2D0*CRAte,del/delp)
-  dcon = del*MIN(1.0D0,1.5D0*CRAte)/(TESco(2,NQ)*CONit)
+  IF ( m/=0 ) crate_com = MAX(0.2D0*crate_com,del/delp)
+  dcon = del*MIN(1.0D0,1.5D0*crate_com)/(tesco_com(2,nq_com)*conit_com)
   IF ( dcon>1.0D0 ) THEN
     m = m + 1
     !                             ...EXIT
@@ -369,8 +371,8 @@ SUBROUTINE DSTOD(Neq,Y,Yh,Nyh,Yh1,Ewt,Savf,Acor,Wm,Iwm,DF,DJAC)
       !                             ...EXIT
       IF ( m<2.OR.del<=2.0D0*delp ) THEN
         delp = del
-        CALL DF(TN,Y,Savf)
-        NFE = NFE + 1
+        CALL DF(tn_com,Y,Savf)
+        nfe_com = nfe_com + 1
         GOTO 600
       END IF
     END IF
@@ -384,9 +386,9 @@ SUBROUTINE DSTOD(Neq,Y,Yh,Nyh,Yh1,Ewt,Savf,Acor,Wm,Iwm,DF,DJAC)
     !                                    PASSES TO STATEMENT 500 IF IT
     !                                    FAILS.
     !                                   ------------------------------------
-    IF ( MITer/=0 ) IPUp = -1
-    IF ( m==0 ) dsm = del/TESco(2,NQ)
-    IF ( m>0 ) dsm = DVNRMS(N,Acor,Ewt)/TESco(2,NQ)
+    IF ( miter_com/=0 ) ipup_com = -1
+    IF ( m==0 ) dsm = del/tesco_com(2,nq_com)
+    IF ( m>0 ) dsm = DVNRMS(n_com,Acor,Ewt)/tesco_com(2,nq_com)
     IF ( dsm>1.0D0 ) THEN
       !                                   ------------------------------------
       !                                    THE ERROR TEST FAILED.  KFLAG KEEPS
@@ -399,28 +401,28 @@ SUBROUTINE DSTOD(Neq,Y,Yh,Nyh,Yh1,Ewt,Savf,Acor,Wm,Iwm,DF,DJAC)
       !                                    FAILURES, H IS FORCED TO DECREASE
       !                                    BY A FACTOR OF 0.2 OR LESS.
       !                                   ------------------------------------
-      KFLag = KFLag - 1
-      TN = told
-      i1 = NQNyh + 1
-      DO jb = 1, NQ
+      kflag_com = kflag_com - 1
+      tn_com = told
+      i1 = nqnyh_com + 1
+      DO jb = 1, nq_com
         i1 = i1 - Nyh
-        DO i = i1, NQNyh
+        DO i = i1, nqnyh_com
           Yh1(i) = Yh1(i) - Yh1(i+Nyh)
         END DO
       END DO
-      RMAx = 2.0D0
-      IF ( ABS(H)<=HMIn*1.00001D0 ) THEN
+      rmax_com = 2.0D0
+      IF ( ABS(h_com)<=hmin_com*1.00001D0 ) THEN
         !                                      ---------------------------------
         !                                       ALL RETURNS ARE MADE THROUGH
         !                                       THIS SECTION.  H IS SAVED IN
         !                                       HOLD TO ALLOW THE CALLER TO
         !                                       CHANGE H ON THE NEXT STEP.
         !                                      ---------------------------------
-        KFLag = -1
+        kflag_com = -1
         !     .................................EXIT
         GOTO 1000
         !                    ...............EXIT
-      ELSEIF ( KFLag>-3 ) THEN
+      ELSEIF ( kflag_com>-3 ) THEN
         iredo = 2
         rhup = 0.0D0
         !                       ............EXIT
@@ -436,24 +438,24 @@ SUBROUTINE DSTOD(Neq,Y,Yh,Nyh,Yh1,Ewt,Savf,Acor,Wm,Iwm,DF,DJAC)
         !                     STEP IS RETRIED, UNTIL IT SUCCEEDS OR H REACHES
         !                     HMIN.
         !                    ---------------------------------------------------
-      ELSEIF ( KFLag/=-10 ) THEN
+      ELSEIF ( kflag_com/=-10 ) THEN
         rh = 0.1D0
-        rh = MAX(HMIn/ABS(H),rh)
-        H = H*rh
-        DO i = 1, N
+        rh = MAX(hmin_com/ABS(h_com),rh)
+        h_com = h_com*rh
+        DO i = 1, n_com
           Y(i) = Yh(i,1)
         END DO
-        CALL DF(TN,Y,Savf)
-        NFE = NFE + 1
-        DO i = 1, N
-          Yh(i,2) = H*Savf(i)
+        CALL DF(tn_com,Y,Savf)
+        nfe_com = nfe_com + 1
+        DO i = 1, n_com
+          Yh(i,2) = h_com*Savf(i)
         END DO
-        IPUp = MITer
-        IALth = 5
+        ipup_com = miter_com
+        ialth_com = 5
         !              ......EXIT
-        IF ( NQ==1 ) GOTO 400
-        NQ = 1
-        L = 2
+        IF ( nq_com==1 ) GOTO 400
+        nq_com = 1
+        l_com = 2
         iret = 3
         GOTO 100
       ELSE
@@ -462,7 +464,7 @@ SUBROUTINE DSTOD(Neq,Y,Yh,Nyh,Yh1,Ewt,Savf,Acor,Wm,Iwm,DF,DJAC)
         !                        IS SAVED IN HOLD TO ALLOW THE CALLER TO CHANGE
         !                        H ON THE NEXT STEP.
         !                       ------------------------------------------------
-        KFLag = -1
+        kflag_com = -1
         !     ..................EXIT
         GOTO 1000
       END IF
@@ -488,29 +490,29 @@ SUBROUTINE DSTOD(Neq,Y,Yh,Nyh,Yh1,Ewt,Savf,Acor,Wm,Iwm,DF,DJAC)
       !                                          3 TO PREVENT TESTING FOR THAT
       !                                          MANY STEPS.
       !                                         ------------------------------
-      KFLag = 0
+      kflag_com = 0
       iredo = 0
-      NST = NST + 1
-      HU = H
-      NQU = NQ
-      DO j = 1, L
-        DO i = 1, N
-          Yh(i,j) = Yh(i,j) + EL(j)*Acor(i)
+      nst_com = nst_com + 1
+      hu_com = h_com
+      nqu_com = nq_com
+      DO j = 1, l_com
+        DO i = 1, n_com
+          Yh(i,j) = Yh(i,j) + el_com(j)*Acor(i)
         END DO
       END DO
-      IALth = IALth - 1
-      IF ( IALth/=0 ) THEN
+      ialth_com = ialth_com - 1
+      IF ( ialth_com/=0 ) THEN
         !                                      ...EXIT
-        IF ( IALth<=1 ) THEN
+        IF ( ialth_com<=1 ) THEN
           !                                      ...EXIT
-          IF ( L/=LMAx ) THEN
-            DO i = 1, N
-              Yh(i,LMAx) = Acor(i)
+          IF ( l_com/=lmax_com ) THEN
+            DO i = 1, n_com
+              Yh(i,lmax_com) = Acor(i)
             END DO
           END IF
         END IF
-        r = 1.0D0/TESco(2,NQU)
-        DO i = 1, N
+        r = 1.0D0/tesco_com(2,nqu_com)
+        DO i = 1, n_com
           Acor(i) = Acor(i)*r
         END DO
         !     .................................EXIT
@@ -537,12 +539,12 @@ SUBROUTINE DSTOD(Neq,Y,Yh,Nyh,Yh1,Ewt,Savf,Acor,Wm,Iwm,DF,DJAC)
         !                                            ---------------------------
         rhup = 0.0D0
         !                       .....................EXIT
-        IF ( L/=LMAx ) THEN
-          DO i = 1, N
-            Savf(i) = Acor(i) - Yh(i,LMAx)
+        IF ( l_com/=lmax_com ) THEN
+          DO i = 1, n_com
+            Savf(i) = Acor(i) - Yh(i,lmax_com)
           END DO
-          dup = DVNRMS(N,Savf,Ewt)/TESco(3,NQ)
-          exup = 1.0D0/(L+1)
+          dup = DVNRMS(n_com,Savf,Ewt)/tesco_com(3,nq_com)
+          exup = 1.0D0/(l_com+1)
           !                       .....................EXIT
           rhup = 1.0D0/(1.4D0*dup**exup+0.0000014D0)
         END IF
@@ -563,58 +565,58 @@ SUBROUTINE DSTOD(Neq,Y,Yh,Nyh,Yh1,Ewt,Savf,Acor,Wm,Iwm,DF,DJAC)
   !                             ------------------------------------------
   !                          ...EXIT
   700 CONTINUE
-  IF ( IPUp/=0 ) THEN
-    IPUp = MITer
+  IF ( ipup_com/=0 ) THEN
+    ipup_com = miter_com
     GOTO 500
   END IF
-  800  TN = told
+  800  tn_com = told
   ncf = ncf + 1
-  RMAx = 2.0D0
-  i1 = NQNyh + 1
-  DO jb = 1, NQ
+  rmax_com = 2.0D0
+  i1 = nqnyh_com + 1
+  DO jb = 1, nq_com
     i1 = i1 - Nyh
-    DO i = i1, NQNyh
+    DO i = i1, nqnyh_com
       Yh1(i) = Yh1(i) - Yh1(i+Nyh)
     END DO
   END DO
-  IF ( ABS(H)<=HMIn*1.00001D0 ) THEN
-    KFLag = -2
+  IF ( ABS(h_com)<=hmin_com*1.00001D0 ) THEN
+    kflag_com = -2
     !     ........................EXIT
     GOTO 1000
   ELSEIF ( ncf/=10 ) THEN
     rh = 0.25D0
-    IPUp = MITer
+    ipup_com = miter_com
     iredo = 1
     !                 .........EXIT
-    rh = MAX(rh,HMIn/ABS(H))
+    rh = MAX(rh,hmin_com/ABS(h_com))
     GOTO 300
   ELSE
-    KFLag = -2
+    kflag_com = -2
     !     ........................EXIT
     GOTO 1000
   END IF
-  900  exsm = 1.0D0/L
+  900  exsm = 1.0D0/l_com
   rhsm = 1.0D0/(1.2D0*dsm**exsm+0.0000012D0)
   rhdn = 0.0D0
-  IF ( NQ/=1 ) THEN
-    ddn = DVNRMS(N,Yh(:,L),Ewt)/TESco(1,NQ)
-    exdn = 1.0D0/NQ
+  IF ( nq_com/=1 ) THEN
+    ddn = DVNRMS(n_com,Yh(:,l_com),Ewt)/tesco_com(1,nq_com)
+    exdn = 1.0D0/nq_com
     rhdn = 1.0D0/(1.3D0*ddn**exdn+0.0000013D0)
   END IF
   IF ( rhsm>=rhup ) THEN
     IF ( rhsm>=rhdn ) THEN
-      newq = NQ
+      newq = nq_com
       rh = rhsm
-      IF ( KFLag==0.AND.rh<1.1D0 ) THEN
-        IALth = 3
-        r = 1.0D0/TESco(2,NQU)
-        DO i = 1, N
+      IF ( kflag_com==0.AND.rh<1.1D0 ) THEN
+        ialth_com = 3
+        r = 1.0D0/tesco_com(2,nqu_com)
+        DO i = 1, n_com
           Acor(i) = Acor(i)*r
         END DO
         !     .....................EXIT
         GOTO 1000
       ELSE
-        IF ( KFLag<=-2 ) rh = MIN(rh,0.2D0)
+        IF ( kflag_com<=-2 ) rh = MIN(rh,0.2D0)
         !                             ------------------------------------------
         !                              IF THERE IS A CHANGE OF ORDER, RESET NQ,
         !                              L, AND THE COEFFICIENTS.  IN ANY CASE H
@@ -623,12 +625,12 @@ SUBROUTINE DSTOD(Neq,Y,Yh,Nyh,Yh1,Ewt,Savf,Acor,Wm,Iwm,DF,DJAC)
         !                              STEP WAS OK, OR REDO THE STEP OTHERWISE.
         !                             ------------------------------------------
         !                 ............EXIT
-        IF ( newq==NQ ) THEN
-          rh = MAX(rh,HMIn/ABS(H))
+        IF ( newq==nq_com ) THEN
+          rh = MAX(rh,hmin_com/ABS(h_com))
           GOTO 300
         ELSE
-          NQ = newq
-          L = NQ + 1
+          nq_com = newq
+          l_com = nq_com + 1
           iret = 2
           !           ..................EXIT
           GOTO 100
@@ -636,40 +638,40 @@ SUBROUTINE DSTOD(Neq,Y,Yh,Nyh,Yh1,Ewt,Savf,Acor,Wm,Iwm,DF,DJAC)
       END IF
     END IF
   ELSEIF ( rhup>rhdn ) THEN
-    newq = L
+    newq = l_com
     rh = rhup
     IF ( rh>=1.1D0 ) THEN
-      r = EL(L)/L
-      DO i = 1, N
+      r = el_com(l_com)/l_com
+      DO i = 1, n_com
         Yh(i,newq+1) = Acor(i)*r
       END DO
-      NQ = newq
-      L = NQ + 1
+      nq_com = newq
+      l_com = nq_com + 1
       iret = 2
       !           ..................EXIT
       GOTO 100
     ELSE
-      IALth = 3
-      r = 1.0D0/TESco(2,NQU)
-      DO i = 1, N
+      ialth_com = 3
+      r = 1.0D0/tesco_com(2,nqu_com)
+      DO i = 1, n_com
         Acor(i) = Acor(i)*r
       END DO
       !     ...........................EXIT
       GOTO 1000
     END IF
   END IF
-  newq = NQ - 1
+  newq = nq_com - 1
   rh = rhdn
-  IF ( KFLag<0.AND.rh>1.0D0 ) rh = 1.0D0
-  IF ( KFLag==0.AND.rh<1.1D0 ) THEN
-    IALth = 3
-    r = 1.0D0/TESco(2,NQU)
-    DO i = 1, N
+  IF ( kflag_com<0.AND.rh>1.0D0 ) rh = 1.0D0
+  IF ( kflag_com==0.AND.rh<1.1D0 ) THEN
+    ialth_com = 3
+    r = 1.0D0/tesco_com(2,nqu_com)
+    DO i = 1, n_com
       Acor(i) = Acor(i)*r
       !     ..................EXIT
     END DO
   ELSE
-    IF ( KFLag<=-2 ) rh = MIN(rh,0.2D0)
+    IF ( kflag_com<=-2 ) rh = MIN(rh,0.2D0)
     !                          ---------------------------------------------
     !                           IF THERE IS A CHANGE OF ORDER, RESET NQ, L,
     !                           AND THE COEFFICIENTS.  IN ANY CASE H IS
@@ -678,19 +680,19 @@ SUBROUTINE DSTOD(Neq,Y,Yh,Nyh,Yh1,Ewt,Savf,Acor,Wm,Iwm,DF,DJAC)
     !                           WAS OK, OR REDO THE STEP OTHERWISE.
     !                          ---------------------------------------------
     !                 .........EXIT
-    IF ( newq==NQ ) THEN
-      rh = MAX(rh,HMIn/ABS(H))
+    IF ( newq==nq_com ) THEN
+      rh = MAX(rh,hmin_com/ABS(h_com))
       GOTO 300
     ELSE
-      NQ = newq
-      L = NQ + 1
+      nq_com = newq
+      l_com = nq_com + 1
       iret = 2
       !           ...............EXIT
       GOTO 100
     END IF
   END IF
-  1000 HOLd = H
-  JSTart = 1
+  1000 hold_com = h_com
+  jstart_com = 1
   !     ----------------------- END OF SUBROUTINE DSTOD
   !     -----------------------
 END SUBROUTINE DSTOD

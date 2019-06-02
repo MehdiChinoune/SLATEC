@@ -1,8 +1,11 @@
 MODULE DEBDF1
   IMPLICIT NONE
-  REAL :: TOLd, CONit, CRAte, EL(13), ELCo(13,12), HOLd, RC, RMAx, TESco(3,12), &
-    EL0, H, HMIn, HMXi, HU, TN, UROund
-  INTEGER :: IQUit, INIt, IYH, IEWt, IACor, ISAvf, IWM, KSTeps, IALth, IPUp, &
-    LMAx, MEO, NQNyh, NSTepj, IBEgin, ITOl, IINteg, ITStop, IJAc, IBAnd, IER, &
-    JSTart, KFLag, L, METh, MITer, MAXord, N, NQ, NST, NFE, NJE, NQU
+  REAL :: told_com, conit_com, crate_com, hold_com, rc_com, rmax_com, el0_com, &
+    h_com, hmin_com, hmxi_com, hu_com, tn_com, uround_com
+  REAL :: el_com(13), elco_com(13,12), tesco_com(3,12)
+  INTEGER :: iquit_com, init_com, iyh_com, iewt_com, iacor_com, isavf_com, iwm_com, &
+    ksteps_com, ialth_com, ipup_com, lmax_com, meo_com, nqnyh_com, nstepj_com, &
+    ibegin_com, itol_com, iinteg_com, itstop_com, ijac_com, iband_com, ier_com, &
+    jstart_com, kflag_com, l_com, meth_com, miter_com, maxord_com, n_com, nq_com, &
+    nst_com, nfe_com, nje_com, nqu_com
 END MODULE DEBDF1

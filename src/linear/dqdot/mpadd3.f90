@@ -32,28 +32,30 @@ SUBROUTINE MPADD3(X,Y,S,Med,Re)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   !   930124  Increased Array size in MPCON for SUN -r8.  (RWC)
-  USE MPCOM, ONLY : B, T, R
-  INTEGER i, i2, i2p, j, Med, X(*), Y(*), S, Re, c, ted
+  USE MPCOM, ONLY : b_com, t_com, r_com
+  INTEGER :: Med, S, Re
+  INTEGER :: X(30), Y(30)
+  INTEGER :: i, i2, i2p, j, c, ted
   !* FIRST EXECUTABLE STATEMENT  MPADD3
-  ted = T + Med
-  i2 = T + 4
+  ted = t_com + Med
+  i2 = t_com + 4
   i = i2
   c = 0
   ! CLEAR GUARD DIGITS TO RIGHT OF X DIGITS
   DO WHILE ( i>ted )
-    R(i) = 0
+    r_com(i) = 0
     i = i - 1
   END DO
   IF ( S<0 ) THEN
-    DO WHILE ( i>T )
+    DO WHILE ( i>t_com )
       ! HERE DO SUBTRACTION, ABS(Y) .GT. ABS(X)
       j = i - Med
-      R(i) = c - X(j+2)
+      r_com(i) = c - X(j+2)
       c = 0
-      IF ( R(i)<0 ) THEN
+      IF ( r_com(i)<0 ) THEN
         ! BORROW GENERATED HERE
         c = -1
-        R(i) = R(i) + B
+        r_com(i) = r_com(i) + b_com
       END IF
       i = i - 1
     END DO
@@ -62,12 +64,12 @@ SUBROUTINE MPADD3(X,Y,S,Med,Re)
       c = Y(i+2) + c - X(j+2)
       IF ( c>=0 ) THEN
         ! NO BORROW GENERATED HERE
-        R(i) = c
+        r_com(i) = c
         c = 0
         i = i - 1
       ELSE
         ! BORROW GENERATED HERE
-        R(i) = c + B
+        r_com(i) = c + b_com
         c = -1
         i = i - 1
       END IF
@@ -76,39 +78,39 @@ SUBROUTINE MPADD3(X,Y,S,Med,Re)
       IF ( i<=0 ) RETURN
       c = Y(i+2) + c
       IF ( c>=0 ) EXIT
-      R(i) = c + B
+      r_com(i) = c + b_com
       c = -1
       i = i - 1
     END DO
   ELSE
     ! HERE DO ADDITION, EXPONENT(Y) .GE. EXPONENT(X)
-    IF ( i>=T ) THEN
+    IF ( i>=t_com ) THEN
       DO
         j = i - Med
-        R(i) = X(j+2)
+        r_com(i) = X(j+2)
         i = i - 1
-        IF ( i<=T ) EXIT
+        IF ( i<=t_com ) EXIT
       END DO
     END IF
     DO WHILE ( i>Med )
       j = i - Med
       c = Y(i+2) + X(j+2) + c
-      IF ( c<B ) THEN
+      IF ( c<b_com ) THEN
         ! NO CARRY GENERATED HERE
-        R(i) = c
+        r_com(i) = c
         c = 0
         i = i - 1
       ELSE
         ! CARRY GENERATED HERE
-        R(i) = c - B
+        r_com(i) = c - b_com
         c = 1
         i = i - 1
       END IF
     END DO
     DO WHILE ( i>0 )
       c = Y(i+2) + c
-      IF ( c<B ) GOTO 100
-      R(i) = 0
+      IF ( c<b_com ) GOTO 100
+      r_com(i) = 0
       c = 1
       i = i - 1
     END DO
@@ -117,18 +119,18 @@ SUBROUTINE MPADD3(X,Y,S,Med,Re)
     i2p = i2 + 1
     DO j = 2, i2
       i = i2p - j
-      R(i+1) = R(i)
+      r_com(i+1) = r_com(i)
     END DO
-    R(1) = 1
+    r_com(1) = 1
     Re = Re + 1
     RETURN
   END IF
-  100  R(i) = c
+  100  r_com(i) = c
   i = i - 1
   DO
     ! NO CARRY POSSIBLE HERE
     IF ( i<=0 ) RETURN
-    R(i) = Y(i+2)
+    r_com(i) = Y(i+2)
     i = i - 1
   END DO
 END SUBROUTINE MPADD3

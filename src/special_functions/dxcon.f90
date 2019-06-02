@@ -45,10 +45,10 @@ SUBROUTINE DXCON(X,Ix,Ierror)
   !           Corrected order of sections in prologue and added TYPE
   !           section.  (WRB)
   !   920127  Revised PURPOSE section of prologue.  (DWL)
-  USE DXBLK ,ONLY: RADixx, RADixl, DLG10r, L
-  INTEGER i, i1, icase, Ierror, itemp, j, j1, j2
+  USE DXBLK ,ONLY: radixx_com, radixl_com, dlg10r_com, l_com
+  INTEGER :: Ierror, Ix
   REAL(8) :: X
-  INTEGER Ix
+  INTEGER :: i, i1, icase, itemp, j, j1, j2
   !
   !   THE CONDITIONS IMPOSED ON L AND KMAX BY THIS SUBROUTINE
   ! ARE
@@ -85,58 +85,58 @@ SUBROUTINE DXCON(X,Ix,Ierror)
     icase = (3+SIGN(itemp,Ix))/2
     IF ( icase==2 ) THEN
       IF ( ABS(X)<1.0D0 ) THEN
-        X = X*RADixl
-        Ix = Ix - L
+        X = X*radixl_com
+        Ix = Ix - l_com
       END IF
     ELSEIF ( ABS(X)>=1.0D0 ) THEN
-      X = X/RADixl
-      Ix = Ix + L
+      X = X/radixl_com
+      Ix = Ix + l_com
     END IF
     !
     ! AT THIS POINT, RADIX**(-L) .LE. ABS(X) .LT. 1.0D0     IN CASE 1,
     !                      1.0D0 .LE. ABS(X) .LT. RADIX**L  IN CASE 2.
-    i = INT( LOG10(ABS(X))/DLG10r )
-    a = RADixx**i
+    i = INT( LOG10(ABS(X))/dlg10r_com )
+    a = radixx_com**i
     IF ( icase==2 ) THEN
       DO WHILE ( a>ABS(X) )
         i = i - 1
-        a = a/RADixx
+        a = a/radixx_com
       END DO
-      DO WHILE ( ABS(X)>=RADixx*a )
+      DO WHILE ( ABS(X)>=radixx_com*a )
         i = i + 1
-        a = a*RADixx
+        a = a*radixx_com
       END DO
     ELSE
-      DO WHILE ( a>RADixx*ABS(X) )
+      DO WHILE ( a>radixx_com*ABS(X) )
         i = i - 1
-        a = a/RADixx
+        a = a/radixx_com
       END DO
       DO WHILE ( ABS(X)>=a )
         i = i + 1
-        a = a*RADixx
+        a = a*radixx_com
       END DO
     END IF
     !
     ! AT THIS POINT I IS SUCH THAT
     ! RADIX**(I-1) .LE. ABS(X) .LT. RADIX**I      IN CASE 1,
     !     RADIX**I .LE. ABS(X) .LT. RADIX**(I+1)  IN CASE 2.
-    itemp = INT( ispace/DLG10r )
-    a = RADixx**itemp
+    itemp = INT( ispace/dlg10r_com )
+    a = radixx_com**itemp
     b = 10.0D0**ispace
     DO WHILE ( a>b )
       itemp = itemp - 1
-      a = a/RADixx
+      a = a/radixx_com
     END DO
-    DO WHILE ( b>=a*RADixx )
+    DO WHILE ( b>=a*radixx_com )
       itemp = itemp + 1
-      a = a*RADixx
+      a = a*radixx_com
     END DO
     !
     ! AT THIS POINT ITEMP IS SUCH THAT
     ! RADIX**ITEMP .LE. 10**ISPACE .LT. RADIX**(ITEMP+1).
     IF ( itemp<=0 ) THEN
       ! ITEMP = 0 IF, AND ONLY IF, ISPACE = 1 AND RADIX = 16.0D0
-      X = X*RADixx**(-i)
+      X = X*radixx_com**(-i)
       Ix = Ix + i
       CALL DXC210(Ix,z,j,Ierror)
       IF ( Ierror/=0 ) RETURN
@@ -146,7 +146,7 @@ SUBROUTINE DXCON(X,Ix,Ierror)
       IF ( icase==2 ) GOTO 100
     END IF
     i1 = i/itemp
-    X = X*RADixx**(-i1*itemp)
+    X = X*radixx_com**(-i1*itemp)
     Ix = Ix + i1*itemp
     !
     ! AT THIS POINT,

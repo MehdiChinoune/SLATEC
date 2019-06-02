@@ -1,5 +1,5 @@
 MODULE CCBLK
   IMPLICIT NONE
-  REAL :: CNV, EPS
-  INTEGER :: NPP, K, NM, NCMplx, IK
+  REAL :: cnv_com, eps_com
+  INTEGER :: npp_com, k_com, nm_com, ncmplx_com, ik_com
 END MODULE CCBLK

@@ -52,8 +52,10 @@ SUBROUTINE MPADD2(X,Y,Z,Y1,Trunc)
   !   900402  Added TYPE section.  (WRB)
   !   920528  Added a REFERENCES section revised.  (WRB)
   !   930124  Increased Array size in MPCON for SUN -r8.  (RWC)
-  USE MPCOM, ONLY : LUN, T
-  INTEGER j, med, X(*), Y(*), Z(*), Y1(*), Trunc, s, ed, rs, re
+  USE MPCOM, ONLY : lun_com, t_com
+  INTEGER :: Trunc
+  INTEGER :: X(30), Y(30), Z(30), Y1(30)
+  INTEGER :: j, med, s, ed, rs, re
   !* FIRST EXECUTABLE STATEMENT  MPADD2
   IF ( X(1)/=0 ) THEN
     IF ( Y1(1)==0 ) GOTO 100
@@ -65,11 +67,11 @@ SUBROUTINE MPADD2(X,Y,Z,Y1,Trunc)
       med = ABS(ed)
       IF ( ed<0 ) THEN
         ! HERE EXPONENT(Y) .GE. EXPONENT(X)
-        IF ( med<=T ) GOTO 200
+        IF ( med<=t_com ) GOTO 200
       ELSEIF ( ed==0 ) THEN
         ! EXPONENTS EQUAL SO COMPARE SIGNS, THEN FRACTIONS IF NEC.
         IF ( s>0 ) GOTO 200
-        DO j = 1, T
+        DO j = 1, t_com
           IF ( X(j+2)<Y(j+2) ) GOTO 200
           IF ( X(j+2)/=Y(j+2) ) GOTO 400
         END DO
@@ -78,12 +80,12 @@ SUBROUTINE MPADD2(X,Y,Z,Y1,Trunc)
         RETURN
       ELSE
         ! ABS(X) .GT. ABS(Y)
-        IF ( med<=T ) GOTO 400
+        IF ( med<=t_com ) GOTO 400
         GOTO 100
       END IF
     ELSE
       CALL MPCHK(1,4)
-      WRITE (LUN,99001)
+      WRITE (lun_com,99001)
       99001 FORMAT (' *** SIGN NOT 0, +1 OR -1 IN CALL TO MPADD2,',&
         ' POSSIBLE OVERWRITING PROBLEM ***')
       CALL MPERR

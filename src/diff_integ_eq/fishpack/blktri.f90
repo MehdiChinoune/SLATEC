@@ -203,45 +203,45 @@ SUBROUTINE BLKTRI(Iflg,Np,N,An,Bn,Cn,Mp,M,Am,Bm,Cm,Idimy,Y,Ierror,W)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  USE CBLKT, ONLY : K, IK, NM, NPP
+  USE CBLKT, ONLY : k_com, ik_com, nm_com, npp_com
   INTEGER :: Idimy, Ierror, Iflg, M, Mp, N, Np
   REAL :: Am(M), An(N), Bm(M), Bn(N), Cm(M), Cn(N), W(:), Y(Idimy,N)
   INTEGER :: iw1, iw2, iw3, iwah, iwbh, iwd, iwu, iww, nh, nl
   !* FIRST EXECUTABLE STATEMENT  BLKTRI
-  NM = N
+  nm_com = N
   Ierror = 0
   IF ( M<5 ) THEN
     Ierror = 1
-  ELSEIF ( NM<3 ) THEN
+  ELSEIF ( nm_com<3 ) THEN
     Ierror = 2
   ELSEIF ( Idimy<M ) THEN
     Ierror = 3
   ELSE
     nh = N
-    NPP = Np
-    IF ( NPP/=0 ) nh = nh + 1
-    IK = 2
-    K = 1
+    npp_com = Np
+    IF ( npp_com/=0 ) nh = nh + 1
+    ik_com = 2
+    k_com = 1
     DO
-      IK = IK + IK
-      K = K + 1
-      IF ( nh<=IK ) THEN
-        nl = IK
-        IK = IK + IK
+      ik_com = ik_com + ik_com
+      k_com = k_com + 1
+      IF ( nh<=ik_com ) THEN
+        nl = ik_com
+        ik_com = ik_com + ik_com
         nl = nl - 1
-        iwah = (K-2)*IK + K + 6
-        IF ( NPP/=0 ) THEN
+        iwah = (k_com-2)*ik_com + k_com + 6
+        IF ( npp_com/=0 ) THEN
           !
           !     DIVIDE W INTO WORKING SUB ARRAYS
           !
           iw1 = iwah
-          iwbh = iw1 + NM
-          W(1) = iw1 - 1 + MAX(2*NM,6*M)
+          iwbh = iw1 + nm_com
+          W(1) = iw1 - 1 + MAX(2*nm_com,6*M)
         ELSE
-          iwbh = iwah + NM + NM
+          iwbh = iwah + nm_com + nm_com
           iw1 = iwbh
-          W(1) = iw1 - 1 + MAX(2*NM,6*M)
-          NM = NM - 1
+          W(1) = iw1 - 1 + MAX(2*nm_com,6*M)
+          nm_com = nm_com - 1
         END IF
         !
         ! SUBROUTINE COMP B COMPUTES THE ROOTS OF THE B POLYNOMIALS

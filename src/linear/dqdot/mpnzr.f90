@@ -33,21 +33,22 @@ SUBROUTINE MPNZR(Rs,Re,Z,Trunc)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   !   930124  Increased Array size in MPCON for SUN -r8.  (RWC)
-  USE MPCOM, ONLY : B, LUN, M, T, R
-  INTEGER i, i2, i2m, i2p, is, it, j, k, Z(*), Re, Rs, Trunc, b2
+  USE MPCOM, ONLY : b_com, lun_com, m_com, t_com, r_com
+  INTEGER :: Re, Rs, Trunc, Z(30)
+  INTEGER :: i, i2, i2m, i2p, is, it, j, k, b2
   !* FIRST EXECUTABLE STATEMENT  MPNZR
-  i2 = T + 4
+  i2 = t_com + 4
   IF ( Rs/=0 ) THEN
     ! CHECK THAT SIGN = +-1
     IF ( ABS(Rs)<=1 ) THEN
       ! LOOK FOR FIRST NONZERO DIGIT
       DO i = 1, i2
         is = i - 1
-        IF ( R(i)>0 ) GOTO 100
+        IF ( r_com(i)>0 ) GOTO 100
         ! FRACTION ZERO
       END DO
     ELSE
-      WRITE (LUN,99001)
+      WRITE (lun_com,99001)
       99001 FORMAT (' *** SIGN NOT 0, +1 OR -1 IN CALL TO MPNZR,',&
         ' POSSIBLE OVERWRITING PROBLEM ***')
       CALL MPERR
@@ -63,57 +64,57 @@ SUBROUTINE MPNZR(Rs,Re,Z,Trunc)
     i2m = i2 - is
     DO j = 1, i2m
       k = j + is
-      R(j) = R(k)
+      r_com(j) = r_com(k)
     END DO
     i2p = i2m + 1
     DO j = i2p, i2
-      R(j) = 0
+      r_com(j) = 0
     END DO
   END IF
   ! CHECK TO SEE IF TRUNCATION IS DESIRED
   IF ( Trunc==0 ) THEN
     ! SEE IF ROUNDING NECESSARY
     ! TREAT EVEN AND ODD BASES DIFFERENTLY
-    b2 = B/2
-    IF ( (2*b2)/=B ) THEN
+    b2 = b_com/2
+    IF ( (2*b2)/=b_com ) THEN
       ! ODD BASE, ROUND IF R(T+1)... .GT. 1/2
       DO i = 1, 4
-        it = T + i
-        IF ( R(it)<b2 ) EXIT
-        IF ( R(it)/=b2 ) GOTO 150
+        it = t_com + i
+        IF ( r_com(it)<b2 ) EXIT
+        IF ( r_com(it)/=b2 ) GOTO 150
       END DO
       GOTO 200
     ELSE
       ! B EVEN.  ROUND IF R(T+1).GE.B2 UNLESS R(T) ODD AND ALL ZEROS
       ! AFTER R(T+2).
-      IF ( R(T+1)<b2 ) GOTO 200
-      IF ( R(T+1)==b2 ) THEN
-        IF ( MOD(R(T),2)/=0 ) THEN
-          IF ( (R(T+2)+R(T+3)+R(T+4))==0 ) GOTO 200
+      IF ( r_com(t_com+1)<b2 ) GOTO 200
+      IF ( r_com(t_com+1)==b2 ) THEN
+        IF ( MOD(r_com(t_com),2)/=0 ) THEN
+          IF ( (r_com(t_com+2)+r_com(t_com+3)+r_com(t_com+4))==0 ) GOTO 200
         END IF
       END IF
     END IF
     ! ROUND
     150 CONTINUE
-    DO j = 1, T
-      i = T + 1 - j
-      R(i) = R(i) + 1
-      IF ( R(i)<B ) GOTO 200
-      R(i) = 0
+    DO j = 1, t_com
+      i = t_com + 1 - j
+      r_com(i) = r_com(i) + 1
+      IF ( r_com(i)<b_com ) GOTO 200
+      r_com(i) = 0
     END DO
     ! EXCEPTIONAL CASE, ROUNDED UP TO .10000...
     Re = Re + 1
-    R(1) = 1
+    r_com(1) = 1
   END IF
   ! CHECK FOR OVERFLOW
   200 CONTINUE
-  IF ( Re>M ) THEN
-    WRITE (LUN,99002)
+  IF ( Re>m_com ) THEN
+    WRITE (lun_com,99002)
     99002 FORMAT (' *** OVERFLOW OCCURRED IN MPNZR ***')
     CALL MPOVFL(Z)
     RETURN
     ! CHECK FOR UNDERFLOW
-  ELSEIF ( Re<(-M) ) THEN
+  ELSEIF ( Re<(-m_com) ) THEN
     ! UNDERFLOW HERE
     CALL MPUNFL(Z)
     RETURN
@@ -121,8 +122,8 @@ SUBROUTINE MPNZR(Rs,Re,Z,Trunc)
   ! STORE RESULT IN Z
   Z(1) = Rs
   Z(2) = Re
-  DO i = 1, T
-    Z(i+2) = R(i)
+  DO i = 1, t_com
+    Z(i+2) = r_com(i)
   END DO
   RETURN
 END SUBROUTINE MPNZR

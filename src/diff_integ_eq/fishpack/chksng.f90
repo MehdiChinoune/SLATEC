@@ -26,7 +26,7 @@ SUBROUTINE CHKSNG(Mbdcnd,Nbdcnd,Alpha,Beta,Gama,Xnu,COFX,COFY,Singlr)
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
-  USE SPLPCM, ONLY : AIT, CIT, DLX, DLY, IS, JS, MS, NS
+  USE SPLPCM, ONLY : ait_com, cit_com, dlx_com, dly_com, is_com, js_com, ms_com, ns_com
   INTERFACE
     SUBROUTINE COFX(X,A,B,C)
       REAL :: X, A, B, C
@@ -60,13 +60,13 @@ SUBROUTINE CHKSNG(Mbdcnd,Nbdcnd,Alpha,Beta,Gama,Xnu,COFX,COFY,Singlr)
   !     CHECK THAT NON-DERIVATIVE COEFFICIENT FUNCTIONS
   !     ARE ZERO
   !
-  DO i = IS, MS
-    xi = AIT + (i-1)*DLX
+  DO i = is_com, ms_com
+    xi = ait_com + (i-1)*dlx_com
     CALL COFX(xi,ai,bi,ci)
     IF ( ci/=0.0 ) RETURN
   END DO
-  DO j = JS, NS
-    yj = CIT + (j-1)*DLY
+  DO j = js_com, ns_com
+    yj = cit_com + (j-1)*dly_com
     CALL COFY(yj,dj,ej,fj)
     IF ( fj/=0.0 ) RETURN
   END DO

@@ -28,11 +28,11 @@ SUBROUTINE DSLVS(Wm,Iwm,X)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
   !   920422  Changed DIMENSION statement.  (WRB)
-  USE DDEBD1, ONLY : EL0, H, IER, MITer, N
+  USE DDEBD1, ONLY : el0_com, h_com, ier_com, miter_com, n_com
   USE linear, ONLY : DGBSL, DGESL
   !
   INTEGER :: Iwm(:)
-  REAL(8) :: Wm(:), X(N)
+  REAL(8) :: Wm(:), X(n_com)
   INTEGER :: i, meband, ml, mu
   REAL(8) :: di, hl0, phl0, r
   !     ------------------------------------------------------------------
@@ -65,23 +65,23 @@ SUBROUTINE DSLVS(Wm,Iwm,X)
   !     BEGIN BLOCK PERMITTING ...EXITS TO 80
   !        BEGIN BLOCK PERMITTING ...EXITS TO 60
   !* FIRST EXECUTABLE STATEMENT  DSLVS
-  IER = 0
-  SELECT CASE (MITer)
+  ier_com = 0
+  SELECT CASE (miter_com)
     CASE (3)
       !
       phl0 = Wm(2)
-      hl0 = H*EL0
+      hl0 = h_com*el0_com
       Wm(2) = hl0
       IF ( hl0/=phl0 ) THEN
         r = hl0/phl0
-        DO i = 1, N
+        DO i = 1, n_com
           di = 1.0D0 - r*(1.0D0-1.0D0/Wm(i+2))
           !        .........EXIT
           IF ( ABS(di)==0.0D0 ) GOTO 100
           Wm(i+2) = 1.0D0/di
         END DO
       END IF
-      DO i = 1, N
+      DO i = 1, n_com
         X(i) = Wm(i+2)*X(i)
         !     ......EXIT
       END DO
@@ -90,14 +90,14 @@ SUBROUTINE DSLVS(Wm,Iwm,X)
       ml = Iwm(1)
       mu = Iwm(2)
       meband = 2*ml + mu + 1
-      CALL DGBSL(Wm(3:meband*N+2),meband,N,ml,mu,Iwm(21:N+20),X,0)
+      CALL DGBSL(Wm(3:meband*n_com+2),meband,n_com,ml,mu,Iwm(21:n_com+20),X,0)
     CASE DEFAULT
       !     ......EXIT
-      CALL DGESL(Wm(3:N**2+2),N,N,Iwm(21:N+20),X,0)
+      CALL DGESL(Wm(3:n_com**2+2),n_com,n_com,Iwm(21:n_com+20),X,0)
   END SELECT
   RETURN
   !     ...EXIT
-  100  IER = -1
+  100  ier_com = -1
   !     ----------------------- END OF SUBROUTINE DSLVS
   !     -----------------------
   RETURN

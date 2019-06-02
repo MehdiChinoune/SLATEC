@@ -31,7 +31,7 @@ SUBROUTINE CBLKT1(An,Cn,M,Am,Bm,Cm,Idimy,Y,B,W1,W2,W3,Wd,Ww,Wu,PRDCT,CPRDCT)
   !   801001  DATE WRITTEN
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
-  USE CCBLK, ONLY : K, NCMplx, NM, NPP
+  USE CCBLK, ONLY : k_com, ncmplx_com, nm_com, npp_com
   !
   INTERFACE
     SUBROUTINE PRDCT(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Y,M,A,B,C,D,U,W)
@@ -46,15 +46,15 @@ SUBROUTINE CBLKT1(An,Cn,M,Am,Bm,Cm,Idimy,Y,B,W1,W2,W3,Wd,Ww,Wu,PRDCT,CPRDCT)
     END SUBROUTINE CPRDCT
   END INTERFACE
   INTEGER :: Idimy, M
-  REAL :: An(NM), Cn(NM), B(:)
-  COMPLEX :: Am(M), Bm(M), Cm(M), W1(M), W2(M), W3(M), Wd(M), Ww(M), Wu(M), Y(Idimy,NM)
+  REAL :: An(nm_com), Cn(nm_com), B(:)
+  COMPLEX :: Am(M), Bm(M), Cm(M), W1(M), W2(M), W3(M), Wd(M), Ww(M), Wu(M), Y(Idimy,nm_com)
   INTEGER :: i, i1, i2, i3, i4, idxa, idxc, if, ifd, im1, im2, im3, imi1, &
     imi2, ip, ip1, ip2, ip3, ipi1, ipi2, ipi3, ir, irm1, iz, izr, j, kdo, l, ll, &
     na, nc, nm1, nm2, nm3, np, np1, np2, np3, nz
   REAL :: dum(0)
-  COMPLEX :: bc(NM/2)
+  COMPLEX :: bc(nm_com/2)
   !* FIRST EXECUTABLE STATEMENT  CBLKT1
-  kdo = K - 1
+  kdo = k_com - 1
   DO l = 1, kdo
     ir = l - 1
     i2 = 2**ir
@@ -67,9 +67,9 @@ SUBROUTINE CBLKT1(An,Cn,M,Am,Bm,Cm,Idimy,Y,B,W1,W2,W3,Wd,Ww,Wu,PRDCT,CPRDCT)
     CALL INXCB(i3,irm1,im1,nm1)
     CALL PRDCT(nm2,B(im2:im2+nm2-1),nm3,B(im3:im3+nm3-1),nm1,B(im1:im1+nm1-1),0,&
       dum,Y(1,i2),W3,M,Am,Bm,Cm,Wd,Ww,Wu)
-    if = 2**K
+    if = 2**k_com
     DO i = i4, if, i4
-      IF ( i<=NM ) THEN
+      IF ( i<=nm_com ) THEN
         ipi1 = i + i1
         ipi2 = i + i2
         ipi3 = i + i3
@@ -82,7 +82,7 @@ SUBROUTINE CBLKT1(An,Cn,M,Am,Bm,Cm,Idimy,Y,B,W1,W2,W3,Wd,Ww,Wu,PRDCT,CPRDCT)
           CALL INXCB(ipi3,irm1,ip3,np3)
           CALL PRDCT(nm1,B(im1:im1+nm1-1),0,dum,0,dum,na,An(idxa),W3,W1,M,Am,Bm,&
             Cm,Wd,Ww,Wu)
-          IF ( ipi2<=NM ) THEN
+          IF ( ipi2<=nm_com ) THEN
             CALL PRDCT(np2,B(ip2:ip2+np2-1),np1,B(ip1:ip1+np1-1),np3,B(ip3:ip3+np3-1),0,&
               dum,Y(1,ipi2),W3,M,Am,Bm,Cm,Wd,Ww,Wu)
             CALL PRDCT(np1,B(ip1:ip1+np1-1),0,dum,0,dum,nc,Cn(idxc),W3,W2,M,Am,Bm,Cm,&
@@ -100,24 +100,24 @@ SUBROUTINE CBLKT1(An,Cn,M,Am,Bm,Cm,Idimy,Y,B,W1,W2,W3,Wd,Ww,Wu,PRDCT,CPRDCT)
       END IF
     END DO
   END DO
-  IF ( NPP==0 ) THEN
+  IF ( npp_com==0 ) THEN
     !
     !     THE PERIODIC CASE IS TREATED USING THE CAPACITANCE MATRIX METHOD
     !
-    if = 2**K
+    if = 2**k_com
     i = if/2
     i1 = i/2
-    CALL INXCB(i-i1,K-2,im1,nm1)
-    CALL INXCB(i+i1,K-2,ip1,np1)
-    CALL INXCB(i,K-1,iz,nz)
+    CALL INXCB(i-i1,k_com-2,im1,nm1)
+    CALL INXCB(i+i1,k_com-2,ip1,np1)
+    CALL INXCB(i,k_com-1,iz,nz)
     CALL PRDCT(nz,B(iz:iz+nz-1),nm1,B(im1:im1+nm1-1),np1,B(ip1:ip1+np1-1),0,dum,&
       Y(1,i),W1,M,Am,Bm,Cm,Wd,Ww,Wu)
     izr = i
     DO j = 1, M
       W2(j) = W1(j)
     END DO
-    DO ll = 2, K
-      l = K - ll + 1
+    DO ll = 2, k_com
+      l = k_com - ll + 1
       ir = l - 1
       i2 = 2**ir
       i1 = i2/2
@@ -133,8 +133,8 @@ SUBROUTINE CBLKT1(An,Cn,M,Am,Bm,Cm,Idimy,Y,B,W1,W2,W3,Wd,Ww,Wu,PRDCT,CPRDCT)
       CALL PRDCT(nz,B(iz:iz+nz-1),nm1,B(im1:im1+nm1-1),np1,B(ip1:ip1+np1-1),0,&
         dum,W1,W1,M,Am,Bm,Cm,Wd,Ww,Wu)
     END DO
-    DO ll = 2, K
-      l = K - ll + 1
+    DO ll = 2, k_com
+      l = k_com - ll + 1
       ir = l - 1
       i2 = 2**ir
       i1 = i2/2
@@ -142,7 +142,7 @@ SUBROUTINE CBLKT1(An,Cn,M,Am,Bm,Cm,Idimy,Y,B,W1,W2,W3,Wd,Ww,Wu,PRDCT,CPRDCT)
       ifd = if - i2
       DO i = i2, ifd, i4
         IF ( i-i2==izr ) THEN
-          IF ( i>NM ) EXIT
+          IF ( i>nm_com ) EXIT
           CALL INXCA(i,ir,idxa,na)
           CALL INXCB(i,ir,iz,nz)
           CALL INXCB(i-i1,ir-1,im1,nm1)
@@ -155,29 +155,29 @@ SUBROUTINE CBLKT1(An,Cn,M,Am,Bm,Cm,Idimy,Y,B,W1,W2,W3,Wd,Ww,Wu,PRDCT,CPRDCT)
           CALL PRDCT(nz,B(iz:iz+nz-1),nm1,B(im1:im1+nm1-1),np1,B(ip1:ip1+np1-1),0,&
             dum,W2,W2,M,Am,Bm,Cm,Wd,Ww,Wu)
           izr = i
-          IF ( i==NM ) GOTO 50
+          IF ( i==nm_com ) GOTO 50
         END IF
       END DO
     END DO
     50 CONTINUE
     DO j = 1, M
-      Y(j,NM+1) = Y(j,NM+1) - Cn(NM+1)*W1(j) - An(NM+1)*W2(j)
+      Y(j,nm_com+1) = Y(j,nm_com+1) - Cn(nm_com+1)*W1(j) - An(nm_com+1)*W2(j)
     END DO
-    CALL INXCB(if/2,K-1,im1,nm1)
-    CALL INXCB(if,K-1,ip,np)
-    IF ( NCMplx/=0 ) THEN
-      bc = [ ( CMPLX( B(ip+i), B(ip+i+1) ), i = 1, NM, 2 ) ]
-      CALL CPRDCT(NM+1,bc,nm1,B(im1:im1+nm1-1),0,dum,0,dum,Y(1,NM+1),Y(1,NM+1),M,&
+    CALL INXCB(if/2,k_com-1,im1,nm1)
+    CALL INXCB(if,k_com-1,ip,np)
+    IF ( ncmplx_com/=0 ) THEN
+      bc = [ ( CMPLX( B(ip+i), B(ip+i+1) ), i = 1, nm_com, 2 ) ]
+      CALL CPRDCT(nm_com+1,bc,nm1,B(im1:im1+nm1-1),0,dum,0,dum,Y(1,nm_com+1),Y(1,nm_com+1),M,&
         Am,Bm,Cm,W1,W3,Ww)
     ELSE
-      CALL PRDCT(NM+1,B(ip:ip+NM),nm1,B(im1:im1+nm1-1),0,dum,0,dum,Y(1,NM+1),&
-        Y(1,NM+1),M,Am,Bm,Cm,Wd,Ww,Wu)
+      CALL PRDCT(nm_com+1,B(ip:ip+nm_com),nm1,B(im1:im1+nm1-1),0,dum,0,dum,Y(1,nm_com+1),&
+        Y(1,nm_com+1),M,Am,Bm,Cm,Wd,Ww,Wu)
     END IF
     DO j = 1, M
-      W1(j) = An(1)*Y(j,NM+1)
-      W2(j) = Cn(NM)*Y(j,NM+1)
+      W1(j) = An(1)*Y(j,nm_com+1)
+      W2(j) = Cn(nm_com)*Y(j,nm_com+1)
       Y(j,1) = Y(j,1) - W1(j)
-      Y(j,NM) = Y(j,NM) - W2(j)
+      Y(j,nm_com) = Y(j,nm_com) - W2(j)
     END DO
     DO l = 1, kdo
       ir = l - 1
@@ -197,7 +197,7 @@ SUBROUTINE CBLKT1(An,Cn,M,Am,Bm,Cm,Idimy,Y,B,W1,W2,W3,Wd,Ww,Wu,PRDCT,CPRDCT)
       END DO
     END DO
     !
-    izr = NM
+    izr = nm_com
     DO l = 1, kdo
       ir = l - 1
       i2 = 2**ir
@@ -232,8 +232,8 @@ SUBROUTINE CBLKT1(An,Cn,M,Am,Bm,Cm,Idimy,Y,B,W1,W2,W3,Wd,Ww,Wu,PRDCT,CPRDCT)
   !
   ! BEGIN BACK SUBSTITUTION PHASE
   !
-  DO ll = 1, K
-    l = K - ll + 1
+  DO ll = 1, k_com
+    l = k_com - ll + 1
     ir = l - 1
     irm1 = ir - 1
     i2 = 2**ir
@@ -241,7 +241,7 @@ SUBROUTINE CBLKT1(An,Cn,M,Am,Bm,Cm,Idimy,Y,B,W1,W2,W3,Wd,Ww,Wu,PRDCT,CPRDCT)
     i4 = i2 + i2
     ifd = if - i2
     DO i = i2, ifd, i4
-      IF ( i<=NM ) THEN
+      IF ( i<=nm_com ) THEN
         imi1 = i - i1
         imi2 = i - i2
         ipi1 = i + i1
@@ -259,7 +259,7 @@ SUBROUTINE CBLKT1(An,Cn,M,Am,Bm,Cm,Idimy,Y,B,W1,W2,W3,Wd,Ww,Wu,PRDCT,CPRDCT)
           CALL PRDCT(nm1,B(im1:im1+nm1-1),0,dum,0,dum,na,An(idxa),Y(1,imi2),W1,M,Am,&
             Bm,Cm,Wd,Ww,Wu)
         END IF
-        IF ( ipi2<=NM ) THEN
+        IF ( ipi2<=nm_com ) THEN
           CALL PRDCT(np1,B(ip1:ip1+np1-1),0,dum,0,dum,nc,Cn(idxc),Y(1,ipi2),W2,M,Am,&
             Bm,Cm,Wd,Ww,Wu)
         ELSE

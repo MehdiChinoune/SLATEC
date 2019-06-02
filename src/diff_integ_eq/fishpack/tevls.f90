@@ -54,7 +54,7 @@ SUBROUTINE TEVLS(N,D,E2,Ierr)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   !   920528  DESCRIPTION revised and REFERENCES section added.  (WRB)
-  USE CBLKT, ONLY : MAChep => EPS
+  USE CBLKT, ONLY : eps_com
   INTEGER :: N, Ierr
   REAL :: D(N), E2(N)
   INTEGER :: nhalf, ntop, i, j, l, m, ii, l1, mml
@@ -73,7 +73,7 @@ SUBROUTINE TEVLS(N,D,E2,Ierr)
     !
     DO l = 1, N
       j = 0
-      h = MAChep*(ABS(D(l))+SQRT(E2(l)))
+      h = eps_com*(ABS(D(l))+SQRT(E2(l)))
       IF ( b<=h ) THEN
         b = h
         c = b*b

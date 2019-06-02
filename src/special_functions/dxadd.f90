@@ -44,9 +44,10 @@ SUBROUTINE DXADD(X,Ix,Y,Iy,Z,Iz,Ierror)
   !           Corrected order of sections in prologue and added TYPE
   !           section.  (WRB)
   !   920127  Revised PURPOSE section of prologue.  (DWL)
-  USE DXBLK ,ONLY: RADixx, RADixl, RAD2l, L
-  INTEGER i, i1, i2, Ierror, is, j, Ix, Iy, Iz
+  USE DXBLK ,ONLY: radixx_com, radixl_com, rad2l_com, l_com
+  INTEGER :: Ierror, Ix, Iy, Iz
   REAL(8) :: X, Y, Z
+  INTEGER :: i, i1, i2, is, j
   REAL(8) :: s, t
   !
   !   THE CONDITIONS IMPOSED ON L AND KMAX BY THIS SUBROUTINE
@@ -70,7 +71,7 @@ SUBROUTINE DXADD(X,Ix,Y,Iy,Z,Iz,Ierror)
   ELSEIF ( Y/=0.0D0 ) THEN
     IF ( Ix<0.OR.Iy<0 ) THEN
       IF ( Ix>=0.OR.Iy>=0 ) THEN
-        IF ( ABS(Ix)>6*L.OR.ABS(Iy)>6*L ) THEN
+        IF ( ABS(Ix)>6*l_com.OR.ABS(Iy)>6*l_com ) THEN
           IF ( Ix>=0 ) THEN
             Z = X
             Iz = Ix
@@ -90,15 +91,15 @@ SUBROUTINE DXADD(X,Ix,Y,Iy,Z,Iz,Ierror)
       t = X
     ELSEIF ( i==0 ) THEN
       IF ( ABS(X)>1.0D0.AND.ABS(Y)>1.0D0 ) THEN
-        s = X/RADixl
-        t = Y/RADixl
+        s = X/radixl_com
+        t = Y/radixl_com
         Z = s + t
-        Iz = Ix + L
+        Iz = Ix + l_com
       ELSEIF ( ABS(X)<1.0D0.AND.ABS(Y)<1.0D0 ) THEN
-        s = X*RADixl
-        t = Y*RADixl
+        s = X*radixl_com
+        t = Y*radixl_com
         Z = s + t
-        Iz = Ix - L
+        Iz = Ix - l_com
       ELSE
         Z = X + Y
         Iz = Ix
@@ -115,18 +116,18 @@ SUBROUTINE DXADD(X,Ix,Y,Iy,Z,Iz,Ierror)
     ! LARGER AUXILIARY INDEX IS STORED IN (S,IS). THE PRINCIPAL
     ! PART OF THE OTHER INPUT IS STORED IN T.
     !
-    i1 = ABS(i)/L
-    i2 = MOD(ABS(i),L)
-    IF ( ABS(t)>=RADixl ) THEN
+    i1 = ABS(i)/l_com
+    i2 = MOD(ABS(i),l_com)
+    IF ( ABS(t)>=radixl_com ) THEN
       j = i1 - 2
       IF ( j<0 ) GOTO 200
-      t = t*RADixx**(-i2)/RAD2l
+      t = t*radixx_com**(-i2)/rad2l_com
       GOTO 300
     ELSE
       IF ( ABS(t)>=1.0D0 ) GOTO 200
-      IF ( RADixl*ABS(t)<1.0D0 ) THEN
+      IF ( radixl_com*ABS(t)<1.0D0 ) THEN
         j = i1 + 1
-        t = t*RADixx**(L-i2)
+        t = t*radixx_com**(l_com-i2)
         GOTO 300
       END IF
     END IF
@@ -137,11 +138,11 @@ SUBROUTINE DXADD(X,Ix,Y,Iy,Z,Iz,Ierror)
     RETURN
   END IF
   100  j = i1
-  t = t*RADixx**(-i2)
+  t = t*radixx_com**(-i2)
   GOTO 300
   200  j = i1 - 1
   IF ( j<0 ) GOTO 100
-  t = t*RADixx**(-i2)/RADixl
+  t = t*radixx_com**(-i2)/radixl_com
   !
   !  AT THIS POINT, SOME OR ALL OF THE DIFFERENCE IN THE
   ! AUXILIARY INDICES HAS BEEN USED TO EFFECT A LEFT SHIFT
@@ -153,24 +154,24 @@ SUBROUTINE DXADD(X,Ix,Y,Iy,Z,Iz,Ierror)
   !
   300 CONTINUE
   IF ( j/=0 ) THEN
-    IF ( ABS(s)<RADixl.AND.j<=3 ) THEN
+    IF ( ABS(s)<radixl_com.AND.j<=3 ) THEN
       IF ( ABS(s)>=1.0D0 ) THEN
         SELECT CASE (j)
           CASE (1)
-            s = s*RADixl
+            s = s*radixl_com
             GOTO 400
           CASE (2,3)
             GOTO 350
           CASE DEFAULT
         END SELECT
       END IF
-      IF ( RADixl*ABS(s)>=1.0D0 ) THEN
+      IF ( radixl_com*ABS(s)>=1.0D0 ) THEN
         SELECT CASE (j)
           CASE (1)
-            s = s*RADixl
+            s = s*radixl_com
           CASE (2)
-            s = s*RADixl
-            s = s*RADixl
+            s = s*radixl_com
+            s = s*radixl_com
           CASE (3)
             GOTO 350
           CASE DEFAULT
@@ -181,16 +182,16 @@ SUBROUTINE DXADD(X,Ix,Y,Iy,Z,Iz,Ierror)
       320 CONTINUE
       SELECT CASE (j)
         CASE (1)
-          s = s*RADixl
+          s = s*radixl_com
           GOTO 400
         CASE (2)
         CASE (3)
-          s = s*RADixl
+          s = s*radixl_com
         CASE DEFAULT
           GOTO 350
       END SELECT
-      s = s*RADixl
-      s = s*RADixl
+      s = s*radixl_com
+      s = s*radixl_com
       GOTO 400
     END IF
     350  Z = s
@@ -207,18 +208,18 @@ SUBROUTINE DXADD(X,Ix,Y,Iy,Z,Iz,Ierror)
   !
   400 CONTINUE
   IF ( ABS(s)>1.0D0.AND.ABS(t)>1.0D0 ) THEN
-    s = s/RADixl
-    t = t/RADixl
+    s = s/radixl_com
+    t = t/radixl_com
     Z = s + t
-    Iz = is - j*L + L
+    Iz = is - j*l_com + l_com
   ELSEIF ( ABS(s)<1.0D0.AND.ABS(t)<1.0D0 ) THEN
-    s = s*RADixl
-    t = t*RADixl
+    s = s*radixl_com
+    t = t*radixl_com
     Z = s + t
-    Iz = is - j*L - L
+    Iz = is - j*l_com - l_com
   ELSE
     Z = s + t
-    Iz = is - j*L
+    Iz = is - j*l_com
   END IF
   CALL DXADJ(Z,Iz,Ierror)
   RETURN

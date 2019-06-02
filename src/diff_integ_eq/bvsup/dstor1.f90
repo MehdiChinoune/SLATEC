@@ -32,32 +32,32 @@ SUBROUTINE DSTOR1(U,Yh,V,Yp,Ntemp,Ndisk,Ntape)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
-  USE DML, ONLY : C, INHomo, NCOmp, NFC
+  USE DML, ONLY : c_com, inhomo_com, ncomp_com, nfc_com
   INTEGER :: Ndisk, Ntape, Ntemp
   REAL(8) :: U(:), V(:), Yh(:), Yp(:)
   INTEGER :: j, nctnf
   !     BEGIN BLOCK PERMITTING ...EXITS TO 80
   !* FIRST EXECUTABLE STATEMENT  DSTOR1
-  nctnf = NCOmp*NFC
+  nctnf = ncomp_com*nfc_com
   DO j = 1, nctnf
     U(j) = Yh(j)
   END DO
-  IF ( INHomo==1 ) THEN
+  IF ( inhomo_com==1 ) THEN
     !
     !           NONZERO PARTICULAR SOLUTION
     !
     IF ( Ntemp==0 ) THEN
       !
-      DO j = 1, NCOmp
-        V(j) = C*Yp(j)
+      DO j = 1, ncomp_com
+        V(j) = c_com*Yp(j)
       END DO
       !
       !        IS OUTPUT INFORMATION TO BE WRITTEN TO DISK
       !
-      IF ( Ndisk==1 ) WRITE (Ntape) (V(j),j=1,NCOmp), (U(j),j=1,nctnf)
+      IF ( Ndisk==1 ) WRITE (Ntape) (V(j),j=1,ncomp_com), (U(j),j=1,nctnf)
     ELSE
       !
-      DO j = 1, NCOmp
+      DO j = 1, ncomp_com
         V(j) = Yp(j)
         !     .........EXIT
       END DO
@@ -67,10 +67,10 @@ SUBROUTINE DSTOR1(U,Yh,V,Yp,Ntemp,Ndisk,Ntape)
     !
     !     ......EXIT
   ELSEIF ( Ntemp/=1 ) THEN
-    DO j = 1, NCOmp
+    DO j = 1, ncomp_com
       V(j) = 0.0D0
     END DO
-    IF ( Ndisk==1 ) WRITE (Ntape) (V(j),j=1,NCOmp), (U(j),j=1,nctnf)
+    IF ( Ndisk==1 ) WRITE (Ntape) (V(j),j=1,ncomp_com), (U(j),j=1,nctnf)
   END IF
   !
 END SUBROUTINE DSTOR1

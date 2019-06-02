@@ -1,5 +1,5 @@
 MODULE LA05DS
   IMPLICIT NONE
-  REAL :: SMAll
-  INTEGER :: LP, LENl, LENu, NCP, LROw, LCOl
+  REAL :: small_com
+  INTEGER :: lp_com, lenl_com, lenu_com, ncp_com, lrow_com, lcol_com
 END MODULE LA05DS

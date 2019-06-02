@@ -31,7 +31,7 @@ SUBROUTINE SVECS(Ncomp,Lnfc,Yhp,Work,Iwork,Inhomo,Iflag)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
-  USE ML, ONLY: INDpvt, LNFcc => NFCc
+  USE ML, ONLY: indpvt_com, nfcc_com
   INTEGER :: Iflag, Inhomo, Lnfc, Ncomp, Iwork(*)
   REAL :: Work(*), Yhp(:,:)
   INTEGER :: idp, k, kp, niv
@@ -40,22 +40,22 @@ SUBROUTINE SVECS(Ncomp,Lnfc,Yhp,Work,Iwork,Inhomo,Iflag)
   IF ( Lnfc/=1 ) THEN
     niv = Lnfc
     Lnfc = 2*Lnfc
-    LNFcc = 2*LNFcc
-    kp = Lnfc + 2 + LNFcc
-    idp = INDpvt
-    INDpvt = 0
+    nfcc_com = 2*nfcc_com
+    kp = Lnfc + 2 + nfcc_com
+    idp = indpvt_com
+    indpvt_com = 0
     CALL MGSBV(Ncomp,Lnfc,Yhp,Ncomp,niv,Iflag,Work(1),Work(kp),Iwork(1),&
       Inhomo,Yhp(:,Lnfc+1),Work(Lnfc+2),dum)
     Lnfc = Lnfc/2
-    LNFcc = LNFcc/2
-    INDpvt = idp
+    nfcc_com = nfcc_com/2
+    indpvt_com = idp
     IF ( Iflag/=0.OR.niv/=Lnfc ) THEN
       Iflag = 99
       RETURN
     END IF
   END IF
   DO k = 1, Ncomp
-    Yhp(k,Lnfc+1) = Yhp(k,LNFcc+1)
+    Yhp(k,Lnfc+1) = Yhp(k,nfcc_com+1)
   END DO
   Iflag = 1
 END SUBROUTINE SVECS

@@ -19,24 +19,25 @@ SUBROUTINE INXCB(I,Ir,Idx,Idp)
   !   801001  DATE WRITTEN
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
-  USE CCBLK, ONLY : IK, NM
-  INTEGER I, id, Idp, Idx, ipl, Ir, izh
+  USE CCBLK, ONLY : ik_com, nm_com
+  INTEGER :: I, Idp, Idx, Ir
+  INTEGER :: id, ipl, izh
   !* FIRST EXECUTABLE STATEMENT  INXCB
   Idp = 0
   IF ( Ir<0 ) RETURN
   IF ( Ir==0 ) THEN
-    IF ( I>NM ) RETURN
+    IF ( I>nm_com ) RETURN
     Idx = I
     Idp = 1
     RETURN
   ELSE
     izh = 2**Ir
     id = I - izh - izh
-    Idx = id + id + (Ir-1)*IK + Ir + (IK-I)/izh + 4
+    Idx = id + id + (Ir-1)*ik_com + Ir + (ik_com-I)/izh + 4
     ipl = izh - 1
     Idp = izh + izh - 1
-    IF ( I-ipl<=NM ) THEN
-      IF ( I+ipl>NM ) Idp = NM + ipl - I + 1
+    IF ( I-ipl<=nm_com ) THEN
+      IF ( I+ipl>nm_com ) Idp = nm_com + ipl - I + 1
       RETURN
     END IF
   END IF

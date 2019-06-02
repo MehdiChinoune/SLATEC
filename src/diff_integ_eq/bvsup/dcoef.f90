@@ -78,7 +78,7 @@ SUBROUTINE DCOEF(Yh,Yp,Ncomp,Nrowb,Nfc,B,Beta,Coef,Inhomo,Re,Ae,By,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
-  USE DML, ONLY : EPS
+  USE DML, ONLY : eps_com
   USE service, ONLY : XGETF, XSETF
   !
   INTEGER :: Iflag, Inhomo, Ncomp, Nfc, Nfcc, Nrowb, Iwork(*)
@@ -126,7 +126,7 @@ SUBROUTINE DCOEF(Yh,Yp,Ncomp,Nrowb,Nfc,B,Beta,Coef,Inhomo,Re,Ae,By,&
   Iflag = 0
   mlso = 0
   IF ( Inhomo==3 ) mlso = 1
-  kflag = INT( 0.5D0*LOG10(EPS) )
+  kflag = INT( 0.5D0*LOG10(eps_com) )
   CALL XGETF(nf)
   CALL XSETF(0)
   DO

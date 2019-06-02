@@ -431,7 +431,7 @@ CONTAINS
     !   901014  Made editorial changes and added correct result to
     !           output.  (RWC)
     !   910708  Minor modifications in use of KPRINT.  (WRB)
-    USE SAVEX, ONLY : XSAve
+    USE SAVEX, ONLY : xsave_com
     USE slatec, ONLY : BVSUP
     USE common_mod, ONLY : PASS
     INTEGER numort, nxpts
@@ -467,7 +467,7 @@ CONTAINS
     END DO
     !
     tol = 1.0E-03
-    XSAve = 0.
+    xsave_com = 0.
     nrowy = 4
     ncomp = 2
     nxpts = 15

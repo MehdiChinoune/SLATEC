@@ -53,8 +53,9 @@ SUBROUTINE DREORT(Ncomp,Y,Yp,Yhp,Niv,W,S,P,Ip,Stowa,Iflag)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
-  USE DML, ONLY : C, INHomo, NFC, PX, PWCnd, TND, X, XENd, XOT, KNSwot, LOTjp, &
-    MNSwot, NSWot, TOL, NPS, NFCc
+  USE DML, ONLY : c_com, inhomo_com, nfc_com, px_com, pwcnd_com, tnd_com, x_com, &
+    xend_com, xot_com, knswot_com, lotjp_com, mnswot_com, nswot_com, tol_com, &
+    nps_com, nfcc_com
   !
   INTEGER :: Iflag, Ncomp, Niv, Ip(:)
   REAL(8) :: P(:), S(:), Stowa(:), W(:), Y(:,:), Yhp(:,:), Yp(:)
@@ -65,17 +66,17 @@ SUBROUTINE DREORT(Ncomp,Y,Yp,Yhp,Niv,W,S,P,Ip,Stowa,Iflag)
   !     BEGIN BLOCK PERMITTING ...EXITS TO 210
   !        BEGIN BLOCK PERMITTING ...EXITS TO 10
   !* FIRST EXECUTABLE STATEMENT  DREORT
-  nfcp = NFC + 1
+  nfcp = nfc_com + 1
   !
   !           CHECK TO SEE IF ORTHONORMALIZATION TEST IS TO BE PERFORMED
   !
   !        ...EXIT
   IF ( Iflag==1 ) THEN
-    KNSwot = KNSwot + 1
+    knswot_com = knswot_com + 1
     !        ...EXIT
-    IF ( KNSwot<NSWot ) THEN
+    IF ( knswot_com<nswot_com ) THEN
       !     ......EXIT
-      IF ( (XENd-X)*(X-XOT)<0.0D0 ) RETURN
+      IF ( (xend_com-x_com)*(x_com-xot_com)<0.0D0 ) RETURN
     END IF
   END IF
   CALL DSTOR1(Y(:,1),Yhp(:,1),Yp,Yhp(:,nfcp),1,0,0)
@@ -85,8 +86,8 @@ SUBROUTINE DREORT(Ncomp,Y,Yp,Yhp,Niv,W,S,P,Ip,Stowa,Iflag)
   !        ORTHOGONALIZE THE HOMOGENEOUS SOLUTIONS Y
   !        AND PARTICULAR SOLUTION YP.
   !
-  Niv = NFC
-  CALL DMGSBV(Ncomp,NFC,Y,Ncomp,Niv,mflag,S,P,Ip,INHomo,Yp,W,wcnd)
+  Niv = nfc_com
+  CALL DMGSBV(Ncomp,nfc_com,Y,Ncomp,Niv,mflag,S,P,Ip,inhomo_com,Yp,W,wcnd)
   !
   !           ************************************************************
   !
@@ -104,7 +105,7 @@ SUBROUTINE DREORT(Ncomp,Y,Yp,Yhp,Niv,W,S,P,Ip,Stowa,Iflag)
       !                 TEST FOR ORTHONORMALIZATION
       !
       !              ...EXIT
-      IF ( wcnd>=50.0D0*TOL ) THEN
+      IF ( wcnd>=50.0D0*tol_com ) THEN
         DO ijk = 1, nfcp
           !              ......EXIT
           IF ( S(ijk)>1.0D20 ) GOTO 50
@@ -115,33 +116,33 @@ SUBROUTINE DREORT(Ncomp,Y,Yp,Yhp,Niv,W,S,P,Ip,Stowa,Iflag)
         !                 CHECKPOINT.  OTHER CONTROLS ON THE NUMBER OF STEPS TO
         !                 THE NEXT CHECKPOINT ARE ADDED FOR SAFETY PURPOSES.
         !
-        NSWot = KNSwot
-        KNSwot = 0
-        LOTjp = 0
+        nswot_com = knswot_com
+        knswot_com = 0
+        lotjp_com = 0
         wcnd = LOG10(wcnd)
-        IF ( wcnd>TND+3.0D0 ) NSWot = 2*NSWot
-        IF ( wcnd<PWCnd ) THEN
-          dx = X - PX
-          dnd = PWCnd - wcnd
-          IF ( dnd>=4 ) NSWot = NSWot/2
-          dndt = wcnd - TND
-          IF ( ABS(dx*dndt)<=dnd*ABS(XENd-X) ) THEN
-            XOT = X + dx*dndt/dnd
-            NSWot = MIN(MNSwot,NSWot)
-            PWCnd = wcnd
+        IF ( wcnd>tnd_com+3.0D0 ) nswot_com = 2*nswot_com
+        IF ( wcnd<pwcnd_com ) THEN
+          dx = x_com - px_com
+          dnd = pwcnd_com - wcnd
+          IF ( dnd>=4 ) nswot_com = nswot_com/2
+          dndt = wcnd - tnd_com
+          IF ( ABS(dx*dndt)<=dnd*ABS(xend_com-x_com) ) THEN
+            xot_com = x_com + dx*dndt/dnd
+            nswot_com = MIN(mnswot_com,nswot_com)
+            pwcnd_com = wcnd
             !           ......EXIT
-            PX = X
+            px_com = x_com
           ELSE
-            XOT = XENd
-            NSWot = MIN(MNSwot,NSWot)
-            PWCnd = wcnd
-            PX = X
+            xot_com = xend_com
+            nswot_com = MIN(mnswot_com,nswot_com)
+            pwcnd_com = wcnd
+            px_com = x_com
           END IF
         ELSE
-          XOT = XENd
-          NSWot = MIN(MNSwot,NSWot)
-          PWCnd = wcnd
-          PX = X
+          xot_com = xend_com
+          nswot_com = MIN(mnswot_com,nswot_com)
+          pwcnd_com = wcnd
+          px_com = x_com
         END IF
         RETURN
       END IF
@@ -152,19 +153,19 @@ SUBROUTINE DREORT(Ncomp,Y,Yp,Yhp,Niv,W,S,P,Ip,Stowa,Iflag)
     !              ORTHONORMALIZATION NECESSARY SO WE NORMALIZE THE
     !              HOMOGENEOUS SOLUTION VECTORS AND CHANGE W ACCORDINGLY.
     !
-    50  NSWot = 1
-    KNSwot = 0
-    LOTjp = 1
+    50  nswot_com = 1
+    knswot_com = 0
+    lotjp_com = 1
     kk = 1
     l = 1
-    DO k = 1, NFCc
+    DO k = 1, nfcc_com
       !                 BEGIN BLOCK PERMITTING ...EXITS TO 140
       srp = SQRT(P(kk))
-      IF ( INHomo==1 ) W(k) = srp*W(k)
+      IF ( inhomo_com==1 ) W(k) = srp*W(k)
       vnorm = 1.0D0/srp
       P(kk) = vnorm
-      kk = kk + NFCc + 1 - k
-      IF ( NFC/=NFCc ) THEN
+      kk = kk + nfcc_com + 1 - k
+      IF ( nfc_com/=nfcc_com ) THEN
         !                 ......EXIT
         IF ( l/=k/2 ) CYCLE
       END IF
@@ -174,7 +175,7 @@ SUBROUTINE DREORT(Ncomp,Y,Yp,Yhp,Niv,W,S,P,Ip,Stowa,Iflag)
       l = l + 1
     END DO
     !
-    IF ( INHomo==1.AND.NPS/=1 ) THEN
+    IF ( inhomo_com==1.AND.nps_com/=1 ) THEN
       !
       !                 NORMALIZE THE PARTICULAR SOLUTION
       !
@@ -185,8 +186,8 @@ SUBROUTINE DREORT(Ncomp,Y,Yp,Yhp,Niv,W,S,P,Ip,Stowa,Iflag)
       DO j = 1, Ncomp
         Yp(j) = Yp(j)/ypnm
       END DO
-      DO j = 1, NFCc
-        W(j) = C*W(j)
+      DO j = 1, nfcc_com
+        W(j) = c_com*W(j)
       END DO
     END IF
     !
@@ -195,7 +196,7 @@ SUBROUTINE DREORT(Ncomp,Y,Yp,Yhp,Niv,W,S,P,Ip,Stowa,Iflag)
     !           BEGIN BLOCK PERMITTING ...EXITS TO 40
   ELSEIF ( Iflag==2 ) THEN
     Iflag = 30
-  ELSEIF ( NSWot<=1.AND.LOTjp/=0 ) THEN
+  ELSEIF ( nswot_com<=1.AND.lotjp_com/=0 ) THEN
     Iflag = 30
   ELSE
     !
@@ -203,11 +204,11 @@ SUBROUTINE DREORT(Ncomp,Y,Yp,Yhp,Niv,W,S,P,Ip,Stowa,Iflag)
     !                    ORTHONORMALIZATION POINT
     !
     CALL DSTWAY(Y(:,1),Yp,Yhp(:,1),1,Stowa)
-    LOTjp = 1
-    NSWot = 1
-    KNSwot = 0
-    MNSwot = MNSwot/2
-    TND = TND + 1.0D0
+    lotjp_com = 1
+    nswot_com = 1
+    knswot_com = 0
+    mnswot_com = mnswot_com/2
+    tnd_com = tnd_com + 1.0D0
     !           .........EXIT
     Iflag = 10
   END IF

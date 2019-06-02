@@ -35,8 +35,9 @@ SUBROUTINE DRKFAB(Ncomp,Xpts,Nxpts,Nfc,Iflag,Z,Mxnon,P,Ntp,Ip,Yhp,Niv,U,V,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
-  USE DML, ONLY : C, INHomo, KKKint, LLLint, X, XBEg, XENd, XOP, INFo, KOP, &
-    AE, RE, NOPg, NDIsk, NTApe, NEQ, INTeg, NPS, NUMort
+  USE DML, ONLY : c_com, inhomo_com, kkkint_com, lllint_com, x_com, xbeg_com, &
+    xend_com, xop_com, info_com, kop_com, ae_com, re_com, nopg_com, ndisk_com, &
+    ntape_com, neq_com, integ_com, nps_com, numort_com
   !
   INTEGER :: Iflag, Mxnon, Ncomp, Nfc, Nfcc, Niv, Ntp, Nxpts
   INTEGER :: Ip(Nfcc,Mxnon+1), Iwork(*)
@@ -53,18 +54,18 @@ SUBROUTINE DRKFAB(Ncomp,Xpts,Nxpts,Nfc,Iflag,Z,Mxnon,P,Ntp,Ip,Yhp,Niv,U,V,&
   !* FIRST EXECUTABLE STATEMENT  DRKFAB
   kod = 1
   non = 1
-  X = XBEg
+  x_com = xbeg_com
   jon = 1
-  INFo(1) = 0
-  INFo(2) = 0
-  INFo(3) = 1
-  INFo(4) = 1
-  Work(1) = XENd
+  info_com(1) = 0
+  info_com(2) = 0
+  info_com(3) = 1
+  info_com(4) = 1
+  Work(1) = xend_com
   ipar = 0
   !        ...EXIT
-  IF ( NOPg/=0 ) THEN
-    INFo(3) = 0
-    IF ( X==Z(1) ) jon = 2
+  IF ( nopg_com/=0 ) THEN
+    info_com(3) = 0
+    IF ( x_com==Z(1) ) jon = 2
   END IF
   nfcp1 = Nfc + 1
   !
@@ -74,39 +75,39 @@ SUBROUTINE DRKFAB(Ncomp,Xpts,Nxpts,Nfc,Iflag,Z,Mxnon,P,Ntp,Ip,Yhp,Niv,U,V,&
   !        ***************************************************************
   !
   DO kopp = 2, Nxpts
-    KOP = kopp
-    XOP = Xpts(KOP)
-    IF ( NDIsk==0 ) kod = KOP
+    kop_com = kopp
+    xop_com = Xpts(kop_com)
+    IF ( ndisk_com==0 ) kod = kop_com
     !
     !
     !              STEP BY STEP INTEGRATION LOOP BETWEEN OUTPUT POINTS.
     !
     !              BEGIN BLOCK PERMITTING ...EXITS TO 190
     !                 BEGIN BLOCK PERMITTING ...EXITS TO 30
-    50  xxop = XOP
+    50  xxop = xop_com
     !                 ...EXIT
-    IF ( NOPg/=0 ) THEN
-      IF ( XENd>XBEg.AND.XOP>Z(jon) ) xxop = Z(jon)
-      IF ( XENd<XBEg.AND.XOP<Z(jon) ) xxop = Z(jon)
+    IF ( nopg_com/=0 ) THEN
+      IF ( xend_com>xbeg_com.AND.xop_com>Z(jon) ) xxop = Z(jon)
+      IF ( xend_com<xbeg_com.AND.xop_com<Z(jon) ) xxop = Z(jon)
     END IF
     DO
       !
       !                 ******************************************************
       !                    BEGIN BLOCK PERMITTING ...EXITS TO 170
-      IF ( INTeg==2 ) THEN
+      IF ( integ_com==2 ) THEN
         !                       DDEABM INTEGRATOR
         !
-        ret(1) = RE
-        aet(1) = AE
-        CALL DDEABM(DBVDER_2,NEQ,X,Yhp,xxop,INFo,ret,aet,idid,Work,KKKint,Iwork,&
-          LLLint)
+        ret(1) = re_com
+        aet(1) = ae_com
+        CALL DDEABM(DBVDER_2,neq_com,x_com,Yhp,xxop,info_com,ret,aet,idid,Work,kkkint_com,Iwork,&
+          lllint_com)
       ELSE
         !                       DDERKF INTEGRATOR
         !
-        ret(1) = RE
-        aet(1) = AE
-        CALL DDERKF(DBVDER_2,NEQ,X,Yhp,xxop,INFo,ret,aet,idid,Work,KKKint,Iwork,&
-          LLLint)
+        ret(1) = re_com
+        aet(1) = ae_com
+        CALL DDERKF(DBVDER_2,neq_com,x_com,Yhp,xxop,info_com,ret,aet,idid,Work,kkkint_com,Iwork,&
+          lllint_com)
       END IF
       IF ( idid>=1 ) THEN
         !
@@ -115,9 +116,9 @@ SUBROUTINE DRKFAB(Ncomp,Xpts,Nxpts,Nfc,Iflag,Z,Mxnon,P,Ntp,Ip,Yhp,Niv,U,V,&
         !                           ORTHONORMALIZATION (TEMPORARILY USING U AND
         !                           V IN THE TEST)
         !
-        IF ( NOPg==0 ) THEN
+        IF ( nopg_com==0 ) THEN
           jflag = 1
-          IF ( INHomo==3.AND.X==XENd ) jflag = 3
+          IF ( inhomo_com==3.AND.x_com==xend_com ) jflag = 3
         ELSEIF ( xxop==Z(jon) ) THEN
           jflag = 2
         ELSE
@@ -132,7 +133,7 @@ SUBROUTINE DRKFAB(Ncomp,Xpts,Nxpts,Nfc,Iflag,Z,Mxnon,P,Ntp,Ip,Yhp,Niv,U,V,&
           EXIT
         END IF
         !
-        IF ( NDIsk==0 ) non = NUMort + 1
+        IF ( ndisk_com==0 ) non = numort_com + 1
         CALL DREORT(Ncomp,U(:,:,kod),V(:,kod),Yhp,Niv,W(:,non),S,P(:,non),&
           Ip(:,non),Stowa,jflag)
         !
@@ -142,8 +143,8 @@ SUBROUTINE DRKFAB(Ncomp,Xpts,Nxpts,Nfc,Iflag,Z,Mxnon,P,Ntp,Ip,Yhp,Niv,U,V,&
           RETURN
           !
         ELSEIF ( jflag==10 ) THEN
-          XOP = Xpts(KOP)
-          IF ( NDIsk==0 ) kod = KOP
+          xop_com = Xpts(kop_com)
+          IF ( ndisk_com==0 ) kod = kop_com
           !              ............EXIT
           GOTO 50
           !
@@ -153,16 +154,16 @@ SUBROUTINE DRKFAB(Ncomp,Xpts,Nxpts,Nfc,Iflag,Z,Mxnon,P,Ntp,Ip,Yhp,Niv,U,V,&
           !                           STORE ORTHONORMALIZED VECTORS INTO SOLUTION
           !                           VECTORS.
           !
-          IF ( NUMort>=Mxnon ) THEN
-            IF ( X/=XENd ) THEN
+          IF ( numort_com>=Mxnon ) THEN
+            IF ( x_com/=xend_com ) THEN
               Iflag = 13
               !     .....................EXIT
               RETURN
             END IF
           END IF
           !
-          NUMort = NUMort + 1
-          CALL DSTOR1(Yhp(:,1),U(:,1,kod),Yhp(:,nfcp1),V(:,kod),1,NDIsk,NTApe)
+          numort_com = numort_com + 1
+          CALL DSTOR1(Yhp(:,1),U(:,1,kod),Yhp(:,nfcp1),V(:,kod),1,ndisk_com,ntape_com)
           !
           !                       ************************************************
           !                           STORE ORTHONORMALIZATION INFORMATION,
@@ -170,16 +171,16 @@ SUBROUTINE DRKFAB(Ncomp,Xpts,Nxpts,Nfc,Iflag,Z,Mxnon,P,Ntp,Ip,Yhp,Niv,U,V,&
           !                           INTEGRATION TO THE NEXT ORTHONORMALIZATION
           !                           POINT OR OUTPUT POINT.
           !
-          Z(NUMort) = X
-          IF ( INHomo==1.AND.NPS==0 ) C = S(nfcp1)*C
-          IF ( NDIsk/=0 ) THEN
-            IF ( INHomo==1 ) WRITE (NTApe) (W(j,1),j=1,Nfcc)
-            WRITE (NTApe) (Ip(j,1),j=1,Nfcc), (P(j,1),j=1,Ntp)
+          Z(numort_com) = x_com
+          IF ( inhomo_com==1.AND.nps_com==0 ) c_com = S(nfcp1)*c_com
+          IF ( ndisk_com/=0 ) THEN
+            IF ( inhomo_com==1 ) WRITE (ntape_com) (W(j,1),j=1,Nfcc)
+            WRITE (ntape_com) (Ip(j,1),j=1,Nfcc), (P(j,1),j=1,Ntp)
           END IF
-          INFo(1) = 0
+          info_com(1) = 0
           jon = jon + 1
           !                 ......EXIT
-          IF ( NOPg==1.AND.X/=XOP ) GOTO 50
+          IF ( nopg_com==1.AND.x_com/=xop_com ) GOTO 50
           !
           !                       ************************************************
           !                           CONTINUE INTEGRATION IF WE ARE NOT AT AN
@@ -198,7 +199,7 @@ SUBROUTINE DRKFAB(Ncomp,Xpts,Nxpts,Nfc,Iflag,Z,Mxnon,P,Ntp,Ip,Yhp,Niv,U,V,&
           !                    ......EXIT
         END IF
       ELSE
-        INFo(1) = 1
+        info_com(1) = 1
         !                    ......EXIT
         IF ( idid/=-1 ) THEN
           Iflag = 20 - idid
@@ -211,7 +212,7 @@ SUBROUTINE DRKFAB(Ncomp,Xpts,Nxpts,Nfc,Iflag,Z,Mxnon,P,Ntp,Ip,Yhp,Niv,U,V,&
     !           STORAGE OF HOMOGENEOUS SOLUTIONS IN U AND THE PARTICULAR
     !           SOLUTION IN V AT THE OUTPUT POINTS.
     !
-    CALL DSTOR1(U(:,1,kod),Yhp(:,1),V(:,kod),Yhp(:,nfcp1),0,NDIsk,NTApe)
+    CALL DSTOR1(U(:,1,kod),Yhp(:,1),V(:,kod),Yhp(:,nfcp1),0,ndisk_com,ntape_com)
   END DO
   !        ***************************************************************
   !        ***************************************************************

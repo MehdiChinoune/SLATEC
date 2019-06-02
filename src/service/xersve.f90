@@ -69,9 +69,9 @@ SUBROUTINE XERSVE(Librar,Subrou,Messg,Kflag,Nerr,Level,Icount)
   INTEGER lun(5)
   CHARACTER(*) Librar, Subrou, Messg
   CHARACTER(8) :: lib, sub
-  CHARACTER(20) :: mes
+  CHARACTER(60) :: mes
   CHARACTER(8), SAVE :: libtab(LENTAB), subtab(LENTAB)
-  CHARACTER(20), SAVE :: mestab(LENTAB)
+  CHARACTER(60), SAVE :: mestab(LENTAB)
   INTEGER, SAVE :: nertab(LENTAB), levtab(LENTAB), kount(LENTAB)
   INTEGER :: kountx = 0, nmsg = 0
   !* FIRST EXECUTABLE STATEMENT  XERSVE
@@ -96,8 +96,8 @@ SUBROUTINE XERSVE(Librar,Subrou,Messg,Kflag,Nerr,Level,Icount)
       ! FORMATs.
       !
       99001 FORMAT ('0          ERROR MESSAGE SUMMARY'/&
-        ' LIBRARY    SUBROUTINE MESSAGE START             NERR',&
-        '     LEVEL     COUNT')
+        ' LIBRARY    SUBROUTINE MESSAGE START                                             &
+        &  NERR      LEVEL     COUNT')
       !
       !           Print body of table.
       !

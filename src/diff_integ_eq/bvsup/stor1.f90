@@ -31,7 +31,7 @@ SUBROUTINE STOR1(U,Yh,V,Yp,Ntemp,Ndisk,Ntape)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
-  USE ML, ONLY : C, INHomo, NCOmp, NFC
+  USE ML, ONLY : c_com, inhomo_com, ncomp_com, nfc_com
   INTEGER :: Ndisk, Ntape, Ntemp
   REAL :: U(:), V(:), Yh(:), Yp(:)
   INTEGER :: j, nctnf
@@ -39,34 +39,34 @@ SUBROUTINE STOR1(U,Yh,V,Yp,Ntemp,Ndisk,Ntape)
   !- *********************************************************************
   !
   !* FIRST EXECUTABLE STATEMENT  STOR1
-  nctnf = NCOmp*NFC
+  nctnf = ncomp_com*nfc_com
   DO j = 1, nctnf
     U(j) = Yh(j)
   END DO
-  IF ( INHomo/=1 ) THEN
+  IF ( inhomo_com/=1 ) THEN
     !
     !   ZERO PARTICULAR SOLUTION
     !
     IF ( Ntemp==1 ) RETURN
-    DO j = 1, NCOmp
+    DO j = 1, ncomp_com
       V(j) = 0.
     END DO
-    IF ( Ndisk==1 ) WRITE (Ntape) (V(j),j=1,NCOmp), (U(j),j=1,nctnf)
+    IF ( Ndisk==1 ) WRITE (Ntape) (V(j),j=1,ncomp_com), (U(j),j=1,nctnf)
     !
     !   NONZERO PARTICULAR SOLUTION
     !
   ELSEIF ( Ntemp==0 ) THEN
     !
-    DO j = 1, NCOmp
-      V(j) = C*Yp(j)
+    DO j = 1, ncomp_com
+      V(j) = c_com*Yp(j)
     END DO
     !
     !  IS OUTPUT INFORMATION TO BE WRITTEN TO DISK
     !
-    IF ( Ndisk==1 ) WRITE (Ntape) (V(j),j=1,NCOmp), (U(j),j=1,nctnf)
+    IF ( Ndisk==1 ) WRITE (Ntape) (V(j),j=1,ncomp_com), (U(j),j=1,nctnf)
   ELSE
     !
-    DO j = 1, NCOmp
+    DO j = 1, ncomp_com
       V(j) = Yp(j)
     END DO
     RETURN

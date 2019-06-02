@@ -194,12 +194,14 @@ SUBROUTINE XSET(Irad,Nradpl,Dzero,Nbits,Ierror)
   !           section.  (WRB)
   !           CALLs to XERROR changed to CALLs to XERMSG.  (WRB)
   !   920127  Revised PURPOSE section of prologue.  (DWL)
-  USE XBLK, ONLY : L, DLG10r, KMAx, L2, MLG102, NBItsf, NLG102, RAD2l, RADixl, &
-    LG102, RADixx
+  USE XBLK, ONLY : l_com, dlg10r_com, kmax_com, l2_com, mlg102_com, nbitsf_com, &
+    nlg102_com, rad2l_com, radixl_com, lg102_com, radixx_com
   USE service, ONLY : XERMSG, I1MACH
-  INTEGER i, ic, Ierror, ii, imaxex, iminex, iradx, it, j, k, kk, lg102x, &
-    lgtemp(20), log2r, lx, nb, nbitsx, np1, nrdplc, Irad, Nradpl, Nbits
-  REAL Dzero, dzerox
+  INTEGER :: Ierror, Irad, Nradpl, Nbits
+  REAL :: Dzero
+  INTEGER :: i, ic, ii, imaxex, iminex, iradx, it, j, k, kk, lg102x, log2r, lx, &
+    nb, nbitsx, np1, nrdplc, lgtemp(20)
+  REAL :: dzerox
   !
   !   LOG102 CONTAINS THE FIRST 60 DIGITS OF LOG10(2) FOR USE IN
   ! CONVERSION OF EXTENDED-RANGE NUMBERS TO BASE 10 .
@@ -245,22 +247,22 @@ SUBROUTINE XSET(Irad,Nradpl,Dzero,Nbits,Ierror)
   IF ( iradx==4 ) log2r = 2
   IF ( iradx==8 ) log2r = 3
   IF ( iradx==16 ) log2r = 4
-  NBItsf = log2r*nrdplc
-  RADixx = iradx
-  DLG10r = LOG10(RADixx)
+  nbitsf_com = log2r*nrdplc
+  radixx_com = iradx
+  dlg10r_com = LOG10(radixx_com)
   IF ( dzerox/=0.0 ) THEN
-    lx = INT( 0.5*LOG10(dzerox)/DLG10r )
+    lx = INT( 0.5*LOG10(dzerox)/dlg10r_com )
     ! RADIX**(2*L) SHOULD NOT OVERFLOW, BUT REDUCE L BY 1 FOR FURTHER
     ! PROTECTION.
     lx = lx - 1
   ELSE
     lx = MIN((1-iminex)/2,(imaxex-1)/2)
   END IF
-  L2 = 2*lx
+  l2_com = 2*lx
   IF ( lx>=4 ) THEN
-    L = lx
-    RADixl = RADixx**L
-    RAD2l = RADixl**2
+    l_com = lx
+    radixl_com = radixx_com**l_com
+    rad2l_com = radixl_com**2
     !    IT IS NECESSARY TO RESTRICT NBITS (OR NBITSX) TO BE LESS THAN SOME
     ! UPPER LIMIT BECAUSE OF BINARY-TO-DECIMAL CONVERSION. SUCH CONVERSION
     ! IS DONE BY XC210 AND REQUIRES A CONSTANT THAT IS STORED TO SOME FIXED
@@ -270,12 +272,12 @@ SUBROUTINE XSET(Irad,Nradpl,Dzero,Nbits,Ierror)
     ! BECAUSE THE SOFTWARE IS DESIGNED TO RUN ON COMPUTERS WITH INTEGER WORD
     ! LENGTH OF AT LEAST 16 BITS.
     IF ( 15<=nbitsx.AND.nbitsx<=63 ) THEN
-      KMAx = 2**(nbitsx-1) - L2
+      kmax_com = 2**(nbitsx-1) - l2_com
       nb = (nbitsx-1)/2
-      MLG102 = 2**nb
+      mlg102_com = 2**nb
       IF ( 1<=nrdplc*log2r.AND.nrdplc*log2r<=120 ) THEN
-        NLG102 = nrdplc*log2r/nb + 3
-        np1 = NLG102 + 1
+        nlg102_com = nrdplc*log2r/nb + 3
+        np1 = nlg102_com + 1
         !
         !   AFTER COMPLETION OF THE FOLLOWING LOOP, IC CONTAINS
         ! THE INTEGER PART AND LGTEMP CONTAINS THE FRACTIONAL PART
@@ -291,7 +293,7 @@ SUBROUTINE XSET(Irad,Nradpl,Dzero,Nbits,Ierror)
         !   AFTER COMPLETION OF THE FOLLOWING LOOP, LG102 CONTAINS
         ! LOG10(IRADX) IN RADIX MLG102. THE RADIX POINT IS
         ! BETWEEN LG102(1) AND LG102(2).
-        LG102(1) = ic
+        lg102_com(1) = ic
         DO i = 2, np1
           lg102x = 0
           DO j = 1, nb
@@ -304,15 +306,15 @@ SUBROUTINE XSET(Irad,Nradpl,Dzero,Nbits,Ierror)
             END DO
             lg102x = 2*lg102x + ic
           END DO
-          LG102(i) = lg102x
+          lg102_com(i) = lg102x
         END DO
         !
         ! CHECK SPECIAL CONDITIONS REQUIRED BY SUBROUTINES...
-        IF ( nrdplc>=L ) THEN
-          CALL XERMSG('SLATEC','XSET','NRADPL .GE. L',105,1)
+        IF ( nrdplc>=l_com ) THEN
+          CALL XERMSG('SLATEC','XSET','NRADPL .GE. l_com',105,1)
           Ierror = 105
           RETURN
-        ELSEIF ( 6*L<=KMAx ) THEN
+        ELSEIF ( 6*l_com<=kmax_com ) THEN
           iflag = 1
           RETURN
         END IF
@@ -331,7 +333,7 @@ SUBROUTINE XSET(Irad,Nradpl,Dzero,Nbits,Ierror)
     Ierror = 102
     RETURN
   END IF
-  CALL XERMSG('SLATEC','XSET','6*L .GT. KMAX',106,1)
+  CALL XERMSG('SLATEC','XSET','6*l_com .GT. KMAX',106,1)
   Ierror = 106
   RETURN
 END SUBROUTINE XSET

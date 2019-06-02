@@ -40,11 +40,12 @@ SUBROUTINE MPMUL(X,Y,Z)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   !   930124  Increased Array size in MPCON for SUN -r8.  (RWC)
-  USE MPCOM, ONLY : B, LUN, T, R
-  INTEGER i, i2, i2p, j, j1, X(*), Y(*), Z(*), rs, re, xi, c, ri
+  USE MPCOM, ONLY : b_com, lun_com, t_com, r_com
+  INTEGER :: X(30), Y(30), Z(30)
+  INTEGER :: i, i2, i2p, j, j1, rs, re, xi, c, ri
   !* FIRST EXECUTABLE STATEMENT  MPMUL
   CALL MPCHK(1,4)
-  i2 = T + 4
+  i2 = t_com + 4
   i2p = i2 + 1
   ! FORM SIGN OF PRODUCT
   rs = X(1)*Y(1)
@@ -53,27 +54,27 @@ SUBROUTINE MPMUL(X,Y,Z)
     re = X(2) + Y(2)
     ! CLEAR ACCUMULATOR
     DO i = 1, i2
-      R(i) = 0
+      r_com(i) = 0
     END DO
     ! PERFORM MULTIPLICATION
     c = 8
-    DO i = 1, T
+    DO i = 1, t_com
       xi = X(i+2)
       ! FOR SPEED, PUT THE NUMBER WITH MANY ZEROS FIRST
       IF ( xi/=0 ) THEN
-        CALL MPMLP(R(i+1),Y(3),xi,MIN(T,i2-i))
+        CALL MPMLP(r_com(i+1),Y(3),xi,MIN(t_com,i2-i))
         c = c - 1
         IF ( c<=0 ) THEN
           ! CHECK FOR LEGAL BASE B DIGIT
-          IF ( (xi<0).OR.(xi>=B) ) GOTO 200
+          IF ( (xi<0).OR.(xi>=b_com) ) GOTO 200
           ! PROPAGATE CARRIES AT END AND EVERY EIGHTH TIME,
           ! FASTER THAN DOING IT EVERY TIME.
           DO j = 1, i2
             j1 = i2p - j
-            ri = R(j1) + c
+            ri = r_com(j1) + c
             IF ( ri<0 ) GOTO 100
-            c = ri/B
-            R(j1) = ri - B*c
+            c = ri/b_com
+            r_com(j1) = ri - b_com*c
           END DO
           IF ( c/=0 ) GOTO 200
           c = 8
@@ -81,14 +82,14 @@ SUBROUTINE MPMUL(X,Y,Z)
       END IF
     END DO
     IF ( c/=8 ) THEN
-      IF ( (xi<0).OR.(xi>=B) ) GOTO 200
+      IF ( (xi<0).OR.(xi>=b_com) ) GOTO 200
       c = 0
       DO j = 1, i2
         j1 = i2p - j
-        ri = R(j1) + c
+        ri = r_com(j1) + c
         IF ( ri<0 ) GOTO 100
-        c = ri/B
-        R(j1) = ri - B*c
+        c = ri/b_com
+        r_com(j1) = ri - b_com*c
       END DO
       IF ( c/=0 ) GOTO 200
     END IF
@@ -100,11 +101,11 @@ SUBROUTINE MPMUL(X,Y,Z)
     Z(1) = 0
     RETURN
   END IF
-  100  WRITE (LUN,99001)
-  99001 FORMAT (' *** INTEGER OVERFLOW IN MPMUL, B TOO LARGE ***')
+  100  WRITE (lun_com,99001)
+  99001 FORMAT (' *** INTEGER OVERFLOW IN MPMUL, b_com TOO LARGE ***')
   GOTO 300
-  200  WRITE (LUN,99002)
-  99002 FORMAT (' *** ILLEGAL BASE B DIGIT IN CALL TO MPMUL,',&
+  200  WRITE (lun_com,99002)
+  99002 FORMAT (' *** ILLEGAL BASE b_com DIGIT IN CALL TO MPMUL,',&
     ' POSSIBLE OVERWRITING PROBLEM ***')
   300  CALL MPERR
   Z(1) = 0

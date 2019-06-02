@@ -46,9 +46,10 @@ SUBROUTINE XRED(X,Ix,Ierror)
   !           Corrected order of sections in prologue and added TYPE
   !           section.  (WRB)
   !   920127  Revised PURPOSE section of prologue.  (DWL)
-  USE XBLK, ONLY: RADixx, RAD2l, L2
-  INTEGER i, Ierror, ixa, ixa1, ixa2, Ix
-  REAL X
+  USE XBLK, ONLY: radixx_com, rad2l_com, l2_com
+  INTEGER :: Ierror, Ix
+  REAL :: X
+  INTEGER :: i, ixa, ixa1, ixa2
   REAL :: xa
   !
   !* FIRST EXECUTABLE STATEMENT  XRED
@@ -59,40 +60,40 @@ SUBROUTINE XRED(X,Ix,Ierror)
     xa = ABS(X)
     IF ( Ix/=0 ) THEN
       ixa = ABS(Ix)
-      ixa1 = ixa/L2
-      ixa2 = MOD(ixa,L2)
+      ixa1 = ixa/l2_com
+      ixa2 = MOD(ixa,l2_com)
       IF ( Ix>0 ) THEN
         !
         DO WHILE ( xa>=1.0 )
-          xa = xa/RAD2l
+          xa = xa/rad2l_com
           ixa1 = ixa1 + 1
         END DO
-        xa = xa*RADixx**ixa2
+        xa = xa*radixx_com**ixa2
         IF ( ixa1/=0 ) THEN
           DO i = 1, ixa1
             IF ( xa>1.0 ) RETURN
-            xa = xa*RAD2l
+            xa = xa*rad2l_com
           END DO
         END IF
       ELSE
         DO WHILE ( xa<=1.0 )
-          xa = xa*RAD2l
+          xa = xa*rad2l_com
           ixa1 = ixa1 + 1
         END DO
-        xa = xa/RADixx**ixa2
+        xa = xa/radixx_com**ixa2
         IF ( ixa1/=0 ) THEN
           DO i = 1, ixa1
             IF ( xa<1.0 ) RETURN
-            xa = xa/RAD2l
+            xa = xa/rad2l_com
           END DO
         END IF
       END IF
     END IF
-    IF ( xa<=RAD2l ) THEN
+    IF ( xa<=rad2l_com ) THEN
       IF ( xa>1.0 ) THEN
         X = SIGN(xa,X)
         Ix = 0
-      ELSEIF ( RAD2l*xa>=1.0 ) THEN
+      ELSEIF ( rad2l_com*xa>=1.0 ) THEN
         X = SIGN(xa,X)
         Ix = 0
       END IF

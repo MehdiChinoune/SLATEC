@@ -134,8 +134,10 @@ SUBROUTINE BVPOR(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
-  USE ML, ONLY : C, INHomo, IVP, PX, PWCnd, TND, X, XBEg, XENd, XOT, XOP, KNSwot, &
-    KOP, LOTjp, NSWot, AE, RE, TOL, NDIsk, NTApe, NEQ, NEQivp, NUMort, ICOco
+  USE ML, ONLY : c_com, inhomo_com, ivp_com, px_com, pwcnd_com, tnd_com, x_com, &
+    xbeg_com, xend_com, xot_com, xop_com, knswot_com, kop_com, lotjp_com, nswot_com, &
+    ae_com, re_com, tol_com, ndisk_com, ntape_com, neq_com, neqivp_com, numort_com, &
+    icoco_com
   INTEGER :: Mxnon, Ncomp, Nfc, Nfcc, Nic, Niv, Nrowa, Nrowb, Nrowy, Ntp, Iflag, &
     Nxpts
   INTEGER :: Ip(Nfcc,Mxnon+1), Iwork(*)
@@ -147,8 +149,8 @@ SUBROUTINE BVPOR(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
     nfcp1, nfcp2, nn, non, i, i1, i2, ic, ira, isflg, j, k
   !* FIRST EXECUTABLE STATEMENT  BVPOR
   nfcp1 = Nfc + 1
-  NUMort = 0
-  C = 1.0
+  numort_com = 0
+  c_com = 1.0
   !
   !- *********************************************************************
   !     CALCULATE INITIAL CONDITIONS WHICH SATISFY
@@ -167,7 +169,7 @@ SUBROUTINE BVPOR(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
   CALL LSSUDS(A,Yhp(1,Nfcc+1),Alpha,Nic,Ncomp,Nrowa,Yhp,Ncomp,Iflag,1,ira,0,&
     Work(1),Work(ndw+1),Iwork,Work(kws),Work(kwd),Work(kwt),isflg,Work(kwc))
   IF ( Iflag==1 ) THEN
-    IF ( Nfc/=Nfcc ) CALL SVECS(Ncomp,Nfc,Yhp,Work,Iwork,INHomo,Iflag)
+    IF ( Nfc/=Nfcc ) CALL SVECS(Ncomp,Nfc,Yhp,Work,Iwork,inhomo_com,Iflag)
     IF ( Iflag==1 ) THEN
       !
       !- *********************************************************************
@@ -175,34 +177,34 @@ SUBROUTINE BVPOR(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
       !     INITIALIZE VARIABLES FOR AUXILIARY INITIAL VALUE PROBLEM AND
       !     STORE INITIAL CONDITIONS.
       !
-      NEQ = Ncomp*Nfc
-      IF ( INHomo==1 ) NEQ = NEQ + Ncomp
-      IVP = 0
-      IF ( NEQivp/=0 ) THEN
-        IVP = NEQ
-        NEQ = NEQ + NEQivp
+      neq_com = Ncomp*Nfc
+      IF ( inhomo_com==1 ) neq_com = neq_com + Ncomp
+      ivp_com = 0
+      IF ( neqivp_com/=0 ) THEN
+        ivp_com = neq_com
+        neq_com = neq_com + neqivp_com
         nfcp2 = nfcp1
-        IF ( INHomo==1 ) nfcp2 = nfcp1 + 1
-        DO k = 1, NEQivp
+        IF ( inhomo_com==1 ) nfcp2 = nfcp1 + 1
+        DO k = 1, neqivp_com
           Yhp(k,nfcp2) = Alpha(Nic+k)
         END DO
       END IF
-      CALL STOR1(U(:,1,1),Yhp(:,1),V(:,1),Yhp(:,nfcp1),0,NDIsk,NTApe)
+      CALL STOR1(U(:,1,1),Yhp(:,1),V(:,1),Yhp(:,nfcp1),0,ndisk_com,ntape_com)
       !
       !- *********************************************************************
       !     SET UP DATA FOR THE ORTHONORMALIZATION TESTING PROCEDURE AND
       !     SAVE INITIAL CONDITIONS IN CASE A RESTART IS NECESSARY.
       !
-      NSWot = 1
-      KNSwot = 0
-      LOTjp = 1
-      TND = LOG10(10.*TOL)
-      PWCnd = LOG10(SQRT(TOL))
-      X = XBEg
-      PX = X
-      XOT = XENd
-      XOP = X
-      KOP = 1
+      nswot_com = 1
+      knswot_com = 0
+      lotjp_com = 1
+      tnd_com = LOG10(10.*tol_com)
+      pwcnd_com = LOG10(SQRT(tol_com))
+      x_com = xbeg_com
+      px_com = x_com
+      xot_com = xend_com
+      xop_com = x_com
+      kop_com = 1
       CALL STWAY(U(:,1,1),V(:,1),Yhp(:,1),0,Stowa)
       !
       !- *********************************************************************
@@ -211,7 +213,7 @@ SUBROUTINE BVPOR(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
       !
       CALL RKFAB(Ncomp,Xpts,Nxpts,Nfc,Iflag,Z,Mxnon,P,Ntp,Ip,Yhp,Niv,U,V,W,&
         S,Stowa,Work,Iwork,Nfcc)
-      IF ( Iflag==0.AND.ICOco/=0 ) THEN
+      IF ( Iflag==0.AND.icoco_com/=0 ) THEN
         !
         !- *********************************************************************
         !- *************** BACKWARD SWEEP TO OBTAIN SOLUTION *******************
@@ -223,11 +225,11 @@ SUBROUTINE BVPOR(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
         !   AT THE LAST OUTPUT POINT, SINCE THE LOCAL COPY OF EACH STILL EXISTS.
         !
         kod = 1
-        IF ( NDIsk==0 ) kod = Nxpts
+        IF ( ndisk_com==0 ) kod = Nxpts
         i1 = 1 + Nfcc*Nfcc
         i2 = i1 + Nfcc
         CALL SCOEF(U(1,1,kod),V(1,kod),Ncomp,Nrowb,Nfc,B,Beta,Coef,&
-          INHomo,RE,AE,Work,Work(i1),Work(i2),Iwork,Iflag,Nfcc)
+          inhomo_com,re_com,ae_com,Work,Work(i1),Work(i2),Iwork,Iflag,Nfcc)
         !
         !- *********************************************************************
         !     CALCULATE SOLUTION AT OUTPUT POINTS BY RECURRING BACKWARDS.
@@ -235,29 +237,29 @@ SUBROUTINE BVPOR(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
         !     NEW SUPERPOSITION COEFFICIENTS EACH TIME WE CROSS A POINT OF
         !     ORTHONORMALIZATION.
         !
-        k = NUMort
+        k = numort_com
         ncomp2 = Ncomp/2
         ic = 1
         IF ( Nfc/=Nfcc ) ic = 2
         DO j = 1, Nxpts
           kpts = Nxpts - j + 1
           kod = kpts
-          IF ( NDIsk==1 ) kod = 1
+          IF ( ndisk_com==1 ) kod = 1
           DO WHILE ( k/=0 )
-            IF ( XENd>XBEg.AND.Xpts(kpts)>=Z(k) ) EXIT
-            IF ( XENd<XBEg.AND.Xpts(kpts)<=Z(k) ) EXIT
+            IF ( xend_com>xbeg_com.AND.Xpts(kpts)>=Z(k) ) EXIT
+            IF ( xend_com<xbeg_com.AND.Xpts(kpts)<=Z(k) ) EXIT
             non = k
-            IF ( NDIsk/=0 ) THEN
+            IF ( ndisk_com/=0 ) THEN
               non = 1
-              BACKSPACE NTApe
-              READ (NTApe) (Ip(i,1),i=1,Nfcc), (P(i,1),i=1,Ntp)
-              BACKSPACE NTApe
+              BACKSPACE ntape_com
+              READ (ntape_com) (Ip(i,1),i=1,Nfcc), (P(i,1),i=1,Ntp)
+              BACKSPACE ntape_com
             END IF
-            IF ( INHomo==1 ) THEN
-              IF ( NDIsk/=0 ) THEN
-                BACKSPACE NTApe
-                READ (NTApe) (W(i,1),i=1,Nfcc)
-                BACKSPACE NTApe
+            IF ( inhomo_com==1 ) THEN
+              IF ( ndisk_com/=0 ) THEN
+                BACKSPACE ntape_com
+                READ (ntape_com) (W(i,1),i=1,Nfcc)
+                BACKSPACE ntape_com
               END IF
               DO n = 1, Nfcc
                 Coef(n) = Coef(n) - W(n,non)
@@ -273,10 +275,10 @@ SUBROUTINE BVPOR(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
             END DO
             k = k - 1
           END DO
-          IF ( NDIsk/=0 ) THEN
-            BACKSPACE NTApe
-            READ (NTApe) (V(i,1),i=1,Ncomp), ((U(i,m,1),i=1,Ncomp),m=1,Nfc)
-            BACKSPACE NTApe
+          IF ( ndisk_com/=0 ) THEN
+            BACKSPACE ntape_com
+            READ (ntape_com) (V(i,1),i=1,Ncomp), ((U(i,m,1),i=1,Ncomp),m=1,Nfc)
+            BACKSPACE ntape_com
           END IF
           DO n = 1, Ncomp
             Y(n,kpts) = V(n,kod) + DOT_PRODUCT(U(n,1:Nfc,kod),Coef(1:ic*Nfc:ic))
@@ -299,5 +301,5 @@ SUBROUTINE BVPOR(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
   !
   !- *********************************************************************
   !
-  Mxnon = NUMort
+  Mxnon = numort_com
 END SUBROUTINE BVPOR

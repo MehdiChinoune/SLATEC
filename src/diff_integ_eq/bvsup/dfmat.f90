@@ -14,15 +14,15 @@ SUBROUTINE DFMAT(X,Y,Yp)
   !* REVISION HISTORY  (YYMMDD)
   !   ??????  DATE WRITTEN
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
-  USE DSAVEX, ONLY : XSAve, TERm
+  USE DSAVEX, ONLY : xsave_com, term_com
   REAL(8) :: X, Y(:), Yp(:)
   REAL(8) :: tanx
   !* FIRST EXECUTABLE STATEMENT  DFMAT
   Yp(1) = Y(2)
-  IF ( X/=XSAve ) THEN
-    XSAve = X
+  IF ( X/=xsave_com ) THEN
+    xsave_com = X
     tanx = TAN(X/57.2957795130823D0)
-    TERm = 3.0D0/tanx + 2.0D0*tanx
+    term_com = 3.0D0/tanx + 2.0D0*tanx
   END IF
-  Yp(2) = -TERm*Y(2) - 0.7D0*Y(1)
+  Yp(2) = -term_com*Y(2) - 0.7D0*Y(1)
 END SUBROUTINE DFMAT

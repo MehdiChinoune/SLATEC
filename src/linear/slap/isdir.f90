@@ -162,7 +162,7 @@ INTEGER FUNCTION ISDIR(N,B,X,MSOLVE,Itol,Tol,Iter,&
   !   920511  Added complete declaration section.  (WRB)
   !   921026  Changed 1.0E10 to D1MACH(2) and corrected E to D in
   !           output format.  (FNF)
-  USE DSLBLK, ONLY : SOLn
+  USE DSLBLK, ONLY : soln_com
   USE service, ONLY : D1MACH
   INTERFACE
     SUBROUTINE MSOLVE(N,R,Z,Rwork,Iwork)
@@ -194,9 +194,9 @@ INTEGER FUNCTION ISDIR(N,B,X,MSOLVE,Itol,Tol,Iter,&
     Err = DNRM2(N,Z,1)/Bnrm
   ELSEIF ( Itol==11 ) THEN
     !         err = ||x-TrueSolution||/||TrueSolution|| (2-Norms).
-    IF ( Iter==0 ) Solnrm = DNRM2(N,SOLn,1)
+    IF ( Iter==0 ) Solnrm = DNRM2(N,soln_com,1)
     DO i = 1, N
-      Dz(i) = X(i) - SOLn(i)
+      Dz(i) = X(i) - soln_com(i)
     END DO
     Err = DNRM2(N,Dz,1)/Solnrm
   ELSE

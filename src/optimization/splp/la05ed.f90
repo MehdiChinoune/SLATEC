@@ -35,14 +35,14 @@ SUBROUTINE LA05ED(A,Irn,Ip,N,Iw,Reals)
   !   890831  Modified array declarations.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
-  USE LA05DD, ONLY : LCOl, LROw, NCP
+  USE LA05DD, ONLY : lcol_com, lrow_com, ncp_com
   INTEGER :: N
   LOGICAL :: Reals
   INTEGER :: Irn(*), Iw(N), Ip(N)
   REAL(8) :: A(:)
   INTEGER :: ipi, j, k, kl, kn, nz
   !* FIRST EXECUTABLE STATEMENT  LA05ED
-  NCP = NCP + 1
+  ncp_com = ncp_com + 1
   !     COMPRESS FILE OF POSITIVE INTEGERS. ENTRY J STARTS AT IRN(IP(J))
   !  AND CONTAINS IW(J) INTEGERS,J=1,N. OTHER COMPONENTS OF IRN ARE ZERO.
   !  LENGTH OF COMPRESSED FILE PLACED IN LROW IF REALS IS .TRUE. OR LCOL
@@ -64,8 +64,8 @@ SUBROUTINE LA05ED(A,Irn,Ip,N,Iw,Reals)
   ! KN IS THE POSITION OF NEXT ENTRY IN COMPRESSED FILE.
   kn = 0
   ipi = 0
-  kl = LCOl
-  IF ( Reals ) kl = LROw
+  kl = lcol_com
+  IF ( Reals ) kl = lrow_com
   ! LOOP THROUGH THE OLD FILE SKIPPING ZERO (DUMMY) ELEMENTS AND
   !     MOVING GENUINE ELEMENTS FORWARD. THE ENTRY NUMBER BECOMES
   !     KNOWN ONLY WHEN ITS END IS DETECTED BY THE PRESENCE OF A NEGATIVE
@@ -87,6 +87,6 @@ SUBROUTINE LA05ED(A,Irn,Ip,N,Iw,Reals)
       Irn(kn) = Irn(k)
     END IF
   END DO
-  IF ( Reals ) LROw = kn
-  IF ( .NOT.Reals ) LCOl = kn
+  IF ( Reals ) lrow_com = kn
+  IF ( .NOT.Reals ) lcol_com = kn
 END SUBROUTINE LA05ED

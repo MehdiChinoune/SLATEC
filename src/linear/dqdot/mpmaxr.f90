@@ -30,16 +30,17 @@ SUBROUTINE MPMAXR(X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   !   930124  Increased Array size in MPCON for SUN -r8.  (RWC)
-  USE MPCOM, ONLY : B, M, T
-  INTEGER i, it, X(*)
+  USE MPCOM, ONLY : b_com, m_com, t_com
+  INTEGER :: X(30)
+  INTEGER :: i, it
   !* FIRST EXECUTABLE STATEMENT  MPMAXR
   CALL MPCHK(1,4)
-  it = B - 1
+  it = b_com - 1
   ! SET FRACTION DIGITS TO B-1
-  DO i = 1, T
+  DO i = 1, t_com
     X(i+2) = it
   END DO
   ! SET SIGN AND EXPONENT
   X(1) = 1
-  X(2) = M
+  X(2) = m_com
 END SUBROUTINE MPMAXR

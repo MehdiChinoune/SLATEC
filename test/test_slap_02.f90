@@ -84,7 +84,7 @@ CONTAINS
     !   920602  Reduced problem size for a shorter-running test and
     !           corrected lower limit in "DO 80" statement.  (FNF)
     !   921021  Changed E's to 1P,D's in output formats.  (FNF)
-    USE DSLBLK, ONLY : SOLn
+    USE DSLBLK, ONLY : soln_com
     USE slatec, ONLY : D1MACH, DCPPLT, DS2Y, DSDBCG, DSDCG, DSDCGN, DSDCGS, DSDGMR, &
       DSDOMN, DSGS, DSICCG, DSILUR, DSJAC, DSLUBC, DSLUCN, DSLUCS, DSLUGM, DSLUOM, &
       XERMAX, XSETF, XSETUN
@@ -122,7 +122,7 @@ CONTAINS
     nmax = MAXN
     leniw = MAXIW
     lenw = MAXRW
-    ALLOCATE( SOLn(nmax) )
+    ALLOCATE( soln_com(nmax) )
     !
     !     Set some input data.
     !
@@ -160,7 +160,8 @@ CONTAINS
         !
         !         Set up a random matrix.
         !
-        CALL DRMGEN(neltmx,factor,ierr,n,nelt,isym,ia,ja,a,f,SOLn,rwork,iwork,iwork(n+1))
+        CALL DRMGEN(neltmx,factor,ierr,n,nelt,isym,ia,ja,a,f,soln_com,rwork,&
+          iwork,iwork(n+1))
         IF ( ierr/=0 ) THEN
           WRITE (Lun,99002) ierr
           !

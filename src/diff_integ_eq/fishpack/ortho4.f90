@@ -25,25 +25,25 @@ SUBROUTINE ORTHO4(Usol,Idmn,Zn,Zm,Pertrb)
   !   801001  DATE WRITTEN
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
-  USE SPL4, ONLY : IS, JS, MS, NS
+  USE SPL4, ONLY : is_com, js_com, ms_com, ns_com
   INTEGER :: Idmn
-  REAL :: Pertrb, Usol(Idmn,NS), Zm(MS), Zn(NS)
+  REAL :: Pertrb, Usol(Idmn,ns_com), Zm(ms_com), Zn(ns_com)
   INTEGER :: i, ifnl, ii, istr, j, jfnl, jj, jstr
   REAL :: ete, ute
   !* FIRST EXECUTABLE STATEMENT  ORTHO4
-  istr = IS
-  ifnl = MS
-  jstr = JS
-  jfnl = NS
+  istr = is_com
+  ifnl = ms_com
+  jstr = js_com
+  jfnl = ns_com
   !
   !     COMPUTE WEIGHTED INNER PRODUCTS
   !
   ute = 0.0
   ete = 0.0
-  DO i = IS, MS
-    ii = i - IS + 1
-    DO j = JS, NS
-      jj = j - JS + 1
+  DO i = is_com, ms_com
+    ii = i - is_com + 1
+    DO j = js_com, ns_com
+      jj = j - js_com + 1
       ete = ete + Zm(ii)*Zn(jj)
       ute = ute + Usol(i,j)*Zm(ii)*Zn(jj)
     END DO

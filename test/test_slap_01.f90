@@ -85,7 +85,7 @@ CONTAINS
     !   920602  Reduced problem size for a shorter-running test and
     !           corrected lower limit in "DO 80" statement.  (FNF)
     !   921021  Added 1P's to output formats.  (FNF)
-    USE SSLBLK, ONLY : SOLn
+    USE SSLBLK, ONLY : soln_com
     USE slatec, ONLY : R1MACH, SCPPLT, SS2Y, SSDBCG, SSDCG, SSDCGN, SSDCGS, SSDGMR, &
       SSDOMN, SSGS, SSICCG, SSILUR, SSJAC, SSLUBC, SSLUCN, SSLUCS, SSLUGM, SSLUOM, &
       XERMAX, XSETF, XSETUN
@@ -123,7 +123,7 @@ CONTAINS
     nmax = MAXN
     leniw = MAXIW
     lenw = MAXRW
-    ALLOCATE( SOLn(nmax) )
+    ALLOCATE( soln_com(nmax) )
     !
     !     Set some input data.
     !
@@ -161,7 +161,8 @@ CONTAINS
         !
         !         Set up a random matrix.
         !
-        CALL SRMGEN(neltmx,factor,ierr,n,nelt,isym,ia,ja,a,f,SOLn,rwork,iwork, iwork(n+1))
+        CALL SRMGEN(neltmx,factor,ierr,n,nelt,isym,ia,ja,a,f,soln_com,rwork,&
+          iwork,iwork(n+1))
         IF ( ierr/=0 ) THEN
           WRITE (Lun,99002) ierr
           !

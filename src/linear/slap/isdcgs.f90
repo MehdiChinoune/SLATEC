@@ -195,7 +195,7 @@ INTEGER FUNCTION ISDCGS(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,&
   !   921026  Changed 1.0E10 to D1MACH(2) and corrected D to E in
   !           output format.  (FNF)
   !   921113  Corrected C***CATEGORY line.  (FNF)
-  USE DSLBLK, ONLY : SOLn
+  USE DSLBLK, ONLY : soln_com
   USE service, ONLY : D1MACH
   INTERFACE
     SUBROUTINE MSOLVE(N,R,Z,Rwork,Iwork)
@@ -236,9 +236,9 @@ INTEGER FUNCTION ISDCGS(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,&
     Err = DNRM2(N,R,1)/Bnrm
   ELSEIF ( Itol==11 ) THEN
     !         err = ||x-TrueSolution||/||TrueSolution|| (2-Norms).
-    IF ( Iter==0 ) Solnrm = DNRM2(N,SOLn,1)
+    IF ( Iter==0 ) Solnrm = DNRM2(N,soln_com,1)
     DO i = 1, N
-      V2(i) = X(i) - SOLn(i)
+      V2(i) = X(i) - soln_com(i)
     END DO
     Err = DNRM2(N,V2,1)/Solnrm
   ELSE

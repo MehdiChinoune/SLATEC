@@ -19,7 +19,7 @@ REAL FUNCTION BSRH(Xll,Xrr,Iz,C,A,Bh,F,Sgn)
   !   801001  DATE WRITTEN
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
-  USE CBLKT, ONLY : CNV
+  USE CBLKT, ONLY : cnv_com
   INTERFACE
     REAL FUNCTION F(X,Iz,C,A,Bh)
       INTEGER :: Iz
@@ -27,7 +27,7 @@ REAL FUNCTION BSRH(Xll,Xrr,Iz,C,A,Bh,F,Sgn)
     END FUNCTION F
   END INTERFACE
   INTEGER :: Iz
-  REAL A(Iz), Bh(Iz), C(Iz)
+  REAL :: A(Iz), Bh(Iz), C(Iz)
   REAL :: Sgn, Xll, Xrr
   REAL :: dx, x, xl, xr
   !* FIRST EXECUTABLE STATEMENT  BSRH
@@ -44,7 +44,7 @@ REAL FUNCTION BSRH(Xll,Xrr,Iz,C,A,Bh,F,Sgn)
     xr = x
   END IF
   dx = .5*dx
-  IF ( dx>CNV ) GOTO 100
+  IF ( dx>cnv_com ) GOTO 100
   BSRH = .5*(xl+xr)
   RETURN
 END FUNCTION BSRH

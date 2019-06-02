@@ -30,8 +30,9 @@ SUBROUTINE SPELIP(Intl,Iorder,A,B,M,Mbdcnd,Bda,Alpha,Bdb,Beta,C,D,N,&
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
-  USE SPLPCM, ONLY : L, AIT, BIT, CIT, DIT, DLX, DLX4, DLY, DLY4, IS, JS, K, KSWx, &
-    KSWy, MIT, MS, NIT, NS, TDLx3, TDLy3
+  USE SPLPCM, ONLY : l_com, ait_com, bit_com, cit_com, dit_com, dlx_com, dlx4_com, &
+    dly_com, dly4_com, is_com, js_com, k_com, kswx_com, kswy_com, mit_com, ms_com, &
+    nit_com, ns_com, tdlx3_com, tdly3_com
   INTERFACE
     SUBROUTINE COFX(X,A,B,C)
       REAL :: X, A, B, C
@@ -50,14 +51,14 @@ SUBROUTINE SPELIP(Intl,Iorder,A,B,M,Mbdcnd,Bda,Alpha,Bdb,Beta,C,D,N,&
     fyn, xi, yj
   LOGICAL :: singlr
   !* FIRST EXECUTABLE STATEMENT  SPELIP
-  KSWx = Mbdcnd + 1
-  KSWy = Nbdcnd + 1
-  K = M + 1
-  L = N + 1
-  AIT = A
-  BIT = B
-  CIT = C
-  DIT = D
+  kswx_com = Mbdcnd + 1
+  kswy_com = Nbdcnd + 1
+  k_com = M + 1
+  l_com = N + 1
+  ait_com = A
+  bit_com = B
+  cit_com = C
+  dit_com = D
   !
   !     SET RIGHT HAND SIDE VALUES FROM GRHS IN USOL ON THE INTERIOR
   !     AND NON-SPECIFIED BOUNDARIES.
@@ -67,72 +68,72 @@ SUBROUTINE SPELIP(Intl,Iorder,A,B,M,Mbdcnd,Bda,Alpha,Bdb,Beta,C,D,N,&
       Usol(i,j) = Grhs(i,j)
     END DO
   END DO
-  IF ( KSWx/=2.AND.KSWx/=3 ) THEN
+  IF ( kswx_com/=2.AND.kswx_com/=3 ) THEN
     DO j = 2, N
       Usol(1,j) = Grhs(1,j)
     END DO
   END IF
-  IF ( KSWx/=2.AND.KSWx/=5 ) THEN
+  IF ( kswx_com/=2.AND.kswx_com/=5 ) THEN
     DO j = 2, N
-      Usol(K,j) = Grhs(K,j)
+      Usol(k_com,j) = Grhs(k_com,j)
     END DO
   END IF
-  IF ( KSWy/=2.AND.KSWy/=3 ) THEN
+  IF ( kswy_com/=2.AND.kswy_com/=3 ) THEN
     DO i = 2, M
       Usol(i,1) = Grhs(i,1)
     END DO
   END IF
-  IF ( KSWy/=2.AND.KSWy/=5 ) THEN
+  IF ( kswy_com/=2.AND.kswy_com/=5 ) THEN
     DO i = 2, M
-      Usol(i,L) = Grhs(i,L)
+      Usol(i,l_com) = Grhs(i,l_com)
     END DO
   END IF
-  IF ( KSWx/=2.AND.KSWx/=3.AND.KSWy/=2.AND.KSWy/=3 ) Usol(1,1) = Grhs(1,1)
-  IF ( KSWx/=2.AND.KSWx/=5.AND.KSWy/=2.AND.KSWy/=3 ) Usol(K,1) = Grhs(K,1)
-  IF ( KSWx/=2.AND.KSWx/=3.AND.KSWy/=2.AND.KSWy/=5 ) Usol(1,L) = Grhs(1,L)
-  IF ( KSWx/=2.AND.KSWx/=5.AND.KSWy/=2.AND.KSWy/=5 ) Usol(K,L) = Grhs(K,L)
+  IF ( kswx_com/=2.AND.kswx_com/=3.AND.kswy_com/=2.AND.kswy_com/=3 ) Usol(1,1) = Grhs(1,1)
+  IF ( kswx_com/=2.AND.kswx_com/=5.AND.kswy_com/=2.AND.kswy_com/=3 ) Usol(k_com,1) = Grhs(k_com,1)
+  IF ( kswx_com/=2.AND.kswx_com/=3.AND.kswy_com/=2.AND.kswy_com/=5 ) Usol(1,l_com) = Grhs(1,l_com)
+  IF ( kswx_com/=2.AND.kswx_com/=5.AND.kswy_com/=2.AND.kswy_com/=5 ) Usol(k_com,l_com) = Grhs(k_com,l_com)
   i1 = 1
   !
   !     SET SWITCHES FOR PERIODIC OR NON-PERIODIC BOUNDARIES
   !
   mp = 1
   np = 1
-  IF ( KSWx==1 ) mp = 0
-  IF ( KSWy==1 ) np = 0
+  IF ( kswx_com==1 ) mp = 0
+  IF ( kswy_com==1 ) np = 0
   !
   !     SET DLX,DLY AND SIZE OF BLOCK TRI-DIAGONAL SYSTEM GENERATED
   !     IN NINT,MINT
   !
-  DLX = (BIT-AIT)/M
-  MIT = K - 1
-  IF ( KSWx==2 ) MIT = K - 2
-  IF ( KSWx==4 ) MIT = K
-  DLY = (DIT-CIT)/N
-  NIT = L - 1
-  IF ( KSWy==2 ) NIT = L - 2
-  IF ( KSWy==4 ) NIT = L
-  TDLx3 = 2.0*DLX**3
-  DLX4 = DLX**4
-  TDLy3 = 2.0*DLY**3
-  DLY4 = DLY**4
+  dlx_com = (bit_com-ait_com)/M
+  mit_com = k_com - 1
+  IF ( kswx_com==2 ) mit_com = k_com - 2
+  IF ( kswx_com==4 ) mit_com = k_com
+  dly_com = (dit_com-cit_com)/N
+  nit_com = l_com - 1
+  IF ( kswy_com==2 ) nit_com = l_com - 2
+  IF ( kswy_com==4 ) nit_com = l_com
+  tdlx3_com = 2.0*dlx_com**3
+  dlx4_com = dlx_com**4
+  tdly3_com = 2.0*dly_com**3
+  dly4_com = dly_com**4
   !
   !     SET SUBSCRIPT LIMITS FOR PORTION OF ARRAY TO INPUT TO BLKTRI
   !
-  IS = 1
-  JS = 1
-  IF ( KSWx==2.OR.KSWx==3 ) IS = 2
-  IF ( KSWy==2.OR.KSWy==3 ) JS = 2
-  NS = NIT + JS - 1
-  MS = MIT + IS - 1
+  is_com = 1
+  js_com = 1
+  IF ( kswx_com==2.OR.kswx_com==3 ) is_com = 2
+  IF ( kswy_com==2.OR.kswy_com==3 ) js_com = 2
+  ns_com = nit_com + js_com - 1
+  ms_com = mit_com + is_com - 1
   !
   !     SET X - DIRECTION
   !
-  DO i = 1, MIT
-    xi = AIT + (IS+i-2)*DLX
+  DO i = 1, mit_com
+    xi = ait_com + (is_com+i-2)*dlx_com
     CALL COFX(xi,ai,bi,ci)
-    axi = (ai/DLX-0.5*bi)/DLX
-    bxi = -2.*ai/DLX**2 + ci
-    cxi = (ai/DLX+0.5*bi)/DLX
+    axi = (ai/dlx_com-0.5*bi)/dlx_com
+    bxi = -2.*ai/dlx_com**2 + ci
+    cxi = (ai/dlx_com+0.5*bi)/dlx_com
     Am(i) = axi
     Bm(i) = bxi
     Cm(i) = cxi
@@ -140,12 +141,12 @@ SUBROUTINE SPELIP(Intl,Iorder,A,B,M,Mbdcnd,Bda,Alpha,Bdb,Beta,C,D,N,&
   !
   !     SET Y DIRECTION
   !
-  DO j = 1, NIT
-    yj = CIT + (JS+j-2)*DLY
+  DO j = 1, nit_com
+    yj = cit_com + (js_com+j-2)*dly_com
     CALL COFY(yj,dj,ej,fj)
-    dyj = (dj/DLY-0.5*ej)/DLY
-    eyj = (-2.*dj/DLY**2+fj)
-    fyj = (dj/DLY+0.5*ej)/DLY
+    dyj = (dj/dly_com-0.5*ej)/dly_com
+    eyj = (-2.*dj/dly_com**2+fj)
+    fyj = (dj/dly_com+0.5*ej)/dly_com
     An(j) = dyj
     Bn(j) = eyj
     Cn(j) = fyj
@@ -154,113 +155,113 @@ SUBROUTINE SPELIP(Intl,Iorder,A,B,M,Mbdcnd,Bda,Alpha,Bdb,Beta,C,D,N,&
   !     ADJUST EDGES IN X DIRECTION UNLESS PERIODIC
   !
   ax1 = Am(1)
-  cxm = Cm(MIT)
-  SELECT CASE (KSWx)
+  cxm = Cm(mit_com)
+  SELECT CASE (kswx_com)
     CASE (1)
     CASE (3)
       !
       !     DIRICHLET-MIXED IN X DIRECTION
       !
       Am(1) = 0.0
-      Am(MIT) = Am(MIT) + cxm
-      Bm(MIT) = Bm(MIT) - 2.*Beta*DLX*cxm
-      Cm(MIT) = 0.0
+      Am(mit_com) = Am(mit_com) + cxm
+      Bm(mit_com) = Bm(mit_com) - 2.*Beta*dlx_com*cxm
+      Cm(mit_com) = 0.0
     CASE (4)
       !
       !     MIXED - MIXED IN X DIRECTION
       !
       Am(1) = 0.0
-      Bm(1) = Bm(1) + 2.*DLX*Alpha*ax1
+      Bm(1) = Bm(1) + 2.*dlx_com*Alpha*ax1
       Cm(1) = Cm(1) + ax1
-      Am(MIT) = Am(MIT) + cxm
-      Bm(MIT) = Bm(MIT) - 2.*DLX*Beta*cxm
-      Cm(MIT) = 0.0
+      Am(mit_com) = Am(mit_com) + cxm
+      Bm(mit_com) = Bm(mit_com) - 2.*dlx_com*Beta*cxm
+      Cm(mit_com) = 0.0
     CASE (5)
       !
       !     MIXED-DIRICHLET IN X DIRECTION
       !
       Am(1) = 0.0
-      Bm(1) = Bm(1) + 2.*Alpha*DLX*ax1
+      Bm(1) = Bm(1) + 2.*Alpha*dlx_com*ax1
       Cm(1) = Cm(1) + ax1
-      Cm(MIT) = 0.0
+      Cm(mit_com) = 0.0
     CASE DEFAULT
       !
       !     DIRICHLET-DIRICHLET IN X DIRECTION
       !
       Am(1) = 0.0
-      Cm(MIT) = 0.0
+      Cm(mit_com) = 0.0
   END SELECT
   !
   !     ADJUST IN Y DIRECTION UNLESS PERIODIC
   !
   dy1 = An(1)
-  fyn = Cn(NIT)
-  SELECT CASE (KSWy)
+  fyn = Cn(nit_com)
+  SELECT CASE (kswy_com)
     CASE (1)
     CASE (3)
       !
       !     DIRICHLET-MIXED IN Y DIRECTION
       !
       An(1) = 0.0
-      An(NIT) = An(NIT) + fyn
-      Bn(NIT) = Bn(NIT) - 2.*DLY*Xnu*fyn
-      Cn(NIT) = 0.0
+      An(nit_com) = An(nit_com) + fyn
+      Bn(nit_com) = Bn(nit_com) - 2.*dly_com*Xnu*fyn
+      Cn(nit_com) = 0.0
     CASE (4)
       !
       !     MIXED - MIXED DIRECTION IN Y DIRECTION
       !
       An(1) = 0.0
-      Bn(1) = Bn(1) + 2.*DLY*Gama*dy1
+      Bn(1) = Bn(1) + 2.*dly_com*Gama*dy1
       Cn(1) = Cn(1) + dy1
-      An(NIT) = An(NIT) + fyn
-      Bn(NIT) = Bn(NIT) - 2.0*DLY*Xnu*fyn
-      Cn(NIT) = 0.0
+      An(nit_com) = An(nit_com) + fyn
+      Bn(nit_com) = Bn(nit_com) - 2.0*dly_com*Xnu*fyn
+      Cn(nit_com) = 0.0
     CASE (5)
       !
       !     MIXED-DIRICHLET IN Y DIRECTION
       !
       An(1) = 0.0
-      Bn(1) = Bn(1) + 2.*DLY*Gama*dy1
+      Bn(1) = Bn(1) + 2.*dly_com*Gama*dy1
       Cn(1) = Cn(1) + dy1
-      Cn(NIT) = 0.0
+      Cn(nit_com) = 0.0
     CASE DEFAULT
       !
       !     DIRICHLET-DIRICHLET IN Y DIRECTION
       !
       An(1) = 0.0
-      Cn(NIT) = 0.0
+      Cn(nit_com) = 0.0
   END SELECT
-  IF ( KSWx/=1 ) THEN
+  IF ( kswx_com/=1 ) THEN
     !
     !     ADJUST USOL ALONG X EDGE
     !
-    DO j = JS, NS
-      IF ( KSWx/=2.AND.KSWx/=3 ) THEN
-        Usol(IS,j) = Usol(IS,j) + 2.0*DLX*ax1*Bda(j)
+    DO j = js_com, ns_com
+      IF ( kswx_com/=2.AND.kswx_com/=3 ) THEN
+        Usol(is_com,j) = Usol(is_com,j) + 2.0*dlx_com*ax1*Bda(j)
       ELSE
-        Usol(IS,j) = Usol(IS,j) - ax1*Usol(1,j)
+        Usol(is_com,j) = Usol(is_com,j) - ax1*Usol(1,j)
       END IF
-      IF ( KSWx/=2.AND.KSWx/=5 ) THEN
-        Usol(MS,j) = Usol(MS,j) - 2.0*DLX*cxm*Bdb(j)
+      IF ( kswx_com/=2.AND.kswx_com/=5 ) THEN
+        Usol(ms_com,j) = Usol(ms_com,j) - 2.0*dlx_com*cxm*Bdb(j)
       ELSE
-        Usol(MS,j) = Usol(MS,j) - cxm*Usol(K,j)
+        Usol(ms_com,j) = Usol(ms_com,j) - cxm*Usol(k_com,j)
       END IF
     END DO
   END IF
-  IF ( KSWy/=1 ) THEN
+  IF ( kswy_com/=1 ) THEN
     !
     !     ADJUST USOL ALONG Y EDGE
     !
-    DO i = IS, MS
-      IF ( KSWy/=2.AND.KSWy/=3 ) THEN
-        Usol(i,JS) = Usol(i,JS) + 2.0*DLY*dy1*Bdc(i)
+    DO i = is_com, ms_com
+      IF ( kswy_com/=2.AND.kswy_com/=3 ) THEN
+        Usol(i,js_com) = Usol(i,js_com) + 2.0*dly_com*dy1*Bdc(i)
       ELSE
-        Usol(i,JS) = Usol(i,JS) - dy1*Usol(i,1)
+        Usol(i,js_com) = Usol(i,js_com) - dy1*Usol(i,1)
       END IF
-      IF ( KSWy/=2.AND.KSWy/=5 ) THEN
-        Usol(i,NS) = Usol(i,NS) - 2.0*DLY*fyn*Bdd(i)
+      IF ( kswy_com/=2.AND.kswy_com/=5 ) THEN
+        Usol(i,ns_com) = Usol(i,ns_com) - 2.0*dly_com*fyn*Bdd(i)
       ELSE
-        Usol(i,NS) = Usol(i,NS) - fyn*Usol(i,L)
+        Usol(i,ns_com) = Usol(i,ns_com) - fyn*Usol(i,l_com)
       END IF
     END DO
   END IF
@@ -268,13 +269,13 @@ SUBROUTINE SPELIP(Intl,Iorder,A,B,M,Mbdcnd,Bda,Alpha,Bdb,Beta,C,D,N,&
   !     SAVE ADJUSTED EDGES IN GRHS IF IORDER=4
   !
   IF ( Iorder==4 ) THEN
-    DO j = JS, NS
-      Grhs(IS,j) = Usol(IS,j)
-      Grhs(MS,j) = Usol(MS,j)
+    DO j = js_com, ns_com
+      Grhs(is_com,j) = Usol(is_com,j)
+      Grhs(ms_com,j) = Usol(ms_com,j)
     END DO
-    DO i = IS, MS
-      Grhs(i,JS) = Usol(i,JS)
-      Grhs(i,NS) = Usol(i,NS)
+    DO i = is_com, ms_com
+      Grhs(i,js_com) = Usol(i,js_com)
+      Grhs(i,ns_com) = Usol(i,ns_com)
     END DO
   END IF
   iord = Iorder
@@ -287,13 +288,13 @@ SUBROUTINE SPELIP(Intl,Iorder,A,B,M,Mbdcnd,Bda,Alpha,Bdb,Beta,C,D,N,&
   !     COMPUTE NON-ZERO EIGENVECTOR IN NULL SPACE OF TRANSPOSE
   !     IF SINGULAR
   !
-  IF ( singlr ) CALL TRISP(MIT,Am,Bm,Cm,Dm,Um,Zm)
-  IF ( singlr ) CALL TRISP(NIT,An,Bn,Cn,Dn,Un,Zn)
+  IF ( singlr ) CALL TRISP(mit_com,Am,Bm,Cm,Dm,Um,Zm)
+  IF ( singlr ) CALL TRISP(nit_com,An,Bn,Cn,Dn,Un,Zn)
   !
   !     MAKE INITIALIZATION CALL TO BLKTRI
   !
-  IF ( Intl==0 ) CALL BLKTRI(Intl,np,NIT,An,Bn,Cn,mp,MIT,Am,Bm,Cm,Idmn,&
-    Usol(IS,JS),Ierror,W)
+  IF ( Intl==0 ) CALL BLKTRI(Intl,np,nit_com,An,Bn,Cn,mp,mit_com,Am,Bm,Cm,Idmn,&
+    Usol(is_com,js_com),Ierror,W)
   IF ( Ierror/=0 ) RETURN
   !
   !     ADJUST RIGHT HAND SIDE IF NECESSARY
@@ -303,19 +304,19 @@ SUBROUTINE SPELIP(Intl,Iorder,A,B,M,Mbdcnd,Bda,Alpha,Bdb,Beta,C,D,N,&
   !
   !     COMPUTE SOLUTION
   !
-  CALL BLKTRI(i1,np,NIT,An,Bn,Cn,mp,MIT,Am,Bm,Cm,Idmn,Usol(IS,JS),Ierror,W)
+  CALL BLKTRI(i1,np,nit_com,An,Bn,Cn,mp,mit_com,Am,Bm,Cm,Idmn,Usol(is_com,js_com),Ierror,W)
   IF ( Ierror/=0 ) RETURN
   !
   !     SET PERIODIC BOUNDARIES IF NECESSARY
   !
-  IF ( KSWx==1 ) THEN
-    DO j = 1, L
-      Usol(K,j) = Usol(1,j)
+  IF ( kswx_com==1 ) THEN
+    DO j = 1, l_com
+      Usol(k_com,j) = Usol(1,j)
     END DO
   END IF
-  IF ( KSWy==1 ) THEN
-    DO i = 1, K
-      Usol(i,L) = Usol(i,1)
+  IF ( kswy_com==1 ) THEN
+    DO i = 1, k_com
+      Usol(i,l_com) = Usol(i,1)
     END DO
   END IF
   !

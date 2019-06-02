@@ -37,12 +37,14 @@ SUBROUTINE MPCDM(Dx,Z)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   !   930124  Increased Array size in MPCON for SUN -r8.  (RWC)
-  USE MPCOM, ONLY : B, T, R
-  INTEGER i, i2, ib, ie, k, Z(*), rs, re, tp
-  REAL(8) :: db, dj, Dx
+  USE MPCOM, ONLY : b_com, t_com, r_com
+  INTEGER :: Z(30)
+  REAL(8) :: Dx
+  INTEGER :: i, i2, ib, ie, k, rs, re, tp
+  REAL(8) :: db, dj
   !* FIRST EXECUTABLE STATEMENT  MPCDM
   CALL MPCHK(1,4)
-  i2 = T + 4
+  i2 = t_com + 4
   ! CHECK SIGN
   IF ( Dx<0 ) THEN
     ! DX .LT. 0D0
@@ -71,23 +73,23 @@ SUBROUTINE MPCDM(Dx,Z)
   ! NOW DJ IS DY DIVIDED BY SUITABLE POWER OF 16
   ! SET EXPONENT TO 0
   re = 0
-  db = REAL(B, 8)
+  db = REAL(b_com, 8)
   ! CONVERSION LOOP (ASSUME DOUBLE-PRECISION OPS. EXACT)
   DO i = 1, i2
     dj = db*dj
-    R(i) = INT(dj)
-    dj = dj - REAL(R(i), 8)
+    r_com(i) = INT(dj)
+    dj = dj - REAL(r_com(i), 8)
   END DO
   ! NORMALIZE RESULT
   CALL MPNZR(rs,re,Z,0)
-  ib = MAX(7*B*B,32767)/16
+  ib = MAX(7*b_com*b_com,32767)/16
   tp = 1
   ! NOW MULTIPLY BY 16**IE
   IF ( ie<0 ) THEN
     k = -ie
     DO i = 1, k
       tp = 16*tp
-      IF ( (tp>ib).OR.(tp==B).OR.(i>=k) ) THEN
+      IF ( (tp>ib).OR.(tp==b_com).OR.(i>=k) ) THEN
         CALL MPDIVI(Z,tp,Z)
         tp = 1
       END IF
@@ -96,7 +98,7 @@ SUBROUTINE MPCDM(Dx,Z)
   ELSEIF ( ie/=0 ) THEN
     DO i = 1, ie
       tp = 16*tp
-      IF ( (tp>ib).OR.(tp==B).OR.(i>=ie) ) THEN
+      IF ( (tp>ib).OR.(tp==b_com).OR.(i>=ie) ) THEN
         CALL MPMULI(Z,tp,Z)
         tp = 1
       END IF

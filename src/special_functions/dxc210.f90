@@ -49,11 +49,11 @@ SUBROUTINE DXC210(K,Z,J,Ierror)
   !           section.  (WRB)
   !           CALLs to XERROR changed to CALLs to XERMSG.  (WRB)
   !   920127  Revised PURPOSE section of prologue.  (DWL)
-  USE DXBLK ,ONLY: NLG102, MLG102, LG102
+  USE DXBLK ,ONLY: nlg102_com, mlg102_com, lg102_com
   USE service, ONLY : XERMSG
-  INTEGER i, ic, id, Ierror, ii, it, ja, ka, ka1, ka2, m, nm1, np1
+  INTEGER :: Ierror, K, J
   REAL(8) :: Z
-  INTEGER K, J
+  INTEGER :: i, ic, id, ii, it, ja, ka, ka1, ka2, m, nm1, np1
   !
   !   THE CONDITIONS IMPOSED ON NLG102, MLG102, AND LG102 BY
   ! THIS SUBROUTINE ARE
@@ -74,35 +74,35 @@ SUBROUTINE DXC210(K,Z,J,Ierror)
     Z = 1.0D0
     RETURN
   ELSE
-    m = MLG102
+    m = mlg102_com
     ka = ABS(K)
     ka1 = ka/m
     ka2 = MOD(ka,m)
     IF ( ka1<m ) THEN
-      nm1 = NLG102 - 1
-      np1 = NLG102 + 1
-      it = ka2*LG102(np1)
+      nm1 = nlg102_com - 1
+      np1 = nlg102_com + 1
+      it = ka2*lg102_com(np1)
       ic = it/m
       id = MOD(it,m)
       Z = id
       IF ( ka1>0 ) THEN
         DO ii = 1, nm1
           i = np1 - ii
-          it = ka2*LG102(i) + ka1*LG102(i+1) + ic
+          it = ka2*lg102_com(i) + ka1*lg102_com(i+1) + ic
           ic = it/m
           id = MOD(it,m)
           Z = Z/m + id
         END DO
-        ja = ka*LG102(1) + ka1*LG102(2) + ic
+        ja = ka*lg102_com(1) + ka1*lg102_com(2) + ic
       ELSE
         DO ii = 1, nm1
           i = np1 - ii
-          it = ka2*LG102(i) + ic
+          it = ka2*lg102_com(i) + ic
           ic = it/m
           id = MOD(it,m)
           Z = Z/m + id
         END DO
-        ja = ka*LG102(1) + ic
+        ja = ka*lg102_com(1) + ic
       END IF
       Z = Z/m
       IF ( K>0 ) THEN

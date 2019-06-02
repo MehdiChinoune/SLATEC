@@ -742,8 +742,8 @@ SUBROUTINE DEBDF(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,JAC)
   !   900510  Convert XERRWV calls to XERMSG calls, change Prologue
   !           comments to agree with DDEBDF.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  USE DEBDF1, ONLY : H, TN, IYH, IEWt, IACor, ISAvf, IWM, IBEgin, ITOl, IINteg, &
-    ITStop, IJAc, IBAnd
+  USE DEBDF1, ONLY : h_com, tn_com, iyh_com, iewt_com, iacor_com, isavf_com, &
+    iwm_com, ibegin_com, itol_com, iinteg_com, itstop_com, ijac_com, iband_com
   USE service, ONLY : XERMSG
   !
   INTERFACE
@@ -891,24 +891,24 @@ SUBROUTINE DEBDF(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,JAC)
   IF ( Info(1)/=0 ) intout = Iwork(iinout)/=(-1)
   !     CALL RSCO(RWORK(ICOMR),IWORK(ICOMI))
   !
-  IYH = icomr + 218
-  IEWt = IYH + 6*Neq
-  ISAvf = IEWt + Neq
-  IACor = ISAvf + Neq
-  IWM = IACor + Neq
-  idelsn = IWM + 2 + ilrw*Neq
+  iyh_com = icomr + 218
+  iewt_com = iyh_com + 6*Neq
+  isavf_com = iewt_com + Neq
+  iacor_com = isavf_com + Neq
+  iwm_com = iacor_com + Neq
+  idelsn = iwm_com + 2 + ilrw*Neq
   !
-  IBEgin = Info(1)
-  ITOl = Info(2)
-  IINteg = Info(3)
-  ITStop = Info(4)
-  IJAc = Info(5)
-  IBAnd = Info(6)
+  ibegin_com = Info(1)
+  itol_com = Info(2)
+  iinteg_com = Info(3)
+  itstop_com = Info(4)
+  ijac_com = Info(5)
+  iband_com = Info(6)
   Rwork(itstar) = T
   !
-  CALL LSOD(F,Neq,T,Y,Tout,Rtol,Atol,Idid,Rwork(iypout),Rwork(IYH),&
-    Rwork(IYH),Rwork(IEWt:ISAvf-1),Rwork(ISAvf:IACor-1),Rwork(IACor:IWM-1),&
-    Rwork(IWM:idelsn),Iwork,JAC,intout,Rwork(1),Rwork(12),Rwork(idelsn))
+  CALL LSOD(F,Neq,T,Y,Tout,Rtol,Atol,Idid,Rwork(iypout),Rwork(iyh_com),&
+    Rwork(iyh_com),Rwork(iewt_com:isavf_com-1),Rwork(isavf_com:iacor_com-1),Rwork(iacor_com:iwm_com-1),&
+    Rwork(iwm_com:idelsn),Iwork,JAC,intout,Rwork(1),Rwork(12),Rwork(idelsn))
   !
   Iwork(iinout) = -1
   IF ( intout ) Iwork(iinout) = 1
@@ -916,8 +916,8 @@ SUBROUTINE DEBDF(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,JAC)
   IF ( Idid/=(-2) ) Iwork(Liw) = Iwork(Liw) + 1
   IF ( T/=Rwork(itstar) ) Iwork(Liw) = 0
   !     CALL SVCO(RWORK(ICOMR),IWORK(ICOMI))
-  Rwork(11) = H
-  Rwork(13) = TN
-  Info(1) = IBEgin
+  Rwork(11) = h_com
+  Rwork(13) = tn_com
+  Info(1) = ibegin_com
   !
 END SUBROUTINE DEBDF

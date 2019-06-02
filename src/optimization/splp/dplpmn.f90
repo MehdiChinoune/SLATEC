@@ -36,7 +36,7 @@ SUBROUTINE DPLPMN(DUSRMT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900328  Added TYPE section.  (WRB)
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
-  USE LA05DD, ONLY : LP
+  USE LA05DD, ONLY : lp_com
   USE service, ONLY : XERMSG
   INTERFACE
     SUBROUTINE DUSRMT(I,J,Aij,Indcat,Dattrv,Iflag)
@@ -188,7 +188,7 @@ SUBROUTINE DPLPMN(DUSRMT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   !
   !     SET LP=0 SO NO ERROR MESSAGES WILL PRINT WITHIN LA05 () PACKAGE.
   !* FIRST EXECUTABLE STATEMENT  DPLPMN
-  LP = 0
+  lp_com = 0
   !
   !     THE VALUES ZERO AND ONE.
   zero = 0.D0

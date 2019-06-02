@@ -32,7 +32,7 @@ SUBROUTINE PPADD(N,Ierror,A,C,Cbp,Bp,Bh)
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
-  USE CBLKT, ONLY : CNV, EPS, NCMplx
+  USE CBLKT, ONLY : cnv_com, eps_com, ncmplx_com
   INTEGER :: Ierror, N
   REAL :: A(N), Bh(N), Bp(N), C(N)
   COMPLEX :: Cbp(N)
@@ -40,7 +40,7 @@ SUBROUTINE PPADD(N,Ierror,A,C,Cbp,Bp,Bh)
   REAL :: db, psg, scnv, sgn, xl, xm, xr
   COMPLEX :: cx, fsg, hsg, dd, f, fp, fpp, cdis, r1, r2, r3
   !* FIRST EXECUTABLE STATEMENT  PPADD
-  scnv = SQRT(CNV)
+  scnv = SQRT(cnv_com)
   iz = N
   IF ( Bp(N)<Bp(1) ) THEN
     DO j = 1, N
@@ -54,7 +54,7 @@ SUBROUTINE PPADD(N,Ierror,A,C,Cbp,Bp,Bh)
       Bh(j) = Bp(j)
     END DO
   END IF
-  NCMplx = 0
+  ncmplx_com = 0
   modiz = MOD(iz,2)
   is = 1
   IF ( modiz/=0 ) THEN
@@ -100,7 +100,7 @@ SUBROUTINE PPADD(N,Ierror,A,C,Cbp,Bp,Bh)
     sgn = -1.
     xm = BSRH(xl,xr,iz,C,A,Bh,PPSPF,sgn)
     psg = PSGF(xm,iz,C,A,Bh)
-    IF ( ABS(psg)>EPS ) THEN
+    IF ( ABS(psg)>eps_com ) THEN
       IF ( psg*PPSGF(xm,iz,C,A,Bh)<0 ) THEN
         !
         !     CASE OF A REAL ZERO
@@ -187,11 +187,11 @@ SUBROUTINE PPADD(N,Ierror,A,C,Cbp,Bp,Bh)
   ELSEIF ( ABS(Cbp(N))==ABS(Cbp(1)) ) THEN
     GOTO 300
   END IF
-  NCMplx = 1
+  ncmplx_com = 1
   DO j = 2, iz
     IF ( AIMAG(Cbp(j))/=0 ) RETURN
   END DO
-  NCMplx = 0
+  ncmplx_com = 0
   DO j = 2, iz
     Bp(j) = REAL(Cbp(j))
   END DO

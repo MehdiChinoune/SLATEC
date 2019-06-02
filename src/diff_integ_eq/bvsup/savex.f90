@@ -1,4 +1,4 @@
 MODULE SAVEX
   IMPLICIT NONE
-  REAL :: XSAve, TERm
+  REAL :: xsave_com, term_com
 END MODULE SAVEX

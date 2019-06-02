@@ -29,9 +29,9 @@ SUBROUTINE XPQNU(Nu1,Nu2,Mu,Theta,Id,Pqa,Ipqa,Ierror)
   !           Corrected order of sections in prologue and added TYPE
   !           section.  (WRB)
   !   920127  Revised PURPOSE section of prologue.  (DWL)
-  USE XBLK ,ONLY: NBItsf
-  INTEGER :: Id, Ierror, Ipqa(*), Mu
-  REAL :: Nu1, Nu2, Pqa(*), Theta
+  USE XBLK ,ONLY: nbitsf_com
+  INTEGER :: Id, Ierror, Mu, Ipqa(*)
+  REAL :: Nu1, Nu2, Theta, Pqa(*)
   INTEGER :: i, ia, if, ipq, ipq1, ipq2, ipsik, ipsix, ix1, ixs, j, j0, k
   REAL :: a, nu, pq, r, w, x, x1, x2, xs, y, z, di, dmu, pq1, pq2, factmu, flok
   !
@@ -43,8 +43,8 @@ SUBROUTINE XPQNU(Nu1,Nu2,Mu,Theta,Id,Pqa,Ipqa,Ierror)
   !
   !* FIRST EXECUTABLE STATEMENT  XPQNU
   Ierror = 0
-  j0 = NBItsf
-  ipsik = 1 + (NBItsf/10)
+  j0 = nbitsf_com
+  ipsik = 1 + (nbitsf_com/10)
   ipsix = 5*ipsik
   ipq = 0
   !        FIND NU IN INTERVAL [-.5,.5) IF ID=2  ( CALCULATION OF Q )

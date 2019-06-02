@@ -48,43 +48,43 @@ SUBROUTINE INTYD(T,K,Yh,Nyh,Dky,Iflag)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
-  USE DEBDF1, ONLY : H, HU, TN, UROund, L, N, NQ
+  USE DEBDF1, ONLY : h_com, hu_com, tn_com, uround_com, l_com, n_com, nq_com
   !
   INTEGER :: K, Nyh, Iflag
   REAL :: T
-  REAL :: Yh(Nyh,NQ+1), Dky(Nyh)
+  REAL :: Yh(Nyh,nq_com+1), Dky(Nyh)
   INTEGER :: i, ic, j, jb, jb2, jj, jj1, jp1
   REAL :: c, r, s, tp
   !
   !* FIRST EXECUTABLE STATEMENT  INTYD
   Iflag = 0
-  IF ( K<0.OR.K>NQ ) THEN
+  IF ( K<0.OR.K>nq_com ) THEN
     !
     Iflag = -1
     RETURN
   ELSE
-    tp = TN - HU*(1.0E0+100.0E0*UROund)
-    IF ( (T-tp)*(T-TN)>0.0E0 ) THEN
+    tp = tn_com - hu_com*(1.0E0+100.0E0*uround_com)
+    IF ( (T-tp)*(T-tn_com)>0.0E0 ) THEN
       Iflag = -2
       RETURN
     ELSE
       !
-      s = (T-TN)/H
+      s = (T-tn_com)/h_com
       ic = 1
       IF ( K/=0 ) THEN
-        jj1 = L - K
-        DO jj = jj1, NQ
+        jj1 = l_com - K
+        DO jj = jj1, nq_com
           ic = ic*jj
         END DO
       END IF
       c = ic
-      DO i = 1, N
-        Dky(i) = c*Yh(i,L)
+      DO i = 1, n_com
+        Dky(i) = c*Yh(i,l_com)
       END DO
-      IF ( K/=NQ ) THEN
-        jb2 = NQ - K
+      IF ( K/=nq_com ) THEN
+        jb2 = nq_com - K
         DO jb = 1, jb2
-          j = NQ - jb
+          j = nq_com - jb
           jp1 = j + 1
           ic = 1
           IF ( K/=0 ) THEN
@@ -94,7 +94,7 @@ SUBROUTINE INTYD(T,K,Yh,Nyh,Dky,Iflag)
             END DO
           END IF
           c = ic
-          DO i = 1, N
+          DO i = 1, n_com
             Dky(i) = c*Yh(i,jp1) + s*Dky(i)
           END DO
         END DO
@@ -102,8 +102,8 @@ SUBROUTINE INTYD(T,K,Yh,Nyh,Dky,Iflag)
       END IF
     END IF
   END IF
-  r = H**(-K)
-  DO i = 1, N
+  r = h_com**(-K)
+  DO i = 1, n_com
     Dky(i) = r*Dky(i)
   END DO
   RETURN

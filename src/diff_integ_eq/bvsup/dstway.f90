@@ -30,7 +30,8 @@ SUBROUTINE DSTWAY(U,V,Yhp,Inout,Stowa)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
-  USE DML, ONLY : NCOmp, NFC, X, XOP, INFo, ISTkop, KOP, NDIsk, NTApe, NEQivp
+  USE DML, ONLY : ncomp_com, nfc_com, x_com, xop_com, info_com, istkop_com, &
+    kop_com, ndisk_com, ntape_com, neqivp_com
   !
   INTEGER :: Inout
   REAL(8) :: Stowa(:), U(:), V(:), Yhp(:)
@@ -40,41 +41,41 @@ SUBROUTINE DSTWAY(U,V,Yhp,Inout,Stowa)
     !
     !        RECALL FROM STOWA ARRAY AND ISTKOP
     !
-    ks = NFC*NCOmp
+    ks = nfc_com*ncomp_com
     CALL DSTOR1(Yhp,Stowa,Yhp(ks+1:),Stowa(ks+1:),1,0,0)
-    ks = ks + NCOmp
-    IF ( NEQivp>=1 ) THEN
-      DO j = 1, NEQivp
+    ks = ks + ncomp_com
+    IF ( neqivp_com>=1 ) THEN
+      DO j = 1, neqivp_com
         ksj = ks + j
         Yhp(ksj) = Stowa(ksj)
       END DO
     END IF
-    ks = ks + NEQivp
-    X = Stowa(ks+1)
-    INFo(1) = 0
-    ko = KOP - ISTkop
-    KOP = ISTkop
-    IF ( NDIsk/=0.AND.ko/=0 ) THEN
+    ks = ks + neqivp_com
+    x_com = Stowa(ks+1)
+    info_com(1) = 0
+    ko = kop_com - istkop_com
+    kop_com = istkop_com
+    IF ( ndisk_com/=0.AND.ko/=0 ) THEN
       DO k = 1, ko
-        BACKSPACE NTApe
+        BACKSPACE ntape_com
       END DO
     END IF
   ELSE
     !
     !        SAVE IN STOWA ARRAY AND ISTKOP
     !
-    ks = NFC*NCOmp
+    ks = nfc_com*ncomp_com
     CALL DSTOR1(Stowa,U,Stowa(ks+1:),V,1,0,0)
-    ks = ks + NCOmp
-    IF ( NEQivp>=1 ) THEN
-      DO j = 1, NEQivp
+    ks = ks + ncomp_com
+    IF ( neqivp_com>=1 ) THEN
+      DO j = 1, neqivp_com
         ksj = ks + j
         Stowa(ksj) = Yhp(ksj)
       END DO
     END IF
-    ks = ks + NEQivp
-    Stowa(ks+1) = X
-    ISTkop = KOP
-    IF ( XOP==X ) ISTkop = KOP + 1
+    ks = ks + neqivp_com
+    Stowa(ks+1) = x_com
+    istkop_com = kop_com
+    IF ( xop_com==x_com ) istkop_com = kop_com + 1
   END IF
 END SUBROUTINE DSTWAY

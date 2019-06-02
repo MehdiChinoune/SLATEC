@@ -42,7 +42,7 @@ SUBROUTINE LA05BD(A,Ind,Ia,N,Ip,Iw,W,G,B,Trans)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900402  Added TYPE section.  (WRB)
   !   920410  Corrected second dimension on IW declaration.  (WRB)
-  USE LA05DD, ONLY : LP, LENl
+  USE LA05DD, ONLY : lp_com, lenl_com
   USE service, ONLY : XERMSG, XSETUN
   INTEGER :: Ia, N
   LOGICAL :: Trans
@@ -53,11 +53,11 @@ SUBROUTINE LA05BD(A,Ind,Ia,N,Ip,Iw,W,G,B,Trans)
   !* FIRST EXECUTABLE STATEMENT  LA05BD
   IF ( G<0.D0 ) THEN
     !
-    CALL XSETUN(LP)
-    IF ( LP>0 ) CALL XERMSG('SLATEC','LA05BD',&
+    CALL XSETUN(lp_com)
+    IF ( lp_com>0 ) CALL XERMSG('SLATEC','LA05BD',&
       'EARLIER ENTRY GAVE ERROR RETURN.',-8,2)
   ELSE
-    kll = Ia - LENl + 1
+    kll = Ia - lenl_com + 1
     IF ( Trans ) THEN
       !
       !     MULTIPLY VECTOR BY INVERSE OF TRANSPOSE OF U
@@ -96,9 +96,9 @@ SUBROUTINE LA05BD(A,Ind,Ia,N,Ip,Iw,W,G,B,Trans)
     ELSE
       !
       !     MULTIPLY VECTOR BY INVERSE OF L
-      IF ( LENl>0 ) THEN
+      IF ( lenl_com>0 ) THEN
         l1 = Ia + 1
-        DO kk = 1, LENl
+        DO kk = 1, lenl_com
           k = l1 - kk
           i = Ind(k,1)
           IF ( B(i)/=0.D0 ) THEN

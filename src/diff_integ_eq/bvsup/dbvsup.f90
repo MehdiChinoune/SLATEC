@@ -412,11 +412,12 @@ SUBROUTINE DBVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
   !   900510  Convert XERRWV calls to XERMSG calls, remove some extraneous
   !           comments.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  USE DML, ONLY : XSAv, IGOfxd => IGOfx, INHomo, NCOmpd => NCOmp, NFCd => NFC, &
-    KKKzpw, NEEdw, NEEdiw, K1, K2, K3, K4, K5, K6, K7, K8, K9, K10, K11, L1, L2, &
-    KKKint, LLLint, XBEg, XENd, MNSwot, AED => AE, RED => RE, NXPtsd => NXPts, &
-    NICd => NIC, NOPg, MXNon, NDIsk, NTApe, INDpvt, INTeg, NPS, NTP, &
-    NEQivd => NEQivp, NFCc, ICOco
+  USE DML, ONLY : xsav_com, igofx_com, inhomo_com, ncomp_com, nfc_com , &
+    kkkzpw_com, needw_com, neediw_com, k1_com, k2_com, k3_com, k4_com, k5_com, &
+    k6_com, k7_com, k8_com, k9_com, k10_com, k11_com, l1_com, l2_com, kkkint_com, &
+    lllint_com, xbeg_com, xend_com, mnswot_com, ae_com, re_com, nxpts_com, &
+    nic_com, nopg_com, mxnon_com, ndisk_com, ntape_com, indpvt_com, integ_com, &
+    nps_com, ntp_com, neqivp_com => neqivp_com, nfcc_com, icoco_com
   USE service, ONLY : XERMSG
   !- *********************************************************************
   INTEGER :: Iflag, Igofx, Ncomp, Ndiw, Ndw, Neqivp, Nfc, Nic, Nrowa, Nrowb, &
@@ -467,19 +468,19 @@ SUBROUTINE DBVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
                         !                                 CHECK FOR DISK STORAGE
                         !
                         kpts = Nxpts
-                        NDIsk = 0
+                        ndisk_com = 0
                         IF ( Iwork(12)/=0 ) THEN
-                          NTApe = Iwork(12)
+                          ntape_com = Iwork(12)
                           kpts = 1
-                          NDIsk = 1
+                          ndisk_com = 1
                         END IF
                         !
                         !                             ******************************************
                         !                                 SET INTEG PARAMETER ACCORDING TO
                         !                                 CHOICE OF INTEGRATOR.
                         !
-                        INTeg = 1
-                        IF ( Iwork(9)==2 ) INTeg = 2
+                        integ_com = 1
+                        IF ( Iwork(9)==2 ) integ_com = 2
                         !
                         !                             ******************************************
                         !                                 COMPUTE INHOMO
@@ -494,7 +495,7 @@ SUBROUTINE DBVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
                           !                    ............EXIT
                           IF ( Beta(j)/=0.0D0 ) GOTO 200
                         END DO
-                        INHomo = 3
+                        inhomo_com = 3
                         !              ...............EXIT
                         GOTO 400
                       END IF
@@ -512,17 +513,17 @@ SUBROUTINE DBVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
   IFlag = -2
   !     ..................EXIT
   RETURN
-  200  INHomo = 2
+  200  inhomo_com = 2
   !              ......EXIT
   GOTO 400
-  300  INHomo = 1
+  300  inhomo_com = 1
   !
   !              *********************************************************
   !                  TO TAKE ADVANTAGE OF THE SPECIAL STRUCTURE WHEN
   !                  SOLVING A COMPLEX*16 VALUED PROBLEM,WE INTRODUCE
   !                  NFCC=NFC WHILE CHANGING THE INTERNAL VALUE OF NFC
   !
-  400  NFCc = Nfc
+  400  nfcc_com = Nfc
   IF ( Iflag==13 ) Nfc = Nfc/2
   !
   !              *********************************************************
@@ -532,83 +533,83 @@ SUBROUTINE DBVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
   kkkyhp = Ncomp*(Nfc+1) + Neqivp
   kkku = Ncomp*Nfc*kpts
   kkkv = Ncomp*kpts
-  kkkcoe = NFCc
+  kkkcoe = nfcc_com
   kkks = Nfc + 1
   kkksto = Ncomp*(Nfc+1) + Neqivp + 1
   kkkg = Ncomp
   !
   !              FOR ORTHONORMALIZATION RELATED MATTERS
-  NTP = (NFCc*(NFCc+1))/2
-  KKKzpw = 1 + NTP + NFCc
-  lllip = NFCc
+  ntp_com = (nfcc_com*(nfcc_com+1))/2
+  kkkzpw_com = 1 + ntp_com + nfcc_com
+  lllip = nfcc_com
   !
   !              FOR ADDITIONAL REQUIRED WORK SPACE
   !                (DLSSUD)
   kkksud = 4*Nic + (Nrowa+1)*Ncomp
   lllsud = Nic
   !              (DVECS)
-  kkksvc = 1 + 4*NFCc + 2*NFCc**2
-  lllsvc = 2*NFCc
+  kkksvc = 1 + 4*nfcc_com + 2*nfcc_com**2
+  lllsvc = 2*nfcc_com
   !
   ndeq = Ncomp*Nfc + Neqivp
-  IF ( INHomo==1 ) ndeq = ndeq + Ncomp
-  IF ( INTeg==2 ) THEN
+  IF ( inhomo_com==1 ) ndeq = ndeq + Ncomp
+  IF ( integ_com==2 ) THEN
     !              (DDEABM)
-    KKKint = 130 + 21*ndeq
-    LLLint = 51
+    kkkint_com = 130 + 21*ndeq
+    lllint_com = 51
   ELSE
     !              (DDERKF)
-    KKKint = 33 + 7*ndeq
-    LLLint = 34
+    kkkint_com = 33 + 7*ndeq
+    lllint_com = 34
   END IF
   !
   !              (COEF)
-  kkkcof = 5*NFCc + NFCc**2
-  lllcof = 3 + NFCc
+  kkkcof = 5*nfcc_com + nfcc_com**2
+  lllcof = 3 + nfcc_com
   !
-  kkkws = MAX(kkksud,kkksvc,KKKint,kkkcof)
-  llliws = MAX(lllsud,lllsvc,LLLint,lllcof)
+  kkkws = MAX(kkksud,kkksvc,kkkint_com,kkkcof)
+  llliws = MAX(lllsud,lllsvc,lllint_com,lllcof)
   !
-  NEEdw = kkkyhp + kkku + kkkv + kkkcoe + kkks + kkksto + kkkg + KKKzpw + kkkws
-  NEEdiw = 17 + lllip + llliws
+  needw_com = kkkyhp + kkku + kkkv + kkkcoe + kkks + kkksto + kkkg + kkkzpw_com + kkkws
+  neediw_com = 17 + lllip + llliws
   !              *********************************************************
   !                  COMPUTE THE NUMBER OF POSSIBLE ORTHONORMALIZATIONS
   !                  WITH THE ALLOTTED STORAGE
   !
-  Iwork(3) = NEEdw
-  Iwork(4) = KKKzpw
-  Iwork(5) = NEEdiw
+  Iwork(3) = needw_com
+  Iwork(4) = kkkzpw_com
+  Iwork(5) = neediw_com
   Iwork(6) = lllip
-  nrtemp = Ndw - NEEdw
-  nitemp = Ndiw - NEEdiw
+  nrtemp = Ndw - needw_com
+  nitemp = Ndiw - neediw_com
   !           ...EXIT
   IF ( nrtemp>=0 ) THEN
     !           ...EXIT
     IF ( nitemp>=0 ) THEN
       !
-      IF ( NDIsk==0 ) THEN
+      IF ( ndisk_com==0 ) THEN
         !
-        mxnonr = nrtemp/KKKzpw
+        mxnonr = nrtemp/kkkzpw_com
         mxnoni = nitemp/lllip
-        MXNon = MIN(mxnonr,mxnoni)
-        non = MXNon
+        mxnon_com = MIN(mxnonr,mxnoni)
+        non = mxnon_com
       ELSE
         non = 0
-        MXNon = nrtemp
+        mxnon_com = nrtemp
       END IF
       !
-      Iwork(2) = MXNon
+      Iwork(2) = mxnon_com
       !
       !              *********************************************************
       !                  CHECK FOR PRE-ASSIGNED ORTHONORMALIZATION POINTS
       !
-      NOPg = 0
+      nopg_com = 0
       !        ......EXIT
       IF ( Iwork(11)/=1 ) GOTO 500
-      IF ( MXNon>=Iwork(1) ) THEN
-        NOPg = 1
-        MXNon = Iwork(1)
-        Work(MXNon+1) = 2.0D0*Xpts(Nxpts) - Xpts(1)
+      IF ( mxnon_com>=Iwork(1) ) THEN
+        nopg_com = 1
+        mxnon_com = Iwork(1)
+        Work(mxnon_com+1) = 2.0D0*Xpts(Nxpts) - Xpts(1)
         !        .........EXIT
         GOTO 500
       END IF
@@ -616,18 +617,18 @@ SUBROUTINE DBVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
   END IF
   !
   Iflag = -1
-  IF ( NDIsk/=1 ) THEN
-    WRITE (xern1,'(I8)') NEEdw
-    WRITE (xern2,'(I8)') KKKzpw
-    WRITE (xern3,'(I8)') NEEdiw
+  IF ( ndisk_com/=1 ) THEN
+    WRITE (xern1,'(I8)') needw_com
+    WRITE (xern2,'(I8)') kkkzpw_com
+    WRITE (xern3,'(I8)') neediw_com
     WRITE (xern4,'(I8)') lllip
     CALL XERMSG('SLATEC','DBVSUP','REQUIRED STORAGE FOR WORK ARRAY IS '&
       //xern1//' + '//xern2//&
       '*(EXPECTED NUMBER OF ORTHONORMALIZATIONS) $$REQUIRED STORAGE FOR IWORK ARRAY IS '&
       //xern3//' + '//xern4//'*(EXPECTED NUMBER OF ORTHONORMALIZATIONS)',1,0)
   ELSE
-    WRITE (xern1,'(I8)') NEEdw
-    WRITE (xern2,'(I8)') NEEdiw
+    WRITE (xern1,'(I8)') needw_com
+    WRITE (xern2,'(I8)') neediw_com
     CALL XERMSG('SLATEC','DBVSUP','REQUIRED STORAGE FOR WORK ARRAY IS '//&
       xern1//' + NUMBER OF ORTHONOMALIZATIONS. $$REQUIRED STORAGE FOR IWORK ARRAY IS '//xern2,1,0)
   END IF
@@ -637,72 +638,72 @@ SUBROUTINE DBVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
   !            ALLOCATE STORAGE FROM WORK AND IWORK ARRAYS
   !
   !         (Z)
-  500  K1 = 1 + (MXNon+1)
+  500  k1_com = 1 + (mxnon_com+1)
   !        (P)
-  K2 = K1 + NTP*(non+1)
+  k2_com = k1_com + ntp_com*(non+1)
   !        (W)
-  K3 = K2 + NFCc*(non+1)
+  k3_com = k2_com + nfcc_com*(non+1)
   !        (YHP)
-  K4 = K3 + kkkyhp
+  k4_com = k3_com + kkkyhp
   !        (U)
-  K5 = K4 + kkku
+  k5_com = k4_com + kkku
   !        (V)
-  K6 = K5 + kkkv
+  k6_com = k5_com + kkkv
   !        (COEF)
-  K7 = K6 + kkkcoe
+  k7_com = k6_com + kkkcoe
   !        (S)
-  K8 = K7 + kkks
+  k8_com = k7_com + kkks
   !        (STOWA)
-  K9 = K8 + kkksto
+  k9_com = k8_com + kkksto
   !        (G)
-  K10 = K9 + kkkg
-  K11 = K10 + kkkws
+  k10_com = k9_com + kkkg
+  k11_com = k10_com + kkkws
   !                  REQUIRED ADDITIONAL DOUBLE PRECISION WORK SPACE
   !                  STARTS AT WORK(K10) AND EXTENDS TO WORK(K11-1)
   !
   !           FIRST 17 LOCATIONS OF IWORK ARE USED FOR OPTIONAL
   !           INPUT AND OUTPUT ITEMS
   !        (IP)
-  L1 = 18 + NFCc*(non+1)
-  L2 = L1 + llliws
+  l1_com = 18 + nfcc_com*(non+1)
+  l2_com = l1_com + llliws
   !                   REQUIRED INTEGER WORK SPACE STARTS AT IWORK(L1)
   !                   AND EXTENDS TO IWORK(L2-1)
   !
   !        ***************************************************************
   !            SET INDICATOR FOR NORMALIZATION OF PARTICULAR SOLUTION
   !
-  NPS = 0
-  IF ( Iwork(10)==1 ) NPS = 1
+  nps_com = 0
+  IF ( Iwork(10)==1 ) nps_com = 1
   !
   !        ***************************************************************
   !            SET PIVOTING PARAMETER
   !
-  INDpvt = 0
-  IF ( Iwork(15)==1 ) INDpvt = 1
+  indpvt_com = 0
+  IF ( Iwork(15)==1 ) indpvt_com = 1
   !
   !        ***************************************************************
   !            SET OTHER COMMON BLOCK PARAMETERS
   !
-  NFCd = Nfc
-  NCOmpd = Ncomp
-  IGOfxd = Igofx
-  NXPtsd = Nxpts
-  NICd = Nic
-  RED = Re
-  AED = Ae
-  NEQivd = Neqivp
-  MNSwot = 20
-  IF ( Iwork(13)==-1 ) MNSwot = MAX(1,Iwork(14))
-  XBEg = Xpts(1)
-  XENd = Xpts(Nxpts)
-  XSAv = XENd
-  ICOco = 1
-  IF ( INHomo==3.AND.NOPg==1 ) Work(MXNon+1) = XENd
+  nfc_com = Nfc
+  ncomp_com = Ncomp
+  igofx_com = Igofx
+  nxpts_com = Nxpts
+  nic_com = Nic
+  re_com = Re
+  ae_com = Ae
+  neqivp_com = Neqivp
+  mnswot_com = 20
+  IF ( Iwork(13)==-1 ) mnswot_com = MAX(1,Iwork(14))
+  xbeg_com = Xpts(1)
+  xend_com = Xpts(Nxpts)
+  xsav_com = xend_com
+  icoco_com = 1
+  IF ( inhomo_com==3.AND.nopg_com==1 ) Work(mxnon_com+1) = xend_com
   !
   !        ***************************************************************
   !
   CALL DEXBVP(Y,Nrowy,Xpts,A,Nrowa,Alpha,B,Nrowb,Beta,Iflag,Work,Iwork)
-  Nfc = NFCc
-  Iwork(17) = Iwork(L1)
+  Nfc = nfcc_com
+  Iwork(17) = Iwork(l1_com)
   RETURN
 END SUBROUTINE DBVSUP

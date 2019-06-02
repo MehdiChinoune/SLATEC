@@ -67,7 +67,7 @@ SUBROUTINE MGSBV(M,N,A,Ia,Niv,Iflag,S,P,Ip,Inhomo,V,W,Wcnd)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
-  USE ML, ONLY : EPS, INDpvt, NFCc, SRU
+  USE ML, ONLY : eps_com, indpvt_com, nfcc_com, sru_com
   INTEGER :: Ia, Iflag, Inhomo, M, N, Niv, Ip(N)
   REAL :: Wcnd, A(Ia,M), P(N*(N+1)/2), S(M), V(M), W(M)
   INTEGER :: i, ip1, ix, iz, j, jk, jp, jq, jy, jz, k, kd, kj, kp, l, lix, lr, &
@@ -89,7 +89,7 @@ SUBROUTINE MGSBV(M,N,A,Ia,Niv,Iflag,S,P,Ip,Inhomo,V,W,Wcnd)
     DO i = 1, N
       vl = NORM2(A(1:M,i))**2
       S(i) = vl
-      IF ( N/=NFCc ) THEN
+      IF ( N/=nfcc_com ) THEN
         j = 2*i - 1
         P(j) = vl
         Ip(j) = j
@@ -102,12 +102,12 @@ SUBROUTINE MGSBV(M,N,A,Ia,Niv,Iflag,S,P,Ip,Inhomo,V,W,Wcnd)
         ix = i
       END IF
     END DO
-    IF ( INDpvt==1 ) THEN
+    IF ( indpvt_com==1 ) THEN
       ix = 1
       y = P(1)
     END IF
     lix = ix
-    IF ( N/=NFCc ) lix = 2*ix - 1
+    IF ( N/=nfcc_com ) lix = 2*ix - 1
     P(lix) = P(1)
     S(np1) = 0.
     IF ( Inhomo==1 ) S(np1) = NORM2(V(1:M))**2
@@ -127,8 +127,8 @@ SUBROUTINE MGSBV(M,N,A,Ia,Niv,Iflag,S,P,Ip,Inhomo,V,W,Wcnd)
           nn = N
           lix = ix
           lr = nr
-          IF ( N/=NFCc ) THEN
-            nn = NFCc
+          IF ( N/=nfcc_com ) THEN
+            nn = nfcc_com
             lix = 2*ix - 1
             lr = 2*nr - 1
           END IF
@@ -153,7 +153,7 @@ SUBROUTINE MGSBV(M,N,A,Ia,Niv,Iflag,S,P,Ip,Inhomo,V,W,Wcnd)
           sv = S(ix)
           S(ix) = S(nr)
           S(nr) = sv
-          IF ( N/=NFCc ) THEN
+          IF ( N/=nfcc_com ) THEN
             IF ( nr/=1 ) THEN
               kj = lr + 1
               DO k = 1, nrm1
@@ -161,7 +161,7 @@ SUBROUTINE MGSBV(M,N,A,Ia,Niv,Iflag,S,P,Ip,Inhomo,V,W,Wcnd)
                 jk = kj + kd
                 P(kj) = P(jk)
                 P(jk) = psave
-                kj = kj + NFCc - k
+                kj = kj + nfcc_com - k
               END DO
             END IF
             iz = Ip(lix+1)
@@ -184,8 +184,8 @@ SUBROUTINE MGSBV(M,N,A,Ia,Niv,Iflag,S,P,Ip,Inhomo,V,W,Wcnd)
         P(jp) = y
         ry = 1.0/y
         nmnr = N - nr
-        IF ( N/=NFCc ) THEN
-          nmnr = NFCc - (2*nr-1)
+        IF ( N/=nfcc_com ) THEN
+          nmnr = nfcc_com - (2*nr-1)
           jp = jp + 1
           P(jp) = 0.
           kp = jp + nmnr
@@ -203,13 +203,13 @@ SUBROUTINE MGSBV(M,N,A,Ia,Niv,Iflag,S,P,Ip,Inhomo,V,W,Wcnd)
             dot = DOT_PRODUCT(A(1:M,nr),A(1:M,j))
             jp = jp + 1
             jq = jp + nmnr
-            IF ( N/=NFCc ) jq = jq + nmnr - 1
+            IF ( N/=nfcc_com ) jq = jq + nmnr - 1
             P(jq) = P(jp) - dot*(dot*ry)
             P(jp) = dot*ry
             DO i = 1, M
               A(i,j) = A(i,j) - P(jp)*A(i,nr)
             END DO
-            IF ( N/=NFCc ) THEN
+            IF ( N/=nfcc_com ) THEN
               kp = jp + nmnr
               jp = jp + 1
               pjp = ry*PRVEC(M,A(1,nr),A(1,j))
@@ -227,20 +227,20 @@ SUBROUTINE MGSBV(M,N,A,Ia,Niv,Iflag,S,P,Ip,Inhomo,V,W,Wcnd)
             !
             !     TEST FOR CANCELLATION IN RECURRENCE RELATION
             !
-            IF ( P(jq)<=S(j)*SRU ) P(jq) = NORM2(A(1:M,j))**2
+            IF ( P(jq)<=S(j)*sru_com ) P(jq) = NORM2(A(1:M,j))**2
             IF ( P(jq)>y ) THEN
               y = P(jq)
               ix = j
             END IF
           END DO
-          IF ( N/=NFCc ) jp = kp
+          IF ( N/=nfcc_com ) jp = kp
           !     ****************************************
-          IF ( INDpvt==1 ) ix = ip1
+          IF ( indpvt_com==1 ) ix = ip1
           !
           !     RECOMPUTE NORM SQUARED OF PIVOTAL VECTOR WITH SCALAR PRODUCT
           !
           y = NORM2(A(1:M,ix))**2
-          IF ( y<=EPS*S(ix) ) GOTO 50
+          IF ( y<=eps_com*S(ix) ) GOTO 50
           Wcnd = MIN(Wcnd,y/S(ix))
         END IF
         !
@@ -248,12 +248,12 @@ SUBROUTINE MGSBV(M,N,A,Ia,Niv,Iflag,S,P,Ip,Inhomo,V,W,Wcnd)
         !
         IF ( Inhomo==1 ) THEN
           lr = nr
-          IF ( N/=NFCc ) lr = 2*nr - 1
+          IF ( N/=nfcc_com ) lr = 2*nr - 1
           W(lr) = DOT_PRODUCT(A(1:M,nr),V(1:M))*ry
           DO i = 1, M
             V(i) = V(i) - W(lr)*A(i,nr)
           END DO
-          IF ( N/=NFCc ) THEN
+          IF ( N/=nfcc_com ) THEN
             lr = 2*nr
             W(lr) = ry*PRVEC(M,V,A(1,nr))
             DO k = 1, m2
@@ -272,10 +272,10 @@ SUBROUTINE MGSBV(M,N,A,Ia,Niv,Iflag,S,P,Ip,Inhomo,V,W,Wcnd)
       IF ( (N>1).AND.(S(np1)<1.0) ) RETURN
       vnorm = NORM2(V(1:M))**2
       IF ( S(np1)/=0. ) Wcnd = MIN(Wcnd,vnorm/S(np1))
-      IF ( vnorm>=EPS*S(np1) ) RETURN
+      IF ( vnorm>=eps_com*S(np1) ) RETURN
     END IF
     50  Iflag = 2
-    Wcnd = EPS
+    Wcnd = eps_com
   ELSE
     Iflag = 1
     RETURN

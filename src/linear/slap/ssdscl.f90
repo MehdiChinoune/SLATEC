@@ -145,7 +145,7 @@ SUBROUTINE SSDSCL(N,Nelt,Ia,Ja,A,X,B,Dinv,Job,Itol)
   !   920511  Added complete declaration section.  (WRB)
   !   921113  Corrected C***CATEGORY line.  (FNF)
   !   930701  Updated CATEGORY section.  (FNF, WRB)
-  USE SSLBLK, ONLY : SOLn
+  USE SSLBLK, ONLY : soln_com
   !     .. Scalar Arguments ..
   INTEGER Itol, Job, N, Nelt
   !     .. Array Arguments ..
@@ -191,7 +191,7 @@ SUBROUTINE SSDSCL(N,Nelt,Ia,Ja,A,X,B,Dinv,Job,Itol)
   !
   IF ( Itol==11 ) THEN
     DO icol = 1, N
-      SOLn(icol) = SOLn(icol)/Dinv(icol)
+      soln_com(icol) = soln_com(icol)/Dinv(icol)
     END DO
   END IF
   !

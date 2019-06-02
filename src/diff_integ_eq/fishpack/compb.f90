@@ -28,26 +28,26 @@ SUBROUTINE COMPB(Ierror,An,Bn,Cn,B,Ah,Bh)
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
-  USE CBLKT, ONLY : K, CNV, EPS, NM, NPP
+  USE CBLKT, ONLY : k_com, cnv_com, eps_com, nm_com, npp_com
   USE service, ONLY : R1MACH
   INTEGER :: Ierror
-  REAL :: Ah(:), An(NM), B(:), Bh(:), Bn(NM), Cn(NM)
+  REAL :: Ah(:), An(nm_com), B(:), Bh(:), Bn(nm_com), Cn(nm_com)
   COMPLEX :: Bc(500)
   INTEGER :: i, i2, i4, ib, if, ifd, ipl, ir, j, j1, j2, jf, js, kdo, l, &
     l1, l2, lh, ls, n2m2, nb, nmp
   REAL :: arg, bnorm, d1, d2, d3
   !* FIRST EXECUTABLE STATEMENT  COMPB
-  EPS = R1MACH(4)
+  eps_com = R1MACH(4)
   bnorm = ABS(Bn(1))
-  DO j = 2, NM
+  DO j = 2, nm_com
     bnorm = MAX(bnorm,ABS(Bn(j)))
     arg = An(j)*Cn(j-1)
     IF ( arg<0 ) GOTO 200
     B(j) = SIGN(SQRT(arg),An(j))
   END DO
-  CNV = EPS*bnorm
-  if = 2**K
-  kdo = K - 1
+  cnv_com = eps_com*bnorm
+  if = 2**k_com
+  kdo = k_com - 1
   DO l = 1, kdo
     ir = l - 1
     i2 = 2**ir
@@ -74,15 +74,15 @@ SUBROUTINE COMPB(Ierror,An,Bn,Cn,B,Ah,Bh)
       END DO
     END DO
   END DO
-  DO j = 1, NM
+  DO j = 1, nm_com
     B(j) = -Bn(j)
   END DO
-  IF ( NPP==0 ) THEN
-    nmp = NM + 1
-    nb = NM + nmp
+  IF ( npp_com==0 ) THEN
+    nmp = nm_com + 1
+    nb = nm_com + nmp
     DO j = 1, nb
       l1 = MOD(j-1,nmp) + 1
-      l2 = MOD(j+NM-1,nmp) + 1
+      l2 = MOD(j+nm_com-1,nmp) + 1
       arg = An(l1)*Cn(l2)
       IF ( arg<0 ) GOTO 200
       Bh(j) = SIGN(SQRT(arg),-An(l1))
@@ -90,11 +90,11 @@ SUBROUTINE COMPB(Ierror,An,Bn,Cn,B,Ah,Bh)
     END DO
     CALL TEVLS(nb,Ah,Bh,Ierror)
     IF ( Ierror/=0 ) GOTO 100
-    CALL INDXB(if,K-1,j2,lh)
-    CALL INDXB(if/2,K-1,j1,lh)
+    CALL INDXB(if,k_com-1,j2,lh)
+    CALL INDXB(if/2,k_com-1,j1,lh)
     j2 = j2 + 1
     lh = j2
-    n2m2 = j2 + NM + NM - 2
+    n2m2 = j2 + nm_com + nm_com - 2
     DO
       d1 = ABS(B(j1)-B(j2-1))
       d2 = ABS(B(j1)-B(j2))
@@ -111,9 +111,9 @@ SUBROUTINE COMPB(Ierror,An,Bn,Cn,B,Ah,Bh)
       END IF
     END DO
     B(lh) = B(n2m2+1)
-    CALL INDXB(if,K-1,j1,j2)
+    CALL INDXB(if,k_com-1,j1,j2)
     j2 = j1 + nmp + nmp
-    CALL PPADD(NM+1,Ierror,An,Cn,Bc(j1),B(j1:j2-1),B(j2:))
+    CALL PPADD(nm_com+1,Ierror,An,Cn,Bc(j1),B(j1:j2-1),B(j2:))
   END IF
   RETURN
   100  Ierror = 4

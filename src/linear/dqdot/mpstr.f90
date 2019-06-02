@@ -31,10 +31,11 @@ SUBROUTINE MPSTR(X,Y)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   !   930124  Increased Array size in MPCON for SUN -r8.  (RWC)
-  USE MPCOM, ONLY : T
-  INTEGER i, X(*), Y(*)
+  USE MPCOM, ONLY : t_com
+  INTEGER :: X(30), Y(30)
+  INTEGER :: i
   !* FIRST EXECUTABLE STATEMENT  MPSTR
-  DO i = 1, T + 2
+  DO i = 1, t_com + 2
     Y(i) = X(i)
   END DO
 END SUBROUTINE MPSTR

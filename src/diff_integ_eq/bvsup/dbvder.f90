@@ -61,29 +61,30 @@ SUBROUTINE DBVDER(X,Y,Yp,G)
   !   910701  Corrected ROUTINES CALLED section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
   !   920618  Minor restructuring of code.  (RWC, WRB)
-  USE DML, ONLY : NOFst, C, XSAv, IGOfx, INHomo, IVP, NCOmp, NFC
+  USE DML, ONLY : nofst_com, c_com, xsav_com, igofx_com, inhomo_com, ivp_com, &
+    ncomp_com, nfc_com
   REAL(8) :: X, Y(:), Yp(:), G(:)
   INTEGER :: j, k, l, na
   !- *********************************************************************
   !
   !* FIRST EXECUTABLE STATEMENT  DBVDER
-  IF ( IVP>0 ) STOP
-  NOFst = IVP
+  IF ( ivp_com>0 ) STOP
+  nofst_com = ivp_com
   na = 1
-  DO k = 1, NFC
+  DO k = 1, nfc_com
     CALL DFMAT(X,Y(na:),Yp(na:))
-    NOFst = NOFst - NCOmp
-    na = na + NCOmp
+    nofst_com = nofst_com - ncomp_com
+    na = na + ncomp_com
   END DO
   !
-  IF ( INHomo/=1 ) RETURN
+  IF ( inhomo_com/=1 ) RETURN
   CALL DFMAT(X,Y(na:),Yp(na:))
   !
-  IF ( IGOfx==0 ) RETURN
-  IF ( X/=XSAv ) THEN
-    IF ( IVP==0 ) CALL DGVEC(X,G)
-    IF ( IVP>0 ) STOP
-    XSAv = X
+  IF ( igofx_com==0 ) RETURN
+  IF ( X/=xsav_com ) THEN
+    IF ( ivp_com==0 ) CALL DGVEC(X,G)
+    IF ( ivp_com>0 ) STOP
+    xsav_com = X
   END IF
   !
   !     If the user has chosen not to normalize the particular
@@ -92,8 +93,8 @@ SUBROUTINE DBVDER(X,Y,Yp,G)
   !     The following loop is just
   !     CALL DAXPY (NCOMP, 1.0D0/C, G, 1, YP(NA), 1)
   !
-  DO j = 1, NCOmp
+  DO j = 1, ncomp_com
     l = na + j - 1
-    Yp(l) = Yp(l) + G(j)/C
+    Yp(l) = Yp(l) + G(j)/c_com
   END DO
 END SUBROUTINE DBVDER

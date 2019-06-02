@@ -26,7 +26,7 @@ SUBROUTINE CHKSN4(Mbdcnd,Nbdcnd,Alpha,Beta,COFX,Singlr)
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
-  USE SPL4, ONLY : AIT, DLX, IS, MS
+  USE SPL4, ONLY : ait_com, dlx_com, is_com, ms_com
   INTERFACE
     SUBROUTINE COFX(X,A,B,C)
       REAL :: X, A, B, C
@@ -54,8 +54,8 @@ SUBROUTINE CHKSN4(Mbdcnd,Nbdcnd,Alpha,Beta,COFX,Singlr)
   !     CHECK THAT NON-DERIVATIVE COEFFICIENT FUNCTIONS
   !     ARE ZERO
   !
-  DO i = IS, MS
-    xi = AIT + (i-1)*DLX
+  DO i = is_com, ms_com
+    xi = ait_com + (i-1)*dlx_com
     CALL COFX(xi,ai,bi,ci)
     IF ( ci/=0.0 ) RETURN
   END DO

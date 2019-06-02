@@ -43,9 +43,9 @@ SUBROUTINE DXADJ(X,Ix,Ierror)
   !           section.  (WRB)
   !           CALLs to XERROR changed to CALLs to XERMSG.  (WRB)
   !   920127  Revised PURPOSE section of prologue.  (DWL)
-  USE DXBLK ,ONLY: RADixl, RAD2l, L2, KMAx
+  USE DXBLK ,ONLY: radixl_com, rad2l_com, l2_com, kmax_com
   USE service, ONLY : XERMSG
-  INTEGER Ierror, Ix
+  INTEGER :: Ierror, Ix
   REAL(8) :: X
   !
   !   THE CONDITION IMPOSED ON L AND KMAX BY THIS SUBROUTINE
@@ -61,23 +61,23 @@ SUBROUTINE DXADJ(X,Ix,Ierror)
     Ix = 0
     GOTO 200
   ELSEIF ( ABS(X)>=1.0D0 ) THEN
-    IF ( ABS(X)<RADixl ) GOTO 200
-    X = X/RAD2l
+    IF ( ABS(X)<radixl_com ) GOTO 200
+    X = X/rad2l_com
     IF ( Ix<=0 ) THEN
-      Ix = Ix + L2
+      Ix = Ix + l2_com
       RETURN
-    ELSEIF ( Ix<=KMAx-L2 ) THEN
-      Ix = Ix + L2
+    ELSEIF ( Ix<=kmax_com-l2_com ) THEN
+      Ix = Ix + l2_com
       RETURN
     END IF
   ELSE
-    IF ( RADixl*ABS(X)>=1.0D0 ) GOTO 200
-    X = X*RAD2l
+    IF ( radixl_com*ABS(X)>=1.0D0 ) GOTO 200
+    X = X*rad2l_com
     IF ( Ix>=0 ) THEN
-      Ix = Ix - L2
+      Ix = Ix - l2_com
       RETURN
-    ELSEIF ( Ix>=-KMAx+L2 ) THEN
-      Ix = Ix - L2
+    ELSEIF ( Ix>=-kmax_com+l2_com ) THEN
+      Ix = Ix - l2_com
       RETURN
     END IF
   END IF
@@ -85,6 +85,6 @@ SUBROUTINE DXADJ(X,Ix,Ierror)
   Ierror = 207
   RETURN
   200 CONTINUE
-  IF ( ABS(Ix)>KMAx ) GOTO 100
+  IF ( ABS(Ix)>kmax_com ) GOTO 100
   RETURN
 END SUBROUTINE DXADJ
