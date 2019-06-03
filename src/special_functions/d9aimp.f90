@@ -66,10 +66,10 @@ SUBROUTINE D9AIMP(X,Ampl,Theta)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
   USE service, ONLY : XERMSG, D1MACH
-  REAL eta
-  REAL(8) :: X, Ampl, Theta, sqrtx, z
+  REAL(8) :: X, Ampl, Theta
+  REAL(8) :: sqrtx, z
   INTEGER, SAVE :: nam20, nath0, nam21, nath1, nam22, nath2
-  REAL(8), SAVE :: xsml
+  REAL(8), PARAMETER :: eta = 0.1D0*D1MACH(3), xsml = -1.0D0/D1MACH(3)**0.3333D0
   REAL(8), PARAMETER :: am20cs(57) = [ +.108716749086561856615730588125D-1, &
     +.369489228982663555091728665146D-3, +.440680100484689563667507001327D-5, &
     +.143686762361911153929183952833D-6, +.824275552390078308670628855353D-8, &
@@ -263,18 +263,15 @@ SUBROUTINE D9AIMP(X,Ampl,Theta)
     -.2567488423238302631121274357678D-30, -.1129232322268882185791505819151D-30, &
     -.4970947029753336916550570105023D-31 ]
   REAL(8), PARAMETER ::  pi4 = 0.78539816339744830961566084581988D0
-  LOGICAL :: first = .TRUE.
+  LOGICAL, SAVE :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  D9AIMP
   IF ( first ) THEN
-    eta = 0.1*REAL(D1MACH(3))
     nam20 = INITDS(am20cs,57,eta)
     nath0 = INITDS(ath0cs,53,eta)
     nam21 = INITDS(am21cs,60,eta)
     nath1 = INITDS(ath1cs,58,eta)
     nam22 = INITDS(am22cs,74,eta)
     nath2 = INITDS(ath2cs,72,eta)
-    !
-    xsml = -1.0D0/D1MACH(3)**0.3333D0
     first = .FALSE.
   END IF
   !

@@ -54,9 +54,8 @@ SUBROUTINE CPEVL(N,M,A,Z,C,B,Kbd)
   INTEGER :: i, j, mini, np1
   REAL :: r, s
   COMPLEX :: ci, cim1, bi, bim1, t
-  REAL :: d1 = 0.0
+  REAL, PARAMETER :: d1 = REAL(I1MACH(10))**(1-I1MACH(11))
   !* FIRST EXECUTABLE STATEMENT  CPEVL
-  IF ( d1==0.0 ) d1 = REAL(I1MACH(10))**(1-I1MACH(11))
   np1 = N + 1
   DO j = 1, np1
     ci = 0.0

@@ -140,10 +140,12 @@ SUBROUTINE CAIRY(Z,Id,Kode,Ai,Nz,Ierr)
   !   920128  Category corrected.  (WRB)
   !   920811  Prologue revised.  (DWL)
   USE service, ONLY : R1MACH, I1MACH
-  COMPLEX Ai, csq, cy(1), s1, s2, trm1, trm2, Z, zta, z3
-  REAL aa, ad, ak, alim, atrm, az, az3, bk, ck, dig, dk, d1, d2, elim, fid, fnu, &
+  INTEGER :: Id, Ierr, Kode, Nz
+  COMPLEX :: Ai
+  INTEGER :: iflag, k, k1, k2, mr, nn
+  REAL :: aa, ad, ak, alim, atrm, az, az3, bk, ck, dig, dk, d1, d2, elim, fid, fnu, &
   rl, r1m5, sfac, tol, zi, zr, z3i, z3r, bb, alaz
-  INTEGER Id, Ierr, iflag, k, Kode, k1, k2, mr, nn, Nz
+  COMPLEX :: csq, cy(1), s1, s2, trm1, trm2, Z, zta, z3
   REAL, PARAMETER :: tth = 6.66666666666666667E-01, c1 = 3.55028053887817240E-01, &
     c2 = 2.58819403792806799E-01, coef = 1.83776298473930683E-01
   COMPLEX, PARAMETER :: cone = (1.0E0,0.0E0)
@@ -187,7 +189,7 @@ SUBROUTINE CAIRY(Z,Id,Kode,Ai,Nz,Ierr)
     !     TEST FOR RANGE
     !-----------------------------------------------------------------------
     aa = 0.5E0/tol
-    bb = I1MACH(9)*0.5E0
+    bb = 0.5E0*I1MACH(9)
     aa = MIN(aa,bb)
     aa = aa**tth
     IF ( az>aa ) THEN

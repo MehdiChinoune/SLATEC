@@ -51,9 +51,11 @@ REAL FUNCTION AIE(X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920618  Removed space from variable names.  (RWC, WRB)
   USE service, ONLY : R1MACH
-  REAL eta, sqrtx, theta, X, xm, z
+  REAL :: X
+  REAL :: sqrtx, theta, xm, z
   INTEGER, SAVE :: naif, naig, naip
-  REAL, SAVE :: x3sml, x32sml, xbig
+  REAL, PARAMETER :: eta = 0.1*R1MACH(3), x3sml = eta**0.3333, x32sml = 1.3104*x3sml**2, &
+    xbig = R1MACH(2)**0.6666
   REAL, PARAMETER :: aifcs(9) = [ -.03797135849666999750E0, .05919188853726363857E0, &
     .00098629280577279975E0, .00000684884381907656E0, .00000002594202596219E0, &
     .00000000006176612774E0, .00000000000010092454E0, .00000000000000012014E0, &
@@ -73,17 +75,12 @@ REAL FUNCTION AIE(X)
     .0000000000000087E0, -.0000000000000040E0, .0000000000000019E0, &
     -.0000000000000009E0, .0000000000000004E0,-.0000000000000002E0, &
     .0000000000000001E0, -.0000000000000000E0 ]
-  LOGICAL :: first = .TRUE.
+  LOGICAL, SAVE :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  AIE
   IF ( first ) THEN
-    eta = 0.1*R1MACH(3)
     naif = INITS(aifcs,9,eta)
     naig = INITS(aigcs,8,eta)
     naip = INITS(aipcs,34,eta)
-    !
-    x3sml = eta**0.3333
-    x32sml = 1.3104*x3sml**2
-    xbig = R1MACH(2)**0.6666
     first = .FALSE.
   END IF
   !

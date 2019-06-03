@@ -43,18 +43,12 @@ REAL FUNCTION BETAI(X,Pin,Qin)
   !           (WRB)
   !   920528  DESCRIPTION and REFERENCES sections revised.  (WRB)
   USE service, ONLY : XERMSG, R1MACH
-  REAL c, finsum, p, p1, Pin, ps, q, Qin, term, X, xb, y
-  INTEGER i, ib, n
-  REAL, SAVE :: eps, alneps, sml, alnsml
-  LOGICAL :: first = .TRUE.
-  !* FIRST EXECUTABLE STATEMENT  BETAI
-  IF ( first ) THEN
-    eps = R1MACH(3)
-    alneps = LOG(eps)
-    sml = R1MACH(1)
+  REAL :: X, Pin, Qin
+  INTEGER :: i, ib, n
+  REAL :: c, finsum, p, p1, ps, q, term, xb, y
+  REAL, PARAMETER :: eps = R1MACH(3), alneps = LOG(eps), sml = R1MACH(1), &
     alnsml = LOG(sml)
-    first = .FALSE.
-  END IF
+  !* FIRST EXECUTABLE STATEMENT  BETAI
   !
   IF ( X<0..OR.X>1.0 ) CALL XERMSG('BETAI',&
     'X IS NOT IN THE RANGE (0,1)',1,2)

@@ -32,21 +32,13 @@ COMPLEX FUNCTION CEXPRL(Z)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   USE service, ONLY : R1MACH
-  REAL alneps, r, xln, xn
-  INTEGER i
-  COMPLEX Z
-  INTEGER, SAVE :: nterms
-  REAL, SAVE :: rbnd
-  LOGICAL :: first = .TRUE.
+  COMPLEX :: Z
+  INTEGER :: i
+  REAL :: r
+  REAL, PARAMETER :: alneps = LOG(R1MACH(3)), xn = 3.72 - 0.3*alneps, &
+    xln = LOG((xn+1.0)/1.36), rbnd = R1MACH(3)
+  INTEGER, PARAMETER :: nterms = INT( xn - (xn*xln+alneps)/(xln+1.36) + 1.5 )
   !* FIRST EXECUTABLE STATEMENT  CEXPRL
-  IF ( first ) THEN
-    alneps = LOG(R1MACH(3))
-    xn = 3.72 - 0.3*alneps
-    xln = LOG((xn+1.0)/1.36)
-    nterms = INT( xn - (xn*xln+alneps)/(xln+1.36) + 1.5 )
-    rbnd = R1MACH(3)
-    first = .FALSE.
-  END IF
   !
   r = ABS(Z)
   IF ( r>0.5 ) CEXPRL = (EXP(Z)-1.0)/Z

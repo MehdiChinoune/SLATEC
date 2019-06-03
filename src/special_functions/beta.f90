@@ -36,12 +36,13 @@ REAL FUNCTION BETA(A,B)
   !           (WRB)
   !   900727  Added EXTERNAL statement.  (WRB)
   USE service, ONLY : XERMSG, R1MACH
-  REAL A, B, xmin
-  REAL :: xmax = 0., alnsml = 0.
+  REAL :: A, B
+  REAL :: xmin
+  REAL, SAVE :: xmax = 0.
+  REAL, PARAMETER :: alnsml = LOG(R1MACH(1))
   !* FIRST EXECUTABLE STATEMENT  BETA
-  IF ( alnsml==0.0 ) THEN
+  IF ( xmax==0.0 ) THEN
     CALL GAMLIM(xmin,xmax)
-    alnsml = LOG(R1MACH(1))
   END IF
   !
   IF ( A<=0..OR.B<=0. ) CALL XERMSG('BETA',&

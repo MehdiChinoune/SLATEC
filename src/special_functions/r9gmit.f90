@@ -32,12 +32,11 @@ REAL FUNCTION R9GMIT(A,X,Algap1,Sgngam)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
   USE service, ONLY : XERMSG, R1MACH
-  REAL A, ae, aeps, alg2, Algap1, algs, fk, s, sgng2, Sgngam, t, te, X
-  INTEGER k, m, ma
-  REAL :: eps = 0., bot = 0.
+  REAL :: A, Algap1, Sgngam, X
+  INTEGER :: k, m, ma
+  REAL :: ae, aeps, alg2, algs, fk, s, sgng2, t, te
+  REAL, PARAMETER :: eps = 0.5*R1MACH(3), bot = LOG(R1MACH(1))
   !* FIRST EXECUTABLE STATEMENT  R9GMIT
-  IF ( eps==0.0 ) eps = 0.5*R1MACH(3)
-  IF ( bot==0.0 ) bot = LOG(R1MACH(1))
   !
   IF ( X<=0.0 ) CALL XERMSG('R9GMIT','X SHOULD BE GT 0',1,2)
   !

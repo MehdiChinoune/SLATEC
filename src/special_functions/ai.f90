@@ -43,9 +43,11 @@ REAL FUNCTION AI(X)
   !           (WRB)
   !   920618  Removed space from variable names.  (RWC, WRB)
   USE service, ONLY : XERMSG, R1MACH
-  REAL theta, X, xm, xmaxt, z
+  REAL :: X
+  REAL :: theta, xm, z
   INTEGER, SAVE :: naif, naig
-  REAL, SAVE :: x3sml, xmax
+  REAL, PARAMETER :: x3sml = R1MACH(3)**0.3334, xmaxt = (-1.5*LOG(R1MACH(1)))**0.6667, &
+    xmax = xmaxt - xmaxt*LOG(xmaxt)/(4.0*SQRT(xmaxt)+1.0) - 0.01
   REAL, PARAMETER :: aifcs(9) = [ -.03797135849666999750E0, .05919188853726363857E0, &
     .00098629280577279975E0, .00000684884381907656E0, .00000002594202596219E0, &
     .00000000006176612774E0, .00000000000010092454E0, .00000000000000012014E0, &
@@ -53,15 +55,11 @@ REAL FUNCTION AI(X)
   REAL, PARAMETER :: aigcs(8) = [ .01815236558116127E0, .02157256316601076E0, &
     .00025678356987483E0, .00000142652141197E0, .00000000457211492E0, &
     .00000000000952517E0, .00000000000001392E0, .00000000000000001E0 ]
-  LOGICAL :: first = .TRUE.
+  LOGICAL, SAVE :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  AI
   IF ( first ) THEN
     naif = INITS(aifcs,9,0.1*R1MACH(3))
     naig = INITS(aigcs,8,0.1*R1MACH(3))
-    !
-    x3sml = R1MACH(3)**0.3334
-    xmaxt = (-1.5*LOG(R1MACH(1)))**0.6667
-    xmax = xmaxt - xmaxt*LOG(xmaxt)/(4.0*SQRT(xmaxt)+1.0) - 0.01
     first = .FALSE.
   END IF
   !

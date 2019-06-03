@@ -73,8 +73,8 @@ REAL(8) FUNCTION DQDOTA(N,Db,Qc,Dx,Incx,Dy,Incy)
 
   INTEGER i, Incx, Incy, ix, iy, N
   REAL(8) :: Dx(*), Dy(*), Db
-  INTEGER Qc(30), qx(30), qy(30)
-  INTEGER :: i1 = 0
+  INTEGER :: Qc(30), qx(30), qy(30)
+  INTEGER, SAVE :: i1 = 0
   !* FIRST EXECUTABLE STATEMENT  DQDOTA
   IF ( i1==0 ) CALL MPBLAS(i1)
   IF ( Db/=0.D0 ) THEN

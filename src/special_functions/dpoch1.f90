@@ -57,10 +57,12 @@ REAL(8) FUNCTION DPOCH1(A,X)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900727  Added EXTERNAL statement.  (WRB)
   USE service, ONLY : XERMSG, D1MACH
-  INTEGER i, ii, incr, j, k, ndx, nterms
-  REAL(8) :: A, X, absa, absx, alnvar, b, binv, bp, gbern(21), &
-    gbk, poly1, q, rho, sinpxx, sinpx2, term, trig, var, var2
-  REAL(8), SAVE :: sqtbig, alneps
+  REAL(8) :: A, X
+  INTEGER :: i, ii, incr, j, k, ndx, nterms
+  REAL(8) :: absa, absx, alnvar, b, binv, bp, gbern(21), gbk, poly1, q, rho, &
+    sinpxx, sinpx2, term, trig, var, var2
+  REAL(8), PARAMETER :: sqtbig = 1.0D0/SQRT(24.0D0*D1MACH(1)), &
+    alneps = LOG(D1MACH(3))
   REAL(8), PARAMETER :: bern(20) = [ +.833333333333333333333333333333333D-1, &
     -.138888888888888888888888888888888D-2, +.330687830687830687830687830687830D-4, &
     -.826719576719576719576719576719576D-6, +.208767569878680989792100903212014D-7, &
@@ -73,14 +75,7 @@ REAL(8) FUNCTION DPOCH1(A,X)
     -.368599494066531017818178247990866D-28, +.933673425709504467203255515278562D-30, &
     -.236502241570062993455963519636983D-31 ]
   REAL(8), PARAMETER :: pi = 3.141592653589793238462643383279503D0
-  LOGICAL :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  DPOCH1
-  IF ( first ) THEN
-    sqtbig = 1.0D0/SQRT(24.0D0*D1MACH(1))
-    alneps = LOG(D1MACH(3))
-    first = .FALSE.
-  END IF
-  !
   IF ( X==0.0D0 ) THEN
     DPOCH1 = DPSI(A)
     RETURN

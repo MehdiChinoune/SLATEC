@@ -81,9 +81,10 @@ REAL FUNCTION E1(X)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920618  Removed space from variable names.  (RWC, WRB)
   USE service, ONLY : XERMSG, R1MACH
-  REAL eta, X, xmaxt
+  REAL :: X
   INTEGER, SAVE :: ntae11, ntae12, nte11, nte12, ntae13, ntae14
-  REAL, SAVE :: xmax
+  REAL, PARAMETER :: eta = 0.1*R1MACH(3), xmaxt = -LOG(R1MACH(1)), &
+    xmax = xmaxt - LOG(xmaxt)
   REAL, PARAMETER :: ae11cs(39) = [ .12150323971606579E0, -.065088778513550150E0, &
     .004897651357459670E0, -.000649237843027216E0, .000093840434587471E0, &
     .000000420236380882E0, -.000008113374735904E0, .000002804247688663E0, &
@@ -138,19 +139,15 @@ REAL FUNCTION E1(X)
     -.00000000000052538E0, .00000000000015592E0,-.00000000000004729E0, &
     .00000000000001463E0, -.00000000000000461E0, .00000000000000148E0, &
     -.00000000000000048E0, .00000000000000016E0,-.00000000000000005E0 ]
-  LOGICAL :: first = .TRUE.
+  LOGICAL, SAVE :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  E1
   IF ( first ) THEN
-    eta = 0.1*R1MACH(3)
     ntae11 = INITS(ae11cs,39,eta)
     ntae12 = INITS(ae12cs,25,eta)
     nte11 = INITS(e11cs,19,eta)
     nte12 = INITS(e12cs,16,eta)
     ntae13 = INITS(ae13cs,25,eta)
     ntae14 = INITS(ae14cs,26,eta)
-    !
-    xmaxt = -LOG(R1MACH(1))
-    xmax = xmaxt - LOG(xmaxt)
     first = .FALSE.
   END IF
   !

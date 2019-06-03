@@ -33,11 +33,11 @@ REAL(8) FUNCTION D9LGIC(A,X,Alx)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
   USE service, ONLY : XERMSG, D1MACH
-  INTEGER k
-  REAL(8) :: A, X, Alx, fk, p, r, s, t, xma, xpa
-  REAL(8) :: eps = 0.D0
+  REAL(8) :: A, X, Alx
+  INTEGER :: k
+  REAL(8) :: fk, p, r, s, t, xma, xpa
+  REAL(8) :: eps = 0.5D0*D1MACH(3)
   !* FIRST EXECUTABLE STATEMENT  D9LGIC
-  IF ( eps==0.D0 ) eps = 0.5D0*D1MACH(3)
   !
   xpa = X + 1.0D0 - A
   xma = X - 1.D0 - A

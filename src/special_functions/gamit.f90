@@ -57,16 +57,11 @@ REAL FUNCTION GAMIT(A,X)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920528  DESCRIPTION and REFERENCES sections revised.  (WRB)
   USE service, ONLY : XERMSG, XERCLR, R1MACH
-  REAL :: A, aeps, ainta, algap1, alng, alx, h, sga, sgngam, t, X
-  REAL, SAVE :: alneps, sqeps, bot
-  LOGICAL :: first = .TRUE.
-  !* FIRST EXECUTABLE STATEMENT  GAMIT
-  IF ( first ) THEN
-    alneps = -LOG(R1MACH(3))
-    sqeps = SQRT(R1MACH(4))
+  REAL :: A, X
+  REAL :: aeps, ainta, algap1, alng, alx, h, sga, sgngam, t
+  REAL, PARAMETER :: alneps = -LOG(R1MACH(3)), sqeps = SQRT(R1MACH(4)), &
     bot = LOG(R1MACH(1))
-    first = .FALSE.
-  END IF
+  !* FIRST EXECUTABLE STATEMENT  GAMIT
   !
   IF ( X<0.0 ) CALL XERMSG('GAMIT','X IS NEGATIVE',2,2)
   !

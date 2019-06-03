@@ -39,9 +39,10 @@ REAL FUNCTION R9ATN1(X)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
   USE service, ONLY : XERMSG, R1MACH
-  REAL eps, X, y
+  REAL X, y
   INTEGER, SAVE :: ntatn1
-  REAL, SAVE :: xsml, xbig, xmax
+  REAL, PARAMETER :: eps = R1MACH(3), xsml = SQRT(0.1*eps), xbig = 1.571/SQRT(eps), &
+    xmax = 1.571/eps
   REAL, PARAMETER :: atn1cs(21) = [ -.03283997535355202E0, .05833432343172412E0, &
     -.00740036969671964E0, .00100978419933728E0,-.00014397871635652E0, &
     .00002114512648992E0, -.00000317232107425E0, .00000048366203654E0, &
@@ -50,15 +51,10 @@ REAL FUNCTION R9ATN1(X)
     -.00000000000119135E0, .00000000000019240E0,-.00000000000003118E0, &
     .00000000000000506E0, -.00000000000000082E0, .00000000000000013E0, &
     -.00000000000000002E0 ]
-  LOGICAL :: first = .TRUE.
+  LOGICAL, SAVE :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  R9ATN1
   IF ( first ) THEN
-    eps = R1MACH(3)
     ntatn1 = INITS(atn1cs,21,0.1*eps)
-    !
-    xsml = SQRT(0.1*eps)
-    xbig = 1.571/SQRT(eps)
-    xmax = 1.571/eps
     first = .FALSE.
   END IF
   !

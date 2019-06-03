@@ -42,12 +42,10 @@ SUBROUTINE BESKS(Xnu,X,Nin,Bk)
   REAL :: Bk(Nin), X, Xnu
   REAL :: expxi
   INTEGER i, n
-  REAL :: xmax = 0.0
+  REAL, PARAMETER :: xmax = -LOG(R1MACH(1))
   !* FIRST EXECUTABLE STATEMENT  BESKS
-  IF ( xmax==0.0 ) xmax = -LOG(R1MACH(1))
   !
-  IF ( X>xmax ) CALL XERMSG('BESKS','X SO BIG BESSEL K UNDERFLOWS',&
-    1,2)
+  IF ( X>xmax ) CALL XERMSG('BESKS','X SO BIG BESSEL K UNDERFLOWS',1,2)
   !
   CALL BESKES(Xnu,X,Nin,Bk)
   !

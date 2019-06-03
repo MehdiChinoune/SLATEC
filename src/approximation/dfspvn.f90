@@ -30,8 +30,8 @@ SUBROUTINE DFSPVN(T,Jhigh,Indexx,X,Ileft,Vnikx)
   REAL(8) :: T(:), Vnikx(*), X
   REAL(8) :: vm, vmprev
   INTEGER :: imjp1, ipj, jp1, jp1ml, l
-  INTEGER :: j = 1
-  REAL(8) :: deltam(20) = 0.0D0, deltap(20) = 0.0D0
+  INTEGER, SAVE :: j = 1
+  REAL(8), SAVE :: deltam(20) = 0.0D0, deltap(20) = 0.0D0
   !* FIRST EXECUTABLE STATEMENT  DFSPVN
   IF ( Indexx/=2 ) THEN
     j = 1

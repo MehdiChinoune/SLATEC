@@ -273,20 +273,15 @@ REAL FUNCTION RC(X,Y,Ier)
   !           editorial changes.  (RWC))
   !   920501  Reformatted the REFERENCES section.  (WRB)
   USE service, ONLY : XERMSG, R1MACH
+  INTEGER :: Ier
+  REAL :: X, Y
+  REAL :: lamda, mu, s, sn, xn, yn
   CHARACTER(16) :: xern3, xern4, xern5
-  INTEGER Ier
-  REAL lamda, mu, s, sn, X, xn, Y, yn
-  REAL, SAVE :: errtol, lolim, uplim
+  REAL, PARAMETER :: errtol = (R1MACH(3)/16.0E0)**(1.0E0/6.0E0), &
+    lolim = 5.0E0*R1MACH(1), uplim = R1MACH(2)/5.0E0
   REAL, PARAMETER ::  c1 = 1.0E0/7.0E0, c2 = 9.0E0/22.0E0
-  LOGICAL :: first = .TRUE.
   !
   !* FIRST EXECUTABLE STATEMENT  RC
-  IF ( first ) THEN
-    errtol = (R1MACH(3)/16.0E0)**(1.0E0/6.0E0)
-    lolim = 5.0E0*R1MACH(1)
-    uplim = R1MACH(2)/5.0E0
-    first = .FALSE.
-  END IF
   !
   !         CALL ERROR HANDLER IF NECESSARY.
   !

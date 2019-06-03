@@ -33,11 +33,11 @@ COMPLEX FUNCTION C0LGMC(Z)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   USE service, ONLY : R1MACH
-  REAL cabsz
-  COMPLEX Z, q
-  REAL :: rbig = 0.0
+  COMPLEX :: Z
+  REAL :: cabsz
+  COMPLEX :: q
+  REAL, PARAMETER :: rbig = 1.0/R1MACH(3)
   !* FIRST EXECUTABLE STATEMENT  C0LGMC
-  IF ( rbig==0.0 ) rbig = 1.0/R1MACH(3)
   !
   cabsz = ABS(Z)
   IF ( cabsz>rbig ) C0LGMC = -(Z+0.5)*LOG(Z) - Z

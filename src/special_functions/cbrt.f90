@@ -28,13 +28,13 @@ REAL FUNCTION CBRT(X)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   USE service, ONLY : R1MACH
-  REAL cbrtsq, X, y
-  INTEGER irem, iter, ixpnt, n
+  REAL :: X
+  INTEGER :: irem, iter, ixpnt, n
+  REAL :: cbrtsq, y
   REAL, PARAMETER :: cbrt2(5) = [ 0.62996052494743658E0,  0.79370052598409974E0, &
     1.0E0, 1.25992104989487316E0, 1.58740105196819947E0 ]
-  INTEGER :: niter = 0
+  INTEGER, PARAMETER :: niter = INT( 1.443*LOG(-.106*LOG(0.1*R1MACH(3))) ) + 1
   !* FIRST EXECUTABLE STATEMENT  CBRT
-  IF ( niter==0 ) niter = INT( 1.443*LOG(-.106*LOG(0.1*R1MACH(3))) ) + 1
   !
   CBRT = 0.0
   IF ( X==0. ) RETURN

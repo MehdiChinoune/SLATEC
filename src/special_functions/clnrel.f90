@@ -35,11 +35,10 @@ COMPLEX FUNCTION CLNREL(Z)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   USE service, ONLY : XERMSG, R1MACH
-  REAL rho, x
-  COMPLEX Z
-  REAL :: sqeps = 0.0
+  COMPLEX :: Z
+  REAL :: rho, x
+  REAL, PARAMETER :: sqeps = SQRT(R1MACH(4))
   !* FIRST EXECUTABLE STATEMENT  CLNREL
-  IF ( sqeps==0. ) sqeps = SQRT(R1MACH(4))
   !
   IF ( ABS(1.+Z)<sqeps ) CALL XERMSG('CLNREL',&
     'ANSWER LT HALF PRECISION BECAUSE Z TOO NEAR -1',1,1)

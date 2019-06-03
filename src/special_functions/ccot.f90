@@ -31,11 +31,10 @@ COMPLEX FUNCTION CCOT(Z)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   USE service, ONLY : XERMSG, XERCLR, R1MACH
-  REAL den, sn2x, x2, y2
-  COMPLEX Z
-  REAL :: sqeps = 0.
+  COMPLEX :: Z
+  REAL :: den, sn2x, x2, y2
+  REAL, PARAMETER :: sqeps = SQRT(R1MACH(4))
   !* FIRST EXECUTABLE STATEMENT  CCOT
-  IF ( sqeps==0. ) sqeps = SQRT(R1MACH(4))
   !
   x2 = 2.0*REAL(Z)
   y2 = 2.0*AIMAG(Z)

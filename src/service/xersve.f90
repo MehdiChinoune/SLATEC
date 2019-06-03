@@ -73,7 +73,7 @@ SUBROUTINE XERSVE(Subrou,Messg,Kflag,Nerr,Level,Icount)
   CHARACTER(8), SAVE :: subtab(LENTAB)
   CHARACTER(60), SAVE :: mestab(LENTAB)
   INTEGER, SAVE :: nertab(LENTAB), levtab(LENTAB), kount(LENTAB)
-  INTEGER :: kountx = 0, nmsg = 0
+  INTEGER, SAVE :: kountx = 0, nmsg = 0
   !* FIRST EXECUTABLE STATEMENT  XERSVE
   !
   IF ( Kflag<=0 ) THEN

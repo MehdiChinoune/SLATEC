@@ -43,9 +43,8 @@ SUBROUTINE DBSKES(Xnu,X,Nin,Bke)
   REAL(8) :: Xnu, X, Bke(Nin)
   INTEGER :: i, iswtch, n
   REAL(8) :: bknu1, v, vincr, vend, direct
-  REAL(8) :: alnbig = 0.D0
+  REAL(8), PARAMETER :: alnbig = LOG(D1MACH(2))
   !* FIRST EXECUTABLE STATEMENT  DBSKES
-  IF ( alnbig==0.D0 ) alnbig = LOG(D1MACH(2))
   !
   v = ABS(Xnu)
   n = ABS(Nin)

@@ -31,17 +31,12 @@ REAL FUNCTION BINOM(N,M)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   USE service, ONLY : XERMSG, R1MACH
-  REAL corr, xk, xn, xnk
-  INTEGER i, k, M, N
-  REAL, SAVE :: bilnmx, fintmx
+  INTEGER :: M, N
+  INTEGER :: i, k
+  REAL :: corr, xk, xn, xnk
+  REAL, PARAMETER :: bilnmx = LOG(R1MACH(2)), fintmx = 0.9/R1MACH(3)
   REAL, PARAMETER :: sq2pil = 0.91893853320467274E0
-  LOGICAL :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  BINOM
-  IF ( first ) THEN
-    bilnmx = LOG(R1MACH(2))
-    fintmx = 0.9/R1MACH(3)
-    first = .FALSE.
-  END IF
   !
   IF ( N<0.OR.M<0 ) CALL XERMSG('BINOM','N OR M LT ZERO',1,2)
   IF ( N<M ) CALL XERMSG('BINOM','N LT M',2,2)

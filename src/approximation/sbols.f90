@@ -440,7 +440,7 @@ SUBROUTINE SBOLS(W,Mdw,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Iw)
   CHARACTER(8) :: xern1, xern2
   CHARACTER(16) :: xern3, xern4
   INTEGER, SAVE :: locacc, lopt, iscale
-  INTEGER :: igo = 0
+  INTEGER, SAVE :: igo = 0
   !* FIRST EXECUTABLE STATEMENT  SBOLS
   nerr = 0
   Mode = 0

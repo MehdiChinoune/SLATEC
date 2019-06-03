@@ -40,13 +40,13 @@ REAL FUNCTION CHU(A,B,X)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900727  Added EXTERNAL statement.  (WRB)
   USE service, ONLY : XERMSG, R1MACH
-  REAL A, a0, aintb, alnx, B, b0, beps, c0, factor,gamri1, gamrni, pch1ai, &
-    pch1i, pochai, summ, t, X, xeps1, xi, xi1, xn, xtoeps
-  INTEGER i, istrt, m, n
+  REAL :: A, B, X
+  INTEGER :: i, istrt, m, n
+  REAL :: a0, aintb, alnx, b0, beps, c0, factor,gamri1, gamrni, pch1ai, &
+    pch1i, pochai, summ, t, xeps1, xi, xi1, xn, xtoeps
   REAL, PARAMETER :: pi = 3.14159265358979324E0
-  REAL :: eps = 0.0
+  REAL, PARAMETER :: eps = R1MACH(3)
   !* FIRST EXECUTABLE STATEMENT  CHU
-  IF ( eps==0.0 ) eps = R1MACH(3)
   !
   IF ( X==0.0 ) CALL XERMSG('CHU','X IS ZERO SO CHU IS INFINITE',1,2)
   IF ( X<0.0 ) CALL XERMSG('CHU','X IS NEGATIVE, USE CCHU',2,2)

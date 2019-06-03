@@ -318,24 +318,18 @@ REAL(8) FUNCTION DRD(X,Y,Z,Ier)
   !   900510  Modify calls to XERMSG to put in standard form.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   USE service, ONLY : XERMSG, D1MACH
+  INTEGER :: Ier
+  REAL(8) :: X, Y
+  REAL(8) :: epslon, ea, eb, ec, ed, ef, lamda, mu, power4, sigma, s1, &
+    s2, xn, xndev, xnroot, yn, yndev, ynroot, Z, zn, zndev, znroot
   CHARACTER(16) :: xern3, xern4, xern5, xern6
-  INTEGER Ier
-  REAL(8) :: tuplim, epslon, ea, eb, ec, ed, ef, lamda, mu, power4, &
-    sigma, s1, s2, X, xn, xndev, xnroot, Y, yn, yndev, ynroot, Z, zn, zndev, znroot
-  REAL(8), SAVE :: errtol, lolim, uplim
+  REAL(8), PARAMETER :: errtol = (D1MACH(3)/3.0D0)**(1.0D0/6.0D0), &
+    lolim = 2.0D0/(D1MACH(2))**(2.0D0/3.0D0), &
+    uplim = (0.10D0*errtol/D1MACH(1))**(2.0D0/3.0D0)
   REAL(8), PARAMETER :: c1 = 3.0D0/14.0D0, c2 = 1.0D0/6.0D0, c3 = 9.0D0/22.0D0, &
     c4 = 3.0D0/26.0D0
-  LOGICAL :: first = .TRUE.
   !
   !* FIRST EXECUTABLE STATEMENT  DRD
-  IF ( first ) THEN
-    errtol = (D1MACH(3)/3.0D0)**(1.0D0/6.0D0)
-    lolim = 2.0D0/(D1MACH(2))**(2.0D0/3.0D0)
-    tuplim = D1MACH(1)**(1.0E0/3.0E0)
-    tuplim = (0.10D0*errtol)**(1.0E0/3.0E0)/tuplim
-    uplim = tuplim**2.0D0
-    first = .FALSE.
-  END IF
   !
   !         CALL ERROR HANDLER IF NECESSARY.
   !

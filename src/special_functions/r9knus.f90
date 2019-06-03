@@ -46,12 +46,14 @@ SUBROUTINE R9KNUS(Xnu,X,Bknu,Bknu1,Iswtch)
   !   900727  Added EXTERNAL statement.  (WRB)
   !   920618  Removed space from variable names.  (RWC, WRB)
   USE service, ONLY : XERMSG, R1MACH
-  REAL a(15), a0, alnz, alpha(15), an, b0, beta(15), Bknu, bknu0, Bknu1, bknud, &
-    bn, c0, expx, p1, p2, p3, qq, result, sqrtx, v, vlnz, X, x2n, x2tov, &
-    xi, xmu, Xnu, z, ztov
-  INTEGER i, ii, inu, Iswtch, n, nterms
+  INTEGER :: Iswtch
+  REAL :: Bknu, Bknu1, X, Xnu
+  INTEGER :: i, ii, inu, n, nterms
+  REAL :: a(15), a0, alnz, alpha(15), an, b0, beta(15), bknu0, bknud, bn, c0, &
+    expx, p1, p2, p3, qq, result, sqrtx, v, vlnz, x2n, x2tov, xi, xmu, z, ztov
   INTEGER, SAVE :: ntc0k, ntznu1
-  REAL, SAVE :: xnusml, xsml, alnsml, alnbig, alneps
+  REAL, PARAMETER :: xnusml = SQRT(R1MACH(3)/8.0), xsml = 0.1*R1MACH(3), &
+    alnsml = LOG(R1MACH(1)), alnbig = LOG(R1MACH(2)), alneps = LOG(0.1*R1MACH(3))
   REAL, PARAMETER :: c0kcs(16) = [ .060183057242626108E0,-.15364871433017286E0, &
     -.011751176008210492E0,-.000852487888919795E0,-.000061329838767496E0, &
     -.000004405228124551E0,-.000000316312467283E0,-.000000022710719382E0, &
@@ -66,17 +68,11 @@ SUBROUTINE R9KNUS(Xnu,X,Bknu,Bknu1,Iswtch)
   REAL, PARAMETER :: euler = 0.57721566490153286E0
   REAL, PARAMETER :: sqpi2 = 1.2533141373155003E0
   REAL, PARAMETER :: aln2 = 0.69314718055994531E0
-  LOGICAL :: first = .TRUE.
+  LOGICAL, SAVE :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  R9KNUS
   IF ( first ) THEN
     ntc0k = INITS(c0kcs,16,0.1*R1MACH(3))
     ntznu1 = INITS(znu1cs,12,0.1*R1MACH(3))
-    !
-    xnusml = SQRT(R1MACH(3)/8.0)
-    xsml = 0.1*R1MACH(3)
-    alnsml = LOG(R1MACH(1))
-    alnbig = LOG(R1MACH(2))
-    alneps = LOG(0.1*R1MACH(3))
     first = .FALSE.
   END IF
   !

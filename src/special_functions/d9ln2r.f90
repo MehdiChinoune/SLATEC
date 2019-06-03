@@ -45,10 +45,12 @@ REAL(8) FUNCTION D9LN2R(X)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
   USE service, ONLY : XERMSG, D1MACH
-  REAL eps, sqeps
-  REAL(8) :: X, txbig, txmax
+  REAL(8) :: X
   INTEGER, SAVE :: ntln21, ntln22
-  REAL(8), SAVE :: xmin, xbig, xmax
+  REAL(8), PARAMETER :: eps = D1MACH(3), sqeps = SQRT(eps), txmax = 8.0/sqeps, &
+    txbig = 6.0/SQRT(sqeps), xmin = -1.0D0 + SQRT(D1MACH(4)), &
+    xmax = txmax - (eps*txmax**2-2.D0*LOG(txmax))/(2.D0*eps*txmax), &
+    xbig = txbig - (sqeps*txbig**2-2.D0*LOG(txbig))/(2.D0*sqeps*txbig)
   REAL(8), PARAMETER :: ln21cs(50) = [ +.18111962513478809875894953043071D+0, &
     -.15627123192872462669625155541078D+0, +.28676305361557275209540627102051D-1, &
     -.55586996559481398781157725126781D-2, +.11178976652299837657335666279727D-2, &
@@ -94,19 +96,11 @@ REAL(8) FUNCTION D9LN2R(X)
     -.9948142607031436571923797333333D-27, +.1427440611211698610634752000000D-27, &
     -.2049794721898234911566506666666D-28, +.2945648756401362222885546666666D-29, &
     -.4235973185184957027669333333333D-30, +.6095532614003832040106666666666D-31 ]
-  LOGICAL :: first = .TRUE.
+  LOGICAL, SAVE :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  D9LN2R
   IF ( first ) THEN
-    eps = REAL(  D1MACH(3), 4 )
     ntln21 = INITDS(ln21cs,50,0.1*eps)
     ntln22 = INITDS(ln22cs,37,0.1*eps)
-    !
-    xmin = -1.0D0 + SQRT(D1MACH(4))
-    sqeps = SQRT(eps)
-    txmax = 8.0/sqeps
-    xmax = txmax - (eps*txmax**2-2.D0*LOG(txmax))/(2.D0*eps*txmax)
-    txbig = 6.0/SQRT(sqeps)
-    xbig = txbig - (sqeps*txbig**2-2.D0*LOG(txbig))/(2.D0*sqeps*txbig)
     first = .FALSE.
   END IF
   !

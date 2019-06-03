@@ -52,19 +52,12 @@ REAL(8) FUNCTION DGAMIC(A,X)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920528  DESCRIPTION and REFERENCES sections revised.  (WRB)
   USE service, ONLY : XERMSG, XERCLR, D1MACH
-  INTEGER izero
-  REAL(8) :: A, X, aeps, ainta, algap1, alngs, alx, e, gstar, h, sga, sgng, &
-    sgngam, sgngs, t
-  REAL(8), SAVE :: eps, sqeps, alneps, bot
-  LOGICAL :: first = .TRUE.
+  REAL(8) :: A, X
+  INTEGER :: izero
+  REAL(8) :: aeps, ainta, algap1, alngs, alx, e, gstar, h, sga, sgng, sgngam, sgngs, t
+  REAL(8), PARAMETER :: eps = 0.5D0*D1MACH(3), sqeps = SQRT(D1MACH(4)), &
+    alneps = -LOG(D1MACH(3)), bot = LOG(D1MACH(1))
   !* FIRST EXECUTABLE STATEMENT  DGAMIC
-  IF ( first ) THEN
-    eps = 0.5D0*D1MACH(3)
-    sqeps = SQRT(D1MACH(4))
-    alneps = -LOG(D1MACH(3))
-    bot = LOG(D1MACH(1))
-    first = .FALSE.
-  END IF
   !
   IF ( X<0.D0 ) CALL XERMSG('DGAMIC','X IS NEGATIVE',2,2)
   !
@@ -130,8 +123,7 @@ REAL(8) FUNCTION DGAMIC(A,X)
       END IF
     END IF
   ELSE
-    IF ( A<=0.D0 ) CALL XERMSG('DGAMIC',&
-      'X = 0 AND A LE 0 SO DGAMIC IS UNDEFINED',3,2)
+    IF ( A<=0.D0 ) CALL XERMSG('DGAMIC','X = 0 AND A LE 0 SO DGAMIC IS UNDEFINED',3,2)
     !
     DGAMIC = EXP(LOG_GAMMA(A+1.D0)-LOG(A))
     RETURN

@@ -148,9 +148,8 @@ SUBROUTINE HFTI(A,Mda,M,N,B,Mdb,Nb,Tau,Krank,Rnorm,H,G,Ip)
   INTEGER :: i, ii, iopt, ip1, j, jb, jj, k, kp1, l, ldiag, lmax, nerr
   REAL :: factor, hmax, sm1, szero, tmp
   REAL(8) :: sm, dzero
-  REAL :: releps = 0.E0
+  REAL, PARAMETER :: releps = R1MACH(4)
   !* FIRST EXECUTABLE STATEMENT  HFTI
-  IF ( releps==0 ) releps = R1MACH(4)
   szero = 0.
   dzero = 0.D0
   factor = 0.001

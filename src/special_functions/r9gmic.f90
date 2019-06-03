@@ -33,16 +33,14 @@ REAL FUNCTION R9GMIC(A,X,Alx)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
   USE service, ONLY : XERMSG, R1MACH
-  REAL A, alng, Alx, fk, fkp1, fm, s, sgng, t, te, X
-  INTEGER k, m, ma, mm1
+  REAL :: A, Alx, X
+  INTEGER :: k, m, ma, mm1
+  REAL :: alng, fk, fkp1, fm, s, sgng, t, te
   REAL, PARAMETER :: euler = .5772156649015329E0
-  REAL :: eps = 0., bot = 0.
+  REAL, PARAMETER :: eps = 0.5*R1MACH(3), bot = LOG(R1MACH(1))
   !* FIRST EXECUTABLE STATEMENT  R9GMIC
-  IF ( eps==0.0 ) eps = 0.5*R1MACH(3)
-  IF ( bot==0.0 ) bot = LOG(R1MACH(1))
   !
-  IF ( A>0.0 ) CALL XERMSG('R9GMIC',&
-    'A MUST BE NEAR A NEGATIVE INTEGER',2,2)
+  IF ( A>0.0 ) CALL XERMSG('R9GMIC','A MUST BE NEAR A NEGATIVE INTEGER',2,2)
   IF ( X<=0.0 ) CALL XERMSG('R9GMIC','X MUST BE GT ZERO',3,2)
   !
   ma = INT( A - 0.5 )

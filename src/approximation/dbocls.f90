@@ -579,7 +579,7 @@ SUBROUTINE DBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,&
   INTEGER :: jopt(05)
   CHARACTER(16) :: xern3, xern4
   LOGICAL, SAVE :: accum, checkl
-  INTEGER :: igo = 0
+  INTEGER, SAVE :: igo = 0
   !* FIRST EXECUTABLE STATEMENT  DBOCLS
   nerr = 0
   Mode = 0

@@ -42,9 +42,8 @@ SUBROUTINE DBESKS(Xnu,X,Nin,Bk)
   REAL(8) :: Xnu, X, Bk(Nin)
   INTEGER :: i, n
   REAL(8) :: expxi
-  REAL(8) :: xmax = 0.D0
+  REAL(8), PARAMETER :: xmax = -LOG(D1MACH(1))
   !* FIRST EXECUTABLE STATEMENT  DBESKS
-  IF ( xmax==0.D0 ) xmax = -LOG(D1MACH(1))
   !
   IF ( X>xmax ) CALL XERMSG('DBESKS','X SO BIG BESSEL K UNDERFLOWS',1,2)
   !

@@ -28,8 +28,8 @@ SUBROUTINE BSPLVN(T,Jhigh,Indexx,X,Ileft,Vnikx)
   REAL :: T(:), Vnikx(*), X
   REAL :: vm, vmprev
   INTEGER :: imjp1, ipj, jp1, jp1ml, l
-  INTEGER :: j = 1
-  REAL :: deltam(20) = 0., deltap(20) = 0.
+  INTEGER, SAVE :: j = 1
+  REAL, SAVE :: deltam(20) = 0., deltap(20) = 0.
   !* FIRST EXECUTABLE STATEMENT  BSPLVN
   IF ( Indexx/=2 ) THEN
     j = 1

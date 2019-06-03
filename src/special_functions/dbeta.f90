@@ -32,17 +32,16 @@ REAL(8) FUNCTION DBETA(A,B)
   !   900727  Added EXTERNAL statement.  (WRB)
   USE service, ONLY : XERMSG, D1MACH
   REAL(8) :: A, B, xmin
-  REAL(8), SAVE :: xmax, alnsml
-  LOGICAL :: first = .TRUE.
+  REAL(8), SAVE :: xmax
+  REAL(8), PARAMETER :: alnsml = LOG(D1MACH(1))
+  LOGICAL, SAVE :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  DBETA
   IF ( first ) THEN
     CALL DGAMLM(xmin,xmax)
-    alnsml = LOG(D1MACH(1))
     first = .FALSE.
   END IF
   !
-  IF ( A<=0.D0.OR.B<=0.D0 )&
-    CALL XERMSG('DBETA','BOTH ARGUMENTS MUST BE GT 0',2,2)
+  IF ( A<=0.D0.OR.B<=0.D0 ) CALL XERMSG('DBETA','BOTH ARGUMENTS MUST BE GT 0',2,2)
   !
   IF ( A+B<xmax ) THEN
     DBETA = GAMMA(A)*GAMMA(B)/GAMMA(A+B)

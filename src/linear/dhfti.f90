@@ -147,10 +147,9 @@ SUBROUTINE DHFTI(A,Mda,M,N,B,Mdb,Nb,Tau,Krank,Rnorm,H,G,Ip)
   REAL(8) :: A(Mda,N+1), B(Mdb,Nb), G(N), H(N), Rnorm(Nb), Tau
   INTEGER :: i, ii, iopt, ip1, j, jb, jj, k, kp1, l, ldiag, lmax, nerr
   REAL(8) :: dzero, factor, hmax, sm, sm1, szero, tmp
-  REAL(8) :: releps = 0.D0
+  REAL(8), PARAMETER :: releps = D1MACH(4)
   !     BEGIN BLOCK PERMITTING ...EXITS TO 360
   !* FIRST EXECUTABLE STATEMENT  DHFTI
-  IF ( releps==0.D0 ) releps = D1MACH(4)
   szero = 0.0D0
   dzero = 0.0D0
   factor = 0.001D0

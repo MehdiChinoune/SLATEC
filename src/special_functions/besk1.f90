@@ -41,21 +41,20 @@ REAL FUNCTION BESK1(X)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   USE service, ONLY : XERMSG, R1MACH
-  REAL X, xmaxt, y
+  REAL :: X
+  REAL :: y
   INTEGER, SAVE :: ntk1
-  REAL, SAVE :: xmin, xsml, xmax
+  REAL, PARAMETER :: xmin = EXP(MAX(LOG(R1MACH(1)),-LOG(R1MACH(2)))+.01), &
+    xsml = SQRT(4.0*R1MACH(3)), xmaxt = -LOG(R1MACH(1)), &
+    xmax = xmaxt - 0.5*xmaxt*LOG(xmaxt)/(xmaxt+0.5)
   REAL, PARAMETER :: bk1cs(11) = [ .0253002273389477705E0,-.353155960776544876E0, &
     -.122611180822657148E0, -.0069757238596398643E0,-.0001730288957513052E0, &
     -.0000024334061415659E0, -.0000000221338763073E0,-.0000000001411488392E0, &
     -.0000000000006666901E0, -.0000000000000024274E0,-.0000000000000000070E0 ]
-  LOGICAL :: first = .TRUE.
+  LOGICAL, SAVE :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  BESK1
   IF ( first ) THEN
     ntk1 = INITS(bk1cs,11,0.1*R1MACH(3))
-    xmin = EXP(MAX(LOG(R1MACH(1)),-LOG(R1MACH(2)))+.01)
-    xsml = SQRT(4.0*R1MACH(3))
-    xmaxt = -LOG(R1MACH(1))
-    xmax = xmaxt - 0.5*xmaxt*LOG(xmaxt)/(xmaxt+0.5)
     first = .FALSE.
   END IF
   !

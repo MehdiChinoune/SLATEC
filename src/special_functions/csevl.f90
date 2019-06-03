@@ -48,15 +48,11 @@ REAL FUNCTION CSEVL(X,Cs,N)
   REAL :: Cs(N), X
   INTEGER :: i, ni
   REAL :: b0, b1, b2, twox
-  REAL, SAVE :: onepl
-  LOGICAL :: first = .TRUE.
+  REAL, PARAMETER :: onepl = 1.0E0 + R1MACH(4)
   !* FIRST EXECUTABLE STATEMENT  CSEVL
-  IF ( first ) onepl = 1.0E0 + R1MACH(4)
-  first = .FALSE.
   IF ( N<1 ) CALL XERMSG('CSEVL','NUMBER OF TERMS .LE. 0',2,2)
   IF ( N>1000 ) CALL XERMSG('CSEVL','NUMBER OF TERMS .GT. 1000',3,2)
-  IF ( ABS(X)>onepl ) CALL XERMSG('CSEVL',&
-    'X OUTSIDE THE INTERVAL (-1,+1)',1,1)
+  IF ( ABS(X)>onepl ) CALL XERMSG('CSEVL','X OUTSIDE THE INTERVAL (-1,+1)',1,1)
   !
   b1 = 0.0E0
   b0 = 0.0E0

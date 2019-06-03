@@ -42,23 +42,15 @@ REAL(8) FUNCTION DBETAI(X,Pin,Qin)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920528  DESCRIPTION and REFERENCES sections revised.  (WRB)
   USE service, ONLY : XERMSG, D1MACH
-  INTEGER i, ib, n
-  REAL(8) :: X, Pin, Qin, c, finsum, p, ps, q, term, xb, xi, y, p1
-  REAL(8), SAVE :: eps, alneps, sml, alnsml
-  LOGICAL :: first = .TRUE.
-  !* FIRST EXECUTABLE STATEMENT  DBETAI
-  IF ( first ) THEN
-    eps = D1MACH(3)
-    alneps = LOG(eps)
-    sml = D1MACH(1)
+  REAL(8) :: X, Pin, Qin
+  INTEGER :: i, ib, n
+  REAL(8) :: c, finsum, p, ps, q, term, xb, xi, y, p1
+  REAL(8), PARAMETER :: eps = D1MACH(3), alneps = LOG(eps), sml = D1MACH(1), &
     alnsml = LOG(sml)
-    first = .FALSE.
-  END IF
+  !* FIRST EXECUTABLE STATEMENT  DBETAI
   !
-  IF ( X<0.D0.OR.X>1.D0 )&
-    CALL XERMSG('DBETAI','X IS NOT IN THE RANGE (0,1)',1,2)
-  IF ( Pin<=0.D0.OR.Qin<=0.D0 )&
-    CALL XERMSG('DBETAI','P AND/OR Q IS LE ZERO',2,2)
+  IF ( X<0.D0.OR.X>1.D0 ) CALL XERMSG('DBETAI','X IS NOT IN THE RANGE (0,1)',1,2)
+  IF ( Pin<=0.D0.OR.Qin<=0.D0 ) CALL XERMSG('DBETAI','P AND/OR Q IS LE ZERO',2,2)
   !
   y = X
   p = Pin

@@ -67,9 +67,11 @@ REAL FUNCTION BIE(X)
   !   890206  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   USE service, ONLY : R1MACH
-  REAL eta, sqrtx, theta, X, xm, z
+  REAL :: X
+  REAL :: sqrtx, theta, xm, z
   INTEGER, SAVE :: nbif, nbig, nbif2, nbig2, nbip, nbip2
-  REAL, SAVE :: x3sml, x32sml, xbig
+  REAL, PARAMETER :: eta = 0.1*R1MACH(3), x3sml = eta**0.3333, &
+    x32sml = 1.3104*x3sml**2, xbig = R1MACH(2)**0.6666
   REAL, PARAMETER :: bifcs(9) = [ -.01673021647198664948E0, .1025233583424944561E0, &
     .00170830925073815165E0, .00001186254546774468E0, .00000004493290701779E0, &
     .00000000010698207143E0, .00000000000017480643E0, .00000000000000020810E0, &
@@ -106,20 +108,15 @@ REAL FUNCTION BIE(X)
     .0000000000000002175E0, -.0000000000000001737E0,-.0000000000000000010E0 ]
   REAL, PARAMETER :: atr = 8.7506905708484345E0
   REAL, PARAMETER :: btr = -2.093836321356054E0
-  LOGICAL :: first = .TRUE.
+  LOGICAL, SAVE :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  BIE
   IF ( first ) THEN
-    eta = 0.1*R1MACH(3)
     nbif = INITS(bifcs,9,eta)
     nbig = INITS(bigcs,8,eta)
     nbif2 = INITS(bif2cs,10,eta)
     nbig2 = INITS(big2cs,10,eta)
     nbip = INITS(bipcs,24,eta)
     nbip2 = INITS(bip2cs,29,eta)
-    !
-    x3sml = eta**0.3333
-    x32sml = 1.3104*x3sml**2
-    xbig = R1MACH(2)**0.6666
     first = .FALSE.
   END IF
   !

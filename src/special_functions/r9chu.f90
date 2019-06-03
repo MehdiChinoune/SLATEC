@@ -36,17 +36,11 @@ REAL FUNCTION R9CHU(A,B,Z)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
   USE service, ONLY : XERMSG, R1MACH
-  REAL A, aa(4), ab, anbn, B, bb(4), bp, c2, ct1, ct2, ct3, d1z, g1, g2, g3, sab
-  REAL x2i1, Z
-  INTEGER i, j
-  REAL, SAVE :: eps, sqeps
-  LOGICAL :: first = .TRUE.
+  REAL :: A, B, Z
+  INTEGER:: i, j
+  REAL :: aa(4), ab, anbn, bb(4), bp, c2, ct1, ct2, ct3, d1z, g1, g2, g3, sab, x2i1
+  REAL, PARAMETER :: eps = 4.0*R1MACH(4), sqeps = SQRT(R1MACH(4))
   !* FIRST EXECUTABLE STATEMENT  R9CHU
-  IF ( first ) THEN
-    eps = 4.0*R1MACH(4)
-    sqeps = SQRT(R1MACH(4))
-    first = .FALSE.
-  END IF
   !
   bp = 1.0 + A - B
   ab = A*bp

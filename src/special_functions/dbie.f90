@@ -79,10 +79,11 @@ REAL(8) FUNCTION DBIE(X)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   USE service, ONLY : D1MACH
-  REAL eta
-  REAL(8) :: X, sqrtx, theta, xm, z
+  REAL(8) :: X
+  REAL(8) :: sqrtx, theta, xm, z
   INTEGER, SAVE :: nbif, nbig, nbif2, nbig2, nbip1, nbip2
-  REAL(8), SAVE :: x3sml, x32sml, xbig
+  REAL(8), PARAMETER :: eta = 0.1D0*D1MACH(3), x3sml = eta**0.3333, &
+    x32sml = 1.3104D0*x3sml**2, xbig = D1MACH(2)**0.6666D0
   REAL(8), PARAMETER :: bifcs(13) = [ -.16730216471986649483537423928176D-1, &
     +.10252335834249445611426362777757D+0, +.17083092507381516539429650242013D-2, &
     +.11862545467744681179216459210040D-4, +.44932907017792133694531887927242D-7, &
@@ -184,20 +185,15 @@ REAL(8) FUNCTION DBIE(X)
     -.40391653875428313641045327529856D-32 ]
   REAL(8), PARAMETER :: atr = 8.75069057084843450880771988210148D0
   REAL(8), PARAMETER :: btr = -2.09383632135605431360096498526268D0
-  LOGICAL :: first = .TRUE.
+  LOGICAL, SAVE :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  DBIE
   IF ( first ) THEN
-    eta = 0.1*REAL(D1MACH(3))
     nbif = INITDS(bifcs,13,eta)
     nbig = INITDS(bigcs,13,eta)
     nbif2 = INITDS(bif2cs,15,eta)
     nbig2 = INITDS(big2cs,15,eta)
     nbip1 = INITDS(bip1cs,47,eta)
     nbip2 = INITDS(bip2cs,88,eta)
-    !
-    x3sml = eta**0.3333
-    x32sml = 1.3104D0*x3sml**2
-    xbig = D1MACH(2)**0.6666D0
     first = .FALSE.
   END IF
   !

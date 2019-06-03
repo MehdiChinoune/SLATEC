@@ -270,21 +270,14 @@ REAL(8) FUNCTION DRC(X,Y,Ier)
   !           editorial changes.  (RWC))
   !   920501  Reformatted the REFERENCES section.  (WRB)
   USE service, ONLY : XERMSG, D1MACH
+  INTEGER :: Ier
+  REAL(8) :: X, Y
+  REAL(8) :: mu, s, sn, xn, yn, lamda
   CHARACTER(16) :: xern3, xern4, xern5
-  INTEGER Ier
-  REAL(8) :: mu, s, sn, X, xn, Y, yn, lamda
-  REAL(8), SAVE :: errtol, lolim, uplim
+  REAL(8), PARAMETER :: errtol = (D1MACH(3)/16.0D0)**(1.0D0/6.0D0), &
+    lolim = 5.0D0*D1MACH(1), uplim = D1MACH(2)/5.0D0
   REAL(8), PARAMETER :: c1 = 1.0D0/7.0D0, c2 = 9.0D0/22.0D0
-  LOGICAL :: first = .TRUE.
-  !
   !* FIRST EXECUTABLE STATEMENT  DRC
-  IF ( first ) THEN
-    errtol = (D1MACH(3)/16.0D0)**(1.0D0/6.0D0)
-    lolim = 5.0D0*D1MACH(1)
-    uplim = D1MACH(2)/5.0D0
-    first = .FALSE.
-  END IF
-  !
   !         CALL ERROR HANDLER IF NECESSARY.
   !
   DRC = 0.0D0

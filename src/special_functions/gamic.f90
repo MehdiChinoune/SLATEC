@@ -52,19 +52,12 @@ REAL FUNCTION GAMIC(A,X)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920528  DESCRIPTION and REFERENCES sections revised.  (WRB)
   USE service, ONLY : XERMSG, XERCLR, R1MACH
-  REAL A, aeps, algap1, alngs, alx, e, fm, gstar, h, sga, sgng,  sgngam, sgngs, &
-    t, X
-  INTEGER izero, ma
-  REAL, SAVE :: eps, sqeps, alneps, bot
-  LOGICAL :: first = .TRUE.
+  REAL :: A, X
+  INTEGER :: izero, ma
+  REAL :: aeps, algap1, alngs, alx, e, fm, gstar, h, sga, sgng,  sgngam, sgngs, t
+  REAL, PARAMETER :: eps = 0.5*R1MACH(3), sqeps = SQRT(R1MACH(4)), &
+    alneps = -LOG(R1MACH(3)), bot = LOG(R1MACH(1))
   !* FIRST EXECUTABLE STATEMENT  GAMIC
-  IF ( first ) THEN
-    eps = 0.5*R1MACH(3)
-    sqeps = SQRT(R1MACH(4))
-    alneps = -LOG(R1MACH(3))
-    bot = LOG(R1MACH(1))
-    first = .FALSE.
-  END IF
   !
   IF ( X<0.0 ) CALL XERMSG('GAMIC','X IS NEGATIVE',2,2)
   !

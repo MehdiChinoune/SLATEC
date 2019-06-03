@@ -64,10 +64,10 @@ REAL FUNCTION RUNIF(T,N)
 
   INTEGER :: N
   REAL :: T(ABS(N)+1)
-  INTEGER i, j
-  REAL dummy
+  INTEGER :: i, j
+  REAL :: dummy
   REAL, SAVE :: floatn
-  INTEGER :: nold = -1
+  INTEGER, SAVE :: nold = -1
   !* FIRST EXECUTABLE STATEMENT  RUNIF
   IF ( N/=nold ) THEN
     !

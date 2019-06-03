@@ -34,15 +34,13 @@ REAL FUNCTION R9LGIT(A,X,Algap1)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
   USE service, ONLY : XERMSG, R1MACH
-  REAL A, a1x, Algap1, ax, fk, hstar, p, r, s, t, X
-  INTEGER k
-  REAL :: eps = 0., sqeps = 0.
+  REAL :: A, Algap1, X
+  INTEGER :: k
+  REAL :: a1x, ax, fk, hstar, p, r, s, t
+  REAL, PARAMETER :: eps = 0.5*R1MACH(3), sqeps = SQRT(R1MACH(4))
   !* FIRST EXECUTABLE STATEMENT  R9LGIT
-  IF ( eps==0.0 ) eps = 0.5*R1MACH(3)
-  IF ( sqeps==0.0 ) sqeps = SQRT(R1MACH(4))
   !
-  IF ( X<=0.0.OR.A<X ) CALL XERMSG('R9LGIT',&
-    'X SHOULD BE GT 0.0 AND LE A',2,2)
+  IF ( X<=0.0.OR.A<X ) CALL XERMSG('R9LGIT','X SHOULD BE GT 0.0 AND LE A',2,2)
   !
   ax = A + X
   a1x = ax + 1.0

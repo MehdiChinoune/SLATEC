@@ -401,7 +401,7 @@ SUBROUTINE LSEI(W,Mdw,Me,Ma,Mg,N,Prgopt,X,Rnorme,Rnorml,Mode,Ws,Ip)
   LOGICAL :: cov
   CHARACTER(8) :: xern1, xern2, xern3, xern4
   !
-  REAL, SAVE :: srelpr = R1MACH(4)
+  REAL, PARAMETER :: srelpr = R1MACH(4)
   !* FIRST EXECUTABLE STATEMENT  LSEI
   !
   !     Set the nominal tolerance used in the code for the equality

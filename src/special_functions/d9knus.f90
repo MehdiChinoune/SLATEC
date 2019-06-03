@@ -47,14 +47,15 @@ SUBROUTINE D9KNUS(Xnu,X,Bknu,Bknu1,Iswtch)
   !   900727  Added EXTERNAL statement.  (WRB)
   !   920618  Removed space from variable names.  (RWC, WRB)
   USE service, ONLY : XERMSG, D1MACH
-  REAL an, bn, eta
-  INTEGER i, ii, inu, Iswtch, n, nterms
-  REAL(8) :: Xnu, X, Bknu, Bknu1, alpha(32), beta(32), a(32), alnz, a0, &
-    bknud, bknu0, b0, c0, expx, p1, p2, p3, qq, result, sqrtx, v, &
-    vlnz, xi, xmu, x2n, x2tov, z, ztov
+  INTEGER :: Iswtch
+  REAL(8) :: Xnu, X, Bknu, Bknu1
+  INTEGER :: i, ii, inu, n, nterms
+  REAL(8) :: alpha(32), beta(32), a(32), alnz, a0, bknud, bknu0, b0, c0, expx, &
+    p1, p2, p3, qq, result, sqrtx, v, vlnz, xi, xmu, x2n, x2tov, z, ztov, an, bn
   INTEGER, SAVE :: ntc0k, ntznu1
-  REAL(8), SAVE :: xnusml, xsml, alnsml, alnbig
-  REAL, SAVE :: alneps
+  REAL(8), PARAMETER :: eta = 0.1D0*D1MACH(3), xnusml = SQRT(D1MACH(3)/8.D0), &
+    xsml = 0.1D0*D1MACH(3), alnsml = LOG(D1MACH(1)), alnbig = LOG(D1MACH(2)), &
+    alneps = LOG(0.1D0*D1MACH(3))
   REAL(8), PARAMETER :: c0kcs(29) = [ +.60183057242626108387577445180329D-1, &
     -.15364871433017286092959755943124D+0, -.11751176008210492040068229226213D-1, &
     -.85248788891979509827048401550987D-3, -.61329838767496791874098176922111D-4, &
@@ -84,18 +85,11 @@ SUBROUTINE D9KNUS(Xnu,X,Bknu,Bknu1,Iswtch)
   REAL(8), PARAMETER :: euler = 0.57721566490153286060651209008240D0
   REAL(8), PARAMETER :: sqpi2 = +1.2533141373155002512078826424055D0
   REAL(8), PARAMETER :: aln2 = 0.69314718055994530941723212145818D0
-  LOGICAL :: first = .TRUE.
+  LOGICAL, SAVE :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  D9KNUS
   IF ( first ) THEN
-    eta = REAL(  0.1D0*D1MACH(3), 4 )
     ntc0k = INITDS(c0kcs,29,eta)
     ntznu1 = INITDS(znu1cs,20,eta)
-    !
-    xnusml = SQRT(D1MACH(3)/8.D0)
-    xsml = 0.1D0*D1MACH(3)
-    alnsml = LOG(D1MACH(1))
-    alnbig = LOG(D1MACH(2))
-    alneps = REAL(  LOG(0.1D0*D1MACH(3)), 4 )
     first = .FALSE.
   END IF
   !
@@ -152,7 +146,7 @@ SUBROUTINE D9KNUS(Xnu,X,Bknu,Bknu1,Iswtch)
     !
     z = 0.0D0
     IF ( X>xsml ) z = 0.25D0*X*X
-    nterms = INT( MAX(2.0,11.0+(8.*REAL(alnz)-25.19-alneps)/(4.28-REAL(alnz))) )
+    nterms = INT( MAX( 2.D0, 11.0+(8.D0*alnz-25.19-alneps)/(4.28-alnz) ) )
     DO i = 2, nterms
       xi = i - 1
       a0 = a0/(xi*(xi-v))
@@ -184,9 +178,9 @@ SUBROUTINE D9KNUS(Xnu,X,Bknu,Bknu1,Iswtch)
     Bknu1 = 2.0D0*Xnu*Bknu/X + bknu0
     RETURN
   END IF
-  an = -0.60 - 1.02/REAL(X)
-  bn = -0.27 - 0.53/REAL(X)
-  nterms = MIN(32,MAX1(3.0,an+bn*alneps))
+  an = -0.60D0 - 1.02D0/X
+  bn = -0.27D0 - 0.53D0/X
+  nterms = MIN( 32, INT( MAX( 3.D0, an+bn*alneps ) ) )
   !
   DO inu = 1, 2
     xmu = 0.D0

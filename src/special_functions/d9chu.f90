@@ -37,18 +37,11 @@ REAL(8) FUNCTION D9CHU(A,B,Z)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
   USE service, ONLY : XERMSG, D1MACH
-  INTEGER i, j
-  REAL(8) :: A, B, Z, aa(4), bb(4), ab, anbn, bp, ct1, ct2, &
-    ct3, c2, d1z, g1, g2, g3, sab, x2i1
-  REAL(8), SAVE :: eps, sqeps
-  LOGICAL :: first = .TRUE.
+  REAL(8) :: A, B, Z
+  INTEGER :: i, j
+  REAL(8) :: aa(4), bb(4), ab, anbn, bp, ct1, ct2, ct3, c2, d1z, g1, g2, g3, sab, x2i1
+  REAL(8), PARAMETER :: eps = 4.0D0*D1MACH(4), sqeps = SQRT(D1MACH(4))
   !* FIRST EXECUTABLE STATEMENT  D9CHU
-  IF ( first ) THEN
-    eps = 4.0D0*D1MACH(4)
-    sqeps = SQRT(D1MACH(4))
-    first = .FALSE.
-  END IF
-  !
   bp = 1.0D0 + A - B
   ab = A*bp
   ct2 = 2.0D0*(Z-ab)

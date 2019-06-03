@@ -40,7 +40,7 @@ REAL FUNCTION R9PAK(Y,N)
   INTEGER N, nsum, ny
   INTEGER, SAVE :: nmin, nmax
   REAL, PARAMETER :: a1n210 = 3.321928094887362E0
-  LOGICAL :: first = .TRUE.
+  LOGICAL, SAVE :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  R9PAK
   IF ( first ) THEN
     a1n2b = 1.0

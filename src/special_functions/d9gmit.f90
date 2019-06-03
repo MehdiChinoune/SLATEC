@@ -33,16 +33,11 @@ REAL(8) FUNCTION D9GMIT(A,X,Algap1,Sgngam)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
   USE service, ONLY : XERMSG, D1MACH
-  INTEGER k, m, ma
-  REAL(8) :: A, X, Algap1, Sgngam, ae, aeps, algs, alg2, fk, s, sgng2, t, te
-  REAL(8), SAVE :: eps, bot
-  LOGICAL :: first = .TRUE.
+  INTEGER :: k, m, ma
+  REAL(8) :: A, X, Algap1, Sgngam
+  REAL(8) :: ae, aeps, algs, alg2, fk, s, sgng2, t, te
+  REAL(8), PARAMETER :: eps = 0.5D0*D1MACH(3), bot = LOG(D1MACH(1))
   !* FIRST EXECUTABLE STATEMENT  D9GMIT
-  IF ( first ) THEN
-    eps = 0.5D0*D1MACH(3)
-    bot = LOG(D1MACH(1))
-    first = .FALSE.
-  END IF
   !
   IF ( X<=0.D0 ) CALL XERMSG('D9GMIT','X SHOULD BE GT 0',1,2)
   !

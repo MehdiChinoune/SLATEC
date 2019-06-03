@@ -38,10 +38,11 @@ SUBROUTINE GAMLIM(Xmin,Xmax)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   USE service, ONLY : XERMSG, R1MACH
-  REAL alnbig, alnsml, xln, Xmax, Xmin, xold
-  INTEGER i
+  REAL, INTENT(OUT) :: Xmax, Xmin
+  INTEGER :: i
+  REAL :: xln, xold
+  REAL, PARAMETER :: alnsml = LOG(R1MACH(1)), alnbig = LOG(R1MACH(2))
   !* FIRST EXECUTABLE STATEMENT  GAMLIM
-  alnsml = LOG(R1MACH(1))
   Xmin = -alnsml
   DO i = 1, 10
     xold = Xmin
@@ -53,7 +54,6 @@ SUBROUTINE GAMLIM(Xmin,Xmax)
   !
   100  Xmin = -Xmin + 0.01
   !
-  alnbig = LOG(R1MACH(2))
   Xmax = alnbig
   DO i = 1, 10
     xold = Xmax

@@ -101,11 +101,11 @@ REAL FUNCTION RAND(R)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-  INTEGER iy0, iy1
-  REAL R
+  REAL :: R
+  INTEGER :: iy0, iy1
+  INTEGER, SAVE :: ix1 = 0, ix0 = 0
   INTEGER, PARAMETER :: ia1 = 1536, ia0 = 1029, ia1ma0 = 507
   INTEGER, PARAMETER :: ic = 1731
-  INTEGER :: ix1 = 0, ix0 = 0
   !* FIRST EXECUTABLE STATEMENT  RAND
   IF ( R>=0. ) THEN
     IF ( R>0. ) THEN

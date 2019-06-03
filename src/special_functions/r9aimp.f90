@@ -53,9 +53,10 @@ SUBROUTINE R9AIMP(X,Ampl,Theta)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
   USE service, ONLY : XERMSG, R1MACH
-  REAL Ampl, eta, sqrtx, Theta, X, z
+  REAL :: Ampl, Theta, X
+  REAL :: sqrtx, z
   INTEGER, SAVE :: nam21, nath1, nam22, nath2
-  REAL, SAVE :: xsml
+  REAL, PARAMETER :: eta = 0.1*R1MACH(3), xsml = -1.0/R1MACH(3)**0.3333
   REAL, PARAMETER :: am21cs(40) = [ .0065809191761485E0, .0023675984685722E0, &
     .0001324741670371E0, .0000157600904043E0, .0000027529702663E0, &
     .0000006102679017E0, .0000001595088468E0, .0000000471033947E0, &
@@ -107,16 +108,13 @@ SUBROUTINE R9AIMP(X,Ampl,Theta)
     -.00000000000000233E0,-.00000000000000093E0,-.00000000000000037E0, &
     -.00000000000000015E0,-.00000000000000006E0,-.00000000000000002E0 ]
   REAL, PARAMETER ::  pi4 = 0.78539816339744831E0
-  LOGICAL :: first = .TRUE.
+  LOGICAL, SAVE :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  R9AIMP
   IF ( first ) THEN
-    eta = 0.1*R1MACH(3)
     nam21 = INITS(am21cs,40,eta)
     nath1 = INITS(ath1cs,36,eta)
     nam22 = INITS(am22cs,33,eta)
     nath2 = INITS(ath2cs,32,eta)
-    !
-    xsml = -1.0/R1MACH(3)**0.3333
     first = .FALSE.
   END IF
   !

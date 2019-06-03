@@ -36,16 +36,15 @@ REAL(8) FUNCTION DCHU(A,B,X)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900727  Added EXTERNAL statement.  (WRB)
   USE service, ONLY : XERMSG, D1MACH
-  INTEGER i, istrt, m, n
-  REAL(8) :: A, B, X, aintb, alnx, a0, beps, b0, c0, factor, gamri1, gamrni, &
+  REAL(8) :: A, B, X
+  INTEGER :: i, istrt, m, n
+  REAL(8) :: aintb, alnx, a0, beps, b0, c0, factor, gamri1, gamrni, &
     pch1ai, pch1i, pochai, summ, t, xeps1, xi, xi1, xn, xtoeps
   REAL(8), PARAMETER :: pi = 3.141592653589793238462643383279503D0
-  REAL(8) :: eps = 0.0D0
+  REAL(8), PARAMETER :: eps = D1MACH(3)
   !* FIRST EXECUTABLE STATEMENT  DCHU
-  IF ( eps==0.0D0 ) eps = D1MACH(3)
   !
-  IF ( X==0.0D0 ) CALL XERMSG('DCHU',&
-    'X IS ZERO SO DCHU IS INFINITE',1,2)
+  IF ( X==0.0D0 ) CALL XERMSG('DCHU','X IS ZERO SO DCHU IS INFINITE',1,2)
   IF ( X<0.0D0 ) CALL XERMSG('DCHU','X IS NEGATIVE, USE CCHU',2,2)
   !
   IF ( MAX(ABS(A),1.0D0)*MAX(ABS(1.0D0+A-B),1.0D0)>=0.99D0*ABS(X) ) THEN

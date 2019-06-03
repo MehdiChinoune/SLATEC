@@ -40,18 +40,17 @@ REAL FUNCTION R9LGMC(X)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
   USE service, ONLY : XERMSG, R1MACH
-  REAL X
+  REAL:: X
   INTEGER, SAVE :: nalgm
-  REAL, SAVE :: xbig, xmax
+  REAL, PARAMETER :: xmax = EXP(MIN(LOG(R1MACH(2)/12.0),-LOG(12.0*R1MACH(1)))), &
+    xbig = 1.0/SQRT(R1MACH(3))
   REAL, PARAMETER :: algmcs(6) = [ .166638948045186E0,-.0000138494817606E0, &
     .0000000098108256E0,-.0000000000180912E0, .0000000000000622E0, &
     -.0000000000000003E0 ]
-  LOGICAL :: first = .TRUE.
+  LOGICAL, SAVE :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  R9LGMC
   IF ( first ) THEN
     nalgm = INITS(algmcs,6,R1MACH(3))
-    xbig = 1.0/SQRT(R1MACH(3))
-    xmax = EXP(MIN(LOG(R1MACH(2)/12.0),-LOG(12.0*R1MACH(1))))
     first = .FALSE.
   END IF
   !

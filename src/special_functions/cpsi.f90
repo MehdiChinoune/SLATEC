@@ -31,28 +31,22 @@ COMPLEX FUNCTION CPSI(Zin)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900727  Added EXTERNAL statement.  (WRB)
   USE service, ONLY : XERMSG, R1MACH
-  REAL cabsz, x, y
-  INTEGER i, n, ndx
-  COMPLEX Zin, z, z2inv, corr
-  INTEGER, SAVE :: nterm
-  REAL, SAVE :: bound, dxrel, rmin, rbig
+  COMPLEX :: Zin
+  INTEGER :: i, n, ndx
+  REAL :: cabsz, x, y
+  COMPLEX :: z, z2inv, corr
+  INTEGER, PARAMETER :: nterm = INT( -0.30*LOG(R1MACH(3)) )
+  ! MAYBE BOUND = N*(0.1*EPS)**(-1/(2*N-1)) / (PI*EXP(1))
+  REAL, PARAMETER ::  bound = 0.1171*nterm*(0.1*R1MACH(3))**(-1.0/(2*nterm-1)), &
+    dxrel = SQRT(R1MACH(4)), rmin = EXP(MAX(LOG(R1MACH(1)),-LOG(R1MACH(2)))+0.011), &
+    rbig = 1.0/R1MACH(3)
   REAL, PARAMETER :: bern(13) = [ .83333333333333333E-1,-.83333333333333333E-2, &
     .39682539682539683E-2, -.41666666666666667E-2, .75757575757575758E-2, &
     -.21092796092796093E-1, .83333333333333333E-1, -.44325980392156863E0, &
     .30539543302701197E1,  -.26456212121212121E2,  .28146014492753623E3, &
     -.34548853937728938E4,  .54827583333333333E5 ]
   REAL, PARAMETER :: pi = 3.141592653589793E0
-  LOGICAL :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  CPSI
-  IF ( first ) THEN
-    nterm = INT( -0.30*LOG(R1MACH(3)) )
-    ! MAYBE BOUND = N*(0.1*EPS)**(-1/(2*N-1)) / (PI*EXP(1))
-    bound = 0.1171*nterm*(0.1*R1MACH(3))**(-1.0/(2*nterm-1))
-    dxrel = SQRT(R1MACH(4))
-    rmin = EXP(MAX(LOG(R1MACH(1)),-LOG(R1MACH(2)))+0.011)
-    rbig = 1.0/R1MACH(3)
-    first = .FALSE.
-  END IF
   !
   z = Zin
   x = REAL(z)

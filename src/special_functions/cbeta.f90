@@ -35,13 +35,12 @@ COMPLEX FUNCTION CBETA(A,B)
   !           (WRB)
   !   900727  Added EXTERNAL statement.  (WRB)
   USE service, ONLY : XERMSG
-  REAL xmaxt, xmin
-  COMPLEX A, B
-  REAL :: xmax = 0.0
+  COMPLEX :: A, B
+  REAL :: xmin
+  REAL, SAVE :: xmax = 0.0
   !* FIRST EXECUTABLE STATEMENT  CBETA
   IF ( xmax==0.0 ) THEN
-    CALL GAMLIM(xmin,xmaxt)
-    xmax = xmaxt
+    CALL GAMLIM(xmin,xmax)
   END IF
   !
   IF ( REAL(A)<=0.0.OR.REAL(B)<=0.0 ) CALL XERMSG('CBETA',&

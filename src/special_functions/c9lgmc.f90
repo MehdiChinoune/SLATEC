@@ -38,22 +38,21 @@ COMPLEX FUNCTION C9LGMC(Zin)
   !           (WRB)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
   USE service, ONLY : XERMSG, R1MACH
-  REAL cabsz, x, y
-  INTEGER i, ndx
-  COMPLEX Zin, z, z2inv
-  INTEGER, SAVE :: nterm
-  REAL, SAVE :: bound, xbig, xmax
+  COMPLEX :: Zin
+  INTEGER :: i, ndx
+  REAL :: cabsz, x, y
+  COMPLEX :: z, z2inv
+  INTEGER, PARAMETER :: nterm = INT( -0.30*LOG(R1MACH(3)) )
+  REAL, PARAMETER :: bound = 0.1170*nterm*(0.1*R1MACH(3))**(-1./(2*nterm-1)), &
+    xbig = 1.0/SQRT(R1MACH(3)), xmax = EXP(MIN(LOG(R1MACH(2)/12.0),-LOG(12.*R1MACH(1))))
   REAL, PARAMETER :: bern(11) = [ .083333333333333333E0,-.0027777777777777778E0, &
     .00079365079365079365E0, -.00059523809523809524E0, .00084175084175084175E0, &
     -.0019175269175269175E0,  .0064102564102564103E0, -.029550653594771242E0, &
     .17964437236883057E0, -1.3924322169059011E0,   13.402864044168392E0 ]
-  LOGICAL :: first = .TRUE.
+  LOGICAL, SAVE :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  C9LGMC
   IF ( first ) THEN
-    nterm = INT( -0.30*LOG(R1MACH(3)) )
-    bound = 0.1170*nterm*(0.1*R1MACH(3))**(-1./(2*nterm-1))
-    xbig = 1.0/SQRT(R1MACH(3))
-    xmax = EXP(MIN(LOG(R1MACH(2)/12.0),-LOG(12.*R1MACH(1))))
+
     first = .FALSE.
   END IF
   !

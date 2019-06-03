@@ -44,9 +44,12 @@ REAL FUNCTION R9LN2R(X)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
   USE service, ONLY : XERMSG, R1MACH
-  REAL eps, sqeps, txbig, txmax, X
+  REAL :: X
   INTEGER, SAVE :: ntln21, ntln22
-  REAL, SAVE :: xmin, xbig, xmax
+  REAL, PARAMETER :: eps = R1MACH(3), sqeps = SQRT(eps), txbig = 4.0/SQRT(sqeps), &
+    xbig = txbig - (sqeps*txbig**2-2.0*LOG(txbig))/(2.*sqeps*txbig), &
+    txmax = 6.0/sqeps, xmin = -1.0 + SQRT(R1MACH(4)), &
+    xmax = txmax - (eps*txmax**2-2.0*LOG(txmax))/(2.0*eps*txmax)
   REAL, PARAMETER :: ln21cs(26) = [ .18111962513478810E0,-.15627123192872463E0, &
     .028676305361557275E0, -.005558699655948139E0, .001117897665229983E0, &
     -.000230805089823279E0, .000048598853341100E0,-.000010390127388903E0, &
@@ -63,19 +66,11 @@ REAL FUNCTION R9LN2R(X)
     -.000000000096748595E0, .000000000013381046E0,-.000000000001858102E0, &
     .000000000000258929E0, -.000000000000036195E0, .000000000000005074E0, &
     -.000000000000000713E0, .000000000000000100E0,-.000000000000000014E0 ]
-  LOGICAL :: first = .TRUE.
+  LOGICAL, SAVE :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  R9LN2R
   IF ( first ) THEN
-    eps = R1MACH(3)
     ntln21 = INITS(ln21cs,26,0.1*eps)
     ntln22 = INITS(ln22cs,20,0.1*eps)
-    !
-    xmin = -1.0 + SQRT(R1MACH(4))
-    sqeps = SQRT(eps)
-    txmax = 6.0/sqeps
-    xmax = txmax - (eps*txmax**2-2.0*LOG(txmax))/(2.0*eps*txmax)
-    txbig = 4.0/SQRT(sqeps)
-    xbig = txbig - (sqeps*txbig**2-2.0*LOG(txbig))/(2.*sqeps*txbig)
     first = .FALSE.
   END IF
   !

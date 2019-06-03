@@ -44,9 +44,8 @@ SUBROUTINE BESKES(Xnu,X,Nin,Bke)
   REAL :: Bke(Nin), X, Xnu
   INTEGER :: i, iswtch, n
   REAL :: bknu1, direct, v, vend, vincr
-  REAL :: alnbig = 0.
+  REAL, PARAMETER :: alnbig = LOG(R1MACH(2))
   !* FIRST EXECUTABLE STATEMENT  BESKES
-  IF ( alnbig==0. ) alnbig = LOG(R1MACH(2))
   !
   v = ABS(Xnu)
   n = ABS(Nin)

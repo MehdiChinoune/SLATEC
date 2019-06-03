@@ -33,20 +33,13 @@ REAL FUNCTION EXPREL(X)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   USE service, ONLY : R1MACH, I1MACH
-  REAL absx, alneps, X, xln, xn
-  INTEGER i
-  INTEGER, SAVE :: nterms
-  REAL, SAVE :: xbnd
-  LOGICAL :: first = .TRUE.
+  REAL :: X
+  INTEGER :: i
+  REAL :: absx
+  REAL, PARAMETER :: alneps = LOG(R1MACH(3)), xn = 3.72 - 0.3*alneps, &
+    xln = LOG((xn+1.0)/1.36), xbnd = R1MACH(3)
+  INTEGER, PARAMETER :: nterms = INT( xn - (xn*xln+alneps)/(xln+1.36) + 1.5 )
   !* FIRST EXECUTABLE STATEMENT  EXPREL
-  IF ( first ) THEN
-    alneps = LOG(R1MACH(3))
-    xn = 3.72 - 0.3*alneps
-    xln = LOG((xn+1.0)/1.36)
-    nterms = INT( xn - (xn*xln+alneps)/(xln+1.36) + 1.5 )
-    xbnd = R1MACH(3)
-    first = .FALSE.
-  END IF
   !
   absx = ABS(X)
   IF ( absx>0.5 ) EXPREL = (EXP(X)-1.0)/X

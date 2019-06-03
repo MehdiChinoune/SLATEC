@@ -44,10 +44,10 @@ INTEGER FUNCTION INITDS(Os,Nos,Eta)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   USE service, ONLY : XERMSG, R1MACH
   INTEGER :: Nos
+  REAL(8) :: Eta
   REAL(8) :: Os(Nos)
-  REAL :: Eta
-  REAL err
-  INTEGER i, ii
+  INTEGER :: i, ii
+  REAL(8) :: err
   !* FIRST EXECUTABLE STATEMENT  INITDS
   IF ( Nos<1 ) CALL XERMSG('INITDS',&
     'Number of coefficients is less than 1',2,1)

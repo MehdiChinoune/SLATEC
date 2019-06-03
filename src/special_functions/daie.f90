@@ -61,10 +61,11 @@ REAL(8) FUNCTION DAIE(X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920618  Removed space from variable names.  (RWC, WRB)
   USE service, ONLY : D1MACH
-  REAL eta
-  REAL(8) :: X, sqrtx, theta, xm, z
+  REAL(8) :: X
+  REAL(8) :: sqrtx, theta, xm, z
   INTEGER, SAVE :: naif, naig, naip1, naip2
-  REAL(8), SAVE :: x3sml, x32sml, xbig
+  REAL(8), PARAMETER :: eta = 0.1D0*D1MACH(3), x3sml = eta**0.3333E0, &
+    x32sml = 1.3104D0*x3sml**2, xbig = D1MACH(2)**0.6666D0
   REAL(8), PARAMETER :: aifcs(13) = [ -.37971358496669997496197089469414D-1, &
     +.59191888537263638574319728013777D-1, +.98629280577279975365603891044060D-3, &
     +.68488438190765667554854830182412D-5, +.25942025962194713019489279081403D-7, &
@@ -127,18 +128,13 @@ REAL(8) FUNCTION DAIE(X)
     -.345147757060899986280721066666D-28, +.843875190213646740427025066666D-29, &
     -.209396142298188169434453333333D-29, +.527008873478945503182848000000D-30, &
     -.134457433014553385789030399999D-30, +.347570964526601147340117333333D-31 ]
-  LOGICAL :: first = .TRUE.
+  LOGICAL, SAVE :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  DAIE
   IF ( first ) THEN
-    eta = 0.1*REAL(D1MACH(3))
     naif = INITDS(aifcs,13,eta)
     naig = INITDS(aigcs,13,eta)
     naip1 = INITDS(aip1cs,57,eta)
     naip2 = INITDS(aip2cs,37,eta)
-    !
-    x3sml = eta**0.3333E0
-    x32sml = 1.3104D0*x3sml**2
-    xbig = D1MACH(2)**0.6666D0
     first = .FALSE.
   END IF
   !
