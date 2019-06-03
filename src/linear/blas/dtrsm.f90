@@ -138,18 +138,18 @@ SUBROUTINE DTRSM(Side,Uplo,Transa,Diag,M,N,Alpha,A,Lda,B,Ldb)
   !     .. Scalar Arguments ..
   CHARACTER :: Side, Uplo, Transa, Diag
   INTEGER M, N, Lda, Ldb
-  REAL(8) :: Alpha
+  REAL(DP) :: Alpha
   !     .. Array Arguments ..
-  REAL(8) :: A(Lda,*), B(Ldb,*)
+  REAL(DP) :: A(Lda,*), B(Ldb,*)
   !
   !     .. Intrinsic Functions ..
   INTRINSIC MAX
   !     .. Local Scalars ..
   LOGICAL lside, nounit, upper
   INTEGER i, info, j, k, nrowa
-  REAL(8) :: temp
+  REAL(DP) :: temp
   !     .. Parameters ..
-  REAL(8), PARAMETER :: ONE = 1.0D+0, ZERO = 0.0D+0
+  REAL(DP), PARAMETER :: ONE = 1.0D+0, ZERO = 0.0D+0
   !* FIRST EXECUTABLE STATEMENT  DTRSM
   !
   !     Test the input parameters.

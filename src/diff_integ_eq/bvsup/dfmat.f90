@@ -15,8 +15,8 @@ SUBROUTINE DFMAT(X,Y,Yp)
   !   ??????  DATE WRITTEN
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   USE DSAVEX, ONLY : xsave_com, term_com
-  REAL(8) :: X, Y(:), Yp(:)
-  REAL(8) :: tanx
+  REAL(DP) :: X, Y(:), Yp(:)
+  REAL(DP) :: tanx
   !* FIRST EXECUTABLE STATEMENT  DFMAT
   Yp(1) = Y(2)
   IF ( X/=xsave_com ) THEN

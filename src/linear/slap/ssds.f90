@@ -111,7 +111,7 @@ SUBROUTINE SSDS(N,Nelt,Ja,A,Dinv)
   !     .. Scalar Arguments ..
   INTEGER N, Nelt
   !     .. Array Arguments ..
-  REAL A(Nelt), Dinv(N)
+  REAL(SP) A(Nelt), Dinv(N)
   INTEGER Ja(Nelt)
   !     .. Local Scalars ..
   INTEGER icol

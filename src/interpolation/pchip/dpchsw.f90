@@ -84,16 +84,16 @@ SUBROUTINE DPCHSW(Dfmax,Iextrm,D1,D2,H,Slope,Ierr)
   !  DECLARE ARGUMENTS.
   !
   INTEGER Iextrm, Ierr
-  REAL(8) :: Dfmax, D1, D2, H, Slope
+  REAL(DP) :: Dfmax, D1, D2, H, Slope
   !
   !  DECLARE LOCAL VARIABLES.
   !
-  REAL(8) :: cp, hphi, lambda, nu, phi, radcal, rho, sigma, small, that
+  REAL(DP) :: cp, hphi, lambda, nu, phi, radcal, rho, sigma, small, that
   !
-  REAL(8), PARAMETER :: zero = 0.D0, one = 1.D0, two = 2.D0, three = 3.D0, &
+  REAL(DP), PARAMETER :: zero = 0.D0, one = 1.D0, two = 2.D0, three = 3.D0, &
     fact = 100.D0
   !        THIRD SHOULD BE SLIGHTLY LESS THAN 1/3.
-  REAL(8), PARAMETER :: third = 0.33333D0
+  REAL(DP), PARAMETER :: third = 0.33333D0
   !
   !  NOTATION AND GENERAL REMARKS.
   !

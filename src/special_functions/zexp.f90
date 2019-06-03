@@ -23,7 +23,7 @@ SUBROUTINE ZEXP(Ar,Ai,Br,Bi)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
   
-  REAL(8) :: Ar, Ai, Br, Bi, zm, ca, cb
+  REAL(DP) :: Ar, Ai, Br, Bi, zm, ca, cb
   !* FIRST EXECUTABLE STATEMENT  ZEXP
   zm = EXP(Ar)
   ca = zm*COS(Ai)

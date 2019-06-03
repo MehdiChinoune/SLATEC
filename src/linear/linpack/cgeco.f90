@@ -83,11 +83,11 @@ SUBROUTINE CGECO(A,Lda,N,Ipvt,Rcond,Z)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER Lda, N, Ipvt(*)
-  COMPLEX A(Lda,*), Z(*)
-  REAL Rcond
+  COMPLEX(SP) A(Lda,*), Z(*)
+  REAL(SP) Rcond
   !
-  COMPLEX ek, t, wk, wkm
-  REAL anorm, s, sm, ynorm
+  COMPLEX(SP) ek, t, wk, wkm
+  REAL(SP) anorm, s, sm, ynorm
   INTEGER info, j, k, kb, kp1, l
   !
   !     COMPUTE 1-NORM OF A

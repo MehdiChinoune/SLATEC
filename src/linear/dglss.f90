@@ -128,9 +128,9 @@ SUBROUTINE DGLSS(A,Mda,M,N,B,Mdb,Nb,Rnorm,Work,Lw,Iwork,Liw,Info)
 
   INTEGER :: Info, Liw, Lw, M, Mda, Mdb, N, Nb
   INTEGER :: Iwork(M+N)
-  REAL(8) :: A(Mda,MIN(N,M)), B(Mdb,Nb), Rnorm(Nb), Work(5*MIN(N,M))
+  REAL(DP) :: A(Mda,MIN(N,M)), B(Mdb,Nb), Rnorm(Nb), Work(5*MIN(N,M))
   INTEGER :: key, krank, ksure, mode, np
-  REAL(8) :: ae(1), re(1)
+  REAL(DP) :: ae(1), re(1)
   !
   !* FIRST EXECUTABLE STATEMENT  DGLSS
   re = 0.D0

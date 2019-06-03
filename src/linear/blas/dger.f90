@@ -89,14 +89,14 @@ SUBROUTINE DGER(M,N,Alpha,X,Incx,Y,Incy,A,Lda)
   !           lines were modified.  (BKS)
   USE service, ONLY : XERBLA
   !     .. Scalar Arguments ..
-  REAL(8) :: Alpha
+  REAL(DP) :: Alpha
   INTEGER Incx, Incy, Lda, M, N
   !     .. Array Arguments ..
-  REAL(8) :: A(Lda,*), X(*), Y(*)
+  REAL(DP) :: A(Lda,*), X(*), Y(*)
   !     .. Parameters ..
-  REAL(8), PARAMETER :: ZERO = 0.0D+0
+  REAL(DP), PARAMETER :: ZERO = 0.0D+0
   !     .. Local Scalars ..
-  REAL(8) :: temp
+  REAL(DP) :: temp
   INTEGER i, info, ix, j, jy, kx
 
   !     .. Intrinsic Functions ..

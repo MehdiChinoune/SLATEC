@@ -37,11 +37,11 @@ SUBROUTINE DWNLIT(W,Mdw,M,N,L,Ipivot,Itype,H,Scalee,Rnorm,Idope,Dope,Done)
   !   900604  DP version created from SP version. .  (RWC)
   USE linear, ONLY : DH12, DROTM, DROTMG, DSWAP
   INTEGER :: L, M, Mdw, N, Idope(3), Ipivot(N), Itype(M)
-  REAL(8) :: Dope(3), H(N), Rnorm, Scalee(M), W(Mdw,M)
+  REAL(DP) :: Dope(3), H(N), Rnorm, Scalee(M), W(Mdw,M)
   LOGICAL :: Done
   !
   INTEGER :: i, i1, imax, ir, j, j1, jj, jp, krank, l1, lb, lend, me, mend, niv, nsoln
-  REAL(8) :: alsq, amax, eanorm, factor, hbar, rn, sparam(5), t, tau
+  REAL(DP) :: alsq, amax, eanorm, factor, hbar, rn, sparam(5), t, tau
   LOGICAL :: indep, recalc
   !
   !* FIRST EXECUTABLE STATEMENT  DWNLIT

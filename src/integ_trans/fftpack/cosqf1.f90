@@ -37,9 +37,9 @@ SUBROUTINE COSQF1(N,X,W,Xh)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER N
-  REAL :: W(N), X(N), Xh(2*N+15)
+  REAL(SP) :: W(N), X(N), Xh(2*N+15)
   INTEGER i, k, kc, modn, np2, ns2
-  REAL :: xim1
+  REAL(SP) :: xim1
   !* FIRST EXECUTABLE STATEMENT  COSQF1
   ns2 = (N+1)/2
   np2 = N + 2

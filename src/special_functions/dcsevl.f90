@@ -1,5 +1,5 @@
 !** DCSEVL
-REAL(8) FUNCTION DCSEVL(X,Cs,N)
+REAL(DP) FUNCTION DCSEVL(X,Cs,N)
   !>
   !  Evaluate a Chebyshev series.
   !***
@@ -45,10 +45,10 @@ REAL(8) FUNCTION DCSEVL(X,Cs,N)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   USE service, ONLY : XERMSG, D1MACH
   INTEGER :: N
-  REAL(8) :: Cs(N), X
+  REAL(DP) :: Cs(N), X
   INTEGER :: i, ni
-  REAL(8) :: b0, b1, b2, twox
-  REAL(8), PARAMETER :: onepl = 1.0D0 + D1MACH(4)
+  REAL(DP) :: b0, b1, b2, twox
+  REAL(DP), PARAMETER :: onepl = 1.0D0 + D1MACH(4)
   !* FIRST EXECUTABLE STATEMENT  DCSEVL
   IF ( N<1 ) CALL XERMSG('DCSEVL','NUMBER OF TERMS .LE. 0',2,2)
   IF ( N>1000 ) CALL XERMSG('DCSEVL','NUMBER OF TERMS .GT. 1000',3,2)

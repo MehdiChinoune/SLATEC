@@ -37,7 +37,7 @@ SUBROUTINE SDCST(Maxord,Mint,Iswflg,El,Tq)
   !   790601  DATE WRITTEN
   !   900329  Initial submission to SLATEC.
 
-  REAL El(13,12), factrl(12), gama(14), summ, Tq(3,12)
+  REAL(SP) El(13,12), factrl(12), gama(14), summ, Tq(3,12)
   INTEGER i, Iswflg, j, Maxord, Mint, mxrd
   !* FIRST EXECUTABLE STATEMENT  SDCST
   factrl(1) = 1.E0

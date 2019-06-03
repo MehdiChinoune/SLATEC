@@ -23,7 +23,7 @@ SUBROUTINE ZMLT(Ar,Ai,Br,Bi,Cr,Ci)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
   
-  REAL(8) :: Ar, Ai, Br, Bi, Cr, Ci, ca, cb
+  REAL(DP) :: Ar, Ai, Br, Bi, Cr, Ci, ca, cb
   !* FIRST EXECUTABLE STATEMENT  ZMLT
   ca = Ar*Br - Ai*Bi
   cb = Ar*Bi + Ai*Br

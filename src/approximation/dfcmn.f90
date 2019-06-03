@@ -34,10 +34,10 @@ SUBROUTINE DFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Nconst,Xconst,&
   USE linear, ONLY : DAXPY, DBNDSL, DBNDAC
   USE data_handling, ONLY : DSORT
   INTEGER :: Mdg, Mdw, Mode, Nbkpt, Nconst, Ndata, Nord, Nderiv(Nconst), Iwork(:)
-  REAL(8) :: Bf(Nord,Nord), Bkpt(Nbkpt), Bkptin(:), Coeff(:), G(Mdg,Nord+1), &
+  REAL(DP) :: Bf(Nord,Nord), Bkpt(Nbkpt), Bkptin(:), Coeff(:), G(Mdg,Nord+1), &
     Ptemp(MAX(Nbkpt,Ndata)), Sddata(Ndata), W(Mdw,Nbkpt-Nord+1), Work(*), &
     Xconst(Nconst), Xdata(Ndata), Xtemp(MAX(Nbkpt,Ndata)), Yconst(Nconst), Ydata(Ndata)
-  REAL(8) :: dummy(1), prgopt(10), rnorm, rnorme, rnorml, xmax, xmin, xval, yval
+  REAL(DP) :: dummy(1), prgopt(10), rnorm, rnorme, rnorml, xmax, xmin, xval, yval
   INTEGER :: i, idata, ideriv, ileft, intrvl, intw1, ip, ir, irow, &
     itype, iw1, iw2, l, lw, mt, n, nb, neqcon, nincon, nordm1, nordp1, np1
   LOGICAL :: band, new, var

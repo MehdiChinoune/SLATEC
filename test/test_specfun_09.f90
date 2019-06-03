@@ -1,4 +1,5 @@
 MODULE TEST10_MOD
+  USE service, ONLY : SP, DP
   IMPLICIT NONE
 
 CONTAINS
@@ -81,9 +82,9 @@ CONTAINS
     !
     !  Declare local variables.
     !
-    REAL(8) :: con1r, con1i, con2r, con2i, con3r, con3i, cvr, &
+    REAL(DP) :: con1r, con1i, con2r, con2i, con3r, con3i, cvr, &
       cvi, cwr, cwi, cyr, cyi, wr(20), wi(20), yr(20), yi(20), zr, zi, zrr, zri
-    REAL(8) :: aa, ab, acw, acy, alim, arg, atol, av, azrr, &
+    REAL(DP) :: aa, ab, acw, acy, alim, arg, atol, av, azrr, &
       a1, a2, ct, c23, dig, elim, eps, er, ertol, &
       film, fnul, fpi, hpi, pi, pi3, ptr, r, rl, rm, &
       rpi, rtpi, r1m4, r1m5, slak, spi, st, sti, str, t(20), tol, tpi, tpi3, ts
@@ -473,9 +474,9 @@ CONTAINS
     !
     !  Declare local variables.
     !
-    REAL(8) :: cvr, cvi, cwr, cwi, cyr, cyi, wr(20), wi(20), yr(20), yi(20), &
+    REAL(DP) :: cvr, cvi, cwr, cwi, cyr, cyi, wr(20), wi(20), yr(20), yi(20), &
       zr, zi, znr, zni
-    REAL(8) :: aa, ab, acw, acy, aer(20), alim, atol, av, aw, ay, &
+    REAL(DP) :: aa, ab, acw, acy, aer(20), alim, atol, av, aw, ay, &
       az, ct, dig, elim, eps, er, ertol, film, fnu, fnul, fpi, hpi, pi, r, rfpi, &
       rl, rm, r1m4, r1m5, r2, slak, st, t(20), tol, ts, xnu(20)
     INTEGER i, icase, ierr, il, ir, irb, it, itl, k, kdo(20), keps(20), &
@@ -837,9 +838,9 @@ CONTAINS
     !
     !  Declare local variables.
     !
-    REAL(8) :: ckr(20), cki(20), coner, conei, csgnr, csgni, cwr, cwi, &
+    REAL(DP) :: ckr(20), cki(20), coner, conei, csgnr, csgni, cwr, cwi, &
       cyr, cyi, wr(20), wi(20), yr(20), yi(20), zr, zi, znr, zni, ztr, zti
-    REAL(8) :: aa, ab, aer(20), alim, arg, atol, aw, carg, ct, &
+    REAL(DP) :: aa, ab, aer(20), alim, arg, atol, aw, carg, ct, &
       dig, elim, eps, er, ertol, film, fnu, fnul, gnu, &
       hpi, pi, r, rl, rlt, rm, r1, r1m4, r1m5, r2, &
       sarg, slak, st, sti, str, t(20), tol, ts, zscr, zzr
@@ -1361,9 +1362,9 @@ CONTAINS
     !
     !  Declare local variables.
     !
-    REAL(8) :: coe1r, coe1i, coe2r, coe2i, cwr, cwi, halfr, &
+    REAL(DP) :: coe1r, coe1i, coe2r, coe2i, cwr, cwi, halfr, &
       halfi, vr(20), vi(20), wr(20), wi(20), yr(20), yi(20), zr, zi
-    REAL(8) :: aa, ab, aer(20), ai, alim, ar, atol, av, cc, ct, &
+    REAL(DP) :: aa, ab, aer(20), ai, alim, ar, atol, av, cc, ct, &
       dd, dig, elim, eps, er, ertol, film, fnu, fnul, &
       gnu, hpi, pi, r, rl, rm, r1m4, r1m5, r2, slak, st, str, t(20), tol, ts, xnu(20)
     INTEGER i, icase, ierr, il, ir, irb, it, itl, k, kdo(20), keps(20), &
@@ -1763,9 +1764,9 @@ CONTAINS
     !
     !  Declare local variables.
     !
-    REAL(8) :: coner, conei, csgnr, csgni, cvr, cvi, cwr, cwi, &
+    REAL(DP) :: coner, conei, csgnr, csgni, cvr, cvi, cwr, cwi, &
       cyr, cyi, wr(20), wi(20), yr(20), yi(20), zr, zi, znr, zni
-    REAL(8) :: aa, ab, aer(20), alim, arg, atol, axx, ct, dig, &
+    REAL(DP) :: aa, ab, aer(20), alim, arg, atol, axx, ct, dig, &
       elim, eps, er, ertol, ffnu, film, fnu, fnul, &
       hpi, pi, r, rl, rm, r1m4, r1m5, r2, slak, st, sti, str, t(20), tol, ts, xnu(20)
     INTEGER i, icase, ierr, ifnu, il, ir, irb, it, itl, k, kdo(20), &
@@ -2150,17 +2151,17 @@ CONTAINS
     !
     !  Declare local variables.
     !
-    REAL(8) :: coe1r, coe1i, coe2r, coe2i, csgnr, csgni, cspnr, cspni, cwr, &
+    REAL(DP) :: coe1r, coe1i, coe2r, coe2i, csgnr, csgni, cspnr, cspni, cwr, &
       cwi, cwrkr(20), cwrki(20), vr(20), vi(20), wr(20), wi(20), yr(20), yi(20), &
       zr, zi, znr, zni
-    REAL(8) :: aa, ab, aer(20), ai, alim, ar, arg, atol, av, cc, &
+    REAL(DP) :: aa, ab, aer(20), ai, alim, ar, arg, atol, av, cc, &
       ct, dig, elim, eps, er, ertol, ffnu, film, fnu, &
       fnul, hpi, pi, ptr, r, rhpi, rl, rm, r1m4, &
       r1m5, r2, slak, st, sti, str, t(20), tol, ts, xnu(20)
     INTEGER i, icase, ierr, ifnu, il, ir, irb, it, itl, i4, k, &
       kdo(20), keps(20), kk, kode, k1, k2, lflg, mflg, n, nl, nu, nul, nz, nz1, nz2
-    REAL(8), PARAMETER :: cipr(4) = [ 1.0D0, 0.0D0, -1.0D0, 0.0D0 ]
-    REAL(8), PARAMETER :: cipi(4) = [ 0.0D0, 1.0D0, 0.0D0, -1.0D0 ]
+    REAL(DP), PARAMETER :: cipr(4) = [ 1.0D0, 0.0D0, -1.0D0, 0.0D0 ]
+    REAL(DP), PARAMETER :: cipi(4) = [ 0.0D0, 1.0D0, 0.0D0, -1.0D0 ]
     !
     !* FIRST EXECUTABLE STATEMENT  ZQCBY
     IF ( Kprint>=2 ) THEN

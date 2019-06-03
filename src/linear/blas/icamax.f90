@@ -53,8 +53,8 @@ INTEGER FUNCTION ICAMAX(N,Cx,Incx)
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
-  COMPLEX Cx(*)
-  REAL smax, xmag
+  COMPLEX(SP) Cx(*)
+  REAL(SP) smax, xmag
   INTEGER i, Incx, ix, N
   !* FIRST EXECUTABLE STATEMENT  ICAMAX
   ICAMAX = 0

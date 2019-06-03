@@ -34,7 +34,7 @@ SUBROUTINE ZUNK2(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Tol,Elim,Alim)
   !    *S1,S2,Y,Z,ZB,ZETA1,ZETA1D,ZETA2,ZETA2D,ZN,ZR
   INTEGER i, ib, iflag, ifn, il, in, inu, iuf, k, kdflg, kflag, &
     kk, Kode, Mr, N, nai, ndai, nw, Nz, idum, j, ipard, ic
-  REAL(8) :: aarg, aii, air, Alim, ang, aphi, argdi, argdr, argi(2), argr(2), &
+  REAL(DP) :: aarg, aii, air, Alim, ang, aphi, argdi, argdr, argi(2), argr(2), &
     asc, ascle, asumdi, asumdr, asumi(2), asumr(2), bry(3), bsumdi, bsumdr, &
     bsumi(2), bsumr(2), car, cki, ckr, crsc, cscl, csgni, csi, cspni, cspnr, &
     csr, csrr(3), cssr(3), cyi(2), cyr(2), c1i, c1r, c2i, c2m, c2r, daii, dair, &
@@ -42,12 +42,12 @@ SUBROUTINE ZUNK2(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Tol,Elim,Alim)
     rs1, rzi, rzr, sar, sgn, sti, str, s1i, s1r, s2i, s2r, Tol, Yi(N), Yr(N), yy, &
     zbi, zbr, zeta1i(2), zeta1r(2), zeta2i(2), zeta2r(2), zet1di, zet1dr, zet2di, &
     zet2dr, Zi, zni, znr, Zr, zri, zrr
-  REAL(8), PARAMETER :: zeror = 0.0D0, zeroi = 0.0D0, coner = 1.0D0, cr1r = 1.0D0, &
+  REAL(DP), PARAMETER :: zeror = 0.0D0, zeroi = 0.0D0, coner = 1.0D0, cr1r = 1.0D0, &
     cr1i = 1.73205080756887729D0, cr2r = -0.5D0, cr2i = -8.66025403784438647D-01
-  REAL(8), PARAMETER :: hpi = 1.57079632679489662D+00, pi = 3.14159265358979324D+00, &
+  REAL(DP), PARAMETER :: hpi = 1.57079632679489662D+00, pi = 3.14159265358979324D+00, &
     aic = 1.26551212348464539D+00
-  REAL(8), PARAMETER :: cipr(4) = [ 1.0D0, 0.0D0, -1.0D0, 0.0D0 ]
-  REAL(8), PARAMETER :: cipi(4) = [ 0.0D0, -1.0D0, 0.0D0, 1.0D0 ]
+  REAL(DP), PARAMETER :: cipr(4) = [ 1.0D0, 0.0D0, -1.0D0, 0.0D0 ]
+  REAL(DP), PARAMETER :: cipi(4) = [ 0.0D0, -1.0D0, 0.0D0, 1.0D0 ]
   !* FIRST EXECUTABLE STATEMENT  ZUNK2
   kdflg = 1
   Nz = 0

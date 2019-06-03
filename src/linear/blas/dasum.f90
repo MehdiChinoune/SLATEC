@@ -1,5 +1,5 @@
 !** DASUM
-REAL(8) FUNCTION DASUM(N,Dx,Incx)
+REAL(DP) FUNCTION DASUM(N,Dx,Incx)
   !>
   !  Compute the sum of the magnitudes of the elements of a
   !            vector.
@@ -52,7 +52,7 @@ REAL(8) FUNCTION DASUM(N,Dx,Incx)
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
-  REAL(8) :: Dx(*)
+  REAL(DP) :: Dx(*)
   INTEGER i, Incx, ix, m, mp1, N
   !* FIRST EXECUTABLE STATEMENT  DASUM
   DASUM = 0.0D0

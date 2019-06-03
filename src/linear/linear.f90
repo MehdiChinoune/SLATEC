@@ -3,6 +3,7 @@ include"slap/sslblk.f90"
 include"slap/dslblk.f90"
 
 MODULE linear
+  USE service, ONLY : SP, DP
   IMPLICIT NONE
 
 CONTAINS

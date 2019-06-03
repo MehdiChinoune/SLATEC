@@ -72,9 +72,9 @@ SUBROUTINE DSISL(A,Lda,N,Kpvt,B)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER Lda, N, Kpvt(*)
-  REAL(8) :: A(Lda,*), B(*)
+  REAL(DP) :: A(Lda,*), B(*)
   !
-  REAL(8) :: ak, akm1, bk, bkm1, denom, temp
+  REAL(DP) :: ak, akm1, bk, bkm1, denom, temp
   INTEGER k, kp
   !
   !     LOOP BACKWARD APPLYING THE TRANSFORMATIONS AND

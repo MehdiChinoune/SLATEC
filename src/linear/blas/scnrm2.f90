@@ -1,5 +1,5 @@
 !** SCNRM2
-REAL FUNCTION SCNRM2(N,Cx,Incx)
+REAL(SP) FUNCTION SCNRM2(N,Cx,Incx)
   !>
   !  Compute the unitary norm of a complex vector.
   !***
@@ -84,10 +84,10 @@ REAL FUNCTION SCNRM2(N,Cx,Incx)
 
   INTEGER i, Incx, N, nn, next
   LOGICAL imagg, scalee
-  REAL hitest, summ, xmax, absx
-  COMPLEX Cx(*)
-  REAL, PARAMETER :: zero = 0.0E0, one = 1.0E0
-  REAL, PARAMETER :: cutlo = 4.441E-16, cuthi= 1.304E19
+  REAL(SP) hitest, summ, xmax, absx
+  COMPLEX(SP) Cx(*)
+  REAL(SP), PARAMETER :: zero = 0.0E0, one = 1.0E0
+  REAL(SP), PARAMETER :: cutlo = 4.441E-16, cuthi= 1.304E19
   !* FIRST EXECUTABLE STATEMENT  SCNRM2
   IF ( N>0 ) THEN
     !

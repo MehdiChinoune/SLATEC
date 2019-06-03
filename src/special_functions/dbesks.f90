@@ -39,10 +39,10 @@ SUBROUTINE DBESKS(Xnu,X,Nin,Bk)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   USE service, ONLY : XERMSG, D1MACH
   INTEGER :: Nin
-  REAL(8) :: Xnu, X, Bk(Nin)
+  REAL(DP) :: Xnu, X, Bk(Nin)
   INTEGER :: i, n
-  REAL(8) :: expxi
-  REAL(8), PARAMETER :: xmax = -LOG(D1MACH(1))
+  REAL(DP) :: expxi
+  REAL(DP), PARAMETER :: xmax = -LOG(D1MACH(1))
   !* FIRST EXECUTABLE STATEMENT  DBESKS
   !
   IF ( X>xmax ) CALL XERMSG('DBESKS','X SO BIG BESSEL K UNDERFLOWS',1,2)

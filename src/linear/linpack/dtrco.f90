@@ -74,11 +74,11 @@ SUBROUTINE DTRCO(T,Ldt,N,Rcond,Z,Job)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER Ldt, N, Job
-  REAL(8) :: T(Ldt,*), Z(*)
-  REAL(8) :: Rcond
+  REAL(DP) :: T(Ldt,*), Z(*)
+  REAL(DP) :: Rcond
   !
-  REAL(8) :: w, wk, wkm, ek
-  REAL(8) :: tnorm, ynorm, s, sm
+  REAL(DP) :: w, wk, wkm, ek
+  REAL(DP) :: tnorm, ynorm, s, sm
   INTEGER i1, j, j1, j2, k, kk, l
   LOGICAL lower
   !* FIRST EXECUTABLE STATEMENT  DTRCO

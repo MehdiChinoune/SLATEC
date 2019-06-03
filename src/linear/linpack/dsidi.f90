@@ -90,11 +90,11 @@ SUBROUTINE DSIDI(A,Lda,N,Kpvt,Det,Inert,Work,Job)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER Lda, N, Job
-  REAL(8) :: A(Lda,*), Work(*)
-  REAL(8) :: Det(2)
+  REAL(DP) :: A(Lda,*), Work(*)
+  REAL(DP) :: Det(2)
   INTEGER Kpvt(*), Inert(3)
   !
-  REAL(8) :: akkp1, temp, ten, d, t, ak, akp1
+  REAL(DP) :: akkp1, temp, ten, d, t, ak, akp1
   INTEGER j, jb, k, km1, ks, kstep
   LOGICAL noinv, nodet, noert
   !* FIRST EXECUTABLE STATEMENT  DSIDI

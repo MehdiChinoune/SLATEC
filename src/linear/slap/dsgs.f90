@@ -222,10 +222,10 @@ SUBROUTINE DSGS(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
   !     .. Parameters ..
   INTEGER , PARAMETER :: LOCRB = 1, LOCIB = 11
   !     .. Scalar Arguments ..
-  REAL(8) :: Err, Tol
+  REAL(DP) :: Err, Tol
   INTEGER Ierr, Isym, Iter, Itmax, Itol, Iunit, Leniw, Lenw, N, Nelt
   !     .. Array Arguments ..
-  REAL(8) :: A(N), B(N), Rwork(*), X(N)
+  REAL(DP) :: A(N), B(N), Rwork(*), X(N)
   INTEGER Ia(Nelt), Iwork(*), Ja(Nelt)
   !     .. Local Scalars ..
   INTEGER icol, j, jbgn, jend, locdz, locel, lociel, lociw, locjel, &

@@ -335,10 +335,10 @@ SUBROUTINE SSLUGM(N,B,X,Nelt,Ia,Ja,A,Isym,Nsave,Tol,Itmax,Iter,Err,&
   !     .. Parameters ..
   INTEGER , PARAMETER :: LOCRB = 1, LOCIB = 11
   !     .. Scalar Arguments ..
-  REAL Err, Tol
+  REAL(SP) Err, Tol
   INTEGER Ierr, Isym, Iter, Itmax, Iunit, Leniw, Lenw, N, Nelt, Nsave
   !     .. Array Arguments ..
-  REAL A(Nelt), B(N), Rwork(Lenw), X(N)
+  REAL(SP) A(Nelt), B(N), Rwork(Lenw), X(N)
   INTEGER Ia(Nelt), Iwork(Leniw), Ja(Nelt)
   !     .. Local Scalars ..
   INTEGER icol, j, jbgn, jend, locdin, locigw, locil, lociu, lociw, &

@@ -1,5 +1,5 @@
 !** D9LGIC
-REAL(8) FUNCTION D9LGIC(A,X,Alx)
+REAL(DP) FUNCTION D9LGIC(A,X,Alx)
   !>
   !  Compute the log complementary incomplete Gamma function
   !            for large X and for A .LE. X.
@@ -33,10 +33,10 @@ REAL(8) FUNCTION D9LGIC(A,X,Alx)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
   USE service, ONLY : XERMSG, D1MACH
-  REAL(8) :: A, X, Alx
+  REAL(DP) :: A, X, Alx
   INTEGER :: k
-  REAL(8) :: fk, p, r, s, t, xma, xpa
-  REAL(8) :: eps = 0.5D0*D1MACH(3)
+  REAL(DP) :: fk, p, r, s, t, xma, xpa
+  REAL(DP) :: eps = 0.5D0*D1MACH(3)
   !* FIRST EXECUTABLE STATEMENT  D9LGIC
   !
   xpa = X + 1.0D0 - A

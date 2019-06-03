@@ -42,15 +42,14 @@ INTEGER FUNCTION INITDS(Os,Nos,Eta)
   !   891115  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-  USE service, ONLY : XERMSG, R1MACH
+  USE service, ONLY : XERMSG
   INTEGER :: Nos
-  REAL(8) :: Eta
-  REAL(8) :: Os(Nos)
+  REAL(DP) :: Eta
+  REAL(DP) :: Os(Nos)
   INTEGER :: i, ii
-  REAL(8) :: err
+  REAL(DP) :: err
   !* FIRST EXECUTABLE STATEMENT  INITDS
-  IF ( Nos<1 ) CALL XERMSG('INITDS',&
-    'Number of coefficients is less than 1',2,1)
+  IF ( Nos<1 ) CALL XERMSG('INITDS','Number of coefficients is less than 1',2,1)
   !
   err = 0.
   DO ii = 1, Nos

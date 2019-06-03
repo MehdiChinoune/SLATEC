@@ -1,5 +1,5 @@
 !** RC
-REAL FUNCTION RC(X,Y,Ier)
+REAL(SP) FUNCTION RC(X,Y,Ier)
   !>
   !  Calculate an approximation to
   !             RC(X,Y) = Integral from zero to infinity of
@@ -274,12 +274,12 @@ REAL FUNCTION RC(X,Y,Ier)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   USE service, ONLY : XERMSG, R1MACH
   INTEGER :: Ier
-  REAL :: X, Y
-  REAL :: lamda, mu, s, sn, xn, yn
+  REAL(SP) :: X, Y
+  REAL(SP) :: lamda, mu, s, sn, xn, yn
   CHARACTER(16) :: xern3, xern4, xern5
-  REAL, PARAMETER :: errtol = (R1MACH(3)/16.0E0)**(1.0E0/6.0E0), &
+  REAL(SP), PARAMETER :: errtol = (R1MACH(3)/16.0E0)**(1.0E0/6.0E0), &
     lolim = 5.0E0*R1MACH(1), uplim = R1MACH(2)/5.0E0
-  REAL, PARAMETER ::  c1 = 1.0E0/7.0E0, c2 = 9.0E0/22.0E0
+  REAL(SP), PARAMETER ::  c1 = 1.0E0/7.0E0, c2 = 9.0E0/22.0E0
   !
   !* FIRST EXECUTABLE STATEMENT  RC
   !

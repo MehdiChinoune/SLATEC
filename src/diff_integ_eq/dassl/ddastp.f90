@@ -98,21 +98,23 @@ SUBROUTINE DDASTP(X,Y,Yprime,Neq,RES,JAC,H,Wt,Jstart,Idid,Phi,&
   !
   INTERFACE
     SUBROUTINE RES(T,Y,Yprime,Delta,Ires)
+      IMPORT DP
       INTEGER :: Ires
-      REAL(8) :: T, Y(:), Yprime(:), Delta(:)
+      REAL(DP) :: T, Y(:), Yprime(:), Delta(:)
     END SUBROUTINE
     SUBROUTINE JAC(T,Y,Yprime,Pd,Cj)
-      REAL(8) :: T, Cj, Pd(:,:), Y(:), Yprime(:)
+      IMPORT DP
+      REAL(DP) :: T, Cj, Pd(:,:), Y(:), Yprime(:)
     END SUBROUTINE
   END INTERFACE
   INTEGER :: Neq, Jstart, Idid, Iphase, Jcalc, K, Kold, Ns, Nonneg, Ntemp
   INTEGER :: Iwm(:)
-  REAL(8) :: X, H, Cj, Cjold, Hold, S, Hmin, Uround
-  REAL(8) :: Y(Neq), Yprime(Neq), Wt(:), Phi(Neq,*), Delta(:), E(:), &
+  REAL(DP) :: X, H, Cj, Cjold, Hold, S, Hmin, Uround
+  REAL(DP) :: Y(Neq), Yprime(Neq), Wt(:), Phi(Neq,*), Delta(:), E(:), &
     Wm(:), Alpha(:), Beta(:), Gama(:), Psi(:), Sigma(:)
   !
   INTEGER i, ier, ires, j, j1, kdiff, km1, knew, kp1, kp2, m, ncf, nef, nsf, nsp1
-  REAL(8) :: alpha0, alphas, cjlast, ck, delnrm, enorm, erk, erkm1, erkm2, erkp1, &
+  REAL(DP) :: alpha0, alphas, cjlast, ck, delnrm, enorm, erk, erkm1, erkm2, erkp1, &
     err, est, hnew, oldnrm, pnorm, r, rate, temp1, temp2, terk, terkm1, terkm2, &
     terkp1, xold
   LOGICAL convgd
@@ -125,7 +127,7 @@ SUBROUTINE DDASTP(X,Y,Yprime,Neq,RES,JAC,H,Wt,Jstart,Idid,Phi,&
   INTEGER, PARAMETER :: LCTF = 15
   !
   INTEGER, PARAMETER :: maxit = 4
-  REAL(8), PARAMETER :: xrate = 0.25D0
+  REAL(DP), PARAMETER :: xrate = 0.25D0
   !
   !
   !

@@ -113,11 +113,11 @@ SUBROUTINE DTPSV(Uplo,Trans,Diag,N,Ap,X,Incx)
   INTEGER Incx, N
   CHARACTER :: Diag, Trans, Uplo
   !     .. Array Arguments ..
-  REAL(8) :: Ap(*), X(*)
+  REAL(DP) :: Ap(*), X(*)
   !     .. Parameters ..
-  REAL(8), PARAMETER :: ZERO = 0.0D+0
+  REAL(DP), PARAMETER :: ZERO = 0.0D+0
   !     .. Local Scalars ..
-  REAL(8) :: temp
+  REAL(DP) :: temp
   INTEGER i, info, ix, j, jx, k, kk, kx
   LOGICAL nounit
   !* FIRST EXECUTABLE STATEMENT  DTPSV

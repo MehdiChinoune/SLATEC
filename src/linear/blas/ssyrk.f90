@@ -128,17 +128,17 @@ SUBROUTINE SSYRK(Uplo,Trans,N,K,Alpha,A,Lda,Beta,C,Ldc)
   !     .. Scalar Arguments ..
   CHARACTER :: Uplo, Trans
   INTEGER N, K, Lda, Ldc
-  REAL Alpha, Beta
+  REAL(SP) Alpha, Beta
   !     .. Array Arguments ..
-  REAL A(Lda,*), C(Ldc,*)
+  REAL(SP) A(Lda,*), C(Ldc,*)
   !     .. Intrinsic Functions ..
   INTRINSIC MAX
   !     .. Local Scalars ..
   LOGICAL upper
   INTEGER i, info, j, l, nrowa
-  REAL temp
+  REAL(SP) temp
   !     .. Parameters ..
-  REAL, PARAMETER :: ONE = 1.0E+0, ZERO = 0.0E+0
+  REAL(SP), PARAMETER :: ONE = 1.0E+0, ZERO = 0.0E+0
   !* FIRST EXECUTABLE STATEMENT  SSYRK
   !
   !     Test the input parameters.

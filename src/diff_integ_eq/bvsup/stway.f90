@@ -32,7 +32,7 @@ SUBROUTINE STWAY(U,V,Yhp,Inout,Stowa)
   USE ML, ONLY: ncomp_com, nfc_com, x_com, xop_com, info_com, istkop_com, kop_com, &
     ndisk_com, ntape_com, neqivp_com
   INTEGER :: Inout
-  REAL :: Stowa(:), U(:), V(:), Yhp(:)
+  REAL(SP) :: Stowa(:), U(:), V(:), Yhp(:)
   INTEGER :: j, k, ko, ks, ksj
   !
   !* FIRST EXECUTABLE STATEMENT  STWAY

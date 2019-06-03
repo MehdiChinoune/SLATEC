@@ -1,5 +1,5 @@
 !** CLNREL
-COMPLEX FUNCTION CLNREL(Z)
+COMPLEX(SP) FUNCTION CLNREL(Z)
   !>
   !  Evaluate ln(1+X) accurate in the sense of relative error.
   !***
@@ -35,9 +35,9 @@ COMPLEX FUNCTION CLNREL(Z)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   USE service, ONLY : XERMSG, R1MACH
-  COMPLEX :: Z
-  REAL :: rho, x
-  REAL, PARAMETER :: sqeps = SQRT(R1MACH(4))
+  COMPLEX(SP) :: Z
+  REAL(SP) :: rho, x
+  REAL(SP), PARAMETER :: sqeps = SQRT(R1MACH(4))
   !* FIRST EXECUTABLE STATEMENT  CLNREL
   !
   IF ( ABS(1.+Z)<sqeps ) CALL XERMSG('CLNREL',&

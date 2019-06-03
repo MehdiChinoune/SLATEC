@@ -15,8 +15,8 @@ SUBROUTINE FMAT(X,Y,Yp)
   !   ??????  DATE WRITTEN
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   USE SAVEX, ONLY : xsave_com, term_com
-  REAL :: X, Y(:), Yp(:)
-  REAL :: tanx
+  REAL(SP) :: X, Y(:), Yp(:)
+  REAL(SP) :: tanx
   !* FIRST EXECUTABLE STATEMENT  FMAT
   Yp(1) = Y(2)
   IF ( X/=xsave_com ) THEN

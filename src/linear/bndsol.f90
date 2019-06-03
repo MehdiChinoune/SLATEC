@@ -199,9 +199,9 @@ SUBROUTINE BNDSOL(Mode,G,Mdg,Nb,Ip,Ir,X,N,Rnorm)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   USE service, ONLY : XERMSG
   INTEGER :: Ip, Ir, Mdg, Mode, N, Nb
-  REAL :: G(Mdg,Nb+1), Rnorm, X(N)
+  REAL(SP) :: G(Mdg,Nb+1), Rnorm, X(N)
   INTEGER :: i, i1, i2, ie, ii, iopt, irm1, ix, j, jg, l, nerr, np1
-  REAL :: rsq, s, zero
+  REAL(SP) :: rsq, s, zero
   !* FIRST EXECUTABLE STATEMENT  BNDSOL
   zero = 0.
   !

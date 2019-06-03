@@ -29,9 +29,9 @@ SUBROUTINE TRIS4(N,A,B,C,D,U,Z)
   !   900402  Added TYPE section.  (WRB)
 
   INTEGER :: N
-  REAL :: A(N), B(N), C(N), D(N), U(N), Z(N)
+  REAL(SP) :: A(N), B(N), C(N), D(N), U(N), Z(N)
   INTEGER :: j, k, nm1, nm2
-  REAL :: an, bn, den, v
+  REAL(SP) :: an, bn, den, v
   !* FIRST EXECUTABLE STATEMENT  TRIS4
   bn = B(N)
   D(1) = A(2)/B(1)

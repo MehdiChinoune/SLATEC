@@ -110,16 +110,16 @@ SUBROUTINE CHEMV(Uplo,N,Alpha,A,Lda,X,Incx,Beta,Y,Incy)
   !           lines were modified.  (BKS)
   USE service, ONLY : XERBLA
   !     .. Scalar Arguments ..
-  COMPLEX Alpha, Beta
+  COMPLEX(SP) Alpha, Beta
   INTEGER Incx, Incy, Lda, N
   CHARACTER :: Uplo
   !     .. Array Arguments ..
-  COMPLEX A(Lda,*), X(*), Y(*)
+  COMPLEX(SP) A(Lda,*), X(*), Y(*)
   !     .. Parameters ..
-  COMPLEX, PARAMETER :: ONE = (1.0E+0,0.0E+0)
-  COMPLEX, PARAMETER :: ZERO = (0.0E+0,0.0E+0)
+  COMPLEX(SP), PARAMETER :: ONE = (1.0E+0,0.0E+0)
+  COMPLEX(SP), PARAMETER :: ZERO = (0.0E+0,0.0E+0)
   !     .. Local Scalars ..
-  COMPLEX temp1, temp2
+  COMPLEX(SP) temp1, temp2
   INTEGER i, info, ix, iy, j, jx, jy, kx, ky
   !     .. Intrinsic Functions ..
   INTRINSIC CONJG, MAX, REAL

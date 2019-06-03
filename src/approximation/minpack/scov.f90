@@ -155,16 +155,17 @@ SUBROUTINE SCOV(FCN,Iopt,M,N,X,Fvec,R,Ldr,Info,Wa1,Wa2,Wa3,Wa4)
   USE service, ONLY : XERMSG
   INTERFACE
     SUBROUTINE FCN(Iflag,M,N,X,Fvec,Fjac,Ldfjac)
+      IMPORT SP
       INTEGER :: Ldfjac, M, N, Iflag
-      REAL :: X(N), Fvec(M), Fjac(:,:)
+      REAL(SP) :: X(N), Fvec(M), Fjac(:,:)
     END SUBROUTINE FCN
   END INTERFACE
   INTEGER :: Info, Iopt, Ldr, M, N
-  REAL :: X(N), R(Ldr,N), Fvec(M), Wa1(N,1), Wa2(N), Wa3(N), Wa4(M)
+  REAL(SP) :: X(N), R(Ldr,N), Fvec(M), Wa1(N,1), Wa2(N), Wa3(N), Wa4(M)
   INTEGER :: i, idum(1), iflag, j, k, kp1, nm1, nrow
-  REAL :: sigma, temp
+  REAL(SP) :: sigma, temp
   LOGICAL :: sing
-  REAL, PARAMETER :: zero = 0.E0, one = 1.E0
+  REAL(SP), PARAMETER :: zero = 0.E0, one = 1.E0
   !* FIRST EXECUTABLE STATEMENT  SCOV
   sing = .FALSE.
   iflag = 0

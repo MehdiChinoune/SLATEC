@@ -82,9 +82,9 @@ SUBROUTINE BNFAC(W,Nroww,Nrow,Nbandl,Nbandu,Iflag)
 
   !
   INTEGER :: Iflag, Nbandl, Nbandu, Nrow, Nroww
-  REAL :: W(Nroww,Nrow)
+  REAL(SP) :: W(Nroww,Nrow)
   INTEGER :: i, ipk, j, jmax, k, kmax, middle, midmk, nrowm1
-  REAL :: factor, pivot
+  REAL(SP) :: factor, pivot
   !
   !* FIRST EXECUTABLE STATEMENT  BNFAC
   Iflag = 1

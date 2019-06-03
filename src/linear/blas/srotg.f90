@@ -65,7 +65,7 @@ SUBROUTINE SROTG(Sa,Sb,Sc,Ss)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
-  REAL r, Sa, Sb, Sc, Ss, u, v
+  REAL(SP) r, Sa, Sb, Sc, Ss, u, v
   !* FIRST EXECUTABLE STATEMENT  SROTG
   IF ( ABS(Sa)>ABS(Sb) ) THEN
     !

@@ -1,5 +1,5 @@
 !** QWGTC
-REAL FUNCTION QWGTC(X,C,P2,P3,P4,Kp)
+REAL(SP) FUNCTION QWGTC(X,C,P2,P3,P4,Kp)
   !>
   !  This function subprogram is used together with the
   !            routine QAWC and defines the WEIGHT function.
@@ -26,9 +26,9 @@ REAL FUNCTION QWGTC(X,C,P2,P3,P4,Kp)
   !   830518  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
-  
+
   !
-  REAL C, P2, P3, P4, X
+  REAL(SP) C, P2, P3, P4, X
   INTEGER Kp
   !* FIRST EXECUTABLE STATEMENT  QWGTC
   QWGTC = 0.1E+01/(X-C)

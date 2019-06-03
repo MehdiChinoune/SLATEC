@@ -77,8 +77,8 @@ SUBROUTINE ELMBAK(Nm,Low,Igh,A,Intt,M,Z)
 
   !
   INTEGER i, j, M, la, mm, mp, Nm, Igh, kp1, Low, mp1
-  REAL A(Nm,*), Z(Nm,*)
-  REAL x
+  REAL(SP) A(Nm,*), Z(Nm,*)
+  REAL(SP) x
   INTEGER Intt(*)
   !
   !* FIRST EXECUTABLE STATEMENT  ELMBAK

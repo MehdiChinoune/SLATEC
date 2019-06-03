@@ -86,8 +86,8 @@ SUBROUTINE CH(Nm,N,Ar,Ai,W,Matz,Zr,Zi,Fv1,Fv2,Fm1,Ierr)
 
   !
   INTEGER i, j, N, Nm, Ierr, Matz
-  REAL Ar(Nm,*), Ai(Nm,*), W(*), Zr(Nm,*), Zi(Nm,*)
-  REAL Fv1(*), Fv2(*), Fm1(2,*)
+  REAL(SP) Ar(Nm,*), Ai(Nm,*), W(*), Zr(Nm,*), Zi(Nm,*)
+  REAL(SP) Fv1(*), Fv2(*), Fm1(2,*)
   !
   !* FIRST EXECUTABLE STATEMENT  CH
   IF ( N<=Nm ) THEN

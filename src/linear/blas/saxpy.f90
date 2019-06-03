@@ -55,7 +55,7 @@ SUBROUTINE SAXPY(N,Sa,Sx,Incx,Sy,Incy)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER i, Incx, Incy, ix, iy, m, mp1, N, ns
-  REAL Sx(*), Sy(*), Sa
+  REAL(SP) Sx(*), Sy(*), Sa
   !* FIRST EXECUTABLE STATEMENT  SAXPY
   IF ( N<=0.OR.Sa==0.0E0 ) RETURN
   IF ( Incx==Incy ) THEN

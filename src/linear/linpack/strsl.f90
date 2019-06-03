@@ -78,10 +78,10 @@ SUBROUTINE STRSL(T,Ldt,N,B,Job,Info)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER Ldt, N, Job, Info
-  REAL T(Ldt,*), B(*)
+  REAL(SP) T(Ldt,*), B(*)
   !
   !
-  REAL temp
+  REAL(SP) temp
   INTEGER case, j, jj
   !* FIRST EXECUTABLE STATEMENT  STRSL
   !

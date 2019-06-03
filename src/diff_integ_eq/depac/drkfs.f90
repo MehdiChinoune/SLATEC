@@ -54,18 +54,19 @@ SUBROUTINE DRKFS(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
   !
   INTERFACE
     SUBROUTINE DF(X,U,Uprime)
-      REAL(8) :: X
-      REAL(8) :: U(:), Uprime(:)
+      IMPORT DP
+      REAL(DP) :: X
+      REAL(DP) :: U(:), Uprime(:)
     END SUBROUTINE DF
   END INTERFACE
   INTEGER :: Idid, Init, Iquit, Kop, Ksteps, Neq, Nstifs, Ntstep
   INTEGER :: Info(15)
-  REAL(8) :: Dtsign, H, Rer, T, Told, Tolfac, Tout, U26
-  REAL(8) :: Atol(:), F1(Neq), F2(Neq), F3(Neq), F4(Neq), F5(Neq), &
+  REAL(DP) :: Dtsign, H, Rer, T, Told, Tolfac, Tout, U26
+  REAL(DP) :: Atol(:), F1(Neq), F2(Neq), F3(Neq), F4(Neq), F5(Neq), &
     Rtol(:), Y(Neq), Yp(Neq), Ys(Neq)
   LOGICAL :: Stiff, Nonstf
   INTEGER :: k, ktol, natolp, nrtolp
-  REAL(8) :: a, big, dt, dy, ee, eeoet, es, estiff, esttol, et, hmin, s, &
+  REAL(DP) :: a, big, dt, dy, ee, eeoet, es, estiff, esttol, et, hmin, s, &
     tol, u, ute, yavg
   LOGICAL :: hfaild, output
   CHARACTER(8) :: xern1
@@ -80,7 +81,7 @@ SUBROUTINE DRKFS(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
   !       TOLERANCE THRESHOLD REMIN IS ASSIGNED FOR THIS METHOD. THIS
   !       VALUE SHOULD NOT BE CHANGED ACROSS DIFFERENT MACHINES.
   !
-  REAL(8), PARAMETER :: remin = 1.0D-12
+  REAL(DP), PARAMETER :: remin = 1.0D-12
   !
   !     ..................................................................
   !

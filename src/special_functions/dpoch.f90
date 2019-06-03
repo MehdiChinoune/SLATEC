@@ -1,5 +1,5 @@
 !** DPOCH
-REAL(8) FUNCTION DPOCH(A,X)
+REAL(DP) FUNCTION DPOCH(A,X)
   !>
   !  Evaluate a generalization of Pochhammer's symbol.
   !***
@@ -37,8 +37,8 @@ REAL(8) FUNCTION DPOCH(A,X)
   !   900727  Added EXTERNAL statement.  (WRB)
   USE service, ONLY : XERMSG
   INTEGER i, ia, n
-  REAL(8) :: A, X, absa, absax, alnga, alngax, ax, b, sgnga, sgngax
-  REAL(8), PARAMETER :: pi = 3.141592653589793238462643383279503D0
+  REAL(DP) :: A, X, absa, absax, alnga, alngax, ax, b, sgnga, sgngax
+  REAL(DP), PARAMETER :: pi = 3.141592653589793238462643383279503D0
   !* FIRST EXECUTABLE STATEMENT  DPOCH
   ax = A + X
   IF ( ax<=0.0D0 ) THEN
@@ -71,10 +71,10 @@ REAL(8) FUNCTION DPOCH(A,X)
   ! A+X IS NOT ZERO OR A NEGATIVE INTEGER.
   !
   DPOCH = 0.0D0
-  IF ( A<=0.0D0.AND.AINT(A)==A ) RETURN
+  IF ( A<=0.0D0 .AND. AINT(A)==A ) RETURN
   !
   n = INT( ABS(X) )
-  IF ( REAL(n, 8)/=X.OR.n>20 ) THEN
+  IF ( REAL( n, DP )/=X .OR. n>20 ) THEN
     !
     absax = ABS(A+X)
     absa = ABS(A)

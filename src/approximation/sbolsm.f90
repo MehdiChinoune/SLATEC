@@ -426,17 +426,17 @@ SUBROUTINE SBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
   USE optimization, ONLY : SVOUT, IVOUT
   INTEGER :: Mdw, Minput, Mode, Ncols
   INTEGER :: Ibasis(Ncols), Ibb(Ncols), Ind(Ncols), Iopt(*)
-  REAL :: Rnorm, W(Mdw,Ncols+1), Bl(Ncols), Bu(Ncols), X(2*Ncols+7), Rw(Ncols), &
+  REAL(SP) :: Rnorm, W(Mdw,Ncols+1), Bl(Ncols), Bu(Ncols), X(2*Ncols+7), Rw(Ncols), &
     Ww(Ncols), Scl(Ncols)
   INTEGER :: i, igopr, ioff, ip, iprint, itemp, iter, itmax, j, jbig, jcol, jdrop, &
     jdrop1, jdrop2, jlarge, jmag, jp, lds, lgopr, lp, mrows, mval, nsetb, i2(1), jbig2(1)
-  REAL :: alpha, beta, bou, colabv, colblo, cl1, cl2, cl3, big, fac, sc, ss, &
+  REAL(SP) :: alpha, beta, bou, colabv, colblo, cl1, cl2, cl3, big, fac, sc, ss, &
     t, tolind, wt, t1, t2, wbig, wlarge, wmag, xnew, tolsze
   LOGICAL :: found, constr
   CHARACTER(8) :: xern1, xern2
   CHARACTER(16) :: xern3, xern4
   !
-  REAL, PARAMETER :: ZERO = 0.0E0, ONE = 1.0E0, TWO = 2.0E0
+  REAL(SP), PARAMETER :: ZERO = 0.0E0, ONE = 1.0E0, TWO = 2.0E0
   !
   !* FIRST EXECUTABLE STATEMENT  SBOLSM
   !

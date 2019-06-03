@@ -29,7 +29,7 @@ SUBROUTINE MACON
   !   900328  Added TYPE section.  (WRB)
   USE ML, ONLY : uro_com, sru_com, eps_com, sqovfl_com, twou_com, fouru_com, lpar_com
   USE service, ONLY : R1MACH
-  REAL dd
+  REAL(SP) dd
   INTEGER ke
   !* FIRST EXECUTABLE STATEMENT  MACON
   uro_com = R1MACH(4)

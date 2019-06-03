@@ -35,11 +35,11 @@ SUBROUTINE PROC(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Y,M,A,B,C,D,W,U)
   !   900402  Added TYPE section.  (WRB)
 
   INTEGER :: M, Na, Nd, Nm1, Nm2
-  REAL :: Aa(Na), Bd(Nd), Bm1(Nm1), Bm2(Nm2)
-  COMPLEX :: X(M), Y(M), A(M), B(M), C(M), D(M), W(M), U(M)
+  REAL(SP) :: Aa(Na), Bd(Nd), Bm1(Nm1), Bm2(Nm2)
+  COMPLEX(SP) :: X(M), Y(M), A(M), B(M), C(M), D(M), W(M), U(M)
   INTEGER :: ia, ibr, id, j, k, m1, m2, mm
-  REAL :: rt
-  COMPLEX :: den
+  REAL(SP) :: rt
+  COMPLEX(SP) :: den
   !* FIRST EXECUTABLE STATEMENT  PROC
   DO j = 1, M
     W(j) = X(j)

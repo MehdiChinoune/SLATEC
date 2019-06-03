@@ -1,4 +1,5 @@
 MODULE TEST21_MOD
+  USE service, ONLY : SP, DP
   IMPLICIT NONE
 
 CONTAINS
@@ -44,10 +45,10 @@ CONTAINS
     !     .. Scalar Arguments ..
     INTEGER Kprint, Lun, Nerr
     !     .. Local Scalars ..
-    REAL errcmp, errmax
+    REAL(SP) errcmp, errmax
     INTEGER i, ind, itask, j, kprog, lda, n
     !     .. Local Arrays ..
-    REAL atemp(5,4), btemp(4), work(20)
+    REAL(SP) atemp(5,4), btemp(4), work(20)
     INTEGER iwork(4)
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, MAX
@@ -184,20 +185,20 @@ CONTAINS
     !     .. Scalar Arguments ..
     INTEGER Kprint, Lun, Nerr
     !     .. Local Scalars ..
-    REAL(8) :: errcmp, errmax
+    REAL(DP) :: errcmp, errmax
     INTEGER i, ind, itask, j, kprog, lda, n
     !     .. Local Arrays ..
-    REAL(8) :: atemp(5,4), btemp(4), work(20)
+    REAL(DP) :: atemp(5,4), btemp(4), work(20)
     INTEGER iwork(4)
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, MAX
     !     .. Data statements ..
-    REAL(8), PARAMETER :: a(5,4) = RESHAPE( [ 5.0D0, 1.0D0, 0.3D0, 2.1D0, 0.0D0, &
+    REAL(DP), PARAMETER :: a(5,4) = RESHAPE( [ 5.0D0, 1.0D0, 0.3D0, 2.1D0, 0.0D0, &
       -1.0D0, -0.5D0, 1.0D0, 1.0D0, 0.0D0, &
       4.5D0,  -1.0D0, -1.7D0, 2.0D0, 0.0D0, &
       0.5D0, 2.0D0, 0.6D0, 1.3D0, 0.0D0 ], [5,4] )
-    REAL(8), PARAMETER :: b(4) = [ 0.0D0, 3.5D0, 3.6D0, 2.4D0 ]
-    REAL(8), PARAMETER :: bxex(4) = [ 0.10D+01, 0.10D+01, -0.10D+01, 0.10D+01 ]
+    REAL(DP), PARAMETER :: b(4) = [ 0.0D0, 3.5D0, 3.6D0, 2.4D0 ]
+    REAL(DP), PARAMETER :: bxex(4) = [ 0.10D+01, 0.10D+01, -0.10D+01, 0.10D+01 ]
     CHARACTER(4), PARAMETER :: list(2) = [ 'GEFS', 'GEIR' ]
     !* FIRST EXECUTABLE STATEMENT  DGEQC
     n = 4
@@ -316,15 +317,15 @@ CONTAINS
     !     .. Local Scalars ..
     INTEGER i, ind, indx, itask, j, kprog, lda, n
     !     .. Local Arrays ..
-    COMPLEX atemp(5,3), btemp(3), work(12)
+    COMPLEX(SP) atemp(5,3), btemp(3), work(12)
     INTEGER iwork(3)
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, AIMAG, REAL
     !     .. Data statements ..
-    COMPLEX, PARAMETER :: a(3,3) = RESHAPE( [ (2.,3.), (1.,1.), (1.,2.), &
+    COMPLEX(SP), PARAMETER :: a(3,3) = RESHAPE( [ (2.,3.), (1.,1.), (1.,2.), &
       (2.,0.), (1.,-1.), (0.,0.),   (0.,0.), (2.,5.), (3.,2.) ], [3,3] )
-    COMPLEX, PARAMETER :: b(3) = [ (-1.,1.), (-5.,4.), (-4.,7.) ]
-    COMPLEX, PARAMETER :: bxex(3) = [ (.21459E-01,.209012E+01), &
+    COMPLEX(SP), PARAMETER :: b(3) = [ (-1.,1.), (-5.,4.), (-4.,7.) ]
+    COMPLEX(SP), PARAMETER :: bxex(3) = [ (.21459E-01,.209012E+01), &
       (.261373E+01,-.162231E+01), (.785407E+00,.109871E+01) ]
     CHARACTER(4), PARAMETER :: list(2) = [ 'GEFS', 'GEIR' ]
     !* FIRST EXECUTABLE STATEMENT  CGEQC

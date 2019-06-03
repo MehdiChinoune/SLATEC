@@ -182,24 +182,25 @@ SUBROUTINE DSTEPS(DF,Neqn,Y,X,H,Eps,Wt,Start,Hold,K,Kold,Crash,Phi,P,Yp,&
   USE service, ONLY : XERMSG, D1MACH
   INTERFACE
     SUBROUTINE DF(X,U,Uprime)
-      REAL(8) :: X
-      REAL(8) :: U(:), Uprime(:)
+      IMPORT DP
+      REAL(DP) :: X
+      REAL(DP) :: U(:), Uprime(:)
     END SUBROUTINE DF
   END INTERFACE
   INTEGER :: Ivc, K, Kgi, Kold, Kprev, Ksteps, Neqn, Ns
   INTEGER :: Iv(10)
-  REAL(8) :: Eps, Fouru, H, Hold, Twou, X, Xold
-  REAL(8) :: Alpha(12), Beta(12), G(13), Gi(11), P(Neqn), Phi(Neqn,16), Psi(12), &
+  REAL(DP) :: Eps, Fouru, H, Hold, Twou, X, Xold
+  REAL(DP) :: Alpha(12), Beta(12), G(13), Gi(11), P(Neqn), Phi(Neqn,16), Psi(12), &
     Sig(13), V(12), W(12), Wt(Neqn), Y(Neqn), Yp(Neqn)
   LOGICAL :: Start, Crash, Phase1, Nornd
   INTEGER :: i, ifail, im1, ip1, jv, iq, j, km1, km2, knew, &
     kp1, kp2, l, limit1, limit2, nsm2, nsp1, nsp2
-  REAL(8) :: absh, big, erk, erkm1, erkm2, erkp1, err, hnew, p5eps, r, reali, &
+  REAL(DP) :: absh, big, erk, erkm1, erkm2, erkp1, err, hnew, p5eps, r, reali, &
     realns, rho, round, tau, temp1, temp2, temp3, temp4, temp5, temp6, u
   !
-  REAL(8), PARAMETER :: two(13) = [ 2.0D0, 4.0D0, 8.0D0, 16.0D0, 32.0D0, 64.0D0, &
+  REAL(DP), PARAMETER :: two(13) = [ 2.0D0, 4.0D0, 8.0D0, 16.0D0, 32.0D0, 64.0D0, &
     128.0D0, 256.0D0, 512.0D0, 1024.0D0, 2048.0D0, 4096.0D0, 8192.0D0 ]
-  REAL(8), PARAMETER :: gstr(13) = [ 0.5D0, 0.0833D0, 0.0417D0, 0.0264D0, &
+  REAL(DP), PARAMETER :: gstr(13) = [ 0.5D0, 0.0833D0, 0.0417D0, 0.0264D0, &
     0.0188D0, 0.0143D0, 0.0114D0, 0.00936D0, 0.00789D0, 0.00679D0, 0.00592D0, &
     0.00524D0, 0.00468D0]
   !

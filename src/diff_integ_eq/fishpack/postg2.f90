@@ -27,12 +27,12 @@ SUBROUTINE POSTG2(Nperod,N,M,A,Bb,C,Idimq,Q,B,B2,B3,W,W2,W3,D,Tcos,P)
   !           routine MERGE.  (WRB)
   USE data_handling, ONLY : S1MERG
   INTEGER :: M, N, Nperod, Idimq
-  REAL :: A(M), B(M), B2(M), B3(M), Bb(M), C(M), D(M), P(:), Q(Idimq,N), &
+  REAL(SP) :: A(M), B(M), B2(M), B3(M), Bb(M), C(M), D(M), P(:), Q(Idimq,N), &
     Tcos(4*N), W(M), W2(M), W3(M)
   INTEGER :: kr, lr, mr, nlast, nlastp, np, nr, nrod, nrodpr, i, i2r, &
     i2rby2, ii, ijump, ip, ipstor, j, jm1, jm2, jm3, jp1, jp2, jp3, jr, &
     jstart, jstep, jstop, k(4)
-  REAL :: fi, fnum, fnum2, t
+  REAL(SP) :: fi, fnum, fnum2, t
   !* FIRST EXECUTABLE STATEMENT  POSTG2
   np = Nperod
   fnum = 0.5*(np/3)

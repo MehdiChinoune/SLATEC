@@ -732,42 +732,47 @@ SUBROUTINE DDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
   USE service, ONLY : XERMSG, D1MACH
   USE linear, ONLY : DGBSL, DGESL, DGBFA, DGEFA
   INTERFACE
-    REAL(8) FUNCTION G(N,T,Y,Iroot)
+    REAL(DP) FUNCTION G(N,T,Y,Iroot)
+      IMPORT DP
       INTEGER :: N, Iroot
-      REAL(8) :: T, Y(N)
+      REAL(DP) :: T, Y(N)
     END FUNCTION G
     SUBROUTINE F(N,T,Y,Ydot)
+      IMPORT DP
       INTEGER :: N
-      REAL(8) :: T, Y(:), Ydot(:)
+      REAL(DP) :: T, Y(:), Ydot(:)
     END SUBROUTINE F
     SUBROUTINE JACOBN(N,T,Y,Dfdy,Matdim,Ml,Mu)
+      IMPORT DP
       INTEGER :: N, Matdim, Ml, Mu
-      REAL(8) :: T, Y(N), Dfdy(Matdim,N)
+      REAL(DP) :: T, Y(N), Dfdy(Matdim,N)
     END SUBROUTINE JACOBN
     SUBROUTINE USERS(Y,Yh,Ywt,Save1,Save2,T,H,El,Impl,N,Nde,Iflag)
+      IMPORT DP
       INTEGER :: Impl, N, Nde, iflag
-      REAL(8) :: T, H, El
-      REAL(8) :: Y(N), Yh(N,13), Ywt(N), Save1(N), Save2(N)
+      REAL(DP) :: T, H, El
+      REAL(DP) :: Y(N), Yh(N,13), Ywt(N), Save1(N), Save2(N)
     END SUBROUTINE USERS
     SUBROUTINE FA(N,T,Y,A,Matdim,Ml,Mu,Nde)
+      IMPORT DP
       INTEGER :: N, Matdim, Ml, Mu, Nde
-      REAL(8) :: T, Y(N), A(:,:)
+      REAL(DP) :: T, Y(N), A(:,:)
     END SUBROUTINE FA
   END INTERFACE
   INTEGER :: Ierflg, Ierror, Impl, Leniw, Lenw, Mint, Miter, Ml, Mu, Mxord, &
     Mxstep, N, Nde, Nroot, Nstate, Ntask, Iwork(Leniw+N)
-  REAL(8) :: Eps, Hmax, T, Tout
-  REAL(8) :: Ewt(N), Work(Lenw+Leniw), Y(N+1)
+  REAL(DP) :: Eps, Hmax, T, Tout
+  REAL(DP) :: Ewt(N), Work(Lenw+Leniw), Y(N+1)
   INTEGER :: i, ia, idfdy, ifac, iflag, ignow, imxerr, info, iroot, isave1, &
     isave2, itroot, iywt, j, jstate, jtroot, lenchk, liwchk, matdim, maxord, &
     ndecom, npar, nstepl
-  REAL(8) :: ae, big, glast, gnow, h, hsign, hused, re, sizee, summ, tlast, &
+  REAL(DP) :: ae, big, glast, gnow, h, hsign, hused, re, sizee, summ, tlast, &
     troot, uround
   LOGICAL :: convrg
-  REAL(8), ALLOCATABLE :: a(:,:)
+  REAL(DP), ALLOCATABLE :: a(:,:)
   CHARACTER(8) :: intgr1, intgr2
   CHARACTER(16) :: rl1, rl2
-  REAL(8), PARAMETER :: NROUND = 20.D0
+  REAL(DP), PARAMETER :: NROUND = 20.D0
   INTEGER, PARAMETER :: IAVGH = 1, IHUSED = 2, IAVGRD = 3, IEL = 4, IH = 160, &
     IHMAX = 161, IHOLD = 162, IHSIGN = 163, IRC = 164, IRMAX = 165, IT = 166, &
     ITOUT = 167, ITQ = 168, ITREND = 204, IMACH1 = 205, IMACH4 = 206, IYH = 251, &
@@ -1318,7 +1323,7 @@ SUBROUTINE DDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
   DO i = 1, N
     Work(i+isave2-1) = Y(i)/Work(i+iywt-1)
   END DO
-  summ = NORM2(Work(isave2:isave2+N))/SQRT(REAL(N, 8))
+  summ = NORM2(Work(isave2:isave2+N))/SQRT(REAL(N, DP))
   summ = MAX(1.D0,summ)
   IF ( Eps<summ*uround ) THEN
     Eps = summ*uround*(1.D0+10.D0*uround)

@@ -83,10 +83,10 @@ SUBROUTINE DPBFA(Abd,Lda,N,M,Info)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER Lda, N, M, Info
-  REAL(8) :: Abd(Lda,*)
+  REAL(DP) :: Abd(Lda,*)
   !
-  REAL(8) :: t
-  REAL(8) :: s
+  REAL(DP) :: t
+  REAL(DP) :: s
   INTEGER ik, j, jk, k, mu
   !* FIRST EXECUTABLE STATEMENT  DPBFA
   DO j = 1, N

@@ -116,9 +116,9 @@ SUBROUTINE SGEIR(A,Lda,N,V,Itask,Ind,Work,Iwork)
   USE service, ONLY : R1MACH, XERMSG
   !
   INTEGER :: Lda, N, Itask, Ind, Iwork(N)
-  REAL :: A(Lda,N), V(N), Work(N,N+1)
+  REAL(SP) :: A(Lda,N), V(N), Work(N,N+1)
   INTEGER :: info, j
-  REAL :: xnorm, dnorm
+  REAL(SP) :: xnorm, dnorm
   CHARACTER(8) :: xern1, xern2
   !* FIRST EXECUTABLE STATEMENT  SGEIR
   IF ( Lda<N ) THEN

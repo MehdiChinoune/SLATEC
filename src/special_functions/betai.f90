@@ -1,5 +1,5 @@
 !** BETAI
-REAL FUNCTION BETAI(X,Pin,Qin)
+REAL(SP) FUNCTION BETAI(X,Pin,Qin)
   !>
   !  Calculate the incomplete Beta function.
   !***
@@ -43,10 +43,10 @@ REAL FUNCTION BETAI(X,Pin,Qin)
   !           (WRB)
   !   920528  DESCRIPTION and REFERENCES sections revised.  (WRB)
   USE service, ONLY : XERMSG, R1MACH
-  REAL :: X, Pin, Qin
+  REAL(SP) :: X, Pin, Qin
   INTEGER :: i, ib, n
-  REAL :: c, finsum, p, p1, ps, q, term, xb, y
-  REAL, PARAMETER :: eps = R1MACH(3), alneps = LOG(eps), sml = R1MACH(1), &
+  REAL(SP) :: c, finsum, p, p1, ps, q, term, xb, y
+  REAL(SP), PARAMETER :: eps = R1MACH(3), alneps = LOG(eps), sml = R1MACH(1), &
     alnsml = LOG(sml)
   !* FIRST EXECUTABLE STATEMENT  BETAI
   !

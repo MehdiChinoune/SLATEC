@@ -34,7 +34,7 @@ SUBROUTINE SDASLV(Neq,Delta,Wm,Iwm)
   USE linear, ONLY : SGBSL, SGESL
   !
   INTEGER :: Neq, Iwm(:)
-  REAL :: Delta(Neq), Wm(Neq)
+  REAL(SP) :: Delta(Neq), Wm(Neq)
   !
   INTEGER :: meband, mtype
   INTEGER, PARAMETER :: NPD = 1

@@ -1,5 +1,5 @@
 !** GAMR
-REAL FUNCTION GAMR(X)
+REAL(SP) FUNCTION GAMR(X)
   !>
   !  Compute the reciprocal of the Gamma function.
   !***
@@ -29,7 +29,7 @@ REAL FUNCTION GAMR(X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900727  Added EXTERNAL statement.  (WRB)
   USE service, ONLY : XGETF, XSETF, XERCLR
-  REAL alngx, sgngx, X
+  REAL(SP) alngx, sgngx, X
   INTEGER irold
   !* FIRST EXECUTABLE STATEMENT  GAMR
   GAMR = 0.0

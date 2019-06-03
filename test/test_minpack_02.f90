@@ -1,4 +1,5 @@
 MODULE TEST36_MOD
+  USE service, ONLY : SP, DP
   IMPLICIT NONE
 
 CONTAINS
@@ -33,10 +34,10 @@ CONTAINS
     !     .. Scalar Arguments ..
     INTEGER Ipass, Kprint, Lun
     !     .. Local Scalars ..
-    REAL(8) :: fnorm, fnorms, tol
+    REAL(DP) :: fnorm, fnorms, tol
     INTEGER icnt, info, infos, iopt, lwa, n, nprint
     !     .. Local Arrays ..
-    REAL(8) :: fvec(2), wa(19), x(2)
+    REAL(DP) :: fvec(2), wa(19), x(2)
     INTEGER itest(3)
     !     .. Intrinsic Functions ..
     INTRINSIC SQRT
@@ -112,7 +113,7 @@ CONTAINS
       D20.5/' RETURNED VALUE OF INFO AND RESIDUAL NORM',I5,D20.5/)
   END SUBROUTINE DNSQQK
   !** DSOSFN
-  REAL(8) FUNCTION DSOSFN(X,K)
+  REAL(DP) FUNCTION DSOSFN(X,K)
     !>
     !  Function evaluator for DSOS quick check.
     !***
@@ -136,7 +137,7 @@ CONTAINS
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
     INTEGER :: K
-    REAL(8) :: X(:)
+    REAL(DP) :: X(:)
     !* FIRST EXECUTABLE STATEMENT  DSOSFN
     IF ( K==1 ) THEN
       DSOSFN = 1.0D0 - X(1)
@@ -176,10 +177,10 @@ CONTAINS
     !     .. Scalar Arguments ..
     INTEGER Ipass, Kprint, Lun
     !     .. Local Scalars ..
-    REAL(8) :: aer, fnorm, fnorms, rer, tolf
+    REAL(DP) :: aer, fnorm, fnorms, rer, tolf
     INTEGER icnt, iflag, iflags, liw, lwa, n
     !     .. Local Arrays ..
-    REAL(8) :: fvec(2), wa(17), x(2)
+    REAL(DP) :: fvec(2), wa(17), x(2)
     INTEGER itest(2), iw(6)
     !     .. Intrinsic Functions ..
     INTRINSIC SQRT
@@ -270,7 +271,7 @@ CONTAINS
     !     .. Scalar Arguments ..
     INTEGER :: Iflag, N
     !     .. Array Arguments ..
-    REAL(8) :: Fvec(N), X(N)
+    REAL(DP) :: Fvec(N), X(N)
     !* FIRST EXECUTABLE STATEMENT  DQFCN2
     Fvec(1) = 1.0D0 - X(1)
     Fvec(2) = 10.0D0*(X(2)-X(1)**2)
@@ -299,7 +300,7 @@ CONTAINS
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
     INTEGER :: Iflag, Ldfjac, N
-    REAL(8) :: Fjac(Ldfjac,N), Fvec(N), X(N)
+    REAL(DP) :: Fjac(Ldfjac,N), Fvec(N), X(N)
     !* FIRST EXECUTABLE STATEMENT  DQJAC2
     Fjac(1,1) = -1.0D0
     Fjac(1,2) = 0.0D0

@@ -156,14 +156,14 @@ SUBROUTINE PCHSP(Ic,Vc,N,X,F,D,Incfd,Wk,Nwk,Ierr)
   !  DECLARE ARGUMENTS.
   !
   INTEGER Ic(2), N, Incfd, Nwk, Ierr
-  REAL Vc(2), X(N), F(Incfd,N), D(Incfd,N), Wk(2,Nwk)
+  REAL(SP) Vc(2), X(N), F(Incfd,N), D(Incfd,N), Wk(2,Nwk)
   !
   !  DECLARE LOCAL VARIABLES.
   !
   INTEGER ibeg, iend, indexx, j, nm1
-  REAL g, stemp(3), xtemp(4)
+  REAL(SP) g, stemp(3), xtemp(4)
   !
-  REAL, PARAMETER :: zero = 0., half = 0.5, one = 1., two = 2., three = 3.
+  REAL(SP), PARAMETER :: zero = 0., half = 0.5, one = 1., two = 2., three = 3.
   !
   !  VALIDITY-CHECK ARGUMENTS.
   !

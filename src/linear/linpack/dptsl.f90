@@ -55,10 +55,10 @@ SUBROUTINE DPTSL(N,D,E,B)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER N
-  REAL(8) :: D(*), E(*), B(*)
+  REAL(DP) :: D(*), E(*), B(*)
   !
   INTEGER k, kbm1, ke, kf, kp1, nm1, nm1d2
-  REAL(8) :: t1, t2
+  REAL(DP) :: t1, t2
   !
   !     CHECK FOR 1 X 1 CASE
   !

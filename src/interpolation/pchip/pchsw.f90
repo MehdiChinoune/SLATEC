@@ -80,15 +80,15 @@ SUBROUTINE PCHSW(Dfmax,Iextrm,D1,D2,H,Slope,Ierr)
   !  DECLARE ARGUMENTS.
   !
   INTEGER Iextrm, Ierr
-  REAL Dfmax, D1, D2, H, Slope
+  REAL(SP) Dfmax, D1, D2, H, Slope
   !
   !  DECLARE LOCAL VARIABLES.
   !
-  REAL cp, hphi, lambda, nu, phi, radcal, rho, sigma, small, that
+  REAL(SP) cp, hphi, lambda, nu, phi, radcal, rho, sigma, small, that
   !
-  REAL, PARAMETER :: zero = 0., one = 1., two = 2., three = 3., fact = 100.
+  REAL(SP), PARAMETER :: zero = 0., one = 1., two = 2., three = 3., fact = 100.
   !        THIRD SHOULD BE SLIGHTLY LESS THAN 1/3.
-  REAL, PARAMETER :: third = 0.33333
+  REAL(SP), PARAMETER :: third = 0.33333
   !
   !  NOTATION AND GENERAL REMARKS.
   !

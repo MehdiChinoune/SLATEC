@@ -74,10 +74,10 @@ SUBROUTINE STRDI(T,Ldt,N,Det,Job,Info)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER Ldt, N, Job, Info
-  REAL T(Ldt,*), Det(2)
+  REAL(SP) T(Ldt,*), Det(2)
   !
-  REAL temp
-  REAL ten
+  REAL(SP) temp
+  REAL(SP) ten
   INTEGER i, j, k, kb, km1, kp1
   !* FIRST EXECUTABLE STATEMENT  STRDI
   !

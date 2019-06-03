@@ -1,5 +1,5 @@
 !** PCHIA
-REAL FUNCTION PCHIA(N,X,F,D,Incfd,Skip,A,B,Ierr)
+REAL(SP) FUNCTION PCHIA(N,X,F,D,Incfd,Skip,A,B,Ierr)
   !>
   !  Evaluate the definite integral of a piecewise cubic
   !            Hermite function over an arbitrary interval.
@@ -121,17 +121,17 @@ REAL FUNCTION PCHIA(N,X,F,D,Incfd,Skip,A,B,Ierr)
   !  DECLARE ARGUMENTS.
   !
   INTEGER N, Incfd, Ierr
-  REAL X(N), F(Incfd,N), D(Incfd,N), A, B
+  REAL(SP) X(N), F(Incfd,N), D(Incfd,N), A, B
   LOGICAL Skip
   !
   !  DECLARE LOCAL VARIABLES.
   !
   INTEGER i, ia, ib, ierd, il, ir
-  REAL value, xa, xb
+  REAL(SP) value, xa, xb
   !
   !  INITIALIZE.
   !
-  REAL, PARAMETER :: zero = 0.
+  REAL(SP), PARAMETER :: zero = 0.
   !* FIRST EXECUTABLE STATEMENT  PCHIA
   value = zero
   !

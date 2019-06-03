@@ -62,22 +62,24 @@ SUBROUTINE SDAJAC(Neq,X,Y,Yprime,Delta,Cj,H,Ier,Wt,E,Wm,Iwm,RES,Ires,&
   !
   INTERFACE
     SUBROUTINE RES(T,Y,Yprime,Delta,Ires)
+      IMPORT SP
       INTEGER :: Ires
-      REAL :: T, Y(:), Yprime(:), Delta(:)
+      REAL(SP) :: T, Y(:), Yprime(:), Delta(:)
     END SUBROUTINE
     SUBROUTINE JAC(T,Y,Yprime,Pd,Cj)
-      REAL :: T, Cj, Pd(:,:), Y(:), Yprime(:)
+      IMPORT SP
+      REAL(SP) :: T, Cj, Pd(:,:), Y(:), Yprime(:)
     END SUBROUTINE
   END INTERFACE
   INTEGER :: Neq, Ier, Ires
   INTEGER :: Iwm(:), Ntemp
-  REAL :: X, Cj, H, Uround
-  REAL :: Y(Neq), Yprime(Neq), Delta(:), Wt(:), E(:), Wm(:)
+  REAL(SP) :: X, Cj, H, Uround
+  REAL(SP) :: Y(Neq), Yprime(Neq), Delta(:), Wt(:), E(:), Wm(:)
   !
   INTEGER :: i, i1, i2, ii, ipsave, isave, j, k, l, mba, mband, meb1, meband, &
     msave, mtype, n, npdm1, nrow
-  REAL :: del, delinv, squr, ypsave, ysave
-  REAL, ALLOCATABLE :: Pd(:,:)
+  REAL(SP) :: del, delinv, squr, ypsave, ysave
+  REAL(SP), ALLOCATABLE :: Pd(:,:)
   !
   INTEGER, PARAMETER :: NPD = 1
   INTEGER, PARAMETER :: LML = 1

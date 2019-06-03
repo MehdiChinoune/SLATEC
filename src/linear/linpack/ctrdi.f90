@@ -75,10 +75,10 @@ SUBROUTINE CTRDI(T,Ldt,N,Det,Job,Info)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER Ldt, N, Job, Info
-  COMPLEX T(Ldt,*), Det(2)
+  COMPLEX(SP) T(Ldt,*), Det(2)
   !
-  COMPLEX temp
-  REAL ten
+  COMPLEX(SP) temp
+  REAL(SP) ten
   INTEGER i, j, k, kb, km1, kp1
   !* FIRST EXECUTABLE STATEMENT  CTRDI
   !

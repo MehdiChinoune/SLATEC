@@ -62,7 +62,7 @@ SUBROUTINE DQCHEB(X,Fval,Cheb12,Cheb24)
   !   900328  Added TYPE section.  (WRB)
   
   !
-  REAL(8) :: alam, alam1, alam2, Cheb12(13), Cheb24(25), Fval(25), part1, &
+  REAL(DP) :: alam, alam1, alam2, Cheb12(13), Cheb24(25), Fval(25), part1, &
     part2, part3, v(12), X(11)
   INTEGER i, j
   !

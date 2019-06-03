@@ -392,16 +392,16 @@ SUBROUTINE LSEI(W,Mdw,Me,Ma,Mg,N,Prgopt,X,Rnorme,Rnorml,Mode,Ws,Ip)
   USE service, ONLY : XERMSG, R1MACH
   USE linear, ONLY : H12, SAXPY, SSWAP
   INTEGER :: Ma, Mdw, Me, Mg, Mode, N, Ip(Mg+2*N+2)
-  REAL :: Prgopt(:), Rnorme, Rnorml, W(Mdw,N+1), Ws(*), X(N)
+  REAL(SP) :: Prgopt(:), Rnorme, Rnorml, W(Mdw,N+1), Ws(*), X(N)
   !
-  REAL :: enorm, fnorm, gam, rb, rn, rnmax, sizee, sn, snmax, t, tau, uj, up, vj, &
+  REAL(SP) :: enorm, fnorm, gam, rb, rn, rnmax, sizee, sn, snmax, t, tau, uj, up, vj, &
     xnorm, xnrme
   INTEGER :: i, imax, j, jp1, k, key, kranke, last, lchk, link, m,  mapke1, mdeqc, &
     mend, mep1, n1, n2, next, nlink, nopt, np1, ntimes
   LOGICAL :: cov
   CHARACTER(8) :: xern1, xern2, xern3, xern4
   !
-  REAL, PARAMETER :: srelpr = R1MACH(4)
+  REAL(SP), PARAMETER :: srelpr = R1MACH(4)
   !* FIRST EXECUTABLE STATEMENT  LSEI
   !
   !     Set the nominal tolerance used in the code for the equality

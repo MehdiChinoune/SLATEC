@@ -42,16 +42,18 @@ SUBROUTINE DEFER(COFX,COFY,Idmn,Usol,Grhs)
     k_com, kswx_com, kswy_com, ms_com, ns_com
   INTERFACE
     SUBROUTINE COFX(X,A,B,C)
-      REAL :: X, A, B, C
+      IMPORT SP
+      REAL(SP) :: X, A, B, C
     END SUBROUTINE COFX
     SUBROUTINE COFY(Y,D,E,F)
-      REAL :: Y, D, E, F
+      IMPORT SP
+      REAL(SP) :: Y, D, E, F
     END SUBROUTINE COFY
   END INTERFACE
   INTEGER :: Idmn
-  REAL :: Grhs(Idmn,ns_com), Usol(Idmn,ns_com)
+  REAL(SP) :: Grhs(Idmn,ns_com), Usol(Idmn,ns_com)
   INTEGER :: i, j
-  REAL :: ai, bi, ci, dj, ej, fj, tx, ty, uxxx, uxxxx, uyyy, uyyyy, xi, yj
+  REAL(SP) :: ai, bi, ci, dj, ej, fj, tx, ty, uxxx, uxxxx, uyyy, uyyyy, xi, yj
   !* FIRST EXECUTABLE STATEMENT  DEFER
   DO j = js_com, ns_com
     yj = cit_com + (j-1)*dly_com

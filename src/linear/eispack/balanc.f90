@@ -85,8 +85,8 @@ SUBROUTINE BALANC(Nm,N,A,Low,Igh,Scalee)
 
   !
   INTEGER i, j, k, l, m, N, jj, Nm, Igh, Low, iexc
-  REAL A(Nm,*), Scalee(*)
-  REAL c, f, g, r, s, b2, radixx
+  REAL(SP) A(Nm,*), Scalee(*)
+  REAL(SP) c, f, g, r, s, b2, radixx
   LOGICAL noconv
   !
   !* FIRST EXECUTABLE STATEMENT  BALANC

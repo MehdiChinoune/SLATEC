@@ -35,19 +35,20 @@ SUBROUTINE DES(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Ypout,Yp,Yy,Wt,P,Phi,&
   USE service, ONLY : XERMSG, R1MACH
   INTERFACE
     SUBROUTINE F(X,U,Uprime)
-      REAL :: X
-      REAL :: U(:), Uprime(:)
+      IMPORT SP
+      REAL(SP) :: X
+      REAL(SP) :: U(:), Uprime(:)
     END SUBROUTINE F
   END INTERFACE
   INTEGER :: Idid, Init, Iquit, Ivc, Kgi, Kle4, Kold, Kord, Kprev, Ksteps, Neq, Ns
   INTEGER :: Info(15), Iv(10)
-  REAL :: Delsgn, Eps, Fouru, H, Hold, T, Told, Tout, Tstop, Twou, X, Xold
-  REAL :: Alpha(12), Atol(:), Beta(12), G(13), Gi(11), P(Neq), Phi(Neq,16), &
+  REAL(SP) :: Delsgn, Eps, Fouru, H, Hold, T, Told, Tout, Tstop, Twou, X, Xold
+  REAL(SP) :: Alpha(12), Atol(:), Beta(12), G(13), Gi(11), P(Neq), Phi(Neq,16), &
     Psi(12), Rtol(:), Sig(13), V(12), W(12), Wt(Neq), Y(Neq), Yp(Neq), &
     Ypout(Neq), Yy(Neq)
   LOGICAL :: Stiff, Start, Phase1, Nornd, Intout
   INTEGER :: k, l, ltol, natolp, nrtolp
-  REAL a, absdel, del, dt, ha, u
+  REAL(SP) a, absdel, del, dt, ha, u
   LOGICAL :: crash
   CHARACTER(8) :: xern1
   CHARACTER(16) :: xern3, xern4

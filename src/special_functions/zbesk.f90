@@ -164,7 +164,7 @@ SUBROUTINE ZBESK(Zr,Zi,Fnu,Kode,N,Cyr,Cyi,Nz,Ierr)
   USE service, ONLY : XERMSG, D1MACH, I1MACH
   !     COMPLEX CY,Z
   INTEGER Ierr, k, Kode, k1, k2, mr, N, nn, nuf, nw, Nz
-  REAL(8) :: aa, alim, aln, arg, az, Cyi(N), Cyr(N), dig, elim, &
+  REAL(DP) :: aa, alim, aln, arg, az, Cyi(N), Cyr(N), dig, elim, &
     fn, Fnu, fnul, rl, r1m5, tol, ufl, Zi, Zr, bb
   !* FIRST EXECUTABLE STATEMENT  ZBESK
   Ierr = 0

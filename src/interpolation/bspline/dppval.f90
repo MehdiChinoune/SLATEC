@@ -1,5 +1,5 @@
 !** DPPVAL
-REAL(8) FUNCTION DPPVAL(Ldc,C,Xi,Lxi,K,Ideriv,X,Inppv)
+REAL(DP) FUNCTION DPPVAL(Ldc,C,Xi,Lxi,K,Ideriv,X,Inppv)
   !>
   !  Calculate the value of the IDERIV-th derivative of the
   !            B-spline from the PP-representation.
@@ -73,9 +73,9 @@ REAL(8) FUNCTION DPPVAL(Ldc,C,Xi,Lxi,K,Ideriv,X,Inppv)
   USE service, ONLY : XERMSG
   !
   INTEGER :: Ideriv, Inppv, K, Ldc, Lxi
-  REAL(8) :: C(Ldc,Lxi), X, Xi(Lxi+1)
+  REAL(DP) :: C(Ldc,Lxi), X, Xi(Lxi+1)
   INTEGER :: i, j, ndummy, kk
-  REAL(8) :: dx
+  REAL(DP) :: dx
   !* FIRST EXECUTABLE STATEMENT  DPPVAL
   DPPVAL = 0.0D0
   IF ( K<1 ) THEN

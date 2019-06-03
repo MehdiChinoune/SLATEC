@@ -68,9 +68,9 @@ SUBROUTINE DPPSL(Ap,N,B)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER N
-  REAL(8) :: Ap(*), B(*)
+  REAL(DP) :: Ap(*), B(*)
   !
-  REAL(8) :: t
+  REAL(DP) :: t
   INTEGER k, kb, kk
   !* FIRST EXECUTABLE STATEMENT  DPPSL
   kk = 0

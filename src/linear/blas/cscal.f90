@@ -51,7 +51,7 @@ SUBROUTINE CSCAL(N,Ca,Cx,Incx)
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
-  COMPLEX Ca, Cx(*)
+  COMPLEX(SP) Ca, Cx(*)
   INTEGER i, Incx, ix, N
   !* FIRST EXECUTABLE STATEMENT  CSCAL
   IF ( N<=0 ) RETURN

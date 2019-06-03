@@ -63,9 +63,9 @@ SUBROUTINE CNBDI(Abe,Lda,N,Ml,Mu,Ipvt,Det)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER Lda, N, Ml, Mu, Ipvt(N)
-  COMPLEX Abe(Lda,2*Ml+Mu+1), Det(2)
+  COMPLEX(SP) Abe(Lda,2*Ml+Mu+1), Det(2)
   !
-  REAL ten
+  REAL(SP) ten
   INTEGER i
   !
   !* FIRST EXECUTABLE STATEMENT  CNBDI

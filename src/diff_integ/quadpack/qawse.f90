@@ -179,15 +179,16 @@ SUBROUTINE QAWSE(F,A,B,Alfa,Beta,Integr,Epsabs,Epsrel,Limit,Result,Abserr,&
   USE service, ONLY : R1MACH
   !
   INTERFACE
-    REAL FUNCTION F(X)
-      REAL :: X
+    REAL(SP) FUNCTION F(X)
+      IMPORT SP
+      REAL(SP) :: X
     END FUNCTION F
   END INTERFACE
   INTEGER :: Ier, Integr, Last, Limit, Neval, Iord(Limit)
-  REAL :: A, Abserr, Alfa, B, Beta, Epsabs, Epsrel, Result
-  REAL :: Alist(Limit), Blist(Limit), Elist(Limit), Rlist(Limit)
+  REAL(SP) :: A, Abserr, Alfa, B, Beta, Epsabs, Epsrel, Result
+  REAL(SP) :: Alist(Limit), Blist(Limit), Elist(Limit), Rlist(Limit)
   INTEGER :: iroff1, iroff2, k, maxerr, nev, nrmax
-  REAL :: area, area1, area12, area2, a1, a2, b1, b2, centre, epmach, errbnd, &
+  REAL(SP) :: area, area1, area12, area2, a1, a2, b1, b2, centre, epmach, errbnd, &
     errmax, error1, erro12, error2, errsum, resas1, resas2, rg(25), rh(25), &
     ri(25), rj(25), uflow
   !

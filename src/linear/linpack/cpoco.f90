@@ -86,11 +86,11 @@ SUBROUTINE CPOCO(A,Lda,N,Rcond,Z,Info)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER Lda, N, Info
-  COMPLEX A(Lda,*), Z(*)
-  REAL Rcond
+  COMPLEX(SP) A(Lda,*), Z(*)
+  REAL(SP) Rcond
   !
-  COMPLEX ek, t, wk, wkm
-  REAL anorm, s, sm, ynorm
+  COMPLEX(SP) ek, t, wk, wkm
+  REAL(SP) anorm, s, sm, ynorm
   INTEGER i, j, jm1, k, kb, kp1
   !
   !     FIND NORM OF A USING ONLY UPPER HALF

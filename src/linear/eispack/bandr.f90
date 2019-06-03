@@ -96,8 +96,8 @@ SUBROUTINE BANDR(Nm,N,Mb,A,D,E,E2,Matz,Z)
 
   !
   INTEGER j, k, l, N, r, i1, i2, j1, j2, kr, Mb, mr, m1, Nm, n2, r1, ugl, maxl, maxr
-  REAL A(Nm,*), D(*), E(*), E2(*), Z(Nm,*)
-  REAL g, u, b1, b2, c2, f1, f2, s2, dmin, dminrt
+  REAL(SP) A(Nm,*), D(*), E(*), E2(*), Z(Nm,*)
+  REAL(SP) g, u, b1, b2, c2, f1, f2, s2, dmin, dminrt
   LOGICAL Matz
   !
   !* FIRST EXECUTABLE STATEMENT  BANDR

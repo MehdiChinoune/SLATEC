@@ -733,46 +733,51 @@ SUBROUTINE CDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
   USE service, ONLY : XERMSG, R1MACH
   USE linear, ONLY : SCNRM2, CGBSL, CGESL, CGBFA, CGEFA
   INTERFACE
-    REAL FUNCTION G(N,T,Y,Iroot)
+    REAL(SP) FUNCTION G(N,T,Y,Iroot)
+      IMPORT SP
       INTEGER :: N, Iroot
-      REAL :: T
-      COMPLEX :: Y(N)
+      REAL(SP) :: T
+      COMPLEX(SP) :: Y(N)
     END FUNCTION G
     SUBROUTINE F(N,T,Y,Ydot)
+      IMPORT SP
       INTEGER :: N
-      REAL :: T
-      COMPLEX :: Y(:), Ydot(:)
+      REAL(SP) :: T
+      COMPLEX(SP) :: Y(:), Ydot(:)
     END SUBROUTINE F
     SUBROUTINE JACOBN(N,T,Y,Dfdy,Matdim,Ml,Mu)
+      IMPORT SP
       INTEGER :: N, Matdim, Ml, Mu
-      REAL :: T
-      COMPLEX :: Y(N), Dfdy(Matdim,N)
+      REAL(SP) :: T
+      COMPLEX(SP) :: Y(N), Dfdy(Matdim,N)
     END SUBROUTINE JACOBN
     SUBROUTINE USERS(Y,Yh,Ywt,Save1,Save2,T,H,El,Impl,N,Nde,Iflag)
+      IMPORT SP
       INTEGER :: Impl, N, Nde, iflag
-      REAL :: T, H, El
-      COMPLEX :: Y(N), Yh(N,13), Ywt(N), Save1(N), Save2(N)
+      REAL(SP) :: T, H, El
+      COMPLEX(SP) :: Y(N), Yh(N,13), Ywt(N), Save1(N), Save2(N)
     END SUBROUTINE USERS
     SUBROUTINE FA(N,T,Y,A,Matdim,Ml,Mu,Nde)
+      IMPORT SP
       INTEGER :: N, Matdim, Ml, Mu, Nde
-      REAL :: T
-      COMPLEX :: Y(N), A(:,:)
+      REAL(SP) :: T
+      COMPLEX(SP) :: Y(N), A(:,:)
     END SUBROUTINE FA
   END INTERFACE
   INTEGER :: Ierflg, Ierror, Impl, Leniw, Lenw, Mint, Miter, Ml, Mu, Mxord, &
     Mxstep, N, Nde, Nroot, Nstate, Ntask, Iwork(Leniw+N)
-  REAL :: Eps, Hmax, T, Tout, Ewt(N)
-  COMPLEX :: Work(Lenw+Leniw), Y(N+1)
+  REAL(SP) :: Eps, Hmax, T, Tout, Ewt(N)
+  COMPLEX(SP) :: Work(Lenw+Leniw), Y(N+1)
   INTEGER :: i, ia, idfdy, ifac, iflag, ignow, imxerr, info, iroot, isave1, &
     isave2, itroot, iywt, j, jstate, jtroot, lenchk, liwchk, matdim, maxord, &
     ndecom, npar, nstepl
-  REAL :: ae, avgh, avgord, big, glast, gnow, h, hold, hsign, hused, rc, re, &
+  REAL(SP) :: ae, avgh, avgord, big, glast, gnow, h, hold, hsign, hused, rc, re, &
     rmax, sizee, summ, tlast, trend, troot, uround, el(13,12), tq(3,12)
   LOGICAL :: convrg
-  COMPLEX, ALLOCATABLE :: a(:,:)
+  COMPLEX(SP), ALLOCATABLE :: a(:,:)
   CHARACTER(8) :: intgr1, intgr2
   CHARACTER(16) :: rl1, rl2
-  REAL, PARAMETER :: NROUND = 20.E0
+  REAL(SP), PARAMETER :: NROUND = 20.E0
   INTEGER, PARAMETER :: IAVGH = 1, IHUSED = 2, IAVGRD = 3, IEL = 4, IH = 160, &
     IHMAX = 161, IHOLD = 162, IHSIGN = 163, IRC = 164, IRMAX = 165, IT = 166, &
     ITOUT = 167, ITQ = 168, ITREND = 204, IMACH1 = 205, IMACH4 = 206, IYH = 251, &

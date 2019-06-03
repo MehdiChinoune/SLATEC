@@ -343,20 +343,22 @@ SUBROUTINE DNSQE(FCN,JAC,Iopt,N,X,Fvec,Tol,Nprint,Info,Wa,Lwa)
   USE service, ONLY : XERMSG
   INTERFACE
     SUBROUTINE FCN(N,X,Fvec,iflag)
+      IMPORT DP
       INTEGER :: N, Iflag
-      REAL(8) :: X(N), Fvec(N)
+      REAL(DP) :: X(N), Fvec(N)
     END SUBROUTINE FCN
     SUBROUTINE JAC(N,X,Fvec,Fjac,Ldfjac,Iflag)
+      IMPORT DP
       INTEGER :: N, Ldfjac, Iflag
-      REAL(8) :: X(N), Fvec(N),Fjac(Ldfjac,N)
+      REAL(DP) :: X(N), Fvec(N),Fjac(Ldfjac,N)
     END SUBROUTINE JAC
   END INTERFACE
   INTEGER :: Info, Iopt, Lwa, N, Nprint
-  REAL(8) :: Tol
-  REAL(8) :: Fvec(N), Wa(Lwa), X(N)
+  REAL(DP) :: Tol
+  REAL(DP) :: Fvec(N), Wa(Lwa), X(N)
   INTEGER :: indexx, j, lr, maxfev, ml, mode, mu, nfev, njev
-  REAL(8) :: epsfcn, xtol
-  REAL(8), PARAMETER :: factor = 1.0D2, one = 1.0D0, zero = 0.0D0
+  REAL(DP) :: epsfcn, xtol
+  REAL(DP), PARAMETER :: factor = 1.0D2, one = 1.0D0, zero = 0.0D0
   !     BEGIN BLOCK PERMITTING ...EXITS TO 20
   !* FIRST EXECUTABLE STATEMENT  DNSQE
   Info = 0

@@ -103,15 +103,15 @@ SUBROUTINE DSPR2(Uplo,N,Alpha,X,Incx,Y,Incy,Ap)
   !           lines were modified.  (BKS)
   USE service, ONLY : XERBLA
   !     .. Scalar Arguments ..
-  REAL(8) :: Alpha
+  REAL(DP) :: Alpha
   INTEGER Incx, Incy, N
   CHARACTER :: Uplo
   !     .. Array Arguments ..
-  REAL(8) :: Ap(*), X(*), Y(*)
+  REAL(DP) :: Ap(*), X(*), Y(*)
   !     .. Parameters ..
-  REAL(8), PARAMETER :: ZERO = 0.0D+0
+  REAL(DP), PARAMETER :: ZERO = 0.0D+0
   !     .. Local Scalars ..
-  REAL(8) :: temp1, temp2
+  REAL(DP) :: temp1, temp2
   INTEGER i, info, ix, iy, j, jx, jy, k, kk, kx, ky
   !* FIRST EXECUTABLE STATEMENT  DSPR2
   !

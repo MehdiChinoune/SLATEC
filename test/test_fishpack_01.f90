@@ -1,4 +1,5 @@
 MODULE TEST50_MOD
+  USE service, ONLY : SP, DP
   IMPLICIT NONE
 
 CONTAINS
@@ -53,9 +54,9 @@ CONTAINS
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   901010  Added PASS/FAIL message and cleaned up FORMATs.  (RWC)
     USE slatec, ONLY : BLKTRI
-    REAL am(75), an(105), bm(75), bn(105), cm(75), cn(105), deltas, deltat, &
+    REAL(SP) am(75), an(105), bm(75), bn(105), cm(75), cn(105), deltas, deltat, &
       ermax, err, hds, hdt, s(75), t(105), tds, tdt, temp1, temp2, temp3, w(1952)
-    REAL y(75,105), z
+    REAL(SP) y(75,105), z
     INTEGER i, idimy, ierror, iflg, Ipass, j, Kprint, Lun, m, mp, n, np
     !* FIRST EXECUTABLE STATEMENT  QXBLKT
     ermax = 1.E-3
@@ -232,9 +233,9 @@ CONTAINS
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   901010  Added PASS/FAIL message and cleaned up FORMATs.  (RWC)
     USE slatec, ONLY : HWSCRT
-    REAL a, b, bda(1), bdb(81), bdc(1), bdd(1), c, d, elmbda, ermax, err, &
+    REAL(SP) a, b, bda(1), bdb(81), bdc(1), bdd(1), c, d, elmbda, ermax, err, &
       f(45,82), pertrb, piby2, pisq, w(1200), x(41)
-    REAL y(81), z
+    REAL(SP) y(81), z
     INTEGER i, idimf, ierror, Ipass, j, Kprint, Lun, m, mbdcnd, mp1, &
       n, nbdcnd, np1
     REAL, PARAMETER :: pi = 3.14159265358979
@@ -380,9 +381,9 @@ CONTAINS
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   901010  Added PASS/FAIL message and cleaned up FORMATs.  (RWC)
     USE slatec, ONLY : HWSCSP
-    REAL bdrf(1), bdrs(1), bdtf(33), bdts(1), ci4, dphi, dr, dtheta, elmbda, &
+    REAL(SP) bdrf(1), bdrs(1), bdtf(33), bdts(1), ci4, dphi, dr, dtheta, elmbda, &
       ermax, err, f(48,33), pertrb, r(33), rf, rs, si
-    REAL tf, theta(48), ts, w(1200), z
+    REAL(SP) tf, theta(48), ts, w(1200), z
     INTEGER i, idimf, ierror, intl, Ipass, j, Kprint, Lun, m, &
       mbdcnd, mp1, n, nbdcnd, np1
     REAL, PARAMETER :: pi = 3.14159265358979
@@ -605,7 +606,7 @@ CONTAINS
     !   901010  Added PASS/FAIL message and cleaned up FORMATs.  (RWC)
     !   930415  Test modified to use a 64 by 128 grid.  (WRB)
     USE slatec, ONLY : HWSCYL
-    REAL a, b, bda(129), bdb(129), bdc(65), bdd(65), c, d, elmbda, ermax, err, &
+    REAL(SP) a, b, bda(129), bdb(129), bdc(65), bdd(65), c, d, elmbda, ermax, err, &
       f(65,129), pertrb, r(65), w(1400), x, z(129)
     INTEGER i, idimf, ierror, Ipass, j, Kprint, Lun, m, mbdcnd, mp1, n, nbdcnd, np1
     !* FIRST EXECUTABLE STATEMENT  QXCYL
@@ -756,7 +757,7 @@ CONTAINS
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   901010  Added PASS/FAIL message and cleaned up FORMATs.  (RWC)
     USE slatec, ONLY : GENBUN
-    REAL a(20), b(20), c(20), deltax, deltay, dysq, ermax, err, f(25,130), &
+    REAL(SP) a(20), b(20), c(20), deltax, deltay, dysq, ermax, err, f(25,130), &
       s, t, w(1200), x(20), y(120), z
     INTEGER i, idimy, ierror, Ipass, j, Kprint, Lun, m, mm1, mperod, n, nperod
     REAL, PARAMETER :: pi = 3.14159265358979
@@ -926,7 +927,7 @@ CONTAINS
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   901010  Added PASS/FAIL message and cleaned up FORMATs.  (RWC)
     USE slatec, ONLY : HWSPLR
-    REAL a, b, bda(1), bdb(1), bdc(51), bdd(51), c, d, elmbda, ermax, err, &
+    REAL(SP) a, b, bda(1), bdb(1), bdc(51), bdd(51), c, d, elmbda, ermax, err, &
       f(100,50), pertrb, r(51), theta(49), w(1200), z
     INTEGER i, idimf, ierror, Ipass, j, Kprint, Lun, m, mbdcnd, mp1, &
       n, nbdcnd, np1
@@ -1073,9 +1074,9 @@ CONTAINS
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   901010  Added PASS/FAIL message and cleaned up FORMATs.  (RWC)
     USE slatec, ONLY : HWSSSP
-    REAL bdpf(1), bdps(1), bdtf(73), bdts(1), dphi, dtheta, elmbda, ermax, &
+    REAL(SP) bdpf(1), bdps(1), bdtf(73), bdts(1), dphi, dtheta, elmbda, ermax, &
       err, f(19,73), pertrb, pf, ps, sinp(73), sint(19), tf, ts
-    REAL w(1200), z
+    REAL(SP) w(1200), z
     INTEGER i, idimf, ierror, Ipass, j, Kprint, Lun, m, mbdcnd, mp1, n, nbdcnd, np1
     REAL, PARAMETER :: pi = 3.14159265358979
     !* FIRST EXECUTABLE STATEMENT  QXSSP

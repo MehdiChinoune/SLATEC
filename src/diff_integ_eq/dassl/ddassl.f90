@@ -936,21 +936,23 @@ SUBROUTINE DDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
   !     Declare arguments.
   INTERFACE
     SUBROUTINE RES(T,Y,Yprime,Delta,Ires)
+      IMPORT DP
       INTEGER :: Ires
-      REAL(8) :: T, Y(:), Yprime(:), Delta(:)
+      REAL(DP) :: T, Y(:), Yprime(:), Delta(:)
     END SUBROUTINE
     SUBROUTINE JAC(T,Y,Yprime,Pd,Cj)
-      REAL(8) :: T, Cj, Pd(:,:), Y(:), Yprime(:)
+      IMPORT DP
+      REAL(DP) :: T, Cj, Pd(:,:), Y(:), Yprime(:)
     END SUBROUTINE
   END INTERFACE
   INTEGER :: Neq, Idid, Lrw, Liw
   INTEGER :: Info(15), Iwork(Liw)
-  REAL(8) :: T, Y(Neq), Yprime(Neq), Tout, Rtol(:), Atol(:), Rwork(Lrw)
+  REAL(DP) :: T, Y(Neq), Yprime(Neq), Tout, Rtol(:), Atol(:), Rwork(Lrw)
   !
   !     Declare local variables.
   INTEGER :: i, itemp, leniw, lenpd, lenrw, le, lpd, lphi, lwm, lwt, mband, &
     msave, mxord, ntemp, nzflg
-  REAL(8) :: atoli, h, hmax, hmin, ho, r, rh, rtoli, tdist, &
+  REAL(DP) :: atoli, h, hmax, hmin, ho, r, rh, rtoli, tdist, &
     tn, tnext, tstop, uround, ypnorm
   LOGICAL :: done
   !       Auxiliary variables for conversion of values to be included in
@@ -961,7 +963,7 @@ SUBROUTINE DDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
   !     SET POINTERS INTO IWORK
   INTEGER, PARAMETER :: LML = 1, LMU = 2, LMXORD = 3, LMTYPE = 4, LNST = 11, &
     LNRE = 12, LNJE = 13, LNPD = 16, LJCALC = 5, LPHASE = 6, LK = 7, LKOLD = 8, &
-    LNS = 9, LNSTL = 10, LIWM = 1
+    LNS = 9, LNSTL = 10
   !
   !     SET RELATIVE OFFSET INTO RWORK
   INTEGER, PARAMETER :: NPD = 1

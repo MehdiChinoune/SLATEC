@@ -114,21 +114,22 @@ SUBROUTINE QC25F(F,A,B,Omega,Integr,Nrmom,Maxp1,Ksave,Result,Abserr,Neval,&
   USE linear, ONLY : SGTSL
   !
   INTERFACE
-    REAL FUNCTION F(X)
-      REAL :: X
+    REAL(SP) FUNCTION F(X)
+      IMPORT SP
+      REAL(SP) :: X
     END FUNCTION F
   END INTERFACE
   INTEGER :: Integr, Ksave, Maxp1, Momcom, Neval, Nrmom
-  REAL :: A, Abserr, B, Chebmo(Maxp1,25), Omega, Resabs, Resasc, Result
+  REAL(SP) :: A, Abserr, B, Chebmo(Maxp1,25), Omega, Resabs, Resasc, Result
   INTEGER :: i, iers, isym, j, k, m, noequ, noeq1
-  REAL :: ac, an, an2, as, asap, ass, centr, cheb12(13), cheb24(25), conc, &
+  REAL(SP) :: ac, an, an2, as, asap, ass, centr, cheb12(13), cheb24(25), conc, &
     cons, cospar, d(25), d1(25), d2(25), estc, ests, fval(25), hlgth, oflow, &
     parint, par2, par22, p2, p3, p4, resc12, resc24, ress12, ress24, sinpar, v(28)
   !
   !           THE VECTOR X CONTAINS THE VALUES COS(K*PI/24)
   !           K = 1, ...,11, TO BE USED FOR THE CHEBYSHEV EXPANSION OF F
   !
-  REAL, PARAMETER :: x(11) = [ 0.9914448613738104E+00, 0.9659258262890683E+00, &
+  REAL(SP), PARAMETER :: x(11) = [ 0.9914448613738104E+00, 0.9659258262890683E+00, &
     0.9238795325112868E+00, 0.8660254037844386E+00, 0.7933533402912352E+00, &
     0.7071067811865475E+00, 0.6087614290087206E+00, 0.5000000000000000E+00, &
     0.3826834323650898E+00, 0.2588190451025208E+00, 0.1305261922200516E+00 ]

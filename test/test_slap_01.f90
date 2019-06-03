@@ -1,4 +1,5 @@
 MODULE TEST25_MOD
+  USE service, ONLY : SP, DP
   IMPLICIT NONE
 
 CONTAINS
@@ -102,11 +103,11 @@ CONTAINS
     !     .. Scalar Arguments ..
     INTEGER Ipass, Kprint, Lun
     !     .. Local Scalars ..
-    REAL dens, err, factor, tol
+    REAL(SP) dens, err, factor, tol
     INTEGER ierr, isym, iter, itmax, itol, itolgm, iunit, k, kase, &
       leniw, lenw, n, nelt, neltmx, nfail, nmax, nsave
     !     .. Local Arrays ..
-    REAL a(MXNELT), f(MAXN), rwork(MAXRW), xiter(MAXN)
+    REAL(SP) a(MXNELT), f(MAXN), rwork(MAXRW), xiter(MAXN)
     INTEGER ia(MXNELT), iwork(MAXIW), ja(MXNELT)
     !     .. Intrinsic Functions ..
     INTRINSIC MAX, REAL
@@ -466,13 +467,13 @@ CONTAINS
     USE slatec, ONLY : RAND
     USE common_mod, ONLY : ISMPL
     !     .. Scalar Arguments ..
-    REAL Factor
+    REAL(SP) Factor
     INTEGER Ierr, Isym, N, Nelt, Neltmx
     !     .. Array Arguments ..
-    REAL A(Neltmx), Dsum(N), F(N), Soln(N)
+    REAL(SP) A(Neltmx), Dsum(N), F(N), Soln(N)
     INTEGER Ia(Neltmx), Idiag(N), Itmp(N), Ja(Neltmx)
     !     .. Local Scalars ..
-    REAL dummy
+    REAL(SP) dummy
     INTEGER i, icol, inum, irow, iseed, k, nl
     !     .. Intrinsic Functions ..
     INTRINSIC INT
@@ -616,10 +617,10 @@ CONTAINS
     !   920511  Added complete declaration section.  (WRB)
 
     !     .. Scalar Arguments ..
-    REAL Val
+    REAL(SP) Val
     INTEGER N
     !     .. Array Arguments ..
-    REAL V(N)
+    REAL(SP) V(N)
     !     .. Local Scalars ..
     INTEGER i, is, nr
     !     .. Intrinsic Functions ..
@@ -679,7 +680,7 @@ CONTAINS
     !   921021  Added 1P's to output formats.  (FNF)
 
     !     .. Scalar Arguments ..
-    REAL Err
+    REAL(SP) Err
     INTEGER Ierr, Iout, Istdo, Iter, Nfail
     CHARACTER Method*6
     !* FIRST EXECUTABLE STATEMENT  OUTERR

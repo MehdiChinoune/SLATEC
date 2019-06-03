@@ -78,8 +78,8 @@ SUBROUTINE CORTH(Nm,N,Low,Igh,Ar,Ai,Ortr,Orti)
 
   !
   INTEGER i, j, m, N, ii, jj, la, mp, Nm, Igh, kp1, Low
-  REAL Ar(Nm,*), Ai(Nm,*), Ortr(*), Orti(*)
-  REAL f, g, h, fi, fr, scalee
+  REAL(SP) Ar(Nm,*), Ai(Nm,*), Ortr(*), Orti(*)
+  REAL(SP) f, g, h, fi, fr, scalee
   !
   !* FIRST EXECUTABLE STATEMENT  CORTH
   la = Igh - 1

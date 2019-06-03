@@ -38,23 +38,25 @@ SUBROUTINE DLSOD(DF,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,&
   !
   INTERFACE
     SUBROUTINE DF(X,U,Uprime)
-      REAL(8) :: X
-      REAL(8) :: U(:), Uprime(:)
+      IMPORT DP
+      REAL(DP) :: X
+      REAL(DP) :: U(:), Uprime(:)
     END SUBROUTINE DF
     SUBROUTINE DJAC(X,U,Pd,Nrowpd)
+      IMPORT DP
       INTEGER :: Nrowpd
-      REAL(8) :: X
-      REAL(8) :: U(:), Pd(:,:)
+      REAL(DP) :: X
+      REAL(DP) :: U(:), Pd(:,:)
     END SUBROUTINE DJAC
   END INTERFACE
   INTEGER :: Idid, Neq
   INTEGER :: Iwm(:)
-  REAL(8) :: Delsgn, T, Tolfac, Tout, Tstop
-  REAL(8) :: Acor(Neq), Atol(:), Ewt(Neq), Rtol(:), Savf(Neq), Wm(:), Y(Neq), &
+  REAL(DP) :: Delsgn, T, Tolfac, Tout, Tstop
+  REAL(DP) :: Acor(Neq), Atol(:), Ewt(Neq), Rtol(:), Savf(Neq), Wm(:), Y(Neq), &
     Yh(Neq,6), Yh1(6*Neq), Ypout(Neq)
   LOGICAL :: Intout
   INTEGER :: intflg, k, l, ltol, natolp, nrtolp
-  REAL(8) :: absdel, big, del, dt, ha, tol
+  REAL(DP) :: absdel, big, del, dt, ha, tol
 
   CHARACTER(8) :: xern1
   CHARACTER(16) :: xern3, xern4

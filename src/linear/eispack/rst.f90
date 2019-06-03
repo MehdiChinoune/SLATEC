@@ -80,7 +80,7 @@ SUBROUTINE RST(Nm,N,W,E,Matz,Z,Ierr)
 
   !
   INTEGER i, j, N, Nm, Ierr, Matz
-  REAL W(*), E(*), Z(Nm,*)
+  REAL(SP) W(*), E(*), Z(Nm,*)
   !
   !* FIRST EXECUTABLE STATEMENT  RST
   IF ( N>Nm ) THEN

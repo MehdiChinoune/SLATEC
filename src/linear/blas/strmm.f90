@@ -136,17 +136,17 @@ SUBROUTINE STRMM(Side,Uplo,Transa,Diag,M,N,Alpha,A,Lda,B,Ldb)
   !     .. Scalar Arguments ..
   CHARACTER :: Side, Uplo, Transa, Diag
   INTEGER M, N, Lda, Ldb
-  REAL Alpha
+  REAL(SP) Alpha
   !     .. Array Arguments ..
-  REAL A(Lda,*), B(Ldb,*)
+  REAL(SP) A(Lda,*), B(Ldb,*)
   !     .. Intrinsic Functions ..
   INTRINSIC MAX
   !     .. Local Scalars ..
   LOGICAL lside, nounit, upper
   INTEGER i, info, j, k, nrowa
-  REAL temp
+  REAL(SP) temp
   !     .. Parameters ..
-  REAL, PARAMETER :: ONE = 1.0E+0, ZERO = 0.0E+0
+  REAL(SP), PARAMETER :: ONE = 1.0E+0, ZERO = 0.0E+0
   !* FIRST EXECUTABLE STATEMENT  STRMM
   !
   !     Test the input parameters.

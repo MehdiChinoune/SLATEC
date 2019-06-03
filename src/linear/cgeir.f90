@@ -117,9 +117,9 @@ SUBROUTINE CGEIR(A,Lda,N,V,Itask,Ind,Work,Iwork)
   USE service, ONLY : R1MACH, XERMSG
   !
   INTEGER :: Lda, N, Itask, Ind, Iwork(N)
-  COMPLEX :: A(Lda,N), V(N), Work(N,N+1)
+  COMPLEX(SP) :: A(Lda,N), V(N), Work(N,N+1)
   INTEGER :: info, j
-  REAL :: xnorm, dnorm
+  REAL(SP) :: xnorm, dnorm
   CHARACTER(8) :: xern1, xern2
   !* FIRST EXECUTABLE STATEMENT  CGEIR
   IF ( Lda<N ) THEN

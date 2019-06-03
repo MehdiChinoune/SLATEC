@@ -33,7 +33,7 @@ SUBROUTINE DREADP(Ipage,List,Rlist,Lpage,Irec)
   USE service, ONLY : XERMSG
   INTEGER :: Ipage, Irec, Lpage
   INTEGER :: List(Lpage)
-  REAL(8) :: Rlist(Lpage)
+  REAL(DP) :: Rlist(Lpage)
   INTEGER :: i, ipagef, irecn, lpg
   CHARACTER(8) :: xern1, xern2
   !* FIRST EXECUTABLE STATEMENT  DREADP

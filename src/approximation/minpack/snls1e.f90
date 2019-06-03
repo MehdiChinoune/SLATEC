@@ -511,17 +511,18 @@ SUBROUTINE SNLS1E(FCN,Iopt,M,N,X,Fvec,Tol,Nprint,Info,Iw,Wa,Lwa)
   USE service, ONLY : XERMSG
   INTERFACE
     SUBROUTINE FCN(Iflag,M,N,X,Fvec,Fjac,Ldfjac)
+      IMPORT SP
       INTEGER :: Ldfjac, M, N, Iflag
-      REAL :: X(N), Fvec(M), Fjac(:,:)
+      REAL(SP) :: X(N), Fvec(M), Fjac(:,:)
     END SUBROUTINE FCN
   END INTERFACE
   INTEGER :: M, N, Nprint, Info, Lwa, Iopt
   INTEGER :: Iw(N)
-  REAL :: Tol
-  REAL :: X(N), Fvec(M), Wa(Lwa)
+  REAL(SP) :: Tol
+  REAL(SP) :: X(N), Fvec(M), Wa(Lwa)
   INTEGER :: indexx, maxfev, mode, nfev, njev
-  REAL :: ftol, gtol, xtol, epsfcn
-  REAL, PARAMETER :: factor = 1.0E2, zero = 0.0E0
+  REAL(SP) :: ftol, gtol, xtol, epsfcn
+  REAL(SP), PARAMETER :: factor = 1.0E2, zero = 0.0E0
   !* FIRST EXECUTABLE STATEMENT  SNLS1E
   Info = 0
   !

@@ -328,10 +328,10 @@ SUBROUTINE HSTPLR(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER :: Idimf, Ierror, M, Mbdcnd, N, Nbdcnd
-  REAL :: A, B, C, D, Elmbda, Pertrb
-  REAL :: Bda(N+1), Bdb(N+1), Bdc(M+1), Bdd(M+1), F(Idimf,N+1), W(:)
+  REAL(SP) :: A, B, C, D, Elmbda, Pertrb
+  REAL(SP) :: Bda(N+1), Bdb(N+1), Bdc(M+1), Bdd(M+1), F(Idimf,N+1), W(:)
   INTEGER :: i, ierr1, isw, iwb, iwc, iwr, j, k, lp, mb, np
-  REAL :: a1, a2, deltar, deltht, dlrsq, dlthsq
+  REAL(SP) :: a1, a2, deltar, deltht, dlrsq, dlthsq
   !* FIRST EXECUTABLE STATEMENT  HSTPLR
   Ierror = 0
   IF ( A<0. ) Ierror = 1

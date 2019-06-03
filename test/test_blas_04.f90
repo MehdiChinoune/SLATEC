@@ -1,9 +1,10 @@
 MODULE TEST20_MOD
+  USE service, ONLY : SP, DP
   IMPLICIT NONE
 
 CONTAINS
   !** CBEG
-  COMPLEX FUNCTION CBEG(Reset)
+  COMPLEX(SP) FUNCTION CBEG(Reset)
     !>
     !  Generate random numbers.
     !***
@@ -103,21 +104,21 @@ CONTAINS
     USE slatec, ONLY : R1MACH, XERCLR
     !     .. Parameters ..
     INTEGER, PARAMETER :: NSUBS = 17
-    COMPLEX, PARAMETER :: ZERO = (0.0,0.0), ONE = (1.0,0.0)
+    COMPLEX(SP), PARAMETER :: ZERO = (0.0,0.0), ONE = (1.0,0.0)
     REAL, PARAMETER :: RZERO = 0.0
     INTEGER, PARAMETER :: NMAX = 65, INCMAX = 2
     !     .. Scalar Arguments ..
     INTEGER Ipass, Kprint
     !     .. Local Scalars ..
-    REAL eps, err, thresh
+    REAL(SP) eps, err, thresh
     INTEGER i, isnum, j, n, Nout
     INTEGER, PARAMETER :: NIDIM = 6, NKB = 4, NINC = 4, NALF = 3, NBET = 3
     LOGICAL same, tsterr, ftl, ftl1, ftl2
     CHARACTER :: trans
     !     .. Local Arrays ..
-    COMPLEX a(NMAX,NMAX), aa(NMAX*NMAX), as(NMAX*NMAX), x(NMAX), xs(NMAX*INCMAX), &
+    COMPLEX(SP) a(NMAX,NMAX), aa(NMAX*NMAX), as(NMAX*NMAX), x(NMAX), xs(NMAX*INCMAX), &
       xx(NMAX*INCMAX), y(NMAX), ys(NMAX*INCMAX), yt(NMAX), yy(NMAX*INCMAX), z(2*NMAX)
-    REAL g(NMAX)
+    REAL(SP) g(NMAX)
     LOGICAL ltest(NSUBS)
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, MAX, MIN
@@ -128,8 +129,8 @@ CONTAINS
     INTEGER, PARAMETER :: idimm(NIDIM) = [ 0, 1, 2, 3, 5, 9 ]
     INTEGER, PARAMETER :: kb(NKB) = [ 0, 1, 2, 4 ]
     INTEGER, PARAMETER :: inc(NINC) = [ 1, 2, -1, -2 ]
-    COMPLEX, PARAMETER :: alf(NALF) = [ (0.0,0.0), (1.0,0.0), (0.7,-0.9) ]
-    COMPLEX, PARAMETER :: bet(NBET) = [ (0.0,0.0), (1.0,0.0), (1.3,-1.1) ]
+    COMPLEX(SP), PARAMETER :: alf(NALF) = [ (0.0,0.0), (1.0,0.0), (0.7,-0.9) ]
+    COMPLEX(SP), PARAMETER :: bet(NBET) = [ (0.0,0.0), (1.0,0.0), (1.3,-1.1) ]
     !* FIRST EXECUTABLE STATEMENT  CBLAT2
     !
     !     Set the flag that indicates whether error exits are to be tested.
@@ -304,21 +305,21 @@ CONTAINS
     USE slatec, ONLY : R1MACH, XERCLR
     !     .. Parameters ..
     INTEGER, PARAMETER :: NSUBS = 9
-    COMPLEX, PARAMETER :: ZERO = (0.0,0.0), ONE = (1.0,0.0)
+    COMPLEX(SP), PARAMETER :: ZERO = (0.0,0.0), ONE = (1.0,0.0)
     REAL, PARAMETER :: RZERO = 0.0
     INTEGER, PARAMETER :: NMAX = 65
     !     .. Scalar Arguments ..
     INTEGER Ipass, Kprint
     !     .. Local Scalars ..
-    REAL eps, err, thresh
+    REAL(SP) eps, err, thresh
     INTEGER i, isnum, j, n, Nout
     INTEGER, PARAMETER :: NIDIM = 6, NALF = 3, NBET = 3
     LOGICAL same, tsterr, ftl, ftl1, ftl2
     CHARACTER :: transa, transb
     !     .. Local Arrays ..
-    COMPLEX aa(NMAX*NMAX), ab(NMAX,2*NMAX), as(NMAX*NMAX), bb(NMAX*NMAX), &
+    COMPLEX(SP) aa(NMAX*NMAX), ab(NMAX,2*NMAX), as(NMAX*NMAX), bb(NMAX*NMAX), &
       bs(NMAX*NMAX), c(NMAX,NMAX), cc(NMAX*NMAX), cs(NMAX*NMAX), ct(NMAX), w(2*NMAX)
-    REAL g(NMAX)
+    REAL(SP) g(NMAX)
     LOGICAL ltest(NSUBS)
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, MAX, MIN
@@ -326,8 +327,8 @@ CONTAINS
     CHARACTER(6), PARAMETER :: snames(NSUBS) = [ 'CGEMM ', 'CHEMM ', 'CSYMM ', &
       'CTRMM ', 'CTRSM ', 'CHERK ', 'CSYRK ', 'CHER2K', 'CSYR2K' ]
     INTEGER, PARAMETER :: idimm(NIDIM) = [ 0, 1, 2, 3, 5, 9 ]
-    COMPLEX, PARAMETER :: alf(NALF) = [ (0.0,0.0), (1.0,0.0), (0.7,-0.9) ]
-    COMPLEX, PARAMETER :: bet(NBET) = [ (0.0,0.0), (1.0,0.0), (1.3,-1.1) ]
+    COMPLEX(SP), PARAMETER :: alf(NALF) = [ (0.0,0.0), (1.0,0.0), (0.7,-0.9) ]
+    COMPLEX(SP), PARAMETER :: bet(NBET) = [ (0.0,0.0), (1.0,0.0), (1.3,-1.1) ]
     !* FIRST EXECUTABLE STATEMENT  CBLAT3
     !
     !     Set the flag that indicates whether error exits are to be tested.
@@ -512,18 +513,18 @@ CONTAINS
     !   910620  Modified to meet SLATEC code and prologue standards.  (BKS)
 
     !     .. Parameters ..
-    COMPLEX, PARAMETER :: ZERO = (0.0,0.0), ONE = (1.0,0.0)
-    COMPLEX, PARAMETER :: ROGUE=(-1.0E10,1.0E10)
+    COMPLEX(SP), PARAMETER :: ZERO = (0.0,0.0), ONE = (1.0,0.0)
+    COMPLEX(SP), PARAMETER :: ROGUE=(-1.0E10,1.0E10)
     REAL, PARAMETER :: RZERO = 0.0
     REAL, PARAMETER :: RROGUE = -1.0E10
     !     .. Scalar Arguments ..
-    COMPLEX Transl
+    COMPLEX(SP) Transl
     INTEGER Kl, Ku, Lda, M, N, Nmax
     LOGICAL Reset
     CHARACTER :: Diag, Uplo
     CHARACTER(2) :: Type
     !     .. Array Arguments ..
-    COMPLEX A(Nmax,*), Aa(*)
+    COMPLEX(SP) A(Nmax,*), Aa(*)
     !     .. Local Scalars ..
     INTEGER i, i1, i2, i3, ibeg, iend, ioff, j, jj, kk
     LOGICAL gen, lower, sym, tri, unit, upper
@@ -704,18 +705,18 @@ CONTAINS
     !   910620  Modified to meet SLATEC code and prologue standards.  (BKS)
 
     !     .. Parameters ..
-    COMPLEX, PARAMETER :: ZERO = (0.0,0.0), ONE = (1.0,0.0)
-    COMPLEX, PARAMETER :: ROGUE = (-1.0E10,1.0E10)
+    COMPLEX(SP), PARAMETER :: ZERO = (0.0,0.0), ONE = (1.0,0.0)
+    COMPLEX(SP), PARAMETER :: ROGUE = (-1.0E10,1.0E10)
     REAL, PARAMETER :: RZERO = 0.0
     REAL, PARAMETER :: RROGUE = -1.0E10
     !     .. Scalar Arguments ..
-    COMPLEX Transl
+    COMPLEX(SP) Transl
     INTEGER Lda, M, N, Nmax
     LOGICAL Reset
     CHARACTER :: Diag, Uplo
     CHARACTER(2) :: Type
     !     .. Array Arguments ..
-    COMPLEX A(Nmax,*), Aa(*)
+    COMPLEX(SP) A(Nmax,*), Aa(*)
     !     .. Local Scalars ..
     INTEGER i, ibeg, iend, j, jj
     LOGICAL gen, lower, sym, tri, unit, upper, her
@@ -829,20 +830,20 @@ CONTAINS
     !   910620  Modified to meet SLATEC code and prologue standards.  (BKS)
     USE slatec, ONLY : CABS1
     !     .. Parameters ..
-    COMPLEX, PARAMETER :: ZERO = (0.0,0.0)
+    COMPLEX(SP), PARAMETER :: ZERO = (0.0,0.0)
     REAL, PARAMETER :: RZERO = 0.0, RONE = 1.0
     !     .. Scalar Arguments ..
     LOGICAL Ftl
-    COMPLEX Alpha, Beta
-    REAL Eps, Err
+    COMPLEX(SP) Alpha, Beta
+    REAL(SP) Eps, Err
     INTEGER Kk, Kprint, Lda, Ldb, Ldc, Ldcc, M, N, Nout
     LOGICAL Mv
     CHARACTER :: Transa, Transb
     !     .. Array Arguments ..
-    COMPLEX A(Lda,*), B(Ldb,*), C(Ldc,*), Cc(Ldcc,*), Ct(*)
-    REAL G(*)
+    COMPLEX(SP) A(Lda,*), B(Ldb,*), C(Ldc,*), Cc(Ldcc,*), Ct(*)
+    REAL(SP) G(*)
     !     .. Local Scalars ..
-    REAL erri
+    REAL(SP) erri
     INTEGER i, j, k
     LOGICAL ctrana, ctranb, trana, tranb
     !     .. Intrinsic Functions ..
@@ -998,19 +999,19 @@ CONTAINS
     !   910620  Modified to meet SLATEC code and prologue standards.  (BKS)
     USE slatec, ONLY : CABS1
     !     .. Parameters ..
-    COMPLEX, PARAMETER :: ZERO = (0.0,0.0)
+    COMPLEX(SP), PARAMETER :: ZERO = (0.0,0.0)
     REAL, PARAMETER :: RZERO = 0.0, RONE = 1.0
     !     .. Scalar Arguments ..
-    COMPLEX Alpha, Beta
-    REAL Eps, Err
+    COMPLEX(SP) Alpha, Beta
+    REAL(SP) Eps, Err
     INTEGER Incx, Incy, Kprint, M, N, Nmax, Nout
     LOGICAL Mv, Ftl
     CHARACTER :: Trans
     !     .. Array Arguments ..
-    COMPLEX A(Nmax,*), X(*), Y(*), Yt(*), Yy(*)
-    REAL G(*)
+    COMPLEX(SP) A(Nmax,*), X(*), Y(*), Yt(*), Yy(*)
+    REAL(SP) G(*)
     !     .. Local Scalars ..
-    REAL erri
+    REAL(SP) erri
     INTEGER i, incxl, incyl, iy, j, jx, k, kx, ky, ml, nl
     LOGICAL ctran, tran
     !     .. Intrinsic Functions ..
@@ -1131,7 +1132,7 @@ CONTAINS
     !     .. Scalar Arguments ..
     INTEGER Lr
     !     .. Array Arguments ..
-    COMPLEX Ri(*), Rj(*)
+    COMPLEX(SP) Ri(*), Rj(*)
     !     .. Local Scalars ..
     INTEGER i
     !* FIRST EXECUTABLE STATEMENT  LCE
@@ -1177,7 +1178,7 @@ CONTAINS
     CHARACTER :: Uplo
     CHARACTER(2) :: Type
     !     .. Array Arguments ..
-    COMPLEX Aa(Lda,*), As(Lda,*)
+    COMPLEX(SP) Aa(Lda,*), As(Lda,*)
     !     .. Local Scalars ..
     INTEGER i, ibeg, iend, j
     LOGICAL upper
@@ -1243,22 +1244,22 @@ CONTAINS
     !   910619  Modified to meet SLATEC code and prologue standards.  (BKS)
     USE slatec, ONLY : CGBMV, CGEMV, NUMXER
     !     .. Parameters ..
-    COMPLEX, PARAMETER :: ZERO = (0.0,0.0), HALF = (0.5,0.0)
+    COMPLEX(SP), PARAMETER :: ZERO = (0.0,0.0), HALF = (0.5,0.0)
     REAL, PARAMETER :: RZERO = 0.0
     !     .. Scalar Arguments ..
     LOGICAL Fatal
-    REAL Eps, Thresh
+    REAL(SP) Eps, Thresh
     INTEGER Incmax, Kprint, Nalf, Nbet, Nidim, Ninc, Nkb, Nmax, Nout
     CHARACTER(6) :: Sname
     !     .. Array Arguments ..
-    COMPLEX A(Nmax,Nmax), Aa(Nmax*Nmax), Alf(Nalf), As(Nmax*Nmax), &
+    COMPLEX(SP) A(Nmax,Nmax), Aa(Nmax*Nmax), Alf(Nalf), As(Nmax*Nmax), &
       Bet(Nbet), X(Nmax), Xs(Nmax*Incmax), Xx(Nmax*Incmax), Y(Nmax), &
       Ys(Nmax*Incmax), Yt(Nmax), Yy(Nmax*Incmax)
-    REAL G(Nmax)
+    REAL(SP) G(Nmax)
     INTEGER Idimm(Nidim), Inc(Ninc), Kb(Nkb)
     !     .. Local Scalars ..
-    COMPLEX alpha, als, beta, bls, transl
-    REAL err, errmax
+    COMPLEX(SP) alpha, als, beta, bls, transl
+    REAL(SP) err, errmax
     INTEGER i, ia, ib, ic, iku, im, in, incx, incxs, incy, incys, &
       ix, iy, kl, kls, ku, kus, laa, lda, ldas, lx, ly, m, &
       ml, ms, n, nargs, nc, nd, nk, nerr, nl, ns
@@ -1549,22 +1550,22 @@ CONTAINS
     !   910619  Modified to meet SLATEC code and prologue standards.  (BKS)
     USE slatec, ONLY : CGEMM, NUMXER
     !     .. Parameters ..
-    COMPLEX, PARAMETER :: ZERO = (0.0,0.0)
+    COMPLEX(SP), PARAMETER :: ZERO = (0.0,0.0)
     REAL, PARAMETER :: RZERO = 0.0
     !     .. Scalar Arguments ..
     LOGICAL Fatal
-    REAL Eps, Thresh
+    REAL(SP) Eps, Thresh
     INTEGER Kprint, Nalf, Nbet, Nidim, Nmax, Nout
     CHARACTER(6) :: Sname
     !     .. Array Arguments ..
-    COMPLEX A(Nmax,Nmax), Aa(Nmax*Nmax), Alf(Nalf), As(Nmax*Nmax), &
+    COMPLEX(SP) A(Nmax,Nmax), Aa(Nmax*Nmax), Alf(Nalf), As(Nmax*Nmax), &
       B(Nmax,Nmax), Bb(Nmax*Nmax), Bet(Nbet), Bs(Nmax*Nmax), &
       C(Nmax,Nmax), Cc(Nmax*Nmax), Cs(Nmax*Nmax), Ct(Nmax)
-    REAL G(Nmax)
+    REAL(SP) G(Nmax)
     INTEGER Idimm(Nidim)
     !     .. Local Scalars ..
-    COMPLEX alpha, als, beta, bls
-    REAL err, errmax
+    COMPLEX(SP) alpha, als, beta, bls
+    REAL(SP) err, errmax
     INTEGER i, ia, ib, ica, icb, ik, im, in, k, ks, laa, lbb, &
       lcc, lda, ldas, ldb, ldbs, ldc, ldcs, m, ma, mb, ms, &
       n, na, nargs, nb, nc, nerr, ns
@@ -1808,22 +1809,22 @@ CONTAINS
     !   910619  Modified to meet SLATEC code and prologue standards.  (BKS)
     USE slatec, ONLY : CHBMV, CHEMV, CHPMV, NUMXER
     !     .. Parameters ..
-    COMPLEX, PARAMETER :: ZERO = (0.0,0.0), HALF = (0.5,0.0)
+    COMPLEX(SP), PARAMETER :: ZERO = (0.0,0.0), HALF = (0.5,0.0)
     REAL, PARAMETER :: RZERO = 0.0
     !     .. Scalar Arguments ..
     LOGICAL Fatal
-    REAL Eps, Thresh
+    REAL(SP) Eps, Thresh
     INTEGER Incmax, Kprint, Nalf, Nbet, Nidim, Ninc, Nkb, Nmax, Nout
     CHARACTER(6) :: Sname
     !     .. Array Arguments ..
-    COMPLEX A(Nmax,Nmax), Aa(Nmax*Nmax), Alf(Nalf), As(Nmax*Nmax), &
+    COMPLEX(SP) A(Nmax,Nmax), Aa(Nmax*Nmax), Alf(Nalf), As(Nmax*Nmax), &
       Bet(Nbet), X(Nmax), Xs(Nmax*Incmax), Xx(Nmax*Incmax), Y(Nmax), &
       Ys(Nmax*Incmax), Yt(Nmax), Yy(Nmax*Incmax)
-    REAL G(Nmax)
+    REAL(SP) G(Nmax)
     INTEGER Idimm(Nidim), Inc(Ninc), Kb(Nkb)
     !     .. Local Scalars ..
-    COMPLEX alpha, als, beta, bls, transl
-    REAL err, errmax
+    COMPLEX(SP) alpha, als, beta, bls, transl
+    REAL(SP) err, errmax
     INTEGER i, ia, ib, ic, ik, in, incx, incxs, incy, incys, ix, &
       iy, k, ks, laa, lda, ldas, lx, ly, n, nargs, nc, nerr, nk, ns
     LOGICAL banded, ftl, full, nul, packed, reset
@@ -2113,22 +2114,22 @@ CONTAINS
     !   910619  Modified to meet SLATEC code and prologue standards.  (BKS)
     USE slatec, ONLY : CHEMM, CSYMM, NUMXER
     !     .. Parameters ..
-    COMPLEX, PARAMETER :: ZERO = (0.0,0.0)
+    COMPLEX(SP), PARAMETER :: ZERO = (0.0,0.0)
     REAL, PARAMETER :: RZERO = 0.0
     !     .. Scalar Arguments ..
     LOGICAL Fatal
-    REAL Eps, Thresh
+    REAL(SP) Eps, Thresh
     INTEGER Kprint, Nalf, Nbet, Nidim, Nmax, Nout
     CHARACTER(6) :: Sname
     !     .. Array Arguments ..
-    COMPLEX A(Nmax,Nmax), Aa(Nmax*Nmax), Alf(Nalf), As(Nmax*Nmax), &
+    COMPLEX(SP) A(Nmax,Nmax), Aa(Nmax*Nmax), Alf(Nalf), As(Nmax*Nmax), &
       B(Nmax,Nmax), Bb(Nmax*Nmax), Bet(Nbet), Bs(Nmax*Nmax), &
       C(Nmax,Nmax), Cc(Nmax*Nmax), Cs(Nmax*Nmax), Ct(Nmax)
-    REAL G(Nmax)
+    REAL(SP) G(Nmax)
     INTEGER Idimm(Nidim)
     !     .. Local Scalars ..
-    COMPLEX alpha, als, beta, bls
-    REAL err, errmax
+    COMPLEX(SP) alpha, als, beta, bls
+    REAL(SP) err, errmax
     INTEGER i, ia, ib, ics, icu, im, in, laa, lbb, lcc, lda, ldas, &
       ldb, ldbs, ldc, ldcs, m, ms, n, na, nargs, nc, nerr, ns
     LOGICAL conj, ftl, left, nul, reset
@@ -2366,21 +2367,21 @@ CONTAINS
     !   910619  Modified to meet SLATEC code and prologue standards.  (BKS)
     USE slatec, ONLY : CTBMV, CTBSV, CTPMV, CTPSV, CTRMV, CTRSV, NUMXER
     !     .. Parameters ..
-    COMPLEX, PARAMETER :: ZERO = (0.0,0.0), HALF = (0.5,0.0), ONE = (1.0,0.0)
+    COMPLEX(SP), PARAMETER :: ZERO = (0.0,0.0), HALF = (0.5,0.0), ONE = (1.0,0.0)
     REAL, PARAMETER :: RZERO = 0.0
     !     .. Scalar Arguments ..
     LOGICAL Fatal
-    REAL Eps, Thresh
+    REAL(SP) Eps, Thresh
     INTEGER Incmax, Kprint, Nidim, Ninc, Nkb, Nmax, Nout
     CHARACTER(6) :: Sname
     !     .. Array Arguments ..
-    COMPLEX A(Nmax,Nmax), Aa(Nmax*Nmax), As(Nmax*Nmax), X(Nmax), &
+    COMPLEX(SP) A(Nmax,Nmax), Aa(Nmax*Nmax), As(Nmax*Nmax), X(Nmax), &
       Xs(Nmax*Incmax), Xt(Nmax), Xx(Nmax*Incmax), Z(Nmax)
-    REAL G(Nmax)
+    REAL(SP) G(Nmax)
     INTEGER Idimm(Nidim), Inc(Ninc), Kb(Nkb)
     !     .. Local Scalars ..
-    COMPLEX transl
-    REAL err, errmax
+    COMPLEX(SP) transl
+    REAL(SP) err, errmax
     INTEGER i, icd, ict, icu, ik, in, incx, incxs, ix, k, ks, laa, &
       lda, ldas, lx, n, nargs, nc, nerr, nk, ns
     LOGICAL banded, ftl, full, nul, packed, reset
@@ -2671,21 +2672,21 @@ CONTAINS
     !   910619  Modified to meet SLATEC code and prologue standards.  (BKS)
     USE slatec, ONLY : CTRMM, CTRSM, NUMXER
     !     .. Parameters ..
-    COMPLEX, PARAMETER :: ZERO = (0.0,0.0), ONE = (1.0,0.0)
+    COMPLEX(SP), PARAMETER :: ZERO = (0.0,0.0), ONE = (1.0,0.0)
     REAL, PARAMETER :: RZERO = 0.0
     !     .. Scalar Arguments ..
     LOGICAL Fatal
-    REAL Eps, Thresh
+    REAL(SP) Eps, Thresh
     INTEGER Kprint, Nalf, Nidim, Nmax, Nout
     CHARACTER(6) :: Sname
     !     .. Array Arguments ..
-    COMPLEX A(Nmax,Nmax), Aa(Nmax*Nmax), Alf(Nalf), As(Nmax*Nmax), &
+    COMPLEX(SP) A(Nmax,Nmax), Aa(Nmax*Nmax), Alf(Nalf), As(Nmax*Nmax), &
       B(Nmax,Nmax), Bb(Nmax*Nmax), Bs(Nmax*Nmax), C(Nmax,Nmax), Ct(Nmax)
-    REAL G(Nmax)
+    REAL(SP) G(Nmax)
     INTEGER Idimm(Nidim)
     !     .. Local Scalars ..
-    COMPLEX alpha, als
-    REAL err, errmax
+    COMPLEX(SP) alpha, als
+    REAL(SP) err, errmax
     INTEGER i, ia, icd, ics, ict, icu, im, in, j, laa, lbb, lda, &
       ldas, ldb, ldbs, m, ms, n, na, nargs, nc, nerr, ns
     LOGICAL ftl, left, nul, reset
@@ -2935,27 +2936,27 @@ CONTAINS
     !   910619  Modified to meet SLATEC code and prologue standards.  (BKS)
     USE slatec, ONLY : CGERC, CGERU, NUMXER
     !     .. Parameters ..
-    COMPLEX, PARAMETER :: ZERO = (0.0,0.0), HALF = (0.5,0.0), ONE = (1.0,0.0)
+    COMPLEX(SP), PARAMETER :: ZERO = (0.0,0.0), HALF = (0.5,0.0), ONE = (1.0,0.0)
     REAL, PARAMETER :: RZERO = 0.0
     !     .. Scalar Arguments ..
     LOGICAL Fatal
-    REAL Eps, Thresh
+    REAL(SP) Eps, Thresh
     INTEGER Incmax, Kprint, Nalf, Nidim, Ninc, Nmax, Nout
     CHARACTER(6) :: Sname
     !     .. Array Arguments ..
-    COMPLEX A(Nmax,Nmax), Aa(Nmax*Nmax), Alf(Nalf), As(Nmax*Nmax), X(Nmax), &
+    COMPLEX(SP) A(Nmax,Nmax), Aa(Nmax*Nmax), Alf(Nalf), As(Nmax*Nmax), X(Nmax), &
       Xs(Nmax*Incmax), Xx(Nmax*Incmax), Y(Nmax), Ys(Nmax*Incmax), &
       Yt(Nmax), Yy(Nmax*Incmax), Z(Nmax)
-    REAL G(Nmax)
+    REAL(SP) G(Nmax)
     INTEGER Idimm(Nidim), Inc(Ninc)
     !     .. Local Scalars ..
-    COMPLEX alpha, als, transl
-    REAL err, errmax
+    COMPLEX(SP) alpha, als, transl
+    REAL(SP) err, errmax
     INTEGER i, ia, im, in, incx, incxs, incy, incys, ix, iy, j, &
       laa, lda, ldas, lx, ly, m, ms, n, nargs, nc, nd, nerr, ns
     LOGICAL conj, ftl, nul, reset
     !     .. Local Arrays ..
-    COMPLEX w(1)
+    COMPLEX(SP) w(1)
     LOGICAL isame(13)
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, CONJG, MAX, MIN
@@ -3183,21 +3184,21 @@ CONTAINS
     !   910619  Modified to meet SLATEC code and prologue standards.  (BKS)
     USE slatec, ONLY : CHERK, CSYRK, NUMXER
     !     .. Parameters ..
-    COMPLEX, PARAMETER :: ZERO = (0.0,0.0)
+    COMPLEX(SP), PARAMETER :: ZERO = (0.0,0.0)
     REAL, PARAMETER :: RZERO = 0.0, RONE = 1.0
     !     .. Scalar Arguments ..
     LOGICAL Fatal
-    REAL Eps, Thresh
+    REAL(SP) Eps, Thresh
     INTEGER Kprint, Nalf, Nbet, Nidim, Nmax, Nout
     CHARACTER(6) :: Sname
     !     .. Array Arguments ..
-    COMPLEX A(Nmax,Nmax), Aa(Nmax*Nmax), Alf(Nalf), As(Nmax*Nmax), &
+    COMPLEX(SP) A(Nmax,Nmax), Aa(Nmax*Nmax), Alf(Nalf), As(Nmax*Nmax), &
       Bet(Nbet), C(Nmax,Nmax), Cc(Nmax*Nmax), Ct(Nmax), Cs(Nmax*Nmax)
-    REAL G(Nmax)
+    REAL(SP) G(Nmax)
     INTEGER Idimm(Nidim)
     !     .. Local Scalars ..
-    COMPLEX alpha, als, beta, bets
-    REAL err, errmax, ralpha, rals, rbeta, rbets
+    COMPLEX(SP) alpha, als, beta, bets
+    REAL(SP) err, errmax, ralpha, rals, rbeta, rbets
     INTEGER i, ia, ib, ict, icu, ik, in, j, jc, jj, k, ks, laa, &
       lcc, lda, ldas, ldc, ldcs, lj, ma, n, na, nargs, nc, nerr, ns
     LOGICAL conj, ftl, nul, reset, tran, upper
@@ -3474,27 +3475,27 @@ CONTAINS
     !   910619  Modified to meet SLATEC code and prologue standards.  (BKS)
     USE slatec, ONLY : CHER, CHPR, NUMXER
     !     .. Parameters ..
-    COMPLEX, PARAMETER :: ZERO = (0.0,0.0), HALF = (0.5,0.0), ONE = (1.0,0.0)
+    COMPLEX(SP), PARAMETER :: ZERO = (0.0,0.0), HALF = (0.5,0.0), ONE = (1.0,0.0)
     REAL, PARAMETER :: RZERO = 0.0
     !     .. Scalar Arguments ..
     LOGICAL Fatal
-    REAL Eps, Thresh
+    REAL(SP) Eps, Thresh
     INTEGER Incmax, Kprint, Nalf, Nidim, Ninc, Nmax, Nout
     CHARACTER(6) :: Sname
     !     .. Array Arguments ..
-    COMPLEX A(Nmax,Nmax), Aa(Nmax*Nmax), Alf(Nalf), As(Nmax*Nmax), X(Nmax), &
+    COMPLEX(SP) A(Nmax,Nmax), Aa(Nmax*Nmax), Alf(Nalf), As(Nmax*Nmax), X(Nmax), &
       Xs(Nmax*Incmax), Xx(Nmax*Incmax), Yt(Nmax), Z(Nmax)
-    REAL G(Nmax)
+    REAL(SP) G(Nmax)
     INTEGER Idimm(Nidim), Inc(Ninc)
     !     .. Local Scalars ..
-    COMPLEX alpha, transl
-    REAL err, errmax, ralpha, rals
+    COMPLEX(SP) alpha, transl
+    REAL(SP) err, errmax, ralpha, rals
     INTEGER i, ia, ic, in, incx, incxs, ix, j, ja, jj, laa, lda, &
       ldas, lj, lx, n, nargs, nc, nerr, ns
     LOGICAL ftl, full, nul, packed, reset, upper
     CHARACTER :: uplo, uplos
     !     .. Local Arrays ..
-    COMPLEX w(1)
+    COMPLEX(SP) w(1)
     LOGICAL isame(13)
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, CMPLX, CONJG, MAX, REAL
@@ -3725,22 +3726,22 @@ CONTAINS
     !   910619  Modified to meet SLATEC code and prologue standards.  (BKS)
     USE slatec, ONLY : CHER2K, CSYR2K, NUMXER
     !     .. Parameters ..
-    COMPLEX, PARAMETER :: ZERO = (0.0,0.0), ONE = (1.0,0.0)
+    COMPLEX(SP), PARAMETER :: ZERO = (0.0,0.0), ONE = (1.0,0.0)
     REAL, PARAMETER :: RZERO = 0.0, RONE = 1.0
     !     .. Scalar Arguments ..
     LOGICAL Fatal
-    REAL Eps, Thresh
+    REAL(SP) Eps, Thresh
     INTEGER Kprint, Nalf, Nbet, Nidim, Nmax, Nout
     CHARACTER(6) :: Sname
     !     .. Array Arguments ..
-    COMPLEX Aa(Nmax*Nmax), Ab(2*Nmax*Nmax), Alf(Nalf), As(Nmax*Nmax), &
+    COMPLEX(SP) Aa(Nmax*Nmax), Ab(2*Nmax*Nmax), Alf(Nalf), As(Nmax*Nmax), &
       Bb(Nmax*Nmax), Bet(Nbet), Bs(Nmax*Nmax), C(Nmax,Nmax), &
       Cc(Nmax*Nmax), Cs(Nmax*Nmax), Ct(Nmax), W(2*Nmax)
-    REAL G(Nmax)
+    REAL(SP) G(Nmax)
     INTEGER Idimm(Nidim)
     !     .. Local Scalars ..
-    COMPLEX alpha, als, beta, bets
-    REAL err, errmax, rbeta, rbets
+    COMPLEX(SP) alpha, als, beta, bets
+    REAL(SP) err, errmax, rbeta, rbets
     INTEGER i, ia, ib, ict, icu, ik, in, j, jc, jj, jjab, k, ks, &
       laa, lbb, lcc, lda, ldas, ldb, ldbs, ldc, ldcs, lj, ma, &
       n, na, nargs, nc, nerr, ns
@@ -4046,28 +4047,28 @@ CONTAINS
     !   910619  Modified to meet SLATEC code and prologue standards.  (BKS)
     USE slatec, ONLY : CHER2, CHPR2, NUMXER
     !     .. Parameters ..
-    COMPLEX, PARAMETER :: ZERO = (0.0,0.0), HALF = (0.5,0.0), ONE = (1.0,0.0)
+    COMPLEX(SP), PARAMETER :: ZERO = (0.0,0.0), HALF = (0.5,0.0), ONE = (1.0,0.0)
     REAL, PARAMETER :: RZERO = 0.0
     !     .. Scalar Arguments ..
     LOGICAL Fatal
-    REAL Eps, Thresh
+    REAL(SP) Eps, Thresh
     INTEGER Incmax, Kprint, Nalf, Nidim, Ninc, Nmax, Nout
     CHARACTER(6) :: Sname
     !     .. Array Arguments ..
-    COMPLEX A(Nmax,Nmax), Aa(Nmax*Nmax), Alf(Nalf), As(Nmax*Nmax), X(Nmax), &
+    COMPLEX(SP) A(Nmax,Nmax), Aa(Nmax*Nmax), Alf(Nalf), As(Nmax*Nmax), X(Nmax), &
       Xs(Nmax*Incmax), Xx(Nmax*Incmax), Y(Nmax), Ys(Nmax*Incmax), &
       Yt(Nmax), Yy(Nmax*Incmax), Z(Nmax,2)
-    REAL G(Nmax)
+    REAL(SP) G(Nmax)
     INTEGER Idimm(Nidim), Inc(Ninc)
     !     .. Local Scalars ..
-    COMPLEX alpha, als, transl
-    REAL err, errmax
+    COMPLEX(SP) alpha, als, transl
+    REAL(SP) err, errmax
     INTEGER i, ia, ic, in, incx, incxs, incy, incys, ix, iy, j, &
       ja, jj, laa, lda, ldas, lj, lx, ly, n, nargs, nc, nerr, ns
     LOGICAL ftl, full, nul, packed, reset, upper
     CHARACTER :: uplo, uplos
     !     .. Local Arrays ..
-    COMPLEX w(2)
+    COMPLEX(SP) w(2)
     LOGICAL isame(13)
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, CONJG, MAX
@@ -4339,11 +4340,11 @@ CONTAINS
     !     .. Scalars in Common ..
     INTEGER infot
     !     .. Local Scalars ..
-    COMPLEX alpha, beta
-    REAL ralpha
+    COMPLEX(SP) alpha, beta
+    REAL(SP) ralpha
     INTEGER kontrl
     !     .. Local Arrays ..
-    COMPLEX a(1,1), x(1), y(1)
+    COMPLEX(SP) a(1,1), x(1), y(1)
     !* FIRST EXECUTABLE STATEMENT  CCHKE2
     CALL XGETF(kontrl)
     IF ( Kprint<=2 ) THEN
@@ -4789,11 +4790,11 @@ CONTAINS
     !     .. Scalars in Common ..
     INTEGER infot
     !     .. Local Scalars ..
-    COMPLEX alpha, beta
-    REAL ralpha, rbeta
+    COMPLEX(SP) alpha, beta
+    REAL(SP) ralpha, rbeta
     INTEGER kontrl
     !     .. Local Arrays ..
-    COMPLEX a(2,1), b(2,1), c(2,1)
+    COMPLEX(SP) a(2,1), b(2,1), c(2,1)
     !* FIRST EXECUTABLE STATEMENT  CCHKE3
     CALL XGETF(kontrl)
     IF ( Kprint<=2 ) THEN

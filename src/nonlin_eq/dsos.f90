@@ -190,13 +190,14 @@ SUBROUTINE DSOS(FNC,Neq,X,Rtolx,Atolx,Tolf,Iflag,Rw,Lrw,Iw,Liw)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   USE service, ONLY : XERMSG
   INTERFACE
-    REAL(8) FUNCTION FNC(X,K)
+    REAL(DP) FUNCTION FNC(X,K)
+      IMPORT DP
       INTEGER :: K
-      REAL(8) :: X(:)
+      REAL(DP) :: X(:)
     END FUNCTION FNC
   END INTERFACE
   INTEGER :: Iflag, Liw, Lrw, Iw(Liw), Neq
-  REAL(8) :: Atolx, Rtolx, Rw(Lrw), Tolf, X(Neq)
+  REAL(DP) :: Atolx, Rtolx, Rw(Lrw), Tolf, X(Neq)
   INTEGER :: inpflg, iprint, k1, k2, k3, k4, k5, k6, mxit, nc, ncjs, nsri, nsrrc
   CHARACTER(8) :: xern1
   CHARACTER(16) :: xern3, xern4

@@ -108,11 +108,11 @@ SUBROUTINE SQRDC(X,Ldx,N,P,Qraux,Jpvt,Work,Job)
   INTEGER jj
   INTEGER Ldx, N, P, Job
   INTEGER Jpvt(*)
-  REAL X(Ldx,*), Qraux(*), Work(*)
+  REAL(SP) X(Ldx,*), Qraux(*), Work(*)
   !
   INTEGER j, jp, l, lp1, lup, maxj, pl, pu
-  REAL maxnrm, tt
-  REAL nrmxl, t
+  REAL(SP) maxnrm, tt
+  REAL(SP) nrmxl, t
   LOGICAL negj, swapj
   !
   !* FIRST EXECUTABLE STATEMENT  SQRDC

@@ -84,7 +84,7 @@ SUBROUTINE FIGI(Nm,N,T,D,E,E2,Ierr)
 
   !
   INTEGER i, N, Nm, Ierr
-  REAL T(Nm,3), D(*), E(*), E2(*)
+  REAL(SP) T(Nm,3), D(*), E(*), E2(*)
   !
   !* FIRST EXECUTABLE STATEMENT  FIGI
   Ierr = 0

@@ -79,9 +79,9 @@ SUBROUTINE CGESL(A,Lda,N,Ipvt,B,Job)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER Lda, N, Ipvt(*), Job
-  COMPLEX A(Lda,*), B(*)
+  COMPLEX(SP) A(Lda,*), B(*)
   !
-  COMPLEX t
+  COMPLEX(SP) t
   INTEGER k, kb, l, nm1
   !* FIRST EXECUTABLE STATEMENT  CGESL
   nm1 = N - 1

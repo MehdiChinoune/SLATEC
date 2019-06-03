@@ -1,5 +1,5 @@
 !** DSINDG
-REAL(8) FUNCTION DSINDG(X)
+REAL(DP) FUNCTION DSINDG(X)
   !>
   !  Compute the sine of an argument in degrees.
   !***
@@ -30,8 +30,8 @@ REAL(8) FUNCTION DSINDG(X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
   INTEGER n
-  REAL(8) :: X
-  REAL(8), PARAMETER :: raddeg = 0.017453292519943295769236907684886D0
+  REAL(DP) :: X
+  REAL(DP), PARAMETER :: raddeg = 0.017453292519943295769236907684886D0
   !* FIRST EXECUTABLE STATEMENT  DSINDG
   DSINDG = SIN(raddeg*X)
   !

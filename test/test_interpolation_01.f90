@@ -1,4 +1,5 @@
 MODULE TEST29_MOD
+  USE service, ONLY : SP, DP
   IMPLICIT NONE
 
 CONTAINS
@@ -29,15 +30,15 @@ CONTAINS
     !     .. Scalar Arguments ..
     INTEGER Ipass, Kprint, Lun
     !     .. Local Scalars ..
-    REAL tol, yf
+    REAL(SP) tol, yf
     INTEGER i, ierr, kontrl, n, nerr
     LOGICAL fatal
     !     .. Local Arrays ..
-    REAL c(6), d(6), w(12)
+    REAL(SP) c(6), d(6), w(12)
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, SQRT
     !     .. Data statements ..
-    REAL :: x(6) = [ 1.0E0, 2.0E0, 3.0E0, -1.0E0, -2.0E0, -3.0E0 ]
+    REAL(SP) :: x(6) = [ 1.0E0, 2.0E0, 3.0E0, -1.0E0, -2.0E0, -3.0E0 ]
     REAL, PARAMETER :: y(6) = [ .0E0, 9.0E0, 64.0E0, 0.0E0, 9.0E0, 64.0E0 ]
     REAL, PARAMETER :: xchk(6) = [ 1.0E0, 0.0E0, -2.0E0, 0.0E0, 1.0E0, 0.0E0 ]
     REAL, PARAMETER :: dchk(6) = [ 1.0E0, 0.0E0, -4.0E0, 0.0E0, 24.0E0, 0.0E0 ]
@@ -164,16 +165,16 @@ CONTAINS
     !     .. Scalar Arguments ..
     INTEGER Ipass, Kprint, Lun
     !     .. Local Scalars ..
-    REAL(8) :: tol, yf
+    REAL(DP) :: tol, yf
     INTEGER i, ierr, kontrl, n, nerr
     LOGICAL fatal
     !     .. Local Arrays ..
-    REAL(8) :: c(6), d(6), w(12)
+    REAL(DP) :: c(6), d(6), w(12)
     !     .. Data statements ..
-    REAL(8) :: x(6) = [ 1.0D0, 2.0D0, 3.0D0, -1.0D0, -2.0D0, -3.0D0 ]
-    REAL(8), PARAMETER :: y(6) = [ 0.0D0, 9.0D0, 64.0D0, 0.0D0, 9.0D0, 64.0D0 ]
-    REAL(8), PARAMETER :: xchk(6) = [ 1.0D0, 0.0D0, -2.0D0, 0.0D0, 1.0D0, 0.0D0 ]
-    REAL(8), PARAMETER :: dchk(6) = [ 1.0D0, 0.0D0, -4.0D0, 0.0D0, 24.0D0, 0.0D0 ]
+    REAL(DP) :: x(6) = [ 1.0D0, 2.0D0, 3.0D0, -1.0D0, -2.0D0, -3.0D0 ]
+    REAL(DP), PARAMETER :: y(6) = [ 0.0D0, 9.0D0, 64.0D0, 0.0D0, 9.0D0, 64.0D0 ]
+    REAL(DP), PARAMETER :: xchk(6) = [ 1.0D0, 0.0D0, -2.0D0, 0.0D0, 1.0D0, 0.0D0 ]
+    REAL(DP), PARAMETER :: dchk(6) = [ 1.0D0, 0.0D0, -4.0D0, 0.0D0, 24.0D0, 0.0D0 ]
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, SQRT
     !* FIRST EXECUTABLE STATEMENT  DPNTCK

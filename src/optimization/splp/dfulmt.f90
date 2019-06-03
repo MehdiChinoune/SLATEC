@@ -42,9 +42,9 @@ SUBROUTINE DFULMT(I,J,Aij,Indcat,Prgopt,Dattrv,Iflag)
   USE service, ONLY : XERMSG
   INTEGER :: I, Indcat, J
   INTEGER :: Iflag(10)
-  REAL(8) :: Aij, Dattrv(:), Prgopt(:)
+  REAL(DP) :: Aij, Dattrv(:), Prgopt(:)
   INTEGER :: key, level, lp, nerr, next
-  REAL(8), PARAMETER :: zero = 0.D0
+  REAL(DP), PARAMETER :: zero = 0.D0
   !* FIRST EXECUTABLE STATEMENT  DFULMT
   IF ( Iflag(1)==1 ) THEN
     !     INITIALIZE POINTERS TO PROCESS FULL TWO-DIMENSIONAL FORTRAN

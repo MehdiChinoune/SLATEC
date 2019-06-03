@@ -70,9 +70,9 @@ SUBROUTINE CPOSL(A,Lda,N,B)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER Lda, N
-  COMPLEX A(Lda,*), B(*)
+  COMPLEX(SP) A(Lda,*), B(*)
   !
-  COMPLEX t
+  COMPLEX(SP) t
   INTEGER k, kb
   !
   !     SOLVE CTRANS(R)*Y = B

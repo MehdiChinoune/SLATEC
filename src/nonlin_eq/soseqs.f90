@@ -95,17 +95,18 @@ SUBROUTINE SOSEQS(FNC,N,S,Rtolx,Atolx,Tolf,Iflag,Mxit,Ncjs,Nsrrc,Nsri,&
   !   900328  Added TYPE section.  (WRB)
   USE service, ONLY : R1MACH, I1MACH
   INTERFACE
-    REAL FUNCTION FNC(X,K)
+    REAL(SP) FUNCTION FNC(X,K)
+      IMPORT SP
       INTEGER :: K
-      REAL :: X(:)
+      REAL(SP) :: X(:)
     END FUNCTION FNC
   END INTERFACE
   INTEGER :: Mxit, N, Nc, Ncjs, Nsri, Nsrrc, Iflag, Iprint, Is(N)
-  REAL :: Atolx, Fmax, Rtolx, Tolf, C(Nc), B(N), Fac(N), P(N), S(N), Temp(N), &
+  REAL(SP) :: Atolx, Fmax, Rtolx, Tolf, C(Nc), B(N), Fac(N), P(N), S(N), Temp(N), &
     X(N), Y(N)
   INTEGER :: ksv, l, loun, ls, m, mit, mm, np1, ic, icr, isj, isv, it, item, &
     itry, j, jk, js, k, kd, kj, kk, km1, kn
-  REAL :: csv, f, fact, fdif, fmin, fmxs, fn1, fn2, fp, h, hx, pmax, re, &
+  REAL(SP) :: csv, f, fact, fdif, fmin, fmxs, fn1, fn2, fp, h, hx, pmax, re, &
     sruro, test, uro, xnorm, yj, yn1, yn2, yn3, ynorm, yns, zero
   !* FIRST EXECUTABLE STATEMENT  SOSEQS
   uro = R1MACH(4)

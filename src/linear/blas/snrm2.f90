@@ -1,5 +1,5 @@
 !** SNRM2
-REAL FUNCTION SNRM2(N,Sx,Incx)
+REAL(SP) FUNCTION SNRM2(N,Sx,Incx)
   !>
   !  Compute the Euclidean length (L2 norm) of a vector.
   !***
@@ -84,9 +84,9 @@ REAL FUNCTION SNRM2(N,Sx,Incx)
 
   INTEGER i, Incx, j, N, nn
   INTEGER next
-  REAL Sx(*), hitest, summ, xmax
-  REAL, PARAMETER :: zero = 0.0E0, one = 1.0E0
-  REAL, PARAMETER :: cutlo = 4.441E-16, cuthi = 1.304E19
+  REAL(SP) Sx(*), hitest, summ, xmax
+  REAL(SP), PARAMETER :: zero = 0.0E0, one = 1.0E0
+  REAL(SP), PARAMETER :: cutlo = 4.441E-16, cuthi = 1.304E19
   !* FIRST EXECUTABLE STATEMENT  SNRM2
   IF ( N>0 ) THEN
     !

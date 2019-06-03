@@ -141,14 +141,14 @@ SUBROUTINE CAIRY(Z,Id,Kode,Ai,Nz,Ierr)
   !   920811  Prologue revised.  (DWL)
   USE service, ONLY : R1MACH, I1MACH
   INTEGER :: Id, Ierr, Kode, Nz
-  COMPLEX :: Ai
+  COMPLEX(SP) :: Ai
   INTEGER :: iflag, k, k1, k2, mr, nn
-  REAL :: aa, ad, ak, alim, atrm, az, az3, bk, ck, dig, dk, d1, d2, elim, fid, fnu, &
+  REAL(SP) :: aa, ad, ak, alim, atrm, az, az3, bk, ck, dig, dk, d1, d2, elim, fid, fnu, &
   rl, r1m5, sfac, tol, zi, zr, z3i, z3r, bb, alaz
-  COMPLEX :: csq, cy(1), s1, s2, trm1, trm2, Z, zta, z3
-  REAL, PARAMETER :: tth = 6.66666666666666667E-01, c1 = 3.55028053887817240E-01, &
+  COMPLEX(SP) :: csq, cy(1), s1, s2, trm1, trm2, Z, zta, z3
+  REAL(SP), PARAMETER :: tth = 6.66666666666666667E-01, c1 = 3.55028053887817240E-01, &
     c2 = 2.58819403792806799E-01, coef = 1.83776298473930683E-01
-  COMPLEX, PARAMETER :: cone = (1.0E0,0.0E0)
+  COMPLEX(SP), PARAMETER :: cone = (1.0E0,0.0E0)
   !* FIRST EXECUTABLE STATEMENT  CAIRY
   Ierr = 0
   Nz = 0

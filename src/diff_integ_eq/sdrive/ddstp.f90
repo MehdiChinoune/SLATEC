@@ -75,36 +75,40 @@ SUBROUTINE DDSTP(Eps,F,FA,Hmax,Impl,Ierror,JACOBN,Matdim,Maxord,Mint,&
   !   900329  Initial submission to SLATEC.
   INTERFACE
     SUBROUTINE F(N,T,Y,Ydot)
+      IMPORT DP
       INTEGER :: N
-      REAL(8) :: T, Y(:), Ydot(:)
+      REAL(DP) :: T, Y(:), Ydot(:)
     END SUBROUTINE F
     SUBROUTINE JACOBN(N,T,Y,Dfdy,Matdim,Ml,Mu)
+      IMPORT DP
       INTEGER :: N, Matdim, Ml, Mu
-      REAL(8) :: T, Y(N), Dfdy(Matdim,N)
+      REAL(DP) :: T, Y(N), Dfdy(Matdim,N)
     END SUBROUTINE JACOBN
     SUBROUTINE USERS(Y,Yh,Ywt,Save1,Save2,T,H,El,Impl,N,Nde,Iflag)
+      IMPORT DP
       INTEGER :: Impl, N, Nde, iflag
-      REAL(8) :: T, H, El
-      REAL(8) :: Y(N), Yh(N,13), Ywt(N), Save1(N), Save2(N)
+      REAL(DP) :: T, H, El
+      REAL(DP) :: Y(N), Yh(N,13), Ywt(N), Save1(N), Save2(N)
     END SUBROUTINE USERS
     SUBROUTINE FA(N,T,Y,A,Matdim,Ml,Mu,Nde)
+      IMPORT DP
       INTEGER :: N, Matdim, Ml, Mu, Nde
-      REAL(8) :: T, Y(N), A(:,:)
+      REAL(DP) :: T, Y(N), A(:,:)
     END SUBROUTINE FA
   END INTERFACE
   INTEGER :: Ierror, Impl, Iswflg, Jstate, Jstepl, Jtask, Matdim, Maxord, Mint, &
     Miter, Ml, Mntold, Mtrold, Mtrsv, Mu, Mxrdsv, N, Nde, Nfe, Nje, Nq, Nqused, &
     Nstep, Nwait, Ipvt(N)
-  REAL(8) :: Avgh, Avgord, Eps, H, Hmax, Hold, Hused, Rc, Rmax, T, Trend, Uround
-  REAL(8) :: A(Matdim,N), Dfdy(Matdim,N), El(13,12), Fac(N), Save1(N), Save2(N), &
+  REAL(DP) :: Avgh, Avgord, Eps, H, Hmax, Hold, Hused, Rc, Rmax, T, Trend, Uround
+  REAL(DP) :: A(Matdim,N), Dfdy(Matdim,N), El(13,12), Fac(N), Save1(N), Save2(N), &
     Tq(3,12), Y(N+1), Yh(N,13), Ywt(N)
   LOGICAL :: Convrg
   INTEGER :: i, iter, j, nfail, nsv, ntry
-  REAL(8) :: bnd, ctest, d, denom, d1, erdn, erup, etest, hn, hs, numer, rh, rh1, &
+  REAL(DP) :: bnd, ctest, d, denom, d1, erdn, erup, etest, hn, hs, numer, rh, rh1, &
     rh2, rh3, told, y0nrm
   LOGICAL :: evalfa, evaljc, switch
   INTEGER, PARAMETER :: MXFAIL = 3, MXITER = 3, MXTRY = 50
-  REAL(8), PARAMETER :: BIAS1 = 1.3D0, BIAS2 = 1.2D0, BIAS3 = 1.4D0, RCTEST = 0.3D0, &
+  REAL(DP), PARAMETER :: BIAS1 = 1.3D0, BIAS2 = 1.2D0, BIAS3 = 1.4D0, RCTEST = 0.3D0, &
     RMFAIL = 2.D0, RMNORM = 10.D0, TRSHLD = 1.D0
   INTEGER, PARAMETER :: NDJSTP = 10
   LOGICAL, SAVE :: ier = .FALSE.
@@ -258,7 +262,7 @@ SUBROUTINE DDSTP(Eps,F,FA,Hmax,Impl,Ierror,JACOBN,Matdim,Maxord,Mint,&
       Save2(i) = Save1(i)/MAX(ABS(Y(i)),Ywt(i))
     END DO
   END IF
-  etest = NORM2(Save2(1:Nde))/(Tq(2,Nq)*SQRT(REAL(Nde, 8)))
+  etest = NORM2(Save2(1:Nde))/(Tq(2,Nq)*SQRT(REAL(Nde, DP)))
   !
   !                           The error test failed.  NFAIL keeps track of
   !                           multiple failures.  Restore T and the YH
@@ -282,7 +286,7 @@ SUBROUTINE DDSTP(Eps,F,FA,Hmax,Impl,Ierror,JACOBN,Matdim,Maxord,Mint,&
             Save2(i) = Yh(i,Nq+1)/MAX(ABS(Y(i)),Ywt(i))
           END DO
         END IF
-        erdn = NORM2(Save2(1:Nde))/(Tq(1,Nq)*SQRT(REAL(Nde, 8)))
+        erdn = NORM2(Save2(1:Nde))/(Tq(1,Nq)*SQRT(REAL(Nde, DP)))
         rh1 = 1.D0/MAX(1.D0,BIAS1*(erdn/Eps)**(1.D0/Nq))
         IF ( rh2<rh1 ) THEN
           Nq = Nq - 1
@@ -424,7 +428,7 @@ SUBROUTINE DDSTP(Eps,F,FA,Hmax,Impl,Ierror,JACOBN,Matdim,Maxord,Mint,&
           Save2(i) = Yh(i,Nq+1)/MAX(ABS(Y(i)),Ywt(i))
         END DO
       END IF
-      erdn = NORM2(Save2(1:Nde))/(Tq(1,Nq)*SQRT(REAL(Nde, 8)))
+      erdn = NORM2(Save2(1:Nde))/(Tq(1,Nq)*SQRT(REAL(Nde, DP)))
       rh1 = 1.D0/MAX(Uround,BIAS1*(erdn/Eps)**(1.D0/Nq))
     END IF
     rh2 = 1.D0/MAX(Uround,BIAS2*(etest/Eps)**(1.D0/(Nq+1)))
@@ -440,7 +444,7 @@ SUBROUTINE DDSTP(Eps,F,FA,Hmax,Impl,Ierror,JACOBN,Matdim,Maxord,Mint,&
           Save2(i) = (Save1(i)-Yh(i,Maxord+1))/MAX(ABS(Y(i)),Ywt(i))
         END DO
       END IF
-      erup = NORM2(Save2(1:Nde))/(Tq(3,Nq)*SQRT(REAL(Nde, 8)))
+      erup = NORM2(Save2(1:Nde))/(Tq(3,Nq)*SQRT(REAL(Nde, DP)))
       rh3 = 1.D0/MAX(Uround,BIAS3*(erup/Eps)**(1.D0/(Nq+2)))
     END IF
     IF ( rh1>rh2.AND.rh1>=rh3 ) THEN

@@ -31,11 +31,11 @@ SUBROUTINE CCMPB(Ierror,An,Bn,Cn,B,Ah,Bh)
   USE CCBLK, ONLY : k_com, cnv_com, eps_com, nm_com, npp_com
   USE service, ONLY : R1MACH
   INTEGER :: Ierror
-  REAL :: Ah(:), An(nm_com), B(:), Bh(:), Bn(nm_com), Cn(nm_com)
-  COMPLEX :: Bc(500)
+  REAL(SP) :: Ah(:), An(nm_com), B(:), Bh(:), Bn(nm_com), Cn(nm_com)
+  COMPLEX(SP) :: Bc(500)
   INTEGER :: i, i2, i4, ib, if, ifd, ipl, ir, j, j1, j2, jf, js, kdo, l, l1, &
     l2, lh, ls, n2m2, nb, nmp
-  REAL :: arg, bnorm, d1, d2, d3
+  REAL(SP) :: arg, bnorm, d1, d2, d3
   !* FIRST EXECUTABLE STATEMENT  CCMPB
   eps_com = R1MACH(4)
   bnorm = ABS(Bn(1))

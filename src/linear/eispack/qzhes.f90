@@ -81,8 +81,8 @@ SUBROUTINE QZHES(Nm,N,A,B,Matz,Z)
 
   !
   INTEGER i, j, k, l, N, lb, l1, Nm, nk1, nm1, nm2
-  REAL A(Nm,*), B(Nm,*), Z(Nm,*)
-  REAL r, s, t, u1, u2, v1, v2, rho
+  REAL(SP) A(Nm,*), B(Nm,*), Z(Nm,*)
+  REAL(SP) r, s, t, u1, u2, v1, v2, rho
   LOGICAL Matz
   !
   !     .......... INITIALIZE Z ..........

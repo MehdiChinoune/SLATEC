@@ -4,7 +4,7 @@ SUBROUTINE DBESK(X,Fnu,Kode,N,Y,Nz)
   !  Implement forward recursion on the three term recursion
   !            relation for a sequence of non-negative order Bessel
   !            functions K/SUB(FNU+I-1)/(X), or scaled Bessel functions
-  !            EXP(X)*K/SUB(FNU+I-1)/(X), I=1,...,N for real, positive
+  !            EXP(X)*K/SUB(FNU+I-1)/(X), I=1,...,N for REAL(SP), positive
   !            X and non-negative orders FNU.
   !***
   ! **Library:**   SLATEC
@@ -87,9 +87,9 @@ SUBROUTINE DBESK(X,Fnu,Kode,N,Y,Nz)
   USE service, ONLY : XERMSG, D1MACH, I1MACH
   !
   INTEGER :: Kode, N, Nz
-  REAL(8) :: Fnu, X, Y(N)
+  REAL(DP) :: Fnu, X, Y(N)
   INTEGER :: i, j, k, mz, nb, nd, nn, nud
-  REAL(8) :: cn, dnu, elim, etx, flgik, fn, fnn, gln, gnu, rtz, s, s1, s2, t, tm, &
+  REAL(DP) :: cn, dnu, elim, etx, flgik, fn, fnn, gln, gnu, rtz, s, s1, s2, t, tm, &
     trx, w(2), xlim, zn
   INTEGER, PARAMETER :: nulim(2) = [ 35, 70 ]
   !* FIRST EXECUTABLE STATEMENT  DBESK

@@ -23,10 +23,10 @@ SUBROUTINE CDSCL(Hmax,N,Nq,Rmax,H,Rc,Rh,Yh)
   !   900329  Initial submission to SLATEC.
 
   INTEGER :: N, Nq
-  REAL :: H, Hmax, Rc, Rh, Rmax
-  COMPLEX :: Yh(N,Nq+1)
+  REAL(SP) :: H, Hmax, Rc, Rh, Rmax
+  COMPLEX(SP) :: Yh(N,Nq+1)
   INTEGER :: i, j
-  REAL :: r1
+  REAL(SP) :: r1
   !* FIRST EXECUTABLE STATEMENT  CDSCL
   IF ( H<1.E0 ) THEN
     Rh = MIN(ABS(H)*Rh,ABS(H)*Rmax,Hmax)/ABS(H)

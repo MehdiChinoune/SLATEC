@@ -1,4 +1,5 @@
 MODULE TEST15_MOD
+  USE service, ONLY : SP, DP
   IMPLICIT NONE
 
 CONTAINS
@@ -49,7 +50,7 @@ CONTAINS
     INTEGER ipass1, ipass2, ipass3, ipass4, ipass5, ier, indexx, &
       i, first, last, nsig, nerr, ierjj, ierjm
     INTEGER, PARAMETER :: NDIM=15
-    REAL tol, l1, l2, l3, m1, m2, m3, l1min, l1max, m2min, m2max, &
+    REAL(SP) tol, l1, l2, l3, m1, m2, m3, l1min, l1max, m2min, m2max, &
       diff(NDIM), x, jjval, jmval, thrcof(NDIM), sixcof(NDIM)
     !
     REAL, PARAMETER :: r3jj(8) = [ 2.78886675511358515993E-1, &

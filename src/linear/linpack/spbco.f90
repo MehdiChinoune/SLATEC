@@ -123,11 +123,11 @@ SUBROUTINE SPBCO(Abd,Lda,N,M,Rcond,Z,Info)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER Lda, N, M, Info
-  REAL Abd(Lda,*), Z(*)
-  REAL Rcond
+  REAL(SP) Abd(Lda,*), Z(*)
+  REAL(SP) Rcond
   !
-  REAL ek, t, wk, wkm
-  REAL anorm, s, sm, ynorm
+  REAL(SP) ek, t, wk, wkm
+  REAL(SP) anorm, s, sm, ynorm
   INTEGER i, j, j2, k, kb, kp1, l, la, lb, lm, mu
   !
   !     FIND NORM OF A

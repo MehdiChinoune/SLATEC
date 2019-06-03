@@ -164,10 +164,10 @@ SUBROUTINE CQRSL(X,Ldx,N,K,Qraux,Y,Qy,Qty,B,Rsd,Xb,Job,Info)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER Ldx, N, K, Job, Info
-  COMPLEX X(Ldx,*), Qraux(*), Y(*), Qy(*), Qty(*), B(*), Rsd(*), Xb(*)
+  COMPLEX(SP) X(Ldx,*), Qraux(*), Y(*), Qy(*), Qty(*), B(*), Rsd(*), Xb(*)
   !
   INTEGER i, j, jj, ju, kp1
-  COMPLEX t, temp
+  COMPLEX(SP) t, temp
   LOGICAL cb, cqy, cqty, cr, cxb
   !* FIRST EXECUTABLE STATEMENT  CQRSL
   !

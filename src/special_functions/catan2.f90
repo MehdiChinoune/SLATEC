@@ -1,5 +1,5 @@
 !** CATAN2
-COMPLEX FUNCTION CATAN2(Csn,Ccs)
+COMPLEX(SP) FUNCTION CATAN2(Csn,Ccs)
   !>
   !  Compute the complex arc tangent in the proper quadrant.
   !***
@@ -36,8 +36,8 @@ COMPLEX FUNCTION CATAN2(Csn,Ccs)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   USE service, ONLY : XERMSG
-  COMPLEX Csn, Ccs
-  REAL, PARAMETER :: pi = 3.14159265358979323846E0
+  COMPLEX(SP) Csn, Ccs
+  REAL(SP), PARAMETER :: pi = 3.14159265358979323846E0
   !* FIRST EXECUTABLE STATEMENT  CATAN2
   IF ( ABS(Ccs)==0. ) THEN
     !

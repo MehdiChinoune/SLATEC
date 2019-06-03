@@ -141,18 +141,18 @@ SUBROUTINE CGEMM(Transa,Transb,M,N,K,Alpha,A,Lda,B,Ldb,Beta,C,Ldc)
   !     .. Scalar Arguments ..
   CHARACTER :: Transa, Transb
   INTEGER M, N, K, Lda, Ldb, Ldc
-  COMPLEX Alpha, Beta
+  COMPLEX(SP) Alpha, Beta
   !     .. Array Arguments ..
-  COMPLEX A(Lda,*), B(Ldb,*), C(Ldc,*)
+  COMPLEX(SP) A(Lda,*), B(Ldb,*), C(Ldc,*)
   !     .. Intrinsic Functions ..
   INTRINSIC CONJG, MAX
   !     .. Local Scalars ..
   LOGICAL conja, conjb, nota, notb
   INTEGER i, info, j, l, ncola, nrowa, nrowb
-  COMPLEX temp
+  COMPLEX(SP) temp
   !     .. Parameters ..
-  COMPLEX, PARAMETER :: ONE = (1.0E+0,0.0E+0)
-  COMPLEX, PARAMETER :: ZERO = (0.0E+0,0.0E+0)
+  COMPLEX(SP), PARAMETER :: ONE = (1.0E+0,0.0E+0)
+  COMPLEX(SP), PARAMETER :: ZERO = (0.0E+0,0.0E+0)
   !* FIRST EXECUTABLE STATEMENT  CGEMM
   !
   !     Set  NOTA  and  NOTB  as  true if  A  and  B  respectively are not

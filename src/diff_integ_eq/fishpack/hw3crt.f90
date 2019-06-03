@@ -369,12 +369,12 @@ SUBROUTINE HW3CRT(Xs,Xf,L,Lbdcnd,Bdxs,Bdxf,Ys,Yf,M,Mbdcnd,Bdys,Bdyf,Zs,Zf,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
   INTEGER :: Ierror, L, Lbdcnd, Ldimf, M, Mbdcnd, Mdimf, N, Nbdcnd
-  REAL :: Elmbda, Pertrb, Xf, Xs, Yf, Ys, Zf, Zs
-  REAL :: Bdxf(Mdimf,N+1), Bdxs(Mdimf,N+1), Bdyf(Ldimf,N+1), Bdys(Ldimf,N+1), &
+  REAL(SP) :: Elmbda, Pertrb, Xf, Xs, Yf, Ys, Zf, Zs
+  REAL(SP) :: Bdxf(Mdimf,N+1), Bdxs(Mdimf,N+1), Bdyf(Ldimf,N+1), Bdys(Ldimf,N+1), &
     Bdzf(Ldimf,M+1), Bdzs(Ldimf,M+1), F(Ldimf,Mdimf,N+1), W(:)
   INTEGER :: i, ir, iwb, iwc, iww, j, k, lp, lp1, lstart, lstop, lstpm1, lunk, &
     mp, mp1, mstart, mstop, mstpm1, munk, np, np1, nperod, nstart, nstop, nstpm1, nunk
-  REAL :: c1, c2, c3, dx, dy, dz, s, s1, s2, twbydx, twbydy, twbydz, xlp, ylp, zlp
+  REAL(SP) :: c1, c2, c3, dx, dy, dz, s, s1, s2, twbydx, twbydy, twbydz, xlp, ylp, zlp
   !* FIRST EXECUTABLE STATEMENT  HW3CRT
   Ierror = 0
   IF ( Xf<=Xs ) Ierror = 1

@@ -111,8 +111,8 @@ SUBROUTINE SGEFS(A,Lda,N,V,Itask,Ind,Work,Iwork)
   USE service, ONLY : R1MACH, XERMSG
   !
   INTEGER :: Lda, N, Itask, Ind, Iwork(N)
-  REAL :: A(Lda,N), V(N), Work(N)
-  REAL :: rcond
+  REAL(SP) :: A(Lda,N), V(N), Work(N)
+  REAL(SP) :: rcond
   CHARACTER(8) :: xern1, xern2
   !* FIRST EXECUTABLE STATEMENT  SGEFS
   IF ( Lda<N ) THEN

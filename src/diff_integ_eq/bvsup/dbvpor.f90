@@ -141,7 +141,7 @@ SUBROUTINE DBVPOR(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
   INTEGER :: Iflag, Mxnon, Ncomp, Nfc, Nfcc, Nic, Niv, Nrowa, Nrowb, Nrowy, Ntp, &
     Nxpts
   INTEGER :: Ip(Nfcc,Mxnon+1), Iwork(*)
-  REAL(8) :: A(Nrowa,Ncomp), Alpha(:), B(Nrowb,Ncomp), Beta(Nfc), Coef(Nfcc), &
+  REAL(DP) :: A(Nrowa,Ncomp), Alpha(:), B(Nrowb,Ncomp), Beta(Nfc), Coef(Nfcc), &
     P(Ntp,Mxnon+1), S(Nfc+1), Stowa(:), U(Ncomp,Nfc,Nxpts), &
     V(Ncomp,Nxpts), W(Nfcc,Mxnon), Work(*), Xpts(Nxpts), Y(Nrowy,Nxpts), &
     Yhp(Ncomp,Nfc+1), Z(Mxnon+1)

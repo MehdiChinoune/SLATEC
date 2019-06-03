@@ -119,13 +119,13 @@ SUBROUTINE SSVDC(X,Ldx,N,P,S,E,U,Ldu,V,Ldv,Work,Job,Info)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER Ldx, N, P, Ldu, Ldv, Job, Info
-  REAL X(Ldx,*), S(*), E(*), U(Ldu,*), V(Ldv,*), Work(*)
+  REAL(SP) X(Ldx,*), S(*), E(*), U(Ldu,*), V(Ldv,*), Work(*)
   !
   !
   INTEGER i, iter, j, jobu, k, kase, kk, l, ll, lls, lm1, lp1, &
     ls, lu, m, maxit, mm, mm1, mp1, nct, nctp1, ncu, nrt, nrtp1
-  REAL t
-  REAL b, c, cs, el, emm1, f, g, scalee, shiftt, sl, sm, &
+  REAL(SP) t
+  REAL(SP) b, c, cs, el, emm1, f, g, scalee, shiftt, sl, sm, &
     sn, smm1, t1, test, ztest
   LOGICAL wantu, wantv
   !* FIRST EXECUTABLE STATEMENT  SSVDC

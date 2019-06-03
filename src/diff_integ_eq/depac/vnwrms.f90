@@ -1,5 +1,5 @@
 !** VNWRMS
-REAL FUNCTION VNWRMS(N,V,W)
+REAL(SP) FUNCTION VNWRMS(N,V,W)
   !>
   !  Subsidiary to DEBDF
   !***
@@ -35,9 +35,9 @@ REAL FUNCTION VNWRMS(N,V,W)
   !   VNWRMS = SQRT( (1/N) * SUM( V(I)/W(I) )**2 )
   !-----------------------------------------------------------------------
   INTEGER ::N
-  REAL :: V(N), W(N)
+  REAL(SP) :: V(N), W(N)
   INTEGER :: i
-  REAL :: summ
+  REAL(SP) :: summ
   !* FIRST EXECUTABLE STATEMENT  VNWRMS
   summ = 0.0E0
   DO i = 1, N

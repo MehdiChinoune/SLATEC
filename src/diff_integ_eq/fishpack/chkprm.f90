@@ -26,16 +26,18 @@ SUBROUTINE CHKPRM(Intl,Iorder,A,B,M,Mbdcnd,C,D,N,Nbdcnd,COFX,COFY,Idmn,Ierror)
 
   INTERFACE
     SUBROUTINE COFX(X,A,B,C)
-      REAL :: X, A, B, C
+      IMPORT SP
+      REAL(SP) :: X, A, B, C
     END SUBROUTINE COFX
     SUBROUTINE COFY(Y,D,E,F)
-      REAL :: Y, D, E, F
+      IMPORT SP
+      REAL(SP) :: Y, D, E, F
     END SUBROUTINE COFY
   END INTERFACE
   INTEGER :: Idmn, Ierror, Intl, Iorder, M, Mbdcnd, Nbdcnd, N
-  REAL :: A, B, C, D
+  REAL(SP) :: A, B, C, D
   INTEGER :: i, j
-  REAL :: ai, bi, ci, dj, dlx, dly, ej, fj, xi, yj
+  REAL(SP) :: ai, bi, ci, dj, dlx, dly, ej, fj, xi, yj
   !* FIRST EXECUTABLE STATEMENT  CHKPRM
   Ierror = 1
   IF ( A>=B.OR.C>=D ) RETURN

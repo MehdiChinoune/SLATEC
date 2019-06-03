@@ -20,9 +20,9 @@ SUBROUTINE TRIDQ(Mr,A,B,C,Y,D)
   !   900402  Added TYPE section.  (WRB)
 
   INTEGER :: Mr
-  REAL :: A(Mr), B(Mr), C(Mr), D(Mr), Y(Mr)
+  REAL(SP) :: A(Mr), B(Mr), C(Mr), D(Mr), Y(Mr)
   INTEGER :: i, ip, m, mm1
-  REAL :: z
+  REAL(SP) :: z
   !* FIRST EXECUTABLE STATEMENT  TRIDQ
   m = Mr
   mm1 = m - 1

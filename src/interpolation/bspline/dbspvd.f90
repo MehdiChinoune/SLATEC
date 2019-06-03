@@ -81,10 +81,10 @@ SUBROUTINE DBSPVD(T,K,Nderiv,X,Ileft,Ldvnik,Vnikx,Work)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   USE service, ONLY : XERMSG
   INTEGER :: Ldvnik, Ileft, K, Nderiv
-  REAL(8) :: T(Ileft+K), Vnikx(Ldvnik,Nderiv), Work((K+1)*(K+2)/2), X
+  REAL(DP) :: T(Ileft+K), Vnikx(Ldvnik,Nderiv), Work((K+1)*(K+2)/2), X
   INTEGER :: iwork, i, ideriv, ipkmd, j, jj, jlow, jm, jp1mid, kmd, kp1, l, &
     ldummy, m, mhigh
-  REAL(8) :: factor, fkmd, v
+  REAL(DP) :: factor, fkmd, v
   !     DIMENSION T(ILEFT+K), WORK((K+1)*(K+2)/2)
   !     A(I,J) = WORK(I+J*(J+1)/2),  I=1,J+1  J=1,K-1
   !     A(I,K) = W0RK(I+K*(K-1)/2)  I=1.K

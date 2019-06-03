@@ -215,17 +215,18 @@ SUBROUTINE QAWFE(F,A,Omega,Integr,Epsabs,Limlst,Limit,Maxp1,Result,Abserr,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   USE service, ONLY : R1MACH
   INTERFACE
-    REAL FUNCTION F(X)
-      REAL :: X
+    REAL(SP) FUNCTION F(X)
+      IMPORT SP
+      REAL(SP) :: X
     END FUNCTION F
   END INTERFACE
   INTEGER :: Ier, Integr, Lst, Limit, Limlst, Maxp1, Neval
   INTEGER :: Ierlst(Limlst), Iord(Limit), Nnlog(Limit)
-  REAL :: A, Abserr, Epsabs, Omega, Result
-  REAL :: Alist(Limit), Blist(Limit), Chebmo(Maxp1,25), Elist(Limit), &
+  REAL(SP) :: A, Abserr, Epsabs, Omega, Result
+  REAL(SP) :: Alist(Limit), Blist(Limit), Chebmo(Maxp1,25), Elist(Limit), &
     Erlst(Limlst), Rlist(Limit), Rslst(Limlst)
   INTEGER :: ktmin, l, last, ll, momcom, nev, nres, numrl2
-  REAL :: abseps, correc, cycle, c1, c2, dl, drl, ep, eps, epsa, errsum, fact, &
+  REAL(SP) :: abseps, correc, cycle, c1, c2, dl, drl, ep, eps, epsa, errsum, fact, &
     p1, psum(52), reseps, res3la(3), uflow
   !
   !            THE DIMENSION OF  PSUM  IS DETERMINED BY THE VALUE OF
@@ -253,7 +254,7 @@ SUBROUTINE QAWFE(F,A,Omega,Integr,Epsabs,Limlst,Limit,Maxp1,Result,Abserr,&
   !           CHEBMO    - ARRAY CONTAINING THE MODIFIED CHEBYSHEV
   !                       MOMENTS (SEE ALSO ROUTINE QC25F)
   !
-  REAL, PARAMETER :: p = 0.9E+00, pi = 0.31415926535897932E+01
+  REAL(SP), PARAMETER :: p = 0.9E+00, pi = 0.31415926535897932E+01
   !
   !           TEST ON VALIDITY OF PARAMETERS
   !           ------------------------------

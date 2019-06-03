@@ -116,11 +116,11 @@ SUBROUTINE BISECT(N,Eps1,D,E,E2,Lb,Ub,Mm,M,W,Ind,Ierr,Rv4,Rv5)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   USE service, ONLY : R1MACH
   INTEGER i, j, k, l, M, N, p, q, r, s, ii, Mm, m1, m2, tag, Ierr, isturm
-  REAL D(*), E(*), E2(*), W(*), Rv4(*), Rv5(*)
-  REAL u, v, Lb, t1, t2, Ub, xu, x0, x1, Eps1, s1, s2
+  REAL(SP) D(*), E(*), E2(*), W(*), Rv4(*), Rv5(*)
+  REAL(SP) u, v, Lb, t1, t2, Ub, xu, x0, x1, Eps1, s1, s2
   INTEGER Ind(*)
   !
-  REAL, PARAMETER :: machep = R1MACH(4)
+  REAL(SP), PARAMETER :: machep = R1MACH(4)
   !* FIRST EXECUTABLE STATEMENT  BISECT
   Ierr = 0
   tag = 0

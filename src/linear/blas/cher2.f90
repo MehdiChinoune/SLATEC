@@ -110,15 +110,15 @@ SUBROUTINE CHER2(Uplo,N,Alpha,X,Incx,Y,Incy,A,Lda)
   !           lines were modified.  (BKS)
   USE service, ONLY : XERBLA
   !     .. Scalar Arguments ..
-  COMPLEX Alpha
+  COMPLEX(SP) Alpha
   INTEGER Incx, Incy, Lda, N
   CHARACTER :: Uplo
   !     .. Array Arguments ..
-  COMPLEX A(Lda,*), X(*), Y(*)
+  COMPLEX(SP) A(Lda,*), X(*), Y(*)
   !     .. Parameters ..
-  COMPLEX, PARAMETER :: ZERO = (0.0E+0,0.0E+0)
+  COMPLEX(SP), PARAMETER :: ZERO = (0.0E+0,0.0E+0)
   !     .. Local Scalars ..
-  COMPLEX temp1, temp2
+  COMPLEX(SP) temp1, temp2
   INTEGER i, info, ix, iy, j, jx, jy, kx, ky
   !     .. Intrinsic Functions ..
   INTRINSIC CONJG, MAX, REAL

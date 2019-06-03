@@ -77,12 +77,12 @@ SUBROUTINE SRLCAL(N,Kmp,Ll,Maxl,V,Q,Rl,Snormw,Prod,R0nrm)
   !   920511  Added complete declaration section.  (WRB)
 
   !     .. Scalar Arguments ..
-  REAL Prod, R0nrm, Snormw
+  REAL(SP) Prod, R0nrm, Snormw
   INTEGER Kmp, Ll, Maxl, N
   !     .. Array Arguments ..
-  REAL Q(*), Rl(N), V(N,*)
+  REAL(SP) Q(*), Rl(N), V(N,*)
   !     .. Local Scalars ..
-  REAL c, s, tem
+  REAL(SP) c, s, tem
   INTEGER i, i2, ip1, k, llm1, llp1
   !* FIRST EXECUTABLE STATEMENT  SRLCAL
   IF ( Kmp==Maxl ) THEN

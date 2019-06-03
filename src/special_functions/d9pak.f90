@@ -1,5 +1,5 @@
 !** D9PAK
-REAL(8) FUNCTION D9PAK(Y,N)
+REAL(DP) FUNCTION D9PAK(Y,N)
   !>
   !  Pack a base 2 exponent into a floating point number.
   !***
@@ -38,9 +38,9 @@ REAL(8) FUNCTION D9PAK(Y,N)
   !           Corrected (RWC)
   USE service, ONLY : XERMSG, D1MACH, I1MACH
   INTEGER N, nsum, ny
-  REAL(8) :: Y, a1n2b
+  REAL(DP) :: Y, a1n2b
   INTEGER, SAVE :: nmin, nmax
-  REAL(8), PARAMETER :: a1n210 = 3.321928094887362347870319429489D0
+  REAL(DP), PARAMETER :: a1n210 = 3.321928094887362347870319429489D0
   LOGICAL, SAVE :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  D9PAK
   IF ( first ) THEN

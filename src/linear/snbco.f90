@@ -135,11 +135,11 @@ SUBROUTINE SNBCO(Abe,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER Lda, N, Ml, Mu, Ipvt(N)
-  REAL Abe(Lda,2*Ml+Mu+1), Z(N)
-  REAL Rcond
+  REAL(SP) Abe(Lda,2*Ml+Mu+1), Z(N)
+  REAL(SP) Rcond
   !
-  REAL ek, t, wk, wkm
-  REAL anorm, s, sm, ynorm
+  REAL(SP) ek, t, wk, wkm
+  REAL(SP) anorm, s, sm, ynorm
   INTEGER i, info, j, ju, k, kb, kp1, l, ldb, lm, lz, m, ml1, mm, nl, nu
   !* FIRST EXECUTABLE STATEMENT  SNBCO
   ml1 = Ml + 1

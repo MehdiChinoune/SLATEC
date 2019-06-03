@@ -54,7 +54,7 @@ SUBROUTINE DSLUI(N,B,X,Rwork,Iwork)
   !     .. Scalar Arguments ..
   INTEGER N
   !     .. Array Arguments ..
-  REAL(8) :: B(N), Rwork(*), X(N)
+  REAL(DP) :: B(N), Rwork(*), X(N)
   INTEGER Iwork(*)
   !     .. Local Scalars ..
   INTEGER locdin, locil, lociu, locjl, locju, locl, locu

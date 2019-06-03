@@ -1,4 +1,5 @@
 MODULE TEST32_MOD
+  USE service, ONLY : SP, DP
   IMPLICIT NONE
 
 CONTAINS
@@ -33,15 +34,15 @@ CONTAINS
     !   900316  Deleted variables ONE and TWO.  (FNF)
     !   900321  Changed name of d.p. version from DFTRUE to DFDTRU.
 
-    REAL X, F, D
-    REAL(8) :: fact1, fact2, xx
+    REAL(SP) X, F, D
+    REAL(DP) :: fact1, fact2, xx
     !
     !* FIRST EXECUTABLE STATEMENT  FDTRUE
     xx = X
     fact1 = xx + 1
     fact2 = xx - 2
-    F = REAL( xx*fact1*fact2, 4 )
-    D = REAL( fact1*fact2 + xx*(fact1+fact2), 4 )
+    F = REAL( xx*fact1*fact2, SP )
+    D = REAL( fact1*fact2 + xx*(fact1+fact2), SP )
     !
     !------------- LAST LINE OF FDTRUE FOLLOWS -----------------------------
   END SUBROUTINE FDTRUE
@@ -112,13 +113,13 @@ CONTAINS
     !  Declare arguments.
     !
     INTEGER Lout, Kprint, Npts
-    REAL Xev(*), Fev(*), Dev(*), Fev2(*)
+    REAL(SP) Xev(*), Fev(*), Dev(*), Fev2(*)
     LOGICAL Fail
     !
     !  DECLARATIONS.
     !
     INTEGER i, ierr, iintt, next(2), next2(2)
-    REAL aed, aed2, aedmax, aedmin, aef, aef2, aefmax, aefmin, &
+    REAL(SP) aed, aed2, aedmax, aedmin, aef, aef2, aefmax, aefmin, &
       check(2), checkf(2), checkd(2), d1, d2, dermax, dtrue, dx, &
       eps1, eps2, f1, f2, fact, fermax, floord, floorf, ftrue, machep, red, &
       red2, redmax, redmin, ref, ref2, refmax, refmin, tol1, tol2, x1, &
@@ -385,7 +386,7 @@ CONTAINS
     !
     !  DEFINE RELATIVE ERROR WITH FLOOR.
     !
-    REAL FUNCTION RERR(err,value,floorr)
+    REAL(SP) FUNCTION RERR(err,value,floorr)
       REAL, INTENT(IN) :: err, value, floorr
       RERR = err/MAX(ABS(value),floorr)
     END FUNCTION RERR
@@ -445,7 +446,7 @@ CONTAINS
     !  DECLARATIONS.
     !
     INTEGER i, ierr, kontrl, nerr, next(2)
-    REAL d(10), dum(1), f(10), temp, x(10)
+    REAL(SP) d(10), dum(1), f(10), temp, x(10)
     LOGICAL skip
     !
     !  INITIALIZE.
@@ -623,14 +624,14 @@ CONTAINS
     !
     INTEGER Lout, Kprint
     LOGICAL Fail
-    REAL X(10), Y(10), F(10,10), Fx(10,10), Fy(10,10), Xe(51), Ye(51), &
+    REAL(SP) X(10), Y(10), F(10,10), Fx(10,10), Fy(10,10), Xe(51), Ye(51), &
       Fe(51), De(51), Fe2(51)
     !
     !  DECLARATIONS.
     !
     INTEGER i, ier2, ierr, inc, j, k, nerr
     LOGICAL faild, faile, failoc, skip
-    REAL dermax, derr, dtrue, dx, fdiff, fdifmx, fermax, ferr, ftrue, &
+    REAL(SP) dermax, derr, dtrue, dx, fdiff, fdifmx, fermax, ferr, ftrue, &
       machep, tol, pdermx, pdifmx, pfermx
     !
     INTEGER, PARAMETER :: nmax = 10, nx = 4, ny = 6
@@ -883,15 +884,15 @@ CONTAINS
     !
     !  DEFINE TEST FUNCTION AND DERIVATIVES.
     !
-    REAL FUNCTION FCN(ax,ay)
+    REAL(SP) FUNCTION FCN(ax,ay)
       REAL ax, ay
       FCN = ax*(ay*ay)*(ax*ax+1.E0)
     END FUNCTION FCN
-    REAL FUNCTION DFDX(ax,ay)
+    REAL(SP) FUNCTION DFDX(ax,ay)
       REAL ax, ay
       DFDX = (ay*ay)*(3.E0*ax*ax+1.E0)
     END FUNCTION DFDX
-    REAL FUNCTION DFDY(ax,ay)
+    REAL(SP) FUNCTION DFDY(ax,ay)
       REAL ax, ay
       DFDY = 2.E0*ax*ay*(ax*ax+1.E0)
     END FUNCTION DFDY
@@ -962,7 +963,7 @@ CONTAINS
     !  DECLARE LOCAL VARIABLES.
     !
     INTEGER i1, i2, i3, i4, i5, i6, i7, i8, i9, ifail, npts
-    REAL work(4000)
+    REAL(SP) work(4000)
     LOGICAL fail
     !
     !* FIRST EXECUTABLE STATEMENT  PCHQK1
@@ -1098,7 +1099,7 @@ CONTAINS
     !  DECLARE VARIABLES.
     !
     INTEGER i, ierr, ifail
-    REAL calc, d(7), errmax, error, f(7), machep, tol, true
+    REAL(SP) calc, d(7), errmax, error, f(7), machep, tol, true
     LOGICAL fail, skip
     !
     !  INITIALIZE.
@@ -1208,15 +1209,15 @@ CONTAINS
     !
     !  DEFINE TEST FUNCTIONS.
     !
-    REAL FUNCTION FCN(ax)
+    REAL(SP) FUNCTION FCN(ax)
       REAL, INTENT(IN) :: ax
       FCN = three*ax*ax*(ax-two)
     END FUNCTION FCN
-    REAL FUNCTION DERIV(ax)
+    REAL(SP) FUNCTION DERIV(ax)
       REAL, INTENT(IN) :: ax
       DERIV = three*ax*(two*(ax-two)+ax)
     END FUNCTION DERIV
-    REAL FUNCTION ANTDER(ax)
+    REAL(SP) FUNCTION ANTDER(ax)
       REAL, INTENT(IN) :: ax
       ANTDER = ax**3*(thrqtr*ax-two)
     END FUNCTION ANTDER
@@ -1312,7 +1313,7 @@ CONTAINS
     !
     INTEGER i, ierr, ifail, nbad, nbadz
     INTEGER, PARAMETER :: N = 9, NWK = 2*N
-    REAL d(N), dc(N), err, f(N), tol, told, tolz, vc(2), wk(NWK)
+    REAL(SP) d(N), dc(N), err, f(N), tol, told, tolz, vc(2), wk(NWK)
     REAL, PARAMETER :: ZERO = 0.0E0, MONE = -1.0E0
     CHARACTER(6) :: result
     !
@@ -1625,7 +1626,7 @@ CONTAINS
     !
     INTEGER, PARAMETER :: MAXN = 16, MAXN2 = 8, MAXN3 = 6, NB = 7
     INTEGER i, ierr, ifail, incfd, ismon(MAXN), k, n
-    REAL d(MAXN), db(NB), f(MAXN), fb(NB), x(MAXN)
+    REAL(SP) d(MAXN), db(NB), f(MAXN), fb(NB), x(MAXN)
     LOGICAL skip
     !
     !  DEFINE EXPECTED RESULTS.
@@ -1874,7 +1875,7 @@ CONTAINS
     !
     INTEGER i, ierr, ifail, inbv, j, knotyp, k, ndim, nknots
     INTEGER, PARAMETER :: N = 9
-    REAL bcoef(2*N), dcalc, derr, dermax, fcalc, ferr, &
+    REAL(SP) bcoef(2*N), dcalc, derr, dermax, fcalc, ferr, &
       fermax, t(2*N+4), terr, termax, tol, tolz, tsave(2*N+4), work(16*N)
     REAL, PARAMETER :: ZERO = 0.0E0
     LOGICAL fail
@@ -2000,7 +2001,7 @@ CONTAINS
     !
     !  Define relative error function.
     !
-    REAL FUNCTION RELERR(err,ans)
+    REAL(SP) FUNCTION RELERR(err,ans)
       REAL, INTENT(IN) :: ans, err
       RELERR = ABS(err)/MAX(1.0E-5,ABS(ans))
     END FUNCTION RELERR

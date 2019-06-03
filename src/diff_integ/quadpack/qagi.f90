@@ -177,12 +177,13 @@ SUBROUTINE QAGI(F,Bound,Inf,Epsabs,Epsrel,Result,Abserr,Neval,Ier,Limit,&
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   USE service, ONLY : XERMSG
   INTERFACE
-    REAL FUNCTION F(X)
-      REAL :: X
+    REAL(SP) FUNCTION F(X)
+      IMPORT SP
+      REAL(SP) :: X
     END FUNCTION F
   END INTERFACE
   INTEGER :: Inf, Last, Ier, Lenw, Limit, Neval, Iwork(Limit)
-  REAL :: Abserr, Bound, Epsabs, Epsrel, Result, Work(Lenw)
+  REAL(SP) :: Abserr, Bound, Epsabs, Epsrel, Result, Work(Lenw)
   INTEGER :: lvl, l1, l2, l3
   !
   !         CHECK VALIDITY OF LIMIT AND LENW.

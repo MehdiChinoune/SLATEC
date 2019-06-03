@@ -223,17 +223,18 @@ SUBROUTINE QAWOE(F,A,B,Omega,Integr,Epsabs,Epsrel,Limit,Icall,Maxp1,&
   USE service, ONLY : R1MACH
   !
   INTERFACE
-    REAL FUNCTION F(X)
-      REAL :: X
+    REAL(SP) FUNCTION F(X)
+      IMPORT SP
+      REAL(SP) :: X
     END FUNCTION F
   END INTERFACE
   INTEGER :: Icall, Ier, Integr, Last, Limit, Maxp1, Momcom, Neval
   INTEGER :: Iord(Limit), Nnlog(Limit)
-  REAL :: A, Abserr, B, Epsabs, Epsrel, Omega, Result
-  REAL :: Alist(Limit), Blist(Limit), Chebmo(Maxp1,25), Elist(Limit), Rlist(Limit)
+  REAL(SP) :: A, Abserr, B, Epsabs, Epsrel, Omega, Result
+  REAL(SP) :: Alist(Limit), Blist(Limit), Chebmo(Maxp1,25), Elist(Limit), Rlist(Limit)
   INTEGER :: id, ierro, iroff1, iroff2, iroff3, jupbnd, k, ksgn, ktmin, maxerr, &
     nev, nres, nrmax, nrmom, numrl2
-  REAL :: abseps, area, area1, area12, area2, a1, a2, b1, b2, correc, defab1, &
+  REAL(SP) :: abseps, area, area1, area12, area2, a1, a2, b1, b2, correc, defab1, &
     defab2, defabs, domega, dres, epmach, erlarg, erlast, errbnd, errmax, error1, &
     erro12, error2, errsum, ertest, oflow, resabs, reseps, res3la(3), rlist2(52), &
     small, uflow, width

@@ -1,5 +1,5 @@
 !** SDSDOT
-REAL FUNCTION SDSDOT(N,Sb,Sx,Incx,Sy,Incy)
+REAL(SP) FUNCTION SDSDOT(N,Sb,Sx,Incx,Sy,Incy)
   !>
   !  Compute the inner product of two vectors with extended
   !            precision accumulation.
@@ -56,8 +56,8 @@ REAL FUNCTION SDSDOT(N,Sb,Sx,Incx,Sy,Incy)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER i, Incx, Incy, kx, ky, N, ns
-  REAL Sx(*), Sy(*), Sb
-  REAL(8) :: dsdot
+  REAL(SP) Sx(*), Sy(*), Sb
+  REAL(DP) :: dsdot
   !* FIRST EXECUTABLE STATEMENT  SDSDOT
   dsdot = Sb
   IF ( N>0 ) THEN
@@ -69,7 +69,7 @@ REAL FUNCTION SDSDOT(N,Sb,Sx,Incx,Sy,Incy)
       DO i = 1, ns, Incx
         dsdot = dsdot + REAL(Sx(i))*REAL(Sy(i))
       END DO
-      SDSDOT = REAL( dsdot, 4 )
+      SDSDOT = REAL( dsdot, SP )
       RETURN
     ELSE
       !
@@ -80,12 +80,12 @@ REAL FUNCTION SDSDOT(N,Sb,Sx,Incx,Sy,Incy)
       IF ( Incx<0 ) kx = 1 + (1-N)*Incx
       IF ( Incy<0 ) ky = 1 + (1-N)*Incy
       DO i = 1, N
-        dsdot = dsdot + REAL(Sx(kx), 8)*REAL(Sy(ky), 8)
+        dsdot = dsdot + REAL( Sx(kx), DP )*REAL( Sy(ky), DP )
         kx = kx + Incx
         ky = ky + Incy
       END DO
     END IF
   END IF
-  SDSDOT = REAL( dsdot, 4 )
+  SDSDOT = REAL( dsdot, SP )
   RETURN
 END FUNCTION SDSDOT

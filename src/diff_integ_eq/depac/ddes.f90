@@ -36,19 +36,20 @@ SUBROUTINE DDES(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Ypout,Yp,Yy,Wt,P,Phi,&
   !
   INTERFACE
     SUBROUTINE DF(X,U,Uprime)
-      REAL(8) :: X
-      REAL(8) :: U(:), Uprime(:)
+      IMPORT DP
+      REAL(DP) :: X
+      REAL(DP) :: U(:), Uprime(:)
     END SUBROUTINE DF
   END INTERFACE
   INTEGER :: Idid, Init, Iquit, Ivc, Kgi, Kle4, Kold, Kord, Kprev, Ksteps, Neq, Ns
   INTEGER :: Info(15), Iv(10)
-  REAL(8) :: Delsgn, Eps, Fouru, H, Hold, T, Told, Tout, Tstop, Twou, X, Xold
-  REAL(8) :: Alpha(12), Atol(:), Beta(12), G(13), Gi(11), P(Neq), Phi(Neq,16), &
+  REAL(DP) :: Delsgn, Eps, Fouru, H, Hold, T, Told, Tout, Tstop, Twou, X, Xold
+  REAL(DP) :: Alpha(12), Atol(:), Beta(12), G(13), Gi(11), P(Neq), Phi(Neq,16), &
     Psi(12), Rtol(:), Sig(13), V(12), W(12), Wt(Neq), Y(Neq), Yp(Neq), &
     Ypout(Neq), Yy(Neq)
   LOGICAL :: Stiff, Start, Phase1, Nornd, Intout
   INTEGER :: k, l, ltol, natolp, nrtolp
-  REAL(8) :: a, absdel, del, dt, ha, u
+  REAL(DP) :: a, absdel, del, dt, ha, u
   LOGICAL :: crash
   CHARACTER(8) :: xern1
   CHARACTER(16) :: xern3, xern4

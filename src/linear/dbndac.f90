@@ -198,9 +198,9 @@ SUBROUTINE DBNDAC(G,Mdg,Nb,Ip,Ir,Mt,Jt)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   USE service, ONLY : XERMSG
   INTEGER :: Ip, Ir, Jt, Mdg, Mt, Nb
-  REAL(8) :: G(Mdg,Nb+1)
+  REAL(DP) :: G(Mdg,Nb+1)
   INTEGER :: i, ie, ig, ig1, ig2, iopt, j, jg, k, kh, l, lp1, mh, mu, nbp1, nerr
-  REAL(8) :: rho, zero
+  REAL(DP) :: rho, zero
   !* FIRST EXECUTABLE STATEMENT  DBNDAC
   zero = 0.D0
   !

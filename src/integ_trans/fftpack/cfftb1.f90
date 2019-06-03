@@ -78,7 +78,7 @@ SUBROUTINE CFFTB1(N,C,Ch,Wa,Ifac)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER :: N, Ifac(15)
-  REAL :: C(2*N), Ch(2*N), Wa(2*N)
+  REAL(SP) :: C(2*N), Ch(2*N), Wa(2*N)
   INTEGER :: i, idl1, ido, idot, ip, iw, ix2, ix3, ix4, k1, l1, l2, n2, na, nac, nf
   !* FIRST EXECUTABLE STATEMENT  CFFTB1
   nf = Ifac(2)

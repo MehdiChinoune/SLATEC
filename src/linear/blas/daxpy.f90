@@ -55,7 +55,7 @@ SUBROUTINE DAXPY(N,Da,Dx,Incx,Dy,Incy)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER i, Incx, Incy, ix, iy, m, mp1, N, ns
-  REAL(8) :: Dx(*), Dy(*), Da
+  REAL(DP) :: Dx(*), Dy(*), Da
   !* FIRST EXECUTABLE STATEMENT  DAXPY
   IF ( N<=0.OR.Da==0.0D0 ) RETURN
   IF ( Incx==Incy ) THEN

@@ -275,7 +275,7 @@ SUBROUTINE DWNNLS(W,Mdw,Me,Ma,N,L,Prgopt,X,Rnorm,Mode,Iwork,Work)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   USE service, ONLY : XERMSG
   INTEGER :: L, Ma, Mdw, Me, Mode, N, Iwork(Ma+Me+N)
-  REAL(8) :: Rnorm, Prgopt(:), W(Mdw,N+1), Work(Ma+Me+5*N), X(N)
+  REAL(DP) :: Rnorm, Prgopt(:), W(Mdw,N+1), Work(Ma+Me+5*N), X(N)
   INTEGER :: l1, l2, l3, l4, l5, liw, lw
   CHARACTER(8) :: xern1
   !* FIRST EXECUTABLE STATEMENT  DWNNLS

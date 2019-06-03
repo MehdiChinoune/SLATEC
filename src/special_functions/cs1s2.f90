@@ -28,10 +28,10 @@ SUBROUTINE CS1S2(Zr,S1,S2,Nz,Ascle,Alim,Iuf)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
 
-  COMPLEX c1, S1, s1d, S2, Zr
-  REAL aa, Alim, aln, Ascle, as1, as2, xx
+  COMPLEX(SP) c1, S1, s1d, S2, Zr
+  REAL(SP) aa, Alim, aln, Ascle, as1, as2, xx
   INTEGER Iuf, Nz
-  COMPLEX, PARAMETER :: czero  = (0.0E0,0.0E0)
+  COMPLEX(SP), PARAMETER :: czero  = (0.0E0,0.0E0)
   !* FIRST EXECUTABLE STATEMENT  CS1S2
   Nz = 0
   as1 = ABS(S1)

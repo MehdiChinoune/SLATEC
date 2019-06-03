@@ -86,9 +86,9 @@ SUBROUTINE CGBSL(Abd,Lda,N,Ml,Mu,Ipvt,B,Job)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER Lda, N, Ml, Mu, Ipvt(*), Job
-  COMPLEX Abd(Lda,*), B(*)
+  COMPLEX(SP) Abd(Lda,*), B(*)
   !
-  COMPLEX t
+  COMPLEX(SP) t
   INTEGER k, kb, l, la, lb, lm, m, nm1
   !* FIRST EXECUTABLE STATEMENT  CGBSL
   m = Mu + Ml + 1

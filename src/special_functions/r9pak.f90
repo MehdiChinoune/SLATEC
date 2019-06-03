@@ -1,5 +1,5 @@
 !** R9PAK
-REAL FUNCTION R9PAK(Y,N)
+REAL(SP) FUNCTION R9PAK(Y,N)
   !>
   !  Pack a base 2 exponent into a floating point number.
   !***
@@ -36,10 +36,10 @@ REAL FUNCTION R9PAK(Y,N)
   !   901009  Routine used I1MACH(7) where it should use I1MACH(10),
   !           Corrected (RWC)
   USE service, ONLY : XERMSG, R1MACH, I1MACH
-  REAL a1n2b, Y
+  REAL(SP) a1n2b, Y
   INTEGER N, nsum, ny
   INTEGER, SAVE :: nmin, nmax
-  REAL, PARAMETER :: a1n210 = 3.321928094887362E0
+  REAL(SP), PARAMETER :: a1n210 = 3.321928094887362E0
   LOGICAL, SAVE :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  R9PAK
   IF ( first ) THEN

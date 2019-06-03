@@ -139,16 +139,16 @@ SUBROUTINE CGBMV(Trans,M,N,Kl,Ku,Alpha,A,Lda,X,Incx,Beta,Y,Incy)
   !           lines were modified.  (BKS)
   USE service, ONLY : XERBLA
   !     .. Scalar Arguments ..
-  COMPLEX Alpha, Beta
+  COMPLEX(SP) Alpha, Beta
   INTEGER Incx, Incy, Kl, Ku, Lda, M, N
   CHARACTER :: Trans
   !     .. Array Arguments ..
-  COMPLEX A(Lda,*), X(*), Y(*)
+  COMPLEX(SP) A(Lda,*), X(*), Y(*)
   !     .. Parameters ..
-  COMPLEX, PARAMETER :: ONE = (1.0E+0,0.0E+0)
-  COMPLEX, PARAMETER :: ZERO = (0.0E+0,0.0E+0)
+  COMPLEX(SP), PARAMETER :: ONE = (1.0E+0,0.0E+0)
+  COMPLEX(SP), PARAMETER :: ZERO = (0.0E+0,0.0E+0)
   !     .. Local Scalars ..
-  COMPLEX temp
+  COMPLEX(SP) temp
   INTEGER i, info, ix, iy, j, jx, jy, k, kup1, kx, ky, lenx, leny
   LOGICAL noconj
   !     .. Intrinsic Functions ..

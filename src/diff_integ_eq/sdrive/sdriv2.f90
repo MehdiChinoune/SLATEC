@@ -347,21 +347,23 @@ SUBROUTINE SDRIV2(N,T,Y,F,Tout,Mstate,Nroot,Eps,Ewt,Mint,Work,Lenw,Iwork,&
   !   900329  Initial submission to SLATEC.
   USE service, ONLY : XERMSG
   INTERFACE
-    REAL FUNCTION G(N,T,Y,Iroot)
+    REAL(SP) FUNCTION G(N,T,Y,Iroot)
+      IMPORT SP
       INTEGER :: N, Iroot
-      REAL :: T, Y(N)
+      REAL(SP) :: T, Y(N)
     END FUNCTION G
     SUBROUTINE F(N,T,Y,Ydot)
+      IMPORT SP
       INTEGER :: N
-      REAL :: T, Y(:), Ydot(:)
+      REAL(SP) :: T, Y(:), Ydot(:)
     END SUBROUTINE F
   END INTERFACE
   INTEGER :: Ierflg, Leniw, Lenw, Mint, Mstate, N, Nroot
   INTEGER :: Iwork(Leniw+N)
-  REAL :: Eps, Ewt, T, Tout
-  REAL :: Work(Lenw), Y(N+1)
+  REAL(SP) :: Eps, Ewt, T, Tout
+  REAL(SP) :: Work(Lenw), Y(N+1)
   INTEGER :: ierror, miter, ml, mu, mxord, nde, nstate, ntask
-  REAL :: ewtcom(1), hmax
+  REAL(SP) :: ewtcom(1), hmax
   CHARACTER(8) :: intgr1
   INTEGER, PARAMETER :: IMPL = 0, MXSTEP = 1000
   !* FIRST EXECUTABLE STATEMENT  SDRIV2
@@ -425,22 +427,22 @@ SUBROUTINE SDRIV2(N,T,Y,F,Tout,Mstate,Nroot,Eps,Ewt,Mint,Work,Lenw,Iwork,&
 CONTAINS
   SUBROUTINE dum_JACOBN(N,T,Y,Dfdy,Matdim,Ml,Mu)
     INTEGER :: N, Matdim, Ml, Mu
-    REAL :: T
-    REAL :: Y(N), Dfdy(Matdim,N)
+    REAL(SP) :: T
+    REAL(SP) :: Y(N), Dfdy(Matdim,N)
     Dfdy = T
     Y = Ml + Mu
   END SUBROUTINE dum_JACOBN
   SUBROUTINE dum_USERS(Y,Yh,Ywt,Save1,Save2,T,H,El,Impl,N,Nde,Iflag)
     INTEGER :: Impl, N, Nde, Iflag
-    REAL :: T, H, El
-    REAL :: Y(N), Yh(N,13), Ywt(N), Save1(N), Save2(N)
+    REAL(SP) :: T, H, El
+    REAL(SP) :: Y(N), Yh(N,13), Ywt(N), Save1(N), Save2(N)
     Y = Ywt + Save1 + Save2
     Yh = T + H + El
     Impl = Nde + Iflag
   END SUBROUTINE dum_USERS
   SUBROUTINE dum_FA(N,T,Y,A,Matdim,Ml,Mu,Nde)
     INTEGER :: N, Matdim, Ml, Mu, Nde
-    REAL :: T, Y(N), A(:,:)
+    REAL(SP) :: T, Y(N), A(:,:)
     T = Matdim + Ml + Mu + Nde
     Y = 0.
     A = 0.

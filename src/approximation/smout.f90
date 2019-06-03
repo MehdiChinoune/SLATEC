@@ -62,7 +62,7 @@ SUBROUTINE SMOUT(M,N,Lda,A,Ifmt,Idigit)
   !   900328  Added TYPE section.  (WRB)
   USE service, ONLY : I1MACH
   INTEGER :: Idigit, Lda, M, N
-  REAL :: A(Lda,N)
+  REAL(SP) :: A(Lda,N)
   CHARACTER :: Ifmt*(*)
   INTEGER :: i, j, k1, k2, lout, ndigit
   CHARACTER(3), PARAMETER :: icol = 'COL'

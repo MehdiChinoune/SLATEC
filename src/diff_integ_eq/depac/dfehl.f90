@@ -54,15 +54,16 @@ SUBROUTINE DFEHL(DF,Neq,T,Y,H,Yp,F1,F2,F3,F4,F5,Ys)
   !
   INTERFACE
     SUBROUTINE DF(X,U,Uprime)
-      REAL(8) :: X
-      REAL(8) :: U(:), Uprime(:)
+      IMPORT DP
+      REAL(DP) :: X
+      REAL(DP) :: U(:), Uprime(:)
     END SUBROUTINE DF
   END INTERFACE
   INTEGER :: Neq
-  REAL(8) :: H, T
-  REAL(8) :: F1(Neq), F2(Neq), F3(Neq), F4(Neq), F5(Neq), Y(Neq), Yp(Neq), Ys(Neq)
+  REAL(DP) :: H, T
+  REAL(DP) :: F1(Neq), F2(Neq), F3(Neq), F4(Neq), F5(Neq), Y(Neq), Yp(Neq), Ys(Neq)
   INTEGER :: k
-  REAL(8) :: ch
+  REAL(DP) :: ch
   !
   !* FIRST EXECUTABLE STATEMENT  DFEHL
   ch = H/4.0D0

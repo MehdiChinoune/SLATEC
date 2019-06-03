@@ -168,12 +168,13 @@ SUBROUTINE DQAG(F,A,B,Epsabs,Epsrel,Key,Result,Abserr,Neval,Ier,Limit,&
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   USE service, ONLY : XERMSG
   INTERFACE
-    REAL(8) FUNCTION F(X)
-      REAL(8) :: X
+    REAL(DP) FUNCTION F(X)
+      IMPORT DP
+      REAL(DP) :: X
     END FUNCTION F
   END INTERFACE
   INTEGER :: Ier, Key, Last, Lenw, Limit, Neval, Iwork(Limit)
-  REAL(8) :: A, Abserr, B, Epsabs, Epsrel, Result, Work(Lenw)
+  REAL(DP) :: A, Abserr, B, Epsabs, Epsrel, Result, Work(Lenw)
   INTEGER :: lvl, l1, l2, l3
   !* FIRST EXECUTABLE STATEMENT  DQAG
   Ier = 6

@@ -21,12 +21,12 @@ SUBROUTINE HWSSS1(Ts,Tf,M,Mbdcnd,Bdts,Bdtf,Ps,Pf,N,Nbdcnd,Bdps,Bdpf,&
   !   900402  Added TYPE section.  (WRB)
 
   INTEGER :: Idimf, M, Mbdcnd, N, Nbdcnd
-  REAL :: Elmbda, Pertrb, Pf, Ps, Tf, Ts
-  REAL :: Am(M+1), Bdpf(M+1), Bdps(M+1), Bdtf(N+1), Bdts(N+1), Bm(M+1), Cm(M+1), &
+  REAL(SP) :: Elmbda, Pertrb, Pf, Ps, Tf, Ts
+  REAL(SP) :: Am(M+1), Bdpf(M+1), Bdps(M+1), Bdtf(N+1), Bdts(N+1), Bm(M+1), Cm(M+1), &
     D(:), F(Idimf,N+1), Sint(M+1), Sn(M+1), Ss(M+1)
   INTEGER :: i, ierror, ii, iid, inp, ising, isp, itf, itfm, its, itsp, j, jpf, &
     jpfm, jps, jpsp, mbr, mp1, munk, nbr, np1, nunk
-  REAL :: at, cf, cnp, cp, csp, ct, den, dfn, dfs, dnn, dns, dphi, dphi2, dsn, &
+  REAL(SP) :: at, cf, cnp, cp, csp, ct, den, dfn, dfs, dnn, dns, dphi, dphi2, dsn, &
     dss, dth, dth2, fim1, fjj, fm, fn, hdth, hld, hne, rtn, rts, summ, sum1, sum2, &
     t1, tdp, tdt, theta, wp, wpf, wps, wtf, wts, yhld
   !* FIRST EXECUTABLE STATEMENT  HWSSS1

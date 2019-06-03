@@ -40,10 +40,10 @@ SUBROUTINE DBSKES(Xnu,X,Nin,Bke)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   USE service, ONLY : XERMSG, D1MACH
   INTEGER :: Nin
-  REAL(8) :: Xnu, X, Bke(Nin)
+  REAL(DP) :: Xnu, X, Bke(Nin)
   INTEGER :: i, iswtch, n
-  REAL(8) :: bknu1, v, vincr, vend, direct
-  REAL(8), PARAMETER :: alnbig = LOG(D1MACH(2))
+  REAL(DP) :: bknu1, v, vincr, vend, direct
+  REAL(DP), PARAMETER :: alnbig = LOG(D1MACH(2))
   !* FIRST EXECUTABLE STATEMENT  DBSKES
   !
   v = ABS(Xnu)

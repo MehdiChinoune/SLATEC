@@ -24,10 +24,10 @@ SUBROUTINE CDNTP(H,K,N,Nq,T,Tout,Yh,Y)
   !   900329  Initial submission to SLATEC.
 
   INTEGER :: K, N, Nq
-  REAL :: H, T, Tout
-  COMPLEX :: Y(N), Yh(N,Nq+1)
+  REAL(SP) :: H, T, Tout
+  COMPLEX(SP) :: Y(N), Yh(N,Nq+1)
   INTEGER :: i, j, jj, kk, kused
-  REAL :: factor, r
+  REAL(SP) :: factor, r
   !* FIRST EXECUTABLE STATEMENT  CDNTP
   IF ( K==0 ) THEN
     DO i = 1, N

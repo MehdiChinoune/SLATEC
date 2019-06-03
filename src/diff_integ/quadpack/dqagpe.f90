@@ -207,19 +207,20 @@ SUBROUTINE DQAGPE(F,A,B,Npts2,Points,Epsabs,Epsrel,Limit,Result,Abserr,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   USE service, ONLY : D1MACH
   INTERFACE
-    REAL(8) FUNCTION F(X)
-      REAL(8) :: X
+    REAL(DP) FUNCTION F(X)
+      IMPORT DP
+      REAL(DP) :: X
     END FUNCTION F
   END INTERFACE
   INTEGER :: Ier, Last, Limit, Neval, Npts2
   INTEGER :: Iord(Limit), Level(Limit), Ndin(Npts2)
-  REAL(8) :: A, Abserr, B, Epsabs, Epsrel, Result
-  REAL(8) :: Alist(Limit), Blist(Limit), Elist(Limit), Points(Npts2), Pts(Npts2), &
+  REAL(DP) :: A, Abserr, B, Epsabs, Epsrel, Result
+  REAL(DP) :: Alist(Limit), Blist(Limit), Elist(Limit), Points(Npts2), Pts(Npts2), &
     Rlist(Limit)
   INTEGER :: i, id, ierro, ind1, ind2, ip1, iroff1, iroff2, iroff3, j, jlow, &
     jupbnd, k, ksgn, ktmin, levcur, levmax, maxerr, nintt, nintp1, npts, &
     nres, nrmax, numrl2
-  REAL(8) :: abseps, area, area1, area12, area2, a1, a2, b1, b2, correc, defabs, &
+  REAL(DP) :: abseps, area, area1, area12, area2, a1, a2, b1, b2, correc, defabs, &
     defab1, defab2, dres, epmach, erlarg, erlast, errbnd, errmax, error1, erro12, &
     error2, errsum, ertest, oflow, resa, resabs, reseps, res3la(3), rlist2(52), &
     signn, temp, uflow

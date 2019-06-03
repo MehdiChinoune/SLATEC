@@ -179,15 +179,16 @@ SUBROUTINE DQAWSE(F,A,B,Alfa,Beta,Integr,Epsabs,Epsrel,Limit,Result,&
   USE service, ONLY : D1MACH
   !
   INTERFACE
-    REAL(8) FUNCTION F(X)
-      REAL(8) :: X
+    REAL(DP) FUNCTION F(X)
+      IMPORT DP
+      REAL(DP) :: X
     END FUNCTION F
   END INTERFACE
   INTEGER :: Ier, Integr, Last, Limit, Neval, Iord(Limit)
-  REAL(8) :: A, Abserr, Alfa, B, Beta, Epsabs, Epsrel, Result
-  REAL(8) :: Alist(Limit), Blist(Limit), Elist(Limit), Rlist(Limit)
+  REAL(DP) :: A, Abserr, Alfa, B, Beta, Epsabs, Epsrel, Result
+  REAL(DP) :: Alist(Limit), Blist(Limit), Elist(Limit), Rlist(Limit)
   INTEGER :: iroff1, iroff2, k, maxerr, nev, nrmax
-  REAL(8) :: area, area1, area12, area2, a1, a2, b1, b2, centre, epmach, errbnd, &
+  REAL(DP) :: area, area1, area12, area2, a1, a2, b1, b2, centre, epmach, errbnd, &
     errmax, error1, erro12, error2, errsum, resas1, resas2, rg(25), rh(25), &
     ri(25), rj(25), uflow
   !

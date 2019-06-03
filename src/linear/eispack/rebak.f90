@@ -75,8 +75,8 @@ SUBROUTINE REBAK(Nm,N,B,Dl,M,Z)
 
   !
   INTEGER i, j, k, M, N, i1, ii, Nm
-  REAL B(Nm,*), Dl(*), Z(Nm,*)
-  REAL x
+  REAL(SP) B(Nm,*), Dl(*), Z(Nm,*)
+  REAL(SP) x
   !
   !* FIRST EXECUTABLE STATEMENT  REBAK
   IF ( M/=0 ) THEN

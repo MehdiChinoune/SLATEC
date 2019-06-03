@@ -40,9 +40,9 @@ LOGICAL FUNCTION WNLT2(Me,Mend,Ir,Factor,Tau,Scalee,Wic)
   !   890620  Code extracted from WNLIT and made a subroutine.  (RWC))
 
   INTEGER :: Ir, Me, Mend
-  REAL :: Factor, Tau, Scalee(Mend), Wic(:)
+  REAL(SP) :: Factor, Tau, Scalee(Mend), Wic(:)
   !
-  REAL rn, sn, t
+  REAL(SP) rn, sn, t
   INTEGER j
   !
   !* FIRST EXECUTABLE STATEMENT  WNLT2

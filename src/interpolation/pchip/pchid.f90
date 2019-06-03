@@ -1,5 +1,5 @@
 !** PCHID
-REAL FUNCTION PCHID(N,X,F,D,Incfd,Skip,Ia,Ib,Ierr)
+REAL(SP) FUNCTION PCHID(N,X,F,D,Incfd,Skip,Ia,Ib,Ierr)
   !>
   !  Evaluate the definite integral of a piecewise cubic
   !            Hermite function over an interval whose endpoints are data
@@ -113,17 +113,17 @@ REAL FUNCTION PCHID(N,X,F,D,Incfd,Skip,Ia,Ib,Ierr)
   !  DECLARE ARGUMENTS.
   !
   INTEGER N, Incfd, Ia, Ib, Ierr
-  REAL X(N), F(Incfd,N), D(Incfd,N)
+  REAL(SP) X(N), F(Incfd,N), D(Incfd,N)
   LOGICAL Skip
   !
   !  DECLARE LOCAL VARIABLES.
   !
   INTEGER i, iup, low
-  REAL h, summ, value
+  REAL(SP) h, summ, value
   !
   !  INITIALIZE.
   !
-  REAL, PARAMETER :: zero = 0., half = 0.5, six = 6.
+  REAL(SP), PARAMETER :: zero = 0., half = 0.5, six = 6.
   !* FIRST EXECUTABLE STATEMENT  PCHID
   value = zero
   !

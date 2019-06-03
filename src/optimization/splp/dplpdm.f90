@@ -37,13 +37,13 @@ SUBROUTINE DPLPDM(Mrelas,Nvars,Lbm,Nredc,Info,Iopt,Ibasis,Imat,Ibrc,&
   USE LA05DD, ONLY : small_com
   USE service, ONLY : XERMSG
   INTEGER :: Info, Iopt, Lbm, Mrelas, Nredc, Nvars
-  REAL(8) :: Anorm, Eps, Gg, Uu
+  REAL(DP) :: Anorm, Eps, Gg, Uu
   LOGICAL :: Singlr, Redbas
   INTEGER :: Ibasis(Nvars+Mrelas), Imat(:), Ibrc(Lbm,2), Ipr(2*Mrelas), &
     Iwr(8*Mrelas), Ind(Nvars+Mrelas)
-  REAL(8) :: Amat(:), Basmat(Lbm), Csc(Nvars), Wr(Mrelas)
+  REAL(DP) :: Amat(:), Basmat(Lbm), Csc(Nvars), Wr(Mrelas)
   INTEGER :: i, iplace, j, k, nzbm
-  REAL(8) :: aij, one, zero
+  REAL(DP) :: aij, one, zero
   CHARACTER(16) :: xern3
   !
   !* FIRST EXECUTABLE STATEMENT  DPLPDM

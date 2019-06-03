@@ -1,4 +1,5 @@
 MODULE common_mod
+  USE service, ONLY: SP
   IMPLICIT NONE
 
 CONTAINS

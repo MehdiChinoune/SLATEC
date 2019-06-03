@@ -77,10 +77,10 @@ SUBROUTINE SGEDI(A,Lda,N,Ipvt,Det,Work,Job)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER Lda, N, Ipvt(*), Job
-  REAL A(Lda,*), Det(2), Work(*)
+  REAL(SP) A(Lda,*), Det(2), Work(*)
   !
-  REAL t
-  REAL ten
+  REAL(SP) t
+  REAL(SP) ten
   INTEGER i, j, k, kb, kp1, l, nm1
   !* FIRST EXECUTABLE STATEMENT  SGEDI
   !

@@ -77,8 +77,8 @@ SUBROUTINE TRBAK3(Nm,N,Nv,A,M,Z)
 
   !
   INTEGER i, j, k, l, M, N, ik, iz, Nm, Nv
-  REAL A(Nv), Z(Nm,M)
-  REAL h, s
+  REAL(SP) A(Nv), Z(Nm,M)
+  REAL(SP) h, s
   !
   !* FIRST EXECUTABLE STATEMENT  TRBAK3
   IF ( M/=0 ) THEN

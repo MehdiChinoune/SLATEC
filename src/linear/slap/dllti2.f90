@@ -126,7 +126,7 @@ SUBROUTINE DLLTI2(N,B,X,Nel,Iel,Jel,El,Dinv)
   !     .. Scalar Arguments ..
   INTEGER N, Nel
   !     .. Array Arguments ..
-  REAL(8) :: B(N), Dinv(N), El(Nel), X(N)
+  REAL(DP) :: B(N), Dinv(N), El(Nel), X(N)
   INTEGER Iel(Nel), Jel(Nel)
   !     .. Local Scalars ..
   INTEGER i, ibgn, iend, irow

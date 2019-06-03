@@ -118,21 +118,22 @@ SUBROUTINE DQC25F(F,A,B,Omega,Integr,Nrmom,Maxp1,Ksave,Result,Abserr,&
   USE linear, ONLY : DGTSL
   !
   INTERFACE
-    REAL(8) FUNCTION F(X)
-      REAL(8) :: X
+    REAL(DP) FUNCTION F(X)
+      IMPORT DP
+      REAL(DP) :: X
     END FUNCTION F
   END INTERFACE
   INTEGER :: Integr, Ksave, Momcom, Neval, Maxp1, Nrmom
-  REAL(8) :: A, Abserr, B, Chebmo(Maxp1,25), Omega, Resabs, Resasc, Result
+  REAL(DP) :: A, Abserr, B, Chebmo(Maxp1,25), Omega, Resabs, Resasc, Result
   INTEGER :: i, iers, isym, j, k, m, noequ, noeq1
-  REAL(8) :: ac, an, an2, as, asap, ass, centr, cheb12(13), cheb24(25), conc, &
+  REAL(DP) :: ac, an, an2, as, asap, ass, centr, cheb12(13), cheb24(25), conc, &
     cons, cospar, d(25), d1(25), d2(25), estc, ests, fval(25), hlgth, oflow, &
     parint, par2, par22, p2, p3, p4, resc12, resc24, ress12, ress24, sinpar, v(28)
   !
   !           THE VECTOR X CONTAINS THE VALUES COS(K*PI/24)
   !           K = 1, ...,11, TO BE USED FOR THE CHEBYSHEV EXPANSION OF F
   !
-  REAL(8), PARAMETER :: x(11) = [ 0.9914448613738104D+00, 0.9659258262890683D+00, &
+  REAL(DP), PARAMETER :: x(11) = [ 0.9914448613738104D+00, 0.9659258262890683D+00, &
     0.9238795325112868D+00, 0.8660254037844386D+00, 0.7933533402912352D+00, &
     0.7071067811865475D+00, 0.6087614290087206D+00, 0.5000000000000000D+00, &
     0.3826834323650898D+00, 0.2588190451025208D+00, 0.1305261922200516D+00 ]

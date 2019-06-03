@@ -104,9 +104,9 @@ SUBROUTINE CGBFA(Abd,Lda,N,Ml,Mu,Ipvt,Info)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER Lda, N, Ml, Mu, Ipvt(*), Info
-  COMPLEX Abd(Lda,*)
+  COMPLEX(SP) Abd(Lda,*)
   !
-  COMPLEX t
+  COMPLEX(SP) t
   INTEGER i, i0, j, ju, jz, j0, j1, k, kp1, l, lm, m, mm, nm1
   !
   !* FIRST EXECUTABLE STATEMENT  CGBFA

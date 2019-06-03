@@ -137,15 +137,15 @@ SUBROUTINE CBIRY(Z,Id,Kode,Bi,Ierr)
   !   920811  Prologue revised.  (DWL)
   USE service, ONLY : R1MACH, I1MACH
   INTEGER :: Id, Ierr, Kode
-  COMPLEX :: Bi, Z
+  COMPLEX(SP) :: Bi, Z
   INTEGER :: k, k1, k2, nz
-  REAL :: aa, ad, ak, alim, atrm, az, az3, bb, bk, ck, dig, dk, d1, d2, elim, fid, &
+  REAL(SP) :: aa, ad, ak, alim, atrm, az, az3, bb, bk, ck, dig, dk, d1, d2, elim, fid, &
     fmr, fnu, fnul, rl, r1m5, sfac, tol, zi, zr, z3i, z3r
-  COMPLEX :: csq, cy(2), s1, s2, trm1, trm2, zta, z3
-  REAL, PARAMETER :: tth = 6.66666666666666667E-01, c1 = 6.14926627446000736E-01, &
+  COMPLEX(SP) :: csq, cy(2), s1, s2, trm1, trm2, zta, z3
+  REAL(SP), PARAMETER :: tth = 6.66666666666666667E-01, c1 = 6.14926627446000736E-01, &
     c2 = 4.48288357353826359E-01, coef = 5.77350269189625765E-01, &
     pi =  3.14159265358979324E+00
-  COMPLEX, PARAMETER :: cone = (1.0E0,0.0E0)
+  COMPLEX(SP), PARAMETER :: cone = (1.0E0,0.0E0)
   !* FIRST EXECUTABLE STATEMENT  CBIRY
   Ierr = 0
   nz = 0

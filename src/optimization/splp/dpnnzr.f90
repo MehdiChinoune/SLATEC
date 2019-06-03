@@ -62,10 +62,10 @@ SUBROUTINE DPNNZR(I,Xval,Iplace,Sx,Ix,Ircx)
   !   910403  Updated AUTHOR and DESCRIPTION sections.  (WRB)
   USE service, ONLY : XERMSG
   INTEGER :: I, Iplace, Ircx, Ix(:)
-  REAL(8) :: Xval, Sx(:)
+  REAL(DP) :: Xval, Sx(:)
   INTEGER :: i1, idiff, iend, ii, il, ilast, iopt, ipl, ipploc, istart, j, l, &
     ll, lmx, lpg, n20046, nerr, np
-  REAL(8), PARAMETER :: zero = 0.D0
+  REAL(DP), PARAMETER :: zero = 0.D0
   !* FIRST EXECUTABLE STATEMENT  DPNNZR
   iopt = 1
   !

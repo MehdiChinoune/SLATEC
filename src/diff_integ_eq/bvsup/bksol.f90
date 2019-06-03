@@ -34,7 +34,7 @@ SUBROUTINE BKSOL(N,A,X)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
   INTEGER :: N
-  REAL :: A(N*(N+1)), X(N)
+  REAL(SP) :: A(N*(N+1)), X(N)
   INTEGER :: j, k, m
   !* FIRST EXECUTABLE STATEMENT  BKSOL
   m = (N*(N+1))/2

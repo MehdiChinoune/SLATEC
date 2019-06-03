@@ -254,23 +254,25 @@ SUBROUTINE DOMN(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Nsave,Itol,Tol,&
   USE service, ONLY : D1MACH
   INTERFACE
     SUBROUTINE MSOLVE(N,R,Z,Rwork,Iwork)
+      IMPORT DP
       INTEGER :: N, Iwork(*)
-      REAL(8) :: R(N), Z(N), Rwork(*)
+      REAL(DP) :: R(N), Z(N), Rwork(*)
     END SUBROUTINE
     SUBROUTINE MATVEC(N,X,R,Nelt,Ia,Ja,A,Isym)
+      IMPORT DP
       INTEGER :: N, Nelt, Isym, Ia(Nelt), Ja(Nelt)
-      REAL(8) :: X(N), R(N), A(Nelt)
+      REAL(DP) :: X(N), R(N), A(Nelt)
     END SUBROUTINE
   END INTERFACE
   !     .. Scalar Arguments ..
-  REAL(8) :: Err, Tol
+  REAL(DP) :: Err, Tol
   INTEGER Ierr, Isym, Iter, Itmax, Itol, Iunit, N, Nelt, Nsave
   !     .. Array Arguments ..
-  REAL(8) :: A(Nelt), Ap(N,0:Nsave), B(N), Csav(Nsave), Dz(N), &
+  REAL(DP) :: A(Nelt), Ap(N,0:Nsave), B(N), Csav(Nsave), Dz(N), &
     Emap(N,0:Nsave), P(N,0:Nsave), R(N), Rwork(*), X(N), Z(N)
   INTEGER Ia(Nelt), Iwork(*), Ja(Nelt)
   !     .. Local Scalars ..
-  REAL(8) :: ak, akden, aknum, bkl, bnrm, fuzz, solnrm
+  REAL(DP) :: ak, akden, aknum, bkl, bnrm, fuzz, solnrm
   INTEGER i, ip, ipo, k, l, lmax
   !     .. Intrinsic Functions ..
   INTRINSIC ABS, MIN, MOD

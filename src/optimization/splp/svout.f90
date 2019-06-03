@@ -57,7 +57,7 @@ SUBROUTINE SVOUT(N,Sx,Ifmt,Idigit)
   !   900328  Added TYPE section.  (WRB)
   USE service, ONLY : I1MACH
   INTEGER :: Idigit, N
-  REAL :: Sx(N)
+  REAL(SP) :: Sx(N)
   CHARACTER :: Ifmt*(*)
   INTEGER :: i, j, k1, k2, lout, ndigit
   !

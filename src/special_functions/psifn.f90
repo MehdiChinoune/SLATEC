@@ -115,15 +115,15 @@ SUBROUTINE PSIFN(X,N,Kode,M,Ans,Nz,Ierr)
   USE service, ONLY : R1MACH, I1MACH
   INTEGER :: Ierr, Kode, M, N, Nz
   INTEGER :: i, j, k, mm, mx, nn, np, nx
-  REAL :: Ans(M), X
-  REAL :: arg, den, elim, eps, fln, fn, fnp, fns, fx, rln, rxsq, r1m4, r1m5, s, &
+  REAL(SP) :: Ans(M), X
+  REAL(SP) :: arg, den, elim, eps, fln, fn, fnp, fns, fx, rln, rxsq, r1m4, r1m5, s, &
     slope, t, ta, tk, tol, tols, trm(22), trmr(100), tss, tst, tt, t1, t2, wdtol, &
     xdmln, xdmy, xinc, xln, xm, xmin, xq, yint
   INTEGER, PARAMETER :: nmax = 100
   !-----------------------------------------------------------------------
   !             BERNOULLI NUMBERS
   !-----------------------------------------------------------------------
-  REAL, PARAMETER :: b(22) = [ 1.00000000000000000E+00, -5.00000000000000000E-01, &
+  REAL(SP), PARAMETER :: b(22) = [ 1.00000000000000000E+00, -5.00000000000000000E-01, &
     1.66666666666666667E-01, -3.33333333333333333E-02, 2.38095238095238095E-02, &
     -3.33333333333333333E-02, 7.57575757575757576E-02,-2.53113553113553114E-01, &
     1.16666666666666667E+00, -7.09215686274509804E+00, 5.49711779448621554E+01, &

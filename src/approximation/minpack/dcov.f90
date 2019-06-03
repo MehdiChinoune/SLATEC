@@ -163,16 +163,17 @@ SUBROUTINE DCOV(FCN,Iopt,M,N,X,Fvec,R,Ldr,Info,Wa1,Wa2,Wa3,Wa4)
   USE service, ONLY : XERMSG
   INTERFACE
     SUBROUTINE FCN(Iflag,M,N,X,Fvec,Fjac,Ldfjac)
+      IMPORT DP
       INTEGER :: Ldfjac, M, N, Iflag
-      REAL(8) :: X(N), Fvec(M), Fjac(:,:)
+      REAL(DP) :: X(N), Fvec(M), Fjac(:,:)
     END SUBROUTINE FCN
   END INTERFACE
   INTEGER :: Info, Iopt, Ldr, M, N
-  REAL(8) :: X(N), R(Ldr,N), Fvec(M), Wa1(N,1), Wa2(N), Wa3(N), Wa4(M)
+  REAL(DP) :: X(N), R(Ldr,N), Fvec(M), Wa1(N,1), Wa2(N), Wa3(N), Wa4(M)
   INTEGER :: i, idum(1), iflag, j, k, kp1, nm1, nrow
-  REAL(8) :: sigma, temp
+  REAL(DP) :: sigma, temp
   LOGICAL :: sing
-  REAL(8), PARAMETER :: zero = 0.D0, one = 1.D0
+  REAL(DP), PARAMETER :: zero = 0.D0, one = 1.D0
   !* FIRST EXECUTABLE STATEMENT  DCOV
   sing = .FALSE.
   iflag = 0

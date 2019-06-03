@@ -274,30 +274,34 @@ SUBROUTINE SBCG(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MTTVEC,MSOLVE,MTSOLV,Itol,&
   USE service, ONLY : R1MACH
   INTERFACE
     SUBROUTINE MSOLVE(N,R,Z,Rwork,Iwork)
+      IMPORT SP
       INTEGER :: N, Iwork(*)
-      REAL :: R(N), Z(N), Rwork(*)
+      REAL(SP) :: R(N), Z(N), Rwork(*)
     END SUBROUTINE
     SUBROUTINE MTSOLV(N,Rr,Zz,Rwork,Iwork)
+      IMPORT SP
       INTEGER :: N, Iwork(*)
-      REAL :: Rr(N), Zz(N), Rwork(*)
+      REAL(SP) :: Rr(N), Zz(N), Rwork(*)
     END SUBROUTINE
     SUBROUTINE MATVEC(N,X,R,Nelt,Ia,Ja,A,Isym)
+      IMPORT SP
       INTEGER :: N, Nelt, Isym, Ia(Nelt), Ja(Nelt)
-      REAL :: X(N), R(N), A(Nelt)
+      REAL(SP) :: X(N), R(N), A(Nelt)
     END SUBROUTINE
     SUBROUTINE MTTVEC(N,X,Y,Nelt,Ia,Ja,A,Isym)
+      IMPORT SP
       INTEGER :: N, Nelt, Isym, Ia(Nelt), Ja(Nelt)
-      REAL :: X(N), Y(N), A(Nelt)
+      REAL(SP) :: X(N), Y(N), A(Nelt)
     END SUBROUTINE
   END INTERFACE
   !     .. Scalar Arguments ..
-  REAL Err, Tol
+  REAL(SP) Err, Tol
   INTEGER Ierr, Isym, Iter, Itmax, Itol, Iunit, N, Nelt
   !     .. Array Arguments ..
-  REAL A(Nelt), B(N), Dz(N), P(N), Pp(N), R(N), Rr(N), Rwork(*), X(N), Z(N), Zz(N)
+  REAL(SP) A(Nelt), B(N), Dz(N), P(N), Pp(N), R(N), Rr(N), Rwork(*), X(N), Z(N), Zz(N)
   INTEGER Ia(Nelt), Iwork(*), Ja(Nelt)
   !     .. Local Scalars ..
-  REAL ak, akden, bk, bkden, bknum, bnrm, fuzz, solnrm, tolmin
+  REAL(SP) ak, akden, bk, bkden, bknum, bnrm, fuzz, solnrm, tolmin
   INTEGER i, k
   !     .. Intrinsic Functions ..
   INTRINSIC ABS

@@ -69,9 +69,9 @@ SUBROUTINE BSPDR(T,A,N,K,Nderiv,Ad)
   USE service, ONLY : XERMSG
   !
   INTEGER :: K, N, Nderiv
-  REAL :: A(N), Ad((2*N-Nderiv+1)*Nderiv/2), T(N+K)
+  REAL(SP) :: A(N), Ad((2*N-Nderiv+1)*Nderiv/2), T(N+K)
   INTEGER :: i, id, ii, ipkmid, jj, jm, kmid
-  REAL :: diff, fkmid
+  REAL(SP) :: diff, fkmid
   !     DIMENSION T(N+K), AD((2*N-NDERIV+1)*NDERIV/2)
   !* FIRST EXECUTABLE STATEMENT  BSPDR
   IF ( K<1 ) THEN

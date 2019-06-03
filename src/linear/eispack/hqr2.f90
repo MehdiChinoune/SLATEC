@@ -63,7 +63,7 @@ SUBROUTINE HQR2(Nm,N,Low,Igh,H,Wr,Wi,Z,Ierr)
   !          dimensional REAL arrays, dimensioned WR(N) and WI(N).
   !
   !        Z contains the real and imaginary parts of the eigenvectors.
-  !          If the J-th eigenvalue is real, the J-th column of Z
+  !          If the J-th eigenvalue is REAL(SP), the J-th column of Z
   !          contains its eigenvector.  If the J-th eigenvalue is complex
   !          with positive imaginary part, the J-th and (J+1)-th
   !          columns of Z contain the real and imaginary parts of its
@@ -103,8 +103,8 @@ SUBROUTINE HQR2(Nm,N,Low,Igh,H,Wr,Wi,Z,Ierr)
   !
   INTEGER i, j, k, l, m, N, en, ii, jj, ll, mm, na, Nm, nn
   INTEGER Igh, itn, its, Low, mp2, enm2, Ierr
-  REAL H(Nm,*), Wr(*), Wi(*), Z(Nm,*)
-  REAL p, q, r, s, t, w, x, y, ra, sa, vi, vr, zz, norm, s1, s2
+  REAL(SP) H(Nm,*), Wr(*), Wi(*), Z(Nm,*)
+  REAL(SP) p, q, r, s, t, w, x, y, ra, sa, vi, vr, zz, norm, s1, s2
   LOGICAL notlas
   !
   !* FIRST EXECUTABLE STATEMENT  HQR2

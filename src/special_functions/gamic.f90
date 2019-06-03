@@ -1,5 +1,5 @@
 !** GAMIC
-REAL FUNCTION GAMIC(A,X)
+REAL(SP) FUNCTION GAMIC(A,X)
   !>
   !  Calculate the complementary incomplete Gamma function.
   !***
@@ -52,10 +52,10 @@ REAL FUNCTION GAMIC(A,X)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920528  DESCRIPTION and REFERENCES sections revised.  (WRB)
   USE service, ONLY : XERMSG, XERCLR, R1MACH
-  REAL :: A, X
+  REAL(SP) :: A, X
   INTEGER :: izero, ma
-  REAL :: aeps, algap1, alngs, alx, e, fm, gstar, h, sga, sgng,  sgngam, sgngs, t
-  REAL, PARAMETER :: eps = 0.5*R1MACH(3), sqeps = SQRT(R1MACH(4)), &
+  REAL(SP) :: aeps, algap1, alngs, alx, e, fm, gstar, h, sga, sgng,  sgngam, sgngs, t
+  REAL(SP), PARAMETER :: eps = 0.5*R1MACH(3), sqeps = SQRT(R1MACH(4)), &
     alneps = -LOG(R1MACH(3)), bot = LOG(R1MACH(1))
   !* FIRST EXECUTABLE STATEMENT  GAMIC
   !

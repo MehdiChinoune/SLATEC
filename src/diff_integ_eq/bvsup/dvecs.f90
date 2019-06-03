@@ -36,9 +36,9 @@ SUBROUTINE DVECS(Ncomp,Lnfc,Yhp,Work,Iwork,Inhomo,Iflag)
   USE DML, ONLY : indpvt_com, nfcc_com
   !
   INTEGER :: Iflag, Inhomo, Iwork(*), Lnfc, Ncomp
-  REAL(8) :: Work(*), Yhp(:,:)
+  REAL(DP) :: Work(*), Yhp(:,:)
   INTEGER :: idp, k, kp, niv
-  REAL(8) :: dum
+  REAL(DP) :: dum
   !* FIRST EXECUTABLE STATEMENT  DVECS
   IF ( Lnfc/=1 ) THEN
     niv = Lnfc

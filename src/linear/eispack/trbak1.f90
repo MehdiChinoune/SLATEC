@@ -79,8 +79,8 @@ SUBROUTINE TRBAK1(Nm,N,A,E,M,Z)
 
   !
   INTEGER i, j, k, l, M, N, Nm
-  REAL A(Nm,*), E(*), Z(Nm,*)
-  REAL s
+  REAL(SP) A(Nm,*), E(*), Z(Nm,*)
+  REAL(SP) s
   !
   !* FIRST EXECUTABLE STATEMENT  TRBAK1
   IF ( M/=0 ) THEN

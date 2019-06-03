@@ -239,11 +239,11 @@ SUBROUTINE POIS3D(Lperod,L,C1,Mperod,M,C2,Nperod,N,A,B,C,Ldimf,Mdimf,F,Ierror,W)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
   INTEGER :: Ierror, L, Ldimf, Lperod, M, Mdimf, Mperod, N
-  REAL :: C1, C2
-  REAL :: A(N), B(N), C(N), F(Ldimf,Mdimf,N), W(:)
+  REAL(SP) :: C1, C2
+  REAL(SP) :: A(N), B(N), C(N), F(Ldimf,Mdimf,N), W(:)
   INTEGER :: i, iwbb, iwd, iwt, iwx, iwy, iwyrt, j, k, lp, mp, nh, nhm1, nhmk, &
     nhpk, nodd, np, Nperod
-  REAL :: save(6)
+  REAL(SP) :: save(6)
   !* FIRST EXECUTABLE STATEMENT  POIS3D
   lp = Lperod + 1
   mp = Mperod + 1

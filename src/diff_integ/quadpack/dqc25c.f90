@@ -75,21 +75,22 @@ SUBROUTINE DQC25C(F,A,B,C,Result,Abserr,Krul,Neval)
 
   !
   INTERFACE
-    REAL(8) FUNCTION F(X)
-      REAL(8) :: X
+    REAL(DP) FUNCTION F(X)
+      IMPORT DP
+      REAL(DP) :: X
     END FUNCTION F
   END INTERFACE
   INTEGER :: Krul, Neval
-  REAL(8) :: A, Abserr, B, C, Result
+  REAL(DP) :: A, Abserr, B, C, Result
   INTEGER :: i, isym, k, kp
-  REAL(8) :: ak22, amom0, amom1, amom2, cc, centr, cheb12(13), cheb24(25), &
+  REAL(DP) :: ak22, amom0, amom1, amom2, cc, centr, cheb12(13), cheb24(25), &
     fval(25), hlgth, p2, p3, p4, resabs, resasc, res12, res24, u
   !
   !           THE VECTOR X CONTAINS THE VALUES COS(K*PI/24),
   !           K = 1, ..., 11, TO BE USED FOR THE CHEBYSHEV SERIES
   !           EXPANSION OF F
   !
-  REAL(8), PARAMETER :: x(11) = [ 0.9914448613738104D+00, 0.9659258262890683D+00, &
+  REAL(DP), PARAMETER :: x(11) = [ 0.9914448613738104D+00, 0.9659258262890683D+00, &
     0.9238795325112868D+00, 0.8660254037844386D+00, 0.7933533402912352D+00, &
     0.7071067811865475D+00, 0.6087614290087206D+00, 0.5000000000000000D+00, &
     0.3826834323650898D+00, 0.2588190451025208D+00, 0.1305261922200516D+00 ]

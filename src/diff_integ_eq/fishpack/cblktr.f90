@@ -207,8 +207,8 @@ SUBROUTINE CBLKTR(Iflg,Np,N,An,Bn,Cn,Mp,M,Am,Bm,Cm,Idimy,Y,Ierror,W)
   USE CCBLK, ONLY : k_com, ik_com, nm_com, npp_com
   !
   INTEGER :: Idimy, Ierror, Iflg, M, Mp, N, Np
-  REAL :: An(N), Bn(N), Cn(N), W(:)
-  COMPLEX :: Am(M), Bm(M), Cm(M), Y(Idimy,N), WC(100)
+  REAL(SP) :: An(N), Bn(N), Cn(N), W(:)
+  COMPLEX(SP) :: Am(M), Bm(M), Cm(M), Y(Idimy,N), WC(100)
   INTEGER :: iw1, iw2, iw3, iwah, iwbh, iwd, i, iwu, iww, m2, nh, nl
   !* FIRST EXECUTABLE STATEMENT  CBLKTR
   WC = [ ( CMPLX(W(i),W(i+1)), i=1,199,2 ) ]

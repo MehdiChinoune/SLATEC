@@ -29,14 +29,15 @@ SUBROUTINE CHKSN4(Mbdcnd,Nbdcnd,Alpha,Beta,COFX,Singlr)
   USE SPL4, ONLY : ait_com, dlx_com, is_com, ms_com
   INTERFACE
     SUBROUTINE COFX(X,A,B,C)
-      REAL :: X, A, B, C
+      IMPORT SP
+      REAL(SP) :: X, A, B, C
     END SUBROUTINE COFX
   END INTERFACE
   INTEGER :: Mbdcnd, Nbdcnd
-  REAL :: Alpha, Beta
+  REAL(SP) :: Alpha, Beta
   LOGICAL :: Singlr
   INTEGER :: i
-  REAL :: ai, bi, ci, xi
+  REAL(SP) :: ai, bi, ci, xi
   !* FIRST EXECUTABLE STATEMENT  CHKSN4
   Singlr = .FALSE.
   !

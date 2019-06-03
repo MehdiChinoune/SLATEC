@@ -573,14 +573,15 @@ SUBROUTINE DEABM(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw)
   USE service, ONLY : XERMSG
   INTERFACE
     SUBROUTINE F(X,U,Uprime)
-      REAL :: X
-      REAL :: U(:), Uprime(:)
+      IMPORT SP
+      REAL(SP) :: X
+      REAL(SP) :: U(:), Uprime(:)
     END SUBROUTINE F
   END INTERFACE
   INTEGER :: Idid, Liw, Lrw, Neq
   INTEGER :: Info(15), Iwork(Liw)
-  REAL :: T, Tout
-  REAL :: Atol(:), Rtol(:), Rwork(Lrw), Y(Neq)
+  REAL(SP) :: T, Tout
+  REAL(SP) :: Atol(:), Rtol(:), Rwork(Lrw), Y(Neq)
   INTEGER :: ialpha, ibeta, idelsn, ifouru, ig, igi, ihold, ip, iphi, ipsi, isig, &
     itold, itstar, itwou, iv, iw, iwt, ixold, iyp, iypout, iyy
   LOGICAL start, phase1, nornd, stiff, intout

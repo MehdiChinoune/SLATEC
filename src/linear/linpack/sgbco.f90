@@ -137,11 +137,11 @@ SUBROUTINE SGBCO(Abd,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER Lda, N, Ml, Mu, Ipvt(*)
-  REAL Abd(Lda,*), Z(*)
-  REAL Rcond
+  REAL(SP) Abd(Lda,*), Z(*)
+  REAL(SP) Rcond
   !
-  REAL ek, t, wk, wkm
-  REAL anorm, s, sm, ynorm
+  REAL(SP) ek, t, wk, wkm
+  REAL(SP) anorm, s, sm, ynorm
   INTEGER is, info, j, ju, k, kb, kp1, l, la, lm, lz, m, mm
   !
   !     COMPUTE 1-NORM OF A

@@ -207,12 +207,13 @@ SUBROUTINE DQAWO(F,A,B,Omega,Integr,Epsabs,Epsrel,Result,Abserr,Neval,Ier,&
   USE service, ONLY : XERMSG
   !
   INTERFACE
-    REAL(8) FUNCTION F(X)
-      REAL(8) :: X
+    REAL(DP) FUNCTION F(X)
+      IMPORT DP
+      REAL(DP) :: X
     END FUNCTION F
   END INTERFACE
   INTEGER :: Ier, Integr, Last, Lenw, Leniw, Maxp1, Neval, Iwork(Leniw)
-  REAL(8) :: A, Abserr, B, Epsabs, Epsrel, Omega, Result, Work(Lenw)
+  REAL(DP) :: A, Abserr, B, Epsabs, Epsrel, Omega, Result, Work(Lenw)
   INTEGER :: limit, lvl, l1, l2, l3, l4, momcom
   !
   !         CHECK VALIDITY OF LENIW, MAXP1 AND LENW.

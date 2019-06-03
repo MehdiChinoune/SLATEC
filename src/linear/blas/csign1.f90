@@ -1,6 +1,6 @@
 
-COMPLEX FUNCTION CSIGN1(zdum1,zdum2)
-  COMPLEX, INTENT(IN) :: zdum1, zdum2
+COMPLEX(SP) FUNCTION CSIGN1(zdum1,zdum2)
+  COMPLEX(SP), INTENT(IN) :: zdum1, zdum2
 
   CSIGN1 = CABS1(zdum1)*(zdum2/CABS1(zdum2))
 

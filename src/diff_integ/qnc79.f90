@@ -79,19 +79,20 @@ SUBROUTINE QNC79(FUN,A,B,Err,Ans,Ierr,K)
   !   920218  Code and prologue polished.  (WRB)
   USE service, ONLY : XERMSG, R1MACH, I1MACH
   !     .. Scalar Arguments ..
-  REAL :: A, Ans, B, Err
+  REAL(SP) :: A, Ans, B, Err
   INTEGER :: Ierr, K
   !     .. Function Arguments ..
   INTERFACE
-    REAL FUNCTION FUN(X)
-      REAL, INTENT(IN) :: X
+    REAL(SP) FUNCTION FUN(X)
+      IMPORT SP
+      REAL(SP), INTENT(IN) :: X
     END FUNCTION FUN
   END INTERFACE
   !     .. Local Scalars ..
-  REAL :: ae, area, bank, blocal, c, ce, ee, ef, eps, q13, q7, q7l, test, tol, vr
+  REAL(SP) :: ae, area, bank, blocal, c, ce, ee, ef, eps, q13, q7, q7l, test, tol, vr
   INTEGER :: i, l, lmn, lmx, nib
   !     .. Local Arrays ..
-  REAL aa(40), f(13), f1(40), f2(40), f3(40), f4(40), f5(40), f6(40), &
+  REAL(SP) aa(40), f(13), f1(40), f2(40), f3(40), f4(40), f5(40), f6(40), &
     f7(40), hh(40), q7r(40), vl(40)
   INTEGER lr(40)
   !     .. Intrinsic Functions ..
@@ -99,7 +100,7 @@ SUBROUTINE QNC79(FUN,A,B,Err,Ans,Ierr,K)
   !     .. Data statements ..
   INTEGER, PARAMETER :: nbits = INT( R1MACH(5)*I1MACH(11)/0.30102000E0 ), &
     nlmx = MIN(40,(nbits*4)/5)
-  REAL, PARAMETER :: sq2 = SQRT(2.0E0), w1 = 41.0E0/140.0E0, w2 = 216.0E0/140.0E0, &
+  REAL(SP), PARAMETER :: sq2 = SQRT(2.0E0), w1 = 41.0E0/140.0E0, w2 = 216.0E0/140.0E0, &
     w3 = 27.0E0/140.0E0, w4 = 272.0E0/140.0E0
   INTEGER, PARAMETER :: kml = 7, kmx = 2000, nlmn = 2
   !* FIRST EXECUTABLE STATEMENT  QNC79

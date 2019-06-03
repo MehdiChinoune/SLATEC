@@ -51,9 +51,9 @@ SUBROUTINE H12(Mode,Lpivot,L1,M,U,Iue,Up,C,Ice,Icv,Ncv)
   !   900328  Added TYPE section.  (WRB)
 
   INTEGER :: Ice, Icv, Iue, L1, Lpivot, M, Mode, Ncv
-  REAL :: C(Icv*Ncv+M*Ice), U(Iue,M), Up
+  REAL(SP) :: C(Icv*Ncv+M*Ice), U(Iue,M), Up
   INTEGER :: i, i2, i3, i4, incr, j, kl1, kl2, klp, l1m1, mml1p2
-  REAL :: b, cl, clinv, one, sm, ul1m1
+  REAL(SP) :: b, cl, clinv, one, sm, ul1m1
   !* FIRST EXECUTABLE STATEMENT  H12
   one = 1.
   !

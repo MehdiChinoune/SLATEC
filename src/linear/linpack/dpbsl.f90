@@ -75,9 +75,9 @@ SUBROUTINE DPBSL(Abd,Lda,N,M,B)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER Lda, N, M
-  REAL(8) :: Abd(Lda,*), B(*)
+  REAL(DP) :: Abd(Lda,*), B(*)
   !
-  REAL(8) :: t
+  REAL(DP) :: t
   INTEGER k, kb, la, lb, lm
   !
   !     SOLVE TRANS(R)*Y = B

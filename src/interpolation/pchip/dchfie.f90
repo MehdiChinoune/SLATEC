@@ -1,5 +1,5 @@
 !** DCHFIE
-REAL(8) FUNCTION DCHFIE(X1,X2,F1,F2,D1,D2,A,B)
+REAL(DP) FUNCTION DCHFIE(X1,X2,F1,F2,D1,D2,A,B)
   !>
   !  Evaluates integral of a single cubic for DPCHIA
   !***
@@ -65,16 +65,16 @@ REAL(8) FUNCTION DCHFIE(X1,X2,F1,F2,D1,D2,A,B)
   !
   !  DECLARE ARGUMENTS.
   !
-  REAL(8) :: X1, X2, F1, F2, D1, D2, A, B
+  REAL(DP) :: X1, X2, F1, F2, D1, D2, A, B
   !
   !  DECLARE LOCAL VARIABLES.
   !
-  REAL(8) :: dterm, fterm, h, phia1, phia2, phib1, phib2, psia1, psia2, psib1, &
+  REAL(DP) :: dterm, fterm, h, phia1, phia2, phib1, phib2, psia1, psia2, psib1, &
     psib2, ta1, ta2, tb1, tb2, ua1, ua2, ub1, ub2
   !
   !  INITIALIZE.
   !
-  REAL(8), PARAMETER :: half = .5D0, two = 2.D0, three = 3.D0, four = 4.D0, six = 6.D0
+  REAL(DP), PARAMETER :: half = .5D0, two = 2.D0, three = 3.D0, four = 4.D0, six = 6.D0
   !
   !  VALIDITY CHECK INPUT.
   !

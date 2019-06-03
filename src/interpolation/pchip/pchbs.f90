@@ -166,12 +166,12 @@ SUBROUTINE PCHBS(N,X,F,D,Incfd,Knotyp,Nknots,T,Bcoef,Ndim,Kord,Ierr)
   !  Declare arguments.
   !
   INTEGER N, Incfd, Knotyp, Nknots, Ndim, Kord, Ierr
-  REAL X(N), F(Incfd,N), D(Incfd,N), T(2*N+4), Bcoef(2*N)
+  REAL(SP) X(N), F(Incfd,N), D(Incfd,N), T(2*N+4), Bcoef(2*N)
   !
   !  Declare local variables.
   !
   INTEGER k, kk
-  REAL dov3, hnew, hold
+  REAL(SP) dov3, hnew, hold
   CHARACTER(8) :: libnam, subnam
   !* FIRST EXECUTABLE STATEMENT  PCHBS
   !

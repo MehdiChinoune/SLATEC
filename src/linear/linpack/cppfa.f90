@@ -75,10 +75,10 @@ SUBROUTINE CPPFA(Ap,N,Info)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER N, Info
-  COMPLEX Ap(*)
+  COMPLEX(SP) Ap(*)
   !
-  COMPLEX t
-  REAL s
+  COMPLEX(SP) t
+  REAL(SP) s
   INTEGER j, jj, jm1, k, kj, kk
   !* FIRST EXECUTABLE STATEMENT  CPPFA
   jj = 0

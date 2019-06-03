@@ -88,11 +88,11 @@ SUBROUTINE CHICO(A,Lda,N,Kpvt,Rcond,Z)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER Lda, N, Kpvt(*)
-  COMPLEX A(Lda,*), Z(*)
-  REAL Rcond
+  COMPLEX(SP) A(Lda,*), Z(*)
+  REAL(SP) Rcond
   !
-  COMPLEX ak, akm1, bk, bkm1, denom, ek, t
-  REAL anorm, s, ynorm
+  COMPLEX(SP) ak, akm1, bk, bkm1, denom, ek, t
+  REAL(SP) anorm, s, ynorm
   INTEGER i, info, j, jm1, k, kp, kps, ks
   !
   !     FIND NORM OF A USING ONLY UPPER HALF

@@ -318,11 +318,11 @@ SUBROUTINE HWSPLR(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER :: Idimf, Ierror, M, Mbdcnd, N
-  REAL :: A, B, C, D, Elmbda, Pertrb
-  REAL :: Bda(N+1), Bdb(N+1), Bdc(M+1), Bdd(M+1), F(Idimf,N+1), W(:)
+  REAL(SP) :: A, B, C, D, Elmbda, Pertrb
+  REAL(SP) :: Bda(N+1), Bdb(N+1), Bdc(M+1), Bdd(M+1), F(Idimf,N+1), W(:)
   INTEGER :: i, id2, id3, id4, id5, id6, ierr1, ij, ip, iwstor, j, k, l, lp, &
     mp1, mstart, mstop, munk, Nbdcnd, np, np1, nstart, nstop, nunk
-  REAL :: a1, a2, deltar, deltht, dlrby2, dlrsq, dlthsq, r, s, s1, s2, ypole
+  REAL(SP) :: a1, a2, deltar, deltht, dlrby2, dlrsq, dlthsq, r, s, s1, s2, ypole
   !* FIRST EXECUTABLE STATEMENT  HWSPLR
   Ierror = 0
   IF ( A<0. ) Ierror = 1

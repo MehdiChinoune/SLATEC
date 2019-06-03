@@ -59,7 +59,7 @@ SUBROUTINE DVOUT(N,Dx,Ifmt,Idigit)
   !   910403  Updated AUTHOR section.  (WRB)
   USE service, ONLY : I1MACH
   INTEGER :: Idigit, N
-  REAL(8) :: Dx(N)
+  REAL(DP) :: Dx(N)
   CHARACTER :: Ifmt*(*)
   INTEGER :: i, k1, k2, lout, ndigit
   !* FIRST EXECUTABLE STATEMENT  DVOUT

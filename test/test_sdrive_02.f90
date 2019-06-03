@@ -1,4 +1,5 @@
 MODULE TEST46_MOD
+  USE service, ONLY : SP, DP
   IMPLICIT NONE
 
 CONTAINS
@@ -37,15 +38,15 @@ CONTAINS
     !   890405  DATE WRITTEN
     !   890405  Revised to meet SLATEC standards.
     USE slatec, ONLY : D1MACH, DDRIV1, DDRIV2, DDRIV3, XERCLR
-    REAL(8) :: eps, t, tout
+    REAL(DP) :: eps, t, tout
     INTEGER ierflg, Ipass, Kprint, leniw, leniwx, lenw, lenwx, Lun, mint, &
       mstate, nde, nfe, nje, nstate, nstep, nx
-    REAL(8), PARAMETER :: ALFA = 1.D0, HMAX = 15.D0
+    REAL(DP), PARAMETER :: ALFA = 1.D0, HMAX = 15.D0
     INTEGER, PARAMETER :: IERROR = 3, IMPL = 0, LENWMX = 342, LIWMX = 53, &
       MITER = 5, ML = 2, MU = 2, MXORD = 5, MXSTEP = 1000, N = 3, NROOT = 0, NTASK = 1
-    REAL(8) :: work(LENWMX), y(N+1)
+    REAL(DP) :: work(LENWMX), y(N+1)
     INTEGER iwork(LIWMX)
-    REAL(8), PARAMETER :: ewt(1) = .00001D0
+    REAL(DP), PARAMETER :: ewt(1) = .00001D0
     !* FIRST EXECUTABLE STATEMENT  DDQCK
     eps = D1MACH(4)**(1.D0/3.D0)
     Ipass = 1
@@ -411,7 +412,7 @@ CONTAINS
     CALL XERCLR
 
   CONTAINS
-    REAL(8) FUNCTION dum_G(N,T,Y,Iroot)
+    REAL(DP) FUNCTION dum_G(N,T,Y,Iroot)
       INTEGER :: N, Iroot
       REAL(8) :: T
       REAL(8) :: Y(N)
@@ -470,8 +471,8 @@ CONTAINS
     !   890405  Revised to meet SLATEC standards.
 
     INTEGER :: N
-    REAL(8) :: T, Y(:), Yp(:)
-    REAL(8) :: alfa
+    REAL(DP) :: T, Y(:), Yp(:)
+    REAL(DP) :: alfa
     !* FIRST EXECUTABLE STATEMENT  DDF
     alfa = Y(N+1)
     Yp(1) = 1.D0 + alfa*(Y(2)-Y(1)) - Y(1)*Y(3)

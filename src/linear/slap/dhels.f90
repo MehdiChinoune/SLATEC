@@ -70,9 +70,9 @@ SUBROUTINE DHELS(A,Lda,N,Q,B)
   !     .. Scalar Arguments ..
   INTEGER Lda, N
   !     .. Array Arguments ..
-  REAL(8) :: A(Lda,*), B(*), Q(*)
+  REAL(DP) :: A(Lda,*), B(*), Q(*)
   !     .. Local Scalars ..
-  REAL(8) :: c, s, t, t1, t2
+  REAL(DP) :: c, s, t, t1, t2
   INTEGER iq, k, kb, kp1
   !* FIRST EXECUTABLE STATEMENT  DHELS
   !

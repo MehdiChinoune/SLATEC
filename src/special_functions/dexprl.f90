@@ -1,5 +1,5 @@
 !** DEXPRL
-REAL(8) FUNCTION DEXPRL(X)
+REAL(DP) FUNCTION DEXPRL(X)
   !>
   !  Calculate the relative error exponential (EXP(X)-1)/X.
   !***
@@ -34,10 +34,10 @@ REAL(8) FUNCTION DEXPRL(X)
   !   890911  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   USE service, ONLY : D1MACH
-  REAL(8) :: X
+  REAL(DP) :: X
   INTEGER :: i
-  REAL(8) :: absx
-  REAL(8), PARAMETER :: alneps = LOG(D1MACH(3)), xn = 3.72D0 - 0.3D0*alneps, &
+  REAL(DP) :: absx
+  REAL(DP), PARAMETER :: alneps = LOG(D1MACH(3)), xn = 3.72D0 - 0.3D0*alneps, &
     xln = LOG((xn+1.0D0)/1.36D0), xbnd = D1MACH(3)
   INTEGER, PARAMETER :: nterms = INT( xn - (xn*xln+alneps)/(xln+1.36D0) + 1.5D0 )
   !* FIRST EXECUTABLE STATEMENT  DEXPRL

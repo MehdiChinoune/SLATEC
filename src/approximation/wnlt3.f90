@@ -26,10 +26,10 @@ SUBROUTINE WNLT3(I,Imax,M,Mdw,Ipivot,H,W)
   !   890620  Code extracted from WNLT and made a subroutine.  (RWC))
   USE linear, ONLY : SSWAP
   INTEGER :: I, Imax, M, Mdw, Ipivot(:)
-  REAL :: H(:), W(Mdw,M)
+  REAL(SP) :: H(:), W(Mdw,M)
   !
   INTEGER :: itemp
-  REAL :: t
+  REAL(SP) :: t
   !
   !* FIRST EXECUTABLE STATEMENT  WNLT3
   IF ( Imax/=I ) THEN

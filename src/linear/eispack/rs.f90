@@ -80,7 +80,7 @@ SUBROUTINE RS(Nm,N,A,W,Matz,Z,Fv1,Fv2,Ierr)
 
   !
   INTEGER N, Nm, Ierr, Matz
-  REAL A(Nm,*), W(*), Z(Nm,*), Fv1(*), Fv2(*)
+  REAL(SP) A(Nm,*), W(*), Z(Nm,*), Fv1(*), Fv2(*)
   !
   !* FIRST EXECUTABLE STATEMENT  RS
   IF ( N>Nm ) THEN

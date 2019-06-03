@@ -1,5 +1,5 @@
 !** CHFIE
-REAL FUNCTION CHFIE(X1,X2,F1,F2,D1,D2,A,B)
+REAL(SP) FUNCTION CHFIE(X1,X2,F1,F2,D1,D2,A,B)
   !>
   !  Evaluates integral of a single cubic for PCHIA
   !***
@@ -64,16 +64,16 @@ REAL FUNCTION CHFIE(X1,X2,F1,F2,D1,D2,A,B)
   !
   !  DECLARE ARGUMENTS.
   !
-  REAL X1, X2, F1, F2, D1, D2, A, B
+  REAL(SP) X1, X2, F1, F2, D1, D2, A, B
   !
   !  DECLARE LOCAL VARIABLES.
   !
-  REAL dterm, fterm, h, phia1, phia2, phib1, phib2, psia1, psia2, psib1, psib2, &
+  REAL(SP) dterm, fterm, h, phia1, phia2, phib1, phib2, psia1, psia2, psib1, psib2, &
     ta1, ta2, tb1, tb2, ua1, ua2, ub1, ub2
   !
   !  INITIALIZE.
   !
-  REAL, PARAMETER :: half = 0.5, two = 2., three = 3., four = 4., six = 6.
+  REAL(SP), PARAMETER :: half = 0.5, two = 2., three = 3., four = 4., six = 6.
   !
   !  VALIDITY CHECK INPUT.
   !

@@ -206,19 +206,21 @@ INTEGER FUNCTION ISSCGN(N,B,X,Nelt,Ia,Ja,A,Isym,MTTVEC,MSOLVE,Itol,&
   USE service, ONLY : R1MACH
   INTERFACE
     SUBROUTINE MSOLVE(N,R,Z,Rwork,Iwork)
+      IMPORT SP
       INTEGER :: N, Iwork(*)
-      REAL :: R(N), Z(N), Rwork(*)
+      REAL(SP) :: R(N), Z(N), Rwork(*)
     END SUBROUTINE
     SUBROUTINE MTTVEC(N,X,Y,Nelt,Ia,Ja,A,Isym)
+      IMPORT SP
       INTEGER :: N, Nelt, Isym, Ia(Nelt), Ja(Nelt)
-      REAL :: X(N), Y(N), A(Nelt)
+      REAL(SP) :: X(N), Y(N), A(Nelt)
     END SUBROUTINE
   END INTERFACE
   !     .. Scalar Arguments ..
-  REAL Ak, Bk, Bnrm, Err, Solnrm, Tol
+  REAL(SP) Ak, Bk, Bnrm, Err, Solnrm, Tol
   INTEGER Ierr, Isym, Iter, Itol, Iunit, N, Nelt
   !     .. Array Arguments ..
-  REAL A(N), Atdz(N), Atz(N), B(N), Dz(N), R(N), Rwork(*), X(N)
+  REAL(SP) A(N), Atdz(N), Atz(N), B(N), Dz(N), R(N), Rwork(*), X(N)
   INTEGER Ia(Nelt), Iwork(*), Ja(Nelt)
   !     .. Local Scalars ..
   INTEGER i

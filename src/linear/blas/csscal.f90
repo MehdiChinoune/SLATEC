@@ -51,8 +51,8 @@ SUBROUTINE CSSCAL(N,Sa,Cx,Incx)
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
-  COMPLEX Cx(*)
-  REAL Sa
+  COMPLEX(SP) Cx(*)
+  REAL(SP) Sa
   INTEGER i, Incx, ix, N
   !* FIRST EXECUTABLE STATEMENT  CSSCAL
   IF ( N<=0 ) RETURN

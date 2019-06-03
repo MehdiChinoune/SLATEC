@@ -26,13 +26,14 @@ SUBROUTINE CHKPR4(Iorder,A,B,M,Mbdcnd,C,D,N,Nbdcnd,COFX,Idmn,Ierror)
 
   INTERFACE
     SUBROUTINE COFX(X,A,B,C)
-      REAL :: X, A, B, C
+      IMPORT SP
+      REAL(SP) :: X, A, B, C
     END SUBROUTINE COFX
   END INTERFACE
   INTEGER :: Idmn, Ierror, Iorder, M, Mbdcnd, N, Nbdcnd
-  REAL :: A, B, C, D
+  REAL(SP) :: A, B, C, D
   INTEGER :: i
-  REAL :: ai, bi, ci, dlx, xi
+  REAL(SP) :: ai, bi, ci, dlx, xi
   !* FIRST EXECUTABLE STATEMENT  CHKPR4
   Ierror = 1
   IF ( A>=B.OR.C>=D ) RETURN

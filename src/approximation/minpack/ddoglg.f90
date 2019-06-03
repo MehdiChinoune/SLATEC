@@ -69,11 +69,11 @@ SUBROUTINE DDOGLG(N,R,Lr,Diag,Qtb,Delta,X,Wa1,Wa2)
   !   900328  Added TYPE section.  (WRB)
   USE service, ONLY : D1MACH
   INTEGER :: Lr, N
-  REAL(8) :: Delta
-  REAL(8) :: Diag(N), Qtb(N), R(Lr), Wa1(N), Wa2(N), X(N)
+  REAL(DP) :: Delta
+  REAL(DP) :: Diag(N), Qtb(N), R(Lr), Wa1(N), Wa2(N), X(N)
   INTEGER :: i, j, jj, jp1, k, l
-  REAL(8) :: alpha, bnorm, epsmch, gnorm, qnorm, sgnorm, summ, temp
-  REAL(8), PARAMETER :: one = 1.0D0, zero = 0.0D0
+  REAL(DP) :: alpha, bnorm, epsmch, gnorm, qnorm, sgnorm, summ, temp
+  REAL(DP), PARAMETER :: one = 1.0D0, zero = 0.0D0
   !
   !     EPSMCH IS THE MACHINE PRECISION.
   !

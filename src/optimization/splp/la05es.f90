@@ -39,7 +39,7 @@ SUBROUTINE LA05ES(A,Irn,Ip,N,Iw,Reals)
   INTEGER :: N
   LOGICAL :: Reals
   INTEGER :: Irn(*), Iw(N), Ip(N)
-  REAL :: A(:)
+  REAL(SP) :: A(:)
   INTEGER :: ipi, j, k, kl, kn, nz
   !* FIRST EXECUTABLE STATEMENT  LA05ES
   ncp_com = ncp_com + 1

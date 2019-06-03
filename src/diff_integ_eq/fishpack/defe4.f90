@@ -42,13 +42,14 @@ SUBROUTINE DEFE4(COFX,Idmn,Usol,Grhs)
     kswx_com, kswy_com, ms_com, ns_com
   INTERFACE
     SUBROUTINE COFX(X,A,B,C)
-      REAL :: X, A, B, C
+      IMPORT SP
+      REAL(SP) :: X, A, B, C
     END SUBROUTINE COFX
   END INTERFACE
   INTEGER :: Idmn
-  REAL :: Grhs(Idmn,ns_com), Usol(Idmn,ns_com)
+  REAL(SP) :: Grhs(Idmn,ns_com), Usol(Idmn,ns_com)
   INTEGER :: i, j
-  REAL :: ai, bi, ci, tx, ty, uxxx, uxxxx, uyyy, uyyyy, xi
+  REAL(SP) :: ai, bi, ci, tx, ty, uxxx, uxxxx, uyyy, uyyyy, xi
   !* FIRST EXECUTABLE STATEMENT  DEFE4
   DO i = is_com, ms_com
     xi = ait_com + (i-1)*dlx_com

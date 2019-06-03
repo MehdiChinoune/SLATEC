@@ -66,10 +66,10 @@ SUBROUTINE CGTSL(N,C,D,E,B,Info)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER N, Info
-  COMPLEX C(*), D(*), E(*), B(*)
+  COMPLEX(SP) C(*), D(*), E(*), B(*)
   !
   INTEGER k, kb, kp1, nm1, nm2
-  COMPLEX t
+  COMPLEX(SP) t
   !* FIRST EXECUTABLE STATEMENT  CGTSL
   Info = 0
   C(1) = D(1)

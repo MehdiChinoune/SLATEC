@@ -28,10 +28,10 @@ SUBROUTINE CRATI(Z,Fnu,N,Cy,Tol)
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
 
   INTEGER i, id, idnu, inu, itime, k, kk, magz, N
-  COMPLEX cdfnu, Cy(N), pt, p1, p2, rz, t1, Z
-  REAL ak, amagz, ap1, ap2, arg, az, dfnu, fdnu, flam, Fnu, fnup, &
+  COMPLEX(SP) cdfnu, Cy(N), pt, p1, p2, rz, t1, Z
+  REAL(SP) ak, amagz, ap1, ap2, arg, az, dfnu, fdnu, flam, Fnu, fnup, &
     rap1, rho, test, test1, Tol
-  COMPLEX, PARAMETER :: czero = (0.0E0,0.0E0), cone = (1.0E0,0.0E0)
+  COMPLEX(SP), PARAMETER :: czero = (0.0E0,0.0E0), cone = (1.0E0,0.0E0)
   !* FIRST EXECUTABLE STATEMENT  CRATI
   az = ABS(Z)
   inu = INT( Fnu )

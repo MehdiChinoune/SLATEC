@@ -75,12 +75,12 @@ SUBROUTINE SORTH(Vnew,V,Hes,N,Ll,Ldhes,Kmp,Snormw)
   !   920511  Added complete declaration section.  (WRB)
 
   !     .. Scalar Arguments ..
-  REAL Snormw
+  REAL(SP) Snormw
   INTEGER Kmp, Ldhes, Ll, N
   !     .. Array Arguments ..
-  REAL Hes(Ldhes,*), V(N,*), Vnew(*)
+  REAL(SP) Hes(Ldhes,*), V(N,*), Vnew(*)
   !     .. Local Scalars ..
-  REAL arg, sumdsq, tem, vnrm
+  REAL(SP) arg, sumdsq, tem, vnrm
   INTEGER i, i0
   !     .. Intrinsic Functions ..
   INTRINSIC MAX, SQRT

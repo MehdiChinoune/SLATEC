@@ -121,7 +121,7 @@ SUBROUTINE HPSORT(Hx,N,Strbeg,Strend,Iperm,Kflag,Work,Ier)
   INTEGER Iperm(N)
   CHARACTER(*) Hx(N)
   !     .. Local Scalars ..
-  REAL r
+  REAL(SP) r
   INTEGER i, ij, indx, indx0, ir, istrt, j, k, kk, l, lm, lmt, m, nn, nn2
   !     .. Local Arrays ..
   INTEGER il(21), iu(21)  !     .. Intrinsic Functions ..

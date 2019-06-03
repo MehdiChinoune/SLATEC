@@ -81,10 +81,10 @@ SUBROUTINE DPSORT(Dx,N,Iperm,Kflag,Ier)
   !     .. Scalar Arguments ..
   INTEGER Ier, Kflag, N
   !     .. Array Arguments ..
-  REAL(8) :: Dx(N)
+  REAL(DP) :: Dx(N)
   INTEGER :: Iperm(N)
   !     .. Local Scalars ..
-  REAL(8) :: r, temp
+  REAL(DP) :: r, temp
   INTEGER i, ij, indx, indx0, istrt, j, k, kk, l, lm, lmt, m, nn
   !     .. Local Arrays ..
   INTEGER il(21), iu(21)  !     .. Intrinsic Functions ..

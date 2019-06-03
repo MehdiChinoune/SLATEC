@@ -69,11 +69,11 @@ SUBROUTINE DPPDI(Ap,N,Det,Job)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER N, Job
-  REAL(8) :: Ap(*)
-  REAL(8) :: Det(2)
+  REAL(DP) :: Ap(*)
+  REAL(DP) :: Det(2)
   !
-  REAL(8) :: t
-  REAL(8) :: s
+  REAL(DP) :: t
+  REAL(DP) :: s
   INTEGER i, ii, j, jj, jm1, j1, k, kj, kk, kp1, k1
   !* FIRST EXECUTABLE STATEMENT  DPPDI
   !

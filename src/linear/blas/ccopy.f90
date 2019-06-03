@@ -53,7 +53,7 @@ SUBROUTINE CCOPY(N,Cx,Incx,Cy,Incy)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER i, Incx, Incy, kx, ky, N, ns
-  COMPLEX Cx(*), Cy(*)
+  COMPLEX(SP) Cx(*), Cy(*)
   !* FIRST EXECUTABLE STATEMENT  CCOPY
   IF ( N<=0 ) RETURN
   IF ( Incx==Incy.AND.Incx>0 ) THEN

@@ -36,14 +36,14 @@ SUBROUTINE DHKSEQ(X,M,H,Ierr)
   !   920528  DESCRIPTION and REFERENCES sections revised.  (WRB)
   USE service, ONLY : D1MACH, I1MACH
   INTEGER :: Ierr, M
-  REAL(8) :: H(M), X
+  REAL(DP) :: H(M), X
   INTEGER :: i, j, k, mx, nx
-  REAL(8) :: fk, fln, fn, fnp, hrx, rln, rxsq, r1m5, s, slope, t, tk, trm(22), &
+  REAL(DP) :: fk, fln, fn, fnp, hrx, rln, rxsq, r1m5, s, slope, t, tk, trm(22), &
     trmh(25), trmr(25), tst, u(25), v(25), wdtol, xdmy, xh, xinc, xm, xmin, yint
   !-----------------------------------------------------------------------
   !             SCALED BERNOULLI NUMBERS 2.0*B(2K)*(1-2**(-2K))
   !-----------------------------------------------------------------------
-  REAL(8), PARAMETER :: b(22) = [ 1.00000000000000000D+00, -5.00000000000000000D-01, &
+  REAL(DP), PARAMETER :: b(22) = [ 1.00000000000000000D+00, -5.00000000000000000D-01, &
     2.50000000000000000D-01, -6.25000000000000000D-02, 4.68750000000000000D-02, &
     -6.64062500000000000D-02, 1.51367187500000000D-01, -5.06103515625000000D-01, &
     2.33319091796875000D+00, -1.41840972900390625D+01, 1.09941936492919922D+02, &

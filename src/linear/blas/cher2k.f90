@@ -26,7 +26,7 @@ SUBROUTINE CHER2K(Uplo,Trans,N,K,Alpha,A,Lda,B,Ldb,Beta,C,Ldc)
   !
   !     C := alpha*conjg( A' )*B + conjg( alpha )*conjg( B' )*A + beta*C,
   !
-  !  where  alpha and beta  are scalars with  beta  real,  C is an  n by n
+  !  where  alpha and beta  are scalars with  beta  REAL(SP),  C is an  n by n
   !  hermitian matrix and  A and B  are  n by k matrices in the first case
   !  and  k by n  matrices in the second case.
   !
@@ -148,19 +148,19 @@ SUBROUTINE CHER2K(Uplo,Trans,N,K,Alpha,A,Lda,B,Ldb,Beta,C,Ldc)
   !     .. Scalar Arguments ..
   CHARACTER :: Uplo, Trans
   INTEGER N, K, Lda, Ldb, Ldc
-  REAL Beta
-  COMPLEX Alpha
+  REAL(SP) Beta
+  COMPLEX(SP) Alpha
   !     .. Array Arguments ..
-  COMPLEX A(Lda,*), B(Ldb,*), C(Ldc,*)
+  COMPLEX(SP) A(Lda,*), B(Ldb,*), C(Ldc,*)
   !     .. Intrinsic Functions ..
   INTRINSIC CONJG, MAX, REAL
   !     .. Local Scalars ..
   LOGICAL upper
   INTEGER i, info, j, l, nrowa
-  COMPLEX temp1, temp2
+  COMPLEX(SP) temp1, temp2
   !     .. Parameters ..
-  REAL, PARAMETER :: ONE = 1.0E+0
-  COMPLEX, PARAMETER :: ZERO = (0.0E+0,0.0E+0)
+  REAL(SP), PARAMETER :: ONE = 1.0E+0
+  COMPLEX(SP), PARAMETER :: ZERO = (0.0E+0,0.0E+0)
   !* FIRST EXECUTABLE STATEMENT  CHER2K
   !
   !     Test the input parameters.

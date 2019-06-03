@@ -62,10 +62,10 @@ SUBROUTINE R1MPYQ(M,N,A,Lda,V,W)
   !   900328  Added TYPE section.  (WRB)
 
   INTEGER :: M, N, Lda
-  REAL :: A(Lda,N), V(N), W(N)
+  REAL(SP) :: A(Lda,N), V(N), W(N)
   INTEGER :: i, j, nmj, nm1
-  REAL :: coss, sinn, temp
-  REAL, PARAMETER :: one = 1.0E0
+  REAL(SP) :: coss, sinn, temp
+  REAL(SP), PARAMETER :: one = 1.0E0
   !* FIRST EXECUTABLE STATEMENT  R1MPYQ
   nm1 = N - 1
   IF ( nm1>=1 ) THEN

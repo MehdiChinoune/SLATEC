@@ -35,13 +35,13 @@ SUBROUTINE CUNIK(Zr,Fnu,Ikflg,Ipmtr,Tol,Init,Phi,Zeta1,Zeta2,Summ,Cwrk)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
   USE service, ONLY : R1MACH
-  COMPLEX cfn, crfn, Cwrk(16), Phi, s, sr, Summ, t, t2, Zeta1, Zeta2, zn, Zr
-  REAL ac, Fnu, rfn, test, Tol, tstr, tsti
+  COMPLEX(SP) cfn, crfn, Cwrk(16), Phi, s, sr, Summ, t, t2, Zeta1, Zeta2, zn, Zr
+  REAL(SP) ac, Fnu, rfn, test, Tol, tstr, tsti
   INTEGER i, Ikflg, Init, Ipmtr, j, k, l
-  COMPLEX, PARAMETER :: czero = (0.0E0,0.0E0), cone = (1.0E0,0.0E0)
-  COMPLEX, PARAMETER :: con(2) = [ (3.98942280401432678E-01,0.0E0), &
+  COMPLEX(SP), PARAMETER :: czero = (0.0E0,0.0E0), cone = (1.0E0,0.0E0)
+  COMPLEX(SP), PARAMETER :: con(2) = [ (3.98942280401432678E-01,0.0E0), &
     (1.25331413731550025E+00,0.0E0) ]
-  REAL, PARAMETER :: c(120) = [ 1.00000000000000000E+00, -2.08333333333333333E-01, &
+  REAL(SP), PARAMETER :: c(120) = [ 1.00000000000000000E+00, -2.08333333333333333E-01, &
     1.25000000000000000E-01, 3.34201388888888889E-01, -4.01041666666666667E-01, &
     7.03125000000000000E-02, -1.02581259645061728E+00, 1.84646267361111111E+00, &
     -8.91210937500000000E-01, 7.32421875000000000E-02, 4.66958442342624743E+00, &

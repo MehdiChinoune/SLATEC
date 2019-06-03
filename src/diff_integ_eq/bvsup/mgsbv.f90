@@ -69,10 +69,10 @@ SUBROUTINE MGSBV(M,N,A,Ia,Niv,Iflag,S,P,Ip,Inhomo,V,W,Wcnd)
   !   910722  Updated AUTHOR section.  (ALS)
   USE ML, ONLY : eps_com, indpvt_com, nfcc_com, sru_com
   INTEGER :: Ia, Iflag, Inhomo, M, N, Niv, Ip(N)
-  REAL :: Wcnd, A(Ia,M), P(N*(N+1)/2), S(M), V(M), W(M)
+  REAL(SP) :: Wcnd, A(Ia,M), P(N*(N+1)/2), S(M), V(M), W(M)
   INTEGER :: i, ip1, ix, iz, j, jk, jp, jq, jy, jz, k, kd, kj, kp, l, lix, lr, &
     m2, nivn, nmnr, nn, np1, nr, nrm1
-  REAL :: dot, pjp, psave, ry, sv, t, vl, vnorm, y
+  REAL(SP) :: dot, pjp, psave, ry, sv, t, vl, vnorm, y
   !* FIRST EXECUTABLE STATEMENT  MGSBV
   IF ( M>0.AND.N>0.AND.Ia>=M ) THEN
     !

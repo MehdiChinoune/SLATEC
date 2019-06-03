@@ -74,7 +74,7 @@ SUBROUTINE INVIT(Nm,N,A,Wr,Wi,Select,Mm,M,Z,Ierr,Rm1,Rv1,Rv2)
   !        Z contains the real and imaginary parts of the eigenvectors.
   !          The eigenvectors are packed into the columns of Z starting
   !          at the first column.  If the next selected eigenvalue is
-  !          real, the next column of Z contains its eigenvector.  If the
+  !          REAL(SP), the next column of Z contains its eigenvector.  If the
   !          eigenvalue is complex, the next two columns of Z contain the
   !          real and imaginary parts of its eigenvector, with the real
   !          part first.  The eigenvectors are normalized so that the
@@ -134,10 +134,10 @@ SUBROUTINE INVIT(Nm,N,A,Wr,Wi,Select,Mm,M,Z,Ierr,Rm1,Rv1,Rv2)
   !
   INTEGER i, j, k, l, M, N, s, ii, ip, Mm, mp, Nm, ns, n1, &
     uk, ip1, its, km1, Ierr
-  REAL A(Nm,*), Wr(*), Wi(*), Z(Nm,*)
-  REAL Rm1(N,*), Rv1(*), Rv2(*)
-  REAL t, w, x, y, eps3
-  REAL norm, normv, growto, ilambd, rlambd, ukroot
+  REAL(SP) A(Nm,*), Wr(*), Wi(*), Z(Nm,*)
+  REAL(SP) Rm1(N,*), Rv1(*), Rv2(*)
+  REAL(SP) t, w, x, y, eps3
+  REAL(SP) norm, normv, growto, ilambd, rlambd, ukroot
   LOGICAL Select(N)
   !
   !* FIRST EXECUTABLE STATEMENT  INVIT

@@ -59,13 +59,13 @@ SUBROUTINE LA05AS(A,Ind,Nz,Ia,N,Ip,Iw,W,G,U)
   USE service, ONLY : XERMSG, XSETUN, R1MACH
   INTEGER :: Ia, N, Nz
   INTEGER :: Ip(N,2), Ind(Ia,2), Iw(N,8)
-  REAL :: G, U, A(:), W(:)
+  REAL(SP) :: G, U, A(:), W(:)
   INTEGER :: i, idummy, ii, il, in, ipp, ipv, ir, j, jcost, jp, k, k1, k2, kc, &
     kcost, kj, kk, kl, klc, kn, knp, kp, kpc, kpl, kq, kr, krl, ks, l, mcp, nc, nzc
-  REAL :: amax, au, am
+  REAL(SP) :: amax, au, am
   CHARACTER(8) :: xern0, xern1, xern2
   ! EPS IS THE RELATIVE ACCURACY OF FLOATING-POINT COMPUTATION
-  REAL, PARAMETER :: eps = 2.0E0*R1MACH(4)
+  REAL(SP), PARAMETER :: eps = 2.0E0*R1MACH(4)
   !* FIRST EXECUTABLE STATEMENT  LA05AS
   !
   !     SET THE OUTPUT UNIT NUMBER FOR THE ERROR PROCESSOR.

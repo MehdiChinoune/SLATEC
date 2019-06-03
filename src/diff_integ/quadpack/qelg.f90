@@ -67,7 +67,7 @@ SUBROUTINE QELG(N,Epstab,Result,Abserr,Res3la,Nres)
   !   900328  Added TYPE section.  (WRB)
   USE service, ONLY : R1MACH
   !
-  REAL Abserr, delta1, delta2, delta3, epmach, epsinf, &
+  REAL(SP) Abserr, delta1, delta2, delta3, epmach, epsinf, &
     Epstab(52), error, err1, err2, err3, e0, e1, e1abs, e2, e3, &
     oflow, res, Result, Res3la(3), ss, tol1, tol2, tol3
   INTEGER i, ib, ib2, ie, indx, k1, k2, k3, limexp, N, newelm, Nres, num

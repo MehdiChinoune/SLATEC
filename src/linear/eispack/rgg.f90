@@ -56,7 +56,7 @@ SUBROUTINE RGG(Nm,N,A,B,Alfr,Alfi,Beta,Matz,Z,Ierr)
   !          BETA is a one-dimensional REAL array, dimensioned BETA(N).
   !
   !        Z contains the real and imaginary parts of the eigenvectors
-  !          if MATZ is not zero.  If the J-th eigenvalue is real, the
+  !          if MATZ is not zero.  If the J-th eigenvalue is REAL(SP), the
   !          J-th column of  Z  contains its eigenvector.  If the J-th
   !          eigenvalue is complex with positive imaginary part, the
   !          J-th and (J+1)-th columns of  Z  contain the real and
@@ -94,7 +94,7 @@ SUBROUTINE RGG(Nm,N,A,B,Alfr,Alfi,Beta,Matz,Z,Ierr)
 
   !
   INTEGER N, Nm, Ierr, Matz
-  REAL A(Nm,*), B(Nm,*), Alfr(*), Alfi(*), Beta(*), Z(Nm,*)
+  REAL(SP) A(Nm,*), B(Nm,*), Alfr(*), Alfi(*), Beta(*), Z(Nm,*)
   LOGICAL tf
   !
   !* FIRST EXECUTABLE STATEMENT  RGG

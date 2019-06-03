@@ -103,7 +103,7 @@ SUBROUTINE SS2LT(N,Nelt,Ia,Ja,A,Isym,Nel,Iel,Jel,El)
   !     .. Scalar Arguments ..
   INTEGER Isym, N, Nel, Nelt
   !     .. Array Arguments ..
-  REAL A(Nelt), El(Nelt)
+  REAL(SP) A(Nelt), El(Nelt)
   INTEGER Ia(Nelt), Iel(Nel), Ja(Nelt), Jel(Nel)
   !     .. Local Scalars ..
   INTEGER i, icol, j, jbgn, jend

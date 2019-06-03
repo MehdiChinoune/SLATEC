@@ -35,16 +35,16 @@ SUBROUTINE MPCMD(X,Dz)
   !   930124  Increased Array size in MPCON for SUN -r8.  (RWC)
   USE MPCOM, ONLY : b_com, lun_com, t_com
   INTEGER :: X(30)
-  REAL(8) :: Dz
+  REAL(DP) :: Dz
   INTEGER :: i, tm
-  REAL(8) :: db, dz2
+  REAL(DP) :: db, dz2
   !* FIRST EXECUTABLE STATEMENT  MPCMD
   CALL MPCHK(1,4)
   Dz = 0D0
   IF ( X(1)==0 ) RETURN
-  db = REAL(b_com, 8)
+  db = REAL( b_com, DP )
   DO i = 1, t_com
-    Dz = db*Dz + REAL(X(i+2), 8)
+    Dz = db*Dz + REAL( X(i+2), DP )
     tm = i
     ! CHECK IF FULL DOUBLE-PRECISION ACCURACY ATTAINED
     dz2 = Dz + 1D0
@@ -57,7 +57,7 @@ SUBROUTINE MPCMD(X,Dz)
   ! CHECK REASONABLENESS OF RESULT.
   IF ( Dz>0D0 ) THEN
     ! LHS SHOULD BE .LE. 0.5 BUT ALLOW FOR SOME ERROR IN LOG
-    IF ( ABS(REAL(X(2), 8)-(LOG(Dz)/LOG(REAL(b_com, 8))+0.5D0))<=0.6D0 ) THEN
+    IF ( ABS(REAL(X(2), DP)-(LOG(Dz)/LOG(REAL(b_com, DP))+0.5D0))<=0.6D0 ) THEN
       IF ( X(1)<0 ) Dz = -Dz
       RETURN
     END IF

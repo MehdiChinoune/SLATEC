@@ -1,5 +1,5 @@
 !** D9GMIT
-REAL(8) FUNCTION D9GMIT(A,X,Algap1,Sgngam)
+REAL(DP) FUNCTION D9GMIT(A,X,Algap1,Sgngam)
   !>
   !  Compute Tricomi's incomplete Gamma function for small
   !            arguments.
@@ -34,9 +34,9 @@ REAL(8) FUNCTION D9GMIT(A,X,Algap1,Sgngam)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
   USE service, ONLY : XERMSG, D1MACH
   INTEGER :: k, m, ma
-  REAL(8) :: A, X, Algap1, Sgngam
-  REAL(8) :: ae, aeps, algs, alg2, fk, s, sgng2, t, te
-  REAL(8), PARAMETER :: eps = 0.5D0*D1MACH(3), bot = LOG(D1MACH(1))
+  REAL(DP) :: A, X, Algap1, Sgngam
+  REAL(DP) :: ae, aeps, algs, alg2, fk, s, sgng2, t, te
+  REAL(DP), PARAMETER :: eps = 0.5D0*D1MACH(3), bot = LOG(D1MACH(1))
   !* FIRST EXECUTABLE STATEMENT  D9GMIT
   !
   IF ( X<=0.D0 ) CALL XERMSG('D9GMIT','X SHOULD BE GT 0',1,2)

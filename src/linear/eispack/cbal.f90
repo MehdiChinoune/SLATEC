@@ -89,8 +89,8 @@ SUBROUTINE CBAL(Nm,N,Ar,Ai,Low,Igh,Scalee)
 
   !
   INTEGER i, j, k, l, m, N, jj, Nm, Igh, Low, iexc
-  REAL Ar(Nm,*), Ai(Nm,*), Scalee(*)
-  REAL c, f, g, r, s, b2, radixx
+  REAL(SP) Ar(Nm,*), Ai(Nm,*), Scalee(*)
+  REAL(SP) c, f, g, r, s, b2, radixx
   LOGICAL noconv
   !
   !     THE FOLLOWING PORTABLE VALUE OF RADIX WORKS WELL ENOUGH

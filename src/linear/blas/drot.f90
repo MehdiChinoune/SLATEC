@@ -57,8 +57,8 @@ SUBROUTINE DROT(N,Dx,Incx,Dy,Incy,Dc,Ds)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER i, Incx, Incy, kx, ky, N, nsteps
-  REAL(8) :: Dx(*), Dy(*), Dc, Ds, w, z
-  REAL(8), PARAMETER :: zero = 0.0D0, one = 1.0D0
+  REAL(DP) :: Dx(*), Dy(*), Dc, Ds, w, z
+  REAL(DP), PARAMETER :: zero = 0.0D0, one = 1.0D0
   !* FIRST EXECUTABLE STATEMENT  DROT
   IF ( .NOT.(N<=0.OR.(Ds==zero.AND.Dc==one)) ) THEN
     IF ( Incx/=Incy.OR.Incx<=0 ) THEN

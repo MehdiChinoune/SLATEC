@@ -1,5 +1,5 @@
 !** SDOT
-REAL FUNCTION SDOT(N,Sx,Incx,Sy,Incy)
+REAL(SP) FUNCTION SDOT(N,Sx,Incx,Sy,Incy)
   !>
   !  Compute the inner product of two vectors.
   !***
@@ -53,7 +53,7 @@ REAL FUNCTION SDOT(N,Sx,Incx,Sy,Incy)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER i, Incx, Incy, ix, iy, m, mp1, N, ns
-  REAL Sx(*), Sy(*)
+  REAL(SP) Sx(*), Sy(*)
   !* FIRST EXECUTABLE STATEMENT  SDOT
   SDOT = 0.0E0
   IF ( N<=0 ) RETURN

@@ -34,20 +34,22 @@ SUBROUTINE CDCOR(Dfdy,El,FA,H,Ierror,Impl,Ipvt,Matdim,Miter,Ml,Mu,N,Nde,&
   USE linear, ONLY : SCNRM2, CGBSL, CGESL
   INTERFACE
     SUBROUTINE USERS(Y,Yh,Ywt,Save1,Save2,T,H,El,Impl,N,Nde,Iflag)
+      IMPORT SP
       INTEGER :: Impl, N, Nde, iflag
-      REAL :: T, H, El
-      COMPLEX :: Y(N), Yh(N,13), Ywt(N), Save1(N), Save2(N)
+      REAL(SP) :: T, H, El
+      COMPLEX(SP) :: Y(N), Yh(N,13), Ywt(N), Save1(N), Save2(N)
     END SUBROUTINE USERS
     SUBROUTINE FA(N,T,Y,A,Matdim,Ml,Mu,Nde)
+      IMPORT SP
       INTEGER :: N, Matdim, Ml, Mu, Nde
-      REAL :: T
-      COMPLEX :: Y(N), A(:,:)
+      REAL(SP) :: T
+      COMPLEX(SP) :: Y(N), A(:,:)
     END SUBROUTINE FA
   END INTERFACE
   INTEGER :: Ierror, Impl, Jstate, Matdim, Miter, Ml, Mu, N, Nde, Nq
   INTEGER :: Ipvt(N)
-  REAL :: D, H, T, El(13,12)
-  COMPLEX :: A(Matdim,N), Dfdy(Matdim,N), Save1(N), Save2(N), Y(N), Yh(N,13), Ywt(N)
+  REAL(SP) :: D, H, T, El(13,12)
+  COMPLEX(SP) :: A(Matdim,N), Dfdy(Matdim,N), Save1(N), Save2(N), Y(N), Yh(N,13), Ywt(N)
   LOGICAL :: Evalfa
   INTEGER :: i, iflag, j, mw
   !* FIRST EXECUTABLE STATEMENT  CDCOR

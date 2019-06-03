@@ -79,11 +79,11 @@ SUBROUTINE SCOEF(Yh,Yp,Ncomp,Nrowb,Nfc,B,Beta,Coef,Inhomo,Re,Ae,By,&
   USE ML, ONLY : eps_com
   USE service, ONLY : XGETF, XSETF
   INTEGER :: Iflag, Inhomo, Ncomp, Nfc, Nfcc, Nrowb, Iwork(*)
-  REAL :: Ae, Re
-  REAL :: B(Nrowb,Ncomp), Beta(Nrowb), By(Nfcc,Ncomp), Coef(Nfcc), Cvec(Nrowb), &
+  REAL(SP) :: Ae, Re
+  REAL(SP) :: B(Nrowb,Ncomp), Beta(Nrowb), By(Nfcc,Ncomp), Coef(Nfcc), Cvec(Nrowb), &
     Work(*), Yh(Ncomp,Nfcc), Yp(Ncomp)
   INTEGER :: i, j, k, kflag, ki, l, mlso, ncomp2, nf, nfccm1
-  REAL bbn, bn, brn, bykl, bys, cons, &
+  REAL(SP) bbn, bn, brn, bykl, bys, cons, &
     gam, un, ypn
   !
   !     SET UP MATRIX  B*YH  AND VECTOR  BETA - B*YP

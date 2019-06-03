@@ -119,12 +119,12 @@ SUBROUTINE CCHUD(R,Ldr,P,X,Z,Ldz,Nz,Y,Rho,C,S)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER Ldr, P, Ldz, Nz
-  REAL Rho(*), C(*)
-  COMPLEX R(Ldr,*), X(*), Z(Ldz,*), Y(*), S(*)
+  REAL(SP) Rho(*), C(*)
+  COMPLEX(SP) R(Ldr,*), X(*), Z(Ldz,*), Y(*), S(*)
   !
   INTEGER i, j, jm1
-  REAL azeta, scalee
-  COMPLEX t, xj, zeta
+  REAL(SP) azeta, scalee
+  COMPLEX(SP) t, xj, zeta
   !
   !     UPDATE R.
   !

@@ -101,9 +101,9 @@ SUBROUTINE DBINTK(X,Y,T,N,K,Bcoef,Q,Work)
   USE service, ONLY : XERMSG
   !
   INTEGER :: K, N
-  REAL(8) :: Bcoef(N), Y(N), Q((2*K-1)*N), T(N+K), X(N), Work(2*K)
+  REAL(DP) :: Bcoef(N), Y(N), Q((2*K-1)*N), T(N+K), X(N), Work(2*K)
   INTEGER :: iflag, iwork, i, ilp1mx, j, jj, km1, kpkm2, left, lenq, np1
-  REAL(8) :: xi
+  REAL(DP) :: xi
   !     DIMENSION Q(2*K-1,N), T(N+K)
   !* FIRST EXECUTABLE STATEMENT  DBINTK
   IF ( K<1 ) THEN

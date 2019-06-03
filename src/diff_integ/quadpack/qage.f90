@@ -165,16 +165,17 @@ SUBROUTINE QAGE(F,A,B,Epsabs,Epsrel,Key,Limit,Result,Abserr,Neval,Ier,&
   USE service, ONLY : R1MACH
   !
   INTERFACE
-    REAL FUNCTION F(X)
-      REAL :: X
+    REAL(SP) FUNCTION F(X)
+      IMPORT SP
+      REAL(SP) :: X
     END FUNCTION F
   END INTERFACE
   INTEGER :: Ier, Key, Last, Limit, Neval
   INTEGER :: Iord(Limit)
-  REAL :: A, Abserr, B, Epsabs, Epsrel, Result
-  REAL :: Alist(Limit), Blist(Limit), Elist(Limit), Rlist(Limit)
+  REAL(SP) :: A, Abserr, B, Epsabs, Epsrel, Result
+  REAL(SP) :: Alist(Limit), Blist(Limit), Elist(Limit), Rlist(Limit)
   INTEGER :: iroff1, iroff2, k, keyf, maxerr, nrmax
-  REAL :: area, area1, area12, area2, a1, a2, b1, b2, defabs, defab1, defab2, &
+  REAL(SP) :: area, area1, area12, area2, a1, a2, b1, b2, defabs, defab1, defab2, &
     epmach, errbnd, errmax, error1, error2, erro12, errsum, resabs, uflow
   !
   !            LIST OF MAJOR VARIABLES

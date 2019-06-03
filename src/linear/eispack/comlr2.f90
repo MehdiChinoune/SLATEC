@@ -111,8 +111,8 @@ SUBROUTINE COMLR2(Nm,N,Low,Igh,Intt,Hr,Hi,Wr,Wi,Zr,Zi,Ierr)
   !
   INTEGER i, j, k, l, m, N, en, ii, jj, ll, mm, Nm, nn, Igh, im1, ip1
   INTEGER itn, its, Low, mp1, enm1, iend, Ierr
-  REAL Hr(Nm,*), Hi(Nm,*), Wr(*), Wi(*), Zr(Nm,*), Zi(Nm,*)
-  REAL si, sr, ti, tr, xi, xr, yi, yr, zzi, zzr, norm, s1, s2
+  REAL(SP) Hr(Nm,*), Hi(Nm,*), Wr(*), Wi(*), Zr(Nm,*), Zi(Nm,*)
+  REAL(SP) si, sr, ti, tr, xi, xr, yi, yr, zzi, zzr, norm, s1, s2
   INTEGER Intt(*)
   !
   !* FIRST EXECUTABLE STATEMENT  COMLR2

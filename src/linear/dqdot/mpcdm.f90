@@ -39,9 +39,9 @@ SUBROUTINE MPCDM(Dx,Z)
   !   930124  Increased Array size in MPCON for SUN -r8.  (RWC)
   USE MPCOM, ONLY : b_com, t_com, r_com
   INTEGER :: Z(30)
-  REAL(8) :: Dx
+  REAL(DP) :: Dx
   INTEGER :: i, i2, ib, ie, k, rs, re, tp
-  REAL(8) :: db, dj
+  REAL(DP) :: db, dj
   !* FIRST EXECUTABLE STATEMENT  MPCDM
   CALL MPCHK(1,4)
   i2 = t_com + 4
@@ -73,12 +73,12 @@ SUBROUTINE MPCDM(Dx,Z)
   ! NOW DJ IS DY DIVIDED BY SUITABLE POWER OF 16
   ! SET EXPONENT TO 0
   re = 0
-  db = REAL(b_com, 8)
+  db = REAL( b_com, DP )
   ! CONVERSION LOOP (ASSUME DOUBLE-PRECISION OPS. EXACT)
   DO i = 1, i2
     dj = db*dj
     r_com(i) = INT(dj)
-    dj = dj - REAL(r_com(i), 8)
+    dj = dj - REAL( r_com(i), DP )
   END DO
   ! NORMALIZE RESULT
   CALL MPNZR(rs,re,Z,0)

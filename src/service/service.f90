@@ -2,6 +2,9 @@ MODULE service
   use ISO_FORTRAN_ENV, ONLY : INPUT_UNIT, OUTPUT_UNIT, ERROR_UNIT, &
     NUMERIC_STORAGE_SIZE, CHARACTER_STORAGE_SIZE
   IMPLICIT NONE
+  INTEGER, PARAMETER :: SP = SELECTED_REAL_KIND(6,37)
+  INTEGER, PARAMETER :: DP = SELECTED_REAL_KIND(15,307)
+  INTEGER, PARAMETER :: QP = SELECTED_REAL_KIND(33,4931)
   !   I/O unit numbers:
   !     I1MACH( 1) = the standard input unit.
   !     I1MACH( 2) = the standard output unit.
@@ -42,9 +45,9 @@ MODULE service
   !     I1MACH(16) = EMAX, the largest exponent E.
   INTEGER, PARAMETER :: I1MACH(16) = [ INPUT_UNIT, OUTPUT_UNIT, OUTPUT_UNIT, &
     ERROR_UNIT, NUMERIC_STORAGE_SIZE, CHARACTER_STORAGE_SIZE, &
-    RADIX(1), DIGITS(1), HUGE(1), RADIX(1.), &
-    DIGITS(1.), MINEXPONENT(1.), MAXEXPONENT(1.), &
-    DIGITS(1.D0), MINEXPONENT(1.D0), MAXEXPONENT(1.D0) ]
+    RADIX(1), DIGITS(1), HUGE(1), RADIX(1._SP), &
+    DIGITS(1._SP), MINEXPONENT(1._SP), MAXEXPONENT(1._SP), &
+    DIGITS(1._DP), MINEXPONENT(1._DP), MAXEXPONENT(1._DP) ]
   !   R1MACH(1) = B**(EMIN-1), the smallest positive magnitude.
   !   R1MACH(2) = B**EMAX*(1 - B**(-T)), the largest magnitude.
   !   R1MACH(3) = B**(-T), the smallest relative spacing.
@@ -58,8 +61,8 @@ MODULE service
   !
   !   where 0 <= X(I) < B for I=1,...,T, 0 < X(1), and
   !   EMIN <= E <= EMAX.
-  REAL, PARAMETER :: R1MACH(5) = [ TINY(1.), HUGE(1.), SPACING(0.5), SPACING(1.), &
-    LOG10( REAL(RADIX(1.),4) ) ]
+  REAL(SP), PARAMETER :: R1MACH(5) = [ TINY(1._SP), HUGE(1._SP), SPACING(0.5_SP), &
+    SPACING(1._SP), LOG10( REAL( RADIX(1._SP), SP ) ) ]
   !   D1MACH( 1) = B**(EMIN-1), the smallest positive magnitude.
   !   D1MACH( 2) = B**EMAX*(1 - B**(-T)), the largest magnitude.
   !   D1MACH( 3) = B**(-T), the smallest relative spacing.
@@ -73,8 +76,8 @@ MODULE service
   !
   !   where 0 <= X(I) < B for I=1,...,T, 0 < X(1), and
   !   EMIN <= E <= EMAX.
-  REAL(8), PARAMETER :: D1MACH(5) = [ TINY(1.D0), HUGE(1.D0), SPACING(0.5D0), &
-    SPACING(1.D0), LOG10( REAL(RADIX(1.D0),8) ) ]
+  REAL(DP), PARAMETER :: D1MACH(5) = [ TINY(1._DP), HUGE(1._DP), SPACING(0.5_DP), &
+    SPACING(1._DP), LOG10( REAL( RADIX(1._DP), DP ) ) ]
 
 CONTAINS
   include"fdump.f90"

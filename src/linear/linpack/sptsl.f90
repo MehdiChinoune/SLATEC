@@ -55,10 +55,10 @@ SUBROUTINE SPTSL(N,D,E,B)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER N
-  REAL D(*), E(*), B(*)
+  REAL(SP) D(*), E(*), B(*)
   !
   INTEGER k, kbm1, ke, kf, kp1, nm1, nm1d2
-  REAL t1, t2
+  REAL(SP) t1, t2
   !
   !     CHECK FOR 1 X 1 CASE
   !

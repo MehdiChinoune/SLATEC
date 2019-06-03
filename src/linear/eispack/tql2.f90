@@ -91,8 +91,8 @@ SUBROUTINE TQL2(Nm,N,D,E,Z,Ierr)
 
   !
   INTEGER i, j, k, l, m, N, ii, l1, l2, Nm, mml, Ierr
-  REAL D(*), E(*), Z(Nm,*)
-  REAL b, c, c2, c3, dl1, el1, f, g, h, p, r, s, s2
+  REAL(SP) D(*), E(*), Z(Nm,*)
+  REAL(SP) b, c, c2, c3, dl1, el1, f, g, h, p, r, s, s2
   !
   !* FIRST EXECUTABLE STATEMENT  TQL2
   Ierr = 0

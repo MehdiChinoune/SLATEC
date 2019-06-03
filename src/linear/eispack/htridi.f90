@@ -86,8 +86,8 @@ SUBROUTINE HTRIDI(Nm,N,Ar,Ai,D,E,E2,Tau)
 
   !
   INTEGER i, j, k, l, N, ii, Nm, jp1
-  REAL Ar(Nm,*), Ai(Nm,*), D(*), E(*), E2(*), Tau(2,*)
-  REAL f, g, h, fi, gi, hh, si, scalee
+  REAL(SP) Ar(Nm,*), Ai(Nm,*), D(*), E(*), E2(*), Tau(2,*)
+  REAL(SP) f, g, h, fi, gi, hh, si, scalee
   !
   !* FIRST EXECUTABLE STATEMENT  HTRIDI
   Tau(1,N) = 1.0E0

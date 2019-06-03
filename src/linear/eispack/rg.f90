@@ -50,7 +50,7 @@ SUBROUTINE RG(Nm,N,A,Wr,Wi,Matz,Z,Iv1,Fv1,Ierr)
   !          one-dimensional REAL arrays, dimensioned WR(N) and WI(N).
   !
   !        Z contains the real and imaginary parts of the eigenvectors
-  !          if MATZ is not zero.  If the J-th eigenvalue is real, the
+  !          if MATZ is not zero.  If the J-th eigenvalue is REAL(SP), the
   !          J-th column of Z contains its eigenvector.  If the J-th
   !          eigenvalue is complex with positive imaginary part, the
   !          J-th and (J+1)-th columns of Z contain the real and
@@ -92,7 +92,7 @@ SUBROUTINE RG(Nm,N,A,Wr,Wi,Matz,Z,Iv1,Fv1,Ierr)
 
   !
   INTEGER N, Nm, is1, is2, Ierr, Matz
-  REAL A(Nm,*), Wr(*), Wi(*), Z(Nm,*), Fv1(*)
+  REAL(SP) A(Nm,*), Wr(*), Wi(*), Z(Nm,*), Fv1(*)
   INTEGER Iv1(*)
   !
   !* FIRST EXECUTABLE STATEMENT  RG

@@ -107,11 +107,11 @@ SUBROUTINE DCHDC(A,Lda,P,Work,Jpvt,Job,Info)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER Lda, P, Jpvt(*), Job, Info
-  REAL(8) :: A(Lda,*), Work(*)
+  REAL(DP) :: A(Lda,*), Work(*)
   !
   INTEGER pu, pl, plp1, j, jp, jt, k, kb, km1, kp1, l, maxl
-  REAL(8) :: temp
-  REAL(8) :: maxdia
+  REAL(DP) :: temp
+  REAL(DP) :: maxdia
   LOGICAL swapk, negk
   !* FIRST EXECUTABLE STATEMENT  DCHDC
   pl = 1

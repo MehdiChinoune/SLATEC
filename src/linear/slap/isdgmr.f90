@@ -269,24 +269,25 @@ INTEGER FUNCTION ISDGMR(N,X,Xl,MSOLVE,Nmsl,Itol,Tol,Iter,Err,Iunit,R,Dz,Rwork, &
   USE service, ONLY : D1MACH
   INTERFACE
     SUBROUTINE MSOLVE(N,R,Z,Rwork,Iwork)
+      IMPORT DP
       INTEGER :: N, Iwork(*)
-      REAL(8) :: R(N), Z(N), Rwork(*)
+      REAL(DP) :: R(N), Z(N), Rwork(*)
     END SUBROUTINE
   END INTERFACE
   !     .. Scalar Arguments ..
-  REAL(8) :: Bnrm, Err, Prod, R0nrm, Rnrm, Snormw, Tol
+  REAL(DP) :: Bnrm, Err, Prod, R0nrm, Rnrm, Snormw, Tol
   INTEGER Iter, Itol, Iunit, Jpre, Jscal, Kmp, Lgmr, Maxl, Maxlp1, N, Nmsl
   !     .. Array Arguments ..
-  REAL(8) :: Dz(*), Hes(Maxlp1,Maxl), Q(*), R(*), Rwork(*), Sx(*), V(N,*), &
+  REAL(DP) :: Dz(*), Hes(Maxlp1,Maxl), Q(*), R(*), Rwork(*), Sx(*), V(N,*), &
     X(*), Xl(*)
   INTEGER Iwork(*)
   !     .. Local Scalars ..
-  REAL(8) :: dxnrm, fuzz, rat, ratmax, tem
+  REAL(DP) :: dxnrm, fuzz, rat, ratmax, tem
   INTEGER i, ielmax
   !     .. Intrinsic Functions ..
   INTRINSIC ABS, MAX, SQRT
   !     .. Save statement ..
-  REAL(8), SAVE :: solnrm
+  REAL(DP), SAVE :: solnrm
   !* FIRST EXECUTABLE STATEMENT  ISDGMR
   ISDGMR = 0
   !

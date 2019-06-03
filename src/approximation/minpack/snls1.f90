@@ -612,24 +612,25 @@ SUBROUTINE SNLS1(FCN,Iopt,M,N,X,Fvec,Fjac,Ldfjac,Ftol,Xtol,Gtol,Maxfev,&
   USE service, ONLY : XERMSG, R1MACH
   INTERFACE
     SUBROUTINE FCN(Iflag,M,N,X,Fvec,Fjac,Ldfjac)
+      IMPORT SP
       INTEGER :: Ldfjac, M, N, Iflag
-      REAL :: X(N), Fvec(M), Fjac(:,:)
+      REAL(SP) :: X(N), Fvec(M), Fjac(:,:)
     END SUBROUTINE FCN
   END INTERFACE
   INTEGER :: Iopt, M, N, Ldfjac, Maxfev, Mode, Nprint, Info, Nfev, Njev
   INTEGER :: Ipvt(N)
-  REAL :: Ftol, Xtol, Gtol, Factor, Epsfcn
-  REAL :: X(N), Fvec(M), Fjac(Ldfjac,N), Diag(N), Qtf(N), Wa1(N), Wa2(N), &
+  REAL(SP) :: Ftol, Xtol, Gtol, Factor, Epsfcn
+  REAL(SP) :: X(N), Fvec(M), Fjac(Ldfjac,N), Diag(N), Qtf(N), Wa1(N), Wa2(N), &
     Wa3(N,1), Wa4(M)
   INTEGER :: ijunk, nrow, i, iflag, iter, j, l, modech
-  REAL :: actred, delta, dirder, epsmch, fnorm, fnorm1, gnorm, par, pnorm, prered, &
+  REAL(SP) :: actred, delta, dirder, epsmch, fnorm, fnorm1, gnorm, par, pnorm, prered, &
     ratio, summ, temp, temp1, temp2, xnorm, err(1)
   LOGICAL :: sing
   CHARACTER(8) :: xern1
   CHARACTER(16) :: xern3
   !
-  REAL, PARAMETER :: chklim = .1E0
-  REAL, PARAMETER :: one = 1.0E0, p1 = 1.0E-1, p5 = 5.0E-1, p25 = 2.5E-1, &
+  REAL(SP), PARAMETER :: chklim = .1E0
+  REAL(SP), PARAMETER :: one = 1.0E0, p1 = 1.0E-1, p5 = 5.0E-1, p25 = 2.5E-1, &
     p75 = 7.5E-1, p0001 = 1.0E-4, zero = 0.0E0
   !
   !* FIRST EXECUTABLE STATEMENT  SNLS1

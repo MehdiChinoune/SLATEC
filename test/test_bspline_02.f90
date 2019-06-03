@@ -1,4 +1,5 @@
 MODULE TEST31_MOD
+  USE service, ONLY : SP, DP
   IMPLICIT NONE
 
 CONTAINS
@@ -44,14 +45,14 @@ CONTAINS
     !     .. Scalar Arguments ..
     INTEGER Ipass, Kprint, Lun
     !     .. Local Scalars ..
-    REAL(8) :: atol, bquad, bv, den, dn, er, fbcl, fbcr, pi, &
+    REAL(DP) :: atol, bquad, bv, den, dn, er, fbcl, fbcr, pi, &
       pquad, quad, spv, tol, x1, x2, xl, xx
     INTEGER i, ibcl, ibcr, id, ierr, iknt, ileft, ilo, inbv, inev, &
       inppv, iwork, j, jhigh, jj, k, kk, knt, kntopt, kontrl, &
       ldc, ldcc, lxi, mflag, n, ndata, nerr, nmk, nn
     LOGICAL fatal
     !     .. Local Arrays ..
-    REAL(8) :: adif(52), bc(13), c(4,10), cc(4,4), q(3), qq(77), &
+    REAL(DP) :: adif(52), bc(13), c(4,10), cc(4,4), q(3), qq(77), &
       qsave(2), sv(4), t(17), w(65), x(11), xi(11), y(11)
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, MAX, SIN
@@ -454,7 +455,7 @@ CONTAINS
     RETURN
   END SUBROUTINE DBSPCK
   !** DFB
-  REAL(8) FUNCTION DFB(X)
+  REAL(DP) FUNCTION DFB(X)
     !>
     !  Subsidiary to DBSPCK.
     !***
@@ -471,7 +472,7 @@ CONTAINS
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   930214  Added TYPE statement.  (WRB)
 
-    REAL(8), INTENT(IN) :: X
+    REAL(DP), INTENT(IN) :: X
     !* FIRST EXECUTABLE STATEMENT  DFB
     DFB = 1.0D0
   END FUNCTION DFB

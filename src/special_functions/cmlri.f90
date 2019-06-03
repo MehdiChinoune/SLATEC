@@ -24,10 +24,10 @@ SUBROUTINE CMLRI(Z,Fnu,Kode,N,Y,Nz,Tol)
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
   USE service, ONLY : R1MACH
   INTEGER i, iaz, idum, ifnu, inu, itime, k, kk, km, Kode, m, N, Nz
-  COMPLEX ck, cnorm, pt, p1, p2, rz, summ, Y(N), Z
-  REAL ack, ak, ap, at, az, bk, fkap, fkk, flam, fnf, Fnu, rho, &
+  COMPLEX(SP) ck, cnorm, pt, p1, p2, rz, summ, Y(N), Z
+  REAL(SP) ack, ak, ap, at, az, bk, fkap, fkk, flam, fnf, Fnu, rho, &
     rho2, scle, tfnf, Tol, tst, x
-  COMPLEX, PARAMETER :: czero = (0.0E0,0.0E0), cone = (1.0E0,0.0E0), ctwo = (2.0E0,0.0E0)
+  COMPLEX(SP), PARAMETER :: czero = (0.0E0,0.0E0), cone = (1.0E0,0.0E0), ctwo = (2.0E0,0.0E0)
   scle = 1.0E+3*R1MACH(1)/Tol
   !* FIRST EXECUTABLE STATEMENT  CMLRI
   Nz = 0

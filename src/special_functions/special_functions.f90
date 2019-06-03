@@ -2,6 +2,7 @@ include"xblk.f90"
 include"dxblk.f90"
 
 MODULE special_functions
+  USE service, ONLY : SP, DP
   IMPLICIT NONE
 
 CONTAINS

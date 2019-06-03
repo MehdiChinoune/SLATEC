@@ -21,9 +21,9 @@ SUBROUTINE CPEVLR(N,M,A,X,C)
   !   900402  Added TYPE section.  (WRB)
 
   INTEGER :: M, N
-  REAL :: X, A(N+1), C(MIN(M+1,N+1))
+  REAL(SP) :: X, A(N+1), C(MIN(M+1,N+1))
   INTEGER :: i, j, mini, np1
-  REAL :: ci, cim1
+  REAL(SP) :: ci, cim1
   !* FIRST EXECUTABLE STATEMENT  CPEVLR
   np1 = N + 1
   DO j = 1, np1

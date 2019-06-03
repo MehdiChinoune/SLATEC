@@ -1,5 +1,5 @@
 !** BINOM
-REAL FUNCTION BINOM(N,M)
+REAL(SP) FUNCTION BINOM(N,M)
   !>
   !  Compute the binomial coefficients.
   !***
@@ -33,9 +33,9 @@ REAL FUNCTION BINOM(N,M)
   USE service, ONLY : XERMSG, R1MACH
   INTEGER :: M, N
   INTEGER :: i, k
-  REAL :: corr, xk, xn, xnk
-  REAL, PARAMETER :: bilnmx = LOG(R1MACH(2)), fintmx = 0.9/R1MACH(3)
-  REAL, PARAMETER :: sq2pil = 0.91893853320467274E0
+  REAL(SP) :: corr, xk, xn, xnk
+  REAL(SP), PARAMETER :: bilnmx = LOG(R1MACH(2)), fintmx = 0.9/R1MACH(3)
+  REAL(SP), PARAMETER :: sq2pil = 0.91893853320467274E0
   !* FIRST EXECUTABLE STATEMENT  BINOM
   !
   IF ( N<0.OR.M<0 ) CALL XERMSG('BINOM','N OR M LT ZERO',1,2)

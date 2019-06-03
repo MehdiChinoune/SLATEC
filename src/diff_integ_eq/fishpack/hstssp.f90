@@ -375,11 +375,11 @@ SUBROUTINE HSTSSP(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER Idimf, Ierror, M, Mbdcnd, N, Nbdcnd
-  REAL :: A, B, C, D, Elmbda, Pertrb
-  REAL :: Bda(N+1), Bdb(N+1), Bdc(M+1), Bdd(M+1), F(Idimf,N+1), W(:)
+  REAL(SP) :: A, B, C, D, Elmbda, Pertrb
+  REAL(SP) :: Bda(N+1), Bdb(N+1), Bdc(M+1), Bdd(M+1), F(Idimf,N+1), W(:)
   INTEGER :: i, ierr1, isw, iwb, iwc, iwr, iws, j, jsw, k, lp, mb, mm1, np
-  REAL :: a1, a2, a3, deltar, deltht, dlrsq, dlthsq
-  REAL, PARAMETER :: pi = 3.14159265358979
+  REAL(SP) :: a1, a2, a3, deltar, deltht, dlrsq, dlthsq
+  REAL(SP), PARAMETER :: pi = 3.14159265358979
   !* FIRST EXECUTABLE STATEMENT  HSTSSP
   Ierror = 0
   IF ( A<0..OR.B>pi ) Ierror = 1

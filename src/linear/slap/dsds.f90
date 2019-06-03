@@ -112,7 +112,7 @@ SUBROUTINE DSDS(N,Nelt,Ja,A,Dinv)
   !     .. Scalar Arguments ..
   INTEGER N, Nelt
   !     .. Array Arguments ..
-  REAL(8) :: A(Nelt), Dinv(N)
+  REAL(DP) :: A(Nelt), Dinv(N)
   INTEGER Ja(Nelt)
   !     .. Local Scalars ..
   INTEGER icol

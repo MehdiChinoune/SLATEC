@@ -47,7 +47,7 @@ SUBROUTINE XCON(X,Ix,Ierror)
   !   920127  Revised PURPOSE section of prologue.  (DWL)
   USE XBLK ,ONLY: radixx_com, radixl_com, dlg10r_com, l_com
   INTEGER :: Ierror, Ix
-  REAL :: X
+  REAL(SP) :: X
   INTEGER :: i, i1, icase, itemp, j, j1, j2
   !
   !   THE CONDITIONS IMPOSED ON L AND KMAX BY THIS SUBROUTINE
@@ -60,7 +60,7 @@ SUBROUTINE XCON(X,Ix,Ierror)
   ! IN SUBROUTINE XSET.
   !
   !
-  REAL :: a, b, z
+  REAL(SP) :: a, b, z
   !
   INTEGER, PARAMETER :: ispace = 1
   !   THE PARAMETER ISPACE IS THE INCREMENT USED IN FORM-

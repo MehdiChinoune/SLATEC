@@ -88,18 +88,18 @@ SUBROUTINE DBESJ(X,Alpha,N,Y,Nz)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   USE service, ONLY : XERMSG, D1MACH, I1MACH
   INTEGER ::  N, Nz
-  REAL(8) :: Alpha, X, Y(N)
+  REAL(DP) :: Alpha, X, Y(N)
   INTEGER :: i, ialp, idalp, iflw, in, is, i1, i2, k, kk, km, kt,nn, ns
-  REAL(8) :: ak, akm, ans, ap, arg, coef, dalpha, dfn, dtm, earg, elim1, &
+  REAL(DP) :: ak, akm, ans, ap, arg, coef, dalpha, dfn, dtm, earg, elim1, &
     etx, fidal, flgjy, fn, fnf, fni, fnp1, fnu, gln, rden, relb, &
     rtx, rzden, s, sa, sb, sxo2, s1, s2, t, ta, tau, tb, temp(3), &
     tfn, tm, tol, tolln, trx, tx, t1, t2, wk(7), xo2, xo2l, slim, rtol
-  REAL(8), PARAMETER :: rtwo = 1.34839972492648D+00, pdf = 7.85398163397448D-01, &
+  REAL(DP), PARAMETER :: rtwo = 1.34839972492648D+00, pdf = 7.85398163397448D-01, &
     rttp = 7.97884560802865D-01, pidt = 1.57079632679490D+00
-  REAL(8), PARAMETER :: pp(4) = [ 8.72909153935547D+00, 2.65693932265030D-01, &
+  REAL(DP), PARAMETER :: pp(4) = [ 8.72909153935547D+00, 2.65693932265030D-01, &
     1.24578576865586D-01, 7.70133747430388D-04 ]
   INTEGER, PARAMETER :: inlim = 150
-  REAL(8), PARAMETER :: fnulim(2) = [ 100.0D0, 60.0D0 ]
+  REAL(DP), PARAMETER :: fnulim(2) = [ 100.0D0, 60.0D0 ]
   !* FIRST EXECUTABLE STATEMENT  DBESJ
   Nz = 0
   kt = 1

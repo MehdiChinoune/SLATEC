@@ -73,9 +73,9 @@ SUBROUTINE DQPSRT(Limit,Last,Maxerr,Ermax,Elist,Iord,Nrmax)
 
   !
   INTEGER :: Last, Limit, Maxerr, Nrmax, Iord(Last)
-  REAL(8) :: Ermax, Elist(Last)
+  REAL(DP) :: Ermax, Elist(Last)
   INTEGER :: i, ibeg, ido, isucc, j, jbnd, jupbn, k
-  REAL(8) :: errmax, errmin
+  REAL(DP) :: errmax, errmin
   !
   !           CHECK WHETHER THE LIST CONTAINS MORE THAN
   !           TWO ERROR ESTIMATES.

@@ -393,15 +393,15 @@ SUBROUTINE DLSEI(W,Mdw,Me,Ma,Mg,N,Prgopt,X,Rnorme,Rnorml,Mode,Ws,Ip)
   USE service, ONLY : XERMSG, D1MACH
   USE linear, ONLY : DAXPY, DH12, DSWAP
   INTEGER :: Ma, Mdw, Me, Mg, Mode, N, Ip(3)
-  REAL(8) :: Rnorme, Rnorml, Prgopt(:), W(Mdw,N+1), Ws(*), X(N)
+  REAL(DP) :: Rnorme, Rnorml, Prgopt(:), W(Mdw,N+1), Ws(*), X(N)
   !
-  REAL(8) :: enorm, fnorm, gam, rb, rn, rnmax, sizee, sn, snmax, t, tau, uj, up, &
+  REAL(DP) :: enorm, fnorm, gam, rb, rn, rnmax, sizee, sn, snmax, t, tau, uj, up, &
     vj, xnorm, xnrme
   INTEGER :: i, imax, j, jp1, k, key, kranke, last, lchk, link, m, &
     mapke1, mdeqc, mend, mep1, n1, n2, next, nlink, nopt, np1, ntimes
   LOGICAL :: cov
   CHARACTER(8) :: xern1, xern2, xern3, xern4
-  REAL(8), PARAMETER :: drelpr = D1MACH(4)
+  REAL(DP), PARAMETER :: drelpr = D1MACH(4)
   !* FIRST EXECUTABLE STATEMENT  DLSEI
   !
   !     Set the nominal tolerance used in the code for the equality

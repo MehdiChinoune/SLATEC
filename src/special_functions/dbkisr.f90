@@ -28,9 +28,9 @@ SUBROUTINE DBKISR(X,N,Summ,Ierr)
   !   910722  Updated AUTHOR section.  (ALS)
   USE service, ONLY : D1MACH
   INTEGER i, Ierr, k, kk, kkn, k1, N, np
-  REAL(8) :: ak, atol, bk, fk, fn, hx, hxs, pol, pr, Summ, tkp, tol, trm, X, xln
+  REAL(DP) :: ak, atol, bk, fk, fn, hx, hxs, pol, pr, Summ, tkp, tol, trm, X, xln
   !
-  REAL(8), PARAMETER :: c(2) = [ 1.57079632679489662D+00, 1.0D0 ]
+  REAL(DP), PARAMETER :: c(2) = [ 1.57079632679489662D+00, 1.0D0 ]
   !* FIRST EXECUTABLE STATEMENT  DBKISR
   Ierr = 0
   tol = MAX(D1MACH(4),1.0D-18)

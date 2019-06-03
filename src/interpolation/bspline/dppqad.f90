@@ -59,9 +59,9 @@ SUBROUTINE DPPQAD(Ldc,C,Xi,Lxi,K,X1,X2,Pquad)
   USE service, ONLY : XERMSG
   !
   INTEGER :: K, Ldc, Lxi
-  REAL(8) :: C(Ldc,Lxi), Pquad, Xi(Lxi+1), X1, X2
+  REAL(DP) :: C(Ldc,Lxi), Pquad, Xi(Lxi+1), X1, X2
   INTEGER :: i, ii, il, ilo, il1, il2, im, left, mf1, mf2
-  REAL(8) :: a, aa, bb, dx, flk, q, s, ss(2), ta, tb, x
+  REAL(DP) :: a, aa, bb, dx, flk, q, s, ss(2), ta, tb, x
   !
   !* FIRST EXECUTABLE STATEMENT  DPPQAD
   Pquad = 0.0D0

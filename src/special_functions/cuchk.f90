@@ -30,8 +30,8 @@ SUBROUTINE CUCHK(Y,Nz,Ascle,Tol)
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
   
   !
-  COMPLEX Y
-  REAL Ascle, ss, st, Tol, yr, yi
+  COMPLEX(SP) Y
+  REAL(SP) Ascle, ss, st, Tol, yr, yi
   INTEGER Nz
   !* FIRST EXECUTABLE STATEMENT  CUCHK
   Nz = 0

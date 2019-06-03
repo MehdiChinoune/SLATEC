@@ -83,8 +83,8 @@ SUBROUTINE HTRIBK(Nm,N,Ar,Ai,Tau,M,Zr,Zi)
 
   !
   INTEGER i, j, k, l, M, N, Nm
-  REAL Ar(Nm,*), Ai(Nm,*), Tau(2,*), Zr(Nm,*), Zi(Nm,*)
-  REAL h, s, si
+  REAL(SP) Ar(Nm,*), Ai(Nm,*), Tau(2,*), Zr(Nm,*), Zi(Nm,*)
+  REAL(SP) h, s, si
   !
   !* FIRST EXECUTABLE STATEMENT  HTRIBK
   IF ( M/=0 ) THEN

@@ -108,11 +108,11 @@ SUBROUTINE CQRDC(X,Ldx,N,P,Qraux,Jpvt,Work,Job)
   INTEGER jj
   INTEGER Ldx, N, P, Job
   INTEGER Jpvt(*)
-  COMPLEX X(Ldx,*), Qraux(*), Work(*)
+  COMPLEX(SP) X(Ldx,*), Qraux(*), Work(*)
   !
   INTEGER j, jp, l, lp1, lup, maxj, pl, pu
-  REAL maxnrm, tt
-  COMPLEX nrmxl, t
+  REAL(SP) maxnrm, tt
+  COMPLEX(SP) nrmxl, t
   LOGICAL negj, swapj
   !
   !* FIRST EXECUTABLE STATEMENT  CQRDC

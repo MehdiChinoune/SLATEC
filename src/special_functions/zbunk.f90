@@ -26,7 +26,7 @@ SUBROUTINE ZBUNK(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Tol,Elim,Alim)
 
   !     COMPLEX Y,Z
   INTEGER Kode, Mr, N, Nz
-  REAL(8) :: Alim, ax, ay, Elim, Fnu, Tol, Yi(N), Yr(N), Zi, Zr
+  REAL(DP) :: Alim, ax, ay, Elim, Fnu, Tol, Yi(N), Yr(N), Zi, Zr
   !* FIRST EXECUTABLE STATEMENT  ZBUNK
   Nz = 0
   ax = ABS(Zr)*1.7321D0

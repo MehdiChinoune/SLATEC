@@ -29,7 +29,7 @@ SUBROUTINE ISMPL(N,M,Indx)
   !     .. Array Arguments ..
   INTEGER Indx(M)
   !     .. Local Scalars ..
-  REAL dummy
+  REAL(SP) dummy
   INTEGER i, id, j
   !     .. Intrinsic Functions ..
   INTRINSIC INT

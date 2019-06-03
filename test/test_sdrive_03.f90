@@ -1,4 +1,5 @@
 MODULE TEST47_MOD
+  USE service, ONLY : SP, DP
   IMPLICIT NONE
 
 CONTAINS
@@ -37,13 +38,13 @@ CONTAINS
     !   890405  DATE WRITTEN
     !   890405  Revised to meet SLATEC standards.
     USE slatec, ONLY : CDRIV1, CDRIV2, CDRIV3, R1MACH, XERCLR
-    REAL eps, t, tout
+    REAL(SP) eps, t, tout
     INTEGER ierflg, Ipass, Kprint, leniw, leniwx, lenw, lenwx, Lun, mint, &
       mstate, nde, nfe, nje, nstate, nstep, nx
     REAL, PARAMETER :: HMAX = 15.E0
     INTEGER, PARAMETER :: IERROR = 3, IMPL = 0, LENWMX = 342, LIWMX = 53, &
       MITER = 5, ML = 2, MU = 2, MXORD = 5, MXSTEP = 1000, N = 3, NROOT = 0, NTASK = 1
-    COMPLEX alfa, work(LENWMX), y(N+1)
+    COMPLEX(SP) alfa, work(LENWMX), y(N+1)
     INTEGER iwork(LIWMX)
     REAL, PARAMETER :: ewt(1)  = .00001E0
     !* FIRST EXECUTABLE STATEMENT  CDQCK
@@ -414,7 +415,7 @@ CONTAINS
     CALL XERCLR
 
   CONTAINS
-    REAL FUNCTION dum_G(N,T,Y,Iroot)
+    REAL(SP) FUNCTION dum_G(N,T,Y,Iroot)
       INTEGER :: N, Iroot
       REAL :: T
       COMPLEX :: Y(N)
@@ -474,9 +475,9 @@ CONTAINS
     !   890405  Revised to meet SLATEC standards.
 
     INTEGER :: N
-    REAL :: T
-    COMPLEX :: Y(:), Yp(:)
-    COMPLEX :: alfa
+    REAL(SP) :: T
+    COMPLEX(SP) :: Y(:), Yp(:)
+    COMPLEX(SP) :: alfa
     !* FIRST EXECUTABLE STATEMENT  CDF
     alfa = Y(N+1)
     Yp(1) = 1.E0 + alfa*(Y(2)-Y(1)) - Y(1)*Y(3)

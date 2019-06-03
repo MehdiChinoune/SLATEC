@@ -133,13 +133,13 @@ SUBROUTINE DRC3JJ(L2,L3,M2,M3,L1min,L1max,Thrcof,Ndim,Ier)
   USE service, ONLY : XERMSG, D1MACH
   !
   INTEGER Ndim, Ier
-  REAL(8) :: L2, L3, M2, M3, L1min, L1max, Thrcof(Ndim)
+  REAL(DP) :: L2, L3, M2, M3, L1min, L1max, Thrcof(Ndim)
   !
   INTEGER i, indexx, lstep, n, nfin, nfinp1, nfinp2, nfinp3, nlim, nstep2
-  REAL(8) :: a1, a1s, a2, a2s, c1, c1old, c2, cnorm, denom, dv, hugee, &
+  REAL(DP) :: a1, a1s, a2, a2s, c1, c1old, c2, cnorm, denom, dv, hugee, &
     l1, m1, newfac, oldfac, ratio, sign1, sign2, srhuge, srtiny, sum1, sum2, &
     sumbac, sumfor, sumuni, thresh, tinyy, x, x1, x2, x3, y, y1, y2, y3
-  REAL(8), PARAMETER :: zero = 0.0D0, eps = 0.01D0, one = 1.0D0, two = 2.0D0, &
+  REAL(DP), PARAMETER :: zero = 0.0D0, eps = 0.01D0, one = 1.0D0, two = 2.0D0, &
     three = 3.0D0
   !
   !* FIRST EXECUTABLE STATEMENT  DRC3JJ

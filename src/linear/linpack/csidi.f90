@@ -83,11 +83,11 @@ SUBROUTINE CSIDI(A,Lda,N,Kpvt,Det,Work,Job)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER Lda, N, Job
-  COMPLEX A(Lda,*), Det(2), Work(*)
+  COMPLEX(SP) A(Lda,*), Det(2), Work(*)
   INTEGER Kpvt(*)
   !
-  COMPLEX ak, akp1, akkp1, d, t, temp
-  REAL ten
+  COMPLEX(SP) ak, akp1, akkp1, d, t, temp
+  REAL(SP) ten
   INTEGER j, jb, k, km1, ks, kstep
   LOGICAL noinv, nodet
   !

@@ -48,19 +48,19 @@ SUBROUTINE DPLPMU(Mrelas,Nvars,Lmx,Lbm,Nredc,Info,Ienter,Ileave,Iopt,Npp,&
   !   900328  Added TYPE section.  (WRB)
   USE service, ONLY : XERMSG
   INTEGER :: Ienter, Ileave, Info, Iopt, Jstrt, Lbm, Lmx, Mrelas, Npp, Nredc, Nvars
-  REAL(8) :: Anorm, Costsc, Erdnrm, Dulnrm, Eps, Gg, Rprnrm, Theta, Uu, Xlamda, Rhsnrm
+  REAL(DP) :: Anorm, Costsc, Erdnrm, Dulnrm, Eps, Gg, Rprnrm, Theta, Uu, Xlamda, Rhsnrm
   LOGICAL :: Singlr, Redbas, Zerolv
   INTEGER :: Ibasis(Nvars+Mrelas), Imat(Lmx), Ibrc(Lbm,2), Ipr(2*Mrelas), &
     Iwr(8*Mrelas), Ind(Nvars+Mrelas), Ibb(Nvars+Mrelas)
-  REAL(8) :: Amat(Lmx), Basmat(Lbm), Csc(Nvars), Wr(Mrelas), Rprim(Mrelas), &
+  REAL(DP) :: Amat(Lmx), Basmat(Lbm), Csc(Nvars), Wr(Mrelas), Rprim(Mrelas), &
     Ww(Mrelas), Bu(Nvars+Mrelas), Bl(Nvars+Mrelas), Rhs(Mrelas), Erd(Mrelas), &
     Erp(Mrelas), Rz(Nvars+Mrelas), Rg(Nvars+Mrelas), Costs(Nvars), &
     Primal(Nvars+Mrelas), Duals(Nvars+Mrelas), Colnrm(Nvars)
   INTEGER :: i, ibas, ihi, il1, ilow, ipage, iplace, iu1, j, k, key, lpg, n20002, &
     n20018, n20121, nerr, nnegrc, npr001, npr003
-  REAL(8) :: aij, alpha, gama, gq, rzj, scalr, wp, rcost, cnorm
+  REAL(DP) :: aij, alpha, gama, gq, rzj, scalr, wp, rcost, cnorm
   LOGICAL :: pagepl, trans, Stpedg
-  REAL(8), PARAMETER :: zero = 0.D0, one = 1.D0, two = 2.D0
+  REAL(DP), PARAMETER :: zero = 0.D0, one = 1.D0, two = 2.D0
   !
   !* FIRST EXECUTABLE STATEMENT  DPLPMU
   lpg = Lmx - (Nvars+4)

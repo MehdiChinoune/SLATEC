@@ -429,24 +429,26 @@ SUBROUTINE SNSQ(FCN,JAC,Iopt,N,X,Fvec,Fjac,Ldfjac,Xtol,Maxfev,Ml,Mu,&
   USE service, ONLY : XERMSG, R1MACH
   INTERFACE
     SUBROUTINE FCN(N,X,Fvec,iflag)
+      IMPORT SP
       INTEGER :: N, Iflag
-      REAL :: X(N), Fvec(N)
+      REAL(SP) :: X(N), Fvec(N)
     END SUBROUTINE FCN
     SUBROUTINE JAC(N,X,Fvec,Fjac,Ldfjac,Iflag)
+      IMPORT SP
       INTEGER :: N, Ldfjac, Iflag
-      REAL :: X(N), Fvec(N),Fjac(Ldfjac,N)
+      REAL(SP) :: X(N), Fvec(N),Fjac(Ldfjac,N)
     END SUBROUTINE JAC
   END INTERFACE
   INTEGER :: Iopt, N, Maxfev, Ml, Mu, Mode, Nprint, Info, Nfev, Ldfjac, Lr, Njev
-  REAL :: Xtol, Epsfcn, Factor
-  REAL :: X(N), Fvec(N), Diag(N), Fjac(Ldfjac,N), R(Lr), Qtf(N), Wa1(N), &
+  REAL(SP) :: Xtol, Epsfcn, Factor
+  REAL(SP) :: X(N), Fvec(N), Diag(N), Fjac(Ldfjac,N), R(Lr), Qtf(N), Wa1(N), &
     Wa2(N), Wa3(N), Wa4(N)
   INTEGER :: i, iflag, iter, j, jm1, l, ncfail, ncsuc, nslow1, nslow2
   INTEGER :: iwa(1)
   LOGICAL :: jeval, sing
-  REAL :: actred, delta, epsmch, fnorm, fnorm1, pnorm, prered, ratio, summ, &
+  REAL(SP) :: actred, delta, epsmch, fnorm, fnorm1, pnorm, prered, ratio, summ, &
     temp, xnorm
-  REAL, PARAMETER ::one = 1.0E0, p1 = 1.0E-1, p5 = 5.0E-1, p001 = 1.0E-3, &
+  REAL(SP), PARAMETER ::one = 1.0E0, p1 = 1.0E-1, p5 = 5.0E-1, p001 = 1.0E-3, &
     p0001 = 1.0E-4, zero = 0.0E0
   !
   !* FIRST EXECUTABLE STATEMENT  SNSQ

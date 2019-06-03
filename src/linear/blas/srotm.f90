@@ -67,8 +67,8 @@ SUBROUTINE SROTM(N,Sx,Incx,Sy,Incy,Sparam)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER i, Incx, Incy, kx, ky, N, nsteps
-  REAL sflag, sh11, sh12, sh21, sh22, Sparam(5), Sx(*), Sy(*), w, z
-  REAL, PARAMETER :: zero = 0.0E0, two = 2.0E0
+  REAL(SP) sflag, sh11, sh12, sh21, sh22, Sparam(5), Sx(*), Sy(*), w, z
+  REAL(SP), PARAMETER :: zero = 0.0E0, two = 2.0E0
   !* FIRST EXECUTABLE STATEMENT  SROTM
   sflag = Sparam(1)
   IF ( N>0.AND.(sflag+two/=zero) ) THEN

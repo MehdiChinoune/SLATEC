@@ -80,10 +80,10 @@ SUBROUTINE SPSORT(X,N,Iperm,Kflag,Ier)
   !     .. Scalar Arguments ..
   INTEGER Ier, Kflag, N
   !     .. Array Arguments ..
-  REAL :: X(N)
+  REAL(SP) :: X(N)
   INTEGER :: Iperm(N)
   !     .. Local Scalars ..
-  REAL r, temp
+  REAL(SP) r, temp
   INTEGER i, ij, indx, indx0, istrt, j, k, kk, l, lm, lmt, m, nn
   !     .. Local Arrays ..
   INTEGER il(21), iu(21)

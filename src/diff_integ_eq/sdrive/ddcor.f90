@@ -34,19 +34,21 @@ SUBROUTINE DDCOR(Dfdy,El,FA,H,Ierror,Impl,Ipvt,Matdim,Miter,Ml,Mu,N,Nde,&
   USE linear, ONLY : DGBSL, DGESL
   INTERFACE
     SUBROUTINE USERS(Y,Yh,Ywt,Save1,Save2,T,H,El,Impl,N,Nde,Iflag)
+      IMPORT DP
       INTEGER :: Impl, N, Nde, iflag
-      REAL(8) :: T, H, El
-      REAL(8) :: Y(N), Yh(N,13), Ywt(N), Save1(N), Save2(N)
+      REAL(DP) :: T, H, El
+      REAL(DP) :: Y(N), Yh(N,13), Ywt(N), Save1(N), Save2(N)
     END SUBROUTINE USERS
     SUBROUTINE FA(N,T,Y,A,Matdim,Ml,Mu,Nde)
+      IMPORT DP
       INTEGER :: N, Matdim, Ml, Mu, Nde
-      REAL(8) :: T, Y(N), A(:,:)
+      REAL(DP) :: T, Y(N), A(:,:)
     END SUBROUTINE FA
   END INTERFACE
   INTEGER :: Ierror, Impl, Jstate, Matdim, Miter, Ml, Mu, N, Nde, Nq
   INTEGER :: Ipvt(N)
-  REAL(8) :: D, H, T
-  REAL(8) :: A(Matdim,N), Dfdy(Matdim,N), El(13,12), Save1(N), Save2(N), Y(N), &
+  REAL(DP) :: D, H, T
+  REAL(DP) :: A(Matdim,N), Dfdy(Matdim,N), El(13,12), Save1(N), Save2(N), Y(N), &
     Yh(N,13), Ywt(N)
   LOGICAL :: Evalfa
   INTEGER :: i, iflag, j, mw
@@ -61,7 +63,7 @@ SUBROUTINE DDCOR(Dfdy,El,FA,H,Ierror,Impl,Ipvt,Matdim,Miter,Ml,Mu,N,Nde,&
         Save1(i) = (H*Save2(i)-Yh(i,2)-Save1(i))/MAX(ABS(Y(i)),Ywt(i))
       END DO
     END IF
-    D = NORM2(Save1(1:N))/SQRT(REAL(N, 8))
+    D = NORM2(Save1(1:N))/SQRT(REAL(N, DP))
     DO i = 1, N
       Save1(i) = H*Save2(i) - Yh(i,2)
     END DO
@@ -132,7 +134,7 @@ SUBROUTINE DDCOR(Dfdy,El,FA,H,Ierror,Impl,Ipvt,Matdim,Miter,Ml,Mu,N,Nde,&
         Save2(i) = Save2(i)/MAX(ABS(Y(i)),Ywt(i))
       END DO
     END IF
-    D = NORM2(Save2(1:N))/SQRT(REAL(N, 8))
+    D = NORM2(Save2(1:N))/SQRT(REAL(N, DP))
   ELSEIF ( Miter==4.OR.Miter==5 ) THEN
     IF ( Impl==0 ) THEN
       DO i = 1, N
@@ -202,7 +204,7 @@ SUBROUTINE DDCOR(Dfdy,El,FA,H,Ierror,Impl,Ipvt,Matdim,Miter,Ml,Mu,N,Nde,&
         Save2(i) = Save2(i)/MAX(ABS(Y(i)),Ywt(i))
       END DO
     END IF
-    D = NORM2(Save2(1:N))/SQRT(REAL(N, 8))
+    D = NORM2(Save2(1:N))/SQRT(REAL(N, DP))
   ELSEIF ( Miter==3 ) THEN
     iflag = 2
     CALL USERS(Y,Yh(1,2),Ywt,Save1,Save2,T,H,El(1,Nq),Impl,N,Nde,iflag)
@@ -221,6 +223,6 @@ SUBROUTINE DDCOR(Dfdy,El,FA,H,Ierror,Impl,Ipvt,Matdim,Miter,Ml,Mu,N,Nde,&
         Save2(i) = Save2(i)/MAX(ABS(Y(i)),Ywt(i))
       END DO
     END IF
-    D = NORM2(Save2(1:N))/SQRT(REAL(N, 8))
+    D = NORM2(Save2(1:N))/SQRT(REAL(N, DP))
   END IF
 END SUBROUTINE DDCOR

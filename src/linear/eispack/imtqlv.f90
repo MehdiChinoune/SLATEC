@@ -97,8 +97,8 @@ SUBROUTINE IMTQLV(N,D,E,E2,W,Ind,Ierr,Rv1)
 
   !
   INTEGER i, j, k, l, m, N, ii, mml, tag, Ierr
-  REAL D(*), E(*), E2(*), W(*), Rv1(*)
-  REAL b, c, f, g, p, r, s, s1, s2
+  REAL(SP) D(*), E(*), E2(*), W(*), Rv1(*)
+  REAL(SP) b, c, f, g, p, r, s, s1, s2
   INTEGER Ind(*)
   !
   !* FIRST EXECUTABLE STATEMENT  IMTQLV

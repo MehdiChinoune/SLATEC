@@ -222,17 +222,18 @@ SUBROUTINE DQAWOE(F,A,B,Omega,Integr,Epsabs,Epsrel,Limit,Icall,Maxp1,Result,&
   USE service, ONLY : D1MACH
   !
   INTERFACE
-    REAL(8) FUNCTION F(X)
-      REAL(8) :: X
+    REAL(DP) FUNCTION F(X)
+      IMPORT DP
+      REAL(DP) :: X
     END FUNCTION F
   END INTERFACE
   INTEGER :: Icall, Ier, Integr, Last, Limit, Maxp1, Momcom, Neval
   INTEGER :: Iord(Limit), Nnlog(Limit)
-  REAL(8) :: A, Abserr, B, Epsabs, Epsrel, Omega, Result
-  REAL(8) :: Alist(Limit), Blist(Limit), Chebmo(Maxp1,25), Elist(Limit), Rlist(Limit)
+  REAL(DP) :: A, Abserr, B, Epsabs, Epsrel, Omega, Result
+  REAL(DP) :: Alist(Limit), Blist(Limit), Chebmo(Maxp1,25), Elist(Limit), Rlist(Limit)
   INTEGER :: id, ierro, iroff1, iroff2, iroff3, jupbnd, k, ksgn, ktmin, maxerr, &
     nev, nres, nrmax, nrmom, numrl2
-  REAL(8) :: abseps, area, area1, area12, area2, a1, a2, b1, b2, correc, defab1, &
+  REAL(DP) :: abseps, area, area1, area12, area2, a1, a2, b1, b2, correc, defab1, &
     defab2, defabs, domega, dres, epmach, erlarg, erlast, errbnd, errmax, error1, &
     erro12, error2, errsum, ertest, oflow, resabs, reseps, res3la(3), rlist2(52), &
     small, uflow, width

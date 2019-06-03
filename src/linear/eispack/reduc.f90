@@ -82,8 +82,8 @@ SUBROUTINE REDUC(Nm,N,A,B,Dl,Ierr)
 
   !
   INTEGER i, j, k, N, i1, j1, Nm, nn, Ierr
-  REAL A(Nm,*), B(Nm,*), Dl(*)
-  REAL x, y
+  REAL(SP) A(Nm,*), B(Nm,*), Dl(*)
+  REAL(SP) x, y
   !
   !* FIRST EXECUTABLE STATEMENT  REDUC
   Ierr = 0

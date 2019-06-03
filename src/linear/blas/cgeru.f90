@@ -90,14 +90,14 @@ SUBROUTINE CGERU(M,N,Alpha,X,Incx,Y,Incy,A,Lda)
   !           lines were modified.  (BKS)
 
   !     .. Scalar Arguments ..
-  COMPLEX Alpha
+  COMPLEX(SP) Alpha
   INTEGER Incx, Incy, Lda, M, N
   !     .. Array Arguments ..
-  COMPLEX A(Lda,*), X(*), Y(*)
+  COMPLEX(SP) A(Lda,*), X(*), Y(*)
   !     .. Parameters ..
-  COMPLEX, PARAMETER :: ZERO = (0.0E+0,0.0E+0)
+  COMPLEX(SP), PARAMETER :: ZERO = (0.0E+0,0.0E+0)
   !     .. Local Scalars ..
-  COMPLEX temp
+  COMPLEX(SP) temp
   INTEGER i, info, ix, j, jy, kx
   !     .. Intrinsic Functions ..
   INTRINSIC MAX

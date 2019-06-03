@@ -24,8 +24,8 @@ SUBROUTINE CWRSK(Zr,Fnu,Kode,N,Y,Nz,Cw,Tol,Elim,Alim)
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
   USE service, ONLY : R1MACH
   INTEGER i, Kode, N, nw, Nz
-  COMPLEX cinu, cscl, ct, Cw(2), c1, c2, rct, st, Y(N), Zr
-  REAL act, acw, Alim, ascle, Elim, Fnu, s1, s2, Tol, yy
+  COMPLEX(SP) cinu, cscl, ct, Cw(2), c1, c2, rct, st, Y(N), Zr
+  REAL(SP) act, acw, Alim, ascle, Elim, Fnu, s1, s2, Tol, yy
   !* FIRST EXECUTABLE STATEMENT  CWRSK
   !-----------------------------------------------------------------------
   !     I(FNU+I-1,Z) BY BACKWARD RECURRENCE FOR RATIOS

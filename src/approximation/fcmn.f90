@@ -33,10 +33,10 @@ SUBROUTINE FCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Nconst,Xconst,&
   USE linear, ONLY : SAXPY, BNDSOL, BNDACC
   USE data_handling, ONLY : SSORT
   INTEGER :: Mdg, Mdw, Mode, Nbkpt, Nconst, Ndata, Nord, Iwork(:), Nderiv(Nconst)
-  REAL :: Bf(Nord,Nord), Bkpt(Nbkpt), Bkptin(:), Coeff(:), G(Mdg,Nord+1), &
+  REAL(SP) :: Bf(Nord,Nord), Bkpt(Nbkpt), Bkptin(:), Coeff(:), G(Mdg,Nord+1), &
     Ptemp(MAX(Nbkpt,Ndata)), Sddata(Ndata), W(Mdw,Nbkpt-Nord+1), Work(*), &
     Xconst(Nconst), Xdata(Ndata), Xtemp(MAX(Nbkpt,Ndata)), Yconst(Nconst), Ydata(Ndata)
-  REAL :: dummy(1), prgopt(10), rnorm, rnorme, rnorml, xmax, xmin, xval, yval
+  REAL(SP) :: dummy(1), prgopt(10), rnorm, rnorme, rnorml, xmax, xmin, xval, yval
   INTEGER :: i, idata, ideriv, ileft, intrvl, intw1, ip, ir, irow, itype, iw1, iw2, &
     l, lw, mt, n, nb, neqcon, nincon, nordm1, nordp1, np1
   LOGICAL :: band, new, var

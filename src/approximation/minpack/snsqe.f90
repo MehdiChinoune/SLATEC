@@ -346,20 +346,22 @@ SUBROUTINE SNSQE(FCN,JAC,Iopt,N,X,Fvec,Tol,Nprint,Info,Wa,Lwa)
   USE service, ONLY : XERMSG
   INTERFACE
     SUBROUTINE FCN(N,X,Fvec,iflag)
+      IMPORT SP
       INTEGER :: N, Iflag
-      REAL :: X(N), Fvec(N)
+      REAL(SP) :: X(N), Fvec(N)
     END SUBROUTINE FCN
     SUBROUTINE JAC(N,X,Fvec,Fjac,Ldfjac,Iflag)
+      IMPORT SP
       INTEGER :: N, Ldfjac, Iflag
-      REAL :: X(N), Fvec(N),Fjac(Ldfjac,N)
+      REAL(SP) :: X(N), Fvec(N),Fjac(Ldfjac,N)
     END SUBROUTINE JAC
   END INTERFACE
   INTEGER :: Iopt, N, Nprint, Info, Lwa
-  REAL :: Tol
-  REAL :: X(N), Fvec(N), Wa(Lwa)
+  REAL(SP) :: Tol
+  REAL(SP) :: X(N), Fvec(N), Wa(Lwa)
   INTEGER :: indexx, j, lr, maxfev, ml, mode, mu, nfev, njev
-  REAL :: epsfcn, xtol
-  REAL, PARAMETER :: factor = 1.0E2, one = 1.0E0, zero = 0.0E0
+  REAL(SP) :: epsfcn, xtol
+  REAL(SP), PARAMETER :: factor = 1.0E2, one = 1.0E0, zero = 0.0E0
   !* FIRST EXECUTABLE STATEMENT  SNSQE
   Info = 0
   !

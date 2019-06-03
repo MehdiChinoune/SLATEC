@@ -1,4 +1,5 @@
 MODULE TEST51_MOD
+  USE service, ONLY : SP, DP
   IMPLICIT NONE
 
 CONTAINS
@@ -89,19 +90,19 @@ CONTAINS
     !     .. Scalar Arguments ..
     INTEGER Ipass, Kprint, Lun
     !     .. Local Scalars ..
-    REAL(8) :: arg, arg1, arg2, dt, summ, sum1, sum2, tpi
-    REAL :: azero, azeroh, cf, cosqbt, cosqfb, cosqft, costfb, costt, &
+    REAL(DP) :: arg, arg1, arg2, dt, summ, sum1, sum2, tpi
+    REAL(SP) :: azero, azeroh, cf, cosqbt, cosqfb, cosqft, costfb, costt, &
       dcfb, dcfftb, dcfftf, dezb1, dezf1, dezfb, errmax, rftb, &
       rftf, rftfb, signn, sinqbt, sinqfb, sinqft, sintfb, sintt, sqrt2
     INTEGER :: i, j, k, modn, n, nm1, nns, np1, ns2, ns2m, nz
     !     .. Local Arrays ..
-    COMPLEX cx(200), cy(200)
-    REAL a(100), ah(100), b(100), bh(100), w(2000), x(200), xh(200), y(200)
+    COMPLEX(SP) cx(200), cy(200)
+    REAL(SP) a(100), ah(100), b(100), bh(100), w(2000), x(200), xh(200), y(200)
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, CABS, CMPLX, COS, MAX, MOD, SIN, SQRT
     !     .. Data statements ..
     INTEGER, PARAMETER :: nd(7) = [ 120, 54, 49, 32, 4, 3, 2 ]
-    REAL(8), PARAMETER :: pi = 3.14159265358979D0
+    REAL(DP), PARAMETER :: pi = 3.14159265358979D0
     !* FIRST EXECUTABLE STATEMENT  FFTQX
     sqrt2 = SQRT(2.0)
     errmax = 2.0*SQRT(R1MACH(4))
@@ -138,8 +139,8 @@ CONTAINS
             sum1 = sum1 + x(i)*COS(arg1)
             sum2 = sum2 + x(i)*SIN(arg1)
           END DO
-          y(2*k-2) = REAL( sum1, 4 )
-          y(2*k-1) = REAL( -sum2, 4 )
+          y(2*k-2) = REAL( sum1, SP )
+          y(2*k-1) = REAL( -sum2, SP )
         END DO
       END IF
       sum1 = 0.0D0
@@ -149,8 +150,8 @@ CONTAINS
         sum2 = sum2 + x(i+1)
       END DO
       IF ( modn==1 ) sum1 = sum1 + x(n)
-      y(1) = REAL( sum1 + sum2, 4 )
-      IF ( modn==0 ) y(n) = REAL( sum1 - sum2, 4 )
+      y(1) = REAL( sum1 + sum2, SP )
+      IF ( modn==0 ) y(n) = REAL( sum1 - sum2, SP )
       CALL RFFTF(n,x,w)
       rftf = 0.0
       DO i = 1, n
@@ -177,7 +178,7 @@ CONTAINS
           END DO
         END IF
         IF ( modn==0 ) summ = summ + 0.5D0*signn*x(n)
-        y(i) = REAL( summ + summ, 4 )
+        y(i) = REAL( summ + summ, SP )
         signn = -signn
       END DO
       CALL RFFTB(n,x,w)
@@ -223,7 +224,7 @@ CONTAINS
         y(i) = 0.0
         arg1 = i*dt
         DO k = 1, nm1
-          y(i) = y(i) + x(k)*REAL( SIN((k)*arg1), 4 )
+          y(i) = y(i) + x(k)*REAL( SIN((k)*arg1), SP )
         END DO
         y(i) = y(i) + y(i)
       END DO
@@ -270,7 +271,7 @@ CONTAINS
         y(i) = 0.5*(x(1)+signn*x(n+1))
         arg = (i-1)*dt
         DO k = 2, n
-          y(i) = y(i) + x(k)*REAL( COS((k-1)*arg), 4 )
+          y(i) = y(i) + x(k)*REAL( COS((k-1)*arg), SP )
         END DO
         y(i) = y(i) + y(i)
         signn = -signn
@@ -319,7 +320,7 @@ CONTAINS
         x(i) = 0.0
         arg = i*dt
         DO k = 1, n
-          x(i) = x(i) + y(k)*REAL( SIN((k+k-1)*arg), 4 )
+          x(i) = x(i) + y(k)*REAL( SIN((k+k-1)*arg), SP )
         END DO
         x(i) = 4.0*x(i)
       END DO
@@ -345,7 +346,7 @@ CONTAINS
         arg = (i+i-1)*dt
         y(i) = 0.5*signn*x(n)
         DO k = 1, nm1
-          y(i) = y(i) + x(k)*REAL( SIN((k)*arg), 4 )
+          y(i) = y(i) + x(k)*REAL( SIN((k)*arg), SP )
         END DO
         y(i) = y(i) + y(i)
         signn = -signn
@@ -390,7 +391,7 @@ CONTAINS
         x(i) = 0.0
         arg = (i-1)*dt
         DO k = 1, n
-          x(i) = x(i) + y(k)*REAL( COS((k+k-1)*arg), 4 )
+          x(i) = x(i) + y(k)*REAL( COS((k+k-1)*arg), SP )
         END DO
         x(i) = 4.0*x(i)
       END DO
@@ -415,7 +416,7 @@ CONTAINS
         y(i) = 0.5*x(1)
         arg = (i+i-1)*dt
         DO k = 2, n
-          y(i) = y(i) + x(k)*REAL( COS((k-1)*arg), 4 )
+          y(i) = y(i) + x(k)*REAL( COS((k-1)*arg), SP )
         END DO
         y(i) = y(i) + y(i)
       END DO
@@ -472,8 +473,8 @@ CONTAINS
             sum1 = sum1 + x(i)*COS(arg1)
             sum2 = sum2 + x(i)*SIN(arg1)
           END DO
-          a(k) = REAL( cf*sum1, 4 )
-          b(k) = REAL( cf*sum2, 4 )
+          a(k) = REAL( cf*sum1, SP )
+          b(k) = REAL( cf*sum2, SP )
         END DO
       END IF
       nm1 = n - 1
@@ -484,8 +485,8 @@ CONTAINS
         sum2 = sum2 + x(i+1)
       END DO
       IF ( modn==1 ) sum1 = sum1 + x(n)
-      azero = REAL( 0.5*cf*(sum1+sum2), 4 )
-      IF ( modn==0 ) a(ns2) = REAL( 0.5*cf*(sum1-sum2), 4 )
+      azero = REAL( 0.5*cf*(sum1+sum2), SP )
+      IF ( modn==0 ) a(ns2) = REAL( 0.5*cf*(sum1-sum2), SP )
       CALL EZFFTF(n,x,azeroh,ah,bh,w)
       dezf1 = ABS(azeroh-azero)
       IF ( modn==0 ) dezf1 = MAX(dezf1,ABS(a(ns2)-ah(ns2)))
@@ -512,7 +513,7 @@ CONTAINS
           arg2 = k*arg1
           summ = summ + a(k)*COS(arg2) + b(k)*SIN(arg2)
         END DO
-        x(i) = REAL( summ, 4 )
+        x(i) = REAL( summ, SP )
       END DO
       CALL EZFFTB(n,y,azero,a,b,w)
       dezb1 = 0.0
@@ -555,7 +556,7 @@ CONTAINS
         cy(i) = (0.0,0.0)
         DO k = 1, n
           arg2 = (k-1)*arg1
-          cy(i) = cy(i) + CMPLX(COS(arg2),SIN(arg2),4)*cx(k)
+          cy(i) = cy(i) + CMPLX(COS(arg2),SIN(arg2),SP)*cx(k)
         END DO
       END DO
       CALL CFFTI(n,w)
@@ -580,7 +581,7 @@ CONTAINS
         cy(i) = (0.0,0.0)
         DO k = 1, n
           arg2 = (k-1)*arg1
-          cy(i) = cy(i) + CMPLX(COS(arg2),SIN(arg2),4)*cx(k)
+          cy(i) = cy(i) + CMPLX(COS(arg2),SIN(arg2),SP)*cx(k)
         END DO
       END DO
       CALL CFFTB(n,cx,w)

@@ -108,15 +108,15 @@ SUBROUTINE DSYMV(Uplo,N,Alpha,A,Lda,X,Incx,Beta,Y,Incy)
   !           lines were modified.  (BKS)
   USE service, ONLY : XERBLA
   !     .. Scalar Arguments ..
-  REAL(8) :: Alpha, Beta
+  REAL(DP) :: Alpha, Beta
   INTEGER Incx, Incy, Lda, N
   CHARACTER :: Uplo
   !     .. Array Arguments ..
-  REAL(8) :: A(Lda,*), X(*), Y(*)
+  REAL(DP) :: A(Lda,*), X(*), Y(*)
   !     .. Parameters ..
-  REAL(8), PARAMETER :: ONE = 1.0D+0, ZERO = 0.0D+0
+  REAL(DP), PARAMETER :: ONE = 1.0D+0, ZERO = 0.0D+0
   !     .. Local Scalars ..
-  REAL(8) :: temp1, temp2
+  REAL(DP) :: temp1, temp2
   INTEGER i, info, ix, iy, j, jx, jy, kx, ky
   !     .. Intrinsic Functions ..
   INTRINSIC MAX

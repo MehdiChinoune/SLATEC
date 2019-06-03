@@ -60,10 +60,10 @@ SUBROUTINE SPBDI(Abd,Lda,N,M,Det)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   
   INTEGER Lda, N, M
-  REAL Abd(Lda,*)
-  REAL Det(2)
+  REAL(SP) Abd(Lda,*)
+  REAL(SP) Det(2)
   !
-  REAL s
+  REAL(SP) s
   INTEGER i
   !* FIRST EXECUTABLE STATEMENT  SPBDI
   !

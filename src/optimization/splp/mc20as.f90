@@ -36,9 +36,9 @@ SUBROUTINE MC20AS(Nc,Maxa,A,Inum,Jptr,Jnum,Jdisp)
 
   INTEGER :: Nc, Jdisp, Jptr(Nc), Maxa
   INTEGER :: Inum(Maxa), Jnum(Maxa)
-  REAL :: A(Maxa)
+  REAL(SP) :: A(Maxa)
   INTEGER :: i, ice, icep, j, ja, jb, jce, jcep, k, kr, locc, nul
-  REAL :: ace, acep
+  REAL(SP) :: ace, acep
   !* FIRST EXECUTABLE STATEMENT  MC20AS
   nul = -Jdisp
   !**      CLEAR JPTR

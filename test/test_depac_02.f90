@@ -1,4 +1,5 @@
 MODULE TEST44_MOD
+  USE service, ONLY : SP, DP
   IMPLICIT NONE
 
 CONTAINS
@@ -22,8 +23,8 @@ CONTAINS
     !           DDJAC to DJAC.  (WRB)
 
     INTEGER :: Nrowpd
-    REAL(8) :: T, U(:), Pd(:,:)
-    REAL(8) :: r, r5, rsq, u1sq, u2sq, u1u2
+    REAL(DP) :: T, U(:), Pd(:,:)
+    REAL(DP) :: r, r5, rsq, u1sq, u2sq, u1u2
     !* FIRST EXECUTABLE STATEMENT  DJAC
     u1sq = U(1)*U(1)
     u2sq = U(2)*U(2)
@@ -59,11 +60,11 @@ CONTAINS
     !
     !     Declare arguments.
     !
-    REAL(8) :: T, U(:), Uprime(:)
+    REAL(DP) :: T, U(:), Uprime(:)
     !
     !     Declare local variables.
     !
-    REAL(8) :: r, rsq, r3
+    REAL(DP) :: r, rsq, r3
     !* FIRST EXECUTABLE STATEMENT  DFDEQC
     rsq = U(1)*U(1) + U(2)*U(2)
     r = SQRT(rsq)
@@ -133,7 +134,7 @@ CONTAINS
     !     Declare local variables.
     !
     INTEGER idid, info(15), iwork(51), n, liw, lrw, nstep
-    REAL(8) :: abserr(1), r, relerr(1), reltol, rwork(214), t, tout, u(4)
+    REAL(DP) :: abserr(1), r, relerr(1), reltol, rwork(214), t, tout, u(4)
     !* FIRST EXECUTABLE STATEMENT  QXDABM
     IF ( Kprint>=2 ) WRITE (Lun,99001)
     !
@@ -254,7 +255,7 @@ CONTAINS
     !     Declare local variables.
     !
     INTEGER :: idid, info(15), iwork(60), n, liw, lrw, nstep
-    REAL(8) :: abserr(1), r, reltol, relerr(1), rwork(306), t, tout, u(4)
+    REAL(DP) :: abserr(1), r, reltol, relerr(1), rwork(306), t, tout, u(4)
     !* FIRST EXECUTABLE STATEMENT  QXDBDF
     IF ( Kprint>=2 ) WRITE (Lun,99001)
     !
@@ -346,10 +347,10 @@ CONTAINS
       Lun, ncomp, ndiw, ndw, neqivp, nfc, nic, nrowa, nrowb, nrowy
     INTEGER numort, nxpts
     INTEGER itmp(9), iwork(100)
-    REAL(8) :: work(1000), ae, re, sve, tol
-    REAL(8) :: y(4,15), a(2,4), alpha(2), b(2,4), beta(2), reler, abser
+    REAL(DP) :: work(1000), ae, re, sve, tol
+    REAL(DP) :: y(4,15), a(2,4), alpha(2), b(2,4), beta(2), reler, abser
     CHARACTER(4) :: msg
-    REAL(8), PARAMETER :: yans(2,15) = RESHAPE( [ &
+    REAL(DP), PARAMETER :: yans(2,15) = RESHAPE( [ &
       5.000000000D+00, -6.888880126D-01,   8.609248635D+00, -1.083092311D+00, &
       1.674923836D+01, -2.072210073D+00,   3.351098494D+01, -4.479263780D+00, &
       6.601103894D+01, -8.909222513D+00,   8.579580988D+01, -1.098742758D+01, &
@@ -358,7 +359,7 @@ CONTAINS
       2.051622475D+02, -1.324886978D+01,   2.059197452D+02, 1.051529813D+01, &
       1.972191446D+02, 9.320592785D+01,    1.556894846D+02, 3.801682434D+02, &
       1.818989404D-12, 1.379853993D+03 ], [2,15] )
-    REAL(8) :: xpts(15) = [ 60.0D+00, 55.0D+00, 50.0D+00, 45.0D+00, &
+    REAL(DP) :: xpts(15) = [ 60.0D+00, 55.0D+00, 50.0D+00, 45.0D+00, &
       40.0D+00, 38.0D+00, 36.0D+00, 34.0D+00, 32.0D+00, 31.0D+00, &
       30.8D+00, 30.6D+00, 30.4D+00, 30.2D+00, 30.0D+00 ]
     !* FIRST EXECUTABLE STATEMENT  QXDBVS
@@ -637,7 +638,7 @@ CONTAINS
     !     Declare local variables.
     !
     INTEGER :: idid, info(15), iwork(34), n, liw, lrw, nstep
-    REAL(8) :: abserr(1), r, relerr(1), reltol, rwork(61), t, tout, u(4)
+    REAL(DP) :: abserr(1), r, relerr(1), reltol, rwork(61), t, tout, u(4)
     !* FIRST EXECUTABLE STATEMENT  QXDRKF
     IF ( Kprint>=2 ) WRITE (Lun,99001)
     !

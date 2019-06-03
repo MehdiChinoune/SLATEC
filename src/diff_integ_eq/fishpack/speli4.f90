@@ -35,16 +35,17 @@ SUBROUTINE SPELI4(Iorder,A,B,M,Mbdcnd,Bda,Alpha,Bdb,Beta,C,D,N,Nbdcnd,Bdc,&
     nit_com, ns_com, tdlx3_com, tdly3_com
   INTERFACE
     SUBROUTINE COFX(X,A,B,C)
-      REAL :: X, A, B, C
+      IMPORT SP
+      REAL(SP) :: X, A, B, C
     END SUBROUTINE COFX
   END INTERFACE
   INTEGER :: Idmn, Ierror, Iorder, M, Mbdcnd, N, Nbdcnd
-  REAL :: A, Alpha, B, Beta, C, D, Pertrb
-  REAL :: Am(M+1), An(N+1), Bda(N+1), Bdb(N+1), Bdc(M+1), Bdd(M+1), Bm(M+1), &
+  REAL(SP) :: A, Alpha, B, Beta, C, D, Pertrb
+  REAL(SP) :: Am(M+1), An(N+1), Bda(N+1), Bdb(N+1), Bdc(M+1), Bdd(M+1), Bm(M+1), &
     Bn(N+1), Cm(M+1), Cn(N+1), Dm(M+1), Dn(N+1), Grhs(Idmn,N), Um(M+1), Un(N+1), &
     Usol(Idmn,N+1), W(:), Zm(M+1), Zn(N+1)
   INTEGER :: i, ieror, iord, j, mp, np
-  REAL :: ai, ax1, axi, bi, bxi, ci, cxi, cxm, dy1, dyj, eyj, fyj, fyn, gama, xi, xnu
+  REAL(SP) :: ai, ax1, axi, bi, bxi, ci, cxi, cxm, dy1, dyj, eyj, fyj, fyn, gama, xi, xnu
   LOGICAL :: singlr
   !* FIRST EXECUTABLE STATEMENT  SPELI4
   kswx_com = Mbdcnd + 1

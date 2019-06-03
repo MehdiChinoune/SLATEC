@@ -39,10 +39,10 @@ SUBROUTINE BESKS(Xnu,X,Nin,Bk)
   !           (WRB)
   USE service, ONLY : XERMSG, R1MACH
   INTEGER :: Nin
-  REAL :: Bk(Nin), X, Xnu
-  REAL :: expxi
+  REAL(SP) :: Bk(Nin), X, Xnu
+  REAL(SP) :: expxi
   INTEGER i, n
-  REAL, PARAMETER :: xmax = -LOG(R1MACH(1))
+  REAL(SP), PARAMETER :: xmax = -LOG(R1MACH(1))
   !* FIRST EXECUTABLE STATEMENT  BESKS
   !
   IF ( X>xmax ) CALL XERMSG('BESKS','X SO BIG BESSEL K UNDERFLOWS',1,2)

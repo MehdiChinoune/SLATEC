@@ -205,7 +205,7 @@ SUBROUTINE BLKTRI(Iflg,Np,N,An,Bn,Cn,Mp,M,Am,Bm,Cm,Idimy,Y,Ierror,W)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   USE CBLKT, ONLY : k_com, ik_com, nm_com, npp_com
   INTEGER :: Idimy, Ierror, Iflg, M, Mp, N, Np
-  REAL :: Am(M), An(N), Bm(M), Bn(N), Cm(M), Cn(N), W(:), Y(Idimy,N)
+  REAL(SP) :: Am(M), An(N), Bm(M), Bn(N), Cm(M), Cn(N), W(:), Y(Idimy,N)
   INTEGER :: iw1, iw2, iw3, iwah, iwbh, iwd, iwu, iww, nh, nl
   !* FIRST EXECUTABLE STATEMENT  BLKTRI
   nm_com = N

@@ -199,19 +199,21 @@ INTEGER FUNCTION ISDCGS(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,&
   USE service, ONLY : D1MACH
   INTERFACE
     SUBROUTINE MSOLVE(N,R,Z,Rwork,Iwork)
+      IMPORT DP
       INTEGER :: N, Iwork(*)
-      REAL(8) :: R(N), Z(N), Rwork(*)
+      REAL(DP) :: R(N), Z(N), Rwork(*)
     END SUBROUTINE
     SUBROUTINE MATVEC(N,X,R,Nelt,Ia,Ja,A,Isym)
+      IMPORT DP
       INTEGER :: N, Nelt, Isym, Ia(Nelt), Ja(Nelt)
-      REAL(8) :: X(N), R(N), A(Nelt)
+      REAL(DP) :: X(N), R(N), A(Nelt)
     END SUBROUTINE
   END INTERFACE
   !     .. Scalar Arguments ..
-  REAL(8) :: Ak, Bk, Bnrm, Err, Solnrm, Tol
+  REAL(DP) :: Ak, Bk, Bnrm, Err, Solnrm, Tol
   INTEGER Ierr, Isym, Iter, Itol, Iunit, N, Nelt
   !     .. Array Arguments ..
-  REAL(8) :: A(Nelt), B(N), R(N), Rwork(*), V2(N), X(N)
+  REAL(DP) :: A(Nelt), B(N), R(N), Rwork(*), V2(N), X(N)
   INTEGER Ia(Nelt), Iwork(*), Ja(Nelt)
   !     .. Local Scalars ..
   INTEGER i

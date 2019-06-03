@@ -45,29 +45,32 @@ SUBROUTINE DDNTL(Eps,F,FA,Hmax,Hold,Impl,Jtask,Matdim,Maxord,Mint,Miter,&
   USE linear, ONLY : DGBSL, DGESL, DGBFA, DGEFA
   INTERFACE
     SUBROUTINE F(N,T,Y,Ydot)
+      IMPORT DP
       INTEGER :: N
-      REAL(8) :: T, Y(:), Ydot(:)
+      REAL(DP) :: T, Y(:), Ydot(:)
     END SUBROUTINE F
     SUBROUTINE USERS(Y,Yh,Ywt,Save1,Save2,T,H,El,Impl,N,Nde,Iflag)
+      IMPORT DP
       INTEGER :: Impl, N, Nde, iflag
-      REAL(8) :: T, H, El
-      REAL(8) :: Y(N), Yh(N,13), Ywt(N), Save1(N), Save2(N)
+      REAL(DP) :: T, H, El
+      REAL(DP) :: Y(N), Yh(N,13), Ywt(N), Save1(N), Save2(N)
     END SUBROUTINE USERS
     SUBROUTINE FA(N,T,Y,A,Matdim,Ml,Mu,Nde)
+      IMPORT DP
       INTEGER :: N, Matdim, Ml, Mu, Nde
-      REAL(8) :: T, Y(N), A(:,:)
+      REAL(DP) :: T, Y(N), A(:,:)
     END SUBROUTINE FA
   END INTERFACE
   INTEGER :: Impl, Iswflg, Jstate, Jtask, Matdim, Maxord, Mint, Miter, Ml, &
     Mntold, Mtrold, Mu, N, Nde, Nfe, Nq, Nwait
   INTEGER :: Ipvt(N)
-  REAL(8) :: Eps, H, Hmax, Hold, Rc, Rh, Rmax, T, Trend, Uround
-  REAL(8) :: A(Matdim,N), El(13,12), Fac(N), Save1(N), Save2(N), Tq(3,12), Y(N+1), &
+  REAL(DP) :: Eps, H, Hmax, Hold, Rc, Rh, Rmax, T, Trend, Uround
+  REAL(DP) :: A(Matdim,N), El(13,12), Fac(N), Save1(N), Save2(N), Tq(3,12), Y(N+1), &
     Yh(N,13), Ywt(N)
   LOGICAL :: Convrg, Ier
   INTEGER :: i, iflag, info
-  REAL(8) :: oldl0, summ
-  REAL(8), PARAMETER :: RMINIT = 10000.D0
+  REAL(DP) :: oldl0, summ
+  REAL(DP), PARAMETER :: RMINIT = 10000.D0
   !* FIRST EXECUTABLE STATEMENT  DDNTL
   Ier = .FALSE.
   IF ( Jtask>=0 ) THEN
@@ -172,7 +175,7 @@ SUBROUTINE DDNTL(Eps,F,FA,Hmax,Hold,Impl,Jtask,Matdim,Maxord,Mint,Miter,&
     DO i = 1, Nde
       Save1(i) = Save2(i)/MAX(1.D0,Ywt(i))
     END DO
-    summ = NORM2(Save1(1:Nde))/SQRT(REAL(Nde, 8))
+    summ = NORM2(Save1(1:Nde))/SQRT(REAL(Nde, DP))
     IF ( summ>Eps/ABS(H) ) H = SIGN(Eps/summ,H)
     DO i = 1, N
       Yh(i,2) = H*Save2(i)

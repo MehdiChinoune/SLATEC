@@ -1,5 +1,5 @@
 !** DPCHST
-REAL(8) FUNCTION DPCHST(Arg1,Arg2)
+REAL(DP) FUNCTION DPCHST(Arg1,Arg2)
   !>
   !  DPCHIP Sign-Testing Routine
   !***
@@ -46,11 +46,11 @@ REAL(8) FUNCTION DPCHST(Arg1,Arg2)
   !
   !  DECLARE ARGUMENTS.
   !
-  REAL(8) :: Arg1, Arg2
+  REAL(DP) :: Arg1, Arg2
   !
   !  DECLARE LOCAL VARIABLES.
   !
-  REAL(8), PARAMETER :: zero = 0.D0, one = 1.D0
+  REAL(DP), PARAMETER :: zero = 0.D0, one = 1.D0
   !
   !  PERFORM THE TEST.
   !

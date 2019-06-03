@@ -144,11 +144,11 @@ SUBROUTINE HFTI(A,Mda,M,N,B,Mdb,Nb,Tau,Krank,Rnorm,H,G,Ip)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   USE service, ONLY : R1MACH, XERMSG
   INTEGER :: Krank, M, Mda, Mdb, N, Nb, Ip(N)
-  REAL :: A(Mda,N+1), B(Mdb,Nb), G(N), H(N), Rnorm(Nb), Tau
+  REAL(SP) :: A(Mda,N+1), B(Mdb,Nb), G(N), H(N), Rnorm(Nb), Tau
   INTEGER :: i, ii, iopt, ip1, j, jb, jj, k, kp1, l, ldiag, lmax, nerr
-  REAL :: factor, hmax, sm1, szero, tmp
-  REAL(8) :: sm, dzero
-  REAL, PARAMETER :: releps = R1MACH(4)
+  REAL(SP) :: factor, hmax, sm1, szero, tmp
+  REAL(DP) :: sm, dzero
+  REAL(SP), PARAMETER :: releps = R1MACH(4)
   !* FIRST EXECUTABLE STATEMENT  HFTI
   szero = 0.
   dzero = 0.D0
@@ -267,10 +267,10 @@ SUBROUTINE HFTI(A,Mda,M,N,B,Mdb,Nb,Tau,Krank,Rnorm,H,G,Ip)
             IF ( i/=k ) THEN
               ip1 = i + 1
               DO j = ip1, k
-                sm = sm + A(i,j)*REAL(B(j,jb), 8)
+                sm = sm + A(i,j)*REAL( B(j,jb), DP )
               END DO
             END IF
-            sm1 = REAL( sm, 4 )
+            sm1 = REAL( sm, SP )
             B(i,jb) = (B(i,jb)-sm1)/A(i,i)
           END DO
           !

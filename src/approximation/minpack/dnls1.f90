@@ -607,24 +607,25 @@ SUBROUTINE DNLS1(FCN,Iopt,M,N,X,Fvec,Fjac,Ldfjac,Ftol,Xtol,Gtol,Maxfev,&
   USE service, ONLY : XERMSG, D1MACH
   INTERFACE
     SUBROUTINE FCN(Iflag,M,N,X,Fvec,Fjac,Ldfjac)
+      IMPORT DP
       INTEGER :: Ldfjac, M, N, Iflag
-      REAL(8) :: X(N), Fvec(M), Fjac(:,:)
+      REAL(DP) :: X(N), Fvec(M), Fjac(:,:)
     END SUBROUTINE FCN
   END INTERFACE
   INTEGER :: Iopt, M, N, Ldfjac, Maxfev, Mode, Nprint, Info, Nfev, Njev
   INTEGER :: Ipvt(N)
-  REAL(8) :: Ftol, Xtol, Gtol, Factor, Epsfcn
-  REAL(8) :: X(N), Fvec(M), Fjac(Ldfjac,N), Diag(N), Qtf(N), &
+  REAL(DP) :: Ftol, Xtol, Gtol, Factor, Epsfcn
+  REAL(DP) :: X(N), Fvec(M), Fjac(Ldfjac,N), Diag(N), Qtf(N), &
     Wa1(N), Wa2(N), Wa3(N,1), Wa4(M)
   INTEGER :: ijunk, nrow, i, iflag, iter, j, l, modech
-  REAL(8) :: actred, delta, dirder, epsmch, fnorm, fnorm1, gnorm, par, &
+  REAL(DP) :: actred, delta, dirder, epsmch, fnorm, fnorm1, gnorm, par, &
     pnorm, prered, ratio, summ, temp, temp1, temp2, xnorm, err(1)
   LOGICAL :: sing
   CHARACTER(8) :: xern1
   CHARACTER(16) :: xern3
   !
-  REAL(8), PARAMETER :: chklim = .1D0
-  REAL(8), PARAMETER :: one = 1.0D0, p1 = 1.0D-1, p5 = 5.0D-1, p25 = 2.5D-1, &
+  REAL(DP), PARAMETER :: chklim = .1D0
+  REAL(DP), PARAMETER :: one = 1.0D0, p1 = 1.0D-1, p5 = 5.0D-1, p25 = 2.5D-1, &
     p75 = 7.5D-1, p0001 = 1.0D-4, zero = 0.0D0
   !* FIRST EXECUTABLE STATEMENT  DNLS1
   epsmch = D1MACH(4)

@@ -1,4 +1,5 @@
 MODULE TEST41_MOD
+  USE service, ONLY : SP, DP
   IMPLICIT NONE
 
 CONTAINS
@@ -25,7 +26,7 @@ CONTAINS
     !   920210  Code restructured and revised to test error returns for all
     !           values of KPRINT.  (WRB)
     USE slatec, ONLY : AVINT, R1MACH, XERCLR, XGETF, XSETF
-    REAL a, ans, b, del, rn1, sqb, tol, tol1, x(501), xint, y(501)
+    REAL(SP) a, ans, b, del, rn1, sqb, tol, tol1, x(501), xint, y(501)
     INTEGER i, ierr, Ipass, kontrl, Kprint, Lun, n
     LOGICAL fatal
     !* FIRST EXECUTABLE STATEMENT  AVNTST
@@ -234,7 +235,7 @@ CONTAINS
     INTEGER Ipass, Kprint, Lun
     !     .. Local Scalars ..
     INTEGER ierr, kontrl
-    REAL a, ans, b, cor, err, req, tol
+    REAL(SP) a, ans, b, cor, err, req, tol
     LOGICAL fatal
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, ATAN, EXP, SQRT
@@ -378,7 +379,7 @@ CONTAINS
     INTEGER Ipass, Kprint, Lun
     !     .. Local Scalars ..
     INTEGER ierr, nfct
-    REAL a, ans, b, cor, err, req, tol
+    REAL(SP) a, ans, b, cor, err, req, tol
     LOGICAL fatal
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, MAX, SQRT
@@ -496,7 +497,7 @@ CONTAINS
     99009 FORMAT (/' ***************QNC79 FAILED SOME TESTS***************')
   END SUBROUTINE QN79QX
   !** FQD1
-  REAL FUNCTION FQD1(X)
+  REAL(SP) FUNCTION FQD1(X)
     !>
     !  Function evaluator for QNC79 and GAUS8 quick checks.
     !***
@@ -522,7 +523,7 @@ CONTAINS
     IF ( X>0.0E0 ) FQD1 = 1.0E0/SQRT(X)
   END FUNCTION FQD1
   !** FQD2
-  REAL FUNCTION FQD2(X)
+  REAL(SP) FUNCTION FQD2(X)
     !>
     !  Function evaluator for QNC79 and GAUS8 quick checks.
     !***

@@ -76,10 +76,10 @@ SUBROUTINE DTRDI(T,Ldt,N,Det,Job,Info)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER Ldt, N, Job, Info
-  REAL(8) :: T(Ldt,*), Det(2)
+  REAL(DP) :: T(Ldt,*), Det(2)
   !
-  REAL(8) :: temp
-  REAL(8) :: ten
+  REAL(DP) :: temp
+  REAL(DP) :: ten
   INTEGER i, j, k, kb, km1, kp1
   !* FIRST EXECUTABLE STATEMENT  DTRDI
   !

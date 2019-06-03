@@ -88,11 +88,11 @@ SUBROUTINE SSICO(A,Lda,N,Kpvt,Rcond,Z)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER Lda, N, Kpvt(*)
-  REAL A(Lda,*), Z(*)
-  REAL Rcond
+  REAL(SP) A(Lda,*), Z(*)
+  REAL(SP) Rcond
   !
-  REAL ak, akm1, bk, bkm1, denom, ek, t
-  REAL anorm, s, ynorm
+  REAL(SP) ak, akm1, bk, bkm1, denom, ek, t
+  REAL(SP) anorm, s, ynorm
   INTEGER i, info, j, jm1, k, kp, kps, ks
   !
   !     FIND NORM OF A USING ONLY UPPER HALF

@@ -80,8 +80,8 @@ SUBROUTINE COMBAK(Nm,Low,Igh,Ar,Ai,Intt,M,Zr,Zi)
 
   !
   INTEGER i, j, M, la, mm, mp, Nm, Igh, kp1, Low, mp1
-  REAL Ar(Nm,*), Ai(Nm,*), Zr(Nm,*), Zi(Nm,*)
-  REAL xr, xi
+  REAL(SP) Ar(Nm,*), Ai(Nm,*), Zr(Nm,*), Zi(Nm,*)
+  REAL(SP) xr, xi
   INTEGER Intt(*)
   !
   !* FIRST EXECUTABLE STATEMENT  COMBAK

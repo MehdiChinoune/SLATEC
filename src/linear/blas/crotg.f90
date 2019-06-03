@@ -48,10 +48,10 @@ SUBROUTINE CROTG(Ca,Cb,C,S)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-  COMPLEX Ca, Cb, S
-  REAL C
-  REAL norm, scalee
-  COMPLEX alpha
+  COMPLEX(SP) Ca, Cb, S
+  REAL(SP) C
+  REAL(SP) norm, scalee
+  COMPLEX(SP) alpha
   !* FIRST EXECUTABLE STATEMENT  CROTG
   IF ( ABS(Ca)==0.0 ) THEN
     C = 0.0

@@ -1,5 +1,5 @@
 !** DDOT
-REAL(8) FUNCTION DDOT(N,Dx,Incx,Dy,Incy)
+REAL(DP) FUNCTION DDOT(N,Dx,Incx,Dy,Incy)
   !>
   !  Compute the inner product of two vectors.
   !***
@@ -53,7 +53,7 @@ REAL(8) FUNCTION DDOT(N,Dx,Incx,Dy,Incy)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER i, Incx, Incy, ix, iy, m, mp1, N, ns
-  REAL(8) :: Dx(*), Dy(*)
+  REAL(DP) :: Dx(*), Dy(*)
   !* FIRST EXECUTABLE STATEMENT  DDOT
   DDOT = 0.0D0
   IF ( N<=0 ) RETURN

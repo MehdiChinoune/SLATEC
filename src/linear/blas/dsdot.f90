@@ -1,5 +1,5 @@
 !** DSDOT
-REAL(8) FUNCTION DSDOT(N,Sx,Incx,Sy,Incy)
+REAL(DP) FUNCTION DSDOT(N,Sx,Incx,Sy,Incy)
   !>
   !  Compute the inner product of two vectors with extended
   !            precision accumulation and result.
@@ -55,7 +55,7 @@ REAL(8) FUNCTION DSDOT(N,Sx,Incx,Sy,Incy)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER i, Incx, Incy, kx, ky, N, ns
-  REAL Sx(*), Sy(*)
+  REAL(SP) Sx(*), Sy(*)
   !* FIRST EXECUTABLE STATEMENT  DSDOT
   DSDOT = 0.0D0
   IF ( N<=0 ) RETURN
@@ -65,7 +65,7 @@ REAL(8) FUNCTION DSDOT(N,Sx,Incx,Sy,Incy)
     !
     ns = N*Incx
     DO i = 1, ns, Incx
-      DSDOT = DSDOT + REAL(Sx(i), 8)*REAL(Sy(i), 8)
+      DSDOT = DSDOT + REAL( Sx(i), DP )*REAL( Sy(i), DP )
     END DO
     RETURN
   END IF
@@ -77,7 +77,7 @@ REAL(8) FUNCTION DSDOT(N,Sx,Incx,Sy,Incy)
   IF ( Incx<0 ) kx = 1 + (1-N)*Incx
   IF ( Incy<0 ) ky = 1 + (1-N)*Incy
   DO i = 1, N
-    DSDOT = DSDOT + REAL(Sx(kx), 8)*REAL(Sy(ky), 8)
+    DSDOT = DSDOT + REAL( Sx(kx), DP )*REAL( Sy(ky), DP )
     kx = kx + Incx
     ky = ky + Incy
   END DO

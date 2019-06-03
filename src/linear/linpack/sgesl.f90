@@ -79,10 +79,10 @@ SUBROUTINE SGESL(A,Lda,N,Ipvt,B,Job)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER :: Lda, N, Job, Ipvt(N)
-  REAL :: A(Lda,N), B(N)
+  REAL(SP) :: A(Lda,N), B(N)
   !
   INTEGER :: k, kb, l, nm1
-  REAL :: t
+  REAL(SP) :: t
   !* FIRST EXECUTABLE STATEMENT  SGESL
   nm1 = N - 1
   IF ( Job/=0 ) THEN

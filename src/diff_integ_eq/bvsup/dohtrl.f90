@@ -32,9 +32,9 @@ SUBROUTINE DOHTRL(Q,N,Nrda,Diag,Irank,Div,Td)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
   INTEGER :: Irank, N, Nrda
-  REAL(8) :: Diag(Irank), Div(Irank), Q(Nrda,Irank), Td(Irank)
+  REAL(DP) :: Diag(Irank), Div(Irank), Q(Nrda,Irank), Td(Irank)
   INTEGER :: irp, j, k, kir, kirm, l, nmir
-  REAL(8) :: dd, diagk, qs, sig, sqd, tdv
+  REAL(DP) :: dd, diagk, qs, sig, sqd, tdv
   !* FIRST EXECUTABLE STATEMENT  DOHTRL
   nmir = N - Irank
   irp = Irank + 1

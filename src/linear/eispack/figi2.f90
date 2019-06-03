@@ -83,8 +83,8 @@ SUBROUTINE FIGI2(Nm,N,T,D,E,Z,Ierr)
 
   !
   INTEGER i, j, N, Nm, Ierr
-  REAL T(Nm,3), D(*), E(*), Z(Nm,*)
-  REAL h
+  REAL(SP) T(Nm,3), D(*), E(*), Z(Nm,*)
+  REAL(SP) h
   !
   !* FIRST EXECUTABLE STATEMENT  FIGI2
   Ierr = 0

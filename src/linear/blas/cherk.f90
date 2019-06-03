@@ -130,18 +130,18 @@ SUBROUTINE CHERK(Uplo,Trans,N,K,Alpha,A,Lda,Beta,C,Ldc)
   !     .. Scalar Arguments ..
   CHARACTER :: Uplo, Trans
   INTEGER N, K, Lda, Ldc
-  REAL Alpha, Beta
+  REAL(SP) Alpha, Beta
   !     .. Array Arguments ..
-  COMPLEX A(Lda,*), C(Ldc,*)
+  COMPLEX(SP) A(Lda,*), C(Ldc,*)
   !     .. Intrinsic Functions ..
   INTRINSIC CMPLX, CONJG, MAX, REAL
   !     .. Local Scalars ..
   LOGICAL upper
   INTEGER i, info, j, l, nrowa
-  REAL rtemp
-  COMPLEX temp
+  REAL(SP) rtemp
+  COMPLEX(SP) temp
   !     .. Parameters ..
-  REAL, PARAMETER :: ONE = 1.0E+0, ZERO = 0.0E+0
+  REAL(SP), PARAMETER :: ONE = 1.0E+0, ZERO = 0.0E+0
   !* FIRST EXECUTABLE STATEMENT  CHERK
   !
   !     Test the input parameters.

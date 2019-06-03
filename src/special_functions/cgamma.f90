@@ -1,5 +1,5 @@
 !** CGAMMA
-COMPLEX FUNCTION CGAMMA(Z)
+COMPLEX(SP) FUNCTION CGAMMA(Z)
   !>
   !  Compute the complete Gamma function.
   !***
@@ -29,7 +29,7 @@ COMPLEX FUNCTION CGAMMA(Z)
   !   861211  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-  COMPLEX Z
+  COMPLEX(SP) Z
   !* FIRST EXECUTABLE STATEMENT  CGAMMA
   CGAMMA = EXP(CLNGAM(Z))
   !

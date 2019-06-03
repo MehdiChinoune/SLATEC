@@ -1,5 +1,5 @@
 !** R9LGIT
-REAL FUNCTION R9LGIT(A,X,Algap1)
+REAL(SP) FUNCTION R9LGIT(A,X,Algap1)
   !>
   !  Compute the logarithm of Tricomi's incomplete Gamma
   !            function with Perron's continued fraction for large X and
@@ -34,10 +34,10 @@ REAL FUNCTION R9LGIT(A,X,Algap1)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
   USE service, ONLY : XERMSG, R1MACH
-  REAL :: A, Algap1, X
+  REAL(SP) :: A, Algap1, X
   INTEGER :: k
-  REAL :: a1x, ax, fk, hstar, p, r, s, t
-  REAL, PARAMETER :: eps = 0.5*R1MACH(3), sqeps = SQRT(R1MACH(4))
+  REAL(SP) :: a1x, ax, fk, hstar, p, r, s, t
+  REAL(SP), PARAMETER :: eps = 0.5*R1MACH(3), sqeps = SQRT(R1MACH(4))
   !* FIRST EXECUTABLE STATEMENT  R9LGIT
   !
   IF ( X<=0.0.OR.A<X ) CALL XERMSG('R9LGIT','X SHOULD BE GT 0.0 AND LE A',2,2)

@@ -86,9 +86,9 @@ SUBROUTINE CFFTB(N,C,Wsave)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER :: N
-  REAL :: Wsave(4*N+15)
-  COMPLEX :: C(N)
-  REAL :: rc(2*N)
+  REAL(SP) :: Wsave(4*N+15)
+  COMPLEX(SP) :: C(N)
+  REAL(SP) :: rc(2*N)
   INTEGER :: ifac(15), i
   !* FIRST EXECUTABLE STATEMENT  CFFTF
   IF ( N==1 ) RETURN

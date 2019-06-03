@@ -169,10 +169,10 @@ SUBROUTINE DSICS(N,Nelt,Ia,Ja,A,Isym,Nel,Iel,Jel,El,D,R,Iwarn)
   !     .. Scalar Arguments ..
   INTEGER Isym, Iwarn, N, Nel, Nelt
   !     .. Array Arguments ..
-  REAL(8) :: A(Nelt), D(N), El(Nel), R(N)
+  REAL(DP) :: A(Nelt), D(N), El(Nel), R(N)
   INTEGER Ia(Nelt), Iel(Nel), Ja(Nelt), Jel(Nel)
   !     .. Local Scalars ..
-  REAL(8) :: eltmp
+  REAL(DP) :: eltmp
   INTEGER i, ibgn, ic, icbgn, icend, icol, iend, ir, irbgn, irend, &
     irow, irr, j, jbgn, jeltmp, jend
   CHARACTER xern1*8

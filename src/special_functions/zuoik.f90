@@ -44,12 +44,12 @@ SUBROUTINE ZUOIK(Zr,Zi,Fnu,Kode,Ikflg,N,Yr,Yi,Nuf,Tol,Elim,Alim)
   !     COMPLEX ARG,ASUM,BSUM,CWRK,CZ,CZERO,PHI,SUM,Y,Z,ZB,ZETA1,ZETA2,ZN,
   !    *ZR
   INTEGER i, idum, iform, Ikflg, init, Kode, N, nn, Nuf, nw
-  REAL(8) :: aarg, Alim, aphi, argi, argr, asumi, asumr, ascle, ax, ay, bsumi, &
+  REAL(DP) :: aarg, Alim, aphi, argi, argr, asumi, asumr, ascle, ax, ay, bsumi, &
     bsumr, cwrki(16), cwrkr(16), czi, czr, Elim, fnn, Fnu, gnn, gnu, phii, phir, &
     rcz, str, sti, sumi, sumr, Tol, Yi(N), Yr(N), zbi, zbr, zeta1i, zeta1r, &
     zeta2i, zeta2r, Zi, zni, znr, Zr, zri, zrr
-  REAL(8), PARAMETER :: zeror = 0.0D0, zeroi = 0.0D0
-  REAL(8), PARAMETER :: aic = 1.265512123484645396D+00
+  REAL(DP), PARAMETER :: zeror = 0.0D0, zeroi = 0.0D0
+  REAL(DP), PARAMETER :: aic = 1.265512123484645396D+00
   !* FIRST EXECUTABLE STATEMENT  ZUOIK
   Nuf = 0
   nn = N

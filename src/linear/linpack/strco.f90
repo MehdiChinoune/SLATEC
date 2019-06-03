@@ -73,11 +73,11 @@ SUBROUTINE STRCO(T,Ldt,N,Rcond,Z,Job)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER Ldt, N, Job
-  REAL T(Ldt,*), Z(*)
-  REAL Rcond
+  REAL(SP) T(Ldt,*), Z(*)
+  REAL(SP) Rcond
   !
-  REAL w, wk, wkm, ek
-  REAL tnorm, ynorm, s, sm
+  REAL(SP) w, wk, wkm, ek
+  REAL(SP) tnorm, ynorm, s, sm
   INTEGER i1, j, j1, j2, k, kk, l
   LOGICAL lower
   !* FIRST EXECUTABLE STATEMENT  STRCO

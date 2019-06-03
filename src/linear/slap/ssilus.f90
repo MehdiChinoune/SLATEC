@@ -169,10 +169,10 @@ SUBROUTINE SSILUS(N,Nelt,Ia,Ja,A,Isym,Nl,Il,Jl,L,Dinv,Nu,Iu,Ju,U,Nrow,Ncol)
   !     .. Scalar Arguments ..
   INTEGER Isym, N, Nelt, Nl, Nu
   !     .. Array Arguments ..
-  REAL A(Nelt), Dinv(N), L(Nl), U(Nu)
+  REAL(SP) A(Nelt), Dinv(N), L(Nl), U(Nu)
   INTEGER Ia(Nelt), Il(Nl), Iu(Nu), Ja(Nelt), Jl(Nl), Ju(Nu), Ncol(N), Nrow(N)
   !     .. Local Scalars ..
-  REAL temp
+  REAL(SP) temp
   INTEGER i, ibgn, icol, iend, indx, indx1, indx2, indxc1, indxc2, &
     indxr1, indxr2, irow, itemp, j, jbgn, jend, jtemp, k, kc, kr
   !* FIRST EXECUTABLE STATEMENT  SSILUS

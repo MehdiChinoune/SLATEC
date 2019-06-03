@@ -79,11 +79,11 @@ SUBROUTINE SPODI(A,Lda,N,Det,Job)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER Lda, N, Job
-  REAL A(Lda,*)
-  REAL Det(2)
+  REAL(SP) A(Lda,*)
+  REAL(SP) Det(2)
   !
-  REAL t
-  REAL s
+  REAL(SP) t
+  REAL(SP) s
   INTEGER i, j, jm1, k, kp1
   !* FIRST EXECUTABLE STATEMENT  SPODI
   !

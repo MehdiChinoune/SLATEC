@@ -1,5 +1,5 @@
 !** ZABS
-REAL(8) FUNCTION ZABS(Zr,Zi)
+REAL(DP) FUNCTION ZABS(Zr,Zi)
   !>
   !  Subsidiary to ZBESH, ZBESI, ZBESJ, ZBESK, ZBESY, ZAIRY and
   !            ZBIRY
@@ -24,7 +24,7 @@ REAL(8) FUNCTION ZABS(Zr,Zi)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
 
-  REAL(8) :: Zr, Zi, u, v, q, s
+  REAL(DP) :: Zr, Zi, u, v, q, s
   !* FIRST EXECUTABLE STATEMENT  ZABS
   u = ABS(Zr)
   v = ABS(Zi)

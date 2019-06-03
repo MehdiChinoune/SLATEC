@@ -53,7 +53,7 @@ SUBROUTINE SCOPY(N,Sx,Incx,Sy,Incy)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER i, Incx, Incy, ix, iy, m, mp1, N, ns
-  REAL Sx(*), Sy(*)
+  REAL(SP) Sx(*), Sy(*)
   !* FIRST EXECUTABLE STATEMENT  SCOPY
   IF ( N<=0 ) RETURN
   IF ( Incx==Incy ) THEN

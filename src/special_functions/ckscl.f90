@@ -25,9 +25,9 @@ SUBROUTINE CKSCL(Zr,Fnu,N,Y,Nz,Rz,Ascle,Tol,Elim)
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
 
   INTEGER i, ic, k, kk, N, nn, nw, Nz
-  COMPLEX ck, cs, cy(2), Rz, s1, s2, Y(N), Zr, zd, celm
-  REAL aa, Ascle, acs, as, csi, csr, Elim, fn, Fnu, Tol, xx, zri, elm, alas, helim
-  COMPLEX, PARAMETER :: czero = (0.0E0,0.0E0)
+  COMPLEX(SP) ck, cs, cy(2), Rz, s1, s2, Y(N), Zr, zd, celm
+  REAL(SP) aa, Ascle, acs, as, csi, csr, Elim, fn, Fnu, Tol, xx, zri, elm, alas, helim
+  COMPLEX(SP), PARAMETER :: czero = (0.0E0,0.0E0)
   !* FIRST EXECUTABLE STATEMENT  CUCHK
   Nz = 0
   ic = 0

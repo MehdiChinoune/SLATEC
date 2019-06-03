@@ -32,7 +32,7 @@ SUBROUTINE D9UPAK(X,Y,N)
   !           between 0.05 and 1.0.  (WRB)
 
   INTEGER N
-  REAL(8) :: X, Y, absx
+  REAL(DP) :: X, Y, absx
   !* FIRST EXECUTABLE STATEMENT  D9UPAK
   absx = ABS(X)
   N = 0

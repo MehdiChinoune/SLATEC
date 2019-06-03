@@ -28,7 +28,7 @@ SUBROUTINE DBDIFF(L,V)
 
   !
   INTEGER :: L
-  REAL(8) :: V(L)
+  REAL(DP) :: V(L)
   INTEGER :: i, j, k
   !* FIRST EXECUTABLE STATEMENT  DBDIFF
   IF ( L==1 ) RETURN

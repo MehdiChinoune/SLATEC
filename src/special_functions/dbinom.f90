@@ -1,5 +1,5 @@
 !** DBINOM
-REAL(8) FUNCTION DBINOM(N,M)
+REAL(DP) FUNCTION DBINOM(N,M)
   !>
   !  Compute the binomial coefficients.
   !***
@@ -32,10 +32,10 @@ REAL(8) FUNCTION DBINOM(N,M)
   USE service, ONLY : XERMSG, D1MACH
   INTEGER :: M, N
   INTEGER :: i, k
-  REAL(8) :: corr, xk, xn, xnk
-  REAL(8), PARAMETER :: bilnmx = LOG(D1MACH(2)) - 0.0001D0, &
+  REAL(DP) :: corr, xk, xn, xnk
+  REAL(DP), PARAMETER :: bilnmx = LOG(D1MACH(2)) - 0.0001D0, &
     fintmx = 0.9D0/D1MACH(3)
-  REAL(8), PARAMETER :: sq2pil = 0.91893853320467274178032973640562D0
+  REAL(DP), PARAMETER :: sq2pil = 0.91893853320467274178032973640562D0
   !* FIRST EXECUTABLE STATEMENT  DBINOM
   !
   IF ( N<0.OR.M<0 ) CALL XERMSG('DBINOM','N OR M LT ZERO',1,2)

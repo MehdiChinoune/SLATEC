@@ -1,6 +1,7 @@
 MODULE TEST05_MOD
+  USE service, ONLY : SP, DP
   IMPLICIT NONE
-  REAL X, A, FKM
+  REAL(SP) X, A, FKM
 
 CONTAINS
   !** BIKCK
@@ -40,8 +41,8 @@ CONTAINS
     USE slatec, ONLY : BESI, BESK, NUMXER, R1MACH, XERCLR, XGETF, XSETF
     INTEGER Ipass, Kprint
     INTEGER i, ix, k, kontrl, kode, Lun, m, n, nerr, nu, nw, ny
-    REAL alp, del, er, fnu, fnup, rx, tol, x
-    REAL fn(3), w(5), xx(5), y(5)
+    REAL(SP) alp, del, er, fnu, fnup, rx, tol, x
+    REAL(SP) fn(3), w(5), xx(5), y(5)
     LOGICAL fatal
     !* FIRST EXECUTABLE STATEMENT  BIKCK
     IF ( Kprint>=2 ) WRITE (Lun,99001)
@@ -306,8 +307,8 @@ CONTAINS
     USE slatec, ONLY : BESJ, BESY, NUMXER, R1MACH, XERCLR, XGETF, XSETF
     INTEGER Ipass, Kprint
     INTEGER i, ix, k, kontrl, Lun, m, n, nerr, nu, ny
-    REAL alp, del, er, fnu, fnup, rhpi, rx, tol, x
-    REAL fn(3), w(5), xx(5), y(5)
+    REAL(SP) alp, del, er, fnu, fnup, rhpi, rx, tol, x
+    REAL(SP) fn(3), w(5), xx(5), y(5)
     LOGICAL fatal
     !* FIRST EXECUTABLE STATEMENT  BJYCK
     IF ( Kprint>=2 ) WRITE (Lun,99001)
@@ -538,7 +539,7 @@ CONTAINS
     INTEGER Kprint
     INTEGER i, icase, ie, ierr, ii, ik, Ipass, ix, iy, k, ke, kk, &
       kode, kx, Lun, m, n, nm, nz
-    REAL ans, atol, bb, en(4), er, ex, sig, summ, tol, t1, t2, xx(5), y(4)
+    REAL(SP) ans, atol, bb, en(4), er, ex, sig, summ, tol, t1, t2, xx(5), y(4)
     LOGICAL fatal
     !* FIRST EXECUTABLE STATEMENT  EG8CK
     IF ( Kprint>=2 ) WRITE (Lun,99001)
@@ -686,7 +687,7 @@ CONTAINS
     RETURN
   END SUBROUTINE EG8CK
   !** FEIN
-  REAL FUNCTION FEIN(T)
+  REAL(SP) FUNCTION FEIN(T)
     !>
     !  Subsidiary to EG8CK.
     !***
@@ -703,7 +704,7 @@ CONTAINS
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
     REAL, INTENT(IN) :: T
-    REAL aln
+    REAL(SP) aln
     !* FIRST EXECUTABLE STATEMENT  FEIN
     aln = (FKM-T)*X - A*LOG(T)
     FEIN = EXP(aln)

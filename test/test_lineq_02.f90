@@ -1,4 +1,5 @@
 MODULE TEST22_MOD
+  USE service, ONLY : SP, DP
   IMPLICIT NONE
 
 CONTAINS
@@ -51,7 +52,7 @@ CONTAINS
     !           fixed code to test all four routines.  (RWC)
     USE slatec, ONLY : R1MACH, SNBFS, SNBIR, SPOFS, SPOIR
     INTEGER Kprint, Lun
-    REAL at(5,4), abe(5,7), abet(5,7), b(4), bt(4), c(4), &
+    REAL(SP) at(5,4), abe(5,7), abet(5,7), b(4), bt(4), c(4), &
       work(35), r, delx, delmax, signn
     INTEGER lda, n, ml, mu, ind, iwork(4), Nerr, i, j, j1, j2, jd, &
       mlp, k, kcase, kprog
@@ -233,11 +234,11 @@ CONTAINS
     !           editorial changes.  (RWC)
     USE slatec, ONLY : D1MACH, DNBFS, DPOFS
     INTEGER Kprint, Lun
-    REAL(8) :: at(5,4), abe(5,7), abet(5,7), b(4), bt(4), c(4), work(35), signn
-    REAL r, delx, delmax
+    REAL(DP) :: at(5,4), abe(5,7), abet(5,7), b(4), bt(4), c(4), work(35), signn
+    REAL(SP) r, delx, delmax
     INTEGER lda, n, ml, mu, ind, iwork(4), Nerr, i, j, j1, j2, jd, &
       mlp, k, kcase, kprog
-    REAL(8), PARAMETER :: a(4,4) = RESHAPE( [ 5.0D0, 4.0D0, 1.0D0, 1.0D0, &
+    REAL(DP), PARAMETER :: a(4,4) = RESHAPE( [ 5.0D0, 4.0D0, 1.0D0, 1.0D0, &
       4.0D0, 5.0D0, 1.0D0, 1.0D0,    1.0D0, 1.0D0, 4.0D0, 2.0D0, &
       1.0D0, 1.0D0, 2.0D0, 4.0D0 ], [4,4] )
     CHARACTER(4), PARAMETER :: list(2) = [ 'POFS', 'NBFS' ]
@@ -251,7 +252,7 @@ CONTAINS
     mu = 1
     jd = 2*ml + mu + 1
     Nerr = 0
-    r = REAL( D1MACH(4)**0.8E0, 4 )
+    r = REAL( D1MACH(4)**0.8D0, SP )
     !
     !     COMPUTE C VECTOR.
     !
@@ -338,7 +339,7 @@ CONTAINS
         IF ( kcase==1 ) THEN
           delmax = 0.0E0
           DO i = 1, n
-            delx = REAL( ABS(bt(i)-c(i)), 4 )
+            delx = REAL( ABS(bt(i)-c(i)), SP )
             delmax = MAX(delmax,delx)
           END DO
           !
@@ -413,17 +414,17 @@ CONTAINS
     !           editorial changes.  (RWC)
     USE slatec, ONLY : CNBFS, CNBIR, CPOFS, CPOIR, R1MACH
     INTEGER Kprint, Lun
-    REAL r, delx, delmax
-    COMPLEX at(5,4), abe(5,7), abet(5,7), bt(4), work(35)
+    REAL(SP) r, delx, delmax
+    COMPLEX(SP) at(5,4), abe(5,7), abet(5,7), bt(4), work(35)
     INTEGER lda, n, ml, mu, ind, iwork(4), Nerr, i, j, j1, j2, jd, &
       mlp, k, kcase, kprog
-    COMPLEX, PARAMETER :: a(4,4) = RESHAPE( [ &
+    COMPLEX(SP), PARAMETER :: a(4,4) = RESHAPE( [ &
       (2.E0,0.E0), (0.E0,1.E0), (0.E0,0.E0), (0.E0,0.E0), &
       (0.E0,-1.E0), (2.E0,0.E0), (0.E0,0.E0), (0.E0,0.E0), &
       (0.E0,0.E0), (0.E0,0.E0), (3.E0,0.E0), (0.E0,1.E0), &
       (0.E0,0.E0), (0.E0,0.E0), (0.E0,-1.E0), (4.E0,0.E0) ], [4,4] )
-    COMPLEX, PARAMETER :: c(4) = [ (1.E0,1.E0), (0.E0,1.E0), (0.E0,-1.E0), (1.E0,0.E0) ]
-    COMPLEX, PARAMETER :: b(4) = [ (3.E0,2.E0), (-1.E0,3.E0), (0.E0,-4.E0), (5.E0,0.E0) ]
+    COMPLEX(SP), PARAMETER :: c(4) = [ (1.E0,1.E0), (0.E0,1.E0), (0.E0,-1.E0), (1.E0,0.E0) ]
+    COMPLEX(SP), PARAMETER :: b(4) = [ (3.E0,2.E0), (-1.E0,3.E0), (0.E0,-4.E0), (5.E0,0.E0) ]
     CHARACTER(4), PARAMETER :: list(4) = [ 'POFS', 'POIR', 'NBFS', 'NBIR' ]
     !* FIRST EXECUTABLE STATEMENT  CQCK
     IF ( Kprint>=3 ) WRITE (Lun,99001)

@@ -86,18 +86,19 @@ SUBROUTINE DGAUS8(FUN,A,B,Err,Ans,Ierr)
   !           (WRB)
   USE service, ONLY : XERMSG, D1MACH, I1MACH
   INTERFACE
-    REAL(8) FUNCTION FUN(X)
-      REAL(8), INTENT(IN) :: X
+    REAL(DP) FUNCTION FUN(X)
+      IMPORT DP
+      REAL(DP), INTENT(IN) :: X
     END FUNCTION
   END INTERFACE
   INTEGER Ierr, k, l, lmn, lmx, lr(60), mxl, nbits, nib, nlmx
-  REAL(8) :: A, aa(60), ae, anib, Ans, area, B, c, ce, ee, ef, &
+  REAL(DP) :: A, aa(60), ae, anib, Ans, area, B, c, ce, ee, ef, &
     eps, Err, est, gl, glr, gr(60), hh(60), tol, vl(60), vr
-  REAL(8), PARAMETER :: x1 = 1.83434642495649805D-01, x2 = 5.25532409916328986D-01, &
+  REAL(DP), PARAMETER :: x1 = 1.83434642495649805D-01, x2 = 5.25532409916328986D-01, &
     x3 =7.96666477413626740D-01 , x4 = 9.60289856497536232D-01
-  REAL(8), PARAMETER :: w1 = 3.62683783378361983D-01, w2 = 3.13706645877887287D-01, &
+  REAL(DP), PARAMETER :: w1 = 3.62683783378361983D-01, w2 = 3.13706645877887287D-01, &
     w3 = 2.22381034453374471D-01, w4 = 1.01228536290376259D-01
-  REAL(8), PARAMETER :: sq2 = 1.41421356D0
+  REAL(DP), PARAMETER :: sq2 = 1.41421356D0
   INTEGER, PARAMETER :: nlmn = 1, kmx = 5000, kml = 6
   !* FIRST EXECUTABLE STATEMENT  DGAUS8
   !
@@ -225,8 +226,8 @@ SUBROUTINE DGAUS8(FUN,A,B,Err,Ans,Ierr)
   GOTO 100
   RETURN
 CONTAINS
-  REAL(8) FUNCTION G8(x,h)
-    REAL(8), INTENT(IN) :: x, h
+  REAL(DP) FUNCTION G8(x,h)
+    REAL(DP), INTENT(IN) :: x, h
     G8 = h*((w1*(FUN(x-x1*h)+FUN(x+x1*h))+w2*(FUN(x-x2*h)+FUN(x+x2*h)))&
       +(w3*(FUN(x-x3*h)+FUN(x+x3*h))+w4*(FUN(x-x4*h)+FUN(x+x4*h))))
   END FUNCTION G8

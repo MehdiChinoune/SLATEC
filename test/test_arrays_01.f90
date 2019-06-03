@@ -1,4 +1,5 @@
 MODULE TEST54_MOD
+  USE service, ONLY : SP, DP
   IMPLICIT NONE
 
 CONTAINS
@@ -620,7 +621,7 @@ CONTAINS
     INTEGER , PARAMETER :: N = 9, NTEST = 4
     !
     LOGICAL fail
-    REAL y(N), yc(N)
+    REAL(SP) y(N), yc(N)
     INTEGER iy(N), Kprint, Lun, Ipass, j, i, kabs, ier, nerr, nn, kkflag
     !
     !     ---------
@@ -924,7 +925,7 @@ CONTAINS
     INTEGER , PARAMETER :: N = 9, NTEST = 4
     !
     LOGICAL fail
-    REAL(8) :: y(N), yc(N)
+    REAL(DP) :: y(N), yc(N)
     INTEGER iy(N), Kprint, Lun, Ipass, j, i, kabs, ier, nerr, nn, kkflag
     !
     !     ---------
@@ -936,7 +937,7 @@ CONTAINS
     !         IX  = PERMUTATION VECTOR, I.E.  X(IX(J)) = XS(J)
     !
     INTEGER, PARAMETER :: kflag(NTEST) = [ 2, -1, -2, 1 ]
-    REAL(8), PARAMETER ::  x(N,NTEST) = RESHAPE( [ &
+    REAL(DP), PARAMETER ::  x(N,NTEST) = RESHAPE( [ &
       36D0, 54D0, -1D0, 29D0, 1D0, 80D0, 98D0, 99D0, 55D0, &
       1D0, 2D0, 3D0, 4D0, 5D0, 6D0, 7D0, 8D0, 9D0, &
       -9D0, -8D0, -7D0, -6D0, -5D0, -4D0, -3D0, -2D0, -1D0, &
@@ -945,7 +946,7 @@ CONTAINS
       9, 8, 7, 6, 5, 4, 3, 2, 1, &
       9, 8, 7, 6, 5, 4, 3, 2, 1, &
       3, 5, 4, 1, 2, 9, 6, 7, 8 ], [N,NTEST] )
-    REAL(8), PARAMETER ::  xs(N,NTEST) = RESHAPE( [ &
+    REAL(DP), PARAMETER ::  xs(N,NTEST) = RESHAPE( [ &
       -1D0, 1D0, 29D0, 36D0, 54D0, 55D0, 80D0, 98D0, 99D0, &
       9D0, 8D0, 7D0, 6D0, 5D0, 4D0, 3D0, 2D0, 1D0, &
       -1D0, -2D0, -3D0, -4D0, -5D0, -6D0, -7D0, -8D0, -9D0, &

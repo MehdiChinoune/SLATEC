@@ -290,9 +290,9 @@ SUBROUTINE HWSCRT(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER :: Idimf, Ierror, M, Mbdcnd, N, Nbdcnd
-  REAL :: A, B, C, D, Elmbda, Pertrb
-  REAL :: Bda(N+1), Bdb(N+1), Bdc(M+1), Bdd(M+1), W(:), F(Idimf,N+1)
-  REAL :: a1, a2, deltax, deltay, delxsq, delysq, s, s1, st2, twdelx, twdely
+  REAL(SP) :: A, B, C, D, Elmbda, Pertrb
+  REAL(SP) :: Bda(N+1), Bdb(N+1), Bdc(M+1), Bdd(M+1), W(:), F(Idimf,N+1)
+  REAL(SP) :: a1, a2, deltax, deltay, delxsq, delysq, s, s1, st2, twdelx, twdely
   INTEGER :: i, id2, id3, id4, ierr1, j, mp, mp1, mperod, mskip, msp1, mstart, &
     mstm1, mstop, munk, np, np1, nperod, nskip, nsp1, nstart, nstm1, nstop, nunk
   !* FIRST EXECUTABLE STATEMENT  HWSCRT

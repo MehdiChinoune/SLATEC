@@ -28,7 +28,7 @@ SUBROUTINE DY(U,Idmn,I,J,Uyyy,Uyyyy)
   !   900402  Added TYPE section.  (WRB)
   USE SPLPCM, ONLY : l_com, dly4_com, kswy_com, tdly3_com
   INTEGER :: I, Idmn, J
-  REAL :: U(Idmn,l_com), Uyyy, Uyyyy
+  REAL(SP) :: U(Idmn,l_com), Uyyy, Uyyyy
   !* FIRST EXECUTABLE STATEMENT  DY
   IF ( J>2.AND.J<(l_com-1) ) THEN
     !

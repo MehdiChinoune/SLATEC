@@ -40,10 +40,10 @@ SUBROUTINE DPRWVR(Key,Ipage,Lpg,Sx,Ix)
   !   910403  Updated AUTHOR and DESCRIPTION sections.  (WRB)
 
   INTEGER :: Ipage, Lpg, Ix(Lpg), Key
-  REAL(8) :: Sx(Lpg)
+  REAL(DP) :: Sx(Lpg)
   INTEGER :: iaddr, ipagef, istart
   LOGICAL :: first
-  REAL(8), PARAMETER :: zero = 0.D0, one = 1.D0
+  REAL(DP), PARAMETER :: zero = 0.D0, one = 1.D0
   !* FIRST EXECUTABLE STATEMENT  DPRWVR
   !
   !     COMPUTE STARTING ADDRESS OF PAGE.

@@ -78,12 +78,12 @@ SUBROUTINE DRLCAL(N,Kmp,Ll,Maxl,V,Q,Rl,Snormw,Prod,R0nrm)
   !   920511  Added complete declaration section.  (WRB)
 
   !     .. Scalar Arguments ..
-  REAL(8) :: Prod, R0nrm, Snormw
+  REAL(DP) :: Prod, R0nrm, Snormw
   INTEGER Kmp, Ll, Maxl, N
   !     .. Array Arguments ..
-  REAL(8) :: Q(*), Rl(N), V(N,*)
+  REAL(DP) :: Q(*), Rl(N), V(N,*)
   !     .. Local Scalars ..
-  REAL(8) :: c, s, tem
+  REAL(DP) :: c, s, tem
   INTEGER i, i2, ip1, k, llm1, llp1
   !* FIRST EXECUTABLE STATEMENT  DRLCAL
   IF ( Kmp==Maxl ) THEN

@@ -96,13 +96,13 @@ SUBROUTINE CHFEV(X1,X2,F1,F2,D1,D2,Ne,Xe,Fe,Next,Ierr)
   !  DECLARE ARGUMENTS.
   !
   INTEGER Ne, Next(2), Ierr
-  REAL X1, X2, F1, F2, D1, D2, Xe(Ne), Fe(Ne)
+  REAL(SP) X1, X2, F1, F2, D1, D2, Xe(Ne), Fe(Ne)
   !
   !  DECLARE LOCAL VARIABLES.
   !
   INTEGER i
-  REAL c2, c3, del1, del2, delta, h, x, xmi, xma
-  REAL, PARAMETER :: zero = 0.
+  REAL(SP) c2, c3, del1, del2, delta, h, x, xmi, xma
+  REAL(SP), PARAMETER :: zero = 0.
   !
   !  VALIDITY-CHECK ARGUMENTS.
   !

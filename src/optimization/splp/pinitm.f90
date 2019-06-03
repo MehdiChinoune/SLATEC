@@ -51,9 +51,9 @@ SUBROUTINE PINITM(M,N,Sx,Ix,Lmx,Ipagef)
   !   910403  Updated AUTHOR and DESCRIPTION sections.  (WRB)
   USE service, ONLY : XERMSG
   INTEGER :: Ipagef, Lmx, Ix(Lmx), M, N
-  REAL :: Sx(Lmx)
+  REAL(SP) :: Sx(Lmx)
   INTEGER :: i, iopt, lp4, n20008, n20012, nerr
-  REAL, PARAMETER :: zero = 0.E0, one = 1.E0
+  REAL(SP), PARAMETER :: zero = 0.E0, one = 1.E0
   !* FIRST EXECUTABLE STATEMENT  PINITM
   iopt = 1
   !

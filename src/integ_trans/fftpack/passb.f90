@@ -24,9 +24,9 @@ SUBROUTINE PASSB(Nac,Ido,Ip,L1,Idl1,Cc,C1,C2,Ch,Ch2,Wa)
   !   900402  Added TYPE section.  (WRB)
 
   INTEGER :: Nac, L1, Idl1, Ido, Ip
-  REAL :: C1(Ido,L1,Ip), C2(Idl1,Ip), Cc(Ido,Ip,L1), Ch(Ido,L1,Ip), Ch2(Idl1,Ip), Wa(:)
+  REAL(SP) :: C1(Ido,L1,Ip), C2(Idl1,Ip), Cc(Ido,Ip,L1), Ch(Ido,L1,Ip), Ch2(Idl1,Ip), Wa(:)
   INTEGER :: i, idij, idj, idl, idlj, idot, idp, ik, inc, ipp2, ipph, j, jc, k, l, lc
-  REAL :: wai, war
+  REAL(SP) :: wai, war
   !* FIRST EXECUTABLE STATEMENT  PASSB
   idot = Ido/2
   ipp2 = Ip + 2

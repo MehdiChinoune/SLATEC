@@ -106,7 +106,7 @@ SUBROUTINE CHIEV(A,Lda,N,E,V,Ldv,Work,Job,Info)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   USE service, ONLY : XERMSG
   INTEGER :: Info, Job, Lda, Ldv, N
-  REAL :: A(2*Lda*N), E(N), Work(4*N), V(2*Ldv*N)
+  REAL(SP) :: A(2*Lda*N), E(N), Work(4*N), V(2*Ldv*N)
   INTEGER :: i, j, k, l, m, mdim
   !* FIRST EXECUTABLE STATEMENT  CHIEV
   IF ( N>Lda ) CALL XERMSG('CHIEV','N .GT. LDA.',1,1)

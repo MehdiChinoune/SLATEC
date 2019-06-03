@@ -25,7 +25,7 @@ SUBROUTINE ZWRSK(Zrr,Zri,Fnu,Kode,N,Yr,Yi,Nz,Cwr,Cwi,Tol,Elim,Alim)
   USE service, ONLY : D1MACH
   !     COMPLEX CINU,CSCL,CT,CW,C1,C2,RCT,ST,Y,ZR
   INTEGER i, Kode, N, nw, Nz
-  REAL(8) :: act, acw, Alim, ascle, cinui, cinur, csclr, cti, &
+  REAL(DP) :: act, acw, Alim, ascle, cinui, cinur, csclr, cti, &
     ctr, Cwi(2), Cwr(2), c1i, c1r, c2i, c2r, Elim, Fnu, &
     pti, ptr, ract, sti, str, Tol, Yi(N), Yr(N), Zri, Zrr
   !* FIRST EXECUTABLE STATEMENT  ZWRSK

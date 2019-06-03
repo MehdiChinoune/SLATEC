@@ -32,36 +32,40 @@ SUBROUTINE CDPST(El,F,FA,H,Impl,JACOBN,Matdim,Miter,Ml,Mu,N,Nde,Nq,Save2,&
   USE linear, ONLY : SCNRM2, CGBFA, CGEFA
   INTERFACE
     SUBROUTINE F(N,T,Y,Ydot)
+      IMPORT SP
       INTEGER :: N
-      REAL :: T
-      COMPLEX :: Y(:), Ydot(:)
+      REAL(SP) :: T
+      COMPLEX(SP) :: Y(:), Ydot(:)
     END SUBROUTINE F
     SUBROUTINE JACOBN(N,T,Y,Dfdy,Matdim,Ml,Mu)
+      IMPORT SP
       INTEGER :: N, Matdim, Ml, Mu
-      REAL :: T
-      COMPLEX :: Y(N), Dfdy(Matdim,N)
+      REAL(SP) :: T
+      COMPLEX(SP) :: Y(N), Dfdy(Matdim,N)
     END SUBROUTINE JACOBN
     SUBROUTINE USERS(Y,Yh,Ywt,Save1,Save2,T,H,El,Impl,N,Nde,Iflag)
+      IMPORT SP
       INTEGER :: Impl, N, Nde, iflag
-      REAL :: T, H, El
-      COMPLEX :: Y(N), Yh(N,13), Ywt(N), Save1(N), Save2(N)
+      REAL(SP) :: T, H, El
+      COMPLEX(SP) :: Y(N), Yh(N,13), Ywt(N), Save1(N), Save2(N)
     END SUBROUTINE USERS
     SUBROUTINE FA(N,T,Y,A,Matdim,Ml,Mu,Nde)
+      IMPORT SP
       INTEGER :: N, Matdim, Ml, Mu, Nde
-      REAL :: T
-      COMPLEX :: Y(N), A(:,:)
+      REAL(SP) :: T
+      COMPLEX(SP) :: Y(N), A(:,:)
     END SUBROUTINE FA
   END INTERFACE
   INTEGER :: Impl, info, Iswflg, Jstate, Matdim, Miter, Ml, Mu, N, Nde, Nfe, Nje, Nq
   INTEGER :: Ipvt(N)
-  REAL :: Bnd, H, T, Uround, El(13,12)
-  COMPLEX :: A(Matdim,N), Dfdy(Matdim,N), Fac(N), Save1(N), Save2(N), Y(N+1), &
+  REAL(SP) :: Bnd, H, T, Uround, El(13,12)
+  COMPLEX(SP) :: A(Matdim,N), Dfdy(Matdim,N), Fac(N), Save1(N), Save2(N), Y(N+1), &
     Yh(N,Nq+1), Ywt(N)
   LOGICAL :: Ier
   INTEGER :: i, iflag, imax, j, j2, k, mw
-  REAL :: bl, bp, br, dfdymx, diff, facmin, factor, scalee, zmax, zmin
-  COMPLEX :: cfctr, dy, yj, ys
-  REAL, PARAMETER :: FACMAX = 0.5E0, BU = 0.5E0
+  REAL(SP) :: bl, bp, br, dfdymx, diff, facmin, factor, scalee, zmax, zmin
+  COMPLEX(SP) :: cfctr, dy, yj, ys
+  REAL(SP), PARAMETER :: FACMAX = 0.5E0, BU = 0.5E0
   !* FIRST EXECUTABLE STATEMENT  CDPST
   Nje = Nje + 1
   Ier = .FALSE.

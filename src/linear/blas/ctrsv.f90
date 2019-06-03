@@ -116,11 +116,11 @@ SUBROUTINE CTRSV(Uplo,Trans,Diag,N,A,Lda,X,Incx)
   INTEGER Incx, Lda, N
   CHARACTER :: Diag, Trans, Uplo
   !     .. Array Arguments ..
-  COMPLEX A(Lda,*), X(*)
+  COMPLEX(SP) A(Lda,*), X(*)
   !     .. Parameters ..
-  COMPLEX, PARAMETER :: ZERO = (0.0E+0,0.0E+0)
+  COMPLEX(SP), PARAMETER :: ZERO = (0.0E+0,0.0E+0)
   !     .. Local Scalars ..
-  COMPLEX temp
+  COMPLEX(SP) temp
   INTEGER i, info, ix, j, jx, kx
   LOGICAL noconj, nounit
   !     .. Intrinsic Functions ..

@@ -1,4 +1,5 @@
 MODULE TEST34_MOD
+  USE service, ONLY : SP, DP
   IMPLICIT NONE
 
 CONTAINS
@@ -30,12 +31,12 @@ CONTAINS
     USE slatec, ONLY : CPZERO, R1MACH, RPZERO
     INTEGER Kprint, Ipass, Lun
     INTEGER idegp1, info, i, j, id
-    REAL err, erri, relerr
-    COMPLEX ac(6), z(5), w(21)
-    REAL w_r(42)
+    REAL(SP) err, erri, relerr
+    COMPLEX(SP) ac(6), z(5), w(21)
+    REAL(SP) w_r(42)
     INTEGER, PARAMETER :: ideg = 5
     REAL, PARAMETER :: a(6) = [ 1., -3.7, 7.4, -10.8, 10.8, -6.8 ]
-    COMPLEX, PARAMETER :: zk(5) = [ (1.7,0.), (1.,1.), (1.,-1.), &
+    COMPLEX(SP), PARAMETER :: zk(5) = [ (1.7,0.), (1.,1.), (1.,-1.), &
       (0.,1.4142135623730950488), (0.,-1.4142135623730950488) ]
     !* FIRST EXECUTABLE STATEMENT  CPRPQX
     Ipass = 1
@@ -119,7 +120,7 @@ CONTAINS
     INTEGER Ipass, Kprint, Lun
     !     .. Local Scalars ..
     INTEGER iflag, kontrl
-    REAL ae, b, c, pi, r, re, tol
+    REAL(SP) ae, b, c, pi, r, re, tol
     LOGICAL fatal
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, ATAN, MAX, SIN, SQRT, TAN
@@ -229,7 +230,7 @@ CONTAINS
     INTEGER Ipass, Kprint, Lun
     !     .. Local Scalars ..
     INTEGER iflag, kontrl
-    REAL(8) :: ae, b, c, pi, r, re, tol
+    REAL(DP) :: ae, b, c, pi, r, re, tol
     LOGICAL fatal
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, ATAN, DSIN, DTAN, MAX, SQRT
@@ -341,14 +342,14 @@ CONTAINS
     !   911010  Code reworked and simplified.  (RWC and WRB)
     USE slatec, ONLY : NUMXER, R1MACH, RPQR79, XERCLR, XGETF, XSETF
     USE common_mod, ONLY : PASS
-    REAL beta, tol, work(63)
+    REAL(SP) beta, tol, work(63)
     INTEGER i, ierr, Ipass, j, kontrl, Kprint, Lun, nerr
     INTEGER itmp(7)
-    COMPLEX root(7)
-    REAL coef(8)
+    COMPLEX(SP) root(7)
+    REAL(SP) coef(8)
     LOGICAL fatal
     !
-    COMPLEX, PARAMETER :: chk(7) = [ (1.4142135623731,1.4142135623731), &
+    COMPLEX(SP), PARAMETER :: chk(7) = [ (1.4142135623731,1.4142135623731), &
       (1.4142135623731,-1.4142135623731), (0.0,2.0), (0.0,-2.0), &
       (-2.0,0.0), (-1.4142135623731,1.4142135623731), &
       (-1.4142135623731,-1.4142135623731) ]
@@ -473,19 +474,19 @@ CONTAINS
     USE slatec, ONLY : CPQR79, NUMXER, R1MACH, XERCLR, XGETF, XSETF
     USE common_mod, ONLY : PASS
     INTEGER i, ierr, Ipass, j, kontrl, Kprint, Lun, nerr
-    REAL tol
+    REAL(SP) tol
     INTEGER itest(2), itmp(7)
-    REAL work(144)
-    COMPLEX root(8)
+    REAL(SP) work(144)
+    COMPLEX(SP) root(8)
     LOGICAL fatal
     !
-    COMPLEX, PARAMETER :: coeff1(9) = [ (1.0,0.0), (-7.0,-2.0), (8.0,6.0), &
+    COMPLEX(SP), PARAMETER :: coeff1(9) = [ (1.0,0.0), (-7.0,-2.0), (8.0,6.0), &
       (28.0,8.0), (-49.0,-24.0), (7.0,2.0), (-8.0,-6.0), (-28.0,-8.0), (48.0,24.0) ]
-    COMPLEX, PARAMETER :: coeff2(2) = [ (1.0,1.0), (1.0,3.0) ]
-    COMPLEX, PARAMETER :: coeff3(2) = [ (0.0,0.0), (1.0,3.0) ]
-    COMPLEX, PARAMETER :: chk1(8) = [ (4.0,2.0), (3.0,0.0), (-2.0,0.0), &
+    COMPLEX(SP), PARAMETER :: coeff2(2) = [ (1.0,1.0), (1.0,3.0) ]
+    COMPLEX(SP), PARAMETER :: coeff3(2) = [ (0.0,0.0), (1.0,3.0) ]
+    COMPLEX(SP), PARAMETER :: chk1(8) = [ (4.0,2.0), (3.0,0.0), (-2.0,0.0), &
       (2.0,0.0), (0.0,-1.0), (-1.0,0.0), (0.0,1.0), (1.0,0.0) ]
-    COMPLEX, PARAMETER :: chk2 = (-2.0,-1.0)
+    COMPLEX(SP), PARAMETER :: chk2 = (-2.0,-1.0)
     !* FIRST EXECUTABLE STATEMENT  CQRTST
     IF ( Kprint>=2 ) WRITE (Lun,99001)
     !

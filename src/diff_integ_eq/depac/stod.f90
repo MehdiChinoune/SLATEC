@@ -98,22 +98,24 @@ SUBROUTINE STOD(Neq,Y,Yh,Nyh,Yh1,Ewt,Savf,Acor,Wm,Iwm,F,JAC)
     nq_com, nst_com, nfe_com, nqu_com
   INTERFACE
     SUBROUTINE F(X,U,Uprime)
-      REAL :: X
-      REAL :: U(:), Uprime(:)
+      IMPORT SP
+      REAL(SP) :: X
+      REAL(SP) :: U(:), Uprime(:)
     END SUBROUTINE F
     SUBROUTINE JAC(X,U,Pd,Nrowpd)
+      IMPORT SP
       INTEGER :: Nrowpd
-      REAL :: X
-      REAL :: U(:), Pd(:,:)
+      REAL(SP) :: X
+      REAL(SP) :: U(:), Pd(:,:)
     END SUBROUTINE JAC
   END INTERFACE
   INTEGER :: Neq, Nyh
   INTEGER :: Iwm(:)
-  REAL :: Y(n_com), Yh(Nyh,maxord_com+1), Yh1(Nyh*maxord_com+Nyh), Ewt(n_com), &
+  REAL(SP) :: Y(n_com), Yh(Nyh,maxord_com+1), Yh1(Nyh*maxord_com+Nyh), Ewt(n_com), &
     Savf(n_com), Acor(n_com), Wm(:)
   !
   INTEGER :: i, i1, iredo, iret, j, jb, m, ncf, newq
-  REAL :: dcon, ddn, del, delp, dsm, dup, exdn, exsm, exup, r, rh, rhdn, rhsm, &
+  REAL(SP) :: dcon, ddn, del, delp, dsm, dup, exdn, exsm, exup, r, rh, rhdn, rhsm, &
     rhup, told
   !
   !* FIRST EXECUTABLE STATEMENT  STOD

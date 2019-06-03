@@ -2,6 +2,7 @@ include"splp/la05ds.f90"
 include"splp/la05dd.f90"
 
 MODULE optimization
+  USE service, ONLY : SP, DP
   IMPLICIT NONE
 
 CONTAINS

@@ -99,11 +99,11 @@ SUBROUTINE SPPCO(Ap,N,Rcond,Z,Info)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER N, Info
-  REAL Ap(*), Z(*)
-  REAL Rcond
+  REAL(SP) Ap(*), Z(*)
+  REAL(SP) Rcond
   !
-  REAL ek, t, wk, wkm
-  REAL anorm, s, sm, ynorm
+  REAL(SP) ek, t, wk, wkm
+  REAL(SP) anorm, s, sm, ynorm
   INTEGER i, ij, j, jm1, j1, k, kb, kj, kk, kp1
   !
   !     FIND NORM OF A

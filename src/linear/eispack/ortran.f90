@@ -76,8 +76,8 @@ SUBROUTINE ORTRAN(Nm,N,Low,Igh,A,Ort,Z)
 
   !
   INTEGER i, j, N, kl, mm, mp, Nm, Igh, Low, mp1
-  REAL A(Nm,*), Ort(*), Z(Nm,*)
-  REAL g
+  REAL(SP) A(Nm,*), Ort(*), Z(Nm,*)
+  REAL(SP) g
   !
   !     .......... INITIALIZE Z TO IDENTITY MATRIX ..........
   !* FIRST EXECUTABLE STATEMENT  ORTRAN

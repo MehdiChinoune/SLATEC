@@ -95,15 +95,15 @@ SUBROUTINE DSYR(Uplo,N,Alpha,X,Incx,A,Lda)
   !           lines were modified.  (BKS)
   USE service, ONLY : XERBLA
   !     .. Scalar Arguments ..
-  REAL(8) :: Alpha
+  REAL(DP) :: Alpha
   INTEGER Incx, Lda, N
   CHARACTER :: Uplo
   !     .. Array Arguments ..
-  REAL(8) :: A(Lda,*), X(*)
+  REAL(DP) :: A(Lda,*), X(*)
   !     .. Parameters ..
-  REAL(8), PARAMETER :: ZERO = 0.0D+0
+  REAL(DP), PARAMETER :: ZERO = 0.0D+0
   !     .. Local Scalars ..
-  REAL(8) :: temp
+  REAL(DP) :: temp
   INTEGER i, info, ix, j, jx, kx
   !     .. Intrinsic Functions ..
   INTRINSIC MAX

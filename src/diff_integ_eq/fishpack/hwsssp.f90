@@ -375,10 +375,10 @@ SUBROUTINE HWSSSP(Ts,Tf,M,Mbdcnd,Bdts,Bdtf,Ps,Pf,N,Nbdcnd,Bdps,Bdpf,&
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER :: Idimf, Ierror, M, Mbdcnd, N, Nbdcnd
-  REAL ::Elmbda, Pertrb, Pf, Ps, Tf, Ts
-  REAL :: Bdpf(M+1), Bdps(M+1), Bdtf(N+1), Bdts(N+1), F(Idimf,N+1), W(:)
-  REAL :: tpi
-  REAL, PARAMETER :: pi = 3.14159265358979
+  REAL(SP) ::Elmbda, Pertrb, Pf, Ps, Tf, Ts
+  REAL(SP) :: Bdpf(M+1), Bdps(M+1), Bdtf(N+1), Bdts(N+1), F(Idimf,N+1), W(:)
+  REAL(SP) :: tpi
+  REAL(SP), PARAMETER :: pi = 3.14159265358979
   !* FIRST EXECUTABLE STATEMENT  HWSSSP
   tpi = 2.*pi
   Ierror = 0

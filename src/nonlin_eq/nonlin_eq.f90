@@ -1,4 +1,5 @@
 MODULE nonlin_eq
+  USE service, ONLY : SP, DP
   IMPLICIT NONE
 
 CONTAINS

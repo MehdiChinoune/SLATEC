@@ -55,10 +55,10 @@ SUBROUTINE CPTSL(N,D,E,B)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER N
-  COMPLEX D(*), E(*), B(*)
+  COMPLEX(SP) D(*), E(*), B(*)
   !
   INTEGER k, kbm1, ke, kf, kp1, nm1, nm1d2
-  COMPLEX t1, t2
+  COMPLEX(SP) t1, t2
   !
   !     CHECK FOR 1 X 1 CASE
   !

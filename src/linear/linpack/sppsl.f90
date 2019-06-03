@@ -68,9 +68,9 @@ SUBROUTINE SPPSL(Ap,N,B)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER N
-  REAL Ap(*), B(*)
+  REAL(SP) Ap(*), B(*)
   !
-  REAL t
+  REAL(SP) t
   INTEGER k, kb, kk
   !* FIRST EXECUTABLE STATEMENT  SPPSL
   kk = 0

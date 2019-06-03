@@ -62,10 +62,10 @@ SUBROUTINE CPOFA(A,Lda,N,Info)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER Lda, N, Info
-  COMPLEX A(Lda,*)
+  COMPLEX(SP) A(Lda,*)
   !
-  COMPLEX t
-  REAL s
+  COMPLEX(SP) t
+  REAL(SP) s
   INTEGER j, jm1, k
   !* FIRST EXECUTABLE STATEMENT  CPOFA
   DO j = 1, N

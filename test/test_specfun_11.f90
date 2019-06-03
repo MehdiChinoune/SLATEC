@@ -1,4 +1,5 @@
 MODULE TEST12_MOD
+  USE service, ONLY : SP, DP
   IMPLICIT NONE
 
 CONTAINS
@@ -37,10 +38,10 @@ CONTAINS
     INTEGER mu, mu1, mu2, n, nbits, ndec, nerr, nradpl, nu1, nudiff
     CHARACTER(34) :: fmt, fmtf, fmti
     INTEGER Lun, Kprint, Ipass
-    REAL(8) :: p(10), q(10), r(10), c1(10), c2(10), pn(10)
-    REAL(8) :: deg, theta, dnu1, dzero
-    REAL(8) :: x11, x12, x13, x21, x22, x23
-    REAL nu
+    REAL(DP) :: p(10), q(10), r(10), c1(10), c2(10), pn(10)
+    REAL(DP) :: deg, theta, dnu1, dzero
+    REAL(DP) :: x11, x12, x13, x21, x22, x23
+    REAL(SP) nu
     !
     !* FIRST EXECUTABLE STATEMENT  FCNQX2
     !
@@ -124,13 +125,13 @@ CONTAINS
     ix13 = iq(1)
     IF ( Kprint>2 ) THEN
       WRITE (Lun,'(A)') '     NU   CASORATI 1'
-      nu = REAL( dnu1, 4 )
+      nu = REAL( dnu1, SP )
       DO i = 1, 5
         WRITE (Lun,fmtf) nu, c1(i), ic1(i)
         nu = nu + 1.
       END DO
       WRITE (Lun,'(A)') '     NU   CASORATI 2'
-      nu = REAL( dnu1, 4 )
+      nu = REAL( dnu1, SP )
       DO i = 1, 5
         WRITE (Lun,fmtf) nu, c2(i), ic2(i)
         nu = nu + 1.
@@ -384,7 +385,7 @@ CONTAINS
     USE slatec, ONLY : DXADD, DXADJ, DXRED
     INTEGER i, Ic1(*), Ic2(*), Ierror, Ip(*), Iq(*), Ir(*), ix1, ix2, j, k, l, &
       lm1, mu, Mu1, Mu2, Nudiff
-    REAL(8) :: C1(*), C2(*), dmu, dmu1, nu, Dnu1, P(*), Q(*), R(*), Theta, sx, x1, x2
+    REAL(DP) :: C1(*), C2(*), dmu, dmu1, nu, Dnu1, P(*), Q(*), R(*), Theta, sx, x1, x2
     !
     !         PLACE ALL INPUT IN ADJUSTED FORM.
     !

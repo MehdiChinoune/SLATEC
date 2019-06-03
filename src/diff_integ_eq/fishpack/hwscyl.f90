@@ -308,11 +308,11 @@ SUBROUTINE HWSCYL(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER :: Idimf, Ierror, M, Mbdcnd, N, Nbdcnd
-  REAL :: A, B, C, D, Elmbda, Pertrb
-  REAL :: Bda(N+1), Bdb(N+1), Bdc(M+1), Bdd(M+1), F(Idimf,N+1), W(:)
+  REAL(SP) :: A, B, C, D, Elmbda, Pertrb
+  REAL(SP) :: Bda(N+1), Bdb(N+1), Bdc(M+1), Bdd(M+1), F(Idimf,N+1), W(:)
   INTEGER :: i, id2, id3, id4, id5, id6, ierr1, ij, istart, j, k, l, mp1, mstart, &
     mstop, munk, np, np1, nsp1, nstart, nstm1, nstop, nunk
-  REAL :: a1, a2, deltar, deltht, dlrby2, dlrsq, dlthsq, r, s, s1, s2
+  REAL(SP) :: a1, a2, deltar, deltht, dlrby2, dlrsq, dlthsq, r, s, s1, s2
   !* FIRST EXECUTABLE STATEMENT  HWSCYL
   Ierror = 0
   IF ( A<0. ) Ierror = 1

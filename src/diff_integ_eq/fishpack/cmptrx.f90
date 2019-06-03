@@ -28,9 +28,9 @@ SUBROUTINE CMPTRX(Idegbr,Idegcr,M,A,B,C,Y,Tcos,D,W)
   !   900402  Added TYPE section.  (WRB)
 
   INTEGER :: Idegbr, Idegcr, M
-  COMPLEX :: A(M), B(M), C(M), Y(:), Tcos(:), D(M), W(M)
+  COMPLEX(SP) :: A(M), B(M), C(M), Y(:), Tcos(:), D(M), W(M)
   INTEGER :: i, ip, k, l, lint, mm1, kb, kc
-  COMPLEX :: x, xx, z
+  COMPLEX(SP) :: x, xx, z
   !* FIRST EXECUTABLE STATEMENT  CMPTRX
   mm1 = M - 1
   kb = Idegbr + 1

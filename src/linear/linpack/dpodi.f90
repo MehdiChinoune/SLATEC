@@ -79,11 +79,11 @@ SUBROUTINE DPODI(A,Lda,N,Det,Job)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER Lda, N, Job
-  REAL(8) :: A(Lda,*)
-  REAL(8) :: Det(2)
+  REAL(DP) :: A(Lda,*)
+  REAL(DP) :: Det(2)
   !
-  REAL(8) :: t
-  REAL(8) :: s
+  REAL(DP) :: t
+  REAL(DP) :: s
   INTEGER i, j, jm1, k, kp1
   !* FIRST EXECUTABLE STATEMENT  DPODI
   !

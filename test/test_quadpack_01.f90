@@ -1,4 +1,5 @@
 MODULE TEST39_MOD
+  USE service, ONLY : SP, DP
   IMPLICIT NONE
 
 CONTAINS
@@ -25,7 +26,7 @@ CONTAINS
 
     ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
     INTEGER ierv(2), Lun
-    REAL a, abserr, b, epmach, epsabs, epsrel, error, &
+    REAL(SP) a, abserr, b, epmach, epsabs, epsrel, error, &
       result, uflow, work(400)
     INTEGER ier, ip, Ipass, iwork(100), key, Kprint, last, lenw, limit, neval
     REAL, PARAMETER :: pi = 0.31415926535897932E+01
@@ -138,7 +139,7 @@ CONTAINS
 
     ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
     INTEGER ierv(4), inf
-    REAL abserr, bound, epmach, epsabs, epsrel, error, &
+    REAL(SP) abserr, bound, epmach, epsabs, epsrel, error, &
       oflow, result, uflow, work(800)
     INTEGER ier, ip, Ipass, iwork(200), Kprint, last, lenw, limit, Lun, neval
     REAL, PARAMETER :: exact0 = 2.0E+00, exact1 = 0.115470066904E1
@@ -268,7 +269,7 @@ CONTAINS
 
     ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
     INTEGER ierv(4)
-    REAL a, abserr, b, epmach, epsabs, epsrel, error, &
+    REAL(SP) a, abserr, b, epmach, epsabs, epsrel, error, &
       oflow, points(5), result, uflow, work(405)
     INTEGER ier, ip, Ipass, iwork(205), Kprint, last, leniw, lenw, limit, &
       Lun, neval, npts2
@@ -413,7 +414,7 @@ CONTAINS
 
     ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
     INTEGER ierv(5), Lun
-    REAL a, abserr, b, epmach, epsabs, epsrel, error, &
+    REAL(SP) a, abserr, b, epmach, epsabs, epsrel, error, &
       oflow, result, uflow, work(800)
     INTEGER ier, ip, Ipass, iwork(200), Kprint, last, lenw, limit, neval
     REAL, PARAMETER :: exact0 = 0.2E+01
@@ -551,7 +552,7 @@ CONTAINS
     !
     ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
     INTEGER ierv(2), Lun
-    REAL a, abserr, b, epmach, epsabs, epsrel, error, &
+    REAL(SP) a, abserr, b, epmach, epsabs, epsrel, error, &
       c, result, uflow, work(800)
     INTEGER ier, ip, Ipass, iwork(200), Kprint, last, lenw, limit, neval
     REAL, PARAMETER :: exact0 = -0.6284617285065624E+03
@@ -654,7 +655,7 @@ CONTAINS
     !
     ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
     INTEGER ierv(3), integr, iwork(450), leniw, Lun, maxp1
-    REAL a, abserr, epsabs, epmach, error, omega, result, uflow, work(1425)
+    REAL(SP) a, abserr, epsabs, epmach, error, omega, result, uflow, work(1425)
     INTEGER ier, ip, Ipass, Kprint, lenw, limit, limlst, lst, neval
     REAL, PARAMETER :: exact0 = 0.1422552162575912E+01
     REAL, PARAMETER :: pi = 0.31415926535897932E+01
@@ -768,7 +769,7 @@ CONTAINS
     !
     ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
     INTEGER leniw
-    REAL a, abserr, b, epmach, epsabs, epsrel, error, &
+    REAL(SP) a, abserr, b, epmach, epsabs, epsrel, error, &
       oflow, omega, result, uflow, work(1325)
     INTEGER ier, ierv(4), integr, ip, Ipass, iwork(400), Kprint, last, lenw, &
       Lun, maxp1, neval
@@ -896,7 +897,7 @@ CONTAINS
 
     ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
     INTEGER ierv(2), Lun
-    REAL a, abserr, b, epmach, epsabs, epsrel, error, &
+    REAL(SP) a, abserr, b, epmach, epsabs, epsrel, error, &
       alfa, beta, result, uflow, work(800)
     INTEGER ier, ip, Ipass, iwork(200), Kprint, last, lenw, limit, neval, integr
     REAL, PARAMETER :: exact0 = 0.5350190569223644E+00
@@ -1001,7 +1002,7 @@ CONTAINS
 
     ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
     INTEGER Lun
-    REAL a, abserr, b, epmach, epsabs, epsrel, error, result, uflow
+    REAL(SP) a, abserr, b, epmach, epsabs, epsrel, error, result, uflow
     INTEGER ier, ierv(1), ip, Ipass, Kprint, neval
     REAL, PARAMETER :: exact1 = 0.7281029132255818E+00
     REAL, PARAMETER :: exact2 = 0.1E+02
@@ -1054,7 +1055,7 @@ CONTAINS
     END IF
   END SUBROUTINE CQNG
   !** F0C
-  REAL FUNCTION F0C(X)
+  REAL(SP) FUNCTION F0C(X)
     !>
     !  Subsidiary to
     !***
@@ -1068,12 +1069,12 @@ CONTAINS
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-    REAL X
+    REAL(SP) X
     !* FIRST EXECUTABLE STATEMENT  F0C
     F0C = 1.E0/(X*X+1.E-4)
   END FUNCTION F0C
   !** F0F
-  REAL FUNCTION F0F(X)
+  REAL(SP) FUNCTION F0F(X)
     !>
     !  Subsidiary to
     !***
@@ -1087,13 +1088,13 @@ CONTAINS
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-    REAL X
+    REAL(SP) X
     !* FIRST EXECUTABLE STATEMENT  F0F
     F0F = 0.0
     IF ( X/=0.0 ) F0F = SIN(0.5E+02*X)/(X*SQRT(X))
   END FUNCTION F0F
   !** F0O
-  REAL FUNCTION F0O(X)
+  REAL(SP) FUNCTION F0O(X)
     !>
     !  Subsidiary to
     !***
@@ -1107,12 +1108,12 @@ CONTAINS
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-    REAL X
+    REAL(SP) X
     !* FIRST EXECUTABLE STATEMENT  F0O
     F0O = (2.0E0*SIN(X))**14
   END FUNCTION F0O
   !** F0S
-  REAL FUNCTION F0S(X)
+  REAL(SP) FUNCTION F0S(X)
     !>
     !  Subsidiary to
     !***
@@ -1126,13 +1127,13 @@ CONTAINS
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-    REAL X
+    REAL(SP) X
     !* FIRST EXECUTABLE STATEMENT  F0S
     F0S = 0.0
     IF ( X/=0.0 ) F0S = 1.0/SQRT(X)
   END FUNCTION F0S
   !** F0WS
-  REAL FUNCTION F0WS(X)
+  REAL(SP) FUNCTION F0WS(X)
     !>
     !  Subsidiary to
     !***
@@ -1146,12 +1147,12 @@ CONTAINS
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-    REAL X
+    REAL(SP) X
     !* FIRST EXECUTABLE STATEMENT  F0WS
     F0WS = SIN(10.0*X)
   END FUNCTION F0WS
   !** F1C
-  REAL FUNCTION F1C(X)
+  REAL(SP) FUNCTION F1C(X)
     !>
     !  Subsidiary to
     !***
@@ -1165,13 +1166,13 @@ CONTAINS
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-    REAL X
+    REAL(SP) X
     !* FIRST EXECUTABLE STATEMENT  F1C
     F1C = 0.0
     IF ( X/=0.33 ) F1C = (X-0.5)*ABS(X-0.33)**(-0.9)
   END FUNCTION F1C
   !** F1F
-  REAL FUNCTION F1F(X)
+  REAL(SP) FUNCTION F1F(X)
     !>
     !  Subsidiary to
     !***
@@ -1185,7 +1186,7 @@ CONTAINS
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-    REAL X, x1, y
+    REAL(SP) X, x1, y
     !* FIRST EXECUTABLE STATEMENT  F1F
     x1 = X + 1.0
     F1F = 5.0/x1/x1
@@ -1193,7 +1194,7 @@ CONTAINS
     IF ( y>3.1415926535897932 ) F1F = 0.0
   END FUNCTION F1F
   !** F1G
-  REAL FUNCTION F1G(X)
+  REAL(SP) FUNCTION F1G(X)
     !>
     !  Subsidiary to
     !***
@@ -1207,13 +1208,13 @@ CONTAINS
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-    REAL X
+    REAL(SP) X
     REAL, PARAMETER :: pi = 3.1415926535897932
     !* FIRST EXECUTABLE STATEMENT  F1G
     F1G = 2.0/(2.0+SIN(10.0*pi*X))
   END FUNCTION F1G
   !** F1N
-  REAL FUNCTION F1N(X)
+  REAL(SP) FUNCTION F1N(X)
     !>
     !  Subsidiary to
     !***
@@ -1227,12 +1228,12 @@ CONTAINS
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-    REAL X
+    REAL(SP) X
     !* FIRST EXECUTABLE STATEMENT  F1N
     F1N = 1.0E0/(X**4+X**2+1.0E0)
   END FUNCTION F1N
   !** F1O
-  REAL FUNCTION F1O(X)
+  REAL(SP) FUNCTION F1O(X)
     !>
     !  Subsidiary to
     !***
@@ -1246,13 +1247,13 @@ CONTAINS
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-    REAL X
+    REAL(SP) X
     !* FIRST EXECUTABLE STATEMENT  F1O
     F1O = 1.0
     IF ( X>3.1415926535897932 ) F1O = 0.0
   END FUNCTION F1O
   !** F1P
-  REAL FUNCTION F1P(X)
+  REAL(SP) FUNCTION F1P(X)
     !>
     !  Subsidiary to
     !***
@@ -1266,7 +1267,7 @@ CONTAINS
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-    REAL alfa1, alfa2, X, d1, d2
+    REAL(SP) alfa1, alfa2, X, d1, d2
     !  P1 = 1/7, P2 = 2/3
     REAL, PARAMETER :: p1 = 0.1428571428571428E+00
     REAL, PARAMETER :: p2 = 0.6666666666666667E+00
@@ -1279,7 +1280,7 @@ CONTAINS
     IF ( d1/=0.0E+00.AND.d2/=0.0E+00 ) F1P = d1**alfa1 + d2**alfa2
   END FUNCTION F1P
   !** F1S
-  REAL FUNCTION F1S(X)
+  REAL(SP) FUNCTION F1S(X)
     !>
     !  Subsidiary to
     !***
@@ -1293,12 +1294,12 @@ CONTAINS
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-    REAL X
+    REAL(SP) X
     !* FIRST EXECUTABLE STATEMENT  F1S
     F1S = 0.2E+01/(0.2E+01+SIN(0.314159E+02*X))
   END FUNCTION F1S
   !** F1WS
-  REAL FUNCTION F1WS(X)
+  REAL(SP) FUNCTION F1WS(X)
     !>
     !  Subsidiary to
     !***
@@ -1312,12 +1313,12 @@ CONTAINS
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-    REAL X
+    REAL(SP) X
     !* FIRST EXECUTABLE STATEMENT  F1WS
     F1WS = ABS(X-0.33E+00)**(-0.999E+00)
   END FUNCTION F1WS
   !** F2G
-  REAL FUNCTION F2G(X)
+  REAL(SP) FUNCTION F2G(X)
     !>
     !  Subsidiary to
     !***
@@ -1331,12 +1332,12 @@ CONTAINS
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-    REAL X
+    REAL(SP) X
     !* FIRST EXECUTABLE STATEMENT  F2G
     F2G = X*SIN(0.3E+02*X)*COS(0.5E+02*X)
   END FUNCTION F2G
   !** F2N
-  REAL FUNCTION F2N(X)
+  REAL(SP) FUNCTION F2N(X)
     !>
     !  Subsidiary to
     !***
@@ -1350,12 +1351,12 @@ CONTAINS
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-    REAL X
+    REAL(SP) X
     !* FIRST EXECUTABLE STATEMENT  F2N
     F2N = X**(-0.9E+00)
   END FUNCTION F2N
   !** F2O
-  REAL FUNCTION F2O(X)
+  REAL(SP) FUNCTION F2O(X)
     !>
     !  Subsidiary to
     !***
@@ -1369,13 +1370,13 @@ CONTAINS
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-    REAL X
+    REAL(SP) X
     !* FIRST EXECUTABLE STATEMENT  F2O
     F2O = 0.0E+00
     IF ( X/=0.0E+00 ) F2O = 1.0/(X*X*SQRT(X))
   END FUNCTION F2O
   !** F2P
-  REAL FUNCTION F2P(X)
+  REAL(SP) FUNCTION F2P(X)
     !>
     !  Subsidiary to
     !***
@@ -1389,12 +1390,12 @@ CONTAINS
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-    REAL X
+    REAL(SP) X
     !* FIRST EXECUTABLE STATEMENT  F2P
     F2P = SIN(0.314159E+03*X)/(0.314159E+01*X)
   END FUNCTION F2P
   !** F2S
-  REAL FUNCTION F2S(X)
+  REAL(SP) FUNCTION F2S(X)
     !>
     !  Subsidiary to
     !***
@@ -1408,13 +1409,13 @@ CONTAINS
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-    REAL X
+    REAL(SP) X
     !* FIRST EXECUTABLE STATEMENT  F2S
     F2S = 100.0
     IF ( X/=0.0 ) F2S = SIN(0.314159E+03*X)/(0.314159E+01*X)
   END FUNCTION F2S
   !** F3G
-  REAL FUNCTION F3G(X)
+  REAL(SP) FUNCTION F3G(X)
     !>
     !  Subsidiary to
     !***
@@ -1428,12 +1429,12 @@ CONTAINS
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-    REAL X
+    REAL(SP) X
     !* FIRST EXECUTABLE STATEMENT  F3G
     F3G = ABS(X-0.33E+00)**(-0.9E+00)
   END FUNCTION F3G
   !** F3P
-  REAL FUNCTION F3P(X)
+  REAL(SP) FUNCTION F3P(X)
     !>
     !  Subsidiary to
     !***
@@ -1447,13 +1448,13 @@ CONTAINS
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-    REAL X
+    REAL(SP) X
     !* FIRST EXECUTABLE STATEMENT  F3P
     F3P = 1.0
     IF ( X>3.1415926535897932 ) F3P = 0.0
   END FUNCTION F3P
   !** F3S
-  REAL FUNCTION F3S(X)
+  REAL(SP) FUNCTION F3S(X)
     !>
     !  Subsidiary to
     !***
@@ -1467,13 +1468,13 @@ CONTAINS
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-    REAL X
+    REAL(SP) X
     !* FIRST EXECUTABLE STATEMENT  F3S
     F3S = 0.1E+01
     IF ( X>3.1415926535897932 ) F3S = 0.0
   END FUNCTION F3S
   !** F4P
-  REAL FUNCTION F4P(X)
+  REAL(SP) FUNCTION F4P(X)
     !>
     !  Subsidiary to
     !***
@@ -1487,13 +1488,13 @@ CONTAINS
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-    REAL X
+    REAL(SP) X
     !* FIRST EXECUTABLE STATEMENT  F4P
     F4P = 0.0
     IF ( X>0.0 ) F4P = 1.0/(X*SQRT(X))
   END FUNCTION F4P
   !** F4S
-  REAL FUNCTION F4S(X)
+  REAL(SP) FUNCTION F4S(X)
     !>
     !  Subsidiary to
     !***
@@ -1507,7 +1508,7 @@ CONTAINS
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-    REAL X
+    REAL(SP) X
     !* FIRST EXECUTABLE STATEMENT  F4S
     IF ( X==.33E+00 ) THEN
       F4S = 0.0
@@ -1518,7 +1519,7 @@ CONTAINS
     RETURN
   END FUNCTION F4S
   !** F5S
-  REAL FUNCTION F5S(X)
+  REAL(SP) FUNCTION F5S(X)
     !>
     !  Subsidiary to
     !***
@@ -1532,13 +1533,13 @@ CONTAINS
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-    REAL X
+    REAL(SP) X
     !* FIRST EXECUTABLE STATEMENT  F5S
     F5S = 0.0
     IF ( X/=0.0 ) F5S = 1.0/(X*SQRT(X))
   END FUNCTION F5S
   !** T0
-  REAL FUNCTION T0(X)
+  REAL(SP) FUNCTION T0(X)
     !>
     !  Subsidiary to
     !***
@@ -1552,7 +1553,7 @@ CONTAINS
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-    REAL a, b, X, x1, y
+    REAL(SP) a, b, X, x1, y
     !* FIRST EXECUTABLE STATEMENT  T0
     a = 0.0E+00
     b = 0.1E+01
@@ -1561,7 +1562,7 @@ CONTAINS
     T0 = (b-a)*F0S(y)/x1/x1
   END FUNCTION T0
   !** T1
-  REAL FUNCTION T1(X)
+  REAL(SP) FUNCTION T1(X)
     !>
     !  Subsidiary to
     !***
@@ -1575,7 +1576,7 @@ CONTAINS
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-    REAL a, b, X, x1, y
+    REAL(SP) a, b, X, x1, y
     !* FIRST EXECUTABLE STATEMENT  T1
     a = 0.0E+00
     b = 0.1E+01
@@ -1584,7 +1585,7 @@ CONTAINS
     T1 = (b-a)*F1S(y)/x1/x1
   END FUNCTION T1
   !** T2
-  REAL FUNCTION T2(X)
+  REAL(SP) FUNCTION T2(X)
     !>
     !  Subsidiary to
     !***
@@ -1598,7 +1599,7 @@ CONTAINS
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-    REAL a, b, X, x1, y
+    REAL(SP) a, b, X, x1, y
     !* FIRST EXECUTABLE STATEMENT  T2
     a = 0.1E+00
     b = 0.1E+01
@@ -1607,7 +1608,7 @@ CONTAINS
     T2 = (b-a)*F2S(y)/x1/x1
   END FUNCTION T2
   !** T3
-  REAL FUNCTION T3(X)
+  REAL(SP) FUNCTION T3(X)
     !>
     !  Subsidiary to
     !***
@@ -1621,7 +1622,7 @@ CONTAINS
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-    REAL a, b, X, x1, y
+    REAL(SP) a, b, X, x1, y
     !* FIRST EXECUTABLE STATEMENT  T3
     a = 0.0E+00
     b = 0.5E+01
@@ -1630,7 +1631,7 @@ CONTAINS
     T3 = (b-a)*F3S(y)/x1/x1
   END FUNCTION T3
   !** T4
-  REAL FUNCTION T4(X)
+  REAL(SP) FUNCTION T4(X)
     !>
     !  Subsidiary to
     !***
@@ -1644,7 +1645,7 @@ CONTAINS
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-    REAL a, b, X, x1, y
+    REAL(SP) a, b, X, x1, y
     !* FIRST EXECUTABLE STATEMENT  T4
     a = 0.0E+00
     b = 0.1E+01
@@ -1653,7 +1654,7 @@ CONTAINS
     T4 = (b-a)*F4S(y)/x1/x1
   END FUNCTION T4
   !** T5
-  REAL FUNCTION T5(X)
+  REAL(SP) FUNCTION T5(X)
     !>
     !  Subsidiary to
     !***
@@ -1667,7 +1668,7 @@ CONTAINS
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-    REAL a, b, X, x1, y
+    REAL(SP) a, b, X, x1, y
     !* FIRST EXECUTABLE STATEMENT  T5
     a = 0.0E+00
     b = 0.1E+01
@@ -1705,12 +1706,12 @@ CONTAINS
     !   910627  Code completely rewritten.  (WRB)
 
     !     .. Scalar Arguments ..
-    REAL Abserr, Exact, Result
+    REAL(SP) Abserr, Exact, Result
     INTEGER Ip, Kprint, Lierv, Lun, Neval, Num1
     !     .. Array Arguments ..
     INTEGER Ierv(Lierv)
     !     .. Local Scalars ..
-    REAL error
+    REAL(SP) error
     INTEGER ier, k
     !     .. Intrinsic Functions ..
     INTRINSIC ABS

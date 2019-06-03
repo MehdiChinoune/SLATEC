@@ -220,12 +220,12 @@ SUBROUTINE PCHIC(Ic,Vc,Switch,N,X,F,D,Incfd,Wk,Nwk,Ierr)
   !  DECLARE ARGUMENTS.
   !
   INTEGER Ic(2), N, Incfd, Nwk, Ierr
-  REAL Vc(2), Switch, X(N), F(Incfd,N), D(Incfd,N), Wk(Nwk)
+  REAL(SP) Vc(2), Switch, X(N), F(Incfd,N), D(Incfd,N), Wk(Nwk)
   !
   !  DECLARE LOCAL VARIABLES.
   !
   INTEGER i, ibeg, iend, nless1
-  REAL, PARAMETER :: zero = 0.
+  REAL(SP), PARAMETER :: zero = 0.
   !
   !  VALIDITY-CHECK ARGUMENTS.
   !

@@ -108,11 +108,11 @@ SUBROUTINE DQRDC(X,Ldx,N,P,Qraux,Jpvt,Work,Job)
   INTEGER jj
   INTEGER Ldx, N, P, Job
   INTEGER Jpvt(*)
-  REAL(8) :: X(Ldx,*), Qraux(*), Work(*)
+  REAL(DP) :: X(Ldx,*), Qraux(*), Work(*)
   !
   INTEGER j, jp, l, lp1, lup, maxj, pl, pu
-  REAL(8) :: maxnrm, tt
-  REAL(8) :: nrmxl, t
+  REAL(DP) :: maxnrm, tt
+  REAL(DP) :: nrmxl, t
   LOGICAL negj, swapj
   !
   !* FIRST EXECUTABLE STATEMENT  DQRDC

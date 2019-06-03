@@ -1,9 +1,10 @@
 MODULE TEST19_MOD
+  USE service, ONLY : SP, DP
   IMPLICIT NONE
 
 CONTAINS
   !** DBEG
-  REAL(8) FUNCTION DBEG(Reset)
+  REAL(DP) FUNCTION DBEG(Reset)
     !>
     !  Generate random numbers.
     !***
@@ -55,7 +56,7 @@ CONTAINS
         ic = 0
         CYCLE
       END IF
-      DBEG = REAL(i-500, 8)/1001.0D0
+      DBEG = REAL( i-500, DP )/1001.0D0
       EXIT
     END DO
     !
@@ -100,18 +101,18 @@ CONTAINS
     USE slatec, ONLY : R1MACH, XERCLR
     !     .. Parameters ..
     INTEGER, PARAMETER :: NSUBS = 16
-    REAL(8), PARAMETER :: ZERO = 0.0D0, ONE = 1.0D0
+    REAL(DP), PARAMETER :: ZERO = 0.0D0, ONE = 1.0D0
     INTEGER, PARAMETER :: NMAX = 65, INCMAX = 2
     !     .. Scalar Arguments ..
     INTEGER Ipass, Kprint
     !     .. Local Scalars ..
-    REAL(8) :: eps, err, thresh
+    REAL(DP) :: eps, err, thresh
     INTEGER i, isnum, j, n, Nout
     INTEGER, PARAMETER :: NIDIM = 6, NKB = 4, NINC = 4, NALF = 3, NBET = 3
     LOGICAL same, tsterr, ftl, ftl1, ftl2
     CHARACTER :: trans
     !     .. Local Arrays ..
-    REAL(8) :: a(NMAX,NMAX), aa(NMAX*NMAX), as(NMAX*NMAX), &
+    REAL(DP) :: a(NMAX,NMAX), aa(NMAX*NMAX), as(NMAX*NMAX), &
       g(NMAX), x(NMAX), xs(NMAX*INCMAX), xx(NMAX*INCMAX), y(NMAX), ys(NMAX*INCMAX), &
       yt(NMAX), yy(NMAX*INCMAX), z(2*NMAX)
     LOGICAL ltest(NSUBS)
@@ -124,8 +125,8 @@ CONTAINS
     INTEGER, PARAMETER :: idimm(NIDIM) = [ 0, 1, 2, 3, 5, 9 ]
     INTEGER, PARAMETER :: kb(NKB) = [ 0, 1, 2, 4 ]
     INTEGER, PARAMETER :: inc(NINC) = [ 1, 2, -1, -2 ]
-    REAL(8), PARAMETER :: alf(NALF) = [ 0.0, 1.0, 0.7 ]
-    REAL(8), PARAMETER :: bet(NBET) = [ 0.0, 1.0, 0.9 ]
+    REAL(DP), PARAMETER :: alf(NALF) = [ 0.0, 1.0, 0.7 ]
+    REAL(DP), PARAMETER :: bet(NBET) = [ 0.0, 1.0, 0.9 ]
     !* FIRST EXECUTABLE STATEMENT  DBLAT2
     !     Set the flag that indicates whether error exits are to be tested.
     tsterr = .TRUE.
@@ -300,18 +301,18 @@ CONTAINS
     USE slatec, ONLY : R1MACH, XERCLR
     !     .. Parameters ..
     INTEGER, PARAMETER :: NSUBS = 6
-    REAL(8), PARAMETER :: ZERO = 0.0D0, ONE = 1.0D0
+    REAL(DP), PARAMETER :: ZERO = 0.0D0, ONE = 1.0D0
     INTEGER, PARAMETER :: NMAX = 65
     !     .. Scalar Arguments ..
     INTEGER Ipass, Kprint
     !     .. Local Scalars ..
-    REAL(8) :: eps, err, thresh
+    REAL(DP) :: eps, err, thresh
     INTEGER i, isnum, j, n, Nout
     INTEGER, PARAMETER :: NIDIM = 6, NALF = 3, NBET = 3
     LOGICAL same, tsterr, ftl, ftl1, ftl2
     CHARACTER :: transa, transb
     !     .. Local Arrays ..
-    REAL(8) :: ab(NMAX,2*NMAX), aa(NMAX*NMAX), as(NMAX*NMAX), g(NMAX), bb(NMAX*NMAX), &
+    REAL(DP) :: ab(NMAX,2*NMAX), aa(NMAX*NMAX), as(NMAX*NMAX), g(NMAX), bb(NMAX*NMAX), &
       bs(NMAX*NMAX), c(NMAX,NMAX), cc(NMAX*NMAX), cs(NMAX*NMAX), ct(NMAX), w(2*NMAX)
     LOGICAL ltest(NSUBS)
     !     .. Intrinsic Functions ..
@@ -320,8 +321,8 @@ CONTAINS
     CHARACTER(6), PARAMETER :: snames(NSUBS)  = [ 'DGEMM ', 'DSYMM ', 'DTRMM ', &
       'DTRSM ', 'DSYRK ', 'DSYR2K' ]
     INTEGER, PARAMETER :: idimm(NIDIM) = [ 0, 1, 2, 3, 5, 9 ]
-    REAL(8), PARAMETER :: alf(NALF) = [ 0.0, 1.0, 0.7 ]
-    REAL(8), PARAMETER :: bet(NBET) = [ 0.0, 1.0, 1.3 ]
+    REAL(DP), PARAMETER :: alf(NALF) = [ 0.0, 1.0, 0.7 ]
+    REAL(DP), PARAMETER :: bet(NBET) = [ 0.0, 1.0, 1.3 ]
     !* FIRST EXECUTABLE STATEMENT  DBLAT3
     !     Set the flag that indicates whether error exits are to be tested.
     tsterr = .TRUE.
@@ -505,16 +506,16 @@ CONTAINS
     !   910620  Modified to meet SLATEC code and prologue standards.  (BKS)
 
     !     .. Parameters ..
-    REAL(8), PARAMETER :: ZERO = 0.0D0, ONE = 1.0D0
-    REAL(8), PARAMETER :: ROGUE = -1.0D10
+    REAL(DP), PARAMETER :: ZERO = 0.0D0, ONE = 1.0D0
+    REAL(DP), PARAMETER :: ROGUE = -1.0D10
     !     .. Scalar Arguments ..
-    REAL(8) :: Transl
+    REAL(DP) :: Transl
     INTEGER Kl, Ku, Lda, M, N, Nmax
     LOGICAL Reset
     CHARACTER :: Diag, Uplo
     CHARACTER(2) :: Type
     !     .. Array Arguments ..
-    REAL(8) :: A(Nmax,*), Aa(*)
+    REAL(DP) :: A(Nmax,*), Aa(*)
     !     .. Local Scalars ..
     INTEGER i, i1, i2, i3, ibeg, iend, ioff, j, kk
     LOGICAL gen, lower, sym, tri, unit, upper
@@ -685,16 +686,16 @@ CONTAINS
     !   910620  Modified to meet SLATEC code and prologue standards.  (BKS)
 
     !     .. Parameters ..
-    REAL(8), PARAMETER :: ZERO = 0.0D0, ONE = 1.0D0
-    REAL(8), PARAMETER :: ROGUE = -1.0D10
+    REAL(DP), PARAMETER :: ZERO = 0.0D0, ONE = 1.0D0
+    REAL(DP), PARAMETER :: ROGUE = -1.0D10
     !     .. Scalar Arguments ..
-    REAL(8) :: Transl
+    REAL(DP) :: Transl
     INTEGER Lda, M, N, Nmax
     LOGICAL Reset
     CHARACTER :: Diag, Uplo
     CHARACTER(2) :: Type
     !     .. Array Arguments ..
-    REAL(8) :: A(Nmax,*), Aa(*)
+    REAL(DP) :: A(Nmax,*), Aa(*)
     !     .. Local Scalars ..
     INTEGER i, ibeg, iend, j
     LOGICAL gen, lower, sym, tri, unit, upper
@@ -800,17 +801,17 @@ CONTAINS
     !   910620  Modified to meet SLATEC code and prologue standards.  (BKS)
 
     !     .. Parameters ..
-    REAL(8), PARAMETER :: ZERO = 0.0D0, ONE = 1.0D0
+    REAL(DP), PARAMETER :: ZERO = 0.0D0, ONE = 1.0D0
     !     .. Scalar Arguments ..
     LOGICAL Ftl
-    REAL(8) :: Alpha, Beta, Eps, Err
+    REAL(DP) :: Alpha, Beta, Eps, Err
     INTEGER Kk, Kprint, Lda, Ldb, Ldc, Ldcc, M, N, Nout
     LOGICAL Mv
     CHARACTER :: Transa, Transb
     !     .. Array Arguments ..
-    REAL(8) :: A(Lda,*), B(Ldb,*), C(Ldc,*), Cc(Ldcc,*), Ct(*), G(*)
+    REAL(DP) :: A(Lda,*), B(Ldb,*), C(Ldc,*), Cc(Ldcc,*), Ct(*), G(*)
     !     .. Local Scalars ..
-    REAL(8) :: erri
+    REAL(DP) :: erri
     INTEGER i, j, k
     LOGICAL trana, tranb
     !     .. Intrinsic Functions ..
@@ -920,16 +921,16 @@ CONTAINS
     !   910620  Modified to meet SLATEC code and prologue standards.  (BKS)
 
     !     .. Parameters ..
-    REAL(8), PARAMETER :: ZERO = 0.0D0, ONE = 1.0D0
+    REAL(DP), PARAMETER :: ZERO = 0.0D0, ONE = 1.0D0
     !     .. Scalar Arguments ..
-    REAL(8) :: Alpha, Beta, Eps, Err
+    REAL(DP) :: Alpha, Beta, Eps, Err
     INTEGER Incx, Incy, Kprint, M, N, Nmax, Nout
     LOGICAL Mv, Ftl
     CHARACTER :: Trans
     !     .. Array Arguments ..
-    REAL(8) :: A(Nmax,*), G(*), X(*), Y(*), Yt(*), Yy(*)
+    REAL(DP) :: A(Nmax,*), G(*), X(*), Y(*), Yt(*), Yy(*)
     !     .. Local Scalars ..
-    REAL(8) :: erri
+    REAL(DP) :: erri
     INTEGER i, incxl, incyl, iy, j, jx, k, kx, ky, ml, nl
     LOGICAL tran
     !     .. Intrinsic Functions ..
@@ -1041,7 +1042,7 @@ CONTAINS
     !     .. Scalar Arguments ..
     INTEGER Lr
     !     .. Array Arguments ..
-    REAL(8) :: Ri(*), Rj(*)
+    REAL(DP) :: Ri(*), Rj(*)
     !     .. Local Scalars ..
     INTEGER i
     !* FIRST EXECUTABLE STATEMENT  LDE
@@ -1087,7 +1088,7 @@ CONTAINS
     CHARACTER :: Uplo
     CHARACTER(2) :: Type
     !     .. Array Arguments ..
-    REAL(8) :: Aa(Lda,*), As(Lda,*)
+    REAL(DP) :: Aa(Lda,*), As(Lda,*)
     !     .. Local Scalars ..
     INTEGER i, ibeg, iend, j
     LOGICAL upper
@@ -1153,19 +1154,19 @@ CONTAINS
     !   910619  Modified to meet SLATEC code and prologue standards. (BKS)
     USE slatec, ONLY : DGBMV, DGEMV, NUMXER
     !     .. Parameters ..
-    REAL(8), PARAMETER :: ZERO = 0.0D0, HALF = 0.5D0
+    REAL(DP), PARAMETER :: ZERO = 0.0D0, HALF = 0.5D0
     !     .. Scalar Arguments ..
     LOGICAL Fatal
-    REAL(8) :: Eps, Thresh
+    REAL(DP) :: Eps, Thresh
     INTEGER Incmax, Kprint, Nalf, Nbet, Nidim, Ninc, Nkb, Nmax, Nout
     CHARACTER(6) :: Sname
     !     .. Array Arguments ..
-    REAL(8) :: A(Nmax,Nmax), Aa(Nmax*Nmax), Alf(Nalf), As(Nmax*Nmax), &
+    REAL(DP) :: A(Nmax,Nmax), Aa(Nmax*Nmax), Alf(Nalf), As(Nmax*Nmax), &
       Bet(Nbet), G(Nmax), X(Nmax), Xs(Nmax*Incmax), &
       Xx(Nmax*Incmax), Y(Nmax), Ys(Nmax*Incmax), Yt(Nmax), Yy(Nmax*Incmax)
     INTEGER Idimm(Nidim), Inc(Ninc), Kb(Nkb)
     !     .. Local Scalars ..
-    REAL(8) :: alpha, als, beta, bls, err, errmax, transl
+    REAL(DP) :: alpha, als, beta, bls, err, errmax, transl
     INTEGER i, ia, ib, ic, iku, im, in, incx, incxs, incy, incys, &
       ix, iy, kl, kls, ku, kus, laa, lda, ldas, lx, ly, m, &
       ml, ms, n, nargs, nc, nd, nk, nl, ns, nerr
@@ -1456,19 +1457,19 @@ CONTAINS
     !   910619  Modified to meet SLATEC code and prologue standards. (BKS)
     USE slatec, ONLY : DGEMM, NUMXER
     !     .. Parameters ..
-    REAL(8), PARAMETER :: ZERO = 0.0D0
+    REAL(DP), PARAMETER :: ZERO = 0.0D0
     !     .. Scalar Arguments ..
     LOGICAL Fatal
-    REAL(8) :: Eps, Thresh
+    REAL(DP) :: Eps, Thresh
     INTEGER Kprint, Nalf, Nbet, Nidim, Nmax, Nout
     CHARACTER(6) :: Sname
     !     .. Array Arguments ..
-    REAL(8) :: A(Nmax,Nmax), Aa(Nmax*Nmax), Alf(Nalf), As(Nmax*Nmax), &
+    REAL(DP) :: A(Nmax,Nmax), Aa(Nmax*Nmax), Alf(Nalf), As(Nmax*Nmax), &
       G(Nmax), Bb(Nmax*Nmax), Bet(Nbet), Bs(Nmax*Nmax), &
       C(Nmax,Nmax), Cc(Nmax*Nmax), Cs(Nmax*Nmax), Ct(Nmax), B(Nmax,Nmax)
     INTEGER Idimm(Nidim)
     !     .. Local Scalars ..
-    REAL(8) :: alpha, als, beta, bls, err, errmax
+    REAL(DP) :: alpha, als, beta, bls, err, errmax
     INTEGER i, ia, ib, ica, icb, ik, im, in, k, ks, laa, lbb, &
       lcc, lda, ldas, ldb, ldbs, ldc, ldcs, m, ma, mb, ms, &
       n, na, nargs, nb, nc, nerr, ns
@@ -1714,19 +1715,19 @@ CONTAINS
     !   910619  Modified to meet SLATEC code and prologue standards. (BKS)
     USE slatec, ONLY : DSBMV, DSPMV, DSYMV, NUMXER
     !     .. Parameters ..
-    REAL(8), PARAMETER :: ZERO = 0.0D0, HALF = 0.5D0
+    REAL(DP), PARAMETER :: ZERO = 0.0D0, HALF = 0.5D0
     !     .. Scalar Arguments ..
     LOGICAL Fatal
-    REAL(8) :: Eps, Thresh
+    REAL(DP) :: Eps, Thresh
     INTEGER Incmax, Kprint, Nalf, Nbet, Nidim, Ninc, Nkb, Nmax, Nout
     CHARACTER(6) :: Sname
     !     .. Array Arguments ..
-    REAL(8) :: A(Nmax,Nmax), Aa(Nmax*Nmax), Alf(Nalf), As(Nmax*Nmax), &
+    REAL(DP) :: A(Nmax,Nmax), Aa(Nmax*Nmax), Alf(Nalf), As(Nmax*Nmax), &
       Bet(Nbet), G(Nmax), X(Nmax), Xs(Nmax*Incmax), &
       Xx(Nmax*Incmax), Y(Nmax), Ys(Nmax*Incmax), Yt(Nmax), Yy(Nmax*Incmax)
     INTEGER Idimm(Nidim), Inc(Ninc), Kb(Nkb)
     !     .. Local Scalars ..
-    REAL(8) :: alpha, als, beta, bls, err, errmax, transl
+    REAL(DP) :: alpha, als, beta, bls, err, errmax, transl
     INTEGER i, ia, ib, ic, ik, in, incx, incxs, incy, incys, ix, &
       iy, k, ks, laa, lda, ldas, lx, ly, n, nargs, nc, nk, ns, nerr
     LOGICAL banded, ftl, full, nul, packed, reset
@@ -2018,19 +2019,19 @@ CONTAINS
     !   910619  Modified to meet SLATEC code and prologue standards. (BKS)
     USE slatec, ONLY : DSYMM, NUMXER
     !     .. Parameters ..
-    REAL(8), PARAMETER :: ZERO = 0.0D0
+    REAL(DP), PARAMETER :: ZERO = 0.0D0
     !     .. Scalar Arguments ..
     LOGICAL Fatal
-    REAL(8) :: Eps, Thresh
+    REAL(DP) :: Eps, Thresh
     INTEGER Kprint, Nalf, Nbet, Nidim, Nmax, Nout
     CHARACTER(6) :: Sname
     !     .. Array Arguments ..
-    REAL(8) :: A(Nmax,Nmax), Aa(Nmax*Nmax), Alf(Nalf), As(Nmax*Nmax), &
+    REAL(DP) :: A(Nmax,Nmax), Aa(Nmax*Nmax), Alf(Nalf), As(Nmax*Nmax), &
       G(Nmax), Bb(Nmax*Nmax), Bet(Nbet), Bs(Nmax*Nmax), &
       C(Nmax,Nmax), Cc(Nmax*Nmax), Cs(Nmax*Nmax), Ct(Nmax), B(Nmax,Nmax)
     INTEGER Idimm(Nidim)
     !     .. Local Scalars ..
-    REAL(8) :: alpha, als, beta, bls, err, errmax
+    REAL(DP) :: alpha, als, beta, bls, err, errmax
     INTEGER i, ia, ib, ics, icu, im, in, laa, lbb, lcc, lda, ldas, &
       ldb, ldbs, ldc, ldcs, m, ms, n, na, nargs, nc, nerr, ns
     LOGICAL ftl, left, nul, reset
@@ -2262,18 +2263,18 @@ CONTAINS
     !   910619  Modified to meet SLATEC code and prologue standards. (BKS)
     USE slatec, ONLY : DTBMV, DTBSV, DTPMV, DTPSV, DTRMV, DTRSV, NUMXER
     !     .. Parameters ..
-    REAL(8), PARAMETER :: ZERO = 0.0D0, HALF = 0.5D0, ONE = 1.0D0
+    REAL(DP), PARAMETER :: ZERO = 0.0D0, HALF = 0.5D0, ONE = 1.0D0
     !     .. Scalar Arguments ..
     LOGICAL Fatal
-    REAL(8) :: Eps, Thresh
+    REAL(DP) :: Eps, Thresh
     INTEGER Incmax, Kprint, Nidim, Ninc, Nkb, Nmax, Nout
     CHARACTER(6) :: Sname
     !     .. Array Arguments ..
-    REAL(8) :: A(Nmax,Nmax), Aa(Nmax*Nmax), As(Nmax*Nmax), G(Nmax), &
+    REAL(DP) :: A(Nmax,Nmax), Aa(Nmax*Nmax), As(Nmax*Nmax), G(Nmax), &
       X(Nmax), Xs(Nmax*Incmax), Xt(Nmax), Xx(Nmax*Incmax), Z(Nmax)
     INTEGER Idimm(Nidim), Inc(Ninc), Kb(Nkb)
     !     .. Local Scalars ..
-    REAL(8) :: err, errmax, transl
+    REAL(DP) :: err, errmax, transl
     INTEGER i, icd, ict, icu, ik, in, incx, incxs, ix, k, ks, laa, &
       lda, ldas, lx, n, nargs, nc, nk, ns, nerr
     LOGICAL banded, ftl, full, nul, packed, reset
@@ -2567,19 +2568,19 @@ CONTAINS
     !   910619  Modified to meet SLATEC code and prologue standards. (BKS)
     USE slatec, ONLY : DTRMM, DTRSM, NUMXER
     !     .. Parameters ..
-    REAL(8), PARAMETER :: ZERO = 0.0D0, ONE = 1.0D0
+    REAL(DP), PARAMETER :: ZERO = 0.0D0, ONE = 1.0D0
     !     .. Scalar Arguments ..
     LOGICAL Fatal
-    REAL(8) :: Eps, Thresh
+    REAL(DP) :: Eps, Thresh
     INTEGER Kprint, Nalf, Nidim, Nmax, Nout
     CHARACTER(6) :: Sname
     !     .. Array Arguments ..
-    REAL(8) :: A(Nmax,Nmax), Aa(Nmax*Nmax), Alf(Nalf), As(Nmax*Nmax), &
+    REAL(DP) :: A(Nmax,Nmax), Aa(Nmax*Nmax), Alf(Nalf), As(Nmax*Nmax), &
       G(Nmax), Bb(Nmax*Nmax), Bs(Nmax*Nmax), C(Nmax,Nmax), &
       Ct(Nmax), B(Nmax,Nmax)
     INTEGER Idimm(Nidim)
     !     .. Local Scalars ..
-    REAL(8) :: alpha, als, err, errmax
+    REAL(DP) :: alpha, als, err, errmax
     INTEGER i, ia, icd, ics, ict, icu, im, in, j, laa, lbb, lda, &
       ldas, ldb, ldbs, m, ms, n, na, nargs, nc, nerr, ns
     LOGICAL ftl, left, nul, reset
@@ -2829,24 +2830,24 @@ CONTAINS
     !   910619  Modified to meet SLATEC code and prologue standards. (BKS)
     USE slatec, ONLY : DGER, NUMXER
     !     .. Parameters ..
-    REAL(8), PARAMETER :: ZERO = 0.0D0, HALF = 0.5D0, ONE = 1.0D0
+    REAL(DP), PARAMETER :: ZERO = 0.0D0, HALF = 0.5D0, ONE = 1.0D0
     !     .. Scalar Arguments ..
     LOGICAL Fatal
-    REAL(8) :: Eps, Thresh
+    REAL(DP) :: Eps, Thresh
     INTEGER Incmax, Kprint, Nalf, Nidim, Ninc, Nmax, Nout
     CHARACTER(6) :: Sname
     !     .. Array Arguments ..
-    REAL(8) :: A(Nmax,Nmax), Aa(Nmax*Nmax), Alf(Nalf), As(Nmax*Nmax), &
+    REAL(DP) :: A(Nmax,Nmax), Aa(Nmax*Nmax), Alf(Nalf), As(Nmax*Nmax), &
       G(Nmax), X(Nmax), Xs(Nmax*Incmax), Xx(Nmax*Incmax), &
       Y(Nmax), Ys(Nmax*Incmax), Yt(Nmax), Yy(Nmax*Incmax), Z(Nmax)
     INTEGER Idimm(Nidim), Inc(Ninc)
     !     .. Local Scalars ..
-    REAL(8) :: alpha, als, err, errmax, transl
+    REAL(DP) :: alpha, als, err, errmax, transl
     INTEGER i, ia, im, in, incx, incxs, incy, incys, ix, iy, j, &
       laa, lda, ldas, lx, ly, m, ms, n, nargs, nc, nd, ns, nerr
     LOGICAL ftl, nul, reset
     !     .. Local Arrays ..
-    REAL(8) :: w(1)
+    REAL(DP) :: w(1)
     LOGICAL isame(13)
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, MAX, MIN
@@ -3068,18 +3069,18 @@ CONTAINS
     !   910619  Modified to meet SLATEC code and prologue standards. (BKS)
     USE slatec, ONLY : DSYRK, NUMXER
     !     .. Parameters ..
-    REAL(8), PARAMETER :: ZERO = 0.0D0
+    REAL(DP), PARAMETER :: ZERO = 0.0D0
     !     .. Scalar Arguments ..
     LOGICAL Fatal
-    REAL(8) :: Eps, Thresh
+    REAL(DP) :: Eps, Thresh
     INTEGER Kprint, Nalf, Nbet, Nidim, Nmax, Nout
     CHARACTER(6) :: Sname
     !     .. Array Arguments ..
-    REAL(8) :: A(Nmax,Nmax), Aa(Nmax*Nmax), Alf(Nalf), As(Nmax*Nmax), &
+    REAL(DP) :: A(Nmax,Nmax), Aa(Nmax*Nmax), Alf(Nalf), As(Nmax*Nmax), &
       G(Nmax), Bet(Nbet), C(Nmax,Nmax), Cc(Nmax*Nmax), Ct(Nmax), Cs(Nmax*Nmax)
     INTEGER Idimm(Nidim)
     !     .. Local Scalars ..
-    REAL(8) :: alpha, als, beta, bets, err, errmax
+    REAL(DP) :: alpha, als, beta, bets, err, errmax
     INTEGER i, ia, ib, ict, icu, ik, in, j, jc, jj, k, ks, laa, &
       lcc, lda, ldas, ldc, ldcs, lj, ma, n, na, nerr, ns, nargs, nc
     LOGICAL ftl, nul, reset, tran, upper
@@ -3311,24 +3312,24 @@ CONTAINS
     !   910619  Modified to meet SLATEC code and prologue standards. (BKS)
     USE slatec, ONLY : DSPR, DSYR, NUMXER
     !     .. Parameters ..
-    REAL(8), PARAMETER :: ZERO = 0.0D0, HALF = 0.5D0, ONE = 1.0D0
+    REAL(DP), PARAMETER :: ZERO = 0.0D0, HALF = 0.5D0, ONE = 1.0D0
     !     .. Scalar Arguments ..
     LOGICAL Fatal
-    REAL(8) :: Eps, Thresh
+    REAL(DP) :: Eps, Thresh
     INTEGER Incmax, Kprint, Nalf, Nidim, Ninc, Nmax, Nout
     CHARACTER(6) :: Sname
     !     .. Array Arguments ..
-    REAL(8) :: A(Nmax,Nmax), Aa(Nmax*Nmax), Alf(Nalf), As(Nmax*Nmax), &
+    REAL(DP) :: A(Nmax,Nmax), Aa(Nmax*Nmax), Alf(Nalf), As(Nmax*Nmax), &
       G(Nmax), X(Nmax), Xs(Nmax*Incmax), Xx(Nmax*Incmax), Yt(Nmax), Z(Nmax)
     INTEGER Idimm(Nidim), Inc(Ninc)
     !     .. Local Scalars ..
-    REAL(8) :: alpha, als, err, errmax, transl
+    REAL(DP) :: alpha, als, err, errmax, transl
     INTEGER i, ia, ic, in, incx, incxs, ix, j, ja, jj, laa, lda, &
       ldas, lj, lx, n, nargs, nc, ns, nerr
     LOGICAL ftl, full, nul, packed, reset, upper
     CHARACTER :: uplo, uplos
     !     .. Local Arrays ..
-    REAL(8) :: w(1)
+    REAL(DP) :: w(1)
     LOGICAL isame(13)
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, MAX
@@ -3561,20 +3562,20 @@ CONTAINS
     !   910619  Modified to meet SLATEC code and prologue standards. (BKS)
     USE slatec, ONLY : DSYR2K, NUMXER
     !     .. Parameters ..
-    REAL(8), PARAMETER :: ZERO = 0.0D0
+    REAL(DP), PARAMETER :: ZERO = 0.0D0
     !     .. Scalar Arguments ..
     LOGICAL Fatal
-    REAL(8) :: Eps, Thresh
+    REAL(DP) :: Eps, Thresh
     INTEGER Kprint, Nalf, Nbet, Nidim, Nmax, Nout
     CHARACTER(6) :: Sname
     !     .. Array Arguments ..
-    REAL(8) :: Aa(Nmax*Nmax), Ab(2*Nmax*Nmax), Alf(Nalf), &
+    REAL(DP) :: Aa(Nmax*Nmax), Ab(2*Nmax*Nmax), Alf(Nalf), &
       As(Nmax*Nmax), Bb(Nmax*Nmax), Bet(Nbet), Bs(Nmax*Nmax), &
       C(Nmax,Nmax), Cc(Nmax*Nmax), Cs(Nmax*Nmax), Ct(Nmax), &
       G(Nmax), W(2*Nmax)
     INTEGER Idimm(Nidim)
     !     .. Local Scalars ..
-    REAL(8) :: alpha, als, beta, bets, err, errmax
+    REAL(DP) :: alpha, als, beta, bets, err, errmax
     INTEGER i, ia, ib, ict, icu, ik, in, j, jc, jj, jjab, k, ks, laa, lbb, lcc, &
       lda, ldas, ldb, ldbs, ldc, ldcs, lj, ma, n, na, nargs, nc, nerr, ns
     LOGICAL ftl, nul, reset, tran, upper
@@ -3837,25 +3838,25 @@ CONTAINS
     !   910619  Modified to meet SLATEC code and prologue standards. (BKS)
     USE slatec, ONLY : DSPR2, DSYR2, NUMXER
     !     .. Parameters ..
-    REAL(8), PARAMETER :: ZERO = 0.0D0, HALF = 0.5D0, ONE = 1.0D0
+    REAL(DP), PARAMETER :: ZERO = 0.0D0, HALF = 0.5D0, ONE = 1.0D0
     !     .. Scalar Arguments ..
     LOGICAL Fatal
-    REAL(8) :: Eps, Thresh
+    REAL(DP) :: Eps, Thresh
     INTEGER Incmax, Kprint, Nalf, Nidim, Ninc, Nmax, Nout
     CHARACTER(6) :: Sname
     !     .. Array Arguments ..
-    REAL(8) :: A(Nmax,Nmax), Aa(Nmax*Nmax), Alf(Nalf), As(Nmax*Nmax), &
+    REAL(DP) :: A(Nmax,Nmax), Aa(Nmax*Nmax), Alf(Nalf), As(Nmax*Nmax), &
       G(Nmax), X(Nmax), Xs(Nmax*Incmax), Xx(Nmax*Incmax), &
       Y(Nmax), Ys(Nmax*Incmax), Yt(Nmax), Yy(Nmax*Incmax), Z(Nmax,2)
     INTEGER Idimm(Nidim), Inc(Ninc)
     !     .. Local Scalars ..
-    REAL(8) :: alpha, als, err, errmax, transl
+    REAL(DP) :: alpha, als, err, errmax, transl
     INTEGER i, ia, ic, in, incx, incxs, incy, incys, ix, iy, j, &
       ja, jj, laa, lda, ldas, lj, lx, ly, n, nargs, nc, ns, nerr
     LOGICAL ftl, full, nul, packed, reset, upper
     CHARACTER :: uplo, uplos
     !     .. Local Arrays ..
-    REAL(8) :: w(2)
+    REAL(DP) :: w(2)
     LOGICAL isame(13)
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, MAX
@@ -4125,10 +4126,10 @@ CONTAINS
     CHARACTER(6) :: Srnamt
     INTEGER infot, Kprint
     !     .. Local Scalars ..
-    REAL(8) :: alpha, beta
+    REAL(DP) :: alpha, beta
     INTEGER kontrl
     !     .. Local Arrays ..
-    REAL(8) :: a(1,1), x(1), y(1)
+    REAL(DP) :: a(1,1), x(1), y(1)
     !* FIRST EXECUTABLE STATEMENT  DCHKE2
     CALL XGETF(kontrl)
     IF ( Kprint<=2 ) THEN
@@ -4552,10 +4553,10 @@ CONTAINS
     CHARACTER(6) :: Srnamt
     INTEGER infot, Kprint
     !     .. Local Scalars ..
-    REAL(8) :: alpha, beta
+    REAL(DP) :: alpha, beta
     INTEGER kontrl
     !     .. Local Arrays ..
-    REAL(8) :: a(1,1), b(1,1), c(1,1)
+    REAL(DP) :: a(1,1), b(1,1), c(1,1)
     !* FIRST EXECUTABLE STATEMENT  DCHKE3
     CALL XGETF(kontrl)
     IF ( Kprint<=2 ) THEN

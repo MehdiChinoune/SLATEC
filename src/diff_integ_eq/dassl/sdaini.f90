@@ -60,27 +60,29 @@ SUBROUTINE SDAINI(X,Y,Yprime,Neq,RES,JAC,H,Wt,Idid,Phi,Delta,E,&
   !
   INTERFACE
     SUBROUTINE RES(T,Y,Yprime,Delta,Ires)
+      IMPORT SP
       INTEGER :: Ires
-      REAL :: T, Y(:), Yprime(:), Delta(:)
+      REAL(SP) :: T, Y(:), Yprime(:), Delta(:)
     END SUBROUTINE
     SUBROUTINE JAC(T,Y,Yprime,Pd,Cj)
-      REAL :: T, Cj, Pd(:,:), Y(:), Yprime(:)
+      IMPORT SP
+      REAL(SP) :: T, Cj, Pd(:,:), Y(:), Yprime(:)
     END SUBROUTINE
   END INTERFACE
   INTEGER :: Neq, Idid, Nonneg, Ntemp
   INTEGER :: Iwm(:)
-  REAL :: X, H, Hmin, Uround
-  REAL :: Y(Neq), Yprime(Neq), Wt(:), Phi(Neq,*), Delta(:), E(:), Wm(:)
+  REAL(SP) :: X, H, Hmin, Uround
+  REAL(SP) :: Y(Neq), Yprime(Neq), Wt(:), Phi(Neq,*), Delta(:), E(:), Wm(:)
   !
   INTEGER :: i, ier, ires, jcalc, m, ncf, nef, nsf
-  REAL :: cj, delnrm, err, oldnrm, r, rate, s, xold, ynorm
+  REAL(SP) :: cj, delnrm, err, oldnrm, r, rate, s, xold, ynorm
   LOGICAL :: convgd
   !
   INTEGER, PARAMETER :: LNRE = 12
   INTEGER, PARAMETER :: LNJE = 13
   !
   INTEGER, PARAMETER :: maxit = 10, mjac = 5
-  REAL, PARAMETER :: damp = 0.75E0
+  REAL(SP), PARAMETER :: damp = 0.75E0
   !
   !
   !---------------------------------------------------

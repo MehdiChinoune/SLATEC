@@ -149,10 +149,10 @@ SUBROUTINE SSDSCL(N,Nelt,Ia,Ja,A,X,B,Dinv,Job,Itol)
   !     .. Scalar Arguments ..
   INTEGER Itol, Job, N, Nelt
   !     .. Array Arguments ..
-  REAL A(Nelt), B(N), Dinv(N), X(N)
+  REAL(SP) A(Nelt), B(N), Dinv(N), X(N)
   INTEGER Ia(Nelt), Ja(Nelt)
   !     .. Local Scalars ..
-  REAL di
+  REAL(SP) di
   INTEGER icol, j, jbgn, jend
   !     .. Intrinsic Functions ..
   INTRINSIC SQRT

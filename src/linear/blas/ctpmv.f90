@@ -110,11 +110,11 @@ SUBROUTINE CTPMV(Uplo,Trans,Diag,N,Ap,X,Incx)
   INTEGER Incx, N
   CHARACTER :: Diag, Trans, Uplo
   !     .. Array Arguments ..
-  COMPLEX Ap(*), X(*)
+  COMPLEX(SP) Ap(*), X(*)
   !     .. Parameters ..
-  COMPLEX, PARAMETER :: ZERO = (0.0E+0,0.0E+0)
+  COMPLEX(SP), PARAMETER :: ZERO = (0.0E+0,0.0E+0)
   !     .. Local Scalars ..
-  COMPLEX temp
+  COMPLEX(SP) temp
   INTEGER i, info, ix, j, jx, k, kk, kx
   LOGICAL noconj, nounit
   !     .. Intrinsic Functions ..

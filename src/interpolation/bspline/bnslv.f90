@@ -47,7 +47,7 @@ SUBROUTINE BNSLV(W,Nroww,Nrow,Nbandl,Nbandu,B)
 
   !
   INTEGER :: Nbandl, Nbandu, Nrow, Nroww
-  REAL :: W(Nroww,Nrow), B(Nrow)
+  REAL(SP) :: W(Nroww,Nrow), B(Nrow)
   INTEGER :: i, j, jmax, middle, nrowm1
   !* FIRST EXECUTABLE STATEMENT  BNSLV
   middle = Nbandu + 1

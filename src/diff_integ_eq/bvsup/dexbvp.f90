@@ -40,9 +40,9 @@ SUBROUTINE DEXBVP(Y,Nrowy,Xpts,A,Nrowa,Alpha,B,Nrowb,Beta,Iflag,Work,Iwork)
   USE service, ONLY : XERMSG
   !
   INTEGER :: Iflag, Nrowa, Nrowb, Nrowy, Iwork(*)
-  REAL(8) :: A(:,:), Alpha(:), B(:,:), Beta(:), Work(*), Xpts(:), Y(:,:)
+  REAL(DP) :: A(:,:), Alpha(:), B(:,:), Beta(:), Work(*), Xpts(:), Y(:,:)
   INTEGER :: iexp, inc, kotc, nsafiw, nsafw
-  REAL(8) :: xl, zquit
+  REAL(DP) :: xl, zquit
   CHARACTER(8) :: xern1, xern2
   !* FIRST EXECUTABLE STATEMENT  DEXBVP
   kotc = 1

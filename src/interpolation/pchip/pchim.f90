@@ -144,13 +144,13 @@ SUBROUTINE PCHIM(N,X,F,D,Incfd,Ierr)
   !  DECLARE ARGUMENTS.
   !
   INTEGER N, Incfd, Ierr
-  REAL X(N), F(Incfd,N), D(Incfd,N)
+  REAL(SP) X(N), F(Incfd,N), D(Incfd,N)
   !
   !  DECLARE LOCAL VARIABLES.
   !
   INTEGER i, nless1
-  REAL del1, del2, dmax, dmin, drat1, drat2, dsave, h1, h2, hsum, hsumt3, w1, w2
-  REAL, PARAMETER :: zero = 0., three = 3.
+  REAL(SP) del1, del2, dmax, dmin, drat1, drat2, dsave, h1, h2, hsum, hsumt3, w1, w2
+  REAL(SP), PARAMETER :: zero = 0., three = 3.
   !
   !  VALIDITY-CHECK ARGUMENTS.
   !

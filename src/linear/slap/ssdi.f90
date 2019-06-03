@@ -80,7 +80,7 @@ SUBROUTINE SSDI(N,B,X,Rwork,Iwork)
   !     .. Scalar Arguments ..
   INTEGER N
   !     .. Array Arguments ..
-  REAL B(N), Rwork(*), X(N)
+  REAL(SP) B(N), Rwork(*), X(N)
   INTEGER Iwork(*)
   !     .. Local Scalars ..
   INTEGER i, locd

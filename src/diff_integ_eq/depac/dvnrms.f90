@@ -1,5 +1,5 @@
 !** DVNRMS
-REAL(8) FUNCTION DVNRMS(N,V,W)
+REAL(DP) FUNCTION DVNRMS(N,V,W)
   !>
   !  Subsidiary to DDEBDF
   !***
@@ -28,9 +28,9 @@ REAL(8) FUNCTION DVNRMS(N,V,W)
   !   900328  Added TYPE section.  (WRB)
 
   INTEGER :: N
-  REAL(8) :: V(N), W(N)
+  REAL(DP) :: V(N), W(N)
   INTEGER :: i
-  REAL(8) :: summ
+  REAL(DP) :: summ
   !* FIRST EXECUTABLE STATEMENT  DVNRMS
   summ = 0.0D0
   DO i = 1, N

@@ -62,7 +62,7 @@ SUBROUTINE BVDER(X,Y,Yp,G)
   !   920618  Minor restructuring of code.  (RWC, WRB)
   USE ML, ONLY : nofst_com, c_com, xsav_com, igofx_com, inhomo_com, ivp_com, &
     ncomp_com, nfc_com
-  REAL :: G(:), Y(:), Yp(:), X
+  REAL(SP) :: G(:), Y(:), Yp(:), X
   INTEGER :: j, k, l, na
   !* FIRST EXECUTABLE STATEMENT  BVDER
   IF ( ivp_com>0 ) STOP

@@ -67,10 +67,10 @@ SUBROUTINE DGTSL(N,C,D,E,B,Info)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER N, Info
-  REAL(8) :: C(*), D(*), E(*), B(*)
+  REAL(DP) :: C(*), D(*), E(*), B(*)
   !
   INTEGER k, kb, kp1, nm1, nm2
-  REAL(8) :: t
+  REAL(DP) :: t
   !* FIRST EXECUTABLE STATEMENT  DGTSL
   Info = 0
   C(1) = D(1)

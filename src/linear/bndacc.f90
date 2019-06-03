@@ -200,9 +200,9 @@ SUBROUTINE BNDACC(G,Mdg,Nb,Ip,Ir,Mt,Jt)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   USE service, ONLY : XERMSG
   INTEGER :: Ip, Ir, Jt, Mdg, Mt, Nb
-  REAL :: G(Mdg,Nb+1)
+  REAL(SP) :: G(Mdg,Nb+1)
   INTEGER :: i, ie, ig, ig1, ig2, iopt, j, jg, k, kh, l, lp1, mh, mu, nbp1, nerr
-  REAL :: rho, zero
+  REAL(SP) :: rho, zero
   !* FIRST EXECUTABLE STATEMENT  BNDACC
   zero = 0.
   !

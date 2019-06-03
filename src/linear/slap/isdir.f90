@@ -166,15 +166,16 @@ INTEGER FUNCTION ISDIR(N,B,X,MSOLVE,Itol,Tol,Iter,&
   USE service, ONLY : D1MACH
   INTERFACE
     SUBROUTINE MSOLVE(N,R,Z,Rwork,Iwork)
+      IMPORT DP
       INTEGER :: N, Iwork(*)
-      REAL(8) :: R(N), Z(N), Rwork(*)
+      REAL(DP) :: R(N), Z(N), Rwork(*)
     END SUBROUTINE
   END INTERFACE
   !     .. Scalar Arguments ..
-  REAL(8) :: Bnrm, Err, Solnrm, Tol
+  REAL(DP) :: Bnrm, Err, Solnrm, Tol
   INTEGER Ierr, Iter, Itol, Iunit, N
   !     .. Array Arguments ..
-  REAL(8) :: B(N), Dz(N), R(N), Rwork(*), X(N), Z(N)
+  REAL(DP) :: B(N), Dz(N), R(N), Rwork(*), X(N), Z(N)
   INTEGER Iwork(*)
   !     .. Local Scalars ..
   INTEGER i

@@ -54,7 +54,7 @@ SUBROUTINE CSWAP(N,Cx,Incx,Cy,Incy)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER i, Incx, Incy, kx, ky, N, ns
-  COMPLEX Cx(*), Cy(*), ctemp
+  COMPLEX(SP) Cx(*), Cy(*), ctemp
   !* FIRST EXECUTABLE STATEMENT  CSWAP
   IF ( N<=0 ) RETURN
   IF ( Incx==Incy.AND.Incx>0 ) THEN

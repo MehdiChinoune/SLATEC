@@ -167,11 +167,11 @@ SUBROUTINE ZBESH(Zr,Zi,Fnu,Kode,M,N,Cyr,Cyi,Nz,Ierr)
   USE service, ONLY : D1MACH, I1MACH
   !     COMPLEX CY,Z,ZN,ZT,CSGN
   INTEGER i, Ierr, inu, inuh, ir, k, Kode, k1, k2, M, mm, mr, N, nn, nuf, nw, Nz
-  REAL(8) :: aa, alim, aln, arg, az, Cyi(N), Cyr(N), dig, elim, fmm, fn, Fnu, &
+  REAL(DP) :: aa, alim, aln, arg, az, Cyi(N), Cyr(N), dig, elim, fmm, fn, Fnu, &
     fnul, rhpi, rl, r1m5, sgn, str, tol, ufl, Zi, zni, znr, Zr, zti, bb, ascle, &
     rtol, atol, sti, csgnr, csgni
   !
-  REAL(8), PARAMETER :: hpi = 1.57079632679489662D0
+  REAL(DP), PARAMETER :: hpi = 1.57079632679489662D0
   !
   !* FIRST EXECUTABLE STATEMENT  ZBESH
   Ierr = 0

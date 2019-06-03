@@ -107,9 +107,9 @@ SUBROUTINE BINT4(X,Y,Ndata,Ibcl,Ibcr,Fbcl,Fbcr,Kntopt,T,Bcoef,N,K,W)
   USE service, ONLY : XERMSG, R1MACH
   !
   INTEGER :: Ibcl, Ibcr, K, Kntopt, N, Ndata
-  REAL :: Bcoef(Ndata+2), Fbcl, Fbcr, T(Ndata+6), W(5,Ndata+2), X(Ndata), Y(Ndata)
+  REAL(SP) :: Bcoef(Ndata+2), Fbcl, Fbcr, T(Ndata+6), W(5,Ndata+2), X(Ndata), Y(Ndata)
   INTEGER :: i, iflag, ilb, ileft, it, iub, iw, iwp, j, jw, ndm, np, nwrow
-  REAL :: tol, txn, tx1, vnikx(4,4), wdtol, work(15), xl
+  REAL(SP) :: tol, txn, tx1, vnikx(4,4), wdtol, work(15), xl
   !* FIRST EXECUTABLE STATEMENT  BINT4
   wdtol = R1MACH(4)
   tol = SQRT(wdtol)

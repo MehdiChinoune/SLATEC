@@ -86,8 +86,8 @@ SUBROUTINE HQR(Nm,N,Low,Igh,H,Wr,Wi,Ierr)
   !
   INTEGER i, j, k, l, m, N, en, ll, mm, na, Nm, Igh, itn, its, &
     Low, mp2, enm2, Ierr
-  REAL H(Nm,*), Wr(*), Wi(*)
-  REAL p, q, r, s, t, w, x, y, zz, norm, s1, s2
+  REAL(SP) H(Nm,*), Wr(*), Wi(*)
+  REAL(SP) p, q, r, s, t, w, x, y, zz, norm, s1, s2
   LOGICAL notlas
   !
   !* FIRST EXECUTABLE STATEMENT  HQR

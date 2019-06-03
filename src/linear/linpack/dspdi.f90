@@ -89,11 +89,11 @@ SUBROUTINE DSPDI(Ap,N,Kpvt,Det,Inert,Work,Job)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER N, Job
-  REAL(8) :: Ap(*), Work(*)
-  REAL(8) :: Det(2)
+  REAL(DP) :: Ap(*), Work(*)
+  REAL(DP) :: Det(2)
   INTEGER Kpvt(*), Inert(3)
   !
-  REAL(8) :: akkp1, temp, ten, d, t, ak, akp1
+  REAL(DP) :: akkp1, temp, ten, d, t, ak, akp1
   INTEGER ij, ik, ikp1, iks, j, jb, jk, jkp1, k, kk, kkp1, km1, ks, ksj, kskp1, kstep
   LOGICAL noinv, nodet, noert
   !* FIRST EXECUTABLE STATEMENT  DSPDI

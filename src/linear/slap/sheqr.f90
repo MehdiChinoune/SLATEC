@@ -78,9 +78,9 @@ SUBROUTINE SHEQR(A,Lda,N,Q,Info,Ijob)
   !     .. Scalar Arguments ..
   INTEGER Ijob, Info, Lda, N
   !     .. Array Arguments ..
-  REAL A(Lda,*), Q(*)
+  REAL(SP) A(Lda,*), Q(*)
   !     .. Local Scalars ..
-  REAL c, s, t, t1, t2
+  REAL(SP) c, s, t, t1, t2
   INTEGER i, iq, j, k, km1, kp1, nm1
   !     .. Intrinsic Functions ..
   INTRINSIC ABS, SQRT

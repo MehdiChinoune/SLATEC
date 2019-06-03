@@ -34,7 +34,7 @@ SUBROUTINE DSTOR1(U,Yh,V,Yp,Ntemp,Ndisk,Ntape)
   !   910722  Updated AUTHOR section.  (ALS)
   USE DML, ONLY : c_com, inhomo_com, ncomp_com, nfc_com
   INTEGER :: Ndisk, Ntape, Ntemp
-  REAL(8) :: U(:), V(:), Yh(:), Yp(:)
+  REAL(DP) :: U(:), V(:), Yh(:), Yp(:)
   INTEGER :: j, nctnf
   !     BEGIN BLOCK PERMITTING ...EXITS TO 80
   !* FIRST EXECUTABLE STATEMENT  DSTOR1

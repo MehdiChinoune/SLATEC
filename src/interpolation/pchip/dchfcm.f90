@@ -86,21 +86,21 @@ INTEGER FUNCTION DCHFCM(D1,D2,Delta)
   !
   !     To produce a single precision version, simply:
   !        a. Change DCHFCM to CHFCM wherever it occurs,
-  !        b. Change the double precision declarations to real, and
+  !        b. Change the double precision declarations to REAL(SP), and
   !        c. Change the constants ZERO, ONE, ... to single precision.
   !
   !  DECLARE ARGUMENTS.
   !
-  REAL(8) :: D1, D2, Delta
+  REAL(DP) :: D1, D2, Delta
   !
   !  DECLARE LOCAL VARIABLES.
   !
   INTEGER ismon, itrue
-  REAL(8) :: a, b, eps, phi
+  REAL(DP) :: a, b, eps, phi
   !
   !  INITIALIZE.
   !
-  REAL(8), PARAMETER :: zero = 0.D0, one = 1.D0, two = 2.D0, three = 3.D0, &
+  REAL(DP), PARAMETER :: zero = 0.D0, one = 1.D0, two = 2.D0, three = 3.D0, &
     four = 4.D0, ten = 10.D0
   !
   !        MACHINE-DEPENDENT PARAMETER -- SHOULD BE ABOUT 10*UROUND.

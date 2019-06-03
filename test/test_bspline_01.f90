@@ -1,4 +1,5 @@
 MODULE TEST30_MOD
+  USE service, ONLY : SP, DP
   IMPLICIT NONE
 
 CONTAINS
@@ -43,14 +44,14 @@ CONTAINS
     !     .. Scalar Arguments ..
     INTEGER Ipass, Kprint, Lun
     !     .. Local Scalars ..
-    REAL atol, bquad, bv, den, dn, er, fbcl, fbcr, pi, pquad, quad, &
+    REAL(SP) atol, bquad, bv, den, dn, er, fbcl, fbcr, pi, pquad, quad, &
       spv, tol, x1, x2, xl, xx
     INTEGER i, ibcl, ibcr, id, ierr, iknt, ileft, ilo, inbv, inev, &
       inppv, iwork, j, jhigh, jj, k, kk, knt, kntopt, kontrl, &
       ldc, ldcc, lxi, mflag, n, ndata, nerr, nmk, nn
     LOGICAL fatal
     !     .. Local Arrays ..
-    REAL adif(52), bc(13), c(4,10), cc(4,4), q(3), qq(77), qsave(2), &
+    REAL(SP) adif(52), bc(13), c(4,10), cc(4,4), q(3), qq(77), qsave(2), &
       sv(4), t(17), w(65), x(11), xi(11), y(11)
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, SIN
@@ -453,7 +454,7 @@ CONTAINS
     RETURN
   END SUBROUTINE BSPCK
   !** FB
-  REAL FUNCTION FB(X)
+  REAL(SP) FUNCTION FB(X)
     !>
     !  Subsidiary to BSPCK.
     !***

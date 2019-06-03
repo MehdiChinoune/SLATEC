@@ -40,14 +40,15 @@ SUBROUTINE DPLPMN(DUSRMT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   USE service, ONLY : XERMSG
   INTERFACE
     SUBROUTINE DUSRMT(I,J,Aij,Indcat,Dattrv,Iflag)
+      IMPORT DP
       INTEGER :: I, J, indcat, iflag(10)
-      REAL(8) :: Dattrv(:), Aij
+      REAL(DP) :: Dattrv(:), Aij
     END SUBROUTINE DUSRMT
   END INTERFACE
   INTEGER :: Info, Lbm, Lmx, Mrelas, Nvars
   INTEGER :: Ibasis(Nvars+Mrelas), Ibb(Nvars+Mrelas), Ibrc(Lbm,2), Imat(Lmx), &
     Ind(Nvars+Mrelas), Ipr(2*Mrelas), Iwr(8*Mrelas)
-  REAL(8) :: Amat(Lmx), Basmat(Lbm), Bl(Nvars+Mrelas), Bu(Nvars+Mrelas), &
+  REAL(DP) :: Amat(Lmx), Basmat(Lbm), Bl(Nvars+Mrelas), Bu(Nvars+Mrelas), &
     Colnrm(Nvars), Costs(Nvars), Csc(Nvars), Dattrv(:), Duals(Nvars+Mrelas), &
     Erd(Mrelas), Erp(Mrelas), Prgopt(:), Primal(Nvars+Mrelas), Rg(Nvars+Mrelas), &
     Rhs(Mrelas), Rprim(Mrelas), Rz(Nvars+Mrelas), Wr(Mrelas), Ww(Mrelas)
@@ -58,10 +59,10 @@ SUBROUTINE DPLPMN(DUSRMT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
     npr014, npr015, nredc, ntries, nx0066, nx0091, nx0106, idum(01)
   INTEGER, TARGET :: intopt(08)
   INTEGER, POINTER :: idg, ipagef, isave, mxitlp, kprint, itbrc, npp, lprg
-  REAL(8) :: aij, anorm, dirnrm, dulnrm, erdnrm, factor, gg, one, resnrm, rhsnrm, &
+  REAL(DP) :: aij, anorm, dirnrm, dulnrm, erdnrm, factor, gg, one, resnrm, rhsnrm, &
     rprnrm, rzj, scalr, scosts, sizee, theta, upbnd, uu, xlamda, xval, zero, rdum(01)
-  REAL(8), TARGET :: ropt(07)
-  REAL(8), POINTER :: eps, asmall, abig, costsc, tolls, tune, tolabs
+  REAL(DP), TARGET :: ropt(07)
+  REAL(DP), POINTER :: eps, asmall, abig, costsc, tolls, tune, tolabs
   !
   !
   !     ARRAY LOCAL VARIABLES

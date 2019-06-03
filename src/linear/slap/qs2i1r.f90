@@ -79,10 +79,10 @@ SUBROUTINE QS2I1R(Ia,Ja,A,N,Kflag)
   !     .. Scalar Arguments ..
   INTEGER Kflag, N
   !     .. Array Arguments ..
-  REAL A(N)
+  REAL(SP) A(N)
   INTEGER Ia(N), Ja(N)
   !     .. Local Scalars ..
-  REAL r, ta, tta
+  REAL(SP) r, ta, tta
   INTEGER i, iit, ij, it, j, jjt, jt, k, kk, l, m, nn
   !     .. Local Arrays ..
   INTEGER il(21), iu(21)

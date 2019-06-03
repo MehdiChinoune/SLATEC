@@ -27,9 +27,9 @@ SUBROUTINE XQNU(Nu1,Nu2,Mu1,Theta,X,Sx,Id,Pqa,Ipqa,Ierror)
   !   920127  Revised PURPOSE section of prologue.  (DWL)
 
   INTEGER :: Ierror, Ipqa(*), Mu1
-  REAL :: Nu1, Nu2, Pqa(*), Sx, X, Theta
+  REAL(SP) :: Nu1, Nu2, Pqa(*), Sx, X, Theta
   INTEGER :: Id, ipq, ipq1, ipq2, ipql1, ipql2, k, mu
-  REAL :: dmu, nu, pq, pq1, pq2, x1, x2, pql1, pql2
+  REAL(SP) :: dmu, nu, pq, pq1, pq2, x1, x2, pql1, pql2
   !* FIRST EXECUTABLE STATEMENT  XQNU
   Ierror = 0
   k = 0

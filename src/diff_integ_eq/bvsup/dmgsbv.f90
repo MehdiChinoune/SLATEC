@@ -72,10 +72,10 @@ SUBROUTINE DMGSBV(M,N,A,Ia,Niv,Iflag,S,P,Ip,Inhomo,V,W,Wcnd)
   USE DML, ONLY : sru_com, eps_com, indpvt_com, nfcc_com
   !
   INTEGER :: Ia, Iflag, Inhomo, M, N, Niv, Ip(2*N)
-  REAL(8) :: Wcnd, A(Ia,M), P(N*(2*N+1)), S(M), V(M), W(M)
+  REAL(DP) :: Wcnd, A(Ia,M), P(N*(2*N+1)), S(M), V(M), W(M)
   INTEGER :: i, ip1, ix, iz, j, jk, jp, jq, jy, jz, k, kd, kj, kp, l, lix, lr, &
     m2, nivn, nmnr, nn, np1, nr, nrm1
-  REAL(8) :: dot, pjp, psave, ry, sv, t, vl, vnorm, y
+  REAL(DP) :: dot, pjp, psave, ry, sv, t, vl, vnorm, y
   !
   !* FIRST EXECUTABLE STATEMENT  DMGSBV
   IF ( M>0.AND.N>0.AND.Ia>=M ) THEN

@@ -36,7 +36,7 @@ SUBROUTINE ALGAMS(X,Algam,Sgngam)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
   !* FIRST EXECUTABLE STATEMENT  ALGAMS
-  REAL Algam, Sgngam, X
+  REAL(SP) Algam, Sgngam, X
   INTEGER i
   Algam = LOG_GAMMA(X)
   Sgngam = 1.0

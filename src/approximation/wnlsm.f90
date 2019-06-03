@@ -73,16 +73,16 @@ SUBROUTINE WNLSM(W,Mdw,Mme,Ma,N,L,Prgopt,X,Rnorm,Mode,Ipivot,Itype,Wd,H,&
   USE service, ONLY : XERMSG, R1MACH
   USE linear, ONLY : H12, SAXPY, SROTM, SROTMG, SSWAP
   INTEGER :: L, Ma, Mdw, Mme, Mode, N, Ipivot(N), Itype(Mme+Ma)
-  REAL :: Rnorm, D(N), H(N), Prgopt(:), Scalee(Mme+Ma), Temp(N), W(Mdw,N+1), &
+  REAL(SP) :: Rnorm, D(N), H(N), Prgopt(:), Scalee(Mme+Ma), Temp(N), W(Mdw,N+1), &
     Wd(N), X(N), Z(N)
   !
   INTEGER i, idope(3), imax, isol, itemp, iter, itmax, iwmax, j, jcon, jp, key, &
     krank, l1, last, link, m, me, next, niv, nlink, nopt, nsoln, ntimes
-  REAL alamda, alpha, alsq, amax, blowup, bnorm, dope(3), eanorm, fac, sm, &
+  REAL(SP) alamda, alpha, alsq, amax, blowup, bnorm, dope(3), eanorm, fac, sm, &
     sparam(5), t, tau, wmax, z2, zz
   LOGICAL done, feasbl, hitcon, pos
   !
-  REAL, PARAMETER :: srelpr = R1MACH(4)
+  REAL(SP), PARAMETER :: srelpr = R1MACH(4)
   !* FIRST EXECUTABLE STATEMENT  WNLSM
   !
   !     Set the nominal tolerance used in the code.

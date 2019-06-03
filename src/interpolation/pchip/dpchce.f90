@@ -117,16 +117,16 @@ SUBROUTINE DPCHCE(Ic,Vc,N,X,H,Slope,D,Incfd,Ierr)
   !  DECLARE ARGUMENTS.
   !
   INTEGER Ic(2), N, Incfd, Ierr
-  REAL(8) :: Vc(2), X(N), H(N), Slope(N), D(Incfd,N)
+  REAL(DP) :: Vc(2), X(N), H(N), Slope(N), D(Incfd,N)
   !
   !  DECLARE LOCAL VARIABLES.
   !
   INTEGER ibeg, iend, ierf, indexx, j, k
-  REAL(8) :: stemp(3), xtemp(4)
+  REAL(DP) :: stemp(3), xtemp(4)
   !
   !  INITIALIZE.
   !
-  REAL(8), PARAMETER :: zero = 0.D0, half = .5D0, two = 2.D0, three = 3.D0
+  REAL(DP), PARAMETER :: zero = 0.D0, half = .5D0, two = 2.D0, three = 3.D0
   !
   !* FIRST EXECUTABLE STATEMENT  DPCHCE
   ibeg = Ic(1)

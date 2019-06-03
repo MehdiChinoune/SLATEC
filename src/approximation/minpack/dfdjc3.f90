@@ -88,16 +88,17 @@ SUBROUTINE DFDJC3(FCN,M,N,X,Fvec,Fjac,Ldfjac,Iflag,Epsfcn,Wa)
   USE service, ONLY : D1MACH
   INTERFACE
     SUBROUTINE FCN(Iflag,M,N,X,Fvec,Fjac,Ldfjac)
+      IMPORT DP
       INTEGER :: Ldfjac, M, N, Iflag
-      REAL(8) :: X(N), Fvec(M), Fjac(:,:)
+      REAL(DP) :: X(N), Fvec(M), Fjac(:,:)
     END SUBROUTINE FCN
   END INTERFACE
   INTEGER :: M, N, Ldfjac, Iflag
-  REAL(8) :: Epsfcn
-  REAL(8) :: X(N), Fvec(M), Fjac(Ldfjac,N), Wa(M)
+  REAL(DP) :: Epsfcn
+  REAL(DP) :: X(N), Fvec(M), Fjac(Ldfjac,N), Wa(M)
   INTEGER :: i, j
-  REAL(8) :: eps, epsmch, h, temp
-  REAL(8), PARAMETER :: zero = 0.0D0
+  REAL(DP) :: eps, epsmch, h, temp
+  REAL(DP), PARAMETER :: zero = 0.0D0
   !* FIRST EXECUTABLE STATEMENT  DFDJC3
   epsmch = D1MACH(4)
   !

@@ -72,8 +72,8 @@ SUBROUTINE ELMHES(Nm,N,Low,Igh,A,Intt)
 
   !
   INTEGER i, j, m, N, la, Nm, Igh, kp1, Low, mm1, mp1
-  REAL A(Nm,*)
-  REAL x, y
+  REAL(SP) A(Nm,*)
+  REAL(SP) x, y
   INTEGER Intt(*)
   !
   !* FIRST EXECUTABLE STATEMENT  ELMHES

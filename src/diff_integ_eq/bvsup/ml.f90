@@ -1,6 +1,7 @@
 MODULE ML
+  USE service, ONLY : SP
   IMPLICIT NONE
-  REAL :: c_com, xsav_com, px_com, pwcnd_com, tnd_com, x_com, xbeg_com, xend_com, &
+  REAL(SP) :: c_com, xsav_com, px_com, pwcnd_com, tnd_com, x_com, xbeg_com, xend_com, &
     xot_com, xop_com, ae_com, re_com, tol_com, uro_com, sru_com, eps_com, &
     sqovfl_com, twou_com, fouru_com
   INTEGER :: igofx_com, inhomo_com, ivp_com, ncomp_com, nfc_com, info_com(15), &

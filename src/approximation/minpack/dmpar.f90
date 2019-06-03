@@ -109,11 +109,11 @@ SUBROUTINE DMPAR(N,R,Ldr,Ipvt,Diag,Qtb,Delta,Par,X,Sigma,Wa1,Wa2)
   USE service, ONLY : D1MACH
   INTEGER :: N, Ldr
   INTEGER :: Ipvt(N)
-  REAL(8) :: Delta, Par
-  REAL(8) :: R(Ldr,N), Diag(N), Qtb(N), X(N), Sigma(N), Wa1(N), Wa2(N)
+  REAL(DP) :: Delta, Par
+  REAL(DP) :: R(Ldr,N), Diag(N), Qtb(N), X(N), Sigma(N), Wa1(N), Wa2(N)
   INTEGER :: i, iter, j, jm1, jp1, k, l, nsing
-  REAL(8) :: dxnorm, dwarf, fp, gnorm, parc, parl, paru, summ, temp
-  REAL(8), PARAMETER :: p1 = 1.0D-1, p001 = 1.0D-3, zero = 0.0D0
+  REAL(DP) :: dxnorm, dwarf, fp, gnorm, parc, parl, paru, summ, temp
+  REAL(DP), PARAMETER :: p1 = 1.0D-1, p001 = 1.0D-3, zero = 0.0D0
   !* FIRST EXECUTABLE STATEMENT  DMPAR
   dwarf = D1MACH(1)
   !

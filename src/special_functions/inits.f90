@@ -43,9 +43,9 @@ INTEGER FUNCTION INITS(Os,Nos,Eta)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   USE service, ONLY : XERMSG
   INTEGER :: Nos
-  REAL :: Os(Nos), Eta
+  REAL(SP) :: Os(Nos), Eta
   INTEGER i, ii
-  REAL err
+  REAL(SP) err
   !* FIRST EXECUTABLE STATEMENT  INITS
   IF ( Nos<1 ) CALL XERMSG('INITS',&
     'Number of coefficients is less than 1',2,1)

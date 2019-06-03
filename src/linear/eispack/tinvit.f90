@@ -116,9 +116,9 @@ SUBROUTINE TINVIT(Nm,N,D,E,E2,M,W,Ind,Z,Ierr,Rv1,Rv2,Rv3,Rv4,Rv6)
   !
   INTEGER i, j, M, N, p, q, r, s, ii, ip, jj, Nm, its, tag, Ierr, group
   INTEGER Ind(*)
-  REAL D(*), E(*), E2(*), W(*), Z(Nm,*)
-  REAL Rv1(*), Rv2(*), Rv3(*), Rv4(*), Rv6(*)
-  REAL u, v, uk, xu, x0, x1, eps2, eps3, eps4, norm, order
+  REAL(SP) D(*), E(*), E2(*), W(*), Z(Nm,*)
+  REAL(SP) Rv1(*), Rv2(*), Rv3(*), Rv4(*), Rv6(*)
+  REAL(SP) u, v, uk, xu, x0, x1, eps2, eps3, eps4, norm, order
   !
   !* FIRST EXECUTABLE STATEMENT  TINVIT
   Ierr = 0

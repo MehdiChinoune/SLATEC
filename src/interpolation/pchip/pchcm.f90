@@ -147,13 +147,13 @@ SUBROUTINE PCHCM(N,X,F,D,Incfd,Skip,Ismon,Ierr)
   !  DECLARE ARGUMENTS.
   !
   INTEGER N, Incfd, Ismon(N), Ierr
-  REAL X(N), F(Incfd,N), D(Incfd,N)
+  REAL(SP) X(N), F(Incfd,N), D(Incfd,N)
   LOGICAL Skip
   !
   !  DECLARE LOCAL VARIABLES.
   !
   INTEGER i, nseg
-  REAL delta
+  REAL(SP) delta
   !
   !  VALIDITY-CHECK ARGUMENTS.
   !

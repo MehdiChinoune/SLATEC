@@ -27,8 +27,8 @@ SUBROUTINE CBUNI(Z,Fnu,Kode,N,Y,Nz,Nui,Nlast,Fnul,Tol,Elim,Alim)
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
   USE service, ONLY : R1MACH
   INTEGER i, iflag, iform, k, Kode, N, nl, Nlast, Nui, nw, Nz
-  COMPLEX cscl, cscr, cy(2), rz, st, s1, s2, Y(N), Z
-  REAL Alim, ax, ay, dfnu, Elim, Fnu, fnui, Fnul, gnu, Tol, xx, &
+  COMPLEX(SP) cscl, cscr, cy(2), rz, st, s1, s2, Y(N), Z
+  REAL(SP) Alim, ax, ay, dfnu, Elim, Fnu, fnui, Fnul, gnu, Tol, xx, &
     yy, ascle, bry(3), str, sti, stm
   !* FIRST EXECUTABLE STATEMENT  CBUNI
   Nz = 0

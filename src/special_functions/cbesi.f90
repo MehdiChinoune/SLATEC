@@ -31,7 +31,7 @@ SUBROUTINE CBESI(Z,Fnu,Kode,N,Cy,Nz,Ierr)
   !
   !         Input
   !           Z      - Argument of type COMPLEX
-  !           FNU    - Initial order of type REAL, FNU>=0
+  !           FNU    - Initial order of type REAL(SP), FNU>=0
   !           KODE   - A parameter to indicate the scaling option
   !                    KODE=1  returns
   !                            CY(L)=I(FNU+L-1,Z), L=1,...,N
@@ -160,11 +160,11 @@ SUBROUTINE CBESI(Z,Fnu,Kode,N,Cy,Nz,Ierr)
   !   920811  Prologue revised.  (DWL)
   USE service, ONLY : R1MACH, I1MACH
   INTEGER i, Ierr, inu, k, Kode, k1, k2, N, nn, Nz
-  COMPLEX csgn, Cy(N), Z, zn
-  REAL aa, alim, arg, dig, elim, Fnu, fnul, rl, r1m5, s1, &
+  COMPLEX(SP) csgn, Cy(N), Z, zn
+  REAL(SP) aa, alim, arg, dig, elim, Fnu, fnul, rl, r1m5, s1, &
     s2, tol, xx, yy, az, fn, bb, ascle, rtol, atol
-  REAL, PARAMETER :: pi = 3.14159265358979324E0
-  COMPLEX, PARAMETER :: cone = (1.0E0,0.0E0)
+  REAL(SP), PARAMETER :: pi = 3.14159265358979324E0
+  COMPLEX(SP), PARAMETER :: cone = (1.0E0,0.0E0)
   !
   !* FIRST EXECUTABLE STATEMENT  CBESI
   Ierr = 0

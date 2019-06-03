@@ -44,29 +44,32 @@ SUBROUTINE SDNTL(Eps,F,FA,Hmax,Hold,Impl,Jtask,Matdim,Maxord,Mint,Miter,&
   USE linear, ONLY : SGBFA, SGBSL, SGEFA, SGESL
   INTERFACE
     SUBROUTINE F(N,T,Y,Ydot)
+      IMPORT SP
       INTEGER :: N
-      REAL :: T, Y(:), Ydot(:)
+      REAL(SP) :: T, Y(:), Ydot(:)
     END SUBROUTINE F
     SUBROUTINE USERS(Y,Yh,Ywt,Save1,Save2,T,H,El,Impl,N,Nde,Iflag)
+      IMPORT SP
       INTEGER :: Impl, N, Nde, iflag
-      REAL :: T, H, El
-      REAL :: Y(N), Yh(N,13), Ywt(N), Save1(N), Save2(N)
+      REAL(SP) :: T, H, El
+      REAL(SP) :: Y(N), Yh(N,13), Ywt(N), Save1(N), Save2(N)
     END SUBROUTINE USERS
     SUBROUTINE FA(N,T,Y,A,Matdim,Ml,Mu,Nde)
+      IMPORT SP
       INTEGER :: N, Matdim, Ml, Mu, Nde
-      REAL :: T, Y(N), A(:,:)
+      REAL(SP) :: T, Y(N), A(:,:)
     END SUBROUTINE FA
   END INTERFACE
   INTEGER :: Impl, Iswflg, Jstate, Jtask, Matdim, Maxord, Mint, Miter, Ml, &
     Mntold, Mtrold, Mu, N, Nde, Nfe, Nq, Nwait
   INTEGER :: Ipvt(N)
-  REAL :: Eps, H, Hmax, Hold, Rc, Rh, Rmax, T, Trend, Uround
-  REAL :: A(Matdim,N), El(13,12), Fac(N), Save1(N), Save2(N), Tq(3,12), Y(N+1), &
+  REAL(SP) :: Eps, H, Hmax, Hold, Rc, Rh, Rmax, T, Trend, Uround
+  REAL(SP) :: A(Matdim,N), El(13,12), Fac(N), Save1(N), Save2(N), Tq(3,12), Y(N+1), &
     Yh(N,13), Ywt(N)
   LOGICAL :: Convrg, Ier
   INTEGER :: i, iflag, info
-  REAL :: oldl0, summ
-  REAL, PARAMETER :: RMINIT = 10000.E0
+  REAL(SP) :: oldl0, summ
+  REAL(SP), PARAMETER :: RMINIT = 10000.E0
   !* FIRST EXECUTABLE STATEMENT  SDNTL
   Ier = .FALSE.
   IF ( Jtask>=0 ) THEN

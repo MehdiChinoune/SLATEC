@@ -76,11 +76,11 @@ SUBROUTINE DWUPDT(N,R,Ldr,W,B,Alpha,Coss,Sinn)
   !   900328  Added TYPE section.  (WRB)
 
   INTEGER :: N, Ldr
-  REAL(8) :: Alpha
-  REAL(8) :: R(Ldr,N), W(N), B(N), Coss(N), Sinn(N)
+  REAL(DP) :: Alpha
+  REAL(DP) :: R(Ldr,N), W(N), B(N), Coss(N), Sinn(N)
   INTEGER :: i, j, jm1
-  REAL(8) :: cotan, rowj, tann, temp
-  REAL(8), PARAMETER :: one = 1.0D0, p5 = 5.0D-1, p25 = 2.5D-1, zero = 0.0D0
+  REAL(DP) :: cotan, rowj, tann, temp
+  REAL(DP), PARAMETER :: one = 1.0D0, p5 = 5.0D-1, p25 = 2.5D-1, zero = 0.0D0
   !* FIRST EXECUTABLE STATEMENT  DWUPDT
   DO j = 1, N
     rowj = W(j)

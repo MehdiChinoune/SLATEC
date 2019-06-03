@@ -1,5 +1,5 @@
 !** CDOTU
-COMPLEX FUNCTION CDOTU(N,Cx,Incx,Cy,Incy)
+COMPLEX(SP) FUNCTION CDOTU(N,Cx,Incx,Cy,Incy)
   !>
   !  Compute the inner product of two vectors.
   !***
@@ -53,7 +53,7 @@ COMPLEX FUNCTION CDOTU(N,Cx,Incx,Cy,Incy)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER i, Incx, Incy, kx, ky, N, ns
-  COMPLEX Cx(*), Cy(*)
+  COMPLEX(SP) Cx(*), Cy(*)
   !* FIRST EXECUTABLE STATEMENT  CDOTU
   CDOTU = (0.0,0.0)
   IF ( N<=0 ) RETURN

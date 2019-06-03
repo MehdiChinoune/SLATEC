@@ -29,7 +29,7 @@ SUBROUTINE DXPNRM(Nu1,Nu2,Mu1,Mu2,Pqa,Ipqa,Ierror)
   !   920127  Revised PURPOSE section of prologue.  (DWL)
 
   INTEGER i, Ierror, Ipqa(*), iprod, j, k, l, mu, Mu1, Mu2
-  REAL(8) :: c1, dmu, nu, Nu1, Nu2, Pqa(*), prod
+  REAL(DP) :: c1, dmu, nu, Nu1, Nu2, Pqa(*), prod
   !* FIRST EXECUTABLE STATEMENT  DXPNRM
   Ierror = 0
   l = INT( (Mu2-Mu1) + (Nu2-Nu1+1.5D0) )

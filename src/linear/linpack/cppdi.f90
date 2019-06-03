@@ -69,11 +69,11 @@ SUBROUTINE CPPDI(Ap,N,Det,Job)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER N, Job
-  COMPLEX Ap(*)
-  REAL Det(2)
+  COMPLEX(SP) Ap(*)
+  REAL(SP) Det(2)
   !
-  COMPLEX t
-  REAL s
+  COMPLEX(SP) t
+  REAL(SP) s
   INTEGER i, ii, j, jj, jm1, j1, k, kj, kk, kp1, k1
   !* FIRST EXECUTABLE STATEMENT  CPPDI
   !

@@ -106,15 +106,15 @@ SUBROUTINE SSYR2(Uplo,N,Alpha,X,Incx,Y,Incy,A,Lda)
   !           lines were modified.  (BKS)
   USE service, ONLY : XERBLA
   !     .. Scalar Arguments ..
-  REAL Alpha
+  REAL(SP) Alpha
   INTEGER Incx, Incy, Lda, N
   CHARACTER :: Uplo
   !     .. Array Arguments ..
-  REAL A(Lda,*), X(*), Y(*)
+  REAL(SP) A(Lda,*), X(*), Y(*)
   !     .. Parameters ..
-  REAL, PARAMETER :: ZERO = 0.0E+0
+  REAL(SP), PARAMETER :: ZERO = 0.0E+0
   !     .. Local Scalars ..
-  REAL temp1, temp2
+  REAL(SP) temp1, temp2
   INTEGER i, info, ix, iy, j, jx, jy, kx, ky
   !     .. Intrinsic Functions ..
   INTRINSIC MAX

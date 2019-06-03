@@ -1,6 +1,7 @@
 MODULE TEST06_MOD
+  USE service, ONLY : SP, DP
   IMPLICIT NONE
-  REAL(8) :: X, A, FKM
+  REAL(DP) :: X, A, FKM
 
 CONTAINS
   !** DBIKCK
@@ -42,8 +43,8 @@ CONTAINS
     USE slatec, ONLY : D1MACH, DBESI, DBESK, NUMXER, XERCLR, XGETF, XSETF
     INTEGER Kprint
     INTEGER i, Ipass, ix, k, kode, kontrl, Lun, m, n, nerr, nu, nw, ny
-    REAL(8) :: alp, del, er, fnu, fnup, rx, tol, x
-    REAL(8) :: fn(3), w(5), xx(5), y(5)
+    REAL(DP) :: alp, del, er, fnu, fnup, rx, tol, x
+    REAL(DP) :: fn(3), w(5), xx(5), y(5)
     LOGICAL fatal
     !* FIRST EXECUTABLE STATEMENT  DBIKCK
     IF ( Kprint>=2 ) WRITE (Lun,99001)
@@ -309,8 +310,8 @@ CONTAINS
     USE slatec, ONLY : D1MACH, DBESJ, DBESY, NUMXER, XERCLR, XGETF, XSETF
     INTEGER Kprint
     INTEGER i, Ipass, ix, k, kontrl, Lun, m, n, nerr, nu, ny
-    REAL(8) :: alp, del, er, fnu, fnup, rhpi, rx, tol, x
-    REAL(8) :: fn(3), w(5), xx(5), y(5)
+    REAL(DP) :: alp, del, er, fnu, fnup, rhpi, rx, tol, x
+    REAL(DP) :: fn(3), w(5), xx(5), y(5)
     LOGICAL fatal
     !* FIRST EXECUTABLE STATEMENT  DBJYCK
     IF ( Kprint>=2 ) WRITE (Lun,99001)
@@ -538,7 +539,7 @@ CONTAINS
     INTEGER Kprint
     INTEGER i, icase, ie, ierr, ii, ik, Ipass, ix, iy, k, ke, kk, &
       kode, kx, Lun, m, n, nm, nz
-    REAL(8) :: ans, atol, bb, en(4), er, ex, sig, summ, tol, t1, t2, xx(5), y(4)
+    REAL(DP) :: ans, atol, bb, en(4), er, ex, sig, summ, tol, t1, t2, xx(5), y(4)
     LOGICAL fatal
     !* FIRST EXECUTABLE STATEMENT  DEG8CK
     IF ( Kprint>=2 ) WRITE (Lun,99001)
@@ -686,7 +687,7 @@ CONTAINS
     RETURN
   END SUBROUTINE DEG8CK
   !** DFEIN
-  REAL(8) FUNCTION DFEIN(T)
+  REAL(DP) FUNCTION DFEIN(T)
     !>
     !  Subsidiary to DEG8CK.
     !***
@@ -702,8 +703,8 @@ CONTAINS
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-    REAL(8), INTENT(IN) :: T
-    REAL(8) :: aln
+    REAL(DP), INTENT(IN) :: T
+    REAL(DP) :: aln
     !* FIRST EXECUTABLE STATEMENT  DFEIN
     aln = (FKM-T)*X - A*LOG(T)
     DFEIN = EXP(aln)

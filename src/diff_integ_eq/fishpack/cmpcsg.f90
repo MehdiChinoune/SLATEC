@@ -42,11 +42,11 @@ SUBROUTINE CMPCSG(N,Ijump,Fnum,Fden,A)
   !   900402  Added TYPE section.  (WRB)
 
   INTEGER :: Ijump, N
-  REAL :: Fden, Fnum
-  COMPLEX :: A(N)
+  REAL(SP) :: Fden, Fnum
+  COMPLEX(SP) :: A(N)
   INTEGER :: i, k, k1, k2, k3, k4, k5, np1
-  REAL :: pibyn, x, y
-  REAL, PARAMETER :: pi = 3.14159265358979
+  REAL(SP) :: pibyn, x, y
+  REAL(SP), PARAMETER :: pi = 3.14159265358979
   !
   !* FIRST EXECUTABLE STATEMENT  CMPCSG
   IF ( N/=0 ) THEN

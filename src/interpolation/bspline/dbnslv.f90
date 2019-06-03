@@ -49,7 +49,7 @@ SUBROUTINE DBNSLV(W,Nroww,Nrow,Nbandl,Nbandu,B)
 
   !
   INTEGER :: Nbandl, Nbandu, Nrow, Nroww
-  REAL(8) :: W(Nroww,Nrow), B(Nrow)
+  REAL(DP) :: W(Nroww,Nrow), B(Nrow)
   INTEGER :: i, j, jmax, middle, nrowm1
   !* FIRST EXECUTABLE STATEMENT  DBNSLV
   middle = Nbandu + 1

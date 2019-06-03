@@ -29,10 +29,10 @@ SUBROUTINE CSERI(Z,Fnu,Kode,N,Y,Nz,Tol,Elim,Alim)
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
   USE service, ONLY : R1MACH
   INTEGER i, ib, idum, iflag, il, k, Kode, l, m, N, nn, nw, Nz
-  COMPLEX ak1, ck, coef, crsc, cz, hz, rz, s1, s2, w(2), Y(N), Z
-  REAL aa, acz, ak, Alim, arm, ascle, atol, az, dfnu, Elim, Fnu, &
+  COMPLEX(SP) ak1, ck, coef, crsc, cz, hz, rz, s1, s2, w(2), Y(N), Z
+  REAL(SP) aa, acz, ak, Alim, arm, ascle, atol, az, dfnu, Elim, Fnu, &
     fnup, rak1, rs, rtr1, s, ss, Tol, x
-  COMPLEX, PARAMETER :: czero = (0.0E0,0.0E0), cone = (1.0E0,0.0E0)
+  COMPLEX(SP), PARAMETER :: czero = (0.0E0,0.0E0), cone = (1.0E0,0.0E0)
   !* FIRST EXECUTABLE STATEMENT  CSERI
   Nz = 0
   az = ABS(Z)

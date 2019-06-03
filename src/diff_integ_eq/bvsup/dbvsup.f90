@@ -422,8 +422,8 @@ SUBROUTINE DBVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
   !- *********************************************************************
   INTEGER :: Iflag, Igofx, Ncomp, Ndiw, Ndw, Neqivp, Nfc, Nic, Nrowa, Nrowb, &
     Nrowy, Nxpts, Iwork(Ndiw)
-  REAL(8) :: Ae, Re
-  REAL(8) :: A(Nrowa,Ncomp), Alpha(:), B(Nrowb,Ncomp), Beta(Nxpts), Work(Ndw), &
+  REAL(DP) :: Ae, Re
+  REAL(DP) :: A(Nrowa,Ncomp), Alpha(:), B(Nrowb,Ncomp), Beta(Nxpts), Work(Ndw), &
     Xpts(Nxpts), Y(Nrowy,Nxpts)
   INTEGER :: is, j, k, kkkcoe, kkkcof, kkkg, kkks, kkksto, kkksud, kkksvc, kkku, &
     kkkv, kkkws, kkkyhp, kpts, lllcof, lllip, llliws, lllsud, lllsvc, mxnoni, &

@@ -274,7 +274,7 @@ SUBROUTINE WNNLS(W,Mdw,Me,Ma,N,L,Prgopt,X,Rnorm,Mode,Iwork,Work)
   USE service, ONLY : XERMSG
   INTEGER :: L, Ma, Mdw, Me, Mode, N
   INTEGER :: Iwork(Ma+Me+N)
-  REAL :: Rnorm, Prgopt(:), W(Mdw,N+1), Work(Ma+Me+5*N), X(N)
+  REAL(SP) :: Rnorm, Prgopt(:), W(Mdw,N+1), Work(Ma+Me+5*N), X(N)
   INTEGER :: l1, l2, l3, l4, l5, liw, lw
   CHARACTER(8) :: xern1
   !

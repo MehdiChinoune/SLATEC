@@ -140,17 +140,17 @@ SUBROUTINE SGEMM(Transa,Transb,M,N,K,Alpha,A,Lda,B,Ldb,Beta,C,Ldc)
   !     .. Scalar Arguments ..
   CHARACTER :: Transa, Transb
   INTEGER M, N, K, Lda, Ldb, Ldc
-  REAL Alpha, Beta
+  REAL(SP) Alpha, Beta
   !     .. Array Arguments ..
-  REAL A(Lda,*), B(Ldb,*), C(Ldc,*)
+  REAL(SP) A(Lda,*), B(Ldb,*), C(Ldc,*)
   !     .. Intrinsic Functions ..
   INTRINSIC MAX
   !     .. Local Scalars ..
   LOGICAL nota, notb
   INTEGER i, info, j, l, ncola, nrowa, nrowb
-  REAL temp
+  REAL(SP) temp
   !     .. Parameters ..
-  REAL, PARAMETER :: ONE = 1.0E+0, ZERO = 0.0E+0
+  REAL(SP), PARAMETER :: ONE = 1.0E+0, ZERO = 0.0E+0
   !* FIRST EXECUTABLE STATEMENT  SGEMM
   !
   !     Set  NOTA  and  NOTB  as  true if  A  and  B  respectively are not

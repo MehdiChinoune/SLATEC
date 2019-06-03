@@ -32,9 +32,9 @@ SUBROUTINE U12US(A,Mda,M,N,B,Mdb,Nb,Mode,Krank,Rnorm,H,W,Ir,Ic)
 
   INTEGER :: Krank, M, Mda, Mdb, Mode, N, Nb
   INTEGER :: Ic(N), Ir(M)
-  REAL :: A(Mda,N), B(Mdb,Nb), H(M), Rnorm(Nb), W(4*M)
+  REAL(SP) :: A(Mda,N), B(Mdb,Nb), H(M), Rnorm(Nb), W(4*M)
   INTEGER :: i, ij, ip1, j, jb, k, kp1, mmk
-  REAL :: bb, tt
+  REAL(SP) :: bb, tt
   !* FIRST EXECUTABLE STATEMENT  U12US
   k = Krank
   kp1 = k + 1

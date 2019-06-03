@@ -87,8 +87,8 @@ SUBROUTINE HTRID3(Nm,N,A,D,E,E2,Tau)
 
   !
   INTEGER i, j, k, l, N, ii, Nm, jm1, jp1
-  REAL A(Nm,*), D(*), E(*), E2(*), Tau(2,*)
-  REAL f, g, h, fi, gi, hh, si, scalee
+  REAL(SP) A(Nm,*), D(*), E(*), E2(*), Tau(2,*)
+  REAL(SP) f, g, h, fi, gi, hh, si, scalee
   !
   !* FIRST EXECUTABLE STATEMENT  HTRID3
   Tau(1,N) = 1.0E0

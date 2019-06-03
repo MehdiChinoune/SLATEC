@@ -1,5 +1,5 @@
 !** SCASUM
-REAL FUNCTION SCASUM(N,Cx,Incx)
+REAL(SP) FUNCTION SCASUM(N,Cx,Incx)
   !>
   !  Compute the sum of the magnitudes of the real and
   !            imaginary elements of a complex vector.
@@ -53,7 +53,7 @@ REAL FUNCTION SCASUM(N,Cx,Incx)
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
-  COMPLEX Cx(*)
+  COMPLEX(SP) Cx(*)
   INTEGER i, Incx, ix, N
   !* FIRST EXECUTABLE STATEMENT  SCASUM
   SCASUM = 0.0E0

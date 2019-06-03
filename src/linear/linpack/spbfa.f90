@@ -83,10 +83,10 @@ SUBROUTINE SPBFA(Abd,Lda,N,M,Info)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER Lda, N, M, Info
-  REAL Abd(Lda,*)
+  REAL(SP) Abd(Lda,*)
   !
-  REAL t
-  REAL s
+  REAL(SP) t
+  REAL(SP) s
   INTEGER ik, j, jk, k, mu
   !* FIRST EXECUTABLE STATEMENT  SPBFA
   DO j = 1, N

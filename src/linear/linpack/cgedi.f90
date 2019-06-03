@@ -77,10 +77,10 @@ SUBROUTINE CGEDI(A,Lda,N,Ipvt,Det,Work,Job)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER Lda, N, Ipvt(*), Job
-  COMPLEX A(Lda,*), Det(2), Work(*)
+  COMPLEX(SP) A(Lda,*), Det(2), Work(*)
   !
-  COMPLEX t
-  REAL ten
+  COMPLEX(SP) t
+  REAL(SP) ten
   INTEGER i, j, k, kb, kp1, l, nm1
   !* FIRST EXECUTABLE STATEMENT  CGEDI
   !

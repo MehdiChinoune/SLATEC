@@ -35,10 +35,10 @@ SUBROUTINE PRODP(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Y,M,A,B,C,D,U,W)
   !   900402  Added TYPE section.  (WRB)
 
   INTEGER :: M, Na, Nd, Nm1, Nm2
-  REAL :: A(M), Aa(Na), B(M), Bd(Nd), Bm1(Nm1), Bm2(Nm2), C(M), D(M), U(M), W(M), &
+  REAL(SP) :: A(M), Aa(Na), B(M), Bd(Nd), Bm1(Nm1), Bm2(Nm2), C(M), D(M), U(M), W(M), &
     X(M), Y(M)
   INTEGER :: ia, ibr, id, j, k, m1, m2, mm, mm2
-  REAL :: am, bh, den, rt, v, ym
+  REAL(SP) :: am, bh, den, rt, v, ym
   !* FIRST EXECUTABLE STATEMENT  PRODP
   DO j = 1, M
     Y(j) = X(j)

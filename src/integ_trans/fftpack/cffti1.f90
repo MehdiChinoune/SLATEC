@@ -50,7 +50,7 @@ SUBROUTINE CFFTI1(N,Wa,Ifac)
   !   860115  Modified by Ron Boisvert to adhere to Fortran 77 by
   !           (a) changing dummy array size declarations (1) to (*),
   !           (b) changing references to intrinsic function FLOAT
-  !               to REAL, and
+  !               to REAL(SP), and
   !           (c) changing definition of variable TPI by using
   !               FORTRAN intrinsic function ATAN instead of a DATA
   !               statement.
@@ -61,8 +61,8 @@ SUBROUTINE CFFTI1(N,Wa,Ifac)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER :: N, Ifac(15)
-  REAL :: Wa(2*N)
-  REAL arg, argh, argld, fi, tpi
+  REAL(SP) :: Wa(2*N)
+  REAL(SP) arg, argh, argld, fi, tpi
   INTEGER i, i1, ib, ido, idot, ii, ip, ipm, j, k1, l1, l2, ld, nf, nl, nq, nr, ntry
   INTEGER, PARAMETER :: ntryh(4) = [ 3, 4, 2, 5 ]
   !* FIRST EXECUTABLE STATEMENT  CFFTI1

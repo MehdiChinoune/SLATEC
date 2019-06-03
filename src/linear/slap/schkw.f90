@@ -74,7 +74,7 @@ SUBROUTINE SCHKW(Name,Lociw,Leniw,Locw,Lenw,Ierr,Iter,Err)
   !   921015  Added code to initialize ITER and ERR when IERR=0.  (FNF)
   USE service, ONLY : R1MACH, XERMSG
   !     .. Scalar Arguments ..
-  REAL Err
+  REAL(SP) Err
   INTEGER Ierr, Iter, Leniw, Lenw, Lociw, Locw
   CHARACTER Name*(*)
   !     .. Local Scalars ..

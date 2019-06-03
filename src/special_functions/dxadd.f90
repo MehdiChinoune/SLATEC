@@ -46,9 +46,9 @@ SUBROUTINE DXADD(X,Ix,Y,Iy,Z,Iz,Ierror)
   !   920127  Revised PURPOSE section of prologue.  (DWL)
   USE DXBLK ,ONLY: radixx_com, radixl_com, rad2l_com, l_com
   INTEGER :: Ierror, Ix, Iy, Iz
-  REAL(8) :: X, Y, Z
+  REAL(DP) :: X, Y, Z
   INTEGER :: i, i1, i2, is, j
-  REAL(8) :: s, t
+  REAL(DP) :: s, t
   !
   !   THE CONDITIONS IMPOSED ON L AND KMAX BY THIS SUBROUTINE
   ! ARE

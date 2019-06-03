@@ -104,9 +104,9 @@ SUBROUTINE SGBFA(Abd,Lda,N,Ml,Mu,Ipvt,Info)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER Lda, N, Ml, Mu, Ipvt(*), Info
-  REAL Abd(Lda,*)
+  REAL(SP) Abd(Lda,*)
   !
-  REAL t
+  REAL(SP) t
   INTEGER i, i0, j, ju, jz, j0, j1, k, kp1, l, lm, m, mm, nm1
   !
   !* FIRST EXECUTABLE STATEMENT  SGBFA

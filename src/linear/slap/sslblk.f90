@@ -1,4 +1,5 @@
 MODULE SSLBLK
+  USE service, ONLY : SP
   IMPLICIT NONE
-  REAL, ALLOCATABLE :: soln_com(:)
+  REAL(SP), ALLOCATABLE :: soln_com(:)
 END MODULE SSLBLK

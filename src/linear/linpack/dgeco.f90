@@ -83,11 +83,11 @@ SUBROUTINE DGECO(A,Lda,N,Ipvt,Rcond,Z)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER Lda, N, Ipvt(*)
-  REAL(8) :: A(Lda,*), Z(*)
-  REAL(8) :: Rcond
+  REAL(DP) :: A(Lda,*), Z(*)
+  REAL(DP) :: Rcond
   !
-  REAL(8) :: ek, t, wk, wkm
-  REAL(8) :: anorm, s, sm, ynorm
+  REAL(DP) :: ek, t, wk, wkm
+  REAL(DP) :: anorm, s, sm, ynorm
   INTEGER info, j, k, kb, kp1, l
   !
   !     COMPUTE 1-NORM OF A

@@ -65,11 +65,11 @@ SUBROUTINE DP1VLU(L,Nder,X,Yfit,Yp,A)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   USE service, ONLY : XERMSG
   INTEGER :: L, Nder
-  REAL(8) :: X, Yfit
-  REAL(8) :: A(:), Yp(Nder)
+  REAL(DP) :: X, Yfit
+  REAL(DP) :: A(:), Yp(Nder)
   INTEGER :: i, ic, ilo, in, inp1, iup, k1, k1i, k2, k3, k3p1, &
     k3pn, k4, k4p1, k4pn, kc, lm1, lp1, maxord, n, ndo, ndp1, nord
-  REAL(8) :: cc, dif, val
+  REAL(DP) :: cc, dif, val
   CHARACTER(8) :: xern1, xern2
   !* FIRST EXECUTABLE STATEMENT  DP1VLU
   IF ( L<0 ) THEN

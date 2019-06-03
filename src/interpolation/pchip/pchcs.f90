@@ -97,17 +97,17 @@ SUBROUTINE PCHCS(Switch,N,H,Slope,D,Incfd,Ierr)
   !  DECLARE ARGUMENTS.
   !
   INTEGER N, Incfd, Ierr
-  REAL Switch, H(N), Slope(N), D(Incfd,N)
+  REAL(SP) Switch, H(N), Slope(N), D(Incfd,N)
   !
   !  DECLARE LOCAL VARIABLES.
   !
   INTEGER i, indx, k, nless1
-  REAL del(3), dext, dfloc, dfmx, fact, slmax, wtave(2)
+  REAL(SP) del(3), dext, dfloc, dfmx, fact, slmax, wtave(2)
   !
   !  INITIALIZE.
   !
-  REAL, PARAMETER :: zero = 0., one = 1.
-  REAL, PARAMETER :: fudge = 4.
+  REAL(SP), PARAMETER :: zero = 0., one = 1.
+  REAL(SP), PARAMETER :: fudge = 4.
   !* FIRST EXECUTABLE STATEMENT  PCHCS
   Ierr = 0
   nless1 = N - 1
@@ -234,8 +234,8 @@ CONTAINS
   !
   !  DEFINE INLINE FUNCTION FOR WEIGHTED AVERAGE OF SLOPES.
   !
-  REAL FUNCTION PCHSD(s1,s2,h1,h2)
-    REAL, INTENT(IN) :: s1, s2, h1, h2
+  REAL(SP) FUNCTION PCHSD(s1,s2,h1,h2)
+    REAL(SP), INTENT(IN) :: s1, s2, h1, h2
 
     PCHSD = (h2/(h1+h2))*s1 + (h1/(h1+h2))*s2
 

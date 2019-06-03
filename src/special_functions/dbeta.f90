@@ -1,5 +1,5 @@
 !** DBETA
-REAL(8) FUNCTION DBETA(A,B)
+REAL(DP) FUNCTION DBETA(A,B)
   !>
   !  Compute the complete Beta function.
   !***
@@ -31,9 +31,9 @@ REAL(8) FUNCTION DBETA(A,B)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900727  Added EXTERNAL statement.  (WRB)
   USE service, ONLY : XERMSG, D1MACH
-  REAL(8) :: A, B, xmin
-  REAL(8), SAVE :: xmax
-  REAL(8), PARAMETER :: alnsml = LOG(D1MACH(1))
+  REAL(DP) :: A, B, xmin
+  REAL(DP), SAVE :: xmax
+  REAL(DP), PARAMETER :: alnsml = LOG(D1MACH(1))
   LOGICAL, SAVE :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  DBETA
   IF ( first ) THEN

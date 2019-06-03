@@ -74,7 +74,7 @@ SUBROUTINE QMOMO(Alfa,Beta,Ri,Rj,Rg,Rh,Integr)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
   !
-  REAL Alfa, alfp1, alfp2, an, anm1, Beta, betp1, betp2, ralf, &
+  REAL(SP) Alfa, alfp1, alfp2, an, anm1, Beta, betp1, betp2, ralf, &
     rbet, Rg(25), Rh(25), Ri(25), Rj(25)
   INTEGER i, im1, Integr
   !* FIRST EXECUTABLE STATEMENT  QMOMO

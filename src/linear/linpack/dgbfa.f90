@@ -104,9 +104,9 @@ SUBROUTINE DGBFA(Abd,Lda,N,Ml,Mu,Ipvt,Info)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER Lda, N, Ml, Mu, Ipvt(*), Info
-  REAL(8) :: Abd(Lda,*)
+  REAL(DP) :: Abd(Lda,*)
   !
-  REAL(8) :: t
+  REAL(DP) :: t
   INTEGER i, i0, j, ju, jz, j0, j1, k, kp1, l, lm, m, mm, nm1
   !
   !* FIRST EXECUTABLE STATEMENT  DGBFA

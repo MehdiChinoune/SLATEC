@@ -35,24 +35,26 @@ SUBROUTINE BLKTR1(An,Cn,M,Am,Bm,Cm,Idimy,Y,B,W1,W2,W3,Wd,Ww,Wu,PRDCT,CPRDCT)
   USE CBLKT, ONLY : k_com, ncmplx_com, nm_com, npp_com
   INTERFACE
     SUBROUTINE PRDCT(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Y,M,A,B,C,D,W,U)
+      IMPORT SP
       INTEGER :: M, Na, Nd, Nm1, Nm2
-      REAL :: A(M), Aa(Na), B(M), Bd(Nd), Bm1(Nm1), Bm2(Nm2), C(M), D(M), U(M), &
+      REAL(SP) :: A(M), Aa(Na), B(M), Bd(Nd), Bm1(Nm1), Bm2(Nm2), C(M), D(M), U(M), &
         W(M), X(M), Y(M)
     END SUBROUTINE PRDCT
     SUBROUTINE CPRDCT(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Yy,M,A,B,C,D,W,Y)
+      IMPORT SP
       INTEGER :: M, Na, Nd, Nm1, Nm2
-      REAL :: A(M), Aa(Na), B(M), Bm1(Nm1), Bm2(Nm2), C(M), X(M), Yy(M)
-      COMPLEX :: Y(M), D(M), W(M), Bd(Nd)
+      REAL(SP) :: A(M), Aa(Na), B(M), Bm1(Nm1), Bm2(Nm2), C(M), X(M), Yy(M)
+      COMPLEX(SP) :: Y(M), D(M), W(M), Bd(Nd)
     END SUBROUTINE CPRDCT
   END INTERFACE
   INTEGER :: Idimy, M
-  REAL :: Am(M), An(nm_com), B(:), Bm(M), Cm(M), Cn(nm_com), W1(M), W2(M), W3(M), &
+  REAL(SP) :: Am(M), An(nm_com), B(:), Bm(M), Cm(M), Cn(nm_com), W1(M), W2(M), W3(M), &
     Wd(M), Wu(M), Ww(M), Y(Idimy,nm_com)
   INTEGER i, i1, i2, i3, i4, idxa, idxc, if, ifd, im1, im2, im3, imi1, &
     imi2, ip, ip1, ip2, ip3, ipi1, ipi2, ipi3, ir, irm1, iz, izr, j, kdo, l, &
     ll, na, nc, nm1, nm2, nm3, np, np1, np2, np3, nz
-  REAL :: dum(0), dum2(0,0)
-  COMPLEX :: bc(nm_com/2), dc(M), wc(M), yc(M)
+  REAL(SP) :: dum(0), dum2(0,0)
+  COMPLEX(SP) :: bc(nm_com/2), dc(M), wc(M), yc(M)
   !* FIRST EXECUTABLE STATEMENT  BLKTR1
   kdo = k_com - 1
   DO l = 1, kdo

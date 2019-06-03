@@ -88,10 +88,10 @@ SUBROUTINE SSPFA(Ap,N,Kpvt,Info)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER N, Kpvt(*), Info
-  REAL Ap(*)
+  REAL(SP) Ap(*)
   !
-  REAL ak, akm1, bk, bkm1, denom, mulk, mulkm1, t
-  REAL absakk, alpha, colmax, rowmax
+  REAL(SP) ak, akm1, bk, bkm1, denom, mulk, mulkm1, t
+  REAL(SP) absakk, alpha, colmax, rowmax
   INTEGER ij, ik, ikm1, im, imax, imaxp1, imim, imj, imk
   INTEGER j, jj, jk, jkm1, jmax, jmim, k, kk, km1, km1k, km1km1, km2, kstep
   LOGICAL swap

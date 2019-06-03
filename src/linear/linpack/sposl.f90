@@ -70,9 +70,9 @@ SUBROUTINE SPOSL(A,Lda,N,B)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER Lda, N
-  REAL A(Lda,*), B(*)
+  REAL(SP) A(Lda,*), B(*)
   !
-  REAL t
+  REAL(SP) t
   INTEGER k, kb
   !
   !     SOLVE TRANS(R)*Y = B

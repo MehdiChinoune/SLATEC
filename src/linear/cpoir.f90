@@ -119,10 +119,10 @@ SUBROUTINE CPOIR(A,Lda,N,V,Itask,Ind,Work)
   USE service, ONLY : R1MACH, XERMSG
   !
   INTEGER :: Lda, N, Itask, Ind
-  COMPLEX :: A(Lda,N), V(N), Work(N,N+1)
+  COMPLEX(SP) :: A(Lda,N), V(N), Work(N,N+1)
   INTEGER :: info, j
-  REAL xnorm, dnorm
-  REAL(8) :: dr1, di1, dr2, di2
+  REAL(SP) xnorm, dnorm
+  REAL(DP) :: dr1, di1, dr2, di2
   CHARACTER(8) :: xern1, xern2
   !* FIRST EXECUTABLE STATEMENT  CPOIR
   IF ( Lda<N ) THEN
@@ -189,8 +189,8 @@ SUBROUTINE CPOIR(A,Lda,N,V,Itask,Ind,Work)
   DO j = 1, N
     CALL DCDOT(j-1,-1.D0,A(1,j),1,V(1),1,dr1,di1)
     CALL DCDOT(N-j+1,1.D0,A(j,j),Lda,V(j),1,dr2,di2)
-    dr1 = dr1 + dr2 - REAL(REAL(Work(j,N+1)), 8)
-    di1 = di1 + di2 - REAL(AIMAG(Work(j,N+1)), 8)
+    dr1 = dr1 + dr2 - REAL( REAL(Work(j,N+1)), DP )
+    di1 = di1 + di2 - REAL( AIMAG(Work(j,N+1)), DP )
     Work(j,N+1) = CMPLX(REAL(dr1),REAL(di1))
   END DO
   !

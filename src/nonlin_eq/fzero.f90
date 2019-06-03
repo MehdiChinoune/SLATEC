@@ -102,14 +102,15 @@ SUBROUTINE FZERO(F,B,C,R,Re,Ae,Iflag)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   USE service, ONLY : R1MACH
   INTERFACE
-    REAL FUNCTION F(X)
-      REAL, INTENT(IN) :: X
+    REAL(SP) FUNCTION F(X)
+      IMPORT SP
+      REAL(SP), INTENT(IN) :: X
     END FUNCTION F
   END INTERFACE
   INTEGER :: Iflag
-  REAL :: Ae, B, C, R, Re
+  REAL(SP) :: Ae, B, C, R, Re
   INTEGER ic, kount
-  REAL :: a, acbs, acmb, aw, cmb, er, fa, fb, fc, fx, fz, p, q, rw, t, tol, z
+  REAL(SP) :: a, acbs, acmb, aw, cmb, er, fa, fb, fc, fx, fz, p, q, rw, t, tol, z
   !* FIRST EXECUTABLE STATEMENT  FZERO
   !
   !   ER is two times the computer unit roundoff value which is defined

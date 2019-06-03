@@ -146,18 +146,18 @@ SUBROUTINE SSYR2K(Uplo,Trans,N,K,Alpha,A,Lda,B,Ldb,Beta,C,Ldc)
   !     .. Scalar Arguments ..
   CHARACTER :: Uplo, Trans
   INTEGER N, K, Lda, Ldb, Ldc
-  REAL Alpha, Beta
+  REAL(SP) Alpha, Beta
   !     .. Array Arguments ..
-  REAL A(Lda,*), B(Ldb,*), C(Ldc,*)
+  REAL(SP) A(Lda,*), B(Ldb,*), C(Ldc,*)
   !
   !     .. Intrinsic Functions ..
   INTRINSIC MAX
   !     .. Local Scalars ..
   LOGICAL upper
   INTEGER i, info, j, l, nrowa
-  REAL temp1, temp2
+  REAL(SP) temp1, temp2
   !     .. Parameters ..
-  REAL, PARAMETER :: ONE = 1.0E+0, ZERO = 0.0E+0
+  REAL(SP), PARAMETER :: ONE = 1.0E+0, ZERO = 0.0E+0
   !* FIRST EXECUTABLE STATEMENT  SSYR2K
   !
   !     Test the input parameters.

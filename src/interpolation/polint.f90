@@ -49,9 +49,9 @@ SUBROUTINE POLINT(N,X,Y,C)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   USE service, ONLY : XERMSG
   INTEGER :: N
-  REAL :: C(N), X(N), Y(N)
+  REAL(SP) :: C(N), X(N), Y(N)
   INTEGER :: i, k, km1
-  REAL :: dif
+  REAL(SP) :: dif
   !* FIRST EXECUTABLE STATEMENT  POLINT
   IF ( N<=0 ) THEN
     CALL XERMSG('POLINT','N IS ZERO OR NEGATIVE.',2,1)

@@ -121,7 +121,7 @@ SUBROUTINE DPCHFE(N,X,F,D,Incfd,Skip,Ne,Xe,Fe,Ierr)
   !     1. To produce a single precision version, simply:
   !        a. Change DPCHFE to PCHFE, and DCHFEV to CHFEV, wherever they
   !           occur,
-  !        b. Change the double precision declaration to real,
+  !        b. Change the double precision declaration to REAL(SP),
   !
   !     2. Most of the coding between the call to DCHFEV and the end of
   !        the IR-loop could be eliminated if it were permissible to
@@ -141,7 +141,7 @@ SUBROUTINE DPCHFE(N,X,F,D,Incfd,Skip,Ne,Xe,Fe,Ierr)
   !  DECLARE ARGUMENTS.
   !
   INTEGER N, Incfd, Ne, Ierr
-  REAL(8) :: X(N), F(Incfd,N), D(Incfd,N), Xe(Ne), Fe(Ne)
+  REAL(DP) :: X(N), F(Incfd,N), D(Incfd,N), Xe(Ne), Fe(Ne)
   LOGICAL Skip
   !
   !  DECLARE LOCAL VARIABLES.

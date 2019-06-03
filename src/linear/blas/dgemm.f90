@@ -140,17 +140,17 @@ SUBROUTINE DGEMM(Transa,Transb,M,N,K,Alpha,A,Lda,B,Ldb,Beta,C,Ldc)
   !     .. Scalar Arguments ..
   CHARACTER :: Transa, Transb
   INTEGER M, N, K, Lda, Ldb, Ldc
-  REAL(8) :: Alpha, Beta
+  REAL(DP) :: Alpha, Beta
   !     .. Array Arguments ..
-  REAL(8) :: A(Lda,*), B(Ldb,*), C(Ldc,*)
+  REAL(DP) :: A(Lda,*), B(Ldb,*), C(Ldc,*)
   !     .. Intrinsic Functions ..
   INTRINSIC MAX
   !     .. Local Scalars ..
   LOGICAL nota, notb
   INTEGER i, info, j, l, ncola, nrowa, nrowb
-  REAL(8) :: temp
+  REAL(DP) :: temp
   !     .. Parameters ..
-  REAL(8), PARAMETER :: ONE = 1.0D+0, ZERO = 0.0D+0
+  REAL(DP), PARAMETER :: ONE = 1.0D+0, ZERO = 0.0D+0
   !* FIRST EXECUTABLE STATEMENT  DGEMM
   !
   !     Set  NOTA  and  NOTB  as  true if  A  and  B  respectively are not

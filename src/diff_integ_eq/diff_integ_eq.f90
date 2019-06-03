@@ -10,6 +10,7 @@ include"fishpack/spl4.f90"
 include"fishpack/splpcm.f90"
 
 MODULE diff_integ_eq
+  USE service, ONLY : SP, DP
   IMPLICIT NONE
 
 CONTAINS

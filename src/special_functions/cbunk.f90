@@ -25,8 +25,8 @@ SUBROUTINE CBUNK(Z,Fnu,Kode,Mr,N,Y,Nz,Tol,Elim,Alim)
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
 
   INTEGER Kode, Mr, N, Nz
-  COMPLEX Y(N), Z
-  REAL Alim, ax, ay, Elim, Fnu, Tol, xx, yy
+  COMPLEX(SP) Y(N), Z
+  REAL(SP) Alim, ax, ay, Elim, Fnu, Tol, xx, yy
   !* FIRST EXECUTABLE STATEMENT  CBUNK
   Nz = 0
   xx = REAL(Z)

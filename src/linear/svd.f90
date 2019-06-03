@@ -97,9 +97,9 @@ SUBROUTINE SVD(Nm,M,N,A,W,Matu,U,Matv,V,Ierr,Rv1)
   !
   INTEGER :: M, N, Nm, Ierr
   LOGICAL :: Matu, Matv
-  REAL :: A(Nm,N), W(N), U(Nm,N), V(Nm,N), Rv1(N)
+  REAL(SP) :: A(Nm,N), W(N), U(Nm,N), V(Nm,N), Rv1(N)
   INTEGER :: i, j, k, l, ii, i1, kk, k1, ll, l1, mn, its
-  REAL :: c, f, g, h, s, x, y, z, scalee, s1
+  REAL(SP) :: c, f, g, h, s, x, y, z, scalee, s1
   !
   !* FIRST EXECUTABLE STATEMENT  SVD
   Ierr = 0

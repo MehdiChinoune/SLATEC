@@ -74,14 +74,15 @@ SUBROUTINE BFQAD(F,T,Bcoef,N,K,Id,X1,X2,Tol,Quad,Ierr,Work)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   USE service, ONLY : XERMSG, R1MACH
   INTERFACE
-    REAL FUNCTION F(X)
-      REAL, INTENT(IN) :: X
+    REAL(SP) FUNCTION F(X)
+      IMPORT SP
+      REAL(SP), INTENT(IN) :: X
     END FUNCTION F
   END INTERFACE
   INTEGER :: Id, Ierr, K, N
-  REAL :: Bcoef(N), Quad, T(N+K), Tol, Work(3*K), X1, X2
+  REAL(SP) :: Bcoef(N), Quad, T(N+K), Tol, Work(3*K), X1, X2
   INTEGER :: inbv, iflg, ilo, il1, il2, left, mflag, npk, np1
-  REAL :: a, aa, ans, b, bb, q, ta, tb, wtol
+  REAL(SP) :: a, aa, ans, b, bb, q, ta, tb, wtol
   !* FIRST EXECUTABLE STATEMENT  BFQAD
   Ierr = 1
   Quad = 0.0E0

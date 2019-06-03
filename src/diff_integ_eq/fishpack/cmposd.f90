@@ -31,11 +31,11 @@ SUBROUTINE CMPOSD(Mr,Nr,Istag,Ba,Bb,Bc,Q,Idimq,B,W,D,Tcos,P)
   !           routine CMPMRG.  (WRB)
   USE data_handling, ONLY : C1MERG
   INTEGER :: Idimq, Mr, Nr
-  COMPLEX :: Ba(Mr), Bb(Mr), Bc(Mr), Q(Idimq,Nr), B(:), W(Mr), D(Mr), Tcos(4*Nr), P(:)
+  COMPLEX(SP) :: Ba(Mr), Bb(Mr), Bc(Mr), Q(Idimq,Nr), B(:), W(Mr), D(Mr), Tcos(4*Nr), P(:)
   INTEGER :: i, ideg, ip, ip1, ipstor, irreg, Istag, j, jdeg, jm1, jm2, jm3, &
     jp1, jp2, jp3, jsh, jsp, jst, jstsav, kr, krpi, l, lr, m, n, nodd, noddpr, nun
-  REAL :: fi
-  COMPLEX :: t
+  REAL(SP) :: fi
+  COMPLEX(SP) :: t
   !* FIRST EXECUTABLE STATEMENT  CMPOSD
   m = Mr
   n = Nr

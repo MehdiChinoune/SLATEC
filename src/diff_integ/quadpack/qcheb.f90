@@ -60,9 +60,9 @@ SUBROUTINE QCHEB(X,Fval,Cheb12,Cheb24)
   !   830518  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
-  
+
   !
-  REAL alam, alam1, alam2, Cheb12(13), Cheb24(25), Fval(25), part1, part2, &
+  REAL(SP) alam, alam1, alam2, Cheb12(13), Cheb24(25), Fval(25), part1, part2, &
     part3, v(12), X(11)
   INTEGER i, j
   !

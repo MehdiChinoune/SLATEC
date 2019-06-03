@@ -54,7 +54,7 @@ SUBROUTINE DSWAP(N,Dx,Incx,Dy,Incy)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER i, Incx, Incy, ix, iy, m, mp1, N, ns
-  REAL(8) :: Dx(*), Dy(*), dtemp1, dtemp2, dtemp3
+  REAL(DP) :: Dx(*), Dy(*), dtemp1, dtemp2, dtemp3
   !* FIRST EXECUTABLE STATEMENT  DSWAP
   IF ( N<=0 ) RETURN
   IF ( Incx==Incy ) THEN

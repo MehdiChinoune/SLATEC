@@ -1,5 +1,5 @@
 !** C0LGMC
-COMPLEX FUNCTION C0LGMC(Z)
+COMPLEX(SP) FUNCTION C0LGMC(Z)
   !>
   !  Evaluate (Z+0.5)*LOG((Z+1.)/Z) - 1.0 with relative
   !            accuracy.
@@ -33,10 +33,10 @@ COMPLEX FUNCTION C0LGMC(Z)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   USE service, ONLY : R1MACH
-  COMPLEX :: Z
-  REAL :: cabsz
-  COMPLEX :: q
-  REAL, PARAMETER :: rbig = 1.0/R1MACH(3)
+  COMPLEX(SP) :: Z
+  REAL(SP) :: cabsz
+  COMPLEX(SP) :: q
+  REAL(SP), PARAMETER :: rbig = 1.0/R1MACH(3)
   !* FIRST EXECUTABLE STATEMENT  C0LGMC
   !
   cabsz = ABS(Z)

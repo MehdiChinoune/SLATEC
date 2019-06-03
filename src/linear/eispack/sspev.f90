@@ -93,7 +93,7 @@ SUBROUTINE SSPEV(A,N,E,V,Ldv,Work,Job,Info)
   USE service, ONLY : XERMSG
   INTEGER Job
   INTEGER i, Info, j, Ldv, m, N
-  REAL A(N*(N+1)/2), E(N), V(Ldv,N), Work(2*N)
+  REAL(SP) A(N*(N+1)/2), E(N), V(Ldv,N), Work(2*N)
   !* FIRST EXECUTABLE STATEMENT  SSPEV
   IF ( N>Ldv ) CALL XERMSG('SSPEV','N .GT. LDV.',1,1)
   IF ( N>Ldv ) RETURN

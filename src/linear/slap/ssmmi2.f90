@@ -165,7 +165,7 @@ SUBROUTINE SSMMI2(N,B,X,Il,Jl,L,Dinv,Iu,Ju,U)
   !     .. Scalar Arguments ..
   INTEGER N
   !     .. Array Arguments ..
-  REAL B(N), Dinv(N), L(*), U(*), X(N)
+  REAL(SP) B(N), Dinv(N), L(*), U(*), X(N)
   INTEGER Il(*), Iu(*), Jl(*), Ju(*)
   !     .. Local Scalars ..
   INTEGER i, icol, irow, j, jbgn, jend

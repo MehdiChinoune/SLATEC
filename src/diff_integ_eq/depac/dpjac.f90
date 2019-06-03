@@ -35,21 +35,23 @@ SUBROUTINE DPJAC(Neq,Y,Yh,Nyh,Ewt,Ftem,Savf,Wm,Iwm,DF,DJAC)
   !
   INTERFACE
     SUBROUTINE DF(X,U,Uprime)
-      REAL(8) :: X
-      REAL(8) :: U(:), Uprime(:)
+      IMPORT DP
+      REAL(DP) :: X
+      REAL(DP) :: U(:), Uprime(:)
     END SUBROUTINE DF
     SUBROUTINE DJAC(X,U,Pd,Nrowpd)
+      IMPORT DP
       INTEGER :: Nrowpd
-      REAL(8) :: X
-      REAL(8) :: U(:), Pd(:,:)
+      REAL(DP) :: X
+      REAL(DP) :: U(:), Pd(:,:)
     END SUBROUTINE DJAC
   END INTERFACE
   INTEGER :: Neq, Nyh
   INTEGER :: Iwm(:)
-  REAL(8) :: Ewt(n_com), Ftem(n_com), Savf(n_com), Wm(:), Y(Neq), Yh(Nyh,n_com)
+  REAL(DP) :: Ewt(n_com), Ftem(n_com), Savf(n_com), Wm(:), Y(Neq), Yh(Nyh,n_com)
   INTEGER :: i, i1, i2, ii, j, j1, jj, mba, mband, meb1, meband, ml, ml3, mu
-  REAL(8) :: con, di, fac, hl0, r, r0, srur, yi, yj, yjj
-  REAL(8), ALLOCATABLE :: pd(:,:)
+  REAL(DP) :: con, di, fac, hl0, r, r0, srur, yi, yj, yjj
+  REAL(DP), ALLOCATABLE :: pd(:,:)
   !     ------------------------------------------------------------------
   !      DPJAC IS CALLED BY DSTOD  TO COMPUTE AND PROCESS THE MATRIX
   !      P = I - H*EL(1)*J, WHERE J IS AN APPROXIMATION TO THE JACOBIAN.

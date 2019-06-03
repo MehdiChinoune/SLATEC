@@ -1,5 +1,5 @@
 !** DPCHIA
-REAL(8) FUNCTION DPCHIA(N,X,F,D,Incfd,Skip,A,B,Ierr)
+REAL(DP) FUNCTION DPCHIA(N,X,F,D,Incfd,Skip,A,B,Ierr)
   !>
   !  Evaluate the definite integral of a piecewise cubic
   !            Hermite function over an arbitrary interval.
@@ -124,17 +124,17 @@ REAL(8) FUNCTION DPCHIA(N,X,F,D,Incfd,Skip,A,B,Ierr)
   !  DECLARE ARGUMENTS.
   !
   INTEGER N, Incfd, Ierr
-  REAL(8) :: X(N), F(Incfd,N), D(Incfd,N), A, B
+  REAL(DP) :: X(N), F(Incfd,N), D(Incfd,N), A, B
   LOGICAL Skip
   !
   !  DECLARE LOCAL VARIABLES.
   !
   INTEGER i, ia, ib, ierd, il, ir
-  REAL(8) :: value, xa, xb
+  REAL(DP) :: value, xa, xb
   !
   !  INITIALIZE.
   !
-  REAL(8), PARAMETER :: zero = 0.D0
+  REAL(DP), PARAMETER :: zero = 0.D0
   !* FIRST EXECUTABLE STATEMENT  DPCHIA
   value = zero
   !

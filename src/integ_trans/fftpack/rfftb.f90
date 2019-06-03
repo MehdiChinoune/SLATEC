@@ -97,7 +97,7 @@ SUBROUTINE RFFTB(N,R,Wsave)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER :: N
-  REAL :: R(N), Wsave(2*N+15)
+  REAL(SP) :: R(N), Wsave(2*N+15)
   INTEGER :: ifac(15)
   !* FIRST EXECUTABLE STATEMENT  RFFTB
   IF ( N==1 ) RETURN

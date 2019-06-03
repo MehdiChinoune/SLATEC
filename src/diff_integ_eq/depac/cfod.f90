@@ -27,7 +27,7 @@ SUBROUTINE CFOD(Meth,Elco,Tesco)
   !
   !
   INTEGER Meth, i, ib, nq, nqm1, nqp1
-  REAL Elco(13,12), Tesco(3,12), agamq, fnq, fnqm1, pc(12), pint, ragq, rqfac, &
+  REAL(SP) Elco(13,12), Tesco(3,12), agamq, fnq, fnqm1, pc(12), pint, ragq, rqfac, &
     rq1fac, tsign, xpin
   !-----------------------------------------------------------------------
   ! CFOD  IS CALLED BY THE INTEGRATOR ROUTINE TO SET COEFFICIENTS

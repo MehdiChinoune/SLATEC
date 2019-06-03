@@ -133,13 +133,13 @@ SUBROUTINE RC3JJ(L2,L3,M2,M3,L1min,L1max,Thrcof,Ndim,Ier)
   USE service, ONLY : XERMSG, R1MACH
   !
   INTEGER Ndim, Ier
-  REAL L2, L3, M2, M3, L1min, L1max, Thrcof(Ndim)
+  REAL(SP) L2, L3, M2, M3, L1min, L1max, Thrcof(Ndim)
   !
   INTEGER i, indexx, lstep, n, nfin, nfinp1, nfinp2, nfinp3, nlim, nstep2
-  REAL a1, a1s, a2, a2s, c1, c1old, c2, cnorm, denom, dv, hugee, l1, m1, &
+  REAL(SP) a1, a1s, a2, a2s, c1, c1old, c2, cnorm, denom, dv, hugee, l1, m1, &
     newfac, oldfac, ratio, sign1, sign2, srhuge, srtiny, sum1, sum2, sumbac, &
     sumfor, sumuni, thresh, tinyy, x, x1, x2, x3, y, y1, y2, y3
-  REAL, PARAMETER :: zero = 0.0, eps = 0.01, one = 1.0, two = 2.0, three = 3.0
+  REAL(SP), PARAMETER :: zero = 0.0, eps = 0.01, one = 1.0, two = 2.0, three = 3.0
   !
   !* FIRST EXECUTABLE STATEMENT  RC3JJ
   Ier = 0

@@ -97,16 +97,17 @@ SUBROUTINE DFDJC1(FCN,N,X,Fvec,Fjac,Ldfjac,Iflag,Ml,Mu,Epsfcn,Wa1,Wa2)
   USE service, ONLY : D1MACH
   INTERFACE
     SUBROUTINE FCN(N,X,Fvec,iflag)
+      IMPORT DP
       INTEGER :: N, Iflag
-      REAL(8) :: X(N), Fvec(N)
+      REAL(DP) :: X(N), Fvec(N)
     END SUBROUTINE FCN
   END INTERFACE
   INTEGER :: Iflag, Ldfjac, Ml, Mu, N
-  REAL(8) :: Epsfcn
-  REAL(8) :: Fjac(Ldfjac,N), Fvec(N), Wa1(N), Wa2(N), X(N)
+  REAL(DP) :: Epsfcn
+  REAL(DP) :: Fjac(Ldfjac,N), Fvec(N), Wa1(N), Wa2(N), X(N)
   INTEGER :: i, j, k, msum
-  REAL(8) :: eps, epsmch, h, temp
-  REAL(8), PARAMETER :: zero = 0.0D0
+  REAL(DP) :: eps, epsmch, h, temp
+  REAL(DP), PARAMETER :: zero = 0.0D0
   !
   !     EPSMCH IS THE MACHINE PRECISION.
   !

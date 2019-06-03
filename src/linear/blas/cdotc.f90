@@ -1,5 +1,5 @@
 !** CDOTC
-COMPLEX FUNCTION CDOTC(N,Cx,Incx,Cy,Incy)
+COMPLEX(SP) FUNCTION CDOTC(N,Cx,Incx,Cy,Incy)
   !>
   !  Dot product of two complex vectors using the complex
   !            conjugate of the first vector.
@@ -54,7 +54,7 @@ COMPLEX FUNCTION CDOTC(N,Cx,Incx,Cy,Incy)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER i, Incx, Incy, kx, ky, N, ns
-  COMPLEX Cx(*), Cy(*)
+  COMPLEX(SP) Cx(*), Cy(*)
   !* FIRST EXECUTABLE STATEMENT  CDOTC
   CDOTC = (0.0,0.0)
   IF ( N<=0 ) RETURN

@@ -1,4 +1,5 @@
 MODULE TEST43_MOD
+  USE service, ONLY : SP, DP
   IMPLICIT NONE
 
 CONTAINS
@@ -21,8 +22,8 @@ CONTAINS
     !   900415  Minor clean-up of prologue and code.  (WRB)
 
     INTEGER :: Nrowpd
-    REAL :: T, U(:), Pd(:,:)
-    REAL :: r, r5, rsq, u1sq, u2sq, u1u2
+    REAL(SP) :: T, U(:), Pd(:,:)
+    REAL(SP) :: r, r5, rsq, u1sq, u2sq, u1u2
     !* FIRST EXECUTABLE STATEMENT  JAC
     u1sq = U(1)*U(1)
     u2sq = U(2)*U(2)
@@ -58,11 +59,11 @@ CONTAINS
     !
     !     Declare arguments.
     !
-    REAL :: T, U(:), Uprime(:)
+    REAL(SP) :: T, U(:), Uprime(:)
     !
     !     Declare local variables.
     !
-    REAL r, rsq, r3
+    REAL(SP) r, rsq, r3
     !* FIRST EXECUTABLE STATEMENT  FDEQC
     rsq = U(1)*U(1) + U(2)*U(2)
     r = SQRT(rsq)
@@ -132,7 +133,7 @@ CONTAINS
     !     Declare local variables.
     !
     INTEGER idid, info(15), iwork(51), n, liw, lrw
-    REAL abserr(1), r, relerr(1), reltol, rwork(214), t, tout, u(4)
+    REAL(SP) abserr(1), r, relerr(1), reltol, rwork(214), t, tout, u(4)
     !* FIRST EXECUTABLE STATEMENT  QXABM
     IF ( Kprint>=2 ) WRITE (Lun,99001)
     !
@@ -244,7 +245,7 @@ CONTAINS
     !     Declare local variables.
     !
     INTEGER idid, info(15), iwork(60), n, liw, lrw
-    REAL abserr(1), r, relerr(1), reltol, rwork(306), t, tout, u(4)
+    REAL(SP) abserr(1), r, relerr(1), reltol, rwork(306), t, tout, u(4)
     !* FIRST EXECUTABLE STATEMENT  QXBDF
     IF ( Kprint>=2 ) WRITE (Lun,99001)
     !
@@ -358,7 +359,7 @@ CONTAINS
     !     Declare local variables.
     !
     INTEGER idid, info(15), iwork(34), n, liw, lrw
-    REAL abserr(1), r, relerr(1), reltol, rwork(61), t, tout, u(4)
+    REAL(SP) abserr(1), r, relerr(1), reltol, rwork(61), t, tout, u(4)
     !* FIRST EXECUTABLE STATEMENT  QXRKF
     IF ( Kprint>=2 ) WRITE (Lun,99001)
     !
@@ -435,7 +436,7 @@ CONTAINS
     USE slatec, ONLY : BVSUP
     USE common_mod, ONLY : PASS
     INTEGER numort, nxpts
-    REAL a(2,4), abser, ae, alpha(2), b(2,4), beta(2), re, reler, sve, tol, &
+    REAL(SP) a(2,4), abser, ae, alpha(2), b(2,4), beta(2), re, reler, sve, tol, &
       work(1000), y(4,15)
     INTEGER i, iflag, igofx, Ipass, ipss, j, kont, kount, Kprint, l, &
       Lun, ncomp, ndiw, ndw, neqivp, nfc, nic, nrowa, nrowb, nrowy
@@ -449,7 +450,7 @@ CONTAINS
       2.017054332E+02, -1.990879843E+01, 2.051622475E+02, -1.324886978E+01, &
       2.059197452E+02, 1.051529813E+01, 1.972191446E+02, 9.320592785E+01, &
       1.556894846E+02, 3.801682434E+02, 1.818989404E-12, 1.379853993E+03 ], [2,15] )
-    REAL :: xpts(15) = [ 60., 55., 50., 45., 40., 38., 36., 34., &
+    REAL(SP) :: xpts(15) = [ 60., 55., 50., 45., 40., 38., 36., 34., &
       32., 31., 30.8, 30.6, 30.4, 30.2, 30. ]
     !* FIRST EXECUTABLE STATEMENT  QXBVSP
     IF ( Kprint>=2 ) THEN

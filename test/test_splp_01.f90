@@ -1,4 +1,5 @@
 MODULE TEST37_MOD
+  USE service, ONLY : SP, DP
   IMPLICIT NONE
 
 CONTAINS
@@ -22,12 +23,12 @@ CONTAINS
     !   901013  Added additional printout on failure.  (RWC)
     USE slatec, ONLY : USRMAT, SPLP
     USE common_mod, ONLY : PASS
-    REAL bl(60), bu(60), d(14,37), dattrv(210), duals(60), prgopt(50), &
+    REAL(SP) bl(60), bu(60), d(14,37), dattrv(210), duals(60), prgopt(50), &
       primal(60), work(800), zero
     INTEGER i, ibasis(60), ic, icnt, ind(60), info, Ipass, isoln(14), iv, ivv, &
       iwork(900), j, kk, kount, Kprint, liw, Lun, lw, mm, mrelas
     INTEGER nvars
-    REAL costs(37)
+    REAL(SP) costs(37)
     !* FIRST EXECUTABLE STATEMENT  SPLPQX
     IF ( Kprint>=2 ) WRITE (Lun,99001)
     99001 FORMAT ('1 SPLP QUICK CHECK')
@@ -289,8 +290,8 @@ CONTAINS
     USE slatec, ONLY : SCOPY, SBOLS, SNRM2, SBOCLS, R1MACH
     INTEGER ib, Ipass, irhs, itest, j, Kprint, Lun, mcon, mdw, &
       mode, mpass, mrows, ncols
-    REAL rnorm, rnormc, sr
-    REAL w(11,11), x(30), rw(55), bl1(10), bu1(10)
+    REAL(SP) rnorm, rnormc, sr
+    REAL(SP) w(11,11), x(30), rw(55), bl1(10), bu1(10)
     INTEGER ind(10), iw(20), iopt(40)
     CHARACTER(4) :: msg
     !

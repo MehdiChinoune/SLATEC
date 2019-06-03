@@ -79,9 +79,9 @@ SUBROUTINE DBSPVN(T,Jhigh,K,Indexx,X,Ileft,Vnikx,Work,Iwork)
   USE service, ONLY : XERMSG
   !
   INTEGER :: Ileft, Indexx, Iwork, Jhigh, K
-  REAL(8) :: T(Ileft+Jhigh), Vnikx(K), Work(2*K), X
+  REAL(DP) :: T(Ileft+Jhigh), Vnikx(K), Work(2*K), X
   INTEGER :: imjp1, ipj, jp1, jp1ml, l
-  REAL(8) :: vm, vmprev
+  REAL(DP) :: vm, vmprev
   !     DIMENSION T(ILEFT+JHIGH)
   !     CONTENT OF J, DELTAM, DELTAP IS EXPECTED UNCHANGED BETWEEN CALLS.
   !     WORK(I) = DELTAP(I), WORK(K+I) = DELTAM(I), I = 1,K

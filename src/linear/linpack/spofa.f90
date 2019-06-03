@@ -62,10 +62,10 @@ SUBROUTINE SPOFA(A,Lda,N,Info)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER Lda, N, Info
-  REAL A(Lda,*)
+  REAL(SP) A(Lda,*)
   !
-  REAL t
-  REAL s
+  REAL(SP) t
+  REAL(SP) s
   INTEGER j, jm1, k
   !* FIRST EXECUTABLE STATEMENT  SPOFA
   DO j = 1, N

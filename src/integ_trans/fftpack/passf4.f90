@@ -23,9 +23,9 @@ SUBROUTINE PASSF4(Ido,L1,Cc,Ch,Wa1,Wa2,Wa3)
   !   900402  Added TYPE section.  (WRB)
 
   INTEGER :: Ido, L1
-  REAL :: Cc(Ido,4,L1), Ch(Ido,L1,4), Wa1(Ido), Wa2(Ido), Wa3(Ido)
+  REAL(SP) :: Cc(Ido,4,L1), Ch(Ido,L1,4), Wa1(Ido), Wa2(Ido), Wa3(Ido)
   INTEGER :: i, k
-  REAL :: ci2, ci3, ci4, cr2, cr3, cr4, ti1, ti2, ti3, ti4, tr1, tr2, tr3, tr4
+  REAL(SP) :: ci2, ci3, ci4, cr2, cr3, cr4, ti1, ti2, ti3, ti4, tr1, tr2, tr3, tr4
   !* FIRST EXECUTABLE STATEMENT  PASSF4
   IF ( Ido==2 ) THEN
     DO k = 1, L1

@@ -65,9 +65,9 @@ SUBROUTINE CGBDI(Abd,Lda,N,Ml,Mu,Ipvt,Det)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   
   INTEGER Lda, N, Ml, Mu, Ipvt(*)
-  COMPLEX Abd(Lda,*), Det(2)
+  COMPLEX(SP) Abd(Lda,*), Det(2)
   !
-  REAL ten
+  REAL(SP) ten
   INTEGER i, m
   !* FIRST EXECUTABLE STATEMENT  CGBDI
   m = Ml + Mu + 1

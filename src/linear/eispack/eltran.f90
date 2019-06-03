@@ -74,7 +74,7 @@ SUBROUTINE ELTRAN(Nm,N,Low,Igh,A,Intt,Z)
 
   !
   INTEGER i, j, N, kl, mm, mp, Nm, Igh, Low, mp1
-  REAL A(Nm,*), Z(Nm,*)
+  REAL(SP) A(Nm,*), Z(Nm,*)
   INTEGER Intt(*)
   !
   !* FIRST EXECUTABLE STATEMENT  ELTRAN

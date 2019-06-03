@@ -105,15 +105,15 @@ SUBROUTINE SSPMV(Uplo,N,Alpha,Ap,X,Incx,Beta,Y,Incy)
   !           lines were modified.  (BKS)
   USE service, ONLY : XERBLA
   !     .. Scalar Arguments ..
-  REAL Alpha, Beta
+  REAL(SP) Alpha, Beta
   INTEGER Incx, Incy, N
   CHARACTER :: Uplo
   !     .. Array Arguments ..
-  REAL Ap(*), X(*), Y(*)
+  REAL(SP) Ap(*), X(*), Y(*)
   !     .. Parameters ..
-  REAL, PARAMETER :: ONE = 1.0E+0, ZERO = 0.0E+0
+  REAL(SP), PARAMETER :: ONE = 1.0E+0, ZERO = 0.0E+0
   !     .. Local Scalars ..
-  REAL temp1, temp2
+  REAL(SP) temp1, temp2
   INTEGER i, info, ix, iy, j, jx, jy, k, kk, kx, ky
   !* FIRST EXECUTABLE STATEMENT  SSPMV
   !

@@ -1,4 +1,5 @@
 MODULE TEST11_MOD
+  USE service, ONLY : SP, DP
   IMPLICIT NONE
 
 CONTAINS
@@ -37,10 +38,10 @@ CONTAINS
     INTEGER mu, mu1, mu2, n, nbits, ndec, nerr, nradpl, nu1, nudiff
     CHARACTER(34) :: fmt, fmtf, fmti
     INTEGER Lun, Kprint, Ipass
-    REAL p(10), q(10), r(10), c1(10), c2(10), pn(10)
-    REAL deg, theta, dnu1, dzero
-    REAL x11, x12, x13, x21, x22, x23
-    REAL nu
+    REAL(SP) p(10), q(10), r(10), c1(10), c2(10), pn(10)
+    REAL(SP) deg, theta, dnu1, dzero
+    REAL(SP) x11, x12, x13, x21, x22, x23
+    REAL(SP) nu
     !
     !* FIRST EXECUTABLE STATEMENT  FCNQX1
     !
@@ -384,7 +385,7 @@ CONTAINS
     USE slatec, ONLY : XADD, XADJ, XRED
     INTEGER i, Ic1(*), Ic2(*), Ierror, Ip(*), Iq(*), Ir(*), ix1, ix2, j, k, l, &
       lm1, mu, Mu1, Mu2, Nudiff
-    REAL C1(*), C2(*), dmu, dmu1, nu, Dnu1, P(*), Q(*), R(*), Theta, sx, x1, x2
+    REAL(SP) C1(*), C2(*), dmu, dmu1, nu, Dnu1, P(*), Q(*), R(*), Theta, sx, x1, x2
     !
     !         PLACE ALL INPUT IN ADJUSTED FORM.
     !

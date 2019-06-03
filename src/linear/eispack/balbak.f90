@@ -73,8 +73,8 @@ SUBROUTINE BALBAK(Nm,N,Low,Igh,Scalee,M,Z)
 
   !
   INTEGER i, j, k, M, N, ii, Nm, Igh, Low
-  REAL Scalee(*), Z(Nm,*)
-  REAL s
+  REAL(SP) Scalee(*), Z(Nm,*)
+  REAL(SP) s
   !
   !* FIRST EXECUTABLE STATEMENT  BALBAK
   IF ( M/=0 ) THEN

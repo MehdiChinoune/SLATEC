@@ -116,7 +116,7 @@ SUBROUTINE DSD2S(N,Nelt,Ia,Ja,A,Isym,Dinv)
   !     .. Scalar Arguments ..
   INTEGER Isym, N, Nelt
   !     .. Array Arguments ..
-  REAL(8) :: A(Nelt), Dinv(N)
+  REAL(DP) :: A(Nelt), Dinv(N)
   INTEGER Ia(Nelt), Ja(Nelt)
   !     .. Local Scalars ..
   INTEGER i, k, kbgn, kend

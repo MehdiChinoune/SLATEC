@@ -162,10 +162,10 @@ SUBROUTINE DBHIN(N,Nelt,Ia,Ja,A,Isym,Soln,Rhs,Iunit,Job)
   !     .. Scalar Arguments ..
   INTEGER Isym, Iunit, Job, N, Nelt
   !     .. Array Arguments ..
-  REAL(8) :: A(Nelt), Rhs(N), Soln(N)
+  REAL(DP) :: A(Nelt), Rhs(N), Soln(N)
   INTEGER Ia(Nelt), Ja(Nelt)
   !     .. Local Scalars ..
-  REAL(8) :: temp
+  REAL(DP) :: temp
   INTEGER i, ibgn, icol, iend, itemp, j, jobret, ncol, nele, nind, &
     nline, nnvls, npls, nrhsls, nrils, nrow
   CHARACTER code*3, pntfmt*16, rinfmt*16, nvlfmt*20, rhsfmt*20, title*80

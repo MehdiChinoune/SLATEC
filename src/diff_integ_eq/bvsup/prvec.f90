@@ -1,5 +1,5 @@
 !** PRVEC
-REAL FUNCTION PRVEC(M,U,V)
+REAL(SP) FUNCTION PRVEC(M,U,V)
   !>
   !  Subsidiary to BVSUP
   !***
@@ -25,7 +25,7 @@ REAL FUNCTION PRVEC(M,U,V)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
   INTEGER :: M
-  REAL :: U(M), V(M)
+  REAL(SP) :: U(M), V(M)
   INTEGER :: n
   !* FIRST EXECUTABLE STATEMENT  PRVEC
   n = M/2

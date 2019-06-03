@@ -76,40 +76,44 @@ SUBROUTINE CDSTP(Eps,F,FA,Hmax,Impl,Ierror,JACOBN,Matdim,Maxord,Mint,&
   USE linear, ONLY : SCNRM2
   INTERFACE
     SUBROUTINE F(N,T,Y,Ydot)
+      IMPORT SP
       INTEGER :: N
-      REAL :: T
-      COMPLEX :: Y(:), Ydot(:)
+      REAL(SP) :: T
+      COMPLEX(SP) :: Y(:), Ydot(:)
     END SUBROUTINE F
     SUBROUTINE JACOBN(N,T,Y,Dfdy,Matdim,Ml,Mu)
+      IMPORT SP
       INTEGER :: N, Matdim, Ml, Mu
-      REAL :: T
-      COMPLEX :: Y(N), Dfdy(Matdim,N)
+      REAL(SP) :: T
+      COMPLEX(SP) :: Y(N), Dfdy(Matdim,N)
     END SUBROUTINE JACOBN
     SUBROUTINE USERS(Y,Yh,Ywt,Save1,Save2,T,H,El,Impl,N,Nde,Iflag)
+      IMPORT SP
       INTEGER :: Impl, N, Nde, iflag
-      REAL :: T, H, El
-      COMPLEX :: Y(N), Yh(N,13), Ywt(N), Save1(N), Save2(N)
+      REAL(SP) :: T, H, El
+      COMPLEX(SP) :: Y(N), Yh(N,13), Ywt(N), Save1(N), Save2(N)
     END SUBROUTINE USERS
     SUBROUTINE FA(N,T,Y,A,Matdim,Ml,Mu,Nde)
+      IMPORT SP
       INTEGER :: N, Matdim, Ml, Mu, Nde
-      REAL :: T
-      COMPLEX :: Y(N), A(:,:)
+      REAL(SP) :: T
+      COMPLEX(SP) :: Y(N), A(:,:)
     END SUBROUTINE FA
   END INTERFACE
   INTEGER :: Ierror, Impl, Iswflg, Jstate, Jstepl, Jtask, Matdim, Maxord, Mint, &
     Miter, Ml, Mntold, Mtrold, Mtrsv, Mu, Mxrdsv, N, Nde, Nfe, Nje, Nq, Nqused, &
     Nstep, Nwait, Ipvt(N)
-  REAL :: Avgh, Avgord, Eps, H, Hmax, Hold, Hused, Rc, Rmax, T, Trend, Uround
-  REAL :: Tq(3,12), El(13,12)
-  COMPLEX :: A(Matdim,N), Dfdy(Matdim,N), Fac(N), Save1(N), Save2(N), Y(N+1), &
+  REAL(SP) :: Avgh, Avgord, Eps, H, Hmax, Hold, Hused, Rc, Rmax, T, Trend, Uround
+  REAL(SP) :: Tq(3,12), El(13,12)
+  COMPLEX(SP) :: A(Matdim,N), Dfdy(Matdim,N), Fac(N), Save1(N), Save2(N), Y(N+1), &
     Yh(N,13), Ywt(N)
   LOGICAL :: Convrg
   INTEGER :: i, iter, j, nfail, nsv, ntry
-  REAL :: bnd, ctest, d, denom, d1, erdn, erup, etest, hn, hs, numer, rh, rh1, &
+  REAL(SP) :: bnd, ctest, d, denom, d1, erdn, erup, etest, hn, hs, numer, rh, rh1, &
     rh2, rh3, told, y0nrm
   LOGICAL :: evalfa, evaljc, switch
   INTEGER, PARAMETER :: MXFAIL = 3, MXITER = 3, MXTRY = 50
-  REAL, PARAMETER :: BIAS1 = 1.3E0, BIAS2 = 1.2E0, BIAS3 = 1.4E0, RCTEST = 0.3E0, &
+  REAL(SP), PARAMETER :: BIAS1 = 1.3E0, BIAS2 = 1.2E0, BIAS3 = 1.4E0, RCTEST = 0.3E0, &
     RMFAIL = 2.E0, RMNORM = 10.E0, TRSHLD = 1.E0
   INTEGER, PARAMETER :: NDJSTP = 10
   LOGICAL, SAVE :: ier = .FALSE.

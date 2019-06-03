@@ -33,7 +33,7 @@ SUBROUTINE STOR1(U,Yh,V,Yp,Ntemp,Ndisk,Ntape)
   !   910722  Updated AUTHOR section.  (ALS)
   USE ML, ONLY : c_com, inhomo_com, ncomp_com, nfc_com
   INTEGER :: Ndisk, Ntape, Ntemp
-  REAL :: U(:), V(:), Yh(:), Yp(:)
+  REAL(SP) :: U(:), V(:), Yh(:), Yp(:)
   INTEGER :: j, nctnf
   !
   !- *********************************************************************

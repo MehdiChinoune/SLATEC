@@ -28,7 +28,7 @@ SUBROUTINE DX4(U,Idmn,I,J,Uxxx,Uxxxx)
   !   900402  Added TYPE section.  (WRB)
   USE SPL4, ONLY : dlx4_com, kswx_com, tdlx3_com, k_com, l_com
   INTEGER :: I, Idmn, J
-  REAL :: U(Idmn,l_com), Uxxx, Uxxxx
+  REAL(SP) :: U(Idmn,l_com), Uxxx, Uxxxx
   !* FIRST EXECUTABLE STATEMENT  DX4
   IF ( I>2.AND.I<(k_com-1) ) THEN
     !

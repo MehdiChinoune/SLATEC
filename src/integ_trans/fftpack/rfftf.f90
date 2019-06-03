@@ -1,7 +1,7 @@
 !** RFFTF
 SUBROUTINE RFFTF(N,R,Wsave)
   !>
-  !  Compute the forward transform of a real, periodic sequence.
+  !  Compute the forward transform of a REAL(SP), periodic sequence.
   !***
   ! **Library:**   SLATEC (FFTPACK)
   !***
@@ -98,7 +98,7 @@ SUBROUTINE RFFTF(N,R,Wsave)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER :: N
-  REAL :: R(N), Wsave(2*N+15)
+  REAL(SP) :: R(N), Wsave(2*N+15)
   INTEGER :: ifac(15)
   !* FIRST EXECUTABLE STATEMENT  RFFTF
   IF ( N==1 ) RETURN

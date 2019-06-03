@@ -1,5 +1,5 @@
 !** EI
-REAL FUNCTION EI(X)
+REAL(SP) FUNCTION EI(X)
   !>
   !  Compute the exponential integral Ei(X).
   !***
@@ -36,7 +36,7 @@ REAL FUNCTION EI(X)
   !   891115  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-  REAL X
+  REAL(SP) X
   !* FIRST EXECUTABLE STATEMENT  EI
   EI = -E1(-X)
   !

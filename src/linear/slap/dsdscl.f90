@@ -150,10 +150,10 @@ SUBROUTINE DSDSCL(N,Nelt,Ia,Ja,A,X,B,Dinv,Job,Itol)
   !     .. Scalar Arguments ..
   INTEGER Itol, Job, N, Nelt
   !     .. Array Arguments ..
-  REAL(8) :: A(Nelt), B(N), Dinv(N), X(N)
+  REAL(DP) :: A(Nelt), B(N), Dinv(N), X(N)
   INTEGER Ia(Nelt), Ja(Nelt)
   !     .. Local Scalars ..
-  REAL(8) :: di
+  REAL(DP) :: di
   INTEGER icol, j, jbgn, jend
   !     .. Intrinsic Functions ..
   INTRINSIC SQRT

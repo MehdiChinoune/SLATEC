@@ -58,9 +58,9 @@ SUBROUTINE PPQAD(Ldc,C,Xi,Lxi,K,X1,X2,Pquad)
   USE service, ONLY : XERMSG
   !
   INTEGER :: K, Ldc, Lxi
-  REAL :: C(Ldc,Lxi), Pquad, Xi(Lxi+1), X1, X2
+  REAL(SP) :: C(Ldc,Lxi), Pquad, Xi(Lxi+1), X1, X2
   INTEGER :: i, ii, il, ilo, il1, il2, im, left, mf1, mf2
-  REAL :: a, aa, bb, dx, flk, q, s, ss(2), ta, tb, x
+  REAL(SP) :: a, aa, bb, dx, flk, q, s, ss(2), ta, tb, x
   !
   !* FIRST EXECUTABLE STATEMENT  PPQAD
   Pquad = 0.0E0

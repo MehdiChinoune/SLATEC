@@ -1,4 +1,5 @@
 MODULE TEST23_MOD
+  USE service, ONLY : SP, DP
   IMPLICIT NONE
 
 CONTAINS
@@ -41,17 +42,17 @@ CONTAINS
     !           FORMATs.  (RWC)
     USE slatec, ONLY : CCHDC
     INTEGER Kprint, Lun, Nerr
-    COMPLEX work(4), at(5,4)
+    COMPLEX(SP) work(4), at(5,4)
     INTEGER lda, p, job, info, jpvtt(4), i, j
     INTEGER indx
-    REAL delx
-    COMPLEX, PARAMETER :: a(4,4) = RESHAPE( [ &
+    REAL(SP) delx
+    COMPLEX(SP), PARAMETER :: a(4,4) = RESHAPE( [ &
       (2.E0,0.E0), (0.E0,1.E0), (0.E0,0.E0), (0.E0,0.E0), &
       (0.E0,-1.E0), (2.E0,0.E0), (0.E0,0.E0), (0.E0,0.E0), &
       (0.E0,0.E0), (0.E0,0.E0), (3.E0,0.E0), (0.E0,1.E0), &
       (0.E0,0.E0), (0.E0,0.E0), (0.E0,-1.E0), (4.E0,0.E0) ], [4,4] )
     INTEGER, PARAMETER :: jpvt(4) = [ 0, -1, 1, 0 ]
-    COMPLEX, PARAMETER :: af(4,4) = RESHAPE( [ &
+    COMPLEX(SP), PARAMETER :: af(4,4) = RESHAPE( [ &
       (1.73205E0,0.E0), (0.E0,1.E0), (0.E0,0.E0), (0.E0,0.E0), &
       (0.E0,-.57735E0), (1.91485E0,0.E0), (0.E0,0.E0), (0.E0,0.E0), &
       (0.E0,0.E0), (0.E0,0.E0), (1.41421E0,0.E0), (0.E0,1.E0), &
@@ -154,19 +155,19 @@ CONTAINS
     !           record and cleaned up FORMATs.  (RWC)
     USE slatec, ONLY : CGBCO, CGBDI, CGBFA, CGBSL, CABS1
     INTEGER Kprint, Lun
-    COMPLEX at(7,4), bt(4), det(2), z(4)
-    REAL r, rcond
+    COMPLEX(SP) at(7,4), bt(4), det(2), z(4)
+    REAL(SP) r, rcond
     INTEGER lda, n, ipvt(4), info, i, j, indx, Nerr
     INTEGER ml, mu
-    COMPLEX, PARAMETER :: abd(6,4) = RESHAPE( [ &
+    COMPLEX(SP), PARAMETER :: abd(6,4) = RESHAPE( [ &
       (0.E0,0.E0), (0.E0,0.E0), (0.E0,0.E0), (0.E0,0.E0), (2.E0,0.E0), (0.E0,1.E0), &
       (0.E0,0.E0), (0.E0,0.E0), (0.E0,0.E0), (0.E0,-1.E0), (2.E0,0.E0), (0.E0,0.E0), &
       (0.E0,0.E0), (0.E0,0.E0), (0.E0,0.E0), (0.E0,0.E0), (3.E0,0.E0), (0.E0,1.E0), &
       (0.E0,0.E0), (0.E0,0.E0), (0.E0,0.E0), (0.E0,-1.E0), (4.E0,0.E0), (0.E0,0.E0) ], &
       [6,4] )
-    COMPLEX, PARAMETER :: b(4) = [ (3.E0,2.E0), (-1.E0,3.E0), (0.E0,-4.E0), (5.E0,0.E0) ]
-    COMPLEX, PARAMETER :: c(4) = [ (1.E0,1.E0), (0.E0,1.E0), (0.E0,-1.E0), (1.E0,0.E0) ]
-    COMPLEX, PARAMETER :: dc(2) = [ (3.3E0,0.E0), (1.0E0,0.E0) ]
+    COMPLEX(SP), PARAMETER :: b(4) = [ (3.E0,2.E0), (-1.E0,3.E0), (0.E0,-4.E0), (5.E0,0.E0) ]
+    COMPLEX(SP), PARAMETER :: c(4) = [ (1.E0,1.E0), (0.E0,1.E0), (0.E0,-1.E0), (1.E0,0.E0) ]
+    COMPLEX(SP), PARAMETER :: dc(2) = [ (3.3E0,0.E0), (1.0E0,0.E0) ]
     CHARACTER(19), PARAMETER :: kprog = 'GBFA GBCO GBSL GBDI'
     CHARACTER(39), PARAMETER :: kfail = 'INFO RCOND SOLUTION DETERMINANT INVERSE'
     REAL, PARAMETER :: rcnd = .24099E0
@@ -296,22 +297,22 @@ CONTAINS
     !           FORMATs.  (RWC)
     USE slatec, ONLY : CGECO, CGEDI, CGEFA, CGESL, CABS1
     INTEGER Kprint, Lun
-    COMPLEX at(5,4), bt(4), det(2), z(4)
-    REAL r, rcond
+    COMPLEX(SP) at(5,4), bt(4), det(2), z(4)
+    REAL(SP) r, rcond
     INTEGER lda, n, ipvt(4), info, i, j, indx, Nerr
-    COMPLEX, PARAMETER :: a(4,4) = RESHAPE( [ &
+    COMPLEX(SP), PARAMETER :: a(4,4) = RESHAPE( [ &
       (2.E0,0.E0), (0.E0,1.E0), (0.E0,0.E0), (0.E0,0.E0), &
       (0.E0,-1.E0), (2.E0,0.E0), (0.E0,0.E0), (0.E0,0.E0), &
       (0.E0,0.E0), (0.E0,0.E0), (3.E0,0.E0), (0.E0,1.E0), &
       (0.E0,0.E0), (0.E0,0.E0), (0.E0,-1.E0), (4.E0,0.E0) ], [4,4] )
-    COMPLEX, PARAMETER :: b(4) = [ (3.E0,2.E0), (-1.E0,3.E0), (0.E0,-4.E0), (5.E0,0.E0) ]
-    COMPLEX, PARAMETER :: c(4) = [ (1.E0,1.E0), (0.E0,1.E0), (0.E0,-1.E0), (1.E0,0.E0) ]
-    COMPLEX, PARAMETER :: ainv(4,4) = RESHAPE( [ &
+    COMPLEX(SP), PARAMETER :: b(4) = [ (3.E0,2.E0), (-1.E0,3.E0), (0.E0,-4.E0), (5.E0,0.E0) ]
+    COMPLEX(SP), PARAMETER :: c(4) = [ (1.E0,1.E0), (0.E0,1.E0), (0.E0,-1.E0), (1.E0,0.E0) ]
+    COMPLEX(SP), PARAMETER :: ainv(4,4) = RESHAPE( [ &
       (.66667E0,0.E0), (0.E0,-.33333E0), (0.E0,0.E0), (0.E0,0.E0), &
       (0.E0,.33333E0), (.66667E0,0.E0), (0.E0,0.E0), (0.E0,0.E0), &
       (0.E0,0.E0), (0.E0,0.E0), (.36364E0,0.E0), (0.E0,-.09091E0), &
       (0.E0,0.E0), (0.E0,0.E0), (0.E0,.09091E0), (.27273E0,0.E0) ], [4,4] )
-    COMPLEX, PARAMETER :: dc(2) = [ (3.3E0,0.E0), (1.0E0,0.E0) ]
+    COMPLEX(SP), PARAMETER :: dc(2) = [ (3.3E0,0.E0), (1.0E0,0.E0) ]
     CHARACTER(19), PARAMETER :: kprog = 'GEFA GECO GESL GEDI'
     CHARACTER(39), PARAMETER :: kfail = 'INFO RCOND SOLUTION DETERMINANT INVERSE'
     REAL, PARAMETER :: rcnd = .24099E0
@@ -448,14 +449,14 @@ CONTAINS
     !           record and cleaned up FORMATs.  (RWC)
     USE slatec, ONLY : CGTSL, CABS1
     INTEGER Kprint, Lun
-    COMPLEX ct(4), dt(4), et(4), bt(4)
+    COMPLEX(SP) ct(4), dt(4), et(4), bt(4)
     INTEGER n, info, i, indx, Nerr
-    REAL delx
-    COMPLEX, PARAMETER :: c(4) = [ (0.E0,0.E0), (0.E0,1.E0), (0.E0,0.E0), (0.E0,1.E0) ]
-    COMPLEX, PARAMETER :: d(4) = [ (2.E0,0.E0), (2.E0,0.E0), (3.E0,0.E0), (4.E0,0.E0) ]
-    COMPLEX, PARAMETER :: e(4) = [ (0.E0,-1.E0), (0.E0,0.E0), (0.E0,-1.E0), (0.E0,0.E0) ]
-    COMPLEX, PARAMETER :: b(4) = [ (3.E0,2.E0), (-1.E0,3.E0), (0.E0,-4.E0), (5.E0,0.E0) ]
-    COMPLEX, PARAMETER :: cx(4) = [ (1.E0,1.E0), (0.E0,1.E0), (0.E0,-1.E0), (1.E0,0.E0) ]
+    REAL(SP) delx
+    COMPLEX(SP), PARAMETER :: c(4) = [ (0.E0,0.E0), (0.E0,1.E0), (0.E0,0.E0), (0.E0,1.E0) ]
+    COMPLEX(SP), PARAMETER :: d(4) = [ (2.E0,0.E0), (2.E0,0.E0), (3.E0,0.E0), (4.E0,0.E0) ]
+    COMPLEX(SP), PARAMETER :: e(4) = [ (0.E0,-1.E0), (0.E0,0.E0), (0.E0,-1.E0), (0.E0,0.E0) ]
+    COMPLEX(SP), PARAMETER :: b(4) = [ (3.E0,2.E0), (-1.E0,3.E0), (0.E0,-4.E0), (5.E0,0.E0) ]
+    COMPLEX(SP), PARAMETER :: cx(4) = [ (1.E0,1.E0), (0.E0,1.E0), (0.E0,-1.E0), (1.E0,0.E0) ]
     CHARACTER(13), PARAMETER :: kfail = 'INFO SOLUTION'
     !* FIRST EXECUTABLE STATEMENT  CGTQC
     n = 4
@@ -532,17 +533,17 @@ CONTAINS
     !           FORMATs.  (RWC)
     USE slatec, ONLY : CHICO, CHIDI, CHIFA, CHISL, CABS1
     INTEGER Kprint, Lun
-    COMPLEX at(5,4), bt(4), z(4)
-    REAL r, rcond, det(2)
+    COMPLEX(SP) at(5,4), bt(4), z(4)
+    REAL(SP) r, rcond, det(2)
     INTEGER lda, n, ipvt(4), info, i, j, indx, Nerr, inert(3)
-    COMPLEX, PARAMETER :: a(4,4) = RESHAPE( [ &
+    COMPLEX(SP), PARAMETER :: a(4,4) = RESHAPE( [ &
       (2.E0,0.E0), (0.E0,1.E0), (0.E0,0.E0), (0.E0,0.E0), &
       (0.E0,-1.E0), (2.E0,0.E0), (0.E0,0.E0), (0.E0,0.E0), &
       (0.E0,0.E0), (0.E0,0.E0), (3.E0,0.E0), (0.E0,1.E0), &
       (0.E0,0.E0), (0.E0,0.E0), (0.E0,-1.E0), (4.E0,0.E0) ], [4,4] )
-    COMPLEX, PARAMETER :: b(4) = [ (3.E0,2.E0), (-1.E0,3.E0), (0.E0,-4.E0), (5.E0,0.E0) ]
-    COMPLEX, PARAMETER :: c(4) = [ (1.E0,1.E0), (0.E0,1.E0), (0.E0,-1.E0), (1.E0,0.E0) ]
-    COMPLEX, PARAMETER :: ainv(4,4) = RESHAPE( [ &
+    COMPLEX(SP), PARAMETER :: b(4) = [ (3.E0,2.E0), (-1.E0,3.E0), (0.E0,-4.E0), (5.E0,0.E0) ]
+    COMPLEX(SP), PARAMETER :: c(4) = [ (1.E0,1.E0), (0.E0,1.E0), (0.E0,-1.E0), (1.E0,0.E0) ]
+    COMPLEX(SP), PARAMETER :: ainv(4,4) = RESHAPE( [ &
       (.66667E0,0.E0), (0.E0,1.E0), (0.E0,0.E0), (0.E0,0.E0), &
       (0.E0,.33333E0), (.66667E0,0.E0), (0.E0,0.E0), (0.E0,0.E0), &
       (0.E0,0.E0), (0.E0,0.E0), (.36364E0,0.E0), (0.E0,1.E0), &
@@ -684,15 +685,15 @@ CONTAINS
     !           FORMATs.  (RWC)
     USE slatec, ONLY : CHPCO, CHPDI, CHPFA, CHPSL, CABS1
     INTEGER Kprint, Lun
-    COMPLEX at(10), bt(4), z(4)
-    REAL r, rcond, det(2)
+    COMPLEX(SP) at(10), bt(4), z(4)
+    REAL(SP) r, rcond, det(2)
     INTEGER n, ipvt(4), info, i, j, indx, Nerr, inert(3)
-    COMPLEX, PARAMETER :: ap(10) = [ (2.E0,0.E0), (0.E0,-1.E0), (2.E0,0.E0), &
+    COMPLEX(SP), PARAMETER :: ap(10) = [ (2.E0,0.E0), (0.E0,-1.E0), (2.E0,0.E0), &
       (0.E0,0.E0), (0.E0,0.E0), (3.E0,0.E0), (0.E0,0.E0), (0.E0,0.E0), &
       (0.E0,-1.E0), (4.E0,0.E0) ]
-    COMPLEX, PARAMETER :: b(4) = [ (3.E0,2.E0), (-1.E0,3.E0), (0.E0,-4.E0), (5.E0,0.E0) ]
-    COMPLEX, PARAMETER :: c(4) = [ (1.E0,1.E0), (0.E0,1.E0), (0.E0,-1.E0), (1.E0,0.E0) ]
-    COMPLEX, PARAMETER :: ainv(10) = [ (.66667E0,0.E0), (0.E0,.33333E0), &
+    COMPLEX(SP), PARAMETER :: b(4) = [ (3.E0,2.E0), (-1.E0,3.E0), (0.E0,-4.E0), (5.E0,0.E0) ]
+    COMPLEX(SP), PARAMETER :: c(4) = [ (1.E0,1.E0), (0.E0,1.E0), (0.E0,-1.E0), (1.E0,0.E0) ]
+    COMPLEX(SP), PARAMETER :: ainv(10) = [ (.66667E0,0.E0), (0.E0,.33333E0), &
       (.66667E0,0.E0), (0.E0,0.E0), (0.E0,0.E0), (.36364E0,0.E0), (0.E0,0.E0), &
       (0.E0,0.E0), (0.E0,.09091E0), (.27273E0,0.E0) ]
     REAL, PARAMETER :: dc(2) = [ 3.3E0, 1.0E0 ]
@@ -827,14 +828,14 @@ CONTAINS
     !           FORMATs.  (RWC)
     USE slatec, ONLY : CPBCO, CPBDI, CPBFA, CPBSL, CABS1
     INTEGER Kprint, Lun
-    COMPLEX at(3,4), bt(4), z(4)
-    REAL r, rcond, det(2)
+    COMPLEX(SP) at(3,4), bt(4), z(4)
+    REAL(SP) r, rcond, det(2)
     INTEGER lda, n, info, i, j, indx, Nerr, m
-    COMPLEX, PARAMETER :: abd(2,4) = RESHAPE( [ (0.E0,0.E0), (2.E0,0.E0), &
+    COMPLEX(SP), PARAMETER :: abd(2,4) = RESHAPE( [ (0.E0,0.E0), (2.E0,0.E0), &
       (0.E0,-1.E0), (2.E0,0.E0),   (0.E0,0.E0), (3.E0,0.E0), &
       (0.E0,-1.E0), (4.E0,0.E0) ], [2,4] )
-    COMPLEX, PARAMETER :: b(4) = [ (3.E0,2.E0), (-1.E0,3.E0), (0.E0,-4.E0), (5.E0,0.E0) ]
-    COMPLEX, PARAMETER :: c(4) = [ (1.E0,1.E0), (0.E0,1.E0), (0.E0,-1.E0), (1.E0,0.E0) ]
+    COMPLEX(SP), PARAMETER :: b(4) = [ (3.E0,2.E0), (-1.E0,3.E0), (0.E0,-4.E0), (5.E0,0.E0) ]
+    COMPLEX(SP), PARAMETER :: c(4) = [ (1.E0,1.E0), (0.E0,1.E0), (0.E0,-1.E0), (1.E0,0.E0) ]
     REAL, PARAMETER :: dc(2) = [ 3.3E0, 1.0E0 ]
     CHARACTER(19), PARAMETER :: kprog = 'PBFA PBCO PBSL PBDI'
     CHARACTER(39), PARAMETER :: kfail = 'INFO RCOND SOLUTION DETERMINANT INVERSE'
@@ -955,17 +956,17 @@ CONTAINS
     !           FORMATs.  (RWC)
     USE slatec, ONLY : CPOCO, CPODI, CPOFA, CPOSL, CABS1
     INTEGER Kprint, Lun
-    COMPLEX at(5,4), bt(4), z(4)
-    REAL r, rcond, det(2)
+    COMPLEX(SP) at(5,4), bt(4), z(4)
+    REAL(SP) r, rcond, det(2)
     INTEGER lda, n, info, i, j, indx, Nerr
-    COMPLEX, PARAMETER :: a(4,4) = RESHAPE( [ &
+    COMPLEX(SP), PARAMETER :: a(4,4) = RESHAPE( [ &
       (2.E0,0.E0), (0.E0,1.E0), (0.E0,0.E0), (0.E0,0.E0), &
       (0.E0,-1.E0), (2.E0,0.E0), (0.E0,0.E0), (0.E0,0.E0), &
       (0.E0,0.E0), (0.E0,0.E0), (3.E0,0.E0), (0.E0,1.E0), &
       (0.E0,0.E0), (0.E0,0.E0), (0.E0,-1.E0), (4.E0,0.E0) ], [4,4] )
-    COMPLEX, PARAMETER :: b(4) = [ (3.E0,2.E0), (-1.E0,3.E0), (0.E0,-4.E0), (5.E0,0.E0) ]
-    COMPLEX, PARAMETER :: c(4) = [ (1.E0,1.E0), (0.E0,1.E0), (0.E0,-1.E0), (1.E0,0.E0) ]
-    COMPLEX, PARAMETER :: ainv(4,4) = RESHAPE( [ &
+    COMPLEX(SP), PARAMETER :: b(4) = [ (3.E0,2.E0), (-1.E0,3.E0), (0.E0,-4.E0), (5.E0,0.E0) ]
+    COMPLEX(SP), PARAMETER :: c(4) = [ (1.E0,1.E0), (0.E0,1.E0), (0.E0,-1.E0), (1.E0,0.E0) ]
+    COMPLEX(SP), PARAMETER :: ainv(4,4) = RESHAPE( [ &
       (.66667E0,0.E0), (0.E0,1.E0), (0.E0,0.E0), (0.E0,0.E0), &
       (0.E0,.33333E0), (.66667E0,0.E0), (0.E0,0.E0), (0.E0,0.E0), &
       (0.E0,0.E0), (0.E0,0.E0), (.36364E0,0.E0), (0.E0,1.E0), &
@@ -1102,15 +1103,15 @@ CONTAINS
     !           FORMATs.  (RWC)
     USE slatec, ONLY : CPPCO, CPPDI, CPPFA, CPPSL, CABS1
     INTEGER Kprint, Lun
-    COMPLEX at(10), bt(4), z(4)
-    REAL r, rcond, det(2)
+    COMPLEX(SP) at(10), bt(4), z(4)
+    REAL(SP) r, rcond, det(2)
     INTEGER n, info, i, j, indx, Nerr
-    COMPLEX, PARAMETER :: ap(10) = [ (2.E0,0.E0), (0.E0,-1.E0), (2.E0,0.E0), &
+    COMPLEX(SP), PARAMETER :: ap(10) = [ (2.E0,0.E0), (0.E0,-1.E0), (2.E0,0.E0), &
       (0.E0,0.E0), (0.E0,0.E0), (3.E0,0.E0), (0.E0,0.E0), (0.E0,0.E0), &
       (0.E0,-1.E0), (4.E0,0.E0) ]
-    COMPLEX, PARAMETER :: b(4) = [ (3.E0,2.E0), (-1.E0,3.E0), (0.E0,-4.E0), (5.E0,0.E0) ]
-    COMPLEX, PARAMETER :: c(4) = [ (1.E0,1.E0), (0.E0,1.E0), (0.E0,-1.E0), (1.E0,0.E0) ]
-    COMPLEX, PARAMETER :: ainv(10) = [ (.66667E0,0.E0), (0.E0,.33333E0), &
+    COMPLEX(SP), PARAMETER :: b(4) = [ (3.E0,2.E0), (-1.E0,3.E0), (0.E0,-4.E0), (5.E0,0.E0) ]
+    COMPLEX(SP), PARAMETER :: c(4) = [ (1.E0,1.E0), (0.E0,1.E0), (0.E0,-1.E0), (1.E0,0.E0) ]
+    COMPLEX(SP), PARAMETER :: ainv(10) = [ (.66667E0,0.E0), (0.E0,.33333E0), &
       (.66667E0,0.E0), (0.E0,0.E0), (0.E0,0.E0), (.36364E0,0.E0), (0.E0,0.E0), &
       (0.E0,0.E0), (0.E0,.09091E0), (.27273E0,0.E0) ]
     REAL, PARAMETER :: dc(2) = [ 3.3E0, 1.0E0 ]
@@ -1236,13 +1237,13 @@ CONTAINS
     !           FORMATs.  (RWC)
     USE slatec, ONLY : CPTSL, CABS1
     INTEGER Kprint, Lun
-    COMPLEX dt(4), et(4), bt(4)
+    COMPLEX(SP) dt(4), et(4), bt(4)
     INTEGER n, i, indx, Nerr
-    REAL delx
-    COMPLEX, PARAMETER :: d(4) = [ (2.E0,0.E0), (2.E0,0.E0), (3.E0,0.E0), (4.E0,0.E0) ]
-    COMPLEX, PARAMETER :: e(4) = [ (0.E0,-1.E0), (0.E0,0.E0), (0.E0,-1.E0), (0.E0,0.E0) ]
-    COMPLEX, PARAMETER :: b(4) = [ (3.E0,2.E0), (-1.E0,3.E0), (0.E0,-4.E0), (5.E0,0.E0) ]
-    COMPLEX, PARAMETER :: cx(4) = [ (1.E0,1.E0), (0.E0,1.E0), (0.E0,-1.E0), (1.E0,0.E0) ]
+    REAL(SP) delx
+    COMPLEX(SP), PARAMETER :: d(4) = [ (2.E0,0.E0), (2.E0,0.E0), (3.E0,0.E0), (4.E0,0.E0) ]
+    COMPLEX(SP), PARAMETER :: e(4) = [ (0.E0,-1.E0), (0.E0,0.E0), (0.E0,-1.E0), (0.E0,0.E0) ]
+    COMPLEX(SP), PARAMETER :: b(4) = [ (3.E0,2.E0), (-1.E0,3.E0), (0.E0,-4.E0), (5.E0,0.E0) ]
+    COMPLEX(SP), PARAMETER :: cx(4) = [ (1.E0,1.E0), (0.E0,1.E0), (0.E0,-1.E0), (1.E0,0.E0) ]
     !* FIRST EXECUTABLE STATEMENT  CPTQC
     n = 4
     Nerr = 0
@@ -1309,30 +1310,30 @@ CONTAINS
     !           record and cleaned up FORMATs.  (RWC)
     USE slatec, ONLY : CQRDC, CQRSL, CABS1
     INTEGER Kprint, Lun
-    COMPLEX qraux(4), work(4), qy(4), qty(4), b(4), rsd(4), xb(4), at(5,4)
+    COMPLEX(SP) qraux(4), work(4), qy(4), qty(4), b(4), rsd(4), xb(4), at(5,4)
     INTEGER ldx, n, p, job, k, infO, jpvtt(4), i, j, indx(5), Nerr, l
-    COMPLEX, PARAMETER :: a(4,4) = RESHAPE( [ &
+    COMPLEX(SP), PARAMETER :: a(4,4) = RESHAPE( [ &
       (2.E0,0.E0), (0.E0,1.E0), (0.E0,0.E0), (0.E0,0.E0), &
       (0.E0,-1.E0), (2.E0,0.E0), (0.E0,0.E0), (0.E0,0.E0), &
       (0.E0,0.E0),  (0.E0,0.E0), (3.E0,0.E0), (0.E0,1.E0), &
       (0.E0,0.E0), (0.E0,0.E0), (0.E0,-1.E0), (4.E0,0.E0) ], [4,4] )
     INTEGER, PARAMETER :: jpvt(4) = [ 0, -1, 1, 0 ]
-    COMPLEX, PARAMETER :: y(4) = [ (3.E0,2.E0), (-1.E0,3.E0), (0.E0,-4.E0), (5.E0,0.E0) ]
-    COMPLEX, PARAMETER :: ac(4,4) = RESHAPE( [ &
+    COMPLEX(SP), PARAMETER :: y(4) = [ (3.E0,2.E0), (-1.E0,3.E0), (0.E0,-4.E0), (5.E0,0.E0) ]
+    COMPLEX(SP), PARAMETER :: ac(4,4) = RESHAPE( [ &
       (-3.16228E0,0.E0), (0.E0,0.E0), (.94868E0,0.E0), (0.E0,.31623E0), &
       (0.E0,2.21359E0), (-3.47851E0,0.E0), (0.E0,.31623E0), (.94868E0,0.E0), &
       (0.E0,0.E0), (0.E0,0.E0), (2.23607E0,0.E0), (0.E0,.70711E0), &
       (0.E0,0.E0), (0.E0,0.E0), (0.E0,-1.78885E0), (-1.34164E0,0.E0) ], [4,4] )
-    COMPLEX, PARAMETER :: qrauxc(4) = [ (1.E0,0.E0), (1.E0,0.E0), &
+    COMPLEX(SP), PARAMETER :: qrauxc(4) = [ (1.E0,0.E0), (1.E0,0.E0), &
       (1.70711E0,0.E0), (0.E0,0.E0) ]
     INTEGER, PARAMETER :: jpvtc(4) = [ 3, 4, 1, 2 ]
-    COMPLEX, PARAMETER :: qyc(4) = [ (0.E0,-5.81378E0), (-2.68328E0,0.E0), &
+    COMPLEX(SP), PARAMETER :: qyc(4) = [ (0.E0,-5.81378E0), (-2.68328E0,0.E0), &
       (-1.89737E0,-1.58114E0), (1.58114E0,-3.79473E0) ]
-    COMPLEX, PARAMETER :: qtyc(4) = [ (0.E0,5.37587E0), (-3.47851E0,0.E0), &
+    COMPLEX(SP), PARAMETER :: qtyc(4) = [ (0.E0,5.37587E0), (-3.47851E0,0.E0), &
       (4.02492E0,2.23607E0), (0.E0,-1.34164E0) ]
-    COMPLEX, PARAMETER :: bc(4) = [ (0.E0,-1.E0), (1.E0,0.E0), (1.E0,1.E0), (0.E0,1.E0) ]
-    COMPLEX, PARAMETER :: rsdc(4) = [ (0.E0,0.E0), (0.E0,0.E0), (0.E0,0.E0), (0.E0,0.E0) ]
-    COMPLEX, PARAMETER :: xbc(4) = [ (3.E0,2.E0), (-1.E0,3.E0), (0.E0,-4.E0), (5.E0,0.E0) ]
+    COMPLEX(SP), PARAMETER :: bc(4) = [ (0.E0,-1.E0), (1.E0,0.E0), (1.E0,1.E0), (0.E0,1.E0) ]
+    COMPLEX(SP), PARAMETER :: rsdc(4) = [ (0.E0,0.E0), (0.E0,0.E0), (0.E0,0.E0), (0.E0,0.E0) ]
+    COMPLEX(SP), PARAMETER :: xbc(4) = [ (3.E0,2.E0), (-1.E0,3.E0), (0.E0,-4.E0), (5.E0,0.E0) ]
     CHARACTER(9), PARAMETER :: kprog = 'QRDC QRSL'
     CHARACTER(75), PARAMETER :: kfail = 'FACTOR QRAUX  JPVT  QY        QTY       &
       &SOLUTION  RSD        XB        INFO'
@@ -1462,22 +1463,22 @@ CONTAINS
     !           FORMATs.  (RWC)
     USE slatec, ONLY : CSICO, CSIDI, CSIFA, CSISL, CABS1
     INTEGER Kprint, Lun
-    COMPLEX at(5,4), bt(4), det(2), z(4)
-    REAL r, rcond
+    COMPLEX(SP) at(5,4), bt(4), det(2), z(4)
+    REAL(SP) r, rcond
     INTEGER lda, n, ipvt(4), info, i, j, indx, Nerr
-    COMPLEX, PARAMETER :: a(4,4) = RESHAPE( [ &
+    COMPLEX(SP), PARAMETER :: a(4,4) = RESHAPE( [ &
       (2.E0,0.E0), (0.E0,1.E0), (0.E0,0.E0), (0.E0,0.E0), &
       (0.E0,-1.E0), (2.E0,0.E0), (0.E0,0.E0), (0.E0,0.E0), &
       (0.E0,0.E0), (0.E0,0.E0), (3.E0,0.E0), (0.E0,1.E0), &
       (0.E0,0.E0), (0.E0,0.E0), (0.E0,-1.E0), (4.E0,0.E0) ], [4,4] )
-    COMPLEX, PARAMETER :: b(4) = [ (3.E0,2.E0), (1.E0,1.E0), (0.E0,-4.E0), (3.E0,0.E0) ]
-    COMPLEX, PARAMETER :: c(4) = [ (1.E0,1.E0), (0.E0,1.E0), (0.E0,-1.E0), (1.E0,0.E0) ]
-    COMPLEX, PARAMETER :: ainv(4,4) = RESHAPE( [ &
+    COMPLEX(SP), PARAMETER :: b(4) = [ (3.E0,2.E0), (1.E0,1.E0), (0.E0,-4.E0), (3.E0,0.E0) ]
+    COMPLEX(SP), PARAMETER :: c(4) = [ (1.E0,1.E0), (0.E0,1.E0), (0.E0,-1.E0), (1.E0,0.E0) ]
+    COMPLEX(SP), PARAMETER :: ainv(4,4) = RESHAPE( [ &
       (.40000E0,0.E0), (0.E0,1.E0), (0.E0,0.E0), (0.E0,0.E0), &
       (0.E0,.20000E0), (.40000E0,0.E0), (0.E0,0.E0), (0.E0,0.E0), &
       (0.E0,0.E0), (0.E0,0.E0), (.30769E0,0.E0), (0.E0,1.E0), &
       (0.E0,0.E0), (0.E0,0.E0), (0.E0,.07692E0), (.23077E0,0.E0) ], [4,4] )
-    COMPLEX, PARAMETER :: dc(2) = [ (6.5E0,0.E0), (1.0E0,0.E0) ]
+    COMPLEX(SP), PARAMETER :: dc(2) = [ (6.5E0,0.E0), (1.0E0,0.E0) ]
     CHARACTER(19), PARAMETER :: kprog = 'SIFA SICO SISL SIDI'
     CHARACTER(39), PARAMETER :: kfail = 'INFO RCOND SOLUTION DETERMINANT INVERSE'
     REAL, PARAMETER :: rcnd = .58692E0
@@ -1603,18 +1604,18 @@ CONTAINS
     !           FORMATs.  (RWC)
     USE slatec, ONLY : CSPCO, CSPDI, CSPFA, CSPSL, CABS1
     INTEGER Kprint, Lun
-    COMPLEX at(10), bt(4), det(2), z(4)
-    REAL r, rcond
+    COMPLEX(SP) at(10), bt(4), det(2), z(4)
+    REAL(SP) r, rcond
     INTEGER n, ipvt(4), info, i, j, indx, Nerr
-    COMPLEX, PARAMETER :: ap(10) = [ (2.E0,0.E0), (0.E0,-1.E0), (2.E0,0.E0), &
+    COMPLEX(SP), PARAMETER :: ap(10) = [ (2.E0,0.E0), (0.E0,-1.E0), (2.E0,0.E0), &
       (0.E0,0.E0), (0.E0,0.E0), (3.E0,0.E0), (0.E0,0.E0), (0.E0,0.E0), &
       (0.E0,-1.E0), (4.E0,0.E0) ]
-    COMPLEX, PARAMETER :: b(4) = [ (3.E0,2.E0), (1.E0,1.E0), (0.E0,-4.E0), (3.E0,0.E0) ]
-    COMPLEX, PARAMETER :: c(4) = [ (1.E0,1.E0), (0.E0,1.E0), (0.E0,-1.E0), (1.E0,0.E0) ]
-    COMPLEX, PARAMETER :: ainv(10) = [ (.4E0,0.E0), (0.E0,.2E0), (.4E0,0.E0), &
+    COMPLEX(SP), PARAMETER :: b(4) = [ (3.E0,2.E0), (1.E0,1.E0), (0.E0,-4.E0), (3.E0,0.E0) ]
+    COMPLEX(SP), PARAMETER :: c(4) = [ (1.E0,1.E0), (0.E0,1.E0), (0.E0,-1.E0), (1.E0,0.E0) ]
+    COMPLEX(SP), PARAMETER :: ainv(10) = [ (.4E0,0.E0), (0.E0,.2E0), (.4E0,0.E0), &
       (0.E0,0.E0), (0.E0,0.E0), (.30769E0,0.E0), (0.E0,0.E0), (0.E0,0.E0), &
       (0.E0,.07692E0), (.23077E0,0.E0) ]
-    COMPLEX, PARAMETER :: dc(2) = [ (6.5E0,0.E0), (1.0E0,0.E0) ]
+    COMPLEX(SP), PARAMETER :: dc(2) = [ (6.5E0,0.E0), (1.0E0,0.E0) ]
     CHARACTER(19), PARAMETER :: kprog = 'SPFA SPCO SPSL SPDI'
     CHARACTER(39), PARAMETER :: kfail = 'INFO RCOND SOLUTION DETERMINANT INVERSE'
     REAL, PARAMETER :: rcnd = .58692E0
@@ -1733,19 +1734,19 @@ CONTAINS
     !           record and cleaned up FORMATs.  (RWC)
     USE slatec, ONLY : CSVDC, CABS1
     INTEGER kone, Kprint, Lun, Nerr
-    COMPLEX work(4), s(4), e(4), u(4,4), v(4,4), at(5,4)
+    COMPLEX(SP) work(4), s(4), e(4), u(4,4), v(4,4), at(5,4)
     INTEGER ldx, n, p, ldu, ldv, job, info
     INTEGER i, j, indx(4)
-    COMPLEX, PARAMETER :: a(4,4) = RESHAPE( [ &
+    COMPLEX(SP), PARAMETER :: a(4,4) = RESHAPE( [ &
       (2.E0,0.E0), (0.E0,1.E0), (0.E0,0.E0), (0.E0,0.E0), &
       (0.E0,-1.E0), (2.E0,0.E0), (0.E0,0.E0), (0.E0,0.E0), &
       (0.E0,0.E0), (0.E0,0.E0), (3.E0,0.E0), (0.E0,1.E0), &
       (0.E0,0.E0), (0.E0,0.E0), (0.E0,-1.E0), (4.E0,0.E0) ], [4,4] )
     CHARACTER(12), PARAMETER :: kfail = 'S E U V INFO'
-    COMPLEX, PARAMETER :: sc(4) = [ (4.61803E0,0.E0), (3.0E0,0.E0), &
+    COMPLEX(SP), PARAMETER :: sc(4) = [ (4.61803E0,0.E0), (3.0E0,0.E0), &
       (2.38197E0,0.E0), (1.E0,0.E0) ]
-    COMPLEX, PARAMETER :: ec(4) = [ (0.E0,0.E0), (0.E0,0.E0), (0.E0,0.E0), (0.E0,0.E0) ]
-    COMPLEX, PARAMETER :: uvc(4,4) = RESHAPE( [ &
+    COMPLEX(SP), PARAMETER :: ec(4) = [ (0.E0,0.E0), (0.E0,0.E0), (0.E0,0.E0), (0.E0,0.E0) ]
+    COMPLEX(SP), PARAMETER :: uvc(4,4) = RESHAPE( [ &
       (0.E0,0.E0), (0.E0,0.E0), (-.52573E0,0.E0), (0.E0,-.85065E0), &
       (.70711E0,0.E0), (0.E0,.70711E0), (0.E0,0.E0), (0.E0,0.E0), &
       (0.E0,0.E0), (0.E0,0.E0), (-.85065E0,0.E0), (0.E0,.52573E0), &
@@ -1844,20 +1845,20 @@ CONTAINS
     !           FORMATs.  (RWC)
     USE slatec, ONLY : CTRCO, CTRDI, CTRSL, CABS1
     INTEGER Kprint, Lun
-    COMPLEX at(5,4), bt(4), det(2), z(4)
-    REAL r, rcond
+    COMPLEX(SP) at(5,4), bt(4), det(2), z(4)
+    REAL(SP) r, rcond
     INTEGER lda, n, info, i, j, indx, Nerr
     INTEGER job, k, kk
-    COMPLEX, PARAMETER :: a(4,4) = RESHAPE( [ &
+    COMPLEX(SP), PARAMETER :: a(4,4) = RESHAPE( [ &
       (2.E0,0.E0), (0.E0,1.E0), (0.E0,0.E0), (0.E0,0.E0), &
       (0.E0,-1.E0), (2.E0,0.E0), (0.E0,0.E0), (0.E0,0.E0), &
       (0.E0,0.E0), (0.E0,0.E0), (3.E0,0.E0), (0.E0,1.E0), &
       (0.E0,0.E0), (0.E0,0.E0), (0.E0,-1.E0), (4.E0,0.E0) ], [4,4] )
-    COMPLEX, PARAMETER :: b(4,2) = RESHAPE( [ &
+    COMPLEX(SP), PARAMETER :: b(4,2) = RESHAPE( [ &
       (2.E0,2.E0), (-1.E0,3.E0), (0.E0,-3.E0), (5.E0,0.E0), &
       (3.E0,2.E0), (0.E0,2.E0), (0.E0,-4.E0), (4.E0,0.E0) ], [4,2] )
-    COMPLEX, PARAMETER :: c(4) = [ (1.E0,1.E0), (0.E0,1.E0), (0.E0,-1.E0), (1.E0,0.E0) ]
-    COMPLEX, PARAMETER :: ainv(4,4,2) = RESHAPE( [ &
+    COMPLEX(SP), PARAMETER :: c(4) = [ (1.E0,1.E0), (0.E0,1.E0), (0.E0,-1.E0), (1.E0,0.E0) ]
+    COMPLEX(SP), PARAMETER :: ainv(4,4,2) = RESHAPE( [ &
       (.50000E0,0.E0), (0.E0,-.25000E0), (0.E0,0.E0), (0.E0,0.E0), &
       (0.E0,-1.00000E0), (.50000E0,0.E0), (0.E0,0.E0), (0.E0,0.E0), &
       (0.E0,0.E0), (0.E0,0.E0), (.33333E0,0.E0), (0.E0,-.083333E0), &
@@ -1866,7 +1867,7 @@ CONTAINS
       (0.E0,.25000E0), (.50000E0,0.E0), (0.E0,0.E0), (0.E0,0.E0), &
       (0.E0,0.E0), (0.E0,0.E0), (.33333E0,0.E0), (0.E0,1.00000E0), &
       (0.E0,0.E0), (0.E0,0.E0), (0.E0,.083333E0), (.25000E0,0.E0) ], [4,4,2] )
-    COMPLEX, PARAMETER :: dc(2) = [ (4.8E0,0.E0), (1.0E0,0.E0) ]
+    COMPLEX(SP), PARAMETER :: dc(2) = [ (4.8E0,0.E0), (1.0E0,0.E0) ]
     CHARACTER(19), PARAMETER :: kprog = 'TRFA TRCO TRSL TRDI'
     CHARACTER(39), PARAMETER :: kfail  = 'INFO RCOND SOLUTION DETERMINANT INVERSE'
     REAL, PARAMETER :: rcnd(2) = [ .45695E0, .37047E0 ]

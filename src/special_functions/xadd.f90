@@ -46,9 +46,9 @@ SUBROUTINE XADD(X,Ix,Y,Iy,Z,Iz,Ierror)
   !   920127  Revised PURPOSE section of prologue.  (DWL)
   USE XBLK ,ONLY: radixx_com, radixl_com, rad2l_com, l_com
   INTEGER :: Ierror, Ix, Iy, Iz
-  REAL :: X, Y, Z
+  REAL(SP) :: X, Y, Z
   INTEGER :: i, i1, i2, is, j
-  REAL :: s, t
+  REAL(SP) :: s, t
   !
   !
   !   THE CONDITIONS IMPOSED ON L AND KMAX BY THIS SUBROUTINE

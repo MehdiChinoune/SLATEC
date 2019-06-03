@@ -37,23 +37,25 @@ SUBROUTINE LSOD(F,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,Acor,&
   USE service, ONLY : XERMSG, R1MACH
   INTERFACE
     SUBROUTINE F(X,U,Uprime)
-      REAL :: X
-      REAL :: U(:), Uprime(:)
+      IMPORT SP
+      REAL(SP) :: X
+      REAL(SP) :: U(:), Uprime(:)
     END SUBROUTINE F
     SUBROUTINE JAC(X,U,Pd,Nrowpd)
+      IMPORT SP
       INTEGER :: Nrowpd
-      REAL :: X
-      REAL :: U(:), Pd(:,:)
+      REAL(SP) :: X
+      REAL(SP) :: U(:), Pd(:,:)
     END SUBROUTINE JAC
   END INTERFACE
   INTEGER :: Neq, Idid
   INTEGER :: Iwm(:)
-  REAL :: Delsgn, T, Tolfac, Tout, Tstop
-  REAL :: Acor(Neq), Atol(:), Ewt(Neq), Rtol(:), Savf(Neq), Wm(:), Y(Neq), &
+  REAL(SP) :: Delsgn, T, Tolfac, Tout, Tstop
+  REAL(SP) :: Acor(Neq), Atol(:), Ewt(Neq), Rtol(:), Savf(Neq), Wm(:), Y(Neq), &
     Yh(Neq,6) , Yh1(6*Neq), Ypout(Neq)
   LOGICAL :: Intout
   INTEGER :: ltol, natolp, nrtolp, intflg, k, l
-  REAL :: absdel, big, del, dt, ha, tol
+  REAL(SP) :: absdel, big, del, dt, ha, tol
   CHARACTER(8) :: xern1
   CHARACTER(16) :: xern3, xern4
   !

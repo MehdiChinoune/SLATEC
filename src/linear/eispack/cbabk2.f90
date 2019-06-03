@@ -75,8 +75,8 @@ SUBROUTINE CBABK2(Nm,N,Low,Igh,Scalee,M,Zr,Zi)
 
   !
   INTEGER i, j, k, M, N, ii, Nm, Igh, Low
-  REAL Scalee(*), Zr(Nm,*), Zi(Nm,*)
-  REAL s
+  REAL(SP) Scalee(*), Zr(Nm,*), Zi(Nm,*)
+  REAL(SP) s
   !
   !* FIRST EXECUTABLE STATEMENT  CBABK2
   IF ( M/=0 ) THEN

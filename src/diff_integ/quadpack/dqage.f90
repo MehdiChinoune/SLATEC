@@ -166,16 +166,17 @@ SUBROUTINE DQAGE(F,A,B,Epsabs,Epsrel,Key,Limit,Result,Abserr,Neval,Ier,&
   USE service, ONLY : D1MACH
   !
   INTERFACE
-    REAL(8) FUNCTION F(X)
-      REAL(8) :: X
+    REAL(DP) FUNCTION F(X)
+      IMPORT DP
+      REAL(DP) :: X
     END FUNCTION F
   END INTERFACE
   INTEGER :: Ier, Key, Last, Limit, Neval
   INTEGER :: Iord(Limit)
-  REAL(8) :: A, Abserr, B, Epsabs, Epsrel, Result
-  REAL(8) :: Alist(Limit), Blist(Limit), Elist(Limit), Rlist(Limit)
+  REAL(DP) :: A, Abserr, B, Epsabs, Epsrel, Result
+  REAL(DP) :: Alist(Limit), Blist(Limit), Elist(Limit), Rlist(Limit)
   INTEGER :: iroff1, iroff2, k, keyf, maxerr, nrmax
-  REAL(8) :: area, area1, area12, area2, a1, a2, b1, b2, defabs, defab1, defab2, &
+  REAL(DP) :: area, area1, area12, area2, a1, a2, b1, b2, defabs, defab1, defab2, &
     epmach, errbnd, errmax, error1, error2, erro12, errsum, resabs, uflow
   !
   !            LIST OF MAJOR VARIABLES

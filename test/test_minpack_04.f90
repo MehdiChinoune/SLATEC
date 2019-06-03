@@ -1,8 +1,9 @@
 MODULE TEST53_MOD
+  USE service, ONLY : SP, DP
   IMPLICIT NONE
-  REAL(8) :: EPS, RP, SVEps, TOL
+  REAL(DP) :: EPS, RP, SVEps, TOL
   INTEGER IERp, IERr, NORd, NORdp
-  REAL(8) :: R(11)
+  REAL(DP) :: R(11)
 
 CONTAINS
   !** DCMPAR
@@ -33,7 +34,7 @@ CONTAINS
     !     .. Array Arguments ..
     INTEGER Itest(9)
     !     .. Local Scalars ..
-    REAL(8) :: rpp, ss
+    REAL(DP) :: rpp, ss
     INTEGER ierpp, nrdp
     !     .. Local Arrays ..
     INTEGER itemp(4)
@@ -96,10 +97,10 @@ CONTAINS
     !     .. Scalar Arguments ..
     INTEGER Ipass, Kprint, Lun
     !     .. Local Scalars ..
-    REAL(8) :: yfit
+    REAL(DP) :: yfit
     INTEGER i, icnt, m, maxord
     !     .. Local Arrays ..
-    REAL(8) :: a(97), tc(5), w(11), x(11), y(11), yp(5)
+    REAL(DP) :: a(97), tc(5), w(11), x(11), y(11), yp(5)
     INTEGER itest(9)
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, SQRT
@@ -473,11 +474,11 @@ CONTAINS
     !     .. Scalar Arguments ..
     INTEGER Ipass, Kprint, Lun
     !     .. Local Scalars ..
-    REAL(8) :: fnorm, fnorms, one, sigma, temp1, temp2, temp3, tol, tol2, zero
+    REAL(DP) :: fnorm, fnorms, one, sigma, temp1, temp2, temp3, tol, tol2, zero
     INTEGER i, iflag, info, infos, iopt, kontrl, ldfjac, lwa, m, n, nerr, nprint
     LOGICAL fatal
     !     .. Local Arrays ..
-    REAL(8) :: fjac(10,2), fjrow(2,1), fjtj(3), fvec(10), wa(40), x(2)
+    REAL(DP) :: fjac(10,2), fjrow(2,1), fjtj(3), fvec(10), wa(40), x(2)
     INTEGER iw(2)
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, SQRT
@@ -773,32 +774,32 @@ CONTAINS
     !     .. Scalar Arguments ..
     INTEGER Ipass, Kprint, Lun
     !     .. Local Scalars ..
-    REAL(8) :: diff, one, t, tol, xval, zero
+    REAL(DP) :: diff, one, t, tol, xval, zero
     INTEGER kontrl, i, idigit, ii, j, l, mode, n, nconst, ndeg, nerr, nval
     LOGICAL fatal
     !     .. Local Arrays ..
-    REAL(8) :: coeff(9), v(51,5), w(529), work(12), xconst(11), yconst(11)
+    REAL(DP) :: coeff(9), v(51,5), w(529), work(12), xconst(11), yconst(11)
     INTEGER iw(30), nderiv(11)
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, REAL, SQRT
     !     .. Data statements ..
     !
     INTEGER, PARAMETER :: ndata = 9, nord = 4, nbkpt = 13, last = 10
-    REAL(8), PARAMETER :: xdata(9) = [ 0.15D0, 0.27D0, 0.33D0, 0.40D0, 0.43D0, &
+    REAL(DP), PARAMETER :: xdata(9) = [ 0.15D0, 0.27D0, 0.33D0, 0.40D0, 0.43D0, &
       0.47D0, 0.53D0, 0.58D0, 0.63D0 ]
-    REAL(8), PARAMETER :: ydata(9) = [ 0.025D0, 0.05D0, 0.13D0, 0.27D0, 0.37D0, &
+    REAL(DP), PARAMETER :: ydata(9) = [ 0.025D0, 0.05D0, 0.13D0, 0.27D0, 0.37D0, &
       0.47D0, 0.64D0, 0.77D0, 0.87D0 ]
-    REAL(8), PARAMETER :: sddata(9)  = 0.015D0
-    REAL(8), PARAMETER :: bkpt(13) = [ -0.6D0, -0.4D0, -0.2D0, 0.0D0, 0.2D0, &
+    REAL(DP), PARAMETER :: sddata(9)  = 0.015D0
+    REAL(DP), PARAMETER :: bkpt(13) = [ -0.6D0, -0.4D0, -0.2D0, 0.0D0, 0.2D0, &
       0.4D0, 0.6D0, 0.8D0, 0.9D0, 1.0D0, 1.1D0, 1.2D0, 1.3D0 ]
     !
     !     Store the data to be used to check the accuracy of the computed
     !     results.  See SAND78-1291, p.26.
     !
-    REAL(8), PARAMETER :: coefck(9) = [ 1.186380846D-13, -2.826166426D-14, &
+    REAL(DP), PARAMETER :: coefck(9) = [ 1.186380846D-13, -2.826166426D-14, &
       -4.333929094D-15, 1.722113311D-01, 9.421965984D-01, 9.684708719D-01, &
       9.894902905D-01,  1.005254855D+00, 9.894902905D-01 ]
-    REAL(8), PARAMETER :: check(51) = [ 2.095830752D-16, 2.870188850D-05, &
+    REAL(DP), PARAMETER :: check(51) = [ 2.095830752D-16, 2.870188850D-05, &
       2.296151081D-04, 7.749509897D-04, 1.836920865D-03, 3.587736064D-03, &
       6.199607918D-03, 9.844747759D-03, 1.469536692D-02, 2.092367672D-02, &
       2.870188851D-02, 3.824443882D-02, 4.993466504D-02, 6.419812979D-02, &
@@ -940,7 +941,7 @@ CONTAINS
       !
       !       The function DBVALU is in the de Boor B-spline package.
       !
-      xval = REAL(i-1, 8)/(nval-1)
+      xval = REAL( i-1, DP)/(nval-1)
       ii = 1
       DO j = 1, 3
         v(i,j+1) = DBVALU(bkpt,coeff,n,nord,j-1,xval,ii,work)
@@ -1082,14 +1083,14 @@ CONTAINS
     !     .. Scalar Arguments ..
     INTEGER :: Iflag, Ldfjac, M, N
     !     .. Array Arguments ..
-    REAL(8) :: Fvec(M), X(N), Fjac(:,:)
+    REAL(DP) :: Fvec(M), X(N), Fjac(:,:)
     !     .. Local Scalars ..
     INTEGER :: i
-    REAL(8) :: temp
+    REAL(DP) :: temp
     !     .. Intrinsic Functions ..
     INTRINSIC EXP
     !     .. Data statements ..
-    REAL(8), PARAMETER :: two = 2.0D0
+    REAL(DP), PARAMETER :: two = 2.0D0
     !* FIRST EXECUTABLE STATEMENT  DFCN1
     IF ( Iflag/=1 ) RETURN
     DO i = 1, M
@@ -1129,14 +1130,14 @@ CONTAINS
     !     .. Scalar Arguments ..
     INTEGER :: Iflag, Ldfjac, M, N
     !     .. Array Arguments ..
-    REAL(8) :: Fjac(:,:), Fvec(M), X(N)
+    REAL(DP) :: Fjac(:,:), Fvec(M), X(N)
     !     .. Local Scalars ..
-    REAL(8) :: temp
+    REAL(DP) :: temp
     INTEGER :: i
     !     .. Intrinsic Functions ..
     INTRINSIC EXP
     !     .. Data statements ..
-    REAL(8), PARAMETER :: two = 2.0D0
+    REAL(DP), PARAMETER :: two = 2.0D0
     !* FIRST EXECUTABLE STATEMENT  DFCN2
     IF ( Iflag==0 ) RETURN
     !
@@ -1194,14 +1195,14 @@ CONTAINS
     !     .. Scalar Arguments ..
     INTEGER :: Iflag, M, N, Nrow
     !     .. Array Arguments ..
-    REAL(8) :: Fjrow(:,:), Fvec(M), X(N)
+    REAL(DP) :: Fjrow(:,:), Fvec(M), X(N)
     !     .. Local Scalars ..
-    REAL(8) :: temp
+    REAL(DP) :: temp
     INTEGER i
     !     .. Intrinsic Functions ..
     INTRINSIC EXP
     !     .. Data statements ..
-    REAL(8), PARAMETER :: two = 2.0D0
+    REAL(DP), PARAMETER :: two = 2.0D0
     !* FIRST EXECUTABLE STATEMENT  DFCN3
     IF ( Iflag==0 ) RETURN
     !

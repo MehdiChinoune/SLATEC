@@ -1,5 +1,5 @@
 !** ALI
-REAL FUNCTION ALI(X)
+REAL(SP) FUNCTION ALI(X)
   !>
   !  Compute the logarithmic integral.
   !***
@@ -32,7 +32,7 @@ REAL FUNCTION ALI(X)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   USE service, ONLY : XERMSG
-  REAL X
+  REAL(SP) X
   !* FIRST EXECUTABLE STATEMENT  ALI
   IF ( X<=0.0 ) CALL XERMSG('ALI', 'LOG INTEGRAL UNDEFINED FOR X LE 0',1,2)
   IF ( X==1.0 ) CALL XERMSG('ALI', 'LOG INTEGRAL UNDEFINED FOR X = 1',2,2)

@@ -36,13 +36,13 @@ SUBROUTINE DPLPFL(Mrelas,Nvars,Ienter,Ileave,Ibasis,Ind,Theta,Dirnrm,&
   !   900328  Added TYPE section.  (WRB)
 
   INTEGER :: Ienter, Ileave, Mrelas, Nvars
-  REAL(8) :: Dirnrm, Rprnrm, Theta
+  REAL(DP) :: Dirnrm, Rprnrm, Theta
   LOGICAL :: Finite, Zerolv
   INTEGER :: Ibasis(Nvars+Mrelas), Ind(Nvars+Mrelas)
-  REAL(8) :: Csc(Nvars), Ww(Mrelas), Bl(Nvars+Mrelas), Bu(Nvars+Mrelas), &
+  REAL(DP) :: Csc(Nvars), Ww(Mrelas), Bl(Nvars+Mrelas), Bu(Nvars+Mrelas), &
     Erp(Mrelas), Rprim(Mrelas), Primal(Nvars+Mrelas)
   INTEGER :: i, j, n20005, n20036
-  REAL(8) :: bound, ratio, zero
+  REAL(DP) :: bound, ratio, zero
   !* FIRST EXECUTABLE STATEMENT  DPLPFL
   zero = 0.D0
   !

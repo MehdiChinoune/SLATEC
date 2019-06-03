@@ -181,8 +181,8 @@ SUBROUTINE CNBFS(Abe,Lda,N,Ml,Mu,V,Itask,Ind,Work,Iwork)
   USE service, ONLY : R1MACH, XERMSG
   !
   INTEGER Lda, N, Itask, Ind, Iwork(N), Ml, Mu
-  COMPLEX Abe(Lda,2*Ml+Mu+1), V(N), Work(N)
-  REAL rcond
+  COMPLEX(SP) Abe(Lda,2*Ml+Mu+1), V(N), Work(N)
+  REAL(SP) rcond
   CHARACTER(8) :: xern1, xern2
   !* FIRST EXECUTABLE STATEMENT  CNBFS
   IF ( Lda<N ) THEN

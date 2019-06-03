@@ -82,8 +82,8 @@ SUBROUTINE ORTBAK(Nm,Low,Igh,A,Ort,M,Z)
 
   !
   INTEGER i, j, M, la, mm, mp, Nm, Igh, kp1, Low, mp1
-  REAL A(Nm,*), Ort(*), Z(Nm,*)
-  REAL g
+  REAL(SP) A(Nm,*), Ort(*), Z(Nm,*)
+  REAL(SP) g
   !
   !* FIRST EXECUTABLE STATEMENT  ORTBAK
   IF ( M/=0 ) THEN

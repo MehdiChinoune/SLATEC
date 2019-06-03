@@ -29,10 +29,10 @@ SUBROUTINE SDAWTS(Neq,Iwt,Rtol,Atol,Y,Wt)
 
   !
   INTEGER::  Neq, Iwt
-  REAL :: Rtol(Neq), Atol(Neq), Y(Neq), Wt(Neq)
+  REAL(SP) :: Rtol(Neq), Atol(Neq), Y(Neq), Wt(Neq)
   !
   INTEGER :: i
-  REAL :: atoli, rtoli
+  REAL(SP) :: atoli, rtoli
   !
   !* FIRST EXECUTABLE STATEMENT  SDAWTS
   rtoli = Rtol(1)

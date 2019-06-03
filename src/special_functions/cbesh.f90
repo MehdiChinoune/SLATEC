@@ -34,7 +34,7 @@ SUBROUTINE CBESH(Z,Fnu,Kode,M,N,Cy,Nz,Ierr)
   !
   !         Input
   !           Z      - Nonzero argument of type COMPLEX
-  !           FNU    - Initial order of type REAL, FNU>=0
+  !           FNU    - Initial order of type REAL(SP), FNU>=0
   !           KODE   - A parameter to indicate the scaling option
   !                    KODE=1  returns
   !                            CY(L)=H(M,FNU+L-1,Z), L=1,...,N
@@ -162,13 +162,13 @@ SUBROUTINE CBESH(Z,Fnu,Kode,M,N,Cy,Nz,Ierr)
   USE service, ONLY : R1MACH, I1MACH
   !
   INTEGER :: Ierr, Kode, M, N, Nz
-  REAL :: Fnu
-  COMPLEX :: Cy(N), Z
+  REAL(SP) :: Fnu
+  COMPLEX(SP) :: Cy(N), Z
   INTEGER :: i, inu, inuh, ir, k, k1, k2, mm, mr, nn, nuf, nw
-  COMPLEX :: zn, zt, csgn
-  REAL :: aa, alim, aln, arg, az, cpn, dig, elim, fmm, fn, fnul, rhpi, rl, &
+  COMPLEX(SP) :: zn, zt, csgn
+  REAL(SP) :: aa, alim, aln, arg, az, cpn, dig, elim, fmm, fn, fnul, rhpi, rl, &
     r1m5, sgn, spn, tol, ufl, xn, xx, yn, yy, bb, ascle, rtol, atol
-  REAL, PARAMETER :: hpi = 1.57079632679489662E0
+  REAL(SP), PARAMETER :: hpi = 1.57079632679489662E0
   !
   !* FIRST EXECUTABLE STATEMENT  CBESH
   Nz = 0

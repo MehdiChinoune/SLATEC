@@ -1,4 +1,5 @@
 MODULE TEST28_MOD
+  USE service, ONLY : SP, DP
   IMPLICIT NONE
 
 CONTAINS
@@ -39,12 +40,12 @@ CONTAINS
     !     .. Scalar Arguments ..
     INTEGER Ipass, Kprint, Lun
     !     .. Local Scalars ..
-    REAL(8) :: cnorm, relerr(1), relnrm(1), resnrm(1), rnorme, rnorml(1), tnorm
+    REAL(DP) :: cnorm, relerr(1), relnrm(1), resnrm(1), rnorme, rnorml(1), tnorm
     INTEGER i, idigit, jdigit, kontrl, ma, mdd, me, meap1, mep1, mg, &
       mode, n, nerr, np1
     LOGICAL fatal
     !     .. Local Arrays ..
-    REAL(8) :: d(11,6), err(5), prgopt(4), work(105), x(5)
+    REAL(DP) :: d(11,6), err(5), prgopt(4), work(105), x(5)
     INTEGER ip(17)
     !     .. Intrinsic Functions ..
     INTRINSIC SQRT
@@ -54,7 +55,7 @@ CONTAINS
     !     the least squares equations.  (There are no equality constraints
     !     in this example).
     !
-    REAL(8), PARAMETER :: a(6,5) = RESHAPE( [ &
+    REAL(DP), PARAMETER :: a(6,5) = RESHAPE( [ &
       -74., 80., 18., -11., -4.,   14., -69., 21., 28., 0., &
       66., -72., -5., 7., 1.,     -12., 66., -30., -23., 3., &
       3., 8., -7., -4., 1.,        4., -12., 4., 4., 0. ], [6,5], ORDER = [2,1] )
@@ -63,21 +64,21 @@ CONTAINS
     !     written in the sense
     !     (row vector)*(solution vector) .GE. (given value).
     !
-    REAL(8), PARAMETER :: g(5,5) = RESHAPE( [ -1., -1., -1., -1., -1., &
+    REAL(DP), PARAMETER :: g(5,5) = RESHAPE( [ -1., -1., -1., -1., -1., &
       10., 10., -3., 5., 4.,    -8., 1., -2., -5., 3.,    8., -1., 2., 5., -3., &
       -4., -2., 3., -5., 1. ], [5,5], ORDER = [2,1] )
     !
     !     Define the least squares right-side vector.
     !
-    REAL(8), PARAMETER :: f(6) = [ -5., -9., 708., 4165., -13266., 8409. ]
+    REAL(DP), PARAMETER :: f(6) = [ -5., -9., 708., 4165., -13266., 8409. ]
     !
     !     Define the inequality constraint right-side vector.
     !
-    REAL(8), PARAMETER :: h(5) = [ -5., 20., -40., 11., -30. ]
+    REAL(DP), PARAMETER :: h(5) = [ -5., 20., -40., 11., -30. ]
     !
     !     Define the vector that is the known solution.
     !
-    REAL(8), PARAMETER :: sol(5) = [ 1., 2., -1., 3., -4. ]
+    REAL(DP), PARAMETER :: sol(5) = [ 1., 2., -1., 3., -4. ]
     !* FIRST EXECUTABLE STATEMENT  DDLSEIT
     IF ( Kprint>=2 ) WRITE (Lun,99001)
     !
@@ -285,15 +286,15 @@ CONTAINS
     !           including removing an illegal character from column 1, and
     !           editorial changes.  (RWC)
     USE slatec, ONLY : D1MACH, DGLSS
-    REAL(8) :: a(4,4), b(4), delmax, delx, r, rnorm(1), work(50)
+    REAL(DP) :: a(4,4), b(4), delmax, delx, r, rnorm(1), work(50)
     INTEGER i, Ipass, j, kk, Kprint, nerr, kprog, kcase, iwork(20), info, Lun
-    REAL(8), PARAMETER :: aa(4,4,2) = RESHAPE( [1.D0, .5D0, 1.D0, .25D0, &
+    REAL(DP), PARAMETER :: aa(4,4,2) = RESHAPE( [1.D0, .5D0, 1.D0, .25D0, &
       0.D0, 2.D0, 0.D0, 1.D0, 2.D0, -1.D0, 1.D0, 0.D0, 0.D0, 0.D0, 0.D0, 0.D0, &
       1.D0, 2.D0, -1.D0, 0.D0, 0.D0, 1.D0, 2.D0, 0.D0, -1.D0, 0.D0, 1.D0, 0.D0, &
       1.D0, 0.D0, 1.D0, 0.D0 ], [4,4,2] )
-    REAL(8), PARAMETER :: bb(4,2) = RESHAPE( [ 3.D0, 1.5D0, 2.D0, 1.25D0, &
+    REAL(DP), PARAMETER :: bb(4,2) = RESHAPE( [ 3.D0, 1.5D0, 2.D0, 1.25D0, &
       1.D0, 3.D0, 3.D0, 0.D0 ], [4,2] )
-    REAL(8), PARAMETER :: xx(4,4) = RESHAPE( [ .9999999999999787D0, 1.000000000000007D0, &
+    REAL(DP), PARAMETER :: xx(4,4) = RESHAPE( [ .9999999999999787D0, 1.000000000000007D0, &
       1.000000000000007D0, 0.D0, .8095238095238102D0, 1.047619047619044D0, &
       1.095238095238081D0, 0.D0, .7777777777777857D0, 1.444444444444429D0, &
       .3333333333333393D0, .5555555555555500D0, .3333333333333321D0, 0.0D0, &

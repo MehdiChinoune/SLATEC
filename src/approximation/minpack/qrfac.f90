@@ -89,10 +89,10 @@ SUBROUTINE QRFAC(M,N,A,Lda,Pivot,Ipvt,Lipvt,Sigma,Acnorm,Wa)
   INTEGER :: M, N, Lda, Lipvt
   INTEGER :: Ipvt(Lipvt)
   LOGICAL :: Pivot
-  REAL :: A(Lda,N), Sigma(N), Acnorm(N), Wa(n)
+  REAL(SP) :: A(Lda,N), Sigma(N), Acnorm(N), Wa(n)
   INTEGER :: i, j, jp1, k, kmax, minmn
-  REAL :: ajnorm, epsmch, summ, temp
-  REAL, PARAMETER :: one = 1.0E0, p05 = 5.0E-2, zero = 0.0E0
+  REAL(SP) :: ajnorm, epsmch, summ, temp
+  REAL(SP), PARAMETER :: one = 1.0E0, p05 = 5.0E-2, zero = 0.0E0
   !* FIRST EXECUTABLE STATEMENT  QRFAC
   epsmch = R1MACH(4)
   !

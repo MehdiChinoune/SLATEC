@@ -41,10 +41,10 @@ SUBROUTINE CUOIK(Z,Fnu,Kode,Ikflg,N,Y,Nuf,Tol,Elim,Alim)
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
   USE service, ONLY : R1MACH
   INTEGER i, iform, Ikflg, init, Kode, N, nn, Nuf, nw
-  COMPLEX arg, asum, bsum, cwrk(16), cz, phi, summ, Y(N), Z, zb, zeta1, zeta2, zn, zr
-  REAL aarg, Alim, aphi, ascle, ax, ay, Elim, fnn, Fnu, gnn, gnu, rcz, Tol, x, yy
-  COMPLEX, PARAMETER :: czero = (0.0E0,0.0E0)
-  REAL, PARAMETER :: aic = 1.265512123484645396E+00
+  COMPLEX(SP) arg, asum, bsum, cwrk(16), cz, phi, summ, Y(N), Z, zb, zeta1, zeta2, zn, zr
+  REAL(SP) aarg, Alim, aphi, ascle, ax, ay, Elim, fnn, Fnu, gnn, gnu, rcz, Tol, x, yy
+  COMPLEX(SP), PARAMETER :: czero = (0.0E0,0.0E0)
+  REAL(SP), PARAMETER :: aic = 1.265512123484645396E+00
   !* FIRST EXECUTABLE STATEMENT  CUOIK
   Nuf = 0
   nn = N

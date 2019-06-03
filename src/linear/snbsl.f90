@@ -85,9 +85,9 @@ SUBROUTINE SNBSL(Abe,Lda,N,Ml,Mu,Ipvt,B,Job)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER Lda, N, Ml, Mu, Ipvt(N), Job
-  REAL Abe(Lda,2*Ml+Mu+1), B(N)
+  REAL(SP) Abe(Lda,2*Ml+Mu+1), B(N)
   !
-  REAL t
+  REAL(SP) t
   INTEGER k, kb, l, lb, ldb, lm, m, mlm, nm1
   !* FIRST EXECUTABLE STATEMENT  SNBSL
   m = Mu + Ml + 1

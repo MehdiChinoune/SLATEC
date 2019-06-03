@@ -1,5 +1,5 @@
 !** CCOT
-COMPLEX FUNCTION CCOT(Z)
+COMPLEX(SP) FUNCTION CCOT(Z)
   !>
   !  Compute the cotangent.
   !***
@@ -31,9 +31,9 @@ COMPLEX FUNCTION CCOT(Z)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   USE service, ONLY : XERMSG, XERCLR, R1MACH
-  COMPLEX :: Z
-  REAL :: den, sn2x, x2, y2
-  REAL, PARAMETER :: sqeps = SQRT(R1MACH(4))
+  COMPLEX(SP) :: Z
+  REAL(SP) :: den, sn2x, x2, y2
+  REAL(SP), PARAMETER :: sqeps = SQRT(R1MACH(4))
   !* FIRST EXECUTABLE STATEMENT  CCOT
   !
   x2 = 2.0*REAL(Z)

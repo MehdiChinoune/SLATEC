@@ -27,7 +27,7 @@ SUBROUTINE DCFOD(Meth,Elco,Tesco)
   !
   !
   INTEGER i, ib, Meth, nq, nqm1, nqp1
-  REAL(8) :: agamq, Elco(13,12), fnq, fnqm1, pc(12), pint, ragq, rq1fac, &
+  REAL(DP) :: agamq, Elco(13,12), fnq, fnqm1, pc(12), pint, ragq, rq1fac, &
     rqfac, Tesco(3,12), tsign, xpin
   !     ------------------------------------------------------------------
   !      DCFOD  IS CALLED BY THE INTEGRATOR ROUTINE TO SET COEFFICIENTS

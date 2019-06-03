@@ -99,11 +99,11 @@ SUBROUTINE DPPCO(Ap,N,Rcond,Z,Info)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER N, Info
-  REAL(8) :: Ap(*), Z(*)
-  REAL(8) :: Rcond
+  REAL(DP) :: Ap(*), Z(*)
+  REAL(DP) :: Rcond
   !
-  REAL(8) :: ek, t, wk, wkm
-  REAL(8) :: anorm, s, sm, ynorm
+  REAL(DP) :: ek, t, wk, wkm
+  REAL(DP) :: anorm, s, sm, ynorm
   INTEGER i, ij, j, jm1, j1, k, kb, kj, kk, kp1
   !
   !     FIND NORM OF A

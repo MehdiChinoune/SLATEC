@@ -74,8 +74,8 @@ SUBROUTINE TRED2(Nm,N,A,D,E,Z)
 
   !
   INTEGER i, j, k, l, N, ii, Nm, jp1
-  REAL A(Nm,*), D(*), E(*), Z(Nm,*)
-  REAL f, g, h, hh, scalee
+  REAL(SP) A(Nm,*), D(*), E(*), Z(Nm,*)
+  REAL(SP) f, g, h, hh, scalee
   !
   !* FIRST EXECUTABLE STATEMENT  TRED2
   DO i = 1, N

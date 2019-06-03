@@ -1,5 +1,5 @@
 !** RD
-REAL FUNCTION RD(X,Y,Z,Ier)
+REAL(SP) FUNCTION RD(X,Y,Z,Ier)
   !>
   !  Compute the incomplete or complete elliptic integral of the
   !            2nd kind.  For X and Y nonnegative, X+Y and Z positive,
@@ -60,7 +60,7 @@ REAL FUNCTION RD(X,Y,Z,Ier)
   !
   !                   X + Y is positive
   !
-  !          Z      - Real, positive variable
+  !          Z      - REAL(SP), positive variable
   !
   !
   !
@@ -317,14 +317,14 @@ REAL FUNCTION RD(X,Y,Z,Ier)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   USE service, ONLY : XERMSG, R1MACH
   INTEGER :: Ier
-  REAL :: X, Y, Z
-  REAL :: epslon, ea, eb, ec, ed, ef, lamda, mu, power4, sigma, s1, s2, xn, &
+  REAL(SP) :: X, Y, Z
+  REAL(SP) :: epslon, ea, eb, ec, ed, ef, lamda, mu, power4, sigma, s1, s2, xn, &
     xndev, xnroot, yn, yndev, ynroot, zn, zndev, znroot
   CHARACTER(16) :: xern3, xern4, xern5, xern6
-  REAL, PARAMETER :: errtol = (R1MACH(3)/3.0E0)**(1.0E0/6.0E0), &
+  REAL(SP), PARAMETER :: errtol = (R1MACH(3)/3.0E0)**(1.0E0/6.0E0), &
     lolim = 2.0E0/(R1MACH(2))**(2.0E0/3.0E0), &
     uplim = (0.10E0*errtol/R1MACH(1))**(2.0E0/3.0E0)
-  REAL, PARAMETER :: c1 = 3.0E0/14.0E0, c2 = 1.0E0/6.0E0, c3 = 9.0E0/22.0E0, &
+  REAL(SP), PARAMETER :: c1 = 3.0E0/14.0E0, c2 = 1.0E0/6.0E0, c3 = 9.0E0/22.0E0, &
     c4 = 3.0E0/26.0E0
   !
   !* FIRST EXECUTABLE STATEMENT  RD

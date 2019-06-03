@@ -28,9 +28,9 @@ SUBROUTINE XPMU(Nu1,Nu2,Mu1,Mu2,Theta,X,Sx,Id,Pqa,Ipqa,Ierror)
   !   920127  Revised PURPOSE section of prologue.  (DWL)
 
   INTEGER :: Id, Ierror, Mu1, Mu2, Ipqa(Mu2-Mu1+1)
-  REAL :: Pqa(Mu2-Mu1+1), Nu1, Nu2, X, Sx, Theta
+  REAL(SP) :: Pqa(Mu2-Mu1+1), Nu1, Nu2, X, Sx, Theta
   INTEGER :: ip0, j, mu, n
-  REAL :: p0, x1, x2
+  REAL(SP) :: p0, x1, x2
   !
   !        CALL XPQNU TO OBTAIN P(-MU2,NU,X)
   !

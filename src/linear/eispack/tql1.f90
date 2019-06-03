@@ -74,8 +74,8 @@ SUBROUTINE TQL1(N,D,E,Ierr)
 
   !
   INTEGER i, j, l, m, N, ii, l1, l2, mml, Ierr
-  REAL D(*), E(*)
-  REAL b, c, c2, c3, dl1, el1, f, g, h, p, r, s, s2
+  REAL(SP) D(*), E(*)
+  REAL(SP) b, c, c2, c3, dl1, el1, f, g, h, p, r, s, s2
   !
   !* FIRST EXECUTABLE STATEMENT  TQL1
   Ierr = 0

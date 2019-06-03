@@ -79,8 +79,8 @@ SUBROUTINE HTRIB3(Nm,N,A,Tau,M,Zr,Zi)
 
   !
   INTEGER i, j, k, l, M, N, Nm
-  REAL A(Nm,*), Tau(2,*), Zr(Nm,*), Zi(Nm,*)
-  REAL h, s, si
+  REAL(SP) A(Nm,*), Tau(2,*), Zr(Nm,*), Zi(Nm,*)
+  REAL(SP) h, s, si
   !
   !* FIRST EXECUTABLE STATEMENT  HTRIB3
   IF ( M/=0 ) THEN

@@ -1,5 +1,5 @@
 !** DCOSDG
-REAL(8) FUNCTION DCOSDG(X)
+REAL(DP) FUNCTION DCOSDG(X)
   !>
   !  Compute the cosine of an argument in degrees.
   !***
@@ -31,8 +31,8 @@ REAL(8) FUNCTION DCOSDG(X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
   INTEGER n
-  REAL(8) :: X
-  REAL(8), PARAMETER :: raddeg = 0.017453292519943295769236907684886D0
+  REAL(DP) :: X
+  REAL(DP), PARAMETER :: raddeg = 0.017453292519943295769236907684886D0
   !* FIRST EXECUTABLE STATEMENT  DCOSDG
   DCOSDG = COS(raddeg*X)
   !

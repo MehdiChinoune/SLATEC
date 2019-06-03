@@ -44,17 +44,18 @@ SUBROUTINE SPLPUP(USRMAT,Mrelas,Nvars,Dattrv,Bl,Bu,Ind,Info,Amat,&
   USE service, ONLY : XERMSG
   INTERFACE
     SUBROUTINE USRMAT(I,J,Aij,Indcat,Dattrv,Iflag)
+      IMPORT SP
       INTEGER :: I, J, indcat, iflag(10)
-      REAL :: Dattrv(:), Aij
+      REAL(SP) :: Dattrv(:), Aij
     END SUBROUTINE
   END INTERFACE
   INTEGER :: Info, Mrelas, Nvars, Ind(Nvars+Mrelas), Imat(:)
   LOGICAL :: Sizeup
-  REAL :: Abig, Amat(:), Asmall, Bl(Nvars+Mrelas), Bu(Nvars+Mrelas), Dattrv(:)
+  REAL(SP) :: Abig, Amat(:), Asmall, Bl(Nvars+Mrelas), Bu(Nvars+Mrelas), Dattrv(:)
   INTEGER :: i, indcat, indexx, iplace, itcnt, itmax, j
   INTEGER :: iflag(10)
   LOGICAL :: first
-  REAL :: aij, amn, amx, xval, zero
+  REAL(SP) :: aij, amn, amx, xval, zero
   CHARACTER(8) :: xern1, xern2
   CHARACTER(16) :: xern3, xern4
   !

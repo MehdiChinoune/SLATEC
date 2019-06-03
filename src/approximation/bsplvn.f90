@@ -25,11 +25,11 @@ SUBROUTINE BSPLVN(T,Jhigh,Indexx,X,Ileft,Vnikx)
   !   900328  Added TYPE section.  (WRB)
 
   INTEGER :: Ileft, Indexx, Jhigh
-  REAL :: T(:), Vnikx(*), X
-  REAL :: vm, vmprev
+  REAL(SP) :: T(:), Vnikx(*), X
+  REAL(SP) :: vm, vmprev
   INTEGER :: imjp1, ipj, jp1, jp1ml, l
   INTEGER, SAVE :: j = 1
-  REAL, SAVE :: deltam(20) = 0., deltap(20) = 0.
+  REAL(SP), SAVE :: deltam(20) = 0., deltap(20) = 0.
   !* FIRST EXECUTABLE STATEMENT  BSPLVN
   IF ( Indexx/=2 ) THEN
     j = 1

@@ -31,9 +31,9 @@ SUBROUTINE MINSOL(Usol,Idmn,Zn,Zm)
   !   900402  Added TYPE section.  (WRB)
   USE SPLPCM, ONLY : l_com, is_com, js_com, k_com, ms_com, ns_com
   INTEGER :: Idmn
-  REAL :: Usol(Idmn,l_com), Zm(ms_com), Zn(ns_com)
+  REAL(SP) :: Usol(Idmn,l_com), Zm(ms_com), Zn(ns_com)
   INTEGER :: i, ifnl, ii, istr, j, jfnl, jj, jstr
-  REAL :: ete, pertrb, ute
+  REAL(SP) :: ete, pertrb, ute
   !* FIRST EXECUTABLE STATEMENT  MINSOL
   istr = 1
   ifnl = k_com

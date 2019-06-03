@@ -1,5 +1,5 @@
 !** BCRH
-REAL FUNCTION BCRH(Xll,Xrr,Iz,C,A,Bh,F,Sgn)
+REAL(SP) FUNCTION BCRH(Xll,Xrr,Iz,C,A,Bh,F,Sgn)
   !>
   !  Subsidiary to CBLKTR
   !***
@@ -21,15 +21,16 @@ REAL FUNCTION BCRH(Xll,Xrr,Iz,C,A,Bh,F,Sgn)
   !   900402  Added TYPE section.  (WRB)
   USE CCBLK, ONLY : cnv_com
   INTERFACE
-    REAL FUNCTION F(X,Iz,C,A,Bh)
+    REAL(SP) FUNCTION F(X,Iz,C,A,Bh)
+      IMPORT SP
       INTEGER :: Iz
-      REAL :: X, A(Iz), Bh(Iz), C(Iz)
+      REAL(SP) :: X, A(Iz), Bh(Iz), C(Iz)
     END FUNCTION F
   END INTERFACE
   INTEGER :: Iz
-  REAL :: A(:), Bh(:), C(:)
-  REAL :: Sgn, Xll, Xrr
-  REAL :: dx, x, xl, xr
+  REAL(SP) :: A(:), Bh(:), C(:)
+  REAL(SP) :: Sgn, Xll, Xrr
+  REAL(SP) :: dx, x, xl, xr
   !* FIRST EXECUTABLE STATEMENT  BCRH
   xl = Xll
   xr = Xrr

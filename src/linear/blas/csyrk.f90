@@ -127,18 +127,18 @@ SUBROUTINE CSYRK(Uplo,Trans,N,K,Alpha,A,Lda,Beta,C,Ldc)
   !     .. Scalar Arguments ..
   CHARACTER :: Uplo, Trans
   INTEGER N, K, Lda, Ldc
-  COMPLEX Alpha, Beta
+  COMPLEX(SP) Alpha, Beta
   !     .. Array Arguments ..
-  COMPLEX A(Lda,*), C(Ldc,*)
+  COMPLEX(SP) A(Lda,*), C(Ldc,*)
   !     .. Intrinsic Functions ..
   INTRINSIC MAX
   !     .. Local Scalars ..
   LOGICAL upper
   INTEGER i, info, j, l, nrowa
-  COMPLEX temp
+  COMPLEX(SP) temp
   !     .. Parameters ..
-  COMPLEX, PARAMETER :: ONE = (1.0E+0,0.0E+0)
-  COMPLEX, PARAMETER :: ZERO = (0.0E+0,0.0E+0)
+  COMPLEX(SP), PARAMETER :: ONE = (1.0E+0,0.0E+0)
+  COMPLEX(SP), PARAMETER :: ZERO = (0.0E+0,0.0E+0)
   !* FIRST EXECUTABLE STATEMENT  CSYRK
   !
   !     Test the input parameters.

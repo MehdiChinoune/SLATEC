@@ -41,10 +41,10 @@ LOGICAL FUNCTION DWNLT2(Me,Mend,Ir,Factor,Tau,Scalee,Wic)
   !   900604  DP version created from SP version.  (RWC)
 
   INTEGER :: Ir, Me, Mend
-  REAL(8) :: Factor, Tau, Scalee(Mend), Wic(:)
+  REAL(DP) :: Factor, Tau, Scalee(Mend), Wic(:)
   !
   INTEGER :: j
-  REAL(8) :: rn, sn, t
+  REAL(DP) :: rn, sn, t
   !
   !* FIRST EXECUTABLE STATEMENT  DWNLT2
   sn = 0.E0

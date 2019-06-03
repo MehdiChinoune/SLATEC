@@ -70,7 +70,7 @@ SUBROUTINE DINTRV(Xt,Lxt,X,Ilo,Ileft,Mflag)
 
   !
   INTEGER :: Ileft, Ilo, Lxt, Mflag
-  REAL(8) :: X, Xt(Lxt)
+  REAL(DP) :: X, Xt(Lxt)
   INTEGER :: ihi, istep, middle
   !* FIRST EXECUTABLE STATEMENT  DINTRV
   ihi = Ilo + 1

@@ -51,10 +51,10 @@ SUBROUTINE DQFORM(M,N,Q,Ldq,Wa)
   !   900328  Added TYPE section.  (WRB)
 
   INTEGER :: Ldq, M, N
-  REAL(8) :: Q(Ldq,M), Wa(M)
+  REAL(DP) :: Q(Ldq,M), Wa(M)
   INTEGER :: i, j, jm1, k, l, minmn, np1
-  REAL(8) :: summ, temp
-  REAL(8), PARAMETER :: one = 1.0D0, zero = 0.0D0
+  REAL(DP) :: summ, temp
+  REAL(DP), PARAMETER :: one = 1.0D0, zero = 0.0D0
   !
   !     ZERO OUT UPPER TRIANGLE OF Q IN THE FIRST MIN(M,N) COLUMNS.
   !

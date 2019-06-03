@@ -105,11 +105,11 @@ SUBROUTINE SCHDC(A,Lda,P,Work,Jpvt,Job,Info)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER Lda, P, Jpvt(*), Job, Info
-  REAL A(Lda,*), Work(*)
+  REAL(SP) A(Lda,*), Work(*)
   !
   INTEGER pu, pl, plp1, j, jp, jt, k, kb, km1, kp1, l, maxl
-  REAL temp
-  REAL maxdia
+  REAL(SP) temp
+  REAL(SP) maxdia
   LOGICAL swapk, negk
   !* FIRST EXECUTABLE STATEMENT  SCHDC
   pl = 1

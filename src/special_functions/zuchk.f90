@@ -31,7 +31,7 @@ SUBROUTINE ZUCHK(Yr,Yi,Nz,Ascle,Tol)
   
   !
   !     COMPLEX Y
-  REAL(8) :: Ascle, ss, st, Tol, wr, wi, Yr, Yi
+  REAL(DP) :: Ascle, ss, st, Tol, wr, wi, Yr, Yi
   INTEGER Nz
   !* FIRST EXECUTABLE STATEMENT  ZUCHK
   Nz = 0

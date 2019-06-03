@@ -83,10 +83,10 @@ SUBROUTINE CPBFA(Abd,Lda,N,M,Info)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER Lda, N, M, Info
-  COMPLEX Abd(Lda,*)
+  COMPLEX(SP) Abd(Lda,*)
   !
-  COMPLEX t
-  REAL s
+  COMPLEX(SP) t
+  REAL(SP) s
   INTEGER ik, j, jk, k, mu
   !* FIRST EXECUTABLE STATEMENT  CPBFA
   DO j = 1, N

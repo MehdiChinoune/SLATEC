@@ -47,7 +47,7 @@ SUBROUTINE DXCON(X,Ix,Ierror)
   !   920127  Revised PURPOSE section of prologue.  (DWL)
   USE DXBLK ,ONLY: radixx_com, radixl_com, dlg10r_com, l_com
   INTEGER :: Ierror, Ix
-  REAL(8) :: X
+  REAL(DP) :: X
   INTEGER :: i, i1, icase, itemp, j, j1, j2
   !
   !   THE CONDITIONS IMPOSED ON L AND KMAX BY THIS SUBROUTINE
@@ -59,7 +59,7 @@ SUBROUTINE DXCON(X,Ix,Ierror)
   ! THESE CONDITIONS MUST BE MET BY APPROPRIATE CODING
   ! IN SUBROUTINE DXSET.
   !
-  REAL(8) :: a, b, z
+  REAL(DP) :: a, b, z
   !
   INTEGER, PARAMETER :: ispace = 1
   !   THE PARAMETER ISPACE IS THE INCREMENT USED IN FORM-

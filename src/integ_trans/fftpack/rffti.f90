@@ -63,7 +63,7 @@ SUBROUTINE RFFTI(N,Wsave)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER :: N
-  REAL :: Wsave(2*N+15)
+  REAL(SP) :: Wsave(2*N+15)
   INTEGER :: ifac(15)
   !* FIRST EXECUTABLE STATEMENT  RFFTI
   IF ( N==1 ) RETURN

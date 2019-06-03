@@ -39,11 +39,11 @@ SUBROUTINE DPOPT(Prgopt,Mrelas,Nvars,Info,Csc,Ibasis,Ropt,Intopt,Lopt)
   USE service, ONLY : XERMSG, D1MACH
   INTEGER :: Info, Mrelas, Nvars
   INTEGER :: Ibasis(Nvars+Mrelas), Intopt(08)
-  REAL(8) :: Csc(Nvars), Prgopt(:), Ropt(07)
+  REAL(DP) :: Csc(Nvars), Prgopt(:), Ropt(07)
   LOGICAL :: Lopt(8)
   INTEGER :: i, iadbig, ictmax, ictopt, idg, iopt, ipagef, isave, itbrc, itest, &
     j, key, kprint, last, lds, lprg, mxitlp, n20043, n20053, n20096, nerr, next, npp
-  REAL(8) :: abig, asmall, costsc, eps, one, tolls, tune, zero, tolabs
+  REAL(DP) :: abig, asmall, costsc, eps, one, tolls, tune, zero, tolabs
   LOGICAL :: contin, usrbas, sizeup, savedt, colscp, cstscp, minprb, stpedg
   !
   !* FIRST EXECUTABLE STATEMENT  DPOPT

@@ -612,14 +612,15 @@ SUBROUTINE DDERKF(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw)
   !
   INTERFACE
     SUBROUTINE DF(X,U,Uprime)
-      REAL(8) :: X
-      REAL(8) :: U(:), Uprime(:)
+      IMPORT DP
+      REAL(DP) :: X
+      REAL(DP) :: U(:), Uprime(:)
     END SUBROUTINE DF
   END INTERFACE
   INTEGER :: Idid, Liw, Lrw, Neq
   INTEGER :: Info(15), Iwork(Liw)
-  REAL(8) :: T, Tout
-  REAL(8) :: Atol(:), Rtol(:), Rwork(Lrw), Y(Neq)
+  REAL(DP) :: T, Tout
+  REAL(DP) :: Atol(:), Rtol(:), Rwork(Lrw), Y(Neq)
   INTEGER ::  kdi, kf1, kf2, kf3, kf4, kf5, kh, krer, ktf, kto, ktstar, ku, kyp, kys
   LOGICAL :: stiff, nonstf
   CHARACTER(8) :: xern1

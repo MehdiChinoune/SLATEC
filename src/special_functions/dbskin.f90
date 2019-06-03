@@ -104,14 +104,14 @@ SUBROUTINE DBSKIN(X,N,Kode,M,Y,Nz,Ierr)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   USE service, ONLY : D1MACH, I1MACH
   INTEGER :: Ierr, Kode, M, N, Nz
-  REAL(8) :: X, Y(M)
+  REAL(DP) :: X, Y(M)
   INTEGER :: i, icase, il, i1m, k, kk, ktrms, m3, ne, nflg, nl, nlim, nn, np, ns, nt
-  REAL(8) :: enlim, exi(102), fn, gr, h(31), hn, ss, tol, t1, t2, w, xlim, xnlim, &
+  REAL(DP) :: enlim, exi(102), fn, gr, h(31), hn, ss, tol, t1, t2, w, xlim, xnlim, &
     xp, ys(3), yss(3)
   !-----------------------------------------------------------------------
   !             COEFFICIENTS IN SERIES OF EXPONENTIAL INTEGRALS
   !-----------------------------------------------------------------------
-  REAL(8), PARAMETER :: a(50) = [ 1.00000000000000000D+00, 5.00000000000000000D-01, &
+  REAL(DP), PARAMETER :: a(50) = [ 1.00000000000000000D+00, 5.00000000000000000D-01, &
     3.75000000000000000D-01, 3.12500000000000000D-01, 2.73437500000000000D-01, &
     2.46093750000000000D-01, 2.25585937500000000D-01, 2.09472656250000000D-01, &
     1.96380615234375000D-01, 1.85470581054687500D-01, 1.76197052001953125D-01, &
@@ -131,7 +131,7 @@ SUBROUTINE DBSKIN(X,N,Kode,M,Y,Nz,Ierr)
   !-----------------------------------------------------------------------
   !             SQRT(PI)/2
   !-----------------------------------------------------------------------
-  REAL(8), PARAMETER :: hrtpi = 8.86226925452758014D-01
+  REAL(DP), PARAMETER :: hrtpi = 8.86226925452758014D-01
   !
   !* FIRST EXECUTABLE STATEMENT  DBSKIN
   Ierr = 0

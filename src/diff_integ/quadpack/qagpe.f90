@@ -207,19 +207,20 @@ SUBROUTINE QAGPE(F,A,B,Npts2,Points,Epsabs,Epsrel,Limit,Result,Abserr,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   USE service, ONLY : R1MACH
   INTERFACE
-    REAL FUNCTION F(X)
-      REAL :: X
+    REAL(SP) FUNCTION F(X)
+      IMPORT SP
+      REAL(SP) :: X
     END FUNCTION F
   END INTERFACE
   INTEGER :: Ier, Last, Limit, Neval, Npts2
   INTEGER :: Iord(Limit), Level(Limit), Ndin(Npts2)
-  REAL :: A, Abserr, Epsabs, Epsrel, Result
-  REAL :: Alist(Limit), Blist(Limit), Elist(Limit), Points(Npts2), Pts(Npts2), &
+  REAL(SP) :: A, Abserr, Epsabs, Epsrel, Result
+  REAL(SP) :: Alist(Limit), Blist(Limit), Elist(Limit), Points(Npts2), Pts(Npts2), &
     Rlist(Limit)
   INTEGER :: i, id, ierro, ind1, ind2, ip1, iroff1, iroff2, iroff3, j, jlow, &
     jupbnd, k, ksgn, ktmin, levcur, levmax, maxerr, nintt, nintp1, npts, nres, &
     nrmax, numrl2
-  REAL :: abseps, area, area1, area12, area2, a1, a2, B, b1, b2, correc, defabs, &
+  REAL(SP) :: abseps, area, area1, area12, area2, a1, a2, B, b1, b2, correc, defabs, &
     defab1, defab2, dres, epmach, erlarg, erlast, errbnd, errmax, error1, erro12, &
     error2, errsum, ertest, oflow, resa, resabs, reseps, res3la(3), rlist2(52), &
     signn, temp, uflow

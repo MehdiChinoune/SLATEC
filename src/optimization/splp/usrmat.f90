@@ -24,7 +24,7 @@ SUBROUTINE USRMAT(I,J,Aij,Indcat,Dattrv,Iflag)
   !   900328  Added TYPE section.  (WRB)
 
   INTEGER :: I, Iflag(10), Indcat, J
-  REAL :: Aij, Dattrv(:)
+  REAL(SP) :: Aij, Dattrv(:)
   INTEGER :: l
   !
   !* FIRST EXECUTABLE STATEMENT  USRMAT

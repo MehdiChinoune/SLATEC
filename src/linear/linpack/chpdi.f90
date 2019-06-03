@@ -89,12 +89,12 @@ SUBROUTINE CHPDI(Ap,N,Kpvt,Det,Inert,Work,Job)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER N, Job
-  COMPLEX Ap(*), Work(*)
-  REAL Det(2)
+  COMPLEX(SP) Ap(*), Work(*)
+  REAL(SP) Det(2)
   INTEGER Kpvt(*), Inert(3)
   !
-  COMPLEX akkp1, temp
-  REAL ten, d, t, ak, akp1
+  COMPLEX(SP) akkp1, temp
+  REAL(SP) ten, d, t, ak, akp1
   INTEGER ij, ik, ikp1, iks, j, jb, jk, jkp1
   INTEGER k, kk, kkp1, km1, ks, ksj, kskp1, kstep
   LOGICAL noinv, nodet, noert

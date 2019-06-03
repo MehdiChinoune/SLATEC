@@ -1,5 +1,5 @@
 !** CSEVL
-REAL FUNCTION CSEVL(X,Cs,N)
+REAL(SP) FUNCTION CSEVL(X,Cs,N)
   !>
   !  Evaluate a Chebyshev series.
   !***
@@ -45,10 +45,10 @@ REAL FUNCTION CSEVL(X,Cs,N)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   USE service, ONLY : XERMSG, R1MACH
   INTEGER :: N
-  REAL :: Cs(N), X
+  REAL(SP) :: Cs(N), X
   INTEGER :: i, ni
-  REAL :: b0, b1, b2, twox
-  REAL, PARAMETER :: onepl = 1.0E0 + R1MACH(4)
+  REAL(SP) :: b0, b1, b2, twox
+  REAL(SP), PARAMETER :: onepl = 1.0E0 + R1MACH(4)
   !* FIRST EXECUTABLE STATEMENT  CSEVL
   IF ( N<1 ) CALL XERMSG('CSEVL','NUMBER OF TERMS .LE. 0',2,2)
   IF ( N>1000 ) CALL XERMSG('CSEVL','NUMBER OF TERMS .GT. 1000',3,2)

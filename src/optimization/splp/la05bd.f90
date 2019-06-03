@@ -47,9 +47,9 @@ SUBROUTINE LA05BD(A,Ind,Ia,N,Ip,Iw,W,G,B,Trans)
   INTEGER :: Ia, N
   LOGICAL :: Trans
   INTEGER :: Ind(Ia,2), Iw(N,8), Ip(N,2)
-  REAL(8) :: G, A(Ia), B(:), W(:)
+  REAL(DP) :: G, A(Ia), B(:), W(:)
   INTEGER :: i, ii, j, k, k2, kk, kl, kll, kp, kpc, l1, n1, nz
-  REAL(8) :: am
+  REAL(DP) :: am
   !* FIRST EXECUTABLE STATEMENT  LA05BD
   IF ( G<0.D0 ) THEN
     !

@@ -64,10 +64,10 @@ SUBROUTINE DPOFA(A,Lda,N,Info)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER Lda, N, Info
-  REAL(8) :: A(Lda,*)
+  REAL(DP) :: A(Lda,*)
   !
-  REAL(8) :: t
-  REAL(8) :: s
+  REAL(DP) :: t
+  REAL(DP) :: s
   INTEGER j, jm1, k
   !* FIRST EXECUTABLE STATEMENT  DPOFA
   DO j = 1, N

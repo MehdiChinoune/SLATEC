@@ -136,14 +136,14 @@ SUBROUTINE DGBMV(Trans,M,N,Kl,Ku,Alpha,A,Lda,X,Incx,Beta,Y,Incy)
   !           lines were modified.  (BKS)
   USE service, ONLY : XERBLA
   !     .. Scalar Arguments ..
-  REAL(8) :: Alpha, Beta
+  REAL(DP) :: Alpha, Beta
   INTEGER Incx, Incy, Kl, Ku, Lda, M, N
   CHARACTER :: Trans
   !     .. Array Arguments ..
-  REAL(8) :: A(Lda,*), X(*), Y(*)
-  REAL(8), PARAMETER :: ONE = 1.0D+0, ZERO = 0.0D+0
+  REAL(DP) :: A(Lda,*), X(*), Y(*)
+  REAL(DP), PARAMETER :: ONE = 1.0D+0, ZERO = 0.0D+0
   !     .. Local Scalars ..
-  REAL(8) :: temp
+  REAL(DP) :: temp
   INTEGER i, info, ix, iy, j, jx, jy, k, kup1, kx, ky, lenx, leny
   !     .. Intrinsic Functions ..
   INTRINSIC MAX, MIN

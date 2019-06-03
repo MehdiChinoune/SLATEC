@@ -1,5 +1,5 @@
 !** DNRM2
-REAL(8) FUNCTION DNRM2(N,Dx,Incx)
+REAL(DP) FUNCTION DNRM2(N,Dx,Incx)
   !>
   !  Compute the Euclidean length (L2 norm) of a vector.
   !***
@@ -83,9 +83,9 @@ REAL(8) FUNCTION DNRM2(N,Dx,Incx)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER i, Incx, j, N, nn, next
-  REAL(8) :: Dx(*), hitest, summ, xmax
-  REAL(8), PARAMETER :: zero = 0.0D0, one = 1.0D0
-  REAL(8), PARAMETER :: cutlo = 8.232D-11, cuthi = 1.304D19
+  REAL(DP) :: Dx(*), hitest, summ, xmax
+  REAL(DP), PARAMETER :: zero = 0.0D0, one = 1.0D0
+  REAL(DP), PARAMETER :: cutlo = 8.232D-11, cuthi = 1.304D19
   !* FIRST EXECUTABLE STATEMENT  DNRM2
   IF ( N>0 ) THEN
     !

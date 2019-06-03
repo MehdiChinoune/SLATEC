@@ -84,9 +84,9 @@ SUBROUTINE DBNFAC(W,Nroww,Nrow,Nbandl,Nbandu,Iflag)
 
   !
   INTEGER :: Iflag, Nbandl, Nbandu, Nrow, Nroww
-  REAL(8) :: W(Nroww,Nrow)
+  REAL(DP) :: W(Nroww,Nrow)
   INTEGER :: i, ipk, j, jmax, k, kmax, middle, midmk, nrowm1
-  REAL(8) :: factor, pivot
+  REAL(DP) :: factor, pivot
   !
   !* FIRST EXECUTABLE STATEMENT  DBNFAC
   Iflag = 1

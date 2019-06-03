@@ -76,8 +76,8 @@ SUBROUTINE IMTQL1(N,D,E,Ierr)
 
   !
   INTEGER i, j, l, m, N, ii, mml, Ierr
-  REAL D(*), E(*)
-  REAL b, c, f, g, p, r, s, s1, s2
+  REAL(SP) D(*), E(*)
+  REAL(SP) b, c, f, g, p, r, s, s1, s2
   !
   !* FIRST EXECUTABLE STATEMENT  IMTQL1
   Ierr = 0

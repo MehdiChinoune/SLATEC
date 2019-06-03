@@ -60,16 +60,17 @@ SUBROUTINE SDZRO(Ae,F,H,N,Nq,Iroot,Re,T,Yh,Uround,B,C,Fb,Fc,Y)
   !   900329  Initial submission to SLATEC.
 
   INTERFACE
-    REAL FUNCTION F(N,T,Y,Iroot)
+    REAL(SP) FUNCTION F(N,T,Y,Iroot)
+      IMPORT SP
       INTEGER :: N, Iroot
-      REAL :: T, Y(N)
+      REAL(SP) :: T, Y(N)
     END FUNCTION F
   END INTERFACE
   INTEGER :: Iroot, N, Nq
-  REAL :: Ae, B, C, Fb, Fc, H, Re, T, Uround
-  REAL :: Y(N), Yh(N,Nq+1)
+  REAL(SP) :: Ae, B, C, Fb, Fc, H, Re, T, Uround
+  REAL(SP) :: Y(N), Yh(N,Nq+1)
   INTEGER :: ic, kount
-  REAL :: a, acbs, acmb, cmb, er, fa, p, q, rw, tol
+  REAL(SP) :: a, acbs, acmb, cmb, er, fa, p, q, rw, tol
   !* FIRST EXECUTABLE STATEMENT  SDZRO
   er = 4.E0*Uround
   rw = MAX(Re,er)

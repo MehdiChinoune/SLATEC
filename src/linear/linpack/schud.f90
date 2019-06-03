@@ -117,12 +117,12 @@ SUBROUTINE SCHUD(R,Ldr,P,X,Z,Ldz,Nz,Y,Rho,C,S)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER Ldr, P, Ldz, Nz
-  REAL Rho(*), C(*)
-  REAL R(Ldr,*), X(*), Z(Ldz,*), Y(*), S(*)
+  REAL(SP) Rho(*), C(*)
+  REAL(SP) R(Ldr,*), X(*), Z(Ldz,*), Y(*), S(*)
   !
   INTEGER i, j, jm1
-  REAL azeta, scalee
-  REAL t, xj, zeta
+  REAL(SP) azeta, scalee
+  REAL(SP) t, xj, zeta
   !
   !     UPDATE R.
   !

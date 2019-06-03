@@ -51,7 +51,7 @@ SUBROUTINE SINQI(N,Wsave)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER :: N
-  REAL :: Wsave(3*N+15)
+  REAL(SP) :: Wsave(3*N+15)
   !* FIRST EXECUTABLE STATEMENT  SINQI
   CALL COSQI(N,Wsave)
 END SUBROUTINE SINQI

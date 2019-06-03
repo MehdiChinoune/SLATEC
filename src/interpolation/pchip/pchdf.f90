@@ -1,5 +1,5 @@
 !** PCHDF
-REAL FUNCTION PCHDF(K,X,S,Ierr)
+REAL(SP) FUNCTION PCHDF(K,X,S,Ierr)
   !>
   !  Computes divided differences for PCHCE and PCHSP
   !***
@@ -66,13 +66,13 @@ REAL FUNCTION PCHDF(K,X,S,Ierr)
   !  DECLARE ARGUMENTS.
   !
   INTEGER K, Ierr
-  REAL X(K), S(K)
+  REAL(SP) X(K), S(K)
   !
   !  DECLARE LOCAL VARIABLES.
   !
   INTEGER i, j
-  REAL value
-  REAL, PARAMETER :: zero = 0.
+  REAL(SP) value
+  REAL(SP), PARAMETER :: zero = 0.
   !
   !  CHECK FOR LEGAL VALUE OF K.
   !

@@ -128,7 +128,7 @@ SUBROUTINE SCPPLT(N,Nelt,Ia,Ja,A,Isym,Iunit)
   !     .. Scalar Arguments ..
   INTEGER Isym, Iunit, N, Nelt
   !     .. Array Arguments ..
-  REAL A(Nelt)
+  REAL(SP) A(Nelt)
   INTEGER Ia(Nelt), Ja(Nelt)
   !     .. Parameters ..
   INTEGER, PARAMETER :: MAXORD = 225

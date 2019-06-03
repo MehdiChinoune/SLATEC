@@ -158,15 +158,16 @@ SUBROUTINE DQAWCE(F,A,B,C,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,&
   USE service, ONLY : D1MACH
   !
   INTERFACE
-    REAL(8) FUNCTION F(X)
-      REAL(8) :: X
+    REAL(DP) FUNCTION F(X)
+      IMPORT DP
+      REAL(DP) :: X
     END FUNCTION F
   END INTERFACE
   INTEGER :: Ier, Last, Limit, Neval, Iord(Limit)
-  REAL(8) :: A, Abserr, B, C, Epsabs, Epsrel, Result
-  REAL(8) :: Alist(Limit), Blist(Limit), Elist(Limit), Rlist(Limit)
+  REAL(DP) :: A, Abserr, B, C, Epsabs, Epsrel, Result
+  REAL(DP) :: Alist(Limit), Blist(Limit), Elist(Limit), Rlist(Limit)
   INTEGER :: iroff1, iroff2, k, krule, maxerr, nev, nrmax
-  REAL(8) :: aa, area, area1, area12, area2, a1, a2, bb, b1, b2, epmach, errbnd, &
+  REAL(DP) :: aa, area, area1, area12, area2, a1, a2, bb, b1, b2, epmach, errbnd, &
     errmax, error1, erro12, error2, errsum, uflow
   !
   !            LIST OF MAJOR VARIABLES

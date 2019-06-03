@@ -23,7 +23,7 @@ SUBROUTINE ZDIV(Ar,Ai,Br,Bi,Cr,Ci)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
 
-  REAL(8) :: Ar, Ai, Br, Bi, Cr, Ci, bm, ca, cb, cc, cd
+  REAL(DP) :: Ar, Ai, Br, Bi, Cr, Ci, bm, ca, cb, cc, cd
   !* FIRST EXECUTABLE STATEMENT  ZDIV
   bm = 1.0D0/ZABS(Br,Bi)
   cc = Br*bm

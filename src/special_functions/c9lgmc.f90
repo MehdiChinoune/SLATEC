@@ -1,5 +1,5 @@
 !** C9LGMC
-COMPLEX FUNCTION C9LGMC(Zin)
+COMPLEX(SP) FUNCTION C9LGMC(Zin)
   !>
   !  Compute the log gamma correction factor so that
   !            LOG(CGAMMA(Z)) = 0.5*LOG(2.*PI) + (Z-0.5)*LOG(Z) - Z
@@ -38,14 +38,14 @@ COMPLEX FUNCTION C9LGMC(Zin)
   !           (WRB)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
   USE service, ONLY : XERMSG, R1MACH
-  COMPLEX :: Zin
+  COMPLEX(SP) :: Zin
   INTEGER :: i, ndx
-  REAL :: cabsz, x, y
-  COMPLEX :: z, z2inv
+  REAL(SP) :: cabsz, x, y
+  COMPLEX(SP) :: z, z2inv
   INTEGER, PARAMETER :: nterm = INT( -0.30*LOG(R1MACH(3)) )
-  REAL, PARAMETER :: bound = 0.1170*nterm*(0.1*R1MACH(3))**(-1./(2*nterm-1)), &
+  REAL(SP), PARAMETER :: bound = 0.1170*nterm*(0.1*R1MACH(3))**(-1./(2*nterm-1)), &
     xbig = 1.0/SQRT(R1MACH(3)), xmax = EXP(MIN(LOG(R1MACH(2)/12.0),-LOG(12.*R1MACH(1))))
-  REAL, PARAMETER :: bern(11) = [ .083333333333333333E0,-.0027777777777777778E0, &
+  REAL(SP), PARAMETER :: bern(11) = [ .083333333333333333E0,-.0027777777777777778E0, &
     .00079365079365079365E0, -.00059523809523809524E0, .00084175084175084175E0, &
     -.0019175269175269175E0,  .0064102564102564103E0, -.029550653594771242E0, &
     .17964437236883057E0, -1.3924322169059011E0,   13.402864044168392E0 ]

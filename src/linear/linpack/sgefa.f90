@@ -68,9 +68,9 @@ SUBROUTINE SGEFA(A,Lda,N,Ipvt,Info)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER Lda, N, Ipvt(*), Info
-  REAL A(Lda,*)
+  REAL(SP) A(Lda,*)
   !
-  REAL t
+  REAL(SP) t
   INTEGER j, k, kp1, l, nm1
   !
   !     GAUSSIAN ELIMINATION WITH PARTIAL PIVOTING

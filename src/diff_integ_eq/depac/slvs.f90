@@ -31,9 +31,9 @@ SUBROUTINE SLVS(Wm,Iwm,X)
   USE linear, ONLY : SGBSL, SGESL
   !
   INTEGER :: Iwm(:)
-  REAL :: Wm(:), X(n_com)
+  REAL(SP) :: Wm(:), X(n_com)
   INTEGER :: i, meband, ml, mu
-  REAL :: di, hl0, phl0, r
+  REAL(SP) :: di, hl0, phl0, r
   !-----------------------------------------------------------------------
   ! THIS ROUTINE MANAGES THE SOLUTION OF THE LINEAR SYSTEM ARISING FROM
   ! A CHORD ITERATION.  IT IS CALLED BY STOD  IF MITER .NE. 0.

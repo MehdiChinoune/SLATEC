@@ -1,5 +1,5 @@
 !** QWGTF
-REAL FUNCTION QWGTF(X,Omega,P2,P3,P4,Integr)
+REAL(SP) FUNCTION QWGTF(X,Omega,P2,P3,P4,Integr)
   !>
   !  This function subprogram is used together with the
   !            routine QAWF and defines the WEIGHT function.
@@ -28,7 +28,7 @@ REAL FUNCTION QWGTF(X,Omega,P2,P3,P4,Integr)
   !   900328  Added TYPE section.  (WRB)
 
   !
-  REAL Omega, omx, P2, P3, P4, X
+  REAL(SP) Omega, omx, P2, P3, P4, X
   INTEGER Integr
   !* FIRST EXECUTABLE STATEMENT  QWGTF
   omx = Omega*X

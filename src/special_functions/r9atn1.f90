@@ -1,5 +1,5 @@
 !** R9ATN1
-REAL FUNCTION R9ATN1(X)
+REAL(SP) FUNCTION R9ATN1(X)
   !>
   !  Evaluate ATAN(X) from first order relative accuracy so that
   !            ATAN(X) = X + X**3*R9ATN1(X).
@@ -39,11 +39,11 @@ REAL FUNCTION R9ATN1(X)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
   USE service, ONLY : XERMSG, R1MACH
-  REAL X, y
+  REAL(SP) X, y
   INTEGER, SAVE :: ntatn1
-  REAL, PARAMETER :: eps = R1MACH(3), xsml = SQRT(0.1*eps), xbig = 1.571/SQRT(eps), &
+  REAL(SP), PARAMETER :: eps = R1MACH(3), xsml = SQRT(0.1*eps), xbig = 1.571/SQRT(eps), &
     xmax = 1.571/eps
-  REAL, PARAMETER :: atn1cs(21) = [ -.03283997535355202E0, .05833432343172412E0, &
+  REAL(SP), PARAMETER :: atn1cs(21) = [ -.03283997535355202E0, .05833432343172412E0, &
     -.00740036969671964E0, .00100978419933728E0,-.00014397871635652E0, &
     .00002114512648992E0, -.00000317232107425E0, .00000048366203654E0, &
     -.00000007467746546E0, .00000001164800896E0,-.00000000183208837E0, &

@@ -35,11 +35,11 @@ SUBROUTINE CPROD(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Yy,M,A,B,C,D,W,Y)
   !   900402  Added TYPE section.  (WRB)
 
   INTEGER :: M, Na, Nd, Nm1, Nm2
-  REAL :: A(M), Aa(Na), B(M), Bm1(Nm1), Bm2(Nm2), C(M), X(M), Yy(M)
-  COMPLEX :: Y(M), D(M), W(M), Bd(Nd)
+  REAL(SP) :: A(M), Aa(Na), B(M), Bm1(Nm1), Bm2(Nm2), C(M), X(M), Yy(M)
+  COMPLEX(SP) :: Y(M), D(M), W(M), Bd(Nd)
   INTEGER :: ia, id, iflg, j, k, m1, m2, mm
-  REAL :: rt
-  COMPLEX :: crt, den, y1, y2
+  REAL(SP) :: rt
+  COMPLEX(SP) :: crt, den, y1, y2
   !* FIRST EXECUTABLE STATEMENT  CPROD
   DO j = 1, M
     Y(j) = CMPLX(X(j),0.)

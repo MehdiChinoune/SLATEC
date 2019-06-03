@@ -135,8 +135,8 @@ SUBROUTINE DXLEGF(Dnu1,Nudiff,Mu1,Mu2,Theta,Id,Pqa,Ipqa,Ierror)
   USE service, ONLY : XERMSG
   INTEGER :: Id, Ierror, Mu1, Mu2, Nudiff, Ipqa(Nudiff+Mu2-Mu1+1)
   INTEGER :: i, l
-  REAL(8) :: Pqa(Nudiff+Mu2-Mu1+1), Dnu1, Theta
-  REAL(8) :: dnu2, sx, x, pi2
+  REAL(DP) :: Pqa(Nudiff+Mu2-Mu1+1), Dnu1, Theta
+  REAL(DP) :: dnu2, sx, x, pi2
   !
   !* FIRST EXECUTABLE STATEMENT  DXLEGF
   Ierror = 0

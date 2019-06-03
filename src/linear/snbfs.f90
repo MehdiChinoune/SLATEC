@@ -180,8 +180,8 @@ SUBROUTINE SNBFS(Abe,Lda,N,Ml,Mu,V,Itask,Ind,Work,Iwork)
   USE service, ONLY : R1MACH, XERMSG
   !
   INTEGER Lda, N, Itask, Ind, Iwork(N), Ml, Mu
-  REAL Abe(Lda,2*Ml+Mu+1), V(N), Work(N)
-  REAL rcond
+  REAL(SP) Abe(Lda,2*Ml+Mu+1), V(N), Work(N)
+  REAL(SP) rcond
   CHARACTER(8) :: xern1, xern2
   !* FIRST EXECUTABLE STATEMENT  SNBFS
   IF ( Lda<N ) THEN

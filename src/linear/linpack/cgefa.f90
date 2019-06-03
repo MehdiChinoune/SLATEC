@@ -68,9 +68,9 @@ SUBROUTINE CGEFA(A,Lda,N,Ipvt,Info)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER Lda, N, Ipvt(*), Info
-  COMPLEX A(Lda,*)
+  COMPLEX(SP) A(Lda,*)
   !
-  COMPLEX t
+  COMPLEX(SP) t
   INTEGER j, k, kp1, l, nm1
   !
   !     GAUSSIAN ELIMINATION WITH PARTIAL PIVOTING

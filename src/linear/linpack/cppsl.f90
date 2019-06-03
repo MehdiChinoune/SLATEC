@@ -68,9 +68,9 @@ SUBROUTINE CPPSL(Ap,N,B)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER N
-  COMPLEX Ap(*), B(*)
+  COMPLEX(SP) Ap(*), B(*)
   !
-  COMPLEX t
+  COMPLEX(SP) t
   INTEGER k, kb, kk
   !* FIRST EXECUTABLE STATEMENT  CPPSL
   kk = 0

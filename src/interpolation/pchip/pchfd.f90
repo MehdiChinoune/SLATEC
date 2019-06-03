@@ -151,7 +151,7 @@ SUBROUTINE PCHFD(N,X,F,D,Incfd,Skip,Ne,Xe,Fe,De,Ierr)
   !  DECLARE ARGUMENTS.
   !
   INTEGER N, Incfd, Ne, Ierr
-  REAL X(N), F(Incfd,N), D(Incfd,N), Xe(Ne), Fe(Ne), De(Ne)
+  REAL(SP) X(N), F(Incfd,N), D(Incfd,N), Xe(Ne), Fe(Ne), De(Ne)
   LOGICAL Skip
   !
   !  DECLARE LOCAL VARIABLES.

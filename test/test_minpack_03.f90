@@ -1,8 +1,9 @@
 MODULE TEST52_MOD
+  USE service, ONLY : SP, DP
   IMPLICIT NONE
-  REAL EPS, RP, SVEps, TOL
+  REAL(SP) EPS, RP, SVEps, TOL
   INTEGER IERp, IERr, NORd, NORdp
-  REAL R(11)
+  REAL(SP) R(11)
 
 CONTAINS
   !** CMPARE
@@ -33,7 +34,7 @@ CONTAINS
     !     .. Array Arguments ..
     INTEGER Itest(9)
     !     .. Local Scalars ..
-    REAL rpp, ss
+    REAL(SP) rpp, ss
     INTEGER ierpp, nrdp
     !     .. Local Arrays ..
     INTEGER itemp(4)
@@ -93,10 +94,10 @@ CONTAINS
     !     .. Scalar Arguments ..
     INTEGER Ipass, Kprint, Lun
     !     .. Local Scalars ..
-    REAL yfit
+    REAL(SP) yfit
     INTEGER i, icnt, m, maxord
     !     .. Local Arrays ..
-    REAL a(97), tc(5), w(11), x(11), y(11), yp(5)
+    REAL(SP) a(97), tc(5), w(11), x(11), y(11), yp(5)
     INTEGER itest(9)
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, SQRT
@@ -470,11 +471,11 @@ CONTAINS
     !     .. Scalar Arguments ..
     INTEGER Ipass, Kprint, Lun
     !     .. Local Scalars ..
-    REAL fnorm, fnorms, one, sigma, temp1, temp2, temp3, tol, tol2, zero
+    REAL(SP) fnorm, fnorms, one, sigma, temp1, temp2, temp3, tol, tol2, zero
     INTEGER i, iflag, info, infos, iopt, kontrl, ldfjac, lwa, m, n, nerr, nprint
     LOGICAL fatal
     !     .. Local Arrays ..
-    REAL fjac(10,2), fjrow(2,1), fjtj(3), fvec(10), wa(40), x(2)
+    REAL(SP) fjac(10,2), fjrow(2,1), fjtj(3), fvec(10), wa(40), x(2)
     INTEGER iw(2)
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, SQRT
@@ -769,11 +770,11 @@ CONTAINS
     !     .. Scalar Arguments ..
     INTEGER Ipass, Kprint, Lun
     !     .. Local Scalars ..
-    REAL diff, one, t, tol, xval, zero
+    REAL(SP) diff, one, t, tol, xval, zero
     INTEGER kontrl, i, idigit, ii, j, l, mode, n, nconst, ndeg, nerr, nval
     LOGICAL fatal
     !     .. Local Arrays ..
-    REAL coeff(9), v(51,5), w(529), work(12), xconst(11), yconst(11)
+    REAL(SP) coeff(9), v(51,5), w(529), work(12), xconst(11), yconst(11)
     INTEGER iw(30), nderiv(11)
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, REAL, SQRT
@@ -1077,10 +1078,10 @@ CONTAINS
     !     .. Scalar Arguments ..
     INTEGER :: Iflag, Ldfjac, M, N
     !     .. Array Arguments ..
-    REAL :: Fvec(M), X(N), Fjac(:,:)
+    REAL(SP) :: Fvec(M), X(N), Fjac(:,:)
     !     .. Local Scalars ..
     INTEGER :: i
-    REAL :: temp
+    REAL(SP) :: temp
     !     .. Intrinsic Functions ..
     INTRINSIC EXP
     !     .. Data statements ..
@@ -1124,9 +1125,9 @@ CONTAINS
     !     .. Scalar Arguments ..
     INTEGER :: Iflag, Ldfjac, M, N
     !     .. Array Arguments ..
-    REAL :: Fjac(:,:), Fvec(M), X(N)
+    REAL(SP) :: Fjac(:,:), Fvec(M), X(N)
     !     .. Local Scalars ..
-    REAL :: temp
+    REAL(SP) :: temp
     INTEGER :: i
     !     .. Intrinsic Functions ..
     INTRINSIC EXP
@@ -1189,9 +1190,9 @@ CONTAINS
     !     .. Scalar Arguments ..
     INTEGER :: Iflag, M, N, Nrow
     !     .. Array Arguments ..
-    REAL :: Fjrow(:,:), Fvec(M), X(N)
+    REAL(SP) :: Fjrow(:,:), Fvec(M), X(N)
     !     .. Local Scalars ..
-    REAL :: temp
+    REAL(SP) :: temp
     INTEGER :: i
     !     .. Intrinsic Functions ..
     INTRINSIC EXP

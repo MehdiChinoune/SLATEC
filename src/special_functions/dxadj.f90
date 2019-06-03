@@ -46,7 +46,7 @@ SUBROUTINE DXADJ(X,Ix,Ierror)
   USE DXBLK ,ONLY: radixl_com, rad2l_com, l2_com, kmax_com
   USE service, ONLY : XERMSG
   INTEGER :: Ierror, Ix
-  REAL(8) :: X
+  REAL(DP) :: X
   !
   !   THE CONDITION IMPOSED ON L AND KMAX BY THIS SUBROUTINE
   ! IS

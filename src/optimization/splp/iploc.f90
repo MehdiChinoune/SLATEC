@@ -38,7 +38,7 @@ INTEGER FUNCTION IPLOC(Locc,Sx,Ix)
   USE service, ONLY : XERMSG
   INTEGER :: Locc
   INTEGER :: Ix(:)
-  REAL :: Sx(:)
+  REAL(SP) :: Sx(:)
   INTEGER :: ipage, itemp, k, key, lmx, lmxm1, lpg, np
   !* FIRST EXECUTABLE STATEMENT  IPLOC
   IF ( Locc<=0 ) THEN

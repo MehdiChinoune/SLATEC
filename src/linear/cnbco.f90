@@ -135,11 +135,11 @@ SUBROUTINE CNBCO(Abe,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER Lda, N, Ml, Mu, Ipvt(N)
-  COMPLEX Abe(Lda,2*Ml+Mu+1), Z(N)
-  REAL Rcond
+  COMPLEX(SP) Abe(Lda,2*Ml+Mu+1), Z(N)
+  REAL(SP) Rcond
   !
-  COMPLEX ek, t, wk, wkm
-  REAL anorm, s, sm, ynorm
+  COMPLEX(SP) ek, t, wk, wkm
+  REAL(SP) anorm, s, sm, ynorm
   INTEGER i, info, j, ju, k, kb, kp1, l, ldb, lm, lz, m, ml1, mm, nl, nu
   !
   !     COMPUTE 1-NORM OF A

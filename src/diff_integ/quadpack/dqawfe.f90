@@ -217,17 +217,18 @@ SUBROUTINE DQAWFE(F,A,Omega,Integr,Epsabs,Limlst,Limit,Maxp1,Result,&
   USE service, ONLY : D1MACH
   !
   INTERFACE
-    REAL(8) FUNCTION F(X)
-      REAL(8) :: X
+    REAL(DP) FUNCTION F(X)
+      IMPORT DP
+      REAL(DP) :: X
     END FUNCTION F
   END INTERFACE
   INTEGER :: Ier, Integr, Lst, Limit, Limlst, Maxp1, Neval
   INTEGER :: Iord(Limit), Ierlst(Limlst), Nnlog(Limit)
-  REAL(8) :: A, Abserr, Epsabs, Omega, Result
-  REAL(8) :: Alist(Limit), Blist(Limit), Chebmo(Maxp1,25), Elist(Limit), &
+  REAL(DP) :: A, Abserr, Epsabs, Omega, Result
+  REAL(DP) :: Alist(Limit), Blist(Limit), Chebmo(Maxp1,25), Elist(Limit), &
     Erlst(Limlst), Rlist(Limit), Rslst(Limlst)
   INTEGER :: ktmin, l, last, ll, momcom, nev, nres, numrl2
-  REAL(8) :: abseps, correc, cycle, c1, c2, dl, drl, ep, eps, epsa, errsum, &
+  REAL(DP) :: abseps, correc, cycle, c1, c2, dl, drl, ep, eps, epsa, errsum, &
     fact, p1, psum(52), reseps, res3la(3), uflow
   !
   !            THE DIMENSION OF  PSUM  IS DETERMINED BY THE VALUE OF
@@ -253,8 +254,8 @@ SUBROUTINE DQAWFE(F,A,Omega,Integr,Epsabs,Limlst,Limit,Maxp1,Result,&
   !           CHEBMO    - ARRAY CONTAINING THE MODIFIED CHEBYSHEV
   !                       MOMENTS (SEE ALSO ROUTINE DQC25F)
   !
-  REAL(8), PARAMETER :: p = 0.9D+00
-  REAL(8), PARAMETER :: pi = 3.14159265358979323846264338327950D0
+  REAL(DP), PARAMETER :: p = 0.9D+00
+  REAL(DP), PARAMETER :: pi = 3.14159265358979323846264338327950D0
   !
   !           TEST ON VALIDITY OF PARAMETERS
   !           ------------------------------

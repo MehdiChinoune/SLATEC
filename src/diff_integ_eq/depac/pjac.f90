@@ -33,21 +33,23 @@ SUBROUTINE PJAC(Neq,Y,Yh,Nyh,Ewt,Ftem,Savf,Wm,Iwm,F,JAC)
   USE linear, ONLY : SGBFA, SGEFA
   INTERFACE
     SUBROUTINE F(X,U,Uprime)
-      REAL :: X
-      REAL :: U(:), Uprime(:)
+      IMPORT SP
+      REAL(SP) :: X
+      REAL(SP) :: U(:), Uprime(:)
     END SUBROUTINE F
     SUBROUTINE JAC(X,U,Pd,Nrowpd)
+      IMPORT SP
       INTEGER :: Nrowpd
-      REAL :: X
-      REAL :: U(:), Pd(:,:)
+      REAL(SP) :: X
+      REAL(SP) :: U(:), Pd(:,:)
     END SUBROUTINE JAC
   END INTERFACE
   INTEGER :: Neq, Nyh
   INTEGER :: Iwm(:)
-  REAL :: Y(Neq), Yh(Nyh,n_com), Ewt(n_com), Ftem(n_com), Savf(n_com), Wm(:)
+  REAL(SP) :: Y(Neq), Yh(Nyh,n_com), Ewt(n_com), Ftem(n_com), Savf(n_com), Wm(:)
   INTEGER :: i, i1, i2, ii, j, j1, jj, mba, mband, meb1, meband, ml, ml3, mu
-  REAL :: con, di, fac, hl0, r, r0, srur, yi, yj, yjj
-  REAL, ALLOCATABLE :: pd(:,:)
+  REAL(SP) :: con, di, fac, hl0, r, r0, srur, yi, yj, yjj
+  REAL(SP), ALLOCATABLE :: pd(:,:)
   !-----------------------------------------------------------------------
   ! PJAC IS CALLED BY STOD  TO COMPUTE AND PROCESS THE MATRIX
   ! P = I - H*EL(1)*J, WHERE J IS AN APPROXIMATION TO THE JACOBIAN.

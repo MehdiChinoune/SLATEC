@@ -48,9 +48,9 @@ SUBROUTINE XRED(X,Ix,Ierror)
   !   920127  Revised PURPOSE section of prologue.  (DWL)
   USE XBLK, ONLY: radixx_com, rad2l_com, l2_com
   INTEGER :: Ierror, Ix
-  REAL :: X
+  REAL(SP) :: X
   INTEGER :: i, ixa, ixa1, ixa2
-  REAL :: xa
+  REAL(SP) :: xa
   !
   !* FIRST EXECUTABLE STATEMENT  XRED
   Ierror = 0

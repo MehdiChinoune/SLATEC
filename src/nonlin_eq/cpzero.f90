@@ -58,11 +58,11 @@ SUBROUTINE CPZERO(In,A,R,T,Iflg,S)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
   INTEGER :: Iflg, In
-  REAL :: S(In)
-  COMPLEX :: R(In), T(4*In+4), A(In+1)
+  REAL(SP) :: S(In)
+  COMPLEX(SP) :: R(In), T(4*In+4), A(In+1)
   INTEGER :: i, imax, j, n, n1, nit, nmax, nr
-  REAL :: u, v, x
-  COMPLEX :: pn(1), temp(1)
+  REAL(SP) :: u, v, x
+  COMPLEX(SP) :: pn(1), temp(1)
   !* FIRST EXECUTABLE STATEMENT  CPZERO
   IF ( In<=0.OR.ABS(A(1))==0.0 ) THEN
     Iflg = 1

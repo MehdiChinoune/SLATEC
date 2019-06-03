@@ -1,4 +1,5 @@
 MODULE data_handling
+  USE service, ONLY : SP, DP
   IMPLICIT NONE
 
 CONTAINS

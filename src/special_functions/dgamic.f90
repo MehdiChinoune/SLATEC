@@ -1,5 +1,5 @@
 !** DGAMIC
-REAL(8) FUNCTION DGAMIC(A,X)
+REAL(DP) FUNCTION DGAMIC(A,X)
   !>
   !  Calculate the complementary incomplete Gamma function.
   !***
@@ -52,10 +52,10 @@ REAL(8) FUNCTION DGAMIC(A,X)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920528  DESCRIPTION and REFERENCES sections revised.  (WRB)
   USE service, ONLY : XERMSG, XERCLR, D1MACH
-  REAL(8) :: A, X
+  REAL(DP) :: A, X
   INTEGER :: izero
-  REAL(8) :: aeps, ainta, algap1, alngs, alx, e, gstar, h, sga, sgng, sgngam, sgngs, t
-  REAL(8), PARAMETER :: eps = 0.5D0*D1MACH(3), sqeps = SQRT(D1MACH(4)), &
+  REAL(DP) :: aeps, ainta, algap1, alngs, alx, e, gstar, h, sga, sgng, sgngam, sgngs, t
+  REAL(DP), PARAMETER :: eps = 0.5D0*D1MACH(3), sqeps = SQRT(D1MACH(4)), &
     alneps = -LOG(D1MACH(3)), bot = LOG(D1MACH(1))
   !* FIRST EXECUTABLE STATEMENT  DGAMIC
   !

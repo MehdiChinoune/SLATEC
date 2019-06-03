@@ -54,19 +54,20 @@ SUBROUTINE DERKFS(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
   USE service, ONLY : XERMSG, R1MACH
   INTERFACE
     SUBROUTINE F(X,U,Uprime)
-      REAL :: X
-      REAL :: U(:), Uprime(:)
+      IMPORT SP
+      REAL(SP) :: X
+      REAL(SP) :: U(:), Uprime(:)
     END SUBROUTINE F
   END INTERFACE
   INTEGER :: Idid, Init, Iquit, Kop, Ksteps, Neq, Nstifs, Ntstep
   INTEGER :: Info(15)
-  REAL :: Dtsign, H, Rer, T, Told, Tolfac, Tout, U26
-  REAL :: Atol(:), F1(Neq), F2(Neq), F3(Neq), F4(Neq), F5(Neq), Rtol(:), &
+  REAL(SP) :: Dtsign, H, Rer, T, Told, Tolfac, Tout, U26
+  REAL(SP) :: Atol(:), F1(Neq), F2(Neq), F3(Neq), F4(Neq), F5(Neq), Rtol(:), &
     Y(Neq), Yp(Neq), Ys(Neq)
   LOGICAL :: Stiff, Nonstf
-  REAL :: a, big, dt, dy, ee, eeoet, es, estiff, esttol, et, hmin
+  REAL(SP) :: a, big, dt, dy, ee, eeoet, es, estiff, esttol, et, hmin
   INTEGER :: k, ktol, natolp, nrtolp
-  REAL :: s, tol, u, ute, yavg
+  REAL(SP) :: s, tol, u, ute, yavg
   LOGICAL :: hfaild, output
   CHARACTER(8) :: xern1
   CHARACTER(16) :: xern3, xern4
@@ -80,7 +81,7 @@ SUBROUTINE DERKFS(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
   !  TOLERANCE THRESHOLD REMIN IS ASSIGNED FOR THIS METHOD. THIS VALUE
   !  SHOULD NOT BE CHANGED ACROSS DIFFERENT MACHINES.
   !
-  REAL, PARAMETER :: remin = 1.E-12
+  REAL(SP), PARAMETER :: remin = 1.E-12
   !
   !.......................................................................
   !

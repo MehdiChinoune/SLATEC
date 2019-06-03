@@ -32,9 +32,9 @@ SUBROUTINE DFSPVD(T,K,X,Ileft,Vnikx,Nderiv)
   !   900328  Added TYPE section.  (WRB)
 
   INTEGER :: Ileft, K, Nderiv
-  REAL(8) :: T(:), Vnikx(K,K), X
+  REAL(DP) :: T(:), Vnikx(K,K), X
   INTEGER :: i, ideriv, idervm, ipkmd, j, jlow, jm1, kmd, l, m
-  REAL(8) :: a(20,20), diff, fkmd, v
+  REAL(DP) :: a(20,20), diff, fkmd, v
   !* FIRST EXECUTABLE STATEMENT  DFSPVD
   CALL DFSPVN(T,K+1-Nderiv,1,X,Ileft,Vnikx(Nderiv,Nderiv))
   IF ( Nderiv>1 ) THEN

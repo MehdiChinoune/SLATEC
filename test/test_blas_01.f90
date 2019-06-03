@@ -1,4 +1,5 @@
 MODULE TEST17_MOD
+  USE service, ONLY : SP, DP
   IMPLICIT NONE
   INTEGER :: NPRint, ICAse, N, INCx, INCy, MODe
   LOGICAL :: PASs
@@ -35,7 +36,7 @@ CONTAINS
 
     INTEGER Lun, Ipass, Kprint
     REAL, PARAMETER :: sfac = .625E-1, sdfac = .50
-    REAL(8), PARAMETER :: dfac = .625D-1, dqfac = 0.625D-1
+    REAL(DP), PARAMETER :: dfac = .625D-1, dqfac = 0.625D-1
     INTEGER, PARAMETER :: jtest(38) = [ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, &
       1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ]
     !* FIRST EXECUTABLE STATEMENT  BLACHK
@@ -142,27 +143,27 @@ CONTAINS
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     USE slatec, ONLY : DROTG, DROTMG, SROTG, SROTMG
     INTEGER i, jump, k, Kprint
-    REAL sa(1), sb(1), sc(1), Sfac, ss(1)
-    REAL strue(9), stemp(9), stmp(1)
-    REAL(8) :: dc(1), ds(1), da(1), Dfac, db(1), dtemp(9)
+    REAL(SP) sa(1), sb(1), sc(1), Sfac, ss(1)
+    REAL(SP) strue(9), stemp(9), stmp(1)
+    REAL(DP) :: dc(1), ds(1), da(1), Dfac, db(1), dtemp(9)
     REAL, PARAMETER :: zero = 0.
-    REAL(8), PARAMETER :: dzero = 0.D0
-    REAL(8), PARAMETER :: da1(8) = [ .3D0, .4D0, -.3D0, -.4D0, -.3D0, 0.D0, 0.D0, 1.D0 ]
-    REAL(8), PARAMETER :: db1(8) = [ .4D0, .3D0, .4D0, .3D0, -.4D0, 0.D0, 1.D0, 0.D0 ]
-    REAL(8), PARAMETER :: dc1(8) = [ .6D0, .8D0, -.6D0, .8D0, .6D0, 1.D0, 0.D0, 1.D0 ]
-    REAL(8), PARAMETER :: ds1(8) = [ .8D0, .6D0, .8D0, -.6D0, .8D0, 0.D0, 1.D0, 0.D0 ]
-    REAL(8), PARAMETER :: datrue(8) = [ .5D0, .5D0, .5D0, -.5D0, -.5D0, 0.D0, 1.D0, 1.D0 ]
-    REAL(8), PARAMETER :: dbtrue(8) = [ 1.D0/.6D0, .6D0, -1.D0/.6D0, -.6D0, &
+    REAL(DP), PARAMETER :: dzero = 0.D0
+    REAL(DP), PARAMETER :: da1(8) = [ .3D0, .4D0, -.3D0, -.4D0, -.3D0, 0.D0, 0.D0, 1.D0 ]
+    REAL(DP), PARAMETER :: db1(8) = [ .4D0, .3D0, .4D0, .3D0, -.4D0, 0.D0, 1.D0, 0.D0 ]
+    REAL(DP), PARAMETER :: dc1(8) = [ .6D0, .8D0, -.6D0, .8D0, .6D0, 1.D0, 0.D0, 1.D0 ]
+    REAL(DP), PARAMETER :: ds1(8) = [ .8D0, .6D0, .8D0, -.6D0, .8D0, 0.D0, 1.D0, 0.D0 ]
+    REAL(DP), PARAMETER :: datrue(8) = [ .5D0, .5D0, .5D0, -.5D0, -.5D0, 0.D0, 1.D0, 1.D0 ]
+    REAL(DP), PARAMETER :: dbtrue(8) = [ 1.D0/.6D0, .6D0, -1.D0/.6D0, -.6D0, &
       1.D0/.6D0, 0.D0, 1.D0, 0.D0 ]
     ! INPUT FOR MODIFIED GIVENS
-    REAL(8), PARAMETER :: dab(4,9) = RESHAPE( [ &
+    REAL(DP), PARAMETER :: dab(4,9) = RESHAPE( [ &
       .1D0, .3D0, 1.2D0, .2D0, .7D0, .2D0, .6D0, 4.2D0, &
       0.D0, 0.D0, 0.D0, 0.D0, 4.D0, -1.D0, 2.D0, 4.D0, &
       6.D-10, 2.D-2, 1.D5, 10.D0, 4.D10, 2.D-2, 1.D-5, 10.D0, &
       2.D-10, 4.D-2, 1.D5, 10.D0, 2.D10, 4.D-2, 1.D-5, 10.D0, &
       4.D0, -2.D0, 8.D0, 4.D0 ], [4,9] )
     ! TRUE RESULTS FOR MODIFIED GIVENS
-    REAL(8) :: dtrue(9,9) = RESHAPE( [ &
+    REAL(DP) :: dtrue(9,9) = RESHAPE( [ &
       0.D0, 0.D0, 1.3D0, .2D0, 0.D0, 0.D0, 0.D0, .5D0, 0.D0, &
       0.D0, 0.D0, 4.5D0, 4.2D0, 1.D0, .5D0, 0.D0, 0.D0, 0.D0, &
       0.D0, 0.D0, 0.D0, 0.D0, -2.D0, 0.D0, 0.D0, 0.D0, 0.D0, &
@@ -173,7 +174,7 @@ CONTAINS
       0.D0, 0.D0, 0.D0, 15.D0, 10.D0, -1.D0, 5.D5, -4096.D0, 1.D0, &
       4096.D-6, 0.D0, 0.D0, 7.D0, 4.D0, 0.D0, 0.D0, -.5D0, -.25D0, 0.D0 ], [9,9] )
     !                   4096 = 2 ** 12
-    REAL(8), PARAMETER :: d12 = 4096.D0
+    REAL(DP), PARAMETER :: d12 = 4096.D0
     !* FIRST EXECUTABLE STATEMENT  CHECK0
     !
     ! COMPUTE TRUE VALUES WHICH CANNOT BE PRESTORED
@@ -222,14 +223,14 @@ CONTAINS
         CASE (5)
           ! 16. SROTMG
           DO i = 1, 4
-            stemp(i) = REAL( dab(i,k), 4 )
+            stemp(i) = REAL( dab(i,k), SP )
             stemp(i+4) = zero
           END DO
           stemp(9) = zero
           CALL SROTMG(stemp(1),stemp(2),stemp(3),stemp(4),stemp(5))
           !
           DO i = 1, 9
-            strue(i) = REAL( dtrue(i,k), 4 )
+            strue(i) = REAL( dtrue(i,k), SP )
           END DO
           CALL STEST(9,stemp,strue,strue,Sfac,Kprint)
         CASE (6)
@@ -244,8 +245,8 @@ CONTAINS
         CASE DEFAULT
           ! 12. SROTG
           IF ( k>8 ) EXIT
-          sa = REAL( da1(k), 4 )
-          sb = REAL( db1(k), 4 )
+          sa = REAL( da1(k), SP )
+          sb = REAL( db1(k), SP )
           CALL SROTG(sa(1),sb(1),sc(1),ss(1))
           stmp = REAL(datrue(k))
           CALL STEST(1,sa,stmp,stmp,Sfac,Kprint)
@@ -297,15 +298,15 @@ CONTAINS
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
     INTEGER i, jump, leng, np1, Kprint, itmp(1)
-    REAL Sfac
-    REAL(8) :: dx(8), Dfac, dtmp(1)
-    REAL strue(8), sx(8), stmp(1), stmp2(1)
-    COMPLEX cx(8)
+    REAL(SP) Sfac
+    REAL(DP) :: dx(8), Dfac, dtmp(1)
+    REAL(SP) strue(8), sx(8), stmp(1), stmp2(1)
+    COMPLEX(SP) cx(8)
     !
     REAL, PARAMETER :: sa = .3
-    REAL(8), PARAMETER :: da = .3D0
-    COMPLEX, PARAMETER :: ca = (.4,-.7)
-    REAL(8), PARAMETER :: dv(8,5,2) = RESHAPE( [ &
+    REAL(DP), PARAMETER :: da = .3D0
+    COMPLEX(SP), PARAMETER :: ca = (.4,-.7)
+    REAL(DP), PARAMETER :: dv(8,5,2) = RESHAPE( [ &
       .1D0, 2.D0, 2.D0, 2.D0, 2.D0, 2.D0, 2.D0, 2.D0, .3D0, &
       3.D0, 3.D0, 3.D0, 3.D0, 3.D0, 3.D0, 3.D0, .3D0, -.4D0, &
       4.D0, 4.D0, 4.D0, 4.D0, 4.D0, 4.D0, .2D0, -.6D0, .3D0, &
@@ -316,7 +317,7 @@ CONTAINS
       3.D0, -.6D0, 5.D0, .3D0, 2.D0, 2.D0, 2.D0, .1D0, 4.D0, &
       -.3D0, 6.D0, -.5D0, 7.D0, -.1D0, 3.D0 ], [8,5,2] )
     !     COMPLEX TEST VECTORS
-    COMPLEX, PARAMETER :: cv(8,5,2) = RESHAPE( [ &
+    COMPLEX(SP), PARAMETER :: cv(8,5,2) = RESHAPE( [ &
       (.1,.1), (1.,2.), (1.,2.), (1.,2.), (1.,2.), (1.,2.), &
       (1.,2.), (1.,2.), (.3,-.4), (3.,4.), (3.,4.), (3.,4.), (3.,4.), &
       (3.,4.), (3.,4.), (3.,4.), (.1,-.3), (.5,-.1), (5.,6.), &
@@ -332,9 +333,9 @@ CONTAINS
     !
     REAL, PARAMETER :: strue2(5) = [ .0, .5, .6, .7, .7 ]
     REAL, PARAMETER :: strue4(5) = [ .0, .7, 1., 1.3, 1.7 ]
-    REAL(8), PARAMETER :: dtrue1(5) = [ .0D0, .3D0, .5D0, .7D0, .6D0 ]
-    REAL(8), PARAMETER :: dtrue3(5) = [ .0D0, .3D0, .7D0, 1.1D0, 1.D0 ]
-    REAL(8), PARAMETER :: dtrue5(8,5,2) = RESHAPE( [ &
+    REAL(DP), PARAMETER :: dtrue1(5) = [ .0D0, .3D0, .5D0, .7D0, .6D0 ]
+    REAL(DP), PARAMETER :: dtrue3(5) = [ .0D0, .3D0, .7D0, 1.1D0, 1.D0 ]
+    REAL(DP), PARAMETER :: dtrue5(8,5,2) = RESHAPE( [ &
       .10D0, 2.D0, 2.D0, 2.D0, 2.D0, 2.D0, 2.D0, 2.D0, &
       .09D0, 3.D0, 3.D0, 3.D0, 3.D0, 3.D0, 3.D0, 3.D0, .09D0, &
       -.12D0, 4.D0, 4.D0, 4.D0, 4.D0, 4.D0, 4.D0, .06D0, -.18D0, &
@@ -345,7 +346,7 @@ CONTAINS
       2.D0, 2.D0, .06D0, 3.D0, -.18D0, 5.D0, .09D0, 2.D0, 2.D0, &
       2.D0, .03D0, 4.D0, -.09D0, 6.D0, -.15D0, 7.D0, -.03D0, 3.D0 ], [8,5,2] )
     !
-    COMPLEX, PARAMETER :: ctrue5(8,5,2) = RESHAPE( [ &
+    COMPLEX(SP), PARAMETER :: ctrue5(8,5,2) = RESHAPE( [ &
       (.1,.1), (1.,2.), (1.,2.), (1.,2.), (1.,2.), (1.,2.), &
       (1.,2.), (1.,2.), (-.16,-.37), (3.,4.), (3.,4.), (3.,4.), &
       (3.,4.), (3.,4.), (3.,4.), (3.,4.), (-.17,-.19), (.13,-.39), &
@@ -360,7 +361,7 @@ CONTAINS
       (-.17,-.19), (7.,2.), (7.,2.), (7.,2.), (.19,-.17), (5.,8.), &
       (.32,.09), (6.,9.), (.23,-.24), (8.,3.), (.18,.01), (9.,4.) ], [8,5,2] )
     !
-    COMPLEX, PARAMETER :: ctrue6(8,5,2) = RESHAPE( [ &
+    COMPLEX(SP), PARAMETER :: ctrue6(8,5,2) = RESHAPE( [ &
       (.1,.1), (1.,2.), (1.,2.), (1.,2.), (1.,2.), (1.,2.), &
       (1.,2.), (1.,2.), (.09,-.12), (3.,4.), (3.,4.), (3.,4.), &
       (3.,4.), (3.,4.), (3.,4.), (3.,4.), (.03,-.09), (.15,-.03), &
@@ -386,7 +387,7 @@ CONTAINS
         leng = 2*MAX(N,1)
         !                                                  SET VECTOR ARGUMENTS.
         DO i = 1, leng
-          sx(i) = REAL( dv(i,np1,INCx), 4 )
+          sx(i) = REAL( dv(i,np1,INCx), SP )
           dx(i) = dv(i,np1,INCx)
           cx(i) = cv(i,np1,INCx)
         END DO
@@ -405,7 +406,7 @@ CONTAINS
           CASE (4)
             ! 29. SASUM
             stmp = SASUM(N,sx,INCx)
-            stmp2 = REAL( dtrue3(np1), 4 )
+            stmp2 = REAL( dtrue3(np1), SP )
             CALL STEST(1,stmp,stmp2,stmp2,Sfac,Kprint)
           CASE (5)
             ! 30. DASUM
@@ -419,7 +420,7 @@ CONTAINS
             ! 32. SSCALE
             CALL SSCAL(N,sa,sx,INCx)
             DO i = 1, leng
-              strue(i) = REAL( dtrue5(i,np1,INCx), 4 )
+              strue(i) = REAL( dtrue5(i,np1,INCx), SP )
             END DO
             CALL STEST(leng,sx,strue,strue,Sfac,Kprint)
           CASE (8)
@@ -449,7 +450,7 @@ CONTAINS
           CASE DEFAULT
             ! 26. SNRM2
             stmp = SNRM2(N,sx,INCx)
-            stmp2 = REAL( dtrue1(np1), 4 )
+            stmp2 = REAL( dtrue1(np1), SP )
             CALL STEST(1,stmp,stmp2,stmp2,Sfac,Kprint)
         END SELECT
         !
@@ -490,40 +491,40 @@ CONTAINS
       DQDOTA, DQDOTI, DROT, DROTM, DSDOT, DSWAP, SAXPY, SCOPY, SDOT, SDSDOT, &
       SROT, SROTM, SSWAP
     INTEGER i, j, ki, kn, kni, kpar, ksize, lenx, leny, mx, my, Kprint, qc_i(30)
-    REAL Sfac
-    REAL sx(7), sy(7), stx(7), sty(7), ssize(7), sparam(5), stmp(1), stmp2(1)
-    REAL(8) :: dx(7), dy(7), dparam(5), dsize(7), dtx(7), dty(7), dtmp(1)
-    REAL(8) :: Dfac, Dqfac
+    REAL(SP) Sfac
+    REAL(SP) sx(7), sy(7), stx(7), sty(7), ssize(7), sparam(5), stmp(1), stmp2(1)
+    REAL(DP) :: dx(7), dy(7), dparam(5), dsize(7), dtx(7), dty(7), dtmp(1)
+    REAL(DP) :: Dfac, Dqfac
     !
-    COMPLEX cx(7), cy(7), ctmp(1), ctmp2(4)
+    COMPLEX(SP) cx(7), cy(7), ctmp(1), ctmp2(4)
     REAL, PARAMETER :: sa = .3, sb = .1
-    REAL(8), PARAMETER :: da = .3D0, db = .25D0
-    COMPLEX, PARAMETER :: ca = (.4,-.7)
+    REAL(DP), PARAMETER :: da = .3D0, db = .25D0
+    COMPLEX(SP), PARAMETER :: ca = (.4,-.7)
     INTEGER, PARAMETER :: incxs(4) = [ 1, 2, -2, -1 ]
     INTEGER, PARAMETER :: incys(4) = [ 1, -2, 1, -2 ]
     INTEGER, PARAMETER :: lens(4,2) = RESHAPE( [1, 1, 2, 4, 1, 1, 3, 7], [4,2] )
     INTEGER, PARAMETER :: ns(4) = [ 0, 1, 2, 4 ]
     REAL, PARAMETER :: sc = .8, ss = .6
-    REAL(8), PARAMETER :: dc = .8D0, ds = .6D0
-    REAL(8), PARAMETER :: dx1(7) = [ .6D0, .1D0, -.5D0, .8D0, .9D0, -.3D0, -.4D0 ]
-    REAL(8), PARAMETER :: dy1(7) = [ .5D0, -.9D0, .3D0, .7D0, -.6D0, .2D0, .8D0 ]
-    REAL(8), PARAMETER :: dx2(7) = [ 1.D0, .01D0, .02D0, 1.D0, .06D0, 2.D0, 1.D0 ]
-    REAL(8), PARAMETER :: dy2(7) = [ 1.D0, .04D0, -.03D0, -1.D0, .05D0, 3.D0, -1.D0 ]
+    REAL(DP), PARAMETER :: dc = .8D0, ds = .6D0
+    REAL(DP), PARAMETER :: dx1(7) = [ .6D0, .1D0, -.5D0, .8D0, .9D0, -.3D0, -.4D0 ]
+    REAL(DP), PARAMETER :: dy1(7) = [ .5D0, -.9D0, .3D0, .7D0, -.6D0, .2D0, .8D0 ]
+    REAL(DP), PARAMETER :: dx2(7) = [ 1.D0, .01D0, .02D0, 1.D0, .06D0, 2.D0, 1.D0 ]
+    REAL(DP), PARAMETER :: dy2(7) = [ 1.D0, .04D0, -.03D0, -1.D0, .05D0, 3.D0, -1.D0 ]
     !            THE TERMS D11(3,2) AND D11(4,2) WILL BE SET BY
     !            COMPUTATION AT RUN TIME.
-    COMPLEX, PARAMETER :: cx1(7) = [ (.7,-.8), (-.4,-.7), (-.1,-.9), (.2,-.8), &
+    COMPLEX(SP), PARAMETER :: cx1(7) = [ (.7,-.8), (-.4,-.7), (-.1,-.9), (.2,-.8), &
       (-.9,-.4), (.1,.4), (-.6,.6) ]
-    COMPLEX, PARAMETER :: cy1(7) = [ (.6,-.6), (-.9,.5), (.7,-.6), (.1,-.5), &
+    COMPLEX(SP), PARAMETER :: cy1(7) = [ (.6,-.6), (-.9,.5), (.7,-.6), (.1,-.5), &
       (-.1,-.2), (-.5,-.3), (.8,-.7) ]
     !
     !                             FOR DQDOTI AND DQDOTA
     !
-    REAL(8), PARAMETER :: dt2(4,4,2) = RESHAPE( [ 0.25D0, 1.25D0, 1.2504D0, 0.2498D0, &
+    REAL(DP), PARAMETER :: dt2(4,4,2) = RESHAPE( [ 0.25D0, 1.25D0, 1.2504D0, 0.2498D0, &
       0.25D0, 1.25D0, 0.24D0, 0.2492D0, 0.25D0, 1.25D0, 0.31D0, 0.2518D0, &
       0.25D0, 1.25D0, 1.2497D0, 0.2507D0, 0.D0, 2.D0, 2.0008D0, -.0004D0, &
       0.D0, 2.D0, -.02D0, -.0016D0, 0.D0, 2.D0, .12D0, .0036D0, &
       0.D0, 2.D0, 1.9994D0, .0014D0 ], [4,4,2] )
-    REAL(8), PARAMETER :: dt7(4,4) = RESHAPE( [ 0.D0, .30D0, .21D0, .62D0, &
+    REAL(DP), PARAMETER :: dt7(4,4) = RESHAPE( [ 0.D0, .30D0, .21D0, .62D0, &
       0.D0, .30D0, -.07D0, .85D0, 0.D0, .30D0, -.79D0, -.74D0, &
       0.D0, .30D0, .33D0, 1.27D0 ], [4,4] )
     REAL, PARAMETER :: st7b(4,4) = RESHAPE( [ .1, .4, .31, .72, .1, .4, .03, .95, &
@@ -531,7 +532,7 @@ CONTAINS
     !
     !                       FOR CDOTU
     !
-    COMPLEX, PARAMETER :: ct7(4,4) = RESHAPE( [ &
+    COMPLEX(SP), PARAMETER :: ct7(4,4) = RESHAPE( [ &
       (0.,0.), (-.06,-.90), (.65,-.47), (-.34,-1.22), &
       (0.,0.), (-.06,-.90), (-.59,-1.46), (-1.04,-.04), &
       (0.,0.), (-.06,-.90), (-.83,.59), (.07,-.37), &
@@ -539,13 +540,13 @@ CONTAINS
     !
     !                       FOR CDOTC
     !
-    COMPLEX, PARAMETER :: ct6(4,4) = RESHAPE( [ &
+    COMPLEX(SP), PARAMETER :: ct6(4,4) = RESHAPE( [ &
       (0.,0.), (.90,0.06), (.91,-.77), (1.80,-.10), &
       (0.,0.), (.90,0.06), (1.45,.74), (.20,.90), &
       (0.,0.), (.90,0.06), (-.55,.23), (.83,-.39), &
       (0.,0.), (.90,0.06), (1.04,0.79), (1.95,1.22) ], [4,4] )
     !
-    REAL(8), PARAMETER :: dt8(7,4,4) = RESHAPE( [ &
+    REAL(DP), PARAMETER :: dt8(7,4,4) = RESHAPE( [ &
       .5D0,  0.D0,   0.D0,   0.D0,   0.D0,  0.D0,  0.D0, &
       .68D0, 0.D0,   0.D0,   0.D0,   0.D0,  0.D0,  0.D0, &
       .68D0, -.87D0, 0.D0,   0.D0,   0.D0,  0.D0,  0.D0, &
@@ -563,7 +564,7 @@ CONTAINS
       .68D0, -.9D0,   .33D0, 0.D0,   0.D0,  0.D0,  0.D0, &
       .68D0, -.9D0,   .33D0,  .7D0,  -.75D0, .2D0, 1.04D0 ], [7,4,4] )
     !
-    COMPLEX, PARAMETER :: ct8(7,4,4) = RESHAPE( [ &
+    COMPLEX(SP), PARAMETER :: ct8(7,4,4) = RESHAPE( [ &
       (.6,-.6), (0.,0.), (0.,0.), (0.,0.), (0.,0.), (0.,0.), (0.,0.), &
       (.32,-1.41), (0.,0.), (0.,0.), (0.,0.), (0.,0.), (0.,0.), (0.,0.), &
       (.32,-1.41), (-1.55,.5), (0.,0.), (0.,0.), (0.,0.), (0.,0.), (0.,0.), &
@@ -582,7 +583,7 @@ CONTAINS
       (.32,-1.41), (-.9,.5), (.05,-.6), (.1,-.5), (-.77,-.49), (-.5,-.3), (.32,-1.16) &
       ], [7,4,4] )
     !                TRUE X VALUES AFTER ROTATION USING SROT OR DROT.
-    REAL(8), PARAMETER :: dt9x(7,4,4) = RESHAPE( [ &
+    REAL(DP), PARAMETER :: dt9x(7,4,4) = RESHAPE( [ &
       .6D0, 0.D0, 0.D0, 0.D0, 0.D0, 0.D0, 0.D0, &
       .78D0, 0.D0, 0.D0, 0.D0, 0.D0, 0.D0, 0.D0, &
       .78D0, -.46D0, 0.D0, 0.D0, 0.D0, 0.D0, 0.D0, &
@@ -602,7 +603,7 @@ CONTAINS
     !
     !                TRUE Y VALUES AFTER ROTATION USING SROT OR DROT.
     !
-    REAL(8), PARAMETER :: dt9y(7,4,4) = RESHAPE( [ &
+    REAL(DP), PARAMETER :: dt9y(7,4,4) = RESHAPE( [ &
       .5D0, 0.D0, 0.D0, 0.D0, 0.D0, 0.D0, 0.D0, &
       .04D0, 0.D0, 0.D0, 0.D0, 0.D0, 0.D0, 0.D0, &
       .04D0, -.78D0, 0.D0, 0.D0, 0.D0, 0.D0, 0.D0, &
@@ -620,7 +621,7 @@ CONTAINS
       .04D0, -.9D0, .18D0, 0.D0, 0.D0, 0.D0, 0.D0, &
       .04D0, -.9D0, .18D0, .7D0, -.18D0, .2D0, .16D0 ], [7,4,4] )
     !
-    REAL(8), PARAMETER :: dt10x(7,4,4) = RESHAPE( [ &
+    REAL(DP), PARAMETER :: dt10x(7,4,4) = RESHAPE( [ &
       .6D0, 0.D0, 0.D0, 0.D0, 0.D0, 0.D0, 0.D0, &
       .5D0, 0.D0, 0.D0, 0.D0, 0.D0, 0.D0, 0.D0, &
       .5D0, -.9D0, 0.D0, 0.D0, 0.D0, 0.D0, 0.D0, &
@@ -638,7 +639,7 @@ CONTAINS
       .5D0, .3D0, 0.D0, 0.D0, 0.D0, 0.D0, 0.D0, &
       .5D0, .3D0, -.6D0, .8D0, 0.D0, 0.D0, 0.D0 ], [7,4,4] )
     !
-    REAL(8), PARAMETER :: dt10y(7,4,4) = RESHAPE( [ &
+    REAL(DP), PARAMETER :: dt10y(7,4,4) = RESHAPE( [ &
       .5D0, 0.D0, 0.D0, 0.D0, 0.D0, 0.D0, 0.D0, &
       .6D0, 0.D0, 0.D0, 0.D0, 0.D0, 0.D0, 0.D0, &
       .6D0, .1D0, 0.D0, 0.D0, 0.D0, 0.D0, 0.D0, &
@@ -656,7 +657,7 @@ CONTAINS
       .6D0, -.9D0, .1D0, 0.D0, 0.D0, 0.D0, 0.D0, &
       .6D0, -.9D0, .1D0, .7D0, -.5D0, .2D0, .8D0 ], [7,4,4] )
     !
-    COMPLEX, PARAMETER :: ct10x(7,4,4) = RESHAPE( [ &
+    COMPLEX(SP), PARAMETER :: ct10x(7,4,4) = RESHAPE( [ &
       (.7,-.8), (0.,0.), (0.,0.), (0.,0.), (0.,0.), (0.,0.), (0.,0.), &
       (.6,-.6), (0.,0.), (0.,0.), (0.,0.), (0.,0.), (0.,0.),  (0.,0.), &
       (.6,-.6), (-.9,.5), (0.,0.), (0.,0.), (0.,0.), (0.,0.), (0.,0.), &
@@ -673,7 +674,7 @@ CONTAINS
       (.6,-.6), (0.,0.), (0.,0.), (0.,0.), (0.,0.), (0.,0.), (0.,0.), &
       (.6,-.6), (.7,-.6), (0.,0.), (0.,0.), (0.,0.), (0.,0.), (0.,0.), &
       (.6,-.6), (.7,-.6), (-.1,-.2), (.8,-.7), (0.,0.), (0.,0.), (0.,0.) ], [7,4,4] )
-    COMPLEX, PARAMETER :: ct10y(7,4,4) = RESHAPE( [ &
+    COMPLEX(SP), PARAMETER :: ct10y(7,4,4) = RESHAPE( [ &
       (.6,-.6), (0.,0.), (0.,0.), (0.,0.), (0.,0.), (0.,0.), (0.,0.), &
       (.7,-.8), (0.,0.), (0.,0.), (0.,0.), (0.,0.), (0.,0.), (0.,0.), &
       (.7,-.8), (-.4,-.7), (0.,0.), (0.,0.), (0.,0.), (0.,0.), (0.,0.), &
@@ -692,7 +693,7 @@ CONTAINS
       (.7,-.8), (-.9,.5), (-.4,-.7), (.1,-.5), (-.1,-.9), (-.5,-.3), (.2,-.8) &
       ], [7,4,4] )
     !                        TRUE X RESULTS F0R ROTATIONS SROTM AND DROTM
-    REAL(8), PARAMETER :: dt19xa(7,4,4) = RESHAPE( [ &
+    REAL(DP), PARAMETER :: dt19xa(7,4,4) = RESHAPE( [ &
       .6D0, 0.D0, 0.D0, 0.D0, 0.D0, 0.D0, 0.D0, &
       .6D0, 0.D0, 0.D0, 0.D0, 0.D0, 0.D0, 0.D0, &
       .6D0, 0.D0, 0.D0, 0.D0, 0.D0, 0.D0, 0.D0, &
@@ -710,7 +711,7 @@ CONTAINS
       -.9D0, 2.8D0, -1.4D0, -1.3D0, 0.D0, 0.D0, 0.D0, &
       3.5D0, -.4D0, -2.2D0, 4.7D0, 0.D0, 0.D0, 0.D0 ], [7,4,4] )
     !
-    REAL(8), PARAMETER :: dt19xb(7,4,4) = RESHAPE( [ &
+    REAL(DP), PARAMETER :: dt19xb(7,4,4) = RESHAPE( [ &
       .6D0, 0.D0, 0.D0, 0.D0, 0.D0, 0.D0, 0.D0, &
       .6D0, 0.D0, 0.D0, 0.D0, 0.D0, 0.D0, 0.D0, &
       .6D0, 0.D0, 0.D0, 0.D0, 0.D0, 0.D0, 0.D0, &
@@ -728,7 +729,7 @@ CONTAINS
       -1.8D0, .1D0, 1.3D0, .8D0, 0.D0, -.3D0, -1.9D0, &
       3.8D0, .1D0, -3.1D0, .8D0, 4.8D0, -.3D0, -1.5D0 ], [7,4,4] )
     !
-    REAL(8), PARAMETER :: dt19xc(7,4,4) = RESHAPE( [ &
+    REAL(DP), PARAMETER :: dt19xc(7,4,4) = RESHAPE( [ &
       .6D0, 0.D0, 0.D0, 0.D0, 0.D0, 0.D0, 0.D0, &
       .6D0, 0.D0, 0.D0, 0.D0, 0.D0, 0.D0, 0.D0, &
       .6D0, 0.D0, 0.D0, 0.D0, 0.D0, 0.D0, 0.D0, &
@@ -746,7 +747,7 @@ CONTAINS
       -1.5D0, .1D0, -1.4D0, .8D0, 3.6D0, -.3D0, -1.9D0, &
       3.7D0, .1D0, -2.2D0, .8D0, 3.6D0, -.3D0, -1.5D0 ], [7,4,4] )
     !
-    REAL(8), PARAMETER :: dt19xd(7,4,4) = RESHAPE( [ &
+    REAL(DP), PARAMETER :: dt19xd(7,4,4) = RESHAPE( [ &
       .6D0, 0.D0, 0.D0, 0.D0, 0.D0, 0.D0, 0.D0, &
       .6D0, 0.D0, 0.D0, 0.D0, 0.D0, 0.D0, 0.D0, &
       .6D0, 0.D0, 0.D0, 0.D0, 0.D0, 0.D0, 0.D0, &
@@ -764,7 +765,7 @@ CONTAINS
       -.9D0, -.8D0, 1.3D0, -1.6D0, 0.D0, 0.D0, 0.D0, &
       3.5D0, .8D0, -3.1D0, 4.8D0, 0.D0, 0.D0, 0.D0 ], [7,4,4] )
     !                        TRUE Y RESULTS FOR ROTATIONS SROTM AND DROTM
-    REAL(8), PARAMETER :: dt19ya(7,4,4) = RESHAPE( [ &
+    REAL(DP), PARAMETER :: dt19ya(7,4,4) = RESHAPE( [ &
       .5D0, 0.D0, 0.D0, 0.D0, 0.D0, 0.D0, 0.D0, &
       .5D0, 0.D0, 0.D0, 0.D0, 0.D0, 0.D0, 0.D0, &
       .5D0, 0.D0, 0.D0, 0.D0, 0.D0, 0.D0, 0.D0, &
@@ -782,7 +783,7 @@ CONTAINS
       1.7D0, -.7D0, -.7D0, 2.3D0, 0.D0, 0.D0, 0.D0, &
       -2.6D0, 3.5D0, -.7D0, -3.6D0, 0.D0, 0.D0, 0.D0 ], [7,4,4] )
     !
-    REAL(8), PARAMETER :: dt19yb(7,4,4) = RESHAPE( [ &
+    REAL(DP), PARAMETER :: dt19yb(7,4,4) = RESHAPE( [ &
       .5D0, 0.D0, 0.D0, 0.D0, 0.D0, 0.D0, 0.D0, &
       .5D0, 0.D0, 0.D0, 0.D0, 0.D0, 0.D0, 0.D0, &
       .5D0, 0.D0, 0.D0, 0.D0, 0.D0, 0.D0, 0.D0, &
@@ -800,7 +801,7 @@ CONTAINS
       -.3D0, -.9D0, 2.1D0, .7D0, -1.6D0, .2D0, 2.0D0, &
       -1.6D0, -.9D0, -2.1D0, .7D0, 2.9D0, .2D0, -3.8D0 ], [7,4,4] )
     !
-    REAL(8), PARAMETER :: dt19yc(7,4,4) = RESHAPE( [ &
+    REAL(DP), PARAMETER :: dt19yc(7,4,4) = RESHAPE( [ &
       .5D0, 0.D0, 0.D0, 0.D0, 0.D0, 0.D0, 0.D0, &
       .5D0, 0.D0, 0.D0, 0.D0, 0.D0, 0.D0, 0.D0, &
       .5D0, 0.D0, 0.D0, 0.D0, 0.D0, 0.D0, 0.D0, &
@@ -818,7 +819,7 @@ CONTAINS
       -.3D0, .9D0, -.7D0, 1.9D0, 0.D0, 0.D0, 0.D0, &
       -1.6D0, 2.7D0, -.7D0, -3.4D0, 0.D0, 0.D0, 0.D0 ], [7,4,4] )
     !
-    REAL(8), PARAMETER :: dt19yd(7,4,4) = RESHAPE( [ &
+    REAL(DP), PARAMETER :: dt19yd(7,4,4) = RESHAPE( [ &
       .5D0, 0.D0, 0.D0, 0.D0, 0.D0, 0.D0, 0.D0, &
       .5D0, 0.D0, 0.D0, 0.D0, 0.D0, 0.D0, 0.D0, &
       .5D0, 0.D0, 0.D0, 0.D0, 0.D0, 0.D0, 0.D0, &
@@ -836,36 +837,36 @@ CONTAINS
       1.7D0, -.9D0, .5D0, .7D0, -1.6D0, .2D0, 2.4D0, &
       -2.6D0, -.9D0, -1.3D0, .7D0, 2.9D0, .2D0, -4.0D0 ], [7,4,4] )
     !
-    REAL(8), PARAMETER :: dt19x(7,4,16) = RESHAPE( [dt19xa, dt19xb, dt19xc, dt19xd], &
+    REAL(DP), PARAMETER :: dt19x(7,4,16) = RESHAPE( [dt19xa, dt19xb, dt19xc, dt19xd], &
       [7,4,16] )
-    REAL(8), PARAMETER :: dt19y(7,4,16) = RESHAPE( [dt19ya, dt19yb, dt19yc, dt19yd], &
+    REAL(DP), PARAMETER :: dt19y(7,4,16) = RESHAPE( [dt19ya, dt19yb, dt19yc, dt19yd], &
       [7,4,16] )
     !
     REAL, PARAMETER :: ssize1(4) = [ 0., .3, 1.6, 3.2 ]
-    REAL(8), PARAMETER :: dsize1(4) = [ 0.D0, .3D0, 1.6D0, 3.2D0 ]
+    REAL(DP), PARAMETER :: dsize1(4) = [ 0.D0, .3D0, 1.6D0, 3.2D0 ]
     REAL, PARAMETER :: ssize3(4) = [ .1, .4, 1.7, 3.3 ]
     !
     !                         FOR CDOTC AND CDOTU
     !
-    COMPLEX, PARAMETER :: csize1(4) = [ (0.,0.), (.9,.9), (1.63,1.73), (2.90,2.78) ]
+    COMPLEX(SP), PARAMETER :: csize1(4) = [ (0.,0.), (.9,.9), (1.63,1.73), (2.90,2.78) ]
     REAL, PARAMETER :: ssize2(14,2) = RESHAPE( [ &
       0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., &
       1.17, 1.17, 1.17, 1.17, 1.17, 1.17, 1.17, 1.17, 1.17, 1.17, 1.17, 1.17, &
       1.17, 1.17 ], [14,2] )
-    REAL(8), PARAMETER :: dsize2(7,2) = RESHAPE( [ &
+    REAL(DP), PARAMETER :: dsize2(7,2) = RESHAPE( [ &
       0.D0, 0.D0, 0.D0, 0.D0, 0.D0, 0.D0, 0.D0, &
       1.17D0, 1.17D0, 1.17D0, 1.17D0, 1.17D0, 1.17D0, 1.17D0 ], [7,2] )
     !
     !                         FOR CAXPY
     !
-    COMPLEX, PARAMETER :: csize2(7,2) = RESHAPE( [ &
+    COMPLEX(SP), PARAMETER :: csize2(7,2) = RESHAPE( [ &
       (0.,0.), (0.,0.), (0.,0.), (0.,0.), (0.,0.), (0.,0.), (0.,0.), &
       (1.54,1.54), (1.54,1.54), (1.54,1.54), (1.54,1.54), (1.54,1.54), &
       (1.54,1.54), (1.54,1.54) ], [7,2] )
     !
     !                         FOR SROTM AND DROTM
     !
-    REAL(8), PARAMETER :: dpar(5,4) = RESHAPE( [ -2.D0, 0.D0, 0.D0, 0.D0, 0.D0, &
+    REAL(DP), PARAMETER :: dpar(5,4) = RESHAPE( [ -2.D0, 0.D0, 0.D0, 0.D0, 0.D0, &
       -1.D0, 2.D0, -3.D0, -4.D0, 5.D0, 0.D0, 0.D0, 2.D0, -3.D0, 0.D0, &
       1.D0, 5.D0, 2.D0, 0.D0, -4.D0 ], [5,4] )
     !* FIRST EXECUTABLE STATEMENT  CHECK2
@@ -882,8 +883,8 @@ CONTAINS
         leny = lens(kn,my)
         ! INITIALIZE ALL ARGUMENT ARRAYS.
         DO i = 1, 7
-          sx(i) = REAL( dx1(i), 4 )
-          sy(i) = REAL( dy1(i), 4 )
+          sx(i) = REAL( dx1(i), SP )
+          sy(i) = REAL( dy1(i), SP )
           dx(i) = dx1(i)
           dy(i) = dy1(i)
           cx(i) = cx1(i)
@@ -943,7 +944,7 @@ CONTAINS
             ! 9. SAXPY
             CALL SAXPY(N,sa,sx,INCx,sy,INCy)
             DO j = 1, leny
-              sty(j) = REAL( dt8(j,kn,ki), 4 )
+              sty(j) = REAL( dt8(j,kn,ki), SP )
             END DO
             CALL STEST(leny,sy,sty,ssize2(:,ksize),Sfac,Kprint)
           CASE (10)
@@ -959,10 +960,10 @@ CONTAINS
           CASE (14)
             ! 14. SROT
             DO i = 1, 7
-              sx(i) = REAL( dx1(i), 4 )
-              sy(i) = REAL( dy1(i), 4 )
-              stx(i) = REAL( dt9x(i,kn,ki), 4 )
-              sty(i) = REAL( dt9y(i,kn,ki), 4 )
+              sx(i) = REAL( dx1(i), SP )
+              sy(i) = REAL( dy1(i), SP )
+              stx(i) = REAL( dt9x(i,kn,ki), SP )
+              sty(i) = REAL( dt9y(i,kn,ki), SP )
             END DO
             CALL SROT(N,sx,INCx,sy,INCy,sc,ss)
             CALL STEST(lenx,sx,stx,ssize2(:,ksize),Sfac,Kprint)
@@ -981,14 +982,14 @@ CONTAINS
             kni = kn + 4*(ki-1)
             DO kpar = 1, 4
               DO i = 1, 7
-                sx(i) = REAL( dx1(i), 4 )
-                sy(i) = REAL( dy1(i), 4 )
-                stx(i) = REAL( dt19x(i,kpar,kni), 4 )
-                sty(i) = REAL( dt19y(i,kpar,kni), 4 )
+                sx(i) = REAL( dx1(i), SP )
+                sy(i) = REAL( dy1(i), SP )
+                stx(i) = REAL( dt19x(i,kpar,kni), SP )
+                sty(i) = REAL( dt19y(i,kpar,kni), SP )
               END DO
               !
               DO i = 1, 5
-                sparam(i) = REAL( dpar(i,kpar), 4 )
+                sparam(i) = REAL( dpar(i,kpar), SP )
               END DO
               ! SET MODE TO IDENTIFY DIAGNOSTIC OUTPUT, IF ANY
               MODe = INT(sparam(1))
@@ -1040,7 +1041,7 @@ CONTAINS
           CASE (20)
             ! 20. SCOPY
             DO i = 1, 7
-              sty(i) = REAL( dt10y(i,kn,ki), 4 )
+              sty(i) = REAL( dt10y(i,kn,ki), SP )
             END DO
             CALL SCOPY(N,sx,INCx,sy,INCy)
             CALL STEST(leny,sy,sty,ssize2,1.,Kprint)
@@ -1057,8 +1058,8 @@ CONTAINS
             ! 23. SSWAP
             CALL SSWAP(N,sx,INCx,sy,INCy)
             DO i = 1, 7
-              stx(i) = REAL( dt10x(i,kn,ki), 4 )
-              sty(i) = REAL( dt10y(i,kn,ki), 4 )
+              stx(i) = REAL( dt10x(i,kn,ki), SP )
+              sty(i) = REAL( dt10y(i,kn,ki), SP )
             END DO
             CALL STEST(lenx,sx,stx,ssize2,1.,Kprint)
             CALL STEST(leny,sy,sty,ssize2,1.,Kprint)
@@ -1188,8 +1189,8 @@ CONTAINS
     !           section.  (WRB)
     USE slatec, ONLY : R1MACH
     INTEGER i, Leng, Kprint
-    REAL Scomp(*), Strue(*), Ssize(*), Sfac, sd
-    REAL :: releps = 0.0E0
+    REAL(SP) Scomp(*), Strue(*), Ssize(*), Sfac, sd
+    REAL(SP) :: releps = 0.0E0
     !* FIRST EXECUTABLE STATEMENT  STEST
     IF ( releps==0.0E0 ) releps = R1MACH(4)
     DO i = 1, Leng
@@ -1254,8 +1255,8 @@ CONTAINS
     !           section.  (WRB)
     USE slatec, ONLY : D1MACH
     INTEGER i, Leng, Kprint
-    REAL(8) :: Dcomp(*), Dtrue(*), Dsize(*), Dfac, dd
-    REAL(8) :: releps = 0.0D0
+    REAL(DP) :: Dcomp(*), Dtrue(*), Dsize(*), Dfac, dd
+    REAL(DP) :: releps = 0.0D0
     !* FIRST EXECUTABLE STATEMENT  DTEST
     IF ( releps==0.0D0 ) releps = D1MACH(4)
     DO i = 1, Leng
@@ -1320,9 +1321,9 @@ CONTAINS
     !           section.  (WRB)
     USE slatec, ONLY : R1MACH, CABS1
     INTEGER i, Leng, Kprint
-    COMPLEX :: Ccomp(*), Ctrue(*), Csize(*)
-    REAL :: Cfac, dd
-    REAL :: releps = 0.0
+    COMPLEX(SP) :: Ccomp(*), Ctrue(*), Csize(*)
+    REAL(SP) :: Cfac, dd
+    REAL(SP) :: releps = 0.0
     !* FIRST EXECUTABLE STATEMENT  DTEST
     IF ( releps==0.0 ) releps = R1MACH(4)
     DO i = 1, Leng

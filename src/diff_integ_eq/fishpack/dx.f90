@@ -28,7 +28,7 @@ SUBROUTINE DX(U,Idmn,I,J,Uxxx,Uxxxx)
   !   900402  Added TYPE section.  (WRB)
   USE SPLPCM, ONLY : dlx4_com, kswx_com, tdlx3_com, k_com, l_com
   INTEGER :: I, Idmn, J
-  REAL :: U(Idmn,l_com), Uxxx, Uxxxx
+  REAL(SP) :: U(Idmn,l_com), Uxxx, Uxxxx
   !* FIRST EXECUTABLE STATEMENT  DX
   IF ( I>2.AND.I<(k_com-1) ) THEN
     !

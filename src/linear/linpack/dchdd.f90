@@ -136,12 +136,12 @@ SUBROUTINE DCHDD(R,Ldr,P,X,Z,Ldz,Nz,Y,Rho,C,S,Info)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER Ldr, P, Ldz, Nz, Info
-  REAL(8) :: R(Ldr,*), X(*), Z(Ldz,*), Y(*), S(*)
-  REAL(8) :: Rho(*), C(*)
+  REAL(DP) :: R(Ldr,*), X(*), Z(Ldz,*), Y(*), S(*)
+  REAL(DP) :: Rho(*), C(*)
   !
   INTEGER i, ii, j
-  REAL(8) :: a, alpha, azeta, norm
-  REAL(8) :: t, zeta, b, xx, scalee
+  REAL(DP) :: a, alpha, azeta, norm
+  REAL(DP) :: t, zeta, b, xx, scalee
   !
   !     SOLVE THE SYSTEM TRANS(R)*A = X, PLACING THE RESULT
   !     IN THE ARRAY S.

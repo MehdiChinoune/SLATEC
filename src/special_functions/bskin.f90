@@ -101,14 +101,14 @@ SUBROUTINE BSKIN(X,N,Kode,M,Y,Nz,Ierr)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   USE service, ONLY : R1MACH, I1MACH
   INTEGER :: Ierr, Kode, M, N, Nz
-  REAL :: X, Y(M)
+  REAL(SP) :: X, Y(M)
   INTEGER :: i, icase, il, i1m, k, kk, ktrms, m3, ne, nflg, nl, nlim, nn, np, ns, nt
-  REAL enlim, exi(102), fn, gr, h(31), hn, ss, tol, t1, t2, w, &
+  REAL(SP) enlim, exi(102), fn, gr, h(31), hn, ss, tol, t1, t2, w, &
     xlim, xnlim, xp, ys(3), yss(3)
   !-----------------------------------------------------------------------
   !             COEFFICIENTS IN SERIES OF EXPONENTIAL INTEGRALS
   !-----------------------------------------------------------------------
-  REAL, PARAMETER :: a(50) = [ 1.00000000000000000E+00, 5.00000000000000000E-01, &
+  REAL(SP), PARAMETER :: a(50) = [ 1.00000000000000000E+00, 5.00000000000000000E-01, &
     3.75000000000000000E-01, 3.12500000000000000E-01, 2.73437500000000000E-01, &
     2.46093750000000000E-01, 2.25585937500000000E-01, 2.09472656250000000E-01, &
     1.96380615234375000E-01, 1.85470581054687500E-01, 1.76197052001953125E-01, &
@@ -128,7 +128,7 @@ SUBROUTINE BSKIN(X,N,Kode,M,Y,Nz,Ierr)
   !-----------------------------------------------------------------------
   !             SQRT(PI)/2
   !-----------------------------------------------------------------------
-  REAL, PARAMETER :: hrtpi = 8.86226925452758014E-01
+  REAL(SP), PARAMETER :: hrtpi = 8.86226925452758014E-01
   !
   !* FIRST EXECUTABLE STATEMENT  BSKIN
   Ierr = 0

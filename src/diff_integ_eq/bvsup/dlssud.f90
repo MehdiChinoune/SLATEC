@@ -118,10 +118,10 @@ SUBROUTINE DLSSUD(A,X,B,N,M,Nrda,U,Nrdu,Iflag,Mlso,Irank,Iscale,Q,Diag,&
   !   920501  Reformatted the REFERENCES section.  (WRB)
   USE service, ONLY : XERMSG, XGETF, XSETF, XERMAX, J4SAVE, D1MACH
   INTEGER :: Iflag, Irank, Iscale, Isflg, M, Mlso, N, Nrda, Nrdu, Kpivot(N)
-  REAL(8) :: A(Nrda,M), B(N), Diag(N), Div(N), Q(Nrda,M), S(N), Scales(M), Td(N), &
+  REAL(DP) :: A(Nrda,M), B(N), Diag(N), Div(N), Q(Nrda,M), S(N), Scales(M), Td(N), &
     U(Nrdu,M), X(M)
   INTEGER :: i, irp, j, jr, k, kp, l, maxmes, nfat, nfatal, nmir, nu
-  REAL(8) :: gam, gama, res, ss, uro
+  REAL(DP) :: gam, gama, res, ss, uro
   !
   !     ******************************************************************
   !

@@ -77,14 +77,15 @@ SUBROUTINE PFQAD(F,Ldc,C,Xi,Lxi,K,Id,X1,X2,Tol,Quad,Ierr)
   USE interpolation, ONLY : PPGQ8, INTRV
   !
   INTERFACE
-    REAL FUNCTION F(X)
-      REAL, INTENT(IN) :: X
+    REAL(SP) FUNCTION F(X)
+      IMPORT SP
+      REAL(SP), INTENT(IN) :: X
     END FUNCTION F
   END INTERFACE
   INTEGER :: Id, Ierr, K, Ldc, Lxi
-  REAL :: Quad, Tol, C(Ldc,Lxi), Xi(Lxi+1)
+  REAL(SP) :: Quad, Tol, C(Ldc,Lxi), Xi(Lxi+1)
   INTEGER :: iflg, ilo, il1, il2, inppv, left, mf1, mf2
-  REAL :: a, aa, ans, b, bb, q, ta, tb, wtol, X1, X2
+  REAL(SP) :: a, aa, ans, b, bb, q, ta, tb, wtol, X1, X2
   !
   !* FIRST EXECUTABLE STATEMENT  PFQAD
   Ierr = 1

@@ -1,5 +1,5 @@
 !** ALBETA
-REAL FUNCTION ALBETA(A,B)
+REAL(SP) FUNCTION ALBETA(A,B)
   !>
   !  Compute the natural logarithm of the complete Beta
   !            function.
@@ -38,8 +38,8 @@ REAL FUNCTION ALBETA(A,B)
   !           (WRB)
   !   900727  Added EXTERNAL statement.  (WRB)
   USE service, ONLY : XERMSG
-  REAL A, B, corr, p, q
-  REAL, PARAMETER :: sq2pil = 0.91893853320467274E0
+  REAL(SP) A, B, corr, p, q
+  REAL(SP), PARAMETER :: sq2pil = 0.91893853320467274E0
   !* FIRST EXECUTABLE STATEMENT  ALBETA
   p = MIN(A,B)
   q = MAX(A,B)

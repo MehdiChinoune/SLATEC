@@ -92,7 +92,7 @@ SUBROUTINE RFFTB1(N,C,Ch,Wa,Ifac)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER :: N, Ifac(15)
-  REAL :: C(N), Ch(N), Wa(N)
+  REAL(SP) :: C(N), Ch(N), Wa(N)
   INTEGER :: i, idl1, ido, ip, iw, ix2, ix3, ix4, k1, l1, l2, na, nf
   !* FIRST EXECUTABLE STATEMENT  RFFTB1
   nf = Ifac(2)

@@ -86,16 +86,17 @@ SUBROUTINE FDJAC3(FCN,M,N,X,Fvec,Fjac,Ldfjac,Iflag,Epsfcn,Wa)
   USE service, ONLY : R1MACH
   INTERFACE
     SUBROUTINE FCN(Iflag,M,N,X,Fvec,Fjac,Ldfjac)
+      IMPORT SP
       INTEGER :: Ldfjac, M, N, Iflag
-      REAL :: X(N), Fvec(M), Fjac(:,:)
+      REAL(SP) :: X(N), Fvec(M), Fjac(:,:)
     END SUBROUTINE FCN
   END INTERFACE
   INTEGER :: M, N, Ldfjac, Iflag
-  REAL :: Epsfcn
-  REAL :: X(N), Fvec(M), Fjac(Ldfjac,N), Wa(M)
+  REAL(SP) :: Epsfcn
+  REAL(SP) :: X(N), Fvec(M), Fjac(Ldfjac,N), Wa(M)
   INTEGER :: i, j
-  REAL :: eps, epsmch, h, temp
-  REAL, PARAMETER :: zero = 0.0E0
+  REAL(SP) :: eps, epsmch, h, temp
+  REAL(SP), PARAMETER :: zero = 0.0E0
   !* FIRST EXECUTABLE STATEMENT  FDJAC3
   epsmch = R1MACH(4)
   !

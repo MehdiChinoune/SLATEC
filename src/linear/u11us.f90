@@ -33,10 +33,10 @@ SUBROUTINE U11US(A,Mda,M,N,Ub,Db,Mode,Np,Krank,Ksure,H,W,Eb,Ir,Ic)
   USE service, ONLY : XERMSG
   INTEGER :: Mda, Mode, N, Np, Krank, Ksure, M
   INTEGER :: Ic(N), Ir(M)
-  REAL :: A(Mda,N), Db(2*M), Eb(M), H(M), Ub(N), W(M)
+  REAL(SP) :: A(Mda,N), Db(2*M), Eb(M), H(M), Ub(N), W(M)
   INTEGER :: mmk, nn, i, ii, im1, imin, is, j, jm1, jmax, jp1, kk, km1, kmi, kp1, &
     kz, l, lm1
-  REAL :: bb, r2, rmin, summ, t, temp, tn, tt
+  REAL(SP) :: bb, r2, rmin, summ, t, temp, tn, tt
   !
   !        INITIALIZATION
   !

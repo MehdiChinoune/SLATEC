@@ -118,12 +118,12 @@ SUBROUTINE DCHUD(R,Ldr,P,X,Z,Ldz,Nz,Y,Rho,C,S)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER Ldr, P, Ldz, Nz
-  REAL(8) :: Rho(*), C(*)
-  REAL(8) :: R(Ldr,*), X(*), Z(Ldz,*), Y(*), S(*)
+  REAL(DP) :: Rho(*), C(*)
+  REAL(DP) :: R(Ldr,*), X(*), Z(Ldz,*), Y(*), S(*)
   !
   INTEGER i, j, jm1
-  REAL(8) :: azeta, scalee
-  REAL(8) :: t, xj, zeta
+  REAL(DP) :: azeta, scalee
+  REAL(DP) :: t, xj, zeta
   !
   !     UPDATE R.
   !

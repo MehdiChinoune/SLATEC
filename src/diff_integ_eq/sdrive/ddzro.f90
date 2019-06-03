@@ -60,16 +60,17 @@ SUBROUTINE DDZRO(Ae,F,H,N,Nq,Iroot,Re,T,Yh,Uround,B,C,Fb,Fc,Y)
   !   900329  Initial submission to SLATEC.
 
   INTERFACE
-    REAL(8) FUNCTION F(N,T,Y,Iroot)
+    REAL(DP) FUNCTION F(N,T,Y,Iroot)
+      IMPORT DP
       INTEGER :: N, Iroot
-      REAL(8) :: T, Y(N)
+      REAL(DP) :: T, Y(N)
     END FUNCTION F
   END INTERFACE
   INTEGER :: Iroot, N, Nq
-  REAL(8) :: Ae, B, C, Fb, Fc, H, Re, T, Uround
-  REAL(8) :: Y(N), Yh(N,Nq+1)
+  REAL(DP) :: Ae, B, C, Fb, Fc, H, Re, T, Uround
+  REAL(DP) :: Y(N), Yh(N,Nq+1)
   INTEGER :: ic, kount
-  REAL(8) :: a, acbs, acmb, cmb, er, fa, p, q, rw, tol
+  REAL(DP) :: a, acbs, acmb, cmb, er, fa, p, q, rw, tol
   !* FIRST EXECUTABLE STATEMENT  DDZRO
   er = 4.D0*Uround
   rw = MAX(Re,er)

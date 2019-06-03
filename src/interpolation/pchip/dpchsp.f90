@@ -153,20 +153,20 @@ SUBROUTINE DPCHSP(Ic,Vc,N,X,F,D,Incfd,Wk,Nwk,Ierr)
   !
   !     To produce a single precision version, simply:
   !        a. Change DPCHSP to PCHSP wherever it occurs,
-  !        b. Change the double precision declarations to real, and
+  !        b. Change the double precision declarations to REAL(SP), and
   !        c. Change the constants ZERO, HALF, ... to single precision.
   !
   !  DECLARE ARGUMENTS.
   !
   INTEGER Ic(2), N, Incfd, Nwk, Ierr
-  REAL(8) :: Vc(2), X(N), F(Incfd,N), D(Incfd,N), Wk(2,Nwk)
+  REAL(DP) :: Vc(2), X(N), F(Incfd,N), D(Incfd,N), Wk(2,Nwk)
   !
   !  DECLARE LOCAL VARIABLES.
   !
   INTEGER ibeg, iend, indexx, j, nm1
-  REAL(8) :: g, stemp(3), xtemp(4)
+  REAL(DP) :: g, stemp(3), xtemp(4)
   !
-  REAL(8), PARAMETER :: zero = 0.D0, half = .5D0, one = 1.D0, two = 2.D0, three = 3.D0
+  REAL(DP), PARAMETER :: zero = 0.D0, half = .5D0, one = 1.D0, two = 2.D0, three = 3.D0
   !
   !  VALIDITY-CHECK ARGUMENTS.
   !

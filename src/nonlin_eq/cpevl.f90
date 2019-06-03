@@ -50,11 +50,11 @@ SUBROUTINE CPEVL(N,M,A,Z,C,B,Kbd)
   USE service, ONLY : I1MACH
   INTEGER :: M, N
   LOGICAL :: Kbd
-  COMPLEX :: Z, A(N+1), C(2*(M+1)), B(2*(M+1))
+  COMPLEX(SP) :: Z, A(N+1), C(2*(M+1)), B(2*(M+1))
   INTEGER :: i, j, mini, np1
-  REAL :: r, s
-  COMPLEX :: ci, cim1, bi, bim1, t
-  REAL, PARAMETER :: d1 = REAL(I1MACH(10))**(1-I1MACH(11))
+  REAL(SP) :: r, s
+  COMPLEX(SP) :: ci, cim1, bi, bim1, t
+  REAL(SP), PARAMETER :: d1 = REAL(I1MACH(10))**(1-I1MACH(11))
   !* FIRST EXECUTABLE STATEMENT  CPEVL
   np1 = N + 1
   DO j = 1, np1
@@ -79,8 +79,8 @@ SUBROUTINE CPEVL(N,M,A,Z,C,B,Kbd)
     END DO
   END DO
 CONTAINS
-  COMPLEX FUNCTION ZA(q)
-    COMPLEX, INTENT(IN) :: q
+  COMPLEX(SP) FUNCTION ZA(q)
+    COMPLEX(SP), INTENT(IN) :: q
     ZA = CMPLX(ABS(REAL(q)),ABS(AIMAG(q)))
   END FUNCTION ZA
 END SUBROUTINE CPEVL

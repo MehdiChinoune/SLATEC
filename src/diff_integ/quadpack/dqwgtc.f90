@@ -1,5 +1,5 @@
 !** DQWGTC
-REAL(8) FUNCTION DQWGTC(X,C,P2,P3,P4,Kp)
+REAL(DP) FUNCTION DQWGTC(X,C,P2,P3,P4,Kp)
   !>
   !  This function subprogram is used together with the
   !            routine DQAWC and defines the WEIGHT function.
@@ -28,7 +28,7 @@ REAL(8) FUNCTION DQWGTC(X,C,P2,P3,P4,Kp)
   !   900328  Added TYPE section.  (WRB)
   
   !
-  REAL(8) :: C, P2, P3, P4, X
+  REAL(DP) :: C, P2, P3, P4, X
   INTEGER Kp
   !* FIRST EXECUTABLE STATEMENT  DQWGTC
   DQWGTC = 0.1D+01/(X-C)

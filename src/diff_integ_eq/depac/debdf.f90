@@ -748,19 +748,21 @@ SUBROUTINE DEBDF(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,JAC)
   !
   INTERFACE
     SUBROUTINE F(X,U,Uprime)
-      REAL :: X
-      REAL :: U(:), Uprime(:)
+      IMPORT SP
+      REAL(SP) :: X
+      REAL(SP) :: U(:), Uprime(:)
     END SUBROUTINE F
     SUBROUTINE JAC(X,U,Pd,Nrowpd)
+      IMPORT SP
       INTEGER :: Nrowpd
-      REAL :: X
-      REAL :: U(:), Pd(:,:)
+      REAL(SP) :: X
+      REAL(SP) :: U(:), Pd(:,:)
     END SUBROUTINE JAC
   END INTERFACE
   INTEGER :: Idid, Liw, Lrw, Neq
   INTEGER :: Info(15), Iwork(Liw)
-  REAL :: T, Tout
-  REAL :: Atol(:), Rtol(:), Rwork(Lrw), Y(Neq)
+  REAL(SP) :: T, Tout
+  REAL(SP) :: Atol(:), Rtol(:), Rwork(Lrw), Y(Neq)
   INTEGER :: icomi, icomr, idelsn, iinout, ilrw, itstar, iypout, ml, mu
   LOGICAL :: intout
   CHARACTER(8) :: xern1, xern2

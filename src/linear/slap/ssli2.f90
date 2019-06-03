@@ -115,7 +115,7 @@ SUBROUTINE SSLI2(N,B,X,Nel,Iel,Jel,El)
   !     .. Scalar Arguments ..
   INTEGER N, Nel
   !     .. Array Arguments ..
-  REAL B(N), El(Nel), X(N)
+  REAL(SP) B(N), El(Nel), X(N)
   INTEGER Iel(Nel), Jel(Nel)
   !     .. Local Scalars ..
   INTEGER i, icol, j, jbgn, jend

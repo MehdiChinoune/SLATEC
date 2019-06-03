@@ -34,16 +34,16 @@ SUBROUTINE SPINCW(Mrelas,Nvars,Lmx,Lbm,Npp,Jstrt,Imat,Ibrc,Ipr,Iwr,&
   !   890605  Removed unreferenced labels.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
-  REAL cnorm
+  REAL(SP) cnorm
   INTEGER :: Jstrt, Lbm, Lmx, Mrelas, Npp, Nvars
   INTEGER :: i, ihi, il1, ilow, ipage, iu1, j, key, lpg, nnegrc
-  REAL :: Costsc, Erdnrm, Dulnrm, Gg
+  REAL(SP) :: Costsc, Erdnrm, Dulnrm, Gg
   LOGICAL :: Stpedg
   INTEGER :: Imat(Lmx), Ibrc(Lbm,2), Ipr(2*Mrelas), Iwr(8*Mrelas), &
     Ind(Nvars+Mrelas), Ibb(Nvars+Mrelas)
-  REAL Amat(Lmx), Basmat(Lbm), Csc(Nvars), Wr(Mrelas), Ww(Mrelas), &
+  REAL(SP) Amat(Lmx), Basmat(Lbm), Csc(Nvars), Wr(Mrelas), Ww(Mrelas), &
     Rz(Nvars+Mrelas), Rg(Nvars+Mrelas), Costs(Nvars), Colnrm(Nvars), Duals(Nvars+Mrelas)
-  REAL :: one, rzj, scalr, zero, rcost
+  REAL(SP) :: one, rzj, scalr, zero, rcost
   LOGICAL :: pagepl, trans
   !* FIRST EXECUTABLE STATEMENT  SPINCW
   lpg = Lmx - (Nvars+4)

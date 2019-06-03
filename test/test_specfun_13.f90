@@ -1,4 +1,5 @@
 MODULE TEST14_MOD
+  USE service, ONLY : SP, DP
   IMPLICIT NONE
 
 CONTAINS
@@ -28,7 +29,7 @@ CONTAINS
     USE slatec, ONLY : D1MACH, DRC, NUMXER, XERCLR, XGETF, XSETF
     INTEGER Kprint, Ipass, contrl, kontrl, Lun, ier
     INTEGER ipass1, ipass2, ipass3, ipass4
-    REAL(8) :: pi, trc, dif
+    REAL(DP) :: pi, trc, dif
     !* FIRST EXECUTABLE STATEMENT  QCDRC
     CALL XERCLR
     CALL XGETF(contrl)
@@ -132,7 +133,7 @@ CONTAINS
     USE slatec, ONLY : D1MACH, DRD, NUMXER, XERCLR, XGETF, XSETF
     INTEGER Kprint, Ipass, contrl, kontrl, Lun, ier
     INTEGER ipass1, ipass2, ipass3, ipass4
-    REAL(8) :: blem, trd, dif
+    REAL(DP) :: blem, trd, dif
     !* FIRST EXECUTABLE STATEMENT  QCDRD
     CALL XERCLR
     CALL XGETF(contrl)
@@ -237,7 +238,7 @@ CONTAINS
     USE slatec, ONLY : D1MACH, DRF, NUMXER, XERCLR, XGETF, XSETF
     INTEGER Kprint, Ipass, contrl, kontrl, Lun, ier
     INTEGER ipass1, ipass2, ipass3, ipass4
-    REAL(8) :: alem, trf, dif
+    REAL(DP) :: alem, trf, dif
     !* FIRST EXECUTABLE STATEMENT  QCDRF
     CALL XERCLR
     CALL XGETF(contrl)
@@ -342,7 +343,7 @@ CONTAINS
     USE slatec, ONLY : D1MACH, DRJ, NUMXER, XERCLR, XGETF, XSETF
     INTEGER Kprint, Ipass, contrl, kontrl, Lun, ier
     INTEGER ipass1, ipass2, ipass3, ipass4
-    REAL(8) :: consj, trj, dif
+    REAL(DP) :: consj, trj, dif
     !* FIRST EXECUTABLE STATEMENT  QCDRJ
     CALL XERCLR
     CALL XGETF(contrl)

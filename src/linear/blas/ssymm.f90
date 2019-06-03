@@ -144,17 +144,17 @@ SUBROUTINE SSYMM(Side,Uplo,M,N,Alpha,A,Lda,B,Ldb,Beta,C,Ldc)
   !     .. Scalar Arguments ..
   CHARACTER :: Side, Uplo
   INTEGER M, N, Lda, Ldb, Ldc
-  REAL Alpha, Beta
+  REAL(SP) Alpha, Beta
   !     .. Array Arguments ..
-  REAL A(Lda,*), B(Ldb,*), C(Ldc,*)
+  REAL(SP) A(Lda,*), B(Ldb,*), C(Ldc,*)
   !     .. Intrinsic Functions ..
   INTRINSIC MAX
   !     .. Local Scalars ..
   LOGICAL upper
   INTEGER i, info, j, k, nrowa
-  REAL temp1, temp2
+  REAL(SP) temp1, temp2
   !     .. Parameters ..
-  REAL, PARAMETER :: ONE = 1.0E+0, ZERO = 0.0E+0
+  REAL(SP), PARAMETER :: ONE = 1.0E+0, ZERO = 0.0E+0
   !* FIRST EXECUTABLE STATEMENT  SSYMM
   !
   !     Set NROWA as the number of rows of A.

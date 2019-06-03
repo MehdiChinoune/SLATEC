@@ -182,25 +182,26 @@ SUBROUTINE STEPS(F,Neqn,Y,X,H,Eps,Wt,Start,Hold,K,Kold,Crash,Phi,P,Yp,Psi,&
   USE service, ONLY : R1MACH
   INTERFACE
     SUBROUTINE F(X,U,Uprime)
-      REAL :: X
-      REAL :: U(:), Uprime(:)
+      IMPORT SP
+      REAL(SP) :: X
+      REAL(SP) :: U(:), Uprime(:)
     END SUBROUTINE F
   END INTERFACE
   INTEGER :: Neqn, Ns, Ivc, K, Kgi, Kold, Kprev, Ksteps
   INTEGER :: Iv(10)
-  REAL :: Eps, Fouru, H, Hold, Twou, X, Xold
-  REAL :: Alpha(12), Beta(12), G(13), Gi(11), P(Neqn), Phi(Neqn,16), Psi(12), &
+  REAL(SP) :: Eps, Fouru, H, Hold, Twou, X, Xold
+  REAL(SP) :: Alpha(12), Beta(12), G(13), Gi(11), P(Neqn), Phi(Neqn,16), Psi(12), &
     Sig(13), W(12), V(12), Wt(Neqn), Y(Neqn), Yp(Neqn)
   LOGICAL :: Start, Crash, Phase1, Nornd
   !
   INTEGER :: i, ifail, im1, ip1, iq, j, jv, km1, km2, knew, kp1, kp2, l, limit1, &
     limit2, nsm2, nsp1, nsp2
-  REAL :: absh, big, erk, erkm1, erkm2, erkp1, err, hnew, p5eps, r, reali, realns, &
+  REAL(SP) :: absh, big, erk, erkm1, erkm2, erkp1, err, hnew, p5eps, r, reali, realns, &
     rho, round, tau, temp1, temp2, temp3, temp4, temp5, temp6, u
   !
-  REAL, PARAMETER :: two(13) = [ 2.0, 4.0, 8.0, 16.0, 32.0, 64.0, 128.0, 256.0, &
+  REAL(SP), PARAMETER :: two(13) = [ 2.0, 4.0, 8.0, 16.0, 32.0, 64.0, 128.0, 256.0, &
     512.0, 1024.0, 2048.0, 4096.0, 8192.0 ]
-  REAL, PARAMETER :: gstr(13) = [ 0.500, 0.0833, 0.0417, 0.0264, 0.0188, 0.0143, &
+  REAL(SP), PARAMETER :: gstr(13) = [ 0.500, 0.0833, 0.0417, 0.0264, 0.0188, 0.0143, &
     0.0114, 0.00936, 0.00789, 0.00679, 0.00592, 0.00524, 0.00468 ]
   !
   !

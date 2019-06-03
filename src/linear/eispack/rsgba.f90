@@ -82,7 +82,7 @@ SUBROUTINE RSGBA(Nm,N,A,B,W,Matz,Z,Fv1,Fv2,Ierr)
 
   !
   INTEGER N, Nm, Ierr, Matz
-  REAL A(Nm,*), B(Nm,*), W(*), Z(Nm,*), Fv1(*), Fv2(*)
+  REAL(SP) A(Nm,*), B(Nm,*), W(*), Z(Nm,*), Fv1(*), Fv2(*)
   !
   !* FIRST EXECUTABLE STATEMENT  RSGBA
   IF ( N<=Nm ) THEN

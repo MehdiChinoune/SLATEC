@@ -40,7 +40,7 @@ SUBROUTINE TEVLC(N,D,E2,Ierr)
   !***
   ! **See also:**  CBLKTR
   !***
-  ! **References:**  C. H. Reinsch, Eigenvalues of a real, symmetric, tri-
+  ! **References:**  C. H. Reinsch, Eigenvalues of a REAL(SP), symmetric, tri-
   !                 diagonal matrix, Algorithm 464, Communications of the
   !                 ACM 16, 11 (November 1973), pp. 689.
   !***
@@ -56,9 +56,9 @@ SUBROUTINE TEVLC(N,D,E2,Ierr)
   !   920528  DESCRIPTION revised and REFERENCES section added.  (WRB)
   USE CCBLK, ONLY : eps_com
   INTEGER :: N, Ierr
-  REAL :: D(N), E2(N)
+  REAL(SP) :: D(N), E2(N)
   INTEGER :: nhalf, ntop, i, j, l, m, ii, l1, mml
-  REAL :: dhold, b, c, f, g, h, p, r, s
+  REAL(SP) :: dhold, b, c, f, g, h, p, r, s
   !* FIRST EXECUTABLE STATEMENT  TEVLC
   Ierr = 0
   IF ( N/=1 ) THEN

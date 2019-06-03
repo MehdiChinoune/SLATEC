@@ -219,18 +219,18 @@ SUBROUTINE DPCHIC(Ic,Vc,Switch,N,X,F,D,Incfd,Wk,Nwk,Ierr)
   !        b. Change DPCHCE to PCHCE wherever it occurs,
   !        c. Change DPCHCI to PCHCI wherever it occurs,
   !        d. Change DPCHCS to PCHCS wherever it occurs,
-  !        e. Change the double precision declarations to real, and
+  !        e. Change the double precision declarations to REAL(SP), and
   !        f. Change the constant  ZERO  to single precision.
   !
   !  DECLARE ARGUMENTS.
   !
   INTEGER Ic(2), N, Incfd, Nwk, Ierr
-  REAL(8) :: Vc(2), Switch, X(N), F(Incfd,N), D(Incfd,N), Wk(Nwk)
+  REAL(DP) :: Vc(2), Switch, X(N), F(Incfd,N), D(Incfd,N), Wk(Nwk)
   !
   !  DECLARE LOCAL VARIABLES.
   !
   INTEGER i, ibeg, iend, nless1
-  REAL(8), PARAMETER :: zero = 0.D0
+  REAL(DP), PARAMETER :: zero = 0.D0
   !
   !  VALIDITY-CHECK ARGUMENTS.
   !

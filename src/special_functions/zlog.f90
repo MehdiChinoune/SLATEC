@@ -23,9 +23,9 @@ SUBROUTINE ZLOG(Ar,Ai,Br,Bi,Ierr)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
 
-  REAL(8) :: Ar, Ai, Br, Bi, zm, dtheta
+  REAL(DP) :: Ar, Ai, Br, Bi, zm, dtheta
   INTEGER Ierr
-  REAL(8), PARAMETER :: dpi = 3.141592653589793238462643383D+0, &
+  REAL(DP), PARAMETER :: dpi = 3.141592653589793238462643383D+0, &
     dhpi = 1.570796326794896619231321696D+0
   !* FIRST EXECUTABLE STATEMENT  ZLOG
   Ierr = 0

@@ -73,11 +73,11 @@ SUBROUTINE CTRCO(T,Ldt,N,Rcond,Z,Job)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER Ldt, N, Job
-  COMPLEX T(Ldt,*), Z(*)
-  REAL Rcond
+  COMPLEX(SP) T(Ldt,*), Z(*)
+  REAL(SP) Rcond
   !
-  COMPLEX w, wk, wkm, ek
-  REAL tnorm, ynorm, s, sm
+  COMPLEX(SP) w, wk, wkm, ek
+  REAL(SP) tnorm, ynorm, s, sm
   INTEGER i1, j, j1, j2, k, kk, l
   LOGICAL lower
   !

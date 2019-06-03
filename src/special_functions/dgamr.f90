@@ -1,5 +1,5 @@
 !** DGAMR
-REAL(8) FUNCTION DGAMR(X)
+REAL(DP) FUNCTION DGAMR(X)
   !>
   !  Compute the reciprocal of the Gamma function.
   !***
@@ -31,7 +31,7 @@ REAL(8) FUNCTION DGAMR(X)
   !   900727  Added EXTERNAL statement.  (WRB)
   USE service, ONLY : XGETF, XSETF, XERCLR
   INTEGER irold
-  REAL(8) :: X, alngx, sgngx
+  REAL(DP) :: X, alngx, sgngx
   !* FIRST EXECUTABLE STATEMENT  DGAMR
   DGAMR = 0.0D0
   IF ( X<=0.0D0.AND.AINT(X)==X ) RETURN

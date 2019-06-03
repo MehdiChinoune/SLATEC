@@ -35,7 +35,7 @@ SUBROUTINE CBESY(Z,Fnu,Kode,N,Cy,Nz,Cwrk,Ierr)
   !
   !         Input
   !           Z      - Nonzero argument of type COMPLEX
-  !           FNU    - Initial order of type REAL, FNU>=0
+  !           FNU    - Initial order of type REAL(SP), FNU>=0
   !           KODE   - A parameter to indicate the scaling option
   !                    KODE=1  returns
   !                            CY(L)=Y(FNU+L-1,Z), L=1,...,N
@@ -161,8 +161,8 @@ SUBROUTINE CBESY(Z,Fnu,Kode,N,Cy,Nz,Cwrk,Ierr)
   USE service, ONLY : R1MACH, I1MACH
   !
   INTEGER i, Ierr, k, Kode, k1, k2, N, Nz, nz1, nz2
-  COMPLEX Cwrk(N), Cy(N), c1, c2, ex, hci, Z, zu, zv
-  REAL elim, ey, Fnu, r1, r2, tay, xx, yy, r1m5, ascle, &
+  COMPLEX(SP) Cwrk(N), Cy(N), c1, c2, ex, hci, Z, zu, zv
+  REAL(SP) elim, ey, Fnu, r1, r2, tay, xx, yy, r1m5, ascle, &
     rtol, atol, tol, aa, bb
   !* FIRST EXECUTABLE STATEMENT  CBESY
   xx = REAL(Z)

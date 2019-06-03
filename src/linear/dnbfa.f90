@@ -121,10 +121,10 @@ SUBROUTINE DNBFA(Abe,Lda,N,Ml,Mu,Ipvt,Info)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER :: Lda, N, Ml, Mu, Ipvt(N), Info
-  REAL(8) :: Abe(Lda,2*Ml+Mu+1)
+  REAL(DP) :: Abe(Lda,2*Ml+Mu+1)
   !
   INTEGER ml1, mb, m, n1, ldb, i, j, k, l, lm, lm1, lm2, mp
-  REAL(8) :: t
+  REAL(DP) :: t
   !* FIRST EXECUTABLE STATEMENT  DNBFA
   ml1 = Ml + 1
   mb = Ml + Mu

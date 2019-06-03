@@ -1,6 +1,6 @@
 
-REAL FUNCTION CABS1(zdum)
-  COMPLEX, INTENT(IN) :: zdum
+REAL(SP) FUNCTION CABS1(zdum)
+  COMPLEX(SP), INTENT(IN) :: zdum
 
   CABS1 = ABS(REAL(zdum)) + ABS(AIMAG(zdum))
 

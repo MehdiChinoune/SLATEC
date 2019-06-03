@@ -39,14 +39,14 @@ SUBROUTINE DPLPFE(Mrelas,Nvars,Lmx,Lbm,Ienter,Ibasis,Imat,Ibrc,Ipr,Iwr,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   INTEGER :: Ienter, Lbm, Lmx, Mrelas, Nvars
-  REAL(8) :: Dirnrm, Dulnrm, Eps, Erdnrm, Gg
+  REAL(DP) :: Dirnrm, Dulnrm, Eps, Erdnrm, Gg
   LOGICAL :: Found
   INTEGER :: Ibasis(Nvars+Mrelas), Imat(Lmx), Ibrc(Lbm,2), Ipr(2*Mrelas), &
     Iwr(8*Mrelas), Ind(Nvars+Mrelas), Ibb(Nvars+Mrelas)
-  REAL(8) :: Amat(Lmx), Basmat(Lbm), Csc(Nvars), Wr(Mrelas), Ww(Mrelas), &
+  REAL(DP) :: Amat(Lmx), Basmat(Lbm), Csc(Nvars), Wr(Mrelas), Ww(Mrelas), &
     Bl(Nvars+Mrelas), Bu(Nvars+Mrelas), Rz(Nvars+Mrelas), Rg(Nvars+Mrelas), &
     Colnrm(Nvars), Duals(Nvars+Mrelas)
-  REAL(8) :: cnorm, one, ratio, rcost, rmax, zero
+  REAL(DP) :: cnorm, one, ratio, rcost, rmax, zero
   INTEGER :: i, ihi, il1, ilow, ipage, iu1, j, key, lpg, n20002, n20050
   LOGICAL :: trans
   !* FIRST EXECUTABLE STATEMENT  DPLPFE

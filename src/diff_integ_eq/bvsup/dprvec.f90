@@ -1,5 +1,5 @@
 !** DPRVEC
-REAL(8) FUNCTION DPRVEC(M,U,V)
+REAL(DP) FUNCTION DPRVEC(M,U,V)
   !>
   !  Subsidiary to DBVSUP
   !***
@@ -28,7 +28,7 @@ REAL(8) FUNCTION DPRVEC(M,U,V)
   !   910722  Updated AUTHOR section.  (ALS)
   !
   INTEGER :: M
-  REAL(8) :: U(M), V(M)
+  REAL(DP) :: U(M), V(M)
   INTEGER :: n
   !* FIRST EXECUTABLE STATEMENT  DPRVEC
   n = M/2

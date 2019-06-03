@@ -26,7 +26,7 @@ SUBROUTINE ZBKNU(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol,Elim,Alim)
   USE service, ONLY : D1MACH, I1MACH
   !
   INTEGER i, iflag, inu, k, kflag, kk, Kode, koded, N, Nz, idum, j, ic, inub, nw
-  REAL(8) :: aa, ak, Alim, ascle, a1, a2, bb, bk, bry(3), caz, cbi, cbr, cchi, &
+  REAL(DP) :: aa, ak, Alim, ascle, a1, a2, bb, bk, bry(3), caz, cbi, cbr, cchi, &
     cchr, cki, ckr, coefi, coefr, crscr, csclr, cshi, cshr, csi, csr, csrr(3), &
     cssr(3), czi, czr, dnu, dnu2, Elim, etest, fc, fhs, fi, fk, fks, fmui, fmur, &
     Fnu, fr, g1, g2, pi, pr, pti, ptr, p1i, p1r, p2i, p2m, p2r, qi, qr, rak, &
@@ -36,12 +36,12 @@ SUBROUTINE ZBKNU(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol,Elim,Alim)
   !     COMPLEX CK,P,Q,COEF,P1,P2,CBK,PT,CZERO,CONE,CTWO,ST,EZ,CS,DK
   !
   INTEGER, PARAMETER :: kmax = 30
-  REAL(8), PARAMETER :: czeror = 0.0D0, czeroi = 0.0D0, coner = 1.0D0, &
+  REAL(DP), PARAMETER :: czeror = 0.0D0, czeroi = 0.0D0, coner = 1.0D0, &
     conei = 0.0D0, ctwor = 2.0D0, r1 = 2.0D0
-  REAL(8), PARAMETER :: dpi = 3.14159265358979324D0, rthpi= 1.25331413731550025D0, &
+  REAL(DP), PARAMETER :: dpi = 3.14159265358979324D0, rthpi= 1.25331413731550025D0, &
     spi = 1.90985931710274403D0, hpi = 1.57079632679489662D0, &
     fpi = 1.89769999331517738D0, tth = 6.66666666666666666D-01
-  REAL(8), PARAMETER :: cc(8) = [ 5.77215664901532861D-01, -4.20026350340952355D-02, &
+  REAL(DP), PARAMETER :: cc(8) = [ 5.77215664901532861D-01, -4.20026350340952355D-02, &
     -4.21977345555443367D-02, 7.21894324666309954D-03,-2.15241674114950973D-04, &
     -2.01348547807882387D-05, 1.13302723198169588D-06, 6.11609510448141582D-09 ]
   !* FIRST EXECUTABLE STATEMENT  ZBKNU

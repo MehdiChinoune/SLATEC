@@ -79,10 +79,10 @@ SUBROUTINE CTRSL(T,Ldt,N,B,Job,Info)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER Ldt, N, Job, Info
-  COMPLEX T(Ldt,*), B(*)
+  COMPLEX(SP) T(Ldt,*), B(*)
   !
   !
-  COMPLEX temp
+  COMPLEX(SP) temp
   INTEGER case, j, jj
   !* FIRST EXECUTABLE STATEMENT  CTRSL
   !

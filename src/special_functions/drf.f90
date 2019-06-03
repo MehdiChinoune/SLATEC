@@ -1,5 +1,5 @@
 !** DRF
-REAL(8) FUNCTION DRF(X,Y,Z,Ier)
+REAL(DP) FUNCTION DRF(X,Y,Z,Ier)
   !>
   !  Compute the incomplete or complete elliptic integral of the
   !            1st kind.  For X, Y, and Z non-negative and at most one of
@@ -258,13 +258,13 @@ REAL(8) FUNCTION DRF(X,Y,Z,Ier)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   USE service, ONLY : XERMSG, D1MACH
   INTEGER :: Ier
-  REAL(8) :: X, Y, Z
-  REAL(8) :: epslon, e2, e3, lamda, mu, s, xn, xndev, xnroot, yn, yndev, ynroot, &
+  REAL(DP) :: X, Y, Z
+  REAL(DP) :: epslon, e2, e3, lamda, mu, s, xn, xndev, xnroot, yn, yndev, ynroot, &
     zn, zndev, znroot
   CHARACTER(16) :: xern3, xern4, xern5, xern6
-  REAL(8), PARAMETER :: errtol = (4.0D0*D1MACH(3))**(1.0D0/6.0D0), &
+  REAL(DP), PARAMETER :: errtol = (4.0D0*D1MACH(3))**(1.0D0/6.0D0), &
     lolim = 5.0D0*D1MACH(1), uplim = D1MACH(2)/5.0D0
-  REAL(8), PARAMETER :: c1 = 1.0D0/24.0D0, c2 = 3.0D0/44.0D0, c3 = 1.0D0/14.0D0
+  REAL(DP), PARAMETER :: c1 = 1.0D0/24.0D0, c2 = 3.0D0/44.0D0, c3 = 1.0D0/14.0D0
   !
   !* FIRST EXECUTABLE STATEMENT  DRF
   !

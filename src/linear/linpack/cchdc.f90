@@ -106,11 +106,11 @@ SUBROUTINE CCHDC(A,Lda,P,Work,Jpvt,Job,Info)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER Lda, P, Jpvt(*), Job, Info
-  COMPLEX A(Lda,*), Work(*)
+  COMPLEX(SP) A(Lda,*), Work(*)
   !
   INTEGER pu, pl, plp1, j, jp, jt, k, kb, km1, kp1, l, maxl
-  COMPLEX temp
-  REAL maxdia
+  COMPLEX(SP) temp
+  REAL(SP) maxdia
   LOGICAL swapk, negk
   !* FIRST EXECUTABLE STATEMENT  CCHDC
   pl = 1

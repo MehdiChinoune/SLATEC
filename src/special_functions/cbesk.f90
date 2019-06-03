@@ -34,7 +34,7 @@ SUBROUTINE CBESK(Z,Fnu,Kode,N,Cy,Nz,Ierr)
   !
   !         Input
   !           Z      - Nonzero argument of type COMPLEX
-  !           FNU    - Initial order of type REAL, FNU>=0
+  !           FNU    - Initial order of type REAL(SP), FNU>=0
   !           KODE   - A parameter to indicate the scaling option
   !                    KODE=1  returns
   !                            CY(L)=K(FNU+L-1,Z), L=1,...,N
@@ -160,8 +160,8 @@ SUBROUTINE CBESK(Z,Fnu,Kode,N,Cy,Nz,Ierr)
   USE service, ONLY : R1MACH, I1MACH
   !
   INTEGER Ierr, k, Kode, k1, k2, mr, N, nn, nuf, nw, Nz
-  COMPLEX Cy(N), Z
-  REAL aa, alim, aln, arg, az, dig, elim, fn, Fnu, fnul, rl, &
+  COMPLEX(SP) Cy(N), Z
+  REAL(SP) aa, alim, aln, arg, az, dig, elim, fn, Fnu, fnul, rl, &
     r1m5, tol, ufl, xx, yy, bb
   !* FIRST EXECUTABLE STATEMENT  CBESK
   Ierr = 0

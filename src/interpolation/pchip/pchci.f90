@@ -96,16 +96,16 @@ SUBROUTINE PCHCI(N,H,Slope,D,Incfd)
   !  DECLARE ARGUMENTS.
   !
   INTEGER N, Incfd
-  REAL H(N), Slope(N), D(Incfd,N)
+  REAL(SP) H(N), Slope(N), D(Incfd,N)
   !
   !  DECLARE LOCAL VARIABLES.
   !
   INTEGER i, nless1
-  REAL del1, del2, dmax, dmin, drat1, drat2, hsum, hsumt3, w1, w2
+  REAL(SP) del1, del2, dmax, dmin, drat1, drat2, hsum, hsumt3, w1, w2
   !
   !  INITIALIZE.
   !
-  REAL, PARAMETER :: zero = 0., three = 3.
+  REAL(SP), PARAMETER :: zero = 0., three = 3.
   !* FIRST EXECUTABLE STATEMENT  PCHCI
   nless1 = N - 1
   del1 = Slope(1)

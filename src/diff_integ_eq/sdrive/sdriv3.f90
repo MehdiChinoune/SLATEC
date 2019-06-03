@@ -730,40 +730,45 @@ SUBROUTINE SDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
   USE service, ONLY : XERMSG, R1MACH
   USE linear, ONLY : SGBSL, SGESL, SGBFA, SGEFA
   INTERFACE
-    REAL FUNCTION G(N,T,Y,Iroot)
+    REAL(SP) FUNCTION G(N,T,Y,Iroot)
+      IMPORT SP
       INTEGER :: N, Iroot
-      REAL :: T, Y(N)
+      REAL(SP) :: T, Y(N)
     END FUNCTION G
     SUBROUTINE F(N,T,Y,Ydot)
+      IMPORT SP
       INTEGER :: N
-      REAL :: T, Y(:), Ydot(:)
+      REAL(SP) :: T, Y(:), Ydot(:)
     END SUBROUTINE F
     SUBROUTINE JACOBN(N,T,Y,Dfdy,Matdim,Ml,Mu)
+      IMPORT SP
       INTEGER :: N, Matdim, Ml, Mu
-      REAL :: T, Y(N), Dfdy(Matdim,N)
+      REAL(SP) :: T, Y(N), Dfdy(Matdim,N)
     END SUBROUTINE JACOBN
     SUBROUTINE USERS(Y,Yh,Ywt,Save1,Save2,T,H,El,Impl,N,Nde,Iflag)
+      IMPORT SP
       INTEGER :: Impl, N, Nde, iflag
-      REAL :: T, H, El
-      REAL :: Y(N), Yh(N,13), Ywt(N), Save1(N), Save2(N)
+      REAL(SP) :: T, H, El
+      REAL(SP) :: Y(N), Yh(N,13), Ywt(N), Save1(N), Save2(N)
     END SUBROUTINE USERS
     SUBROUTINE FA(N,T,Y,A,Matdim,Ml,Mu,Nde)
+      IMPORT SP
       INTEGER :: N, Matdim, Ml, Mu, Nde
-      REAL :: T, Y(N), A(:,:)
+      REAL(SP) :: T, Y(N), A(:,:)
     END SUBROUTINE FA
   END INTERFACE
   INTEGER :: Ierflg, Ierror, Impl, Leniw, Lenw, Mint, Miter, Ml, Mu, Mxord, &
     Mxstep, N, Nde, Nroot, Nstate, Ntask, Iwork(Leniw+N)
-  REAL :: Eps, Hmax, T, Tout
-  REAL :: Ewt(N), Work(Lenw+Leniw), Y(N+1)
+  REAL(SP) :: Eps, Hmax, T, Tout
+  REAL(SP) :: Ewt(N), Work(Lenw+Leniw), Y(N+1)
   INTEGER :: i, ia, idfdy, ifac, iflag, ignow, imxerr, info, iroot, isave1, isave2, &
     itroot,iywt, j, jstate, jtroot, lenchk, liwchk, matdim, maxord, ndecom, npar, nstepl
-  REAL :: ae, big, glast, gnow, h, hsign, hused, re, sizee, summ, tlast, troot, uround
-  REAL, ALLOCATABLE :: a(:,:)
+  REAL(SP) :: ae, big, glast, gnow, h, hsign, hused, re, sizee, summ, tlast, troot, uround
+  REAL(SP), ALLOCATABLE :: a(:,:)
   LOGICAL :: convrg
   CHARACTER(8) :: intgr1, intgr2
   CHARACTER(16) :: rl1, rl2
-  REAL, PARAMETER :: NROUND = 20.E0
+  REAL(SP), PARAMETER :: NROUND = 20.E0
   INTEGER, PARAMETER :: IAVGH = 1, IHUSED = 2, IAVGRD = 3, IEL = 4, IH = 160, &
     IHMAX = 161, IHOLD = 162, IHSIGN = 163, IRC = 164, IRMAX = 165, IT = 166, &
     ITOUT = 167, ITQ = 168, ITREND = 204, IMACH1 = 205, IMACH4 = 206, IYH = 251, &

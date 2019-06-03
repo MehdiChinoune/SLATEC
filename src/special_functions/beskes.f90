@@ -41,10 +41,10 @@ SUBROUTINE BESKES(Xnu,X,Nin,Bke)
   !           (WRB)
   USE service, ONLY : XERMSG, R1MACH
   INTEGER :: Nin
-  REAL :: Bke(Nin), X, Xnu
+  REAL(SP) :: Bke(Nin), X, Xnu
   INTEGER :: i, iswtch, n
-  REAL :: bknu1, direct, v, vend, vincr
-  REAL, PARAMETER :: alnbig = LOG(R1MACH(2))
+  REAL(SP) :: bknu1, direct, v, vend, vincr
+  REAL(SP), PARAMETER :: alnbig = LOG(R1MACH(2))
   !* FIRST EXECUTABLE STATEMENT  BESKES
   !
   v = ABS(Xnu)

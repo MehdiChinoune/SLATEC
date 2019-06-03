@@ -85,7 +85,7 @@ SUBROUTINE SSIEV(A,Lda,N,E,Work,Job,Info)
   !           (WRB)
   USE service, ONLY : XERMSG
   INTEGER :: Info, Job, Lda, N
-  REAL :: A(Lda,N), E(N), Work(2*N)
+  REAL(SP) :: A(Lda,N), E(N), Work(2*N)
   INTEGER i, j
   !* FIRST EXECUTABLE STATEMENT  SSIEV
   IF ( N>Lda ) CALL XERMSG('SSIEV','N .GT. LDA.',1,1)

@@ -1,5 +1,5 @@
 !** R9GMIC
-REAL FUNCTION R9GMIC(A,X,Alx)
+REAL(SP) FUNCTION R9GMIC(A,X,Alx)
   !>
   !  Compute the complementary incomplete Gamma function for A
   !            near a negative integer and for small X.
@@ -33,11 +33,11 @@ REAL FUNCTION R9GMIC(A,X,Alx)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
   USE service, ONLY : XERMSG, R1MACH
-  REAL :: A, Alx, X
+  REAL(SP) :: A, Alx, X
   INTEGER :: k, m, ma, mm1
-  REAL :: alng, fk, fkp1, fm, s, sgng, t, te
-  REAL, PARAMETER :: euler = .5772156649015329E0
-  REAL, PARAMETER :: eps = 0.5*R1MACH(3), bot = LOG(R1MACH(1))
+  REAL(SP) :: alng, fk, fkp1, fm, s, sgng, t, te
+  REAL(SP), PARAMETER :: euler = .5772156649015329E0
+  REAL(SP), PARAMETER :: eps = 0.5*R1MACH(3), bot = LOG(R1MACH(1))
   !* FIRST EXECUTABLE STATEMENT  R9GMIC
   !
   IF ( A>0.0 ) CALL XERMSG('R9GMIC','A MUST BE NEAR A NEGATIVE INTEGER',2,2)

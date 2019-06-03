@@ -1550,18 +1550,19 @@ SUBROUTINE DSPLP(DUSRMT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   USE service, ONLY : XERMSG
   INTERFACE
     SUBROUTINE DUSRMT(I,J,Aij,Indcat,Dattrv,Iflag)
+      IMPORT DP
       INTEGER :: I, J, indcat, iflag(10)
-      REAL(8) :: Dattrv(:), Aij
+      REAL(DP) :: Dattrv(:), Aij
     END SUBROUTINE DUSRMT
   END INTERFACE
   INTEGER :: Info, Liw, Lw, Mrelas, Nvars
   INTEGER :: Ibasis(Nvars+Mrelas), Ind(Nvars+Mrelas), Iwork(Liw)
-  REAL(8) :: Bl(Nvars+Mrelas), Bu(Nvars+Mrelas), Costs(Nvars), Dattrv(:), &
+  REAL(DP) :: Bl(Nvars+Mrelas), Bu(Nvars+Mrelas), Costs(Nvars), Dattrv(:), &
     Duals(Nvars+Mrelas), Prgopt(:), Primal(Nvars+Mrelas), Work(Lw)
   INTEGER :: iadbig, ictmax, ictopt, iopt, key, lamat, last, lbasma, lbm, lcolnr, &
     lcsc, lerd, lerp, libb, librc, limat, lipr, liwork, liwr, lmx, lrg, lrhs, &
     lrprim, lrz, lwork, lwr, lww, nerr, next
-  REAL(8) :: zero
+  REAL(DP) :: zero
   CHARACTER(8) :: xern1, xern2
   !* FIRST EXECUTABLE STATEMENT  DSPLP
   zero = 0.D0

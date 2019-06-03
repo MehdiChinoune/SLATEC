@@ -22,12 +22,12 @@ SUBROUTINE HWSCS1(Intl,Ts,Tf,M,Mbdcnd,Bdts,Bdtf,Rs,Rf,N,Nbdcnd,Bdrs,Bdrf,&
   !   900402  Added TYPE section.  (WRB)
 
   INTEGER :: Idimf, Intl, M, Mbdcnd, N, Nbdcnd
-  REAL :: Elmbda, Pertrb, Rf, Rs, Tf, Ts
-  REAL :: Am(M+1), An(N+1), Bdrf(M+1), Bdrs(M+1), Bdtf(N+1), Bdts(N+1), Bm(M+1), &
+  REAL(SP) :: Elmbda, Pertrb, Rf, Rs, Tf, Ts
+  REAL(SP) :: Am(M+1), An(N+1), Bdrf(M+1), Bdrs(M+1), Bdtf(N+1), Bdts(N+1), Bm(M+1), &
     Bmh(:), Bn(N+1), Cm(M+1), Cn(N+1), F(Idimf,N+1), R(N+1), S(N+1), Sint(M+1), W(:)
   INTEGER :: i, ictr, ierror, iflg, ising, itf, itfm, its, itsp, j, jrf, jrfm, &
     jrs, jrsp, l, mp, mp1, munk, np, np1, nunk
-  REAL :: ar, at, cr, ct, czr, dr, dr2, dth, hdr, hdth, hne, r2, rf2, rs2, rsq, &
+  REAL(SP) :: ar, at, cr, ct, czr, dr, dr2, dth, hdr, hdth, hne, r2, rf2, rs2, rsq, &
     sdts, summ, t1, tdr, tdt, theta, wrf, wrs, wrz, wtf, wtnm, wts, xp, xps, &
     yhld, yph, yps
   !* FIRST EXECUTABLE STATEMENT  HWSCS1

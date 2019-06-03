@@ -36,7 +36,7 @@ SUBROUTINE DBKSOL(N,A,X)
   !   910722  Updated AUTHOR section.  (ALS)
   !
   INTEGER :: N
-  REAL(8) :: A(N*(N+1)), X(N)
+  REAL(DP) :: A(N*(N+1)), X(N)
   INTEGER :: j, k, m, nm1
   !
   !* FIRST EXECUTABLE STATEMENT  DBKSOL

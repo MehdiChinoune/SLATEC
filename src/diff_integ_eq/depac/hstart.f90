@@ -143,14 +143,15 @@ SUBROUTINE HSTART(F,Neq,A,B,Y,Yprime,Etol,Morder,Small,Big,Spy,Pv,Yp,Sf,H)
 
   INTERFACE
     SUBROUTINE F(X,U,Uprime)
-      REAL :: X
-      REAL :: U(:), Uprime(:)
+      IMPORT SP
+      REAL(SP) :: X
+      REAL(SP) :: U(:), Uprime(:)
     END SUBROUTINE F
   END INTERFACE
   INTEGER :: Morder, Neq
-  REAL :: A, B, Big, H, Small
-  REAL :: Etol(Neq), Pv(Neq), Sf(Neq), Spy(Neq), Y(Neq), Yp(Neq), Yprime(Neq)
-  REAL :: absdx, da, delf, delx, delxb, dely, dfdub, dfdxb, dx, dy, fbnd, power, &
+  REAL(SP) :: A, B, Big, H, Small
+  REAL(SP) :: Etol(Neq), Pv(Neq), Sf(Neq), Spy(Neq), Y(Neq), Yp(Neq), Yprime(Neq)
+  REAL(SP) :: absdx, da, delf, delx, delxb, dely, dfdub, dfdxb, dx, dy, fbnd, power, &
     relper, srydpb, wtj, ydpb, ynorm, ypnorm
   INTEGER :: icase, j, k, lk
   !

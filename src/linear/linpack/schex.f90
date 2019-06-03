@@ -137,11 +137,11 @@ SUBROUTINE SCHEX(R,Ldr,P,K,L,Z,Ldz,Nz,C,S,Job)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER Ldr, P, K, L, Ldz, Nz, Job
-  REAL R(Ldr,*), Z(Ldz,*), S(*)
-  REAL C(*)
+  REAL(SP) R(Ldr,*), Z(Ldz,*), S(*)
+  REAL(SP) C(*)
   !
   INTEGER i, ii, il, iu, j, jj, km1, kp1, lmk, lm1
-  REAL t
+  REAL(SP) t
   !
   !     INITIALIZE
   !

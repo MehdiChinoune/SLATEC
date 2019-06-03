@@ -147,18 +147,18 @@ SUBROUTINE CHEMM(Side,Uplo,M,N,Alpha,A,Lda,B,Ldb,Beta,C,Ldc)
   !     .. Scalar Arguments ..
   CHARACTER :: Side, Uplo
   INTEGER M, N, Lda, Ldb, Ldc
-  COMPLEX Alpha, Beta
+  COMPLEX(SP) Alpha, Beta
   !     .. Array Arguments ..
-  COMPLEX A(Lda,*), B(Ldb,*), C(Ldc,*)
+  COMPLEX(SP) A(Lda,*), B(Ldb,*), C(Ldc,*)
   !     .. Intrinsic Functions ..
   INTRINSIC CONJG, MAX, REAL
   !     .. Local Scalars ..
   LOGICAL upper
   INTEGER i, info, j, k, nrowa
-  COMPLEX temp1, temp2
+  COMPLEX(SP) temp1, temp2
   !     .. Parameters ..
-  COMPLEX, PARAMETER :: ONE = (1.0E+0,0.0E+0)
-  COMPLEX, PARAMETER :: ZERO = (0.0E+0,0.0E+0)
+  COMPLEX(SP), PARAMETER :: ONE = (1.0E+0,0.0E+0)
+  COMPLEX(SP), PARAMETER :: ZERO = (0.0E+0,0.0E+0)
   !* FIRST EXECUTABLE STATEMENT  CHEMM
   !
   !     Set NROWA as the number of rows of A.

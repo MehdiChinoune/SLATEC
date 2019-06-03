@@ -92,8 +92,8 @@ SUBROUTINE COMQR(Nm,N,Low,Igh,Hr,Hi,Wr,Wi,Ierr)
 
   !
   INTEGER i, j, l, N, en, ll, Nm, Igh, itn, its, Low, lp1, enm1, Ierr
-  REAL Hr(Nm,*), Hi(Nm,*), Wr(*), Wi(*)
-  REAL si, sr, ti, tr, xi, xr, yi, yr, zzi, zzr, norm, s1, s2
+  REAL(SP) Hr(Nm,*), Hi(Nm,*), Wr(*), Wi(*)
+  REAL(SP) si, sr, ti, tr, xi, xr, yi, yr, zzi, zzr, norm, s1, s2
   !
   !* FIRST EXECUTABLE STATEMENT  COMQR
   Ierr = 0

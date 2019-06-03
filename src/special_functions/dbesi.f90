@@ -99,12 +99,12 @@ SUBROUTINE DBESI(X,Alpha,Kode,N,Y,Nz)
   USE service, ONLY : XERMSG, D1MACH, I1MACH
   !
   INTEGER :: Kode, N, Nz
-  REAL(8) :: Alpha, X, Y(N)
+  REAL(DP) :: Alpha, X, Y(N)
   INTEGER :: i, ialp, in, is, i1, k, kk, km, kt, nn, ns
-  REAL(8) :: ain, ak, akm, ans, ap, arg, atol, tolln, dfn, dtm, dx, earg, &
+  REAL(DP) :: ain, ak, akm, ans, ap, arg, atol, tolln, dfn, dtm, dx, earg, &
     elim, etx, flgik, fn, fnf, fni, fnp1, fnu, gln, ra, s, sx, sxo2, s1, s2, t, &
     ta, tb, temp(3), tfn, tm, tol, trx, t2, xo2, xo2l, z
-  REAL(8), PARAMETER :: rttpi = 3.98942280401433D-01
+  REAL(DP), PARAMETER :: rttpi = 3.98942280401433D-01
   INTEGER, PARAMETER :: inlim = 80
   !* FIRST EXECUTABLE STATEMENT  DBESI
   Nz = 0

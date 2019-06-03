@@ -57,8 +57,8 @@ SUBROUTINE RPZERO(N,A,R,T,Iflg,S)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
   INTEGER :: Iflg, N
-  REAL :: A(N+1), S(N)
-  COMPLEX :: R(N), T(6*N+6)
+  REAL(SP) :: A(N+1), S(N)
+  COMPLEX(SP) :: R(N), T(6*N+6)
   INTEGER :: i, n1
   !* FIRST EXECUTABLE STATEMENT  RPZERO
   n1 = N + 1

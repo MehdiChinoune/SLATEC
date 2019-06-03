@@ -1,5 +1,5 @@
 !** SASUM
-REAL FUNCTION SASUM(N,Sx,Incx)
+REAL(SP) FUNCTION SASUM(N,Sx,Incx)
   !>
   !  Compute the sum of the magnitudes of the elements of a
   !            vector.
@@ -51,7 +51,7 @@ REAL FUNCTION SASUM(N,Sx,Incx)
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
-  REAL Sx(*)
+  REAL(SP) Sx(*)
   INTEGER i, Incx, ix, m, mp1, N
   !* FIRST EXECUTABLE STATEMENT  SASUM
   SASUM = 0.0E0

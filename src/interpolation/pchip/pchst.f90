@@ -1,5 +1,5 @@
 !** PCHST
-REAL FUNCTION PCHST(Arg1,Arg2)
+REAL(SP) FUNCTION PCHST(Arg1,Arg2)
   !>
   !  PCHIP Sign-Testing Routine
   !***
@@ -44,11 +44,11 @@ REAL FUNCTION PCHST(Arg1,Arg2)
   !
   !  DECLARE ARGUMENTS.
   !
-  REAL Arg1, Arg2
+  REAL(SP) Arg1, Arg2
   !
   !  DECLARE LOCAL VARIABLES.
   !
-  REAL, PARAMETER :: zero = 0., one = 1.
+  REAL(SP), PARAMETER :: zero = 0., one = 1.
   !
   !  PERFORM THE TEST.
   !

@@ -141,20 +141,20 @@ SUBROUTINE DPCHIM(N,X,F,D,Incfd,Ierr)
   !        b. Change DPCHST to PCHST wherever it occurs,
   !        c. Change all references to the Fortran intrinsics to their
   !           single precision equivalents,
-  !        d. Change the double precision declarations to real, and
+  !        d. Change the double precision declarations to REAL(SP), and
   !        e. Change the constants ZERO and THREE to single precision.
   !
   !  DECLARE ARGUMENTS.
   !
   INTEGER N, Incfd, Ierr
-  REAL(8) :: X(N), F(Incfd,N), D(Incfd,N)
+  REAL(DP) :: X(N), F(Incfd,N), D(Incfd,N)
   !
   !  DECLARE LOCAL VARIABLES.
   !
   INTEGER i, nless1
-  REAL(8) :: del1, del2, dmax, dmin, drat1, drat2, dsave, h1, &
+  REAL(DP) :: del1, del2, dmax, dmin, drat1, drat2, dsave, h1, &
     h2, hsum, hsumt3, w1, w2
-  REAL(8), PARAMETER :: zero = 0.D0, three = 3.D0
+  REAL(DP), PARAMETER :: zero = 0.D0, three = 3.D0
   !
   !  VALIDITY-CHECK ARGUMENTS.
   !

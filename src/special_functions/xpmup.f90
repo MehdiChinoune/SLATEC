@@ -29,7 +29,7 @@ SUBROUTINE XPMUP(Nu1,Nu2,Mu1,Mu2,Pqa,Ipqa,Ierror)
   !   920127  Revised PURPOSE section of prologue.  (DWL)
 
   INTEGER i, Ierror, Ipqa(*), iprod, j, k, l, mu, Mu1, Mu2, n
-  REAL dmu, nu, Nu1, Nu2, Pqa(*), prod
+  REAL(SP) dmu, nu, Nu1, Nu2, Pqa(*), prod
   !* FIRST EXECUTABLE STATEMENT  XPMUP
   Ierror = 0
   nu = Nu1

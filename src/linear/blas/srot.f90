@@ -57,8 +57,8 @@ SUBROUTINE SROT(N,Sx,Incx,Sy,Incy,Sc,Ss)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER i, Incx, Incy, kx, ky, N, nsteps
-  REAL Sx(*), Sy(*), Sc, Ss, w, z
-  REAL, PARAMETER :: zero = 0.0E0, one = 1.0E0
+  REAL(SP) Sx(*), Sy(*), Sc, Ss, w, z
+  REAL(SP), PARAMETER :: zero = 0.0E0, one = 1.0E0
   !* FIRST EXECUTABLE STATEMENT  SROT
   IF ( .NOT.(N<=0.OR.(Ss==zero.AND.Sc==one)) ) THEN
     IF ( Incx/=Incy.OR.Incx<=0 ) THEN

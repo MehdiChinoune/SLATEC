@@ -198,10 +198,10 @@ SUBROUTINE DXSET(Irad,Nradpl,Dzero,Nbits,Ierror)
     nlg102_com, rad2l_com, radixl_com, lg102_com, radixx_com
   USE service, ONLY : XERMSG, I1MACH
   INTEGER :: Ierror, Irad, Nradpl, Nbits
-  REAL(8) :: Dzero
+  REAL(DP) :: Dzero
   INTEGER :: i, ic, ii, imaxex, iminex, iradx, it, j, k, kk, lg102x, log2r, lx, &
     nb, nbitsx, np1, nrdplc, lgtemp(20)
-  REAL(8) :: dzerox
+  REAL(DP) :: dzerox
   !
   !   LOG102 CONTAINS THE FIRST 60 DIGITS OF LOG10(2) FOR USE IN
   ! CONVERSION OF EXTENDED-RANGE NUMBERS TO BASE 10 .

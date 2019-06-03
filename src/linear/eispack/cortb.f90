@@ -86,9 +86,9 @@ SUBROUTINE CORTB(Nm,Low,Igh,Ar,Ai,Ortr,Orti,M,Zr,Zi)
 
   !
   INTEGER i, j, M, la, mm, mp, Nm, Igh, kp1, Low, mp1
-  REAL Ar(Nm,*), Ai(Nm,*), Ortr(*), Orti(*)
-  REAL Zr(Nm,*), Zi(Nm,*)
-  REAL h, gi, gr
+  REAL(SP) Ar(Nm,*), Ai(Nm,*), Ortr(*), Orti(*)
+  REAL(SP) Zr(Nm,*), Zi(Nm,*)
+  REAL(SP) h, gi, gr
   !
   !* FIRST EXECUTABLE STATEMENT  CORTB
   IF ( M/=0 ) THEN

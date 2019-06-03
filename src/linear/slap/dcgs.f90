@@ -257,23 +257,25 @@ SUBROUTINE DCGS(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,Iter,&
   USE service, ONLY : D1MACH
   INTERFACE
     SUBROUTINE MSOLVE(N,R,Z,Rwork,Iwork)
+      IMPORT DP
       INTEGER :: N, Iwork(*)
-      REAL(8) :: R(N), Z(N), Rwork(*)
+      REAL(DP) :: R(N), Z(N), Rwork(*)
     END SUBROUTINE
     SUBROUTINE MATVEC(N,X,R,Nelt,Ia,Ja,A,Isym)
+      IMPORT DP
       INTEGER :: N, Nelt, Isym, Ia(Nelt), Ja(Nelt)
-      REAL(8) :: X(N), R(N), A(Nelt)
+      REAL(DP) :: X(N), R(N), A(Nelt)
     END SUBROUTINE
   END INTERFACE
   !     .. Scalar Arguments ..
-  REAL(8) :: Err, Tol
+  REAL(DP) :: Err, Tol
   INTEGER Ierr, Isym, Iter, Itmax, Itol, Iunit, N, Nelt
   !     .. Array Arguments ..
-  REAL(8) :: A(Nelt), B(N), P(N), Q(N), R(N), R0(N), Rwork(*), &
+  REAL(DP) :: A(Nelt), B(N), P(N), Q(N), R(N), R0(N), Rwork(*), &
     U(N), V1(N), V2(N), X(N)
   INTEGER Ia(Nelt), Iwork(*), Ja(Nelt)
   !     .. Local Scalars ..
-  REAL(8) :: ak, akm, bk, bnrm, fuzz, rhon, rhonm1, sigma, solnrm, tolmin
+  REAL(DP) :: ak, akm, bk, bnrm, fuzz, rhon, rhonm1, sigma, solnrm, tolmin
   INTEGER i, k
   !     .. Intrinsic Functions ..
   INTRINSIC ABS

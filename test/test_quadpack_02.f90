@@ -1,4 +1,5 @@
 MODULE TEST40_MOD
+  USE service, ONLY : SP, DP
   IMPLICIT NONE
 
 CONTAINS
@@ -25,12 +26,12 @@ CONTAINS
 
     ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
     INTEGER ierv(2), Lun
-    REAL(8) :: a, abserr, b, epmach, epsabs, epsrel, error, result, uflow, work(400)
+    REAL(DP) :: a, abserr, b, epmach, epsabs, epsrel, error, result, uflow, work(400)
     INTEGER ier, ip, Ipass, iwork(100), key, Kprint, last, lenw, limit, neval
-    REAL(8), PARAMETER :: pi = 0.31415926535897932D+01
-    REAL(8), PARAMETER :: exact1 = 0.1154700538379252D+01
-    REAL(8), PARAMETER :: exact2 = 0.11780972450996172D+00
-    REAL(8), PARAMETER :: exact3 = 0.1855802D+02
+    REAL(DP), PARAMETER :: pi = 0.31415926535897932D+01
+    REAL(DP), PARAMETER :: exact1 = 0.1154700538379252D+01
+    REAL(DP), PARAMETER :: exact2 = 0.11780972450996172D+00
+    REAL(DP), PARAMETER :: exact3 = 0.1855802D+02
     !* FIRST EXECUTABLE STATEMENT  CDQAG
     IF ( Kprint>=2 ) WRITE (Lun,'(''1DQAG QUICK CHECK''/)')
     !
@@ -137,13 +138,13 @@ CONTAINS
     !
     ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
     INTEGER ierv(4), inf
-    REAL(8) :: abserr, bound, epmach, epsabs, epsrel, error, oflow, result, &
+    REAL(DP) :: abserr, bound, epmach, epsabs, epsrel, error, oflow, result, &
       uflow, work(800)
     INTEGER ier, ip, Ipass, iwork(200), Kprint, last, lenw, limit, Lun, neval
-    REAL(8), PARAMETER :: exact0 = 2.0D+00, exact1 = 0.115470066904D1
-    REAL(8), PARAMETER :: exact2 = 0.909864525656D-02
-    REAL(8), PARAMETER :: exact3 = 0.31415926535897932D+01
-    REAL(8), PARAMETER :: exact4 = 0.19984914554328673D+04
+    REAL(DP), PARAMETER :: exact0 = 2.0D+00, exact1 = 0.115470066904D1
+    REAL(DP), PARAMETER :: exact2 = 0.909864525656D-02
+    REAL(DP), PARAMETER :: exact3 = 0.31415926535897932D+01
+    REAL(DP), PARAMETER :: exact4 = 0.19984914554328673D+04
     !* FIRST EXECUTABLE STATEMENT  CDQAGI
     IF ( Kprint>=2 ) WRITE (Lun,'(''1DQAGI QUICK CHECK''/)')
     !
@@ -268,15 +269,15 @@ CONTAINS
 
     ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
     INTEGER ierv(4)
-    REAL(8) :: a, abserr, b, epmach, epsabs, epsrel, error, oflow, &
+    REAL(DP) :: a, abserr, b, epmach, epsabs, epsrel, error, oflow, &
       points(5), result, uflow, work(405)
     INTEGER ier, ip, Ipass, iwork(205), Kprint, last, leniw, lenw, limit, &
       Lun, neval, npts2
-    REAL(8), PARAMETER :: exact1 = 0.4285277667368085D+01
-    REAL(8), PARAMETER :: exact2 = 0.909864525656D-2
-    REAL(8), PARAMETER :: exact3 = 0.31415926535897932D+01
-    REAL(8), PARAMETER :: p1 = 0.1428571428571428D+00
-    REAL(8), PARAMETER :: p2 = 0.6666666666666667D+00
+    REAL(DP), PARAMETER :: exact1 = 0.4285277667368085D+01
+    REAL(DP), PARAMETER :: exact2 = 0.909864525656D-2
+    REAL(DP), PARAMETER :: exact3 = 0.31415926535897932D+01
+    REAL(DP), PARAMETER :: p1 = 0.1428571428571428D+00
+    REAL(DP), PARAMETER :: p2 = 0.6666666666666667D+00
     !* FIRST EXECUTABLE STATEMENT  CDQAGP
     IF ( Kprint>=2 ) WRITE (Lun,'(''1DQAGP QUICK CHECK''/)')
     !
@@ -414,14 +415,14 @@ CONTAINS
 
     ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
     INTEGER ierv(5), Lun
-    REAL(8) :: a, abserr, b, epmach, epsabs, epsrel, error, oflow, result, &
+    REAL(DP) :: a, abserr, b, epmach, epsabs, epsrel, error, oflow, result, &
       uflow, work(800)
     INTEGER ier, ip, Ipass, iwork(200), Kprint, last, lenw, limit, neval
-    REAL(8), PARAMETER :: exact0 = 0.2D+01
-    REAL(8), PARAMETER :: exact1 = 0.115470066904D+01
-    REAL(8), PARAMETER :: exact2 = 0.909864525656D-02
-    REAL(8), PARAMETER :: exact3 = 0.31415926535897932D+01
-    REAL(8), PARAMETER :: exact4 = 0.19984914554328673D+04
+    REAL(DP), PARAMETER :: exact0 = 0.2D+01
+    REAL(DP), PARAMETER :: exact1 = 0.115470066904D+01
+    REAL(DP), PARAMETER :: exact2 = 0.909864525656D-02
+    REAL(DP), PARAMETER :: exact3 = 0.31415926535897932D+01
+    REAL(DP), PARAMETER :: exact4 = 0.19984914554328673D+04
     !* FIRST EXECUTABLE STATEMENT  CDQAGS
     IF ( Kprint>=2 ) WRITE (Lun,'(''1DQAGS QUICK CHECK''/)')
     !
@@ -550,11 +551,11 @@ CONTAINS
 
     ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
     INTEGER ierv(2), Lun
-    REAL(8) :: a, abserr, b, epmach, epsabs, epsrel, error, c, result, &
+    REAL(DP) :: a, abserr, b, epmach, epsabs, epsrel, error, c, result, &
       uflow, work(800)
     INTEGER ier, ip, Ipass, iwork(200), Kprint, last, lenw, limit, neval
-    REAL(8), PARAMETER :: exact0 = -0.6284617285065624D+03
-    REAL(8), PARAMETER :: exact1 = 0.1855802D+01
+    REAL(DP), PARAMETER :: exact0 = -0.6284617285065624D+03
+    REAL(DP), PARAMETER :: exact1 = 0.1855802D+01
     !* FIRST EXECUTABLE STATEMENT  CDQAWC
     IF ( Kprint>=2 ) WRITE (Lun,'(''1DQAWC QUICK CHECK''/)')
     !
@@ -654,10 +655,10 @@ CONTAINS
 
     ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
     INTEGER ierv(4), integr, iwork(450), leniw, Lun, maxp1
-    REAL(8) :: a, abserr, epsabs, epmach, error, omega, result, uflow, work(1425)
+    REAL(DP) :: a, abserr, epsabs, epmach, error, omega, result, uflow, work(1425)
     INTEGER ier, ip, Ipass, Kprint, lenw, limit, limlst, lst, neval
-    REAL(8), PARAMETER :: exact0 = 0.1422552162575912D+01
-    REAL(8), PARAMETER :: pi = 0.31415926535897932D+01
+    REAL(DP), PARAMETER :: exact0 = 0.1422552162575912D+01
+    REAL(DP), PARAMETER :: pi = 0.31415926535897932D+01
     !* FIRST EXECUTABLE STATEMENT  CDQAWF
     IF ( Kprint>=2 ) WRITE (Lun,'(''1DQAWF QUICK CHECK''/)')
     !
@@ -769,12 +770,12 @@ CONTAINS
 
     ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
     INTEGER leniw
-    REAL(8) :: a, abserr, b, epmach, epsabs, epsrel, error, oflow, omega, result, &
+    REAL(DP) :: a, abserr, b, epmach, epsabs, epsrel, error, oflow, omega, result, &
       uflow, work(1325)
     INTEGER ier, ierv(4), integr, ip, Ipass, iwork(400), Kprint, last, lenw, &
       Lun, maxp1, neval
-    REAL(8), PARAMETER :: exact0 = 0.1042872789432789D+05
-    REAL(8), PARAMETER :: pi = 0.31415926535897932D+01
+    REAL(DP), PARAMETER :: exact0 = 0.1042872789432789D+05
+    REAL(DP), PARAMETER :: pi = 0.31415926535897932D+01
     !* FIRST EXECUTABLE STATEMENT  CDQAWO
     IF ( Kprint>=2 ) WRITE (Lun,'(''1DQAWO QUICK CHECK''/)')
     !
@@ -898,11 +899,11 @@ CONTAINS
 
     ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
     INTEGER ierv(2), Lun
-    REAL(8) :: a, abserr, b, epmach, epsabs, epsrel, error, alfa, beta, &
+    REAL(DP) :: a, abserr, b, epmach, epsabs, epsrel, error, alfa, beta, &
       result, uflow, work(800)
     INTEGER ier, ip, Ipass, iwork(200), Kprint, last, lenw, limit, neval, integr
-    REAL(8), PARAMETER :: exact0 = 0.5350190569223644D+00
-    REAL(8), PARAMETER :: exact1 = 0.1998491554328673D+04
+    REAL(DP), PARAMETER :: exact0 = 0.5350190569223644D+00
+    REAL(DP), PARAMETER :: exact1 = 0.1998491554328673D+04
     !* FIRST EXECUTABLE STATEMENT  CDQAWS
     IF ( Kprint>=2 ) WRITE (Lun,'(''1DQAWS QUICK CHECK''/)')
     !
@@ -1003,10 +1004,10 @@ CONTAINS
 
     ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
     INTEGER Lun
-    REAL(8) :: a, abserr, b, epmach, epsabs, epsrel, error, result, uflow
+    REAL(DP) :: a, abserr, b, epmach, epsabs, epsrel, error, result, uflow
     INTEGER ier, ierv(1), ip, Ipass, Kprint, neval
-    REAL(8), PARAMETER :: exact1 = 0.7281029132255818D+00
-    REAL(8), PARAMETER :: exact2 = 0.1D+02
+    REAL(DP), PARAMETER :: exact1 = 0.7281029132255818D+00
+    REAL(DP), PARAMETER :: exact2 = 0.1D+02
     !* FIRST EXECUTABLE STATEMENT  CDQNG
     IF ( Kprint>=2 ) WRITE (Lun,'(''1DQNG QUICK CHECK''/)')
     !
@@ -1057,7 +1058,7 @@ CONTAINS
     END IF
   END SUBROUTINE CDQNG
   !** DF0C
-  REAL(8) FUNCTION DF0C(X)
+  REAL(DP) FUNCTION DF0C(X)
     !>
     !  Subsidiary to
     !***
@@ -1071,12 +1072,12 @@ CONTAINS
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-    REAL(8) :: X
+    REAL(DP) :: X
     !* FIRST EXECUTABLE STATEMENT  DF0C
     DF0C = 1.D0/(X*X+1.D-4)
   END FUNCTION DF0C
   !** DF0F
-  REAL(8) FUNCTION DF0F(X)
+  REAL(DP) FUNCTION DF0F(X)
     !>
     !  Subsidiary to
     !***
@@ -1090,13 +1091,13 @@ CONTAINS
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-    REAL(8) :: X
+    REAL(DP) :: X
     !* FIRST EXECUTABLE STATEMENT  DF0F
     DF0F = 0.0D+00
     IF ( X/=0.0D+00 ) DF0F = SIN(0.5D+02*X)/(X*SQRT(X))
   END FUNCTION DF0F
   !** DF0O
-  REAL(8) FUNCTION DF0O(X)
+  REAL(DP) FUNCTION DF0O(X)
     !>
     !  Subsidiary to
     !***
@@ -1110,12 +1111,12 @@ CONTAINS
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-    REAL(8) :: X
+    REAL(DP) :: X
     !* FIRST EXECUTABLE STATEMENT  DF0O
     DF0O = (0.2D+01*SIN(X))**14
   END FUNCTION DF0O
   !** DF0S
-  REAL(8) FUNCTION DF0S(X)
+  REAL(DP) FUNCTION DF0S(X)
     !>
     !  Subsidiary to
     !***
@@ -1129,13 +1130,13 @@ CONTAINS
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-    REAL(8) :: X
+    REAL(DP) :: X
     !* FIRST EXECUTABLE STATEMENT  DF0S
     DF0S = 0.0D+00
     IF ( X/=0.0D+00 ) DF0S = 0.1D+01/SQRT(X)
   END FUNCTION DF0S
   !** DF0WS
-  REAL(8) FUNCTION DF0WS(X)
+  REAL(DP) FUNCTION DF0WS(X)
     !>
     !  Subsidiary to
     !***
@@ -1149,12 +1150,12 @@ CONTAINS
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-    REAL(8) :: X
+    REAL(DP) :: X
     !* FIRST EXECUTABLE STATEMENT  DF0WS
     DF0WS = SIN(0.1D+02*X)
   END FUNCTION DF0WS
   !** DF1C
-  REAL(8) FUNCTION DF1C(X)
+  REAL(DP) FUNCTION DF1C(X)
     !>
     !  Subsidiary to
     !***
@@ -1168,13 +1169,13 @@ CONTAINS
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-    REAL(8) :: X
+    REAL(DP) :: X
     !* FIRST EXECUTABLE STATEMENT  DF1C
     DF1C = 0.0D+00
     IF ( X/=0.33D+00 ) DF1C = (X-0.5D+00)*ABS(X-0.33D+00)**(-0.9D+00)
   END FUNCTION DF1C
   !** DF1F
-  REAL(8) FUNCTION DF1F(X)
+  REAL(DP) FUNCTION DF1F(X)
     !>
     !  Subsidiary to
     !***
@@ -1188,7 +1189,7 @@ CONTAINS
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-    REAL(8) :: X, x1, y
+    REAL(DP) :: X, x1, y
     !* FIRST EXECUTABLE STATEMENT  DF1F
     x1 = X + 0.1D+01
     DF1F = 0.5D+01/x1/x1
@@ -1196,7 +1197,7 @@ CONTAINS
     IF ( y>3.1415926535897932D0 ) DF1F = 0.0D0
   END FUNCTION DF1F
   !** DF1G
-  REAL(8) FUNCTION DF1G(X)
+  REAL(DP) FUNCTION DF1G(X)
     !>
     !  Subsidiary to
     !***
@@ -1210,13 +1211,13 @@ CONTAINS
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-    REAL(8) :: X
-    REAL(8), PARAMETER :: pi = 3.1415926535897932D0
+    REAL(DP) :: X
+    REAL(DP), PARAMETER :: pi = 3.1415926535897932D0
     !* FIRST EXECUTABLE STATEMENT  DF1G
     DF1G = 2.0D0/(2.0D0+SIN(10.0D0*pi*X))
   END FUNCTION DF1G
   !** DF1N
-  REAL(8) FUNCTION DF1N(X)
+  REAL(DP) FUNCTION DF1N(X)
     !>
     !  Subsidiary to
     !***
@@ -1230,12 +1231,12 @@ CONTAINS
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-    REAL(8) :: X
+    REAL(DP) :: X
     !* FIRST EXECUTABLE STATEMENT  DF1N
     DF1N = 1.0D0/(X**4+X**2+1.0D0)
   END FUNCTION DF1N
   !** DF1O
-  REAL(8) FUNCTION DF1O(X)
+  REAL(DP) FUNCTION DF1O(X)
     !>
     !  Subsidiary to
     !***
@@ -1249,13 +1250,13 @@ CONTAINS
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-    REAL(8) :: X
+    REAL(DP) :: X
     !* FIRST EXECUTABLE STATEMENT  DF1O
     DF1O = 0.1D+01
     IF ( X>0.31415926535897932D+01 ) DF1O = 0.0D+00
   END FUNCTION DF1O
   !** DF1P
-  REAL(8) FUNCTION DF1P(X)
+  REAL(DP) FUNCTION DF1P(X)
     !>
     !  Subsidiary to
     !***
@@ -1269,11 +1270,11 @@ CONTAINS
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-    REAL(8) :: alfa1, alfa2, X, d1, d2
+    REAL(DP) :: alfa1, alfa2, X, d1, d2
     !* FIRST EXECUTABLE STATEMENT  DF1P
     !  P1 = 1/7, P2 = 2/3
-    REAL(8), PARAMETER :: p1 = 0.1428571428571428D+00
-    REAL(8), PARAMETER :: p2 = 0.6666666666666667D+00
+    REAL(DP), PARAMETER :: p1 = 0.1428571428571428D+00
+    REAL(DP), PARAMETER :: p2 = 0.6666666666666667D+00
     alfa1 = -0.25D0
     alfa2 = -0.5D0
     d1 = ABS(X-p1)
@@ -1282,7 +1283,7 @@ CONTAINS
     IF ( d1/=0.0D+00.AND.d2/=0.0D+00 ) DF1P = d1**alfa1 + d2**alfa2
   END FUNCTION DF1P
   !** DF1S
-  REAL(8) FUNCTION DF1S(X)
+  REAL(DP) FUNCTION DF1S(X)
     !>
     !  Subsidiary to
     !***
@@ -1296,12 +1297,12 @@ CONTAINS
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-    REAL(8) :: X
+    REAL(DP) :: X
     !* FIRST EXECUTABLE STATEMENT  DF1S
     DF1S = 0.2D+01/(0.2D+01+SIN(0.314159D+02*X))
   END FUNCTION DF1S
   !** DF1WS
-  REAL(8) FUNCTION DF1WS(X)
+  REAL(DP) FUNCTION DF1WS(X)
     !>
     !  Subsidiary to
     !***
@@ -1315,13 +1316,13 @@ CONTAINS
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-    REAL(8) :: X
+    REAL(DP) :: X
     !* FIRST EXECUTABLE STATEMENT  DF1WS
     DF1WS = 0.00D+00
     IF ( X-0.33D+00/=0.00D+00 ) DF1WS = ABS(X-0.33D+00)**(-0.999D+00)
   END FUNCTION DF1WS
   !** DF2G
-  REAL(8) FUNCTION DF2G(X)
+  REAL(DP) FUNCTION DF2G(X)
     !>
     !  Subsidiary to
     !***
@@ -1335,12 +1336,12 @@ CONTAINS
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-    REAL(8) :: X
+    REAL(DP) :: X
     !* FIRST EXECUTABLE STATEMENT  DF2G
     DF2G = X*SIN(0.3D+02*X)*COS(0.5D+02*X)
   END FUNCTION DF2G
   !** DF2N
-  REAL(8) FUNCTION DF2N(X)
+  REAL(DP) FUNCTION DF2N(X)
     !>
     !  Subsidiary to
     !***
@@ -1354,12 +1355,12 @@ CONTAINS
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-    REAL(8) :: X
+    REAL(DP) :: X
     !* FIRST EXECUTABLE STATEMENT  DF2N
     DF2N = X**(-0.9D+00)
   END FUNCTION DF2N
   !** DF2O
-  REAL(8) FUNCTION DF2O(X)
+  REAL(DP) FUNCTION DF2O(X)
     !>
     !  Subsidiary to
     !***
@@ -1373,13 +1374,13 @@ CONTAINS
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-    REAL(8) :: X
+    REAL(DP) :: X
     !* FIRST EXECUTABLE STATEMENT  DF2O
     DF2O = 0.0D+00
     IF ( X/=0.0D+00 ) DF2O = 0.1D+01/(X*X*SQRT(X))
   END FUNCTION DF2O
   !** DF2P
-  REAL(8) FUNCTION DF2P(X)
+  REAL(DP) FUNCTION DF2P(X)
     !>
     !  Subsidiary to
     !***
@@ -1393,12 +1394,12 @@ CONTAINS
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-    REAL(8) :: X
+    REAL(DP) :: X
     !* FIRST EXECUTABLE STATEMENT  DF2P
     DF2P = SIN(0.314159D+03*X)/(0.314159D+01*X)
   END FUNCTION DF2P
   !** DF2S
-  REAL(8) FUNCTION DF2S(X)
+  REAL(DP) FUNCTION DF2S(X)
     !>
     !  Subsidiary to
     !***
@@ -1412,13 +1413,13 @@ CONTAINS
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-    REAL(8) :: X
+    REAL(DP) :: X
     !* FIRST EXECUTABLE STATEMENT  DF2S
     DF2S = 0.1D+03
     IF ( X/=0.0D+00 ) DF2S = SIN(0.314159D+03*X)/(0.314159D+01*X)
   END FUNCTION DF2S
   !** DF3G
-  REAL(8) FUNCTION DF3G(X)
+  REAL(DP) FUNCTION DF3G(X)
     !>
     !  Subsidiary to
     !***
@@ -1432,12 +1433,12 @@ CONTAINS
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-    REAL(8) :: X
+    REAL(DP) :: X
     !* FIRST EXECUTABLE STATEMENT  DF3G
     DF3G = ABS(X-0.33D+00)**(-.90D+00)
   END FUNCTION DF3G
   !** DF3P
-  REAL(8) FUNCTION DF3P(X)
+  REAL(DP) FUNCTION DF3P(X)
     !>
     !  Subsidiary to
     !***
@@ -1451,13 +1452,13 @@ CONTAINS
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-    REAL(8) :: X
+    REAL(DP) :: X
     !* FIRST EXECUTABLE STATEMENT  DF3P
     DF3P = 0.1D+01
     IF ( X>0.31415926535897932D+01 ) DF3P = 0.0D+00
   END FUNCTION DF3P
   !** DF3S
-  REAL(8) FUNCTION DF3S(X)
+  REAL(DP) FUNCTION DF3S(X)
     !>
     !  Subsidiary to
     !***
@@ -1471,13 +1472,13 @@ CONTAINS
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-    REAL(8) :: X
+    REAL(DP) :: X
     !* FIRST EXECUTABLE STATEMENT  DF3S
     DF3S = 0.1D+01
     IF ( X>0.31415926535897932D+01 ) DF3S = 0.0D+00
   END FUNCTION DF3S
   !** DF4P
-  REAL(8) FUNCTION DF4P(X)
+  REAL(DP) FUNCTION DF4P(X)
     !>
     !  Subsidiary to
     !***
@@ -1491,13 +1492,13 @@ CONTAINS
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-    REAL(8) :: X
+    REAL(DP) :: X
     !* FIRST EXECUTABLE STATEMENT  DF4P
     DF4P = 0.0D+00
     IF ( X>0.0D+00 ) DF4P = 0.1D+01/(X*SQRT(X))
   END FUNCTION DF4P
   !** DF4S
-  REAL(8) FUNCTION DF4S(X)
+  REAL(DP) FUNCTION DF4S(X)
     !>
     !  Subsidiary to
     !***
@@ -1511,13 +1512,13 @@ CONTAINS
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-    REAL(8) :: X
+    REAL(DP) :: X
     !* FIRST EXECUTABLE STATEMENT  DF4S
     DF4S = 0.00D+00
     IF ( X-0.33D+00/=0.00D+00 ) DF4S = ABS(X-0.33D+00)**(-0.999D+00)
   END FUNCTION DF4S
   !** DF5S
-  REAL(8) FUNCTION DF5S(X)
+  REAL(DP) FUNCTION DF5S(X)
     !>
     !  Subsidiary to
     !***
@@ -1531,13 +1532,13 @@ CONTAINS
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-    REAL(8) :: X
+    REAL(DP) :: X
     !* FIRST EXECUTABLE STATEMENT  DF5S
     DF5S = 0.0D+00
     IF ( X/=0.0D+00 ) DF5S = 1.0D+00/(X*SQRT(X))
   END FUNCTION DF5S
   !** DT0
-  REAL(8) FUNCTION DT0(X)
+  REAL(DP) FUNCTION DT0(X)
     !>
     !  Subsidiary to
     !***
@@ -1551,7 +1552,7 @@ CONTAINS
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-    REAL(8) :: a, b, X, x1, y
+    REAL(DP) :: a, b, X, x1, y
     !* FIRST EXECUTABLE STATEMENT  DT0
     a = 0.0D+00
     b = 0.1D+01
@@ -1560,7 +1561,7 @@ CONTAINS
     DT0 = (b-a)*DF0S(y)/x1/x1
   END FUNCTION DT0
   !** DT1
-  REAL(8) FUNCTION DT1(X)
+  REAL(DP) FUNCTION DT1(X)
     !>
     !  Subsidiary to
     !***
@@ -1574,7 +1575,7 @@ CONTAINS
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-    REAL(8) :: a, b, X, x1, y
+    REAL(DP) :: a, b, X, x1, y
     !* FIRST EXECUTABLE STATEMENT  DT1
     a = 0.0D+00
     b = 0.1D+01
@@ -1583,7 +1584,7 @@ CONTAINS
     DT1 = (b-a)*DF1S(y)/x1/x1
   END FUNCTION DT1
   !** DT2
-  REAL(8) FUNCTION DT2(X)
+  REAL(DP) FUNCTION DT2(X)
     !>
     !  Subsidiary to
     !***
@@ -1597,7 +1598,7 @@ CONTAINS
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-    REAL(8) :: a, b, X, x1, y
+    REAL(DP) :: a, b, X, x1, y
     !* FIRST EXECUTABLE STATEMENT  DT2
     a = 0.1D+00
     b = 0.1D+01
@@ -1606,7 +1607,7 @@ CONTAINS
     DT2 = (b-a)*DF2S(y)/x1/x1
   END FUNCTION DT2
   !** DT3
-  REAL(8) FUNCTION DT3(X)
+  REAL(DP) FUNCTION DT3(X)
     !>
     !  Subsidiary to
     !***
@@ -1620,7 +1621,7 @@ CONTAINS
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-    REAL(8) :: a, b, X, x1, y
+    REAL(DP) :: a, b, X, x1, y
     !* FIRST EXECUTABLE STATEMENT  DT3
     a = 0.0D+00
     b = 0.5D+01
@@ -1629,7 +1630,7 @@ CONTAINS
     DT3 = (b-a)*DF3S(y)/x1/x1
   END FUNCTION DT3
   !** DT4
-  REAL(8) FUNCTION DT4(X)
+  REAL(DP) FUNCTION DT4(X)
     !>
     !  Subsidiary to
     !***
@@ -1643,7 +1644,7 @@ CONTAINS
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-    REAL(8) :: a, b, X, x1, y
+    REAL(DP) :: a, b, X, x1, y
     !* FIRST EXECUTABLE STATEMENT  DT4
     a = 0.0D+00
     b = 0.1D+01
@@ -1652,7 +1653,7 @@ CONTAINS
     DT4 = (b-a)*DF4S(y)/x1/x1
   END FUNCTION DT4
   !** DT5
-  REAL(8) FUNCTION DT5(X)
+  REAL(DP) FUNCTION DT5(X)
     !>
     !  Subsidiary to
     !***
@@ -1666,7 +1667,7 @@ CONTAINS
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-    REAL(8) :: a, b, X, x1, y
+    REAL(DP) :: a, b, X, x1, y
     !* FIRST EXECUTABLE STATEMENT  DT5
     a = 0.0D+00
     b = 0.1D+01
@@ -1704,12 +1705,12 @@ CONTAINS
     !   910627  Code completely rewritten.  (WRB)
 
     !     .. Scalar Arguments ..
-    REAL(8) :: Abserr, Exact, Result
+    REAL(DP) :: Abserr, Exact, Result
     INTEGER Ip, Kprint, Lierv, Lun, Neval, Num1
     !     .. Array Arguments ..
     INTEGER Ierv(Lierv)
     !     .. Local Scalars ..
-    REAL(8) :: error
+    REAL(DP) :: error
     INTEGER ier, k
     !     .. Intrinsic Functions ..
     INTRINSIC ABS

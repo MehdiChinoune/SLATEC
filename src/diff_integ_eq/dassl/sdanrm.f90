@@ -1,5 +1,5 @@
 !** SDANRM
-REAL FUNCTION SDANRM(Neq,V,Wt)
+REAL(SP) FUNCTION SDANRM(Neq,V,Wt)
   !>
   !  Compute vector norm for SDASSL.
   !***
@@ -29,10 +29,10 @@ REAL FUNCTION SDANRM(Neq,V,Wt)
 
   !
   INTEGER :: Neq
-  REAL :: V(Neq), Wt(Neq)
+  REAL(SP) :: V(Neq), Wt(Neq)
   !
   INTEGER :: i
-  REAL :: summ, vmax
+  REAL(SP) :: summ, vmax
   !
   !* FIRST EXECUTABLE STATEMENT  SDANRM
   SDANRM = 0.0E0

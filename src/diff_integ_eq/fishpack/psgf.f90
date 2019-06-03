@@ -1,5 +1,5 @@
 !** PSGF
-REAL FUNCTION PSGF(X,Iz,C,A,Bh)
+REAL(SP) FUNCTION PSGF(X,Iz,C,A,Bh)
   !>
   !  Subsidiary to BLKTRI
   !***
@@ -19,9 +19,9 @@ REAL FUNCTION PSGF(X,Iz,C,A,Bh)
   !   900402  Added TYPE section.  (WRB)
 
   INTEGER :: Iz
-  REAL :: X, A(Iz), Bh(Iz), C(Iz)
+  REAL(SP) :: X, A(Iz), Bh(Iz), C(Iz)
   INTEGER :: j
-  REAL :: dd, fsg, hsg
+  REAL(SP) :: dd, fsg, hsg
   !* FIRST EXECUTABLE STATEMENT  PSGF
   fsg = 1.
   hsg = 1.

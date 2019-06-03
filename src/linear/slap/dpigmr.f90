@@ -219,24 +219,26 @@ SUBROUTINE DPIGMR(N,R0,Sr,Sz,Jscal,Maxl,Maxlp1,Kmp,Nrsts,Jpre,MATVEC,&
   !   920511  Added complete declaration section.  (WRB)
   INTERFACE
     SUBROUTINE MSOLVE(N,R,Z,Rwork,Iwork)
+      IMPORT DP
       INTEGER :: N, Iwork(*)
-      REAL(8) :: R(N), Z(N), Rwork(*)
+      REAL(DP) :: R(N), Z(N), Rwork(*)
     END SUBROUTINE
     SUBROUTINE MATVEC(N,X,R,Nelt,Ia,Ja,A,Isym)
+      IMPORT DP
       INTEGER :: N, Nelt, Isym, Ia(Nelt), Ja(Nelt)
-      REAL(8) :: X(N), R(N), A(Nelt)
+      REAL(DP) :: X(N), R(N), A(Nelt)
     END SUBROUTINE
   END INTERFACE
   !     .. Scalar Arguments ..
-  REAL(8) :: Bnrm, Err, Rhol, Tol
+  REAL(DP) :: Bnrm, Err, Rhol, Tol
   INTEGER Iflag, Isym, Itol, Iunit, Jpre, Jscal, Kmp, Lgmr, Maxl, &
     Maxlp1, N, Nelt, Nmsl, Nrmax, Nrsts
   !     .. Array Arguments ..
-  REAL(8) :: A(Nelt), Dl(*), Hes(Maxlp1,*), Q(*), R0(*), &
+  REAL(DP) :: A(Nelt), Dl(*), Hes(Maxlp1,*), Q(*), R0(*), &
     Rpar(*), Sr(*), Sz(*), V(N,*), Wk(*), X(*), Xl(*), Z(*)
   INTEGER Ia(Nelt), Ipar(*), Ja(Nelt)
   !     .. Local Scalars ..
-  REAL(8) :: c, dlnrm, prod, r0nrm, rho, s, snormw, tem
+  REAL(DP) :: c, dlnrm, prod, r0nrm, rho, s, snormw, tem
   INTEGER i, i2, info, ip1, iter, itmax, j, k, ll, llp1
   !     .. Intrinsic Functions ..
   INTRINSIC ABS

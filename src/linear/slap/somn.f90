@@ -253,23 +253,25 @@ SUBROUTINE SOMN(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Nsave,Itol,Tol,&
   USE service, ONLY : R1MACH
   INTERFACE
     SUBROUTINE MSOLVE(N,R,Z,Rwork,Iwork)
+      IMPORT SP
       INTEGER :: N, Iwork(*)
-      REAL :: R(N), Z(N), Rwork(*)
+      REAL(SP) :: R(N), Z(N), Rwork(*)
     END SUBROUTINE
     SUBROUTINE MATVEC(N,X,R,Nelt,Ia,Ja,A,Isym)
+      IMPORT SP
       INTEGER :: N, Nelt, Isym, Ia(Nelt), Ja(Nelt)
-      REAL :: X(N), R(N), A(Nelt)
+      REAL(SP) :: X(N), R(N), A(Nelt)
     END SUBROUTINE
   END INTERFACE
   !     .. Scalar Arguments ..
-  REAL Err, Tol
+  REAL(SP) Err, Tol
   INTEGER Ierr, Isym, Iter, Itmax, Itol, Iunit, N, Nelt, Nsave
   !     .. Array Arguments ..
-  REAL A(Nelt), Ap(N,0:Nsave), B(N), Csav(Nsave), Dz(N), &
+  REAL(SP) A(Nelt), Ap(N,0:Nsave), B(N), Csav(Nsave), Dz(N), &
     Emap(N,0:Nsave), P(N,0:Nsave), R(N), Rwork(*), X(N), Z(N)
   INTEGER Ia(Nelt), Iwork(*), Ja(Nelt)
   !     .. Local Scalars ..
-  REAL ak, akden, aknum, bkl, bnrm, fuzz, solnrm
+  REAL(SP) ak, akden, aknum, bkl, bnrm, fuzz, solnrm
   INTEGER i, ip, ipo, k, l, lmax
   !     .. Intrinsic Functions ..
   INTRINSIC ABS, MIN, MOD

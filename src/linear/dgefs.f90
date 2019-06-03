@@ -112,8 +112,8 @@ SUBROUTINE DGEFS(A,Lda,N,V,Itask,Ind,Work,Iwork)
   USE service, ONLY : D1MACH, XERMSG
   !
   INTEGER :: Lda, N, Itask, Ind, Iwork(N)
-  REAL(8) :: A(Lda,N), V(N), Work(N)
-  REAL(8) :: rcond
+  REAL(DP) :: A(Lda,N), V(N), Work(N)
+  REAL(DP) :: rcond
   CHARACTER(8) :: xern1, xern2
   !* FIRST EXECUTABLE STATEMENT  DGEFS
   IF ( Lda<N ) THEN

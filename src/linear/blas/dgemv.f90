@@ -110,15 +110,15 @@ SUBROUTINE DGEMV(Trans,M,N,Alpha,A,Lda,X,Incx,Beta,Y,Incy)
   !           lines were modified.  (BKS)
   USE service, ONLY : XERBLA
   !     .. Scalar Arguments ..
-  REAL(8) :: Alpha, Beta
+  REAL(DP) :: Alpha, Beta
   INTEGER Incx, Incy, Lda, M, N
   CHARACTER :: Trans
   !     .. Array Arguments ..
-  REAL(8) :: A(Lda,*), X(*), Y(*)
+  REAL(DP) :: A(Lda,*), X(*), Y(*)
   !     .. Parameters ..
-  REAL(8), PARAMETER :: ONE = 1.0D+0, ZERO = 0.0D+0
+  REAL(DP), PARAMETER :: ONE = 1.0D+0, ZERO = 0.0D+0
   !     .. Local Scalars ..
-  REAL(8) :: temp
+  REAL(DP) :: temp
   INTEGER i, info, ix, iy, j, jx, jy, kx, ky, lenx, leny
   !     .. Intrinsic Functions ..
   INTRINSIC MAX

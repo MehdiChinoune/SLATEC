@@ -83,9 +83,9 @@ SUBROUTINE POLYVL(Nder,Xx,Yfit,Yp,N,X,C,Work,Ierr)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER :: Ierr, N, Nder
-  REAL :: C(N), Work(2*N), X(N), Yp(Nder), Xx, Yfit
+  REAL(SP) :: C(N), Work(2*N), X(N), Yp(Nder), Xx, Yfit
   INTEGER i, im1, izero, k, km1, km1pi, km2pn, km2pni, m, mm, ndr, nmkp1, npkm1
-  REAL :: fac, pione, pitwo, pone, ptwo, xk
+  REAL(SP) :: fac, pione, pitwo, pone, ptwo, xk
   !* FIRST EXECUTABLE STATEMENT  POLYVL
   Ierr = 1
   IF ( Nder<=0 ) THEN

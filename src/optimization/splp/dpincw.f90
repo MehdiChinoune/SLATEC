@@ -36,15 +36,15 @@ SUBROUTINE DPINCW(Mrelas,Nvars,Lmx,Lbm,Npp,Jstrt,Imat,Ibrc,Ipr,Iwr,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   INTEGER :: Jstrt, Lbm, Lmx, Mrelas, Npp, Nvars
-  REAL(8) :: Costsc, Erdnrm, Dulnrm, Gg
+  REAL(DP) :: Costsc, Erdnrm, Dulnrm, Gg
   LOGICAL :: Stpedg
   INTEGER :: Imat(Lmx), Ibrc(Lbm,2), Ipr(2*Mrelas), Iwr(8*Mrelas), &
     Ind(Nvars+Mrelas), Ibb(Nvars+Mrelas)
-  REAL(8) :: Amat(Lmx), Basmat(Lbm), Csc(Nvars), Wr(Mrelas), Ww(Mrelas), &
+  REAL(DP) :: Amat(Lmx), Basmat(Lbm), Csc(Nvars), Wr(Mrelas), Ww(Mrelas), &
     Rz(Nvars+Mrelas), Rg(Nvars+Mrelas), Costs(Nvars), Colnrm(Nvars), &
     Duals(Nvars+Mrelas)
   INTEGER :: i, ihi, il1, ilow, ipage, iu1, j, key, lpg, nnegrc
-  REAL(8) :: one, rzj, scalr, zero, rcost, cnorm
+  REAL(DP) :: one, rzj, scalr, zero, rcost, cnorm
   LOGICAL :: pagepl, trans
   !* FIRST EXECUTABLE STATEMENT  DPINCW
   lpg = Lmx - (Nvars+4)

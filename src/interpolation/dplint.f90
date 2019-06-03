@@ -49,9 +49,9 @@ SUBROUTINE DPLINT(N,X,Y,C)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   USE service, ONLY : XERMSG
   INTEGER :: N
-  REAL(8) :: C(N), X(N), Y(N)
+  REAL(DP) :: C(N), X(N), Y(N)
   INTEGER :: i, k, km1
-  REAL(8) :: dif
+  REAL(DP) :: dif
   !* FIRST EXECUTABLE STATEMENT  DPLINT
   IF ( N<=0 ) THEN
     CALL XERMSG('DPLINT','N IS ZERO OR NEGATIVE.',2,1)

@@ -23,7 +23,7 @@ SUBROUTINE CSROOT(Xr,Xi,Yr,Yi)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
 
-  REAL Xr, Xi, Yr, Yi, s, tr, ti
+  REAL(SP) Xr, Xi, Yr, Yi, s, tr, ti
   !
   !     BRANCH CHOSEN SO THAT YR .GE. 0.0 AND SIGN(YI) .EQ. SIGN(XI)
   !* FIRST EXECUTABLE STATEMENT  CSROOT

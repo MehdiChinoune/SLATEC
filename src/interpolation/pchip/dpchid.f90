@@ -1,5 +1,5 @@
 !** DPCHID
-REAL(8) FUNCTION DPCHID(N,X,F,D,Incfd,Skip,Ia,Ib,Ierr)
+REAL(DP) FUNCTION DPCHID(N,X,F,D,Incfd,Skip,Ia,Ib,Ierr)
   !>
   !  Evaluate the definite integral of a piecewise cubic
   !            Hermite function over an interval whose endpoints are data
@@ -116,17 +116,17 @@ REAL(8) FUNCTION DPCHID(N,X,F,D,Incfd,Skip,Ia,Ib,Ierr)
   !  DECLARE ARGUMENTS.
   !
   INTEGER N, Incfd, Ia, Ib, Ierr
-  REAL(8) :: X(N), F(Incfd,N), D(Incfd,N)
+  REAL(DP) :: X(N), F(Incfd,N), D(Incfd,N)
   LOGICAL Skip
   !
   !  DECLARE LOCAL VARIABLES.
   !
   INTEGER i, iup, low
-  REAL(8) :: h, summ, value
+  REAL(DP) :: h, summ, value
   !
   !  INITIALIZE.
   !
-  REAL(8), PARAMETER :: zero = 0.D0, half = .5D0, six = 6.D0
+  REAL(DP), PARAMETER :: zero = 0.D0, half = .5D0, six = 6.D0
   !* FIRST EXECUTABLE STATEMENT  DPCHID
   value = zero
   !

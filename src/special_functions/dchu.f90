@@ -1,5 +1,5 @@
 !** DCHU
-REAL(8) FUNCTION DCHU(A,B,X)
+REAL(DP) FUNCTION DCHU(A,B,X)
   !>
   !  Compute the logarithmic confluent hypergeometric function.
   !***
@@ -36,12 +36,12 @@ REAL(8) FUNCTION DCHU(A,B,X)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900727  Added EXTERNAL statement.  (WRB)
   USE service, ONLY : XERMSG, D1MACH
-  REAL(8) :: A, B, X
+  REAL(DP) :: A, B, X
   INTEGER :: i, istrt, m, n
-  REAL(8) :: aintb, alnx, a0, beps, b0, c0, factor, gamri1, gamrni, &
+  REAL(DP) :: aintb, alnx, a0, beps, b0, c0, factor, gamri1, gamrni, &
     pch1ai, pch1i, pochai, summ, t, xeps1, xi, xi1, xn, xtoeps
-  REAL(8), PARAMETER :: pi = 3.141592653589793238462643383279503D0
-  REAL(8), PARAMETER :: eps = D1MACH(3)
+  REAL(DP), PARAMETER :: pi = 3.141592653589793238462643383279503D0
+  REAL(DP), PARAMETER :: eps = D1MACH(3)
   !* FIRST EXECUTABLE STATEMENT  DCHU
   !
   IF ( X==0.0D0 ) CALL XERMSG('DCHU','X IS ZERO SO DCHU IS INFINITE',1,2)

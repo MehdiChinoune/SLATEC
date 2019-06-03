@@ -49,7 +49,7 @@ SUBROUTINE RFFTI1(N,Wa,Ifac)
   !   860115  Modified by Ron Boisvert to adhere to Fortran 77 by
   !           (a) changing dummy array size declarations (1) to (*),
   !           (b) changing references to intrinsic function FLOAT
-  !               to REAL, and
+  !               to REAL(SP), and
   !           (c) changing definition of variable TPI by using
   !               FORTRAN intrinsic functions instead of DATA
   !               statements.
@@ -60,9 +60,9 @@ SUBROUTINE RFFTI1(N,Wa,Ifac)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER :: N, Ifac(15)
-  REAL :: Wa(N)
+  REAL(SP) :: Wa(N)
   INTEGER :: i, ib, ido, ii, ip, ipm, is, j, k1, l1, l2, ld, nf, nfm1, nl, nq, nr, ntry
-  REAL :: arg, argh, argld, fi, tpi
+  REAL(SP) :: arg, argh, argld, fi, tpi
   INTEGER, PARAMETER :: ntryh(4) = [ 4, 2, 3, 5 ]
   !* FIRST EXECUTABLE STATEMENT  RFFTI1
   nl = N

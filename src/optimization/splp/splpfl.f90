@@ -36,13 +36,13 @@ SUBROUTINE SPLPFL(Mrelas,Nvars,Ienter,Ileave,Ibasis,Ind,Theta,Dirnrm,&
   !   900328  Added TYPE section.  (WRB)
 
   INTEGER :: Ienter, Ileave, Mrelas, Nvars
-  REAL :: Dirnrm, Rprnrm, Theta
+  REAL(SP) :: Dirnrm, Rprnrm, Theta
   LOGICAL :: Finite, Zerolv
   INTEGER :: Ibasis(Nvars+Mrelas), Ind(Nvars+Mrelas)
-  REAL :: Csc(Nvars), Ww(Mrelas), Bl(Nvars+Mrelas), Bu(Nvars+Mrelas), Erp(Mrelas), &
+  REAL(SP) :: Csc(Nvars), Ww(Mrelas), Bl(Nvars+Mrelas), Bu(Nvars+Mrelas), Erp(Mrelas), &
     Rprim(Mrelas), Primal(Nvars+Mrelas)
   INTEGER :: i, j, n20005, n20036
-  REAL ::  bound, ratio, zero
+  REAL(SP) ::  bound, ratio, zero
   !* FIRST EXECUTABLE STATEMENT  SPLPFL
   zero = 0.E0
   !

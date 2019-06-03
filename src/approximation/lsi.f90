@@ -62,14 +62,14 @@ SUBROUTINE LSI(W,Mdw,Ma,Mg,N,Prgopt,X,Rnorm,Mode,Ws,Ip)
   USE service, ONLY : R1MACH
   USE linear, ONLY : H12, HFTI, SAXPY, SSWAP
   INTEGER :: Ma, Mdw, Mg, Mode, N, Ip(Mg+2*N+1)
-  REAL :: Rnorm, Prgopt(:), W(Mdw,N+1), Ws(*), X(N)
+  REAL(SP) :: Rnorm, Prgopt(:), W(Mdw,N+1), Ws(*), X(N)
   !
-  REAL :: anorm, fac, gam, rb,tau, tol, xnorm, temp(1)
+  REAL(SP) :: anorm, fac, gam, rb,tau, tol, xnorm, temp(1)
   INTEGER :: i, j, k, key, krank, krm1, krp1, l, last, link, m, map1, mdlpdp, minman, &
     n1, n2, n3, next, np1
   LOGICAL :: cov, sclcov
   !
-  REAL, PARAMETER :: srelpr = R1MACH(4)
+  REAL(SP), PARAMETER :: srelpr = R1MACH(4)
   !
   !* FIRST EXECUTABLE STATEMENT  LSI
   !

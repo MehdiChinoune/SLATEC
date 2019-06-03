@@ -1,4 +1,5 @@
 MODULE TEST35_MOD
+  USE service, ONLY : SP, DP
   IMPLICIT NONE
 
 CONTAINS
@@ -34,10 +35,10 @@ CONTAINS
     !     .. Scalar Arguments ..
     INTEGER Ipass, Kprint, Lun
     !     .. Local Scalars ..
-    REAL fnorm, fnorms, tol
+    REAL(SP) fnorm, fnorms, tol
     INTEGER icnt, info, infos, iopt, lwa, n, nprint
     !     .. Local Arrays ..
-    REAL fvec(2), wa(19), x(2)
+    REAL(SP) fvec(2), wa(19), x(2)
     INTEGER itest(3)
     !     .. Intrinsic Functions ..
     INTRINSIC SQRT
@@ -113,7 +114,7 @@ CONTAINS
       E20.5/' RETURNED VALUE OF INFO AND RESIDUAL NORM',I5,E20.5/)
   END SUBROUTINE SNSQQK
   !** SOSFNC
-  REAL FUNCTION SOSFNC(X,K)
+  REAL(SP) FUNCTION SOSFNC(X,K)
     !>
     !  Function evaluator for SOS quick check.
     !***
@@ -137,7 +138,7 @@ CONTAINS
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
     INTEGER :: K
-    REAL :: X(:)
+    REAL(SP) :: X(:)
     !* FIRST EXECUTABLE STATEMENT  SOSFNC
     IF ( K==1 ) THEN
       SOSFNC = 1.E0 - X(1)
@@ -177,10 +178,10 @@ CONTAINS
     !     .. Scalar Arguments ..
     INTEGER Ipass, Kprint, Lun
     !     .. Local Scalars ..
-    REAL aer, fnorm, fnorms, rer, tolf
+    REAL(SP) aer, fnorm, fnorms, rer, tolf
     INTEGER icnt, iflag, iflags, liw, lwa, n
     !     .. Local Arrays ..
-    REAL fvec(2), wa(17), x(2)
+    REAL(SP) fvec(2), wa(17), x(2)
     INTEGER itest(2), iw(6)
     !     .. Intrinsic Functions ..
     INTRINSIC SQRT
@@ -270,7 +271,7 @@ CONTAINS
     !     .. Scalar Arguments ..
     INTEGER Iflag, N
     !     .. Array Arguments ..
-    REAL :: Fvec(N), X(N)
+    REAL(SP) :: Fvec(N), X(N)
     !* FIRST EXECUTABLE STATEMENT  SQFCN2
     Fvec(1) = 1.0E0 - X(1)
     Fvec(2) = 10.0E0*(X(2)-X(1)**2)
@@ -301,7 +302,7 @@ CONTAINS
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
     INTEGER :: Iflag, Ldfjac, N
-    REAL :: Fjac(Ldfjac,N), Fvec(N), X(N)
+    REAL(SP) :: Fjac(Ldfjac,N), Fvec(N), X(N)
     !* FIRST EXECUTABLE STATEMENT  SQJAC2
     Fjac(1,1) = -1.E0
     Fjac(1,2) = 0.E0

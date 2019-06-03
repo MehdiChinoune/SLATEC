@@ -205,12 +205,13 @@ SUBROUTINE QAGP(F,A,B,Npts2,Points,Epsabs,Epsrel,Result,Abserr,Neval,Ier,&
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   USE service, ONLY : XERMSG
   INTERFACE
-    REAL FUNCTION F(X)
-      REAL :: X
+    REAL(SP) FUNCTION F(X)
+      IMPORT SP
+      REAL(SP) :: X
     END FUNCTION F
   END INTERFACE
   INTEGER :: Ier, Leniw, Lenw, Neval, Npts2, Last, Iwork(Leniw)
-  REAL :: A, Abserr, B, Epsabs, Epsrel, Result, Points(Npts2), Work(Lenw)
+  REAL(SP) :: A, Abserr, B, Epsabs, Epsrel, Result, Points(Npts2), Work(Lenw)
   INTEGER :: l4, limit, lvl, l1, l2, l3
   !
   !         CHECK VALIDITY OF LIMIT AND LENW.

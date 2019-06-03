@@ -139,7 +139,7 @@ SUBROUTINE PCHFE(N,X,F,D,Incfd,Skip,Ne,Xe,Fe,Ierr)
   !  DECLARE ARGUMENTS.
   !
   INTEGER N, Incfd, Ne, Ierr
-  REAL X(N), F(Incfd,N), D(Incfd,N), Xe(Ne), Fe(Ne)
+  REAL(SP) X(N), F(Incfd,N), D(Incfd,N), Xe(Ne), Fe(Ne)
   LOGICAL Skip
   !
   !  DECLARE LOCAL VARIABLES.

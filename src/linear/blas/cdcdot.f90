@@ -1,5 +1,5 @@
 !** CDCDOT
-COMPLEX FUNCTION CDCDOT(N,Cb,Cx,Incx,Cy,Incy)
+COMPLEX(SP) FUNCTION CDCDOT(N,Cb,Cx,Incx,Cy,Incy)
   !>
   !  Compute the inner product of two vectors with extended
   !            precision accumulation.
@@ -55,21 +55,21 @@ COMPLEX FUNCTION CDCDOT(N,Cb,Cx,Incx,Cy,Incy)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER N, Incx, Incy, i, kx, ky
-  COMPLEX Cx(*), Cy(*), Cb
-  REAL(8) :: dsdotr, dsdoti, dt1, dt2, dt3, dt4
+  COMPLEX(SP) Cx(*), Cy(*), Cb
+  REAL(DP) :: dsdotr, dsdoti, dt1, dt2, dt3, dt4
   !* FIRST EXECUTABLE STATEMENT  CDCDOT
-  dsdotr = REAL(REAL(Cb), 8)
-  dsdoti = REAL(AIMAG(Cb), 8)
+  dsdotr = REAL( REAL(Cb), DP )
+  dsdoti = REAL( AIMAG(Cb), DP )
   IF ( N>0 ) THEN
     kx = 1
     ky = 1
     IF ( Incx<0 ) kx = 1 + (1-N)*Incx
     IF ( Incy<0 ) ky = 1 + (1-N)*Incy
     DO i = 1, N
-      dt1 = REAL(REAL(Cx(kx)), 8)
-      dt2 = REAL(REAL(Cy(ky)), 8)
-      dt3 = REAL(AIMAG(Cx(kx)), 8)
-      dt4 = REAL(AIMAG(Cy(ky)), 8)
+      dt1 = REAL( REAL(Cx(kx)), DP )
+      dt2 = REAL( REAL(Cy(ky)), DP )
+      dt3 = REAL( AIMAG(Cx(kx)), DP )
+      dt4 = REAL( AIMAG(Cy(ky)), DP )
       dsdotr = dsdotr + (dt1*dt2) - (dt3*dt4)
       dsdoti = dsdoti + (dt1*dt4) + (dt3*dt2)
       kx = kx + Incx

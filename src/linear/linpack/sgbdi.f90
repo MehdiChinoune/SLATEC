@@ -65,9 +65,9 @@ SUBROUTINE SGBDI(Abd,Lda,N,Ml,Mu,Ipvt,Det)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   
   INTEGER Lda, N, Ml, Mu, Ipvt(*)
-  REAL Abd(Lda,*), Det(2)
+  REAL(SP) Abd(Lda,*), Det(2)
   !
-  REAL ten
+  REAL(SP) ten
   INTEGER i, m
   !* FIRST EXECUTABLE STATEMENT  SGBDI
   m = Ml + Mu + 1

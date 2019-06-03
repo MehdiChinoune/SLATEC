@@ -1,5 +1,5 @@
 !** DDANRM
-REAL(8) FUNCTION DDANRM(Neq,V,Wt)
+REAL(DP) FUNCTION DDANRM(Neq,V,Wt)
   !>
   !  Compute vector norm for DDASSL.
   !***
@@ -29,10 +29,10 @@ REAL(8) FUNCTION DDANRM(Neq,V,Wt)
 
   !
   INTEGER :: Neq
-  REAL(8) :: V(Neq), Wt(Neq)
+  REAL(DP) :: V(Neq), Wt(Neq)
   !
   INTEGER :: i
-  REAL(8) :: summ, vmax
+  REAL(DP) :: summ, vmax
   !
   !* FIRST EXECUTABLE STATEMENT  DDANRM
   DDANRM = 0.0D0

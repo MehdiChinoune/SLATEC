@@ -238,7 +238,7 @@ SUBROUTINE EFC(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkpt,Mdein,Mdeout,Coeff,Lw,W)
   !                         ALB., N. M., AUGUST-SEPTEMBER, 1980.
   !
   INTEGER :: Lw, Mdein, Mdeout, Nbkpt, Ndata, Nord
-  REAL :: Bkpt(Nbkpt), Coeff(Nbkpt-Nord), Sddata(Ndata), W(Lw), Xdata(Ndata), &
+  REAL(SP) :: Bkpt(Nbkpt), Coeff(Nbkpt-Nord), Sddata(Ndata), W(Lw), Xdata(Ndata), &
     Ydata(Ndata)
   !
   INTEGER lbf, lbkpt, lg, lptemp, lww, lxtemp, mdg, mdw

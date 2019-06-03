@@ -38,9 +38,9 @@ SUBROUTINE DSOSSL(K,N,L,X,C,B,M)
   !
   !
   INTEGER :: K, L, M, N
-  REAL(8) :: B(:), C(:), X(:)
+  REAL(DP) :: B(:), C(:), X(:)
   INTEGER :: j, j1, k1, k2, k3, km1, kn, lk
-  REAL(8) :: xmax
+  REAL(DP) :: xmax
   !
   !* FIRST EXECUTABLE STATEMENT  DSOSSL
   km1 = K - 1

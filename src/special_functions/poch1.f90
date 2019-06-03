@@ -1,5 +1,5 @@
 !** POCH1
-REAL FUNCTION POCH1(A,X)
+REAL(SP) FUNCTION POCH1(A,X)
   !>
   !  Calculate a generalization of Pochhammer's symbol starting
   !            from first order.
@@ -55,16 +55,16 @@ REAL FUNCTION POCH1(A,X)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900727  Added EXTERNAL statement.  (WRB)
   USE service, ONLY : XERMSG, R1MACH
-  REAL :: A, X
+  REAL(SP) :: A, X
   INTEGER :: i, ii, incr, j, k, ndx, nterms
-  REAL :: absa, absx, alnvar, b, binv, bp, gbern(10), gbk, poly1, &
+  REAL(SP) :: absa, absx, alnvar, b, binv, bp, gbern(10), gbk, poly1, &
     q, rho, sinpx2, sinpxx, term, trig, var, var2
-  REAL, PARAMETER :: sqtbig = 1.0/SQRT(24.0*R1MACH(1)), alneps = LOG(R1MACH(3))
-  REAL, PARAMETER :: bern(9) = [ .83333333333333333E-01,-.13888888888888889E-02, &
+  REAL(SP), PARAMETER :: sqtbig = 1.0/SQRT(24.0*R1MACH(1)), alneps = LOG(R1MACH(3))
+  REAL(SP), PARAMETER :: bern(9) = [ .83333333333333333E-01,-.13888888888888889E-02, &
     .33068783068783069E-04, -.82671957671957672E-06, .20876756987868099E-07, &
     -.52841901386874932E-09, .13382536530684679E-10,-.33896802963225829E-12, &
     .85860620562778446E-14 ]
-  REAL, PARAMETER :: pi = 3.14159265358979324E0
+  REAL(SP), PARAMETER :: pi = 3.14159265358979324E0
   !* FIRST EXECUTABLE STATEMENT  POCH1
   !
   IF ( X==0.0 ) THEN

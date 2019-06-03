@@ -57,9 +57,9 @@ SUBROUTINE REORT(Ncomp,Y,Yp,Yhp,Niv,W,S,P,Ip,Stowa,Iflag)
     xend_com, xot_com, knswot_com, lotjp_com, mnswot_com, nswot_com, tol_com, &
     nps_com, nfcc_com
   INTEGER :: Ncomp,  Niv, Iflag, Ip(:)
-  REAL :: P(:), S(:), Stowa(:), W(:), Y(:,:), Yhp(:,:), Yp(:)
+  REAL(SP) :: P(:), S(:), Stowa(:), W(:), Y(:,:), Yhp(:,:), Yp(:)
   INTEGER :: nfcp,ijk, j, k, kk, l, mflag
-  REAL :: dnd, dndt, dx, srp, vnorm, wcnd, ypnm
+  REAL(SP) :: dnd, dndt, dx, srp, vnorm, wcnd, ypnm
   !
   !- *********************************************************************
   !* FIRST EXECUTABLE STATEMENT  REORT

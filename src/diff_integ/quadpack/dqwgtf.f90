@@ -1,5 +1,5 @@
 !** DQWGTF
-REAL(8) FUNCTION DQWGTF(X,Omega,P2,P3,P4,Integr)
+REAL(DP) FUNCTION DQWGTF(X,Omega,P2,P3,P4,Integr)
   !>
   !  This function subprogram is used together with the
   !            routine DQAWF and defines the WEIGHT function.
@@ -29,7 +29,7 @@ REAL(8) FUNCTION DQWGTF(X,Omega,P2,P3,P4,Integr)
   !   900328  Added TYPE section.  (WRB)
 
   !
-  REAL(8) :: Omega, omx, P2, P3, P4, X
+  REAL(DP) :: Omega, omx, P2, P3, P4, X
   INTEGER Integr
   !* FIRST EXECUTABLE STATEMENT  DQWGTF
   omx = Omega*X

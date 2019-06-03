@@ -95,15 +95,15 @@ SUBROUTINE CHPR(Uplo,N,Alpha,X,Incx,Ap)
   !           lines were modified.  (BKS)
   USE service, ONLY : XERBLA
   !     .. Scalar Arguments ..
-  REAL Alpha
+  REAL(SP) Alpha
   INTEGER Incx, N
   CHARACTER :: Uplo
   !     .. Array Arguments ..
-  COMPLEX Ap(*), X(*)
+  COMPLEX(SP) Ap(*), X(*)
   !     .. Parameters ..
-  COMPLEX, PARAMETER :: ZERO = (0.0E+0,0.0E+0)
+  COMPLEX(SP), PARAMETER :: ZERO = (0.0E+0,0.0E+0)
   !     .. Local Scalars ..
-  COMPLEX temp
+  COMPLEX(SP) temp
   INTEGER i, info, ix, j, jx, k, kk, kx
   !     .. Intrinsic Functions ..
   INTRINSIC CONJG, REAL

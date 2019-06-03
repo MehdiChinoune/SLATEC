@@ -71,9 +71,9 @@ SUBROUTINE DPOLCF(Xx,N,X,C,D,Work)
 
   !
   INTEGER :: N
-  REAL(8) :: C(N), D(N), X(N), Xx, Work(2*N)
+  REAL(DP) :: C(N), D(N), X(N), Xx, Work(2*N)
   INTEGER :: i, im1, k, km1, km1pi, km2n, km2npi, nm1, nmkp1, npkm1
-  REAL(8) :: pone, ptwo
+  REAL(DP) :: pone, ptwo
   !* FIRST EXECUTABLE STATEMENT  DPOLCF
   DO k = 1, N
     D(k) = C(k)

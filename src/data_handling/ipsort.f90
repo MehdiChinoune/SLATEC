@@ -84,7 +84,7 @@ SUBROUTINE IPSORT(Ix,N,Iperm,Kflag,Ier)
   !     .. Array Arguments ..
   INTEGER Iperm(N), Ix(N)
   !     .. Local Scalars ..
-  REAL r
+  REAL(SP) r
   INTEGER i, ij, indx, indx0, istrt, itemp, j, k, kk, l, lm, lmt, m, nn
   !     .. Local Arrays ..
   INTEGER il(21), iu(21)  !     .. Intrinsic Functions ..

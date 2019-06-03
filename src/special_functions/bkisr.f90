@@ -27,9 +27,9 @@ SUBROUTINE BKISR(X,N,Summ,Ierr)
   !   910722  Updated AUTHOR section.  (ALS)
   USE service, ONLY : R1MACH
   INTEGER i, Ierr, k, kk, kkn, k1, N, np
-  REAL ak, atol, bk, fk, fn, hx, hxs, pol, pr, Summ, tkp, tol, trm, X, xln
+  REAL(SP) ak, atol, bk, fk, fn, hx, hxs, pol, pr, Summ, tkp, tol, trm, X, xln
   !
-  REAL, PARAMETER :: c(2) = [ 1.57079632679489662E+00, 1.0E0 ]
+  REAL(SP), PARAMETER :: c(2) = [ 1.57079632679489662E+00, 1.0E0 ]
   !* FIRST EXECUTABLE STATEMENT  BKISR
   Ierr = 0
   tol = MAX(R1MACH(4),1.0E-18)

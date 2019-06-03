@@ -64,9 +64,9 @@ SUBROUTINE DNBDI(Abe,Lda,N,Ml,Mu,Ipvt,Det)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER Lda, N, Ml, Mu, Ipvt(N)
-  REAL(8) :: Abe(Lda,2*Ml+Mu+1), Det(2)
+  REAL(DP) :: Abe(Lda,2*Ml+Mu+1), Det(2)
   !
-  REAL(8) :: ten
+  REAL(DP) :: ten
   INTEGER i
   !* FIRST EXECUTABLE STATEMENT  DNBDI
   Det(1) = 1.0D0

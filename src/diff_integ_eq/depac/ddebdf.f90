@@ -751,19 +751,21 @@ SUBROUTINE DDEBDF(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,DJAC)
   USE service, ONLY : XERMSG
   INTERFACE
     SUBROUTINE DF(X,U,Uprime)
-      REAL(8) :: X
-      REAL(8) :: U(:), Uprime(:)
+      IMPORT DP
+      REAL(DP) :: X
+      REAL(DP) :: U(:), Uprime(:)
     END SUBROUTINE DF
     SUBROUTINE DJAC(X,U,Pd,Nrowpd)
+      IMPORT DP
       INTEGER :: Nrowpd
-      REAL(8) :: X
-      REAL(8) :: U(:), Pd(:,:)
+      REAL(DP) :: X
+      REAL(DP) :: U(:), Pd(:,:)
     END SUBROUTINE DJAC
   END INTERFACE
   INTEGER :: Idid, Liw, Lrw, Neq
   INTEGER :: Info(15), Iwork(Liw)
-  REAL(8) :: T, Tout
-  REAL(8) :: Atol(:), Rtol(:), Rwork(Lrw), Y(Neq)
+  REAL(DP) :: T, Tout
+  REAL(DP) :: Atol(:), Rtol(:), Rwork(Lrw), Y(Neq)
   INTEGER :: icomi, icomr, idelsn, iinout, ilrw, itstar, iypout, ml, mu
   LOGICAL :: intout
   CHARACTER(8) :: xern1, xern2

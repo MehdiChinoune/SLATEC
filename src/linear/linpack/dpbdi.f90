@@ -60,10 +60,10 @@ SUBROUTINE DPBDI(Abd,Lda,N,M,Det)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   
   INTEGER Lda, N, M
-  REAL(8) :: Abd(Lda,*)
-  REAL(8) :: Det(2)
+  REAL(DP) :: Abd(Lda,*)
+  REAL(DP) :: Det(2)
   !
-  REAL(8) :: s
+  REAL(DP) :: s
   INTEGER i
   !* FIRST EXECUTABLE STATEMENT  DPBDI
   !

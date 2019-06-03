@@ -1,5 +1,5 @@
 !** DBVALU
-REAL(8) FUNCTION DBVALU(T,A,N,K,Ideriv,X,Inbv,Work)
+REAL(DP) FUNCTION DBVALU(T,A,N,K,Ideriv,X,Inbv,Work)
   !>
   !  Evaluate the B-representation of a B-spline at X for the
   !            function value or any of its derivatives.
@@ -77,10 +77,10 @@ REAL(8) FUNCTION DBVALU(T,A,N,K,Ideriv,X,Inbv,Work)
   USE service, ONLY : XERMSG
   !
   INTEGER :: Ideriv, Inbv, K, N
-  REAL(8) :: A(N), T(N+K), Work(3*K), X
+  REAL(DP) :: A(N), T(N+K), Work(3*K), X
   INTEGER i, iderp1, ihi, ihmkmj, ilo, imk, imkpj, &
     ipj, ip1, ip1mj, j, jj, j1, j2, kmider, kmj, km1, kpk, mflag
-  REAL(8) :: fkmj
+  REAL(DP) :: fkmj
   !* FIRST EXECUTABLE STATEMENT  DBVALU
   DBVALU = 0.0D0
   IF ( K<1 ) THEN

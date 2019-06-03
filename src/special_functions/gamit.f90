@@ -1,5 +1,5 @@
 !** GAMIT
-REAL FUNCTION GAMIT(A,X)
+REAL(SP) FUNCTION GAMIT(A,X)
   !>
   !  Calculate Tricomi's form of the incomplete Gamma function.
   !***
@@ -57,9 +57,9 @@ REAL FUNCTION GAMIT(A,X)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920528  DESCRIPTION and REFERENCES sections revised.  (WRB)
   USE service, ONLY : XERMSG, XERCLR, R1MACH
-  REAL :: A, X
-  REAL :: aeps, ainta, algap1, alng, alx, h, sga, sgngam, t
-  REAL, PARAMETER :: alneps = -LOG(R1MACH(3)), sqeps = SQRT(R1MACH(4)), &
+  REAL(SP) :: A, X
+  REAL(SP) :: aeps, ainta, algap1, alng, alx, h, sga, sgngam, t
+  REAL(SP), PARAMETER :: alneps = -LOG(R1MACH(3)), sqeps = SQRT(R1MACH(4)), &
     bot = LOG(R1MACH(1))
   !* FIRST EXECUTABLE STATEMENT  GAMIT
   !

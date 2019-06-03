@@ -82,11 +82,11 @@ SUBROUTINE CSPDI(Ap,N,Kpvt,Det,Work,Job)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER N, Job
-  COMPLEX Ap(*), Work(*), Det(2)
+  COMPLEX(SP) Ap(*), Work(*), Det(2)
   INTEGER Kpvt(*)
   !
-  COMPLEX ak, akkp1, akp1, d, t, temp
-  REAL ten
+  COMPLEX(SP) ak, akkp1, akp1, d, t, temp
+  REAL(SP) ten
   INTEGER ij, ik, ikp1, iks, j, jb, jk, jkp1
   INTEGER k, kk, kkp1, km1, ks, ksj, kskp1, kstep
   LOGICAL noinv, nodet

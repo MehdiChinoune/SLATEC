@@ -45,7 +45,7 @@ SUBROUTINE COSTI(N,Wsave)
   !   860115  Modified by Ron Boisvert to adhere to Fortran 77 by
   !           (a) changing dummy array size declarations (1) to (*),
   !           (b) changing references to intrinsic function FLOAT
-  !               to REAL, and
+  !               to REAL(SP), and
   !           (c) changing definition of variable PI by using
   !               FORTRAN intrinsic function ATAN instead of a DATA
   !               statement.
@@ -56,9 +56,9 @@ SUBROUTINE COSTI(N,Wsave)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER :: N
-  REAL :: Wsave(3*N+15)
+  REAL(SP) :: Wsave(3*N+15)
   INTEGER :: k, kc, nm1, np1, ns2
-  REAL :: dt, fk, pi
+  REAL(SP) :: dt, fk, pi
   !* FIRST EXECUTABLE STATEMENT  COSTI
   IF ( N<=3 ) RETURN
   pi = 4.*ATAN(1.)

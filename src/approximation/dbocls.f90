@@ -566,14 +566,14 @@ SUBROUTINE DBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,&
   ! ++
   USE service, ONLY : XERMSG, D1MACH
   INTEGER :: Mcon, Mdw, Mode, Mrows, Ncols
-  REAL(8) :: Rnorm, Rnormc
+  REAL(DP) :: Rnorm, Rnormc
   INTEGER :: Ind(Ncols+Mcon), Iw(2*(Ncols+Mcon)), Iopt(*)
-  REAL(8) :: W(Mdw,Ncols+Mcon+1), Bl(Ncols+Mcon), Bu(Ncols+Mcon), &
+  REAL(DP) :: W(Mdw,Ncols+Mcon+1), Bl(Ncols+Mcon), Bu(Ncols+Mcon), &
     X(2*(Ncols+Mcon)+7), Rw(6*Ncols+5*Mcon)
   INTEGER :: i, icase, iiw, inrows, ip, irw, iscale, j, jp, lbou, lboum, lds, lenx, &
     liopt, liw, llb, lliw, llrw, llx, lmdw, lndw, locacc, locdim, lopt, lp, lrw, &
     m, mdwl, mnew, modec, mopt, mout, nerr
-  REAL(8) :: anorm, cnorm, one, drelpr, t, t1, t2, wt, zero
+  REAL(DP) :: anorm, cnorm, one, drelpr, t, t1, t2, wt, zero
   LOGICAL :: filter, pretri
   CHARACTER(8) :: xern1, xern2
   INTEGER :: jopt(05)

@@ -1,5 +1,5 @@
 !** COSDG
-REAL FUNCTION COSDG(X)
+REAL(SP) FUNCTION COSDG(X)
   !>
   !  Compute the cosine of an argument in degrees.
   !***
@@ -30,9 +30,9 @@ REAL FUNCTION COSDG(X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
   ! JUNE 1977 EDITION.   W. FULLERTON, C3, LOS ALAMOS SCIENTIFIC LAB.
-  REAL X
+  REAL(SP) X
   INTEGER n
-  REAL, PARAMETER :: raddeg = .017453292519943296E0
+  REAL(SP), PARAMETER :: raddeg = .017453292519943296E0
   !
   !* FIRST EXECUTABLE STATEMENT  COSDG
   COSDG = COS(raddeg*X)

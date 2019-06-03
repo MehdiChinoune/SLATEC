@@ -207,19 +207,21 @@ INTEGER FUNCTION ISDCGN(N,B,X,Nelt,Ia,Ja,A,Isym,MTTVEC,MSOLVE,Itol,&
   USE service, ONLY : D1MACH
   INTERFACE
     SUBROUTINE MSOLVE(N,R,Z,Rwork,Iwork)
+      IMPORT DP
       INTEGER :: N, Iwork(*)
-      REAL(8) :: R(N), Z(N), Rwork(*)
+      REAL(DP) :: R(N), Z(N), Rwork(*)
     END SUBROUTINE
     SUBROUTINE MTTVEC(N,X,Y,Nelt,Ia,Ja,A,Isym)
+      IMPORT DP
       INTEGER :: N, Nelt, Isym, Ia(Nelt), Ja(Nelt)
-      REAL(8) :: X(N), Y(N), A(Nelt)
+      REAL(DP) :: X(N), Y(N), A(Nelt)
     END SUBROUTINE
   END INTERFACE
   !     .. Scalar Arguments ..
-  REAL(8) :: Ak, Bk, Bnrm, Err, Solnrm, Tol
+  REAL(DP) :: Ak, Bk, Bnrm, Err, Solnrm, Tol
   INTEGER Ierr, Isym, Iter, Itol, Iunit, N, Nelt
   !     .. Array Arguments ..
-  REAL(8) :: A(N), Atdz(N), Atz(N), B(N), Dz(N), R(N), Rwork(*), X(N)
+  REAL(DP) :: A(N), Atdz(N), Atz(N), B(N), Dz(N), R(N), Rwork(*), X(N)
   INTEGER Ia(Nelt), Iwork(*), Ja(Nelt)
   !     .. Local Scalars ..
   INTEGER i

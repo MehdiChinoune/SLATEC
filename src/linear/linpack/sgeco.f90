@@ -83,10 +83,10 @@ SUBROUTINE SGECO(A,Lda,N,Ipvt,Rcond,Z)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER :: Lda, N, Ipvt(N)
-  REAL :: A(Lda,N), Z(N)
-  REAL :: Rcond
+  REAL(SP) :: A(Lda,N), Z(N)
+  REAL(SP) :: Rcond
   !
-  REAL :: ek, t, wk, wkm, anorm, s, sm, ynorm
+  REAL(SP) :: ek, t, wk, wkm, anorm, s, sm, ynorm
   INTEGER :: info, j, k, kb, kp1, l
   !
   !     COMPUTE 1-NORM OF A

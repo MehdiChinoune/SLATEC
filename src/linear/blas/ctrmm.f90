@@ -137,18 +137,18 @@ SUBROUTINE CTRMM(Side,Uplo,Transa,Diag,M,N,Alpha,A,Lda,B,Ldb)
   !     .. Scalar Arguments ..
   CHARACTER :: Side, Uplo, Transa, Diag
   INTEGER M, N, Lda, Ldb
-  COMPLEX Alpha
+  COMPLEX(SP) Alpha
   !     .. Array Arguments ..
-  COMPLEX A(Lda,*), B(Ldb,*)
+  COMPLEX(SP) A(Lda,*), B(Ldb,*)
   !     .. Intrinsic Functions ..
   INTRINSIC CONJG, MAX
   !     .. Local Scalars ..
   LOGICAL lside, noconj, nounit, upper
   INTEGER i, info, j, k, nrowa
-  COMPLEX temp
+  COMPLEX(SP) temp
   !     .. Parameters ..
-  COMPLEX, PARAMETER :: ONE = (1.0E+0,0.0E+0)
-  COMPLEX, PARAMETER :: ZERO = (0.0E+0,0.0E+0)
+  COMPLEX(SP), PARAMETER :: ONE = (1.0E+0,0.0E+0)
+  COMPLEX(SP), PARAMETER :: ZERO = (0.0E+0,0.0E+0)
   !* FIRST EXECUTABLE STATEMENT  CTRMM
   !
   !     Test the input parameters.

@@ -59,9 +59,9 @@ SUBROUTINE SSORT(X,Y,N,Kflag)
   !     .. Scalar Arguments ..
   INTEGER Kflag, N
   !     .. Array Arguments ..
-  REAL :: X(N), Y(N)
+  REAL(SP) :: X(N), Y(N)
   !     .. Local Scalars ..
-  REAL r, t, tt, tty, ty
+  REAL(SP) r, t, tt, tty, ty
   INTEGER i, ij, j, k, kk, l, m, nn
   !     .. Local Arrays ..
   INTEGER il(21), iu(21)

@@ -138,11 +138,11 @@ SUBROUTINE DCHEX(R,Ldr,P,K,L,Z,Ldz,Nz,C,S,Job)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER Ldr, P, K, L, Ldz, Nz, Job
-  REAL(8) :: R(Ldr,*), Z(Ldz,*), S(*)
-  REAL(8) :: C(*)
+  REAL(DP) :: R(Ldr,*), Z(Ldz,*), S(*)
+  REAL(DP) :: C(*)
   !
   INTEGER i, ii, il, iu, j, jj, km1, kp1, lmk, lm1
-  REAL(8) :: t
+  REAL(DP) :: t
   !
   !     INITIALIZE
   !

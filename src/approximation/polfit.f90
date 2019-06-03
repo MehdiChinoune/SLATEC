@@ -131,14 +131,14 @@ SUBROUTINE POLFIT(N,X,Y,W,Maxdeg,Ndeg,Eps,R,Ierr,A)
   !   920527  Corrected erroneous statements in DESCRIPTION.  (WRB)
   USE service, ONLY : XERMSG
   INTEGER :: Ierr, Maxdeg, N, Ndeg
-  REAL :: Eps
-  REAL :: A(3*(N+Maxdeg+1)), R(N), W(N), X(N), Y(N)
-  REAL :: degf, den, etst, f, fcrit, sig, sigj, sigjm1, sigpas, temp, w1, w11, &
+  REAL(SP) :: Eps
+  REAL(SP) :: A(3*(N+Maxdeg+1)), R(N), W(N), X(N), Y(N)
+  REAL(SP) :: degf, den, etst, f, fcrit, sig, sigj, sigjm1, sigpas, temp, w1, w11, &
     xm, yp(1)
   INTEGER :: i, idegf, j, jp1, jpas, k1, k1pj, k2, k2pj, k3, k3pi, k4, k4pi, &
     k5, k5pi, ksig, m, mop1, nder, nfail
-  REAL(8) :: temd1, temd2
-  REAL, PARAMETER :: co(4,3) = RESHAPE( [ &
+  REAL(DP) :: temd1, temd2
+  REAL(SP), PARAMETER :: co(4,3) = RESHAPE( [ &
     -13.086850, -2.4648165, -3.3846535, -1.2973162, &
     -3.3381146, -1.7812271, -3.2578406, -1.6589279, &
     -1.6282703, -1.3152745, -3.2640179, -1.9829776 ], [4,3] )
@@ -214,17 +214,17 @@ SUBROUTINE POLFIT(N,X,Y,W,Maxdeg,Ndeg,Eps,R,Ierr,A)
   temd1 = 0.0D0
   DO i = 1, m
     k4pi = k4 + i
-    temd1 = temd1 + REAL(W(i), 8)*REAL(Y(i), 8)*REAL(A(k4pi), 8)
+    temd1 = temd1 + REAL( W(i), DP )*REAL( Y(i), DP )*REAL( A(k4pi), DP )
   END DO
-  temd1 = temd1/REAL(w11, 8)
-  A(k2+1) = REAL( temd1, 4 )
+  temd1 = temd1/REAL( w11, DP )
+  A(k2+1) = REAL( temd1, SP )
   sigj = 0.0
   DO i = 1, m
     k4pi = k4 + i
     k5pi = k5 + i
-    temd2 = temd1*REAL(A(k4pi), 8)
-    R(i) = REAL( temd2, 4 )
-    A(k5pi) = REAL( temd2 - R(i), 4 )
+    temd2 = temd1*REAL( A(k4pi), DP )
+    R(i) = REAL( temd2, SP )
+    A(k5pi) = REAL( temd2 - R(i), SP )
     sigj = sigj + W(i)*((Y(i)-R(i))-A(k5pi))**2
   END DO
   j = 0
@@ -255,9 +255,9 @@ SUBROUTINE POLFIT(N,X,Y,W,Maxdeg,Ndeg,Eps,R,Ierr,A)
     DO i = 1, m
       k4pi = k4 + i
       temd2 = A(k4pi)
-      temd1 = temd1 + REAL(X(i), 8)*REAL(W(i), 8)*temd2*temd2
+      temd1 = temd1 + REAL( X(i), DP )*REAL( W(i), DP )*temd2*temd2
     END DO
-    A(jp1) = REAL( temd1/w11, 4 )
+    A(jp1) = REAL( temd1/w11, SP )
     !
     ! EVALUATE ORTHOGONAL POLYNOMIAL AT DATA POINTS
     !
@@ -279,11 +279,11 @@ SUBROUTINE POLFIT(N,X,Y,W,Maxdeg,Ndeg,Eps,R,Ierr,A)
     DO i = 1, m
       k4pi = k4 + i
       k5pi = k5 + i
-      temd2 = REAL(W(i),8)*REAL((Y(i)-R(i))-A(k5pi), 8)*REAL(A(k4pi), 8)
+      temd2 = REAL( W(i), DP )*REAL( (Y(i)-R(i))-A(k5pi), DP )*REAL( A(k4pi), DP )
       temd1 = temd1 + temd2
     END DO
-    temd1 = temd1/REAL(w11, 8)
-    A(k2pj+1) = REAL( temd1, 4 )
+    temd1 = temd1/REAL( w11, DP )
+    A(k2pj+1) = REAL( temd1, SP )
     !
     ! UPDATE POLYNOMIAL EVALUATIONS AT EACH OF THE DATA POINTS, AND
     ! ACCUMULATE SUM OF SQUARES OF ERRORS.  THE POLYNOMIAL EVALUATIONS ARE
@@ -295,9 +295,9 @@ SUBROUTINE POLFIT(N,X,Y,W,Maxdeg,Ndeg,Eps,R,Ierr,A)
     DO i = 1, m
       k4pi = k4 + i
       k5pi = k5 + i
-      temd2 = REAL(R(i), 8) + REAL(A(k5pi), 8) + temd1*REAL(A(k4pi), 8)
-      R(i) = REAL( temd2, 4 )
-      A(k5pi) = REAL( temd2 - R(i), 4 )
+      temd2 = REAL( R(i), DP ) + REAL(A(k5pi), DP ) + temd1*REAL(A(k4pi), DP )
+      R(i) = REAL( temd2, SP )
+      A(k5pi) = REAL( temd2 - R(i), SP )
       sigj = sigj + W(i)*((Y(i)-R(i))-A(k5pi))**2
     END DO
     !

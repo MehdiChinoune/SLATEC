@@ -38,10 +38,10 @@ SUBROUTINE DGAMLM(Xmin,Xmax)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   USE service, ONLY : XERMSG, D1MACH
-  REAL(8), INTENT(OUT) :: Xmin, Xmax
+  REAL(DP), INTENT(OUT) :: Xmin, Xmax
   INTEGER :: i
-  REAL(8) :: xln, xold
-  REAL(8), PARAMETER :: alnsml = LOG(D1MACH(1)), alnbig = LOG(D1MACH(2))
+  REAL(DP) :: xln, xold
+  REAL(DP), PARAMETER :: alnsml = LOG(D1MACH(1)), alnbig = LOG(D1MACH(2))
   !* FIRST EXECUTABLE STATEMENT  DGAMLM
   Xmin = -alnsml
   DO i = 1, 10

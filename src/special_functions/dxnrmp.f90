@@ -137,9 +137,9 @@ SUBROUTINE DXNRMP(Nu,Mu1,Mu2,Darg,Mode,Dpn,Ipn,Isig,Ierror)
   !   920127  Revised PURPOSE section of prologue.  (DWL)
   USE service, ONLY : XERMSG
   INTEGER Nu, Mu1, Mu2, Mode, Ipn(Mu2-Mu1+1), Isig, Ierror
-  REAL(8) :: Darg, Dpn(Mu2-Mu1+1)
+  REAL(DP) :: Darg, Dpn(Mu2-Mu1+1)
   INTEGER i, ip, ip1, ip2, j, k, mu
-  REAL(8) :: c1, c2, p, p1, p2, p3, s, sx, t, tx, x, dk
+  REAL(DP) :: c1, c2, p, p1, p2, p3, s, sx, t, tx, x, dk
   ! CALL DXSET TO INITIALIZE EXTENDED-RANGE ARITHMETIC (SEE DXSET
   ! LISTING FOR DETAILS)
   !* FIRST EXECUTABLE STATEMENT  DXNRMP

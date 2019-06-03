@@ -1,4 +1,5 @@
 MODULE approximation
+  USE service, ONLY : SP, DP
   IMPLICIT NONE
 
 CONTAINS

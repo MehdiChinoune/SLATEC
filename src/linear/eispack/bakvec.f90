@@ -84,7 +84,7 @@ SUBROUTINE BAKVEC(Nm,N,T,E,M,Z,Ierr)
 
   !
   INTEGER i, j, M, N, Nm, Ierr
-  REAL T(Nm,3), E(*), Z(Nm,*)
+  REAL(SP) T(Nm,3), E(*), Z(Nm,*)
   !
   !* FIRST EXECUTABLE STATEMENT  BAKVEC
   Ierr = 0

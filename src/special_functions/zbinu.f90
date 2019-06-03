@@ -23,9 +23,9 @@ SUBROUTINE ZBINU(Zr,Zi,Fnu,Kode,N,Cyr,Cyi,Nz,Rl,Fnul,Tol,Elim,Alim)
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
 
   INTEGER i, inw, Kode, N, nlast, nn, nui, nw, Nz
-  REAL(8) :: Alim, az, cwi(2), cwr(2), Cyi(N), Cyr(N), dfnu, Elim, Fnu, &
+  REAL(DP) :: Alim, az, cwi(2), cwr(2), Cyi(N), Cyr(N), dfnu, Elim, Fnu, &
     Fnul, Rl, Tol, Zi, Zr
-  REAL(8), PARAMETER :: zeror = 0.0D0, zeroi = 0.0D0
+  REAL(DP), PARAMETER :: zeror = 0.0D0, zeroi = 0.0D0
   !* FIRST EXECUTABLE STATEMENT  ZBINU
   Nz = 0
   az = ZABS(Zr,Zi)

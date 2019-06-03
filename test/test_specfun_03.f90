@@ -1,4 +1,5 @@
 MODULE TEST04_MOD
+  USE service, ONLY : SP, DP
   IMPLICIT NONE
 
 CONTAINS
@@ -45,19 +46,19 @@ CONTAINS
     USE slatec, ONLY : C0LGMC, CATAN2, CBETA, CCBRT, CCOT, CEXPRL, CGAMMA, CGAMR, &
       CLBETA, CLNGAM, CLNREL, CLOG10, CPSI, R1MACH
     INTEGER i, Lun, Kprint, Ipass
-    REAL errmax, errtol, abserr, relerr
-    COMPLEX w(48)
+    REAL(SP) errmax, errtol, abserr, relerr
+    COMPLEX(SP) w(48)
     !
     !     Constants to be used
     !
-    COMPLEX, PARAMETER :: c1 = (1.E0,0.E0), ci = (0.E0,1.E0)
+    COMPLEX(SP), PARAMETER :: c1 = (1.E0,0.E0), ci = (0.E0,1.E0)
     REAL, PARAMETER :: sqrt2  = .14142135623730950488E1
     REAL, PARAMETER :: sqrt3  = .17320508075688772935E1
     REAL, PARAMETER :: pi = 3.14159265358979323846E0
     !
     !     Complex values through different calculations are stored in C(*)
     !
-    COMPLEX, PARAMETER :: c(28) = [ (.121699028117870E1,.326091563038355E0), &
+    COMPLEX(SP), PARAMETER :: c(28) = [ (.121699028117870E1,.326091563038355E0), &
       (.866025403784438E0,.500000000000000E0), &
       (-.785398163397449E0,-.658478948462413E0), &
       (.785398163397449E0,-.658478948462413E0), &

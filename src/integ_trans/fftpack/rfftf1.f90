@@ -1,7 +1,7 @@
 !** RFFTF1
 SUBROUTINE RFFTF1(N,C,Ch,Wa,Ifac)
   !>
-  !  Compute the forward transform of a real, periodic sequence.
+  !  Compute the forward transform of a REAL(SP), periodic sequence.
   !***
   ! **Library:**   SLATEC (FFTPACK)
   !***
@@ -93,7 +93,7 @@ SUBROUTINE RFFTF1(N,C,Ch,Wa,Ifac)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER :: N, Ifac(15)
-  REAL :: C(N), Ch(N), Wa(N)
+  REAL(SP) :: C(N), Ch(N), Wa(N)
   INTEGER :: i, idl1, ido, ip, iw, ix2, ix3, ix4, k1, kh, l1, l2, na, nf
   !* FIRST EXECUTABLE STATEMENT  RFFTF1
   nf = Ifac(2)

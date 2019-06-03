@@ -63,14 +63,14 @@ SUBROUTINE DLSI(W,Mdw,Ma,Mg,N,Prgopt,X,Rnorm,Mode,Ws,Ip)
   USE service, ONLY : D1MACH
   USE linear, ONLY : DSWAP, DH12, DHFTI, DAXPY
   INTEGER :: Ma, Mdw, Mg, Mode, N, Ip(Mg+2*N+1)
-  REAL(8) :: Rnorm, Prgopt(:), W(Mdw,N+1), Ws(*), X(N)
+  REAL(DP) :: Rnorm, Prgopt(:), W(Mdw,N+1), Ws(*), X(N)
   !
-  REAL(8) :: anorm, fac, gam, rb, tau, tol, xnorm, temp(1)
+  REAL(DP) :: anorm, fac, gam, rb, tau, tol, xnorm, temp(1)
   INTEGER :: i, j, k, key, krank, krm1, krp1, l, last, link, m, map1, mdlpdp, minman, &
     n1, n2, n3, next, np1
   LOGICAL :: cov, sclcov
   !
-  REAL(8), PARAMETER :: drelpr = D1MACH(4)
+  REAL(DP), PARAMETER :: drelpr = D1MACH(4)
   !
   !* FIRST EXECUTABLE STATEMENT  DLSI
   !

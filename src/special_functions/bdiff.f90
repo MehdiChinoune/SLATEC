@@ -27,7 +27,7 @@ SUBROUTINE BDIFF(L,V)
   !   900328  Added TYPE section.  (WRB)
 
   INTEGER :: L
-  REAL :: V(L)
+  REAL(SP) :: V(L)
   INTEGER :: i, j, k
   !* FIRST EXECUTABLE STATEMENT  BDIFF
   IF ( L==1 ) RETURN

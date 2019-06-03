@@ -1,4 +1,5 @@
 MODULE TEST24_MOD
+  USE service, ONLY : SP, DP
   IMPLICIT NONE
 
 CONTAINS
@@ -31,12 +32,12 @@ CONTAINS
     USE slatec, ONLY : CGEEV, R1MACH, SGEEV
     INTEGER Kprint, Ipass, Lun
     INTEGER job, i, j, id, info
-    REAL w(9)
-    REAL err, erri, relerr, recj
-    COMPLEX ac(3,3), ec(3)
-    REAL ac_r(3,6), ec_r(6), vc_r(3,6)
+    REAL(SP) w(9)
+    REAL(SP) err, erri, relerr, recj
+    COMPLEX(SP) ac(3,3), ec(3)
+    REAL(SP) ac_r(3,6), ec_r(6), vc_r(3,6)
     INTEGER, PARAMETER :: lda = 3, n = 3, ldv = 3
-    REAL :: a(3,3) = RESHAPE( [ 1., -2., 6., -1., 0., -3., 2., 5., 6. ], [3,3] )
+    REAL(SP) :: a(3,3) = RESHAPE( [ 1., -2., 6., -1., 0., -3., 2., 5., 6. ], [3,3] )
     REAL, PARAMETER :: ek(3) = [ -1., 3., 5. ]
     !* FIRST EXECUTABLE STATEMENT  EISQX1
     Ipass = 1
@@ -123,10 +124,10 @@ CONTAINS
     USE slatec, ONLY : CHIEV, R1MACH, SSIEV, SSPEV
     INTEGER Kprint, Ipass, Lun
     INTEGER job, i, j, id, info
-    REAL a1(4,4), a2(10), e(4), v(4,4), w(16)
-    REAL err, erri, relerr
-    COMPLEX ac(4,4)
-    REAL ac_r(4,8), vc_r(4,8)
+    REAL(SP) a1(4,4), a2(10), e(4), v(4,4), w(16)
+    REAL(SP) err, erri, relerr
+    COMPLEX(SP) ac(4,4)
+    REAL(SP) ac_r(4,8), vc_r(4,8)
     INTEGER, PARAMETER :: lda = 4, n = 4, ldv = 4
     REAL, PARAMETER :: ap(10) = [ 5., 4., 5., 1., 1., 4., 1., 1., 2., 4. ]
     REAL, PARAMETER :: ek(4) = [ 1., 2., 5., 10. ]

@@ -1,4 +1,5 @@
 MODULE TEST27_MOD
+  USE service, ONLY : SP, DP
   IMPLICIT NONE
 
 CONTAINS
@@ -39,12 +40,12 @@ CONTAINS
     !     .. Scalar Arguments ..
     INTEGER Ipass, Kprint, Lun
     !     .. Local Scalars ..
-    REAL cnorm, relerr(1), relnrm(1), resnrm(1), rnorme, rnorml(1), tnorm
+    REAL(SP) cnorm, relerr(1), relnrm(1), resnrm(1), rnorme, rnorml(1), tnorm
     INTEGER i, idigit, jdigit, kontrl, ma, mdd, me, meap1, mep1, mg, &
       mode, n, nerr, np1
     LOGICAL fatal
     !     .. Local Arrays ..
-    REAL d(11,6), err(5), prgopt(4), work(105), x(5)
+    REAL(SP) d(11,6), err(5), prgopt(4), work(105), x(5)
     INTEGER ip(17)
     !     .. Intrinsic Functions ..
     INTRINSIC SQRT
@@ -286,7 +287,7 @@ CONTAINS
     !           editorial changes.  (RWC)
     USE slatec, ONLY : R1MACH, SGLSS
     INTEGER i, Ipass, j, kk, Kprint, nerr, kprog, kcase, iwork(7), info, Lun
-    REAL rnorm(1), a(4,4), b(4), delmax, delx, r, work(20)
+    REAL(SP) rnorm(1), a(4,4), b(4), delmax, delx, r, work(20)
     REAL, PARAMETER :: aa(4,4,2) = RESHAPE( [ 1., .5, 1., .25, 0., 2., 0., 1., 2., &
       -1., 1., 0., 0., 0., 0., 0., 1., 2., -1., 0., 0., 1., 2., 0., -1., 0., 1., &
       0., 1., 0., 1., 0. ], [4,4,2] )

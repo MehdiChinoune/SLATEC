@@ -1,5 +1,5 @@
 !** DRJ
-REAL(8) FUNCTION DRJ(X,Y,Z,P,Ier)
+REAL(DP) FUNCTION DRJ(X,Y,Z,P,Ier)
   !>
   !  Compute the incomplete or complete (X or Y or Z is zero)
   !            elliptic integral of the 3rd kind.  For X, Y, and Z non-
@@ -305,14 +305,14 @@ REAL(8) FUNCTION DRJ(X,Y,Z,P,Ier)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   USE service, ONLY : XERMSG, D1MACH
   INTEGER :: Ier
-  REAL(8) :: P, X, Y, Z
-  REAL(8) :: alfa, beta, ea, eb, ec, e2, e3, epslon, lamda, mu, pn, pndev, power4, &
+  REAL(DP) :: P, X, Y, Z
+  REAL(DP) :: alfa, beta, ea, eb, ec, e2, e3, epslon, lamda, mu, pn, pndev, power4, &
     sigma, s1, s2, s3, xn, xndev,xnroot, yn, yndev, ynroot, zn, zndev, znroot
   CHARACTER(16) :: xern3, xern4, xern5, xern6, xern7
-  REAL(8), PARAMETER :: errtol = (D1MACH(3)/3.0D0)**(1.0D0/6.0D0), &
+  REAL(DP), PARAMETER :: errtol = (D1MACH(3)/3.0D0)**(1.0D0/6.0D0), &
     lolim = (5.0D0*D1MACH(1))**(1.0D0/3.0D0), &
     uplim = 0.30D0*(D1MACH(2)/5.0D0)**(1.0D0/3.0D0)
-  REAL(8), PARAMETER :: c1 = 3.0D0/14.0D0, c2 = 1.0D0/3.0D0, c3 = 3.0D0/22.0D0, &
+  REAL(DP), PARAMETER :: c1 = 3.0D0/14.0D0, c2 = 1.0D0/3.0D0, c3 = 3.0D0/22.0D0, &
     c4 = 3.0D0/26.0D0
   !
   !* FIRST EXECUTABLE STATEMENT  DRJ

@@ -34,7 +34,7 @@ SUBROUTINE DLGAMS(X,Dlgam,Sgngam)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
   INTEGER i
-  REAL(8) :: X, Dlgam, Sgngam
+  REAL(DP) :: X, Dlgam, Sgngam
   !* FIRST EXECUTABLE STATEMENT  DLGAMS
   Dlgam = LOG_GAMMA(X)
   Sgngam = 1.0D0

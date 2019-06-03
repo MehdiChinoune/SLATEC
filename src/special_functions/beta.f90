@@ -1,5 +1,5 @@
 !** BETA
-REAL FUNCTION BETA(A,B)
+REAL(SP) FUNCTION BETA(A,B)
   !>
   !  Compute the complete Beta function.
   !***
@@ -36,10 +36,10 @@ REAL FUNCTION BETA(A,B)
   !           (WRB)
   !   900727  Added EXTERNAL statement.  (WRB)
   USE service, ONLY : XERMSG, R1MACH
-  REAL :: A, B
-  REAL :: xmin
-  REAL, SAVE :: xmax = 0.
-  REAL, PARAMETER :: alnsml = LOG(R1MACH(1))
+  REAL(SP) :: A, B
+  REAL(SP) :: xmin
+  REAL(SP), SAVE :: xmax = 0.
+  REAL(SP), PARAMETER :: alnsml = LOG(R1MACH(1))
   !* FIRST EXECUTABLE STATEMENT  BETA
   IF ( xmax==0.0 ) THEN
     CALL GAMLIM(xmin,xmax)

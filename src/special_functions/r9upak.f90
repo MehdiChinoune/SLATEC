@@ -29,7 +29,7 @@ SUBROUTINE R9UPAK(X,Y,N)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
   !* FIRST EXECUTABLE STATEMENT  R9UPAK
-  REAL absx, X, Y
+  REAL(SP) absx, X, Y
   INTEGER N
   absx = ABS(X)
   N = 0

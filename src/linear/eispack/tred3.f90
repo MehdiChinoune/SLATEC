@@ -75,8 +75,8 @@ SUBROUTINE TRED3(N,Nv,A,D,E,E2)
 
   !
   INTEGER i, j, k, l, N, ii, iz, jk, Nv
-  REAL A(Nv), D(N), E(N), E2(N)
-  REAL f, g, h, hh, scalee
+  REAL(SP) A(Nv), D(N), E(N), E2(N)
+  REAL(SP) f, g, h, hh, scalee
   !
   !     .......... FOR I=N STEP -1 UNTIL 1 DO -- ..........
   !* FIRST EXECUTABLE STATEMENT  TRED3

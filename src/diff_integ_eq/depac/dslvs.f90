@@ -32,9 +32,9 @@ SUBROUTINE DSLVS(Wm,Iwm,X)
   USE linear, ONLY : DGBSL, DGESL
   !
   INTEGER :: Iwm(:)
-  REAL(8) :: Wm(:), X(n_com)
+  REAL(DP) :: Wm(:), X(n_com)
   INTEGER :: i, meband, ml, mu
-  REAL(8) :: di, hl0, phl0, r
+  REAL(DP) :: di, hl0, phl0, r
   !     ------------------------------------------------------------------
   !      THIS ROUTINE MANAGES THE SOLUTION OF THE LINEAR SYSTEM ARISING
   !      FROM A CHORD ITERATION.  IT IS CALLED BY DSTOD  IF MITER .NE. 0.

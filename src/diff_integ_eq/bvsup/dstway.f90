@@ -34,7 +34,7 @@ SUBROUTINE DSTWAY(U,V,Yhp,Inout,Stowa)
     kop_com, ndisk_com, ntape_com, neqivp_com
   !
   INTEGER :: Inout
-  REAL(8) :: Stowa(:), U(:), V(:), Yhp(:)
+  REAL(DP) :: Stowa(:), U(:), V(:), Yhp(:)
   INTEGER :: j, k, ko, ks, ksj
   !* FIRST EXECUTABLE STATEMENT  DSTWAY
   IF ( Inout==1 ) THEN

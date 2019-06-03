@@ -32,32 +32,36 @@ SUBROUTINE DDPST(El,F,FA,H,Impl,JACOBN,Matdim,Miter,Ml,Mu,N,Nde,Nq,Save2,&
   USE linear, ONLY : DGBFA, DGEFA
   INTERFACE
     SUBROUTINE F(N,T,Y,Ydot)
+      IMPORT DP
       INTEGER :: N
-      REAL(8) :: T, Y(:), Ydot(:)
+      REAL(DP) :: T, Y(:), Ydot(:)
     END SUBROUTINE F
     SUBROUTINE JACOBN(N,T,Y,Dfdy,Matdim,Ml,Mu)
+      IMPORT DP
       INTEGER :: N, Matdim, Ml, Mu
-      REAL(8) :: T, Y(N), Dfdy(Matdim,N)
+      REAL(DP) :: T, Y(N), Dfdy(Matdim,N)
     END SUBROUTINE JACOBN
     SUBROUTINE USERS(Y,Yh,Ywt,Save1,Save2,T,H,El,Impl,N,Nde,Iflag)
+      IMPORT DP
       INTEGER :: Impl, N, Nde, iflag
-      REAL(8) :: T, H, El
-      REAL(8) :: Y(N), Yh(N,13), Ywt(N), Save1(N), Save2(N)
+      REAL(DP) :: T, H, El
+      REAL(DP) :: Y(N), Yh(N,13), Ywt(N), Save1(N), Save2(N)
     END SUBROUTINE USERS
     SUBROUTINE FA(N,T,Y,A,Matdim,Ml,Mu,Nde)
+      IMPORT DP
       INTEGER :: N, Matdim, Ml, Mu, Nde
-      REAL(8) :: T, Y(N), A(:,:)
+      REAL(DP) :: T, Y(N), A(:,:)
     END SUBROUTINE FA
   END INTERFACE
   INTEGER :: Impl, Iswflg, Jstate, Matdim, Miter, Ml, Mu, N, Nde, Nfe, Nje, Nq
   INTEGER :: Ipvt(N)
-  REAL(8) :: Bnd, H, T, Uround
-  REAL(8) :: A(Matdim,N), Dfdy(Matdim,N), El(13,12), Fac(N), Save1(N), Save2(N), &
+  REAL(DP) :: Bnd, H, T, Uround
+  REAL(DP) :: A(Matdim,N), Dfdy(Matdim,N), El(13,12), Fac(N), Save1(N), Save2(N), &
     Y(N+1), Yh(N,Nq+1), Ywt(N)
   LOGICAL :: Ier
   INTEGER :: i, iflag, imax, info, j, j2, k, mw
-  REAL(8) :: bl, bp, br, dfdymx, diff, dy, facmin, factor, scalee, yj, ys
-  REAL(8), PARAMETER :: FACMAX = 0.5D0, BU = 0.5D0
+  REAL(DP) :: bl, bp, br, dfdymx, diff, dy, facmin, factor, scalee, yj, ys
+  REAL(DP), PARAMETER :: FACMAX = 0.5D0, BU = 0.5D0
   !* FIRST EXECUTABLE STATEMENT  DDPST
   Nje = Nje + 1
   Ier = .FALSE.

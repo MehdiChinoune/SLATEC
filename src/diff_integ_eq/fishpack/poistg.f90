@@ -227,10 +227,10 @@ SUBROUTINE POISTG(Nperod,N,Mperod,M,A,B,C,Idimy,Y,Ierror,W)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER :: Idimy, Ierror, M, Mperod, N, Nperod
-  REAL :: A(M), B(M), C(M), W(:), Y(Idimy,N)
+  REAL(SP) :: A(M), B(M), C(M), W(:), Y(Idimy,N)
   INTEGER :: i, ipstor, irev, iwb2, iwb3, iwba, iwbb, iwbc, iwd, iwp, iwtcos, &
     iww1, iww2, iww3, j, k, mh, mhm1, mhmi, mhpi, modd, mp, mskip, nby2, np
-  REAL :: a1
+  REAL(SP) :: a1
   !* FIRST EXECUTABLE STATEMENT  POISTG
   Ierror = 0
   IF ( M<=2 ) Ierror = 1

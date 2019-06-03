@@ -41,10 +41,10 @@ SUBROUTINE RKFAB(Ncomp,Xpts,Nxpts,Nfc,Iflag,Z,Mxnon,P,Ntp,Ip,Yhp,Niv,U,V,&
     nps_com, numort_com, kkkint_com, lllint_com
   INTEGER :: Ncomp, Nfc, Nfcc, Niv, Ntp, Iflag, Mxnon, Nxpts
   INTEGER :: Iwork(*), Ip(Nfcc,Mxnon+1)
-  REAL :: P(Ntp,Mxnon+1), S(Nfc+1), Stowa(:), U(Ncomp,Nfc,Nxpts), &
+  REAL(SP) :: P(Ntp,Mxnon+1), S(Nfc+1), Stowa(:), U(Ncomp,Nfc,Nxpts), &
     V(Ncomp,Nxpts), W(Nfcc,Mxnon+1), Work(*), Xpts(Nxpts), Yhp(Ncomp,Nfc+1), Z(Mxnon+1)
   INTEGER :: nfcp1, non, idid, ipar(1), j, jflag, jon, kod, kopp
-  REAL :: xxop, ret(1), aet(1)
+  REAL(SP) :: xxop, ret(1), aet(1)
   !
   !- *********************************************************************
   !  INITIALIZATION OF COUNTERS AND VARIABLES.
@@ -181,9 +181,9 @@ SUBROUTINE RKFAB(Ncomp,Xpts,Nxpts,Nfc,Iflag,Z,Mxnon,P,Ntp,Ip,Yhp,Niv,U,V,&
 
 CONTAINS
   SUBROUTINE BVDER_2(X,Y,Yp)
-    REAL :: X
-    REAL :: Y(:), Yp(:)
-    REAL :: g(SIZE(Y))
+    REAL(SP) :: X
+    REAL(SP) :: Y(:), Yp(:)
+    REAL(SP) :: g(SIZE(Y))
 
     g = 0.
     CALL BVDER(X,Y,Yp,G)

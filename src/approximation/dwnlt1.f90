@@ -26,7 +26,7 @@ SUBROUTINE DWNLT1(I,Lend,Mend,Ir,Mdw,Recalc,Imax,Hbar,H,Scalee,W)
   !   890620  Code extracted from WNLIT and made a subroutine.  (RWC))
   !   900604  DP version created from SP version.  (RWC)
   INTEGER :: I, Imax, Ir, Lend, Mdw, Mend
-  REAL(8) :: Hbar, H(:), Scalee(Mend), W(Mdw,Mend)
+  REAL(DP) :: Hbar, H(:), Scalee(Mend), W(Mdw,Mend)
   LOGICAL :: Recalc
   !
   INTEGER :: j, k

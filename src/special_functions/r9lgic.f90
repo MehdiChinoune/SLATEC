@@ -1,5 +1,5 @@
 !** R9LGIC
-REAL FUNCTION R9LGIC(A,X,Alx)
+REAL(SP) FUNCTION R9LGIC(A,X,Alx)
   !>
   !  Compute the log complementary incomplete Gamma function
   !            for large X and for A .LE. X.
@@ -33,10 +33,10 @@ REAL FUNCTION R9LGIC(A,X,Alx)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
   USE service, ONLY : XERMSG, R1MACH
-  REAL :: A, Alx, X
+  REAL(SP) :: A, Alx, X
   INTEGER :: k
-  REAL :: fk, p, r, s, t, xma, xpa
-  REAL, PARAMETER :: eps = 0.5*R1MACH(3)
+  REAL(SP) :: fk, p, r, s, t, xma, xpa
+  REAL(SP), PARAMETER :: eps = 0.5*R1MACH(3)
   !* FIRST EXECUTABLE STATEMENT  R9LGIC
   !
   xpa = X + 1.0 - A

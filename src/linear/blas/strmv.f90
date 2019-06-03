@@ -113,11 +113,11 @@ SUBROUTINE STRMV(Uplo,Trans,Diag,N,A,Lda,X,Incx)
   INTEGER Incx, Lda, N
   CHARACTER :: Diag, Trans, Uplo
   !     .. Array Arguments ..
-  REAL A(Lda,*), X(*)
+  REAL(SP) A(Lda,*), X(*)
   !     .. Parameters ..
-  REAL, PARAMETER :: ZERO = 0.0E+0
+  REAL(SP), PARAMETER :: ZERO = 0.0E+0
   !     .. Local Scalars ..
-  REAL temp
+  REAL(SP) temp
   INTEGER i, info, ix, j, jx, kx
   LOGICAL nounit
   !     .. Intrinsic Functions ..

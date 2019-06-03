@@ -75,10 +75,10 @@ SUBROUTINE SPPFA(Ap,N,Info)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER N, Info
-  REAL Ap(*)
+  REAL(SP) Ap(*)
   !
-  REAL t
-  REAL s
+  REAL(SP) t
+  REAL(SP) s
   INTEGER j, jj, jm1, k, kj, kk
   !* FIRST EXECUTABLE STATEMENT  SPPFA
   jj = 0

@@ -25,7 +25,7 @@ SUBROUTINE WNLT1(I,Lend,Mend,Ir,Mdw,Recalc,Imax,Hbar,H,Scalee,W)
   !   790701  DATE WRITTEN
   !   890620  Code extracted from WNLIT and made a subroutine.  (RWC))
   INTEGER :: I, Imax, Ir, Lend, Mdw, Mend
-  REAL :: Hbar, H(:), Scalee(Mend), W(Mdw,Mend)
+  REAL(SP) :: Hbar, H(:), Scalee(Mend), W(Mdw,Mend)
   LOGICAL :: Recalc
   !
   INTEGER :: j, k

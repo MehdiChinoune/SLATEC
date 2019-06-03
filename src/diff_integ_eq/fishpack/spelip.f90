@@ -35,19 +35,21 @@ SUBROUTINE SPELIP(Intl,Iorder,A,B,M,Mbdcnd,Bda,Alpha,Bdb,Beta,C,D,N,&
     nit_com, ns_com, tdlx3_com, tdly3_com
   INTERFACE
     SUBROUTINE COFX(X,A,B,C)
-      REAL :: X, A, B, C
+      IMPORT SP
+      REAL(SP) :: X, A, B, C
     END SUBROUTINE COFX
     SUBROUTINE COFY(Y,D,E,F)
-      REAL :: Y, D, E, F
+      IMPORT SP
+      REAL(SP) :: Y, D, E, F
     END SUBROUTINE COFY
   END INTERFACE
   INTEGER :: Idmn, Ierror, Intl, Iorder, M, Mbdcnd, N, Nbdcnd
-  REAL :: A, Alpha, B, Beta, C, D, Gama, Pertrb, Xnu
-  REAL :: Am(M), An(N), Bda(N+1), Bdb(N+1), Bdc(M+1), Bdd(M+1), Bm(M), Bn(N), Cm(M), &
+  REAL(SP) :: A, Alpha, B, Beta, C, D, Gama, Pertrb, Xnu
+  REAL(SP) :: Am(M), An(N), Bda(N+1), Bdb(N+1), Bdc(M+1), Bdd(M+1), Bm(M), Bn(N), Cm(M), &
     Cn(N), Dm(M), Dn(N), Grhs(Idmn,N+1), Um(M), Un(N), Usol(Idmn,N+1), W(:), &
     Zm(M), Zn(N)
   INTEGER :: i, i1, iord, j, mp, np
-  REAL :: ai, ax1, axi, bi, bxi, ci, cxi, cxm, dj, dy1, dyj, ej, eyj, fj, fyj, &
+  REAL(SP) :: ai, ax1, axi, bi, bxi, ci, cxi, cxm, dj, dy1, dyj, ej, eyj, fj, fyj, &
     fyn, xi, yj
   LOGICAL :: singlr
   !* FIRST EXECUTABLE STATEMENT  SPELIP

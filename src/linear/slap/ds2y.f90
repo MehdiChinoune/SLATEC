@@ -135,10 +135,10 @@ SUBROUTINE DS2Y(N,Nelt,Ia,Ja,A)
   !     .. Scalar Arguments ..
   INTEGER N, Nelt
   !     .. Array Arguments ..
-  REAL(8) :: A(Nelt)
+  REAL(DP) :: A(Nelt)
   INTEGER Ia(Nelt), Ja(Nelt)
   !     .. Local Scalars ..
-  REAL(8) :: temp
+  REAL(DP) :: temp
   INTEGER i, ibgn, icol, iend, itemp, j
   !* FIRST EXECUTABLE STATEMENT  DS2Y
   !

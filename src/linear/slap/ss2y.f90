@@ -134,10 +134,10 @@ SUBROUTINE SS2Y(N,Nelt,Ia,Ja,A)
   !     .. Scalar Arguments ..
   INTEGER N, Nelt
   !     .. Array Arguments ..
-  REAL A(Nelt)
+  REAL(SP) A(Nelt)
   INTEGER Ia(Nelt), Ja(Nelt)
   !     .. Local Scalars ..
-  REAL temp
+  REAL(SP) temp
   INTEGER i, ibgn, icol, iend, itemp, j
   !* FIRST EXECUTABLE STATEMENT  SS2Y
   !

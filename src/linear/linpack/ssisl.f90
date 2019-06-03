@@ -72,9 +72,9 @@ SUBROUTINE SSISL(A,Lda,N,Kpvt,B)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER Lda, N, Kpvt(*)
-  REAL A(Lda,*), B(*)
+  REAL(SP) A(Lda,*), B(*)
   !
-  REAL ak, akm1, bk, bkm1, denom, temp
+  REAL(SP) ak, akm1, bk, bkm1, denom, temp
   INTEGER k, kp
   !
   !     LOOP BACKWARD APPLYING THE TRANSFORMATIONS AND

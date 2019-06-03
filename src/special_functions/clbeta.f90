@@ -1,5 +1,5 @@
 !** CLBETA
-COMPLEX FUNCTION CLBETA(A,B)
+COMPLEX(SP) FUNCTION CLBETA(A,B)
   !>
   !  Compute the natural logarithm of the complete Beta
   !            function.
@@ -36,7 +36,7 @@ COMPLEX FUNCTION CLBETA(A,B)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   USE service, ONLY : XERMSG
-  COMPLEX A, B
+  COMPLEX(SP) A, B
   !* FIRST EXECUTABLE STATEMENT  CLBETA
   IF ( REAL(A)<=0.0.OR.REAL(B)<=0.0 ) CALL XERMSG('CLBETA',&
     'REAL PART OF BOTH ARGUMENTS MUST BE GT 0',1,2)

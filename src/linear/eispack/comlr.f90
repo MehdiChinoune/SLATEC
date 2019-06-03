@@ -88,8 +88,8 @@ SUBROUTINE COMLR(Nm,N,Low,Igh,Hr,Hi,Wr,Wi,Ierr)
   !
   INTEGER i, j, l, m, N, en, ll, mm, Nm, Igh, im1, itn, its, &
     Low, mp1, enm1, Ierr
-  REAL Hr(Nm,*), Hi(Nm,*), Wr(*), Wi(*)
-  REAL si, sr, ti, tr, xi, xr, yi, yr, zzi, zzr, s1, s2
+  REAL(SP) Hr(Nm,*), Hi(Nm,*), Wr(*), Wi(*)
+  REAL(SP) si, sr, ti, tr, xi, xr, yi, yr, zzi, zzr, s1, s2
   !
   !* FIRST EXECUTABLE STATEMENT  COMLR
   Ierr = 0

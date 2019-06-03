@@ -41,10 +41,10 @@ SUBROUTINE DRKFAB(Ncomp,Xpts,Nxpts,Nfc,Iflag,Z,Mxnon,P,Ntp,Ip,Yhp,Niv,U,V,&
   !
   INTEGER :: Iflag, Mxnon, Ncomp, Nfc, Nfcc, Niv, Ntp, Nxpts
   INTEGER :: Ip(Nfcc,Mxnon+1), Iwork(*)
-  REAL(8) :: P(Ntp,Mxnon+1), S(Nfc+1), Stowa(:), U(Ncomp,Nfc,Nxpts), &
+  REAL(DP) :: P(Ntp,Mxnon+1), S(Nfc+1), Stowa(:), U(Ncomp,Nfc,Nxpts), &
     V(Ncomp,Nxpts), W(Nfcc,Mxnon+1), Work(*), Xpts(Nxpts), Yhp(Ncomp,Nfc+1), Z(Mxnon+1)
   INTEGER :: idid, ipar(1), j, jflag, jon, kod, kopp, nfcp1, non
-  REAL(8) :: xxop, ret(1), aet(1)
+  REAL(DP) :: xxop, ret(1), aet(1)
   !
   !      *****************************************************************
   !       INITIALIZATION OF COUNTERS AND VARIABLES.
@@ -222,9 +222,9 @@ SUBROUTINE DRKFAB(Ncomp,Xpts,Nxpts,Nfc,Iflag,Z,Mxnon,P,Ntp,Ip,Yhp,Niv,U,V,&
 
 CONTAINS
   SUBROUTINE DBVDER_2(X,Y,Yp)
-    REAL(8) :: X
-    REAL(8) :: Y(:), Yp(:)
-    REAL(8) :: g(SIZE(Y))
+    REAL(DP) :: X
+    REAL(DP) :: Y(:), Yp(:)
+    REAL(DP) :: g(SIZE(Y))
 
     g = 0.
     CALL DBVDER(X,Y,Yp,G)

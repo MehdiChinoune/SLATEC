@@ -61,8 +61,8 @@ SUBROUTINE CSROT(N,Cx,Incx,Cy,Incy,C,S)
   !   920310  Corrected definition of LX in DESCRIPTION.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
-  COMPLEX Cx(*), Cy(*), ctemp
-  REAL C, S
+  COMPLEX(SP) Cx(*), Cy(*), ctemp
+  REAL(SP) C, S
   INTEGER i, Incx, Incy, ix, iy, N
   !* FIRST EXECUTABLE STATEMENT  CSROT
   IF ( N<=0 ) RETURN

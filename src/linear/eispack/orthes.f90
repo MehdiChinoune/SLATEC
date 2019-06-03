@@ -75,8 +75,8 @@ SUBROUTINE ORTHES(Nm,N,Low,Igh,A,Ort)
 
   !
   INTEGER i, j, m, N, ii, jj, la, mp, Nm, Igh, kp1, Low
-  REAL A(Nm,*), Ort(*)
-  REAL f, g, h, scalee
+  REAL(SP) A(Nm,*), Ort(*)
+  REAL(SP) f, g, h, scalee
   !
   !* FIRST EXECUTABLE STATEMENT  ORTHES
   la = Igh - 1

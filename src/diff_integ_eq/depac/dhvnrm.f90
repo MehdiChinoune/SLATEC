@@ -1,5 +1,5 @@
 !** DHVNRM
-REAL(8) FUNCTION DHVNRM(V,Ncomp)
+REAL(DP) FUNCTION DHVNRM(V,Ncomp)
   !>
   !  Subsidiary to DDEABM, DDEBDF and DDERKF
   !***
@@ -31,7 +31,7 @@ REAL(8) FUNCTION DHVNRM(V,Ncomp)
 
   !
   INTEGER :: Ncomp
-  REAL(8) :: V(Ncomp)
+  REAL(DP) :: V(Ncomp)
   INTEGER :: k
   !* FIRST EXECUTABLE STATEMENT  DHVNRM
   DHVNRM = 0.0D0

@@ -85,12 +85,12 @@ INTEGER FUNCTION CHFCM(D1,D2,Delta)
   !        b. Change the real declarations to double precision, and
   !        c. Change the constants ZERO, ONE, ... to double precision.
   !  DECLARE ARGUMENTS.
-  REAL D1, D2, Delta
+  REAL(SP) D1, D2, Delta
   !  DECLARE LOCAL VARIABLES
   INTEGER ismon, itrue
-  REAL a, b, eps, phi
+  REAL(SP) a, b, eps, phi
   !  INITIALIZE.
-  REAL, PARAMETER :: zero = 0., one = 1.0, two = 2., three = 3., four = 4., ten = 10.
+  REAL(SP), PARAMETER :: zero = 0., one = 1.0, two = 2., three = 3., four = 4., ten = 10.
   !  MACHINE-DEPENDENT PARAMETER -- SHOULD BE ABOUT 10*UROUND.
   !* FIRST EXECUTABLE STATEMENT  CHFCM
   eps = ten*R1MACH(4)

@@ -27,14 +27,14 @@ SUBROUTINE BKIAS(X,N,Ktrms,T,Ans,Ind,Ms,Gmrn,H,Ierr)
   !   910722  Updated AUTHOR section.  (ALS)
   USE service, ONLY : R1MACH
   INTEGER :: Ind, Ktrms, Ms, N, Ierr
-  REAL :: Ans, Gmrn, H(30), T(50), X
+  REAL(SP) :: Ans, Gmrn, H(30), T(50), X
   INTEGER i, ii, j, jmi, jn, k, kk, km, mm, mp
-  REAL :: den1, den2, den3, er, err, fj, fk, fln, fm1, g1, gs, hn, rat, rg1, rxp, &
+  REAL(SP) :: den1, den2, den3, er, err, fj, fk, fln, fm1, g1, gs, hn, rat, rg1, rxp, &
     rz, rzx, s(31), ss, sumi, sumj, tol, v(52), w(52), xp(16), z
   !-----------------------------------------------------------------------
   !             COEFFICIENTS OF POLYNOMIAL P(J-1,X), J=1,15
   !-----------------------------------------------------------------------
-  REAL, PARAMETER :: b(120) = [ 1.00000000000000000E+00, 1.00000000000000000E+00, &
+  REAL(SP), PARAMETER :: b(120) = [ 1.00000000000000000E+00, 1.00000000000000000E+00, &
     -2.00000000000000000E+00, 1.00000000000000000E+00, -8.00000000000000000E+00, &
     6.00000000000000000E+00, 1.00000000000000000E+00, -2.20000000000000000E+01, &
     5.80000000000000000E+01, -2.40000000000000000E+01, 1.00000000000000000E+00, &
@@ -78,9 +78,9 @@ SUBROUTINE BKIAS(X,N,Ktrms,T,Ans,Ind,Ms,Gmrn,H,Ierr)
   !-----------------------------------------------------------------------
   !             BOUNDS B(M,K), K=M-3
   !-----------------------------------------------------------------------
-  REAL, PARAMETER :: bnd(15) = [ 1.0E0, 1.0E0, 1.0E0, 1.0E0, 3.10E0, 5.18E0, 11.7E0, &
+  REAL(SP), PARAMETER :: bnd(15) = [ 1.0E0, 1.0E0, 1.0E0, 1.0E0, 3.10E0, 5.18E0, 11.7E0, &
     29.8E0, 90.4E0, 297.0E0, 1070.0E0, 4290.0E0, 18100.0E0, 84700.0E0, 408000.0E0 ]
-  REAL, PARAMETER :: hrtpi = 8.86226925452758014E-01
+  REAL(SP), PARAMETER :: hrtpi = 8.86226925452758014E-01
   !
   !* FIRST EXECUTABLE STATEMENT  BKIAS
   Ierr = 0

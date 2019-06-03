@@ -122,9 +122,9 @@ SUBROUTINE CINVIT(Nm,N,Ar,Ai,Wr,Wi,Select,Mm,M,Zr,Zi,Ierr,Rm1,Rm2,Rv1,Rv2)
 
   !
   INTEGER i, j, k, M, N, s, ii, Mm, mp, Nm, uk, ip1, its, km1, Ierr
-  REAL Ar(Nm,*), Ai(Nm,*), Wr(*), Wi(*), Zr(Nm,*), Zi(Nm,*)
-  REAL Rm1(N,*), Rm2(N,*), Rv1(*), Rv2(*)
-  REAL x, y, eps3, norm, normv, growto, ilambd, rlambd, ukroot
+  REAL(SP) Ar(Nm,*), Ai(Nm,*), Wr(*), Wi(*), Zr(Nm,*), Zi(Nm,*)
+  REAL(SP) Rm1(N,*), Rm2(N,*), Rv1(*), Rv2(*)
+  REAL(SP) x, y, eps3, norm, normv, growto, ilambd, rlambd, ukroot
   LOGICAL Select(N)
   !
   !* FIRST EXECUTABLE STATEMENT  CINVIT

@@ -90,7 +90,7 @@ SUBROUTINE RT(Nm,N,A,W,Matz,Z,Fv1,Ierr)
 
   !
   INTEGER N, Nm, Ierr, Matz
-  REAL A(Nm,3), W(*), Z(Nm,*), Fv1(*)
+  REAL(SP) A(Nm,3), W(*), Z(Nm,*), Fv1(*)
   !
   !* FIRST EXECUTABLE STATEMENT  RT
   IF ( N>Nm ) THEN

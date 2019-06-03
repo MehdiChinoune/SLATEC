@@ -47,7 +47,7 @@ SUBROUTINE PRWPGE(Key,Ipage,Lpg,Sx,Ix)
   !   910403  Updated AUTHOR and DESCRIPTION sections.  (WRB)
   USE service, ONLY : XERMSG
   INTEGER :: Ipage, Lpg, Ix(Lpg), Key
-  REAL :: Sx(Lpg)
+  REAL(SP) :: Sx(Lpg)
   !* FIRST EXECUTABLE STATEMENT  PRWPGE
   !
   !     CHECK IF IPAGE IS IN RANGE.

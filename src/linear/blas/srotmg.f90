@@ -65,11 +65,11 @@ SUBROUTINE SROTMG(Sd1,Sd2,Sx1,Sy1,Sparam)
   !   920316  Prologue corrected.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
-  REAL Sd1, Sd2, sflag, sh11, sh12, sh21, sh22, sp1, sp2, Sparam(5), sq1, sq2, &
+  REAL(SP) Sd1, Sd2, sflag, sh11, sh12, sh21, sh22, sp1, sp2, Sparam(5), sq1, sq2, &
     stemp, su, Sx1, Sy1
   INTEGER igo
-  REAL, PARAMETER :: zero = 0.0E0,  one = 1.0E0, two = 2.0E0
-  REAL, PARAMETER :: gam = 4096.0E0, gamsq = 1.67772E7, rgamsq = 5.96046E-8
+  REAL(SP), PARAMETER :: zero = 0.0E0,  one = 1.0E0, two = 2.0E0
+  REAL(SP), PARAMETER :: gam = 4096.0E0, gamsq = 1.67772E7, rgamsq = 5.96046E-8
   !* FIRST EXECUTABLE STATEMENT  SROTMG
   IF ( .NOT.Sd1<zero ) THEN
     !     CASE-SD1-NONNEGATIVE

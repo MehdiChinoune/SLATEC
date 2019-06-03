@@ -80,8 +80,8 @@ SUBROUTINE COSQF(N,X,Wsave)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER :: N
-  REAL :: Wsave(3*N+15), X(N)
-  REAL :: sqrt2, tsqx
+  REAL(SP) :: Wsave(3*N+15), X(N)
+  REAL(SP) :: sqrt2, tsqx
   !* FIRST EXECUTABLE STATEMENT  COSQF
   sqrt2 = SQRT(2.)
   IF ( N<2 ) THEN

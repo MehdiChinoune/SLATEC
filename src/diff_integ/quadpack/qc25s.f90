@@ -97,22 +97,23 @@ SUBROUTINE QC25S(F,A,B,Bl,Br,Alfa,Beta,Ri,Rj,Rg,Rh,Result,Abserr,Resasc,&
 
   !
   INTERFACE
-    REAL FUNCTION F(X)
-      REAL :: X
+    REAL(SP) FUNCTION F(X)
+      IMPORT SP
+      REAL(SP) :: X
     END FUNCTION F
   END INTERFACE
   INTEGER :: Integr, Nev
-  REAL :: A, Abserr, Alfa, B, Beta, Bl, Br, Resasc, Result, Rg(25), Rh(25), &
+  REAL(SP) :: A, Abserr, Alfa, B, Beta, Bl, Br, Resasc, Result, Rg(25), Rh(25), &
     Ri(25), Rj(25)
   INTEGER :: i, isym
-  REAL :: centr, cheb12(13), cheb24(25), dc, factor, fix, fval(25), hlgth, resabs, &
+  REAL(SP) :: centr, cheb12(13), cheb24(25), dc, factor, fix, fval(25), hlgth, resabs, &
     res12, res24, u
   !
   !           THE VECTOR X CONTAINS THE VALUES COS(K*PI/24)
   !           K = 1, ..., 11, TO BE USED FOR THE COMPUTATION OF THE
   !           CHEBYSHEV SERIES EXPANSION OF F.
   !
-  REAL, PARAMETER :: x(11) = [ 0.9914448613738104E+00, 0.9659258262890683E+00, &
+  REAL(SP), PARAMETER :: x(11) = [ 0.9914448613738104E+00, 0.9659258262890683E+00, &
     0.9238795325112868E+00, 0.8660254037844386E+00, 0.7933533402912352E+00, &
     0.7071067811865475E+00, 0.6087614290087206E+00, 0.5000000000000000E+00, &
     0.3826834323650898E+00, 0.2588190451025208E+00, 0.1305261922200516E+00 ]

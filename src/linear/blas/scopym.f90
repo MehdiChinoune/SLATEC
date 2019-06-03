@@ -44,7 +44,7 @@ SUBROUTINE SCOPYM(N,Sx,Incx,Sy,Incy)
   !   920310  Corrected definition of LX in DESCRIPTION.  (WRB)
 
   INTEGER i, Incx, Incy, ix, iy, m, mp1, N, ns
-  REAL Sx(*), Sy(*)
+  REAL(SP) Sx(*), Sy(*)
   !* FIRST EXECUTABLE STATEMENT  SCOPYM
   IF ( N<=0 ) RETURN
   IF ( Incx==Incy ) THEN

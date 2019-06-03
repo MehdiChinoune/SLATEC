@@ -106,15 +106,15 @@ SUBROUTINE CHPR2(Uplo,N,Alpha,X,Incx,Y,Incy,Ap)
   !           lines were modified.  (BKS)
   USE service, ONLY : XERBLA
   !     .. Scalar Arguments ..
-  COMPLEX Alpha
+  COMPLEX(SP) Alpha
   INTEGER Incx, Incy, N
   CHARACTER :: Uplo
   !     .. Array Arguments ..
-  COMPLEX Ap(*), X(*), Y(*)
+  COMPLEX(SP) Ap(*), X(*), Y(*)
   !     .. Parameters ..
-  COMPLEX, PARAMETER :: ZERO = (0.0E+0,0.0E+0)
+  COMPLEX(SP), PARAMETER :: ZERO = (0.0E+0,0.0E+0)
   !     .. Local Scalars ..
-  COMPLEX temp1, temp2
+  COMPLEX(SP) temp1, temp2
   INTEGER i, info, ix, iy, j, jx, jy, k, kk, kx, ky
   !     .. Intrinsic Functions ..
   INTRINSIC CONJG, REAL

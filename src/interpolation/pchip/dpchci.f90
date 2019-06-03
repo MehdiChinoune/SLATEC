@@ -97,16 +97,16 @@ SUBROUTINE DPCHCI(N,H,Slope,D,Incfd)
   !  DECLARE ARGUMENTS.
   !
   INTEGER N, Incfd
-  REAL(8) :: H(N), Slope(N), D(Incfd,N)
+  REAL(DP) :: H(N), Slope(N), D(Incfd,N)
   !
   !  DECLARE LOCAL VARIABLES.
   !
   INTEGER i, nless1
-  REAL(8) :: del1, del2, dmax, dmin, drat1, drat2, hsum, hsumt3, w1, w2
+  REAL(DP) :: del1, del2, dmax, dmin, drat1, drat2, hsum, hsumt3, w1, w2
   !
   !  INITIALIZE.
   !
-  REAL(8), PARAMETER :: zero = 0.D0, three = 3.D0
+  REAL(DP), PARAMETER :: zero = 0.D0, three = 3.D0
   !* FIRST EXECUTABLE STATEMENT  DPCHCI
   nless1 = N - 1
   del1 = Slope(1)

@@ -1,4 +1,5 @@
 MODULE TEST33_MOD
+  USE service, ONLY : SP, DP
   IMPLICIT NONE
 
 CONTAINS
@@ -33,8 +34,8 @@ CONTAINS
     !   900316  Deleted variables ONE and TWO.  (FNF)
     !   900321  Changed name of d.p. version from DFTRUE to DFDTRU.
 
-    REAL(8) :: X, F, D
-    REAL(8) :: fact1, fact2, xx
+    REAL(DP) :: X, F, D
+    REAL(DP) :: fact1, fact2, xx
     !
     !* FIRST EXECUTABLE STATEMENT  DFDTRU
     xx = X
@@ -116,13 +117,13 @@ CONTAINS
     !  Declare arguments.
     !
     INTEGER Lout, Kprint, Npts
-    REAL(8) :: Xev(*), Fev(*), Dev(*), Fev2(*)
+    REAL(DP) :: Xev(*), Fev(*), Dev(*), Fev2(*)
     LOGICAL Fail
     !
     !  DECLARATIONS.
     !
     INTEGER i, ierr, iintt, next(2), next2(2)
-    REAL(8) :: aed, aed2, aedmax, aedmin, aef, aef2, aefmax, aefmin, check(2), &
+    REAL(DP) :: aed, aed2, aedmax, aedmin, aef, aef2, aefmax, aefmin, check(2), &
       checkf(2), checkd(2), d1, d2, dermax, dtrue, dx, eps1, eps2, f1, f2, fact, &
       fermax, floord, floorf, ftrue, machep, red, red2, redmax, redmin, &
       ref, ref2, refmax, refmin, tol1, tol2, x1, x2, xadmax, xadmin, &
@@ -131,11 +132,11 @@ CONTAINS
     !
     !  INITIALIZE.
     !
-    REAL(8), PARAMETER :: zero = 0.D0, one = 1.D0, four = 4.D0, ten = 10.D0
-    REAL(8), PARAMETER :: small = 1.0D-10
+    REAL(DP), PARAMETER :: zero = 0.D0, one = 1.D0, four = 4.D0, ten = 10.D0
+    REAL(DP), PARAMETER :: small = 1.0D-10
     INTEGER, PARAMETER :: nintt = 3
-    REAL(8), PARAMETER :: left(3) = [ -1.5D0, 2.0D-10, 1.0D0 ]
-    REAL(8), PARAMETER :: right(3) = [ 2.5D0, 3.0D-10, 1.0D+8 ]
+    REAL(DP), PARAMETER :: left(3) = [ -1.5D0, 2.0D-10, 1.0D0 ]
+    REAL(DP), PARAMETER :: right(3) = [ 2.5D0, 3.0D-10, 1.0D+8 ]
     !
     !* FIRST EXECUTABLE STATEMENT  DEVCHK
     machep = D1MACH(4)
@@ -389,7 +390,7 @@ CONTAINS
     !
     !  DEFINE RELATIVE ERROR WITH FLOOR.
     !
-    REAL(8) FUNCTION RERR(err,value,floorr)
+    REAL(DP) FUNCTION RERR(err,value,floorr)
       REAL(8), INTENT(IN) :: err, value, floorr
       RERR = err/MAX(ABS(value),floorr)
     END FUNCTION RERR
@@ -448,7 +449,7 @@ CONTAINS
     !  DECLARATIONS.
     !
     INTEGER i, ierr, kontrl, nerr, next(2)
-    REAL(8) :: d(10), dum(1), f(10), temp, x(10)
+    REAL(DP) :: d(10), dum(1), f(10), temp, x(10)
     LOGICAL skip
     !  INITIALIZE.
     INTEGER, PARAMETER :: N = 10
@@ -624,19 +625,19 @@ CONTAINS
     !
     INTEGER Lout, Kprint
     LOGICAL Fail
-    REAL(8) :: X(10), Y(10), F(10,10), Fx(10,10), Fy(10,10), Xe(51), &
+    REAL(DP) :: X(10), Y(10), F(10,10), Fx(10,10), Fy(10,10), Xe(51), &
       Ye(51), Fe(51), De(51), Fe2(51)
     !
     !  DECLARATIONS.
     !
     INTEGER i, ier2, ierr, inc, j, k, nerr
     LOGICAL faild, faile, failoc, skip
-    REAL(8) :: dermax, derr, dtrue, dx, fdiff, fdifmx, fermax, &
+    REAL(DP) :: dermax, derr, dtrue, dx, fdiff, fdifmx, fermax, &
       ferr, ftrue, machep, tol, pdermx, pdifmx, pfermx
     !
     INTEGER, PARAMETER :: nmax = 10, nx = 4, ny = 6
     INTEGER, PARAMETER :: ne = 51
-    REAL(8), PARAMETER :: zero = 0.D0
+    REAL(DP), PARAMETER :: zero = 0.D0
     !
     !  INITIALIZE.
     !
@@ -886,15 +887,15 @@ CONTAINS
     !
     !  DEFINE TEST FUNCTION AND DERIVATIVES.
     !
-    REAL(8) FUNCTION FCN(ax,ay)
+    REAL(DP) FUNCTION FCN(ax,ay)
       REAL(8) ax, ay
       FCN = ax*(ay*ay)*(ax*ax+1.E0)
     END FUNCTION FCN
-    REAL(8) FUNCTION DFDX(ax,ay)
+    REAL(DP) FUNCTION DFDX(ax,ay)
       REAL(8) ax, ay
       DFDX = (ay*ay)*(3.E0*ax*ax+1.E0)
     END FUNCTION DFDX
-    REAL(8) FUNCTION DFDY(ax,ay)
+    REAL(DP) FUNCTION DFDY(ax,ay)
       REAL(8) ax, ay
       DFDY = 2.E0*ax*ay*(ax*ax+1.E0)
     END FUNCTION DFDY
@@ -966,7 +967,7 @@ CONTAINS
     !  DECLARE LOCAL VARIABLES.
     !
     INTEGER i1, i2, i3, i4, i5, i6, i7, i8, i9, ifail, npts
-    REAL(8) :: work(4000)
+    REAL(DP) :: work(4000)
     LOGICAL fail
     !
     !* FIRST EXECUTABLE STATEMENT  DPCHQ1
@@ -1102,18 +1103,18 @@ CONTAINS
     !  DECLARE VARIABLES.
     !
     INTEGER i, ierr, ifail
-    REAL(8) :: calc, d(7), errmax, error, f(7), machep, tol, true
+    REAL(DP) :: calc, d(7), errmax, error, f(7), machep, tol, true
     LOGICAL fail, skip
     !
     !  INITIALIZE.
     !
-    REAL(8), PARAMETER :: thrqtr = 0.75D0, one = 1.D0, two = 2.D0, three = 3.D0
+    REAL(DP), PARAMETER :: thrqtr = 0.75D0, one = 1.D0, two = 2.D0, three = 3.D0
     INTEGER, PARAMETER :: n = 7
-    REAL(8), PARAMETER :: x(7) = [ -4.D0, -2.D0, -0.9D0, 0.D0, 0.9D0, 2.D0, 4.D0 ]
+    REAL(DP), PARAMETER :: x(7) = [ -4.D0, -2.D0, -0.9D0, 0.D0, 0.9D0, 2.D0, 4.D0 ]
     INTEGER, PARAMETER :: npairs = 17
-    REAL(8), PARAMETER :: a(17) = [ -3.0D0, 3.0D0, -0.5D0, -0.5D0, -0.5D0, -4.0D0, &
+    REAL(DP), PARAMETER :: a(17) = [ -3.0D0, 3.0D0, -0.5D0, -0.5D0, -0.5D0, -4.0D0, &
       -4.0D0, 3.0D0, -5.0D0, -5.0D0, -6.0D0, 6.0D0, -1.5D0, -1.5D0, -3.0D0, 3.0D0, 0.5D0 ]
-    REAL(8), PARAMETER :: b(17) =  [ 3.0D0, -3.0D0, 1.0D0, 2.0D0, 5.0D0, -0.5D0, &
+    REAL(DP), PARAMETER :: b(17) =  [ 3.0D0, -3.0D0, 1.0D0, 2.0D0, 5.0D0, -0.5D0, &
       4.0D0, 5.0D0, -3.0D0, 5.0D0, -5.0D0, 5.0D0, -0.5D0, -1.0D0, -2.5D0, 3.5D0, 0.5D0 ]
     INTEGER, PARAMETER :: ierexp(17) = [ 0, 0, 0, 0, 2, 0, 0, 2, 1, 3, 3, 3, 0, &
       0, 0, 0, 0 ]
@@ -1212,15 +1213,15 @@ CONTAINS
     !
     !  DEFINE TEST FUNCTIONS.
     !
-    REAL(8) FUNCTION FCN(ax)
+    REAL(DP) FUNCTION FCN(ax)
       REAL(8), INTENT(IN) :: ax
       FCN = three*ax*ax*(ax-two)
     END FUNCTION FCN
-    REAL(8) FUNCTION DERIV(ax)
+    REAL(DP) FUNCTION DERIV(ax)
       REAL(8), INTENT(IN) :: ax
       DERIV = three*ax*(two*(ax-two)+ax)
     END FUNCTION DERIV
-    REAL(8) FUNCTION ANTDER(ax)
+    REAL(DP) FUNCTION ANTDER(ax)
       REAL(8), INTENT(IN) :: ax
       ANTDER = ax**3*(thrqtr*ax-two)
     END FUNCTION ANTDER
@@ -1317,23 +1318,23 @@ CONTAINS
     !
     INTEGER i, ierr, ifail, nbad, nbadz
     INTEGER, PARAMETER :: N = 9, NWK = 2*N
-    REAL(8) :: d(N), dc(N), err, f(N), tol, told, tolz, vc(2), wk(NWK)
-    REAL(8), PARAMETER :: ZERO = 0.0D0, MONE = -1.0D0
+    REAL(DP) :: d(N), dc(N), err, f(N), tol, told, tolz, vc(2), wk(NWK)
+    REAL(DP), PARAMETER :: ZERO = 0.0D0, MONE = -1.0D0
     CHARACTER(6) :: result
     !
     !  Initialize.
     !
     !       Data.
     INTEGER, PARAMETER :: ic(2) = [ 0, 0 ]
-    REAL(8), PARAMETER :: x(N) = [ -2.2D0, -1.2D0, -1.0D0, -0.5D0, -0.01D0, 0.5D0, &
+    REAL(DP), PARAMETER :: x(N) = [ -2.2D0, -1.2D0, -1.0D0, -0.5D0, -0.01D0, 0.5D0, &
       1.0D0, 2.0D0, 2.2D0 ]
     !
     !       Results generated on Cray X/MP (9 sign. figs.)
-    REAL(8), PARAMETER :: dm(N) = [ 0.D0, 3.80027352D-01, 7.17253009D-01, &
+    REAL(DP), PARAMETER :: dm(N) = [ 0.D0, 3.80027352D-01, 7.17253009D-01, &
       5.82014161D-01, 0.D0, -5.68208031D-01, -5.13501618D-01, -7.77910977D-02, &
       -2.45611117D-03 ]
-    REAL(8), PARAMETER :: dc5 = 1.76950158D-02, dc6 = -5.69579814D-01
-    REAL(8), PARAMETER :: ds(N) = [ -5.16830792D-02, 5.71455855D-01, 7.40530225D-01, &
+    REAL(DP), PARAMETER :: dc5 = 1.76950158D-02, dc6 = -5.69579814D-01
+    REAL(DP), PARAMETER :: ds(N) = [ -5.16830792D-02, 5.71455855D-01, 7.40530225D-01, &
       7.63864934D-01, 1.92614386D-02, -7.65324380D-01, -7.28209035D-01, &
       -7.98445427D-02, -2.85983446D-02 ]
     !
@@ -1632,7 +1633,7 @@ CONTAINS
     !
     INTEGER, PARAMETER :: MAXN = 16, MAXN2 = 8, MAXN3 = 6, NB = 7
     INTEGER i, ierr, ifail, incfd, ismon(MAXN), k, n
-    REAL(8) :: d(MAXN), db(NB), f(MAXN), fb(NB), x(MAXN)
+    REAL(DP) :: d(MAXN), db(NB), f(MAXN), fb(NB), x(MAXN)
     LOGICAL skip
     !
     !  DEFINE EXPECTED RESULTS.
@@ -1881,18 +1882,18 @@ CONTAINS
     !
     INTEGER i, ierr, ifail, inbv, j, knotyp, k, ndim, nknots
     INTEGER, PARAMETER :: N = 9
-    REAL(8) :: bcoef(2*N), dcalc, derr, dermax, fcalc, ferr, fermax, t(2*N+4), &
+    REAL(DP) :: bcoef(2*N), dcalc, derr, dermax, fcalc, ferr, fermax, t(2*N+4), &
       terr, termax, tol, tolz, tsave(2*N+4), work(16*N)
-    REAL(8), PARAMETER :: ZERO = 0.0D0
+    REAL(DP), PARAMETER :: ZERO = 0.0D0
     LOGICAL fail
     !
     !  Define test data.
     !
-    REAL(8), PARAMETER :: x(N) = [ -2.2D0, -1.2D0, -1.0D0, -0.5D0, -0.01D0, 0.5D0, &
+    REAL(DP), PARAMETER :: x(N) = [ -2.2D0, -1.2D0, -1.0D0, -0.5D0, -0.01D0, 0.5D0, &
       1.0D0, 2.0D0, 2.2D0 ]
-    REAL(8), PARAMETER :: f(N) = [ 0.0079D0, 0.2369D0, 0.3679D0, 0.7788D0, 0.9999D0, &
+    REAL(DP), PARAMETER :: f(N) = [ 0.0079D0, 0.2369D0, 0.3679D0, 0.7788D0, 0.9999D0, &
       0.7788D0, 0.3679D0, 0.1083D0, 0.0079D0 ]
-    REAL(8), PARAMETER :: d(N) = [ 0.0000D0, 0.3800D0, 0.7173D0, 0.5820D0, 0.0177D0, &
+    REAL(DP), PARAMETER :: d(N) = [ 0.0000D0, 0.3800D0, 0.7173D0, 0.5820D0, 0.0177D0, &
       -0.5696D0, -0.5135D0, -0.0778D0, -0.0025D0 ]
     !
     !  Initialize.
@@ -2007,7 +2008,7 @@ CONTAINS
     !
     !  Define relative error function.
     !
-    REAL(8) FUNCTION RELERR(err,ans)
+    REAL(DP) FUNCTION RELERR(err,ans)
       REAL(8), INTENT(IN) :: ans, err
       RELERR = ABS(err)/MAX(1.0D-5,ABS(ans))
     END FUNCTION RELERR

@@ -75,12 +75,12 @@ SUBROUTINE DORTH(Vnew,V,Hes,N,Ll,Ldhes,Kmp,Snormw)
   !   920511  Added complete declaration section.  (WRB)
 
   !     .. Scalar Arguments ..
-  REAL(8) :: Snormw
+  REAL(DP) :: Snormw
   INTEGER Kmp, Ldhes, Ll, N
   !     .. Array Arguments ..
-  REAL(8) :: Hes(Ldhes,*), V(N,*), Vnew(*)
+  REAL(DP) :: Hes(Ldhes,*), V(N,*), Vnew(*)
   !     .. Local Scalars ..
-  REAL(8) :: arg, sumdsq, tem, vnrm
+  REAL(DP) :: arg, sumdsq, tem, vnrm
   INTEGER i, i0
   !     .. Intrinsic Functions ..
   INTRINSIC MAX, SQRT

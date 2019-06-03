@@ -1,5 +1,5 @@
 !** DPCHDF
-REAL(8) FUNCTION DPCHDF(K,X,S,Ierr)
+REAL(DP) FUNCTION DPCHDF(K,X,S,Ierr)
   !>
   !  Computes divided differences for DPCHCE and DPCHSP
   !***
@@ -68,13 +68,13 @@ REAL(8) FUNCTION DPCHDF(K,X,S,Ierr)
   !  DECLARE ARGUMENTS.
   !
   INTEGER K, Ierr
-  REAL(8) :: X(K), S(K)
+  REAL(DP) :: X(K), S(K)
   !
   !  DECLARE LOCAL VARIABLES.
   !
   INTEGER i, j
-  REAL(8) :: value
-  REAL(8), PARAMETER :: zero = 0.D0
+  REAL(DP) :: value
+  REAL(DP), PARAMETER :: zero = 0.D0
   !
   !  CHECK FOR LEGAL VALUE OF K.
   !

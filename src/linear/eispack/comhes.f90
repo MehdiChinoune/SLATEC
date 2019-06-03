@@ -78,8 +78,8 @@ SUBROUTINE COMHES(Nm,N,Low,Igh,Ar,Ai,Intt)
 
   !
   INTEGER i, j, m, N, la, Nm, Igh, kp1, Low, mm1, mp1
-  REAL Ar(Nm,*), Ai(Nm,*)
-  REAL xr, xi, yr, yi
+  REAL(SP) Ar(Nm,*), Ai(Nm,*)
+  REAL(SP) xr, xi, yr, yi
   INTEGER Intt(*)
   !
   !* FIRST EXECUTABLE STATEMENT  COMHES

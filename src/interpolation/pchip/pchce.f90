@@ -116,16 +116,16 @@ SUBROUTINE PCHCE(Ic,Vc,N,X,H,Slope,D,Incfd,Ierr)
   !  DECLARE ARGUMENTS.
   !
   INTEGER Ic(2), N, Incfd, Ierr
-  REAL Vc(2), X(N), H(N), Slope(N), D(Incfd,N)
+  REAL(SP) Vc(2), X(N), H(N), Slope(N), D(Incfd,N)
   !
   !  DECLARE LOCAL VARIABLES.
   !
   INTEGER ibeg, iend, ierf, indexx, j, k
-  REAL stemp(3), xtemp(4)
+  REAL(SP) stemp(3), xtemp(4)
   !
   !  INITIALIZE.
   !
-  REAL, PARAMETER :: zero = 0., half = 0.5, two = 2., three = 3.
+  REAL(SP), PARAMETER :: zero = 0., half = 0.5, two = 2., three = 3.
   !
   !* FIRST EXECUTABLE STATEMENT  PCHCE
   ibeg = Ic(1)

@@ -137,11 +137,11 @@ SUBROUTINE DGBCO(Abd,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER Lda, N, Ml, Mu, Ipvt(*)
-  REAL(8) :: Abd(Lda,*), Z(*)
-  REAL(8) :: Rcond
+  REAL(DP) :: Abd(Lda,*), Z(*)
+  REAL(DP) :: Rcond
   !
-  REAL(8) :: ek, t, wk, wkm
-  REAL(8) :: anorm, s, sm, ynorm
+  REAL(DP) :: ek, t, wk, wkm
+  REAL(DP) :: anorm, s, sm, ynorm
   INTEGER is, info, j, ju, k, kb, kp1, l, la, lm, lz, m, mm
   !
   !     COMPUTE 1-NORM OF A

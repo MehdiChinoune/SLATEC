@@ -291,10 +291,10 @@ SUBROUTINE HSTCRT(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER :: Idimf, Ierror, M, Mbdcnd, N, Nbdcnd
-  REAL :: A, B, C, D, Elmbda, Pertrb
-  REAL :: Bda(N+1), Bdb(N+1), Bdc(M+1), Bdd(M+1), F(Idimf,N+1), W(:)
+  REAL(SP) :: A, B, C, D, Elmbda, Pertrb
+  REAL(SP) :: Bda(N+1), Bdb(N+1), Bdc(M+1), Bdd(M+1), F(Idimf,N+1), W(:)
   INTEGER :: i, id2, id3, id4, ierr1, j, mp, mperod, np, nperod
-  REAL :: deltax, deltay, delxsq, delysq, s, st2, twdelx, twdely, twdysq
+  REAL(SP) :: deltax, deltay, delxsq, delysq, s, st2, twdelx, twdely, twdysq
   !* FIRST EXECUTABLE STATEMENT  HSTCRT
   Ierror = 0
   IF ( A>=B ) Ierror = 1

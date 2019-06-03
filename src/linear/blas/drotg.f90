@@ -66,7 +66,7 @@ SUBROUTINE DROTG(Da,Db,Dc,Ds)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
-  REAL(8) :: Da, Db, Dc, Ds, u, v, r
+  REAL(DP) :: Da, Db, Dc, Ds, u, v, r
   !* FIRST EXECUTABLE STATEMENT  DROTG
   IF ( ABS(Da)>ABS(Db) ) THEN
     !

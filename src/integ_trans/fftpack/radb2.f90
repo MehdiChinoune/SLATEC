@@ -23,9 +23,9 @@ SUBROUTINE RADB2(Ido,L1,Cc,Ch,Wa1)
   !   900402  Added TYPE section.  (WRB)
 
   INTEGER :: Ido, L1
-  REAL :: Cc(Ido,2,L1), Ch(Ido,L1,2), Wa1(Ido)
+  REAL(SP) :: Cc(Ido,2,L1), Ch(Ido,L1,2), Wa1(Ido)
   INTEGER :: i, ic, idp2, k
-  REAL :: ti2, tr2
+  REAL(SP) :: ti2, tr2
   !* FIRST EXECUTABLE STATEMENT  RADB2
   DO k = 1, L1
     Ch(1,k,1) = Cc(1,1,k) + Cc(Ido,2,k)

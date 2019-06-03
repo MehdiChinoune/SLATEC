@@ -137,11 +137,11 @@ SUBROUTINE CGBCO(Abd,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER Lda, N, Ml, Mu, Ipvt(*)
-  COMPLEX Abd(Lda,*), Z(*)
-  REAL Rcond
+  COMPLEX(SP) Abd(Lda,*), Z(*)
+  REAL(SP) Rcond
   !
-  COMPLEX ek, t, wk, wkm
-  REAL anorm, s, sm, ynorm
+  COMPLEX(SP) ek, t, wk, wkm
+  REAL(SP) anorm, s, sm, ynorm
   INTEGER is, info, j, ju, k, kb, kp1, l, la, lm, lz, m, mm
   !
   !     COMPUTE 1-NORM OF A

@@ -110,11 +110,11 @@ SUBROUTINE STPMV(Uplo,Trans,Diag,N,Ap,X,Incx)
   INTEGER Incx, N
   CHARACTER :: Diag, Trans, Uplo
   !     .. Array Arguments ..
-  REAL Ap(*), X(*)
+  REAL(SP) Ap(*), X(*)
   !     .. Parameters ..
-  REAL, PARAMETER :: ZERO = 0.0E+0
+  REAL(SP), PARAMETER :: ZERO = 0.0E+0
   !     .. Local Scalars ..
-  REAL temp
+  REAL(SP) temp
   INTEGER i, info, ix, j, jx, k, kk, kx
   LOGICAL nounit
   !* FIRST EXECUTABLE STATEMENT  STPMV

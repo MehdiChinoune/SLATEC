@@ -51,10 +51,10 @@ SUBROUTINE DINTYD(T,K,Yh,Nyh,Dky,Iflag)
   USE DDEBD1, ONLY : h_com, hu_com, tn_com, uround_com, l_com, n_com, nq_com
   !
   INTEGER :: Iflag, K, Nyh
-  REAL(8) :: T
-  REAL(8) :: Dky(Nyh), Yh(Nyh,nq_com+1)
+  REAL(DP) :: T
+  REAL(DP) :: Dky(Nyh), Yh(Nyh,nq_com+1)
   INTEGER :: i, ic, j, jb, jb2, jj, jj1, jp1
-  REAL(8) :: c, r, s, tp
+  REAL(DP) :: c, r, s, tp
   !
   !     BEGIN BLOCK PERMITTING ...EXITS TO 130
   !* FIRST EXECUTABLE STATEMENT  DINTYD

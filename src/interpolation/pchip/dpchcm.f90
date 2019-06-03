@@ -148,13 +148,13 @@ SUBROUTINE DPCHCM(N,X,F,D,Incfd,Skip,Ismon,Ierr)
   !  DECLARE ARGUMENTS.
   !
   INTEGER N, Incfd, Ismon(N), Ierr
-  REAL(8) :: X(N), F(Incfd,N), D(Incfd,N)
+  REAL(DP) :: X(N), F(Incfd,N), D(Incfd,N)
   LOGICAL Skip
   !
   !  DECLARE LOCAL VARIABLES.
   !
   INTEGER i, nseg
-  REAL(8) :: delta
+  REAL(DP) :: delta
   !
   !  VALIDITY-CHECK ARGUMENTS.
   !

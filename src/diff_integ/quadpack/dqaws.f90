@@ -186,12 +186,13 @@ SUBROUTINE DQAWS(F,A,B,Alfa,Beta,Integr,Epsabs,Epsrel,Result,Abserr,Neval,&
   USE service, ONLY : XERMSG
   !
   INTERFACE
-    REAL(8) FUNCTION F(X)
-      REAL(8) :: X
+    REAL(DP) FUNCTION F(X)
+      IMPORT DP
+      REAL(DP) :: X
     END FUNCTION F
   END INTERFACE
   INTEGER :: Ier, Integr, Last, Lenw, Limit, Neval, Iwork(Limit)
-  REAL(8) :: A, Abserr, Alfa, B, Beta, Epsabs, Epsrel, Result, Work(Lenw)
+  REAL(DP) :: A, Abserr, Alfa, B, Beta, Epsabs, Epsrel, Result, Work(Lenw)
   INTEGER :: lvl, l1, l2, l3
   !
   !         CHECK VALIDITY OF LIMIT AND LENW.

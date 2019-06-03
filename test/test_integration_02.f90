@@ -1,4 +1,5 @@
 MODULE TEST42_MOD
+  USE service, ONLY : SP, DP
   IMPLICIT NONE
 
 CONTAINS
@@ -27,7 +28,7 @@ CONTAINS
     USE slatec, ONLY : D1MACH, DAVINT, XERCLR, XGETF, XSETF
     INTEGER kontrl
     INTEGER i, ierr, Ipass, Kprint, Lun, n
-    REAL(8) :: a, ans, b, del, rn1, sqb, tol, tol1, x(501), xint, y(501)
+    REAL(DP) :: a, ans, b, del, rn1, sqb, tol, tol1, x(501), xint, y(501)
     LOGICAL fatal
     !* FIRST EXECUTABLE STATEMENT  DAVNTS
     IF ( Kprint>=2 ) WRITE (Lun,99001)
@@ -235,7 +236,7 @@ CONTAINS
     INTEGER Ipass, Kprint, Lun
     !     .. Local Scalars ..
     INTEGER ierr, kontrl
-    REAL(8) :: a, ans, b, cor, err, req, tol
+    REAL(DP) :: a, ans, b, cor, err, req, tol
     LOGICAL fatal
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, ATAN, EXP, SQRT
@@ -378,7 +379,7 @@ CONTAINS
     INTEGER Ipass, Kprint, Lun
     !     .. Local Scalars ..
     INTEGER ierr, kontrl, nfct
-    REAL(8) :: a, ans, b, cor, err, req, tol
+    REAL(DP) :: a, ans, b, cor, err, req, tol
     LOGICAL fatal
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, MAX, SQRT
@@ -496,7 +497,7 @@ CONTAINS
     99009 FORMAT (/' ***************DQNC79 FAILED SOME TESTS**************')
   END SUBROUTINE DQN79Q
   !** DFQD1
-  REAL(8) FUNCTION DFQD1(X)
+  REAL(DP) FUNCTION DFQD1(X)
     !>
     !  Function evaluator for DQNC79 and DGAUS8 quick checks.
     !***
@@ -514,7 +515,7 @@ CONTAINS
     !   920229  DATE WRITTEN
 
     !     .. Scalar Arguments ..
-    REAL(8), INTENT(IN) :: X
+    REAL(DP), INTENT(IN) :: X
     !     .. Intrinsic Functions ..
     INTRINSIC SQRT
     !* FIRST EXECUTABLE STATEMENT  DFQD1
@@ -522,7 +523,7 @@ CONTAINS
     IF ( X>0.0D0 ) DFQD1 = 1.0D0/SQRT(X)
   END FUNCTION DFQD1
   !** DFQD2
-  REAL(8) FUNCTION DFQD2(X)
+  REAL(DP) FUNCTION DFQD2(X)
     !>
     !  Function evaluator for DQNC79 and DGAUS8 quick checks.
     !***
@@ -540,7 +541,7 @@ CONTAINS
     !   920229  DATE WRITTEN
 
     !     .. Scalar Arguments ..
-    REAL(8), INTENT(IN) :: X
+    REAL(DP), INTENT(IN) :: X
     !     .. Intrinsic Functions ..
     INTRINSIC COS, EXP
     !* FIRST EXECUTABLE STATEMENT  DFQD2

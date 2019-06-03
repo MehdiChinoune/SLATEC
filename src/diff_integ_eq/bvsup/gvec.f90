@@ -13,7 +13,7 @@ SUBROUTINE GVEC(X,G)
   !   ??????  DATE WRITTEN
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-  REAL :: X, G(2)
+  REAL(SP) :: X, G(2)
   !* FIRST EXECUTABLE STATEMENT  GVEC
   G(1) = 0.0
   G(2) = 1.0 + COS(X)

@@ -1,5 +1,5 @@
 !** DENORM
-REAL(8) FUNCTION DENORM(N,X)
+REAL(DP) FUNCTION DENORM(N,X)
   !>
   !  Subsidiary to DNSQ and DNSQE
   !***
@@ -51,10 +51,10 @@ REAL(8) FUNCTION DENORM(N,X)
   !   900328  Added TYPE section.  (WRB)
 
   INTEGER :: N
-  REAL(8) :: X(N)
+  REAL(DP) :: X(N)
   INTEGER :: i
-  REAL(8) :: agiant, floatn, s1, s2, s3, x1max, x3max, xabs
-  REAL(8), PARAMETER :: one = 1.0D0, zero = 0.0D0, rdwarf = 3.834D-20, rgiant = 1.304D19
+  REAL(DP) :: agiant, floatn, s1, s2, s3, x1max, x3max, xabs
+  REAL(DP), PARAMETER :: one = 1.0D0, zero = 0.0D0, rdwarf = 3.834D-20, rgiant = 1.304D19
   !* FIRST EXECUTABLE STATEMENT  DENORM
   s1 = zero
   s2 = zero

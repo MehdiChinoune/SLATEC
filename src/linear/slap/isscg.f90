@@ -173,15 +173,16 @@ INTEGER FUNCTION ISSCG(N,B,X,MSOLVE,Itol,Tol,Iter,&
   USE service, ONLY : R1MACH
   INTERFACE
     SUBROUTINE MSOLVE(N,R,Z,Rwork,Iwork)
+      IMPORT SP
       INTEGER :: N, Iwork(*)
-      REAL :: R(N), Z(N), Rwork(*)
+      REAL(SP) :: R(N), Z(N), Rwork(*)
     END SUBROUTINE
   END INTERFACE
   !     .. Scalar Arguments ..
-  REAL Ak, Bk, Bnrm, Err, Solnrm, Tol
+  REAL(SP) Ak, Bk, Bnrm, Err, Solnrm, Tol
   INTEGER Ierr, Iter, Itol, Iunit, N
   !     .. Array Arguments ..
-  REAL B(N), Dz(N), R(N), Rwork(*), X(N), Z(N)
+  REAL(SP) B(N), Dz(N), R(N), Rwork(*), X(N), Z(N)
   INTEGER Iwork(*)
   !     .. Local Scalars ..
   INTEGER i

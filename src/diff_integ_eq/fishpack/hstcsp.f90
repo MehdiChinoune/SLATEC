@@ -405,10 +405,10 @@ SUBROUTINE HSTCSP(Intl,A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER :: Idimf, Ierror, Intl, M, Mbdcnd, N, Nbdcnd
-  REAL :: A, B, C, D, Elmbda, Pertrb
-  REAL :: Bda(N), Bdb(N), Bdc(M), Bdd(M), F(Idimf,N), W(:)
+  REAL(SP) :: A, B, C, D, Elmbda, Pertrb
+  REAL(SP) :: Bda(N), Bdb(N), Bdc(M), Bdd(M), F(Idimf,N), W(:)
   INTEGER :: ierr1, iwan, iwbm, iwbn, iwcm, iwcn, iwrsq, iwsnth, iwwrk
-  REAL, PARAMETER :: pi = 3.14159265358979
+  REAL(SP), PARAMETER :: pi = 3.14159265358979
   !* FIRST EXECUTABLE STATEMENT  HSTCSP
   !
   !     CHECK FOR INVALID INPUT PARAMETERS

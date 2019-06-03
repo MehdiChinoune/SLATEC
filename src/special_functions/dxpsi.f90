@@ -1,5 +1,5 @@
 !** DXPSI
-REAL(8) FUNCTION DXPSI(A,Ipsik,Ipsix)
+REAL(DP) FUNCTION DXPSI(A,Ipsik,Ipsix)
   !>
   !  To compute values of the Psi function for DXLEGF.
   !***
@@ -25,15 +25,15 @@ REAL(8) FUNCTION DXPSI(A,Ipsik,Ipsix)
   !   920127  Revised PURPOSE section of prologue.  (DWL)
 
   INTEGER i, Ipsik, Ipsix, k, k1, m, n
-  REAL(8) :: A, b, c
+  REAL(DP) :: A, b, c
   !
   !        CNUM(I) AND CDENOM(I) ARE THE ( REDUCED ) NUMERATOR
   !        AND 2*I*DENOMINATOR RESPECTIVELY OF THE 2*I TH BERNOULLI
   !        NUMBER.
   !
-  REAL(8), PARAMETER :: cnum(12) = [ 1.D0, -1.D0, 1.D0, -1.D0, 1.D0, -691.D0, 1.D0, -3617.D0, &
+  REAL(DP), PARAMETER :: cnum(12) = [ 1.D0, -1.D0, 1.D0, -1.D0, 1.D0, -691.D0, 1.D0, -3617.D0, &
     43867.D0, -174611.D0, 77683.D0, -236364091.D0 ]
-  REAL(8), PARAMETER :: cdenom(12) = [ 12.D0, 120.D0, 252.D0, 240.D0, 132.D0, 32760.D0, &
+  REAL(DP), PARAMETER :: cdenom(12) = [ 12.D0, 120.D0, 252.D0, 240.D0, 132.D0, 32760.D0, &
     12.D0, 8160.D0, 14364.D0, 6600.D0, 276.D0, 65520.D0 ]
   !* FIRST EXECUTABLE STATEMENT  DXPSI
   n = MAX(0,Ipsix-INT(A))

@@ -70,9 +70,9 @@ SUBROUTINE SHELS(A,Lda,N,Q,B)
   !     .. Scalar Arguments ..
   INTEGER Lda, N
   !     .. Array Arguments ..
-  REAL A(Lda,*), B(*), Q(*)
+  REAL(SP) A(Lda,*), B(*), Q(*)
   !     .. Local Scalars ..
-  REAL c, s, t, t1, t2
+  REAL(SP) c, s, t, t1, t2
   INTEGER iq, k, kb, kp1
   !* FIRST EXECUTABLE STATEMENT  SHELS
   !

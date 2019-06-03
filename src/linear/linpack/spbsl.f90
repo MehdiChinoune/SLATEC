@@ -75,9 +75,9 @@ SUBROUTINE SPBSL(Abd,Lda,N,M,B)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER Lda, N, M
-  REAL Abd(Lda,*), B(*)
+  REAL(SP) Abd(Lda,*), B(*)
   !
-  REAL t
+  REAL(SP) t
   INTEGER k, kb, la, lb, lm
   !
   !     SOLVE TRANS(R)*Y = B

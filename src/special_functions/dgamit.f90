@@ -1,5 +1,5 @@
 !** DGAMIT
-REAL(8) FUNCTION DGAMIT(A,X)
+REAL(DP) FUNCTION DGAMIT(A,X)
   !>
   !  Calculate Tricomi's form of the incomplete Gamma function.
   !***
@@ -57,9 +57,9 @@ REAL(8) FUNCTION DGAMIT(A,X)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920528  DESCRIPTION and REFERENCES sections revised.  (WRB)
   USE service, ONLY : XERMSG, XERCLR, D1MACH
-  REAL(8) :: A, X
-  REAL(8) :: aeps, ainta, algap1, alng, alx, h, sga, sgngam, t
-  REAL(8), PARAMETER :: alneps = -LOG(D1MACH(3)), sqeps = SQRT(D1MACH(4)), &
+  REAL(DP) :: A, X
+  REAL(DP) :: aeps, ainta, algap1, alng, alx, h, sga, sgngam, t
+  REAL(DP), PARAMETER :: alneps = -LOG(D1MACH(3)), sqeps = SQRT(D1MACH(4)), &
     bot = LOG(D1MACH(1))
   !* FIRST EXECUTABLE STATEMENT  DGAMIT
   IF ( X<0.D0 ) CALL XERMSG('DGAMIT','X IS NEGATIVE',2,2)

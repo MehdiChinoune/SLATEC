@@ -24,22 +24,22 @@ SUBROUTINE CBKNU(Z,Fnu,Kode,N,Y,Nz,Tol,Elim,Alim)
   USE service, ONLY : R1MACH, I1MACH
   !
   INTEGER i, idum, iflag, inu, k, kflag, kk, Kode, koded, N, Nz, nw, j, ic, inub
-  COMPLEX cch, ck, coef, crsc, cs, cscl, csh, csr(3), css(3), cz, f, fmu, p, &
+  COMPLEX(SP) cch, ck, coef, crsc, cs, cscl, csh, csr(3), css(3), cz, f, fmu, p, &
     pt, p1, p2, q, rz, smu, st, s1, s2, Y(N), Z, zd, celm, cy(2)
-  REAL aa, ak, Alim, ascle, a1, a2, bb, bk, bry(3), caz, dnu, dnu2, Elim, &
+  REAL(SP) aa, ak, Alim, ascle, a1, a2, bb, bk, bry(3), caz, dnu, dnu2, Elim, &
     etest, fc, fhs, fk, fks, Fnu, g1, g2, p2i, p2m, p2r, rk, s, tm, Tol, &
     t1, t2, xx, yy, helim, elm, xd, yd, alas, as
   !
   INTEGER, PARAMETER :: kmax = 30
-  REAL, PARAMETER ::  r1 = 2.0E0
-  COMPLEX, PARAMETER ::  czero = (0.0E0,0.0E0), cone = (1.0E0,0.0E0), &
+  REAL(SP), PARAMETER ::  r1 = 2.0E0
+  COMPLEX(SP), PARAMETER ::  czero = (0.0E0,0.0E0), cone = (1.0E0,0.0E0), &
     ctwo = (2.0E0,0.0E0)
   !
-  REAL, PARAMETER ::  pi = 3.14159265358979324E0, rthpi = 1.25331413731550025E0, &
+  REAL(SP), PARAMETER ::  pi = 3.14159265358979324E0, rthpi = 1.25331413731550025E0, &
     spi= 1.90985931710274403E0, hpi = 1.57079632679489662E0, &
     fpi = 1.89769999331517738E0, tth = 6.66666666666666666E-01
   !
-  REAL, PARAMETER :: cc(8) = [ 5.77215664901532861E-01, -4.20026350340952355E-02, &
+  REAL(SP), PARAMETER :: cc(8) = [ 5.77215664901532861E-01, -4.20026350340952355E-02, &
     -4.21977345555443367E-02, 7.21894324666309954E-03, -2.15241674114950973E-04, &
     -2.01348547807882387E-05, 1.13302723198169588E-06, 6.11609510448141582E-09 ]
   !

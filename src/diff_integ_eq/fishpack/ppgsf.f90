@@ -1,5 +1,5 @@
 !** PPGSF
-REAL FUNCTION PPGSF(X,Iz,C,A,Bh)
+REAL(SP) FUNCTION PPGSF(X,Iz,C,A,Bh)
   !>
   !  Subsidiary to CBLKTR
   !***
@@ -19,9 +19,9 @@ REAL FUNCTION PPGSF(X,Iz,C,A,Bh)
   !   900402  Added TYPE section.  (WRB)
 
   INTEGER :: Iz
-  REAL :: X, A(Iz), Bh(Iz), C(Iz)
+  REAL(SP) :: X, A(Iz), Bh(Iz), C(Iz)
   INTEGER :: j
-  REAL :: summ
+  REAL(SP) :: summ
   !* FIRST EXECUTABLE STATEMENT  PPGSF
   summ = 0.
   DO j = 1, Iz

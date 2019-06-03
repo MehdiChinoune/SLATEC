@@ -26,10 +26,10 @@ SUBROUTINE POISP2(M,N,A,Bb,C,Q,Idimq,B,B2,B3,W,W2,W3,D,Tcos,P)
   !   900402  Added TYPE section.  (WRB)
 
   INTEGER :: Idimq, M, N
-  REAL :: A(M), B(M), B2(M), B3(M), Bb(M), C(M), D(M), P(:), Q(Idimq,N), Tcos(4*N), &
+  REAL(SP) :: A(M), B(M), B2(M), B3(M), Bb(M), C(M), D(M), P(:), Q(Idimq,N), Tcos(4*N), &
     W(M), W2(M), W3(M)
   INTEGER :: i, ipstor, j, lh, mr, nr, nrm1, nrmj, nrpj
-  REAL :: s, t
+  REAL(SP) :: s, t
 
   !* FIRST EXECUTABLE STATEMENT  POISP2
   mr = M

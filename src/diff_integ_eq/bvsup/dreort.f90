@@ -58,9 +58,9 @@ SUBROUTINE DREORT(Ncomp,Y,Yp,Yhp,Niv,W,S,P,Ip,Stowa,Iflag)
     nps_com, nfcc_com
   !
   INTEGER :: Iflag, Ncomp, Niv, Ip(:)
-  REAL(8) :: P(:), S(:), Stowa(:), W(:), Y(:,:), Yhp(:,:), Yp(:)
+  REAL(DP) :: P(:), S(:), Stowa(:), W(:), Y(:,:), Yhp(:,:), Yp(:)
   INTEGER :: ijk, j, k, kk, l, mflag, nfcp
-  REAL(8) :: dnd, dndt, dx, srp, vnorm, wcnd, ypnm
+  REAL(DP) :: dnd, dndt, dx, srp, vnorm, wcnd, ypnm
   !
   !- *********************************************************************
   !     BEGIN BLOCK PERMITTING ...EXITS TO 210

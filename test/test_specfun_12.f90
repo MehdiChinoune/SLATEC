@@ -1,4 +1,5 @@
 MODULE TEST13_MOD
+  USE service, ONLY : SP, DP
   IMPLICIT NONE
 
 CONTAINS
@@ -28,7 +29,7 @@ CONTAINS
     USE slatec, ONLY : NUMXER, R1MACH, RC, XERCLR, XGETF, XSETF
     INTEGER Kprint, Ipass, contrl, kontrl, Lun, ier
     INTEGER ipass1, ipass2, ipass3, ipass4
-    REAL pi, trc, dif
+    REAL(SP) pi, trc, dif
     !* FIRST EXECUTABLE STATEMENT  QCRC
     CALL XERCLR
     CALL XGETF(contrl)
@@ -131,7 +132,7 @@ CONTAINS
     USE slatec, ONLY : NUMXER, R1MACH, RD, XERCLR, XGETF, XSETF
     INTEGER Kprint, Ipass, contrl, kontrl, Lun, ier
     INTEGER ipass1, ipass2, ipass3, ipass4
-    REAL blem, trd, dif
+    REAL(SP) blem, trd, dif
     !* FIRST EXECUTABLE STATEMENT  QCRD
     CALL XERCLR
     CALL XGETF(contrl)
@@ -235,7 +236,7 @@ CONTAINS
     USE slatec, ONLY : NUMXER, R1MACH, RF, XERCLR, XGETF, XSETF
     INTEGER Kprint, Ipass, contrl, kontrl, Lun, ier
     INTEGER ipass1, ipass2, ipass3, ipass4
-    REAL alem, trf, dif
+    REAL(SP) alem, trf, dif
     !* FIRST EXECUTABLE STATEMENT  QCRF
     CALL XERCLR
     CALL XGETF(contrl)
@@ -339,7 +340,7 @@ CONTAINS
     USE slatec, ONLY : NUMXER, R1MACH, RJ, XERCLR, XGETF, XSETF
     INTEGER Kprint, Ipass, contrl, kontrl, Lun, ier
     INTEGER ipass1, ipass2, ipass3, ipass4
-    REAL consj, trj, dif
+    REAL(SP) consj, trj, dif
     !* FIRST EXECUTABLE STATEMENT  QCRJ
     CALL XERCLR
     CALL XGETF(contrl)

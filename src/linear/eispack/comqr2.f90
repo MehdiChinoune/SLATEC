@@ -112,9 +112,9 @@ SUBROUTINE COMQR2(Nm,N,Low,Igh,Ortr,Orti,Hr,Hi,Wr,Wi,Zr,Zi,Ierr)
   !
   INTEGER i, j, k, l, m, N, en, ii, jj, ll, Nm, nn, Igh, ip1
   INTEGER itn, its, Low, lp1, enm1, iend, Ierr
-  REAL Hr(Nm,*), Hi(Nm,*), Wr(*), Wi(*), Zr(Nm,*), Zi(Nm,*)
-  REAL Ortr(*), Orti(*)
-  REAL si, sr, ti, tr, xi, xr, yi, yr, zzi, zzr, norm, s1, s2
+  REAL(SP) Hr(Nm,*), Hi(Nm,*), Wr(*), Wi(*), Zr(Nm,*), Zi(Nm,*)
+  REAL(SP) Ortr(*), Orti(*)
+  REAL(SP) si, sr, ti, tr, xi, xr, yi, yr, zzi, zzr, norm, s1, s2
   !
   !* FIRST EXECUTABLE STATEMENT  COMQR2
   Ierr = 0

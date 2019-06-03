@@ -37,7 +37,7 @@ SUBROUTINE DDRIV1(N,T,Y,F,Tout,Mstate,Eps,Work,Lenw,Ierflg)
   !           SDRIV uses single precision arithmetic.  DDRIV uses double
   !           precision arithmetic.  CDRIV allows complex-valued
   !           differential equations, integrated with respect to a single,
-  !           real, independent variable.
+  !           REAL(SP), independent variable.
   !
   !    As an aid in selecting the proper program, the following is a
   !    discussion of the important options or restrictions associated with
@@ -294,44 +294,42 @@ SUBROUTINE DDRIV1(N,T,Y,F,Tout,Mstate,Eps,Work,Lenw,Ierflg)
   !* REVISION HISTORY  (YYMMDD)
   !   790601  DATE WRITTEN
   !   900329  Initial submission to SLATEC.
-  USE service, ONLY : XERMSG, D1MACH
+  USE service, ONLY : XERMSG
   INTERFACE
     SUBROUTINE F(N,T,Y,Ydot)
+      IMPORT DP
       INTEGER :: N
-      REAL(8) :: T, Y(:), Ydot(:)
+      REAL(DP) :: T, Y(:), Ydot(:)
     END SUBROUTINE F
   END INTERFACE
   INTEGER :: Ierflg, Lenw, Mstate, N
-  REAL(8) :: Eps, T, Tout
-  REAL(8) :: Work(Lenw), Y(N+1)
+  REAL(DP) :: Eps, T, Tout
+  REAL(DP) :: Work(Lenw), Y(N+1)
   INTEGER :: i, leniw, lenwcm, lnwchk, ml, mu, nde, nstate, ntask
-  REAL(8) :: hmax
+  REAL(DP) :: hmax
   CHARACTER(8) :: intgr1
   INTEGER, PARAMETER :: MXN = 200, IDLIW = 50
   INTEGER :: iwork(IDLIW+MXN)
   INTEGER, PARAMETER :: NROOT = 0, IERROR = 2, MINT = 2, MITER = 2, IMPL = 0, &
     MXORD = 5, MXSTEP = 1000
-  REAL(8), PARAMETER :: ewtcom(1)  = 1.D0
+  REAL(DP), PARAMETER :: ewtcom(1)  = 1.D0
   !* FIRST EXECUTABLE STATEMENT  DDRIV1
   IF ( ABS(Mstate)==0.OR.ABS(Mstate)>7 ) THEN
     WRITE (intgr1,'(I8)') Mstate
     Ierflg = 26
-    CALL XERMSG('DDRIV1',&
-      'Illegal input.  The magnitude of MSTATE, '//intgr1//&
+    CALL XERMSG('DDRIV1','Illegal input.  The magnitude of MSTATE, '//intgr1//&
       ', is not in the range 1 to 6 .',Ierflg,1)
     Mstate = SIGN(7,Mstate)
     RETURN
   ELSEIF ( ABS(Mstate)==7 ) THEN
     Ierflg = 999
-    CALL XERMSG('DDRIV1',&
-      'Illegal input.  The magnitude of MSTATE is 7 .',Ierflg,2)
+    CALL XERMSG('DDRIV1','Illegal input.  The magnitude of MSTATE is 7 .',Ierflg,2)
     RETURN
   END IF
   IF ( N>MXN ) THEN
     WRITE (intgr1,'(I8)') N
     Ierflg = 21
-    CALL XERMSG('DDRIV1',&
-      'Illegal input.  The number of equations, '//intgr1//&
+    CALL XERMSG('DDRIV1','Illegal input.  The number of equations, '//intgr1//&
       ', is greater than the maximum allowed: 200 .',Ierflg,1)
     Mstate = SIGN(7,Mstate)
     RETURN
@@ -350,8 +348,8 @@ SUBROUTINE DDRIV1(N,T,Y,F,Tout,Mstate,Eps,Work,Lenw,Ierflg)
     lnwchk = N*N + 10*N + 250 + leniw
     WRITE (intgr1,'(I8)') lnwchk
     Ierflg = 32
-    CALL XERMSG('DDRIV1',&
-      'Insufficient storage allocated for the work array.  The required storage is at least '//intgr1//' .',Ierflg,1)
+    CALL XERMSG('DDRIV1','Insufficient storage allocated for the work array.&
+      & The required storage is at least '//intgr1//' .',Ierflg,1)
     Mstate = SIGN(7,Mstate)
     RETURN
   END IF
@@ -377,31 +375,31 @@ SUBROUTINE DDRIV1(N,T,Y,F,Tout,Mstate,Eps,Work,Lenw,Ierflg)
   END IF
 
 CONTAINS
-  REAL(8) FUNCTION dum_G(N,T,Y,Iroot)
+  REAL(DP) FUNCTION dum_G(N,T,Y,Iroot)
     INTEGER :: N, Iroot
-    REAL(8) :: T
-    REAL(8) :: Y(N)
+    REAL(DP) :: T
+    REAL(DP) :: Y(N)
     Iroot = 0
     dum_G = SUM(Y) + T
   END FUNCTION dum_G
   SUBROUTINE dum_JACOBN(N,T,Y,Dfdy,Matdim,Ml,Mu)
     INTEGER :: N, Matdim, Ml, Mu
-    REAL(8) :: T
-    REAL(8) :: Y(N), Dfdy(Matdim,N)
+    REAL(DP) :: T
+    REAL(DP) :: Y(N), Dfdy(Matdim,N)
     Dfdy = T
     Y = Ml + Mu
   END SUBROUTINE dum_JACOBN
   SUBROUTINE dum_USERS(Y,Yh,Ywt,Save1,Save2,T,H,El,Impl,N,Nde,Iflag)
     INTEGER :: Impl, N, Nde, Iflag
-    REAL(8) :: T, H, El
-    REAL(8) :: Y(N), Yh(N,13), Ywt(N), Save1(N), Save2(N)
+    REAL(DP) :: T, H, El
+    REAL(DP) :: Y(N), Yh(N,13), Ywt(N), Save1(N), Save2(N)
     Y = Ywt + Save1 + Save2
     Yh = T + H + El
     Impl = Nde + Iflag
   END SUBROUTINE dum_USERS
   SUBROUTINE dum_FA(N,T,Y,A,Matdim,Ml,Mu,Nde)
     INTEGER :: N, Matdim, Ml, Mu, Nde
-    REAL(8) :: T, Y(N), A(:,:)
+    REAL(DP) :: T, Y(N), A(:,:)
     T = Matdim + Ml + Mu + Nde
     Y = 0.D0
     A = 0.D0

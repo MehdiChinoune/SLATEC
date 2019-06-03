@@ -145,15 +145,16 @@ SUBROUTINE DXLCAL(N,Lgmr,X,Xl,Zl,Hes,Maxlp1,Q,V,R0nrm,Wk,Sz,Jscal,Jpre,&
   !   920511  Added complete declaration section.  (WRB)
   INTERFACE
     SUBROUTINE MSOLVE(N,R,Z,Rwork,Iwork)
+      IMPORT DP
       INTEGER :: N, Iwork(*)
-      REAL(8) :: R(N), Z(N), Rwork(*)
+      REAL(DP) :: R(N), Z(N), Rwork(*)
     END SUBROUTINE
   END INTERFACE
   !     .. Scalar Arguments ..
-  REAL(8) :: R0nrm
+  REAL(DP) :: R0nrm
   INTEGER Jpre, Jscal, Lgmr, Maxlp1, N, Nmsl
   !     .. Array Arguments ..
-  REAL(8) :: Hes(Maxlp1,*), Q(*), Rpar(*), Sz(*), V(N,*), Wk(N), X(N), Xl(N), Zl(N)
+  REAL(DP) :: Hes(Maxlp1,*), Q(*), Rpar(*), Sz(*), V(N,*), Wk(N), X(N), Xl(N), Zl(N)
   INTEGER Ipar(*)
   !     .. Local Scalars ..
   INTEGER i, k, ll, llp1

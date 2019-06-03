@@ -1,7 +1,7 @@
 !** COST
 SUBROUTINE COST(N,X,Wsave)
   !>
-  !  Compute the cosine transform of a real, even sequence.
+  !  Compute the cosine transform of a REAL(SP), even sequence.
   !***
   ! **Library:**   SLATEC (FFTPACK)
   !***
@@ -78,9 +78,9 @@ SUBROUTINE COST(N,X,Wsave)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER :: N
-  REAL :: Wsave(3*N+15), X(N)
+  REAL(SP) :: Wsave(3*N+15), X(N)
   INTEGER i, k, kc, modn, nm1, np1, ns2
-  REAL :: c1, t1, t2, tx2, x1h, x1p3, xi, xim2
+  REAL(SP) :: c1, t1, t2, tx2, x1h, x1p3, xi, xim2
   !* FIRST EXECUTABLE STATEMENT  COST
   nm1 = N - 1
   np1 = N + 1

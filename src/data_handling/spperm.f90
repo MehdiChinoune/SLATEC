@@ -41,9 +41,9 @@ SUBROUTINE SPPERM(X,N,Iperm,Ier)
   !   920507  Modified by M. McClain to revise prologue text.
   USE service, ONLY : XERMSG
   INTEGER :: N, Iperm(N), Ier
-  REAL :: X(N)
+  REAL(SP) :: X(N)
   INTEGER :: i, indx, indx0, istrt
-  REAL :: temp
+  REAL(SP) :: temp
   !* FIRST EXECUTABLE STATEMENT  SPPERM
   Ier = 0
   IF ( N<1 ) THEN

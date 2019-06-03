@@ -1,4 +1,5 @@
 MODULE TEST07_MOD
+  USE service, ONLY : SP, DP
   IMPLICIT NONE
 
 CONTAINS
@@ -45,7 +46,7 @@ CONTAINS
     USE slatec, ONLY : BSKIN, I1MACH, R1MACH
     INTEGER Ipass, Kprint
     INTEGER i, ierr, iflg, ix, i1m12, j, k, kode, Lun, m, mdel, mm, n, ndel, nn, nz
-    REAL aix, er, tol, v(1), x, xinc, y(10)
+    REAL(SP) aix, er, tol, v(1), x, xinc, y(10)
     !* FIRST EXECUTABLE STATEMENT  QCKIN
     tol = 1000.0E0*MAX(R1MACH(4),1.0E-18)
     iflg = 0
@@ -169,7 +170,7 @@ CONTAINS
     USE slatec, ONLY : PSIFN, R1MACH
     INTEGER Ipass, Kprint
     INTEGER i, ierr, iflg, ix, kode, Lun, m, n, nm, nn, nz
-    REAL er, psi1(3), psi2(20), r1m4, s, tol, x
+    REAL(SP) er, psi1(3), psi2(20), r1m4, s, tol, x
     REAL, PARAMETER :: euler = 0.5772156649015328606E0
     !* FIRST EXECUTABLE STATEMENT  QCPSI
     r1m4 = R1MACH(4)

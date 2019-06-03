@@ -36,9 +36,9 @@ SUBROUTINE SOSSOL(K,N,L,X,C,B,M)
   !   900328  Added TYPE section.  (WRB)
 
   INTEGER :: K, L, M, N
-  REAL :: B(:), C(:), X(:)
+  REAL(SP) :: B(:), C(:), X(:)
   INTEGER :: j, j1, k1, k2, k3, kn, lk
-  REAL :: xmax
+  REAL(SP) :: xmax
   !* FIRST EXECUTABLE STATEMENT  SOSSOL
   lk = K - 1
   IF ( L==K ) lk = K

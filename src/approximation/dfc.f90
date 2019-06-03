@@ -382,7 +382,7 @@ SUBROUTINE DFC(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkpt,Nconst,Xconst,&
   !   920501  Reformatted the REFERENCES section.  (WRB)
   USE service, ONLY : XERMSG
   INTEGER :: Mode, Nbkpt, Nconst, Ndata, Nord, Nderiv(Nconst), Iw(:)
-  REAL(8) :: Bkpt(Nbkpt), Coeff(:), Sddata(Ndata), W(*), Xconst(Nconst), &
+  REAL(DP) :: Bkpt(Nbkpt), Coeff(:), Sddata(Ndata), W(*), Xconst(Nconst), &
     Xdata(Ndata), Yconst(Nconst), Ydata(Ndata)
   !
   INTEGER :: i1, i2, i3, i4, i5, i6, i7, mdg, mdw

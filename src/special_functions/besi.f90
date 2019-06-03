@@ -94,12 +94,12 @@ SUBROUTINE BESI(X,Alpha,Kode,N,Y,Nz)
   USE service, ONLY : XERMSG, R1MACH, I1MACH
   !
   INTEGER :: Kode, N, Nz
-  REAL :: Alpha, X, Y(N)
+  REAL(SP) :: Alpha, X, Y(N)
   INTEGER i, ialp, in, is, i1, k, kk, km, kt, nn, ns
-  REAL ain, ak, akm, ans, ap, arg, atol, tolln, dfn, dtm, dx, earg, elim, &
+  REAL(SP) ain, ak, akm, ans, ap, arg, atol, tolln, dfn, dtm, dx, earg, elim, &
     etx, flgik, fn, fnf, fni, fnp1, fnu, gln, ra, s, sx, sxo2, s1, s2, t, ta, tb, &
     temp(3), tfn, tm, tol, trx, t2, xo2, xo2l, z
-  REAL, PARAMETER :: rttpi = 3.98942280401433E-01
+  REAL(SP), PARAMETER :: rttpi = 3.98942280401433E-01
   INTEGER, PARAMETER :: inlim = 80
   !* FIRST EXECUTABLE STATEMENT  BESI
   Nz = 0

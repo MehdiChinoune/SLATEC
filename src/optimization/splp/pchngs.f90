@@ -59,11 +59,11 @@ SUBROUTINE PCHNGS(Ii,Xval,Iplace,Sx,Ix,Ircx)
   !   910403  Updated AUTHOR and DESCRIPTION sections.  (WRB)
   USE service, ONLY : XERMSG
   INTEGER :: Ii, Iplace, Ircx, Ix(:)
-  REAL :: Sx(:), Xval
+  REAL(SP) :: Sx(:), Xval
   INTEGER :: i, iend, il, ilast, iopt, ipl, istart, ixlast, j, jj, jstart, k, &
     key, ll, lmx, lpg, n20055, nerr, np
-  REAL :: sxlast, sxval
-  REAL, PARAMETER :: zero = 0.E0, one = 1.E0
+  REAL(SP) :: sxlast, sxval
+  REAL(SP), PARAMETER :: zero = 0.E0, one = 1.E0
   !* FIRST EXECUTABLE STATEMENT  PCHNGS
   iopt = 1
   !

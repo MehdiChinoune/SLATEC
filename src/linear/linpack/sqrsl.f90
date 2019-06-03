@@ -164,10 +164,10 @@ SUBROUTINE SQRSL(X,Ldx,N,K,Qraux,Y,Qy,Qty,B,Rsd,Xb,Job,Info)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER Ldx, N, K, Job, Info
-  REAL X(Ldx,*), Qraux(*), Y(*), Qy(*), Qty(*), B(*), Rsd(*), Xb(*)
+  REAL(SP) X(Ldx,*), Qraux(*), Y(*), Qy(*), Qty(*), B(*), Rsd(*), Xb(*)
   !
   INTEGER i, j, jj, ju, kp1
-  REAL t, temp
+  REAL(SP) t, temp
   LOGICAL cb, cqy, cqty, cr, cxb
   !* FIRST EXECUTABLE STATEMENT  SQRSL
   !

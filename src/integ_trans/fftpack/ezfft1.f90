@@ -18,7 +18,7 @@ SUBROUTINE EZFFT1(N,Wa,Ifac)
   !   860115  Modified by Ron Boisvert to adhere to Fortran 77 by
   !           (a) changing dummy array size declarations (1) to (*),
   !           (b) changing references to intrinsic function FLOAT
-  !               to REAL, and
+  !               to REAL(SP), and
   !           (c) changing definition of variable TPI by using
   !               FORTRAN intrinsic function ATAN instead of a DATA
   !               statement.
@@ -29,9 +29,9 @@ SUBROUTINE EZFFT1(N,Wa,Ifac)
   !   900402  Added TYPE section.  (WRB)
 
   INTEGER :: N, Ifac(15)
-  REAL :: Wa(N)
+  REAL(SP) :: Wa(N)
   INTEGER :: i, ib, ido, ii, ip, ipm, is, j, k1, l1, l2, nf, nfm1, nl, nq, nr, ntry
-  REAL :: arg1, argh, ch1, ch1h, dch1, dsh1, sh1, tpi
+  REAL(SP) :: arg1, argh, ch1, ch1h, dch1, dsh1, sh1, tpi
   INTEGER, PARAMETER :: ntryh(4) = [ 4, 2, 3, 5 ]
   !* FIRST EXECUTABLE STATEMENT  EZFFT1
   tpi = 8.*ATAN(1.)

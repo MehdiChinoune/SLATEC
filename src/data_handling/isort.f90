@@ -61,7 +61,7 @@ SUBROUTINE ISORT(Ix,Iy,N,Kflag)
   !     .. Array Arguments ..
   INTEGER Ix(N), Iy(N)
   !     .. Local Scalars ..
-  REAL r
+  REAL(SP) r
   INTEGER i, ij, j, k, kk, l, m, nn, t, tt, tty, ty
   !     .. Local Arrays ..
   INTEGER il(21), iu(21)  !     .. Intrinsic Functions ..

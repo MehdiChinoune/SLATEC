@@ -44,17 +44,18 @@ SUBROUTINE DPLPUP(DUSRMT,Mrelas,Nvars,Dattrv,Bl,Bu,Ind,Info,Amat,&
   USE service, ONLY : XERMSG
   INTERFACE
     SUBROUTINE DUSRMT(I,J,Aij,Indcat,Dattrv,Iflag)
+      IMPORT DP
       INTEGER :: I, J, indcat, iflag(10)
-      REAL(8) :: Dattrv(:), Aij
+      REAL(DP) :: Dattrv(:), Aij
     END SUBROUTINE
   END INTERFACE
   INTEGER :: Info, Mrelas, Nvars
-  REAL(8) :: Abig, Asmall
+  REAL(DP) :: Abig, Asmall
   LOGICAL :: Sizeup
   INTEGER :: Imat(:), Ind(Nvars+Mrelas)
-  REAL(8) :: Amat(:), Bl(Nvars+Mrelas), Bu(Nvars+Mrelas), Dattrv(:)
+  REAL(DP) :: Amat(:), Bl(Nvars+Mrelas), Bu(Nvars+Mrelas), Dattrv(:)
   INTEGER :: iflag(10), i, indcat, indexx, iplace, itcnt, itmax, j
-  REAL(8) :: aij, amn, amx, xval, zero
+  REAL(DP) :: aij, amn, amx, xval, zero
   LOGICAL :: first
   CHARACTER(8) :: xern1, xern2
   CHARACTER(16) :: xern3, xern4

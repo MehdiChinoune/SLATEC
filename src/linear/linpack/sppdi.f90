@@ -69,11 +69,11 @@ SUBROUTINE SPPDI(Ap,N,Det,Job)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER N, Job
-  REAL Ap(*)
-  REAL Det(2)
+  REAL(SP) Ap(*)
+  REAL(SP) Det(2)
   !
-  REAL t
-  REAL s
+  REAL(SP) t
+  REAL(SP) s
   INTEGER i, ii, j, jj, jm1, j1, k, kj, kk, kp1, k1
   !* FIRST EXECUTABLE STATEMENT  SPPDI
   !

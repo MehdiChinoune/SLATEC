@@ -171,7 +171,7 @@ SUBROUTINE DLLSIA(A,Mda,M,N,B,Mdb,Nb,Re,Ae,Key,Mode,Np,Krank,Ksure,Rnorm,&
   USE service, ONLY : D1MACH, XERMSG
   INTEGER i, Info, it, Key, Krank, Ksure, Liw, Lw, M, Mda, Mdb, &
     Mode, N, n1, n2, n3, n4, n5, Nb, Np
-  REAL(8) :: A(Mda,N), Ae(N), B(Mdb,Nb), eps, Re(N), Rnorm(Nb), W(5*N)
+  REAL(DP) :: A(Mda,N), Ae(N), B(Mdb,Nb), eps, Re(N), Rnorm(Nb), W(5*N)
   INTEGER Iwork(N+M)
   !
   !* FIRST EXECUTABLE STATEMENT  DLLSIA

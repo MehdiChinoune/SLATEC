@@ -1548,18 +1548,19 @@ SUBROUTINE SPLP(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   USE service, ONLY : XERMSG
   INTERFACE
     SUBROUTINE USRMAT(I,J,Aij,Indcat,Dattrv,Iflag)
+      IMPORT SP
       INTEGER :: I, J, indcat, iflag(10)
-      REAL :: Dattrv(:), Aij
+      REAL(SP) :: Dattrv(:), Aij
     END SUBROUTINE USRMAT
   END INTERFACE
   INTEGER :: Info, Liw, Lw, Mrelas, Nvars
   INTEGER :: Ibasis(Nvars+Mrelas), Ind(Nvars+Mrelas), Iwork(Liw)
-  REAL :: Bl(Nvars+Mrelas), Bu(Nvars+Mrelas), Costs(Nvars), Dattrv(:), &
+  REAL(SP) :: Bl(Nvars+Mrelas), Bu(Nvars+Mrelas), Costs(Nvars), Dattrv(:), &
     Duals(Nvars+Mrelas), Prgopt(:), Primal(Nvars+Mrelas), Work(Lw)
   INTEGER :: iadbig, ictmax, ictopt, iopt, key, lamat, last, lbasma, lbm, lcolnr, &
     lcsc, lerd, lerp, libb, librc, limat, lipr, liwork, liwr, lmx, lrg, lrhs, &
     lrprim, lrz, lwork, lwr, lww, nerr, next
-  REAL :: zero
+  REAL(SP) :: zero
   CHARACTER(8) :: xern1, xern2
   !* FIRST EXECUTABLE STATEMENT  SPLP
   zero = 0.E0

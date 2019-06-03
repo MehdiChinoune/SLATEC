@@ -35,11 +35,11 @@ SUBROUTINE CPROC(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Y,M,A,B,C,D,W,Yy)
   !   900402  Added TYPE section.  (WRB)
 
   INTEGER :: Na, Nd, Nm1, Nm2, M
-  REAL :: Aa(Na), Bm1(Nm1), Bm2(Nm2)
-  COMPLEX :: Y(M), D(M), W(M), Bd(Nd), X(M), A(M), B(M), C(M), Yy(M)
+  REAL(SP) :: Aa(Na), Bm1(Nm1), Bm2(Nm2)
+  COMPLEX(SP) :: Y(M), D(M), W(M), Bd(Nd), X(M), A(M), B(M), C(M), Yy(M)
   INTEGER :: ia, id, iflg, j, k, m1, m2, mm
-  REAL :: rt
-  COMPLEX :: crt, den, y1, y2
+  REAL(SP) :: rt
+  COMPLEX(SP) :: crt, den, y1, y2
   !* FIRST EXECUTABLE STATEMENT  CPROC
   DO j = 1, M
     Y(j) = X(j)

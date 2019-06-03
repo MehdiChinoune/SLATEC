@@ -78,9 +78,9 @@ SUBROUTINE SINQF(N,X,Wsave)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER :: N
-  REAL :: Wsave(N), X(N)
+  REAL(SP) :: Wsave(N), X(N)
   INTEGER :: k, kc, ns2
-  REAL :: xhold
+  REAL(SP) :: xhold
   !* FIRST EXECUTABLE STATEMENT  SINQF
   IF ( N==1 ) RETURN
   ns2 = N/2

@@ -73,21 +73,22 @@ SUBROUTINE QC25C(F,A,B,C,Result,Abserr,Krul,Neval)
 
   !
   INTERFACE
-    REAL FUNCTION F(X)
-      REAL :: X
+    REAL(SP) FUNCTION F(X)
+      IMPORT SP
+      REAL(SP) :: X
     END FUNCTION F
   END INTERFACE
   INTEGER :: Krul, Neval
-  REAL :: A, Abserr, B, C, Result
+  REAL(SP) :: A, Abserr, B, C, Result
   INTEGER :: i, isym, k, kp
-  REAL :: ak22, amom0, amom1, amom2, cc, centr, cheb12(13), cheb24(25), &
+  REAL(SP) :: ak22, amom0, amom1, amom2, cc, centr, cheb12(13), cheb24(25), &
     fval(25), hlgth, p2, p3, p4, resabs, resasc, res12, res24, u
   !
   !           THE VECTOR X CONTAINS THE VALUES COS(K*PI/24),
   !           K = 1, ..., 11, TO BE USED FOR THE CHEBYSHEV SERIES
   !           EXPANSION OF F
   !
-  REAL, PARAMETER :: x(11) = [ 0.9914448613738104E+00, 0.9659258262890683E+00, &
+  REAL(SP), PARAMETER :: x(11) = [ 0.9914448613738104E+00, 0.9659258262890683E+00, &
     0.9238795325112868E+00, 0.8660254037844386E+00, 0.7933533402912352E+00, &
     0.7071067811865475E+00, 0.6087614290087206E+00, 0.5000000000000000E+00, &
     0.3826834323650898E+00, 0.2588190451025208E+00, 0.1305261922200516E+00 ]
@@ -104,7 +105,7 @@ SUBROUTINE QC25C(F,A,B,C,Result,Abserr,Krul,Neval)
   !                    TO THE USE OF CHEB12
   !           RES24  - APPROXIMATION TO THE INTEGRAL CORRESPONDING
   !                    TO THE USE OF CHEB24
-  !           QWGTC - REAL, EXTERNAL :: FUNCTION SUBPROGRAM DEFINING
+  !           QWGTC - REAL(SP), EXTERNAL :: FUNCTION SUBPROGRAM DEFINING
   !                    THE WEIGHT FUNCTION
   !           HLGTH  - HALF-LENGTH OF THE INTERVAL
   !           CENTR  - MID POINT OF THE INTERVAL

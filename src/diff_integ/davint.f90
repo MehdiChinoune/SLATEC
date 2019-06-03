@@ -80,9 +80,9 @@ SUBROUTINE DAVINT(X,Y,N,Xlo,Xup,Ans,Ierr)
   USE service, ONLY : XERMSG
   !
   INTEGER :: Ierr, N
-  REAL(8) :: Ans, Xlo, Xup, X(N), Y(N)
+  REAL(DP) :: Ans, Xlo, Xup, X(N), Y(N)
   INTEGER :: i, inlft, inrt, istart, istop
-  REAL(8) :: a, b, c, ca, cb, cc, fl, fr, r3, rp5, slope, summ, syl, syl2, syl3, &
+  REAL(DP) :: a, b, c, ca, cb, cc, fl, fr, r3, rp5, slope, summ, syl, syl2, syl3, &
     syu, syu2, syu3, term1, term2, term3, x1, x12, x13, x2, x23, x3
   !     BEGIN BLOCK PERMITTING ...EXITS TO 190
   !        BEGIN BLOCK PERMITTING ...EXITS TO 180

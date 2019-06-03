@@ -88,7 +88,7 @@ SUBROUTINE RSP(Nm,N,Nv,A,W,Matz,Z,Fv1,Fv2,Ierr)
 
   !
   INTEGER i, j, N, Nm, Nv, Ierr, Matz
-  REAL A(Nv), W(N), Z(Nm,N), Fv1(N), Fv2(N)
+  REAL(SP) A(Nv), W(N), Z(Nm,N), Fv1(N), Fv2(N)
   !
   !* FIRST EXECUTABLE STATEMENT  RSP
   IF ( N>Nm ) THEN

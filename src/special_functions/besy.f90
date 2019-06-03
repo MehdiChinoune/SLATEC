@@ -3,7 +3,7 @@ SUBROUTINE BESY(X,Fnu,N,Y)
   !>
   !  Implement forward recursion on the three term recursion
   !            relation for a sequence of non-negative order Bessel
-  !            functions Y/SUB(FNU+I-1)/(X), I=1,...,N for real, positive
+  !            functions Y/SUB(FNU+I-1)/(X), I=1,...,N for REAL(SP), positive
   !            X and non-negative orders FNU.
   !***
   ! **Library:**   SLATEC
@@ -75,9 +75,9 @@ SUBROUTINE BESY(X,Fnu,N,Y)
   USE service, ONLY : XERMSG, R1MACH, I1MACH
   !
   INTEGER :: N
-  REAL :: Fnu, X, Y(N)
+  REAL(SP) :: Fnu, X, Y(N)
   INTEGER :: i, iflw, j, nb, nd, nn, nud
-  REAL :: azn, cn, dnu, elim, flgjy, fn, rann, s, s1, s2, tm, &
+  REAL(SP) :: azn, cn, dnu, elim, flgjy, fn, rann, s, s1, s2, tm, &
     trx, w(2), wk(7), w2n, xlim, xxn
   INTEGER, PARAMETER :: nulim(2) = [ 70, 100 ]
   !* FIRST EXECUTABLE STATEMENT  BESY

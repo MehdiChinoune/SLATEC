@@ -25,12 +25,12 @@ SUBROUTINE POS3D1(Lp,L,Mp,M,N,A,B,C,Ldimf,Mdimf,F,Xrt,Yrt,T,D,Wx,Wy,C1,C2,Bb)
   USE integ_trans, ONLY : COSQB, COSQF, COSQI, COST, COSTI, RFFTB, RFFTF, RFFTI, &
     SINQB, SINQF, SINQI, SINT, SINTI
   INTEGER :: L, Ldimf, Lp, M, Mdimf, Mp, N
-  REAL :: C1, C2
-  REAL :: A(N), B(N), Bb(N), C(N), D(N), F(Ldimf,Mdimf,N), T(:), Wx(:), Wy(:), &
+  REAL(SP) :: C1, C2
+  REAL(SP) :: A(N), B(N), Bb(N), C(N), D(N), F(Ldimf,Mdimf,N), T(:), Wx(:), Wy(:), &
     Xrt(L), Yrt(M)
   INTEGER :: i, ifwrd, j, k, lr, lrdel, mr, mrdel, nr
-  REAL :: di, dj, dx, dy, scalx, scaly
-  REAL, PARAMETER :: pi = 3.14159265358979
+  REAL(SP) :: di, dj, dx, dy, scalx, scaly
+  REAL(SP), PARAMETER :: pi = 3.14159265358979
   !* FIRST EXECUTABLE STATEMENT  POS3D1
   lr = L
   mr = M

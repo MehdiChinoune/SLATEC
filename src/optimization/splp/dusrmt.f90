@@ -25,7 +25,7 @@ SUBROUTINE DUSRMT(I,J,Aij,Indcat,Dattrv,Iflag)
 
   INTEGER :: I, Indcat, J
   INTEGER :: Iflag(10)
-  REAL(8) :: Dattrv(:), Aij
+  REAL(DP) :: Dattrv(:), Aij
   INTEGER :: l
   !
   !* FIRST EXECUTABLE STATEMENT  DUSRMT

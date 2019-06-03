@@ -40,10 +40,10 @@ SUBROUTINE SPOPT(Prgopt,Mrelas,Nvars,Info,Csc,Ibasis,Ropt,Intopt,Lopt)
   INTEGER :: Info, Mrelas, Nvars
   INTEGER :: Ibasis(Nvars+Mrelas), Intopt(08)
   LOGICAL :: Lopt(8)
-  REAL :: Csc(Nvars), Prgopt(:), Ropt(07)
+  REAL(SP) :: Csc(Nvars), Prgopt(:), Ropt(07)
   INTEGER :: i, iadbig, ictmax, ictopt, idg, iopt, ipagef, isave, itbrc, itest, j, &
     key, kprint, last, lds, lprg, mxitlp, n20043, n20053, n20096, nerr, next, npp
-  REAL :: abig, asmall, costsc, eps, one, tolls, tune, zero, tolabs
+  REAL(SP) :: abig, asmall, costsc, eps, one, tolls, tune, zero, tolabs
   LOGICAL :: contin, usrbas, sizeup, savedt, colscp, cstscp, minprb, stpedg
   !
   !* FIRST EXECUTABLE STATEMENT  SPOPT

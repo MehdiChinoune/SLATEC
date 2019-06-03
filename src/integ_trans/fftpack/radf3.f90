@@ -26,9 +26,9 @@ SUBROUTINE RADF3(Ido,L1,Cc,Ch,Wa1,Wa2)
   !   900402  Added TYPE section.  (WRB)
 
   INTEGER :: Ido, L1
-  REAL :: Cc(Ido,L1,3), Ch(Ido,3,L1), Wa1(Ido), Wa2(Ido)
+  REAL(SP) :: Cc(Ido,L1,3), Ch(Ido,3,L1), Wa1(Ido), Wa2(Ido)
   INTEGER :: i, ic, idp2, k
-  REAL :: ci2, cr2, di2, di3, dr2, dr3, taui, taur, ti2, ti3, tr2, tr3
+  REAL(SP) :: ci2, cr2, di2, di3, dr2, dr3, taui, taur, ti2, ti3, tr2, tr3
   !* FIRST EXECUTABLE STATEMENT  RADF3
   taur = -.5
   taui = .5*SQRT(3.)

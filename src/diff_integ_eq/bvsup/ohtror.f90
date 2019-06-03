@@ -31,9 +31,9 @@ SUBROUTINE OHTROR(Q,N,Nrda,Diag,Irank,Div,Td)
   !   900402  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
   INTEGER :: Irank, N, Nrda
-  REAL :: Diag(Irank), Div(Irank), Q(Nrda,Irank), Td(Irank)
+  REAL(SP) :: Diag(Irank), Div(Irank), Q(Nrda,Irank), Td(Irank)
   INTEGER :: irp, j, k, kir, kirm, l, nmir
-  REAL :: dd, diagk, qs, sig, sqd, tdv
+  REAL(SP) :: dd, diagk, qs, sig, sqd, tdv
   !* FIRST EXECUTABLE STATEMENT  OHTROR
   nmir = N - Irank
   irp = Irank + 1

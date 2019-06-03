@@ -45,30 +45,33 @@ SUBROUTINE CDNTL(Eps,F,FA,Hmax,Hold,Impl,Jtask,Matdim,Maxord,Mint,Miter,&
   USE linear, ONLY : SCNRM2, CGBSL, CGESL, CGBFA, CGEFA
   INTERFACE
     SUBROUTINE F(N,T,Y,Ydot)
+      IMPORT SP
       INTEGER :: N
-      REAL :: T
-      COMPLEX :: Y(:), Ydot(:)
+      REAL(SP) :: T
+      COMPLEX(SP) :: Y(:), Ydot(:)
     END SUBROUTINE F
     SUBROUTINE USERS(Y,Yh,Ywt,Save1,Save2,T,H,El,Impl,N,Nde,Iflag)
+      IMPORT SP
       INTEGER :: Impl, N, Nde, iflag
-      REAL :: T, H, El
-      COMPLEX :: Y(N), Yh(N,13), Ywt(N), Save1(N), Save2(N)
+      REAL(SP) :: T, H, El
+      COMPLEX(SP) :: Y(N), Yh(N,13), Ywt(N), Save1(N), Save2(N)
     END SUBROUTINE USERS
     SUBROUTINE FA(N,T,Y,A,Matdim,Ml,Mu,Nde)
+      IMPORT SP
       INTEGER :: N, Matdim, Ml, Mu, Nde
-      REAL :: T
-      COMPLEX :: Y(N), A(:,:)
+      REAL(SP) :: T
+      COMPLEX(SP) :: Y(N), A(:,:)
     END SUBROUTINE FA
   END INTERFACE
   INTEGER :: Impl, Iswflg, Jstate, Jtask, Matdim, Maxord, Mint, Miter, Ml, &
     Mntold, Mtrold, Mu, N, Nde, Nfe, Nq, Nwait
-  REAL :: Eps, H, Hmax, Hold, Rc, Rh, Rmax, T, Trend, Uround, El(13,12), Tq(3,12)
-  COMPLEX :: A(Matdim,N), Fac(N), Save1(N), Save2(N), Y(N+1), Yh(N,13), Ywt(N)
+  REAL(SP) :: Eps, H, Hmax, Hold, Rc, Rh, Rmax, T, Trend, Uround, El(13,12), Tq(3,12)
+  COMPLEX(SP) :: A(Matdim,N), Fac(N), Save1(N), Save2(N), Y(N+1), Yh(N,13), Ywt(N)
   INTEGER :: Ipvt(N)
   LOGICAL :: Convrg, Ier
   INTEGER :: i, iflag, info
-  REAL :: oldl0, summ
-  REAL, PARAMETER :: RMINIT = 10000.E0
+  REAL(SP) :: oldl0, summ
+  REAL(SP), PARAMETER :: RMINIT = 10000.E0
   !* FIRST EXECUTABLE STATEMENT  CDNTL
   Ier = .FALSE.
   IF ( Jtask>=0 ) THEN

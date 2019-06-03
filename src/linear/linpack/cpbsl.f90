@@ -75,9 +75,9 @@ SUBROUTINE CPBSL(Abd,Lda,N,M,B)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER Lda, N, M
-  COMPLEX Abd(Lda,*), B(*)
+  COMPLEX(SP) Abd(Lda,*), B(*)
   !
-  COMPLEX t
+  COMPLEX(SP) t
   INTEGER k, kb, la, lb, lm
   !
   !     SOLVE CTRANS(R)*Y = B

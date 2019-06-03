@@ -102,11 +102,11 @@ SUBROUTINE CHPCO(Ap,N,Kpvt,Rcond,Z)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER N, Kpvt(*)
-  COMPLEX Ap(*), Z(*)
-  REAL Rcond
+  COMPLEX(SP) Ap(*), Z(*)
+  REAL(SP) Rcond
   !
-  COMPLEX ak, akm1, bk, bkm1, denom, ek, t
-  REAL anorm, s, ynorm
+  COMPLEX(SP) ak, akm1, bk, bkm1, denom, ek, t
+  REAL(SP) anorm, s, ynorm
   INTEGER i, ij, ik, ikm1, ikp1, info, j, jm1, j1
   INTEGER k, kk, km1k, km1km1, kp, kps, ks
   !

@@ -25,7 +25,7 @@ SUBROUTINE SDPSC(Ksgn,N,Nq,Yh)
   !   900329  Initial submission to SLATEC.
 
   INTEGER :: Ksgn, N, Nq
-  REAL :: Yh(N,Nq+1)
+  REAL(SP) :: Yh(N,Nq+1)
   INTEGER :: i, j, j1, j2
   !* FIRST EXECUTABLE STATEMENT  SDPSC
   IF ( Ksgn>0 ) THEN

@@ -502,17 +502,18 @@ SUBROUTINE DNLS1E(FCN,Iopt,M,N,X,Fvec,Tol,Nprint,Info,Iw,Wa,Lwa)
   USE service, ONLY : XERMSG
   INTERFACE
     SUBROUTINE FCN(Iflag,M,N,X,Fvec,Fjac,Ldfjac)
+      IMPORT DP
       INTEGER :: Ldfjac, M, N, Iflag
-      REAL(8) :: X(N), Fvec(M), Fjac(:,:)
+      REAL(DP) :: X(N), Fvec(M), Fjac(:,:)
     END SUBROUTINE FCN
   END INTERFACE
   INTEGER :: M, N, Nprint, Info, Lwa, Iopt
   INTEGER :: Iw(N)
-  REAL(8) :: Tol
-  REAL(8) :: X(N), Fvec(M), Wa(Lwa)
+  REAL(DP) :: Tol
+  REAL(DP) :: X(N), Fvec(M), Wa(Lwa)
   INTEGER :: indexx, maxfev, mode, nfev, njev
-  REAL(8) :: ftol, gtol, xtol, epsfcn
-  REAL(8), PARAMETER :: factor = 1.0D2, zero = 0.0D0
+  REAL(DP) :: ftol, gtol, xtol, epsfcn
+  REAL(DP), PARAMETER :: factor = 1.0D2, zero = 0.0D0
   !* FIRST EXECUTABLE STATEMENT  DNLS1E
   Info = 0
   !

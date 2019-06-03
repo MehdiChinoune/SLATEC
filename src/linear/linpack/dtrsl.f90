@@ -78,10 +78,10 @@ SUBROUTINE DTRSL(T,Ldt,N,B,Job,Info)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER Ldt, N, Job, Info
-  REAL(8) :: T(Ldt,*), B(*)
+  REAL(DP) :: T(Ldt,*), B(*)
   !
   !
-  REAL(8) :: temp
+  REAL(DP) :: temp
   INTEGER case, j, jj
   !* FIRST EXECUTABLE STATEMENT  DTRSL
   !

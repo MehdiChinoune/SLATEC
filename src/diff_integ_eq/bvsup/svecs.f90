@@ -33,9 +33,9 @@ SUBROUTINE SVECS(Ncomp,Lnfc,Yhp,Work,Iwork,Inhomo,Iflag)
   !   910722  Updated AUTHOR section.  (ALS)
   USE ML, ONLY: indpvt_com, nfcc_com
   INTEGER :: Iflag, Inhomo, Lnfc, Ncomp, Iwork(*)
-  REAL :: Work(*), Yhp(:,:)
+  REAL(SP) :: Work(*), Yhp(:,:)
   INTEGER :: idp, k, kp, niv
-  REAL :: dum
+  REAL(SP) :: dum
   !* FIRST EXECUTABLE STATEMENT  SVECS
   IF ( Lnfc/=1 ) THEN
     niv = Lnfc

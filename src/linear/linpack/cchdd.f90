@@ -135,14 +135,14 @@ SUBROUTINE CCHDD(R,Ldr,P,X,Z,Ldz,Nz,Y,Rho,C,S,Info)
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
-  REAL scalee
+  REAL(SP) scalee
   INTEGER Ldr, P, Ldz, Nz, Info
-  COMPLEX R(Ldr,*), X(*), Z(Ldz,*), Y(*), S(*)
-  REAL Rho(*), C(*)
+  COMPLEX(SP) R(Ldr,*), X(*), Z(Ldz,*), Y(*), S(*)
+  REAL(SP) Rho(*), C(*)
   !
   INTEGER i, ii, j
-  REAL a, alpha, azeta, norm
-  COMPLEX t, zeta, b, xx
+  REAL(SP) a, alpha, azeta, norm
+  COMPLEX(SP) t, zeta, b, xx
   !
   !     SOLVE THE SYSTEM CTRANS(R)*A = X, PLACING THE RESULT
   !     IN THE ARRAY S.

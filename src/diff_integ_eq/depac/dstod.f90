@@ -100,21 +100,23 @@ SUBROUTINE DSTOD(Neq,Y,Yh,Nyh,Yh1,Ewt,Savf,Acor,Wm,Iwm,DF,DJAC)
   !
   INTERFACE
     SUBROUTINE DF(X,U,Uprime)
-      REAL(8) :: X
-      REAL(8) :: U(:), Uprime(:)
+      IMPORT DP
+      REAL(DP) :: X
+      REAL(DP) :: U(:), Uprime(:)
     END SUBROUTINE DF
     SUBROUTINE DJAC(X,U,Pd,Nrowpd)
+      IMPORT DP
       INTEGER :: Nrowpd
-      REAL(8) :: X
-      REAL(8) :: U(:), Pd(:,:)
+      REAL(DP) :: X
+      REAL(DP) :: U(:), Pd(:,:)
     END SUBROUTINE DJAC
   END INTERFACE
   INTEGER :: Neq, Nyh
   INTEGER :: Iwm(:)
-  REAL(8) :: Acor(n_com), Ewt(n_com), Savf(n_com), Wm(:), Y(n_com), Yh(Nyh,maxord_com+1), &
+  REAL(DP) :: Acor(n_com), Ewt(n_com), Savf(n_com), Wm(:), Y(n_com), Yh(Nyh,maxord_com+1), &
     Yh1(Nyh*maxord_com+Nyh)
   INTEGER :: i, i1, iredo, iret, j, jb, m, ncf, newq
-  REAL(8) :: dcon, ddn, del, delp, dsm, dup, exdn, exsm, exup, r, rh, rhdn, &
+  REAL(DP) :: dcon, ddn, del, delp, dsm, dup, exdn, exsm, exup, r, rh, rhdn, &
     rhsm, rhup, told
   !
   !     BEGIN BLOCK PERMITTING ...EXITS TO 690

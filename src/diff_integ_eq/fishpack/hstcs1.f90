@@ -21,11 +21,11 @@ SUBROUTINE HSTCS1(Intl,A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   !   900402  Added TYPE section.  (WRB)
 
   INTEGER :: Idimf, Ierr1, Intl, M, Mbdcnd, N, Nbdcnd
-  REAL :: A, B, C, D, Elmbda, Pertrb
-  REAL :: Am(M), An(N), Bda(N), Bdb(N), Bdc(M), Bdd(M), Bm(M), Bn(N), Cm(M), Cn(N), &
+  REAL(SP) :: A, B, C, D, Elmbda, Pertrb
+  REAL(SP) :: Am(M), An(N), Bda(N), Bdb(N), Bdc(M), Bdd(M), Bm(M), Bn(N), Cm(M), Cn(N), &
     F(Idimf,N), Rsq(N), Snth(M), Wrk(:)
   INTEGER :: i, isw, j, nb
-  REAL :: a1, a2, a3, dr, dth, dthsq, x, y
+  REAL(SP) :: a1, a2, a3, dr, dth, dthsq, x, y
   !* FIRST EXECUTABLE STATEMENT  HSTCS1
   dth = (B-A)/M
   dthsq = dth*dth

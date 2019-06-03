@@ -51,10 +51,10 @@ SUBROUTINE INTYD(T,K,Yh,Nyh,Dky,Iflag)
   USE DEBDF1, ONLY : h_com, hu_com, tn_com, uround_com, l_com, n_com, nq_com
   !
   INTEGER :: K, Nyh, Iflag
-  REAL :: T
-  REAL :: Yh(Nyh,nq_com+1), Dky(Nyh)
+  REAL(SP) :: T
+  REAL(SP) :: Yh(Nyh,nq_com+1), Dky(Nyh)
   INTEGER :: i, ic, j, jb, jb2, jj, jj1, jp1
-  REAL :: c, r, s, tp
+  REAL(SP) :: c, r, s, tp
   !
   !* FIRST EXECUTABLE STATEMENT  INTYD
   Iflag = 0

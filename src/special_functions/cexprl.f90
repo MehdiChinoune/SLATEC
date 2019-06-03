@@ -1,5 +1,5 @@
 !** CEXPRL
-COMPLEX FUNCTION CEXPRL(Z)
+COMPLEX(SP) FUNCTION CEXPRL(Z)
   !>
   !  Calculate the relative error exponential (EXP(X)-1)/X.
   !***
@@ -32,10 +32,10 @@ COMPLEX FUNCTION CEXPRL(Z)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   USE service, ONLY : R1MACH
-  COMPLEX :: Z
+  COMPLEX(SP) :: Z
   INTEGER :: i
-  REAL :: r
-  REAL, PARAMETER :: alneps = LOG(R1MACH(3)), xn = 3.72 - 0.3*alneps, &
+  REAL(SP) :: r
+  REAL(SP), PARAMETER :: alneps = LOG(R1MACH(3)), xn = 3.72 - 0.3*alneps, &
     xln = LOG((xn+1.0)/1.36), rbnd = R1MACH(3)
   INTEGER, PARAMETER :: nterms = INT( xn - (xn*xln+alneps)/(xln+1.36) + 1.5 )
   !* FIRST EXECUTABLE STATEMENT  CEXPRL

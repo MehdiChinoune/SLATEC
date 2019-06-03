@@ -76,10 +76,10 @@ SUBROUTINE DPPFA(Ap,N,Info)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER N, Info
-  REAL(8) :: Ap(*)
+  REAL(DP) :: Ap(*)
   !
-  REAL(8) :: t
-  REAL(8) :: s
+  REAL(DP) :: t
+  REAL(DP) :: s
   INTEGER j, jj, jm1, k, kj, kk
   !* FIRST EXECUTABLE STATEMENT  DPPFA
   jj = 0

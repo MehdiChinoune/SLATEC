@@ -70,20 +70,21 @@ SUBROUTINE BSGQ8(FUN,Xt,Bc,N,Kk,Id,A,B,Inbv,Err,Ans,Ierr,Work)
   USE service, ONLY : XERMSG, R1MACH, I1MACH
   !
   INTERFACE
-    REAL FUNCTION FUN(X)
-      REAL, INTENT(IN) :: X
+    REAL(SP) FUNCTION FUN(X)
+      IMPORT SP
+      REAL(SP), INTENT(IN) :: X
     END FUNCTION
   END INTERFACE
   INTEGER :: Id, Ierr, Inbv, Kk, N
-  REAL :: A, Ans, B, Bc(N), Err, Work(3*Kk), Xt(N+Kk)
+  REAL(SP) :: A, Ans, B, Bc(N), Err, Work(3*Kk), Xt(N+Kk)
   INTEGER :: k, l, lmn, lmx, lr(30), mxl, nbits, nib, nlmx
-  REAL :: aa(30), ae, anib, area, c, ce, ee, ef, eps, est, gl, glr, gr(30), &
+  REAL(SP) :: aa(30), ae, anib, area, c, ce, ee, ef, eps, est, gl, glr, gr(30), &
     hh(30), tol, vl(30), vr
-  REAL, PARAMETER :: x1 = 1.83434642495649805E-01, x2 = 5.25532409916328986E-01, &
+  REAL(SP), PARAMETER :: x1 = 1.83434642495649805E-01, x2 = 5.25532409916328986E-01, &
     x3 =7.96666477413626740E-01 , x4 = 9.60289856497536232E-01
-  REAL, PARAMETER ::  w1 =3.62683783378361983E-01 , w2 = 3.13706645877887287E-01, &
+  REAL(SP), PARAMETER ::  w1 =3.62683783378361983E-01 , w2 = 3.13706645877887287E-01, &
     w3 = 2.22381034453374471E-01, w4 = 1.01228536290376259E-01
-  REAL, PARAMETER :: sq2 = 1.41421356E0
+  REAL(SP), PARAMETER :: sq2 = 1.41421356E0
   INTEGER, PARAMETER :: nlmn = 1, kmx = 5000, kml = 6
   !
   !     INITIALIZE
@@ -209,8 +210,8 @@ SUBROUTINE BSGQ8(FUN,Xt,Bc,N,Kk,Id,A,B,Inbv,Err,Ans,Ierr,Work)
   GOTO 100
   RETURN
 CONTAINS
-  REAL FUNCTION G8(x,h)
-    REAL, INTENT(IN) :: x, h
+  REAL(SP) FUNCTION G8(x,h)
+    REAL(SP), INTENT(IN) :: x, h
     G8 = h*((w1*(FUN(x-x1*h)*BVALU(Xt,Bc,N,Kk,Id,x-x1*h,Inbv,Work)+FUN(x+&
       x1*h)*BVALU(Xt,Bc,N,Kk,Id,x+x1*h,Inbv,Work))&
       +w2*(FUN(x-x2*h)*BVALU(Xt,Bc,N,Kk,Id,x-x2*h,Inbv,Work)&

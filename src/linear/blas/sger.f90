@@ -89,14 +89,14 @@ SUBROUTINE SGER(M,N,Alpha,X,Incx,Y,Incy,A,Lda)
   !           lines were modified.  (BKS)
   USE service, ONLY : XERBLA
   !     .. Scalar Arguments ..
-  REAL Alpha
+  REAL(SP) Alpha
   INTEGER Incx, Incy, Lda, M, N
   !     .. Array Arguments ..
-  REAL A(Lda,*), X(*), Y(*)
+  REAL(SP) A(Lda,*), X(*), Y(*)
   !     .. Parameters ..
-  REAL, PARAMETER :: ZERO = 0.0E+0
+  REAL(SP), PARAMETER :: ZERO = 0.0E+0
   !     .. Local Scalars ..
-  REAL temp
+  REAL(SP) temp
   INTEGER i, info, ix, j, jy, kx
 
   !     .. Intrinsic Functions ..

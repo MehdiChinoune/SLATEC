@@ -238,7 +238,7 @@ SUBROUTINE DEFC(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkpt,Mdein,Mdeout,Coeff,Lw,W
   !                         ALB., N. M., AUGUST-SEPTEMBER, 1980.
   !
   INTEGER :: Lw, Mdein, Mdeout, Nbkpt, Ndata, Nord
-  REAL(8) :: Bkpt(Nbkpt), Coeff(Nbkpt-Nord+1), W(Lw), Sddata(Ndata), Xdata(Ndata), &
+  REAL(DP) :: Bkpt(Nbkpt), Coeff(Nbkpt-Nord+1), W(Lw), Sddata(Ndata), Xdata(Ndata), &
     Ydata(Ndata)
   !
   INTEGER :: lbf, lbkpt, lg, lptemp, lww, lxtemp, mdg, mdw

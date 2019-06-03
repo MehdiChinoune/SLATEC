@@ -78,9 +78,9 @@ SUBROUTINE DHEQR(A,Lda,N,Q,Info,Ijob)
   !     .. Scalar Arguments ..
   INTEGER Ijob, Info, Lda, N
   !     .. Array Arguments ..
-  REAL(8) :: A(Lda,*), Q(*)
+  REAL(DP) :: A(Lda,*), Q(*)
   !     .. Local Scalars ..
-  REAL(8) :: c, s, t, t1, t2
+  REAL(DP) :: c, s, t, t1, t2
   INTEGER i, iq, j, k, km1, kp1, nm1
   !     .. Intrinsic Functions ..
   INTRINSIC ABS, SQRT

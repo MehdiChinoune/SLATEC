@@ -82,19 +82,20 @@ SUBROUTINE DQNC79(FUN,A,B,Err,Ans,Ierr,K)
   !           wordlength.  (RWC)
   USE service, ONLY : XERMSG, D1MACH, I1MACH
   !     .. Scalar Arguments ..
-  REAL(8) :: A, Ans, B, Err
+  REAL(DP) :: A, Ans, B, Err
   INTEGER :: Ierr, K
   !     .. Function Arguments ..
   INTERFACE
-    REAL(8) FUNCTION FUN(X)
-      REAL(8), INTENT(IN) :: X
+    REAL(DP) FUNCTION FUN(X)
+      IMPORT DP
+      REAL(DP), INTENT(IN) :: X
     END FUNCTION FUN
   END INTERFACE
   !     .. Local Scalars ..
-  REAL(8) :: ae, area, bank, blocal, c, ce, ee, ef, eps, q13, q7, q7l, test, tol, vr
+  REAL(DP) :: ae, area, bank, blocal, c, ce, ee, ef, eps, q13, q7, q7l, test, tol, vr
   INTEGER :: i, l, lmn, lmx, nib
   !     .. Local Arrays ..
-  REAL(8) :: aa(99), f(13), f1(99), f2(99), f3(99), f4(99), f5(99), f6(99), &
+  REAL(DP) :: aa(99), f(13), f1(99), f2(99), f3(99), f4(99), f5(99), f6(99), &
     f7(99), hh(99), q7r(99), vl(99)
   INTEGER :: lr(99)
   !     .. Intrinsic Functions ..
@@ -102,7 +103,7 @@ SUBROUTINE DQNC79(FUN,A,B,Err,Ans,Ierr,K)
   !     .. Data statements ..
   INTEGER, PARAMETER :: nbits = INT( D1MACH(5)*I1MACH(14)/0.30102000D0 ), &
     nlmx = MIN(99,(nbits*4)/5)
-  REAL(8), PARAMETER :: sq2 = SQRT(2.0D0), w1 = 41.0D0/140.0D0, w2 = 216.0D0/140.0D0, &
+  REAL(DP), PARAMETER :: sq2 = SQRT(2.0D0), w1 = 41.0D0/140.0D0, w2 = 216.0D0/140.0D0, &
     w3 = 27.0D0/140.0D0, w4 = 272.0D0/140.0D0
   INTEGER, PARAMETER :: kml = 7, kmx = 5000, nlmn = 2
   !* FIRST EXECUTABLE STATEMENT  DQNC79

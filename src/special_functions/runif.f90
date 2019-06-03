@@ -1,5 +1,5 @@
 !** RUNIF
-REAL FUNCTION RUNIF(T,N)
+REAL(SP) FUNCTION RUNIF(T,N)
   !>
   !  Generate a uniformly distributed random number.
   !***
@@ -63,10 +63,10 @@ REAL FUNCTION RUNIF(T,N)
   !           RS 6000.  (WRB)
 
   INTEGER :: N
-  REAL :: T(ABS(N)+1)
+  REAL(SP) :: T(ABS(N)+1)
   INTEGER :: i, j
-  REAL :: dummy
-  REAL, SAVE :: floatn
+  REAL(SP) :: dummy
+  REAL(SP), SAVE :: floatn
   INTEGER, SAVE :: nold = -1
   !* FIRST EXECUTABLE STATEMENT  RUNIF
   IF ( N/=nold ) THEN

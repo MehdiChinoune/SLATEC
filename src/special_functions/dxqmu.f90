@@ -26,9 +26,9 @@ SUBROUTINE DXQMU(Nu1,Nu2,Mu1,Mu2,Theta,X,Sx,Id,Pqa,Ipqa,Ierror)
   !   920127  Revised PURPOSE section of prologue.  (DWL)
 
   INTEGER :: Id, Ierror, Mu1, Mu2, Ipqa(Mu2-Mu1+1)
-  REAL(8) :: Nu1, Nu2, Pqa(Mu2-Mu1+1), Sx, X, Theta
+  REAL(DP) :: Nu1, Nu2, Pqa(Mu2-Mu1+1), Sx, X, Theta
   INTEGER :: ipq, ipq1, ipq2, k, mu
-  REAL(8) :: dmu, nu, pq, pq1, pq2, x1, x2
+  REAL(DP) :: dmu, nu, pq, pq1, pq2, x1, x2
   !* FIRST EXECUTABLE STATEMENT  DXQMU
   Ierror = 0
   mu = 0

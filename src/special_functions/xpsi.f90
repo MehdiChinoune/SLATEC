@@ -1,5 +1,5 @@
 !** XPSI
-REAL FUNCTION XPSI(A,Ipsik,Ipsix)
+REAL(SP) FUNCTION XPSI(A,Ipsik,Ipsix)
   !>
   !  To compute values of the Psi function for XLEGF.
   !***
@@ -25,15 +25,15 @@ REAL FUNCTION XPSI(A,Ipsik,Ipsix)
   !   920127  Revised PURPOSE section of prologue.  (DWL)
 
   INTEGER i, Ipsik, Ipsix, k, k1, m, n
-  REAL A, b, c
+  REAL(SP) A, b, c
   !
   !        CNUM(I) AND CDENOM(I) ARE THE ( REDUCED ) NUMERATOR
   !        AND 2*I*DENOMINATOR RESPECTIVELY OF THE 2*I TH BERNOULLI
   !        NUMBER.
   !
-  REAL, PARAMETER :: cnum(12) = [ 1., -1., 1., -1., 1., -691., 1., -3617., 43867., &
+  REAL(SP), PARAMETER :: cnum(12) = [ 1., -1., 1., -1., 1., -691., 1., -3617., 43867., &
     -174611., 77683., -236364091. ]
-  REAL, PARAMETER :: cdenom(12) = [ 12., 120., 252., 240., 132., 32760., 12., 8160., &
+  REAL(SP), PARAMETER :: cdenom(12) = [ 12., 120., 252., 240., 132., 32760., 12., 8160., &
     14364., 6600., 276., 65520. ]
   !* FIRST EXECUTABLE STATEMENT  XPSI
   n = MAX(0,Ipsix-INT(A))

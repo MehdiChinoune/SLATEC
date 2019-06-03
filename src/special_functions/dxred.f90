@@ -48,9 +48,9 @@ SUBROUTINE DXRED(X,Ix,Ierror)
   !   920127  Revised PURPOSE section of prologue.  (DWL)
   USE DXBLK ,ONLY: radixx_com, rad2l_com, l2_com
   INTEGER :: Ierror, Ix
-  REAL(8) :: X
+  REAL(DP) :: X
   INTEGER :: i, ixa, ixa1, ixa2
-  REAL(8) :: xa
+  REAL(DP) :: xa
   !
   !* FIRST EXECUTABLE STATEMENT  DXRED
   Ierror = 0

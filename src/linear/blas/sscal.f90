@@ -51,7 +51,7 @@ SUBROUTINE SSCAL(N,Sa,Sx,Incx)
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
-  REAL Sa, Sx(*)
+  REAL(SP) Sa, Sx(*)
   INTEGER i, Incx, ix, m, mp1, N
   !* FIRST EXECUTABLE STATEMENT  SSCAL
   IF ( N<=0 ) RETURN

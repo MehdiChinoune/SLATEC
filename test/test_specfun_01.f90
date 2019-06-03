@@ -1,4 +1,5 @@
 MODULE TEST02_MOD
+  USE service, ONLY : SP, DP
   IMPLICIT NONE
 
 CONTAINS
@@ -50,7 +51,7 @@ CONTAINS
       COSDG, COT, DAWS, E1, EI, EXPREL, FAC, GAMI, GAMIC, GAMIT, GAMR, POCH, POCH1, &
       PSI, R1MACH, R9ATN1, R9LN2R, SINDG, SPENC
     INTEGER i, Lun, Kprint, Ipass
-    REAL y(105), errmax, errtol, abserr, relerr
+    REAL(SP) y(105), errmax, errtol, abserr, relerr
     !
     !     Correct values through different calculations are stored in V(*)
     !

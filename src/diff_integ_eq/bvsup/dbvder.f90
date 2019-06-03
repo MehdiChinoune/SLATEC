@@ -63,7 +63,7 @@ SUBROUTINE DBVDER(X,Y,Yp,G)
   !   920618  Minor restructuring of code.  (RWC, WRB)
   USE DML, ONLY : nofst_com, c_com, xsav_com, igofx_com, inhomo_com, ivp_com, &
     ncomp_com, nfc_com
-  REAL(8) :: X, Y(:), Yp(:), G(:)
+  REAL(DP) :: X, Y(:), Yp(:), G(:)
   INTEGER :: j, k, l, na
   !- *********************************************************************
   !

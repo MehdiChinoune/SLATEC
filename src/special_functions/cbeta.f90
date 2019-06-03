@@ -1,5 +1,5 @@
 !** CBETA
-COMPLEX FUNCTION CBETA(A,B)
+COMPLEX(SP) FUNCTION CBETA(A,B)
   !>
   !  Compute the complete Beta function.
   !***
@@ -35,9 +35,9 @@ COMPLEX FUNCTION CBETA(A,B)
   !           (WRB)
   !   900727  Added EXTERNAL statement.  (WRB)
   USE service, ONLY : XERMSG
-  COMPLEX :: A, B
-  REAL :: xmin
-  REAL, SAVE :: xmax = 0.0
+  COMPLEX(SP) :: A, B
+  REAL(SP) :: xmin
+  REAL(SP), SAVE :: xmax = 0.0
   !* FIRST EXECUTABLE STATEMENT  CBETA
   IF ( xmax==0.0 ) THEN
     CALL GAMLIM(xmin,xmax)

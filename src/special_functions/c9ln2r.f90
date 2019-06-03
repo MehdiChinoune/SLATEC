@@ -1,5 +1,5 @@
 !** C9LN2R
-COMPLEX FUNCTION C9LN2R(Z)
+COMPLEX(SP) FUNCTION C9LN2R(Z)
   !>
   !  Evaluate LOG(1+Z) from second order relative accuracy so
   !            that  LOG(1+Z) = Z - Z**2/2 + Z**3*C9LN2R(Z).
@@ -53,8 +53,8 @@ COMPLEX FUNCTION C9LN2R(Z)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
 
-  REAL aipart, arg, cabsz, rpart, x, xz, y, y1x, yz
-  COMPLEX Z
+  REAL(SP) aipart, arg, cabsz, rpart, x, xz, y, y1x, yz
+  COMPLEX(SP) Z
   !* FIRST EXECUTABLE STATEMENT  C9LN2R
   x = REAL(Z)
   y = AIMAG(Z)

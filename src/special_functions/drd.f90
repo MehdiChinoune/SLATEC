@@ -1,5 +1,5 @@
 !** DRD
-REAL(8) FUNCTION DRD(X,Y,Z,Ier)
+REAL(DP) FUNCTION DRD(X,Y,Z,Ier)
   !>
   !  Compute the incomplete or complete elliptic integral of
   !            the 2nd kind. For X and Y nonnegative, X+Y and Z positive,
@@ -319,14 +319,14 @@ REAL(8) FUNCTION DRD(X,Y,Z,Ier)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   USE service, ONLY : XERMSG, D1MACH
   INTEGER :: Ier
-  REAL(8) :: X, Y
-  REAL(8) :: epslon, ea, eb, ec, ed, ef, lamda, mu, power4, sigma, s1, &
+  REAL(DP) :: X, Y
+  REAL(DP) :: epslon, ea, eb, ec, ed, ef, lamda, mu, power4, sigma, s1, &
     s2, xn, xndev, xnroot, yn, yndev, ynroot, Z, zn, zndev, znroot
   CHARACTER(16) :: xern3, xern4, xern5, xern6
-  REAL(8), PARAMETER :: errtol = (D1MACH(3)/3.0D0)**(1.0D0/6.0D0), &
+  REAL(DP), PARAMETER :: errtol = (D1MACH(3)/3.0D0)**(1.0D0/6.0D0), &
     lolim = 2.0D0/(D1MACH(2))**(2.0D0/3.0D0), &
     uplim = (0.10D0*errtol/D1MACH(1))**(2.0D0/3.0D0)
-  REAL(8), PARAMETER :: c1 = 3.0D0/14.0D0, c2 = 1.0D0/6.0D0, c3 = 9.0D0/22.0D0, &
+  REAL(DP), PARAMETER :: c1 = 3.0D0/14.0D0, c2 = 1.0D0/6.0D0, c3 = 9.0D0/22.0D0, &
     c4 = 3.0D0/26.0D0
   !
   !* FIRST EXECUTABLE STATEMENT  DRD

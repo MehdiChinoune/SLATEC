@@ -1,6 +1,7 @@
 MODULE integ_trans
+  USE service, ONLY : SP
   IMPLICIT NONE
-  
+
 CONTAINS
   include"fftpack/cfftb.f90"
   include"fftpack/cfftb1.f90"

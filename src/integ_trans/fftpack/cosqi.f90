@@ -46,7 +46,7 @@ SUBROUTINE COSQI(N,Wsave)
   !   860115  Modified by Ron Boisvert to adhere to Fortran 77 by
   !           (a) changing dummy array size declarations (1) to (*),
   !           (b) changing references to intrinsic function FLOAT
-  !               to REAL, and
+  !               to REAL(SP), and
   !           (c) changing definition of variable PIH by using
   !               FORTRAN intrinsic function ATAN instead of a DATA
   !               statement.
@@ -57,9 +57,9 @@ SUBROUTINE COSQI(N,Wsave)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER :: N
-  REAL :: Wsave(3*N+15)
+  REAL(SP) :: Wsave(3*N+15)
   INTEGER :: k
-  REAL :: dt, fk, pih
+  REAL(SP) :: dt, fk, pih
   !* FIRST EXECUTABLE STATEMENT  COSQI
   pih = 2.*ATAN(1.)
   dt = pih/N

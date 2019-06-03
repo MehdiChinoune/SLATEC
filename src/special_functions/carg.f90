@@ -1,5 +1,5 @@
 !** CARG
-REAL FUNCTION CARG(Z)
+REAL(SP) FUNCTION CARG(Z)
   !>
   !  Compute the argument of a complex number.
   !***
@@ -30,7 +30,7 @@ REAL FUNCTION CARG(Z)
   !   861211  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   
-  COMPLEX Z
+  COMPLEX(SP) Z
   !* FIRST EXECUTABLE STATEMENT  CARG
   CARG = 0.0
   IF ( REAL(Z)/=0..OR.AIMAG(Z)/=0. ) CARG = ATAN2(AIMAG(Z),REAL(Z))

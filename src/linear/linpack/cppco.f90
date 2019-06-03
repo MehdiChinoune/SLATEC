@@ -98,11 +98,11 @@ SUBROUTINE CPPCO(Ap,N,Rcond,Z,Info)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER N, Info
-  COMPLEX Ap(*), Z(*)
-  REAL Rcond
+  COMPLEX(SP) Ap(*), Z(*)
+  REAL(SP) Rcond
   !
-  COMPLEX ek, t, wk, wkm
-  REAL anorm, s, sm, ynorm
+  COMPLEX(SP) ek, t, wk, wkm
+  REAL(SP) anorm, s, sm, ynorm
   INTEGER i, ij, j, jm1, j1, k, kb, kj, kk, kp1
   !
   !     FIND NORM OF A

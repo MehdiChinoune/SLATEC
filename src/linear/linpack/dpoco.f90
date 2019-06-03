@@ -86,11 +86,11 @@ SUBROUTINE DPOCO(A,Lda,N,Rcond,Z,Info)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER Lda, N, Info
-  REAL(8) :: A(Lda,*), Z(*)
-  REAL(8) :: Rcond
+  REAL(DP) :: A(Lda,*), Z(*)
+  REAL(DP) :: Rcond
   !
-  REAL(8) :: ek, t, wk, wkm
-  REAL(8) :: anorm, s, sm, ynorm
+  REAL(DP) :: ek, t, wk, wkm
+  REAL(DP) :: anorm, s, sm, ynorm
   INTEGER i, j, jm1, k, kb, kp1
   !
   !     FIND NORM OF A USING ONLY UPPER HALF

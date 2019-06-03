@@ -1,4 +1,5 @@
 MODULE TEST09_MOD
+  USE service, ONLY : SP, DP
   IMPLICIT NONE
 
 CONTAINS
@@ -79,8 +80,8 @@ CONTAINS
     !
     !  Declare local variables.
     !
-    COMPLEX con1, con2, con3, cv, cw, cy, w(20), y(20), z, zr
-    REAL aa, ab, acw, acy, alim, arg, arzr, atol, av, a1, a2, ct, &
+    COMPLEX(SP) con1, con2, con3, cv, cw, cy, w(20), y(20), z, zr
+    REAL(SP) aa, ab, acw, acy, alim, arg, arzr, atol, av, a1, a2, ct, &
       c23, dig, elim, eps, er, ertol, film, fnul, fpi, hpi, pi, &
       pi3, r, rl, rm, rpi, rtpi, rzr, r1m4, r1m5, slak, spi, &
       st, t(20), tol, tpi, tpi3, ts
@@ -445,8 +446,8 @@ CONTAINS
     !
     !  Declare local variables.
     !
-    COMPLEX cv, cw, cy, w(20), y(20), z, zn
-    REAL aa, ab, acw, acy, aer(20), alim, atol, av, aw, ay, az, ct, &
+    COMPLEX(SP) cv, cw, cy, w(20), y(20), z, zn
+    REAL(SP) aa, ab, acw, acy, aer(20), alim, atol, av, aw, ay, az, ct, &
       dig, elim, eps, er, ertol, film, fnu, fnul, fpi, hpi, pi, &
       r, rfpi, rl, rm, r1m4, r1m5, r2, slak, st, t(20), tol, ts, xnu(20)
     INTEGER i, icase, ierr, il, ir, irb, it, itl, k, kdo(20), keps(20), &
@@ -800,8 +801,8 @@ CONTAINS
     !
     !  Declare local variables.
     !
-    COMPLEX ck(20), cone, csgn, cw, cy, w(20), y(20), z, zn, zsc, zt, zz
-    REAL aa, ab, aer(20), alim, arg, atol, aw, carg, ct, dig, elim, &
+    COMPLEX(SP) ck(20), cone, csgn, cw, cy, w(20), y(20), z, zn, zsc, zt, zz
+    REAL(SP) aa, ab, aer(20), alim, arg, atol, aw, carg, ct, dig, elim, &
       eps, er, ertol, film, fnu, fnul, gnu, hpi, pi, r, rl, &
       rlt, rm, r1, r1m4, r1m5, r2, sarg, slak, st, t(20), tol, ts, xx, yy
     INTEGER i, icase, ierr, il, inu, iprnt, ir, it, itl, k, kdo(20), &
@@ -1295,8 +1296,8 @@ CONTAINS
     !
     !  Declare local variables.
     !
-    COMPLEX chalf, coe1, coe2, cw, v(20), w(20), y(20), z
-    REAL aa, ab, aer(20), alim, atol, av, cc, ct, dd, dig, elim, eps, &
+    COMPLEX(SP) chalf, coe1, coe2, cw, v(20), w(20), y(20), z
+    REAL(SP) aa, ab, aer(20), alim, atol, av, cc, ct, dd, dig, elim, eps, &
       er, ertol, film, fnu, fnul, gnu, hpi, pi, r, rl, rm, &
       r1m4, r1m5, r2, slak, st, t(20), tol, ts, xnu(20), xx, yy
     INTEGER i, icase, ierr, il, ir, irb, it, itl, k, kdo(20), keps(20), &
@@ -1682,8 +1683,8 @@ CONTAINS
     !
     !  Declare local variables.
     !
-    COMPLEX cone, csgn, cv, cw, cy, w(20), y(20), z, zn
-    REAL aa, ab, aer(20), alim, arg, atol, axx, ct, dig, elim, eps, &
+    COMPLEX(SP) cone, csgn, cv, cw, cy, w(20), y(20), z, zn
+    REAL(SP) aa, ab, aer(20), alim, arg, atol, axx, ct, dig, elim, eps, &
       er, ertol, ffnu, film, fnu, fnul, hpi, pi, r, rl, rm, &
       r1m4, r1m5, r2, slak, st, t(20), tol, ts, xnu(20), xx
     INTEGER i, icase, ierr, ifnu, il, ir, irb, it, itl, k, kdo(20), &
@@ -2049,13 +2050,13 @@ CONTAINS
     !
     !  Declare local variables.
     !
-    COMPLEX ci, coe1, coe2, csgn, cspn, cw, cwrk(20), v(20), w(20), y(20), z, zn
-    REAL aa, ab, aer(20), alim, arg, atol, av, cc, ct, dig, elim, eps, &
+    COMPLEX(SP) ci, coe1, coe2, csgn, cspn, cw, cwrk(20), v(20), w(20), y(20), z, zn
+    REAL(SP) aa, ab, aer(20), alim, arg, atol, av, cc, ct, dig, elim, eps, &
       er, ertol, ffnu, film, fnu, fnul, hpi, pi, r, rhpi, rl, &
       rm, r1m4, r1m5, r2, slak, st, t(20), tol, ts, xn, xnu(20), xx, yn, yy
     INTEGER i, icase, ierr, ifnu, il, ir, irb, it, itl, i4, k, &
       kdo(20), keps(20), kk, kode, k1, k2, lflg, mflg, n, nl, nu, nul, nz, nz1, nz2
-    COMPLEX, PARAMETER :: cip(4) = [ (1.0E0,0.0E0), (0.0E0,1.0E0), &
+    COMPLEX(SP), PARAMETER :: cip(4) = [ (1.0E0,0.0E0), (0.0E0,1.0E0), &
       (-1.0E0,0.0E0), (0.0E0,-1.0E0) ]
     !
     !* FIRST EXECUTABLE STATEMENT  CQCBY

@@ -51,7 +51,7 @@ INTEGER FUNCTION ISAMAX(N,Sx,Incx)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !   920618  Slight restructuring of code.  (RWC, WRB)
 
-  REAL Sx(*), smax, xmag
+  REAL(SP) Sx(*), smax, xmag
   INTEGER i, Incx, ix, N
   !* FIRST EXECUTABLE STATEMENT  ISAMAX
   ISAMAX = 0

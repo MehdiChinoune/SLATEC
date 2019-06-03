@@ -169,16 +169,17 @@ SUBROUTINE QAGIE(F,Bound,Inf,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,&
   USE service, ONLY : R1MACH
   !
   INTERFACE
-    REAL FUNCTION F(X)
-      REAL :: X
+    REAL(SP) FUNCTION F(X)
+      IMPORT SP
+      REAL(SP) :: X
     END FUNCTION F
   END INTERFACE
   INTEGER :: Ier, Inf, Last, Limit, Neval, Iord(Limit)
-  REAL :: Abserr, Bound, Epsabs, Epsrel, Result
-  REAL :: Alist(Limit), Blist(Limit), Elist(Limit), Rlist(Limit)
+  REAL(SP) :: Abserr, Bound, Epsabs, Epsrel, Result
+  REAL(SP) :: Alist(Limit), Blist(Limit), Elist(Limit), Rlist(Limit)
   INTEGER :: id, ierro, iroff1, iroff2, iroff3, jupbnd, k, ksgn, ktmin, maxerr, &
   nres, nrmax, numrl2
-  REAL :: abseps, area, area1, area12, area2, a1, a2, boun, b1, b2, correc, &
+  REAL(SP) :: abseps, area, area1, area12, area2, a1, a2, boun, b1, b2, correc, &
     defabs, defab1, defab2, dres, epmach, erlarg, erlast, errbnd, errmax, error1, &
     error2, erro12, errsum, ertest, oflow, resabs, reseps, res3la(3), rlist2(52), &
     small, uflow

@@ -74,7 +74,7 @@ SUBROUTINE DCHKW(Name,Lociw,Leniw,Locw,Lenw,Ierr,Iter,Err)
   !   921015  Added code to initialize ITER and ERR when IERR=0.  (FNF)
   USE service, ONLY : D1MACH, XERMSG
   !     .. Scalar Arguments ..
-  REAL(8) :: Err
+  REAL(DP) :: Err
   INTEGER Ierr, Iter, Leniw, Lenw, Lociw, Locw
   CHARACTER Name*(*)
   !     .. Local Scalars ..

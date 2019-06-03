@@ -45,10 +45,10 @@ SUBROUTINE LA05CS(A,Ind,Ia,N,Ip,Iw,W,G,U,Mm)
   USE service, ONLY : XERMSG, XSETUN
   INTEGER :: Ia, Mm, N
   INTEGER :: Ind(Ia,2), Iw(N,8), Ip(N,2)
-  REAL :: G, U, A(:), W(:)
+  REAL(SP) :: G, U, A(:), W(:)
   INTEGER :: i, ii, ij, im, in, ins, ipp, ir, is, j, jm, jns, jp, k, kj, kk, kl, &
     km, knp, kp, kpl, kq, kr, krl, ks, l, last, last1, last2, m, m1, mcp, nz
-  REAL :: am, au
+  REAL(SP) :: am, au
   CHARACTER(8) :: xern1
   !* FIRST EXECUTABLE STATEMENT  LA05CS
   CALL XSETUN(lp_com)

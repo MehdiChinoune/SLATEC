@@ -49,7 +49,7 @@ SUBROUTINE EZFFTI(N,Wsave)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER :: N
-  REAL :: Wsave(3*N+15)
+  REAL(SP) :: Wsave(3*N+15)
   INTEGER :: ifac(15)
   !* FIRST EXECUTABLE STATEMENT  EZFFTI
   IF ( N==1 ) RETURN

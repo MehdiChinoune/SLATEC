@@ -124,11 +124,11 @@ SUBROUTINE DPBCO(Abd,Lda,N,M,Rcond,Z,Info)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER Lda, N, M, Info
-  REAL(8) :: Abd(Lda,*), Z(*)
-  REAL(8) :: Rcond
+  REAL(DP) :: Abd(Lda,*), Z(*)
+  REAL(DP) :: Rcond
   !
-  REAL(8) :: ek, t, wk, wkm
-  REAL(8) :: anorm, s, sm, ynorm
+  REAL(DP) :: ek, t, wk, wkm
+  REAL(DP) :: anorm, s, sm, ynorm
   INTEGER i, j, j2, k, kb, kp1, l, la, lb, lm, mu
   !
   !     FIND NORM OF A

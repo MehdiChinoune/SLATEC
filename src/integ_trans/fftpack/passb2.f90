@@ -23,9 +23,9 @@ SUBROUTINE PASSB2(Ido,L1,Cc,Ch,Wa1)
   !   900402  Added TYPE section.  (WRB)
 
   INTEGER :: Ido, L1
-  REAL :: Cc(Ido,2,L1), Ch(Ido,L1,2), Wa1(Ido)
+  REAL(SP) :: Cc(Ido,2,L1), Ch(Ido,L1,2), Wa1(Ido)
   INTEGER :: i, k
-  REAL :: ti2, tr2
+  REAL(SP) :: ti2, tr2
   !* FIRST EXECUTABLE STATEMENT  PASSB2
   IF ( Ido<=2 ) THEN
     DO k = 1, L1

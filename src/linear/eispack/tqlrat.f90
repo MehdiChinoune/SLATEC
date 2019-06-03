@@ -59,7 +59,7 @@ SUBROUTINE TQLRAT(N,D,E2,Ierr)
   !                 Y. Ikebe, V. C. Klema and C. B. Moler, Matrix Eigen-
   !                 system Routines - EISPACK Guide, Springer-Verlag,
   !                 1976.
-  !               C. H. Reinsch, Eigenvalues of a real, symmetric, tri-
+  !               C. H. Reinsch, Eigenvalues of a REAL(SP), symmetric, tri-
   !                 diagonal matrix, Algorithm 464, Communications of the
   !                 ACM 16, 11 (November 1973), pp. 689.
   !***
@@ -73,10 +73,10 @@ SUBROUTINE TQLRAT(N,D,E2,Ierr)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   USE service, ONLY : R1MACH
   INTEGER i, j, l, m, N, ii, l1, mml, Ierr
-  REAL D(*), E2(*)
-  REAL b, c, f, g, h, p, r, s
+  REAL(SP) D(*), E2(*)
+  REAL(SP) b, c, f, g, h, p, r, s
   !
-  REAL, PARAMETER :: machep = R1MACH(4)
+  REAL(SP), PARAMETER :: machep = R1MACH(4)
   !* FIRST EXECUTABLE STATEMENT  TQLRAT
   !
   Ierr = 0

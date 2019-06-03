@@ -25,7 +25,7 @@ SUBROUTINE DMACON
   USE DML, ONLY : uro_com, sru_com, eps_com, sqovfl_com, twou_com, fouru_com, lpar_com
   USE service, ONLY : D1MACH
   INTEGER ke
-  REAL(8) :: dd
+  REAL(DP) :: dd
   !* FIRST EXECUTABLE STATEMENT  DMACON
   uro_com = D1MACH(4)
   sru_com = SQRT(uro_com)

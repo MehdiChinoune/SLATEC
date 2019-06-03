@@ -47,9 +47,9 @@ SUBROUTINE LA05BS(A,Ind,Ia,N,Ip,Iw,W,G,B,Trans)
   INTEGER :: Ia, N
   LOGICAL :: Trans
   INTEGER :: Ind(Ia,2), Iw(N,8), Ip(N,2)
-  REAL :: G, A(Ia), B(:), W(:)
+  REAL(SP) :: G, A(Ia), B(:), W(:)
   INTEGER :: i, ii, j, k, k2, kk, kl, kll, kp, kpc, l1, n1, nz
-  REAL :: am
+  REAL(SP) :: am
   !* FIRST EXECUTABLE STATEMENT  LA05BS
   IF ( G<0. ) THEN
     !

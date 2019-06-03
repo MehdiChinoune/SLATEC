@@ -417,8 +417,8 @@ SUBROUTINE BVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
   USE service, ONLY : XERMSG
   INTEGER :: Ndw, Neqivp, Nfc, Nic, Nrowa, Nrowb, Nrowy, Iflag, Igofx, Ncomp, &
     Ndiw, Nxpts, Iwork(Ndiw)
-  REAL :: Ae, Re
-  REAL :: A(Nrowa,Ncomp), Alpha(:), B(Nrowb,Ncomp), Beta(Nxpts), Work(Ndw), &
+  REAL(SP) :: Ae, Re
+  REAL(SP) :: A(Nrowa,Ncomp), Alpha(:), B(Nrowb,Ncomp), Beta(Nxpts), Work(Ndw), &
     Xpts(Nxpts), Y(Nrowy,Nxpts)
   INTEGER :: nitemp, non, nrtemp, is, j, k, kkkcoe, kkkcof, kkkg, kkks, kkksto, &
     kkksud, kkksvc, kkku, kkkv, kkkws, kkkyhp, kpts, lllcof, lllip, llliws, &

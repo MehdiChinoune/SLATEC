@@ -35,9 +35,9 @@ SUBROUTINE EXBVP(Y,Nrowy,Xpts,A,Nrowa,Alpha,B,Nrowb,Beta,Iflag,Work,Iwork)
     k8_com, k9_com, k10_com, l1_com, lpar_com
   USE service, ONLY : XERMSG
   INTEGER :: Nrowa, Nrowb, Nrowy, Iflag, Iwork(*)
-  REAL :: A(:,:), Alpha(:), B(:,:), Beta(:), Work(*), Xpts(:), Y(:,:)
+  REAL(SP) :: A(:,:), Alpha(:), B(:,:), Beta(:), Work(*), Xpts(:), Y(:,:)
   INTEGER :: nsafiw, nsafw, iexp, inc, kotc
-  REAL :: xl, zquit
+  REAL(SP) :: xl, zquit
   CHARACTER(8) :: xern1, xern2
   !* FIRST EXECUTABLE STATEMENT  EXBVP
   kotc = 1

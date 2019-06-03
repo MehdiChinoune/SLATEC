@@ -111,7 +111,7 @@ SUBROUTINE DSUDS(A,X,B,Neq,Nuk,Nrda,Iflag,Mlso,Work,Iwork)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER :: Iflag, Mlso, Neq, Nrda, Nuk, Iwork(*)
-  REAL(8) :: A(Nrda,Nuk), B(Neq), Work(*), X(Nuk)
+  REAL(DP) :: A(Nrda,Nuk), B(Neq), Work(*), X(Nuk)
   INTEGER :: il, ip, is, ks, kt, ku, kv
   !
   !* FIRST EXECUTABLE STATEMENT  DSUDS

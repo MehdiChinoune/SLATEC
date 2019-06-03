@@ -108,10 +108,10 @@ SUBROUTINE CHKDER(M,N,X,Fvec,Fjac,Ldfjac,Xp,Fvecp,Mode,Err)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   USE service, ONLY : R1MACH
   INTEGER :: M, N, Ldfjac, Mode
-  REAL :: X(N), Fvec(M), Fjac(Ldfjac,N), Xp(N), Fvecp(M), Err(M)
+  REAL(SP) :: X(N), Fvec(M), Fjac(Ldfjac,N), Xp(N), Fvecp(M), Err(M)
   INTEGER :: i, j
-  REAL :: eps, epsf, epslog, epsmch, temp
-  REAL, PARAMETER :: factor = 1.0E2, one = 1.0E0, zero = 0.0E0
+  REAL(SP) :: eps, epsf, epslog, epsmch, temp
+  REAL(SP), PARAMETER :: factor = 1.0E2, one = 1.0E0, zero = 0.0E0
   !* FIRST EXECUTABLE STATEMENT  CHKDER
   epsmch = R1MACH(4)
   !

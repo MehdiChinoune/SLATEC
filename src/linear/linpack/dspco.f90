@@ -102,10 +102,10 @@ SUBROUTINE DSPCO(Ap,N,Kpvt,Rcond,Z)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER N, Kpvt(*)
-  REAL(8) :: Ap(*), Z(*)
-  REAL(8) :: Rcond
+  REAL(DP) :: Ap(*), Z(*)
+  REAL(DP) :: Rcond
   !
-  REAL(8) :: ak, akm1, bk, bkm1, denom, ek, t, anorm, s, ynorm
+  REAL(DP) :: ak, akm1, bk, bkm1, denom, ek, t, anorm, s, ynorm
   INTEGER i, ij, ik, ikm1, ikp1, info, j, jm1, j1, k, kk, km1k, km1km1, kp, kps, ks
   !
   !     FIND NORM OF A USING ONLY UPPER HALF

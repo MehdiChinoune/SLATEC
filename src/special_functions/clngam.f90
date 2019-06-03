@@ -1,5 +1,5 @@
 !** CLNGAM
-COMPLEX FUNCTION CLNGAM(Zin)
+COMPLEX(SP) FUNCTION CLNGAM(Zin)
   !>
   !  Compute the logarithm of the absolute value of the Gamma
   !            function.
@@ -33,16 +33,16 @@ COMPLEX FUNCTION CLNGAM(Zin)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   USE service, ONLY : XERMSG, R1MACH
-  COMPLEX :: Zin
+  COMPLEX(SP) :: Zin
   INTEGER :: i, n
-  REAL :: argsum, cabsz, x, y
-  COMPLEX :: z, corr
+  REAL(SP) :: argsum, cabsz, x, y
+  COMPLEX(SP) :: z, corr
   INTEGER, PARAMETER :: np = INT( -0.30*LOG(R1MACH(3)) )
   ! BOUND = N*(0.1*EPS)**(-1/(2*N-1))/(PI*EXP(1))
-  REAL, PARAMETER :: bound = 0.1171*np*(0.1*R1MACH(3))**(-1./(2*np-1)), &
+  REAL(SP), PARAMETER :: bound = 0.1171*np*(0.1*R1MACH(3))**(-1./(2*np-1)), &
     dxrel = SQRT(R1MACH(4))
-  REAL, PARAMETER :: pi = 3.14159265358979324E0
-  REAL, PARAMETER :: sq2pil = 0.91893853320467274E0
+  REAL(SP), PARAMETER :: pi = 3.14159265358979324E0
+  REAL(SP), PARAMETER :: sq2pil = 0.91893853320467274E0
   !* FIRST EXECUTABLE STATEMENT  CLNGAM
   !
   z = Zin

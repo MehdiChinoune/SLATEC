@@ -1,5 +1,5 @@
 !** DBETAI
-REAL(8) FUNCTION DBETAI(X,Pin,Qin)
+REAL(DP) FUNCTION DBETAI(X,Pin,Qin)
   !>
   !  Calculate the incomplete Beta function.
   !***
@@ -42,10 +42,10 @@ REAL(8) FUNCTION DBETAI(X,Pin,Qin)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920528  DESCRIPTION and REFERENCES sections revised.  (WRB)
   USE service, ONLY : XERMSG, D1MACH
-  REAL(8) :: X, Pin, Qin
+  REAL(DP) :: X, Pin, Qin
   INTEGER :: i, ib, n
-  REAL(8) :: c, finsum, p, ps, q, term, xb, xi, y, p1
-  REAL(8), PARAMETER :: eps = D1MACH(3), alneps = LOG(eps), sml = D1MACH(1), &
+  REAL(DP) :: c, finsum, p, ps, q, term, xb, xi, y, p1
+  REAL(DP), PARAMETER :: eps = D1MACH(3), alneps = LOG(eps), sml = D1MACH(1), &
     alnsml = LOG(sml)
   !* FIRST EXECUTABLE STATEMENT  DBETAI
   !
@@ -105,7 +105,7 @@ REAL(8) FUNCTION DBETAI(X,Pin,Qin)
       !
       finsum = 0.0D0
       n = INT( q )
-      IF ( q==REAL(n, 8) ) n = n - 1
+      IF ( q==REAL( n, DP ) ) n = n - 1
       DO i = 1, n
         IF ( p1<=1.0D0.AND.term/eps<=finsum ) EXIT
         xi = i

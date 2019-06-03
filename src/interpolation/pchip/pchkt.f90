@@ -52,12 +52,12 @@ SUBROUTINE PCHKT(N,X,Knotyp,T)
   !  Declare arguments.
   !
   INTEGER N, Knotyp
-  REAL X(N), T(2*N+4)
+  REAL(SP) X(N), T(2*N+4)
   !
   !  Declare local variables.
   !
   INTEGER j, k, ndim
-  REAL hbeg, hend
+  REAL(SP) hbeg, hend
   !* FIRST EXECUTABLE STATEMENT  PCHKT
   !
   !  Initialize.

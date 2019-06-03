@@ -1,4 +1,5 @@
 MODULE diff_integ
+  USE service, ONLY : SP, DP
   IMPLICIT NONE
 
 CONTAINS

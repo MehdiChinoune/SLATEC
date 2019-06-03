@@ -94,19 +94,19 @@ SUBROUTINE DCHFEV(X1,X2,F1,F2,D1,D2,Ne,Xe,Fe,Next,Ierr)
   !
   !     To produce a single precision version, simply:
   !        a. Change DCHFEV to CHFEV wherever it occurs,
-  !        b. Change the double precision declaration to real, and
+  !        b. Change the double precision declaration to REAL(SP), and
   !        c. Change the constant ZERO to single precision.
   !
   !  DECLARE ARGUMENTS.
   !
   INTEGER Ne, Next(2), Ierr
-  REAL(8) :: X1, X2, F1, F2, D1, D2, Xe(Ne), Fe(Ne)
+  REAL(DP) :: X1, X2, F1, F2, D1, D2, Xe(Ne), Fe(Ne)
   !
   !  DECLARE LOCAL VARIABLES.
   !
   INTEGER i
-  REAL(8) :: c2, c3, del1, del2, delta, h, x, xmi, xma
-  REAL(8), PARAMETER :: zero = 0.D0
+  REAL(DP) :: c2, c3, del1, del2, delta, h, x, xmi, xma
+  REAL(DP), PARAMETER :: zero = 0.D0
   !
   !  VALIDITY-CHECK ARGUMENTS.
   !

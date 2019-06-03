@@ -1,9 +1,10 @@
 MODULE TEST18_MOD
+  USE service, ONLY : SP, DP
   IMPLICIT NONE
 
 CONTAINS
   !** SBEG
-  REAL FUNCTION SBEG(Reset)
+  REAL(SP) FUNCTION SBEG(Reset)
     !>
     !  Generate random numbers.
     !***
@@ -106,13 +107,13 @@ CONTAINS
     INTEGER Ipass, Kprint
     !     .. Local Scalars ..
     LOGICAL ftl, ftl1, ftl2
-    REAL eps, err, thresh
+    REAL(SP) eps, err, thresh
     INTEGER i, isnum, j, n, Nout
     INTEGER, PARAMETER :: NIDIM = 6, NKB = 4, NINC = 4, NALF = 3, NBET = 3
     LOGICAL same, tsterr
     CHARACTER :: trans
     !     .. Local Arrays ..
-    REAL a(NMAX,NMAX), aa(NMAX*NMAX), as(NMAX*NMAX), &
+    REAL(SP) a(NMAX,NMAX), aa(NMAX*NMAX), as(NMAX*NMAX), &
       g(NMAX), x(NMAX), xs(NMAX*INCMAX), xx(NMAX*INCMAX), y(NMAX), &
       ys(NMAX*INCMAX), yt(NMAX), yy(NMAX*INCMAX), z(2*NMAX)
     LOGICAL ltest(NSUBS)
@@ -311,13 +312,13 @@ CONTAINS
     !     .. Scalar Arguments ..
     INTEGER Ipass, Kprint
     !     .. Local Scalars ..
-    REAL eps, err, thresh
+    REAL(SP) eps, err, thresh
     INTEGER i, isnum, j, n, Nout
     INTEGER, PARAMETER :: NIDIM = 6, NALF = 3, NBET = 3
     LOGICAL same, tsterr, ftl, ftl1, ftl2
     CHARACTER :: transa, transb
     !     .. Local Arrays ..
-    REAL ab(NMAX,2*NMAX), aa(NMAX*NMAX), as(NMAX*NMAX), &
+    REAL(SP) ab(NMAX,2*NMAX), aa(NMAX*NMAX), as(NMAX*NMAX), &
       g(NMAX), bb(NMAX*NMAX), bs(NMAX*NMAX), c(NMAX,NMAX), &
       cc(NMAX*NMAX), cs(NMAX*NMAX), ct(NMAX), w(2*NMAX)
     LOGICAL ltest(NSUBS)
@@ -517,13 +518,13 @@ CONTAINS
     REAL, PARAMETER :: ZERO = 0.0, ONE = 1.0
     REAL, PARAMETER :: ROGUE = -1.0E10
     !     .. Scalar Arguments ..
-    REAL Transl
+    REAL(SP) Transl
     INTEGER Kl, Ku, Lda, M, N, Nmax
     LOGICAL Reset
     CHARACTER :: Diag, Uplo
     CHARACTER(2) :: Type
     !     .. Array Arguments ..
-    REAL A(Nmax,*), Aa(*)
+    REAL(SP) A(Nmax,*), Aa(*)
     !     .. Local Scalars ..
     INTEGER i, i1, i2, i3, ibeg, iend, ioff, j, kk
     LOGICAL gen, lower, sym, tri, unit, upper
@@ -697,13 +698,13 @@ CONTAINS
     REAL, PARAMETER :: ZERO = 0.0, ONE = 1.0
     REAL, PARAMETER :: ROGUE = -1.0E10
     !     .. Scalar Arguments ..
-    REAL Transl
+    REAL(SP) Transl
     INTEGER Lda, M, N, Nmax
     LOGICAL Reset
     CHARACTER :: Diag, Uplo
     CHARACTER(2) :: Type
     !     .. Array Arguments ..
-    REAL A(Nmax,*), Aa(*)
+    REAL(SP) A(Nmax,*), Aa(*)
     !     .. Local Scalars ..
     INTEGER i, ibeg, iend, j
     LOGICAL gen, lower, sym, tri, unit, upper
@@ -809,14 +810,14 @@ CONTAINS
     !     .. Parameters ..
     REAL, PARAMETER :: ZERO = 0.0, ONE = 1.0
     !     .. Scalar Arguments ..
-    REAL Alpha, Beta, Eps, Err
+    REAL(SP) Alpha, Beta, Eps, Err
     INTEGER Kk, Kprint, Lda, Ldb, Ldc, Ldcc, M, N, Nout
     LOGICAL Mv, Ftl
     CHARACTER :: Transa, Transb
     !     .. Array Arguments ..
-    REAL A(Lda,*), B(Ldb,*), C(Ldc,*), Cc(Ldcc,*), Ct(*), G(*)
+    REAL(SP) A(Lda,*), B(Ldb,*), C(Ldc,*), Cc(Ldcc,*), Ct(*), G(*)
     !     .. Local Scalars ..
-    REAL erri
+    REAL(SP) erri
     INTEGER i, j, k
     LOGICAL trana, tranb
     !     .. Intrinsic Functions ..
@@ -928,14 +929,14 @@ CONTAINS
     !     .. Parameters ..
     REAL, PARAMETER :: ZERO = 0.0, ONE = 1.0
     !     .. Scalar Arguments ..
-    REAL Alpha, Beta, Eps, Err
+    REAL(SP) Alpha, Beta, Eps, Err
     INTEGER Incx, Incy, Kprint, M, N, Nmax, Nout
     LOGICAL Mv, Ftl
     CHARACTER :: Trans
     !     .. Array Arguments ..
-    REAL A(Nmax,*), G(*), X(*), Y(*), Yt(*), Yy(*)
+    REAL(SP) A(Nmax,*), G(*), X(*), Y(*), Yt(*), Yy(*)
     !     .. Local Scalars ..
-    REAL erri
+    REAL(SP) erri
     INTEGER i, incxl, incyl, iy, j, jx, k, kx, ky, ml, nl
     LOGICAL tran
     !     .. Intrinsic Functions ..
@@ -1047,7 +1048,7 @@ CONTAINS
     !     .. Scalar Arguments ..
     INTEGER Lr
     !     .. Array Arguments ..
-    REAL Ri(*), Rj(*)
+    REAL(SP) Ri(*), Rj(*)
     !     .. Local Scalars ..
     INTEGER i
     !* FIRST EXECUTABLE STATEMENT  LSE
@@ -1093,7 +1094,7 @@ CONTAINS
     CHARACTER :: Uplo
     CHARACTER(2) :: Type
     !     .. Array Arguments ..
-    REAL Aa(Lda,*), As(Lda,*)
+    REAL(SP) Aa(Lda,*), As(Lda,*)
     !     .. Local Scalars ..
     INTEGER i, ibeg, iend, j
     LOGICAL upper
@@ -1162,16 +1163,16 @@ CONTAINS
     REAL, PARAMETER :: ZERO = 0.0, HALF = 0.5
     !     .. Scalar Arguments ..
     LOGICAL Fatal
-    REAL Eps, Thresh
+    REAL(SP) Eps, Thresh
     INTEGER Incmax, Kprint, Nalf, Nbet, Nidim, Ninc, Nkb, Nmax, Nout
     CHARACTER(6) :: Sname
     !     .. Array Arguments ..
-    REAL A(Nmax,Nmax), Aa(Nmax*Nmax), Alf(Nalf), As(Nmax*Nmax), Bet(Nbet), &
+    REAL(SP) A(Nmax,Nmax), Aa(Nmax*Nmax), Alf(Nalf), As(Nmax*Nmax), Bet(Nbet), &
       G(Nmax), X(Nmax), Xs(Nmax*Incmax), Xx(Nmax*Incmax), Y(Nmax), &
       Ys(Nmax*Incmax), Yt(Nmax), Yy(Nmax*Incmax)
     INTEGER Idimm(Nidim), Inc(Ninc), Kb(Nkb)
     !     .. Local Scalars ..
-    REAL alpha, als, beta, bls, err, errmax, transl
+    REAL(SP) alpha, als, beta, bls, err, errmax, transl
     INTEGER i, ia, ib, ic, iku, im, in, incx, incxs, incy, incys, &
       ix, iy, kl, kls, ku, kus, laa, lda, ldas, lx, ly, m, &
       ml, ms, n, nargs, nc, nd, nk, nl, ns, nerr
@@ -1465,16 +1466,16 @@ CONTAINS
     REAL, PARAMETER :: ZERO = 0.0
     !     .. Scalar Arguments ..
     LOGICAL Fatal
-    REAL Eps, Thresh
+    REAL(SP) Eps, Thresh
     INTEGER Kprint, Nalf, Nbet, Nidim, Nmax, Nout
     CHARACTER(6) :: Sname
     !     .. Array Arguments ..
-    REAL A(Nmax,Nmax), Aa(Nmax*Nmax), Alf(Nalf), As(Nmax*Nmax), Bet(Nbet), &
+    REAL(SP) A(Nmax,Nmax), Aa(Nmax*Nmax), Alf(Nalf), As(Nmax*Nmax), Bet(Nbet), &
       G(Nmax), B(Nmax,Nmax), Bb(Nmax*Nmax), Bs(Nmax*Nmax), &
       C(Nmax,Nmax), Cc(Nmax*Nmax), Cs(Nmax*Nmax), Ct(Nmax)
     INTEGER Idimm(Nidim)
     !     .. Local Scalars ..
-    REAL alpha, als, beta, bls, err, errmax
+    REAL(SP) alpha, als, beta, bls, err, errmax
     INTEGER i, ia, ib, ica, icb, ik, im, in, k, ks, laa, lbb, &
       lcc, lda, ldas, ldb, ldbs, ldc, ldcs, m, ma, mb, ms, &
       n, na, nargs, nb, nc, nerr, ns
@@ -1725,16 +1726,16 @@ CONTAINS
     REAL, PARAMETER :: ZERO = 0.0, HALF = 0.5
     !     .. Scalar Arguments ..
     LOGICAL Fatal
-    REAL Eps, Thresh
+    REAL(SP) Eps, Thresh
     INTEGER Incmax, Kprint, Nalf, Nbet, Nidim, Ninc, Nkb, Nmax, Nout
     CHARACTER(6) :: Sname
     !     .. Array Arguments ..
-    REAL A(Nmax,Nmax), Aa(Nmax*Nmax), Alf(Nalf), As(Nmax*Nmax), Bet(Nbet), &
+    REAL(SP) A(Nmax,Nmax), Aa(Nmax*Nmax), Alf(Nalf), As(Nmax*Nmax), Bet(Nbet), &
       G(Nmax), X(Nmax), Xs(Nmax*Incmax), Xx(Nmax*Incmax), Y(Nmax), &
       Ys(Nmax*Incmax), Yt(Nmax), Yy(Nmax*Incmax)
     INTEGER Idimm(Nidim), Inc(Ninc), Kb(Nkb)
     !     .. Local Scalars ..
-    REAL alpha, als, beta, bls, err, errmax, transl
+    REAL(SP) alpha, als, beta, bls, err, errmax, transl
     INTEGER i, ia, ib, ic, ik, in, incx, incxs, incy, incys, ix, &
       iy, k, ks, laa, lda, ldas, lx, ly, n, nargs, nc, nk, ns, nerr
     LOGICAL banded, ftl, full, nul, packed, reset
@@ -2029,16 +2030,16 @@ CONTAINS
     REAL, PARAMETER :: ZERO = 0.0
     !     .. Scalar Arguments ..
     LOGICAL Fatal
-    REAL Eps, Thresh
+    REAL(SP) Eps, Thresh
     INTEGER Kprint, Nalf, Nbet, Nidim, Nmax, Nout
     CHARACTER(6) :: Sname
     !     .. Array Arguments ..
-    REAL A(Nmax,Nmax), Aa(Nmax*Nmax), Alf(Nalf), As(Nmax*Nmax), Bet(Nbet), &
+    REAL(SP) A(Nmax,Nmax), Aa(Nmax*Nmax), Alf(Nalf), As(Nmax*Nmax), Bet(Nbet), &
       G(Nmax), B(Nmax,Nmax), Bb(Nmax*Nmax), Bs(Nmax*Nmax), &
       C(Nmax,Nmax), Cc(Nmax*Nmax), Cs(Nmax*Nmax), Ct(Nmax)
     INTEGER Idimm(Nidim)
     !     .. Local Scalars ..
-    REAL alpha, als, beta, bls, err, errmax
+    REAL(SP) alpha, als, beta, bls, err, errmax
     INTEGER i, ia, ib, ics, icu, im, in, laa, lbb, lcc, lda, ldas, &
       ldb, ldbs, ldc, ldcs, m, ms, n, na, nargs, nc, nerr, ns
     LOGICAL ftl, nul, reset, left
@@ -2275,15 +2276,15 @@ CONTAINS
     REAL, PARAMETER :: ZERO = 0.0, HALF = 0.5, ONE = 1.0
     !     .. Scalar Arguments ..
     LOGICAL Fatal
-    REAL Eps, Thresh
+    REAL(SP) Eps, Thresh
     INTEGER Incmax, Kprint, Nidim, Ninc, Nkb, Nmax, Nout
     CHARACTER(6) :: Sname
     !     .. Array Arguments ..
-    REAL A(Nmax,Nmax), Aa(Nmax*Nmax), As(Nmax*Nmax), G(Nmax), X(Nmax), &
+    REAL(SP) A(Nmax,Nmax), Aa(Nmax*Nmax), As(Nmax*Nmax), G(Nmax), X(Nmax), &
       Xs(Nmax*Incmax), Xt(Nmax), Xx(Nmax*Incmax), Z(Nmax)
     INTEGER Idimm(Nidim), Inc(Ninc), Kb(Nkb)
     !     .. Local Scalars ..
-    REAL err, errmax, transl
+    REAL(SP) err, errmax, transl
     INTEGER i, icd, ict, icu, ik, in, incx, incxs, ix, k, ks, laa, &
       lda, ldas, lx, n, nargs, nc, nk, ns, nerr
     LOGICAL banded, ftl, full, nul, packed, reset
@@ -2580,15 +2581,15 @@ CONTAINS
     REAL, PARAMETER :: ZERO = 0.0, ONE = 1.0
     !     .. Scalar Arguments ..
     LOGICAL Fatal
-    REAL Eps, Thresh
+    REAL(SP) Eps, Thresh
     INTEGER Kprint, Nalf, Nidim, Nmax, Nout
     CHARACTER(6) :: Sname
     !     .. Array Arguments ..
-    REAL A(Nmax,Nmax), Aa(Nmax*Nmax), Alf(Nalf), As(Nmax*Nmax), G(Nmax), &
+    REAL(SP) A(Nmax,Nmax), Aa(Nmax*Nmax), Alf(Nalf), As(Nmax*Nmax), G(Nmax), &
       B(Nmax,Nmax), Bb(Nmax*Nmax), Bs(Nmax*Nmax), C(Nmax,Nmax), Ct(Nmax)
     INTEGER Idimm(Nidim)
     !     .. Local Scalars ..
-    REAL alpha, als, err, errmax
+    REAL(SP) alpha, als, err, errmax
     INTEGER i, ia, icd, ics, ict, icu, im, in, j, laa, lbb, lda, &
       ldas, ldb, ldbs, m, ms, n, na, nargs, nc, nerr, ns
     LOGICAL ftl, nul, reset, left
@@ -2844,21 +2845,21 @@ CONTAINS
     REAL, PARAMETER :: ZERO = 0.0, HALF = 0.5, ONE = 1.0
     !     .. Scalar Arguments ..
     LOGICAL Fatal
-    REAL Eps, Thresh
+    REAL(SP) Eps, Thresh
     INTEGER Incmax, Kprint, Nalf, Nidim, Ninc, Nmax, Nout
     CHARACTER(6) :: Sname
     !     .. Array Arguments ..
-    REAL A(Nmax,Nmax), Aa(Nmax*Nmax), Alf(Nalf), As(Nmax*Nmax), G(Nmax), &
+    REAL(SP) A(Nmax,Nmax), Aa(Nmax*Nmax), Alf(Nalf), As(Nmax*Nmax), G(Nmax), &
       X(Nmax), Xs(Nmax*Incmax), Xx(Nmax*Incmax), Y(Nmax), &
       Ys(Nmax*Incmax), Yt(Nmax), Yy(Nmax*Incmax), Z(Nmax)
     INTEGER Idimm(Nidim), Inc(Ninc)
     !     .. Local Scalars ..
-    REAL alpha, als, err, errmax, transl
+    REAL(SP) alpha, als, err, errmax, transl
     INTEGER i, ia, im, in, incx, incxs, incy, incys, ix, iy, j, &
       laa, lda, ldas, lx, ly, m, ms, n, nargs, nc, nd, ns, nerr
     LOGICAL ftl, nul, reset
     !     .. Local Arrays ..
-    REAL w(1)
+    REAL(SP) w(1)
     LOGICAL isame(13)
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, MAX, MIN
@@ -3083,15 +3084,15 @@ CONTAINS
     REAL, PARAMETER :: ZERO = 0.0
     !     .. Scalar Arguments ..
     LOGICAL Fatal
-    REAL Eps, Thresh
+    REAL(SP) Eps, Thresh
     INTEGER Kprint, Nalf, Nbet, Nidim, Nmax, Nout
     CHARACTER(6) :: Sname
     !     .. Array Arguments ..
-    REAL A(Nmax,Nmax), Aa(Nmax*Nmax), Alf(Nalf), As(Nmax*Nmax), Bet(Nbet), &
+    REAL(SP) A(Nmax,Nmax), Aa(Nmax*Nmax), Alf(Nalf), As(Nmax*Nmax), Bet(Nbet), &
       G(Nmax), C(Nmax,Nmax), Cc(Nmax*Nmax), Cs(Nmax*Nmax), Ct(Nmax)
     INTEGER Idimm(Nidim)
     !     .. Local Scalars ..
-    REAL alpha, als, beta, bets, err, errmax
+    REAL(SP) alpha, als, beta, bets, err, errmax
     INTEGER i, ia, ib, ict, icu, ik, in, j, jc, jj, k, laa, lcc, &
       lda, ldas, ldc, ldcs, n, na, nargs, nc, nerr, ns, ks, lj, ma
     LOGICAL ftl, nul, reset, tran, upper
@@ -3328,21 +3329,21 @@ CONTAINS
     REAL, PARAMETER :: ZERO = 0.0, HALF = 0.5, ONE = 1.0
     !     .. Scalar Arguments ..
     LOGICAL Fatal
-    REAL Eps, Thresh
+    REAL(SP) Eps, Thresh
     INTEGER Incmax, Kprint, Nalf, Nidim, Ninc, Nmax, Nout
     CHARACTER(6) :: Sname
     !     .. Array Arguments ..
-    REAL A(Nmax,Nmax), Aa(Nmax*Nmax), Alf(Nalf), As(Nmax*Nmax), G(Nmax), &
+    REAL(SP) A(Nmax,Nmax), Aa(Nmax*Nmax), Alf(Nalf), As(Nmax*Nmax), G(Nmax), &
       X(Nmax), Xs(Nmax*Incmax), Xx(Nmax*Incmax), Yt(Nmax), Z(Nmax)
     INTEGER Idimm(Nidim), Inc(Ninc)
     !     .. Local Scalars ..
-    REAL alpha, als, err, errmax, transl
+    REAL(SP) alpha, als, err, errmax, transl
     INTEGER i, ia, ic, in, incx, incxs, ix, j, ja, jj, laa, lda, &
       ldas, lj, lx, n, nargs, nc, ns, nerr
     LOGICAL ftl, full, nul, packed, reset, upper
     CHARACTER :: uplo, uplos
     !     .. Local Arrays ..
-    REAL w(1)
+    REAL(SP) w(1)
     LOGICAL isame(13)
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, MAX
@@ -3577,16 +3578,16 @@ CONTAINS
     REAL, PARAMETER :: ZERO = 0.0
     !     .. Scalar Arguments ..
     LOGICAL Fatal
-    REAL Eps, Thresh
+    REAL(SP) Eps, Thresh
     INTEGER Kprint, Nalf, Nbet, Nidim, Nmax, Nout
     CHARACTER(6) :: Sname
     !     .. Array Arguments ..
-    REAL Aa(Nmax*Nmax), Alf(Nalf), As(Nmax*Nmax), Bet(Nbet), G(Nmax), &
+    REAL(SP) Aa(Nmax*Nmax), Alf(Nalf), As(Nmax*Nmax), Bet(Nbet), G(Nmax), &
       Bb(Nmax*Nmax), Bs(Nmax*Nmax), C(Nmax,Nmax), Cc(Nmax*Nmax), &
       Cs(Nmax*Nmax), Ct(Nmax), W(2*Nmax), Ab(2*Nmax*Nmax)
     INTEGER Idimm(Nidim)
     !     .. Local Scalars ..
-    REAL alpha, als, beta, bets, err, errmax
+    REAL(SP) alpha, als, beta, bets, err, errmax
     INTEGER i, ia, ib, ict, icu, ik, in, j, jc, jj, k, laa, lbb, &
       lcc, lda, ldas, ldb, ldbs, ldc, ldcs, n, na, nargs, nc, &
       nerr, ns, ks, lj, ma, jjab
@@ -3856,22 +3857,22 @@ CONTAINS
     REAL, PARAMETER :: ZERO = 0.0, HALF = 0.5, ONE = 1.0
     !     .. Scalar Arguments ..
     LOGICAL Fatal
-    REAL Eps, Thresh
+    REAL(SP) Eps, Thresh
     INTEGER Incmax, Kprint, Nalf, Nidim, Ninc, Nmax, Nout
     CHARACTER(6) :: Sname
     !     .. Array Arguments ..
-    REAL A(Nmax,Nmax), Aa(Nmax*Nmax), Alf(Nalf), As(Nmax*Nmax), G(Nmax), &
+    REAL(SP) A(Nmax,Nmax), Aa(Nmax*Nmax), Alf(Nalf), As(Nmax*Nmax), G(Nmax), &
       X(Nmax), Xs(Nmax*Incmax), Xx(Nmax*Incmax), Y(Nmax), &
       Ys(Nmax*Incmax), Yt(Nmax), Yy(Nmax*Incmax), Z(Nmax,2)
     INTEGER Idimm(Nidim), Inc(Ninc)
     !     .. Local Scalars ..
-    REAL alpha, als, err, errmax, transl
+    REAL(SP) alpha, als, err, errmax, transl
     INTEGER i, ia, ic, in, incx, incxs, incy, incys, ix, iy, j, &
       ja, jj, laa, lda, ldas, lj, lx, ly, n, nargs, nc, ns, nerr
     LOGICAL ftl, full, nul, packed, reset, upper
     CHARACTER :: uplo, uplos
     !     .. Local Arrays ..
-    REAL w(2)
+    REAL(SP) w(2)
     LOGICAL isame(13)
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, MAX
@@ -4142,10 +4143,10 @@ CONTAINS
     !     .. Scalars in Common ..
     INTEGER infot
     !     .. Local Scalars ..
-    REAL alpha, beta
+    REAL(SP) alpha, beta
     INTEGER kontrl
     !     .. Local Arrays ..
-    REAL a(1,1), x(1), y(1)
+    REAL(SP) a(1,1), x(1), y(1)
     !* FIRST EXECUTABLE STATEMENT  SCHKE2
     CALL XGETF(kontrl)
     IF ( Kprint<=2 ) THEN
@@ -4571,10 +4572,10 @@ CONTAINS
     !     .. Scalars in Common ..
     INTEGER infot
     !     .. Local Scalars ..
-    REAL alpha, beta
+    REAL(SP) alpha, beta
     INTEGER kontrl
     !     .. Local Arrays ..
-    REAL a(1,1), b(1,1), c(1,1)
+    REAL(SP) a(1,1), b(1,1), c(1,1)
     !* FIRST EXECUTABLE STATEMENT  SCHKE3
     CALL XGETF(kontrl)
     IF ( Kprint<=2 ) THEN

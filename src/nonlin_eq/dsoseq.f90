@@ -95,17 +95,18 @@ SUBROUTINE DSOSEQ(FNC,N,S,Rtolx,Atolx,Tolf,Iflag,Mxit,Ncjs,Nsrrc,Nsri,&
   USE service, ONLY : D1MACH, I1MACH
   !
   INTERFACE
-    REAL(8) FUNCTION FNC(X,K)
+    REAL(DP) FUNCTION FNC(X,K)
+      IMPORT DP
       INTEGER :: K
-      REAL(8) :: X(:)
+      REAL(DP) :: X(:)
     END FUNCTION FNC
   END INTERFACE
   INTEGER :: Iflag, Iprint, Mxit, N, Nc, Ncjs, Nsri, Nsrrc, Is(N)
-  REAL(8) :: Atolx, Fmax, Rtolx, Tolf, C(Nc), B(N), Fac(N), P(N), S(N), Temp(N), &
+  REAL(DP) :: Atolx, Fmax, Rtolx, Tolf, C(Nc), B(N), Fac(N), P(N), S(N), Temp(N), &
     X(N), Y(N)
   INTEGER :: ic, icr, isj, isv, it, item, itry, j, jk, js, k, kd, kj, kk, km1, &
     kn, ksv, l, loun, ls, m, mit, mm, np1
-  REAL(8) :: csv, f, fact, fdif, fmin, fmxs, fn1, fn2, fp, h, hx, &
+  REAL(DP) :: csv, f, fact, fdif, fmin, fmxs, fn1, fn2, fp, h, hx, &
     pmax, re, sruro, &
     test, uro, xnorm, yj, yn1, &
     yn2, yn3, ynorm, yns, zero

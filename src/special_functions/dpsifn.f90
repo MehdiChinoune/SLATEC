@@ -116,16 +116,16 @@ SUBROUTINE DPSIFN(X,N,Kode,M,Ans,Nz,Ierr)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   USE service, ONLY : D1MACH, I1MACH
   INTEGER :: Ierr, Kode, M, N, Nz
-  REAL(8) :: X, Ans(M)
+  REAL(DP) :: X, Ans(M)
   INTEGER :: i, j, k, mm, mx, nn, np, nx, fn
-  REAL(8) :: arg, den, elim, eps, fln, fx, rln, rxsq, r1m4, r1m5, s, slope, t, ta, &
+  REAL(DP) :: arg, den, elim, eps, fln, fx, rln, rxsq, r1m4, r1m5, s, slope, t, ta, &
     tk, tol, tols, trm(22), trmr(100), tss, tst, tt, t1, t2, wdtol, xdmln, xdmy, &
     xinc, xln, xm, xmin, xq, yint
   INTEGER, PARAMETER :: nmax = 100
   !-----------------------------------------------------------------------
   !             BERNOULLI NUMBERS
   !-----------------------------------------------------------------------
-  REAL(8), PARAMETER :: b(22) = [ 1.00000000000000000D+00, -5.00000000000000000D-01, &
+  REAL(DP), PARAMETER :: b(22) = [ 1.00000000000000000D+00, -5.00000000000000000D-01, &
     1.66666666666666667D-01, -3.33333333333333333D-02, 2.38095238095238095D-02, &
     -3.33333333333333333D-02, 7.57575757575757576D-02, -2.53113553113553114D-01, &
     1.16666666666666667D+00, -7.09215686274509804D+00, 5.49711779448621554D+01, &

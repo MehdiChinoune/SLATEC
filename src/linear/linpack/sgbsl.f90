@@ -86,10 +86,10 @@ SUBROUTINE SGBSL(Abd,Lda,N,Ml,Mu,Ipvt,B,Job)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER :: Lda, N, Ml, Mu, Job, Ipvt(N)
-  REAL :: Abd(Lda,N), B(N)
+  REAL(SP) :: Abd(Lda,N), B(N)
   !
   INTEGER :: k, kb, l, la, lb, lm, m, nm1
-  REAL :: t
+  REAL(SP) :: t
   !* FIRST EXECUTABLE STATEMENT  SGBSL
   m = Mu + Ml + 1
   nm1 = N - 1

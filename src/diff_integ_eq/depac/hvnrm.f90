@@ -1,5 +1,5 @@
 !** HVNRM
-REAL FUNCTION HVNRM(V,Ncomp)
+REAL(SP) FUNCTION HVNRM(V,Ncomp)
   !>
   !  Subsidiary to DEABM, DEBDF and DERKF
   !***
@@ -29,7 +29,7 @@ REAL FUNCTION HVNRM(V,Ncomp)
   !   910722  Updated AUTHOR section.  (ALS)
 
   INTEGER :: Ncomp
-  REAL :: V(Ncomp)
+  REAL(SP) :: V(Ncomp)
   INTEGER :: k
   !* FIRST EXECUTABLE STATEMENT  HVNRM
   HVNRM = 0.

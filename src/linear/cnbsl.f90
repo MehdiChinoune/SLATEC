@@ -85,9 +85,9 @@ SUBROUTINE CNBSL(Abe,Lda,N,Ml,Mu,Ipvt,B,Job)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER Lda, N, Ml, Mu, Ipvt(N), Job
-  COMPLEX Abe(Lda,2*Ml+Mu+1), B(N)
+  COMPLEX(SP) Abe(Lda,2*Ml+Mu+1), B(N)
   !
-  COMPLEX t
+  COMPLEX(SP) t
   INTEGER k, kb, l, lb, ldb, lm, m, mlm, nm1
   !* FIRST EXECUTABLE STATEMENT  CNBSL
   m = Mu + Ml + 1

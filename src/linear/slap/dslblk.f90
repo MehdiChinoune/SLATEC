@@ -1,4 +1,5 @@
 MODULE DSLBLK
+  USE service, ONLY : DP
   IMPLICIT NONE
-  REAL(8), ALLOCATABLE :: soln_com(:)
+  REAL(DP), ALLOCATABLE :: soln_com(:)
 END MODULE DSLBLK

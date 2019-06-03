@@ -35,14 +35,14 @@ SUBROUTINE HKSEQ(X,M,H,Ierr)
   !   920528  DESCRIPTION and REFERENCES sections revised.  (WRB)
   USE service, ONLY : R1MACH, I1MACH
   INTEGER :: Ierr, M
-  REAL :: H(M), X
+  REAL(SP) :: H(M), X
   INTEGER :: i, j, k, mx, nx
-  REAL :: fk, fln, fn, fnp, hrx, rln, rxsq, r1m5, s, slope, t, tk, trm(22), &
+  REAL(SP) :: fk, fln, fn, fnp, hrx, rln, rxsq, r1m5, s, slope, t, tk, trm(22), &
     trmh(25), trmr(25), tst, u(25), v(25), wdtol, xdmy, xh, xinc, xm, xmin, yint
   !-----------------------------------------------------------------------
   !             SCALED BERNOULLI NUMBERS 2.0*B(2K)*(1-2**(-2K))
   !-----------------------------------------------------------------------
-  REAL, PARAMETER :: b(22) = [ 1.00000000000000000E+00, -5.00000000000000000E-01, &
+  REAL(SP), PARAMETER :: b(22) = [ 1.00000000000000000E+00, -5.00000000000000000E-01, &
     2.50000000000000000E-01, -6.25000000000000000E-02, 4.68750000000000000E-02, &
     -6.64062500000000000E-02, 1.51367187500000000E-01,-5.06103515625000000E-01, &
     2.33319091796875000E+00, -1.41840972900390625E+01, 1.09941936492919922E+02, &

@@ -89,12 +89,12 @@ SUBROUTINE CHIDI(A,Lda,N,Kpvt,Det,Inert,Work,Job)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER Lda, N, Job
-  COMPLEX A(Lda,*), Work(*)
-  REAL Det(2)
+  COMPLEX(SP) A(Lda,*), Work(*)
+  REAL(SP) Det(2)
   INTEGER Kpvt(*), Inert(3)
   !
-  COMPLEX akkp1, temp
-  REAL ten, d, t, ak, akp1
+  COMPLEX(SP) akkp1, temp
+  REAL(SP) ten, d, t, ak, akp1
   INTEGER j, jb, k, km1, ks, kstep
   LOGICAL noinv, nodet, noert
   !* FIRST EXECUTABLE STATEMENT  CHIDI

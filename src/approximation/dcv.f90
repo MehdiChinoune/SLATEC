@@ -1,5 +1,5 @@
 !** DCV
-REAL(8) FUNCTION DCV(Xval,Ndata,Nconst,Nord,Nbkpt,Bkpt,W)
+REAL(DP) FUNCTION DCV(Xval,Ndata,Nconst,Nord,Nbkpt,Bkpt,W)
   !>
   !  Evaluate the variance function of the curve obtained
   !            by the constrained B-spline fitting subprogram DFC.
@@ -110,9 +110,9 @@ REAL(8) FUNCTION DCV(Xval,Ndata,Nconst,Nord,Nbkpt,Bkpt,W)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   INTEGER :: Nbkpt, Nconst, Ndata, Nord
-  REAL(8) :: Xval, Bkpt(Nbkpt), W(:)
+  REAL(DP) :: Xval, Bkpt(Nbkpt), W(:)
   INTEGER :: i, ileft, ip, is, last, mdg, mdw, n
-  REAL(8) :: zero, v(40)
+  REAL(DP) :: zero, v(40)
   !* FIRST EXECUTABLE STATEMENT  DCV
   zero = 0.0D0
   mdg = Nbkpt - Nord + 3

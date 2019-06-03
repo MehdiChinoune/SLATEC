@@ -69,7 +69,7 @@ SUBROUTINE INTRV(Xt,Lxt,X,Ilo,Ileft,Mflag)
 
   !
   INTEGER :: Ileft, Ilo, Lxt, Mflag
-  REAL :: X, Xt(Lxt)
+  REAL(SP) :: X, Xt(Lxt)
   INTEGER :: ihi, istep, middle
   !* FIRST EXECUTABLE STATEMENT  INTRV
   ihi = Ilo + 1

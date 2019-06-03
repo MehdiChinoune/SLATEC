@@ -164,12 +164,13 @@ SUBROUTINE QAWC(F,A,B,C,Epsabs,Epsrel,Result,Abserr,Neval,Ier,Limit,Lenw,&
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   USE service, ONLY : XERMSG
   INTERFACE
-    REAL FUNCTION F(X)
-      REAL :: X
+    REAL(SP) FUNCTION F(X)
+      IMPORT SP
+      REAL(SP) :: X
     END FUNCTION F
   END INTERFACE
   INTEGER :: Ier, Last, Lenw, Limit, Neval, Iwork(Limit)
-  REAL :: A, Abserr, B, C, Epsabs, Epsrel, Result, Work(Lenw)
+  REAL(SP) :: A, Abserr, B, C, Epsabs, Epsrel, Result, Work(Lenw)
   INTEGER :: lvl, l1, l2, l3
   !
   !         CHECK VALIDITY OF LIMIT AND LENW.

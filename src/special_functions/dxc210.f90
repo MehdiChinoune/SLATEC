@@ -52,7 +52,7 @@ SUBROUTINE DXC210(K,Z,J,Ierror)
   USE DXBLK ,ONLY: nlg102_com, mlg102_com, lg102_com
   USE service, ONLY : XERMSG
   INTEGER :: Ierror, K, J
-  REAL(8) :: Z
+  REAL(DP) :: Z
   INTEGER :: i, ic, id, ii, it, ja, ka, ka1, ka2, m, nm1, np1
   !
   !   THE CONDITIONS IMPOSED ON NLG102, MLG102, AND LG102 BY

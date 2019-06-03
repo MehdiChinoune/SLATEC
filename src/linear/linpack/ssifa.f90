@@ -75,10 +75,10 @@ SUBROUTINE SSIFA(A,Lda,N,Kpvt,Info)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER Lda, N, Kpvt(*), Info
-  REAL A(Lda,*)
+  REAL(SP) A(Lda,*)
   !
-  REAL ak, akm1, bk, bkm1, denom, mulk, mulkm1, t
-  REAL absakk, alpha, colmax, rowmax
+  REAL(SP) ak, akm1, bk, bkm1, denom, mulk, mulkm1, t
+  REAL(SP) absakk, alpha, colmax, rowmax
   INTEGER imax, imaxp1, j, jj, jmax, k, km1, km2, kstep
   LOGICAL swap
   !* FIRST EXECUTABLE STATEMENT  SSIFA

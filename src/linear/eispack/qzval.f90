@@ -106,11 +106,11 @@ SUBROUTINE QZVAL(Nm,N,A,B,Alfr,Alfi,Beta,Matz,Z)
 
   !
   INTEGER i, j, N, en, na, Nm, nn, isw
-  REAL A(Nm,*), B(Nm,*), Alfr(*), Alfi(*), Beta(*), Z(Nm,*)
-  REAL c, d, e, r, s, t, an, a1, a2, bn, cq, cz, di, dr, ei, ti, tr
-  REAL u1, u2, v1, v2, a1i, a11, a12, a2i, a21, a22, b11, b12, b22
-  REAL sqi, sqr, ssi, ssr, szi, szr, a11i, a11r, a12i, a12r
-  REAL a22i, a22r, epsb
+  REAL(SP) A(Nm,*), B(Nm,*), Alfr(*), Alfi(*), Beta(*), Z(Nm,*)
+  REAL(SP) c, d, e, r, s, t, an, a1, a2, bn, cq, cz, di, dr, ei, ti, tr
+  REAL(SP) u1, u2, v1, v2, a1i, a11, a12, a2i, a21, a22, b11, b12, b22
+  REAL(SP) sqi, sqr, ssi, ssr, szi, szr, a11i, a11r, a12i, a12r
+  REAL(SP) a22i, a22r, epsb
   LOGICAL Matz
   !
   !* FIRST EXECUTABLE STATEMENT  QZVAL

@@ -26,9 +26,9 @@ SUBROUTINE RADF4(Ido,L1,Cc,Ch,Wa1,Wa2,Wa3)
   !   900402  Added TYPE section.  (WRB)
 
   INTEGER :: Ido, L1
-  REAL :: Cc(Ido,L1,4), Ch(Ido,4,L1), Wa1(Ido), Wa2(Ido), Wa3(ido)
+  REAL(SP) :: Cc(Ido,L1,4), Ch(Ido,4,L1), Wa1(Ido), Wa2(Ido), Wa3(ido)
   INTEGER :: i, ic, idp2, k
-  REAL :: ci2, ci3, ci4, cr2, cr3, cr4, hsqt2, ti1, ti2, ti3, ti4, tr1, tr2, tr3, tr4
+  REAL(SP) :: ci2, ci3, ci4, cr2, cr3, cr4, hsqt2, ti1, ti2, ti3, ti4, tr1, tr2, tr3, tr4
   !* FIRST EXECUTABLE STATEMENT  RADF4
   hsqt2 = .5*SQRT(2.)
   DO k = 1, L1

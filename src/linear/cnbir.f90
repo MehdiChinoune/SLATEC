@@ -182,9 +182,9 @@ SUBROUTINE CNBIR(Abe,Lda,N,Ml,Mu,V,Itask,Ind,Work,Iwork)
   USE service, ONLY : R1MACH, XERMSG
   !
   INTEGER :: Lda, N, Itask, Ind, Iwork(N), Ml, Mu
-  COMPLEX :: Abe(Lda,Ml+Mu+1), V(N), Work(N,2*Ml+Mu+2)
+  COMPLEX(SP) :: Abe(Lda,Ml+Mu+1), V(N), Work(N,2*Ml+Mu+2)
   INTEGER :: info, j, k, kk, l, m, nc
-  REAL xnorm, dnorm
+  REAL(SP) xnorm, dnorm
   CHARACTER(8) :: xern1, xern2
   !* FIRST EXECUTABLE STATEMENT  CNBIR
   IF ( Lda<N ) THEN

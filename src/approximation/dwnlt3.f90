@@ -27,10 +27,10 @@ SUBROUTINE DWNLT3(I,Imax,M,Mdw,Ipivot,H,W)
   !   900604  DP version created from SP version.  (RWC)
   USE linear, ONLY : DSWAP
   INTEGER :: I, Imax, M, Mdw, Ipivot(:)
-  REAL(8) :: H(:), W(Mdw,M)
+  REAL(DP) :: H(:), W(Mdw,M)
   !
   INTEGER :: itemp
-  REAL(8) :: t
+  REAL(DP) :: t
   !
   !* FIRST EXECUTABLE STATEMENT  DWNLT3
   IF ( Imax/=I ) THEN

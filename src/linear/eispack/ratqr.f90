@@ -133,12 +133,12 @@ SUBROUTINE RATQR(N,Eps1,D,E,E2,M,W,Ind,Bd,Type,Idef,Ierr)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   USE service, ONLY : R1MACH
   INTEGER i, j, k, M, N, ii, jj, k1, Idef, Ierr, jdef
-  REAL D(*), E(*), E2(*), W(*), Bd(*)
-  REAL f, p, q, r, s, ep, qp, err, tot, Eps1, delta
+  REAL(SP) D(*), E(*), E2(*), W(*), Bd(*)
+  REAL(SP) f, p, q, r, s, ep, qp, err, tot, Eps1, delta
   INTEGER Ind(*)
   LOGICAL :: Type
   !
-  REAL, PARAMETER :: machep = R1MACH(4)
+  REAL(SP), PARAMETER :: machep = R1MACH(4)
   !* FIRST EXECUTABLE STATEMENT  RATQR
   !
   Ierr = 0

@@ -26,9 +26,9 @@ SUBROUTINE PASSF3(Ido,L1,Cc,Ch,Wa1,Wa2)
   !   900402  Added TYPE section.  (WRB)
 
   INTEGER :: Ido, L1
-  REAL :: Cc(Ido,3,L1), Ch(Ido,L1,3), Wa1(Ido), Wa2(Ido)
+  REAL(SP) :: Cc(Ido,3,L1), Ch(Ido,L1,3), Wa1(Ido), Wa2(Ido)
   INTEGER :: i, k
-  REAL :: ci2, ci3, cr2, cr3, di2, di3, dr2, dr3, taui, taur, ti2, tr2
+  REAL(SP) :: ci2, ci3, cr2, cr3, di2, di3, dr2, dr3, taui, taur, ti2, tr2
   !* FIRST EXECUTABLE STATEMENT  PASSF3
   taur = -.5
   taui = -.5*SQRT(3.)

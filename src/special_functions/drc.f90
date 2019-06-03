@@ -1,5 +1,5 @@
 !** DRC
-REAL(8) FUNCTION DRC(X,Y,Ier)
+REAL(DP) FUNCTION DRC(X,Y,Ier)
   !>
   !  Calculate a double precision approximation to
   !             DRC(X,Y) = Integral from zero to infinity of
@@ -271,12 +271,12 @@ REAL(8) FUNCTION DRC(X,Y,Ier)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   USE service, ONLY : XERMSG, D1MACH
   INTEGER :: Ier
-  REAL(8) :: X, Y
-  REAL(8) :: mu, s, sn, xn, yn, lamda
+  REAL(DP) :: X, Y
+  REAL(DP) :: mu, s, sn, xn, yn, lamda
   CHARACTER(16) :: xern3, xern4, xern5
-  REAL(8), PARAMETER :: errtol = (D1MACH(3)/16.0D0)**(1.0D0/6.0D0), &
+  REAL(DP), PARAMETER :: errtol = (D1MACH(3)/16.0D0)**(1.0D0/6.0D0), &
     lolim = 5.0D0*D1MACH(1), uplim = D1MACH(2)/5.0D0
-  REAL(8), PARAMETER :: c1 = 1.0D0/7.0D0, c2 = 9.0D0/22.0D0
+  REAL(DP), PARAMETER :: c1 = 1.0D0/7.0D0, c2 = 9.0D0/22.0D0
   !* FIRST EXECUTABLE STATEMENT  DRC
   !         CALL ERROR HANDLER IF NECESSARY.
   !

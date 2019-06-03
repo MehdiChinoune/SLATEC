@@ -27,9 +27,9 @@ SUBROUTINE ORTHOG(Usol,Idmn,Zn,Zm,Pertrb)
   !   900402  Added TYPE section.  (WRB)
   USE SPLPCM, ONLY : is_com, js_com, ms_com, ns_com
   INTEGER :: Idmn
-  REAL :: Pertrb, Usol(Idmn,ns_com), Zm(ms_com), Zn(ns_com)
+  REAL(SP) :: Pertrb, Usol(Idmn,ns_com), Zm(ms_com), Zn(ns_com)
   INTEGER :: i, ifnl, ii, istr, j, jfnl, jj, jstr
-  REAL :: ete, ute
+  REAL(SP) :: ete, ute
   !* FIRST EXECUTABLE STATEMENT  ORTHOG
   istr = is_com
   ifnl = ms_com

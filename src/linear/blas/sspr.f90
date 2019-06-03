@@ -92,15 +92,15 @@ SUBROUTINE SSPR(Uplo,N,Alpha,X,Incx,Ap)
   !           lines were modified.  (BKS)
   USE service, ONLY : XERBLA
   !     .. Scalar Arguments ..
-  REAL Alpha
+  REAL(SP) Alpha
   INTEGER Incx, N
   CHARACTER :: Uplo
   !     .. Array Arguments ..
-  REAL Ap(*), X(*)
+  REAL(SP) Ap(*), X(*)
   !     .. Parameters ..
-  REAL, PARAMETER :: ZERO = 0.0E+0
+  REAL(SP), PARAMETER :: ZERO = 0.0E+0
   !     .. Local Scalars ..
-  REAL temp
+  REAL(SP) temp
   INTEGER i, info, ix, j, jx, k, kk, kx
   !* FIRST EXECUTABLE STATEMENT  SSPR
   !

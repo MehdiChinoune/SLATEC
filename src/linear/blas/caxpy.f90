@@ -55,7 +55,7 @@ SUBROUTINE CAXPY(N,Ca,Cx,Incx,Cy,Incy)
   !   920801  Removed variable CANORM.  (RWC, WRB)
 
   INTEGER i, Incx, Incy, kx, ky, N, ns
-  COMPLEX Cx(*), Cy(*), Ca
+  COMPLEX(SP) Cx(*), Cy(*), Ca
   !* FIRST EXECUTABLE STATEMENT  CAXPY
   IF ( N<=0.OR.Ca==(0.0E0,0.0E0) ) RETURN
   IF ( Incx==Incy.AND.Incx>0 ) THEN

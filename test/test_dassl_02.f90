@@ -1,4 +1,5 @@
 MODULE TEST49_MOD
+  USE service, ONLY : SP, DP
   IMPLICIT NONE
 
 CONTAINS
@@ -24,10 +25,10 @@ CONTAINS
     !   901009  Changed AMAX1 to MAX.  (FNF)
     !   901030  Removed FLOAT's; made all local declarations explicit. (FNF)
 
-    REAL(8) :: Y(*), T, Erm
+    REAL(DP) :: Y(*), T, Erm
     INTEGER i, j, k
-    REAL(8) :: a1, a2, er, ex, yt
-    REAL(8), PARAMETER :: alph1 = 1.0D0, alph2 = 1.0D0
+    REAL(DP) :: a1, a2, er, ex, yt
+    REAL(DP), PARAMETER :: alph1 = 1.0D0, alph2 = 1.0D0
     INTEGER, PARAMETER :: ng = 5
     !* FIRST EXECUTABLE STATEMENT  DEDIT2
     Erm = 0.0D0
@@ -100,10 +101,10 @@ CONTAINS
     !
     INTEGER i, idid, info(15), iout, ires, iwork(45), j190, &
       j290, liw, lrw, ml, mu, neq, nerr, nfe, nje, nout, nqu, nst
-    REAL(8) :: atol(1), delta(25), er, er1, er2, erm, ero, hu, rtol(1), &
+    REAL(DP) :: atol(1), delta(25), er, er1, er2, erm, ero, hu, rtol(1), &
       rwork(550), t, tout, y(25), yprime(25), yt1, yt2
     !
-    REAL(8), PARAMETER :: tout1 = 1.0D0, dtout = 1.0D0
+    REAL(DP), PARAMETER :: tout1 = 1.0D0, dtout = 1.0D0
     !
     !* FIRST EXECUTABLE STATEMENT  DDASQC
     Ipass = 1
@@ -278,7 +279,7 @@ CONTAINS
     !   901001  Converted prologue to 4.0 format and made all argument
     !           declarations explicit.  (FNF)
 
-    REAL(8) :: T, Y(:), Yprime(:), Pd(:,:), Cj
+    REAL(DP) :: T, Y(:), Yprime(:), Pd(:,:), Cj
     !* FIRST EXECUTABLE STATEMENT  DDJAC1
     Pd(1,1) = Cj + 10.0D0
     Pd(1,2) = 0.0D0
@@ -308,9 +309,9 @@ CONTAINS
     !           including MBAND+n in expressions.  (FNF)
     !   901030  Made all local declarations explicit.  (FNF)
 
-    REAL(8) :: T, Y(:), Yprime(:), Pd(:,:), Cj
+    REAL(DP) :: T, Y(:), Yprime(:), Pd(:,:), Cj
     INTEGER :: j, mband
-    REAL(8), PARAMETER :: alph1 = 1.0D0, alph2 = 1.0D0
+    REAL(DP), PARAMETER :: alph1 = 1.0D0, alph2 = 1.0D0
     INTEGER, PARAMETER :: ng = 5
     INTEGER, PARAMETER :: ml = 5, mu = 0, neq = 25
     !* FIRST EXECUTABLE STATEMENT  DDJAC2
@@ -348,7 +349,7 @@ CONTAINS
     !           declarations explicit.  (FNF)
 
     INTEGER :: Ires
-    REAL(8) :: T, Y(:), Yprime(:), Delta(:)
+    REAL(DP) :: T, Y(:), Yprime(:), Delta(:)
     !* FIRST EXECUTABLE STATEMENT  DDRES1
     Delta(1) = Yprime(1) + 10.0D0*Y(1)
     Delta(2) = Y(2) + Y(1) - 1.0D0
@@ -375,10 +376,10 @@ CONTAINS
     !   901030  Made all local declarations explicit.  (FNF)
 
     INTEGER :: Ires
-    REAL(8) :: T, Y(:), Yprime(:), Delta(:)
+    REAL(DP) :: T, Y(:), Yprime(:), Delta(:)
     INTEGER :: i, j, k
-    REAL(8) :: d
-    REAL(8), PARAMETER :: alph1 = 1.0D0, alph2 = 1.0D0
+    REAL(DP) :: d
+    REAL(DP), PARAMETER :: alph1 = 1.0D0, alph2 = 1.0D0
     INTEGER, PARAMETER :: ng = 5
     !* FIRST EXECUTABLE STATEMENT  DDRES2
     DO j = 1, ng

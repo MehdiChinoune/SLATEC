@@ -1,5 +1,5 @@
 !** DQDOTA
-REAL(8) FUNCTION DQDOTA(N,Db,Qc,Dx,Incx,Dy,Incy)
+REAL(DP) FUNCTION DQDOTA(N,Db,Qc,Dx,Incx,Dy,Incy)
   !>
   !  Compute the inner product of two vectors with extended
   !            precision accumulation and result.
@@ -72,7 +72,7 @@ REAL(8) FUNCTION DQDOTA(N,Db,Qc,Dx,Incx,Dy,Incy)
   !   930124  Increased Array sizes for SUN -r8.  (RWC)
 
   INTEGER i, Incx, Incy, ix, iy, N
-  REAL(8) :: Dx(*), Dy(*), Db
+  REAL(DP) :: Dx(*), Dy(*), Db
   INTEGER :: Qc(30), qx(30), qy(30)
   INTEGER, SAVE :: i1 = 0
   !* FIRST EXECUTABLE STATEMENT  DQDOTA

@@ -108,10 +108,10 @@ SUBROUTINE QZIT(Nm,N,A,B,Eps1,Matz,Z,Ierr)
   !
   INTEGER i, j, k, l, N, en, k1, k2, ld, ll, l1, na, Nm, ish, itn, its, km1, lm1
   INTEGER enm2, Ierr, lor1, enorn
-  REAL A(Nm,*), B(Nm,*), Z(Nm,*)
-  REAL r, s, t, a1, a2, a3, ep, sh, u1, u2, u3, v1, v2, v3, ani
-  REAL a11, a12, a21, a22, a33, a34, a43, a44, bni, b11
-  REAL b12, b22, b33, b34, b44, epsa, epsb, Eps1, anorm, bnorm
+  REAL(SP) A(Nm,*), B(Nm,*), Z(Nm,*)
+  REAL(SP) r, s, t, a1, a2, a3, ep, sh, u1, u2, u3, v1, v2, v3, ani
+  REAL(SP) a11, a12, a21, a22, a33, a34, a43, a44, bni, b11
+  REAL(SP) b12, b22, b33, b34, b44, epsa, epsb, Eps1, anorm, bnorm
   LOGICAL Matz, notlas
   !
   !* FIRST EXECUTABLE STATEMENT  QZIT

@@ -40,10 +40,10 @@ SUBROUTINE PRWVIR(Key,Ipage,Lpg,Sx,Ix)
   !   910403  Updated AUTHOR and DESCRIPTION sections.  (WRB)
 
   INTEGER :: Ipage, Lpg, Ix(Lpg), Key
-  REAL :: Sx(Lpg)
+  REAL(SP) :: Sx(Lpg)
   INTEGER :: iaddr, ipagef, istart
   LOGICAL :: first
-  REAL, PARAMETER :: zero = 0.E0, one = 1.E0
+  REAL(SP), PARAMETER :: zero = 0.E0, one = 1.E0
   !* FIRST EXECUTABLE STATEMENT  PRWVIR
   !
   !     COMPUTE STARTING ADDRESS OF PAGE.

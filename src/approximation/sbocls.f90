@@ -564,14 +564,14 @@ SUBROUTINE SBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,&
   ! ++
   USE service, ONLY : XERMSG, R1MACH
   INTEGER :: Mcon, Mdw, Mode, Mrows, Ncols
-  REAL :: Rnorm, Rnormc
+  REAL(SP) :: Rnorm, Rnormc
   INTEGER :: Ind(Ncols+Mcon), Iw(2*(Ncols+Mcon)), Iopt(*)
-  REAL :: W(Mdw,Ncols+Mcon+1), Bl(Ncols+Mcon), Bu(Ncols+Mcon), X(2*(Ncols+Mcon)+7), &
+  REAL(SP) :: W(Mdw,Ncols+Mcon+1), Bl(Ncols+Mcon), Bu(Ncols+Mcon), X(2*(Ncols+Mcon)+7), &
     Rw(6*Ncols+5*Mcon)
   INTEGER :: i, icase, iiw, inrows, ip, irw, iscale, j, jp, lbou, lboum, lds, lenx, &
     liopt, liw, llb, lliw, llrw, llx, lmdw, lndw, locacc, locdim, lopt, lp, lrw, &
     m, mdwl, mnew, modec, mopt, mout, nerr
-  REAL :: anorm, cnorm, one, srelpr, t, t1, t2, wt, zero
+  REAL(SP) :: anorm, cnorm, one, srelpr, t, t1, t2, wt, zero
   LOGICAL :: filter, pretri
   CHARACTER(8) :: xern1, xern2
   INTEGER :: jopt(05)

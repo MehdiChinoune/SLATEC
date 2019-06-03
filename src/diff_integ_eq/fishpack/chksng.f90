@@ -29,17 +29,19 @@ SUBROUTINE CHKSNG(Mbdcnd,Nbdcnd,Alpha,Beta,Gama,Xnu,COFX,COFY,Singlr)
   USE SPLPCM, ONLY : ait_com, cit_com, dlx_com, dly_com, is_com, js_com, ms_com, ns_com
   INTERFACE
     SUBROUTINE COFX(X,A,B,C)
-      REAL :: X, A, B, C
+      IMPORT SP
+      REAL(SP) :: X, A, B, C
     END SUBROUTINE COFX
     SUBROUTINE COFY(Y,D,E,F)
-      REAL :: Y, D, E, F
+      IMPORT SP
+      REAL(SP) :: Y, D, E, F
     END SUBROUTINE COFY
   END INTERFACE
   INTEGER :: Mbdcnd, Nbdcnd
-  REAL :: Alpha, Beta, Gama, Xnu
+  REAL(SP) :: Alpha, Beta, Gama, Xnu
   LOGICAL :: Singlr
   INTEGER :: i, j
-  REAL :: ai, bi, ci, dj, ej, fj, xi, yj
+  REAL(SP) :: ai, bi, ci, dj, ej, fj, xi, yj
   !* FIRST EXECUTABLE STATEMENT  CHKSNG
   Singlr = .FALSE.
   !

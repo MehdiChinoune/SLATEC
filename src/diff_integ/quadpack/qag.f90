@@ -168,12 +168,13 @@ SUBROUTINE QAG(F,A,B,Epsabs,Epsrel,Key,Result,Abserr,Neval,Ier,Limit,Lenw,&
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   USE service, ONLY : XERMSG
   INTERFACE
-    REAL FUNCTION F(X)
-      REAL :: X
+    REAL(SP) FUNCTION F(X)
+      IMPORT SP
+      REAL(SP) :: X
     END FUNCTION F
   END INTERFACE
   INTEGER :: Last, Ier, Key, Lenw, Limit, Neval, Iwork(Limit)
-  REAL :: A, Abserr, B, Epsabs, Epsrel, Result, Work(Lenw)
+  REAL(SP) :: A, Abserr, B, Epsabs, Epsrel, Result, Work(Lenw)
   INTEGER :: lvl, l1, l2, l3
   !* FIRST EXECUTABLE STATEMENT  QAG
   Ier = 6

@@ -1,4 +1,5 @@
 MODULE TEST38_MOD
+  USE service, ONLY : SP, DP
   IMPLICIT NONE
 
 CONTAINS
@@ -24,12 +25,12 @@ CONTAINS
     USE common_mod, ONLY : PASS
     INTEGER i, ic, iv, ivv, j, kk, kount, Kprint, Lun, mm
     INTEGER icnt, ind(60), ibasis(60), Ipass, iwork(900), isoln(14)
-    REAL(8) :: costs(37)
-    REAL(8) :: prgopt(50), dattrv(210), bl(60), bu(60)
-    REAL(8) :: primal(60), duals(60)
-    REAL(8) :: work(800)
-    REAL(8) :: d(14,37)
-    REAL(8) :: zero
+    REAL(DP) :: costs(37)
+    REAL(DP) :: prgopt(50), dattrv(210), bl(60), bu(60)
+    REAL(DP) :: primal(60), duals(60)
+    REAL(DP) :: work(800)
+    REAL(DP) :: d(14,37)
+    REAL(DP) :: zero
     INTEGER mrelas, nvars, info, lw, liw
     !* FIRST EXECUTABLE STATEMENT  DPLPQX
     IF ( Kprint>=2 ) WRITE (Lun,99001)
@@ -281,28 +282,28 @@ CONTAINS
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   901010  Added PASS/FAIL message.  (RWC)
     USE slatec, ONLY : D1MACH, DBOCLS, DBOLS, DCOPY, DNRM2
-    REAL(8) :: rnorm, rnormc, sr
+    REAL(DP) :: rnorm, rnormc, sr
     INTEGER ib, Ipass, irhs, itest, j, Kprint, Lun, mcon, mdw, &
       mode, mpass, mrows, ncols
-    REAL(8) :: w(11,11), x(30), rw(55), bl1(10), bu1(10)
+    REAL(DP) :: w(11,11), x(30), rw(55), bl1(10), bu1(10)
     INTEGER ind(10), iw(20), iopt(40)
     CHARACTER(4) :: msg
     !
-    REAL(8), PARAMETER :: c(5,5) = RESHAPE( [ 1.D0, 10.D0, 4.D0, 8.D0, 1.D0, &
+    REAL(DP), PARAMETER :: c(5,5) = RESHAPE( [ 1.D0, 10.D0, 4.D0, 8.D0, 1.D0, &
       1.D0, 10.D0, 2.D0, -1.D0, 1.D0,  1.D0, -3.D0, -3.D0, 2.D0, 1.D0, &
       1.D0, 5.D0, 5.D0, 5.D0, 1.D0,    1.D0, 4.D0, -1.D0, -3.D0, 1.D0 ], [5,5] )
-    REAL(8), PARAMETER :: d(6,5) = RESHAPE( [-74.D0, 14.D0, 66.D0,-12.D0, 3.D0, 4.D0, &
+    REAL(DP), PARAMETER :: d(6,5) = RESHAPE( [-74.D0, 14.D0, 66.D0,-12.D0, 3.D0, 4.D0, &
       80.D0, -69.D0, -72.D0, 66.D0, 8.D0, -12.D0, &
       18.D0, 21.D0, -5.D0, -30.D0, -7.D0, 4.D0, &
       -11.D0, 28.D0, 7.D0, -23.D0, -4.D0, 4.D0, &
       -4.D0, 0.D0, 1.D0, 3.D0, 1.D0, 0.D0 ], [6,5] )
-    REAL(8), PARAMETER :: bl(5,2) = RESHAPE( [ 1.D0, 0.D0, -1.D0, 1.D0, -4.D0, &
+    REAL(DP), PARAMETER :: bl(5,2) = RESHAPE( [ 1.D0, 0.D0, -1.D0, 1.D0, -4.D0, &
       -1.D0, 0.D0, -3.D0, 1.D0, -6.D0 ], [5,2] )
-    REAL(8), PARAMETER :: bu(5,2) = RESHAPE( [ 3.D0, 2.D0, 1.D0, 3.D0, -2.D0, &
+    REAL(DP), PARAMETER :: bu(5,2) = RESHAPE( [ 3.D0, 2.D0, 1.D0, 3.D0, -2.D0, &
       3.D0, 4.D0, 1.D0, 5.D0, -2.D0 ], [5,2] )
-    REAL(8), PARAMETER :: rhs(6,2) = RESHAPE( [ 51.D0,-61.D0,-56.D0, 69.D0, 10.D0,-12.D0, &
+    REAL(DP), PARAMETER :: rhs(6,2) = RESHAPE( [ 51.D0,-61.D0,-56.D0, 69.D0, 10.D0,-12.D0, &
       -5.D0, -9.D0, 708.D0, 4165.D0, -13266.D0, 8409.D0 ], [6,2] )
-    REAL(8), PARAMETER :: xtrue(9) = [ 1.D0, 2.D0, -1.D0, 3.D0, -4.D0, 1.D0, &
+    REAL(DP), PARAMETER :: xtrue(9) = [ 1.D0, 2.D0, -1.D0, 3.D0, -4.D0, 1.D0, &
       32.D0, 30.D0, 31.D0 ]
     !* FIRST EXECUTABLE STATEMENT  DBOCQX
     mdw = 11

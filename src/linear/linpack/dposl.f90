@@ -70,9 +70,9 @@ SUBROUTINE DPOSL(A,Lda,N,B)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER Lda, N
-  REAL(8) :: A(Lda,*), B(*)
+  REAL(DP) :: A(Lda,*), B(*)
   !
-  REAL(8) :: t
+  REAL(DP) :: t
   INTEGER k, kb
   !
   !     SOLVE TRANS(R)*Y = B

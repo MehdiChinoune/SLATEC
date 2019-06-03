@@ -77,16 +77,16 @@ SUBROUTINE DWNLSM(W,Mdw,Mme,Ma,N,L,Prgopt,X,Rnorm,Mode,Ipivot,Itype,Wd,H,&
   USE service, ONLY : XERMSG, D1MACH
   USE linear, ONLY : DAXPY, DH12, DROTM, DROTMG, DSWAP
   INTEGER :: L, Ma, Mdw, Mme, Mode, N, Ipivot(N), Itype(Mme+Ma)
-  REAL(8) :: Rnorm, D(N), H(N), Prgopt(:), Scalee(Mme+Ma), Temp(N), W(Mdw,N+1), &
+  REAL(DP) :: Rnorm, D(N), H(N), Prgopt(:), Scalee(Mme+Ma), Temp(N), W(Mdw,N+1), &
     Wd(N), X(N), Z(N)
   !
   INTEGER :: i, idope(3), imax, isol, itemp, iter, itmax, iwmax, j, jcon, jp, key, &
     krank, l1, last, link, m, me, next, niv, nlink, nopt, nsoln, ntimes
-  REAL(8) :: alamda, alpha, alsq, amax, blowup, bnorm, dope(3), eanorm, fac, sm, &
+  REAL(DP) :: alamda, alpha, alsq, amax, blowup, bnorm, dope(3), eanorm, fac, sm, &
     sparam(5), t, tau, wmax, z2, zz
   LOGICAL :: done, feasbl, hitcon, pos
   !
-  REAL(8), PARAMETER :: drelpr = D1MACH(4)
+  REAL(DP), PARAMETER :: drelpr = D1MACH(4)
   !* FIRST EXECUTABLE STATEMENT  DWNLSM
   !
   !     Set the nominal tolerance used in the code.

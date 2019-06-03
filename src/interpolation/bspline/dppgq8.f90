@@ -73,20 +73,21 @@ SUBROUTINE DPPGQ8(FUN,Ldc,C,Xi,Lxi,Kk,Id,A,B,Inppv,Err,Ans,Ierr)
   USE service, ONLY : XERMSG, D1MACH, I1MACH
   !
   INTERFACE
-    REAL(8) FUNCTION FUN(X)
-      REAL(8), INTENT(IN) :: X
+    REAL(DP) FUNCTION FUN(X)
+      IMPORT DP
+      REAL(DP), INTENT(IN) :: X
     END FUNCTION FUN
   END INTERFACE
   INTEGER :: Id, Ierr, Inppv, Kk, Ldc, Lxi
-  REAL(8) :: A, Ans, B, C(Ldc,Lxi), Err, Xi(Lxi+1)
+  REAL(DP) :: A, Ans, B, C(Ldc,Lxi), Err, Xi(Lxi+1)
   INTEGER :: k, l, lmn, lmx, lr(60), mxl, nbits, nib, nlmx
-  REAL(8) :: aa(60), ae, anib, area, be, cc, ee, ef, eps, est, gl, glr, gr(60), &
+  REAL(DP) :: aa(60), ae, anib, area, be, cc, ee, ef, eps, est, gl, glr, gr(60), &
     hh(60), tol, vl(60), vr
-  REAL(8), PARAMETER :: x1 = 1.83434642495649805D-01, x2 = 5.25532409916328986D-01, &
+  REAL(DP), PARAMETER :: x1 = 1.83434642495649805D-01, x2 = 5.25532409916328986D-01, &
     x3 =7.96666477413626740D-01 , x4 = 9.60289856497536232D-01
-  REAL(8), PARAMETER :: w1 = 3.62683783378361983D-01, w2 = 3.13706645877887287D-01, &
+  REAL(DP), PARAMETER :: w1 = 3.62683783378361983D-01, w2 = 3.13706645877887287D-01, &
     w3 = 2.22381034453374471D-01, w4 = 1.01228536290376259D-01
-  REAL(8), PARAMETER :: sq2 = 1.41421356D0
+  REAL(DP), PARAMETER :: sq2 = 1.41421356D0
   INTEGER, PARAMETER :: nlmn = 1, kmx = 5000, kml = 6
   !
   !     INITIALIZE
@@ -213,8 +214,8 @@ SUBROUTINE DPPGQ8(FUN,Ldc,C,Xi,Lxi,Kk,Id,A,B,Inppv,Err,Ans,Ierr)
   GOTO 100
   RETURN
 CONTAINS
-  REAL(8) FUNCTION G8(x,h)
-    REAL(8), INTENT(IN) :: x, h
+  REAL(DP) FUNCTION G8(x,h)
+    REAL(DP), INTENT(IN) :: x, h
     G8 = h*((w1*(FUN(x-x1*h)*DPPVAL(Ldc,C,Xi,Lxi,Kk,Id,x-x1*h,Inppv)+FUN(&
       x+x1*h)*DPPVAL(Ldc,C,Xi,Lxi,Kk,Id,x+x1*h,Inppv))&
       +w2*(FUN(x-x2*h)*DPPVAL(Ldc,C,Xi,Lxi,Kk,Id,x-x2*h,Inppv)&

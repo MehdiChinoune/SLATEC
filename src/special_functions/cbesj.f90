@@ -33,7 +33,7 @@ SUBROUTINE CBESJ(Z,Fnu,Kode,N,Cy,Nz,Ierr)
   !
   !         Input
   !           Z      - Argument of type COMPLEX
-  !           FNU    - Initial order of type REAL, FNU>=0
+  !           FNU    - Initial order of type REAL(SP), FNU>=0
   !           KODE   - A parameter to indicate the scaling option
   !                    KODE=1  returns
   !                            CY(L)=J(FNU+L-1,Z), L=1,...,N
@@ -158,10 +158,10 @@ SUBROUTINE CBESJ(Z,Fnu,Kode,N,Cy,Nz,Ierr)
   USE service, ONLY : R1MACH, I1MACH
   !
   INTEGER i, Ierr, inu, inuh, ir, Kode, k1, k2, N, nl, Nz, k
-  COMPLEX ci, csgn, Cy(N), Z, zn
-  REAL aa, alim, arg, dig, elim, Fnu, fnul, rl, r1, r1m5, &
+  COMPLEX(SP) ci, csgn, Cy(N), Z, zn
+  REAL(SP) aa, alim, arg, dig, elim, Fnu, fnul, rl, r1, r1m5, &
     r2, tol, yy, az, fn, bb, ascle, rtol, atol
-  REAL, PARAMETER :: hpi = 1.57079632679489662E0
+  REAL(SP), PARAMETER :: hpi = 1.57079632679489662E0
   !
   !* FIRST EXECUTABLE STATEMENT  CBESJ
   Ierr = 0

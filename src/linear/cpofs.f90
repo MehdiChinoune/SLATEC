@@ -114,9 +114,9 @@ SUBROUTINE CPOFS(A,Lda,N,V,Itask,Ind,Work)
   USE service, ONLY : R1MACH, XERMSG
   !
   INTEGER :: Lda, N, Itask, Ind
-  COMPLEX :: A(Lda,N), V(N), Work(N)
+  COMPLEX(SP) :: A(Lda,N), V(N), Work(N)
   INTEGER :: info
-  REAL rcond
+  REAL(SP) rcond
   CHARACTER(8) :: xern1, xern2
   !* FIRST EXECUTABLE STATEMENT  CPOFS
   IF ( Lda<N ) THEN

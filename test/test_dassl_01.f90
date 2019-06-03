@@ -1,4 +1,5 @@
 MODULE TEST48_MOD
+  USE service, ONLY : SP, DP
   IMPLICIT NONE
 
 CONTAINS
@@ -24,9 +25,9 @@ CONTAINS
     !   901009  Changed AMAX1 to MAX.  (FNF)
     !   901030  Removed FLOAT's; made all local declarations explicit. (FNF)
 
-    REAL Y(*), T, Erm
+    REAL(SP) Y(*), T, Erm
     INTEGER i, j, k
-    REAL a1, a2, er, ex, yt
+    REAL(SP) a1, a2, er, ex, yt
     REAL, PARAMETER :: alph1 = 1.0E0, alph2 = 1.0E0
     INTEGER, PARAMETER :: ng = 5
     !* FIRST EXECUTABLE STATEMENT  EDIT2
@@ -99,7 +100,7 @@ CONTAINS
     !
     INTEGER :: i, idid, info(15), iout, ires, iwork(45), j190, &
       j290, liw, lrw, ml, mu, neq, nerr, nfe, nje, nout, nqu, nst
-    REAL :: atol(1), delta(25), er, er1, er2, erm, ero, hu, &
+    REAL(SP) :: atol(1), delta(25), er, er1, er2, erm, ero, hu, &
       rtol(1), rwork(550), t, tout, y(25), yprime(25), yt1, yt2
     !
     REAL, PARAMETER :: tout1 = 1.0E0, dtout = 1.0E0
@@ -277,7 +278,7 @@ CONTAINS
     !   901001  Converted prologue to 4.0 format and made all argument
     !           declarations explicit.  (FNF)
 
-    REAL :: T, Y(:), Yprime(:), Pd(:,:), Cj
+    REAL(SP) :: T, Y(:), Yprime(:), Pd(:,:), Cj
     !* FIRST EXECUTABLE STATEMENT  SDJAC1
     Pd(1,1) = Cj + 10.0E0
     Pd(1,2) = 0.0E0
@@ -307,7 +308,7 @@ CONTAINS
     !           including MBAND+n in expressions.  (FNF)
     !   901030  Made all local declarations explicit.  (FNF)
 
-    REAL :: T, Y(:), Yprime(:), Pd(:,:), Cj
+    REAL(SP) :: T, Y(:), Yprime(:), Pd(:,:), Cj
     INTEGER :: j, mband
     REAL, PARAMETER :: alph1 = 1.0E0, alph2 = 1.0E0
     INTEGER, PARAMETER :: ng = 5
@@ -347,7 +348,7 @@ CONTAINS
     !           declarations explicit.  (FNF)
 
     INTEGER :: Ires
-    REAL :: T, Y(:), Yprime(:), Delta(:)
+    REAL(SP) :: T, Y(:), Yprime(:), Delta(:)
     !* FIRST EXECUTABLE STATEMENT  SDRES1
     Delta(1) = Yprime(1) + 10.0E0*Y(1)
     Delta(2) = Y(2) + Y(1) - 1.0E0
@@ -374,9 +375,9 @@ CONTAINS
     !   901030  Made all local declarations explicit.  (FNF)
 
     INTEGER :: Ires
-    REAL :: T, Y(:), Yprime(:), Delta(:)
+    REAL(SP) :: T, Y(:), Yprime(:), Delta(:)
     INTEGER :: i, j, k
-    REAL :: d
+    REAL(SP) :: d
     REAL, PARAMETER :: alph1 = 1.0E0, alph2 = 1.0E0
     INTEGER, PARAMETER :: ng = 5
     !* FIRST EXECUTABLE STATEMENT  SDRES2

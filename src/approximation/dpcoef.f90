@@ -65,9 +65,9 @@ SUBROUTINE DPCOEF(L,C,Tc,A)
 
   !
   INTEGER :: L
-  REAL(8) :: C, A(:), Tc(ABS(L)+1)
+  REAL(DP) :: C, A(:), Tc(ABS(L)+1)
   INTEGER :: i, ll, llp1, llp2, new, nr
-  REAL(8) :: fac, save
+  REAL(DP) :: fac, save
   !* FIRST EXECUTABLE STATEMENT  DPCOEF
   ll = ABS(L)
   llp1 = ll + 1

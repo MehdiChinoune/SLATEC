@@ -78,10 +78,10 @@ SUBROUTINE DGEDI(A,Lda,N,Ipvt,Det,Work,Job)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER Lda, N, Ipvt(*), Job
-  REAL(8) :: A(Lda,*), Det(2), Work(*)
+  REAL(DP) :: A(Lda,*), Det(2), Work(*)
   !
-  REAL(8) :: t
-  REAL(8) :: ten
+  REAL(DP) :: t
+  REAL(DP) :: ten
   INTEGER i, j, k, kb, kp1, l, nm1
   !* FIRST EXECUTABLE STATEMENT  DGEDI
   !

@@ -66,10 +66,10 @@ SUBROUTINE SGTSL(N,C,D,E,B,Info)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER N, Info
-  REAL C(*), D(*), E(*), B(*)
+  REAL(SP) C(*), D(*), E(*), B(*)
   !
   INTEGER k, kb, kp1, nm1, nm2
-  REAL t
+  REAL(SP) t
   !* FIRST EXECUTABLE STATEMENT  SGTSL
   Info = 0
   C(1) = D(1)
