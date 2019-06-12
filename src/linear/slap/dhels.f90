@@ -67,6 +67,7 @@ SUBROUTINE DHELS(A,Lda,N,Q,B)
   !   910506  Made subsidiary to DGMRES.  (FNF)
   !   920511  Added complete declaration section.  (WRB)
 
+  USE blas, ONLY : DAXPY
   !     .. Scalar Arguments ..
   INTEGER Lda, N
   !     .. Array Arguments ..

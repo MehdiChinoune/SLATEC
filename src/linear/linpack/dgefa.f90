@@ -66,12 +66,13 @@ SUBROUTINE DGEFA(A,Lda,N,Ipvt,Info)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
+  USE blas, ONLY : DAXPY
 
-  INTEGER Lda, N, Ipvt(*), Info
-  REAL(DP) :: A(Lda,*)
+  INTEGER :: Lda, N, Ipvt(N), Info
+  REAL(DP) :: A(Lda,N)
   !
   REAL(DP) :: t
-  INTEGER j, k, kp1, l, nm1
+  INTEGER :: j, k, kp1, l, nm1
   !
   !     GAUSSIAN ELIMINATION WITH PARTIAL PIVOTING
   !
@@ -84,7 +85,7 @@ SUBROUTINE DGEFA(A,Lda,N,Ipvt,Info)
       !
       !        FIND L = PIVOT INDEX
       !
-      l = IDAMAX(N-k+1,A(k,k),1) + k - 1
+      l = MAXLOC( ABS(A(k:N,k)),1) + k - 1
       Ipvt(k) = l
       !
       !        ZERO PIVOT IMPLIES THIS COLUMN ALREADY TRIANGULARIZED
@@ -104,7 +105,7 @@ SUBROUTINE DGEFA(A,Lda,N,Ipvt,Info)
         !           COMPUTE MULTIPLIERS
         !
         t = -1.0D0/A(k,k)
-        CALL DSCAL(N-k,t,A(k+1,k),1)
+        A(k+1:N,k) = t*A(k+1:N,k)
         !
         !           ROW ELIMINATION WITH COLUMN INDEXING
         !

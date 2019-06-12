@@ -173,7 +173,7 @@ CONTAINS
     !   890618  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   920310  Code cleaned up and TYPE section added.  (RWC, WRB)
-    USE slatec, ONLY : R1MACH, SNRM2, SOS
+    USE slatec, ONLY : R1MACH, SOS
     USE common_mod, ONLY : PASS
     !     .. Scalar Arguments ..
     INTEGER Ipass, Kprint, Lun
@@ -206,7 +206,7 @@ CONTAINS
     icnt = 1
     fvec(1) = SOSFNC(x,1)
     fvec(2) = SOSFNC(x,2)
-    fnorm = SNRM2(n,fvec,1)
+    fnorm = NORM2(fvec(1:n))
     itest(icnt) = 0
     IF ( iflag<=iflags.AND.fnorm-fnorms<=rer ) itest(icnt) = 1
     !

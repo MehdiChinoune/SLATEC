@@ -254,6 +254,7 @@ SUBROUTINE SCG(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,Iter,&
   !   920929  Corrected format of references.  (FNF)
   !   921019  Changed 500.0 to 500 to reduce SP/DP differences.  (FNF)
   USE service, ONLY : R1MACH
+  USE blas, ONLY : SAXPY
   INTERFACE
     SUBROUTINE MSOLVE(N,R,Z,Rwork,Iwork)
       IMPORT SP
@@ -267,14 +268,14 @@ SUBROUTINE SCG(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,Iter,&
     END SUBROUTINE
   END INTERFACE
   !     .. Scalar Arguments ..
-  REAL(SP) Err, Tol
-  INTEGER Ierr, Isym, Iter, Itmax, Itol, Iunit, N, Nelt
+  REAL(SP) :: Err, Tol
+  INTEGER :: Ierr, Isym, Iter, Itmax, Itol, Iunit, N, Nelt
   !     .. Array Arguments ..
-  REAL(SP) A(Nelt), B(N), Dz(N), P(N), R(N), Rwork(*), X(N), Z(N)
-  INTEGER Ia(Nelt), Iwork(*), Ja(Nelt)
+  REAL(SP) :: A(Nelt), B(N), Dz(N), P(N), R(N), Rwork(*), X(N), Z(N)
+  INTEGER :: Ia(Nelt), Iwork(*), Ja(Nelt)
   !     .. Local Scalars ..
-  REAL(SP) ak, akden, bk, bkden, bknum, bnrm, solnrm, tolmin
-  INTEGER i, k
+  REAL(SP) :: ak, akden, bk, bkden, bknum, bnrm, solnrm, tolmin
+  INTEGER :: i, k
   !* FIRST EXECUTABLE STATEMENT  SCG
   !
   !         Check some of the input data.
@@ -309,13 +310,13 @@ SUBROUTINE SCG(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,Iter,&
       Iter = k
       !
       !         Calculate coefficient bk and direction vector p.
-      bknum = SDOT(N,Z,1,R,1)
+      bknum = DOT_PRODUCT(Z,R)
       IF ( bknum<=0.0E0 ) THEN
         Ierr = 5
         RETURN
       END IF
       IF ( Iter==1 ) THEN
-        CALL SCOPY(N,Z,1,P,1)
+        P = Z
       ELSE
         bk = bknum/bkden
         DO i = 1, N
@@ -327,7 +328,7 @@ SUBROUTINE SCG(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,Iter,&
       !         Calculate coefficient ak, new iterate x, new residual r,
       !         and new pseudo-residual z.
       CALL MATVEC(N,P,Z,Nelt,Ia,Ja,A,Isym)
-      akden = SDOT(N,P,1,Z,1)
+      akden = DOT_PRODUCT(P,Z)
       IF ( akden<=0.0E0 ) THEN
         Ierr = 6
         RETURN

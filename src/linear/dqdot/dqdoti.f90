@@ -71,9 +71,11 @@ REAL(DP) FUNCTION DQDOTI(N,Db,Qc,Dx,Incx,Dy,Incy)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !   930124  Increased Array sizes for SUN -r8.  (RWC)
 
-  INTEGER i, Incx, Incy, ix, iy, N
-  REAL(DP) :: Dx(*), Dy(*), Db
-  INTEGER Qc(30), qx(30), qy(30)
+  INTEGER :: Incx, Incy, N
+  INTEGER :: Qc(30)
+  REAL(DP) :: Dx(:), Dy(:), Db
+  INTEGER :: i, ix, iy
+  INTEGER :: qx(30), qy(30)
   INTEGER, SAVE :: i1 = 0
   !* FIRST EXECUTABLE STATEMENT  DQDOTI
   IF ( i1==0 ) CALL MPBLAS(i1)

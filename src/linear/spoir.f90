@@ -113,6 +113,7 @@ SUBROUTINE SPOIR(A,Lda,N,V,Itask,Ind,Work)
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   USE service, ONLY : R1MACH, XERMSG
+  USE linpack, ONLY : SPOFA, SPOSL
   !
   INTEGER :: Lda, N, Itask, Ind
   REAL(SP) :: A(Lda,N), V(N), Work(N,N+1)
@@ -124,8 +125,7 @@ SUBROUTINE SPOIR(A,Lda,N,V,Itask,Ind,Work)
     Ind = -1
     WRITE (xern1,'(I8)') Lda
     WRITE (xern2,'(I8)') N
-    CALL XERMSG('SPOIR','LDA = '//xern1//' IS LESS THAN N = '//&
-      xern2,-1,1)
+    CALL XERMSG('SPOIR','LDA = '//xern1//' IS LESS THAN N = '//xern2,-1,1)
     RETURN
   END IF
   !
@@ -147,9 +147,7 @@ SUBROUTINE SPOIR(A,Lda,N,V,Itask,Ind,Work)
     !
     !        MOVE MATRIX A TO WORK
     !
-    DO j = 1, N
-      CALL SCOPY(N,A(1,j),1,Work(1,j),1)
-    END DO
+    Work(1:N,1:N) = A(1:N,1:N)
     !
     !        FACTOR MATRIX A INTO R
     CALL SPOFA(Work,N,N,info)
@@ -157,8 +155,7 @@ SUBROUTINE SPOIR(A,Lda,N,V,Itask,Ind,Work)
     !        CHECK FOR  SINGULAR OR NOT POS.DEF. MATRIX
     IF ( info/=0 ) THEN
       Ind = -4
-      CALL XERMSG('SPOIR',&
-        'SINGULAR OR NOT POSITIVE DEFINITE - NO SOLUTION',-4,1)
+      CALL XERMSG('SPOIR','SINGULAR OR NOT POSITIVE DEFINITE - NO SOLUTION',-4,1)
       RETURN
     END IF
   END IF
@@ -166,12 +163,12 @@ SUBROUTINE SPOIR(A,Lda,N,V,Itask,Ind,Work)
   !     SOLVE AFTER FACTORING
   !     MOVE VECTOR B TO WORK
   !
-  CALL SCOPY(N,V(1),1,Work(1,N+1),1)
+  Work(1:N,N+1) = V
   CALL SPOSL(Work,N,N,V)
   !
   !     FORM NORM OF X0
   !
-  xnorm = SASUM(N,V(1),1)
+  xnorm = SUM( ABS(V) )
   IF ( xnorm==0.0 ) THEN
     Ind = 75
     RETURN
@@ -180,8 +177,8 @@ SUBROUTINE SPOIR(A,Lda,N,V,Itask,Ind,Work)
   !     COMPUTE  RESIDUAL
   !
   DO j = 1, N
-    Work(j,N+1) = -Work(j,N+1) + REAL( DSDOT(j-1,A(1,j),1,V(1),1)&
-      + DSDOT(N-j+1,A(j,j),Lda,V(j),1) , 4 )
+    Work(j,N+1) = -Work(j,N+1) + DOT_PRODUCT(A(1:j-1,j),V(1:j-1)) &
+      + DOT_PRODUCT(A(j,j:N),V(j:N))
   END DO
   !
   !     SOLVE A*DELTA=R
@@ -190,7 +187,7 @@ SUBROUTINE SPOIR(A,Lda,N,V,Itask,Ind,Work)
   !
   !     FORM NORM OF DELTA
   !
-  dnorm = SASUM(N,Work(1,N+1),1)
+  dnorm = SUM( ABS(Work(1:N,N+1)) )
   !
   !     COMPUTE IND (ESTIMATE OF NO. OF SIGNIFICANT DIGITS)
   !     AND CHECK FOR IND GREATER THAN ZERO

@@ -25,8 +25,8 @@ SUBROUTINE MPADD(X,Y,Z)
   !   890831  Modified array declarations.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
-  
-  INTEGER X(*), Y(*), Z(*)
+
+  INTEGER :: X(*), Y(*), Z(*)
   !* FIRST EXECUTABLE STATEMENT  MPADD
   CALL MPADD2(X,Y,Z,Y,0)
 END SUBROUTINE MPADD

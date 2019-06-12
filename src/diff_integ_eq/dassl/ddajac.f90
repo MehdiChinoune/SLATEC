@@ -58,7 +58,7 @@ SUBROUTINE DDAJAC(Neq,X,Y,Yprime,Delta,Cj,H,Ier,Wt,E,Wm,Iwm,RES,Ires,&
   !   901026  Added explicit declarations for all variables and minor
   !           cosmetic changes to prologue.  (FNF)
   !   901101  Corrected PURPOSE.  (FNF)
-  USE linear, ONLY : DGBFA, DGEFA
+  USE linpack, ONLY : DGBFA, DGEFA
   !
   INTERFACE
     SUBROUTINE RES(T,Y,Yprime,Delta,Ires)
@@ -127,18 +127,19 @@ SUBROUTINE DDAJAC(Neq,X,Y,Yprime,Delta,Cj,H,Ier,Wt,E,Wm,Iwm,RES,Ires,&
       !
       !     BANDED USER-SUPPLIED MATRIX
       meband = 2*Iwm(LML) + Iwm(LMU) + 1
-      ALLOCATE( Pd(meband,Neq) )
-      Pd = 0.D0
-      CALL JAC(X,Y,Yprime,Pd,Cj)
-      DO j = 1, Neq
-        DO i = 1, meband
-          Wm( npdm1+(j-1)*meband+i ) = Pd(i,j)
-        END DO
-      END DO
+      ALLOCATE( pd(meband,Neq) )
+      pd = 0.D0
+      CALL JAC(X,Y,Yprime,pd,Cj)
       !
       !
       !     DO LU DECOMPOSITION OF BANDED PD
-      CALL DGBFA(Wm,meband,Neq,Iwm(LML),Iwm(LMU),Iwm(LIPVT:),Ier)
+      CALL DGBFA(pd,meband,Neq,Iwm(LML),Iwm(LMU),Iwm(LIPVT:),Ier)
+      !CALL DGBTRF(Iwm(LML)+Iwm(LMU)+1,Neq,Iwm(LML),Iwm(LMU),pd,meband,Iwm(LIPVT:),Ier)
+      DO j = 1, Neq
+        DO i = 1, meband
+          Wm( (j-1)*meband+i ) = pd(i,j)
+        END DO
+      END DO
       RETURN
     CASE (5)
       !
@@ -183,17 +184,18 @@ SUBROUTINE DDAJAC(Neq,X,Y,Yprime,Delta,Cj,H,Ier,Wt,E,Wm,Iwm,RES,Ires,&
         END DO
       END DO
       CALL DGBFA(Wm,meband,Neq,Iwm(LML),Iwm(LMU),Iwm(LIPVT:),Ier)
+      !CALL DGBTRF(Iwm(LML)+Iwm(LMU)+1,Neq,Iwm(LML),Iwm(LMU),Wm,meband,Iwm(LIPVT:),Ier)
       RETURN
     CASE DEFAULT
       !
       !
       !     DENSE USER-SUPPLIED MATRIX
-      ALLOCATE( Pd(Neq,Neq) )
-      Pd = 0.E0
-      CALL JAC(X,Y,Yprime,Pd,Cj)
+      ALLOCATE( pd(Neq,Neq) )
+      pd = 0.E0
+      CALL JAC(X,Y,Yprime,pd,Cj)
       DO j = 1, Neq
         DO i = 1, Neq
-          Wm( npdm1+(j-1)*Neq+i ) = Pd(i,j)
+          Wm( npdm1+(j-1)*Neq+i ) = pd(i,j)
         END DO
       END DO
   END SELECT
@@ -201,7 +203,7 @@ SUBROUTINE DDAJAC(Neq,X,Y,Yprime,Delta,Cj,H,Ier,Wt,E,Wm,Iwm,RES,Ires,&
   !
   !     DO DENSE-MATRIX LU DECOMPOSITION ON PD
   CALL DGEFA(Wm,Neq,Neq,Iwm(LIPVT:),Ier)
-  RETURN
+  !CALL DGETRF(Neq,Neq,Wm,Neq,Iwm(LIPVT:),Ier)
   !------END OF SUBROUTINE DDAJAC------
   RETURN
 END SUBROUTINE DDAJAC

@@ -31,6 +31,7 @@ SUBROUTINE U11US(A,Mda,M,N,Ub,Db,Mode,Np,Krank,Ksure,H,W,Eb,Ir,Ic)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900328  Added TYPE section.  (WRB)
   USE service, ONLY : XERMSG
+  USE blas, ONLY : SSWAP, SAXPY
   INTEGER :: Mda, Mode, N, Np, Krank, Ksure, M
   INTEGER :: Ic(N), Ir(M)
   REAL(SP) :: A(Mda,N), Db(2*M), Eb(M), H(M), Ub(N), W(M)
@@ -57,7 +58,7 @@ SUBROUTINE U11US(A,Mda,M,N,Ub,Db,Mode,Np,Krank,Ksure,H,W,Eb,Ir,Ic)
   !        CALCULATE ROW LENGTH
   !
   DO i = 1, M
-    H(i) = SNRM2(N,A(i,1),Mda)
+    H(i) = NORM2(A(i,1:N))
     W(i) = H(i)
   END DO
   !
@@ -201,7 +202,7 @@ SUBROUTINE U11US(A,Mda,M,N,Ub,Db,Mode,Np,Krank,Ksure,H,W,Eb,Ir,Ic)
   !
   !        COLUMN PIVOT
   !
-  jmax = ISAMAX(nn,A(j,j),Mda)
+  jmax = MAXLOC(A(j,j:N),1)
   jmax = jmax + j - 1
   IF ( jmax/=j ) THEN
     CALL SSWAP(M,A(1,j),1,A(1,jmax),1)
@@ -210,15 +211,15 @@ SUBROUTINE U11US(A,Mda,M,N,Ub,Db,Mode,Np,Krank,Ksure,H,W,Eb,Ir,Ic)
   !
   !     APPLY HOUSEHOLDER TRANSFORMATION
   !
-  tn = SNRM2(nn,A(j,j),Mda)
+  tn = NORM2(A(j,j:N))
   IF ( tn==0.0 ) GOTO 300
   IF ( A(j,j)/=0.0 ) tn = SIGN(tn,A(j,j))
-  CALL SSCAL(nn,1.0/tn,A(j,j),Mda)
+  A(j,j:N) = A(j,j:N)/tn
   A(j,j) = A(j,j) + 1.0
   IF ( j/=M ) THEN
     DO i = jp1, M
-      bb = -SDOT(nn,A(j,j),Mda,A(i,j),Mda)/A(j,j)
-      CALL SAXPY(nn,bb,A(j,j),Mda,A(i,j),Mda)
+      bb = -DOT_PRODUCT(A(j,j:N),A(i,j:N))/A(j,j)
+      CALL SAXPY(nn,bb,A(j,j:N),1,A(i,j:N),1)
       IF ( i>Np ) THEN
         IF ( H(i)/=0.0 ) THEN
           tt = 1.0 - (ABS(A(i,j))/H(i))**2
@@ -226,7 +227,7 @@ SUBROUTINE U11US(A,Mda,M,N,Ub,Db,Mode,Np,Krank,Ksure,H,W,Eb,Ir,Ic)
           t = tt
           tt = 1.0 + .05*tt*(H(i)/W(i))**2
           IF ( tt==1.0 ) THEN
-            H(i) = SNRM2(N-j,A(i,j+1),Mda)
+            H(i) = NORM2(A(i,j+1:N))
             W(i) = H(i)
           ELSE
             H(i) = H(i)*SQRT(t)
@@ -287,17 +288,17 @@ SUBROUTINE U11US(A,Mda,M,N,Ub,Db,Mode,Np,Krank,Ksure,H,W,Eb,Ir,Ic)
     kp1 = Krank + 1
     i = Krank
     DO
-      tn = SNRM2(mmk,A(kp1,i),1)/A(i,i)
+      tn = NORM2(A(kp1:M,i))/A(i,i)
       tn = A(i,i)*SQRT(1.0+tn*tn)
-      CALL SSCAL(mmk,1.0/tn,A(kp1,i),1)
+      A(kp1:M,i) = A(kp1:M,i)/tn
       W(i) = A(i,i)/tn + 1.0
       A(i,i) = -tn
       IF ( i==1 ) EXIT
       im1 = i - 1
       DO ii = 1, im1
-        tt = -SDOT(mmk,A(kp1,ii),1,A(kp1,i),1)/W(i)
+        tt = -DOT_PRODUCT(A(kp1:M,ii),A(kp1:M,i))/W(i)
         tt = tt - A(i,ii)
-        CALL SAXPY(mmk,tt,A(kp1,i),1,A(kp1,ii),1)
+        CALL SAXPY(mmk,tt,A(kp1:M,i),1,A(kp1:M,ii),1)
         A(i,ii) = A(i,ii) + tt*W(i)
       END DO
       i = i - 1

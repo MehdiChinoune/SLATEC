@@ -31,7 +31,7 @@ SUBROUTINE DDCOR(Dfdy,El,FA,H,Ierror,Impl,Ipvt,Matdim,Miter,Ml,Mu,N,Nde,&
   !* REVISION HISTORY  (YYMMDD)
   !   790601  DATE WRITTEN
   !   900329  Initial submission to SLATEC.
-  USE linear, ONLY : DGBSL, DGESL
+  USE lapack, ONLY : DGBTRS, DGETRS
   INTERFACE
     SUBROUTINE USERS(Y,Yh,Ywt,Save1,Save2,T,H,El,Impl,N,Nde,Iflag)
       IMPORT DP
@@ -51,7 +51,7 @@ SUBROUTINE DDCOR(Dfdy,El,FA,H,Ierror,Impl,Ipvt,Matdim,Miter,Ml,Mu,N,Nde,&
   REAL(DP) :: A(Matdim,N), Dfdy(Matdim,N), El(13,12), Save1(N), Save2(N), Y(N), &
     Yh(N,13), Ywt(N)
   LOGICAL :: Evalfa
-  INTEGER :: i, iflag, j, mw
+  INTEGER :: i, iflag, j, mw, info
   !* FIRST EXECUTABLE STATEMENT  DDCOR
   IF ( Miter==0 ) THEN
     IF ( Ierror==1.OR.Ierror==5 ) THEN
@@ -122,7 +122,7 @@ SUBROUTINE DDCOR(Dfdy,El,FA,H,Ierror,Impl,Ipvt,Matdim,Miter,Ml,Mu,N,Nde,&
         END DO
       END DO
     END IF
-    CALL DGESL(Dfdy,Matdim,N,Ipvt,Save2,0)
+    CALL DGETRS('N',N,1,Dfdy,Matdim,Ipvt,Save2,N,info)
     IF ( Ierror==1.OR.Ierror==5 ) THEN
       DO i = 1, N
         Save1(i) = Save1(i) + Save2(i)
@@ -192,7 +192,7 @@ SUBROUTINE DDCOR(Dfdy,El,FA,H,Ierror,Impl,Ipvt,Matdim,Miter,Ml,Mu,N,Nde,&
         END DO
       END DO
     END IF
-    CALL DGBSL(Dfdy,Matdim,N,Ml,Mu,Ipvt,Save2,0)
+    CALL DGBTRS('N',N,Ml,Mu,1,Dfdy,Matdim,Ipvt,Save2,N,info)
     IF ( Ierror==1.OR.Ierror==5 ) THEN
       DO i = 1, N
         Save1(i) = Save1(i) + Save2(i)

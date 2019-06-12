@@ -255,6 +255,7 @@ SUBROUTINE DCG(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,Iter,&
   !   920929  Corrected format of references.  (FNF)
   !   921019  Changed 500.0 to 500 to reduce SP/DP differences.  (FNF)
   USE service, ONLY : D1MACH
+  USE blas, ONLY : DAXPY
   INTERFACE
     SUBROUTINE MSOLVE(N,R,Z,Rwork,Iwork)
       IMPORT DP
@@ -269,13 +270,13 @@ SUBROUTINE DCG(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,Iter,&
   END INTERFACE
   !     .. Scalar Arguments ..
   REAL(DP) :: Err, Tol
-  INTEGER Ierr, Isym, Iter, Itmax, Itol, Iunit, N, Nelt
+  INTEGER :: Ierr, Isym, Iter, Itmax, Itol, Iunit, N, Nelt
   !     .. Array Arguments ..
   REAL(DP) :: A(Nelt), B(N), Dz(N), P(N), R(N), Rwork(*), X(N), Z(N)
-  INTEGER Ia(Nelt), Iwork(*), Ja(Nelt)
+  INTEGER :: Ia(Nelt), Iwork(*), Ja(Nelt)
   !     .. Local Scalars ..
   REAL(DP) :: ak, akden, bk, bkden, bknum, bnrm, solnrm, tolmin
-  INTEGER i, k
+  INTEGER :: i, k
   !* FIRST EXECUTABLE STATEMENT  DCG
   !
   !         Check some of the input data.
@@ -310,13 +311,13 @@ SUBROUTINE DCG(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,Iter,&
       Iter = k
       !
       !         Calculate coefficient bk and direction vector p.
-      bknum = DDOT(N,Z,1,R,1)
+      bknum = DOT_PRODUCT(Z,R)
       IF ( bknum<=0.0D0 ) THEN
         Ierr = 5
         RETURN
       END IF
       IF ( Iter==1 ) THEN
-        CALL DCOPY(N,Z,1,P,1)
+        P = Z
       ELSE
         bk = bknum/bkden
         DO i = 1, N
@@ -328,7 +329,7 @@ SUBROUTINE DCG(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,Iter,&
       !         Calculate coefficient ak, new iterate x, new residual r,
       !         and new pseudo-residual z.
       CALL MATVEC(N,P,Z,Nelt,Ia,Ja,A,Isym)
-      akden = DDOT(N,P,1,Z,1)
+      akden = DOT_PRODUCT(P,Z)
       IF ( akden<=0.0D0 ) THEN
         Ierr = 6
         RETURN

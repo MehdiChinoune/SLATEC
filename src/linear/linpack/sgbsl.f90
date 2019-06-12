@@ -84,6 +84,7 @@ SUBROUTINE SGBSL(Abd,Lda,N,Ml,Mu,Ipvt,B,Job)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
+  USE blas, ONLY : SAXPY
 
   INTEGER :: Lda, N, Ml, Mu, Job, Ipvt(N)
   REAL(SP) :: Abd(Lda,N), B(N)
@@ -102,7 +103,7 @@ SUBROUTINE SGBSL(Abd,Lda,N,Ml,Mu,Ipvt,B,Job)
       lm = MIN(k,m) - 1
       la = m - lm
       lb = k - lm
-      t = SDOT(lm,Abd(la,k),1,B(lb),1)
+      t = DOT_PRODUCT(Abd(la:m-1,k),B(lb:k-1))
       B(k) = (B(k)-t)/Abd(m,k)
     END DO
     !
@@ -113,7 +114,7 @@ SUBROUTINE SGBSL(Abd,Lda,N,Ml,Mu,Ipvt,B,Job)
         DO kb = 1, nm1
           k = N - kb
           lm = MIN(Ml,N-k)
-          B(k) = B(k) + SDOT(lm,Abd(m+1,k),1,B(k+1),1)
+          B(k) = B(k) + DOT_PRODUCT(Abd(m+1:m+lm,k),B(k+1:k+lm))
           l = Ipvt(k)
           IF ( l/=k ) THEN
             t = B(l)
@@ -138,7 +139,7 @@ SUBROUTINE SGBSL(Abd,Lda,N,Ml,Mu,Ipvt,B,Job)
             B(l) = B(k)
             B(k) = t
           END IF
-          CALL SAXPY(lm,t,Abd(m+1,k),1,B(k+1),1)
+          CALL SAXPY(lm,t,Abd(m+1:m+lm,k),1,B(k+1:k+lm),1)
         END DO
       END IF
     END IF
@@ -152,7 +153,7 @@ SUBROUTINE SGBSL(Abd,Lda,N,Ml,Mu,Ipvt,B,Job)
       la = m - lm
       lb = k - lm
       t = -B(k)
-      CALL SAXPY(lm,t,Abd(la,k),1,B(lb),1)
+      CALL SAXPY(lm,t,Abd(la:m-1,k),1,B(lb:k-1),1)
     END DO
   END IF
 END SUBROUTINE SGBSL

@@ -61,12 +61,12 @@ SUBROUTINE CPOFA(A,Lda,N,Info)
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
-  INTEGER Lda, N, Info
-  COMPLEX(SP) A(Lda,*)
+  INTEGER :: Lda, N, Info
+  COMPLEX(SP) :: A(Lda,N)
   !
-  COMPLEX(SP) t
-  REAL(SP) s
-  INTEGER j, jm1, k
+  COMPLEX(SP) :: t
+  REAL(SP) :: s
+  INTEGER :: j, jm1, k
   !* FIRST EXECUTABLE STATEMENT  CPOFA
   DO j = 1, N
     Info = j
@@ -74,7 +74,7 @@ SUBROUTINE CPOFA(A,Lda,N,Info)
     jm1 = j - 1
     IF ( jm1>=1 ) THEN
       DO k = 1, jm1
-        t = A(k,j) - CDOTC(k-1,A(1,k),1,A(1,j),1)
+        t = A(k,j) - DOT_PRODUCT(A(1:k-1,k),A(1:k-1,j))
         t = t/A(k,k)
         A(k,j) = t
         s = s + REAL(t*CONJG(t))

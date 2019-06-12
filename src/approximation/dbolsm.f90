@@ -424,7 +424,7 @@ SUBROUTINE DBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
   !     /REAL            / TO /DOUBLE PRECISION/.
   !++
   USE service, ONLY : XERMSG, D1MACH
-  USE linear, ONLY : DROT, DROTG, DSWAP, DAXPY
+  USE blas, ONLY : DROT, DROTG, DSWAP, DAXPY
   USE optimization, ONLY : DVOUT, IVOUT
   INTEGER :: Mdw, Minput, Mode, Ncols
   INTEGER :: Ibasis(Ncols), Ibb(Ncols), Ind(Ncols), Iopt(*)

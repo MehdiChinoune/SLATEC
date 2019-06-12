@@ -77,19 +77,19 @@ SUBROUTINE SRLCAL(N,Kmp,Ll,Maxl,V,Q,Rl,Snormw,Prod,R0nrm)
   !   920511  Added complete declaration section.  (WRB)
 
   !     .. Scalar Arguments ..
-  REAL(SP) Prod, R0nrm, Snormw
-  INTEGER Kmp, Ll, Maxl, N
+  REAL(SP) :: Prod, R0nrm, Snormw
+  INTEGER :: Kmp, Ll, Maxl, N
   !     .. Array Arguments ..
-  REAL(SP) Q(*), Rl(N), V(N,*)
+  REAL(SP) :: Q(2*Maxl), Rl(N), V(N,Ll+1)
   !     .. Local Scalars ..
-  REAL(SP) c, s, tem
-  INTEGER i, i2, ip1, k, llm1, llp1
+  REAL(SP) :: c, s, tem
+  INTEGER :: i, i2, ip1, k, llm1, llp1
   !* FIRST EXECUTABLE STATEMENT  SRLCAL
   IF ( Kmp==Maxl ) THEN
     !
     !         calculate RL.  Start by copying V(*,1) into RL.
     !
-    CALL SCOPY(N,V(1,1),1,Rl,1)
+    Rl = V(1:N,1)
     llm1 = Ll - 1
     DO i = 1, llm1
       ip1 = i + 1
@@ -112,6 +112,6 @@ SUBROUTINE SRLCAL(N,Kmp,Ll,Maxl,V,Q,Rl,Snormw,Prod,R0nrm)
   !         Scale RL by R0NRM*PROD to obtain the residual RL.
   !
   tem = R0nrm*Prod
-  CALL SSCAL(N,tem,Rl,1)
+  Rl = tem*Rl
   !------------- LAST LINE OF SRLCAL FOLLOWS ----------------------------
 END SUBROUTINE SRLCAL

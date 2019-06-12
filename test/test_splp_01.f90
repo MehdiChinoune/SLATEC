@@ -287,12 +287,12 @@ CONTAINS
     !   890618  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   901013  Added PASS/FAIL message and cleaned up FORMATs.  (RWC)
-    USE slatec, ONLY : SCOPY, SBOLS, SNRM2, SBOCLS, R1MACH
-    INTEGER ib, Ipass, irhs, itest, j, Kprint, Lun, mcon, mdw, &
+    USE slatec, ONLY : SBOLS, SBOCLS, R1MACH
+    INTEGER :: ib, Ipass, irhs, itest, j, Kprint, Lun, mcon, mdw, &
       mode, mpass, mrows, ncols
-    REAL(SP) rnorm, rnormc, sr
-    REAL(SP) w(11,11), x(30), rw(55), bl1(10), bu1(10)
-    INTEGER ind(10), iw(20), iopt(40)
+    REAL(SP) :: rnorm, rnormc, sr
+    REAL(SP) :: w(11,11), x(30), rw(55), bl1(10), bu1(10)
+    INTEGER :: ind(10), iw(20), iopt(40)
     CHARACTER(4) :: msg
     !
     REAL, PARAMETER :: c(5,5) = RESHAPE( [ 1., 10., 4., 8., 1., &
@@ -325,11 +325,9 @@ CONTAINS
         !
         !           TRANSFER DATA TO WORKING ARRAY W(*,*).
         !
-        DO j = 1, ncols
-          CALL SCOPY(mrows,d(1,j),1,w(1,j),1)
-        END DO
+        w(1:mrows,1:ncols) = d(1:mrows,1:ncols)
         !
-        CALL SCOPY(mrows,rhs(1,irhs),1,w(1,ncols+1),1)
+        w(1:mrows,ncols+1) = rhs(1:mrows,irhs)
         !
         !             SET BOUND INDICATOR FLAGS.
         !
@@ -343,7 +341,7 @@ CONTAINS
           x(j) = x(j) - xtrue(j)
         END DO
         !
-        sr = SNRM2(ncols,x,1)
+        sr = NORM2(x(1:ncols))
         mpass = 1
         IF ( sr>10.E3*SQRT(R1MACH(4)) ) mpass = 0
         Ipass = Ipass*mpass
@@ -361,8 +359,8 @@ CONTAINS
     DO ib = 1, 2
       DO irhs = 1, 2
         w(:,1:10) = 0.E0
-        CALL SCOPY(ncols,bl(1,ib),1,bl1,1)
-        CALL SCOPY(ncols,bu(1,ib),1,bu1,1)
+        bl1(1:ncols) = bl(1:ncols,ib)
+        bu1(1:ncols) = bu(1:ncols,ib)
         ind(ncols+1) = 2
         ind(ncols+2) = 1
         ind(ncols+3) = 2
@@ -372,12 +370,10 @@ CONTAINS
         bu1(ncols+3) = 30.
         bl1(ncols+4) = 11.
         bu1(ncols+4) = 40.
-        DO j = 1, ncols
-          CALL SCOPY(mcon,c(1,j),1,w(1,j),1)
-          CALL SCOPY(mrows,d(1,j),1,w(mcon+1,j),1)
-        END DO
+        w(1:mcon,1:ncols) = c(1:mcon,1:ncols)
+        w(mcon+1:mcon+mrows,1:ncols) = d(1:mrows,1:ncols)
         !
-        CALL SCOPY(mrows,rhs(1,irhs),1,w(mcon+1,ncols+1),1)
+        w(mcon+1:mcon+mrows,ncols+1) = rhs(1:mrows,irhs)
         !
         !           CHECK LENGTHS OF REQD. ARRAYS.
         !
@@ -396,7 +392,7 @@ CONTAINS
           x(j) = x(j) - xtrue(j)
         END DO
         !
-        sr = SNRM2(ncols+mcon,x,1)
+        sr = NORM2(x(1:ncols+mcon))
         mpass = 1
         IF ( sr>10.E3*SQRT(R1MACH(4)) ) mpass = 0
         Ipass = Ipass*mpass

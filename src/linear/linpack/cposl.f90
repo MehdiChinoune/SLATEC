@@ -68,18 +68,19 @@ SUBROUTINE CPOSL(A,Lda,N,B)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
+  USE blas, ONLY : CAXPY
 
-  INTEGER Lda, N
-  COMPLEX(SP) A(Lda,*), B(*)
+  INTEGER :: Lda, N
+  COMPLEX(SP) :: A(Lda,N), B(N)
   !
-  COMPLEX(SP) t
-  INTEGER k, kb
+  COMPLEX(SP) :: t
+  INTEGER :: k, kb
   !
   !     SOLVE CTRANS(R)*Y = B
   !
   !* FIRST EXECUTABLE STATEMENT  CPOSL
   DO k = 1, N
-    t = CDOTC(k-1,A(1,k),1,B(1),1)
+    t = DOT_PRODUCT(A(1:k-1,k),B(1:k-1))
     B(k) = (B(k)-t)/A(k,k)
   END DO
   !

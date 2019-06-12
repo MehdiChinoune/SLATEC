@@ -120,11 +120,12 @@ SUBROUTINE SNBFA(Abe,Lda,N,Ml,Mu,Ipvt,Info)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
-  INTEGER Lda, N, Ml, Mu, Ipvt(N), Info
-  REAL(SP) Abe(Lda,2*Ml+Mu+1)
+  USE blas, ONLY : SSWAP, SAXPY
+  INTEGER :: Lda, N, Ml, Mu, Ipvt(N), Info
+  REAL(SP) :: Abe(Lda,2*Ml+Mu+1)
   !
-  INTEGER ml1, mb, m, n1, ldb, i, j, k, l, lm, lm1, lm2, mp
-  REAL(SP) t
+  INTEGER :: ml1, mb, m, n1, ldb, i, j, k, l, lm, lm1, lm2, mp
+  REAL(SP) :: t, v(2*Ml+Mu+1)
   !* FIRST EXECUTABLE STATEMENT  SNBFA
   ml1 = Ml + 1
   mb = Ml + Mu
@@ -137,11 +138,7 @@ SUBROUTINE SNBFA(Abe,Lda,N,Ml,Mu,Ipvt,Info)
   !
   IF ( N>1 ) THEN
     IF ( Ml>0 ) THEN
-      DO j = 1, Ml
-        DO i = 1, N
-          Abe(i,m+j) = 0.0E0
-        END DO
-      END DO
+      Abe(1:N,m+1:m+Ml) = 0._SP
     END IF
     !
     !     GAUSSIAN ELIMINATION WITH PARTIAL ELIMINATION
@@ -150,10 +147,13 @@ SUBROUTINE SNBFA(Abe,Lda,N,Ml,Mu,Ipvt,Info)
       lm = MIN(N-k,Ml)
       lm1 = lm + 1
       lm2 = ml1 - lm
+      DO i = 0, lm
+        v(i+1) = Abe(lm+k-i,lm2+i)
+      END DO
       !
       !     SEARCH FOR PIVOT INDEX
       !
-      l = -ISAMAX(lm1,Abe(lm+k,lm2),ldb) + lm1 + k
+      l = -MAXLOC(v(1:lm+1),1) + lm1 + k
       Ipvt(k) = l
       mp = MIN(mb,N-k)
       !
@@ -170,7 +170,9 @@ SUBROUTINE SNBFA(Abe,Lda,N,Ml,Mu,Ipvt,Info)
         !     COMPUTE MULTIPLIERS
         !
         t = -1.0/Abe(k,ml1)
-        CALL SSCAL(lm,t,Abe(lm+k,lm2),ldb)
+        DO i = 0, lm-1
+          Abe(lm+k-i,lm2+i) = t*Abe(lm+k-i,lm2+i)
+        END DO
         !
         !     ROW ELIMINATION WITH COLUMN INDEXING
         !

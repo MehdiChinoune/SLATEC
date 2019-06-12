@@ -102,12 +102,13 @@ SUBROUTINE DGBFA(Abd,Lda,N,Ml,Mu,Ipvt,Info)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
+  USE blas, ONLY : DAXPY
 
-  INTEGER Lda, N, Ml, Mu, Ipvt(*), Info
-  REAL(DP) :: Abd(Lda,*)
+  INTEGER :: Lda, N, Ml, Mu, Ipvt(N), Info
+  REAL(DP) :: Abd(Lda,N)
   !
   REAL(DP) :: t
-  INTEGER i, i0, j, ju, jz, j0, j1, k, kp1, l, lm, m, mm, nm1
+  INTEGER :: i, i0, j, ju, jz, j0, j1, k, kp1, l, lm, m, mm, nm1
   !
   !* FIRST EXECUTABLE STATEMENT  DGBFA
   m = Ml + Mu + 1
@@ -149,7 +150,7 @@ SUBROUTINE DGBFA(Abd,Lda,N,Ml,Mu,Ipvt,Info)
       !        FIND L = PIVOT INDEX
       !
       lm = MIN(Ml,N-k)
-      l = IDAMAX(lm+1,Abd(m,k),1) + m - 1
+      l = MAXLOC( ABS(Abd(m:m+lm,k)),1) + m - 1
       Ipvt(k) = l + k - m
       !
       !        ZERO PIVOT IMPLIES THIS COLUMN ALREADY TRIANGULARIZED
@@ -169,7 +170,7 @@ SUBROUTINE DGBFA(Abd,Lda,N,Ml,Mu,Ipvt,Info)
         !           COMPUTE MULTIPLIERS
         !
         t = -1.0D0/Abd(m,k)
-        CALL DSCAL(lm,t,Abd(m+1,k),1)
+        Abd(m+1:m+lm,k) = t*Abd(m+1:m+lm,k)
         !
         !           ROW ELIMINATION WITH COLUMN INDEXING
         !

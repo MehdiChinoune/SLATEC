@@ -77,6 +77,7 @@ SUBROUTINE DGESL(A,Lda,N,Ipvt,B,Job)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
+  USE blas, ONLY : DAXPY
 
   INTEGER :: Lda, N, Job, Ipvt(N)
   REAL(DP) :: A(Lda,N), B(N)
@@ -91,7 +92,7 @@ SUBROUTINE DGESL(A,Lda,N,Ipvt,B,Job)
     !        FIRST SOLVE  TRANS(U)*Y = B
     !
     DO k = 1, N
-      t = DDOT(k-1,A(1,k),1,B(1),1)
+      t = DOT_PRODUCT(A(1:k-1,k),B(1:k-1))
       B(k) = (B(k)-t)/A(k,k)
     END DO
     !
@@ -100,7 +101,7 @@ SUBROUTINE DGESL(A,Lda,N,Ipvt,B,Job)
     IF ( nm1>=1 ) THEN
       DO kb = 1, nm1
         k = N - kb
-        B(k) = B(k) + DDOT(N-k,A(k+1,k),1,B(k+1),1)
+        B(k) = B(k) + DOT_PRODUCT(A(k+1:N,k),B(k+1:N))
         l = Ipvt(k)
         IF ( l/=k ) THEN
           t = B(l)

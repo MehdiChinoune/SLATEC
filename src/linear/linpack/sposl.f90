@@ -68,18 +68,19 @@ SUBROUTINE SPOSL(A,Lda,N,B)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
+  USE blas, ONLY : SAXPY
 
-  INTEGER Lda, N
-  REAL(SP) A(Lda,*), B(*)
+  INTEGER :: Lda, N
+  REAL(SP) :: A(Lda,N), B(N)
   !
-  REAL(SP) t
-  INTEGER k, kb
+  REAL(SP) :: t
+  INTEGER :: k, kb
   !
   !     SOLVE TRANS(R)*Y = B
   !
   !* FIRST EXECUTABLE STATEMENT  SPOSL
   DO k = 1, N
-    t = SDOT(k-1,A(1,k),1,B(1),1)
+    t = DOT_PRODUCT(A(1:k-1,k),B(1:k-1))
     B(k) = (B(k)-t)/A(k,k)
   END DO
   !
@@ -89,6 +90,6 @@ SUBROUTINE SPOSL(A,Lda,N,B)
     k = N + 1 - kb
     B(k) = B(k)/A(k,k)
     t = -B(k)
-    CALL SAXPY(k-1,t,A(1,k),1,B(1),1)
+    CALL SAXPY(k-1,t,A(1:k-1,k),1,B(1:k-1),1)
   END DO
 END SUBROUTINE SPOSL

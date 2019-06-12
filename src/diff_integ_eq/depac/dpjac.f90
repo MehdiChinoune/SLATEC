@@ -31,7 +31,7 @@ SUBROUTINE DPJAC(Neq,Y,Yh,Nyh,Ewt,Ftem,Savf,Wm,Iwm,DF,DJAC)
   !   920422  Changed DIMENSION statement.  (WRB)
   USE DDEBD1, ONLY : el0_com, h_com, tn_com, uround_com, ier_com, miter_com, n_com, &
     nfe_com, nje_com
-  USE linear, ONLY : DGBFA, DGEFA
+  USE linpack, ONLY : DGBFA, DGEFA
   !
   INTERFACE
     SUBROUTINE DF(X,U,Uprime)

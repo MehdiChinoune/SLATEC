@@ -730,7 +730,8 @@ SUBROUTINE DDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
   !   790601  DATE WRITTEN
   !   900329  Initial submission to SLATEC.
   USE service, ONLY : XERMSG, D1MACH
-  USE linear, ONLY : DGBSL, DGESL, DGBFA, DGEFA
+  USE linpack, ONLY : DGBFA, DGEFA
+  USE lapack, ONLY : DGBTRS, DGETRS
   INTERFACE
     REAL(DP) FUNCTION G(N,T,Y,Iroot)
       IMPORT DP
@@ -798,8 +799,7 @@ SUBROUTINE DDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
   IF ( Eps<0.D0 ) THEN
     WRITE (rl1,'(D16.8)') Eps
     Ierflg = 27
-    CALL XERMSG('DDRIV3','Illegal input.  EPS, '//rl1//&
-      ', is negative.',Ierflg,1)
+    CALL XERMSG('DDRIV3','Illegal input.  EPS, '//rl1//', is negative.',Ierflg,1)
     Nstate = 12
     RETURN
   END IF
@@ -823,7 +823,8 @@ SUBROUTINE DDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
     WRITE (intgr1,'(I8)') Mint
     Ierflg = 23
     CALL XERMSG('DDRIV3',&
-      'Illegal input.  Improper value for the integration method flag, '//intgr1//' .',Ierflg,1)
+      'Illegal input.  Improper value for the integration method flag, '//intgr1&
+      //' .',Ierflg,1)
     Nstate = 12
     RETURN
   ELSEIF ( Miter<0.OR.Miter>5 ) THEN
@@ -1256,7 +1257,7 @@ SUBROUTINE DDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
           END IF
           CALL DGEFA(a,matdim,N,Iwork(INDPVT),info)
           IF ( info/=0 ) GOTO 700
-          CALL DGESL(a,matdim,N,Iwork(INDPVT),Work(isave2),0)
+          CALL DGETRS('N',N,1,a,matdim,Iwork(INDPVT),Work(isave2),N,info)
         ELSEIF ( Miter==4.OR.Miter==5 ) THEN
           CALL FA(npar,T,Y,a(Ml+1:,:),matdim,Ml,Mu,ndecom)
           IF ( npar==0 ) THEN
@@ -1265,7 +1266,7 @@ SUBROUTINE DDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
           END IF
           CALL DGBFA(a,matdim,N,Ml,Mu,Iwork(INDPVT),info)
           IF ( info/=0 ) GOTO 700
-          CALL DGBSL(a,matdim,N,Ml,Mu,Iwork(INDPVT),Work(isave2),0)
+          CALL DGBTRS('N',N,Ml,Mu,1,a,matdim,Iwork(INDPVT),Work(isave2),N,info)
         END IF
       ELSEIF ( Impl==2 ) THEN
         CALL FA(npar,T,Y,a,matdim,Ml,Mu,ndecom)
@@ -1286,7 +1287,7 @@ SUBROUTINE DDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
           END IF
           CALL DGEFA(a,matdim,Nde,Iwork(INDPVT),info)
           IF ( info/=0 ) GOTO 700
-          CALL DGESL(a,matdim,Nde,Iwork(INDPVT),Work(isave2),0)
+          CALL DGETRS('N',Nde,1,a,matdim,Iwork(INDPVT),Work(isave2),N,info)
         ELSEIF ( Miter==4.OR.Miter==5 ) THEN
           CALL FA(npar,T,Y,a(Ml+1:,:),matdim,Ml,Mu,ndecom)
           IF ( npar==0 ) THEN
@@ -1295,7 +1296,7 @@ SUBROUTINE DDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
           END IF
           CALL DGBFA(a,matdim,Nde,Ml,Mu,Iwork(INDPVT),info)
           IF ( info/=0 ) GOTO 700
-          CALL DGBSL(a,matdim,Nde,Ml,Mu,Iwork(INDPVT),Work(isave2),0)
+          CALL DGBTRS('N',Nde,Ml,Mu,1,a,matdim,Iwork(INDPVT),Work(isave2),N,info)
         END IF
       END IF
     END IF
@@ -1323,7 +1324,7 @@ SUBROUTINE DDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
   DO i = 1, N
     Work(i+isave2-1) = Y(i)/Work(i+iywt-1)
   END DO
-  summ = NORM2(Work(isave2:isave2+N))/SQRT(REAL(N, DP))
+  summ = NORM2(Work(isave2:isave2+N-1))/SQRT(REAL(N, DP))
   summ = MAX(1.D0,summ)
   IF ( Eps<summ*uround ) THEN
     Eps = summ*uround*(1.D0+10.D0*uround)

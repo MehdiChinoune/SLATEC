@@ -24,8 +24,8 @@ SUBROUTINE MPUNFL(X)
   !   890831  Modified array declarations.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
-  
-  INTEGER X(*)
+
+  INTEGER :: X(*)
   !* FIRST EXECUTABLE STATEMENT  MPUNFL
   CALL MPCHK(1,4)
   ! THE UNDERFLOWING NUMBER IS SET TO ZERO

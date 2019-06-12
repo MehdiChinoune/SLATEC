@@ -25,7 +25,7 @@ SUBROUTINE DWNLT3(I,Imax,M,Mdw,Ipivot,H,W)
   !   790701  DATE WRITTEN
   !   890620  Code extracted from WNLIT and made a subroutine.  (RWC))
   !   900604  DP version created from SP version.  (RWC)
-  USE linear, ONLY : DSWAP
+  USE blas, ONLY : DSWAP
   INTEGER :: I, Imax, M, Mdw, Ipivot(:)
   REAL(DP) :: H(:), W(Mdw,M)
   !

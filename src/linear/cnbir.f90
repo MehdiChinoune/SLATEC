@@ -180,19 +180,19 @@ SUBROUTINE CNBIR(Abe,Lda,N,Ml,Mu,V,Itask,Ind,Work,Iwork)
   !           IF-THEN-ELSE.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   USE service, ONLY : R1MACH, XERMSG
+  USE blas, ONLY : SCASUM
   !
   INTEGER :: Lda, N, Itask, Ind, Iwork(N), Ml, Mu
   COMPLEX(SP) :: Abe(Lda,Ml+Mu+1), V(N), Work(N,2*Ml+Mu+2)
   INTEGER :: info, j, k, kk, l, m, nc
-  REAL(SP) xnorm, dnorm
+  REAL(SP) :: xnorm, dnorm
   CHARACTER(8) :: xern1, xern2
   !* FIRST EXECUTABLE STATEMENT  CNBIR
   IF ( Lda<N ) THEN
     Ind = -1
     WRITE (xern1,'(I8)') Lda
     WRITE (xern2,'(I8)') N
-    CALL XERMSG('CNBIR','LDA = '//xern1//' IS LESS THAN N = '//&
-      xern2,-1,1)
+    CALL XERMSG('CNBIR','LDA = '//xern1//' IS LESS THAN N = '//xern2,-1,1)
     RETURN
   END IF
   !
@@ -230,9 +230,7 @@ SUBROUTINE CNBIR(Abe,Lda,N,Ml,Mu,V,Itask,Ind,Work,Iwork)
     !        MOVE MATRIX ABE TO WORK
     !
     m = Ml + Mu + 1
-    DO j = 1, m
-      CALL CCOPY(N,Abe(1,j),1,Work(1,j),1)
-    END DO
+    Work(1:N,1:m) = Abe(1:N,1:m)
     !
     !        FACTOR MATRIX A INTO LU
     CALL CNBFA(Work,N,N,Ml,Mu,Iwork,info)
@@ -248,7 +246,7 @@ SUBROUTINE CNBIR(Abe,Lda,N,Ml,Mu,V,Itask,Ind,Work,Iwork)
   !     SOLVE WHEN FACTORING COMPLETE
   !     MOVE VECTOR B TO WORK
   !
-  CALL CCOPY(N,V(1),1,Work(1,nc+1),1)
+  Work(1:N,nc+1) = V
   CALL CNBSL(Work,N,N,Ml,Mu,Iwork,V,0)
   !
   !     FORM NORM OF X0
@@ -265,7 +263,7 @@ SUBROUTINE CNBIR(Abe,Lda,N,Ml,Mu,V,Itask,Ind,Work,Iwork)
     k = MAX(1,Ml+2-j)
     kk = MAX(1,j-Ml)
     l = MIN(j-1,Ml) + MIN(N-j,Mu) + 1
-    Work(j,nc+1) = CDCDOT(l,-Work(j,nc+1),Abe(j,k),Lda,V(kk),1)
+    Work(j,nc+1) = DOT_PRODUCT( CONJG(Abe(j,k:k+l-1)),V(kk:kk+l-1) ) - Work(j,nc+1)
   END DO
   !
   !     SOLVE A*DELTA=R

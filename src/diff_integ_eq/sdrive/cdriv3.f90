@@ -731,7 +731,9 @@ SUBROUTINE CDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
   !   790601  DATE WRITTEN
   !   900329  Initial submission to SLATEC.
   USE service, ONLY : XERMSG, R1MACH
-  USE linear, ONLY : SCNRM2, CGBSL, CGESL, CGBFA, CGEFA
+  USE blas, ONLY : SCNRM2
+  USE linpack, ONLY : CGBFA, CGEFA
+  USE lapack, ONLY : CGBTRS, CGETRS
   INTERFACE
     REAL(SP) FUNCTION G(N,T,Y,Iroot)
       IMPORT SP
@@ -788,8 +790,7 @@ SUBROUTINE CDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
   !* FIRST EXECUTABLE STATEMENT  CDRIV3
   IF ( Nstate==12 ) THEN
     Ierflg = 999
-    CALL XERMSG('CDRIV3',&
-      'Illegal input.  The value of NSTATE is 12 .',Ierflg,2)
+    CALL XERMSG('CDRIV3','Illegal input.  The value of NSTATE is 12 .',Ierflg,2)
     RETURN
   ELSEIF ( Nstate<1.OR.Nstate>12 ) THEN
     WRITE (intgr1,'(I8)') Nstate
@@ -803,8 +804,7 @@ SUBROUTINE CDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
   IF ( Eps<0.E0 ) THEN
     WRITE (rl1,'(E16.8)') Eps
     Ierflg = 27
-    CALL XERMSG('CDRIV3','Illegal input.  EPS, '//rl1//&
-      ', is negative.',Ierflg,1)
+    CALL XERMSG('CDRIV3','Illegal input.  EPS, '//rl1//', is negative.',Ierflg,1)
     Nstate = 12
     RETURN
   END IF
@@ -828,7 +828,8 @@ SUBROUTINE CDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
     WRITE (intgr1,'(I8)') Mint
     Ierflg = 23
     CALL XERMSG('CDRIV3',&
-      'Illegal input.  Improper value for the integration method flag, '//intgr1//' .',Ierflg,1)
+      'Illegal input.  Improper value for the integration method flag, '&
+      //intgr1//' .',Ierflg,1)
     Nstate = 12
     RETURN
   ELSEIF ( Miter<0.OR.Miter>5 ) THEN
@@ -849,24 +850,21 @@ SUBROUTINE CDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
     WRITE (intgr1,'(I8)') Miter
     WRITE (intgr2,'(I8)') Impl
     Ierflg = 29
-    CALL XERMSG('CDRIV3',&
-      'Illegal input.  For MINT = 3, the value of MITER, '//&
+    CALL XERMSG('CDRIV3','Illegal input.  For MINT = 3, the value of MITER, '//&
       intgr1//', and/or IMPL, '//intgr2//', is not allowed.',Ierflg,1)
     Nstate = 12
     RETURN
   ELSEIF ( (Impl>=1.AND.Impl<=3).AND.Miter==0 ) THEN
     WRITE (intgr1,'(I8)') Impl
     Ierflg = 30
-    CALL XERMSG('CDRIV3',&
-      'Illegal input.  For MITER = 0, the value of IMPL, '//&
+    CALL XERMSG('CDRIV3','Illegal input.  For MITER = 0, the value of IMPL, '//&
       intgr1//', is not allowed.',Ierflg,1)
     Nstate = 12
     RETURN
   ELSEIF ( (Impl==2.OR.Impl==3).AND.Mint==1 ) THEN
     WRITE (intgr1,'(I8)') Impl
     Ierflg = 31
-    CALL XERMSG('CDRIV3',&
-      'Illegal input.  For MINT = 1, the value of IMPL, '//&
+    CALL XERMSG('CDRIV3','Illegal input.  For MINT = 1, the value of IMPL, '//&
       intgr1//', is not allowed.',Ierflg,1)
     Nstate = 12
     RETURN
@@ -1148,8 +1146,7 @@ SUBROUTINE CDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
         WRITE (rl1,'(E16.8)') T
         WRITE (rl2,'(E16.8)') Tout
         Ierflg = 11
-        CALL XERMSG('CDRIV3',&
-          'While integrating exactly to TOUT, T, '//rl1//&
+        CALL XERMSG('CDRIV3','While integrating exactly to TOUT, T, '//rl1//&
           ', was beyond TOUT, '//rl2//' .  Solution obtained by interpolation.',Ierflg,0)
         Nstate = 11
         CALL CDNTP(h,0,N,Iwork(INQ),T,Tout,Work(IYH),Y)
@@ -1187,8 +1184,7 @@ SUBROUTINE CDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
         WRITE (rl1,'(E16.8)') T
         WRITE (rl2,'(E16.8)') Tout
         Ierflg = 11
-        CALL XERMSG('CDRIV3',&
-          'While integrating exactly to TOUT, T, '//rl1//&
+        CALL XERMSG('CDRIV3','While integrating exactly to TOUT, T, '//rl1//&
           ', was beyond TOUT, '//rl2//' .  Solution obtained by interpolation.',Ierflg,0)
         Nstate = 11
         CALL CDNTP(h,0,N,Iwork(INQ),T,Tout,Work(IYH),Y)
@@ -1281,7 +1277,7 @@ SUBROUTINE CDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
           END IF
           CALL CGEFA(a,matdim,N,Iwork(INDPVT),info)
           IF ( info/=0 ) GOTO 700
-          CALL CGESL(a,matdim,N,Iwork(INDPVT),Work(isave2),0)
+          CALL CGETRS('N',N,1,a,matdim,Iwork(INDPVT),Work(isave2),N,info)
         ELSEIF ( Miter==4.OR.Miter==5 ) THEN
           CALL FA(npar,T,Y,a(Ml+1:,:),matdim,Ml,Mu,ndecom)
           IF ( npar==0 ) THEN
@@ -1290,7 +1286,7 @@ SUBROUTINE CDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
           END IF
           CALL CGBFA(a,matdim,N,Ml,Mu,Iwork(INDPVT),info)
           IF ( info/=0 ) GOTO 700
-          CALL CGBSL(a,matdim,N,Ml,Mu,Iwork(INDPVT),Work(isave2),0)
+          CALL CGBTRS('N',N,Ml,Mu,1,a,matdim,Iwork(INDPVT),Work(isave2),N,info)
         END IF
       ELSEIF ( Impl==2 ) THEN
         CALL FA(npar,T,Y,a,matdim,Ml,Mu,ndecom)
@@ -1311,7 +1307,7 @@ SUBROUTINE CDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
           END IF
           CALL CGEFA(a,matdim,Nde,Iwork(INDPVT),info)
           IF ( info/=0 ) GOTO 700
-          CALL CGESL(a,matdim,Nde,Iwork(INDPVT),Work(isave2),0)
+          CALL CGETRS('N',Nde,1,a,matdim,Iwork(INDPVT),Work(isave2),Nde,info)
         ELSEIF ( Miter==4.OR.Miter==5 ) THEN
           CALL FA(npar,T,Y,a(Ml+1:,:),matdim,Ml,Mu,ndecom)
           IF ( npar==0 ) THEN
@@ -1320,7 +1316,7 @@ SUBROUTINE CDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
           END IF
           CALL CGBFA(a,matdim,Nde,Ml,Mu,Iwork(INDPVT),info)
           IF ( info/=0 ) GOTO 700
-          CALL CGBSL(a,matdim,Nde,Ml,Mu,Iwork(INDPVT),Work(isave2),0)
+          CALL CGBTRS('N',Nde,Ml,Mu,1,a,matdim,Iwork(INDPVT),Work(isave2),Nde,info)
         END IF
       END IF
     END IF

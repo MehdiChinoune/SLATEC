@@ -173,33 +173,33 @@ INTEGER FUNCTION ISDIR(N,B,X,MSOLVE,Itol,Tol,Iter,&
   END INTERFACE
   !     .. Scalar Arguments ..
   REAL(DP) :: Bnrm, Err, Solnrm, Tol
-  INTEGER Ierr, Iter, Itol, Iunit, N
+  INTEGER :: Ierr, Iter, Itol, Iunit, N
   !     .. Array Arguments ..
   REAL(DP) :: B(N), Dz(N), R(N), Rwork(*), X(N), Z(N)
-  INTEGER Iwork(*)
+  INTEGER :: Iwork(*)
   !     .. Local Scalars ..
-  INTEGER i
+  INTEGER :: i
   !* FIRST EXECUTABLE STATEMENT  ISDIR
   ISDIR = 0
   IF ( Itol==1 ) THEN
     !         err = ||Residual||/||RightHandSide|| (2-Norms).
-    IF ( Iter==0 ) Bnrm = DNRM2(N,B,1)
-    Err = DNRM2(N,R,1)/Bnrm
+    IF ( Iter==0 ) Bnrm = NORM2(B)
+    Err = NORM2(R)/Bnrm
   ELSEIF ( Itol==2 ) THEN
     !                  -1              -1
     !         err = ||M  Residual||/||M  RightHandSide|| (2-Norms).
     IF ( Iter==0 ) THEN
       CALL MSOLVE(N,B,Dz,Rwork,Iwork)
-      Bnrm = DNRM2(N,Dz,1)
+      Bnrm = NORM2(Dz)
     END IF
-    Err = DNRM2(N,Z,1)/Bnrm
+    Err = NORM2(Z)/Bnrm
   ELSEIF ( Itol==11 ) THEN
     !         err = ||x-TrueSolution||/||TrueSolution|| (2-Norms).
-    IF ( Iter==0 ) Solnrm = DNRM2(N,soln_com,1)
+    IF ( Iter==0 ) Solnrm = NORM2(soln_com(1:N))
     DO i = 1, N
       Dz(i) = X(i) - soln_com(i)
     END DO
-    Err = DNRM2(N,Dz,1)/Solnrm
+    Err = NORM2(Dz)/Solnrm
   ELSE
     !
     !         If we get here ITOL is not one of the acceptable values.

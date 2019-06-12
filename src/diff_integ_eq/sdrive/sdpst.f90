@@ -28,7 +28,7 @@ SUBROUTINE SDPST(El,F,FA,H,Impl,JACOBN,Matdim,Miter,Ml,Mu,N,Nde,Nq,Save2,&
   !* REVISION HISTORY  (YYMMDD)
   !   790601  DATE WRITTEN
   !   900329  Initial submission to SLATEC.
-  USE linear, ONLY : SGBFA, SGEFA
+  USE linpack, ONLY : SGBFA, SGEFA
   INTERFACE
     SUBROUTINE F(N,T,Y,Ydot)
       IMPORT SP

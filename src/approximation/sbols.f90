@@ -429,11 +429,11 @@ SUBROUTINE SBOLS(W,Mdw,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Iw)
   !     /REAL            / TO /DOUBLE PRECISION/.
   ! ++
   USE service, ONLY : XERMSG
-  USE linear, ONLY : SROT, SROTG
+  USE blas, ONLY : SROT, SROTG
   INTEGER :: Mdw, Mode, Mrows, Ncols
   INTEGER :: Ind(Ncols), Iw(2*Ncols), Iopt(*)
   REAL(SP) :: Rnorm, W(Mdw,Ncols+1), Bl(Ncols), Bu(Ncols), X(2*Ncols), Rw(5*Ncols)
-  INTEGER i, ibig, inrows, ip, j, jp, lds, lenx, liopt, llb, lliw, llrw, &
+  INTEGER :: i, ibig, inrows, ip, j, jp, lds, lenx, liopt, llb, lliw, llrw, &
     llx, lmdw, lndw, locdim, lp, mnew, nerr
   REAL(SP) :: sc, ss, one, zero
   LOGICAL :: checkl

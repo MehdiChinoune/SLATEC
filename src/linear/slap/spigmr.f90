@@ -213,6 +213,7 @@ SUBROUTINE SPIGMR(N,R0,Sr,Sz,Jscal,Maxl,Maxlp1,Kmp,Nrsts,Jpre,MATVEC,&
   !   910502  Removed MATVEC and MSOLVE from ROUTINES CALLED list.  (FNF)
   !   910506  Made subsidiary to SGMRES.  (FNF)
   !   920511  Added complete declaration section.  (WRB)
+  USE blas, ONLY : SAXPY
   INTERFACE
     SUBROUTINE MSOLVE(N,R,Z,Rwork,Iwork)
       IMPORT SP
@@ -226,16 +227,16 @@ SUBROUTINE SPIGMR(N,R0,Sr,Sz,Jscal,Maxl,Maxlp1,Kmp,Nrsts,Jpre,MATVEC,&
     END SUBROUTINE
   END INTERFACE
   !     .. Scalar Arguments ..
-  REAL(SP) Bnrm, Err, Rhol, Tol
-  INTEGER Iflag, Isym, Itol, Iunit, Jpre, Jscal, Kmp, Lgmr, Maxl, &
+  REAL(SP) :: Bnrm, Err, Rhol, Tol
+  INTEGER :: Iflag, Isym, Itol, Iunit, Jpre, Jscal, Kmp, Lgmr, Maxl, &
     Maxlp1, N, Nelt, Nmsl, Nrmax, Nrsts
   !     .. Array Arguments ..
-  REAL(SP) A(Nelt), Dl(*), Hes(Maxlp1,*), Q(*), R0(*), Rpar(*), &
-    Sr(*), Sz(*), V(N,*), Wk(*), X(*), Xl(*), Z(*)
-  INTEGER Ia(Nelt), Ipar(*), Ja(Nelt)
+  REAL(SP) :: A(Nelt), Dl(N), Hes(Maxlp1,Maxl), Q(2*Maxl), R0(N), Rpar(*), &
+    Sr(N), Sz(N), V(N,Maxlp1), Wk(N), X(N), Xl(N), Z(N)
+  INTEGER :: Ia(Nelt), Ipar(*), Ja(Nelt)
   !     .. Local Scalars ..
-  REAL(SP) c, dlnrm, prod, r0nrm, rho, s, snormw, tem
-  INTEGER i, i2, info, ip1, iter, itmax, j, k, ll, llp1
+  REAL(SP) :: c, dlnrm, prod, r0nrm, rho, s, snormw, tem
+  INTEGER :: i, i2, info, ip1, iter, itmax, j, k, ll, llp1
   !     .. Intrinsic Functions ..
   INTRINSIC ABS
   !* FIRST EXECUTABLE STATEMENT  SPIGMR
@@ -257,7 +258,7 @@ SUBROUTINE SPIGMR(N,R0,Sr,Sz,Jscal,Maxl,Maxlp1,Kmp,Nrsts,Jpre,MATVEC,&
   !         Apply scaling to R0 if JSCAL = 2 or 3.
   !   -------------------------------------------------------------------
   IF ( (Jpre<0).AND.(Nrsts==0) ) THEN
-    CALL SCOPY(N,R0,1,Wk,1)
+    Wk(1:N) = R0(1:N)
     CALL MSOLVE(N,Wk,R0,Rpar,Ipar)
     Nmsl = Nmsl + 1
   END IF
@@ -270,7 +271,7 @@ SUBROUTINE SPIGMR(N,R0,Sr,Sz,Jscal,Maxl,Maxlp1,Kmp,Nrsts,Jpre,MATVEC,&
       V(i,1) = R0(i)
     END DO
   END IF
-  r0nrm = SNRM2(N,V,1)
+  r0nrm = NORM2(V(1:N,1))
   iter = Nrsts*Maxl
   !
   !         Call stopping routine ISSGMR.
@@ -278,7 +279,7 @@ SUBROUTINE SPIGMR(N,R0,Sr,Sz,Jscal,Maxl,Maxlp1,Kmp,Nrsts,Jpre,MATVEC,&
   IF ( ISSGMR(N,X,Xl,MSOLVE,Nmsl,Itol,Tol,iter,Err,Iunit,V(1,1),Wk,Rpar,Ipar,r0nrm, &
     Bnrm,Sz,Jscal,Kmp,Lgmr,Maxl,Maxlp1,V,Q,snormw,prod,r0nrm,Hes,Jpre)/=0 ) RETURN
   tem = 1.0E0/r0nrm
-  CALL SSCAL(N,tem,V(1,1),1)
+  V(1:N,1) = tem*V(1:N,1)
   !
   !         Zero out the HES array.
   !
@@ -308,7 +309,7 @@ SUBROUTINE SPIGMR(N,R0,Sr,Sz,Jscal,Maxl,Maxlp1,Kmp,Nrsts,Jpre,MATVEC,&
         Wk(i) = V(i,ll)/Sz(i)
       END DO
     ELSE
-      CALL SCOPY(N,V(1,ll),1,Wk,1)
+      Wk(1:N) = V(1:N,ll)
     END IF
     IF ( Jpre>0 ) THEN
       CALL MSOLVE(N,Wk,Z,Rpar,Ipar)
@@ -318,7 +319,7 @@ SUBROUTINE SPIGMR(N,R0,Sr,Sz,Jscal,Maxl,Maxlp1,Kmp,Nrsts,Jpre,MATVEC,&
       CALL MATVEC(N,Wk,V(1,ll+1),Nelt,Ia,Ja,A,Isym)
     END IF
     IF ( Jpre<0 ) THEN
-      CALL SCOPY(N,V(1,ll+1),1,Wk,1)
+      Wk(1:N) = V(1:N,ll+1)
       CALL MSOLVE(N,Wk,V(1,ll+1),Rpar,Ipar)
       Nmsl = Nmsl + 1
     END IF
@@ -341,7 +342,7 @@ SUBROUTINE SPIGMR(N,R0,Sr,Sz,Jscal,Maxl,Maxlp1,Kmp,Nrsts,Jpre,MATVEC,&
     rho = ABS(prod*r0nrm)
     IF ( (ll>Kmp).AND.(Kmp<Maxl) ) THEN
       IF ( ll==Kmp+1 ) THEN
-        CALL SCOPY(N,V(1,1),1,Dl,1)
+        Dl(1:N) = V(1:N,1)
         DO i = 1, Kmp
           ip1 = i + 1
           i2 = i*2
@@ -358,7 +359,7 @@ SUBROUTINE SPIGMR(N,R0,Sr,Sz,Jscal,Maxl,Maxlp1,Kmp,Nrsts,Jpre,MATVEC,&
       DO k = 1, N
         Dl(k) = s*Dl(k) + c*V(k,llp1)
       END DO
-      dlnrm = SNRM2(N,Dl,1)
+      dlnrm = NORM2(Dl)
       rho = rho*dlnrm
     END IF
     Rhol = rho
@@ -374,7 +375,7 @@ SUBROUTINE SPIGMR(N,R0,Sr,Sz,Jscal,Maxl,Maxlp1,Kmp,Nrsts,Jpre,MATVEC,&
     !         Rescale so that the norm of V(1,LL+1) is one.
     !   -------------------------------------------------------------------
     tem = 1.0E0/snormw
-    CALL SSCAL(N,tem,V(1,ll+1),1)
+    V(1:N,ll+1) = tem*V(1:N,ll+1)
   END DO
   IF ( rho<r0nrm ) THEN
     Iflag = 1
@@ -424,7 +425,7 @@ SUBROUTINE SPIGMR(N,R0,Sr,Sz,Jscal,Maxl,Maxlp1,Kmp,Nrsts,Jpre,MATVEC,&
     END DO
   END IF
   IF ( Jpre>0 ) THEN
-    CALL SCOPY(N,Z,1,Wk,1)
+    Wk(1:N) = Z(1:N)
     CALL MSOLVE(N,Wk,Z,Rpar,Ipar)
     Nmsl = Nmsl + 1
   END IF

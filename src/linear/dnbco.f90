@@ -134,12 +134,13 @@ SUBROUTINE DNBCO(Abe,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
+  USE blas, ONLY : DAXPY
   INTEGER :: Lda, N, Ml, Mu, Ipvt(N)
   REAL(DP) :: Abe(Lda,2*Ml+Mu+1), Z(N)
   REAL(DP) :: Rcond
   !
-  REAL(DP) :: ek, t, wk, wkm, anorm, s, sm, ynorm
-  INTEGER i, info, j, ju, k, kb, kp1, l, ldb, lm, lz, m, ml1, mm, nl, nu
+  REAL(DP) :: ek, t, wk, wkm, anorm, s, sm, ynorm, v(2*Ml+Mu+1)
+  INTEGER :: i, info, j, ju, k, kb, kp1, l, ldb, lm, lz, m, ml1, mm, nl, nu
   !* FIRST EXECUTABLE STATEMENT  DNBCO
   ml1 = Ml + 1
   ldb = Lda - 1
@@ -148,7 +149,10 @@ SUBROUTINE DNBCO(Abe,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
     nu = MIN(Mu,j-1)
     nl = MIN(Ml,N-j)
     l = 1 + nu + nl
-    anorm = MAX(anorm,DASUM(l,Abe(j+nl,ml1-nl),ldb))
+    DO i = 0, l-1
+      v(i+1) = Abe(j+nl-i,ml1-nl+i)
+    END DO
+    anorm = MAX( anorm, SUM( ABS(v(1:l)) ) )
   END DO
   !
   !     FACTOR
@@ -165,16 +169,14 @@ SUBROUTINE DNBCO(Abe,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
   !     SOLVE TRANS(U)*W = E
   !
   ek = 1.0D0
-  DO j = 1, N
-    Z(j) = 0.0D0
-  END DO
+  Z = 0._DP
   m = Ml + Mu + 1
   ju = 0
   DO k = 1, N
     IF ( Z(k)/=0.0D0 ) ek = SIGN(ek,-Z(k))
     IF ( ABS(ek-Z(k))>ABS(Abe(k,ml1)) ) THEN
       s = ABS(Abe(k,ml1))/ABS(ek-Z(k))
-      CALL DSCAL(N,s,Z,1)
+      Z = s*Z
       ek = s*ek
     END IF
     wk = ek - Z(k)
@@ -210,26 +212,32 @@ SUBROUTINE DNBCO(Abe,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
     END IF
     Z(k) = wk
   END DO
-  s = 1.0D0/DASUM(N,Z,1)
-  CALL DSCAL(N,s,Z,1)
+  s = 1.0D0/SUM( ABS(Z) )
+  Z = s*Z
   !
   !     SOLVE TRANS(L)*Y = W
   !
   DO kb = 1, N
     k = N + 1 - kb
     nl = MIN(Ml,N-k)
-    IF ( k<N ) Z(k) = Z(k) + DDOT(nl,Abe(k+nl,ml1-nl),-ldb,Z(k+1),1)
+    IF ( k<N ) THEN
+      DO i = 0, nl-2
+        v(i+1) = Abe(k+nl+i,Ml+1-nl-i)
+      END DO
+      v(nl) = Abe(k+2*nl-2,1)
+      Z(k) = Z(k) + DOT_PRODUCT(v(1:nl),Z(k+1:k+nl))
+    END IF
     IF ( ABS(Z(k))>1.0D0 ) THEN
       s = 1.0D0/ABS(Z(k))
-      CALL DSCAL(N,s,Z,1)
+      Z = s*Z
     END IF
     l = Ipvt(k)
     t = Z(l)
     Z(l) = Z(k)
     Z(k) = t
   END DO
-  s = 1.0D0/DASUM(N,Z,1)
-  CALL DSCAL(N,s,Z,1)
+  s = 1.0D0/SUM( ABS(Z) )
+  Z = s*Z
   !
   ynorm = 1.0D0
   !
@@ -244,12 +252,12 @@ SUBROUTINE DNBCO(Abe,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
     IF ( k<N ) CALL DAXPY(nl,t,Abe(k+nl,ml1-nl),-ldb,Z(k+1),1)
     IF ( ABS(Z(k))>1.0D0 ) THEN
       s = 1.0D0/ABS(Z(k))
-      CALL DSCAL(N,s,Z,1)
+      Z = s*Z
       ynorm = s*ynorm
     END IF
   END DO
-  s = 1.0D0/DASUM(N,Z,1)
-  CALL DSCAL(N,s,Z,1)
+  s = 1.0D0/SUM( ABS(Z) )
+  Z = s*Z
   ynorm = s*ynorm
   !
   !     SOLVE  U*Z = V
@@ -258,7 +266,7 @@ SUBROUTINE DNBCO(Abe,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
     k = N + 1 - kb
     IF ( ABS(Z(k))>ABS(Abe(k,ml1)) ) THEN
       s = ABS(Abe(k,ml1))/ABS(Z(k))
-      CALL DSCAL(N,s,Z,1)
+      Z = s*Z
       ynorm = s*ynorm
     END IF
     IF ( Abe(k,ml1)/=0.0D0 ) Z(k) = Z(k)/Abe(k,ml1)
@@ -270,8 +278,8 @@ SUBROUTINE DNBCO(Abe,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
     CALL DAXPY(lm,t,Abe(k-1,Ml+2),-ldb,Z(lz),1)
   END DO
   !     MAKE ZNORM = 1.0D0
-  s = 1.0D0/DASUM(N,Z,1)
-  CALL DSCAL(N,s,Z,1)
+  s = 1.0D0/SUM( ABS(Z) )
+  Z = s*Z
   ynorm = s*ynorm
   !
   IF ( anorm/=0.0D0 ) Rcond = ynorm/anorm

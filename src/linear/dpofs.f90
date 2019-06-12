@@ -109,6 +109,7 @@ SUBROUTINE DPOFS(A,Lda,N,V,Itask,Ind,Work)
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   USE service, ONLY : D1MACH, XERMSG
+  USE linpack, ONLY : DPOCO, DPOSL
   !
   INTEGER :: Lda, N, Itask, Ind, info
   REAL(DP) :: A(Lda,N), V(N), Work(N)

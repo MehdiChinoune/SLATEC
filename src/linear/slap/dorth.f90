@@ -74,21 +74,22 @@ SUBROUTINE DORTH(Vnew,V,Hes,N,Ll,Ldhes,Kmp,Snormw)
   !   910506  Made subsidiary to DGMRES.  (FNF)
   !   920511  Added complete declaration section.  (WRB)
 
+  USE blas, ONLY : DAXPY
   !     .. Scalar Arguments ..
   REAL(DP) :: Snormw
-  INTEGER Kmp, Ldhes, Ll, N
+  INTEGER :: Kmp, Ldhes, Ll, N
   !     .. Array Arguments ..
-  REAL(DP) :: Hes(Ldhes,*), V(N,*), Vnew(*)
+  REAL(DP) :: Hes(Ldhes,Ll), V(N,Ll), Vnew(N)
   !     .. Local Scalars ..
   REAL(DP) :: arg, sumdsq, tem, vnrm
-  INTEGER i, i0
+  INTEGER :: i, i0
   !     .. Intrinsic Functions ..
   INTRINSIC MAX, SQRT
   !* FIRST EXECUTABLE STATEMENT  DORTH
   !
   !         Get norm of unaltered VNEW for later use.
   !
-  vnrm = DNRM2(N,Vnew,1)
+  vnrm = NORM2(Vnew(1:N))
   !   -------------------------------------------------------------------
   !         Perform the modified Gram-Schmidt procedure on VNEW =A*V(LL).
   !         Scaled inner products give new column of HES.
@@ -96,7 +97,7 @@ SUBROUTINE DORTH(Vnew,V,Hes,N,Ll,Ldhes,Kmp,Snormw)
   !   -------------------------------------------------------------------
   i0 = MAX(1,Ll-Kmp+1)
   DO i = i0, Ll
-    Hes(i,Ll) = DDOT(N,V(1,i),1,Vnew,1)
+    Hes(i,Ll) = DOT_PRODUCT(V(1:N,i),Vnew)
     tem = -Hes(i,Ll)
     CALL DAXPY(N,tem,V(1,i),1,Vnew,1)
   END DO
@@ -107,11 +108,11 @@ SUBROUTINE DORTH(Vnew,V,Hes,N,Ll,Ldhes,Kmp,Snormw)
   !         exceeds 1000*(unit roundoff).  Finally, correct SNORMW using
   !         the dot products involved.
   !   -------------------------------------------------------------------
-  Snormw = DNRM2(N,Vnew,1)
+  Snormw = NORM2(Vnew(1:N))
   IF ( vnrm+0.001D0*Snormw/=vnrm ) RETURN
   sumdsq = 0
   DO i = i0, Ll
-    tem = -DDOT(N,V(1,i),1,Vnew,1)
+    tem = -DOT_PRODUCT(V(1:N,i),Vnew)
     IF ( Hes(i,Ll)+0.001D0*tem/=Hes(i,Ll) ) THEN
       Hes(i,Ll) = Hes(i,Ll) - tem
       CALL DAXPY(N,tem,V(1,i),1,Vnew,1)

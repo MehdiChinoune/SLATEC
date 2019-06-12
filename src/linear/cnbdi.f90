@@ -62,11 +62,12 @@ SUBROUTINE CNBDI(Abe,Lda,N,Ml,Mu,Ipvt,Det)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
-  INTEGER Lda, N, Ml, Mu, Ipvt(N)
-  COMPLEX(SP) Abe(Lda,2*Ml+Mu+1), Det(2)
+  USE blas, ONLY : SCABS1
+  INTEGER :: Lda, N, Ml, Mu, Ipvt(N)
+  COMPLEX(SP) :: Abe(Lda,2*Ml+Mu+1), Det(2)
   !
-  REAL(SP) ten
-  INTEGER i
+  REAL(SP) :: ten
+  INTEGER :: i
   !
   !* FIRST EXECUTABLE STATEMENT  CNBDI
   Det(1) = (1.0E0,0.0E0)
@@ -75,12 +76,12 @@ SUBROUTINE CNBDI(Abe,Lda,N,Ml,Mu,Ipvt,Det)
   DO i = 1, N
     IF ( Ipvt(i)/=i ) Det(1) = -Det(1)
     Det(1) = Abe(i,Ml+1)*Det(1)
-    IF ( CABS1(Det(1))==0.0E0 ) EXIT
-    DO WHILE ( CABS1(Det(1))<1.0E0 )
+    IF ( SCABS1(Det(1))==0.0E0 ) EXIT
+    DO WHILE ( SCABS1(Det(1))<1.0E0 )
       Det(1) = CMPLX(ten,0.0E0)*Det(1)
       Det(2) = Det(2) - (1.0E0,0.0E0)
     END DO
-    DO WHILE ( CABS1(Det(1))>=ten )
+    DO WHILE ( SCABS1(Det(1))>=ten )
       Det(1) = Det(1)/CMPLX(ten,0.0E0)
       Det(2) = Det(2) + (1.0E0,0.0E0)
     END DO

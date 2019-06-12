@@ -73,7 +73,7 @@ SUBROUTINE CDSTP(Eps,F,FA,Hmax,Impl,Ierror,JACOBN,Matdim,Maxord,Mint,&
   !* REVISION HISTORY  (YYMMDD)
   !   790601  DATE WRITTEN
   !   900329  Initial submission to SLATEC.
-  USE linear, ONLY : SCNRM2
+  USE blas, ONLY : SCNRM2
   INTERFACE
     SUBROUTINE F(N,T,Y,Ydot)
       IMPORT SP

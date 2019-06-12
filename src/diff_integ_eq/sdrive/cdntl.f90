@@ -42,7 +42,9 @@ SUBROUTINE CDNTL(Eps,F,FA,Hmax,Hold,Impl,Jtask,Matdim,Maxord,Mint,Miter,&
   !* REVISION HISTORY  (YYMMDD)
   !   790601  DATE WRITTEN
   !   900329  Initial submission to SLATEC.
-  USE linear, ONLY : SCNRM2, CGBSL, CGESL, CGBFA, CGEFA
+  USE blas, ONLY : SCNRM2
+  USE linpack, ONLY : CGBFA, CGEFA
+  USE lapack, ONLY : CGBTRS, CGETRS
   INTERFACE
     SUBROUTINE F(N,T,Y,Ydot)
       IMPORT SP
@@ -114,7 +116,7 @@ SUBROUTINE CDNTL(Eps,F,FA,Hmax,Hold,Impl,Jtask,Matdim,Maxord,Mint,Miter,&
             Ier = .TRUE.
             RETURN
           END IF
-          CALL CGESL(A,Matdim,N,Ipvt,Save2,0)
+          CALL CGETRS('N',N,1,A,Matdim,Ipvt,Save2,N,info)
         ELSEIF ( Miter==4.OR.Miter==5 ) THEN
           CALL FA(N,T,Y,A(Ml+1:,:),Matdim,Ml,Mu,Nde)
           IF ( N==0 ) THEN
@@ -126,7 +128,7 @@ SUBROUTINE CDNTL(Eps,F,FA,Hmax,Hold,Impl,Jtask,Matdim,Maxord,Mint,Miter,&
             Ier = .TRUE.
             RETURN
           END IF
-          CALL CGBSL(A,Matdim,N,Ml,Mu,Ipvt,Save2,0)
+          CALL CGBTRS('N',N,Ml,Mu,1,A,Matdim,Ipvt,Save2,N,info)
         END IF
       ELSEIF ( Impl==2 ) THEN
         CALL FA(N,T,Y,A,Matdim,Ml,Mu,Nde)
@@ -157,7 +159,7 @@ SUBROUTINE CDNTL(Eps,F,FA,Hmax,Hold,Impl,Jtask,Matdim,Maxord,Mint,Miter,&
             Ier = .TRUE.
             RETURN
           END IF
-          CALL CGESL(A,Matdim,Nde,Ipvt,Save2,0)
+          CALL CGETRS('N',Nde,1,A,Matdim,Ipvt,Save2,Nde,info)
         ELSEIF ( Miter==4.OR.Miter==5 ) THEN
           CALL FA(N,T,Y,A(Ml+1:,:),Matdim,Ml,Mu,Nde)
           IF ( N==0 ) THEN
@@ -169,7 +171,7 @@ SUBROUTINE CDNTL(Eps,F,FA,Hmax,Hold,Impl,Jtask,Matdim,Maxord,Mint,Miter,&
             Ier = .TRUE.
             RETURN
           END IF
-          CALL CGBSL(A,Matdim,Nde,Ml,Mu,Ipvt,Save2,0)
+          CALL CGBTRS('N',Nde,Ml,Mu,1,A,Matdim,Ipvt,Save2,Nde,info)
         END IF
       END IF
     END IF

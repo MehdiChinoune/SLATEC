@@ -102,12 +102,13 @@ SUBROUTINE SGBFA(Abd,Lda,N,Ml,Mu,Ipvt,Info)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
+  USE blas, ONLY : SAXPY
 
-  INTEGER Lda, N, Ml, Mu, Ipvt(*), Info
-  REAL(SP) Abd(Lda,*)
+  INTEGER :: Lda, N, Ml, Mu, Ipvt(N), Info
+  REAL(SP) :: Abd(Lda,N)
   !
-  REAL(SP) t
-  INTEGER i, i0, j, ju, jz, j0, j1, k, kp1, l, lm, m, mm, nm1
+  REAL(SP) :: t
+  INTEGER :: i, i0, j, ju, jz, j0, j1, k, kp1, l, lm, m, mm, nm1
   !
   !* FIRST EXECUTABLE STATEMENT  SGBFA
   m = Ml + Mu + 1
@@ -149,7 +150,7 @@ SUBROUTINE SGBFA(Abd,Lda,N,Ml,Mu,Ipvt,Info)
       !        FIND L = PIVOT INDEX
       !
       lm = MIN(Ml,N-k)
-      l = ISAMAX(lm+1,Abd(m,k),1) + m - 1
+      l = MAXLOC( ABS(Abd(m:m+lm,k)),1) + m - 1
       Ipvt(k) = l + k - m
       !
       !        ZERO PIVOT IMPLIES THIS COLUMN ALREADY TRIANGULARIZED
@@ -169,7 +170,7 @@ SUBROUTINE SGBFA(Abd,Lda,N,Ml,Mu,Ipvt,Info)
         !           COMPUTE MULTIPLIERS
         !
         t = -1.0E0/Abd(m,k)
-        CALL SSCAL(lm,t,Abd(m+1,k),1)
+        Abd(m+1:m+lm,k) = t*Abd(m+1:m+lm,k)
         !
         !           ROW ELIMINATION WITH COLUMN INDEXING
         !
@@ -184,7 +185,7 @@ SUBROUTINE SGBFA(Abd,Lda,N,Ml,Mu,Ipvt,Info)
               Abd(l,j) = Abd(mm,j)
               Abd(mm,j) = t
             END IF
-            CALL SAXPY(lm,t,Abd(m+1,k),1,Abd(mm+1,j),1)
+            CALL SAXPY(lm,t,Abd(m+1:m+lm,k),1,Abd(mm+1:mm+lm,j),1)
           END DO
         END IF
       END IF

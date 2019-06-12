@@ -117,20 +117,20 @@ SUBROUTINE CPOIR(A,Lda,N,V,Itask,Ind,Work)
   !           IF-THEN-ELSE.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   USE service, ONLY : R1MACH, XERMSG
+  USE linpack, ONLY : CPOFA, CPOSL
+  USE blas, ONLY : SCASUM
   !
   INTEGER :: Lda, N, Itask, Ind
   COMPLEX(SP) :: A(Lda,N), V(N), Work(N,N+1)
   INTEGER :: info, j
-  REAL(SP) xnorm, dnorm
-  REAL(DP) :: dr1, di1, dr2, di2
+  REAL(SP) :: xnorm, dnorm
   CHARACTER(8) :: xern1, xern2
   !* FIRST EXECUTABLE STATEMENT  CPOIR
   IF ( Lda<N ) THEN
     Ind = -1
     WRITE (xern1,'(I8)') Lda
     WRITE (xern2,'(I8)') N
-    CALL XERMSG('CPOIR','LDA = '//xern1//' IS LESS THAN N = '//&
-      xern2,-1,1)
+    CALL XERMSG('CPOIR','LDA = '//xern1//' IS LESS THAN N = '//xern2,-1,1)
     RETURN
   END IF
   !
@@ -152,9 +152,7 @@ SUBROUTINE CPOIR(A,Lda,N,V,Itask,Ind,Work)
     !
     !        MOVE MATRIX A TO WORK
     !
-    DO j = 1, N
-      CALL CCOPY(N,A(1,j),1,Work(1,j),1)
-    END DO
+    Work(1:N,1:N) = A(1:N,1:N)
     !
     !        FACTOR MATRIX A INTO R
     !
@@ -164,8 +162,7 @@ SUBROUTINE CPOIR(A,Lda,N,V,Itask,Ind,Work)
     !
     IF ( info/=0 ) THEN
       Ind = -4
-      CALL XERMSG('CPOIR',&
-        'SINGULAR OR NOT POSITIVE DEFINITE - NO SOLUTION',-4,1)
+      CALL XERMSG('CPOIR','SINGULAR OR NOT POSITIVE DEFINITE - NO SOLUTION',-4,1)
       RETURN
     END IF
   END IF
@@ -173,7 +170,7 @@ SUBROUTINE CPOIR(A,Lda,N,V,Itask,Ind,Work)
   !     SOLVE AFTER FACTORING
   !     MOVE VECTOR B TO WORK
   !
-  CALL CCOPY(N,V(1),1,Work(1,N+1),1)
+  Work(1:N,N+1) = V
   CALL CPOSL(Work,N,N,V)
   !
   !     FORM NORM OF X0
@@ -187,11 +184,8 @@ SUBROUTINE CPOIR(A,Lda,N,V,Itask,Ind,Work)
   !     COMPUTE  RESIDUAL
   !
   DO j = 1, N
-    CALL DCDOT(j-1,-1.D0,A(1,j),1,V(1),1,dr1,di1)
-    CALL DCDOT(N-j+1,1.D0,A(j,j),Lda,V(j),1,dr2,di2)
-    dr1 = dr1 + dr2 - REAL( REAL(Work(j,N+1)), DP )
-    di1 = di1 + di2 - REAL( AIMAG(Work(j,N+1)), DP )
-    Work(j,N+1) = CMPLX(REAL(dr1),REAL(di1))
+    Work(j,N+1) = DOT_PRODUCT( A(1:j-1,j), V(1:j-1) ) &
+      + DOT_PRODUCT( CONJG(A(j,j:N)), V(j:N) ) - Work(j,N+1)
   END DO
   !
   !     SOLVE A*DELTA=R

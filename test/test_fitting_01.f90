@@ -35,8 +35,8 @@ CONTAINS
     !   920722  Initialized IP(1) and IP(2) for CALL to LSEI.  (BKS, WRB)
     !   930214  Declarations sections added, code revised to test error
     !           returns for all values of KPRINT and code polished.  (WRB)
-    USE slatec, ONLY : LSEI, R1MACH, SAXPY, SCOPY, SDOT, SNRM2, SVOUT, XGETF, &
-      XSETF, XERCLR, NUMXER
+    USE slatec, ONLY : LSEI, R1MACH, SVOUT, XGETF, XSETF, XERCLR, NUMXER
+    USE blas, ONLY :  SAXPY
     !     .. Scalar Arguments ..
     INTEGER Ipass, Kprint, Lun
     !     .. Local Scalars ..
@@ -104,24 +104,14 @@ CONTAINS
     !
     !     Copy the problem matrices.
     !
-    DO i = 1, n
-      !
-      !        Copy the i-th column of the inequality constraint matrix into
-      !        the work array.
-      !
-      CALL SCOPY(mg,g(1,i),1,d(meap1,i),1)
-      !
-      !        Copy the i-th column of the least squares matrix into the work
-      !        array.
-      !
-      CALL SCOPY(ma,a(1,i),1,d(mep1,i),1)
-    END DO
+    d(ma+1:mdd,1:n) = g
+    d(1:ma,1:n) = a
     !
     !     Copy the right-side vectors into the work array in compatible
     !     order.
     !
-    CALL SCOPY(mg,h,1,d(meap1,np1),1)
-    CALL SCOPY(ma,f,1,d(mep1,np1),1)
+    d(ma+1:mdd,np1) = h
+    d(1:ma,np1) = f
     !
     !     Use default program options in LSEI, and set matrix-vector
     !     printing accuracy parameters.
@@ -134,9 +124,9 @@ CONTAINS
     !     (to be used to check computed residual norm = RNORML.)
     !
     DO i = 1, ma
-      work(i) = SDOT(n,d(i,1),mdd,sol,1) - f(i)
+      work(i) = DOT_PRODUCT(d(i,1:n),sol) - f(i)
     END DO
-    resnrm = SNRM2(ma,work,1)
+    resnrm = NORM2(work(1:ma))
     !
     !     Call LSEI to get solution in X(*), least squares residual in
     !     RNORML.
@@ -146,10 +136,10 @@ CONTAINS
     !     Compute relative error in problem variable solution and residual
     !     norm computation.
     !
-    tnorm = SNRM2(n,sol,1)
-    CALL SCOPY(n,sol,1,err,1)
+    tnorm = NORM2(sol(1:n))
+    err = sol
     CALL SAXPY(n,-1.0E0,x,1,err,1)
-    cnorm = SNRM2(n,err,1)
+    cnorm = NORM2(err(1:n))
     relerr = cnorm/tnorm
     relnrm = (resnrm-rnorml)/resnrm
     !

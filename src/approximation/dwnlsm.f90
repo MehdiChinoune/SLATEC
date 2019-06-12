@@ -75,7 +75,8 @@ SUBROUTINE DWNLSM(W,Mdw,Mme,Ma,N,L,Prgopt,X,Rnorm,Mode,Ipivot,Itype,Wd,H,&
   !   900604  DP version created from SP version.  (RWC)
   !   900911  Restriction on value of ALAMDA included.  (WRB)
   USE service, ONLY : XERMSG, D1MACH
-  USE linear, ONLY : DAXPY, DH12, DROTM, DROTMG, DSWAP
+  USE blas, ONLY : DAXPY, DROTM, DROTMG, DSWAP
+  USE linear, ONLY : DH12
   INTEGER :: L, Ma, Mdw, Mme, Mode, N, Ipivot(N), Itype(Mme+Ma)
   REAL(DP) :: Rnorm, D(N), H(N), Prgopt(:), Scalee(Mme+Ma), Temp(N), W(Mdw,N+1), &
     Wd(N), X(N), Z(N)

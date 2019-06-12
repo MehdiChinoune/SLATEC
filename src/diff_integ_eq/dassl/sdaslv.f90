@@ -31,13 +31,14 @@ SUBROUTINE SDASLV(Neq,Delta,Wm,Iwm)
   !   901019  Merged changes made by C. Ulrich with SLATEC 4.0 format.
   !   901026  Added explicit declarations for all variables and minor
   !           cosmetic changes to prologue.  (FNF)
-  USE linear, ONLY : SGBSL, SGESL
+  USE lapack, ONLY : SGBTRS, SGETRS
   !
   INTEGER :: Neq, Iwm(:)
-  REAL(SP) :: Delta(Neq), Wm(Neq)
+  REAL(SP) :: Wm(:)
+  REAL(SP), TARGET :: Delta(Neq)
   !
-  INTEGER :: meband, mtype
-  INTEGER, PARAMETER :: NPD = 1
+  INTEGER :: meband, mtype, info
+  REAL(SP), POINTER :: delta2(:,:)
   INTEGER, PARAMETER :: LML = 1
   INTEGER, PARAMETER :: LMU = 2
   INTEGER, PARAMETER :: LMTYPE = 4
@@ -45,6 +46,7 @@ SUBROUTINE SDASLV(Neq,Delta,Wm,Iwm)
   !
   !* FIRST EXECUTABLE STATEMENT  SDASLV
   mtype = Iwm(LMTYPE)
+  delta2(1:Neq,1:1) => Delta
   SELECT CASE (mtype)
     CASE (3)
       !
@@ -54,13 +56,13 @@ SUBROUTINE SDASLV(Neq,Delta,Wm,Iwm)
       !
       !     BANDED MATRIX
       meband = 2*Iwm(LML) + Iwm(LMU) + 1
-      CALL SGBSL(Wm(NPD),meband,Neq,Iwm(LML),Iwm(LMU),Iwm(LIPVT:),Delta,0)
+      CALL SGBTRS('N',Neq,Iwm(LML),Iwm(LMU),1,Wm,meband,Iwm(LIPVT:),delta2,Neq,info)
       RETURN
     CASE DEFAULT
   END SELECT
   !
   !     DENSE MATRIX
-  CALL SGESL(Wm(NPD),Neq,Neq,Iwm(LIPVT:),Delta,0)
+  CALL SGETRS('N',Neq,1,Wm,Neq,Iwm(LIPVT:LIPVT+Neq-1),delta2,Neq,info)
   RETURN
   !------END OF SUBROUTINE SDASLV------
   RETURN

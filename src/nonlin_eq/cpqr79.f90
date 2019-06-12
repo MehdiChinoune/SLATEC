@@ -59,12 +59,13 @@ SUBROUTINE CPQR79(Ndeg,Coeff,Root,Ierr,Work)
   !           (WRB)
   !   911010  Code reworked and simplified.  (RWC and WRB)
   USE service, ONLY : XERMSG
-  USE linear, ONLY : COMQR
+  USE lapack, ONLY : CHSEQR
   INTEGER :: Ndeg, Ierr
   REAL(SP) :: Work(2*Ndeg*(Ndeg+1))
   COMPLEX(SP) :: Coeff(Ndeg+1), Root(Ndeg)
-  INTEGER :: km1, k, khr, khi, kwr, kwi, kad, kj
-  COMPLEX(SP) :: scalee, c
+  INTEGER :: k, khr, khi
+  COMPLEX(SP) :: scalee
+  COMPLEX(SP) :: h(Ndeg,Ndeg), z(1,Ndeg), wrk(Ndeg)
   !* FIRST EXECUTABLE STATEMENT  CPQR79
   Ierr = 0
   IF ( ABS(Coeff(1))==0.0 ) THEN
@@ -87,32 +88,20 @@ SUBROUTINE CPQR79(Ndeg,Coeff,Root,Ierr,Work)
   scalee = 1.0E0/Coeff(1)
   khr = 1
   khi = khr + Ndeg*Ndeg
-  kwr = khi + khi - khr
-  kwi = kwr + Ndeg
   !
-  DO k = 1, kwr
-    Work(k) = 0.0E0
-  END DO
-  !
+  h = CMPLX( 0._SP, 0._SP, SP )
   DO k = 1, Ndeg
-    kad = (k-1)*Ndeg + 1
-    c = scalee*Coeff(k+1)
-    Work(kad) = -REAL(c)
-    kj = khi + kad - 1
-    Work(kj) = -AIMAG(c)
-    IF ( k/=Ndeg ) Work(kad+k) = 1.0E0
+    h(1,k) = -scalee*Coeff(k+1)
+    IF( k==Ndeg ) CYCLE
+    h(k+1,k) = 1._SP
   END DO
   !
-  CALL COMQR(Ndeg,Ndeg,1,Ndeg,Work(khr),Work(khi),Work(kwr),Work(kwi),Ierr)
+  CALL CHSEQR('E','N',Ndeg,1,Ndeg,h,Ndeg,Root,z,1,wrk,Ndeg,Ierr)
   !
   IF ( Ierr/=0 ) THEN
     Ierr = 1
     CALL XERMSG('CPQR79','NO CONVERGENCE IN 30 QR ITERATIONS.',1,1)
     RETURN
   END IF
-  !
-  DO k = 1, Ndeg
-    km1 = k - 1
-    Root(k) = CMPLX(Work(kwr+km1),Work(kwi+km1))
-  END DO
+
 END SUBROUTINE CPQR79

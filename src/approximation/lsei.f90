@@ -390,7 +390,8 @@ SUBROUTINE LSEI(W,Mdw,Me,Ma,Mg,N,Prgopt,X,Rnorme,Rnorml,Mode,Ws,Ip)
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   USE service, ONLY : XERMSG, R1MACH
-  USE linear, ONLY : H12, SAXPY, SSWAP
+  USE blas, ONLY : SAXPY, SSWAP
+  USE linear, ONLY : H12
   INTEGER :: Ma, Mdw, Me, Mg, Mode, N, Ip(Mg+2*N+2)
   REAL(SP) :: Prgopt(:), Rnorme, Rnorml, W(Mdw,N+1), Ws(*), X(N)
   !

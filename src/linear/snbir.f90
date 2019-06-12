@@ -180,7 +180,7 @@ SUBROUTINE SNBIR(Abe,Lda,N,Ml,Mu,V,Itask,Ind,Work,Iwork)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   USE service, ONLY : R1MACH, XERMSG
   !
-  INTEGER :: Lda, N, Itask, Ind, Iwork(N), Ml, Mu
+  INTEGER :: Lda, N, Itask, Ind, Ml, Mu, Iwork(N)
   REAL(SP) :: Abe(Lda,Ml+Mu+1), V(N), Work(N,2*Ml+Mu+2)
   INTEGER :: info, j, k, kk, l, m, nc
   REAL(SP) :: xnorm, dnorm
@@ -190,8 +190,7 @@ SUBROUTINE SNBIR(Abe,Lda,N,Ml,Mu,V,Itask,Ind,Work,Iwork)
     Ind = -1
     WRITE (xern1,'(I8)') Lda
     WRITE (xern2,'(I8)') N
-    CALL XERMSG('SNBIR','LDA = '//xern1//' IS LESS THAN N = '//&
-      xern2,-1,1)
+    CALL XERMSG('SNBIR','LDA = '//xern1//' IS LESS THAN N = '//xern2,-1,1)
     RETURN
   END IF
   !
@@ -229,9 +228,7 @@ SUBROUTINE SNBIR(Abe,Lda,N,Ml,Mu,V,Itask,Ind,Work,Iwork)
     !        MOVE MATRIX ABE TO WORK
     !
     m = Ml + Mu + 1
-    DO j = 1, m
-      CALL SCOPY(N,Abe(1,j),1,Work(1,j),1)
-    END DO
+    Work(1:N,1:m) = Abe(1:N,1:m)
     !
     !        FACTOR MATRIX A INTO LU
     !
@@ -249,12 +246,12 @@ SUBROUTINE SNBIR(Abe,Lda,N,Ml,Mu,V,Itask,Ind,Work,Iwork)
   !     SOLVE WHEN FACTORING COMPLETE
   !     MOVE VECTOR B TO WORK
   !
-  CALL SCOPY(N,V(1),1,Work(1,nc+1),1)
+  Work(1:N,nc+1) = V
   CALL SNBSL(Work,N,N,Ml,Mu,Iwork,V,0)
   !
   !     FORM NORM OF X0
   !
-  xnorm = SASUM(N,V(1),1)
+  xnorm = SUM( ABS(V) )
   IF ( xnorm==0.0 ) THEN
     Ind = 75
     RETURN
@@ -266,7 +263,7 @@ SUBROUTINE SNBIR(Abe,Lda,N,Ml,Mu,V,Itask,Ind,Work,Iwork)
     k = MAX(1,Ml+2-j)
     kk = MAX(1,j-Ml)
     l = MIN(j-1,Ml) + MIN(N-j,Mu) + 1
-    Work(j,nc+1) = SDSDOT(l,-Work(j,nc+1),Abe(j,k),Lda,V(kk),1)
+    Work(j,nc+1) = DOT_PRODUCT(Abe(j,k:k+l-1),V(kk:kk+l-1)) - Work(j,nc+1)
   END DO
   !
   !     SOLVE A*DELTA=R
@@ -275,7 +272,7 @@ SUBROUTINE SNBIR(Abe,Lda,N,Ml,Mu,V,Itask,Ind,Work,Iwork)
   !
   !     FORM NORM OF DELTA
   !
-  dnorm = SASUM(N,Work(1,nc+1),1)
+  dnorm = SUM( ABS(Work(1:N,nc+1)) )
   !
   !     COMPUTE IND (ESTIMATE OF NO. OF SIGNIFICANT DIGITS)
   !     AND CHECK FOR IND GREATER THAN ZERO

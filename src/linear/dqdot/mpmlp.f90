@@ -24,9 +24,10 @@ SUBROUTINE MPMLP(U,V,W,J)
   !   890831  Modified array declarations.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
-  
-  INTEGER i, J
-  INTEGER U(*), V(*), W
+
+  INTEGER :: J
+  INTEGER :: U(J), V(J), W
+  INTEGER :: i
   !* FIRST EXECUTABLE STATEMENT  MPMLP
   DO i = 1, J
     U(i) = U(i) + W*V(i)

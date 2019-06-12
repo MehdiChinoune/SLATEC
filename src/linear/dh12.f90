@@ -53,6 +53,7 @@ SUBROUTINE DH12(Mode,Lpivot,L1,M,U,Iue,Up,C,Ice,Icv,Ncv)
   !   900328  Added TYPE section.  (WRB)
   !   900911  Added DDOT to DOUBLE PRECISION statement.  (WRB)
 
+  USE blas, ONLY : DAXPY, DSWAP
   INTEGER :: Ice, Icv, Iue, L1, Lpivot, M, Mode, Ncv
   REAL(DP) :: C(Icv*Ncv+M*Ice), U(Iue,M), Up
   INTEGER :: i, i2, i3, i4, incr, j, kl1, kl2, klp, l1m1, mml1p2
@@ -124,7 +125,7 @@ SUBROUTINE DH12(Mode,Lpivot,L1,M,U,Iue,Up,C,Ice,Icv,Ncv)
           U(1,l1m1) = Up
           IF ( Lpivot/=l1m1 ) CALL DSWAP(Ncv,C(kl1),Icv,C(klp),Icv)
           DO j = 1, Ncv
-            sm = DDOT(mml1p2,U(1,l1m1),Iue,C(kl1),Ice)
+            sm = DOT_PRODUCT(U(1,l1m1:M),C(kl1:M+(L1-2)*(Ice-1)))
             sm = sm*b
             CALL DAXPY(mml1p2,sm,U(1,l1m1),Iue,C(kl1),Ice)
             kl1 = kl1 + Icv

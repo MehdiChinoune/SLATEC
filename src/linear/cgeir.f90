@@ -115,6 +115,8 @@ SUBROUTINE CGEIR(A,Lda,N,V,Itask,Ind,Work,Iwork)
   !           IF-THEN-ELSE.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   USE service, ONLY : R1MACH, XERMSG
+  USE linpack, ONLY : CGEFA, CGESL
+  USE blas, ONLY : SCASUM
   !
   INTEGER :: Lda, N, Itask, Ind, Iwork(N)
   COMPLEX(SP) :: A(Lda,N), V(N), Work(N,N+1)
@@ -126,8 +128,7 @@ SUBROUTINE CGEIR(A,Lda,N,V,Itask,Ind,Work,Iwork)
     Ind = -1
     WRITE (xern1,'(I8)') Lda
     WRITE (xern2,'(I8)') N
-    CALL XERMSG('CGEIR','LDA = '//xern1//' IS LESS THAN N = '//&
-      xern2,-1,1)
+    CALL XERMSG('CGEIR','LDA = '//xern1//' IS LESS THAN N = '//xern2,-1,1)
     RETURN
   END IF
   !
@@ -147,9 +148,7 @@ SUBROUTINE CGEIR(A,Lda,N,V,Itask,Ind,Work,Iwork)
   !
   IF ( Itask==1 ) THEN
     !        MOVE MATRIX A TO WORK
-    DO j = 1, N
-      CALL CCOPY(N,A(1,j),1,Work(1,j),1)
-    END DO
+    Work(1:N,1:N) = A(1:N,1:N)
     !
     !        FACTOR MATRIX A INTO LU
     !
@@ -167,12 +166,12 @@ SUBROUTINE CGEIR(A,Lda,N,V,Itask,Ind,Work,Iwork)
   !     SOLVE WHEN FACTORING COMPLETE
   !     MOVE VECTOR B TO WORK
   !
-  CALL CCOPY(N,V(1),1,Work(1,N+1),1)
+  Work(1:N,N+1) = V
   CALL CGESL(Work,N,N,Iwork,V,0)
   !
   !     FORM NORM OF X0
   !
-  xnorm = SCASUM(N,V(1),1)
+  xnorm = SUM( ABS(REAL(V,SP)) + ABS(AIMAG(V)) )
   IF ( xnorm==0.0 ) THEN
     Ind = 75
     RETURN
@@ -181,7 +180,7 @@ SUBROUTINE CGEIR(A,Lda,N,V,Itask,Ind,Work,Iwork)
   !     COMPUTE  RESIDUAL
   !
   DO j = 1, N
-    Work(j,N+1) = CDCDOT(N,-Work(j,N+1),A(j,1),Lda,V,1)
+    Work(j,N+1) = DOT_PRODUCT( CONJG(A(j,1:N)), V ) -Work(j,N+1)
   END DO
   !
   !     SOLVE A*DELTA=R
@@ -190,7 +189,7 @@ SUBROUTINE CGEIR(A,Lda,N,V,Itask,Ind,Work,Iwork)
   !
   !     FORM NORM OF DELTA
   !
-  dnorm = SCASUM(N,Work(1,N+1),1)
+  dnorm = SUM( ABS(REAL(Work(1:N,N+1),SP)) + ABS(AIMAG(Work(1:N,N+1))) )
   !
   !     COMPUTE IND (ESTIMATE OF NO. OF SIGNIFICANT DIGITS)
   !     AND CHECK FOR IND GREATER THAN ZERO

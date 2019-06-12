@@ -273,14 +273,15 @@ INTEGER FUNCTION ISSGMR(N,X,Xl,MSOLVE,Nmsl,Itol,Tol,Iter,Err,Iunit,R,Dz,Rwork, &
     END SUBROUTINE
   END INTERFACE
   !     .. Scalar Arguments ..
-  REAL(SP) Bnrm, Err, Prod, R0nrm, Rnrm, Snormw, Tol
-  INTEGER Iter, Itol, Iunit, Jpre, Jscal, Kmp, Lgmr, Maxl, Maxlp1, N, Nmsl
+  REAL(SP) :: Bnrm, Err, Prod, R0nrm, Rnrm, Snormw, Tol
+  INTEGER :: Iter, Itol, Iunit, Jpre, Jscal, Kmp, Lgmr, Maxl, Maxlp1, N, Nmsl
   !     .. Array Arguments ..
-  REAL(SP) Dz(*), Hes(Maxlp1,Maxl), Q(*), R(*), Rwork(*), Sx(*), V(N,*), X(*), Xl(*)
-  INTEGER Iwork(*)
+  REAL(SP) :: Dz(N), Hes(Maxlp1,Maxl), Q(2*Maxl), R(N), Rwork(*), Sx(N), V(N,Maxlp1), &
+    X(N), Xl(N)
+  INTEGER :: Iwork(*)
   !     .. Local Scalars ..
-  REAL(SP) dxnrm, fuzz, rat, ratmax, tem
-  INTEGER i, ielmax
+  REAL(SP) :: dxnrm, fuzz, rat, ratmax, tem
+  INTEGER :: i, ielmax
   !     .. Intrinsic Functions ..
   INTRINSIC ABS, MAX, SQRT
   !     .. Save statement ..
@@ -299,13 +300,13 @@ INTEGER FUNCTION ISSGMR(N,X,Xl,MSOLVE,Nmsl,Itol,Tol,Iter,Err,Iunit,R,Dz,Rwork, &
     IF ( Lgmr/=0 ) CALL SRLCAL(N,Kmp,Lgmr,Maxl,V,Q,R,Snormw,Prod,R0nrm)
     IF ( Itol<=2 ) THEN
       !         err = ||Residual||/||RightHandSide||(2-Norms).
-      Err = SNRM2(N,R,1)/Bnrm
+      Err = NORM2(R)/Bnrm
       !
       !         Unscale R by R0NRM*PROD when KMP < MAXL.
       !
       IF ( (Kmp<Maxl).AND.(Lgmr/=0) ) THEN
         tem = 1.0E0/(R0nrm*Prod)
-        CALL SSCAL(N,tem,R,1)
+        R = tem*R
       END IF
     ELSEIF ( Itol==3 ) THEN
       !         err = Max |(Minv*Residual)(i)/x(i)|
@@ -319,7 +320,7 @@ INTEGER FUNCTION ISSGMR(N,X,Xl,MSOLVE,Nmsl,Itol,Tol,Iter,Err,Iunit,R,Dz,Rwork, &
       !
       IF ( (Kmp<Maxl).AND.(Lgmr/=0) ) THEN
         tem = 1.0E0/(R0nrm*Prod)
-        CALL SSCAL(N,tem,R,1)
+        R = tem*R
       END IF
       !
       fuzz = R1MACH(1)
@@ -349,7 +350,7 @@ INTEGER FUNCTION ISSGMR(N,X,Xl,MSOLVE,Nmsl,Itol,Tol,Iter,Err,Iunit,R,Dz,Rwork, &
         MSOLVE,Nmsl,Rwork,Iwork)
     ELSEIF ( Iter==0 ) THEN
       !         Copy X to XL to check if initial guess is good enough.
-      CALL SCOPY(N,X,1,Xl,1)
+      Xl(1:N) = X(1:N)
     ELSE
       !         Return since this is the first call to SPIGMR on a restart.
       RETURN
@@ -357,11 +358,11 @@ INTEGER FUNCTION ISSGMR(N,X,Xl,MSOLVE,Nmsl,Itol,Tol,Iter,Err,Iunit,R,Dz,Rwork, &
     !
     IF ( (Jscal==0).OR.(Jscal==2) ) THEN
       !         err = ||x-TrueSolution||/||TrueSolution||(2-Norms).
-      IF ( Iter==0 ) solnrm = SNRM2(N,soln_com,1)
+      IF ( Iter==0 ) solnrm = NORM2(soln_com(1:N))
       DO i = 1, N
         Dz(i) = Xl(i) - soln_com(i)
       END DO
-      Err = SNRM2(N,Dz,1)/solnrm
+      Err = NORM2(Dz)/solnrm
     ELSE
       IF ( Iter==0 ) THEN
         solnrm = 0

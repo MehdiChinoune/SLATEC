@@ -111,18 +111,18 @@ SUBROUTINE CGEFS(A,Lda,N,V,Itask,Ind,Work,Iwork)
   !           IF-THEN-ELSE.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   USE service, ONLY : R1MACH, XERMSG
+  USE linpack, ONLY : CGECO, CGESL
   !
-  INTEGER Lda, N, Itask, Ind, Iwork(N)
-  COMPLEX(SP) A(Lda,N), V(N), Work(N)
-  REAL(SP) rcond
+  INTEGER :: Lda, N, Itask, Ind, Iwork(N)
+  COMPLEX(SP) :: A(Lda,N), V(N), Work(N)
+  REAL(SP) :: rcond
   CHARACTER(8) :: xern1, xern2
   !* FIRST EXECUTABLE STATEMENT  CGEFS
   IF ( Lda<N ) THEN
     Ind = -1
     WRITE (xern1,'(I8)') Lda
     WRITE (xern2,'(I8)') N
-    CALL XERMSG('CGEFS','LDA = '//xern1//' IS LESS THAN N = '//&
-      xern2,-1,1)
+    CALL XERMSG('CGEFS','LDA = '//xern1//' IS LESS THAN N = '//xern2,-1,1)
     RETURN
   END IF
   !

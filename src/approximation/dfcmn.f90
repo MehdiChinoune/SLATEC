@@ -31,7 +31,8 @@ SUBROUTINE DFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Nconst,Xconst,&
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
   !   900604  DP version created from SP version.  (RWC)
   USE service, ONLY : XERMSG
-  USE linear, ONLY : DAXPY, DBNDSL, DBNDAC
+  USE blas, ONLY : DAXPY
+  USE linear, ONLY : DBNDSL, DBNDAC
   USE data_handling, ONLY : DSORT
   INTEGER :: Mdg, Mdw, Mode, Nbkpt, Nconst, Ndata, Nord, Nderiv(Nconst), Iwork(:)
   REAL(DP) :: Bf(Nord,Nord), Bkpt(Nbkpt), Bkptin(:), Coeff(:), G(Mdg,Nord+1), &

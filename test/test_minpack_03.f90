@@ -765,7 +765,7 @@ CONTAINS
     !           FORMATs.  (RWC)
     !   930214  Declarations sections added, code revised to test error
     !           returns for all values of KPRINT and code polished.  (WRB)
-    USE slatec, ONLY : BVALU, CV, FC, IVOUT, R1MACH, SCOPY, SMOUT, SVOUT, XGETF, &
+    USE slatec, ONLY : BVALU, CV, FC, IVOUT, R1MACH, SMOUT, SVOUT, XGETF, &
       XSETF, XERCLR, NUMXER
     !     .. Scalar Arguments ..
     INTEGER Ipass, Kprint, Lun

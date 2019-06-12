@@ -1,0 +1,109 @@
+MODULE blas
+  USE service, ONLY : SP, DP
+  IMPLICIT NONE
+
+  INTERFACE
+    SUBROUTINE SAXPY(N,Sa,Sx,Incx,Sy,Incy)
+      IMPORT SP
+      INTEGER, INTENT(IN) :: N, Incx, Incy
+      REAL(SP), INTENT(IN) :: Sa
+      REAL(SP), INTENT(IN) :: Sx(N)
+      REAL(SP), INTENT(INOUT) :: Sy(N)
+    END SUBROUTINE SAXPY
+    SUBROUTINE SROT(N,Sx,Incx,Sy,Incy,Sc,Ss)
+      IMPORT SP
+      INTEGER, INTENT(IN) :: N, Incx, Incy
+      REAL(SP), INTENT(IN) :: Sc, Ss
+      REAL(SP), INTENT(INOUT) :: Sx(N), Sy(N)
+    END SUBROUTINE SROT
+    SUBROUTINE SROTG(Sa,Sb,Sc,Ss)
+      IMPORT SP
+      REAL(SP), INTENT(INOUT) :: Sa, Sb
+      REAL(SP), INTENT(OUT) :: Sc, Ss
+    END SUBROUTINE SROTG
+    SUBROUTINE SSWAP(N,Sx,Incx,Sy,Incy)
+      IMPORT SP
+      INTEGER, INTENT(IN) :: N, Incx, Incy
+      REAL(SP), INTENT(INOUT) :: Sx(N), Sy(N)
+    END SUBROUTINE SSWAP
+    SUBROUTINE SROTM(N,Sx,Incx,Sy,Incy,Sparam)
+      IMPORT SP
+      INTEGER, INTENT(IN) :: N, Incx, Incy
+      REAL(SP), INTENT(IN) :: Sparam(5)
+      REAL(SP), INTENT(INOUT) :: Sx(N), Sy(N)
+    END SUBROUTINE SROTM
+    SUBROUTINE SROTMG(Sd1,Sd2,Sx1,Sy1,Sparam)
+      IMPORT SP
+      REAL(SP), INTENT(IN) :: Sy1
+      REAL(SP), INTENT(IN) :: Sparam(5)
+      REAL(SP), INTENT(INOUT) :: Sd1, Sd2, Sx1
+    END SUBROUTINE SROTMG
+    REAL(SP) FUNCTION SCNRM2(N,Cx,Incx)
+      IMPORT SP
+      INTEGER, INTENT(IN) :: N, Incx
+      COMPLEX(SP), INTENT(IN) :: Cx(N)
+    END FUNCTION SCNRM2
+    SUBROUTINE DAXPY(N,Sa,Sx,Incx,Sy,Incy)
+      IMPORT DP
+      INTEGER, INTENT(IN) :: N, Incx, Incy
+      REAL(DP), INTENT(IN) :: Sa
+      REAL(DP), INTENT(IN) :: Sx(N)
+      REAL(DP), INTENT(INOUT) :: Sy(N)
+    END SUBROUTINE DAXPY
+    SUBROUTINE DROT(N,Sx,Incx,Sy,Incy,Sc,Ss)
+      IMPORT DP
+      INTEGER, INTENT(IN) :: N, Incx, Incy
+      REAL(DP), INTENT(IN) :: Sc, Ss
+      REAL(DP), INTENT(INOUT) :: Sx(N), Sy(N)
+    END SUBROUTINE DROT
+    SUBROUTINE DROTG(Sa,Sb,Sc,Ss)
+      IMPORT DP
+      REAL(DP), INTENT(INOUT) :: Sa, Sb
+      REAL(DP), INTENT(OUT) :: Sc, Ss
+    END SUBROUTINE DROTG
+    SUBROUTINE DSWAP(N,Sx,Incx,Sy,Incy)
+      IMPORT DP
+      INTEGER, INTENT(IN) :: N, Incx, Incy
+      REAL(DP), INTENT(INOUT) :: Sx(N), Sy(N)
+    END SUBROUTINE DSWAP
+    SUBROUTINE DROTM(N,Sx,Incx,Sy,Incy,Sparam)
+      IMPORT DP
+      INTEGER, INTENT(IN) :: N, Incx, Incy
+      REAL(DP), INTENT(IN) :: Sparam(5)
+      REAL(DP), INTENT(INOUT) :: Sx(N), Sy(N)
+    END SUBROUTINE DROTM
+    SUBROUTINE DROTMG(Sd1,Sd2,Sx1,Sy1,Sparam)
+      IMPORT DP
+      REAL(DP), INTENT(IN) :: Sy1
+      REAL(DP), INTENT(IN) :: Sparam(5)
+      REAL(DP), INTENT(INOUT) :: Sd1, Sd2, Sx1
+    END SUBROUTINE DROTMG
+    REAL(SP) FUNCTION SCABS1(C)
+      IMPORT SP
+      COMPLEX(SP), INTENT(IN) :: C
+    END FUNCTION SCABS1
+    REAL(SP) FUNCTION SCASUM(N,Cx,Incx)
+      IMPORT SP
+      INTEGER, INTENT(IN) :: N, Incx
+      COMPLEX(SP), INTENT(IN) :: Cx(N)
+    END FUNCTION SCASUM
+    SUBROUTINE CAXPY(N,Ca,Cx,Incx,Cy,Incy)
+      IMPORT SP
+      INTEGER, INTENT(IN) :: N, Incx, Incy
+      COMPLEX(SP), INTENT(IN) :: Ca
+      COMPLEX(SP), INTENT(IN) :: Cx(N)
+      COMPLEX(SP), INTENT(INOUT) :: Cy(N)
+    END SUBROUTINE CAXPY
+    SUBROUTINE CSWAP(N,Cx,Incx,Cy,Incy)
+      IMPORT SP
+      INTEGER, INTENT(IN) :: N, Incx, Incy
+      COMPLEX(SP), INTENT(INOUT) :: Cx(N), Cy(N)
+    END SUBROUTINE CSWAP
+    INTEGER FUNCTION ICAMAX(N,Cx,Incx)
+      IMPORT SP
+      INTEGER, INTENT(IN) :: N, Incx
+      COMPLEX(SP), INTENT(IN) :: Cx
+    END FUNCTION ICAMAX
+  END INTERFACE
+
+END MODULE blas

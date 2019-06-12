@@ -20,7 +20,7 @@ endif()
 if ( "${CMAKE_Fortran_COMPILER_ID}" MATCHES "GNU" )
 
   set( CMAKE_Fortran_FLAGS_RELEASE "${CMAKE_Fortran_FLAGS} -O3" )
-  set( CMAKE_Fortran_FLAGS_DEBUG "${CMAKE_Fortran_FLAGS} -Wall -Wno-unused-dummy-argument \
+  set( CMAKE_Fortran_FLAGS_DEBUG "${CMAKE_Fortran_FLAGS} -Wall -Wimplicit-procedure \
     -fcheck=all -ffpe-trap=zero,overflow,invalid -fbacktrace -g -O0 -std=f2018" )
   set ( CMAKE_Fortran_FLAGS_CODECOVERAGE "--coverage -g -O0" )
 
@@ -28,7 +28,7 @@ elseif ( "${CMAKE_Fortran_COMPILER_ID}" MATCHES "Intel" )
 
   set( CMAKE_Fortran_FLAGS_RELEASE "${CMAKE_Fortran_FLAGS} -O3" )
   set( CMAKE_Fortran_FLAGS_DEBUG "${CMAKE_Fortran_FLAGS} -warn all -traceback \
-    -fpe0 -g -check all -stand f18" )
+    -fpe0 -g -check all -stand f18 -standrad-semantics" )
   set ( CMAKE_Fortran_FLAGS_CODECOVERAGE "-prof-gen:srcpos -prof-dir=${CMAKE_BINARY_DIR}/prof/ -g -O0" )
 
 elseif ( "${CMAKE_Fortran_COMPILER_ID}" MATCHES "Flang" )
@@ -42,6 +42,13 @@ elseif ( "${CMAKE_Fortran_COMPILER_ID}" MATCHES "PGI" )
   set( CMAKE_Fortran_FLAGS_DEBUG "${CMAKE_Fortran_FLAGS} -Minform=inform -Mallocatable=03 -Mstandard -g -C" )
 
 endif ()
+
+if( "${BLA_VENDOR}" MATCHES "Intel" )
+  enable_language( C )
+endif()
+find_package(BLAS REQUIRED)
+
+find_package(LAPACK REQUIRED)
 
 add_subdirectory(src)
 

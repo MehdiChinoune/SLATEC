@@ -30,7 +30,8 @@ SUBROUTINE SDCOR(Dfdy,El,FA,H,Ierror,Impl,Ipvt,Matdim,Miter,Ml,Mu,N,Nde,&
   !* REVISION HISTORY  (YYMMDD)
   !   790601  DATE WRITTEN
   !   900329  Initial submission to SLATEC.
-  USE linear, ONLY : SGBSL, SGESL
+  USE linpack, ONLY : SGBSL, SGESL
+  USE lapack, ONLY : SGBTRS, SGETRS
   INTERFACE
     SUBROUTINE USERS(Y,Yh,Ywt,Save1,Save2,T,H,El,Impl,N,Nde,Iflag)
       IMPORT SP
@@ -50,7 +51,7 @@ SUBROUTINE SDCOR(Dfdy,El,FA,H,Ierror,Impl,Ipvt,Matdim,Miter,Ml,Mu,N,Nde,&
   REAL(SP) :: A(Matdim,N), Dfdy(Matdim,N), El(13,12), Save1(N), Save2(N), Y(N), &
     Yh(N,13), Ywt(N)
   LOGICAL :: Evalfa
-  INTEGER :: i, iflag, j, mw
+  INTEGER :: i, iflag, j, mw, info
   !* FIRST EXECUTABLE STATEMENT  SDCOR
   IF ( Miter==0 ) THEN
     IF ( Ierror==1.OR.Ierror==5 ) THEN
@@ -122,6 +123,9 @@ SUBROUTINE SDCOR(Dfdy,El,FA,H,Ierror,Impl,Ipvt,Matdim,Miter,Ml,Mu,N,Nde,&
       END DO
     END IF
     CALL SGESL(Dfdy,Matdim,N,Ipvt,Save2,0)
+    !CALL SGETRS('N',N,1,Dfdy,Matdim,Ipvt,Save2,N,info)
+    print*,'E',N
+    print'(F18.11)', Save2
     IF ( Ierror==1.OR.Ierror==5 ) THEN
       DO i = 1, N
         Save1(i) = Save1(i) + Save2(i)
@@ -192,6 +196,9 @@ SUBROUTINE SDCOR(Dfdy,El,FA,H,Ierror,Impl,Ipvt,Matdim,Miter,Ml,Mu,N,Nde,&
       END DO
     END IF
     CALL SGBSL(Dfdy,Matdim,N,Ml,Mu,Ipvt,Save2,0)
+    !CALL SGBTRS('N',N,Ml,Mu,1,Dfdy,Matdim,Ipvt,Save2,N,info)
+    print*,'B',N
+    print'(F18.11)', Save2
     IF ( Ierror==1.OR.Ierror==5 ) THEN
       DO i = 1, N
         Save1(i) = Save1(i) + Save2(i)

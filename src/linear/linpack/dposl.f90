@@ -68,18 +68,19 @@ SUBROUTINE DPOSL(A,Lda,N,B)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
+  USE blas, ONLY : DAXPY
 
-  INTEGER Lda, N
-  REAL(DP) :: A(Lda,*), B(*)
+  INTEGER :: Lda, N
+  REAL(DP) :: A(Lda,N), B(N)
   !
   REAL(DP) :: t
-  INTEGER k, kb
+  INTEGER :: k, kb
   !
   !     SOLVE TRANS(R)*Y = B
   !
   !* FIRST EXECUTABLE STATEMENT  DPOSL
   DO k = 1, N
-    t = DDOT(k-1,A(1,k),1,B(1),1)
+    t = DOT_PRODUCT(A(1:k-1,k),B(1:k-1))
     B(k) = (B(k)-t)/A(k,k)
   END DO
   !

@@ -108,6 +108,7 @@ SUBROUTINE SPOFS(A,Lda,N,V,Itask,Ind,Work)
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   USE service, ONLY : R1MACH, XERMSG
+  USE linpack, ONLY : SPOCO, SPOSL
   !
   INTEGER :: Lda, N, Itask, Ind
   REAL(SP) :: A(Lda,N), V(N), Work(N)

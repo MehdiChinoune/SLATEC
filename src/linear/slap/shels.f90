@@ -67,6 +67,7 @@ SUBROUTINE SHELS(A,Lda,N,Q,B)
   !   910506  Made subsidiary to SGMRES.  (FNF)
   !   920511  Added complete declaration section.  (WRB)
 
+  USE blas, ONLY : SAXPY
   !     .. Scalar Arguments ..
   INTEGER Lda, N
   !     .. Array Arguments ..

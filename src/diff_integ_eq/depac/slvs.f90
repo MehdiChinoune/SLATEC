@@ -28,11 +28,11 @@ SUBROUTINE SLVS(Wm,Iwm,X)
   !   910722  Updated AUTHOR section.  (ALS)
   !   920422  Changed DIMENSION statement.  (WRB)
   USE DEBDF1, ONLY : el0_com, h_com, ier_com, miter_com, n_com
-  USE linear, ONLY : SGBSL, SGESL
+  USE lapack, ONLY : SGBTRS, SGETRS
   !
   INTEGER :: Iwm(:)
   REAL(SP) :: Wm(:), X(n_com)
-  INTEGER :: i, meband, ml, mu
+  INTEGER :: i, meband, ml, mu, info
   REAL(SP) :: di, hl0, phl0, r
   !-----------------------------------------------------------------------
   ! THIS ROUTINE MANAGES THE SOLUTION OF THE LINEAR SYSTEM ARISING FROM
@@ -83,10 +83,11 @@ SUBROUTINE SLVS(Wm,Iwm,X)
       ml = Iwm(1)
       mu = Iwm(2)
       meband = 2*ml + mu + 1
-      CALL SGBSL(Wm(3:meband*n_com+2),meband,n_com,ml,mu,Iwm(21:n_com+20),X,0)
+      CALL SGBTRS('N',n_com,ml,mu,1,Wm(3:meband*n_com+2),meband,Iwm(21:n_com+20),&
+        X,n_com,info)
       RETURN
     CASE DEFAULT
-      CALL SGESL(Wm(3:n_com**2+2),n_com,n_com,Iwm(21:n_com+20),X,0)
+      CALL SGETRS('N',n_com,1,Wm(3:n_com**2+2),n_com,Iwm(21:n_com+20),X,n_com,info)
       RETURN
   END SELECT
   100  ier_com = -1

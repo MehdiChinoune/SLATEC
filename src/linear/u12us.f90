@@ -30,6 +30,7 @@ SUBROUTINE U12US(A,Mda,M,N,B,Mdb,Nb,Mode,Krank,Rnorm,H,W,Ir,Ic)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
 
+  USE blas, ONLY : SAXPY, SSWAP
   INTEGER :: Krank, M, Mda, Mdb, Mode, N, Nb
   INTEGER :: Ic(N), Ir(M)
   REAL(SP) :: A(Mda,N), B(Mdb,Nb), H(M), Rnorm(Nb), W(4*M)
@@ -61,9 +62,9 @@ SUBROUTINE U12US(A,Mda,M,N,B,Mdb,Nb,Mode,Krank,Rnorm,H,W,Ir,Ic)
           DO jb = 1, Nb
             DO j = 1, k
               i = kp1 - j
-              tt = -SDOT(mmk,A(kp1,i),1,B(kp1,jb),1)/W(i)
+              tt = -DOT_PRODUCT(A(kp1:M,i),B(kp1:M,jb))/W(i)
               tt = tt - B(i,jb)
-              CALL SAXPY(mmk,tt,A(kp1,i),1,B(kp1,jb),1)
+              CALL SAXPY(mmk,tt,A(kp1:M,i),1,B(kp1:M,jb),1)
               B(i,jb) = B(i,jb) + tt*W(i)
             END DO
           END DO
@@ -72,7 +73,7 @@ SUBROUTINE U12US(A,Mda,M,N,B,Mdb,Nb,Mode,Krank,Rnorm,H,W,Ir,Ic)
         !     FIND NORMS OF RESIDUAL VECTOR(S)..(BEFORE OVERWRITE B)
         !
         DO jb = 1, Nb
-          Rnorm(jb) = SNRM2((M-k),B(kp1,jb),1)
+          Rnorm(jb) = NORM2(B(kp1:M,jb))
         END DO
         !
         !     BACK SOLVE LOWER TRIANGULAR L
@@ -82,7 +83,7 @@ SUBROUTINE U12US(A,Mda,M,N,B,Mdb,Nb,Mode,Krank,Rnorm,H,W,Ir,Ic)
             B(i,jb) = B(i,jb)/A(i,i)
             IF ( i==k ) EXIT
             ip1 = i + 1
-            CALL SAXPY(k-i,-B(i,jb),A(ip1,i),1,B(ip1,jb),1)
+            CALL SAXPY(k-i,-B(i,jb),A(ip1:k,i),1,B(ip1:k,jb),1)
           END DO
         END DO
         !
@@ -104,8 +105,8 @@ SUBROUTINE U12US(A,Mda,M,N,B,Mdb,Nb,Mode,Krank,Rnorm,H,W,Ir,Ic)
           tt = A(j,j)
           A(j,j) = H(j)
           DO jb = 1, Nb
-            bb = -SDOT(N-j+1,A(j,j),Mda,B(j,jb),1)/H(j)
-            CALL SAXPY(N-j+1,bb,A(j,j),Mda,B(j,jb),1)
+            bb = -DOT_PRODUCT(A(j,j:N),B(j:N,jb))/H(j)
+            CALL SAXPY(N-j+1,bb,A(j,j:N),1,B(j:N,jb),1)
           END DO
           A(j,j) = tt
         END DO
@@ -166,7 +167,7 @@ SUBROUTINE U12US(A,Mda,M,N,B,Mdb,Nb,Mode,Krank,Rnorm,H,W,Ir,Ic)
     END DO
   ELSE
     DO jb = 1, Nb
-      Rnorm(jb) = SNRM2(M,B(1,jb),1)
+      Rnorm(jb) = NORM2(B(1:M,jb))
     END DO
     DO jb = 1, Nb
       DO i = 1, N

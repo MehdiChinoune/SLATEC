@@ -34,6 +34,7 @@ SUBROUTINE DU11LS(A,Mda,M,N,Ub,Db,Mode,Np,Krank,Ksure,H,W,Eb,Ic,Ir)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900328  Added TYPE section.  (WRB)
   USE service, ONLY : XERMSG
+  USE blas, ONLY : DAXPY, DSWAP
   INTEGER :: Mda, Mode, N, Np, Krank, Ksure, M
   INTEGER :: Ic(N), Ir(M)
   REAL(DP) :: A(Mda,N), Db(N), Eb(N), H(N), Ub(N), W(N)
@@ -60,7 +61,7 @@ SUBROUTINE DU11LS(A,Mda,M,N,Ub,Db,Mode,Np,Krank,Ksure,H,W,Eb,Ic,Ir)
   !        CALCULATE COL LENGTH
   !
   DO i = 1, N
-    H(i) = DNRM2(M,A(1,i),1)
+    H(i) = NORM2(A(1:M,i))
     W(i) = H(i)
   END DO
   !
@@ -92,8 +93,7 @@ SUBROUTINE DU11LS(A,Mda,M,N,Ub,Db,Mode,Np,Krank,Ksure,H,W,Eb,Ic,Ir)
         CALL ISWAP(1,Ic(i),1,Ic(kk),1)
         CALL DSWAP(M,A(1,i),1,A(1,kk),1)
       ELSE
-        CALL XERMSG('DU11LS',&
-          'FIRST NP COLUMNS ARE LINEARLY DEPENDENT',8,0)
+        CALL XERMSG('DU11LS','FIRST NP COLUMNS ARE LINEARLY DEPENDENT',8,0)
         Krank = i - 1
         RETURN
       END IF
@@ -206,7 +206,7 @@ SUBROUTINE DU11LS(A,Mda,M,N,Ub,Db,Mode,Np,Krank,Ksure,H,W,Eb,Ic,Ir)
   !
   !        ROW PIVOT
   !
-  jmax = IDAMAX(mm,A(j,j),1)
+  jmax = MAXLOC(A(j:M,j),1)
   jmax = jmax + j - 1
   IF ( jmax/=j ) THEN
     CALL DSWAP(N,A(j,1),Mda,A(jmax,1),Mda)
@@ -215,14 +215,14 @@ SUBROUTINE DU11LS(A,Mda,M,N,Ub,Db,Mode,Np,Krank,Ksure,H,W,Eb,Ic,Ir)
   !
   !     APPLY HOUSEHOLDER TRANSFORMATION
   !
-  tn = DNRM2(mm,A(j,j),1)
+  tn = NORM2(A(j:M,j))
   IF ( tn==0.0D0 ) GOTO 300
   IF ( A(j,j)/=0.0D0 ) tn = SIGN(tn,A(j,j))
-  CALL DSCAL(mm,1.0D0/tn,A(j,j),1)
+  A(j:M,j) = A(j:M,j)/tn
   A(j,j) = A(j,j) + 1.0D0
   IF ( j/=N ) THEN
     DO i = jp1, N
-      bb = -DDOT(mm,A(j,j),1,A(j,i),1)/A(j,j)
+      bb = -DOT_PRODUCT(A(j:M,j),A(j:M,i))/A(j,j)
       CALL DAXPY(mm,bb,A(j,j),1,A(j,i),1)
       IF ( i>Np ) THEN
         IF ( H(i)/=0.0D0 ) THEN
@@ -231,7 +231,7 @@ SUBROUTINE DU11LS(A,Mda,M,N,Ub,Db,Mode,Np,Krank,Ksure,H,W,Eb,Ic,Ir)
           t = tt
           tt = 1.0D0 + .05D0*tt*(H(i)/W(i))**2
           IF ( tt==1.0D0 ) THEN
-            H(i) = DNRM2(M-j,A(j+1,i),1)
+            H(i) = NORM2(A(j+1:M,i))
             W(i) = H(i)
           ELSE
             H(i) = H(i)*SQRT(t)
@@ -292,15 +292,15 @@ SUBROUTINE DU11LS(A,Mda,M,N,Ub,Db,Mode,Np,Krank,Ksure,H,W,Eb,Ic,Ir)
     kp1 = Krank + 1
     i = Krank
     DO
-      tn = DNRM2(nmk,A(i,kp1),Mda)/A(i,i)
+      tn = NORM2(A(i,kp1:N))/A(i,i)
       tn = A(i,i)*SQRT(1.0D0+tn*tn)
-      CALL DSCAL(nmk,1.0D0/tn,A(i,kp1),Mda)
+      A(i,kp1:N) = A(i,kp1:N)/tn
       W(i) = A(i,i)/tn + 1.0D0
       A(i,i) = -tn
       IF ( i==1 ) EXIT
       im1 = i - 1
       DO ii = 1, im1
-        tt = -DDOT(nmk,A(ii,kp1),Mda,A(i,kp1),Mda)/W(i)
+        tt = -DOT_PRODUCT(A(ii,kp1:N),A(i,kp1:N))/W(i)
         tt = tt - A(ii,i)
         CALL DAXPY(nmk,tt,A(i,kp1),Mda,A(ii,kp1),Mda)
         A(ii,i) = A(ii,i) + tt*W(i)

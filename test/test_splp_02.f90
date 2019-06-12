@@ -21,7 +21,7 @@ CONTAINS
     !   890911  Removed unnecessary intrinsics.  (WRB)
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   901013  Added additional printout on failure.  (RWC)
-    USE slatec, ONLY : DCOPY, DSPLP, DUSRMT
+    USE slatec, ONLY : DSPLP, DUSRMT
     USE common_mod, ONLY : PASS
     INTEGER i, ic, iv, ivv, j, kk, kount, Kprint, Lun, mm
     INTEGER icnt, ind(60), ibasis(60), Ipass, iwork(900), isoln(14)
@@ -281,7 +281,7 @@ CONTAINS
     !   890618  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   901010  Added PASS/FAIL message.  (RWC)
-    USE slatec, ONLY : D1MACH, DBOCLS, DBOLS, DCOPY, DNRM2
+    USE slatec, ONLY : D1MACH, DBOCLS, DBOLS
     REAL(DP) :: rnorm, rnormc, sr
     INTEGER ib, Ipass, irhs, itest, j, Kprint, Lun, mcon, mdw, &
       mode, mpass, mrows, ncols
@@ -322,11 +322,9 @@ CONTAINS
         !
         !           TRANSFER DATA TO WORKING ARRAY W(*,*).
         !
-        DO j = 1, ncols
-          CALL DCOPY(mrows,d(1,j),1,w(1,j),1)
-        END DO
+        w(1:mrows,1:ncols) = d(1:mrows,1:ncols)
         !
-        CALL DCOPY(mrows,rhs(1,irhs),1,w(1,ncols+1),1)
+        w(1:mrows,ncols+1) = rhs(1:mrows,irhs)
         !
         !             SET BOUND INDICATOR FLAGS.
         !
@@ -340,7 +338,7 @@ CONTAINS
           x(j) = x(j) - xtrue(j)
         END DO
         !
-        sr = DNRM2(ncols,x,1)
+        sr = NORM2(x(1:ncols))
         mpass = 1
         IF ( sr>10.D2*SQRT(D1MACH(4)) ) mpass = 0
         Ipass = Ipass*mpass
@@ -358,8 +356,8 @@ CONTAINS
     DO ib = 1, 2
       DO irhs = 1, 2
         w(:,1:10) = 0.D0
-        CALL DCOPY(ncols,bl(1,ib),1,bl1,1)
-        CALL DCOPY(ncols,bu(1,ib),1,bu1,1)
+        bl1(1:ncols) = bl(1:ncols,ib)
+        bu1(1:ncols) = bu(1:ncols,ib)
         ind(ncols+1) = 2
         ind(ncols+2) = 1
         ind(ncols+3) = 2
@@ -369,12 +367,10 @@ CONTAINS
         bu1(ncols+3) = 30.
         bl1(ncols+4) = 11.
         bu1(ncols+4) = 40.
-        DO j = 1, ncols
-          CALL DCOPY(mcon,c(1,j),1,w(1,j),1)
-          CALL DCOPY(mrows,d(1,j),1,w(mcon+1,j),1)
-        END DO
+        w(1:mcon,1:ncols) = c(1:mcon,1:ncols)
+        w(mcon+1:mcon+mrows,1:ncols) = d(1:mrows,1:ncols)
         !
-        CALL DCOPY(mrows,rhs(1,irhs),1,w(mcon+1,ncols+1),1)
+        w(mcon+1:mcon+mrows,ncols+1) = rhs(1:mrows,irhs)
         !
         !           CHECK LENGTHS OF REQD. ARRAYS.
         !
@@ -393,7 +389,7 @@ CONTAINS
           x(j) = x(j) - xtrue(j)
         END DO
         !
-        sr = DNRM2(ncols+mcon,x,1)
+        sr = NORM2(x(1:ncols+mcon))
         mpass = 1
         IF ( sr>10.D2*SQRT(D1MACH(4)) ) mpass = 0
         Ipass = Ipass*mpass

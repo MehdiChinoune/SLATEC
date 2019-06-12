@@ -71,7 +71,8 @@ SUBROUTINE WNLSM(W,Mdw,Mme,Ma,N,L,Prgopt,X,Rnorm,Mode,Ipivot,Itype,Wd,H,&
   !   900328  Added TYPE section.  (WRB)
   !   900510  Fixed an error message.  (RWC)
   USE service, ONLY : XERMSG, R1MACH
-  USE linear, ONLY : H12, SAXPY, SROTM, SROTMG, SSWAP
+  USE blas, ONLY : SAXPY, SROTM, SROTMG, SSWAP
+  USE linear, ONLY : H12
   INTEGER :: L, Ma, Mdw, Mme, Mode, N, Ipivot(N), Itype(Mme+Ma)
   REAL(SP) :: Rnorm, D(N), H(N), Prgopt(:), Scalee(Mme+Ma), Temp(N), W(Mdw,N+1), &
     Wd(N), X(N), Z(N)

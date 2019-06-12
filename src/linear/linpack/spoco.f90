@@ -84,20 +84,21 @@ SUBROUTINE SPOCO(A,Lda,N,Rcond,Z,Info)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
+  USE blas, ONLY : SAXPY
 
-  INTEGER Lda, N, Info
-  REAL(SP) A(Lda,*), Z(*)
-  REAL(SP) Rcond
+  INTEGER :: Lda, N, Info
+  REAL(SP) :: A(Lda,N), Z(N)
+  REAL(SP) :: Rcond
   !
-  REAL(SP) ek, t, wk, wkm
-  REAL(SP) anorm, s, sm, ynorm
-  INTEGER i, j, jm1, k, kb, kp1
+  REAL(SP) :: ek, t, wk, wkm
+  REAL(SP) :: anorm, s, sm, ynorm
+  INTEGER :: i, j, jm1, k, kb, kp1
   !
   !     FIND NORM OF A USING ONLY UPPER HALF
   !
   !* FIRST EXECUTABLE STATEMENT  SPOCO
   DO j = 1, N
-    Z(j) = SASUM(j,A(1,j),1)
+    Z(j) = SUM( ABS(A(1:j,j)) )
     jm1 = j - 1
     IF ( jm1>=1 ) THEN
       DO i = 1, jm1
@@ -131,7 +132,7 @@ SUBROUTINE SPOCO(A,Lda,N,Rcond,Z,Info)
       IF ( Z(k)/=0.0E0 ) ek = SIGN(ek,-Z(k))
       IF ( ABS(ek-Z(k))>A(k,k) ) THEN
         s = A(k,k)/ABS(ek-Z(k))
-        CALL SSCAL(N,s,Z,1)
+        Z = s*Z
         ek = s*ek
       END IF
       wk = ek - Z(k)
@@ -157,8 +158,8 @@ SUBROUTINE SPOCO(A,Lda,N,Rcond,Z,Info)
       END IF
       Z(k) = wk
     END DO
-    s = 1.0E0/SASUM(N,Z,1)
-    CALL SSCAL(N,s,Z,1)
+    s = 1.0E0/SUM( ABS(Z) )
+    Z = s*Z
     !
     !        SOLVE R*Y = W
     !
@@ -166,30 +167,30 @@ SUBROUTINE SPOCO(A,Lda,N,Rcond,Z,Info)
       k = N + 1 - kb
       IF ( ABS(Z(k))>A(k,k) ) THEN
         s = A(k,k)/ABS(Z(k))
-        CALL SSCAL(N,s,Z,1)
+        Z = s*Z
       END IF
       Z(k) = Z(k)/A(k,k)
       t = -Z(k)
-      CALL SAXPY(k-1,t,A(1,k),1,Z(1),1)
+      CALL SAXPY(k-1,t,A(1:k-1,k),1,Z(1:k-1),1)
     END DO
-    s = 1.0E0/SASUM(N,Z,1)
-    CALL SSCAL(N,s,Z,1)
+    s = 1.0E0/SUM( ABS(Z) )
+    Z = s*Z
     !
     ynorm = 1.0E0
     !
     !        SOLVE TRANS(R)*V = Y
     !
     DO k = 1, N
-      Z(k) = Z(k) - SDOT(k-1,A(1,k),1,Z(1),1)
+      Z(k) = Z(k) - DOT_PRODUCT(A(1:k-1,k),Z(1:k-1))
       IF ( ABS(Z(k))>A(k,k) ) THEN
         s = A(k,k)/ABS(Z(k))
-        CALL SSCAL(N,s,Z,1)
+        Z = s*Z
         ynorm = s*ynorm
       END IF
       Z(k) = Z(k)/A(k,k)
     END DO
-    s = 1.0E0/SASUM(N,Z,1)
-    CALL SSCAL(N,s,Z,1)
+    s = 1.0E0/SUM( ABS(Z) )
+    Z = s*Z
     ynorm = s*ynorm
     !
     !        SOLVE R*Z = V
@@ -198,16 +199,16 @@ SUBROUTINE SPOCO(A,Lda,N,Rcond,Z,Info)
       k = N + 1 - kb
       IF ( ABS(Z(k))>A(k,k) ) THEN
         s = A(k,k)/ABS(Z(k))
-        CALL SSCAL(N,s,Z,1)
+        Z = s*Z
         ynorm = s*ynorm
       END IF
       Z(k) = Z(k)/A(k,k)
       t = -Z(k)
-      CALL SAXPY(k-1,t,A(1,k),1,Z(1),1)
+      CALL SAXPY(k-1,t,A(1:k-1,k),1,Z(1:k-1),1)
     END DO
     !        MAKE ZNORM = 1.0
-    s = 1.0E0/SASUM(N,Z,1)
-    CALL SSCAL(N,s,Z,1)
+    s = 1.0E0/SUM( ABS(Z) )
+    Z = s*Z
     ynorm = s*ynorm
     !
     IF ( anorm/=0.0E0 ) Rcond = ynorm/anorm

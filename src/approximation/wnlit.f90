@@ -34,7 +34,8 @@ SUBROUTINE WNLIT(W,Mdw,M,N,L,Ipivot,Itype,H,Scalee,Rnorm,Idope,Dope,Done)
   !   890620  Revised to make WNLT1, WNLT2, and WNLT3 subroutines.  (RWC)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
-  USE linear, ONLY : H12, SROTM, SROTMG, SSWAP
+  USE blas, ONLY : SROTM, SROTMG, SSWAP
+  USE linear, ONLY : H12
   INTEGER :: L, M, Mdw, N, Idope(3), Ipivot(N), Itype(M)
   REAL(SP) :: Rnorm, Dope(3), H(N), Scalee(M), W(Mdw,M)
   LOGICAL :: Done

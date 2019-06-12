@@ -84,11 +84,12 @@ SUBROUTINE DNBSL(Abe,Lda,N,Ml,Mu,Ipvt,B,Job)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
+  USE blas, ONLY : DAXPY
   INTEGER :: Lda, N, Ml, Mu, Ipvt(N), Job
   REAL(DP) :: Abe(Lda,2*Ml+Mu+1), B(N)
   !
-  REAL(DP) :: t
-  INTEGER k, kb, l, lb, ldb, lm, m, mlm, nm1
+  REAL(DP) :: t, v(2*Ml+Mu+1)
+  INTEGER k, kb, l, lb, ldb, lm, m, mlm, nm1, i
   !* FIRST EXECUTABLE STATEMENT  DNBSL
   m = Mu + Ml + 1
   nm1 = N - 1
@@ -101,7 +102,10 @@ SUBROUTINE DNBSL(Abe,Lda,N,Ml,Mu,Ipvt,B,Job)
     DO k = 1, N
       lm = MIN(k,m) - 1
       lb = k - lm
-      t = DDOT(lm,Abe(k-1,Ml+2),ldb,B(lb),1)
+      DO i = 0, lm-1
+        v(i+1) = Abe(k-1-i,Ml+2+i)
+      END DO
+      t = DOT_PRODUCT(v(1:lm),B(lb:k-1))
       B(k) = (B(k)-t)/Abe(k,Ml+1)
     END DO
     !
@@ -113,7 +117,10 @@ SUBROUTINE DNBSL(Abe,Lda,N,Ml,Mu,Ipvt,B,Job)
           k = N - kb
           lm = MIN(Ml,N-k)
           mlm = Ml - (lm-1)
-          B(k) = B(k) + DDOT(lm,Abe(k+lm,mlm),ldb,B(k+1),1)
+          DO i = 0, lm-1
+            v(i+1) = Abe(k+lm-i,mlm+i)
+          END DO
+          B(k) = B(k) + DOT_PRODUCT(v(1:lm),B(k+1:k+lm))
           l = Ipvt(k)
           IF ( l/=k ) THEN
             t = B(l)

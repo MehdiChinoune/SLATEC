@@ -112,6 +112,7 @@ SUBROUTINE CPOFS(A,Lda,N,V,Itask,Ind,Work)
   !           IF-THEN-ELSE.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   USE service, ONLY : R1MACH, XERMSG
+  USE linpack, ONLY : CPOCO, CPOSL
   !
   INTEGER :: Lda, N, Itask, Ind
   COMPLEX(SP) :: A(Lda,N), V(N), Work(N)
@@ -123,8 +124,7 @@ SUBROUTINE CPOFS(A,Lda,N,V,Itask,Ind,Work)
     Ind = -1
     WRITE (xern1,'(I8)') Lda
     WRITE (xern2,'(I8)') N
-    CALL XERMSG('CPOFS','LDA = '//xern1//' IS LESS THAN N = '//&
-      xern2,-1,1)
+    CALL XERMSG('CPOFS','LDA = '//xern1//' IS LESS THAN N = '//xern2,-1,1)
     RETURN
   END IF
   !

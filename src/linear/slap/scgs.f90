@@ -253,6 +253,7 @@ SUBROUTINE SCGS(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,Iter,&
   !   921019  Changed 500.0 to 500 to reduce SP/DP differences.  (FNF)
   !   921113  Corrected C***CATEGORY line.  (FNF)
   USE service, ONLY : R1MACH
+  USE blas, ONLY : SAXPY
   INTERFACE
     SUBROUTINE MSOLVE(N,R,Z,Rwork,Iwork)
       IMPORT SP
@@ -266,14 +267,14 @@ SUBROUTINE SCGS(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,Iter,&
     END SUBROUTINE
   END INTERFACE
   !     .. Scalar Arguments ..
-  REAL(SP) Err, Tol
-  INTEGER Ierr, Isym, Iter, Itmax, Itol, Iunit, N, Nelt
+  REAL(SP) :: Err, Tol
+  INTEGER :: Ierr, Isym, Iter, Itmax, Itol, Iunit, N, Nelt
   !     .. Array Arguments ..
-  REAL(SP) A(Nelt), B(N), P(N), Q(N), R(N), R0(N), Rwork(*), U(N), V1(N), V2(N), X(N)
-  INTEGER Ia(Nelt), Iwork(*), Ja(Nelt)
+  REAL(SP) :: A(Nelt), B(N), P(N), Q(N), R(N), R0(N), Rwork(*), U(N), V1(N), V2(N), X(N)
+  INTEGER :: Ia(Nelt), Iwork(*), Ja(Nelt)
   !     .. Local Scalars ..
-  REAL(SP) ak, akm, bk, bnrm, fuzz, rhon, rhonm1, sigma, solnrm, tolmin
-  INTEGER i, k
+  REAL(SP) :: ak, akm, bk, bnrm, fuzz, rhon, rhonm1, sigma, solnrm, tolmin
+  INTEGER :: i, k
   !     .. Intrinsic Functions ..
   INTRINSIC ABS
   !* FIRST EXECUTABLE STATEMENT  SCGS
@@ -318,7 +319,7 @@ SUBROUTINE SCGS(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,Iter,&
       Iter = k
       !
       !         Calculate coefficient BK and direction vectors U, V and P.
-      rhon = SDOT(N,R0,1,R,1)
+      rhon = DOT_PRODUCT(R0,R)
       IF ( ABS(rhonm1)<fuzz ) GOTO 200
       bk = rhon/rhonm1
       IF ( Iter==1 ) THEN
@@ -339,7 +340,7 @@ SUBROUTINE SCGS(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,Iter,&
       !         Calculate coefficient AK, new iterate X, Q
       CALL MATVEC(N,P,V2,Nelt,Ia,Ja,A,Isym)
       CALL MSOLVE(N,V2,V1,Rwork,Iwork)
-      sigma = SDOT(N,R0,1,V1,1)
+      sigma = DOT_PRODUCT(R0,V1)
       IF ( ABS(sigma)<fuzz ) GOTO 300
       ak = rhon/sigma
       akm = -ak

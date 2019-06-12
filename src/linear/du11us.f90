@@ -31,6 +31,7 @@ SUBROUTINE DU11US(A,Mda,M,N,Ub,Db,Mode,Np,Krank,Ksure,H,W,Eb,Ir,Ic)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900328  Added TYPE section.  (WRB)
   USE service, ONLY : XERMSG
+  USE blas, ONLY : DAXPY, DSWAP
   INTEGER :: Mda, Mode, N, Np, Krank, Ksure, M
   INTEGER :: Ic(N), Ir(M)
   REAL(DP) :: A(Mda,N), Db(N), Eb(N), H(N), Ub(N), W(N)
@@ -58,7 +59,7 @@ SUBROUTINE DU11US(A,Mda,M,N,Ub,Db,Mode,Np,Krank,Ksure,H,W,Eb,Ir,Ic)
   !        CALCULATE ROW LENGTH
   !
   DO i = 1, M
-    H(i) = DNRM2(N,A(i,1),Mda)
+    H(i) = NORM2(A(i,1:N))
     W(i) = H(i)
   END DO
   !
@@ -203,7 +204,7 @@ SUBROUTINE DU11US(A,Mda,M,N,Ub,Db,Mode,Np,Krank,Ksure,H,W,Eb,Ir,Ic)
   !
   !        COLUMN PIVOT
   !
-  jmax = IDAMAX(nn,A(j,j),Mda)
+  jmax = MAXLOC(A(j:N,j),1)
   jmax = jmax + j - 1
   IF ( jmax/=j ) THEN
     CALL DSWAP(M,A(1,j),1,A(1,jmax),1)
@@ -212,14 +213,14 @@ SUBROUTINE DU11US(A,Mda,M,N,Ub,Db,Mode,Np,Krank,Ksure,H,W,Eb,Ir,Ic)
   !
   !     APPLY HOUSEHOLDER TRANSFORMATION
   !
-  tn = DNRM2(nn,A(j,j),Mda)
+  tn = NORM2(A(j,j:N))
   IF ( tn==0.0D0 ) GOTO 300
   IF ( A(j,j)/=0.0D0 ) tn = SIGN(tn,A(j,j))
-  CALL DSCAL(nn,1.0D0/tn,A(j,j),Mda)
+  A(j,j:N) = A(j,j:N)/tn
   A(j,j) = A(j,j) + 1.0D0
   IF ( j/=M ) THEN
     DO i = jp1, M
-      bb = -DDOT(nn,A(j,j),Mda,A(i,j),Mda)/A(j,j)
+      bb = -DOT_PRODUCT(A(j,j:N),A(i,j:N))/A(j,j)
       CALL DAXPY(nn,bb,A(j,j),Mda,A(i,j),Mda)
       IF ( i>Np ) THEN
         IF ( H(i)/=0.0D0 ) THEN
@@ -228,7 +229,7 @@ SUBROUTINE DU11US(A,Mda,M,N,Ub,Db,Mode,Np,Krank,Ksure,H,W,Eb,Ir,Ic)
           t = tt
           tt = 1.0D0 + .05D0*tt*(H(i)/W(i))**2
           IF ( tt==1.0D0 ) THEN
-            H(i) = DNRM2(N-j,A(i,j+1),Mda)
+            H(i) = NORM2(A(i,j+1:N))
             W(i) = H(i)
           ELSE
             H(i) = H(i)*SQRT(t)
@@ -289,15 +290,15 @@ SUBROUTINE DU11US(A,Mda,M,N,Ub,Db,Mode,Np,Krank,Ksure,H,W,Eb,Ir,Ic)
     kp1 = Krank + 1
     i = Krank
     DO
-      tn = DNRM2(mmk,A(kp1,i),1)/A(i,i)
+      tn = NORM2(A(kp1:M,i))/A(i,i)
       tn = A(i,i)*SQRT(1.0D0+tn*tn)
-      CALL DSCAL(mmk,1.0D0/tn,A(kp1,i),1)
+      A(kp1:M,i) = A(kp1:M,i)/tn
       W(i) = A(i,i)/tn + 1.0D0
       A(i,i) = -tn
       IF ( i==1 ) EXIT
       im1 = i - 1
       DO ii = 1, im1
-        tt = -DDOT(mmk,A(kp1,ii),1,A(kp1,i),1)/W(i)
+        tt = -DOT_PRODUCT(A(kp1:M,ii),A(kp1:M,i))/W(i)
         tt = tt - A(i,ii)
         CALL DAXPY(mmk,tt,A(kp1,i),1,A(kp1,ii),1)
         A(i,ii) = A(i,ii) + tt*W(i)

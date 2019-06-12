@@ -115,7 +115,7 @@ SUBROUTINE DQC25F(F,A,B,Omega,Integr,Nrmom,Maxp1,Ksave,Result,Abserr,&
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   USE service, ONLY : D1MACH
-  USE linear, ONLY : DGTSL
+  USE lapack, ONLY : DGTSV
   !
   INTERFACE
     REAL(DP) FUNCTION F(X)
@@ -128,7 +128,9 @@ SUBROUTINE DQC25F(F,A,B,Omega,Integr,Nrmom,Maxp1,Ksave,Result,Abserr,&
   INTEGER :: i, iers, isym, j, k, m, noequ, noeq1
   REAL(DP) :: ac, an, an2, as, asap, ass, centr, cheb12(13), cheb24(25), conc, &
     cons, cospar, d(25), d1(25), d2(25), estc, ests, fval(25), hlgth, oflow, &
-    parint, par2, par22, p2, p3, p4, resc12, resc24, ress12, ress24, sinpar, v(28)
+    parint, par2, par22, p2, p3, p4, resc12, resc24, ress12, ress24, sinpar
+  REAL(DP), TARGET :: v(28)
+  REAL(DP), POINTER :: v2(:,:)
   !
   !           THE VECTOR X CONTAINS THE VALUES COS(K*PI/24)
   !           K = 1, ...,11, TO BE USED FOR THE CHEBYSHEV EXPANSION OF F
@@ -254,7 +256,8 @@ SUBROUTINE DQC25F(F,A,B,Omega,Integr,Nrmom,Maxp1,Ksave,Result,Abserr,&
         !- **       CALL TO DGTSL MUST BE REPLACED BY CALL TO
         !- **       DOUBLE PRECISION VERSION OF LINPACK ROUTINE SGTSL
         !
-        CALL DGTSL(noequ,d1,d,d2,v(4),iers)
+        v2(1:25,1:1) => v(4:28)
+        CALL DGTSV(noequ,1,d1,d,d2,v2,noequ,iers)
       END IF
       DO j = 1, 13
         Chebmo(m,2*j-1) = v(j)
@@ -310,7 +313,8 @@ SUBROUTINE DQC25F(F,A,B,Omega,Integr,Nrmom,Maxp1,Ksave,Result,Abserr,&
         !- **       CALL TO DGTSL MUST BE REPLACED BY CALL TO
         !- **       DOUBLE PRECISION VERSION OF LINPACK ROUTINE SGTSL
         !
-        CALL DGTSL(noequ,d1,d,d2,v(3),iers)
+        v2(1:25,1:1) => v(3:27)
+        CALL DGTSV(noequ,1,d1,d,d2,v2,noequ,iers)
       END IF
       DO j = 1, 12
         Chebmo(m,2*j) = v(j)

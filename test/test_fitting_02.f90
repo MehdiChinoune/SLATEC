@@ -35,8 +35,8 @@ CONTAINS
     !   920722  Initialized IP(1) and IP(2) for CALL to DLSEI.  (BKS, WRB)
     !   930214  Declarations sections added, code revised to test error
     !           returns for all values of KPRINT and code polished.  (WRB)
-    USE slatec, ONLY : D1MACH, DAXPY, DCOPY, DDOT, DLSEI, DNRM2, DVOUT, XGETF, &
-      XSETF, XERCLR, NUMXER
+    USE slatec, ONLY : D1MACH, DLSEI, DVOUT, XGETF, XSETF, XERCLR, NUMXER
+    USE blas, ONLY : DAXPY
     !     .. Scalar Arguments ..
     INTEGER Ipass, Kprint, Lun
     !     .. Local Scalars ..
@@ -104,24 +104,13 @@ CONTAINS
     !
     !     Copy the problem matrices.
     !
-    DO i = 1, n
-      !
-      !        Copy the i-th column of the inequality constraint matrix into
-      !        the work array.
-      !
-      CALL DCOPY(mg,g(1,i),1,d(meap1,i),1)
-      !
-      !        Copy the i-th column of the least squares matrix into the work
-      !        array.
-      !
-      CALL DCOPY(ma,a(1,i),1,d(mep1,i),1)
-    END DO
+    d(ma+1:mdd,1:n) = g
+    d(1:ma,1:n) = a
     !
-    !     Copy the right-side vectors into the work array in compatible
-    !     order.
+    !     Copy the right-side vectors into the work array in compatible order.
     !
-    CALL DCOPY(mg,h,1,d(meap1,np1),1)
-    CALL DCOPY(ma,f,1,d(mep1,np1),1)
+    d(ma+1:mdd,np1) = h
+    d(1:ma,np1) = f
     !
     !     Use default program options in DLSEI, and set matrix-vector
     !     printing accuracy parameters.
@@ -134,9 +123,9 @@ CONTAINS
     !     (to be used to check computed residual norm = RNORML.)
     !
     DO i = 1, ma
-      work(i) = DDOT(n,d(i,1),mdd,sol,1) - f(i)
+      work(i) = DOT_PRODUCT(d(i,1:n),sol) - f(i)
     END DO
-    resnrm = DNRM2(ma,work,1)
+    resnrm = NORM2(work(1:ma))
     !
     !     Call DLSEI to get solution in X(*), least squares residual in
     !     RNORML.
@@ -146,10 +135,10 @@ CONTAINS
     !     Compute relative error in problem variable solution and residual
     !     norm computation.
     !
-    tnorm = DNRM2(n,sol,1)
-    CALL DCOPY(n,sol,1,err,1)
+    tnorm = NORM2(sol(1:n))
+    err = sol
     CALL DAXPY(n,-1.0D0,x,1,err,1)
-    cnorm = DNRM2(n,err,1)
+    cnorm = NORM2(err(1:n))
     relerr = cnorm/tnorm
     relnrm = (resnrm-rnorml)/resnrm
     !

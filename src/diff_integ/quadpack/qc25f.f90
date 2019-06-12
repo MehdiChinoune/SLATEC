@@ -111,7 +111,7 @@ SUBROUTINE QC25F(F,A,B,Omega,Integr,Nrmom,Maxp1,Ksave,Result,Abserr,Neval,&
   !   861211  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   USE service, ONLY : R1MACH
-  USE linear, ONLY : SGTSL
+  USE lapack, ONLY : SGTSV
   !
   INTERFACE
     REAL(SP) FUNCTION F(X)
@@ -124,7 +124,9 @@ SUBROUTINE QC25F(F,A,B,Omega,Integr,Nrmom,Maxp1,Ksave,Result,Abserr,Neval,&
   INTEGER :: i, iers, isym, j, k, m, noequ, noeq1
   REAL(SP) :: ac, an, an2, as, asap, ass, centr, cheb12(13), cheb24(25), conc, &
     cons, cospar, d(25), d1(25), d2(25), estc, ests, fval(25), hlgth, oflow, &
-    parint, par2, par22, p2, p3, p4, resc12, resc24, ress12, ress24, sinpar, v(28)
+    parint, par2, par22, p2, p3, p4, resc12, resc24, ress12, ress24, sinpar
+  REAL(SP), TARGET :: v(28)
+  REAL(SP), POINTER :: v2(:,:)
   !
   !           THE VECTOR X CONTAINS THE VALUES COS(K*PI/24)
   !           K = 1, ...,11, TO BE USED FOR THE CHEBYSHEV EXPANSION OF F
@@ -249,7 +251,8 @@ SUBROUTINE QC25F(F,A,B,Omega,Integr,Nrmom,Maxp1,Ksave,Result,Abserr,Neval,&
         !           SOLVE THE TRIDIAGONAL SYSTEM BY MEANS OF GAUSSIAN
         !           ELIMINATION WITH PARTIAL PIVOTING.
         !
-        CALL SGTSL(noequ,d1,d,d2,v(4),iers)
+        v2(1:25,1:1) => v(4:28)
+        CALL SGTSV(noequ,1,d1,d,d2,v2,noequ,iers)
       END IF
       DO j = 1, 13
         Chebmo(m,2*j-1) = v(j)
@@ -304,7 +307,8 @@ SUBROUTINE QC25F(F,A,B,Omega,Integr,Nrmom,Maxp1,Ksave,Result,Abserr,Neval,&
         !           SOLVE THE TRIDIAGONAL SYSTEM BY MEANS OF GAUSSIAN
         !           ELIMINATION WITH PARTIAL PIVOTING.
         !
-        CALL SGTSL(noequ,d1,d,d2,v(3),iers)
+        v2(1:25,1:1) => v(3:27)
+        CALL SGTSV(noequ,1,d1,d,d2,v2,noequ,iers)
       END IF
       DO j = 1, 12
         Chebmo(m,2*j) = v(j)

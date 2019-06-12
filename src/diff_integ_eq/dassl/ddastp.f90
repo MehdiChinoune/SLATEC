@@ -113,11 +113,11 @@ SUBROUTINE DDASTP(X,Y,Yprime,Neq,RES,JAC,H,Wt,Jstart,Idid,Phi,&
   REAL(DP) :: Y(Neq), Yprime(Neq), Wt(:), Phi(Neq,*), Delta(:), E(:), &
     Wm(:), Alpha(:), Beta(:), Gama(:), Psi(:), Sigma(:)
   !
-  INTEGER i, ier, ires, j, j1, kdiff, km1, knew, kp1, kp2, m, ncf, nef, nsf, nsp1
+  INTEGER :: i, ier, ires, j, j1, kdiff, km1, knew, kp1, kp2, m, ncf, nef, nsf, nsp1
   REAL(DP) :: alpha0, alphas, cjlast, ck, delnrm, enorm, erk, erkm1, erkm2, erkp1, &
     err, est, hnew, oldnrm, pnorm, r, rate, temp1, temp2, terk, terkm1, terkm2, &
     terkp1, xold
-  LOGICAL convgd
+  LOGICAL :: convgd
   !
   INTEGER, PARAMETER :: LMXORD = 3
   INTEGER, PARAMETER :: LNST = 11

@@ -272,6 +272,7 @@ SUBROUTINE SBCG(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MTTVEC,MSOLVE,MTSOLV,Itol,&
   !   921019  Changed 500.0 to 500 to reduce SP/DP differences.  (FNF)
   !   921113  Corrected C***CATEGORY line.  (FNF)
   USE service, ONLY : R1MACH
+  USE blas, ONLY : SAXPY
   INTERFACE
     SUBROUTINE MSOLVE(N,R,Z,Rwork,Iwork)
       IMPORT SP
@@ -295,14 +296,15 @@ SUBROUTINE SBCG(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MTTVEC,MSOLVE,MTSOLV,Itol,&
     END SUBROUTINE
   END INTERFACE
   !     .. Scalar Arguments ..
-  REAL(SP) Err, Tol
-  INTEGER Ierr, Isym, Iter, Itmax, Itol, Iunit, N, Nelt
+  REAL(SP) :: Err, Tol
+  INTEGER :: Ierr, Isym, Iter, Itmax, Itol, Iunit, N, Nelt
   !     .. Array Arguments ..
-  REAL(SP) A(Nelt), B(N), Dz(N), P(N), Pp(N), R(N), Rr(N), Rwork(*), X(N), Z(N), Zz(N)
-  INTEGER Ia(Nelt), Iwork(*), Ja(Nelt)
+  REAL(SP) :: A(Nelt), B(N), Dz(N), P(N), Pp(N), R(N), Rr(N), Rwork(*), X(N), &
+    Z(N), Zz(N)
+  INTEGER :: Ia(Nelt), Iwork(*), Ja(Nelt)
   !     .. Local Scalars ..
-  REAL(SP) ak, akden, bk, bkden, bknum, bnrm, fuzz, solnrm, tolmin
-  INTEGER i, k
+  REAL(SP) :: ak, akden, bk, bkden, bknum, bnrm, fuzz, solnrm, tolmin
+  INTEGER :: i, k
   !     .. Intrinsic Functions ..
   INTRINSIC ABS
   !* FIRST EXECUTABLE STATEMENT  SBCG
@@ -343,14 +345,14 @@ SUBROUTINE SBCG(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MTTVEC,MSOLVE,MTSOLV,Itol,&
       Iter = k
       !
       !         Calculate coefficient BK and direction vectors P and PP.
-      bknum = SDOT(N,Z,1,Rr,1)
+      bknum = DOT_PRODUCT(Z,Rr)
       IF ( ABS(bknum)<=fuzz ) THEN
         Ierr = 6
         RETURN
       END IF
       IF ( Iter==1 ) THEN
-        CALL SCOPY(N,Z,1,P,1)
-        CALL SCOPY(N,Zz,1,Pp,1)
+        P = Z
+        Pp = Zz
       ELSE
         bk = bknum/bkden
         DO i = 1, N
@@ -363,7 +365,7 @@ SUBROUTINE SBCG(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MTTVEC,MSOLVE,MTSOLV,Itol,&
       !         Calculate coefficient AK, new iterate X, new residuals R and
       !         RR, and new pseudo-residuals Z and ZZ.
       CALL MATVEC(N,P,Z,Nelt,Ia,Ja,A,Isym)
-      akden = SDOT(N,Pp,1,Z,1)
+      akden = DOT_PRODUCT(Pp,Z)
       ak = bknum/akden
       IF ( ABS(akden)<=fuzz ) THEN
         Ierr = 6

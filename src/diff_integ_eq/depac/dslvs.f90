@@ -29,11 +29,11 @@ SUBROUTINE DSLVS(Wm,Iwm,X)
   !   910722  Updated AUTHOR section.  (ALS)
   !   920422  Changed DIMENSION statement.  (WRB)
   USE DDEBD1, ONLY : el0_com, h_com, ier_com, miter_com, n_com
-  USE linear, ONLY : DGBSL, DGESL
+  USE lapack, ONLY : DGBTRS, DGETRS
   !
   INTEGER :: Iwm(:)
   REAL(DP) :: Wm(:), X(n_com)
-  INTEGER :: i, meband, ml, mu
+  INTEGER :: i, meband, ml, mu, info
   REAL(DP) :: di, hl0, phl0, r
   !     ------------------------------------------------------------------
   !      THIS ROUTINE MANAGES THE SOLUTION OF THE LINEAR SYSTEM ARISING
@@ -90,10 +90,11 @@ SUBROUTINE DSLVS(Wm,Iwm,X)
       ml = Iwm(1)
       mu = Iwm(2)
       meband = 2*ml + mu + 1
-      CALL DGBSL(Wm(3:meband*n_com+2),meband,n_com,ml,mu,Iwm(21:n_com+20),X,0)
+      CALL DGBTRS('N',n_com,ml,mu,1,Wm(3:meband*n_com+2),meband,Iwm(21:n_com+20),&
+        X,n_com,info)
     CASE DEFAULT
       !     ......EXIT
-      CALL DGESL(Wm(3:n_com**2+2),n_com,n_com,Iwm(21:n_com+20),X,0)
+      CALL DGETRS('N',n_com,1,Wm(3:n_com**2+2),n_com,Iwm(21:n_com+20),X,n_com,info)
   END SELECT
   RETURN
   !     ...EXIT

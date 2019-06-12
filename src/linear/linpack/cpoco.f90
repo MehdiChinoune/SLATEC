@@ -84,14 +84,15 @@ SUBROUTINE CPOCO(A,Lda,N,Rcond,Z,Info)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
+  USE blas, ONLY : CAXPY, SCABS1, SCASUM
 
-  INTEGER Lda, N, Info
-  COMPLEX(SP) A(Lda,*), Z(*)
-  REAL(SP) Rcond
+  INTEGER :: Lda, N, Info
+  COMPLEX(SP) :: A(Lda,N), Z(N)
+  REAL(SP) :: Rcond
   !
-  COMPLEX(SP) ek, t, wk, wkm
-  REAL(SP) anorm, s, sm, ynorm
-  INTEGER i, j, jm1, k, kb, kp1
+  COMPLEX(SP) :: ek, t, wk, wkm
+  REAL(SP) :: anorm, s, sm, ynorm
+  INTEGER :: i, j, jm1, k, kb, kp1
   !
   !     FIND NORM OF A USING ONLY UPPER HALF
   !
@@ -101,7 +102,7 @@ SUBROUTINE CPOCO(A,Lda,N,Rcond,Z,Info)
     jm1 = j - 1
     IF ( jm1>=1 ) THEN
       DO i = 1, jm1
-        Z(i) = CMPLX(REAL(Z(i))+CABS1(A(i,j)),0.0E0)
+        Z(i) = CMPLX(REAL(Z(i))+SCABS1(A(i,j)),0.0E0)
       END DO
     END IF
   END DO
@@ -128,24 +129,24 @@ SUBROUTINE CPOCO(A,Lda,N,Rcond,Z,Info)
       Z(j) = (0.0E0,0.0E0)
     END DO
     DO k = 1, N
-      IF ( CABS1(Z(k))/=0.0E0 ) ek = CSIGN1(ek,-Z(k))
-      IF ( CABS1(ek-Z(k))>REAL(A(k,k)) ) THEN
-        s = REAL(A(k,k))/CABS1(ek-Z(k))
-        CALL CSSCAL(N,s,Z,1)
+      IF ( SCABS1(Z(k))/=0.0E0 ) ek = CSIGN1(ek,-Z(k))
+      IF ( SCABS1(ek-Z(k))>REAL(A(k,k)) ) THEN
+        s = REAL(A(k,k))/SCABS1(ek-Z(k))
+        Z = s*Z
         ek = CMPLX(s,0.0E0)*ek
       END IF
       wk = ek - Z(k)
       wkm = -ek - Z(k)
-      s = CABS1(wk)
-      sm = CABS1(wkm)
+      s = SCABS1(wk)
+      sm = SCABS1(wkm)
       wk = wk/A(k,k)
       wkm = wkm/A(k,k)
       kp1 = k + 1
       IF ( kp1<=N ) THEN
         DO j = kp1, N
-          sm = sm + CABS1(Z(j)+wkm*CONJG(A(k,j)))
+          sm = sm + SCABS1(Z(j)+wkm*CONJG(A(k,j)))
           Z(j) = Z(j) + wk*CONJG(A(k,j))
-          s = s + CABS1(Z(j))
+          s = s + SCABS1(Z(j))
         END DO
         IF ( s<sm ) THEN
           t = wkm - wk
@@ -158,47 +159,47 @@ SUBROUTINE CPOCO(A,Lda,N,Rcond,Z,Info)
       Z(k) = wk
     END DO
     s = 1.0E0/SCASUM(N,Z,1)
-    CALL CSSCAL(N,s,Z,1)
+    Z = s*Z
     !
     !        SOLVE R*Y = W
     !
     DO kb = 1, N
       k = N + 1 - kb
-      IF ( CABS1(Z(k))>REAL(A(k,k)) ) THEN
-        s = REAL(A(k,k))/CABS1(Z(k))
-        CALL CSSCAL(N,s,Z,1)
+      IF ( SCABS1(Z(k))>REAL(A(k,k)) ) THEN
+        s = REAL(A(k,k))/SCABS1(Z(k))
+        Z = s*Z
       END IF
       Z(k) = Z(k)/A(k,k)
       t = -Z(k)
       CALL CAXPY(k-1,t,A(1,k),1,Z(1),1)
     END DO
     s = 1.0E0/SCASUM(N,Z,1)
-    CALL CSSCAL(N,s,Z,1)
+    Z = s*Z
     !
     ynorm = 1.0E0
     !
     !        SOLVE CTRANS(R)*V = Y
     !
     DO k = 1, N
-      Z(k) = Z(k) - CDOTC(k-1,A(1,k),1,Z(1),1)
-      IF ( CABS1(Z(k))>REAL(A(k,k)) ) THEN
-        s = REAL(A(k,k))/CABS1(Z(k))
-        CALL CSSCAL(N,s,Z,1)
+      Z(k) = Z(k) - DOT_PRODUCT(A(1:k-1,k),Z(1:k-1))
+      IF ( SCABS1(Z(k))>REAL(A(k,k)) ) THEN
+        s = REAL(A(k,k))/SCABS1(Z(k))
+        Z = s*Z
         ynorm = s*ynorm
       END IF
       Z(k) = Z(k)/A(k,k)
     END DO
     s = 1.0E0/SCASUM(N,Z,1)
-    CALL CSSCAL(N,s,Z,1)
+    Z = s*Z
     ynorm = s*ynorm
     !
     !        SOLVE R*Z = V
     !
     DO kb = 1, N
       k = N + 1 - kb
-      IF ( CABS1(Z(k))>REAL(A(k,k)) ) THEN
-        s = REAL(A(k,k))/CABS1(Z(k))
-        CALL CSSCAL(N,s,Z,1)
+      IF ( SCABS1(Z(k))>REAL(A(k,k)) ) THEN
+        s = REAL(A(k,k))/SCABS1(Z(k))
+        Z = s*Z
         ynorm = s*ynorm
       END IF
       Z(k) = Z(k)/A(k,k)
@@ -207,7 +208,7 @@ SUBROUTINE CPOCO(A,Lda,N,Rcond,Z,Info)
     END DO
     !        MAKE ZNORM = 1.0
     s = 1.0E0/SCASUM(N,Z,1)
-    CALL CSSCAL(N,s,Z,1)
+    Z = s*Z
     ynorm = s*ynorm
     !
     IF ( anorm/=0.0E0 ) Rcond = ynorm/anorm

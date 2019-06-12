@@ -206,39 +206,39 @@ INTEGER FUNCTION ISSCGS(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,&
     END SUBROUTINE
   END INTERFACE
   !     .. Scalar Arguments ..
-  REAL(SP) Ak, Bk, Bnrm, Err, Solnrm, Tol
-  INTEGER Ierr, Isym, Iter, Itol, Iunit, N, Nelt
+  REAL(SP) :: Ak, Bk, Bnrm, Err, Solnrm, Tol
+  INTEGER :: Ierr, Isym, Iter, Itol, Iunit, N, Nelt
   !     .. Array Arguments ..
-  REAL(SP) A(Nelt), B(N), R(N), Rwork(*), V2(N), X(N)
-  INTEGER Ia(Nelt), Iwork(*), Ja(Nelt)
+  REAL(SP) :: A(Nelt), B(N), R(N), Rwork(*), V2(N), X(N)
+  INTEGER :: Ia(Nelt), Iwork(*), Ja(Nelt)
   !     .. Local Scalars ..
-  INTEGER i
+  INTEGER :: i
   !* FIRST EXECUTABLE STATEMENT  ISSCGS
   ISSCGS = 0
   !
   IF ( Itol==1 ) THEN
     !         err = ||Residual||/||RightHandSide|| (2-Norms).
-    IF ( Iter==0 ) Bnrm = SNRM2(N,B,1)
+    IF ( Iter==0 ) Bnrm = NORM2(B)
     CALL MATVEC(N,X,V2,Nelt,Ia,Ja,A,Isym)
     DO i = 1, N
       V2(i) = V2(i) - B(i)
     END DO
-    Err = SNRM2(N,V2,1)/Bnrm
+    Err = NORM2(V2)/Bnrm
   ELSEIF ( Itol==2 ) THEN
     !                  -1              -1
     !         err = ||M  Residual||/||M  RightHandSide|| (2-Norms).
     IF ( Iter==0 ) THEN
       CALL MSOLVE(N,B,V2,Rwork,Iwork)
-      Bnrm = SNRM2(N,V2,1)
+      Bnrm = NORM2(V2)
     END IF
-    Err = SNRM2(N,R,1)/Bnrm
+    Err = NORM2(R)/Bnrm
   ELSEIF ( Itol==11 ) THEN
     !         err = ||x-TrueSolution||/||TrueSolution|| (2-Norms).
-    IF ( Iter==0 ) Solnrm = SNRM2(N,soln_com,1)
+    IF ( Iter==0 ) Solnrm = NORM2(soln_com(1:N))
     DO i = 1, N
       V2(i) = X(i) - soln_com(i)
     END DO
-    Err = SNRM2(N,V2,1)/Solnrm
+    Err = NORM2(V2)/Solnrm
   ELSE
     !
     !         If we get here ITOL is not one of the acceptable values.

@@ -409,13 +409,13 @@ SUBROUTINE DGMRES(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,&
   END INTERFACE
   !     .. Scalar Arguments ..
   REAL(DP) :: Err, Tol
-  INTEGER Ierr, Isym, Iter, Itol, Iunit, Ligw, Lrgw, N, Nelt
+  INTEGER :: Ierr, Isym, Iter, Itol, Iunit, Ligw, Lrgw, N, Nelt
   !     .. Array Arguments ..
   REAL(DP) :: A(Nelt), B(N), Rgwk(Lrgw), Rwork(*), Sb(N), Sx(N), X(N)
-  INTEGER Ia(Nelt), Igwk(Ligw), Iwork(*), Ja(Nelt)
+  INTEGER :: Ia(Nelt), Igwk(Ligw), Iwork(*), Ja(Nelt)
   !     .. Local Scalars ..
   REAL(DP) :: bnrm, rhol, summ
-  INTEGER i, iflag, jpre, jscal, kmp, ldl, lgmr, lhes, lq, lr, &
+  INTEGER :: i, iflag, jpre, jscal, kmp, ldl, lgmr, lhes, lq, lr, &
     lv, lw, lxl, lz, lzm1, maxl, maxlp1, nms, nmsl, nrmax, nrsts
   !     .. Intrinsic Functions ..
   INTRINSIC SQRT
@@ -476,7 +476,7 @@ SUBROUTINE DGMRES(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,&
             CALL MSOLVE(N,B,Rgwk(lr),Rwork,Iwork)
             nms = nms + 1
           ELSE
-            CALL DCOPY(N,B,1,Rgwk(lr),1)
+            Rgwk(lr:lr+N-1) = B
           END IF
           IF ( jscal==2.OR.jscal==3 ) THEN
             summ = 0
@@ -485,7 +485,7 @@ SUBROUTINE DGMRES(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,&
             END DO
             bnrm = SQRT(summ)
           ELSE
-            bnrm = DNRM2(N,Rgwk(lr),1)
+            bnrm = NORM2(Rgwk(lr:lr+N-1))
           END IF
           !   ------------------------------------------------------------------
           !         Calculate initial residual.
@@ -501,7 +501,7 @@ SUBROUTINE DGMRES(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,&
           DO WHILE ( nrsts<=nrmax )
             !         Copy the current residual to a different location in the RGWK
             !         array.
-            IF ( nrsts>0 ) CALL DCOPY(N,Rgwk(ldl),1,Rgwk(lr),1)
+            IF ( nrsts>0 ) Rgwk(lr:lr+N-1) = Rgwk(ldl:ldl+N-1)
             !   ------------------------------------------------------------------
             !         Use the DPIGMR algorithm to solve the linear system A*Z = R.
             !   ------------------------------------------------------------------

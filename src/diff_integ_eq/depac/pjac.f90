@@ -30,7 +30,7 @@ SUBROUTINE PJAC(Neq,Y,Yh,Nyh,Ewt,Ftem,Savf,Wm,Iwm,F,JAC)
   !   920422  Changed DIMENSION statement.  (WRB)
   USE DEBDF1, ONLY : el0_com, h_com, tn_com, uround_com, ier_com, miter_com, &
     n_com, nfe_com, nje_com
-  USE linear, ONLY : SGBFA, SGEFA
+  USE linpack, ONLY : SGBFA, SGEFA
   INTERFACE
     SUBROUTINE F(X,U,Uprime)
       IMPORT SP

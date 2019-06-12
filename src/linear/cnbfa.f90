@@ -120,11 +120,12 @@ SUBROUTINE CNBFA(Abe,Lda,N,Ml,Mu,Ipvt,Info)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
-  INTEGER Lda, N, Ml, Mu, Ipvt(N), Info
-  COMPLEX(SP) Abe(Lda,2*Ml+Mu+1)
+  USE blas, ONLY : SCABS1, CSWAP, CAXPY, ICAMAX
+  INTEGER :: Lda, N, Ml, Mu, Ipvt(N), Info
+  COMPLEX(SP) :: Abe(Lda,2*Ml+Mu+1)
   !
-  INTEGER ml1, mb, m, n1, ldb, i, j, k, l, lm, lm1, lm2, mp
-  COMPLEX(SP) t
+  INTEGER :: ml1, mb, m, n1, ldb, i, j, k, l, lm, lm1, lm2, mp
+  COMPLEX(SP) :: t
   !
   !* FIRST EXECUTABLE STATEMENT  CNBFA
   ml1 = Ml + 1
@@ -138,11 +139,7 @@ SUBROUTINE CNBFA(Abe,Lda,N,Ml,Mu,Ipvt,Info)
   !
   IF ( N>1 ) THEN
     IF ( Ml>0 ) THEN
-      DO j = 1, Ml
-        DO i = 1, N
-          Abe(i,m+j) = (0.0E0,0.0E0)
-        END DO
-      END DO
+      Abe(1:N,m+1:m+Ml) = CMPLX( 0._SP ,0._SP )
     END IF
     !
     !     GAUSSIAN ELIMINATION WITH PARTIAL ELIMINATION
@@ -164,14 +161,16 @@ SUBROUTINE CNBFA(Abe,Lda,N,Ml,Mu,Ipvt,Info)
       !
       !     SKIP COLUMN REDUCTION IF PIVOT IS ZERO
       !
-      IF ( CABS1(Abe(k,ml1))==0.0E0 ) THEN
+      IF ( SCABS1(Abe(k,ml1))==0.0E0 ) THEN
         Info = k
       ELSE
         !
         !     COMPUTE MULTIPLIERS
         !
         t = -(1.0E0,0.0E0)/Abe(k,ml1)
-        CALL CSCAL(lm,t,Abe(lm+k,lm2),ldb)
+        DO i = 0, lm-1
+          Abe(lm+k-i,lm2+i) = t*Abe(lm+k-i,lm2+i)
+        END DO
         !
         !     ROW ELIMINATION WITH COLUMN INDEXING
         !
@@ -182,5 +181,5 @@ SUBROUTINE CNBFA(Abe,Lda,N,Ml,Mu,Ipvt,Info)
     END DO
   END IF
   Ipvt(N) = N
-  IF ( CABS1(Abe(N,ml1))==0.0E0 ) Info = N
+  IF ( SCABS1(Abe(N,ml1))==0.0E0 ) Info = N
 END SUBROUTINE CNBFA

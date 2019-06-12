@@ -391,7 +391,8 @@ SUBROUTINE DLSEI(W,Mdw,Me,Ma,Mg,N,Prgopt,X,Rnorme,Rnorml,Mode,Ws,Ip)
   !   900604  DP version created from SP version.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   USE service, ONLY : XERMSG, D1MACH
-  USE linear, ONLY : DAXPY, DH12, DSWAP
+  USE blas, ONLY : DAXPY, DSWAP
+  USE linear, ONLY : DH12
   INTEGER :: Ma, Mdw, Me, Mg, Mode, N, Ip(3)
   REAL(DP) :: Rnorme, Rnorml, Prgopt(:), W(Mdw,N+1), Ws(*), X(N)
   !

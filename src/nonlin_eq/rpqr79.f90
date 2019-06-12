@@ -56,12 +56,13 @@ SUBROUTINE RPQR79(Ndeg,Coeff,Root,Ierr,Work)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   911010  Code reworked and simplified.  (RWC and WRB)
   USE service, ONLY : XERMSG
-  USE linear, ONLY : HQR
+  USE lapack, ONLY : SHSEQR
   INTEGER :: Ndeg, Ierr
   REAL(SP) :: Coeff(Ndeg+1), Work(Ndeg*(Ndeg+2))
   COMPLEX(SP) :: Root(Ndeg)
-  INTEGER :: km1, kwend, k, kh, kwr, kwi, kcol
+  INTEGER :: km1, kwend, k, kh, kwr, kwi
   REAL(SP) :: scalee
+  REAL(SP) :: z(1,Ndeg), h(Ndeg,Ndeg)
   !* FIRST EXECUTABLE STATEMENT  RPQR79
   Ierr = 0
   IF ( ABS(Coeff(1))==0.0 ) THEN
@@ -87,17 +88,14 @@ SUBROUTINE RPQR79(Ndeg,Coeff,Root,Ierr,Work)
   kwi = kwr + Ndeg
   kwend = kwi + Ndeg - 1
   !
-  DO k = 1, kwend
-    Work(k) = 0.0E0
-  END DO
-  !
+  h = 0._SP
   DO k = 1, Ndeg
-    kcol = (k-1)*Ndeg + 1
-    Work(kcol) = -Coeff(k+1)*scalee
-    IF ( k/=Ndeg ) Work(kcol+k) = 1.0E0
+    h(1,k) = -Coeff(k+1)*scalee
+    IF( k==Ndeg ) Cycle
+    h(k+1,k) = 1._SP
   END DO
   !
-  CALL HQR(Ndeg,Ndeg,1,Ndeg,Work(kh),Work(kwr),Work(kwi),Ierr)
+  CALL SHSEQR('E','N',Ndeg,1,Ndeg,h,Ndeg,Work(kwr),Work(kwi),z,1,Work,Ndeg,Ierr)
   !
   IF ( Ierr/=0 ) THEN
     Ierr = 1

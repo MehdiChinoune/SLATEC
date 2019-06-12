@@ -273,6 +273,7 @@ SUBROUTINE DBCG(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MTTVEC,MSOLVE,MTSOLV,Itol,&
   !   921019  Changed 500.0 to 500 to reduce SP/DP differences.  (FNF)
   !   921113  Corrected C***CATEGORY line.  (FNF)
   USE service, ONLY : D1MACH
+  USE blas, ONLY : DAXPY
   INTERFACE
     SUBROUTINE MSOLVE(N,R,Z,Rwork,Iwork)
       IMPORT DP
@@ -297,14 +298,14 @@ SUBROUTINE DBCG(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MTTVEC,MSOLVE,MTSOLV,Itol,&
   END INTERFACE
   !     .. Scalar Arguments ..
   REAL(DP) :: Err, Tol
-  INTEGER Ierr, Isym, Iter, Itmax, Itol, Iunit, N, Nelt
+  INTEGER :: Ierr, Isym, Iter, Itmax, Itol, Iunit, N, Nelt
   !     .. Array Arguments ..
   REAL(DP) :: A(Nelt), B(N), Dz(N), P(N), Pp(N), R(N), Rr(N), &
     Rwork(*), X(N), Z(N), Zz(N)
-  INTEGER Ia(Nelt), Iwork(*), Ja(Nelt)
+  INTEGER :: Ia(Nelt), Iwork(*), Ja(Nelt)
   !     .. Local Scalars ..
   REAL(DP) :: ak, akden, bk, bkden, bknum, bnrm, fuzz, solnrm, tolmin
-  INTEGER i, k
+  INTEGER :: i, k
   !     .. Intrinsic Functions ..
   INTRINSIC ABS
   !* FIRST EXECUTABLE STATEMENT  DBCG
@@ -345,14 +346,14 @@ SUBROUTINE DBCG(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MTTVEC,MSOLVE,MTSOLV,Itol,&
       Iter = k
       !
       !         Calculate coefficient BK and direction vectors P and PP.
-      bknum = DDOT(N,Z,1,Rr,1)
+      bknum = DOT_PRODUCT(Z,Rr)
       IF ( ABS(bknum)<=fuzz ) THEN
         Ierr = 6
         RETURN
       END IF
       IF ( Iter==1 ) THEN
-        CALL DCOPY(N,Z,1,P,1)
-        CALL DCOPY(N,Zz,1,Pp,1)
+        P = Z
+        Pp = Zz
       ELSE
         bk = bknum/bkden
         DO i = 1, N
@@ -365,7 +366,7 @@ SUBROUTINE DBCG(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MTTVEC,MSOLVE,MTSOLV,Itol,&
       !         Calculate coefficient AK, new iterate X, new residuals R and
       !         RR, and new pseudo-residuals Z and ZZ.
       CALL MATVEC(N,P,Z,Nelt,Ia,Ja,A,Isym)
-      akden = DDOT(N,Pp,1,Z,1)
+      akden = DOT_PRODUCT(Pp,Z)
       ak = bknum/akden
       IF ( ABS(akden)<=fuzz ) THEN
         Ierr = 6

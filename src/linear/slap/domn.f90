@@ -252,6 +252,7 @@ SUBROUTINE DOMN(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Nsave,Itol,Tol,&
   !   921113  Corrected C***CATEGORY line.  (FNF)
   !   930326  Removed unused variable.  (FNF)
   USE service, ONLY : D1MACH
+  USE blas, ONLY : DAXPY
   INTERFACE
     SUBROUTINE MSOLVE(N,R,Z,Rwork,Iwork)
       IMPORT DP
@@ -266,14 +267,14 @@ SUBROUTINE DOMN(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Nsave,Itol,Tol,&
   END INTERFACE
   !     .. Scalar Arguments ..
   REAL(DP) :: Err, Tol
-  INTEGER Ierr, Isym, Iter, Itmax, Itol, Iunit, N, Nelt, Nsave
+  INTEGER :: Ierr, Isym, Iter, Itmax, Itol, Iunit, N, Nelt, Nsave
   !     .. Array Arguments ..
   REAL(DP) :: A(Nelt), Ap(N,0:Nsave), B(N), Csav(Nsave), Dz(N), &
     Emap(N,0:Nsave), P(N,0:Nsave), R(N), Rwork(*), X(N), Z(N)
-  INTEGER Ia(Nelt), Iwork(*), Ja(Nelt)
+  INTEGER :: Ia(Nelt), Iwork(*), Ja(Nelt)
   !     .. Local Scalars ..
   REAL(DP) :: ak, akden, aknum, bkl, bnrm, fuzz, solnrm
-  INTEGER i, ip, ipo, k, l, lmax
+  INTEGER :: i, ip, ipo, k, l, lmax
   !     .. Intrinsic Functions ..
   INTRINSIC ABS, MIN, MOD
   !* FIRST EXECUTABLE STATEMENT  DOMN
@@ -314,17 +315,17 @@ SUBROUTINE DOMN(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Nsave,Itol,Tol,&
       !
       !         calculate direction vector p, a*p, and (m-inv)*a*p,
       !         and save if desired.
-      CALL DCOPY(N,Z,1,P(1,ip),1)
+      P(1:N,ip) = Z
       CALL MATVEC(N,P(1,ip),Ap(1,ip),Nelt,Ia,Ja,A,Isym)
       CALL MSOLVE(N,Ap(1,ip),Emap(1,ip),Rwork,Iwork)
       IF ( Nsave==0 ) THEN
-        akden = DDOT(N,Emap,1,Emap,1)
+        akden = NORM2(Emap(1:N,0))**2
       ELSE
         IF ( Iter>1 ) THEN
           lmax = MIN(Nsave,Iter-1)
           DO l = 1, lmax
             ipo = MOD(ip+(Nsave+1-l),Nsave+1)
-            bkl = DDOT(N,Emap(1,ip),1,Emap(1,ipo),1)
+            bkl = DOT_PRODUCT(Emap(1:N,ip),Emap(1:N,ipo))
             bkl = bkl*Csav(l)
             CALL DAXPY(N,-bkl,P(1,ipo),1,P(1,ip),1)
             CALL DAXPY(N,-bkl,Ap(1,ipo),1,Ap(1,ip),1)
@@ -336,7 +337,7 @@ SUBROUTINE DOMN(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Nsave,Itol,Tol,&
             END DO
           END IF
         END IF
-        akden = DDOT(N,Emap(1,ip),1,Emap(1,ip),1)
+        akden = NORM2(Emap(1:N,ip))**2
         IF ( ABS(akden)<fuzz ) THEN
           Ierr = 6
           RETURN
@@ -346,7 +347,7 @@ SUBROUTINE DOMN(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Nsave,Itol,Tol,&
         !         calculate coefficient ak, new iterate x, new residual r, and
         !         new pseudo-residual z.
       END IF
-      aknum = DDOT(N,Z,1,Emap(1,ip),1)
+      aknum = DOT_PRODUCT(Z,Emap(1:N,ip))
       ak = aknum/akden
       CALL DAXPY(N,ak,P(1,ip),1,X,1)
       CALL DAXPY(N,-ak,Ap(1,ip),1,R,1)

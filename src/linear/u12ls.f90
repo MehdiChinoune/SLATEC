@@ -30,6 +30,7 @@ SUBROUTINE U12LS(A,Mda,M,N,B,Mdb,Nb,Mode,Krank,Rnorm,H,W,Ic,Ir)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
 
+  USE blas, ONLY : SAXPY, SSWAP
   INTEGER :: Krank, M, Mda, Mdb, Mode, N, Nb
   INTEGER :: Ic(N), Ir(M)
   REAL(SP) :: A(Mda,N), B(Mdb,Nb), H(N), Rnorm(Nb), W(4*N)
@@ -59,8 +60,8 @@ SUBROUTINE U12LS(A,Mda,M,N,B,Mdb,Nb,Mode,Krank,Rnorm,H,W,Ic,Ir)
           tt = A(j,j)
           A(j,j) = H(j)
           DO i = 1, Nb
-            bb = -SDOT(M-j+1,A(j,j),1,B(j,i),1)/H(j)
-            CALL SAXPY(M-j+1,bb,A(j,j),1,B(j,i),1)
+            bb = -DOT_PRODUCT(A(j:M,j),B(j:M,i))/H(j)
+            CALL SAXPY(M-j+1,bb,A(j:M,j),1,B(j:M,i),1)
           END DO
           A(j,j) = tt
         END DO
@@ -68,7 +69,7 @@ SUBROUTINE U12LS(A,Mda,M,N,B,Mdb,Nb,Mode,Krank,Rnorm,H,W,Ic,Ir)
         !        FIND NORMS OF RESIDUAL VECTOR(S)..(BEFORE OVERWRITE B)
         !
         DO jb = 1, Nb
-          Rnorm(jb) = SNRM2((M-k),B(kp1,jb),1)
+          Rnorm(jb) = NORM2(B(kp1:M,jb))
         END DO
         !
         !     BACK SOLVE UPPER TRIANGULAR R
@@ -97,9 +98,9 @@ SUBROUTINE U12LS(A,Mda,M,N,B,Mdb,Nb,Mode,Krank,Rnorm,H,W,Ic,Ir)
                 nmk = N - k
                 DO jb = 1, Nb
                   DO i = 1, k
-                    tt = -SDOT(nmk,A(i,kp1),Mda,B(kp1,jb),1)/W(i)
+                    tt = -DOT_PRODUCT(A(i,kp1:N),B(kp1:N,jb))/W(i)
                     tt = tt - B(i,jb)
-                    CALL SAXPY(nmk,tt,A(i,kp1),Mda,B(kp1,jb),1)
+                    CALL SAXPY(nmk,tt,A(i,kp1:N),1,B(kp1:N,jb),1)
                     B(i,jb) = B(i,jb) + tt*W(i)
                   END DO
                 END DO
@@ -136,7 +137,7 @@ SUBROUTINE U12LS(A,Mda,M,N,B,Mdb,Nb,Mode,Krank,Rnorm,H,W,Ic,Ir)
           ELSE
             im1 = i - 1
             DO jb = 1, Nb
-              CALL SAXPY(im1,-B(i,jb),A(1,i),1,B(1,jb),1)
+              CALL SAXPY(im1,-B(i,jb),A(1:im1,i),1,B(1:im1,jb),1)
             END DO
             i = im1
           END IF
@@ -170,7 +171,7 @@ SUBROUTINE U12LS(A,Mda,M,N,B,Mdb,Nb,Mode,Krank,Rnorm,H,W,Ic,Ir)
     END DO
   ELSE
     DO jb = 1, Nb
-      Rnorm(jb) = SNRM2(M,B(1,jb),1)
+      Rnorm(jb) = NORM2(B(1:M,jb))
     END DO
     DO jb = 1, Nb
       DO i = 1, N

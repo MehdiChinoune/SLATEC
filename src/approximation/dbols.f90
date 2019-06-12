@@ -432,14 +432,14 @@ SUBROUTINE DBOLS(W,Mdw,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Iw)
   !     /REAL            / TO /DOUBLE PRECISION/.
   ! ++
   USE service, ONLY : XERMSG
-  USE linear, ONLY : DROT, DROTG
+  USE blas, ONLY : DROT, DROTG
   INTEGER :: Mdw, Mode, Mrows, Ncols
   INTEGER :: Ind(Ncols), Iw(2*Ncols), Iopt(*)
   REAL(DP) :: Rnorm, W(Mdw,Ncols+1), Bl(Ncols), Bu(Ncols), X(2*Ncols), Rw(5*Ncols)
   INTEGER :: i, ibig, inrows, ip, j, jp, lds, lenx, liopt, llb, lliw, llrw, &
     llx, lmdw, lndw, locdim, lp,mnew, nerr
   REAL(DP) :: sc, ss, one, zero
-  LOGICAL checkl
+  LOGICAL :: checkl
   CHARACTER(8) :: xern1, xern2
   CHARACTER(16) :: xern3, xern4
   INTEGER, SAVE :: locacc, lopt, iscale

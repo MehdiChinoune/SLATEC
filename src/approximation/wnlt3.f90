@@ -24,7 +24,7 @@ SUBROUTINE WNLT3(I,Imax,M,Mdw,Ipivot,H,W)
   !* REVISION HISTORY  (YYMMDD)
   !   790701  DATE WRITTEN
   !   890620  Code extracted from WNLT and made a subroutine.  (RWC))
-  USE linear, ONLY : SSWAP
+  USE blas, ONLY : SSWAP
   INTEGER :: I, Imax, M, Mdw, Ipivot(:)
   REAL(SP) :: H(:), W(Mdw,M)
   !

@@ -30,6 +30,7 @@ SUBROUTINE DU12LS(A,Mda,M,N,B,Mdb,Nb,Mode,Krank,Rnorm,H,W,Ic,Ir)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
 
+  USE blas, ONLY : DAXPY, DSWAP
   INTEGER :: Krank, M, Mda, Mdb, Mode, N, Nb
   INTEGER :: Ic(N), Ir(M)
   REAL(DP) :: A(Mda,N), B(Mdb,Nb), H(N), Rnorm(N), W(4*N)
@@ -59,7 +60,7 @@ SUBROUTINE DU12LS(A,Mda,M,N,B,Mdb,Nb,Mode,Krank,Rnorm,H,W,Ic,Ir)
           tt = A(j,j)
           A(j,j) = H(j)
           DO i = 1, Nb
-            bb = -DDOT(M-j+1,A(j,j),1,B(j,i),1)/H(j)
+            bb = -DOT_PRODUCT(A(j:M,j),B(j:M,i))/H(j)
             CALL DAXPY(M-j+1,bb,A(j,j),1,B(j,i),1)
           END DO
           A(j,j) = tt
@@ -68,7 +69,7 @@ SUBROUTINE DU12LS(A,Mda,M,N,B,Mdb,Nb,Mode,Krank,Rnorm,H,W,Ic,Ir)
         !        FIND NORMS OF RESIDUAL VECTOR(S)..(BEFORE OVERWRITE B)
         !
         DO jb = 1, Nb
-          Rnorm(jb) = DNRM2((M-k),B(kp1,jb),1)
+          Rnorm(jb) = NORM2(B(kp1:M,jb))
         END DO
         !
         !     BACK SOLVE UPPER TRIANGULAR R
@@ -97,7 +98,7 @@ SUBROUTINE DU12LS(A,Mda,M,N,B,Mdb,Nb,Mode,Krank,Rnorm,H,W,Ic,Ir)
                 nmk = N - k
                 DO jb = 1, Nb
                   DO i = 1, k
-                    tt = -DDOT(nmk,A(i,kp1),Mda,B(kp1,jb),1)/W(i)
+                    tt = -DOT_PRODUCT(A(i,kp1:N),B(kp1:N,jb))/W(i)
                     tt = tt - B(i,jb)
                     CALL DAXPY(nmk,tt,A(i,kp1),Mda,B(kp1,jb),1)
                     B(i,jb) = B(i,jb) + tt*W(i)
@@ -170,7 +171,7 @@ SUBROUTINE DU12LS(A,Mda,M,N,B,Mdb,Nb,Mode,Krank,Rnorm,H,W,Ic,Ir)
     END DO
   ELSE
     DO jb = 1, Nb
-      Rnorm(jb) = DNRM2(M,B(1,jb),1)
+      Rnorm(jb) = NORM2(B(1:M,jb))
     END DO
     DO jb = 1, Nb
       DO i = 1, N

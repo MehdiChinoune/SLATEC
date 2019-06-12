@@ -120,11 +120,12 @@ SUBROUTINE DNBFA(Abe,Lda,N,Ml,Mu,Ipvt,Info)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
+  USE blas, ONLY : DAXPY, DSWAP
   INTEGER :: Lda, N, Ml, Mu, Ipvt(N), Info
   REAL(DP) :: Abe(Lda,2*Ml+Mu+1)
   !
-  INTEGER ml1, mb, m, n1, ldb, i, j, k, l, lm, lm1, lm2, mp
-  REAL(DP) :: t
+  INTEGER :: ml1, mb, m, n1, ldb, i, j, k, l, lm, lm1, lm2, mp, i2
+  REAL(DP) :: t, v(2*Ml+Mu+1)
   !* FIRST EXECUTABLE STATEMENT  DNBFA
   ml1 = Ml + 1
   mb = Ml + Mu
@@ -137,11 +138,7 @@ SUBROUTINE DNBFA(Abe,Lda,N,Ml,Mu,Ipvt,Info)
   !
   IF ( N>1 ) THEN
     IF ( Ml>0 ) THEN
-      DO j = 1, Ml
-        DO i = 1, N
-          Abe(i,m+j) = 0.0D0
-        END DO
-      END DO
+      Abe(1:N,m+1:m+Ml) = 0.0D0
     END IF
     !
     !     GAUSSIAN ELIMINATION WITH PARTIAL ELIMINATION
@@ -153,7 +150,10 @@ SUBROUTINE DNBFA(Abe,Lda,N,Ml,Mu,Ipvt,Info)
       !
       !     SEARCH FOR PIVOT INDEX
       !
-      l = -IDAMAX(lm1,Abe(lm+k,lm2),ldb) + lm1 + k
+      DO i2 = 0, lm
+        v(i2+1) = Abe(lm+k-i2,lm2+i2)
+      END DO
+      l = -MAXLOC(v(1:lm+1),1) + lm1 + k
       Ipvt(k) = l
       mp = MIN(mb,N-k)
       !
@@ -170,7 +170,9 @@ SUBROUTINE DNBFA(Abe,Lda,N,Ml,Mu,Ipvt,Info)
         !     COMPUTE MULTIPLIERS
         !
         t = -1.0/Abe(k,ml1)
-        CALL DSCAL(lm,t,Abe(lm+k,lm2),ldb)
+        DO i = 0, lm-1
+          Abe(lm+k-i,lm2+i) = t*Abe(lm+k-i,lm2+i)
+        END DO
         !
         !     ROW ELIMINATION WITH COLUMN INDEXING
         !

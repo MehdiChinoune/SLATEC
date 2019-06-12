@@ -267,7 +267,7 @@ CONTAINS
     IF ( Kprint>=3.AND.Nerr==0 ) WRITE (Lun,99002)
     99002 FORMAT (/,2X,'DGEFS Quick Check PASSED'/)
     IF ( Kprint>=2.AND.Nerr/=0 ) WRITE (Lun,99003)
-    99003 FORMAT (/,2X,'SGEFS and SGEIR Quick Check FAILED'/)
+    99003 FORMAT (/,2X,'DGEFS Quick Check FAILED'/)
     RETURN
     99004 FORMAT (/,5X,'D',A,' Normal test PASSED')
     99005 FORMAT (/,5X,'D',A,' Test FAILED, MAX ABS(ERROR) is',E13.5)
@@ -311,7 +311,8 @@ CONTAINS
     !   890618  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   920601  Code reworked and TYPE section added.  (RWC, WRB)
-    USE slatec, ONLY : CGEFS, CGEIR, CABS1
+    USE slatec, ONLY : CGEFS, CGEIR
+    USE blas, ONLY : SCABS1
     !     .. Scalar Arguments ..
     INTEGER Kprint, Lun, Nerr
     !     .. Local Scalars ..
@@ -363,7 +364,7 @@ CONTAINS
       !
       indx = 0
       DO i = 1, n
-        IF ( CABS1(bxex(i)-btemp(i))>.0001 ) indx = indx + 1
+        IF ( SCABS1(bxex(i)-btemp(i))>.0001 ) indx = indx + 1
       END DO
       IF ( indx==0 ) THEN
         IF ( Kprint>=3 ) WRITE (Lun,FMT=99004) list(kprog)

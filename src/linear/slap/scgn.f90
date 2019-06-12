@@ -277,6 +277,7 @@ SUBROUTINE SCGN(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MTTVEC,MSOLVE,Itol,Tol,&
   !   921019  Changed 500.0 to 500 to reduce SP/DP differences.  (FNF)
   !   921113  Corrected C***CATEGORY line.  (FNF)
   USE service, ONLY : R1MACH
+  USE blas, ONLY : SAXPY
   INTERFACE
     SUBROUTINE MSOLVE(N,R,Z,Rwork,Iwork)
       IMPORT SP
@@ -295,15 +296,15 @@ SUBROUTINE SCGN(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MTTVEC,MSOLVE,Itol,Tol,&
     END SUBROUTINE
   END INTERFACE
   !     .. Scalar Arguments ..
-  REAL(SP) Err, Tol
-  INTEGER Ierr, Isym, Iter, Itmax, Itol, Iunit, N, Nelt
+  REAL(SP) :: Err, Tol
+  INTEGER :: Ierr, Isym, Iter, Itmax, Itol, Iunit, N, Nelt
   !     .. Array Arguments ..
-  REAL(SP) A(N), Atdz(N), Atp(N), Atz(N), B(N), Dz(N), P(N), R(N), &
+  REAL(SP) :: A(N), Atdz(N), Atp(N), Atz(N), B(N), Dz(N), P(N), R(N), &
     Rwork(*), X(N), Z(N)
-  INTEGER Ia(Nelt), Iwork(*), Ja(Nelt)
+  INTEGER :: Ia(Nelt), Iwork(*), Ja(Nelt)
   !     .. Local Scalars ..
-  REAL(SP) ak, akden, bk, bkden, bknum, bnrm, solnrm, tolmin
-  INTEGER i, k
+  REAL(SP) :: ak, akden, bk, bkden, bknum, bnrm, solnrm, tolmin
+  INTEGER :: i, k
   !* FIRST EXECUTABLE STATEMENT  SCGN
   !
   !         Check user input.
@@ -339,13 +340,13 @@ SUBROUTINE SCGN(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MTTVEC,MSOLVE,Itol,Tol,&
       Iter = k
       !
       !         Calculate coefficient BK and direction vector P.
-      bknum = SDOT(N,Z,1,R,1)
+      bknum = DOT_PRODUCT(Z,R)
       IF ( bknum<=0.0E0 ) THEN
         Ierr = 6
         RETURN
       END IF
       IF ( Iter==1 ) THEN
-        CALL SCOPY(N,Z,1,P,1)
+        P = Z
       ELSE
         bk = bknum/bkden
         DO i = 1, N
@@ -357,8 +358,8 @@ SUBROUTINE SCGN(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MTTVEC,MSOLVE,Itol,Tol,&
       !         Calculate coefficient AK, new iterate X, new residual R,
       !         and new pseudo-residual ATZ.
       IF ( Iter/=1 ) CALL SAXPY(N,bk,Atp,1,Atz,1)
-      CALL SCOPY(N,Atz,1,Atp,1)
-      akden = SDOT(N,Atp,1,Atp,1)
+      Atp = Atz
+      akden = DOT_PRODUCT(Atp,Atp)
       IF ( akden<=0.0E0 ) THEN
         Ierr = 6
         RETURN

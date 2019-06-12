@@ -79,18 +79,18 @@ SUBROUTINE DRLCAL(N,Kmp,Ll,Maxl,V,Q,Rl,Snormw,Prod,R0nrm)
 
   !     .. Scalar Arguments ..
   REAL(DP) :: Prod, R0nrm, Snormw
-  INTEGER Kmp, Ll, Maxl, N
+  INTEGER :: Kmp, Ll, Maxl, N
   !     .. Array Arguments ..
-  REAL(DP) :: Q(*), Rl(N), V(N,*)
+  REAL(DP) :: Q(2*Maxl), Rl(N), V(N,Ll+1)
   !     .. Local Scalars ..
   REAL(DP) :: c, s, tem
-  INTEGER i, i2, ip1, k, llm1, llp1
+  INTEGER :: i, i2, ip1, k, llm1, llp1
   !* FIRST EXECUTABLE STATEMENT  DRLCAL
   IF ( Kmp==Maxl ) THEN
     !
     !         calculate RL.  Start by copying V(*,1) into RL.
     !
-    CALL DCOPY(N,V(1,1),1,Rl,1)
+    Rl(1:N) = V(1:N,1)
     llm1 = Ll - 1
     DO i = 1, llm1
       ip1 = i + 1
@@ -113,6 +113,6 @@ SUBROUTINE DRLCAL(N,Kmp,Ll,Maxl,V,Q,Rl,Snormw,Prod,R0nrm)
   !         Scale RL by R0NRM*PROD to obtain the residual RL.
   !
   tem = R0nrm*Prod
-  CALL DSCAL(N,tem,Rl,1)
+  Rl = tem*Rl
   !------------- LAST LINE OF DRLCAL FOLLOWS ----------------------------
 END SUBROUTINE DRLCAL

@@ -60,7 +60,8 @@ SUBROUTINE LSI(W,Mdw,Ma,Mg,N,Prgopt,X,Rnorm,Mode,Ws,Ip)
   !   900328  Added TYPE section.  (WRB)
   !   920422  Changed CALL to HFTI to include variable MA.  (WRB)
   USE service, ONLY : R1MACH
-  USE linear, ONLY : H12, HFTI, SAXPY, SSWAP
+  USE blas, ONLY : SAXPY, SSWAP
+  USE linear, ONLY : H12, HFTI
   INTEGER :: Ma, Mdw, Mg, Mode, N, Ip(Mg+2*N+1)
   REAL(SP) :: Rnorm, Prgopt(:), W(Mdw,N+1), Ws(*), X(N)
   !

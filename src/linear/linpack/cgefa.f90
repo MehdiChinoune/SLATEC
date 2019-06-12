@@ -66,12 +66,13 @@ SUBROUTINE CGEFA(A,Lda,N,Ipvt,Info)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
+  USE blas, ONLY : CAXPY, SCABS1, ICAMAX
 
-  INTEGER Lda, N, Ipvt(*), Info
-  COMPLEX(SP) A(Lda,*)
+  INTEGER :: Lda, N, Ipvt(N), Info
+  COMPLEX(SP) :: A(Lda,N)
   !
-  COMPLEX(SP) t
-  INTEGER j, k, kp1, l, nm1
+  COMPLEX(SP) :: t
+  INTEGER :: j, k, kp1, l, nm1
   !
   !     GAUSSIAN ELIMINATION WITH PARTIAL PIVOTING
   !
@@ -89,7 +90,7 @@ SUBROUTINE CGEFA(A,Lda,N,Ipvt,Info)
       !
       !        ZERO PIVOT IMPLIES THIS COLUMN ALREADY TRIANGULARIZED
       !
-      IF ( CABS1(A(l,k))==0.0E0 ) THEN
+      IF ( SCABS1(A(l,k))==0.0E0 ) THEN
         Info = k
       ELSE
         !
@@ -104,7 +105,7 @@ SUBROUTINE CGEFA(A,Lda,N,Ipvt,Info)
         !           COMPUTE MULTIPLIERS
         !
         t = -(1.0E0,0.0E0)/A(k,k)
-        CALL CSCAL(N-k,t,A(k+1,k),1)
+        A(k+1:N,k) = t*A(k+1:N,k)
         !
         !           ROW ELIMINATION WITH COLUMN INDEXING
         !
@@ -120,5 +121,5 @@ SUBROUTINE CGEFA(A,Lda,N,Ipvt,Info)
     END DO
   END IF
   Ipvt(N) = N
-  IF ( CABS1(A(N,N))==0.0E0 ) Info = N
+  IF ( SCABS1(A(N,N))==0.0E0 ) Info = N
 END SUBROUTINE CGEFA

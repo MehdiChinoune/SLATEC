@@ -5,28 +5,30 @@ trigger:
 pool:
   vmImage: 'Ubuntu-16.04'
 
+container: alpine:edge
+
 steps:
 - script: |
-    sudo apt update
-    sudo apt -y install gfortran-9
-  displayName: 'Installing gfortran-9'
+    apk update
+    apk add openblas-dev cmake
+  displayName: 'Installing required packages'
 - script: |
     mkdir build && cd build
-    cmake .. -DCMAKE_Fortran_COMPILER=gfortran-9
+    cmake .. -DCMAKE_Fortran_COMPILER=gfortran
     make -j
-  displayName: 'Building gfortran-9-Release'
+  displayName: 'Building gfortran-Release'
 - script: |
     ls
     cd build
     make test
-  displayName: 'Testing gfortran-9-Release'
+  displayName: 'Testing gfortran-Release'
 - script: |
     cd build
     rm -r *
-    cmake .. -DCMAKE_Fortran_COMPILER=gfortran-9 -DCMAKE_BUILD_TYPE=Debug
+    cmake .. -DCMAKE_Fortran_COMPILER=gfortran -DCMAKE_BUILD_TYPE=Debug
     make -j
-  displayName: 'Building gfortran-9-Debug'
+  displayName: 'Building gfortran-Debug'
 - script: |
     cd build
     make test
-  displayName: 'Testing gfortran-9-Debug'
+  displayName: 'Testing gfortran-Debug'

@@ -66,12 +66,13 @@ SUBROUTINE SGEFA(A,Lda,N,Ipvt,Info)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
+  USE blas, ONLY : SAXPY
 
-  INTEGER Lda, N, Ipvt(*), Info
-  REAL(SP) A(Lda,*)
+  INTEGER :: Lda, N, Ipvt(N), Info
+  REAL(SP) :: A(Lda,N)
   !
-  REAL(SP) t
-  INTEGER j, k, kp1, l, nm1
+  REAL(SP) :: t
+  INTEGER :: j, k, kp1, l, nm1
   !
   !     GAUSSIAN ELIMINATION WITH PARTIAL PIVOTING
   !
@@ -84,7 +85,7 @@ SUBROUTINE SGEFA(A,Lda,N,Ipvt,Info)
       !
       !        FIND L = PIVOT INDEX
       !
-      l = ISAMAX(N-k+1,A(k,k),1) + k - 1
+      l = MAXLOC( ABS(A(k:N,k)),1) + k - 1
       Ipvt(k) = l
       !
       !        ZERO PIVOT IMPLIES THIS COLUMN ALREADY TRIANGULARIZED
@@ -104,7 +105,7 @@ SUBROUTINE SGEFA(A,Lda,N,Ipvt,Info)
         !           COMPUTE MULTIPLIERS
         !
         t = -1.0E0/A(k,k)
-        CALL SSCAL(N-k,t,A(k+1,k),1)
+        A(k+1:N,k) = t*A(k+1:N,k)
         !
         !           ROW ELIMINATION WITH COLUMN INDEXING
         !
@@ -114,7 +115,7 @@ SUBROUTINE SGEFA(A,Lda,N,Ipvt,Info)
             A(l,j) = A(k,j)
             A(k,j) = t
           END IF
-          CALL SAXPY(N-k,t,A(k+1,k),1,A(k+1,j),1)
+          CALL SAXPY(N-k,t,A(k+1:N,k),1,A(k+1:N,j),1)
         END DO
       END IF
     END DO

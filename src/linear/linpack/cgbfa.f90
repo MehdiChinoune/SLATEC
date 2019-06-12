@@ -102,12 +102,13 @@ SUBROUTINE CGBFA(Abd,Lda,N,Ml,Mu,Ipvt,Info)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
+  USE blas, ONLY : CAXPY, SCABS1, ICAMAX
 
-  INTEGER Lda, N, Ml, Mu, Ipvt(*), Info
-  COMPLEX(SP) Abd(Lda,*)
+  INTEGER :: Lda, N, Ml, Mu, Ipvt(N), Info
+  COMPLEX(SP) :: Abd(Lda,N)
   !
-  COMPLEX(SP) t
-  INTEGER i, i0, j, ju, jz, j0, j1, k, kp1, l, lm, m, mm, nm1
+  COMPLEX(SP) :: t
+  INTEGER :: i, i0, j, ju, jz, j0, j1, k, kp1, l, lm, m, mm, nm1
   !
   !* FIRST EXECUTABLE STATEMENT  CGBFA
   m = Ml + Mu + 1
@@ -154,7 +155,7 @@ SUBROUTINE CGBFA(Abd,Lda,N,Ml,Mu,Ipvt,Info)
       !
       !        ZERO PIVOT IMPLIES THIS COLUMN ALREADY TRIANGULARIZED
       !
-      IF ( CABS1(Abd(l,k))==0.0E0 ) THEN
+      IF ( SCABS1(Abd(l,k))==0.0E0 ) THEN
         Info = k
       ELSE
         !
@@ -169,7 +170,7 @@ SUBROUTINE CGBFA(Abd,Lda,N,Ml,Mu,Ipvt,Info)
         !           COMPUTE MULTIPLIERS
         !
         t = -(1.0E0,0.0E0)/Abd(m,k)
-        CALL CSCAL(lm,t,Abd(m+1,k),1)
+        Abd(m+1:m+ml,k) = t*Abd(m+1:m+ml,k)
         !
         !           ROW ELIMINATION WITH COLUMN INDEXING
         !
@@ -191,5 +192,5 @@ SUBROUTINE CGBFA(Abd,Lda,N,Ml,Mu,Ipvt,Info)
     END DO
   END IF
   Ipvt(N) = N
-  IF ( CABS1(Abd(m,N))==0.0E0 ) Info = N
+  IF ( SCABS1(Abd(m,N))==0.0E0 ) Info = N
 END SUBROUTINE CGBFA

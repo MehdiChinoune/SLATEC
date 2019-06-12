@@ -114,6 +114,7 @@ SUBROUTINE SGEIR(A,Lda,N,V,Itask,Ind,Work,Iwork)
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   USE service, ONLY : R1MACH, XERMSG
+  USE linpack, ONLY : SGEFA, SGESL
   !
   INTEGER :: Lda, N, Itask, Ind, Iwork(N)
   REAL(SP) :: A(Lda,N), V(N), Work(N,N+1)
@@ -125,8 +126,7 @@ SUBROUTINE SGEIR(A,Lda,N,V,Itask,Ind,Work,Iwork)
     Ind = -1
     WRITE (xern1,'(I8)') Lda
     WRITE (xern2,'(I8)') N
-    CALL XERMSG('SGEIR','LDA = '//xern1//' IS LESS THAN N = '//&
-      xern2,-1,1)
+    CALL XERMSG('SGEIR','LDA = '//xern1//' IS LESS THAN N = '//xern2,-1,1)
     RETURN
   END IF
   !
@@ -148,9 +148,7 @@ SUBROUTINE SGEIR(A,Lda,N,V,Itask,Ind,Work,Iwork)
     !
     !        MOVE MATRIX A TO WORK
     !
-    DO j = 1, N
-      CALL SCOPY(N,A(1,j),1,Work(1,j),1)
-    END DO
+    Work(1:N,1:N) = A(1:N,1:N)
     !
     !        FACTOR MATRIX A INTO LU
     !
@@ -168,12 +166,12 @@ SUBROUTINE SGEIR(A,Lda,N,V,Itask,Ind,Work,Iwork)
   !     SOLVE WHEN FACTORING COMPLETE
   !     MOVE VECTOR B TO WORK
   !
-  CALL SCOPY(N,V(1),1,Work(1,N+1),1)
+  Work(1:N,N+1) = V
   CALL SGESL(Work,N,N,Iwork,V,0)
   !
   !     FORM NORM OF X0
   !
-  xnorm = SASUM(N,V(1),1)
+  xnorm = SUM( ABS(V) )
   IF ( xnorm/=0.0 ) THEN
     Ind = 75
     RETURN
@@ -182,7 +180,7 @@ SUBROUTINE SGEIR(A,Lda,N,V,Itask,Ind,Work,Iwork)
   !     COMPUTE  RESIDUAL
   !
   DO j = 1, N
-    Work(j,N+1) = SDSDOT(N,-Work(j,N+1),A(j,1),Lda,V,1)
+    Work(j,N+1) = DOT_PRODUCT(A(j,1:N),V) - Work(j,N+1)
   END DO
   !
   !     SOLVE A*DELTA=R
@@ -191,7 +189,7 @@ SUBROUTINE SGEIR(A,Lda,N,V,Itask,Ind,Work,Iwork)
   !
   !     FORM NORM OF DELTA
   !
-  dnorm = SASUM(N,Work(1,N+1),1)
+  dnorm = SUM( ABS(Work(1:N,N+1)) )
   !
   !     COMPUTE IND (ESTIMATE OF NO. OF SIGNIFICANT DIGITS)
   !     AND CHECK FOR IND GREATER THAN ZERO

@@ -77,12 +77,13 @@ SUBROUTINE CGESL(A,Lda,N,Ipvt,B,Job)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
+  USE blas, ONLY : CAXPY
 
-  INTEGER Lda, N, Ipvt(*), Job
-  COMPLEX(SP) A(Lda,*), B(*)
+  INTEGER :: Lda, N, Ipvt(N), Job
+  COMPLEX(SP) :: A(Lda,N), B(N)
   !
-  COMPLEX(SP) t
-  INTEGER k, kb, l, nm1
+  COMPLEX(SP) :: t
+  INTEGER :: k, kb, l, nm1
   !* FIRST EXECUTABLE STATEMENT  CGESL
   nm1 = N - 1
   IF ( Job/=0 ) THEN
@@ -91,7 +92,7 @@ SUBROUTINE CGESL(A,Lda,N,Ipvt,B,Job)
     !        FIRST SOLVE  CTRANS(U)*Y = B
     !
     DO k = 1, N
-      t = CDOTC(k-1,A(1,k),1,B(1),1)
+      t = DOT_PRODUCT(A(1:k-1,k),B(1:k-1))
       B(k) = (B(k)-t)/CONJG(A(k,k))
     END DO
     !
@@ -100,7 +101,7 @@ SUBROUTINE CGESL(A,Lda,N,Ipvt,B,Job)
     IF ( nm1>=1 ) THEN
       DO kb = 1, nm1
         k = N - kb
-        B(k) = B(k) + CDOTC(N-k,A(k+1,k),1,B(k+1),1)
+        B(k) = B(k) + DOT_PRODUCT(A(k+1:N,k),B(k+1:N))
         l = Ipvt(k)
         IF ( l/=k ) THEN
           t = B(l)

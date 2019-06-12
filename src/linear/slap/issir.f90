@@ -182,23 +182,23 @@ INTEGER FUNCTION ISSIR(N,B,X,MSOLVE,Itol,Tol,Iter,&
   ISSIR = 0
   IF ( Itol==1 ) THEN
     !         err = ||Residual||/||RightHandSide|| (2-Norms).
-    IF ( Iter==0 ) Bnrm = SNRM2(N,B,1)
-    Err = SNRM2(N,R,1)/Bnrm
+    IF ( Iter==0 ) Bnrm = NORM2(B)
+    Err = NORM2(R)/Bnrm
   ELSEIF ( Itol==2 ) THEN
     !                  -1              -1
     !         err = ||M  Residual||/||M  RightHandSide|| (2-Norms).
     IF ( Iter==0 ) THEN
       CALL MSOLVE(N,B,Dz,Rwork,Iwork)
-      Bnrm = SNRM2(N,Dz,1)
+      Bnrm = NORM2(Dz)
     END IF
-    Err = SNRM2(N,Z,1)/Bnrm
+    Err = NORM2(Z)/Bnrm
   ELSEIF ( Itol==11 ) THEN
     !         err = ||x-TrueSolution||/||TrueSolution|| (2-Norms).
-    IF ( Iter==0 ) Solnrm = SNRM2(N,soln_com,1)
+    IF ( Iter==0 ) Solnrm = NORM2(soln_com(1:N))
     DO i = 1, N
       Dz(i) = X(i) - soln_com(i)
     END DO
-    Err = SNRM2(N,Dz,1)/Solnrm
+    Err = NORM2(Dz)/Solnrm
   ELSE
     !
     !         If we get here ITOL is not one of the acceptable values.

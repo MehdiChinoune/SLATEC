@@ -422,7 +422,7 @@ SUBROUTINE SBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
   !++
   !
   USE service, ONLY : XERMSG, R1MACH
-  USE linear, ONLY : SAXPY, SROT, SROTG, SSWAP
+  USE blas, ONLY : SAXPY, SROT, SROTG, SSWAP
   USE optimization, ONLY : SVOUT, IVOUT
   INTEGER :: Mdw, Minput, Mode, Ncols
   INTEGER :: Ibasis(Ncols), Ibb(Ncols), Ind(Ncols), Iopt(*)

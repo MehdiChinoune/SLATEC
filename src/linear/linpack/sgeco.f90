@@ -81,6 +81,7 @@ SUBROUTINE SGECO(A,Lda,N,Ipvt,Rcond,Z)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
+  USE blas, ONLY : SAXPY
 
   INTEGER :: Lda, N, Ipvt(N)
   REAL(SP) :: A(Lda,N), Z(N)
@@ -94,7 +95,7 @@ SUBROUTINE SGECO(A,Lda,N,Ipvt,Rcond,Z)
   !* FIRST EXECUTABLE STATEMENT  SGECO
   anorm = 0.0E0
   DO j = 1, N
-    anorm = MAX(anorm,SASUM(N,A(1,j),1))
+    anorm = MAX(anorm,SUM( ABS(A(1:N,j)) ) )
   END DO
   !
   !     FACTOR
@@ -118,7 +119,7 @@ SUBROUTINE SGECO(A,Lda,N,Ipvt,Rcond,Z)
     IF ( Z(k)/=0.0E0 ) ek = SIGN(ek,-Z(k))
     IF ( ABS(ek-Z(k))>ABS(A(k,k)) ) THEN
       s = ABS(A(k,k))/ABS(ek-Z(k))
-      CALL SSCAL(N,s,Z,1)
+      Z = s*Z
       ek = s*ek
     END IF
     wk = ek - Z(k)
@@ -149,25 +150,25 @@ SUBROUTINE SGECO(A,Lda,N,Ipvt,Rcond,Z)
     END IF
     Z(k) = wk
   END DO
-  s = 1.0E0/SASUM(N,Z,1)
-  CALL SSCAL(N,s,Z,1)
+  s = 1.0E0/SUM( ABS(Z) )
+  Z = s*Z
   !
   !     SOLVE TRANS(L)*Y = W
   !
   DO kb = 1, N
     k = N + 1 - kb
-    IF ( k<N ) Z(k) = Z(k) + SDOT(N-k,A(k+1,k),1,Z(k+1),1)
+    IF ( k<N ) Z(k) = Z(k) + DOT_PRODUCT(A(k+1:N,k),Z(k+1:N))
     IF ( ABS(Z(k))>1.0E0 ) THEN
       s = 1.0E0/ABS(Z(k))
-      CALL SSCAL(N,s,Z,1)
+      Z = s*Z
     END IF
     l = Ipvt(k)
     t = Z(l)
     Z(l) = Z(k)
     Z(k) = t
   END DO
-  s = 1.0E0/SASUM(N,Z,1)
-  CALL SSCAL(N,s,Z,1)
+  s = 1.0E0/SUM( ABS(Z) )
+  Z = s*Z
   !
   ynorm = 1.0E0
   !
@@ -178,15 +179,15 @@ SUBROUTINE SGECO(A,Lda,N,Ipvt,Rcond,Z)
     t = Z(l)
     Z(l) = Z(k)
     Z(k) = t
-    IF ( k<N ) CALL SAXPY(N-k,t,A(k+1,k),1,Z(k+1),1)
+    IF ( k<N ) CALL SAXPY(N-k,t,A(k+1:N,k),1,Z(k+1:N),1)
     IF ( ABS(Z(k))>1.0E0 ) THEN
       s = 1.0E0/ABS(Z(k))
-      CALL SSCAL(N,s,Z,1)
+      Z = s*Z
       ynorm = s*ynorm
     END IF
   END DO
-  s = 1.0E0/SASUM(N,Z,1)
-  CALL SSCAL(N,s,Z,1)
+  s = 1.0E0/SUM( ABS(Z) )
+  Z = s*Z
   ynorm = s*ynorm
   !
   !     SOLVE  U*Z = V
@@ -195,17 +196,17 @@ SUBROUTINE SGECO(A,Lda,N,Ipvt,Rcond,Z)
     k = N + 1 - kb
     IF ( ABS(Z(k))>ABS(A(k,k)) ) THEN
       s = ABS(A(k,k))/ABS(Z(k))
-      CALL SSCAL(N,s,Z,1)
+      Z = s*Z
       ynorm = s*ynorm
     END IF
     IF ( A(k,k)/=0.0E0 ) Z(k) = Z(k)/A(k,k)
     IF ( A(k,k)==0.0E0 ) Z(k) = 1.0E0
     t = -Z(k)
-    CALL SAXPY(k-1,t,A(1,k),1,Z(1),1)
+    CALL SAXPY(k-1,t,A(1:k-1,k),1,Z(1:k-1),1)
   END DO
   !     MAKE ZNORM = 1.0
-  s = 1.0E0/SASUM(N,Z,1)
-  CALL SSCAL(N,s,Z,1)
+  s = 1.0E0/SUM( ABS(Z) )
+  Z = s*Z
   ynorm = s*ynorm
   !
   IF ( anorm/=0.0E0 ) Rcond = ynorm/anorm

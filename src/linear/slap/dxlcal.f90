@@ -143,6 +143,7 @@ SUBROUTINE DXLCAL(N,Lgmr,X,Xl,Zl,Hes,Maxlp1,Q,V,R0nrm,Wk,Sz,Jscal,Jpre,&
   !   910502  Removed MSOLVE from ROUTINES CALLED list.  (FNF)
   !   910506  Made subsidiary to DGMRES.  (FNF)
   !   920511  Added complete declaration section.  (WRB)
+  USE blas, ONLY : DAXPY
   INTERFACE
     SUBROUTINE MSOLVE(N,R,Z,Rwork,Iwork)
       IMPORT DP
@@ -152,12 +153,13 @@ SUBROUTINE DXLCAL(N,Lgmr,X,Xl,Zl,Hes,Maxlp1,Q,V,R0nrm,Wk,Sz,Jscal,Jpre,&
   END INTERFACE
   !     .. Scalar Arguments ..
   REAL(DP) :: R0nrm
-  INTEGER Jpre, Jscal, Lgmr, Maxlp1, N, Nmsl
+  INTEGER :: Jpre, Jscal, Lgmr, Maxlp1, N, Nmsl
   !     .. Array Arguments ..
-  REAL(DP) :: Hes(Maxlp1,*), Q(*), Rpar(*), Sz(*), V(N,*), Wk(N), X(N), Xl(N), Zl(N)
-  INTEGER Ipar(*)
+  REAL(DP) :: Hes(Maxlp1,Maxlp1-1), Q(2*(Maxlp1-1)), Rpar(*), Sz(N), V(N,Maxlp1), &
+    Wk(N), X(N), Xl(N), Zl(N)
+  INTEGER :: Ipar(*)
   !     .. Local Scalars ..
-  INTEGER i, k, ll, llp1
+  INTEGER :: i, k, ll, llp1
   !* FIRST EXECUTABLE STATEMENT  DXLCAL
   ll = Lgmr
   llp1 = ll + 1
@@ -178,7 +180,7 @@ SUBROUTINE DXLCAL(N,Lgmr,X,Xl,Zl,Hes,Maxlp1,Q,V,R0nrm,Wk,Sz,Jscal,Jpre,&
     END DO
   END IF
   IF ( Jpre>0 ) THEN
-    CALL DCOPY(N,Zl,1,Wk,1)
+    Wk = Zl
     CALL MSOLVE(N,Wk,Zl,Rpar,Ipar)
     Nmsl = Nmsl + 1
   END IF
