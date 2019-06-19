@@ -1,7 +1,6 @@
 !** CPROC
 SUBROUTINE CPROC(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Y,M,A,B,C,D,W,Yy)
-  !>
-  !  Subsidiary to CBLKTR
+  !> Subsidiary to CBLKTR
   !***
   ! **Library:**   SLATEC
   !***
@@ -51,7 +50,7 @@ SUBROUTINE CPROC(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Y,M,A,B,C,D,W,Yy)
   ia = Na
   100 CONTINUE
   IFlg = 0
-  IF ( id>0 ) THEN
+  IF( id>0 ) THEN
     crt = Bd(id)
     id = id - 1
     !
@@ -66,7 +65,7 @@ SUBROUTINE CPROC(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Y,M,A,B,C,D,W,Yy)
       W(k+1) = (Y(k+1)-C(k+1)*W(k+2))/den
     END DO
     den = B(1) - crt - C(1)*D(2)
-    IF ( ABS(den)/=0 ) THEN
+    IF( ABS(den)/=0 ) THEN
       Y(1) = (Y(1)-C(1)*W(2))/den
     ELSE
       Y(1) = (1.,0.)
@@ -75,9 +74,9 @@ SUBROUTINE CPROC(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Y,M,A,B,C,D,W,Yy)
       Y(j) = W(j) - D(j)*Y(j-1)
     END DO
   END IF
-  IF ( m1<=0 ) THEN
-    IF ( m2<=0 ) THEN
-      IF ( ia>0 ) THEN
+  IF( m1<=0 ) THEN
+    IF( m2<=0 ) THEN
+      IF( ia>0 ) THEN
         rt = Aa(ia)
         ia = ia - 1
         iflg = 1
@@ -88,16 +87,16 @@ SUBROUTINE CPROC(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Y,M,A,B,C,D,W,Yy)
           Y(j) = rt*Y(j)
         END DO
       END IF
-      IF ( iflg>0 ) GOTO 100
+      IF( iflg>0 ) GOTO 100
       RETURN
     ELSE
       rt = Bm2(m2)
       m2 = m2 - 1
     END IF
-  ELSEIF ( m2<=0 ) THEN
+  ELSEIF( m2<=0 ) THEN
     rt = Bm1(m1)
     m1 = m1 - 1
-  ELSEIF ( ABS(Bm1(m1))<=ABS(Bm2(m2)) ) THEN
+  ELSEIF( ABS(Bm1(m1))<=ABS(Bm2(m2)) ) THEN
     rt = Bm2(m2)
     m2 = m2 - 1
   ELSE
@@ -105,7 +104,7 @@ SUBROUTINE CPROC(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Y,M,A,B,C,D,W,Yy)
     m1 = m1 - 1
   END IF
   y1 = (B(1)-rt)*Y(1) + C(1)*Y(2)
-  IF ( mm>=2 ) THEN
+  IF( mm>=2 ) THEN
     !
     ! MATRIX MULTIPLICATION
     !

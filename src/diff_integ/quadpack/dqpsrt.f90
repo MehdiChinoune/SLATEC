@@ -1,7 +1,6 @@
 !** DQPSRT
 SUBROUTINE DQPSRT(Limit,Last,Maxerr,Ermax,Elist,Iord,Nrmax)
-  !>
-  !  This routine maintains the descending ordering in the
+  !> This routine maintains the descending ordering in the
   !            list of the local error estimated resulting from the
   !            interval subdivision process. At each call two error
   !            estimates are inserted using the sequential search
@@ -53,7 +52,7 @@ SUBROUTINE DQPSRT(Limit,Last,Maxerr,Ermax,Elist,Iord,Nrmax)
   !                       estimates, such that
   !                       ELIST(IORD(1)),...,  ELIST(IORD(K))
   !                       form a decreasing sequence, with
-  !                       K = LAST if LAST.LE.(LIMIT/2+2), and
+  !                       K = LAST if LAST<=(LIMIT/2+2), and
   !                       K = LIMIT+1-LAST otherwise
   !
   !              NRMAX  - Integer
@@ -81,7 +80,7 @@ SUBROUTINE DQPSRT(Limit,Last,Maxerr,Ermax,Elist,Iord,Nrmax)
   !           TWO ERROR ESTIMATES.
   !
   !* FIRST EXECUTABLE STATEMENT  DQPSRT
-  IF ( Last>2 ) THEN
+  IF( Last>2 ) THEN
     !
     !           THIS PART OF THE ROUTINE IS ONLY EXECUTED IF, DUE TO A
     !           DIFFICULT INTEGRAND, SUBDIVISION INCREASED THE ERROR
@@ -89,12 +88,12 @@ SUBROUTINE DQPSRT(Limit,Last,Maxerr,Ermax,Elist,Iord,Nrmax)
     !           START AFTER THE NRMAX-TH LARGEST ERROR ESTIMATE.
     !
     errmax = Elist(Maxerr)
-    IF ( Nrmax/=1 ) THEN
+    IF( Nrmax/=1 ) THEN
       ido = Nrmax - 1
       DO i = 1, ido
         isucc = Iord(Nrmax-1)
         !- **JUMP OUT OF DO-LOOP
-        IF ( errmax<=Elist(isucc) ) EXIT
+        IF( errmax<=Elist(isucc) ) EXIT
         Iord(Nrmax) = isucc
         Nrmax = Nrmax - 1
       END DO
@@ -105,7 +104,7 @@ SUBROUTINE DQPSRT(Limit,Last,Maxerr,Ermax,Elist,Iord,Nrmax)
     !           SUBDIVISIONS STILL ALLOWED.
     !
     jupbn = Last
-    IF ( Last>(Limit/2+2) ) jupbn = Limit + 3 - Last
+    IF( Last>(Limit/2+2) ) jupbn = Limit + 3 - Last
     errmin = Elist(Last)
     !
     !           INSERT ERRMAX BY TRAVERSING THE LIST TOP-DOWN,
@@ -113,11 +112,11 @@ SUBROUTINE DQPSRT(Limit,Last,Maxerr,Ermax,Elist,Iord,Nrmax)
     !
     jbnd = jupbn - 1
     ibeg = Nrmax + 1
-    IF ( ibeg<=jbnd ) THEN
+    IF( ibeg<=jbnd ) THEN
       DO i = ibeg, jbnd
         isucc = Iord(i)
         !- **JUMP OUT OF DO-LOOP
-        IF ( errmax>=Elist(isucc) ) GOTO 100
+        IF( errmax>=Elist(isucc) ) GOTO 100
         Iord(i-1) = isucc
       END DO
     END IF
@@ -136,7 +135,7 @@ SUBROUTINE DQPSRT(Limit,Last,Maxerr,Ermax,Elist,Iord,Nrmax)
   DO j = i, jbnd
     isucc = Iord(k)
     !- **JUMP OUT OF DO-LOOP
-    IF ( errmin<Elist(isucc) ) GOTO 200
+    IF( errmin<Elist(isucc) ) GOTO 200
     Iord(k+1) = isucc
     k = k - 1
   END DO

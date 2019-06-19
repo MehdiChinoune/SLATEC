@@ -1,7 +1,6 @@
 !** ZACON
 SUBROUTINE ZACON(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Rl,Fnul,Tol,Elim,Alim)
-  !>
-  !  Subsidiary to ZBESH and ZBESK
+  !> Subsidiary to ZBESH and ZBESK
   !***
   ! **Library:**   SLATEC
   !***
@@ -30,7 +29,7 @@ SUBROUTINE ZACON(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Rl,Fnul,Tol,Elim,Alim)
   USE service, ONLY : XERMSG, D1MACH
   !     COMPLEX CK,CONE,CSCL,CSCR,CSGN,CSPN,CY,CZERO,C1,C2,RZ,SC1,SC2,ST,
   !    *S1,S2,Y,Z,ZN
-  INTEGER i, inu, iuf, kflag, Kode, Mr, N, nn, nw, Nz
+  INTEGER :: i, inu, iuf, kflag, Kode, Mr, N, nn, nw, Nz
   REAL(DP) :: Alim, arg, ascle, as2, azn, bry(3), bscle, cki, ckr, cpn, cscl, &
     cscr, csgni, csgnr, cspni, cspnr, csr, csrr(3), cssr(3), cyi(2), cyr(2), &
     c1i, c1m, c1r, c2i, c2r, Elim, fmr, fn, Fnu, Fnul, pti, ptr, razn, Rl, rzi, &
@@ -44,20 +43,20 @@ SUBROUTINE ZACON(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Rl,Fnul,Tol,Elim,Alim)
   zni = -Zi
   nn = N
   CALL ZBINU(znr,zni,Fnu,Kode,nn,Yr,Yi,nw,Rl,Fnul,Tol,Elim,Alim)
-  IF ( nw>=0 ) THEN
+  IF( nw>=0 ) THEN
     !-----------------------------------------------------------------------
     !     ANALYTIC CONTINUATION TO THE LEFT HALF PLANE FOR THE K FUNCTION
     !-----------------------------------------------------------------------
     nn = MIN(2,N)
     CALL ZBKNU(znr,zni,Fnu,Kode,nn,cyr,cyi,nw,Tol,Elim,Alim)
-    IF ( nw==0 ) THEN
+    IF( nw==0 ) THEN
       s1r = cyr(1)
       s1i = cyi(1)
       fmr = Mr
       sgn = -SIGN(pi,fmr)
       csgnr = zeror
       csgni = sgn
-      IF ( Kode/=1 ) THEN
+      IF( Kode/=1 ) THEN
         yy = -zni
         cpn = COS(yy)
         spn = SIN(yy)
@@ -73,7 +72,7 @@ SUBROUTINE ZACON(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Rl,Fnul,Tol,Elim,Alim)
       spn = SIN(arg)
       cspnr = cpn
       cspni = spn
-      IF ( MOD(inu,2)/=0 ) THEN
+      IF( MOD(inu,2)/=0 ) THEN
         cspnr = -cspnr
         cspni = -cspni
       END IF
@@ -83,7 +82,7 @@ SUBROUTINE ZACON(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Rl,Fnul,Tol,Elim,Alim)
       c2r = Yr(1)
       c2i = Yi(1)
       ascle = 1.0D+3*D1MACH(1)/Tol
-      IF ( Kode/=1 ) THEN
+      IF( Kode/=1 ) THEN
         CALL ZS1S2(znr,zni,c1r,c1i,c2r,c2i,nw,ascle,Alim,iuf)
         Nz = Nz + nw
         sc1r = c1r
@@ -93,7 +92,7 @@ SUBROUTINE ZACON(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Rl,Fnul,Tol,Elim,Alim)
       CALL ZMLT(csgnr,csgni,c2r,c2i,ptr,pti)
       Yr(1) = str + ptr
       Yi(1) = sti + pti
-      IF ( N==1 ) RETURN
+      IF( N==1 ) RETURN
       cspnr = -cspnr
       cspni = -cspni
       s2r = cyr(2)
@@ -102,7 +101,7 @@ SUBROUTINE ZACON(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Rl,Fnul,Tol,Elim,Alim)
       c1i = s2i
       c2r = Yr(2)
       c2i = Yi(2)
-      IF ( Kode/=1 ) THEN
+      IF( Kode/=1 ) THEN
         CALL ZS1S2(znr,zni,c1r,c1i,c2r,c2i,nw,ascle,Alim,iuf)
         Nz = Nz + nw
         sc2r = c1r
@@ -112,7 +111,7 @@ SUBROUTINE ZACON(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Rl,Fnul,Tol,Elim,Alim)
       CALL ZMLT(csgnr,csgni,c2r,c2i,ptr,pti)
       Yr(2) = str + ptr
       Yi(2) = sti + pti
-      IF ( N==2 ) RETURN
+      IF( N==2 ) RETURN
       cspnr = -cspnr
       cspni = -cspni
       azn = ZABS(znr,zni)
@@ -140,9 +139,9 @@ SUBROUTINE ZACON(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Rl,Fnul,Tol,Elim,Alim)
       bry(3) = D1MACH(2)
       as2 = ZABS(s2r,s2i)
       kflag = 2
-      IF ( as2<=bry(1) ) THEN
+      IF( as2<=bry(1) ) THEN
         kflag = 1
-      ELSEIF ( as2>=bry(2) ) THEN
+      ELSEIF( as2>=bry(2) ) THEN
         kflag = 3
       END IF
       bscle = bry(kflag)
@@ -164,15 +163,15 @@ SUBROUTINE ZACON(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Rl,Fnul,Tol,Elim,Alim)
         sti = c1i
         c2r = Yr(i)
         c2i = Yi(i)
-        IF ( Kode/=1 ) THEN
-          IF ( iuf>=0 ) THEN
+        IF( Kode/=1 ) THEN
+          IF( iuf>=0 ) THEN
             CALL ZS1S2(znr,zni,c1r,c1i,c2r,c2i,nw,ascle,Alim,iuf)
             Nz = Nz + nw
             sc1r = sc2r
             sc1i = sc2i
             sc2r = c1r
             sc2i = c1i
-            IF ( iuf==3 ) THEN
+            IF( iuf==3 ) THEN
               iuf = -4
               s1r = sc1r*cssr(kflag)
               s1i = sc1i*cssr(kflag)
@@ -191,11 +190,11 @@ SUBROUTINE ZACON(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Rl,Fnul,Tol,Elim,Alim)
         cki = cki + rzi
         cspnr = -cspnr
         cspni = -cspni
-        IF ( kflag<3 ) THEN
+        IF( kflag<3 ) THEN
           ptr = ABS(c1r)
           pti = ABS(c1i)
           c1m = MAX(ptr,pti)
-          IF ( c1m>bscle ) THEN
+          IF( c1m>bscle ) THEN
             kflag = kflag + 1
             bscle = bry(kflag)
             s1r = s1r*csr
@@ -214,5 +213,5 @@ SUBROUTINE ZACON(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Rl,Fnul,Tol,Elim,Alim)
     END IF
   END IF
   Nz = -1
-  IF ( nw==(-2) ) Nz = -2
+  IF( nw==(-2) ) Nz = -2
 END SUBROUTINE ZACON

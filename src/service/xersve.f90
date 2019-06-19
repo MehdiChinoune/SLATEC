@@ -1,7 +1,6 @@
 !** XERSVE
 SUBROUTINE XERSVE(Subrou,Messg,Kflag,Nerr,Level,Icount)
-  !>
-  !  Record that an error has occurred.
+  !> Record that an error has occurred.
   !***
   ! **Library:**   SLATEC (XERROR)
   !***
@@ -65,8 +64,8 @@ SUBROUTINE XERSVE(Subrou,Messg,Kflag,Nerr,Level,Icount)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER, PARAMETER :: LENTAB = 10
-  INTEGER i, Icount, iunit, Kflag, kunit, Level, Nerr, nunit
-  INTEGER lun(5)
+  INTEGER :: i, Icount, iunit, Kflag, kunit, Level, Nerr, nunit
+  INTEGER :: lun(5)
   CHARACTER(*) :: Subrou, Messg
   CHARACTER(8) :: sub
   CHARACTER(60) :: mes
@@ -76,18 +75,18 @@ SUBROUTINE XERSVE(Subrou,Messg,Kflag,Nerr,Level,Icount)
   INTEGER, SAVE :: kountx = 0, nmsg = 0
   !* FIRST EXECUTABLE STATEMENT  XERSVE
   !
-  IF ( Kflag<=0 ) THEN
+  IF( Kflag<=0 ) THEN
     !
     !        Dump the table.
     !
-    IF ( nmsg==0 ) RETURN
+    IF( nmsg==0 ) RETURN
     !
     !        Print to each unit.
     !
     CALL XGETUA(lun,nunit)
     DO kunit = 1, nunit
       iunit = lun(kunit)
-      IF ( iunit==0 ) iunit = I1MACH(4)
+      IF( iunit==0 ) iunit = I1MACH(4)
       !
       !           Print the table header.
       !
@@ -109,7 +108,7 @@ SUBROUTINE XERSVE(Subrou,Messg,Kflag,Nerr,Level,Icount)
       !
       !           Print number of other errors.
       !
-      IF ( kountx/=0 ) WRITE (iunit,99003) kountx
+      IF( kountx/=0 ) WRITE (iunit,99003) kountx
       99003 FORMAT ('0OTHER ERRORS NOT INDIVIDUALLY TABULATED = ',I10)
       WRITE (iunit,99004)
       99004 FORMAT (1X)
@@ -117,7 +116,7 @@ SUBROUTINE XERSVE(Subrou,Messg,Kflag,Nerr,Level,Icount)
     !
     !        Clear the error tables.
     !
-    IF ( Kflag==0 ) THEN
+    IF( Kflag==0 ) THEN
       nmsg = 0
       kountx = 0
     END IF
@@ -130,15 +129,15 @@ SUBROUTINE XERSVE(Subrou,Messg,Kflag,Nerr,Level,Icount)
     sub = Subrou
     mes = Messg
     DO i = 1, nmsg
-      IF ( sub==subtab(i).AND.mes==mestab(i).AND.&
-          Nerr==nertab(i).AND.Level==levtab(i) ) THEN
+      IF( sub==subtab(i) .AND. mes==mestab(i) .AND. &
+          Nerr==nertab(i) .AND. Level==levtab(i) ) THEN
         kount(i) = kount(i) + 1
         Icount = kount(i)
         RETURN
       END IF
     END DO
     !
-    IF ( nmsg<LENTAB ) THEN
+    IF( nmsg<LENTAB ) THEN
       !
       !           Empty slot found for new message.
       !

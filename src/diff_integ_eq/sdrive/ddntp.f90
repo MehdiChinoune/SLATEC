@@ -1,7 +1,6 @@
 !** DDNTP
 SUBROUTINE DDNTP(H,K,N,Nq,T,Tout,Yh,Y)
-  !>
-  !  Subroutine DDNTP interpolates the K-th derivative of Y at
+  !> Subroutine DDNTP interpolates the K-th derivative of Y at
   !            TOUT, using the data in the YH array.  If K has a value
   !            greater than NQ, the NQ-th derivative is calculated.
   !***
@@ -29,7 +28,7 @@ SUBROUTINE DDNTP(H,K,N,Nq,T,Tout,Yh,Y)
   INTEGER :: i, j, jj, kk, kused
   REAL(DP) :: factor, r
   !* FIRST EXECUTABLE STATEMENT  DDNTP
-  IF ( K==0 ) THEN
+  IF( K==0 ) THEN
     DO i = 1, N
       Y(i) = Yh(i,Nq+1)
     END DO

@@ -1,7 +1,6 @@
 !** SSMTV
 SUBROUTINE SSMTV(N,X,Y,Nelt,Ia,Ja,A,Isym)
-  !>
-  !  SLAP Column Format Sparse Matrix Transpose Vector Product.
+  !> SLAP Column Format Sparse Matrix Transpose Vector Product.
   !            Routine to calculate the sparse matrix vector product:
   !            Y = A'*X, where ' denotes transpose.
   !***
@@ -113,12 +112,12 @@ SUBROUTINE SSMTV(N,X,Y,Nelt,Ia,Ja,A,Isym)
   !   930701  Updated CATEGORY section.  (FNF, WRB)
 
   !     .. Scalar Arguments ..
-  INTEGER Isym, N, Nelt
+  INTEGER :: Isym, N, Nelt
   !     .. Array Arguments ..
-  REAL(SP) A(Nelt), X(N), Y(N)
-  INTEGER Ia(Nelt), Ja(Nelt)
+  REAL(SP) :: A(Nelt), X(N), Y(N)
+  INTEGER :: Ia(Nelt), Ja(Nelt)
   !     .. Local Scalars ..
-  INTEGER i, ibgn, icol, iend, irow, j, jbgn, jend
+  INTEGER :: i, ibgn, icol, iend, irow, j, jbgn, jend
   !* FIRST EXECUTABLE STATEMENT  SSMTV
   !
   !         Zero out the result vector.
@@ -137,7 +136,7 @@ SUBROUTINE SSMTV(N,X,Y,Nelt,Ia,Ja,A,Isym)
     END DO
   END DO
   !
-  IF ( Isym==1 ) THEN
+  IF( Isym==1 ) THEN
     !
     !         The matrix is non-symmetric.  Need to get the other half in...
     !         This loops assumes that the diagonal is the first entry in
@@ -146,7 +145,7 @@ SUBROUTINE SSMTV(N,X,Y,Nelt,Ia,Ja,A,Isym)
     DO icol = 1, N
       jbgn = Ja(icol) + 1
       jend = Ja(icol+1) - 1
-      IF ( jbgn<=jend ) THEN
+      IF( jbgn<=jend ) THEN
         DO j = jbgn, jend
           Y(Ia(j)) = Y(Ia(j)) + A(j)*X(icol)
         END DO

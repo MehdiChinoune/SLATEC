@@ -1,7 +1,6 @@
 !** DFAC
 REAL(DP) FUNCTION DFAC(N)
-  !>
-  !  Compute the factorial function.
+  !> Compute the factorial function.
   !***
   ! **Library:**   SLATEC (FNLIB)
   !***
@@ -30,7 +29,7 @@ REAL(DP) FUNCTION DFAC(N)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   USE service, ONLY : XERMSG
-  INTEGER N
+  INTEGER :: N
   REAL(DP) :: x, xmax, xmin
   REAL(DP), PARAMETER :: facn(31) = [ +.100000000000000000000000000000000D+1, &
     +.100000000000000000000000000000000D+1, +.200000000000000000000000000000000D+1, &
@@ -51,18 +50,18 @@ REAL(DP) FUNCTION DFAC(N)
   REAL(DP), PARAMETER :: sq2pil = 0.91893853320467274178032973640562D0
   INTEGER, SAVE :: nmax = 0
   !* FIRST EXECUTABLE STATEMENT  DFAC
-  IF ( nmax==0 ) THEN
+  IF( nmax==0 ) THEN
     CALL DGAMLM(xmin,xmax)
     nmax = INT( xmax ) - 1
   END IF
   !
-  IF ( N<0 ) CALL XERMSG('DFAC',&
+  IF( N<0 ) CALL XERMSG('DFAC',&
     'FACTORIAL OF NEGATIVE INTEGER UNDEFINED',1,2)
   !
-  IF ( N<=30 ) DFAC = facn(N+1)
-  IF ( N<=30 ) RETURN
+  IF( N<=30 ) DFAC = facn(N+1)
+  IF( N<=30 ) RETURN
   !
-  IF ( N>nmax ) CALL XERMSG('DFAC',&
+  IF( N>nmax ) CALL XERMSG('DFAC',&
     'N SO BIG FACTORIAL(N) OVERFLOWS',2,2)
   !
   x = N + 1

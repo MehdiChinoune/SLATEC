@@ -1,7 +1,6 @@
 !** DLGAMS
 SUBROUTINE DLGAMS(X,Dlgam,Sgngam)
-  !>
-  !  Compute the logarithm of the absolute value of the Gamma
+  !> Compute the logarithm of the absolute value of the Gamma
   !            function.
   !***
   ! **Library:**   SLATEC (FNLIB)
@@ -33,14 +32,14 @@ SUBROUTINE DLGAMS(X,Dlgam,Sgngam)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-  INTEGER i
+  INTEGER :: i
   REAL(DP) :: X, Dlgam, Sgngam
   !* FIRST EXECUTABLE STATEMENT  DLGAMS
   Dlgam = LOG_GAMMA(X)
   Sgngam = 1.0D0
-  IF ( X>0.D0 ) RETURN
+  IF( X>0.D0 ) RETURN
   !
   i = INT( MOD(-AINT(X),2.0D0) + 0.1D0 )
-  IF ( i==0 ) Sgngam = -1.0D0
+  IF( i==0 ) Sgngam = -1.0D0
   !
 END SUBROUTINE DLGAMS

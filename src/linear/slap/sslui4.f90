@@ -1,7 +1,6 @@
 !** SSLUI4
 SUBROUTINE SSLUI4(N,B,X,Il,Jl,L,Dinv,Iu,Ju,U)
-  !>
-  !  SLAP Backsolve for LDU Factorization.
+  !> SLAP Backsolve for LDU Factorization.
   !            Routine to solve a system of the form  (L*D*U)' X = B,
   !            where L is a unit lower triangular matrix, D is a diagonal
   !            matrix, and U is a unit upper triangular matrix and '
@@ -164,12 +163,12 @@ SUBROUTINE SSLUI4(N,B,X,Il,Jl,L,Dinv,Iu,Ju,U)
   !   930701  Updated CATEGORY section.  (FNF, WRB)
 
   !     .. Scalar Arguments ..
-  INTEGER N
+  INTEGER :: N
   !     .. Array Arguments ..
-  REAL(SP) B(N), Dinv(N), L(*), U(*), X(N)
-  INTEGER Il(*), Iu(*), Jl(*), Ju(*)
+  REAL(SP) :: B(N), Dinv(N), L(*), U(*), X(N)
+  INTEGER :: Il(*), Iu(*), Jl(*), Ju(*)
   !     .. Local Scalars ..
-  INTEGER i, icol, irow, j, jbgn, jend
+  INTEGER :: i, icol, irow, j, jbgn, jend
   !* FIRST EXECUTABLE STATEMENT  SSLUI4
   DO i = 1, N
     X(i) = B(i)
@@ -179,7 +178,7 @@ SUBROUTINE SSLUI4(N,B,X,Il,Jl,L,Dinv,Iu,Ju,U)
   DO irow = 2, N
     jbgn = Ju(irow)
     jend = Ju(irow+1) - 1
-    IF ( jbgn<=jend ) THEN
+    IF( jbgn<=jend ) THEN
       DO j = jbgn, jend
         X(irow) = X(irow) - U(j)*X(Iu(j))
       END DO
@@ -195,7 +194,7 @@ SUBROUTINE SSLUI4(N,B,X,Il,Jl,L,Dinv,Iu,Ju,U)
   DO icol = N, 2, -1
     jbgn = Il(icol)
     jend = Il(icol+1) - 1
-    IF ( jbgn<=jend ) THEN
+    IF( jbgn<=jend ) THEN
       DO j = jbgn, jend
         X(Jl(j)) = X(Jl(j)) - L(j)*X(icol)
       END DO

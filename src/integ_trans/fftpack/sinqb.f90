@@ -1,7 +1,6 @@
 !** SINQB
 SUBROUTINE SINQB(N,X,Wsave)
-  !>
-  !  Compute the unnormalized inverse of SINQF.
+  !> Compute the unnormalized inverse of SINQF.
   !***
   ! **Library:**   SLATEC (FFTPACK)
   !***
@@ -80,7 +79,7 @@ SUBROUTINE SINQB(N,X,Wsave)
   INTEGER :: k, kc, ns2
   REAL(SP) :: xhold
   !* FIRST EXECUTABLE STATEMENT  SINQB
-  IF ( N>1 ) THEN
+  IF( N>1 ) THEN
     ns2 = N/2
     DO k = 2, N, 2
       X(k) = -X(k)

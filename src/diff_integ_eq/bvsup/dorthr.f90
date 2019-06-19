@@ -1,7 +1,6 @@
 !** DORTHR
 SUBROUTINE DORTHR(A,N,M,Nrda,Iflag,Irank,Iscale,Diag,Kpivot,Scales,Rows,Rs)
-  !>
-  !  Subsidiary to DBVSUP and DSUDS
+  !> Subsidiary to DBVSUP and DSUDS
   !***
   ! **Library:**   SLATEC
   !***
@@ -91,10 +90,10 @@ SUBROUTINE DORTHR(A,N,M,Nrda,Iflag,Irank,Iscale,Diag,Kpivot,Scales,Rows,Rs)
   !* FIRST EXECUTABLE STATEMENT  DORTHR
   uro = D1MACH(4)
   dum = 0.D0
-  IF ( M>=N.AND.N>=1.AND.Nrda>=N ) THEN
+  IF( M>=N .AND. N>=1 .AND. Nrda>=N ) THEN
     !
     acc = 10.0D0*uro
-    IF ( Iflag<0 ) acc = MAX(acc,10.0D0**Iflag)
+    IF( Iflag<0 ) acc = MAX(acc,10.0D0**Iflag)
     sruro = SQRT(uro)
     Iflag = 1
     Irank = N
@@ -124,26 +123,26 @@ SUBROUTINE DORTHR(A,N,M,Nrda,Iflag,Irank,Iscale,Diag,Kpivot,Scales,Rows,Rs)
       !           BEGIN BLOCK PERMITTING ...EXITS TO 80
       mk = M - k + 1
       !           ...EXIT
-      IF ( k/=N ) THEN
+      IF( k/=N ) THEN
         kp = k + 1
         !
         !              SEARCHING FOR PIVOTAL ROW
         !
         DO j = k, N
           !                 BEGIN BLOCK PERMITTING ...EXITS TO 50
-          IF ( Rows(j)<sruro*Rs(j) ) THEN
+          IF( Rows(j)<sruro*Rs(j) ) THEN
             Rows(j) = NORM2(A(j,k:k+mk-1))**2
             Rs(j) = Rows(j)
           END IF
-          IF ( j/=k ) THEN
+          IF( j/=k ) THEN
             !                 ......EXIT
-            IF ( sigma>=0.99D0*Rows(j) ) CYCLE
+            IF( sigma>=0.99D0*Rows(j) ) CYCLE
           END IF
           sigma = Rows(j)
           jrow = j
         END DO
         !           ...EXIT
-        IF ( jrow/=k ) THEN
+        IF( jrow/=k ) THEN
           !
           !              PERFORM ROW INTERCHANGE
           !
@@ -167,15 +166,15 @@ SUBROUTINE DORTHR(A,N,M,Nrda,Iflag,Irank,Iscale,Diag,Kpivot,Scales,Rows,Rs)
       !
       sig = NORM2(A(k,k:k+mk-1))**2
       diagk = SQRT(sig)
-      IF ( diagk>acc*anorm ) THEN
+      IF( diagk>acc*anorm ) THEN
         !
         !           CONSTRUCT AND APPLY TRANSFORMATION TO MATRIX A
         !
         akk = A(k,k)
-        IF ( akk>0.0D0 ) diagk = -diagk
+        IF( akk>0.0D0 ) diagk = -diagk
         Diag(k) = diagk
         A(k,k) = akk - diagk
-        IF ( k/=N ) THEN
+        IF( k/=N ) THEN
           sad = diagk*akk - sig
           DO j = kp, N
             as = NORM2(A(k,k:k+mk-1))**2/sad

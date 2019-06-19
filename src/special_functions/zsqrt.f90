@@ -1,7 +1,6 @@
 !** ZSQRT
 SUBROUTINE ZSQRT(Ar,Ai,Br,Bi)
-  !>
-  !  Subsidiary to ZBESH, ZBESI, ZBESJ, ZBESK, ZBESY, ZAIRY and
+  !> Subsidiary to ZBESH, ZBESI, ZBESJ, ZBESK, ZBESY, ZAIRY and
   !            ZBIRY
   !***
   ! **Library:**   SLATEC
@@ -29,12 +28,12 @@ SUBROUTINE ZSQRT(Ar,Ai,Br,Bi)
   !* FIRST EXECUTABLE STATEMENT  ZSQRT
   zm = ZABS(Ar,Ai)
   zm = SQRT(zm)
-  IF ( Ar==0.0D+0 ) THEN
-    IF ( Ai>0.0D+0 ) THEN
+  IF( Ar==0.0D+0 ) THEN
+    IF( Ai>0.0D+0 ) THEN
       Br = zm*drt
       Bi = zm*drt
       RETURN
-    ELSEIF ( Ai<0.0D+0 ) THEN
+    ELSEIF( Ai<0.0D+0 ) THEN
       Br = zm*drt
       Bi = -zm*drt
       RETURN
@@ -43,8 +42,8 @@ SUBROUTINE ZSQRT(Ar,Ai,Br,Bi)
       Bi = 0.0D+0
       RETURN
     END IF
-  ELSEIF ( Ai==0.0D+0 ) THEN
-    IF ( Ar>0.0D+0 ) THEN
+  ELSEIF( Ai==0.0D+0 ) THEN
+    IF( Ar>0.0D+0 ) THEN
       Br = SQRT(Ar)
       Bi = 0.0D+0
       RETURN
@@ -55,10 +54,10 @@ SUBROUTINE ZSQRT(Ar,Ai,Br,Bi)
     END IF
   ELSE
     dtheta = ATAN(Ai/Ar)
-    IF ( dtheta<=0.0D+0 ) THEN
-      IF ( Ar<0.0D+0 ) dtheta = dtheta + dpi
+    IF( dtheta<=0.0D+0 ) THEN
+      IF( Ar<0.0D+0 ) dtheta = dtheta + dpi
     ELSE
-      IF ( Ar<0.0D+0 ) dtheta = dtheta - dpi
+      IF( Ar<0.0D+0 ) dtheta = dtheta - dpi
     END IF
   END IF
   dtheta = dtheta*0.5D+0

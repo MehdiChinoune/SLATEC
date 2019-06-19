@@ -1,7 +1,6 @@
 !** CMPOSP
 SUBROUTINE CMPOSP(M,N,A,Bb,C,Q,Idimq,B,B2,B3,W,W2,W3,D,Tcos,P)
-  !>
-  !  Subsidiary to CMGNBN
+  !> Subsidiary to CMGNBN
   !***
   ! **Library:**   SLATEC
   !***
@@ -34,7 +33,7 @@ SUBROUTINE CMPOSP(M,N,A,Bb,C,Q,Idimq,B,B2,B3,W,W2,W3,D,Tcos,P)
   mr = M
   nr = (N+1)/2
   nrm1 = nr - 1
-  IF ( 2*nr/=N ) THEN
+  IF( 2*nr/=N ) THEN
     !
     !     ODD  NUMBER OF UNKNOWNS
     !

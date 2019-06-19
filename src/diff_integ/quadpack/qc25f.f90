@@ -1,8 +1,7 @@
 !** QC25F
 SUBROUTINE QC25F(F,A,B,Omega,Integr,Nrmom,Maxp1,Ksave,Result,Abserr,Neval,&
     Resabs,Resasc,Momcom,Chebmo)
-  !>
-  !  To compute the integral I=Integral of F(X) over (A,B)
+  !> To compute the integral I=Integral of F(X) over (A,B)
   !            Where W(X) = COS(OMEGA*X) Or (WX)=SIN(OMEGA*X)
   !            and to compute J=Integral of ABS(F) over (A,B). For small
   !            value of OMEGA or small intervals (A,B) 15-point GAUSS-
@@ -91,7 +90,7 @@ SUBROUTINE QC25F(F,A,B,Omega,Integr,Nrmom,Maxp1,Ksave,Result,Abserr,Neval,&
   !                    For each interval length we need to compute the
   !                    Chebyshev moments. MOMCOM counts the number of
   !                    intervals for which these moments have already been
-  !                    computed. If NRMOM.LT.MOMCOM or KSAVE = 1, the
+  !                    computed. If NRMOM<MOMCOM or KSAVE = 1, the
   !                    Chebyshev moments for the interval (A,B) have
   !                    already been computed and stored, otherwise we
   !                    compute them and we increase MOMCOM.
@@ -176,7 +175,7 @@ SUBROUTINE QC25F(F,A,B,Omega,Integr,Nrmom,Maxp1,Ksave,Result,Abserr,Neval,&
   !           FORMULA IF THE VALUE OF THE PARAMETER IN THE INTEGRAND
   !           IS SMALL.
   !
-  IF ( ABS(parint)>0.2E+01 ) THEN
+  IF( ABS(parint)>0.2E+01 ) THEN
     !
     !           COMPUTE THE INTEGRAL USING THE GENERALIZED CLENSHAW-
     !           CURTIS METHOD.
@@ -189,7 +188,7 @@ SUBROUTINE QC25F(F,A,B,Omega,Integr,Nrmom,Maxp1,Ksave,Result,Abserr,Neval,&
     !           CHECK WHETHER THE CHEBYSHEV MOMENTS FOR THIS INTERVAL
     !           HAVE ALREADY BEEN COMPUTED.
     !
-    IF ( Nrmom>=Momcom.AND.Ksave/=1 ) THEN
+    IF( Nrmom>=Momcom .AND. Ksave/=1 ) THEN
       !
       !           COMPUTE A NEW SET OF CHEBYSHEV MOMENTS.
       !
@@ -207,7 +206,7 @@ SUBROUTINE QC25F(F,A,B,Omega,Integr,Nrmom,Maxp1,Ksave,Result,Abserr,Neval,&
         +0.192E+03)*sinpar)/parint)/(par2*par2)
       ac = 0.8E+01*cospar
       as = 0.24E+02*parint*sinpar
-      IF ( ABS(parint)>0.24E+02 ) THEN
+      IF( ABS(parint)>0.24E+02 ) THEN
         !
         !           COMPUTE THE CHEBYSHEV MOMENTS BY MEANS OF FORWARD
         !           RECURSION.
@@ -265,7 +264,7 @@ SUBROUTINE QC25F(F,A,B,Omega,Integr,Nrmom,Maxp1,Ksave,Result,Abserr,Neval,&
         *cospar/parint
       ac = -0.24E+02*parint*cospar
       as = -0.8E+01*sinpar
-      IF ( ABS(parint)>0.24E+02 ) THEN
+      IF( ABS(parint)>0.24E+02 ) THEN
         !
         !           COMPUTE THE CHEBYSHEV MOMENTS BY MEANS OF
         !           FORWARD RECURSION.
@@ -314,8 +313,8 @@ SUBROUTINE QC25F(F,A,B,Omega,Integr,Nrmom,Maxp1,Ksave,Result,Abserr,Neval,&
         Chebmo(m,2*j) = v(j)
       END DO
     END IF
-    IF ( Nrmom<Momcom ) m = Nrmom + 1
-    IF ( Momcom<Maxp1-1.AND.Nrmom>=Momcom ) Momcom = Momcom + 1
+    IF( Nrmom<Momcom ) m = Nrmom + 1
+    IF( Momcom<Maxp1-1 .AND. Nrmom>=Momcom ) Momcom = Momcom + 1
     !
     !           COMPUTE THE COEFFICIENTS OF THE CHEBYSHEV EXPANSIONS
     !           OF DEGREES 12 AND 24 OF THE FUNCTION F.
@@ -353,7 +352,7 @@ SUBROUTINE QC25F(F,A,B,Omega,Integr,Nrmom,Maxp1,Ksave,Result,Abserr,Neval,&
     estc = ABS(resc24-resc12)
     ests = ABS(ress24-ress12)
     Resabs = Resabs*ABS(hlgth)
-    IF ( Integr==2 ) THEN
+    IF( Integr==2 ) THEN
       Result = conc*ress24 + cons*resc24
       Abserr = ABS(conc*ests) + ABS(cons*estc)
     ELSE

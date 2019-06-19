@@ -1,7 +1,6 @@
 !** PASS
 SUBROUTINE PASS(Lun,Icnt,Itest)
-  !>
-  !  Print a PASS/FAIL message for a particular quick check
+  !> Print a PASS/FAIL message for a particular quick check
   !            test.
   !***
   ! **Library:**   SLATEC
@@ -15,9 +14,9 @@ SUBROUTINE PASS(Lun,Icnt,Itest)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920210  PURPOSE added and code restructured.  (WRB)
 
-  INTEGER Icnt, Itest, Lun
+  INTEGER :: Icnt, Itest, Lun
   !* FIRST EXECUTABLE STATEMENT  PASS
-  IF ( Itest/=0 ) THEN
+  IF( Itest/=0 ) THEN
     WRITE (Lun,99001) Icnt
     99001 FORMAT (/' TEST NUMBER',I5,' PASSED')
   ELSE

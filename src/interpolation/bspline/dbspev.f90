@@ -1,7 +1,6 @@
 !** DBSPEV
 SUBROUTINE DBSPEV(T,Ad,N,K,Nderiv,X,Inev,Svalue,Work)
-  !>
-  !  Calculate the value of the spline and its derivatives from
+  !> Calculate the value of the spline and its derivatives from
   !            the B-representation.
   !***
   ! **Library:**   SLATEC
@@ -23,7 +22,7 @@ SUBROUTINE DBSPEV(T,Ad,N,K,Nderiv,X,Inev,Svalue,Work)
   !
   !         DBSPEV calculates the value of the spline and its derivatives
   !         at X from the B-representation (T,A,N,K) and returns them in
-  !         SVALUE(I),I=1,NDERIV, T(K) .LE. X .LE. T(N+1).  AD(I) can be
+  !         SVALUE(I),I=1,NDERIV, T(K) <= X <= T(N+1).  AD(I) can be
   !         the B-spline coefficients A(I), I=1,N) if NDERIV=1.  Otherwise
   !         AD must be computed before hand by a call to DBSPDR (T,A,N,K,
   !         NDERIV,AD).  If X=T(I),I=K,N), right limiting values are
@@ -42,11 +41,11 @@ SUBROUTINE DBSPEV(T,Ad,N,K,Nderiv,X,Inev,Svalue,Work)
   !                    the difference table from DBSPDR.
   !          N       - number of B-spline coefficients
   !                    N = sum of knot multiplicities-K
-  !          K       - order of the B-spline, K .GE. 1
-  !          NDERIV  - number of derivatives, 1 .LE. NDERIV .LE. K.
+  !          K       - order of the B-spline, K >= 1
+  !          NDERIV  - number of derivatives, 1 <= NDERIV <= K.
   !                    NDERIV=1 gives the zero-th derivative =
   !                    function value
-  !          X       - argument, T(K) .LE. X .LE. T(N+1)
+  !          X       - argument, T(K) <= X <= T(N+1)
   !          INEV    - an initialization parameter which must be set
   !                    to 1 the first time DBSPEV is called.
   !
@@ -85,34 +84,34 @@ SUBROUTINE DBSPEV(T,Ad,N,K,Nderiv,X,Inev,Svalue,Work)
   REAL(DP) :: summ
   !     DIMENSION T(N+K)
   !* FIRST EXECUTABLE STATEMENT  DBSPEV
-  IF ( K<1 ) THEN
+  IF( K<1 ) THEN
     !
     !
-    CALL XERMSG('DBSPEV','K DOES NOT SATISFY K.GE.1',2,1)
+    CALL XERMSG('DBSPEV','K DOES NOT SATISFY K>=1',2,1)
     RETURN
-  ELSEIF ( N<K ) THEN
-    CALL XERMSG('DBSPEV','N DOES NOT SATISFY N.GE.K',2,1)
+  ELSEIF( N<K ) THEN
+    CALL XERMSG('DBSPEV','N DOES NOT SATISFY N>=K',2,1)
     RETURN
-  ELSEIF ( Nderiv<1.OR.Nderiv>K ) THEN
-    CALL XERMSG('DBSPEV','NDERIV DOES NOT SATISFY 1.LE.NDERIV.LE.K',2,1)
+  ELSEIF( Nderiv<1 .OR. Nderiv>K ) THEN
+    CALL XERMSG('DBSPEV','NDERIV DOES NOT SATISFY 1<=NDERIV<=K',2,1)
     RETURN
   ELSE
     id = Nderiv
     CALL DINTRV(T,N+1,X,Inev,i,mflag)
-    IF ( X>=T(K) ) THEN
-      IF ( mflag/=0 ) THEN
-        IF ( X>T(i) ) GOTO 100
-        DO WHILE ( i/=K )
+    IF( X>=T(K) ) THEN
+      IF( mflag/=0 ) THEN
+        IF( X>T(i) ) GOTO 100
+        DO WHILE( i/=K )
           i = i - 1
-          IF ( X/=T(i) ) GOTO 20
+          IF( X/=T(i) ) GOTO 20
         END DO
         CALL XERMSG('DBSPEV',&
           'A LEFT LIMITING VALUE CANNOT BE OBTAINED AT T(K)',2,1)
         RETURN
       END IF
       !
-      !- I* HAS BEEN FOUND IN (K,N) SO THAT T(I) .LE. X .LT. T(I+1)
-      !     (OR .LE. T(I+1), IF T(I) .LT. T(I+1) = T(N+1) ).
+      !- I* HAS BEEN FOUND IN (K,N) SO THAT T(I) <= X < T(I+1)
+      !     (OR <= T(I+1), IF T(I) < T(I+1) = T(N+1) ).
       20  kp1mn = K + 1 - id
       kp1 = K + 1
       CALL DBSPVN(T,kp1mn,K,1,X,i,Work(1),Work(kp1),iwork)
@@ -129,7 +128,7 @@ SUBROUTINE DBSPEV(T,Ad,N,K,Nderiv,X,Inev,Svalue,Work)
         END DO
         Svalue(id) = summ
         id = id - 1
-        IF ( id==0 ) THEN
+        IF( id==0 ) THEN
           !
           RETURN
         ELSE
@@ -140,6 +139,6 @@ SUBROUTINE DBSPEV(T,Ad,N,K,Nderiv,X,Inev,Svalue,Work)
       END DO
     END IF
   END IF
-  100  CALL XERMSG('DBSPEV','X IS NOT IN T(K).LE.X.LE.T(N+1)',2,1)
+  100  CALL XERMSG('DBSPEV','X IS NOT IN T(K)<=X<=T(N+1)',2,1)
   RETURN
 END SUBROUTINE DBSPEV

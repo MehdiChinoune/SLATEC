@@ -1,7 +1,6 @@
 !** BSGQ8
 SUBROUTINE BSGQ8(FUN,Xt,Bc,N,Kk,Id,A,B,Inbv,Err,Ans,Ierr,Work)
-  !>
-  !  Subsidiary to BFQAD
+  !> Subsidiary to BFQAD
   !***
   ! **Library:**   SLATEC
   !***
@@ -24,13 +23,13 @@ SUBROUTINE BSGQ8(FUN,Xt,Bc,N,Kk,Id,A,B,Inbv,Err,Ans,Ierr,Work)
   !        XT  - Knot array for BVALU
   !        BC  - B-coefficient array for BVALU
   !        N   - Number of B-coefficients for BVALU
-  !        KK  - Order of the spline, KK.GE.1
-  !        ID  - Order of the spline derivative, 0.LE.ID.LE.KK-1
+  !        KK  - Order of the spline, KK>=1
+  !        ID  - Order of the spline derivative, 0<=ID<=KK-1
   !        A   - Lower limit of integral
   !        B   - Upper limit of integral (may be less than A)
   !        INBV- Initialization parameter for BVALU
   !        ERR - Is a requested pseudorelative error tolerance.  Normally
-  !              pick a value of ABS(ERR).LT.1E-3.  ANS will normally
+  !              pick a value of ABS(ERR)<1E-3.  ANS will normally
   !              have no more error than ABS(ERR) times the integral of
   !              the absolute value of FUN(X)*BVALU(XT,BC,N,KK,X,ID,
   !              INBV,WORK).
@@ -97,28 +96,28 @@ SUBROUTINE BSGQ8(FUN,Xt,Bc,N,Kk,Id,A,B,Inbv,Err,Ans,Ierr,Work)
   Ans = 0.0E0
   Ierr = 1
   ce = 0.0E0
-  IF ( A==B ) THEN
-    IF ( Err<0.0E0 ) Err = ce
+  IF( A==B ) THEN
+    IF( Err<0.0E0 ) Err = ce
     RETURN
   ELSE
     lmx = nlmx
     lmn = nlmn
-    IF ( B/=0.0E0 ) THEN
-      IF ( SIGN(1.0E0,B)*A>0.0E0 ) THEN
+    IF( B/=0.0E0 ) THEN
+      IF( SIGN(1.0E0,B)*A>0.0E0 ) THEN
         c = ABS(1.0E0-A/B)
-        IF ( c<=0.1E0 ) THEN
-          IF ( c<=0.0E0 ) THEN
-            IF ( Err<0.0E0 ) Err = ce
+        IF( c<=0.1E0 ) THEN
+          IF( c<=0.0E0 ) THEN
+            IF( Err<0.0E0 ) Err = ce
             RETURN
           ELSE
             anib = 0.5E0 - LOG(c)/0.69314718E0
             nib = INT(anib)
             lmx = MIN(nlmx,nbits-nib-7)
-            IF ( lmx<1 ) THEN
+            IF( lmx<1 ) THEN
               Ierr = -1
               CALL XERMSG('BSGQ8',&
                 'A AND B ARE TOO NEARLY EQUAL TO ALLOW NORMAL INTEGRATION.  ANS IS SET TO ZERO AND IERR TO -1.',1,-1)
-              IF ( Err<0.0E0 ) Err = ce
+              IF( Err<0.0E0 ) Err = ce
               RETURN
             ELSE
               lmn = MIN(lmn,lmx)
@@ -128,7 +127,7 @@ SUBROUTINE BSGQ8(FUN,Xt,Bc,N,Kk,Id,A,B,Inbv,Err,Ans,Ierr,Work)
       END IF
     END IF
     tol = MAX(ABS(Err),2.0E0**(5-nbits))/2.0E0
-    IF ( Err==0.0E0 ) tol = SQRT(R1MACH(4))
+    IF( Err==0.0E0 ) tol = SQRT(R1MACH(4))
     eps = tol
     hh(1) = (B-A)/4.0E0
     aa(1) = A
@@ -152,12 +151,12 @@ SUBROUTINE BSGQ8(FUN,Xt,Bc,N,Kk,Id,A,B,Inbv,Err,Ans,Ierr,Work)
     glr = gl + gr(l)
     ee = ABS(est-glr)*ef
     ae = MAX(eps*area,tol*ABS(glr))
-    IF ( ee<=ae ) EXIT
+    IF( ee<=ae ) EXIT
     !
     !     CONSIDER THE LEFT HALF OF THIS LEVEL
     !
-    IF ( k>kmx ) lmx = kml
-    IF ( l>=lmx ) THEN
+    IF( k>kmx ) lmx = kml
+    IF( l>=lmx ) THEN
       mxl = 1
       EXIT
     ELSE
@@ -171,7 +170,7 @@ SUBROUTINE BSGQ8(FUN,Xt,Bc,N,Kk,Id,A,B,Inbv,Err,Ans,Ierr,Work)
     END IF
   END DO
   ce = ce + (est-glr)
-  IF ( lr(l)<=0 ) THEN
+  IF( lr(l)<=0 ) THEN
     !
     !     PROCEED TO RIGHT HALF AT THIS LEVEL
     !
@@ -181,11 +180,11 @@ SUBROUTINE BSGQ8(FUN,Xt,Bc,N,Kk,Id,A,B,Inbv,Err,Ans,Ierr,Work)
     !     RETURN ONE LEVEL
     !
     vr = glr
-    DO WHILE ( l>1 )
+    DO WHILE( l>1 )
       l = l - 1
       eps = eps*2.0E0
       ef = ef*sq2
-      IF ( lr(l)<=0 ) THEN
+      IF( lr(l)<=0 ) THEN
         vl(l) = vl(l+1) + vr
         GOTO 200
       ELSE
@@ -196,12 +195,12 @@ SUBROUTINE BSGQ8(FUN,Xt,Bc,N,Kk,Id,A,B,Inbv,Err,Ans,Ierr,Work)
     !      EXIT
     !
     Ans = vr
-    IF ( (mxl/=0).AND.(ABS(ce)>2.0E0*tol*area) ) THEN
+    IF( (mxl/=0) .AND. (ABS(ce)>2.0E0*tol*area) ) THEN
       Ierr = 2
       CALL XERMSG('BSGQ8',&
         'ANS IS PROBABLY INSUFFICIENTLY ACCURATE.',3,1)
     END IF
-    IF ( Err<0.0E0 ) Err = ce
+    IF( Err<0.0E0 ) Err = ce
     RETURN
   END IF
   200  est = gr(l-1)

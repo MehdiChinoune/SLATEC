@@ -1,7 +1,6 @@
 !** DWNLT2
 LOGICAL FUNCTION DWNLT2(Me,Mend,Ir,Factor,Tau,Scalee,Wic)
-  !>
-  !  Subsidiary to WNLIT
+  !> Subsidiary to WNLIT
   !***
   ! **Library:**   SLATEC
   !***
@@ -28,7 +27,7 @@ LOGICAL FUNCTION DWNLT2(Me,Mend,Ir,Factor,Tau,Scalee,Wic)
   !           (A2)  M-NIV components
   !     And compute  SN = inverse weighted length of A1
   !                  RN = inverse weighted length of A2
-  !     Call the column independent when RN .GT. TAU*SN
+  !     Call the column independent when RN > TAU*SN
   !
   !***
   ! **See also:**  DWNLIT
@@ -51,10 +50,10 @@ LOGICAL FUNCTION DWNLT2(Me,Mend,Ir,Factor,Tau,Scalee,Wic)
   rn = 0.E0
   DO j = 1, Mend
     t = Scalee(j)
-    IF ( j<=Me ) t = t/Factor
+    IF( j<=Me ) t = t/Factor
     t = t*Wic(j)**2
     !
-    IF ( j<Ir ) THEN
+    IF( j<Ir ) THEN
       sn = sn + t
     ELSE
       rn = rn + t

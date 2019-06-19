@@ -5,8 +5,7 @@ MODULE TEST48_MOD
 CONTAINS
   !** EDIT2
   SUBROUTINE EDIT2(Y,T,Erm)
-    !>
-    !  Subsidiary to SDASQC.
+    !> Subsidiary to SDASQC.
     !***
     ! **Library:**   SLATEC (DASSL)
     !***
@@ -25,16 +24,16 @@ CONTAINS
     !   901009  Changed AMAX1 to MAX.  (FNF)
     !   901030  Removed FLOAT's; made all local declarations explicit. (FNF)
 
-    REAL(SP) Y(*), T, Erm
-    INTEGER i, j, k
-    REAL(SP) a1, a2, er, ex, yt
+    REAL(SP) :: Y(*), T, Erm
+    INTEGER :: i, j, k
+    REAL(SP) :: a1, a2, er, ex, yt
     REAL, PARAMETER :: alph1 = 1.0E0, alph2 = 1.0E0
     INTEGER, PARAMETER :: ng = 5
     !* FIRST EXECUTABLE STATEMENT  EDIT2
     Erm = 0.0E0
-    IF ( T==0.0E0 ) RETURN
+    IF( T==0.0E0 ) RETURN
     ex = 0.0E0
-    IF ( T<=30.0E0 ) ex = EXP(-2.0E0*T)
+    IF( T<=30.0E0 ) ex = EXP(-2.0E0*T)
     a2 = 1.0E0
     DO j = 1, ng
       a1 = 1.0E0
@@ -50,8 +49,7 @@ CONTAINS
   END SUBROUTINE EDIT2
   !** SDASQC
   SUBROUTINE SDASQC(Lun,Kprint,Ipass)
-    !>
-    !  Quick check for SLATEC routine SDASSL.
+    !> Quick check for SLATEC routine SDASSL.
     !***
     ! **Library:**   SLATEC (DASSL)
     !***
@@ -96,7 +94,7 @@ CONTAINS
     !   901030  Made all declarations explicit; added 1P's to formats. (FNF)
     USE slatec, ONLY : SDASSL
     !
-    INTEGER Lun, Kprint, Ipass
+    INTEGER :: Lun, Kprint, Ipass
     !
     INTEGER :: i, idid, info(15), iout, ires, iwork(45), j190, &
       j290, liw, lrw, ml, mu, neq, nerr, nfe, nje, nout, nqu, nst
@@ -117,7 +115,7 @@ CONTAINS
     !
     neq = 2
     nout = 10
-    IF ( Kprint>=2 ) WRITE (Lun,99001) neq, rtol, atol
+    IF( Kprint>=2 ) WRITE (Lun,99001) neq, rtol, atol
     99001 FORMAT ('1'/1X,' DEMONSTRATION PROGRAM FOR SDASSL',///1X,&
       ' PROBLEM 1..   LINEAR DIFFERENTIAL/ALGEBRAIC SYSTEM..',/1X,&
       ' X1DOT + 10.0*X1 = 0,  X1 + X2 = 1',/1X,&
@@ -128,9 +126,9 @@ CONTAINS
       DO i = 1, 15
         info(i) = 0
       END DO
-      IF ( j190==2 ) info(5) = 1
+      IF( j190==2 ) info(5) = 1
       !
-      IF ( Kprint>2 ) WRITE (Lun,99002) info(5)
+      IF( Kprint>2 ) WRITE (Lun,99002) info(5)
       99002 FORMAT (////1X,' INFO(5) =',I3//6X,'T',15X,'X1',14X,'X2',12X,'NQ',6X,&
         'H',12X/)
       !
@@ -146,34 +144,34 @@ CONTAINS
           iwork,liw,SDJAC1)
         hu = rwork(7)
         nqu = iwork(8)
-        IF ( Kprint>2 ) THEN
+        IF( Kprint>2 ) THEN
           WRITE (Lun,99003) t, y(1), y(2), nqu, hu
           99003 FORMAT (1X,1P,E15.5,E16.5,E16.5,I6,E14.3)
         END IF
         !
-        IF ( idid<0 ) EXIT
+        IF( idid<0 ) EXIT
         yt1 = EXP(-10.0E0*t)
         yt2 = 1.0E0 - yt1
         er1 = ABS(yt1-y(1))
         er2 = ABS(yt2-y(2))
         er = MAX(er1,er2)/atol(1)
         ero = MAX(ero,er)
-        IF ( er>1000.0E0 ) THEN
-          IF ( Kprint>=2 ) WRITE (Lun,99010) t
+        IF( er>1000.0E0 ) THEN
+          IF( Kprint>=2 ) WRITE (Lun,99010) t
           !
           nerr = nerr + 1
         END IF
         tout = tout + dtout
       END DO
-      IF ( idid<0 ) THEN
-        IF ( Kprint>=2 ) WRITE (Lun,99011) idid, t
+      IF( idid<0 ) THEN
+        IF( Kprint>=2 ) WRITE (Lun,99011) idid, t
         !
         nerr = nerr + 1
       END IF
       nst = iwork(11)
       nfe = iwork(12)
       nje = iwork(13)
-      IF ( Kprint>2 ) WRITE (Lun,99012) nst, nfe, nje, ero
+      IF( Kprint>2 ) WRITE (Lun,99012) nst, nfe, nje, ero
       !
     END DO
     !
@@ -185,7 +183,7 @@ CONTAINS
     iwork(1) = ml
     iwork(2) = mu
     nout = 5
-    IF ( Kprint>=2 ) WRITE (Lun,99004) neq, ml, mu, rtol, atol
+    IF( Kprint>=2 ) WRITE (Lun,99004) neq, ml, mu, rtol, atol
     99004 FORMAT ('1'/1X,' DEMONSTRATION PROGRAM FOR SDASSL',///1X,&
       ' PROBLEM 2.. YDOT = A * Y, WHERE ',&
       ' A IS A BANDED LOWER TRIANGULAR MATRIX',/1X,&
@@ -197,9 +195,9 @@ CONTAINS
         info(i) = 0
       END DO
       info(6) = 1
-      IF ( j290==2 ) info(5) = 1
+      IF( j290==2 ) info(5) = 1
       !
-      IF ( Kprint>2 ) WRITE (Lun,99005) info(5)
+      IF( Kprint>2 ) WRITE (Lun,99005) info(5)
       99005 FORMAT (////1X,' INFO(5) =',I3//6X,'T',14X,'MAX.ERR.',5X,'NQ',6X,'H'/)
       !
       t = 0.0E0
@@ -220,36 +218,36 @@ CONTAINS
         CALL EDIT2(y,t,erm)
         hu = rwork(7)
         nqu = iwork(8)
-        IF ( Kprint>2 ) WRITE (Lun,99006) t, erm, nqu, hu
+        IF( Kprint>2 ) WRITE (Lun,99006) t, erm, nqu, hu
         99006 FORMAT (1X,1P,E15.5,E14.3,I6,E14.3)
         !
-        IF ( idid<0 ) EXIT
+        IF( idid<0 ) EXIT
         er = erm/atol(1)
         ero = MAX(ero,er)
-        IF ( er>1000.0E0 ) THEN
-          IF ( Kprint>=2 ) WRITE (Lun,99010) t
+        IF( er>1000.0E0 ) THEN
+          IF( Kprint>=2 ) WRITE (Lun,99010) t
           nerr = nerr + 1
         END IF
         tout = tout*10.0E0
       END DO
-      IF ( idid<0 ) THEN
-        IF ( Kprint>=2 ) WRITE (Lun,99011) idid, t
+      IF( idid<0 ) THEN
+        IF( Kprint>=2 ) WRITE (Lun,99011) idid, t
         nerr = nerr + 1
       END IF
       nst = iwork(11)
       nfe = iwork(12)
       nje = iwork(13)
-      IF ( Kprint>2 ) WRITE (Lun,99012) nst, nfe, nje, ero
+      IF( Kprint>2 ) WRITE (Lun,99012) nst, nfe, nje, ero
       !
     END DO
-    IF ( Kprint>=2 ) WRITE (Lun,99007) nerr
+    IF( Kprint>=2 ) WRITE (Lun,99007) nerr
     !
     99007 FORMAT (////1X,' NUMBER OF ERRORS ENCOUNTERED =',I3)
     !
-    IF ( nerr>0 ) Ipass = 0
-    IF ( (Ipass==1).AND.(Kprint>1) ) WRITE (Lun,99008)
+    IF( nerr>0 ) Ipass = 0
+    IF( (Ipass==1) .AND. (Kprint>1) ) WRITE (Lun,99008)
     99008 FORMAT (/,' ----------SDASSL PASSED ALL TESTS----------')
-    IF ( (Ipass==0).AND.(Kprint/=0) ) WRITE (Lun,99009)
+    IF( (Ipass==0) .AND. (Kprint/=0) ) WRITE (Lun,99009)
     99009 FORMAT (/,' **********SDASSL FAILED SOME TESTS*********')
     99010 FORMAT (//' WARNING.. ERROR EXCEEDS 1000 * TOLERANCE','  WHEN  T =',1P,&
       E13.5//)
@@ -260,8 +258,7 @@ CONTAINS
   END SUBROUTINE SDASQC
   !** SDJAC1
   SUBROUTINE SDJAC1(T,Y,Yprime,Pd,Cj)
-    !>
-    !  First Jacobian evaluator for SDASQC.
+    !> First Jacobian evaluator for SDASQC.
     !***
     ! **Library:**   SLATEC (DASSL)
     !***
@@ -287,8 +284,7 @@ CONTAINS
   END SUBROUTINE SDJAC1
   !** SDJAC2
   SUBROUTINE SDJAC2(T,Y,Yprime,Pd,Cj)
-    !>
-    !  Second Jacobian evaluator for SDASQC.
+    !> Second Jacobian evaluator for SDASQC.
     !***
     ! **Library:**   SLATEC (DASSL)
     !***
@@ -329,8 +325,7 @@ CONTAINS
   END SUBROUTINE SDJAC2
   !** SDRES1
   SUBROUTINE SDRES1(T,Y,Yprime,Delta,Ires)
-    !>
-    !  First residual evaluator for SDASQC.
+    !> First residual evaluator for SDASQC.
     !***
     ! **Library:**   SLATEC (DASSL)
     !***
@@ -355,8 +350,7 @@ CONTAINS
   END SUBROUTINE SDRES1
   !** SDRES2
   SUBROUTINE SDRES2(T,Y,Yprime,Delta,Ires)
-    !>
-    !  Second residual evaluator for SDASQC.
+    !> Second residual evaluator for SDASQC.
     !***
     ! **Library:**   SLATEC (DASSL)
     !***
@@ -385,8 +379,8 @@ CONTAINS
       DO i = 1, ng
         k = i + (j-1)*ng
         d = -2.0E0*Y(k)
-        IF ( i/=1 ) d = d + Y(k-1)*alph1
-        IF ( j/=1 ) d = d + Y(k-ng)*alph2
+        IF( i/=1 ) d = d + Y(k-1)*alph1
+        IF( j/=1 ) d = d + Y(k-ng)*alph2
         Delta(k) = d - Yprime(k)
       END DO
     END DO
@@ -398,8 +392,7 @@ PROGRAM TEST48
   USE slatec, ONLY : I1MACH, XSETF, XSETUN, XERMAX
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
-  !>
-  !  Driver for testing SLATEC subprograms
+  !> Driver for testing SLATEC subprograms
   !***
   ! **Library:**   SLATEC
   !***
@@ -444,7 +437,7 @@ PROGRAM TEST48
   !   891013  DATE WRITTEN
   !   901001  Converted prologue to 4.0 format.  (FNF)
   !   901009  Corrected GAMS classification code.  (FNF)
-  INTEGER ipass, kprint, lin, lun, nfail
+  INTEGER :: ipass, kprint, lin, lun, nfail
   !* FIRST EXECUTABLE STATEMENT  TEST48
   lun = I1MACH(2)
   lin = I1MACH(1)
@@ -454,7 +447,7 @@ PROGRAM TEST48
   !
   CALL GET_ARGUMENT(kprint)
   CALL XSETUN(lun)
-  IF ( kprint<=1 ) THEN
+  IF( kprint<=1 ) THEN
     CALL XSETF(0)
   ELSE
     CALL XSETF(1)
@@ -464,11 +457,11 @@ PROGRAM TEST48
   !     Test SDASSL
   !
   CALL SDASQC(lun,kprint,ipass)
-  IF ( ipass==0 ) nfail = nfail + 1
+  IF( ipass==0 ) nfail = nfail + 1
   !
   !     Write PASS or FAIL message
   !
-  IF ( nfail==0 ) THEN
+  IF( nfail==0 ) THEN
     WRITE (lun,99001)
     99001 FORMAT (/' --------------TEST48 PASSED ALL TESTS----------------')
   ELSE

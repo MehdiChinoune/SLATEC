@@ -1,7 +1,6 @@
 !** DSLLTI
 SUBROUTINE DSLLTI(N,B,X,Rwork,Iwork)
-  !>
-  !  SLAP MSOLVE for LDL' (IC) Factorization.
+  !> SLAP MSOLVE for LDL' (IC) Factorization.
   !            This routine acts as an interface between the SLAP generic
   !            MSOLVE calling convention and the routine that actually
   !                           -1
@@ -50,12 +49,12 @@ SUBROUTINE DSLLTI(N,B,X,Rwork,Iwork)
   !   930701  Updated CATEGORY section.  (FNF, WRB)
 
   !     .. Scalar Arguments ..
-  INTEGER N
+  INTEGER :: N
   !     .. Array Arguments ..
   REAL(DP) :: B(N), Rwork(*), X(N)
-  INTEGER Iwork(*)
+  INTEGER :: Iwork(*)
   !     .. Local Scalars ..
-  INTEGER locdin, locel, lociel, locjel, nel
+  INTEGER :: locdin, locel, lociel, locjel, nel
   !* FIRST EXECUTABLE STATEMENT  DSLLTI
   nel = Iwork(1)
   lociel = Iwork(3)

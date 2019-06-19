@@ -1,13 +1,12 @@
 !** QAWF
 SUBROUTINE QAWF(F,A,Omega,Integr,Epsabs,Result,Abserr,Neval,Ier,Limlst,&
     Lst,Leniw,Maxp1,Lenw,Iwork,Work)
-  !>
-  !  The routine calculates an approximation result to a given
+  !> The routine calculates an approximation result to a given
   !            Fourier integral
   !            I = Integral of F(X)*W(X) over (A,INFINITY)
   !            where W(X) = COS(OMEGA*X) or W(X) = SIN(OMEGA*X).
   !            Hopefully satisfying following claim for accuracy
-  !            ABS(I-RESULT).LE.EPSABS.
+  !            ABS(I-RESULT)<=EPSABS.
   !***
   ! **Library:**   SLATEC (QUADPACK)
   !***
@@ -50,12 +49,12 @@ SUBROUTINE QAWF(F,A,Omega,Integr,Epsabs,Result,Abserr,Neval,Ier,Limlst,&
   !                     Indicates which of the WEIGHT functions is used
   !                     INTEGR = 1      W(X) = COS(OMEGA*X)
   !                     INTEGR = 2      W(X) = SIN(OMEGA*X)
-  !                     IF INTEGR.NE.1.AND.INTEGR.NE.2, the routine
+  !                     IF INTEGR/=1 .AND. INTEGR/=2, the routine
   !                     will end with IER = 6.
   !
   !            EPSABS - Real
-  !                     Absolute accuracy requested, EPSABS.GT.0.
-  !                     If EPSABS.LE.0, the routine will end with IER = 6.
+  !                     Absolute accuracy requested, EPSABS>0.
+  !                     If EPSABS<=0, the routine will end with IER = 6.
   !
   !         ON RETURN
   !            RESULT - Real
@@ -72,12 +71,12 @@ SUBROUTINE QAWF(F,A,Omega,Integr,Epsabs,Result,Abserr,Neval,Ier,Limlst,&
   !                     IER = 0 Normal and reliable termination of the
   !                             routine. It is assumed that the requested
   !                             accuracy has been achieved.
-  !                     IER.GT.0 Abnormal termination of the routine.
+  !                     IER>0 Abnormal termination of the routine.
   !                             The estimates for integral and error are
   !                             less reliable. It is assumed that the
   !                             requested accuracy has not been achieved.
   !            ERROR MESSAGES
-  !                    If OMEGA.NE.0
+  !                    If OMEGA/=0
   !                     IER = 1 Maximum number of cycles allowed
   !                             has been achieved, i.e. of subintervals
   !                             (A+(K-1)C,A+KC) where
@@ -105,10 +104,10 @@ SUBROUTINE QAWF(F,A,Omega,Integr,Epsabs,Result,Abserr,Neval,Ier,Limlst,&
   !                             to examine the array IWORK which contains
   !                             the error flags on the cycles.
   !                         = 6 The input is invalid because
-  !                             (INTEGR.NE.1 AND INTEGR.NE.2) or
-  !                              EPSABS.LE.0 or LIMLST.LT.1 or
-  !                              LENIW.LT.(LIMLST+2) or MAXP1.LT.1 or
-  !                              LENW.LT.(LENIW*2+MAXP1*25).
+  !                             (INTEGR/=1 AND INTEGR/=2) or
+  !                              EPSABS<=0 or LIMLST<1 or
+  !                              LENIW<(LIMLST+2) or MAXP1<1 or
+  !                              LENW<(LENIW*2+MAXP1*25).
   !                              RESULT, ABSERR, NEVAL, LST are set to
   !                              zero.
   !                         = 7 Bad integrand behaviour occurs within
@@ -153,8 +152,8 @@ SUBROUTINE QAWF(F,A,Omega,Integr,Epsabs,Result,Abserr,Neval,Ier,Limlst,&
   !         DIMENSIONING PARAMETERS
   !            LIMLST - Integer
   !                     LIMLST gives an upper bound on the number of
-  !                     cycles, LIMLST.GE.3.
-  !                     If LIMLST.LT.3, the routine will end with IER = 6.
+  !                     cycles, LIMLST>=3.
+  !                     If LIMLST<3, the routine will end with IER = 6.
   !
   !            LST    - Integer
   !                     On return, LST indicates the number of cycles
@@ -165,20 +164,20 @@ SUBROUTINE QAWF(F,A,Omega,Integr,Epsabs,Result,Abserr,Neval,Ier,Limlst,&
   !                     Dimensioning parameter for IWORK. On entry,
   !                     (LENIW-LIMLST)/2 equals the maximum number of
   !                     subintervals allowed in the partition of each
-  !                     cycle, LENIW.GE.(LIMLST+2).
-  !                     If LENIW.LT.(LIMLST+2), the routine will end with
+  !                     cycle, LENIW>=(LIMLST+2).
+  !                     If LENIW<(LIMLST+2), the routine will end with
   !                     IER = 6.
   !
   !            MAXP1  - Integer
   !                     MAXP1 gives an upper bound on the number of
   !                     Chebyshev moments which can be stored, i.e. for
   !                     the intervals of lengths ABS(B-A)*2**(-L),
-  !                     L = 0,1, ..., MAXP1-2, MAXP1.GE.1.
-  !                     If MAXP1.LT.1, the routine will end with IER = 6.
+  !                     L = 0,1, ..., MAXP1-2, MAXP1>=1.
+  !                     If MAXP1<1, the routine will end with IER = 6.
   !            LENW   - Integer
   !                     Dimensioning parameter for WORK
   !                     LENW must be at least LENIW*2+MAXP1*25.
-  !                     If LENW.LT.(LENIW*2+MAXP1*25), the routine will
+  !                     If LENW<(LENIW*2+MAXP1*25), the routine will
   !                     end with IER = 6.
   !
   !         WORK ARRAYS
@@ -227,7 +226,7 @@ SUBROUTINE QAWF(F,A,Omega,Integr,Epsabs,Result,Abserr,Neval,Ier,Limlst,&
   Neval = 0
   Result = 0.0E+00
   Abserr = 0.0E+00
-  IF ( Limlst>=3.AND.Leniw>=(Limlst+2).AND.Maxp1>=1.AND.&
+  IF( Limlst>=3 .AND. Leniw>=(Limlst+2) .AND. Maxp1>=1 .AND. &
       Lenw>=(Leniw*2+Maxp1*25) ) THEN
     !
     !         PREPARE CALL FOR QAWFE
@@ -248,6 +247,6 @@ SUBROUTINE QAWF(F,A,Omega,Integr,Epsabs,Result,Abserr,Neval,Ier,Limlst,&
     !
     lvl = 0
   END IF
-  IF ( Ier==6 ) lvl = 1
-  IF ( Ier/=0 ) CALL XERMSG('QAWF','ABNORMAL RETURN',Ier,lvl)
+  IF( Ier==6 ) lvl = 1
+  IF( Ier/=0 ) CALL XERMSG('QAWF','ABNORMAL RETURN',Ier,lvl)
 END SUBROUTINE QAWF

@@ -1,7 +1,6 @@
 !** GAMRN
 REAL(SP) FUNCTION GAMRN(X)
-  !>
-  !  Subsidiary to BSKIN
+  !> Subsidiary to BSKIN
   !***
   ! **Library:**   SLATEC
   !***
@@ -13,9 +12,9 @@ REAL(SP) FUNCTION GAMRN(X)
   !
   !     Abstract
   !         GAMRN computes the GAMMA function ratio GAMMA(X)/GAMMA(X+0.5)
-  !         for real X.gt.0. If X.ge.XMIN, an asymptotic expansion is
-  !         evaluated. If X.lt.XMIN, an integer is added to X to form a
-  !         new value of X.ge.XMIN and the asymptotic expansion is eval-
+  !         for real X>0. If X>=XMIN, an asymptotic expansion is
+  !         evaluated. If X<XMIN, an integer is added to X to form a
+  !         new value of X>=XMIN and the asymptotic expansion is eval-
   !         uated for this new value of X. Successive application of the
   !         recurrence relation
   !
@@ -29,7 +28,7 @@ REAL(SP) FUNCTION GAMRN(X)
   !         constants are given to only 18 digits.
   !
   !         Input
-  !           X      - Argument, X.gt.0.0
+  !           X      - Argument, X>0.0
   !
   !         OUTPUT
   !           GAMRN  - Ratio  GAMMA(X)/GAMMA(X+0.5)
@@ -52,8 +51,8 @@ REAL(SP) FUNCTION GAMRN(X)
   !   910722  Updated AUTHOR section.  (ALS)
   !   920520  Added REFERENCES section.  (WRB)
   USE service, ONLY : R1MACH, I1MACH
-  INTEGER i, i1m11, k, mx, nx
-  REAL(SP) fln, rln, s, tol, trm, X, xdmy, xinc, xm, xmin, xp, xsq
+  INTEGER :: i, i1m11, k, mx, nx
+  REAL(SP) :: fln, rln, s, tol, trm, X, xdmy, xinc, xm, xmin, xp, xsq
   !
   REAL(SP), PARAMETER :: gr(12) = [ 1.00000000000000000E+00,-1.56250000000000000E-02, &
     2.56347656250000000E-03,-1.27983093261718750E-03,  1.34351104497909546E-03, &
@@ -74,23 +73,23 @@ REAL(SP) FUNCTION GAMRN(X)
   xmin = mx
   xdmy = X - 0.25E0
   xinc = 0.0E0
-  IF ( X<xmin ) THEN
+  IF( X<xmin ) THEN
     xinc = xmin - nx
     xdmy = xdmy + xinc
   END IF
   s = 1.0E0
-  IF ( xdmy*tol<=1.0E0 ) THEN
+  IF( xdmy*tol<=1.0E0 ) THEN
     xsq = 1.0E0/(xdmy*xdmy)
     xp = xsq
     DO k = 2, 12
       trm = gr(k)*xp
-      IF ( ABS(trm)<tol ) EXIT
+      IF( ABS(trm)<tol ) EXIT
       s = s + trm
       xp = xp*xsq
     END DO
   END IF
   s = s/SQRT(xdmy)
-  IF ( xinc/=0.0E0 ) THEN
+  IF( xinc/=0.0E0 ) THEN
     nx = INT(xinc)
     xp = 0.0E0
     DO i = 1, nx

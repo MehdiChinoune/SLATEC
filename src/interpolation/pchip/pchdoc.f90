@@ -1,7 +1,6 @@
 !** PCHDOC
 SUBROUTINE PCHDOC
-  !>
-  !  Documentation for PCHIP, a Fortran package for piecewise
+  !> Documentation for PCHIP, a Fortran package for piecewise
   !            cubic Hermite interpolation of data.
   !***
   ! **Library:**   SLATEC (PCHIP)
@@ -171,7 +170,7 @@ SUBROUTINE PCHDOC
   !         REAL  X(NXMAX), Y(NYMAX)
   !         REAL  F2D(NXMAX,NYMAX), FX(NXMAX,NYMAX), FY(NXMAX,NYMAX)
   !
-  !   where  2.LE.NX.LE.NXMAX AND 2.LE.NY.LE.NYMAX .  To interpolate
+  !   where  2<=NX<=NXMAX AND 2<=NY<=NYMAX .  To interpolate
   !   in X along the line  Y = Y(J), call PCHxx with
   !
   !              NX, X, F2D(1,J), FX(1,J), 1  .

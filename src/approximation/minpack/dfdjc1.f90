@@ -1,7 +1,6 @@
 !** DFDJC1
 SUBROUTINE DFDJC1(FCN,N,X,Fvec,Fjac,Ldfjac,Iflag,Ml,Mu,Epsfcn,Wa1,Wa2)
-  !>
-  !  Subsidiary to DNSQ and DNSQE
+  !> Subsidiary to DNSQ and DNSQE
   !***
   ! **Library:**   SLATEC
   !***
@@ -116,7 +115,7 @@ SUBROUTINE DFDJC1(FCN,N,X,Fvec,Fjac,Ldfjac,Iflag,Ml,Mu,Epsfcn,Wa1,Wa2)
   !
   eps = SQRT(MAX(Epsfcn,epsmch))
   msum = Ml + Mu + 1
-  IF ( msum<N ) THEN
+  IF( msum<N ) THEN
     !
     !        COMPUTATION OF BANDED APPROXIMATE JACOBIAN.
     !
@@ -124,18 +123,18 @@ SUBROUTINE DFDJC1(FCN,N,X,Fvec,Fjac,Ldfjac,Iflag,Ml,Mu,Epsfcn,Wa1,Wa2)
       DO j = k, N, msum
         Wa2(j) = X(j)
         h = eps*ABS(Wa2(j))
-        IF ( h==zero ) h = eps
+        IF( h==zero ) h = eps
         X(j) = Wa2(j) + h
       END DO
       CALL FCN(N,X,Wa1,Iflag)
-      IF ( Iflag<0 ) EXIT
+      IF( Iflag<0 ) EXIT
       DO j = k, N, msum
         X(j) = Wa2(j)
         h = eps*ABS(Wa2(j))
-        IF ( h==zero ) h = eps
+        IF( h==zero ) h = eps
         DO i = 1, N
           Fjac(i,j) = zero
-          IF ( i>=j-Mu.AND.i<=j+Ml ) Fjac(i,j) = (Wa1(i)-Fvec(i))/h
+          IF( i>=j-Mu .AND. i<=j+Ml ) Fjac(i,j) = (Wa1(i)-Fvec(i))/h
         END DO
       END DO
     END DO
@@ -146,10 +145,10 @@ SUBROUTINE DFDJC1(FCN,N,X,Fvec,Fjac,Ldfjac,Iflag,Ml,Mu,Epsfcn,Wa1,Wa2)
     DO j = 1, N
       temp = X(j)
       h = eps*ABS(temp)
-      IF ( h==zero ) h = eps
+      IF( h==zero ) h = eps
       X(j) = temp + h
       CALL FCN(N,X,Wa1,Iflag)
-      IF ( Iflag<0 ) EXIT
+      IF( Iflag<0 ) EXIT
       X(j) = temp
       DO i = 1, N
         Fjac(i,j) = (Wa1(i)-Fvec(i))/h

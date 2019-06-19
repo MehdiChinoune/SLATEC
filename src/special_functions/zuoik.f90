@@ -1,7 +1,6 @@
 !** ZUOIK
 SUBROUTINE ZUOIK(Zr,Zi,Fnu,Kode,Ikflg,N,Yr,Yi,Nuf,Tol,Elim,Alim)
-  !>
-  !  Subsidiary to ZBESH, ZBESI and ZBESK
+  !> Subsidiary to ZBESH, ZBESI and ZBESK
   !***
   ! **Library:**   SLATEC
   !***
@@ -14,7 +13,7 @@ SUBROUTINE ZUOIK(Zr,Zi,Fnu,Kode,Ikflg,N,Yr,Yi,Nuf,Tol,Elim,Alim)
   !     ZUOIK COMPUTES THE LEADING TERMS OF THE UNIFORM ASYMPTOTIC
   !     EXPANSIONS FOR THE I AND K FUNCTIONS AND COMPARES THEM
   !     (IN LOGARITHMIC FORM) TO ALIM AND ELIM FOR OVER AND UNDERFLOW
-  !     WHERE ALIM.LT.ELIM. IF THE MAGNITUDE, BASED ON THE LEADING
+  !     WHERE ALIM<ELIM. IF THE MAGNITUDE, BASED ON THE LEADING
   !     EXPONENTIAL, IS LESS THAN ALIM OR GREATER THAN -ALIM, THEN
   !     THE RESULT IS ON SCALE. IF NOT, THEN A REFINED TEST USING OTHER
   !     MULTIPLIERS (IN LOGARITHMIC FORM) IS MADE BASED ON ELIM. HERE
@@ -25,10 +24,10 @@ SUBROUTINE ZUOIK(Zr,Zi,Fnu,Kode,Ikflg,N,Yr,Yi,Nuf,Tol,Elim,Alim)
   !          =2 MEANS THE K SEQUENCE IS TESTED
   !     NUF = 0 MEANS THE LAST MEMBER OF THE SEQUENCE IS ON SCALE
   !         =-1 MEANS AN OVERFLOW WOULD OCCUR
-  !     IKFLG=1 AND NUF.GT.0 MEANS THE LAST NUF Y VALUES WERE SET TO ZERO
+  !     IKFLG=1 AND NUF>0 MEANS THE LAST NUF Y VALUES WERE SET TO ZERO
   !             THE FIRST N-NUF VALUES MUST BE SET BY ANOTHER ROUTINE
-  !     IKFLG=2 AND NUF.EQ.N MEANS ALL Y VALUES WERE SET TO ZERO
-  !     IKFLG=2 AND 0.LT.NUF.LT.N NOT CONSIDERED. Y MUST BE SET BY
+  !     IKFLG=2 AND NUF=N MEANS ALL Y VALUES WERE SET TO ZERO
+  !     IKFLG=2 AND 0<NUF<N NOT CONSIDERED. Y MUST BE SET BY
   !             ANOTHER ROUTINE
   !
   !***
@@ -43,7 +42,7 @@ SUBROUTINE ZUOIK(Zr,Zi,Fnu,Kode,Ikflg,N,Yr,Yi,Nuf,Tol,Elim,Alim)
   USE service, ONLY : D1MACH
   !     COMPLEX ARG,ASUM,BSUM,CWRK,CZ,CZERO,PHI,SUM,Y,Z,ZB,ZETA1,ZETA2,ZN,
   !    *ZR
-  INTEGER i, idum, iform, Ikflg, init, Kode, N, nn, Nuf, nw
+  INTEGER :: i, idum, iform, Ikflg, init, Kode, N, nn, Nuf, nw
   REAL(DP) :: aarg, Alim, aphi, argi, argr, asumi, asumr, ascle, ax, ay, bsumi, &
     bsumr, cwrki(16), cwrkr(16), czi, czr, Elim, fnn, Fnu, gnn, gnu, phii, phir, &
     rcz, str, sti, sumi, sumr, Tol, Yi(N), Yr(N), zbi, zbr, zeta1i, zeta1r, &
@@ -55,7 +54,7 @@ SUBROUTINE ZUOIK(Zr,Zi,Fnu,Kode,Ikflg,N,Yr,Yi,Nuf,Tol,Elim,Alim)
   nn = N
   zrr = Zr
   zri = Zi
-  IF ( Zr<0.0D0 ) THEN
+  IF( Zr<0.0D0 ) THEN
     zrr = -Zr
     zri = -Zi
   END IF
@@ -64,9 +63,9 @@ SUBROUTINE ZUOIK(Zr,Zi,Fnu,Kode,Ikflg,N,Yr,Yi,Nuf,Tol,Elim,Alim)
   ax = ABS(Zr)*1.7321D0
   ay = ABS(Zi)
   iform = 1
-  IF ( ay>ax ) iform = 2
+  IF( ay>ax ) iform = 2
   gnu = MAX(Fnu,1.0D0)
-  IF ( Ikflg/=1 ) THEN
+  IF( Ikflg/=1 ) THEN
     fnn = nn
     gnn = Fnu + fnn - 1.0D0
     gnu = MAX(gnn,fnn)
@@ -76,10 +75,10 @@ SUBROUTINE ZUOIK(Zr,Zi,Fnu,Kode,Ikflg,N,Yr,Yi,Nuf,Tol,Elim,Alim)
   !     REAL PARTS OF ZETA1, ZETA2 AND ZB. NO ATTEMPT IS MADE TO GET
   !     THE SIGN OF THE IMAGINARY PART CORRECT.
   !-----------------------------------------------------------------------
-  IF ( iform==2 ) THEN
+  IF( iform==2 ) THEN
     znr = zri
     zni = -zrr
-    IF ( Zi<=0.0D0 ) znr = -znr
+    IF( Zi<=0.0D0 ) znr = -znr
     CALL ZUNHJ(znr,zni,gnu,1,Tol,phir,phii,argr,argi,zeta1r,zeta1i,zeta2r,&
       zeta2i,asumr,asumi,bsumr,bsumi)
     czr = -zeta1r + zeta2r
@@ -92,11 +91,11 @@ SUBROUTINE ZUOIK(Zr,Zi,Fnu,Kode,Ikflg,N,Yr,Yi,Nuf,Tol,Elim,Alim)
     czr = -zeta1r + zeta2r
     czi = -zeta1i + zeta2i
   END IF
-  IF ( Kode/=1 ) THEN
+  IF( Kode/=1 ) THEN
     czr = czr - zbr
     czi = czi - zbi
   END IF
-  IF ( Ikflg/=1 ) THEN
+  IF( Ikflg/=1 ) THEN
     czr = -czr
     czi = -czi
   END IF
@@ -105,24 +104,24 @@ SUBROUTINE ZUOIK(Zr,Zi,Fnu,Kode,Ikflg,N,Yr,Yi,Nuf,Tol,Elim,Alim)
   !-----------------------------------------------------------------------
   !     OVERFLOW TEST
   !-----------------------------------------------------------------------
-  IF ( rcz>Elim ) THEN
+  IF( rcz>Elim ) THEN
     Nuf = -1
     RETURN
   ELSE
-    IF ( rcz<Alim ) THEN
+    IF( rcz<Alim ) THEN
       !-----------------------------------------------------------------------
       !     UNDERFLOW TEST
       !-----------------------------------------------------------------------
-      IF ( rcz>=(-Elim) ) THEN
-        IF ( rcz>(-Alim) ) GOTO 50
+      IF( rcz>=(-Elim) ) THEN
+        IF( rcz>(-Alim) ) GOTO 50
         rcz = rcz + LOG(aphi)
-        IF ( iform==2 ) rcz = rcz - 0.25D0*LOG(aarg) - aic
-        IF ( rcz>(-Elim) ) THEN
+        IF( iform==2 ) rcz = rcz - 0.25D0*LOG(aarg) - aic
+        IF( rcz>(-Elim) ) THEN
           ascle = 1.0D+3*D1MACH(1)/Tol
           CALL ZLOG(phir,phii,str,sti,idum)
           czr = czr + str
           czi = czi + sti
-          IF ( iform/=1 ) THEN
+          IF( iform/=1 ) THEN
             CALL ZLOG(argr,argi,str,sti,idum)
             czr = czr - 0.25D0*str - aic
             czi = czi - 0.25D0*sti
@@ -132,7 +131,7 @@ SUBROUTINE ZUOIK(Zr,Zi,Fnu,Kode,Ikflg,N,Yr,Yi,Nuf,Tol,Elim,Alim)
           czr = ax*COS(ay)
           czi = ax*SIN(ay)
           CALL ZUCHK(czr,czi,nw,ascle,Tol)
-          IF ( nw==0 ) GOTO 50
+          IF( nw==0 ) GOTO 50
         END IF
       END IF
       DO i = 1, nn
@@ -143,20 +142,20 @@ SUBROUTINE ZUOIK(Zr,Zi,Fnu,Kode,Ikflg,N,Yr,Yi,Nuf,Tol,Elim,Alim)
       RETURN
     ELSE
       rcz = rcz + LOG(aphi)
-      IF ( iform==2 ) rcz = rcz - 0.25D0*LOG(aarg) - aic
-      IF ( rcz>Elim ) THEN
+      IF( iform==2 ) rcz = rcz - 0.25D0*LOG(aarg) - aic
+      IF( rcz>Elim ) THEN
         Nuf = -1
         RETURN
       END IF
     END IF
-    50  IF ( Ikflg==2 ) RETURN
-    IF ( N==1 ) RETURN
+    50  IF( Ikflg==2 ) RETURN
+    IF( N==1 ) RETURN
   END IF
   !-----------------------------------------------------------------------
   !     SET UNDERFLOWS ON I SEQUENCE
   !-----------------------------------------------------------------------
   100  gnu = Fnu + (nn-1)
-  IF ( iform==2 ) THEN
+  IF( iform==2 ) THEN
     CALL ZUNHJ(znr,zni,gnu,1,Tol,phir,phii,argr,argi,zeta1r,zeta1i,zeta2r,&
       zeta2i,asumr,asumi,bsumr,bsumi)
     czr = -zeta1r + zeta2r
@@ -169,22 +168,22 @@ SUBROUTINE ZUOIK(Zr,Zi,Fnu,Kode,Ikflg,N,Yr,Yi,Nuf,Tol,Elim,Alim)
     czr = -zeta1r + zeta2r
     czi = -zeta1i + zeta2i
   END IF
-  IF ( Kode/=1 ) THEN
+  IF( Kode/=1 ) THEN
     czr = czr - zbr
     czi = czi - zbi
   END IF
   aphi = ZABS(phir,phii)
   rcz = czr
-  IF ( rcz>=(-Elim) ) THEN
-    IF ( rcz>(-Alim) ) RETURN
+  IF( rcz>=(-Elim) ) THEN
+    IF( rcz>(-Alim) ) RETURN
     rcz = rcz + LOG(aphi)
-    IF ( iform==2 ) rcz = rcz - 0.25D0*LOG(aarg) - aic
-    IF ( rcz>(-Elim) ) THEN
+    IF( iform==2 ) rcz = rcz - 0.25D0*LOG(aarg) - aic
+    IF( rcz>(-Elim) ) THEN
       ascle = 1.0D+3*D1MACH(1)/Tol
       CALL ZLOG(phir,phii,str,sti,idum)
       czr = czr + str
       czi = czi + sti
-      IF ( iform/=1 ) THEN
+      IF( iform/=1 ) THEN
         CALL ZLOG(argr,argi,str,sti,idum)
         czr = czr - 0.25D0*str - aic
         czi = czi - 0.25D0*sti
@@ -194,14 +193,14 @@ SUBROUTINE ZUOIK(Zr,Zi,Fnu,Kode,Ikflg,N,Yr,Yi,Nuf,Tol,Elim,Alim)
       czr = ax*COS(ay)
       czi = ax*SIN(ay)
       CALL ZUCHK(czr,czi,nw,ascle,Tol)
-      IF ( nw==0 ) RETURN
+      IF( nw==0 ) RETURN
     END IF
   END IF
   Yr(nn) = zeror
   Yi(nn) = zeroi
   nn = nn - 1
   Nuf = Nuf + 1
-  IF ( nn==0 ) RETURN
+  IF( nn==0 ) RETURN
   GOTO 100
   RETURN
 END SUBROUTINE ZUOIK

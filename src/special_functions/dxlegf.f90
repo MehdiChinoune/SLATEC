@@ -1,7 +1,6 @@
 !** DXLEGF
 SUBROUTINE DXLEGF(Dnu1,Nudiff,Mu1,Mu2,Theta,Id,Pqa,Ipqa,Ierror)
-  !>
-  !  Compute normalized Legendre polynomials and associated
+  !> Compute normalized Legendre polynomials and associated
   !            Legendre functions.
   !***
   ! **Library:**   SLATEC
@@ -141,7 +140,7 @@ SUBROUTINE DXLEGF(Dnu1,Nudiff,Mu1,Mu2,Theta,Id,Pqa,Ipqa,Ierror)
   !* FIRST EXECUTABLE STATEMENT  DXLEGF
   Ierror = 0
   CALL DXSET(0,0,0.0D0,0,Ierror)
-  IF ( Ierror/=0 ) RETURN
+  IF( Ierror/=0 ) RETURN
   pi2 = 2.D0*ATAN(1.D0)
   !
   !        ZERO OUTPUT ARRAYS
@@ -154,73 +153,73 @@ SUBROUTINE DXLEGF(Dnu1,Nudiff,Mu1,Mu2,Theta,Id,Pqa,Ipqa,Ierror)
   !
   !        CHECK FOR VALID INPUT VALUES
   !
-  IF ( Nudiff>=0 ) THEN
-    IF ( Dnu1>=-.5D0 ) THEN
-      IF ( Mu2>=Mu1 ) THEN
-        IF ( Mu1>=0 ) THEN
-          IF ( Theta<=0.D0.OR.Theta>pi2 ) THEN
+  IF( Nudiff>=0 ) THEN
+    IF( Dnu1>=-.5D0 ) THEN
+      IF( Mu2>=Mu1 ) THEN
+        IF( Mu1>=0 ) THEN
+          IF( Theta<=0.D0 .OR. Theta>pi2 ) THEN
             CALL XERMSG('DXLEGF','THETA out of range',211,1)
             Ierror = 211
             RETURN
-          ELSEIF ( Id>=1.AND.Id<=4 ) THEN
-            IF ( (Mu1==Mu2).OR.(Nudiff<=0) ) THEN
+          ELSEIF( Id>=1 .AND. Id<=4 ) THEN
+            IF( (Mu1==Mu2) .OR. (Nudiff<=0) ) THEN
               !
               !        IF DNU1 IS NOT AN INTEGER, NORMALIZED P(MU,DNU,X)
               !        CANNOT BE CALCULATED.  IF DNU1 IS AN INTEGER AND
-              !        MU1.GT.DNU2 THEN ALL VALUES OF P(+MU,DNU,X) AND
+              !        MU1>DNU2 THEN ALL VALUES OF P(+MU,DNU,X) AND
               !        NORMALIZED P(MU,NU,X) WILL BE ZERO.
               !
               dnu2 = Dnu1 + Nudiff
-              IF ( (Id/=3).OR.(MOD(Dnu1,1.D0)==0.D0) ) THEN
-                IF ( (Id==4).AND.(MOD(Dnu1,1.D0)/=0.D0) ) GOTO 100
-                IF ( (Id==3.OR.Id==4).AND.Mu1>dnu2 ) RETURN
+              IF( (Id/=3) .OR. (MOD(Dnu1,1.D0)==0.D0) ) THEN
+                IF( (Id==4) .AND. (MOD(Dnu1,1.D0)/=0.D0) ) GOTO 100
+                IF( (Id==3 .OR. Id==4) .AND. Mu1>dnu2 ) RETURN
               END IF
               !
               x = COS(Theta)
               sx = 1.D0/SIN(Theta)
-              IF ( Id/=2 ) THEN
-                IF ( Mu2<=Mu1 ) THEN
+              IF( Id/=2 ) THEN
+                IF( Mu2<=Mu1 ) THEN
                   !
                   !        FIXED MU, VARIABLE NU
                   !        CALL DXPQNU TO CALCULATE P(-MU,DNU1,X),....,P(-MU,DNU2,X)
                   !
                   CALL DXPQNU(Dnu1,dnu2,Mu1,Theta,Id,Pqa,Ipqa,Ierror)
-                  IF ( Ierror/=0 ) RETURN
+                  IF( Ierror/=0 ) RETURN
                 ELSE
                   !
                   !        FIXED NU, VARIABLE MU
                   !        CALL DXPMU TO CALCULATE P(-MU1,NU,X),....,P(-MU2,NU,X)
                   !
                   CALL DXPMU(Dnu1,dnu2,Mu1,Mu2,Theta,x,sx,Id,Pqa,Ipqa,Ierror)
-                  IF ( Ierror/=0 ) RETURN
+                  IF( Ierror/=0 ) RETURN
                 END IF
                 !
                 !        IF ID = 3, TRANSFORM P(-MU,NU,X) VECTOR INTO
                 !        P(MU,NU,X) VECTOR.
                 !
-                IF ( Id==3 ) CALL DXPMUP(Dnu1,dnu2,Mu1,Mu2,Pqa,Ipqa,Ierror)
-                IF ( Ierror/=0 ) RETURN
+                IF( Id==3 ) CALL DXPMUP(Dnu1,dnu2,Mu1,Mu2,Pqa,Ipqa,Ierror)
+                IF( Ierror/=0 ) RETURN
                 !
                 !        IF ID = 4, TRANSFORM P(-MU,NU,X) VECTOR INTO
                 !        NORMALIZED P(MU,NU,X) VECTOR.
                 !
-                IF ( Id==4 ) CALL DXPNRM(Dnu1,dnu2,Mu1,Mu2,Pqa,Ipqa,Ierror)
-                IF ( Ierror/=0 ) RETURN
+                IF( Id==4 ) CALL DXPNRM(Dnu1,dnu2,Mu1,Mu2,Pqa,Ipqa,Ierror)
+                IF( Ierror/=0 ) RETURN
                 !
-              ELSEIF ( Mu2==Mu1 ) THEN
+              ELSEIF( Mu2==Mu1 ) THEN
                 !
                 !        FIXED MU, VARIABLE NU
                 !        CALL DXQNU TO CALCULATE Q(MU,DNU1,X),....,Q(MU,DNU2,X)
                 !
                 CALL DXQNU(Dnu1,dnu2,Mu1,Theta,x,sx,Id,Pqa,Ipqa,Ierror)
-                IF ( Ierror/=0 ) RETURN
+                IF( Ierror/=0 ) RETURN
               ELSE
                 !
                 !        FIXED NU, VARIABLE MU
                 !        CALL DXQMU TO CALCULATE Q(MU1,NU,X),....,Q(MU2,NU,X)
                 !
                 CALL DXQMU(Dnu1,dnu2,Mu1,Mu2,Theta,x,sx,Id,Pqa,Ipqa,Ierror)
-                IF ( Ierror/=0 ) RETURN
+                IF( Ierror/=0 ) RETURN
               END IF
               !
               !        PLACE RESULTS IN REDUCED FORM IF POSSIBLE
@@ -228,7 +227,7 @@ SUBROUTINE DXLEGF(Dnu1,Nudiff,Mu1,Mu2,Theta,Id,Pqa,Ipqa,Ierror)
               !
               DO i = 1, l
                 CALL DXRED(Pqa(i),Ipqa(i),Ierror)
-                IF ( Ierror/=0 ) RETURN
+                IF( Ierror/=0 ) RETURN
               END DO
               RETURN
             END IF

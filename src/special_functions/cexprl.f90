@@ -1,7 +1,6 @@
 !** CEXPRL
 COMPLEX(SP) FUNCTION CEXPRL(Z)
-  !>
-  !  Calculate the relative error exponential (EXP(X)-1)/X.
+  !> Calculate the relative error exponential (EXP(X)-1)/X.
   !***
   ! **Library:**   SLATEC (FNLIB)
   !***
@@ -41,11 +40,11 @@ COMPLEX(SP) FUNCTION CEXPRL(Z)
   !* FIRST EXECUTABLE STATEMENT  CEXPRL
   !
   r = ABS(Z)
-  IF ( r>0.5 ) CEXPRL = (EXP(Z)-1.0)/Z
-  IF ( r>0.5 ) RETURN
+  IF( r>0.5 ) CEXPRL = (EXP(Z)-1.0)/Z
+  IF( r>0.5 ) RETURN
   !
   CEXPRL = (1.0,0.0)
-  IF ( r<rbnd ) RETURN
+  IF( r<rbnd ) RETURN
   !
   CEXPRL = (0.0,0.0)
   DO i = 1, nterms

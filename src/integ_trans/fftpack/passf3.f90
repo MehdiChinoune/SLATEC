@@ -1,7 +1,6 @@
 !** PASSF3
 SUBROUTINE PASSF3(Ido,L1,Cc,Ch,Wa1,Wa2)
-  !>
-  !  Calculate the fast Fourier transform of subvectors of
+  !> Calculate the fast Fourier transform of subvectors of
   !            length three.
   !***
   ! **Library:**   SLATEC (FFTPACK)
@@ -32,7 +31,7 @@ SUBROUTINE PASSF3(Ido,L1,Cc,Ch,Wa1,Wa2)
   !* FIRST EXECUTABLE STATEMENT  PASSF3
   taur = -.5
   taui = -.5*SQRT(3.)
-  IF ( Ido==2 ) THEN
+  IF( Ido==2 ) THEN
     DO k = 1, L1
       tr2 = Cc(1,2,k) + Cc(1,3,k)
       cr2 = Cc(1,1,k) + taur*tr2
@@ -48,7 +47,7 @@ SUBROUTINE PASSF3(Ido,L1,Cc,Ch,Wa1,Wa2)
       Ch(2,k,3) = ci2 - cr3
     END DO
     RETURN
-  ELSEIF ( Ido/2<L1 ) THEN
+  ELSEIF( Ido/2<L1 ) THEN
     DO i = 2, Ido, 2
       DO k = 1, L1
         tr2 = Cc(i-1,2,k) + Cc(i-1,3,k)

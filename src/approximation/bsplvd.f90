@@ -1,7 +1,6 @@
 !** BSPLVD
 SUBROUTINE BSPLVD(T,K,X,Ileft,Vnikx,Nderiv)
-  !>
-  !  Subsidiary to FC
+  !> Subsidiary to FC
   !***
   ! **Library:**   SLATEC
   !***
@@ -35,7 +34,7 @@ SUBROUTINE BSPLVD(T,K,X,Ileft,Vnikx,Nderiv)
   REAL(SP) :: a(20,20), diff, fkmd, v
   !* FIRST EXECUTABLE STATEMENT  BSPLVD
   CALL BSPLVN(T,K+1-Nderiv,1,X,Ileft,Vnikx(Nderiv,Nderiv))
-  IF ( Nderiv>1 ) THEN
+  IF( Nderiv>1 ) THEN
     ideriv = Nderiv
     DO i = 2, Nderiv
       idervm = ideriv - 1
@@ -62,8 +61,8 @@ SUBROUTINE BSPLVD(T,K,X,Ileft,Vnikx,Nderiv)
         jm1 = j - 1
         ipkmd = i + kmd
         diff = T(ipkmd) - T(i)
-        IF ( jm1==0 ) THEN
-          IF ( diff/=0. ) a(1,1) = a(1,1)/diff*fkmd
+        IF( jm1==0 ) THEN
+          IF( diff/=0. ) a(1,1) = a(1,1)/diff*fkmd
           !
           DO i = 1, K
             v = 0.
@@ -75,7 +74,7 @@ SUBROUTINE BSPLVD(T,K,X,Ileft,Vnikx,Nderiv)
           END DO
           EXIT
         ELSE
-          IF ( diff/=0. ) THEN
+          IF( diff/=0. ) THEN
             DO l = 1, j
               a(l,j) = (a(l,j)-a(l,j-1))/diff*fkmd
             END DO

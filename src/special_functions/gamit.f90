@@ -1,7 +1,6 @@
 !** GAMIT
 REAL(SP) FUNCTION GAMIT(A,X)
-  !>
-  !  Calculate Tricomi's form of the incomplete Gamma function.
+  !> Calculate Tricomi's form of the incomplete Gamma function.
   !***
   ! **Library:**   SLATEC (FNLIB)
   !***
@@ -21,12 +20,12 @@ REAL(SP) FUNCTION GAMIT(A,X)
   !   GAMIT = X**(-A)/GAMMA(A) * integral from 0 to X of EXP(-T) *
   !             T**(A-1.)
   !
-  !   for A .GT. 0.0 and by analytic continuation for A .LE. 0.0.
+  !   for A > 0.0 and by analytic continuation for A <= 0.0.
   !   GAMMA(X) is the complete gamma function of X.
   !
   !   GAMIT is evaluated for arbitrary real values of A and for non-
-  !   negative values of X (even though GAMIT is defined for X .LT.
-  !   0.0), except that for X = 0 and A .LE. 0.0, GAMIT is infinite,
+  !   negative values of X (even though GAMIT is defined for X <
+  !   0.0), except that for X = 0 and A <= 0.0, GAMIT is infinite,
   !   which is a fatal error.
   !
   !   The function and both arguments are REAL.
@@ -63,43 +62,43 @@ REAL(SP) FUNCTION GAMIT(A,X)
     bot = LOG(R1MACH(1))
   !* FIRST EXECUTABLE STATEMENT  GAMIT
   !
-  IF ( X<0.0 ) CALL XERMSG('GAMIT','X IS NEGATIVE',2,2)
+  IF( X<0.0 ) CALL XERMSG('GAMIT','X IS NEGATIVE',2,2)
   !
-  IF ( X/=0.0 ) alx = LOG(X)
+  IF( X/=0.0 ) alx = LOG(X)
   sga = 1.0
-  IF ( A/=0.0 ) sga = SIGN(1.0,A)
+  IF( A/=0.0 ) sga = SIGN(1.0,A)
   ainta = AINT(A+0.5*sga)
   aeps = A - ainta
   !
-  IF ( X<=0.0 ) THEN
+  IF( X<=0.0 ) THEN
     GAMIT = 0.0
-    IF ( ainta>0.0.OR.aeps/=0.0 ) GAMIT = GAMR(A+1.0)
+    IF( ainta>0.0 .OR. aeps/=0.0 ) GAMIT = GAMR(A+1.0)
     RETURN
     !
-  ELSEIF ( X<=1.0 ) THEN
-    IF ( A>=(-0.5).OR.aeps/=0.0 ) CALL ALGAMS(A+1.0,algap1,sgngam)
+  ELSEIF( X<=1.0 ) THEN
+    IF( A>=(-0.5) .OR. aeps/=0.0 ) CALL ALGAMS(A+1.0,algap1,sgngam)
     GAMIT = R9GMIT(A,X,algap1,sgngam)
     RETURN
     !
-  ELSEIF ( A<X ) THEN
+  ELSEIF( A<X ) THEN
     !
     alng = R9LGIC(A,X,alx)
     !
     ! EVALUATE GAMIT IN TERMS OF LOG(GAMIC(A,X))
     !
     h = 1.0
-    IF ( aeps/=0.0.OR.ainta>0.0 ) THEN
+    IF( aeps/=0.0 .OR. ainta>0.0 ) THEN
       CALL ALGAMS(A+1.0,algap1,sgngam)
       t = LOG(ABS(A)) + alng - algap1
-      IF ( t>alneps ) THEN
+      IF( t>alneps ) THEN
         !
         t = t - A*alx
-        IF ( t<bot ) CALL XERCLR
+        IF( t<bot ) CALL XERCLR
         GAMIT = -sga*sgngam*EXP(t)
         RETURN
       ELSE
-        IF ( t>(-alneps) ) h = 1.0 - sga*sgngam*EXP(t)
-        IF ( ABS(h)<=sqeps ) THEN
+        IF( t>(-alneps) ) h = 1.0 - sga*sgngam*EXP(t)
+        IF( ABS(h)<=sqeps ) THEN
           CALL XERCLR
           CALL XERMSG('GAMIT','RESULT LT HALF PRECISION',1,1)
         END IF
@@ -107,13 +106,13 @@ REAL(SP) FUNCTION GAMIT(A,X)
     END IF
   ELSE
     t = R9LGIT(A,X,LOG_GAMMA(A+1.0))
-    IF ( t<bot ) CALL XERCLR
+    IF( t<bot ) CALL XERCLR
     GAMIT = EXP(t)
     RETURN
   END IF
   !
   t = -A*alx + LOG(ABS(h))
-  IF ( t<bot ) CALL XERCLR
+  IF( t<bot ) CALL XERCLR
   GAMIT = SIGN(EXP(t),h)
   RETURN
 END FUNCTION GAMIT

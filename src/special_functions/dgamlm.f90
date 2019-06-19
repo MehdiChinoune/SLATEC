@@ -1,7 +1,6 @@
 !** DGAMLM
 SUBROUTINE DGAMLM(Xmin,Xmax)
-  !>
-  !  Compute the minimum and maximum bounds for the argument in
+  !> Compute the minimum and maximum bounds for the argument in
   !            the Gamma function.
   !***
   ! **Library:**   SLATEC (FNLIB)
@@ -48,7 +47,7 @@ SUBROUTINE DGAMLM(Xmin,Xmax)
     xold = Xmin
     xln = LOG(Xmin)
     Xmin = Xmin - Xmin*((Xmin+0.5D0)*xln-Xmin-0.2258D0+alnsml)/(Xmin*xln+0.5D0)
-    IF ( ABS(Xmin-xold)<0.005D0 ) GOTO 100
+    IF( ABS(Xmin-xold)<0.005D0 ) GOTO 100
   END DO
   CALL XERMSG('DGAMLM','UNABLE TO FIND XMIN',1,2)
   !
@@ -59,7 +58,7 @@ SUBROUTINE DGAMLM(Xmin,Xmax)
     xold = Xmax
     xln = LOG(Xmax)
     Xmax = Xmax - Xmax*((Xmax-0.5D0)*xln-Xmax+0.9189D0-alnbig)/(Xmax*xln-0.5D0)
-    IF ( ABS(Xmax-xold)<0.005D0 ) GOTO 200
+    IF( ABS(Xmax-xold)<0.005D0 ) GOTO 200
   END DO
   CALL XERMSG('DGAMLM','UNABLE TO FIND XMAX',2,2)
   !

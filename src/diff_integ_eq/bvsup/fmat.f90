@@ -1,7 +1,6 @@
 !** FMAT
 SUBROUTINE FMAT(X,Y,Yp)
-  !>
-  !  Subsidiary to
+  !> Subsidiary to
   !***
   ! **Library:**   SLATEC
   !***
@@ -19,7 +18,7 @@ SUBROUTINE FMAT(X,Y,Yp)
   REAL(SP) :: tanx
   !* FIRST EXECUTABLE STATEMENT  FMAT
   Yp(1) = Y(2)
-  IF ( X/=xsave_com ) THEN
+  IF( X/=xsave_com ) THEN
     xsave_com = X
     tanx = TAN(X/57.2957795130823)
     term_com = 3.0/tanx + 2.0*tanx

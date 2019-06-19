@@ -1,7 +1,6 @@
 !** RADF3
 SUBROUTINE RADF3(Ido,L1,Cc,Ch,Wa1,Wa2)
-  !>
-  !  Calculate the fast Fourier transform of subvectors of
+  !> Calculate the fast Fourier transform of subvectors of
   !            length three.
   !***
   ! **Library:**   SLATEC (FFTPACK)
@@ -38,9 +37,9 @@ SUBROUTINE RADF3(Ido,L1,Cc,Ch,Wa1,Wa2)
     Ch(1,3,k) = taui*(Cc(1,k,3)-Cc(1,k,2))
     Ch(Ido,2,k) = Cc(1,k,1) + taur*cr2
   END DO
-  IF ( Ido==1 ) RETURN
+  IF( Ido==1 ) RETURN
   idp2 = Ido + 2
-  IF ( (Ido-1)/2<L1 ) THEN
+  IF( (Ido-1)/2<L1 ) THEN
     DO i = 3, Ido, 2
       ic = idp2 - i
       DO k = 1, L1

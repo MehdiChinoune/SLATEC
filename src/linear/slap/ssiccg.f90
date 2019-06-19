@@ -1,8 +1,7 @@
 !** SSICCG
 SUBROUTINE SSICCG(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
     Iunit,Rwork,Lenw,Iwork,Leniw)
-  !>
-  !  Incomplete Cholesky Conjugate Gradient Sparse Ax=b Solver.
+  !> Incomplete Cholesky Conjugate Gradient Sparse Ax=b Solver.
   !            Routine to solve a symmetric positive definite linear
   !            system  Ax = b  using the incomplete Cholesky
   !            Preconditioned Conjugate Gradient method.
@@ -208,7 +207,7 @@ SUBROUTINE SSICCG(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
   !
   !- Cautions:
   !     This routine will attempt to write to the Fortran logical output
-  !     unit IUNIT, if IUNIT .ne. 0.  Thus, the user must make sure that
+  !     unit IUNIT, if IUNIT /= 0.  Thus, the user must make sure that
   !     this logical unit is attached to a file or terminal before calling
   !     this routine with a non-zero value for IUNIT.  This routine does
   !     not check for the validity of a non-zero IUNIT unit number.
@@ -242,20 +241,20 @@ SUBROUTINE SSICCG(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
   !   921019  Corrected NEL to NL.  (FNF)
   USE service, ONLY : XERMSG
   !     .. Parameters ..
-  INTEGER , PARAMETER :: LOCRB = 1, LOCIB = 11
+  INTEGER, PARAMETER :: LOCRB = 1, LOCIB = 11
   !     .. Scalar Arguments ..
-  REAL(SP) Err, Tol
-  INTEGER Ierr, Isym, Iter, Itmax, Itol, Iunit, Leniw, Lenw, N, Nelt
+  REAL(SP) :: Err, Tol
+  INTEGER :: Ierr, Isym, Iter, Itmax, Itol, Iunit, Leniw, Lenw, N, Nelt
   !     .. Array Arguments ..
-  REAL(SP) A(Nelt), B(N), Rwork(Lenw), X(N)
-  INTEGER Ia(Nelt), Iwork(Leniw), Ja(Nelt)
+  REAL(SP) :: A(Nelt), B(N), Rwork(Lenw), X(N)
+  INTEGER :: Ia(Nelt), Iwork(Leniw), Ja(Nelt)
   !     .. Local Scalars ..
-  INTEGER locdin, locdz, locel, lociel, lociw, locjel, locp, locr, locw, locz, nl
+  INTEGER :: locdin, locdz, locel, lociel, lociw, locjel, locp, locr, locw, locz, nl
   CHARACTER xern1*8
   !* FIRST EXECUTABLE STATEMENT  SSICCG
   !
   Ierr = 0
-  IF ( N<1.OR.Nelt<1 ) THEN
+  IF( N<1 .OR. Nelt<1 ) THEN
     Ierr = 3
     RETURN
   END IF
@@ -265,7 +264,7 @@ SUBROUTINE SSICCG(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
   !
   !         Count number of elements in lower triangle of the matrix.
   !         Then set up the work arrays.
-  IF ( Isym==0 ) THEN
+  IF( Isym==0 ) THEN
     nl = (Nelt+N)/2
   ELSE
     nl = Nelt
@@ -285,7 +284,7 @@ SUBROUTINE SSICCG(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
   !
   !         Check the workspace allocations.
   CALL SCHKW('SSICCG',lociw,Leniw,locw,Lenw,Ierr,Iter,Err)
-  IF ( Ierr/=0 ) RETURN
+  IF( Ierr/=0 ) RETURN
   !
   Iwork(1) = nl
   Iwork(2) = locjel
@@ -299,7 +298,7 @@ SUBROUTINE SSICCG(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
   !
   CALL SSICS(N,Nelt,Ia,Ja,A,Isym,nl,Iwork(lociel),Iwork(locjel),Rwork(locel)&
     ,Rwork(locdin),Rwork(locr),Ierr)
-  IF ( Ierr/=0 ) THEN
+  IF( Ierr/=0 ) THEN
     WRITE (xern1,'(I8)') Ierr
     CALL XERMSG('SSICCG','IC factorization broke down on step '//&
       xern1//'.  Diagonal was set to unity and factorization proceeded.',1,1)

@@ -1,8 +1,7 @@
 !** SSDOMN
 SUBROUTINE SSDOMN(N,B,X,Nelt,Ia,Ja,A,Isym,Nsave,Itol,Tol,Itmax,Iter,Err,&
     Ierr,Iunit,Rwork,Lenw,Iwork,Leniw)
-  !>
-  !  Diagonally Scaled Orthomin Sparse Iterative Ax=b Solver.
+  !> Diagonally Scaled Orthomin Sparse Iterative Ax=b Solver.
   !            Routine to solve a general linear system  Ax = b  using
   !            the Orthomin method with diagonal scaling.
   !***
@@ -186,7 +185,7 @@ SUBROUTINE SSDOMN(N,B,X,Nelt,Ia,Ja,A,Isym,Nsave,Itol,Tol,Itmax,Iter,Err,&
   !
   !- Cautions:
   !     This routine will attempt to write to the Fortran logical output
-  !     unit IUNIT, if IUNIT .ne. 0.  Thus, the user must make sure that
+  !     unit IUNIT, if IUNIT /= 0.  Thus, the user must make sure that
   !     this logical unit is attached to a file or terminal before calling
   !     this routine with a non-zero value for IUNIT.  This routine does
   !     not check for the validity of a non-zero IUNIT unit number.
@@ -212,19 +211,19 @@ SUBROUTINE SSDOMN(N,B,X,Nelt,Ia,Ja,A,Isym,Nsave,Itol,Tol,Itmax,Iter,Err,&
   !   921113  Corrected C***CATEGORY line.  (FNF)
 
   !     .. Parameters ..
-  INTEGER , PARAMETER :: LOCRB = 1, LOCIB = 11
+  INTEGER, PARAMETER :: LOCRB = 1, LOCIB = 11
   !     .. Scalar Arguments ..
-  REAL(SP) Err, Tol
-  INTEGER Ierr, Isym, Iter, Itmax, Itol, Iunit, Leniw, Lenw, N, Nelt, Nsave
+  REAL(SP) :: Err, Tol
+  INTEGER :: Ierr, Isym, Iter, Itmax, Itol, Iunit, Leniw, Lenw, N, Nelt, Nsave
   !     .. Array Arguments ..
-  REAL(SP) A(N), B(N), Rwork(Lenw), X(N)
-  INTEGER Ia(Nelt), Iwork(Leniw), Ja(Nelt)
+  REAL(SP) :: A(N), B(N), Rwork(Lenw), X(N)
+  INTEGER :: Ia(Nelt), Iwork(Leniw), Ja(Nelt)
   !     .. Local Scalars ..
-  INTEGER locap, loccsa, locdin, locdz, locema, lociw, locp, locr, locw, locz
+  INTEGER :: locap, loccsa, locdin, locdz, locema, lociw, locp, locr, locw, locz
   !* FIRST EXECUTABLE STATEMENT  SSDOMN
   !
   Ierr = 0
-  IF ( N<1.OR.Nelt<1 ) THEN
+  IF( N<1 .OR. Nelt<1 ) THEN
     Ierr = 3
     RETURN
   END IF
@@ -247,7 +246,7 @@ SUBROUTINE SSDOMN(N,B,X,Nelt,Ia,Ja,A,Isym,Nsave,Itol,Tol,Itmax,Iter,Err,&
   !
   !         Check the workspace allocations.
   CALL SCHKW('SSDOMN',lociw,Leniw,locw,Lenw,Ierr,Iter,Err)
-  IF ( Ierr/=0 ) RETURN
+  IF( Ierr/=0 ) RETURN
   !
   Iwork(4) = locdin
   Iwork(9) = lociw

@@ -1,8 +1,7 @@
 !** ISDGMR
 INTEGER FUNCTION ISDGMR(N,X,Xl,MSOLVE,Nmsl,Itol,Tol,Iter,Err,Iunit,R,Dz,Rwork, &
   Iwork,Rnrm,Bnrm,Sx,Jscal,Kmp,Lgmr,Maxl,Maxlp1,V,Q,Snormw,Prod,R0nrm,Hes,Jpre)
-  !>
-  !  Generalized Minimum Residual Stop Test.
+  !> Generalized Minimum Residual Stop Test.
   !            This routine calculates the stop test for the Generalized
   !            Minimum RESidual (GMRES) iteration scheme.  It returns a
   !            non-zero if the error estimate (the type of which is
@@ -37,11 +36,11 @@ INTEGER FUNCTION ISDGMR(N,X,Xl,MSOLVE,Nmsl,Itol,Tol,Iter,Err,Iunit,R,Dz,Rwork, &
   !     $                 HES(MAXLP1,MAXL)
   !      EXTERNAL MSOLVE
   !
-  !      IF (ISDGMR(N, B, X, XL, NELT, IA, JA, A, ISYM, MSOLVE,
+  !      IF(ISDGMR(N, B, X, XL, NELT, IA, JA, A, ISYM, MSOLVE,
   !     $     NMSL, ITOL, TOL, ITMAX, ITER, ERR, IUNIT, R, Z, DZ,
   !     $     RWORK, IWORK, RNRM, BNRM, SB, SX, JSCAL,
   !     $     KMP, LGMR, MAXL, MAXLP1, V, Q, SNORMW, PROD, R0NRM,
-  !     $     HES, JPRE) .NE. 0) THEN ITERATION DONE
+  !     $     HES, JPRE) /= 0) THEN ITERATION DONE
   !
   !- Arguments:
   ! N      :IN       Integer.
@@ -182,7 +181,7 @@ INTEGER FUNCTION ISDGMR(N,X,Xl,MSOLVE,Nmsl,Itol,Tol,Iter,Err,Iunit,R,Dz,Rwork, &
   !         JSCAL=3 means both SB and SX are used.
   ! KMP    :IN       Integer
   !         The number of previous vectors the new vector VNEW
-  !         must be made orthogonal to.  (KMP .le. MAXL)
+  !         must be made orthogonal to.  (KMP <= MAXL)
   ! LGMR   :IN       Integer
   !         The number of GMRES iterations performed on the current call
   !         to DPIGMR (i.e., # iterations since the last restart) and
@@ -234,7 +233,7 @@ INTEGER FUNCTION ISDGMR(N,X,Xl,MSOLVE,Nmsl,Itol,Tol,Iter,Err,Iunit,R,Dz,Rwork, &
   !
   !- Cautions:
   !     This routine will attempt to write to the Fortran logical output
-  !     unit IUNIT, if IUNIT .ne. 0.  Thus, the user must make sure that
+  !     unit IUNIT, if IUNIT /= 0.  Thus, the user must make sure that
   !     this logical unit is attached to a file or terminal before calling
   !     this routine with a non-zero value for IUNIT.  This routine does
   !     not check for the validity of a non-zero IUNIT unit number.
@@ -293,34 +292,34 @@ INTEGER FUNCTION ISDGMR(N,X,Xl,MSOLVE,Nmsl,Itol,Tol,Iter,Err,Iunit,R,Dz,Rwork, &
   !
   !       Use input from DPIGMR to determine if stop conditions are met.
   !
-  IF ( Itol==0 ) Err = Rnrm/Bnrm
-  IF ( (Itol>0).AND.(Itol<=3) ) THEN
+  IF( Itol==0 ) Err = Rnrm/Bnrm
+  IF( (Itol>0) .AND. (Itol<=3) ) THEN
     !
     !       Use DRLCAL to calculate the scaled residual vector.
     !       Store answer in R.
     !
-    IF ( Lgmr/=0 ) CALL DRLCAL(N,Kmp,Lgmr,Maxl,V,Q,R,Snormw,Prod,R0nrm)
-    IF ( Itol<=2 ) THEN
+    IF( Lgmr/=0 ) CALL DRLCAL(N,Kmp,Lgmr,Maxl,V,Q,R,Snormw,Prod,R0nrm)
+    IF( Itol<=2 ) THEN
       !         err = ||Residual||/||RightHandSide||(2-Norms).
       Err = NORM2(R)/Bnrm
       !
       !         Unscale R by R0NRM*PROD when KMP < MAXL.
       !
-      IF ( (Kmp<Maxl).AND.(Lgmr/=0) ) THEN
+      IF( (Kmp<Maxl) .AND. (Lgmr/=0) ) THEN
         tem = 1.0D0/(R0nrm*Prod)
         R = tem*R
       END IF
-    ELSEIF ( Itol==3 ) THEN
+    ELSEIF( Itol==3 ) THEN
       !         err = Max |(Minv*Residual)(i)/x(i)|
-      !         When JPRE .lt. 0, R already contains Minv*Residual.
-      IF ( Jpre>0 ) THEN
+      !         When JPRE < 0, R already contains Minv*Residual.
+      IF( Jpre>0 ) THEN
         CALL MSOLVE(N,R,Dz,Rwork,Iwork)
         Nmsl = Nmsl + 1
       END IF
       !
       !         Unscale R by R0NRM*PROD when KMP < MAXL.
       !
-      IF ( (Kmp<Maxl).AND.(Lgmr/=0) ) THEN
+      IF( (Kmp<Maxl) .AND. (Lgmr/=0) ) THEN
         tem = 1.0D0/(R0nrm*Prod)
         R = tem*R
       END IF
@@ -330,27 +329,27 @@ INTEGER FUNCTION ISDGMR(N,X,Xl,MSOLVE,Nmsl,Itol,Tol,Iter,Err,Iunit,R,Dz,Rwork, &
       ratmax = ABS(Dz(1))/MAX(ABS(X(1)),fuzz)
       DO i = 2, N
         rat = ABS(Dz(i))/MAX(ABS(X(i)),fuzz)
-        IF ( rat>ratmax ) THEN
+        IF( rat>ratmax ) THEN
           ielmax = i
           ratmax = rat
         END IF
       END DO
       Err = ratmax
-      IF ( ratmax<=Tol ) ISDGMR = 1
-      IF ( Iunit>0 ) WRITE (Iunit,99001) Iter, ielmax, ratmax
+      IF( ratmax<=Tol ) ISDGMR = 1
+      IF( Iunit>0 ) WRITE (Iunit,99001) Iter, ielmax, ratmax
       99001 FORMAT (1X,' ITER = ',I5,' IELMAX = ',I5,' |R(IELMAX)/X(IELMAX)| = ',&
         D12.5)
       RETURN
     END IF
   END IF
-  IF ( Itol==11 ) THEN
+  IF( Itol==11 ) THEN
     !
     !       Use DXLCAL to calculate the approximate solution XL.
     !
-    IF ( (Lgmr/=0).AND.(Iter>0) ) THEN
+    IF( (Lgmr/=0) .AND. (Iter>0) ) THEN
       CALL DXLCAL(N,Lgmr,X,Xl,Xl,Hes,Maxlp1,Q,V,R0nrm,Dz,Sx,Jscal,Jpre,&
         MSOLVE,Nmsl,Rwork,Iwork)
-    ELSEIF ( Iter==0 ) THEN
+    ELSEIF( Iter==0 ) THEN
       !         Copy X to XL to check if initial guess is good enough.
       Xl(1:N) = X(1:N)
     ELSE
@@ -358,15 +357,15 @@ INTEGER FUNCTION ISDGMR(N,X,Xl,MSOLVE,Nmsl,Itol,Tol,Iter,Err,Iunit,R,Dz,Rwork, &
       RETURN
     END IF
     !
-    IF ( (Jscal==0).OR.(Jscal==2) ) THEN
+    IF( (Jscal==0) .OR. (Jscal==2) ) THEN
       !         err = ||x-TrueSolution||/||TrueSolution||(2-Norms).
-      IF ( Iter==0 ) solnrm = NORM2(soln_com(1:N))
+      IF( Iter==0 ) solnrm = NORM2(soln_com(1:N))
       DO i = 1, N
         Dz(i) = Xl(i) - soln_com(i)
       END DO
       Err = NORM2(Dz)/solnrm
     ELSE
-      IF ( Iter==0 ) THEN
+      IF( Iter==0 ) THEN
         solnrm = 0
         DO i = 1, N
           solnrm = solnrm + (Sx(i)*soln_com(i))**2
@@ -383,8 +382,8 @@ INTEGER FUNCTION ISDGMR(N,X,Xl,MSOLVE,Nmsl,Itol,Tol,Iter,Err,Iunit,R,Dz,Rwork, &
     END IF
   END IF
   !
-  IF ( Iunit/=0 ) THEN
-    IF ( Iter==0 ) THEN
+  IF( Iunit/=0 ) THEN
+    IF( Iter==0 ) THEN
       WRITE (Iunit,99002) N, Itol, Maxl, Kmp
       99002 FORMAT (' Generalized Minimum Residual(',I3,I3,') for ','N, ITOL = ',&
         I5,I5,/' ITER','   Natural Err Est','   Error Estimate')
@@ -392,7 +391,7 @@ INTEGER FUNCTION ISDGMR(N,X,Xl,MSOLVE,Nmsl,Itol,Tol,Iter,Err,Iunit,R,Dz,Rwork, &
     WRITE (Iunit,99003) Iter, Rnrm/Bnrm, Err
     99003 FORMAT (1X,I4,1X,D16.7,1X,D16.7)
   END IF
-  IF ( Err<=Tol ) ISDGMR = 1
+  IF( Err<=Tol ) ISDGMR = 1
   !
   RETURN
   !------------- LAST LINE OF ISDGMR FOLLOWS ----------------------------

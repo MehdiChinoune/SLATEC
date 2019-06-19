@@ -1,7 +1,6 @@
 !** SLVS
 SUBROUTINE SLVS(Wm,Iwm,X)
-  !>
-  !  Subsidiary to DEBDF
+  !> Subsidiary to DEBDF
   !***
   ! **Library:**   SLATEC
   !***
@@ -36,7 +35,7 @@ SUBROUTINE SLVS(Wm,Iwm,X)
   REAL(SP) :: di, hl0, phl0, r
   !-----------------------------------------------------------------------
   ! THIS ROUTINE MANAGES THE SOLUTION OF THE LINEAR SYSTEM ARISING FROM
-  ! A CHORD ITERATION.  IT IS CALLED BY STOD  IF MITER .NE. 0.
+  ! A CHORD ITERATION.  IT IS CALLED BY STOD  IF MITER /= 0.
   ! IF MITER IS 1 OR 2, IT CALLS SGESL TO ACCOMPLISH THIS.
   ! IF MITER = 3 IT UPDATES THE COEFFICIENT H*EL0 IN THE DIAGONAL
   ! MATRIX, AND THEN COMPUTES THE SOLUTION.
@@ -66,11 +65,11 @@ SUBROUTINE SLVS(Wm,Iwm,X)
       phl0 = Wm(2)
       hl0 = h_com*el0_com
       Wm(2) = hl0
-      IF ( hl0/=phl0 ) THEN
+      IF( hl0/=phl0 ) THEN
         r = hl0/phl0
         DO i = 1, n_com
           di = 1.0E0 - r*(1.0E0-1.0E0/Wm(i+2))
-          IF ( ABS(di)==0.0E0 ) GOTO 100
+          IF( ABS(di)==0.0E0 ) GOTO 100
           Wm(i+2) = 1.0E0/di
         END DO
       END IF

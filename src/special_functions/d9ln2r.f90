@@ -1,7 +1,6 @@
 !** D9LN2R
 REAL(DP) FUNCTION D9LN2R(X)
-  !>
-  !  Evaluate LOG(1+X) from second order relative accuracy so
+  !> Evaluate LOG(1+X) from second order relative accuracy so
   !            that LOG(1+X) = X - X**2/2 + X**3*D9LN2R(X)
   !***
   ! **Library:**   SLATEC (FNLIB)
@@ -98,26 +97,26 @@ REAL(DP) FUNCTION D9LN2R(X)
     -.4235973185184957027669333333333D-30, +.6095532614003832040106666666666D-31 ]
   LOGICAL, SAVE :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  D9LN2R
-  IF ( first ) THEN
+  IF( first ) THEN
     ntln21 = INITDS(ln21cs,50,0.1*eps)
     ntln22 = INITDS(ln22cs,37,0.1*eps)
     first = .FALSE.
   END IF
   !
-  IF ( X<(-.625D0).OR.X>0.8125D0 ) THEN
+  IF( X<(-.625D0) .OR. X>0.8125D0 ) THEN
     !
-    IF ( X<xmin ) CALL XERMSG('D9LN2R',&
+    IF( X<xmin ) CALL XERMSG('D9LN2R',&
       'ANSWER LT HALF PRECISION BECAUSE X IS TOO NEAR -1',1,1)
-    IF ( X>xmax ) CALL XERMSG('D9LN2R',&
+    IF( X>xmax ) CALL XERMSG('D9LN2R',&
       'NO PRECISION IN ANSWER BECAUSE X IS TOO BIG',3,2)
-    IF ( X>xbig ) CALL XERMSG('D9LN2R',&
+    IF( X>xbig ) CALL XERMSG('D9LN2R',&
       'ANSWER LT HALF PRECISION BECAUSE X IS TOO BIG',2,1)
     !
     D9LN2R = (LOG(1.D0+X)-X*(1.D0-0.5D0*X))/X**3
     RETURN
   END IF
   !
-  IF ( X<0.0D0 ) THEN
+  IF( X<0.0D0 ) THEN
     D9LN2R = 0.375D0 + DCSEVL(16.D0*X/5.D0+1.D0,ln21cs,ntln21)
   ELSE
     D9LN2R = 0.375D0 + DCSEVL(32.D0*X/13.D0-1.D0,ln22cs,ntln22)

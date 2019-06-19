@@ -1,7 +1,6 @@
 !** BESK1E
 REAL(SP) FUNCTION BESK1E(X)
-  !>
-  !  Compute the exponentially scaled modified (hyperbolic)
+  !> Compute the exponentially scaled modified (hyperbolic)
   !            Bessel function of the third kind of order one.
   !***
   ! **Library:**   SLATEC (FNLIB)
@@ -20,7 +19,7 @@ REAL(SP) FUNCTION BESK1E(X)
   !
   ! BESK1E(X) computes the exponentially scaled modified (hyperbolic)
   ! Bessel function of third kind of order one for real argument
-  ! X .GT. 0.0, i.e., EXP(X)*K1(X).
+  ! X > 0.0, i.e., EXP(X)*K1(X).
   !
   ! Series for BK1        on the interval  0.          to  4.00000D+00
   !                                        with weighted error   7.02E-18
@@ -76,17 +75,17 @@ REAL(SP) FUNCTION BESK1E(X)
     .00000000000000215E0, -.00000000000000022E0, .00000000000000002E0 ]
   LOGICAL, SAVE :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  BESK1E
-  IF ( first ) THEN
+  IF( first ) THEN
     ntk1 = INITS(bk1cs,11,0.1*R1MACH(3))
     ntak1 = INITS(ak1cs,17,0.1*R1MACH(3))
     ntak12 = INITS(ak12cs,14,0.1*R1MACH(3))
     first = .FALSE.
   END IF
   !
-  IF ( X<=0. ) CALL XERMSG('BESK1E','X IS ZERO OR NEGATIVE',2,2)
-  IF ( X>2.0 ) THEN
+  IF( X<=0. ) CALL XERMSG('BESK1E','X IS ZERO OR NEGATIVE',2,2)
+  IF( X>2.0 ) THEN
     !
-    IF ( X<=8. ) THEN
+    IF( X<=8. ) THEN
       BESK1E = (1.25+CSEVL((16./X-5.)/3.,ak1cs,ntak1))/SQRT(X)
     ELSE
       BESK1E = (1.25+CSEVL(16./X-1.,ak12cs,ntak12))/SQRT(X)
@@ -94,9 +93,9 @@ REAL(SP) FUNCTION BESK1E(X)
     RETURN
   END IF
   !
-  IF ( X<xmin ) CALL XERMSG('BESK1E','X SO SMALL K1 OVERFLOWS',3,2)
+  IF( X<xmin ) CALL XERMSG('BESK1E','X SO SMALL K1 OVERFLOWS',3,2)
   y = 0.
-  IF ( X>xsml ) y = X*X
+  IF( X>xsml ) y = X*X
   BESK1E = EXP(X)*(LOG(0.5*X)*BESI1(X)+(0.75+CSEVL(.5*y-1.,bk1cs,ntk1))/X)
   RETURN
 END FUNCTION BESK1E

@@ -1,7 +1,6 @@
 !** CPRODP
 SUBROUTINE CPRODP(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Yy,M,A,B,C,D,U,Y)
-  !>
-  !  Subsidiary to BLKTRI
+  !> Subsidiary to BLKTRI
   !***
   ! **Library:**   SLATEC
   !***
@@ -54,7 +53,7 @@ SUBROUTINE CPRODP(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Yy,M,A,B,C,D,U,Y)
   ia = Na
   100 CONTINUE
   IFlg = 0
-  IF ( id>0 ) THEN
+  IF( id>0 ) THEN
     crt = Bd(id)
     id = id - 1
     iflg = 1
@@ -68,7 +67,7 @@ SUBROUTINE CPRODP(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Yy,M,A,B,C,D,U,Y)
     U(1) = A(1)/den
     Y(1) = Y(1)/den
     v = CMPLX(C(M),0.)
-    IF ( mm2>=2 ) THEN
+    IF( mm2>=2 ) THEN
       DO j = 2, mm2
         den = B(j) - crt - A(j)*D(j-1)
         D(j) = C(j)/den
@@ -86,7 +85,7 @@ SUBROUTINE CPRODP(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Yy,M,A,B,C,D,U,Y)
     bh = bh - v*U(M-2)
     ym = ym - v*Y(M-2)
     den = bh - am*D(M-1)
-    IF ( ABS(den)/=0 ) THEN
+    IF( ABS(den)/=0 ) THEN
       Y(M) = (ym-am*Y(M-1))/den
     ELSE
       Y(M) = (1.,0.)
@@ -97,9 +96,9 @@ SUBROUTINE CPRODP(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Yy,M,A,B,C,D,U,Y)
       Y(k) = Y(k) - D(k)*Y(k+1) - U(k)*Y(M)
     END DO
   END IF
-  IF ( m1<=0 ) THEN
-    IF ( m2<=0 ) THEN
-      IF ( ia>0 ) THEN
+  IF( m1<=0 ) THEN
+    IF( m2<=0 ) THEN
+      IF( ia>0 ) THEN
         rt = Aa(ia)
         ia = ia - 1
         iflg = 1
@@ -110,7 +109,7 @@ SUBROUTINE CPRODP(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Yy,M,A,B,C,D,U,Y)
           Y(j) = rt*Y(j)
         END DO
       END IF
-      IF ( iflg>0 ) GOTO 100
+      IF( iflg>0 ) GOTO 100
       DO j = 1, M
         Yy(j) = REAL(Y(j))
       END DO
@@ -119,10 +118,10 @@ SUBROUTINE CPRODP(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Yy,M,A,B,C,D,U,Y)
       rt = Bm2(m2)
       m2 = m2 - 1
     END IF
-  ELSEIF ( m2<=0 ) THEN
+  ELSEIF( m2<=0 ) THEN
     rt = Bm1(m1)
     m1 = m1 - 1
-  ELSEIF ( ABS(Bm1(m1))<=ABS(Bm2(m2)) ) THEN
+  ELSEIF( ABS(Bm1(m1))<=ABS(Bm2(m2)) ) THEN
     rt = Bm2(m2)
     m2 = m2 - 1
   ELSE
@@ -134,7 +133,7 @@ SUBROUTINE CPRODP(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Yy,M,A,B,C,D,U,Y)
   !
   yh = Y(1)
   y1 = (B(1)-rt)*Y(1) + C(1)*Y(2) + A(1)*Y(M)
-  IF ( mm>=2 ) THEN
+  IF( mm>=2 ) THEN
     DO j = 2, mm
       y2 = A(j)*Y(j-1) + (B(j)-rt)*Y(j) + C(j)*Y(j+1)
       Y(j-1) = y1

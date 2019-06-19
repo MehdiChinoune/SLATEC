@@ -5,8 +5,7 @@ MODULE TEST21_MOD
 CONTAINS
   !** SGEQC
   SUBROUTINE SGEQC(Lun,Kprint,Nerr)
-    !>
-    !  Quick check for SGEFS and SGEIR.
+    !> Quick check for SGEFS and SGEIR.
     !***
     ! **Library:**   SLATEC
     !***
@@ -43,13 +42,13 @@ CONTAINS
     !   920601  Code reworked and TYPE section added.  (RWC, WRB)
     USE slatec, ONLY : R1MACH, SGEFS, SGEIR
     !     .. Scalar Arguments ..
-    INTEGER Kprint, Lun, Nerr
+    INTEGER :: Kprint, Lun, Nerr
     !     .. Local Scalars ..
-    REAL(SP) errcmp, errmax
-    INTEGER i, ind, itask, j, kprog, lda, n
+    REAL(SP) :: errcmp, errmax
+    INTEGER :: i, ind, itask, j, kprog, lda, n
     !     .. Local Arrays ..
-    REAL(SP) atemp(5,4), btemp(4), work(20)
-    INTEGER iwork(4)
+    REAL(SP) :: atemp(5,4), btemp(4), work(20)
+    INTEGER :: iwork(4)
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, MAX
     !     .. Data statements ..
@@ -64,7 +63,7 @@ CONTAINS
     lda = 5
     Nerr = 0
     errcmp = R1MACH(4)**0.8E0
-    IF ( Kprint>=2 ) WRITE (Lun,99001)
+    IF( Kprint>=2 ) WRITE (Lun,99001)
     !
     99001 FORMAT (//,2X,'SGEFS and SGEIR Quick Check'/)
     !
@@ -81,13 +80,13 @@ CONTAINS
           atemp(i,j) = a(i,j)
         END DO
       END DO
-      IF ( kprog==1 ) THEN
+      IF( kprog==1 ) THEN
         CALL SGEFS(atemp,lda,n,btemp,itask,ind,work,iwork)
       ELSE
         CALL SGEIR(atemp,lda,n,btemp,itask,ind,work,iwork)
       END IF
-      IF ( ind<0 ) THEN
-        IF ( Kprint>=2 ) WRITE (Lun,FMT=99004) list(kprog), ind
+      IF( ind<0 ) THEN
+        IF( Kprint>=2 ) WRITE (Lun,FMT=99004) list(kprog), ind
         Nerr = Nerr + 1
       END IF
       !
@@ -98,10 +97,10 @@ CONTAINS
       DO i = 1, n
         errmax = MAX(errmax,ABS(btemp(i)-bxex(i)))
       END DO
-      IF ( errcmp>errmax ) THEN
-        IF ( Kprint>=3 ) WRITE (Lun,FMT=99004) list(kprog)
+      IF( errcmp>errmax ) THEN
+        IF( Kprint>=3 ) WRITE (Lun,FMT=99004) list(kprog)
       ELSE
-        IF ( Kprint>=2 ) WRITE (Lun,FMT=99005) list(kprog), errmax
+        IF( Kprint>=2 ) WRITE (Lun,FMT=99005) list(kprog), errmax
         Nerr = Nerr + 1
       END IF
       !
@@ -119,23 +118,23 @@ CONTAINS
       DO j = 1, n
         atemp(1,j) = 0.0E0
       END DO
-      IF ( kprog==1 ) THEN
+      IF( kprog==1 ) THEN
         CALL SGEFS(atemp,lda,n,btemp,itask,ind,work,iwork)
       ELSE
         CALL SGEIR(atemp,lda,n,btemp,itask,ind,work,iwork)
       END IF
-      IF ( ind==-4 ) THEN
-        IF ( Kprint>=3 ) WRITE (Lun,FMT=99006) list(kprog)
+      IF( ind==-4 ) THEN
+        IF( Kprint>=3 ) WRITE (Lun,FMT=99006) list(kprog)
       ELSE
-        IF ( Kprint>=2 ) WRITE (Lun,FMT=99007) list(kprog), ind
+        IF( Kprint>=2 ) WRITE (Lun,FMT=99007) list(kprog), ind
         Nerr = Nerr + 1
       END IF
       !
     END DO
     !
-    IF ( Kprint>=3.AND.Nerr==0 ) WRITE (Lun,99002)
+    IF( Kprint>=3 .AND. Nerr==0 ) WRITE (Lun,99002)
     99002 FORMAT (/,2X,'SGEFS and SGEIR Quick Check PASSED'/)
-    IF ( Kprint>=2.AND.Nerr/=0 ) WRITE (Lun,99003)
+    IF( Kprint>=2 .AND. Nerr/=0 ) WRITE (Lun,99003)
     99003 FORMAT (/,2X,'SGEFS and SGEIR Quick Check FAILED'/)
     RETURN
     99004 FORMAT (/,5X,'S',A,' Normal test PASSED')
@@ -145,8 +144,7 @@ CONTAINS
   END SUBROUTINE SGEQC
   !** DGEQC
   SUBROUTINE DGEQC(Lun,Kprint,Nerr)
-    !>
-    !  Quick check for DGEFS.
+    !> Quick check for DGEFS.
     !***
     ! **Library:**   SLATEC
     !***
@@ -183,13 +181,13 @@ CONTAINS
     !   920601  Code reworked and TYPE section added.  (RWC, WRB)
     USE slatec, ONLY : D1MACH, DGEFS
     !     .. Scalar Arguments ..
-    INTEGER Kprint, Lun, Nerr
+    INTEGER :: Kprint, Lun, Nerr
     !     .. Local Scalars ..
     REAL(DP) :: errcmp, errmax
-    INTEGER i, ind, itask, j, kprog, lda, n
+    INTEGER :: i, ind, itask, j, kprog, lda, n
     !     .. Local Arrays ..
     REAL(DP) :: atemp(5,4), btemp(4), work(20)
-    INTEGER iwork(4)
+    INTEGER :: iwork(4)
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, MAX
     !     .. Data statements ..
@@ -205,7 +203,7 @@ CONTAINS
     lda = 5
     Nerr = 0
     errcmp = D1MACH(4)**0.8D0
-    IF ( Kprint>=2 ) WRITE (Lun,99001)
+    IF( Kprint>=2 ) WRITE (Lun,99001)
     !
     99001 FORMAT (//,2X,'DGEFS Quick Check'/)
     !
@@ -223,8 +221,8 @@ CONTAINS
       END DO
     END DO
     CALL DGEFS(atemp,lda,n,btemp,itask,ind,work,iwork)
-    IF ( ind<0 ) THEN
-      IF ( Kprint>=2 ) WRITE (Lun,FMT=99005) list(kprog), ind
+    IF( ind<0 ) THEN
+      IF( Kprint>=2 ) WRITE (Lun,FMT=99005) list(kprog), ind
       Nerr = Nerr + 1
     END IF
     !
@@ -235,10 +233,10 @@ CONTAINS
     DO i = 1, n
       errmax = MAX(errmax,ABS(btemp(i)-bxex(i)))
     END DO
-    IF ( errcmp>errmax ) THEN
-      IF ( Kprint>=3 ) WRITE (Lun,FMT=99004) list(kprog)
+    IF( errcmp>errmax ) THEN
+      IF( Kprint>=3 ) WRITE (Lun,FMT=99004) list(kprog)
     ELSE
-      IF ( Kprint>=2 ) WRITE (Lun,FMT=99005) list(kprog), errmax
+      IF( Kprint>=2 ) WRITE (Lun,FMT=99005) list(kprog), errmax
       Nerr = Nerr + 1
     END IF
     !
@@ -257,16 +255,16 @@ CONTAINS
       atemp(1,j) = 0.0D0
     END DO
     CALL DGEFS(atemp,lda,n,btemp,itask,ind,work,iwork)
-    IF ( ind==-4 ) THEN
-      IF ( Kprint>=3 ) WRITE (Lun,FMT=99006) list(kprog)
+    IF( ind==-4 ) THEN
+      IF( Kprint>=3 ) WRITE (Lun,FMT=99006) list(kprog)
     ELSE
-      IF ( Kprint>=2 ) WRITE (Lun,FMT=99007) list(kprog), ind
+      IF( Kprint>=2 ) WRITE (Lun,FMT=99007) list(kprog), ind
       Nerr = Nerr + 1
     END IF
     !
-    IF ( Kprint>=3.AND.Nerr==0 ) WRITE (Lun,99002)
+    IF( Kprint>=3 .AND. Nerr==0 ) WRITE (Lun,99002)
     99002 FORMAT (/,2X,'DGEFS Quick Check PASSED'/)
-    IF ( Kprint>=2.AND.Nerr/=0 ) WRITE (Lun,99003)
+    IF( Kprint>=2 .AND. Nerr/=0 ) WRITE (Lun,99003)
     99003 FORMAT (/,2X,'DGEFS Quick Check FAILED'/)
     RETURN
     99004 FORMAT (/,5X,'D',A,' Normal test PASSED')
@@ -276,8 +274,7 @@ CONTAINS
   END SUBROUTINE DGEQC
   !** CGEQC
   SUBROUTINE CGEQC(Lun,Kprint,Nerr)
-    !>
-    !  Quick check for CGEFS and CGEIR.
+    !> Quick check for CGEFS and CGEIR.
     !***
     ! **Library:**   SLATEC
     !***
@@ -314,12 +311,12 @@ CONTAINS
     USE slatec, ONLY : CGEFS, CGEIR
     USE blas, ONLY : SCABS1
     !     .. Scalar Arguments ..
-    INTEGER Kprint, Lun, Nerr
+    INTEGER :: Kprint, Lun, Nerr
     !     .. Local Scalars ..
-    INTEGER i, ind, indx, itask, j, kprog, lda, n
+    INTEGER :: i, ind, indx, itask, j, kprog, lda, n
     !     .. Local Arrays ..
-    COMPLEX(SP) atemp(5,3), btemp(3), work(12)
-    INTEGER iwork(3)
+    COMPLEX(SP) :: atemp(5,3), btemp(3), work(12)
+    INTEGER :: iwork(3)
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, AIMAG, REAL
     !     .. Data statements ..
@@ -333,7 +330,7 @@ CONTAINS
     n = 3
     lda = 5
     Nerr = 0
-    IF ( Kprint>=2 ) WRITE (Lun,99001)
+    IF( Kprint>=2 ) WRITE (Lun,99001)
     !
     99001 FORMAT (//,2X,'CGEFS and CGEIR Quick Check'/)
     !
@@ -350,13 +347,13 @@ CONTAINS
           atemp(i,j) = a(i,j)
         END DO
       END DO
-      IF ( kprog==1 ) THEN
+      IF( kprog==1 ) THEN
         CALL CGEFS(atemp,lda,n,btemp,itask,ind,work,iwork)
       ELSE
         CALL CGEIR(atemp,lda,n,btemp,itask,ind,work,iwork)
       END IF
-      IF ( ind<0 ) THEN
-        IF ( Kprint>=2 ) WRITE (Lun,FMT=99005) list(kprog), ind
+      IF( ind<0 ) THEN
+        IF( Kprint>=2 ) WRITE (Lun,FMT=99005) list(kprog), ind
         Nerr = Nerr + 1
       END IF
       !
@@ -364,12 +361,12 @@ CONTAINS
       !
       indx = 0
       DO i = 1, n
-        IF ( SCABS1(bxex(i)-btemp(i))>.0001 ) indx = indx + 1
+        IF( SCABS1(bxex(i)-btemp(i))>.0001 ) indx = indx + 1
       END DO
-      IF ( indx==0 ) THEN
-        IF ( Kprint>=3 ) WRITE (Lun,FMT=99004) list(kprog)
+      IF( indx==0 ) THEN
+        IF( Kprint>=3 ) WRITE (Lun,FMT=99004) list(kprog)
       ELSE
-        IF ( Kprint>=2 ) WRITE (Lun,FMT=99005) list(kprog)
+        IF( Kprint>=2 ) WRITE (Lun,FMT=99005) list(kprog)
         Nerr = Nerr + 1
       END IF
       !
@@ -387,22 +384,22 @@ CONTAINS
       DO j = 1, n
         atemp(1,j) = (0.E0,0.E0)
       END DO
-      IF ( kprog==1 ) THEN
+      IF( kprog==1 ) THEN
         CALL CGEFS(atemp,lda,n,btemp,itask,ind,work,iwork)
       ELSE
         CALL CGEIR(atemp,lda,n,btemp,itask,ind,work,iwork)
       END IF
-      IF ( ind==-4 ) THEN
-        IF ( Kprint>=3 ) WRITE (Lun,FMT=99006) list(kprog)
+      IF( ind==-4 ) THEN
+        IF( Kprint>=3 ) WRITE (Lun,FMT=99006) list(kprog)
       ELSE
-        IF ( Kprint>=2 ) WRITE (Lun,FMT=99007) list(kprog), ind
+        IF( Kprint>=2 ) WRITE (Lun,FMT=99007) list(kprog), ind
         Nerr = Nerr + 1
       END IF
     END DO
     !
-    IF ( Kprint>=3.AND.Nerr==0 ) WRITE (Lun,99002)
+    IF( Kprint>=3 .AND. Nerr==0 ) WRITE (Lun,99002)
     99002 FORMAT (/,2X,'CGEFS and CGEIR Quick Check PASSED'/)
-    IF ( Kprint>=2.AND.Nerr/=0 ) WRITE (Lun,99003)
+    IF( Kprint>=2 .AND. Nerr/=0 ) WRITE (Lun,99003)
     99003 FORMAT (/,2X,'CGEFS and CGEIR Quick Check FAILED'/)
     RETURN
     99004 FORMAT (/,5X,'C',A,' Normal test PASSED')
@@ -417,8 +414,7 @@ PROGRAM TEST21
   USE slatec, ONLY : I1MACH, XSETF, XSETUN, XERMAX
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
-  !>
-  !  Driver for testing SLATEC subprograms
+  !> Driver for testing SLATEC subprograms
   !***
   ! **Library:**   SLATEC
   !***
@@ -466,7 +462,7 @@ PROGRAM TEST21
   !   890618  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900524  Cosmetic changes to code.  (WRB)
-  INTEGER kprint, lin, lun, nerr, nfail
+  INTEGER :: kprint, lin, lun, nerr, nfail
   !* FIRST EXECUTABLE STATEMENT  TEST21
   lun = I1MACH(2)
   lin = I1MACH(1)
@@ -477,7 +473,7 @@ PROGRAM TEST21
   CALL GET_ARGUMENT(kprint)
   CALL XERMAX(1000)
   CALL XSETUN(lun)
-  IF ( kprint<=1 ) THEN
+  IF( kprint<=1 ) THEN
     CALL XSETF(0)
   ELSE
     CALL XSETF(1)
@@ -494,7 +490,7 @@ PROGRAM TEST21
   !
   !     Write PASS or FAIL message
   !
-  IF ( nfail==0 ) THEN
+  IF( nfail==0 ) THEN
     WRITE (lun,99001)
     99001 FORMAT (/' --------------TEST21 PASSED ALL TESTS----------------')
   ELSE

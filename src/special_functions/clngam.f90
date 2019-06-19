@@ -1,7 +1,6 @@
 !** CLNGAM
 COMPLEX(SP) FUNCTION CLNGAM(Zin)
-  !>
-  !  Compute the logarithm of the absolute value of the Gamma
+  !> Compute the logarithm of the absolute value of the Gamma
   !            function.
   !***
   ! **Library:**   SLATEC (FNLIB)
@@ -51,15 +50,15 @@ COMPLEX(SP) FUNCTION CLNGAM(Zin)
   !
   corr = (0.0,0.0)
   cabsz = ABS(z)
-  IF ( x<0.0.OR.cabsz<=bound ) THEN
-    IF ( x>=0.0.OR.ABS(y)<=bound ) THEN
+  IF( x<0.0 .OR. cabsz<=bound ) THEN
+    IF( x>=0.0 .OR. ABS(y)<=bound ) THEN
       !
-      IF ( cabsz<bound ) THEN
+      IF( cabsz<bound ) THEN
         !
         ! USE THE RECURSION RELATION FOR ABS(Z) SMALL.
         !
-        IF ( x<(-0.5).AND.ABS(y)<=dxrel ) THEN
-          IF ( ABS((z-AINT(x-0.5))/x)<dxrel ) CALL XERMSG('CLNGAM',&
+        IF( x<(-0.5) .AND. ABS(y)<=dxrel ) THEN
+          IF( ABS((z-AINT(x-0.5))/x)<dxrel ) CALL XERMSG('CLNGAM',&
             'ANSWER LT HALF PRECISION BECAUSE Z TOO NEAR NEGATIVE INTEGER',1,1)
         END IF
         !
@@ -72,7 +71,7 @@ COMPLEX(SP) FUNCTION CLNGAM(Zin)
           z = 1.0 + z
         END DO
         !
-        IF ( REAL(corr)==0.0.AND.AIMAG(corr)==0.0 )&
+        IF( REAL(corr)==0.0 .AND. AIMAG(corr)==0.0 )&
           CALL XERMSG('CLNGAM','Z IS A NEGATIVE INTEGER',3,2)
         corr = -CMPLX(LOG(ABS(corr)),argsum)
       ELSE
@@ -80,14 +79,14 @@ COMPLEX(SP) FUNCTION CLNGAM(Zin)
         ! USE THE REFLECTION FORMULA FOR REAL(Z) NEGATIVE, ABS(Z) LARGE, AND
         ! ABS(AIMAG(Y)) SMALL.
         !
-        IF ( y>0.0 ) z = CONJG(z)
+        IF( y>0.0 ) z = CONJG(z)
         corr = EXP(-CMPLX(0.0,2.0*pi)*z)
-        IF ( REAL(corr)==1.0.AND.AIMAG(corr)==0.0 )&
+        IF( REAL(corr)==1.0 .AND. AIMAG(corr)==0.0 )&
           CALL XERMSG('CLNGAM','Z IS A NEGATIVE INTEGER',3,2)
         !
         CLNGAM = sq2pil + 1.0 - CMPLX(0.0,pi)*(z-0.5) - CLNREL(-corr)&
           + (z-0.5)*LOG(1.0-z) - z - C9LGMC(1.0-z)
-        IF ( y>0.0 ) CLNGAM = CONJG(CLNGAM)
+        IF( y>0.0 ) CLNGAM = CONJG(CLNGAM)
         RETURN
       END IF
     END IF

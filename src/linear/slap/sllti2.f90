@@ -1,7 +1,6 @@
 !** SLLTI2
 SUBROUTINE SLLTI2(N,B,X,Nel,Iel,Jel,El,Dinv)
-  !>
-  !  SLAP Backsolve routine for LDL' Factorization.
+  !> SLAP Backsolve routine for LDL' Factorization.
   !            Routine to solve a system of the form  L*D*L' X = B,
   !            where L is a unit lower triangular matrix and D is a
   !            diagonal matrix and ' means transpose.
@@ -124,12 +123,12 @@ SUBROUTINE SLLTI2(N,B,X,Nel,Iel,Jel,El,Dinv)
   !   930701  Updated CATEGORY section.  (FNF, WRB)
 
   !     .. Scalar Arguments ..
-  INTEGER N, Nel
+  INTEGER :: N, Nel
   !     .. Array Arguments ..
-  REAL(SP) B(N), Dinv(N), El(Nel), X(N)
-  INTEGER Iel(Nel), Jel(Nel)
+  REAL(SP) :: B(N), Dinv(N), El(Nel), X(N)
+  INTEGER :: Iel(Nel), Jel(Nel)
   !     .. Local Scalars ..
-  INTEGER i, ibgn, iend, irow
+  INTEGER :: i, ibgn, iend, irow
   !* FIRST EXECUTABLE STATEMENT  SLLTI2
   !
   !         Solve  L*y = b,  storing result in x.
@@ -140,7 +139,7 @@ SUBROUTINE SLLTI2(N,B,X,Nel,Iel,Jel,El,Dinv)
   DO irow = 1, N
     ibgn = Iel(irow) + 1
     iend = Iel(irow+1) - 1
-    IF ( ibgn<=iend ) THEN
+    IF( ibgn<=iend ) THEN
       DO i = ibgn, iend
         X(irow) = X(irow) - El(i)*X(Jel(i))
       END DO
@@ -158,7 +157,7 @@ SUBROUTINE SLLTI2(N,B,X,Nel,Iel,Jel,El,Dinv)
   DO irow = N, 2, -1
     ibgn = Iel(irow) + 1
     iend = Iel(irow+1) - 1
-    IF ( ibgn<=iend ) THEN
+    IF( ibgn<=iend ) THEN
       DO i = ibgn, iend
         X(Jel(i)) = X(Jel(i)) - El(i)*X(irow)
       END DO

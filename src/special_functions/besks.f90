@@ -1,7 +1,6 @@
 !** BESKS
 SUBROUTINE BESKS(Xnu,X,Nin,Bk)
-  !>
-  !  Compute a sequence of modified Bessel functions of the
+  !> Compute a sequence of modified Bessel functions of the
   !            third kind of fractional order.
   !***
   ! **Library:**   SLATEC (FNLIB)
@@ -19,7 +18,7 @@ SUBROUTINE BESKS(Xnu,X,Nin,Bk)
   ! **Description:**
   !
   ! BESKS computes a sequence of modified Bessel functions of the third
-  ! kind of order XNU + I at X, where X .GT. 0, XNU lies in (-1,1),
+  ! kind of order XNU + I at X, where X > 0, XNU lies in (-1,1),
   ! and I = 0, 1, ..., NIN - 1, if NIN is positive and I = 0, 1, ... ,
   ! NIN + 1, if NIN is negative.  On return, the vector BK(.) Contains
   ! the results at X for order starting at XNU.
@@ -41,11 +40,11 @@ SUBROUTINE BESKS(Xnu,X,Nin,Bk)
   INTEGER :: Nin
   REAL(SP) :: Bk(Nin), X, Xnu
   REAL(SP) :: expxi
-  INTEGER i, n
+  INTEGER :: i, n
   REAL(SP), PARAMETER :: xmax = -LOG(R1MACH(1))
   !* FIRST EXECUTABLE STATEMENT  BESKS
   !
-  IF ( X>xmax ) CALL XERMSG('BESKS','X SO BIG BESSEL K UNDERFLOWS',1,2)
+  IF( X>xmax ) CALL XERMSG('BESKS','X SO BIG BESSEL K UNDERFLOWS',1,2)
   !
   CALL BESKES(Xnu,X,Nin,Bk)
   !

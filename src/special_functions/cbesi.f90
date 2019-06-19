@@ -1,7 +1,6 @@
 !** CBESI
 SUBROUTINE CBESI(Z,Fnu,Kode,N,Cy,Nz,Ierr)
-  !>
-  !  Compute a sequence of the Bessel functions I(a,z) for
+  !> Compute a sequence of the Bessel functions I(a,z) for
   !            complex argument z and real nonnegative orders a=b,b+1,
   !            b+2,... where b>0.  A scaling option is available to
   !            help avoid overflow.
@@ -159,9 +158,9 @@ SUBROUTINE CBESI(Z,Fnu,Kode,N,Cy,Nz,Ierr)
   !   920128  Category corrected.  (WRB)
   !   920811  Prologue revised.  (DWL)
   USE service, ONLY : R1MACH, I1MACH
-  INTEGER i, Ierr, inu, k, Kode, k1, k2, N, nn, Nz
-  COMPLEX(SP) csgn, Cy(N), Z, zn
-  REAL(SP) aa, alim, arg, dig, elim, Fnu, fnul, rl, r1m5, s1, &
+  INTEGER :: i, Ierr, inu, k, Kode, k1, k2, N, nn, Nz
+  COMPLEX(SP) :: csgn, Cy(N), Z, zn
+  REAL(SP) :: aa, alim, arg, dig, elim, Fnu, fnul, rl, r1m5, s1, &
     s2, tol, xx, yy, az, fn, bb, ascle, rtol, atol
   REAL(SP), PARAMETER :: pi = 3.14159265358979324E0
   COMPLEX(SP), PARAMETER :: cone = (1.0E0,0.0E0)
@@ -169,18 +168,18 @@ SUBROUTINE CBESI(Z,Fnu,Kode,N,Cy,Nz,Ierr)
   !* FIRST EXECUTABLE STATEMENT  CBESI
   Ierr = 0
   Nz = 0
-  IF ( Fnu<0.0E0 ) Ierr = 1
-  IF ( Kode<1.OR.Kode>2 ) Ierr = 1
-  IF ( N<1 ) Ierr = 1
-  IF ( Ierr/=0 ) RETURN
+  IF( Fnu<0.0E0 ) Ierr = 1
+  IF( Kode<1 .OR. Kode>2 ) Ierr = 1
+  IF( N<1 ) Ierr = 1
+  IF( Ierr/=0 ) RETURN
   xx = REAL(Z)
   yy = AIMAG(Z)
   !-----------------------------------------------------------------------
   !     SET PARAMETERS RELATED TO MACHINE CONSTANTS.
   !     TOL IS THE APPROXIMATE UNIT ROUNDOFF LIMITED TO 1.0E-18.
   !     ELIM IS THE APPROXIMATE EXPONENTIAL OVER- AND UNDERFLOW LIMIT.
-  !     EXP(-ELIM).LT.EXP(-ALIM)=EXP(-ELIM)/TOL    AND
-  !     EXP(ELIM).GT.EXP(ALIM)=EXP(ELIM)*TOL       ARE INTERVALS NEAR
+  !     EXP(-ELIM)<EXP(-ALIM)=EXP(-ELIM)/TOL    AND
+  !     EXP(ELIM)>EXP(ALIM)=EXP(ELIM)*TOL       ARE INTERVALS NEAR
   !     UNDERFLOW AND OVERFLOW LIMITS WHERE SCALED ARITHMETIC IS DONE.
   !     RL IS THE LOWER BOUNDARY OF THE ASYMPTOTIC EXPANSION FOR LARGE Z.
   !     DIG = NUMBER OF BASE 10 DIGITS IN TOL = 10**(-DIG).
@@ -206,15 +205,15 @@ SUBROUTINE CBESI(Z,Fnu,Kode,N,Cy,Nz,Ierr)
   aa = 0.5E0/tol
   bb = I1MACH(9)*0.5E0
   aa = MIN(aa,bb)
-  IF ( az<=aa ) THEN
+  IF( az<=aa ) THEN
     fn = Fnu + (N-1)
-    IF ( fn<=aa ) THEN
+    IF( fn<=aa ) THEN
       aa = SQRT(aa)
-      IF ( az>aa ) Ierr = 3
-      IF ( fn>aa ) Ierr = 3
+      IF( az>aa ) Ierr = 3
+      IF( fn>aa ) Ierr = 3
       zn = Z
       csgn = cone
-      IF ( xx<0.0E0 ) THEN
+      IF( xx<0.0E0 ) THEN
         zn = -Z
         !-----------------------------------------------------------------------
         !     CALCULATE CSGN=EXP(FNU*PI*I) TO MINIMIZE LOSSES OF SIGNIFICANCE
@@ -222,20 +221,20 @@ SUBROUTINE CBESI(Z,Fnu,Kode,N,Cy,Nz,Ierr)
         !-----------------------------------------------------------------------
         inu = INT( Fnu )
         arg = (Fnu-inu)*pi
-        IF ( yy<0.0E0 ) arg = -arg
+        IF( yy<0.0E0 ) arg = -arg
         s1 = COS(arg)
         s2 = SIN(arg)
         csgn = CMPLX(s1,s2)
-        IF ( MOD(inu,2)==1 ) csgn = -csgn
+        IF( MOD(inu,2)==1 ) csgn = -csgn
       END IF
       CALL CBINU(zn,Fnu,Kode,N,Cy,Nz,rl,fnul,tol,elim,alim)
-      IF ( Nz>=0 ) THEN
-        IF ( xx>=0.0E0 ) RETURN
+      IF( Nz>=0 ) THEN
+        IF( xx>=0.0E0 ) RETURN
         !-----------------------------------------------------------------------
         !     ANALYTIC CONTINUATION TO THE LEFT HALF PLANE
         !-----------------------------------------------------------------------
         nn = N - Nz
-        IF ( nn==0 ) RETURN
+        IF( nn==0 ) RETURN
         rtol = 1.0E0/tol
         ascle = R1MACH(1)*rtol*1.0E+3
         DO i = 1, nn
@@ -244,7 +243,7 @@ SUBROUTINE CBESI(Z,Fnu,Kode,N,Cy,Nz,Ierr)
           aa = REAL(zn)
           bb = AIMAG(zn)
           atol = 1.0E0
-          IF ( MAX(ABS(aa),ABS(bb))<=ascle ) THEN
+          IF( MAX(ABS(aa),ABS(bb))<=ascle ) THEN
             zn = zn*CMPLX(rtol,0.0E0)
             atol = tol
           END IF
@@ -253,7 +252,7 @@ SUBROUTINE CBESI(Z,Fnu,Kode,N,Cy,Nz,Ierr)
           csgn = -csgn
         END DO
         RETURN
-      ELSEIF ( Nz==(-2) ) THEN
+      ELSEIF( Nz==(-2) ) THEN
         Nz = 0
         Ierr = 5
         RETURN

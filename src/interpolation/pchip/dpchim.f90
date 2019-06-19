@@ -1,7 +1,6 @@
 !** DPCHIM
 SUBROUTINE DPCHIM(N,X,F,D,Incfd,Ierr)
-  !>
-  !  Set derivatives needed to determine a monotone piecewise
+  !> Set derivatives needed to determine a monotone piecewise
   !            cubic Hermite interpolant to given data.  Boundary values
   !            are provided which are compatible with monotonicity.  The
   !            interpolant will have an extremum at each point where mono-
@@ -57,12 +56,12 @@ SUBROUTINE DPCHIM(N,X,F,D,Incfd,Ierr)
   !
   !   Parameters:
   !
-  !     N -- (input) number of data points.  (Error return if N.LT.2 .)
+  !     N -- (input) number of data points.  (Error return if N<2 .)
   !           If N=2, simply does linear interpolation.
   !
   !     X -- (input) real*8 array of independent variable values.  The
   !           elements of X must be strictly increasing:
-  !                X(I-1) .LT. X(I),  I = 2(1)N.
+  !                X(I-1) < X(I),  I = 2(1)N.
   !           (Error return if not.)
   !
   !     F -- (input) real*8 array of dependent variable values to be
@@ -81,17 +80,17 @@ SUBROUTINE DPCHIM(N,X,F,D,Incfd,Ierr)
   !
   !     INCFD -- (input) increment between successive values in F and D.
   !           This argument is provided primarily for 2-D applications.
-  !           (Error return if  INCFD.LT.1 .)
+  !           (Error return if  INCFD<1 .)
   !
   !     IERR -- (output) error flag.
   !           Normal return:
   !              IERR = 0  (no errors).
   !           Warning error:
-  !              IERR.GT.0  means that IERR switches in the direction
+  !              IERR>0  means that IERR switches in the direction
   !                 of monotonicity were detected.
   !           "Recoverable" errors:
-  !              IERR = -1  if N.LT.2 .
-  !              IERR = -2  if INCFD.LT.1 .
+  !              IERR = -1  if N<2 .
+  !              IERR = -2  if INCFD<1 .
   !              IERR = -3  if the X-array is not strictly increasing.
   !             (The D-array has not been changed in any of these cases.)
   !               NOTE:  The above errors are checked in the order listed,
@@ -146,12 +145,12 @@ SUBROUTINE DPCHIM(N,X,F,D,Incfd,Ierr)
   !
   !  DECLARE ARGUMENTS.
   !
-  INTEGER N, Incfd, Ierr
+  INTEGER :: N, Incfd, Ierr
   REAL(DP) :: X(N), F(Incfd,N), D(Incfd,N)
   !
   !  DECLARE LOCAL VARIABLES.
   !
-  INTEGER i, nless1
+  INTEGER :: i, nless1
   REAL(DP) :: del1, del2, dmax, dmin, drat1, drat2, dsave, h1, &
     h2, hsum, hsumt3, w1, w2
   REAL(DP), PARAMETER :: zero = 0.D0, three = 3.D0
@@ -159,24 +158,24 @@ SUBROUTINE DPCHIM(N,X,F,D,Incfd,Ierr)
   !  VALIDITY-CHECK ARGUMENTS.
   !
   !* FIRST EXECUTABLE STATEMENT  DPCHIM
-  IF ( N<2 ) THEN
+  IF( N<2 ) THEN
     !
     !  ERROR RETURNS.
     !
-    !     N.LT.2 RETURN.
+    !     N<2 RETURN.
     Ierr = -1
     CALL XERMSG('DPCHIM','NUMBER OF DATA POINTS LESS THAN TWO',Ierr,1)
     RETURN
   ELSE
-    IF ( Incfd<1 ) THEN
+    IF( Incfd<1 ) THEN
       !
-      !     INCFD.LT.1 RETURN.
+      !     INCFD<1 RETURN.
       Ierr = -2
       CALL XERMSG('DPCHIM','INCREMENT LESS THAN ONE',Ierr,1)
       RETURN
     ELSE
       DO i = 2, N
-        IF ( X(i)<=X(i-1) ) GOTO 50
+        IF( X(i)<=X(i-1) ) GOTO 50
       END DO
       !
       !  FUNCTION DEFINITION IS OK, GO ON.
@@ -189,9 +188,9 @@ SUBROUTINE DPCHIM(N,X,F,D,Incfd,Ierr)
       !
       !  SPECIAL CASE N=2 -- USE LINEAR INTERPOLATION.
       !
-      IF ( nless1>1 ) THEN
+      IF( nless1>1 ) THEN
         !
-        !  NORMAL CASE  (N .GE. 3).
+        !  NORMAL CASE  (N >= 3).
         !
         h2 = X(3) - X(2)
         del2 = (F(1,3)-F(1,2))/h2
@@ -203,18 +202,18 @@ SUBROUTINE DPCHIM(N,X,F,D,Incfd,Ierr)
         w1 = (h1+hsum)/hsum
         w2 = -h1/hsum
         D(1,1) = w1*del1 + w2*del2
-        IF ( DPCHST(D(1,1),del1)<=zero ) THEN
+        IF( DPCHST(D(1,1),del1)<=zero ) THEN
           D(1,1) = zero
-        ELSEIF ( DPCHST(del1,del2)<zero ) THEN
+        ELSEIF( DPCHST(del1,del2)<zero ) THEN
           !        NEED DO THIS CHECK ONLY IF MONOTONICITY SWITCHES.
           dmax = three*del1
-          IF ( ABS(D(1,1))>ABS(dmax) ) D(1,1) = dmax
+          IF( ABS(D(1,1))>ABS(dmax) ) D(1,1) = dmax
         END IF
         !
         !  LOOP THROUGH INTERIOR POINTS.
         !
         DO i = 2, nless1
-          IF ( i/=2 ) THEN
+          IF( i/=2 ) THEN
             !
             h1 = h2
             h2 = X(i+1) - X(i)
@@ -226,16 +225,16 @@ SUBROUTINE DPCHIM(N,X,F,D,Incfd,Ierr)
           !        SET D(I)=0 UNLESS DATA ARE STRICTLY MONOTONIC.
           !
           D(1,i) = zero
-          IF ( DPCHST(del1,del2)<0 ) THEN
+          IF( DPCHST(del1,del2)<0 ) THEN
             !
             Ierr = Ierr + 1
             dsave = del2
-          ELSEIF ( DPCHST(del1,del2)==0 ) THEN
+          ELSEIF( DPCHST(del1,del2)==0 ) THEN
             !
             !        COUNT NUMBER OF CHANGES IN DIRECTION OF MONOTONICITY.
             !
-            IF ( del2/=zero ) THEN
-              IF ( DPCHST(dsave,del2)<zero ) Ierr = Ierr + 1
+            IF( del2/=zero ) THEN
+              IF( DPCHST(dsave,del2)<zero ) Ierr = Ierr + 1
               dsave = del2
             END IF
           ELSE
@@ -260,12 +259,12 @@ SUBROUTINE DPCHIM(N,X,F,D,Incfd,Ierr)
         w1 = -h2/hsum
         w2 = (h2+hsum)/hsum
         D(1,N) = w1*del1 + w2*del2
-        IF ( DPCHST(D(1,N),del2)<=zero ) THEN
+        IF( DPCHST(D(1,N),del2)<=zero ) THEN
           D(1,N) = zero
-        ELSEIF ( DPCHST(del1,del2)<zero ) THEN
+        ELSEIF( DPCHST(del1,del2)<zero ) THEN
           !        NEED DO THIS CHECK ONLY IF MONOTONICITY SWITCHES.
           dmax = three*del2
-          IF ( ABS(D(1,N))>ABS(dmax) ) D(1,N) = dmax
+          IF( ABS(D(1,N))>ABS(dmax) ) D(1,N) = dmax
         END IF
       ELSE
         D(1,1) = del1

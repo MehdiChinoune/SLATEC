@@ -1,7 +1,6 @@
 !** XERDMP
 SUBROUTINE XERDMP
-  !>
-  !  Print the error tables and then clear them.
+  !> Print the error tables and then clear them.
   !***
   ! **Library:**   SLATEC (XERROR)
   !***
@@ -32,7 +31,7 @@ SUBROUTINE XERDMP
   !   900510  Changed call of XERSAV to XERSVE.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
-  INTEGER kount
+  INTEGER :: kount
   !* FIRST EXECUTABLE STATEMENT  XERDMP
   CALL XERSVE(' ',' ',0,0,0,kount)
 END SUBROUTINE XERDMP

@@ -1,7 +1,6 @@
 !** CNBFA
 SUBROUTINE CNBFA(Abe,Lda,N,Ml,Mu,Ipvt,Info)
-  !>
-  !  Factor a band matrix by elimination.
+  !> Factor a band matrix by elimination.
   !***
   ! **Library:**   SLATEC
   !***
@@ -28,24 +27,24 @@ SUBROUTINE CNBFA(Abe,Lda,N,Ml,Mu,Ipvt,Info)
   !                of the original matrix are stored in the rows
   !                of ABE and the diagonals of the original matrix
   !                are stored in columns 1 through ML+MU+1 of ABE.
-  !                NC must be .GE. 2*ML+MU+1 .
+  !                NC must be >= 2*ML+MU+1 .
   !                See the comments below for details.
   !
   !        LDA     INTEGER
   !                the leading dimension of the array ABE.
-  !                LDA must be .GE. N .
+  !                LDA must be >= N .
   !
   !        N       INTEGER
   !                the order of the original matrix.
   !
   !        ML      INTEGER
   !                number of diagonals below the main diagonal.
-  !                0 .LE. ML .LT. N .
+  !                0 <= ML < N .
   !
   !        MU      INTEGER
   !                number of diagonals above the main diagonal.
-  !                0 .LE. MU .LT. N .
-  !                More efficient if ML .LE. MU .
+  !                0 <= MU < N .
+  !                More efficient if ML <= MU .
   !
   !     On Return
   !
@@ -60,7 +59,7 @@ SUBROUTINE CNBFA(Abe,Lda,N,Ml,Mu,Ipvt,Info)
   !
   !        INFO    INTEGER
   !                =0  normal value
-  !                =K  if  U(K,K) .EQ. 0.0 .  This is not an error
+  !                =K  if  U(K,K) = 0.0 .  This is not an error
   !                condition for this subroutine, but it does
   !                indicate that CNBSL will divide by zero if
   !                called.  Use RCOND in CNBCO for a reliable
@@ -97,7 +96,7 @@ SUBROUTINE CNBFA(Abe,Lda,N,Ml,Mu,Ipvt,Info)
   !            0  0  0 54 55 56
   !            0  0  0  0 65 66
   !
-  !      then  N = 6, ML = 1, MU = 2, LDA .GE. 5  and ABE should contain
+  !      then  N = 6, ML = 1, MU = 2, LDA >= 5  and ABE should contain
   !
   !            * 11 12 13  +    , * = not used
   !           21 22 23 24  +    , + = used for pivoting
@@ -137,8 +136,8 @@ SUBROUTINE CNBFA(Abe,Lda,N,Ml,Mu,Ipvt,Info)
   !
   !     SET FILL-IN COLUMNS TO ZERO
   !
-  IF ( N>1 ) THEN
-    IF ( Ml>0 ) THEN
+  IF( N>1 ) THEN
+    IF( Ml>0 ) THEN
       Abe(1:N,m+1:m+Ml) = CMPLX( 0._SP ,0._SP )
     END IF
     !
@@ -157,11 +156,11 @@ SUBROUTINE CNBFA(Abe,Lda,N,Ml,Mu,Ipvt,Info)
       !
       !     SWAP ROWS IF NECESSARY
       !
-      IF ( l/=k ) CALL CSWAP(mp+1,Abe(k,ml1),Lda,Abe(l,ml1+k-l),Lda)
+      IF( l/=k ) CALL CSWAP(mp+1,Abe(k,ml1),Lda,Abe(l,ml1+k-l),Lda)
       !
       !     SKIP COLUMN REDUCTION IF PIVOT IS ZERO
       !
-      IF ( SCABS1(Abe(k,ml1))==0.0E0 ) THEN
+      IF( SCABS1(Abe(k,ml1))==0.0E0 ) THEN
         Info = k
       ELSE
         !
@@ -181,5 +180,5 @@ SUBROUTINE CNBFA(Abe,Lda,N,Ml,Mu,Ipvt,Info)
     END DO
   END IF
   Ipvt(N) = N
-  IF ( SCABS1(Abe(N,ml1))==0.0E0 ) Info = N
+  IF( SCABS1(Abe(N,ml1))==0.0E0 ) Info = N
 END SUBROUTINE CNBFA

@@ -1,7 +1,6 @@
 !** DQELG
 SUBROUTINE DQELG(N,Epstab,Result,Abserr,Res3la,Nres)
-  !>
-  !  The routine determines the limit of a given sequence of
+  !> The routine determines the limit of a given sequence of
   !            approximations, by means of the Epsilon algorithm of
   !            P.Wynn. An estimate of the absolute error is also given.
   !            The condensed Epsilon table is computed. Only those
@@ -70,7 +69,7 @@ SUBROUTINE DQELG(N,Epstab,Result,Abserr,Res3la,Nres)
   REAL(DP) :: Abserr, delta1, delta2, delta3, epmach, &
     epsinf, Epstab(52), error, err1, err2, err3, e0, e1, &
     e1abs, e2, e3, oflow, res, Result, Res3la(3), ss, tol1, tol2, tol3
-  INTEGER i, ib, ib2, ie, indx, k1, k2, k3, limexp, N, newelm, Nres, num
+  INTEGER :: i, ib, ib2, ie, indx, k1, k2, k3, limexp, N, newelm, Nres, num
   !
   !           LIST OF MAJOR VARIABLES
   !           -----------------------
@@ -102,7 +101,7 @@ SUBROUTINE DQELG(N,Epstab,Result,Abserr,Res3la,Nres)
   Nres = Nres + 1
   Abserr = oflow
   Result = Epstab(N)
-  IF ( N>=3 ) THEN
+  IF( N>=3 ) THEN
     limexp = 50
     Epstab(N+2) = Epstab(N)
     newelm = (N-1)/2
@@ -123,7 +122,7 @@ SUBROUTINE DQELG(N,Epstab,Result,Abserr,Res3la,Nres)
       delta3 = e1 - e0
       err3 = ABS(delta3)
       tol3 = MAX(e1abs,ABS(e0))*epmach
-      IF ( err2>tol2.OR.err3>tol3 ) THEN
+      IF( err2>tol2 .OR. err3>tol3 ) THEN
         e3 = Epstab(k1)
         Epstab(k1) = e1
         delta1 = e1 - e3
@@ -133,7 +132,7 @@ SUBROUTINE DQELG(N,Epstab,Result,Abserr,Res3la,Nres)
         !           IF TWO ELEMENTS ARE VERY CLOSE TO EACH OTHER, OMIT
         !           A PART OF THE TABLE BY ADJUSTING THE VALUE OF N
         !
-        IF ( err1>tol1.AND.err2>tol2.AND.err3>tol3 ) THEN
+        IF( err1>tol1 .AND. err2>tol2 .AND. err3>tol3 ) THEN
           ss = 0.1D+01/delta1 + 0.1D+01/delta2 - 0.1D+01/delta3
           epsinf = ABS(ss*e1)
           !
@@ -141,7 +140,7 @@ SUBROUTINE DQELG(N,Epstab,Result,Abserr,Res3la,Nres)
           !           EVENTUALLY OMIT A PART OF THE TABLE ADJUSTING THE VALUE
           !           OF N.
           !
-          IF ( epsinf>0.1D-03 ) THEN
+          IF( epsinf>0.1D-03 ) THEN
             !
             !           COMPUTE A NEW ELEMENT AND EVENTUALLY ADJUST
             !           THE VALUE OF RESULT.
@@ -150,7 +149,7 @@ SUBROUTINE DQELG(N,Epstab,Result,Abserr,Res3la,Nres)
             Epstab(k1) = res
             k1 = k1 - 2
             error = err2 + ABS(res-e2) + err3
-            IF ( error<=Abserr ) THEN
+            IF( error<=Abserr ) THEN
               Abserr = error
               Result = res
             END IF
@@ -176,23 +175,23 @@ SUBROUTINE DQELG(N,Epstab,Result,Abserr,Res3la,Nres)
     !
     !           SHIFT THE TABLE.
     !
-    IF ( N==limexp ) N = 2*(limexp/2) - 1
+    IF( N==limexp ) N = 2*(limexp/2) - 1
     ib = 1
-    IF ( (num/2)*2==num ) ib = 2
+    IF( (num/2)*2==num ) ib = 2
     ie = newelm + 1
     DO i = 1, ie
       ib2 = ib + 2
       Epstab(ib) = Epstab(ib2)
       ib = ib2
     END DO
-    IF ( num/=N ) THEN
+    IF( num/=N ) THEN
       indx = num - N + 1
       DO i = 1, N
         Epstab(i) = Epstab(indx)
         indx = indx + 1
       END DO
     END IF
-    IF ( Nres>=4 ) THEN
+    IF( Nres>=4 ) THEN
       !
       !           COMPUTE ERROR ESTIMATE
       !

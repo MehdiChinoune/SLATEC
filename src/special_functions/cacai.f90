@@ -1,7 +1,6 @@
 !** CACAI
 SUBROUTINE CACAI(Z,Fnu,Kode,Mr,N,Y,Nz,Rl,Tol,Elim,Alim)
-  !>
-  !  Subsidiary to CAIRY
+  !> Subsidiary to CAIRY
   !***
   ! **Library:**   SLATEC
   !***
@@ -31,9 +30,9 @@ SUBROUTINE CACAI(Z,Fnu,Kode,Mr,N,Y,Nz,Rl,Tol,Elim,Alim)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
   USE service, ONLY : R1MACH
-  INTEGER inu, iuf, Kode, Mr, N, nn, nw, Nz
-  COMPLEX(SP) csgn, cspn, c1, c2, Y(N), Z, zn, cy(2)
-  REAL(SP) Alim, arg, ascle, az, cpn, dfnu, Elim, fmr, Fnu, Rl, &
+  INTEGER :: inu, iuf, Kode, Mr, N, nn, nw, Nz
+  COMPLEX(SP) :: csgn, cspn, c1, c2, Y(N), Z, zn, cy(2)
+  REAL(SP) :: Alim, arg, ascle, az, cpn, dfnu, Elim, fmr, Fnu, Rl, &
     sgn, spn, Tol, yy
   REAL(SP), PARAMETER :: pi = 3.14159265358979324E0
   !* FIRST EXECUTABLE STATEMENT  CACAI
@@ -42,24 +41,24 @@ SUBROUTINE CACAI(Z,Fnu,Kode,Mr,N,Y,Nz,Rl,Tol,Elim,Alim)
   az = ABS(Z)
   nn = N
   dfnu = Fnu + (N-1)
-  IF ( az<=2.0E0 ) THEN
+  IF( az<=2.0E0 ) THEN
     !-----------------------------------------------------------------------
     !     POWER SERIES FOR THE I FUNCTION
     !-----------------------------------------------------------------------
     CALL CSERI(zn,Fnu,Kode,nn,Y,nw,Tol,Elim,Alim)
-  ELSEIF ( az*az*0.25E0>dfnu+1.0E0 ) THEN
-    IF ( az<Rl ) THEN
+  ELSEIF( az*az*0.25E0>dfnu+1.0E0 ) THEN
+    IF( az<Rl ) THEN
       !-----------------------------------------------------------------------
       !     MILLER ALGORITHM NORMALIZED BY THE SERIES FOR THE I FUNCTION
       !-----------------------------------------------------------------------
       CALL CMLRI(zn,Fnu,Kode,nn,Y,nw,Tol)
-      IF ( nw<0 ) GOTO 100
+      IF( nw<0 ) GOTO 100
     ELSE
       !-----------------------------------------------------------------------
       !     ASYMPTOTIC EXPANSION FOR LARGE Z FOR THE I FUNCTION
       !-----------------------------------------------------------------------
       CALL CASYI(zn,Fnu,Kode,nn,Y,nw,Rl,Tol,Elim,Alim)
-      IF ( nw<0 ) GOTO 100
+      IF( nw<0 ) GOTO 100
     END IF
   ELSE
     CALL CSERI(zn,Fnu,Kode,nn,Y,nw,Tol,Elim,Alim)
@@ -68,11 +67,11 @@ SUBROUTINE CACAI(Z,Fnu,Kode,Mr,N,Y,Nz,Rl,Tol,Elim,Alim)
   !     ANALYTIC CONTINUATION TO THE LEFT HALF PLANE FOR THE K FUNCTION
   !-----------------------------------------------------------------------
   CALL CBKNU(zn,Fnu,Kode,1,cy,nw,Tol,Elim,Alim)
-  IF ( nw==0 ) THEN
+  IF( nw==0 ) THEN
     fmr = Mr
     sgn = -SIGN(pi,fmr)
     csgn = CMPLX(0.0E0,sgn)
-    IF ( Kode/=1 ) THEN
+    IF( Kode/=1 ) THEN
       yy = -AIMAG(zn)
       cpn = COS(yy)
       spn = SIN(yy)
@@ -87,10 +86,10 @@ SUBROUTINE CACAI(Z,Fnu,Kode,Mr,N,Y,Nz,Rl,Tol,Elim,Alim)
     cpn = COS(arg)
     spn = SIN(arg)
     cspn = CMPLX(cpn,spn)
-    IF ( MOD(inu,2)==1 ) cspn = -cspn
+    IF( MOD(inu,2)==1 ) cspn = -cspn
     c1 = cy(1)
     c2 = Y(1)
-    IF ( Kode/=1 ) THEN
+    IF( Kode/=1 ) THEN
       iuf = 0
       ascle = 1.0E+3*R1MACH(1)/Tol
       CALL CS1S2(zn,c1,c2,nw,ascle,Alim,iuf)
@@ -100,5 +99,5 @@ SUBROUTINE CACAI(Z,Fnu,Kode,Mr,N,Y,Nz,Rl,Tol,Elim,Alim)
     RETURN
   END IF
   100  Nz = -1
-  IF ( nw==(-2) ) Nz = -2
+  IF( nw==(-2) ) Nz = -2
 END SUBROUTINE CACAI

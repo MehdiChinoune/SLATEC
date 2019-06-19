@@ -5,8 +5,7 @@ MODULE TEST01_MOD
 CONTAINS
   !** QC6A
   SUBROUTINE QC6A(Lun,Kprint,Ipass)
-    !>
-    !  Test subroutine AAAAAA.
+    !> Test subroutine AAAAAA.
     !***
     ! **Library:**   SLATEC
     !***
@@ -55,7 +54,7 @@ CONTAINS
     !
     !  Declare arguments.
     !
-    INTEGER Lun, Kprint, Ipass
+    INTEGER :: Lun, Kprint, Ipass
     !
     !  DECLARE VARIABLES.
     !
@@ -63,32 +62,32 @@ CONTAINS
     CHARACTER(3), PARAMETER :: VERSN = '4.2'
     !
     !* FIRST EXECUTABLE STATEMENT  QC6A
-    IF ( Kprint>=3 ) WRITE (Lun,99001)
+    IF( Kprint>=3 ) WRITE (Lun,99001)
     !
     ! FORMATs.
     !
     99001 FORMAT ('1 CODE TO TEST SLATEC ROUTINE AAAAAA')
     CALL AAAAAA(ver)
-    IF ( ver==VERSN ) THEN
+    IF( ver==VERSN ) THEN
       Ipass = 1
-      IF ( Kprint>=3 ) THEN
+      IF( Kprint>=3 ) THEN
         WRITE (Lun,99006)
         WRITE (Lun,99002) ver
         99002 FORMAT (' *** Passed -- version number = ',A16)
       END IF
     ELSE
       Ipass = 0
-      IF ( Kprint>=3 ) WRITE (Lun,99006)
-      IF ( Kprint>=2 ) WRITE (Lun,99003) ver, VERSN
+      IF( Kprint>=3 ) WRITE (Lun,99006)
+      IF( Kprint>=2 ) WRITE (Lun,99003) ver, VERSN
       99003 FORMAT (' *** Failed -- version number from AAAAAA = ',A16,&
         ' but expected version number = ',A16)
     END IF
     !
     !     Terminate.
     !
-    IF ( Kprint>=2.AND.Ipass==1 ) WRITE (Lun,99004)
+    IF( Kprint>=2 .AND. Ipass==1 ) WRITE (Lun,99004)
     99004 FORMAT (/' ************QC6A   PASSED  ALL TESTS ****************')
-    IF ( Kprint>=1.AND.Ipass==0 ) WRITE (Lun,99005)
+    IF( Kprint>=1 .AND. Ipass==0 ) WRITE (Lun,99005)
     99005 FORMAT (/' ************QC6A   FAILED SOME TESTS ****************')
     RETURN
     99006 FORMAT (/' QC6A RESULTS')
@@ -101,8 +100,7 @@ PROGRAM TEST01
   USE slatec, ONLY : I1MACH, XSETF, XSETUN, XERMAX
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
-  !>
-  !  Driver for testing SLATEC subprogram  AAAAAA
+  !> Driver for testing SLATEC subprogram  AAAAAA
   !***
   ! **Library:**   SLATEC
   !***
@@ -146,7 +144,7 @@ PROGRAM TEST01
   !* REVISION HISTORY  (YYMMDD)
   !   890713  DATE WRITTEN
   !   900524  Cosmetic changes to code.  (WRB)
-  INTEGER ipass, kprint, lin, lun, nfail
+  INTEGER :: ipass, kprint, lin, lun, nfail
   !* FIRST EXECUTABLE STATEMENT  TEST01
   lun = I1MACH(2)
   lin = I1MACH(1)
@@ -157,7 +155,7 @@ PROGRAM TEST01
   CALL GET_ARGUMENT(kprint)
   CALL XERMAX(1000)
   CALL XSETUN(lun)
-  IF ( kprint<=1 ) THEN
+  IF( kprint<=1 ) THEN
     CALL XSETF(0)
   ELSE
     CALL XSETF(1)
@@ -166,11 +164,11 @@ PROGRAM TEST01
   !     Test AAAAAA
   !
   CALL QC6A(lun,kprint,ipass)
-  IF ( ipass==0 ) nfail = nfail + 1
+  IF( ipass==0 ) nfail = nfail + 1
   !
   !     Write PASS or FAIL message
   !
-  IF ( nfail==0 ) THEN
+  IF( nfail==0 ) THEN
     WRITE (lun,99001)
     99001 FORMAT (/' --------------TEST01 PASSED ALL TESTS----------------')
   ELSE

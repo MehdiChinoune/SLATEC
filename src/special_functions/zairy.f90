@@ -1,7 +1,6 @@
 !** ZAIRY
 SUBROUTINE ZAIRY(Zr,Zi,Id,Kode,Air,Aii,Nz,Ierr)
-  !>
-  !  Compute the Airy function Ai(z) or its derivative dAi/dz
+  !> Compute the Airy function Ai(z) or its derivative dAi/dz
   !            for complex argument z.  A scaling option is available
   !            to help avoid underflow and overflow.
   !***
@@ -150,30 +149,30 @@ SUBROUTINE ZAIRY(Zr,Zi,Id,Kode,Air,Aii,Nz,Ierr)
     cyi(1), cyr(1), dig, dk, d1, d2, elim, fid, fnu, ptr, rl, r1m5, sfac, sti, &
     str, s1i, s1r, s2i, s2r, tol, trm1i, trm1r, trm2i, trm2r, Zi, Zr, ztai, &
     ztar, z3i, z3r, alaz, bb
-  INTEGER Id, Ierr, iflag, k, Kode, k1, k2, mr, nn, Nz
+  INTEGER :: Id, Ierr, iflag, k, Kode, k1, k2, mr, nn, Nz
   REAL(DP), PARAMETER :: tth = 6.66666666666666667D-01, c1 = 3.55028053887817240D-01, &
     c2 = 2.58819403792806799D-01, coef = 1.83776298473930683D-01
   REAL(DP), PARAMETER :: zeror = 0.0D0, zeroi = 0.0D0, coner = 1.0D0, conei = 0.0D0
   !* FIRST EXECUTABLE STATEMENT  ZAIRY
   Ierr = 0
   Nz = 0
-  IF ( Id<0.OR.Id>1 ) Ierr = 1
-  IF ( Kode<1.OR.Kode>2 ) Ierr = 1
-  IF ( Ierr/=0 ) RETURN
+  IF( Id<0 .OR. Id>1 ) Ierr = 1
+  IF( Kode<1 .OR. Kode>2 ) Ierr = 1
+  IF( Ierr/=0 ) RETURN
   az = ZABS(Zr,Zi)
   tol = MAX(D1MACH(4),1.0D-18)
   fid = Id
-  IF ( az>1.0D0 ) THEN
+  IF( az>1.0D0 ) THEN
     !-----------------------------------------------------------------------
-    !     CASE FOR ABS(Z).GT.1.0
+    !     CASE FOR ABS(Z)>1.0
     !-----------------------------------------------------------------------
     fnu = (1.0D0+fid)/3.0D0
     !-----------------------------------------------------------------------
     !     SET PARAMETERS RELATED TO MACHINE CONSTANTS.
     !     TOL IS THE APPROXIMATE UNIT ROUNDOFF LIMITED TO 1.0D-18.
     !     ELIM IS THE APPROXIMATE EXPONENTIAL OVER- AND UNDERFLOW LIMIT.
-    !     EXP(-ELIM).LT.EXP(-ALIM)=EXP(-ELIM)/TOL    AND
-    !     EXP(ELIM).GT.EXP(ALIM)=EXP(ELIM)*TOL       ARE INTERVALS NEAR
+    !     EXP(-ELIM)<EXP(-ALIM)=EXP(-ELIM)/TOL    AND
+    !     EXP(ELIM)>EXP(ALIM)=EXP(ELIM)*TOL       ARE INTERVALS NEAR
     !     UNDERFLOW AND OVERFLOW LIMITS WHERE SCALED ARITHMETIC IS DONE.
     !     RL IS THE LOWER BOUNDARY OF THE ASYMPTOTIC EXPANSION FOR LARGE Z.
     !     DIG = NUMBER OF BASE 10 DIGITS IN TOL = 10**(-DIG).
@@ -197,71 +196,71 @@ SUBROUTINE ZAIRY(Zr,Zi,Id,Kode,Air,Aii,Nz,Ierr)
     bb = I1MACH(9)*0.5D0
     aa = MIN(aa,bb)
     aa = aa**tth
-    IF ( az>aa ) THEN
+    IF( az>aa ) THEN
       Ierr = 4
       Nz = 0
       RETURN
     ELSE
       aa = SQRT(aa)
-      IF ( az>aa ) Ierr = 3
+      IF( az>aa ) Ierr = 3
       CALL ZSQRT(Zr,Zi,csqr,csqi)
       ztar = tth*(Zr*csqr-Zi*csqi)
       ztai = tth*(Zr*csqi+Zi*csqr)
       !-----------------------------------------------------------------------
-      !     RE(ZTA).LE.0 WHEN RE(Z).LT.0, ESPECIALLY WHEN IM(Z) IS SMALL
+      !     RE(ZTA)<=0 WHEN RE(Z)<0, ESPECIALLY WHEN IM(Z) IS SMALL
       !-----------------------------------------------------------------------
       iflag = 0
       sfac = 1.0D0
       ak = ztai
-      IF ( Zr<0.0D0 ) THEN
+      IF( Zr<0.0D0 ) THEN
         bk = ztar
         ck = -ABS(bk)
         ztar = ck
         ztai = ak
       END IF
-      IF ( Zi==0.0D0 ) THEN
-        IF ( Zr<=0.0D0 ) THEN
+      IF( Zi==0.0D0 ) THEN
+        IF( Zr<=0.0D0 ) THEN
           ztar = 0.0D0
           ztai = ak
         END IF
       END IF
       aa = ztar
-      IF ( aa<0.0D0.OR.Zr<=0.0D0 ) THEN
-        IF ( Kode/=2 ) THEN
+      IF( aa<0.0D0 .OR. Zr<=0.0D0 ) THEN
+        IF( Kode/=2 ) THEN
           !-----------------------------------------------------------------------
           !     OVERFLOW TEST
           !-----------------------------------------------------------------------
-          IF ( aa<=(-alim) ) THEN
+          IF( aa<=(-alim) ) THEN
             aa = -aa + 0.25D0*alaz
             iflag = 1
             sfac = tol
-            IF ( aa>elim ) GOTO 50
+            IF( aa>elim ) GOTO 50
           END IF
         END IF
         !-----------------------------------------------------------------------
         !     CBKNU AND CACON RETURN EXP(ZTA)*K(FNU,ZTA) ON KODE=2
         !-----------------------------------------------------------------------
         mr = 1
-        IF ( Zi<0.0D0 ) mr = -1
+        IF( Zi<0.0D0 ) mr = -1
         CALL ZACAI(ztar,ztai,fnu,Kode,mr,1,cyr,cyi,nn,rl,tol,elim,alim)
-        IF ( nn<0 ) THEN
-          IF ( nn/=(-1) ) GOTO 100
+        IF( nn<0 ) THEN
+          IF( nn/=(-1) ) GOTO 100
           GOTO 50
         ELSE
           Nz = Nz + nn
         END IF
-      ELSEIF ( Kode==2 ) THEN
+      ELSEIF( Kode==2 ) THEN
         CALL ZBKNU(ztar,ztai,fnu,Kode,1,cyr,cyi,Nz,tol,elim,alim)
         !-----------------------------------------------------------------------
         !     UNDERFLOW TEST
         !-----------------------------------------------------------------------
-      ELSEIF ( aa<alim ) THEN
+      ELSEIF( aa<alim ) THEN
         CALL ZBKNU(ztar,ztai,fnu,Kode,1,cyr,cyi,Nz,tol,elim,alim)
       ELSE
         aa = -aa - 0.25D0*alaz
         iflag = 2
         sfac = 1.0D0/tol
-        IF ( aa<(-elim) ) THEN
+        IF( aa<(-elim) ) THEN
           Nz = 1
           Air = zeror
           Aii = zeroi
@@ -272,10 +271,10 @@ SUBROUTINE ZAIRY(Zr,Zi,Id,Kode,Air,Aii,Nz,Ierr)
       END IF
       s1r = cyr(1)*coef
       s1i = cyi(1)*coef
-      IF ( iflag/=0 ) THEN
+      IF( iflag/=0 ) THEN
         s1r = s1r*sfac
         s1i = s1i*sfac
-        IF ( Id==1 ) THEN
+        IF( Id==1 ) THEN
           str = -(s1r*Zr-s1i*Zi)
           s1i = -(s1r*Zi+s1i*Zr)
           s1r = str
@@ -290,7 +289,7 @@ SUBROUTINE ZAIRY(Zr,Zi,Id,Kode,Air,Aii,Nz,Ierr)
           Aii = s1i/sfac
           RETURN
         END IF
-      ELSEIF ( Id==1 ) THEN
+      ELSEIF( Id==1 ) THEN
         Air = -(Zr*s1r-Zi*s1i)
         Aii = -(Zr*s1i+Zi*s1r)
         RETURN
@@ -305,21 +304,21 @@ SUBROUTINE ZAIRY(Zr,Zi,Id,Kode,Air,Aii,Nz,Ierr)
     RETURN
   ELSE
     !-----------------------------------------------------------------------
-    !     POWER SERIES FOR ABS(Z).LE.1.
+    !     POWER SERIES FOR ABS(Z)<=1.
     !-----------------------------------------------------------------------
     s1r = coner
     s1i = conei
     s2r = coner
     s2i = conei
-    IF ( az<tol ) THEN
+    IF( az<tol ) THEN
       aa = 1.0D+3*D1MACH(1)
       s1r = zeror
       s1i = zeroi
-      IF ( Id==1 ) THEN
+      IF( Id==1 ) THEN
         Air = -c2
         Aii = 0.0D0
         aa = SQRT(aa)
-        IF ( az>aa ) THEN
+        IF( az>aa ) THEN
           s1r = 0.5D0*(Zr*Zr-Zi*Zi)
           s1i = Zr*Zi
         END IF
@@ -327,7 +326,7 @@ SUBROUTINE ZAIRY(Zr,Zi,Id,Kode,Air,Aii,Nz,Ierr)
         Aii = Aii + c1*s1i
         RETURN
       ELSE
-        IF ( az>aa ) THEN
+        IF( az>aa ) THEN
           s1r = c2*Zr
           s1i = c2*Zi
         END IF
@@ -337,7 +336,7 @@ SUBROUTINE ZAIRY(Zr,Zi,Id,Kode,Air,Aii,Nz,Ierr)
       END IF
     ELSE
       aa = az*az
-      IF ( aa>=tol/az ) THEN
+      IF( aa>=tol/az ) THEN
         trm1r = coner
         trm1i = conei
         trm2r = coner
@@ -372,22 +371,22 @@ SUBROUTINE ZAIRY(Zr,Zi,Id,Kode,Air,Aii,Nz,Ierr)
           d1 = d1 + ak
           d2 = d2 + bk
           ad = MIN(d1,d2)
-          IF ( atrm<tol*ad ) EXIT
+          IF( atrm<tol*ad ) EXIT
           ak = ak + 18.0D0
           bk = bk + 18.0D0
         END DO
       END IF
-      IF ( Id==1 ) THEN
+      IF( Id==1 ) THEN
         Air = -s2r*c2
         Aii = -s2i*c2
-        IF ( az>tol ) THEN
+        IF( az>tol ) THEN
           str = Zr*s1r - Zi*s1i
           sti = Zr*s1i + Zi*s1r
           cc = c1/(1.0D0+fid)
           Air = Air + cc*(str*Zr-sti*Zi)
           Aii = Aii + cc*(str*Zi+sti*Zr)
         END IF
-        IF ( Kode==1 ) RETURN
+        IF( Kode==1 ) RETURN
         CALL ZSQRT(Zr,Zi,str,sti)
         ztar = tth*(Zr*str-Zi*sti)
         ztai = tth*(Zr*sti+Zi*str)
@@ -399,7 +398,7 @@ SUBROUTINE ZAIRY(Zr,Zi,Id,Kode,Air,Aii,Nz,Ierr)
       ELSE
         Air = s1r*c1 - c2*(Zr*s2r-Zi*s2i)
         Aii = s1i*c1 - c2*(Zr*s2i+Zi*s2r)
-        IF ( Kode==1 ) RETURN
+        IF( Kode==1 ) RETURN
         CALL ZSQRT(Zr,Zi,str,sti)
         ztar = tth*(Zr*str-Zi*sti)
         ztai = tth*(Zr*sti+Zi*str)

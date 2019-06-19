@@ -1,7 +1,6 @@
 !** INDXC
 SUBROUTINE INDXC(I,Ir,Idxc,Nc)
-  !>
-  !  Subsidiary to BLKTRI
+  !> Subsidiary to BLKTRI
   !***
   ! **Library:**   SLATEC
   !***
@@ -24,5 +23,5 @@ SUBROUTINE INDXC(I,Ir,Idxc,Nc)
   !* FIRST EXECUTABLE STATEMENT  INDXC
   Nc = 2**Ir
   Idxc = I
-  IF ( Idxc+Nc-1>nm_com ) Nc = 0
+  IF( Idxc+Nc-1>nm_com ) Nc = 0
 END SUBROUTINE INDXC

@@ -1,7 +1,6 @@
 !** DBESK1
 REAL(DP) FUNCTION DBESK1(X)
-  !>
-  !  Compute the modified (hyperbolic) Bessel function of the
+  !> Compute the modified (hyperbolic) Bessel function of the
   !            third kind of order one.
   !***
   ! **Library:**   SLATEC (FNLIB)
@@ -58,25 +57,25 @@ REAL(DP) FUNCTION DBESK1(X)
     -.91550857176541866666666666666666D-31 ]
   LOGICAL, SAVE :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  DBESK1
-  IF ( first ) THEN
+  IF( first ) THEN
     ntk1 = INITDS(bk1cs,16,0.1*D1MACH(3))
     first = .FALSE.
   END IF
   !
-  IF ( X<=0.D0 ) CALL XERMSG('DBESK1','X IS ZERO OR NEGATIVE',2,2)
-  IF ( X>2.0D0 ) THEN
+  IF( X<=0.D0 ) CALL XERMSG('DBESK1','X IS ZERO OR NEGATIVE',2,2)
+  IF( X>2.0D0 ) THEN
     !
     DBESK1 = 0.D0
-    IF ( X>xmax ) CALL XERMSG('DBESK1','X SO BIG K1 UNDERFLOWS',1,1)
-    IF ( X>xmax ) RETURN
+    IF( X>xmax ) CALL XERMSG('DBESK1','X SO BIG K1 UNDERFLOWS',1,1)
+    IF( X>xmax ) RETURN
     !
     DBESK1 = EXP(-X)*DBSK1E(X)
     RETURN
   END IF
   !
-  IF ( X<xmin ) CALL XERMSG('DBESK1','X SO SMALL K1 OVERFLOWS',3,2)
+  IF( X<xmin ) CALL XERMSG('DBESK1','X SO SMALL K1 OVERFLOWS',3,2)
   y = 0.D0
-  IF ( X>xsml ) y = X*X
+  IF( X>xsml ) y = X*X
   DBESK1 = LOG(0.5D0*X)*DBESI1(X) + (0.75D0+DCSEVL(.5D0*y-1.D0,bk1cs,ntk1))/X
   RETURN
 END FUNCTION DBESK1

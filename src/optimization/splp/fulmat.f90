@@ -1,7 +1,6 @@
 !** FULMAT
 SUBROUTINE FULMAT(I,J,Aij,Indcat,Prgopt,Dattrv,Iflag)
-  !>
-  !  Subsidiary to SPLP
+  !> Subsidiary to SPLP
   !***
   ! **Library:**   SLATEC
   !***
@@ -45,17 +44,17 @@ SUBROUTINE FULMAT(I,J,Aij,Indcat,Prgopt,Dattrv,Iflag)
   INTEGER :: key, level, lp, nerr, next
   REAL(SP), PARAMETER :: zero = 0.
   !* FIRST EXECUTABLE STATEMENT  FULMAT
-  IF ( Iflag(1)==1 ) THEN
+  IF( Iflag(1)==1 ) THEN
     !     INITIALIZE POINTERS TO PROCESS FULL TWO-DIMENSIONAL FORTRAN
     !     ARRAYS.
     lp = 1
     DO
       next = INT( Prgopt(lp) )
-      IF ( next>1 ) THEN
+      IF( next>1 ) THEN
         key = INT( Prgopt(lp+1) )
-        IF ( key/=68 ) THEN
+        IF( key/=68 ) THEN
           lp = next
-        ELSEIF ( Prgopt(lp+2)/=zero ) THEN
+        ELSEIF( Prgopt(lp+2)/=zero ) THEN
           Iflag(2) = 1
           Iflag(3) = 1
           Iflag(4) = INT( Prgopt(lp+3) )
@@ -74,17 +73,17 @@ SUBROUTINE FULMAT(I,J,Aij,Indcat,Prgopt,Dattrv,Iflag)
         EXIT
       END IF
     END DO
-  ELSEIF ( Iflag(1)==2 ) THEN
+  ELSEIF( Iflag(1)==2 ) THEN
     DO
       I = Iflag(2)
       J = Iflag(3)
-      IF ( J>Iflag(6) ) THEN
+      IF( J>Iflag(6) ) THEN
         Iflag(1) = 3
         EXIT
-      ELSEIF ( I<=Iflag(5) ) THEN
+      ELSEIF( I<=Iflag(5) ) THEN
         Aij = Dattrv(Iflag(4)*(J-1)+I)
         Iflag(2) = I + 1
-        IF ( Aij/=zero ) THEN
+        IF( Aij/=zero ) THEN
           Indcat = 0
           EXIT
         END IF

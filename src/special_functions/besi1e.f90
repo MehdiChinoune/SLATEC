@@ -1,7 +1,6 @@
 !** BESI1E
 REAL(SP) FUNCTION BESI1E(X)
-  !>
-  !  Compute the exponentially scaled modified (hyperbolic)
+  !> Compute the exponentially scaled modified (hyperbolic)
   !            Bessel function of the first kind of order one.
   !***
   ! **Library:**   SLATEC (FNLIB)
@@ -80,7 +79,7 @@ REAL(SP) FUNCTION BESI1E(X)
     .00000000000000028E0, -.00000000000000003E0 ]
   LOGICAL, SAVE :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  BESI1E
-  IF ( first ) THEN
+  IF( first ) THEN
     nti1 = INITS(bi1cs,11,0.1*R1MACH(3))
     ntai1 = INITS(ai1cs,21,0.1*R1MACH(3))
     ntai12 = INITS(ai12cs,22,0.1*R1MACH(3))
@@ -88,21 +87,21 @@ REAL(SP) FUNCTION BESI1E(X)
   END IF
   !
   y = ABS(X)
-  IF ( y>3.0 ) THEN
+  IF( y>3.0 ) THEN
     !
-    IF ( y<=8. ) BESI1E = (.375+CSEVL((48./y-11.)/5.,ai1cs,ntai1))/SQRT(y)
-    IF ( y>8. ) BESI1E = (.375+CSEVL(16./y-1.0,ai12cs,ntai12))/SQRT(y)
+    IF( y<=8. ) BESI1E = (.375+CSEVL((48./y-11.)/5.,ai1cs,ntai1))/SQRT(y)
+    IF( y>8. ) BESI1E = (.375+CSEVL(16./y-1.0,ai12cs,ntai12))/SQRT(y)
     BESI1E = SIGN(BESI1E,X)
     RETURN
   END IF
   !
   BESI1E = 0.0
-  IF ( y==0.0 ) RETURN
+  IF( y==0.0 ) RETURN
   !
-  IF ( y<=xmin ) CALL XERMSG('BESI1E',&
+  IF( y<=xmin ) CALL XERMSG('BESI1E',&
     'ABS(X) SO SMALL I1 UNDERFLOWS',1,1)
-  IF ( y>xmin ) BESI1E = 0.5*X
-  IF ( y>xsml ) BESI1E = X*(.875+CSEVL(y*y/4.5-1.,bi1cs,nti1))
+  IF( y>xmin ) BESI1E = 0.5*X
+  IF( y>xsml ) BESI1E = X*(.875+CSEVL(y*y/4.5-1.,bi1cs,nti1))
   BESI1E = EXP(-y)*BESI1E
   RETURN
 END FUNCTION BESI1E

@@ -3,8 +3,7 @@ SUBROUTINE DDES(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Ypout,Yp,Yy,Wt,P,Phi,&
     Alpha,Beta,Psi,V,W,Sig,G,Gi,H,Eps,X,Xold,Hold,Told,Delsgn,&
     Tstop,Twou,Fouru,Start,Phase1,Nornd,Stiff,Intout,Ns,Kord,&
     Kold,Init,Ksteps,Kle4,Iquit,Kprev,Ivc,Iv,Kgi)
-  !>
-  !  Subsidiary to DDEABM
+  !> Subsidiary to DDEABM
   !***
   ! **Library:**   SLATEC
   !***
@@ -66,7 +65,7 @@ SUBROUTINE DDES(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Ypout,Yp,Yy,Wt,P,Phi,&
   !.......................................................................
   !
   !* FIRST EXECUTABLE STATEMENT  DDES
-  IF ( Info(1)==0 ) THEN
+  IF( Info(1)==0 ) THEN
     !
     ! ON THE FIRST CALL, PERFORM INITIALIZATION --
     !        DEFINE THE MACHINE UNIT ROUNDOFF QUANTITY  U  BY CALLING THE
@@ -101,7 +100,7 @@ SUBROUTINE DDES(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Ypout,Yp,Yy,Wt,P,Phi,&
   !
   !      CHECK VALIDITY OF INPUT PARAMETERS ON EACH ENTRY
   !
-  IF ( Info(1)/=0.AND.Info(1)/=1 ) THEN
+  IF( Info(1)/=0 .AND. Info(1)/=1 ) THEN
     WRITE (xern1,'(I8)') Info(1)
     CALL XERMSG('DDES','IN DDEABM, INFO(1) MUST BE SET TO 0 FOR THE&
       & START OF A NEW PROBLEM, AND MUST BE SET TO 1 FOLLOWING AN INTERRUPTED TASK.&
@@ -110,7 +109,7 @@ SUBROUTINE DDES(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Ypout,Yp,Yy,Wt,P,Phi,&
     Idid = -33
   END IF
   !
-  IF ( Info(2)/=0.AND.Info(2)/=1 ) THEN
+  IF( Info(2)/=0 .AND. Info(2)/=1 ) THEN
     WRITE (xern1,'(I8)') Info(2)
     CALL XERMSG('DDES','IN DDEABM, INFO(2) MUST BE 0 OR 1 INDICATING&
       & SCALAR AND VECTOR ERROR TOLERANCES, RESPECTIVELY.&
@@ -118,7 +117,7 @@ SUBROUTINE DDES(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Ypout,Yp,Yy,Wt,P,Phi,&
     Idid = -33
   END IF
   !
-  IF ( Info(3)/=0.AND.Info(3)/=1 ) THEN
+  IF( Info(3)/=0 .AND. Info(3)/=1 ) THEN
     WRITE (xern1,'(I8)') Info(3)
     CALL XERMSG('DDES','IN DDEABM, INFO(3) MUST BE 0 OR 1 INDICATING&
       & THE INTERVAL OR INTERMEDIATE-OUTPUT MODE OF INTEGRATION, RESPECTIVELY.&
@@ -126,7 +125,7 @@ SUBROUTINE DDES(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Ypout,Yp,Yy,Wt,P,Phi,&
     Idid = -33
   END IF
   !
-  IF ( Info(4)/=0.AND.Info(4)/=1 ) THEN
+  IF( Info(4)/=0 .AND. Info(4)/=1 ) THEN
     WRITE (xern1,'(I8)') Info(4)
     CALL XERMSG('DDES','IN DDEABM, INFO(4) MUST BE 0 OR 1 INDICATING&
       & WHETHER OR NOT THE INTEGRATION INTERVAL IS TO BE RESTRICTED BY A POINT TSTOP.&
@@ -134,7 +133,7 @@ SUBROUTINE DDES(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Ypout,Yp,Yy,Wt,P,Phi,&
     Idid = -33
   END IF
   !
-  IF ( Neq<1 ) THEN
+  IF( Neq<1 ) THEN
     WRITE (xern1,'(I8)') Neq
     CALL XERMSG('DDES','IN DDEABM,  THE NUMBER OF EQUATIONS NEQ&
       & MUST BE A POSITIVE INTEGER.  YOU HAVE CALLED THE CODE WITH  NEQ = '//xern1,6,1)
@@ -144,7 +143,7 @@ SUBROUTINE DDES(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Ypout,Yp,Yy,Wt,P,Phi,&
   nrtolp = 0
   natolp = 0
   DO k = 1, Neq
-    IF ( nrtolp==0.AND.Rtol(k)<0.D0 ) THEN
+    IF( nrtolp==0 .AND. Rtol(k)<0.D0 ) THEN
       WRITE (xern1,'(I8)') k
       WRITE (xern3,'(1PE15.6)') Rtol(k)
       CALL XERMSG('DDES','IN DDEABM, THE RELATIVE ERROR TOLERANCES RTOL&
@@ -155,7 +154,7 @@ SUBROUTINE DDES(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Ypout,Yp,Yy,Wt,P,Phi,&
       nrtolp = 1
     END IF
     !
-    IF ( natolp==0.AND.Atol(k)<0.D0 ) THEN
+    IF( natolp==0 .AND. Atol(k)<0.D0 ) THEN
       WRITE (xern1,'(I8)') k
       WRITE (xern3,'(1PE15.6)') Atol(k)
       CALL XERMSG('DDES','IN DDEABM, THE ABSOLUTE ERROR TOLERANCES ATOL&
@@ -166,12 +165,12 @@ SUBROUTINE DDES(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Ypout,Yp,Yy,Wt,P,Phi,&
       natolp = 1
     END IF
     !
-    IF ( Info(2)==0 ) EXIT
-    IF ( natolp>0.AND.nrtolp>0 ) EXIT
+    IF( Info(2)==0 ) EXIT
+    IF( natolp>0 .AND. nrtolp>0 ) EXIT
   END DO
   !
-  IF ( Info(4)==1 ) THEN
-    IF ( SIGN(1.D0,Tout-T)/=SIGN(1.D0,Tstop-T).OR.ABS(Tout-T)>ABS(Tstop-T) ) THEN
+  IF( Info(4)==1 ) THEN
+    IF( SIGN(1.D0,Tout-T)/=SIGN(1.D0,Tstop-T) .OR. ABS(Tout-T)>ABS(Tstop-T) ) THEN
       WRITE (xern3,'(1PE15.6)') Tout
       WRITE (xern4,'(1PE15.6)') Tstop
       CALL XERMSG('DDES','IN DDEABM, YOU HAVE CALLED THE CODE WITH  TOUT = '&
@@ -183,15 +182,15 @@ SUBROUTINE DDES(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Ypout,Yp,Yy,Wt,P,Phi,&
   !
   !     CHECK SOME CONTINUATION POSSIBILITIES
   !
-  IF ( Init/=0 ) THEN
-    IF ( T==Tout ) THEN
+  IF( Init/=0 ) THEN
+    IF( T==Tout ) THEN
       WRITE (xern3,'(1PE15.6)') T
       CALL XERMSG('DDES','IN DDEABM, YOU HAVE CALLED THE CODE WITH  T = TOUT = '//xern3//&
         '$$THIS IS NOT ALLOWED ON CONTINUATION CALLS.',9,1)
       Idid = -33
     END IF
     !
-    IF ( T/=Told ) THEN
+    IF( T/=Told ) THEN
       WRITE (xern3,'(1PE15.6)') Told
       WRITE (xern4,'(1PE15.6)') T
       CALL XERMSG('DDES','IN DDEABM, YOU HAVE CHANGED THE VALUE OF T FROM '//xern3//' TO '//xern4//&
@@ -199,8 +198,8 @@ SUBROUTINE DDES(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Ypout,Yp,Yy,Wt,P,Phi,&
       Idid = -33
     END IF
     !
-    IF ( Init/=1 ) THEN
-      IF ( Delsgn*(Tout-T)<0.D0 ) THEN
+    IF( Init/=1 ) THEN
+      IF( Delsgn*(Tout-T)<0.D0 ) THEN
         WRITE (xern3,'(1PE15.6)') Tout
         CALL XERMSG('DDES','IN DDEABM, BY CALLING THE CODE WITH TOUT = '//xern3//&
           ' YOU ARE ATTEMPTING TO CHANGE THE DIRECTION OF INTEGRATION.$$THIS IS NOT ALLOWED WITHOUT RESTARTING.',11,1)
@@ -211,8 +210,8 @@ SUBROUTINE DDES(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Ypout,Yp,Yy,Wt,P,Phi,&
   !
   !     INVALID INPUT DETECTED
   !
-  IF ( Idid==(-33) ) THEN
-    IF ( Iquit/=(-33) ) THEN
+  IF( Idid==(-33) ) THEN
+    IF( Iquit/=(-33) ) THEN
       Iquit = -33
       Info(1) = -1
     ELSE
@@ -231,14 +230,14 @@ SUBROUTINE DDES(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Ypout,Yp,Yy,Wt,P,Phi,&
   !     FOURU WHICH IS LIKELY TO BE REASONABLE FOR THIS METHOD AND MACHINE
   !
   DO k = 1, Neq
-    IF ( Rtol(k)+Atol(k)<=0.D0 ) THEN
+    IF( Rtol(k)+Atol(k)<=0.D0 ) THEN
       Rtol(k) = Fouru
       Idid = -2
     END IF
-    IF ( Info(2)==0 ) EXIT
+    IF( Info(2)==0 ) EXIT
   END DO
   !
-  IF ( Idid/=(-2) ) THEN
+  IF( Idid/=(-2) ) THEN
     !
     !     BRANCH ON STATUS OF INITIALIZATION INDICATOR
     !            INIT=0 MEANS INITIAL DERIVATIVES AND NOMINAL STEP SIZE
@@ -246,7 +245,7 @@ SUBROUTINE DDES(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Ypout,Yp,Yy,Wt,P,Phi,&
     !            INIT=1 MEANS NOMINAL STEP SIZE AND DIRECTION NOT YET SET
     !            INIT=2 MEANS NO FURTHER INITIALIZATION REQUIRED
     !
-    IF ( Init==0 ) THEN
+    IF( Init==0 ) THEN
       !
       !.......................................................................
       !
@@ -256,7 +255,7 @@ SUBROUTINE DDES(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Ypout,Yp,Yy,Wt,P,Phi,&
       Init = 1
       a = T
       CALL DF(a,Y,Yp)
-      IF ( T==Tout ) THEN
+      IF( T==Tout ) THEN
         Idid = 2
         DO l = 1, Neq
           Ypout(l) = Yp(l)
@@ -264,7 +263,7 @@ SUBROUTINE DDES(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Ypout,Yp,Yy,Wt,P,Phi,&
         Told = T
         RETURN
       END IF
-    ELSEIF ( Init/=1 ) THEN
+    ELSEIF( Init/=1 ) THEN
       GOTO 100
     END IF
     !
@@ -299,13 +298,13 @@ SUBROUTINE DDES(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Ypout,Yp,Yy,Wt,P,Phi,&
   !
   !   IF ALREADY PAST OUTPUT POINT, INTERPOLATE AND RETURN
   !
-  DO WHILE ( ABS(X-T)<absdel )
+  DO WHILE( ABS(X-T)<absdel )
     !
     !   IF CANNOT GO PAST TSTOP AND SUFFICIENTLY CLOSE,
     !   EXTRAPOLATE AND RETURN
     !
-    IF ( Info(4)==1 ) THEN
-      IF ( ABS(Tstop-X)<Fouru*ABS(X) ) THEN
+    IF( Info(4)==1 ) THEN
+      IF( ABS(Tstop-X)<Fouru*ABS(X) ) THEN
         dt = Tout - X
         DO l = 1, Neq
           Y(l) = Yy(l) + dt*Yp(l)
@@ -318,7 +317,7 @@ SUBROUTINE DDES(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Ypout,Yp,Yy,Wt,P,Phi,&
       END IF
     END IF
     !
-    IF ( .NOT.(Info(3)==0.OR..NOT.Intout) ) THEN
+    IF( .NOT. (Info(3)==0 .OR. .NOT. Intout) ) THEN
       !
       !   INTERMEDIATE-OUTPUT MODE
       !
@@ -336,21 +335,21 @@ SUBROUTINE DDES(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Ypout,Yp,Yy,Wt,P,Phi,&
       !
       !     MONITOR NUMBER OF STEPS ATTEMPTED
       !
-    ELSEIF ( Ksteps<=maxnum ) THEN
+    ELSEIF( Ksteps<=maxnum ) THEN
       !
       !.......................................................................
       !
       !   LIMIT STEP SIZE, SET WEIGHT VECTOR AND TAKE A STEP
       !
       ha = ABS(H)
-      IF ( Info(4)==1 ) ha = MIN(ha,ABS(Tstop-X))
+      IF( Info(4)==1 ) ha = MIN(ha,ABS(Tstop-X))
       H = SIGN(ha,H)
       Eps = 1.0D0
       ltol = 1
       DO l = 1, Neq
-        IF ( Info(2)==1 ) ltol = l
+        IF( Info(2)==1 ) ltol = l
         Wt(l) = Rtol(ltol)*ABS(Yy(l)) + Atol(ltol)
-        IF ( Wt(l)<=0.0D0 ) GOTO 120
+        IF( Wt(l)<=0.0D0 ) GOTO 120
       END DO
       !
       CALL DSTEPS(DF,Neq,Yy,X,H,Eps,Wt,Start,Hold,Kord,Kold,crash,Phi,P,Yp,&
@@ -359,14 +358,14 @@ SUBROUTINE DDES(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Ypout,Yp,Yy,Wt,P,Phi,&
       !
       !.......................................................................
       !
-      IF ( .NOT.crash ) THEN
+      IF( .NOT. crash ) THEN
         !
         !   (STIFFNESS TEST) COUNT NUMBER OF CONSECUTIVE STEPS TAKEN WITH THE
         !   ORDER OF THE METHOD BEING LESS OR EQUAL TO FOUR
         !
         Kle4 = Kle4 + 1
-        IF ( Kold>4 ) Kle4 = 0
-        IF ( Kle4>=50 ) Stiff = .TRUE.
+        IF( Kold>4 ) Kle4 = 0
+        IF( Kle4>=50 ) Stiff = .TRUE.
         Intout = .TRUE.
         CYCLE
       ELSE
@@ -375,7 +374,7 @@ SUBROUTINE DDES(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Ypout,Yp,Yy,Wt,P,Phi,&
         Idid = -2
         Rtol(1) = Eps*Rtol(1)
         Atol(1) = Eps*Atol(1)
-        IF ( Info(2)/=0 ) THEN
+        IF( Info(2)/=0 ) THEN
           DO l = 2, Neq
             Rtol(l) = Eps*Rtol(l)
             Atol(l) = Eps*Atol(l)
@@ -400,7 +399,7 @@ SUBROUTINE DDES(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Ypout,Yp,Yy,Wt,P,Phi,&
       !                       A SIGNIFICANT AMOUNT OF WORK HAS BEEN EXPENDED
       Idid = -1
       Ksteps = 0
-      IF ( Stiff ) THEN
+      IF( Stiff ) THEN
         !
         !                       PROBLEM APPEARS TO BE STIFF
         Idid = -4
@@ -421,7 +420,7 @@ SUBROUTINE DDES(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Ypout,Yp,Yy,Wt,P,Phi,&
   END DO
   CALL DINTP(X,Yy,Tout,Y,Ypout,Neq,Kold,Phi,Ivc,Iv,Kgi,Gi,Alpha,G,W,Xold,P)
   Idid = 3
-  IF ( X==Tout ) THEN
+  IF( X==Tout ) THEN
     Idid = 2
     Intout = .FALSE.
   END IF

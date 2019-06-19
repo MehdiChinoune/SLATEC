@@ -1,7 +1,6 @@
 !** DDEABM
 SUBROUTINE DDEABM(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw)
-  !>
-  !  Solve an initial value problem in ordinary differential
+  !> Solve an initial value problem in ordinary differential
   !            equations using an Adams-Bashforth method.
   !***
   ! **Library:**   SLATEC (DEPAC)
@@ -141,7 +140,7 @@ SUBROUTINE DDEABM(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw)
   !             length.
   !
   !      NEQ -- Set it to the number of differential equations.
-  !             (NEQ .GE. 1)
+  !             (NEQ >= 1)
   !
   !      T -- Set it to the initial point of the integration.
   !             You must use a program variable for T because the code
@@ -154,8 +153,8 @@ SUBROUTINE DDEABM(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw)
   !      TOUT -- Set it to the first point at which a solution
   !             is desired.  You can take TOUT = T, in which case the code
   !             will evaluate the derivative of the solution at T and
-  !             return. Integration either forward in T  (TOUT .GT. T)  or
-  !             backward in T  (TOUT .LT. T)  is permitted.
+  !             return. Integration either forward in T  (TOUT > T)  or
+  !             backward in T  (TOUT < T)  is permitted.
   !
   !             The code advances the solution from T to TOUT using
   !             step sizes which are automatically selected so as to
@@ -251,7 +250,7 @@ SUBROUTINE DDEABM(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw)
   !
   !             The tolerances are used by the code in a local error test
   !             at each step which requires roughly that
-  !                     ABS(LOCAL ERROR) .LE. RTOL*ABS(Y)+ATOL
+  !                     ABS(LOCAL ERROR) <= RTOL*ABS(Y)+ATOL
   !             for each vector component.
   !             (More specifically, a Euclidean norm is used to measure
   !             the size of vectors, and the error test uses the magnitude
@@ -309,13 +308,13 @@ SUBROUTINE DDEABM(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw)
   !             TSTOP.)
   !
   !      LRW -- Set it to the declared length of the RWORK array.
-  !             You must have  LRW .GE. 130+21*NEQ
+  !             You must have  LRW >= 130+21*NEQ
   !
   !      IWORK(*) -- Dimension this INTEGER work array of length LIW in
   !             your calling program.
   !
   !      LIW -- Set it to the declared length of the IWORK array.
-  !             You must have  LIW .GE. 51
+  !             You must have  LIW >= 51
   !
   !      RPAR, IPAR -- These are parameter arrays, of DOUBLE PRECISION and
   !             INTEGER type, respectively.  You can use them for
@@ -597,16 +596,16 @@ SUBROUTINE DDEABM(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw)
   REAL(DP) :: Atol(:), Rtol(:), Rwork(Lrw), Y(Neq)
   INTEGER :: igi, ixold, ialpha, ibeta, idelsn, ifouru, ig, ihold, ip, iphi, &
     ipsi, isig, itold, itstar, itwou, iv, iw, iwt, iyp, iypout, iyy
-  LOGICAL start, phase1, nornd, stiff, intout
+  LOGICAL :: start, phase1, nornd, stiff, intout
   CHARACTER(8) :: xern1
   CHARACTER(16) :: xern3
   !
   !     CHECK FOR AN APPARENT INFINITE LOOP
   !
   !* FIRST EXECUTABLE STATEMENT  DDEABM
-  IF ( Info(1)==0 ) Iwork(Liw) = 0
-  IF ( Iwork(Liw)>=5 ) THEN
-    IF ( T==Rwork(21+Neq) ) THEN
+  IF( Info(1)==0 ) Iwork(Liw) = 0
+  IF( Iwork(Liw)>=5 ) THEN
+    IF( T==Rwork(21+Neq) ) THEN
       WRITE (xern3,'(1PE15.6)') T
       CALL XERMSG('DDEABM','AN APPARENT INFINITE LOOP HAS BEEN DETECTED.&
         &$$YOU HAVE MADE REPEATED CALLS AT T = '//xern3//' AND THE INTEGRATION&
@@ -619,14 +618,14 @@ SUBROUTINE DDEABM(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw)
   !     CHECK LRW AND LIW FOR SUFFICIENT STORAGE ALLOCATION
   !
   Idid = 0
-  IF ( Lrw<130+21*Neq ) THEN
+  IF( Lrw<130+21*Neq ) THEN
     WRITE (xern1,'(I8)') Lrw
     CALL XERMSG('DDEABM','THE LENGTH OF THE RWORK ARRAY MUST BE AT&
       & LEAST 130 + 21*NEQ.$$YOU HAVE CALLED THE CODE WITH LRW = '//xern1,1,1)
     Idid = -33
   END IF
   !
-  IF ( Liw<51 ) THEN
+  IF( Liw<51 ) THEN
     WRITE (xern1,'(I8)') Liw
     CALL XERMSG('DDEABM','THE LENGTH OF THE IWORK ARRAY MUST BE AT LEAST 51.&
       &$$YOU HAVE CALLED THE CODE WITH LIW = '//xern1,2,1)
@@ -658,7 +657,7 @@ SUBROUTINE DDEABM(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw)
   ifouru = 1 + itwou
   !
   Rwork(itstar) = T
-  IF ( Info(1)/=0 ) THEN
+  IF( Info(1)/=0 ) THEN
     start = Iwork(21)/=(-1)
     phase1 = Iwork(22)/=(-1)
     nornd = Iwork(23)/=(-1)
@@ -676,17 +675,17 @@ SUBROUTINE DDEABM(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw)
     Iwork(33),Iwork(34),Iwork(35),Iwork(45))
   !
   Iwork(21) = -1
-  IF ( start ) Iwork(21) = 1
+  IF( start ) Iwork(21) = 1
   Iwork(22) = -1
-  IF ( phase1 ) Iwork(22) = 1
+  IF( phase1 ) Iwork(22) = 1
   Iwork(23) = -1
-  IF ( nornd ) Iwork(23) = 1
+  IF( nornd ) Iwork(23) = 1
   Iwork(24) = -1
-  IF ( stiff ) Iwork(24) = 1
+  IF( stiff ) Iwork(24) = 1
   Iwork(25) = -1
-  IF ( intout ) Iwork(25) = 1
+  IF( intout ) Iwork(25) = 1
   !
-  IF ( Idid/=(-2) ) Iwork(Liw) = Iwork(Liw) + 1
-  IF ( T/=Rwork(itstar) ) Iwork(Liw) = 0
+  IF( Idid/=(-2) ) Iwork(Liw) = Iwork(Liw) + 1
+  IF( T/=Rwork(itstar) ) Iwork(Liw) = 0
   !
 END SUBROUTINE DDEABM

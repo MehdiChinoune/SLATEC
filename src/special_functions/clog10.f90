@@ -1,7 +1,6 @@
 !** CLOG10
 COMPLEX(SP) FUNCTION CLOG10(Z)
-  !>
-  !  Compute the principal value of the complex base 10
+  !> Compute the principal value of the complex base 10
   !            logarithm.
   !***
   ! **Library:**   SLATEC (FNLIB)
@@ -17,7 +16,7 @@ COMPLEX(SP) FUNCTION CLOG10(Z)
   ! **Description:**
   !
   ! CLOG10(Z) calculates the principal value of the complex common
-  ! or base 10 logarithm of Z for -PI .LT. arg(Z) .LE. +PI.
+  ! or base 10 logarithm of Z for -PI < arg(Z) <= +PI.
   !
   !***
   ! **References:**  (NONE)
@@ -30,7 +29,7 @@ COMPLEX(SP) FUNCTION CLOG10(Z)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-  COMPLEX(SP) Z
+  COMPLEX(SP) :: Z
   REAL(SP), PARAMETER :: aloge = 0.43429448190325182765E0
   !* FIRST EXECUTABLE STATEMENT  CLOG10
   CLOG10 = aloge*LOG(Z)

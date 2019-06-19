@@ -1,7 +1,6 @@
 !** LSI
 SUBROUTINE LSI(W,Mdw,Ma,Mg,N,Prgopt,X,Rnorm,Mode,Ws,Ip)
-  !>
-  !  Subsidiary to LSEI
+  !> Subsidiary to LSEI
   !***
   ! **Library:**   SLATEC
   !***
@@ -18,7 +17,7 @@ SUBROUTINE LSI(W,Mdw,Ma,Mg,N,Prgopt,X,Rnorm,Mode,Ws,Ip)
   !              AX = B,  A  MA by N  (least squares equations)
   !     subject to..
   !
-  !              GX.GE.H, G  MG by N  (inequality constraints)
+  !              GX>=H, G  MG by N  (inequality constraints)
   !
   !     Input..
   !
@@ -83,7 +82,7 @@ SUBROUTINE LSI(W,Mdw,Ma,Mg,N,Prgopt,X,Rnorm,Mode,Ws,Ip)
   m = Ma + Mg
   np1 = N + 1
   krank = 0
-  IF ( N>0.AND.m>0 ) THEN
+  IF( N>0 .AND. m>0 ) THEN
     !
     !     To process option vector.
     !
@@ -93,11 +92,11 @@ SUBROUTINE LSI(W,Mdw,Ma,Mg,N,Prgopt,X,Rnorm,Mode,Ws,Ip)
     link = INT( Prgopt(1) )
     DO
       !
-      IF ( link>1 ) THEN
+      IF( link>1 ) THEN
         key = INT( Prgopt(last+1) )
-        IF ( key==1 ) cov = Prgopt(last+2)/=0.E0
-        IF ( key==10 ) sclcov = Prgopt(last+2)==0.E0
-        IF ( key==5 ) tol = MAX(srelpr,Prgopt(last+2))
+        IF( key==1 ) cov = Prgopt(last+2)/=0.E0
+        IF( key==10 ) sclcov = Prgopt(last+2)==0.E0
+        IF( key==5 ) tol = MAX(srelpr,Prgopt(last+2))
         next = INT( Prgopt(link) )
         last = link
         link = next
@@ -127,7 +126,7 @@ SUBROUTINE LSI(W,Mdw,Ma,Mg,N,Prgopt,X,Rnorm,Mode,Ws,Ip)
       Rnorm = temp(1)
       fac = 1.E0
       gam = Ma - krank
-      IF ( krank<Ma.AND.sclcov ) fac = Rnorm**2/gam
+      IF( krank<Ma .AND. sclcov ) fac = Rnorm**2/gam
       !
       !     Reduce to LPDP and solve.
       !
@@ -135,8 +134,8 @@ SUBROUTINE LSI(W,Mdw,Ma,Mg,N,Prgopt,X,Rnorm,Mode,Ws,Ip)
       !
       !     Compute inequality rt-hand side for LPDP.
       !
-      IF ( Ma<m ) THEN
-        IF ( minman>0 ) THEN
+      IF( Ma<m ) THEN
+        IF( minman>0 ) THEN
           DO i = map1, m
             W(i,np1) = W(i,np1) - DOT_PRODUCT(W(i,1:N),Ws(1:N))
           END DO
@@ -149,7 +148,7 @@ SUBROUTINE LSI(W,Mdw,Ma,Mg,N,Prgopt,X,Rnorm,Mode,Ws,Ip)
           !
           !           Apply Householder transformations to constraint matrix.
           !
-          IF ( krank>0.AND.krank<N ) THEN
+          IF( krank>0 .AND. krank<N ) THEN
             DO i = krank, 1, -1
               CALL H12(2,i,krank+1,N,W(i,1),Mdw,Ws(n1+i-1),W(map1,1),Mdw,1,Mg)
             END DO
@@ -172,14 +171,14 @@ SUBROUTINE LSI(W,Mdw,Ma,Mg,N,Prgopt,X,Rnorm,Mode,Ws,Ip)
         !
         !        Compute solution in original coordinates.
         !
-        IF ( mdlpdp==1 ) THEN
+        IF( mdlpdp==1 ) THEN
           DO i = krank, 1, -1
             X(i) = (X(i)-DOT_PRODUCT(W(i,i+1:krank),X(i+1:krank)))/W(i,i)
           END DO
           !
           !           Apply Householder transformation to solution vector.
           !
-          IF ( krank<N ) THEN
+          IF( krank<N ) THEN
             DO i = 1, krank
               CALL H12(2,i,krank+1,N,W(i,1),Mdw,Ws(n1+i-1),X,1,1,1)
             END DO
@@ -187,7 +186,7 @@ SUBROUTINE LSI(W,Mdw,Ma,Mg,N,Prgopt,X,Rnorm,Mode,Ws,Ip)
           !
           !           Repermute variables to their input order.
           !
-          IF ( minman>0 ) THEN
+          IF( minman>0 ) THEN
             DO i = minman, 1, -1
               CALL SSWAP(1,X(i),1,X(Ip(i)),1)
             END DO
@@ -213,7 +212,7 @@ SUBROUTINE LSI(W,Mdw,Ma,Mg,N,Prgopt,X,Rnorm,Mode,Ws,Ip)
       !     Compute covariance matrix based on the orthogonal decomposition
       !     from HFTI( ).
       !
-      IF ( .NOT.(.NOT.cov.OR.krank<=0) ) THEN
+      IF( .NOT. ( .NOT. cov .OR. krank<=0) ) THEN
         krm1 = krank - 1
         krp1 = krank + 1
         !
@@ -231,7 +230,7 @@ SUBROUTINE LSI(W,Mdw,Ma,Mg,N,Prgopt,X,Rnorm,Mode,Ws,Ip)
         !
         !     Invert the upper triangular QR factor on itself.
         !
-        IF ( krank>1 ) THEN
+        IF( krank>1 ) THEN
           DO i = 1, krm1
             DO j = i + 1, krank
               W(i,j) = -DOT_PRODUCT(W(i,i:j-1),W(i:j-1,j))*W(j,j)
@@ -250,7 +249,7 @@ SUBROUTINE LSI(W,Mdw,Ma,Mg,N,Prgopt,X,Rnorm,Mode,Ws,Ip)
         !     Zero out lower trapezoidal part.
         !     Copy upper triangular to lower triangular part.
         !
-        IF ( krank<N ) THEN
+        IF( krank<N ) THEN
           DO j = 1, krank
             W(j,1:j) = W(1:j,j)
           END DO
@@ -267,9 +266,9 @@ SUBROUTINE LSI(W,Mdw,Ma,Mg,N,Prgopt,X,Rnorm,Mode,Ws,Ip)
             k = n2 + i
             rb = Ws(l-1)*Ws(k-1)
             !
-            !           If RB.GE.0.E0, transformation can be regarded as zero.
+            !           If RB>=0.E0, transformation can be regarded as zero.
             !
-            IF ( rb<0.E0 ) THEN
+            IF( rb<0.E0 ) THEN
               rb = 1.E0/rb
               !
               !              Store unscaled rank one Householder update in work array.
@@ -315,7 +314,7 @@ SUBROUTINE LSI(W,Mdw,Ma,Mg,N,Prgopt,X,Rnorm,Mode,Ws,Ip)
         !
         DO i = minman, 1, -1
           k = Ip(i)
-          IF ( i/=k ) THEN
+          IF( i/=k ) THEN
             CALL SSWAP(1,W(i,i),1,W(k,k),1)
             CALL SSWAP(i-1,W(1,i),1,W(1,k),1)
             CALL SSWAP(k-i-1,W(i,i+1),Mdw,W(i+1,k),1)

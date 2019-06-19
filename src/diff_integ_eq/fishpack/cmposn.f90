@@ -1,7 +1,6 @@
 !** CMPOSN
 SUBROUTINE CMPOSN(M,N,Istag,Mixbnd,A,Bb,C,Q,Idimq,B,B2,B3,W,W2,W3,D,Tcos,P)
-  !>
-  !  Subsidiary to CMGNBN
+  !> Subsidiary to CMGNBN
   !***
   ! **Library:**   SLATEC
   !***
@@ -54,27 +53,27 @@ SUBROUTINE CMPOSN(M,N,Istag,Mixbnd,A,Bb,C,Q,Idimq,B,B2,B3,W,W2,W3,D,Tcos,P)
   nlast = N
   kr = 1
   lr = 0
-  IF ( Istag/=2 ) THEN
+  IF( Istag/=2 ) THEN
     DO i = 1, mr
       Q(i,N) = .5*Q(i,N)
     END DO
-    IF ( Mixbnd==2 ) GOTO 100
+    IF( Mixbnd==2 ) GOTO 100
   END IF
-  IF ( N<=3 ) GOTO 200
+  IF( N<=3 ) GOTO 200
   100  jr = 2*i2r
   nrod = 1
-  IF ( (nr/2)*2==nr ) nrod = 0
-  IF ( Mixbnd==2 ) THEN
+  IF( (nr/2)*2==nr ) nrod = 0
+  IF( Mixbnd==2 ) THEN
     jstart = jr
     nrod = 1 - nrod
   ELSE
     jstart = 1
   END IF
   jstop = nlast - jr
-  IF ( nrod==0 ) jstop = jstop - i2r
+  IF( nrod==0 ) jstop = jstop - i2r
   CALL CMPCSG(i2r,1,0.5,0.0,Tcos)
   i2rby2 = i2r/2
-  IF ( jstop>=jstart ) THEN
+  IF( jstop>=jstart ) THEN
     !
     !     REGULAR REDUCTION.
     !
@@ -85,19 +84,19 @@ SUBROUTINE CMPOSN(M,N,Istag,Mixbnd,A,Bb,C,Q,Idimq,B,B2,B3,W,W2,W3,D,Tcos,P)
       jm1 = j - i2rby2
       jm2 = j - i2r
       jm3 = jm2 - i2rby2
-      IF ( j==1 ) THEN
+      IF( j==1 ) THEN
         jm1 = jp1
         jm2 = jp2
         jm3 = jp3
       END IF
-      IF ( i2r/=1 ) THEN
+      IF( i2r/=1 ) THEN
         DO i = 1, mr
           fi = Q(i,j)
           Q(i,j) = Q(i,j) - Q(i,jm1) - Q(i,jp1) + Q(i,jm2) + Q(i,jp2)
           B(i) = fi + Q(i,j) - Q(i,jm3) - Q(i,jp3)
         END DO
       ELSE
-        IF ( j==1 ) jm2 = jp2
+        IF( j==1 ) jm2 = jp2
         DO i = 1, mr
           B(i) = 2.*Q(i,j)
           Q(i,j) = Q(i,jm2) + Q(i,jp2)
@@ -122,17 +121,17 @@ SUBROUTINE CMPOSN(M,N,Istag,Mixbnd,A,Bb,C,Q,Idimq,B,B2,B3,W,W2,W3,D,Tcos,P)
   jm1 = j - i2rby2
   jm2 = j - i2r
   jm3 = jm2 - i2rby2
-  IF ( nrod==0 ) THEN
+  IF( nrod==0 ) THEN
     !
     !     EVEN NUMBER OF UNKNOWNS
     !
     jp1 = j + i2rby2
     jp2 = j + i2r
-    IF ( i2r/=1 ) THEN
+    IF( i2r/=1 ) THEN
       DO i = 1, mr
         B(i) = Q(i,j) + .5*(Q(i,jm2)-Q(i,jm1)-Q(i,jm3))
       END DO
-      IF ( nrodpr/=0 ) THEN
+      IF( nrodpr/=0 ) THEN
         DO i = 1, mr
           B(i) = B(i) + Q(i,jp2) - Q(i,jp1)
         END DO
@@ -150,7 +149,7 @@ SUBROUTINE CMPOSN(M,N,Istag,Mixbnd,A,Bb,C,Q,Idimq,B,B2,B3,W,W2,W3,D,Tcos,P)
         P(ii) = B(i) + .5*(Q(i,j)-Q(i,jm1)-Q(i,jp1))
         B(i) = P(ii) + Q(i,jp2)
       END DO
-      IF ( lr==0 ) THEN
+      IF( lr==0 ) THEN
         DO i = 1, i2r
           ii = kr + i
           Tcos(ii) = Tcos(i)
@@ -160,9 +159,9 @@ SUBROUTINE CMPOSN(M,N,Istag,Mixbnd,A,Bb,C,Q,Idimq,B,B2,B3,W,W2,W3,D,Tcos,P)
         CALL C1MERG(Tcos,0,i2r,i2r,lr,kr)
       END IF
       CALL CMPCSG(kr,1,0.5,fden,Tcos)
-      IF ( lr/=0 ) THEN
+      IF( lr/=0 ) THEN
         CALL CMPTRX(kr,kr,mr,A,Bb,C,B,Tcos,D,W)
-      ELSEIF ( Istag==1 ) THEN
+      ELSEIF( Istag==1 ) THEN
         DO i = 1, mr
           B(i) = fistag*B(i)
         END DO
@@ -180,7 +179,7 @@ SUBROUTINE CMPOSN(M,N,Istag,Mixbnd,A,Bb,C,Q,Idimq,B,B2,B3,W,W2,W3,D,Tcos,P)
       CALL CMPTRX(1,0,mr,A,Bb,C,B,Tcos,D,W)
       ip = 0
       ipstor = mr
-      IF ( Istag==1 ) THEN
+      IF( Istag==1 ) THEN
         DO i = 1, mr
           P(i) = B(i)
           Q(i,j) = Q(i,jm2) + 2.*Q(i,jp2) + 3.*B(i)
@@ -204,11 +203,11 @@ SUBROUTINE CMPOSN(M,N,Istag,Mixbnd,A,Bb,C,Q,Idimq,B,B2,B3,W,W2,W3,D,Tcos,P)
     !
     !     ODD NUMBER OF UNKNOWNS
     !
-    IF ( i2r/=1 ) THEN
+    IF( i2r/=1 ) THEN
       DO i = 1, mr
         B(i) = Q(i,j) + .5*(Q(i,jm2)-Q(i,jm1)-Q(i,jm3))
       END DO
-      IF ( nrodpr/=0 ) THEN
+      IF( nrodpr/=0 ) THEN
         DO i = 1, mr
           Q(i,j) = Q(i,j) - Q(i,jm1) + Q(i,jm2)
         END DO
@@ -219,7 +218,7 @@ SUBROUTINE CMPOSN(M,N,Istag,Mixbnd,A,Bb,C,Q,Idimq,B,B2,B3,W,W2,W3,D,Tcos,P)
         END DO
         ip = ip - mr
       END IF
-      IF ( lr==0 ) THEN
+      IF( lr==0 ) THEN
         DO i = 1, mr
           B(i) = fistag*B(i)
         END DO
@@ -239,9 +238,9 @@ SUBROUTINE CMPOSN(M,N,Istag,Mixbnd,A,Bb,C,Q,Idimq,B,B2,B3,W,W2,W3,D,Tcos,P)
     END DO
     kr = kr + i2r
   END IF
-  IF ( Mixbnd==2 ) THEN
+  IF( Mixbnd==2 ) THEN
     nr = nlast/jr
-    IF ( nr<=1 ) THEN
+    IF( nr<=1 ) THEN
       DO i = 1, mr
         B(i) = Q(i,nlast)
       END DO
@@ -249,7 +248,7 @@ SUBROUTINE CMPOSN(M,N,Istag,Mixbnd,A,Bb,C,Q,Idimq,B,B2,B3,W,W2,W3,D,Tcos,P)
     END IF
   ELSE
     nr = (nlast-1)/jr + 1
-    IF ( nr<=3 ) GOTO 200
+    IF( nr<=3 ) GOTO 200
   END IF
   i2r = jr
   nrodpr = nrod
@@ -261,8 +260,8 @@ SUBROUTINE CMPOSN(M,N,Istag,Mixbnd,A,Bb,C,Q,Idimq,B,B2,B3,W,W2,W3,D,Tcos,P)
   jm1 = j - i2r
   jp1 = j + i2r
   jm2 = nlast - i2r
-  IF ( nr==2 ) THEN
-    IF ( N/=2 ) THEN
+  IF( nr==2 ) THEN
+    IF( N/=2 ) THEN
       !
       !     CASE OF GENERAL N AND NR = 2 .
       !
@@ -319,12 +318,12 @@ SUBROUTINE CMPOSN(M,N,Istag,Mixbnd,A,Bb,C,Q,Idimq,B,B2,B3,W,W2,W3,D,Tcos,P)
     END IF
     GOTO 400
   ELSE
-    IF ( lr==0 ) THEN
-      IF ( N/=3 ) THEN
+    IF( lr==0 ) THEN
+      IF( N/=3 ) THEN
         !
         !     CASE N = 2**P+1
         !
-        IF ( Istag/=2 ) THEN
+        IF( Istag/=2 ) THEN
           DO i = 1, mr
             B(i) = Q(i,j) + .5*Q(i,1) - Q(i,jm1) + Q(i,nlast) - Q(i,jm2)
           END DO
@@ -356,7 +355,7 @@ SUBROUTINE CMPOSN(M,N,Istag,Mixbnd,A,Bb,C,Q,Idimq,B,B2,B3,W,W2,W3,D,Tcos,P)
         !
         !     CASE N = 3.
         !
-      ELSEIF ( Istag==2 ) THEN
+      ELSEIF( Istag==2 ) THEN
         !
         !     CASE OF GENERAL N WITH NR = 3 .
         !
@@ -402,7 +401,7 @@ SUBROUTINE CMPOSN(M,N,Istag,Mixbnd,A,Bb,C,Q,Idimq,B,B2,B3,W,W2,W3,D,Tcos,P)
     DO i = 1, mr
       B(i) = .5*Q(i,1) - Q(i,jm1) + Q(i,j)
     END DO
-    IF ( nrod/=0 ) THEN
+    IF( nrod/=0 ) THEN
       DO i = 1, mr
         B(i) = B(i) + Q(i,nlast) - Q(i,jm2)
       END DO
@@ -432,7 +431,7 @@ SUBROUTINE CMPOSN(M,N,Istag,Mixbnd,A,Bb,C,Q,Idimq,B,B2,B3,W,W2,W3,D,Tcos,P)
   k(4) = k(3) + jr + 1
   CALL CMPCSG(kr,1,0.5,fden,Tcos(k(4)))
   CALL C1MERG(Tcos,k(3),jr,k(3)+jr,kr,k(1))
-  IF ( lr/=0 ) THEN
+  IF( lr/=0 ) THEN
     CALL CMPCSG(lr,1,0.5,fden,Tcos(k(4)))
     CALL C1MERG(Tcos,k(3),jr,k(3)+jr,lr,k(3)-lr)
     CALL CMPCSG(kr,1,0.5,fden,Tcos(k(4)))
@@ -451,7 +450,7 @@ SUBROUTINE CMPOSN(M,N,Istag,Mixbnd,A,Bb,C,Q,Idimq,B,B2,B3,W,W2,W3,D,Tcos,P)
   END DO
   CALL CMPCSG(jr,1,0.5,0.0,Tcos)
   CALL CMPTRX(jr,0,mr,A,Bb,C,B,Tcos,D,W)
-  IF ( jr/=1 ) THEN
+  IF( jr/=1 ) THEN
     DO i = 1, mr
       Q(i,1) = .5*Q(i,1) - Q(i,jm1) + B(i)
     END DO
@@ -468,11 +467,11 @@ SUBROUTINE CMPOSN(M,N,Istag,Mixbnd,A,Bb,C,Q,Idimq,B,B2,B3,W,W2,W3,D,Tcos,P)
     B(i) = Q(i,nlast) + Q(i,j)
   END DO
   500  jm2 = nlast - i2r
-  IF ( jr==1 ) THEN
+  IF( jr==1 ) THEN
     DO i = 1, mr
       Q(i,nlast) = (0.,0.)
     END DO
-  ELSEIF ( nrod/=0 ) THEN
+  ELSEIF( nrod/=0 ) THEN
     DO i = 1, mr
       Q(i,nlast) = Q(i,nlast) - Q(i,jm2)
     END DO
@@ -485,7 +484,7 @@ SUBROUTINE CMPOSN(M,N,Istag,Mixbnd,A,Bb,C,Q,Idimq,B,B2,B3,W,W2,W3,D,Tcos,P)
   END IF
   CALL CMPCSG(kr,1,0.5,fden,Tcos)
   CALL CMPCSG(lr,1,0.5,fden,Tcos(kr+1))
-  IF ( lr==0 ) THEN
+  IF( lr==0 ) THEN
     DO i = 1, mr
       B(i) = fistag*B(i)
     END DO
@@ -499,20 +498,20 @@ SUBROUTINE CMPOSN(M,N,Istag,Mixbnd,A,Bb,C,Q,Idimq,B,B2,B3,W,W2,W3,D,Tcos,P)
     jstep = jr
     jr = i2r
     i2r = i2r/2
-    IF ( jr==0 ) THEN
+    IF( jr==0 ) THEN
       !
       !     RETURN STORAGE REQUIREMENTS FOR P VECTORS.
       !
       W(1) = CMPLX(REAL(ipstor),0.)
       EXIT
     ELSE
-      IF ( Mixbnd==2 ) THEN
+      IF( Mixbnd==2 ) THEN
         jstart = jr
       ELSE
         jstart = 1 + jr
       END IF
       kr = kr - jr
-      IF ( nlast+jr>N ) THEN
+      IF( nlast+jr>N ) THEN
         jstop = nlast - jr
       ELSE
         kr = kr - jr
@@ -524,7 +523,7 @@ SUBROUTINE CMPOSN(M,N,Istag,Mixbnd,A,Bb,C,Q,Idimq,B,B2,B3,W,W2,W3,D,Tcos,P)
       DO j = jstart, jstop, jstep
         jm2 = j - jr
         jp2 = j + jr
-        IF ( j/=jr ) THEN
+        IF( j/=jr ) THEN
           DO i = 1, mr
             B(i) = Q(i,j) + Q(i,jm2) + Q(i,jp2)
           END DO
@@ -533,7 +532,7 @@ SUBROUTINE CMPOSN(M,N,Istag,Mixbnd,A,Bb,C,Q,Idimq,B,B2,B3,W,W2,W3,D,Tcos,P)
             B(i) = Q(i,j) + Q(i,jp2)
           END DO
         END IF
-        IF ( jr/=1 ) THEN
+        IF( jr/=1 ) THEN
           jm1 = j - i2r
           jp1 = j + i2r
           DO i = 1, mr
@@ -550,8 +549,8 @@ SUBROUTINE CMPOSN(M,N,Istag,Mixbnd,A,Bb,C,Q,Idimq,B,B2,B3,W,W2,W3,D,Tcos,P)
         END DO
       END DO
       nrod = 1
-      IF ( nlast+i2r<=N ) nrod = 0
-      IF ( nlastp/=nlast ) GOTO 400
+      IF( nlast+i2r<=N ) nrod = 0
+      IF( nlastp/=nlast ) GOTO 400
     END IF
   END DO
 END SUBROUTINE CMPOSN

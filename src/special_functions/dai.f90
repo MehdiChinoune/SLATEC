@@ -1,7 +1,6 @@
 !** DAI
 REAL(DP) FUNCTION DAI(X)
-  !>
-  !  Evaluate the Airy function.
+  !> Evaluate the Airy function.
   !***
   ! **Library:**   SLATEC (FNLIB)
   !***
@@ -65,24 +64,24 @@ REAL(DP) FUNCTION DAI(X)
     +.19900855034518869333333333333333D-29, +.74702885256533333333333333333333D-33 ]
   LOGICAL, SAVE :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  DAI
-  IF ( first ) THEN
+  IF( first ) THEN
     naif = INITDS(aifcs,13,0.1*D1MACH(3))
     naig = INITDS(aigcs,13,0.1*D1MACH(3))
     first = .FALSE.
   END IF
   !
-  IF ( X<(-1.D0) ) THEN
+  IF( X<(-1.D0) ) THEN
     CALL D9AIMP(X,xm,theta)
     DAI = xm*COS(theta)
     RETURN
     !
-  ELSEIF ( X<=1.0D0 ) THEN
+  ELSEIF( X<=1.0D0 ) THEN
     z = 0.0D0
-    IF ( ABS(X)>x3sml ) z = X**3
+    IF( ABS(X)>x3sml ) z = X**3
     DAI = 0.375D0 + (DCSEVL(z,aifcs,naif)-X*(0.25D0+DCSEVL(z,aigcs,naig)))
     RETURN
     !
-  ELSEIF ( X>xmax ) THEN
+  ELSEIF( X>xmax ) THEN
     !
     DAI = 0.0D0
     CALL XERMSG('DAI','X SO BIG AI UNDERFLOWS',1,1)

@@ -1,8 +1,7 @@
 !** SEPX4
 SUBROUTINE SEPX4(Iorder,A,B,M,Mbdcnd,Bda,Alpha,Bdb,Beta,C,D,N,Nbdcnd,Bdc,&
     Bdd,COFX,Grhs,Usol,Idmn,W,Pertrb,Ierror)
-  !>
-  !  Solve for either the second or fourth order finite
+  !> Solve for either the second or fourth order finite
   !            difference approximation to the solution of a separable
   !            elliptic partial differential equation on a rectangle.
   !            Any combination of periodic or mixed boundary conditions is
@@ -37,7 +36,7 @@ SUBROUTINE SEPX4(Iorder,A,B,M,Mbdcnd,Bda,Alpha,Bdb,Beta,C,D,N,Nbdcnd,Bdc,&
   !                        are periodic (see MBDCND=0 below) then the
   !                        coefficients must satisfy
   !                        AF(X)=C1,BF(X)=0,CF(X)=C2 for all X.
-  !                        Here C1,C2 are constants, C1.GT.0.
+  !                        Here C1,C2 are constants, C1>0.
   !
   !                        The possible boundary conditions are
   !                        in the X-direction:
@@ -197,7 +196,7 @@ SUBROUTINE SEPX4(Iorder,A,B,M,Mbdcnd,Bda,Alpha,Bdb,Beta,C,D,N,Nbdcnd,Bdc,&
   !                          If boundary conditions in the X direction
   !                          are periodic then the coefficients
   !                          must satisfy AF(X)=C1,BF(X)=0,CF(X)=C2 for
-  !                          all X.  Here C1.GT.0 and C2 are constants.
+  !                          all X.  Here C1>0 and C2 are constants.
   !
   !                          Note that COFX must be declared external
   !                          in the calling routine.
@@ -424,12 +423,12 @@ SUBROUTINE SEPX4(Iorder,A,B,M,Mbdcnd,Bda,Alpha,Bdb,Beta,C,D,N,Nbdcnd,Bdc,&
     i9, k, l, length, linput, log2n, loutpt
   !* FIRST EXECUTABLE STATEMENT  SEPX4
   CALL CHKPR4(Iorder,A,B,M,Mbdcnd,C,D,N,Nbdcnd,COFX,Idmn,Ierror)
-  IF ( Ierror/=0 ) RETURN
+  IF( Ierror/=0 ) RETURN
   !
   !     COMPUTE MINIMUM WORK SPACE AND CHECK WORK SPACE LENGTH INPUT
   !
   l = N + 1
-  IF ( Nbdcnd==0 ) l = N
+  IF( Nbdcnd==0 ) l = N
   k = M + 1
   l = N + 1
   !     ESTIMATE LOG BASE 2 OF N
@@ -439,7 +438,7 @@ SUBROUTINE SEPX4(Iorder,A,B,M,Mbdcnd,Bda,Alpha,Bdb,Beta,C,D,N,Nbdcnd,Bdc,&
   linput = INT(W(1)+0.5)
   loutpt = length + 6*(k+l) + 1
   W(1) = loutpt
-  IF ( loutpt>linput ) RETURN
+  IF( loutpt>linput ) RETURN
   Ierror = 0
   !
   !     SET WORK SPACE INDICES

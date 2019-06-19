@@ -1,7 +1,6 @@
 !** DSTWAY
 SUBROUTINE DSTWAY(U,V,Yhp,Inout,Stowa)
-  !>
-  !  Subsidiary to DBVSUP
+  !> Subsidiary to DBVSUP
   !***
   ! **Library:**   SLATEC
   !***
@@ -37,14 +36,14 @@ SUBROUTINE DSTWAY(U,V,Yhp,Inout,Stowa)
   REAL(DP) :: Stowa(:), U(:), V(:), Yhp(:)
   INTEGER :: j, k, ko, ks, ksj
   !* FIRST EXECUTABLE STATEMENT  DSTWAY
-  IF ( Inout==1 ) THEN
+  IF( Inout==1 ) THEN
     !
     !        RECALL FROM STOWA ARRAY AND ISTKOP
     !
     ks = nfc_com*ncomp_com
     CALL DSTOR1(Yhp,Stowa,Yhp(ks+1:),Stowa(ks+1:),1,0,0)
     ks = ks + ncomp_com
-    IF ( neqivp_com>=1 ) THEN
+    IF( neqivp_com>=1 ) THEN
       DO j = 1, neqivp_com
         ksj = ks + j
         Yhp(ksj) = Stowa(ksj)
@@ -55,7 +54,7 @@ SUBROUTINE DSTWAY(U,V,Yhp,Inout,Stowa)
     info_com(1) = 0
     ko = kop_com - istkop_com
     kop_com = istkop_com
-    IF ( ndisk_com/=0.AND.ko/=0 ) THEN
+    IF( ndisk_com/=0 .AND. ko/=0 ) THEN
       DO k = 1, ko
         BACKSPACE ntape_com
       END DO
@@ -67,7 +66,7 @@ SUBROUTINE DSTWAY(U,V,Yhp,Inout,Stowa)
     ks = nfc_com*ncomp_com
     CALL DSTOR1(Stowa,U,Stowa(ks+1:),V,1,0,0)
     ks = ks + ncomp_com
-    IF ( neqivp_com>=1 ) THEN
+    IF( neqivp_com>=1 ) THEN
       DO j = 1, neqivp_com
         ksj = ks + j
         Stowa(ksj) = Yhp(ksj)
@@ -76,6 +75,6 @@ SUBROUTINE DSTWAY(U,V,Yhp,Inout,Stowa)
     ks = ks + neqivp_com
     Stowa(ks+1) = x_com
     istkop_com = kop_com
-    IF ( xop_com==x_com ) istkop_com = kop_com + 1
+    IF( xop_com==x_com ) istkop_com = kop_com + 1
   END IF
 END SUBROUTINE DSTWAY

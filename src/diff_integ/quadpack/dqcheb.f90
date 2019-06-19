@@ -1,7 +1,6 @@
 !** DQCHEB
 SUBROUTINE DQCHEB(X,Fval,Cheb12,Cheb24)
-  !>
-  !  This routine computes the CHEBYSHEV series expansion
+  !> This routine computes the CHEBYSHEV series expansion
   !            of degrees 12 and 24 of a function using A
   !            FAST FOURIER TRANSFORM METHOD
   !            F(X) = SUM(K=1,..,13) (CHEB12(K)*T(K-1,X)),
@@ -64,7 +63,7 @@ SUBROUTINE DQCHEB(X,Fval,Cheb12,Cheb24)
   !
   REAL(DP) :: alam, alam1, alam2, Cheb12(13), Cheb24(25), Fval(25), part1, &
     part2, part3, v(12), X(11)
-  INTEGER i, j
+  INTEGER :: i, j
   !
   !* FIRST EXECUTABLE STATEMENT  DQCHEB
   DO i = 1, 12

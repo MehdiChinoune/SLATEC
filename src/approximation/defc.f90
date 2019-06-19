@@ -1,7 +1,6 @@
 !** DEFC
 SUBROUTINE DEFC(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkpt,Mdein,Mdeout,Coeff,Lw,W)
-  !>
-  !  Fit a piecewise polynomial curve to discrete data.
+  !> Fit a piecewise polynomial curve to discrete data.
   !            The piecewise polynomials are represented as B-splines.
   !            The fitting is done in a weighted least squares sense.
   !***
@@ -72,9 +71,9 @@ SUBROUTINE DEFC(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkpt,Mdein,Mdeout,Coeff,Lw,W
   !                         to the given knot values.  The contents of
   !                         BKPT(*) is not changed.
   !
-  !                         NORD must be in the range 1 .LE. NORD .LE. 20.
+  !                         NORD must be in the range 1 <= NORD <= 20.
   !                         The value of NBKPT must satisfy the condition
-  !                         NBKPT .GE. 2*NORD.
+  !                         NBKPT >= 2*NORD.
   !                         Other values are considered errors.
   !
   !                         (The order of the spline is one more than the
@@ -113,7 +112,7 @@ SUBROUTINE DEFC(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkpt,Mdein,Mdeout,Coeff,Lw,W
   !
   !                         The length of the array W(*) must satisfy
   !
-  !                         LW .GE. (NBKPT-NORD+3)*(NORD+1)+
+  !                         LW >= (NBKPT-NORD+3)*(NORD+1)+
   !                                 (NBKPT+1)*(NORD+1)+
   !                               2*MAX(NDATA,NBKPT)+NBKPT+NORD**2
   !
@@ -184,7 +183,7 @@ SUBROUTINE DEFC(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkpt,Mdein,Mdeout,Coeff,Lw,W
   !                         The output of this subprogram will not be
   !                         defined unless an output value of MDEOUT=1
   !                         was obtained from DEFC( ), XVAL is in the data
-  !                         interval, and IDER is nonnegative and .LT.
+  !                         interval, and IDER is nonnegative and <
   !                         NORD.
   !
   !                         The first time DBVALU( ) is called, INBV=1

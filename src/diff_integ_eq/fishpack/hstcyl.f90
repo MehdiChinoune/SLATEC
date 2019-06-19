@@ -1,8 +1,7 @@
 !** HSTCYL
 SUBROUTINE HSTCYL(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
     Idimf,Pertrb,Ierror,W)
-  !>
-  !  Solve the standard five-point finite difference
+  !> Solve the standard five-point finite difference
   !            approximation on a staggered grid to the modified
   !            Helmholtz equation in cylindrical coordinates.
   !***
@@ -38,7 +37,7 @@ SUBROUTINE HSTCYL(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   !             * * * * * *   On Input    * * * * * *
   !
   !    A,B
-  !      The range of R, i.e. A .LE. R .LE. B.  A must be less than B and
+  !      The range of R, i.e. A <= R <= B.  A must be less than B and
   !      A must be non-negative.
   !
   !    M
@@ -100,7 +99,7 @@ SUBROUTINE HSTCYL(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   !               BDB(J) = (d/dR)U(B,Z(J)),    J=1,2,...,N.
   !
   !    C,D
-  !      The range of Z, i.e. C .LE. Z .LE. D.  C must be less
+  !      The range of Z, i.e. C <= Z <= D.  C must be less
   !      than D.
   !
   !    N
@@ -206,29 +205,29 @@ SUBROUTINE HSTCYL(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   !
   !      =  0  No error
   !
-  !      =  1  A .LT. 0
+  !      =  1  A < 0
   !
-  !      =  2  A .GE. B
+  !      =  2  A >= B
   !
-  !      =  3  MBDCND .LT. 1 or MBDCND .GT. 6
+  !      =  3  MBDCND < 1 or MBDCND > 6
   !
-  !      =  4  C .GE. D
+  !      =  4  C >= D
   !
-  !      =  5  N .LE. 2
+  !      =  5  N <= 2
   !
-  !      =  6  NBDCND .LT. 0 or NBDCND .GT. 4
+  !      =  6  NBDCND < 0 or NBDCND > 4
   !
   !      =  7  A = 0 and MBDCND = 1,2,3, or 4
   !
-  !      =  8  A .GT. 0 and MBDCND .GE. 5
+  !      =  8  A > 0 and MBDCND >= 5
   !
-  !      =  9  M .LE. 2
+  !      =  9  M <= 2
   !
-  !      = 10  IDIMF .LT. M
+  !      = 10  IDIMF < M
   !
-  !      = 11  LAMBDA .GT. 0
+  !      = 11  LAMBDA > 0
   !
-  !      = 12  A=0, MBDCND .GE. 5, ELMBDA .NE. 0
+  !      = 12  A=0, MBDCND >= 5, ELMBDA /= 0
   !
   !      Since this is the only means of indicating a possibly
   !      incorrect call to HSTCYL, the user should test IERROR after
@@ -332,18 +331,18 @@ SUBROUTINE HSTCYL(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   REAL(SP) :: a1, deltar, deltht, dlrsq, dlthsq
   !* FIRST EXECUTABLE STATEMENT  HSTCYL
   Ierror = 0
-  IF ( A<0. ) Ierror = 1
-  IF ( A>=B ) Ierror = 2
-  IF ( Mbdcnd<=0.OR.Mbdcnd>=7 ) Ierror = 3
-  IF ( C>=D ) Ierror = 4
-  IF ( N<=2 ) Ierror = 5
-  IF ( Nbdcnd<0.OR.Nbdcnd>=5 ) Ierror = 6
-  IF ( A==0..AND.Mbdcnd/=5.AND.Mbdcnd/=6 ) Ierror = 7
-  IF ( A>0..AND.Mbdcnd>=5 ) Ierror = 8
-  IF ( Idimf<M ) Ierror = 10
-  IF ( M<=2 ) Ierror = 9
-  IF ( A==0..AND.Mbdcnd>=5.AND.Elmbda/=0. ) Ierror = 12
-  IF ( Ierror/=0 ) RETURN
+  IF( A<0. ) Ierror = 1
+  IF( A>=B ) Ierror = 2
+  IF( Mbdcnd<=0 .OR. Mbdcnd>=7 ) Ierror = 3
+  IF( C>=D ) Ierror = 4
+  IF( N<=2 ) Ierror = 5
+  IF( Nbdcnd<0 .OR. Nbdcnd>=5 ) Ierror = 6
+  IF( A==0. .AND. Mbdcnd/=5 .AND. Mbdcnd/=6 ) Ierror = 7
+  IF( A>0. .AND. Mbdcnd>=5 ) Ierror = 8
+  IF( Idimf<M ) Ierror = 10
+  IF( M<=2 ) Ierror = 9
+  IF( A==0. .AND. Mbdcnd>=5 .AND. Elmbda/=0. ) Ierror = 12
+  IF( Ierror/=0 ) RETURN
   deltar = (B-A)/M
   dlrsq = deltar**2
   deltht = (D-C)/N
@@ -431,8 +430,8 @@ SUBROUTINE HSTCYL(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   !     SOLUTION.
   !
   100  Pertrb = 0.
-  IF ( Elmbda<0 ) THEN
-  ELSEIF ( Elmbda==0 ) THEN
+  IF( Elmbda<0 ) THEN
+  ELSEIF( Elmbda==0 ) THEN
     SELECT CASE (Mbdcnd)
       CASE (1,2,4,5)
       CASE DEFAULT
@@ -477,7 +476,7 @@ SUBROUTINE HSTCYL(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   !
   !     CALL GENBUN TO SOLVE THE SYSTEM OF EQUATIONS.
   !
-  IF ( Nbdcnd==0 ) THEN
+  IF( Nbdcnd==0 ) THEN
     CALL GENBUN(lp,N,1,M,W(1:iwb),W(iwb+1:iwc),W(iwc+1:iwr),Idimf,F,ierr1,W(iwr+1:))
   ELSE
     CALL POISTG(lp,N,1,M,W(1:iwb),W(iwb+1:iwc),W(iwc+1:iwr),Idimf,F,ierr1,W(iwr+1:))

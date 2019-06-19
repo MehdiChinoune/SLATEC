@@ -1,8 +1,7 @@
 !** RKFAB
 SUBROUTINE RKFAB(Ncomp,Xpts,Nxpts,Nfc,Iflag,Z,Mxnon,P,Ntp,Ip,Yhp,Niv,U,V,&
     W,S,Stowa,Work,Iwork,Nfcc)
-  !>
-  !  Subsidiary to BVSUP
+  !> Subsidiary to BVSUP
   !***
   ! **Library:**   SLATEC
   !***
@@ -60,9 +59,9 @@ SUBROUTINE RKFAB(Ncomp,Xpts,Nxpts,Nfc,Iflag,Z,Mxnon,P,Ntp,Ip,Yhp,Niv,U,V,&
   info_com(4) = 1
   Work(1) = xend_com
   ipar = 0
-  IF ( nopg_com/=0 ) THEN
+  IF( nopg_com/=0 ) THEN
     info_com(3) = 0
-    IF ( x_com==Z(1) ) jon = 2
+    IF( x_com==Z(1) ) jon = 2
   END IF
   nfcp1 = Nfc + 1
   !
@@ -74,19 +73,19 @@ SUBROUTINE RKFAB(Ncomp,Xpts,Nxpts,Nfc,Iflag,Z,Mxnon,P,Ntp,Ip,Yhp,Niv,U,V,&
     kop_com = kopp
     !
     50  xop_com = Xpts(kop_com)
-    IF ( ndisk_com==0 ) kod = kop_com
+    IF( ndisk_com==0 ) kod = kop_com
     !
     !     STEP BY STEP INTEGRATION LOOP BETWEEN OUTPUT POINTS.
     !
     100  xxop = xop_com
-    IF ( nopg_com/=0 ) THEN
-      IF ( xend_com>xbeg_com.AND.xop_com>Z(jon) ) xxop = Z(jon)
-      IF ( xend_com<xbeg_com.AND.xop_com<Z(jon) ) xxop = Z(jon)
+    IF( nopg_com/=0 ) THEN
+      IF( xend_com>xbeg_com .AND. xop_com>Z(jon) ) xxop = Z(jon)
+      IF( xend_com<xbeg_com .AND. xop_com<Z(jon) ) xxop = Z(jon)
     END IF
     !
     !- *********************************************************************
     150 CONTINUE
-    IF ( integ_com==2 ) THEN
+    IF( integ_com==2 ) THEN
       !     DEABM INTEGRATOR
       !
       ret(1) = re_com
@@ -101,35 +100,35 @@ SUBROUTINE RKFAB(Ncomp,Xpts,Nxpts,Nfc,Iflag,Z,Mxnon,P,Ntp,Ip,Yhp,Niv,U,V,&
       CALL DERKF(BVDER_2,neq_com,x_com,Yhp,xxop,info_com,ret,aet,idid,Work,kkkint_com,Iwork,&
         lllint_com)
     END IF
-    IF ( idid>=1 ) THEN
+    IF( idid>=1 ) THEN
       !
       !- *********************************************************************
       !     GRAM-SCHMIDT ORTHOGONALIZATION TEST FOR ORTHONORMALIZATION
       !     (TEMPORARILY USING U AND V IN THE TEST)
       !
-      IF ( nopg_com==0 ) THEN
+      IF( nopg_com==0 ) THEN
         jflag = 1
-        IF ( inhomo_com==3.AND.x_com==xend_com ) jflag = 3
+        IF( inhomo_com==3 .AND. x_com==xend_com ) jflag = 3
       ELSE
-        IF ( xxop/=Z(jon) ) GOTO 200
+        IF( xxop/=Z(jon) ) GOTO 200
         jflag = 2
       END IF
       !
-      IF ( ndisk_com==0 ) non = numort_com + 1
+      IF( ndisk_com==0 ) non = numort_com + 1
       CALL REORT(Ncomp,U(:,:,kod),V(:,kod),Yhp,Niv,W(:,non),S,P(:,non),&
         Ip(:,non),Stowa,jflag)
       !
-      IF ( jflag/=30 ) THEN
+      IF( jflag/=30 ) THEN
         !
-        IF ( jflag==10 ) GOTO 50
+        IF( jflag==10 ) GOTO 50
         !
-        IF ( jflag==0 ) THEN
+        IF( jflag==0 ) THEN
           !
           !- *********************************************************************
           !     STORE ORTHONORMALIZED VECTORS INTO SOLUTION VECTORS.
           !
-          IF ( numort_com>=Mxnon ) THEN
-            IF ( x_com/=xend_com ) THEN
+          IF( numort_com>=Mxnon ) THEN
+            IF( x_com/=xend_com ) THEN
               Iflag = 13
               RETURN
             END IF
@@ -144,14 +143,14 @@ SUBROUTINE RKFAB(Ncomp,Xpts,Nxpts,Nfc,Iflag,Z,Mxnon,P,Ntp,Ip,Yhp,Niv,U,V,&
           !     ORTHONORMALIZATION POINT OR OUTPUT POINT.
           !
           Z(numort_com) = x_com
-          IF ( inhomo_com==1.AND.nps_com==0 ) c_com = S(nfcp1)*c_com
-          IF ( ndisk_com/=0 ) THEN
-            IF ( inhomo_com==1 ) WRITE (ntape_com) (W(j,1),j=1,Nfcc)
+          IF( inhomo_com==1 .AND. nps_com==0 ) c_com = S(nfcp1)*c_com
+          IF( ndisk_com/=0 ) THEN
+            IF( inhomo_com==1 ) WRITE (ntape_com) (W(j,1),j=1,Nfcc)
             WRITE (ntape_com) (Ip(j,1),j=1,Nfcc), (P(j,1),j=1,Ntp)
           END IF
           info_com(1) = 0
           jon = jon + 1
-          IF ( nopg_com==1.AND.x_com/=xop_com ) GOTO 100
+          IF( nopg_com==1 .AND. x_com/=xop_com ) GOTO 100
         END IF
       ELSE
         Iflag = 30
@@ -159,7 +158,7 @@ SUBROUTINE RKFAB(Ncomp,Xpts,Nxpts,Nfc,Iflag,Z,Mxnon,P,Ntp,Ip,Yhp,Niv,U,V,&
       END IF
     ELSE
       info_com(1) = 1
-      IF ( idid==-1 ) GOTO 150
+      IF( idid==-1 ) GOTO 150
       Iflag = 20 - idid
       RETURN
     END IF
@@ -167,7 +166,7 @@ SUBROUTINE RKFAB(Ncomp,Xpts,Nxpts,Nfc,Iflag,Z,Mxnon,P,Ntp,Ip,Yhp,Niv,U,V,&
     !- *********************************************************************
     !     CONTINUE INTEGRATION IF WE ARE NOT AT AN OUTPUT POINT.
     !
-    200  IF ( idid==1 ) GOTO 150
+    200  IF( idid==1 ) GOTO 150
     !
     !     STORAGE OF HOMOGENEOUS SOLUTIONS IN U AND THE PARTICULAR
     !     SOLUTION IN V AT THE OUTPUT POINTS.

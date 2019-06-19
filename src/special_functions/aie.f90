@@ -1,7 +1,6 @@
 !** AIE
 REAL(SP) FUNCTION AIE(X)
-  !>
-  !  Calculate the Airy function for a negative argument and an
+  !> Calculate the Airy function for a negative argument and an
   !            exponentially scaled Airy function for a non-negative
   !            argument.
   !***
@@ -19,8 +18,8 @@ REAL(SP) FUNCTION AIE(X)
   ! **Description:**
   !
   ! AIE(X) computes the exponentially scaled Airy function for
-  ! non-negative X.  It evaluates AI(X) for X .LE. 0.0 and
-  ! EXP(ZETA)*AI(X) for X .GE. 0.0 where ZETA = (2.0/3.0)*(X**1.5).
+  ! non-negative X.  It evaluates AI(X) for X <= 0.0 and
+  ! EXP(ZETA)*AI(X) for X >= 0.0 where ZETA = (2.0/3.0)*(X**1.5).
   !
   ! Series for AIF        on the interval -1.00000D+00 to  1.00000D+00
   !                                        with weighted error   1.09E-19
@@ -77,29 +76,29 @@ REAL(SP) FUNCTION AIE(X)
     .0000000000000001E0, -.0000000000000000E0 ]
   LOGICAL, SAVE :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  AIE
-  IF ( first ) THEN
+  IF( first ) THEN
     naif = INITS(aifcs,9,eta)
     naig = INITS(aigcs,8,eta)
     naip = INITS(aipcs,34,eta)
     first = .FALSE.
   END IF
   !
-  IF ( X<(-1.0) ) THEN
+  IF( X<(-1.0) ) THEN
     CALL R9AIMP(X,xm,theta)
     AIE = xm*COS(theta)
     RETURN
     !
-  ELSEIF ( X>1.0 ) THEN
+  ELSEIF( X>1.0 ) THEN
     !
     sqrtx = SQRT(X)
     z = -1.0
-    IF ( X<xbig ) z = 2.0/(X*sqrtx) - 1.0
+    IF( X<xbig ) z = 2.0/(X*sqrtx) - 1.0
     AIE = (.28125+CSEVL(z,aipcs,naip))/SQRT(sqrtx)
     RETURN
   END IF
   z = 0.0
-  IF ( ABS(X)>x3sml ) z = X**3
+  IF( ABS(X)>x3sml ) z = X**3
   AIE = 0.375 + (CSEVL(z,aifcs,naif)-X*(0.25+CSEVL(z,aigcs,naig)))
-  IF ( X>x32sml ) AIE = AIE*EXP(2.0*X*SQRT(X)/3.0)
+  IF( X>x32sml ) AIE = AIE*EXP(2.0*X*SQRT(X)/3.0)
   RETURN
 END FUNCTION AIE

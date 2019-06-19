@@ -1,7 +1,6 @@
 !** PSI
 REAL(SP) FUNCTION PSI(X)
-  !>
-  !  Compute the Psi (or Digamma) function.
+  !> Compute the Psi (or Digamma) function.
   !***
   ! **Library:**   SLATEC (FNLIB)
   !***
@@ -66,20 +65,20 @@ REAL(SP) FUNCTION PSI(X)
   REAL(SP), PARAMETER :: pi = 3.14159265358979324E0
   LOGICAL, SAVE :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  PSI
-  IF ( first ) THEN
+  IF( first ) THEN
     ntpsi = INITS(psics,23,0.1*R1MACH(3))
     ntapsi = INITS(apsics,16,0.1*R1MACH(3))
     first = .FALSE.
   END IF
   !
   y = ABS(X)
-  IF ( y>=2.0 ) THEN
+  IF( y>=2.0 ) THEN
     !
-    ! PSI(X) FOR ABS(X) .GE. 2.
+    ! PSI(X) FOR ABS(X) >= 2.
     !
     aux = 0.
-    IF ( y<xbig ) aux = CSEVL(8./y**2-1.,apsics,ntapsi)
-    IF ( X<0. ) THEN
+    IF( y<xbig ) aux = CSEVL(8./y**2-1.,apsics,ntapsi)
+    IF( X<0. ) THEN
       PSI = LOG(ABS(X)) - 0.5/X + aux - pi*COT(pi*X)
     ELSE
       PSI = LOG(X) - 0.5/X + aux
@@ -87,20 +86,20 @@ REAL(SP) FUNCTION PSI(X)
     RETURN
   END IF
   !
-  ! PSI(X) FOR -2. .LT. X .LT. 2.
+  ! PSI(X) FOR -2. < X < 2.
   !
   n = INT( X )
-  IF ( X<0. ) n = n - 1
+  IF( X<0. ) n = n - 1
   y = X - n
   n = n - 1
   PSI = CSEVL(2.*y-1.,psics,ntpsi)
-  IF ( n==0 ) RETURN
+  IF( n==0 ) RETURN
   !
   n = -n
-  IF ( X==0. ) CALL XERMSG('PSI','X IS 0',2,2)
-  IF ( X<0..AND.X+n-2==0. )&
+  IF( X==0. ) CALL XERMSG('PSI','X IS 0',2,2)
+  IF( X<0. .AND. X+n-2==0. )&
     CALL XERMSG('PSI','X IS A NEGATIVE INTEGER',3,2)
-  IF ( X<(-0.5).AND.ABS((X-AINT(X-0.5))/X)<dxrel )&
+  IF( X<(-0.5) .AND. ABS((X-AINT(X-0.5))/X)<dxrel )&
     CALL XERMSG('PSI',&
     'ANSWER LT HALF PRECISION BECAUSE X TOO NEAR NEGATIVE INTEGER',1,1)
   !

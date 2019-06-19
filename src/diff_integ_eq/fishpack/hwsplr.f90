@@ -1,8 +1,7 @@
 !** HWSPLR
 SUBROUTINE HWSPLR(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
     Idimf,Pertrb,Ierror,W)
-  !>
-  !  Solve a finite difference approximation to the Helmholtz
+  !> Solve a finite difference approximation to the Helmholtz
   !            equation in polar coordinates.
   !***
   ! **Library:**   SLATEC (FISHPACK)
@@ -34,7 +33,7 @@ SUBROUTINE HWSPLR(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   !             * * * * * *   On Input    * * * * * *
   !
   !     A,B
-  !       The range of R, i.e., A .LE. R .LE. B.  A must be less than B
+  !       The range of R, i.e., A <= R <= B.  A must be less than B
   !       and A must be non-negative.
   !
   !     M
@@ -82,7 +81,7 @@ SUBROUTINE HWSPLR(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   !       When MBDCND has any other value, BDB is a dummy variable.
   !
   !     C,D
-  !       The range of THETA, i.e., C .LE. THETA .LE. D.  C must be less
+  !       The range of THETA, i.e., C <= THETA <= D.  C must be less
   !       than D.
   !
   !     N
@@ -132,7 +131,7 @@ SUBROUTINE HWSPLR(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   !
   !     ELMBDA
   !       The constant LAMBDA in the Helmholtz equation.  If
-  !       LAMBDA .LT. 0, a solution may not exist.  However, HWSPLR will
+  !       LAMBDA < 0, a solution may not exist.  However, HWSPLR will
   !       attempt to find a solution.
   !
   !     F
@@ -209,18 +208,18 @@ SUBROUTINE HWSPLR(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   !       for numbers 0 and 11, a solution is not attempted.
   !
   !       =  0  No error.
-  !       =  1  A .LT. 0  .
-  !       =  2  A .GE. B.
-  !       =  3  MBDCND .LT. 1 or MBDCND .GT. 6  .
-  !       =  4  C .GE. D.
-  !       =  5  N .LE. 3
-  !       =  6  NBDCND .LT. 0 or .GT. 4  .
+  !       =  1  A < 0  .
+  !       =  2  A >= B.
+  !       =  3  MBDCND < 1 or MBDCND > 6  .
+  !       =  4  C >= D.
+  !       =  5  N <= 3
+  !       =  6  NBDCND < 0 or > 4  .
   !       =  7  A = 0, MBDCND = 3 or 4  .
-  !       =  8  A .GT. 0, MBDCND .GE. 5  .
-  !       =  9  MBDCND .GE. 5, NBDCND .NE. 0 and NBDCND .NE. 3  .
-  !       = 10  IDIMF .LT. M+1  .
-  !       = 11  LAMBDA .GT. 0  .
-  !       = 12  M .LE. 3
+  !       =  8  A > 0, MBDCND >= 5  .
+  !       =  9  MBDCND >= 5, NBDCND /= 0 and NBDCND /= 3  .
+  !       = 10  IDIMF < M+1  .
+  !       = 11  LAMBDA > 0  .
+  !       = 12  M <= 3
   !
   !       Since this is the only means of indicating a possibly incorrect
   !       call to HWSPLR, the user should test IERROR after the call.
@@ -325,18 +324,18 @@ SUBROUTINE HWSPLR(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   REAL(SP) :: a1, a2, deltar, deltht, dlrby2, dlrsq, dlthsq, r, s, s1, s2, ypole
   !* FIRST EXECUTABLE STATEMENT  HWSPLR
   Ierror = 0
-  IF ( A<0. ) Ierror = 1
-  IF ( A>=B ) Ierror = 2
-  IF ( Mbdcnd<=0.OR.Mbdcnd>=7 ) Ierror = 3
-  IF ( C>=D ) Ierror = 4
-  IF ( N<=3 ) Ierror = 5
-  IF ( Nbdcnd<=-1.OR.Nbdcnd>=5 ) Ierror = 6
-  IF ( A==0..AND.(Mbdcnd==3.OR.Mbdcnd==4) ) Ierror = 7
-  IF ( A>0..AND.Mbdcnd>=5 ) Ierror = 8
-  IF ( Mbdcnd>=5.AND.Nbdcnd/=0.AND.Nbdcnd/=3 ) Ierror = 9
-  IF ( Idimf<M+1 ) Ierror = 10
-  IF ( M<=3 ) Ierror = 12
-  IF ( Ierror/=0 ) RETURN
+  IF( A<0. ) Ierror = 1
+  IF( A>=B ) Ierror = 2
+  IF( Mbdcnd<=0 .OR. Mbdcnd>=7 ) Ierror = 3
+  IF( C>=D ) Ierror = 4
+  IF( N<=3 ) Ierror = 5
+  IF( Nbdcnd<=-1 .OR. Nbdcnd>=5 ) Ierror = 6
+  IF( A==0. .AND. (Mbdcnd==3 .OR. Mbdcnd==4) ) Ierror = 7
+  IF( A>0. .AND. Mbdcnd>=5 ) Ierror = 8
+  IF( Mbdcnd>=5 .AND. Nbdcnd/=0 .AND. Nbdcnd/=3 ) Ierror = 9
+  IF( Idimf<M+1 ) Ierror = 10
+  IF( M<=3 ) Ierror = 12
+  IF( Ierror/=0 ) RETURN
   mp1 = M + 1
   deltar = (B-A)/M
   dlrby2 = deltar/2.
@@ -386,7 +385,7 @@ SUBROUTINE HWSPLR(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   id6 = id5 + munk
   a1 = 2./dlrsq
   ij = 0
-  IF ( Mbdcnd==3.OR.Mbdcnd==4 ) ij = 1
+  IF( Mbdcnd==3 .OR. Mbdcnd==4 ) ij = 1
   DO i = 1, munk
     r = A + (i-ij)*deltar
     j = id5 + i
@@ -478,16 +477,16 @@ SUBROUTINE HWSPLR(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   !     DERIVATIVE SPECIFIED BOUNDARY CONDITIONS.
   !
   100 CONTINUE
-  IF ( Mbdcnd>=5.AND.Nbdcnd==3 ) F(1,1) = F(1,1) - (Bdd(2)-Bdc(2))&
+  IF( Mbdcnd>=5 .AND. Nbdcnd==3 ) F(1,1) = F(1,1) - (Bdd(2)-Bdc(2))&
     *4./(N*deltht*dlrsq)
   !
   !     ADJUST RIGHT SIDE OF SINGULAR PROBLEMS TO INSURE EXISTENCE OF A
   !     SOLUTION.
   !
   Pertrb = 0.
-  IF ( Elmbda<0 ) THEN
-  ELSEIF ( Elmbda==0 ) THEN
-    IF ( Nbdcnd==0.OR.Nbdcnd==3 ) THEN
+  IF( Elmbda<0 ) THEN
+  ELSEIF( Elmbda==0 ) THEN
+    IF( Nbdcnd==0 .OR. Nbdcnd==3 ) THEN
       s2 = 0.
       SELECT CASE (Mbdcnd)
         CASE (1,2,4,5)
@@ -498,7 +497,7 @@ SUBROUTINE HWSPLR(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
           s2 = .25*deltar
       END SELECT
       a2 = 2.
-      IF ( Nbdcnd==0 ) a2 = 1.
+      IF( Nbdcnd==0 ) a2 = 1.
       j = id5 + munk
       W(j) = .5*(W(j-1)+dlrby2)
       s = 0.
@@ -514,7 +513,7 @@ SUBROUTINE HWSPLR(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
       END DO
       s2 = M*A + deltar*((M-1)*(M+1)*.5+.25) + s2
       s1 = (2.+a2*(nunk-2))*s2
-      IF ( Mbdcnd/=3 ) THEN
+      IF( Mbdcnd/=3 ) THEN
         s2 = N*a2*deltar/8.
         s = s + F(1,1)*s2
         s1 = s1 + s2
@@ -562,7 +561,7 @@ SUBROUTINE HWSPLR(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
       !
       !     ADJUST THE SOLUTION AS NECESSARY FOR THE PROBLEMS WHERE A = 0.
       !
-      IF ( Elmbda==0. ) THEN
+      IF( Elmbda==0. ) THEN
         ypole = 0.
         GOTO 300
       END IF
@@ -586,7 +585,7 @@ SUBROUTINE HWSPLR(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
     s = s + F(2,j)
   END DO
   a2 = nunk
-  IF ( Nbdcnd/=0 ) THEN
+  IF( Nbdcnd/=0 ) THEN
     s = s - .5*(F(2,nstart)+F(2,nstop))
     a2 = a2 - 1.
   END IF
@@ -602,7 +601,7 @@ SUBROUTINE HWSPLR(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
     F(1,j) = ypole
   END DO
   400 CONTINUE
-  IF ( Nbdcnd==0 ) THEN
+  IF( Nbdcnd==0 ) THEN
     DO i = mstart, mstop
       F(i,np1) = F(i,1)
     END DO

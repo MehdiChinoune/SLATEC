@@ -1,7 +1,6 @@
 !** SSMV
 SUBROUTINE SSMV(N,X,Y,Nelt,Ia,Ja,A,Isym)
-  !>
-  !  SLAP Column Format Sparse Matrix Vector Product.
+  !> SLAP Column Format Sparse Matrix Vector Product.
   !            Routine to calculate the sparse matrix vector product:
   !            Y = A*X.
   !***
@@ -112,12 +111,12 @@ SUBROUTINE SSMV(N,X,Y,Nelt,Ia,Ja,A,Isym)
   !   930701  Updated CATEGORY section.  (FNF, WRB)
 
   !     .. Scalar Arguments ..
-  INTEGER Isym, N, Nelt
+  INTEGER :: Isym, N, Nelt
   !     .. Array Arguments ..
-  REAL(SP) A(Nelt), X(N), Y(N)
-  INTEGER Ia(Nelt), Ja(Nelt)
+  REAL(SP) :: A(Nelt), X(N), Y(N)
+  INTEGER :: Ia(Nelt), Ja(Nelt)
   !     .. Local Scalars ..
-  INTEGER i, ibgn, icol, iend, irow, j, jbgn, jend
+  INTEGER :: i, ibgn, icol, iend, irow, j, jbgn, jend
   !* FIRST EXECUTABLE STATEMENT  SSMV
   !
   !         Zero out the result vector.
@@ -136,7 +135,7 @@ SUBROUTINE SSMV(N,X,Y,Nelt,Ia,Ja,A,Isym)
     END DO
   END DO
   !
-  IF ( Isym==1 ) THEN
+  IF( Isym==1 ) THEN
     !
     !         The matrix is non-symmetric.  Need to get the other half in...
     !         This loops assumes that the diagonal is the first entry in
@@ -145,7 +144,7 @@ SUBROUTINE SSMV(N,X,Y,Nelt,Ia,Ja,A,Isym)
     DO irow = 1, N
       jbgn = Ja(irow) + 1
       jend = Ja(irow+1) - 1
-      IF ( jbgn<=jend ) THEN
+      IF( jbgn<=jend ) THEN
         DO j = jbgn, jend
           Y(irow) = Y(irow) + A(j)*X(Ia(j))
         END DO

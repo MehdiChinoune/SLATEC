@@ -1,7 +1,6 @@
 !** RC
 REAL(SP) FUNCTION RC(X,Y,Ier)
-  !>
-  !  Calculate an approximation to
+  !> Calculate an approximation to
   !             RC(X,Y) = Integral from zero to infinity of
   !                              -1/2     -1
   !                    (1/2)(t+X)    (t+Y)  dt,
@@ -78,9 +77,9 @@ REAL(SP) FUNCTION RC(X,Y,Ier)
   !         Value of IER assigned by the RC routine
   !
   !                  Value Assigned         Error Message Printed
-  !                  IER = 1                X.LT.0.0E0.OR.Y.LE.0.0E0
-  !                      = 2                X+Y.LT.LOLIM
-  !                      = 3                MAX(X,Y) .GT. UPLIM
+  !                  IER = 1                X<0.0E0 .OR. Y<=0.0E0
+  !                      = 2                X+Y<LOLIM
+  !                      = 3                MAX(X,Y) > UPLIM
   !
   !
   !   4.     Control Parameters
@@ -182,7 +181,7 @@ REAL(SP) FUNCTION RC(X,Y,Ier)
   !
   !
   !
-  !                  LN X                X .GT. 0
+  !                  LN X                X > 0
   !
   !                                            2
   !                  LN(X) = (X-1) RC(((1+X)/2) , X )
@@ -190,14 +189,14 @@ REAL(SP) FUNCTION RC(X,Y,Ier)
   !
   !   --------------------------------------------------------------------
   !
-  !                  ARCSIN X            -1 .LE. X .LE. 1
+  !                  ARCSIN X            -1 <= X <= 1
   !
   !                                      2
   !                  ARCSIN X = X RC (1-X  ,1 )
   !
   !   --------------------------------------------------------------------
   !
-  !                  ARCCOS X            0 .LE. X .LE. 1
+  !                  ARCCOS X            0 <= X <= 1
   !
   !
   !                                     2      2
@@ -205,42 +204,42 @@ REAL(SP) FUNCTION RC(X,Y,Ier)
   !
   !   --------------------------------------------------------------------
   !
-  !                  ARCTAN X            -INF .LT. X .LT. +INF
+  !                  ARCTAN X            -INF < X < +INF
   !
   !                                       2
   !                  ARCTAN X = X RC(1,1+X  )
   !
   !   --------------------------------------------------------------------
   !
-  !                  ARCCOT X            0 .LE. X .LT. INF
+  !                  ARCCOT X            0 <= X < INF
   !
   !                                 2   2
   !                  ARCCOT X = RC(X  ,X +1 )
   !
   !   --------------------------------------------------------------------
   !
-  !                  ARCSINH X           -INF .LT. X .LT. +INF
+  !                  ARCSINH X           -INF < X < +INF
   !
   !                                      2
   !                  ARCSINH X = X RC(1+X  ,1 )
   !
   !   --------------------------------------------------------------------
   !
-  !                  ARCCOSH X           X .GE. 1
+  !                  ARCCOSH X           X >= 1
   !
   !                                    2        2
   !                  ARCCOSH X = SQRT(X -1) RC(X  ,1 )
   !
   !   --------------------------------------------------------------------
   !
-  !                  ARCTANH X           -1 .LT. X .LT. 1
+  !                  ARCTANH X           -1 < X < 1
   !
   !                                        2
   !                  ARCTANH X = X RC(1,1-X  )
   !
   !   --------------------------------------------------------------------
   !
-  !                  ARCCOTH X           X .GT. 1
+  !                  ARCCOTH X           X > 1
   !
   !                                  2   2
   !                  ARCCOTH X = RC(X  ,X -1 )
@@ -286,31 +285,31 @@ REAL(SP) FUNCTION RC(X,Y,Ier)
   !         CALL ERROR HANDLER IF NECESSARY.
   !
   RC = 0.0E0
-  IF ( X<0.0E0.OR.Y<=0.0E0 ) THEN
+  IF( X<0.0E0 .OR. Y<=0.0E0 ) THEN
     Ier = 1
     WRITE (xern3,'(1PE15.6)') X
     WRITE (xern4,'(1PE15.6)') Y
-    CALL XERMSG('RC','X.LT.0 .OR. Y.LE.0 WHERE X = '//xern3//&
+    CALL XERMSG('RC','X<0 .OR. Y<=0 WHERE X = '//xern3//&
       ' AND Y = '//xern4,1,1)
     RETURN
   END IF
   !
-  IF ( MAX(X,Y)>uplim ) THEN
+  IF( MAX(X,Y)>uplim ) THEN
     Ier = 3
     WRITE (xern3,'(1PE15.6)') X
     WRITE (xern4,'(1PE15.6)') Y
     WRITE (xern5,'(1PE15.6)') uplim
-    CALL XERMSG('RC','MAX(X,Y).GT.UPLIM WHERE X = '//xern3//&
+    CALL XERMSG('RC','MAX(X,Y)>UPLIM WHERE X = '//xern3//&
       ' Y = '//xern4//' AND UPLIM = '//xern5,3,1)
     RETURN
   END IF
   !
-  IF ( X+Y<lolim ) THEN
+  IF( X+Y<lolim ) THEN
     Ier = 2
     WRITE (xern3,'(1PE15.6)') X
     WRITE (xern4,'(1PE15.6)') Y
     WRITE (xern5,'(1PE15.6)') lolim
-    CALL XERMSG('RC','X+Y.LT.LOLIM WHERE X = '//xern3//' Y = '//&
+    CALL XERMSG('RC','X+Y<LOLIM WHERE X = '//xern3//' Y = '//&
       xern4//' AND LOLIM = '//xern5,2,1)
     RETURN
   END IF
@@ -322,7 +321,7 @@ REAL(SP) FUNCTION RC(X,Y,Ier)
     !
     mu = (xn+yn+yn)/3.0E0
     sn = (yn+mu)/mu - 2.0E0
-    IF ( ABS(sn)<errtol ) THEN
+    IF( ABS(sn)<errtol ) THEN
       !
       s = sn*sn*(0.30E0+sn*(c1+sn*(0.3750E0+sn*c2)))
       RC = (1.0E0+s)/SQRT(mu)

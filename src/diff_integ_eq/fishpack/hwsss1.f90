@@ -1,8 +1,7 @@
 !** HWSSS1
 SUBROUTINE HWSSS1(Ts,Tf,M,Mbdcnd,Bdts,Bdtf,Ps,Pf,N,Nbdcnd,Bdps,Bdpf,&
     Elmbda,F,Idimf,Pertrb,Am,Bm,Cm,Sn,Ss,Sint,D)
-  !>
-  !  Subsidiary to HWSSSP
+  !> Subsidiary to HWSSSP
   !***
   ! **Library:**   SLATEC
   !***
@@ -47,7 +46,7 @@ SUBROUTINE HWSSS1(Ts,Tf,M,Mbdcnd,Bdts,Bdtf,Ps,Pf,N,Nbdcnd,Bdps,Bdpf,&
     fim1 = i - 1
     theta = fim1*dth + Ts
     Sint(i) = SIN(theta)
-    IF ( Sint(i)/=0 ) THEN
+    IF( Sint(i)/=0 ) THEN
       t1 = 1./(dth2*Sint(i))
       Am(i) = t1*SIN(theta-hdth)
       Cm(i) = t1*SIN(theta+hdth)
@@ -101,7 +100,7 @@ SUBROUTINE HWSSS1(Ts,Tf,M,Mbdcnd,Bdts,Bdtf,Ps,Pf,N,Nbdcnd,Bdps,Bdpf,&
   wts = Sint(its+1)*Am(its+1)/Cm(its)
   wtf = Sint(itf-1)*Cm(itf-1)/Am(itf)
   munk = itf - its + 1
-  IF ( isp>0 ) THEN
+  IF( isp>0 ) THEN
     D(its) = Cm(its)/Bm(its)
     DO i = itsp, M
       D(i) = Cm(i)/(Bm(i)-Am(i)*D(i-1))
@@ -114,7 +113,7 @@ SUBROUTINE HWSSS1(Ts,Tf,M,Mbdcnd,Bdts,Bdtf,Ps,Pf,N,Nbdcnd,Bdps,Bdpf,&
     END DO
     Ss(M+1) = 1.
   END IF
-  IF ( inp>0 ) THEN
+  IF( inp>0 ) THEN
     Sn(1) = 1.
     D(itf) = Am(itf)/Bm(itf)
     iid = itf - 2
@@ -176,11 +175,11 @@ SUBROUTINE HWSSS1(Ts,Tf,M,Mbdcnd,Bdts,Bdtf,Ps,Pf,N,Nbdcnd,Bdps,Bdpf,&
       SELECT CASE (nbr)
         CASE (2,3,5)
         CASE DEFAULT
-          IF ( Elmbda>=0 ) THEN
+          IF( Elmbda>=0 ) THEN
             ising = 1
             summ = wts*wps + wts*wpf + wtf*wps + wtf*wpf
-            IF ( inp>0 ) summ = summ + wp
-            IF ( isp>0 ) summ = summ + wp
+            IF( inp>0 ) summ = summ + wp
+            IF( isp>0 ) summ = summ + wp
             sum1 = 0.
             DO i = itsp, itfm
               sum1 = sum1 + Sint(i)
@@ -202,7 +201,7 @@ SUBROUTINE HWSSS1(Ts,Tf,M,Mbdcnd,Bdts,Bdtf,Ps,Pf,N,Nbdcnd,Bdps,Bdpf,&
         F(1,j) = F(1,j) + tdt*Bdts(j)*at
       END DO
     CASE DEFAULT
-      IF ( Nbdcnd==3 ) THEN
+      IF( Nbdcnd==3 ) THEN
         yhld = F(1,jps) - 4./(fn*dphi*dth2)*(Bdpf(2)-Bdps(2))
         DO j = 1, np1
           F(1,j) = yhld
@@ -220,7 +219,7 @@ SUBROUTINE HWSSS1(Ts,Tf,M,Mbdcnd,Bdts,Bdtf,Ps,Pf,N,Nbdcnd,Bdps,Bdpf,&
         F(M+1,j) = F(M+1,j) - tdt*Bdtf(j)*ct
       END DO
     CASE DEFAULT
-      IF ( Nbdcnd==3 ) THEN
+      IF( Nbdcnd==3 ) THEN
         yhld = F(M+1,jps) - 4./(fn*dphi*dth2)*(Bdpf(M)-Bdps(M))
         DO j = 1, np1
           F(M+1,j) = yhld
@@ -250,11 +249,11 @@ SUBROUTINE HWSSS1(Ts,Tf,M,Mbdcnd,Bdts,Bdtf,Ps,Pf,N,Nbdcnd,Bdps,Bdpf,&
       END DO
   END SELECT
   Pertrb = 0.
-  IF ( ising/=0 ) THEN
+  IF( ising/=0 ) THEN
     summ = wts*wps*F(its,jps) + wts*wpf*F(its,jpf) + wtf*wps*F(itf,jps)&
       + wtf*wpf*F(itf,jpf)
-    IF ( inp>0 ) summ = summ + wp*F(1,jps)
-    IF ( isp>0 ) summ = summ + wp*F(M+1,jps)
+    IF( inp>0 ) summ = summ + wp*F(1,jps)
+    IF( isp>0 ) summ = summ + wp*F(M+1,jps)
     DO i = itsp, itfm
       sum1 = 0.
       DO j = jpsp, jpfm
@@ -294,22 +293,22 @@ SUBROUTINE HWSSS1(Ts,Tf,M,Mbdcnd,Bdts,Bdtf,Ps,Pf,N,Nbdcnd,Bdps,Bdpf,&
   END DO
   CALL GENBUN(Nbdcnd,nunk,1,munk,Am(its),Bm(its),Cm(its),Idimf,F(its,jps),&
     ierror,D)
-  IF ( ising>0 ) THEN
-    IF ( inp<=0 ) THEN
-      IF ( isp>0 ) THEN
+  IF( ising>0 ) THEN
+    IF( inp<=0 ) THEN
+      IF( isp>0 ) THEN
         DO j = 1, np1
           F(M+1,j) = 0.
         END DO
         GOTO 100
       END IF
-    ELSEIF ( isp<=0 ) THEN
+    ELSEIF( isp<=0 ) THEN
       DO j = 1, np1
         F(1,j) = 0.
       END DO
       GOTO 100
     END IF
   END IF
-  IF ( inp>0 ) THEN
+  IF( inp>0 ) THEN
     summ = wps*F(its,jps) + wpf*F(its,jpf)
     DO j = jpsp, jpfm
       summ = summ + F(its,j)
@@ -317,7 +316,7 @@ SUBROUTINE HWSSS1(Ts,Tf,M,Mbdcnd,Bdts,Bdtf,Ps,Pf,N,Nbdcnd,Bdps,Bdpf,&
     dfn = cp*summ
     dnn = cp*((wps+wpf+fjj)*(Sn(2)-1.)) + Elmbda
     dsn = cp*(wps+wpf+fjj)*Sn(M)
-    IF ( isp<=0 ) THEN
+    IF( isp<=0 ) THEN
       cnp = (F(1,1)-dfn)/dnn
       DO i = its, itf
         hld = cnp*Sn(i)
@@ -330,7 +329,7 @@ SUBROUTINE HWSSS1(Ts,Tf,M,Mbdcnd,Bdts,Bdtf,Ps,Pf,N,Nbdcnd,Bdps,Bdpf,&
       END DO
       GOTO 100
     END IF
-  ELSEIF ( isp<=0 ) THEN
+  ELSEIF( isp<=0 ) THEN
     GOTO 100
   END IF
   summ = wps*F(itf,jps) + wpf*F(itf,jpf)
@@ -340,7 +339,7 @@ SUBROUTINE HWSSS1(Ts,Tf,M,Mbdcnd,Bdts,Bdtf,Ps,Pf,N,Nbdcnd,Bdps,Bdpf,&
   dfs = cp*summ
   dss = cp*((wps+wpf+fjj)*(Ss(M)-1.)) + Elmbda
   dns = cp*(wps+wpf+fjj)*Ss(2)
-  IF ( inp<=0 ) THEN
+  IF( inp<=0 ) THEN
     csp = (F(M+1,1)-dfs)/dss
     DO i = its, itf
       hld = csp*Ss(i)
@@ -354,10 +353,10 @@ SUBROUTINE HWSSS1(Ts,Tf,M,Mbdcnd,Bdts,Bdtf,Ps,Pf,N,Nbdcnd,Bdps,Bdpf,&
   ELSE
     rtn = F(1,1) - dfn
     rts = F(M+1,1) - dfs
-    IF ( ising>0 ) THEN
+    IF( ising>0 ) THEN
       csp = 0.
       cnp = rtn/dnn
-    ELSEIF ( ABS(dnn)<=ABS(dsn) ) THEN
+    ELSEIF( ABS(dnn)<=ABS(dsn) ) THEN
       den = dns - dss*dnn/dsn
       rtn = rtn - rts*dnn/dsn
       csp = rtn/den
@@ -380,7 +379,7 @@ SUBROUTINE HWSSS1(Ts,Tf,M,Mbdcnd,Bdts,Bdtf,Ps,Pf,N,Nbdcnd,Bdps,Bdpf,&
     END DO
   END IF
   100 CONTINUE
-  IF ( Nbdcnd==0 ) THEN
+  IF( Nbdcnd==0 ) THEN
     DO i = 1, mp1
       F(i,jpf+1) = F(i,jps)
     END DO

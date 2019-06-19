@@ -1,7 +1,6 @@
 !** DTIN
 SUBROUTINE DTIN(N,Nelt,Ia,Ja,A,Isym,Soln,Rhs,Iunit,Job)
-  !>
-  !  Read in SLAP Triad Format Linear System.
+  !> Read in SLAP Triad Format Linear System.
   !            Routine to read in a SLAP Triad format matrix and right
   !            hand side and solution to the system, if known.
   !***
@@ -115,7 +114,7 @@ SUBROUTINE DTIN(N,Nelt,Ia,Ja,A,Isym,Soln,Rhs,Iunit,Job)
   !
   !- Cautions:
   !     This routine will attempt to write to the Fortran logical output
-  !     unit IUNIT, if IUNIT .ne. 0.  Thus, the user must make sure that
+  !     unit IUNIT, if IUNIT /= 0.  Thus, the user must make sure that
   !     this logical unit is attached to a file or terminal before calling
   !     this routine with a non-zero value for IUNIT.  This routine does
   !     not check for the validity of a non-zero IUNIT unit number.
@@ -137,12 +136,12 @@ SUBROUTINE DTIN(N,Nelt,Ia,Ja,A,Isym,Soln,Rhs,Iunit,Job)
   !   930701  Updated CATEGORY section.  (FNF, WRB)
 
   !     .. Scalar Arguments ..
-  INTEGER Isym, Iunit, Job, N, Nelt
+  INTEGER :: Isym, Iunit, Job, N, Nelt
   !     .. Array Arguments ..
   REAL(DP) :: A(Nelt), Rhs(N), Soln(N)
-  INTEGER Ia(Nelt), Ja(Nelt)
+  INTEGER :: Ia(Nelt), Ja(Nelt)
   !     .. Local Scalars ..
-  INTEGER i, irhs, isoln, jobret, neltmx
+  INTEGER :: i, irhs, isoln, jobret, neltmx
   !     .. Intrinsic Functions ..
   INTRINSIC MIN
   !* FIRST EXECUTABLE STATEMENT  DTIN
@@ -162,10 +161,10 @@ SUBROUTINE DTIN(N,Nelt,Ia,Ja,A,Isym,Soln,Rhs,Iunit,Job)
   !
   !         If requested, read in the rhs.
   jobret = 0
-  IF ( Job==1.OR.Job==3 ) THEN
+  IF( Job==1 .OR. Job==3 ) THEN
     !
     !         Check to see if rhs is in the file.
-    IF ( irhs==1 ) THEN
+    IF( irhs==1 ) THEN
       jobret = 1
       READ (Iunit,99003) (Rhs(i),i=1,N)
     ELSE
@@ -176,10 +175,10 @@ SUBROUTINE DTIN(N,Nelt,Ia,Ja,A,Isym,Soln,Rhs,Iunit,Job)
   END IF
   !
   !         If requested, read in the solution.
-  IF ( Job>1 ) THEN
+  IF( Job>1 ) THEN
     !
     !         Check to see if solution is in the file.
-    IF ( isoln==1 ) THEN
+    IF( isoln==1 ) THEN
       jobret = jobret + 2
       READ (Iunit,99003) (Soln(i),i=1,N)
     ELSE

@@ -1,7 +1,6 @@
 !** SOS
 SUBROUTINE SOS(FNC,Neq,X,Rtolx,Atolx,Tolf,Iflag,Rw,Lrw,Iw,Liw)
-  !>
-  !  Solve a square system of nonlinear equations.
+  !> Solve a square system of nonlinear equations.
   !***
   ! **Library:**   SLATEC
   !***
@@ -64,7 +63,7 @@ SUBROUTINE SOS(FNC,Neq,X,Rtolx,Atolx,Tolf,Iflag,Rw,Lrw,Iw,Liw)
   !
   !     RTOLX -Relative error tolerance used in the convergence criteria.
   !          Each solution component X(I) is checked by an accuracy test
-  !          of the form   ABS(X(I)-XOLD(I)) .LE. RTOLX*ABS(X(I))+ATOLX,
+  !          of the form   ABS(X(I)-XOLD(I)) <= RTOLX*ABS(X(I))+ATOLX,
   !          where XOLD(I) represents the previous iteration value.
   !          RTOLX must be non-negative.
   !
@@ -122,11 +121,11 @@ SUBROUTINE SOS(FNC,Neq,X,Rtolx,Atolx,Tolf,Iflag,Rw,Lrw,Iw,Liw)
   !
   !          1 Means satisfactory convergence to a solution was achieved.
   !            Each solution component X(I) satisfies the error tolerance
-  !            test   ABS(X(I)-XOLD(I)) .LE. RTOLX*ABS(X(I))+ATOLX.
+  !            test   ABS(X(I)-XOLD(I)) <= RTOLX*ABS(X(I))+ATOLX.
   !
   !          2 Means procedure converged to a solution such that all
   !            residuals are at most TOLF in magnitude,
-  !            ABS(FNC(X,I)) .LE. TOLF.
+  !            ABS(FNC(X,I)) <= TOLF.
   !
   !          3 Means that conditions for both IFLAG=1 and IFLAG=2 hold.
   !
@@ -205,14 +204,14 @@ SUBROUTINE SOS(FNC,Neq,X,Rtolx,Atolx,Tolf,Iflag,Rw,Lrw,Iw,Liw)
   !
   !     CHECK FOR VALID INPUT
   !
-  IF ( Neq<=0 ) THEN
+  IF( Neq<=0 ) THEN
     WRITE (xern1,'(I8)') Neq
     CALL XERMSG('SOS','THE NUMBER OF EQUATIONS MUST BE A POSITIVE INTEGER.&
       & YOU HAVE CALLED THE CODE WITH NEQ = '//xern1,1,1)
     Iflag = 9
   END IF
   !
-  IF ( Rtolx<0.0D0.OR.Atolx<0.0D0 ) THEN
+  IF( Rtolx<0.0D0 .OR. Atolx<0.0D0 ) THEN
     WRITE (xern3,'(1PE15.6)') Atolx
     WRITE (xern4,'(1PE15.6)') Rtolx
     CALL XERMSG('SOS','THE ERROR TOLERANCES FOR THE SOLUTION ITERATES&
@@ -221,7 +220,7 @@ SUBROUTINE SOS(FNC,Neq,X,Rtolx,Atolx,Tolf,Iflag,Rw,Lrw,Iw,Liw)
     Iflag = 9
   END IF
   !
-  IF ( Tolf<0.0D0 ) THEN
+  IF( Tolf<0.0D0 ) THEN
     WRITE (xern3,'(1PE15.6)') Tolf
     CALL XERMSG('SOS','THE RESIDUAL ERROR TOLERANCE MUST BE NON-NEGATIVE.&
       & YOU HAVE CALLED THE CODE WITH TOLF = '//xern3,3,1)
@@ -230,10 +229,10 @@ SUBROUTINE SOS(FNC,Neq,X,Rtolx,Atolx,Tolf,Iflag,Rw,Lrw,Iw,Liw)
   !
   iprint = 0
   mxit = 50
-  IF ( inpflg==(-1) ) THEN
-    IF ( Iw(1)==(-1) ) iprint = -1
+  IF( inpflg==(-1) ) THEN
+    IF( Iw(1)==(-1) ) iprint = -1
     mxit = Iw(2)
-    IF ( mxit<=0 ) THEN
+    IF( mxit<=0 ) THEN
       WRITE (xern1,'(I8)') mxit
       CALL XERMSG('SOS','YOU HAVE TOLD THE CODE TO USE OPTIONAL IN&
         & PUT ITEMS BY SETTING  IFLAG=-1. HOWEVER YOU HAVE CALLED THE CODE WITH&
@@ -243,21 +242,21 @@ SUBROUTINE SOS(FNC,Neq,X,Rtolx,Atolx,Tolf,Iflag,Rw,Lrw,Iw,Liw)
   END IF
   !
   nc = (Neq*(Neq+1))/2
-  IF ( Lrw<1+6*Neq+nc ) THEN
+  IF( Lrw<1+6*Neq+nc ) THEN
     WRITE (xern1,'(I8)') Lrw
     CALL XERMSG('SOS','DIMENSION OF THE RW ARRAY MUST BE AT LEAST&
       & 1 + 6*NEQ + NEQ*(NEQ+1)/2 .  YOU HAVE CALLED THE CODE WITH LRW = '//xern1,5,1)
     Iflag = 9
   END IF
   !
-  IF ( Liw<3+Neq ) THEN
+  IF( Liw<3+Neq ) THEN
     WRITE (xern1,'(I8)') Liw
     CALL XERMSG('SOS','DIMENSION OF THE IW ARRAY MUST BE AT LEAST&
       & 3 + NEQ.  YOU HAVE CALLED THE CODE WITH  LIW = '//xern1,6,1)
     Iflag = 9
   END IF
   !
-  IF ( Iflag/=9 ) THEN
+  IF( Iflag/=9 ) THEN
     ncjs = 6
     nsrrc = 4
     nsri = 5

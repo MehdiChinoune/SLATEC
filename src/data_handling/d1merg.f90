@@ -1,7 +1,6 @@
 !** D1MERG
 SUBROUTINE D1MERG(Tcos,I1,M1,I2,M2,I3)
-  !>
-  !  Merge two strings of ascending double precision numbers.
+  !> Merge two strings of ascending double precision numbers.
   !***
   ! **Library:**   SLATEC
   !***
@@ -25,20 +24,20 @@ SUBROUTINE D1MERG(Tcos,I1,M1,I2,M2,I3)
 
   !* REVISION HISTORY  (YYMMDD)
   !   910819  DATE WRITTEN
-  INTEGER I1, I2, I3, M1, M2
+  INTEGER :: I1, I2, I3, M1, M2
   REAL(DP) :: Tcos( MAX(I1+M1,I2+M2,I3+M1+M2) )
   !
-  INTEGER j1, j2, j3
+  INTEGER :: j1, j2, j3
   !
   !* FIRST EXECUTABLE STATEMENT  D1MERG
-  IF ( M1==0.AND.M2==0 ) RETURN
+  IF( M1==0 .AND. M2==0 ) RETURN
   !
-  IF ( M1==0.AND.M2/=0 ) THEN
+  IF( M1==0 .AND. M2/=0 ) THEN
     Tcos(I3+1:I3+M2) = Tcos(I2+1:I2+M2)
     RETURN
   END IF
   !
-  IF ( M1/=0.AND.M2==0 ) THEN
+  IF( M1/=0 .AND. M2==0 ) THEN
     Tcos(I3+1:I3+M1) = Tcos(I1+1:I1+M1)
     RETURN
   END IF
@@ -48,17 +47,17 @@ SUBROUTINE D1MERG(Tcos,I1,M1,I2,M2,I3)
   j3 = 1
   DO
     !
-    IF ( Tcos(I1+j1)<=Tcos(I2+j2) ) THEN
+    IF( Tcos(I1+j1)<=Tcos(I2+j2) ) THEN
       Tcos(I3+j3) = Tcos(I1+j1)
       j1 = j1 + 1
-      IF ( j1>M1 ) THEN
+      IF( j1>M1 ) THEN
         Tcos(I3+j3+1:I3+j3-j2+M2+1) = Tcos(I2+j2:I2+M2)
         RETURN
       END IF
     ELSE
       Tcos(I3+j3) = Tcos(I2+j2)
       j2 = j2 + 1
-      IF ( j2>M2 ) THEN
+      IF( j2>M2 ) THEN
         Tcos(I3+j3+1:I3+j3-j1+M1+1) = Tcos(I1+j1:I1+M1)
         RETURN
       END IF

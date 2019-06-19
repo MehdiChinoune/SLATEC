@@ -1,8 +1,7 @@
 !** BVPOR
 SUBROUTINE BVPOR(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
     Nfc,Iflag,Z,Mxnon,P,Ntp,Ip,W,Niv,Yhp,U,V,Coef,S,Stowa,Work,Iwork,Nfcc)
-  !>
-  !  Subsidiary to BVSUP
+  !> Subsidiary to BVSUP
   !***
   ! **Library:**   SLATEC
   !***
@@ -38,7 +37,7 @@ SUBROUTINE BVPOR(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
   !             point of orthonormalization.
   !         = 1 Do not normalize particular solution.
   !
-  !     NTP = Must be .GE. NFC*(NFC+1)/2.
+  !     NTP = Must be >= NFC*(NFC+1)/2.
   !
   !
   !     NFCC = 2*NFC for special treatment of a complex valued problem
@@ -145,7 +144,7 @@ SUBROUTINE BVPOR(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
     P(Ntp,Mxnon+1), S(Nfc+1), Stowa(:), U(Ncomp,Nfc,Nxpts), &
     V(Ncomp,Nxpts), W(Nfcc,Mxnon+1), Work(*), Xpts(Nxpts), Y(Nrowy,Nxpts), &
     Yhp(Ncomp,Nfc+1), Z(Mxnon+1)
-  INTEGER kod, kpts, kwc, kwd, kws, kwt, l, m, n, ncomp2, ndw, &
+  INTEGER :: kod, kpts, kwc, kwd, kws, kwt, l, m, n, ncomp2, ndw, &
     nfcp1, nfcp2, nn, non, i, i1, i2, ic, ira, isflg, j, k
   !* FIRST EXECUTABLE STATEMENT  BVPOR
   nfcp1 = Nfc + 1
@@ -155,7 +154,7 @@ SUBROUTINE BVPOR(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
   !- *********************************************************************
   !     CALCULATE INITIAL CONDITIONS WHICH SATISFY
   !                   A*YH(XINITIAL)=0  AND  A*YP(XINITIAL)=ALPHA.
-  !     WHEN NFC .NE. NFCC LSSUDS DEFINES VALUES YHP IN A MATRIX OF SIZE
+  !     WHEN NFC /= NFCC LSSUDS DEFINES VALUES YHP IN A MATRIX OF SIZE
   !     (NFCC+1)*NCOMP AND ,HENCE, OVERFLOWS THE STORAGE ALLOCATION INTO
   !     THE U ARRAY. HOWEVER, THIS IS OKAY SINCE PLENTY OF SPACE IS
   !     AVAILABLE IN U AND IT HAS NOT YET BEEN USED.
@@ -168,9 +167,9 @@ SUBROUTINE BVPOR(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
   Iflag = 0
   CALL LSSUDS(A,Yhp(1,Nfcc+1),Alpha,Nic,Ncomp,Nrowa,Yhp,Ncomp,Iflag,1,ira,0,&
     Work(1),Work(ndw+1),Iwork,Work(kws),Work(kwd),Work(kwt),isflg,Work(kwc))
-  IF ( Iflag==1 ) THEN
-    IF ( Nfc/=Nfcc ) CALL SVECS(Ncomp,Nfc,Yhp,Work,Iwork,inhomo_com,Iflag)
-    IF ( Iflag==1 ) THEN
+  IF( Iflag==1 ) THEN
+    IF( Nfc/=Nfcc ) CALL SVECS(Ncomp,Nfc,Yhp,Work,Iwork,inhomo_com,Iflag)
+    IF( Iflag==1 ) THEN
       !
       !- *********************************************************************
       !     DETERMINE THE NUMBER OF DIFFERENTIAL EQUATIONS TO BE INTEGRATED,
@@ -178,13 +177,13 @@ SUBROUTINE BVPOR(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
       !     STORE INITIAL CONDITIONS.
       !
       neq_com = Ncomp*Nfc
-      IF ( inhomo_com==1 ) neq_com = neq_com + Ncomp
+      IF( inhomo_com==1 ) neq_com = neq_com + Ncomp
       ivp_com = 0
-      IF ( neqivp_com/=0 ) THEN
+      IF( neqivp_com/=0 ) THEN
         ivp_com = neq_com
         neq_com = neq_com + neqivp_com
         nfcp2 = nfcp1
-        IF ( inhomo_com==1 ) nfcp2 = nfcp1 + 1
+        IF( inhomo_com==1 ) nfcp2 = nfcp1 + 1
         DO k = 1, neqivp_com
           Yhp(k,nfcp2) = Alpha(Nic+k)
         END DO
@@ -213,7 +212,7 @@ SUBROUTINE BVPOR(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
       !
       CALL RKFAB(Ncomp,Xpts,Nxpts,Nfc,Iflag,Z,Mxnon,P,Ntp,Ip,Yhp,Niv,U,V,W,&
         S,Stowa,Work,Iwork,Nfcc)
-      IF ( Iflag==0.AND.icoco_com/=0 ) THEN
+      IF( Iflag==0 .AND. icoco_com/=0 ) THEN
         !
         !- *********************************************************************
         !- *************** BACKWARD SWEEP TO OBTAIN SOLUTION *******************
@@ -225,7 +224,7 @@ SUBROUTINE BVPOR(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
         !   AT THE LAST OUTPUT POINT, SINCE THE LOCAL COPY OF EACH STILL EXISTS.
         !
         kod = 1
-        IF ( ndisk_com==0 ) kod = Nxpts
+        IF( ndisk_com==0 ) kod = Nxpts
         i1 = 1 + Nfcc*Nfcc
         i2 = i1 + Nfcc
         CALL SCOEF(U(1,1,kod),V(1,kod),Ncomp,Nrowb,Nfc,B,Beta,Coef,&
@@ -240,23 +239,23 @@ SUBROUTINE BVPOR(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
         k = numort_com
         ncomp2 = Ncomp/2
         ic = 1
-        IF ( Nfc/=Nfcc ) ic = 2
+        IF( Nfc/=Nfcc ) ic = 2
         DO j = 1, Nxpts
           kpts = Nxpts - j + 1
           kod = kpts
-          IF ( ndisk_com==1 ) kod = 1
-          DO WHILE ( k/=0 )
-            IF ( xend_com>xbeg_com.AND.Xpts(kpts)>=Z(k) ) EXIT
-            IF ( xend_com<xbeg_com.AND.Xpts(kpts)<=Z(k) ) EXIT
+          IF( ndisk_com==1 ) kod = 1
+          DO WHILE( k/=0 )
+            IF( xend_com>xbeg_com .AND. Xpts(kpts)>=Z(k) ) EXIT
+            IF( xend_com<xbeg_com .AND. Xpts(kpts)<=Z(k) ) EXIT
             non = k
-            IF ( ndisk_com/=0 ) THEN
+            IF( ndisk_com/=0 ) THEN
               non = 1
               BACKSPACE ntape_com
               READ (ntape_com) (Ip(i,1),i=1,Nfcc), (P(i,1),i=1,Ntp)
               BACKSPACE ntape_com
             END IF
-            IF ( inhomo_com==1 ) THEN
-              IF ( ndisk_com/=0 ) THEN
+            IF( inhomo_com==1 ) THEN
+              IF( ndisk_com/=0 ) THEN
                 BACKSPACE ntape_com
                 READ (ntape_com) (W(i,1),i=1,Nfcc)
                 BACKSPACE ntape_com
@@ -275,7 +274,7 @@ SUBROUTINE BVPOR(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
             END DO
             k = k - 1
           END DO
-          IF ( ndisk_com/=0 ) THEN
+          IF( ndisk_com/=0 ) THEN
             BACKSPACE ntape_com
             READ (ntape_com) (V(i,1),i=1,Ncomp), ((U(i,m,1),i=1,Ncomp),m=1,Nfc)
             BACKSPACE ntape_com
@@ -283,7 +282,7 @@ SUBROUTINE BVPOR(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
           DO n = 1, Ncomp
             Y(n,kpts) = V(n,kod) + DOT_PRODUCT(U(n,1:Nfc,kod),Coef(1:ic*Nfc:ic))
           END DO
-          IF ( Nfc/=Nfcc ) THEN
+          IF( Nfc/=Nfcc ) THEN
             DO n = 1, ncomp2
               nn = ncomp2 + n
               Y(n,kpts) = Y(n,kpts) - DOT_PRODUCT(U(nn,1:Nfc,kod),Coef(2:2*Nfc:2))

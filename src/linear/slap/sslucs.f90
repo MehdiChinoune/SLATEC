@@ -1,8 +1,7 @@
 !** SSLUCS
 SUBROUTINE SSLUCS(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
     Iunit,Rwork,Lenw,Iwork,Leniw)
-  !>
-  !  Incomplete LU BiConjugate Gradient Squared Ax=b Solver.
+  !> Incomplete LU BiConjugate Gradient Squared Ax=b Solver.
   !            Routine to solve a linear system  Ax = b  using the
   !            BiConjugate Gradient Squared method with Incomplete LU
   !            decomposition preconditioning.
@@ -194,7 +193,7 @@ SUBROUTINE SSLUCS(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
   !
   !- Cautions:
   !     This routine will attempt to write to the Fortran logical output
-  !     unit IUNIT, if IUNIT .ne. 0.  Thus, the user must make sure that
+  !     unit IUNIT, if IUNIT /= 0.  Thus, the user must make sure that
   !     this logical unit is attached to a file or terminal before calling
   !     this routine with a non-zero value for IUNIT.  This routine does
   !     not check for the validity of a non-zero IUNIT unit number.
@@ -228,21 +227,21 @@ SUBROUTINE SSLUCS(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
   !   921113  Corrected C***CATEGORY line.  (FNF)
 
   !     .. Parameters ..
-  INTEGER , PARAMETER :: LOCRB = 1, LOCIB = 11
+  INTEGER, PARAMETER :: LOCRB = 1, LOCIB = 11
   !     .. Scalar Arguments ..
-  REAL(SP) Err, Tol
-  INTEGER Ierr, Isym, Iter, Itmax, Itol, Iunit, Leniw, Lenw, N, Nelt
+  REAL(SP) :: Err, Tol
+  INTEGER :: Ierr, Isym, Iter, Itmax, Itol, Iunit, Leniw, Lenw, N, Nelt
   !     .. Array Arguments ..
-  REAL(SP) A(Nelt), B(N), Rwork(Lenw), X(N)
-  INTEGER Ia(Nelt), Iwork(Leniw), Ja(Nelt)
+  REAL(SP) :: A(Nelt), B(N), Rwork(Lenw), X(N)
+  INTEGER :: Ia(Nelt), Iwork(Leniw), Ja(Nelt)
   !     .. Local Scalars ..
-  INTEGER icol, j, jbgn, jend, locdin, locil, lociu, lociw, locjl, &
+  INTEGER :: icol, j, jbgn, jend, locdin, locil, lociu, lociw, locjl, &
     locju, locl, locnc, locnr, locp, locq, locr, locr0, locu, &
     locuu, locv1, locv2, locw, nl, nu
   !* FIRST EXECUTABLE STATEMENT  SSLUCS
   !
   Ierr = 0
-  IF ( N<1.OR.Nelt<1 ) THEN
+  IF( N<1 .OR. Nelt<1 ) THEN
     Ierr = 3
     RETURN
   END IF
@@ -258,11 +257,11 @@ SUBROUTINE SSLUCS(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
     !         Don't count diagonal.
     jbgn = Ja(icol) + 1
     jend = Ja(icol+1) - 1
-    IF ( jbgn<=jend ) THEN
+    IF( jbgn<=jend ) THEN
       DO j = jbgn, jend
-        IF ( Ia(j)>icol ) THEN
+        IF( Ia(j)>icol ) THEN
           nl = nl + 1
-          IF ( Isym/=0 ) nu = nu + 1
+          IF( Isym/=0 ) nu = nu + 1
         ELSE
           nu = nu + 1
         END IF
@@ -292,7 +291,7 @@ SUBROUTINE SSLUCS(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
   !
   !         Check the workspace allocations.
   CALL SCHKW('SSLUCS',lociw,Leniw,locw,Lenw,Ierr,Iter,Err)
-  IF ( Ierr/=0 ) RETURN
+  IF( Ierr/=0 ) RETURN
   !
   Iwork(1) = locil
   Iwork(2) = locjl

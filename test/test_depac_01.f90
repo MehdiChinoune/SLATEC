@@ -5,8 +5,7 @@ MODULE TEST43_MOD
 CONTAINS
   !** JAC
   SUBROUTINE JAC(T,U,Pd,Nrowpd)
-    !>
-    !  Evaluate Jacobian for DEBDF quick check.
+    !> Evaluate Jacobian for DEBDF quick check.
     !***
     ! **Library:**   SLATEC
     !***
@@ -40,8 +39,7 @@ CONTAINS
   END SUBROUTINE JAC
   !** FDEQC
   SUBROUTINE FDEQC(T,U,Uprime)
-    !>
-    !  Derivative evaluator for DEPAC quick checks.
+    !> Derivative evaluator for DEPAC quick checks.
     !***
     ! **Library:**   SLATEC
     !***
@@ -63,7 +61,7 @@ CONTAINS
     !
     !     Declare local variables.
     !
-    REAL(SP) r, rsq, r3
+    REAL(SP) :: r, rsq, r3
     !* FIRST EXECUTABLE STATEMENT  FDEQC
     rsq = U(1)*U(1) + U(2)*U(2)
     r = SQRT(rsq)
@@ -75,8 +73,7 @@ CONTAINS
   END SUBROUTINE FDEQC
   !** QXABM
   SUBROUTINE QXABM(Lun,Kprint,Ipass)
-    !>
-    !  Test the DEPAC routine DEABM.
+    !> Test the DEPAC routine DEABM.
     !***
     ! **Library:**   SLATEC
     !***
@@ -128,14 +125,14 @@ CONTAINS
     !
     !     Declare arguments.
     !
-    INTEGER Lun, Kprint, Ipass
+    INTEGER :: Lun, Kprint, Ipass
     !
     !     Declare local variables.
     !
-    INTEGER idid, info(15), iwork(51), n, liw, lrw
-    REAL(SP) abserr(1), r, relerr(1), reltol, rwork(214), t, tout, u(4)
+    INTEGER :: idid, info(15), iwork(51), n, liw, lrw
+    REAL(SP) :: abserr(1), r, relerr(1), reltol, rwork(214), t, tout, u(4)
     !* FIRST EXECUTABLE STATEMENT  QXABM
-    IF ( Kprint>=2 ) WRITE (Lun,99001)
+    IF( Kprint>=2 ) WRITE (Lun,99001)
     !
     ! FORMATs.
     !
@@ -160,26 +157,26 @@ CONTAINS
     info(2) = 0
     info(3) = 1
     info(4) = 0
-    IF ( Kprint>2 ) WRITE (Lun,99002) relerr, abserr, t, (1.0E0)
+    IF( Kprint>2 ) WRITE (Lun,99002) relerr, abserr, t, (1.0E0)
     99002 FORMAT (/' RELERR = ',E16.8,'   ABSERR =',E16.8/12X,'T',19X,'R'/2E20.8)
     DO
       !
       CALL DEABM(FDEQC,n,t,u,tout,info,relerr,abserr,idid,rwork,lrw,iwork,liw)
       r = SQRT(u(1)*u(1)+u(2)*u(2))
-      IF ( ABS(r-1.0E0)>reltol ) Ipass = 0
-      IF ( Kprint>2 ) WRITE (Lun,99003) t, r
+      IF( ABS(r-1.0E0)>reltol ) Ipass = 0
+      IF( Kprint>2 ) WRITE (Lun,99003) t, r
       99003 FORMAT (2E20.8)
       info(1) = 1
-      IF ( idid/=1 ) THEN
+      IF( idid/=1 ) THEN
         !
         !     Finish up.
         !
-        IF ( idid<1 ) Ipass = 0
-        IF ( Kprint>1.AND.idid<1 ) WRITE (Lun,99004) idid
+        IF( idid<1 ) Ipass = 0
+        IF( Kprint>1 .AND. idid<1 ) WRITE (Lun,99004) idid
         99004 FORMAT (1X,'ERROR RETURN FROM DEABM.  IDID = ',I3)
-        IF ( Kprint>1.AND.Ipass==1 ) WRITE (Lun,99005)
+        IF( Kprint>1 .AND. Ipass==1 ) WRITE (Lun,99005)
         99005 FORMAT (/' ------------  DEABM PASSED TESTS  ------------')
-        IF ( Kprint>=1.AND.Ipass==0 ) WRITE (Lun,99006)
+        IF( Kprint>=1 .AND. Ipass==0 ) WRITE (Lun,99006)
         99006 FORMAT (/' ************  DEABM FAILED TESTS  ************')
         RETURN
       END IF
@@ -187,8 +184,7 @@ CONTAINS
   END SUBROUTINE QXABM
   !** QXBDF
   SUBROUTINE QXBDF(Lun,Kprint,Ipass)
-    !>
-    !  Test the DEPAC routine DEBDF.
+    !> Test the DEPAC routine DEBDF.
     !***
     ! **Library:**   SLATEC
     !***
@@ -240,14 +236,14 @@ CONTAINS
     !
     !     Declare arguments.
     !
-    INTEGER Lun, Kprint, Ipass
+    INTEGER :: Lun, Kprint, Ipass
     !
     !     Declare local variables.
     !
-    INTEGER idid, info(15), iwork(60), n, liw, lrw
-    REAL(SP) abserr(1), r, relerr(1), reltol, rwork(306), t, tout, u(4)
+    INTEGER :: idid, info(15), iwork(60), n, liw, lrw
+    REAL(SP) :: abserr(1), r, relerr(1), reltol, rwork(306), t, tout, u(4)
     !* FIRST EXECUTABLE STATEMENT  QXBDF
-    IF ( Kprint>=2 ) WRITE (Lun,99001)
+    IF( Kprint>=2 ) WRITE (Lun,99001)
     !
     ! FORMATs.
     !
@@ -274,26 +270,26 @@ CONTAINS
     info(4) = 0
     info(5) = 1
     info(6) = 0
-    IF ( Kprint>2 ) WRITE (Lun,99002) relerr, abserr, t, (1.0E0)
+    IF( Kprint>2 ) WRITE (Lun,99002) relerr, abserr, t, (1.0E0)
     99002 FORMAT (/' RELERR = ',E16.8,'   ABSERR =',E16.8/12X,'T',19X,'R'/2E20.8)
     DO
       !
       CALL DEBDF(FDEQC,n,t,u,tout,info,relerr,abserr,idid,rwork,lrw,iwork,liw,JAC)
       r = SQRT(u(1)*u(1)+u(2)*u(2))
-      IF ( ABS(r-1.0E0)>reltol ) Ipass = 0
-      IF ( Kprint>2 ) WRITE (Lun,99003) t, r
+      IF( ABS(r-1.0E0)>reltol ) Ipass = 0
+      IF( Kprint>2 ) WRITE (Lun,99003) t, r
       99003 FORMAT (2E20.8)
       info(1) = 1
-      IF ( idid/=1 ) THEN
+      IF( idid/=1 ) THEN
         !
         !     Finish up.
         !
-        IF ( idid<1 ) Ipass = 0
-        IF ( Kprint>1.AND.idid<1 ) WRITE (Lun,99004) idid
+        IF( idid<1 ) Ipass = 0
+        IF( Kprint>1 .AND. idid<1 ) WRITE (Lun,99004) idid
         99004 FORMAT (1X,'ERROR RETURN FROM DEBDF.  IDID = ',I3)
-        IF ( Kprint>1.AND.Ipass==1 ) WRITE (Lun,99005)
+        IF( Kprint>1 .AND. Ipass==1 ) WRITE (Lun,99005)
         99005 FORMAT (/' ------------  DEBDF PASSED TESTS  ------------')
-        IF ( Kprint>=1.AND.Ipass==0 ) WRITE (Lun,99006)
+        IF( Kprint>=1 .AND. Ipass==0 ) WRITE (Lun,99006)
         99006 FORMAT (/' ************  DEBDF FAILED TESTS  ************')
         RETURN
       END IF
@@ -301,8 +297,7 @@ CONTAINS
   END SUBROUTINE QXBDF
   !** QXRKF
   SUBROUTINE QXRKF(Lun,Kprint,Ipass)
-    !>
-    !  Test the DEPAC routine DERKF.
+    !> Test the DEPAC routine DERKF.
     !***
     ! **Library:**   SLATEC
     !***
@@ -354,14 +349,14 @@ CONTAINS
     !
     !     Declare arguments.
     !
-    INTEGER Lun, Kprint, Ipass
+    INTEGER :: Lun, Kprint, Ipass
     !
     !     Declare local variables.
     !
-    INTEGER idid, info(15), iwork(34), n, liw, lrw
-    REAL(SP) abserr(1), r, relerr(1), reltol, rwork(61), t, tout, u(4)
+    INTEGER :: idid, info(15), iwork(34), n, liw, lrw
+    REAL(SP) :: abserr(1), r, relerr(1), reltol, rwork(61), t, tout, u(4)
     !* FIRST EXECUTABLE STATEMENT  QXRKF
-    IF ( Kprint>=2 ) WRITE (Lun,99001)
+    IF( Kprint>=2 ) WRITE (Lun,99001)
     !
     ! FORMATs.
     !
@@ -386,26 +381,26 @@ CONTAINS
     info(2) = 0
     info(3) = 1
     info(4) = 0
-    IF ( Kprint>2 ) WRITE (Lun,99002) relerr, abserr, t, (1.0E0)
+    IF( Kprint>2 ) WRITE (Lun,99002) relerr, abserr, t, (1.0E0)
     99002 FORMAT (/' RELERR = ',E16.8,'   ABSERR =',E16.8/12X,'T',19X,'R'/2E20.8)
     DO
       !
       CALL DERKF(FDEQC,n,t,u,tout,info,relerr,abserr,idid,rwork,lrw,iwork,liw)
       r = SQRT(u(1)*u(1)+u(2)*u(2))
-      IF ( ABS(r-1.0E0)>reltol ) Ipass = 0
-      IF ( Kprint>2 ) WRITE (Lun,99003) t, r
+      IF( ABS(r-1.0E0)>reltol ) Ipass = 0
+      IF( Kprint>2 ) WRITE (Lun,99003) t, r
       99003 FORMAT (2E20.8)
       info(1) = 1
-      IF ( idid/=1 ) THEN
+      IF( idid/=1 ) THEN
         !
         !     Finish up.
         !
-        IF ( idid<1 ) Ipass = 0
-        IF ( Kprint>1.AND.idid<1 ) WRITE (Lun,99004) idid
+        IF( idid<1 ) Ipass = 0
+        IF( Kprint>1 .AND. idid<1 ) WRITE (Lun,99004) idid
         99004 FORMAT (1X,'ERROR RETURN FROM DERKF.  IDID = ',I3)
-        IF ( Kprint>1.AND.Ipass==1 ) WRITE (Lun,99005)
+        IF( Kprint>1 .AND. Ipass==1 ) WRITE (Lun,99005)
         99005 FORMAT (/' ------------  DERKF PASSED TESTS  ------------')
-        IF ( Kprint>=1.AND.Ipass==0 ) WRITE (Lun,99006)
+        IF( Kprint>=1 .AND. Ipass==0 ) WRITE (Lun,99006)
         99006 FORMAT (/' ************  DERKF FAILED TESTS  ************')
         RETURN
       END IF
@@ -413,8 +408,7 @@ CONTAINS
   END SUBROUTINE QXRKF
   !** QXBVSP
   SUBROUTINE QXBVSP(Lun,Kprint,Ipass)
-    !>
-    !  Quick check for BVSUP.
+    !> Quick check for BVSUP.
     !***
     ! **Library:**   SLATEC
     !***
@@ -435,12 +429,12 @@ CONTAINS
     USE SAVEX, ONLY : xsave_com
     USE slatec, ONLY : BVSUP
     USE common_mod, ONLY : PASS
-    INTEGER numort, nxpts
-    REAL(SP) a(2,4), abser, ae, alpha(2), b(2,4), beta(2), re, reler, sve, tol, &
+    INTEGER :: numort, nxpts
+    REAL(SP) :: a(2,4), abser, ae, alpha(2), b(2,4), beta(2), re, reler, sve, tol, &
       work(1000), y(4,15)
-    INTEGER i, iflag, igofx, Ipass, ipss, j, kont, kount, Kprint, l, &
+    INTEGER :: i, iflag, igofx, Ipass, ipss, j, kont, kount, Kprint, l, &
       Lun, ncomp, ndiw, ndw, neqivp, nfc, nic, nrowa, nrowb, nrowy
-    INTEGER itmp(9), iwork(100)
+    INTEGER :: itmp(9), iwork(100)
     CHARACTER(4) :: msg
     REAL, PARAMETER :: yans(2,15) = RESHAPE( [ 5.000000000E+00, -6.888880126E-01, &
       8.609248635E+00, -1.083092311E+00, 1.674923836E+01, -2.072210073E+00, &
@@ -453,7 +447,7 @@ CONTAINS
     REAL(SP) :: xpts(15) = [ 60., 55., 50., 45., 40., 38., 36., 34., &
       32., 31., 30.8, 30.6, 30.4, 30.2, 30. ]
     !* FIRST EXECUTABLE STATEMENT  QXBVSP
-    IF ( Kprint>=2 ) THEN
+    IF( Kprint>=2 ) THEN
       WRITE (Lun,99001)
       !
       99001 FORMAT ('1')
@@ -500,9 +494,9 @@ CONTAINS
     !-----IF IFLAG = 0, WE HAVE A SUCCESSFUL SOLUTION; OTHERWISE, SKIP
     !     THE ARGUMENT CHECKING AND GO TO THE END.
     !
-    IF ( iflag/=0 ) THEN
+    IF( iflag/=0 ) THEN
       Ipass = 0
-      IF ( Kprint>1 ) WRITE (Lun,99003) iflag
+      IF( Kprint>1 ) WRITE (Lun,99003) iflag
       99003 FORMAT (10X,'IFLAG =',I2)
       GOTO 300
     END IF
@@ -514,16 +508,16 @@ CONTAINS
       DO l = 1, 2
         abser = ABS(yans(l,j)-y(l,j))
         reler = abser/ABS(yans(l,j))
-        IF ( reler>tol.AND.abser>tol ) Ipass = 0
+        IF( reler>tol .AND. abser>tol ) Ipass = 0
       END DO
     END DO
     !
     !-----CHECK FOR SUPPRESSION OF PRINTING.
     !
-    IF ( Kprint==0.OR.(Kprint==1.AND.Ipass==1) ) GOTO 400
+    IF( Kprint==0 .OR. (Kprint==1 .AND. Ipass==1) ) GOTO 400
     !
-    IF ( Kprint/=1.OR.Ipass/=0 ) THEN
-      IF ( Kprint>=3.OR.Ipass==0 ) THEN
+    IF( Kprint/=1 .OR. Ipass/=0 ) THEN
+      IF( Kprint>=3 .OR. Ipass==0 ) THEN
         WRITE (Lun,99004)
         99004 FORMAT (/' ACCURACY TEST')
         WRITE (Lun,99005) numort
@@ -537,10 +531,10 @@ CONTAINS
           msg = 'PASS'
           abser = ABS(yans(1,j)-y(1,j))
           reler = abser/ABS(yans(1,j))
-          IF ( reler>tol.AND.abser>tol ) msg = 'FAIL'
+          IF( reler>tol .AND. abser>tol ) msg = 'FAIL'
           abser = ABS(yans(2,j)-y(2,j))
           reler = abser/ABS(yans(2,j))
-          IF ( reler>tol.AND.abser>tol ) msg = 'FAIL'
+          IF( reler>tol .AND. abser>tol ) msg = 'FAIL'
           WRITE (Lun,99008) xpts(j), y(1,j), y(2,j), yans(1,j), yans(2,j), msg
           99008 FORMAT (F5.1,4E20.7,5X,A)
         END DO
@@ -553,7 +547,7 @@ CONTAINS
     !
     !-----ERROR MESSAGE TESTS.
     !
-    IF ( Kprint==1 ) GOTO 400
+    IF( Kprint==1 ) GOTO 400
     kont = 1
     WRITE (Lun,99009)
     99009 FORMAT (/' (7) TESTS OF IFLAG VALUES')
@@ -573,7 +567,7 @@ CONTAINS
         CASE (2)
           !
           WRITE (Lun,99013) iflag
-          IF ( iflag==-2 ) itmp(kont) = 1
+          IF( iflag==-2 ) itmp(kont) = 1
           kont = kont + 1
           !
           !-----RE OR AE NEGATIVE
@@ -585,7 +579,7 @@ CONTAINS
         CASE (3)
           !
           WRITE (Lun,99013) iflag
-          IF ( iflag==-2 ) itmp(kont) = 1
+          IF( iflag==-2 ) itmp(kont) = 1
           kont = kont + 1
           !
           !-----NROWA LESS THAN NIC
@@ -603,7 +597,7 @@ CONTAINS
           !
           WRITE (Lun,99010) iflag
           99010 FORMAT (/' IFLAG SHOULD BE -1, IFLAG =',I3)
-          IF ( iflag==-1 ) itmp(kont) = 1
+          IF( iflag==-1 ) itmp(kont) = 1
           kont = kont + 1
           !-----INCORRECT ORDERING OF XPTS
           kount = 7
@@ -614,12 +608,12 @@ CONTAINS
         CASE (7)
           !
           WRITE (Lun,99013) iflag
-          IF ( iflag==-2 ) itmp(kont) = 1
+          IF( iflag==-2 ) itmp(kont) = 1
           GOTO 300
         CASE DEFAULT
           !
           WRITE (Lun,99013) iflag
-          IF ( iflag==-2 ) itmp(kont) = 1
+          IF( iflag==-2 ) itmp(kont) = 1
           kont = kont + 1
           !
           !-----IGOFX NOT EQUAL TO 0 OR 1
@@ -631,7 +625,7 @@ CONTAINS
     END DO
     !
     WRITE (Lun,99013) iflag
-    IF ( iflag==-2 ) itmp(kont) = 1
+    IF( iflag==-2 ) itmp(kont) = 1
     kont = kont + 1
     !-----NROWB LESS THAN NFC
     kount = 5
@@ -639,7 +633,7 @@ CONTAINS
     nrowb = 0
     !
     200  WRITE (Lun,99013) iflag
-    IF ( iflag==-2 ) itmp(kont) = 1
+    IF( iflag==-2 ) itmp(kont) = 1
     kont = kont + 1
     !-----STORAGE ALLOCATION IS INSUFFICIENT
     kount = 6
@@ -661,9 +655,9 @@ CONTAINS
     Ipass = Ipass*ipss
     !
     400 CONTINUE
-    IF ( Ipass==1.AND.Kprint>1 ) WRITE (Lun,99011)
+    IF( Ipass==1 .AND. Kprint>1 ) WRITE (Lun,99011)
     99011 FORMAT (/' ****************BVSUP PASSED ALL TESTS***************')
-    IF ( Ipass==0.AND.Kprint/=0 ) WRITE (Lun,99012)
+    IF( Ipass==0 .AND. Kprint/=0 ) WRITE (Lun,99012)
     99012 FORMAT (/' ****************BVSUP FAILED SOME TESTS**************')
     RETURN
     99013 FORMAT (/' IFLAG SHOULD BE -2, IFLAG =',I3)
@@ -675,8 +669,7 @@ PROGRAM TEST43
   USE slatec, ONLY : I1MACH, XSETF, XSETUN, XERMAX
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
-  !>
-  !  Driver for testing SLATEC subprograms
+  !> Driver for testing SLATEC subprograms
   !***
   ! **Library:**   SLATEC
   !***
@@ -723,7 +716,7 @@ PROGRAM TEST43
   !   890618  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900524  Cosmetic changes to code.  (WRB)
-  INTEGER ipass, kprint, lin, lun, nfail
+  INTEGER :: ipass, kprint, lin, lun, nfail
   !* FIRST EXECUTABLE STATEMENT  TEST43
   lun = I1MACH(2)
   lin = I1MACH(1)
@@ -734,7 +727,7 @@ PROGRAM TEST43
   CALL GET_ARGUMENT(kprint)
   CALL XERMAX(1000)
   CALL XSETUN(lun)
-  IF ( kprint<=1 ) THEN
+  IF( kprint<=1 ) THEN
     CALL XSETF(0)
   ELSE
     CALL XSETF(1)
@@ -743,26 +736,26 @@ PROGRAM TEST43
   !     Test DEABM
   !
   CALL QXABM(lun,kprint,ipass)
-  IF ( ipass==0 ) nfail = nfail + 1
+  IF( ipass==0 ) nfail = nfail + 1
   !
   !     Test DEBDF
   !
   CALL QXBDF(lun,kprint,ipass)
-  IF ( ipass==0 ) nfail = nfail + 1
+  IF( ipass==0 ) nfail = nfail + 1
   !
   !     Test DERKF
   !
   CALL QXRKF(lun,kprint,ipass)
-  IF ( ipass==0 ) nfail = nfail + 1
+  IF( ipass==0 ) nfail = nfail + 1
   !
   !     Test BVSUP
   !
   CALL QXBVSP(lun,kprint,ipass)
-  IF ( ipass==0 ) nfail = nfail + 1
+  IF( ipass==0 ) nfail = nfail + 1
   !
   !     Write PASS or FAIL message
   !
-  IF ( nfail==0 ) THEN
+  IF( nfail==0 ) THEN
     WRITE (lun,99001)
     99001 FORMAT (/' --------------TEST43 PASSED ALL TESTS----------------')
   ELSE

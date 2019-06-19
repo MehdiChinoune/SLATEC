@@ -5,8 +5,7 @@ MODULE TEST40_MOD
 CONTAINS
   !** CDQAG
   SUBROUTINE CDQAG(Lun,Kprint,Ipass)
-    !>
-    !  Quick check for DQAG.
+    !> Quick check for DQAG.
     !***
     ! **Library:**   SLATEC
     !***
@@ -25,15 +24,15 @@ CONTAINS
     USE slatec, ONLY : D1MACH, DQAG
 
     ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
-    INTEGER ierv(2), Lun
+    INTEGER :: ierv(2), Lun
     REAL(DP) :: a, abserr, b, epmach, epsabs, epsrel, error, result, uflow, work(400)
-    INTEGER ier, ip, Ipass, iwork(100), key, Kprint, last, lenw, limit, neval
+    INTEGER :: ier, ip, Ipass, iwork(100), key, Kprint, last, lenw, limit, neval
     REAL(DP), PARAMETER :: pi = 0.31415926535897932D+01
     REAL(DP), PARAMETER :: exact1 = 0.1154700538379252D+01
     REAL(DP), PARAMETER :: exact2 = 0.11780972450996172D+00
     REAL(DP), PARAMETER :: exact3 = 0.1855802D+02
     !* FIRST EXECUTABLE STATEMENT  CDQAG
-    IF ( Kprint>=2 ) WRITE (Lun,'(''1DQAG QUICK CHECK''/)')
+    IF( Kprint>=2 ) WRITE (Lun,'(''1DQAG QUICK CHECK''/)')
     !
     ! TEST ON IER = 0
     !
@@ -51,8 +50,8 @@ CONTAINS
     ierv(1) = ier
     ip = 0
     error = ABS(exact1-result)
-    IF ( ier==0.AND.error<=abserr.AND.abserr<=epsrel*ABS(exact1) ) ip = 1
-    IF ( ip==0 ) Ipass = 0
+    IF( ier==0 .AND. error<=abserr .AND. abserr<=epsrel*ABS(exact1) ) ip = 1
+    IF( ip==0 ) Ipass = 0
     CALL DPRIN(Lun,0,Kprint,ip,exact1,result,abserr,neval,ierv,1)
     !
     ! TEST ON IER = 1
@@ -64,8 +63,8 @@ CONTAINS
       last,iwork,work)
     ierv(1) = ier
     ip = 0
-    IF ( ier==1 ) ip = 1
-    IF ( ip==0 ) Ipass = 0
+    IF( ier==1 ) ip = 1
+    IF( ip==0 ) Ipass = 0
     CALL DPRIN(Lun,1,Kprint,ip,exact2,result,abserr,neval,ierv,1)
     !
     ! TEST ON IER = 2 OR 1
@@ -78,8 +77,8 @@ CONTAINS
     ierv(1) = ier
     ierv(2) = 1
     ip = 0
-    IF ( ier==2.OR.ier==1 ) ip = 1
-    IF ( ip==0 ) Ipass = 0
+    IF( ier==2 .OR. ier==1 ) ip = 1
+    IF( ip==0 ) Ipass = 0
     CALL DPRIN(Lun,2,Kprint,ip,exact2,result,abserr,neval,ierv,2)
     !
     ! TEST ON IER = 3 OR 1
@@ -90,8 +89,8 @@ CONTAINS
     ierv(1) = ier
     ierv(2) = 1
     ip = 0
-    IF ( ier==3.OR.ier==1 ) ip = 1
-    IF ( ip==0 ) Ipass = 0
+    IF( ier==3 .OR. ier==1 ) ip = 1
+    IF( ip==0 ) Ipass = 0
     CALL DPRIN(Lun,3,Kprint,ip,exact3,result,abserr,neval,ierv,2)
     !
     ! TEST ON IER = 6
@@ -101,23 +100,22 @@ CONTAINS
       last,iwork,work)
     ierv(1) = ier
     ip = 0
-    IF ( ier==6.AND.result==0.0D+00.AND.abserr==0.0D+00.AND.neval==0.AND.&
+    IF( ier==6 .AND. result==0.0D+00 .AND. abserr==0.0D+00 .AND. neval==0 .AND. &
       last==0 ) ip = 1
-    IF ( ip==0 ) Ipass = 0
+    IF( ip==0 ) Ipass = 0
     CALL DPRIN(Lun,6,Kprint,ip,exact1,result,abserr,neval,ierv,1)
     !
-    IF ( Kprint>=1 ) THEN
-      IF ( Ipass==0 ) THEN
+    IF( Kprint>=1 ) THEN
+      IF( Ipass==0 ) THEN
         WRITE (Lun,'(/'' SOME TEST(S) IN CDQAG FAILED''/)')
-      ELSEIF ( Kprint>=2 ) THEN
+      ELSEIF( Kprint>=2 ) THEN
         WRITE (Lun,'(/'' ALL TEST(S) IN CDQAG PASSED''/)')
       END IF
     END IF
   END SUBROUTINE CDQAG
   !** CDQAGI
   SUBROUTINE CDQAGI(Lun,Kprint,Ipass)
-    !>
-    !  Quick check for DQAGI.
+    !> Quick check for DQAGI.
     !***
     ! **Library:**   SLATEC
     !***
@@ -137,16 +135,16 @@ CONTAINS
     USE slatec, ONLY : D1MACH, DQAGI
     !
     ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
-    INTEGER ierv(4), inf
+    INTEGER :: ierv(4), inf
     REAL(DP) :: abserr, bound, epmach, epsabs, epsrel, error, oflow, result, &
       uflow, work(800)
-    INTEGER ier, ip, Ipass, iwork(200), Kprint, last, lenw, limit, Lun, neval
+    INTEGER :: ier, ip, Ipass, iwork(200), Kprint, last, lenw, limit, Lun, neval
     REAL(DP), PARAMETER :: exact0 = 2.0D+00, exact1 = 0.115470066904D1
     REAL(DP), PARAMETER :: exact2 = 0.909864525656D-02
     REAL(DP), PARAMETER :: exact3 = 0.31415926535897932D+01
     REAL(DP), PARAMETER :: exact4 = 0.19984914554328673D+04
     !* FIRST EXECUTABLE STATEMENT  CDQAGI
-    IF ( Kprint>=2 ) WRITE (Lun,'(''1DQAGI QUICK CHECK''/)')
+    IF( Kprint>=2 ) WRITE (Lun,'(''1DQAGI QUICK CHECK''/)')
     !
     ! TEST ON IER = 0
     !
@@ -163,8 +161,8 @@ CONTAINS
     error = ABS(result-exact0)
     ierv(1) = ier
     ip = 0
-    IF ( ier==0.AND.error<=epsrel*ABS(exact0) ) ip = 1
-    IF ( ip==0 ) Ipass = 0
+    IF( ier==0 .AND. error<=epsrel*ABS(exact0) ) ip = 1
+    IF( ip==0 ) Ipass = 0
     CALL DPRIN(Lun,0,Kprint,ip,exact0,result,abserr,neval,ierv,1)
     !
     ! TEST ON IER = 1
@@ -173,8 +171,8 @@ CONTAINS
       iwork,work)
     ierv(1) = ier
     ip = 0
-    IF ( ier==1 ) ip = 1
-    IF ( ip==0 ) Ipass = 0
+    IF( ier==1 ) ip = 1
+    IF( ip==0 ) Ipass = 0
     CALL DPRIN(Lun,1,Kprint,ip,exact1,result,abserr,neval,ierv,1)
     !
     ! TEST ON IER = 2 OR 4 OR 1
@@ -186,8 +184,8 @@ CONTAINS
     ierv(2) = 4
     ierv(3) = 1
     ip = 0
-    IF ( ier==2.OR.ier==4.OR.ier==1 ) ip = 1
-    IF ( ip==0 ) Ipass = 0
+    IF( ier==2 .OR. ier==4 .OR. ier==1 ) ip = 1
+    IF( ip==0 ) Ipass = 0
     CALL DPRIN(Lun,2,Kprint,ip,exact2,result,abserr,neval,ierv,3)
     !
     ! TEST ON IER = 3 OR 4 OR 1 OR 2
@@ -199,8 +197,8 @@ CONTAINS
     ierv(3) = 1
     ierv(4) = 2
     ip = 0
-    IF ( ier==3.OR.ier==4.OR.ier==1.OR.ier==2 ) ip = 1
-    IF ( ip==0 ) Ipass = 0
+    IF( ier==3 .OR. ier==4 .OR. ier==1 .OR. ier==2 ) ip = 1
+    IF( ip==0 ) Ipass = 0
     CALL DPRIN(Lun,3,Kprint,ip,exact3,result,abserr,neval,ierv,4)
     !
     ! TEST ON IER = 4 OR 3 OR 1 OR 0
@@ -212,8 +210,8 @@ CONTAINS
     ierv(3) = 1
     ierv(4) = 0
     ip = 0
-    IF ( ier==4.OR.ier==3.OR.ier==1.OR.ier==0 ) ip = 1
-    IF ( ip==0 ) Ipass = 0
+    IF( ier==4 .OR. ier==3 .OR. ier==1 .OR. ier==0 ) ip = 1
+    IF( ip==0 ) Ipass = 0
     CALL DPRIN(Lun,4,Kprint,ip,exact4,result,abserr,neval,ierv,4)
     !
     ! TEST ON IER = 5
@@ -223,8 +221,8 @@ CONTAINS
       last,iwork,work)
     ierv(1) = ier
     ip = 0
-    IF ( ier==5 ) ip = 1
-    IF ( ip==0 ) Ipass = 0
+    IF( ier==5 ) ip = 1
+    IF( ip==0 ) Ipass = 0
     CALL DPRIN(Lun,5,Kprint,ip,oflow,result,abserr,neval,ierv,1)
     !
     ! TEST ON IER = 6
@@ -233,23 +231,22 @@ CONTAINS
       lenw,last,iwork,work)
     ierv(1) = ier
     ip = 0
-    IF ( ier==6.AND.result==0.0D+00.AND.abserr==0.0D+00.AND.neval==0.AND.&
+    IF( ier==6 .AND. result==0.0D+00 .AND. abserr==0.0D+00 .AND. neval==0 .AND. &
       last==0 ) ip = 1
-    IF ( ip==0 ) Ipass = 0
+    IF( ip==0 ) Ipass = 0
     CALL DPRIN(Lun,6,Kprint,ip,exact1,result,abserr,neval,ierv,1)
     !
-    IF ( Kprint>=1 ) THEN
-      IF ( Ipass==0 ) THEN
+    IF( Kprint>=1 ) THEN
+      IF( Ipass==0 ) THEN
         WRITE (Lun,'(/'' SOME TEST(S) IN CDQAGI FAILED''/)')
-      ELSEIF ( Kprint>=2 ) THEN
+      ELSEIF( Kprint>=2 ) THEN
         WRITE (Lun,'(/'' ALL TEST(S) IN CDQAGI PASSED''/)')
       END IF
     END IF
   END SUBROUTINE CDQAGI
   !** CDQAGP
   SUBROUTINE CDQAGP(Lun,Kprint,Ipass)
-    !>
-    !  Quick check for DQAGP.
+    !> Quick check for DQAGP.
     !***
     ! **Library:**   SLATEC
     !***
@@ -268,10 +265,10 @@ CONTAINS
     USE slatec, ONLY : D1MACH, DQAGP
 
     ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
-    INTEGER ierv(4)
+    INTEGER :: ierv(4)
     REAL(DP) :: a, abserr, b, epmach, epsabs, epsrel, error, oflow, &
       points(5), result, uflow, work(405)
-    INTEGER ier, ip, Ipass, iwork(205), Kprint, last, leniw, lenw, limit, &
+    INTEGER :: ier, ip, Ipass, iwork(205), Kprint, last, leniw, lenw, limit, &
       Lun, neval, npts2
     REAL(DP), PARAMETER :: exact1 = 0.4285277667368085D+01
     REAL(DP), PARAMETER :: exact2 = 0.909864525656D-2
@@ -279,7 +276,7 @@ CONTAINS
     REAL(DP), PARAMETER :: p1 = 0.1428571428571428D+00
     REAL(DP), PARAMETER :: p2 = 0.6666666666666667D+00
     !* FIRST EXECUTABLE STATEMENT  CDQAGP
-    IF ( Kprint>=2 ) WRITE (Lun,'(''1DQAGP QUICK CHECK''/)')
+    IF( Kprint>=2 ) WRITE (Lun,'(''1DQAGP QUICK CHECK''/)')
     !
     ! TEST ON IER = 0
     !
@@ -300,8 +297,8 @@ CONTAINS
     error = ABS(result-exact1)
     ierv(1) = ier
     ip = 0
-    IF ( ier==0.AND.error<=epsrel*ABS(exact1) ) ip = 1
-    IF ( ip==0 ) Ipass = 0
+    IF( ier==0 .AND. error<=epsrel*ABS(exact1) ) ip = 1
+    IF( ip==0 ) Ipass = 0
     CALL DPRIN(Lun,0,Kprint,ip,exact1,result,abserr,neval,ierv,1)
     !
     ! TEST ON IER = 1
@@ -312,8 +309,8 @@ CONTAINS
       leniw,lenw,last,iwork,work)
     ierv(1) = ier
     ip = 0
-    IF ( ier==1 ) ip = 1
-    IF ( ip==0 ) Ipass = 0
+    IF( ier==1 ) ip = 1
+    IF( ip==0 ) Ipass = 0
     CALL DPRIN(Lun,1,Kprint,ip,exact1,result,abserr,neval,ierv,1)
     !
     ! TEST ON IER = 2, 4, 1 OR 3
@@ -331,8 +328,8 @@ CONTAINS
     ierv(3) = 1
     ierv(4) = 3
     ip = 0
-    IF ( ier==2.OR.ier==4.OR.ier==1.OR.ier==3 ) ip = 1
-    IF ( ip==0 ) Ipass = 0
+    IF( ier==2 .OR. ier==4 .OR. ier==1 .OR. ier==3 ) ip = 1
+    IF( ip==0 ) Ipass = 0
     CALL DPRIN(Lun,2,Kprint,ip,exact2,result,abserr,neval,ierv,4)
     !
     ! TEST ON IER = 3 OR 4 OR 1 OR 2
@@ -349,8 +346,8 @@ CONTAINS
     ierv(3) = 1
     ierv(4) = 2
     ip = 0
-    IF ( ier==3.OR.ier==4.OR.ier==1.OR.ier==2 ) ip = 1
-    IF ( ip==0 ) Ipass = 0
+    IF( ier==3 .OR. ier==4 .OR. ier==1 .OR. ier==2 ) ip = 1
+    IF( ip==0 ) Ipass = 0
     CALL DPRIN(Lun,3,Kprint,ip,exact3,result,abserr,neval,ierv,4)
     !
     ! TEST ON IER = 5
@@ -360,8 +357,8 @@ CONTAINS
       leniw,lenw,last,iwork,work)
     ierv(1) = ier
     ip = 0
-    IF ( ier==5 ) ip = 1
-    IF ( ip==0 ) Ipass = 0
+    IF( ier==5 ) ip = 1
+    IF( ip==0 ) Ipass = 0
     oflow = D1MACH(2)
     CALL DPRIN(Lun,5,Kprint,ip,oflow,result,abserr,neval,ierv,1)
     !
@@ -377,23 +374,22 @@ CONTAINS
       leniw,lenw,last,iwork,work)
     ierv(1) = ier
     ip = 0
-    IF ( ier==6.AND.result==0.0D+00.AND.abserr==0.0D+00.AND.neval==0.AND.&
+    IF( ier==6 .AND. result==0.0D+00 .AND. abserr==0.0D+00 .AND. neval==0 .AND. &
       last==0 ) ip = 1
-    IF ( ip==0 ) Ipass = 0
+    IF( ip==0 ) Ipass = 0
     CALL DPRIN(Lun,6,Kprint,ip,exact1,result,abserr,neval,ierv,1)
     !
-    IF ( Kprint>=1 ) THEN
-      IF ( Ipass==0 ) THEN
+    IF( Kprint>=1 ) THEN
+      IF( Ipass==0 ) THEN
         WRITE (Lun,'(/'' SOME TEST(S) IN CDQAGP FAILED''/)')
-      ELSEIF ( Kprint>=2 ) THEN
+      ELSEIF( Kprint>=2 ) THEN
         WRITE (Lun,'(/'' ALL TEST(S) IN CDQAGP PASSED''/)')
       END IF
     END IF
   END SUBROUTINE CDQAGP
   !** CDQAGS
   SUBROUTINE CDQAGS(Lun,Kprint,Ipass)
-    !>
-    !  Quick check for DQAGS.
+    !> Quick check for DQAGS.
     !***
     ! **Library:**   SLATEC
     !***
@@ -414,17 +410,17 @@ CONTAINS
     USE slatec, ONLY : D1MACH, DQAGS
 
     ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
-    INTEGER ierv(5), Lun
+    INTEGER :: ierv(5), Lun
     REAL(DP) :: a, abserr, b, epmach, epsabs, epsrel, error, oflow, result, &
       uflow, work(800)
-    INTEGER ier, ip, Ipass, iwork(200), Kprint, last, lenw, limit, neval
+    INTEGER :: ier, ip, Ipass, iwork(200), Kprint, last, lenw, limit, neval
     REAL(DP), PARAMETER :: exact0 = 0.2D+01
     REAL(DP), PARAMETER :: exact1 = 0.115470066904D+01
     REAL(DP), PARAMETER :: exact2 = 0.909864525656D-02
     REAL(DP), PARAMETER :: exact3 = 0.31415926535897932D+01
     REAL(DP), PARAMETER :: exact4 = 0.19984914554328673D+04
     !* FIRST EXECUTABLE STATEMENT  CDQAGS
-    IF ( Kprint>=2 ) WRITE (Lun,'(''1DQAGS QUICK CHECK''/)')
+    IF( Kprint>=2 ) WRITE (Lun,'(''1DQAGS QUICK CHECK''/)')
     !
     ! TEST ON IER = 0
     !
@@ -441,8 +437,8 @@ CONTAINS
     error = ABS(result-exact0)
     ierv(1) = ier
     ip = 0
-    IF ( ier==0.AND.error<=epsrel*ABS(exact0) ) ip = 1
-    IF ( ip==0 ) Ipass = 0
+    IF( ier==0 .AND. error<=epsrel*ABS(exact0) ) ip = 1
+    IF( ip==0 ) Ipass = 0
     CALL DPRIN(Lun,0,Kprint,ip,exact0,result,abserr,neval,ierv,1)
     !
     ! TEST ON IER = 1
@@ -450,8 +446,8 @@ CONTAINS
     CALL DQAGS(DF1S,a,b,epsabs,epsrel,result,abserr,neval,ier,1,4,last,iwork,work)
     ierv(1) = ier
     ip = 0
-    IF ( ier==1 ) ip = 1
-    IF ( ip==0 ) Ipass = 0
+    IF( ier==1 ) ip = 1
+    IF( ip==0 ) Ipass = 0
     CALL DPRIN(Lun,1,Kprint,ip,exact1,result,abserr,neval,ierv,1)
     !
     ! TEST ON IER = 2 OR 4 OR 1
@@ -464,8 +460,8 @@ CONTAINS
     ierv(2) = 4
     ierv(3) = 1
     ip = 0
-    IF ( ier==2.OR.ier==4.OR.ier==1 ) ip = 1
-    IF ( ip==0 ) Ipass = 0
+    IF( ier==2 .OR. ier==4 .OR. ier==1 ) ip = 1
+    IF( ip==0 ) Ipass = 0
     CALL DPRIN(Lun,2,Kprint,ip,exact2,result,abserr,neval,ierv,3)
     !
     ! TEST ON IER = 3 OR 4 OR 1 OR 2
@@ -479,8 +475,8 @@ CONTAINS
     ierv(3) = 1
     ierv(4) = 2
     ip = 0
-    IF ( ier==3.OR.ier==4.OR.ier==1.OR.ier==2 ) ip = 1
-    IF ( ip==0 ) Ipass = 0
+    IF( ier==3 .OR. ier==4 .OR. ier==1 .OR. ier==2 ) ip = 1
+    IF( ip==0 ) Ipass = 0
     CALL DPRIN(Lun,3,Kprint,ip,exact3,result,abserr,neval,ierv,4)
     !
     ! TEST ON IER = 4, OR 5 OR 3 OR 1 OR 0
@@ -494,8 +490,8 @@ CONTAINS
     ierv(4) = 1
     ierv(5) = 0
     ip = 0
-    IF ( ier==5.OR.ier==4.OR.ier==3.OR.ier==1.OR.ier==0 ) ip = 1
-    IF ( ip==0 ) Ipass = 0
+    IF( ier==5 .OR. ier==4 .OR. ier==3 .OR. ier==1 .OR. ier==0 ) ip = 1
+    IF( ip==0 ) Ipass = 0
     CALL DPRIN(Lun,4,Kprint,ip,exact4,result,abserr,neval,ierv,5)
     !
     ! TEST ON IER = 5
@@ -505,8 +501,8 @@ CONTAINS
       iwork,work)
     ierv(1) = ier
     ip = 0
-    IF ( ier==5 ) ip = 1
-    IF ( ip==0 ) Ipass = 0
+    IF( ier==5 ) ip = 1
+    IF( ip==0 ) Ipass = 0
     CALL DPRIN(Lun,5,Kprint,ip,oflow,result,abserr,neval,ierv,1)
     !
     ! TEST ON IER = 6
@@ -515,23 +511,22 @@ CONTAINS
       last,iwork,work)
     ierv(1) = ier
     ip = 0
-    IF ( ier==6.AND.result==0.0D+00.AND.abserr==0.0D+00.AND.neval==0.AND.&
+    IF( ier==6 .AND. result==0.0D+00 .AND. abserr==0.0D+00 .AND. neval==0 .AND. &
       last==0 ) ip = 1
-    IF ( ip==0 ) Ipass = 0
+    IF( ip==0 ) Ipass = 0
     CALL DPRIN(Lun,6,Kprint,ip,exact1,result,abserr,neval,ierv,1)
     !
-    IF ( Kprint>=1 ) THEN
-      IF ( Ipass==0 ) THEN
+    IF( Kprint>=1 ) THEN
+      IF( Ipass==0 ) THEN
         WRITE (Lun,'(/'' SOME TEST(S) IN CDQAGS FAILED''/)')
-      ELSEIF ( Kprint>=2 ) THEN
+      ELSEIF( Kprint>=2 ) THEN
         WRITE (Lun,'(/'' ALL TEST(S) IN CDQAGS PASSED''/)')
       END IF
     END IF
   END SUBROUTINE CDQAGS
   !** CDQAWC
   SUBROUTINE CDQAWC(Lun,Kprint,Ipass)
-    !>
-    !  Quick check for DQAWC.
+    !> Quick check for DQAWC.
     !***
     ! **Library:**   SLATEC
     !***
@@ -550,14 +545,14 @@ CONTAINS
     USE slatec, ONLY : D1MACH, DQAWC
 
     ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
-    INTEGER ierv(2), Lun
+    INTEGER :: ierv(2), Lun
     REAL(DP) :: a, abserr, b, epmach, epsabs, epsrel, error, c, result, &
       uflow, work(800)
-    INTEGER ier, ip, Ipass, iwork(200), Kprint, last, lenw, limit, neval
+    INTEGER :: ier, ip, Ipass, iwork(200), Kprint, last, lenw, limit, neval
     REAL(DP), PARAMETER :: exact0 = -0.6284617285065624D+03
     REAL(DP), PARAMETER :: exact1 = 0.1855802D+01
     !* FIRST EXECUTABLE STATEMENT  CDQAWC
-    IF ( Kprint>=2 ) WRITE (Lun,'(''1DQAWC QUICK CHECK''/)')
+    IF( Kprint>=2 ) WRITE (Lun,'(''1DQAWC QUICK CHECK''/)')
     !
     ! TEST ON IER = 0
     !
@@ -575,8 +570,8 @@ CONTAINS
     ierv(1) = ier
     ip = 0
     error = ABS(exact0-result)
-    IF ( ier==0.AND.error<=abserr.AND.abserr<=epsrel*ABS(exact0) ) ip = 1
-    IF ( ip==0 ) Ipass = 0
+    IF( ier==0 .AND. error<=abserr .AND. abserr<=epsrel*ABS(exact0) ) ip = 1
+    IF( ip==0 ) Ipass = 0
     CALL DPRIN(Lun,0,Kprint,ip,exact0,result,abserr,neval,ierv,1)
     !
     ! TEST ON IER = 1
@@ -585,8 +580,8 @@ CONTAINS
       iwork,work)
     ierv(1) = ier
     ip = 0
-    IF ( ier==1 ) ip = 1
-    IF ( ip==0 ) Ipass = 0
+    IF( ier==1 ) ip = 1
+    IF( ip==0 ) Ipass = 0
     CALL DPRIN(Lun,1,Kprint,ip,exact0,result,abserr,neval,ierv,1)
     !
     ! TEST ON IER = 2 OR 1
@@ -597,8 +592,8 @@ CONTAINS
     ierv(1) = ier
     ierv(2) = 1
     ip = 0
-    IF ( ier==2.OR.ier==1 ) ip = 1
-    IF ( ip==0 ) Ipass = 0
+    IF( ier==2 .OR. ier==1 ) ip = 1
+    IF( ip==0 ) Ipass = 0
     CALL DPRIN(Lun,2,Kprint,ip,exact0,result,abserr,neval,ierv,2)
     !
     ! TEST ON IER = 3 OR 1
@@ -608,8 +603,8 @@ CONTAINS
     ierv(1) = ier
     ierv(2) = 1
     ip = 0
-    IF ( ier==3.OR.ier==1 ) ip = 1
-    IF ( ip==0 ) Ipass = 0
+    IF( ier==3 .OR. ier==1 ) ip = 1
+    IF( ip==0 ) Ipass = 0
     CALL DPRIN(Lun,3,Kprint,ip,exact1,result,abserr,neval,ierv,2)
     !
     ! TEST ON IER = 6
@@ -620,22 +615,21 @@ CONTAINS
       last,iwork,work)
     ierv(1) = ier
     ip = 0
-    IF ( ier==6 ) ip = 1
-    IF ( ip==0 ) Ipass = 0
+    IF( ier==6 ) ip = 1
+    IF( ip==0 ) Ipass = 0
     CALL DPRIN(Lun,6,Kprint,ip,exact0,result,abserr,neval,ierv,1)
     !
-    IF ( Kprint>=1 ) THEN
-      IF ( Ipass==0 ) THEN
+    IF( Kprint>=1 ) THEN
+      IF( Ipass==0 ) THEN
         WRITE (Lun,'(/'' SOME TEST(S) IN CDQAWC FAILED''/)')
-      ELSEIF ( Kprint>=2 ) THEN
+      ELSEIF( Kprint>=2 ) THEN
         WRITE (Lun,'(/'' ALL TEST(S) IN CDQAWC PASSED''/)')
       END IF
     END IF
   END SUBROUTINE CDQAWC
   !** CDQAWF
   SUBROUTINE CDQAWF(Lun,Kprint,Ipass)
-    !>
-    !  Quick check for DQAWF.
+    !> Quick check for DQAWF.
     !***
     ! **Library:**   SLATEC
     !***
@@ -654,13 +648,13 @@ CONTAINS
     USE slatec, ONLY : D1MACH, DQAWF
 
     ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
-    INTEGER ierv(4), integr, iwork(450), leniw, Lun, maxp1
+    INTEGER :: ierv(4), integr, iwork(450), leniw, Lun, maxp1
     REAL(DP) :: a, abserr, epsabs, epmach, error, omega, result, uflow, work(1425)
-    INTEGER ier, ip, Ipass, Kprint, lenw, limit, limlst, lst, neval
+    INTEGER :: ier, ip, Ipass, Kprint, lenw, limit, limlst, lst, neval
     REAL(DP), PARAMETER :: exact0 = 0.1422552162575912D+01
     REAL(DP), PARAMETER :: pi = 0.31415926535897932D+01
     !* FIRST EXECUTABLE STATEMENT  CDQAWF
-    IF ( Kprint>=2 ) WRITE (Lun,'(''1DQAWF QUICK CHECK''/)')
+    IF( Kprint>=2 ) WRITE (Lun,'(''1DQAWF QUICK CHECK''/)')
     !
     ! TEST ON IER = 0
     !
@@ -680,8 +674,8 @@ CONTAINS
     ierv(1) = ier
     ip = 0
     error = ABS(exact0-result)
-    IF ( ier==0.AND.error<=abserr.AND.abserr<=epsabs ) ip = 1
-    IF ( ip==0 ) Ipass = 0
+    IF( ier==0 .AND. error<=abserr .AND. abserr<=epsabs ) ip = 1
+    IF( ip==0 ) Ipass = 0
     CALL DPRIN(Lun,0,Kprint,ip,exact0,result,abserr,neval,ierv,1)
     !
     ! TEST ON IER = 1
@@ -693,8 +687,8 @@ CONTAINS
       leniw,maxp1,lenw,iwork,work)
     ierv(1) = ier
     ip = 0
-    IF ( ier==1 ) ip = 1
-    IF ( ip==0 ) Ipass = 0
+    IF( ier==1 ) ip = 1
+    IF( ip==0 ) Ipass = 0
     CALL DPRIN(Lun,1,Kprint,ip,exact0,result,abserr,neval,ierv,1)
     !
     ! TEST ON IER = 3 OR 4 OR 1 OR 2
@@ -710,8 +704,8 @@ CONTAINS
     ierv(3) = 1
     ierv(4) = 2
     ip = 0
-    IF ( ier==3.OR.ier==4.OR.ier==1.OR.ier==2 ) ip = 1
-    IF ( ip==0 ) Ipass = 0
+    IF( ier==3 .OR. ier==4 .OR. ier==1 .OR. ier==2 ) ip = 1
+    IF( ip==0 ) Ipass = 0
     CALL DPRIN(Lun,3,Kprint,ip,pi,result,abserr,neval,ierv,4)
     !
     ! TEST ON IER = 6
@@ -722,8 +716,8 @@ CONTAINS
       leniw,maxp1,lenw,iwork,work)
     ierv(1) = ier
     ip = 0
-    IF ( ier==6 ) ip = 1
-    IF ( ip==0 ) Ipass = 0
+    IF( ier==6 ) ip = 1
+    IF( ip==0 ) Ipass = 0
     CALL DPRIN(Lun,6,Kprint,ip,exact0,result,abserr,neval,ierv,1)
     !
     ! TEST ON IER = 7
@@ -735,22 +729,21 @@ CONTAINS
       leniw,maxp1,lenw,iwork,work)
     ierv(1) = ier
     ip = 0
-    IF ( ier==7 ) ip = 1
-    IF ( ip==0 ) Ipass = 0
+    IF( ier==7 ) ip = 1
+    IF( ip==0 ) Ipass = 0
     CALL DPRIN(Lun,7,Kprint,ip,exact0,result,abserr,neval,ierv,1)
     !
-    IF ( Kprint>=1 ) THEN
-      IF ( Ipass==0 ) THEN
+    IF( Kprint>=1 ) THEN
+      IF( Ipass==0 ) THEN
         WRITE (Lun,'(/'' SOME TEST(S) IN CDQAWF FAILED''/)')
-      ELSEIF ( Kprint>=2 ) THEN
+      ELSEIF( Kprint>=2 ) THEN
         WRITE (Lun,'(/'' ALL TEST(S) IN CDQAWF PASSED''/)')
       END IF
     END IF
   END SUBROUTINE CDQAWF
   !** CDQAWO
   SUBROUTINE CDQAWO(Lun,Kprint,Ipass)
-    !>
-    !  Quick check for DQAWO.
+    !> Quick check for DQAWO.
     !***
     ! **Library:**   SLATEC
     !***
@@ -769,15 +762,15 @@ CONTAINS
     USE slatec, ONLY : D1MACH, DQAWO
 
     ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
-    INTEGER leniw
+    INTEGER :: leniw
     REAL(DP) :: a, abserr, b, epmach, epsabs, epsrel, error, oflow, omega, result, &
       uflow, work(1325)
-    INTEGER ier, ierv(4), integr, ip, Ipass, iwork(400), Kprint, last, lenw, &
+    INTEGER :: ier, ierv(4), integr, ip, Ipass, iwork(400), Kprint, last, lenw, &
       Lun, maxp1, neval
     REAL(DP), PARAMETER :: exact0 = 0.1042872789432789D+05
     REAL(DP), PARAMETER :: pi = 0.31415926535897932D+01
     !* FIRST EXECUTABLE STATEMENT  CDQAWO
-    IF ( Kprint>=2 ) WRITE (Lun,'(''1DQAWO QUICK CHECK''/)')
+    IF( Kprint>=2 ) WRITE (Lun,'(''1DQAWO QUICK CHECK''/)')
     !
     ! TEST ON IER = 0
     !
@@ -797,8 +790,8 @@ CONTAINS
     ierv(1) = ier
     ip = 0
     error = ABS(exact0-result)
-    IF ( ier==0.AND.error<=abserr.AND.abserr<=epsrel*ABS(exact0) ) ip = 1
-    IF ( ip==0 ) Ipass = 0
+    IF( ier==0 .AND. error<=abserr .AND. abserr<=epsrel*ABS(exact0) ) ip = 1
+    IF( ip==0 ) Ipass = 0
     CALL DPRIN(Lun,0,Kprint,ip,exact0,result,abserr,neval,ierv,1)
     !
     ! TEST ON IER = 1
@@ -809,8 +802,8 @@ CONTAINS
       leniw,maxp1,lenw,last,iwork,work)
     ierv(1) = ier
     ip = 0
-    IF ( ier==1 ) ip = 1
-    IF ( ip==0 ) Ipass = 0
+    IF( ier==1 ) ip = 1
+    IF( ip==0 ) Ipass = 0
     CALL DPRIN(Lun,1,Kprint,ip,exact0,result,abserr,neval,ierv,1)
     !
     ! TEST ON IER = 2 OR 4 OR 1
@@ -824,8 +817,8 @@ CONTAINS
     ierv(2) = 4
     ierv(3) = 1
     ip = 0
-    IF ( ier==2.OR.ier==4.OR.ier==1 ) ip = 1
-    IF ( ip==0 ) Ipass = 0
+    IF( ier==2 .OR. ier==4 .OR. ier==1 ) ip = 1
+    IF( ip==0 ) Ipass = 0
     CALL DPRIN(Lun,2,Kprint,ip,exact0,result,abserr,neval,ierv,3)
     !
     ! TEST ON IER = 3 OR 4 OR 1 OR 2
@@ -840,8 +833,8 @@ CONTAINS
     ierv(3) = 1
     ierv(4) = 2
     ip = 0
-    IF ( ier==3.OR.ier==4.OR.ier==1.OR.ier==2 ) ip = 1
-    IF ( ip==0 ) Ipass = 0
+    IF( ier==3 .OR. ier==4 .OR. ier==1 .OR. ier==2 ) ip = 1
+    IF( ip==0 ) Ipass = 0
     CALL DPRIN(Lun,3,Kprint,ip,pi,result,abserr,neval,ierv,4)
     !
     ! TEST ON IER = 5
@@ -852,8 +845,8 @@ CONTAINS
       leniw,maxp1,lenw,last,iwork,work)
     ierv(1) = ier
     ip = 0
-    IF ( ier==5 ) ip = 1
-    IF ( ip==0 ) Ipass = 0
+    IF( ier==5 ) ip = 1
+    IF( ip==0 ) Ipass = 0
     CALL DPRIN(Lun,5,Kprint,ip,oflow,result,abserr,neval,ierv,1)
     !
     ! TEST ON IER = 6
@@ -863,23 +856,22 @@ CONTAINS
       leniw,maxp1,lenw,last,iwork,work)
     ierv(1) = ier
     ip = 0
-    IF ( ier==6.AND.result==0.0D+00.AND.abserr==0.0D+00.AND.neval==0.AND.&
+    IF( ier==6 .AND. result==0.0D+00 .AND. abserr==0.0D+00 .AND. neval==0 .AND. &
       last==0 ) ip = 1
-    IF ( ip==0 ) Ipass = 0
+    IF( ip==0 ) Ipass = 0
     CALL DPRIN(Lun,6,Kprint,ip,exact0,result,abserr,neval,ierv,1)
     !
-    IF ( Kprint>=1 ) THEN
-      IF ( Ipass==0 ) THEN
+    IF( Kprint>=1 ) THEN
+      IF( Ipass==0 ) THEN
         WRITE (Lun,'(/'' SOME TEST(S) IN CDQAWO FAILED''/)')
-      ELSEIF ( Kprint>=2 ) THEN
+      ELSEIF( Kprint>=2 ) THEN
         WRITE (Lun,'(/'' ALL TEST(S) IN CDQAWO PASSED''/)')
       END IF
     END IF
   END SUBROUTINE CDQAWO
   !** CDQAWS
   SUBROUTINE CDQAWS(Lun,Kprint,Ipass)
-    !>
-    !  Quick check for DQAWS.
+    !> Quick check for DQAWS.
     !***
     ! **Library:**   SLATEC
     !***
@@ -898,14 +890,14 @@ CONTAINS
     USE slatec, ONLY : D1MACH, DQAWS
 
     ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
-    INTEGER ierv(2), Lun
+    INTEGER :: ierv(2), Lun
     REAL(DP) :: a, abserr, b, epmach, epsabs, epsrel, error, alfa, beta, &
       result, uflow, work(800)
-    INTEGER ier, ip, Ipass, iwork(200), Kprint, last, lenw, limit, neval, integr
+    INTEGER :: ier, ip, Ipass, iwork(200), Kprint, last, lenw, limit, neval, integr
     REAL(DP), PARAMETER :: exact0 = 0.5350190569223644D+00
     REAL(DP), PARAMETER :: exact1 = 0.1998491554328673D+04
     !* FIRST EXECUTABLE STATEMENT  CDQAWS
-    IF ( Kprint>=2 ) WRITE (Lun,'(''1DQAWS QUICK CHECK''/)')
+    IF( Kprint>=2 ) WRITE (Lun,'(''1DQAWS QUICK CHECK''/)')
     !
     ! TEST ON IER = 0
     !
@@ -925,8 +917,8 @@ CONTAINS
     ierv(1) = ier
     ip = 0
     error = ABS(exact0-result)
-    IF ( ier==0.AND.error<=epsrel*ABS(exact0) ) ip = 1
-    IF ( ip==0 ) Ipass = 0
+    IF( ier==0 .AND. error<=epsrel*ABS(exact0) ) ip = 1
+    IF( ip==0 ) Ipass = 0
     CALL DPRIN(Lun,0,Kprint,ip,exact0,result,abserr,neval,ierv,1)
     !
     ! TEST ON IER = 1
@@ -935,8 +927,8 @@ CONTAINS
       ier,2,8,last,iwork,work)
     ierv(1) = ier
     ip = 0
-    IF ( ier==1 ) ip = 1
-    IF ( ip==0 ) Ipass = 0
+    IF( ier==1 ) ip = 1
+    IF( ip==0 ) Ipass = 0
     CALL DPRIN(Lun,1,Kprint,ip,exact0,result,abserr,neval,ierv,1)
     !
     ! TEST ON IER = 2 OR 1
@@ -947,8 +939,8 @@ CONTAINS
     ierv(1) = ier
     ierv(2) = 1
     ip = 0
-    IF ( ier==2.OR.ier==1 ) ip = 1
-    IF ( ip==0 ) Ipass = 0
+    IF( ier==2 .OR. ier==1 ) ip = 1
+    IF( ip==0 ) Ipass = 0
     CALL DPRIN(Lun,2,Kprint,ip,exact0,result,abserr,neval,ierv,2)
     !
     ! TEST ON IER = 3 OR 1
@@ -958,8 +950,8 @@ CONTAINS
     ierv(1) = ier
     ierv(2) = 1
     ip = 0
-    IF ( ier==3.OR.ier==1 ) ip = 1
-    IF ( ip==0 ) Ipass = 0
+    IF( ier==3 .OR. ier==1 ) ip = 1
+    IF( ip==0 ) Ipass = 0
     CALL DPRIN(Lun,3,Kprint,ip,exact1,result,abserr,neval,ierv,2)
     !
     ! TEST ON IER = 6
@@ -969,22 +961,21 @@ CONTAINS
       ier,limit,lenw,last,iwork,work)
     ierv(1) = ier
     ip = 0
-    IF ( ier==6 ) ip = 1
-    IF ( ip==0 ) Ipass = 0
+    IF( ier==6 ) ip = 1
+    IF( ip==0 ) Ipass = 0
     CALL DPRIN(Lun,6,Kprint,ip,exact0,result,abserr,neval,ierv,1)
     !
-    IF ( Kprint>=1 ) THEN
-      IF ( Ipass==0 ) THEN
+    IF( Kprint>=1 ) THEN
+      IF( Ipass==0 ) THEN
         WRITE (Lun,'(/'' SOME TEST(S) IN CDQAWS FAILED''/)')
-      ELSEIF ( Kprint>=2 ) THEN
+      ELSEIF( Kprint>=2 ) THEN
         WRITE (Lun,'(/'' ALL TEST(S) IN CDQAWS PASSED''/)')
       END IF
     END IF
   END SUBROUTINE CDQAWS
   !** CDQNG
   SUBROUTINE CDQNG(Lun,Kprint,Ipass)
-    !>
-    !  Quick check for DQNG.
+    !> Quick check for DQNG.
     !***
     ! **Library:**   SLATEC
     !***
@@ -1003,13 +994,13 @@ CONTAINS
     USE slatec, ONLY : D1MACH, DQNG
 
     ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
-    INTEGER Lun
+    INTEGER :: Lun
     REAL(DP) :: a, abserr, b, epmach, epsabs, epsrel, error, result, uflow
-    INTEGER ier, ierv(1), ip, Ipass, Kprint, neval
+    INTEGER :: ier, ierv(1), ip, Ipass, Kprint, neval
     REAL(DP), PARAMETER :: exact1 = 0.7281029132255818D+00
     REAL(DP), PARAMETER :: exact2 = 0.1D+02
     !* FIRST EXECUTABLE STATEMENT  CDQNG
-    IF ( Kprint>=2 ) WRITE (Lun,'(''1DQNG QUICK CHECK''/)')
+    IF( Kprint>=2 ) WRITE (Lun,'(''1DQNG QUICK CHECK''/)')
     !
     ! TEST ON IER = 0
     !
@@ -1025,18 +1016,18 @@ CONTAINS
     ierv(1) = ier
     ip = 0
     error = ABS(exact1-result)
-    IF ( ier==0.AND.error<=abserr.AND.abserr<=epsrel*ABS(exact1) ) ip = 1
-    IF ( ip==0 ) Ipass = 0
-    IF ( Kprint/=0 ) CALL DPRIN(Lun,0,Kprint,ip,exact1,result,abserr,neval,ierv,1)
+    IF( ier==0 .AND. error<=abserr .AND. abserr<=epsrel*ABS(exact1) ) ip = 1
+    IF( ip==0 ) Ipass = 0
+    IF( Kprint/=0 ) CALL DPRIN(Lun,0,Kprint,ip,exact1,result,abserr,neval,ierv,1)
     !
     ! TEST ON IER = 1
     !
     CALL DQNG(DF2N,a,b,uflow,0.0D+00,result,abserr,neval,ier)
     ierv(1) = ier
     ip = 0
-    IF ( ier==1 ) ip = 1
-    IF ( ip==0 ) Ipass = 0
-    IF ( Kprint/=0 ) CALL DPRIN(Lun,1,Kprint,ip,exact2,result,abserr,neval,ierv,1)
+    IF( ier==1 ) ip = 1
+    IF( ip==0 ) Ipass = 0
+    IF( Kprint/=0 ) CALL DPRIN(Lun,1,Kprint,ip,exact2,result,abserr,neval,ierv,1)
     !
     ! TEST ON IER = 6
     !
@@ -1045,22 +1036,21 @@ CONTAINS
     CALL DQNG(DF1N,a,b,epsabs,0.0D+00,result,abserr,neval,ier)
     ierv(1) = ier
     ip = 0
-    IF ( ier==6.AND.result==0.0D+00.AND.abserr==0.0D+00.AND.neval==0 ) ip = 1
-    IF ( ip==0 ) Ipass = 0
-    IF ( Kprint/=0 ) CALL DPRIN(Lun,6,Kprint,ip,exact1,result,abserr,neval,ierv,1)
+    IF( ier==6 .AND. result==0.0D+00 .AND. abserr==0.0D+00 .AND. neval==0 ) ip = 1
+    IF( ip==0 ) Ipass = 0
+    IF( Kprint/=0 ) CALL DPRIN(Lun,6,Kprint,ip,exact1,result,abserr,neval,ierv,1)
     !
-    IF ( Kprint>=1 ) THEN
-      IF ( Ipass==0 ) THEN
+    IF( Kprint>=1 ) THEN
+      IF( Ipass==0 ) THEN
         WRITE (Lun,'(/'' SOME TEST(S) IN CDQNG FAILED''/)')
-      ELSEIF ( Kprint>=2 ) THEN
+      ELSEIF( Kprint>=2 ) THEN
         WRITE (Lun,'(/'' ALL TEST(S) IN CDQNG PASSED''/)')
       END IF
     END IF
   END SUBROUTINE CDQNG
   !** DF0C
   REAL(DP) FUNCTION DF0C(X)
-    !>
-    !  Subsidiary to
+    !> Subsidiary to
     !***
     ! **Library:**   SLATEC
     !***
@@ -1078,8 +1068,7 @@ CONTAINS
   END FUNCTION DF0C
   !** DF0F
   REAL(DP) FUNCTION DF0F(X)
-    !>
-    !  Subsidiary to
+    !> Subsidiary to
     !***
     ! **Library:**   SLATEC
     !***
@@ -1094,12 +1083,11 @@ CONTAINS
     REAL(DP) :: X
     !* FIRST EXECUTABLE STATEMENT  DF0F
     DF0F = 0.0D+00
-    IF ( X/=0.0D+00 ) DF0F = SIN(0.5D+02*X)/(X*SQRT(X))
+    IF( X/=0.0D+00 ) DF0F = SIN(0.5D+02*X)/(X*SQRT(X))
   END FUNCTION DF0F
   !** DF0O
   REAL(DP) FUNCTION DF0O(X)
-    !>
-    !  Subsidiary to
+    !> Subsidiary to
     !***
     ! **Library:**   SLATEC
     !***
@@ -1117,8 +1105,7 @@ CONTAINS
   END FUNCTION DF0O
   !** DF0S
   REAL(DP) FUNCTION DF0S(X)
-    !>
-    !  Subsidiary to
+    !> Subsidiary to
     !***
     ! **Library:**   SLATEC
     !***
@@ -1133,12 +1120,11 @@ CONTAINS
     REAL(DP) :: X
     !* FIRST EXECUTABLE STATEMENT  DF0S
     DF0S = 0.0D+00
-    IF ( X/=0.0D+00 ) DF0S = 0.1D+01/SQRT(X)
+    IF( X/=0.0D+00 ) DF0S = 0.1D+01/SQRT(X)
   END FUNCTION DF0S
   !** DF0WS
   REAL(DP) FUNCTION DF0WS(X)
-    !>
-    !  Subsidiary to
+    !> Subsidiary to
     !***
     ! **Library:**   SLATEC
     !***
@@ -1156,8 +1142,7 @@ CONTAINS
   END FUNCTION DF0WS
   !** DF1C
   REAL(DP) FUNCTION DF1C(X)
-    !>
-    !  Subsidiary to
+    !> Subsidiary to
     !***
     ! **Library:**   SLATEC
     !***
@@ -1172,12 +1157,11 @@ CONTAINS
     REAL(DP) :: X
     !* FIRST EXECUTABLE STATEMENT  DF1C
     DF1C = 0.0D+00
-    IF ( X/=0.33D+00 ) DF1C = (X-0.5D+00)*ABS(X-0.33D+00)**(-0.9D+00)
+    IF( X/=0.33D+00 ) DF1C = (X-0.5D+00)*ABS(X-0.33D+00)**(-0.9D+00)
   END FUNCTION DF1C
   !** DF1F
   REAL(DP) FUNCTION DF1F(X)
-    !>
-    !  Subsidiary to
+    !> Subsidiary to
     !***
     ! **Library:**   SLATEC
     !***
@@ -1194,12 +1178,11 @@ CONTAINS
     x1 = X + 0.1D+01
     DF1F = 0.5D+01/x1/x1
     y = 0.5D+01/x1
-    IF ( y>3.1415926535897932D0 ) DF1F = 0.0D0
+    IF( y>3.1415926535897932D0 ) DF1F = 0.0D0
   END FUNCTION DF1F
   !** DF1G
   REAL(DP) FUNCTION DF1G(X)
-    !>
-    !  Subsidiary to
+    !> Subsidiary to
     !***
     ! **Library:**   SLATEC
     !***
@@ -1218,8 +1201,7 @@ CONTAINS
   END FUNCTION DF1G
   !** DF1N
   REAL(DP) FUNCTION DF1N(X)
-    !>
-    !  Subsidiary to
+    !> Subsidiary to
     !***
     ! **Library:**   SLATEC
     !***
@@ -1237,8 +1219,7 @@ CONTAINS
   END FUNCTION DF1N
   !** DF1O
   REAL(DP) FUNCTION DF1O(X)
-    !>
-    !  Subsidiary to
+    !> Subsidiary to
     !***
     ! **Library:**   SLATEC
     !***
@@ -1253,12 +1234,11 @@ CONTAINS
     REAL(DP) :: X
     !* FIRST EXECUTABLE STATEMENT  DF1O
     DF1O = 0.1D+01
-    IF ( X>0.31415926535897932D+01 ) DF1O = 0.0D+00
+    IF( X>0.31415926535897932D+01 ) DF1O = 0.0D+00
   END FUNCTION DF1O
   !** DF1P
   REAL(DP) FUNCTION DF1P(X)
-    !>
-    !  Subsidiary to
+    !> Subsidiary to
     !***
     ! **Library:**   SLATEC
     !***
@@ -1280,12 +1260,11 @@ CONTAINS
     d1 = ABS(X-p1)
     d2 = ABS(X-p2)
     DF1P = 0.0D+00
-    IF ( d1/=0.0D+00.AND.d2/=0.0D+00 ) DF1P = d1**alfa1 + d2**alfa2
+    IF( d1/=0.0D+00 .AND. d2/=0.0D+00 ) DF1P = d1**alfa1 + d2**alfa2
   END FUNCTION DF1P
   !** DF1S
   REAL(DP) FUNCTION DF1S(X)
-    !>
-    !  Subsidiary to
+    !> Subsidiary to
     !***
     ! **Library:**   SLATEC
     !***
@@ -1303,8 +1282,7 @@ CONTAINS
   END FUNCTION DF1S
   !** DF1WS
   REAL(DP) FUNCTION DF1WS(X)
-    !>
-    !  Subsidiary to
+    !> Subsidiary to
     !***
     ! **Library:**   SLATEC
     !***
@@ -1319,12 +1297,11 @@ CONTAINS
     REAL(DP) :: X
     !* FIRST EXECUTABLE STATEMENT  DF1WS
     DF1WS = 0.00D+00
-    IF ( X-0.33D+00/=0.00D+00 ) DF1WS = ABS(X-0.33D+00)**(-0.999D+00)
+    IF( X-0.33D+00/=0.00D+00 ) DF1WS = ABS(X-0.33D+00)**(-0.999D+00)
   END FUNCTION DF1WS
   !** DF2G
   REAL(DP) FUNCTION DF2G(X)
-    !>
-    !  Subsidiary to
+    !> Subsidiary to
     !***
     ! **Library:**   SLATEC
     !***
@@ -1342,8 +1319,7 @@ CONTAINS
   END FUNCTION DF2G
   !** DF2N
   REAL(DP) FUNCTION DF2N(X)
-    !>
-    !  Subsidiary to
+    !> Subsidiary to
     !***
     ! **Library:**   SLATEC
     !***
@@ -1361,8 +1337,7 @@ CONTAINS
   END FUNCTION DF2N
   !** DF2O
   REAL(DP) FUNCTION DF2O(X)
-    !>
-    !  Subsidiary to
+    !> Subsidiary to
     !***
     ! **Library:**   SLATEC
     !***
@@ -1377,12 +1352,11 @@ CONTAINS
     REAL(DP) :: X
     !* FIRST EXECUTABLE STATEMENT  DF2O
     DF2O = 0.0D+00
-    IF ( X/=0.0D+00 ) DF2O = 0.1D+01/(X*X*SQRT(X))
+    IF( X/=0.0D+00 ) DF2O = 0.1D+01/(X*X*SQRT(X))
   END FUNCTION DF2O
   !** DF2P
   REAL(DP) FUNCTION DF2P(X)
-    !>
-    !  Subsidiary to
+    !> Subsidiary to
     !***
     ! **Library:**   SLATEC
     !***
@@ -1400,8 +1374,7 @@ CONTAINS
   END FUNCTION DF2P
   !** DF2S
   REAL(DP) FUNCTION DF2S(X)
-    !>
-    !  Subsidiary to
+    !> Subsidiary to
     !***
     ! **Library:**   SLATEC
     !***
@@ -1416,12 +1389,11 @@ CONTAINS
     REAL(DP) :: X
     !* FIRST EXECUTABLE STATEMENT  DF2S
     DF2S = 0.1D+03
-    IF ( X/=0.0D+00 ) DF2S = SIN(0.314159D+03*X)/(0.314159D+01*X)
+    IF( X/=0.0D+00 ) DF2S = SIN(0.314159D+03*X)/(0.314159D+01*X)
   END FUNCTION DF2S
   !** DF3G
   REAL(DP) FUNCTION DF3G(X)
-    !>
-    !  Subsidiary to
+    !> Subsidiary to
     !***
     ! **Library:**   SLATEC
     !***
@@ -1439,8 +1411,7 @@ CONTAINS
   END FUNCTION DF3G
   !** DF3P
   REAL(DP) FUNCTION DF3P(X)
-    !>
-    !  Subsidiary to
+    !> Subsidiary to
     !***
     ! **Library:**   SLATEC
     !***
@@ -1455,12 +1426,11 @@ CONTAINS
     REAL(DP) :: X
     !* FIRST EXECUTABLE STATEMENT  DF3P
     DF3P = 0.1D+01
-    IF ( X>0.31415926535897932D+01 ) DF3P = 0.0D+00
+    IF( X>0.31415926535897932D+01 ) DF3P = 0.0D+00
   END FUNCTION DF3P
   !** DF3S
   REAL(DP) FUNCTION DF3S(X)
-    !>
-    !  Subsidiary to
+    !> Subsidiary to
     !***
     ! **Library:**   SLATEC
     !***
@@ -1475,12 +1445,11 @@ CONTAINS
     REAL(DP) :: X
     !* FIRST EXECUTABLE STATEMENT  DF3S
     DF3S = 0.1D+01
-    IF ( X>0.31415926535897932D+01 ) DF3S = 0.0D+00
+    IF( X>0.31415926535897932D+01 ) DF3S = 0.0D+00
   END FUNCTION DF3S
   !** DF4P
   REAL(DP) FUNCTION DF4P(X)
-    !>
-    !  Subsidiary to
+    !> Subsidiary to
     !***
     ! **Library:**   SLATEC
     !***
@@ -1495,12 +1464,11 @@ CONTAINS
     REAL(DP) :: X
     !* FIRST EXECUTABLE STATEMENT  DF4P
     DF4P = 0.0D+00
-    IF ( X>0.0D+00 ) DF4P = 0.1D+01/(X*SQRT(X))
+    IF( X>0.0D+00 ) DF4P = 0.1D+01/(X*SQRT(X))
   END FUNCTION DF4P
   !** DF4S
   REAL(DP) FUNCTION DF4S(X)
-    !>
-    !  Subsidiary to
+    !> Subsidiary to
     !***
     ! **Library:**   SLATEC
     !***
@@ -1515,12 +1483,11 @@ CONTAINS
     REAL(DP) :: X
     !* FIRST EXECUTABLE STATEMENT  DF4S
     DF4S = 0.00D+00
-    IF ( X-0.33D+00/=0.00D+00 ) DF4S = ABS(X-0.33D+00)**(-0.999D+00)
+    IF( X-0.33D+00/=0.00D+00 ) DF4S = ABS(X-0.33D+00)**(-0.999D+00)
   END FUNCTION DF4S
   !** DF5S
   REAL(DP) FUNCTION DF5S(X)
-    !>
-    !  Subsidiary to
+    !> Subsidiary to
     !***
     ! **Library:**   SLATEC
     !***
@@ -1535,12 +1502,11 @@ CONTAINS
     REAL(DP) :: X
     !* FIRST EXECUTABLE STATEMENT  DF5S
     DF5S = 0.0D+00
-    IF ( X/=0.0D+00 ) DF5S = 1.0D+00/(X*SQRT(X))
+    IF( X/=0.0D+00 ) DF5S = 1.0D+00/(X*SQRT(X))
   END FUNCTION DF5S
   !** DT0
   REAL(DP) FUNCTION DT0(X)
-    !>
-    !  Subsidiary to
+    !> Subsidiary to
     !***
     ! **Library:**   SLATEC
     !***
@@ -1562,8 +1528,7 @@ CONTAINS
   END FUNCTION DT0
   !** DT1
   REAL(DP) FUNCTION DT1(X)
-    !>
-    !  Subsidiary to
+    !> Subsidiary to
     !***
     ! **Library:**   SLATEC
     !***
@@ -1585,8 +1550,7 @@ CONTAINS
   END FUNCTION DT1
   !** DT2
   REAL(DP) FUNCTION DT2(X)
-    !>
-    !  Subsidiary to
+    !> Subsidiary to
     !***
     ! **Library:**   SLATEC
     !***
@@ -1608,8 +1572,7 @@ CONTAINS
   END FUNCTION DT2
   !** DT3
   REAL(DP) FUNCTION DT3(X)
-    !>
-    !  Subsidiary to
+    !> Subsidiary to
     !***
     ! **Library:**   SLATEC
     !***
@@ -1631,8 +1594,7 @@ CONTAINS
   END FUNCTION DT3
   !** DT4
   REAL(DP) FUNCTION DT4(X)
-    !>
-    !  Subsidiary to
+    !> Subsidiary to
     !***
     ! **Library:**   SLATEC
     !***
@@ -1654,8 +1616,7 @@ CONTAINS
   END FUNCTION DT4
   !** DT5
   REAL(DP) FUNCTION DT5(X)
-    !>
-    !  Subsidiary to
+    !> Subsidiary to
     !***
     ! **Library:**   SLATEC
     !***
@@ -1677,8 +1638,7 @@ CONTAINS
   END FUNCTION DT5
   !** DPRIN
   SUBROUTINE DPRIN(Lun,Num1,Kprint,Ip,Exact,Result,Abserr,Neval,Ierv,Lierv)
-    !>
-    !  Subsidiary to CDQAG, CDQAG, CDQAGI, CDQAGP, CDQAGS, CDQAWC,
+    !> Subsidiary to CDQAG, CDQAG, CDQAGI, CDQAGP, CDQAGS, CDQAWC,
     !            CDQAWF, CDQAWO, CDQAWS, and CDQNG.
     !***
     ! **Library:**   SLATEC
@@ -1706,36 +1666,36 @@ CONTAINS
 
     !     .. Scalar Arguments ..
     REAL(DP) :: Abserr, Exact, Result
-    INTEGER Ip, Kprint, Lierv, Lun, Neval, Num1
+    INTEGER :: Ip, Kprint, Lierv, Lun, Neval, Num1
     !     .. Array Arguments ..
-    INTEGER Ierv(Lierv)
+    INTEGER :: Ierv(Lierv)
     !     .. Local Scalars ..
     REAL(DP) :: error
-    INTEGER ier, k
+    INTEGER :: ier, k
     !     .. Intrinsic Functions ..
     INTRINSIC ABS
     !* FIRST EXECUTABLE STATEMENT  DPRIN
     ier = Ierv(1)
     error = ABS(Exact-Result)
     !
-    IF ( Kprint>=2 ) THEN
-      IF ( Ip/=1 ) THEN
+    IF( Kprint>=2 ) THEN
+      IF( Ip/=1 ) THEN
         !
         !         Write failure messages.
         !
         WRITE (UNIT=Lun,FMT=99002) Num1
-        IF ( Num1==0 ) WRITE (UNIT=Lun,FMT=99003)
-        IF ( Num1>0 ) WRITE (UNIT=Lun,FMT=99004) Num1
-        IF ( Lierv>1 ) WRITE (UNIT=Lun,FMT=99005) (Ierv(k),k=2,Lierv)
-        IF ( Num1==6 ) WRITE (UNIT=Lun,FMT=99006)
+        IF( Num1==0 ) WRITE (UNIT=Lun,FMT=99003)
+        IF( Num1>0 ) WRITE (UNIT=Lun,FMT=99004) Num1
+        IF( Lierv>1 ) WRITE (UNIT=Lun,FMT=99005) (Ierv(k),k=2,Lierv)
+        IF( Num1==6 ) WRITE (UNIT=Lun,FMT=99006)
         WRITE (UNIT=Lun,FMT=99007)
         WRITE (UNIT=Lun,FMT=99008)
-        IF ( Num1/=5 ) THEN
+        IF( Num1/=5 ) THEN
           WRITE (UNIT=Lun,FMT=99009) Exact, Result, error, Abserr, ier, Neval
         ELSE
           WRITE (Lun,FMT=99010) Result, Abserr, ier, Neval
         END IF
-      ELSEIF ( Kprint>=3 ) THEN
+      ELSEIF( Kprint>=3 ) THEN
         !
         !           Write PASS message.
         !
@@ -1747,7 +1707,7 @@ CONTAINS
     !
     99001 FORMAT (' TEST ON IER = ',I2,' PASSED')
     99002 FORMAT (' TEST ON IER = ',I1,' FAILED.')
-    99003 FORMAT (' WE MUST HAVE IER = 0, ERROR.LE.ABSERR AND ABSERR.LE',&
+    99003 FORMAT (' WE MUST HAVE IER = 0, ERROR<=ABSERR AND ABSERR.LE',&
       '.MAX(EPSABS,EPSREL*ABS(EXACT))')
     99004 FORMAT (' WE MUST HAVE IER = ',I1)
     99005 FORMAT (' OR IER =     ',8(I1,2X))
@@ -1766,8 +1726,7 @@ PROGRAM TEST40
   USE slatec, ONLY : I1MACH, XSETF, XSETUN, XERMAX
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
-  !>
-  !  Driver for testing SLATEC subprograms
+  !> Driver for testing SLATEC subprograms
   !***
   ! **Library:**   SLATEC
   !***
@@ -1816,7 +1775,7 @@ PROGRAM TEST40
   !   890618  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900524  Cosmetic changes to code.  (WRB)
-  INTEGER ipass, kprint, lin, lun, nfail
+  INTEGER :: ipass, kprint, lin, lun, nfail
   !* FIRST EXECUTABLE STATEMENT  TEST40
   lun = I1MACH(2)
   lin = I1MACH(1)
@@ -1827,7 +1786,7 @@ PROGRAM TEST40
   CALL GET_ARGUMENT(kprint)
   CALL XERMAX(1000)
   CALL XSETUN(lun)
-  IF ( kprint<=1 ) THEN
+  IF( kprint<=1 ) THEN
     CALL XSETF(0)
   ELSE
     CALL XSETF(1)
@@ -1838,51 +1797,51 @@ PROGRAM TEST40
   !     Test DQAG.
   !
   CALL CDQAG(lun,kprint,ipass)
-  IF ( ipass==0 ) nfail = nfail + 1
+  IF( ipass==0 ) nfail = nfail + 1
   !
   !     Test DQAGS.
   !
   CALL CDQAGS(lun,kprint,ipass)
-  IF ( ipass==0 ) nfail = nfail + 1
+  IF( ipass==0 ) nfail = nfail + 1
   !
   !     Test DQAGP.
   !
   CALL CDQAGP(lun,kprint,ipass)
-  IF ( ipass==0 ) nfail = nfail + 1
+  IF( ipass==0 ) nfail = nfail + 1
   !
   !     Test DQAGI.
   !
   CALL CDQAGI(lun,kprint,ipass)
-  IF ( ipass==0 ) nfail = nfail + 1
+  IF( ipass==0 ) nfail = nfail + 1
   !
   !     Test DQAWO.
   !
   CALL CDQAWO(lun,kprint,ipass)
-  IF ( ipass==0 ) nfail = nfail + 1
+  IF( ipass==0 ) nfail = nfail + 1
   !
   !     Test DQAWF.
   !
   CALL CDQAWF(lun,kprint,ipass)
-  IF ( ipass==0 ) nfail = nfail + 1
+  IF( ipass==0 ) nfail = nfail + 1
   !
   !     Test DQAWS.
   !
   CALL CDQAWS(lun,kprint,ipass)
-  IF ( ipass==0 ) nfail = nfail + 1
+  IF( ipass==0 ) nfail = nfail + 1
   !
   !     Test DQAWC.
   !
   CALL CDQAWC(lun,kprint,ipass)
-  IF ( ipass==0 ) nfail = nfail + 1
+  IF( ipass==0 ) nfail = nfail + 1
   !
   !     Test DQNG.
   !
   CALL CDQNG(lun,kprint,ipass)
-  IF ( ipass==0 ) nfail = nfail + 1
+  IF( ipass==0 ) nfail = nfail + 1
   !
   !     Write PASS or FAIL message
   !
-  IF ( nfail==0 ) THEN
+  IF( nfail==0 ) THEN
     WRITE (lun,99001)
     99001 FORMAT (/' --------------TEST40 PASSED ALL TESTS----------------')
   ELSE

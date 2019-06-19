@@ -1,7 +1,6 @@
 !** PPGSF
 REAL(SP) FUNCTION PPGSF(X,Iz,C,A,Bh)
-  !>
-  !  Subsidiary to CBLKTR
+  !> Subsidiary to CBLKTR
   !***
   ! **Library:**   SLATEC
   !***

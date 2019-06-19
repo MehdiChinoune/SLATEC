@@ -1,8 +1,7 @@
 !** SBOLSM
 SUBROUTINE SBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
     Scl,Ibasis,Ibb)
-  !>
-  !  Subsidiary to SBOCLS and SBOLS
+  !> Subsidiary to SBOCLS and SBOLS
   !***
   ! **Library:**   SLATEC
   !***
@@ -35,7 +34,7 @@ SUBROUTINE SBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
   !     [E:F] has MINPUT rows and NCOLS+1 columns. This data is placed in
   !     the array W(*,*) with E occupying the first NCOLS columns and the
   !     right side vector F in column NCOLS+1. The row dimension, MDW, of
-  !     the array W(*,*) must satisfy the inequality MDW .ge. MINPUT.
+  !     the array W(*,*) must satisfy the inequality MDW >= MINPUT.
   !     Other values of MDW are errors. The values of MINPUT and NCOLS
   !     must be positive. Other values are errors.
   !
@@ -47,14 +46,14 @@ SUBROUTINE SBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
   !     type of bound and BL(J) and BU(J) give the explicit values for
   !     the respective upper and lower bounds.
   !
-  !    1.    For IND(J)=1, require X(J) .ge. BL(J).
-  !    2.    For IND(J)=2, require X(J) .le. BU(J).
-  !    3.    For IND(J)=3, require X(J) .ge. BL(J) and
-  !                                X(J) .le. BU(J).
+  !    1.    For IND(J)=1, require X(J) >= BL(J).
+  !    2.    For IND(J)=2, require X(J) <= BU(J).
+  !    3.    For IND(J)=3, require X(J) >= BL(J) and
+  !                                X(J) <= BU(J).
   !    4.    For IND(J)=4, no bounds on X(J) are required.
   !     The values of BL(*),BL(*) are modified by the subprogram. Values
   !     other than 1,2,3 or 4 for IND(J) are errors. In the case IND(J)=3
-  !     (upper and lower bounds) the condition BL(J) .gt. BU(J) is an
+  !     (upper and lower bounds) the condition BL(J) > BU(J) is an
   !     error.
   !
   !    -------
@@ -76,7 +75,7 @@ SUBROUTINE SBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
   !           4         Reset the maximum number of iterations to use
   !                     in solving the problem.
   !           5         The data matrix is triangularized before the
-  !                     problem is solved whenever (NCOLS/MINPUT) .lt.
+  !                     problem is solved whenever (NCOLS/MINPUT) <
   !                     FAC. Change the value of FAC.
   !           6         Redefine the weighting matrix used for
   !                     linear independence checking.
@@ -111,7 +110,7 @@ SUBROUTINE SBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
   !    ----------
   !    X(*),RNORM
   !    ----------
-  !     The array X(*) contains a solution (if MODE .ge. 0 or .eq. -22)
+  !     The array X(*) contains a solution (if MODE >= 0 or = -22)
   !     for the constrained least squares problem. The value RNORM is the
   !     minimum residual vector length.
   !
@@ -120,11 +119,11 @@ SUBROUTINE SBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
   !    ----
   !     The sign of mode determines whether the subprogram has completed
   !     normally, or encountered an error condition or abnormal status.
-  !     A value of MODE .ge. 0 signifies that the subprogram has completed
-  !     normally. The value of MODE (.ge. 0) is the number of variables
+  !     A value of MODE >= 0 signifies that the subprogram has completed
+  !     normally. The value of MODE (>= 0) is the number of variables
   !     in an active status: not at a bound nor at the value ZERO, for
   !     the case of free variables. A negative value of MODE will be one
-  !     of the 18 cases -38,-37,...,-22, or -1. Values .lt. -1 correspond
+  !     of the 18 cases -38,-37,...,-22, or -1. Values < -1 correspond
   !     to an abnormal completion of the subprogram. To understand the
   !     abnormal completion codes see below: ERROR MESSAGES for SBOLSM
   !     An approximate solution will be returned to the user only when
@@ -142,7 +141,7 @@ SUBROUTINE SBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
   !    IBASIS(*),IBB(*)
   !    ----------------
   !     These arrays contain information about the status of the solution
-  !     when MODE .ge. 0. The indices IBASIS(K), K=1,...,MODE, show the
+  !     when MODE >= 0. The indices IBASIS(K), K=1,...,MODE, show the
   !     nonactive variables; indices IBASIS(K), K=MODE+1,..., NCOLS are
   !     the active variables. The value (IBB(J)-1) is the number of times
   !     variable J was reflected from its upper bound. (Normally the user
@@ -194,7 +193,7 @@ SUBROUTINE SBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
   !     nonactive columns. After triangularizing this matrix a test is
   !     made on the size of the pivot element. The column vector is
   !     rejected as dependent if the magnitude of the pivot element is
-  !     .le. TOL* magnitude of the column in components strictly above
+  !     <= TOL* magnitude of the column in components strictly above
   !     the pivot element. Nominally the value of this (rank) tolerance
   !     is TOL = SQRT(R1MACH(4)). To change only the value of TOL, for
   !     example,
@@ -215,14 +214,14 @@ SUBROUTINE SBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
   !
   !     The required length of IOPT(*) is increased by 2 if option 2 is
   !     used; The required length of X(*) is increased by 1. A value of
-  !     IOFF .le. 0 is an error. A value of TOL .le. R1MACH(4) gives a
+  !     IOFF <= 0 is an error. A value of TOL <= R1MACH(4) gives a
   !     warning message; it is not considered an error.
   !
   !   3
   !   -
   !     A solution component is left active (not used) if, roughly
   !     speaking, it seems too large. Mathematically the new component is
-  !     left active if the magnitude is .ge.((vector norm of F)/(matrix
+  !     left active if the magnitude is >=((vector norm of F)/(matrix
   !     norm of E))/BLOWUP. Nominally the factor BLOWUP = SQRT(R1MACH(4)).
   !     To change only the value of BLOWUP, for example,
   !
@@ -242,7 +241,7 @@ SUBROUTINE SBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
   !
   !     The required length of IOPT(*) is increased by 2 if option 3 is
   !     used; the required length of X(*) is increased by 1. A value of
-  !     IOFF .le. 0 is an error. A value of BLOWUP .le. 0.0 is an error.
+  !     IOFF <= 0 is an error. A value of BLOWUP <= 0.0 is an error.
   !
   !   4
   !   -
@@ -270,14 +269,14 @@ SUBROUTINE SBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
   !        .
   !       CALL SBOLSM
   !
-  !     The value of ITMAX must be .gt. 0. Other values are errors. Use
+  !     The value of ITMAX must be > 0. Other values are errors. Use
   !     of this option increases the required length of IOPT(*) by 2.
   !
   !   5
   !   -
   !     For purposes of increased efficiency the MINPUT by NCOLS+1 data
   !     matrix [E:F] is triangularized as a first step whenever MINPUT
-  !     satisfies FAC*MINPUT .gt. NCOLS. Nominally FAC=0.75. To change the
+  !     satisfies FAC*MINPUT > NCOLS. Nominally FAC=0.75. To change the
   !     value of FAC,
   !
   !       X(NCOLS+3)=FAC
@@ -370,12 +369,12 @@ SUBROUTINE SBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
   !
   !    -32    THE NUMBER OF COLUMNS = ... MUST BE POSTIVE.
   !
-  !    -33    THE ROW DIMENSION OF W(,) = ... MUST BE .GE. THE NUMBER OF
+  !    -33    THE ROW DIMENSION OF W(,) = ... MUST BE >= THE NUMBER OF
   !           ROWS = ....
   !
   !    -34    FOR J = ... THE CONSTRAINT INDICATOR MUST BE 1-4.
   !
-  !    -35    FOR J = ... THE LOWER BOUND = ... IS .GT. THE UPPER BOUND =
+  !    -35    FOR J = ... THE LOWER BOUND = ... IS > THE UPPER BOUND =
   !           ....
   !
   !    -36    THE INPUT ORDER OF COLUMNS = ... IS NOT BETWEEN 1 AND NCOLS
@@ -442,7 +441,7 @@ SUBROUTINE SBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
   !
   !     Verify that the problem dimensions are defined properly.
   !
-  IF ( Minput<=0 ) THEN
+  IF( Minput<=0 ) THEN
     WRITE (xern1,'(I8)') Minput
     CALL XERMSG('SBOLSM','THE NUMBER OF ROWS = '//xern1//&
       ' MUST BE POSITIVE.',31,1)
@@ -450,7 +449,7 @@ SUBROUTINE SBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
     RETURN
   END IF
   !
-  IF ( Ncols<=0 ) THEN
+  IF( Ncols<=0 ) THEN
     WRITE (xern1,'(I8)') Ncols
     CALL XERMSG('SBOLSM','THE NUMBER OF COLUMNS = '//xern1//&
       ' MUST BE POSITIVE.',32,1)
@@ -458,11 +457,11 @@ SUBROUTINE SBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
     RETURN
   END IF
   !
-  IF ( Mdw<Minput ) THEN
+  IF( Mdw<Minput ) THEN
     WRITE (xern1,'(I8)') Mdw
     WRITE (xern2,'(I8)') Minput
     CALL XERMSG('SBOLSM','THE ROW DIMENSION OF W(,) = '//xern1//&
-      ' MUST BE .GE. THE NUMBER OF ROWS = '//xern2,33,1)
+      ' MUST BE >= THE NUMBER OF ROWS = '//xern2,33,1)
     Mode = -33
     RETURN
   END IF
@@ -470,7 +469,7 @@ SUBROUTINE SBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
   !     Verify that bound information is correct.
   !
   DO j = 1, Ncols
-    IF ( Ind(j)<1.OR.Ind(j)>4 ) THEN
+    IF( Ind(j)<1 .OR. Ind(j)>4 ) THEN
       WRITE (xern1,'(I8)') j
       WRITE (xern2,'(I8)') Ind(j)
       CALL XERMSG('SBOLSM','FOR J = '//xern1//&
@@ -481,14 +480,14 @@ SUBROUTINE SBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
   END DO
   !
   DO j = 1, Ncols
-    IF ( Ind(j)==3 ) THEN
-      IF ( Bu(j)<Bl(j) ) THEN
+    IF( Ind(j)==3 ) THEN
+      IF( Bu(j)<Bl(j) ) THEN
         WRITE (xern1,'(I8)') j
         WRITE (xern3,'(1PE15.6)') Bl(j)
         WRITE (xern4,'(1PE15.6)') Bu(j)
         CALL XERMSG('SBOLSM','FOR J = '//xern1//&
           ' THE LOWER BOUND = '//xern3//&
-          ' IS .GT. THE UPPER BOUND = '//xern4,35,1)
+          ' IS > THE UPPER BOUND = '//xern4,35,1)
         Mode = -35
         RETURN
       END IF
@@ -498,7 +497,7 @@ SUBROUTINE SBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
   !     Check that permutation and polarity arrays have been set.
   !
   DO j = 1, Ncols
-    IF ( Ibasis(j)<1.OR.Ibasis(j)>Ncols ) THEN
+    IF( Ibasis(j)<1 .OR. Ibasis(j)>Ncols ) THEN
       WRITE (xern1,'(I8)') Ibasis(j)
       WRITE (xern2,'(I8)') Ncols
       CALL XERMSG('SBOLSM','THE INPUT ORDER OF COLUMNS = '//xern1//&
@@ -507,7 +506,7 @@ SUBROUTINE SBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
       RETURN
     END IF
     !
-    IF ( Ibb(j)<=0 ) THEN
+    IF( Ibb(j)<=0 ) THEN
       WRITE (xern1,'(I8)') j
       WRITE (xern2,'(I8)') Ibb(j)
       CALL XERMSG('SBOLSM',&
@@ -541,12 +540,12 @@ SUBROUTINE SBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
     lp = lp + lds
     ip = Iopt(lp+1)
     jp = ABS(ip)
-    IF ( ip==99 ) THEN
+    IF( ip==99 ) THEN
       !
       !     Pretriangularize rectangular arrays of certain sizes for
       !     increased efficiency.
       !
-      IF ( fac*Minput>Ncols ) THEN
+      IF( fac*Minput>Ncols ) THEN
         DO j = 1, Ncols + 1
           DO i = Minput, j + mval + 1, -1
             CALL SROTG(W(i-1,j),W(i,j),sc,ss)
@@ -569,18 +568,18 @@ SUBROUTINE SBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
       !
       big = R1MACH(2)
       DO j = 1, Ncols
-        IF ( Ind(j)==1 ) THEN
+        IF( Ind(j)==1 ) THEN
           Bu(j) = big
-        ELSEIF ( Ind(j)==2 ) THEN
+        ELSEIF( Ind(j)==2 ) THEN
           Bl(j) = -big
-        ELSEIF ( Ind(j)==4 ) THEN
+        ELSEIF( Ind(j)==4 ) THEN
           Bl(j) = -big
           Bu(j) = big
         END IF
       END DO
       !
       DO j = 1, Ncols
-        IF ( (Bl(j)<=ZERO.AND.ZERO<=Bu(j).AND.ABS(Bu(j))<ABS(Bl(j))).OR.&
+        IF( (Bl(j)<=ZERO .AND. ZERO<=Bu(j) .AND. ABS(Bu(j))<ABS(Bl(j))) .OR. &
             Bu(j)<ZERO ) THEN
           t = Bu(j)
           Bu(j) = -Bl(j)
@@ -594,7 +593,7 @@ SUBROUTINE SBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
         !         Indices in set T(=TIGHT) are denoted by negative values
         !         of IBASIS(*).
         !
-        IF ( Bl(j)>=ZERO ) THEN
+        IF( Bl(j)>=ZERO ) THEN
           Ibasis(j) = -Ibasis(j)
           t = -Bl(j)
           Bu(j) = Bu(j) + t
@@ -605,31 +604,31 @@ SUBROUTINE SBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
       nsetb = 0
       iter = 0
       !
-      IF ( iprint>0 ) THEN
+      IF( iprint>0 ) THEN
         CALL SMOUT(mrows,Ncols+1,Mdw,W,'('' PRETRI. INPUT MATRIX'')',-4)
         CALL SVOUT(Ncols,Bl,'('' LOWER BOUNDS'')',-4)
         CALL SVOUT(Ncols,Bu,'('' UPPER BOUNDS'')',-4)
       END IF
       EXIT
-    ELSEIF ( jp==99 ) THEN
+    ELSEIF( jp==99 ) THEN
       lds = 1
-    ELSEIF ( jp==1 ) THEN
+    ELSEIF( jp==1 ) THEN
       !
       !         Move the IOPT(*) processing pointer.
       !
-      IF ( ip>0 ) THEN
+      IF( ip>0 ) THEN
         lp = Iopt(lp+2) - 1
         lds = 0
       ELSE
         lds = 2
       END IF
-    ELSEIF ( jp==2 ) THEN
+    ELSEIF( jp==2 ) THEN
       !
       !         Change tolerance for rank determination.
       !
-      IF ( ip>0 ) THEN
+      IF( ip>0 ) THEN
         ioff = Iopt(lp+2)
-        IF ( ioff<=0 ) THEN
+        IF( ioff<=0 ) THEN
           WRITE (xern1,'(I8)') ioff
           WRITE (xern2,'(I8)') Ncols
           CALL XERMSG('SBOLSM','THE OFFSET = '//xern1//&
@@ -640,7 +639,7 @@ SUBROUTINE SBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
         END IF
         !
         tolind = X(Ncols+ioff)
-        IF ( tolind<R1MACH(4) ) THEN
+        IF( tolind<R1MACH(4) ) THEN
           WRITE (xern3,'(1PE15.6)') tolind
           WRITE (xern4,'(1PE15.6)') R1MACH(4)
           CALL XERMSG('SBOLSM',&
@@ -650,14 +649,14 @@ SUBROUTINE SBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
         END IF
       END IF
       lds = 2
-    ELSEIF ( jp==3 ) THEN
+    ELSEIF( jp==3 ) THEN
       !
       !         Change blowup factor for allowing variables to become
       !         inactive.
       !
-      IF ( ip>0 ) THEN
+      IF( ip>0 ) THEN
         ioff = Iopt(lp+2)
-        IF ( ioff<=0 ) THEN
+        IF( ioff<=0 ) THEN
           WRITE (xern1,'(I8)') ioff
           WRITE (xern2,'(I8)') Ncols
           CALL XERMSG('SBOLSM','THE OFFSET = '//xern1//&
@@ -668,7 +667,7 @@ SUBROUTINE SBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
         END IF
         !
         tolsze = X(Ncols+ioff)
-        IF ( tolsze<=ZERO ) THEN
+        IF( tolsze<=ZERO ) THEN
           WRITE (xern3,'(1PE15.6)') tolsze
           CALL XERMSG('SBOLSM','THE RECIPROCAL OF THE BLOW-UP FACTOR&
             & FOR REJECTING VARIABLES MUST BE POSITIVE.$$NOW = '//xern3,27,1)
@@ -677,13 +676,13 @@ SUBROUTINE SBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
         END IF
       END IF
       lds = 2
-    ELSEIF ( jp==4 ) THEN
+    ELSEIF( jp==4 ) THEN
       !
       !         Change the maximum number of iterations allowed.
       !
-      IF ( ip>0 ) THEN
+      IF( ip>0 ) THEN
         itmax = Iopt(lp+2)
-        IF ( itmax<=0 ) THEN
+        IF( itmax<=0 ) THEN
           WRITE (xern1,'(I8)') itmax
           CALL XERMSG('SBOLSM',&
             'THE MAXIMUM NUMBER OF ITERATIONS = '//xern1//&
@@ -693,13 +692,13 @@ SUBROUTINE SBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
         END IF
       END IF
       lds = 2
-    ELSEIF ( jp==5 ) THEN
+    ELSEIF( jp==5 ) THEN
       !
       !         Change the factor for pretriangularizing the data matrix.
       !
-      IF ( ip>0 ) THEN
+      IF( ip>0 ) THEN
         ioff = Iopt(lp+2)
-        IF ( ioff<=0 ) THEN
+        IF( ioff<=0 ) THEN
           WRITE (xern1,'(I8)') ioff
           WRITE (xern2,'(I8)') Ncols
           CALL XERMSG('SBOLSM','THE OFFSET = '//xern1//&
@@ -710,7 +709,7 @@ SUBROUTINE SBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
         END IF
         !
         fac = X(Ncols+ioff)
-        IF ( fac<ZERO ) THEN
+        IF( fac<ZERO ) THEN
           WRITE (xern3,'(1PE15.6)') fac
           CALL XERMSG('SBOLSM',&
             'THE FACTOR (NCOLS/MINPUT) WHERE PRE-TRIANGULARIZING IS PERFORMED MUST&
@@ -720,20 +719,20 @@ SUBROUTINE SBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
         END IF
       END IF
       lds = 2
-    ELSEIF ( jp==6 ) THEN
+    ELSEIF( jp==6 ) THEN
       !
       !         Change the weighting factor (from 1.0) to apply to components
-      !         numbered .gt. MVAL (initially set to 1.)  This trick is needed
+      !         numbered > MVAL (initially set to 1.)  This trick is needed
       !         for applications of this subprogram to the heavily weighted
       !         least squares problem that come from equality constraints.
       !
-      IF ( ip>0 ) THEN
+      IF( ip>0 ) THEN
         ioff = Iopt(lp+2)
         mval = Iopt(lp+3)
         wt = X(Ncols+ioff)
       END IF
       !
-      IF ( mval<0.OR.mval>Minput.OR.wt<=ZERO ) THEN
+      IF( mval<0 .OR. mval>Minput .OR. wt<=ZERO ) THEN
         WRITE (xern1,'(I8)') mval
         WRITE (xern2,'(I8)') Minput
         WRITE (xern3,'(1PE15.6)') wt
@@ -745,11 +744,11 @@ SUBROUTINE SBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
         RETURN
       END IF
       lds = 3
-    ELSEIF ( jp==7 ) THEN
+    ELSEIF( jp==7 ) THEN
       !
       !         Turn on debug output.
       !
-      IF ( ip>0 ) iprint = 1
+      IF( ip>0 ) iprint = 1
       lds = 2
     ELSE
       WRITE (xern1,'(I8)') ip
@@ -761,7 +760,7 @@ SUBROUTINE SBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
   END DO
   !
   100  iter = iter + 1
-  IF ( iter>itmax ) THEN
+  IF( iter>itmax ) THEN
     WRITE (xern1,'(I8)') itmax
     CALL XERMSG('SBOLSM','MORE THAN ITMAX = '//xern1//&
       ' ITERATIONS SOLVING BOUNDED LEAST SQUARES PROBLEM.',22,1)
@@ -784,7 +783,7 @@ SUBROUTINE SBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
       W(INEXT(nsetb):INEXT(nsetb)+mrows-nsetb-1,Ncols+1))*ABS(Scl(jcol))
   END DO
   !
-  IF ( iprint>0 ) THEN
+  IF( iprint>0 ) THEN
     CALL SVOUT(Ncols,Ww,'('' GRADIENT VALUES'')',-4)
     CALL IVOUT(Ncols,Ibasis,'('' INTERNAL VARIABLE ORDER'')',-4)
     CALL IVOUT(Ncols,Ibb,'('' BOUND POLARITY'')',-4)
@@ -793,7 +792,7 @@ SUBROUTINE SBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
     !
     !     If active set = number of total rows, quit.
     !
-    IF ( nsetb==mrows ) THEN
+    IF( nsetb==mrows ) THEN
       found = .FALSE.
       GOTO 600
     END IF
@@ -805,22 +804,22 @@ SUBROUTINE SBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
     wmag = -big
     DO j = nsetb + 1, Ncols
       t = Ww(j)
-      IF ( t/=big ) THEN
+      IF( t/=big ) THEN
         itemp = Ibasis(j)
         jcol = ABS(itemp)
         t1 = NORM2(W(INEXT(nsetb):INEXT(nsetb)+mval-nsetb-1,j))
-        IF ( itemp<0 ) THEN
-          IF ( MOD(Ibb(jcol),2)==0 ) t = -t
-          IF ( t>=ZERO ) THEN
-            IF ( mval>nsetb ) t = t1
-            IF ( t>wlarge ) THEN
+        IF( itemp<0 ) THEN
+          IF( MOD(Ibb(jcol),2)==0 ) t = -t
+          IF( t>=ZERO ) THEN
+            IF( mval>nsetb ) t = t1
+            IF( t>wlarge ) THEN
               wlarge = t
               jlarge = j
             END IF
           END IF
         ELSE
-          IF ( mval>nsetb ) t = t1
-          IF ( ABS(t)>wmag ) THEN
+          IF( mval>nsetb ) t = t1
+          IF( ABS(t)>wmag ) THEN
             wmag = ABS(t)
             jmag = j
           END IF
@@ -832,28 +831,28 @@ SUBROUTINE SBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
     !
     jbig = 0
     wbig = ZERO
-    IF ( wlarge>ZERO ) THEN
+    IF( wlarge>ZERO ) THEN
       jbig = jlarge
       wbig = wlarge
     END IF
     !
-    IF ( wmag>=wbig ) THEN
+    IF( wmag>=wbig ) THEN
       jbig = jmag
       wbig = wmag
     END IF
     !
-    IF ( jbig==0 ) THEN
+    IF( jbig==0 ) THEN
       found = .FALSE.
-      IF ( iprint>0 ) CALL IVOUT(0,i2,'('' FOUND NO VARIABLE TO ENTER'')',-4)
+      IF( iprint>0 ) CALL IVOUT(0,i2,'('' FOUND NO VARIABLE TO ENTER'')',-4)
       GOTO 600
     END IF
     !
     !     See if the incoming column is sufficiently independent.  This
     !     test is made before an elimination is performed.
     !
-    IF ( iprint>0 ) CALL IVOUT(1,jbig2,'('' TRY TO BRING IN THIS COL.'')',-4)
+    IF( iprint>0 ) CALL IVOUT(1,jbig2,'('' TRY TO BRING IN THIS COL.'')',-4)
     !
-    IF ( mval<=nsetb ) THEN
+    IF( mval<=nsetb ) THEN
       cl1 = NORM2(W(1:mval,jbig))
       cl2 = ABS(wt)*NORM2(W(INEXT(mval):INEXT(mval)+nsetb-mval-1,jbig))
       cl3 = ABS(wt)*NORM2(W(INEXT(nsetb):INEXT(nsetb)+mrows-nsetb,jbig))
@@ -869,9 +868,9 @@ SUBROUTINE SBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
       colblo = ABS(cl2)
     END IF
     !
-    IF ( colblo<=tolind*colabv ) THEN
+    IF( colblo<=tolind*colabv ) THEN
       Ww(jbig) = big
-      IF ( iprint>0 ) CALL IVOUT(0,i2,'('' VARIABLE IS DEPENDENT, NOT USED.'')',-4)
+      IF( iprint>0 ) CALL IVOUT(0,i2,'('' VARIABLE IS DEPENDENT, NOT USED.'')',-4)
       CYCLE
     END IF
     !
@@ -879,7 +878,7 @@ SUBROUTINE SBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
     !     and gradient values.
     !
     nsetb = nsetb + 1
-    IF ( nsetb/=jbig ) THEN
+    IF( nsetb/=jbig ) THEN
       CALL SSWAP(mrows,W(1,nsetb),1,W(1,jbig),1)
       CALL SSWAP(1,Ww(nsetb),1,Ww(jbig),1)
       itemp = Ibasis(nsetb)
@@ -889,26 +888,26 @@ SUBROUTINE SBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
     !
     !     Eliminate entries below the pivot line in column NSETB.
     !
-    IF ( mrows>nsetb ) THEN
+    IF( mrows>nsetb ) THEN
       DO i = mrows, nsetb + 1, -1
-        IF ( i/=mval+1 ) THEN
+        IF( i/=mval+1 ) THEN
           CALL SROTG(W(i-1,nsetb),W(i,nsetb),sc,ss)
           W(i,nsetb) = ZERO
           CALL SROT(Ncols-nsetb+1,W(i-1,nsetb+1),Mdw,W(i,nsetb+1),Mdw,sc,ss)
         END IF
       END DO
       !
-      IF ( mval>=nsetb.AND.mval<mrows ) THEN
+      IF( mval>=nsetb .AND. mval<mrows ) THEN
         CALL SROTG(W(nsetb,nsetb),W(mval+1,nsetb),sc,ss)
         W(mval+1,nsetb) = ZERO
         CALL SROT(Ncols-nsetb+1,W(nsetb,nsetb+1),Mdw,W(mval+1,nsetb+1),Mdw,sc,ss)
       END IF
     END IF
     !
-    IF ( W(nsetb,nsetb)==ZERO ) THEN
+    IF( W(nsetb,nsetb)==ZERO ) THEN
       Ww(nsetb) = big
       nsetb = nsetb - 1
-      IF ( iprint>0 ) CALL IVOUT(0,i2,'('' PIVOT IS ZERO, NOT USED.'')',-4)
+      IF( iprint>0 ) CALL IVOUT(0,i2,'('' PIVOT IS ZERO, NOT USED.'')',-4)
       CYCLE
     END IF
     !
@@ -917,17 +916,17 @@ SUBROUTINE SBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
     itemp = Ibasis(nsetb)
     jcol = ABS(itemp)
     xnew = (W(nsetb,Ncols+1)/W(nsetb,nsetb))/ABS(Scl(jcol))
-    IF ( itemp<0 ) THEN
+    IF( itemp<0 ) THEN
       !
-      !         IF(WW(NSETB).GE.ZERO.AND.XNEW.LE.ZERO) exit(quit)
-      !         IF(WW(NSETB).LE.ZERO.AND.XNEW.GE.ZERO) exit(quit)
+      !         IF(WW(NSETB)>=ZERO .AND. XNEW<=ZERO) exit(quit)
+      !         IF(WW(NSETB)<=ZERO .AND. XNEW>=ZERO) exit(quit)
       !
-      IF ( (Ww(nsetb)>=ZERO.AND.xnew<=ZERO).OR.&
-          (Ww(nsetb)<=ZERO.AND.xnew>=ZERO) ) THEN
+      IF( (Ww(nsetb)>=ZERO .AND. xnew<=ZERO) .OR. &
+          (Ww(nsetb)<=ZERO .AND. xnew>=ZERO) ) THEN
         !
         Ww(nsetb) = big
         nsetb = nsetb - 1
-        IF ( iprint>0 ) CALL IVOUT(0,i2,&
+        IF( iprint>0 ) CALL IVOUT(0,i2,&
           '('' VARIABLE HAS BAD DIRECTION, NOT USED.'')',-4)
         CYCLE
       END IF
@@ -944,36 +943,36 @@ SUBROUTINE SBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
     Rw(j) = Rw(j)/W(j,j)
     jcol = ABS(Ibasis(j))
     t = Rw(j)
-    IF ( MOD(Ibb(jcol),2)==0 ) Rw(j) = -Rw(j)
+    IF( MOD(Ibb(jcol),2)==0 ) Rw(j) = -Rw(j)
     CALL SAXPY(j-1,-t,W(1,j),1,Rw,1)
     Rw(j) = Rw(j)/ABS(Scl(jcol))
   END DO
   !
-  IF ( iprint>0 ) THEN
+  IF( iprint>0 ) THEN
     CALL SVOUT(nsetb,Rw,'('' SOLN. VALUES'')',-4)
     CALL IVOUT(nsetb,Ibasis,'('' COLS. USED'')',-4)
   END IF
   !
-  IF ( lgopr==2 ) THEN
+  IF( lgopr==2 ) THEN
     X(1:nsetb) = Rw(1:nsetb)
     DO j = 1, nsetb
       itemp = Ibasis(j)
       jcol = ABS(itemp)
-      IF ( itemp<0 ) THEN
+      IF( itemp<0 ) THEN
         bou = ZERO
       ELSE
         bou = Bl(jcol)
       END IF
       !
-      IF ( (-bou)/=big ) bou = bou/ABS(Scl(jcol))
-      IF ( X(j)<=bou ) THEN
+      IF( (-bou)/=big ) bou = bou/ABS(Scl(jcol))
+      IF( X(j)<=bou ) THEN
         jdrop1 = j
         EXIT
       END IF
       !
       bou = Bu(jcol)
-      IF ( bou/=big ) bou = bou/ABS(Scl(jcol))
-      IF ( X(j)>=bou ) THEN
+      IF( bou/=big ) bou = bou/ABS(Scl(jcol))
+      IF( X(j)>=bou ) THEN
         jdrop2 = j
         EXIT
       END IF
@@ -992,33 +991,33 @@ SUBROUTINE SBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
     jcol = ABS(itemp)
     t1 = TWO
     t2 = TWO
-    IF ( itemp<0 ) THEN
+    IF( itemp<0 ) THEN
       bou = ZERO
     ELSE
       bou = Bl(jcol)
     END IF
-    IF ( (-bou)/=big ) bou = bou/ABS(Scl(jcol))
-    IF ( Rw(j)<=bou ) t1 = (X(j)-bou)/(X(j)-Rw(j))
+    IF( (-bou)/=big ) bou = bou/ABS(Scl(jcol))
+    IF( Rw(j)<=bou ) t1 = (X(j)-bou)/(X(j)-Rw(j))
     bou = Bu(jcol)
-    IF ( bou/=big ) bou = bou/ABS(Scl(jcol))
-    IF ( Rw(j)>=bou ) t2 = (bou-X(j))/(Rw(j)-X(j))
+    IF( bou/=big ) bou = bou/ABS(Scl(jcol))
+    IF( Rw(j)>=bou ) t2 = (bou-X(j))/(Rw(j)-X(j))
     !
     !     If not, then compute a step length so that the variables remain
     !     feasible.
     !
-    IF ( t1<alpha ) THEN
+    IF( t1<alpha ) THEN
       alpha = t1
       jdrop1 = j
     END IF
     !
-    IF ( t2<beta ) THEN
+    IF( t2<beta ) THEN
       beta = t2
       jdrop2 = j
     END IF
   END DO
   !
   constr = alpha<TWO .OR. beta<TWO
-  IF ( .NOT.constr ) THEN
+  IF( .NOT. constr ) THEN
     !
     !         Accept the candidate because it satisfies the stated bounds
     !         on the variables.
@@ -1034,24 +1033,24 @@ SUBROUTINE SBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
     X(j) = X(j) + MIN(alpha,beta)*(Rw(j)-X(j))
   END DO
   !
-  IF ( alpha<=beta ) THEN
+  IF( alpha<=beta ) THEN
     jdrop2 = 0
   ELSE
     jdrop1 = 0
   END IF
   !
   300 CONTINUE
-  IF ( jdrop1+jdrop2<=0.OR.nsetb<=0 ) GOTO 100
+  IF( jdrop1+jdrop2<=0 .OR. nsetb<=0 ) GOTO 100
   jdrop = jdrop1 + jdrop2
   itemp = Ibasis(jdrop)
   jcol = ABS(itemp)
-  IF ( jdrop2>0 ) THEN
+  IF( jdrop2>0 ) THEN
     !
     !         Variable is at an upper bound.  Subtract multiple of this
     !         column from right hand side.
     !
     t = Bu(jcol)
-    IF ( itemp>0 ) THEN
+    IF( itemp>0 ) THEN
       Bu(jcol) = t - Bl(jcol)
       Bl(jcol) = -t
       itemp = -itemp
@@ -1061,12 +1060,12 @@ SUBROUTINE SBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
       END DO
     ELSE
       Ibb(jcol) = Ibb(jcol) + 1
-      IF ( MOD(Ibb(jcol),2)==0 ) t = -t
+      IF( MOD(Ibb(jcol),2)==0 ) t = -t
     END IF
     !
     !     Variable is at a lower bound.
     !
-  ELSEIF ( itemp<ZERO ) THEN
+  ELSEIF( itemp<ZERO ) THEN
     t = ZERO
   ELSE
     t = -Bl(jcol)
@@ -1098,12 +1097,12 @@ SUBROUTINE SBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
     !         Look for small pivots and avoid mixing weighted and
     !         nonweighted rows.
     !
-    IF ( i==mval ) THEN
+    IF( i==mval ) THEN
       t = ZERO
       DO j = i, nsetb
         jcol = ABS(Ibasis(j))
         t1 = ABS(W(i,j)*Scl(jcol))
-        IF ( t1>t ) THEN
+        IF( t1>t ) THEN
           jbig = j
           t = t1
         END IF
@@ -1146,7 +1145,7 @@ SUBROUTINE SBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
   !     Find a variable to become non-active.
   !
   600 CONTINUE
-  IF ( found ) THEN
+  IF( found ) THEN
     lgopr = 1
     GOTO 200
   END IF
@@ -1162,22 +1161,22 @@ SUBROUTINE SBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
   END DO
   !
   DO j = 1, Ncols
-    IF ( MOD(Ibb(j),2)==0 ) X(j) = Bu(j) - X(j)
+    IF( MOD(Ibb(j),2)==0 ) X(j) = Bu(j) - X(j)
   END DO
   !
   DO j = 1, Ncols
     jcol = Ibasis(j)
-    IF ( jcol<0 ) X(-jcol) = Bl(-jcol) + X(-jcol)
+    IF( jcol<0 ) X(-jcol) = Bl(-jcol) + X(-jcol)
   END DO
   !
   DO j = 1, Ncols
-    IF ( Scl(j)<ZERO ) X(j) = -X(j)
+    IF( Scl(j)<ZERO ) X(j) = -X(j)
   END DO
   !
   i = MAX(nsetb,mval)
   Rnorm = NORM2(W(INEXT(i):INEXT(i)+mrows-i-1,Ncols+1))
   !
-  IF ( igopr==2 ) Mode = nsetb
+  IF( igopr==2 ) Mode = nsetb
 CONTAINS
   INTEGER FUNCTION INEXT(idum)
     INTEGER, INTENT(IN) :: idum

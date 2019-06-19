@@ -1,7 +1,6 @@
 !** DLI
 REAL(DP) FUNCTION DLI(X)
-  !>
-  !  Compute the logarithmic integral.
+  !> Compute the logarithmic integral.
   !***
   ! **Library:**   SLATEC (FNLIB)
   !***
@@ -32,8 +31,8 @@ REAL(DP) FUNCTION DLI(X)
   USE service, ONLY : XERMSG
   REAL(DP) :: X
   !* FIRST EXECUTABLE STATEMENT  DLI
-  IF ( X<=0.D0 ) CALL XERMSG('DLI','LOG INTEGRAL UNDEFINED FOR X LE 0',1,2)
-  IF ( X==1.D0 ) CALL XERMSG('DLI','LOG INTEGRAL UNDEFINED FOR X = 0',2,2)
+  IF( X<=0.D0 ) CALL XERMSG('DLI','LOG INTEGRAL UNDEFINED FOR X LE 0',1,2)
+  IF( X==1.D0 ) CALL XERMSG('DLI','LOG INTEGRAL UNDEFINED FOR X = 0',2,2)
   !
   DLI = DEI(LOG(X))
   !

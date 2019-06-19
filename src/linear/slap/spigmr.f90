@@ -2,8 +2,7 @@
 SUBROUTINE SPIGMR(N,R0,Sr,Sz,Jscal,Maxl,Maxlp1,Kmp,Nrsts,Jpre,MATVEC,&
     MSOLVE,Nmsl,Z,V,Hes,Q,Lgmr,Rpar,Ipar,Wk,Dl,Rhol,Nrmax,&
     Bnrm,X,Xl,Itol,Tol,Nelt,Ia,Ja,A,Isym,Iunit,Iflag,Err)
-  !>
-  !  Internal routine for SGMRES.
+  !> Internal routine for SGMRES.
   !***
   ! **Library:**   SLATEC (SLAP)
   !***
@@ -71,10 +70,10 @@ SUBROUTINE SPIGMR(N,R0,Sr,Sz,Jscal,Maxl,Maxlp1,Kmp,Nrsts,Jpre,MATVEC,&
   !         MAXPL1 = MAXL + 1, used for dynamic dimensioning of HES.
   ! KMP    :IN       Integer
   !         The number of previous vectors the new vector VNEW
-  !         must be made orthogonal to.  (KMP .le. MAXL)
+  !         must be made orthogonal to.  (KMP <= MAXL)
   ! NRSTS  :IN       Integer
   !         Counter for the number of restarts on the current
-  !         call to SGMRES.  If NRSTS .gt. 0, then the residual
+  !         call to SGMRES.  If NRSTS > 0, then the residual
   !         R0 is already scaled, and so scaling of it is
   !         not necessary.
   ! JPRE   :IN       Integer
@@ -134,14 +133,14 @@ SUBROUTINE SPIGMR(N,R0,Sr,Sz,Jscal,Maxl,Maxlp1,Kmp,Nrsts,Jpre,MATVEC,&
   ! DL     :INOUT    Real DL(N)
   !         On input, a real work array of length N used for calculation
   !         of the residual norm RHO when the method is incomplete
-  !         (KMP.lt.MAXL), and/or when using restarting.
+  !         (KMP<MAXL), and/or when using restarting.
   !         On output, the scaled residual vector RL.  It is only loaded
   !         when performing restarts of the Krylov iteration.
   ! RHOL   :OUT      Real
   !         A real scalar containing the norm of the final residual.
   ! NRMAX  :IN       Integer
   !         The maximum number of restarts of the Krylov iteration.
-  !         NRMAX .gt. 0 means restarting is active, while
+  !         NRMAX > 0 means restarting is active, while
   !         NRMAX = 0 means restarting is not being used.
   ! B      :IN       Real B(N)
   !         The right hand side of the linear system A*X = b.
@@ -179,19 +178,19 @@ SUBROUTINE SPIGMR(N,R0,Sr,Sz,Jscal,Maxl,Maxlp1,Kmp,Nrsts,Jpre,MATVEC,&
   !         norm values.
   ! IFLAG  :OUT      Integer
   !         An integer error flag..
-  !         0 means convergence in LGMR iterations, LGMR.le.MAXL.
+  !         0 means convergence in LGMR iterations, LGMR<=MAXL.
   !         1 means the convergence test did not pass in MAXL
-  !           iterations, but the residual norm is .lt. norm(R0),
+  !           iterations, but the residual norm is < norm(R0),
   !           and so Z is computed.
   !         2 means the convergence test did not pass in MAXL
-  !           iterations, residual .ge. norm(R0), and Z = 0.
+  !           iterations, residual >= norm(R0), and Z = 0.
   ! ERR    :OUT      Real.
   !         Error estimate of error in final approximate solution, as
   !         defined by ITOL.
   !
   !- Cautions:
   !     This routine will attempt to write to the Fortran logical output
-  !     unit IUNIT, if IUNIT .ne. 0.  Thus, the user must make sure that
+  !     unit IUNIT, if IUNIT /= 0.  Thus, the user must make sure that
   !     this logical unit is attached to a file or terminal before calling
   !     this routine with a non-zero value for IUNIT.  This routine does
   !     not check for the validity of a non-zero IUNIT unit number.
@@ -257,12 +256,12 @@ SUBROUTINE SPIGMR(N,R0,Sr,Sz,Jscal,Maxl,Maxlp1,Kmp,Nrsts,Jpre,MATVEC,&
   !         Apply left precon. if JPRE < 0 and this is not a restart.
   !         Apply scaling to R0 if JSCAL = 2 or 3.
   !   -------------------------------------------------------------------
-  IF ( (Jpre<0).AND.(Nrsts==0) ) THEN
+  IF( (Jpre<0) .AND. (Nrsts==0) ) THEN
     Wk(1:N) = R0(1:N)
     CALL MSOLVE(N,Wk,R0,Rpar,Ipar)
     Nmsl = Nmsl + 1
   END IF
-  IF ( ((Jscal==2).OR.(Jscal==3)).AND.(Nrsts==0) ) THEN
+  IF( ((Jscal==2) .OR. (Jscal==3)) .AND. (Nrsts==0) ) THEN
     DO i = 1, N
       V(i,1) = R0(i)*Sr(i)
     END DO
@@ -276,7 +275,7 @@ SUBROUTINE SPIGMR(N,R0,Sr,Sz,Jscal,Maxl,Maxlp1,Kmp,Nrsts,Jpre,MATVEC,&
   !
   !         Call stopping routine ISSGMR.
   !
-  IF ( ISSGMR(N,X,Xl,MSOLVE,Nmsl,Itol,Tol,iter,Err,Iunit,V(1,1),Wk,Rpar,Ipar,r0nrm, &
+  IF( ISSGMR(N,X,Xl,MSOLVE,Nmsl,Itol,Tol,iter,Err,Iunit,V(1,1),Wk,Rpar,Ipar,r0nrm, &
     Bnrm,Sz,Jscal,Kmp,Lgmr,Maxl,Maxlp1,V,Q,snormw,prod,r0nrm,Hes,Jpre)/=0 ) RETURN
   tem = 1.0E0/r0nrm
   V(1:N,1) = tem*V(1:N,1)
@@ -304,26 +303,26 @@ SUBROUTINE SPIGMR(N,R0,Sr,Sz,Jscal,Maxl,Maxlp1,Kmp,Nrsts,Jpre,MATVEC,&
     !        routine SORTH  to  orthogonalize the    new vector VNEW   =
     !        V(*,LL+1).  Call routine SHEQR to update the factors of HES.
     !   -------------------------------------------------------------------
-    IF ( (Jscal==1).OR.(Jscal==3) ) THEN
+    IF( (Jscal==1) .OR. (Jscal==3) ) THEN
       DO i = 1, N
         Wk(i) = V(i,ll)/Sz(i)
       END DO
     ELSE
       Wk(1:N) = V(1:N,ll)
     END IF
-    IF ( Jpre>0 ) THEN
+    IF( Jpre>0 ) THEN
       CALL MSOLVE(N,Wk,Z,Rpar,Ipar)
       Nmsl = Nmsl + 1
       CALL MATVEC(N,Z,V(1,ll+1),Nelt,Ia,Ja,A,Isym)
     ELSE
       CALL MATVEC(N,Wk,V(1,ll+1),Nelt,Ia,Ja,A,Isym)
     END IF
-    IF ( Jpre<0 ) THEN
+    IF( Jpre<0 ) THEN
       Wk(1:N) = V(1:N,ll+1)
       CALL MSOLVE(N,Wk,V(1,ll+1),Rpar,Ipar)
       Nmsl = Nmsl + 1
     END IF
-    IF ( (Jscal==2).OR.(Jscal==3) ) THEN
+    IF( (Jscal==2) .OR. (Jscal==3) ) THEN
       DO i = 1, N
         V(i,ll+1) = V(i,ll+1)*Sr(i)
       END DO
@@ -331,7 +330,7 @@ SUBROUTINE SPIGMR(N,R0,Sr,Sz,Jscal,Maxl,Maxlp1,Kmp,Nrsts,Jpre,MATVEC,&
     CALL SORTH(V(1,ll+1),V,Hes,N,ll,Maxlp1,Kmp,snormw)
     Hes(ll+1,ll) = snormw
     CALL SHEQR(Hes,Maxlp1,ll,Q,info,ll)
-    IF ( info==ll ) GOTO 100
+    IF( info==ll ) GOTO 100
     !   -------------------------------------------------------------------
     !         Update RHO, the estimate of the norm of the residual R0-A*ZL.
     !         If KMP <  MAXL, then the vectors V(*,1),...,V(*,LL+1) are not
@@ -340,8 +339,8 @@ SUBROUTINE SPIGMR(N,R0,Sr,Sz,Jscal,Maxl,Maxlp1,Kmp,Nrsts,Jpre,MATVEC,&
     !   -------------------------------------------------------------------
     prod = prod*Q(2*ll)
     rho = ABS(prod*r0nrm)
-    IF ( (ll>Kmp).AND.(Kmp<Maxl) ) THEN
-      IF ( ll==Kmp+1 ) THEN
+    IF( (ll>Kmp) .AND. (Kmp<Maxl) ) THEN
+      IF( ll==Kmp+1 ) THEN
         Dl(1:N) = V(1:N,1)
         DO i = 1, Kmp
           ip1 = i + 1
@@ -368,16 +367,16 @@ SUBROUTINE SPIGMR(N,R0,Sr,Sz,Jscal,Maxl,Maxlp1,Kmp,Nrsts,Jpre,MATVEC,&
     !         If failed and LL < MAXL, then continue iterating.
     !   -------------------------------------------------------------------
     iter = Nrsts*Maxl + Lgmr
-    IF ( ISSGMR(N,X,Xl,MSOLVE,Nmsl,Itol,Tol,iter,Err,Iunit,Dl,Wk,Rpar,Ipar,Rhol, &
+    IF( ISSGMR(N,X,Xl,MSOLVE,Nmsl,Itol,Tol,iter,Err,Iunit,Dl,Wk,Rpar,Ipar,Rhol, &
       Bnrm,Sz,Jscal,Kmp,Lgmr,Maxl,Maxlp1,V,Q,snormw,prod,r0nrm,Hes,Jpre)/=0 ) GOTO 200
-    IF ( ll==Maxl ) EXIT
+    IF( ll==Maxl ) EXIT
     !   -------------------------------------------------------------------
     !         Rescale so that the norm of V(1,LL+1) is one.
     !   -------------------------------------------------------------------
     tem = 1.0E0/snormw
     V(1:N,ll+1) = tem*V(1:N,ll+1)
   END DO
-  IF ( rho<r0nrm ) THEN
+  IF( rho<r0nrm ) THEN
     Iflag = 1
     !
     !         Tolerance not met, but residual norm reduced.
@@ -389,7 +388,7 @@ SUBROUTINE SPIGMR(N,R0,Sr,Sz,Jscal,Maxl,Maxlp1,Kmp,Nrsts,Jpre,MATVEC,&
     !        calculated up to a scaling factor.   Use SRLCAL to calculate
     !        the scaled residual vector.
     !
-    IF ( Nrmax>0 ) CALL SRLCAL(N,Kmp,Maxl,Maxl,V,Q,Dl,snormw,prod,r0nrm)
+    IF( Nrmax>0 ) CALL SRLCAL(N,Kmp,Maxl,Maxl,V,Q,Dl,snormw,prod,r0nrm)
     GOTO 200
   END IF
   100 CONTINUE
@@ -419,12 +418,12 @@ SUBROUTINE SPIGMR(N,R0,Sr,Sz,Jscal,Maxl,Maxlp1,Kmp,Nrsts,Jpre,MATVEC,&
   DO i = 1, ll
     CALL SAXPY(N,R0(i),V(1,i),1,Z,1)
   END DO
-  IF ( (Jscal==1).OR.(Jscal==3) ) THEN
+  IF( (Jscal==1) .OR. (Jscal==3) ) THEN
     DO i = 1, N
       Z(i) = Z(i)/Sz(i)
     END DO
   END IF
-  IF ( Jpre>0 ) THEN
+  IF( Jpre>0 ) THEN
     Wk(1:N) = Z(1:N)
     CALL MSOLVE(N,Wk,Z,Rpar,Ipar)
     Nmsl = Nmsl + 1

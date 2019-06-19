@@ -1,7 +1,6 @@
 !** SCLOSM
 SUBROUTINE SCLOSM(Ipage)
-  !>
-  !  Subsidiary to SPLP
+  !> Subsidiary to SPLP
   !***
   ! **Library:**   SLATEC
   !***
@@ -25,7 +24,7 @@ SUBROUTINE SCLOSM(Ipage)
   !   900402  Added TYPE section.  (WRB)
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
   USE service, ONLY : XERMSG
-  INTEGER ios, Ipage, ipagef
+  INTEGER :: ios, Ipage, ipagef
   CHARACTER(8) :: xern1
   !
   !* FIRST EXECUTABLE STATEMENT  SCLOSM

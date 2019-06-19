@@ -1,7 +1,6 @@
 !** DGAMIC
 REAL(DP) FUNCTION DGAMIC(A,X)
-  !>
-  !  Calculate the complementary incomplete Gamma function.
+  !> Calculate the complementary incomplete Gamma function.
   !***
   ! **Library:**   SLATEC (FNLIB)
   !***
@@ -21,8 +20,8 @@ REAL(DP) FUNCTION DGAMIC(A,X)
   !   DGAMIC = integral from X to infinity of EXP(-T) * T**(A-1.)  .
   !
   !   DGAMIC is evaluated for arbitrary real values of A and for non-
-  !   negative values of X (even though DGAMIC is defined for X .LT.
-  !   0.0), except that for X = 0 and A .LE. 0.0, DGAMIC is undefined.
+  !   negative values of X (even though DGAMIC is defined for X <
+  !   0.0), except that for X = 0 and A <= 0.0, DGAMIC is undefined.
   !
   !   DGAMIC, A, and X are DOUBLE PRECISION.
   !
@@ -59,20 +58,20 @@ REAL(DP) FUNCTION DGAMIC(A,X)
     alneps = -LOG(D1MACH(3)), bot = LOG(D1MACH(1))
   !* FIRST EXECUTABLE STATEMENT  DGAMIC
   !
-  IF ( X<0.D0 ) CALL XERMSG('DGAMIC','X IS NEGATIVE',2,2)
+  IF( X<0.D0 ) CALL XERMSG('DGAMIC','X IS NEGATIVE',2,2)
   !
-  IF ( X>0.D0 ) THEN
+  IF( X>0.D0 ) THEN
     !
     alx = LOG(X)
     sga = 1.0D0
-    IF ( A/=0.D0 ) sga = SIGN(1.0D0,A)
+    IF( A/=0.D0 ) sga = SIGN(1.0D0,A)
     ainta = AINT(A+0.5D0*sga)
     aeps = A - ainta
     !
     izero = 0
-    IF ( X>=1.0D0 ) THEN
+    IF( X>=1.0D0 ) THEN
       !
-      IF ( A<X ) THEN
+      IF( A<X ) THEN
         DGAMIC = EXP(D9LGIC(A,X,alx))
         RETURN
       END IF
@@ -83,11 +82,11 @@ REAL(DP) FUNCTION DGAMIC(A,X)
       alngs = D9LGIT(A,X,algap1)
     ELSE
       !
-      IF ( A<=0.5D0.AND.ABS(aeps)<=0.001D0 ) THEN
+      IF( A<=0.5D0 .AND. ABS(aeps)<=0.001D0 ) THEN
         e = 2.0D0
-        IF ( -ainta>1.D0 ) e = 2.D0*(-ainta+2.D0)/(ainta*ainta-1.0D0)
+        IF( -ainta>1.D0 ) e = 2.D0*(-ainta+2.D0)/(ainta*ainta-1.0D0)
         e = e - alx*X**(-0.001D0)
-        IF ( e*ABS(aeps)<=eps ) THEN
+        IF( e*ABS(aeps)<=eps ) THEN
           !
           DGAMIC = D9GMIC(A,X,alx)
           RETURN
@@ -96,34 +95,34 @@ REAL(DP) FUNCTION DGAMIC(A,X)
       !
       CALL DLGAMS(A+1.0D0,algap1,sgngam)
       gstar = D9GMIT(A,X,algap1,sgngam)
-      IF ( gstar==0.D0 ) izero = 1
-      IF ( gstar/=0.D0 ) alngs = LOG(ABS(gstar))
-      IF ( gstar/=0.D0 ) sgngs = SIGN(1.0D0,gstar)
+      IF( gstar==0.D0 ) izero = 1
+      IF( gstar/=0.D0 ) alngs = LOG(ABS(gstar))
+      IF( gstar/=0.D0 ) sgngs = SIGN(1.0D0,gstar)
     END IF
     !
     ! EVALUATION OF DGAMIC(A,X) IN TERMS OF TRICOMI-S INCOMPLETE GAMMA FN.
     !
     h = 1.D0
-    IF ( izero/=1 ) THEN
+    IF( izero/=1 ) THEN
       !
       t = A*alx + alngs
-      IF ( t>alneps ) THEN
+      IF( t>alneps ) THEN
         !
         sgng = -sgngs*sga*sgngam
         t = t + algap1 - LOG(ABS(A))
-        IF ( t<bot ) CALL XERCLR
+        IF( t<bot ) CALL XERCLR
         DGAMIC = sgng*EXP(t)
         RETURN
       ELSE
-        IF ( t>(-alneps) ) h = 1.0D0 - sgngs*EXP(t)
+        IF( t>(-alneps) ) h = 1.0D0 - sgngs*EXP(t)
         !
-        IF ( ABS(h)<sqeps ) CALL XERCLR
-        IF ( ABS(h)<sqeps )&
+        IF( ABS(h)<sqeps ) CALL XERCLR
+        IF( ABS(h)<sqeps )&
           CALL XERMSG('DGAMIC','RESULT LT HALF PRECISION',1,1)
       END IF
     END IF
   ELSE
-    IF ( A<=0.D0 ) CALL XERMSG('DGAMIC','X = 0 AND A LE 0 SO DGAMIC IS UNDEFINED',3,2)
+    IF( A<=0.D0 ) CALL XERMSG('DGAMIC','X = 0 AND A LE 0 SO DGAMIC IS UNDEFINED',3,2)
     !
     DGAMIC = EXP(LOG_GAMMA(A+1.D0)-LOG(A))
     RETURN
@@ -131,7 +130,7 @@ REAL(DP) FUNCTION DGAMIC(A,X)
   !
   sgng = SIGN(1.0D0,h)*sga*sgngam
   t = LOG(ABS(h)) + algap1 - LOG(ABS(A))
-  IF ( t<bot ) CALL XERCLR
+  IF( t<bot ) CALL XERCLR
   DGAMIC = sgng*EXP(t)
   RETURN
 END FUNCTION DGAMIC

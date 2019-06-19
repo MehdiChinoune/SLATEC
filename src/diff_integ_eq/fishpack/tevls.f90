@@ -1,7 +1,6 @@
 !** TEVLS
 SUBROUTINE TEVLS(N,D,E2,Ierr)
-  !>
-  !  Subsidiary to BLKTRI
+  !> Subsidiary to BLKTRI
   !***
   ! **Library:**   SLATEC
   !***
@@ -61,7 +60,7 @@ SUBROUTINE TEVLS(N,D,E2,Ierr)
   REAL(SP) :: dhold, b, c, f, g, h, p, r, s
   !* FIRST EXECUTABLE STATEMENT  TEVLS
   Ierr = 0
-  IF ( N/=1 ) THEN
+  IF( N/=1 ) THEN
     !
     DO i = 2, N
       E2(i-1) = E2(i)*E2(i)
@@ -74,7 +73,7 @@ SUBROUTINE TEVLS(N,D,E2,Ierr)
     DO l = 1, N
       j = 0
       h = eps_com*(ABS(D(l))+SQRT(E2(l)))
-      IF ( b<=h ) THEN
+      IF( b<=h ) THEN
         b = h
         c = b*b
       END IF
@@ -82,15 +81,15 @@ SUBROUTINE TEVLS(N,D,E2,Ierr)
       !     ********** LOOK FOR SMALL SQUARED SUB-DIAGONAL ELEMENT **********
       !
       DO m = l, N
-        IF ( E2(m)<=c ) EXIT
+        IF( E2(m)<=c ) EXIT
         !
         !     ********** E2(N) IS ALWAYS ZERO, SO THERE IS NO EXIT
         !                THROUGH THE BOTTOM OF THE LOOP **********
         !
       END DO
       !
-      IF ( m/=l ) THEN
-        DO WHILE ( j/=30 )
+      IF( m/=l ) THEN
+        DO WHILE( j/=30 )
           j = j + 1
           !
           !     ********** FORM SHIFT **********
@@ -112,7 +111,7 @@ SUBROUTINE TEVLS(N,D,E2,Ierr)
           !     ********** RATIONAL QL TRANSFORMATION **********
           !
           g = D(m)
-          IF ( g==0.0 ) g = b
+          IF( g==0.0 ) g = b
           h = g
           s = 0.0
           mml = m - l
@@ -127,7 +126,7 @@ SUBROUTINE TEVLS(N,D,E2,Ierr)
             s = E2(i)/r
             D(i+1) = h + s*(h+D(i))
             g = D(i) - E2(i)/g
-            IF ( g==0.0 ) g = b
+            IF( g==0.0 ) g = b
             h = g*p/r
           END DO
           !
@@ -136,10 +135,10 @@ SUBROUTINE TEVLS(N,D,E2,Ierr)
           !
           !     ********** GUARD AGAINST UNDERFLOWED H **********
           !
-          IF ( h==0.0 ) GOTO 20
-          IF ( ABS(E2(l))<=ABS(c/h) ) GOTO 20
+          IF( h==0.0 ) GOTO 20
+          IF( ABS(E2(l))<=ABS(c/h) ) GOTO 20
           E2(l) = h*E2(l)
-          IF ( E2(l)==0.0 ) GOTO 20
+          IF( E2(l)==0.0 ) GOTO 20
         END DO
         GOTO 50
       END IF
@@ -147,13 +146,13 @@ SUBROUTINE TEVLS(N,D,E2,Ierr)
       !
       !     ********** ORDER EIGENVALUES **********
       !
-      IF ( l/=1 ) THEN
+      IF( l/=1 ) THEN
         !
         !     ********** FOR I=L STEP -1 UNTIL 2 DO -- **********
         !
         DO ii = 2, l
           i = l + 2 - ii
-          IF ( p>=D(i-1) ) GOTO 40
+          IF( p>=D(i-1) ) GOTO 40
           D(i) = D(i-1)
         END DO
       END IF
@@ -162,7 +161,7 @@ SUBROUTINE TEVLS(N,D,E2,Ierr)
       40  D(i) = p
     END DO
     !
-    IF ( ABS(D(N))<ABS(D(1)) ) THEN
+    IF( ABS(D(N))<ABS(D(1)) ) THEN
       nhalf = N/2
       DO i = 1, nhalf
         ntop = N - i

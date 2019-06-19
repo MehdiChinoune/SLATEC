@@ -1,7 +1,6 @@
 !** DFDJC3
 SUBROUTINE DFDJC3(FCN,M,N,X,Fvec,Fjac,Ldfjac,Iflag,Epsfcn,Wa)
-  !>
-  !  Subsidiary to DNLS1 and DNLS1E
+  !> Subsidiary to DNLS1 and DNLS1E
   !***
   ! **Library:**   SLATEC
   !***
@@ -32,7 +31,7 @@ SUBROUTINE DFDJC3(FCN,M,N,X,Fvec,Fjac,Ldfjac,Iflag,Epsfcn,Wa)
   !         INTEGER LDFJAC,M,N,IFLAG
   !         DOUBLE PRECISION X(N),FVEC(M),FJAC(LDFJAC,N)
   !         ----------
-  !         When IFLAG.EQ.1 calculate the functions at X and
+  !         When IFLAG=1 calculate the functions at X and
   !         return this vector in FVEC.
   !         ----------
   !         RETURN
@@ -109,10 +108,10 @@ SUBROUTINE DFDJC3(FCN,M,N,X,Fvec,Fjac,Ldfjac,Iflag,Epsfcn,Wa)
   DO j = 1, N
     temp = X(j)
     h = eps*ABS(temp)
-    IF ( h==zero ) h = eps
+    IF( h==zero ) h = eps
     X(j) = temp + h
     CALL FCN(Iflag,M,N,X,Wa,Fjac,Ldfjac)
-    IF ( Iflag<0 ) EXIT
+    IF( Iflag<0 ) EXIT
     X(j) = temp
     DO i = 1, M
       Fjac(i,j) = (Wa(i)-Fvec(i))/h

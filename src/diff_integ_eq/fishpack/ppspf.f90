@@ -1,7 +1,6 @@
 !** PPSPF
 REAL(SP) FUNCTION PPSPF(X,Iz,C,A,Bh)
-  !>
-  !  Subsidiary to BLKTRI
+  !> Subsidiary to BLKTRI
   !***
   ! **Library:**   SLATEC
   !***

@@ -1,7 +1,6 @@
 !** SINQF
 SUBROUTINE SINQF(N,X,Wsave)
-  !>
-  !  Compute the forward sine transform with odd wave numbers.
+  !> Compute the forward sine transform with odd wave numbers.
   !***
   ! **Library:**   SLATEC (FFTPACK)
   !***
@@ -82,7 +81,7 @@ SUBROUTINE SINQF(N,X,Wsave)
   INTEGER :: k, kc, ns2
   REAL(SP) :: xhold
   !* FIRST EXECUTABLE STATEMENT  SINQF
-  IF ( N==1 ) RETURN
+  IF( N==1 ) RETURN
   ns2 = N/2
   DO k = 1, ns2
     kc = N - k

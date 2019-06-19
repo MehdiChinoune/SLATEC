@@ -2,8 +2,7 @@
 SUBROUTINE SPLPMN(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
     Primal,Duals,Amat,Csc,Colnrm,Erd,Erp,Basmat,Wr,Rz,Rg,&
     Rprim,Rhs,Ww,Lmx,Lbm,Ibasis,Ibb,Imat,Ibrc,Ipr,Iwr)
-  !>
-  !  Subsidiary to SPLP
+  !> Subsidiary to SPLP
   !***
   ! **Library:**   SLATEC
   !***
@@ -90,11 +89,11 @@ SUBROUTINE SPLPMN(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   !     IBASIS(NVARS+MRELAS)  COLS. 1-MRELAS ARE BASIC, REST ARE NON-BASIC
   !     IBB(NVARS+MRELAS)     INDICATOR FOR NON-BASIC VARS., POLARITY OF
   !                           VARS., AND POTENTIALLY INFINITE VARS.
-  !                           IF IBB(J).LT.0, VARIABLE J IS BASIC
-  !                           IF IBB(J).GT.0, VARIABLE J IS NON-BASIC
-  !                           IF IBB(J).EQ.0, VARIABLE J HAS TO BE IGNORED
+  !                           IF IBB(J)<0, VARIABLE J IS BASIC
+  !                           IF IBB(J)>0, VARIABLE J IS NON-BASIC
+  !                           IF IBB(J)=0, VARIABLE J HAS TO BE IGNORED
   !                           BECAUSE IT WOULD CAUSE UNBOUNDED SOLN.
-  !                           WHEN MOD(IBB(J),2).EQ.0, VARIABLE IS AT ITS
+  !                           WHEN MOD(IBB(J),2)=0, VARIABLE IS AT ITS
   !                           UPPER BOUND, OTHERWISE IT IS AT ITS LOWER
   !                           BOUND
   !     COLNRM(NVARS)         NORM OF COLUMNS
@@ -206,8 +205,8 @@ SUBROUTINE SPLPMN(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   !     PROCESS USER OPTIONS IN PRGOPT(*).
   !     CHECK THAT ANY USER-GIVEN CHANGES ARE WELL-DEFINED.
   CALL SPOPT(Prgopt,Mrelas,Nvars,Info,Csc,Ibasis,ropt,intopt,lopt)
-  IF ( Info<0 ) GOTO 4600
-  IF ( .NOT.(contin) ) THEN
+  IF( Info<0 ) GOTO 4600
+  IF( .NOT. (contin) ) THEN
     !
     !     INITIALIZE SPARSE DATA MATRIX, AMAT(*) AND IMAT(*).
     CALL PINITM(Mrelas,Nvars,Amat,Imat,Lmx,ipagef)
@@ -225,10 +224,10 @@ SUBROUTINE SPLPMN(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   !     UPDATE MATRIX DATA AND CHECK BOUNDS FOR CONSISTENCY.
   100  CALL SPLPUP(USRMAT,Mrelas,Nvars,Dattrv,Bl,Bu,Ind,Info,Amat,Imat,&
     sizeup,asmall,abig)
-  IF ( Info<0 ) GOTO 4600
+  IF( Info<0 ) GOTO 4600
   !
   !++  CODE FOR OUTPUT=YES IS ACTIVE
-  IF ( kprint>=1 ) THEN
+  IF( kprint>=1 ) THEN
     ! CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
     !++  CODE FOR OUTPUT=YES IS ACTIVE
     !     PROCEDURE (PRINT PROLOGUE)
@@ -256,7 +255,7 @@ SUBROUTINE SPLPMN(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
       '('' LOWER BOUNDS FOR VARIABLES  (IGNORE UNUSED ENTRIES.)'')',idg)
     CALL SVOUT(Nvars+Mrelas,Bu,&
       '('' UPPER BOUNDS FOR VARIABLES  (IGNORE UNUSED ENTRIES.)'')',idg)
-    IF ( kprint>=2 ) THEN
+    IF( kprint>=2 ) THEN
       CALL IVOUT(0,idum,'(''0NON-BASIC INDICES THAT ARE NEGATIVE SHOW VARIABLES&
         & EXCHANGED AT A ZERO''/&
         &'' STEP LENGTH'')',idg)
@@ -274,13 +273,13 @@ SUBROUTINE SPLPMN(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   !     CHECK SUMS, AND FORM INITIAL BASIS MATRIX.
   CALL SPINIT(Mrelas,Nvars,Costs,Bl,Bu,Ind,Primal,Amat,Csc,costsc,&
     Colnrm,xlamda,anorm,Rhs,rhsnrm,Ibasis,Ibb,Imat,lopt)
-  IF ( Info<0 ) GOTO 4600
+  IF( Info<0 ) GOTO 4600
   !
   nredc = 0
   npr004 = 200
   GOTO 2700
   200 CONTINUE
-  IF ( .NOT.(singlr) ) THEN
+  IF( .NOT. (singlr) ) THEN
     npr005 = 300
     ! CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
     !     PROCEDURE (COMPUTE ERROR IN DUAL AND PRIMAL SYSTEMS)
@@ -298,11 +297,11 @@ SUBROUTINE SPLPMN(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   400  npr007 = 500
   GOTO 2800
   500 CONTINUE
-  IF ( .NOT.(usrbas) ) GOTO 700
+  IF( .NOT. (usrbas) ) GOTO 700
   npr008 = 600
   GOTO 3100
   600 CONTINUE
-  IF ( .NOT.feas ) THEN
+  IF( .NOT. feas ) THEN
     nerr = 24
     CALL XERMSG('SPLPMN',&
       'IN SPLP, AN INFEASIBLE INITIAL BASIS WAS ENCOUNTERED.',nerr,iopt)
@@ -323,15 +322,15 @@ SUBROUTINE SPLPMN(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   1000 npr008 = 1100
   GOTO 3100
   1100 CONTINUE
-  IF ( feas ) THEN
+  IF( feas ) THEN
     !     CHECK IF ANY BASIC VARIABLES ARE STILL CLASSIFIED AS
     !     INFEASIBLE.  IF ANY ARE, THEN THIS MAY NOT YET BE AN
     !     OPTIMAL POINT.  THEREFORE SET LAMDA TO ZERO AND TRY
     !     TO PERFORM MORE SIMPLEX STEPS.
     i = 1
     n20046 = Mrelas
-    DO WHILE ( (n20046-i)>=0 )
-      IF ( Primal(i+Nvars)/=zero ) THEN
+    DO WHILE( (n20046-i)>=0 )
+      IF( Primal(i+Nvars)/=zero ) THEN
         xlamda = zero
         npr009 = 1700
         npr013= 2000
@@ -345,7 +344,7 @@ SUBROUTINE SPLPMN(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
     !
     !     SET LAMDA TO INFINITY BY SETTING COSTSC TO ZERO (SAVE THE VALUE OF
     !     COSTSC) AND PERFORM STANDARD PHASE-1.
-    IF ( kprint>=2 ) CALL IVOUT(0,idum,'('' ENTER STANDARD PHASE-1'')',idg)
+    IF( kprint>=2 ) CALL IVOUT(0,idum,'('' ENTER STANDARD PHASE-1'')',idg)
     scosts = costsc
     costsc = zero
     npr007 = 1200
@@ -361,10 +360,10 @@ SUBROUTINE SPLPMN(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   1500 npr008 = 1600
   GOTO 3100
   1600 CONTINUE
-  IF ( feas ) THEN
+  IF( feas ) THEN
     !
     !     SET LAMDA TO ZERO, COSTSC=SCOSTS, PERFORM STANDARD PHASE-2.
-    IF ( kprint>1 ) CALL IVOUT(0,idum,'('' ENTER STANDARD PHASE-2'')',idg)
+    IF( kprint>1 ) CALL IVOUT(0,idum,'('' ENTER STANDARD PHASE-2'')',idg)
     xlamda = zero
     costsc = scosts
     npr009 = 1700
@@ -380,19 +379,19 @@ SUBROUTINE SPLPMN(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   npr013 = 4300
   GOTO 4100
   1800 CONTINUE
-  IF ( feas.AND.(.NOT.unbnd) ) THEN
+  IF( feas .AND. ( .NOT. unbnd) ) THEN
     Info = 1
-  ELSEIF ( (.NOT.feas).AND.(.NOT.unbnd) ) THEN
+  ELSEIF( ( .NOT. feas) .AND. ( .NOT. unbnd) ) THEN
     nerr = 1
     CALL XERMSG('SPLPMN',&
       'IN SPLP, THE PROBLEM APPEARS TO BE INFEASIBLE',nerr,iopt)
     Info = -nerr
-  ELSEIF ( feas.AND.unbnd ) THEN
+  ELSEIF( feas .AND. unbnd ) THEN
     nerr = 2
     CALL XERMSG('SPLPMN',&
       'IN SPLP, THE PROBLEM APPEARS TO HAVE NO FINITE SOLUTION.',nerr,iopt)
     Info = -nerr
-  ELSEIF ( (.NOT.feas).AND.unbnd ) THEN
+  ELSEIF( ( .NOT. feas) .AND. unbnd ) THEN
     nerr = 3
     CALL XERMSG('SPLPMN',&
       'IN SPLP, THE PROBLEM APPEARS TO BE INFEASIBLE AND TO HAVE NO FINITE SOLUTION.'&
@@ -400,32 +399,32 @@ SUBROUTINE SPLPMN(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
     Info = -nerr
   END IF
   !
-  IF ( Info==(-1).OR.Info==(-3) ) THEN
+  IF( Info==(-1) .OR. Info==(-3) ) THEN
     sizee = SUM(ABS(Primal(1:Nvars)))*anorm
     sizee = sizee/SUM(ABS(Csc(1:Nvars)))
     sizee = sizee + SUM(ABS(Primal(Nvars+1:Nvars+Mrelas)))
     i = 1
     n20058 = Nvars + Mrelas
-    DO WHILE ( (n20058-i)>=0 )
+    DO WHILE( (n20058-i)>=0 )
       nx0066 = Ind(i)
-      IF ( nx0066>=1.AND.nx0066<=4 ) THEN
+      IF( nx0066>=1 .AND. nx0066<=4 ) THEN
         SELECT CASE (nx0066)
           CASE (2)
-            IF ( sizee+ABS(Primal(i)-Bu(i))*factor/=sizee ) THEN
-              IF ( Primal(i)>=Bu(i) ) Ind(i) = -4
+            IF( sizee+ABS(Primal(i)-Bu(i))*factor/=sizee ) THEN
+              IF( Primal(i)>=Bu(i) ) Ind(i) = -4
             END IF
           CASE (3)
-            IF ( sizee+ABS(Primal(i)-Bl(i))*factor/=sizee ) THEN
-              IF ( Primal(i)<Bl(i) ) THEN
+            IF( sizee+ABS(Primal(i)-Bl(i))*factor/=sizee ) THEN
+              IF( Primal(i)<Bl(i) ) THEN
                 Ind(i) = -4
-              ELSEIF ( sizee+ABS(Primal(i)-Bu(i))*factor/=sizee ) THEN
-                IF ( Primal(i)>Bu(i) ) Ind(i) = -4
+              ELSEIF( sizee+ABS(Primal(i)-Bu(i))*factor/=sizee ) THEN
+                IF( Primal(i)>Bu(i) ) Ind(i) = -4
               END IF
             END IF
           CASE (4)
           CASE DEFAULT
-            IF ( sizee+ABS(Primal(i)-Bl(i))*factor/=sizee ) THEN
-              IF ( Primal(i)<=Bl(i) ) Ind(i) = -4
+            IF( sizee+ABS(Primal(i)-Bl(i))*factor/=sizee ) THEN
+              IF( Primal(i)<=Bl(i) ) Ind(i) = -4
             END IF
         END SELECT
       END IF
@@ -433,13 +432,13 @@ SUBROUTINE SPLPMN(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
     END DO
   END IF
   !
-  IF ( Info==(-2).OR.Info==(-3) ) THEN
+  IF( Info==(-2) .OR. Info==(-3) ) THEN
     j = 1
     n20080 = Nvars
-    DO WHILE ( (n20080-j)>=0 )
-      IF ( Ibb(j)==0 ) THEN
+    DO WHILE( (n20080-j)>=0 )
+      IF( Ibb(j)==0 ) THEN
         nx0091 = Ind(j)
-        IF ( nx0091>=1.AND.nx0091<=4 ) THEN
+        IF( nx0091>=1 .AND. nx0091<=4 ) THEN
           SELECT CASE (nx0091)
             CASE (2)
               Bl(j) = Bu(j)
@@ -459,7 +458,7 @@ SUBROUTINE SPLPMN(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
     END DO
   END IF
   !++  CODE FOR OUTPUT=YES IS ACTIVE
-  IF ( kprint<1 ) GOTO 4600
+  IF( kprint<1 ) GOTO 4600
   npr012 = 4600
   !++  CODE FOR OUTPUT=NO IS INACTIVE
   !++  END
@@ -469,9 +468,9 @@ SUBROUTINE SPLPMN(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   1900 Rhs(1:Mrelas) = zero
   j = 1
   n20098 = Nvars + Mrelas
-  DO WHILE ( (n20098-j)>=0 )
+  DO WHILE( (n20098-j)>=0 )
     nx0106 = Ind(j)
-    IF ( nx0106>=1.AND.nx0106<=4 ) THEN
+    IF( nx0106>=1 .AND. nx0106<=4 ) THEN
       SELECT CASE (nx0106)
         CASE (2)
           scalr = -Bu(j)
@@ -483,16 +482,16 @@ SUBROUTINE SPLPMN(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
           scalr = -Bl(j)
       END SELECT
     END IF
-    IF ( scalr==zero ) THEN
+    IF( scalr==zero ) THEN
       j = j + 1
-    ELSEIF ( j>Nvars ) THEN
+    ELSEIF( j>Nvars ) THEN
       Rhs(j-Nvars) = Rhs(j-Nvars) - scalr
       j = j + 1
     ELSE
       i = 0
       DO
         CALL PNNZRS(i,aij,iplace,Amat,Imat,j)
-        IF ( i>0 ) THEN
+        IF( i>0 ) THEN
           Rhs(i) = Rhs(i) + aij*scalr
         ELSE
           j = j + 1
@@ -503,19 +502,19 @@ SUBROUTINE SPLPMN(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   END DO
   j = 1
   n20119 = Nvars + Mrelas
-  DO WHILE ( (n20119-j)>=0 )
+  DO WHILE( (n20119-j)>=0 )
     scalr = zero
-    IF ( Ind(j)==3.AND.MOD(Ibb(j),2)==0 ) scalr = Bu(j) - Bl(j)
-    IF ( scalr==zero ) THEN
+    IF( Ind(j)==3 .AND. MOD(Ibb(j),2)==0 ) scalr = Bu(j) - Bl(j)
+    IF( scalr==zero ) THEN
       j = j + 1
-    ELSEIF ( j>Nvars ) THEN
+    ELSEIF( j>Nvars ) THEN
       Rhs(j-Nvars) = Rhs(j-Nvars) + scalr
       j = j + 1
     ELSE
       i = 0
       DO
         CALL PNNZRS(i,aij,iplace,Amat,Imat,j)
-        IF ( i>0 ) THEN
+        IF( i>0 ) THEN
           Rhs(i) = Rhs(i) - aij*scalr
         ELSE
           j = j + 1
@@ -533,22 +532,22 @@ SUBROUTINE SPLPMN(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   2000 npr014 = 2100
   GOTO 3200
   2100 CONTINUE
-  IF ( kprint>2 ) THEN
+  IF( kprint>2 ) THEN
     CALL SVOUT(Mrelas,Duals,'('' BASIC (INTERNAL) DUAL SOLN.'')',idg)
     CALL SVOUT(Nvars+Mrelas,Rz,'('' REDUCED COSTS'')',idg)
   END IF
   npr015 = 2200
   GOTO 4200
   2200 CONTINUE
-  IF ( .NOT.found ) THEN
+  IF( .NOT. found ) THEN
     ! CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
     !     PROCEDURE (REDECOMPOSE BASIS MATRIX AND TRY AGAIN)
-    IF ( redbas ) GOTO 3900
+    IF( redbas ) GOTO 3900
     npr004 = 3500
     GOTO 2700
   END IF
   2300 CONTINUE
-  IF ( .NOT.(found) ) THEN
+  IF( .NOT. (found) ) THEN
     SELECT CASE(npr009)
       CASE(800)
         GOTO 800
@@ -558,12 +557,12 @@ SUBROUTINE SPLPMN(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
         GOTO 1700
     END SELECT
   ELSE
-    IF ( kprint>=3 ) CALL SVOUT(Mrelas,Ww,'('' SEARCH DIRECTION'')',idg)
+    IF( kprint>=3 ) CALL SVOUT(Mrelas,Ww,'('' SEARCH DIRECTION'')',idg)
     ! CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
     !     PROCEDURE (CHOOSE VARIABLE TO LEAVE BASIS)
     CALL SPLPFL(Mrelas,Nvars,ienter,ileave,Ibasis,Ind,theta,dirnrm,&
       rprnrm,Csc,Ww,Bl,Bu,Erp,Rprim,Primal,finite,zerolv)
-    IF ( .NOT.(finite) ) THEN
+    IF( .NOT. (finite) ) THEN
       unbnd = .TRUE.
       Ibb(Ibasis(ienter)) = 0
     ELSE
@@ -574,9 +573,9 @@ SUBROUTINE SPLPMN(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
         rprnrm,erdnrm,dulnrm,theta,costsc,xlamda,rhsnrm,Amat,&
         Basmat,Csc,Wr,Rprim,Ww,Bu,Bl,Rhs,Erd,Erp,Rz,Rg,Colnrm,&
         Costs,Primal,Duals,singlr,redbas,zerolv,stpedg)
-      IF ( Info==(-26) ) GOTO 4600
+      IF( Info==(-26) ) GOTO 4600
       !++  CODE FOR OUTPUT=YES IS ACTIVE
-      IF ( kprint>=2 ) THEN
+      IF( kprint>=2 ) THEN
         ! CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
         !     PROCEDURE (PRINT ITERATION SUMMARY)
         idum(1) = itlp + 1
@@ -589,7 +588,7 @@ SUBROUTINE SPLPMN(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
         CALL IVOUT(1,idum,'('' INDEX OF VARIABLE LEAVING THE BASIS'')',idg)
         rdum(1) = theta
         CALL SVOUT(1,rdum,'('' LENGTH OF THE EXCHANGE STEP'')',idg)
-        IF ( kprint>=3 ) THEN
+        IF( kprint>=3 ) THEN
           CALL SVOUT(Mrelas,Rprim,'('' BASIC (INTERNAL) PRIMAL SOLN.'')',idg)
           CALL IVOUT(Nvars+Mrelas,Ibasis,&
             '('' VARIABLE INDICES IN POSITIONS 1-MRELAS ARE BASIC.'')',idg)
@@ -608,7 +607,7 @@ SUBROUTINE SPLPMN(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   2400 itlp = itlp + 1
   ! CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
   !     PROCEDURE (CHECK AND RETURN WITH EXCESS ITERATIONS)
-  IF ( itlp<=mxitlp ) THEN
+  IF( itlp<=mxitlp ) THEN
     npr015 = 2200
     GOTO 4200
   ELSE
@@ -622,7 +621,7 @@ SUBROUTINE SPLPMN(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   CALL PRWPGE(key,ipage,lpg,Amat,Imat)
   np = Imat(Lmx-1)
   ipage = ipage + 1
-  IF ( np>=0 ) GOTO 2500
+  IF( np>=0 ) GOTO 2500
   nparm = Nvars + Mrelas
   READ (isave) (Ibasis(i),i=1,nparm)
   REWIND isave
@@ -632,17 +631,17 @@ SUBROUTINE SPLPMN(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   WRITE (isave) (Amat(i),i=lpr1,Lmx), (Imat(i),i=lpr1,Lmx)
   np = Imat(Lmx-1)
   ipage = ipage + 1
-  IF ( np>=0 ) GOTO 2600
+  IF( np>=0 ) GOTO 2600
   nparm = Nvars + Mrelas
   WRITE (isave) (Ibasis(i),i=1,nparm)
   ENDFILE isave
-  IF ( Imat(Lmx-1)/=(-1) ) CALL SCLOSM(ipagef)
+  IF( Imat(Lmx-1)/=(-1) ) CALL SCLOSM(ipagef)
   RETURN
   ! CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
   !     PROCEDURE (DECOMPOSE BASIS MATRIX)
   !++  CODE FOR OUTPUT=YES IS ACTIVE
   2700 CONTINUE
-  IF ( kprint>=2 ) CALL IVOUT(Mrelas,Ibasis,&
+  IF( kprint>=2 ) CALL IVOUT(Mrelas,Ibasis,&
     '('' SUBSCRIPTS OF BASIC VARIABLES DURING REDECOMPOSITION'')',idg)
   !++  CODE FOR OUTPUT=NO IS INACTIVE
   !++  END
@@ -651,7 +650,7 @@ SUBROUTINE SPLPMN(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   uu = 0.1
   CALL SPLPDM(Mrelas,Nvars,Lbm,nredc,Info,iopt,Ibasis,Imat,Ibrc,Ipr,Iwr,&
     Ind,anorm,eps,uu,gg,Amat,Basmat,Csc,Wr,singlr,redbas)
-  IF ( Info<0 ) GOTO 4600
+  IF( Info<0 ) GOTO 4600
   SELECT CASE(npr004)
     CASE(200)
       GOTO 200
@@ -666,27 +665,27 @@ SUBROUTINE SPLPMN(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   !     DEFINE THE CLASSIFICATION OF THE BASIC VARIABLES
   !     -1 VIOLATES LOWER BOUND, 0 FEASIBLE, +1 VIOLATES UPPER BOUND.
   !     (THIS INFO IS STORED IN PRIMAL(NVARS+1)-PRIMAL(NVARS+MRELAS))
-  !     TRANSLATE VARIABLE TO ITS UPPER BOUND, IF .GT. UPPER BOUND
+  !     TRANSLATE VARIABLE TO ITS UPPER BOUND, IF > UPPER BOUND
   2800 Primal(Nvars+1:Nvars+Mrelas) = zero
   i = 1
   n20172 = Mrelas
-  DO WHILE ( (n20172-i)>=0 )
+  DO WHILE( (n20172-i)>=0 )
     j = Ibasis(i)
-    IF ( Ind(j)/=4 ) THEN
-      IF ( Rprim(i)<zero ) THEN
+    IF( Ind(j)/=4 ) THEN
+      IF( Rprim(i)<zero ) THEN
         Primal(i+Nvars) = -one
-      ELSEIF ( Ind(j)==3 ) THEN
+      ELSEIF( Ind(j)==3 ) THEN
         upbnd = Bu(j) - Bl(j)
-        IF ( j<=Nvars ) upbnd = upbnd/Csc(j)
-        IF ( Rprim(i)>upbnd ) THEN
+        IF( j<=Nvars ) upbnd = upbnd/Csc(j)
+        IF( Rprim(i)>upbnd ) THEN
           Rprim(i) = Rprim(i) - upbnd
-          IF ( j>Nvars ) THEN
+          IF( j>Nvars ) THEN
             Rhs(j-Nvars) = Rhs(j-Nvars) + upbnd
           ELSE
             k = 0
             DO
               CALL PNNZRS(k,aij,iplace,Amat,Imat,j)
-              IF ( k<=0 ) EXIT
+              IF( k<=0 ) EXIT
               Rhs(k) = Rhs(k) - upbnd*aij*Csc(j)
             END DO
           END IF
@@ -704,12 +703,12 @@ SUBROUTINE SPLPMN(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   END SELECT
   2900 ntries = ntries + 1
   3000 CONTINUE
-  IF ( (2-ntries)>=0 ) THEN
+  IF( (2-ntries)>=0 ) THEN
     CALL SPLPCE(Mrelas,Nvars,Lmx,Lbm,itlp,itbrc,Ibasis,Imat,Ibrc,Ipr,Iwr,&
       Ind,Ibb,erdnrm,eps,tune,gg,Amat,Basmat,Csc,Wr,Ww,Primal,Erd,Erp,singlr,redbas)
-    IF ( .NOT.singlr ) THEN
+    IF( .NOT. singlr ) THEN
       !++  CODE FOR OUTPUT=YES IS ACTIVE
-      IF ( kprint>=3 ) THEN
+      IF( kprint>=3 ) THEN
         CALL SVOUT(Mrelas,Erp,'('' EST. ERROR IN PRIMAL COMPS.'')',idg)
         !++  CODE FOR OUTPUT=NO IS INACTIVE
         !++  END
@@ -723,7 +722,7 @@ SUBROUTINE SPLPMN(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
         CASE(3600)
           GOTO 3600
       END SELECT
-    ELSEIF ( ntries/=2 ) THEN
+    ELSEIF( ntries/=2 ) THEN
       npr004 = 2900
       GOTO 2700
     END IF
@@ -743,25 +742,25 @@ SUBROUTINE SPLPMN(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   3100 Ww(1:Mrelas) = Rhs(1:Mrelas)
   j = 1
   n20206 = Mrelas
-  DO WHILE ( (n20206-j)>=0 )
+  DO WHILE( (n20206-j)>=0 )
     ibas = Ibasis(j)
     xval = Rprim(j)
     !
     !     ALL VARIABLES BOUNDED BELOW HAVE ZERO AS THAT BOUND.
-    IF ( Ind(ibas)<=3 ) xval = MAX(zero,xval)
+    IF( Ind(ibas)<=3 ) xval = MAX(zero,xval)
     !
     !     IF THE VARIABLE HAS AN UPPER BOUND, COMPUTE THAT BOUND.
-    IF ( Ind(ibas)==3 ) THEN
+    IF( Ind(ibas)==3 ) THEN
       upbnd = Bu(ibas) - Bl(ibas)
-      IF ( ibas<=Nvars ) upbnd = upbnd/Csc(ibas)
+      IF( ibas<=Nvars ) upbnd = upbnd/Csc(ibas)
       xval = MIN(upbnd,xval)
     END IF
     !
     !     SUBTRACT XVAL TIMES COLUMN VECTOR FROM RIGHT-HAND SIDE IN WW(*)
-    IF ( xval==zero ) THEN
+    IF( xval==zero ) THEN
       j = j + 1
-    ELSEIF ( ibas>Nvars ) THEN
-      IF ( Ind(ibas)/=2 ) THEN
+    ELSEIF( ibas>Nvars ) THEN
+      IF( Ind(ibas)/=2 ) THEN
         Ww(ibas-Nvars) = Ww(ibas-Nvars) + xval
       ELSE
         Ww(ibas-Nvars) = Ww(ibas-Nvars) - xval
@@ -771,7 +770,7 @@ SUBROUTINE SPLPMN(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
       i = 0
       DO
         CALL PNNZRS(i,aij,iplace,Amat,Imat,ibas)
-        IF ( i>0 ) THEN
+        IF( i>0 ) THEN
           Ww(i) = Ww(i) - xval*aij*Csc(ibas)
         ELSE
           j = j + 1
@@ -786,8 +785,8 @@ SUBROUTINE SPLPMN(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   feas = resnrm<=tolls*(rprnrm*anorm+rhsnrm)
   !
   !     TRY AN ABSOLUTE ERROR TEST IF THE RELATIVE TEST FAILS.
-  IF ( .NOT.feas ) feas = resnrm<=tolabs
-  IF ( feas ) THEN
+  IF( .NOT. feas ) feas = resnrm<=tolabs
+  IF( feas ) THEN
     Primal(Nvars+1:Nvars+Mrelas) = zero
   END IF
   SELECT CASE(npr008)
@@ -811,14 +810,14 @@ SUBROUTINE SPLPMN(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   END SELECT
   !++  CODE FOR OUTPUT=YES IS ACTIVE
   3300 CONTINUE
-  IF ( kprint>=1 ) THEN
+  IF( kprint>=1 ) THEN
     npr012 = 3400
     GOTO 4500
   END IF
   !++  CODE FOR OUTPUT=NO IS INACTIVE
   !++  END
   3400 idum(1) = 0
-  IF ( savedt ) idum(1) = isave
+  IF( savedt ) idum(1) = isave
   WRITE (xern1,'(I8)') mxitlp
   WRITE (xern2,'(I8)') idum(1)
   CALL XERMSG('SPLPMN','IN SPLP, MAX ITERATIONS = '//xern1//&
@@ -839,7 +838,7 @@ SUBROUTINE SPLPMN(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   !     ERASE NON-CYCLING MARKERS NEAR COMPLETION.
   3900 i = Mrelas + 1
   n20247 = Mrelas + Nvars
-  DO WHILE ( (n20247-i)>=0 )
+  DO WHILE( (n20247-i)>=0 )
     Ibasis(i) = ABS(Ibasis(i))
     i = i + 1
   END DO
@@ -872,9 +871,9 @@ SUBROUTINE SPLPMN(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   !     SOLVE FOR DUAL VARIABLES. FIRST COPY COSTS INTO DUALS(*).
   4100 i = 1
   n20252 = Mrelas
-  DO WHILE ( (n20252-i)>=0 )
+  DO WHILE( (n20252-i)>=0 )
     j = Ibasis(i)
-    IF ( j>Nvars ) THEN
+    IF( j>Nvars ) THEN
       Duals(i) = xlamda*Primal(i+Nvars)
     ELSE
       Duals(i) = costsc*Costs(j)*Csc(j) + xlamda*Primal(i+Nvars)
@@ -904,13 +903,13 @@ SUBROUTINE SPLPMN(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
       GOTO 2300
   END SELECT
   4300 CONTINUE
-  IF ( costsc==zero ) THEN
+  IF( costsc==zero ) THEN
     npr006 = 4400
     GOTO 4000
   ELSE
     i = 1
     n20271 = Mrelas
-    DO WHILE ( (n20271-i)>=0 )
+    DO WHILE( (n20271-i)>=0 )
       Duals(i) = Duals(i)/costsc
       i = i + 1
     END DO
@@ -921,11 +920,11 @@ SUBROUTINE SPLPMN(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   !     REAPPLY COLUMN SCALING TO PRIMAL.
   4400 i = 1
   n20276 = Mrelas
-  DO WHILE ( (n20276-i)>=0 )
+  DO WHILE( (n20276-i)>=0 )
     j = Ibasis(i)
-    IF ( j<=Nvars ) THEN
+    IF( j<=Nvars ) THEN
       scalr = Csc(j)
-      IF ( Ind(j)==2 ) scalr = -scalr
+      IF( Ind(j)==2 ) scalr = -scalr
       Rprim(i) = Rprim(i)*scalr
     END IF
     i = i + 1
@@ -935,14 +934,14 @@ SUBROUTINE SPLPMN(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   Primal(1:Nvars+Mrelas) = zero
   j = 1
   n20283 = Nvars + Mrelas
-  DO WHILE ( (n20283-j)>=0 )
+  DO WHILE( (n20283-j)>=0 )
     ibas = ABS(Ibasis(j))
     xval = zero
-    IF ( j<=Mrelas ) xval = Rprim(j)
-    IF ( Ind(ibas)==1 ) xval = xval + Bl(ibas)
-    IF ( Ind(ibas)==2 ) xval = Bu(ibas) - xval
-    IF ( Ind(ibas)==3 ) THEN
-      IF ( MOD(Ibb(ibas),2)==0 ) xval = Bu(ibas) - Bl(ibas) - xval
+    IF( j<=Mrelas ) xval = Rprim(j)
+    IF( Ind(ibas)==1 ) xval = xval + Bl(ibas)
+    IF( Ind(ibas)==2 ) xval = Bu(ibas) - xval
+    IF( Ind(ibas)==3 ) THEN
+      IF( MOD(Ibb(ibas),2)==0 ) xval = Bu(ibas) - Bl(ibas) - xval
       xval = xval + Bl(ibas)
     END IF
     Primal(ibas) = xval
@@ -953,14 +952,14 @@ SUBROUTINE SPLPMN(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   !     OTHER ENTRIES ARE ZERO.
   j = 1
   n20290 = Nvars
-  DO WHILE ( (n20290-j)>=0 )
+  DO WHILE( (n20290-j)>=0 )
     rzj = zero
-    IF ( Ibb(j)>zero.AND.Ind(j)/=4 ) THEN
+    IF( Ibb(j)>zero .AND. Ind(j)/=4 ) THEN
       rzj = Costs(j)
       i = 0
       DO
         CALL PNNZRS(i,aij,iplace,Amat,Imat,j)
-        IF ( i<=0 ) EXIT
+        IF( i<=0 ) EXIT
         rzj = rzj - aij*Duals(i)
       END DO
     END IF
@@ -977,12 +976,12 @@ SUBROUTINE SPLPMN(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   !     PROCEDURE (PRINT SUMMARY)
   4500 idum(1) = Info
   CALL IVOUT(1,idum,'('' THE OUTPUT VALUE OF INFO IS'')',idg)
-  IF ( .NOT.(minprb) ) THEN
+  IF( .NOT. (minprb) ) THEN
     CALL IVOUT(0,idum,'('' THIS IS A MAXIMIZATION PROBLEM.'')',idg)
   ELSE
     CALL IVOUT(0,idum,'('' THIS IS A MINIMIZATION PROBLEM.'')',idg)
   END IF
-  IF ( .NOT.(stpedg) ) THEN
+  IF( .NOT. (stpedg) ) THEN
     CALL IVOUT(0,idum,'('' MINIMUM REDUCED COST PRICING WAS USED.'')',idg)
   ELSE
     CALL IVOUT(0,idum,'('' STEEPEST EDGE PRICING WAS USED.'')',idg)
@@ -1009,14 +1008,14 @@ SUBROUTINE SPLPMN(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   ! CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
   !     PROCEDURE (RETURN TO USER)
   4600 CONTINUE
-  IF ( .NOT.(savedt) ) THEN
-    IF ( Imat(Lmx-1)/=(-1) ) CALL SCLOSM(ipagef)
+  IF( .NOT. (savedt) ) THEN
+    IF( Imat(Lmx-1)/=(-1) ) CALL SCLOSM(ipagef)
   ELSE
     ! CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
     !     PROCEDURE (SAVE DATA ON FILE ISAVE)
     !
     !     SOME PAGES MAY NOT BE WRITTEN YET.
-    IF ( Amat(Lmx)==one ) THEN
+    IF( Amat(Lmx)==one ) THEN
       Amat(Lmx) = zero
       key = 2
       ipage = ABS(Imat(Lmx-1))

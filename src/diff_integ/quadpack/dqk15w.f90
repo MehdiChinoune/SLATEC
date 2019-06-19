@@ -1,7 +1,6 @@
 !** DQK15W
 SUBROUTINE DQK15W(F,W,P1,P2,P3,P4,Kp,A,B,Result,Abserr,Resabs,Resasc)
-  !>
-  !  To compute I = Integral of F*W over (A,B), with error
+  !> To compute I = Integral of F*W over (A,B), with error
   !                           estimate
   !                       J = Integral of ABS(F*W) over (A,B)
   !***
@@ -94,7 +93,7 @@ SUBROUTINE DQK15W(F,W,P1,P2,P3,P4,Kp,A,B,Result,Abserr,Resabs,Resasc)
   REAL(DP) :: A, absc, absc1, absc2, Abserr, B, centr, dhlgth, epmach, fc, fsum, &
     fval1, fval2, fv1(7), fv2(7), hlgth, P1, P2, P3, P4, Resabs, Resasc, &
     resg, resk, reskh, Result, uflow
-  INTEGER j, jtw, jtwm1, Kp
+  INTEGER :: j, jtw, jtwm1, Kp
   !
   !           THE ABSCISSAE AND WEIGHTS ARE GIVEN FOR THE INTERVAL (-1,1).
   !           BECAUSE OF SYMMETRY ONLY THE POSITIVE ABSCISSAE AND THEIR
@@ -188,8 +187,8 @@ SUBROUTINE DQK15W(F,W,P1,P2,P3,P4,Kp,A,B,Result,Abserr,Resabs,Resasc)
   Resabs = Resabs*dhlgth
   Resasc = Resasc*dhlgth
   Abserr = ABS((resk-resg)*hlgth)
-  IF ( Resasc/=0.0D+00.AND.Abserr/=0.0D+00 )&
+  IF( Resasc/=0.0D+00 .AND. Abserr/=0.0D+00 )&
     Abserr = Resasc*MIN(0.1D+01,(0.2D+03*Abserr/Resasc)**1.5D+00)
-  IF ( Resabs>uflow/(0.5D+02*epmach) ) Abserr = MAX((epmach*0.5D+02)*Resabs,&
+  IF( Resabs>uflow/(0.5D+02*epmach) ) Abserr = MAX((epmach*0.5D+02)*Resabs,&
     Abserr)
 END SUBROUTINE DQK15W

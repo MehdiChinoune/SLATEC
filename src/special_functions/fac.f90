@@ -1,7 +1,6 @@
 !** FAC
 REAL(SP) FUNCTION FAC(N)
-  !>
-  !  Compute the factorial function.
+  !> Compute the factorial function.
   !***
   ! **Library:**   SLATEC (FNLIB)
   !***
@@ -30,8 +29,8 @@ REAL(SP) FUNCTION FAC(N)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   USE service, ONLY : XERMSG
-  REAL(SP) x, xmax, xmin
-  INTEGER N
+  REAL(SP) :: x, xmax, xmin
+  INTEGER :: N
   REAL(SP), PARAMETER :: facn(26) = [ 1.0E0, 1.0E0, 2.0E0, 6.0E0, 24.0E0, 120.0E0, &
     720.0E0, 5040.0E0, 40320.0E0, 362880.0E0, 3628800.0E0, 39916800.0E0, &
     479001600.0E0, 6227020800.0E0, 87178291200.0E0, 1307674368000.0E0, &
@@ -42,18 +41,18 @@ REAL(SP) FUNCTION FAC(N)
   REAL(SP), PARAMETER :: sq2pil = 0.91893853320467274E0
   INTEGER, SAVE :: nmax = 0
   !* FIRST EXECUTABLE STATEMENT  FAC
-  IF ( nmax==0 ) THEN
+  IF( nmax==0 ) THEN
     CALL GAMLIM(xmin,xmax)
     nmax = INT( xmax ) - 1
   END IF
   !
-  IF ( N<0 ) CALL XERMSG('FAC',&
+  IF( N<0 ) CALL XERMSG('FAC',&
     'FACTORIAL OF NEGATIVE INTEGER UNDEFINED',1,2)
   !
-  IF ( N<=25 ) FAC = facn(N+1)
-  IF ( N<=25 ) RETURN
+  IF( N<=25 ) FAC = facn(N+1)
+  IF( N<=25 ) RETURN
   !
-  IF ( N>nmax ) CALL XERMSG('FAC','N SO BIG FACTORIAL(N) OVERFLOWS',2,2)
+  IF( N>nmax ) CALL XERMSG('FAC','N SO BIG FACTORIAL(N) OVERFLOWS',2,2)
   !
   x = N + 1
   FAC = EXP((x-0.5)*LOG(x)-x+sq2pil+R9LGMC(x))

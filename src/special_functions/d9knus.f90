@@ -1,8 +1,7 @@
 !** D9KNUS
 SUBROUTINE D9KNUS(Xnu,X,Bknu,Bknu1,Iswtch)
-  !>
-  !  Compute Bessel functions EXP(X)*K-SUB-XNU(X) and EXP(X)*
-  !            K-SUB-XNU+1(X) for 0.0 .LE. XNU .LT. 1.0.
+  !> Compute Bessel functions EXP(X)*K-SUB-XNU(X) and EXP(X)*
+  !            K-SUB-XNU+1(X) for 0.0 <= XNU < 1.0.
   !***
   ! **Library:**   SLATEC (FNLIB)
   !***
@@ -17,7 +16,7 @@ SUBROUTINE D9KNUS(Xnu,X,Bknu,Bknu1,Iswtch)
   ! **Description:**
   !
   ! Compute Bessel functions EXP(X) * K-sub-XNU (X)  and
-  ! EXP(X) * K-sub-XNU+1 (X) for 0.0 .LE. XNU .LT. 1.0 .
+  ! EXP(X) * K-sub-XNU+1 (X) for 0.0 <= XNU < 1.0 .
   !
   ! Series for C0K        on the interval  0.          to  2.50000E-01
   !                                        with weighted error   2.16E-32
@@ -87,24 +86,24 @@ SUBROUTINE D9KNUS(Xnu,X,Bknu,Bknu1,Iswtch)
   REAL(DP), PARAMETER :: aln2 = 0.69314718055994530941723212145818D0
   LOGICAL, SAVE :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  D9KNUS
-  IF ( first ) THEN
+  IF( first ) THEN
     ntc0k = INITDS(c0kcs,29,eta)
     ntznu1 = INITDS(znu1cs,20,eta)
     first = .FALSE.
   END IF
   !
-  IF ( Xnu<0.D0.OR.Xnu>=1.D0 )&
+  IF( Xnu<0.D0 .OR. Xnu>=1.D0 )&
     CALL XERMSG('D9KNUS','XNU MUST BE GE 0 AND LT 1',1,2)
-  IF ( X<=0. ) CALL XERMSG('D9KNUS','X MUST BE GT 0',2,2)
+  IF( X<=0. ) CALL XERMSG('D9KNUS','X MUST BE GT 0',2,2)
   !
   Iswtch = 0
-  IF ( X>2.0D0 ) THEN
+  IF( X>2.0D0 ) THEN
     !
     ! X IS LARGE.  FIND K-SUB-XNU (X) AND K-SUB-XNU+1 (X) WITH Y. L. LUKE-S
     ! RATIONAL EXPANSION.
     !
     sqrtx = SQRT(X)
-    IF ( X>1.0D0/xsml ) THEN
+    IF( X>1.0D0/xsml ) THEN
       !
       Bknu = sqpi2/sqrtx
       Bknu1 = Bknu
@@ -118,13 +117,13 @@ SUBROUTINE D9KNUS(Xnu,X,Bknu,Bknu1,Iswtch)
     ! ORDER (+NU).
     !
     v = Xnu
-    IF ( Xnu>0.5D0 ) v = 1.0D0 - Xnu
+    IF( Xnu>0.5D0 ) v = 1.0D0 - Xnu
     !
     ! CAREFULLY FIND (X/2)**XNU AND Z**XNU WHERE Z = X*X/4.
     alnz = 2.D0*(LOG(X)-aln2)
     !
-    IF ( X<=Xnu ) THEN
-      IF ( -0.5D0*Xnu*alnz-aln2-LOG(Xnu)>alnbig )&
+    IF( X<=Xnu ) THEN
+      IF( -0.5D0*Xnu*alnz-aln2-LOG(Xnu)>alnbig )&
         CALL XERMSG('D9KNUS',&
         'X SO SMALL BESSEL K-SUB-XNU OVERFLOWS',3,2)
     END IF
@@ -132,20 +131,20 @@ SUBROUTINE D9KNUS(Xnu,X,Bknu,Bknu1,Iswtch)
     vlnz = v*alnz
     x2tov = EXP(0.5D0*vlnz)
     ztov = 0.0D0
-    IF ( vlnz>alnsml ) ztov = x2tov**2
+    IF( vlnz>alnsml ) ztov = x2tov**2
     !
     a0 = 0.5D0*GAMMA(1.0D0+v)
     b0 = 0.5D0*GAMMA(1.0D0-v)
     c0 = -euler
-    IF ( ztov>0.5D0.AND.v>xnusml ) c0 = -0.75D0 + DCSEVL((8.0D0*v)*v-1.0D0,c0kcs,ntc0k)
+    IF( ztov>0.5D0 .AND. v>xnusml ) c0 = -0.75D0 + DCSEVL((8.0D0*v)*v-1.0D0,c0kcs,ntc0k)
     !
-    IF ( ztov<=0.5D0 ) alpha(1) = (a0-ztov*b0)/v
-    IF ( ztov>0.5D0 ) alpha(1) = c0 - alnz*(0.75D0+DCSEVL(vlnz/0.35D0+1.0D0,&
+    IF( ztov<=0.5D0 ) alpha(1) = (a0-ztov*b0)/v
+    IF( ztov>0.5D0 ) alpha(1) = c0 - alnz*(0.75D0+DCSEVL(vlnz/0.35D0+1.0D0,&
       znu1cs,ntznu1))*b0
     beta(1) = -0.5D0*(a0+ztov*b0)
     !
     z = 0.0D0
-    IF ( X>xsml ) z = 0.25D0*X*X
+    IF( X>xsml ) z = 0.25D0*X*X
     nterms = INT( MAX( 2.D0, 11.0+(8.D0*alnz-25.19-alneps)/(4.28-alnz) ) )
     DO i = 2, nterms
       xi = i - 1
@@ -166,12 +165,12 @@ SUBROUTINE D9KNUS(Xnu,X,Bknu,Bknu1,Iswtch)
     expx = EXP(X)
     Bknu = expx*Bknu/x2tov
     !
-    IF ( -0.5D0*(Xnu+1.D0)*alnz-2.0D0*aln2>alnbig ) Iswtch = 1
-    IF ( Iswtch==1 ) RETURN
+    IF( -0.5D0*(Xnu+1.D0)*alnz-2.0D0*aln2>alnbig ) Iswtch = 1
+    IF( Iswtch==1 ) RETURN
     bknud = expx*bknud*2.0D0/(x2tov*X)
     !
-    IF ( Xnu<=0.5D0 ) Bknu1 = v*Bknu/X - bknud
-    IF ( Xnu<=0.5D0 ) RETURN
+    IF( Xnu<=0.5D0 ) Bknu1 = v*Bknu/X - bknud
+    IF( Xnu<=0.5D0 ) RETURN
     !
     bknu0 = Bknu
     Bknu = -v*Bknu/X - bknud
@@ -184,14 +183,14 @@ SUBROUTINE D9KNUS(Xnu,X,Bknu,Bknu1,Iswtch)
   !
   DO inu = 1, 2
     xmu = 0.D0
-    IF ( inu==1.AND.Xnu>xnusml ) xmu = (4.0D0*Xnu)*Xnu
-    IF ( inu==2 ) xmu = 4.0D0*(ABS(Xnu)+1.D0)**2
+    IF( inu==1 .AND. Xnu>xnusml ) xmu = (4.0D0*Xnu)*Xnu
+    IF( inu==2 ) xmu = 4.0D0*(ABS(Xnu)+1.D0)**2
     !
     a(1) = 1.0D0 - xmu
     a(2) = 9.0D0 - xmu
     a(3) = 25.0D0 - xmu
-    IF ( a(2)==0.D0 ) result = sqpi2*(16.D0*X+xmu+7.D0)/(16.D0*X*sqrtx)
-    IF ( a(2)/=0.D0 ) THEN
+    IF( a(2)==0.D0 ) result = sqpi2*(16.D0*X+xmu+7.D0)/(16.D0*X*sqrtx)
+    IF( a(2)/=0.D0 ) THEN
       !
       alpha(1) = 1.0D0
       alpha(2) = (16.D0*X+a(2))/a(2)
@@ -202,7 +201,7 @@ SUBROUTINE D9KNUS(Xnu,X,Bknu,Bknu1,Iswtch)
       beta(3) = ((768.D0*X+48.D0*(xmu+23.D0))*X+((xmu+62.D0)*xmu+129.D0))&
         /(a(2)*a(3))
       !
-      IF ( nterms>=4 ) THEN
+      IF( nterms>=4 ) THEN
         DO i = 4, nterms
           n = i - 1
           x2n = 2*n - 1
@@ -221,8 +220,8 @@ SUBROUTINE D9KNUS(Xnu,X,Bknu,Bknu1,Iswtch)
       result = sqpi2*beta(nterms)/(sqrtx*alpha(nterms))
     END IF
     !
-    IF ( inu==1 ) Bknu = result
-    IF ( inu==2 ) Bknu1 = result
+    IF( inu==1 ) Bknu = result
+    IF( inu==2 ) Bknu1 = result
   END DO
   RETURN
 END SUBROUTINE D9KNUS

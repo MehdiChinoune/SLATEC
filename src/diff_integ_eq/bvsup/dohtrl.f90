@@ -1,7 +1,6 @@
 !** DOHTRL
 SUBROUTINE DOHTRL(Q,N,Nrda,Diag,Irank,Div,Td)
-  !>
-  !  Subsidiary to DBVSUP and DSUDS
+  !> Subsidiary to DBVSUP and DSUDS
   !***
   ! **Library:**   SLATEC
   !***
@@ -46,7 +45,7 @@ SUBROUTINE DOHTRL(Q,N,Nrda,Diag,Irank,Div,Td)
     Div(kir) = dd
     tdv = diagk - dd
     Td(kir) = tdv
-    IF ( k/=Irank ) THEN
+    IF( k/=Irank ) THEN
       kirm = kir - 1
       sqd = dd*diagk - sig
       DO j = 1, kirm

@@ -1,7 +1,6 @@
 !** SINT
 SUBROUTINE SINT(N,X,Wsave)
-  !>
-  !  Compute the sine transform of a REAL(SP), odd sequence.
+  !> Compute the sine transform of a REAL(SP), odd sequence.
   !***
   ! **Library:**   SLATEC (FFTPACK)
   !***
@@ -85,10 +84,10 @@ SUBROUTINE SINT(N,X,Wsave)
   REAL(SP) :: sqrt3, t1, t2, xh
   !* FIRST EXECUTABLE STATEMENT  SINT
   sqrt3 = SQRT(3.)
-  IF ( N<2 ) THEN
+  IF( N<2 ) THEN
     X(1) = X(1) + X(1)
     RETURN
-  ELSEIF ( N==2 ) THEN
+  ELSEIF( N==2 ) THEN
     xh = sqrt3*(X(1)+X(2))
     X(2) = sqrt3*(X(1)-X(2))
     X(1) = xh
@@ -107,7 +106,7 @@ SUBROUTINE SINT(N,X,Wsave)
       Wsave(kc+1) = t2 - t1
     END DO
     modn = MOD(N,2)
-    IF ( modn/=0 ) Wsave(ns2+2) = 4.*X(ns2+1)
+    IF( modn/=0 ) Wsave(ns2+2) = 4.*X(ns2+1)
     nf = np1 + ns2 + 1
     CALL RFFTF(np1,Wsave,Wsave(nf))
     X(1) = .5*Wsave(1)
@@ -115,7 +114,7 @@ SUBROUTINE SINT(N,X,Wsave)
       X(i-1) = -Wsave(i)
       X(i) = X(i-2) + Wsave(i-1)
     END DO
-    IF ( modn/=0 ) RETURN
+    IF( modn/=0 ) RETURN
     X(N) = -Wsave(N+1)
   END IF
 END SUBROUTINE SINT

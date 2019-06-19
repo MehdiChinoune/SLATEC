@@ -1,7 +1,6 @@
 !** LPDP
 SUBROUTINE LPDP(A,Mda,M,N1,N2,Prgopt,X,Wnorm,Mode,Ws,Is)
-  !>
-  !  Subsidiary to LSEI
+  !> Subsidiary to LSEI
   !***
   ! **Library:**   SLATEC
   !***
@@ -18,7 +17,7 @@ SUBROUTINE LPDP(A,Mda,M,N1,N2,Prgopt,X,Wnorm,Mode,Ws,Is)
   !     Determine an N1-vector W, and
   !               an N2-vector Z
   !     which minimizes the Euclidean length of W
-  !     subject to G*W+H*Z .GE. Y.
+  !     subject to G*W+H*Z >= Y.
   !     This is the least projected distance problem, LPDP.
   !     The matrices G and H are of respective
   !     dimensions M by N1 and M by N2.
@@ -72,13 +71,13 @@ SUBROUTINE LPDP(A,Mda,M,N1,N2,Prgopt,X,Wnorm,Mode,Ws,Is)
   !* FIRST EXECUTABLE STATEMENT  LPDP
   n = N1 + N2
   Mode = 1
-  IF ( M>0 ) THEN
+  IF( M>0 ) THEN
     np1 = n + 1
     !
     !     SCALE NONZERO ROWS OF INEQUALITY MATRIX TO HAVE LENGTH ONE.
     DO i = 1, M
       sc = NORM2(A(i,1:n))
-      IF ( sc/=zero ) THEN
+      IF( sc/=zero ) THEN
         sc = one/sc
         A(i,1:np1) = A(i,1:np1)*sc
       END IF
@@ -86,21 +85,21 @@ SUBROUTINE LPDP(A,Mda,M,N1,N2,Prgopt,X,Wnorm,Mode,Ws,Is)
     !
     !     SCALE RT.-SIDE VECTOR TO HAVE LENGTH ONE (OR ZERO).
     ynorm = NORM2(A(1:M,np1))
-    IF ( ynorm/=zero ) THEN
+    IF( ynorm/=zero ) THEN
       sc = one/ynorm
       A(1:M,np1) = A(1:M,np1)*sc
     END IF
     !
     !     SCALE COLS OF MATRIX H.
     j = N1 + 1
-    DO WHILE ( j<=n )
+    DO WHILE( j<=n )
       sc = NORM2(A(1:M,j))
-      IF ( sc/=zero ) sc = one/sc
+      IF( sc/=zero ) sc = one/sc
       A(1:M,j) = A(1:M,j)*sc
       X(j) = sc
       j = j + 1
     END DO
-    IF ( N1>0 ) THEN
+    IF( N1>0 ) THEN
       !
       !     COPY TRANSPOSE OF (H G Y) TO WORK ARRAY WS(*).
       iw = 0
@@ -123,7 +122,7 @@ SUBROUTINE LPDP(A,Mda,M,N1,N2,Prgopt,X,Wnorm,Mode,Ws,Is)
       Ws(iw+1) = one
       iw = iw + 1
       !
-      !     SOLVE EU=F SUBJECT TO (TRANSPOSE OF H)U=0, U.GE.0.  THE
+      !     SOLVE EU=F SUBJECT TO (TRANSPOSE OF H)U=0, U>=0.  THE
       !     MATRIX E = TRANSPOSE OF (G Y), AND THE (N+1)-VECTOR
       !     F = TRANSPOSE OF (0,...,0,1).
       ix = iw + 1
@@ -136,7 +135,7 @@ SUBROUTINE LPDP(A,Mda,M,N1,N2,Prgopt,X,Wnorm,Mode,Ws,Is)
       !
       !     COMPUTE THE COMPONENTS OF THE SOLN DENOTED ABOVE BY W.
       sc = one - DOT_PRODUCT(A(1:M,np1),Ws(ix:ix+M-1))
-      IF ( one+fac*ABS(sc)==one.OR.rnorm<=zero ) THEN
+      IF( one+fac*ABS(sc)==one .OR. rnorm<=zero ) THEN
         Mode = 2
         RETURN
       ELSE
@@ -151,7 +150,7 @@ SUBROUTINE LPDP(A,Mda,M,N1,N2,Prgopt,X,Wnorm,Mode,Ws,Is)
         END DO
       END IF
     END IF
-    IF ( N2>0 ) THEN
+    IF( N2>0 ) THEN
       !
       !     COPY TRANSPOSE OF (H Q) TO WORK ARRAY WS(*).
       iw = 0
@@ -168,7 +167,7 @@ SUBROUTINE LPDP(A,Mda,M,N1,N2,Prgopt,X,Wnorm,Mode,Ws,Is)
       ix = iw + 1
       iw = iw + M
       !
-      !     SOLVE RV=S SUBJECT TO V.GE.0.  THE MATRIX R =(TRANSPOSE
+      !     SOLVE RV=S SUBJECT TO V>=0.  THE MATRIX R =(TRANSPOSE
       !     OF (H Q)), WHERE Q=Y-GW.  THE (N2+1)-VECTOR S =(TRANSPOSE
       !     OF (0,...,0,1)).
       !
@@ -179,7 +178,7 @@ SUBROUTINE LPDP(A,Mda,M,N1,N2,Prgopt,X,Wnorm,Mode,Ws,Is)
       !
       !     COMPUTE THE COMPONENTS OF THE SOLN DENOTED ABOVE BY Z.
       sc = one - DOT_PRODUCT(A(1:M,np1),Ws(ix:ix+M-1))
-      IF ( one+fac*ABS(sc)==one.OR.rnorm<=zero ) THEN
+      IF( one+fac*ABS(sc)==one .OR. rnorm<=zero ) THEN
         Mode = 2
         RETURN
       ELSE
@@ -195,7 +194,7 @@ SUBROUTINE LPDP(A,Mda,M,N1,N2,Prgopt,X,Wnorm,Mode,Ws,Is)
     X(1:n) = X(1:n)*ynorm
     Wnorm = NORM2(X(1:N1))
   ELSE
-    IF ( n>0 ) THEN
+    IF( n>0 ) THEN
       X(1:n) = zero
     END IF
     Wnorm = zero

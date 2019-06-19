@@ -1,8 +1,7 @@
 !** DNSQ
 SUBROUTINE DNSQ(FCN,JAC,Iopt,N,X,Fvec,Fjac,Ldfjac,Xtol,Maxfev,Ml,Mu,&
     Epsfcn,Diag,Mode,Factor,Nprint,Info,Nfev,Njev,R,Lr,Qtf,Wa1,Wa2,Wa3,Wa4)
-  !>
-  !  Find a zero of a system of a N nonlinear functions in N
+  !> Find a zero of a system of a N nonlinear functions in N
   !            variables by a modification of the Powell hybrid method.
   !***
   ! **Library:**   SLATEC
@@ -231,7 +230,7 @@ SUBROUTINE DNSQ(FCN,JAC,Iopt,N,X,Fvec,Fjac,Ldfjac,Xtol,Maxfev,Ml,Mu,&
   !         defined by the array DIAG, then this test attempts to
   !         guarantee that
   !
-  !               DENORM(D*(X-XSOL)) .LE. XTOL*DENORM(D*XSOL).
+  !               DENORM(D*(X-XSOL)) <= XTOL*DENORM(D*XSOL).
   !
   !         If this condition is satisfied with XTOL = 10**(-K), then the
   !         larger components of D*X have K significant decimal digits and
@@ -249,9 +248,9 @@ SUBROUTINE DNSQ(FCN,JAC,Iopt,N,X,Fvec,Fjac,Ldfjac,Xtol,Maxfev,Ml,Mu,&
   !       function evaluations, or lack of good progress.
   !
   !       Improper Input Parameters.  INFO is set to 0 if IOPT .LT .1,
-  !         or IOPT .GT. 2, or N .LE. 0, or LDFJAC .LT. N, or
-  !         XTOL .LT. 0.E0, or MAXFEV .LE. 0, or ML .LT. 0, or MU .LT. 0,
-  !         or FACTOR .LE. 0.E0, or LR .LT. (N*(N+1))/2.
+  !         or IOPT > 2, or N <= 0, or LDFJAC < N, or
+  !         XTOL < 0.E0, or MAXFEV <= 0, or ML < 0, or MU < 0,
+  !         or FACTOR <= 0.E0, or LR < (N*(N+1))/2.
   !
   !       Arithmetic Interrupts.  If these interrupts occur in the FCN
   !         subroutine during an early stage of the computation, they may
@@ -378,7 +377,7 @@ SUBROUTINE DNSQ(FCN,JAC,Iopt,N,X,Fvec,Fjac,Ldfjac,Xtol,Maxfev,Ml,Mu,&
   !       DOUBLE PRECISION ONE,TEMP,TEMP1,TEMP2,THREE,TWO,ZERO
   !       DATA ZERO,ONE,TWO,THREE /0.E0,1.E0,2.E0,3.E0/
   ! C
-  !       IF (IFLAG .NE. 0) GO TO 5
+  !       IF(IFLAG /= 0) GO TO 5
   ! C
   ! C     INSERT PRINT STATEMENTS HERE WHEN NPRINT IS POSITIVE.
   ! C
@@ -387,9 +386,9 @@ SUBROUTINE DNSQ(FCN,JAC,Iopt,N,X,Fvec,Fjac,Ldfjac,Xtol,Maxfev,Ml,Mu,&
   !       DO 10 K = 1, N
   !          TEMP = (THREE - TWO*X(K))*X(K)
   !          TEMP1 = ZERO
-  !          IF (K .NE. 1) TEMP1 = X(K-1)
+  !          IF(K /= 1) TEMP1 = X(K-1)
   !          TEMP2 = ZERO
-  !          IF (K .NE. N) TEMP2 = X(K+1)
+  !          IF(K /= N) TEMP2 = X(K+1)
   !          FVEC(K) = TEMP - TEMP1 - TWO*TEMP2 + ONE
   !    10    CONTINUE
   !       RETURN
@@ -463,12 +462,12 @@ SUBROUTINE DNSQ(FCN,JAC,Iopt,N,X,Fvec,Fjac,Ldfjac,Xtol,Maxfev,Ml,Mu,&
   !        CHECK THE INPUT PARAMETERS FOR ERRORS.
   !
   !     ...EXIT
-  IF ( Iopt<1.OR.Iopt>2.OR.N<=0.OR.Xtol<zero.OR.Maxfev<=0.OR.Ml<0.OR.&
-    Mu<0.OR.Factor<=zero.OR.Ldfjac<N.OR.Lr<(N*(N+1))/2 ) GOTO 300
-  IF ( Mode==2 ) THEN
+  IF( Iopt<1 .OR. Iopt>2 .OR. N<=0 .OR. Xtol<zero .OR. Maxfev<=0 .OR. Ml<0 .OR. &
+    Mu<0 .OR. Factor<=zero .OR. Ldfjac<N .OR. Lr<(N*(N+1))/2 ) GOTO 300
+  IF( Mode==2 ) THEN
     DO j = 1, N
       !     .........EXIT
-      IF ( Diag(j)<=zero ) GOTO 300
+      IF( Diag(j)<=zero ) GOTO 300
     END DO
   END IF
   !
@@ -479,7 +478,7 @@ SUBROUTINE DNSQ(FCN,JAC,Iopt,N,X,Fvec,Fjac,Ldfjac,Xtol,Maxfev,Ml,Mu,&
   CALL FCN(N,X,Fvec,iflag)
   Nfev = 1
   !     ...EXIT
-  IF ( iflag<0 ) GOTO 300
+  IF( iflag<0 ) GOTO 300
   fnorm = DENORM(N,Fvec)
   !
   !        INITIALIZE ITERATION COUNTER AND MONITORS.
@@ -497,7 +496,7 @@ SUBROUTINE DNSQ(FCN,JAC,Iopt,N,X,Fvec,Fjac,Ldfjac,Xtol,Maxfev,Ml,Mu,&
   !
   !              CALCULATE THE JACOBIAN MATRIX.
   !
-  IF ( Iopt==2 ) THEN
+  IF( Iopt==2 ) THEN
     !
     !                 CODE APPROXIMATES THE JACOBIAN
     !
@@ -513,7 +512,7 @@ SUBROUTINE DNSQ(FCN,JAC,Iopt,N,X,Fvec,Fjac,Ldfjac,Xtol,Maxfev,Ml,Mu,&
   END IF
   !
   !     .........EXIT
-  IF ( iflag<0 ) GOTO 300
+  IF( iflag<0 ) GOTO 300
   !
   !              COMPUTE THE QR FACTORIZATION OF THE JACOBIAN.
   !
@@ -523,11 +522,11 @@ SUBROUTINE DNSQ(FCN,JAC,Iopt,N,X,Fvec,Fjac,Ldfjac,Xtol,Maxfev,Ml,Mu,&
   !              TO THE NORMS OF THE COLUMNS OF THE INITIAL JACOBIAN.
   !
   !           ...EXIT
-  IF ( iter==1 ) THEN
-    IF ( Mode/=2 ) THEN
+  IF( iter==1 ) THEN
+    IF( Mode/=2 ) THEN
       DO j = 1, N
         Diag(j) = Wa2(j)
-        IF ( Wa2(j)==zero ) Diag(j) = one
+        IF( Wa2(j)==zero ) Diag(j) = one
       END DO
     END IF
     !
@@ -539,7 +538,7 @@ SUBROUTINE DNSQ(FCN,JAC,Iopt,N,X,Fvec,Fjac,Ldfjac,Xtol,Maxfev,Ml,Mu,&
     END DO
     xnorm = DENORM(N,Wa3)
     delta = Factor*xnorm
-    IF ( delta==zero ) delta = Factor
+    IF( delta==zero ) delta = Factor
   END IF
   !
   !           FORM (Q TRANSPOSE)*FVEC AND STORE IN QTF.
@@ -548,7 +547,7 @@ SUBROUTINE DNSQ(FCN,JAC,Iopt,N,X,Fvec,Fjac,Ldfjac,Xtol,Maxfev,Ml,Mu,&
     Qtf(i) = Fvec(i)
   END DO
   DO j = 1, N
-    IF ( Fjac(j,j)/=zero ) THEN
+    IF( Fjac(j,j)/=zero ) THEN
       summ = zero
       DO i = j, N
         summ = summ + Fjac(i,j)*Qtf(i)
@@ -566,14 +565,14 @@ SUBROUTINE DNSQ(FCN,JAC,Iopt,N,X,Fvec,Fjac,Ldfjac,Xtol,Maxfev,Ml,Mu,&
   DO j = 1, N
     l = j
     jm1 = j - 1
-    IF ( jm1>=1 ) THEN
+    IF( jm1>=1 ) THEN
       DO i = 1, jm1
         R(l) = Fjac(i,j)
         l = l + N - i
       END DO
     END IF
     R(l) = Wa1(j)
-    IF ( Wa1(j)==zero ) sing = .TRUE.
+    IF( Wa1(j)==zero ) sing = .TRUE.
   END DO
   !
   !           ACCUMULATE THE ORTHOGONAL FACTOR IN FJAC.
@@ -582,7 +581,7 @@ SUBROUTINE DNSQ(FCN,JAC,Iopt,N,X,Fvec,Fjac,Ldfjac,Xtol,Maxfev,Ml,Mu,&
   !
   !           RESCALE IF NECESSARY.
   !
-  IF ( Mode/=2 ) THEN
+  IF( Mode/=2 ) THEN
     DO j = 1, N
       Diag(j) = MAX(Diag(j),Wa2(j))
     END DO
@@ -594,11 +593,11 @@ SUBROUTINE DNSQ(FCN,JAC,Iopt,N,X,Fvec,Fjac,Ldfjac,Xtol,Maxfev,Ml,Mu,&
   !              IF REQUESTED, CALL FCN TO ENABLE PRINTING OF ITERATES.
   !
   200 CONTINUE
-  IF ( Nprint>0 ) THEN
+  IF( Nprint>0 ) THEN
     iflag = 0
-    IF ( MOD(iter-1,Nprint)==0 ) CALL FCN(N,X,Fvec,iflag)
+    IF( MOD(iter-1,Nprint)==0 ) CALL FCN(N,X,Fvec,iflag)
     !     ............EXIT
-    IF ( iflag<0 ) GOTO 300
+    IF( iflag<0 ) GOTO 300
   END IF
   !
   !              DETERMINE THE DIRECTION P.
@@ -616,7 +615,7 @@ SUBROUTINE DNSQ(FCN,JAC,Iopt,N,X,Fvec,Fjac,Ldfjac,Xtol,Maxfev,Ml,Mu,&
   !
   !              ON THE FIRST ITERATION, ADJUST THE INITIAL STEP BOUND.
   !
-  IF ( iter==1 ) delta = MIN(delta,pnorm)
+  IF( iter==1 ) delta = MIN(delta,pnorm)
   !
   !              EVALUATE THE FUNCTION AT X + P AND CALCULATE ITS NORM.
   !
@@ -624,13 +623,13 @@ SUBROUTINE DNSQ(FCN,JAC,Iopt,N,X,Fvec,Fjac,Ldfjac,Xtol,Maxfev,Ml,Mu,&
   CALL FCN(N,Wa2,Wa4,iflag)
   Nfev = Nfev + 1
   !     .........EXIT
-  IF ( iflag>=0 ) THEN
+  IF( iflag>=0 ) THEN
     fnorm1 = DENORM(N,Wa4)
     !
     !              COMPUTE THE SCALED ACTUAL REDUCTION.
     !
     actred = -one
-    IF ( fnorm1<fnorm ) actred = one - (fnorm1/fnorm)**2
+    IF( fnorm1<fnorm ) actred = one - (fnorm1/fnorm)**2
     !
     !              COMPUTE THE SCALED PREDICTED REDUCTION.
     !
@@ -645,21 +644,21 @@ SUBROUTINE DNSQ(FCN,JAC,Iopt,N,X,Fvec,Fjac,Ldfjac,Xtol,Maxfev,Ml,Mu,&
     END DO
     temp = DENORM(N,Wa3)
     prered = zero
-    IF ( temp<fnorm ) prered = one - (temp/fnorm)**2
+    IF( temp<fnorm ) prered = one - (temp/fnorm)**2
     !
     !              COMPUTE THE RATIO OF THE ACTUAL TO THE PREDICTED
     !              REDUCTION.
     !
     ratio = zero
-    IF ( prered>zero ) ratio = actred/prered
+    IF( prered>zero ) ratio = actred/prered
     !
     !              UPDATE THE STEP BOUND.
     !
-    IF ( ratio>=p1 ) THEN
+    IF( ratio>=p1 ) THEN
       ncfail = 0
       ncsuc = ncsuc + 1
-      IF ( ratio>=p5.OR.ncsuc>1 ) delta = MAX(delta,pnorm/p5)
-      IF ( ABS(ratio-one)<=p1 ) delta = pnorm/p5
+      IF( ratio>=p5 .OR. ncsuc>1 ) delta = MAX(delta,pnorm/p5)
+      IF( ABS(ratio-one)<=p1 ) delta = pnorm/p5
     ELSE
       ncsuc = 0
       ncfail = ncfail + 1
@@ -668,7 +667,7 @@ SUBROUTINE DNSQ(FCN,JAC,Iopt,N,X,Fvec,Fjac,Ldfjac,Xtol,Maxfev,Ml,Mu,&
     !
     !              TEST FOR SUCCESSFUL ITERATION.
     !
-    IF ( ratio>=p0001 ) THEN
+    IF( ratio>=p0001 ) THEN
       !
       !                 SUCCESSFUL ITERATION. UPDATE X, FVEC, AND THEIR NORMS.
       !
@@ -685,29 +684,29 @@ SUBROUTINE DNSQ(FCN,JAC,Iopt,N,X,Fvec,Fjac,Ldfjac,Xtol,Maxfev,Ml,Mu,&
     !              DETERMINE THE PROGRESS OF THE ITERATION.
     !
     nslow1 = nslow1 + 1
-    IF ( actred>=p001 ) nslow1 = 0
-    IF ( jeval ) nslow2 = nslow2 + 1
-    IF ( actred>=p1 ) nslow2 = 0
+    IF( actred>=p001 ) nslow1 = 0
+    IF( jeval ) nslow2 = nslow2 + 1
+    IF( actred>=p1 ) nslow2 = 0
     !
     !              TEST FOR CONVERGENCE.
     !
-    IF ( delta<=Xtol*xnorm.OR.fnorm==zero ) Info = 1
+    IF( delta<=Xtol*xnorm .OR. fnorm==zero ) Info = 1
     !     .........EXIT
-    IF ( Info==0 ) THEN
+    IF( Info==0 ) THEN
       !
       !              TESTS FOR TERMINATION AND STRINGENT TOLERANCES.
       !
-      IF ( Nfev>=Maxfev ) Info = 2
-      IF ( p1*MAX(p1*delta,pnorm)<=epsmch*xnorm ) Info = 3
-      IF ( nslow2==5 ) Info = 4
-      IF ( nslow1==10 ) Info = 5
+      IF( Nfev>=Maxfev ) Info = 2
+      IF( p1*MAX(p1*delta,pnorm)<=epsmch*xnorm ) Info = 3
+      IF( nslow2==5 ) Info = 4
+      IF( nslow1==10 ) Info = 5
       !     .........EXIT
-      IF ( Info==0 ) THEN
+      IF( Info==0 ) THEN
         !
         !              CRITERION FOR RECALCULATING JACOBIAN
         !
         !           ...EXIT
-        IF ( ncfail==2 ) GOTO 100
+        IF( ncfail==2 ) GOTO 100
         !
         !              CALCULATE THE RANK ONE MODIFICATION TO THE JACOBIAN
         !              AND UPDATE QTF IF NECESSARY.
@@ -719,7 +718,7 @@ SUBROUTINE DNSQ(FCN,JAC,Iopt,N,X,Fvec,Fjac,Ldfjac,Xtol,Maxfev,Ml,Mu,&
           END DO
           Wa2(j) = (summ-Wa3(j))/pnorm
           Wa1(j) = Diag(j)*((Diag(j)*Wa1(j))/pnorm)
-          IF ( ratio>=p0001 ) Qtf(j) = summ
+          IF( ratio>=p0001 ) Qtf(j) = summ
         END DO
         !
         !              COMPUTE THE QR FACTORIZATION OF THE UPDATED JACOBIAN.
@@ -742,17 +741,17 @@ SUBROUTINE DNSQ(FCN,JAC,Iopt,N,X,Fvec,Fjac,Ldfjac,Xtol,Maxfev,Ml,Mu,&
   !     TERMINATION, EITHER NORMAL OR USER IMPOSED.
   !
   300 CONTINUE
-  IF ( iflag<0 ) Info = iflag
+  IF( iflag<0 ) Info = iflag
   iflag = 0
-  IF ( Nprint>0 ) CALL FCN(N,X,Fvec,iflag)
-  IF ( Info<0 ) CALL XERMSG('DNSQ',&
+  IF( Nprint>0 ) CALL FCN(N,X,Fvec,iflag)
+  IF( Info<0 ) CALL XERMSG('DNSQ',&
     'EXECUTION TERMINATED BECAUSE USER SET IFLAG NEGATIVE.',1,1)
-  IF ( Info==0 ) CALL XERMSG('DNSQ','INVALID INPUT PARAMETER.',2,1)
-  IF ( Info==2 ) CALL XERMSG('DNSQ',&
+  IF( Info==0 ) CALL XERMSG('DNSQ','INVALID INPUT PARAMETER.',2,1)
+  IF( Info==2 ) CALL XERMSG('DNSQ',&
     'TOO MANY FUNCTION EVALUATIONS.',9,1)
-  IF ( Info==3 ) CALL XERMSG('DNSQ',&
+  IF( Info==3 ) CALL XERMSG('DNSQ',&
     'XTOL TOO SMALL. NO FURTHER IMPROVEMENT POSSIBLE.',3,1)
-  IF ( Info>4 ) CALL XERMSG('DNSQ',&
+  IF( Info>4 ) CALL XERMSG('DNSQ',&
     'ITERATION NOT MAKING GOOD PROGRESS.',1,1)
   !
   !     LAST CARD OF SUBROUTINE DNSQ.

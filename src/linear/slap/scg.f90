@@ -1,8 +1,7 @@
 !** SCG
 SUBROUTINE SCG(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,Iter,&
     Err,Ierr,Iunit,R,Z,P,Dz,Rwork,Iwork)
-  !>
-  !  Preconditioned Conjugate Gradient Sparse Ax=b Solver.
+  !> Preconditioned Conjugate Gradient Sparse Ax=b Solver.
   !            Routine to solve a symmetric positive definite linear
   !            system  Ax = b  using the Preconditioned Conjugate
   !            Gradient method.
@@ -217,7 +216,7 @@ SUBROUTINE SCG(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,Iter,&
   !
   !- Cautions:
   !     This routine will attempt to write to the Fortran logical output
-  !     unit IUNIT, if IUNIT .ne. 0.  Thus, the user must make sure that
+  !     unit IUNIT, if IUNIT /= 0.  Thus, the user must make sure that
   !     this logical unit is attached to a file or terminal before calling
   !     this routine with a non-zero value for IUNIT.  This routine does
   !     not check for the validity of a non-zero IUNIT unit number.
@@ -282,12 +281,12 @@ SUBROUTINE SCG(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,Iter,&
   !
   Iter = 0
   Ierr = 0
-  IF ( N<1 ) THEN
+  IF( N<1 ) THEN
     Ierr = 3
     RETURN
   END IF
   tolmin = 500*R1MACH(3)
-  IF ( Tol<tolmin ) THEN
+  IF( Tol<tolmin ) THEN
     Tol = tolmin
     Ierr = 4
   END IF
@@ -300,9 +299,9 @@ SUBROUTINE SCG(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,Iter,&
   END DO
   CALL MSOLVE(N,R,Z,Rwork,Iwork)
   !
-  IF ( ISSCG(N,B,X,MSOLVE,Itol,Tol,Iter,Err,Ierr,&
+  IF( ISSCG(N,B,X,MSOLVE,Itol,Tol,Iter,Err,Ierr,&
       Iunit,R,Z,Dz,Rwork,Iwork,ak,bk,bnrm,solnrm)==0 ) THEN
-    IF ( Ierr/=0 ) RETURN
+    IF( Ierr/=0 ) RETURN
     !
     !         ***** Iteration loop *****
     !
@@ -311,11 +310,11 @@ SUBROUTINE SCG(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,Iter,&
       !
       !         Calculate coefficient bk and direction vector p.
       bknum = DOT_PRODUCT(Z,R)
-      IF ( bknum<=0.0E0 ) THEN
+      IF( bknum<=0.0E0 ) THEN
         Ierr = 5
         RETURN
       END IF
-      IF ( Iter==1 ) THEN
+      IF( Iter==1 ) THEN
         P = Z
       ELSE
         bk = bknum/bkden
@@ -329,7 +328,7 @@ SUBROUTINE SCG(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,Iter,&
       !         and new pseudo-residual z.
       CALL MATVEC(N,P,Z,Nelt,Ia,Ja,A,Isym)
       akden = DOT_PRODUCT(P,Z)
-      IF ( akden<=0.0E0 ) THEN
+      IF( akden<=0.0E0 ) THEN
         Ierr = 6
         RETURN
       END IF
@@ -339,7 +338,7 @@ SUBROUTINE SCG(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,Iter,&
       CALL MSOLVE(N,R,Z,Rwork,Iwork)
       !
       !         check stopping criterion.
-      IF ( ISSCG(N,B,X,MSOLVE,Itol,Tol,Iter,Err,&
+      IF( ISSCG(N,B,X,MSOLVE,Itol,Tol,Iter,Err,&
         Ierr,Iunit,R,Z,Dz,Rwork,Iwork,ak,bk,bnrm,solnrm)/=0 ) RETURN
       !
     END DO

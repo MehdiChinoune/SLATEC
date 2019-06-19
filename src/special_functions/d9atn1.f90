@@ -1,7 +1,6 @@
 !** D9ATN1
 REAL(DP) FUNCTION D9ATN1(X)
-  !>
-  !  Evaluate ATAN(X) from first order relative accuracy so
+  !> Evaluate ATAN(X) from first order relative accuracy so
   !            that ATAN(X) = X + X**3*D9ATN1(X).
   !***
   ! **Library:**   SLATEC (FNLIB)
@@ -69,25 +68,25 @@ REAL(DP) FUNCTION D9ATN1(X)
     +.3385428713046493843073706666666D-31 ]
   LOGICAL, SAVE :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  D9ATN1
-  IF ( first ) THEN
+  IF( first ) THEN
     ntatn1 = INITDS(atn1cs,40,0.1D0*eps)
     first = .FALSE.
   END IF
   !
   y = ABS(X)
-  IF ( y>1.0D0 ) THEN
+  IF( y>1.0D0 ) THEN
     !
-    IF ( y>xmax ) CALL XERMSG('D9ATN1',&
+    IF( y>xmax ) CALL XERMSG('D9ATN1',&
       'NO PRECISION IN ANSWER BECAUSE X IS TOO BIG',2,2)
-    IF ( y>xbig ) CALL XERMSG('D9ATN1',&
+    IF( y>xbig ) CALL XERMSG('D9ATN1',&
       'ANSWER LT HALF PRECISION BECAUSE X IS TOO BIG',1,1)
     !
     D9ATN1 = (ATAN(X)-X)/X**3
     RETURN
   END IF
   !
-  IF ( y<=xsml ) D9ATN1 = -1.0D0/3.0D0
-  IF ( y<=xsml ) RETURN
+  IF( y<=xsml ) D9ATN1 = -1.0D0/3.0D0
+  IF( y<=xsml ) RETURN
   !
   D9ATN1 = -0.25D0 + DCSEVL(2.D0*y*y-1.D0,atn1cs,ntatn1)
   RETURN

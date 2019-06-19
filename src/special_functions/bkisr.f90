@@ -1,7 +1,6 @@
 !** BKISR
 SUBROUTINE BKISR(X,N,Summ,Ierr)
-  !>
-  !  Subsidiary to BSKIN
+  !> Subsidiary to BSKIN
   !***
   ! **Library:**   SLATEC
   !***
@@ -26,17 +25,17 @@ SUBROUTINE BKISR(X,N,Summ,Ierr)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
   USE service, ONLY : R1MACH
-  INTEGER i, Ierr, k, kk, kkn, k1, N, np
-  REAL(SP) ak, atol, bk, fk, fn, hx, hxs, pol, pr, Summ, tkp, tol, trm, X, xln
+  INTEGER :: i, Ierr, k, kk, kkn, k1, N, np
+  REAL(SP) :: ak, atol, bk, fk, fn, hx, hxs, pol, pr, Summ, tkp, tol, trm, X, xln
   !
   REAL(SP), PARAMETER :: c(2) = [ 1.57079632679489662E+00, 1.0E0 ]
   !* FIRST EXECUTABLE STATEMENT  BKISR
   Ierr = 0
   tol = MAX(R1MACH(4),1.0E-18)
-  IF ( X>=tol ) THEN
+  IF( X>=tol ) THEN
     pr = 1.0E0
     pol = 0.0E0
-    IF ( N/=0 ) THEN
+    IF( N/=0 ) THEN
       DO i = 1, N
         pol = -pol*X + c(i)
         pr = pr*X/i
@@ -60,7 +59,7 @@ SUBROUTINE BKISR(X,N,Summ,Ierr)
       kkn = kk + N
       trm = (PSIXN(k1)+PSIXN(kkn)-PSIXN(kk)-xln)*ak
       Summ = Summ + trm
-      IF ( ABS(trm)<=atol ) GOTO 100
+      IF( ABS(trm)<=atol ) GOTO 100
       tkp = tkp + 2.0E0
       bk = bk + tkp
       fk = fk + 1.0E0
@@ -68,9 +67,9 @@ SUBROUTINE BKISR(X,N,Summ,Ierr)
     Ierr = 2
     RETURN
     !-----------------------------------------------------------------------
-    !     SMALL X CASE, X.LT.WORD TOLERANCE
+    !     SMALL X CASE, X<WORD TOLERANCE
     !-----------------------------------------------------------------------
-  ELSEIF ( N>0 ) THEN
+  ELSEIF( N>0 ) THEN
     Summ = c(N)
     RETURN
   ELSE
@@ -79,7 +78,7 @@ SUBROUTINE BKISR(X,N,Summ,Ierr)
     RETURN
   END IF
   100  Summ = (Summ*hxs+PSIXN(np)-xln)*pr
-  IF ( N==1 ) Summ = -Summ
+  IF( N==1 ) Summ = -Summ
   Summ = pol + Summ
   RETURN
 END SUBROUTINE BKISR

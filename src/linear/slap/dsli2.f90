@@ -1,7 +1,6 @@
 !** DSLI2
 SUBROUTINE DSLI2(N,B,X,Nel,Iel,Jel,El)
-  !>
-  !  SLAP Lower Triangle Matrix Backsolve.
+  !> SLAP Lower Triangle Matrix Backsolve.
   !            Routine to solve a system of the form  Lx = b, where L
   !            is a lower triangular matrix.
   !***
@@ -113,12 +112,12 @@ SUBROUTINE DSLI2(N,B,X,Nel,Iel,Jel,El)
   !   930701  Updated CATEGORY section.  (FNF, WRB)
 
   !     .. Scalar Arguments ..
-  INTEGER N, Nel
+  INTEGER :: N, Nel
   !     .. Array Arguments ..
   REAL(DP) :: B(N), El(Nel), X(N)
-  INTEGER Iel(Nel), Jel(Nel)
+  INTEGER :: Iel(Nel), Jel(Nel)
   !     .. Local Scalars ..
-  INTEGER i, icol, j, jbgn, jend
+  INTEGER :: i, icol, j, jbgn, jend
   !* FIRST EXECUTABLE STATEMENT  DSLI2
   !
   !         Initialize the solution by copying the right hands side
@@ -132,7 +131,7 @@ SUBROUTINE DSLI2(N,B,X,Nel,Iel,Jel,El)
     X(icol) = X(icol)/El(Jel(icol))
     jbgn = Jel(icol) + 1
     jend = Jel(icol+1) - 1
-    IF ( jbgn<=jend ) THEN
+    IF( jbgn<=jend ) THEN
       DO j = jbgn, jend
         X(Iel(j)) = X(Iel(j)) - El(j)*X(icol)
       END DO

@@ -1,7 +1,6 @@
 !** POISTG
 SUBROUTINE POISTG(Nperod,N,Mperod,M,A,B,C,Idimy,Y,Ierror,W)
-  !>
-  !  Solve a block tridiagonal system of linear equations
+  !> Solve a block tridiagonal system of linear equations
   !            that results from a staggered grid finite difference
   !            approximation to 2-D elliptic PDE's.
   !***
@@ -95,15 +94,15 @@ SUBROUTINE POISTG(Nperod,N,Mperod,M,A,B,C,Idimy,Y,Ierror,W)
   !     An error flag that indicates invalid input parameters.  Except
   !     for number zero, a solution is not attempted.
   !     = 0  No error
-  !     = 1  If M .LE. 2
-  !     = 2  If N .LE. 2
-  !     = 3  IDIMY .LT. M
-  !     = 4  If NPEROD .LT. 1 or NPEROD .GT. 4
-  !     = 5  If MPEROD .LT. 0 or MPEROD .GT. 1
+  !     = 1  If M <= 2
+  !     = 2  If N <= 2
+  !     = 3  IDIMY < M
+  !     = 4  If NPEROD < 1 or NPEROD > 4
+  !     = 5  If MPEROD < 0 or MPEROD > 1
   !     = 6  If MPEROD = 0 and
-  !          A(I) .NE. C(1) or B(I) .NE. B(1) or C(I) .NE. C(1)
+  !          A(I) /= C(1) or B(I) /= B(1) or C(I) /= C(1)
   !          for some I = 1, 2, ..., M.
-  !       = 7 If MPEROD .EQ. 1 .AND. (A(1).NE.0 .OR. C(M).NE.0)
+  !       = 7 If MPEROD = 1 .AND. (A(1)/=0 .OR. C(M)/=0)
   !
   !   W
   !     W(1) contains the required length of W.
@@ -233,21 +232,21 @@ SUBROUTINE POISTG(Nperod,N,Mperod,M,A,B,C,Idimy,Y,Ierror,W)
   REAL(SP) :: a1
   !* FIRST EXECUTABLE STATEMENT  POISTG
   Ierror = 0
-  IF ( M<=2 ) Ierror = 1
-  IF ( N<=2 ) Ierror = 2
-  IF ( Idimy<M ) Ierror = 3
-  IF ( Nperod<1.OR.Nperod>4 ) Ierror = 4
-  IF ( Mperod<0.OR.Mperod>1 ) Ierror = 5
-  IF ( Mperod==1 ) THEN
-    IF ( A(1)/=0..OR.C(M)/=0. ) Ierror = 7
+  IF( M<=2 ) Ierror = 1
+  IF( N<=2 ) Ierror = 2
+  IF( Idimy<M ) Ierror = 3
+  IF( Nperod<1 .OR. Nperod>4 ) Ierror = 4
+  IF( Mperod<0 .OR. Mperod>1 ) Ierror = 5
+  IF( Mperod==1 ) THEN
+    IF( A(1)/=0. .OR. C(M)/=0. ) Ierror = 7
   ELSE
     DO i = 1, M
-      IF ( A(i)/=C(1) ) GOTO 100
-      IF ( C(i)/=C(1) ) GOTO 100
-      IF ( B(i)/=B(1) ) GOTO 100
+      IF( A(i)/=C(1) ) GOTO 100
+      IF( C(i)/=C(1) ) GOTO 100
+      IF( B(i)/=B(1) ) GOTO 100
     END DO
   END IF
-  IF ( Ierror/=0 ) RETURN
+  IF( Ierror/=0 ) RETURN
   iwba = M + 1
   iwbb = iwba + M
   iwbc = iwbb + M
@@ -272,7 +271,7 @@ SUBROUTINE POISTG(Nperod,N,Mperod,M,A,B,C,Idimy,Y,Ierror,W)
   END DO
   np = Nperod
   mp = Mperod + 1
-  IF ( mp/=1 ) GOTO 200
+  IF( mp/=1 ) GOTO 200
   GOTO 500
   100  Ierror = 6
   RETURN
@@ -293,17 +292,17 @@ SUBROUTINE POISTG(Nperod,N,Mperod,M,A,B,C,Idimy,Y,Ierror,W)
     W(iww3:iwd-1),W(iwd:iwtcos-1),W(iwtcos:iwp-1),W(iwp:))
   ipstor = INT( W(iww1) )
   irev = 2
-  IF ( Nperod==4 ) GOTO 600
+  IF( Nperod==4 ) GOTO 600
   400 CONTINUE
-  IF ( mp==1 ) GOTO 700
-  IF ( mp==2 ) GOTO 800
+  IF( mp==1 ) GOTO 700
+  IF( mp==2 ) GOTO 800
   !
   !     REORDER UNKNOWNS WHEN MP =0
   !
   500  mh = (M+1)/2
   mhm1 = mh - 1
   modd = 1
-  IF ( mh*2==M ) modd = 2
+  IF( mh*2==M ) modd = 2
   DO j = 1, N
     DO i = 1, mhm1
       mhpi = mh + i
@@ -312,7 +311,7 @@ SUBROUTINE POISTG(Nperod,N,Mperod,M,A,B,C,Idimy,Y,Ierror,W)
       W(mhpi) = Y(mhmi,j) + Y(mhpi,j)
     END DO
     W(mh) = 2.*Y(mh,j)
-    IF ( modd/=1 ) W(M) = 2.*Y(M,j)
+    IF( modd/=1 ) W(M) = 2.*Y(M,j)
     DO i = 1, M
       Y(i,j) = W(i)
     END DO
@@ -322,7 +321,7 @@ SUBROUTINE POISTG(Nperod,N,Mperod,M,A,B,C,Idimy,Y,Ierror,W)
   W(k) = 0.
   W(i) = 0.
   W(k+1) = 2.*W(k+1)
-  IF ( modd==2 ) THEN
+  IF( modd==2 ) THEN
     W(iwbb-1) = W(k+1)
   ELSE
     k = iwbb + mhm1 - 1
@@ -339,8 +338,8 @@ SUBROUTINE POISTG(Nperod,N,Mperod,M,A,B,C,Idimy,Y,Ierror,W)
       Y(i,mskip) = a1
     END DO
   END DO
-  IF ( irev==1 ) GOTO 300
-  IF ( irev==2 ) GOTO 400
+  IF( irev==1 ) GOTO 300
+  IF( irev==2 ) GOTO 400
   700 CONTINUE
   DO j = 1, N
     DO i = 1, mhm1
@@ -350,7 +349,7 @@ SUBROUTINE POISTG(Nperod,N,Mperod,M,A,B,C,Idimy,Y,Ierror,W)
       W(mhpi) = .5*(Y(mhpi,j)-Y(i,j))
     END DO
     W(mh) = .5*Y(mh,j)
-    IF ( modd/=1 ) W(M) = .5*Y(M,j)
+    IF( modd/=1 ) W(M) = .5*Y(M,j)
     DO i = 1, M
       Y(i,j) = W(i)
     END DO

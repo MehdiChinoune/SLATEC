@@ -1,7 +1,6 @@
 !** PFQAD
 SUBROUTINE PFQAD(F,Ldc,C,Xi,Lxi,K,Id,X1,X2,Tol,Quad,Ierr)
-  !>
-  !  Compute the integral on (X1,X2) of a product of a function
+  !> Compute the integral on (X1,X2) of a product of a function
   !            F and the ID-th derivative of a B-spline,
   !            (PP-representation).
   !***
@@ -21,7 +20,7 @@ SUBROUTINE PFQAD(F,Ldc,C,Xi,Lxi,K,Id,X1,X2,Tol,Quad,Ierr)
   !         PFQAD computes the integral on (X1,X2) of a product of a
   !         function F and the ID-th derivative of a B-spline, using the
   !         PP-representation (C,XI,LXI,K). (X1,X2) is normally a sub-
-  !         interval of XI(1) .LE. X .LE. XI(LXI+1).  An integration rou-
+  !         interval of XI(1) <= X <= XI(LXI+1).  An integration rou-
   !         tine, PPGQ8(a modification of GAUS8), integrates the product
   !         on sub-intervals of (X1,X2) formed by the included break
   !         points.  Integration outside of (XI(1),XI(LXI+1)) is permitted
@@ -32,17 +31,17 @@ SUBROUTINE PFQAD(F,Ldc,C,Xi,Lxi,K,Id,X1,X2,Tol,Quad,Ierr)
   !           F      - external function of one argument for the
   !                    integrand PF(X)=F(X)*PPVAL(LDC,C,XI,LXI,K,ID,X,
   !                    INPPV)
-  !           LDC    - leading dimension of matrix C, LDC .GE. K
+  !           LDC    - leading dimension of matrix C, LDC >= K
   !           C(I,J) - right Taylor derivatives at XI(J), I=1,K, J=1,LXI
   !           XI(*)  - break point array of length LXI+1
   !           LXI    - number of polynomial pieces
-  !           K      - order of B-spline, K .GE. 1
-  !           ID     - order of the spline derivative, 0 .LE. ID .LE. K-1
+  !           K      - order of B-spline, K >= 1
+  !           ID     - order of the spline derivative, 0 <= ID <= K-1
   !                    ID=0 gives the spline function
   !           X1,X2  - end points of quadrature interval, normally in
-  !                    XI(1) .LE. X .LE. XI(LXI+1)
+  !                    XI(1) <= X <= XI(LXI+1)
   !           TOL    - desired accuracy for the quadrature, suggest
-  !                    10.*STOL .LT. TOL .LE. 0.1 where STOL is the single
+  !                    10.*STOL < TOL <= 0.1 where STOL is the single
   !                    precision unit roundoff for the machine = R1MACH(4)
   !
   !         Output
@@ -90,24 +89,24 @@ SUBROUTINE PFQAD(F,Ldc,C,Xi,Lxi,K,Id,X1,X2,Tol,Quad,Ierr)
   !* FIRST EXECUTABLE STATEMENT  PFQAD
   Ierr = 1
   Quad = 0.0E0
-  IF ( K<1 ) THEN
-    CALL XERMSG('PFQAD','K DOES NOT SATISFY K.GE.1',2,1)
+  IF( K<1 ) THEN
+    CALL XERMSG('PFQAD','K DOES NOT SATISFY K>=1',2,1)
     RETURN
-  ELSEIF ( Ldc<K ) THEN
-    CALL XERMSG('PFQAD','LDC DOES NOT SATISFY LDC.GE.K',2,1)
+  ELSEIF( Ldc<K ) THEN
+    CALL XERMSG('PFQAD','LDC DOES NOT SATISFY LDC>=K',2,1)
     RETURN
-  ELSEIF ( Id<0.OR.Id>=K ) THEN
-    CALL XERMSG('PFQAD','ID DOES NOT SATISFY 0.LE.ID.LT.K',2,1)
+  ELSEIF( Id<0 .OR. Id>=K ) THEN
+    CALL XERMSG('PFQAD','ID DOES NOT SATISFY 0<=ID<K',2,1)
     RETURN
-  ELSEIF ( Lxi<1 ) THEN
-    CALL XERMSG('PFQAD','LXI DOES NOT SATISFY LXI.GE.1',2,1)
+  ELSEIF( Lxi<1 ) THEN
+    CALL XERMSG('PFQAD','LXI DOES NOT SATISFY LXI>=1',2,1)
     RETURN
   ELSE
     wtol = R1MACH(4)
-    IF ( Tol>=wtol.AND.Tol<=0.1E0 ) THEN
+    IF( Tol>=wtol .AND. Tol<=0.1E0 ) THEN
       aa = MIN(X1,X2)
       bb = MAX(X1,X2)
-      IF ( aa==bb ) RETURN
+      IF( aa==bb ) RETURN
       ilo = 1
       CALL INTRV(Xi,Lxi,aa,ilo,il1,mf1)
       CALL INTRV(Xi,Lxi,bb,ilo,il2,mf2)
@@ -116,15 +115,15 @@ SUBROUTINE PFQAD(F,Ldc,C,Xi,Lxi,K,Id,X1,X2,Tol,Quad,Ierr)
       DO left = il1, il2
         ta = Xi(left)
         a = MAX(aa,ta)
-        IF ( left==1 ) a = aa
+        IF( left==1 ) a = aa
         tb = bb
-        IF ( left<Lxi ) tb = Xi(left+1)
+        IF( left<Lxi ) tb = Xi(left+1)
         b = MIN(bb,tb)
         CALL PPGQ8(F,Ldc,C,Xi,Lxi,K,Id,a,b,inppv,Tol,ans,iflg)
-        IF ( iflg>1 ) Ierr = 2
+        IF( iflg>1 ) Ierr = 2
         q = q + ans
       END DO
-      IF ( X1>X2 ) q = -q
+      IF( X1>X2 ) q = -q
       Quad = q
       RETURN
     END IF

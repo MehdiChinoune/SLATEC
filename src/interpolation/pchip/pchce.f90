@@ -1,7 +1,6 @@
 !** PCHCE
 SUBROUTINE PCHCE(Ic,Vc,N,X,H,Slope,D,Incfd,Ierr)
-  !>
-  !  Set boundary conditions for PCHIC
+  !> Set boundary conditions for PCHIC
   !***
   ! **Library:**   SLATEC (PCHIP)
   !***
@@ -42,7 +41,7 @@ SUBROUTINE PCHCE(Ic,Vc,N,X,H,Slope,D,Incfd,Ierr)
   !           values.  VC(1) need be set only if IC(1) = 2 or 3 .
   !                    VC(2) need be set only if IC(2) = 2 or 3 .
   !
-  !     N -- (input) number of data points.  (assumes N.GE.2)
+  !     N -- (input) number of data points.  (assumes N>=2)
   !
   !     X -- (input) real array of independent variable values.  (the
   !           elements of X are assumed to be strictly increasing.)
@@ -67,9 +66,9 @@ SUBROUTINE PCHCE(Ic,Vc,N,X,H,Slope,D,Incfd,Ierr)
   !           Normal return:
   !              IERR = 0  (no errors).
   !           Warning errors:
-  !              IERR = 1  if IBEG.LT.0 and D(1) had to be adjusted for
+  !              IERR = 1  if IBEG<0 and D(1) had to be adjusted for
   !                        monotonicity.
-  !              IERR = 2  if IEND.LT.0 and D(1+(N-1)*INCFD) had to be
+  !              IERR = 2  if IEND<0 and D(1+(N-1)*INCFD) had to be
   !                        adjusted for monotonicity.
   !              IERR = 3  if both of the above are true.
   !
@@ -115,13 +114,13 @@ SUBROUTINE PCHCE(Ic,Vc,N,X,H,Slope,D,Incfd,Ierr)
   !
   !  DECLARE ARGUMENTS.
   !
-  INTEGER Ic(2), N, Incfd, Ierr
-  REAL(SP) Vc(2), X(N), H(N), Slope(N), D(Incfd,N)
+  INTEGER :: Ic(2), N, Incfd, Ierr
+  REAL(SP) :: Vc(2), X(N), H(N), Slope(N), D(Incfd,N)
   !
   !  DECLARE LOCAL VARIABLES.
   !
-  INTEGER ibeg, iend, ierf, indexx, j, k
-  REAL(SP) stemp(3), xtemp(4)
+  INTEGER :: ibeg, iend, ierf, indexx, j, k
+  REAL(SP) :: stemp(3), xtemp(4)
   !
   !  INITIALIZE.
   !
@@ -134,51 +133,51 @@ SUBROUTINE PCHCE(Ic,Vc,N,X,H,Slope,D,Incfd,Ierr)
   !
   !  SET TO DEFAULT BOUNDARY CONDITIONS IF N IS TOO SMALL.
   !
-  IF ( ABS(ibeg)>N ) ibeg = 0
-  IF ( ABS(iend)>N ) iend = 0
+  IF( ABS(ibeg)>N ) ibeg = 0
+  IF( ABS(iend)>N ) iend = 0
   !
   !  TREAT BEGINNING BOUNDARY CONDITION.
   !
-  IF ( ibeg/=0 ) THEN
+  IF( ibeg/=0 ) THEN
     k = ABS(ibeg)
-    IF ( k==1 ) THEN
+    IF( k==1 ) THEN
       !        BOUNDARY VALUE PROVIDED.
       D(1,1) = Vc(1)
-    ELSEIF ( k==2 ) THEN
+    ELSEIF( k==2 ) THEN
       !        BOUNDARY SECOND DERIVATIVE PROVIDED.
       D(1,1) = half*((three*Slope(1)-D(1,2))-half*Vc(1)*H(1))
-    ELSEIF ( k<5 ) THEN
+    ELSEIF( k<5 ) THEN
       !        USE K-POINT DERIVATIVE FORMULA.
       !        PICK UP FIRST K POINTS, IN REVERSE ORDER.
       DO j = 1, k
         indexx = k - j + 1
         !           INDEX RUNS FROM K DOWN TO 1.
         xtemp(j) = X(indexx)
-        IF ( j<k ) stemp(j) = Slope(indexx-1)
+        IF( j<k ) stemp(j) = Slope(indexx-1)
       END DO
       !                 -----------------------------
       D(1,1) = PCHDF(k,xtemp,stemp,ierf)
       !                 -----------------------------
-      IF ( ierf/=0 ) GOTO 100
+      IF( ierf/=0 ) GOTO 100
     ELSE
       !        USE 'NOT A KNOT' CONDITION.
       D(1,1) = (three*(H(1)*Slope(2)+H(2)*Slope(1))-two*(H(1)+H(2))*D(1,2)&
         -H(1)*D(1,3))/H(2)
     END IF
     !
-    IF ( ibeg<=0 ) THEN
+    IF( ibeg<=0 ) THEN
       !
       !  CHECK D(1,1) FOR COMPATIBILITY WITH MONOTONICITY.
       !
-      IF ( Slope(1)==zero ) THEN
-        IF ( D(1,1)/=zero ) THEN
+      IF( Slope(1)==zero ) THEN
+        IF( D(1,1)/=zero ) THEN
           D(1,1) = zero
           Ierr = Ierr + 1
         END IF
-      ELSEIF ( PCHST(D(1,1),Slope(1))<zero ) THEN
+      ELSEIF( PCHST(D(1,1),Slope(1))<zero ) THEN
         D(1,1) = zero
         Ierr = Ierr + 1
-      ELSEIF ( ABS(D(1,1))>three*ABS(Slope(1)) ) THEN
+      ELSEIF( ABS(D(1,1))>three*ABS(Slope(1)) ) THEN
         D(1,1) = three*Slope(1)
         Ierr = Ierr + 1
       END IF
@@ -187,46 +186,46 @@ SUBROUTINE PCHCE(Ic,Vc,N,X,H,Slope,D,Incfd,Ierr)
   !
   !  TREAT END BOUNDARY CONDITION.
   !
-  IF ( iend/=0 ) THEN
+  IF( iend/=0 ) THEN
     k = ABS(iend)
-    IF ( k==1 ) THEN
+    IF( k==1 ) THEN
       !        BOUNDARY VALUE PROVIDED.
       D(1,N) = Vc(2)
-    ELSEIF ( k==2 ) THEN
+    ELSEIF( k==2 ) THEN
       !        BOUNDARY SECOND DERIVATIVE PROVIDED.
       D(1,N) = half*((three*Slope(N-1)-D(1,N-1))+half*Vc(2)*H(N-1))
-    ELSEIF ( k<5 ) THEN
+    ELSEIF( k<5 ) THEN
       !        USE K-POINT DERIVATIVE FORMULA.
       !        PICK UP LAST K POINTS.
       DO j = 1, k
         indexx = N - k + j
         !           INDEX RUNS FROM N+1-K UP TO N.
         xtemp(j) = X(indexx)
-        IF ( j<k ) stemp(j) = Slope(indexx)
+        IF( j<k ) stemp(j) = Slope(indexx)
       END DO
       !                 -----------------------------
       D(1,N) = PCHDF(k,xtemp,stemp,ierf)
       !                 -----------------------------
-      IF ( ierf/=0 ) GOTO 100
+      IF( ierf/=0 ) GOTO 100
     ELSE
       !        USE 'NOT A KNOT' CONDITION.
       D(1,N) = (three*(H(N-1)*Slope(N-2)+H(N-2)*Slope(N-1))&
         -two*(H(N-1)+H(N-2))*D(1,N-1)-H(N-1)*D(1,N-2))/H(N-2)
     END IF
     !
-    IF ( iend<=0 ) THEN
+    IF( iend<=0 ) THEN
       !
       !  CHECK D(1,N) FOR COMPATIBILITY WITH MONOTONICITY.
       !
-      IF ( Slope(N-1)==zero ) THEN
-        IF ( D(1,N)/=zero ) THEN
+      IF( Slope(N-1)==zero ) THEN
+        IF( D(1,N)/=zero ) THEN
           D(1,N) = zero
           Ierr = Ierr + 2
         END IF
-      ELSEIF ( PCHST(D(1,N),Slope(N-1))<zero ) THEN
+      ELSEIF( PCHST(D(1,N),Slope(N-1))<zero ) THEN
         D(1,N) = zero
         Ierr = Ierr + 2
-      ELSEIF ( ABS(D(1,N))>three*ABS(Slope(N-1)) ) THEN
+      ELSEIF( ABS(D(1,N))>three*ABS(Slope(N-1)) ) THEN
         D(1,N) = three*Slope(N-1)
         Ierr = Ierr + 2
       END IF

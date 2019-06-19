@@ -1,7 +1,6 @@
 !** GAMIC
 REAL(SP) FUNCTION GAMIC(A,X)
-  !>
-  !  Calculate the complementary incomplete Gamma function.
+  !> Calculate the complementary incomplete Gamma function.
   !***
   ! **Library:**   SLATEC (FNLIB)
   !***
@@ -21,8 +20,8 @@ REAL(SP) FUNCTION GAMIC(A,X)
   !   GAMIC = integral from X to infinity of EXP(-T) * T**(A-1.)  .
   !
   !   GAMIC is evaluated for arbitrary real values of A and for non-
-  !   negative values of X (even though GAMIC is defined for X .LT.
-  !   0.0), except that for X = 0 and A .LE. 0.0, GAMIC is undefined.
+  !   negative values of X (even though GAMIC is defined for X <
+  !   0.0), except that for X = 0 and A <= 0.0, GAMIC is undefined.
   !
   !   GAMIC, A, and X are REAL.
   !
@@ -59,20 +58,20 @@ REAL(SP) FUNCTION GAMIC(A,X)
     alneps = -LOG(R1MACH(3)), bot = LOG(R1MACH(1))
   !* FIRST EXECUTABLE STATEMENT  GAMIC
   !
-  IF ( X<0.0 ) CALL XERMSG('GAMIC','X IS NEGATIVE',2,2)
+  IF( X<0.0 ) CALL XERMSG('GAMIC','X IS NEGATIVE',2,2)
   !
-  IF ( X>0.0 ) THEN
+  IF( X>0.0 ) THEN
     !
     alx = LOG(X)
     sga = 1.0
-    IF ( A/=0.0 ) sga = SIGN(1.0,A)
+    IF( A/=0.0 ) sga = SIGN(1.0,A)
     ma = INT( A + 0.5*sga )
     aeps = A - ma
     !
     izero = 0
-    IF ( X>=1.0 ) THEN
+    IF( X>=1.0 ) THEN
       !
-      IF ( A<X ) THEN
+      IF( A<X ) THEN
         GAMIC = EXP(R9LGIC(A,X,alx))
         RETURN
       END IF
@@ -83,12 +82,12 @@ REAL(SP) FUNCTION GAMIC(A,X)
       alngs = R9LGIT(A,X,algap1)
     ELSE
       !
-      IF ( A<=0.5.AND.ABS(aeps)<=0.001 ) THEN
+      IF( A<=0.5 .AND. ABS(aeps)<=0.001 ) THEN
         fm = -ma
         e = 2.0
-        IF ( fm>1.0 ) e = 2.0*(fm+2.0)/(fm*fm-1.0)
+        IF( fm>1.0 ) e = 2.0*(fm+2.0)/(fm*fm-1.0)
         e = e - alx*X**(-0.001)
-        IF ( e*ABS(aeps)<=eps ) THEN
+        IF( e*ABS(aeps)<=eps ) THEN
           !
           GAMIC = R9GMIC(A,X,alx)
           RETURN
@@ -97,34 +96,34 @@ REAL(SP) FUNCTION GAMIC(A,X)
       !
       CALL ALGAMS(A+1.0,algap1,sgngam)
       gstar = R9GMIT(A,X,algap1,sgngam)
-      IF ( gstar==0.0 ) izero = 1
-      IF ( gstar/=0.0 ) alngs = LOG(ABS(gstar))
-      IF ( gstar/=0.0 ) sgngs = SIGN(1.0,gstar)
+      IF( gstar==0.0 ) izero = 1
+      IF( gstar/=0.0 ) alngs = LOG(ABS(gstar))
+      IF( gstar/=0.0 ) sgngs = SIGN(1.0,gstar)
     END IF
     !
     ! EVALUATION OF GAMIC(A,X) IN TERMS OF TRICOMI-S INCOMPLETE GAMMA FN.
     !
     h = 1.0
-    IF ( izero/=1 ) THEN
+    IF( izero/=1 ) THEN
       !
       t = A*alx + alngs
-      IF ( t>alneps ) THEN
+      IF( t>alneps ) THEN
         !
         sgng = -sgngs*sga*sgngam
         t = t + algap1 - LOG(ABS(A))
-        IF ( t<bot ) CALL XERCLR
+        IF( t<bot ) CALL XERCLR
         GAMIC = sgng*EXP(t)
         RETURN
       ELSE
-        IF ( t>(-alneps) ) h = 1.0 - sgngs*EXP(t)
+        IF( t>(-alneps) ) h = 1.0 - sgngs*EXP(t)
         !
-        IF ( ABS(h)<sqeps ) CALL XERCLR
-        IF ( ABS(h)<sqeps )&
+        IF( ABS(h)<sqeps ) CALL XERCLR
+        IF( ABS(h)<sqeps )&
           CALL XERMSG('GAMIC','RESULT LT HALF PRECISION',1,1)
       END IF
     END IF
   ELSE
-    IF ( A<=0.0 ) CALL XERMSG('GAMIC',&
+    IF( A<=0.0 ) CALL XERMSG('GAMIC',&
       'X = 0 AND A LE 0 SO GAMIC IS UNDEFINED',3,2)
     !
     GAMIC = EXP(LOG_GAMMA(A+1.0)-LOG(A))
@@ -133,7 +132,7 @@ REAL(SP) FUNCTION GAMIC(A,X)
   !
   sgng = SIGN(1.0,h)*sga*sgngam
   t = LOG(ABS(h)) + algap1 - LOG(ABS(A))
-  IF ( t<bot ) CALL XERCLR
+  IF( t<bot ) CALL XERCLR
   GAMIC = sgng*EXP(t)
   RETURN
 END FUNCTION GAMIC

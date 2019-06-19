@@ -1,7 +1,6 @@
 !** SREADP
 SUBROUTINE SREADP(Ipage,List,Rlist,Lpage,Irec)
-  !>
-  !  Subsidiary to SPLP
+  !> Subsidiary to SPLP
   !***
   ! **Library:**   SLATEC
   !***

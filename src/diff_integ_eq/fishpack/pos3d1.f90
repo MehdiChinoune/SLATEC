@@ -1,7 +1,6 @@
 !** POS3D1
 SUBROUTINE POS3D1(Lp,L,Mp,M,N,A,B,C,Ldimf,Mdimf,F,Xrt,Yrt,T,D,Wx,Wy,C1,C2,Bb)
-  !>
-  !  Subsidiary to POIS3D
+  !> Subsidiary to POIS3D
   !***
   ! **Library:**   SLATEC
   !***
@@ -125,7 +124,7 @@ SUBROUTINE POS3D1(Lp,L,Mp,M,N,A,B,C,Ldimf,Mdimf,F,Xrt,Yrt,T,D,Wx,Wy,C1,C2,Bb)
           CASE (2)
             CALL SINT(lr,T,Wx)
           CASE (3)
-            IF ( ifwrd==2 ) THEN
+            IF( ifwrd==2 ) THEN
               CALL SINQB(lr,T,Wx)
             ELSE
               CALL SINQF(lr,T,Wx)
@@ -133,13 +132,13 @@ SUBROUTINE POS3D1(Lp,L,Mp,M,N,A,B,C,Ldimf,Mdimf,F,Xrt,Yrt,T,D,Wx,Wy,C1,C2,Bb)
           CASE (4)
             CALL COST(lr,T,Wx)
           CASE (5)
-            IF ( ifwrd==2 ) THEN
+            IF( ifwrd==2 ) THEN
               CALL COSQB(lr,T,Wx)
             ELSE
               CALL COSQF(lr,T,Wx)
             END IF
           CASE DEFAULT
-            IF ( ifwrd==2 ) THEN
+            IF( ifwrd==2 ) THEN
               CALL RFFTB(lr,T,Wx)
             ELSE
               CALL RFFTF(lr,T,Wx)
@@ -150,7 +149,7 @@ SUBROUTINE POS3D1(Lp,L,Mp,M,N,A,B,C,Ldimf,Mdimf,F,Xrt,Yrt,T,D,Wx,Wy,C1,C2,Bb)
         END DO
       END DO
     END DO
-    IF ( ifwrd==2 ) THEN
+    IF( ifwrd==2 ) THEN
       DO i = 1, lr
         DO j = 1, mr
           DO k = 1, nr
@@ -173,7 +172,7 @@ SUBROUTINE POS3D1(Lp,L,Mp,M,N,A,B,C,Ldimf,Mdimf,F,Xrt,Yrt,T,D,Wx,Wy,C1,C2,Bb)
               CASE (2)
                 CALL SINT(mr,T,Wy)
               CASE (3)
-                IF ( ifwrd==2 ) THEN
+                IF( ifwrd==2 ) THEN
                   CALL SINQB(mr,T,Wy)
                 ELSE
                   CALL SINQF(mr,T,Wy)
@@ -181,13 +180,13 @@ SUBROUTINE POS3D1(Lp,L,Mp,M,N,A,B,C,Ldimf,Mdimf,F,Xrt,Yrt,T,D,Wx,Wy,C1,C2,Bb)
               CASE (4)
                 CALL COST(mr,T,Wy)
               CASE (5)
-                IF ( ifwrd==2 ) THEN
+                IF( ifwrd==2 ) THEN
                   CALL COSQB(mr,T,Wy)
                 ELSE
                   CALL COSQF(mr,T,Wy)
                 END IF
               CASE DEFAULT
-                IF ( ifwrd==2 ) THEN
+                IF( ifwrd==2 ) THEN
                   CALL RFFTB(mr,T,Wy)
                 ELSE
                   CALL RFFTF(mr,T,Wy)
@@ -198,7 +197,7 @@ SUBROUTINE POS3D1(Lp,L,Mp,M,N,A,B,C,Ldimf,Mdimf,F,Xrt,Yrt,T,D,Wx,Wy,C1,C2,Bb)
             END DO
           END DO
         END DO
-        IF ( ifwrd==2 ) EXIT
+        IF( ifwrd==2 ) EXIT
         !
         !     SOLVE TRIDIAGONAL SYSTEMS IN Z
         !

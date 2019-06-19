@@ -1,7 +1,6 @@
 !** DSICS
 SUBROUTINE DSICS(N,Nelt,Ia,Ja,A,Isym,Nel,Iel,Jel,El,D,R,Iwarn)
-  !>
-  !  Incompl. Cholesky Decomposition Preconditioner SLAP Set Up.
+  !> Incompl. Cholesky Decomposition Preconditioner SLAP Set Up.
   !            Routine to generate the Incomplete Cholesky decomposition,
   !            L*D*L-trans, of a symmetric positive definite matrix, A,
   !            which is stored in SLAP Column format.  The unit lower
@@ -167,13 +166,13 @@ SUBROUTINE DSICS(N,Nelt,Ia,Ja,A,Isym,Nel,Iel,Jel,El,D,R,Iwarn)
   !   930701  Updated CATEGORY section.  (FNF, WRB)
   USE service, ONLY : XERMSG
   !     .. Scalar Arguments ..
-  INTEGER Isym, Iwarn, N, Nel, Nelt
+  INTEGER :: Isym, Iwarn, N, Nel, Nelt
   !     .. Array Arguments ..
   REAL(DP) :: A(Nelt), D(N), El(Nel), R(N)
-  INTEGER Ia(Nelt), Iel(Nel), Ja(Nelt), Jel(Nel)
+  INTEGER :: Ia(Nelt), Iel(Nel), Ja(Nelt), Jel(Nel)
   !     .. Local Scalars ..
   REAL(DP) :: eltmp
-  INTEGER i, ibgn, ic, icbgn, icend, icol, iend, ir, irbgn, irend, &
+  INTEGER :: i, ibgn, ic, icbgn, icend, icol, iend, ir, irbgn, irend, &
     irow, irr, j, jbgn, jeltmp, jend
   CHARACTER xern1*8
   !* FIRST EXECUTABLE STATEMENT  DSICS
@@ -203,7 +202,7 @@ SUBROUTINE DSICS(N,Nelt,Ia,Ja,A,Isym,Nel,Iel,Jel,El,D,R,Iwarn)
     !         Since the matrix is symmetric, we can look across the
     !         IROW-th row by looking down the IROW-th column (if it is
     !         stored ISYM=0)...
-    IF ( Isym==0 ) THEN
+    IF( Isym==0 ) THEN
       icbgn = Ja(irow)
       icend = Ja(irow+1) - 1
     ELSE
@@ -211,17 +210,17 @@ SUBROUTINE DSICS(N,Nelt,Ia,Ja,A,Isym,Nel,Iel,Jel,El,D,R,Iwarn)
       icend = irow - 1
     END IF
     DO ic = icbgn, icend
-      IF ( Isym==0 ) THEN
+      IF( Isym==0 ) THEN
         icol = Ia(ic)
-        IF ( icol>=irow ) CYCLE
+        IF( icol>=irow ) CYCLE
       ELSE
         icol = ic
       END IF
       jbgn = Ja(icol) + 1
       jend = Ja(icol+1) - 1
-      IF ( jbgn<=jend.AND.Ia(jend)>=irow ) THEN
+      IF( jbgn<=jend .AND. Ia(jend)>=irow ) THEN
         DO j = jbgn, jend
-          IF ( Ia(j)==irow ) THEN
+          IF( Ia(j)==irow ) THEN
             Nel = Nel + 1
             Jel(Nel) = icol
             El(Nel) = A(j)
@@ -239,10 +238,10 @@ SUBROUTINE DSICS(N,Nelt,Ia,Ja,A,Isym,Nel,Iel,Jel,El,D,R,Iwarn)
   DO irow = 2, N
     ibgn = Iel(irow) + 1
     iend = Iel(irow+1) - 1
-    IF ( ibgn<iend ) THEN
+    IF( ibgn<iend ) THEN
       DO i = ibgn, iend - 1
         DO j = i + 1, iend
-          IF ( Jel(i)>Jel(j) ) THEN
+          IF( Jel(i)>Jel(j) ) THEN
             jeltmp = Jel(j)
             Jel(j) = Jel(i)
             Jel(i) = jeltmp
@@ -279,7 +278,7 @@ SUBROUTINE DSICS(N,Nelt,Ia,Ja,A,Isym,Nel,Iel,Jel,El,D,R,Iwarn)
     END DO
     ibgn = Iel(irow) + 1
     iend = Iel(irow+1) - 1
-    IF ( ibgn<=iend ) THEN
+    IF( ibgn<=iend ) THEN
       DO i = ibgn, iend
         R(Jel(i)) = El(i)*D(Jel(i))
         D(irow) = D(irow) - El(i)*R(Jel(i))
@@ -287,8 +286,8 @@ SUBROUTINE DSICS(N,Nelt,Ia,Ja,A,Isym,Nel,Iel,Jel,El,D,R,Iwarn)
       !
       !         Check to see if we have a problem with the diagonal.
       !
-      IF ( D(irow)<=0.0D0 ) THEN
-        IF ( Iwarn==0 ) Iwarn = irow
+      IF( D(irow)<=0.0D0 ) THEN
+        IF( Iwarn==0 ) Iwarn = irow
         D(irow) = 1
       END IF
     END IF
@@ -301,16 +300,16 @@ SUBROUTINE DSICS(N,Nelt,Ia,Ja,A,Isym,Nel,Iel,Jel,El,D,R,Iwarn)
     irend = Ja(irow+1) - 1
     DO irr = irbgn, irend
       ir = Ia(irr)
-      IF ( ir>irow ) THEN
+      IF( ir>irow ) THEN
         !         Find the index into EL for EL(IR,IROW)
         ibgn = Iel(ir) + 1
         iend = Iel(ir+1) - 1
-        IF ( Jel(ibgn)<=irow ) THEN
+        IF( Jel(ibgn)<=irow ) THEN
           DO i = ibgn, iend
-            IF ( Jel(i)==irow ) THEN
+            IF( Jel(i)==irow ) THEN
               icend = iend
               DO
-                IF ( Jel(icend)>=irow ) THEN
+                IF( Jel(icend)>=irow ) THEN
                   icend = icend - 1
                   CYCLE
                 END IF

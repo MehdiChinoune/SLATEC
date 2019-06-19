@@ -1,7 +1,6 @@
 !** SPPERM
 SUBROUTINE SPPERM(X,N,Iperm,Ier)
-  !>
-  !  Rearrange a given array according to a prescribed
+  !> Rearrange a given array according to a prescribed
   !            permutation vector.
   !***
   ! **Library:**   SLATEC
@@ -46,7 +45,7 @@ SUBROUTINE SPPERM(X,N,Iperm,Ier)
   REAL(SP) :: temp
   !* FIRST EXECUTABLE STATEMENT  SPPERM
   Ier = 0
-  IF ( N<1 ) THEN
+  IF( N<1 ) THEN
     Ier = 1
     CALL XERMSG('SPPERM',&
       'The number of values to be rearranged, N, is not positive.',Ier,1)
@@ -57,8 +56,8 @@ SUBROUTINE SPPERM(X,N,Iperm,Ier)
   !
   DO i = 1, N
     indx = ABS(Iperm(i))
-    IF ( (indx>=1).AND.(indx<=N) ) THEN
-      IF ( Iperm(indx)>0 ) THEN
+    IF( (indx>=1) .AND. (indx<=N) ) THEN
+      IF( Iperm(indx)>0 ) THEN
         Iperm(indx) = -Iperm(indx)
         CYCLE
       END IF
@@ -75,11 +74,11 @@ SUBROUTINE SPPERM(X,N,Iperm,Ier)
   !     IF IPERM(I) > 0, THEN THE I-TH VALUE IS IN CORRECT LOCATION
   !
   DO istrt = 1, N
-    IF ( Iperm(istrt)<=0 ) THEN
+    IF( Iperm(istrt)<=0 ) THEN
       indx = istrt
       indx0 = indx
       temp = X(istrt)
-      DO WHILE ( Iperm(indx)<0 )
+      DO WHILE( Iperm(indx)<0 )
         X(indx) = X(-Iperm(indx))
         indx0 = indx
         Iperm(indx) = -Iperm(indx)

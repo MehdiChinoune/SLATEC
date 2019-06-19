@@ -1,7 +1,6 @@
 !** BDIFF
 SUBROUTINE BDIFF(L,V)
-  !>
-  !  Subsidiary to BSKIN
+  !> Subsidiary to BSKIN
   !***
   ! **Library:**   SLATEC
   !***
@@ -30,7 +29,7 @@ SUBROUTINE BDIFF(L,V)
   REAL(SP) :: V(L)
   INTEGER :: i, j, k
   !* FIRST EXECUTABLE STATEMENT  BDIFF
-  IF ( L==1 ) RETURN
+  IF( L==1 ) RETURN
   DO j = 2, L
     k = L
     DO i = j, L

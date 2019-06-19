@@ -1,7 +1,6 @@
 !** INXCB
 SUBROUTINE INXCB(I,Ir,Idx,Idp)
-  !>
-  !  Subsidiary to CBLKTR
+  !> Subsidiary to CBLKTR
   !***
   ! **Library:**   SLATEC
   !***
@@ -24,9 +23,9 @@ SUBROUTINE INXCB(I,Ir,Idx,Idp)
   INTEGER :: id, ipl, izh
   !* FIRST EXECUTABLE STATEMENT  INXCB
   Idp = 0
-  IF ( Ir<0 ) RETURN
-  IF ( Ir==0 ) THEN
-    IF ( I>nm_com ) RETURN
+  IF( Ir<0 ) RETURN
+  IF( Ir==0 ) THEN
+    IF( I>nm_com ) RETURN
     Idx = I
     Idp = 1
     RETURN
@@ -36,8 +35,8 @@ SUBROUTINE INXCB(I,Ir,Idx,Idp)
     Idx = id + id + (Ir-1)*ik_com + Ir + (ik_com-I)/izh + 4
     ipl = izh - 1
     Idp = izh + izh - 1
-    IF ( I-ipl<=nm_com ) THEN
-      IF ( I+ipl>nm_com ) Idp = nm_com + ipl - I + 1
+    IF( I-ipl<=nm_com ) THEN
+      IF( I+ipl>nm_com ) Idp = nm_com + ipl - I + 1
       RETURN
     END IF
   END IF

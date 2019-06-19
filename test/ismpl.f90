@@ -1,7 +1,6 @@
 !** ISMPL
 SUBROUTINE ISMPL(N,M,Indx)
-  !>
-  !  Generate integer sample.
+  !> Generate integer sample.
   !            This routine picks M "random" integers in the range 1 to
   !            N without any repetitions.
   !***
@@ -25,12 +24,12 @@ SUBROUTINE ISMPL(N,M,Indx)
   !   920511  Added complete declaration section.  (WRB)
   USE slatec, ONLY : RAND
   !     .. Scalar Arguments ..
-  INTEGER M, N
+  INTEGER :: M, N
   !     .. Array Arguments ..
-  INTEGER Indx(M)
+  INTEGER :: Indx(M)
   !     .. Local Scalars ..
-  REAL(SP) dummy
-  INTEGER i, id, j
+  REAL(SP) :: dummy
+  INTEGER :: i, id, j
   !     .. Intrinsic Functions ..
   INTRINSIC INT
   !* FIRST EXECUTABLE STATEMENT  ISMPL
@@ -38,7 +37,7 @@ SUBROUTINE ISMPL(N,M,Indx)
   !     Check the input
   !
   dummy = 0.0
-  IF ( N*M<=0 .OR. M>N ) RETURN
+  IF( N*M<=0 .OR. M>N ) RETURN
   !
   !     Set the indices.
   Indx(1) = INT(RAND(dummy)*N) + 1
@@ -48,7 +47,7 @@ SUBROUTINE ISMPL(N,M,Indx)
       !
       !        Check to see if ID has already been chosen.
       DO j = 1, i - 1
-        IF ( id==Indx(j) ) GOTO 50
+        IF( id==Indx(j) ) GOTO 50
       END DO
       Indx(i) = id
       EXIT

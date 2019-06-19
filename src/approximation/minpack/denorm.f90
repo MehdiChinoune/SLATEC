@@ -1,7 +1,6 @@
 !** DENORM
 REAL(DP) FUNCTION DENORM(N,X)
-  !>
-  !  Subsidiary to DNSQ and DNSQE
+  !> Subsidiary to DNSQ and DNSQE
   !***
   ! **Library:**   SLATEC
   !***
@@ -65,17 +64,17 @@ REAL(DP) FUNCTION DENORM(N,X)
   agiant = rgiant/floatn
   DO i = 1, N
     xabs = ABS(X(i))
-    IF ( xabs>rdwarf.AND.xabs<agiant ) THEN
+    IF( xabs>rdwarf .AND. xabs<agiant ) THEN
       !
       !           SUM FOR INTERMEDIATE COMPONENTS.
       !
       s2 = s2 + xabs**2
-    ELSEIF ( xabs<=rdwarf ) THEN
+    ELSEIF( xabs<=rdwarf ) THEN
       !
       !              SUM FOR SMALL COMPONENTS.
       !
-      IF ( xabs<=x3max ) THEN
-        IF ( xabs/=zero ) s3 = s3 + (xabs/x3max)**2
+      IF( xabs<=x3max ) THEN
+        IF( xabs/=zero ) s3 = s3 + (xabs/x3max)**2
       ELSE
         s3 = one + s3*(x3max/xabs)**2
         x3max = xabs
@@ -83,7 +82,7 @@ REAL(DP) FUNCTION DENORM(N,X)
       !
       !              SUM FOR LARGE COMPONENTS.
       !
-    ELSEIF ( xabs<=x1max ) THEN
+    ELSEIF( xabs<=x1max ) THEN
       s1 = s1 + (xabs/x1max)**2
     ELSE
       s1 = one + s1*(x1max/xabs)**2
@@ -93,13 +92,13 @@ REAL(DP) FUNCTION DENORM(N,X)
   !
   !     CALCULATION OF NORM.
   !
-  IF ( s1/=zero ) THEN
+  IF( s1/=zero ) THEN
     DENORM = x1max*SQRT(s1+(s2/x1max)/x1max)
-  ELSEIF ( s2==zero ) THEN
+  ELSEIF( s2==zero ) THEN
     DENORM = x3max*SQRT(s3)
   ELSE
-    IF ( s2>=x3max ) DENORM = SQRT(s2*(one+(x3max/s2)*(x3max*s3)))
-    IF ( s2<x3max ) DENORM = SQRT(x3max*((s2/x3max)+(x3max*s3)))
+    IF( s2>=x3max ) DENORM = SQRT(s2*(one+(x3max/s2)*(x3max*s3)))
+    IF( s2<x3max ) DENORM = SQRT(x3max*((s2/x3max)+(x3max*s3)))
   END IF
   !
   !     LAST CARD OF FUNCTION DENORM.

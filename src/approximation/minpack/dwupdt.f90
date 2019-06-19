@@ -1,7 +1,6 @@
 !** DWUPDT
 SUBROUTINE DWUPDT(N,R,Ldr,W,B,Alpha,Coss,Sinn)
-  !>
-  !  Subsidiary to DNLS1 and DNLS1E
+  !> Subsidiary to DNLS1 and DNLS1E
   !***
   ! **Library:**   SLATEC
   !***
@@ -89,7 +88,7 @@ SUBROUTINE DWUPDT(N,R,Ldr,W,B,Alpha,Coss,Sinn)
     !        APPLY THE PREVIOUS TRANSFORMATIONS TO
     !        R(I,J), I=1,2,...,J-1, AND TO W(J).
     !
-    IF ( jm1>=1 ) THEN
+    IF( jm1>=1 ) THEN
       DO i = 1, jm1
         temp = Coss(i)*R(i,j) + Sinn(i)*rowj
         rowj = -Sinn(i)*R(i,j) + Coss(i)*rowj
@@ -101,8 +100,8 @@ SUBROUTINE DWUPDT(N,R,Ldr,W,B,Alpha,Coss,Sinn)
     !
     Coss(j) = one
     Sinn(j) = zero
-    IF ( rowj/=zero ) THEN
-      IF ( ABS(R(j,j))>=ABS(rowj) ) THEN
+    IF( rowj/=zero ) THEN
+      IF( ABS(R(j,j))>=ABS(rowj) ) THEN
         tann = rowj/R(j,j)
         Coss(j) = p5/SQRT(p25+p25*tann**2)
         Sinn(j) = Coss(j)*tann

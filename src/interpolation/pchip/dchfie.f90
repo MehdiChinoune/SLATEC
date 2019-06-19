@@ -1,7 +1,6 @@
 !** DCHFIE
 REAL(DP) FUNCTION DCHFIE(X1,X2,F1,F2,D1,D2,A,B)
-  !>
-  !  Evaluates integral of a single cubic for DPCHIA
+  !> Evaluates integral of a single cubic for DPCHIA
   !***
   ! **Library:**   SLATEC (PCHIP)
   !***
@@ -54,13 +53,13 @@ REAL(DP) FUNCTION DCHFIE(X1,X2,F1,F2,D1,D2,A,B)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900328  Added TYPE section.  (WRB)
   !   910408  Updated AUTHOR section in prologue.  (WRB)
-  !   930503  Corrected to set VALUE=0 when IERR.ne.0.  (FNF)
+  !   930503  Corrected to set VALUE=0 when IERR/=0.  (FNF)
   !   930504  Eliminated IERR and changed name DCHFIV to DCHFIE.  (FNF)
 
   !
   !  Programming notes:
   !  1. There is no error return from this routine because zero is
-  !     indeed the mathematically correct answer when X1.EQ.X2 .
+  !     indeed the mathematically correct answer when X1=X2 .
   !**End
   !
   !  DECLARE ARGUMENTS.
@@ -79,7 +78,7 @@ REAL(DP) FUNCTION DCHFIE(X1,X2,F1,F2,D1,D2,A,B)
   !  VALIDITY CHECK INPUT.
   !
   !* FIRST EXECUTABLE STATEMENT  DCHFIE
-  IF ( X1==X2 ) THEN
+  IF( X1==X2 ) THEN
     DCHFIE = 0
   ELSE
     h = X2 - X1

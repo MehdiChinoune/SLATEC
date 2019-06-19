@@ -1,7 +1,6 @@
 !** DQWGTS
 REAL(DP) FUNCTION DQWGTS(X,A,B,Alfa,Beta,Integr)
-  !>
-  !  This function subprogram is used together with the
+  !> This function subprogram is used together with the
   !            routine DQAWS and defines the WEIGHT function.
   !***
   ! **Library:**   SLATEC
@@ -31,7 +30,7 @@ REAL(DP) FUNCTION DQWGTS(X,A,B,Alfa,Beta,Integr)
   
   !
   REAL(DP) :: A, Alfa, B, Beta, bmx, X, xma
-  INTEGER Integr
+  INTEGER :: Integr
   !* FIRST EXECUTABLE STATEMENT  DQWGTS
   xma = X - A
   bmx = B - X

@@ -1,7 +1,6 @@
 !** SRLCAL
 SUBROUTINE SRLCAL(N,Kmp,Ll,Maxl,V,Q,Rl,Snormw,Prod,R0nrm)
-  !>
-  !  Internal routine for SGMRES.
+  !> Internal routine for SGMRES.
   !***
   ! **Library:**   SLATEC (SLAP)
   !***
@@ -34,7 +33,7 @@ SUBROUTINE SRLCAL(N,Kmp,Ll,Maxl,V,Q,Rl,Snormw,Prod,R0nrm)
   !         of the vectors SR, SZ, R0 and Z.
   ! KMP    :IN       Integer
   !         The number of previous V vectors the new vector VNEW
-  !         must be made orthogonal to. (KMP .le. MAXL)
+  !         must be made orthogonal to. (KMP <= MAXL)
   ! LL     :IN       Integer
   !         The current dimension of the Krylov subspace.
   ! MAXL   :IN       Integer
@@ -85,7 +84,7 @@ SUBROUTINE SRLCAL(N,Kmp,Ll,Maxl,V,Q,Rl,Snormw,Prod,R0nrm)
   REAL(SP) :: c, s, tem
   INTEGER :: i, i2, ip1, k, llm1, llp1
   !* FIRST EXECUTABLE STATEMENT  SRLCAL
-  IF ( Kmp==Maxl ) THEN
+  IF( Kmp==Maxl ) THEN
     !
     !         calculate RL.  Start by copying V(*,1) into RL.
     !

@@ -1,7 +1,6 @@
 !** BINT4
 SUBROUTINE BINT4(X,Y,Ndata,Ibcl,Ibcr,Fbcl,Fbcr,Kntopt,T,Bcoef,N,K,W)
-  !>
-  !  Compute the B-representation of a cubic spline
+  !> Compute the B-representation of a cubic spline
   !            which interpolates given data.
   !***
   ! **Library:**   SLATEC
@@ -25,7 +24,7 @@ SUBROUTINE BINT4(X,Y,Ndata,Ibcl,Ibcr,Fbcl,Fbcr,Kntopt,T,Bcoef,N,K,W)
   !         by the problem, it is common practice to use a natural
   !         spline by setting second derivatives at X(1) and X(NDATA)
   !         to zero (IBCL=IBCR=2,FBCL=FBCR=0.0).  The spline is defined on
-  !         T(4) .LE. X .LE. T(N+1) with (ordered) interior knots at X(I))
+  !         T(4) <= X <= T(N+1) with (ordered) interior knots at X(I))
   !         values where N=NDATA+2.  The knots T(1), T(2), T(3) lie to
   !         the left of T(4)=X(1) and the knots T(N+2), T(N+3), T(N+4)
   !         lie to the right of T(N+1)=X(NDATA) in increasing order.  If
@@ -39,7 +38,7 @@ SUBROUTINE BINT4(X,Y,Ndata,Ibcl,Ibcr,Fbcl,Fbcr,Kntopt,T,Bcoef,N,K,W)
   !         order, for T(1), T(2), T(3) to the left of X(1) and T(N+2),
   !         T(N+3), T(N+4) to the right of X(NDATA) in the work array
   !         W(1) through W(6).  In any case, the interpolation on
-  !         T(4) .LE. X .LE. T(N+1) by using function BVALU is unique
+  !         T(4) <= X <= T(N+1) by using function BVALU is unique
   !         for given boundary conditions.
   !
   !     Description of Arguments
@@ -47,7 +46,7 @@ SUBROUTINE BINT4(X,Y,Ndata,Ibcl,Ibcr,Fbcl,Fbcr,Kntopt,T,Bcoef,N,K,W)
   !           X      - X vector of abscissae of length NDATA, distinct
   !                    and in increasing order
   !           Y      - Y vector of ordinates of length NDATA
-  !           NDATA  - number of data points, NDATA .GE. 2
+  !           NDATA  - number of data points, NDATA >= 2
   !           IBCL   - selection parameter for left boundary condition
   !                    IBCL = 1 constrain the first derivative at
   !                             X(1) to FBCL
@@ -113,21 +112,21 @@ SUBROUTINE BINT4(X,Y,Ndata,Ibcl,Ibcr,Fbcl,Fbcr,Kntopt,T,Bcoef,N,K,W)
   !* FIRST EXECUTABLE STATEMENT  BINT4
   wdtol = R1MACH(4)
   tol = SQRT(wdtol)
-  IF ( Ndata<2 ) THEN
+  IF( Ndata<2 ) THEN
     CALL XERMSG('BINT4','NDATA IS LESS THAN 2',2,1)
     RETURN
   ELSE
     ndm = Ndata - 1
     DO i = 1, ndm
-      IF ( X(i)>=X(i+1) ) GOTO 50
+      IF( X(i)>=X(i+1) ) GOTO 50
     END DO
-    IF ( Ibcl<1.OR.Ibcl>2 ) THEN
+    IF( Ibcl<1 .OR. Ibcl>2 ) THEN
       CALL XERMSG('BINT4','IBCL IS NOT 1 OR 2',2,1)
       RETURN
-    ELSEIF ( Ibcr<1.OR.Ibcr>2 ) THEN
+    ELSEIF( Ibcr<1 .OR. Ibcr>2 ) THEN
       CALL XERMSG('BINT4','IBCR IS NOT 1 OR 2',2,1)
       RETURN
-    ELSEIF ( Kntopt<1.OR.Kntopt>3 ) THEN
+    ELSEIF( Kntopt<1 .OR. Kntopt>3 ) THEN
       CALL XERMSG('BINT4','KNTOPT IS NOT 1, 2, OR 3',2,1)
       RETURN
     ELSE
@@ -140,7 +139,7 @@ SUBROUTINE BINT4(X,Y,Ndata,Ibcl,Ibcr,Fbcl,Fbcr,Kntopt,T,Bcoef,N,K,W)
       SELECT CASE (Kntopt)
         CASE (2)
           !     SET UP KNOT ARRAY WITH SYMMETRIC PLACEMENT ABOUT END POINTS
-          IF ( Ndata>3 ) THEN
+          IF( Ndata>3 ) THEN
             tx1 = X(1) + X(1)
             txn = X(Ndata) + X(Ndata)
             DO i = 1, 3
@@ -162,8 +161,8 @@ SUBROUTINE BINT4(X,Y,Ndata,Ibcl,Ibcr,Fbcl,Fbcr,Kntopt,T,Bcoef,N,K,W)
             jw = MAX(1,i-1)
             iw = MOD(i+2,5) + 1
             T(np+i) = W(iw,jw)
-            IF ( T(4-i)>T(5-i) ) GOTO 100
-            IF ( T(np+i)<T(np+i-1) ) GOTO 100
+            IF( T(4-i)>T(5-i) ) GOTO 100
+            IF( T(np+i)<T(np+i-1) ) GOTO 100
           END DO
         CASE DEFAULT
           !     SET UP KNOT ARRAY WITH MULTIPLICITY 4 AT X(1) AND X(NDATA)
@@ -183,7 +182,7 @@ SUBROUTINE BINT4(X,Y,Ndata,Ibcl,Ibcr,Fbcl,Fbcr,Kntopt,T,Bcoef,N,K,W)
       it = Ibcl + 1
       CALL BSPVD(T,K,it,X(1),K,4,vnikx,work)
       iw = 0
-      IF ( ABS(vnikx(3,1))<tol ) iw = 1
+      IF( ABS(vnikx(3,1))<tol ) iw = 1
       DO j = 1, 3
         W(j+1,4-j) = vnikx(4-j,it)
         W(j,4-j) = vnikx(4-j,1)
@@ -192,7 +191,7 @@ SUBROUTINE BINT4(X,Y,Ndata,Ibcl,Ibcr,Fbcl,Fbcr,Kntopt,T,Bcoef,N,K,W)
       Bcoef(2) = Fbcl
       !     SET UP INTERPOLATION EQUATIONS FOR POINTS I=2 TO I=NDATA-1
       ileft = 4
-      IF ( ndm>=2 ) THEN
+      IF( ndm>=2 ) THEN
         DO i = 2, ndm
           ileft = ileft + 1
           CALL BSPVD(T,K,1,X(i),ileft,4,vnikx,work)
@@ -207,7 +206,7 @@ SUBROUTINE BINT4(X,Y,Ndata,Ibcl,Ibcr,Fbcl,Fbcr,Kntopt,T,Bcoef,N,K,W)
       it = Ibcr + 1
       CALL BSPVD(T,K,it,X(Ndata),ileft,4,vnikx,work)
       jw = 0
-      IF ( ABS(vnikx(2,1))<tol ) jw = 1
+      IF( ABS(vnikx(2,1))<tol ) jw = 1
       DO j = 1, 3
         W(j+1,3+Ndata-j) = vnikx(5-j,it)
         W(j+2,3+Ndata-j) = vnikx(5-j,1)
@@ -220,7 +219,7 @@ SUBROUTINE BINT4(X,Y,Ndata,Ibcl,Ibcr,Fbcl,Fbcr,Kntopt,T,Bcoef,N,K,W)
       nwrow = 5
       iwp = iw + 1
       CALL BNFAC(W(iwp,1),nwrow,N,ilb,iub,iflag)
-      IF ( iflag==2 ) THEN
+      IF( iflag==2 ) THEN
         !
         !
         CALL XERMSG('BINT4','THE SYSTEM OF EQUATIONS IS SINGULAR', 2,1)

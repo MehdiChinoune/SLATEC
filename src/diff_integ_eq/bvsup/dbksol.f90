@@ -1,7 +1,6 @@
 !** DBKSOL
 SUBROUTINE DBKSOL(N,A,X)
-  !>
-  !  Subsidiary to DBVSUP
+  !> Subsidiary to DBVSUP
   !***
   ! **Library:**   SLATEC
   !***
@@ -43,7 +42,7 @@ SUBROUTINE DBKSOL(N,A,X)
   m = (N*(N+1))/2
   X(N) = X(N)*A(m)
   nm1 = N - 1
-  IF ( nm1>=1 ) THEN
+  IF( nm1>=1 ) THEN
     DO k = 1, nm1
       j = N - k
       m = m - k - 1

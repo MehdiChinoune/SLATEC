@@ -1,7 +1,6 @@
 !** SSD2S
 SUBROUTINE SSD2S(N,Nelt,Ia,Ja,A,Isym,Dinv)
-  !>
-  !  Diagonal Scaling Preconditioner SLAP Normal Eqns Set Up.
+  !> Diagonal Scaling Preconditioner SLAP Normal Eqns Set Up.
   !            Routine to compute the inverse of the diagonal of the
   !            matrix A*A', where A is stored in SLAP-Column format.
   !***
@@ -113,12 +112,12 @@ SUBROUTINE SSD2S(N,Nelt,Ia,Ja,A,Isym,Dinv)
   !   930701  Updated CATEGORY section.  (FNF, WRB)
 
   !     .. Scalar Arguments ..
-  INTEGER Isym, N, Nelt
+  INTEGER :: Isym, N, Nelt
   !     .. Array Arguments ..
-  REAL(SP) A(Nelt), Dinv(N)
-  INTEGER Ia(Nelt), Ja(Nelt)
+  REAL(SP) :: A(Nelt), Dinv(N)
+  INTEGER :: Ia(Nelt), Ja(Nelt)
   !     .. Local Scalars ..
-  INTEGER i, k, kbgn, kend
+  INTEGER :: i, k, kbgn, kend
   !* FIRST EXECUTABLE STATEMENT  SSD2S
   DO i = 1, N
     Dinv(i) = 0
@@ -134,13 +133,13 @@ SUBROUTINE SSD2S(N,Nelt,Ia,Ja,A,Isym,Dinv)
     DO k = kbgn, kend
       Dinv(Ia(k)) = Dinv(Ia(k)) + A(k)**2
     END DO
-    IF ( Isym==1 ) THEN
+    IF( Isym==1 ) THEN
       !
       !         Lower triangle stored by columns => upper triangle stored by
       !         rows with Diagonal being the first entry.  Loop across the
       !         rest of the row.
       kbgn = kbgn + 1
-      IF ( kbgn<=kend ) THEN
+      IF( kbgn<=kend ) THEN
         DO k = kbgn, kend
           Dinv(i) = Dinv(i) + A(k)**2
         END DO

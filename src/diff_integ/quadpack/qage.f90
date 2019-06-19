@@ -1,11 +1,10 @@
 !** QAGE
 SUBROUTINE QAGE(F,A,B,Epsabs,Epsrel,Key,Limit,Result,Abserr,Neval,Ier,&
     Alist,Blist,Rlist,Elist,Iord,Last)
-  !>
-  !  The routine calculates an approximation result to a given
+  !> The routine calculates an approximation result to a given
   !            definite integral   I = Integral of F over (A,B),
   !            hopefully satisfying following claim for accuracy
-  !            ABS(I-RESLT).LE.MAX(EPSABS,EPSREL*ABS(I)).
+  !            ABS(I-RESLT)<=MAX(EPSABS,EPSREL*ABS(I)).
   !***
   ! **Library:**   SLATEC (QUADPACK)
   !***
@@ -47,23 +46,23 @@ SUBROUTINE QAGE(F,A,B,Epsabs,Epsrel,Key,Limit,Result,Abserr,Neval,Ier,&
   !                     Absolute accuracy requested
   !            EPSREL - Real
   !                     Relative accuracy requested
-  !                     If  EPSABS.LE.0
-  !                     and EPSREL.LT.MAX(50*REL.MACH.ACC.,0.5D-28),
+  !                     If  EPSABS<=0
+  !                     and EPSREL<MAX(50*REL.MACH.ACC.,0.5D-28),
   !                     the routine will end with IER = 6.
   !
   !            KEY    - Integer
   !                     Key for choice of local integration rule
   !                     A Gauss-Kronrod pair is used with
-  !                          7 - 15 points if KEY.LT.2,
+  !                          7 - 15 points if KEY<2,
   !                         10 - 21 points if KEY = 2,
   !                         15 - 31 points if KEY = 3,
   !                         20 - 41 points if KEY = 4,
   !                         25 - 51 points if KEY = 5,
-  !                         30 - 61 points if KEY.GT.5.
+  !                         30 - 61 points if KEY>5.
   !
   !            LIMIT  - Integer
   !                     Gives an upper bound on the number of subintervals
-  !                     in the partition of (A,B), LIMIT.GE.1.
+  !                     in the partition of (A,B), LIMIT>=1.
   !
   !         ON RETURN
   !            RESULT - Real
@@ -80,7 +79,7 @@ SUBROUTINE QAGE(F,A,B,Epsabs,Epsrel,Key,Limit,Result,Abserr,Neval,Ier,&
   !                     IER = 0 Normal and reliable termination of the
   !                             routine. It is assumed that the requested
   !                             accuracy has been achieved.
-  !                     IER.GT.0 Abnormal termination of the routine
+  !                     IER>0 Abnormal termination of the routine
   !                             The estimates for result and error are
   !                             less reliable. It is assumed that the
   !                             requested accuracy has not been achieved.
@@ -109,8 +108,8 @@ SUBROUTINE QAGE(F,A,B,Epsabs,Epsrel,Key,Limit,Result,Abserr,Neval,Ier,&
   !                             at some points of the integration
   !                             interval.
   !                         = 6 The input is invalid, because
-  !                             (EPSABS.LE.0 and
-  !                              EPSREL.LT.MAX(50*REL.MACH.ACC.,0.5D-28),
+  !                             (EPSABS<=0 and
+  !                              EPSREL<MAX(50*REL.MACH.ACC.,0.5D-28),
   !                             RESULT, ABSERR, NEVAL, LAST, RLIST(1) ,
   !                             ELIST(1) and IORD(1) are set to zero.
   !                             ALIST(1) and BLIST(1) are set to A and B
@@ -144,7 +143,7 @@ SUBROUTINE QAGE(F,A,B,Epsabs,Epsrel,Key,Limit,Result,Abserr,Neval,Ier,&
   !                      error estimates over the subintervals,
   !                      such that ELIST(IORD(1)), ...,
   !                      ELIST(IORD(K)) form a decreasing sequence,
-  !                      with K = LAST if LAST.LE.(LIMIT/2+2), and
+  !                      with K = LAST if LAST<=(LIMIT/2+2), and
   !                      K = LIMIT+1-LAST otherwise
   !
   !            LAST    - Integer
@@ -223,22 +222,22 @@ SUBROUTINE QAGE(F,A,B,Epsabs,Epsrel,Key,Limit,Result,Abserr,Neval,Ier,&
   Rlist(1) = 0.0E+00
   Elist(1) = 0.0E+00
   Iord(1) = 0
-  IF ( Epsabs<=0.0E+00.AND.Epsrel<MAX(0.5E+02*epmach,0.5E-14) ) Ier = 6
-  IF ( Ier/=6 ) THEN
+  IF( Epsabs<=0.0E+00 .AND. Epsrel<MAX(0.5E+02*epmach,0.5E-14) ) Ier = 6
+  IF( Ier/=6 ) THEN
     !
     !           FIRST APPROXIMATION TO THE INTEGRAL
     !           -----------------------------------
     !
     keyf = Key
-    IF ( Key<=0 ) keyf = 1
-    IF ( Key>=7 ) keyf = 6
+    IF( Key<=0 ) keyf = 1
+    IF( Key>=7 ) keyf = 6
     Neval = 0
-    IF ( keyf==1 ) CALL QK15(F,A,B,Result,Abserr,defabs,resabs)
-    IF ( keyf==2 ) CALL QK21(F,A,B,Result,Abserr,defabs,resabs)
-    IF ( keyf==3 ) CALL QK31(F,A,B,Result,Abserr,defabs,resabs)
-    IF ( keyf==4 ) CALL QK41(F,A,B,Result,Abserr,defabs,resabs)
-    IF ( keyf==5 ) CALL QK51(F,A,B,Result,Abserr,defabs,resabs)
-    IF ( keyf==6 ) CALL QK61(F,A,B,Result,Abserr,defabs,resabs)
+    IF( keyf==1 ) CALL QK15(F,A,B,Result,Abserr,defabs,resabs)
+    IF( keyf==2 ) CALL QK21(F,A,B,Result,Abserr,defabs,resabs)
+    IF( keyf==3 ) CALL QK31(F,A,B,Result,Abserr,defabs,resabs)
+    IF( keyf==4 ) CALL QK41(F,A,B,Result,Abserr,defabs,resabs)
+    IF( keyf==5 ) CALL QK51(F,A,B,Result,Abserr,defabs,resabs)
+    IF( keyf==6 ) CALL QK61(F,A,B,Result,Abserr,defabs,resabs)
     Last = 1
     Rlist(1) = Result
     Elist(1) = Abserr
@@ -247,9 +246,9 @@ SUBROUTINE QAGE(F,A,B,Epsabs,Epsrel,Key,Limit,Result,Abserr,Neval,Ier,&
     !           TEST ON ACCURACY.
     !
     errbnd = MAX(Epsabs,Epsrel*ABS(Result))
-    IF ( Abserr<=0.5E+02*epmach*defabs.AND.Abserr>errbnd ) Ier = 2
-    IF ( Limit==1 ) Ier = 1
-    IF ( .NOT.(Ier/=0.OR.(Abserr<=errbnd.AND.Abserr/=resabs).OR.&
+    IF( Abserr<=0.5E+02*epmach*defabs .AND. Abserr>errbnd ) Ier = 2
+    IF( Limit==1 ) Ier = 1
+    IF( .NOT. (Ier/=0 .OR. (Abserr<=errbnd .AND. Abserr/=resabs) .OR. &
         Abserr==0.0E+00) ) THEN
       !
       !           INITIALIZATION
@@ -275,18 +274,18 @@ SUBROUTINE QAGE(F,A,B,Epsabs,Epsrel,Key,Limit,Result,Abserr,Neval,Ier,&
         b1 = 0.5E+00*(Alist(maxerr)+Blist(maxerr))
         a2 = b1
         b2 = Blist(maxerr)
-        IF ( keyf==1 ) CALL QK15(F,a1,b1,area1,error1,resabs,defab1)
-        IF ( keyf==2 ) CALL QK21(F,a1,b1,area1,error1,resabs,defab1)
-        IF ( keyf==3 ) CALL QK31(F,a1,b1,area1,error1,resabs,defab1)
-        IF ( keyf==4 ) CALL QK41(F,a1,b1,area1,error1,resabs,defab1)
-        IF ( keyf==5 ) CALL QK51(F,a1,b1,area1,error1,resabs,defab1)
-        IF ( keyf==6 ) CALL QK61(F,a1,b1,area1,error1,resabs,defab1)
-        IF ( keyf==1 ) CALL QK15(F,a2,b2,area2,error2,resabs,defab2)
-        IF ( keyf==2 ) CALL QK21(F,a2,b2,area2,error2,resabs,defab2)
-        IF ( keyf==3 ) CALL QK31(F,a2,b2,area2,error2,resabs,defab2)
-        IF ( keyf==4 ) CALL QK41(F,a2,b2,area2,error2,resabs,defab2)
-        IF ( keyf==5 ) CALL QK51(F,a2,b2,area2,error2,resabs,defab2)
-        IF ( keyf==6 ) CALL QK61(F,a2,b2,area2,error2,resabs,defab2)
+        IF( keyf==1 ) CALL QK15(F,a1,b1,area1,error1,resabs,defab1)
+        IF( keyf==2 ) CALL QK21(F,a1,b1,area1,error1,resabs,defab1)
+        IF( keyf==3 ) CALL QK31(F,a1,b1,area1,error1,resabs,defab1)
+        IF( keyf==4 ) CALL QK41(F,a1,b1,area1,error1,resabs,defab1)
+        IF( keyf==5 ) CALL QK51(F,a1,b1,area1,error1,resabs,defab1)
+        IF( keyf==6 ) CALL QK61(F,a1,b1,area1,error1,resabs,defab1)
+        IF( keyf==1 ) CALL QK15(F,a2,b2,area2,error2,resabs,defab2)
+        IF( keyf==2 ) CALL QK21(F,a2,b2,area2,error2,resabs,defab2)
+        IF( keyf==3 ) CALL QK31(F,a2,b2,area2,error2,resabs,defab2)
+        IF( keyf==4 ) CALL QK41(F,a2,b2,area2,error2,resabs,defab2)
+        IF( keyf==5 ) CALL QK51(F,a2,b2,area2,error2,resabs,defab2)
+        IF( keyf==6 ) CALL QK61(F,a2,b2,area2,error2,resabs,defab2)
         !
         !           IMPROVE PREVIOUS APPROXIMATIONS TO INTEGRAL
         !           AND ERROR AND TEST FOR ACCURACY.
@@ -296,36 +295,36 @@ SUBROUTINE QAGE(F,A,B,Epsabs,Epsrel,Key,Limit,Result,Abserr,Neval,Ier,&
         erro12 = error1 + error2
         errsum = errsum + erro12 - errmax
         area = area + area12 - Rlist(maxerr)
-        IF ( defab1/=error1.AND.defab2/=error2 ) THEN
-          IF ( ABS(Rlist(maxerr)-area12)<=0.1E-04*ABS(area12).AND.&
+        IF( defab1/=error1 .AND. defab2/=error2 ) THEN
+          IF( ABS(Rlist(maxerr)-area12)<=0.1E-04*ABS(area12) .AND. &
             erro12>=0.99E+00*errmax ) iroff1 = iroff1 + 1
-          IF ( Last>10.AND.erro12>errmax ) iroff2 = iroff2 + 1
+          IF( Last>10 .AND. erro12>errmax ) iroff2 = iroff2 + 1
         END IF
         Rlist(maxerr) = area1
         Rlist(Last) = area2
         errbnd = MAX(Epsabs,Epsrel*ABS(area))
-        IF ( errsum>errbnd ) THEN
+        IF( errsum>errbnd ) THEN
           !
           !           TEST FOR ROUNDOFF ERROR AND EVENTUALLY
           !           SET ERROR FLAG.
           !
-          IF ( iroff1>=6.OR.iroff2>=20 ) Ier = 2
+          IF( iroff1>=6 .OR. iroff2>=20 ) Ier = 2
           !
           !           SET ERROR FLAG IN THE CASE THAT THE NUMBER OF
           !           SUBINTERVALS EQUALS LIMIT.
           !
-          IF ( Last==Limit ) Ier = 1
+          IF( Last==Limit ) Ier = 1
           !
           !           SET ERROR FLAG IN THE CASE OF BAD INTEGRAND BEHAVIOUR
           !           AT A POINT OF THE INTEGRATION RANGE.
           !
-          IF ( MAX(ABS(a1),ABS(b2))<=(0.1E+01+0.1E+03*epmach)&
+          IF( MAX(ABS(a1),ABS(b2))<=(0.1E+01+0.1E+03*epmach)&
             *(ABS(a2)+0.1E+04*uflow) ) Ier = 3
         END IF
         !
         !           APPEND THE NEWLY-CREATED INTERVALS TO THE LIST.
         !
-        IF ( error2>error1 ) THEN
+        IF( error2>error1 ) THEN
           Alist(maxerr) = a2
           Alist(Last) = a1
           Blist(Last) = b1
@@ -348,7 +347,7 @@ SUBROUTINE QAGE(F,A,B,Epsabs,Epsrel,Key,Limit,Result,Abserr,Neval,Ier,&
         !
         CALL QPSRT(Limit,Last,maxerr,errmax,Elist,Iord,nrmax)
         !- **JUMP OUT OF DO-LOOP
-        IF ( Ier/=0.OR.errsum<=errbnd ) EXIT
+        IF( Ier/=0 .OR. errsum<=errbnd ) EXIT
       END DO
       !
       !           COMPUTE FINAL RESULT.
@@ -360,7 +359,7 @@ SUBROUTINE QAGE(F,A,B,Epsabs,Epsrel,Key,Limit,Result,Abserr,Neval,Ier,&
       END DO
       Abserr = errsum
     END IF
-    IF ( keyf/=1 ) Neval = (10*keyf+1)*(2*Neval+1)
-    IF ( keyf==1 ) Neval = 30*Neval + 15
+    IF( keyf/=1 ) Neval = (10*keyf+1)*(2*Neval+1)
+    IF( keyf==1 ) Neval = 30*Neval + 15
   END IF
 END SUBROUTINE QAGE

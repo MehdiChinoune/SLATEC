@@ -1,7 +1,6 @@
 !** DBESI1
 REAL(DP) FUNCTION DBESI1(X)
-  !>
-  !  Compute the modified (hyperbolic) Bessel function of the
+  !> Compute the modified (hyperbolic) Bessel function of the
   !            first kind of order one.
   !***
   ! **Library:**   SLATEC (FNLIB)
@@ -55,26 +54,26 @@ REAL(DP) FUNCTION DBESI1(X)
     +.69732310939194709333333333333333D-29, +.14367948220620800000000000000000D-31 ]
   LOGICAL, SAVE :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  DBESI1
-  IF ( first ) THEN
+  IF( first ) THEN
     nti1 = INITDS(bi1cs,17,0.1*D1MACH(3))
     first = .FALSE.
   END IF
   !
   y = ABS(X)
-  IF ( y>3.0D0 ) THEN
+  IF( y>3.0D0 ) THEN
     !
-    IF ( y>xmax ) CALL XERMSG('DBESI1','ABS(X) SO BIG I1 OVERFLOWS',2,2)
+    IF( y>xmax ) CALL XERMSG('DBESI1','ABS(X) SO BIG I1 OVERFLOWS',2,2)
     !
     DBESI1 = EXP(y)*DBSI1E(X)
     RETURN
   END IF
   !
   DBESI1 = 0.D0
-  IF ( y==0.D0 ) RETURN
+  IF( y==0.D0 ) RETURN
   !
-  IF ( y<=xmin ) CALL XERMSG('DBESI1',&
+  IF( y<=xmin ) CALL XERMSG('DBESI1',&
     'ABS(X) SO SMALL I1 UNDERFLOWS',1,1)
-  IF ( y>xmin ) DBESI1 = 0.5D0*X
-  IF ( y>xsml ) DBESI1 = X*(0.875D0+DCSEVL(y*y/4.5D0-1.D0,bi1cs,nti1))
+  IF( y>xmin ) DBESI1 = 0.5D0*X
+  IF( y>xsml ) DBESI1 = X*(0.875D0+DCSEVL(y*y/4.5D0-1.D0,bi1cs,nti1))
   RETURN
 END FUNCTION DBESI1

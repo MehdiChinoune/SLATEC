@@ -1,7 +1,6 @@
 !** DSINDG
 REAL(DP) FUNCTION DSINDG(X)
-  !>
-  !  Compute the sine of an argument in degrees.
+  !> Compute the sine of an argument in degrees.
   !***
   ! **Library:**   SLATEC (FNLIB)
   !***
@@ -29,16 +28,16 @@ REAL(DP) FUNCTION DSINDG(X)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-  INTEGER n
+  INTEGER :: n
   REAL(DP) :: X
   REAL(DP), PARAMETER :: raddeg = 0.017453292519943295769236907684886D0
   !* FIRST EXECUTABLE STATEMENT  DSINDG
   DSINDG = SIN(raddeg*X)
   !
-  IF ( MOD(X,90.D0)/=0.D0 ) RETURN
+  IF( MOD(X,90.D0)/=0.D0 ) RETURN
   n = INT( ABS(X)/90.D0 + 0.5D0 )
   n = MOD(n,2)
-  IF ( n==0 ) DSINDG = 0.D0
-  IF ( n==1 ) DSINDG = SIGN(1.0D0,DSINDG)
+  IF( n==0 ) DSINDG = 0.D0
+  IF( n==1 ) DSINDG = SIGN(1.0D0,DSINDG)
   !
 END FUNCTION DSINDG

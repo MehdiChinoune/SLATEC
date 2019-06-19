@@ -1,12 +1,11 @@
 !** DQAWCE
 SUBROUTINE DQAWCE(F,A,B,C,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,&
     Alist,Blist,Rlist,Elist,Iord,Last)
-  !>
-  !  The routine calculates an approximation result to a
+  !> The routine calculates an approximation result to a
   !            CAUCHY PRINCIPAL VALUE I = Integral of F*W over (A,B)
-  !            (W(X) = 1/(X-C), (C.NE.A, C.NE.B), hopefully satisfying
+  !            (W(X) = 1/(X-C), (C/=A, C/=B), hopefully satisfying
   !            following claim for accuracy
-  !            ABS(I-RESULT).LE.MAX(EPSABS,EPSREL*ABS(I))
+  !            ABS(I-RESULT)<=MAX(EPSABS,EPSREL*ABS(I))
   !***
   ! **Library:**   SLATEC (QUADPACK)
   !***
@@ -45,7 +44,7 @@ SUBROUTINE DQAWCE(F,A,B,C,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,&
   !                     Upper limit of integration
   !
   !            C      - Double precision
-  !                     Parameter in the WEIGHT function, C.NE.A, C.NE.B
+  !                     Parameter in the WEIGHT function, C/=A, C/=B
   !                     If C = A OR C = B, the routine will end with
   !                     IER = 6.
   !
@@ -53,13 +52,13 @@ SUBROUTINE DQAWCE(F,A,B,C,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,&
   !                     Absolute accuracy requested
   !            EPSREL - Double precision
   !                     Relative accuracy requested
-  !                     If  EPSABS.LE.0
-  !                     and EPSREL.LT.MAX(50*REL.MACH.ACC.,0.5D-28),
+  !                     If  EPSABS<=0
+  !                     and EPSREL<MAX(50*REL.MACH.ACC.,0.5D-28),
   !                     the routine will end with IER = 6.
   !
   !            LIMIT  - Integer
   !                     Gives an upper bound on the number of subintervals
-  !                     in the partition of (A,B), LIMIT.GE.1
+  !                     in the partition of (A,B), LIMIT>=1
   !
   !         ON RETURN
   !            RESULT - Double precision
@@ -76,7 +75,7 @@ SUBROUTINE DQAWCE(F,A,B,C,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,&
   !                     IER = 0 Normal and reliable termination of the
   !                             routine. It is assumed that the requested
   !                             accuracy has been achieved.
-  !                     IER.GT.0 Abnormal termination of the routine
+  !                     IER>0 Abnormal termination of the routine
   !                             the estimates for integral and error are
   !                             less reliable. It is assumed that the
   !                             requested accuracy has not been achieved.
@@ -102,9 +101,9 @@ SUBROUTINE DQAWCE(F,A,B,C,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,&
   !                             the integration interval.
   !                         = 6 The input is invalid, because
   !                             C = A or C = B or
-  !                             (EPSABS.LE.0 and
-  !                              EPSREL.LT.MAX(50*REL.MACH.ACC.,0.5D-28))
-  !                             or LIMIT.LT.1.
+  !                             (EPSABS<=0 and
+  !                              EPSREL<MAX(50*REL.MACH.ACC.,0.5D-28))
+  !                             or LIMIT<1.
   !                             RESULT, ABSERR, NEVAL, RLIST(1), ELIST(1),
   !                             IORD(1) and LAST are set to zero. ALIST(1)
   !                             and BLIST(1) are set to A and B
@@ -137,7 +136,7 @@ SUBROUTINE DQAWCE(F,A,B,C,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,&
   !                      elements of which are pointers to the error
   !                      estimates over the subintervals, so that
   !                      ELIST(IORD(1)), ..., ELIST(IORD(K)) with K = LAST
-  !                      If LAST.LE.(LIMIT/2+2), and K = LIMIT+1-LAST
+  !                      If LAST<=(LIMIT/2+2), and K = LIMIT+1-LAST
   !                      otherwise, form a decreasing sequence
   !
   !            LAST    - Integer
@@ -216,7 +215,7 @@ SUBROUTINE DQAWCE(F,A,B,C,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,&
   Iord(1) = 0
   Result = 0.0D+00
   Abserr = 0.0D+00
-  IF ( .NOT.(C==A.OR.C==B.OR.(Epsabs<=0.0D+00.AND.Epsrel<MAX(0.5D+02*epmach,&
+  IF( .NOT. (C==A .OR. C==B .OR. (Epsabs<=0.0D+00 .AND. Epsrel<MAX(0.5D+02*epmach,&
       0.5D-28))) ) THEN
     !
     !           FIRST APPROXIMATION TO THE INTEGRAL
@@ -224,7 +223,7 @@ SUBROUTINE DQAWCE(F,A,B,C,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,&
     !
     aa = A
     bb = B
-    IF ( A>B ) THEN
+    IF( A>B ) THEN
       aa = B
       bb = A
     END IF
@@ -241,8 +240,8 @@ SUBROUTINE DQAWCE(F,A,B,C,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,&
     !           TEST ON ACCURACY
     !
     errbnd = MAX(Epsabs,Epsrel*ABS(Result))
-    IF ( Limit==1 ) Ier = 1
-    IF ( Abserr>=MIN(0.1D-01*ABS(Result),errbnd).AND.Ier/=1 ) THEN
+    IF( Limit==1 ) Ier = 1
+    IF( Abserr>=MIN(0.1D-01*ABS(Result),errbnd) .AND. Ier/=1 ) THEN
       !
       !           INITIALIZATION
       !           --------------
@@ -269,8 +268,8 @@ SUBROUTINE DQAWCE(F,A,B,C,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,&
         a1 = Alist(maxerr)
         b1 = 0.5D+00*(Alist(maxerr)+Blist(maxerr))
         b2 = Blist(maxerr)
-        IF ( C<=b1.AND.C>a1 ) b1 = 0.5D+00*(C+b2)
-        IF ( C>b1.AND.C<b2 ) b1 = 0.5D+00*(a1+C)
+        IF( C<=b1 .AND. C>a1 ) b1 = 0.5D+00*(C+b2)
+        IF( C>b1 .AND. C<b2 ) b1 = 0.5D+00*(a1+C)
         a2 = b1
         krule = 2
         CALL DQC25C(F,a1,b1,C,area1,error1,krule,nev)
@@ -285,33 +284,33 @@ SUBROUTINE DQAWCE(F,A,B,C,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,&
         erro12 = error1 + error2
         errsum = errsum + erro12 - errmax
         area = area + area12 - Rlist(maxerr)
-        IF ( ABS(Rlist(maxerr)-area12)<0.1D-04*ABS(area12).AND.&
-          erro12>=0.99D+00*errmax.AND.krule==0 ) iroff1 = iroff1 + 1
-        IF ( Last>10.AND.erro12>errmax.AND.krule==0 ) iroff2 = iroff2 + 1
+        IF( ABS(Rlist(maxerr)-area12)<0.1D-04*ABS(area12) .AND. &
+          erro12>=0.99D+00*errmax .AND. krule==0 ) iroff1 = iroff1 + 1
+        IF( Last>10 .AND. erro12>errmax .AND. krule==0 ) iroff2 = iroff2 + 1
         Rlist(maxerr) = area1
         Rlist(Last) = area2
         errbnd = MAX(Epsabs,Epsrel*ABS(area))
-        IF ( errsum>errbnd ) THEN
+        IF( errsum>errbnd ) THEN
           !
           !           TEST FOR ROUNDOFF ERROR AND EVENTUALLY SET ERROR FLAG.
           !
-          IF ( iroff1>=6.AND.iroff2>20 ) Ier = 2
+          IF( iroff1>=6 .AND. iroff2>20 ) Ier = 2
           !
           !           SET ERROR FLAG IN THE CASE THAT NUMBER OF INTERVAL
           !           BISECTIONS EXCEEDS LIMIT.
           !
-          IF ( Last==Limit ) Ier = 1
+          IF( Last==Limit ) Ier = 1
           !
           !           SET ERROR FLAG IN THE CASE OF BAD INTEGRAND BEHAVIOUR
           !           AT A POINT OF THE INTEGRATION RANGE.
           !
-          IF ( MAX(ABS(a1),ABS(b2))<=(0.1D+01+0.1D+03*epmach)&
+          IF( MAX(ABS(a1),ABS(b2))<=(0.1D+01+0.1D+03*epmach)&
             *(ABS(a2)+0.1D+04*uflow) ) Ier = 3
         END IF
         !
         !           APPEND THE NEWLY-CREATED INTERVALS TO THE LIST.
         !
-        IF ( error2>error1 ) THEN
+        IF( error2>error1 ) THEN
           Alist(maxerr) = a2
           Alist(Last) = a1
           Blist(Last) = b1
@@ -333,7 +332,7 @@ SUBROUTINE DQAWCE(F,A,B,C,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,&
         !
         CALL DQPSRT(Limit,Last,maxerr,errmax,Elist,Iord,nrmax)
         !- **JUMP OUT OF DO-LOOP
-        IF ( Ier/=0.OR.errsum<=errbnd ) EXIT
+        IF( Ier/=0 .OR. errsum<=errbnd ) EXIT
       END DO
       !
       !           COMPUTE FINAL RESULT.
@@ -345,6 +344,6 @@ SUBROUTINE DQAWCE(F,A,B,C,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,&
       END DO
       Abserr = errsum
     END IF
-    IF ( aa==B ) Result = -Result
+    IF( aa==B ) Result = -Result
   END IF
 END SUBROUTINE DQAWCE

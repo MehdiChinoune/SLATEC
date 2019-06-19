@@ -1,7 +1,6 @@
 !** ASYJY
 SUBROUTINE ASYJY(FUNJY,X,Fnu,Flgjy,In,Y,Wk,Iflw)
-  !>
-  !  Subsidiary to BESJ and BESY
+  !> Subsidiary to BESJ and BESY
   !***
   ! **Library:**   SLATEC
   !***
@@ -12,13 +11,13 @@ SUBROUTINE ASYJY(FUNJY,X,Fnu,Flgjy,In,Y,Wk,Iflw)
   ! **Description:**
   !
   !                 ASYJY computes Bessel functions J and Y
-  !               for arguments X.GT.0.0 and orders FNU.GE.35.0
+  !               for arguments X>0.0 and orders FNU>=35.0
   !               on FLGJY = 1 and FLGJY = -1 respectively
   !
   !                                  INPUT
   !
   !      FUNJY - external function JAIRY or YAIRY
-  !          X - argument, X.GT.0.0E0
+  !          X - argument, X>0.0E0
   !        FNU - order of the first Bessel function
   !      FLGJY - selection flag
   !              FLGJY =  1.0E0 gives the J function
@@ -42,8 +41,8 @@ SUBROUTINE ASYJY(FUNJY,X,Fnu,Flgjy,In,Y,Wk,Iflw)
   !
   !     Abstract
   !         ASYJY implements the uniform asymptotic expansion of
-  !         the J and Y Bessel functions for FNU.GE.35 and real
-  !         X.GT.0.0E0. The forms are identical except for a change
+  !         the J and Y Bessel functions for FNU>=35 and real
+  !         X>0.0E0. The forms are identical except for a change
   !         in sign of some of the terms. This change in sign is
   !         accomplished by means of the flag FLGJY = 1 or -1. On
   !         FLGJY = 1 the AIRY functions AI(X) and DAI(X) are
@@ -207,7 +206,7 @@ SUBROUTINE ASYJY(FUNJY,X,Fnu,Flgjy,In,Y,Wk,Iflw)
   tol = MAX(ta,1.0E-15)
   tb = R1MACH(5)
   ju = I1MACH(12)
-  IF ( Flgjy==1.0E0 ) THEN
+  IF( Flgjy==1.0E0 ) THEN
     elim = -2.303E0*(tb*ju+3.0E0)
   ELSE
     jr = I1MACH(11)
@@ -221,19 +220,19 @@ SUBROUTINE ASYJY(FUNJY,X,Fnu,Flgjy,In,Y,Wk,Iflw)
     abw2 = ABS(Wk(1))
     Wk(2) = SQRT(abw2)
     Wk(7) = fn**con2
-    IF ( abw2>0.27750E0 ) THEN
+    IF( abw2>0.27750E0 ) THEN
       !
       upol(1) = 1.0E0
       tau = 1.0E0/Wk(2)
       t2 = 1.0E0/Wk(1)
-      IF ( Wk(1)>=0.0E0 ) THEN
+      IF( Wk(1)>=0.0E0 ) THEN
         !
-        !     CASES FOR (X/FN).LT.SQRT(0.7225)
+        !     CASES FOR (X/FN)<SQRT(0.7225)
         !
         Wk(3) = ABS(LOG((1.0E0+Wk(2))/xx)-Wk(2))
         Wk(4) = Wk(3)*fn
         rcz = con1/Wk(4)
-        IF ( Wk(4)<=elim ) THEN
+        IF( Wk(4)<=elim ) THEN
           z32 = 1.5E0*Wk(3)
           rtz = z32**con2
           Wk(7) = fn**con2
@@ -243,7 +242,7 @@ SUBROUTINE ASYJY(FUNJY,X,Fnu,Flgjy,In,Y,Wk,Iflw)
         END IF
       ELSE
         !
-        !     CASES FOR (X/FN).GT.SQRT(1.2775)
+        !     CASES FOR (X/FN)>SQRT(1.2775)
         !
         Wk(3) = ABS(Wk(2)-ATAN(Wk(2)))
         Wk(4) = Wk(3)*fn
@@ -257,7 +256,7 @@ SUBROUTINE ASYJY(FUNJY,X,Fnu,Flgjy,In,Y,Wk,Iflw)
     ELSE
       !
       !     ASYMPTOTIC EXPANSION
-      !     CASES NEAR X=FN, ABS(1.-(X/FN)**2).LE.0.2775
+      !     CASES NEAR X=FN, ABS(1.-(X/FN)**2)<=0.2775
       !     COEFFICIENTS OF ASYMPTOTIC EXPANSION BY SERIES
       !
       !     ZETA AND TRUNCATION FOR A(ZETA) AND B(ZETA) SERIES
@@ -265,7 +264,7 @@ SUBROUTINE ASYJY(FUNJY,X,Fnu,Flgjy,In,Y,Wk,Iflw)
       !     KMAX IS TRUNCATION INDEX FOR A(ZETA) AND B(ZETA) SERIES=MAX(2,SA)
       !
       sa = 0.0E0
-      IF ( abw2/=0.0E0 ) sa = tols/LOG(abw2)
+      IF( abw2/=0.0E0 ) sa = tols/LOG(abw2)
       sb = sa
       DO i = 1, 5
         akm = MAX(sa,2.0E0)
@@ -286,8 +285,8 @@ SUBROUTINE ASYJY(FUNJY,X,Fnu,Flgjy,In,Y,Wk,Iflw)
       Wk(4) = Wk(3)*fn
       Wk(5) = rtz*Wk(7)
       Wk(6) = -Wk(5)*Wk(5)
-      IF ( z>0.0E0 ) THEN
-        IF ( Wk(4)>elim ) GOTO 50
+      IF( z>0.0E0 ) THEN
+        IF( Wk(4)>elim ) GOTO 50
         Wk(6) = -Wk(6)
       END IF
       phi = SQRT(SQRT(sa+sa+sa+sa))
@@ -328,7 +327,7 @@ SUBROUTINE ASYJY(FUNJY,X,Fnu,Flgjy,In,Y,Wk,Iflw)
         tb = sb*rden
         asum = asum + ta
         bsum = bsum + tb
-        IF ( ABS(ta)<=tol.AND.ABS(tb)<=relb ) EXIT
+        IF( ABS(ta)<=tol .AND. ABS(tb)<=relb ) EXIT
       END DO
       bsum = bsum/(fn*Wk(7))
       GOTO 150
@@ -384,30 +383,30 @@ SUBROUTINE ASYJY(FUNJY,X,Fnu,Flgjy,In,Y,Wk,Iflw)
       END DO
       rden = rden*rfn2
       tb = -tb
-      IF ( Wk(1)>0.0E0 ) tb = ABS(tb)
-      IF ( rden<tol ) THEN
-        IF ( iseta/=1 ) THEN
-          IF ( ABS(suma)<tol ) iseta = 1
+      IF( Wk(1)>0.0E0 ) tb = ABS(tb)
+      IF( rden<tol ) THEN
+        IF( iseta/=1 ) THEN
+          IF( ABS(suma)<tol ) iseta = 1
           asum = asum + suma*tb
         END IF
-        IF ( isetb/=1 ) THEN
-          IF ( ABS(sumb)<relb ) isetb = 1
+        IF( isetb/=1 ) THEN
+          IF( ABS(sumb)<relb ) isetb = 1
           bsum = bsum + sumb*tb
         END IF
-        IF ( iseta==1.AND.isetb==1 ) EXIT
+        IF( iseta==1 .AND. isetb==1 ) EXIT
       ELSE
         asum = asum + suma*tb
         bsum = bsum + sumb*tb
       END IF
     END DO
     tb = Wk(5)
-    IF ( Wk(1)>0.0E0 ) tb = -tb
+    IF( Wk(1)>0.0E0 ) tb = -tb
     bsum = bsum/tb
     !
     150  CALL FUNJY(Wk(6),Wk(5),Wk(4),fi,dfi)
     ta = 1.0E0/tol
     tb = R1MACH(1)*ta*1.0E+3
-    IF ( ABS(fi)<=tb ) THEN
+    IF( ABS(fi)<=tb ) THEN
       fi = fi*ta
       dfi = dfi*ta
       phi = phi*tol

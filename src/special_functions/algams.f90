@@ -1,7 +1,6 @@
 !** ALGAMS
 SUBROUTINE ALGAMS(X,Algam,Sgngam)
-  !>
-  !  Compute the logarithm of the absolute value of the Gamma
+  !> Compute the logarithm of the absolute value of the Gamma
   !            function.
   !***
   ! **Library:**   SLATEC (FNLIB)
@@ -36,13 +35,13 @@ SUBROUTINE ALGAMS(X,Algam,Sgngam)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
   !* FIRST EXECUTABLE STATEMENT  ALGAMS
-  REAL(SP) Algam, Sgngam, X
-  INTEGER i
+  REAL(SP) :: Algam, Sgngam, X
+  INTEGER :: i
   Algam = LOG_GAMMA(X)
   Sgngam = 1.0
-  IF ( X>0.0 ) RETURN
+  IF( X>0.0 ) RETURN
   !
   i = INT( MOD(-AINT(X),2.0) + 0.1 )
-  IF ( i==0 ) Sgngam = -1.0
+  IF( i==0 ) Sgngam = -1.0
   !
 END SUBROUTINE ALGAMS

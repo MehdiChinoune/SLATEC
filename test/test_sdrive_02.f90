@@ -5,8 +5,7 @@ MODULE TEST46_MOD
 CONTAINS
   !** DDQCK
   SUBROUTINE DDQCK(Lun,Kprint,Ipass)
-    !>
-    !  Quick check for SLATEC routines DDRIV1, DDRIV2 and DDRIV3.
+    !> Quick check for SLATEC routines DDRIV1, DDRIV2 and DDRIV3.
     !***
     ! **Library:**   SLATEC (SDRIVE)
     !***
@@ -39,13 +38,13 @@ CONTAINS
     !   890405  Revised to meet SLATEC standards.
     USE slatec, ONLY : D1MACH, DDRIV1, DDRIV2, DDRIV3, XERCLR
     REAL(DP) :: eps, t, tout
-    INTEGER ierflg, Ipass, Kprint, leniw, leniwx, lenw, lenwx, Lun, mint, &
+    INTEGER :: ierflg, Ipass, Kprint, leniw, leniwx, lenw, lenwx, Lun, mint, &
       mstate, nde, nfe, nje, nstate, nstep, nx
     REAL(DP), PARAMETER :: ALFA = 1.D0, HMAX = 15.D0
     INTEGER, PARAMETER :: IERROR = 3, IMPL = 0, LENWMX = 342, LIWMX = 53, &
       MITER = 5, ML = 2, MU = 2, MXORD = 5, MXSTEP = 1000, N = 3, NROOT = 0, NTASK = 1
     REAL(DP) :: work(LENWMX), y(N+1)
-    INTEGER iwork(LIWMX)
+    INTEGER :: iwork(LIWMX)
     REAL(DP), PARAMETER :: ewt(1) = .00001D0
     !* FIRST EXECUTABLE STATEMENT  DDQCK
     eps = D1MACH(4)**(1.D0/3.D0)
@@ -64,11 +63,11 @@ CONTAINS
     nstep = INT( work(lenw-(N+50)+3) )
     nfe = INT( work(lenw-(N+50)+4) )
     nje = INT( work(lenw-(N+50)+5) )
-    IF ( mstate/=2 ) THEN
-      IF ( Kprint==1 ) THEN
+    IF( mstate/=2 ) THEN
+      IF( Kprint==1 ) THEN
         WRITE (Lun,&
           '('' While using DDRIV1, a solution was not obtained.'' //)')
-      ELSEIF ( Kprint>=2 ) THEN
+      ELSEIF( Kprint>=2 ) THEN
         WRITE (Lun,&
           '('' While using DDRIV1, a solution was not obtained.'')')
         WRITE (Lun,&
@@ -85,12 +84,12 @@ CONTAINS
         WRITE (Lun,'(//)')
       END IF
       Ipass = 0
-    ELSEIF ( ABS(1.D0-y(1)*1.5D0)>eps**(2.D0/3.D0).OR.ABS(1.D0-y(2)*3.D0)&
-        >eps**(2.D0/3.D0).OR.ABS(1.D0-y(3))>eps**(2.D0/3.D0) ) THEN
-      IF ( Kprint==1 ) THEN
+    ELSEIF( ABS(1.D0-y(1)*1.5D0)>eps**(2.D0/3.D0) .OR. ABS(1.D0-y(2)*3.D0)&
+        >eps**(2.D0/3.D0) .OR. ABS(1.D0-y(3))>eps**(2.D0/3.D0) ) THEN
+      IF( Kprint==1 ) THEN
         WRITE (Lun,&
           '('' DDRIV1:The solution determined is not  accurate enough.'' //)')
-      ELSEIF ( Kprint==2 ) THEN
+      ELSEIF( Kprint==2 ) THEN
         WRITE (Lun,&
           '('' DDRIV1:The solution determined is not accurate enough.'')')
         WRITE (Lun,&
@@ -106,10 +105,10 @@ CONTAINS
         WRITE (Lun,'(//)')
       END IF
       Ipass = 0
-    ELSEIF ( Kprint==2 ) THEN
+    ELSEIF( Kprint==2 ) THEN
       WRITE (Lun,&
         '('' DDRIV1:The solution determined met the expected values.'' //)')
-    ELSEIF ( Kprint==3 ) THEN
+    ELSEIF( Kprint==3 ) THEN
       WRITE (Lun,&
         '('' DDRIV1:The solution determined met the expected values.'')')
       WRITE (Lun,'('' The values of results are '')')
@@ -131,11 +130,11 @@ CONTAINS
     mstate = 1
     lenw = 342
     CALL DDRIV1(nx,t,y,DDF,tout,mstate,eps,work,lenw,ierflg)
-    IF ( ierflg/=21 ) THEN
-      IF ( Kprint==1 ) THEN
+    IF( ierflg/=21 ) THEN
+      IF( Kprint==1 ) THEN
         WRITE (Lun,&
           '('' DDRIV1:An invalid parameter has not been correctly detected.'' //)')
-      ELSEIF ( Kprint>=2 ) THEN
+      ELSEIF( Kprint>=2 ) THEN
         WRITE (Lun,&
           '('' DDRIV1:An invalid parameter has not been correctly detected.'')')
         WRITE (Lun,*) ' The value of N was set to ', nx
@@ -153,10 +152,10 @@ CONTAINS
         WRITE (Lun,'(//)')
       END IF
       Ipass = 0
-    ELSEIF ( Kprint==2 ) THEN
+    ELSEIF( Kprint==2 ) THEN
       WRITE (Lun,&
         '('' DDRIV1:An invalid parameter has been correctly detected.'' //)')
-    ELSEIF ( Kprint==3 ) THEN
+    ELSEIF( Kprint==3 ) THEN
       WRITE (Lun,&
         '('' DDRIV1:An invalid parameter has been correctly detected.'')')
       WRITE (Lun,*) ' The value of N was set to ', nx
@@ -181,11 +180,11 @@ CONTAINS
     nstep = iwork(3)
     nfe = iwork(4)
     nje = iwork(5)
-    IF ( mstate/=2 ) THEN
-      IF ( Kprint==1 ) THEN
+    IF( mstate/=2 ) THEN
+      IF( Kprint==1 ) THEN
         WRITE (Lun,&
           '('' While using DDRIV2, a solution was not obtained.'' //)' )
-      ELSEIF ( Kprint>=2 ) THEN
+      ELSEIF( Kprint>=2 ) THEN
         WRITE (Lun,&
           '('' While using DDRIV2, a solution was not obtained.'')')
         WRITE (Lun,*) ' MSTATE = ', mstate, ', Error number = ', ierflg
@@ -204,12 +203,12 @@ CONTAINS
         WRITE (Lun,'(//)')
       END IF
       Ipass = 0
-    ELSEIF ( ABS(1.D0-y(1)*1.5D0)>eps**(2.D0/3.D0).OR.ABS(1.D0-y(2)*3.D0)&
-        >eps**(2.D0/3.D0).OR.ABS(1.D0-y(3))>eps**(2.D0/3.D0) ) THEN
-      IF ( Kprint==1 ) THEN
+    ELSEIF( ABS(1.D0-y(1)*1.5D0)>eps**(2.D0/3.D0) .OR. ABS(1.D0-y(2)*3.D0)&
+        >eps**(2.D0/3.D0) .OR. ABS(1.D0-y(3))>eps**(2.D0/3.D0) ) THEN
+      IF( Kprint==1 ) THEN
         WRITE (Lun,&
           '('' DDRIV2:The solution determined is not accurate enough.'' //)')
-      ELSEIF ( Kprint==2 ) THEN
+      ELSEIF( Kprint==2 ) THEN
         WRITE (Lun,&
           '('' DDRIV2:The solution determined is not accurate enough.'')')
         WRITE (Lun,&
@@ -225,10 +224,10 @@ CONTAINS
         WRITE (Lun,'(//)')
       END IF
       Ipass = 0
-    ELSEIF ( Kprint==2 ) THEN
+    ELSEIF( Kprint==2 ) THEN
       WRITE (Lun,&
         '('' DDRIV2:The solution determined met the expected values.'' //)')
-    ELSEIF ( Kprint==3 ) THEN
+    ELSEIF( Kprint==3 ) THEN
       WRITE (Lun,&
         '('' DDRIV2:The solution determined met the expected values.'')')
       WRITE (Lun,'('' The values of results are '')')
@@ -252,11 +251,11 @@ CONTAINS
     leniw = 50
     CALL DDRIV2(N,t,y,DDF,tout,mstate,NROOT,eps,ewt(1),mint,work,lenwx,iwork,&
       leniw,dum_G,ierflg)
-    IF ( ierflg/=32 ) THEN
-      IF ( Kprint==1 ) THEN
+    IF( ierflg/=32 ) THEN
+      IF( Kprint==1 ) THEN
         WRITE (Lun,&
           '('' DDRIV2:An invalid parameter has not been correctly detected.'' //)')
-      ELSEIF ( Kprint>=2 ) THEN
+      ELSEIF( Kprint>=2 ) THEN
         WRITE (Lun,&
           '('' DDRIV2:An invalid parameter has not been correctly detected.'')')
         WRITE (Lun,*) ' The value of LENW was set to ', lenwx
@@ -275,10 +274,10 @@ CONTAINS
         WRITE (Lun,'(//)')
       END IF
       Ipass = 0
-    ELSEIF ( Kprint==2 ) THEN
+    ELSEIF( Kprint==2 ) THEN
       WRITE (Lun,&
         '('' DDRIV2:An invalid parameter has been correctly detected.'' //)')
-    ELSEIF ( Kprint==3 ) THEN
+    ELSEIF( Kprint==3 ) THEN
       WRITE (Lun,&
         '('' DDRIV2:An invalid parameter has been correctly detected.'')')
       WRITE (Lun,*) ' The value of LENW was set to ', lenwx
@@ -304,11 +303,11 @@ CONTAINS
     nstep = iwork(3)
     nfe = iwork(4)
     nje = iwork(5)
-    IF ( nstate/=2 ) THEN
-      IF ( Kprint==1 ) THEN
+    IF( nstate/=2 ) THEN
+      IF( Kprint==1 ) THEN
         WRITE (Lun,&
           '('' While using DDRIV3, a solution was not obtained.'' //)' )
-      ELSEIF ( Kprint>=2 ) THEN
+      ELSEIF( Kprint>=2 ) THEN
         WRITE (Lun,&
           '('' While using DDRIV3, a solution was not obtained.'')' )
         WRITE (Lun,*) ' MSTATE = ', mstate, ', Error number = ', ierflg
@@ -326,12 +325,12 @@ CONTAINS
         WRITE (Lun,'(//)')
       END IF
       Ipass = 0
-    ELSEIF ( ABS(1.D0-y(1)*1.5D0)>eps**(2.D0/3.D0).OR.ABS(1.D0-y(2)*3.D0)&
-        >eps**(2.D0/3.D0).OR.ABS(1.D0-y(3))>eps**(2.D0/3.D0) ) THEN
-      IF ( Kprint==1 ) THEN
+    ELSEIF( ABS(1.D0-y(1)*1.5D0)>eps**(2.D0/3.D0) .OR. ABS(1.D0-y(2)*3.D0)&
+        >eps**(2.D0/3.D0) .OR. ABS(1.D0-y(3))>eps**(2.D0/3.D0) ) THEN
+      IF( Kprint==1 ) THEN
         WRITE (Lun,&
           '('' DDRIV3:The solution determined is not accurate enough.'' //)')
-      ELSEIF ( Kprint>=2 ) THEN
+      ELSEIF( Kprint>=2 ) THEN
         WRITE (Lun,&
           '('' DDRIV3:The solution determined is not accurate enough.'')')
         WRITE (Lun,&
@@ -348,10 +347,10 @@ CONTAINS
         WRITE (Lun,'(//)')
       END IF
       Ipass = 0
-    ELSEIF ( Kprint==2 ) THEN
+    ELSEIF( Kprint==2 ) THEN
       WRITE (Lun,&
         '('' DDRIV3:The solution determined met the expected values.'' //)')
-    ELSEIF ( Kprint==3 ) THEN
+    ELSEIF( Kprint==3 ) THEN
       WRITE (Lun,&
         '('' DDRIV3:The solution determined met the expected values.'')')
       WRITE (Lun,'('' The values of results are '')')
@@ -376,11 +375,11 @@ CONTAINS
     CALL DDRIV3(N,t,y,DDF,nstate,tout,NTASK,NROOT,eps,ewt,IERROR,mint,MITER,&
       IMPL,ML,MU,MXORD,HMAX,work,lenw,iwork,leniwx,dum_JACOBN,dum_FA,nde,&
       MXSTEP,dum_G,dum_USERS,ierflg)
-    IF ( ierflg/=33 ) THEN
-      IF ( Kprint==1 ) THEN
+    IF( ierflg/=33 ) THEN
+      IF( Kprint==1 ) THEN
         WRITE (Lun,&
           '('' DDRIV3:An invalid parameter has not been correctly detected.'' //)')
-      ELSEIF ( Kprint>=2 ) THEN
+      ELSEIF( Kprint>=2 ) THEN
         WRITE (Lun,&
           '('' DDRIV3:An invalid parameter has not been correctly detected.'')')
         WRITE (Lun,*) ' The value of LENIW was set to ', leniwx
@@ -399,10 +398,10 @@ CONTAINS
         WRITE (Lun,'(//)')
       END IF
       Ipass = 0
-    ELSEIF ( Kprint==2 ) THEN
+    ELSEIF( Kprint==2 ) THEN
       WRITE (Lun,&
         '('' DDRIV3:An invalid parameter has been correctly detected.'' //)')
-    ELSEIF ( Kprint==3 ) THEN
+    ELSEIF( Kprint==3 ) THEN
       WRITE (Lun,&
         '('' DDRIV3:An invalid parameter has been correctly detected.'')')
       WRITE (Lun,*) ' The value of LENIW was set to ', leniwx
@@ -443,8 +442,7 @@ CONTAINS
   END SUBROUTINE DDQCK
   !** DDF
   SUBROUTINE DDF(N,T,Y,Yp)
-    !>
-    !  Quick check for SLATEC routines DDRIV1, DDRIV2 and DDRIV3.
+    !> Quick check for SLATEC routines DDRIV1, DDRIV2 and DDRIV3.
     !***
     ! **Library:**   SLATEC (SDRIVE)
     !***
@@ -486,8 +484,7 @@ PROGRAM TEST46
   USE slatec, ONLY : I1MACH, XSETF, XSETUN, XERMAX
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
-  !>
-  !  Driver for testing SLATEC subprograms
+  !> Driver for testing SLATEC subprograms
   !            DDRIV1  DDRIV2  DDRIV3
   !***
   ! **Library:**   SLATEC
@@ -531,7 +528,7 @@ PROGRAM TEST46
 
   !* REVISION HISTORY  (YYMMDD)
   !   920801  DATE WRITTEN
-  INTEGER ipass, kprint, lin, lun, nfail
+  INTEGER :: ipass, kprint, lin, lun, nfail
   !* FIRST EXECUTABLE STATEMENT  TEST46
   lun = I1MACH(2)
   lin = I1MACH(1)
@@ -542,7 +539,7 @@ PROGRAM TEST46
   CALL GET_ARGUMENT(kprint)
   CALL XERMAX(1000)
   CALL XSETUN(lun)
-  IF ( kprint<=1 ) THEN
+  IF( kprint<=1 ) THEN
     CALL XSETF(0)
   ELSE
     CALL XSETF(1)
@@ -551,11 +548,11 @@ PROGRAM TEST46
   !     Test double precision SDRIVE
   !
   CALL DDQCK(lun,kprint,ipass)
-  IF ( ipass==0 ) nfail = nfail + 1
+  IF( ipass==0 ) nfail = nfail + 1
   !
   !     Write PASS or FAIL message
   !
-  IF ( nfail==0 ) THEN
+  IF( nfail==0 ) THEN
     WRITE (lun,99001)
     99001 FORMAT (/' --------------TEST46 PASSED ALL TESTS----------------')
   ELSE

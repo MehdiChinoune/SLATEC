@@ -1,7 +1,6 @@
 !** DSILUS
 SUBROUTINE DSILUS(N,Nelt,Ia,Ja,A,Isym,Nl,Il,Jl,L,Dinv,Nu,Iu,Ju,U,Nrow,Ncol)
-  !>
-  !  Incomplete LU Decomposition Preconditioner SLAP Set Up.
+  !> Incomplete LU Decomposition Preconditioner SLAP Set Up.
   !            Routine to generate the incomplete LDU decomposition of a
   !            matrix.  The unit lower triangular factor L is stored by
   !            rows and the unit upper triangular factor U is stored by
@@ -168,13 +167,13 @@ SUBROUTINE DSILUS(N,Nelt,Ia,Ja,A,Isym,Nl,Il,Jl,L,Dinv,Nu,Iu,Ju,U,Nrow,Ncol)
   !   930701  Updated CATEGORY section.  (FNF, WRB)
 
   !     .. Scalar Arguments ..
-  INTEGER Isym, N, Nelt, Nl, Nu
+  INTEGER :: Isym, N, Nelt, Nl, Nu
   !     .. Array Arguments ..
   REAL(DP) :: A(Nelt), Dinv(N), L(Nl), U(Nu)
-  INTEGER Ia(Nelt), Il(Nl), Iu(Nu), Ja(Nelt), Jl(Nl), Ju(Nu), Ncol(N), Nrow(N)
+  INTEGER :: Ia(Nelt), Il(Nl), Iu(Nu), Ja(Nelt), Jl(Nl), Ju(Nu), Ncol(N), Nrow(N)
   !     .. Local Scalars ..
   REAL(DP) :: temp
-  INTEGER i, ibgn, icol, iend, indx, indx1, indx2, indxc1, indxc2, &
+  INTEGER :: i, ibgn, icol, iend, indx, indx1, indx2, indxc1, indxc2, &
     indxr1, indxr2, irow, itemp, j, jbgn, jend, jtemp, k, kc, kr
   !* FIRST EXECUTABLE STATEMENT  DSILUS
   !
@@ -187,13 +186,13 @@ SUBROUTINE DSILUS(N,Nelt,Ia,Ja,A,Isym,Nl,Il,Jl,L,Dinv,Nu,Iu,Ju,U,Nrow,Ncol)
   DO icol = 1, N
     jbgn = Ja(icol) + 1
     jend = Ja(icol+1) - 1
-    IF ( jbgn<=jend ) THEN
+    IF( jbgn<=jend ) THEN
       DO j = jbgn, jend
-        IF ( Ia(j)<icol ) THEN
+        IF( Ia(j)<icol ) THEN
           Ncol(icol) = Ncol(icol) + 1
         ELSE
           Nrow(Ia(j)) = Nrow(Ia(j)) + 1
-          IF ( Isym/=0 ) Ncol(Ia(j)) = Ncol(Ia(j)) + 1
+          IF( Isym/=0 ) Ncol(Ia(j)) = Ncol(Ia(j)) + 1
         END IF
       END DO
     END IF
@@ -212,10 +211,10 @@ SUBROUTINE DSILUS(N,Nelt,Ia,Ja,A,Isym,Nl,Il,Jl,L,Dinv,Nu,Iu,Ju,U,Nrow,Ncol)
     Dinv(icol) = A(Ja(icol))
     jbgn = Ja(icol) + 1
     jend = Ja(icol+1) - 1
-    IF ( jbgn<=jend ) THEN
+    IF( jbgn<=jend ) THEN
       DO j = jbgn, jend
         irow = Ia(j)
-        IF ( irow<icol ) THEN
+        IF( irow<icol ) THEN
           !         Part of the upper triangle.
           Iu(Ncol(icol)) = irow
           U(Ncol(icol)) = A(j)
@@ -225,7 +224,7 @@ SUBROUTINE DSILUS(N,Nelt,Ia,Ja,A,Isym,Nl,Il,Jl,L,Dinv,Nu,Iu,Ju,U,Nrow,Ncol)
           Jl(Nrow(irow)) = icol
           L(Nrow(irow)) = A(j)
           Nrow(irow) = Nrow(irow) + 1
-          IF ( Isym/=0 ) THEN
+          IF( Isym/=0 ) THEN
             !         Symmetric...Copy lower triangle into upper triangle as well.
             Iu(Ncol(irow)) = icol
             U(Ncol(irow)) = A(j)
@@ -240,10 +239,10 @@ SUBROUTINE DSILUS(N,Nelt,Ia,Ja,A,Isym,Nl,Il,Jl,L,Dinv,Nu,Iu,Ju,U,Nrow,Ncol)
   DO k = 2, N
     jbgn = Ju(k)
     jend = Ju(k+1) - 1
-    IF ( jbgn<jend ) THEN
+    IF( jbgn<jend ) THEN
       DO j = jbgn, jend - 1
         DO i = j + 1, jend
-          IF ( Iu(j)>Iu(i) ) THEN
+          IF( Iu(j)>Iu(i) ) THEN
             itemp = Iu(j)
             Iu(j) = Iu(i)
             Iu(i) = itemp
@@ -256,10 +255,10 @@ SUBROUTINE DSILUS(N,Nelt,Ia,Ja,A,Isym,Nl,Il,Jl,L,Dinv,Nu,Iu,Ju,U,Nrow,Ncol)
     END IF
     ibgn = Il(k)
     iend = Il(k+1) - 1
-    IF ( ibgn<iend ) THEN
+    IF( ibgn<iend ) THEN
       DO i = ibgn, iend - 1
         DO j = i + 1, iend
-          IF ( Jl(i)>Jl(j) ) THEN
+          IF( Jl(i)>Jl(j) ) THEN
             jtemp = Ju(i)
             Ju(i) = Ju(j)
             Ju(j) = jtemp
@@ -278,31 +277,31 @@ SUBROUTINE DSILUS(N,Nelt,Ia,Ja,A,Isym,Nl,Il,Jl,L,Dinv,Nu,Iu,Ju,U,Nrow,Ncol)
     !           I-th row of L
     indx1 = Il(i)
     indx2 = Il(i+1) - 1
-    IF ( indx1<=indx2 ) THEN
+    IF( indx1<=indx2 ) THEN
       DO indx = indx1, indx2
-        IF ( indx/=indx1 ) THEN
+        IF( indx/=indx1 ) THEN
           indxr1 = indx1
           indxr2 = indx - 1
           indxc1 = Ju(Jl(indx))
           indxc2 = Ju(Jl(indx)+1) - 1
-          IF ( indxc1<=indxc2 ) THEN
+          IF( indxc1<=indxc2 ) THEN
             kr = Jl(indxr1)
             DO
               kc = Iu(indxc1)
-              IF ( kr>kc ) THEN
+              IF( kr>kc ) THEN
                 indxc1 = indxc1 + 1
-                IF ( indxc1<=indxc2 ) CYCLE
-              ELSEIF ( kr<kc ) THEN
+                IF( indxc1<=indxc2 ) CYCLE
+              ELSEIF( kr<kc ) THEN
                 indxr1 = indxr1 + 1
-                IF ( indxr1<=indxr2 ) THEN
+                IF( indxr1<=indxr2 ) THEN
                   kr = Jl(indxr1)
                   CYCLE
                 END IF
-              ELSEIF ( kr==kc ) THEN
+              ELSEIF( kr==kc ) THEN
                 L(indx) = L(indx) - L(indxr1)*Dinv(kc)*U(indxc1)
                 indxr1 = indxr1 + 1
                 indxc1 = indxc1 + 1
-                IF ( indxr1<=indxr2.AND.indxc1<=indxc2 ) THEN
+                IF( indxr1<=indxr2 .AND. indxc1<=indxc2 ) THEN
                   kr = Jl(indxr1)
                   CYCLE
                 END IF
@@ -318,31 +317,31 @@ SUBROUTINE DSILUS(N,Nelt,Ia,Ja,A,Isym,Nl,Il,Jl,L,Dinv,Nu,Iu,Ju,U,Nrow,Ncol)
     !         I-th column of U
     indx1 = Ju(i)
     indx2 = Ju(i+1) - 1
-    IF ( indx1<=indx2 ) THEN
+    IF( indx1<=indx2 ) THEN
       DO indx = indx1, indx2
-        IF ( indx/=indx1 ) THEN
+        IF( indx/=indx1 ) THEN
           indxc1 = indx1
           indxc2 = indx - 1
           indxr1 = Il(Iu(indx))
           indxr2 = Il(Iu(indx)+1) - 1
-          IF ( indxr1<=indxr2 ) THEN
+          IF( indxr1<=indxr2 ) THEN
             kr = Jl(indxr1)
             DO
               kc = Iu(indxc1)
-              IF ( kr>kc ) THEN
+              IF( kr>kc ) THEN
                 indxc1 = indxc1 + 1
-                IF ( indxc1<=indxc2 ) CYCLE
-              ELSEIF ( kr<kc ) THEN
+                IF( indxc1<=indxc2 ) CYCLE
+              ELSEIF( kr<kc ) THEN
                 indxr1 = indxr1 + 1
-                IF ( indxr1<=indxr2 ) THEN
+                IF( indxr1<=indxr2 ) THEN
                   kr = Jl(indxr1)
                   CYCLE
                 END IF
-              ELSEIF ( kr==kc ) THEN
+              ELSEIF( kr==kc ) THEN
                 U(indx) = U(indx) - L(indxr1)*Dinv(kc)*U(indxc1)
                 indxr1 = indxr1 + 1
                 indxc1 = indxc1 + 1
-                IF ( indxr1<=indxr2.AND.indxc1<=indxc2 ) THEN
+                IF( indxr1<=indxr2 .AND. indxc1<=indxc2 ) THEN
                   kr = Jl(indxr1)
                   CYCLE
                 END IF
@@ -358,27 +357,27 @@ SUBROUTINE DSILUS(N,Nelt,Ia,Ja,A,Isym,Nl,Il,Jl,L,Dinv,Nu,Iu,Ju,U,Nrow,Ncol)
     !         I-th diagonal element
     indxr1 = Il(i)
     indxr2 = Il(i+1) - 1
-    IF ( indxr1<=indxr2 ) THEN
+    IF( indxr1<=indxr2 ) THEN
       indxc1 = Ju(i)
       indxc2 = Ju(i+1) - 1
-      IF ( indxc1<=indxc2 ) THEN
+      IF( indxc1<=indxc2 ) THEN
         kr = Jl(indxr1)
         DO
           kc = Iu(indxc1)
-          IF ( kr>kc ) THEN
+          IF( kr>kc ) THEN
             indxc1 = indxc1 + 1
-            IF ( indxc1<=indxc2 ) CYCLE
-          ELSEIF ( kr<kc ) THEN
+            IF( indxc1<=indxc2 ) CYCLE
+          ELSEIF( kr<kc ) THEN
             indxr1 = indxr1 + 1
-            IF ( indxr1<=indxr2 ) THEN
+            IF( indxr1<=indxr2 ) THEN
               kr = Jl(indxr1)
               CYCLE
             END IF
-          ELSEIF ( kr==kc ) THEN
+          ELSEIF( kr==kc ) THEN
             Dinv(i) = Dinv(i) - L(indxr1)*Dinv(kc)*U(indxc1)
             indxr1 = indxr1 + 1
             indxc1 = indxc1 + 1
-            IF ( indxr1<=indxr2.AND.indxc1<=indxc2 ) THEN
+            IF( indxr1<=indxr2 .AND. indxc1<=indxc2 ) THEN
               kr = Jl(indxr1)
               CYCLE
             END IF

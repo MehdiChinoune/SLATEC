@@ -1,7 +1,6 @@
 !** MPOVFL
 SUBROUTINE MPOVFL(X)
-  !>
-  !  Subsidiary to DQDOTA and DQDOTI
+  !> Subsidiary to DQDOTA and DQDOTI
   !***
   ! **Library:**   SLATEC
   !***

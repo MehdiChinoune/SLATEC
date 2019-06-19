@@ -1,7 +1,6 @@
 !** SUDS
 SUBROUTINE SUDS(A,X,B,Neq,Nuk,Nrda,Iflag,Mlso,Work,Iwork)
-  !>
-  !  Subsidiary to BVSUP
+  !> Subsidiary to BVSUP
   !***
   ! **Library:**   SLATEC
   !***
@@ -12,7 +11,7 @@ SUBROUTINE SUDS(A,X,B,Neq,Nuk,Nrda,Iflag,Mlso,Work,Iwork)
   ! **Description:**
   !
   !     SUDS solves the underdetermined system of linear equations A Z = B
-  !     where A is NEQ by NUK and NEQ .LE. NUK. In particular, if rank A
+  !     where A is NEQ by NUK and NEQ <= NUK. In particular, if rank A
   !     equals IRA, a vector X and a matrix U are determined such that
   !     X is the UNIQUE solution of smallest length, satisfying A X = B,
   !     and the columns of U form an orthonormal basis for the null
@@ -56,7 +55,7 @@ SUBROUTINE SUDS(A,X,B,Neq,Nuk,Nrda,Iflag,Mlso,Work,Iwork)
   !     WORK(*),IWORK(*) -- Arrays for storage of internal information,
   !                WORK must be dimensioned at least
   !                       NUK + 3*NEQ + MLSO*NUK*(NUK-rank A)
-  !                where it is possible for   0 .LE. rank A .LE. NEQ
+  !                where it is possible for   0 <= rank A <= NEQ
   !                IWORK must be dimensioned at least   3 + NEQ
   !     IWORK(2) -- Scaling indicator
   !                 =-1 If the matrix is to be pre-scaled by

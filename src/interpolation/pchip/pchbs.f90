@@ -1,7 +1,6 @@
 !** PCHBS
 SUBROUTINE PCHBS(N,X,F,D,Incfd,Knotyp,Nknots,T,Bcoef,Ndim,Kord,Ierr)
-  !>
-  !  Piecewise Cubic Hermite to B-Spline converter.
+  !> Piecewise Cubic Hermite to B-Spline converter.
   !***
   ! **Library:**   SLATEC (PCHIP)
   !***
@@ -33,20 +32,20 @@ SUBROUTINE PCHBS(N,X,F,D,Incfd,Knotyp,Nknots,T,Bcoef,Ndim,Kord,Ierr)
   !
   !- Arguments:
   !
-  !     N:IN  is the number of data points, N.ge.2 .  (not checked)
+  !     N:IN  is the number of data points, N>=2 .  (not checked)
   !
   !     X:IN  is the real array of independent variable values.  The
   !           elements of X must be strictly increasing:
-  !                X(I-1) .LT. X(I),  I = 2(1)N.   (not checked)
-  !           nmax, the dimension of X, must be .ge.N.
+  !                X(I-1) < X(I),  I = 2(1)N.   (not checked)
+  !           nmax, the dimension of X, must be >=N.
   !
   !     F:IN  is the real array of dependent variable values.
   !           F(1+(I-1)*INCFD) is the value corresponding to X(I).
-  !           nmax, the second dimension of F, must be .ge.N.
+  !           nmax, the second dimension of F, must be >=N.
   !
   !     D:IN  is the real array of derivative values at the data points.
   !           D(1+(I-1)*INCFD) is the value corresponding to X(I).
-  !           nmax, the second dimension of D, must be .ge.N.
+  !           nmax, the second dimension of D, must be >=N.
   !
   !     INCFD:IN  is the increment between successive values in F and D.
   !           This argument is provided primarily for 2-D applications.
@@ -71,15 +70,15 @@ SUBROUTINE PCHBS(N,X,F,D,Incfd,Knotyp,Nknots,T,Bcoef,Ndim,Kord,Ierr)
   !           in a parametric setting.
   !
   !     NKNOTS:INOUT  is the number of knots.
-  !           If KNOTYP.GE.0, then NKNOTS will be set to NDIM+4.
-  !           If KNOTYP.LT.0, then NKNOTS is an input variable, and an
+  !           If KNOTYP>=0, then NKNOTS will be set to NDIM+4.
+  !           If KNOTYP<0, then NKNOTS is an input variable, and an
   !              error return will be taken if it is not equal to NDIM+4.
   !
   !     T:INOUT  is the array of 2*N+4 knots for the B-representation.
-  !           If KNOTYP.GE.0, T will be returned by PCHBS with the
+  !           If KNOTYP>=0, T will be returned by PCHBS with the
   !              interior double knots equal to the X-values and the
   !              boundary knots set as indicated above.
-  !           If KNOTYP.LT.0, it is assumed that T was set by a
+  !           If KNOTYP<0, it is assumed that T was set by a
   !              previous call to PCHBS.  (This routine does **not**
   !              verify that T forms a legitimate knot sequence.)
   !
@@ -93,8 +92,8 @@ SUBROUTINE PCHBS(N,X,F,D,Incfd,Knotyp,Nknots,T,Bcoef,Ndim,Kord,Ierr)
   !           Normal return:
   !              IERR = 0  (no errors).
   !           "Recoverable" errors:
-  !              IERR = -4  if KNOTYP.GT.2 .
-  !              IERR = -5  if KNOTYP.LT.0 and NKNOTS.NE.(2*N+4).
+  !              IERR = -4  if KNOTYP>2 .
+  !              IERR = -5  if KNOTYP<0 and NKNOTS/=(2*N+4).
   !
   !- Description:
   !     PCHBS computes the B-spline representation of the PCH function
@@ -111,14 +110,14 @@ SUBROUTINE PCHBS(N,X,F,D,Incfd,Knotyp,Nknots,T,Bcoef,Ndim,Kord,Ierr)
   !     input arguments N, X, INCFD are **not** checked for validity.
   !
   !- Restrictions/assumptions:
-  !     1. N.GE.2 .  (not checked)
-  !     2. X(i).LT.X(i+1), i=1,...,N .  (not checked)
-  !     3. INCFD.GT.0 .  (not checked)
-  !     4. KNOTYP.LE.2 .  (error return if not)
+  !     1. N>=2 .  (not checked)
+  !     2. X(i)<X(i+1), i=1,...,N .  (not checked)
+  !     3. INCFD>0 .  (not checked)
+  !     4. KNOTYP<=2 .  (error return if not)
   !    *5. NKNOTS = NDIM+4 = 2*N+4 .  (error return if not)
   !    *6. T(2*k+1) = T(2*k) = X(k), k=1,...,N .  (not checked)
   !
-  !       * Indicates this applies only if KNOTYP.LT.0 .
+  !       * Indicates this applies only if KNOTYP<0 .
   !
   !- Portability:
   !     Argument INCFD is used only to cause the compiler to generate
@@ -165,13 +164,13 @@ SUBROUTINE PCHBS(N,X,F,D,Incfd,Knotyp,Nknots,T,Bcoef,Ndim,Kord,Ierr)
   !
   !  Declare arguments.
   !
-  INTEGER N, Incfd, Knotyp, Nknots, Ndim, Kord, Ierr
-  REAL(SP) X(N), F(Incfd,N), D(Incfd,N), T(2*N+4), Bcoef(2*N)
+  INTEGER :: N, Incfd, Knotyp, Nknots, Ndim, Kord, Ierr
+  REAL(SP) :: X(N), F(Incfd,N), D(Incfd,N), T(2*N+4), Bcoef(2*N)
   !
   !  Declare local variables.
   !
-  INTEGER k, kk
-  REAL(SP) dov3, hnew, hold
+  INTEGER :: k, kk
+  REAL(SP) :: dov3, hnew, hold
   CHARACTER(8) :: libnam, subnam
   !* FIRST EXECUTABLE STATEMENT  PCHBS
   !
@@ -185,18 +184,18 @@ SUBROUTINE PCHBS(N,X,F,D,Incfd,Knotyp,Nknots,T,Bcoef,Ndim,Kord,Ierr)
   !
   !  Check argument validity.  Set up knot sequence if OK.
   !
-  IF ( Knotyp>2 ) THEN
+  IF( Knotyp>2 ) THEN
     Ierr = -1
     CALL XERMSG(subnam,'KNOTYP GREATER THAN 2',Ierr,1)
     RETURN
   END IF
-  IF ( Knotyp>=0 ) THEN
+  IF( Knotyp>=0 ) THEN
     !          Set up knot sequence.
     Nknots = Ndim + 4
     CALL PCHKT(N,X,Knotyp,T)
-  ELSEIF ( Nknots/=Ndim+4 ) THEN
+  ELSEIF( Nknots/=Ndim+4 ) THEN
     Ierr = -2
-    CALL XERMSG(subnam,'KNOTYP.LT.0 AND NKNOTS.NE.(2*N+4)',Ierr,1)
+    CALL XERMSG(subnam,'KNOTYP<0 AND NKNOTS/=(2*N+4)',Ierr,1)
     RETURN
   END IF
   !

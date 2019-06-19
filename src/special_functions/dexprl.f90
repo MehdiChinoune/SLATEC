@@ -1,7 +1,6 @@
 !** DEXPRL
 REAL(DP) FUNCTION DEXPRL(X)
-  !>
-  !  Calculate the relative error exponential (EXP(X)-1)/X.
+  !> Calculate the relative error exponential (EXP(X)-1)/X.
   !***
   ! **Library:**   SLATEC (FNLIB)
   !***
@@ -43,11 +42,11 @@ REAL(DP) FUNCTION DEXPRL(X)
   !* FIRST EXECUTABLE STATEMENT  DEXPRL
   !
   absx = ABS(X)
-  IF ( absx>0.5D0 ) DEXPRL = (EXP(X)-1.0D0)/X
-  IF ( absx>0.5D0 ) RETURN
+  IF( absx>0.5D0 ) DEXPRL = (EXP(X)-1.0D0)/X
+  IF( absx>0.5D0 ) RETURN
   !
   DEXPRL = 1.0D0
-  IF ( absx<xbnd ) RETURN
+  IF( absx<xbnd ) RETURN
   !
   DEXPRL = 0.0D0
   DO i = 1, nterms

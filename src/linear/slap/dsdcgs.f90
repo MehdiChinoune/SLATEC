@@ -1,8 +1,7 @@
 !** DSDCGS
 SUBROUTINE DSDCGS(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
     Iunit,Rwork,Lenw,Iwork,Leniw)
-  !>
-  !  Diagonally Scaled CGS Sparse Ax=b Solver.
+  !> Diagonally Scaled CGS Sparse Ax=b Solver.
   !            Routine to solve a linear system  Ax = b  using the
   !            BiConjugate Gradient Squared method with diagonal scaling.
   !***
@@ -201,7 +200,7 @@ SUBROUTINE DSDCGS(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
   !
   !- Cautions:
   !     This routine will attempt to write to the Fortran logical output
-  !     unit IUNIT, if IUNIT .ne. 0.  Thus, the user must make sure that
+  !     unit IUNIT, if IUNIT /= 0.  Thus, the user must make sure that
   !     this logical unit is attached to a file or terminal before calling
   !     this routine with a non-zero value for IUNIT.  This routine does
   !     not check for the validity of a non-zero IUNIT unit number.
@@ -236,19 +235,19 @@ SUBROUTINE DSDCGS(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
   !   921113  Corrected C***CATEGORY line.  (FNF)
 
   !     .. Parameters ..
-  INTEGER , PARAMETER :: LOCRB = 1, LOCIB = 11
+  INTEGER, PARAMETER :: LOCRB = 1, LOCIB = 11
   !     .. Scalar Arguments ..
   REAL(DP) :: Err, Tol
-  INTEGER Ierr, Isym, Iter, Itmax, Itol, Iunit, Leniw, Lenw, N, Nelt
+  INTEGER :: Ierr, Isym, Iter, Itmax, Itol, Iunit, Leniw, Lenw, N, Nelt
   !     .. Array Arguments ..
   REAL(DP) :: A(N), B(N), Rwork(Lenw), X(N)
-  INTEGER Ia(Nelt), Iwork(Leniw), Ja(Nelt)
+  INTEGER :: Ia(Nelt), Iwork(Leniw), Ja(Nelt)
   !     .. Local Scalars ..
-  INTEGER locdin, lociw, locp, locq, locr, locr0, locu, locv1, locv2, locw
+  INTEGER :: locdin, lociw, locp, locq, locr, locr0, locu, locv1, locv2, locw
   !* FIRST EXECUTABLE STATEMENT  DSDCGS
   !
   Ierr = 0
-  IF ( N<1.OR.Nelt<1 ) THEN
+  IF( N<1 .OR. Nelt<1 ) THEN
     Ierr = 3
     RETURN
   END IF
@@ -271,7 +270,7 @@ SUBROUTINE DSDCGS(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
   !
   !         Check the workspace allocations.
   CALL DCHKW('DSDCGS',lociw,Leniw,locw,Lenw,Ierr,Iter,Err)
-  IF ( Ierr/=0 ) RETURN
+  IF( Ierr/=0 ) RETURN
   !
   Iwork(4) = locdin
   Iwork(9) = lociw

@@ -1,8 +1,7 @@
 !** SDCOR
 SUBROUTINE SDCOR(Dfdy,El,FA,H,Ierror,Impl,Ipvt,Matdim,Miter,Ml,Mu,N,Nde,&
     Nq,T,USERS,Y,Yh,Ywt,Evalfa,Save1,Save2,A,D,Jstate)
-  !>
-  !  Subroutine SDCOR computes corrections to the Y array.
+  !> Subroutine SDCOR computes corrections to the Y array.
   !***
   ! **Library:**   SLATEC (SDRIVE)
   !***
@@ -53,8 +52,8 @@ SUBROUTINE SDCOR(Dfdy,El,FA,H,Ierror,Impl,Ipvt,Matdim,Miter,Ml,Mu,N,Nde,&
   LOGICAL :: Evalfa
   INTEGER :: i, iflag, j, mw, info
   !* FIRST EXECUTABLE STATEMENT  SDCOR
-  IF ( Miter==0 ) THEN
-    IF ( Ierror==1.OR.Ierror==5 ) THEN
+  IF( Miter==0 ) THEN
+    IF( Ierror==1 .OR. Ierror==5 ) THEN
       DO i = 1, N
         Save1(i) = (H*Save2(i)-Yh(i,2)-Save1(i))/Ywt(i)
       END DO
@@ -67,15 +66,15 @@ SUBROUTINE SDCOR(Dfdy,El,FA,H,Ierror,Impl,Ipvt,Matdim,Miter,Ml,Mu,N,Nde,&
     DO i = 1, N
       Save1(i) = H*Save2(i) - Yh(i,2)
     END DO
-  ELSEIF ( Miter==1.OR.Miter==2 ) THEN
-    IF ( Impl==0 ) THEN
+  ELSEIF( Miter==1 .OR. Miter==2 ) THEN
+    IF( Impl==0 ) THEN
       DO i = 1, N
         Save2(i) = H*Save2(i) - Yh(i,2) - Save1(i)
       END DO
-    ELSEIF ( Impl==1 ) THEN
-      IF ( Evalfa ) THEN
+    ELSEIF( Impl==1 ) THEN
+      IF( Evalfa ) THEN
         CALL FA(N,T,Y,A,Matdim,Ml,Mu,Nde)
-        IF ( N==0 ) THEN
+        IF( N==0 ) THEN
           Jstate = 9
           RETURN
         END IF
@@ -90,10 +89,10 @@ SUBROUTINE SDCOR(Dfdy,El,FA,H,Ierror,Impl,Ipvt,Matdim,Miter,Ml,Mu,N,Nde,&
           Save2(i) = Save2(i) - A(i,j)*(Yh(j,2)+Save1(j))
         END DO
       END DO
-    ELSEIF ( Impl==2 ) THEN
-      IF ( Evalfa ) THEN
+    ELSEIF( Impl==2 ) THEN
+      IF( Evalfa ) THEN
         CALL FA(N,T,Y,A,Matdim,Ml,Mu,Nde)
-        IF ( N==0 ) THEN
+        IF( N==0 ) THEN
           Jstate = 9
           RETURN
         END IF
@@ -103,10 +102,10 @@ SUBROUTINE SDCOR(Dfdy,El,FA,H,Ierror,Impl,Ipvt,Matdim,Miter,Ml,Mu,N,Nde,&
       DO i = 1, N
         Save2(i) = H*Save2(i) - A(i,1)*(Yh(i,2)+Save1(i))
       END DO
-    ELSEIF ( Impl==3 ) THEN
-      IF ( Evalfa ) THEN
+    ELSEIF( Impl==3 ) THEN
+      IF( Evalfa ) THEN
         CALL FA(N,T,Y,A,Matdim,Ml,Mu,Nde)
-        IF ( N==0 ) THEN
+        IF( N==0 ) THEN
           Jstate = 9
           RETURN
         END IF
@@ -126,7 +125,7 @@ SUBROUTINE SDCOR(Dfdy,El,FA,H,Ierror,Impl,Ipvt,Matdim,Miter,Ml,Mu,N,Nde,&
     !CALL SGETRS('N',N,1,Dfdy,Matdim,Ipvt,Save2,N,info)
     print*,'E',N
     print'(F18.11)', Save2
-    IF ( Ierror==1.OR.Ierror==5 ) THEN
+    IF( Ierror==1 .OR. Ierror==5 ) THEN
       DO i = 1, N
         Save1(i) = Save1(i) + Save2(i)
         Save2(i) = Save2(i)/Ywt(i)
@@ -138,15 +137,15 @@ SUBROUTINE SDCOR(Dfdy,El,FA,H,Ierror,Impl,Ipvt,Matdim,Miter,Ml,Mu,N,Nde,&
       END DO
     END IF
     D = NORM2(Save2(1:N))/SQRT(REAL(N))
-  ELSEIF ( Miter==4.OR.Miter==5 ) THEN
-    IF ( Impl==0 ) THEN
+  ELSEIF( Miter==4 .OR. Miter==5 ) THEN
+    IF( Impl==0 ) THEN
       DO i = 1, N
         Save2(i) = H*Save2(i) - Yh(i,2) - Save1(i)
       END DO
-    ELSEIF ( Impl==1 ) THEN
-      IF ( Evalfa ) THEN
+    ELSEIF( Impl==1 ) THEN
+      IF( Evalfa ) THEN
         CALL FA(N,T,Y,A(Ml+1:,:),Matdim,Ml,Mu,Nde)
-        IF ( N==0 ) THEN
+        IF( N==0 ) THEN
           Jstate = 9
           RETURN
         END IF
@@ -162,10 +161,10 @@ SUBROUTINE SDCOR(Dfdy,El,FA,H,Ierror,Impl,Ipvt,Matdim,Miter,Ml,Mu,N,Nde,&
           Save2(i+j-mw) = Save2(i+j-mw) - A(i,j)*(Yh(j,2)+Save1(j))
         END DO
       END DO
-    ELSEIF ( Impl==2 ) THEN
-      IF ( Evalfa ) THEN
+    ELSEIF( Impl==2 ) THEN
+      IF( Evalfa ) THEN
         CALL FA(N,T,Y,A,Matdim,Ml,Mu,Nde)
-        IF ( N==0 ) THEN
+        IF( N==0 ) THEN
           Jstate = 9
           RETURN
         END IF
@@ -175,10 +174,10 @@ SUBROUTINE SDCOR(Dfdy,El,FA,H,Ierror,Impl,Ipvt,Matdim,Miter,Ml,Mu,N,Nde,&
       DO i = 1, N
         Save2(i) = H*Save2(i) - A(i,1)*(Yh(i,2)+Save1(i))
       END DO
-    ELSEIF ( Impl==3 ) THEN
-      IF ( Evalfa ) THEN
+    ELSEIF( Impl==3 ) THEN
+      IF( Evalfa ) THEN
         CALL FA(N,T,Y,A(Ml+1:,:),Matdim,Ml,Mu,Nde)
-        IF ( N==0 ) THEN
+        IF( N==0 ) THEN
           Jstate = 9
           RETURN
         END IF
@@ -199,7 +198,7 @@ SUBROUTINE SDCOR(Dfdy,El,FA,H,Ierror,Impl,Ipvt,Matdim,Miter,Ml,Mu,N,Nde,&
     !CALL SGBTRS('N',N,Ml,Mu,1,Dfdy,Matdim,Ipvt,Save2,N,info)
     print*,'B',N
     print'(F18.11)', Save2
-    IF ( Ierror==1.OR.Ierror==5 ) THEN
+    IF( Ierror==1 .OR. Ierror==5 ) THEN
       DO i = 1, N
         Save1(i) = Save1(i) + Save2(i)
         Save2(i) = Save2(i)/Ywt(i)
@@ -211,14 +210,14 @@ SUBROUTINE SDCOR(Dfdy,El,FA,H,Ierror,Impl,Ipvt,Matdim,Miter,Ml,Mu,N,Nde,&
       END DO
     END IF
     D = NORM2(Save2(1:N))/SQRT(REAL(N))
-  ELSEIF ( Miter==3 ) THEN
+  ELSEIF( Miter==3 ) THEN
     iflag = 2
     CALL USERS(Y,Yh(1,2),Ywt,Save1,Save2,T,H,El(1,Nq),Impl,N,Nde,iflag)
-    IF ( N==0 ) THEN
+    IF( N==0 ) THEN
       Jstate = 10
       RETURN
     END IF
-    IF ( Ierror==1.OR.Ierror==5 ) THEN
+    IF( Ierror==1 .OR. Ierror==5 ) THEN
       DO i = 1, N
         Save1(i) = Save1(i) + Save2(i)
         Save2(i) = Save2(i)/Ywt(i)

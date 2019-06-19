@@ -6,8 +6,7 @@ MODULE TEST06_MOD
 CONTAINS
   !** DBIKCK
   SUBROUTINE DBIKCK(Lun,Kprint,Ipass)
-    !>
-    !  Quick check for DBESI and DBESK.
+    !> Quick check for DBESI and DBESK.
     !***
     ! **Library:**   SLATEC
     !***
@@ -41,13 +40,13 @@ CONTAINS
     !           obtain more information when there is failure of the
     !           Wronskian.  (WRB)
     USE slatec, ONLY : D1MACH, DBESI, DBESK, NUMXER, XERCLR, XGETF, XSETF
-    INTEGER Kprint
-    INTEGER i, Ipass, ix, k, kode, kontrl, Lun, m, n, nerr, nu, nw, ny
+    INTEGER :: Kprint
+    INTEGER :: i, Ipass, ix, k, kode, kontrl, Lun, m, n, nerr, nu, nw, ny
     REAL(DP) :: alp, del, er, fnu, fnup, rx, tol, x
     REAL(DP) :: fn(3), w(5), xx(5), y(5)
-    LOGICAL fatal
+    LOGICAL :: fatal
     !* FIRST EXECUTABLE STATEMENT  DBIKCK
-    IF ( Kprint>=2 ) WRITE (Lun,99001)
+    IF( Kprint>=2 ) WRITE (Lun,99001)
     99001 FORMAT (/' QUICK CHECKS FOR DBESI AND DBESK'//)
     !
     Ipass = 1
@@ -66,24 +65,24 @@ CONTAINS
           DO nu = 1, 4
             fnu = fn(m) + 12*(nu-1)
             DO ix = 1, 5
-              IF ( ix>=2.OR.nu<=3 ) THEN
+              IF( ix>=2 .OR. nu<=3 ) THEN
                 x = xx(ix)
                 rx = 1.0D0/x
                 CALL DBESI(x,fnu,kode,n,y,ny)
-                IF ( ny==0 ) THEN
+                IF( ny==0 ) THEN
                   CALL DBESK(x,fnu,kode,n,w,nw)
-                  IF ( nw==0 ) THEN
+                  IF( nw==0 ) THEN
                     fnup = fnu + n
                     CALL DBESI(x,fnup,kode,1,y(n+1),ny)
-                    IF ( ny==0 ) THEN
+                    IF( ny==0 ) THEN
                       CALL DBESK(x,fnup,kode,1,w(n+1),nw)
-                      IF ( nw==0 ) THEN
+                      IF( nw==0 ) THEN
                         DO i = 1, n
                           er = y(i+1)*w(i) + w(i+1)*y(i) - rx
                           er = ABS(er)*x
-                          IF ( er>tol ) THEN
+                          IF( er>tol ) THEN
                             Ipass = 0
-                            IF ( Kprint>=2 ) WRITE (Lun,99002) kode, m, n, &
+                            IF( Kprint>=2 ) WRITE (Lun,99002) kode, m, n, &
                               nu, ix, i, x, er, tol, y(i), y(i+1), w(i), w(i+1)
                             99002 FORMAT (/' ERROR IN QUICK CHECK OF WRONSKIAN',&
                               1P/' KODE = ',I1,', M = ',I1,', N = ',I1,&
@@ -116,9 +115,9 @@ CONTAINS
         CALL DBESK(x,fnu,kode,n,w,nw)
         er = y(2)*w(1) + w(2)*y(1) - 1.0D0/x
         er = ABS(er)*x
-        IF ( er>tol ) THEN
+        IF( er>tol ) THEN
           Ipass = 0
-          IF ( Kprint>=2 ) WRITE (Lun,99003) i, kode, fnu, x, er, tol, &
+          IF( Kprint>=2 ) WRITE (Lun,99003) i, kode, fnu, x, er, tol, &
             y(1), y(2), w(1), w(2)
           99003 FORMAT (/' ERROR IN QUICK CHECK OF SMALL X AND ORDER',1P/' I = ',I1,&
             ', KODE = ',I1,', FNU = ',E14.7/' X = ',E14.7,', ER = ',&
@@ -143,21 +142,21 @@ CONTAINS
         DO i = 1, 5
           rx = 1.0D0/x
           CALL DBESI(x,fnu,kode,n,y,ny)
-          IF ( ny==0 ) THEN
+          IF( ny==0 ) THEN
             CALL DBESK(x,fnu,kode,n,w,nw)
-            IF ( nw==0 ) THEN
-              IF ( n==1 ) THEN
+            IF( nw==0 ) THEN
+              IF( n==1 ) THEN
                 fnup = fnu + 1.0D0
                 CALL DBESI(x,fnup,kode,1,y(2),ny)
-                IF ( ny/=0 ) CYCLE
+                IF( ny/=0 ) CYCLE
                 CALL DBESK(x,fnup,kode,1,w(2),nw)
-                IF ( nw/=0 ) CYCLE
+                IF( nw/=0 ) CYCLE
               END IF
               er = y(2)*w(1) + y(1)*w(2) - rx
               er = ABS(er)*x
-              IF ( er>tol ) THEN
+              IF( er>tol ) THEN
                 Ipass = 0
-                IF ( Kprint>=2 ) WRITE (Lun,99004) k, n, i, fnup, x, er, &
+                IF( Kprint>=2 ) WRITE (Lun,99004) k, n, i, fnup, x, er, &
                   tol, y(1), y(2), w(1), w(2)
                 99004 FORMAT (/' ERROR IN QUICK CHECK OF LARGE X AND ORDER',&
                   1P/' K = ',I1,', N = ',I1,', I = ',I1,', FNUP = ',&
@@ -179,9 +178,9 @@ CONTAINS
     alp = 12.3D0
     n = 3
     CALL DBESI(x,alp,1,n,y,ny)
-    IF ( ny/=3 ) THEN
+    IF( ny/=3 ) THEN
       Ipass = 0
-      IF ( Kprint>=2 ) WRITE (Lun,99005)
+      IF( Kprint>=2 ) WRITE (Lun,99005)
       99005 FORMAT (/' ERROR IN DBESI UNDERFLOW TEST'/)
     END IF
     !
@@ -189,16 +188,16 @@ CONTAINS
     alp = 1.3D0
     n = 3
     CALL DBESK(x,alp,1,n,w,nw)
-    IF ( nw/=3 ) THEN
+    IF( nw/=3 ) THEN
       Ipass = 0
-      IF ( Kprint>=2 ) WRITE (Lun,99006)
+      IF( Kprint>=2 ) WRITE (Lun,99006)
       99006 FORMAT (/' ERROR IN DBESK UNDERFLOW TEST'/)
     END IF
     !
     !     Trigger 10 error conditions
     !
     CALL XGETF(kontrl)
-    IF ( Kprint<=2 ) THEN
+    IF( Kprint<=2 ) THEN
       CALL XSETF(0)
     ELSE
       CALL XSETF(1)
@@ -206,7 +205,7 @@ CONTAINS
     fatal = .FALSE.
     CALL XERCLR
     !
-    IF ( Kprint>=3 ) WRITE (Lun,99007)
+    IF( Kprint>=3 ) WRITE (Lun,99007)
     99007 FORMAT (//' TRIGGER 10 ERROR CONDITIONS'//)
     xx(1) = 1.0D0
     xx(2) = 1.0D0
@@ -220,13 +219,13 @@ CONTAINS
       k = INT(xx(3))
       n = INT(xx(4))
       CALL DBESI(xx(1),xx(2),k,n,y,ny)
-      IF ( NUMXER(nerr)/=2 ) THEN
+      IF( NUMXER(nerr)/=2 ) THEN
         Ipass = 0
         fatal = .TRUE.
       END IF
       CALL XERCLR
       CALL DBESK(xx(1),xx(2),k,n,w,nw)
-      IF ( NUMXER(nerr)/=2 ) THEN
+      IF( NUMXER(nerr)/=2 ) THEN
         Ipass = 0
         fatal = .TRUE.
       END IF
@@ -240,7 +239,7 @@ CONTAINS
     n = 3
     alp = 2.3D0
     CALL DBESI(x,alp,1,n,y,ny)
-    IF ( NUMXER(nerr)/=6 ) THEN
+    IF( NUMXER(nerr)/=6 ) THEN
       Ipass = 0
       fatal = .TRUE.
     END IF
@@ -248,33 +247,32 @@ CONTAINS
     !
     x = D1MACH(1)*10.0D0
     CALL DBESK(x,alp,1,n,w,nw)
-    IF ( NUMXER(nerr)/=6 ) THEN
+    IF( NUMXER(nerr)/=6 ) THEN
       Ipass = 0
       fatal = .TRUE.
     END IF
     CALL XERCLR
     !
     CALL XSETF(kontrl)
-    IF ( fatal ) THEN
-      IF ( Kprint>=2 ) THEN
+    IF( fatal ) THEN
+      IF( Kprint>=2 ) THEN
         WRITE (Lun,99008)
         99008 FORMAT (/' AT LEAST ONE INCORRECT ARGUMENT TEST FAILED')
       END IF
-    ELSEIF ( Kprint>=3 ) THEN
+    ELSEIF( Kprint>=3 ) THEN
       WRITE (Lun,99009)
       99009 FORMAT (/' ALL INCORRECT ARGUMENT TESTS PASSED')
     END IF
     !
-    IF ( Ipass==1.AND.Kprint>=2 ) WRITE (Lun,99010)
+    IF( Ipass==1 .AND. Kprint>=2 ) WRITE (Lun,99010)
     99010 FORMAT (/' *********DBESI AND DBESK PASSED ALL TESTS***********')
-    IF ( Ipass==0.AND.Kprint>=1 ) WRITE (Lun,99011)
+    IF( Ipass==0 .AND. Kprint>=1 ) WRITE (Lun,99011)
     99011 FORMAT (/' *********DBESI OR DBESK FAILED SOME TESTS***********')
     RETURN
   END SUBROUTINE DBIKCK
   !** DBJYCK
   SUBROUTINE DBJYCK(Lun,Kprint,Ipass)
-    !>
-    !  Quick check for DBESJ and DBESY.
+    !> Quick check for DBESJ and DBESY.
     !***
     ! **Library:**   SLATEC
     !***
@@ -308,13 +306,13 @@ CONTAINS
     !           obtain more information when there is failure of the
     !           Wronskian.  (WRB)
     USE slatec, ONLY : D1MACH, DBESJ, DBESY, NUMXER, XERCLR, XGETF, XSETF
-    INTEGER Kprint
-    INTEGER i, Ipass, ix, k, kontrl, Lun, m, n, nerr, nu, ny
+    INTEGER :: Kprint
+    INTEGER :: i, Ipass, ix, k, kontrl, Lun, m, n, nerr, nu, ny
     REAL(DP) :: alp, del, er, fnu, fnup, rhpi, rx, tol, x
     REAL(DP) :: fn(3), w(5), xx(5), y(5)
-    LOGICAL fatal
+    LOGICAL :: fatal
     !* FIRST EXECUTABLE STATEMENT  DBJYCK
-    IF ( Kprint>=2 ) WRITE (Lun,99001)
+    IF( Kprint>=2 ) WRITE (Lun,99001)
     99001 FORMAT (/' QUICK CHECKS FOR DBESJ AND DBESY'//)
     !
     Ipass = 1
@@ -333,22 +331,22 @@ CONTAINS
         DO nu = 1, 4
           fnu = fn(m) + 12*(nu-1)
           DO ix = 1, 5
-            IF ( ix>=2.OR.nu<=3 ) THEN
+            IF( ix>=2 .OR. nu<=3 ) THEN
               x = xx(ix)
               rx = rhpi/x
               CALL DBESJ(x,fnu,n,y,ny)
-              IF ( ny==0 ) THEN
+              IF( ny==0 ) THEN
                 CALL DBESY(x,fnu,n,w)
                 fnup = fnu + n
                 CALL DBESJ(x,fnup,1,y(n+1),ny)
-                IF ( ny==0 ) THEN
+                IF( ny==0 ) THEN
                   CALL DBESY(x,fnup,1,w(n+1))
                   DO i = 1, n
                     er = y(i+1)*w(i) - w(i+1)*y(i) - rx
                     er = ABS(er)/rx
-                    IF ( er>tol ) THEN
+                    IF( er>tol ) THEN
                       Ipass = 0
-                      IF ( Kprint>=2 ) WRITE (Lun,99002) m, n, nu, ix, i, &
+                      IF( Kprint>=2 ) WRITE (Lun,99002) m, n, nu, ix, i, &
                         x, er, tol, y(i), y(i+1), w(i), w(i+1)
                       99002 FORMAT (/' ERROR IN QUICK CHECK OF WRONSKIAN',&
                         1P/' M = ',I1,', N = ',I1,', NU = ',I1,&
@@ -377,9 +375,9 @@ CONTAINS
       CALL DBESY(x,fnu,n,w)
       er = y(2)*w(1) - w(2)*y(1) - rx
       er = ABS(er)/rx
-      IF ( er>tol ) THEN
+      IF( er>tol ) THEN
         Ipass = 0
-        IF ( Kprint>=2 ) WRITE (Lun,99003) i, fnu, x, er, tol, y(i), &
+        IF( Kprint>=2 ) WRITE (Lun,99003) i, fnu, x, er, tol, y(i), &
           y(i+1), w(i), w(i+1)
         99003 FORMAT (/' ERROR IN QUICK CHECK OF SMALL X AND ORDER',1P/' I = ',I1,&
           ',  FNU = ',E14.7/' X = ',E14.7,', ER = ',E14.7,', TOL = ',&
@@ -401,19 +399,19 @@ CONTAINS
         DO i = 1, 5
           rx = rhpi/x
           CALL DBESJ(x,fnu,n,y,ny)
-          IF ( ny==0 ) THEN
+          IF( ny==0 ) THEN
             CALL DBESY(x,fnu,n,w)
-            IF ( n==1 ) THEN
+            IF( n==1 ) THEN
               fnup = fnu + 1.0D0
               CALL DBESJ(x,fnup,1,y(2),ny)
-              IF ( ny/=0 ) CYCLE
+              IF( ny/=0 ) CYCLE
               CALL DBESY(x,fnup,1,w(2))
             END IF
             er = y(2)*w(1) - y(1)*w(2) - rx
             er = ABS(er)/rx
-            IF ( er>tol ) THEN
+            IF( er>tol ) THEN
               Ipass = 0
-              IF ( Kprint>=2 ) WRITE (Lun,99004) k, n, i, x, er, tol, &
+              IF( Kprint>=2 ) WRITE (Lun,99004) k, n, i, x, er, tol, &
                 y(1), y(2), w(1), w(2)
               99004 FORMAT (/' ERROR IN QUICK CHECK OF LARGE X AND ORDER',&
                 1P/' K = ',I1,', N = ',I1,', I = ',I1/' X = ',E14.7,&
@@ -433,16 +431,16 @@ CONTAINS
     alp = 12.3D0
     n = 3
     CALL DBESJ(x,alp,n,y,ny)
-    IF ( ny/=3 ) THEN
+    IF( ny/=3 ) THEN
       Ipass = 0
-      IF ( Kprint>=2 ) WRITE (Lun,99005)
+      IF( Kprint>=2 ) WRITE (Lun,99005)
       99005 FORMAT (/' ERROR IN DBESJ UNDERFLOW TEST'/)
     END IF
     !
     !     Trigger 7 error conditions
     !
     CALL XGETF(kontrl)
-    IF ( Kprint<=2 ) THEN
+    IF( Kprint<=2 ) THEN
       CALL XSETF(0)
     ELSE
       CALL XSETF(1)
@@ -450,7 +448,7 @@ CONTAINS
     fatal = .FALSE.
     CALL XERCLR
     !
-    IF ( Kprint>=3 ) WRITE (Lun,99006)
+    IF( Kprint>=3 ) WRITE (Lun,99006)
     99006 FORMAT (//' TRIGGER 7 ERROR CONDITIONS'//)
     xx(1) = 1.0D0
     xx(2) = 1.0D0
@@ -462,13 +460,13 @@ CONTAINS
       xx(i) = -xx(i)
       n = INT(xx(3))
       CALL DBESJ(xx(1),xx(2),n,y,ny)
-      IF ( NUMXER(nerr)/=2 ) THEN
+      IF( NUMXER(nerr)/=2 ) THEN
         Ipass = 0
         fatal = .TRUE.
       END IF
       CALL XERCLR
       CALL DBESY(xx(1),xx(2),n,w)
-      IF ( NUMXER(nerr)/=2 ) THEN
+      IF( NUMXER(nerr)/=2 ) THEN
         Ipass = 0
         fatal = .TRUE.
       END IF
@@ -482,32 +480,31 @@ CONTAINS
     n = 3
     alp = 2.3D0
     CALL DBESY(x,alp,n,w)
-    IF ( NUMXER(nerr)/=6 ) THEN
+    IF( NUMXER(nerr)/=6 ) THEN
       Ipass = 0
       fatal = .TRUE.
     END IF
     CALL XERCLR
     CALL XSETF(kontrl)
-    IF ( fatal ) THEN
-      IF ( Kprint>=2 ) THEN
+    IF( fatal ) THEN
+      IF( Kprint>=2 ) THEN
         WRITE (Lun,99007)
         99007 FORMAT (/' AT LEAST ONE INCORRECT ARGUMENT TEST FAILED')
       END IF
-    ELSEIF ( Kprint>=3 ) THEN
+    ELSEIF( Kprint>=3 ) THEN
       WRITE (Lun,99008)
       99008 FORMAT (/' ALL INCORRECT ARGUMENT TESTS PASSED')
     END IF
     !
-    IF ( Ipass==1.AND.Kprint>=2 ) WRITE (Lun,99009)
+    IF( Ipass==1 .AND. Kprint>=2 ) WRITE (Lun,99009)
     99009 FORMAT (/' *********DBESJ AND DBESY PASSED ALL TESTS*********')
-    IF ( Ipass==0.AND.Kprint>=1 ) WRITE (Lun,99010)
+    IF( Ipass==0 .AND. Kprint>=1 ) WRITE (Lun,99010)
     99010 FORMAT (/' *********DBESJ OR DBESY FAILED SOME TESTS*********')
     RETURN
   END SUBROUTINE DBJYCK
   !** DEG8CK
   SUBROUTINE DEG8CK(Lun,Kprint,Ipass)
-    !>
-    !  Quick check for DEXINT and DGAUS8.
+    !> Quick check for DEXINT and DGAUS8.
     !***
     ! **Library:**   SLATEC
     !***
@@ -536,13 +533,13 @@ CONTAINS
     !           KPRINT.  (WRB)
     !   920206  Corrected argument list in CALL to DEXINT.  (WRB)
     USE slatec, ONLY : D1MACH, DEXINT, DGAUS8
-    INTEGER Kprint
-    INTEGER i, icase, ie, ierr, ii, ik, Ipass, ix, iy, k, ke, kk, &
+    INTEGER :: Kprint
+    INTEGER :: i, icase, ie, ierr, ii, ik, Ipass, ix, iy, k, ke, kk, &
       kode, kx, Lun, m, n, nm, nz
     REAL(DP) :: ans, atol, bb, en(4), er, ex, sig, summ, tol, t1, t2, xx(5), y(4)
-    LOGICAL fatal
+    LOGICAL :: fatal
     !* FIRST EXECUTABLE STATEMENT  DEG8CK
-    IF ( Kprint>=2 ) WRITE (Lun,99001)
+    IF( Kprint>=2 ) WRITE (Lun,99001)
     !
     99001 FORMAT ('1'/' QUICK CHECK FOR DEXINT AND DGAUS8'/)
     Ipass = 1
@@ -557,13 +554,13 @@ CONTAINS
             X = ix - 0.20D0
             CALL DEXINT(X,n,kode,m,tol,en,nz,ierr)
             kx = INT( X + 0.5D0 )
-            IF ( kx==0 ) kx = 1
+            IF( kx==0 ) kx = 1
             icase = 1
             A = n
-            IF ( kx>n ) THEN
+            IF( kx>n ) THEN
               icase = 2
               A = nm
-              IF ( kx<nm ) THEN
+              IF( kx<nm ) THEN
                 icase = 3
                 A = kx
               END IF
@@ -577,25 +574,25 @@ CONTAINS
               atol = tol
               CALL DGAUS8(DFEIN,t1,t2,atol,ans,ierr)
               summ = summ + ans
-              IF ( ABS(ans)<ABS(summ)*tol ) THEN
+              IF( ABS(ans)<ABS(summ)*tol ) THEN
                 ex = 1.0D0
-                IF ( kode==1 ) ex = EXP(-X)
+                IF( kode==1 ) ex = EXP(-X)
                 bb = A
-                IF ( icase==3 ) THEN
+                IF( icase==3 ) THEN
                   iy = kx - n + 1
                   y(iy) = summ
                   ke = m - iy
                   ie = iy - 1
                   kk = iy
                   ii = iy
-                ELSEIF ( icase/=2 ) THEN
+                ELSEIF( icase/=2 ) THEN
                   y(1) = summ
-                  IF ( m==1 ) GOTO 5
+                  IF( m==1 ) GOTO 5
                   ke = m - 1
                   kk = 1
                 ELSE
                   y(m) = summ
-                  IF ( m==1 ) GOTO 5
+                  IF( m==1 ) GOTO 5
                   ie = m - 1
                   ii = m
                   EXIT
@@ -608,7 +605,7 @@ CONTAINS
                   bb = bb + 1.0D0
                   kk = kk + 1
                 END DO
-                IF ( icase==3 ) EXIT
+                IF( icase==3 ) EXIT
                 GOTO 5
               END IF
             END DO
@@ -624,7 +621,7 @@ CONTAINS
             5 CONTINUE
             DO i = 1, m
               er = ABS((y(i)-en(i))/y(i))
-              IF ( er>tol ) THEN
+              IF( er>tol ) THEN
                 WRITE (Lun,99002)
                 99002 FORMAT (//' ERROR IN DEG8CK COMPARISON TEST'/)
                 Ipass = 0
@@ -640,7 +637,7 @@ CONTAINS
     !
     100  fatal = .FALSE.
     !
-    IF ( Kprint>=3 ) WRITE (Lun,99003)
+    IF( Kprint>=3 ) WRITE (Lun,99003)
     99003 FORMAT (/' TRIGGER 6 ERROR CONDITIONS'/)
     xx(1) = 1.0D0
     xx(2) = 1.0D0
@@ -653,7 +650,7 @@ CONTAINS
       n = INT( xx(3) )
       m = INT( xx(4) )
       CALL DEXINT(xx(i),n,k,m,xx(5),en,nz,ierr)
-      IF ( ierr/=1 ) THEN
+      IF( ierr/=1 ) THEN
         Ipass = 0
         fatal = .TRUE.
         WRITE (Lun,99004) i
@@ -664,32 +661,31 @@ CONTAINS
     X = 0.0D0
     tol = 1.0D-2
     CALL DEXINT(X,1,1,1,tol,en,nz,ierr)
-    IF ( ierr/=1 ) THEN
+    IF( ierr/=1 ) THEN
       Ipass = 0
       fatal = .TRUE.
       WRITE (Lun,99005)
       99005 FORMAT (' Error occurred with X = 0.0')
     END IF
-    IF ( fatal ) THEN
-      IF ( Kprint>=2 ) THEN
+    IF( fatal ) THEN
+      IF( Kprint>=2 ) THEN
         WRITE (Lun,99006)
         99006 FORMAT (/' AT LEAST ONE INCORRECT ARGUMENT TEST FAILED')
       END IF
-    ELSEIF ( Kprint>=3 ) THEN
+    ELSEIF( Kprint>=3 ) THEN
       WRITE (Lun,99007)
       99007 FORMAT (/' ALL INCORRECT ARGUMENT TESTS PASSED')
     END IF
     !
-    IF ( Ipass==1.AND.Kprint>=2 ) WRITE (Lun,99008)
+    IF( Ipass==1 .AND. Kprint>=2 ) WRITE (Lun,99008)
     99008 FORMAT (/' *********DEXINT AND DGAUS8 PASSED ALL TESTS*********')
-    IF ( Ipass==0.AND.Kprint>=1 ) WRITE (Lun,99009)
+    IF( Ipass==0 .AND. Kprint>=1 ) WRITE (Lun,99009)
     99009 FORMAT (/' *********DEXINT OR DGAUS8 FAILED SOME TESTS*********')
     RETURN
   END SUBROUTINE DEG8CK
   !** DFEIN
   REAL(DP) FUNCTION DFEIN(T)
-    !>
-    !  Subsidiary to DEG8CK.
+    !> Subsidiary to DEG8CK.
     !***
     ! **Library:**   SLATEC
     !***
@@ -716,8 +712,7 @@ PROGRAM TEST06
   USE slatec, ONLY : I1MACH, XSETF, XSETUN, XERMAX
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
-  !>
-  !  Driver for testing SLATEC subprograms
+  !> Driver for testing SLATEC subprograms
   !***
   ! **Library:**   SLATEC
   !***
@@ -766,7 +761,7 @@ PROGRAM TEST06
   !   890618  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900524  Cosmetic changes to code.  (WRB)
-  INTEGER ipass, kprint, lin, lun, nfail
+  INTEGER :: ipass, kprint, lin, lun, nfail
   !* FIRST EXECUTABLE STATEMENT  TEST06
   lun = I1MACH(2)
   lin = I1MACH(1)
@@ -777,7 +772,7 @@ PROGRAM TEST06
   CALL GET_ARGUMENT(kprint)
   CALL XERMAX(1000)
   CALL XSETUN(lun)
-  IF ( kprint<=1 ) THEN
+  IF( kprint<=1 ) THEN
     CALL XSETF(0)
   ELSE
     CALL XSETF(1)
@@ -786,21 +781,21 @@ PROGRAM TEST06
   !     Test DEXINT and DQAUS8
   !
   CALL DEG8CK(lun,kprint,ipass)
-  IF ( ipass==0 ) nfail = nfail + 1
+  IF( ipass==0 ) nfail = nfail + 1
   !
   !     Test DBESI and DBESK
   !
   CALL DBIKCK(lun,kprint,ipass)
-  IF ( ipass==0 ) nfail = nfail + 1
+  IF( ipass==0 ) nfail = nfail + 1
   !
   !     Test DBESJ and DBESY
   !
   CALL DBJYCK(lun,kprint,ipass)
-  IF ( ipass==0 ) nfail = nfail + 1
+  IF( ipass==0 ) nfail = nfail + 1
   !
   !     Write PASS or FAIL message
   !
-  IF ( nfail==0 ) THEN
+  IF( nfail==0 ) THEN
     WRITE (lun,99001)
     99001 FORMAT (/' --------------TEST06 PASSED ALL TESTS----------------')
   ELSE

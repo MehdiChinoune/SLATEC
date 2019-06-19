@@ -1,8 +1,7 @@
 !** HSTSSP
 SUBROUTINE HSTSSP(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
     Idimf,Pertrb,Ierror,W)
-  !>
-  !  Solve the standard five-point finite difference
+  !> Solve the standard five-point finite difference
   !            approximation on a staggered grid to the Helmholtz
   !            equation in spherical coordinates and on the surface of
   !            the unit sphere (radius of 1).
@@ -39,7 +38,7 @@ SUBROUTINE HSTSSP(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   !            * * * * * *   On Input    * * * * * *
   !
   !   A,B
-  !     The range of THETA (colatitude), i.e. A .LE. THETA .LE. B.  A
+  !     The range of THETA (colatitude), i.e. A <= THETA <= B.  A
   !     must be less than B and A must be non-negative.  A and B are in
   !     radians.  A = 0 corresponds to the north pole and B = PI
   !     corresponds to the south pole.
@@ -140,7 +139,7 @@ SUBROUTINE HSTSSP(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   !     When MBDCND has any other value, BDB is a dummy variable.
   !
   !   C,D
-  !     The range of PHI (longitude), i.e. C .LE. PHI .LE. D.
+  !     The range of PHI (longitude), i.e. C <= PHI <= D.
   !     C must be less than D.  If D-C = 2*PI, periodic boundary
   !     conditions are usually prescribed.
   !
@@ -251,33 +250,33 @@ SUBROUTINE HSTSSP(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   !
   !     =  0  No error
   !
-  !     =  1  A .LT. 0 or B .GT. PI
+  !     =  1  A < 0 or B > PI
   !
-  !     =  2  A .GE. B
+  !     =  2  A >= B
   !
-  !     =  3  MBDCND .LT. 1 or MBDCND .GT. 9
+  !     =  3  MBDCND < 1 or MBDCND > 9
   !
-  !     =  4  C .GE. D
+  !     =  4  C >= D
   !
-  !     =  5  N .LE. 2
+  !     =  5  N <= 2
   !
-  !     =  6  NBDCND .LT. 0 or NBDCND .GT. 4
+  !     =  6  NBDCND < 0 or NBDCND > 4
   !
-  !     =  7  A .GT. 0 and MBDCND = 5, 6, or 9
+  !     =  7  A > 0 and MBDCND = 5, 6, or 9
   !
   !     =  8  A = 0 and MBDCND = 3, 4, or 8
   !
-  !     =  9  B .LT. PI and MBDCND .GE. 7
+  !     =  9  B < PI and MBDCND >= 7
   !
   !     = 10  B = PI and MBDCND = 2,3, or 6
   !
-  !     = 11  MBDCND .GE. 5 and NDBCND = 1, 2, or 4
+  !     = 11  MBDCND >= 5 and NDBCND = 1, 2, or 4
   !
-  !     = 12  IDIMF .LT. M
+  !     = 12  IDIMF < M
   !
-  !     = 13  M .LE. 2
+  !     = 13  M <= 2
   !
-  !     = 14  LAMBDA .GT. 0
+  !     = 14  LAMBDA > 0
   !
   !     Since this is the only means of indicating a possibly
   !     incorrect call to HSTSSP, the user should test IERROR after
@@ -374,7 +373,7 @@ SUBROUTINE HSTSSP(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
-  INTEGER Idimf, Ierror, M, Mbdcnd, N, Nbdcnd
+  INTEGER :: Idimf, Ierror, M, Mbdcnd, N, Nbdcnd
   REAL(SP) :: A, B, C, D, Elmbda, Pertrb
   REAL(SP) :: Bda(N+1), Bdb(N+1), Bdc(M+1), Bdd(M+1), F(Idimf,N+1), W(:)
   INTEGER :: i, ierr1, isw, iwb, iwc, iwr, iws, j, jsw, k, lp, mb, mm1, np
@@ -382,20 +381,20 @@ SUBROUTINE HSTSSP(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   REAL(SP), PARAMETER :: pi = 3.14159265358979
   !* FIRST EXECUTABLE STATEMENT  HSTSSP
   Ierror = 0
-  IF ( A<0..OR.B>pi ) Ierror = 1
-  IF ( A>=B ) Ierror = 2
-  IF ( Mbdcnd<=0.OR.Mbdcnd>9 ) Ierror = 3
-  IF ( C>=D ) Ierror = 4
-  IF ( N<=2 ) Ierror = 5
-  IF ( Nbdcnd<0.OR.Nbdcnd>=5 ) Ierror = 6
-  IF ( A>0..AND.(Mbdcnd==5.OR.Mbdcnd==6.OR.Mbdcnd==9) ) Ierror = 7
-  IF ( A==0..AND.(Mbdcnd==3.OR.Mbdcnd==4.OR.Mbdcnd==8) ) Ierror = 8
-  IF ( B<pi.AND.Mbdcnd>=7 ) Ierror = 9
-  IF ( B==pi.AND.(Mbdcnd==2.OR.Mbdcnd==3.OR.Mbdcnd==6) ) Ierror = 10
-  IF ( Mbdcnd>=5.AND.(Nbdcnd==1.OR.Nbdcnd==2.OR.Nbdcnd==4) ) Ierror = 11
-  IF ( Idimf<M ) Ierror = 12
-  IF ( M<=2 ) Ierror = 13
-  IF ( Ierror/=0 ) RETURN
+  IF( A<0. .OR. B>pi ) Ierror = 1
+  IF( A>=B ) Ierror = 2
+  IF( Mbdcnd<=0 .OR. Mbdcnd>9 ) Ierror = 3
+  IF( C>=D ) Ierror = 4
+  IF( N<=2 ) Ierror = 5
+  IF( Nbdcnd<0 .OR. Nbdcnd>=5 ) Ierror = 6
+  IF( A>0. .AND. (Mbdcnd==5 .OR. Mbdcnd==6 .OR. Mbdcnd==9) ) Ierror = 7
+  IF( A==0. .AND. (Mbdcnd==3 .OR. Mbdcnd==4 .OR. Mbdcnd==8) ) Ierror = 8
+  IF( B<pi .AND. Mbdcnd>=7 ) Ierror = 9
+  IF( B==pi .AND. (Mbdcnd==2 .OR. Mbdcnd==3 .OR. Mbdcnd==6) ) Ierror = 10
+  IF( Mbdcnd>=5 .AND. (Nbdcnd==1 .OR. Nbdcnd==2 .OR. Nbdcnd==4) ) Ierror = 11
+  IF( Idimf<M ) Ierror = 12
+  IF( M<=2 ) Ierror = 13
+  IF( Ierror/=0 ) RETURN
   deltar = (B-A)/M
   dlrsq = deltar**2
   deltht = (D-C)/N
@@ -404,21 +403,21 @@ SUBROUTINE HSTSSP(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   isw = 1
   jsw = 1
   mb = Mbdcnd
-  IF ( Elmbda==0. ) THEN
+  IF( Elmbda==0. ) THEN
     SELECT CASE (Mbdcnd)
       CASE (2)
-        IF ( A==0. ) THEN
+        IF( A==0. ) THEN
           mb = 6
           jsw = 2
         END IF
       CASE (3,6,8,9)
       CASE (4)
-        IF ( B==pi ) THEN
+        IF( B==pi ) THEN
           mb = 8
           jsw = 2
         END IF
       CASE DEFAULT
-        IF ( A==0..AND.B==pi ) THEN
+        IF( A==0. .AND. B==pi ) THEN
           mb = 9
           jsw = 2
         END IF
@@ -525,8 +524,8 @@ SUBROUTINE HSTSSP(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   !     SOLUTION.
   !
   100  Pertrb = 0.
-  IF ( Elmbda<0 ) THEN
-  ELSEIF ( Elmbda==0 ) THEN
+  IF( Elmbda<0 ) THEN
+  ELSEIF( Elmbda==0 ) THEN
     SELECT CASE (mb)
       CASE (1,2,4,5,7)
       CASE DEFAULT
@@ -582,20 +581,20 @@ SUBROUTINE HSTSSP(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   !
   !     CALL POISTG OR GENBUN TO SOLVE THE SYSTEM OF EQUATIONS.
   !
-  IF ( Nbdcnd==0 ) THEN
+  IF( Nbdcnd==0 ) THEN
     CALL GENBUN(lp,N,1,M,W(1:iwb),W(iwb+1:iwc),W(iwc+1:iwr),Idimf,F,ierr1,W(iwr+1:))
   ELSE
     CALL POISTG(lp,N,1,M,W(1:iwb),W(iwb+1:iwc),W(iwc+1:iwr),Idimf,F,ierr1,W(iwr+1:))
   END IF
   W(1) = W(iwr+1) + 3*M
-  IF ( isw==2.AND.jsw==2 ) THEN
-    IF ( mb/=8 ) THEN
+  IF( isw==2 .AND. jsw==2 ) THEN
+    IF( mb/=8 ) THEN
       a1 = 0.
       DO j = 1, N
         a1 = a1 + F(1,j)
       END DO
       a1 = (a1-dlrsq*a2/16.)/N
-      IF ( Nbdcnd==3 ) a1 = a1 + (Bdd(1)-Bdc(1))/(D-C)
+      IF( Nbdcnd==3 ) a1 = a1 + (Bdd(1)-Bdc(1))/(D-C)
       a1 = Bda(1) - a1
     ELSE
       a1 = 0.
@@ -603,7 +602,7 @@ SUBROUTINE HSTSSP(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
         a1 = a1 + F(M,j)
       END DO
       a1 = (a1-dlrsq*a3/16.)/N
-      IF ( Nbdcnd==3 ) a1 = a1 + (Bdd(M)-Bdc(M))/(D-C)
+      IF( Nbdcnd==3 ) a1 = a1 + (Bdd(M)-Bdc(M))/(D-C)
       a1 = Bdb(1) - a1
     END IF
     DO i = 1, M

@@ -1,7 +1,6 @@
 !** RFFTB1
 SUBROUTINE RFFTB1(N,C,Ch,Wa,Ifac)
-  !>
-  !  Compute the backward fast Fourier transform of a real
+  !> Compute the backward fast Fourier transform of a real
   !            coefficient array.
   !***
   ! **Library:**   SLATEC (FFTPACK)
@@ -104,42 +103,42 @@ SUBROUTINE RFFTB1(N,C,Ch,Wa,Ifac)
     l2 = ip*l1
     ido = N/l2
     idl1 = ido*l1
-    IF ( ip==4 ) THEN
+    IF( ip==4 ) THEN
       ix2 = iw + ido
       ix3 = ix2 + ido
-      IF ( na/=0 ) THEN
+      IF( na/=0 ) THEN
         CALL RADB4(ido,l1,Ch,C,Wa(iw),Wa(ix2),Wa(ix3))
       ELSE
         CALL RADB4(ido,l1,C,Ch,Wa(iw),Wa(ix2),Wa(ix3))
       END IF
       na = 1 - na
-    ELSEIF ( ip==2 ) THEN
-      IF ( na/=0 ) THEN
+    ELSEIF( ip==2 ) THEN
+      IF( na/=0 ) THEN
         CALL RADB2(ido,l1,Ch,C,Wa(iw))
       ELSE
         CALL RADB2(ido,l1,C,Ch,Wa(iw))
       END IF
       na = 1 - na
-    ELSEIF ( ip==3 ) THEN
+    ELSEIF( ip==3 ) THEN
       ix2 = iw + ido
-      IF ( na/=0 ) THEN
+      IF( na/=0 ) THEN
         CALL RADB3(ido,l1,Ch,C,Wa(iw),Wa(ix2))
       ELSE
         CALL RADB3(ido,l1,C,Ch,Wa(iw),Wa(ix2))
       END IF
       na = 1 - na
-    ELSEIF ( ip/=5 ) THEN
-      IF ( na/=0 ) THEN
+    ELSEIF( ip/=5 ) THEN
+      IF( na/=0 ) THEN
         CALL RADBG(ido,ip,l1,idl1,Ch,Ch,Ch,C,C,Wa(iw:))
       ELSE
         CALL RADBG(ido,ip,l1,idl1,C,C,C,Ch,Ch,Wa(iw:))
       END IF
-      IF ( ido==1 ) na = 1 - na
+      IF( ido==1 ) na = 1 - na
     ELSE
       ix2 = iw + ido
       ix3 = ix2 + ido
       ix4 = ix3 + ido
-      IF ( na/=0 ) THEN
+      IF( na/=0 ) THEN
         CALL RADB5(ido,l1,Ch,C,Wa(iw),Wa(ix2),Wa(ix3),Wa(ix4))
       ELSE
         CALL RADB5(ido,l1,C,Ch,Wa(iw),Wa(ix2),Wa(ix3),Wa(ix4))
@@ -149,7 +148,7 @@ SUBROUTINE RFFTB1(N,C,Ch,Wa,Ifac)
     l1 = l2
     iw = iw + (ip-1)*ido
   END DO
-  IF ( na==0 ) RETURN
+  IF( na==0 ) RETURN
   DO i = 1, N
     C(i) = Ch(i)
   END DO

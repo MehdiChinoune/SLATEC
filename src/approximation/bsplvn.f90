@@ -1,7 +1,6 @@
 !** BSPLVN
 SUBROUTINE BSPLVN(T,Jhigh,Indexx,X,Ileft,Vnikx)
-  !>
-  !  Subsidiary to FC
+  !> Subsidiary to FC
   !***
   ! **Library:**   SLATEC
   !***
@@ -31,10 +30,10 @@ SUBROUTINE BSPLVN(T,Jhigh,Indexx,X,Ileft,Vnikx)
   INTEGER, SAVE :: j = 1
   REAL(SP), SAVE :: deltam(20) = 0., deltap(20) = 0.
   !* FIRST EXECUTABLE STATEMENT  BSPLVN
-  IF ( Indexx/=2 ) THEN
+  IF( Indexx/=2 ) THEN
     j = 1
     Vnikx(1) = 1.
-    IF ( j>=Jhigh ) RETURN
+    IF( j>=Jhigh ) RETURN
   END IF
   DO
     !
@@ -52,7 +51,7 @@ SUBROUTINE BSPLVN(T,Jhigh,Indexx,X,Ileft,Vnikx)
     END DO
     Vnikx(jp1) = vmprev
     j = jp1
-    IF ( j>=Jhigh ) EXIT
+    IF( j>=Jhigh ) EXIT
   END DO
   !
   RETURN

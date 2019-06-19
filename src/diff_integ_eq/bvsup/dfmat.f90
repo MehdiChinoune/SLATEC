@@ -1,7 +1,6 @@
 !** DFMAT
 SUBROUTINE DFMAT(X,Y,Yp)
-  !>
-  !  Subsidiary to
+  !> Subsidiary to
   !***
   ! **Library:**   SLATEC
   !***
@@ -19,7 +18,7 @@ SUBROUTINE DFMAT(X,Y,Yp)
   REAL(DP) :: tanx
   !* FIRST EXECUTABLE STATEMENT  DFMAT
   Yp(1) = Y(2)
-  IF ( X/=xsave_com ) THEN
+  IF( X/=xsave_com ) THEN
     xsave_com = X
     tanx = TAN(X/57.2957795130823D0)
     term_com = 3.0D0/tanx + 2.0D0*tanx

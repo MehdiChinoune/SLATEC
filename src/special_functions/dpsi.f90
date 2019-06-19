@@ -1,7 +1,6 @@
 !** DPSI
 REAL(DP) FUNCTION DPSI(X)
-  !>
-  !  Compute the Psi (or Digamma) function.
+  !> Compute the Psi (or Digamma) function.
   !***
   ! **Library:**   SLATEC (FNLIB)
   !***
@@ -86,7 +85,7 @@ REAL(DP) FUNCTION DPSI(X)
   REAL(DP), PARAMETER :: pi = 3.14159265358979323846264338327950D0
   LOGICAL, SAVE :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  DPSI
-  IF ( first ) THEN
+  IF( first ) THEN
     ntpsi = INITDS(psics,42,0.1*D1MACH(3))
     ntapsi = INITDS(apsics,16,0.1*D1MACH(3))
     first = .FALSE.
@@ -94,14 +93,14 @@ REAL(DP) FUNCTION DPSI(X)
   !
   y = ABS(X)
   !
-  IF ( y>10.0D0 ) THEN
+  IF( y>10.0D0 ) THEN
     !
-    ! DPSI(X) FOR ABS(X) .GT. 10.0
+    ! DPSI(X) FOR ABS(X) > 10.0
     !
     aux = 0.D0
-    IF ( y<xbig ) aux = DCSEVL(2.D0*(10.D0/y)**2-1.D0,apsics,ntapsi)
+    IF( y<xbig ) aux = DCSEVL(2.D0*(10.D0/y)**2-1.D0,apsics,ntapsi)
     !
-    IF ( X<0.D0 ) THEN
+    IF( X<0.D0 ) THEN
       DPSI = LOG(ABS(X)) - 0.5D0/X + aux - pi*DCOT(pi*X)
     ELSE
       DPSI = LOG(X) - 0.5D0/X + aux
@@ -109,22 +108,22 @@ REAL(DP) FUNCTION DPSI(X)
     RETURN
   ELSE
     !
-    ! DPSI(X) FOR ABS(X) .LE. 2
+    ! DPSI(X) FOR ABS(X) <= 2
     !
     n = INT( X )
-    IF ( X<0.D0 ) n = n - 1
+    IF( X<0.D0 ) n = n - 1
     y = X - n
     n = n - 1
     DPSI = DCSEVL(2.D0*y-1.D0,psics,ntpsi)
-    IF ( n==0 ) RETURN
+    IF( n==0 ) RETURN
     !
-    IF ( n<=0 ) THEN
+    IF( n<=0 ) THEN
       !
       n = -n
-      IF ( X==0.D0 ) CALL XERMSG('DPSI','X IS 0',2,2)
-      IF ( X<0.D0.AND.X+n-2==0.D0 )&
+      IF( X==0.D0 ) CALL XERMSG('DPSI','X IS 0',2,2)
+      IF( X<0.D0 .AND. X+n-2==0.D0 )&
         CALL XERMSG('DPSI','X IS A NEGATIVE INTEGER',3,2)
-      IF ( X<(-0.5D0).AND.ABS((X-AINT(X-0.5D0))/X)<dxrel )&
+      IF( X<(-0.5D0) .AND. ABS((X-AINT(X-0.5D0))/X)<dxrel )&
         CALL XERMSG('DPSI',&
         'ANSWER LT HALF PRECISION BECAUSE X TOO NEAR NEGATIVE INTEGER',1,1)
       !
@@ -135,7 +134,7 @@ REAL(DP) FUNCTION DPSI(X)
     END IF
   END IF
   !
-  ! DPSI(X) FOR X .GE. 2.0 AND X .LE. 10.0
+  ! DPSI(X) FOR X >= 2.0 AND X <= 10.0
   !
   DO i = 1, n
     DPSI = DPSI + 1.0D0/(y+i)

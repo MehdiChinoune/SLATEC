@@ -1,8 +1,7 @@
 !** HWSSSP
 SUBROUTINE HWSSSP(Ts,Tf,M,Mbdcnd,Bdts,Bdtf,Ps,Pf,N,Nbdcnd,Bdps,Bdpf,&
     Elmbda,F,Idimf,Pertrb,Ierror,W)
-  !>
-  !  Solve a finite difference approximation to the Helmholtz
+  !> Solve a finite difference approximation to the Helmholtz
   !            equation in spherical coordinates and on the surface of the
   !            unit sphere (radius of 1).
   !***
@@ -37,7 +36,7 @@ SUBROUTINE HWSSSP(Ts,Tf,M,Mbdcnd,Bdts,Bdtf,Ps,Pf,N,Nbdcnd,Bdps,Bdpf,&
   !             * * * * * *   On Input    * * * * * *
   !
   !     TS,TF
-  !       The range of THETA (colatitude), i.e., TS .LE. THETA .LE. TF.
+  !       The range of THETA (colatitude), i.e., TS <= THETA <= TF.
   !       TS must be less than TF.  TS and TF are in radians.  A TS of
   !       zero corresponds to the north pole and a TF of PI corresponds to
   !       the south pole.
@@ -108,7 +107,7 @@ SUBROUTINE HWSSSP(Ts,Tf,M,Mbdcnd,Bdts,Bdtf,Ps,Pf,N,Nbdcnd,Bdps,Bdpf,&
   !       When MBDCND has any other value, BDTF is a dummy variable.
   !
   !     PS,PF
-  !       The range of PHI (longitude), i.e., PS .LE. PHI .LE. PF.  PS
+  !       The range of PHI (longitude), i.e., PS <= PHI <= PF.  PS
   !       must be less than PF.  PS and PF are in radians.  If PS = 0 and
   !       PF = 2*PI, periodic boundary conditions are usually prescribed.
   !
@@ -171,7 +170,7 @@ SUBROUTINE HWSSSP(Ts,Tf,M,Mbdcnd,Bdts,Bdtf,Ps,Pf,N,Nbdcnd,Bdps,Bdpf,&
   !
   !     ELMBDA
   !       The constant LAMBDA in the Helmholtz equation.  If
-  !       LAMBDA .GT. 0, a solution may not exist.  However, HWSSSP will
+  !       LAMBDA > 0, a solution may not exist.  However, HWSSSP will
   !       attempt to find a solution.
   !
   !     F
@@ -251,21 +250,21 @@ SUBROUTINE HWSSSP(Ts,Tf,M,Mbdcnd,Bdts,Bdtf,Ps,Pf,N,Nbdcnd,Bdps,Bdpf,&
   !       for numbers 0 and 8, a solution is not attempted.
   !
   !       = 0  No error
-  !       = 1  TS.LT.0 or TF.GT.PI
-  !       = 2  TS.GE.TF
-  !       = 3  MBDCND.LT.1 or MBDCND.GT.9
-  !       = 4  PS.LT.0 or PS.GT.PI+PI
-  !       = 5  PS.GE.PF
-  !       = 6  N.LT.5
-  !       = 7  M.LT.5
-  !       = 8  NBDCND.LT.0 or NBDCND.GT.4
-  !       = 9  ELMBDA.GT.0
-  !       = 10 IDIMF.LT.M+1
-  !       = 11 NBDCND equals 1,2 or 4 and MBDCND.GE.5
-  !       = 12 TS.EQ.0 and MBDCND equals 3,4 or 8
-  !       = 13 TF.EQ.PI and MBDCND equals 2,3 or 6
-  !       = 14 MBDCND equals 5,6 or 9 and TS.NE.0
-  !       = 15 MBDCND.GE.7 and TF.NE.PI
+  !       = 1  TS<0 or TF>PI
+  !       = 2  TS>=TF
+  !       = 3  MBDCND<1 or MBDCND>9
+  !       = 4  PS<0 or PS>PI+PI
+  !       = 5  PS>=PF
+  !       = 6  N<5
+  !       = 7  M<5
+  !       = 8  NBDCND<0 or NBDCND>4
+  !       = 9  ELMBDA>0
+  !       = 10 IDIMF<M+1
+  !       = 11 NBDCND equals 1,2 or 4 and MBDCND>=5
+  !       = 12 TS=0 and MBDCND equals 3,4 or 8
+  !       = 13 TF=PI and MBDCND equals 2,3 or 6
+  !       = 14 MBDCND equals 5,6 or 9 and TS/=0
+  !       = 15 MBDCND>=7 and TF/=PI
   !
   !       Since this is the only means of indicating a possibly incorrect
   !       call to HWSSSP, the user should test IERROR after a call.
@@ -375,29 +374,29 @@ SUBROUTINE HWSSSP(Ts,Tf,M,Mbdcnd,Bdts,Bdtf,Ps,Pf,N,Nbdcnd,Bdps,Bdpf,&
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER :: Idimf, Ierror, M, Mbdcnd, N, Nbdcnd
-  REAL(SP) ::Elmbda, Pertrb, Pf, Ps, Tf, Ts
+  REAL(SP) :: Elmbda, Pertrb, Pf, Ps, Tf, Ts
   REAL(SP) :: Bdpf(M+1), Bdps(M+1), Bdtf(N+1), Bdts(N+1), F(Idimf,N+1), W(:)
   REAL(SP) :: tpi
   REAL(SP), PARAMETER :: pi = 3.14159265358979
   !* FIRST EXECUTABLE STATEMENT  HWSSSP
   tpi = 2.*pi
   Ierror = 0
-  IF ( Ts<0..OR.Tf>pi ) Ierror = 1
-  IF ( Ts>=Tf ) Ierror = 2
-  IF ( Mbdcnd<1.OR.Mbdcnd>9 ) Ierror = 3
-  IF ( Ps<0..OR.Pf>tpi ) Ierror = 4
-  IF ( Ps>=Pf ) Ierror = 5
-  IF ( N<5 ) Ierror = 6
-  IF ( M<5 ) Ierror = 7
-  IF ( Nbdcnd<0.OR.Nbdcnd>4 ) Ierror = 8
-  IF ( Elmbda>0. ) Ierror = 9
-  IF ( Idimf<M+1 ) Ierror = 10
-  IF ( (Nbdcnd==1.OR.Nbdcnd==2.OR.Nbdcnd==4).AND.Mbdcnd>=5 ) Ierror = 11
-  IF ( Ts==0..AND.(Mbdcnd==3.OR.Mbdcnd==4.OR.Mbdcnd==8) ) Ierror = 12
-  IF ( Tf==pi.AND.(Mbdcnd==2.OR.Mbdcnd==3.OR.Mbdcnd==6) ) Ierror = 13
-  IF ( (Mbdcnd==5.OR.Mbdcnd==6.OR.Mbdcnd==9).AND.Ts/=0. ) Ierror = 14
-  IF ( Mbdcnd>=7.AND.Tf/=pi ) Ierror = 15
-  IF ( Ierror/=0.AND.Ierror/=9 ) RETURN
+  IF( Ts<0. .OR. Tf>pi ) Ierror = 1
+  IF( Ts>=Tf ) Ierror = 2
+  IF( Mbdcnd<1 .OR. Mbdcnd>9 ) Ierror = 3
+  IF( Ps<0. .OR. Pf>tpi ) Ierror = 4
+  IF( Ps>=Pf ) Ierror = 5
+  IF( N<5 ) Ierror = 6
+  IF( M<5 ) Ierror = 7
+  IF( Nbdcnd<0 .OR. Nbdcnd>4 ) Ierror = 8
+  IF( Elmbda>0. ) Ierror = 9
+  IF( Idimf<M+1 ) Ierror = 10
+  IF( (Nbdcnd==1 .OR. Nbdcnd==2 .OR. Nbdcnd==4) .AND. Mbdcnd>=5 ) Ierror = 11
+  IF( Ts==0. .AND. (Mbdcnd==3 .OR. Mbdcnd==4 .OR. Mbdcnd==8) ) Ierror = 12
+  IF( Tf==pi .AND. (Mbdcnd==2 .OR. Mbdcnd==3 .OR. Mbdcnd==6) ) Ierror = 13
+  IF( (Mbdcnd==5 .OR. Mbdcnd==6 .OR. Mbdcnd==9) .AND. Ts/=0. ) Ierror = 14
+  IF( Mbdcnd>=7 .AND. Tf/=pi ) Ierror = 15
+  IF( Ierror/=0 .AND. Ierror/=9 ) RETURN
   CALL HWSSS1(Ts,Tf,M,Mbdcnd,Bdts,Bdtf,Ps,Pf,N,Nbdcnd,Bdps,Bdpf,Elmbda,F,&
     Idimf,Pertrb,W,W(M+2:2*M+2),W(2*M+3:3*M+3),W(3*M+4:4*M+4),W(4*M+5:5*M+5),&
     W(5*M+6:6*M+6),W(6*M+7:))

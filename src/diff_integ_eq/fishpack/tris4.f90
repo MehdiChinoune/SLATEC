@@ -1,7 +1,6 @@
 !** TRIS4
 SUBROUTINE TRIS4(N,A,B,C,D,U,Z)
-  !>
-  !  Subsidiary to SEPX4
+  !> Subsidiary to SEPX4
   !***
   ! **Library:**   SLATEC
   !***

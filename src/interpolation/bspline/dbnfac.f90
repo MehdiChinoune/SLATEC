@@ -1,7 +1,6 @@
 !** DBNFAC
 SUBROUTINE DBNFAC(W,Nroww,Nrow,Nbandl,Nbandu,Iflag)
-  !>
-  !  Subsidiary to DBINT4 and DBINTK
+  !> Subsidiary to DBINT4 and DBINTK
   !***
   ! **Library:**   SLATEC
   !***
@@ -43,7 +42,7 @@ SUBROUTINE DBNFAC(W,Nroww,Nrow,Nbandl,Nbandu,Iflag)
   !        All other entries of  W  not identified in this way with an en-
   !        try of  A  are never referenced .
   !  NROWW.....Row dimension of the work array  W .
-  !        must be  .GE.  NBANDL + 1 + NBANDU  .
+  !        must be  >=  NBANDL + 1 + NBANDU  .
   !  NBANDL.....Number of bands of  A  below the main diagonal
   !  NBANDU.....Number of bands of  A  above the main diagonal .
   !
@@ -93,20 +92,20 @@ SUBROUTINE DBNFAC(W,Nroww,Nrow,Nbandl,Nbandu,Iflag)
   middle = Nbandu + 1
   !                         W(MIDDLE,.) CONTAINS THE MAIN DIAGONAL OF  A .
   nrowm1 = Nrow - 1
-  IF ( nrowm1<0 ) GOTO 100
-  IF ( nrowm1/=0 ) THEN
-    IF ( Nbandl<=0 ) THEN
+  IF( nrowm1<0 ) GOTO 100
+  IF( nrowm1/=0 ) THEN
+    IF( Nbandl<=0 ) THEN
       !                A IS UPPER TRIANGULAR. CHECK THAT DIAGONAL IS NONZERO .
       DO i = 1, nrowm1
-        IF ( W(middle,i)==0.0D0 ) GOTO 100
+        IF( W(middle,i)==0.0D0 ) GOTO 100
       END DO
-    ELSEIF ( Nbandu>0 ) THEN
+    ELSEIF( Nbandu>0 ) THEN
       !
       !        A  IS NOT JUST A TRIANGULAR MATRIX. CONSTRUCT LU FACTORIZATION
       DO i = 1, nrowm1
         !                                  W(MIDDLE,I)  IS PIVOT FOR I-TH STEP .
         pivot = W(middle,i)
-        IF ( pivot==0.0D0 ) GOTO 100
+        IF( pivot==0.0D0 ) GOTO 100
         !                 JMAX  IS THE NUMBER OF (NONZERO) ENTRIES IN COLUMN  I
         !                     BELOW THE DIAGONAL .
         jmax = MIN(Nbandl,Nrow-i)
@@ -133,7 +132,7 @@ SUBROUTINE DBNFAC(W,Nroww,Nrow,Nbandl,Nbandu,Iflag)
       !                 DIVIDE EACH COLUMN BY ITS DIAGONAL .
       DO i = 1, nrowm1
         pivot = W(middle,i)
-        IF ( pivot==0.0D0 ) GOTO 100
+        IF( pivot==0.0D0 ) GOTO 100
         jmax = MIN(Nbandl,Nrow-i)
         DO j = 1, jmax
           W(middle+j,i) = W(middle+j,i)/pivot
@@ -143,7 +142,7 @@ SUBROUTINE DBNFAC(W,Nroww,Nrow,Nbandl,Nbandu,Iflag)
     END IF
   END IF
   !                                       CHECK THE LAST DIAGONAL ENTRY .
-  IF ( W(middle,Nrow)/=0.0D0 ) RETURN
+  IF( W(middle,Nrow)/=0.0D0 ) RETURN
   100 CONTINUE
   IFlag = 2
 END SUBROUTINE DBNFAC

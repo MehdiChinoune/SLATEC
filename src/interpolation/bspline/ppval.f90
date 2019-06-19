@@ -1,7 +1,6 @@
 !** PPVAL
 REAL(SP) FUNCTION PPVAL(Ldc,C,Xi,Lxi,K,Ideriv,X,Inppv)
-  !>
-  !  Calculate the value of the IDERIV-th derivative of the
+  !> Calculate the value of the IDERIV-th derivative of the
   !            B-spline from the PP-representation.
   !***
   ! **Library:**   SLATEC
@@ -24,7 +23,7 @@ REAL(SP) FUNCTION PPVAL(Ldc,C,Xi,Lxi,K,Ideriv,X,Inppv)
   !         PPVAL calculates (at X) the value of the IDERIV-th
   !         derivative of the B-spline from the PP-representation
   !         (C,XI,LXI,K).  The Taylor expansion about XI(J) for X in
-  !         the interval XI(J) .LE. X .LT. XI(J+1) is evaluated, J=1,LXI.
+  !         the interval XI(J) <= X < XI(J+1) is evaluated, J=1,LXI.
   !         Right limiting values at X=XI(J) are obtained.  PPVAL will
   !         extrapolate beyond XI(1) and XI(LXI+1).
   !
@@ -33,15 +32,15 @@ REAL(SP) FUNCTION PPVAL(Ldc,C,Xi,Lxi,K,Ideriv,X,Inppv)
   !
   !     Description of Arguments
   !         Input
-  !          LDC     - leading dimension of C matrix, LDC .GE. K
+  !          LDC     - leading dimension of C matrix, LDC >= K
   !          C       - matrix of dimension at least (K,LXI) containing
   !                    right derivatives at break points XI(*).
   !          XI      - break point vector of length LXI+1
   !          LXI     - number of polynomial pieces
-  !          K       - order of B-spline, K .GE. 1
-  !          IDERIV  - order of the derivative, 0 .LE. IDERIV .LE. K-1
+  !          K       - order of B-spline, K >= 1
+  !          IDERIV  - order of the derivative, 0 <= IDERIV <= K-1
   !                    IDERIV=0 gives the B-spline value
-  !          X       - argument, XI(1) .LE. X .LE. XI(LXI+1)
+  !          X       - argument, XI(1) <= X <= XI(LXI+1)
   !          INPPV   - an initialization parameter which must be set
   !                    to 1 the first time PPVAL is called.
   !
@@ -77,19 +76,19 @@ REAL(SP) FUNCTION PPVAL(Ldc,C,Xi,Lxi,K,Ideriv,X,Inppv)
   REAL(SP) :: dx, fltk
   !* FIRST EXECUTABLE STATEMENT  PPVAL
   PPVAL = 0.0E0
-  IF ( K<1 ) THEN
-    CALL XERMSG('PPVAL','K DOES NOT SATISFY K.GE.1',2,1)
+  IF( K<1 ) THEN
+    CALL XERMSG('PPVAL','K DOES NOT SATISFY K>=1',2,1)
     RETURN
-  ELSEIF ( Ldc<K ) THEN
+  ELSEIF( Ldc<K ) THEN
     !
     !
-    CALL XERMSG('PPVAL','LDC DOES NOT SATISFY LDC.GE.K',2,1)
+    CALL XERMSG('PPVAL','LDC DOES NOT SATISFY LDC>=K',2,1)
     RETURN
-  ELSEIF ( Lxi<1 ) THEN
-    CALL XERMSG('PPVAL','LXI DOES NOT SATISFY LXI.GE.1',2,1)
+  ELSEIF( Lxi<1 ) THEN
+    CALL XERMSG('PPVAL','LXI DOES NOT SATISFY LXI>=1',2,1)
     RETURN
-  ELSEIF ( Ideriv<0.OR.Ideriv>=K ) THEN
-    CALL XERMSG('PPVAL','IDERIV DOES NOT SATISFY 0.LE.IDERIV.LT.K',2,1)
+  ELSEIF( Ideriv<0 .OR. Ideriv>=K ) THEN
+    CALL XERMSG('PPVAL','IDERIV DOES NOT SATISFY 0<=IDERIV<K',2,1)
     RETURN
   ELSE
     i = K - Ideriv
@@ -101,7 +100,7 @@ REAL(SP) FUNCTION PPVAL(Ldc,C,Xi,Lxi,K,Ideriv,X,Inppv)
       PPVAL = (PPVAL/fltk)*dx + C(j,i)
       j = j - 1
       fltk = fltk - 1.0E0
-      IF ( fltk<=0.0E0 ) EXIT
+      IF( fltk<=0.0E0 ) EXIT
     END DO
   END IF
   RETURN

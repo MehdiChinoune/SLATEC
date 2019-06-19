@@ -1,7 +1,6 @@
 !** E1
 REAL(SP) FUNCTION E1(X)
-  !>
-  !  Compute the exponential integral E1(X).
+  !> Compute the exponential integral E1(X).
   !***
   ! **Library:**   SLATEC (FNLIB)
   !***
@@ -141,7 +140,7 @@ REAL(SP) FUNCTION E1(X)
     -.00000000000000048E0, .00000000000000016E0,-.00000000000000005E0 ]
   LOGICAL, SAVE :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  E1
-  IF ( first ) THEN
+  IF( first ) THEN
     ntae11 = INITS(ae11cs,39,eta)
     ntae12 = INITS(ae12cs,25,eta)
     nte11 = INITS(e11cs,19,eta)
@@ -151,52 +150,52 @@ REAL(SP) FUNCTION E1(X)
     first = .FALSE.
   END IF
   !
-  IF ( X<=(-10.) ) THEN
+  IF( X<=(-10.) ) THEN
     !
-    ! E1(X) = -EI(-X) FOR X .LE. -10.
+    ! E1(X) = -EI(-X) FOR X <= -10.
     !
     E1 = EXP(-X)/X*(1.+CSEVL(20./X+1.,ae11cs,ntae11))
     RETURN
     !
-  ELSEIF ( X<=(-4.0) ) THEN
+  ELSEIF( X<=(-4.0) ) THEN
     !
-    ! E1(X) = -EI(-X) FOR -10. .LT. X .LE. -4.
+    ! E1(X) = -EI(-X) FOR -10. < X <= -4.
     !
     E1 = EXP(-X)/X*(1.+CSEVL((40./X+7.)/3.,ae12cs,ntae12))
     RETURN
     !
-  ELSEIF ( X<=(-1.0) ) THEN
+  ELSEIF( X<=(-1.0) ) THEN
     !
-    ! E1(X) = -EI(-X) FOR -4. .LT. X .LE. -1.
+    ! E1(X) = -EI(-X) FOR -4. < X <= -1.
     !
     E1 = -LOG(ABS(X)) + CSEVL((2.*X+5.)/3.,e11cs,nte11)
     RETURN
     !
-  ELSEIF ( X<=1. ) THEN
-    IF ( X==0. ) CALL XERMSG('E1','X IS 0',2,2)
+  ELSEIF( X<=1. ) THEN
+    IF( X==0. ) CALL XERMSG('E1','X IS 0',2,2)
     !
-    ! E1(X) = -EI(-X) FOR -1. .LT. X .LE. 1.,  X .NE. 0.
+    ! E1(X) = -EI(-X) FOR -1. < X <= 1.,  X /= 0.
     !
     E1 = (-LOG(ABS(X))-0.6875+X) + CSEVL(X,e12cs,nte12)
     RETURN
     !
-  ELSEIF ( X<=4. ) THEN
+  ELSEIF( X<=4. ) THEN
     !
-    ! E1(X) = -EI(-X) FOR 1. .LT. X .LE. 4.
+    ! E1(X) = -EI(-X) FOR 1. < X <= 4.
     !
     E1 = EXP(-X)/X*(1.+CSEVL((8./X-5.)/3.,ae13cs,ntae13))
     RETURN
     !
-  ELSEIF ( X>xmax ) THEN
+  ELSEIF( X>xmax ) THEN
     !
-    ! E1(X) = -EI(-X) FOR X .GT. XMAX
+    ! E1(X) = -EI(-X) FOR X > XMAX
     !
     CALL XERMSG('E1','X SO BIG E1 UNDERFLOWS',1,1)
     E1 = 0.
     RETURN
   END IF
   !
-  ! E1(X) = -EI(-X) FOR 4. .LT. X .LE. XMAX
+  ! E1(X) = -EI(-X) FOR 4. < X <= XMAX
   !
   E1 = EXP(-X)/X*(1.+CSEVL(8./X-1.,ae14cs,ntae14))
   RETURN

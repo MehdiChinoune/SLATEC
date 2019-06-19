@@ -5,8 +5,7 @@ MODULE TEST32_MOD
 CONTAINS
   !** FDTRUE
   SUBROUTINE FDTRUE(X,F,D)
-    !>
-    !  Compute exact function values for EVCHCK.
+    !> Compute exact function values for EVCHCK.
     !***
     ! **Library:**   SLATEC (PCHIP)
     !***
@@ -34,7 +33,7 @@ CONTAINS
     !   900316  Deleted variables ONE and TWO.  (FNF)
     !   900321  Changed name of d.p. version from DFTRUE to DFDTRU.
 
-    REAL(SP) X, F, D
+    REAL(SP) :: X, F, D
     REAL(DP) :: fact1, fact2, xx
     !
     !* FIRST EXECUTABLE STATEMENT  FDTRUE
@@ -48,8 +47,7 @@ CONTAINS
   END SUBROUTINE FDTRUE
   !** EVCHCK
   SUBROUTINE EVCHCK(Lout,Kprint,Npts,Xev,Fev,Dev,Fev2,Fail)
-    !>
-    !  Test evaluation accuracy of CHFDV and CHFEV for PCHQK1.
+    !> Test evaluation accuracy of CHFDV and CHFEV for PCHQK1.
     !***
     ! **Library:**   SLATEC (PCHIP)
     !***
@@ -112,19 +110,19 @@ CONTAINS
     !
     !  Declare arguments.
     !
-    INTEGER Lout, Kprint, Npts
-    REAL(SP) Xev(*), Fev(*), Dev(*), Fev2(*)
-    LOGICAL Fail
+    INTEGER :: Lout, Kprint, Npts
+    REAL(SP) :: Xev(*), Fev(*), Dev(*), Fev2(*)
+    LOGICAL :: Fail
     !
     !  DECLARATIONS.
     !
-    INTEGER i, ierr, iintt, next(2), next2(2)
-    REAL(SP) aed, aed2, aedmax, aedmin, aef, aef2, aefmax, aefmin, &
+    INTEGER :: i, ierr, iintt, next(2), next2(2)
+    REAL(SP) :: aed, aed2, aedmax, aedmin, aef, aef2, aefmax, aefmin, &
       check(2), checkf(2), checkd(2), d1, d2, dermax, dtrue, dx, &
       eps1, eps2, f1, f2, fact, fermax, floord, floorf, ftrue, machep, red, &
       red2, redmax, redmin, ref, ref2, refmax, refmin, tol1, tol2, x1, &
       x2, xadmax, xadmin, xafmax, xafmin, xrdmax, xrdmin, xrfmax, xrfmin
-    LOGICAL failoc, failnx
+    LOGICAL :: failoc, failnx
     !
     !  INITIALIZE.
     !
@@ -141,7 +139,7 @@ CONTAINS
     !
     Fail = .FALSE.
     !
-    IF ( Kprint>=2 ) WRITE (Lout,99001)
+    IF( Kprint>=2 ) WRITE (Lout,99001)
     99001 FORMAT (//10X,'EVCHCK RESULTS'/10X,'--------------')
     !
     !  CYCLE OVER INTERVALS.
@@ -159,8 +157,8 @@ CONTAINS
       CALL FDTRUE(x1,f1,d1)
       CALL FDTRUE(x2,f2,d2)
       !
-      IF ( Kprint>=3 ) THEN
-        IF ( iintt==1 ) WRITE (Lout,99002)
+      IF( Kprint>=3 ) THEN
+        IF( iintt==1 ) WRITE (Lout,99002)
         !
         ! FORMATS.
         !
@@ -171,7 +169,7 @@ CONTAINS
         WRITE (Lout,99017) 'D1', d1, 'D2', d2
       END IF
       !
-      IF ( Kprint>=2 ) WRITE (Lout,99003) x1, x2
+      IF( Kprint>=2 ) WRITE (Lout,99003) x1, x2
       99003 FORMAT (/10X,'INTERVAL = (',1P,E12.5,',',E12.5,' ):')
       !
       !  COMPUTE FLOORS FOR RELATIVE ERRORS.
@@ -198,7 +196,7 @@ CONTAINS
       failoc = MAX(ABS(ref),ABS(ref2),ABS(red),ABS(red2))>tol1
       Fail = Fail .OR. failoc
       !
-      IF ( Kprint>=3 ) THEN
+      IF( Kprint>=3 ) THEN
         WRITE (Lout,99004) next, aef, aef2, aed, aed2
         99004 FORMAT (/' ERRORS AT ENDPOINTS:',40X,'(NEXT =',2I3,')'//1P,4X,'F1:',&
           E13.5,4X,'F2:',E13.5,4X,'D1:',E13.5,4X,'D2:',E13.5)
@@ -206,7 +204,7 @@ CONTAINS
         99005 FORMAT (1P,4(7X,E13.5))
       END IF
       !
-      IF ( failoc.AND.(Kprint>=2) ) WRITE (Lout,99006)
+      IF( failoc .AND. (Kprint>=2) ) WRITE (Lout,99006)
       99006 FORMAT (/' ***** CHFDV FAILED TO REPRODUCE ENDPOINT VALUES.')
       !
       !  CHFEV SHOULD AGREE EXACTLY WITH CHFDV.
@@ -217,7 +215,7 @@ CONTAINS
       failoc = (check(1)/=checkf(1)) .OR. (check(2)/=checkf(2))
       Fail = Fail .OR. failoc
       !
-      IF ( failoc.AND.(Kprint>=2) ) WRITE (Lout,99007)
+      IF( failoc .AND. (Kprint>=2) ) WRITE (Lout,99007)
       99007 FORMAT (/' ***** CHFEV DOES NOT AGREE WITH CHFDV AT ENDPOINTS.')
       !
       !  EVALUATE AT NPTS 'UNIFORMLY RANDOM' POINTS IN (X1,X2).
@@ -231,9 +229,9 @@ CONTAINS
       !     --------------------------------------------------------
       CALL CHFDV(x1,x2,f1,f2,d1,d2,Npts,Xev,Fev,Dev,next,ierr)
       !     --------------------------------------------------------
-      IF ( ierr/=0 ) THEN
+      IF( ierr/=0 ) THEN
         failoc = .TRUE.
-        IF ( Kprint>=2 ) WRITE (Lout,99008) ierr
+        IF( Kprint>=2 ) WRITE (Lout,99008) ierr
         99008 FORMAT (/' ***** ERROR ***** CHFDV RETURNED IERR =',I5)
       ELSE
         !
@@ -246,7 +244,7 @@ CONTAINS
           aed = Dev(i) - dtrue
           red = RERR(aed,dtrue,floord)
           !
-          IF ( i==1 ) THEN
+          IF( i==1 ) THEN
             !            INITIALIZE.
             aefmin = aef
             aefmax = aef
@@ -266,31 +264,31 @@ CONTAINS
             xrdmax = Xev(1)
           ELSE
             !            SELECT.
-            IF ( aef<aefmin ) THEN
+            IF( aef<aefmin ) THEN
               aefmin = aef
               xafmin = Xev(i)
-            ELSEIF ( aef>aefmax ) THEN
+            ELSEIF( aef>aefmax ) THEN
               aefmax = aef
               xafmax = Xev(i)
             END IF
-            IF ( aed<aedmin ) THEN
+            IF( aed<aedmin ) THEN
               aedmin = aed
               xadmin = Xev(i)
-            ELSEIF ( aed>aedmax ) THEN
+            ELSEIF( aed>aedmax ) THEN
               aedmax = aed
               xadmax = Xev(i)
             END IF
-            IF ( ref<refmin ) THEN
+            IF( ref<refmin ) THEN
               refmin = ref
               xrfmin = Xev(i)
-            ELSEIF ( ref>refmax ) THEN
+            ELSEIF( ref>refmax ) THEN
               refmax = ref
               xrfmax = Xev(i)
             END IF
-            IF ( red<redmin ) THEN
+            IF( red<redmin ) THEN
               redmin = red
               xrdmin = Xev(i)
-            ELSEIF ( red>redmax ) THEN
+            ELSEIF( red>redmax ) THEN
               redmax = red
               xrdmax = Xev(i)
             END IF
@@ -307,7 +305,7 @@ CONTAINS
       !
       !  PRINT SUMMARY.
       !
-      IF ( Kprint>=3 ) THEN
+      IF( Kprint>=3 ) THEN
         WRITE (Lout,99009) Npts - 10, next
         99009 FORMAT (/' ERRORS AT ',I5,' INTERIOR POINTS + 10 OUTSIDE:',15X,&
           '(NEXT =',2I3,')'//30X,'FUNCTION',17X,'DERIVATIVE'/15X,&
@@ -319,11 +317,11 @@ CONTAINS
         WRITE (Lout,99019) xafmax, xrfmax, xadmax, xrdmax
       END IF
       !
-      IF ( Kprint>=2 ) THEN
-        IF ( failoc ) THEN
-          IF ( fermax>tol2 ) WRITE (Lout,99020) 'F', fermax, tol2
-          IF ( dermax>tol2 ) WRITE (Lout,99020) 'D', dermax, tol2
-          IF ( failnx ) WRITE (Lout,99010) next
+      IF( Kprint>=2 ) THEN
+        IF( failoc ) THEN
+          IF( fermax>tol2 ) WRITE (Lout,99020) 'F', fermax, tol2
+          IF( dermax>tol2 ) WRITE (Lout,99020) 'D', dermax, tol2
+          IF( failnx ) WRITE (Lout,99010) next
           99010 FORMAT (/' ***** REPORTED NEXT =',2I5,'   RATHER THAN    4    6')
         ELSE
           WRITE (Lout,99011)
@@ -336,30 +334,30 @@ CONTAINS
       !     -----------------------------------------------------------------
       CALL CHFEV(x1,x2,f1,f2,d1,d2,Npts,Xev,Fev2,next2,ierr)
       !     -----------------------------------------------------------------
-      IF ( ierr/=0 ) THEN
+      IF( ierr/=0 ) THEN
         failoc = .TRUE.
-        IF ( Kprint>=2 ) WRITE (Lout,99012) ierr
+        IF( Kprint>=2 ) WRITE (Lout,99012) ierr
         99012 FORMAT (/' ***** ERROR ***** CHFEV RETURNED IERR =',I5)
       ELSE
         aefmax = ABS(Fev2(1)-Fev(1))
         xafmax = Xev(1)
         DO i = 2, Npts
           aef = ABS(Fev2(i)-Fev(i))
-          IF ( aef>aefmax ) THEN
+          IF( aef>aefmax ) THEN
             aefmax = aef
             xafmax = Xev(i)
           END IF
         END DO
         failnx = (next2(1)/=next(1)) .OR. (next2(2)/=next(2))
         failoc = failnx .OR. (aefmax/=zero)
-        IF ( Kprint>=2 ) THEN
-          IF ( failoc ) THEN
+        IF( Kprint>=2 ) THEN
+          IF( failoc ) THEN
             WRITE (Lout,99013)
             99013 FORMAT (/' ***** CHFEV DID NOT AGREE WITH CHFDV:')
-            IF ( aefmax/=zero ) WRITE (Lout,99014) aefmax, xafmax
+            IF( aefmax/=zero ) WRITE (Lout,99014) aefmax, xafmax
             99014 FORMAT (7X,'MAXIMUM DIFFERENCE ',1P,E12.5,'; OCCURRED AT X =',&
               E12.5)
-            IF ( failnx ) WRITE (Lout,99015) next2, next
+            IF( failnx ) WRITE (Lout,99015) next2, next
             99015 FORMAT (7X,'REPORTED NEXT =',2I3,'   RATHER THAN ',2I3)
           ELSE
             WRITE (Lout,99016)
@@ -393,8 +391,7 @@ CONTAINS
   END SUBROUTINE EVCHCK
   !** EVERCK
   SUBROUTINE EVERCK(Lout,Kprint,Fail)
-    !>
-    !  Test error returns from PCHIP evaluators for PCHQK1.
+    !> Test error returns from PCHIP evaluators for PCHQK1.
     !***
     ! **Library:**   SLATEC (PCHIP)
     !***
@@ -422,7 +419,7 @@ CONTAINS
     !   820601  DATE WRITTEN
     !   820715  CONVERTED TO QUICK CHECK FOR SLATEC LIBRARY.
     !   890207  ADDED CALLS TO ERROR HANDLER.
-    !   890316  Added call to XERDMP if KPRINT.GT.2 (FNF).
+    !   890316  Added call to XERDMP if KPRINT>2 (FNF).
     !   890629  Appended E0 to real constants to reduce S.P./D.P.
     !           differences.
     !   890706  Cosmetic changes to prologue.  (WRB)
@@ -440,14 +437,14 @@ CONTAINS
     !
     !  Declare arguments.
     !
-    INTEGER Lout, Kprint
-    LOGICAL Fail
+    INTEGER :: Lout, Kprint
+    LOGICAL :: Fail
     !
     !  DECLARATIONS.
     !
-    INTEGER i, ierr, kontrl, nerr, next(2)
-    REAL(SP) d(10), dum(1), f(10), temp, x(10)
-    LOGICAL skip
+    INTEGER :: i, ierr, kontrl, nerr, next(2)
+    REAL(SP) :: d(10), dum(1), f(10), temp, x(10)
+    LOGICAL :: skip
     !
     !  INITIALIZE.
     !
@@ -456,37 +453,37 @@ CONTAINS
     nerr = 0
     !
     CALL XGETF(kontrl)
-    IF ( Kprint<=2 ) THEN
+    IF( Kprint<=2 ) THEN
       CALL XSETF(0)
     ELSE
       CALL XSETF(1)
     END IF
     !
-    IF ( Kprint>=3 ) WRITE (Lout,99001)
+    IF( Kprint>=3 ) WRITE (Lout,99001)
     !
     ! FORMATS.
     !
     99001 FORMAT ('1'//10X,'TEST ERROR RETURNS')
-    IF ( Kprint>=2 ) WRITE (Lout,99002)
+    IF( Kprint>=2 ) WRITE (Lout,99002)
     99002 FORMAT (//10X,'EVERCK RESULTS'/10X,'--------------')
     !
     !  FIRST, TEST CHFEV AND CHFDV.
     !
-    IF ( Kprint>=3 ) WRITE (Lout,99005) -1
+    IF( Kprint>=3 ) WRITE (Lout,99005) -1
     CALL CHFEV(0.E0,1.E0,3.E0,7.E0,3.E0,6.E0,0,dum,dum,next,ierr)
-    IF ( .NOT.COMP(ierr,-1,Lout,Kprint) ) nerr = nerr + 1
+    IF( .NOT. COMP(ierr,-1,Lout,Kprint) ) nerr = nerr + 1
     !
-    IF ( Kprint>=3 ) WRITE (Lout,99005) -2
+    IF( Kprint>=3 ) WRITE (Lout,99005) -2
     CALL CHFEV(1.E0,1.E0,3.E0,7.E0,3.E0,6.E0,1,dum,dum,next,ierr)
-    IF ( .NOT.COMP(ierr,-2,Lout,Kprint) ) nerr = nerr + 1
+    IF( .NOT. COMP(ierr,-2,Lout,Kprint) ) nerr = nerr + 1
     !
-    IF ( Kprint>=3 ) WRITE (Lout,99005) -1
+    IF( Kprint>=3 ) WRITE (Lout,99005) -1
     CALL CHFDV(0.E0,1.E0,3.E0,7.E0,3.E0,6.E0,0,dum,dum,dum,next,ierr)
-    IF ( .NOT.COMP(ierr,-1,Lout,Kprint) ) nerr = nerr + 1
+    IF( .NOT. COMP(ierr,-1,Lout,Kprint) ) nerr = nerr + 1
     !
-    IF ( Kprint>=3 ) WRITE (Lout,99005) -2
+    IF( Kprint>=3 ) WRITE (Lout,99005) -2
     CALL CHFDV(1.E0,1.E0,3.E0,7.E0,3.E0,6.E0,1,dum,dum,dum,next,ierr)
-    IF ( .NOT.COMP(ierr,-2,Lout,Kprint) ) nerr = nerr + 1
+    IF( .NOT. COMP(ierr,-2,Lout,Kprint) ) nerr = nerr + 1
     !
     !  SET UP PCH DEFINITION.
     !
@@ -504,46 +501,46 @@ CONTAINS
     !
     !  NOW, TEST PCHFE AND PCHFD.
     !
-    IF ( Kprint>=3 ) WRITE (Lout,99005) -1
+    IF( Kprint>=3 ) WRITE (Lout,99005) -1
     skip = .FALSE.
     CALL PCHFE(1,x,f,d,1,skip,0,dum,dum,ierr)
-    IF ( .NOT.COMP(ierr,-1,Lout,Kprint) ) nerr = nerr + 1
+    IF( .NOT. COMP(ierr,-1,Lout,Kprint) ) nerr = nerr + 1
     !
-    IF ( Kprint>=3 ) WRITE (Lout,99005) -3
+    IF( Kprint>=3 ) WRITE (Lout,99005) -3
     skip = .FALSE.
     CALL PCHFE(N,x,f,d,1,skip,0,dum,dum,ierr)
-    IF ( .NOT.COMP(ierr,-3,Lout,Kprint) ) nerr = nerr + 1
+    IF( .NOT. COMP(ierr,-3,Lout,Kprint) ) nerr = nerr + 1
     !
-    IF ( Kprint>=3 ) WRITE (Lout,99005) -4
+    IF( Kprint>=3 ) WRITE (Lout,99005) -4
     skip = .TRUE.
     CALL PCHFE(N,x,f,d,1,skip,0,dum,dum,ierr)
-    IF ( .NOT.COMP(ierr,-4,Lout,Kprint) ) nerr = nerr + 1
+    IF( .NOT. COMP(ierr,-4,Lout,Kprint) ) nerr = nerr + 1
     !
-    IF ( Kprint>=3 ) WRITE (Lout,99005) -1
+    IF( Kprint>=3 ) WRITE (Lout,99005) -1
     skip = .FALSE.
     CALL PCHFD(1,x,f,d,1,skip,0,dum,dum,dum,ierr)
-    IF ( .NOT.COMP(ierr,-1,Lout,Kprint) ) nerr = nerr + 1
+    IF( .NOT. COMP(ierr,-1,Lout,Kprint) ) nerr = nerr + 1
     !
-    IF ( Kprint>=3 ) WRITE (Lout,99005) -3
+    IF( Kprint>=3 ) WRITE (Lout,99005) -3
     skip = .FALSE.
     CALL PCHFD(N,x,f,d,1,skip,0,dum,dum,dum,ierr)
-    IF ( .NOT.COMP(ierr,-3,Lout,Kprint) ) nerr = nerr + 1
+    IF( .NOT. COMP(ierr,-3,Lout,Kprint) ) nerr = nerr + 1
     !
-    IF ( Kprint>=3 ) WRITE (Lout,99005) -4
+    IF( Kprint>=3 ) WRITE (Lout,99005) -4
     skip = .TRUE.
     CALL PCHFD(N,x,f,d,1,skip,0,dum,dum,dum,ierr)
-    IF ( .NOT.COMP(ierr,-4,Lout,Kprint) ) nerr = nerr + 1
+    IF( .NOT. COMP(ierr,-4,Lout,Kprint) ) nerr = nerr + 1
     !
     !  SUMMARIZE RESULTS.
     !
-    IF ( Kprint>2 ) CALL XERDMP
-    IF ( nerr==0 ) THEN
+    IF( Kprint>2 ) CALL XERDMP
+    IF( nerr==0 ) THEN
       Fail = .FALSE.
-      IF ( Kprint>=2 ) WRITE (Lout,99003)
+      IF( Kprint>=2 ) WRITE (Lout,99003)
       99003 FORMAT (/' ALL ERROR RETURNS OK.')
     ELSE
       Fail = .TRUE.
-      IF ( Kprint>=2 ) WRITE (Lout,99004) nerr
+      IF( Kprint>=2 ) WRITE (Lout,99004) nerr
       99004 FORMAT (//' ***** TROUBLE IN EVERCK *****'//5X,I5,&
         ' TESTS FAILED TO GIVE EXPECTED RESULTS.')
     END IF
@@ -557,8 +554,7 @@ CONTAINS
   END SUBROUTINE EVERCK
   !** EVPCCK
   SUBROUTINE EVPCCK(Lout,Kprint,X,Y,F,Fx,Fy,Xe,Ye,Fe,De,Fe2,Fail)
-    !>
-    !  Test usage of increment argument in PCHFD and PCHFE for
+    !> Test usage of increment argument in PCHFD and PCHFE for
     !            PCHQK1.
     !***
     ! **Library:**   SLATEC (PCHIP)
@@ -622,16 +618,16 @@ CONTAINS
     !
     !  Declare arguments.
     !
-    INTEGER Lout, Kprint
-    LOGICAL Fail
-    REAL(SP) X(10), Y(10), F(10,10), Fx(10,10), Fy(10,10), Xe(51), Ye(51), &
+    INTEGER :: Lout, Kprint
+    LOGICAL :: Fail
+    REAL(SP) :: X(10), Y(10), F(10,10), Fx(10,10), Fy(10,10), Xe(51), Ye(51), &
       Fe(51), De(51), Fe2(51)
     !
     !  DECLARATIONS.
     !
-    INTEGER i, ier2, ierr, inc, j, k, nerr
-    LOGICAL faild, faile, failoc, skip
-    REAL(SP) dermax, derr, dtrue, dx, fdiff, fdifmx, fermax, ferr, ftrue, &
+    INTEGER :: i, ier2, ierr, inc, j, k, nerr
+    LOGICAL :: faild, faile, failoc, skip
+    REAL(SP) :: dermax, derr, dtrue, dx, fdiff, fdifmx, fermax, ferr, ftrue, &
       machep, tol, pdermx, pdifmx, pfermx
     !
     INTEGER, PARAMETER :: nmax = 10, nx = 4, ny = 6
@@ -675,12 +671,12 @@ CONTAINS
     Xe(ne) = 1.E0
     Ye(ne) = 2.E0
     !
-    IF ( Kprint>=3 ) WRITE (Lout,99001)
+    IF( Kprint>=3 ) WRITE (Lout,99001)
     !
     ! FORMATS.
     !
     99001 FORMAT ('1'//10X,'TEST PCHFE AND PCHFD')
-    IF ( Kprint>=2 ) WRITE (Lout,99002)
+    IF( Kprint>=2 ) WRITE (Lout,99002)
     99002 FORMAT (//10X,'EVPCCK RESULTS'/10X,'--------------')
     !
     !  EVALUATE ON HORIZONTAL MESH LINES (Y FIXED, X RUNNING) ..............
@@ -692,13 +688,13 @@ CONTAINS
       !        --------------------------------------------------------------
       CALL PCHFD(nx,X,F(1,j),Fx(1,j),inc,skip,ne,Xe,Fe,De,ierr)
       !        --------------------------------------------------------------
-      IF ( Kprint>=3 ) WRITE (Lout,99003) inc, 'J', j, 'Y', Y(j), ierr
-      IF ( ierr<0 ) THEN
+      IF( Kprint>=3 ) WRITE (Lout,99003) inc, 'J', j, 'Y', Y(j), ierr
+      IF( ierr<0 ) THEN
         !
         failoc = .TRUE.
-        IF ( Kprint>=2 ) WRITE (Lout,99011) ierr
+        IF( Kprint>=2 ) WRITE (Lout,99011) ierr
       ELSE
-        IF ( Kprint>3 ) WRITE (Lout,99004) 'X'
+        IF( Kprint>3 ) WRITE (Lout,99004) 'X'
         !
         !        PCHFE SHOULD AGREE EXACTLY WITH PCHFD.
         !
@@ -711,9 +707,9 @@ CONTAINS
           ferr = Fe(k) - ftrue
           dtrue = DFDX(Xe(k),Y(j))
           derr = De(k) - dtrue
-          IF ( Kprint>3 ) WRITE (Lout,99005) Xe(k), ftrue, Fe(k), ferr, &
+          IF( Kprint>3 ) WRITE (Lout,99005) Xe(k), ftrue, Fe(k), ferr, &
             dtrue, De(k), derr
-          IF ( k==1 ) THEN
+          IF( k==1 ) THEN
             !              INITIALIZE.
             fermax = ABS(ferr)
             pfermx = Xe(1)
@@ -724,17 +720,17 @@ CONTAINS
           ELSE
             !              SELECT.
             ferr = ABS(ferr)
-            IF ( ferr>fermax ) THEN
+            IF( ferr>fermax ) THEN
               fermax = ferr
               pfermx = Xe(k)
             END IF
             derr = ABS(derr)
-            IF ( derr>dermax ) THEN
+            IF( derr>dermax ) THEN
               dermax = derr
               pdermx = Xe(k)
             END IF
             fdiff = ABS(Fe2(k)-Fe(k))
-            IF ( fdiff>fdifmx ) THEN
+            IF( fdiff>fdifmx ) THEN
               fdifmx = fdiff
               pdifmx = Xe(k)
             END IF
@@ -745,26 +741,26 @@ CONTAINS
         faile = fdifmx/=zero
         failoc = faild .OR. faile .OR. (ierr/=13) .OR. (ier2/=ierr)
         !
-        IF ( failoc.AND.(Kprint>=2) ) WRITE (Lout,99006) 'J', j, 'Y', Y(j)
+        IF( failoc .AND. (Kprint>=2) ) WRITE (Lout,99006) 'J', j, 'Y', Y(j)
         !
-        IF ( (Kprint>=3).OR.(faild.AND.(Kprint==2)) ) WRITE (Lout,99007)&
+        IF( (Kprint>=3) .OR. (faild .AND. (Kprint==2)) ) WRITE (Lout,99007)&
           fermax, pfermx, dermax, pdermx
-        IF ( faild.AND.(Kprint>=2) ) WRITE (Lout,99010) tol
+        IF( faild .AND. (Kprint>=2) ) WRITE (Lout,99010) tol
         !
-        IF ( (Kprint>=3).OR.(faile.AND.(Kprint==2)) ) WRITE (Lout,99008)&
+        IF( (Kprint>=3) .OR. (faile .AND. (Kprint==2)) ) WRITE (Lout,99008)&
           fdifmx, pdifmx
         !
-        IF ( (ierr/=13).AND.(Kprint>=2) ) WRITE (Lout,99009) 'D', ierr, 13
+        IF( (ierr/=13) .AND. (Kprint>=2) ) WRITE (Lout,99009) 'D', ierr, 13
         !
-        IF ( (ier2/=ierr).AND.(Kprint>=2) ) WRITE (Lout,99009) 'E', ier2, ierr
+        IF( (ier2/=ierr) .AND. (Kprint>=2) ) WRITE (Lout,99009) 'E', ier2, ierr
       END IF
       !
-      IF ( failoc ) nerr = nerr + 1
+      IF( failoc ) nerr = nerr + 1
       Fail = Fail .OR. failoc
     END DO
     !
-    IF ( Kprint>=2 ) THEN
-      IF ( nerr>0 ) THEN
+    IF( Kprint>=2 ) THEN
+      IF( nerr>0 ) THEN
         WRITE (Lout,99012) nerr, 'J'
       ELSE
         WRITE (Lout,99013) 'J'
@@ -780,13 +776,13 @@ CONTAINS
       !        --------------------------------------------------------------
       CALL PCHFD(ny,Y,F(i,1),Fy(i,1),inc,skip,ne,Ye,Fe,De,ierr)
       !        --------------------------------------------------------------
-      IF ( Kprint>=3 ) WRITE (Lout,99003) inc, 'I', i, 'X', X(i), ierr
-      IF ( ierr<0 ) THEN
+      IF( Kprint>=3 ) WRITE (Lout,99003) inc, 'I', i, 'X', X(i), ierr
+      IF( ierr<0 ) THEN
         !
         failoc = .TRUE.
-        IF ( Kprint>=2 ) WRITE (Lout,99011) ierr
+        IF( Kprint>=2 ) WRITE (Lout,99011) ierr
       ELSE
-        IF ( Kprint>3 ) WRITE (Lout,99004) 'Y'
+        IF( Kprint>3 ) WRITE (Lout,99004) 'Y'
         !
         !        PCHFE SHOULD AGREE EXACTLY WITH PCHFD.
         !
@@ -799,9 +795,9 @@ CONTAINS
           ferr = Fe(k) - ftrue
           dtrue = DFDY(X(i),Ye(k))
           derr = De(k) - dtrue
-          IF ( Kprint>3 ) WRITE (Lout,99005) Ye(k), ftrue, Fe(k), ferr, &
+          IF( Kprint>3 ) WRITE (Lout,99005) Ye(k), ftrue, Fe(k), ferr, &
             dtrue, De(k), derr
-          IF ( k==1 ) THEN
+          IF( k==1 ) THEN
             !              INITIALIZE.
             fermax = ABS(ferr)
             pfermx = Ye(1)
@@ -812,17 +808,17 @@ CONTAINS
           ELSE
             !              SELECT.
             ferr = ABS(ferr)
-            IF ( ferr>fermax ) THEN
+            IF( ferr>fermax ) THEN
               fermax = ferr
               pfermx = Ye(k)
             END IF
             derr = ABS(derr)
-            IF ( derr>dermax ) THEN
+            IF( derr>dermax ) THEN
               dermax = derr
               pdermx = Ye(k)
             END IF
             fdiff = ABS(Fe2(k)-Fe(k))
-            IF ( fdiff>fdifmx ) THEN
+            IF( fdiff>fdifmx ) THEN
               fdifmx = fdiff
               pdifmx = Ye(k)
             END IF
@@ -833,26 +829,26 @@ CONTAINS
         faile = fdifmx/=zero
         failoc = faild .OR. faile .OR. (ierr/=20) .OR. (ier2/=ierr)
         !
-        IF ( failoc.AND.(Kprint>=2) ) WRITE (Lout,99006) 'I', i, 'X', X(i)
+        IF( failoc .AND. (Kprint>=2) ) WRITE (Lout,99006) 'I', i, 'X', X(i)
         !
-        IF ( (Kprint>=3).OR.(faild.AND.(Kprint==2)) ) WRITE (Lout,99007)&
+        IF( (Kprint>=3) .OR. (faild .AND. (Kprint==2)) ) WRITE (Lout,99007)&
           fermax, pfermx, dermax, pdermx
-        IF ( faild.AND.(Kprint>=2) ) WRITE (Lout,99010) tol
+        IF( faild .AND. (Kprint>=2) ) WRITE (Lout,99010) tol
         !
-        IF ( (Kprint>=3).OR.(faile.AND.(Kprint==2)) ) WRITE (Lout,99008)&
+        IF( (Kprint>=3) .OR. (faile .AND. (Kprint==2)) ) WRITE (Lout,99008)&
           fdifmx, pdifmx
         !
-        IF ( (ierr/=20).AND.(Kprint>=2) ) WRITE (Lout,99009) 'D', ierr, 20
+        IF( (ierr/=20) .AND. (Kprint>=2) ) WRITE (Lout,99009) 'D', ierr, 20
         !
-        IF ( (ier2/=ierr).AND.(Kprint>=2) ) WRITE (Lout,99009) 'E', ier2, ierr
+        IF( (ier2/=ierr) .AND. (Kprint>=2) ) WRITE (Lout,99009) 'E', ier2, ierr
       END IF
       !
-      IF ( failoc ) nerr = nerr + 1
+      IF( failoc ) nerr = nerr + 1
       Fail = Fail .OR. failoc
     END DO
     !
-    IF ( Kprint>=2 ) THEN
-      IF ( nerr>0 ) THEN
+    IF( Kprint>=2 ) THEN
+      IF( nerr>0 ) THEN
         WRITE (Lout,99012) nerr, 'I'
       ELSE
         WRITE (Lout,99013) 'I'
@@ -873,7 +869,7 @@ CONTAINS
     99008 FORMAT ('  MAXIMUM DIFFERENCE BETWEEN PCHFE AND PCHFD =',1P,E13.5,0P,&
       ' (AT',F6.2,').')
     99009 FORMAT (/'  PCHF',A1,' RETURNED IERR = ',I2,' INSTEAD OF ',I2)
-    99010 FORMAT ('  *** BOTH SHOULD BE .LE. TOL =',1P,E12.5,' ***')
+    99010 FORMAT ('  *** BOTH SHOULD BE <= TOL =',1P,E12.5,' ***')
     99011 FORMAT (//' ***** ERROR ***** PCHFD RETURNED IERR =',I5//)
     99012 FORMAT (//' ***** ERROR ***** PCHFD AND/OR PCHFE FAILED ON',I2,1X,A1,&
       '-LINES.'//)
@@ -899,8 +895,7 @@ CONTAINS
   END SUBROUTINE EVPCCK
   !** PCHQK1
   SUBROUTINE PCHQK1(Lun,Kprint,Ipass)
-    !>
-    !  Test the PCHIP evaluators CHFDV, CHFEV, PCHFD and PCHFE.
+    !> Test the PCHIP evaluators CHFDV, CHFEV, PCHFD and PCHFE.
     !***
     ! **Library:**   SLATEC (PCHIP)
     !***
@@ -958,16 +953,16 @@ CONTAINS
     !
     !  Declare arguments.
     !
-    INTEGER Lun, Kprint, Ipass
+    INTEGER :: Lun, Kprint, Ipass
     !
     !  DECLARE LOCAL VARIABLES.
     !
-    INTEGER i1, i2, i3, i4, i5, i6, i7, i8, i9, ifail, npts
-    REAL(SP) work(4000)
-    LOGICAL fail
+    INTEGER :: i1, i2, i3, i4, i5, i6, i7, i8, i9, ifail, npts
+    REAL(SP) :: work(4000)
+    LOGICAL :: fail
     !
     !* FIRST EXECUTABLE STATEMENT  PCHQK1
-    IF ( Kprint>=2 ) WRITE (Lun,99001) Kprint
+    IF( Kprint>=2 ) WRITE (Lun,99001) Kprint
     !
     ! FORMATS.
     !
@@ -982,7 +977,7 @@ CONTAINS
     i2 = i1 + npts
     i3 = i2 + npts
     CALL EVCHCK(Lun,Kprint,npts,work(1),work(i1),work(i2),work(i3),fail)
-    IF ( fail ) ifail = ifail + 1
+    IF( fail ) ifail = ifail + 1
     !
     !  TEST PCHFD AND PCHFE.
     !
@@ -997,12 +992,12 @@ CONTAINS
     i9 = i8 + 51
     CALL EVPCCK(Lun,Kprint,work(1),work(i1),work(i2),work(i3),work(i4),&
       work(i5),work(i6),work(i7),work(i8),work(i9),fail)
-    IF ( fail ) ifail = ifail + 2
+    IF( fail ) ifail = ifail + 2
     !
     !  TEST ERROR RETURNS.
     !
     CALL EVERCK(Lun,Kprint,fail)
-    IF ( fail ) ifail = ifail + 4
+    IF( fail ) ifail = ifail + 4
     !
     !  PRINT SUMMARY AND TERMINATE.
     !     At this point, IFAIL has the following value:
@@ -1012,17 +1007,17 @@ CONTAINS
     !           IFAIL=2  IF PCHFD/PCHFE  TEST FAILED. (SEE EVPCCK OUTPUT.)
     !           IFAIL=4  IF ERROR RETURN TEST FAILED. (SEE EVERCK OUTPUT.)
     !
-    IF ( (Kprint>=2).AND.(ifail/=0) ) WRITE (Lun,99002) ifail
+    IF( (Kprint>=2) .AND. (ifail/=0) ) WRITE (Lun,99002) ifail
     99002 FORMAT (/' *** TROUBLE ***',I5,' EVALUATION TESTS FAILED.')
     !
-    IF ( ifail==0 ) THEN
+    IF( ifail==0 ) THEN
       Ipass = 1
-      IF ( Kprint>=2 ) WRITE (Lun,99003)
+      IF( Kprint>=2 ) WRITE (Lun,99003)
       99003 FORMAT (/' ------------  PCHIP PASSED  ALL EVALUATION TESTS',&
         ' ------------')
     ELSE
       Ipass = 0
-      IF ( Kprint>=1 ) WRITE (Lun,99004)
+      IF( Kprint>=1 ) WRITE (Lun,99004)
       99004 FORMAT (/' ************  PCHIP FAILED SOME EVALUATION TESTS',&
         ' ************')
     END IF
@@ -1032,8 +1027,7 @@ CONTAINS
   END SUBROUTINE PCHQK1
   !** PCHQK2
   SUBROUTINE PCHQK2(Lun,Kprint,Ipass)
-    !>
-    !  Test the PCHIP integrators PCHIA and PCHID.
+    !> Test the PCHIP integrators PCHIA and PCHID.
     !***
     ! **Library:**   SLATEC (PCHIP)
     !***
@@ -1087,20 +1081,20 @@ CONTAINS
     !   900316  Additional minor cosmetic changes.  (FNF)
     !   900321  Removed IFAIL from call sequence for SLATEC standards and
     !           made miscellaneous cosmetic changes.  (FNF)
-    !   901130  Added 1P's to formats; changed to allow KPRINT.gt.3.  (FNF)
+    !   901130  Added 1P's to formats; changed to allow KPRINT>3.  (FNF)
     !   910708  Minor modifications in use of KPRINT.  (WRB)
     !   930317  Improved output formats.  (FNF)
     USE slatec, ONLY : PCHIA, R1MACH
     !
     !  Declare arguments.
     !
-    INTEGER Lun, Kprint, Ipass
+    INTEGER :: Lun, Kprint, Ipass
     !
     !  DECLARE VARIABLES.
     !
-    INTEGER i, ierr, ifail
-    REAL(SP) calc, d(7), errmax, error, f(7), machep, tol, true
-    LOGICAL fail, skip
+    INTEGER :: i, ierr, ifail
+    REAL(SP) :: calc, d(7), errmax, error, f(7), machep, tol, true
+    LOGICAL :: fail, skip
     !
     !  INITIALIZE.
     !
@@ -1128,19 +1122,19 @@ CONTAINS
       d(i) = DERIV(x(i))
     END DO
     !
-    IF ( Kprint>=3 ) WRITE (Lun,99001)
+    IF( Kprint>=3 ) WRITE (Lun,99001)
     !
     ! FORMATS.
     !
     99001 FORMAT ('1'//10X,'TEST PCHIP INTEGRATORS')
-    IF ( Kprint>=2 ) WRITE (Lun,99002)
+    IF( Kprint>=2 ) WRITE (Lun,99002)
     99002 FORMAT (//10X,'PCHQK2 RESULTS'/10X,'--------------')
-    IF ( Kprint>=3 ) WRITE (Lun,99003) (x(i),f(i),d(i),i=1,n)
+    IF( Kprint>=3 ) WRITE (Lun,99003) (x(i),f(i),d(i),i=1,n)
     99003 FORMAT (//5X,'DATA:'//11X,'X',9X,'F',9X,'D'/(5X,3F10.3))
     !
     !  LOOP OVER (A,B)-PAIRS.
     !
-    IF ( Kprint>=3 ) WRITE (Lun,99004)
+    IF( Kprint>=3 ) WRITE (Lun,99004)
     99004 FORMAT (//5X,'TEST RESULTS:    A     B    ERR     TRUE',16X,'CALC',&
       15X,'ERROR')
     !
@@ -1151,12 +1145,12 @@ CONTAINS
       !               ---------------------------------------------
       calc = PCHIA(n,x,f,d,1,skip,a(i),b(i),ierr)
       !               ---------------------------------------------
-      IF ( ierr>=0 ) THEN
+      IF( ierr>=0 ) THEN
         fail = ierr/=ierexp(i)
         true = ANTDER(b(i)) - ANTDER(a(i))
         error = calc - true
-        IF ( Kprint>=3 ) THEN
-          IF ( fail ) THEN
+        IF( Kprint>=3 ) THEN
+          IF( fail ) THEN
             WRITE (Lun,99005) a(i), b(i), ierr, true, calc, error, ierexp(i)
             99005 FORMAT (2F6.1,I5,1P,2E20.10,E15.5,'  (',I1,') *****')
           ELSE
@@ -1165,38 +1159,38 @@ CONTAINS
         END IF
         !
         error = ABS(error)/MAX(one,ABS(true))
-        IF ( fail.OR.(error>tol) ) ifail = ifail + 1
-        IF ( i==1 ) THEN
+        IF( fail .OR. (error>tol) ) ifail = ifail + 1
+        IF( i==1 ) THEN
           errmax = error
         ELSE
           errmax = MAX(errmax,error)
         END IF
       ELSE
-        IF ( Kprint>=3 ) WRITE (Lun,99010) a(i), b(i), ierr
+        IF( Kprint>=3 ) WRITE (Lun,99010) a(i), b(i), ierr
         ifail = ifail + 1
       END IF
     END DO
     !
     !  PRINT SUMMARY.
     !
-    IF ( Kprint>=2 ) THEN
+    IF( Kprint>=2 ) THEN
       WRITE (Lun,99006) errmax, tol
       99006 FORMAT (/'  MAXIMUM RELATIVE ERROR IS:',1P,E15.5,',   TOLERANCE:',1P,&
         E15.5)
-      IF ( ifail/=0 ) WRITE (Lun,99007) ifail
+      IF( ifail/=0 ) WRITE (Lun,99007) ifail
       99007 FORMAT (/' *** TROUBLE ***',I5,' INTEGRATION TESTS FAILED.')
     END IF
     !
     !  TERMINATE.
     !
-    IF ( ifail==0 ) THEN
+    IF( ifail==0 ) THEN
       Ipass = 1
-      IF ( Kprint>=2 ) WRITE (Lun,99008)
+      IF( Kprint>=2 ) WRITE (Lun,99008)
       99008 FORMAT (/' ------------  PCHIP PASSED  ALL INTEGRATION TESTS',&
         ' ------------')
     ELSE
       Ipass = 0
-      IF ( Kprint>=1 ) WRITE (Lun,99009)
+      IF( Kprint>=1 ) WRITE (Lun,99009)
       99009 FORMAT (/' ************  PCHIP FAILED SOME INTEGRATION TESTS',&
         ' ************')
     END IF
@@ -1224,8 +1218,7 @@ CONTAINS
   END SUBROUTINE PCHQK2
   !** PCHQK3
   SUBROUTINE PCHQK3(Lun,Kprint,Ipass)
-    !>
-    !  Test the PCHIP interpolators PCHIC, PCHIM, PCHSP.
+    !> Test the PCHIP interpolators PCHIC, PCHIM, PCHSP.
     !***
     ! **Library:**   SLATEC (PCHIP)
     !***
@@ -1307,13 +1300,13 @@ CONTAINS
     !
     !  Declare arguments.
     !
-    INTEGER Lun, Kprint, Ipass
+    INTEGER :: Lun, Kprint, Ipass
     !
     !  Declare variables.
     !
-    INTEGER i, ierr, ifail, nbad, nbadz
+    INTEGER :: i, ierr, ifail, nbad, nbadz
     INTEGER, PARAMETER :: N = 9, NWK = 2*N
-    REAL(SP) d(N), dc(N), err, f(N), tol, told, tolz, vc(2), wk(NWK)
+    REAL(SP) :: d(N), dc(N), err, f(N), tol, told, tolz, vc(2), wk(NWK)
     REAL, PARAMETER :: ZERO = 0.0E0, MONE = -1.0E0
     CHARACTER(6) :: result
     !
@@ -1340,12 +1333,12 @@ CONTAINS
     told = SQRT(R1MACH(4))
     tolz = ZERO
     !
-    IF ( Kprint>=3 ) WRITE (Lun,99001)
+    IF( Kprint>=3 ) WRITE (Lun,99001)
     !
     ! FORMATS.
     !
     99001 FORMAT ('1'//10X,'TEST PCHIP INTERPOLATORS')
-    IF ( Kprint>=2 ) WRITE (Lun,99002)
+    IF( Kprint>=2 ) WRITE (Lun,99002)
     99002 FORMAT (//10X,'PCHQK3 RESULTS'/10X,'--------------')
     !
     !  Set up data.
@@ -1354,7 +1347,7 @@ CONTAINS
       f(i) = EXP(-x(i)**2)
     END DO
     !
-    IF ( Kprint>=3 ) THEN
+    IF( Kprint>=3 ) THEN
       WRITE (Lun,99003)
       99003 FORMAT (//5X,'DATA:'/39X,'---------- EXPECTED D-VALUES ----------'/12X,&
         'X',9X,'F',18X,'DM',13X,'DC',13X,'DS')
@@ -1370,171 +1363,171 @@ CONTAINS
     !
     !  Test PCHIM.
     !
-    IF ( Kprint>=3 ) WRITE (Lun,99011) 'IM'
+    IF( Kprint>=3 ) WRITE (Lun,99011) 'IM'
     !     --------------------------------
     CALL PCHIM(N,x,f,d,1,ierr)
     !     --------------------------------
     !        Expect IERR=1 (one monotonicity switch).
-    IF ( Kprint>=3 ) WRITE (Lun,99012) 1
-    IF ( .NOT.COMP(ierr,1,Lun,Kprint) ) THEN
+    IF( Kprint>=3 ) WRITE (Lun,99012) 1
+    IF( .NOT. COMP(ierr,1,Lun,Kprint) ) THEN
       ifail = ifail + 1
     ELSE
-      IF ( Kprint>=3 ) WRITE (Lun,99013)
+      IF( Kprint>=3 ) WRITE (Lun,99013)
       nbad = 0
       nbadz = 0
       DO i = 1, N
         result = '  OK'
         !             D-values should agree with stored values.
         !               (Zero values should agree exactly.)
-        IF ( dm(i)==ZERO ) THEN
+        IF( dm(i)==ZERO ) THEN
           err = ABS(d(i))
-          IF ( err>tolz ) THEN
+          IF( err>tolz ) THEN
             nbadz = nbadz + 1
             result = '**BADZ'
           END IF
         ELSE
           err = ABS((d(i)-dm(i))/dm(i))
-          IF ( err>told ) THEN
+          IF( err>told ) THEN
             nbad = nbad + 1
             result = '**BAD'
           END IF
         END IF
-        IF ( Kprint>=3 ) WRITE (Lun,99014) i, x(i), d(i), err, result
+        IF( Kprint>=3 ) WRITE (Lun,99014) i, x(i), d(i), err, result
       END DO
-      IF ( (nbadz/=0).OR.(nbad/=0) ) THEN
+      IF( (nbadz/=0) .OR. (nbad/=0) ) THEN
         ifail = ifail + 1
-        IF ( (nbadz/=0).AND.(Kprint>=2) ) WRITE (Lun,99004) nbad
+        IF( (nbadz/=0) .AND. (Kprint>=2) ) WRITE (Lun,99004) nbad
         99004 FORMAT (/'    **',I5,'  PCHIM RESULTS FAILED TO BE EXACTLY ZERO.')
-        IF ( (nbad/=0).AND.(Kprint>=2) ) WRITE (Lun,99015) nbad, 'IM', told
+        IF( (nbad/=0) .AND. (Kprint>=2) ) WRITE (Lun,99015) nbad, 'IM', told
       ELSE
-        IF ( Kprint>=2 ) WRITE (Lun,99016) 'IM'
+        IF( Kprint>=2 ) WRITE (Lun,99016) 'IM'
       END IF
     END IF
     !
     !  Test PCHIC -- options set to reproduce PCHIM.
     !
-    IF ( Kprint>=3 ) WRITE (Lun,99011) 'IC'
+    IF( Kprint>=3 ) WRITE (Lun,99011) 'IC'
     !     --------------------------------------------------------
     CALL PCHIC(ic,vc,ZERO,N,x,f,dc,1,wk,NWK,ierr)
     !     --------------------------------------------------------
     !        Expect IERR=0 .
-    IF ( Kprint>=3 ) WRITE (Lun,99012) 0
-    IF ( .NOT.COMP(ierr,0,Lun,Kprint) ) THEN
+    IF( Kprint>=3 ) WRITE (Lun,99012) 0
+    IF( .NOT. COMP(ierr,0,Lun,Kprint) ) THEN
       ifail = ifail + 1
     ELSE
-      IF ( Kprint>=3 ) WRITE (Lun,99013)
+      IF( Kprint>=3 ) WRITE (Lun,99013)
       nbad = 0
       DO i = 1, N
         result = '  OK'
         !           D-values should agree exactly with those computed by PCHIM.
         !            (To be generous, will only test to machine precision.)
         err = ABS(d(i)-dc(i))
-        IF ( err>tol ) THEN
+        IF( err>tol ) THEN
           nbad = nbad + 1
           result = '**BAD'
         END IF
-        IF ( Kprint>=3 ) WRITE (Lun,99014) i, x(i), dc(i), err, result
+        IF( Kprint>=3 ) WRITE (Lun,99014) i, x(i), dc(i), err, result
       END DO
-      IF ( nbad/=0 ) THEN
+      IF( nbad/=0 ) THEN
         ifail = ifail + 1
-        IF ( Kprint>=2 ) WRITE (Lun,99015) nbad, 'IC', tol
+        IF( Kprint>=2 ) WRITE (Lun,99015) nbad, 'IC', tol
       ELSE
-        IF ( Kprint>=2 ) WRITE (Lun,99016) 'IC'
+        IF( Kprint>=2 ) WRITE (Lun,99016) 'IC'
       END IF
     END IF
     !
     !  Test PCHIC -- default nonzero switch derivatives.
     !
-    IF ( Kprint>=3 ) WRITE (Lun,99011) 'IC'
+    IF( Kprint>=3 ) WRITE (Lun,99011) 'IC'
     !     -------------------------------------------------------
     CALL PCHIC(ic,vc,MONE,N,x,f,d,1,wk,NWK,ierr)
     !     -------------------------------------------------------
     !        Expect IERR=0 .
-    IF ( Kprint>=3 ) WRITE (Lun,99012) 0
-    IF ( .NOT.COMP(ierr,0,Lun,Kprint) ) THEN
+    IF( Kprint>=3 ) WRITE (Lun,99012) 0
+    IF( .NOT. COMP(ierr,0,Lun,Kprint) ) THEN
       ifail = ifail + 1
     ELSE
-      IF ( Kprint>=3 ) WRITE (Lun,99013)
+      IF( Kprint>=3 ) WRITE (Lun,99013)
       nbad = 0
       nbadz = 0
       DO i = 1, N
         result = '  OK'
         !            D-values should agree exactly with those computed in
         !            previous call, except at points 5 and 6.
-        IF ( (i<5).OR.(i>6) ) THEN
+        IF( (i<5) .OR. (i>6) ) THEN
           err = ABS(d(i)-dc(i))
-          IF ( err>tolz ) THEN
+          IF( err>tolz ) THEN
             nbadz = nbadz + 1
             result = '**BADA'
           END IF
         ELSE
-          IF ( i==5 ) THEN
+          IF( i==5 ) THEN
             err = ABS((d(i)-dc5)/dc5)
           ELSE
             err = ABS((d(i)-dc6)/dc6)
           END IF
-          IF ( err>told ) THEN
+          IF( err>told ) THEN
             nbad = nbad + 1
             result = '**BAD'
           END IF
         END IF
-        IF ( Kprint>=3 ) WRITE (Lun,99014) i, x(i), d(i), err, result
+        IF( Kprint>=3 ) WRITE (Lun,99014) i, x(i), d(i), err, result
       END DO
-      IF ( (nbadz/=0).OR.(nbad/=0) ) THEN
+      IF( (nbadz/=0) .OR. (nbad/=0) ) THEN
         ifail = ifail + 1
-        IF ( (nbadz/=0).AND.(Kprint>=2) ) WRITE (Lun,99005) nbad
+        IF( (nbadz/=0) .AND. (Kprint>=2) ) WRITE (Lun,99005) nbad
         99005 FORMAT (/'    **',I5,'  PCHIC RESULTS FAILED TO AGREE WITH',&
           ' PREVIOUS CALL.')
-        IF ( (nbad/=0).AND.(Kprint>=2) ) WRITE (Lun,99015) nbad, 'IC', told
+        IF( (nbad/=0) .AND. (Kprint>=2) ) WRITE (Lun,99015) nbad, 'IC', told
       ELSE
-        IF ( Kprint>=2 ) WRITE (Lun,99016) 'IC'
+        IF( Kprint>=2 ) WRITE (Lun,99016) 'IC'
       END IF
     END IF
     !
     !  Test PCHSP.
     !
-    IF ( Kprint>=3 ) WRITE (Lun,99011) 'SP'
+    IF( Kprint>=3 ) WRITE (Lun,99011) 'SP'
     !     -------------------------------------------------
     CALL PCHSP(ic,vc,N,x,f,d,1,wk,NWK,ierr)
     !     -------------------------------------------------
     !        Expect IERR=0 .
-    IF ( Kprint>=3 ) WRITE (Lun,99012) 0
-    IF ( .NOT.COMP(ierr,0,Lun,Kprint) ) THEN
+    IF( Kprint>=3 ) WRITE (Lun,99012) 0
+    IF( .NOT. COMP(ierr,0,Lun,Kprint) ) THEN
       ifail = ifail + 1
     ELSE
-      IF ( Kprint>=3 ) WRITE (Lun,99013)
+      IF( Kprint>=3 ) WRITE (Lun,99013)
       nbad = 0
       DO i = 1, N
         result = '  OK'
         !             D-values should agree with stored values.
         err = ABS((d(i)-ds(i))/ds(i))
-        IF ( err>told ) THEN
+        IF( err>told ) THEN
           nbad = nbad + 1
           result = '**BAD'
         END IF
-        IF ( Kprint>=3 ) WRITE (Lun,99014) i, x(i), d(i), err, result
+        IF( Kprint>=3 ) WRITE (Lun,99014) i, x(i), d(i), err, result
       END DO
-      IF ( nbad/=0 ) THEN
+      IF( nbad/=0 ) THEN
         ifail = ifail + 1
-        IF ( Kprint>=2 ) WRITE (Lun,99015) nbad, 'SP', told
+        IF( Kprint>=2 ) WRITE (Lun,99015) nbad, 'SP', told
       ELSE
-        IF ( Kprint>=2 ) WRITE (Lun,99016) 'SP'
+        IF( Kprint>=2 ) WRITE (Lun,99016) 'SP'
       END IF
     END IF
     !
     !  PRINT SUMMARY AND TERMINATE.
     !
-    IF ( (Kprint>=2).AND.(ifail/=0) ) WRITE (Lun,99006) ifail
+    IF( (Kprint>=2) .AND. (ifail/=0) ) WRITE (Lun,99006) ifail
     99006 FORMAT (/' *** TROUBLE ***',I5,' INTERPOLATION TESTS FAILED.')
     !
-    IF ( ifail==0 ) THEN
+    IF( ifail==0 ) THEN
       Ipass = 1
-      IF ( Kprint>=2 ) WRITE (Lun,99007)
+      IF( Kprint>=2 ) WRITE (Lun,99007)
       99007 FORMAT (/' ------------  PCHIP PASSED  ALL INTERPOLATION TESTS',&
         ' ------------')
     ELSE
       Ipass = 0
-      IF ( Kprint>=1 ) WRITE (Lun,99008)
+      IF( Kprint>=1 ) WRITE (Lun,99008)
       99008 FORMAT (/' ************  PCHIP FAILED SOME INTERPOLATION TESTS',&
         ' ************')
     END IF
@@ -1553,8 +1546,7 @@ CONTAINS
   END SUBROUTINE PCHQK3
   !** PCHQK4
   SUBROUTINE PCHQK4(Lun,Kprint,Ipass)
-    !>
-    !  Test the PCHIP monotonicity checker PCHCM.
+    !> Test the PCHIP monotonicity checker PCHCM.
     !***
     ! **Library:**   SLATEC (PCHIP)
     !***
@@ -1620,14 +1612,14 @@ CONTAINS
     !
     !  Declare arguments.
     !
-    INTEGER Lun, Kprint, Ipass
+    INTEGER :: Lun, Kprint, Ipass
     !
     !  DECLARE VARIABLES.
     !
     INTEGER, PARAMETER :: MAXN = 16, MAXN2 = 8, MAXN3 = 6, NB = 7
-    INTEGER i, ierr, ifail, incfd, ismon(MAXN), k, n
-    REAL(SP) d(MAXN), db(NB), f(MAXN), fb(NB), x(MAXN)
-    LOGICAL skip
+    INTEGER :: i, ierr, ifail, incfd, ismon(MAXN), k, n
+    REAL(SP) :: d(MAXN), db(NB), f(MAXN), fb(NB), x(MAXN)
+    LOGICAL :: skip
     !
     !  DEFINE EXPECTED RESULTS.
     !
@@ -1642,12 +1634,12 @@ CONTAINS
     INTEGER, PARAMETER :: ns(3) = [ 16, 8, 6 ]
     !
     !* FIRST EXECUTABLE STATEMENT  PCHQK4
-    IF ( Kprint>=3 ) WRITE (Lun,99001)
+    IF( Kprint>=3 ) WRITE (Lun,99001)
     !
     ! FORMATS.
     !
     99001 FORMAT ('1'//10X,'TEST PCHIP MONOTONICITY CHECKER')
-    IF ( Kprint>=2 ) WRITE (Lun,99002)
+    IF( Kprint>=2 ) WRITE (Lun,99002)
     99002 FORMAT (//10X,'PCHQK4 RESULTS'/10X,'--------------')
     !
     !       Define X, F, D.
@@ -1684,7 +1676,7 @@ CONTAINS
     !
     ifail = 0
     !
-    IF ( Kprint>=3 ) THEN
+    IF( Kprint>=3 ) THEN
       WRITE (Lun,99003)
       99003 FORMAT (//5X,'DATA:'//9X,'I',4X,'X',5X,'F',5X,'D',5X,'FB',4X,'DB')
       DO i = 1, NB
@@ -1707,28 +1699,28 @@ CONTAINS
       !        -------------------------------------------------
       CALL PCHCM(n,x,f,d,incfd,skip,ismon,ierr)
       !        -------------------------------------------------
-      IF ( Kprint>=3 ) WRITE (Lun,99004) incfd, ierr, (ismon(i),i=1,n)
+      IF( Kprint>=3 ) WRITE (Lun,99004) incfd, ierr, (ismon(i),i=1,n)
       99004 FORMAT (/4X,'INCFD =',I2,':  IERR =',I3/15X,'ISMON =',16I3)
-      IF ( ierr/=0 ) THEN
+      IF( ierr/=0 ) THEN
         ifail = ifail + 1
-        IF ( Kprint>=3 ) WRITE (Lun,99011)
+        IF( Kprint>=3 ) WRITE (Lun,99011)
       ELSE
         DO i = 1, n
-          IF ( incfd==1 ) THEN
-            IF ( ismon(i)/=ismex1(i) ) THEN
+          IF( incfd==1 ) THEN
+            IF( ismon(i)/=ismex1(i) ) THEN
               ifail = ifail + 1
-              IF ( Kprint>=3 ) WRITE (Lun,99012) (ismex1(k),k=1,n)
+              IF( Kprint>=3 ) WRITE (Lun,99012) (ismex1(k),k=1,n)
               EXIT
             END IF
-          ELSEIF ( incfd==2 ) THEN
-            IF ( ismon(i)/=ismex2(i) ) THEN
+          ELSEIF( incfd==2 ) THEN
+            IF( ismon(i)/=ismex2(i) ) THEN
               ifail = ifail + 1
-              IF ( Kprint>=3 ) WRITE (Lun,99012) (ismex2(k),k=1,n)
+              IF( Kprint>=3 ) WRITE (Lun,99012) (ismex2(k),k=1,n)
               EXIT
             END IF
-          ELSEIF ( ismon(i)/=ismex3(i) ) THEN
+          ELSEIF( ismon(i)/=ismex3(i) ) THEN
             ifail = ifail + 1
-            IF ( Kprint>=3 ) WRITE (Lun,99012) (ismex3(k),k=1,n)
+            IF( Kprint>=3 ) WRITE (Lun,99012) (ismex3(k),k=1,n)
             EXIT
           END IF
         END DO
@@ -1741,36 +1733,36 @@ CONTAINS
     !     ------------------------------------------------
     CALL PCHCM(NB,x,fb,db,1,skip,ismon,ierr)
     !     ------------------------------------------------
-    IF ( Kprint>=3 ) WRITE (Lun,99005) ierr, (ismon(i),i=1,NB)
+    IF( Kprint>=3 ) WRITE (Lun,99005) ierr, (ismon(i),i=1,NB)
     99005 FORMAT (/4X,' Bug test:  IERR =',I3/15X,'ISMON =',7I3)
-    IF ( ierr/=0 ) THEN
+    IF( ierr/=0 ) THEN
       ifail = ifail + 1
-      IF ( Kprint>=3 ) WRITE (Lun,99011)
+      IF( Kprint>=3 ) WRITE (Lun,99011)
     ELSE
       DO i = 1, NB
-        IF ( ismon(i)/=ismexb(i) ) THEN
+        IF( ismon(i)/=ismexb(i) ) THEN
           ifail = ifail + 1
-          IF ( Kprint>=3 ) WRITE (Lun,99012) (ismexb(k),k=1,NB)
+          IF( Kprint>=3 ) WRITE (Lun,99012) (ismexb(k),k=1,NB)
           EXIT
         END IF
       END DO
     END IF
     !
-    IF ( f(1)<0. ) THEN
+    IF( f(1)<0. ) THEN
       !
       !  PRINT SUMMARY AND TERMINATE.
       !
-      IF ( (Kprint>=2).AND.(ifail/=0) ) WRITE (Lun,99006) ifail
+      IF( (Kprint>=2) .AND. (ifail/=0) ) WRITE (Lun,99006) ifail
       99006 FORMAT (/' *** TROUBLE ***',I5,' MONOTONICITY TESTS FAILED.')
       !
-      IF ( ifail==0 ) THEN
+      IF( ifail==0 ) THEN
         Ipass = 1
-        IF ( Kprint>=2 ) WRITE (Lun,99007)
+        IF( Kprint>=2 ) WRITE (Lun,99007)
         99007 FORMAT (/' ------------  PCHIP PASSED  ALL MONOTONICITY TESTS',&
           ' ------------')
       ELSE
         Ipass = 0
-        IF ( Kprint>=1 ) WRITE (Lun,99008)
+        IF( Kprint>=1 ) WRITE (Lun,99008)
         99008 FORMAT (/' ************  PCHIP FAILED SOME MONOTONICITY TESTS',&
           ' ************')
       END IF
@@ -1780,23 +1772,23 @@ CONTAINS
       !
       !  Change sign and do again.
       !
-      IF ( Kprint>=3 ) WRITE (Lun,99009)
+      IF( Kprint>=3 ) WRITE (Lun,99009)
       99009 FORMAT (/4X,'Changing sign of data.....')
       DO i = 1, MAXN
         f(i) = -f(i)
         d(i) = -d(i)
-        IF ( ismex1(i)/=2 ) ismex1(i) = -ismex1(i)
+        IF( ismex1(i)/=2 ) ismex1(i) = -ismex1(i)
       END DO
       DO i = 1, MAXN2
-        IF ( ismex2(i)/=2 ) ismex2(i) = -ismex2(i)
+        IF( ismex2(i)/=2 ) ismex2(i) = -ismex2(i)
       END DO
       DO i = 1, MAXN3
-        IF ( ismex3(i)/=2 ) ismex3(i) = -ismex3(i)
+        IF( ismex3(i)/=2 ) ismex3(i) = -ismex3(i)
       END DO
       DO i = 1, NB
         fb(i) = -fb(i)
         db(i) = -db(i)
-        IF ( ismexb(i)/=2 ) ismexb(i) = -ismexb(i)
+        IF( ismexb(i)/=2 ) ismexb(i) = -ismexb(i)
       END DO
       GOTO 100
     END IF
@@ -1807,8 +1799,7 @@ CONTAINS
   END SUBROUTINE PCHQK4
   !** PCHQK5
   SUBROUTINE PCHQK5(Lun,Kprint,Ipass)
-    !>
-    !  Test the PCH to B-spline conversion routine PCHBS.
+    !> Test the PCH to B-spline conversion routine PCHBS.
     !***
     ! **Library:**   SLATEC (PCHIP)
     !***
@@ -1869,16 +1860,16 @@ CONTAINS
     !
     !  Declare arguments.
     !
-    INTEGER Lun, Kprint, Ipass
+    INTEGER :: Lun, Kprint, Ipass
     !
     !  Declare variables.
     !
-    INTEGER i, ierr, ifail, inbv, j, knotyp, k, ndim, nknots
+    INTEGER :: i, ierr, ifail, inbv, j, knotyp, k, ndim, nknots
     INTEGER, PARAMETER :: N = 9
-    REAL(SP) bcoef(2*N), dcalc, derr, dermax, fcalc, ferr, &
+    REAL(SP) :: bcoef(2*N), dcalc, derr, dermax, fcalc, ferr, &
       fermax, t(2*N+4), terr, termax, tol, tolz, tsave(2*N+4), work(16*N)
     REAL, PARAMETER :: ZERO = 0.0E0
-    LOGICAL fail
+    LOGICAL :: fail
     !
     !  Define test data.
     !
@@ -1896,35 +1887,35 @@ CONTAINS
     tol = 100*R1MACH(4)
     tolz = ZERO
     !
-    IF ( Kprint>=3 ) WRITE (Lun,99001)
+    IF( Kprint>=3 ) WRITE (Lun,99001)
     !
     ! FORMATS.
     !
     99001 FORMAT ('1'//10X,'TEST PCH TO B-SPLINE CONVERTER')
-    IF ( Kprint>=2 ) WRITE (Lun,99002)
+    IF( Kprint>=2 ) WRITE (Lun,99002)
     99002 FORMAT (//10X,'PCHQK5 RESULTS'/10X,'--------------')
     !
     !  Loop over a series of values of KNOTYP.
     !
-    IF ( Kprint>=3 ) WRITE (Lun,99003)
+    IF( Kprint>=3 ) WRITE (Lun,99003)
     99003 FORMAT (/4X,'(Results should be the same for all KNOTYP values.)')
     DO knotyp = 2, -1, -1
       !        ------------
       CALL PCHBS(N,x,f,d,1,knotyp,nknots,t,bcoef,ndim,k,ierr)
       !        ------------
-      IF ( Kprint>=3 ) WRITE (Lun,99004) knotyp, nknots, ndim, k, ierr
+      IF( Kprint>=3 ) WRITE (Lun,99004) knotyp, nknots, ndim, k, ierr
       99004 FORMAT (/4X,'KNOTYP =',I2,':  NKNOTS =',I3,',  NDIM =',I3,',  K =',I2,&
         ',  IERR =',I3)
-      IF ( ierr/=0 ) THEN
+      IF( ierr/=0 ) THEN
         ifail = ifail + 1
-        IF ( Kprint>=3 ) WRITE (Lun,99005)
+        IF( Kprint>=3 ) WRITE (Lun,99005)
         99005 FORMAT (' *** Failed -- bad IERR value.')
       ELSE
         !             Compare evaluated results with inputs to PCHBS.
         inbv = 1
         fermax = ZERO
         dermax = ZERO
-        IF ( Kprint>=3 ) THEN
+        IF( Kprint>=3 ) THEN
           WRITE (Lun,99006)
           99006 FORMAT (/15X,'X',9X,'KNOTS',10X,'F',7X,'FERR',8X,'D',7X,'DERR')
           WRITE (Lun,99013) t(1), t(2)
@@ -1937,40 +1928,40 @@ CONTAINS
           dcalc = BVALU(t,bcoef,ndim,k,1,x(i),inbv,work)
           derr = d(i) - dcalc
           dermax = MAX(dermax,RELERR(derr,d(i)))
-          IF ( Kprint>=3 ) THEN
+          IF( Kprint>=3 ) THEN
             j = j + 2
             WRITE (Lun,99007) x(i), t(j), t(j+1), f(i), ferr, d(i), derr
             99007 FORMAT (10X,3F8.2,F10.4,1P,E10.2,0P,F10.4,1P,E10.2)
           END IF
         END DO
-        IF ( Kprint>=3 ) THEN
+        IF( Kprint>=3 ) THEN
           j = j + 2
           WRITE (Lun,99013) t(j), t(j+1)
         END IF
         fail = (fermax>tol) .OR. (dermax>tol)
-        IF ( fail ) ifail = ifail + 1
-        IF ( (Kprint>=3).OR.(Kprint>=2).AND.fail ) WRITE (Lun,99008) fermax, &
+        IF( fail ) ifail = ifail + 1
+        IF( (Kprint>=3) .OR. (Kprint>=2) .AND. fail ) WRITE (Lun,99008) fermax, &
           dermax, tol
         99008 FORMAT (/5X,'Maximum relative errors:'/15X,'F-error =',1P,E13.5,5X,&
           'D-error =',E13.5/5X,'Both should be less than  TOL =',E13.5)
       END IF
       !
       !          Special check for KNOTYP=-1.
-      IF ( knotyp==0 ) THEN
+      IF( knotyp==0 ) THEN
         !             Save knot vector for next test.
         DO i = 1, nknots
           tsave(i) = t(i)
         END DO
-      ELSEIF ( knotyp==-1 ) THEN
+      ELSEIF( knotyp==-1 ) THEN
         !             Check that knot vector is unchanged.
         termax = ZERO
         DO i = 1, nknots
           terr = ABS(t(i)-tsave(i))
           termax = MAX(termax,terr)
         END DO
-        IF ( termax>tolz ) THEN
+        IF( termax>tolz ) THEN
           ifail = ifail + 1
-          IF ( Kprint>=2 ) WRITE (Lun,99009) termax, tolz
+          IF( Kprint>=2 ) WRITE (Lun,99009) termax, tolz
           99009 FORMAT (/' *** T-ARRAY MAXIMUM CHANGE =',1P,E13.5,&
             ';  SHOULD NOT EXCEED TOLZ =',E13.5)
         END IF
@@ -1979,17 +1970,17 @@ CONTAINS
     !
     !  PRINT SUMMARY AND TERMINATE.
     !
-    IF ( (Kprint>=2).AND.(ifail/=0) ) WRITE (Lun,99010) ifail
+    IF( (Kprint>=2) .AND. (ifail/=0) ) WRITE (Lun,99010) ifail
     99010 FORMAT (/' *** TROUBLE ***',I5,' CONVERSION TESTS FAILED.')
     !
-    IF ( ifail==0 ) THEN
+    IF( ifail==0 ) THEN
       Ipass = 1
-      IF ( Kprint>=2 ) WRITE (Lun,99011)
+      IF( Kprint>=2 ) WRITE (Lun,99011)
       99011 FORMAT (/' ------------  PCHIP PASSED  ALL CONVERSION TESTS',&
         ' ------------')
     ELSE
       Ipass = 0
-      IF ( Kprint>=1 ) WRITE (Lun,99012)
+      IF( Kprint>=1 ) WRITE (Lun,99012)
       99012 FORMAT (/' ************  PCHIP FAILED SOME CONVERSION TESTS',&
         ' ************')
     END IF
@@ -2013,8 +2004,7 @@ PROGRAM TEST32
   USE slatec, ONLY : I1MACH, XSETF, XSETUN, XERMAX
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
-  !>
-  !  Driver for testing SLATEC subprograms
+  !> Driver for testing SLATEC subprograms
   !***
   ! **Library:**   SLATEC
   !***
@@ -2064,7 +2054,7 @@ PROGRAM TEST32
   !   900321  Moved IPASS to call sequences for SLATEC standards.  (FNF)
   !   900524  Cosmetic changes to code.  (WRB)
   !   930318  Added new quick check PCHQK5.  (WRB,FNF)
-  INTEGER ipass, kprint, lin, lun, nfail
+  INTEGER :: ipass, kprint, lin, lun, nfail
   !* FIRST EXECUTABLE STATEMENT  TEST32
   lun = I1MACH(2)
   lin = I1MACH(1)
@@ -2075,7 +2065,7 @@ PROGRAM TEST32
   CALL GET_ARGUMENT(kprint)
   CALL XERMAX(1000)
   CALL XSETUN(lun)
-  IF ( kprint<=1 ) THEN
+  IF( kprint<=1 ) THEN
     CALL XSETF(0)
   ELSE
     CALL XSETF(1)
@@ -2084,31 +2074,31 @@ PROGRAM TEST32
   !     Test PCHIP evaluators
   !
   CALL PCHQK1(lun,kprint,ipass)
-  IF ( ipass==0 ) nfail = nfail + 1
+  IF( ipass==0 ) nfail = nfail + 1
   !
   !     Test PCHIP integrators
   !
   CALL PCHQK2(lun,kprint,ipass)
-  IF ( ipass==0 ) nfail = nfail + 1
+  IF( ipass==0 ) nfail = nfail + 1
   !
   !     Test PCHIP interpolators
   !
   CALL PCHQK3(lun,kprint,ipass)
-  IF ( ipass==0 ) nfail = nfail + 1
+  IF( ipass==0 ) nfail = nfail + 1
   !
   !     Test PCHIP monotonicity checker
   !
   CALL PCHQK4(lun,kprint,ipass)
-  IF ( ipass==0 ) nfail = nfail + 1
+  IF( ipass==0 ) nfail = nfail + 1
   !
   !     Test PCH to B-spline conversion.
   !
   CALL PCHQK5(lun,kprint,ipass)
-  IF ( ipass==0 ) nfail = nfail + 1
+  IF( ipass==0 ) nfail = nfail + 1
   !
   !     Write PASS or FAIL message
   !
-  IF ( nfail==0 ) THEN
+  IF( nfail==0 ) THEN
     WRITE (lun,99001)
     99001 FORMAT (/' --------------TEST32 PASSED ALL TESTS----------------')
   ELSE

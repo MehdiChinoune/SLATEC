@@ -1,7 +1,6 @@
 !** CGEFA
 SUBROUTINE CGEFA(A,Lda,N,Ipvt,Info)
-  !>
-  !  Factor a matrix using Gaussian elimination.
+  !> Factor a matrix using Gaussian elimination.
   !***
   ! **Library:**   SLATEC (LINPACK)
   !***
@@ -46,7 +45,7 @@ SUBROUTINE CGEFA(A,Lda,N,Ipvt,Info)
   !
   !        INFO    INTEGER
   !                = 0  normal value.
-  !                = K  if  U(K,K) .EQ. 0.0 .  This is not an error
+  !                = K  if  U(K,K) = 0.0 .  This is not an error
   !                     condition for this subroutine, but it does
   !                     indicate that CGESL or CGEDI will divide by zero
   !                     if called.  Use  RCOND  in CGECO for a reliable
@@ -79,7 +78,7 @@ SUBROUTINE CGEFA(A,Lda,N,Ipvt,Info)
   !* FIRST EXECUTABLE STATEMENT  CGEFA
   Info = 0
   nm1 = N - 1
-  IF ( nm1>=1 ) THEN
+  IF( nm1>=1 ) THEN
     DO k = 1, nm1
       kp1 = k + 1
       !
@@ -90,13 +89,13 @@ SUBROUTINE CGEFA(A,Lda,N,Ipvt,Info)
       !
       !        ZERO PIVOT IMPLIES THIS COLUMN ALREADY TRIANGULARIZED
       !
-      IF ( SCABS1(A(l,k))==0.0E0 ) THEN
+      IF( SCABS1(A(l,k))==0.0E0 ) THEN
         Info = k
       ELSE
         !
         !           INTERCHANGE IF NECESSARY
         !
-        IF ( l/=k ) THEN
+        IF( l/=k ) THEN
           t = A(l,k)
           A(l,k) = A(k,k)
           A(k,k) = t
@@ -111,7 +110,7 @@ SUBROUTINE CGEFA(A,Lda,N,Ipvt,Info)
         !
         DO j = kp1, N
           t = A(l,j)
-          IF ( l/=k ) THEN
+          IF( l/=k ) THEN
             A(l,j) = A(k,j)
             A(k,j) = t
           END IF
@@ -121,5 +120,5 @@ SUBROUTINE CGEFA(A,Lda,N,Ipvt,Info)
     END DO
   END IF
   Ipvt(N) = N
-  IF ( SCABS1(A(N,N))==0.0E0 ) Info = N
+  IF( SCABS1(A(N,N))==0.0E0 ) Info = N
 END SUBROUTINE CGEFA

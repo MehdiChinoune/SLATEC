@@ -2,8 +2,7 @@
 SUBROUTINE DSTEPS(DF,Neqn,Y,X,H,Eps,Wt,Start,Hold,K,Kold,Crash,Phi,P,Yp,&
     Psi,Alpha,Beta,Sig,V,W,G,Phase1,Ns,Nornd,Ksteps,Twou,&
     Fouru,Xold,Kprev,Ivc,Iv,Kgi,Gi)
-  !>
-  !  Integrate a system of first order ordinary differential
+  !> Integrate a system of first order ordinary differential
   !            equations one step.
   !***
   ! **Library:**   SLATEC (DEPAC)
@@ -109,7 +108,7 @@ SUBROUTINE DSTEPS(DF,Neqn,Y,X,H,Eps,Wt,Start,Hold,K,Kold,Crash,Phi,P,Yp,&
   !   Define U to be the machine unit roundoff quantity by calling
   !   the function routine  D1MACH,  U = D1MACH(4), or by
   !   computing U so that U is the smallest positive number such
-  !   that 1.0+U .GT. 1.0.
+  !   that 1.0+U > 1.0.
   !
   !   DSTEPS  requires that the L2 norm of the vector with components
   !   LOCAL ERROR(L)/WT(L)  be less than  EPS  for a successful step.  The
@@ -214,7 +213,7 @@ SUBROUTINE DSTEPS(DF,Neqn,Y,X,H,Eps,Wt,Start,Hold,K,Kold,Crash,Phi,P,Yp,&
   !
   !* FIRST EXECUTABLE STATEMENT  DSTEPS
   Crash = .TRUE.
-  IF ( ABS(H)>=Fouru*ABS(X) ) THEN
+  IF( ABS(H)>=Fouru*ABS(X) ) THEN
     p5eps = 0.5D0*Eps
     !
     !   IF ERROR TOLERANCE IS TOO SMALL, INCREASE IT TO AN ACCEPTABLE VALUE
@@ -224,12 +223,12 @@ SUBROUTINE DSTEPS(DF,Neqn,Y,X,H,Eps,Wt,Start,Hold,K,Kold,Crash,Phi,P,Yp,&
       round = round + (Y(l)/Wt(l))**2
     END DO
     round = Twou*SQRT(round)
-    IF ( p5eps>=round ) THEN
+    IF( p5eps>=round ) THEN
       Crash = .FALSE.
       G(1) = 1.0D0
       G(2) = 0.5D0
       Sig(1) = 1.0D0
-      IF ( Start ) THEN
+      IF( Start ) THEN
         !
         !   INITIALIZE.  COMPUTE APPROPRIATE STEP SIZE FOR FIRST STEP
         !
@@ -242,7 +241,7 @@ SUBROUTINE DSTEPS(DF,Neqn,Y,X,H,Eps,Wt,Start,Hold,K,Kold,Crash,Phi,P,Yp,&
         !20     SUM = SUM + (YP(L)/WT(L))**2
         !     SUM = SQRT(SUM)
         !     ABSH = ABS(H)
-        !     IF(EPS .LT. 16.0*SUM*H*H) ABSH = 0.25*SQRT(EPS/SUM)
+        !     IF(EPS < 16.0*SUM*H*H) ABSH = 0.25*SQRT(EPS/SUM)
         !     H = SIGN(MAX(ABSH,FOURU*ABS(X)),H)
         !
         u = D1MACH(4)
@@ -257,7 +256,7 @@ SUBROUTINE DSTEPS(DF,Neqn,Y,X,H,Eps,Wt,Start,Hold,K,Kold,Crash,Phi,P,Yp,&
         Start = .FALSE.
         Phase1 = .TRUE.
         Nornd = .TRUE.
-        IF ( p5eps<=100.0D0*round ) THEN
+        IF( p5eps<=100.0D0*round ) THEN
           Nornd = .FALSE.
           DO l = 1, Neqn
             Phi(l,15) = 0.0D0
@@ -286,12 +285,12 @@ SUBROUTINE DSTEPS(DF,Neqn,Y,X,H,Eps,Wt,Start,Hold,K,Kold,Crash,Phi,P,Yp,&
   km2 = K - 2
   !
   !   NS IS THE NUMBER OF DSTEPS TAKEN WITH SIZE H, INCLUDING THE CURRENT
-  !   ONE.  WHEN K.LT.NS, NO COEFFICIENTS CHANGE
+  !   ONE.  WHEN K<NS, NO COEFFICIENTS CHANGE
   !
-  IF ( H/=Hold ) Ns = 0
-  IF ( Ns<=Kold ) Ns = Ns + 1
+  IF( H/=Hold ) Ns = 0
+  IF( Ns<=Kold ) Ns = Ns + 1
   nsp1 = Ns + 1
-  IF ( K>=Ns ) THEN
+  IF( K>=Ns ) THEN
     !
     !   COMPUTE THOSE COMPONENTS OF ALPHA(*),BETA(*),PSI(*),SIG(*) WHICH
     !   ARE CHANGED
@@ -301,7 +300,7 @@ SUBROUTINE DSTEPS(DF,Neqn,Y,X,H,Eps,Wt,Start,Hold,K,Kold,Crash,Phi,P,Yp,&
     Alpha(Ns) = 1.0D0/realns
     temp1 = H*realns
     Sig(nsp1) = 1.0D0
-    IF ( K>=nsp1 ) THEN
+    IF( K>=nsp1 ) THEN
       DO i = nsp1, K
         im1 = i - 1
         temp2 = Psi(im1)
@@ -319,17 +318,17 @@ SUBROUTINE DSTEPS(DF,Neqn,Y,X,H,Eps,Wt,Start,Hold,K,Kold,Crash,Phi,P,Yp,&
     !
     !   INITIALIZE V(*) AND SET W(*).
     !
-    IF ( Ns>1 ) THEN
+    IF( Ns>1 ) THEN
       !
       !   IF ORDER WAS RAISED, UPDATE DIAGONAL PART OF V(*)
       !
-      IF ( K>Kprev ) THEN
-        IF ( Ivc==0 ) THEN
+      IF( K>Kprev ) THEN
+        IF( Ivc==0 ) THEN
           jv = 1
           temp4 = K*kp1
           V(K) = 1.0D0/temp4
           W(K) = V(K)
-          IF ( K==2 ) THEN
+          IF( K==2 ) THEN
             Kgi = 1
             Gi(1) = W(2)
           END IF
@@ -338,13 +337,13 @@ SUBROUTINE DSTEPS(DF,Neqn,Y,X,H,Eps,Wt,Start,Hold,K,Kold,Crash,Phi,P,Yp,&
           Ivc = Ivc - 1
         END IF
         nsm2 = Ns - 2
-        IF ( nsm2>=jv ) THEN
+        IF( nsm2>=jv ) THEN
           DO j = jv, nsm2
             i = K - j
             V(i) = V(i) - Alpha(j+1)*V(i+1)
             W(i) = V(i)
           END DO
-          IF ( i==2 ) THEN
+          IF( i==2 ) THEN
             Kgi = Ns - 1
             Gi(Kgi) = W(2)
           END IF
@@ -360,12 +359,12 @@ SUBROUTINE DSTEPS(DF,Neqn,Y,X,H,Eps,Wt,Start,Hold,K,Kold,Crash,Phi,P,Yp,&
         W(iq) = V(iq)
       END DO
       G(nsp1) = W(1)
-      IF ( limit1/=1 ) THEN
+      IF( limit1/=1 ) THEN
         Kgi = Ns
         Gi(Kgi) = W(2)
       END IF
       W(limit1+1) = V(limit1+1)
-      IF ( K<Kold ) THEN
+      IF( K<Kold ) THEN
         Ivc = Ivc + 1
         Iv(Ivc) = limit1 + 2
       END IF
@@ -377,7 +376,7 @@ SUBROUTINE DSTEPS(DF,Neqn,Y,X,H,Eps,Wt,Start,Hold,K,Kold,Crash,Phi,P,Yp,&
       END DO
       Ivc = 0
       Kgi = 0
-      IF ( K/=1 ) THEN
+      IF( K/=1 ) THEN
         Kgi = 1
         Gi(1) = W(2)
       END IF
@@ -387,7 +386,7 @@ SUBROUTINE DSTEPS(DF,Neqn,Y,X,H,Eps,Wt,Start,Hold,K,Kold,Crash,Phi,P,Yp,&
     !
     nsp2 = Ns + 2
     Kprev = K
-    IF ( kp1>=nsp2 ) THEN
+    IF( kp1>=nsp2 ) THEN
       DO i = nsp2, kp1
         limit2 = kp2 - i
         temp6 = Alpha(i-1)
@@ -412,7 +411,7 @@ SUBROUTINE DSTEPS(DF,Neqn,Y,X,H,Eps,Wt,Start,Hold,K,Kold,Crash,Phi,P,Yp,&
   !
   !   CHANGE PHI TO PHI STAR
   !
-  IF ( K>=nsp1 ) THEN
+  IF( K>=nsp1 ) THEN
     DO i = nsp1, K
       temp1 = Beta(i)
       DO l = 1, Neqn
@@ -437,7 +436,7 @@ SUBROUTINE DSTEPS(DF,Neqn,Y,X,H,Eps,Wt,Start,Hold,K,Kold,Crash,Phi,P,Yp,&
       Phi(l,i) = Phi(l,i) + Phi(l,ip1)
     END DO
   END DO
-  IF ( Nornd ) THEN
+  IF( Nornd ) THEN
     DO l = 1, Neqn
       P(l) = Y(l) + H*P(l)
     END DO
@@ -461,13 +460,13 @@ SUBROUTINE DSTEPS(DF,Neqn,Y,X,H,Eps,Wt,Start,Hold,K,Kold,Crash,Phi,P,Yp,&
   DO l = 1, Neqn
     temp3 = 1.0D0/Wt(l)
     temp4 = Yp(l) - Phi(l,1)
-    IF ( km2<0 ) GOTO 150
-    IF ( km2/=0 ) erkm2 = erkm2 + ((Phi(l,km1)+temp4)*temp3)**2
+    IF( km2<0 ) GOTO 150
+    IF( km2/=0 ) erkm2 = erkm2 + ((Phi(l,km1)+temp4)*temp3)**2
     erkm1 = erkm1 + ((Phi(l,K)+temp4)*temp3)**2
     150  erk = erk + (temp4*temp3)**2
   END DO
-  IF ( km2<0 ) GOTO 200
-  IF ( km2/=0 ) erkm2 = absh*Sig(km1)*gstr(km2)*SQRT(erkm2)
+  IF( km2<0 ) GOTO 200
+  IF( km2/=0 ) erkm2 = absh*Sig(km1)*gstr(km2)*SQRT(erkm2)
   erkm1 = absh*Sig(K)*gstr(km1)*SQRT(erkm1)
   200  temp5 = absh*SQRT(erk)
   err = temp5*(G(K)-G(kp1))
@@ -476,16 +475,16 @@ SUBROUTINE DSTEPS(DF,Neqn,Y,X,H,Eps,Wt,Start,Hold,K,Kold,Crash,Phi,P,Yp,&
   !
   !   TEST IF ORDER SHOULD BE LOWERED
   !
-  IF ( km2<0 ) THEN
-  ELSEIF ( km2==0 ) THEN
-    IF ( erkm1<=0.5D0*erk ) knew = km1
+  IF( km2<0 ) THEN
+  ELSEIF( km2==0 ) THEN
+    IF( erkm1<=0.5D0*erk ) knew = km1
   ELSE
-    IF ( MAX(erkm1,erkm2)<=erk ) knew = km1
+    IF( MAX(erkm1,erkm2)<=erk ) knew = km1
   END IF
   !
   !   TEST IF STEP SUCCESSFUL
   !
-  IF ( err<=Eps ) THEN
+  IF( err<=Eps ) THEN
     !       ***     END BLOCK 3     ***
     !
     !       ***     BEGIN BLOCK 4     ***
@@ -499,7 +498,7 @@ SUBROUTINE DSTEPS(DF,Neqn,Y,X,H,Eps,Wt,Start,Hold,K,Kold,Crash,Phi,P,Yp,&
     !   CORRECT AND EVALUATE
     !
     temp1 = H*G(kp1)
-    IF ( Nornd ) THEN
+    IF( Nornd ) THEN
       DO l = 1, Neqn
         temp3 = Y(l)
         Y(l) = P(l) + temp1*(Yp(l)-Phi(l,1))
@@ -534,10 +533,10 @@ SUBROUTINE DSTEPS(DF,Neqn,Y,X,H,Eps,Wt,Start,Hold,K,Kold,Crash,Phi,P,Yp,&
     !     STEP SIZE NOT CONSTANT SO ESTIMATE UNRELIABLE
     !
     erkp1 = 0.0D0
-    IF ( knew==km1.OR.K==12 ) Phase1 = .FALSE.
-    IF ( .NOT.(Phase1) ) THEN
-      IF ( knew==km1 ) GOTO 300
-      IF ( kp1>Ns ) GOTO 400
+    IF( knew==km1 .OR. K==12 ) Phase1 = .FALSE.
+    IF( .NOT. (Phase1) ) THEN
+      IF( knew==km1 ) GOTO 300
+      IF( kp1>Ns ) GOTO 400
       DO l = 1, Neqn
         erkp1 = erkp1 + (Phi(l,kp2)/Wt(l))**2
       END DO
@@ -546,15 +545,15 @@ SUBROUTINE DSTEPS(DF,Neqn,Y,X,H,Eps,Wt,Start,Hold,K,Kold,Crash,Phi,P,Yp,&
       !   USING ESTIMATED ERROR AT ORDER K+1, DETERMINE APPROPRIATE ORDER
       !   FOR NEXT STEP
       !
-      IF ( K>1 ) THEN
-        IF ( erkm1<=MIN(erk,erkp1) ) GOTO 300
-        IF ( erkp1>=erk.OR.K==12 ) GOTO 400
-      ELSEIF ( erkp1>=0.5D0*erk ) THEN
+      IF( K>1 ) THEN
+        IF( erkm1<=MIN(erk,erkp1) ) GOTO 300
+        IF( erkp1>=erk .OR. K==12 ) GOTO 400
+      ELSEIF( erkp1>=0.5D0*erk ) THEN
         GOTO 400
       END IF
     END IF
     !
-    !   HERE ERKP1 .LT. ERK .LT. MAX(ERKM1,ERKM2) ELSE ORDER WOULD HAVE
+    !   HERE ERKP1 < ERK < MAX(ERKM1,ERKM2) ELSE ORDER WOULD HAVE
     !   BEEN LOWERED IN BLOCK 2.  THUS ORDER IS TO BE RAISED
     !
     !   RAISE ORDER
@@ -584,7 +583,7 @@ SUBROUTINE DSTEPS(DF,Neqn,Y,X,H,Eps,Wt,Start,Hold,K,Kold,Crash,Phi,P,Yp,&
         Phi(l,i) = temp1*(Phi(l,i)-Phi(l,ip1))
       END DO
     END DO
-    IF ( K>=2 ) THEN
+    IF( K>=2 ) THEN
       DO i = 2, K
         Psi(i-1) = Psi(i) - H
       END DO
@@ -595,15 +594,15 @@ SUBROUTINE DSTEPS(DF,Neqn,Y,X,H,Eps,Wt,Start,Hold,K,Kold,Crash,Phi,P,Yp,&
     !
     ifail = ifail + 1
     temp2 = 0.5D0
-    IF ( ifail<3 ) GOTO 250
-    IF ( ifail/=3 ) THEN
-      IF ( p5eps<0.25D0*erk ) temp2 = SQRT(p5eps/erk)
+    IF( ifail<3 ) GOTO 250
+    IF( ifail/=3 ) THEN
+      IF( p5eps<0.25D0*erk ) temp2 = SQRT(p5eps/erk)
     END IF
     knew = 1
     250  H = temp2*H
     K = knew
     Ns = 0
-    IF ( ABS(H)>=Fouru*ABS(X) ) GOTO 100
+    IF( ABS(H)>=Fouru*ABS(X) ) GOTO 100
     Crash = .TRUE.
     H = SIGN(Fouru*ABS(X),H)
     Eps = Eps + Eps
@@ -618,10 +617,10 @@ SUBROUTINE DSTEPS(DF,Neqn,Y,X,H,Eps,Wt,Start,Hold,K,Kold,Crash,Phi,P,Yp,&
   !   WITH NEW ORDER DETERMINE APPROPRIATE STEP SIZE FOR NEXT STEP
   !
   400  hnew = H + H
-  IF ( .NOT.(Phase1) ) THEN
-    IF ( p5eps<erk*two(K+1) ) THEN
+  IF( .NOT. (Phase1) ) THEN
+    IF( p5eps<erk*two(K+1) ) THEN
       hnew = H
-      IF ( p5eps<erk ) THEN
+      IF( p5eps<erk ) THEN
         temp2 = K + 1
         r = (p5eps/erk)**(1.0D0/temp2)
         hnew = absh*MAX(0.5D0,MIN(0.9D0,r))

@@ -1,8 +1,7 @@
 !** DPINIT
 SUBROUTINE DPINIT(Mrelas,Nvars,Costs,Bl,Bu,Ind,Primal,Amat,Csc,&
     Costsc,Colnrm,Xlamda,Anorm,Rhs,Rhsnrm,Ibasis,Ibb,Imat,Lopt)
-  !>
-  !  Subsidiary to DSPLP
+  !> Subsidiary to DSPLP
   !***
   ! **Library:**   SLATEC
   !***
@@ -60,18 +59,18 @@ SUBROUTINE DPINIT(Mrelas,Nvars,Costs,Bl,Bu,Ind,Primal,Amat,Csc,&
   !     PROCEDURE (SCALE DATA. NORMALIZE BOUNDS. FORM COLUMN CHECK SUMS)
   !
   !     DO COLUMN SCALING IF NOT PROVIDED BY THE USER.
-  IF ( .NOT.colscp ) THEN
+  IF( .NOT. colscp ) THEN
     j = 1
     n20007 = Nvars
-    DO WHILE ( (n20007-j)>=0 )
+    DO WHILE( (n20007-j)>=0 )
       cmax = zero
       i = 0
       DO
         CALL DPNNZR(i,aij,iplace,Amat,Imat,j)
-        IF ( i/=0 ) THEN
+        IF( i/=0 ) THEN
           cmax = MAX(cmax,ABS(aij))
         ELSE
-          IF ( cmax/=zero ) THEN
+          IF( cmax/=zero ) THEN
             Csc(j) = one/cmax
           ELSE
             Csc(j) = one
@@ -87,17 +86,17 @@ SUBROUTINE DPINIT(Mrelas,Nvars,Costs,Bl,Bu,Ind,Primal,Amat,Csc,&
   Anorm = zero
   j = 1
   n20019 = Nvars
-  DO WHILE ( (n20019-j)>=0 )
+  DO WHILE( (n20019-j)>=0 )
     Primal(j) = zero
     csum = zero
     i = 0
     DO
       CALL DPNNZR(i,aij,iplace,Amat,Imat,j)
-      IF ( i>0 ) THEN
+      IF( i>0 ) THEN
         Primal(j) = Primal(j) + aij
         csum = csum + ABS(aij)
       ELSE
-        IF ( Ind(j)==2 ) Csc(j) = -Csc(j)
+        IF( Ind(j)==2 ) Csc(j) = -Csc(j)
         Primal(j) = Primal(j)*Csc(j)
         Colnrm(j) = ABS(Csc(j)*csum)
         Anorm = MAX(Anorm,Colnrm(j))
@@ -112,23 +111,23 @@ SUBROUTINE DPINIT(Mrelas,Nvars,Costs,Bl,Bu,Ind,Primal,Amat,Csc,&
   testsc = zero
   j = 1
   n20028 = Nvars
-  DO WHILE ( (n20028-j)>=0 )
+  DO WHILE( (n20028-j)>=0 )
     testsc = MAX(testsc,ABS(Csc(j)*Costs(j)))
     j = j + 1
   END DO
-  IF ( .NOT.cstscp ) THEN
-    IF ( testsc<=zero ) THEN
+  IF( .NOT. cstscp ) THEN
+    IF( testsc<=zero ) THEN
       Costsc = one
     ELSE
       Costsc = one/testsc
     END IF
   END IF
   Xlamda = (Costsc+Costsc)*testsc
-  IF ( Xlamda==zero ) Xlamda = one
+  IF( Xlamda==zero ) Xlamda = one
   !
   !     IF MAXIMIZATION PROBLEM, THEN CHANGE SIGN OF COSTSC AND LAMDA
   !     =WEIGHT FOR PENALTY-FEASIBILITY METHOD.
-  IF ( .NOT.minprb ) Costsc = -Costsc
+  IF( .NOT. minprb ) Costsc = -Costsc
   !:CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
   !     PROCEDURE (INITIALIZE RHS(*),IBASIS(*), AND IBB(*))
   !
@@ -138,23 +137,23 @@ SUBROUTINE DPINIT(Mrelas,Nvars,Costs,Bl,Bu,Ind,Primal,Amat,Csc,&
   !     TRANSLATE RHS ACCORDING TO CLASSIFICATION OF INDEPENDENT VARIABLES
   j = 1
   n20041 = Nvars
-  DO WHILE ( (n20041-j)>=0 )
-    IF ( Ind(j)==1 ) THEN
+  DO WHILE( (n20041-j)>=0 )
+    IF( Ind(j)==1 ) THEN
       scalr = -Bl(j)
-    ELSEIF ( Ind(j)==2 ) THEN
+    ELSEIF( Ind(j)==2 ) THEN
       scalr = -Bu(j)
-    ELSEIF ( Ind(j)==3 ) THEN
+    ELSEIF( Ind(j)==3 ) THEN
       scalr = -Bl(j)
-    ELSEIF ( Ind(j)==4 ) THEN
+    ELSEIF( Ind(j)==4 ) THEN
       scalr = zero
     END IF
-    IF ( scalr==zero ) THEN
+    IF( scalr==zero ) THEN
       j = j + 1
     ELSE
       i = 0
       DO
         CALL DPNNZR(i,aij,iplace,Amat,Imat,j)
-        IF ( i>0 ) THEN
+        IF( i>0 ) THEN
           Rhs(i) = scalr*aij + Rhs(i)
         ELSE
           j = j + 1
@@ -167,14 +166,14 @@ SUBROUTINE DPINIT(Mrelas,Nvars,Costs,Bl,Bu,Ind,Primal,Amat,Csc,&
   !     TRANSLATE RHS ACCORDING TO CLASSIFICATION OF DEPENDENT VARIABLES.
   i = Nvars + 1
   n20056 = Nvars + Mrelas
-  DO WHILE ( (n20056-i)>=0 )
-    IF ( Ind(i)==1 ) THEN
+  DO WHILE( (n20056-i)>=0 )
+    IF( Ind(i)==1 ) THEN
       scalr = Bl(i)
-    ELSEIF ( Ind(i)==2 ) THEN
+    ELSEIF( Ind(i)==2 ) THEN
       scalr = Bu(i)
-    ELSEIF ( Ind(i)==3 ) THEN
+    ELSEIF( Ind(i)==3 ) THEN
       scalr = Bl(i)
-    ELSEIF ( Ind(i)==4 ) THEN
+    ELSEIF( Ind(i)==4 ) THEN
       scalr = zero
     END IF
     Rhs(i-Nvars) = Rhs(i-Nvars) + scalr
@@ -185,10 +184,10 @@ SUBROUTINE DPINIT(Mrelas,Nvars,Costs,Bl,Bu,Ind,Primal,Amat,Csc,&
   !     IF THIS IS NOT A CONTINUATION OR THE USER HAS NOT PROVIDED THE
   !     INITIAL BASIS, THEN THE INITIAL BASIS IS COMPRISED OF THE
   !     DEPENDENT VARIABLES.
-  IF ( .NOT.(contin.OR.usrbas) ) THEN
+  IF( .NOT. (contin .OR. usrbas) ) THEN
     j = 1
     n20066 = Mrelas
-    DO WHILE ( (n20066-j)>=0 )
+    DO WHILE( (n20066-j)>=0 )
       Ibasis(j) = Nvars + j
       j = j + 1
     END DO
@@ -197,13 +196,13 @@ SUBROUTINE DPINIT(Mrelas,Nvars,Costs,Bl,Bu,Ind,Primal,Amat,Csc,&
   !     DEFINE THE ARRAY IBB(*)
   j = 1
   n20070 = Nvars + Mrelas
-  DO WHILE ( (n20070-j)>=0 )
+  DO WHILE( (n20070-j)>=0 )
     Ibb(j) = 1
     j = j + 1
   END DO
   j = 1
   n20074 = Mrelas
-  DO WHILE ( (n20074-j)>=0 )
+  DO WHILE( (n20074-j)>=0 )
     Ibb(Ibasis(j)) = -1
     j = j + 1
   END DO
@@ -212,8 +211,8 @@ SUBROUTINE DPINIT(Mrelas,Nvars,Costs,Bl,Bu,Ind,Primal,Amat,Csc,&
   ip = Mrelas
   j = 1
   n20078 = Nvars + Mrelas
-  DO WHILE ( (n20078-j)>=0 )
-    IF ( Ibb(j)>0 ) THEN
+  DO WHILE( (n20078-j)>=0 )
+    IF( Ibb(j)>0 ) THEN
       ip = ip + 1
       Ibasis(ip) = j
     END IF

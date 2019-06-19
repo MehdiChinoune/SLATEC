@@ -1,7 +1,6 @@
 !** DBSYNU
 SUBROUTINE DBSYNU(X,Fnu,N,Y)
-  !>
-  !  Subsidiary to DBESY
+  !> Subsidiary to DBESY
   !***
   ! **Library:**   SLATEC
   !***
@@ -20,12 +19,12 @@ SUBROUTINE DBSYNU(X,Fnu,N,Y)
   !         generates higher orders FNU+I-1, I=1,...,N.
   !
   !         To start the recursion FNU is normalized to the interval
-  !         -0.5.LE.DNU.LT.0.5. A special form of the power series is
-  !         implemented on 0.LT.X.LE.X1 while the Miller algorithm for the
+  !         -0.5<=DNU<0.5. A special form of the power series is
+  !         implemented on 0<X<=X1 while the Miller algorithm for the
   !         K Bessel function in terms of the confluent hypergeometric
-  !         function U(FNU+0.5,2*FNU+1,I*X) is implemented on X1.LT.X.LE.X
+  !         function U(FNU+0.5,2*FNU+1,I*X) is implemented on X1<X<=X
   !         Here I is the complex number SQRT(-1.).
-  !         For X.GT.X2, the asymptotic expansion for large X is used.
+  !         For X>X2, the asymptotic expansion for large X is used.
   !         When FNU is a half odd integer, a special formula for
   !         DNU=-0.5 and DNU+1.0=0.5 is used to start the recursion.
   !
@@ -39,9 +38,9 @@ SUBROUTINE DBSYNU(X,Fnu,N,Y)
   !     Description of Arguments
   !
   !         INPUT
-  !           X      - X.GT.0.0D0
-  !           FNU    - Order of initial Y function, FNU.GE.0.0D0
-  !           N      - Number of members of the sequence, N.GE.1
+  !           X      - X>0.0D0
+  !           FNU    - Order of initial Y function, FNU>=0.0D0
+  !           N      - Number of members of the sequence, N>=1
   !
   !         OUTPUT
   !           Y      - A vector whose first N components contain values
@@ -94,22 +93,22 @@ SUBROUTINE DBSYNU(X,Fnu,N,Y)
   ak = D1MACH(3)
   tol = MAX(ak,1.0D-15)
   s2 = 0.D0
-  IF ( X<=0.0D0 ) THEN
+  IF( X<=0.0D0 ) THEN
     !
     !
     CALL XERMSG('DBSYNU','X NOT GREATER THAN ZERO',2,1)
     RETURN
-  ELSEIF ( Fnu<0.0D0 ) THEN
+  ELSEIF( Fnu<0.0D0 ) THEN
     CALL XERMSG('DBSYNU','FNU NOT ZERO OR POSITIVE',2,1)
     RETURN
-  ELSEIF ( N<1 ) THEN
+  ELSEIF( N<1 ) THEN
     CALL XERMSG('DBSYNU','N NOT GREATER THAN 0',2,1)
     RETURN
   ELSE
     rx = 2.0D0/X
     inu = INT(Fnu+0.5D0)
     dnu = Fnu - inu
-    IF ( ABS(dnu)==0.5D0 ) THEN
+    IF( ABS(dnu)==0.5D0 ) THEN
       !
       !     FNU=HALF ODD INTEGER CASE
       !
@@ -118,18 +117,18 @@ SUBROUTINE DBSYNU(X,Fnu,N,Y)
       s2 = -coef*COS(X)
     ELSE
       dnu2 = 0.0D0
-      IF ( ABS(dnu)>=tol ) dnu2 = dnu*dnu
-      IF ( X>x1 ) THEN
+      IF( ABS(dnu)>=tol ) dnu2 = dnu*dnu
+      IF( X>x1 ) THEN
         coef = rthpi/SQRT(X)
-        IF ( X>x2 ) THEN
+        IF( X>x2 ) THEN
           !
-          !     ASYMPTOTIC EXPANSION FOR LARGE X, X.GT.X2
+          !     ASYMPTOTIC EXPANSION FOR LARGE X, X>X2
           !
           nn = 2
-          IF ( inu==0.AND.N==1 ) nn = 1
+          IF( inu==0 .AND. N==1 ) nn = 1
           dnu2 = dnu + dnu
           fmu = 0.0D0
-          IF ( ABS(dnu2)>=tol ) fmu = dnu2*dnu2
+          IF( ABS(dnu2)>=tol ) fmu = dnu2*dnu2
           arg = X - hpi*(dnu+0.5D0)
           sa = SIN(arg)
           sb = COS(arg)
@@ -154,7 +153,7 @@ SUBROUTINE DBSYNU(X,Fnu,N,Y)
               fn = fn + ak
               t2 = t2*(fmu-fn)/t1
               ss = ss + t2
-              IF ( ABS(t2)<=relb ) EXIT
+              IF( ABS(t2)<=relb ) EXIT
             END DO
             s2 = coef*(s*sa+ss*sb)
             fmu = fmu + 8.0D0*dnu + 4.0D0
@@ -162,13 +161,13 @@ SUBROUTINE DBSYNU(X,Fnu,N,Y)
             sa = -sb
             sb = tb
           END DO
-          IF ( nn<=1 ) THEN
+          IF( nn<=1 ) THEN
             s1 = s2
             GOTO 100
           END IF
         ELSE
           !
-          !     MILLER ALGORITHM FOR X1.LT.X.LE.X2
+          !     MILLER ALGORITHM FOR X1<X<=X2
           !
           etest = COS(pi*dnu)/(pi*X*tol)
           fks = 1.0D0
@@ -203,7 +202,7 @@ SUBROUTINE DBSYNU(X,Fnu,N,Y)
             pt = MAX(ABS(rp1),ABS(cp1))
             fc = (rp1/pt)**2 + (cp1/pt)**2
             pt = pt*SQRT(fc)*fk
-            IF ( etest<=pt ) THEN
+            IF( etest<=pt ) THEN
               kk = k
               rs = 1.0D0
               cs = 0.0D0
@@ -231,7 +230,7 @@ SUBROUTINE DBSYNU(X,Fnu,N,Y)
               p = COS(fc)
               q = SIN(fc)
               s1 = (cs1*q-rs1*p)*coef
-              IF ( inu>0.OR.N>1 ) THEN
+              IF( inu>0 .OR. N>1 ) THEN
                 pt = MAX(ABS(rp2),ABS(cp2))
                 fc = (rp2/pt)**2 + (cp2/pt)**2
                 pt = pt*SQRT(fc)
@@ -250,13 +249,13 @@ SUBROUTINE DBSYNU(X,Fnu,N,Y)
         END IF
       ELSE
         !
-        !     SERIES FOR X.LE.X1
+        !     SERIES FOR X<=X1
         !
         a1 = 1.0D0 - dnu
         a2 = 1.0D0 + dnu
         t1 = 1.0D0/GAMMA(a1)
         t2 = 1.0D0/GAMMA(a2)
-        IF ( ABS(dnu)>0.1D0 ) THEN
+        IF( ABS(dnu)>0.1D0 ) THEN
           g1 = (t1-t2)/dnu
         ELSE
           !     SERIES FOR F0 TO RESOLVE INDETERMINACY FOR SMALL ABS(DNU)
@@ -266,7 +265,7 @@ SUBROUTINE DBSYNU(X,Fnu,N,Y)
             ak = ak*dnu2
             tm = cc(k)*ak
             s = s + tm
-            IF ( ABS(tm)<tol ) EXIT
+            IF( ABS(tm)<tol ) EXIT
           END DO
           g1 = -(s+s)
         END IF
@@ -276,11 +275,11 @@ SUBROUTINE DBSYNU(X,Fnu,N,Y)
         flrx = LOG(rx)
         fmu = dnu*flrx
         tm = 0.0D0
-        IF ( dnu/=0.0D0 ) THEN
+        IF( dnu/=0.0D0 ) THEN
           tm = SIN(dnu*hpi)/dnu
           tm = (dnu+dnu)*tm*tm
           fc = dnu/SIN(dnu*pi)
-          IF ( fmu/=0.0D0 ) smu = SINH(fmu)/fmu
+          IF( fmu/=0.0D0 ) smu = SINH(fmu)/fmu
         END IF
         f = fc*(g1*COSH(fmu)+g2*flrx*smu)
         fx = EXP(fmu)
@@ -292,8 +291,8 @@ SUBROUTINE DBSYNU(X,Fnu,N,Y)
         bk = 1.0D0
         s1 = g
         s2 = p
-        IF ( inu>0.OR.N>1 ) THEN
-          IF ( X>=tol ) THEN
+        IF( inu>0 .OR. N>1 ) THEN
+          IF( X>=tol ) THEN
             cx = X*X*0.25D0
             DO
               f = (ak*f+p+q)/(bk-dnu2)
@@ -308,13 +307,13 @@ SUBROUTINE DBSYNU(X,Fnu,N,Y)
               bk = bk + ak + ak + 1.0D0
               ak = ak + 1.0D0
               s = ABS(t1)/(1.0D0+ABS(s1)) + ABS(t2)/(1.0D0+ABS(s2))
-              IF ( s<=tol ) EXIT
+              IF( s<=tol ) EXIT
             END DO
           END IF
           s2 = -s2*rx
           s1 = -s1
         ELSE
-          IF ( X>=tol ) THEN
+          IF( X>=tol ) THEN
             cx = X*X*0.25D0
             DO
               f = (ak*f+p+q)/(bk-dnu2)
@@ -327,7 +326,7 @@ SUBROUTINE DBSYNU(X,Fnu,N,Y)
               bk = bk + ak + ak + 1.0D0
               ak = ak + 1.0D0
               s = ABS(t1)/(1.0D0+ABS(s1))
-              IF ( s<=tol ) EXIT
+              IF( s<=tol ) EXIT
             END DO
           END IF
           Y(1) = -s1
@@ -339,23 +338,23 @@ SUBROUTINE DBSYNU(X,Fnu,N,Y)
     !     FORWARD RECURSION ON THE THREE TERM RECURSION RELATION
     !
     ck = (dnu+dnu+2.0D0)/X
-    IF ( N==1 ) inu = inu - 1
-    IF ( inu>0 ) THEN
+    IF( N==1 ) inu = inu - 1
+    IF( inu>0 ) THEN
       DO i = 1, inu
         st = s2
         s2 = ck*s2 - s1
         s1 = st
         ck = ck + rx
       END DO
-      IF ( N==1 ) s1 = s2
-    ELSEIF ( N<=1 ) THEN
+      IF( N==1 ) s1 = s2
+    ELSEIF( N<=1 ) THEN
       s1 = s2
     END IF
   END IF
   100  Y(1) = s1
-  IF ( N==1 ) RETURN
+  IF( N==1 ) RETURN
   Y(2) = s2
-  IF ( N==2 ) RETURN
+  IF( N==2 ) RETURN
   DO i = 3, N
     Y(i) = ck*Y(i-1) - Y(i-2)
     ck = ck + rx

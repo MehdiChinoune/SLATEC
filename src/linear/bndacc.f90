@@ -1,7 +1,6 @@
 !** BNDACC
 SUBROUTINE BNDACC(G,Mdg,Nb,Ip,Ir,Mt,Jt)
-  !>
-  !  Compute the LU factorization of a banded matrices using
+  !> Compute the LU factorization of a banded matrices using
   !            sequential accumulation of rows of the data matrix.
   !            Exactly one right-hand side vector is permitted.
   !***
@@ -92,7 +91,7 @@ SUBROUTINE BNDACC(G,Mdg,Nb,Ip,Ir,Mt,Jt)
   !                       See descriptions of IR and MT below.
   !
   !     MDG               The number of rows in the working array
-  !                       G(*,*).  The value of MDG should be .GE. MU.
+  !                       G(*,*).  The value of MDG should be >= MU.
   !                       The value of MU is defined in the abstract
   !                       of these subprograms.
   !
@@ -107,7 +106,7 @@ SUBROUTINE BNDACC(G,Mdg,Nb,Ip,Ir,Mt,Jt)
   !                       to place the new block of data (C F).  Set by
   !                       the user to the value 1 before the first call
   !                       to BNDACC.  Its subsequent value is controlled
-  !                       by BNDACC. A value of IR .GT. MDG is considered
+  !                       by BNDACC. A value of IR > MDG is considered
   !                       an error.
   !
   !     MT,JT             Set by the user to indicate respectively the
@@ -209,14 +208,14 @@ SUBROUTINE BNDACC(G,Mdg,Nb,Ip,Ir,Mt,Jt)
   !              ALG. STEPS 1-4 ARE PERFORMED EXTERNAL TO THIS SUBROUTINE.
   !
   nbp1 = Nb + 1
-  IF ( Mt<=0.OR.Nb<=0 ) RETURN
+  IF( Mt<=0 .OR. Nb<=0 ) RETURN
   !
-  IF ( .NOT.Mdg<Ir ) THEN
+  IF( .NOT. Mdg<Ir ) THEN
     !
     !  ALG. STEP 5
-    IF ( Jt/=Ip ) THEN
+    IF( Jt/=Ip ) THEN
       !  ALG. STEPS 6-7
-      IF ( Jt>Ir ) THEN
+      IF( Jt>Ir ) THEN
         !  ALG. STEPS 8-9
         DO i = 1, Mt
           ig1 = Jt + Mt - i
@@ -238,7 +237,7 @@ SUBROUTINE BNDACC(G,Mdg,Nb,Ip,Ir,Mt,Jt)
       END IF
       !  ALG. STEP 12
       mu = MIN(Nb-1,Ir-Ip-1)
-      IF ( mu/=0 ) THEN
+      IF( mu/=0 ) THEN
         !  ALG. STEP 13
         DO l = 1, mu
           !  ALG. STEP 14
@@ -271,7 +270,7 @@ SUBROUTINE BNDACC(G,Mdg,Nb,Ip,Ir,Mt,Jt)
     !  ALG. STEP 21
     Ir = Ip + kh
     !  ALG. STEP 22
-    IF ( kh>=nbp1 ) THEN
+    IF( kh>=nbp1 ) THEN
       !  ALG. STEP 23
       DO i = 1, Nb
         G(Ir-1,i) = zero
@@ -280,7 +279,7 @@ SUBROUTINE BNDACC(G,Mdg,Nb,Ip,Ir,Mt,Jt)
   ELSE
     nerr = 1
     iopt = 2
-    CALL XERMSG('BNDACC','MDG.LT.IR, PROBABLE ERROR.',nerr,iopt)
+    CALL XERMSG('BNDACC','MDG<IR, PROBABLE ERROR.',nerr,iopt)
     RETURN
   END IF
   !  ALG. STEP 24

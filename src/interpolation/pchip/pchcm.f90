@@ -1,7 +1,6 @@
 !** PCHCM
 SUBROUTINE PCHCM(N,X,F,D,Incfd,Skip,Ismon,Ierr)
-  !>
-  !  Check a cubic Hermite function for monotonicity.
+  !> Check a cubic Hermite function for monotonicity.
   !***
   ! **Library:**   SLATEC (PCHIP)
   !***
@@ -32,11 +31,11 @@ SUBROUTINE PCHCM(N,X,F,D,Incfd,Skip,Ismon,Ierr)
   !
   !- Arguments:
   !
-  !     N:IN  is the number of data points.  (Error return if N.LT.2 .)
+  !     N:IN  is the number of data points.  (Error return if N<2 .)
   !
   !     X:IN  is a real array of independent variable values.  The
   !           elements of X must be strictly increasing:
-  !                X(I-1) .LT. X(I),  I = 2(1)N.
+  !                X(I-1) < X(I),  I = 2(1)N.
   !           (Error return if not.)
   !
   !     F:IN  is a real array of function values.  F(1+(I-1)*INCFD) is
@@ -46,7 +45,7 @@ SUBROUTINE PCHCM(N,X,F,D,Incfd,Skip,Ismon,Ierr)
   !           the value corresponding to X(I).
   !
   !     INCFD:IN  is the increment between successive values in F and D.
-  !           (Error return if  INCFD.LT.1 .)
+  !           (Error return if  INCFD<1 .)
   !
   !     SKIP:INOUT  is a logical variable which should be set to
   !           .TRUE. if the user wishes to skip checks for validity of
@@ -75,8 +74,8 @@ SUBROUTINE PCHCM(N,X,F,D,Incfd,Skip,Ismon,Ierr)
   !           Normal return:
   !              IERR = 0  (no errors).
   !           "Recoverable" errors:
-  !              IERR = -1  if N.LT.2 .
-  !              IERR = -2  if INCFD.LT.1 .
+  !              IERR = -1  if N<2 .
+  !              IERR = -2  if INCFD<1 .
   !              IERR = -3  if the X-array is not strictly increasing.
   !          (The ISMON-array has not been changed in any of these cases.)
   !               NOTE:  The above errors are checked in the order listed,
@@ -96,10 +95,10 @@ SUBROUTINE PCHCM(N,X,F,D,Incfd,Skip,Ismon,Ierr)
   !     This provides the same capability as old PCHMC, except that a
   !     new output value, -3, was added February 1989.  (Formerly, -3
   !     and +3 were lumped together in the single value 3.)  Codes that
-  !     flag nonmonotonicity by "IF (ISMON.EQ.2)" need not be changed.
-  !     Codes that check via "IF (ISMON.GE.3)" should change the test to
-  !     "IF (IABS(ISMON).GE.3)".  Codes that declare monotonicity via
-  !     "IF (ISMON.LE.1)" should change to "IF (IABS(ISMON).LE.1)".
+  !     flag nonmonotonicity by "IF(ISMON=2)" need not be changed.
+  !     Codes that check via "IF(ISMON>=3)" should change the test to
+  !     "IF(IABS(ISMON)>=3)".  Codes that declare monotonicity via
+  !     "IF(ISMON<=1)" should change to "IF(IABS(ISMON)<=1)".
   !
   !***
   ! **References:**  F. N. Fritsch and R. E. Carlson, Monotone piecewise
@@ -112,7 +111,7 @@ SUBROUTINE PCHCM(N,X,F,D,Incfd,Skip,Ismon,Ierr)
   !   820518  DATE WRITTEN
   !   820804  Converted to SLATEC library version.
   !   831201  Reversed order of subscripts of F and D, so that the
-  !           routine will work properly when INCFD.GT.1 .  (Bug!!)
+  !           routine will work properly when INCFD>1 .  (Bug!!)
   !   870707  Minor cosmetic changes to prologue.
   !   890208  Added possible ISMON value of -3 and modified code so
   !           that 1,3,-1 produces ISMON(N)=2, rather than 3.
@@ -146,37 +145,37 @@ SUBROUTINE PCHCM(N,X,F,D,Incfd,Skip,Ismon,Ierr)
   !
   !  DECLARE ARGUMENTS.
   !
-  INTEGER N, Incfd, Ismon(N), Ierr
-  REAL(SP) X(N), F(Incfd,N), D(Incfd,N)
-  LOGICAL Skip
+  INTEGER :: N, Incfd, Ismon(N), Ierr
+  REAL(SP) :: X(N), F(Incfd,N), D(Incfd,N)
+  LOGICAL :: Skip
   !
   !  DECLARE LOCAL VARIABLES.
   !
-  INTEGER i, nseg
-  REAL(SP) delta
+  INTEGER :: i, nseg
+  REAL(SP) :: delta
   !
   !  VALIDITY-CHECK ARGUMENTS.
   !
   !* FIRST EXECUTABLE STATEMENT  PCHCM
-  IF ( .NOT.(Skip) ) THEN
+  IF( .NOT. (Skip) ) THEN
     !
-    IF ( N<2 ) THEN
+    IF( N<2 ) THEN
       !
       !  ERROR RETURNS.
       !
-      !     N.LT.2 RETURN.
+      !     N<2 RETURN.
       Ierr = -1
       CALL XERMSG('PCHCM','NUMBER OF DATA POINTS LESS THAN TWO',Ierr,1)
       RETURN
-    ELSEIF ( Incfd<1 ) THEN
+    ELSEIF( Incfd<1 ) THEN
       !
-      !     INCFD.LT.1 RETURN.
+      !     INCFD<1 RETURN.
       Ierr = -2
       CALL XERMSG('PCHCM','INCREMENT LESS THAN ONE',Ierr,1)
       RETURN
     ELSE
       DO i = 2, N
-        IF ( X(i)<=X(i-1) ) GOTO 100
+        IF( X(i)<=X(i-1) ) GOTO 100
       END DO
       Skip = .TRUE.
     END IF
@@ -190,7 +189,7 @@ SUBROUTINE PCHCM(N,X,F,D,Incfd,Skip,Ismon,Ierr)
     !                   -------------------------------
     Ismon(i) = CHFCM(D(1,i),D(1,i+1),delta)
     !                   -------------------------------
-    IF ( i==1 ) THEN
+    IF( i==1 ) THEN
       Ismon(N) = Ismon(1)
       !           Need to figure out cumulative monotonicity from following
       !           "multiplication table":
@@ -210,10 +209,10 @@ SUBROUTINE PCHCM(N,X,F,D,Incfd,Skip,Ismon,Ierr)
       !
       !           No change needed if equal or constant on this interval or
       !           already declared nonmonotonic.
-    ELSEIF ( (Ismon(i)/=Ismon(N)).AND.(Ismon(i)/=0).AND.(Ismon(N)/=2) ) THEN
-      IF ( (Ismon(i)==2).OR.(Ismon(N)==0) ) THEN
+    ELSEIF( (Ismon(i)/=Ismon(N)) .AND. (Ismon(i)/=0) .AND. (Ismon(N)/=2) ) THEN
+      IF( (Ismon(i)==2) .OR. (Ismon(N)==0) ) THEN
         Ismon(N) = Ismon(i)
-      ELSEIF ( Ismon(i)*Ismon(N)<0 ) THEN
+      ELSEIF( Ismon(i)*Ismon(N)<0 ) THEN
         !                 This interval has opposite sense from curve so far.
         Ismon(N) = 2
       ELSE

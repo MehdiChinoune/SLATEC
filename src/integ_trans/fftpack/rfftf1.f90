@@ -1,7 +1,6 @@
 !** RFFTF1
 SUBROUTINE RFFTF1(N,C,Ch,Wa,Ifac)
-  !>
-  !  Compute the forward transform of a REAL(SP), periodic sequence.
+  !> Compute the forward transform of a REAL(SP), periodic sequence.
   !***
   ! **Library:**   SLATEC (FFTPACK)
   !***
@@ -108,25 +107,25 @@ SUBROUTINE RFFTF1(N,C,Ch,Wa,Ifac)
     idl1 = ido*l1
     iw = iw - (ip-1)*ido
     na = 1 - na
-    IF ( ip==4 ) THEN
+    IF( ip==4 ) THEN
       ix2 = iw + ido
       ix3 = ix2 + ido
-      IF ( na/=0 ) THEN
+      IF( na/=0 ) THEN
         CALL RADF4(ido,l1,Ch,C,Wa(iw),Wa(ix2),Wa(ix3))
       ELSE
         CALL RADF4(ido,l1,C,Ch,Wa(iw),Wa(ix2),Wa(ix3))
       END IF
-    ELSEIF ( ip/=2 ) THEN
-      IF ( ip==3 ) THEN
+    ELSEIF( ip/=2 ) THEN
+      IF( ip==3 ) THEN
         ix2 = iw + ido
-        IF ( na/=0 ) THEN
+        IF( na/=0 ) THEN
           CALL RADF3(ido,l1,Ch,C,Wa(iw),Wa(ix2))
         ELSE
           CALL RADF3(ido,l1,C,Ch,Wa(iw),Wa(ix2))
         END IF
-      ELSEIF ( ip/=5 ) THEN
-        IF ( ido==1 ) na = 1 - na
-        IF ( na/=0 ) THEN
+      ELSEIF( ip/=5 ) THEN
+        IF( ido==1 ) na = 1 - na
+        IF( na/=0 ) THEN
           CALL RADFG(ido,ip,l1,idl1,Ch,Ch,Ch,C,C,Wa(iw:))
           na = 0
         ELSE
@@ -137,20 +136,20 @@ SUBROUTINE RFFTF1(N,C,Ch,Wa,Ifac)
         ix2 = iw + ido
         ix3 = ix2 + ido
         ix4 = ix3 + ido
-        IF ( na/=0 ) THEN
+        IF( na/=0 ) THEN
           CALL RADF5(ido,l1,Ch,C,Wa(iw),Wa(ix2),Wa(ix3),Wa(ix4))
         ELSE
           CALL RADF5(ido,l1,C,Ch,Wa(iw),Wa(ix2),Wa(ix3),Wa(ix4))
         END IF
       END IF
-    ELSEIF ( na/=0 ) THEN
+    ELSEIF( na/=0 ) THEN
       CALL RADF2(ido,l1,Ch,C,Wa(iw))
     ELSE
       CALL RADF2(ido,l1,C,Ch,Wa(iw))
     END IF
     l2 = l1
   END DO
-  IF ( na==1 ) RETURN
+  IF( na==1 ) RETURN
   DO i = 1, N
     C(i) = Ch(i)
   END DO

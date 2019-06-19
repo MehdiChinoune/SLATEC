@@ -1,7 +1,6 @@
 !** STWAY
 SUBROUTINE STWAY(U,V,Yhp,Inout,Stowa)
-  !>
-  !  Subsidiary to BVSUP
+  !> Subsidiary to BVSUP
   !***
   ! **Library:**   SLATEC
   !***
@@ -36,14 +35,14 @@ SUBROUTINE STWAY(U,V,Yhp,Inout,Stowa)
   INTEGER :: j, k, ko, ks, ksj
   !
   !* FIRST EXECUTABLE STATEMENT  STWAY
-  IF ( Inout==1 ) THEN
+  IF( Inout==1 ) THEN
     !
     !     RECALL FROM STOWA ARRAY AND ISTKOP
     !
     ks = nfc_com*ncomp_com
     CALL STOR1(Yhp,Stowa,Yhp(ks+1:),Stowa(ks+1:),1,0,0)
     ks = ks + ncomp_com
-    IF ( neqivp_com/=0 ) THEN
+    IF( neqivp_com/=0 ) THEN
       DO j = 1, neqivp_com
         ksj = ks + j
         Yhp(ksj) = Stowa(ksj)
@@ -54,7 +53,7 @@ SUBROUTINE STWAY(U,V,Yhp,Inout,Stowa)
     info_com(1) = 0
     ko = kop_com - istkop_com
     kop_com = istkop_com
-    IF ( ndisk_com==0.OR.ko==0 ) RETURN
+    IF( ndisk_com==0 .OR. ko==0 ) RETURN
     DO k = 1, ko
       BACKSPACE ntape_com
     END DO
@@ -65,7 +64,7 @@ SUBROUTINE STWAY(U,V,Yhp,Inout,Stowa)
     ks = nfc_com*ncomp_com
     CALL STOR1(Stowa,U,Stowa(ks+1:),V,1,0,0)
     ks = ks + ncomp_com
-    IF ( neqivp_com/=0 ) THEN
+    IF( neqivp_com/=0 ) THEN
       DO j = 1, neqivp_com
         ksj = ks + j
         Stowa(ksj) = Yhp(ksj)
@@ -74,7 +73,7 @@ SUBROUTINE STWAY(U,V,Yhp,Inout,Stowa)
     ks = ks + neqivp_com
     Stowa(ks+1) = x_com
     istkop_com = kop_com
-    IF ( xop_com==x_com ) istkop_com = kop_com + 1
+    IF( xop_com==x_com ) istkop_com = kop_com + 1
     RETURN
   END IF
 END SUBROUTINE STWAY

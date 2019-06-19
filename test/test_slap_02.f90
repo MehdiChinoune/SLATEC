@@ -5,8 +5,7 @@ MODULE TEST26_MOD
 CONTAINS
   !** DLAPQC
   SUBROUTINE DLAPQC(Lun,Kprint,Ipass)
-    !>
-    !  Quick check for testing Sparse Linear Algebra Package
+    !> Quick check for testing Sparse Linear Algebra Package
     !            (SLAP) Version 2.0.2.
     !***
     ! **Library:**   SLATEC (SLAP)
@@ -100,14 +99,14 @@ CONTAINS
     !     .. Parameters ..
     INTEGER, PARAMETER :: MAXN = 25, MXNELT = 500, MAXIW = 1000, MAXRW = 1000
     !     .. Scalar Arguments ..
-    INTEGER Ipass, Kprint, Lun
+    INTEGER :: Ipass, Kprint, Lun
     !     .. Local Scalars ..
     REAL(DP) :: dens, err, factor, tol
-    INTEGER ierr, isym, iter, itmax, itol, itolgm, iunit, k, kase, &
+    INTEGER :: ierr, isym, iter, itmax, itol, itolgm, iunit, k, kase, &
       leniw, lenw, n, nelt, neltmx, nfail, nmax, nsave
     !     .. Local Arrays ..
     REAL(DP) :: a(MXNELT), f(MAXN), rwork(MAXRW), xiter(MAXN)
-    INTEGER ia(MXNELT), iwork(MAXIW), ja(MXNELT)
+    INTEGER :: ia(MXNELT), iwork(MAXIW), ja(MXNELT)
     !     .. Intrinsic Functions ..
     INTRINSIC MAX, REAL
     !
@@ -131,9 +130,9 @@ CONTAINS
     itmax = n
     factor = 1.2D0
     !
-    !     Set to print intermediate results if KPRINT.GE.3.
+    !     Set to print intermediate results if KPRINT>=3.
     !
-    IF ( Kprint<3 ) THEN
+    IF( Kprint<3 ) THEN
       iunit = 0
     ELSE
       iunit = Lun
@@ -147,8 +146,8 @@ CONTAINS
     !     Test routines using various convergence criteria.
     !
     DO kase = 1, 3
-      IF ( kase==1.OR.kase==2 ) itol = kase
-      IF ( kase==3 ) itol = 11
+      IF( kase==1 .OR. kase==2 ) itol = kase
+      IF( kase==3 ) itol = 11
       !
       !         Test routines using nonsymmetric (ISYM=0) and symmetric
       !         storage (ISYM=1).  For ISYM=0 a really non-symmetric matrix
@@ -156,14 +155,14 @@ CONTAINS
       !         user.
       !
       DO isym = 0, 1
-        IF ( Kprint>=2 ) WRITE (Lun,99001) n, kase, isym
+        IF( Kprint>=2 ) WRITE (Lun,99001) n, kase, isym
         99001 FORMAT ('1'/' Running tests with  N =',I3,',  KASE =',I2,',  ISYM =',I2)
         !
         !         Set up a random matrix.
         !
         CALL DRMGEN(neltmx,factor,ierr,n,nelt,isym,ia,ja,a,f,soln_com,rwork,&
           iwork,iwork(n+1))
-        IF ( ierr/=0 ) THEN
+        IF( ierr/=0 ) THEN
           WRITE (Lun,99002) ierr
           !
           99002 FORMAT (/1X,'DLAPQC -- Fatal error ',I1,' generating ',&
@@ -171,12 +170,12 @@ CONTAINS
           nfail = nfail + 1
           CYCLE
         END IF
-        IF ( isym==0 ) THEN
+        IF( isym==0 ) THEN
           dens = REAL(nelt)/(n*n)
         ELSE
           dens = REAL(2*nelt)/(n*n)
         END IF
-        IF ( Kprint>=2 ) THEN
+        IF( Kprint>=2 ) THEN
           WRITE (Lun,99003) n, nelt, dens
           99003 FORMAT (/'                * RANDOM Matrix of size',I5,&
             '*'/'                ','Number of non-zeros & Density = ',&
@@ -189,7 +188,7 @@ CONTAINS
         !         write out matrix in SLAP-Column format, if desired.
         !
         CALL DS2Y(n,nelt,ia,ja,a)
-        IF ( Kprint>=4 ) THEN
+        IF( Kprint>=4 ) THEN
           WRITE (Lun,99005) (k,ia(k),ja(k),a(k),k=1,nelt)
           99005 FORMAT (/'  ***** SLAP Column Matrix *****'/' Indx   ia   ja     a'/&
             (1X,I4,1X,I4,1X,I4,1X,1P,D16.7))
@@ -202,7 +201,7 @@ CONTAINS
         !
         !         * * * * * *   DSJAC   * * * * * *
         !
-        IF ( Kprint>=3 ) WRITE (Lun,99008) 'DSJAC ', itol, isym
+        IF( Kprint>=3 ) WRITE (Lun,99008) 'DSJAC ', itol, isym
         CALL DFILL(n,xiter,0.0D0)
         !
         CALL DSJAC(n,f,xiter,nelt,ia,ja,a,isym,itol,tol,2*itmax,iter,err,ierr,&
@@ -212,7 +211,7 @@ CONTAINS
         !
         !         * * * * *  DSGS  * * * * *
         !
-        IF ( Kprint>=3 ) WRITE (Lun,99008) 'DSGS  ', itol, isym
+        IF( Kprint>=3 ) WRITE (Lun,99008) 'DSGS  ', itol, isym
         CALL DFILL(n,xiter,0.0D0)
         !
         CALL DSGS(n,f,xiter,nelt,ia,ja,a,isym,itol,tol,itmax,iter,err,ierr,&
@@ -222,7 +221,7 @@ CONTAINS
         !
         !         * * * * * *   DSILUR   * * * * * *
         !
-        IF ( Kprint>=3 ) WRITE (Lun,99008) 'DSILUR', itol, isym
+        IF( Kprint>=3 ) WRITE (Lun,99008) 'DSILUR', itol, isym
         CALL DFILL(n,xiter,0.0D0)
         !
         CALL DSILUR(n,f,xiter,nelt,ia,ja,a,isym,itol,tol,itmax,iter,err,ierr,&
@@ -232,8 +231,8 @@ CONTAINS
         !
         !         * * * * * *   DSDCG    * * * * * *
         !
-        IF ( isym==1 ) THEN
-          IF ( Kprint>=3 ) WRITE (Lun,99008) 'DSDCG', itol, isym
+        IF( isym==1 ) THEN
+          IF( Kprint>=3 ) WRITE (Lun,99008) 'DSDCG', itol, isym
           CALL DFILL(n,xiter,0.0D0)
           !
           CALL DSDCG(n,f,xiter,nelt,ia,ja,a,isym,itol,tol,itmax,iter,err,ierr,&
@@ -244,8 +243,8 @@ CONTAINS
         !
         !         * * * * * *    DSICCG    * * * * * *
         !
-        IF ( isym==1 ) THEN
-          IF ( Kprint>=3 ) WRITE (Lun,99008) 'DSICCG', itol, isym
+        IF( isym==1 ) THEN
+          IF( Kprint>=3 ) WRITE (Lun,99008) 'DSICCG', itol, isym
           CALL DFILL(n,xiter,0.0D0)
           !
           CALL DSICCG(n,f,xiter,nelt,ia,ja,a,isym,itol,tol,itmax,iter,err,&
@@ -256,7 +255,7 @@ CONTAINS
         !
         !         * * * * * *    DSDCGN   * * * * * *
         !
-        IF ( Kprint>=3 ) WRITE (Lun,99008) 'DSDCGN', itol, isym
+        IF( Kprint>=3 ) WRITE (Lun,99008) 'DSDCGN', itol, isym
         CALL DFILL(n,xiter,0.0D0)
         !
         CALL DSDCGN(n,f,xiter,nelt,ia,ja,a,isym,itol,tol,itmax,iter,err,ierr,&
@@ -266,7 +265,7 @@ CONTAINS
         !
         !         * * * * * *   DSLUCN   * * * * * *
         !
-        IF ( Kprint>=3 ) WRITE (Lun,99008) 'DSLUCN', itol, isym
+        IF( Kprint>=3 ) WRITE (Lun,99008) 'DSLUCN', itol, isym
         CALL DFILL(n,xiter,0.0D0)
         !
         CALL DSLUCN(n,f,xiter,nelt,ia,ja,a,isym,itol,tol,itmax,iter,err,ierr,&
@@ -276,7 +275,7 @@ CONTAINS
         !
         !         * * * * * *    DSDBCG   * * * * * *
         !
-        IF ( Kprint>=3 ) WRITE (Lun,99008) 'DSDBCG', itol, isym
+        IF( Kprint>=3 ) WRITE (Lun,99008) 'DSDBCG', itol, isym
         CALL DFILL(n,xiter,0.0D0)
         !
         CALL DSDBCG(n,f,xiter,nelt,ia,ja,a,isym,itol,tol,itmax,iter,err,ierr,&
@@ -286,7 +285,7 @@ CONTAINS
         !
         !         * * * * * *   DSLUBC   * * * * * *
         !
-        IF ( Kprint>=3 ) WRITE (Lun,99008) 'DSLUBC', itol, isym
+        IF( Kprint>=3 ) WRITE (Lun,99008) 'DSLUBC', itol, isym
         CALL DFILL(n,xiter,0.0D0)
         !
         CALL DSLUBC(n,f,xiter,nelt,ia,ja,a,isym,itol,tol,itmax,iter,err,ierr,&
@@ -296,7 +295,7 @@ CONTAINS
         !
         !         * * * * * *    DSDCGS   * * * * * *
         !
-        IF ( Kprint>=3 ) WRITE (Lun,99008) 'DSDCGS', itol, isym
+        IF( Kprint>=3 ) WRITE (Lun,99008) 'DSDCGS', itol, isym
         CALL DFILL(n,xiter,0.0D0)
         !
         CALL DSDCGS(n,f,xiter,nelt,ia,ja,a,isym,itol,tol,itmax,iter,err,ierr,&
@@ -306,7 +305,7 @@ CONTAINS
         !
         !         * * * * * *   DSLUCS   * * * * * *
         !
-        IF ( Kprint>=3 ) WRITE (Lun,99008) 'DSLUCS', itol, isym
+        IF( Kprint>=3 ) WRITE (Lun,99008) 'DSLUCS', itol, isym
         CALL DFILL(n,xiter,0.0D0)
         !
         CALL DSLUCS(n,f,xiter,nelt,ia,ja,a,isym,itol,tol,itmax,iter,err,ierr,&
@@ -317,7 +316,7 @@ CONTAINS
         !         * * * * * *    DSDOMN   * * * * * *
         !
         DO nsave = 0, 3
-          IF ( Kprint>=3 ) WRITE (Lun,99009) 'DSDOMN', itol, isym, nsave
+          IF( Kprint>=3 ) WRITE (Lun,99009) 'DSDOMN', itol, isym, nsave
           CALL DFILL(n,xiter,0.0D0)
           !
           CALL DSDOMN(n,f,xiter,nelt,ia,ja,a,isym,nsave,itol,tol,itmax,iter,&
@@ -329,7 +328,7 @@ CONTAINS
         !         * * * * * *   DSLUOM   * * * * * *
         !
         DO nsave = 0, 3
-          IF ( Kprint>=3 ) WRITE (Lun,99009) 'DSLUOM', itol, isym, nsave
+          IF( Kprint>=3 ) WRITE (Lun,99009) 'DSLUOM', itol, isym, nsave
           CALL DFILL(n,xiter,0.0D0)
           !
           CALL DSLUOM(n,f,xiter,nelt,ia,ja,a,isym,nsave,itol,tol,itmax,iter,&
@@ -341,7 +340,7 @@ CONTAINS
         !         * * * * * *   DSDGMR   * * * * * *
         !
         DO nsave = 5, 12
-          IF ( Kprint>=3 ) WRITE (Lun,99009) 'DSDGMR', itol, isym, nsave
+          IF( Kprint>=3 ) WRITE (Lun,99009) 'DSDGMR', itol, isym, nsave
           CALL DFILL(n,xiter,0.0D0)
           itolgm = 0
           !
@@ -354,7 +353,7 @@ CONTAINS
         !         * * * * * *   DSLUGM   * * * * * *
         !
         DO nsave = 5, 12
-          IF ( Kprint>=3 ) WRITE (Lun,99009) 'DSLUGM', itol, isym, nsave
+          IF( Kprint>=3 ) WRITE (Lun,99009) 'DSLUGM', itol, isym, nsave
           CALL DFILL(n,xiter,0.0D0)
           !
           CALL DSLUGM(n,f,xiter,nelt,ia,ja,a,isym,nsave,tol,itmax,iter,&
@@ -365,13 +364,13 @@ CONTAINS
       END DO
     END DO
     !
-    IF ( nfail==0 ) THEN
+    IF( nfail==0 ) THEN
       Ipass = 1
-      IF ( Kprint>=2 ) WRITE (Lun,99006)
+      IF( Kprint>=2 ) WRITE (Lun,99006)
       99006 FORMAT ('--------- All double precision SLAP tests passed ','---------')
     ELSE
       Ipass = 0
-      IF ( Kprint>=2 ) WRITE (Lun,99007) nfail
+      IF( Kprint>=2 ) WRITE (Lun,99007) nfail
       99007 FORMAT ('*********',I3,' double precision SLAP tests failed ',&
         '*********')
     END IF
@@ -382,8 +381,7 @@ CONTAINS
   END SUBROUTINE DLAPQC
   !** DRMGEN
   SUBROUTINE DRMGEN(Neltmx,Factor,Ierr,N,Nelt,Isym,Ia,Ja,A,F,Soln,Dsum,Itmp,Idiag)
-    !>
-    !  This routine generates a "Random" symmetric or non-symmetric matrix
+    !> This routine generates a "Random" symmetric or non-symmetric matrix
     !  of size N for use in the SLAP Quick Checks.
     !***
     ! **Library:**   SLATEC (SLAP)
@@ -451,7 +449,7 @@ CONTAINS
     !         numbers for each off diagonal.   The diagonal elements
     !         are chosen to be positive and large enough so the matrix
     !         is slightly diagonally dominant.  The lower triangle of
-    !         the matrix is generated and if isym.eq.0 (all matrix elements
+    !         the matrix is generated and if isym=0 (all matrix elements
     !         stored) the upper triangle elements are chosen so that they
     !         are FACTOR times the corresponding lower triangular element.
     !
@@ -467,13 +465,13 @@ CONTAINS
     USE common_mod, ONLY : ISMPL
     !     .. Scalar Arguments ..
     REAL(DP) :: Factor
-    INTEGER Ierr, Isym, N, Nelt, Neltmx
+    INTEGER :: Ierr, Isym, N, Nelt, Neltmx
     !     .. Array Arguments ..
     REAL(DP) :: A(Neltmx), Dsum(N), F(N), SOLn(N)
-    INTEGER Ia(Neltmx), Idiag(N), Itmp(N), Ja(Neltmx)
+    INTEGER :: Ia(Neltmx), Idiag(N), Itmp(N), Ja(Neltmx)
     !     .. Local Scalars ..
-    REAL(SP) dummy
-    INTEGER i, icol, inum, irow, iseed, k, nl
+    REAL(SP) :: dummy
+    INTEGER :: i, icol, inum, irow, iseed, k, nl
     !     .. Intrinsic Functions ..
     INTRINSIC INT
     !* FIRST EXECUTABLE STATEMENT  DRMGEN
@@ -510,23 +508,23 @@ CONTAINS
       !         Set up this column (and row, if non-symmetric structure).
       DO irow = 1, inum
         Nelt = Nelt + 1
-        IF ( Nelt>Neltmx ) THEN
+        IF( Nelt>Neltmx ) THEN
           Ierr = 1
           RETURN
         END IF
         Ia(Nelt) = N + 1 - Itmp(irow)
         Ja(Nelt) = icol
-        IF ( Ia(Nelt)==icol ) THEN
+        IF( Ia(Nelt)==icol ) THEN
           Idiag(icol) = Nelt
         ELSE
           A(Nelt) = -RAND(dummy)
           Dsum(icol) = Dsum(icol) + A(Nelt)
-          IF ( Isym==0 ) THEN
+          IF( Isym==0 ) THEN
             !
             !         Copy this element into upper triangle.
             !
             Nelt = Nelt + 1
-            IF ( Nelt>Neltmx ) THEN
+            IF( Nelt>Neltmx ) THEN
               Ierr = 1
               RETURN
             END IF
@@ -539,12 +537,12 @@ CONTAINS
           END IF
         END IF
       END DO
-      IF ( Idiag(icol)==0 ) THEN
+      IF( Idiag(icol)==0 ) THEN
         !
         !           Add a diagonal to the column.
         !
         Nelt = Nelt + 1
-        IF ( Nelt>Neltmx ) THEN
+        IF( Nelt>Neltmx ) THEN
           Ierr = 1
           RETURN
         END IF
@@ -570,14 +568,13 @@ CONTAINS
     !
     DO k = 1, Nelt
       F(Ia(k)) = F(Ia(k)) + A(k)*SOLn(Ja(k))
-      IF ( Isym/=0.AND.Ia(k)/=Ja(k) ) F(Ja(k)) = F(Ja(k)) + A(k)*SOLn(Ia(k))
+      IF( Isym/=0 .AND. Ia(k)/=Ja(k) ) F(Ja(k)) = F(Ja(k)) + A(k)*SOLn(Ia(k))
     END DO
     !------------- LAST LINE OF DRMGEN FOLLOWS ----------------------------
   END SUBROUTINE DRMGEN
   !** DFILL
   SUBROUTINE DFILL(N,V,Val)
-    !>
-    !  Fill a vector with a value.
+    !> Fill a vector with a value.
     !***
     ! **Library:**   SLATEC (SLAP)
     !***
@@ -616,15 +613,15 @@ CONTAINS
 
     !     .. Scalar Arguments ..
     REAL(DP) :: Val
-    INTEGER N
+    INTEGER :: N
     !     .. Array Arguments ..
     REAL(DP) :: V(N)
     !     .. Local Scalars ..
-    INTEGER i, is, nr
+    INTEGER :: i, is, nr
     !     .. Intrinsic Functions ..
     INTRINSIC MOD
     !* FIRST EXECUTABLE STATEMENT  DFILL
-    IF ( N<=0 ) RETURN
+    IF( N<=0 ) RETURN
     nr = MOD(N,4)
     !
     !         The following construct assumes a zero pass do loop.
@@ -655,8 +652,7 @@ CONTAINS
   END SUBROUTINE DFILL
   !** DUTERR
   SUBROUTINE DUTERR(Method,Ierr,Iout,Nfail,Istdo,Iter,Err)
-    !>
-    !  Output error messages for the SLAP Quick Check.
+    !> Output error messages for the SLAP Quick Check.
     !***
     ! **Library:**   SLATEC (SLAP)
     !***
@@ -678,24 +674,24 @@ CONTAINS
 
     !     .. Scalar Arguments ..
     REAL(DP) :: Err
-    INTEGER Ierr, Iout, Istdo, Iter, Nfail
+    INTEGER :: Ierr, Iout, Istdo, Iter, Nfail
     CHARACTER Method*6
     !* FIRST EXECUTABLE STATEMENT  DUTERR
-    IF ( Ierr/=0 ) Nfail = Nfail + 1
-    IF ( Iout==1.AND.Ierr/=0 ) THEN
+    IF( Ierr/=0 ) Nfail = Nfail + 1
+    IF( Iout==1 .AND. Ierr/=0 ) THEN
       WRITE (Istdo,99001) Method
       99001 FORMAT (1X,A6,' : **** FAILURE ****')
     END IF
-    IF ( Iout==2 ) THEN
-      IF ( Ierr==0 ) THEN
+    IF( Iout==2 ) THEN
+      IF( Ierr==0 ) THEN
         WRITE (Istdo,99002) Method
         99002 FORMAT (1X,A6,' : **** PASSED  ****')
       ELSE
         WRITE (Istdo,99004) Method, Ierr, Iter, Err
       END IF
     END IF
-    IF ( Iout>=3 ) THEN
-      IF ( Ierr==0 ) THEN
+    IF( Iout>=3 ) THEN
+      IF( Ierr==0 ) THEN
         WRITE (Istdo,99003) Method, Ierr, Iter, Err
         99003 FORMAT (' ***************** PASSED ***********************'/' **** ',&
           A6,' Quick Test PASSED: IERR = ',I5,&
@@ -719,8 +715,7 @@ PROGRAM TEST26
   USE slatec, ONLY : I1MACH, XSETF, XSETUN, XERMAX
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
-  !>
-  !  Driver for testing SLATEC subprograms.
+  !> Driver for testing SLATEC subprograms.
   !***
   ! **Library:**   SLATEC
   !***
@@ -766,7 +761,7 @@ PROGRAM TEST26
   !   920511  Added complete declaration section.  (WRB)
 
   !     .. Local Scalars ..
-  INTEGER ipass, kprint, lin, lun, nfail
+  INTEGER :: ipass, kprint, lin, lun, nfail
   !* FIRST EXECUTABLE STATEMENT  TEST26
   lun = I1MACH(2)
   lin = I1MACH(1)
@@ -776,7 +771,7 @@ PROGRAM TEST26
   !
   CALL GET_ARGUMENT(kprint)
   CALL XSETUN(lun)
-  IF ( kprint<=1 ) THEN
+  IF( kprint<=1 ) THEN
     CALL XSETF(0)
   ELSE
     CALL XSETF(1)
@@ -786,11 +781,11 @@ PROGRAM TEST26
   !     Test SLAP (double precision)
   !
   CALL DLAPQC(lun,kprint,ipass)
-  IF ( ipass==0 ) nfail = nfail + 1
+  IF( ipass==0 ) nfail = nfail + 1
   !
   !     Write PASS or FAIL message
   !
-  IF ( nfail==0 ) THEN
+  IF( nfail==0 ) THEN
     WRITE (lun,99001)
     99001 FORMAT (/' --------------TEST26 PASSED ALL TESTS----------------')
   ELSE

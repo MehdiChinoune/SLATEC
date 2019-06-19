@@ -1,8 +1,7 @@
 !** LSSODS
 SUBROUTINE LSSODS(A,X,B,M,N,Nrda,Iflag,Irank,Iscale,Q,Diag,Kpivot,Iter,&
     Resnrm,Xnorm,Z,R,Div,Td,Scales)
-  !>
-  !  Subsidiary to BVSUP
+  !> Subsidiary to BVSUP
   !***
   ! **Library:**   SLATEC
   !***
@@ -49,12 +48,12 @@ SUBROUTINE LSSODS(A,X,B,M,N,Nrda,Iflag,Irank,Iscale,Q,Diag,Kpivot,Iter,&
   !             no scaling will be attempted
   !             For most problems scaling will probably not be necessary
   !   ITER -- Maximum number of iterative improvement steps to be
-  !           performed,  0 .LE. ITER .LE. 10   (SODS uses ITER=0)
+  !           performed,  0 <= ITER <= 10   (SODS uses ITER=0)
   !      Q -- Matrix used for the transformation, must be dimensioned
   !           NRDA by N  (SODS puts A in the Q location which conserves
   !           storage but destroys A)
   !           When iterative improvement of the solution is requested,
-  !           ITER .GT. 0, this additional storage for Q must be
+  !           ITER > 0, this additional storage for Q must be
   !           made available
   ! DIAG,KPIVOT,Z,R, -- Arrays of length N (except for R which is M)
   !   DIV,TD,SCALES     used for internal storage
@@ -139,15 +138,15 @@ SUBROUTINE LSSODS(A,X,B,M,N,Nrda,Iflag,Irank,Iscale,Q,Diag,Kpivot,Iter,&
   !
   !- *********************************************************************
   !
-  IF ( N>=1.AND.M>=N.AND.Nrda>=M ) THEN
-    IF ( Iter>=0 ) THEN
-      IF ( Iflag<=0 ) THEN
+  IF( N>=1 .AND. M>=N .AND. Nrda>=M ) THEN
+    IF( Iter>=0 ) THEN
+      IF( Iflag<=0 ) THEN
         !
         CALL XGETF(nfatal)
         maxmes = J4SAVE(4,0,.FALSE.)
-        IF ( Iflag/=0 ) THEN
+        IF( Iflag/=0 ) THEN
           nfat = -1
-          IF ( nfatal==0 ) nfat = 0
+          IF( nfatal==0 ) nfat = 0
           CALL XSETF(nfat)
           CALL XERMAX(1)
         END IF
@@ -167,7 +166,7 @@ SUBROUTINE LSSODS(A,X,B,M,N,Nrda,Iflag,Irank,Iscale,Q,Diag,Kpivot,Iter,&
         !
         CALL XSETF(nfatal)
         CALL XERMAX(maxmes)
-        IF ( Irank==N ) THEN
+        IF( Irank==N ) THEN
           !
           !     STORE DIVISORS FOR THE TRIANGULAR SOLUTION
           !
@@ -180,10 +179,10 @@ SUBROUTINE LSSODS(A,X,B,M,N,Nrda,Iflag,Irank,Iscale,Q,Diag,Kpivot,Iter,&
           !     FOR RANK DEFICIENT PROBLEMS USE ADDITIONAL ORTHOGONAL
           !     TRANSFORMATIONS TO FURTHER REDUCE Q
           !
-          IF ( Irank/=0 ) CALL OHTROR(Q,N,Nrda,Diag,Irank,Div,Td)
+          IF( Irank/=0 ) CALL OHTROR(Q,N,Nrda,Diag,Irank,Div,Td)
           RETURN
         END IF
-      ELSEIF ( Iflag==1 ) THEN
+      ELSEIF( Iflag==1 ) THEN
         GOTO 100
       END IF
     END IF
@@ -205,7 +204,7 @@ SUBROUTINE LSSODS(A,X,B,M,N,Nrda,Iflag,Irank,Iscale,Q,Diag,Kpivot,Iter,&
     X(k) = 0.
   END DO
   !
-  IF ( Irank>0 ) THEN
+  IF( Irank>0 ) THEN
     !
     !     COPY CONSTANT VECTOR INTO R
     !
@@ -233,7 +232,7 @@ SUBROUTINE LSSODS(A,X,B,M,N,Nrda,Iflag,Irank,Iscale,Q,Diag,Kpivot,Iter,&
       !        BACKWARD SUBSTITUTION FOR TRIANGULAR SYSTEM SOLUTION
       !
       Z(Irank) = R(Irank)/Div(Irank)
-      IF ( irm/=0 ) THEN
+      IF( irm/=0 ) THEN
         DO l = 1, irm
           k = Irank - l
           kp = k + 1
@@ -241,7 +240,7 @@ SUBROUTINE LSSODS(A,X,B,M,N,Nrda,Iflag,Irank,Iscale,Q,Diag,Kpivot,Iter,&
         END DO
       END IF
       !
-      IF ( Irank/=N ) THEN
+      IF( Irank/=N ) THEN
         !
         !        FOR RANK DEFICIENT PROBLEMS OBTAIN THE
         !        MINIMAL LENGTH SOLUTION
@@ -271,8 +270,8 @@ SUBROUTINE LSSODS(A,X,B,M,N,Nrda,Iflag,Irank,Iscale,Q,Diag,Kpivot,Iter,&
       !        COMPUTE CORRECTION VECTOR NORM (SOLUTION NORM)
       !
       znorm = NORM2(Z(1:N))
-      IF ( it==1 ) Xnorm = znorm
-      IF ( iterp>1 ) THEN
+      IF( it==1 ) Xnorm = znorm
+      IF( iterp>1 ) THEN
         !
         !        COMPUTE RESIDUAL VECTOR FOR THE ITERATIVE IMPROVEMENT PROCESS
         !
@@ -280,17 +279,17 @@ SUBROUTINE LSSODS(A,X,B,M,N,Nrda,Iflag,Irank,Iscale,Q,Diag,Kpivot,Iter,&
           R(k) = -DOT_PRODUCT(A(k,1:N),X(1:N)) + B(k)
         END DO
         Resnrm = NORM2(R(1:M))
-        IF ( it/=1 ) THEN
+        IF( it/=1 ) THEN
           !
           !        TEST FOR CONVERGENCE
           !
-          IF ( znorm<=acc*Xnorm ) RETURN
+          IF( znorm<=acc*Xnorm ) RETURN
           !
           !        COMPARE SUCCESSIVE REFINEMENT VECTOR NORMS
           !        FOR LOOP TERMINATION CRITERIA
           !
-          IF ( znorm>0.25*znrm0 ) THEN
-            IF ( it==2 ) THEN
+          IF( znorm>0.25*znrm0 ) THEN
+            IF( it==2 ) THEN
               !
               Iflag = 5
               CALL XERMSG('LSSODS',&
@@ -315,7 +314,7 @@ SUBROUTINE LSSODS(A,X,B,M,N,Nrda,Iflag,Irank,Iscale,Q,Diag,Kpivot,Iter,&
         !        THEN WE ARE DONE
         !
         mmir = M - Irank
-        IF ( mmir==0 ) THEN
+        IF( mmir==0 ) THEN
           Resnrm = 0.
           RETURN
         ELSE

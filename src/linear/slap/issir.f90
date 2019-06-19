@@ -1,8 +1,7 @@
 !** ISSIR
 INTEGER FUNCTION ISSIR(N,B,X,MSOLVE,Itol,Tol,Iter,&
     Err,Ierr,Iunit,R,Z,Dz,Rwork,Iwork,Bnrm,Solnrm)
-  !>
-  !  Preconditioned Iterative Refinement Stop Test.
+  !> Preconditioned Iterative Refinement Stop Test.
   !            This routine calculates the stop test for the iterative
   !            refinement iteration scheme.  It returns a non-zero if the
   !            error estimate (the type of which is determined by ITOL)
@@ -34,7 +33,7 @@ INTEGER FUNCTION ISSIR(N,B,X,MSOLVE,Itol,Tol,Iter,&
   !
   !     IF( ISSIR(N, B, X, NELT, IA, JA, A, ISYM, MSOLVE, ITOL, TOL,
   !    $     ITMAX, ITER, ERR, IERR, IUNIT, R, Z, DZ, RWORK, IWORK,
-  !    $     BNRM, SOLNRM) .NE. 0 ) THEN ITERATION DONE
+  !    $     BNRM, SOLNRM) /= 0 ) THEN ITERATION DONE
   !
   !- Arguments:
   ! N      :IN       Integer.
@@ -135,7 +134,7 @@ INTEGER FUNCTION ISSIR(N,B,X,MSOLVE,Itol,Tol,Iter,&
   !
   !- Cautions:
   !     This routine will attempt to write to the Fortran logical output
-  !     unit IUNIT, if IUNIT .ne. 0.  Thus, the user must make sure that
+  !     unit IUNIT, if IUNIT /= 0.  Thus, the user must make sure that
   !     this logical unit is attached to a file or terminal before calling
   !     this routine with a non-zero value for IUNIT.  This routine does
   !     not check for the validity of a non-zero IUNIT unit number.
@@ -171,30 +170,30 @@ INTEGER FUNCTION ISSIR(N,B,X,MSOLVE,Itol,Tol,Iter,&
     END SUBROUTINE
   END INTERFACE
   !     .. Scalar Arguments ..
-  REAL(SP) Bnrm, Err, Solnrm, Tol
-  INTEGER Ierr, Iter, Itol, Iunit, N
+  REAL(SP) :: Bnrm, Err, Solnrm, Tol
+  INTEGER :: Ierr, Iter, Itol, Iunit, N
   !     .. Array Arguments ..
-  REAL(SP) B(N), Dz(N), R(N), Rwork(*), X(N), Z(N)
-  INTEGER Iwork(*)
+  REAL(SP) :: B(N), Dz(N), R(N), Rwork(*), X(N), Z(N)
+  INTEGER :: Iwork(*)
   !     .. Local Scalars ..
-  INTEGER i
+  INTEGER :: i
   !* FIRST EXECUTABLE STATEMENT  ISSIR
   ISSIR = 0
-  IF ( Itol==1 ) THEN
+  IF( Itol==1 ) THEN
     !         err = ||Residual||/||RightHandSide|| (2-Norms).
-    IF ( Iter==0 ) Bnrm = NORM2(B)
+    IF( Iter==0 ) Bnrm = NORM2(B)
     Err = NORM2(R)/Bnrm
-  ELSEIF ( Itol==2 ) THEN
+  ELSEIF( Itol==2 ) THEN
     !                  -1              -1
     !         err = ||M  Residual||/||M  RightHandSide|| (2-Norms).
-    IF ( Iter==0 ) THEN
+    IF( Iter==0 ) THEN
       CALL MSOLVE(N,B,Dz,Rwork,Iwork)
       Bnrm = NORM2(Dz)
     END IF
     Err = NORM2(Z)/Bnrm
-  ELSEIF ( Itol==11 ) THEN
+  ELSEIF( Itol==11 ) THEN
     !         err = ||x-TrueSolution||/||TrueSolution|| (2-Norms).
-    IF ( Iter==0 ) Solnrm = NORM2(soln_com(1:N))
+    IF( Iter==0 ) Solnrm = NORM2(soln_com(1:N))
     DO i = 1, N
       Dz(i) = X(i) - soln_com(i)
     END DO
@@ -206,12 +205,12 @@ INTEGER FUNCTION ISSIR(N,B,X,MSOLVE,Itol,Tol,Iter,&
     Ierr = 3
   END IF
   !
-  IF ( Iunit/=0 ) THEN
+  IF( Iunit/=0 ) THEN
     WRITE (Iunit,99001) Iter, Err
     99001 FORMAT (5X,'ITER = ',I4,' Error Estimate = ',E16.7)
   END IF
   !
-  IF ( Err<=Tol ) ISSIR = 1
+  IF( Err<=Tol ) ISSIR = 1
   !
   RETURN
   !------------- LAST LINE OF ISSIR FOLLOWS -----------------------------

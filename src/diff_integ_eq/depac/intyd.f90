@@ -1,7 +1,6 @@
 !** INTYD
 SUBROUTINE INTYD(T,K,Yh,Nyh,Dky,Iflag)
-  !>
-  !  Subsidiary to DEBDF
+  !> Subsidiary to DEBDF
   !***
   ! **Library:**   SLATEC
   !***
@@ -58,20 +57,20 @@ SUBROUTINE INTYD(T,K,Yh,Nyh,Dky,Iflag)
   !
   !* FIRST EXECUTABLE STATEMENT  INTYD
   Iflag = 0
-  IF ( K<0.OR.K>nq_com ) THEN
+  IF( K<0 .OR. K>nq_com ) THEN
     !
     Iflag = -1
     RETURN
   ELSE
     tp = tn_com - hu_com*(1.0E0+100.0E0*uround_com)
-    IF ( (T-tp)*(T-tn_com)>0.0E0 ) THEN
+    IF( (T-tp)*(T-tn_com)>0.0E0 ) THEN
       Iflag = -2
       RETURN
     ELSE
       !
       s = (T-tn_com)/h_com
       ic = 1
-      IF ( K/=0 ) THEN
+      IF( K/=0 ) THEN
         jj1 = l_com - K
         DO jj = jj1, nq_com
           ic = ic*jj
@@ -81,13 +80,13 @@ SUBROUTINE INTYD(T,K,Yh,Nyh,Dky,Iflag)
       DO i = 1, n_com
         Dky(i) = c*Yh(i,l_com)
       END DO
-      IF ( K/=nq_com ) THEN
+      IF( K/=nq_com ) THEN
         jb2 = nq_com - K
         DO jb = 1, jb2
           j = nq_com - jb
           jp1 = j + 1
           ic = 1
-          IF ( K/=0 ) THEN
+          IF( K/=0 ) THEN
             jj1 = jp1 - K
             DO jj = jj1, j
               ic = ic*jj
@@ -98,7 +97,7 @@ SUBROUTINE INTYD(T,K,Yh,Nyh,Dky,Iflag)
             Dky(i) = c*Yh(i,jp1) + s*Dky(i)
           END DO
         END DO
-        IF ( K==0 ) RETURN
+        IF( K==0 ) RETURN
       END IF
     END IF
   END IF

@@ -1,8 +1,7 @@
 !** DWNLSM
 SUBROUTINE DWNLSM(W,Mdw,Mme,Ma,N,L,Prgopt,X,Rnorm,Mode,Ipivot,Itype,Wd,H,&
     Scalee,Z,Temp,D)
-  !>
-  !  Subsidiary to DWNNLS
+  !> Subsidiary to DWNNLS
   !***
   ! **Library:**   SLATEC
   !***
@@ -42,7 +41,7 @@ SUBROUTINE DWNLSM(W,Mdw,Mme,Ma,N,L,Prgopt,X,Rnorm,Mode,Ipivot,Itype,Wd,H,&
   !         H(*)
   !            An array of length N.  Upon completion it contains the
   !         pivot scalars of the Householder transformations performed
-  !         in the case KRANK.LT.L.
+  !         in the case KRANK<L.
   !
   !         SCALE(*)
   !            An array of length M which is used by the subroutine
@@ -121,36 +120,36 @@ SUBROUTINE DWNLSM(W,Mdw,Mme,Ma,N,L,Prgopt,X,Rnorm,Mode,Ipivot,Itype,Wd,H,&
   ntimes = 0
   last = 1
   link = INT( Prgopt(1) )
-  IF ( link<=0.OR.link>nlink ) THEN
+  IF( link<=0 .OR. link>nlink ) THEN
     CALL XERMSG('DWNLSM',&
       'IN DWNNLS, THE OPTION VECTOR IS UNDEFINED',3,1)
     RETURN
   END IF
   DO
     !
-    IF ( link>1 ) THEN
+    IF( link>1 ) THEN
       ntimes = ntimes + 1
-      IF ( ntimes>nopt ) THEN
+      IF( ntimes>nopt ) THEN
         CALL XERMSG('DWNLSM',&
           'IN DWNNLS, THE LINKS IN THE OPTION VECTOR ARE CYCLING.',3,1)
         RETURN
       END IF
       !
       key = INT( Prgopt(last+1) )
-      IF ( key==6.AND.Prgopt(last+2)/=0.D0 ) THEN
+      IF( key==6 .AND. Prgopt(last+2)/=0.D0 ) THEN
         DO j = 1, N
           t = NORM2(W(1:m,j))
-          IF ( t/=0.D0 ) t = 1.D0/t
+          IF( t/=0.D0 ) t = 1.D0/t
           D(j) = t
         END DO
       END IF
       !
-      IF ( key==7 ) D(1:N) = Prgopt(last+2:last+N+1)
-      IF ( key==8 ) tau = MAX(drelpr,Prgopt(last+2))
-      IF ( key==9 ) blowup = MAX(drelpr,Prgopt(last+2))
+      IF( key==7 ) D(1:N) = Prgopt(last+2:last+N+1)
+      IF( key==8 ) tau = MAX(drelpr,Prgopt(last+2))
+      IF( key==9 ) blowup = MAX(drelpr,Prgopt(last+2))
       !
       next = INT( Prgopt(link) )
-      IF ( next<=0.OR.next>nlink ) THEN
+      IF( next<=0 .OR. next>nlink ) THEN
         CALL XERMSG('DWNLSM',&
           'IN DWNNLS, THE OPTION VECTOR IS UNDEFINED',3,1)
         RETURN
@@ -201,7 +200,7 @@ SUBROUTINE DWNLSM(W,Mdw,Mme,Ma,N,L,Prgopt,X,Rnorm,Mode,Ipivot,Itype,Wd,H,&
       !        When equation I is heavily weighted ITYPE(I)=0,
       !        else ITYPE(I)=1.
       !
-      IF ( i<=me ) THEN
+      IF( i<=me ) THEN
         t = alsq
         itemp = 0
       ELSE
@@ -261,18 +260,18 @@ SUBROUTINE DWNLSM(W,Mdw,Mme,Ma,N,L,Prgopt,X,Rnorm,Mode,Ipivot,Itype,Wd,H,&
   !     To solve system
   !     Copy right hand side into TEMP vector to use overwriting method.
   !
-  DO WHILE ( .NOT.(done) )
+  DO WHILE( .NOT. (done) )
     isol = L + 1
-    IF ( nsoln>=isol ) THEN
+    IF( nsoln>=isol ) THEN
       Temp(1:niv) = W(1:niv,N+1)
       DO j = nsoln, isol, -1
-        IF ( j>krank ) THEN
+        IF( j>krank ) THEN
           i = niv - nsoln + j
         ELSE
           i = j
         END IF
         !
-        IF ( j>krank.AND.j<=L ) THEN
+        IF( j>krank .AND. j<=L ) THEN
           Z(j) = 0.D0
         ELSE
           Z(j) = Temp(i)/W(i,j)
@@ -285,7 +284,7 @@ SUBROUTINE DWNLSM(W,Mdw,Mme,Ma,N,L,Prgopt,X,Rnorm,Mode,Ipivot,Itype,Wd,H,&
     !     of iterations.
     !
     iter = iter + 1
-    IF ( iter>itmax ) THEN
+    IF( iter>itmax ) THEN
       Mode = 1
       done = .TRUE.
     END IF
@@ -298,9 +297,9 @@ SUBROUTINE DWNLSM(W,Mdw,Mme,Ma,N,L,Prgopt,X,Rnorm,Mode,Ipivot,Itype,Wd,H,&
     hitcon = .FALSE.
     DO j = L + 1, nsoln
       zz = Z(j)
-      IF ( zz<=0.D0 ) THEN
+      IF( zz<=0.D0 ) THEN
         t = X(j)/(X(j)-zz)
-        IF ( t<alpha ) THEN
+        IF( t<alpha ) THEN
           alpha = t
           jcon = j
         END IF
@@ -310,7 +309,7 @@ SUBROUTINE DWNLSM(W,Mdw,Mme,Ma,N,L,Prgopt,X,Rnorm,Mode,Ipivot,Itype,Wd,H,&
     !
     !     Compute search direction and feasible point
     !
-    IF ( hitcon ) THEN
+    IF( hitcon ) THEN
       !
       !        To add constraints, use computed ALPHA to interpolate between
       !        last feasible solution X(*) and current unconstrained (and
@@ -353,25 +352,25 @@ SUBROUTINE DWNLSM(W,Mdw,Mme,Ma,N,L,Prgopt,X,Rnorm,Mode,Ipivot,Itype,Wd,H,&
       !
       i = krank + jcon - L
       DO j = jcon, nsoln
-        IF ( Itype(i)==0.AND.Itype(i+1)==0 ) THEN
+        IF( Itype(i)==0 .AND. Itype(i+1)==0 ) THEN
           !
           !              Zero IP1 to I in column J
           !
-          IF ( W(i+1,j)/=0.D0 ) THEN
+          IF( W(i+1,j)/=0.D0 ) THEN
             CALL DROTMG(Scalee(i),Scalee(i+1),W(i,j),W(i+1,j),sparam)
             W(i+1,j) = 0.D0
             CALL DROTM(N+1-j,W(i,j+1),Mdw,W(i+1,j+1),Mdw,sparam)
           END IF
-        ELSEIF ( Itype(i)==1.AND.Itype(i+1)==1 ) THEN
+        ELSEIF( Itype(i)==1 .AND. Itype(i+1)==1 ) THEN
           !
           !              Zero IP1 to I in column J
           !
-          IF ( W(i+1,j)/=0.D0 ) THEN
+          IF( W(i+1,j)/=0.D0 ) THEN
             CALL DROTMG(Scalee(i),Scalee(i+1),W(i,j),W(i+1,j),sparam)
             W(i+1,j) = 0.D0
             CALL DROTM(N+1-j,W(i,j+1),Mdw,W(i+1,j+1),Mdw,sparam)
           END IF
-        ELSEIF ( Itype(i)==1.AND.Itype(i+1)==0 ) THEN
+        ELSEIF( Itype(i)==1 .AND. Itype(i+1)==0 ) THEN
           CALL DSWAP(N+1,W(i,1),Mdw,W(i+1,1),Mdw)
           CALL DSWAP(1,Scalee(i),1,Scalee(i+1),1)
           itemp = Itype(i+1)
@@ -382,13 +381,13 @@ SUBROUTINE DWNLSM(W,Mdw,Mme,Ma,N,L,Prgopt,X,Rnorm,Mode,Ipivot,Itype,Wd,H,&
           !              be large enough to perform elimination.
           !              Zero IP1 to I in column J.
           !
-          IF ( W(i+1,j)/=0.D0 ) THEN
+          IF( W(i+1,j)/=0.D0 ) THEN
             CALL DROTMG(Scalee(i),Scalee(i+1),W(i,j),W(i+1,j),sparam)
             W(i+1,j) = 0.D0
             CALL DROTM(N+1-j,W(i,j+1),Mdw,W(i+1,j+1),Mdw,sparam)
           END IF
-        ELSEIF ( Itype(i)==0.AND.Itype(i+1)==1 ) THEN
-          IF ( Scalee(i)*W(i,j)**2/alsq<=(tau*eanorm)**2 ) THEN
+        ELSEIF( Itype(i)==0 .AND. Itype(i+1)==1 ) THEN
+          IF( Scalee(i)*W(i,j)**2/alsq<=(tau*eanorm)**2 ) THEN
             CALL DSWAP(N+1,W(i,1),Mdw,W(i+1,1),Mdw)
             CALL DSWAP(1,Scalee(i),1,Scalee(i+1),1)
             itemp = Itype(i+1)
@@ -398,7 +397,7 @@ SUBROUTINE DWNLSM(W,Mdw,Mme,Ma,N,L,Prgopt,X,Rnorm,Mode,Ipivot,Itype,Wd,H,&
             !
             !                 Zero IP1 to I in column J
             !
-          ELSEIF ( W(i+1,j)/=0.D0 ) THEN
+          ELSEIF( W(i+1,j)/=0.D0 ) THEN
             CALL DROTMG(Scalee(i),Scalee(i+1),W(i,j),W(i+1,j),sparam)
             W(i+1,j) = 0.D0
             CALL DROTM(N+1-j,W(i,j+1),Mdw,W(i+1,j+1),Mdw,sparam)
@@ -414,23 +413,23 @@ SUBROUTINE DWNLSM(W,Mdw,Mme,Ma,N,L,Prgopt,X,Rnorm,Mode,Ipivot,Itype,Wd,H,&
       !        removed from the solution set.
       !
       DO jcon = L + 1, nsoln
-        IF ( X(jcon)<=0.D0 ) GOTO 40
+        IF( X(jcon)<=0.D0 ) GOTO 40
       END DO
       feasbl = .TRUE.
-      40  IF ( .NOT.feasbl ) GOTO 20
+      40  IF( .NOT. feasbl ) GOTO 20
     ELSE
       !
       !        To perform multiplier test and drop a constraint.
       !
       X(1:nsoln) = Z(1:nsoln)
-      IF ( nsoln<N ) X(nsoln+1:N) = 0.D0
+      IF( nsoln<N ) X(nsoln+1:N) = 0.D0
       !
       !        Reclassify least squares equations as equalities as necessary.
       !
       i = niv + 1
       DO
-        IF ( i<=me ) THEN
-          IF ( Itype(i)==0 ) THEN
+        IF( i<=me ) THEN
+          IF( Itype(i)==0 ) THEN
             i = i + 1
           ELSE
             CALL DSWAP(N+1,W(i,1),Mdw,W(me,1),Mdw)
@@ -463,18 +462,18 @@ SUBROUTINE DWNLSM(W,Mdw,Mme,Ma,N,L,Prgopt,X,Rnorm,Mode,Ipivot,Itype,Wd,H,&
         wmax = 0.D0
         iwmax = nsoln + 1
         DO j = nsoln + 1, N
-          IF ( Wd(j)>wmax ) THEN
+          IF( Wd(j)>wmax ) THEN
             wmax = Wd(j)
             iwmax = j
           END IF
         END DO
-        IF ( wmax<=0.D0 ) GOTO 100
+        IF( wmax<=0.D0 ) GOTO 100
         !
         !        Set dual coefficients to zero for incoming column.
         !
         Wd(iwmax) = 0.D0
         !
-        !        WMAX .GT. 0.D0, so okay to move column IWMAX to solution set.
+        !        WMAX > 0.D0, so okay to move column IWMAX to solution set.
         !        Perform transformation to retriangularize, and test for near
         !        linear dependence.
         !
@@ -484,7 +483,7 @@ SUBROUTINE DWNLSM(W,Mdw,Mme,Ma,N,L,Prgopt,X,Rnorm,Mode,Ipivot,Itype,Wd,H,&
         !
         nsoln = nsoln + 1
         niv = niv + 1
-        IF ( nsoln/=iwmax ) THEN
+        IF( nsoln/=iwmax ) THEN
           CALL DSWAP(m,W(1,nsoln),1,W(1,iwmax),1)
           Wd(iwmax) = Wd(nsoln)
           Wd(nsoln) = 0.D0
@@ -504,12 +503,12 @@ SUBROUTINE DWNLSM(W,Mdw,Mme,Ma,N,L,Prgopt,X,Rnorm,Mode,Ipivot,Itype,Wd,H,&
           !           it as the pivot.  This is to maintain the sharp interface
           !           between weighted and non-weighted rows in all cases.
           !
-          IF ( j==me+1 ) THEN
+          IF( j==me+1 ) THEN
             imax = me
             amax = Scalee(me)*W(me,nsoln)**2
             DO jp = j - 1, niv, -1
               t = Scalee(jp)*W(jp,nsoln)**2
-              IF ( t>amax ) THEN
+              IF( t>amax ) THEN
                 imax = jp
                 amax = t
               END IF
@@ -517,7 +516,7 @@ SUBROUTINE DWNLSM(W,Mdw,Mme,Ma,N,L,Prgopt,X,Rnorm,Mode,Ipivot,Itype,Wd,H,&
             jp = imax
           END IF
           !
-          IF ( W(j,nsoln)/=0.D0 ) THEN
+          IF( W(j,nsoln)/=0.D0 ) THEN
             CALL DROTMG(Scalee(jp),Scalee(j),W(jp,nsoln),W(j,nsoln),sparam)
             W(j,nsoln) = 0.D0
             CALL DROTM(N+1-nsoln,W(jp,nsoln+1),Mdw,W(j,nsoln+1),Mdw,sparam)
@@ -528,21 +527,21 @@ SUBROUTINE DWNLSM(W,Mdw,Mme,Ma,N,L,Prgopt,X,Rnorm,Mode,Ipivot,Itype,Wd,H,&
         !        this is nonpositive or too large.  If this was true or if the
         !        pivot term was zero, reject the column as dependent.
         !
-        IF ( W(niv,nsoln)/=0.D0 ) THEN
+        IF( W(niv,nsoln)/=0.D0 ) THEN
           isol = niv
           z2 = W(isol,N+1)/W(isol,nsoln)
           Z(nsoln) = z2
           pos = z2>0.D0
-          IF ( z2*eanorm>=bnorm.AND.pos )&
-            pos = .NOT.(blowup*z2*eanorm>=bnorm)
+          IF( z2*eanorm>=bnorm .AND. pos )&
+            pos = .NOT. (blowup*z2*eanorm>=bnorm)
           !
           !           Try to add row ME+1 as an additional equality constraint.
           !           Check size of proposed new solution component.
           !           Reject it if it is too large.
           !
-        ELSEIF ( niv<=me.AND.W(me+1,nsoln)/=0.D0 ) THEN
+        ELSEIF( niv<=me .AND. W(me+1,nsoln)/=0.D0 ) THEN
           isol = me + 1
-          IF ( pos ) THEN
+          IF( pos ) THEN
             !
             !              Swap rows ME+1 and NIV, and scale factors for these rows.
             !
@@ -557,11 +556,11 @@ SUBROUTINE DWNLSM(W,Mdw,Mme,Ma,N,L,Prgopt,X,Rnorm,Mode,Ipivot,Itype,Wd,H,&
           pos = .FALSE.
         END IF
         !
-        IF ( .NOT.pos ) THEN
+        IF( .NOT. pos ) THEN
           nsoln = nsoln - 1
           niv = niv - 1
         END IF
-        IF ( pos.OR.done ) EXIT
+        IF( pos .OR. done ) EXIT
       END DO
     END IF
   END DO
@@ -572,16 +571,16 @@ SUBROUTINE DWNLSM(W,Mdw,Mme,Ma,N,L,Prgopt,X,Rnorm,Mode,Ipivot,Itype,Wd,H,&
   !     Copy right hand side into TEMP vector to use overwriting method.
   !
   100  isol = 1
-  IF ( nsoln>=isol ) THEN
+  IF( nsoln>=isol ) THEN
     Temp(1:niv) = W(1:niv,N+1)
     DO j = nsoln, isol, -1
-      IF ( j>krank ) THEN
+      IF( j>krank ) THEN
         i = niv - nsoln + j
       ELSE
         i = j
       END IF
       !
-      IF ( j>krank.AND.j<=L ) THEN
+      IF( j>krank .AND. j<=L ) THEN
         Z(j) = 0.D0
       ELSE
         Z(j) = Temp(i)/W(i,j)
@@ -594,9 +593,9 @@ SUBROUTINE DWNLSM(W,Mdw,Mme,Ma,N,L,Prgopt,X,Rnorm,Mode,Ipivot,Itype,Wd,H,&
   !
   X(1:nsoln) = Z(1:nsoln)
   !
-  !     Apply Householder transformations to X(*) if KRANK.LT.L
+  !     Apply Householder transformations to X(*) if KRANK<L
   !
-  IF ( krank<L ) THEN
+  IF( krank<L ) THEN
     DO i = 1, krank
       CALL DH12(2,i,krank+1,L,W(i,1),Mdw,H(i),X,1,1,1)
     END DO
@@ -604,13 +603,13 @@ SUBROUTINE DWNLSM(W,Mdw,Mme,Ma,N,L,Prgopt,X,Rnorm,Mode,Ipivot,Itype,Wd,H,&
   !
   !     Fill in trailing zeroes for constrained variables not in solution.
   !
-  IF ( nsoln<N ) X(nsoln+1:N) = 0.D0
+  IF( nsoln<N ) X(nsoln+1:N) = 0.D0
   !
   !     Permute solution vector to natural order.
   !
   DO i = 1, N
     j = i
-    DO WHILE ( Ipivot(j)/=i )
+    DO WHILE( Ipivot(j)/=i )
       j = j + 1
     END DO
     !
@@ -627,7 +626,7 @@ SUBROUTINE DWNLSM(W,Mdw,Mme,Ma,N,L,Prgopt,X,Rnorm,Mode,Ipivot,Itype,Wd,H,&
   !
   DO i = nsoln + 1, m
     t = W(i,N+1)
-    IF ( i<=me ) t = t/alamda
+    IF( i<=me ) t = t/alamda
     t = (Scalee(i)*t)*t
     Rnorm = Rnorm + t
   END DO

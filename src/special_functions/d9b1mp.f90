@@ -1,7 +1,6 @@
 !** D9B1MP
 SUBROUTINE D9B1MP(X,Ampl,Theta)
-  !>
-  !  Evaluate the modulus and phase for the J1 and Y1 Bessel
+  !> Evaluate the modulus and phase for the J1 and Y1 Bessel
   !            functions.
   !***
   ! **Library:**   SLATEC (FNLIB)
@@ -149,7 +148,7 @@ SUBROUTINE D9B1MP(X,Ampl,Theta)
   REAL(DP), PARAMETER ::  pi4 = 0.785398163397448309615660845819876D0
   LOGICAL, SAVE :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  D9B1MP
-  IF ( first ) THEN
+  IF( first ) THEN
     nbm1 = INITDS(bm1cs,37,eta)
     nbt12 = INITDS(bt12cs,39,eta)
     nbm12 = INITDS(bm12cs,40,eta)
@@ -157,16 +156,16 @@ SUBROUTINE D9B1MP(X,Ampl,Theta)
     first = .FALSE.
   END IF
   !
-  IF ( X<4.0D0 ) THEN
-    CALL XERMSG('D9B1MP','X must be .GE. 4',1,2)
+  IF( X<4.0D0 ) THEN
+    CALL XERMSG('D9B1MP','X must be >= 4',1,2)
     Ampl = 0.0D0
     Theta = 0.0D0
-  ELSEIF ( X<=8.0D0 ) THEN
+  ELSEIF( X<=8.0D0 ) THEN
     z = (128.0D0/(X*X)-5.0D0)/3.0D0
     Ampl = (0.75D0+DCSEVL(z,bm1cs,nbm1))/SQRT(X)
     Theta = X - 3.0D0*pi4 + DCSEVL(z,bt12cs,nbt12)/X
   ELSE
-    IF ( X>xmax ) CALL XERMSG('D9B1MP',&
+    IF( X>xmax ) CALL XERMSG('D9B1MP',&
       'No precision because X is too big',2,2)
     !
     z = 128.0D0/(X*X) - 1.0D0

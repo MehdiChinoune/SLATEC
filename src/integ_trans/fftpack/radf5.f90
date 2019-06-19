@@ -1,7 +1,6 @@
 !** RADF5
 SUBROUTINE RADF5(Ido,L1,Cc,Ch,Wa1,Wa2,Wa3,Wa4)
-  !>
-  !  Calculate the fast Fourier transform of subvectors of
+  !> Calculate the fast Fourier transform of subvectors of
   !            length five.
   !***
   ! **Library:**   SLATEC (FFTPACK)
@@ -47,9 +46,9 @@ SUBROUTINE RADF5(Ido,L1,Cc,Ch,Wa1,Wa2,Wa3,Wa4)
     Ch(Ido,4,k) = Cc(1,k,1) + tr12*cr2 + tr11*cr3
     Ch(1,5,k) = ti12*ci5 - ti11*ci4
   END DO
-  IF ( Ido==1 ) RETURN
+  IF( Ido==1 ) RETURN
   idp2 = Ido + 2
-  IF ( (Ido-1)/2<L1 ) THEN
+  IF( (Ido-1)/2<L1 ) THEN
     DO i = 3, Ido, 2
       ic = idp2 - i
       DO k = 1, L1

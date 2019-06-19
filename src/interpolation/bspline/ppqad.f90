@@ -1,7 +1,6 @@
 !** PPQAD
 SUBROUTINE PPQAD(Ldc,C,Xi,Lxi,K,X1,X2,Pquad)
-  !>
-  !  Compute the integral on (X1,X2) of a K-th order B-spline
+  !> Compute the integral on (X1,X2) of a K-th order B-spline
   !            using the piecewise polynomial (PP) representation.
   !***
   ! **Library:**   SLATEC
@@ -27,13 +26,13 @@ SUBROUTINE PPQAD(Ldc,C,Xi,Lxi,K,X1,X2,Pquad)
   !
   !     Description of Arguments
   !         Input
-  !           LDC    - leading dimension of matrix C, LDC .GE. K
+  !           LDC    - leading dimension of matrix C, LDC >= K
   !           C(I,J) - right Taylor derivatives at XI(J), I=1,K, J=1,LXI
   !           XI(*)  - break point array of length LXI+1
   !           LXI    - number of polynomial pieces
-  !           K      - order of B-spline, K .GE. 1
+  !           K      - order of B-spline, K >= 1
   !           X1,X2  - end points of quadrature interval, normally in
-  !                    XI(1) .LE. X .LE. XI(LXI+1)
+  !                    XI(1) <= X <= XI(LXI+1)
   !
   !         Output
   !           PQUAD  - integral of the PP representation over (X1,X2)
@@ -64,21 +63,21 @@ SUBROUTINE PPQAD(Ldc,C,Xi,Lxi,K,X1,X2,Pquad)
   !
   !* FIRST EXECUTABLE STATEMENT  PPQAD
   Pquad = 0.0E0
-  IF ( K<1 ) THEN
+  IF( K<1 ) THEN
     !
     !
-    CALL XERMSG('PPQAD','K DOES NOT SATISFY K.GE.1',2,1)
+    CALL XERMSG('PPQAD','K DOES NOT SATISFY K>=1',2,1)
     RETURN
-  ELSEIF ( Lxi<1 ) THEN
-    CALL XERMSG('PPQAD','LXI DOES NOT SATISFY LXI.GE.1',2,1)
+  ELSEIF( Lxi<1 ) THEN
+    CALL XERMSG('PPQAD','LXI DOES NOT SATISFY LXI>=1',2,1)
     RETURN
-  ELSEIF ( Ldc<K ) THEN
-    CALL XERMSG('PPQAD','LDC DOES NOT SATISFY LDC.GE.K',2,1)
+  ELSEIF( Ldc<K ) THEN
+    CALL XERMSG('PPQAD','LDC DOES NOT SATISFY LDC>=K',2,1)
     RETURN
   END IF
   aa = MIN(X1,X2)
   bb = MAX(X1,X2)
-  IF ( aa==bb ) RETURN
+  IF( aa==bb ) RETURN
   ilo = 1
   CALL INTRV(Xi,Lxi,aa,ilo,il1,mf1)
   CALL INTRV(Xi,Lxi,bb,ilo,il2,mf2)
@@ -86,14 +85,14 @@ SUBROUTINE PPQAD(Ldc,C,Xi,Lxi,K,X1,X2,Pquad)
   DO left = il1, il2
     ta = Xi(left)
     a = MAX(aa,ta)
-    IF ( left==1 ) a = aa
+    IF( left==1 ) a = aa
     tb = bb
-    IF ( left<Lxi ) tb = Xi(left+1)
+    IF( left<Lxi ) tb = Xi(left+1)
     x = MIN(bb,tb)
     DO ii = 1, 2
       ss(ii) = 0.0E0
       dx = x - Xi(left)
-      IF ( dx/=0.0E0 ) THEN
+      IF( dx/=0.0E0 ) THEN
         s = C(K,left)
         flk = K
         im = K - 1
@@ -109,7 +108,7 @@ SUBROUTINE PPQAD(Ldc,C,Xi,Lxi,K,X1,X2,Pquad)
     END DO
     q = q + (ss(1)-ss(2))
   END DO
-  IF ( X1>X2 ) q = -q
+  IF( X1>X2 ) q = -q
   Pquad = q
   RETURN
 END SUBROUTINE PPQAD

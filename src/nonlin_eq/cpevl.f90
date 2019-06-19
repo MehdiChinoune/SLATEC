@@ -1,7 +1,6 @@
 !** CPEVL
 SUBROUTINE CPEVL(N,M,A,Z,C,B,Kbd)
-  !>
-  !  Subsidiary to CPZERO
+  !> Subsidiary to CPZERO
   !***
   ! **Library:**   SLATEC
   !***
@@ -19,7 +18,7 @@ SUBROUTINE CPEVL(N,M,A,Z,C,B,Kbd)
   !        M = Number of derivatives to be calculated,
   !            M=0 evaluates only the function
   !            M=1 evaluates the function and first derivative, etc.
-  !             if M .GT. N+1 function and all N derivatives will be
+  !             if M > N+1 function and all N derivatives will be
   !                calculated.
   !       A = Complex vector containing the N+1 coefficients of polynomial
   !               A(I)= coefficient of Z**(N+1-I)
@@ -64,17 +63,17 @@ SUBROUTINE CPEVL(N,M,A,Z,C,B,Kbd)
     bim1 = 0.0
     mini = MIN(M+1,N+2-j)
     DO i = 1, mini
-      IF ( j/=1 ) ci = C(i)
-      IF ( i/=1 ) cim1 = C(i-1)
+      IF( j/=1 ) ci = C(i)
+      IF( i/=1 ) cim1 = C(i-1)
       C(i) = cim1 + Z*ci
-      IF ( Kbd ) THEN
-        IF ( j/=1 ) bi = B(i)
-        IF ( i/=1 ) bim1 = B(i-1)
+      IF( Kbd ) THEN
+        IF( j/=1 ) bi = B(i)
+        IF( i/=1 ) bim1 = B(i-1)
         t = bi + (3.*d1+4.*d1*d1)*ZA(ci)
         r = REAL(ZA(Z)*CMPLX(REAL(t),-AIMAG(t)))
         s = AIMAG(ZA(Z)*t)
         B(i) = (1.+8.*d1)*(bim1+d1*ZA(cim1)+CMPLX(r,s))
-        IF ( j==1 ) B(i) = 0.0
+        IF( j==1 ) B(i) = 0.0
       END IF
     END DO
   END DO

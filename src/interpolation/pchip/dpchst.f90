@@ -1,7 +1,6 @@
 !** DPCHST
 REAL(DP) FUNCTION DPCHST(Arg1,Arg2)
-  !>
-  !  DPCHIP Sign-Testing Routine
+  !> DPCHIP Sign-Testing Routine
   !***
   ! **Library:**   SLATEC (PCHIP)
   !***
@@ -56,7 +55,7 @@ REAL(DP) FUNCTION DPCHST(Arg1,Arg2)
   !
   !* FIRST EXECUTABLE STATEMENT  DPCHST
   DPCHST = SIGN(one,Arg1)*SIGN(one,Arg2)
-  IF ( (Arg1==zero).OR.(Arg2==zero) ) DPCHST = zero
+  IF( (Arg1==zero) .OR. (Arg2==zero) ) DPCHST = zero
   !
   !------------- LAST LINE OF DPCHST FOLLOWS -----------------------------
 END FUNCTION DPCHST

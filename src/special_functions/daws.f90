@@ -1,7 +1,6 @@
 !** DAWS
 REAL(SP) FUNCTION DAWS(X)
-  !>
-  !  Compute Dawson's function.
+  !> Compute Dawson's function.
   !***
   ! **Library:**   SLATEC (FNLIB)
   !***
@@ -79,7 +78,7 @@ REAL(SP) FUNCTION DAWS(X)
     -.00000000000000011E0,-.00000000000000006E0, .00000000000000002E0 ]
   LOGICAL, SAVE :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  DAWS
-  IF ( first ) THEN
+  IF( first ) THEN
     ntdaw = INITS(dawcs,13,0.1*eps)
     ntdaw2 = INITS(daw2cs,29,0.1*eps)
     ntdawa = INITS(dawacs,26,0.1*eps)
@@ -87,26 +86,26 @@ REAL(SP) FUNCTION DAWS(X)
   END IF
   !
   y = ABS(X)
-  IF ( y<=1.0 ) THEN
+  IF( y<=1.0 ) THEN
     !
     DAWS = X
-    IF ( y<=xsml ) RETURN
+    IF( y<=xsml ) RETURN
     !
     DAWS = X*(0.75+CSEVL(2.0*y*y-1.0,dawcs,ntdaw))
     RETURN
     !
-  ELSEIF ( y<=4.0 ) THEN
+  ELSEIF( y<=4.0 ) THEN
     DAWS = X*(0.25+CSEVL(0.125*y*y-1.0,daw2cs,ntdaw2))
     RETURN
     !
-  ELSEIF ( y>xmax ) THEN
+  ELSEIF( y>xmax ) THEN
     !
     CALL XERMSG('DAWS','ABS(X) SO LARGE DAWS UNDERFLOWS',1,1)
     DAWS = 0.0
     RETURN
   END IF
   DAWS = 0.5/X
-  IF ( y>xbig ) RETURN
+  IF( y>xbig ) RETURN
   !
   DAWS = (0.5+CSEVL(32.0/y**2-1.0,dawacs,ntdawa))/X
   RETURN

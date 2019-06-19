@@ -1,7 +1,6 @@
 !** DBESK
 SUBROUTINE DBESK(X,Fnu,Kode,N,Y,Nz)
-  !>
-  !  Implement forward recursion on the three term recursion
+  !> Implement forward recursion on the three term recursion
   !            relation for a sequence of non-negative order Bessel
   !            functions K/SUB(FNU+I-1)/(X), or scaled Bessel functions
   !            EXP(X)*K/SUB(FNU+I-1)/(X), I=1,...,N for REAL(SP), positive
@@ -23,12 +22,12 @@ SUBROUTINE DBESK(X,Fnu,Kode,N,Y,Nz)
   !         DBESK implements forward recursion on the three term
   !         recursion relation for a sequence of non-negative order Bessel
   !         functions K/sub(FNU+I-1)/(X), or scaled Bessel functions
-  !         EXP(X)*K/sub(FNU+I-1)/(X), I=1,..,N for real X .GT. 0.0D0 and
-  !         non-negative orders FNU.  If FNU .LT. NULIM, orders FNU and
+  !         EXP(X)*K/sub(FNU+I-1)/(X), I=1,..,N for real X > 0.0D0 and
+  !         non-negative orders FNU.  If FNU < NULIM, orders FNU and
   !         FNU+1 are obtained from DBSKNU to start the recursion.  If
-  !         FNU .GE. NULIM, the uniform asymptotic expansion is used for
+  !         FNU >= NULIM, the uniform asymptotic expansion is used for
   !         orders FNU and FNU+1 to start the recursion.  NULIM is 35 or
-  !         70 depending on whether N=1 or N .GE. 2.  Under and overflow
+  !         70 depending on whether N=1 or N >= 2.  Under and overflow
   !         tests are made on the leading term of the asymptotic expansion
   !         before any extensive computation is done.
   !
@@ -39,14 +38,14 @@ SUBROUTINE DBESK(X,Fnu,Kode,N,Y,Nz)
   !     Description of Arguments
   !
   !         Input      X,FNU are double precision
-  !           X      - X .GT. 0.0D0
-  !           FNU    - order of the initial K function, FNU .GE. 0.0D0
+  !           X      - X > 0.0D0
+  !           FNU    - order of the initial K function, FNU >= 0.0D0
   !           KODE   - a parameter to indicate the scaling option
   !                    KODE=1 returns Y(I)=       K/sub(FNU+I-1)/(X),
   !                                        I=1,...,N
   !                    KODE=2 returns Y(I)=EXP(X)*K/sub(FNU+I-1)/(X),
   !                                        I=1,...,N
-  !           N      - number of members in the sequence, N .GE. 1
+  !           N      - number of members in the sequence, N >= 1
   !
   !         Output     Y is double precision
   !           Y      - a vector whose first N components contain values
@@ -57,13 +56,13 @@ SUBROUTINE DBESK(X,Fnu,Kode,N,Y,Nz)
   !           NZ     - number of components of Y set to zero due to
   !                    underflow with KODE=1,
   !                    NZ=0  , normal return, computation completed
-  !                    NZ .NE. 0, first NZ components of Y set to zero
+  !                    NZ /= 0, first NZ components of Y set to zero
   !                             due to underflow, Y(I)=0.0D0, I=1,...,NZ
   !
   !     Error Conditions
   !         Improper input arguments - a fatal error
   !         Overflow - a fatal error
-  !         Underflow with KODE=1 -  a non-fatal error (NZ .NE. 0)
+  !         Underflow with KODE=1 -  a non-fatal error (NZ /= 0)
   !
   !***
   ! **References:**  F. W. J. Olver, Tables of Bessel Functions of Moderate
@@ -96,23 +95,23 @@ SUBROUTINE DBESK(X,Fnu,Kode,N,Y,Nz)
   nn = -I1MACH(15)
   elim = 2.303D0*(nn*D1MACH(5)-3.0D0)
   xlim = D1MACH(1)*1.0D+3
-  IF ( Kode<1.OR.Kode>2 ) THEN
+  IF( Kode<1 .OR. Kode>2 ) THEN
     !
     !
     !
     CALL XERMSG('DBESK','SCALING OPTION, KODE, NOT 1 OR 2',2,1)
     RETURN
-  ELSEIF ( Fnu<0.0D0 ) THEN
+  ELSEIF( Fnu<0.0D0 ) THEN
     CALL XERMSG('DBESK','ORDER, FNU, LESS THAN ZERO',2,1)
     RETURN
-  ELSEIF ( X<=0.0D0 ) THEN
+  ELSEIF( X<=0.0D0 ) THEN
     CALL XERMSG('DBESK','X LESS THAN OR EQUAL TO ZERO',2,1)
     RETURN
-  ELSEIF ( X<xlim ) THEN
+  ELSEIF( X<xlim ) THEN
     CALL XERMSG('DBESK',&
       'OVERFLOW, FNU OR N TOO LARGE OR X TOO SMALL',6,1)
     RETURN
-  ELSEIF ( N<1 ) THEN
+  ELSEIF( N<1 ) THEN
     CALL XERMSG('DBESK','N LESS THAN ONE',2,1)
     RETURN
   ELSE
@@ -130,19 +129,19 @@ SUBROUTINE DBESK(X,Fnu,Kode,N,Y,Nz)
     nn = MIN(2,nd)
     fn = Fnu + N - 1
     fnn = fn
-    IF ( fn<2.0D0 ) THEN
+    IF( fn<2.0D0 ) THEN
       !
       !     UNDERFLOW TEST FOR KODE=1
-      IF ( Kode==2 ) GOTO 600
-      IF ( X<=elim ) GOTO 600
+      IF( Kode==2 ) GOTO 600
+      IF( X<=elim ) GOTO 600
       GOTO 700
     ELSE
       !
       !     OVERFLOW TEST  (LEADING EXPONENTIAL OF ASYMPTOTIC EXPANSION)
-      !     FOR THE LAST ORDER, FNU+N-1.GE.NULIM
+      !     FOR THE LAST ORDER, FNU+N-1>=NULIM
       !
       zn = X/fn
-      IF ( zn==0.0D0 ) THEN
+      IF( zn==0.0D0 ) THEN
         CALL XERMSG('DBESK',&
           'OVERFLOW, FNU OR N TOO LARGE OR X TOO SMALL',6,1)
         RETURN
@@ -151,20 +150,20 @@ SUBROUTINE DBESK(X,Fnu,Kode,N,Y,Nz)
         gln = LOG((1.0D0+rtz)/zn)
         t = rtz*(1.0D0-etx) + etx/(zn+rtz)
         cn = -fn*(t-gln)
-        IF ( cn>elim ) THEN
+        IF( cn>elim ) THEN
           CALL XERMSG('DBESK',&
             'OVERFLOW, FNU OR N TOO LARGE OR X TOO SMALL',6,1)
           RETURN
-        ELSEIF ( nud<nulim(nn) ) THEN
+        ELSEIF( nud<nulim(nn) ) THEN
           !
-          IF ( Kode==2 ) GOTO 300
+          IF( Kode==2 ) GOTO 300
           !
           !     UNDERFLOW TEST (LEADING EXPONENTIAL OF ASYMPTOTIC EXPANSION IN X)
           !     FOR ORDER DNU
           !
-          IF ( X<=elim ) GOTO 300
+          IF( X<=elim ) GOTO 300
           GOTO 700
-        ELSEIF ( nn==1 ) THEN
+        ELSEIF( nn==1 ) THEN
           GOTO 200
         END IF
       END IF
@@ -172,7 +171,7 @@ SUBROUTINE DBESK(X,Fnu,Kode,N,Y,Nz)
   END IF
   !
   !     UNDERFLOW TEST (LEADING EXPONENTIAL OF ASYMPTOTIC EXPANSION)
-  !     FOR THE FIRST ORDER, FNU.GE.NULIM
+  !     FOR THE FIRST ORDER, FNU>=NULIM
   !
   100  fn = gnu
   zn = X/fn
@@ -181,32 +180,32 @@ SUBROUTINE DBESK(X,Fnu,Kode,N,Y,Nz)
   t = rtz*(1.0D0-etx) + etx/(zn+rtz)
   cn = -fn*(t-gln)
   200 CONTINUE
-  IF ( cn<-elim ) GOTO 700
+  IF( cn<-elim ) GOTO 700
   !
-  !     ASYMPTOTIC EXPANSION FOR ORDERS FNU AND FNU+1.GE.NULIM
+  !     ASYMPTOTIC EXPANSION FOR ORDERS FNU AND FNU+1>=NULIM
   !
   flgik = -1.0D0
   CALL DASYIK(X,gnu,Kode,flgik,rtz,cn,nn,Y)
-  IF ( nn==1 ) GOTO 800
+  IF( nn==1 ) GOTO 800
   trx = 2.0D0/X
   tm = (gnu+gnu+2.0D0)/X
   GOTO 500
   300 CONTINUE
-  IF ( dnu/=0.0D0 ) THEN
+  IF( dnu/=0.0D0 ) THEN
     nb = 2
-    IF ( nud==0.AND.nd==1 ) nb = 1
+    IF( nud==0 .AND. nd==1 ) nb = 1
     CALL DBSKNU(X,dnu,Kode,nb,w,Nz)
     s1 = w(1)
-    IF ( nb==1 ) GOTO 400
+    IF( nb==1 ) GOTO 400
     s2 = w(2)
   ELSE
-    IF ( Kode==2 ) THEN
+    IF( Kode==2 ) THEN
       s1 = DBSK0E(X)
     ELSE
       s1 = DBESK0(X)
     END IF
-    IF ( nud==0.AND.nd==1 ) GOTO 400
-    IF ( Kode==2 ) THEN
+    IF( nud==0 .AND. nd==1 ) GOTO 400
+    IF( Kode==2 ) THEN
       s2 = DBSK1E(X)
     ELSE
       s2 = DBESK1(X)
@@ -215,23 +214,23 @@ SUBROUTINE DBESK(X,Fnu,Kode,N,Y,Nz)
   trx = 2.0D0/X
   tm = (dnu+dnu+2.0D0)/X
   !     FORWARD RECUR FROM DNU TO FNU+1 TO GET Y(1) AND Y(2)
-  IF ( nd==1 ) nud = nud - 1
-  IF ( nud>0 ) THEN
+  IF( nd==1 ) nud = nud - 1
+  IF( nud>0 ) THEN
     DO i = 1, nud
       s = s2
       s2 = tm*s2 + s1
       s1 = s
       tm = tm + trx
     END DO
-    IF ( nd==1 ) s1 = s2
-  ELSEIF ( nd<=1 ) THEN
+    IF( nd==1 ) s1 = s2
+  ELSEIF( nd<=1 ) THEN
     s1 = s2
   END IF
   400  Y(1) = s1
-  IF ( nd==1 ) GOTO 800
+  IF( nd==1 ) GOTO 800
   Y(2) = s2
   500 CONTINUE
-  IF ( nd/=2 ) THEN
+  IF( nd/=2 ) THEN
     !     FORWARD RECUR FROM FNU+2 TO FNU+N-1
     DO i = 3, nd
       Y(i) = tm*Y(i-1) + Y(i-2)
@@ -241,26 +240,26 @@ SUBROUTINE DBESK(X,Fnu,Kode,N,Y,Nz)
   GOTO 800
   !     OVERFLOW TEST
   600 CONTINUE
-  IF ( fn>1.0D0 ) THEN
-    IF ( -fn*(LOG(X)-0.693D0)>elim ) THEN
+  IF( fn>1.0D0 ) THEN
+    IF( -fn*(LOG(X)-0.693D0)>elim ) THEN
       CALL XERMSG('DBESK',&
         'OVERFLOW, FNU OR N TOO LARGE OR X TOO SMALL',6,1)
       RETURN
     END IF
   END IF
-  IF ( dnu==0.0D0 ) THEN
+  IF( dnu==0.0D0 ) THEN
     j = nud
-    IF ( j/=1 ) THEN
+    IF( j/=1 ) THEN
       j = j + 1
-      IF ( Kode==2 ) THEN
+      IF( Kode==2 ) THEN
         Y(j) = DBSK0E(X)
       ELSE
         Y(j) = DBESK0(X)
       END IF
-      IF ( nd==1 ) GOTO 800
+      IF( nd==1 ) GOTO 800
       j = j + 1
     END IF
-    IF ( Kode==2 ) THEN
+    IF( Kode==2 ) THEN
       Y(j) = DBSK1E(X)
     ELSE
       Y(j) = DBESK1(X)
@@ -276,16 +275,16 @@ SUBROUTINE DBESK(X,Fnu,Kode,N,Y,Nz)
     !
     nud = nud + 1
     nd = nd - 1
-    IF ( nd==0 ) EXIT
+    IF( nd==0 ) EXIT
     nn = MIN(2,nd)
     gnu = gnu + 1.0D0
-    IF ( fnn>=2.0D0 ) THEN
-      IF ( nud>=nulim(nn) ) GOTO 100
+    IF( fnn>=2.0D0 ) THEN
+      IF( nud>=nulim(nn) ) GOTO 100
     END IF
   END DO
   800  Nz = N - nd
-  IF ( Nz==0 ) RETURN
-  IF ( nd/=0 ) THEN
+  IF( Nz==0 ) RETURN
+  IF( nd/=0 ) THEN
     DO i = 1, nd
       j = N - i + 1
       k = nd - i + 1

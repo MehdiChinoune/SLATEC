@@ -1,7 +1,6 @@
 !** DSMMTI
 SUBROUTINE DSMMTI(N,B,X,Rwork,Iwork)
-  !>
-  !  SLAP MSOLVE for LDU Factorization of Normal Equations.
+  !> SLAP MSOLVE for LDU Factorization of Normal Equations.
   !            This routine acts as an interface between the SLAP generic
   !            MMTSLV calling convention and the routine that actually
   !                                    -1
@@ -51,12 +50,12 @@ SUBROUTINE DSMMTI(N,B,X,Rwork,Iwork)
   !   930701  Updated CATEGORY section.  (FNF, WRB)
 
   !     .. Scalar Arguments ..
-  INTEGER N
+  INTEGER :: N
   !     .. Array Arguments ..
   REAL(DP) :: B(N), Rwork(*), X(N)
-  INTEGER Iwork(*)
+  INTEGER :: Iwork(*)
   !     .. Local Scalars ..
-  INTEGER locdin, locil, lociu, locjl, locju, locl, locu
+  INTEGER :: locdin, locil, lociu, locjl, locju, locl, locu
   !* FIRST EXECUTABLE STATEMENT  DSMMTI
   !
   !         Pull out the locations of the arrays holding the ILU

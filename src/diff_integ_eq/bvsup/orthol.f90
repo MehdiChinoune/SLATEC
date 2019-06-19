@@ -1,7 +1,6 @@
 !** ORTHOL
 SUBROUTINE ORTHOL(A,M,N,Nrda,Iflag,Irank,Iscale,Diag,Kpivot,Scales,Cols,Cs)
-  !>
-  !  Subsidiary to BVSUP
+  !> Subsidiary to BVSUP
   !***
   ! **Library:**   SLATEC
   !***
@@ -96,10 +95,10 @@ SUBROUTINE ORTHOL(A,M,N,Nrda,Iflag,Irank,Iscale,Diag,Kpivot,Scales,Cols,Cs)
   !
   !- *********************************************************************
   !
-  IF ( M>=N.AND.N>=1.AND.Nrda>=M ) THEN
+  IF( M>=N .AND. N>=1 .AND. Nrda>=M ) THEN
     !
     acc = 10.*uro
-    IF ( Iflag<0 ) acc = MAX(acc,10.**Iflag)
+    IF( Iflag<0 ) acc = MAX(acc,10.**Iflag)
     sruro = SQRT(uro)
     Iflag = 1
     Irank = N
@@ -127,23 +126,23 @@ SUBROUTINE ORTHOL(A,M,N,Nrda,Iflag,Irank,Iscale,Diag,Kpivot,Scales,Cols,Cs)
     !
     DO k = 1, N
       mk = M - k + 1
-      IF ( k/=N ) THEN
+      IF( k/=N ) THEN
         kp = k + 1
         !
         !        SEARCHING FOR PIVOTAL COLUMN
         !
         DO j = k, N
-          IF ( Cols(j)<sruro*Cs(j) ) THEN
+          IF( Cols(j)<sruro*Cs(j) ) THEN
             Cols(j) = NORM2(A(k:k+mk-1,j))**2
             Cs(j) = Cols(j)
           END IF
-          IF ( j/=k ) THEN
-            IF ( sigma>=0.99*Cols(j) ) CYCLE
+          IF( j/=k ) THEN
+            IF( sigma>=0.99*Cols(j) ) CYCLE
           END IF
           sigma = Cols(j)
           jcol = j
         END DO
-        IF ( jcol/=k ) THEN
+        IF( jcol/=k ) THEN
           !
           !        PERFORM COLUMN INTERCHANGE
           !
@@ -170,15 +169,15 @@ SUBROUTINE ORTHOL(A,M,N,Nrda,Iflag,Irank,Iscale,Diag,Kpivot,Scales,Cols,Cs)
       !
       sig = NORM2(A(k:k+mk-1,k))**2
       diagk = SQRT(sig)
-      IF ( diagk>acc*anorm ) THEN
+      IF( diagk>acc*anorm ) THEN
         !
         !        CONSTRUCT AND APPLY TRANSFORMATION TO MATRIX A
         !
         akk = A(k,k)
-        IF ( akk>0. ) diagk = -diagk
+        IF( akk>0. ) diagk = -diagk
         Diag(k) = diagk
         A(k,k) = akk - diagk
-        IF ( k/=N ) THEN
+        IF( k/=N ) THEN
           sad = diagk*akk - sig
           DO j = kp, N
             as = DOT_PRODUCT(A(k:M,k),A(k:M,j))/sad

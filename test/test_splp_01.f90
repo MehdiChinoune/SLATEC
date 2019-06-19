@@ -5,8 +5,7 @@ MODULE TEST37_MOD
 CONTAINS
   !** SPLPQX
   SUBROUTINE SPLPQX(Lun,Kprint,Ipass)
-    !>
-    !  Quick check for SPLP.
+    !> Quick check for SPLP.
     !***
     ! **Library:**   SLATEC
     !***
@@ -23,14 +22,14 @@ CONTAINS
     !   901013  Added additional printout on failure.  (RWC)
     USE slatec, ONLY : USRMAT, SPLP
     USE common_mod, ONLY : PASS
-    REAL(SP) bl(60), bu(60), d(14,37), dattrv(210), duals(60), prgopt(50), &
+    REAL(SP) :: bl(60), bu(60), d(14,37), dattrv(210), duals(60), prgopt(50), &
       primal(60), work(800), zero
-    INTEGER i, ibasis(60), ic, icnt, ind(60), info, Ipass, isoln(14), iv, ivv, &
+    INTEGER :: i, ibasis(60), ic, icnt, ind(60), info, Ipass, isoln(14), iv, ivv, &
       iwork(900), j, kk, kount, Kprint, liw, Lun, lw, mm, mrelas
-    INTEGER nvars
-    REAL(SP) costs(37)
+    INTEGER :: nvars
+    REAL(SP) :: costs(37)
     !* FIRST EXECUTABLE STATEMENT  SPLPQX
-    IF ( Kprint>=2 ) WRITE (Lun,99001)
+    IF( Kprint>=2 ) WRITE (Lun,99001)
     99001 FORMAT ('1 SPLP QUICK CHECK')
     icnt = 1
     zero = 0.0
@@ -175,7 +174,7 @@ CONTAINS
     DO mm = 1, nvars
       dattrv(kount) = -mm
       DO kk = 1, mrelas
-        IF ( d(kk,mm)/=zero ) THEN
+        IF( d(kk,mm)/=zero ) THEN
           kount = kount + 1
           dattrv(kount) = kk
           kount = kount + 1
@@ -235,32 +234,31 @@ CONTAINS
     Ipass = 1
     DO j = 1, mrelas
       DO i = 1, mrelas
-        IF ( isoln(i)==ibasis(j) ) GOTO 100
+        IF( isoln(i)==ibasis(j) ) GOTO 100
       END DO
       Ipass = 0
       EXIT
       100 CONTINUE
     END DO
     !
-    IF ( Kprint>=2 ) WRITE (Lun,99002) (isoln(i),ibasis(i),i=1,mrelas)
+    IF( Kprint>=2 ) WRITE (Lun,99002) (isoln(i),ibasis(i),i=1,mrelas)
     !
     99002 FORMAT (/'     ISOLN    IBASIS'/(2I10))
     !
-    IF ( Kprint>=2.OR.(Kprint==1.AND.Ipass/=1) ) CALL PASS(Lun,icnt,Ipass)
+    IF( Kprint>=2 .OR. (Kprint==1 .AND. Ipass/=1) ) CALL PASS(Lun,icnt,Ipass)
     !
     !     HERE IPASS=0 IF CODE FAILED QUICK CHECK;
     !               =1 IF CODE PASSED QUICK CHECK.
     !
-    IF ( Kprint>=1.AND.Ipass/=1 ) WRITE (Lun,99003)
+    IF( Kprint>=1 .AND. Ipass/=1 ) WRITE (Lun,99003)
     99003 FORMAT (/' ************ SPLP FAILED SOME TESTS ****************')
-    IF ( Kprint>=2.AND.Ipass==1 ) WRITE (Lun,99004)
+    IF( Kprint>=2 .AND. Ipass==1 ) WRITE (Lun,99004)
     99004 FORMAT (/' ************ SPLP PASSED ALL TESTS *****************')
     RETURN
   END SUBROUTINE SPLPQX
   !** SBOCQX
   SUBROUTINE SBOCQX(Lun,Kprint,Ipass)
-    !>
-    !  Quick check for SBOCLS.
+    !> Quick check for SBOCLS.
     !***
     ! **Library:**   SLATEC
     !***
@@ -317,7 +315,7 @@ CONTAINS
     Ipass = 1
     itest = 0
     !
-    IF ( Kprint>=2 ) WRITE (Lun,99001)
+    IF( Kprint>=2 ) WRITE (Lun,99001)
     99001 FORMAT (' TEST   IB IRHS             SR')
     !
     DO ib = 1, 2
@@ -343,11 +341,11 @@ CONTAINS
         !
         sr = NORM2(x(1:ncols))
         mpass = 1
-        IF ( sr>10.E3*SQRT(R1MACH(4)) ) mpass = 0
+        IF( sr>10.E3*SQRT(R1MACH(4)) ) mpass = 0
         Ipass = Ipass*mpass
-        IF ( Kprint>=2 ) THEN
+        IF( Kprint>=2 ) THEN
           msg = 'PASS'
-          IF ( mpass==0 ) msg = 'FAIL'
+          IF( mpass==0 ) msg = 'FAIL'
           itest = itest + 1
           WRITE (Lun,99003) itest, ib, irhs, sr, msg
         END IF
@@ -394,11 +392,11 @@ CONTAINS
         !
         sr = NORM2(x(1:ncols+mcon))
         mpass = 1
-        IF ( sr>10.E3*SQRT(R1MACH(4)) ) mpass = 0
+        IF( sr>10.E3*SQRT(R1MACH(4)) ) mpass = 0
         Ipass = Ipass*mpass
-        IF ( Kprint>=2 ) THEN
+        IF( Kprint>=2 ) THEN
           msg = 'PASS'
-          IF ( mpass==0 ) msg = 'FAIL'
+          IF( mpass==0 ) msg = 'FAIL'
           itest = itest + 1
           WRITE (Lun,99003) itest, ib, irhs, sr, msg
         END IF
@@ -408,9 +406,9 @@ CONTAINS
     !     HERE THE VALUE OF IPASS=1 SAYS THAT SBOCLS() HAS PASSED ITS TESTS.
     !          THE VALUE OF IPASS=0 SAYS THAT SBOCLS() HAS NOT PASSED.
     !
-    IF ( Kprint>=3 ) WRITE (Lun,&
+    IF( Kprint>=3 ) WRITE (Lun,&
       '('' IPASS VALUE. (A 1 IS GOOD, 0 IS BAD.)'',I4)') Ipass
-    IF ( Kprint>=2.AND.Ipass==0 ) WRITE (Lun,99002)
+    IF( Kprint>=2 .AND. Ipass==0 ) WRITE (Lun,99002)
     !
     99002 FORMAT (' ERROR IN SBOCLS OR SBOLS')
     RETURN
@@ -423,8 +421,7 @@ PROGRAM TEST37
   USE slatec, ONLY : I1MACH, XSETF, XSETUN, XERMAX
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
-  !>
-  !  Driver for testing SLATEC subprograms
+  !> Driver for testing SLATEC subprograms
   !***
   ! **Library:**   SLATEC
   !***
@@ -470,7 +467,7 @@ PROGRAM TEST37
   !   890618  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900524  Cosmetic changes to code.  (WRB)
-  INTEGER ipass, kprint, lin, lun, nfail
+  INTEGER :: ipass, kprint, lin, lun, nfail
   !* FIRST EXECUTABLE STATEMENT  TEST37
   lun = I1MACH(2)
   lin = I1MACH(1)
@@ -481,7 +478,7 @@ PROGRAM TEST37
   CALL GET_ARGUMENT(kprint)
   CALL XERMAX(1000)
   CALL XSETUN(lun)
-  IF ( kprint<=1 ) THEN
+  IF( kprint<=1 ) THEN
     CALL XSETF(0)
   ELSE
     CALL XSETF(1)
@@ -490,16 +487,16 @@ PROGRAM TEST37
   !     Test SPLP package
   !
   CALL SPLPQX(lun,kprint,ipass)
-  IF ( ipass==0 ) nfail = nfail + 1
+  IF( ipass==0 ) nfail = nfail + 1
   !
   !     Test SBOCLS package
   !
   CALL SBOCQX(lun,kprint,ipass)
-  IF ( ipass==0 ) nfail = nfail + 1
+  IF( ipass==0 ) nfail = nfail + 1
   !
   !     Write PASS or FAIL message
   !
-  IF ( nfail==0 ) THEN
+  IF( nfail==0 ) THEN
     WRITE (lun,99001)
     99001 FORMAT (/' --------------TEST37 PASSED ALL TESTS----------------')
   ELSE

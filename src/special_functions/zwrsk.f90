@@ -1,7 +1,6 @@
 !** ZWRSK
 SUBROUTINE ZWRSK(Zrr,Zri,Fnu,Kode,N,Yr,Yi,Nz,Cwr,Cwi,Tol,Elim,Alim)
-  !>
-  !  Subsidiary to ZBESI and ZBESK
+  !> Subsidiary to ZBESI and ZBESK
   !***
   ! **Library:**   SLATEC
   !***
@@ -11,7 +10,7 @@ SUBROUTINE ZWRSK(Zrr,Zri,Fnu,Kode,N,Yr,Yi,Nz,Cwr,Cwi,Tol,Elim,Alim)
   !***
   ! **Description:**
   !
-  !     ZWRSK COMPUTES THE I BESSEL FUNCTION FOR RE(Z).GE.0.0 BY
+  !     ZWRSK COMPUTES THE I BESSEL FUNCTION FOR RE(Z)>=0.0 BY
   !     NORMALIZING THE I FUNCTION RATIOS FROM ZRATI BY THE WRONSKIAN
   !
   !***
@@ -24,7 +23,7 @@ SUBROUTINE ZWRSK(Zrr,Zri,Fnu,Kode,N,Yr,Yi,Nz,Cwr,Cwi,Tol,Elim,Alim)
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
   USE service, ONLY : D1MACH
   !     COMPLEX CINU,CSCL,CT,CW,C1,C2,RCT,ST,Y,ZR
-  INTEGER i, Kode, N, nw, Nz
+  INTEGER :: i, Kode, N, nw, Nz
   REAL(DP) :: act, acw, Alim, ascle, cinui, cinur, csclr, cti, &
     ctr, Cwi(2), Cwr(2), c1i, c1r, c2i, c2r, Elim, Fnu, &
     pti, ptr, ract, sti, str, Tol, Yi(N), Yr(N), Zri, Zrr
@@ -37,9 +36,9 @@ SUBROUTINE ZWRSK(Zrr,Zri,Fnu,Kode,N,Yr,Yi,Nz,Cwr,Cwi,Tol,Elim,Alim)
   !
   Nz = 0
   CALL ZBKNU(Zrr,Zri,Fnu,Kode,2,Cwr,Cwi,nw,Tol,Elim,Alim)
-  IF ( nw/=0 ) THEN
+  IF( nw/=0 ) THEN
     Nz = -1
-    IF ( nw==(-2) ) Nz = -2
+    IF( nw==(-2) ) Nz = -2
     RETURN
   ELSE
     CALL ZRATI(Zrr,Zri,Fnu,N,Yr,Yi,Tol)
@@ -49,7 +48,7 @@ SUBROUTINE ZWRSK(Zrr,Zri,Fnu,Kode,N,Yr,Yi,Nz,Cwr,Cwi,Tol,Elim,Alim)
     !-----------------------------------------------------------------------
     cinur = 1.0D0
     cinui = 0.0D0
-    IF ( Kode/=1 ) THEN
+    IF( Kode/=1 ) THEN
       cinur = COS(Zri)
       cinui = SIN(Zri)
     END IF
@@ -62,9 +61,9 @@ SUBROUTINE ZWRSK(Zrr,Zri,Fnu,Kode,N,Yr,Yi,Nz,Cwr,Cwi,Tol,Elim,Alim)
     acw = ZABS(Cwr(2),Cwi(2))
     ascle = 1.0D+3*D1MACH(1)/Tol
     csclr = 1.0D0
-    IF ( acw>ascle ) THEN
+    IF( acw>ascle ) THEN
       ascle = 1.0D0/ascle
-      IF ( acw>=ascle ) csclr = Tol
+      IF( acw>=ascle ) csclr = Tol
     ELSE
       csclr = 1.0D0/Tol
     END IF
@@ -95,7 +94,7 @@ SUBROUTINE ZWRSK(Zrr,Zri,Fnu,Kode,N,Yr,Yi,Nz,Cwr,Cwi,Tol,Elim,Alim)
   cinui = ptr*cti + pti*ctr
   Yr(1) = cinur*csclr
   Yi(1) = cinui*csclr
-  IF ( N==1 ) RETURN
+  IF( N==1 ) RETURN
   DO i = 2, N
     ptr = str*cinur - sti*cinui
     cinui = str*cinui + sti*cinur

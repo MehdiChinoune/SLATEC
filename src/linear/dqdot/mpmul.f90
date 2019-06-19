@@ -1,7 +1,6 @@
 !** MPMUL
 SUBROUTINE MPMUL(X,Y,Z)
-  !>
-  !  Subsidiary to DQDOTA and DQDOTI
+  !> Subsidiary to DQDOTA and DQDOTI
   !***
   ! **Library:**   SLATEC
   !***
@@ -49,7 +48,7 @@ SUBROUTINE MPMUL(X,Y,Z)
   i2p = i2 + 1
   ! FORM SIGN OF PRODUCT
   rs = X(1)*Y(1)
-  IF ( rs/=0 ) THEN
+  IF( rs/=0 ) THEN
     ! FORM EXPONENT OF PRODUCT
     re = X(2) + Y(2)
     ! CLEAR ACCUMULATOR
@@ -61,37 +60,37 @@ SUBROUTINE MPMUL(X,Y,Z)
     DO i = 1, t_com
       xi = X(i+2)
       ! FOR SPEED, PUT THE NUMBER WITH MANY ZEROS FIRST
-      IF ( xi/=0 ) THEN
+      IF( xi/=0 ) THEN
         CALL MPMLP(r_com(i+1),Y(3),xi,MIN(t_com,i2-i))
         c = c - 1
-        IF ( c<=0 ) THEN
+        IF( c<=0 ) THEN
           ! CHECK FOR LEGAL BASE B DIGIT
-          IF ( (xi<0).OR.(xi>=b_com) ) GOTO 200
+          IF( (xi<0) .OR. (xi>=b_com) ) GOTO 200
           ! PROPAGATE CARRIES AT END AND EVERY EIGHTH TIME,
           ! FASTER THAN DOING IT EVERY TIME.
           DO j = 1, i2
             j1 = i2p - j
             ri = r_com(j1) + c
-            IF ( ri<0 ) GOTO 100
+            IF( ri<0 ) GOTO 100
             c = ri/b_com
             r_com(j1) = ri - b_com*c
           END DO
-          IF ( c/=0 ) GOTO 200
+          IF( c/=0 ) GOTO 200
           c = 8
         END IF
       END IF
     END DO
-    IF ( c/=8 ) THEN
-      IF ( (xi<0).OR.(xi>=b_com) ) GOTO 200
+    IF( c/=8 ) THEN
+      IF( (xi<0) .OR. (xi>=b_com) ) GOTO 200
       c = 0
       DO j = 1, i2
         j1 = i2p - j
         ri = r_com(j1) + c
-        IF ( ri<0 ) GOTO 100
+        IF( ri<0 ) GOTO 100
         c = ri/b_com
         r_com(j1) = ri - b_com*c
       END DO
-      IF ( c/=0 ) GOTO 200
+      IF( c/=0 ) GOTO 200
     END IF
     ! NORMALIZE AND ROUND RESULT
     CALL MPNZR(rs,re,Z,0)

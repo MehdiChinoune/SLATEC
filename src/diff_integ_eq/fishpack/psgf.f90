@@ -1,7 +1,6 @@
 !** PSGF
 REAL(SP) FUNCTION PSGF(X,Iz,C,A,Bh)
-  !>
-  !  Subsidiary to BLKTRI
+  !> Subsidiary to BLKTRI
   !***
   ! **Library:**   SLATEC
   !***
@@ -30,7 +29,7 @@ REAL(SP) FUNCTION PSGF(X,Iz,C,A,Bh)
     fsg = fsg*A(j)*dd
     hsg = hsg*C(j)*dd
   END DO
-  IF ( MOD(Iz,2)/=0 ) THEN
+  IF( MOD(Iz,2)/=0 ) THEN
     PSGF = 1. + fsg + hsg
     RETURN
   END IF

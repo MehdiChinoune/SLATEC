@@ -1,9 +1,8 @@
 !** R9LGIT
 REAL(SP) FUNCTION R9LGIT(A,X,Algap1)
-  !>
-  !  Compute the logarithm of Tricomi's incomplete Gamma
+  !> Compute the logarithm of Tricomi's incomplete Gamma
   !            function with Perron's continued fraction for large X and
-  !            A .GE. X.
+  !            A >= X.
   !***
   ! **Library:**   SLATEC (FNLIB)
   !***
@@ -19,7 +18,7 @@ REAL(SP) FUNCTION R9LGIT(A,X,Algap1)
   ! **Description:**
   !
   ! Compute the log of Tricomi's incomplete gamma function with Perron's
-  ! continued fraction for large X and for A .GE. X.
+  ! continued fraction for large X and for A >= X.
   !
   !***
   ! **References:**  (NONE)
@@ -40,7 +39,7 @@ REAL(SP) FUNCTION R9LGIT(A,X,Algap1)
   REAL(SP), PARAMETER :: eps = 0.5*R1MACH(3), sqeps = SQRT(R1MACH(4))
   !* FIRST EXECUTABLE STATEMENT  R9LGIT
   !
-  IF ( X<=0.0.OR.A<X ) CALL XERMSG('R9LGIT','X SHOULD BE GT 0.0 AND LE A',2,2)
+  IF( X<=0.0 .OR. A<X ) CALL XERMSG('R9LGIT','X SHOULD BE GT 0.0 AND LE A',2,2)
   !
   ax = A + X
   a1x = ax + 1.0
@@ -53,13 +52,13 @@ REAL(SP) FUNCTION R9LGIT(A,X,Algap1)
     r = t/((ax+fk)*(a1x+fk)-t)
     p = r*p
     s = s + p
-    IF ( ABS(p)<eps*s ) GOTO 100
+    IF( ABS(p)<eps*s ) GOTO 100
   END DO
   CALL XERMSG('R9LGIT',&
     'NO CONVERGENCE IN 200 TERMS OF CONTINUED FRACTION',3,2)
   !
   100  hstar = 1.0 - X*s/a1x
-  IF ( hstar<sqeps ) CALL XERMSG('R9LGIT',&
+  IF( hstar<sqeps ) CALL XERMSG('R9LGIT',&
     'RESULT LESS THAN HALF PRECISION',1,1)
   !
   R9LGIT = -X - Algap1 - LOG(hstar)

@@ -1,7 +1,6 @@
 !** DREADP
 SUBROUTINE DREADP(Ipage,List,Rlist,Lpage,Irec)
-  !>
-  !  Subsidiary to DSPLP
+  !> Subsidiary to DSPLP
   !***
   ! **Library:**   SLATEC
   !***

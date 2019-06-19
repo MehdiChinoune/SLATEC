@@ -1,7 +1,6 @@
 !** DRC
 REAL(DP) FUNCTION DRC(X,Y,Ier)
-  !>
-  !  Calculate a double precision approximation to
+  !> Calculate a double precision approximation to
   !             DRC(X,Y) = Integral from zero to infinity of
   !                              -1/2     -1
   !                    (1/2)(t+X)    (t+Y)  dt,
@@ -76,9 +75,9 @@ REAL(DP) FUNCTION DRC(X,Y,Ier)
   !         Value of IER assigned by the DRC routine
   !
   !                  Value assigned         Error message printed
-  !                  IER = 1                X.LT.0.0D0.OR.Y.LE.0.0D0
-  !                      = 2                X+Y.LT.LOLIM
-  !                      = 3                MAX(X,Y) .GT. UPLIM
+  !                  IER = 1                X<0.0D0 .OR. Y<=0.0D0
+  !                      = 2                X+Y<LOLIM
+  !                      = 3                MAX(X,Y) > UPLIM
   !
   !   4.     Control parameters
   !
@@ -179,7 +178,7 @@ REAL(DP) FUNCTION DRC(X,Y,Ier)
   !
   !
   !
-  !                  LN X                X .GT. 0
+  !                  LN X                X > 0
   !
   !                                             2
   !                  LN(X) = (X-1) DRC(((1+X)/2) , X )
@@ -187,14 +186,14 @@ REAL(DP) FUNCTION DRC(X,Y,Ier)
   !
   !   --------------------------------------------------------------------
   !
-  !                  ARCSIN X            -1 .LE. X .LE. 1
+  !                  ARCSIN X            -1 <= X <= 1
   !
   !                                       2
   !                  ARCSIN X = X DRC (1-X  ,1 )
   !
   !   --------------------------------------------------------------------
   !
-  !                  ARCCOS X            0 .LE. X .LE. 1
+  !                  ARCCOS X            0 <= X <= 1
   !
   !
   !                                     2       2
@@ -202,42 +201,42 @@ REAL(DP) FUNCTION DRC(X,Y,Ier)
   !
   !   --------------------------------------------------------------------
   !
-  !                  ARCTAN X            -INF .LT. X .LT. +INF
+  !                  ARCTAN X            -INF < X < +INF
   !
   !                                        2
   !                  ARCTAN X = X DRC(1,1+X  )
   !
   !   --------------------------------------------------------------------
   !
-  !                  ARCCOT X            0 .LE. X .LT. INF
+  !                  ARCCOT X            0 <= X < INF
   !
   !                                  2   2
   !                  ARCCOT X = DRC(X  ,X +1 )
   !
   !   --------------------------------------------------------------------
   !
-  !                  ARCSINH X           -INF .LT. X .LT. +INF
+  !                  ARCSINH X           -INF < X < +INF
   !
   !                                       2
   !                  ARCSINH X = X DRC(1+X  ,1 )
   !
   !   --------------------------------------------------------------------
   !
-  !                  ARCCOSH X           X .GE. 1
+  !                  ARCCOSH X           X >= 1
   !
   !                                    2         2
   !                  ARCCOSH X = SQRT(X -1) DRC(X  ,1 )
   !
   !   --------------------------------------------------------------------
   !
-  !                  ARCTANH X           -1 .LT. X .LT. 1
+  !                  ARCTANH X           -1 < X < 1
   !
   !                                         2
   !                  ARCTANH X = X DRC(1,1-X  )
   !
   !   --------------------------------------------------------------------
   !
-  !                  ARCCOTH X           X .GT. 1
+  !                  ARCCOTH X           X > 1
   !
   !                                   2   2
   !                  ARCCOTH X = DRC(X  ,X -1 )
@@ -281,31 +280,31 @@ REAL(DP) FUNCTION DRC(X,Y,Ier)
   !         CALL ERROR HANDLER IF NECESSARY.
   !
   DRC = 0.0D0
-  IF ( X<0.0D0.OR.Y<=0.0D0 ) THEN
+  IF( X<0.0D0 .OR. Y<=0.0D0 ) THEN
     Ier = 1
     WRITE (xern3,'(1PE15.6)') X
     WRITE (xern4,'(1PE15.6)') Y
-    CALL XERMSG('DRC','X.LT.0 .OR. Y.LE.0 WHERE X = '//xern3//&
+    CALL XERMSG('DRC','X<0 .OR. Y<=0 WHERE X = '//xern3//&
       ' AND Y = '//xern4,1,1)
     RETURN
   END IF
   !
-  IF ( MAX(X,Y)>uplim ) THEN
+  IF( MAX(X,Y)>uplim ) THEN
     Ier = 3
     WRITE (xern3,'(1PE15.6)') X
     WRITE (xern4,'(1PE15.6)') Y
     WRITE (xern5,'(1PE15.6)') uplim
-    CALL XERMSG('DRC','MAX(X,Y).GT.UPLIM WHERE X = '//xern3//&
+    CALL XERMSG('DRC','MAX(X,Y)>UPLIM WHERE X = '//xern3//&
       ' Y = '//xern4//' AND UPLIM = '//xern5,3,1)
     RETURN
   END IF
   !
-  IF ( X+Y<lolim ) THEN
+  IF( X+Y<lolim ) THEN
     Ier = 2
     WRITE (xern3,'(1PE15.6)') X
     WRITE (xern4,'(1PE15.6)') Y
     WRITE (xern5,'(1PE15.6)') lolim
-    CALL XERMSG('DRC','X+Y.LT.LOLIM WHERE X = '//xern3//' Y = '//&
+    CALL XERMSG('DRC','X+Y<LOLIM WHERE X = '//xern3//' Y = '//&
       xern4//' AND LOLIM = '//xern5,2,1)
     RETURN
   END IF
@@ -317,7 +316,7 @@ REAL(DP) FUNCTION DRC(X,Y,Ier)
     !
     mu = (xn+yn+yn)/3.0D0
     sn = (yn+mu)/mu - 2.0D0
-    IF ( ABS(sn)<errtol ) THEN
+    IF( ABS(sn)<errtol ) THEN
       !
       s = sn*sn*(0.30D0+sn*(c1+sn*(0.3750D0+sn*c2)))
       DRC = (1.0D0+s)/SQRT(mu)

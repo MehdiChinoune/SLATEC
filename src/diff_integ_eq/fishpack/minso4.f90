@@ -1,7 +1,6 @@
 !** MINSO4
 SUBROUTINE MINSO4(Usol,Idmn,Zn,Zm)
-  !>
-  !  Subsidiary to SEPX4
+  !> Subsidiary to SEPX4
   !***
   ! **Library:**   SLATEC
   !***

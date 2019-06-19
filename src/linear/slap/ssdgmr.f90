@@ -1,8 +1,7 @@
 !** SSDGMR
 SUBROUTINE SSDGMR(N,B,X,Nelt,Ia,Ja,A,Isym,Nsave,Tol,Itmax,Iter,Err,&
     Ierr,Iunit,Rwork,Lenw,Iwork,Leniw)
-  !>
-  !  Diagonally Scaled GMRES Iterative Sparse Ax=b Solver.
+  !> Diagonally Scaled GMRES Iterative Sparse Ax=b Solver.
   !            This routine uses the generalized minimum residual
   !            (GMRES) method with diagonal scaling to solve possibly
   !            non-symmetric linear systems of the form: Ax = b.
@@ -200,11 +199,11 @@ SUBROUTINE SSDGMR(N,B,X,Nelt,Ia,Ja,A,Isym,Nsave,Tol,Itmax,Iter,Err,&
   !       the size  of the  scaled norm of  the residual  R(L)  =  B -
   !       A*X(L).  The actual stopping test is either:
   !
-  !               norm(SB*(B-A*X(L))) .le. TOL*norm(SB*B),
+  !               norm(SB*(B-A*X(L))) <= TOL*norm(SB*B),
   !
   !       for right preconditioning, or
   !
-  !               norm(SB*(M-inverse)*(B-A*X(L))) .le.
+  !               norm(SB*(M-inverse)*(B-A*X(L))) <=
   !                       TOL*norm(SB*(M-inverse)*B),
   !
   !       for left preconditioning, where norm() denotes the Euclidean
@@ -300,7 +299,7 @@ SUBROUTINE SSDGMR(N,B,X,Nelt,Ia,Ja,A,Isym,Nsave,Tol,Itmax,Iter,Err,&
   !
   !- Cautions:
   !     This routine will attempt to write to the Fortran logical output
-  !     unit IUNIT, if IUNIT .ne. 0.  Thus, the user must make sure that
+  !     unit IUNIT, if IUNIT /= 0.  Thus, the user must make sure that
   !     this logical unit is attached to a file or terminal before calling
   !     this routine with a non-zero value for IUNIT.  This routine does
   !     not check for the validity of a non-zero IUNIT unit number.
@@ -326,20 +325,20 @@ SUBROUTINE SSDGMR(N,B,X,Nelt,Ia,Ja,A,Isym,Nsave,Tol,Itmax,Iter,Err,&
   !   920929  Corrected format of references.  (FNF)
 
   !     .. Parameters ..
-  INTEGER , PARAMETER :: LOCRB = 1, LOCIB = 11
+  INTEGER, PARAMETER :: LOCRB = 1, LOCIB = 11
   !     .. Scalar Arguments ..
-  REAL(SP) Err, Tol
-  INTEGER Ierr, Isym, Iter, Itmax, Iunit, Leniw, Lenw, N, Nelt, Nsave
+  REAL(SP) :: Err, Tol
+  INTEGER :: Ierr, Isym, Iter, Itmax, Iunit, Leniw, Lenw, N, Nelt, Nsave
   !     .. Array Arguments ..
-  REAL(SP) A(Nelt), B(N), Rwork(Lenw), X(N)
-  INTEGER Ia(Nelt), Iwork(Leniw), Ja(Nelt)
+  REAL(SP) :: A(Nelt), B(N), Rwork(Lenw), X(N)
+  INTEGER :: Ia(Nelt), Iwork(Leniw), Ja(Nelt)
   !     .. Local Scalars ..
-  INTEGER locdin, locigw, lociw, locrgw, locw, myitol
+  INTEGER :: locdin, locigw, lociw, locrgw, locw, myitol
   !* FIRST EXECUTABLE STATEMENT  SSDGMR
   !
   Ierr = 0
   Err = 0
-  IF ( Nsave<=1 ) THEN
+  IF( Nsave<=1 ) THEN
     Ierr = 3
     RETURN
   END IF
@@ -361,7 +360,7 @@ SUBROUTINE SSDGMR(N,B,X,Nelt,Ia,Ja,A,Isym,Nsave,Tol,Itmax,Iter,Err,&
   !
   !         Check the workspace allocations.
   CALL SCHKW('SSDGMR',lociw,Leniw,locw,Lenw,Ierr,Iter,Err)
-  IF ( Ierr/=0 ) RETURN
+  IF( Ierr/=0 ) RETURN
   !
   !         Compute the inverse of the diagonal of the matrix.
   CALL SSDS(N,Nelt,Ja,A,Rwork(locdin))
@@ -381,6 +380,6 @@ SUBROUTINE SSDGMR(N,B,X,Nelt,Ia,Ja,A,Isym,Nsave,Tol,Itmax,Iter,Err,&
     Ierr,Iunit,Rwork,Rwork,Rwork(locrgw),Lenw-locrgw,Iwork(locigw)&
     ,20,Rwork,Iwork)
   !
-  IF ( Iter>Itmax ) Ierr = 2
+  IF( Iter>Itmax ) Ierr = 2
   !------------- LAST LINE OF SSDGMR FOLLOWS ----------------------------
 END SUBROUTINE SSDGMR

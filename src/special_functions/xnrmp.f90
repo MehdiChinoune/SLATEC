@@ -1,7 +1,6 @@
 !** XNRMP
 SUBROUTINE XNRMP(Nu,Mu1,Mu2,Sarg,Mode,Spn,Ipn,Isig,Ierror)
-  !>
-  !  Compute normalized Legendre polynomials.
+  !> Compute normalized Legendre polynomials.
   !***
   ! **Library:**   SLATEC
   !***
@@ -39,16 +38,16 @@ SUBROUTINE XNRMP(Nu,Mu1,Mu2,Sarg,Mode,Spn,Ipn,Isig,Ierror)
   !
   !        The input values to XNRMP are NU, MU1, MU2, SARG, and MODE.
   !        These must satisfy
-  !          1. NU .GE. 0 specifies the degree of the normalized Legendre
+  !          1. NU >= 0 specifies the degree of the normalized Legendre
   !             polynomial that is wanted.
-  !          2. MU1 .GE. 0 specifies the lowest-order normalized Legendre
+  !          2. MU1 >= 0 specifies the lowest-order normalized Legendre
   !             polynomial that is wanted.
-  !          3. MU2 .GE. MU1 specifies the highest-order normalized Leg-
+  !          3. MU2 >= MU1 specifies the highest-order normalized Leg-
   !             endre polynomial that is wanted.
-  !         4a. MODE = 1 and -1.0 .LE. SARG .LE. 1.0 specifies that
+  !         4a. MODE = 1 and -1.0 <= SARG <= 1.0 specifies that
   !             Normalized Legendre(NU, MU, SARG) is wanted for MU = MU1,
   !             MU1 + 1, ..., MU2.
-  !         4b. MODE = 2 and -3.14159... .LT. SARG .LT. 3.14159... spec-
+  !         4b. MODE = 2 and -3.14159... < SARG < 3.14159... spec-
   !             ifies that Normalized Legendre(NU, MU, COS(SARG)) is want-
   !             ed for MU = MU1, MU1 + 1, ..., MU2.
   !
@@ -73,7 +72,7 @@ SUBROUTINE XNRMP(Nu,Mu1,Mu2,Sarg,Mode,Spn,Ipn,Isig,Ierror)
   !        IPN(I) = 0 the value of the normalized Legendre polynomial is
   !        contained entirely in SPN(I) and subsequent single-precision
   !        computations can be performed without further consideration of
-  !        extended-range arithmetic. However, if IPN(I) .NE. 0 the corre-
+  !        extended-range arithmetic. However, if IPN(I) /= 0 the corre-
   !        sponding value of the normalized Legendre polynomial cannot be
   !        represented in single-precision because of overflow or under-
   !        flow. THE USER MUST TEST IPN(I) IN HIS/HER PROGRAM. In the case
@@ -89,10 +88,10 @@ SUBROUTINE XNRMP(Nu,Mu1,Mu2,Sarg,Mode,Spn,Ipn,Isig,Ierror)
   !              J = K
   !              DO 20 I = 1, K
   !              CALL XCON(SPN(I), IPN(I),IERROR)
-  !              IF (IERROR.NE.0) RETURN
+  !              IF(IERROR/=0) RETURN
   !              PRINT 10, SPN(I), IPN(I)
   !           10 FORMAT(1X, E30.8, I15)
-  !              IF ((IPN(I) .EQ. 0) .OR. (J .LT. K)) GO TO 20
+  !              IF((IPN(I) = 0) .OR. (J < K)) GO TO 20
   !              J = I - 1
   !           20 CONTINUE
   !        will print all computed values and determine the largest J
@@ -136,34 +135,34 @@ SUBROUTINE XNRMP(Nu,Mu1,Mu2,Sarg,Mode,Spn,Ipn,Isig,Ierror)
   !           CALLs to XERROR changed to CALLs to XERMSG.  (WRB)
   !   920127  Revised PURPOSE section of prologue.  (DWL)
   USE service, ONLY : XERMSG
-  INTEGER Nu, Mu1, Mu2, Mode, Ipn(Mu2-Mu1+1), Isig, Ierror
-  REAL(SP) Sarg, Spn(Mu2-Mu1+1)
-  INTEGER i, ip, ip1, ip2, j, k, mu
-  REAL(SP) c1, c2, p, p1, p2, p3, s, sx, t, tx, x, rk
+  INTEGER :: Nu, Mu1, Mu2, Mode, Ipn(Mu2-Mu1+1), Isig, Ierror
+  REAL(SP) :: Sarg, Spn(Mu2-Mu1+1)
+  INTEGER :: i, ip, ip1, ip2, j, k, mu
+  REAL(SP) :: c1, c2, p, p1, p2, p3, s, sx, t, tx, x, rk
   ! CALL XSET TO INITIALIZE EXTENDED-RANGE ARITHMETIC (SEE XSET
   ! LISTING FOR DETAILS)
   !* FIRST EXECUTABLE STATEMENT  XNRMP
   Ierror = 0
   CALL XSET(0,0,0.0,0,Ierror)
-  IF ( Ierror/=0 ) RETURN
+  IF( Ierror/=0 ) RETURN
   !
   !        TEST FOR PROPER INPUT VALUES.
   !
-  IF ( Nu<0 ) GOTO 300
-  IF ( Mu1<0 ) GOTO 300
-  IF ( Mu1>Mu2 ) GOTO 300
-  IF ( Nu==0 ) GOTO 200
-  IF ( Mode<1.OR.Mode>2 ) GOTO 300
-  IF ( Mode==2 ) THEN
-    IF ( ABS(Sarg)>4.0*ATAN(1.0) ) GOTO 400
-    IF ( Sarg==0.0 ) GOTO 200
+  IF( Nu<0 ) GOTO 300
+  IF( Mu1<0 ) GOTO 300
+  IF( Mu1>Mu2 ) GOTO 300
+  IF( Nu==0 ) GOTO 200
+  IF( Mode<1 .OR. Mode>2 ) GOTO 300
+  IF( Mode==2 ) THEN
+    IF( ABS(Sarg)>4.0*ATAN(1.0) ) GOTO 400
+    IF( Sarg==0.0 ) GOTO 200
     x = COS(Sarg)
     sx = ABS(SIN(Sarg))
     tx = x/sx
     Isig = INT( LOG10(2.0*Nu*(5.0+ABS(Sarg*tx))) )
   ELSE
-    IF ( ABS(Sarg)>1.0 ) GOTO 400
-    IF ( ABS(Sarg)==1.0 ) GOTO 200
+    IF( ABS(Sarg)>1.0 ) GOTO 400
+    IF( ABS(Sarg)==1.0 ) GOTO 200
     x = Sarg
     sx = SQRT((1.0+ABS(x))*((0.5-ABS(x))+0.5))
     tx = x/sx
@@ -175,14 +174,14 @@ SUBROUTINE XNRMP(Nu,Mu1,Mu2,Sarg,Mode,Spn,Ipn,Isig,Ierror)
   mu = Mu2
   i = Mu2 - Mu1 + 1
   !
-  !        IF MU.GT.NU, NORMALIZED LEGENDRE(NU,MU,X)=0.
+  !        IF MU>NU, NORMALIZED LEGENDRE(NU,MU,X)=0.
   !
-  DO WHILE ( mu>Nu )
+  DO WHILE( mu>Nu )
     Spn(i) = 0.0
     Ipn(i) = 0
     i = i - 1
     mu = mu - 1
-    IF ( i<=0 ) THEN
+    IF( i<=0 ) THEN
       Isig = 0
       RETURN
     END IF
@@ -204,19 +203,19 @@ SUBROUTINE XNRMP(Nu,Mu1,Mu2,Sarg,Mode,Spn,Ipn,Isig,Ierror)
     p3 = ((rk+1.0)/rk)*p3
     p2 = p2*sx
     CALL XADJ(p2,ip2,Ierror)
-    IF ( Ierror/=0 ) RETURN
+    IF( Ierror/=0 ) RETURN
     rk = rk + 2.0
   END DO
   p2 = p2*SQRT(p3)
   CALL XADJ(p2,ip2,Ierror)
-  IF ( Ierror/=0 ) RETURN
+  IF( Ierror/=0 ) RETURN
   s = 2.0*tx
   t = 1.0/Nu
-  IF ( Mu2>=Nu ) THEN
+  IF( Mu2>=Nu ) THEN
     Spn(i) = p2
     Ipn(i) = ip2
     i = i - 1
-    IF ( i==0 ) GOTO 500
+    IF( i==0 ) GOTO 500
   END IF
   !
   !        RECURRENCE PROCESS
@@ -226,22 +225,22 @@ SUBROUTINE XNRMP(Nu,Mu1,Mu2,Sarg,Mode,Spn,Ipn,Isig,Ierror)
   c2 = s*p*c1*p2
   c1 = -SQRT((1.0+p+t)*(1.0-p))*c1*p1
   CALL XADD(c2,ip2,c1,ip1,p,ip,Ierror)
-  IF ( Ierror/=0 ) RETURN
+  IF( Ierror/=0 ) RETURN
   mu = mu - 1
-  IF ( mu<=Mu2 ) THEN
+  IF( mu<=Mu2 ) THEN
     !
     !        STORE IN ARRAY SPN FOR RETURN TO CALLING ROUTINE.
     !
     Spn(i) = p
     Ipn(i) = ip
     i = i - 1
-    IF ( i==0 ) GOTO 500
+    IF( i==0 ) GOTO 500
   END IF
   p1 = p2
   ip1 = ip2
   p2 = p
   ip2 = ip
-  IF ( mu>Mu1 ) GOTO 100
+  IF( mu>Mu1 ) GOTO 100
   GOTO 500
   !
   !        SPECIAL CASE WHEN X=-1 OR +1, OR NU=0.
@@ -252,13 +251,13 @@ SUBROUTINE XNRMP(Nu,Mu1,Mu2,Sarg,Mode,Spn,Ipn,Isig,Ierror)
     Ipn(i) = 0
   END DO
   Isig = 0
-  IF ( Mu1<=0 ) THEN
+  IF( Mu1<=0 ) THEN
     Isig = 1
     Spn(1) = SQRT(Nu+0.5)
     Ipn(1) = 0
-    IF ( MOD(Nu,2)/=0 ) THEN
-      IF ( Mode/=1.OR.Sarg/=1.0 ) THEN
-        IF ( Mode/=2 ) Spn(1) = -Spn(1)
+    IF( MOD(Nu,2)/=0 ) THEN
+      IF( Mode/=1 .OR. Sarg/=1.0 ) THEN
+        IF( Mode/=2 ) Spn(1) = -Spn(1)
       END IF
     END IF
   END IF
@@ -278,7 +277,7 @@ SUBROUTINE XNRMP(Nu,Mu1,Mu2,Sarg,Mode,Spn,Ipn,Isig,Ierror)
   500  k = Mu2 - Mu1 + 1
   DO i = 1, k
     CALL XRED(Spn(i),Ipn(i),Ierror)
-    IF ( Ierror/=0 ) RETURN
+    IF( Ierror/=0 ) RETURN
   END DO
   RETURN
 END SUBROUTINE XNRMP

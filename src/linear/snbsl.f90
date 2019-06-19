@@ -1,7 +1,6 @@
 !** SNBSL
 SUBROUTINE SNBSL(Abe,Lda,N,Ml,Mu,Ipvt,B,Job)
-  !>
-  !  Solve a real band system using the factors computed by
+  !> Solve a real band system using the factors computed by
   !            SNBCO or SNBFA.
   !***
   ! **Library:**   SLATEC
@@ -24,7 +23,7 @@ SUBROUTINE SNBSL(Abe,Lda,N,Ml,Mu,Ipvt,B,Job)
   !
   !        ABE     REAL(LDA, NC)
   !                the output from SNBCO or SNBFA.
-  !                NC must be .GE. 2*ML+MU+1 .
+  !                NC must be >= 2*ML+MU+1 .
   !
   !        LDA     INTEGER
   !                the leading dimension of the array  ABE .
@@ -59,13 +58,13 @@ SUBROUTINE SNBSL(Abe,Lda,N,Ml,Mu,Ipvt,B,Job)
   !        zero on the diagonal.  Technically, this indicates singularity,
   !        but it is often caused by improper arguments or improper
   !        setting of LDA.  It will not occur if the subroutines are
-  !        called correctly and if SNBCO has set RCOND .GT. 0.0
-  !        or SNBFA has set INFO .EQ. 0 .
+  !        called correctly and if SNBCO has set RCOND > 0.0
+  !        or SNBFA has set INFO = 0 .
   !
   !     To compute  INVERSE(A) * C  where  C  is a matrix
   !     with  P  columns
   !           CALL SNBCO(ABE,LDA,N,ML,MU,IPVT,RCOND,Z)
-  !           IF (RCOND is too small) GO TO ...
+  !           IF(RCOND is too small) GO TO ...
   !           DO 10 J = 1, P
   !             CALL SNBSL(ABE,LDA,N,ML,MU,IPVT,C(1,J),0)
   !        10 CONTINUE
@@ -94,7 +93,7 @@ SUBROUTINE SNBSL(Abe,Lda,N,Ml,Mu,Ipvt,B,Job)
   m = Mu + Ml + 1
   nm1 = N - 1
   ldb = 1 - Lda
-  IF ( Job/=0 ) THEN
+  IF( Job/=0 ) THEN
     !
     !       JOB = NONZERO, SOLVE TRANS(A) * X = B
     !       FIRST SOLVE  TRANS(U)*Y = B
@@ -111,8 +110,8 @@ SUBROUTINE SNBSL(Abe,Lda,N,Ml,Mu,Ipvt,B,Job)
     !
     !       NOW SOLVE TRANS(L)*X = Y
     !
-    IF ( Ml/=0 ) THEN
-      IF ( nm1>=1 ) THEN
+    IF( Ml/=0 ) THEN
+      IF( nm1>=1 ) THEN
         DO kb = 1, nm1
           k = N - kb
           lm = MIN(Ml,N-k)
@@ -122,7 +121,7 @@ SUBROUTINE SNBSL(Abe,Lda,N,Ml,Mu,Ipvt,B,Job)
           END DO
           B(k) = B(k) + DOT_PRODUCT(v(1:lm),B(k+1:k+lm))
           l = Ipvt(k)
-          IF ( l/=k ) THEN
+          IF( l/=k ) THEN
             t = B(l)
             B(l) = B(k)
             B(k) = t
@@ -135,13 +134,13 @@ SUBROUTINE SNBSL(Abe,Lda,N,Ml,Mu,Ipvt,B,Job)
     !       JOB = 0, SOLVE  A * X = B
     !       FIRST SOLVE L*Y = B
     !
-    IF ( Ml/=0 ) THEN
-      IF ( nm1>=1 ) THEN
+    IF( Ml/=0 ) THEN
+      IF( nm1>=1 ) THEN
         DO k = 1, nm1
           lm = MIN(Ml,N-k)
           l = Ipvt(k)
           t = B(l)
-          IF ( l/=k ) THEN
+          IF( l/=k ) THEN
             B(l) = B(k)
             B(k) = t
           END IF

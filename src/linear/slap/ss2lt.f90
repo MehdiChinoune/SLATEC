@@ -1,7 +1,6 @@
 !** SS2LT
 SUBROUTINE SS2LT(N,Nelt,Ia,Ja,A,Isym,Nel,Iel,Jel,El)
-  !>
-  !  Lower Triangle Preconditioner SLAP Set Up.
+  !> Lower Triangle Preconditioner SLAP Set Up.
   !            Routine to store the lower triangle of a matrix stored
   !            in the SLAP Column format.
   !***
@@ -101,14 +100,14 @@ SUBROUTINE SS2LT(N,Nelt,Ia,Ja,A,Isym,Nel,Iel,Jel,El)
   !   930701  Updated CATEGORY section.  (FNF, WRB)
 
   !     .. Scalar Arguments ..
-  INTEGER Isym, N, Nel, Nelt
+  INTEGER :: Isym, N, Nel, Nelt
   !     .. Array Arguments ..
-  REAL(SP) A(Nelt), El(Nelt)
-  INTEGER Ia(Nelt), Iel(Nel), Ja(Nelt), Jel(Nel)
+  REAL(SP) :: A(Nelt), El(Nelt)
+  INTEGER :: Ia(Nelt), Iel(Nel), Ja(Nelt), Jel(Nel)
   !     .. Local Scalars ..
-  INTEGER i, icol, j, jbgn, jend
+  INTEGER :: i, icol, j, jbgn, jend
   !* FIRST EXECUTABLE STATEMENT  SS2LT
-  IF ( Isym==0 ) THEN
+  IF( Isym==0 ) THEN
     !
     !         The matrix is stored non-symmetricly.  Pick out the lower
     !         triangle.
@@ -119,7 +118,7 @@ SUBROUTINE SS2LT(N,Nelt,Ia,Ja,A,Isym,Nel,Iel,Jel,El)
       jbgn = Ja(icol)
       jend = Ja(icol+1) - 1
       DO j = jbgn, jend
-        IF ( Ia(j)>=icol ) THEN
+        IF( Ia(j)>=icol ) THEN
           Nel = Nel + 1
           Iel(Nel) = Ia(j)
           El(Nel) = A(j)

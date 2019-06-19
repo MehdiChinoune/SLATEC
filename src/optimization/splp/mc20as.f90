@@ -1,7 +1,6 @@
 !** MC20AS
 SUBROUTINE MC20AS(Nc,Maxa,A,Inum,Jptr,Jnum,Jdisp)
-  !>
-  !  Subsidiary to SPLP
+  !> Subsidiary to SPLP
   !***
   ! **Library:**   SLATEC
   !***
@@ -63,7 +62,7 @@ SUBROUTINE MC20AS(Nc,Maxa,A,Inum,Jptr,Jnum,Jdisp)
   DO i = 1, Maxa
     !        ESTABLISH THE CURRENT ENTRY.
     jce = Jnum(i) + Jdisp
-    IF ( jce/=0 ) THEN
+    IF( jce/=0 ) THEN
       ace = A(i)
       ice = Inum(i)
       !        CLEAR THE LOCATION VACATED.
@@ -83,7 +82,7 @@ SUBROUTINE MC20AS(Nc,Maxa,A,Inum,Jptr,Jnum,Jdisp)
         Inum(locc) = ice
         Jnum(locc) = nul
         !        CHECK IF NEXT CURRENT ENTRY NEEDS TO BE PROCESSED.
-        IF ( jcep==nul ) EXIT
+        IF( jcep==nul ) EXIT
         !        IT DOES.  COPY INTO CURRENT ENTRY.
         ace = acep
         ice = icep

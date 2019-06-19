@@ -5,8 +5,7 @@ MODULE TEST30_MOD
 CONTAINS
   !** BSPCK
   SUBROUTINE BSPCK(Lun,Kprint,Ipass)
-    !>
-    !  Quick check for the B-Spline package.
+    !> Quick check for the B-Spline package.
     !***
     ! **Library:**   SLATEC
     !***
@@ -42,21 +41,21 @@ CONTAINS
     USE slatec, ONLY : BFQAD, BINT4, BINTK, BSPDR, BSPEV, BSPPP, BSPVD, BSPVN, &
       BSQAD, BVALU, INTRV, PFQAD, PPQAD, PPVAL, R1MACH, XGETF, XSETF, XERCLR, NUMXER
     !     .. Scalar Arguments ..
-    INTEGER Ipass, Kprint, Lun
+    INTEGER :: Ipass, Kprint, Lun
     !     .. Local Scalars ..
-    REAL(SP) atol, bquad, bv, den, dn, er, fbcl, fbcr, pi, pquad, quad, &
+    REAL(SP) :: atol, bquad, bv, den, dn, er, fbcl, fbcr, pi, pquad, quad, &
       spv, tol, x1, x2, xl, xx
-    INTEGER i, ibcl, ibcr, id, ierr, iknt, ileft, ilo, inbv, inev, &
+    INTEGER :: i, ibcl, ibcr, id, ierr, iknt, ileft, ilo, inbv, inev, &
       inppv, iwork, j, jhigh, jj, k, kk, knt, kntopt, kontrl, &
       ldc, ldcc, lxi, mflag, n, ndata, nerr, nmk, nn
-    LOGICAL fatal
+    LOGICAL :: fatal
     !     .. Local Arrays ..
-    REAL(SP) adif(52), bc(13), c(4,10), cc(4,4), q(3), qq(77), qsave(2), &
+    REAL(SP) :: adif(52), bc(13), c(4,10), cc(4,4), q(3), qq(77), qsave(2), &
       sv(4), t(17), w(65), x(11), xi(11), y(11)
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, SIN
     !* FIRST EXECUTABLE STATEMENT  BSPCK
-    IF ( Kprint>=2 ) WRITE (Lun,99001)
+    IF( Kprint>=2 ) WRITE (Lun,99001)
     !
     99001 FORMAT ('1 QUICK CHECK FOR SPLINE ROUTINES',//)
     !
@@ -92,26 +91,26 @@ CONTAINS
         xx = x(i)
         bv = BVALU(t,bc,n,k,0,xx,inbv,w)
         er = ABS(y(i)-bv)
-        IF ( er>tol ) THEN
+        IF( er>tol ) THEN
           Ipass = 0
-          IF ( Kprint>=2 ) WRITE (Lun,99002)
+          IF( Kprint>=2 ) WRITE (Lun,99002)
           99002 FORMAT (' ERROR TEST FOR INTERPOLATION BY BINT4 NOT SATISFIED')
         END IF
       END DO
       inbv = 1
       bv = BVALU(t,bc,n,k,1,x(1),inbv,w)
       er = ABS(pi-bv)
-      IF ( er>tol ) THEN
+      IF( er>tol ) THEN
         Ipass = 0
-        IF ( Kprint>=2 ) WRITE (Lun,99003)
+        IF( Kprint>=2 ) WRITE (Lun,99003)
         99003 FORMAT (' ERROR TEST FOR INTERPOLATION BY BINT4 NOT SATISFIED ',&
           'BY FIRST DERIVATIVE')
       END IF
       bv = BVALU(t,bc,n,k,2,x(ndata),inbv,w)
       er = ABS(bv)
-      IF ( er>tol ) THEN
+      IF( er>tol ) THEN
         Ipass = 0
-        IF ( Kprint>=2 ) WRITE (Lun,99004)
+        IF( Kprint>=2 ) WRITE (Lun,99004)
         99004 FORMAT (' ERROR TEST FOR INTERPOLATION BY BINT4 NOT SATISFIED ',&
           'BY SECOND DERIVATIVE')
       END IF
@@ -131,18 +130,18 @@ CONTAINS
       !
       DO i = 1, 3
         er = ABS(bquad-q(i))
-        IF ( er>tol ) THEN
+        IF( er>tol ) THEN
           Ipass = 0
-          IF ( Kprint>=2 ) WRITE (Lun,99005)
+          IF( Kprint>=2 ) WRITE (Lun,99005)
           99005 FORMAT (' ERROR IN QUADRATURE CHECKS')
         END IF
       END DO
       qsave(knt) = bquad
     END DO
     er = ABS(qsave(1)-qsave(2))
-    IF ( er>tol ) THEN
+    IF( er>tol ) THEN
       Ipass = 0
-      IF ( Kprint>=2 ) WRITE (Lun,99006)
+      IF( Kprint>=2 ) WRITE (Lun,99006)
       99006 FORMAT (' ERROR IN QUADRATURE CHECK USING TWO SETS OF KNOTS')
     END IF
     !
@@ -161,10 +160,10 @@ CONTAINS
         spv = BVALU(t,bc,n,k,j-1,xx,inbv,w)
         er = ABS(spv-sv(j))
         x2 = ABS(sv(j))
-        IF ( x2>1.0E0 ) er = er/x2
-        IF ( er>atol ) THEN
+        IF( x2>1.0E0 ) er = er/x2
+        IF( er>atol ) THEN
           Ipass = 0
-          IF ( Kprint>=2 ) WRITE (Lun,99007)
+          IF( Kprint>=2 ) WRITE (Lun,99007)
           99007 FORMAT (' COMPARISONS FROM BSPEV AND BVALU DO NOT AGREE')
         END IF
         atol = 10.0E0*atol
@@ -174,10 +173,10 @@ CONTAINS
         spv = PPVAL(ldc,c,xi,lxi,k,j-1,xx,inppv)
         er = ABS(spv-sv(j))
         x2 = ABS(sv(j))
-        IF ( x2>1.0E0 ) er = er/x2
-        IF ( er>atol ) THEN
+        IF( x2>1.0E0 ) er = er/x2
+        IF( er>atol ) THEN
           Ipass = 0
-          IF ( Kprint>=2 ) WRITE (Lun,99008)
+          IF( Kprint>=2 ) WRITE (Lun,99008)
           99008 FORMAT (' COMPARISONS FROM BSPEV AND PPVAL DO NOT AGREE')
         END IF
         atol = 10.0E0*atol
@@ -185,7 +184,7 @@ CONTAINS
       atol = tol
       ldcc = 4
       x1 = xx
-      IF ( i+i-1==ndata ) x1 = t(n)
+      IF( i+i-1==ndata ) x1 = t(n)
       nn = n + k
       CALL INTRV(t,nn,x1,ilo,ileft,mflag)
       DO j = 1, k
@@ -196,10 +195,10 @@ CONTAINS
         END DO
         er = ABS(er-sv(j))
         x2 = ABS(sv(j))
-        IF ( x2>1.0E0 ) er = er/x2
-        IF ( er>atol ) THEN
+        IF( x2>1.0E0 ) er = er/x2
+        IF( er>atol ) THEN
           Ipass = 0
-          IF ( Kprint>=2 ) WRITE (Lun,99009)
+          IF( Kprint>=2 ) WRITE (Lun,99009)
           99009 FORMAT (' COMPARISONS FROM BSPEV AND BSPVD DO NOT AGREE')
         END IF
         atol = 10.0E0*atol
@@ -226,9 +225,9 @@ CONTAINS
         xx = x(i)
         bv = BVALU(t,bc,n,k,0,xx,inbv,w)
         er = ABS(y(i)-bv)
-        IF ( er>tol ) THEN
+        IF( er>tol ) THEN
           Ipass = 0
-          IF ( Kprint>=2 ) WRITE (Lun,99010)
+          IF( Kprint>=2 ) WRITE (Lun,99010)
           99010 FORMAT (' ERROR TEST FOR INTERPOLATION BY BINTK NOT SATISFIED')
         END IF
       END DO
@@ -237,7 +236,7 @@ CONTAINS
     !     Trigger error conditions.
     !
     CALL XGETF(kontrl)
-    IF ( Kprint<=2 ) THEN
+    IF( Kprint<=2 ) THEN
       CALL XSETF(0)
     ELSE
       CALL XSETF(1)
@@ -245,7 +244,7 @@ CONTAINS
     fatal = .FALSE.
     CALL XERCLR
     !
-    IF ( Kprint>=3 ) WRITE (Lun,99011)
+    IF( Kprint>=3 ) WRITE (Lun,99011)
     99011 FORMAT (/' TRIGGER 52 ERROR CONDITIONS',/)
     !
     w(1) = 11.0E0
@@ -264,16 +263,16 @@ CONTAINS
       id = INT( w(3) )
       xx = w(4)
       ldc = INT( w(5) )
-      IF ( i<=4 ) THEN
+      IF( i<=4 ) THEN
         bv = BVALU(t,bc,n,k,id,xx,inbv,qq)
-        IF ( NUMXER(nerr)/=2 ) THEN
+        IF( NUMXER(nerr)/=2 ) THEN
           Ipass = 0
           fatal = .TRUE.
         END IF
         CALL XERCLR
         !
         CALL BSPEV(t,adif,n,k,id,xx,inev,sv,qq)
-        IF ( NUMXER(nerr)/=2 ) THEN
+        IF( NUMXER(nerr)/=2 ) THEN
           Ipass = 0
           fatal = .TRUE.
         END IF
@@ -281,70 +280,70 @@ CONTAINS
         !
         jhigh = n - 10
         CALL BSPVN(t,jhigh,k,id,xx,ileft,sv,qq,iwork)
-        IF ( NUMXER(nerr)/=2 ) THEN
+        IF( NUMXER(nerr)/=2 ) THEN
           Ipass = 0
           fatal = .TRUE.
         END IF
         CALL XERCLR
         !
         CALL BFQAD(FB,t,bc,n,k,id,xx,x2,tol,quad,ierr,qq)
-        IF ( NUMXER(nerr)/=2 ) THEN
+        IF( NUMXER(nerr)/=2 ) THEN
           Ipass = 0
           fatal = .TRUE.
         END IF
         CALL XERCLR
       END IF
       !
-      IF ( i/=3.AND.i/=4 ) THEN
+      IF( i/=3 .AND. i/=4 ) THEN
         CALL BSPPP(t,bc,n,k,ldc,c,xi,lxi,qq)
-        IF ( NUMXER(nerr)/=2 ) THEN
+        IF( NUMXER(nerr)/=2 ) THEN
           Ipass = 0
           fatal = .TRUE.
         END IF
         CALL XERCLR
       END IF
       !
-      IF ( i<=3 ) THEN
+      IF( i<=3 ) THEN
         CALL BSPDR(t,bc,n,k,id,adif)
-        IF ( NUMXER(nerr)/=2 ) THEN
+        IF( NUMXER(nerr)/=2 ) THEN
           Ipass = 0
           fatal = .TRUE.
         END IF
         CALL XERCLR
       END IF
       !
-      IF ( i/=3.AND.i/=5 ) THEN
+      IF( i/=3 .AND. i/=5 ) THEN
         CALL BSQAD(t,bc,n,k,xx,x2,bquad,qq)
-        IF ( NUMXER(nerr)/=2 ) THEN
+        IF( NUMXER(nerr)/=2 ) THEN
           Ipass = 0
           fatal = .TRUE.
         END IF
         CALL XERCLR
       END IF
       !
-      IF ( i>1 ) THEN
+      IF( i>1 ) THEN
         CALL BSPVD(t,k,id,xx,ileft,ldc,c,qq)
-        IF ( NUMXER(nerr)/=2 ) THEN
+        IF( NUMXER(nerr)/=2 ) THEN
           Ipass = 0
           fatal = .TRUE.
         END IF
         CALL XERCLR
       END IF
       !
-      IF ( i<=2 ) THEN
+      IF( i<=2 ) THEN
         CALL BINTK(x,y,t,n,k,bc,qq,adif)
-        IF ( NUMXER(nerr)/=2 ) THEN
+        IF( NUMXER(nerr)/=2 ) THEN
           Ipass = 0
           fatal = .TRUE.
         END IF
         CALL XERCLR
       END IF
       !
-      IF ( i/=4 ) THEN
+      IF( i/=4 ) THEN
         kntopt = ldc - 2
         ibcl = k - 2
         CALL BINT4(x,y,n,ibcl,id,fbcl,fbcr,kntopt,t,bc,nn,kk,qq)
-        IF ( NUMXER(nerr)/=2 ) THEN
+        IF( NUMXER(nerr)/=2 ) THEN
           Ipass = 0
           fatal = .TRUE.
         END IF
@@ -355,14 +354,14 @@ CONTAINS
     kntopt = 1
     x(1) = 1.0E0
     CALL BINT4(x,y,n,ibcl,ibcr,fbcl,fbcr,kntopt,t,bc,n,k,qq)
-    IF ( NUMXER(nerr)/=2 ) THEN
+    IF( NUMXER(nerr)/=2 ) THEN
       Ipass = 0
       fatal = .TRUE.
     END IF
     CALL XERCLR
     !
     CALL BINTK(x,y,t,n,k,bc,qq,adif)
-    IF ( NUMXER(nerr)/=2 ) THEN
+    IF( NUMXER(nerr)/=2 ) THEN
       Ipass = 0
       fatal = .TRUE.
     END IF
@@ -377,14 +376,14 @@ CONTAINS
     END DO
     qq(1) = 1.0E0
     CALL BINT4(x,y,ndata,1,1,fbcl,fbcr,3,t,bc,n,k,qq)
-    IF ( NUMXER(nerr)/=2 ) THEN
+    IF( NUMXER(nerr)/=2 ) THEN
       Ipass = 0
       fatal = .TRUE.
     END IF
     CALL XERCLR
     !
     CALL BFQAD(FB,t,bc,n,k,id,x1,x2,atol,quad,ierr,qq)
-    IF ( NUMXER(nerr)/=2 ) THEN
+    IF( NUMXER(nerr)/=2 ) THEN
       Ipass = 0
       fatal = .TRUE.
     END IF
@@ -399,22 +398,22 @@ CONTAINS
       xx = w(4)
       ldc = INT( w(5) )
       spv = PPVAL(ldc,c,xi,lxi,k,id,xx,inppv)
-      IF ( (i/=4.AND.NUMXER(nerr)/=2).OR.(i==4.AND.NUMXER(nerr)/=0) ) THEN
+      IF( (i/=4 .AND. NUMXER(nerr)/=2) .OR. (i==4 .AND. NUMXER(nerr)/=0) ) THEN
         Ipass = 0
         fatal = .TRUE.
       END IF
       CALL XERCLR
       !
       CALL PFQAD(FB,ldc,c,xi,lxi,k,id,xx,x2,tol,quad,ierr)
-      IF ( (i/=4.AND.NUMXER(nerr)/=2).OR.(i==4.AND.NUMXER(nerr)/=0) ) THEN
+      IF( (i/=4 .AND. NUMXER(nerr)/=2) .OR. (i==4 .AND. NUMXER(nerr)/=0) ) THEN
         Ipass = 0
         fatal = .TRUE.
       END IF
       CALL XERCLR
       !
-      IF ( i/=3 ) THEN
+      IF( i/=3 ) THEN
         CALL PPQAD(ldc,c,xi,lxi,k,xx,x2,pquad)
-        IF ( (i/=4.AND.NUMXER(nerr)/=2).OR.(i==4.AND.NUMXER(nerr)/=0) ) THEN
+        IF( (i/=4 .AND. NUMXER(nerr)/=2) .OR. (i==4 .AND. NUMXER(nerr)/=0) ) THEN
           Ipass = 0
           fatal = .TRUE.
         END IF
@@ -425,7 +424,7 @@ CONTAINS
     END DO
     ldc = INT( w(5) )
     CALL PFQAD(FB,ldc,c,xi,lxi,k,id,x1,x2,atol,quad,ierr)
-    IF ( NUMXER(nerr)/=2 ) THEN
+    IF( NUMXER(nerr)/=2 ) THEN
       Ipass = 0
       fatal = .TRUE.
     END IF
@@ -435,28 +434,27 @@ CONTAINS
     !     passed.
     !
     CALL XSETF(kontrl)
-    IF ( fatal ) THEN
-      IF ( Kprint>=2 ) THEN
+    IF( fatal ) THEN
+      IF( Kprint>=2 ) THEN
         WRITE (Lun,99012)
         99012 FORMAT (/' AT LEAST ONE INCORRECT ARGUMENT TEST FAILED')
       END IF
-    ELSEIF ( Kprint>=3 ) THEN
+    ELSEIF( Kprint>=3 ) THEN
       WRITE (Lun,99013)
       99013 FORMAT (/' ALL INCORRECT ARGUMENT TESTS PASSED')
     END IF
     !
     !     Print PASS/FAIL message.
     !
-    IF ( Ipass==1.AND.Kprint>=2 ) WRITE (Lun,99014)
+    IF( Ipass==1 .AND. Kprint>=2 ) WRITE (Lun,99014)
     99014 FORMAT (/' **********B-SPLINE PACKAGE PASSED ALL TESTS**********')
-    IF ( Ipass==0.AND.Kprint>=1 ) WRITE (Lun,99015)
+    IF( Ipass==0 .AND. Kprint>=1 ) WRITE (Lun,99015)
     99015 FORMAT (/' *********B-SPLINE PACKAGE FAILED SOME TESTS**********')
     RETURN
   END SUBROUTINE BSPCK
   !** FB
   REAL(SP) FUNCTION FB(X)
-    !>
-    !  Subsidiary to BSPCK.
+    !> Subsidiary to BSPCK.
     !***
     ! **Library:**   SLATEC
     !***
@@ -482,8 +480,7 @@ PROGRAM TEST30
   USE slatec, ONLY : I1MACH, XSETF, XSETUN, XERMAX
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
-  !>
-  !  Driver for testing SLATEC subprograms
+  !> Driver for testing SLATEC subprograms
   !***
   ! **Library:**   SLATEC
   !***
@@ -531,7 +528,7 @@ PROGRAM TEST30
   !   890618  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900524  Cosmetic changes to code.  (WRB)
-  INTEGER ipass, kprint, lin, lun, nfail
+  INTEGER :: ipass, kprint, lin, lun, nfail
   !* FIRST EXECUTABLE STATEMENT  TEST30
   lun = I1MACH(2)
   lin = I1MACH(1)
@@ -542,7 +539,7 @@ PROGRAM TEST30
   CALL GET_ARGUMENT(kprint)
   CALL XERMAX(1000)
   CALL XSETUN(lun)
-  IF ( kprint<=1 ) THEN
+  IF( kprint<=1 ) THEN
     CALL XSETF(0)
   ELSE
     CALL XSETF(1)
@@ -551,11 +548,11 @@ PROGRAM TEST30
   !     Test single precision B-Spline package
   !
   CALL BSPCK(lun,kprint,ipass)
-  IF ( ipass==0 ) nfail = nfail + 1
+  IF( ipass==0 ) nfail = nfail + 1
   !
   !     Write PASS or FAIL message
   !
-  IF ( nfail==0 ) THEN
+  IF( nfail==0 ) THEN
     WRITE (lun,99001)
     99001 FORMAT (/' --------------TEST30 PASSED ALL TESTS----------------')
   ELSE

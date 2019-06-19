@@ -1,7 +1,6 @@
 !** XSET
 SUBROUTINE XSET(Irad,Nradpl,Dzero,Nbits,Ierror)
-  !>
-  !  To provide single-precision floating-point arithmetic
+  !> To provide single-precision floating-point arithmetic
   !            with an extended exponent range.
   !***
   ! **Library:**   SLATEC
@@ -67,7 +66,7 @@ SUBROUTINE XSET(Irad,Nradpl,Dzero,Nbits,Ierror)
   !   AN EXTENDED-RANGE NUMBER  (X,IX)  IS SAID TO BE IN ADJUSTED FORM IF
   ! X AND IX ARE ZERO OR
   !
-  !           RADIX**(-L) .LE. ABS(X) .LT. RADIX**L
+  !           RADIX**(-L) <= ABS(X) < RADIX**L
   !
   ! IS SATISFIED, WHERE L IS A COMPUTER-DEPENDENT INTEGER DEFINED IN THIS
   ! SUBROUTINE. TWO EXTENDED-RANGE NUMBERS IN ADJUSTED FORM CAN BE ADDED,
@@ -92,7 +91,7 @@ SUBROUTINE XSET(Irad,Nradpl,Dzero,Nbits,Ierror)
   !   ADDITION AND SUBTRACTION REQUIRE THE USE OF SUBROUTINE XADD
   ! (SEE BELOW).  THE INPUT OPERANDS NEED NOT BE IN ADJUSTED FORM.
   ! HOWEVER, THE RESULT OF ADDITION OR SUBTRACTION IS RETURNED
-  ! IN ADJUSTED FORM.  THUS, FOR EXAMPLE, IF (X,IX),(Y,IY),
+  ! IN ADJUSTED FORM.  THUS, FOR EXAMPLE, IF(X,IX),(Y,IY),
   ! (U,IU),  AND (V,IV) ARE IN ADJUSTED FORM, THEN
   !
   !                 (X,IX)*(Y,IY) + (U,IU)*(V,IV)
@@ -109,23 +108,23 @@ SUBROUTINE XSET(Irad,Nradpl,Dzero,Nbits,Ierror)
   !     SUBROUTINE XADD
   ! USAGE
   !                  CALL XADD(X,IX,Y,IY,Z,IZ,IERROR)
-  !                  IF (IERROR.NE.0) RETURN
+  !                  IF(IERROR/=0) RETURN
   ! **Description:**
   !                  FORMS THE EXTENDED-RANGE SUM  (Z,IZ) =
   !                  (X,IX) + (Y,IY).  (Z,IZ) IS ADJUSTED
   !                  BEFORE RETURNING. THE INPUT OPERANDS
   !                  NEED NOT BE IN ADJUSTED FORM, BUT THEIR
   !                  PRINCIPAL PARTS MUST SATISFY
-  !                  RADIX**(-2L).LE.ABS(X).LE.RADIX**(2L),
-  !                  RADIX**(-2L).LE.ABS(Y).LE.RADIX**(2L).
+  !                  RADIX**(-2L)<=ABS(X)<=RADIX**(2L),
+  !                  RADIX**(-2L)<=ABS(Y)<=RADIX**(2L).
   !
   !     SUBROUTINE XADJ
   ! USAGE
   !                  CALL XADJ(X,IX,IERROR)
-  !                  IF (IERROR.NE.0) RETURN
+  !                  IF(IERROR/=0) RETURN
   ! **Description:**
   !                  TRANSFORMS (X,IX) SO THAT
-  !                  RADIX**(-L) .LE. ABS(X) .LT. RADIX**L.
+  !                  RADIX**(-L) <= ABS(X) < RADIX**L.
   !                  ON MOST COMPUTERS THIS TRANSFORMATION DOES
   !                  NOT CHANGE THE MANTISSA OF X PROVIDED RADIX IS
   !                  THE NUMBER BASE OF SINGLE-PRECISION ARITHMETIC.
@@ -133,11 +132,11 @@ SUBROUTINE XSET(Irad,Nradpl,Dzero,Nbits,Ierror)
   !     SUBROUTINE XC210
   ! USAGE
   !                  CALL XC210(K,Z,J,IERROR)
-  !                  IF (IERROR.NE.0) RETURN
+  !                  IF(IERROR/=0) RETURN
   ! **Description:**
   !                  GIVEN K THIS SUBROUTINE COMPUTES J AND Z
   !                  SUCH THAT  RADIX**K = Z*10**J, WHERE Z IS IN
-  !                  THE RANGE 1/10 .LE. Z .LT. 1.
+  !                  THE RANGE 1/10 <= Z < 1.
   !                  THE VALUE OF Z WILL BE ACCURATE TO FULL
   !                  SINGLE-PRECISION PROVIDED THE NUMBER
   !                  OF DECIMAL PLACES IN THE LARGEST
@@ -150,12 +149,12 @@ SUBROUTINE XSET(Irad,Nradpl,Dzero,Nbits,Ierror)
   !     SUBROUTINE XCON
   ! USAGE
   !                  CALL XCON(X,IX,IERROR)
-  !                  IF (IERROR.NE.0) RETURN
+  !                  IF(IERROR/=0) RETURN
   ! **Description:**
   !                  CONVERTS (X,IX) = X*RADIX**IX
   !                  TO DECIMAL FORM IN PREPARATION FOR
   !                  PRINTING, SO THAT (X,IX) = X*10**IX
-  !                  WHERE 1/10 .LE. ABS(X) .LT. 1
+  !                  WHERE 1/10 <= ABS(X) < 1
   !                  IS RETURNED, EXCEPT THAT IF
   !                  (ABS(X),IX) IS BETWEEN RADIX**(-2L)
   !                  AND RADIX**(2L) THEN THE REDUCED
@@ -164,12 +163,12 @@ SUBROUTINE XSET(Irad,Nradpl,Dzero,Nbits,Ierror)
   !     SUBROUTINE XRED
   ! USAGE
   !                  CALL XRED(X,IX,IERROR)
-  !                  IF (IERROR.NE.0) RETURN
+  !                  IF(IERROR/=0) RETURN
   ! **Description:**
   !                  IF
-  !                  RADIX**(-2L) .LE. (ABS(X),IX) .LE. RADIX**(2L)
+  !                  RADIX**(-2L) <= (ABS(X),IX) <= RADIX**(2L)
   !                  THEN XRED TRANSFORMS (X,IX) SO THAT IX=0.
-  !                  IF (X,IX) IS OUTSIDE THE ABOVE RANGE,
+  !                  IF(X,IX) IS OUTSIDE THE ABOVE RANGE,
   !                  THEN XRED TAKES NO ACTION.
   !                  THIS SUBROUTINE IS USEFUL IF THE
   !                  RESULTS OF EXTENDED-RANGE CALCULATIONS
@@ -216,7 +215,7 @@ SUBROUTINE XSET(Irad,Nradpl,Dzero,Nbits,Ierror)
   INTEGER, SAVE :: iflag = 0
   !* FIRST EXECUTABLE STATEMENT  XSET
   Ierror = 0
-  IF ( iflag/=0 ) RETURN
+  IF( iflag/=0 ) RETURN
   iradx = Irad
   nrdplc = Nradpl
   dzerox = Dzero
@@ -226,15 +225,15 @@ SUBROUTINE XSET(Irad,Nradpl,Dzero,Nbits,Ierror)
   ! FOLLOWING 5 STATEMENTS SHOULD BE DELETED IF I1MACH IS
   ! NOT AVAILABLE OR NOT CONFIGURED TO RETURN THE CORRECT
   ! MACHINE-DEPENDENT VALUES.
-  IF ( iradx==0 ) iradx = I1MACH(10)
-  IF ( nrdplc==0 ) nrdplc = I1MACH(11)
-  IF ( dzerox==0.0 ) iminex = I1MACH(12)
-  IF ( dzerox==0.0 ) imaxex = I1MACH(13)
-  IF ( nbitsx==0 ) nbitsx = I1MACH(8)
-  IF ( iradx/=2 ) THEN
-    IF ( iradx/=4 ) THEN
-      IF ( iradx/=8 ) THEN
-        IF ( iradx/=16 ) THEN
+  IF( iradx==0 ) iradx = I1MACH(10)
+  IF( nrdplc==0 ) nrdplc = I1MACH(11)
+  IF( dzerox==0.0 ) iminex = I1MACH(12)
+  IF( dzerox==0.0 ) imaxex = I1MACH(13)
+  IF( nbitsx==0 ) nbitsx = I1MACH(8)
+  IF( iradx/=2 ) THEN
+    IF( iradx/=4 ) THEN
+      IF( iradx/=8 ) THEN
+        IF( iradx/=16 ) THEN
           CALL XERMSG('XSET','IMPROPER VALUE OF IRAD',101,1)
           Ierror = 101
           RETURN
@@ -243,14 +242,14 @@ SUBROUTINE XSET(Irad,Nradpl,Dzero,Nbits,Ierror)
     END IF
   END IF
   log2r = 0
-  IF ( iradx==2 ) log2r = 1
-  IF ( iradx==4 ) log2r = 2
-  IF ( iradx==8 ) log2r = 3
-  IF ( iradx==16 ) log2r = 4
+  IF( iradx==2 ) log2r = 1
+  IF( iradx==4 ) log2r = 2
+  IF( iradx==8 ) log2r = 3
+  IF( iradx==16 ) log2r = 4
   nbitsf_com = log2r*nrdplc
   radixx_com = iradx
   dlg10r_com = LOG10(radixx_com)
-  IF ( dzerox/=0.0 ) THEN
+  IF( dzerox/=0.0 ) THEN
     lx = INT( 0.5*LOG10(dzerox)/dlg10r_com )
     ! RADIX**(2*L) SHOULD NOT OVERFLOW, BUT REDUCE L BY 1 FOR FURTHER
     ! PROTECTION.
@@ -259,7 +258,7 @@ SUBROUTINE XSET(Irad,Nradpl,Dzero,Nbits,Ierror)
     lx = MIN((1-iminex)/2,(imaxex-1)/2)
   END IF
   l2_com = 2*lx
-  IF ( lx>=4 ) THEN
+  IF( lx>=4 ) THEN
     l_com = lx
     radixl_com = radixx_com**l_com
     rad2l_com = radixl_com**2
@@ -271,11 +270,11 @@ SUBROUTINE XSET(Irad,Nradpl,Dzero,Nbits,Ierror)
     ! WORD LENGTH DOES NOT EXCEED 63. A LOWER LIMIT OF 15 BITS IS IMPOSED
     ! BECAUSE THE SOFTWARE IS DESIGNED TO RUN ON COMPUTERS WITH INTEGER WORD
     ! LENGTH OF AT LEAST 16 BITS.
-    IF ( 15<=nbitsx.AND.nbitsx<=63 ) THEN
+    IF( 15<=nbitsx .AND. nbitsx<=63 ) THEN
       kmax_com = 2**(nbitsx-1) - l2_com
       nb = (nbitsx-1)/2
       mlg102_com = 2**nb
-      IF ( 1<=nrdplc*log2r.AND.nrdplc*log2r<=120 ) THEN
+      IF( 1<=nrdplc*log2r .AND. nrdplc*log2r<=120 ) THEN
         nlg102_com = nrdplc*log2r/nb + 3
         np1 = nlg102_com + 1
         !
@@ -310,11 +309,11 @@ SUBROUTINE XSET(Irad,Nradpl,Dzero,Nbits,Ierror)
         END DO
         !
         ! CHECK SPECIAL CONDITIONS REQUIRED BY SUBROUTINES...
-        IF ( nrdplc>=l_com ) THEN
-          CALL XERMSG('XSET','NRADPL .GE. l_com',105,1)
+        IF( nrdplc>=l_com ) THEN
+          CALL XERMSG('XSET','NRADPL >= l_com',105,1)
           Ierror = 105
           RETURN
-        ELSEIF ( 6*l_com<=kmax_com ) THEN
+        ELSEIF( 6*l_com<=kmax_com ) THEN
           iflag = 1
           RETURN
         END IF
@@ -333,7 +332,7 @@ SUBROUTINE XSET(Irad,Nradpl,Dzero,Nbits,Ierror)
     Ierror = 102
     RETURN
   END IF
-  CALL XERMSG('XSET','6*l_com .GT. KMAX',106,1)
+  CALL XERMSG('XSET','6*l_com > KMAX',106,1)
   Ierror = 106
   RETURN
 END SUBROUTINE XSET

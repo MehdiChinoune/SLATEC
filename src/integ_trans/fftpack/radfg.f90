@@ -1,7 +1,6 @@
 !** RADFG
 SUBROUTINE RADFG(Ido,Ip,L1,Idl1,Cc,C1,C2,Ch,Ch2,Wa)
-  !>
-  !  Calculate the fast Fourier transform of subvectors of
+  !> Calculate the fast Fourier transform of subvectors of
   !            arbitrary length.
   !***
   ! **Library:**   SLATEC (FFTPACK)
@@ -41,7 +40,7 @@ SUBROUTINE RADFG(Ido,Ip,L1,Idl1,Cc,C1,C2,Ch,Ch2,Wa)
   ipp2 = Ip + 2
   idp2 = Ido + 2
   nbd = (Ido-1)/2
-  IF ( Ido==1 ) THEN
+  IF( Ido==1 ) THEN
     DO ik = 1, Idl1
       C2(ik,1) = Ch2(ik,1)
     END DO
@@ -54,7 +53,7 @@ SUBROUTINE RADFG(Ido,Ip,L1,Idl1,Cc,C1,C2,Ch,Ch2,Wa)
         Ch(1,k,j) = C1(1,k,j)
       END DO
     END DO
-    IF ( nbd>L1 ) THEN
+    IF( nbd>L1 ) THEN
       is = -Ido
       DO j = 2, Ip
         is = is + Ido
@@ -81,7 +80,7 @@ SUBROUTINE RADFG(Ido,Ip,L1,Idl1,Cc,C1,C2,Ch,Ch2,Wa)
         END DO
       END DO
     END IF
-    IF ( nbd<L1 ) THEN
+    IF( nbd<L1 ) THEN
       DO j = 2, ipph
         jc = ipp2 - j
         DO i = 3, Ido, 2
@@ -147,7 +146,7 @@ SUBROUTINE RADFG(Ido,Ip,L1,Idl1,Cc,C1,C2,Ch,Ch2,Wa)
     END DO
   END DO
   !
-  IF ( Ido<L1 ) THEN
+  IF( Ido<L1 ) THEN
     DO i = 1, Ido
       DO k = 1, L1
         Cc(i,1,k) = Ch(i,k,1)
@@ -168,8 +167,8 @@ SUBROUTINE RADFG(Ido,Ip,L1,Idl1,Cc,C1,C2,Ch,Ch2,Wa)
       Cc(1,j2-1,k) = Ch(1,k,jc)
     END DO
   END DO
-  IF ( Ido==1 ) RETURN
-  IF ( nbd<L1 ) THEN
+  IF( Ido==1 ) RETURN
+  IF( nbd<L1 ) THEN
     DO j = 2, ipph
       jc = ipp2 - j
       j2 = j + j

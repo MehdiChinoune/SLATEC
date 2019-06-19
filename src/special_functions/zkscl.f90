@@ -1,7 +1,6 @@
 !** ZKSCL
 SUBROUTINE ZKSCL(Zrr,Zri,Fnu,N,Yr,Yi,Nz,Rzr,Rzi,Ascle,Tol,Elim)
-  !>
-  !  Subsidiary to ZBESK
+  !> Subsidiary to ZBESK
   !***
   ! **Library:**   SLATEC
   !***
@@ -26,7 +25,7 @@ SUBROUTINE ZKSCL(Zrr,Zri,Fnu,N,Yr,Yi,Nz,Rzr,Rzi,Ascle,Tol,Elim)
   !   930122  Added ZLOG to EXTERNAL statement.  (RWC)
 
   !     COMPLEX CK,CS,CY,CZERO,RZ,S1,S2,Y,ZR,ZD,CELM
-  INTEGER i, ic, idum, kk, N, nn, nw, Nz
+  INTEGER :: i, ic, idum, kk, N, nn, nw, Nz
   REAL(DP) :: acs, as, Ascle, cki, ckr, csi, csr, cyi(2), cyr(2), Elim, fn, Fnu, &
     Rzi, Rzr, str, s1i, s1r, s2i, s2r, Tol, Yi(N), Yr(N), Zri, Zrr, zdr, zdi, &
     celmr, elm, helim, alas
@@ -45,7 +44,7 @@ SUBROUTINE ZKSCL(Zrr,Zri,Fnu,N,Yr,Yi,Nz,Rzr,Rzi,Ascle,Tol,Elim)
     Nz = Nz + 1
     Yr(i) = zeror
     Yi(i) = zeroi
-    IF ( acs>=(-Elim) ) THEN
+    IF( acs>=(-Elim) ) THEN
       CALL ZLOG(s1r,s1i,csr,csi,idum)
       csr = csr - Zrr
       csi = csi - Zri
@@ -53,7 +52,7 @@ SUBROUTINE ZKSCL(Zrr,Zri,Fnu,N,Yr,Yi,Nz,Rzr,Rzi,Ascle,Tol,Elim)
       csr = str*COS(csi)
       csi = str*SIN(csi)
       CALL ZUCHK(csr,csi,nw,Ascle,Tol)
-      IF ( nw==0 ) THEN
+      IF( nw==0 ) THEN
         Yr(i) = csr
         Yi(i) = csi
         ic = i
@@ -61,14 +60,14 @@ SUBROUTINE ZKSCL(Zrr,Zri,Fnu,N,Yr,Yi,Nz,Rzr,Rzi,Ascle,Tol,Elim)
       END IF
     END IF
   END DO
-  IF ( N==1 ) RETURN
-  IF ( ic<=1 ) THEN
+  IF( N==1 ) RETURN
+  IF( ic<=1 ) THEN
     Yr(1) = zeror
     Yi(1) = zeroi
     Nz = 2
   END IF
-  IF ( N==2 ) RETURN
-  IF ( Nz==0 ) RETURN
+  IF( N==2 ) RETURN
+  IF( Nz==0 ) RETURN
   fn = Fnu + 1.0D0
   ckr = fn*Rzr
   cki = fn*Rzi
@@ -101,7 +100,7 @@ SUBROUTINE ZKSCL(Zrr,Zri,Fnu,N,Yr,Yi,Nz,Rzr,Rzi,Ascle,Tol,Elim)
     Nz = Nz + 1
     Yr(i) = zeror
     Yi(i) = zeroi
-    IF ( acs>=(-Elim) ) THEN
+    IF( acs>=(-Elim) ) THEN
       CALL ZLOG(s2r,s2i,csr,csi,idum)
       csr = csr - zdr
       csi = csi - zdi
@@ -109,16 +108,16 @@ SUBROUTINE ZKSCL(Zrr,Zri,Fnu,N,Yr,Yi,Nz,Rzr,Rzi,Ascle,Tol,Elim)
       csr = str*COS(csi)
       csi = str*SIN(csi)
       CALL ZUCHK(csr,csi,nw,Ascle,Tol)
-      IF ( nw==0 ) THEN
+      IF( nw==0 ) THEN
         Yr(i) = csr
         Yi(i) = csi
         Nz = Nz - 1
-        IF ( ic==kk-1 ) GOTO 100
+        IF( ic==kk-1 ) GOTO 100
         ic = kk
         CYCLE
       END IF
     END IF
-    IF ( alas>=helim ) THEN
+    IF( alas>=helim ) THEN
       zdr = zdr - Elim
       s1r = s1r*celmr
       s1i = s1i*celmr
@@ -127,7 +126,7 @@ SUBROUTINE ZKSCL(Zrr,Zri,Fnu,N,Yr,Yi,Nz,Rzr,Rzi,Ascle,Tol,Elim)
     END IF
   END DO
   Nz = N
-  IF ( ic==N ) Nz = N - 1
+  IF( ic==N ) Nz = N - 1
   GOTO 200
   100  Nz = kk - 2
   200 CONTINUE

@@ -1,7 +1,6 @@
 !** PCHID
 REAL(SP) FUNCTION PCHID(N,X,F,D,Incfd,Skip,Ia,Ib,Ierr)
-  !>
-  !  Evaluate the definite integral of a piecewise cubic
+  !> Evaluate the definite integral of a piecewise cubic
   !            Hermite function over an interval whose endpoints are data
   !            points.
   !***
@@ -45,11 +44,11 @@ REAL(SP) FUNCTION PCHID(N,X,F,D,Incfd,Skip,Ia,Ib,Ierr)
   !
   !     VALUE -- (output) value of the requested integral.
   !
-  !     N -- (input) number of data points.  (Error return if N.LT.2 .)
+  !     N -- (input) number of data points.  (Error return if N<2 .)
   !
   !     X -- (input) real array of independent variable values.  The
   !           elements of X must be strictly increasing:
-  !                X(I-1) .LT. X(I),  I = 2(1)N.
+  !                X(I-1) < X(I),  I = 2(1)N.
   !           (Error return if not.)
   !
   !     F -- (input) real array of function values.  F(1+(I-1)*INCFD) is
@@ -59,7 +58,7 @@ REAL(SP) FUNCTION PCHID(N,X,F,D,Incfd,Skip,Ia,Ib,Ierr)
   !           the value corresponding to X(I).
   !
   !     INCFD -- (input) increment between successive values in F and D.
-  !           (Error return if  INCFD.LT.1 .)
+  !           (Error return if  INCFD<1 .)
   !
   !     SKIP -- (input/output) logical variable which should be set to
   !           .TRUE. if the user wishes to skip checks for validity of
@@ -76,8 +75,8 @@ REAL(SP) FUNCTION PCHID(N,X,F,D,Incfd,Skip,Ia,Ib,Ierr)
   !           Normal return:
   !              IERR = 0  (no errors).
   !           "Recoverable" errors:
-  !              IERR = -1  if N.LT.2 .
-  !              IERR = -2  if INCFD.LT.1 .
+  !              IERR = -1  if N<2 .
+  !              IERR = -2  if INCFD<1 .
   !              IERR = -3  if the X-array is not strictly increasing.
   !              IERR = -4  if IA or IB is out of range.
   !                (VALUE will be zero in any of these cases.)
@@ -100,7 +99,7 @@ REAL(SP) FUNCTION PCHID(N,X,F,D,Incfd,Skip,Ia,Ib,Ierr)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-  !   930504  Corrected to set VALUE=0 when IERR.ne.0.  (FNF)
+  !   930504  Corrected to set VALUE=0 when IERR/=0.  (FNF)
   USE service, ONLY : XERMSG
   !
   !  Programming notes:
@@ -112,14 +111,14 @@ REAL(SP) FUNCTION PCHID(N,X,F,D,Incfd,Skip,Ia,Ib,Ierr)
   !
   !  DECLARE ARGUMENTS.
   !
-  INTEGER N, Incfd, Ia, Ib, Ierr
-  REAL(SP) X(N), F(Incfd,N), D(Incfd,N)
-  LOGICAL Skip
+  INTEGER :: N, Incfd, Ia, Ib, Ierr
+  REAL(SP) :: X(N), F(Incfd,N), D(Incfd,N)
+  LOGICAL :: Skip
   !
   !  DECLARE LOCAL VARIABLES.
   !
-  INTEGER i, iup, low
-  REAL(SP) h, summ, value
+  INTEGER :: i, iup, low
+  REAL(SP) :: h, summ, value
   !
   !  INITIALIZE.
   !
@@ -129,25 +128,25 @@ REAL(SP) FUNCTION PCHID(N,X,F,D,Incfd,Skip,Ia,Ib,Ierr)
   !
   !  VALIDITY-CHECK ARGUMENTS.
   !
-  IF ( .NOT.(Skip) ) THEN
+  IF( .NOT. (Skip) ) THEN
     !
-    IF ( N<2 ) THEN
+    IF( N<2 ) THEN
       !
       !  ERROR RETURNS.
       !
-      !     N.LT.2 RETURN.
+      !     N<2 RETURN.
       Ierr = -1
       CALL XERMSG('PCHID','NUMBER OF DATA POINTS LESS THAN TWO',Ierr,1)
       GOTO 100
-    ELSEIF ( Incfd<1 ) THEN
+    ELSEIF( Incfd<1 ) THEN
       !
-      !     INCFD.LT.1 RETURN.
+      !     INCFD<1 RETURN.
       Ierr = -2
       CALL XERMSG('PCHID','INCREMENT LESS THAN ONE',Ierr,1)
       GOTO 100
     ELSE
       DO i = 2, N
-        IF ( X(i)<=X(i-1) ) GOTO 200
+        IF( X(i)<=X(i-1) ) GOTO 200
       END DO
     END IF
   END IF
@@ -155,13 +154,13 @@ REAL(SP) FUNCTION PCHID(N,X,F,D,Incfd,Skip,Ia,Ib,Ierr)
   !  FUNCTION DEFINITION IS OK, GO ON.
   !
   Skip = .TRUE.
-  IF ( (Ia<1).OR.(Ia>N) ) GOTO 300
-  IF ( (Ib<1).OR.(Ib>N) ) GOTO 300
+  IF( (Ia<1) .OR. (Ia>N) ) GOTO 300
+  IF( (Ib<1) .OR. (Ib>N) ) GOTO 300
   Ierr = 0
   !
   !  COMPUTE INTEGRAL VALUE.
   !
-  IF ( Ia/=Ib ) THEN
+  IF( Ia/=Ib ) THEN
     low = MIN(Ia,Ib)
     iup = MAX(Ia,Ib) - 1
     summ = zero
@@ -170,7 +169,7 @@ REAL(SP) FUNCTION PCHID(N,X,F,D,Incfd,Skip,Ia,Ib,Ierr)
       summ = summ + h*((F(1,i)+F(1,i+1))+(D(1,i)-D(1,i+1))*(h/six))
     END DO
     value = half*summ
-    IF ( Ia>Ib ) value = -value
+    IF( Ia>Ib ) value = -value
   END IF
   !
   !  NORMAL RETURN.

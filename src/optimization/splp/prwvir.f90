@@ -1,7 +1,6 @@
 !** PRWVIR
 SUBROUTINE PRWVIR(Key,Ipage,Lpg,Sx,Ix)
-  !>
-  !  Subsidiary to SPLP
+  !> Subsidiary to SPLP
   !***
   ! **Library:**   SLATEC
   !***
@@ -54,7 +53,7 @@ SUBROUTINE PRWVIR(Key,Ipage,Lpg,Sx,Ix)
   !     OPEN RANDOM ACCESS FILE NUMBER IPAGEF, IF FIRST PAGE WRITE.
   !
   first = Sx(4)==zero
-  IF ( first ) THEN
+  IF( first ) THEN
     CALL SOPENM(ipagef,Lpg)
     Sx(4) = one
   END IF
@@ -62,9 +61,9 @@ SUBROUTINE PRWVIR(Key,Ipage,Lpg,Sx,Ix)
   !     PERFORM EITHER A READ OR A WRITE.
   !
   iaddr = 2*Ipage - 1
-  IF ( Key==1 ) THEN
+  IF( Key==1 ) THEN
     CALL SREADP(ipagef,Ix(istart),Sx(istart),Lpg,iaddr)
-  ELSEIF ( Key==2 ) THEN
+  ELSEIF( Key==2 ) THEN
     CALL SWRITP(ipagef,Ix(istart),Sx(istart),Lpg,iaddr)
   END IF
 END SUBROUTINE PRWVIR

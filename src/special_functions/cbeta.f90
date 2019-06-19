@@ -1,7 +1,6 @@
 !** CBETA
 COMPLEX(SP) FUNCTION CBETA(A,B)
-  !>
-  !  Compute the complete Beta function.
+  !> Compute the complete Beta function.
   !***
   ! **Library:**   SLATEC (FNLIB)
   !***
@@ -39,14 +38,14 @@ COMPLEX(SP) FUNCTION CBETA(A,B)
   REAL(SP) :: xmin
   REAL(SP), SAVE :: xmax = 0.0
   !* FIRST EXECUTABLE STATEMENT  CBETA
-  IF ( xmax==0.0 ) THEN
+  IF( xmax==0.0 ) THEN
     CALL GAMLIM(xmin,xmax)
   END IF
   !
-  IF ( REAL(A)<=0.0.OR.REAL(B)<=0.0 ) CALL XERMSG('CBETA',&
+  IF( REAL(A)<=0.0 .OR. REAL(B)<=0.0 ) CALL XERMSG('CBETA',&
     'REAL PART OF BOTH ARGUMENTS MUST BE GT 0',1,2)
   !
-  IF ( REAL(A)+REAL(B)<xmax ) THEN
+  IF( REAL(A)+REAL(B)<xmax ) THEN
     CBETA = CGAMMA(A)*(CGAMMA(B)/CGAMMA(A+B))
     RETURN
   END IF

@@ -1,7 +1,6 @@
 !** CV
 REAL(SP) FUNCTION CV(Xval,Ndata,Nconst,Nord,Nbkpt,Bkpt,W)
-  !>
-  !  Evaluate the variance function of the curve obtained
+  !> Evaluate the variance function of the curve obtained
   !            by the constrained B-spline fitting subprogram FC.
   !***
   ! **Library:**   SLATEC
@@ -77,7 +76,7 @@ REAL(SP) FUNCTION CV(Xval,Ndata,Nconst,Nord,Nbkpt,Bkpt,W)
   !             example, NORD=4 when we are using piece-wise cubics.)
   !
   !     NBKPT   The number of knots in the array BKPT(*).
-  !             The value of NBKPT must satisfy NBKPT .GE. 2*NORD.
+  !             The value of NBKPT must satisfy NBKPT >= 2*NORD.
   !
   !     BKPT(*) The real array of knots.  Normally the problem data
   !             interval will be included between the limits BKPT(NORD)
@@ -116,7 +115,7 @@ REAL(SP) FUNCTION CV(Xval,Ndata,Nconst,Nord,Nbkpt,Bkpt,W)
   is = mdg*(Nord+1) + 2*MAX(Ndata,Nbkpt) + Nbkpt + Nord**2
   last = Nbkpt - Nord + 1
   ileft = Nord
-  DO WHILE ( Xval>=Bkpt(ileft+1).AND.ileft<last-1 )
+  DO WHILE( Xval>=Bkpt(ileft+1) .AND. ileft<last-1 )
     ileft = ileft + 1
   END DO
   CALL BSPLVN(Bkpt,Nord,1,Xval,ileft,v(Nord+1))

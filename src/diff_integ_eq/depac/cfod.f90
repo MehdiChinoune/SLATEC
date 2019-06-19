@@ -1,7 +1,6 @@
 !** CFOD
 SUBROUTINE CFOD(Meth,Elco,Tesco)
-  !>
-  !  Subsidiary to DEBDF
+  !> Subsidiary to DEBDF
   !***
   ! **Library:**   SLATEC
   !***
@@ -26,8 +25,8 @@ SUBROUTINE CFOD(Meth,Elco,Tesco)
 
   !
   !
-  INTEGER Meth, i, ib, nq, nqm1, nqp1
-  REAL(SP) Elco(13,12), Tesco(3,12), agamq, fnq, fnqm1, pc(12), pint, ragq, rqfac, &
+  INTEGER :: Meth, i, ib, nq, nqm1, nqp1
+  REAL(SP) :: Elco(13,12), Tesco(3,12), agamq, fnq, fnqm1, pc(12), pint, ragq, rqfac, &
     rq1fac, tsign, xpin
   !-----------------------------------------------------------------------
   ! CFOD  IS CALLED BY THE INTEGRATOR ROUTINE TO SET COEFFICIENTS
@@ -39,7 +38,7 @@ SUBROUTINE CFOD(Meth,Elco,Tesco)
   ! AND IS NOT CALLED AGAIN UNLESS AND UNTIL METH IS CHANGED.
   !
   ! THE ELCO ARRAY CONTAINS THE BASIC METHOD COEFFICIENTS.
-  ! THE COEFFICIENTS EL(I), 1 .LE. I .LE. NQ+1, FOR THE METHOD OF
+  ! THE COEFFICIENTS EL(I), 1 <= I <= NQ+1, FOR THE METHOD OF
   ! ORDER NQ ARE STORED IN ELCO(I,NQ).  THEY ARE GIVEN BY A GENERATING
   ! POLYNOMIAL, I.E.,
   !     L(X) = EL(1) + EL(2)*X + ... + EL(NQ+1)*X**NQ.
@@ -57,7 +56,7 @@ SUBROUTINE CFOD(Meth,Elco,Tesco)
   !-----------------------------------------------------------------------
 
   !* FIRST EXECUTABLE STATEMENT  CFOD
-  IF ( Meth==2 ) THEN
+  IF( Meth==2 ) THEN
     !
     pc(1) = 1.0E0
     rq1fac = 1.0E0
@@ -133,7 +132,7 @@ SUBROUTINE CFOD(Meth,Elco,Tesco)
     agamq = rqfac*xpin
     ragq = 1.0E0/agamq
     Tesco(2,nq) = ragq
-    IF ( nq<12 ) Tesco(1,nqp1) = ragq*rqfac/nqp1
+    IF( nq<12 ) Tesco(1,nqp1) = ragq*rqfac/nqp1
     Tesco(3,nqm1) = ragq
   END DO
   RETURN

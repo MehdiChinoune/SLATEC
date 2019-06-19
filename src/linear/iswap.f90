@@ -1,7 +1,6 @@
 !** ISWAP
 SUBROUTINE ISWAP(N,Ix,Incx,Iy,Incy)
-  !>
-  !  Interchange two vectors.
+  !> Interchange two vectors.
   !***
   ! **Library:**   SLATEC (BLAS)
   !***
@@ -26,12 +25,12 @@ SUBROUTINE ISWAP(N,Ix,Incx,Iy,Incy)
   !     INCY  storage spacing between elements of IY
   !
   !     --Output--
-  !       IX  input vector IY (unchanged if N .LE. 0)
-  !       IY  input vector IX (unchanged if N .LE. 0)
+  !       IX  input vector IY (unchanged if N <= 0)
+  !       IY  input vector IX (unchanged if N <= 0)
   !
   !     Interchange integer IX and integer IY.
   !     For I = 0 to N-1, interchange  IX(LX+I*INCX) and IY(LY+I*INCY),
-  !     where LX = 1 if INCX .GE. 0, else LX = 1+(1-N)*INCX, and LY is
+  !     where LX = 1 if INCX >= 0, else LX = 1+(1-N)*INCX, and LY is
   !     defined in a similar way using INCY.
   !
   !***
@@ -53,23 +52,23 @@ SUBROUTINE ISWAP(N,Ix,Incx,Iy,Incy)
   INTEGER :: Ix(N), Iy(N)
   INTEGER :: i, iix, iiy, m, mp1, ns, itemp1, itemp2, itemp3
   !* FIRST EXECUTABLE STATEMENT  ISWAP
-  IF ( N<=0 ) RETURN
-  IF ( Incx==Incy ) THEN
-    IF ( Incx<1 ) THEN
-    ELSEIF ( Incx==1 ) THEN
+  IF( N<=0 ) RETURN
+  IF( Incx==Incy ) THEN
+    IF( Incx<1 ) THEN
+    ELSEIF( Incx==1 ) THEN
       !
       !     Code for both increments equal to 1.
       !
       !     Clean-up loop so remaining vector length is a multiple of 3.
       !
       m = MOD(N,3)
-      IF ( m/=0 ) THEN
+      IF( m/=0 ) THEN
         DO i = 1, m
           itemp1 = Ix(i)
           Ix(i) = Iy(i)
           Iy(i) = itemp1
         END DO
-        IF ( N<3 ) RETURN
+        IF( N<3 ) RETURN
       END IF
       GOTO 100
     ELSE
@@ -90,8 +89,8 @@ SUBROUTINE ISWAP(N,Ix,Incx,Iy,Incy)
   !
   iix = 1
   iiy = 1
-  IF ( Incx<0 ) iix = (1-N)*Incx + 1
-  IF ( Incy<0 ) iiy = (1-N)*Incy + 1
+  IF( Incx<0 ) iix = (1-N)*Incx + 1
+  IF( Incy<0 ) iiy = (1-N)*Incy + 1
   DO i = 1, N
     itemp1 = Ix(iix)
     Ix(iix) = Iy(iiy)

@@ -1,7 +1,6 @@
 !** RADB2
 SUBROUTINE RADB2(Ido,L1,Cc,Ch,Wa1)
-  !>
-  !  Calculate the fast Fourier transform of subvectors of
+  !> Calculate the fast Fourier transform of subvectors of
   !            length two.
   !***
   ! **Library:**   SLATEC (FFTPACK)
@@ -31,10 +30,10 @@ SUBROUTINE RADB2(Ido,L1,Cc,Ch,Wa1)
     Ch(1,k,1) = Cc(1,1,k) + Cc(Ido,2,k)
     Ch(1,k,2) = Cc(1,1,k) - Cc(Ido,2,k)
   END DO
-  IF ( Ido<2 ) RETURN
-  IF ( Ido/=2 ) THEN
+  IF( Ido<2 ) RETURN
+  IF( Ido/=2 ) THEN
     idp2 = Ido + 2
-    IF ( (Ido-1)/2<L1 ) THEN
+    IF( (Ido-1)/2<L1 ) THEN
       DO i = 3, Ido, 2
         ic = idp2 - i
         DO k = 1, L1
@@ -59,7 +58,7 @@ SUBROUTINE RADB2(Ido,L1,Cc,Ch,Wa1)
         END DO
       END DO
     END IF
-    IF ( MOD(Ido,2)==1 ) RETURN
+    IF( MOD(Ido,2)==1 ) RETURN
   END IF
   DO k = 1, L1
     Ch(Ido,k,1) = Cc(Ido,1,k) + Cc(Ido,1,k)

@@ -1,8 +1,7 @@
 !** DEXINT
 SUBROUTINE DEXINT(X,N,Kode,M,Tol,En,Nz,Ierr)
-  !>
-  !  Compute an M member sequence of exponential integrals
-  !            E(N+K,X), K=0,1,...,M-1 for N .GE. 1 and X .GE. 0.
+  !> Compute an M member sequence of exponential integrals
+  !            E(N+K,X), K=0,1,...,M-1 for N >= 1 and X >= 0.
   !***
   ! **Library:**   SLATEC
   !***
@@ -17,7 +16,7 @@ SUBROUTINE DEXINT(X,N,Kode,M,Tol,En,Nz,Ierr)
   ! **Description:**
   !
   !         DEXINT computes M member sequences of exponential integrals
-  !         E(N+K,X), K=0,1,...,M-1 for N .GE. 1 and X .GE. 0.  The
+  !         E(N+K,X), K=0,1,...,M-1 for N >= 1 and X >= 0.  The
   !         exponential integral is defined by
   !
   !         E(N,X)=integral on (1,infinity) of EXP(-XT)/T**N
@@ -26,14 +25,14 @@ SUBROUTINE DEXINT(X,N,Kode,M,Tol,En,Nz,Ierr)
   !         and notation are found in the NBS Handbook of Mathematical
   !         Functions (ref. 1).
   !
-  !         The power series is implemented for X .LE. XCUT and the
+  !         The power series is implemented for X <= XCUT and the
   !         confluent hypergeometric representation
   !
   !                     E(A,X) = EXP(-X)*(X**(A-1))*U(A,A,X)
   !
-  !         is computed for X .GT. XCUT.  Since sequences are computed in
+  !         is computed for X > XCUT.  Since sequences are computed in
   !         a stable fashion by recurring away from X, A is selected as
-  !         the integer closest to X within the constraint N .LE. A .LE.
+  !         the integer closest to X within the constraint N <= A <=
   !         N+M-1.  For the U computation, A is further modified to be the
   !         nearest even integer.  Indices are carried forward or
   !         backward by the two term recursion relation
@@ -57,15 +56,15 @@ SUBROUTINE DEXINT(X,N,Kode,M,Tol,En,Nz,Ierr)
   !     Description of Arguments
   !
   !         Input     * X and TOL are double precision *
-  !           X       X .GT. 0.0 for N=1 and  X .GE. 0.0 for N .GE. 2
-  !           N       order of the first member of the sequence, N .GE. 1
+  !           X       X > 0.0 for N=1 and  X >= 0.0 for N >= 2
+  !           N       order of the first member of the sequence, N >= 1
   !                   (X=0.0 and N=1 is an error)
   !           KODE    a selection parameter for scaled values
   !                   KODE=1   returns        E(N+K,X), K=0,1,...,M-1.
   !                       =2   returns EXP(X)*E(N+K,X), K=0,1,...,M-1.
   !           M       number of exponential integrals in the sequence,
-  !                   M .GE. 1
-  !           TOL     relative accuracy wanted, ETOL .LE. TOL .LE. 0.1
+  !                   M >= 1
+  !           TOL     relative accuracy wanted, ETOL <= TOL <= 0.1
   !                   ETOL is the larger of double precision unit
   !                   roundoff = D1MACH(4) and 1.0D-18
   !
@@ -110,26 +109,26 @@ SUBROUTINE DEXINT(X,N,Kode,M,Tol,En,Nz,Ierr)
   REAL(DP) :: En(M), X, Tol
   REAL(DP) :: a(99), aa, aams, ah, ak, at, b(99), bk, bt, cc, cnorm, ct, em, emx, &
     etol, fnm, fx, pt, p1, p2, s, tx, xlim, xtol, y(2), yt, y1, y2
-  INTEGER i, ic, icase, ict, ik, ind, ix, i1m, jset, k, kk, kn, ks, ml, mu, nd, nm
+  INTEGER :: i, ic, icase, ict, ik, ind, ix, i1m, jset, k, kk, kn, ks, ml, mu, nd, nm
   REAL(DP), PARAMETER :: xcut = 2.0D0
   !* FIRST EXECUTABLE STATEMENT  DEXINT
   Ierr = 0
   Nz = 0
   etol = MAX(D1MACH(4),0.5D-18)
-  IF ( X<0.0D0 ) Ierr = 1
-  IF ( N<1 ) Ierr = 1
-  IF ( Kode<1.OR.Kode>2 ) Ierr = 1
-  IF ( M<1 ) Ierr = 1
-  IF ( Tol<etol.OR.Tol>0.1D0 ) Ierr = 1
-  IF ( X==0.0D0.AND.N==1 ) Ierr = 1
-  IF ( Ierr/=0 ) RETURN
+  IF( X<0.0D0 ) Ierr = 1
+  IF( N<1 ) Ierr = 1
+  IF( Kode<1 .OR. Kode>2 ) Ierr = 1
+  IF( M<1 ) Ierr = 1
+  IF( Tol<etol .OR. Tol>0.1D0 ) Ierr = 1
+  IF( X==0.0D0 .AND. N==1 ) Ierr = 1
+  IF( Ierr/=0 ) RETURN
   i1m = -I1MACH(15)
   pt = 2.3026D0*i1m*D1MACH(5)
   xlim = pt - 6.907755D0
   bt = pt + (N+M-1)
-  IF ( bt>1000.0D0 ) xlim = pt - LOG(bt)
+  IF( bt>1000.0D0 ) xlim = pt - LOG(bt)
   !
-  IF ( X>xcut ) THEN
+  IF( X>xcut ) THEN
     !-----------------------------------------------------------------------
     !     BACKWARD RECURSIVE MILLER ALGORITHM FOR
     !              E(N,X)=EXP(-X)*(X**(N-1))*U(N,N,X)
@@ -137,8 +136,8 @@ SUBROUTINE DEXINT(X,N,Kode,M,Tol,En,Nz,Ierr)
     !     U(A,B,X) IS THE SECOND CONFLUENT HYPERGEOMETRIC FUNCTION
     !-----------------------------------------------------------------------
     emx = 1.0D0
-    IF ( Kode/=2 ) THEN
-      IF ( X<=xlim ) THEN
+    IF( Kode/=2 ) THEN
+      IF( X<=xlim ) THEN
         emx = EXP(-X)
       ELSE
         Nz = M
@@ -151,22 +150,22 @@ SUBROUTINE DEXINT(X,N,Kode,M,Tol,En,Nz,Ierr)
     tx = X + 0.5D0
     ix = INT( tx )
     kn = N + M - 1
-    IF ( kn<=ix ) THEN
+    IF( kn<=ix ) THEN
       icase = 1
       ks = kn
       ml = M - 1
       mu = -1
       ind = M
-      IF ( kn>1 ) GOTO 200
+      IF( kn>1 ) GOTO 200
     ELSE
-      IF ( N<ix.AND.ix<kn ) GOTO 100
-      IF ( N>=ix ) THEN
+      IF( N<ix .AND. ix<kn ) GOTO 100
+      IF( N>=ix ) THEN
         icase = 2
         ind = 1
         ks = N
         mu = M - 1
-        IF ( N>1 ) GOTO 200
-        IF ( kn/=1 ) THEN
+        IF( N>1 ) GOTO 200
+        IF( kn/=1 ) THEN
           ix = 2
           GOTO 100
         END IF
@@ -178,23 +177,23 @@ SUBROUTINE DEXINT(X,N,Kode,M,Tol,En,Nz,Ierr)
     ks = 2
     icase = 3
     GOTO 200
-  ELSEIF ( X==0.0D0.AND.N>1 ) THEN
+  ELSEIF( X==0.0D0 .AND. N>1 ) THEN
     DO i = 1, M
       En(i) = 1.0D0/(N+i-2)
     END DO
     RETURN
   ELSE
     !-----------------------------------------------------------------------
-    !     SERIES FOR E(N,X) FOR X.LE.XCUT
+    !     SERIES FOR E(N,X) FOR X<=XCUT
     !-----------------------------------------------------------------------
     tx = X + 0.5D0
     ix = INT( tx )
     !-----------------------------------------------------------------------
     !     ICASE=1 MEANS INTEGER CLOSEST TO X IS 2 AND N=1
-    !     ICASE=2 MEANS INTEGER CLOSEST TO X IS 0,1, OR 2 AND N.GE.2
+    !     ICASE=2 MEANS INTEGER CLOSEST TO X IS 0,1, OR 2 AND N>=2
     !-----------------------------------------------------------------------
     icase = 2
-    IF ( ix>N ) icase = 1
+    IF( ix>N ) icase = 1
     nm = N - icase + 1
     nd = nm + 1
     ind = 3 - icase
@@ -204,49 +203,49 @@ SUBROUTINE DEXINT(X,N,Kode,M,Tol,En,Nz,Ierr)
     fnm = nm
     s = 0.0D0
     xtol = 3.0D0*Tol
-    IF ( nd/=1 ) THEN
+    IF( nd/=1 ) THEN
       xtol = 0.3333D0*Tol
       s = 1.0D0/fnm
     END IF
     aa = 1.0D0
     ak = 1.0D0
     ic = 35
-    IF ( X<etol ) ic = 1
+    IF( X<etol ) ic = 1
     DO i = 1, ic
       aa = -aa*X/ak
-      IF ( i==nm ) THEN
+      IF( i==nm ) THEN
         s = s + aa*(-LOG(X)+DPSIXN(nd))
         xtol = 3.0D0*Tol
       ELSE
         s = s - aa/(ak-fnm)
-        IF ( ABS(aa)>xtol*ABS(s) ) THEN
+        IF( ABS(aa)>xtol*ABS(s) ) THEN
           ak = ak + 1.0D0
           CYCLE
-        ELSEIF ( i>=2 ) THEN
-          IF ( nd-2>i.OR.i>nd-1 ) GOTO 50
+        ELSEIF( i>=2 ) THEN
+          IF( nd-2>i .OR. i>nd-1 ) GOTO 50
           ak = ak + 1.0D0
           CYCLE
         END IF
       END IF
       ak = ak + 1.0D0
     END DO
-    IF ( ic/=1 ) THEN
+    IF( ic/=1 ) THEN
       Ierr = 2
       RETURN
     END IF
-    50  IF ( nd==1 ) s = s + (-LOG(X)+DPSIXN(1))
-    IF ( Kode==2 ) s = s*EXP(X)
+    50  IF( nd==1 ) s = s + (-LOG(X)+DPSIXN(1))
+    IF( Kode==2 ) s = s*EXP(X)
     En(1) = s
     emx = 1.0D0
-    IF ( M/=1 ) THEN
+    IF( M/=1 ) THEN
       En(ind) = s
       aa = ks
-      IF ( Kode==1 ) emx = EXP(-X)
-      IF ( icase==1 ) GOTO 300
-      IF ( icase==2 ) GOTO 400
+      IF( Kode==1 ) emx = EXP(-X)
+      IF( icase==1 ) GOTO 300
+      IF( icase==2 ) GOTO 400
     END IF
-    IF ( icase==2 ) RETURN
-    IF ( Kode==1 ) emx = EXP(-X)
+    IF( icase==2 ) RETURN
+    IF( Kode==1 ) emx = EXP(-X)
     En(1) = (emx-s)/X
     RETURN
   END IF
@@ -272,7 +271,7 @@ SUBROUTINE DEXINT(X,N,Kode,M,Tol,En,Nz,Ierr)
   fx = tx + tx
   ak = ah
   xtol = Tol
-  IF ( Tol<=1.0D-3 ) xtol = 20.0D0*Tol
+  IF( Tol<=1.0D-3 ) xtol = 20.0D0*Tol
   ct = aams + fx*ah
   em = (ah+1.0D0)/((X+aa)*xtol*SQRT(ct))
   bk = aa
@@ -283,7 +282,7 @@ SUBROUTINE DEXINT(X,N,Kode,M,Tol,En,Nz,Ierr)
   !-----------------------------------------------------------------------
   p1 = 0.0D0
   p2 = 1.0D0
-  DO WHILE ( ic/=99 )
+  DO WHILE( ic/=99 )
     ic = ic + 1
     ak = ak + 1.0D0
     at = bk/(bk+ak+cc+ic)
@@ -296,7 +295,7 @@ SUBROUTINE DEXINT(X,N,Kode,M,Tol,En,Nz,Ierr)
     p1 = pt
     ct = ct + fx
     em = em*at*(1.0D0-tx/ct)
-    IF ( em*(ak+1.0D0)<=p1*p1 ) THEN
+    IF( em*(ak+1.0D0)<=p1*p1 ) THEN
       ict = ic
       kk = ic + 1
       bt = tx/(ct+fx)
@@ -324,12 +323,12 @@ SUBROUTINE DEXINT(X,N,Kode,M,Tol,En,Nz,Ierr)
       cnorm = 1.0E0 - pt*(ah+1.0E0)/aa
       y(1) = 1.0E0/(cnorm*aa+X)
       y(2) = cnorm*y(1)
-      IF ( icase/=3 ) THEN
+      IF( icase/=3 ) THEN
         En(ind) = emx*y(jset)
-        IF ( M==1 ) RETURN
+        IF( M==1 ) RETURN
         aa = ks
-        IF ( icase==1 ) GOTO 300
-        IF ( icase==2 ) GOTO 400
+        IF( icase==1 ) GOTO 300
+        IF( icase==2 ) GOTO 400
       END IF
       !-----------------------------------------------------------------------
       !     RECURSION SECTION  N*E(N+1,X) + X*E(N,X)=EMX
@@ -346,7 +345,7 @@ SUBROUTINE DEXINT(X,N,Kode,M,Tol,En,Nz,Ierr)
     En(k) = (emx-aa*En(k+1))/X
     k = k - 1
   END DO
-  IF ( mu<=0 ) RETURN
+  IF( mu<=0 ) RETURN
   aa = ks
   400  k = ind
   DO i = 1, mu

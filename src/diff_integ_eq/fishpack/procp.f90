@@ -1,7 +1,6 @@
 !** PROCP
 SUBROUTINE PROCP(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Y,M,A,B,C,D,U,W)
-  !>
-  !  Subsidiary to CBLKTR
+  !> Subsidiary to CBLKTR
   !***
   ! **Library:**   SLATEC
   !***
@@ -55,18 +54,18 @@ SUBROUTINE PROCP(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Y,M,A,B,C,D,U,W)
   ia = Na
   100 CONTINUE
   DO
-    IF ( ia>0 ) THEN
+    IF( ia>0 ) THEN
       rt = Aa(ia)
-      IF ( Nd==0 ) rt = -rt
+      IF( Nd==0 ) rt = -rt
       ia = ia - 1
       DO j = 1, M
         Y(j) = rt*W(j)
       END DO
     END IF
-    IF ( id<=0 ) RETURN
+    IF( id<=0 ) RETURN
     rt = Bd(id)
     id = id - 1
-    IF ( id==0 ) ibr = 1
+    IF( id==0 ) ibr = 1
     !
     ! BEGIN SOLUTION TO SYSTEM
     !
@@ -77,7 +76,7 @@ SUBROUTINE PROCP(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Y,M,A,B,C,D,U,W)
     U(1) = A(1)/den
     W(1) = Y(1)/den
     v = C(M)
-    IF ( mm2>=2 ) THEN
+    IF( mm2>=2 ) THEN
       DO j = 2, mm2
         den = B(j) - rt - A(j)*D(j-1)
         D(j) = C(j)/den
@@ -95,7 +94,7 @@ SUBROUTINE PROCP(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Y,M,A,B,C,D,U,W)
     bh = bh - v*U(M-2)
     ym = ym - v*W(M-2)
     den = bh - am*D(M-1)
-    IF ( ABS(den)/=0 ) THEN
+    IF( ABS(den)/=0 ) THEN
       W(M) = (ym-am*W(M-1))/den
     ELSE
       W(M) = (1.,0.)
@@ -105,13 +104,13 @@ SUBROUTINE PROCP(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Y,M,A,B,C,D,U,W)
       k = M - j
       W(k) = W(k) - D(k)*W(k+1) - U(k)*W(M)
     END DO
-    IF ( Na<=0 ) THEN
-      IF ( m1<=0 ) THEN
-        IF ( m2>0 ) GOTO 400
+    IF( Na<=0 ) THEN
+      IF( m1<=0 ) THEN
+        IF( m2>0 ) GOTO 400
         EXIT
       ELSE
-        IF ( m2<=0 ) GOTO 300
-        IF ( ABS(Bm1(m1))>ABS(Bm2(m2)) ) GOTO 300
+        IF( m2<=0 ) GOTO 300
+        IF( ABS(Bm1(m1))>ABS(Bm2(m2)) ) GOTO 300
         GOTO 400
       END IF
     END IF
@@ -123,15 +122,15 @@ SUBROUTINE PROCP(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Y,M,A,B,C,D,U,W)
   ibr = 1
   GOTO 100
   300 CONTINUE
-  IF ( ibr<=0 ) THEN
-    IF ( ABS(Bm1(m1)-Bd(id))<ABS(Bm1(m1)-rt) ) GOTO 200
+  IF( ibr<=0 ) THEN
+    IF( ABS(Bm1(m1)-Bd(id))<ABS(Bm1(m1)-rt) ) GOTO 200
   END IF
   rt = rt - Bm1(m1)
   m1 = m1 - 1
   GOTO 500
   400 CONTINUE
-  IF ( ibr<=0 ) THEN
-    IF ( ABS(Bm2(m2)-Bd(id))<ABS(Bm2(m2)-rt) ) GOTO 200
+  IF( ibr<=0 ) THEN
+    IF( ABS(Bm2(m2)-Bd(id))<ABS(Bm2(m2)-rt) ) GOTO 200
   END IF
   rt = rt - Bm2(m2)
   m2 = m2 - 1

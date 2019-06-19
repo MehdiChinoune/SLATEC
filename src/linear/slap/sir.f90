@@ -1,8 +1,7 @@
 !** SIR
 SUBROUTINE SIR(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,Iter,&
     Err,Ierr,Iunit,R,Z,Dz,Rwork,Iwork)
-  !>
-  !  Preconditioned Iterative Refinement Sparse Ax = b Solver.
+  !> Preconditioned Iterative Refinement Sparse Ax = b Solver.
   !            Routine to solve a general linear system  Ax = b  using
   !            iterative refinement with a matrix splitting.
   !***
@@ -231,7 +230,7 @@ SUBROUTINE SIR(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,Iter,&
   !
   !- Cautions:
   !     This routine will attempt to write to the Fortran logical output
-  !     unit IUNIT, if IUNIT .ne. 0.  Thus, the user must make sure that
+  !     unit IUNIT, if IUNIT /= 0.  Thus, the user must make sure that
   !     this logical unit is attached to a file or terminal before calling
   !     this routine with a non-zero value for IUNIT.  This routine does
   !     not check for the validity of a non-zero IUNIT unit number.
@@ -277,26 +276,26 @@ SUBROUTINE SIR(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,Iter,&
     END SUBROUTINE
   END INTERFACE
   !     .. Scalar Arguments ..
-  REAL(SP) Err, Tol
-  INTEGER Ierr, Isym, Iter, Itmax, Itol, Iunit, N, Nelt
+  REAL(SP) :: Err, Tol
+  INTEGER :: Ierr, Isym, Iter, Itmax, Itol, Iunit, N, Nelt
   !     .. Array Arguments ..
-  REAL(SP) A(Nelt), B(N), Dz(N), R(N), Rwork(*), X(N), Z(N)
-  INTEGER Ia(Nelt), Iwork(*), Ja(Nelt)
+  REAL(SP) :: A(Nelt), B(N), Dz(N), R(N), Rwork(*), X(N), Z(N)
+  INTEGER :: Ia(Nelt), Iwork(*), Ja(Nelt)
   !     .. Local Scalars ..
-  REAL(SP) bnrm, solnrm, tolmin
-  INTEGER i, k
+  REAL(SP) :: bnrm, solnrm, tolmin
+  INTEGER :: i, k
   !* FIRST EXECUTABLE STATEMENT  SIR
   !
   !         Check some of the input data.
   !
   Iter = 0
   Ierr = 0
-  IF ( N<1 ) THEN
+  IF( N<1 ) THEN
     Ierr = 3
     RETURN
   END IF
   tolmin = 500*R1MACH(3)
-  IF ( Tol<tolmin ) THEN
+  IF( Tol<tolmin ) THEN
     Tol = tolmin
     Ierr = 4
   END IF
@@ -309,9 +308,9 @@ SUBROUTINE SIR(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,Iter,&
   END DO
   CALL MSOLVE(N,R,Z,Rwork,Iwork)
   !
-  IF ( ISSIR(N,B,X,MSOLVE,Itol,Tol,Iter,Err,Ierr,&
+  IF( ISSIR(N,B,X,MSOLVE,Itol,Tol,Iter,Err,Ierr,&
       Iunit,R,Z,Dz,Rwork,Iwork,bnrm,solnrm)==0 ) THEN
-    IF ( Ierr/=0 ) RETURN
+    IF( Ierr/=0 ) RETURN
     !
     !         ***** iteration loop *****
     !
@@ -330,7 +329,7 @@ SUBROUTINE SIR(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,Iter,&
       CALL MSOLVE(N,R,Z,Rwork,Iwork)
       !
       !         check stopping criterion.
-      IF ( ISSIR(N,B,X,MSOLVE,Itol,Tol,Iter,Err,&
+      IF( ISSIR(N,B,X,MSOLVE,Itol,Tol,Iter,Err,&
         Ierr,Iunit,R,Z,Dz,Rwork,Iwork,bnrm,solnrm)/=0 ) RETURN
       !
     END DO

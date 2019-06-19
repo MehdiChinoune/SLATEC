@@ -1,7 +1,6 @@
 !** CHKXER
 SUBROUTINE CHKXER(Srnamt,Infot,Nout,Fatal,Kprint)
-  !>
-  !  Test whether an error has been detected.
+  !> Test whether an error has been detected.
   !***
   ! **Library:**   SLATEC (BLAS)
   !***
@@ -23,15 +22,15 @@ SUBROUTINE CHKXER(Srnamt,Infot,Nout,Fatal,Kprint)
   !   910620  Modified to meet SLATEC code and prologue standards.  (BKS)
   USE slatec, ONLY : NUMXER
   !     .. Scalar Arguments ..
-  LOGICAL Fatal
-  INTEGER Infot, Kprint, Nout
+  LOGICAL :: Fatal
+  INTEGER :: Infot, Kprint, Nout
   CHARACTER(6) :: Srnamt
   !     .. Local Scalars ..
-  INTEGER nerr
+  INTEGER :: nerr
   !* FIRST EXECUTABLE STATEMENT  CHKXER
-  IF ( NUMXER(nerr)/=Infot ) THEN
+  IF( NUMXER(nerr)/=Infot ) THEN
     Fatal = .TRUE.
-    IF ( Kprint>=3 ) WRITE (Nout,FMT=99001) Infot, Srnamt
+    IF( Kprint>=3 ) WRITE (Nout,FMT=99001) Infot, Srnamt
   END IF
   RETURN
   !

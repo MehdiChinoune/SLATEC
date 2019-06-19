@@ -1,7 +1,6 @@
 !** DXADD
 SUBROUTINE DXADD(X,Ix,Y,Iy,Z,Iz,Ierror)
-  !>
-  !  To provide double-precision floating-point arithmetic
+  !> To provide double-precision floating-point arithmetic
   !            with an extended exponent range.
   !***
   ! **Library:**   SLATEC
@@ -24,8 +23,8 @@ SUBROUTINE DXADD(X,Ix,Y,Iy,Z,Iz,Ierror)
   !                  BEFORE RETURNING. THE INPUT OPERANDS
   !                  NEED NOT BE IN ADJUSTED FORM, BUT THEIR
   !                  PRINCIPAL PARTS MUST SATISFY
-  !                  RADIX**(-2L).LE.ABS(X).LE.RADIX**(2L),
-  !                  RADIX**(-2L).LE.ABS(Y).LE.RADIX**(2L).
+  !                  RADIX**(-2L)<=ABS(X)<=RADIX**(2L),
+  !                  RADIX**(-2L)<=ABS(Y)<=RADIX**(2L).
   !
   !***
   ! **See also:**  DXSET
@@ -52,27 +51,27 @@ SUBROUTINE DXADD(X,Ix,Y,Iy,Z,Iz,Ierror)
   !
   !   THE CONDITIONS IMPOSED ON L AND KMAX BY THIS SUBROUTINE
   ! ARE
-  !     (1) 1 .LT. L .LE. 0.5D0*LOGR(0.5D0*DZERO)
+  !     (1) 1 < L <= 0.5D0*LOGR(0.5D0*DZERO)
   !
-  !     (2) NRADPL .LT. L .LE. KMAX/6
+  !     (2) NRADPL < L <= KMAX/6
   !
-  !     (3) KMAX .LE. (2**NBITS - 4*L - 1)/2
+  !     (3) KMAX <= (2**NBITS - 4*L - 1)/2
   !
   ! THESE CONDITIONS MUST BE MET BY APPROPRIATE CODING
   ! IN SUBROUTINE DXSET.
   !
   !* FIRST EXECUTABLE STATEMENT  DXADD
   Ierror = 0
-  IF ( X==0.0D0 ) THEN
+  IF( X==0.0D0 ) THEN
     Z = Y
     Iz = Iy
     CALL DXADJ(Z,Iz,Ierror)
     RETURN
-  ELSEIF ( Y/=0.0D0 ) THEN
-    IF ( Ix<0.OR.Iy<0 ) THEN
-      IF ( Ix>=0.OR.Iy>=0 ) THEN
-        IF ( ABS(Ix)>6*l_com.OR.ABS(Iy)>6*l_com ) THEN
-          IF ( Ix>=0 ) THEN
+  ELSEIF( Y/=0.0D0 ) THEN
+    IF( Ix<0 .OR. Iy<0 ) THEN
+      IF( Ix>=0 .OR. Iy>=0 ) THEN
+        IF( ABS(Ix)>6*l_com .OR. ABS(Iy)>6*l_com ) THEN
+          IF( Ix>=0 ) THEN
             Z = X
             Iz = Ix
           ELSE
@@ -85,17 +84,17 @@ SUBROUTINE DXADD(X,Ix,Y,Iy,Z,Iz,Ierror)
       END IF
     END IF
     i = Ix - Iy
-    IF ( i<0 ) THEN
+    IF( i<0 ) THEN
       s = Y
       is = Iy
       t = X
-    ELSEIF ( i==0 ) THEN
-      IF ( ABS(X)>1.0D0.AND.ABS(Y)>1.0D0 ) THEN
+    ELSEIF( i==0 ) THEN
+      IF( ABS(X)>1.0D0 .AND. ABS(Y)>1.0D0 ) THEN
         s = X/radixl_com
         t = Y/radixl_com
         Z = s + t
         Iz = Ix + l_com
-      ELSEIF ( ABS(X)<1.0D0.AND.ABS(Y)<1.0D0 ) THEN
+      ELSEIF( ABS(X)<1.0D0 .AND. ABS(Y)<1.0D0 ) THEN
         s = X*radixl_com
         t = Y*radixl_com
         Z = s + t
@@ -118,14 +117,14 @@ SUBROUTINE DXADD(X,Ix,Y,Iy,Z,Iz,Ierror)
     !
     i1 = ABS(i)/l_com
     i2 = MOD(ABS(i),l_com)
-    IF ( ABS(t)>=radixl_com ) THEN
+    IF( ABS(t)>=radixl_com ) THEN
       j = i1 - 2
-      IF ( j<0 ) GOTO 200
+      IF( j<0 ) GOTO 200
       t = t*radixx_com**(-i2)/rad2l_com
       GOTO 300
     ELSE
-      IF ( ABS(t)>=1.0D0 ) GOTO 200
-      IF ( radixl_com*ABS(t)<1.0D0 ) THEN
+      IF( ABS(t)>=1.0D0 ) GOTO 200
+      IF( radixl_com*ABS(t)<1.0D0 ) THEN
         j = i1 + 1
         t = t*radixx_com**(l_com-i2)
         GOTO 300
@@ -141,21 +140,21 @@ SUBROUTINE DXADD(X,Ix,Y,Iy,Z,Iz,Ierror)
   t = t*radixx_com**(-i2)
   GOTO 300
   200  j = i1 - 1
-  IF ( j<0 ) GOTO 100
+  IF( j<0 ) GOTO 100
   t = t*radixx_com**(-i2)/radixl_com
   !
   !  AT THIS POINT, SOME OR ALL OF THE DIFFERENCE IN THE
   ! AUXILIARY INDICES HAS BEEN USED TO EFFECT A LEFT SHIFT
   ! OF T.  THE SHIFTED VALUE OF T SATISFIES
   !
-  !       RADIX**(-2*L) .LE. ABS(T) .LE. 1.0D0
+  !       RADIX**(-2*L) <= ABS(T) <= 1.0D0
   !
   ! AND, IF J=0, NO FURTHER SHIFTING REMAINS TO BE DONE.
   !
   300 CONTINUE
-  IF ( j/=0 ) THEN
-    IF ( ABS(s)<radixl_com.AND.j<=3 ) THEN
-      IF ( ABS(s)>=1.0D0 ) THEN
+  IF( j/=0 ) THEN
+    IF( ABS(s)<radixl_com .AND. j<=3 ) THEN
+      IF( ABS(s)>=1.0D0 ) THEN
         SELECT CASE (j)
           CASE (1)
             s = s*radixl_com
@@ -165,7 +164,7 @@ SUBROUTINE DXADD(X,Ix,Y,Iy,Z,Iz,Ierror)
           CASE DEFAULT
         END SELECT
       END IF
-      IF ( radixl_com*ABS(s)>=1.0D0 ) THEN
+      IF( radixl_com*ABS(s)>=1.0D0 ) THEN
         SELECT CASE (j)
           CASE (1)
             s = s*radixl_com
@@ -207,12 +206,12 @@ SUBROUTINE DXADD(X,Ix,Y,Iy,Z,Iz,Ierror)
   ! SUM.
   !
   400 CONTINUE
-  IF ( ABS(s)>1.0D0.AND.ABS(t)>1.0D0 ) THEN
+  IF( ABS(s)>1.0D0 .AND. ABS(t)>1.0D0 ) THEN
     s = s/radixl_com
     t = t/radixl_com
     Z = s + t
     Iz = is - j*l_com + l_com
-  ELSEIF ( ABS(s)<1.0D0.AND.ABS(t)<1.0D0 ) THEN
+  ELSEIF( ABS(s)<1.0D0 .AND. ABS(t)<1.0D0 ) THEN
     s = s*radixl_com
     t = t*radixl_com
     Z = s + t

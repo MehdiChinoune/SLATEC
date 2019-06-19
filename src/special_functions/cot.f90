@@ -1,7 +1,6 @@
 !** COT
 REAL(SP) FUNCTION COT(X)
-  !>
-  !  Compute the cotangent.
+  !> Compute the cotangent.
   !***
   ! **Library:**   SLATEC (FNLIB)
   !***
@@ -49,15 +48,15 @@ REAL(SP) FUNCTION COT(X)
   REAL(SP), PARAMETER :: pi2rec = .0116197723675813430E0
   LOGICAL, SAVE :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  COT
-  IF ( first ) THEN
+  IF( first ) THEN
     nterms = INITS(cotcs,8,0.1*R1MACH(3))
     first = .FALSE.
   END IF
   !
   y = ABS(X)
-  IF ( ABS(X)<xmin ) CALL XERMSG('COT',&
+  IF( ABS(X)<xmin ) CALL XERMSG('COT',&
     'ABS(X) IS ZERO OR SO SMALL COT OVERFLOWS',2,2)
-  IF ( y>xmax ) CALL XERMSG('COT',&
+  IF( y>xmax ) CALL XERMSG('COT',&
     'NO PRECISION BECAUSE ABS(X) IS TOO BIG',3,2)
   !
   ! CAREFULLY COMPUTE Y * (2/PI) = (AINT(Y) + REM(Y)) * (.625 + PI2REC)
@@ -74,16 +73,16 @@ REAL(SP) FUNCTION COT(X)
   y = y - ainty2
   !
   ifn = INT( MOD(ainty,2.) )
-  IF ( ifn==1 ) y = 1.0 - y
+  IF( ifn==1 ) y = 1.0 - y
   !
-  IF ( ABS(X)>0.5.AND.y<ABS(X)*sqeps ) CALL XERMSG('COT',&
-    'ANSWER LT HALF PRECISION, ABS(X) TOO BIG OR X NEAR N*PI (N.NE.0)',1,1)
+  IF( ABS(X)>0.5 .AND. y<ABS(X)*sqeps ) CALL XERMSG('COT',&
+    'ANSWER LT HALF PRECISION, ABS(X) TOO BIG OR X NEAR N*PI (N/=0)',1,1)
   !
-  IF ( y<=0.25 ) THEN
+  IF( y<=0.25 ) THEN
     COT = 1.0/X
-    IF ( y>xsml ) COT = (0.5+CSEVL(32.0*y*y-1.,cotcs,nterms))/y
+    IF( y>xsml ) COT = (0.5+CSEVL(32.0*y*y-1.,cotcs,nterms))/y
     !
-  ELSEIF ( y>0.5 ) THEN
+  ELSEIF( y>0.5 ) THEN
     !
     COT = (0.5+CSEVL(2.0*y*y-1.,cotcs,nterms))/(0.25*y)
     COT = (COT**2-1.0)*0.5/COT
@@ -93,7 +92,7 @@ REAL(SP) FUNCTION COT(X)
     COT = (COT**2-1.0)*0.5/COT
   END IF
   !
-  IF ( X/=0. ) COT = SIGN(COT,X)
-  IF ( ifn==1 ) COT = -COT
+  IF( X/=0. ) COT = SIGN(COT,X)
+  IF( ifn==1 ) COT = -COT
   !
 END FUNCTION COT

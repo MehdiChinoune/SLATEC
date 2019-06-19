@@ -1,7 +1,6 @@
 !** CPQR79
 SUBROUTINE CPQR79(Ndeg,Coeff,Root,Ierr,Work)
-  !>
-  !  Find the zeros of a polynomial with complex coefficients.
+  !> Find the zeros of a polynomial with complex coefficients.
   !***
   ! **Library:**   SLATEC
   !***
@@ -68,19 +67,19 @@ SUBROUTINE CPQR79(Ndeg,Coeff,Root,Ierr,Work)
   COMPLEX(SP) :: h(Ndeg,Ndeg), z(1,Ndeg), wrk(Ndeg)
   !* FIRST EXECUTABLE STATEMENT  CPQR79
   Ierr = 0
-  IF ( ABS(Coeff(1))==0.0 ) THEN
+  IF( ABS(Coeff(1))==0.0 ) THEN
     Ierr = 2
     CALL XERMSG('CPQR79','LEADING COEFFICIENT IS ZERO.',2,1)
     RETURN
   END IF
   !
-  IF ( Ndeg<=0 ) THEN
+  IF( Ndeg<=0 ) THEN
     Ierr = 3
     CALL XERMSG('CPQR79','DEGREE INVALID.',3,1)
     RETURN
   END IF
   !
-  IF ( Ndeg==1 ) THEN
+  IF( Ndeg==1 ) THEN
     Root(1) = -Coeff(2)/Coeff(1)
     RETURN
   END IF
@@ -98,7 +97,7 @@ SUBROUTINE CPQR79(Ndeg,Coeff,Root,Ierr,Work)
   !
   CALL CHSEQR('E','N',Ndeg,1,Ndeg,h,Ndeg,Root,z,1,wrk,Ndeg,Ierr)
   !
-  IF ( Ierr/=0 ) THEN
+  IF( Ierr/=0 ) THEN
     Ierr = 1
     CALL XERMSG('CPQR79','NO CONVERGENCE IN 30 QR ITERATIONS.',1,1)
     RETURN

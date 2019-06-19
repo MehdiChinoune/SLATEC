@@ -1,7 +1,6 @@
 !** CBLKTR
 SUBROUTINE CBLKTR(Iflg,Np,N,An,Bn,Cn,Mp,M,Am,Bm,Cm,Idimy,Y,Ierror,W)
-  !>
-  !  Solve a block tridiagonal system of linear equations
+  !> Solve a block tridiagonal system of linear equations
   !            (usually resulting from the discretization of separable
   !            two-dimensional elliptic equations).
   !***
@@ -88,7 +87,7 @@ SUBROUTINE CBLKTR(Iflg,Np,N,An,Bn,Cn,Mp,M,Am,Bm,Cm,Idimy,Y,Ierror,W)
   !     Y
   !       A complex two-dimensional array that specifies the values of
   !       the right side of the linear system of equations given above.
-  !       Y must be dimensioned Y(IDIMY,N) with IDIMY .GE. M.
+  !       Y must be dimensioned Y(IDIMY,N) with IDIMY >= M.
   !
   !     W
   !       A one-dimensional array that must be provided by the user for
@@ -215,27 +214,27 @@ SUBROUTINE CBLKTR(Iflg,Np,N,An,Bn,Cn,Mp,M,Am,Bm,Cm,Idimy,Y,Ierror,W)
   nm_com = N
   m2 = M + M
   Ierror = 0
-  IF ( M<5 ) THEN
+  IF( M<5 ) THEN
     Ierror = 1
-  ELSEIF ( nm_com<3 ) THEN
+  ELSEIF( nm_com<3 ) THEN
     Ierror = 2
-  ELSEIF ( Idimy<M ) THEN
+  ELSEIF( Idimy<M ) THEN
     Ierror = 3
   ELSE
     nh = N
     npp_com = Np
-    IF ( npp_com/=0 ) nh = nh + 1
+    IF( npp_com/=0 ) nh = nh + 1
     ik_com = 2
     k_com = 1
     DO
       ik_com = ik_com + ik_com
       k_com = k_com + 1
-      IF ( nh<=ik_com ) THEN
+      IF( nh<=ik_com ) THEN
         nl = ik_com
         ik_com = ik_com + ik_com
         nl = nl - 1
         iwah = (k_com-2)*ik_com + k_com + 6
-        IF ( npp_com/=0 ) THEN
+        IF( npp_com/=0 ) THEN
           !
           !     DIVIDE W INTO WORKING SUB ARRAYS
           !
@@ -251,15 +250,15 @@ SUBROUTINE CBLKTR(Iflg,Np,N,An,Bn,Cn,Mp,M,Am,Bm,Cm,Idimy,Y,Ierror,W)
         !
         ! SUBROUTINE CCMPB COMPUTES THE ROOTS OF THE B POLYNOMIALS
         !
-        IF ( Ierror==0 ) THEN
+        IF( Ierror==0 ) THEN
           iw2 = iw1 + m2
           iw3 = iw2 + m2
           iwd = iw3 + m2
           iww = iwd + m2
           iwu = iww + m2
-          IF ( Iflg==0 ) THEN
+          IF( Iflg==0 ) THEN
             CALL CCMPB(Ierror,An,Bn,Cn,W(2:iwah),W(iwah:iwbh-1),W(iwbh:))
-          ELSEIF ( Mp/=0 ) THEN
+          ELSEIF( Mp/=0 ) THEN
             !
             ! SUBROUTINE CBLKT1 SOLVES THE LINEAR SYSTEM
             !

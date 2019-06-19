@@ -1,7 +1,6 @@
 !** CHFIE
 REAL(SP) FUNCTION CHFIE(X1,X2,F1,F2,D1,D2,A,B)
-  !>
-  !  Evaluates integral of a single cubic for PCHIA
+  !> Evaluates integral of a single cubic for PCHIA
   !***
   ! **Library:**   SLATEC (PCHIP)
   !***
@@ -53,22 +52,22 @@ REAL(SP) FUNCTION CHFIE(X1,X2,F1,F2,D1,D2,A,B)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900328  Added TYPE section.  (WRB)
   !   910408  Updated AUTHOR section in prologue.  (WRB)
-  !   930503  Corrected to set VALUE=0 when IERR.ne.0.  (FNF)
+  !   930503  Corrected to set VALUE=0 when IERR/=0.  (FNF)
   !   930504  Eliminated IERR and changed name from CHFIV to CHFIE.  (FNF)
 
   !
   !  Programming notes:
   !  1. There is no error return from this routine because zero is
-  !     indeed the mathematically correct answer when X1.EQ.X2 .
+  !     indeed the mathematically correct answer when X1=X2 .
   !**End
   !
   !  DECLARE ARGUMENTS.
   !
-  REAL(SP) X1, X2, F1, F2, D1, D2, A, B
+  REAL(SP) :: X1, X2, F1, F2, D1, D2, A, B
   !
   !  DECLARE LOCAL VARIABLES.
   !
-  REAL(SP) dterm, fterm, h, phia1, phia2, phib1, phib2, psia1, psia2, psib1, psib2, &
+  REAL(SP) :: dterm, fterm, h, phia1, phia2, phib1, phib2, psia1, psia2, psib1, psib2, &
     ta1, ta2, tb1, tb2, ua1, ua2, ub1, ub2
   !
   !  INITIALIZE.
@@ -78,7 +77,7 @@ REAL(SP) FUNCTION CHFIE(X1,X2,F1,F2,D1,D2,A,B)
   !  VALIDITY CHECK INPUT.
   !
   !* FIRST EXECUTABLE STATEMENT  CHFIE
-  IF ( X1==X2 ) THEN
+  IF( X1==X2 ) THEN
     CHFIE = 0
   ELSE
     h = X2 - X1

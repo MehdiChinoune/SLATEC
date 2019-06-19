@@ -1,7 +1,6 @@
 !** INXCC
 SUBROUTINE INXCC(I,Ir,Idxc,Nc)
-  !>
-  !  Subsidiary to CBLKTR
+  !> Subsidiary to CBLKTR
   !***
   ! **Library:**   SLATEC
   !***
@@ -24,5 +23,5 @@ SUBROUTINE INXCC(I,Ir,Idxc,Nc)
   !* FIRST EXECUTABLE STATEMENT  INXCC
   Nc = 2**Ir
   Idxc = I
-  IF ( Idxc+Nc-1>nm_com ) Nc = 0
+  IF( Idxc+Nc-1>nm_com ) Nc = 0
 END SUBROUTINE INXCC

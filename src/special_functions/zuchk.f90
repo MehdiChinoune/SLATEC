@@ -1,7 +1,6 @@
 !** ZUCHK
 SUBROUTINE ZUCHK(Yr,Yi,Nz,Ascle,Tol)
-  !>
-  !  Subsidiary to SERI, ZUOIK, ZUNK1, ZUNK2, ZUNI1, ZUNI2 and
+  !> Subsidiary to SERI, ZUOIK, ZUNK1, ZUNK2, ZUNI1, ZUNI2 and
   !            ZKSCL
   !***
   ! **Library:**   SLATEC
@@ -32,14 +31,14 @@ SUBROUTINE ZUCHK(Yr,Yi,Nz,Ascle,Tol)
   !
   !     COMPLEX Y
   REAL(DP) :: Ascle, ss, st, Tol, wr, wi, Yr, Yi
-  INTEGER Nz
+  INTEGER :: Nz
   !* FIRST EXECUTABLE STATEMENT  ZUCHK
   Nz = 0
   wr = ABS(Yr)
   wi = ABS(Yi)
   st = MIN(wr,wi)
-  IF ( st>Ascle ) RETURN
+  IF( st>Ascle ) RETURN
   ss = MAX(wr,wi)
   st = st/Tol
-  IF ( ss<st ) Nz = 1
+  IF( ss<st ) Nz = 1
 END SUBROUTINE ZUCHK

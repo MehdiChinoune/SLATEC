@@ -1,7 +1,6 @@
 !** XPSI
 REAL(SP) FUNCTION XPSI(A,Ipsik,Ipsix)
-  !>
-  !  To compute values of the Psi function for XLEGF.
+  !> To compute values of the Psi function for XLEGF.
   !***
   ! **Library:**   SLATEC
   !***
@@ -24,8 +23,8 @@ REAL(SP) FUNCTION XPSI(A,Ipsik,Ipsix)
   !           section.  (WRB)
   !   920127  Revised PURPOSE section of prologue.  (DWL)
 
-  INTEGER i, Ipsik, Ipsix, k, k1, m, n
-  REAL(SP) A, b, c
+  INTEGER :: i, Ipsik, Ipsix, k, k1, m, n
+  REAL(SP) :: A, b, c
   !
   !        CNUM(I) AND CDENOM(I) ARE THE ( REDUCED ) NUMERATOR
   !        AND 2*I*DENOMINATOR RESPECTIVELY OF THE 2*I TH BERNOULLI
@@ -40,7 +39,7 @@ REAL(SP) FUNCTION XPSI(A,Ipsik,Ipsix)
   b = n + A
   k1 = Ipsik - 1
   !
-  !        SERIES EXPANSION FOR A .GT. IPSIX USING IPSIK-1 TERMS.
+  !        SERIES EXPANSION FOR A > IPSIX USING IPSIK-1 TERMS.
   !
   c = 0.
   DO i = 1, k1
@@ -48,10 +47,10 @@ REAL(SP) FUNCTION XPSI(A,Ipsik,Ipsix)
     c = (c+cnum(k)/cdenom(k))/b**2
   END DO
   XPSI = LOG(b) - (c+.5/b)
-  IF ( n/=0 ) THEN
+  IF( n/=0 ) THEN
     b = 0.
     !
-    !        RECURRENCE FOR A .LE. IPSIX.
+    !        RECURRENCE FOR A <= IPSIX.
     !
     DO m = 1, n
       b = b + 1./(n-m+A)

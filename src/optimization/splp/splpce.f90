@@ -2,8 +2,7 @@
 SUBROUTINE SPLPCE(Mrelas,Nvars,Lmx,Lbm,Itlp,Itbrc,Ibasis,Imat,Ibrc,Ipr,&
     Iwr,Ind,Ibb,Erdnrm,Eps,Tune,Gg,Amat,Basmat,Csc,Wr,Ww,&
     Primal,Erd,Erp,Singlr,Redbas)
-  !>
-  !  Subsidiary to SPLP
+  !> Subsidiary to SPLP
   !***
   ! **Library:**   SLATEC
   !***
@@ -61,11 +60,11 @@ SUBROUTINE SPLPCE(Mrelas,Nvars,Lmx,Lbm,Itlp,Itbrc,Ibasis,Imat,Ibrc,Ipr,&
   !     COPY COLSUMS IN WW(*), AND SOLVE TRANSPOSED SYSTEM.
   i = 1
   n20002 = Mrelas
-  DO WHILE ( (n20002-i)>=0 )
+  DO WHILE( (n20002-i)>=0 )
     j = Ibasis(i)
-    IF ( j<=Nvars ) THEN
+    IF( j<=Nvars ) THEN
       Ww(i) = Primal(j)
-    ELSEIF ( Ind(j)/=2 ) THEN
+    ELSEIF( Ind(j)/=2 ) THEN
       Ww(i) = -one
     ELSE
       Ww(i) = one
@@ -77,7 +76,7 @@ SUBROUTINE SPLPCE(Mrelas,Nvars,Lmx,Lbm,Itlp,Itbrc,Ibasis,Imat,Ibrc,Ipr,&
   !     ERRORS IN THE CHECK SUM SOLNS.
   i = 1
   n20012 = Mrelas
-  DO WHILE ( (n20012-i)>=0 )
+  DO WHILE( (n20012-i)>=0 )
     Ww(i) = Ww(i) + ten*Eps*Ww(i)
     i = i + 1
   END DO
@@ -85,10 +84,10 @@ SUBROUTINE SPLPCE(Mrelas,Nvars,Lmx,Lbm,Itlp,Itbrc,Ibasis,Imat,Ibrc,Ipr,&
   CALL LA05BS(Basmat,Ibrc,Lbm,Mrelas,Ipr,Iwr,Wr,Gg,Ww,trans)
   i = 1
   n20016 = Mrelas
-  DO WHILE ( (n20016-i)>=0 )
+  DO WHILE( (n20016-i)>=0 )
     Erd(i) = MAX(ABS(Ww(i)-one),Eps)*Tune
     !
-    !     SYSTEM BECOMES SINGULAR WHEN ACCURACY OF SOLUTION IS .GT. FACTOR.
+    !     SYSTEM BECOMES SINGULAR WHEN ACCURACY OF SOLUTION IS > FACTOR.
     !     THIS VALUE (FACTOR) MIGHT NEED TO BE CHANGED.
     Singlr = Singlr .OR. (Erd(i)>=factor)
     i = i + 1
@@ -97,25 +96,25 @@ SUBROUTINE SPLPCE(Mrelas,Nvars,Lmx,Lbm,Itlp,Itbrc,Ibasis,Imat,Ibrc,Ipr,&
   !
   !     RECALCULATE ROW CHECK SUMS EVERY ITBRC ITERATIONS OR WHEN
   !     A REDECOMPOSITION HAS OCCURRED.
-  IF ( MOD(Itlp,Itbrc)==0.OR.Redbas ) THEN
+  IF( MOD(Itlp,Itbrc)==0 .OR. Redbas ) THEN
     !
     !     COMPUTE ROW SUMS, STORE IN WW(*), SOLVE PRIMAL SYSTEM.
     Ww(1:Mrelas) = zero
     pagepl = .TRUE.
     j = 1
     n20023 = Nvars
-    DO WHILE ( (n20023-j)>=0 )
-      IF ( Ibb(j)<zero ) THEN
-        IF ( j/=1 ) THEN
+    DO WHILE( (n20023-j)>=0 )
+      IF( Ibb(j)<zero ) THEN
+        IF( j/=1 ) THEN
           ilow = Imat(j+3) + 1
         ELSE
           ilow = Nvars + 5
         END IF
-        IF ( .NOT.(pagepl) ) THEN
+        IF( .NOT. (pagepl) ) THEN
           il1 = ihi + 1
         ELSE
           il1 = IPLOC(ilow,Amat,Imat)
-          IF ( il1>=Lmx-1 ) THEN
+          IF( il1>=Lmx-1 ) THEN
             ilow = ilow + 2
             il1 = IPLOC(ilow,Amat,Imat)
           END IF
@@ -124,11 +123,11 @@ SUBROUTINE SPLPCE(Mrelas,Nvars,Lmx,Lbm,Itlp,Itbrc,Ibasis,Imat,Ibrc,Ipr,&
         ihi = Imat(j+4) - (ilow-il1)
         DO
           iu1 = MIN(Lmx-2,ihi)
-          IF ( il1>iu1 ) EXIT
+          IF( il1>iu1 ) EXIT
           DO i = il1, iu1
             Ww(Imat(i)) = Ww(Imat(i)) + Amat(i)*Csc(j)
           END DO
-          IF ( ihi<=Lmx-2 ) EXIT
+          IF( ihi<=Lmx-2 ) EXIT
           ipage = ipage + 1
           key = 1
           CALL PRWPGE(key,ipage,lpg,Amat,Imat)
@@ -145,11 +144,11 @@ SUBROUTINE SPLPCE(Mrelas,Nvars,Lmx,Lbm,Itlp,Itbrc,Ibasis,Imat,Ibrc,Ipr,&
     END DO
     l = 1
     n20047 = Mrelas
-    DO WHILE ( (n20047-l)>=0 )
+    DO WHILE( (n20047-l)>=0 )
       j = Ibasis(l)
-      IF ( j>Nvars ) THEN
+      IF( j>Nvars ) THEN
         i = j - Nvars
-        IF ( Ind(j)/=2 ) THEN
+        IF( Ind(j)/=2 ) THEN
           Ww(i) = Ww(i) - one
         ELSE
           Ww(i) = Ww(i) + one
@@ -161,7 +160,7 @@ SUBROUTINE SPLPCE(Mrelas,Nvars,Lmx,Lbm,Itlp,Itbrc,Ibasis,Imat,Ibrc,Ipr,&
     !     PERTURB RIGHT-SIDE IN UNITS OF LAST BIT POSITIONS.
     i = 1
     n20057 = Mrelas
-    DO WHILE ( (n20057-i)>=0 )
+    DO WHILE( (n20057-i)>=0 )
       Ww(i) = Ww(i) + ten*Eps*Ww(i)
       i = i + 1
     END DO
@@ -169,10 +168,10 @@ SUBROUTINE SPLPCE(Mrelas,Nvars,Lmx,Lbm,Itlp,Itbrc,Ibasis,Imat,Ibrc,Ipr,&
     CALL LA05BS(Basmat,Ibrc,Lbm,Mrelas,Ipr,Iwr,Wr,Gg,Ww,trans)
     i = 1
     n20061 = Mrelas
-    DO WHILE ( (n20061-i)>=0 )
+    DO WHILE( (n20061-i)>=0 )
       Erp(i) = MAX(ABS(Ww(i)-one),Eps)*Tune
       !
-      !     SYSTEM BECOMES SINGULAR WHEN ACCURACY OF SOLUTION IS .GT. FACTOR.
+      !     SYSTEM BECOMES SINGULAR WHEN ACCURACY OF SOLUTION IS > FACTOR.
       !     THIS VALUE (FACTOR) MIGHT NEED TO BE CHANGED.
       Singlr = Singlr .OR. (Erp(i)>=factor)
       i = i + 1

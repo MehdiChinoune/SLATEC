@@ -1,7 +1,6 @@
 !** DBSQAD
 SUBROUTINE DBSQAD(T,Bcoef,N,K,X1,X2,Bquad,Work)
-  !>
-  !  Compute the integral of a K-th order B-spline using the
+  !> Compute the integral of a K-th order B-spline using the
   !            B-representation.
   !***
   ! **Library:**   SLATEC
@@ -36,9 +35,9 @@ SUBROUTINE DBSQAD(T,Bcoef,N,K,X1,X2,Bquad,Work)
   !           T      - knot array of length N+K
   !           BCOEF  - B-spline coefficient array of length N
   !           N      - length of coefficient array
-  !           K      - order of B-spline, 1 .LE. K .LE. 20
+  !           K      - order of B-spline, 1 <= K <= 20
   !           X1,X2  - end points of quadrature interval in
-  !                    T(K) .LE. X .LE. T(N+1)
+  !                    T(K) <= X <= T(N+1)
   !
   !         Output     BQUAD,WORK are double precision
   !           BQUAD  - integral of the B-spline over (X1,X2)
@@ -81,27 +80,27 @@ SUBROUTINE DBSQAD(T,Bcoef,N,K,X1,X2,Bquad,Work)
   !
   !* FIRST EXECUTABLE STATEMENT  DBSQAD
   Bquad = 0.0D0
-  IF ( K<1.OR.K>20 ) THEN
-    CALL XERMSG('DBSQAD','K DOES NOT SATISFY 1.LE.K.LE.20',2,1)
+  IF( K<1 .OR. K>20 ) THEN
+    CALL XERMSG('DBSQAD','K DOES NOT SATISFY 1<=K<=20',2,1)
     RETURN
-  ELSEIF ( N<K ) THEN
-    CALL XERMSG('DBSQAD','N DOES NOT SATISFY N.GE.K',2,1)
+  ELSEIF( N<K ) THEN
+    CALL XERMSG('DBSQAD','N DOES NOT SATISFY N>=K',2,1)
     RETURN
   ELSE
     aa = MIN(X1,X2)
     bb = MAX(X1,X2)
-    IF ( aa>=T(K) ) THEN
+    IF( aa>=T(K) ) THEN
       np1 = N + 1
-      IF ( bb<=T(np1) ) THEN
-        IF ( aa==bb ) RETURN
+      IF( bb<=T(np1) ) THEN
+        IF( aa==bb ) RETURN
         npk = N + K
         !     SELECTION OF 2, 6, OR 10 POINT GAUSS FORMULA
         jf = 0
         mf = 1
-        IF ( K>4 ) THEN
+        IF( K>4 ) THEN
           jf = 1
           mf = 3
-          IF ( K>12 ) THEN
+          IF( K>12 ) THEN
             jf = 4
             mf = 5
           END IF
@@ -114,11 +113,11 @@ SUBROUTINE DBSQAD(T,Bcoef,N,K,X1,X2,Bquad,Work)
         inbv = 1
         CALL DINTRV(T,npk,aa,ilo,il1,mflag)
         CALL DINTRV(T,npk,bb,ilo,il2,mflag)
-        IF ( il2>=np1 ) il2 = N
+        IF( il2>=np1 ) il2 = N
         DO left = il1, il2
           ta = T(left)
           tb = T(left+1)
-          IF ( ta/=tb ) THEN
+          IF( ta/=tb ) THEN
             a = MAX(aa,ta)
             b = MIN(bb,tb)
             bma = 0.5D0*(b-a)
@@ -137,7 +136,7 @@ SUBROUTINE DBSQAD(T,Bcoef,N,K,X1,X2,Bquad,Work)
         DO m = 1, mf
           q = q + gwts(jf+m)*summ(m)
         END DO
-        IF ( X1>X2 ) q = -q
+        IF( X1>X2 ) q = -q
         Bquad = q
         RETURN
       END IF
@@ -146,6 +145,6 @@ SUBROUTINE DBSQAD(T,Bcoef,N,K,X1,X2,Bquad,Work)
   !
   !
   CALL XERMSG('DBSQAD',&
-    'X1 OR X2 OR BOTH DO NOT SATISFY T(K).LE.X.LE.T(N+1)',2,1)
+    'X1 OR X2 OR BOTH DO NOT SATISFY T(K)<=X<=T(N+1)',2,1)
   RETURN
 END SUBROUTINE DBSQAD

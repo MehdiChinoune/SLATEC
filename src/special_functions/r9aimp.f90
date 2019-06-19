@@ -1,7 +1,6 @@
 !** R9AIMP
 SUBROUTINE R9AIMP(X,Ampl,Theta)
-  !>
-  !  Evaluate the Airy modulus and phase.
+  !> Evaluate the Airy modulus and phase.
   !***
   ! **Library:**   SLATEC (FNLIB)
   !***
@@ -15,7 +14,7 @@ SUBROUTINE R9AIMP(X,Ampl,Theta)
   !***
   ! **Description:**
   !
-  ! Evaluate the Airy modulus and phase for X .LE. -1.0
+  ! Evaluate the Airy modulus and phase for X <= -1.0
   !
   ! Series for AM21       on the interval -1.25000D-01 to  0.
   !                                        with weighted error   2.89E-17
@@ -110,7 +109,7 @@ SUBROUTINE R9AIMP(X,Ampl,Theta)
   REAL(SP), PARAMETER ::  pi4 = 0.78539816339744831E0
   LOGICAL, SAVE :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  R9AIMP
-  IF ( first ) THEN
+  IF( first ) THEN
     nam21 = INITS(am21cs,40,eta)
     nath1 = INITS(ath1cs,36,eta)
     nam22 = INITS(am22cs,33,eta)
@@ -118,16 +117,16 @@ SUBROUTINE R9AIMP(X,Ampl,Theta)
     first = .FALSE.
   END IF
   !
-  IF ( X>=(-2.0) ) THEN
+  IF( X>=(-2.0) ) THEN
     !
-    IF ( X>(-1.0) ) CALL XERMSG('R9AIMP','X MUST BE LE -1.0',1,2)
+    IF( X>(-1.0) ) CALL XERMSG('R9AIMP','X MUST BE LE -1.0',1,2)
     !
     z = (16.0/X**3+9.0)/7.0
     Ampl = 0.3125 + CSEVL(z,am22cs,nam22)
     Theta = -0.625 + CSEVL(z,ath2cs,nath2)
   ELSE
     z = 1.0
-    IF ( X>xsml ) z = 16.0/X**3 + 1.0
+    IF( X>xsml ) z = 16.0/X**3 + 1.0
     Ampl = 0.3125 + CSEVL(z,am21cs,nam21)
     Theta = -0.625 + CSEVL(z,ath1cs,nath1)
   END IF

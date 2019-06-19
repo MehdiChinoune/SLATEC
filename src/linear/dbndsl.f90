@@ -1,7 +1,6 @@
 !** DBNDSL
 SUBROUTINE DBNDSL(Mode,G,Mdg,Nb,Ip,Ir,X,N,Rnorm)
-  !>
-  !  Solve the least squares problem for a banded matrix using
+  !> Solve the least squares problem for a banded matrix using
   !            sequential accumulation of rows of the data matrix.
   !            Exactly one right-hand side vector is permitted.
   !***
@@ -92,7 +91,7 @@ SUBROUTINE DBNDSL(Mode,G,Mdg,Nb,Ip,Ir,X,N,Rnorm)
   !                       See descriptions of IR and MT below.
   !
   !     MDG               The number of rows in the working array
-  !                       G(*,*).  The value of MDG should be .GE. MU.
+  !                       G(*,*).  The value of MDG should be >= MU.
   !                       The value of MU is defined in the abstract
   !                       of these subprograms.
   !
@@ -106,7 +105,7 @@ SUBROUTINE DBNDSL(Mode,G,Mdg,Nb,Ip,Ir,X,N,Rnorm)
   !     IR                Index of the row of G(*,*) where the user is
   !                       the user to the value 1 before the first call
   !                       to DBNDAC.  Its subsequent value is controlled
-  !                       by DBNDAC. A value of IR .GT. MDG is considered
+  !                       by DBNDAC. A value of IR > MDG is considered
   !                       an error.
   !
   !     MT,JT             Set by the user to indicate respectively the
@@ -198,7 +197,7 @@ SUBROUTINE DBNDSL(Mode,G,Mdg,Nb,Ip,Ir,X,N,Rnorm)
   USE service, ONLY : XERMSG
   INTEGER :: Ip, Ir, Mdg, Mode, N, Nb
   REAL(DP) :: G(Mdg,Nb+1), Rnorm, X(N)
-  INTEGER i, i1, i2, ie, ii, iopt, irm1, ix, j, jg, l, nerr, np1
+  INTEGER :: i, i1, i2, ie, ii, iopt, irm1, ix, j, jg, l, nerr, np1
   REAL(DP) :: rsq, s, zero
   !* FIRST EXECUTABLE STATEMENT  DBNDSL
   zero = 0.D0
@@ -209,7 +208,7 @@ SUBROUTINE DBNDSL(Mode,G,Mdg,Nb,Ip,Ir,X,N,Rnorm)
       !                                   ********************* MODE = 2
       DO j = 1, N
         s = zero
-        IF ( j/=1 ) THEN
+        IF( j/=1 ) THEN
           i1 = MAX(1,j-Nb+1)
           i2 = j - 1
           DO i = i1, i2
@@ -218,7 +217,7 @@ SUBROUTINE DBNDSL(Mode,G,Mdg,Nb,Ip,Ir,X,N,Rnorm)
           END DO
         END IF
         l = MAX(0,j-Ip)
-        IF ( G(j,l+1)==0 ) GOTO 100
+        IF( G(j,l+1)==0 ) GOTO 100
         X(j) = (X(j)-s)/G(j,l+1)
       END DO
       RETURN
@@ -232,7 +231,7 @@ SUBROUTINE DBNDSL(Mode,G,Mdg,Nb,Ip,Ir,X,N,Rnorm)
       rsq = zero
       np1 = N + 1
       irm1 = Ir - 1
-      IF ( np1<=irm1 ) THEN
+      IF( np1<=irm1 ) THEN
         DO j = np1, irm1
           rsq = rsq + G(j,Nb+1)**2
         END DO
@@ -247,7 +246,7 @@ SUBROUTINE DBNDSL(Mode,G,Mdg,Nb,Ip,Ir,X,N,Rnorm)
     s = zero
     l = MAX(0,i-Ip)
     !                                   ALG. STEP 29
-    IF ( i/=N ) THEN
+    IF( i/=N ) THEN
       !                                   ALG. STEP 30
       ie = MIN(N+1-i,Nb)
       DO j = 2, ie
@@ -257,7 +256,7 @@ SUBROUTINE DBNDSL(Mode,G,Mdg,Nb,Ip,Ir,X,N,Rnorm)
       END DO
     END IF
     !                                   ALG. STEP 31
-    IF ( G(i,l+1)==0 ) GOTO 100
+    IF( G(i,l+1)==0 ) GOTO 100
     X(i) = (X(i)-s)/G(i,l+1)
   END DO
   !                                   ALG. STEP 32

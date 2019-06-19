@@ -5,8 +5,7 @@ MODULE TEST22_MOD
 CONTAINS
   !** SQCK
   SUBROUTINE SQCK(Lun,Kprint,Nerr)
-    !>
-    !  Quick check for SPOFS, SPOIR, SNBFS and SNBIR.
+    !> Quick check for SPOFS, SPOIR, SNBFS and SNBIR.
     !***
     ! **Library:**   SLATEC
     !***
@@ -51,17 +50,17 @@ CONTAINS
     !           including removing an illegal character from column 1, and
     !           fixed code to test all four routines.  (RWC)
     USE slatec, ONLY : R1MACH, SNBFS, SNBIR, SPOFS, SPOIR
-    INTEGER Kprint, Lun
-    REAL(SP) at(5,4), abe(5,7), abet(5,7), b(4), bt(4), c(4), &
+    INTEGER :: Kprint, Lun
+    REAL(SP) :: at(5,4), abe(5,7), abet(5,7), b(4), bt(4), c(4), &
       work(35), r, delx, delmax, signn
-    INTEGER lda, n, ml, mu, ind, iwork(4), Nerr, i, j, j1, j2, jd, &
+    INTEGER :: lda, n, ml, mu, ind, iwork(4), Nerr, i, j, j1, j2, jd, &
       mlp, k, kcase, kprog
     REAL, PARAMETER :: a(4,4) = RESHAPE( [ 5.0E0, 4.0E0, 1.0E0, 1.0E0, &
       4.0E0, 5.0E0, 1.0E0, 1.0E0,    1.0E0, 1.0E0, 4.0E0, 2.0E0, &
       1.0E0, 1.0E0, 2.0E0, 4.0E0 ], [4,4] )
     CHARACTER(4), PARAMETER :: list(4) = [ 'POFS', 'POIR', 'NBFS', 'NBIR' ]
     !* FIRST EXECUTABLE STATEMENT  SQCK
-    IF ( Kprint>=3 ) WRITE (Lun,99001)
+    IF( Kprint>=3 ) WRITE (Lun,99001)
     !
     99001 FORMAT (/' *    SQCK - QUICK CHECK FOR SPOFS, SPOIR, SNBFS AND ','SNBIR'/)
     lda = 5
@@ -91,7 +90,7 @@ CONTAINS
         !
         !           FORM VECTOR B FOR NON-BANDED.
         !
-        IF ( kprog<=2 ) THEN
+        IF( kprog<=2 ) THEN
           DO i = 1, n
             DO j = 1, n
               b(i) = b(i) + a(i,j)*c(j)
@@ -137,7 +136,7 @@ CONTAINS
         !
         !           MAKE AT AND ABET SINGULAR FOR CASE  =  2
         !
-        IF ( kcase==2 ) THEN
+        IF( kcase==2 ) THEN
           DO j = 1, n
             at(1,j) = 0.0E0
           END DO
@@ -149,21 +148,21 @@ CONTAINS
         !
         !           SOLVE FOR X
         !
-        IF ( kprog==1 ) CALL SPOFS(at,lda,n,bt,1,ind,work)
-        IF ( kprog==2 ) CALL SPOIR(at,lda,n,bt,1,ind,work)
-        IF ( kprog==3 ) CALL SNBFS(abet,lda,n,ml,mu,bt,1,ind,work,iwork)
-        IF ( kprog==4 ) CALL SNBIR(abet,lda,n,ml,mu,bt,1,ind,work,iwork)
+        IF( kprog==1 ) CALL SPOFS(at,lda,n,bt,1,ind,work)
+        IF( kprog==2 ) CALL SPOIR(at,lda,n,bt,1,ind,work)
+        IF( kprog==3 ) CALL SNBFS(abet,lda,n,ml,mu,bt,1,ind,work,iwork)
+        IF( kprog==4 ) CALL SNBIR(abet,lda,n,ml,mu,bt,1,ind,work,iwork)
         !
         !           COMPARE EXACT AND COMPUTED SOLUTIONS FOR CASE 1
         !
-        IF ( kcase==1 ) THEN
+        IF( kcase==1 ) THEN
           delmax = 0.0E0
           DO i = 1, n
             delx = ABS(bt(i)-c(i))
             delmax = MAX(delmax,delx)
           END DO
           !
-          IF ( r<=delmax ) THEN
+          IF( r<=delmax ) THEN
             Nerr = Nerr + 1
             WRITE (Lun,99002) list(kprog), kcase, delmax
             99002 FORMAT ('   PROBLEM WITH S',A,', CASE ',I1,'.  MAX ABS ERROR OF',&
@@ -172,7 +171,7 @@ CONTAINS
           !
           !              CHECK CONTROL FOR SINGULAR MATRIX FOR CASE 2
           !
-        ELSEIF ( ind/=-4 ) THEN
+        ELSEIF( ind/=-4 ) THEN
           Nerr = Nerr + 1
           WRITE (Lun,99003) list(kprog), kcase, ind
           99003 FORMAT ('   PROBLEM WITH S',A,', CASE ',I1,'.  IND = ',I2,&
@@ -183,16 +182,15 @@ CONTAINS
     !
     !     SUMMARY PRINT
     !
-    IF ( Nerr/=0 ) WRITE (Lun,99004) Nerr
+    IF( Nerr/=0 ) WRITE (Lun,99004) Nerr
     99004 FORMAT (/' **** SQCK DETECTED A TOTAL OF ',I2,' PROBLEMS. ****'/)
-    IF ( Kprint>=2.AND.Nerr==0 ) WRITE (Lun,99005)
+    IF( Kprint>=2 .AND. Nerr==0 ) WRITE (Lun,99005)
     99005 FORMAT ('     SQCK DETECTED NO PROBLEMS.'/)
     RETURN
   END SUBROUTINE SQCK
   !** DQCK
   SUBROUTINE DQCK(Lun,Kprint,Nerr)
-    !>
-    !  Quick check for DPOFS AND DNBFS.
+    !> Quick check for DPOFS AND DNBFS.
     !***
     ! **Library:**   SLATEC
     !***
@@ -233,17 +231,17 @@ CONTAINS
     !           including removing an illegal character from column 1, and
     !           editorial changes.  (RWC)
     USE slatec, ONLY : D1MACH, DNBFS, DPOFS
-    INTEGER Kprint, Lun
+    INTEGER :: Kprint, Lun
     REAL(DP) :: at(5,4), abe(5,7), abet(5,7), b(4), bt(4), c(4), work(35), signn
-    REAL(SP) r, delx, delmax
-    INTEGER lda, n, ml, mu, ind, iwork(4), Nerr, i, j, j1, j2, jd, &
+    REAL(SP) :: r, delx, delmax
+    INTEGER :: lda, n, ml, mu, ind, iwork(4), Nerr, i, j, j1, j2, jd, &
       mlp, k, kcase, kprog
     REAL(DP), PARAMETER :: a(4,4) = RESHAPE( [ 5.0D0, 4.0D0, 1.0D0, 1.0D0, &
       4.0D0, 5.0D0, 1.0D0, 1.0D0,    1.0D0, 1.0D0, 4.0D0, 2.0D0, &
       1.0D0, 1.0D0, 2.0D0, 4.0D0 ], [4,4] )
     CHARACTER(4), PARAMETER :: list(2) = [ 'POFS', 'NBFS' ]
     !* FIRST EXECUTABLE STATEMENT  DQCK
-    IF ( Kprint>=3 ) WRITE (Lun,99001)
+    IF( Kprint>=3 ) WRITE (Lun,99001)
     !
     99001 FORMAT (/' *    DQCK - QUICK CHECK FOR  DPOFS AND DNBFS'/)
     lda = 5
@@ -273,7 +271,7 @@ CONTAINS
         !
         !           FORM VECTOR B FOR NON-BANDED.
         !
-        IF ( kprog==1 ) THEN
+        IF( kprog==1 ) THEN
           DO i = 1, n
             DO j = 1, n
               b(i) = b(i) + a(i,j)*c(j)
@@ -319,7 +317,7 @@ CONTAINS
         !
         !           MAKE AT AND ABET SINGULAR FOR CASE  =  2
         !
-        IF ( kcase==2 ) THEN
+        IF( kcase==2 ) THEN
           DO j = 1, n
             at(1,j) = 0.0D0
           END DO
@@ -331,19 +329,19 @@ CONTAINS
         !
         !           SOLVE FOR X
         !
-        IF ( kprog==1 ) CALL DPOFS(at,lda,n,bt,1,ind,work)
-        IF ( kprog==2 ) CALL DNBFS(abet,lda,n,ml,mu,bt,1,ind,work,iwork)
+        IF( kprog==1 ) CALL DPOFS(at,lda,n,bt,1,ind,work)
+        IF( kprog==2 ) CALL DNBFS(abet,lda,n,ml,mu,bt,1,ind,work,iwork)
         !
         !           COMPARE EXACT AND COMPUTED SOLUTIONS FOR CASE 1
         !
-        IF ( kcase==1 ) THEN
+        IF( kcase==1 ) THEN
           delmax = 0.0E0
           DO i = 1, n
             delx = REAL( ABS(bt(i)-c(i)), SP )
             delmax = MAX(delmax,delx)
           END DO
           !
-          IF ( r<=delmax ) THEN
+          IF( r<=delmax ) THEN
             Nerr = Nerr + 1
             WRITE (Lun,99002) list(kprog), kcase, delmax
             99002 FORMAT ('   PROBLEM WITH D',A,', CASE ',I1,'.  MAX ABS ERROR OF',&
@@ -352,7 +350,7 @@ CONTAINS
           !
           !              CHECK CONTROL FOR SINGULAR MATRIX FOR CASE 2
           !
-        ELSEIF ( ind/=-4 ) THEN
+        ELSEIF( ind/=-4 ) THEN
           Nerr = Nerr + 1
           WRITE (Lun,99003) list(kprog), kcase, ind
           99003 FORMAT ('   PROBLEM WITH D',A,', CASE ',I1,'.  IND = ',I2,&
@@ -363,16 +361,15 @@ CONTAINS
     !
     !     SUMMARY PRINT
     !
-    IF ( Nerr/=0 ) WRITE (Lun,99004) Nerr
+    IF( Nerr/=0 ) WRITE (Lun,99004) Nerr
     99004 FORMAT (/' **** DQCK DETECTED A TOTAL OF ',I2,' PROBLEMS. ****'/)
-    IF ( Kprint>=2.AND.Nerr==0 ) WRITE (Lun,99005)
+    IF( Kprint>=2 .AND. Nerr==0 ) WRITE (Lun,99005)
     99005 FORMAT ('     DQCK DETECTED NO PROBLEMS.'/)
     RETURN
   END SUBROUTINE DQCK
   !** CQCK
   SUBROUTINE CQCK(Lun,Kprint,Nerr)
-    !>
-    !  Quick check for CPOFS, CPOIR, CNBFS and CNBIR.
+    !> Quick check for CPOFS, CPOIR, CNBFS and CNBIR.
     !***
     ! **Library:**   SLATEC
     !***
@@ -413,10 +410,10 @@ CONTAINS
     !           including removing an illegal character from column 1, and
     !           editorial changes.  (RWC)
     USE slatec, ONLY : CNBFS, CNBIR, CPOFS, CPOIR, R1MACH
-    INTEGER Kprint, Lun
-    REAL(SP) r, delx, delmax
-    COMPLEX(SP) at(5,4), abe(5,7), abet(5,7), bt(4), work(35)
-    INTEGER lda, n, ml, mu, ind, iwork(4), Nerr, i, j, j1, j2, jd, &
+    INTEGER :: Kprint, Lun
+    REAL(SP) :: r, delx, delmax
+    COMPLEX(SP) :: at(5,4), abe(5,7), abet(5,7), bt(4), work(35)
+    INTEGER :: lda, n, ml, mu, ind, iwork(4), Nerr, i, j, j1, j2, jd, &
       mlp, k, kcase, kprog
     COMPLEX(SP), PARAMETER :: a(4,4) = RESHAPE( [ &
       (2.E0,0.E0), (0.E0,1.E0), (0.E0,0.E0), (0.E0,0.E0), &
@@ -427,7 +424,7 @@ CONTAINS
     COMPLEX(SP), PARAMETER :: b(4) = [ (3.E0,2.E0), (-1.E0,3.E0), (0.E0,-4.E0), (5.E0,0.E0) ]
     CHARACTER(4), PARAMETER :: list(4) = [ 'POFS', 'POIR', 'NBFS', 'NBIR' ]
     !* FIRST EXECUTABLE STATEMENT  CQCK
-    IF ( Kprint>=3 ) WRITE (Lun,99001)
+    IF( Kprint>=3 ) WRITE (Lun,99001)
     !
     99001 FORMAT (/' *    CQCK - QUICK CHECK FOR CPOFS, CPOIR, CNBFS AND ','CNBIR'/)
     lda = 5
@@ -476,7 +473,7 @@ CONTAINS
         !
         !           MAKE AT AND ABET SINGULAR FOR CASE  =  2
         !
-        IF ( kcase==2 ) THEN
+        IF( kcase==2 ) THEN
           DO j = 1, n
             at(1,j) = (0.0E0,0.0E0)
           END DO
@@ -488,14 +485,14 @@ CONTAINS
         !
         !           SOLVE FOR X
         !
-        IF ( kprog==1 ) CALL CPOFS(at,lda,n,bt,1,ind,work)
-        IF ( kprog==2 ) CALL CPOIR(at,lda,n,bt,1,ind,work)
-        IF ( kprog==3 ) CALL CNBFS(abet,lda,n,ml,mu,bt,1,ind,work,iwork)
-        IF ( kprog==4 ) CALL CNBIR(abet,lda,n,ml,mu,bt,1,ind,work,iwork)
+        IF( kprog==1 ) CALL CPOFS(at,lda,n,bt,1,ind,work)
+        IF( kprog==2 ) CALL CPOIR(at,lda,n,bt,1,ind,work)
+        IF( kprog==3 ) CALL CNBFS(abet,lda,n,ml,mu,bt,1,ind,work,iwork)
+        IF( kprog==4 ) CALL CNBIR(abet,lda,n,ml,mu,bt,1,ind,work,iwork)
         !
         !           COMPARE EXACT AND COMPUTED SOLUTIONS FOR CASE 1
         !
-        IF ( kcase==1 ) THEN
+        IF( kcase==1 ) THEN
           delmax = 0.0E0
           DO i = 1, n
             delx = ABS(REAL(bt(i))-REAL(c(i)))
@@ -504,7 +501,7 @@ CONTAINS
             delmax = MAX(delmax,delx)
           END DO
           !
-          IF ( r<=delmax ) THEN
+          IF( r<=delmax ) THEN
             Nerr = Nerr + 1
             WRITE (Lun,99002) list(kprog), kcase, delmax
             99002 FORMAT ('   PROBLEM WITH C',A,', CASE ',I1,'.  MAX ABS ERROR OF',&
@@ -512,7 +509,7 @@ CONTAINS
           END IF
           !              CHECK CONTROL FOR SINGULAR MATRIX FOR CASE 2
           !
-        ELSEIF ( ind/=-4 ) THEN
+        ELSEIF( ind/=-4 ) THEN
           Nerr = Nerr + 1
           WRITE (Lun,99003) list(kprog), kcase, ind
           99003 FORMAT ('   PROBLEM WITH C',A,', CASE ',I1,'.  IND = ',I2,&
@@ -523,9 +520,9 @@ CONTAINS
     !
     !     SUMMARY PRINT
     !
-    IF ( Nerr/=0 ) WRITE (Lun,99004) Nerr
+    IF( Nerr/=0 ) WRITE (Lun,99004) Nerr
     99004 FORMAT (/' **** CQCK DETECTED A TOTAL OF ',I2,' PROBLEMS. ****'/)
-    IF ( Kprint>=2.AND.Nerr==0 ) WRITE (Lun,99005)
+    IF( Kprint>=2 .AND. Nerr==0 ) WRITE (Lun,99005)
     99005 FORMAT ('     CQCK DETECTED NO PROBLEMS.'/)
     RETURN
   END SUBROUTINE CQCK
@@ -536,8 +533,7 @@ PROGRAM TEST22
   USE slatec, ONLY : I1MACH, XSETF, XSETUN, XERMAX
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
-  !>
-  !  Driver for testing SLATEC subprograms
+  !> Driver for testing SLATEC subprograms
   !***
   ! **Library:**   SLATEC
   !***
@@ -585,7 +581,7 @@ PROGRAM TEST22
   !   890618  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900524  Cosmetic changes to code.  (WRB)
-  INTEGER kprint, lin, lun, nerr, nfail
+  INTEGER :: kprint, lin, lun, nerr, nfail
   !* FIRST EXECUTABLE STATEMENT  TEST22
   lun = I1MACH(2)
   lin = I1MACH(1)
@@ -596,7 +592,7 @@ PROGRAM TEST22
   CALL GET_ARGUMENT(kprint)
   CALL XERMAX(1000)
   CALL XSETUN(lun)
-  IF ( kprint<=1 ) THEN
+  IF( kprint<=1 ) THEN
     CALL XSETF(0)
   ELSE
     CALL XSETF(1)
@@ -613,7 +609,7 @@ PROGRAM TEST22
   !
   !     Write PASS or FAIL message
   !
-  IF ( nfail==0 ) THEN
+  IF( nfail==0 ) THEN
     WRITE (lun,99001)
     99001 FORMAT (/' --------------TEST22 PASSED ALL TESTS----------------')
   ELSE

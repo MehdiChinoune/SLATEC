@@ -1,7 +1,6 @@
 !** ZRATI
 SUBROUTINE ZRATI(Zr,Zi,Fnu,N,Cyr,Cyi,Tol)
-  !>
-  !  Subsidiary to ZBESH, ZBESI and ZBESK
+  !> Subsidiary to ZBESH, ZBESI and ZBESK
   !***
   ! **Library:**   SLATEC
   !***
@@ -27,7 +26,7 @@ SUBROUTINE ZRATI(Zr,Zi,Fnu,N,Cyr,Cyi,Tol)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
 
-  INTEGER i, id, idnu, inu, itime, k, kk, magz, N
+  INTEGER :: i, id, idnu, inu, itime, k, kk, magz, N
   REAL(DP) :: ak, amagz, ap1, ap2, arg, az, cdfnui, cdfnur, Cyi(N), Cyr(N), dfnu, &
     fdnu, flam, Fnu, fnup, pti, ptr, p1i, p1r, p2i, p2r, rak, rap1, rho, rzi, &
     rzr, test, test1, Tol, tti, ttr, t1i, t1r, Zi, Zr
@@ -55,7 +54,7 @@ SUBROUTINE ZRATI(Zr,Zi,Fnu,N,Cyr,Cyi,Tol)
   p1i = conei
   t1r = t1r + rzr
   t1i = t1i + rzi
-  IF ( id>0 ) id = 0
+  IF( id>0 ) id = 0
   ap2 = ZABS(p2r,p2i)
   ap1 = ZABS(p1r,p1i)
   !-----------------------------------------------------------------------
@@ -85,8 +84,8 @@ SUBROUTINE ZRATI(Zr,Zi,Fnu,N,Cyr,Cyi,Tol)
     t1r = t1r + rzr
     t1i = t1i + rzi
     ap2 = ZABS(p2r,p2i)
-    IF ( ap1>test ) THEN
-      IF ( itime==2 ) THEN
+    IF( ap1>test ) THEN
+      IF( itime==2 ) THEN
         kk = k + 1 - id
         ak = kk
         t1r = ak
@@ -108,12 +107,12 @@ SUBROUTINE ZRATI(Zr,Zi,Fnu,N,Cyr,Cyi,Tol)
           p2i = pti
           t1r = t1r - coner
         END DO
-        IF ( p1r==czeror.AND.p1i==czeroi ) THEN
+        IF( p1r==czeror .AND. p1i==czeroi ) THEN
           p1r = Tol
           p1i = Tol
         END IF
         CALL ZDIV(p2r,p2i,p1r,p1i,Cyr(N),Cyi(N))
-        IF ( N==1 ) RETURN
+        IF( N==1 ) RETURN
         k = N - 1
         ak = k
         t1r = ak
@@ -124,7 +123,7 @@ SUBROUTINE ZRATI(Zr,Zi,Fnu,N,Cyr,Cyi,Tol)
           ptr = cdfnur + (t1r*rzr-t1i*rzi) + Cyr(k+1)
           pti = cdfnui + (t1r*rzi+t1i*rzr) + Cyi(k+1)
           ak = ZABS(ptr,pti)
-          IF ( ak==czeror ) THEN
+          IF( ak==czeror ) THEN
             ptr = Tol
             pti = Tol
             ak = Tol*rt2

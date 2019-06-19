@@ -1,8 +1,7 @@
 !** INTRV
 SUBROUTINE INTRV(Xt,Lxt,X,Ilo,Ileft,Mflag)
-  !>
-  !  Compute the largest integer ILEFT in 1 .LE. ILEFT .LE. LXT
-  !            such that XT(ILEFT) .LE. X where XT(*) is a subdivision
+  !> Compute the largest integer ILEFT in 1 <= ILEFT <= LXT
+  !            such that XT(ILEFT) <= X where XT(*) is a subdivision
   !            of the X interval.
   !***
   ! **Library:**   SLATEC
@@ -22,13 +21,13 @@ SUBROUTINE INTRV(Xt,Lxt,X,Ilo,Ileft,Mflag)
   !     Abstract
   !         INTRV is the INTERV routine of the reference.
   !
-  !         INTRV computes the largest integer ILEFT in 1 .LE. ILEFT .LE.
-  !         LXT such that XT(ILEFT) .LE. X where XT(*) is a subdivision of
+  !         INTRV computes the largest integer ILEFT in 1 <= ILEFT <=
+  !         LXT such that XT(ILEFT) <= X where XT(*) is a subdivision of
   !         the X interval.  Precisely,
   !
-  !                      X .LT. XT(1)                1         -1
-  !         if  XT(I) .LE. X .LT. XT(I+1)  then  ILEFT=I , MFLAG=0
-  !           XT(LXT) .LE. X                         LXT        1,
+  !                      X < XT(1)                1         -1
+  !         if  XT(I) <= X < XT(I+1)  then  ILEFT=I , MFLAG=0
+  !           XT(LXT) <= X                         LXT        1,
   !
   !         That is, when multiplicities are present in the break point
   !         to the left of X, the largest index is taken for ILEFT.
@@ -47,7 +46,7 @@ SUBROUTINE INTRV(Xt,Lxt,X,Ilo,Ileft,Mflag)
   !                    ing after the initial call, and ILO must not be
   !                    changed by the user.  Distinct splines require
   !                    distinct ILO parameters.
-  !          ILEFT   - largest integer satisfying XT(ILEFT) .LE. X
+  !          ILEFT   - largest integer satisfying XT(ILEFT) <= X
   !          MFLAG   - signals when X lies out of bounds
   !
   !     Error Conditions
@@ -73,53 +72,53 @@ SUBROUTINE INTRV(Xt,Lxt,X,Ilo,Ileft,Mflag)
   INTEGER :: ihi, istep, middle
   !* FIRST EXECUTABLE STATEMENT  INTRV
   ihi = Ilo + 1
-  IF ( ihi>=Lxt ) THEN
-    IF ( X>=Xt(Lxt) ) GOTO 300
-    IF ( Lxt<=1 ) GOTO 100
+  IF( ihi>=Lxt ) THEN
+    IF( X>=Xt(Lxt) ) GOTO 300
+    IF( Lxt<=1 ) GOTO 100
     Ilo = Lxt - 1
     ihi = Lxt
   END IF
   !
-  IF ( X>=Xt(ihi) ) THEN
-    !- ** NOW X .GE. XT(ILO) . FIND UPPER BOUND
+  IF( X>=Xt(ihi) ) THEN
+    !- ** NOW X >= XT(ILO) . FIND UPPER BOUND
     istep = 1
     DO
       Ilo = ihi
       ihi = Ilo + istep
-      IF ( ihi>=Lxt ) THEN
-        IF ( X>=Xt(Lxt) ) GOTO 300
+      IF( ihi>=Lxt ) THEN
+        IF( X>=Xt(Lxt) ) GOTO 300
         ihi = Lxt
         EXIT
       ELSE
-        IF ( X<Xt(ihi) ) EXIT
+        IF( X<Xt(ihi) ) EXIT
         istep = istep*2
       END IF
     END DO
   ELSE
-    IF ( X>=Xt(Ilo) ) GOTO 200
+    IF( X>=Xt(Ilo) ) GOTO 200
     !
-    !- ** NOW X .LT. XT(IHI) . FIND LOWER BOUND
+    !- ** NOW X < XT(IHI) . FIND LOWER BOUND
     istep = 1
     DO
       ihi = Ilo
       Ilo = ihi - istep
-      IF ( Ilo<=1 ) THEN
+      IF( Ilo<=1 ) THEN
         Ilo = 1
-        IF ( X>=Xt(1) ) EXIT
+        IF( X>=Xt(1) ) EXIT
         GOTO 100
       ELSE
-        IF ( X>=Xt(Ilo) ) EXIT
+        IF( X>=Xt(Ilo) ) EXIT
         istep = istep*2
       END IF
     END DO
   END IF
   DO
     !
-    !- ** NOW XT(ILO) .LE. X .LT. XT(IHI) . NARROW THE INTERVAL
+    !- ** NOW XT(ILO) <= X < XT(IHI) . NARROW THE INTERVAL
     middle = (Ilo+ihi)/2
-    IF ( middle==Ilo ) GOTO 200
+    IF( middle==Ilo ) GOTO 200
     !     NOTE. IT IS ASSUMED THAT MIDDLE = ILO IN CASE IHI = ILO+1
-    IF ( X<Xt(middle) ) THEN
+    IF( X<Xt(middle) ) THEN
       ihi = middle
     ELSE
       Ilo = middle

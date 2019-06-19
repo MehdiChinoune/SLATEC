@@ -1,7 +1,6 @@
 !** DHEQR
 SUBROUTINE DHEQR(A,Lda,N,Q,Info,Ijob)
-  !>
-  !  Internal routine for DGMRES.
+  !> Internal routine for DGMRES.
   !***
   ! **Library:**   SLATEC (SLAP)
   !***
@@ -48,14 +47,14 @@ SUBROUTINE DHEQR(A,Lda,N,Q,Info,Ijob)
   !         in decomposing A.
   ! INFO   :OUT      Integer
   !         = 0  normal value.
-  !         = K  if  A(K,K) .eq. 0.0 .  This is not an error
+  !         = K  if  A(K,K) = 0.0 .  This is not an error
   !           condition for this subroutine, but it does
   !           indicate that DHELS will divide by zero
   !           if called.
   ! IJOB   :IN       Integer
   !         = 1     means that a fresh decomposition of the
   !                 matrix A is desired.
-  !         .ge. 2  means that the current decomposition of A
+  !         >= 2  means that the current decomposition of A
   !                 will be updated by the addition of a row
   !                 and a column.
   !
@@ -76,16 +75,16 @@ SUBROUTINE DHEQR(A,Lda,N,Q,Info,Ijob)
   !   920511  Added complete declaration section.  (WRB)
 
   !     .. Scalar Arguments ..
-  INTEGER Ijob, Info, Lda, N
+  INTEGER :: Ijob, Info, Lda, N
   !     .. Array Arguments ..
   REAL(DP) :: A(Lda,*), Q(*)
   !     .. Local Scalars ..
   REAL(DP) :: c, s, t, t1, t2
-  INTEGER i, iq, j, k, km1, kp1, nm1
+  INTEGER :: i, iq, j, k, km1, kp1, nm1
   !     .. Intrinsic Functions ..
   INTRINSIC ABS, SQRT
   !* FIRST EXECUTABLE STATEMENT  DHEQR
-  IF ( Ijob>1 ) THEN
+  IF( Ijob>1 ) THEN
     !   -------------------------------------------------------------------
     !         The old factorization of a will be updated.  A row and a
     !         column has been added to the matrix A.  N by N-1 is now
@@ -112,10 +111,10 @@ SUBROUTINE DHEQR(A,Lda,N,Q,Info,Ijob)
     Info = 0
     t1 = A(N,N)
     t2 = A(N+1,N)
-    IF ( t2==0.0D0 ) THEN
+    IF( t2==0.0D0 ) THEN
       c = 1
       s = 0
-    ELSEIF ( ABS(t2)>=ABS(t1) ) THEN
+    ELSEIF( ABS(t2)>=ABS(t1) ) THEN
       t = t1/t2
       s = -1.0D0/SQRT(1.0D0+t*t)
       c = -s*t
@@ -128,7 +127,7 @@ SUBROUTINE DHEQR(A,Lda,N,Q,Info,Ijob)
     Q(iq) = c
     Q(iq+1) = s
     A(N,N) = c*t1 - s*t2
-    IF ( A(N,N)==0.0D0 ) Info = N
+    IF( A(N,N)==0.0D0 ) Info = N
     RETURN
   END IF
   !   -------------------------------------------------------------------
@@ -145,7 +144,7 @@ SUBROUTINE DHEQR(A,Lda,N,Q,Info,Ijob)
     !           First, multiply the K-th column of A by the previous
     !           K-1 Givens rotations.
     !
-    IF ( km1>=1 ) THEN
+    IF( km1>=1 ) THEN
       DO j = 1, km1
         i = 2*(j-1) + 1
         t1 = A(j,k)
@@ -162,10 +161,10 @@ SUBROUTINE DHEQR(A,Lda,N,Q,Info,Ijob)
     iq = 2*km1 + 1
     t1 = A(k,k)
     t2 = A(kp1,k)
-    IF ( t2==0.0D0 ) THEN
+    IF( t2==0.0D0 ) THEN
       c = 1
       s = 0
-    ELSEIF ( ABS(t2)>=ABS(t1) ) THEN
+    ELSEIF( ABS(t2)>=ABS(t1) ) THEN
       t = t1/t2
       s = -1.0D0/SQRT(1.0D0+t*t)
       c = -s*t
@@ -177,7 +176,7 @@ SUBROUTINE DHEQR(A,Lda,N,Q,Info,Ijob)
     Q(iq) = c
     Q(iq+1) = s
     A(k,k) = c*t1 - s*t2
-    IF ( A(k,k)==0.0D0 ) Info = k
+    IF( A(k,k)==0.0D0 ) Info = k
   END DO
   RETURN
   !------------- LAST LINE OF DHEQR FOLLOWS ----------------------------

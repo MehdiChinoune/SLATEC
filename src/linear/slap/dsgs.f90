@@ -1,8 +1,7 @@
 !** DSGS
 SUBROUTINE DSGS(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
     Iunit,Rwork,Lenw,Iwork,Leniw)
-  !>
-  !  Gauss-Seidel Method Iterative Sparse Ax = b Solver.
+  !> Gauss-Seidel Method Iterative Sparse Ax = b Solver.
   !            Routine to solve a general linear system  Ax = b  using
   !            Gauss-Seidel iteration.
   !***
@@ -194,7 +193,7 @@ SUBROUTINE DSGS(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
   !
   !- Cautions:
   !     This routine will attempt to write to the Fortran logical output
-  !     unit IUNIT, if IUNIT .ne. 0.  Thus, the user must make sure that
+  !     unit IUNIT, if IUNIT /= 0.  Thus, the user must make sure that
   !     this logical unit is attached to a file or terminal before calling
   !     this routine with a non-zero value for IUNIT.  This routine does
   !     not check for the validity of a non-zero IUNIT unit number.
@@ -220,19 +219,19 @@ SUBROUTINE DSGS(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
   !   921019  Corrected NEL to NL.  (FNF)
 
   !     .. Parameters ..
-  INTEGER , PARAMETER :: LOCRB = 1, LOCIB = 11
+  INTEGER, PARAMETER :: LOCRB = 1, LOCIB = 11
   !     .. Scalar Arguments ..
   REAL(DP) :: Err, Tol
-  INTEGER Ierr, Isym, Iter, Itmax, Itol, Iunit, Leniw, Lenw, N, Nelt
+  INTEGER :: Ierr, Isym, Iter, Itmax, Itol, Iunit, Leniw, Lenw, N, Nelt
   !     .. Array Arguments ..
   REAL(DP) :: A(N), B(N), Rwork(*), X(N)
-  INTEGER Ia(Nelt), Iwork(*), Ja(Nelt)
+  INTEGER :: Ia(Nelt), Iwork(*), Ja(Nelt)
   !     .. Local Scalars ..
-  INTEGER icol, j, jbgn, jend, locdz, locel, lociel, lociw, locjel, &
+  INTEGER :: icol, j, jbgn, jend, locdz, locel, lociel, lociw, locjel, &
     locr, locw, locz, nl
   !* FIRST EXECUTABLE STATEMENT  DSGS
   !
-  IF ( N<1.OR.Nelt<1 ) THEN
+  IF( N<1 .OR. Nelt<1 ) THEN
     Ierr = 3
     RETURN
   END IF
@@ -241,13 +240,13 @@ SUBROUTINE DSGS(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
   CALL DS2Y(N,Nelt,Ia,Ja,A)
   !
   !         Count number of elements in lower triangle of the matrix.
-  IF ( Isym==0 ) THEN
+  IF( Isym==0 ) THEN
     nl = 0
     DO icol = 1, N
       jbgn = Ja(icol)
       jend = Ja(icol+1) - 1
       DO j = jbgn, jend
-        IF ( Ia(j)>=icol ) nl = nl + 1
+        IF( Ia(j)>=icol ) nl = nl + 1
       END DO
     END DO
   ELSE
@@ -269,7 +268,7 @@ SUBROUTINE DSGS(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
   !
   !         Check the workspace allocations.
   CALL DCHKW('DSGS',lociw,Leniw,locw,Lenw,Ierr,Iter,Err)
-  IF ( Ierr/=0 ) RETURN
+  IF( Ierr/=0 ) RETURN
   !
   Iwork(1) = nl
   Iwork(2) = lociel

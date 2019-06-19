@@ -1,7 +1,6 @@
 !** BNSLV
 SUBROUTINE BNSLV(W,Nroww,Nrow,Nbandl,Nbandu,B)
-  !>
-  !  Subsidiary to BINT4 and BINTK
+  !> Subsidiary to BINT4 and BINTK
   !***
   ! **Library:**   SLATEC
   !***
@@ -51,11 +50,11 @@ SUBROUTINE BNSLV(W,Nroww,Nrow,Nbandl,Nbandu,B)
   INTEGER :: i, j, jmax, middle, nrowm1
   !* FIRST EXECUTABLE STATEMENT  BNSLV
   middle = Nbandu + 1
-  IF ( Nrow==1 ) THEN
+  IF( Nrow==1 ) THEN
     B(1) = B(1)/W(middle,1)
   ELSE
     nrowm1 = Nrow - 1
-    IF ( Nbandl/=0 ) THEN
+    IF( Nbandl/=0 ) THEN
       !                                 FORWARD PASS
       !            FOR I=1,2,...,NROW-1, SUBTRACT  RIGHT SIDE(I)*(I-TH COLUMN
       !            OF  L )  FROM RIGHT SIDE  (BELOW I-TH ROW) .
@@ -70,7 +69,7 @@ SUBROUTINE BNSLV(W,Nroww,Nrow,Nbandl,Nbandu,B)
     !            FOR I=NROW,NROW-1,...,1, DIVIDE RIGHT SIDE(I) BY I-TH DIAG-
     !            ONAL ENTRY OF  U, THEN SUBTRACT  RIGHT SIDE(I)*(I-TH COLUMN
     !            OF  U)  FROM RIGHT SIDE  (ABOVE I-TH ROW).
-    IF ( Nbandu>0 ) THEN
+    IF( Nbandu>0 ) THEN
       i = Nrow
       DO
         B(i) = B(i)/W(middle,i)
@@ -79,7 +78,7 @@ SUBROUTINE BNSLV(W,Nroww,Nrow,Nbandl,Nbandu,B)
           B(i-j) = B(i-j) - B(i)*W(middle-j,i)
         END DO
         i = i - 1
-        IF ( i<=1 ) THEN
+        IF( i<=1 ) THEN
           B(1) = B(1)/W(middle,1)
           EXIT
         END IF

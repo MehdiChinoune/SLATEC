@@ -1,7 +1,6 @@
 !** BINTK
 SUBROUTINE BINTK(X,Y,T,N,K,Bcoef,Q,Work)
-  !>
-  !  Compute the B-representation of a spline which interpolates
+  !> Compute the B-representation of a spline which interpolates
   !            given data.
   !***
   ! **Library:**   SLATEC
@@ -39,7 +38,7 @@ SUBROUTINE BINTK(X,Y,T,N,K,Bcoef,Q,Work)
   !         pivoting, since the total positivity of the matrix A makes
   !         this unnecessary.  The linear system to be solved is
   !         (theoretically) invertible if and only if
-  !                 T(I) .LT. X(I)) .LT. T(I+K),        all I.
+  !                 T(I) < X(I)) < T(I+K),        all I.
   !         Equality is permitted on the left for I=1 and on the right
   !         for I=N when K knots are used at X(1) or X(N).  Otherwise,
   !         violation of this condition is certain to lead to an error.
@@ -51,11 +50,11 @@ SUBROUTINE BINTK(X,Y,T,N,K,Bcoef,Q,Work)
   !           Y       - corresponding vector of length N containing data
   !                     point ordinates.
   !           T       - knot vector of length N+K
-  !                     since T(1),..,T(K) .LE. X(1) and T(N+1),..,T(N+K)
-  !                     .GE. X(N), this leaves only N-K knots (not nec-
+  !                     since T(1),..,T(K) <= X(1) and T(N+1),..,T(N+K)
+  !                     >= X(N), this leaves only N-K knots (not nec-
   !                     essarily X(I)) values) interior to (X(1),X(N))
-  !           N       - number of data points, N .GE. K
-  !           K       - order of the spline, K .GE. 1
+  !           N       - number of data points, N >= K
+  !           K       - order of the spline, K >= 1
   !
   !         Output
   !           BCOEF   - a vector of length N containing the B-spline
@@ -104,18 +103,18 @@ SUBROUTINE BINTK(X,Y,T,N,K,Bcoef,Q,Work)
   REAL(SP) :: xi
   !     DIMENSION Q(2*K-1,N), T(N+K)
   !* FIRST EXECUTABLE STATEMENT  BINTK
-  IF ( K<1 ) THEN
-    CALL XERMSG('BINTK','K DOES NOT SATISFY K.GE.1',2,1)
+  IF( K<1 ) THEN
+    CALL XERMSG('BINTK','K DOES NOT SATISFY K>=1',2,1)
     RETURN
   ELSE
-    IF ( N<K ) THEN
-      CALL XERMSG('BINTK','N DOES NOT SATISFY N.GE.K',2,1)
+    IF( N<K ) THEN
+      CALL XERMSG('BINTK','N DOES NOT SATISFY N>=K',2,1)
       RETURN
     ELSE
       jj = N - 1
-      IF ( jj/=0 ) THEN
+      IF( jj/=0 ) THEN
         DO i = 1, jj
-          IF ( X(i)>=X(i+1) ) GOTO 50
+          IF( X(i)>=X(i+1) ) GOTO 50
         END DO
       END IF
       np1 = N + 1
@@ -133,15 +132,15 @@ SUBROUTINE BINTK(X,Y,T,N,K,Bcoef,Q,Work)
         xi = X(i)
         ilp1mx = MIN(i+K,np1)
         !        *** FIND  LEFT  IN THE CLOSED INTERVAL (I,I+K-1) SUCH THAT
-        !                T(LEFT) .LE. X(I) .LT. T(LEFT+1)
+        !                T(LEFT) <= X(I) < T(LEFT+1)
         !        MATRIX IS SINGULAR IF THIS IS NOT POSSIBLE
         left = MAX(left,i)
-        IF ( xi<T(left) ) GOTO 20
-        DO WHILE ( xi>=T(left+1) )
+        IF( xi<T(left) ) GOTO 20
+        DO WHILE( xi>=T(left+1) )
           left = left + 1
-          IF ( left>=ilp1mx ) THEN
+          IF( left>=ilp1mx ) THEN
             left = left - 1
-            IF ( xi<=T(left+1) ) EXIT
+            IF( xi<=T(left+1) ) EXIT
             GOTO 20
           END IF
         END DO
@@ -171,7 +170,7 @@ SUBROUTINE BINTK(X,Y,T,N,K,Bcoef,Q,Work)
       !
       !     ***OBTAIN FACTORIZATION OF  A , STORED AGAIN IN  Q.
       CALL BNFAC(Q,K+km1,N,km1,km1,iflag)
-      IF ( iflag==2 ) THEN
+      IF( iflag==2 ) THEN
         CALL XERMSG('BINTK',&
           'THE SYSTEM OF SOLVER DETECTS A SINGULAR SYSTEM ALTHOUGH '&
           &'THE THEORETICAL CONDITIONS FOR A SOLUTION WERE SATISFIED.',8,1)
@@ -192,6 +191,6 @@ SUBROUTINE BINTK(X,Y,T,N,K,Bcoef,Q,Work)
       RETURN
     END IF
     50  CALL XERMSG('BINTK',&
-      'X(I) DOES NOT SATISFY X(I).LT.X(I+1) FOR SOME I',2,1)
+      'X(I) DOES NOT SATISFY X(I)<X(I+1) FOR SOME I',2,1)
   END IF
 END SUBROUTINE BINTK

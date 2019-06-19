@@ -1,7 +1,6 @@
 !** PCHSW
 SUBROUTINE PCHSW(Dfmax,Iextrm,D1,D2,H,Slope,Ierr)
-  !>
-  !  Limits excursion from data for PCHCS
+  !> Limits excursion from data for PCHCS
   !***
   ! **Library:**   SLATEC (PCHIP)
   !***
@@ -30,17 +29,17 @@ SUBROUTINE PCHSW(Dfmax,Iextrm,D1,D2,H,Slope,Ierr)
   !
   !     DFMAX -- (input) maximum allowed difference between F(IEXTRM) and
   !           the cubic determined by derivative values D1,D2.  (assumes
-  !           DFMAX.GT.0.)
+  !           DFMAX>0.)
   !
   !     IEXTRM -- (input) index of the extreme data value.  (assumes
-  !           IEXTRM = 1 or 2 .  Any value .NE.1 is treated as 2.)
+  !           IEXTRM = 1 or 2 .  Any value /=1 is treated as 2.)
   !
   !     D1,D2 -- (input) derivative values at the ends of the interval.
-  !           (Assumes D1*D2 .LE. 0.)
+  !           (Assumes D1*D2 <= 0.)
   !          (output) may be modified if necessary to meet the restriction
   !           imposed by DFMAX.
   !
-  !     H -- (input) interval length.  (Assumes  H.GT.0.)
+  !     H -- (input) interval length.  (Assumes  H>0.)
   !
   !     SLOPE -- (input) data slope on the interval.
   !
@@ -79,12 +78,12 @@ SUBROUTINE PCHSW(Dfmax,Iextrm,D1,D2,H,Slope,Ierr)
   !
   !  DECLARE ARGUMENTS.
   !
-  INTEGER Iextrm, Ierr
-  REAL(SP) Dfmax, D1, D2, H, Slope
+  INTEGER :: Iextrm, Ierr
+  REAL(SP) :: Dfmax, D1, D2, H, Slope
   !
   !  DECLARE LOCAL VARIABLES.
   !
-  REAL(SP) cp, hphi, lambda, nu, phi, radcal, rho, sigma, small, that
+  REAL(SP) :: cp, hphi, lambda, nu, phi, radcal, rho, sigma, small, that
   !
   REAL(SP), PARAMETER :: zero = 0., one = 1., two = 2., three = 3., fact = 100.
   !        THIRD SHOULD BE SLIGHTLY LESS THAN 1/3.
@@ -106,51 +105,51 @@ SUBROUTINE PCHSW(Dfmax,Iextrm,D1,D2,H,Slope,Ierr)
   !
   !  DO MAIN CALCULATION.
   !
-  IF ( D1==zero ) THEN
+  IF( D1==zero ) THEN
     !
-    !        SPECIAL CASE -- D1.EQ.ZERO .
+    !        SPECIAL CASE -- D1=ZERO .
     !
     !          IF D2 IS ALSO ZERO, THIS ROUTINE SHOULD NOT HAVE BEEN CALLED.
-    IF ( D2==zero ) GOTO 200
+    IF( D2==zero ) GOTO 200
     !
     rho = Slope/D2
-    !          EXTREMUM IS OUTSIDE INTERVAL WHEN RHO .GE. 1/3 .
-    IF ( rho<third ) THEN
+    !          EXTREMUM IS OUTSIDE INTERVAL WHEN RHO >= 1/3 .
+    IF( rho<third ) THEN
       that = (two*(three*rho-one))/(three*(two*rho-one))
       phi = that**2*((three*rho-one)/three)
       !
-      !          CONVERT TO DISTANCE FROM F2 IF IEXTRM.NE.1 .
-      IF ( Iextrm/=1 ) phi = phi - rho
+      !          CONVERT TO DISTANCE FROM F2 IF IEXTRM/=1 .
+      IF( Iextrm/=1 ) phi = phi - rho
       !
       !          TEST FOR EXCEEDING LIMIT, AND ADJUST ACCORDINGLY.
       hphi = H*ABS(phi)
-      !           AT THIS POINT, HPHI.GT.0, SO DIVIDE IS OK.
-      IF ( hphi*ABS(D2)>Dfmax ) D2 = SIGN(Dfmax/hphi,D2)
+      !           AT THIS POINT, HPHI>0, SO DIVIDE IS OK.
+      IF( hphi*ABS(D2)>Dfmax ) D2 = SIGN(Dfmax/hphi,D2)
     END IF
   ELSE
     !
     rho = Slope/D1
     lambda = -D2/D1
-    IF ( D2==zero ) THEN
+    IF( D2==zero ) THEN
       !
-      !           SPECIAL CASE -- D2.EQ.ZERO .
+      !           SPECIAL CASE -- D2=ZERO .
       !
-      !             EXTREMUM IS OUTSIDE INTERVAL WHEN RHO .GE. 1/3 .
-      IF ( rho>=third ) GOTO 100
+      !             EXTREMUM IS OUTSIDE INTERVAL WHEN RHO >= 1/3 .
+      IF( rho>=third ) GOTO 100
       cp = two - three*rho
       nu = one - two*rho
       that = one/(three*nu)
     ELSE
-      IF ( lambda<=zero ) GOTO 200
+      IF( lambda<=zero ) GOTO 200
       !
       !           NORMAL CASE -- D1 AND D2 BOTH NONZERO, OPPOSITE SIGNS.
       !
       nu = one - lambda - two*rho
       sigma = one - rho
       cp = nu + sigma
-      IF ( ABS(nu)>small ) THEN
+      IF( ABS(nu)>small ) THEN
         radcal = (nu-(two*rho+one))*nu + sigma**2
-        IF ( radcal<zero ) THEN
+        IF( radcal<zero ) THEN
           !
           !     NEGATIVE VALUE OF RADICAL (SHOULD NEVER OCCUR).
           Ierr = -2
@@ -165,13 +164,13 @@ SUBROUTINE PCHSW(Dfmax,Iextrm,D1,D2,H,Slope,Ierr)
     END IF
     phi = that*((nu*that-cp)*that+one)
     !
-    !          CONVERT TO DISTANCE FROM F2 IF IEXTRM.NE.1 .
-    IF ( Iextrm/=1 ) phi = phi - rho
+    !          CONVERT TO DISTANCE FROM F2 IF IEXTRM/=1 .
+    IF( Iextrm/=1 ) phi = phi - rho
     !
     !          TEST FOR EXCEEDING LIMIT, AND ADJUST ACCORDINGLY.
     hphi = H*ABS(phi)
-    IF ( hphi*ABS(D1)>Dfmax ) THEN
-      !           AT THIS POINT, HPHI.GT.0, SO DIVIDE IS OK.
+    IF( hphi*ABS(D1)>Dfmax ) THEN
+      !           AT THIS POINT, HPHI>0, SO DIVIDE IS OK.
       D1 = SIGN(Dfmax/hphi,D1)
       D2 = -lambda*D1
     END IF

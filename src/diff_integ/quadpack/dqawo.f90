@@ -1,13 +1,12 @@
 !** DQAWO
 SUBROUTINE DQAWO(F,A,B,Omega,Integr,Epsabs,Epsrel,Result,Abserr,Neval,Ier,&
     Leniw,Maxp1,Lenw,Last,Iwork,Work)
-  !>
-  !  Calculate an approximation to a given definite integral
+  !> Calculate an approximation to a given definite integral
   !            I= Integral of F(X)*W(X) over (A,B), where
   !                   W(X) = COS(OMEGA*X)
   !               or  W(X) = SIN(OMEGA*X),
   !            hopefully satisfying the following claim for accuracy
-  !                ABS(I-RESULT).LE.MAX(EPSABS,EPSREL*ABS(I)).
+  !                ABS(I-RESULT)<=MAX(EPSABS,EPSREL*ABS(I)).
   !***
   ! **Library:**   SLATEC (QUADPACK)
   !***
@@ -53,15 +52,15 @@ SUBROUTINE DQAWO(F,A,B,Omega,Integr,Epsabs,Epsrel,Result,Abserr,Neval,Ier,&
   !                     Indicates which of the weight functions is used
   !                     INTEGR = 1      W(X) = COS(OMEGA*X)
   !                     INTEGR = 2      W(X) = SIN(OMEGA*X)
-  !                     If INTEGR.NE.1.AND.INTEGR.NE.2, the routine will
+  !                     If INTEGR/=1 .AND. INTEGR/=2, the routine will
   !                     end with IER = 6.
   !
   !            EPSABS - Double precision
   !                     Absolute accuracy requested
   !            EPSREL - Double precision
   !                     Relative accuracy requested
-  !                     If EPSABS.LE.0 and
-  !                     EPSREL.LT.MAX(50*REL.MACH.ACC.,0.5D-28),
+  !                     If EPSABS<=0 and
+  !                     EPSREL<MAX(50*REL.MACH.ACC.,0.5D-28),
   !                     the routine will end with IER = 6.
   !
   !         ON RETURN
@@ -79,7 +78,7 @@ SUBROUTINE DQAWO(F,A,B,Omega,Integr,Epsabs,Epsrel,Result,Abserr,Neval,Ier,&
   !                     IER = 0 Normal and reliable termination of the
   !                             routine. It is assumed that the requested
   !                             accuracy has been achieved.
-  !                   - IER.GT.0 Abnormal termination of the routine.
+  !                   - IER>0 Abnormal termination of the routine.
   !                             The estimates for integral and error are
   !                             less reliable. It is assumed that the
   !                             requested accuracy has not been achieved.
@@ -121,11 +120,11 @@ SUBROUTINE DQAWO(F,A,B,Omega,Integr,Epsabs,Epsrel,Result,Abserr,Neval,Ier,&
   !                             divergence can occur with any other value
   !                             of IER.
   !                         = 6 The input is invalid, because
-  !                             (EPSABS.LE.0 and
-  !                              EPSREL.LT.MAX(50*REL.MACH.ACC.,0.5D-28))
-  !                             or (INTEGR.NE.1 AND INTEGR.NE.2),
-  !                             or LENIW.LT.2 OR MAXP1.LT.1 or
-  !                             LENW.LT.LENIW*2+MAXP1*25.
+  !                             (EPSABS<=0 and
+  !                              EPSREL<MAX(50*REL.MACH.ACC.,0.5D-28))
+  !                             or (INTEGR/=1 AND INTEGR/=2),
+  !                             or LENIW<2 OR MAXP1<1 or
+  !                             LENW<LENIW*2+MAXP1*25.
   !                             RESULT, ABSERR, NEVAL, LAST are set to
   !                             zero. Except when LENIW, MAXP1 or LENW are
   !                             invalid, WORK(LIMIT*2+1), WORK(LIMIT*3+1),
@@ -138,20 +137,20 @@ SUBROUTINE DQAWO(F,A,B,Omega,Integr,Epsabs,Epsrel,Result,Abserr,Neval,Ier,&
   !                     Dimensioning parameter for IWORK.
   !                     LENIW/2 equals the maximum number of subintervals
   !                     allowed in the partition of the given integration
-  !                     interval (A,B), LENIW.GE.2.
-  !                     If LENIW.LT.2, the routine will end with IER = 6.
+  !                     interval (A,B), LENIW>=2.
+  !                     If LENIW<2, the routine will end with IER = 6.
   !
   !            MAXP1  - Integer
   !                     Gives an upper bound on the number of Chebyshev
   !                     moments which can be stored, i.e. for the
   !                     intervals of lengths ABS(B-A)*2**(-L),
-  !                     L=0,1, ..., MAXP1-2, MAXP1.GE.1
-  !                     If MAXP1.LT.1, the routine will end with IER = 6.
+  !                     L=0,1, ..., MAXP1-2, MAXP1>=1
+  !                     If MAXP1<1, the routine will end with IER = 6.
   !
   !            LENW   - Integer
   !                     Dimensioning parameter for WORK
   !                     LENW must be at least LENIW*2+MAXP1*25.
-  !                     If LENW.LT.(LENIW*2+MAXP1*25), the routine will
+  !                     If LENW<(LENIW*2+MAXP1*25), the routine will
   !                     end with IER = 6.
   !
   !            LAST   - Integer
@@ -168,7 +167,7 @@ SUBROUTINE DQAWO(F,A,B,Omega,Integr,Epsabs,Epsrel,Result,Abserr,Neval,Ier,&
   !                     subintervals, such that WORK(LIMIT*3+IWORK(1)), ..
   !                     WORK(LIMIT*3+IWORK(K)) form a decreasing
   !                     sequence, with LIMIT = LENW/2, and K = LAST
-  !                     if LAST.LE.(LIMIT/2+2), and K = LIMIT+1-LAST
+  !                     if LAST<=(LIMIT/2+2), and K = LIMIT+1-LAST
   !                     otherwise.
   !                     Furthermore, IWORK(LIMIT+1), ..., IWORK(LIMIT+
   !                     LAST) indicate the subdivision levels of the
@@ -224,7 +223,7 @@ SUBROUTINE DQAWO(F,A,B,Omega,Integr,Epsabs,Epsrel,Result,Abserr,Neval,Ier,&
   Last = 0
   Result = 0.0D+00
   Abserr = 0.0D+00
-  IF ( Leniw>=2.AND.Maxp1>=1.AND.Lenw>=(Leniw*2+Maxp1*25) ) THEN
+  IF( Leniw>=2 .AND. Maxp1>=1 .AND. Lenw>=(Leniw*2+Maxp1*25) ) THEN
     !
     !         PREPARE CALL FOR DQAWOE
     !
@@ -241,6 +240,6 @@ SUBROUTINE DQAWO(F,A,B,Omega,Integr,Epsabs,Epsrel,Result,Abserr,Neval,Ier,&
     !
     lvl = 0
   END IF
-  IF ( Ier==6 ) lvl = 0
-  IF ( Ier/=0 ) CALL XERMSG('DQAWO','ABNORMAL RETURN',Ier,lvl)
+  IF( Ier==6 ) lvl = 0
+  IF( Ier/=0 ) CALL XERMSG('DQAWO','ABNORMAL RETURN',Ier,lvl)
 END SUBROUTINE DQAWO

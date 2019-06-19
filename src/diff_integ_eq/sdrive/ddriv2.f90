@@ -1,8 +1,7 @@
 !** DDRIV2
 SUBROUTINE DDRIV2(N,T,Y,F,Tout,Mstate,Nroot,Eps,Ewt,Mint,Work,Lenw,Iwork,&
     Leniw,G,Ierflg)
-  !>
-  !  The function of DDRIV2 is to solve N ordinary differential
+  !> The function of DDRIV2 is to solve N ordinary differential
   !            equations of the form dY(I)/dT = F(Y(I),T), given the
   !            initial conditions Y(I) = YI.  The program has options to
   !            allow the solution of both stiff and non-stiff differential
@@ -332,10 +331,10 @@ SUBROUTINE DDRIV2(N,T,Y,F,Tout,Mstate,Nroot,Eps,Ewt,Mint,Work,Lenw,Iwork,&
   !              8             MINT, WORK, LENW, IWORK, LENIW, F, IERFLG)
   !         C                                 Next to last argument is not
   !         C                                    F if rootfinding is used.
-  !               IF (MSTATE .GT. 2) STOP
+  !               IF(MSTATE > 2) STOP
   !               WRITE(6, 100) TOUT, (Y(I), I=1,N)
   !               TOUT = TOUT + 1.
-  !               IF (TOUT .LE. 10.) GO TO 20
+  !               IF(TOUT <= 10.) GO TO 20
   !          100  FORMAT(...)
   !               END (Sample)
   !
@@ -370,12 +369,12 @@ SUBROUTINE DDRIV2(N,T,Y,F,Tout,Mstate,Nroot,Eps,Ewt,Mint,Work,Lenw,Iwork,&
   CHARACTER(8) :: intgr1
   INTEGER, PARAMETER :: IMPL = 0, MXSTEP = 1000
   !* FIRST EXECUTABLE STATEMENT  DDRIV2
-  IF ( ABS(Mstate)==9 ) THEN
+  IF( ABS(Mstate)==9 ) THEN
     Ierflg = 999
     CALL XERMSG('DDRIV2',&
       'Illegal input.  The magnitude of MSTATE IS 9 .',Ierflg,2)
     RETURN
-  ELSEIF ( ABS(Mstate)==0.OR.ABS(Mstate)>9 ) THEN
+  ELSEIF( ABS(Mstate)==0 .OR. ABS(Mstate)>9 ) THEN
     WRITE (intgr1,'(I8)') Mstate
     Ierflg = 26
     CALL XERMSG('DDRIV2',&
@@ -384,7 +383,7 @@ SUBROUTINE DDRIV2(N,T,Y,F,Tout,Mstate,Nroot,Eps,Ewt,Mint,Work,Lenw,Iwork,&
     Mstate = SIGN(9,Mstate)
     RETURN
   END IF
-  IF ( Mint<1.OR.Mint>3 ) THEN
+  IF( Mint<1 .OR. Mint>3 ) THEN
     WRITE (intgr1,'(I8)') Mint
     Ierflg = 23
     CALL XERMSG('DDRIV2',&
@@ -392,7 +391,7 @@ SUBROUTINE DDRIV2(N,T,Y,F,Tout,Mstate,Nroot,Eps,Ewt,Mint,Work,Lenw,Iwork,&
     Mstate = SIGN(9,Mstate)
     RETURN
   END IF
-  IF ( Mstate>=0 ) THEN
+  IF( Mstate>=0 ) THEN
     nstate = Mstate
     ntask = 1
   ELSE
@@ -400,18 +399,18 @@ SUBROUTINE DDRIV2(N,T,Y,F,Tout,Mstate,Nroot,Eps,Ewt,Mint,Work,Lenw,Iwork,&
     ntask = 3
   END IF
   ewtcom(1) = Ewt
-  IF ( Ewt/=0.D0 ) THEN
+  IF( Ewt/=0.D0 ) THEN
     ierror = 3
   ELSE
     ierror = 2
   END IF
-  IF ( Mint==1 ) THEN
+  IF( Mint==1 ) THEN
     miter = 0
     mxord = 12
-  ELSEIF ( Mint==2 ) THEN
+  ELSEIF( Mint==2 ) THEN
     miter = 2
     mxord = 5
-  ELSEIF ( Mint==3 ) THEN
+  ELSEIF( Mint==3 ) THEN
     miter = 2
     mxord = 12
   END IF
@@ -419,11 +418,11 @@ SUBROUTINE DDRIV2(N,T,Y,F,Tout,Mstate,Nroot,Eps,Ewt,Mint,Work,Lenw,Iwork,&
   CALL DDRIV3(N,T,Y,F,nstate,Tout,ntask,Nroot,Eps,ewtcom,ierror,Mint,miter,&
     IMPL,ml,mu,mxord,hmax,Work,Lenw,Iwork,Leniw,dum_JACOBN,dum_FA,nde,MXSTEP,G,&
     dum_USERS,Ierflg)
-  IF ( nstate<=7 ) THEN
+  IF( nstate<=7 ) THEN
     Mstate = SIGN(nstate,Mstate)
-  ELSEIF ( nstate==11 ) THEN
+  ELSEIF( nstate==11 ) THEN
     Mstate = SIGN(8,Mstate)
-  ELSEIF ( nstate>11 ) THEN
+  ELSEIF( nstate>11 ) THEN
     Mstate = SIGN(9,Mstate)
   END IF
 

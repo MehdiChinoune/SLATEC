@@ -1,7 +1,6 @@
 !** D9PAK
 REAL(DP) FUNCTION D9PAK(Y,N)
-  !>
-  !  Pack a base 2 exponent into a floating point number.
+  !> Pack a base 2 exponent into a floating point number.
   !***
   ! **Library:**   SLATEC (FNLIB)
   !***
@@ -37,15 +36,15 @@ REAL(DP) FUNCTION D9PAK(Y,N)
   !   901009  Routine used I1MACH(7) where it should use I1MACH(10),
   !           Corrected (RWC)
   USE service, ONLY : XERMSG, D1MACH, I1MACH
-  INTEGER N, nsum, ny
+  INTEGER :: N, nsum, ny
   REAL(DP) :: Y, a1n2b
   INTEGER, SAVE :: nmin, nmax
   REAL(DP), PARAMETER :: a1n210 = 3.321928094887362347870319429489D0
   LOGICAL, SAVE :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  D9PAK
-  IF ( first ) THEN
+  IF( first ) THEN
     a1n2b = 1.0D0
-    IF ( I1MACH(10)/=2 ) a1n2b = D1MACH(5)*a1n210
+    IF( I1MACH(10)/=2 ) a1n2b = D1MACH(5)*a1n210
     nmin = INT( a1n2b*I1MACH(15) )
     nmax = INT( a1n2b*I1MACH(16) )
     first = .FALSE.
@@ -54,29 +53,29 @@ REAL(DP) FUNCTION D9PAK(Y,N)
   CALL D9UPAK(Y,D9PAK,ny)
   !
   nsum = N + ny
-  IF ( nsum<nmin ) THEN
+  IF( nsum<nmin ) THEN
     !
     CALL XERMSG('D9PAK','PACKED NUMBER UNDERFLOWS',1,1)
     D9PAK = 0.0D0
     RETURN
   ELSE
-    IF ( nsum>nmax ) CALL XERMSG('D9PAK','PACKED NUMBER OVERFLOWS',&
+    IF( nsum>nmax ) CALL XERMSG('D9PAK','PACKED NUMBER OVERFLOWS',&
       1,2)
     !
-    IF ( nsum==0 ) RETURN
-    IF ( nsum>0 ) THEN
+    IF( nsum==0 ) RETURN
+    IF( nsum>0 ) THEN
       DO
         !
         D9PAK = 2.0D0*D9PAK
         nsum = nsum - 1
-        IF ( nsum==0 ) EXIT
+        IF( nsum==0 ) EXIT
       END DO
     ELSE
       DO
         !
         D9PAK = 0.5D0*D9PAK
         nsum = nsum + 1
-        IF ( nsum==0 ) RETURN
+        IF( nsum==0 ) RETURN
       END DO
     END IF
   END IF

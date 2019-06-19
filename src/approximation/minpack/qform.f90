@@ -1,7 +1,6 @@
 !** QFORM
 SUBROUTINE QFORM(M,N,Q,Ldq,Wa)
-  !>
-  !  Subsidiary to SNSQ and SNSQE
+  !> Subsidiary to SNSQ and SNSQE
   !***
   ! **Library:**   SLATEC
   !***
@@ -57,7 +56,7 @@ SUBROUTINE QFORM(M,N,Q,Ldq,Wa)
   REAL(SP), PARAMETER :: one = 1.0E0, zero = 0.0E0
   !* FIRST EXECUTABLE STATEMENT  QFORM
   minmn = MIN(M,N)
-  IF ( minmn>=2 ) THEN
+  IF( minmn>=2 ) THEN
     DO j = 2, minmn
       jm1 = j - 1
       DO i = 1, jm1
@@ -69,7 +68,7 @@ SUBROUTINE QFORM(M,N,Q,Ldq,Wa)
   !     INITIALIZE REMAINING COLUMNS TO THOSE OF THE IDENTITY MATRIX.
   !
   np1 = N + 1
-  IF ( M>=np1 ) THEN
+  IF( M>=np1 ) THEN
     DO j = np1, M
       DO i = 1, M
         Q(i,j) = zero
@@ -87,7 +86,7 @@ SUBROUTINE QFORM(M,N,Q,Ldq,Wa)
       Q(i,k) = zero
     END DO
     Q(k,k) = one
-    IF ( Wa(k)/=zero ) THEN
+    IF( Wa(k)/=zero ) THEN
       DO j = k, M
         summ = zero
         DO i = k, M

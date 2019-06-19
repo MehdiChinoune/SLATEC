@@ -1,7 +1,6 @@
 !** DXPSI
 REAL(DP) FUNCTION DXPSI(A,Ipsik,Ipsix)
-  !>
-  !  To compute values of the Psi function for DXLEGF.
+  !> To compute values of the Psi function for DXLEGF.
   !***
   ! **Library:**   SLATEC
   !***
@@ -24,7 +23,7 @@ REAL(DP) FUNCTION DXPSI(A,Ipsik,Ipsix)
   !           section.  (WRB)
   !   920127  Revised PURPOSE section of prologue.  (DWL)
 
-  INTEGER i, Ipsik, Ipsix, k, k1, m, n
+  INTEGER :: i, Ipsik, Ipsix, k, k1, m, n
   REAL(DP) :: A, b, c
   !
   !        CNUM(I) AND CDENOM(I) ARE THE ( REDUCED ) NUMERATOR
@@ -40,7 +39,7 @@ REAL(DP) FUNCTION DXPSI(A,Ipsik,Ipsix)
   b = n + A
   k1 = Ipsik - 1
   !
-  !        SERIES EXPANSION FOR A .GT. IPSIX USING IPSIK-1 TERMS.
+  !        SERIES EXPANSION FOR A > IPSIX USING IPSIK-1 TERMS.
   !
   c = 0.D0
   DO i = 1, k1
@@ -48,10 +47,10 @@ REAL(DP) FUNCTION DXPSI(A,Ipsik,Ipsix)
     c = (c+cnum(k)/cdenom(k))/b**2
   END DO
   DXPSI = LOG(b) - (c+.5D0/b)
-  IF ( n/=0 ) THEN
+  IF( n/=0 ) THEN
     b = 0.D0
     !
-    !        RECURRENCE FOR A .LE. IPSIX.
+    !        RECURRENCE FOR A <= IPSIX.
     !
     DO m = 1, n
       b = b + 1.D0/(n-m+A)

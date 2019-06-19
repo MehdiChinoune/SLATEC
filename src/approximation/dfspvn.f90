@@ -1,7 +1,6 @@
 !** DFSPVN
 SUBROUTINE DFSPVN(T,Jhigh,Indexx,X,Ileft,Vnikx)
-  !>
-  !  Subsidiary to DFC
+  !> Subsidiary to DFC
   !***
   ! **Library:**   SLATEC
   !***
@@ -33,10 +32,10 @@ SUBROUTINE DFSPVN(T,Jhigh,Indexx,X,Ileft,Vnikx)
   INTEGER, SAVE :: j = 1
   REAL(DP), SAVE :: deltam(20) = 0.0D0, deltap(20) = 0.0D0
   !* FIRST EXECUTABLE STATEMENT  DFSPVN
-  IF ( Indexx/=2 ) THEN
+  IF( Indexx/=2 ) THEN
     j = 1
     Vnikx(1) = 1.D0
-    IF ( j>=Jhigh ) RETURN
+    IF( j>=Jhigh ) RETURN
   END IF
   DO
     !
@@ -54,7 +53,7 @@ SUBROUTINE DFSPVN(T,Jhigh,Indexx,X,Ileft,Vnikx)
     END DO
     Vnikx(jp1) = vmprev
     j = jp1
-    IF ( j>=Jhigh ) EXIT
+    IF( j>=Jhigh ) EXIT
   END DO
   !
   RETURN

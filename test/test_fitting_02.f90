@@ -5,8 +5,7 @@ MODULE TEST28_MOD
 CONTAINS
   !** DLSEIT
   SUBROUTINE DLSEIT(Lun,Kprint,Ipass)
-    !>
-    !  Quick check for DLSEI.
+    !> Quick check for DLSEI.
     !***
     ! **Library:**   SLATEC
     !***
@@ -38,15 +37,15 @@ CONTAINS
     USE slatec, ONLY : D1MACH, DLSEI, DVOUT, XGETF, XSETF, XERCLR, NUMXER
     USE blas, ONLY : DAXPY
     !     .. Scalar Arguments ..
-    INTEGER Ipass, Kprint, Lun
+    INTEGER :: Ipass, Kprint, Lun
     !     .. Local Scalars ..
     REAL(DP) :: cnorm, relerr(1), relnrm(1), resnrm(1), rnorme, rnorml(1), tnorm
-    INTEGER i, idigit, jdigit, kontrl, ma, mdd, me, meap1, mep1, mg, &
+    INTEGER :: i, idigit, jdigit, kontrl, ma, mdd, me, meap1, mep1, mg, &
       mode, n, nerr, np1
-    LOGICAL fatal
+    LOGICAL :: fatal
     !     .. Local Arrays ..
     REAL(DP) :: d(11,6), err(5), prgopt(4), work(105), x(5)
-    INTEGER ip(17)
+    INTEGER :: ip(17)
     !     .. Intrinsic Functions ..
     INTRINSIC SQRT
     !     .. Data statements ..
@@ -62,7 +61,7 @@ CONTAINS
     !
     !     The array G contains the inequality constraint equations,
     !     written in the sense
-    !     (row vector)*(solution vector) .GE. (given value).
+    !     (row vector)*(solution vector) >= (given value).
     !
     REAL(DP), PARAMETER :: g(5,5) = RESHAPE( [ -1., -1., -1., -1., -1., &
       10., 10., -3., 5., 4.,    -8., 1., -2., -5., 3.,    8., -1., 2., 5., -3., &
@@ -80,7 +79,7 @@ CONTAINS
     !
     REAL(DP), PARAMETER :: sol(5) = [ 1., 2., -1., 3., -4. ]
     !* FIRST EXECUTABLE STATEMENT  DDLSEIT
-    IF ( Kprint>=2 ) WRITE (Lun,99001)
+    IF( Kprint>=2 ) WRITE (Lun,99001)
     !
     99001 FORMAT ('1TEST OF SUBROUTINE DLSEI')
     !
@@ -142,26 +141,26 @@ CONTAINS
     relerr = cnorm/tnorm
     relnrm = (resnrm-rnorml)/resnrm
     !
-    IF ( relerr(1)<=70.0D0*SQRT(D1MACH(4)).AND.relnrm(1)<=5.0D0*D1MACH(4) ) THEN
+    IF( relerr(1)<=70.0D0*SQRT(D1MACH(4)) .AND. relnrm(1)<=5.0D0*D1MACH(4) ) THEN
       Ipass = 1
-      IF ( Kprint>=3 ) WRITE (Lun,99002)
+      IF( Kprint>=3 ) WRITE (Lun,99002)
       99002 FORMAT (/' DLSEI PASSED TEST')
     ELSE
       Ipass = 0
-      IF ( Kprint>=2 ) WRITE (Lun,99003) relerr, relnrm
+      IF( Kprint>=2 ) WRITE (Lun,99003) relerr, relnrm
       99003 FORMAT (/' DLSEI FAILED TEST'/' RELERR = ',1P,D20.6/' RELNRM = ',D20.6)
     END IF
     !
     !     Print out known and computed solutions.
     !
-    IF ( Kprint>=3 ) THEN
+    IF( Kprint>=3 ) THEN
       CALL DVOUT(n,err,'('' RESIDUALS FROM KNOWN LEAST SQUARES SOLUTION'')',&
         idigit)
       CALL DVOUT(n,x,'(/'' SOLUTION COMPUTED BY DLSEI'')',jdigit)
     END IF
     !
-    IF ( Kprint>=2 ) THEN
-      IF ( Kprint/=2.OR.Ipass==0 ) THEN
+    IF( Kprint>=2 ) THEN
+      IF( Kprint/=2 .OR. Ipass==0 ) THEN
         !
         !           Print out the known and computed residual norms.
         !
@@ -183,7 +182,7 @@ CONTAINS
     !     Check calls to error processor.
     !
     CALL XGETF(kontrl)
-    IF ( Kprint<=2 ) THEN
+    IF( Kprint<=2 ) THEN
       CALL XSETF(0)
     ELSE
       CALL XSETF(1)
@@ -191,11 +190,11 @@ CONTAINS
     fatal = .FALSE.
     CALL XERCLR
     !
-    IF ( Kprint>=3 ) WRITE (Lun,99004)
+    IF( Kprint>=3 ) WRITE (Lun,99004)
     99004 FORMAT (/' 2 ERROR MESSAGES EXPECTED')
     !
     CALL DLSEI(d,0,me,ma,mg,n,prgopt,x,rnorme,rnorml(1),mode,work,ip)
-    IF ( NUMXER(nerr)/=2 ) THEN
+    IF( NUMXER(nerr)/=2 ) THEN
       Ipass = 0
       fatal = .TRUE.
     END IF
@@ -203,7 +202,7 @@ CONTAINS
     !
     prgopt(1) = -1
     CALL DLSEI(d,mdd,me,ma,mg,n,prgopt,x,rnorme,rnorml(1),mode,work,ip)
-    IF ( NUMXER(nerr)/=2 ) THEN
+    IF( NUMXER(nerr)/=2 ) THEN
       Ipass = 0
       fatal = .TRUE.
     END IF
@@ -213,28 +212,27 @@ CONTAINS
     !     passed.
     !
     CALL XSETF(kontrl)
-    IF ( fatal ) THEN
-      IF ( Kprint>=2 ) THEN
+    IF( fatal ) THEN
+      IF( Kprint>=2 ) THEN
         WRITE (Lun,99005)
         99005 FORMAT (/' AT LEAST ONE INCORRECT ARGUMENT TEST FAILED')
       END IF
-    ELSEIF ( Kprint>=3 ) THEN
+    ELSEIF( Kprint>=3 ) THEN
       WRITE (Lun,99006)
       99006 FORMAT (/' ALL INCORRECT ARGUMENT TESTS PASSED')
     END IF
     !
     !     Print PASS/FAIL message.
     !
-    IF ( Ipass==1.AND.Kprint>=2 ) WRITE (Lun,99007)
+    IF( Ipass==1 .AND. Kprint>=2 ) WRITE (Lun,99007)
     99007 FORMAT (/' ****************DLSEI PASSED ALL TESTS***************')
-    IF ( Ipass==0.AND.Kprint>=1 ) WRITE (Lun,99008)
+    IF( Ipass==0 .AND. Kprint>=1 ) WRITE (Lun,99008)
     99008 FORMAT (/' ****************DLSEI FAILED SOME TESTS**************')
     RETURN
   END SUBROUTINE DLSEIT
   !** DQCGLS
   SUBROUTINE DQCGLS(Lun,Kprint,Ipass)
-    !>
-    !  Quick check for DGLSS.
+    !> Quick check for DGLSS.
     !***
     ! **Library:**   SLATEC
     !***
@@ -276,7 +274,7 @@ CONTAINS
     !           editorial changes.  (RWC)
     USE slatec, ONLY : D1MACH, DGLSS
     REAL(DP) :: a(4,4), b(4), delmax, delx, r, rnorm(1), work(50)
-    INTEGER i, Ipass, j, kk, Kprint, nerr, kprog, kcase, iwork(20), info, Lun
+    INTEGER :: i, Ipass, j, kk, Kprint, nerr, kprog, kcase, iwork(20), info, Lun
     REAL(DP), PARAMETER :: aa(4,4,2) = RESHAPE( [1.D0, .5D0, 1.D0, .25D0, &
       0.D0, 2.D0, 0.D0, 1.D0, 2.D0, -1.D0, 1.D0, 0.D0, 0.D0, 0.D0, 0.D0, 0.D0, &
       1.D0, 2.D0, -1.D0, 0.D0, 0.D0, 1.D0, 2.D0, 0.D0, -1.D0, 0.D0, 1.D0, 0.D0, &
@@ -294,7 +292,7 @@ CONTAINS
     info = 0
     nerr = 0
     r = MAX(SQRT(D1MACH(4)),1.D-12)
-    IF ( Kprint>=2 ) WRITE (Lun,99001)
+    IF( Kprint>=2 ) WRITE (Lun,99001)
     99001 FORMAT (/' *  DQCGLS - QUICK CHECK FOR DGLSS (DLLSIA AND DULSIA)'/)
     DO kprog = 1, 2
       DO kcase = 1, 2
@@ -310,7 +308,7 @@ CONTAINS
         !
         !           MAKE 3 ROWS IDENTICAL FOR CASE 2.
         !
-        IF ( kcase/=1 ) THEN
+        IF( kcase/=1 ) THEN
           DO i = 2, 3
             DO j = 1, 4
               a(i,j) = a(1,j)
@@ -322,8 +320,8 @@ CONTAINS
         !           SOLVE FOR VECTOR  X .
         !
         info = 0
-        IF ( kprog==1 ) CALL DGLSS(a,4,4,3,b,4,1,rnorm,work,50,iwork,20,info)
-        IF ( kprog==2 ) CALL DGLSS(a,4,3,4,b,4,1,rnorm,work,50,iwork,20,info)
+        IF( kprog==1 ) CALL DGLSS(a,4,4,3,b,4,1,rnorm,work,50,iwork,20,info)
+        IF( kprog==2 ) CALL DGLSS(a,4,3,4,b,4,1,rnorm,work,50,iwork,20,info)
         !
         !           TEST COMPUTED  X, RNORM, AND  INFO .
         !
@@ -334,29 +332,29 @@ CONTAINS
           delmax = MAX(delmax,delx)
         END DO
         !
-        IF ( Kprint>=3 ) WRITE (Lun,99002) list(kprog), kcase, delmax
+        IF( Kprint>=3 ) WRITE (Lun,99002) list(kprog), kcase, delmax
         99002 FORMAT (3X,A,'LSIA, CASE ',I1,'.  MAX ABS ERROR OF',D11.4/)
-        IF ( delmax>=r ) THEN
+        IF( delmax>=r ) THEN
           nerr = nerr + 1
-          IF ( Kprint>=2 ) WRITE (Lun,99003) list(kprog), kcase, delmax
+          IF( Kprint>=2 ) WRITE (Lun,99003) list(kprog), kcase, delmax
           99003 FORMAT ('   PROBLEM WITH ',A,'LSIA, CASE ',I1,'.  MAX ABS ERROR OF',&
             D11.4/)
         END IF
         !
-        IF ( Kprint>=3 ) WRITE (Lun,99004) list(kprog), kcase, rnorm
+        IF( Kprint>=3 ) WRITE (Lun,99004) list(kprog), kcase, rnorm
         99004 FORMAT (3X,A,'LSIA, CASE ',I1,'.  RNORM IS ',D11.4/)
-        IF ( rnorm(1)>=r ) THEN
+        IF( rnorm(1)>=r ) THEN
           nerr = nerr + 1
-          IF ( Kprint>=2 ) WRITE (Lun,99005) list(kprog), kcase, rnorm
+          IF( Kprint>=2 ) WRITE (Lun,99005) list(kprog), kcase, rnorm
           99005 FORMAT ('   PROBLEM WITH ',A,'LSIA, CASE ',I1,&
             '.  RNORM (TOO LARGE) IS',D11.4/)
         END IF
-        IF ( Kprint>=3 ) WRITE (Lun,99006) list(kprog), kcase, info, inf(kk)
+        IF( Kprint>=3 ) WRITE (Lun,99006) list(kprog), kcase, info, inf(kk)
         !
         99006 FORMAT (3X,A,'LSIA, CASE ',I1,'.  INFO=',I1,' (SHOULD = ',I1,')'/)
-        IF ( info/=inf(kk) ) THEN
+        IF( info/=inf(kk) ) THEN
           nerr = nerr + 1
-          IF ( Kprint>=2 ) WRITE (Lun,99007) list(kprog), kcase, info, inf(kk)
+          IF( Kprint>=2 ) WRITE (Lun,99007) list(kprog), kcase, info, inf(kk)
           99007 FORMAT ('   PROBLEM WITH ',A,'LSIA, CASE ',I1,'.  INFO=',I1,&
             ' (SHOULD = ',I1,')'/)
         END IF
@@ -366,11 +364,11 @@ CONTAINS
     !     SUMMARY PRINT
     !
     Ipass = 0
-    IF ( nerr==0 ) Ipass = 1
-    IF ( nerr/=0.AND.Kprint/=0 ) WRITE (Lun,99008) nerr
+    IF( nerr==0 ) Ipass = 1
+    IF( nerr/=0 .AND. Kprint/=0 ) WRITE (Lun,99008) nerr
     99008 FORMAT (/' **** DQCGLS DETECTED A TOTAL OF ',I2,&
       ' PROBLEMS WITH DGLSS. ****'/)
-    IF ( nerr==0.AND.Kprint>1 ) WRITE (Lun,99009)
+    IF( nerr==0 .AND. Kprint>1 ) WRITE (Lun,99009)
     99009 FORMAT ('     DQCGLS DETECTED NO PROBLEMS WITH DGLSS.'/)
     RETURN
   END SUBROUTINE DQCGLS
@@ -381,8 +379,7 @@ PROGRAM TEST28
   USE slatec, ONLY : I1MACH, XSETF, XSETUN, XERMAX
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
-  !>
-  !  Driver for testing SLATEC subprograms
+  !> Driver for testing SLATEC subprograms
   !***
   ! **Library:**   SLATEC
   !***
@@ -428,7 +425,7 @@ PROGRAM TEST28
   !   890618  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900524  Cosmetic changes to code.  (WRB)
-  INTEGER ipass, kprint, lin, lun, nfail
+  INTEGER :: ipass, kprint, lin, lun, nfail
   !* FIRST EXECUTABLE STATEMENT  TEST28
   lun = I1MACH(2)
   lin = I1MACH(1)
@@ -439,7 +436,7 @@ PROGRAM TEST28
   CALL GET_ARGUMENT(kprint)
   CALL XERMAX(1000)
   CALL XSETUN(lun)
-  IF ( kprint<=1 ) THEN
+  IF( kprint<=1 ) THEN
     CALL XSETF(0)
   ELSE
     CALL XSETF(1)
@@ -448,16 +445,16 @@ PROGRAM TEST28
   !     Test DLSEI
   !
   CALL DLSEIT(lun,kprint,ipass)
-  IF ( ipass==0 ) nfail = nfail + 1
+  IF( ipass==0 ) nfail = nfail + 1
   !
   !     Test DGLSS
   !
   CALL DQCGLS(lun,kprint,ipass)
-  IF ( ipass==0 ) nfail = nfail + 1
+  IF( ipass==0 ) nfail = nfail + 1
   !
   !     Write PASS or FAIL message
   !
-  IF ( nfail==0 ) THEN
+  IF( nfail==0 ) THEN
     WRITE (lun,99001)
     99001 FORMAT (/' --------------TEST28 PASSED ALL TESTS----------------')
   ELSE

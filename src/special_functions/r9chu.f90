@@ -1,7 +1,6 @@
 !** R9CHU
 REAL(SP) FUNCTION R9CHU(A,B,Z)
-  !>
-  !  Evaluate for large Z  Z**A * U(A,B,Z) where U is the
+  !> Evaluate for large Z  Z**A * U(A,B,Z) where U is the
   !            logarithmic confluent hypergeometric function.
   !***
   ! **Library:**   SLATEC (FNLIB)
@@ -74,7 +73,7 @@ REAL(SP) FUNCTION R9CHU(A,B,Z)
     !
     bb(4) = g1*bb(3) + g2*bb(2) + g3*bb(1)
     aa(4) = g1*aa(3) + g2*aa(2) + g3*aa(1)
-    IF ( ABS(aa(4)*bb(1)-aa(1)*bb(4))<eps*ABS(bb(4)*bb(1)) ) GOTO 100
+    IF( ABS(aa(4)*bb(1)-aa(1)*bb(4))<eps*ABS(bb(4)*bb(1)) ) GOTO 100
     !
     ! IF OVERFLOWS OR UNDERFLOWS PROVE TO BE A PROBLEM, THE STATEMENTS
     ! BELOW COULD BE ALTERED TO INCORPORATE A DYNAMICALLY ADJUSTED SCALE
@@ -89,7 +88,7 @@ REAL(SP) FUNCTION R9CHU(A,B,Z)
   !
   100  R9CHU = aa(4)/bb(4)
   !
-  IF ( R9CHU<sqeps.OR.R9CHU>1.0/sqeps )&
+  IF( R9CHU<sqeps .OR. R9CHU>1.0/sqeps )&
     CALL XERMSG('R9CHU','ANSWER LESS THAN HALF PRECISION',2,1)
   !
 END FUNCTION R9CHU

@@ -1,7 +1,6 @@
 !** PCHST
 REAL(SP) FUNCTION PCHST(Arg1,Arg2)
-  !>
-  !  PCHIP Sign-Testing Routine
+  !> PCHIP Sign-Testing Routine
   !***
   ! **Library:**   SLATEC (PCHIP)
   !***
@@ -44,7 +43,7 @@ REAL(SP) FUNCTION PCHST(Arg1,Arg2)
   !
   !  DECLARE ARGUMENTS.
   !
-  REAL(SP) Arg1, Arg2
+  REAL(SP) :: Arg1, Arg2
   !
   !  DECLARE LOCAL VARIABLES.
   !
@@ -54,7 +53,7 @@ REAL(SP) FUNCTION PCHST(Arg1,Arg2)
   !
   !* FIRST EXECUTABLE STATEMENT  PCHST
   PCHST = SIGN(one,Arg1)*SIGN(one,Arg2)
-  IF ( (Arg1==zero).OR.(Arg2==zero) ) PCHST = zero
+  IF( (Arg1==zero) .OR. (Arg2==zero) ) PCHST = zero
   !
   !------------- LAST LINE OF PCHST FOLLOWS ------------------------------
 END FUNCTION PCHST

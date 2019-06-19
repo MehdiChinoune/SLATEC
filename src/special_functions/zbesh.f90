@@ -1,7 +1,6 @@
 !** ZBESH
 SUBROUTINE ZBESH(Zr,Zi,Fnu,Kode,M,N,Cyr,Cyi,Nz,Ierr)
-  !>
-  !  Compute a sequence of the Hankel functions H(m,a,z)
+  !> Compute a sequence of the Hankel functions H(m,a,z)
   !            for superscript m=1 or 2, real nonnegative orders a=b,
   !            b+1,... where b>0, and nonzero complex argument z.  A
   !            scaling option is available to help avoid overflow.
@@ -166,7 +165,7 @@ SUBROUTINE ZBESH(Zr,Zi,Fnu,Kode,M,N,Cyr,Cyi,Nz,Ierr)
   !   920811  Prologue revised.  (DWL)
   USE service, ONLY : D1MACH, I1MACH
   !     COMPLEX CY,Z,ZN,ZT,CSGN
-  INTEGER i, Ierr, inu, inuh, ir, k, Kode, k1, k2, M, mm, mr, N, nn, nuf, nw, Nz
+  INTEGER :: i, Ierr, inu, inuh, ir, k, Kode, k1, k2, M, mm, mr, N, nn, nuf, nw, Nz
   REAL(DP) :: aa, alim, aln, arg, az, Cyi(N), Cyr(N), dig, elim, fmm, fn, Fnu, &
     fnul, rhpi, rl, r1m5, sgn, str, tol, ufl, Zi, zni, znr, Zr, zti, bb, ascle, &
     rtol, atol, sti, csgnr, csgni
@@ -176,19 +175,19 @@ SUBROUTINE ZBESH(Zr,Zi,Fnu,Kode,M,N,Cyr,Cyi,Nz,Ierr)
   !* FIRST EXECUTABLE STATEMENT  ZBESH
   Ierr = 0
   Nz = 0
-  IF ( Zr==0.0D0.AND.Zi==0.0D0 ) Ierr = 1
-  IF ( Fnu<0.0D0 ) Ierr = 1
-  IF ( M<1.OR.M>2 ) Ierr = 1
-  IF ( Kode<1.OR.Kode>2 ) Ierr = 1
-  IF ( N<1 ) Ierr = 1
-  IF ( Ierr/=0 ) RETURN
+  IF( Zr==0.0D0 .AND. Zi==0.0D0 ) Ierr = 1
+  IF( Fnu<0.0D0 ) Ierr = 1
+  IF( M<1 .OR. M>2 ) Ierr = 1
+  IF( Kode<1 .OR. Kode>2 ) Ierr = 1
+  IF( N<1 ) Ierr = 1
+  IF( Ierr/=0 ) RETURN
   nn = N
   !-----------------------------------------------------------------------
   !     SET PARAMETERS RELATED TO MACHINE CONSTANTS.
   !     TOL IS THE APPROXIMATE UNIT ROUNDOFF LIMITED TO 1.0E-18.
   !     ELIM IS THE APPROXIMATE EXPONENTIAL OVER- AND UNDERFLOW LIMIT.
-  !     EXP(-ELIM).LT.EXP(-ALIM)=EXP(-ELIM)/TOL    AND
-  !     EXP(ELIM).GT.EXP(ALIM)=EXP(ELIM)*TOL       ARE INTERVALS NEAR
+  !     EXP(-ELIM)<EXP(-ALIM)=EXP(-ELIM)/TOL    AND
+  !     EXP(ELIM)>EXP(ALIM)=EXP(ELIM)*TOL       ARE INTERVALS NEAR
   !     UNDERFLOW AND OVERFLOW LIMITS WHERE SCALED ARITHMETIC IS DONE.
   !     RL IS THE LOWER BOUNDARY OF THE ASYMPTOTIC EXPANSION FOR LARGE Z.
   !     DIG = NUMBER OF BASE 10 DIGITS IN TOL = 10**(-DIG).
@@ -219,64 +218,64 @@ SUBROUTINE ZBESH(Zr,Zi,Fnu,Kode,M,N,Cyr,Cyi,Nz,Ierr)
   aa = 0.5D0/tol
   bb = I1MACH(9)*0.5D0
   aa = MIN(aa,bb)
-  IF ( az>aa ) GOTO 300
-  IF ( fn>aa ) GOTO 300
+  IF( az>aa ) GOTO 300
+  IF( fn>aa ) GOTO 300
   aa = SQRT(aa)
-  IF ( az>aa ) Ierr = 3
-  IF ( fn>aa ) Ierr = 3
+  IF( az>aa ) Ierr = 3
+  IF( fn>aa ) Ierr = 3
   !-----------------------------------------------------------------------
   !     OVERFLOW TEST ON THE LAST MEMBER OF THE SEQUENCE
   !-----------------------------------------------------------------------
   ufl = D1MACH(1)*1.0D+3
-  IF ( az>=ufl ) THEN
-    IF ( Fnu>fnul ) THEN
+  IF( az>=ufl ) THEN
+    IF( Fnu>fnul ) THEN
       !-----------------------------------------------------------------------
-      !     UNIFORM ASYMPTOTIC EXPANSIONS FOR FNU.GT.FNUL
+      !     UNIFORM ASYMPTOTIC EXPANSIONS FOR FNU>FNUL
       !-----------------------------------------------------------------------
       mr = 0
-      IF ( .NOT.((znr>=0.0D0).AND.(znr/=0.0D0.OR.zni>=0.0D0.OR.M/=2)) ) THEN
+      IF( .NOT. ((znr>=0.0D0) .AND. (znr/=0.0D0 .OR. zni>=0.0D0 .OR. M/=2)) ) THEN
         mr = -mm
-        IF ( znr==0.0D0.AND.zni<0.0D0 ) THEN
+        IF( znr==0.0D0 .AND. zni<0.0D0 ) THEN
           znr = -znr
           zni = -zni
         END IF
       END IF
       CALL ZBUNK(znr,zni,Fnu,Kode,mr,nn,Cyr,Cyi,nw,tol,elim,alim)
-      IF ( nw<0 ) GOTO 200
+      IF( nw<0 ) GOTO 200
       Nz = Nz + nw
     ELSE
-      IF ( fn>1.0D0 ) THEN
-        IF ( fn>2.0D0 ) THEN
+      IF( fn>1.0D0 ) THEN
+        IF( fn>2.0D0 ) THEN
           CALL ZUOIK(znr,zni,Fnu,Kode,2,nn,Cyr,Cyi,nuf,tol,elim,alim)
-          IF ( nuf<0 ) GOTO 100
+          IF( nuf<0 ) GOTO 100
           Nz = Nz + nuf
           nn = nn - nuf
           !-----------------------------------------------------------------------
           !     HERE NN=N OR NN=0 SINCE NUF=0,NN, OR -1 ON RETURN FROM CUOIK
           !     IF NUF=NN, THEN CY(I)=CZERO FOR ALL I
           !-----------------------------------------------------------------------
-          IF ( nn==0 ) THEN
-            IF ( znr<0.0D0 ) GOTO 100
+          IF( nn==0 ) THEN
+            IF( znr<0.0D0 ) GOTO 100
             RETURN
           END IF
-        ELSEIF ( az<=tol ) THEN
+        ELSEIF( az<=tol ) THEN
           arg = 0.5D0*az
           aln = -fn*LOG(arg)
-          IF ( aln>elim ) GOTO 100
+          IF( aln>elim ) GOTO 100
         END IF
       END IF
-      IF ( (znr<0.0D0).OR.(znr==0.0D0.AND.zni<0.0D0.AND.M==2) ) THEN
+      IF( (znr<0.0D0) .OR. (znr==0.0D0 .AND. zni<0.0D0 .AND. M==2) ) THEN
         !-----------------------------------------------------------------------
         !     LEFT HALF PLANE COMPUTATION
         !-----------------------------------------------------------------------
         mr = -mm
         CALL ZACON(znr,zni,Fnu,Kode,mr,nn,Cyr,Cyi,nw,rl,fnul,tol,elim,alim)
-        IF ( nw<0 ) GOTO 200
+        IF( nw<0 ) GOTO 200
         Nz = nw
       ELSE
         !-----------------------------------------------------------------------
-        !     RIGHT HALF PLANE COMPUTATION, XN.GE.0. .AND. (XN.NE.0. .OR.
-        !     YN.GE.0. .OR. M=1)
+        !     RIGHT HALF PLANE COMPUTATION, XN>=0. .AND. (XN/=0.  .OR. 
+        !     YN>=0. .OR. M=1)
         !-----------------------------------------------------------------------
         CALL ZBKNU(znr,zni,Fnu,Kode,nn,Cyr,Cyi,Nz,tol,elim,alim)
       END IF
@@ -300,7 +299,7 @@ SUBROUTINE ZBESH(Zr,Zi,Fnu,Kode,M,N,Cyr,Cyi,Nz,Ierr)
     !     ZNR = -RHPI*SIN(ARG)
     csgni = rhpi*COS(arg)
     csgnr = -rhpi*SIN(arg)
-    IF ( MOD(inuh,2)/=0 ) THEN
+    IF( MOD(inuh,2)/=0 ) THEN
       !     ZNR = -ZNR
       !     ZNI = -ZNI
       csgnr = -csgnr
@@ -319,7 +318,7 @@ SUBROUTINE ZBESH(Zr,Zi,Fnu,Kode,M,N,Cyr,Cyi,Nz,Ierr)
       aa = Cyr(i)
       bb = Cyi(i)
       atol = 1.0D0
-      IF ( MAX(ABS(aa),ABS(bb))<=ascle ) THEN
+      IF( MAX(ABS(aa),ABS(bb))<=ascle ) THEN
         aa = aa*rtol
         bb = bb*rtol
         atol = tol
@@ -338,7 +337,7 @@ SUBROUTINE ZBESH(Zr,Zi,Fnu,Kode,M,N,Cyr,Cyi,Nz,Ierr)
   Ierr = 2
   RETURN
   200 CONTINUE
-  IF ( nw==(-1) ) GOTO 100
+  IF( nw==(-1) ) GOTO 100
   Nz = 0
   Ierr = 5
   RETURN

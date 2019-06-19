@@ -1,7 +1,6 @@
 !** CPEVLR
 SUBROUTINE CPEVLR(N,M,A,X,C)
-  !>
-  !  Subsidiary to CPZERO
+  !> Subsidiary to CPZERO
   !***
   ! **Library:**   SLATEC
   !***
@@ -31,8 +30,8 @@ SUBROUTINE CPEVLR(N,M,A,X,C)
     cim1 = A(j)
     mini = MIN(M+1,N+2-j)
     DO i = 1, mini
-      IF ( j/=1 ) ci = C(i)
-      IF ( i/=1 ) cim1 = C(i-1)
+      IF( j/=1 ) ci = C(i)
+      IF( i/=1 ) cim1 = C(i-1)
       C(i) = cim1 + X*ci
     END DO
   END DO

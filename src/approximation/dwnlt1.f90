@@ -1,7 +1,6 @@
 !** DWNLT1
 SUBROUTINE DWNLT1(I,Lend,Mend,Ir,Mdw,Recalc,Imax,Hbar,H,Scalee,W)
-  !>
-  !  Subsidiary to WNLIT
+  !> Subsidiary to WNLIT
   !***
   ! **Library:**   SLATEC
   !***
@@ -32,7 +31,7 @@ SUBROUTINE DWNLT1(I,Lend,Mend,Ir,Mdw,Recalc,Imax,Hbar,H,Scalee,W)
   INTEGER :: j, k
   !
   !* FIRST EXECUTABLE STATEMENT  DWNLT1
-  IF ( Ir/=1.AND.(.NOT.Recalc) ) THEN
+  IF( Ir/=1 .AND. ( .NOT. Recalc) ) THEN
     !
     !        Update column SS=sum of squares.
     !
@@ -48,7 +47,7 @@ SUBROUTINE DWNLT1(I,Lend,Mend,Ir,Mdw,Recalc,Imax,Hbar,H,Scalee,W)
   !
   !     If required, recalculate column SS, using rows IR through MEND.
   !
-  IF ( Recalc ) THEN
+  IF( Recalc ) THEN
     DO j = I, Lend
       H(j) = 0.D0
       DO k = Ir, Mend

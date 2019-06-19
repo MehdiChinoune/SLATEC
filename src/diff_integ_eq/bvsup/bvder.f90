@@ -1,7 +1,6 @@
 !** BVDER
 SUBROUTINE BVDER(X,Y,Yp,G)
-  !>
-  !  Subsidiary to BVSUP
+  !> Subsidiary to BVSUP
   !***
   ! **Library:**   SLATEC
   !***
@@ -33,7 +32,7 @@ SUBROUTINE BVDER(X,Y,Yp,G)
   !           0   ( if  NEQIVP = 0 )
   !     IVP =
   !           Number of differential equations integrated due to
-  !           the original boundary value problem   ( if  NEQIVP .GT. 0 )
+  !           the original boundary value problem   ( if  NEQIVP > 0 )
   !
   !     NOFST - For problems with auxiliary initial value equations,
   !             NOFST communicates to the routine FMAT how to access
@@ -65,7 +64,7 @@ SUBROUTINE BVDER(X,Y,Yp,G)
   REAL(SP) :: G(:), Y(:), Yp(:), X
   INTEGER :: j, k, l, na
   !* FIRST EXECUTABLE STATEMENT  BVDER
-  IF ( ivp_com>0 ) STOP
+  IF( ivp_com>0 ) STOP
   nofst_com = ivp_com
   na = 1
   DO k = 1, nfc_com
@@ -74,13 +73,13 @@ SUBROUTINE BVDER(X,Y,Yp,G)
     na = na + ncomp_com
   END DO
   !
-  IF ( inhomo_com/=1 ) RETURN
+  IF( inhomo_com/=1 ) RETURN
   CALL FMAT(X,Y(na:),Yp(na:))
   !
-  IF ( igofx_com==0 ) RETURN
-  IF ( X/=xsav_com ) THEN
-    IF ( ivp_com==0 ) CALL GVEC(X,G)
-    IF ( ivp_com>0 ) STOP
+  IF( igofx_com==0 ) RETURN
+  IF( X/=xsav_com ) THEN
+    IF( ivp_com==0 ) CALL GVEC(X,G)
+    IF( ivp_com>0 ) STOP
     xsav_com = X
   END IF
   !

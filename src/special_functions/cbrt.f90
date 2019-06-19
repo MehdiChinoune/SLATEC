@@ -1,7 +1,6 @@
 !** CBRT
 REAL(SP) FUNCTION CBRT(X)
-  !>
-  !  Compute the cube root.
+  !> Compute the cube root.
   !***
   ! **Library:**   SLATEC (FNLIB)
   !***
@@ -37,7 +36,7 @@ REAL(SP) FUNCTION CBRT(X)
   !* FIRST EXECUTABLE STATEMENT  CBRT
   !
   CBRT = 0.0
-  IF ( X==0. ) RETURN
+  IF( X==0. ) RETURN
   !
   CALL R9UPAK(ABS(X),y,n)
   ixpnt = n/3

@@ -1,7 +1,6 @@
 !** DCPPLT
 SUBROUTINE DCPPLT(N,Nelt,Ia,Ja,A,Isym,Iunit)
-  !>
-  !  Printer Plot of SLAP Column Format Matrix.
+  !> Printer Plot of SLAP Column Format Matrix.
   !            Routine to print out a SLAP Column format matrix in a
   !            "printer plot" graphical representation.
   !***
@@ -30,7 +29,7 @@ SUBROUTINE DCPPLT(N,Nelt,Ia,Ja,A,Isym,Iunit)
   !- Arguments:
   ! N      :IN       Integer
   !         Order of the Matrix.
-  !         If N.gt.MAXORD, only the leading MAXORD x MAXORD
+  !         If N>MAXORD, only the leading MAXORD x MAXORD
   !         submatrix will be printed.  (Currently MAXORD = 225.)
   ! NELT   :IN       Integer.
   !         Number of non-zeros stored in A.
@@ -97,7 +96,7 @@ SUBROUTINE DCPPLT(N,Nelt,Ia,Ja,A,Isym,Iunit)
   !
   !- Cautions:
   !     This routine will attempt to write to the Fortran logical output
-  !     unit IUNIT, if IUNIT .ne. 0.  Thus, the user must make sure that
+  !     unit IUNIT, if IUNIT /= 0.  Thus, the user must make sure that
   !     this logical unit is attached to a file or terminal before calling
   !     this routine with a non-zero value for IUNIT.  This routine does
   !     not check for the validity of a non-zero IUNIT unit number.
@@ -128,14 +127,14 @@ SUBROUTINE DCPPLT(N,Nelt,Ia,Ja,A,Isym,Iunit)
   !   930701  Updated CATEGORY section.  (FNF, WRB)
 
   !     .. Scalar Arguments ..
-  INTEGER Isym, Iunit, N, Nelt
+  INTEGER :: Isym, Iunit, N, Nelt
   !     .. Array Arguments ..
   REAL(DP) :: A(Nelt)
-  INTEGER Ia(Nelt), Ja(Nelt)
+  INTEGER :: Ia(Nelt), Ja(Nelt)
   !     .. Parameters ..
   INTEGER, PARAMETER :: MAXORD = 225
   !     .. Local Scalars ..
-  INTEGER i, icol, irow, j, jbgn, jend, nmax
+  INTEGER :: i, icol, irow, j, jbgn, jend, nmax
   !     .. Local Arrays ..
   CHARACTER chmat(MAXORD)*(MAXORD)
   !     .. Intrinsic Functions ..
@@ -153,30 +152,30 @@ SUBROUTINE DCPPLT(N,Nelt,Ia,Ja,A,Isym,Iunit)
     jend = Ja(icol+1) - 1
     DO j = jbgn, jend
       irow = Ia(j)
-      IF ( irow<=nmax ) THEN
-        IF ( Isym/=0 ) THEN
+      IF( irow<=nmax ) THEN
+        IF( Isym/=0 ) THEN
           !         Put in non-sym part as well...
-          IF ( A(j)==0.0D0 ) THEN
+          IF( A(j)==0.0D0 ) THEN
             chmat(irow)(icol:icol) = '0'
-          ELSEIF ( A(j)>0.0D0 ) THEN
+          ELSEIF( A(j)>0.0D0 ) THEN
             chmat(irow)(icol:icol) = '#'
           ELSE
             chmat(irow)(icol:icol) = '*'
           END IF
         END IF
-        IF ( irow==icol ) THEN
+        IF( irow==icol ) THEN
           !         Diagonal entry.
-          IF ( A(j)==0.0D0 ) THEN
+          IF( A(j)==0.0D0 ) THEN
             chmat(irow)(icol:icol) = '0'
-          ELSEIF ( A(j)>0.0D0 ) THEN
+          ELSEIF( A(j)>0.0D0 ) THEN
             chmat(irow)(icol:icol) = 'D'
           ELSE
             chmat(irow)(icol:icol) = 'N'
           END IF
           !         Off-Diagonal entry
-        ELSEIF ( A(j)==0.0D0 ) THEN
+        ELSEIF( A(j)==0.0D0 ) THEN
           chmat(irow)(icol:icol) = '0'
-        ELSEIF ( A(j)>0.0D0 ) THEN
+        ELSEIF( A(j)>0.0D0 ) THEN
           chmat(irow)(icol:icol) = '#'
         ELSE
           chmat(irow)(icol:icol) = '*'
@@ -191,7 +190,7 @@ SUBROUTINE DCPPLT(N,Nelt,Ia,Ja,A,Isym,Iunit)
   99001 FORMAT (/'**** Picture of Column SLAP matrix follows ****'/&
     ' N, NELT and Density = ',2I10,D16.7)
   WRITE (Iunit,99002) (MOD(i,10),i=1,nmax)
-  !      The following assumes MAXORD.le.225.
+  !      The following assumes MAXORD<=225.
   99002 FORMAT (4X,225(I1))
   !
   !         Write out the character representations matrix elements.

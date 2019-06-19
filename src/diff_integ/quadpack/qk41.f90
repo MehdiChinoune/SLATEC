@@ -1,7 +1,6 @@
 !** QK41
 SUBROUTINE QK41(F,A,B,Result,Abserr,Resabs,Resasc)
-  !>
-  !  To compute I = Integral of F over (A,B), with error
+  !> To compute I = Integral of F over (A,B), with error
   !                           estimate
   !                       J = Integral of ABS(F) over (A,B)
   !***
@@ -182,8 +181,8 @@ SUBROUTINE QK41(F,A,B,Result,Abserr,Resabs,Resasc)
   Resabs = Resabs*dhlgth
   Resasc = Resasc*dhlgth
   Abserr = ABS((resk-resg)*hlgth)
-  IF ( Resasc/=0.0E+00.AND.Abserr/=0.E+00 )&
+  IF( Resasc/=0.0E+00 .AND. Abserr/=0.E+00 )&
     Abserr = Resasc*MIN(0.1E+01,(0.2E+03*Abserr/Resasc)**1.5E+00)
-  IF ( Resabs>uflow/(0.5E+02*epmach) ) Abserr = MAX((epmach*0.5E+02)*Resabs,&
+  IF( Resabs>uflow/(0.5E+02*epmach) ) Abserr = MAX((epmach*0.5E+02)*Resabs,&
     Abserr)
 END SUBROUTINE QK41

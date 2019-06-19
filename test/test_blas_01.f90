@@ -7,8 +7,7 @@ MODULE TEST17_MOD
 CONTAINS
   !** BLACHK
   SUBROUTINE BLACHK(Lun,Kprint,Ipass)
-    !>
-    !  Quick check for Basic Linear Algebra Subprograms.
+    !> Quick check for Basic Linear Algebra Subprograms.
     !***
     ! **Library:**   SLATEC
     !***
@@ -34,7 +33,7 @@ CONTAINS
     !   890618  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-    INTEGER Lun, Ipass, Kprint
+    INTEGER :: Lun, Ipass, Kprint
     REAL, PARAMETER :: sfac = .625E-1
     REAL(DP), PARAMETER :: dfac = .625D-1, dqfac = 0.625D-1
     INTEGER, PARAMETER :: jtest(38) = [ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, &
@@ -43,10 +42,10 @@ CONTAINS
     nprint_com = Lun
     Ipass = 1
     !
-    IF ( Kprint>=2 ) WRITE (nprint_com,99001)
+    IF( Kprint>=2 ) WRITE (nprint_com,99001)
     99001 FORMAT ('1','QUICK CHECK OF 38 BASIC LINEAR ALGEBRA SUBROUTINES'/)
     DO icase_com = 1, 38
-      IF ( jtest(icase_com)/=0 ) THEN
+      IF( jtest(icase_com)/=0 ) THEN
         CALL HEADER(Kprint)
         !
         !         INITIALIZE  PASS, INCX, INCY, AND MODE FOR A NEW CASE.
@@ -64,21 +63,20 @@ CONTAINS
             CALL CHECK2(sfac,dfac,dqfac,Kprint)
         END SELECT
         !                                                  PRINT
-        IF ( Kprint>=2.AND.PASs ) WRITE (nprint_com,99002)
+        IF( Kprint>=2 .AND. PASs ) WRITE (nprint_com,99002)
         99002 FORMAT ('+',39X,'PASS')
-        IF ( .NOT.PASs ) Ipass = 0
+        IF( .NOT. PASs ) Ipass = 0
       END IF
     END DO
-    IF ( Kprint>=2.AND.Ipass==1 ) WRITE (nprint_com,99003)
+    IF( Kprint>=2 .AND. Ipass==1 ) WRITE (nprint_com,99003)
     99003 FORMAT (/' ****************BLAS PASSED ALL TESTS****************')
-    IF ( Kprint>=1.AND.Ipass==0 ) WRITE (nprint_com,99004)
+    IF( Kprint>=1 .AND. Ipass==0 ) WRITE (nprint_com,99004)
     99004 FORMAT (/' ****************BLAS FAILED SOME TESTS***************')
     RETURN
   END SUBROUTINE BLACHK
   !** HEADER
   SUBROUTINE HEADER(Kprint)
-    !>
-    !  Print header for BLAS quick checks.
+    !> Print header for BLAS quick checks.
     !***
     ! **Library:**   SLATEC
     !***
@@ -101,15 +99,14 @@ CONTAINS
       ' CSWAP', ' SNRM2', ' DNRM2', 'SCNRM2', ' SASUM', ' DASUM', 'SCASUM', &
       ' SSCAL', ' DSCAL', ' CSCAL', 'CSSCAL', 'ISAMAX', 'IDAMAX', 'ICAMAX' ]
     !* FIRST EXECUTABLE STATEMENT  HEADER
-    IF ( Kprint>=2 ) WRITE (nprint_com,99001) icase_com, l(icase_com)
+    IF( Kprint>=2 ) WRITE (nprint_com,99001) icase_com, l(icase_com)
     !
     99001 FORMAT (' Test of subprogram number',I3,2X,A)
     RETURN
   END SUBROUTINE HEADER
   !** CHECK2
   SUBROUTINE CHECK2(Sfac,Dfac,Dqfac,Kprint)
-    !>
-    !  (UNKNOWN)
+    !> (UNKNOWN)
     !***
     ! **Library:**   SLATEC
     !***
@@ -231,8 +228,7 @@ CONTAINS
   END SUBROUTINE CHECK2
   !** ITEST
   SUBROUTINE ITEST(Leng,Icomp,Itrue,Kprint)
-    !>
-    !  Compare arrays ICOMP and ITRUE.
+    !> Compare arrays ICOMP and ITRUE.
     !***
     ! **Library:**   SLATEC
     !***
@@ -261,20 +257,20 @@ CONTAINS
     !   920211  Code restructured and information added to the DESCRIPTION
     !           section.  (WRB)
 
-    INTEGER i, Leng, Kprint, id
-    INTEGER Icomp(*), Itrue(*)
+    INTEGER :: i, Leng, Kprint, id
+    INTEGER :: Icomp(*), Itrue(*)
     !* FIRST EXECUTABLE STATEMENT  ITEST
     DO i = 1, Leng
-      IF ( Icomp(i)/=Itrue(i) ) THEN
+      IF( Icomp(i)/=Itrue(i) ) THEN
         !
         !         Here ICOMP(I) is not equal to ITRUE(I).
         !
-        IF ( PASs ) THEN
+        IF( PASs ) THEN
           !
           !           Print FAIL message and header.
           !
           PASs = .FALSE.
-          IF ( Kprint>=3 ) THEN
+          IF( Kprint>=3 ) THEN
             WRITE (nprint_com,99001)
             99001 FORMAT ('+',39X,'FAIL')
             WRITE (nprint_com,99002)
@@ -282,7 +278,7 @@ CONTAINS
               2X,'DIFFERENCE'/1X)
           END IF
         END IF
-        IF ( Kprint>=3 ) THEN
+        IF( Kprint>=3 ) THEN
           id = Icomp(i) - Itrue(i)
           WRITE (nprint_com,99003) icase_com, n_com, incx_com, incy_com, mode_com, &
             i, Icomp(i), Itrue(i), id
@@ -294,8 +290,7 @@ CONTAINS
   END SUBROUTINE ITEST
   !** STEST
   SUBROUTINE STEST(Leng,Scomp,Strue,Ssize,Sfac,Kprint)
-    !>
-    !  Compare arrays SCOMP and STRUE.
+    !> Compare arrays SCOMP and STRUE.
     !***
     ! **Library:**   SLATEC
     !***
@@ -329,23 +324,23 @@ CONTAINS
     !   920211  Code restructured and information added to the DESCRIPTION
     !           section.  (WRB)
     USE slatec, ONLY : R1MACH
-    INTEGER i, Leng, Kprint
-    REAL(SP) Scomp(*), Strue(*), Ssize(*), Sfac, sd
+    INTEGER :: i, Leng, Kprint
+    REAL(SP) :: Scomp(*), Strue(*), Ssize(*), Sfac, sd
     REAL(SP) :: releps = 0.0E0
     !* FIRST EXECUTABLE STATEMENT  STEST
-    IF ( releps==0.0E0 ) releps = R1MACH(4)
+    IF( releps==0.0E0 ) releps = R1MACH(4)
     DO i = 1, Leng
       sd = ABS(Scomp(i)-Strue(i))
-      IF ( Sfac*sd>ABS(Ssize(i))*releps ) THEN
+      IF( Sfac*sd>ABS(Ssize(i))*releps ) THEN
         !
         !         Here SCOMP(I) is not close to STRUE(I).
         !
-        IF ( PASs ) THEN
+        IF( PASs ) THEN
           !
           !           Print FAIL message and header.
           !
           PASs = .FALSE.
-          IF ( Kprint>=3 ) THEN
+          IF( Kprint>=3 ) THEN
             WRITE (nprint_com,99001)
             99001 FORMAT ('+',39X,'FAIL')
             WRITE (nprint_com,99002)
@@ -353,7 +348,7 @@ CONTAINS
               2X,'DIFFERENCE',5X,'SIZE(I)'/1X)
           END IF
         END IF
-        IF ( Kprint>=3 ) WRITE (nprint_com,99003) icase_com, n_com, incx_com, &
+        IF( Kprint>=3 ) WRITE (nprint_com,99003) icase_com, n_com, incx_com, &
           incy_com, mode_com, i, Scomp(i), Strue(i), sd, Ssize(i)
         99003 FORMAT (1X,I4,I3,3I5,I3,2E36.8,2E12.4)
       END IF
@@ -362,8 +357,7 @@ CONTAINS
   END SUBROUTINE STEST
   !** DTEST
   SUBROUTINE DTEST(Leng,Dcomp,Dtrue,Dsize,Dfac,Kprint)
-    !>
-    !  Compare arrays DCOMP and DTRUE.
+    !> Compare arrays DCOMP and DTRUE.
     !***
     ! **Library:**   SLATEC
     !***
@@ -395,23 +389,23 @@ CONTAINS
     !   920211  Code restructured and information added to the DESCRIPTION
     !           section.  (WRB)
     USE slatec, ONLY : D1MACH
-    INTEGER i, Leng, Kprint
+    INTEGER :: i, Leng, Kprint
     REAL(DP) :: Dcomp(*), Dtrue(*), Dsize(*), Dfac, dd
     REAL(DP) :: releps = 0.0D0
     !* FIRST EXECUTABLE STATEMENT  DTEST
-    IF ( releps==0.0D0 ) releps = D1MACH(4)
+    IF( releps==0.0D0 ) releps = D1MACH(4)
     DO i = 1, Leng
       dd = ABS(Dcomp(i)-Dtrue(i))
-      IF ( Dfac*dd>ABS(Dsize(i))*releps ) THEN
+      IF( Dfac*dd>ABS(Dsize(i))*releps ) THEN
         !
         !         Here DCOMP(I) is not close to DTRUE(I).
         !
-        IF ( PASs ) THEN
+        IF( PASs ) THEN
           !
           !           Print FAIL message and header.
           !
           PASs = .FALSE.
-          IF ( Kprint>=3 ) THEN
+          IF( Kprint>=3 ) THEN
             WRITE (nprint_com,99001)
             99001 FORMAT ('+',39X,'FAIL')
             WRITE (nprint_com,99002)
@@ -419,7 +413,7 @@ CONTAINS
               2X,'DIFFERENCE',5X,'SIZE(I)'/1X)
           END IF
         END IF
-        IF ( Kprint>=3 ) WRITE (nprint_com,99003) icase_com, n_com, incx_com, incy_com, mode_com, &
+        IF( Kprint>=3 ) WRITE (nprint_com,99003) icase_com, n_com, incx_com, incy_com, mode_com, &
           i, Dcomp(i), Dtrue(i), dd, Dsize(i)
         99003 FORMAT (1X,I4,I3,3I5,I3,2D36.18,2D12.4)
       END IF
@@ -428,8 +422,7 @@ CONTAINS
   END SUBROUTINE DTEST
 
   SUBROUTINE CTEST(Leng,Ccomp,Ctrue,Csize,Cfac,Kprint)
-    !>
-    !  Compare arrays DCOMP and DTRUE.
+    !> Compare arrays DCOMP and DTRUE.
     !***
     ! **Library:**   SLATEC
     !***
@@ -462,24 +455,24 @@ CONTAINS
     !           section.  (WRB)
     USE slatec, ONLY : R1MACH
     USE blas, ONLY : SCABS1
-    INTEGER i, Leng, Kprint
+    INTEGER :: i, Leng, Kprint
     COMPLEX(SP) :: Ccomp(*), Ctrue(*), Csize(*)
     REAL(SP) :: Cfac, dd
     REAL(SP) :: releps = 0.0
     !* FIRST EXECUTABLE STATEMENT  DTEST
-    IF ( releps==0.0 ) releps = R1MACH(4)
+    IF( releps==0.0 ) releps = R1MACH(4)
     DO i = 1, Leng
       dd = SCABS1(Ccomp(i)-Ctrue(i))
-      IF ( Cfac*dd>ABS(Csize(i))*releps ) THEN
+      IF( Cfac*dd>ABS(Csize(i))*releps ) THEN
         !
         !         Here DCOMP(I) is not close to DTRUE(I).
         !
-        IF ( PASs ) THEN
+        IF( PASs ) THEN
           !
           !           Print FAIL message and header.
           !
           PASs = .FALSE.
-          IF ( Kprint>=3 ) THEN
+          IF( Kprint>=3 ) THEN
             WRITE (nprint_com,99001)
             99001 FORMAT ('+',39X,'FAIL')
             WRITE (nprint_com,99002)
@@ -487,7 +480,7 @@ CONTAINS
               2X,'DIFFERENCE',5X,'SIZE(I)'/1X)
           END IF
         END IF
-        IF ( Kprint>=3 ) WRITE (nprint_com,99003) icase_com, n_com, incx_com, incy_com, mode_com, &
+        IF( Kprint>=3 ) WRITE (nprint_com,99003) icase_com, n_com, incx_com, incy_com, mode_com, &
           i, Ccomp(i), Ctrue(i), dd, Csize(i)
         99003 FORMAT (1X,I4,I3,3I5,I3,2D36.18,2D12.4)
       END IF
@@ -501,8 +494,7 @@ PROGRAM TEST17
   USE slatec, ONLY : I1MACH, XSETF, XSETUN, XERMAX
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
-  !>
-  !  Driver for testing SLATEC subprograms
+  !> Driver for testing SLATEC subprograms
   !***
   ! **Library:**   SLATEC
   !***
@@ -548,7 +540,7 @@ PROGRAM TEST17
   !   890618  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900524  Cosmetic changes to code.  (WRB)
-  INTEGER ipass, kprint, lin, lun, nfail
+  INTEGER :: ipass, kprint, lin, lun, nfail
   !* FIRST EXECUTABLE STATEMENT  TEST17
   lun = I1MACH(2)
   lin = I1MACH(1)
@@ -559,7 +551,7 @@ PROGRAM TEST17
   CALL GET_ARGUMENT(kprint)
   CALL XERMAX(1000)
   CALL XSETUN(lun)
-  IF ( kprint<=1 ) THEN
+  IF( kprint<=1 ) THEN
     CALL XSETF(0)
   ELSE
     CALL XSETF(1)
@@ -568,11 +560,11 @@ PROGRAM TEST17
   !     Test BLAS
   !
   CALL BLACHK(lun,kprint,ipass)
-  IF ( ipass==0 ) nfail = nfail + 1
+  IF( ipass==0 ) nfail = nfail + 1
   !
   !     Write PASS or FAIL message
   !
-  IF ( nfail==0 ) THEN
+  IF( nfail==0 ) THEN
     WRITE (lun,99001)
     99001 FORMAT (/' --------------TEST17 PASSED ALL TESTS----------------')
   ELSE

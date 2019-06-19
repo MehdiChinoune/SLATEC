@@ -1,7 +1,6 @@
 !** CBESH
 SUBROUTINE CBESH(Z,Fnu,Kode,M,N,Cy,Nz,Ierr)
-  !>
-  !  Compute a sequence of the Hankel functions H(m,a,z)
+  !> Compute a sequence of the Hankel functions H(m,a,z)
   !            for superscript m=1 or 2, real nonnegative orders a=b,
   !            b+1,... where b>0, and nonzero complex argument z.  A
   !            scaling option is available to help avoid overflow.
@@ -175,19 +174,19 @@ SUBROUTINE CBESH(Z,Fnu,Kode,M,N,Cy,Nz,Ierr)
   xx = REAL(Z)
   yy = AIMAG(Z)
   Ierr = 0
-  IF ( xx==0.0E0.AND.yy==0.0E0 ) Ierr = 1
-  IF ( Fnu<0.0E0 ) Ierr = 1
-  IF ( M<1.OR.M>2 ) Ierr = 1
-  IF ( Kode<1.OR.Kode>2 ) Ierr = 1
-  IF ( N<1 ) Ierr = 1
-  IF ( Ierr/=0 ) RETURN
+  IF( xx==0.0E0 .AND. yy==0.0E0 ) Ierr = 1
+  IF( Fnu<0.0E0 ) Ierr = 1
+  IF( M<1 .OR. M>2 ) Ierr = 1
+  IF( Kode<1 .OR. Kode>2 ) Ierr = 1
+  IF( N<1 ) Ierr = 1
+  IF( Ierr/=0 ) RETURN
   nn = N
   !-----------------------------------------------------------------------
   !     SET PARAMETERS RELATED TO MACHINE CONSTANTS.
   !     TOL IS THE APPROXIMATE UNIT ROUNDOFF LIMITED TO 1.0E-18.
   !     ELIM IS THE APPROXIMATE EXPONENTIAL OVER- AND UNDERFLOW LIMIT.
-  !     EXP(-ELIM).LT.EXP(-ALIM)=EXP(-ELIM)/TOL    AND
-  !     EXP(ELIM).GT.EXP(ALIM)=EXP(ELIM)*TOL       ARE INTERVALS NEAR
+  !     EXP(-ELIM)<EXP(-ALIM)=EXP(-ELIM)/TOL    AND
+  !     EXP(ELIM)>EXP(ALIM)=EXP(ELIM)*TOL       ARE INTERVALS NEAR
   !     UNDERFLOW AND OVERFLOW LIMITS WHERE SCALED ARITHMETIC IS DONE.
   !     RL IS THE LOWER BOUNDARY OF THE ASYMPTOTIC EXPANSION FOR LARGE Z.
   !     DIG = NUMBER OF BASE 10 DIGITS IN TOL = 10**(-DIG).
@@ -219,61 +218,61 @@ SUBROUTINE CBESH(Z,Fnu,Kode,M,N,Cy,Nz,Ierr)
   aa = 0.5E0/tol
   bb = I1MACH(9)*0.5E0
   aa = MIN(aa,bb)
-  IF ( az>aa ) GOTO 300
-  IF ( fn>aa ) GOTO 300
+  IF( az>aa ) GOTO 300
+  IF( fn>aa ) GOTO 300
   aa = SQRT(aa)
-  IF ( az>aa ) Ierr = 3
-  IF ( fn>aa ) Ierr = 3
+  IF( az>aa ) Ierr = 3
+  IF( fn>aa ) Ierr = 3
   !-----------------------------------------------------------------------
   !     OVERFLOW TEST ON THE LAST MEMBER OF THE SEQUENCE
   !-----------------------------------------------------------------------
   ufl = R1MACH(1)*1.0E+3
-  IF ( az>=ufl ) THEN
-    IF ( Fnu>fnul ) THEN
+  IF( az>=ufl ) THEN
+    IF( Fnu>fnul ) THEN
       !-----------------------------------------------------------------------
-      !     UNIFORM ASYMPTOTIC EXPANSIONS FOR FNU.GT.FNUL
+      !     UNIFORM ASYMPTOTIC EXPANSIONS FOR FNU>FNUL
       !-----------------------------------------------------------------------
       mr = 0
-      IF ( .NOT.((xn>=0.0E0).AND.(xn/=0.0E0.OR.yn>=0.0E0.OR.M/=2)) ) THEN
+      IF( .NOT. ((xn>=0.0E0) .AND. (xn/=0.0E0 .OR. yn>=0.0E0 .OR. M/=2)) ) THEN
         mr = -mm
-        IF ( xn==0.0E0.AND.yn<0.0E0 ) zn = -zn
+        IF( xn==0.0E0 .AND. yn<0.0E0 ) zn = -zn
       END IF
       CALL CBUNK(zn,Fnu,Kode,mr,nn,Cy,nw,tol,elim,alim)
-      IF ( nw<0 ) GOTO 200
+      IF( nw<0 ) GOTO 200
       Nz = Nz + nw
     ELSE
-      IF ( fn>1.0E0 ) THEN
-        IF ( fn>2.0E0 ) THEN
+      IF( fn>1.0E0 ) THEN
+        IF( fn>2.0E0 ) THEN
           CALL CUOIK(zn,Fnu,Kode,2,nn,Cy,nuf,tol,elim,alim)
-          IF ( nuf<0 ) GOTO 100
+          IF( nuf<0 ) GOTO 100
           Nz = Nz + nuf
           nn = nn - nuf
           !-----------------------------------------------------------------------
           !     HERE NN=N OR NN=0 SINCE NUF=0,NN, OR -1 ON RETURN FROM CUOIK
           !     IF NUF=NN, THEN CY(I)=CZERO FOR ALL I
           !-----------------------------------------------------------------------
-          IF ( nn==0 ) THEN
-            IF ( xn<0.0E0 ) GOTO 100
+          IF( nn==0 ) THEN
+            IF( xn<0.0E0 ) GOTO 100
             RETURN
           END IF
-        ELSEIF ( az<=tol ) THEN
+        ELSEIF( az<=tol ) THEN
           arg = 0.5E0*az
           aln = -fn*LOG(arg)
-          IF ( aln>elim ) GOTO 100
+          IF( aln>elim ) GOTO 100
         END IF
       END IF
-      IF ( (xn<0.0E0).OR.(xn==0.0E0.AND.yn<0.0E0.AND.M==2) ) THEN
+      IF( (xn<0.0E0) .OR. (xn==0.0E0 .AND. yn<0.0E0 .AND. M==2) ) THEN
         !-----------------------------------------------------------------------
         !     LEFT HALF PLANE COMPUTATION
         !-----------------------------------------------------------------------
         mr = -mm
         CALL CACON(zn,Fnu,Kode,mr,nn,Cy,nw,rl,fnul,tol,elim,alim)
-        IF ( nw<0 ) GOTO 200
+        IF( nw<0 ) GOTO 200
         Nz = nw
       ELSE
         !-----------------------------------------------------------------------
-        !     RIGHT HALF PLANE COMPUTATION, XN.GE.0. .AND. (XN.NE.0. .OR.
-        !     YN.GE.0. .OR. M=1)
+        !     RIGHT HALF PLANE COMPUTATION, XN>=0. .AND. (XN/=0.  .OR. 
+        !     YN>=0. .OR. M=1)
         !-----------------------------------------------------------------------
         CALL CBKNU(zn,Fnu,Kode,nn,Cy,Nz,tol,elim,alim)
       END IF
@@ -297,8 +296,8 @@ SUBROUTINE CBESH(Z,Fnu,Kode,M,N,Cy,Nz,Ierr)
     spn = rhpi*SIN(arg)
     !     ZN = CMPLX(-SPN,CPN)
     csgn = CMPLX(-spn,cpn)
-    !     IF (MOD(INUH,2).EQ.1) ZN = -ZN
-    IF ( MOD(inuh,2)==1 ) csgn = -csgn
+    !     IF(MOD(INUH,2)=1) ZN = -ZN
+    IF( MOD(inuh,2)==1 ) csgn = -csgn
     zt = CMPLX(0.0E0,-fmm)
     rtol = 1.0E0/tol
     ascle = ufl*rtol
@@ -309,7 +308,7 @@ SUBROUTINE CBESH(Z,Fnu,Kode,M,N,Cy,Nz,Ierr)
       aa = REAL(zn)
       bb = AIMAG(zn)
       atol = 1.0E0
-      IF ( MAX(ABS(aa),ABS(bb))<=ascle ) THEN
+      IF( MAX(ABS(aa),ABS(bb))<=ascle ) THEN
         zn = zn*CMPLX(rtol,0.0E0)
         atol = tol
       END IF
@@ -323,7 +322,7 @@ SUBROUTINE CBESH(Z,Fnu,Kode,M,N,Cy,Nz,Ierr)
   Nz = 0
   RETURN
   200 CONTINUE
-  IF ( nw==(-1) ) GOTO 100
+  IF( nw==(-1) ) GOTO 100
   Nz = 0
   Ierr = 5
   RETURN

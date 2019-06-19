@@ -1,7 +1,6 @@
 !** MPBLAS
 SUBROUTINE MPBLAS(I1)
-  !>
-  !  Subsidiary to DQDOTA and DQDOTI
+  !> Subsidiary to DQDOTA and DQDOTI
   !***
   ! **Library:**   SLATEC
   !***
@@ -75,7 +74,7 @@ SUBROUTINE MPBLAS(I1)
   !                  DIMENSION OF R
   mxr_com = t_com + 4
   !
-  IF ( mxr_com>30 ) THEN
+  IF( mxr_com>30 ) THEN
     CALL XERMSG('MPBLAS',&
       'Array space not sufficient for Quad Precision 2x Double Precision, Proceeding.',1,1)
     t_com = 26

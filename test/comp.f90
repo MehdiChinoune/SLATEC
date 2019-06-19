@@ -1,7 +1,6 @@
 !** COMP
 LOGICAL FUNCTION COMP(Ieract,Ierexp,Lout,Kprint)
-  !>
-  !  Compare actual and expected values of error flag.
+  !> Compare actual and expected values of error flag.
   !***
   ! **Library:**   SLATEC
   !***
@@ -26,15 +25,15 @@ LOGICAL FUNCTION COMP(Ieract,Ierexp,Lout,Kprint)
   !   900316  Minor modification to format 5010.  (FNF)
   !   910708  Minor modifications in use of KPRINT.  (WRB)
 
-  INTEGER Ieract, Ierexp, Lout, Kprint
+  INTEGER :: Ieract, Ierexp, Lout, Kprint
   !* FIRST EXECUTABLE STATEMENT  COMP
-  IF ( Ieract==Ierexp ) THEN
+  IF( Ieract==Ierexp ) THEN
     COMP = .TRUE.
-    IF ( Kprint>=3 ) WRITE (Lout,99001)
+    IF( Kprint>=3 ) WRITE (Lout,99001)
     99001 FORMAT ('     OK.')
   ELSE
     COMP = .FALSE.
-    IF ( Kprint>=3 ) WRITE (Lout,99002) Ieract
+    IF( Kprint>=3 ) WRITE (Lout,99002) Ieract
     99002 FORMAT (' *** COMPARE FAILED -- IERR =',I5)
   END IF
   !

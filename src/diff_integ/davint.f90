@@ -1,7 +1,6 @@
 !** DAVINT
 SUBROUTINE DAVINT(X,Y,N,Xlo,Xup,Ans,Ierr)
-  !>
-  !  Integrate a function tabulated at arbitrarily spaced
+  !> Integrate a function tabulated at arbitrarily spaced
   !            abscissas using overlapping parabolas.
   !***
   ! **Library:**   SLATEC
@@ -39,10 +38,10 @@ SUBROUTINE DAVINT(X,Y,N,Xlo,Xup,Ans,Ierr)
   !      Y    - DOUBLE PRECISION array of function values. i.e.,
   !                Y(I)=FUNC(X(I))
   !      N    - The integer number of function values supplied.
-  !                N .GE. 2 unless XLO = XUP.
+  !                N >= 2 unless XLO = XUP.
   !      XLO  - DOUBLE PRECISION lower limit of integration
   !      XUP  - DOUBLE PRECISION upper limit of integration.  Must have
-  !              XLO.LE.XUP
+  !              XLO<=XUP
   !
   !         Output--
   !      ANS  - Double Precision computed approximate value of integral
@@ -55,8 +54,8 @@ SUBROUTINE DAVINT(X,Y,N,Xlo,Xup,Ans,Ierr)
   !                   (inclusive) was less than 3 and neither of the two
   !                   special cases described in the abstract occurred.
   !                   No integration was performed.
-  !                =4 Means the restriction X(I+1).GT.X(I) was violated.
-  !                =5 Means the number N of function values was .lt. 2.
+  !                =4 Means the restriction X(I+1)>X(I) was violated.
+  !                =5 Means the number N of function values was < 2.
   !                   ANS is set to zero if IERR=2,3,4,or 5.
   !
   !    DAVINT is documented completely in SC-M-69-335
@@ -89,20 +88,20 @@ SUBROUTINE DAVINT(X,Y,N,Xlo,Xup,Ans,Ierr)
   !* FIRST EXECUTABLE STATEMENT  DAVINT
   Ierr = 1
   Ans = 0.0D0
-  IF ( Xlo>Xup ) THEN
+  IF( Xlo>Xup ) THEN
     Ierr = 2
     !     ......EXIT
     CALL XERMSG('DAVINT',&
       'THE UPPER LIMIT OF INTEGRATION WAS NOT GREATER THAN THE LOWER LIMIT.',4,1)
-  ELSEIF ( Xlo/=Xup ) THEN
-    IF ( N>=2 ) THEN
+  ELSEIF( Xlo/=Xup ) THEN
+    IF( N>=2 ) THEN
       DO i = 2, N
         !        ............EXIT
-        IF ( X(i)<=X(i-1) ) GOTO 50
+        IF( X(i)<=X(i-1) ) GOTO 50
         !                 ...EXIT
-        IF ( X(i)>Xup ) EXIT
+        IF( X(i)>Xup ) EXIT
       END DO
-      IF ( N<3 ) THEN
+      IF( N<3 ) THEN
         !
         !                    SPECIAL N=2 CASE
         slope = (Y(2)-Y(1))/(X(2)-X(1))
@@ -111,28 +110,28 @@ SUBROUTINE DAVINT(X,Y,N,Xlo,Xup,Ans,Ierr)
         Ans = 0.5D0*(fl+fr)*(Xup-Xlo)
         !     ...............EXIT
         RETURN
-      ELSEIF ( X(N-2)<Xlo ) THEN
+      ELSEIF( X(N-2)<Xlo ) THEN
         Ierr = 3
         CALL XERMSG('DAVINT',&
           'THERE WERE LESS THAN THREE FUNCTION VALUES BETWEEN THE LIMITS OF INTEGRATION.',4,1)
         !     ...............EXIT
         RETURN
-      ELSEIF ( X(3)<=Xup ) THEN
+      ELSEIF( X(3)<=Xup ) THEN
         i = 1
-        DO WHILE ( X(i)<Xlo )
+        DO WHILE( X(i)<Xlo )
           i = i + 1
         END DO
         inlft = i
         i = N
-        DO WHILE ( X(i)>Xup )
+        DO WHILE( X(i)>Xup )
           i = i - 1
         END DO
         inrt = i
-        IF ( (inrt-inlft)>=2 ) THEN
+        IF( (inrt-inlft)>=2 ) THEN
           istart = inlft
-          IF ( inlft==1 ) istart = 2
+          IF( inlft==1 ) istart = 2
           istop = inrt
-          IF ( inrt==N ) istop = N - 1
+          IF( inrt==N ) istop = N - 1
           !
           r3 = 3.0D0
           rp5 = 0.5D0
@@ -154,7 +153,7 @@ SUBROUTINE DAVINT(X,Y,N,Xlo,Xup,Ans,Ierr)
             a = term1 + term2 + term3
             b = -(x2+x3)*term1 - (x1+x3)*term2 - (x1+x2)*term3
             c = x2*x3*term1 + x1*x3*term2 + x1*x2*term3
-            IF ( i>istart ) THEN
+            IF( i>istart ) THEN
               ca = 0.5D0*(a+ca)
               cb = 0.5D0*(b+cb)
               cc = 0.5D0*(c+cc)
@@ -199,7 +198,7 @@ SUBROUTINE DAVINT(X,Y,N,Xlo,Xup,Ans,Ierr)
     END IF
     50  Ierr = 4
     CALL XERMSG('DAVINT',&
-      'THE ABSCISSAS WERE NOT STRICTLY INCREASING.  MUST HAVE X(I-1) .LT. X(I) FOR ALL I.',4,1)
+      'THE ABSCISSAS WERE NOT STRICTLY INCREASING.  MUST HAVE X(I-1) < X(I) FOR ALL I.',4,1)
   END IF
   RETURN
 END SUBROUTINE DAVINT

@@ -1,7 +1,6 @@
 !** SHELS
 SUBROUTINE SHELS(A,Lda,N,Q,B)
-  !>
-  !  Internal routine for SGMRES.
+  !> Internal routine for SGMRES.
   !***
   ! **Library:**   SLATEC (SLAP)
   !***
@@ -69,12 +68,12 @@ SUBROUTINE SHELS(A,Lda,N,Q,B)
 
   USE blas, ONLY : SAXPY
   !     .. Scalar Arguments ..
-  INTEGER Lda, N
+  INTEGER :: Lda, N
   !     .. Array Arguments ..
-  REAL(SP) A(Lda,*), B(*), Q(*)
+  REAL(SP) :: A(Lda,*), B(*), Q(*)
   !     .. Local Scalars ..
-  REAL(SP) c, s, t, t1, t2
-  INTEGER iq, k, kb, kp1
+  REAL(SP) :: c, s, t, t1, t2
+  INTEGER :: iq, k, kb, kp1
   !* FIRST EXECUTABLE STATEMENT  SHELS
   !
   !         Minimize(B-A*X,B-A*X).  First form Q*B.

@@ -1,7 +1,6 @@
 !** DBESI0
 REAL(DP) FUNCTION DBESI0(X)
-  !>
-  !  Compute the hyperbolic Bessel function of the first kind
+  !> Compute the hyperbolic Bessel function of the first kind
   !            of order zero.
   !***
   ! **Library:**   SLATEC (FNLIB)
@@ -55,21 +54,21 @@ REAL(DP) FUNCTION DBESI0(X)
     +.9508172606122666666666666666666666D-33 ]
   LOGICAL, SAVE :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  DBESI0
-  IF ( first ) THEN
+  IF( first ) THEN
     nti0 = INITDS(bi0cs,18,0.1*D1MACH(3))
     first = .FALSE.
   END IF
   !
   y = ABS(X)
-  IF ( y>3.0D0 ) THEN
+  IF( y>3.0D0 ) THEN
     !
-    IF ( y>xmax ) CALL XERMSG('DBESI0','ABS(X) SO BIG I0 OVERFLOWS',2,2)
+    IF( y>xmax ) CALL XERMSG('DBESI0','ABS(X) SO BIG I0 OVERFLOWS',2,2)
     !
     DBESI0 = EXP(y)*DBSI0E(X)
     RETURN
   END IF
   !
   DBESI0 = 1.0D0
-  IF ( y>xsml ) DBESI0 = 2.75D0 + DCSEVL(y*y/4.5D0-1.D0,bi0cs,nti0)
+  IF( y>xsml ) DBESI0 = 2.75D0 + DCSEVL(y*y/4.5D0-1.D0,bi0cs,nti0)
   RETURN
 END FUNCTION DBESI0

@@ -1,10 +1,9 @@
 !** DQAGPE
 SUBROUTINE DQAGPE(F,A,B,Npts2,Points,Epsabs,Epsrel,Limit,Result,Abserr,&
     Neval,Ier,Alist,Blist,Rlist,Elist,Pts,Iord,Level,Ndin,Last)
-  !>
-  !  Approximate a given definite integral I = Integral of F
+  !> Approximate a given definite integral I = Integral of F
   !            over (A,B), hopefully satisfying the accuracy claim:
-  !                 ABS(I-RESULT).LE.MAX(EPSABS,EPSREL*ABS(I)).
+  !                 ABS(I-RESULT)<=MAX(EPSABS,EPSREL*ABS(I)).
   !            Break points of the integration interval, where local
   !            difficulties of the integrand may occur (e.g. singularities
   !            or discontinuities) are provided by the user.
@@ -48,8 +47,8 @@ SUBROUTINE DQAGPE(F,A,B,Npts2,Points,Epsabs,Epsrel,Limit,Result,Abserr,&
   !            NPTS2  - Integer
   !                     Number equal to two more than the number of
   !                     user-supplied break points within the integration
-  !                     range, NPTS2.GE.2.
-  !                     If NPTS2.LT.2, the routine will end with IER = 6.
+  !                     range, NPTS2>=2.
+  !                     If NPTS2<2, the routine will end with IER = 6.
   !
   !            POINTS - Double precision
   !                     Vector of dimension NPTS2, the first (NPTS2-2)
@@ -62,14 +61,14 @@ SUBROUTINE DQAGPE(F,A,B,Npts2,Points,Epsabs,Epsrel,Limit,Result,Abserr,&
   !                     Absolute accuracy requested
   !            EPSREL - Double precision
   !                     Relative accuracy requested
-  !                     If  EPSABS.LE.0
-  !                     and EPSREL.LT.MAX(50*REL.MACH.ACC.,0.5D-28),
+  !                     If  EPSABS<=0
+  !                     and EPSREL<MAX(50*REL.MACH.ACC.,0.5D-28),
   !                     the routine will end with IER = 6.
   !
   !            LIMIT  - Integer
   !                     Gives an upper bound on the number of subintervals
-  !                     in the partition of (A,B), LIMIT.GE.NPTS2
-  !                     If LIMIT.LT.NPTS2, the routine will end with
+  !                     in the partition of (A,B), LIMIT>=NPTS2
+  !                     If LIMIT<NPTS2, the routine will end with
   !                     IER = 6.
   !
   !         ON RETURN
@@ -87,7 +86,7 @@ SUBROUTINE DQAGPE(F,A,B,Npts2,Points,Epsabs,Epsrel,Limit,Result,Abserr,&
   !                     IER = 0 Normal and reliable termination of the
   !                             routine. It is assumed that the requested
   !                             accuracy has been achieved.
-  !                     IER.GT.0 Abnormal termination of the routine.
+  !                     IER>0 Abnormal termination of the routine.
   !                             The estimates for integral and error are
   !                             less reliable. It is assumed that the
   !                             requested accuracy has not been achieved.
@@ -124,14 +123,14 @@ SUBROUTINE DQAGPE(F,A,B,Npts2,Points,Epsabs,Epsrel,Limit,Result,Abserr,&
   !                         = 5 The integral is probably divergent, or
   !                             slowly convergent. It must be noted that
   !                             divergence can occur with any other value
-  !                             of IER.GT.0.
+  !                             of IER>0.
   !                         = 6 The input is invalid because
-  !                             NPTS2.LT.2 or
+  !                             NPTS2<2 or
   !                             Break points are specified outside
   !                             the integration range or
-  !                             (EPSABS.LE.0 and
-  !                              EPSREL.LT.MAX(50*REL.MACH.ACC.,0.5D-28))
-  !                             or LIMIT.LT.NPTS2.
+  !                             (EPSABS<=0 and
+  !                              EPSREL<MAX(50*REL.MACH.ACC.,0.5D-28))
+  !                             or LIMIT<NPTS2.
   !                             RESULT, ABSERR, NEVAL, LAST, RLIST(1),
   !                             and ELIST(1) are set to zero. ALIST(1) and
   !                             BLIST(1) are set to A and B respectively.
@@ -187,7 +186,7 @@ SUBROUTINE DQAGPE(F,A,B,Npts2,Points,Epsabs,Epsrel,Limit,Result,Abserr,&
   !                     error estimates over the subintervals,
   !                     such that ELIST(IORD(1)), ..., ELIST(IORD(K))
   !                     form a decreasing sequence, with K = LAST
-  !                     If LAST.LE.(LIMIT/2+2), and K = LIMIT+1-LAST
+  !                     If LAST<=(LIMIT/2+2), and K = LIMIT+1-LAST
   !                     otherwise
   !
   !            LAST   - Integer
@@ -295,17 +294,17 @@ SUBROUTINE DQAGPE(F,A,B,Npts2,Points,Epsabs,Epsrel,Limit,Result,Abserr,&
   Iord(1) = 0
   Level(1) = 0
   npts = Npts2 - 2
-  IF ( Npts2<2.OR.Limit<=npts.OR.&
-    (Epsabs<=0.0D+00.AND.Epsrel<MAX(0.5D+02*epmach,0.5D-28)) ) Ier = 6
-  IF ( Ier==6 ) RETURN
+  IF( Npts2<2 .OR. Limit<=npts .OR. &
+    (Epsabs<=0.0D+00 .AND. Epsrel<MAX(0.5D+02*epmach,0.5D-28)) ) Ier = 6
+  IF( Ier==6 ) RETURN
   !
   !            IF ANY BREAK POINTS ARE PROVIDED, SORT THEM INTO AN
   !            ASCENDING SEQUENCE.
   !
   signn = 1.0D+00
-  IF ( A>B ) signn = -1.0D+00
+  IF( A>B ) signn = -1.0D+00
   Pts(1) = MIN(A,B)
-  IF ( npts/=0 ) THEN
+  IF( npts/=0 ) THEN
     DO i = 1, npts
       Pts(i+1) = Points(i)
     END DO
@@ -313,20 +312,20 @@ SUBROUTINE DQAGPE(F,A,B,Npts2,Points,Epsabs,Epsrel,Limit,Result,Abserr,&
   Pts(npts+2) = MAX(A,B)
   nintt = npts + 1
   a1 = Pts(1)
-  IF ( npts/=0 ) THEN
+  IF( npts/=0 ) THEN
     nintp1 = nintt + 1
     DO i = 1, nintt
       ip1 = i + 1
       DO j = ip1, nintp1
-        IF ( Pts(i)>Pts(j) ) THEN
+        IF( Pts(i)>Pts(j) ) THEN
           temp = Pts(i)
           Pts(i) = Pts(j)
           Pts(j) = temp
         END IF
       END DO
     END DO
-    IF ( Pts(1)/=MIN(A,B).OR.Pts(nintp1)/=MAX(A,B) ) Ier = 6
-    IF ( Ier==6 ) RETURN
+    IF( Pts(1)/=MIN(A,B) .OR. Pts(nintp1)/=MAX(A,B) ) Ier = 6
+    IF( Ier==6 ) RETURN
   END IF
   !
   !            COMPUTE FIRST INTEGRAL AND ERROR APPROXIMATIONS.
@@ -339,7 +338,7 @@ SUBROUTINE DQAGPE(F,A,B,Npts2,Points,Epsabs,Epsrel,Limit,Result,Abserr,&
     Abserr = Abserr + error1
     Result = Result + area1
     Ndin(i) = 0
-    IF ( error1==resa.AND.error1/=0.0D+00 ) Ndin(i) = 1
+    IF( error1==resa .AND. error1/=0.0D+00 ) Ndin(i) = 1
     resabs = resabs + defabs
     Level(i) = 0
     Elist(i) = error1
@@ -351,7 +350,7 @@ SUBROUTINE DQAGPE(F,A,B,Npts2,Points,Epsabs,Epsrel,Limit,Result,Abserr,&
   END DO
   errsum = 0.0D+00
   DO i = 1, nintt
-    IF ( Ndin(i)==1 ) Elist(i) = Abserr
+    IF( Ndin(i)==1 ) Elist(i) = Abserr
     errsum = errsum + Elist(i)
   END DO
   !
@@ -361,26 +360,26 @@ SUBROUTINE DQAGPE(F,A,B,Npts2,Points,Epsabs,Epsrel,Limit,Result,Abserr,&
   Neval = 21*nintt
   dres = ABS(Result)
   errbnd = MAX(Epsabs,Epsrel*dres)
-  IF ( Abserr<=0.1D+03*epmach*resabs.AND.Abserr>errbnd ) Ier = 2
-  IF ( nintt/=1 ) THEN
+  IF( Abserr<=0.1D+03*epmach*resabs .AND. Abserr>errbnd ) Ier = 2
+  IF( nintt/=1 ) THEN
     DO i = 1, npts
       jlow = i + 1
       ind1 = Iord(i)
       DO j = jlow, nintt
         ind2 = Iord(j)
-        IF ( Elist(ind1)<=Elist(ind2) ) THEN
+        IF( Elist(ind1)<=Elist(ind2) ) THEN
           ind1 = ind2
           k = j
         END IF
       END DO
-      IF ( ind1/=Iord(i) ) THEN
+      IF( ind1/=Iord(i) ) THEN
         Iord(k) = Iord(i)
         Iord(i) = ind1
       END IF
     END DO
-    IF ( Limit<Npts2 ) Ier = 1
+    IF( Limit<Npts2 ) Ier = 1
   END IF
-  IF ( Ier/=0.OR.Abserr<=errbnd ) RETURN
+  IF( Ier/=0 .OR. Abserr<=errbnd ) RETURN
   !
   !           INITIALIZATION
   !           --------------
@@ -406,7 +405,7 @@ SUBROUTINE DQAGPE(F,A,B,Npts2,Points,Epsabs,Epsrel,Limit,Result,Abserr,&
   oflow = D1MACH(2)
   Abserr = oflow
   ksgn = -1
-  IF ( dres>=(0.1D+01-0.5D+02*epmach)*resabs ) ksgn = 1
+  IF( dres>=(0.1D+01-0.5D+02*epmach)*resabs ) ksgn = 1
   !
   !           MAIN DO-LOOP
   !           ------------
@@ -433,13 +432,13 @@ SUBROUTINE DQAGPE(F,A,B,Npts2,Points,Epsabs,Epsrel,Limit,Result,Abserr,&
     erro12 = error1 + error2
     errsum = errsum + erro12 - errmax
     area = area + area12 - Rlist(maxerr)
-    IF ( defab1/=error1.AND.defab2/=error2 ) THEN
-      IF ( ABS(Rlist(maxerr)-area12)<=0.1D-04*ABS(area12).AND.&
+    IF( defab1/=error1 .AND. defab2/=error2 ) THEN
+      IF( ABS(Rlist(maxerr)-area12)<=0.1D-04*ABS(area12) .AND. &
           erro12>=0.99D+00*errmax ) THEN
-        IF ( extrap ) iroff2 = iroff2 + 1
-        IF ( .NOT.extrap ) iroff1 = iroff1 + 1
+        IF( extrap ) iroff2 = iroff2 + 1
+        IF( .NOT. extrap ) iroff1 = iroff1 + 1
       END IF
-      IF ( Last>10.AND.erro12>errmax ) iroff3 = iroff3 + 1
+      IF( Last>10 .AND. erro12>errmax ) iroff3 = iroff3 + 1
     END IF
     Level(maxerr) = levcur
     Level(Last) = levcur
@@ -449,23 +448,23 @@ SUBROUTINE DQAGPE(F,A,B,Npts2,Points,Epsabs,Epsrel,Limit,Result,Abserr,&
     !
     !           TEST FOR ROUNDOFF ERROR AND EVENTUALLY SET ERROR FLAG.
     !
-    IF ( iroff1+iroff2>=10.OR.iroff3>=20 ) Ier = 2
-    IF ( iroff2>=5 ) ierro = 3
+    IF( iroff1+iroff2>=10 .OR. iroff3>=20 ) Ier = 2
+    IF( iroff2>=5 ) ierro = 3
     !
     !           SET ERROR FLAG IN THE CASE THAT THE NUMBER OF
     !           SUBINTERVALS EQUALS LIMIT.
     !
-    IF ( Last==Limit ) Ier = 1
+    IF( Last==Limit ) Ier = 1
     !
     !           SET ERROR FLAG IN THE CASE OF BAD INTEGRAND BEHAVIOUR
     !           AT A POINT OF THE INTEGRATION RANGE
     !
-    IF ( MAX(ABS(a1),ABS(b2))<=(0.1D+01+0.1D+03*epmach)&
+    IF( MAX(ABS(a1),ABS(b2))<=(0.1D+01+0.1D+03*epmach)&
       *(ABS(a2)+0.1D+04*uflow) ) Ier = 4
     !
     !           APPEND THE NEWLY-CREATED INTERVALS TO THE LIST.
     !
-    IF ( error2>error1 ) THEN
+    IF( error2>error1 ) THEN
       Alist(maxerr) = a2
       Alist(Last) = a1
       Blist(Last) = b1
@@ -487,22 +486,22 @@ SUBROUTINE DQAGPE(F,A,B,Npts2,Points,Epsabs,Epsrel,Limit,Result,Abserr,&
     !
     CALL DQPSRT(Limit,Last,maxerr,errmax,Elist,Iord,nrmax)
     !- **JUMP OUT OF DO-LOOP
-    IF ( errsum<=errbnd ) GOTO 200
+    IF( errsum<=errbnd ) GOTO 200
     !- **JUMP OUT OF DO-LOOP
-    IF ( Ier/=0 ) EXIT
-    IF ( .NOT.(noext) ) THEN
+    IF( Ier/=0 ) EXIT
+    IF( .NOT. (noext) ) THEN
       erlarg = erlarg - erlast
-      IF ( levcur+1<=levmax ) erlarg = erlarg + erro12
-      IF ( .NOT.(extrap) ) THEN
+      IF( levcur+1<=levmax ) erlarg = erlarg + erro12
+      IF( .NOT. (extrap) ) THEN
         !
         !           TEST WHETHER THE INTERVAL TO BE BISECTED NEXT IS THE
         !           SMALLEST INTERVAL.
         !
-        IF ( Level(maxerr)+1<=levmax ) CYCLE
+        IF( Level(maxerr)+1<=levmax ) CYCLE
         extrap = .TRUE.
         nrmax = 2
       END IF
-      IF ( ierro/=3.AND.erlarg>ertest ) THEN
+      IF( ierro/=3 .AND. erlarg>ertest ) THEN
         !
         !           THE SMALLEST INTERVAL HAS THE LARGEST ERROR.
         !           BEFORE BISECTING DECREASE THE SUM OF THE ERRORS OVER
@@ -510,12 +509,12 @@ SUBROUTINE DQAGPE(F,A,B,Npts2,Points,Epsabs,Epsrel,Limit,Result,Abserr,&
         !
         id = nrmax
         jupbnd = Last
-        IF ( Last>(2+Limit/2) ) jupbnd = Limit + 3 - Last
+        IF( Last>(2+Limit/2) ) jupbnd = Limit + 3 - Last
         DO k = id, jupbnd
           maxerr = Iord(nrmax)
           errmax = Elist(maxerr)
           !- **JUMP OUT OF DO-LOOP
-          IF ( Level(maxerr)+1<=levmax ) GOTO 100
+          IF( Level(maxerr)+1<=levmax ) GOTO 100
           nrmax = nrmax + 1
         END DO
       END IF
@@ -524,24 +523,24 @@ SUBROUTINE DQAGPE(F,A,B,Npts2,Points,Epsabs,Epsrel,Limit,Result,Abserr,&
       !
       numrl2 = numrl2 + 1
       rlist2(numrl2) = area
-      IF ( numrl2>2 ) THEN
+      IF( numrl2>2 ) THEN
         CALL DQELG(numrl2,rlist2,reseps,abseps,res3la,nres)
         ktmin = ktmin + 1
-        IF ( ktmin>5.AND.Abserr<0.1D-02*errsum ) Ier = 5
-        IF ( abseps<Abserr ) THEN
+        IF( ktmin>5 .AND. Abserr<0.1D-02*errsum ) Ier = 5
+        IF( abseps<Abserr ) THEN
           ktmin = 0
           Abserr = abseps
           Result = reseps
           correc = erlarg
           ertest = MAX(Epsabs,Epsrel*ABS(reseps))
           !- **JUMP OUT OF DO-LOOP
-          IF ( Abserr<ertest ) EXIT
+          IF( Abserr<ertest ) EXIT
         END IF
         !
         !           PREPARE BISECTION OF THE SMALLEST INTERVAL.
         !
-        IF ( numrl2==1 ) noext = .TRUE.
-        IF ( Ier>=5 ) EXIT
+        IF( numrl2==1 ) noext = .TRUE.
+        IF( Ier>=5 ) EXIT
       END IF
       maxerr = Iord(1)
       errmax = Elist(maxerr)
@@ -557,22 +556,22 @@ SUBROUTINE DQAGPE(F,A,B,Npts2,Points,Epsabs,Epsrel,Limit,Result,Abserr,&
   !           ---------------------
   !
   !
-  IF ( Abserr/=oflow ) THEN
-    IF ( (Ier+ierro)/=0 ) THEN
-      IF ( ierro==3 ) Abserr = Abserr + correc
-      IF ( Ier==0 ) Ier = 3
-      IF ( Result==0.0D+00.OR.area==0.0D+00 ) THEN
-        IF ( Abserr>errsum ) GOTO 200
-        IF ( area==0.0D+00 ) GOTO 300
-      ELSEIF ( Abserr/ABS(Result)>errsum/ABS(area) ) THEN
+  IF( Abserr/=oflow ) THEN
+    IF( (Ier+ierro)/=0 ) THEN
+      IF( ierro==3 ) Abserr = Abserr + correc
+      IF( Ier==0 ) Ier = 3
+      IF( Result==0.0D+00 .OR. area==0.0D+00 ) THEN
+        IF( Abserr>errsum ) GOTO 200
+        IF( area==0.0D+00 ) GOTO 300
+      ELSEIF( Abserr/ABS(Result)>errsum/ABS(area) ) THEN
         GOTO 200
       END IF
     END IF
     !
     !           TEST ON DIVERGENCE.
     !
-    IF ( ksgn/=(-1).OR.MAX(ABS(Result),ABS(area))>defabs*0.1D-01 ) THEN
-      IF ( 0.1D-01>(Result/area).OR.(Result/area)>0.1D+03.OR.&
+    IF( ksgn/=(-1) .OR. MAX(ABS(Result),ABS(area))>defabs*0.1D-01 ) THEN
+      IF( 0.1D-01>(Result/area) .OR. (Result/area)>0.1D+03 .OR. &
         errsum>ABS(area) ) Ier = 6
     END IF
     GOTO 300
@@ -586,7 +585,7 @@ SUBROUTINE DQAGPE(F,A,B,Npts2,Points,Epsabs,Epsrel,Limit,Result,Abserr,&
   END DO
   Abserr = errsum
   300 CONTINUE
-  IF ( Ier>2 ) Ier = Ier - 1
+  IF( Ier>2 ) Ier = Ier - 1
   Result = Result*signn
   RETURN
 END SUBROUTINE DQAGPE

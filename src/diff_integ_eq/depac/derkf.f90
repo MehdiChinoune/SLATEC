@@ -1,7 +1,6 @@
 !** DERKF
 SUBROUTINE DERKF(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw)
-  !>
-  !  Solve an initial value problem in ordinary differential
+  !> Solve an initial value problem in ordinary differential
   !            equations using a Runge-Kutta-Fehlberg scheme.
   !***
   ! **Library:**   SLATEC (DEPAC)
@@ -179,7 +178,7 @@ SUBROUTINE DERKF(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw)
   !             as arrays of appropriate length.
   !
   !      NEQ -- Set it to the number of differential equations.
-  !             (NEQ .GE. 1)
+  !             (NEQ >= 1)
   !
   !      T -- Set it to the initial point of the integration.
   !             You must use a program variable for T because the code
@@ -192,8 +191,8 @@ SUBROUTINE DERKF(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw)
   !      TOUT -- Set it to the first point at which a solution
   !             is desired.  You can take TOUT = T, in which case the code
   !             will evaluate the derivative of the solution at T and
-  !             return.  Integration either forward in T  (TOUT .GT. T) or
-  !             backward in T  (TOUT .LT. T)  is permitted.
+  !             return.  Integration either forward in T  (TOUT > T) or
+  !             backward in T  (TOUT < T)  is permitted.
   !
   !             The code advances the solution from T to TOUT using
   !             step sizes which are automatically selected so as to
@@ -273,7 +272,7 @@ SUBROUTINE DERKF(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw)
   !
   !             The tolerances are used by the code in a local error test
   !             at each step which requires roughly that
-  !                     ABS(LOCAL ERROR) .LE. RTOL*ABS(Y)+ATOL
+  !                     ABS(LOCAL ERROR) <= RTOL*ABS(Y)+ATOL
   !             for each vector component.
   !             (More specifically, a maximum norm is used to measure
   !             the size of vectors, and the error test uses the average
@@ -328,13 +327,13 @@ SUBROUTINE DERKF(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw)
   !             calling program.
   !
   !      LRW -- Set it to the declared length of the RWORK array.
-  !             You must have  LRW .GE. 33+7*NEQ
+  !             You must have  LRW >= 33+7*NEQ
   !
   !      IWORK(*) -- Dimension this INTEGER work array of length LIW in
   !             your calling program.
   !
   !      LIW -- Set it to the declared length of the IWORK array.
-  !             You must have  LIW .GE. 34
+  !             You must have  LIW >= 34
   !
   !      RPAR, IPAR -- These are parameter arrays, of REAL and INTEGER
   !             type, respectively.  You can use them for communication
@@ -621,9 +620,9 @@ SUBROUTINE DERKF(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw)
   !     CHECK FOR AN APPARENT INFINITE LOOP
   !
   !* FIRST EXECUTABLE STATEMENT  DERKF
-  IF ( Info(1)==0 ) Iwork(Liw) = 0
-  IF ( Iwork(Liw)>=5 ) THEN
-    IF ( T==Rwork(21+Neq) ) THEN
+  IF( Info(1)==0 ) Iwork(Liw) = 0
+  IF( Iwork(Liw)>=5 ) THEN
+    IF( T==Rwork(21+Neq) ) THEN
       WRITE (xern3,'(1PE15.6)') T
       CALL XERMSG('DERKF','AN APPARENT INFINITE LOOP HAS BEEN DETECTED.&
         &$$YOU HAVE MADE REPEATED CALLS AT  T = '//xern3//' AND THE INTEGRATION&
@@ -636,14 +635,14 @@ SUBROUTINE DERKF(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw)
   !     CHECK LRW AND LIW FOR SUFFICIENT STORAGE ALLOCATION
   !
   Idid = 0
-  IF ( Lrw<30+7*Neq ) THEN
+  IF( Lrw<30+7*Neq ) THEN
     WRITE (xern1,'(I8)') Lrw
     CALL XERMSG('DERKF','LENGTH OF RWORK ARRAY MUST BE AT LEAST  30&
       & + 7*NEQ.  YOU HAVE CALLED THE CODE WITH  LRW = '//xern1,1,1)
     Idid = -33
   END IF
   !
-  IF ( Liw<34 ) THEN
+  IF( Liw<34 ) THEN
     WRITE (xern1,'(I8)') Liw
     CALL XERMSG('DERKF','LENGTH OF IWORK ARRAY MUST BE AT LEAST  34.  YOU HAVE CALLED THE CODE WITH LIW = '//xern1,2,1)
     Idid = -33
@@ -674,7 +673,7 @@ SUBROUTINE DERKF(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw)
   !- *********************************************************************
   !
   Rwork(ktstar) = T
-  IF ( Info(1)/=0 ) THEN
+  IF( Info(1)/=0 ) THEN
     stiff = (Iwork(25)==0)
     nonstf = (Iwork(26)==0)
   END IF
@@ -686,11 +685,11 @@ SUBROUTINE DERKF(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw)
     nonstf,Iwork(27),Iwork(28))
   !
   Iwork(25) = 1
-  IF ( stiff ) Iwork(25) = 0
+  IF( stiff ) Iwork(25) = 0
   Iwork(26) = 1
-  IF ( nonstf ) Iwork(26) = 0
+  IF( nonstf ) Iwork(26) = 0
   !
-  IF ( Idid/=(-2) ) Iwork(Liw) = Iwork(Liw) + 1
-  IF ( T/=Rwork(ktstar) ) Iwork(Liw) = 0
+  IF( Idid/=(-2) ) Iwork(Liw) = Iwork(Liw) + 1
+  IF( T/=Rwork(ktstar) ) Iwork(Liw) = 0
   !
 END SUBROUTINE DERKF

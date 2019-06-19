@@ -1,7 +1,6 @@
 !** BKIAS
 SUBROUTINE BKIAS(X,N,Ktrms,T,Ans,Ind,Ms,Gmrn,H,Ierr)
-  !>
-  !  Subsidiary to BSKIN
+  !> Subsidiary to BSKIN
   !***
   ! **Library:**   SLATEC
   !***
@@ -28,7 +27,7 @@ SUBROUTINE BKIAS(X,N,Ktrms,T,Ans,Ind,Ms,Gmrn,H,Ierr)
   USE service, ONLY : R1MACH
   INTEGER :: Ind, Ktrms, Ms, N, Ierr
   REAL(SP) :: Ans, Gmrn, H(30), T(50), X
-  INTEGER i, ii, j, jmi, jn, k, kk, km, mm, mp
+  INTEGER :: i, ii, j, jmi, jn, k, kk, km, mm, mp
   REAL(SP) :: den1, den2, den3, er, err, fj, fk, fln, fm1, g1, gs, hn, rat, rg1, rxp, &
     rz, rzx, s(31), ss, sumi, sumj, tol, v(52), w(52), xp(16), z
   !-----------------------------------------------------------------------
@@ -89,12 +88,12 @@ SUBROUTINE BKIAS(X,N,Ktrms,T,Ans,Ind,Ms,Gmrn,H,Ierr)
   rz = 1.0E0/(X+fln)
   rzx = X*rz
   z = 0.5E0*(X+fln)
-  IF ( Ind<=1 ) Gmrn = GAMRN(z)
+  IF( Ind<=1 ) Gmrn = GAMRN(z)
   gs = hrtpi*Gmrn
   g1 = gs + gs
   rg1 = 1.0E0/g1
   Gmrn = (rz+rz)/Gmrn
-  IF ( Ind>1 ) GOTO 200
+  IF( Ind>1 ) GOTO 200
   !-----------------------------------------------------------------------
   !     EVALUATE ERROR FOR M=MS
   !-----------------------------------------------------------------------
@@ -103,26 +102,26 @@ SUBROUTINE BKIAS(X,N,Ktrms,T,Ans,Ind,Ms,Gmrn,H,Ierr)
   den3 = den2 - 2.0E0
   den1 = X + den2
   err = rg1*(X+X)/(den1-1.0E0)
-  IF ( N/=0 ) rat = 1.0E0/(fln*fln)
-  IF ( Ktrms/=0 ) THEN
+  IF( N/=0 ) rat = 1.0E0/(fln*fln)
+  IF( Ktrms/=0 ) THEN
     fj = Ktrms
     rat = 0.25E0/(hrtpi*den3*SQRT(fj))
   END IF
   err = err*rat
   fj = -3.0E0
   DO j = 1, 15
-    IF ( j<=5 ) err = err/den1
+    IF( j<=5 ) err = err/den1
     fm1 = MAX(1.0E0,fj)
     fj = fj + 1.0E0
     er = bnd(j)*err
-    IF ( Ktrms==0 ) THEN
+    IF( Ktrms==0 ) THEN
       er = er*(1.0E0+hn/fm1)
-      IF ( er<tol ) GOTO 100
-      IF ( j>=5 ) err = err/fln
+      IF( er<tol ) GOTO 100
+      IF( j>=5 ) err = err/fln
     ELSE
       er = er/fm1
-      IF ( er<tol ) GOTO 100
-      IF ( j>=5 ) err = err/den3
+      IF( er<tol ) GOTO 100
+      IF( j>=5 ) err = err/den3
     END IF
   END DO
   Ierr = 2
@@ -133,7 +132,7 @@ SUBROUTINE BKIAS(X,N,Ktrms,T,Ans,Ind,Ms,Gmrn,H,Ierr)
   !-----------------------------------------------------------------------
   !     H(K)=(-Z)**(K)*(PSI(K-1,Z)-PSI(K-1,Z+0.5))/GAMMA(K), K=1,2,...,MM
   !-----------------------------------------------------------------------
-  IF ( Ind>1 ) THEN
+  IF( Ind>1 ) THEN
     rat = z/(z-0.5E0)
     rxp = rat
     DO i = 1, mm
@@ -162,7 +161,7 @@ SUBROUTINE BKIAS(X,N,Ktrms,T,Ans,Ind,Ms,Gmrn,H,Ierr)
   !-----------------------------------------------------------------------
   !     SCALED S-TILDA SEQUENCE
   !-----------------------------------------------------------------------
-  IF ( Ktrms/=0 ) THEN
+  IF( Ktrms/=0 ) THEN
     fk = 0.0E0
     ss = 0.0E0
     rg1 = rg1/z

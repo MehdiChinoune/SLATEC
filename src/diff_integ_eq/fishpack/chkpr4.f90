@@ -1,7 +1,6 @@
 !** CHKPR4
 SUBROUTINE CHKPR4(Iorder,A,B,M,Mbdcnd,C,D,N,Nbdcnd,COFX,Idmn,Ierror)
-  !>
-  !  Subsidiary to SEPX4
+  !> Subsidiary to SEPX4
   !***
   ! **Library:**   SLATEC
   !***
@@ -36,34 +35,34 @@ SUBROUTINE CHKPR4(Iorder,A,B,M,Mbdcnd,C,D,N,Nbdcnd,COFX,Idmn,Ierror)
   REAL(SP) :: ai, bi, ci, dlx, xi
   !* FIRST EXECUTABLE STATEMENT  CHKPR4
   Ierror = 1
-  IF ( A>=B.OR.C>=D ) RETURN
+  IF( A>=B .OR. C>=D ) RETURN
   !
   !     CHECK BOUNDARY SWITCHES
   !
   Ierror = 2
-  IF ( Mbdcnd<0.OR.Mbdcnd>4 ) RETURN
+  IF( Mbdcnd<0 .OR. Mbdcnd>4 ) RETURN
   Ierror = 3
-  IF ( Nbdcnd<0.OR.Nbdcnd>4 ) RETURN
+  IF( Nbdcnd<0 .OR. Nbdcnd>4 ) RETURN
   !
   !     CHECK FIRST DIMENSION IN CALLING ROUTINE
   !
   Ierror = 5
-  IF ( Idmn<7 ) RETURN
+  IF( Idmn<7 ) RETURN
   !
   !     CHECK M
   !
   Ierror = 6
-  IF ( M>(Idmn-1).OR.M<6 ) RETURN
+  IF( M>(Idmn-1) .OR. M<6 ) RETURN
   !
   !     CHECK N
   !
   Ierror = 7
-  IF ( N<5 ) RETURN
+  IF( N<5 ) RETURN
   !
   !     CHECK IORDER
   !
   Ierror = 8
-  IF ( Iorder/=2.AND.Iorder/=4 ) RETURN
+  IF( Iorder/=2 .AND. Iorder/=4 ) RETURN
   !
   !     CHECK THAT EQUATION IS ELLIPTIC
   !
@@ -71,7 +70,7 @@ SUBROUTINE CHKPR4(Iorder,A,B,M,Mbdcnd,C,D,N,Nbdcnd,COFX,Idmn,Ierror)
   DO i = 2, M
     xi = A + (i-1)*dlx
     CALL COFX(xi,ai,bi,ci)
-    IF ( ai<=0.0 ) THEN
+    IF( ai<=0.0 ) THEN
       Ierror = 10
       RETURN
     END IF

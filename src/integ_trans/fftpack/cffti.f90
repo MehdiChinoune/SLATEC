@@ -1,7 +1,6 @@
 !** CFFTI
 SUBROUTINE CFFTI(N,Wsave)
-  !>
-  !  Initialize a work array for CFFTF and CFFTB.
+  !> Initialize a work array for CFFTF and CFFTB.
   !***
   ! **Library:**   SLATEC (FFTPACK)
   !***
@@ -66,7 +65,7 @@ SUBROUTINE CFFTI(N,Wsave)
   REAL(SP) :: Wsave(4*N+15)
   INTEGER :: ifac(15)
   !* FIRST EXECUTABLE STATEMENT  CFFTI
-  IF ( N==1 ) RETURN
+  IF( N==1 ) RETURN
   ifac = INT( Wsave(4*N+1:4*N+15) )
   CALL CFFTI1(N,Wsave(2*N+1),ifac)
   Wsave(4*N+1:4*N+15) = ifac

@@ -1,7 +1,6 @@
 !** DQDOTA
 REAL(DP) FUNCTION DQDOTA(N,Db,Qc,Dx,Incx,Dy,Incy)
-  !>
-  !  Compute the inner product of two vectors with extended
+  !> Compute the inner product of two vectors with extended
   !            precision accumulation and result.
   !***
   ! **Library:**   SLATEC
@@ -39,7 +38,7 @@ REAL(DP) FUNCTION DQDOTA(N,Db,Qc,Dx,Incx,Dy,Incy)
   !    QC and DQDOTA are set = DB + QC + sum for I = 0 to N-1 of
   !      DX(LX+I*INCX) * DY(LY+I*INCY),  where QC is an extended
   !      precision result previously computed by DQDOTI or DQDOTA
-  !      and LX = 1 if INCX .GE. 0, else LX = (-INCX)*N, and LY is
+  !      and LX = 1 if INCX >= 0, else LX = (-INCX)*N, and LY is
   !      defined in a similar way using INCY.  The MP package by
   !      Richard P. Brent is used for the extended precision arithmetic.
   !
@@ -78,16 +77,16 @@ REAL(DP) FUNCTION DQDOTA(N,Db,Qc,Dx,Incx,Dy,Incy)
   INTEGER :: qx(30), qy(30)
   INTEGER, SAVE :: i1 = 0
   !* FIRST EXECUTABLE STATEMENT  DQDOTA
-  IF ( i1==0 ) CALL MPBLAS(i1)
-  IF ( Db/=0.D0 ) THEN
+  IF( i1==0 ) CALL MPBLAS(i1)
+  IF( Db/=0.D0 ) THEN
     CALL MPCDM(Db,qx)
     CALL MPADD(Qc,qx,Qc)
   END IF
-  IF ( N/=0 ) THEN
+  IF( N/=0 ) THEN
     ix = 1
     iy = 1
-    IF ( Incx<0 ) ix = (-N+1)*Incx + 1
-    IF ( Incy<0 ) iy = (-N+1)*Incy + 1
+    IF( Incx<0 ) ix = (-N+1)*Incx + 1
+    IF( Incy<0 ) iy = (-N+1)*Incy + 1
     DO i = 1, N
       CALL MPCDM(Dx(ix),qx)
       CALL MPCDM(Dy(iy),qy)

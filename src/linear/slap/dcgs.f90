@@ -1,8 +1,7 @@
 !** DCGS
 SUBROUTINE DCGS(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,Iter,&
     Err,Ierr,Iunit,R,R0,P,Q,U,V1,V2,Rwork,Iwork)
-  !>
-  !  Preconditioned BiConjugate Gradient Squared Ax=b Solver.
+  !> Preconditioned BiConjugate Gradient Squared Ax=b Solver.
   !            Routine to solve a Non-Symmetric linear system  Ax = b
   !            using the Preconditioned BiConjugate Gradient Squared
   !            method.
@@ -215,7 +214,7 @@ SUBROUTINE DCGS(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,Iter,&
   !
   !- Cautions:
   !     This routine will attempt to write to the Fortran logical output
-  !     unit IUNIT, if IUNIT .ne. 0.  Thus, the user must make sure that
+  !     unit IUNIT, if IUNIT /= 0.  Thus, the user must make sure that
   !     this logical unit is attached to a file or terminal before calling
   !     this routine with a non-zero value for IUNIT.  This routine does
   !     not check for the validity of a non-zero IUNIT unit number.
@@ -270,7 +269,7 @@ SUBROUTINE DCGS(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,Iter,&
   END INTERFACE
   !     .. Scalar Arguments ..
   REAL(DP) :: Err, Tol
-  INTEGER Ierr, Isym, Iter, Itmax, Itol, Iunit, N, Nelt
+  INTEGER :: Ierr, Isym, Iter, Itmax, Itol, Iunit, N, Nelt
   !     .. Array Arguments ..
   REAL(DP) :: A(Nelt), B(N), P(N), Q(N), R(N), R0(N), Rwork(*), &
     U(N), V1(N), V2(N), X(N)
@@ -286,12 +285,12 @@ SUBROUTINE DCGS(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,Iter,&
   !
   Iter = 0
   Ierr = 0
-  IF ( N<1 ) THEN
+  IF( N<1 ) THEN
     Ierr = 3
     RETURN
   END IF
   tolmin = 500*D1MACH(3)
-  IF ( Tol<tolmin ) THEN
+  IF( Tol<tolmin ) THEN
     Tol = tolmin
     Ierr = 4
   END IF
@@ -304,9 +303,9 @@ SUBROUTINE DCGS(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,Iter,&
   END DO
   CALL MSOLVE(N,V1,R,Rwork,Iwork)
   !
-  IF ( ISDCGS(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Iter,Err,&
+  IF( ISDCGS(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Iter,Err,&
       Ierr,Iunit,R,V2,Rwork,Iwork,ak,bk,bnrm,solnrm)==0 ) THEN
-    IF ( Ierr/=0 ) RETURN
+    IF( Ierr/=0 ) RETURN
     !
     !         Set initial values.
     !
@@ -323,9 +322,9 @@ SUBROUTINE DCGS(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,Iter,&
       !
       !         Calculate coefficient BK and direction vectors U, V and P.
       rhon = DOT_PRODUCT(R0,R)
-      IF ( ABS(rhonm1)<fuzz ) GOTO 200
+      IF( ABS(rhonm1)<fuzz ) GOTO 200
       bk = rhon/rhonm1
-      IF ( Iter==1 ) THEN
+      IF( Iter==1 ) THEN
         DO i = 1, N
           U(i) = R(i)
           P(i) = R(i)
@@ -344,7 +343,7 @@ SUBROUTINE DCGS(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,Iter,&
       CALL MATVEC(N,P,V2,Nelt,Ia,Ja,A,Isym)
       CALL MSOLVE(N,V2,V1,Rwork,Iwork)
       sigma = DOT_PRODUCT(R0,V1)
-      IF ( ABS(sigma)<fuzz ) GOTO 300
+      IF( ABS(sigma)<fuzz ) GOTO 300
       ak = rhon/sigma
       akm = -ak
       DO i = 1, N
@@ -362,7 +361,7 @@ SUBROUTINE DCGS(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,Iter,&
       CALL DAXPY(N,akm,V1,1,R,1)
       !
       !         check stopping criterion.
-      IF ( ISDCGS(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Iter,&
+      IF( ISDCGS(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Iter,&
         Err,Ierr,Iunit,R,V2,Rwork,Iwork,ak,bk,bnrm,solnrm)&
         /=0 ) GOTO 100
       !

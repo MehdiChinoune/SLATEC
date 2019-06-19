@@ -1,7 +1,6 @@
 !** DPCHCI
 SUBROUTINE DPCHCI(N,H,Slope,D,Incfd)
-  !>
-  !  Set interior derivatives for DPCHIC
+  !> Set interior derivatives for DPCHIC
   !***
   ! **Library:**   SLATEC (PCHIP)
   !***
@@ -96,12 +95,12 @@ SUBROUTINE DPCHCI(N,H,Slope,D,Incfd)
   !
   !  DECLARE ARGUMENTS.
   !
-  INTEGER N, Incfd
+  INTEGER :: N, Incfd
   REAL(DP) :: H(N), Slope(N), D(Incfd,N)
   !
   !  DECLARE LOCAL VARIABLES.
   !
-  INTEGER i, nless1
+  INTEGER :: i, nless1
   REAL(DP) :: del1, del2, dmax, dmin, drat1, drat2, hsum, hsumt3, w1, w2
   !
   !  INITIALIZE.
@@ -113,9 +112,9 @@ SUBROUTINE DPCHCI(N,H,Slope,D,Incfd)
   !
   !  SPECIAL CASE N=2 -- USE LINEAR INTERPOLATION.
   !
-  IF ( nless1>1 ) THEN
+  IF( nless1>1 ) THEN
     !
-    !  NORMAL CASE  (N .GE. 3).
+    !  NORMAL CASE  (N >= 3).
     !
     del2 = Slope(2)
     !
@@ -126,18 +125,18 @@ SUBROUTINE DPCHCI(N,H,Slope,D,Incfd)
     w1 = (H(1)+hsum)/hsum
     w2 = -H(1)/hsum
     D(1,1) = w1*del1 + w2*del2
-    IF ( DPCHST(D(1,1),del1)<=zero ) THEN
+    IF( DPCHST(D(1,1),del1)<=zero ) THEN
       D(1,1) = zero
-    ELSEIF ( DPCHST(del1,del2)<zero ) THEN
+    ELSEIF( DPCHST(del1,del2)<zero ) THEN
       !        NEED DO THIS CHECK ONLY IF MONOTONICITY SWITCHES.
       dmax = three*del1
-      IF ( ABS(D(1,1))>ABS(dmax) ) D(1,1) = dmax
+      IF( ABS(D(1,1))>ABS(dmax) ) D(1,1) = dmax
     END IF
     !
     !  LOOP THROUGH INTERIOR POINTS.
     !
     DO i = 2, nless1
-      IF ( i/=2 ) THEN
+      IF( i/=2 ) THEN
         !
         hsum = H(i-1) + H(i)
         del1 = del2
@@ -147,7 +146,7 @@ SUBROUTINE DPCHCI(N,H,Slope,D,Incfd)
       !        SET D(I)=0 UNLESS DATA ARE STRICTLY MONOTONIC.
       !
       D(1,i) = zero
-      IF ( DPCHST(del1,del2)>zero ) THEN
+      IF( DPCHST(del1,del2)>zero ) THEN
         !
         !        USE BRODLIE MODIFICATION OF BUTLAND FORMULA.
         !
@@ -169,12 +168,12 @@ SUBROUTINE DPCHCI(N,H,Slope,D,Incfd)
     w1 = -H(N-1)/hsum
     w2 = (H(N-1)+hsum)/hsum
     D(1,N) = w1*del1 + w2*del2
-    IF ( DPCHST(D(1,N),del2)<=zero ) THEN
+    IF( DPCHST(D(1,N),del2)<=zero ) THEN
       D(1,N) = zero
-    ELSEIF ( DPCHST(del1,del2)<zero ) THEN
+    ELSEIF( DPCHST(del1,del2)<zero ) THEN
       !        NEED DO THIS CHECK ONLY IF MONOTONICITY SWITCHES.
       dmax = three*del2
-      IF ( ABS(D(1,N))>ABS(dmax) ) D(1,N) = dmax
+      IF( ABS(D(1,N))>ABS(dmax) ) D(1,N) = dmax
     END IF
   ELSE
     D(1,1) = del1

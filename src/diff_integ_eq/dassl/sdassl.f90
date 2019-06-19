@@ -1,8 +1,7 @@
 !** SDASSL
 SUBROUTINE SDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
     Iwork,Liw,JAC)
-  !>
-  !  This code solves a system of differential/algebraic
+  !> This code solves a system of differential/algebraic
   !            equations of the form G(T,Y,YPRIME) = 0.
   !***
   ! **Library:**   SLATEC (DASSL)
@@ -151,7 +150,7 @@ SUBROUTINE SDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
   !         of appropriate length.
   !
   !  NEQ -- Set it to the number of differential equations.
-  !         (NEQ .GE. 1)
+  !         (NEQ >= 1)
   !
   !  T -- Set it to the initial point of the integration.
   !         T must be defined as a variable.
@@ -168,8 +167,8 @@ SUBROUTINE SDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
   !
   !  TOUT -- Set it to the first point at which a solution
   !         is desired. You can not take TOUT = T.
-  !         integration either forward in T (TOUT .GT. T) or
-  !         backward in T (TOUT .LT. T) is permitted.
+  !         integration either forward in T (TOUT > T) or
+  !         backward in T (TOUT < T) is permitted.
   !
   !         The code advances the solution from T to TOUT using
   !         step sizes which are automatically selected so as to
@@ -283,7 +282,7 @@ SUBROUTINE SDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
   !              faster. The differential equation is said to have
   !              half-bandwidths ML (lower) and MU (upper) if equation i
   !              involves only unknowns Y(J) with
-  !                             I-ML .LE. J .LE. I+MU
+  !                             I-ML <= J <= I+MU
   !              for all I=1,2,...,NEQ. Thus, ML and MU are the widths
   !              of the lower and upper parts of the band, respectively,
   !              with the main diagonal being excluded. If you do not
@@ -291,7 +290,7 @@ SUBROUTINE SDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
   !              derivatives, the code works with a full matrix of NEQ**2
   !              elements (stored in the conventional way). Computations
   !              with banded matrices cost less time and storage than with
-  !              full matrices if 2*ML+MU .LT. NEQ. If you tell the
+  !              full matrices if 2*ML+MU < NEQ. If you tell the
   !              code that the matrix of partial derivatives has a banded
   !              structure and you want to provide subroutine JAC to
   !              compute the partial derivatives, then you must be careful
@@ -343,7 +342,7 @@ SUBROUTINE SDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
   !              order decrease below 5, the code
   !              requires NEQ fewer locations, however
   !              it is likely to be slower. In any
-  !              case, you must have 1 .LE. MAXORD .LE. 5
+  !              case, you must have 1 <= MAXORD <= 5
   !          ****  Do you want the maximum order to
   !                default to 5?
   !                Yes - Set INFO(9)=0
@@ -389,7 +388,7 @@ SUBROUTINE SDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
   !
   !         The tolerances are used by the code in a local error
   !         test at each step which requires roughly that
-  !               ABS(LOCAL ERROR) .LE. RTOL*ABS(Y)+ATOL
+  !               ABS(LOCAL ERROR) <= RTOL*ABS(Y)+ATOL
   !         for each vector component.
   !         (More specifically, a root-mean-square norm is used to
   !         measure the size of vectors, and the error test uses the
@@ -427,12 +426,12 @@ SUBROUTINE SDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
   !
   !  LRW -- Set it to the declared length of the RWORK array.
   !               You must have
-  !                    LRW .GE. 40+(MAXORD+4)*NEQ+NEQ**2
+  !                    LRW >= 40+(MAXORD+4)*NEQ+NEQ**2
   !               for the full (dense) JACOBIAN case (when INFO(6)=0), or
-  !                    LRW .GE. 40+(MAXORD+4)*NEQ+(2*ML+MU+1)*NEQ
+  !                    LRW >= 40+(MAXORD+4)*NEQ+(2*ML+MU+1)*NEQ
   !               for the banded user-defined JACOBIAN case
   !               (when INFO(5)=1 and INFO(6)=1), or
-  !                     LRW .GE. 40+(MAXORD+4)*NEQ+(2*ML+MU+1)*NEQ
+  !                     LRW >= 40+(MAXORD+4)*NEQ+(2*ML+MU+1)*NEQ
   !                           +2*(NEQ/(ML+MU+1)+1)
   !               for the banded finite-difference-generated JACOBIAN case
   !               (when INFO(5)=0 and INFO(6)=1)
@@ -441,7 +440,7 @@ SUBROUTINE SDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
   !         your calling program.
   !
   !  LIW -- Set it to the declared length of the IWORK array.
-  !               You must have LIW .GE. 20+NEQ
+  !               You must have LIW >= 20+NEQ
   !
   !  RPAR, IPAR -- These are parameter arrays, of real and integer
   !         type, respectively.  You can use them for communication
@@ -804,23 +803,23 @@ SUBROUTINE SDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
   !   Error number       Condition
   !
   !        1       Some element of INFO vector is not zero or one.
-  !        2       NEQ .le. 0
+  !        2       NEQ <= 0
   !        3       MAXORD not in range.
   !        4       LRW is less than the required length for RWORK.
   !        5       LIW is less than the required length for IWORK.
-  !        6       Some element of RTOL is .lt. 0
-  !        7       Some element of ATOL is .lt. 0
+  !        6       Some element of RTOL is < 0
+  !        7       Some element of ATOL is < 0
   !        8       All elements of RTOL and ATOL are zero.
   !        9       INFO(4)=1 and TSTOP is behind TOUT.
-  !       10       HMAX .lt. 0.0
+  !       10       HMAX < 0.0
   !       11       TOUT is behind T.
   !       12       INFO(8)=1 and H0=0.0
-  !       13       Some element of WT is .le. 0.0
+  !       13       Some element of WT is <= 0.0
   !       14       TOUT is too close to T to start integration.
   !       15       INFO(4)=1 and TSTOP is behind T.
   !       16       --( Not used in this version )--
-  !       17       ML illegal.  Either .lt. 0 or .gt. NEQ
-  !       18       MU illegal.  Either .lt. 0 or .gt. NEQ
+  !       17       ML illegal.  Either < 0 or > NEQ
+  !       18       MU illegal.  Either < 0 or > NEQ
   !       19       TOUT = T.
   !
   !   If SDASSL is called again without any action taken to remove the
@@ -947,10 +946,10 @@ SUBROUTINE SDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
   !
   !     Declare local variables.
   !
-  INTEGER i, itemp, leniw, lenpd, lenrw, le, lpd, lphi, lwm, lwt, mband, msave, &
+  INTEGER :: i, itemp, leniw, lenpd, lenrw, le, lpd, lphi, lwm, lwt, mband, msave, &
     mxord, ntemp, nzflg
-  REAL(SP) atoli, h, hmax, hmin, ho, r, rh, rtoli, tdist, tn, tnext, tstop, uround, ypnorm
-  LOGICAL done
+  REAL(SP) :: atoli, h, hmax, hmin, ho, r, rh, rtoli, tdist, tn, tnext, tstop, uround, ypnorm
+  LOGICAL :: done
   !       Auxiliary variables for conversion of values to be included in
   !       error messages.
   CHARACTER(8) :: xern1, xern2
@@ -970,7 +969,7 @@ SUBROUTINE SDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
     LSIGMA = 35, LDELTA = 41
   !
   !* FIRST EXECUTABLE STATEMENT  SDASSL
-  IF ( Info(1)==0 ) THEN
+  IF( Info(1)==0 ) THEN
     !
     !-----------------------------------------------------------------------
     !     THIS BLOCK IS EXECUTED FOR THE INITIAL CALL ONLY.
@@ -980,21 +979,21 @@ SUBROUTINE SDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
     !     FIRST CHECK INFO ARRAY TO MAKE SURE ALL ELEMENTS OF INFO
     !     ARE EITHER ZERO OR ONE.
     DO i = 2, 11
-      IF ( Info(i)/=0.AND.Info(i)/=1 ) GOTO 400
+      IF( Info(i)/=0 .AND. Info(i)/=1 ) GOTO 400
     END DO
     !
-    IF ( Neq<=0 ) THEN
+    IF( Neq<=0 ) THEN
       !
       WRITE (xern1,'(I8)') Neq
-      CALL XERMSG('SDASSL','NEQ = '//xern1//' .LE. 0',2,1)
+      CALL XERMSG('SDASSL','NEQ = '//xern1//' <= 0',2,1)
       GOTO 1200
     ELSE
       !
       !     CHECK AND COMPUTE MAXIMUM ORDER
       mxord = 5
-      IF ( Info(9)/=0 ) THEN
+      IF( Info(9)/=0 ) THEN
         mxord = Iwork(LMXORD)
-        IF ( mxord<1.OR.mxord>5 ) THEN
+        IF( mxord<1 .OR. mxord>5 ) THEN
           !
           WRITE (xern1,'(I8)') mxord
           CALL XERMSG('SDASSL','MAXORD = '//xern1//' NOT IN RANGE',3,1)
@@ -1004,29 +1003,29 @@ SUBROUTINE SDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
       Iwork(LMXORD) = mxord
       !
       !     COMPUTE MTYPE,LENPD,LENRW.CHECK ML AND MU.
-      IF ( Info(6)==0 ) THEN
+      IF( Info(6)==0 ) THEN
         lenpd = Neq**2
         lenrw = 40 + (Iwork(LMXORD)+4)*Neq + lenpd
-        IF ( Info(5)/=0 ) THEN
+        IF( Info(5)/=0 ) THEN
           Iwork(LMTYPE) = 1
         ELSE
           Iwork(LMTYPE) = 2
         END IF
-      ELSEIF ( Iwork(LML)<0.OR.Iwork(LML)>=Neq ) THEN
+      ELSEIF( Iwork(LML)<0 .OR. Iwork(LML)>=Neq ) THEN
         !
         WRITE (xern1,'(I8)') Iwork(LML)
         CALL XERMSG('SDASSL','ML = '//xern1//&
-          ' ILLEGAL.  EITHER .LT. 0 OR .GT. NEQ',17,1)
+          ' ILLEGAL.  EITHER < 0 OR > NEQ',17,1)
         GOTO 1200
-      ELSEIF ( Iwork(LMU)<0.OR.Iwork(LMU)>=Neq ) THEN
+      ELSEIF( Iwork(LMU)<0 .OR. Iwork(LMU)>=Neq ) THEN
         !
         WRITE (xern1,'(I8)') Iwork(LMU)
         CALL XERMSG('SDASSL','MU = '//xern1//&
-          ' ILLEGAL.  EITHER .LT. 0 OR .GT. NEQ',18,1)
+          ' ILLEGAL.  EITHER < 0 OR > NEQ',18,1)
         GOTO 1200
       ELSE
         lenpd = (2*Iwork(LML)+Iwork(LMU)+1)*Neq
-        IF ( Info(5)/=0 ) THEN
+        IF( Info(5)/=0 ) THEN
           Iwork(LMTYPE) = 4
           lenrw = 40 + (Iwork(LMXORD)+4)*Neq + lenpd
         ELSE
@@ -1040,14 +1039,14 @@ SUBROUTINE SDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
       !     CHECK LENGTHS OF RWORK AND IWORK
       leniw = 20 + Neq
       Iwork(LNPD) = lenpd
-      IF ( Lrw<lenrw ) THEN
+      IF( Lrw<lenrw ) THEN
         !
         WRITE (xern1,'(I8)') lenrw
         WRITE (xern2,'(I8)') Lrw
         CALL XERMSG('SDASSL','RWORK LENGTH NEEDED, LENRW = '//&
           xern1//', EXCEEDS LRW = '//xern2,4,1)
         GOTO 1200
-      ELSEIF ( Liw<leniw ) THEN
+      ELSEIF( Liw<leniw ) THEN
         !
         WRITE (xern1,'(I8)') leniw
         WRITE (xern2,'(I8)') Liw
@@ -1057,15 +1056,15 @@ SUBROUTINE SDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
       ELSE
         !
         !     CHECK TO SEE THAT TOUT IS DIFFERENT FROM T
-        IF ( Tout==T ) GOTO 1100
+        IF( Tout==T ) GOTO 1100
         !
         !     CHECK HMAX
-        IF ( Info(7)/=0 ) THEN
+        IF( Info(7)/=0 ) THEN
           hmax = Rwork(LHMAX)
-          IF ( hmax<=0.0E0 ) THEN
+          IF( hmax<=0.0E0 ) THEN
             !
             WRITE (xern3,'(1P,E15.6)') hmax
-            CALL XERMSG('SDASSL','HMAX = '//xern3//' .LT. 0.0',10,1)
+            CALL XERMSG('SDASSL','HMAX = '//xern3//' < 0.0',10,1)
             GOTO 1200
           END IF
         END IF
@@ -1087,10 +1086,10 @@ SUBROUTINE SDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
     !     APPROPRIATE ACTION WAS TAKEN.
     !-----------------------------------------------------------------------
     !
-  ELSEIF ( Info(1)==1 ) THEN
+  ELSEIF( Info(1)==1 ) THEN
     Iwork(LNSTL) = Iwork(LNST)
   ELSE
-    IF ( Info(1)/=-1 ) GOTO 400
+    IF( Info(1)/=-1 ) GOTO 400
     !
     !     IF WE ARE HERE, THE LAST STEP WAS INTERRUPTED
     !     BY AN ERROR CONDITION FROM SDASTP, AND
@@ -1115,13 +1114,13 @@ SUBROUTINE SDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
   rtoli = Rtol(1)
   atoli = Atol(1)
   DO i = 1, Neq
-    IF ( Info(2)==1 ) rtoli = Rtol(i)
-    IF ( Info(2)==1 ) atoli = Atol(i)
-    IF ( rtoli>0.0E0.OR.atoli>0.0E0 ) nzflg = 1
-    IF ( rtoli<0.0E0 ) GOTO 500
-    IF ( atoli<0.0E0 ) GOTO 600
+    IF( Info(2)==1 ) rtoli = Rtol(i)
+    IF( Info(2)==1 ) atoli = Atol(i)
+    IF( rtoli>0.0E0 .OR. atoli>0.0E0 ) nzflg = 1
+    IF( rtoli<0.0E0 ) GOTO 500
+    IF( atoli<0.0E0 ) GOTO 600
   END DO
-  IF ( nzflg==0 ) THEN
+  IF( nzflg==0 ) THEN
     !
     CALL XERMSG('SDASSL','ALL ELEMENTS OF RTOL AND ATOL ARE ZERO',8,1)
     GOTO 1200
@@ -1135,7 +1134,7 @@ SUBROUTINE SDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
     lpd = lphi + (Iwork(LMXORD)+1)*Neq
     lwm = lpd
     ntemp = NPD + Iwork(LNPD)
-    IF ( Info(1)==1 ) THEN
+    IF( Info(1)==1 ) THEN
       !
       !-------------------------------------------------------
       !     THIS BLOCK IS FOR CONTINUATION CALLS ONLY. ITS
@@ -1148,19 +1147,19 @@ SUBROUTINE SDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
       done = .FALSE.
       tn = Rwork(LTN)
       h = Rwork(LH)
-      IF ( Info(7)/=0 ) THEN
+      IF( Info(7)/=0 ) THEN
         rh = ABS(h)/Rwork(LHMAX)
-        IF ( rh>1.0E0 ) h = h/rh
+        IF( rh>1.0E0 ) h = h/rh
       END IF
-      IF ( T==Tout ) GOTO 1100
-      IF ( (T-Tout)*h>0.0E0 ) GOTO 800
-      IF ( Info(4)==1 ) THEN
-        IF ( Info(3)==1 ) THEN
+      IF( T==Tout ) GOTO 1100
+      IF( (T-Tout)*h>0.0E0 ) GOTO 800
+      IF( Info(4)==1 ) THEN
+        IF( Info(3)==1 ) THEN
           tstop = Rwork(LTSTOP)
-          IF ( (tn-tstop)*h>0.0E0 ) GOTO 1000
-          IF ( (tstop-Tout)*h<0.0E0 ) GOTO 700
-          IF ( (tn-T)*h>0.0E0 ) THEN
-            IF ( (tn-Tout)*h>0.0E0 ) THEN
+          IF( (tn-tstop)*h>0.0E0 ) GOTO 1000
+          IF( (tstop-Tout)*h<0.0E0 ) GOTO 700
+          IF( (tn-T)*h>0.0E0 ) THEN
+            IF( (tn-Tout)*h>0.0E0 ) THEN
               CALL SDATRP(tn,Tout,Y,Yprime,Neq,Iwork(LKOLD),Rwork(lphi),Rwork(LPSI))
               T = Tout
               Idid = 3
@@ -1175,9 +1174,9 @@ SUBROUTINE SDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
           END IF
         ELSE
           tstop = Rwork(LTSTOP)
-          IF ( (tn-tstop)*h>0.0E0 ) GOTO 1000
-          IF ( (tstop-Tout)*h<0.0E0 ) GOTO 700
-          IF ( (tn-Tout)*h>=0.0E0 ) THEN
+          IF( (tn-tstop)*h>0.0E0 ) GOTO 1000
+          IF( (tstop-Tout)*h<0.0E0 ) GOTO 700
+          IF( (tn-Tout)*h>=0.0E0 ) THEN
             CALL SDATRP(tn,Tout,Y,Yprime,Neq,Iwork(LKOLD),Rwork(lphi),Rwork(LPSI))
             T = Tout
             Idid = 3
@@ -1186,9 +1185,9 @@ SUBROUTINE SDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
           END IF
         END IF
         !     CHECK WHETHER WE ARE WITHIN ROUNDOFF OF TSTOP
-        IF ( ABS(tn-tstop)>100.0E0*uround*(ABS(tn)+ABS(h)) ) THEN
+        IF( ABS(tn-tstop)>100.0E0*uround*(ABS(tn)+ABS(h)) ) THEN
           tnext = tn + h
-          IF ( (tnext-tstop)*h>0.0E0 ) THEN
+          IF( (tnext-tstop)*h>0.0E0 ) THEN
             h = tstop - tn
             Rwork(LH) = h
           END IF
@@ -1198,9 +1197,9 @@ SUBROUTINE SDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
           T = tstop
           done = .TRUE.
         END IF
-      ELSEIF ( Info(3)==1 ) THEN
-        IF ( (tn-T)*h>0.0E0 ) THEN
-          IF ( (tn-Tout)*h>0.0E0 ) THEN
+      ELSEIF( Info(3)==1 ) THEN
+        IF( (tn-T)*h>0.0E0 ) THEN
+          IF( (tn-Tout)*h>0.0E0 ) THEN
             CALL SDATRP(tn,Tout,Y,Yprime,Neq,Iwork(LKOLD),Rwork(lphi),Rwork(LPSI))
             T = Tout
             Idid = 3
@@ -1212,14 +1211,14 @@ SUBROUTINE SDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
             done = .TRUE.
           END IF
         END IF
-      ELSEIF ( (tn-Tout)*h>=0.0E0 ) THEN
+      ELSEIF( (tn-Tout)*h>=0.0E0 ) THEN
         CALL SDATRP(tn,Tout,Y,Yprime,Neq,Iwork(LKOLD),Rwork(lphi),Rwork(LPSI))
         T = Tout
         Idid = 3
         done = .TRUE.
       END IF
       !
-      20  IF ( done ) GOTO 300
+      20  IF( done ) GOTO 300
     ELSE
       !
       !-----------------------------------------------------------------------
@@ -1235,7 +1234,7 @@ SUBROUTINE SDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
       !     SET ERROR WEIGHT VECTOR WT
       CALL SDAWTS(Neq,Info(2),Rtol,Atol,Y,Rwork(lwt))
       DO i = 1, Neq
-        IF ( Rwork(lwt+i-1)<=0.0E0 ) GOTO 900
+        IF( Rwork(lwt+i-1)<=0.0E0 ) GOTO 900
       END DO
       !
       !     COMPUTE UNIT ROUNDOFF AND HMIN
@@ -1245,7 +1244,7 @@ SUBROUTINE SDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
       !
       !     CHECK INITIAL INTERVAL TO SEE THAT IT IS LONG ENOUGH
       tdist = ABS(Tout-T)
-      IF ( tdist<hmin ) THEN
+      IF( tdist<hmin ) THEN
         !
         WRITE (xern3,'(1P,E15.6)') Tout
         WRITE (xern4,'(1P,E15.6)') T
@@ -1255,42 +1254,42 @@ SUBROUTINE SDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
       ELSE
         !
         !     CHECK HO, IF THIS WAS INPUT
-        IF ( Info(8)==0 ) THEN
+        IF( Info(8)==0 ) THEN
           !
           !     COMPUTE INITIAL STEPSIZE, TO BE USED BY EITHER
           !     SDASTP OR SDAINI, DEPENDING ON INFO(11)
           ho = 0.001E0*tdist
           ypnorm = SDANRM(Neq,Yprime,Rwork(lwt))
-          IF ( ypnorm>0.5E0/ho ) ho = 0.5E0/ypnorm
+          IF( ypnorm>0.5E0/ho ) ho = 0.5E0/ypnorm
           ho = SIGN(ho,Tout-T)
         ELSE
           ho = Rwork(LH)
-          IF ( (Tout-T)*ho<0.0E0 ) GOTO 800
-          IF ( ho==0.0E0 ) THEN
+          IF( (Tout-T)*ho<0.0E0 ) GOTO 800
+          IF( ho==0.0E0 ) THEN
             !
             CALL XERMSG('SDASSL','INFO(8)=1 AND H0=0.0',12,1)
             GOTO 1200
           END IF
         END IF
         !     ADJUST HO IF NECESSARY TO MEET HMAX BOUND
-        IF ( Info(7)/=0 ) THEN
+        IF( Info(7)/=0 ) THEN
           rh = ABS(ho)/Rwork(LHMAX)
-          IF ( rh>1.0E0 ) ho = ho/rh
+          IF( rh>1.0E0 ) ho = ho/rh
         END IF
         !     COMPUTE TSTOP, IF APPLICABLE
-        IF ( Info(4)/=0 ) THEN
+        IF( Info(4)/=0 ) THEN
           tstop = Rwork(LTSTOP)
-          IF ( (tstop-T)*ho<0.0E0 ) GOTO 1000
-          IF ( (T+ho-tstop)*ho>0.0E0 ) ho = tstop - T
-          IF ( (tstop-Tout)*ho<0.0E0 ) GOTO 700
+          IF( (tstop-T)*ho<0.0E0 ) GOTO 1000
+          IF( (T+ho-tstop)*ho>0.0E0 ) ho = tstop - T
+          IF( (tstop-Tout)*ho<0.0E0 ) GOTO 700
         END IF
         !
         !     COMPUTE INITIAL DERIVATIVE, UPDATING TN AND Y, IF APPLICABLE
-        IF ( Info(11)/=0 ) THEN
+        IF( Info(11)/=0 ) THEN
           CALL SDAINI(tn,Y,Yprime,Neq,RES,JAC,ho,Rwork(lwt:lphi-1),Idid,&
             Rwork(lphi:lpd-1),Rwork(LDELTA:lwt-1),Rwork(le:lwt-1),Rwork(lwm:),&
             Iwork,hmin,Rwork(LROUND),Info(10),ntemp)
-          IF ( Idid<0 ) GOTO 100
+          IF( Idid<0 ) GOTO 100
         END IF
         !
         !     LOAD H WITH HO.  STORE H IN RWORK(LH)
@@ -1320,15 +1319,15 @@ SUBROUTINE SDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
   !
   !     CHECK FOR FAILURE TO COMPUTE INITIAL YPRIME
   100 CONTINUE
-  IF ( Idid/=-12 ) THEN
+  IF( Idid/=-12 ) THEN
     !
     !     CHECK FOR TOO MANY STEPS
-    IF ( (Iwork(LNST)-Iwork(LNSTL))<500 ) THEN
+    IF( (Iwork(LNST)-Iwork(LNSTL))<500 ) THEN
       !
       !     UPDATE WT
       CALL SDAWTS(Neq,Info(2),Rtol,Atol,Rwork(lphi),Rwork(lwt))
       DO i = 1, Neq
-        IF ( Rwork(i+lwt-1)<=0.0E0 ) THEN
+        IF( Rwork(i+lwt-1)<=0.0E0 ) THEN
           Idid = -3
           GOTO 200
         END IF
@@ -1336,15 +1335,15 @@ SUBROUTINE SDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
       !
       !     TEST FOR TOO MUCH ACCURACY REQUESTED.
       r = SDANRM(Neq,Rwork(lphi),Rwork(lwt))*100.0E0*uround
-      IF ( r<=1.0E0 ) THEN
+      IF( r<=1.0E0 ) THEN
         !
         !     COMPUTE MINIMUM STEPSIZE
         hmin = 4.0E0*uround*MAX(ABS(tn),ABS(Tout))
         !
         !     TEST H VS. HMAX
-        IF ( Info(7)/=0 ) THEN
+        IF( Info(7)/=0 ) THEN
           rh = ABS(h)/Rwork(LHMAX)
-          IF ( rh>1.0E0 ) h = h/rh
+          IF( rh>1.0E0 ) h = h/rh
         END IF
         !
         CALL SDASTP(tn,Y,Yprime,Neq,RES,JAC,h,Rwork(lwt:lphi-1),Info(1),Idid,&
@@ -1354,7 +1353,7 @@ SUBROUTINE SDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
           Rwork(LHOLD),Rwork(LS),hmin,Rwork(LROUND),Iwork(LPHASE),&
           Iwork(LJCALC),Iwork(LK),Iwork(LKOLD),Iwork(LNS),Info(10),ntemp)
         !     MULTIPLY RTOL AND ATOL BY R AND RETURN
-      ELSEIF ( Info(2)==1 ) THEN
+      ELSEIF( Info(2)==1 ) THEN
         DO i = 1, Neq
           Rtol(i) = r*Rtol(i)
           Atol(i) = r*Atol(i)
@@ -1370,7 +1369,7 @@ SUBROUTINE SDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
     END IF
   END IF
   200 CONTINUE
-  IF ( Idid<0 ) THEN
+  IF( Idid<0 ) THEN
     !
     !-----------------------------------------------------------------------
     !     THIS BLOCK HANDLES ALL UNSUCCESSFUL
@@ -1387,10 +1386,10 @@ SUBROUTINE SDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
           ' TOO MUCH ACCURACY REQUESTED FOR PRECISION OF MACHINE. RTOL AND ATOL WERE INCREASED TO APPROPRIATE VALUES',Idid,1)
       CASE (3)
         !
-        !     WT(I) .LE. 0.0 FOR SOME I (NOT AT START OF PROBLEM)
+        !     WT(I) <= 0.0 FOR SOME I (NOT AT START OF PROBLEM)
         WRITE (xern3,'(1P,E15.6)') tn
         CALL XERMSG('SDASSL','AT T = '//xern3//&
-          ' SOME ELEMENT OF WT HAS BECOME .LE. 0.0',Idid,1)
+          ' SOME ELEMENT OF WT HAS BECOME <= 0.0',Idid,1)
       CASE (4,5)
       CASE (6)
         !
@@ -1461,13 +1460,13 @@ SUBROUTINE SDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
     !     FROM SDASTP (IDID=1).  TEST FOR STOP CONDITIONS.
     !--------------------------------------------------------
     !
-  ELSEIF ( Info(4)/=0 ) THEN
-    IF ( Info(3)/=0 ) THEN
-      IF ( (tn-Tout)*h>=0.0E0 ) THEN
+  ELSEIF( Info(4)/=0 ) THEN
+    IF( Info(3)/=0 ) THEN
+      IF( (tn-Tout)*h>=0.0E0 ) THEN
         CALL SDATRP(tn,Tout,Y,Yprime,Neq,Iwork(LKOLD),Rwork(lphi),Rwork(LPSI))
         T = Tout
         Idid = 3
-      ELSEIF ( ABS(tn-tstop)<=100.0E0*uround*(ABS(tn)+ABS(h)) ) THEN
+      ELSEIF( ABS(tn-tstop)<=100.0E0*uround*(ABS(tn)+ABS(h)) ) THEN
         CALL SDATRP(tn,tstop,Y,Yprime,Neq,Iwork(LKOLD),Rwork(lphi),Rwork(LPSI))
         Idid = 2
         T = tstop
@@ -1475,15 +1474,15 @@ SUBROUTINE SDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
         T = tn
         Idid = 1
       END IF
-    ELSEIF ( (tn-Tout)*h<0.0E0 ) THEN
-      IF ( ABS(tn-tstop)<=100.0E0*uround*(ABS(tn)+ABS(h)) ) THEN
+    ELSEIF( (tn-Tout)*h<0.0E0 ) THEN
+      IF( ABS(tn-tstop)<=100.0E0*uround*(ABS(tn)+ABS(h)) ) THEN
         CALL SDATRP(tn,tstop,Y,Yprime,Neq,Iwork(LKOLD),Rwork(lphi),&
           Rwork(LPSI))
         Idid = 2
         T = tstop
       ELSE
         tnext = tn + h
-        IF ( (tnext-tstop)*h>0.0E0 ) h = tstop - tn
+        IF( (tnext-tstop)*h>0.0E0 ) h = tstop - tn
         GOTO 100
       END IF
     ELSE
@@ -1491,8 +1490,8 @@ SUBROUTINE SDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
       T = Tout
       Idid = 3
     END IF
-  ELSEIF ( Info(3)/=0 ) THEN
-    IF ( (tn-Tout)*h>=0.0E0 ) THEN
+  ELSEIF( Info(3)/=0 ) THEN
+    IF( (tn-Tout)*h>=0.0E0 ) THEN
       CALL SDATRP(tn,Tout,Y,Yprime,Neq,Iwork(LKOLD),Rwork(lphi),Rwork(LPSI))
       Idid = 3
       T = Tout
@@ -1501,7 +1500,7 @@ SUBROUTINE SDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
       Idid = 1
     END IF
   ELSE
-    IF ( (tn-Tout)*h<0.0E0 ) GOTO 100
+    IF( (tn-Tout)*h<0.0E0 ) GOTO 100
     CALL SDATRP(tn,Tout,Y,Yprime,Neq,Iwork(LKOLD),Rwork(lphi),Rwork(LPSI))
     Idid = 3
     T = Tout
@@ -1528,10 +1527,10 @@ SUBROUTINE SDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
     'SOME ELEMENT OF INFO VECTOR IS NOT ZERO OR ONE',1,1)
   GOTO 1200
   !
-  500  CALL XERMSG('SDASSL','SOME ELEMENT OF RTOL IS .LT. 0',6,1)
+  500  CALL XERMSG('SDASSL','SOME ELEMENT OF RTOL IS < 0',6,1)
   GOTO 1200
   !
-  600  CALL XERMSG('SDASSL','SOME ELEMENT OF ATOL IS .LT. 0',7,1)
+  600  CALL XERMSG('SDASSL','SOME ELEMENT OF ATOL IS < 0',7,1)
   GOTO 1200
   !
   700  WRITE (xern3,'(1P,E15.6)') tstop
@@ -1545,7 +1544,7 @@ SUBROUTINE SDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
   CALL XERMSG('SDASSL','TOUT = '//xern3//' BEHIND T = '//xern4,11,1)
   GOTO 1200
   !
-  900  CALL XERMSG('SDASSL','SOME ELEMENT OF WT IS .LE. 0.0',13,1)
+  900  CALL XERMSG('SDASSL','SOME ELEMENT OF WT IS <= 0.0',13,1)
   GOTO 1200
   !
   1000 WRITE (xern3,'(1P,E15.6)') tstop
@@ -1558,7 +1557,7 @@ SUBROUTINE SDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
   CALL XERMSG('SDASSL','TOUT = T = '//xern3,19,1)
   !
   1200 Idid = -33
-  IF ( Info(1)==-1 ) CALL XERMSG('SDASSL',&
+  IF( Info(1)==-1 ) CALL XERMSG('SDASSL',&
     'REPEATED OCCURRENCES OF ILLEGAL INPUT$$RUN TERMINATED. APPARENT INFINITE LOOP',&
     -999,2)
   !

@@ -1,7 +1,6 @@
 !** DCHU
 REAL(DP) FUNCTION DCHU(A,B,X)
-  !>
-  !  Compute the logarithmic confluent hypergeometric function.
+  !> Compute the logarithmic confluent hypergeometric function.
   !***
   ! **Library:**   SLATEC (FNLIB)
   !***
@@ -44,19 +43,19 @@ REAL(DP) FUNCTION DCHU(A,B,X)
   REAL(DP), PARAMETER :: eps = D1MACH(3)
   !* FIRST EXECUTABLE STATEMENT  DCHU
   !
-  IF ( X==0.0D0 ) CALL XERMSG('DCHU','X IS ZERO SO DCHU IS INFINITE',1,2)
-  IF ( X<0.0D0 ) CALL XERMSG('DCHU','X IS NEGATIVE, USE CCHU',2,2)
+  IF( X==0.0D0 ) CALL XERMSG('DCHU','X IS ZERO SO DCHU IS INFINITE',1,2)
+  IF( X<0.0D0 ) CALL XERMSG('DCHU','X IS NEGATIVE, USE CCHU',2,2)
   !
-  IF ( MAX(ABS(A),1.0D0)*MAX(ABS(1.0D0+A-B),1.0D0)>=0.99D0*ABS(X) ) THEN
+  IF( MAX(ABS(A),1.0D0)*MAX(ABS(1.0D0+A-B),1.0D0)>=0.99D0*ABS(X) ) THEN
     !
     ! THE ASCENDING SERIES WILL BE USED, BECAUSE THE DESCENDING RATIONAL
     ! APPROXIMATION (WHICH IS BASED ON THE ASYMPTOTIC SERIES) IS UNSTABLE.
     !
-    IF ( ABS(1.0D0+A-B)<SQRT(eps) ) CALL XERMSG('DCHU',&
+    IF( ABS(1.0D0+A-B)<SQRT(eps) ) CALL XERMSG('DCHU',&
       'ALGORITHMIS BAD WHEN 1+A-B IS NEAR ZERO FOR SMALL X',10,2)
     !
-    IF ( B>=0.0D0 ) aintb = AINT(B+0.5D0)
-    IF ( B<0.0D0 ) aintb = AINT(B-0.5D0)
+    IF( B>=0.0D0 ) aintb = AINT(B+0.5D0)
+    IF( B<0.0D0 ) aintb = AINT(B-0.5D0)
     beps = B - aintb
     n = INT( aintb )
     !
@@ -65,16 +64,16 @@ REAL(DP) FUNCTION DCHU(A,B,X)
     !
     ! EVALUATE THE FINITE SUM.     -----------------------------------------
     !
-    IF ( n>=1 ) THEN
+    IF( n>=1 ) THEN
       !
-      ! NOW CONSIDER THE CASE B .GE. 1.0.
+      ! NOW CONSIDER THE CASE B >= 1.0.
       !
       summ = 0.0D0
       m = n - 2
-      IF ( m>=0 ) THEN
+      IF( m>=0 ) THEN
         t = 1.0D0
         summ = 1.0D0
-        IF ( m/=0 ) THEN
+        IF( m/=0 ) THEN
           !
           DO i = 1, m
             xi = i
@@ -87,10 +86,10 @@ REAL(DP) FUNCTION DCHU(A,B,X)
       END IF
     ELSE
       !
-      ! CONSIDER THE CASE B .LT. 1.0 FIRST.
+      ! CONSIDER THE CASE B < 1.0 FIRST.
       !
       summ = 1.0D0
-      IF ( n/=0 ) THEN
+      IF( n/=0 ) THEN
         !
         t = 1.0D0
         m = -n
@@ -107,18 +106,18 @@ REAL(DP) FUNCTION DCHU(A,B,X)
     ! NEXT EVALUATE THE INFINITE SUM.     ----------------------------------
     !
     istrt = 0
-    IF ( n<1 ) istrt = 1 - n
+    IF( n<1 ) istrt = 1 - n
     xi = istrt
     !
     factor = (-1.0D0)**n*DGAMR(1.0D0+A-B)*X**istrt
-    IF ( beps/=0.0D0 ) factor = factor*beps*pi/SIN(beps*pi)
+    IF( beps/=0.0D0 ) factor = factor*beps*pi/SIN(beps*pi)
     !
     pochai = DPOCH(A,xi)
     gamri1 = DGAMR(xi+1.0D0)
     gamrni = DGAMR(aintb+xi)
     b0 = factor*DPOCH(A,xi-beps)*gamrni*DGAMR(xi+1.0D0-beps)
     !
-    IF ( ABS(xtoeps-1.0D0)<=0.5D0 ) THEN
+    IF( ABS(xtoeps-1.0D0)<=0.5D0 ) THEN
       !
       ! X**(-BEPS) IS CLOSE TO 1.0D0, SO WE MUST BE CAREFUL IN EVALUATING THE
       ! DIFFERENCES.
@@ -142,7 +141,7 @@ REAL(DP) FUNCTION DCHU(A,B,X)
           *b0/(xi*(B+xi1)*(A+xi1-beps))
         t = c0 + xeps1*b0
         DCHU = DCHU + t
-        IF ( ABS(t)<eps*ABS(DCHU) ) RETURN
+        IF( ABS(t)<eps*ABS(DCHU) ) RETURN
       END DO
       CALL XERMSG('DCHU',&
         'NO CONVERGENCE IN 1000 TERMS OF THE ASCENDING SERIES',3,2)
@@ -162,7 +161,7 @@ REAL(DP) FUNCTION DCHU(A,B,X)
       b0 = (A+xi1-beps)*b0*X/((aintb+xi1)*(xi-beps))
       t = a0 - b0
       DCHU = DCHU + t
-      IF ( ABS(t)<eps*ABS(DCHU) ) RETURN
+      IF( ABS(t)<eps*ABS(DCHU) ) RETURN
     END DO
     CALL XERMSG('DCHU',&
       'NO CONVERGENCE IN 1000 TERMS OF THE ASCENDING SERIES',3,2)

@@ -1,7 +1,6 @@
 !** XQNU
 SUBROUTINE XQNU(Nu1,Nu2,Mu1,Theta,X,Sx,Id,Pqa,Ipqa,Ierror)
-  !>
-  !  To compute the values of Legendre functions for XLEGF.
+  !> To compute the values of Legendre functions for XLEGF.
   !            Method: backward nu-wise recurrence for Q(MU,NU,X) for
   !            fixed mu to obtain Q(MU1,NU1,X), Q(MU1,NU1+1,X), ...,
   !            Q(MU1,NU2,X).
@@ -37,14 +36,14 @@ SUBROUTINE XQNU(Nu1,Nu2,Mu1,Theta,X,Sx,Id,Pqa,Ipqa,Ierror)
   ipq2 = 0
   pql2 = 0.0
   ipql2 = 0
-  IF ( Mu1/=1 ) THEN
+  IF( Mu1/=1 ) THEN
     mu = 0
     !
     !        CALL XPQNU TO OBTAIN Q(0.,NU2,X) AND Q(0.,NU2-1,X)
     !
     CALL XPQNU(Nu1,Nu2,mu,Theta,Id,Pqa,Ipqa,Ierror)
-    IF ( Ierror/=0 ) RETURN
-    IF ( Mu1==0 ) RETURN
+    IF( Ierror/=0 ) RETURN
+    IF( Mu1==0 ) RETURN
     k = INT( (Nu2-Nu1+1.5) )
     pq2 = Pqa(k)
     ipq2 = Ipqa(k)
@@ -56,8 +55,8 @@ SUBROUTINE XQNU(Nu1,Nu2,Mu1,Theta,X,Sx,Id,Pqa,Ipqa,Ierror)
   !        CALL XPQNU TO OBTAIN Q(1.,NU2,X) AND Q(1.,NU2-1,X)
   !
   CALL XPQNU(Nu1,Nu2,mu,Theta,Id,Pqa,Ipqa,Ierror)
-  IF ( Ierror/=0 ) RETURN
-  IF ( Mu1==1 ) RETURN
+  IF( Ierror/=0 ) RETURN
+  IF( Mu1==1 ) RETURN
   nu = Nu2
   pq1 = Pqa(k)
   ipq1 = Ipqa(k)
@@ -77,20 +76,20 @@ SUBROUTINE XQNU(Nu1,Nu2,Mu1,Theta,X,Sx,Id,Pqa,Ipqa,Ierror)
     x1 = -2.*dmu*X*Sx*pq1
     x2 = (nu+dmu)*(nu-dmu+1.)*pq2
     CALL XADD(x1,ipq1,-x2,ipq2,pq,ipq,Ierror)
-    IF ( Ierror/=0 ) RETURN
+    IF( Ierror/=0 ) RETURN
     CALL XADJ(pq,ipq,Ierror)
-    IF ( Ierror/=0 ) RETURN
+    IF( Ierror/=0 ) RETURN
     pq2 = pq1
     ipq2 = ipq1
     pq1 = pq
     ipq1 = ipq
     mu = mu + 1
     dmu = dmu + 1.
-    IF ( mu>=Mu1 ) THEN
+    IF( mu>=Mu1 ) THEN
       Pqa(k) = pq
       Ipqa(k) = ipq
-      IF ( k==1 ) RETURN
-      IF ( nu<Nu2 ) THEN
+      IF( k==1 ) RETURN
+      IF( nu<Nu2 ) THEN
         !
         !         BACKWARD RECURRENCE IN NU TO OBTAIN
         !              Q(MU1,NU1,X),Q(MU1,NU1+1,X),....,Q(MU1,NU2,X)
@@ -103,14 +102,14 @@ SUBROUTINE XQNU(Nu1,Nu2,Mu1,Theta,X,Sx,Id,Pqa,Ipqa,Ierror)
         pq2 = Pqa(k+1)
         ipq2 = Ipqa(k+1)
         DO
-          IF ( nu<=Nu1 ) RETURN
+          IF( nu<=Nu1 ) RETURN
           k = k - 1
           x1 = (2.*nu+1.)*X*pq1/(nu+dmu)
           x2 = -(nu-dmu+1.)*pq2/(nu+dmu)
           CALL XADD(x1,ipq1,x2,ipq2,pq,ipq,Ierror)
-          IF ( Ierror/=0 ) RETURN
+          IF( Ierror/=0 ) RETURN
           CALL XADJ(pq,ipq,Ierror)
-          IF ( Ierror/=0 ) RETURN
+          IF( Ierror/=0 ) RETURN
           pq2 = pq1
           ipq2 = ipq1
           pq1 = pq

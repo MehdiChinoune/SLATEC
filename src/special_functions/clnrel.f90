@@ -1,7 +1,6 @@
 !** CLNREL
 COMPLEX(SP) FUNCTION CLNREL(Z)
-  !>
-  !  Evaluate ln(1+X) accurate in the sense of relative error.
+  !> Evaluate ln(1+X) accurate in the sense of relative error.
   !***
   ! **Library:**   SLATEC (FNLIB)
   !***
@@ -40,12 +39,12 @@ COMPLEX(SP) FUNCTION CLNREL(Z)
   REAL(SP), PARAMETER :: sqeps = SQRT(R1MACH(4))
   !* FIRST EXECUTABLE STATEMENT  CLNREL
   !
-  IF ( ABS(1.+Z)<sqeps ) CALL XERMSG('CLNREL',&
+  IF( ABS(1.+Z)<sqeps ) CALL XERMSG('CLNREL',&
     'ANSWER LT HALF PRECISION BECAUSE Z TOO NEAR -1',1,1)
   !
   rho = ABS(Z)
-  IF ( rho>0.375 ) CLNREL = LOG(1.0+Z)
-  IF ( rho>0.375 ) RETURN
+  IF( rho>0.375 ) CLNREL = LOG(1.0+Z)
+  IF( rho>0.375 ) RETURN
   !
   x = REAL(Z)
   CLNREL = CMPLX(0.5*ALNREL(2.*x+rho**2),CARG(1.0+Z))

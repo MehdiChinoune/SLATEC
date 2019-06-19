@@ -1,7 +1,6 @@
 !** CS1S2
 SUBROUTINE CS1S2(Zr,S1,S2,Nz,Ascle,Alim,Iuf)
-  !>
-  !  Subsidiary to CAIRY and CBESK
+  !> Subsidiary to CAIRY and CBESK
   !***
   ! **Library:**   SLATEC
   !***
@@ -28,9 +27,9 @@ SUBROUTINE CS1S2(Zr,S1,S2,Nz,Ascle,Alim,Iuf)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
 
-  COMPLEX(SP) c1, S1, s1d, S2, Zr
-  REAL(SP) aa, Alim, aln, Ascle, as1, as2, xx
-  INTEGER Iuf, Nz
+  COMPLEX(SP) :: c1, S1, s1d, S2, Zr
+  REAL(SP) :: aa, Alim, aln, Ascle, as1, as2, xx
+  INTEGER :: Iuf, Nz
   COMPLEX(SP), PARAMETER :: czero  = (0.0E0,0.0E0)
   !* FIRST EXECUTABLE STATEMENT  CS1S2
   Nz = 0
@@ -38,14 +37,14 @@ SUBROUTINE CS1S2(Zr,S1,S2,Nz,Ascle,Alim,Iuf)
   as2 = ABS(S2)
   aa = REAL(S1)
   aln = AIMAG(S1)
-  IF ( aa/=0.0E0.OR.aln/=0.0E0 ) THEN
-    IF ( as1/=0.0E0 ) THEN
+  IF( aa/=0.0E0 .OR. aln/=0.0E0 ) THEN
+    IF( as1/=0.0E0 ) THEN
       xx = REAL(Zr)
       aln = -xx - xx + LOG(as1)
       s1d = S1
       S1 = czero
       as1 = 0.0E0
-      IF ( aln>=(-Alim) ) THEN
+      IF( aln>=(-Alim) ) THEN
         c1 = LOG(s1d) - Zr - Zr
         S1 = EXP(c1)
         as1 = ABS(S1)
@@ -54,7 +53,7 @@ SUBROUTINE CS1S2(Zr,S1,S2,Nz,Ascle,Alim,Iuf)
     END IF
   END IF
   aa = MAX(as1,as2)
-  IF ( aa>Ascle ) RETURN
+  IF( aa>Ascle ) RETURN
   S1 = czero
   S2 = czero
   Nz = 1

@@ -1,8 +1,7 @@
 !** SGMRES
 SUBROUTINE SGMRES(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,&
     Iter,Err,Ierr,Iunit,Sb,Sx,Rgwk,Lrgw,Igwk,Ligw,Rwork,Iwork)
-  !>
-  !  Preconditioned GMRES Iterative Sparse Ax=b Solver.
+  !> Preconditioned GMRES Iterative Sparse Ax=b Solver.
   !            This routine uses the generalized minimum residual
   !            (GMRES) method with preconditioning to solve
   !            non-symmetric linear systems of the form: Ax = b.
@@ -181,11 +180,11 @@ SUBROUTINE SGMRES(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,&
   !         number is 0, no writing will occur.
   ! SB     :IN       Real SB(N).
   !         Array of length N containing scale factors for the right
-  !         hand side vector B.  If JSCAL.eq.0 (see below), SB need
+  !         hand side vector B.  If JSCAL=0 (see below), SB need
   !         not be supplied.
   ! SX     :IN       Real SX(N).
   !         Array of length N containing scale factors for the solution
-  !         vector X.  If JSCAL.eq.0 (see below), SX need not be
+  !         vector X.  If JSCAL=0 (see below), SX need not be
   !         supplied.  SB and SX can be the same array in the calling
   !         program if desired.
   ! RGWK   :INOUT    Real RGWK(LRGW).
@@ -261,11 +260,11 @@ SUBROUTINE SGMRES(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,&
   !       the size  of the  scaled norm of  the residual  R(L)  =  B -
   !       A*X(L).  The actual stopping test is either:
   !
-  !               norm(SB*(B-A*X(L))) .le. TOL*norm(SB*B),
+  !               norm(SB*(B-A*X(L))) <= TOL*norm(SB*B),
   !
   !       for right preconditioning, or
   !
-  !               norm(SB*(M-inverse)*(B-A*X(L))) .le.
+  !               norm(SB*(M-inverse)*(B-A*X(L))) <=
   !                       TOL*norm(SB*(M-inverse)*B),
   !
   !       for left preconditioning, where norm() denotes the Euclidean
@@ -361,7 +360,7 @@ SUBROUTINE SGMRES(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,&
   !
   !- Cautions:
   !     This routine will attempt to write to the Fortran logical output
-  !     unit IUNIT, if IUNIT .ne. 0.  Thus, the user must make sure that
+  !     unit IUNIT, if IUNIT /= 0.  Thus, the user must make sure that
   !     this logical unit is attached to a file or terminal before calling
   !     this routine with a non-zero value for IUNIT.  This routine does
   !     not check for the validity of a non-zero IUNIT unit number.
@@ -423,24 +422,24 @@ SUBROUTINE SGMRES(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,&
   !         Load method parameters with user values or defaults.
   !   ------------------------------------------------------------------
   maxl = Igwk(1)
-  IF ( maxl==0 ) maxl = 10
-  IF ( maxl>N ) maxl = N
+  IF( maxl==0 ) maxl = 10
+  IF( maxl>N ) maxl = N
   kmp = Igwk(2)
-  IF ( kmp==0 ) kmp = maxl
-  IF ( kmp>maxl ) kmp = maxl
+  IF( kmp==0 ) kmp = maxl
+  IF( kmp>maxl ) kmp = maxl
   jscal = Igwk(3)
   jpre = Igwk(4)
   !         Check for valid value of ITOL.
-  IF ( .NOT.((Itol<0).OR.((Itol>3).AND.(Itol/=11))) ) THEN
+  IF( .NOT. ((Itol<0) .OR. ((Itol>3) .AND. (Itol/=11))) ) THEN
     !         Check for consistent values of ITOL and JPRE.
-    IF ( Itol/=1.OR.jpre>=0 ) THEN
-      IF ( Itol/=2.OR.jpre<0 ) THEN
+    IF( Itol/=1 .OR. jpre>=0 ) THEN
+      IF( Itol/=2 .OR. jpre<0 ) THEN
         nrmax = Igwk(5)
-        IF ( nrmax==0 ) nrmax = 10
-        !         If NRMAX .eq. -1, then set NRMAX = 0 to turn off restarting.
-        IF ( nrmax==-1 ) nrmax = 0
+        IF( nrmax==0 ) nrmax = 10
+        !         If NRMAX = -1, then set NRMAX = 0 to turn off restarting.
+        IF( nrmax==-1 ) nrmax = 0
         !         If input value of TOL is zero, set it to its default value.
-        IF ( Tol==0.0E0 ) Tol = 500*R1MACH(3)
+        IF( Tol==0.0E0 ) Tol = 500*R1MACH(3)
         !
         !         Initialize counters.
         Iter = 0
@@ -461,7 +460,7 @@ SUBROUTINE SGMRES(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,&
         !
         !         Load IGWK(6) with required minimum length of the RGWK array.
         Igwk(6) = lz + N - 1
-        IF ( lz+N-1>Lrgw ) THEN
+        IF( lz+N-1>Lrgw ) THEN
           !         Error return.  Insufficient length for RGWK array.
           Err = Tol
           Ierr = -1
@@ -470,13 +469,13 @@ SUBROUTINE SGMRES(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,&
           !   ------------------------------------------------------------------
           !         Calculate scaled-preconditioned norm of RHS vector b.
           !   ------------------------------------------------------------------
-          IF ( jpre<0 ) THEN
+          IF( jpre<0 ) THEN
             CALL MSOLVE(N,B,Rgwk(lr),Rwork,Iwork)
             nms = nms + 1
           ELSE
             Rgwk(lr:lr+N-1) = B
           END IF
-          IF ( jscal==2.OR.jscal==3 ) THEN
+          IF( jscal==2 .OR. jscal==3 ) THEN
             summ = 0
             DO i = 1, N
               summ = summ + (Rgwk(lr-1+i)*Sb(i))**2
@@ -496,10 +495,10 @@ SUBROUTINE SGMRES(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,&
           !         If performing restarting, then load the residual into the
           !         correct location in the RGWK array.
           !   ------------------------------------------------------------------
-          DO WHILE ( nrsts<=nrmax )
+          DO WHILE( nrsts<=nrmax )
             !         Copy the current residual to a different location in the RGWK
             !         array.
-            IF ( nrsts>0 ) Rgwk(lr:lr+N-1) = Rgwk(ldl:ldl+N-1)
+            IF( nrsts>0 ) Rgwk(lr:lr+N-1) = Rgwk(ldl:ldl+N-1)
             !   ------------------------------------------------------------------
             !         Use the SPIGMR algorithm to solve the linear system A*Z = R.
             !   ------------------------------------------------------------------
@@ -516,12 +515,12 @@ SUBROUTINE SGMRES(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,&
             DO i = 1, N
               X(i) = X(i) + Rgwk(lzm1+i)
             END DO
-            IF ( iflag/=0 ) THEN
-              IF ( iflag==1 ) THEN
+            IF( iflag/=0 ) THEN
+              IF( iflag==1 ) THEN
                 nrsts = nrsts + 1
                 CYCLE
               END IF
-              IF ( iflag==2 ) THEN
+              IF( iflag==2 ) THEN
                 !
                 !         GMRES failed to reduce last residual in MAXL iterations.
                 !         The iteration has stalled.

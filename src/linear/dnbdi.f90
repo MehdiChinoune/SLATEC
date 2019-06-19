@@ -1,7 +1,6 @@
 !** DNBDI
 SUBROUTINE DNBDI(Abe,Lda,N,Ml,Mu,Ipvt,Det)
-  !>
-  !  Compute the determinant of a band matrix using the factors
+  !> Compute the determinant of a band matrix using the factors
   !            computed by DNBCO or DNBFA.
   !***
   ! **Library:**   SLATEC
@@ -24,7 +23,7 @@ SUBROUTINE DNBDI(Abe,Lda,N,Ml,Mu,Ipvt,Det)
   !
   !        ABE     DOUBLE PRECISION(LDA, NC)
   !                the output from DNBCO or DNBFA.
-  !                NC must be .GE. 2*ML+MU+1 .
+  !                NC must be >= 2*ML+MU+1 .
   !
   !        LDA     INTEGER
   !                the leading dimension of the array  ABE .
@@ -46,7 +45,7 @@ SUBROUTINE DNBDI(Abe,Lda,N,Ml,Mu,Ipvt,Det)
   !        DET     DOUBLE PRECISION(2)
   !                determinant of original matrix.
   !                Determinant = DET(1) * 10.0**DET(2)
-  !                with  1.0 .LE. ABS(DET(1)) .LT. 10.0
+  !                with  1.0 <= ABS(DET(1)) < 10.0
   !                or  DET(1) = 0.0 .
   !
   !***
@@ -63,24 +62,24 @@ SUBROUTINE DNBDI(Abe,Lda,N,Ml,Mu,Ipvt,Det)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
-  INTEGER Lda, N, Ml, Mu, Ipvt(N)
+  INTEGER :: Lda, N, Ml, Mu, Ipvt(N)
   REAL(DP) :: Abe(Lda,2*Ml+Mu+1), Det(2)
   !
   REAL(DP) :: ten
-  INTEGER i
+  INTEGER :: i
   !* FIRST EXECUTABLE STATEMENT  DNBDI
   Det(1) = 1.0D0
   Det(2) = 0.0D0
   ten = 10.0D0
   DO i = 1, N
-    IF ( Ipvt(i)/=i ) Det(1) = -Det(1)
+    IF( Ipvt(i)/=i ) Det(1) = -Det(1)
     Det(1) = Abe(i,Ml+1)*Det(1)
-    IF ( Det(1)==0.0D0 ) EXIT
-    DO WHILE ( ABS(Det(1))<1.0D0 )
+    IF( Det(1)==0.0D0 ) EXIT
+    DO WHILE( ABS(Det(1))<1.0D0 )
       Det(1) = ten*Det(1)
       Det(2) = Det(2) - 1.0D0
     END DO
-    DO WHILE ( ABS(Det(1))>=ten )
+    DO WHILE( ABS(Det(1))>=ten )
       Det(1) = Det(1)/ten
       Det(2) = Det(2) + 1.0D0
     END DO

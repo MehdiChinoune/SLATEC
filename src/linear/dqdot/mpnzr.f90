@@ -1,7 +1,6 @@
 !** MPNZR
 SUBROUTINE MPNZR(Rs,Re,Z,Trunc)
-  !>
-  !  Subsidiary to DQDOTA and DQDOTI
+  !> Subsidiary to DQDOTA and DQDOTI
   !***
   ! **Library:**   SLATEC
   !***
@@ -14,7 +13,7 @@ SUBROUTINE MPNZR(Rs,Re,Z,Trunc)
   !  Modified for use with BLAS.  Blank COMMON changed to named COMMON.
   !  Assumes long (i.e. (t+4)-DIGIT) fraction in R, sign = RS, exponent
   !  = RE.  Normalizes, and returns 'mp' result in Z. Integer arguments
-  !  RS and RE are not preserved. R*-rounding is used if TRUNC.EQ.0
+  !  RS and RE are not preserved. R*-rounding is used if TRUNC=0
   !
   !  The argument Z(*) and the variable R in COMMON are INTEGER arrays
   !  of size 30.  See the comments in the routine MPBLAS for the reason
@@ -38,13 +37,13 @@ SUBROUTINE MPNZR(Rs,Re,Z,Trunc)
   INTEGER :: i, i2, i2m, i2p, is, it, j, k, b2
   !* FIRST EXECUTABLE STATEMENT  MPNZR
   i2 = t_com + 4
-  IF ( Rs/=0 ) THEN
+  IF( Rs/=0 ) THEN
     ! CHECK THAT SIGN = +-1
-    IF ( ABS(Rs)<=1 ) THEN
+    IF( ABS(Rs)<=1 ) THEN
       ! LOOK FOR FIRST NONZERO DIGIT
       DO i = 1, i2
         is = i - 1
-        IF ( r_com(i)>0 ) GOTO 100
+        IF( r_com(i)>0 ) GOTO 100
         ! FRACTION ZERO
       END DO
     ELSE
@@ -58,7 +57,7 @@ SUBROUTINE MPNZR(Rs,Re,Z,Trunc)
   Z(1) = 0
   RETURN
   100 CONTINUE
-  IF ( is/=0 ) THEN
+  IF( is/=0 ) THEN
     ! NORMALIZE
     Re = Re - is
     i2m = i2 - is
@@ -72,25 +71,25 @@ SUBROUTINE MPNZR(Rs,Re,Z,Trunc)
     END DO
   END IF
   ! CHECK TO SEE IF TRUNCATION IS DESIRED
-  IF ( Trunc==0 ) THEN
+  IF( Trunc==0 ) THEN
     ! SEE IF ROUNDING NECESSARY
     ! TREAT EVEN AND ODD BASES DIFFERENTLY
     b2 = b_com/2
-    IF ( (2*b2)/=b_com ) THEN
-      ! ODD BASE, ROUND IF R(T+1)... .GT. 1/2
+    IF( (2*b2)/=b_com ) THEN
+      ! ODD BASE, ROUND IF R(T+1)... > 1/2
       DO i = 1, 4
         it = t_com + i
-        IF ( r_com(it)<b2 ) EXIT
-        IF ( r_com(it)/=b2 ) GOTO 150
+        IF( r_com(it)<b2 ) EXIT
+        IF( r_com(it)/=b2 ) GOTO 150
       END DO
       GOTO 200
     ELSE
-      ! B EVEN.  ROUND IF R(T+1).GE.B2 UNLESS R(T) ODD AND ALL ZEROS
+      ! B EVEN.  ROUND IF R(T+1)>=B2 UNLESS R(T) ODD AND ALL ZEROS
       ! AFTER R(T+2).
-      IF ( r_com(t_com+1)<b2 ) GOTO 200
-      IF ( r_com(t_com+1)==b2 ) THEN
-        IF ( MOD(r_com(t_com),2)/=0 ) THEN
-          IF ( (r_com(t_com+2)+r_com(t_com+3)+r_com(t_com+4))==0 ) GOTO 200
+      IF( r_com(t_com+1)<b2 ) GOTO 200
+      IF( r_com(t_com+1)==b2 ) THEN
+        IF( MOD(r_com(t_com),2)/=0 ) THEN
+          IF( (r_com(t_com+2)+r_com(t_com+3)+r_com(t_com+4))==0 ) GOTO 200
         END IF
       END IF
     END IF
@@ -99,7 +98,7 @@ SUBROUTINE MPNZR(Rs,Re,Z,Trunc)
     DO j = 1, t_com
       i = t_com + 1 - j
       r_com(i) = r_com(i) + 1
-      IF ( r_com(i)<b_com ) GOTO 200
+      IF( r_com(i)<b_com ) GOTO 200
       r_com(i) = 0
     END DO
     ! EXCEPTIONAL CASE, ROUNDED UP TO .10000...
@@ -108,13 +107,13 @@ SUBROUTINE MPNZR(Rs,Re,Z,Trunc)
   END IF
   ! CHECK FOR OVERFLOW
   200 CONTINUE
-  IF ( Re>m_com ) THEN
+  IF( Re>m_com ) THEN
     WRITE (lun_com,99002)
     99002 FORMAT (' *** OVERFLOW OCCURRED IN MPNZR ***')
     CALL MPOVFL(Z)
     RETURN
     ! CHECK FOR UNDERFLOW
-  ELSEIF ( Re<(-m_com) ) THEN
+  ELSEIF( Re<(-m_com) ) THEN
     ! UNDERFLOW HERE
     CALL MPUNFL(Z)
     RETURN

@@ -1,8 +1,7 @@
 !** HWSCYL
 SUBROUTINE HWSCYL(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
     Idimf,Pertrb,Ierror,W)
-  !>
-  !  Solve a standard finite difference approximation
+  !> Solve a standard finite difference approximation
   !            to the Helmholtz equation in cylindrical coordinates.
   !***
   ! **Library:**   SLATEC (FISHPACK)
@@ -34,7 +33,7 @@ SUBROUTINE HWSCYL(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   !             * * * * * *   On Input    * * * * * *
   !
   !     A,B
-  !       The range of R, i.e., A .LE. R .LE. B.  A must be less than B
+  !       The range of R, i.e., A <= R <= B.  A must be less than B
   !       and A must be non-negative.
   !
   !     M
@@ -82,7 +81,7 @@ SUBROUTINE HWSCYL(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   !       When MBDCND has any other value, BDB is a dummy variable.
   !
   !     C,D
-  !       The range of Z, i.e., C .LE. Z .LE. D.  C must be less than D.
+  !       The range of Z, i.e., C <= Z <= D.  C must be less than D.
   !
   !     N
   !       The number of panels into which the interval (C,D) is
@@ -122,7 +121,7 @@ SUBROUTINE HWSCYL(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   !
   !     ELMBDA
   !       The constant LAMBDA in the Helmholtz equation.  If
-  !       LAMBDA .GT. 0, a solution may not exist.  However, HWSCYL will
+  !       LAMBDA > 0, a solution may not exist.  However, HWSCYL will
   !       attempt to find a solution.  LAMBDA must be zero when
   !       MBDCND = 5 or 6  .
   !
@@ -199,18 +198,18 @@ SUBROUTINE HWSCYL(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   !       for numbers 0 and 11, a solution is not attempted.
   !
   !       =  0  No error.
-  !       =  1  A .LT. 0  .
-  !       =  2  A .GE. B.
-  !       =  3  MBDCND .LT. 1 or MBDCND .GT. 6  .
-  !       =  4  C .GE. D.
-  !       =  5  N .LE. 3
-  !       =  6  NBDCND .LT. 0 or NBDCND .GT. 4  .
+  !       =  1  A < 0  .
+  !       =  2  A >= B.
+  !       =  3  MBDCND < 1 or MBDCND > 6  .
+  !       =  4  C >= D.
+  !       =  5  N <= 3
+  !       =  6  NBDCND < 0 or NBDCND > 4  .
   !       =  7  A = 0, MBDCND = 3 or 4  .
-  !       =  8  A .GT. 0, MBDCND .GE. 5  .
-  !       =  9  A = 0, LAMBDA .NE. 0, MBDCND .GE. 5  .
-  !       = 10  IDIMF .LT. M+1  .
-  !       = 11  LAMBDA .GT. 0  .
-  !       = 12  M .LE. 3
+  !       =  8  A > 0, MBDCND >= 5  .
+  !       =  9  A = 0, LAMBDA /= 0, MBDCND >= 5  .
+  !       = 10  IDIMF < M+1  .
+  !       = 11  LAMBDA > 0  .
+  !       = 12  M <= 3
   !
   !       Since this is the only means of indicating a possibly incorrect
   !       call to HWSCYL, the user should test IERROR after the call.
@@ -315,18 +314,18 @@ SUBROUTINE HWSCYL(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   REAL(SP) :: a1, a2, deltar, deltht, dlrby2, dlrsq, dlthsq, r, s, s1, s2
   !* FIRST EXECUTABLE STATEMENT  HWSCYL
   Ierror = 0
-  IF ( A<0. ) Ierror = 1
-  IF ( A>=B ) Ierror = 2
-  IF ( Mbdcnd<=0.OR.Mbdcnd>=7 ) Ierror = 3
-  IF ( C>=D ) Ierror = 4
-  IF ( N<=3 ) Ierror = 5
-  IF ( Nbdcnd<=-1.OR.Nbdcnd>=5 ) Ierror = 6
-  IF ( A==0..AND.(Mbdcnd==3.OR.Mbdcnd==4) ) Ierror = 7
-  IF ( A>0..AND.Mbdcnd>=5 ) Ierror = 8
-  IF ( A==0..AND.Elmbda/=0..AND.Mbdcnd>=5 ) Ierror = 9
-  IF ( Idimf<M+1 ) Ierror = 10
-  IF ( M<=3 ) Ierror = 12
-  IF ( Ierror/=0 ) RETURN
+  IF( A<0. ) Ierror = 1
+  IF( A>=B ) Ierror = 2
+  IF( Mbdcnd<=0 .OR. Mbdcnd>=7 ) Ierror = 3
+  IF( C>=D ) Ierror = 4
+  IF( N<=3 ) Ierror = 5
+  IF( Nbdcnd<=-1 .OR. Nbdcnd>=5 ) Ierror = 6
+  IF( A==0. .AND. (Mbdcnd==3 .OR. Mbdcnd==4) ) Ierror = 7
+  IF( A>0. .AND. Mbdcnd>=5 ) Ierror = 8
+  IF( A==0. .AND. Elmbda/=0. .AND. Mbdcnd>=5 ) Ierror = 9
+  IF( Idimf<M+1 ) Ierror = 10
+  IF( M<=3 ) Ierror = 12
+  IF( Ierror/=0 ) RETURN
   mp1 = M + 1
   deltar = (B-A)/M
   dlrby2 = deltar/2.
@@ -375,8 +374,8 @@ SUBROUTINE HWSCYL(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   istart = 1
   a1 = 2./dlrsq
   ij = 0
-  IF ( Mbdcnd==3.OR.Mbdcnd==4 ) ij = 1
-  IF ( Mbdcnd>4 ) THEN
+  IF( Mbdcnd==3 .OR. Mbdcnd==4 ) ij = 1
+  IF( Mbdcnd>4 ) THEN
     W(1) = 0.
     W(id2+1) = -2.*a1
     W(id3+1) = 2.*a1
@@ -470,8 +469,8 @@ SUBROUTINE HWSCYL(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   !     SOLUTION.
   !
   100  Pertrb = 0.
-  IF ( Elmbda<0 ) THEN
-  ELSEIF ( Elmbda==0 ) THEN
+  IF( Elmbda<0 ) THEN
+  ELSEIF( Elmbda==0 ) THEN
     W(id5+1) = .5*(W(id5+2)-dlrby2)
     SELECT CASE (Mbdcnd)
       CASE (1,2,4,5)
@@ -502,7 +501,7 @@ SUBROUTINE HWSCYL(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
       s = s + (a2*s1+F(i,nstart)+F(i,nstop))*W(k)
     END DO
     s2 = M*A + (.75+(M-1)*(M+1))*dlrby2
-    IF ( Mbdcnd==3 ) s2 = s2 + .25*dlrby2
+    IF( Mbdcnd==3 ) s2 = s2 + .25*dlrby2
     s1 = (2.+a2*(nunk-2))*s2
     Pertrb = s/s1
     DO i = mstart, mstop
@@ -537,7 +536,7 @@ SUBROUTINE HWSCYL(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   CALL GENBUN(Nbdcnd,nunk,1,munk,W(1:munk),W(id2+1:id3),W(id3+1:id4),Idimf,&
     F(mstart,nstart),ierr1,W(id4+1:))
   W(1) = W(id4+1) + 3*munk
-  IF ( Nbdcnd==0 ) THEN
+  IF( Nbdcnd==0 ) THEN
     DO i = mstart, mstop
       F(i,np1) = F(i,1)
     END DO

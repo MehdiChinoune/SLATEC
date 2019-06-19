@@ -5,8 +5,7 @@ MODULE TEST09_MOD
 CONTAINS
   !** CQCAI
   SUBROUTINE CQCAI(Lun,Kprint,Ipass)
-    !>
-    !  Quick check for SLATEC subroutines
+    !> Quick check for SLATEC subroutines
     !            CAIRY, CBIRY
     !***
     ! **Library:**   SLATEC
@@ -76,20 +75,20 @@ CONTAINS
     INTEGER, PARAMETER :: MQC = 1
     !  Declare arguments.
     !
-    INTEGER Lun, Kprint, Ipass
+    INTEGER :: Lun, Kprint, Ipass
     !
     !  Declare local variables.
     !
-    COMPLEX(SP) con1, con2, con3, cv, cw, cy, w(20), y(20), z, zr
-    REAL(SP) aa, ab, acw, acy, alim, arg, arzr, atol, av, a1, a2, ct, &
+    COMPLEX(SP) :: con1, con2, con3, cv, cw, cy, w(20), y(20), z, zr
+    REAL(SP) :: aa, ab, acw, acy, alim, arg, arzr, atol, av, a1, a2, ct, &
       c23, dig, elim, eps, er, ertol, film, fnul, fpi, hpi, pi, &
       pi3, r, rl, rm, rpi, rtpi, rzr, r1m4, r1m5, slak, spi, &
       st, t(20), tol, tpi, tpi3, ts
-    INTEGER i, icase, icl, ierr, il, ir, irb, irset, it, itl, k, &
+    INTEGER :: i, icase, icl, ierr, il, ir, irb, irset, it, itl, k, &
       kdo(20), keps(20), kode, k1, k2, lflg, nz1, nz2, nz3, nz4
     !
     !* FIRST EXECUTABLE STATEMENT  CQCAI
-    IF ( Kprint>=2 ) THEN
+    IF( Kprint>=2 ) THEN
       WRITE (Lun,99001)
       99001 FORMAT (' QUICK CHECK ROUTINE FOR THE AIRY FUNCTIONS FROM ',&
         'CAIRY AND CBIRY'/)
@@ -98,8 +97,8 @@ CONTAINS
     !     Set parameters related to machine constants.
     !     TOL is the approximate unit roundoff limited to 1.0E-18.
     !     ELIM is the approximate exponential over- and underflow limit.
-    !     exp(-ELIM).lt.exp(-ALIM)=exp(-ELIM)/TOL    and
-    !     exp(ELIM).gt.exp(ALIM)=exp(ELIM)*TOL       are intervals near
+    !     exp(-ELIM)<exp(-ALIM)=exp(-ELIM)/TOL    and
+    !     exp(ELIM)>exp(ALIM)=exp(ELIM)*TOL       are intervals near
     !     underflow and overflow limits where scaled arithmetic is done.
     !     RL is the lower boundary of the asymptotic expansion for large Z.
     !     DIG = number of base 10 digits in TOL = 10**(-DIG).
@@ -125,7 +124,7 @@ CONTAINS
     rm = MIN(rm,200.0E0)
     rm = MAX(rm,rl+10.0E0)
     fnul = 10.0E0 + 6.0E0*(dig-3.0E0)
-    IF ( Kprint>=2 ) THEN
+    IF( Kprint>=2 ) THEN
       WRITE (Lun,99002)
       99002 FORMAT (' PARAMETERS'/5X,'TOL ',8X,'ELIM',8X,'ALIM',8X,'RL  ',8X,'FNUL',&
         8X,'DIG')
@@ -165,7 +164,7 @@ CONTAINS
     !                   down by EPS
     !     The angles to be used are stored in the T(I) array, I = 1,ITL.
     !-----------------------------------------------------------------------
-    IF ( MQC/=2 ) THEN
+    IF( MQC/=2 ) THEN
       icl = 1
       il = 5
       DO i = 1, il
@@ -189,9 +188,9 @@ CONTAINS
     film = il - 1
     t(1) = -pi + eps
     DO k = 2, il
-      IF ( kdo(k)==0 ) THEN
+      IF( kdo(k)==0 ) THEN
         t(i) = pi*(-il+2*k-1)/film
-        IF ( keps(k)/=0 ) THEN
+        IF( keps(k)/=0 ) THEN
           ts = t(i)
           t(i) = ts - eps
           i = i + 1
@@ -202,9 +201,9 @@ CONTAINS
     END DO
     itl = i - 1
     !-----------------------------------------------------------------------
-    !     Test values of Z in -PI.lt.arg(Z).le.PI near formula boundaries.
+    !     Test values of Z in -PI<arg(Z)<=PI near formula boundaries.
     !-----------------------------------------------------------------------
-    IF ( Kprint>=2 ) THEN
+    IF( Kprint>=2 ) THEN
       WRITE (Lun,99004)
       99004 FORMAT (' CHECKS IN THE Z PLANE'/)
     END IF
@@ -238,30 +237,30 @@ CONTAINS
               !----------------------------------------------------------------------
               ct = COS(t(it))
               st = SIN(t(it))
-              IF ( ABS(ct)<atol ) ct = 0.0E0
-              IF ( ABS(st)<atol ) st = 0.0E0
+              IF( ABS(ct)<atol ) ct = 0.0E0
+              IF( ABS(st)<atol ) st = 0.0E0
               z = CMPLX(r*ct,r*st)
               zr = CMPLX(c23,0.0E0)*z*SQRT(z)
               rzr = REAL(zr)
               arzr = ABS(rzr)
               !-------------- Check for possible underflow or overflow
-              IF ( arzr/=0.0E0 ) THEN
+              IF( arzr/=0.0E0 ) THEN
                 arg = -arzr - 0.5E0*LOG(arzr) + 0.226E0
                 arg = arg + arg
                 !---------------- Skip test for this case?
-                IF ( arg<(-elim) ) CYCLE
+                IF( arg<(-elim) ) CYCLE
               END IF
               CALL CAIRY(z,0,kode,y(1),nz1,ierr)
               CALL CAIRY(z,1,kode,y(2),nz2,ierr)
-              IF ( icase==1 ) THEN
+              IF( icase==1 ) THEN
                 !---------------- Compare 1/PI with Wronskian of CAIRY(Z) and CBIRY(Z).
                 CALL CBIRY(z,0,kode,w(1),ierr)
                 CALL CBIRY(z,1,kode,w(2),ierr)
-                IF ( kode==2 ) THEN
+                IF( kode==2 ) THEN
                   !-----------------------------------------------------------------------
                   !     When KODE = 2, the scaling factor exp(-zeta1-zeta2) is 1.0 for
-                  !     -PI.lt.arg(Z).le.PI/3 and exp(-2.0*zeta1) for PI/3.lt.arg(Z)
-                  !     .le.PI where zeta1 = zeta2 in this range. This is due to the fact
+                  !     -PI<arg(Z)<=PI/3 and exp(-2.0*zeta1) for PI/3<arg(Z)
+                  !     <=PI where zeta1 = zeta2 in this range. This is due to the fact
                   !     that arg(Z*CON1) is taken to be in (-PI,PI) by the principal
                   !     square root.
                   !-----------------------------------------------------------------------
@@ -278,8 +277,8 @@ CONTAINS
                 cv = z*con1
                 CALL CAIRY(cv,0,kode,w(1),nz3,ierr)
                 CALL CAIRY(cv,1,kode,w(2),nz4,ierr)
-                IF ( kode==2 ) THEN
-                  IF ( t(it)>=pi3 ) THEN
+                IF( kode==2 ) THEN
+                  IF( t(it)>=pi3 ) THEN
                     !-------------------- Adjust scaling factor.
                     cv = zr + zr
                     cv = EXP(-cv)
@@ -301,16 +300,16 @@ CONTAINS
               acw = ABS(w(1))*ABS(y(2))
               av = MAX(acw,acy,av)
               er = ABS(cy)/av
-              IF ( er>=ertol ) THEN
-                IF ( lflg==0 ) THEN
-                  IF ( Kprint>=2 ) THEN
+              IF( er>=ertol ) THEN
+                IF( lflg==0 ) THEN
+                  IF( Kprint>=2 ) THEN
                     WRITE (Lun,99005) ertol
                     99005 FORMAT (' CASES WHICH VIOLATE THE RELATIVE ERROR',&
                       ' TEST WITH ERTOL = ',E12.4/)
                     WRITE (Lun,99006)
                     99006 FORMAT (' INPUT TO CAIRY AND ERROR')
                   END IF
-                  IF ( Kprint>=3 ) THEN
+                  IF( Kprint>=3 ) THEN
                     WRITE (Lun,99007)
                     99007 FORMAT (' COMPARISON VALUE AND WRONSKIAN')
                     WRITE (Lun,99008)
@@ -320,18 +319,18 @@ CONTAINS
                   END IF
                 END IF
                 lflg = 1
-                IF ( Kprint>=2 ) THEN
+                IF( Kprint>=2 ) THEN
                   WRITE (Lun,99010) z, er
                   99010 FORMAT (12X,'INPUT:    Z=',2E12.4,5X,'ERROR:   ER=',E12.4)
                 END IF
-                IF ( Kprint>=3 ) THEN
+                IF( Kprint>=3 ) THEN
                   WRITE (Lun,99011) cv, cy
                   99011 FORMAT (' COMPARISON VALUE:   CV=',2E12.4/8X,&
                     'WRONSKIAN:   CY=',2E12.4)
                   WRITE (Lun,99012) nz1, y(1), nz2, y(2)
                   99012 FORMAT (10X,'RESULTS:  NZ1=',I3,4X,'Y(1)=',2E12.4/20X,&
                     'NZ2=',I3,4X,'Y(2)=',2E12.4)
-                  IF ( icase==1 ) THEN
+                  IF( icase==1 ) THEN
                     WRITE (Lun,99013) w(1), w(2)
                     99013 FORMAT (31X,'W(1)=',2E12.4/31X,'W(2)=',2E12.4)
                   ELSE
@@ -349,8 +348,8 @@ CONTAINS
         END DO
       END DO
     END DO
-    IF ( Kprint>=2 ) THEN
-      IF ( lflg==0 ) THEN
+    IF( Kprint>=2 ) THEN
+      IF( lflg==0 ) THEN
         WRITE (Lun,99016)
         99016 FORMAT (' QUICK CHECKS OK')
       ELSE
@@ -359,20 +358,19 @@ CONTAINS
       END IF
     END IF
     Ipass = 0
-    IF ( lflg==0 ) Ipass = 1
-    IF ( Ipass==1.AND.Kprint>=2 ) THEN
+    IF( lflg==0 ) Ipass = 1
+    IF( Ipass==1 .AND. Kprint>=2 ) THEN
       WRITE (Lun,99018)
       99018 FORMAT (/' ****** CAIRY  PASSED ALL TESTS  ******'/)
     END IF
-    IF ( Ipass==0.AND.Kprint>=1 ) THEN
+    IF( Ipass==0 .AND. Kprint>=1 ) THEN
       WRITE (Lun,99019)
       99019 FORMAT (/' ****** CAIRY  FAILED SOME TESTS ******'/)
     END IF
   END SUBROUTINE CQCAI
   !** CQCBH
   SUBROUTINE CQCBH(Lun,Kprint,Ipass)
-    !>
-    !  Quick check for SLATEC subroutine
+    !> Quick check for SLATEC subroutine
     !            CBESH
     !***
     ! **Library:**   SLATEC
@@ -442,19 +440,19 @@ CONTAINS
     INTEGER, PARAMETER :: MQC = 1
     !  Declare arguments.
     !
-    INTEGER Lun, Kprint, Ipass
+    INTEGER :: Lun, Kprint, Ipass
     !
     !  Declare local variables.
     !
-    COMPLEX(SP) cv, cw, cy, w(20), y(20), z, zn
-    REAL(SP) aa, ab, acw, acy, aer(20), alim, atol, av, aw, ay, az, ct, &
+    COMPLEX(SP) :: cv, cw, cy, w(20), y(20), z, zn
+    REAL(SP) :: aa, ab, acw, acy, aer(20), alim, atol, av, aw, ay, az, ct, &
       dig, elim, eps, er, ertol, film, fnu, fnul, fpi, hpi, pi, &
       r, rfpi, rl, rm, r1m4, r1m5, r2, slak, st, t(20), tol, ts, xnu(20)
-    INTEGER i, icase, ierr, il, ir, irb, it, itl, k, kdo(20), keps(20), &
+    INTEGER :: i, icase, ierr, il, ir, irb, it, itl, k, kdo(20), keps(20), &
       kk, kode, k1, k2, lflg, mflg, n, nl, nu, nul, nz1, nz2, n1
     !
     !* FIRST EXECUTABLE STATEMENT  CQCBH
-    IF ( Kprint>=2 ) THEN
+    IF( Kprint>=2 ) THEN
       WRITE (Lun,99001)
       99001 FORMAT (' QUICK CHECK ROUTINE FOR THE H BESSEL FUNCTIONS FROM ','CBESH'/)
     END IF
@@ -462,8 +460,8 @@ CONTAINS
     !     Set parameters related to machine constants.
     !     TOL is the approximate unit roundoff limited to 1.0E-18.
     !     ELIM is the approximate exponential over- and underflow limit.
-    !     exp(-ELIM).lt.exp(-ALIM)=exp(-ELIM)/TOL    and
-    !     exp(ELIM).gt.exp(ALIM)=exp(ELIM)*TOL       are intervals near
+    !     exp(-ELIM)<exp(-ALIM)=exp(-ELIM)/TOL    and
+    !     exp(ELIM)>exp(ALIM)=exp(ELIM)*TOL       are intervals near
     !     underflow and overflow limits where scaled arithmetic is done.
     !     RL is the lower boundary of the asymptotic expansion for large Z.
     !     DIG = number of base 10 digits in TOL = 10**(-DIG).
@@ -490,7 +488,7 @@ CONTAINS
     rm = MIN(rm,200.0E0)
     rm = MAX(rm,rl+10.0E0)
     r2 = MIN(fnul,rm)
-    IF ( Kprint>=2 ) THEN
+    IF( Kprint>=2 ) THEN
       WRITE (Lun,99002)
       99002 FORMAT (' PARAMETERS'/5X,'TOL ',8X,'ELIM',8X,'ALIM',8X,'RL  ',8X,'FNUL',&
         8X,'DIG')
@@ -522,7 +520,7 @@ CONTAINS
     !                   down by EPS
     !     The angles to be used are stored in the T(I) array, I = 1,ITL.
     !-----------------------------------------------------------------------
-    IF ( MQC/=2 ) THEN
+    IF( MQC/=2 ) THEN
       nl = 2
       il = 5
       DO i = 1, il
@@ -565,9 +563,9 @@ CONTAINS
     film = il - 1
     t(1) = -pi + eps
     DO k = 2, il
-      IF ( kdo(k)==0 ) THEN
+      IF( kdo(k)==0 ) THEN
         t(i) = pi*(-il+2*k-1)/film
-        IF ( keps(k)/=0 ) THEN
+        IF( keps(k)/=0 ) THEN
           ts = t(i)
           t(i) = ts - eps
           i = i + 1
@@ -579,9 +577,9 @@ CONTAINS
     END DO
     itl = i - 1
     !-----------------------------------------------------------------------
-    !     Test values of Z in -PI.lt.arg(Z).le.PI.
+    !     Test values of Z in -PI<arg(Z)<=PI.
     !-----------------------------------------------------------------------
-    IF ( Kprint>=2 ) THEN
+    IF( Kprint>=2 ) THEN
       WRITE (Lun,99004)
       99004 FORMAT (' CHECKS IN THE (Z,FNU) SPACE'/)
     END IF
@@ -599,7 +597,7 @@ CONTAINS
                 CASE (2)
                   r = (2.0E0*(3-ir)+r2*(ir-1))/2.0E0
                 CASE (3)
-                  IF ( r2>=rm ) EXIT
+                  IF( r2>=rm ) EXIT
                   r = (r2*(3-ir)+rm*(ir-1))/2.0E0
                 CASE DEFAULT
                   r = (eps*(3-ir)+2.0E0*(ir-1))/2.0E0
@@ -608,27 +606,27 @@ CONTAINS
               DO it = 1, itl
                 ct = COS(t(it))
                 st = SIN(t(it))
-                IF ( ABS(ct)<atol ) ct = 0.0E0
-                IF ( ABS(st)<atol ) st = 0.0E0
+                IF( ABS(ct)<atol ) ct = 0.0E0
+                IF( ABS(st)<atol ) st = 0.0E0
                 z = CMPLX(r*ct,r*st)
-                IF ( fnu>=2.0E0 ) THEN
+                IF( fnu>=2.0E0 ) THEN
                   !------------------ Check for possible overflow condition
                   cv = z*(0.0E0,1.0E0)
                   CALL CUOIK(cv,fnu,kode,2,n1,w,nz2,tol,elim,alim)
                   !------------------ Overflow detected? - skip test for this case
-                  IF ( nz2==(-1) ) CYCLE
+                  IF( nz2==(-1) ) CYCLE
                   cv = -cv
                   CALL CUOIK(cv,fnu,kode,2,n1,w,nz2,tol,elim,alim)
                   !------------------ Overflow detected? - skip test for this case
-                  IF ( nz2==(-1) ) CYCLE
+                  IF( nz2==(-1) ) CYCLE
                 END IF
                 !---------------- No overflow - calculate H1(Z,FNU) and H2(Z,FNU)
                 CALL CBESH(z,fnu,kode,1,n1,y,nz1,ierr)
                 !---------------- Underflow? - skip test for this case
-                IF ( nz1==0 ) THEN
+                IF( nz1==0 ) THEN
                   CALL CBESH(z,fnu,kode,2,n1,w,nz2,ierr)
                   !---------------- Underflow? - skip test for this case
-                  IF ( nz2==0 ) THEN
+                  IF( nz2==0 ) THEN
                     !-----------------------------------------------------------------------
                     !     Compare ZN/Z with the Wronskian of H1(Z,FNU) and H2(Z,FNU).
                     !     ZN = -4i/PI
@@ -643,7 +641,7 @@ CONTAINS
                       ay = ABS(y(i))
                       az = LOG(aw) + LOG(ay)
                       az = ABS(az)
-                      IF ( az<=alim ) THEN
+                      IF( az<=alim ) THEN
                         !-------------------- No scaling problem - do error analysis
                         av = ABS(cv)
                         cw = w(i)*y(i+1)
@@ -654,19 +652,19 @@ CONTAINS
                         av = MAX(acw,acy,av)
                         er = ABS(cy)/av
                         aer(i) = er
-                        IF ( er>ertol ) mflg = 1
+                        IF( er>ertol ) mflg = 1
                       END IF
                     END DO
-                    IF ( mflg/=0 ) THEN
-                      IF ( lflg==0 ) THEN
-                        IF ( Kprint>=2 ) THEN
+                    IF( mflg/=0 ) THEN
+                      IF( lflg==0 ) THEN
+                        IF( Kprint>=2 ) THEN
                           WRITE (Lun,99005) ertol
                           99005 FORMAT (' CASES WHICH VIOLATE THE RELATIVE ',&
                             'ERROR TEST WITH ERTOL = ',E12.4/)
                           WRITE (Lun,99006)
                           99006 FORMAT (' INPUT TO CBESH   Z, FNU, KODE, N')
                         END IF
-                        IF ( Kprint>=3 ) THEN
+                        IF( Kprint>=3 ) THEN
                           WRITE (Lun,99007)
                           99007 FORMAT (' COMPARE -4i/(PI*Z) WITH WRONSKIAN OF',&
                             ' H1(Z,FNU) AND H2(Z,FNU)')
@@ -678,12 +676,12 @@ CONTAINS
                         END IF
                       END IF
                       lflg = lflg + 1
-                      IF ( Kprint>=2 ) THEN
+                      IF( Kprint>=2 ) THEN
                         WRITE (Lun,99010) z, fnu, kode, n
                         99010 FORMAT ('   INPUT:    Z=',2E12.4,4X,'FNU=',E12.4,4X,&
                           'KODE=',I3,4X,'N=',I3)
                       END IF
-                      IF ( Kprint>=3 ) THEN
+                      IF( Kprint>=3 ) THEN
                         WRITE (Lun,99011) (aer(k),k=1,n)
                         99011 FORMAT ('   ERROR:   AER(K)=',4E12.4)
                         kk = MAX(nz1,nz2) + 1
@@ -703,8 +701,8 @@ CONTAINS
         END DO
       END DO
     END DO
-    IF ( Kprint>=2 ) THEN
-      IF ( lflg==0 ) THEN
+    IF( Kprint>=2 ) THEN
+      IF( lflg==0 ) THEN
         WRITE (Lun,99014)
         99014 FORMAT (' QUICK CHECKS OK')
       ELSE
@@ -713,20 +711,19 @@ CONTAINS
       END IF
     END IF
     Ipass = 0
-    IF ( lflg==0 ) Ipass = 1
-    IF ( Ipass==1.AND.Kprint>=2 ) THEN
+    IF( lflg==0 ) Ipass = 1
+    IF( Ipass==1 .AND. Kprint>=2 ) THEN
       WRITE (Lun,99016)
       99016 FORMAT (/' ****** CBESH  PASSED ALL TESTS  ******'/)
     END IF
-    IF ( Ipass==0.AND.Kprint>=1 ) THEN
+    IF( Ipass==0 .AND. Kprint>=1 ) THEN
       WRITE (Lun,99017)
       99017 FORMAT (/' ****** CBESH  FAILED SOME TESTS ******'/)
     END IF
   END SUBROUTINE CQCBH
   !** CQCBI
   SUBROUTINE CQCBI(Lun,Kprint,Ipass)
-    !>
-    !  Quick check for SLATEC subroutine
+    !> Quick check for SLATEC subroutine
     !            CBESI
     !***
     ! **Library:**   SLATEC
@@ -797,19 +794,19 @@ CONTAINS
     INTEGER, PARAMETER :: MQC = 1
     !  Declare arguments.
     !
-    INTEGER Lun, Kprint, Ipass
+    INTEGER :: Lun, Kprint, Ipass
     !
     !  Declare local variables.
     !
-    COMPLEX(SP) ck(20), cone, csgn, cw, cy, w(20), y(20), z, zn, zsc, zt, zz
-    REAL(SP) aa, ab, aer(20), alim, arg, atol, aw, carg, ct, dig, elim, &
+    COMPLEX(SP) :: ck(20), cone, csgn, cw, cy, w(20), y(20), z, zn, zsc, zt, zz
+    REAL(SP) :: aa, ab, aer(20), alim, arg, atol, aw, carg, ct, dig, elim, &
       eps, er, ertol, film, fnu, fnul, gnu, hpi, pi, r, rl, &
       rlt, rm, r1, r1m4, r1m5, r2, sarg, slak, st, t(20), tol, ts, xx, yy
-    INTEGER i, icase, ierr, il, inu, iprnt, ir, it, itl, k, kdo(20), &
+    INTEGER :: i, icase, ierr, il, inu, iprnt, ir, it, itl, k, kdo(20), &
       keps(20), kk, kode, k1, k2, lflg, mflg, n, nl, nzi, nzk, nz1, nz2, n1
     !
     !* FIRST EXECUTABLE STATEMENT  CQCBI
-    IF ( Kprint>=2 ) THEN
+    IF( Kprint>=2 ) THEN
       WRITE (Lun,99001)
       99001 FORMAT (' QUICK CHECK ROUTINE FOR THE I BESSEL FUNCTION FROM ','CBESI'/)
     END IF
@@ -817,8 +814,8 @@ CONTAINS
     !     Set parameters related to machine constants.
     !     TOL is the approximate unit roundoff limited to 1.0E-18.
     !     ELIM is the approximate exponential over- and underflow limit.
-    !     exp(-ELIM).lt.exp(-ALIM)=exp(-ELIM)/TOL    and
-    !     exp(ELIM).gt.exp(ALIM)=exp(ELIM)*TOL       are intervals near
+    !     exp(-ELIM)<exp(-ALIM)=exp(-ELIM)/TOL    and
+    !     exp(ELIM)>exp(ALIM)=exp(ELIM)*TOL       are intervals near
     !     underflow and overflow limits where scaled arithmetic is done.
     !     RL is the lower boundary of the asymptotic expansion for large Z.
     !     DIG = number of base 10 digits in TOL = 10**(-DIG).
@@ -846,7 +843,7 @@ CONTAINS
     rm = MAX(rm,rl+10.0E0)
     r2 = MIN(rm,fnul)
     r1 = 2.0E0*SQRT(fnul+1.0E0)
-    IF ( Kprint>=2 ) THEN
+    IF( Kprint>=2 ) THEN
       WRITE (Lun,99002)
       99002 FORMAT (' PARAMETERS'/5X,'TOL ',8X,'ELIM',8X,'ALIM',8X,'RL  ',8X,'FNUL',&
         8X,'DIG')
@@ -877,7 +874,7 @@ CONTAINS
     !                   down by EPS
     !     The angles to be used are stored in the T(I) array, I = 1,ITL.
     !-----------------------------------------------------------------------
-    IF ( MQC/=2 ) THEN
+    IF( MQC/=2 ) THEN
       nl = 2
       il = 5
       DO i = 1, il
@@ -907,9 +904,9 @@ CONTAINS
     film = il - 1
     t(1) = -pi + eps
     DO k = 2, il
-      IF ( kdo(k)==0 ) THEN
+      IF( kdo(k)==0 ) THEN
         t(i) = pi*(-il+2*k-1)/film
-        IF ( keps(k)/=0 ) THEN
+        IF( keps(k)/=0 ) THEN
           ts = t(i)
           t(i) = ts - eps
           i = i + 1
@@ -921,9 +918,9 @@ CONTAINS
     END DO
     itl = i - 1
     !-----------------------------------------------------------------------
-    !     Test values of Z in -PI.lt.arg(Z).le.PI near formula boundaries.
+    !     Test values of Z in -PI<arg(Z)<=PI near formula boundaries.
     !-----------------------------------------------------------------------
-    IF ( Kprint>=2 ) THEN
+    IF( Kprint>=2 ) THEN
       WRITE (Lun,99004)
       99004 FORMAT (' CHECKS ACROSS FORMULA BOUNDARIES')
     END IF
@@ -944,19 +941,19 @@ CONTAINS
                 gnu = SQRT(r+r) - 0.2E0 - (n-1)
                 fnu = MAX(0.0E0,gnu)
               CASE (3)
-                IF ( r2>=rm ) GOTO 100
+                IF( r2>=rm ) GOTO 100
                 r = (r2*(3-ir)+rm*(ir-1))/2.0E0
                 gnu = SQRT(r+r) - 0.2E0 - (n-1)
                 fnu = MAX(0.0E0,gnu)
               CASE (4)
-                IF ( r1>=rl ) GOTO 100
+                IF( r1>=rl ) GOTO 100
                 r = (r1*(3-ir)+rl*(ir-1))/2.0E0
                 fnu = fnul - 0.2E0 - (n-1)
               CASE (5)
                 r = (rl*(3-ir)+r2*(ir-1))/2.0E0
                 fnu = fnul - 0.2E0 - (n-1)
               CASE (6)
-                IF ( r2>=rm ) GOTO 100
+                IF( r2>=rm ) GOTO 100
                 r = (r2*(3-ir)+rm*(ir-1))/2.0E0
                 fnu = fnul - 0.2E0 - (n-1)
               CASE DEFAULT
@@ -968,32 +965,32 @@ CONTAINS
             DO it = 1, itl
               ct = COS(t(it))
               st = SIN(t(it))
-              IF ( ABS(ct)<atol ) ct = 0.0E0
-              IF ( ABS(st)<atol ) st = 0.0E0
+              IF( ABS(ct)<atol ) ct = 0.0E0
+              IF( ABS(st)<atol ) st = 0.0E0
               z = CMPLX(r*ct,r*st)
               xx = REAL(z)
               yy = AIMAG(z)
               CALL CBESI(z,fnu,kode,n1,y,nz1,ierr)
-              IF ( nz1==0 ) THEN
+              IF( nz1==0 ) THEN
                 !-----------------------------------------------------------------------
                 !     Compare values from CBESI with values from CWRSK, an alternative
                 !     method for calculating the complex Bessel I function.
                 !-----------------------------------------------------------------------
                 zn = z
-                IF ( xx>=0.0E0 ) THEN
+                IF( xx>=0.0E0 ) THEN
                   CALL CWRSK(zn,fnu,kode,n,w,nz2,ck,tol,elim,alim)
-                  IF ( nz2/=0 ) CYCLE
+                  IF( nz2/=0 ) CYCLE
                 ELSE
                   zn = -z
                   inu = INT(fnu)
                   arg = (fnu-inu)*pi
-                  IF ( yy<0.0E0 ) arg = -arg
+                  IF( yy<0.0E0 ) arg = -arg
                   carg = COS(arg)
                   sarg = SIN(arg)
                   csgn = CMPLX(carg,sarg)
-                  IF ( MOD(inu,2)==1 ) csgn = -csgn
+                  IF( MOD(inu,2)==1 ) csgn = -csgn
                   CALL CWRSK(zn,fnu,kode,n,w,nz2,ck,tol,elim,alim)
-                  IF ( nz2/=0 ) CYCLE
+                  IF( nz2/=0 ) CYCLE
                   DO i = 1, n
                     w(i) = w(i)*csgn
                     csgn = -csgn
@@ -1004,7 +1001,7 @@ CONTAINS
                   ab = fnu + i - 1
                   aa = MAX(2.0E0,ab)
                   zt = w(i)
-                  IF ( ABS(zt)>1.0E0 ) THEN
+                  IF( ABS(zt)>1.0E0 ) THEN
                     zsc = CMPLX(tol,0.0E0)
                   ELSE
                     zsc = zz
@@ -1014,31 +1011,31 @@ CONTAINS
                   cy = y(i)*zsc
                   er = ABS(cy-cw)
                   aw = ABS(cw)
-                  IF ( aw==0.0E0 ) THEN
+                  IF( aw==0.0E0 ) THEN
                     er = ABS(y(i))
-                  ELSEIF ( xx/=0.0E0 ) THEN
+                  ELSEIF( xx/=0.0E0 ) THEN
                     er = er/aw
-                  ELSEIF ( ABS(yy)<aa ) THEN
+                  ELSEIF( ABS(yy)<aa ) THEN
                     er = er/aw
                   ELSE
                     er = ABS(w(i)-y(i))
                   END IF
                   aer(i) = er
-                  IF ( er>=ertol ) mflg = 1
+                  IF( er>=ertol ) mflg = 1
                 END DO
                 !-----------------------------------------------------------------------
-                !     Write failure reports for KPRINT.ge.2 and KPRINT.ge.3
+                !     Write failure reports for KPRINT>=2 and KPRINT>=3
                 !-----------------------------------------------------------------------
-                IF ( mflg/=0 ) THEN
-                  IF ( lflg==0 ) THEN
-                    IF ( Kprint>=2 ) THEN
+                IF( mflg/=0 ) THEN
+                  IF( lflg==0 ) THEN
+                    IF( Kprint>=2 ) THEN
                       WRITE (Lun,99005) ertol
                       99005 FORMAT (/' CASES WHICH UNDERFLOW OR VIOLATE THE ',&
                         'RELATIVE ERROR TEST'/' WITH ERTOL = ',E12.4/)
                       WRITE (Lun,99006)
                       99006 FORMAT (' INPUT TO CBESI   Z, FNU, KODE, N')
                     END IF
-                    IF ( Kprint>=3 ) THEN
+                    IF( Kprint>=3 ) THEN
                       WRITE (Lun,99007)
                       99007 FORMAT (' ERROR TEST ON RESULTS FROM CBESI AND ',&
                         'CWRSK   AER(K)')
@@ -1050,12 +1047,12 @@ CONTAINS
                     END IF
                   END IF
                   lflg = lflg + 1
-                  IF ( Kprint>=2 ) THEN
+                  IF( Kprint>=2 ) THEN
                     WRITE (Lun,99010) z, fnu, kode, n
                     99010 FORMAT ('   INPUT:    Z=',2E12.4,4X,'FNU=',E12.4,4X,&
                       'KODE=',I3,4X,'N=',I3)
                   END IF
-                  IF ( Kprint>=3 ) THEN
+                  IF( Kprint>=3 ) THEN
                     WRITE (Lun,99011) (aer(k),k=1,n)
                     99011 FORMAT ('   ERROR:  AER(K)=',4E12.4)
                     kk = MAX(nz1,nz2) + 1
@@ -1074,8 +1071,8 @@ CONTAINS
       END DO
       100 CONTINUE
     END DO
-    IF ( Kprint>=2 ) THEN
-      IF ( lflg==0 ) THEN
+    IF( Kprint>=2 ) THEN
+      IF( lflg==0 ) THEN
         WRITE (Lun,99019)
       ELSE
         WRITE (Lun,99014) lflg
@@ -1086,14 +1083,14 @@ CONTAINS
     !
     !
     iprnt = 0
-    IF ( MQC/=1 ) THEN
+    IF( MQC/=1 ) THEN
       !-----------------------------------------------------------------------
       !     Checks near underflow limits on series(I=1) and uniform
       !     asymptotic expansion(I=2)
       !     Compare 1/Z with I(Z,FNU)*K(Z,FNU+1) + I(Z,FNU+1)*K(Z,FNU) and
       !     report cases for which the relative error is greater than ERTOL.
       !-----------------------------------------------------------------------
-      IF ( Kprint>=2 ) THEN
+      IF( Kprint>=2 ) THEN
         WRITE (Lun,99015)
         99015 FORMAT (/' CHECKS NEAR UNDERFLOW AND OVERFLOW LIMITS'/)
       END IF
@@ -1104,13 +1101,13 @@ CONTAINS
         fnu = 10.2E0
         DO
           !-----------------------------------------------------------------------
-          !       Adjust FNU by repeating until 0.lt.NZI.lt.10
+          !       Adjust FNU by repeating until 0<NZI<10
           !-----------------------------------------------------------------------
           CALL CBESI(z,fnu,kode,n,y,nzi,ierr)
-          IF ( nzi==0 ) THEN
+          IF( nzi==0 ) THEN
             fnu = fnu + 5.0E0
             CYCLE
-          ELSEIF ( nzi>=10 ) THEN
+          ELSEIF( nzi>=10 ) THEN
             fnu = fnu - 1.0E0
             CYCLE
           END IF
@@ -1122,16 +1119,16 @@ CONTAINS
           cw = cw + cy - zt
           er = ABS(cw)/ABS(zt)
           !-----------------------------------------------------------------------
-          !     Write failure reports for KPRINT.ge.2 and KPRINT.ge.3
+          !     Write failure reports for KPRINT>=2 and KPRINT>=3
           !-----------------------------------------------------------------------
-          IF ( er>=ertol ) THEN
-            IF ( iprnt==0 ) THEN
-              IF ( Kprint>=2 ) WRITE (Lun,99020)
-              IF ( Kprint>=3 ) WRITE (Lun,99021)
+          IF( er>=ertol ) THEN
+            IF( iprnt==0 ) THEN
+              IF( Kprint>=2 ) WRITE (Lun,99020)
+              IF( Kprint>=3 ) WRITE (Lun,99021)
             END IF
             iprnt = 1
-            IF ( Kprint>=2 ) WRITE (Lun,99022) z, fnu, kode, n
-            IF ( Kprint>=3 ) THEN
+            IF( Kprint>=2 ) WRITE (Lun,99022) z, fnu, kode, n
+            IF( Kprint>=3 ) THEN
               WRITE (Lun,99023) zt, cw + cy
               WRITE (Lun,99024) er
             END IF
@@ -1150,12 +1147,12 @@ CONTAINS
       fnu = 0.0E0
       DO
         !-----------------------------------------------------------------------
-        !     Adjust FNU by repeating until NZK.lt.10
+        !     Adjust FNU by repeating until NZK<10
         !     N = 20 set before DO 280 loop
         !-----------------------------------------------------------------------
         CALL CBESK(z,fnu,kode,n,y,nzk,ierr)
-        IF ( nzk>=10 ) THEN
-          IF ( nzk==n ) THEN
+        IF( nzk>=10 ) THEN
+          IF( nzk==n ) THEN
             fnu = fnu + 3.0E0
           ELSE
             fnu = fnu + 2.0E0
@@ -1170,20 +1167,20 @@ CONTAINS
         cw = y(n)*w(1)
         cw = cw + cy - zt
         er = ABS(cw)/ABS(zt)
-        IF ( er>=ertol ) THEN
-          IF ( iprnt==0 ) THEN
-            IF ( Kprint>=2 ) WRITE (Lun,99020)
-            IF ( Kprint>=3 ) WRITE (Lun,99021)
+        IF( er>=ertol ) THEN
+          IF( iprnt==0 ) THEN
+            IF( Kprint>=2 ) WRITE (Lun,99020)
+            IF( Kprint>=3 ) WRITE (Lun,99021)
           END IF
           iprnt = 1
-          IF ( Kprint>=2 ) WRITE (Lun,99022) z, fnu, kode, n
-          IF ( Kprint>=3 ) THEN
+          IF( Kprint>=2 ) WRITE (Lun,99022) z, fnu, kode, n
+          IF( Kprint>=3 ) THEN
             WRITE (Lun,99023) zt, cw + cy
             WRITE (Lun,99024) er
           END IF
         END IF
-        IF ( Kprint>=2 ) THEN
-          IF ( iprnt==0 ) THEN
+        IF( Kprint>=2 ) THEN
+          IF( iprnt==0 ) THEN
             WRITE (Lun,99019)
             ! 99986 FORMAT (' QUICK CHECKS OK')
           ELSE
@@ -1196,12 +1193,12 @@ CONTAINS
       END DO
     END IF
     Ipass = 0
-    IF ( iprnt==0.AND.lflg==0 ) Ipass = 1
-    IF ( Ipass==1.AND.Kprint>=2 ) THEN
+    IF( iprnt==0 .AND. lflg==0 ) Ipass = 1
+    IF( Ipass==1 .AND. Kprint>=2 ) THEN
       WRITE (Lun,99017)
       99017 FORMAT (/' ****** CBESI  PASSED ALL TESTS  ******'/)
     END IF
-    IF ( Ipass==0.AND.Kprint>=1 ) THEN
+    IF( Ipass==0 .AND. Kprint>=1 ) THEN
       WRITE (Lun,99018)
       99018 FORMAT (/' ****** CBESI  FAILED SOME TESTS ******'/)
     END IF
@@ -1214,8 +1211,7 @@ CONTAINS
   END SUBROUTINE CQCBI
   !** CQCBJ
   SUBROUTINE CQCBJ(Lun,Kprint,Ipass)
-    !>
-    !  Quick check for SLATEC subroutine
+    !> Quick check for SLATEC subroutine
     !            CBESJ
     !***
     ! **Library:**   SLATEC
@@ -1258,9 +1254,9 @@ CONTAINS
     !
     !            J(FNU,Z) = 0.5*( H(1,FNU,Z) + H(2,FNU,Z) )
     !
-    !    where -PI.lt.arg(Z).le.PI for abs(Z).ge.FNU.
+    !    where -PI<arg(Z)<=PI for abs(Z)>=FNU.
     !
-    !   For abs(Z).lt.FNU, the first N members of a sequence of length
+    !   For abs(Z)<FNU, the first N members of a sequence of length
     !    N+16 are checked against a corresponding N member sequence where
     !    both sequences are generated by CBESJ beginning at order FNU.
     !
@@ -1292,19 +1288,19 @@ CONTAINS
     INTEGER, PARAMETER :: MQC = 1
     !  Declare arguments.
     !
-    INTEGER Lun, Kprint, Ipass
+    INTEGER :: Lun, Kprint, Ipass
     !
     !  Declare local variables.
     !
-    COMPLEX(SP) chalf, coe1, coe2, cw, v(20), w(20), y(20), z
-    REAL(SP) aa, ab, aer(20), alim, atol, av, cc, ct, dd, dig, elim, eps, &
+    COMPLEX(SP) :: chalf, coe1, coe2, cw, v(20), w(20), y(20), z
+    REAL(SP) :: aa, ab, aer(20), alim, atol, av, cc, ct, dd, dig, elim, eps, &
       er, ertol, film, fnu, fnul, gnu, hpi, pi, r, rl, rm, &
       r1m4, r1m5, r2, slak, st, t(20), tol, ts, xnu(20), xx, yy
-    INTEGER i, icase, ierr, il, ir, irb, it, itl, k, kdo(20), keps(20), &
+    INTEGER :: i, icase, ierr, il, ir, irb, it, itl, k, kdo(20), keps(20), &
       kk, kode, k1, k2, lflg, m, mflg, n, nl, nu, nul, nz, nz1, nz2
     !
     !* FIRST EXECUTABLE STATEMENT  CQCBJ
-    IF ( Kprint>=2 ) THEN
+    IF( Kprint>=2 ) THEN
       WRITE (Lun,99001)
       99001 FORMAT (' QUICK CHECK ROUTINE FOR THE J BESSEL FUNCTION FROM ','CBESJ'/)
     END IF
@@ -1312,8 +1308,8 @@ CONTAINS
     !     Set parameters related to machine constants.
     !     TOL is the approximate unit roundoff limited to 1.0E-18.
     !     ELIM is the approximate exponential over- and underflow limit.
-    !     exp(-ELIM).lt.exp(-ALIM)=exp(-ELIM)/TOL    and
-    !     exp(ELIM).gt.exp(ALIM)=exp(ELIM)*TOL       are intervals near
+    !     exp(-ELIM)<exp(-ALIM)=exp(-ELIM)/TOL    and
+    !     exp(ELIM)>exp(ALIM)=exp(ELIM)*TOL       are intervals near
     !     underflow and overflow limits where scaled arithmetic is done.
     !     RL is the lower boundary of the asymptotic expansion for large Z.
     !     DIG = number of base 10 digits in TOL = 10**(-DIG).
@@ -1340,7 +1336,7 @@ CONTAINS
     rm = MIN(rm,200.0E0)
     rm = MAX(rm,rl+10.0E0)
     r2 = MIN(rm,fnul)
-    IF ( Kprint>=2 ) THEN
+    IF( Kprint>=2 ) THEN
       WRITE (Lun,99002)
       99002 FORMAT (' PARAMETERS'/5X,'TOL ',8X,'ELIM',8X,'ALIM',8X,'RL  ',8X,'FNUL',&
         8X,'DIG')
@@ -1370,7 +1366,7 @@ CONTAINS
     !                   down by EPS
     !     The angles to be used are stored in the T(I) array, I = 1,ITL.
     !-----------------------------------------------------------------------
-    IF ( MQC/=2 ) THEN
+    IF( MQC/=2 ) THEN
       nl = 2
       il = 5
       DO i = 1, il
@@ -1413,9 +1409,9 @@ CONTAINS
     film = il - 1
     t(1) = -pi + eps
     DO k = 2, il
-      IF ( kdo(k)==0 ) THEN
+      IF( kdo(k)==0 ) THEN
         t(i) = pi*(-il+2*k-1)/film
-        IF ( keps(k)==0 ) THEN
+        IF( keps(k)==0 ) THEN
           ts = t(i)
           t(i) = ts - eps
           i = i + 1
@@ -1427,9 +1423,9 @@ CONTAINS
     END DO
     itl = i - 1
     !-----------------------------------------------------------------------
-    !     Test values of Z in -PI.lt.arg(Z).le.PI.
+    !     Test values of Z in -PI<arg(Z)<=PI.
     !-----------------------------------------------------------------------
-    IF ( Kprint>=2 ) THEN
+    IF( Kprint>=2 ) THEN
       WRITE (Lun,99004)
       99004 FORMAT (' CHECKS IN THE (Z,FNU) SPACE'/)
     END IF
@@ -1446,7 +1442,7 @@ CONTAINS
                 CASE (2)
                   r = (2.0E0*(4-ir)+r2*(ir-1))/3.0E0
                 CASE (3)
-                  IF ( r2>=rm ) EXIT
+                  IF( r2>=rm ) EXIT
                   r = (r2*(4-ir)+rm*(ir-1))/3.0E0
                 CASE DEFAULT
                   r = (eps*(4-ir)+2.0E0*(ir-1))/3.0E0
@@ -1456,29 +1452,29 @@ CONTAINS
               DO it = 1, itl
                 ct = COS(t(it))
                 st = SIN(t(it))
-                IF ( ABS(ct)<atol ) ct = 0.0E0
-                IF ( ABS(st)<atol ) st = 0.0E0
+                IF( ABS(ct)<atol ) ct = 0.0E0
+                IF( ABS(st)<atol ) st = 0.0E0
                 z = CMPLX(r*ct,r*st)
                 xx = REAL(z)
                 yy = AIMAG(z)
-                IF ( r>=gnu ) THEN
-                  !------------------ Cases for abs(Z).ge.FNU+N-1
+                IF( r>=gnu ) THEN
+                  !------------------ Cases for abs(Z)>=FNU+N-1
                   CALL CBESJ(z,fnu,kode,n,v,nz,ierr)
                   !------------------ Underflow - skip test for this case.
-                  IF ( nz/=0 ) CYCLE
+                  IF( nz/=0 ) CYCLE
                   CALL CBESH(z,fnu,kode,1,n,w,nz1,ierr)
                   CALL CBESH(z,fnu,kode,2,n,y,nz2,ierr)
-                  IF ( kode==2 ) THEN
+                  IF( kode==2 ) THEN
                     !-------------------- Adjust scaling of H functions.
                     cc = -yy - ABS(yy)
-                    IF ( cc>(-alim) ) THEN
+                    IF( cc>(-alim) ) THEN
                       cw = CMPLX(cc,xx)
                       coe1 = EXP(cw)
                     ELSE
                       coe1 = CMPLX(0.0E0,0.0E0)
                     END IF
                     dd = yy - ABS(yy)
-                    IF ( dd>(-alim) ) THEN
+                    IF( dd>(-alim) ) THEN
                       cw = CMPLX(dd,-xx)
                       coe2 = EXP(cw)
                     ELSE
@@ -1490,20 +1486,20 @@ CONTAINS
                     END DO
                   END IF
                 ELSE
-                  !------------------ Cases for abs(Z).lt.FNU+N-1
+                  !------------------ Cases for abs(Z)<FNU+N-1
                   m = n + 16
                   CALL CBESJ(z,fnu,kode,m,v,nz,ierr)
                   !------------------ Underflow at end of sequence - skip test
-                  IF ( nz>10 ) CYCLE
+                  IF( nz>10 ) CYCLE
                   CALL CBESJ(z,fnu,kode,n,w,nz,ierr)
                   DO kk = 1, n
                     y(kk) = w(kk)
                   END DO
                 END IF
                 !-----------------------------------------------------------------------
-                !     If abs(Z).ge.FNU+N-1 then the error test compares J(Z<FNU) with
+                !     If abs(Z)>=FNU+N-1 then the error test compares J(Z<FNU) with
                 !     0.5*(H1(Z,FNU) + H2(Z,FNU)).
-                !     If abs(Z).lt.FNU+N-1 then the error test ensures that calculations
+                !     If abs(Z)<FNU+N-1 then the error test ensures that calculations
                 !     begun in one region of the (Z,FNU) plane and carried into another
                 !     region do not diverge from calculations carried out entirely in
                 !     one region.  This is an internal consistency check.
@@ -1515,27 +1511,27 @@ CONTAINS
                   cw = (w(i)+y(i))*chalf
                   av = ABS(v(i))
                   er = ABS(cw-v(i))
-                  IF ( av/=0.0E0 ) THEN
-                    IF ( yy==0.0E0 ) THEN
-                      IF ( ABS(xx)<aa ) er = er/av
+                  IF( av/=0.0E0 ) THEN
+                    IF( yy==0.0E0 ) THEN
+                      IF( ABS(xx)<aa ) er = er/av
                     ELSE
                       er = er/av
                     END IF
                   END IF
                   aer(i) = er
-                  IF ( er>ertol ) mflg = 1
+                  IF( er>ertol ) mflg = 1
                 END DO
-                IF ( mflg/=0 ) THEN
-                  IF ( lflg==0 ) THEN
-                    IF ( Kprint>=2 ) THEN
+                IF( mflg/=0 ) THEN
+                  IF( lflg==0 ) THEN
+                    IF( Kprint>=2 ) THEN
                       WRITE (Lun,99005) ertol
                       99005 FORMAT (' CASES WHICH VIOLATE THE RELATIVE ',&
                         'ERROR TEST WITH ERTOL=',E12.4/)
                       WRITE (Lun,99006)
                       99006 FORMAT (' INPUT TO CBESJ   Z, FNU, KODE, N')
                     END IF
-                    IF ( Kprint>=3 ) THEN
-                      IF ( r>=gnu ) THEN
+                    IF( Kprint>=3 ) THEN
+                      IF( r>=gnu ) THEN
                         WRITE (Lun,99007)
                         99007 FORMAT (' COMPARE WITH AVERAGE OF H1 AND H2 ',&
                           'FUNCTIONS FOR THE SAME INPUT')
@@ -1554,15 +1550,15 @@ CONTAINS
                     END IF
                   END IF
                   lflg = lflg + 1
-                  IF ( Kprint>=2 ) THEN
+                  IF( Kprint>=2 ) THEN
                     WRITE (Lun,99013) z, fnu, kode, n
                     99013 FORMAT ('   INPUT:   Z=',2E12.4,3X,'FNU=',E12.4,3X,&
                       'KODE=',I3,3X,'N=',I3)
                   END IF
-                  IF ( Kprint>=3 ) THEN
+                  IF( Kprint>=3 ) THEN
                     WRITE (Lun,99014) (aer(k),k=1,n)
                     99014 FORMAT ('   ERROR:   AER(K)=',4E12.4)
-                    IF ( r>=gnu ) THEN
+                    IF( r>=gnu ) THEN
                       kk = MAX(nz1,nz2) + 1
                       kk = MIN(n,kk)
                       WRITE (Lun,99015) nz, v(kk)
@@ -1586,8 +1582,8 @@ CONTAINS
         END DO
       END DO
     END DO
-    IF ( Kprint>=2 ) THEN
-      IF ( lflg==0 ) THEN
+    IF( Kprint>=2 ) THEN
+      IF( lflg==0 ) THEN
         WRITE (Lun,99020)
         99020 FORMAT (' QUICK CHECKS OK')
       ELSE
@@ -1596,20 +1592,19 @@ CONTAINS
       END IF
     END IF
     Ipass = 0
-    IF ( lflg==0 ) Ipass = 1
-    IF ( Ipass==1.AND.Kprint>=2 ) THEN
+    IF( lflg==0 ) Ipass = 1
+    IF( Ipass==1 .AND. Kprint>=2 ) THEN
       WRITE (Lun,99022)
       99022 FORMAT (/' ****** CBESJ  PASSED ALL TESTS  ******'/)
     END IF
-    IF ( Ipass==0.AND.Kprint>=1 ) THEN
+    IF( Ipass==0 .AND. Kprint>=1 ) THEN
       WRITE (Lun,99023)
       99023 FORMAT (/' ****** CBESJ  FAILED SOME TESTS ******'/)
     END IF
   END SUBROUTINE CQCBJ
   !** CQCBK
   SUBROUTINE CQCBK(Lun,Kprint,Ipass)
-    !>
-    !  Quick check for SLATEC subroutine
+    !> Quick check for SLATEC subroutine
     !            CBESK
     !***
     ! **Library:**   SLATEC
@@ -1679,19 +1674,19 @@ CONTAINS
     INTEGER, PARAMETER :: MQC = 1
     !  Declare arguments.
     !
-    INTEGER Lun, Kprint, Ipass
+    INTEGER :: Lun, Kprint, Ipass
     !
     !  Declare local variables.
     !
-    COMPLEX(SP) cone, csgn, cv, cw, cy, w(20), y(20), z, zn
-    REAL(SP) aa, ab, aer(20), alim, arg, atol, axx, ct, dig, elim, eps, &
+    COMPLEX(SP) :: cone, csgn, cv, cw, cy, w(20), y(20), z, zn
+    REAL(SP) :: aa, ab, aer(20), alim, arg, atol, axx, ct, dig, elim, eps, &
       er, ertol, ffnu, film, fnu, fnul, hpi, pi, r, rl, rm, &
       r1m4, r1m5, r2, slak, st, t(20), tol, ts, xnu(20), xx
-    INTEGER i, icase, ierr, ifnu, il, ir, irb, it, itl, k, kdo(20), &
+    INTEGER :: i, icase, ierr, ifnu, il, ir, irb, it, itl, k, kdo(20), &
       keps(20), kk, kode, k1, k2, lflg, mflg, n, nl, nu, nul, nz1, nz2, n1
     !
     !* FIRST EXECUTABLE STATEMENT  CQCBK
-    IF ( Kprint>=2 ) THEN
+    IF( Kprint>=2 ) THEN
       WRITE (Lun,99001)
       99001 FORMAT (' QUICK CHECK ROUTINE FOR THE K BESSEL FUNCTION FROM ','CBESK'/)
     END IF
@@ -1699,8 +1694,8 @@ CONTAINS
     !     Set parameters related to machine constants.
     !     TOL is the approximate unit roundoff limited to 1.0E-18.
     !     ELIM is the approximate exponential over- and underflow limit.
-    !     exp(-ELIM).lt.exp(-ALIM)=exp(-ELIM)/TOL    and
-    !     exp(ELIM).gt.exp(ALIM)=exp(ELIM)*TOL       are intervals near
+    !     exp(-ELIM)<exp(-ALIM)=exp(-ELIM)/TOL    and
+    !     exp(ELIM)>exp(ALIM)=exp(ELIM)*TOL       are intervals near
     !     underflow and overflow limits where scaled arithmetic is done.
     !     RL is the lower boundary of the asymptotic expansion for large Z.
     !     DIG = number of base 10 digits in TOL = 10**(-DIG).
@@ -1727,7 +1722,7 @@ CONTAINS
     rm = MIN(rm,200.0E0)
     rm = MAX(rm,rl+10.0E0)
     r2 = MIN(rm,fnul)
-    IF ( Kprint>=2 ) THEN
+    IF( Kprint>=2 ) THEN
       WRITE (Lun,99002)
       99002 FORMAT (' PARAMETERS'/5X,'TOL ',8X,'ELIM',8X,'ALIM',8X,'RL  ',8X,'FNUL',&
         8X,'DIG')
@@ -1757,7 +1752,7 @@ CONTAINS
     !                   down by EPS
     !     The angles to be used are stored in the T(I) array, I = 1,ITL.
     !-----------------------------------------------------------------------
-    IF ( MQC/=2 ) THEN
+    IF( MQC/=2 ) THEN
       nl = 2
       il = 5
       DO i = 1, il
@@ -1800,9 +1795,9 @@ CONTAINS
     film = il - 1
     t(1) = -pi + eps
     DO k = 2, il
-      IF ( kdo(k)==0 ) THEN
+      IF( kdo(k)==0 ) THEN
         t(i) = pi*(-il+2*k-1)/film
-        IF ( keps(k)/=0 ) THEN
+        IF( keps(k)/=0 ) THEN
           ts = t(i)
           t(i) = ts - eps
           i = i + 1
@@ -1814,9 +1809,9 @@ CONTAINS
     END DO
     itl = i - 1
     !-----------------------------------------------------------------------
-    !     Test values of Z IN -PI.lt.arg(Z).le.PI near formula boundaries.
+    !     Test values of Z IN -PI<arg(Z)<=PI near formula boundaries.
     !-----------------------------------------------------------------------
-    IF ( Kprint>=2 ) THEN
+    IF( Kprint>=2 ) THEN
       WRITE (Lun,99004)
       99004 FORMAT (' CHECKS IN THE (Z,FNU) SPACE')
     END IF
@@ -1830,7 +1825,7 @@ CONTAINS
           ffnu = fnu - ifnu
           arg = pi*ffnu
           csgn = CMPLX(COS(arg),SIN(arg))
-          IF ( MOD(ifnu,2)==1 ) csgn = -csgn
+          IF( MOD(ifnu,2)==1 ) csgn = -csgn
           DO icase = 1, 3
             irb = MIN(2,icase)
             DO ir = irb, 4
@@ -1839,7 +1834,7 @@ CONTAINS
                 CASE (2)
                   r = (2.0E0*(4-ir)+r2*(ir-1))/3.0E0
                 CASE (3)
-                  IF ( r2>=rm ) EXIT
+                  IF( r2>=rm ) EXIT
                   r = (r2*(4-ir)+rm*(ir-1))/3.0E0
                 CASE DEFAULT
                   r = (eps*(4-ir)+2.0E0*(ir-1))/3.0E0
@@ -1848,12 +1843,12 @@ CONTAINS
               DO it = 1, itl
                 ct = COS(t(it))
                 st = SIN(t(it))
-                IF ( ABS(ct)<atol ) ct = 0.0E0
-                IF ( ABS(st)<atol ) st = 0.0E0
+                IF( ABS(ct)<atol ) ct = 0.0E0
+                IF( ABS(st)<atol ) st = 0.0E0
                 z = CMPLX(r*ct,r*st)
                 CALL CBESI(z,fnu,kode,n1,w,nz2,ierr)
                 !---------------- Underflow? - skip test for this case.
-                IF ( nz2==0 ) THEN
+                IF( nz2==0 ) THEN
                   !-----------------------------------------------------------------------
                   !     In the left half plane, the analytic continuation formula for K
                   !     introduces an I function. The dominant terms in the Wronskian
@@ -1861,11 +1856,11 @@ CONTAINS
                   !     This cancellation can be done analytically to give a Wronskian in
                   !     terms of I in the left half plane and K in the right half plane.
                   !-----------------------------------------------------------------------
-                  IF ( icase==1.OR.ct>=0.0E0 ) THEN
+                  IF( icase==1 .OR. ct>=0.0E0 ) THEN
                     !------------------ Z is in the right half plane
                     CALL CBESK(z,fnu,kode,n1,y,nz1,ierr)
                     cv = cone/z
-                    IF ( kode==2 ) THEN
+                    IF( kode==2 ) THEN
                       !-------------------- Adjust Wronskian due to scaled I and K functions
                       xx = REAL(z)
                       axx = ABS(xx)
@@ -1879,13 +1874,13 @@ CONTAINS
                     CALL CBESK(zn,fnu,kode,n1,y,nz1,ierr)
                     zn = csgn
                     !------------------ CSGN set near top of DO 180 loop
-                    IF ( st>0.0E0.OR.(st==0.0E0.AND.ct<0.0E0) ) zn = CONJG(zn)
+                    IF( st>0.0E0 .OR. (st==0.0E0 .AND. ct<0.0E0) ) zn = CONJG(zn)
                     DO kk = 1, n1
                       y(kk) = y(kk)*zn
                       zn = -zn
                     END DO
                     cv = cone/z
-                    IF ( kode==2 ) THEN
+                    IF( kode==2 ) THEN
                       !-------------------- Adjust Wronskian due to scaled I and K functions
                       xx = REAL(z)
                       axx = ABS(xx)
@@ -1901,18 +1896,18 @@ CONTAINS
                     cy = cy + cw - cv
                     er = ABS(cy)/ABS(cv)
                     aer(i) = er
-                    IF ( er>ertol ) mflg = 1
+                    IF( er>ertol ) mflg = 1
                   END DO
-                  IF ( mflg/=0 ) THEN
-                    IF ( lflg==0 ) THEN
-                      IF ( Kprint>=2 ) THEN
+                  IF( mflg/=0 ) THEN
+                    IF( lflg==0 ) THEN
+                      IF( Kprint>=2 ) THEN
                         WRITE (Lun,99005) ertol
                         99005 FORMAT (/' CASES WHICH OR VIOLATE THE RELATIVE',&
                           ' ERROR TEST WITH ERTOL = ',E12.4/)
                         WRITE (Lun,99006)
                         99006 FORMAT (' INPUT TO CBESK   Z, FNU, KODE, N')
                       END IF
-                      IF ( Kprint>=3 ) THEN
+                      IF( Kprint>=3 ) THEN
                         WRITE (Lun,99007)
                         99007 FORMAT (' ERROR TEST ON THE WRONSKIAN OF ',&
                           'CBESI(Z,FNU) AND CBESK(Z,FNU)')
@@ -1924,12 +1919,12 @@ CONTAINS
                       END IF
                     END IF
                     lflg = lflg + 1
-                    IF ( Kprint>=2 ) THEN
+                    IF( Kprint>=2 ) THEN
                       WRITE (Lun,99010) z, fnu, kode, n
                       99010 FORMAT ('   INPUT:    Z=',2E12.4,4X,'FNU=',E12.4,4X,&
                         'KODE=',I3,4X,'N=',I3)
                     END IF
-                    IF ( Kprint>=3 ) THEN
+                    IF( Kprint>=3 ) THEN
                       WRITE (Lun,99011) (aer(k),k=1,n)
                       99011 FORMAT ('   ERROR:  AER(K)=',4E12.4)
                       kk = MAX(nz1,nz2) + 1
@@ -1948,8 +1943,8 @@ CONTAINS
         END DO
       END DO
     END DO
-    IF ( Kprint>=2 ) THEN
-      IF ( lflg==0 ) THEN
+    IF( Kprint>=2 ) THEN
+      IF( lflg==0 ) THEN
         WRITE (Lun,99014)
         99014 FORMAT (' QUICK CHECKS OK')
       ELSE
@@ -1958,20 +1953,19 @@ CONTAINS
       END IF
     END IF
     Ipass = 0
-    IF ( lflg==0 ) Ipass = 1
-    IF ( Ipass==1.AND.Kprint>=2 ) THEN
+    IF( lflg==0 ) Ipass = 1
+    IF( Ipass==1 .AND. Kprint>=2 ) THEN
       WRITE (Lun,99016)
       99016 FORMAT (/' ****** CBESK  PASSED ALL TESTS  ******'/)
     END IF
-    IF ( Ipass==0.AND.Kprint>=1 ) THEN
+    IF( Ipass==0 .AND. Kprint>=1 ) THEN
       WRITE (Lun,99017)
       99017 FORMAT (/' ****** CBESK  FAILED SOME TESTS ******'/)
     END IF
   END SUBROUTINE CQCBK
   !** CQCBY
   SUBROUTINE CQCBY(Lun,Kprint,Ipass)
-    !>
-    !  Quick check for SLATEC subroutine
+    !> Quick check for SLATEC subroutine
     !            CBESY
     !***
     ! **Library:**   SLATEC
@@ -2016,7 +2010,7 @@ CONTAINS
     !
     !    where ROT = EXP(PI*I/2), C(FNU)=EXP(PI*FNU*I/2), I**2=-1
     !
-    !    and -PI.LT.ARG(Z).LE.PI/2, in the (Z,FNU) space.
+    !    and -PI<ARG(Z)<=PI/2, in the (Z,FNU) space.
     !
     !***
     ! **References:**  Abramowitz, M. and Stegun, I. A., Handbook
@@ -2046,21 +2040,21 @@ CONTAINS
     INTEGER, PARAMETER :: MQC = 1
     !  Declare arguments.
     !
-    INTEGER Lun, Kprint, Ipass
+    INTEGER :: Lun, Kprint, Ipass
     !
     !  Declare local variables.
     !
-    COMPLEX(SP) ci, coe1, coe2, csgn, cspn, cw, cwrk(20), v(20), w(20), y(20), z, zn
-    REAL(SP) aa, ab, aer(20), alim, arg, atol, av, cc, ct, dig, elim, eps, &
+    COMPLEX(SP) :: ci, coe1, coe2, csgn, cspn, cw, cwrk(20), v(20), w(20), y(20), z, zn
+    REAL(SP) :: aa, ab, aer(20), alim, arg, atol, av, cc, ct, dig, elim, eps, &
       er, ertol, ffnu, film, fnu, fnul, hpi, pi, r, rhpi, rl, &
       rm, r1m4, r1m5, r2, slak, st, t(20), tol, ts, xn, xnu(20), xx, yn, yy
-    INTEGER i, icase, ierr, ifnu, il, ir, irb, it, itl, i4, k, &
+    INTEGER :: i, icase, ierr, ifnu, il, ir, irb, it, itl, i4, k, &
       kdo(20), keps(20), kk, kode, k1, k2, lflg, mflg, n, nl, nu, nul, nz, nz1, nz2
     COMPLEX(SP), PARAMETER :: cip(4) = [ (1.0E0,0.0E0), (0.0E0,1.0E0), &
       (-1.0E0,0.0E0), (0.0E0,-1.0E0) ]
     !
     !* FIRST EXECUTABLE STATEMENT  CQCBY
-    IF ( Kprint>=2 ) THEN
+    IF( Kprint>=2 ) THEN
       WRITE (Lun,99001)
       99001 FORMAT (' QUICK CHECK ROUTINE FOR THE Y BESSEL FUNCTION FROM ','CBESY'/)
     END IF
@@ -2068,8 +2062,8 @@ CONTAINS
     !     Set parameters related to machine constants.
     !     TOL is the approximate unit roundoff limited to 1.0E-18.
     !     ELIM is the approximate exponential over- and underflow limit.
-    !     exp(-ELIM).lt.exp(-ALIM)=exp(-ELIM)/TOL    and
-    !     exp(ELIM).gt.exp(ALIM)=exp(ELIM)*TOL       are intervals near
+    !     exp(-ELIM)<exp(-ALIM)=exp(-ELIM)/TOL    and
+    !     exp(ELIM)>exp(ALIM)=exp(ELIM)*TOL       are intervals near
     !     underflow and overflow limits where scaled arithmetic is done.
     !     RL is the lower boundary of the asymptotic expansion for large Z.
     !     DIG = number of base 10 digits in TOL = 10**(-DIG).
@@ -2096,7 +2090,7 @@ CONTAINS
     rm = MIN(rm,200.0E0)
     rm = MAX(rm,rl+10.0E0)
     r2 = MIN(rm,fnul)
-    IF ( Kprint>=2 ) THEN
+    IF( Kprint>=2 ) THEN
       WRITE (Lun,99002)
       99002 FORMAT (' PARAMETERS'/5X,'TOL ',8X,'ELIM',8X,'ALIM',8X,'RL  ',8X,'FNUL',&
         8X,'DIG')
@@ -2127,7 +2121,7 @@ CONTAINS
     !                   down by EPS
     !     The angles to be used are stored in the T(I) array, I = 1,ITL.
     !-----------------------------------------------------------------------
-    IF ( MQC/=2 ) THEN
+    IF( MQC/=2 ) THEN
       nl = 2
       il = 5
       DO i = 1, il
@@ -2171,9 +2165,9 @@ CONTAINS
     film = il - 1
     t(1) = -pi + eps
     DO k = 2, il
-      IF ( kdo(k)==0 ) THEN
+      IF( kdo(k)==0 ) THEN
         t(i) = pi*(-il+2*k-1)/film
-        IF ( keps(k)/=0 ) THEN
+        IF( keps(k)/=0 ) THEN
           ts = t(i)
           t(i) = ts - eps
           i = i + 1
@@ -2185,9 +2179,9 @@ CONTAINS
     END DO
     itl = i - 1
     !-----------------------------------------------------------------------
-    !     Test values of Z in -PI/2.lt.arg(Z).le.PI
+    !     Test values of Z in -PI/2<arg(Z)<=PI
     !-----------------------------------------------------------------------
-    IF ( Kprint>=2 ) THEN
+    IF( Kprint>=2 ) THEN
       WRITE (Lun,99004)
       99004 FORMAT (' CHECKS IN THE (Z,FNU) SPACE')
     END IF
@@ -2217,7 +2211,7 @@ CONTAINS
                 CASE (2)
                   r = (2.0E0*(4-ir)+r2*(ir-1))/3.0E0
                 CASE (3)
-                  IF ( r2>=rm ) EXIT
+                  IF( r2>=rm ) EXIT
                   r = (r2*(4-ir)+rm*(ir-1))/3.0E0
                 CASE DEFAULT
                   r = (eps*(4-ir)+2.0E0*(ir-1))/3.0E0
@@ -2226,29 +2220,29 @@ CONTAINS
               DO it = 1, itl
                 ct = COS(t(it))
                 st = SIN(t(it))
-                IF ( ABS(ct)<atol ) ct = 0.0E0
-                IF ( ABS(st)<atol ) st = 0.0E0
+                IF( ABS(ct)<atol ) ct = 0.0E0
+                IF( ABS(st)<atol ) st = 0.0E0
                 z = CMPLX(r*ct,r*st)
                 xx = REAL(z)
                 yy = AIMAG(z)
                 CALL CBESI(z,fnu,kode,n,w,nz2,ierr)
                 !---------------- Underflow in CBESI - skip test for this case.
-                IF ( nz2==0 ) THEN
+                IF( nz2==0 ) THEN
                   CALL CBESK(z,fnu,kode,n,y,nz1,ierr)
                   !---------------- Underflow in CBESK - skip test for this case.
-                  IF ( nz1==0 ) THEN
+                  IF( nz1==0 ) THEN
                     zn = z*ci
                     xn = -yy
                     yn = xx
                     CALL CBESY(zn,fnu,kode,n,v,nz,cwrk,ierr)
                     !---------------- Underflow in CBESY - skip test for this case.
-                    IF ( nz==0 ) THEN
+                    IF( nz==0 ) THEN
                       coe1 = csgn
                       coe2 = cspn
-                      IF ( kode==2 ) THEN
+                      IF( kode==2 ) THEN
                         !------------------ Adjust scale for I and K functions.
                         cc = -xx - ABS(xx)
-                        IF ( cc>(-alim) ) THEN
+                        IF( cc>(-alim) ) THEN
                           cw = CMPLX(cc,-yy)
                           coe2 = coe2*EXP(cw)
                         ELSE
@@ -2273,30 +2267,30 @@ CONTAINS
                         cw = w(i) - y(i)
                         av = ABS(v(i))
                         er = ABS(cw-v(i))
-                        IF ( av/=0.0E0 ) THEN
-                          IF ( yn/=0.0E0 ) THEN
+                        IF( av/=0.0E0 ) THEN
+                          IF( yn/=0.0E0 ) THEN
                             er = er/av
-                          ELSEIF ( xn>0.0E0 ) THEN
-                            IF ( ABS(xn)<aa ) er = er/av
-                          ELSEIF ( ABS(ffnu-0.5E0)<0.125E0 ) THEN
-                            IF ( ABS(xn)<aa ) er = er/av
+                          ELSEIF( xn>0.0E0 ) THEN
+                            IF( ABS(xn)<aa ) er = er/av
+                          ELSEIF( ABS(ffnu-0.5E0)<0.125E0 ) THEN
+                            IF( ABS(xn)<aa ) er = er/av
                           ELSE
                             er = er/av
                           END IF
                         END IF
                         aer(i) = er
-                        IF ( er>ertol ) mflg = 1
+                        IF( er>ertol ) mflg = 1
                       END DO
-                      IF ( mflg/=0 ) THEN
-                        IF ( lflg==0 ) THEN
-                          IF ( Kprint>=2 ) THEN
+                      IF( mflg/=0 ) THEN
+                        IF( lflg==0 ) THEN
+                          IF( Kprint>=2 ) THEN
                             WRITE (Lun,99005) ertol
                             99005 FORMAT (/' CASES WHICH VIOLATE THE RELATIVE ',&
                               'ERROR TEST WITH ERTOL = ',E12.4/)
                             WRITE (Lun,99006)
                             99006 FORMAT (' INPUT TO CBESY   ZN, FNU, KODE, N')
                           END IF
-                          IF ( Kprint>=3 ) THEN
+                          IF( Kprint>=3 ) THEN
                             WRITE (Lun,99007)
                             99007 FORMAT (' COMPARE Y(ZN,FNU) WITH COE1*I(Z,FNU)',&
                               '-COE2*K(Z,FNU)')
@@ -2313,12 +2307,12 @@ CONTAINS
                           END IF
                         END IF
                         lflg = lflg + 1
-                        IF ( Kprint>=2 ) THEN
+                        IF( Kprint>=2 ) THEN
                           WRITE (Lun,99011) zn, fnu, kode, n
                           99011 FORMAT ('   INPUT:   ZN=',2E12.4,3X,'FNU=',E12.4,3X,&
                             'KODE=',I3,3X,'N=',I3)
                         END IF
-                        IF ( Kprint>=3 ) THEN
+                        IF( Kprint>=3 ) THEN
                           WRITE (Lun,99012) (aer(k),k=1,n)
                           99012 FORMAT ('   ERROR:   AER(K)=',4E12.4)
                           WRITE (Lun,99013) z, coe1, coe2
@@ -2343,8 +2337,8 @@ CONTAINS
         END DO
       END DO
     END DO
-    IF ( Kprint>=2 ) THEN
-      IF ( lflg==0 ) THEN
+    IF( Kprint>=2 ) THEN
+      IF( lflg==0 ) THEN
         WRITE (Lun,99016)
         99016 FORMAT (' QUICK CHECKS OK')
       ELSE
@@ -2353,12 +2347,12 @@ CONTAINS
       END IF
     END IF
     Ipass = 0
-    IF ( lflg==0 ) Ipass = 1
-    IF ( Ipass==1.AND.Kprint>=2 ) THEN
+    IF( lflg==0 ) Ipass = 1
+    IF( Ipass==1 .AND. Kprint>=2 ) THEN
       WRITE (Lun,99018)
       99018 FORMAT (/' ****** CBESY  PASSED ALL TESTS  ******'/)
     END IF
-    IF ( Ipass==0.AND.Kprint>=1 ) THEN
+    IF( Ipass==0 .AND. Kprint>=1 ) THEN
       WRITE (Lun,99019)
       99019 FORMAT (/' ****** CBESY  FAILED SOME TESTS ******'/)
     END IF
@@ -2370,8 +2364,7 @@ PROGRAM TEST09
   USE slatec, ONLY : I1MACH, XSETF, XSETUN, XERMAX
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
-  !>
-  !  Driver for testing SLATEC subprograms.
+  !> Driver for testing SLATEC subprograms.
   !***
   ! **Library:**   SLATEC
   !***
@@ -2416,7 +2409,7 @@ PROGRAM TEST09
   !* REVISION HISTORY  (YYMMDD)
   !   910411  DATE WRITTEN
   !   920128  Category corrected.  (WRB)
-  INTEGER ipass, kprint, lin, lun, nfail
+  INTEGER :: ipass, kprint, lin, lun, nfail
   !* FIRST EXECUTABLE STATEMENT  TEST09
   lun = I1MACH(2)
   lin = I1MACH(1)
@@ -2427,7 +2420,7 @@ PROGRAM TEST09
   CALL GET_ARGUMENT(kprint)
   CALL XERMAX(1000)
   CALL XSETUN(lun)
-  IF ( kprint<=1 ) THEN
+  IF( kprint<=1 ) THEN
     CALL XSETF(0)
   ELSE
     CALL XSETF(1)
@@ -2436,21 +2429,21 @@ PROGRAM TEST09
   !     Test Single Precision Complex Bessel Functions.
   !
   CALL CQCAI(lun,kprint,ipass)
-  IF ( ipass==0 ) nfail = nfail + 1
+  IF( ipass==0 ) nfail = nfail + 1
   CALL CQCBH(lun,kprint,ipass)
-  IF ( ipass==0 ) nfail = nfail + 1
+  IF( ipass==0 ) nfail = nfail + 1
   CALL CQCBI(lun,kprint,ipass)
-  IF ( ipass==0 ) nfail = nfail + 1
+  IF( ipass==0 ) nfail = nfail + 1
   CALL CQCBJ(lun,kprint,ipass)
-  IF ( ipass==0 ) nfail = nfail + 1
+  IF( ipass==0 ) nfail = nfail + 1
   CALL CQCBK(lun,kprint,ipass)
-  IF ( ipass==0 ) nfail = nfail + 1
+  IF( ipass==0 ) nfail = nfail + 1
   CALL CQCBY(lun,kprint,ipass)
-  IF ( ipass==0 ) nfail = nfail + 1
+  IF( ipass==0 ) nfail = nfail + 1
   !
   !     Write PASS or FAIL message
   !
-  IF ( nfail==0 ) THEN
+  IF( nfail==0 ) THEN
     WRITE (lun,99001)
     99001 FORMAT (/' --------------TEST09 PASSED ALL TESTS----------------')
   ELSE

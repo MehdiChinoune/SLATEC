@@ -1,7 +1,6 @@
 !** CPSI
 COMPLEX(SP) FUNCTION CPSI(Zin)
-  !>
-  !  Compute the Psi (or Digamma) function.
+  !> Compute the Psi (or Digamma) function.
   !***
   ! **Library:**   SLATEC (FNLIB)
   !***
@@ -51,24 +50,24 @@ COMPLEX(SP) FUNCTION CPSI(Zin)
   z = Zin
   x = REAL(z)
   y = AIMAG(z)
-  IF ( y<0.0 ) z = CONJG(z)
+  IF( y<0.0 ) z = CONJG(z)
   !
   corr = (0.0,0.0)
   cabsz = ABS(z)
-  IF ( x<0.0.OR.cabsz<=bound ) THEN
-    IF ( x>=0.0.OR.ABS(y)<=bound ) THEN
+  IF( x<0.0 .OR. cabsz<=bound ) THEN
+    IF( x>=0.0 .OR. ABS(y)<=bound ) THEN
       !
-      IF ( cabsz<bound ) THEN
+      IF( cabsz<bound ) THEN
         !
         ! USE THE RECURSION RELATION FOR ABS(Z) SMALL.
         !
-        IF ( cabsz<rmin ) CALL XERMSG('CPSI',&
+        IF( cabsz<rmin ) CALL XERMSG('CPSI',&
           'CPSI CALLED WITH Z SO NEAR 0 THAT CPSI OVERFLOWS',2,2)
         !
-        IF ( x<(-0.5).AND.ABS(y)<=dxrel ) THEN
-          IF ( ABS((z-AINT(x-0.5))/x)<dxrel ) CALL XERMSG('CPSI',&
+        IF( x<(-0.5) .AND. ABS(y)<=dxrel ) THEN
+          IF( ABS((z-AINT(x-0.5))/x)<dxrel ) CALL XERMSG('CPSI',&
             'ANSWER LT HALF PRECISION BECAUSE Z TOO NEAR NEGATIVE INTEGER',1,1)
-          IF ( y==0.0.AND.x==AINT(x) )&
+          IF( y==0.0 .AND. x==AINT(x) )&
             CALL XERMSG('CPSI','Z IS A NEGATIVE INTEGER',3,2)
         END IF
         !
@@ -90,8 +89,8 @@ COMPLEX(SP) FUNCTION CPSI(Zin)
   !
   ! NOW EVALUATE THE ASYMPTOTIC SERIES FOR SUITABLY LARGE Z.
   !
-  IF ( cabsz>rbig ) CPSI = LOG(z) + corr
-  IF ( cabsz<=rbig ) THEN
+  IF( cabsz>rbig ) CPSI = LOG(z) + corr
+  IF( cabsz<=rbig ) THEN
     !
     CPSI = (0.0,0.0)
     z2inv = 1.0/z**2
@@ -102,6 +101,6 @@ COMPLEX(SP) FUNCTION CPSI(Zin)
     CPSI = LOG(z) - 0.5/z - CPSI*z2inv + corr
   END IF
   !
-  IF ( y<0.0 ) CPSI = CONJG(CPSI)
+  IF( y<0.0 ) CPSI = CONJG(CPSI)
   !
 END FUNCTION CPSI

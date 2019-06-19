@@ -1,7 +1,6 @@
 !** SSDI
 SUBROUTINE SSDI(N,B,X,Rwork,Iwork)
-  !>
-  !  Diagonal Matrix Vector Multiply.
+  !> Diagonal Matrix Vector Multiply.
   !            Routine to calculate the product  X = DIAG*B, where DIAG
   !            is a diagonal matrix.
   !***
@@ -78,12 +77,12 @@ SUBROUTINE SSDI(N,B,X,Rwork,Iwork)
   !   930701  Updated CATEGORY section.  (FNF, WRB)
 
   !     .. Scalar Arguments ..
-  INTEGER N
+  INTEGER :: N
   !     .. Array Arguments ..
-  REAL(SP) B(N), Rwork(*), X(N)
-  INTEGER Iwork(*)
+  REAL(SP) :: B(N), Rwork(*), X(N)
+  INTEGER :: Iwork(*)
   !     .. Local Scalars ..
-  INTEGER i, locd
+  INTEGER :: i, locd
   !* FIRST EXECUTABLE STATEMENT  SSDI
   !
   !         Determine where the inverse of the diagonal

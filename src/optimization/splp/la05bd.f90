@@ -1,7 +1,6 @@
 !** LA05BD
 SUBROUTINE LA05BD(A,Ind,Ia,N,Ip,Iw,W,G,B,Trans)
-  !>
-  !  Subsidiary to DSPLP
+  !> Subsidiary to DSPLP
   !***
   ! **Library:**   SLATEC
   !***
@@ -51,14 +50,14 @@ SUBROUTINE LA05BD(A,Ind,Ia,N,Ip,Iw,W,G,B,Trans)
   INTEGER :: i, ii, j, k, k2, kk, kl, kll, kp, kpc, l1, n1, nz
   REAL(DP) :: am
   !* FIRST EXECUTABLE STATEMENT  LA05BD
-  IF ( G<0.D0 ) THEN
+  IF( G<0.D0 ) THEN
     !
     CALL XSETUN(lp_com)
-    IF ( lp_com>0 ) CALL XERMSG('LA05BD',&
+    IF( lp_com>0 ) CALL XERMSG('LA05BD',&
       'EARLIER ENTRY GAVE ERROR RETURN.',-8,2)
   ELSE
     kll = Ia - lenl_com + 1
-    IF ( Trans ) THEN
+    IF( Trans ) THEN
       !
       !     MULTIPLY VECTOR BY INVERSE OF TRANSPOSE OF U
       DO i = 1, N
@@ -68,13 +67,13 @@ SUBROUTINE LA05BD(A,Ind,Ia,N,Ip,Iw,W,G,B,Trans)
       DO ii = 1, N
         i = Iw(ii,4)
         am = W(i)
-        IF ( am/=0.D0 ) THEN
+        IF( am/=0.D0 ) THEN
           j = Iw(ii,3)
           kp = Ip(j,1)
           am = am/A(kp)
           B(j) = am
           kl = Iw(j,1) + kp - 1
-          IF ( kp/=kl ) THEN
+          IF( kp/=kl ) THEN
             k2 = kp + 1
             DO k = k2, kl
               i = Ind(k,2)
@@ -85,10 +84,10 @@ SUBROUTINE LA05BD(A,Ind,Ia,N,Ip,Iw,W,G,B,Trans)
       END DO
       !
       !     MULTIPLY VECTOR BY INVERSE OF TRANSPOSE OF L
-      IF ( kll>Ia ) RETURN
+      IF( kll>Ia ) RETURN
       DO k = kll, Ia
         j = Ind(k,2)
-        IF ( B(j)/=0.D0 ) THEN
+        IF( B(j)/=0.D0 ) THEN
           i = Ind(k,1)
           B(i) = B(i) + A(k)*B(j)
         END IF
@@ -96,12 +95,12 @@ SUBROUTINE LA05BD(A,Ind,Ia,N,Ip,Iw,W,G,B,Trans)
     ELSE
       !
       !     MULTIPLY VECTOR BY INVERSE OF L
-      IF ( lenl_com>0 ) THEN
+      IF( lenl_com>0 ) THEN
         l1 = Ia + 1
         DO kk = 1, lenl_com
           k = l1 - kk
           i = Ind(k,1)
-          IF ( B(i)/=0.D0 ) THEN
+          IF( B(i)/=0.D0 ) THEN
             j = Ind(k,2)
             B(j) = B(j) + A(k)*B(i)
           END IF
@@ -119,7 +118,7 @@ SUBROUTINE LA05BD(A,Ind,Ia,N,Ip,Iw,W,G,B,Trans)
         i = Iw(i,3)
         am = W(i)
         kp = Ip(i,1)
-        IF ( kp<=0 ) THEN
+        IF( kp<=0 ) THEN
           kp = -kp
           Ip(i,1) = kp
           nz = Iw(i,1)
@@ -130,12 +129,12 @@ SUBROUTINE LA05BD(A,Ind,Ia,N,Ip,Iw,W,G,B,Trans)
             am = am - A(k)*B(j)
           END DO
         END IF
-        IF ( am/=0. ) THEN
+        IF( am/=0. ) THEN
           j = Ind(kp,2)
           B(j) = am/A(kp)
           kpc = Ip(j,2)
           kl = Iw(j,2) + kpc - 1
-          IF ( kl/=kpc ) THEN
+          IF( kl/=kpc ) THEN
             k2 = kpc + 1
             DO k = k2, kl
               i = Ind(k,1)

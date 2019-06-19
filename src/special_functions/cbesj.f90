@@ -1,7 +1,6 @@
 !** CBESJ
 SUBROUTINE CBESJ(Z,Fnu,Kode,N,Cy,Nz,Ierr)
-  !>
-  !  Compute a sequence of the Bessel functions J(a,z) for
+  !> Compute a sequence of the Bessel functions J(a,z) for
   !            complex argument z and real nonnegative orders a=b,b+1,
   !            b+2,... where b>0.  A scaling option is available to
   !            help avoid overflow.
@@ -157,25 +156,25 @@ SUBROUTINE CBESJ(Z,Fnu,Kode,N,Cy,Nz,Ierr)
   !   920811  Prologue revised.  (DWL)
   USE service, ONLY : R1MACH, I1MACH
   !
-  INTEGER i, Ierr, inu, inuh, ir, Kode, k1, k2, N, nl, Nz, k
-  COMPLEX(SP) ci, csgn, Cy(N), Z, zn
-  REAL(SP) aa, alim, arg, dig, elim, Fnu, fnul, rl, r1, r1m5, &
+  INTEGER :: i, Ierr, inu, inuh, ir, Kode, k1, k2, N, nl, Nz, k
+  COMPLEX(SP) :: ci, csgn, Cy(N), Z, zn
+  REAL(SP) :: aa, alim, arg, dig, elim, Fnu, fnul, rl, r1, r1m5, &
     r2, tol, yy, az, fn, bb, ascle, rtol, atol
   REAL(SP), PARAMETER :: hpi = 1.57079632679489662E0
   !
   !* FIRST EXECUTABLE STATEMENT  CBESJ
   Ierr = 0
   Nz = 0
-  IF ( Fnu<0.0E0 ) Ierr = 1
-  IF ( Kode<1.OR.Kode>2 ) Ierr = 1
-  IF ( N<1 ) Ierr = 1
-  IF ( Ierr/=0 ) RETURN
+  IF( Fnu<0.0E0 ) Ierr = 1
+  IF( Kode<1 .OR. Kode>2 ) Ierr = 1
+  IF( N<1 ) Ierr = 1
+  IF( Ierr/=0 ) RETURN
   !-----------------------------------------------------------------------
   !     SET PARAMETERS RELATED TO MACHINE CONSTANTS.
   !     TOL IS THE APPROXIMATE UNIT ROUNDOFF LIMITED TO 1.0E-18.
   !     ELIM IS THE APPROXIMATE EXPONENTIAL OVER- AND UNDERFLOW LIMIT.
-  !     EXP(-ELIM).LT.EXP(-ALIM)=EXP(-ELIM)/TOL    AND
-  !     EXP(ELIM).GT.EXP(ALIM)=EXP(ELIM)*TOL       ARE INTERVALS NEAR
+  !     EXP(-ELIM)<EXP(-ALIM)=EXP(-ELIM)/TOL    AND
+  !     EXP(ELIM)>EXP(ALIM)=EXP(ELIM)*TOL       ARE INTERVALS NEAR
   !     UNDERFLOW AND OVERFLOW LIMITS WHERE SCALED ARITHMETIC IS DONE.
   !     RL IS THE LOWER BOUNDARY OF THE ASYMPTOTIC EXPANSION FOR LARGE Z.
   !     DIG = NUMBER OF BASE 10 DIGITS IN TOL = 10**(-DIG).
@@ -204,11 +203,11 @@ SUBROUTINE CBESJ(Z,Fnu,Kode,N,Cy,Nz,Ierr)
   bb = I1MACH(9)*0.5E0
   aa = MIN(aa,bb)
   fn = Fnu + (N-1)
-  IF ( az<=aa ) THEN
-    IF ( fn<=aa ) THEN
+  IF( az<=aa ) THEN
+    IF( fn<=aa ) THEN
       aa = SQRT(aa)
-      IF ( az>aa ) Ierr = 3
-      IF ( fn>aa ) Ierr = 3
+      IF( az>aa ) Ierr = 3
+      IF( fn>aa ) Ierr = 3
       !-----------------------------------------------------------------------
       !     CALCULATE CSGN=EXP(FNU*HPI*I) TO MINIMIZE LOSSES OF SIGNIFICANCE
       !     WHEN FNU IS LARGE
@@ -220,20 +219,20 @@ SUBROUTINE CBESJ(Z,Fnu,Kode,N,Cy,Nz,Ierr)
       r1 = COS(arg)
       r2 = SIN(arg)
       csgn = CMPLX(r1,r2)
-      IF ( MOD(inuh,2)==1 ) csgn = -csgn
+      IF( MOD(inuh,2)==1 ) csgn = -csgn
       !-----------------------------------------------------------------------
       !     ZN IS IN THE RIGHT HALF PLANE
       !-----------------------------------------------------------------------
       zn = -Z*ci
-      IF ( yy<0.0E0 ) THEN
+      IF( yy<0.0E0 ) THEN
         zn = -zn
         csgn = CONJG(csgn)
         ci = CONJG(ci)
       END IF
       CALL CBINU(zn,Fnu,Kode,N,Cy,Nz,rl,fnul,tol,elim,alim)
-      IF ( Nz>=0 ) THEN
+      IF( Nz>=0 ) THEN
         nl = N - Nz
-        IF ( nl==0 ) RETURN
+        IF( nl==0 ) RETURN
         rtol = 1.0E0/tol
         ascle = R1MACH(1)*rtol*1.0E+3
         DO i = 1, nl
@@ -242,7 +241,7 @@ SUBROUTINE CBESJ(Z,Fnu,Kode,N,Cy,Nz,Ierr)
           aa = REAL(zn)
           bb = AIMAG(zn)
           atol = 1.0E0
-          IF ( MAX(ABS(aa),ABS(bb))<=ascle ) THEN
+          IF( MAX(ABS(aa),ABS(bb))<=ascle ) THEN
             zn = zn*CMPLX(rtol,0.0E0)
             atol = tol
           END IF
@@ -251,7 +250,7 @@ SUBROUTINE CBESJ(Z,Fnu,Kode,N,Cy,Nz,Ierr)
           csgn = csgn*ci
         END DO
         RETURN
-      ELSEIF ( Nz==(-2) ) THEN
+      ELSEIF( Nz==(-2) ) THEN
         Nz = 0
         Ierr = 5
         RETURN

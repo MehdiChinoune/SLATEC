@@ -1,8 +1,7 @@
 !** DOMN
 SUBROUTINE DOMN(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Nsave,Itol,Tol,&
     Itmax,Iter,Err,Ierr,Iunit,R,Z,P,Ap,Emap,Dz,Csav,Rwork,Iwork)
-  !>
-  !  Preconditioned Orthomin Sparse Iterative Ax=b Solver.
+  !> Preconditioned Orthomin Sparse Iterative Ax=b Solver.
   !            Routine to solve a general linear system  Ax = b  using
   !            the Preconditioned Orthomin method.
   !***
@@ -221,7 +220,7 @@ SUBROUTINE DOMN(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Nsave,Itol,Tol,&
   !
   !- Cautions:
   !     This routine will attempt to write to the Fortran logical output
-  !     unit IUNIT, if IUNIT .ne. 0.  Thus, the user must make sure that
+  !     unit IUNIT, if IUNIT /= 0.  Thus, the user must make sure that
   !     this logical unit is attached to a file or terminal before calling
   !     this routine with a non-zero value for IUNIT.  This routine does
   !     not check for the validity of a non-zero IUNIT unit number.
@@ -283,12 +282,12 @@ SUBROUTINE DOMN(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Nsave,Itol,Tol,&
   !
   Iter = 0
   Ierr = 0
-  IF ( N<1 ) THEN
+  IF( N<1 ) THEN
     Ierr = 3
     RETURN
   END IF
   fuzz = D1MACH(3)
-  IF ( Tol<500*fuzz ) THEN
+  IF( Tol<500*fuzz ) THEN
     Tol = 500*fuzz
     Ierr = 4
   END IF
@@ -302,9 +301,9 @@ SUBROUTINE DOMN(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Nsave,Itol,Tol,&
   END DO
   CALL MSOLVE(N,R,Z,Rwork,Iwork)
   !
-  IF ( ISDOMN(N,B,X,MSOLVE,Nsave,Itol,Tol,Iter,Err,&
+  IF( ISDOMN(N,B,X,MSOLVE,Nsave,Itol,Tol,Iter,Err,&
       Ierr,Iunit,R,Z,Dz,Rwork,Iwork,ak,bnrm,solnrm)==0 ) THEN
-    IF ( Ierr/=0 ) RETURN
+    IF( Ierr/=0 ) RETURN
     !
     !
     !         ***** iteration loop *****
@@ -318,10 +317,10 @@ SUBROUTINE DOMN(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Nsave,Itol,Tol,&
       P(1:N,ip) = Z
       CALL MATVEC(N,P(1,ip),Ap(1,ip),Nelt,Ia,Ja,A,Isym)
       CALL MSOLVE(N,Ap(1,ip),Emap(1,ip),Rwork,Iwork)
-      IF ( Nsave==0 ) THEN
+      IF( Nsave==0 ) THEN
         akden = NORM2(Emap(1:N,0))**2
       ELSE
-        IF ( Iter>1 ) THEN
+        IF( Iter>1 ) THEN
           lmax = MIN(Nsave,Iter-1)
           DO l = 1, lmax
             ipo = MOD(ip+(Nsave+1-l),Nsave+1)
@@ -331,14 +330,14 @@ SUBROUTINE DOMN(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Nsave,Itol,Tol,&
             CALL DAXPY(N,-bkl,Ap(1,ipo),1,Ap(1,ip),1)
             CALL DAXPY(N,-bkl,Emap(1,ipo),1,Emap(1,ip),1)
           END DO
-          IF ( Nsave>1 ) THEN
+          IF( Nsave>1 ) THEN
             DO l = Nsave - 1, 1, -1
               Csav(l+1) = Csav(l)
             END DO
           END IF
         END IF
         akden = NORM2(Emap(1:N,ip))**2
-        IF ( ABS(akden)<fuzz ) THEN
+        IF( ABS(akden)<fuzz ) THEN
           Ierr = 6
           RETURN
         END IF
@@ -354,7 +353,7 @@ SUBROUTINE DOMN(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Nsave,Itol,Tol,&
       CALL DAXPY(N,-ak,Emap(1,ip),1,Z,1)
       !
       !         check stopping criterion.
-      IF ( ISDOMN(N,B,X,MSOLVE,Nsave,Itol,Tol,Iter,&
+      IF( ISDOMN(N,B,X,MSOLVE,Nsave,Itol,Tol,Iter,&
         Err,Ierr,Iunit,R,Z,Dz,Rwork,Iwork,ak,bnrm,solnrm)&
         /=0 ) RETURN
       !

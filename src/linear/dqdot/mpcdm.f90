@@ -1,7 +1,6 @@
 !** MPCDM
 SUBROUTINE MPCDM(Dx,Z)
-  !>
-  !  Subsidiary to DQDOTA and DQDOTI
+  !> Subsidiary to DQDOTA and DQDOTI
   !***
   ! **Library:**   SLATEC
   !***
@@ -46,27 +45,27 @@ SUBROUTINE MPCDM(Dx,Z)
   CALL MPCHK(1,4)
   i2 = t_com + 4
   ! CHECK SIGN
-  IF ( Dx<0 ) THEN
-    ! DX .LT. 0D0
+  IF( Dx<0 ) THEN
+    ! DX < 0D0
     rs = -1
     dj = -Dx
     ie = 0
-  ELSEIF ( Dx==0 ) THEN
+  ELSEIF( Dx==0 ) THEN
     ! IF DX = 0D0 RETURN 0
     Z(1) = 0
     RETURN
   ELSE
-    ! DX .GT. 0D0
+    ! DX > 0D0
     rs = 1
     dj = Dx
     ie = 0
   END IF
-  DO WHILE ( dj>=1D0 )
+  DO WHILE( dj>=1D0 )
     ! INCREASE IE AND DIVIDE DJ BY 16.
     ie = ie + 1
     dj = 0.0625D0*dj
   END DO
-  DO WHILE ( dj<0.0625D0 )
+  DO WHILE( dj<0.0625D0 )
     ie = ie - 1
     dj = 16D0*dj
   END DO
@@ -85,20 +84,20 @@ SUBROUTINE MPCDM(Dx,Z)
   ib = MAX(7*b_com*b_com,32767)/16
   tp = 1
   ! NOW MULTIPLY BY 16**IE
-  IF ( ie<0 ) THEN
+  IF( ie<0 ) THEN
     k = -ie
     DO i = 1, k
       tp = 16*tp
-      IF ( (tp>ib).OR.(tp==b_com).OR.(i>=k) ) THEN
+      IF( (tp>ib) .OR. (tp==b_com) .OR. (i>=k) ) THEN
         CALL MPDIVI(Z,tp,Z)
         tp = 1
       END IF
     END DO
     RETURN
-  ELSEIF ( ie/=0 ) THEN
+  ELSEIF( ie/=0 ) THEN
     DO i = 1, ie
       tp = 16*tp
-      IF ( (tp>ib).OR.(tp==b_com).OR.(i>=ie) ) THEN
+      IF( (tp>ib) .OR. (tp==b_com) .OR. (i>=ie) ) THEN
         CALL MPMULI(Z,tp,Z)
         tp = 1
       END IF

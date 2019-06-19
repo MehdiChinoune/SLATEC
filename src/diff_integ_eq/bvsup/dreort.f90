@@ -1,7 +1,6 @@
 !** DREORT
 SUBROUTINE DREORT(Ncomp,Y,Yp,Yhp,Niv,W,S,P,Ip,Stowa,Iflag)
-  !>
-  !  Subsidiary to DBVSUP
+  !> Subsidiary to DBVSUP
   !***
   ! **Library:**   SLATEC
   !***
@@ -71,12 +70,12 @@ SUBROUTINE DREORT(Ncomp,Y,Yp,Yhp,Niv,W,S,P,Ip,Stowa,Iflag)
   !           CHECK TO SEE IF ORTHONORMALIZATION TEST IS TO BE PERFORMED
   !
   !        ...EXIT
-  IF ( Iflag==1 ) THEN
+  IF( Iflag==1 ) THEN
     knswot_com = knswot_com + 1
     !        ...EXIT
-    IF ( knswot_com<nswot_com ) THEN
+    IF( knswot_com<nswot_com ) THEN
       !     ......EXIT
-      IF ( (xend_com-x_com)*(x_com-xot_com)<0.0D0 ) RETURN
+      IF( (xend_com-x_com)*(x_com-xot_com)<0.0D0 ) RETURN
     END IF
   END IF
   CALL DSTOR1(Y(:,1),Yhp(:,1),Yp,Yhp(:,nfcp),1,0,0)
@@ -93,22 +92,22 @@ SUBROUTINE DREORT(Ncomp,Y,Yp,Yhp,Niv,W,S,P,Ip,Stowa,Iflag)
   !
   !        CHECK FOR LINEAR DEPENDENCE OF THE SOLUTIONS.
   !
-  IF ( mflag==0 ) THEN
+  IF( mflag==0 ) THEN
     !           BEGIN BLOCK PERMITTING ...EXITS TO 190
     !              BEGIN BLOCK PERMITTING ...EXITS TO 110
     !
     !                 ******************************************************
     !
     !              ...EXIT
-    IF ( Iflag==1 ) THEN
+    IF( Iflag==1 ) THEN
       !
       !                 TEST FOR ORTHONORMALIZATION
       !
       !              ...EXIT
-      IF ( wcnd>=50.0D0*tol_com ) THEN
+      IF( wcnd>=50.0D0*tol_com ) THEN
         DO ijk = 1, nfcp
           !              ......EXIT
-          IF ( S(ijk)>1.0D20 ) GOTO 50
+          IF( S(ijk)>1.0D20 ) GOTO 50
         END DO
         !
         !                 USE LINEAR EXTRAPOLATION ON LOGARITHMIC VALUES OF THE
@@ -120,13 +119,13 @@ SUBROUTINE DREORT(Ncomp,Y,Yp,Yhp,Niv,W,S,P,Ip,Stowa,Iflag)
         knswot_com = 0
         lotjp_com = 0
         wcnd = LOG10(wcnd)
-        IF ( wcnd>tnd_com+3.0D0 ) nswot_com = 2*nswot_com
-        IF ( wcnd<pwcnd_com ) THEN
+        IF( wcnd>tnd_com+3.0D0 ) nswot_com = 2*nswot_com
+        IF( wcnd<pwcnd_com ) THEN
           dx = x_com - px_com
           dnd = pwcnd_com - wcnd
-          IF ( dnd>=4 ) nswot_com = nswot_com/2
+          IF( dnd>=4 ) nswot_com = nswot_com/2
           dndt = wcnd - tnd_com
-          IF ( ABS(dx*dndt)<=dnd*ABS(xend_com-x_com) ) THEN
+          IF( ABS(dx*dndt)<=dnd*ABS(xend_com-x_com) ) THEN
             xot_com = x_com + dx*dndt/dnd
             nswot_com = MIN(mnswot_com,nswot_com)
             pwcnd_com = wcnd
@@ -161,13 +160,13 @@ SUBROUTINE DREORT(Ncomp,Y,Yp,Yhp,Niv,W,S,P,Ip,Stowa,Iflag)
     DO k = 1, nfcc_com
       !                 BEGIN BLOCK PERMITTING ...EXITS TO 140
       srp = SQRT(P(kk))
-      IF ( inhomo_com==1 ) W(k) = srp*W(k)
+      IF( inhomo_com==1 ) W(k) = srp*W(k)
       vnorm = 1.0D0/srp
       P(kk) = vnorm
       kk = kk + nfcc_com + 1 - k
-      IF ( nfc_com/=nfcc_com ) THEN
+      IF( nfc_com/=nfcc_com ) THEN
         !                 ......EXIT
-        IF ( l/=k/2 ) CYCLE
+        IF( l/=k/2 ) CYCLE
       END IF
       DO j = 1, Ncomp
         Y(j,l) = Y(j,l)*vnorm
@@ -175,12 +174,12 @@ SUBROUTINE DREORT(Ncomp,Y,Yp,Yhp,Niv,W,S,P,Ip,Stowa,Iflag)
       l = l + 1
     END DO
     !
-    IF ( inhomo_com==1.AND.nps_com/=1 ) THEN
+    IF( inhomo_com==1 .AND. nps_com/=1 ) THEN
       !
       !                 NORMALIZE THE PARTICULAR SOLUTION
       !
       ypnm = NORM2(Yp(1:Ncomp))**2
-      IF ( ypnm==0.0D0 ) ypnm = 1.0D0
+      IF( ypnm==0.0D0 ) ypnm = 1.0D0
       ypnm = SQRT(ypnm)
       S(nfcp) = ypnm
       DO j = 1, Ncomp
@@ -191,12 +190,12 @@ SUBROUTINE DREORT(Ncomp,Y,Yp,Yhp,Niv,W,S,P,Ip,Stowa,Iflag)
       END DO
     END IF
     !
-    IF ( Iflag==1 ) CALL DSTWAY(Y(:,1),Yp,Yhp(:,1),0,Stowa)
+    IF( Iflag==1 ) CALL DSTWAY(Y(:,1),Yp,Yhp(:,1),0,Stowa)
     Iflag = 0
     !           BEGIN BLOCK PERMITTING ...EXITS TO 40
-  ELSEIF ( Iflag==2 ) THEN
+  ELSEIF( Iflag==2 ) THEN
     Iflag = 30
-  ELSEIF ( nswot_com<=1.AND.lotjp_com/=0 ) THEN
+  ELSEIF( nswot_com<=1 .AND. lotjp_com/=0 ) THEN
     Iflag = 30
   ELSE
     !

@@ -1,7 +1,6 @@
 !** IVOUT
 SUBROUTINE IVOUT(N,Ix,Ifmt,Idigit)
-  !>
-  !  Subsidiary to SPLP
+  !> Subsidiary to SPLP
   !***
   ! **Library:**   SLATEC
   !***
@@ -27,10 +26,10 @@ SUBROUTINE IVOUT(N,Ix,Ifmt,Idigit)
   !  IDIGIT  PRINT UP TO ABS(IDIGIT) DECIMAL DIGITS PER NUMBER.
   !          THE SUBPROGRAM WILL CHOOSE THAT INTEGER 4,6,10 OR 14
   !          WHICH WILL PRINT AT LEAST ABS(IDIGIT) NUMBER OF
-  !          PLACES.  IF IDIGIT.LT.0, 72 PRINTING COLUMNS ARE UTILIZED
+  !          PLACES.  IF IDIGIT<0, 72 PRINTING COLUMNS ARE UTILIZED
   !          TO WRITE EACH LINE OF OUTPUT OF THE ARRAY IX(*). (THIS
   !          CAN BE USED ON MOST TIME-SHARING TERMINALS). IF
-  !          IDIGIT.GE.0, 133 PRINTING COLUMNS ARE UTILIZED. (THIS CAN
+  !          IDIGIT>=0, 133 PRINTING COLUMNS ARE UTILIZED. (THIS CAN
   !          BE USED ON MOST LINE PRINTERS).
   !
   !  EXAMPLE..
@@ -65,13 +64,13 @@ SUBROUTINE IVOUT(N,Ix,Ifmt,Idigit)
   j = 2
   lout = I1MACH(j)
   WRITE (lout,Ifmt)
-  IF ( N<=0 ) RETURN
+  IF( N<=0 ) RETURN
   ndigit = Idigit
-  IF ( Idigit==0 ) ndigit = 4
-  IF ( Idigit<0 ) THEN
+  IF( Idigit==0 ) ndigit = 4
+  IF( Idigit<0 ) THEN
     !
     ndigit = -Idigit
-    IF ( ndigit<=4 ) THEN
+    IF( ndigit<=4 ) THEN
       !
       DO k1 = 1, N, 10
         k2 = MIN(N,k1+9)
@@ -79,7 +78,7 @@ SUBROUTINE IVOUT(N,Ix,Ifmt,Idigit)
       END DO
       RETURN
       !
-    ELSEIF ( ndigit<=6 ) THEN
+    ELSEIF( ndigit<=6 ) THEN
       !
       DO k1 = 1, N, 7
         k2 = MIN(N,k1+6)
@@ -87,7 +86,7 @@ SUBROUTINE IVOUT(N,Ix,Ifmt,Idigit)
       END DO
       RETURN
       !
-    ELSEIF ( ndigit>10 ) THEN
+    ELSEIF( ndigit>10 ) THEN
       !
       DO k1 = 1, N, 3
         k2 = MIN(N,k1+2)
@@ -103,7 +102,7 @@ SUBROUTINE IVOUT(N,Ix,Ifmt,Idigit)
       RETURN
     END IF
     !
-  ELSEIF ( ndigit<=4 ) THEN
+  ELSEIF( ndigit<=4 ) THEN
     !
     DO k1 = 1, N, 20
       k2 = MIN(N,k1+19)
@@ -111,7 +110,7 @@ SUBROUTINE IVOUT(N,Ix,Ifmt,Idigit)
     END DO
     RETURN
     !
-  ELSEIF ( ndigit<=6 ) THEN
+  ELSEIF( ndigit<=6 ) THEN
     !
     DO k1 = 1, N, 15
       k2 = MIN(N,k1+14)
@@ -119,7 +118,7 @@ SUBROUTINE IVOUT(N,Ix,Ifmt,Idigit)
     END DO
     RETURN
     !
-  ELSEIF ( ndigit>10 ) THEN
+  ELSEIF( ndigit>10 ) THEN
     !
     DO k1 = 1, N, 7
       k2 = MIN(N,k1+6)

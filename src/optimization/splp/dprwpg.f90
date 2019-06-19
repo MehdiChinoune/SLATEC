@@ -1,7 +1,6 @@
 !** DPRWPG
 SUBROUTINE DPRWPG(Key,Ipage,Lpg,Sx,Ix)
-  !>
-  !  Subsidiary to DSPLP
+  !> Subsidiary to DSPLP
   !***
   ! **Library:**   SLATEC
   !***
@@ -52,22 +51,22 @@ SUBROUTINE DPRWPG(Key,Ipage,Lpg,Sx,Ix)
   !
   !     CHECK IF IPAGE IS IN RANGE.
   !
-  IF ( Ipage<1 ) CALL XERMSG('DPRWPG',&
-    'THE VALUE OF IPAGE (PAGE NUMBER) WAS NOT IN THE RANGE1.LE.IPAGE.LE.MAXPGE.',55,1)
+  IF( Ipage<1 ) CALL XERMSG('DPRWPG',&
+    'THE VALUE OF IPAGE (PAGE NUMBER) WAS NOT IN THE RANGE1<=IPAGE<=MAXPGE.',55,1)
   !
   !     CHECK IF LPG IS POSITIVE.
   !
-  IF ( Lpg<=0 ) CALL XERMSG('DPRWPG',&
+  IF( Lpg<=0 ) CALL XERMSG('DPRWPG',&
     'THE VALUE OF LPG (PAGE LENGTH) WAS NONPOSITIVE.',55,1)
   !
   !     DECIDE IF WE ARE READING OR WRITING.
   !
-  IF ( Key==1 ) THEN
+  IF( Key==1 ) THEN
     !
     !        CODE TO DO A PAGE READ.
     !
     CALL DPRWVR(Key,Ipage,Lpg,Sx,Ix)
-  ELSEIF ( Key==2 ) THEN
+  ELSEIF( Key==2 ) THEN
     !
     !        CODE TO DO A PAGE WRITE.
     !

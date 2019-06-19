@@ -5,8 +5,7 @@ MODULE TEST11_MOD
 CONTAINS
   !** FCNQX1
   SUBROUTINE FCNQX1(Lun,Kprint,Ipass)
-    !>
-    !  THIS IS A QUICK CHECK PROGRAM FOR THE SUBROUTINES XLEGF
+    !> THIS IS A QUICK CHECK PROGRAM FOR THE SUBROUTINES XLEGF
     !            AND XNRMP WHICH CALCULATE LEGENDRE FUNCTIONS
     !***
     ! **Library:**   SLATEC
@@ -33,19 +32,19 @@ CONTAINS
     !   901106  Changed all specific intrinsics to generic.  (WRB)
     !   910104  Changed to print variable number of decimals. (DWL and JMS)
     USE slatec, ONLY : XCON, XERCLR, XLEGF, XNRMP, XSET, XSETF, I1MACH, NUMXER
-    INTEGER i, ic1(10), ic2(10), id, ierr, ierror, ip(10), ipn(10), &
+    INTEGER :: i, ic1(10), ic2(10), id, ierr, ierror, ip(10), ipn(10), &
       iq(10), ir(10), irad, isig, isum, ix11, ix12, ix13, ix21, ix22, ix23
-    INTEGER mu, mu1, mu2, n, nbits, ndec, nerr, nradpl, nu1, nudiff
+    INTEGER :: mu, mu1, mu2, n, nbits, ndec, nerr, nradpl, nu1, nudiff
     CHARACTER(34) :: fmt, fmtf, fmti
-    INTEGER Lun, Kprint, Ipass
-    REAL(SP) p(10), q(10), r(10), c1(10), c2(10), pn(10)
-    REAL(SP) deg, theta, dnu1, dzero
-    REAL(SP) x11, x12, x13, x21, x22, x23
-    REAL(SP) nu
+    INTEGER :: Lun, Kprint, Ipass
+    REAL(SP) :: p(10), q(10), r(10), c1(10), c2(10), pn(10)
+    REAL(SP) :: deg, theta, dnu1, dzero
+    REAL(SP) :: x11, x12, x13, x21, x22, x23
+    REAL(SP) :: nu
     !
     !* FIRST EXECUTABLE STATEMENT  FCNQX1
     !
-    IF ( Kprint>=2 ) WRITE (Lun,99001)
+    IF( Kprint>=2 ) WRITE (Lun,99001)
     99001 FORMAT (' ** TEST SINGLE PRECISION LEGENDRE FUNCTION ROUTINES',&
       ' IN FCNPAK ** ',/)
     Ipass = 1
@@ -54,16 +53,16 @@ CONTAINS
     dzero = 0.0
     nbits = 0
     CALL XSET(irad,nradpl,dzero,nbits,ierror)
-    IF ( ierror/=0 ) Ipass = 0
+    IF( ierror/=0 ) Ipass = 0
     ierr = 0
     dnu1 = 2000.4
-    IF ( I1MACH(13)*LOG10(REAL(I1MACH(10)))<150. ) dnu1 = 100.4
-    IF ( Kprint>2 ) THEN
-      IF ( I1MACH(13)<500 ) WRITE (Lun,99002)
+    IF( I1MACH(13)*LOG10(REAL(I1MACH(10)))<150. ) dnu1 = 100.4
+    IF( Kprint>2 ) THEN
+      IF( I1MACH(13)<500 ) WRITE (Lun,99002)
       99002 FORMAT (' ON COMPUTERS WITH MAXIMUM EXPONENT LESS THAN 500, SMALL'/&
         ' TEST VALUES FOR NU, MU ARE USED. IF LARGER THAN OR EQUAL 500,'/&
         ' LARGER VALUES ARE USED. THIS COMPUTER USES THE SMALLER VALUES.')
-      IF ( I1MACH(13)>=500 ) WRITE (Lun,99003)
+      IF( I1MACH(13)>=500 ) WRITE (Lun,99003)
       99003 FORMAT (' ON COMPUTERS WITH MAXIMUM EXPONENT LESS THAN 500, SMALL'/&
         ' TEST VALUES FOR NU, MU ARE USED. IF LARGER THAN OR EQUAL 500,'/&
         ' LARGER VALUES ARE USED. THIS COMPUTER USES THE LARGER VALUES.')
@@ -98,7 +97,7 @@ CONTAINS
     fmti(1:20) = '(1X, I6, 4H   (,E30.'
     WRITE (fmti(21:22),'(I2)') ndec
     fmti(23:34) = ',1H,,I8,1H))'
-    IF ( Kprint>2 ) WRITE (Lun,99004) mu1, deg
+    IF( Kprint>2 ) WRITE (Lun,99004) mu1, deg
     99004 FORMAT (/' TEST 1, FIXED MU = ',I4,' AND THETA = ',F3.1,&
       ' DEGREES, RECURRENCE IN NU,'/'         CASORATIS SHOULD = 1.0')
     CALL XLEGF(dnu1,nudiff,mu1,mu2,theta,1,p,ip,ierror)
@@ -123,7 +122,7 @@ CONTAINS
     ix12 = ir(1)
     x13 = q(1)
     ix13 = iq(1)
-    IF ( Kprint>2 ) THEN
+    IF( Kprint>2 ) THEN
       WRITE (Lun,'(A)') '     NU   CASORATI 1'
       nu = dnu1
       DO i = 1, 5
@@ -138,16 +137,16 @@ CONTAINS
       END DO
     END IF
     DO i = 1, 5
-      IF ( ABS(1.0-c1(i))>=10.0E0**(6-ndec) ) GOTO 100
-      IF ( ABS(1.0-c2(i))>=10.0E0**(6-ndec) ) GOTO 100
+      IF( ABS(1.0-c1(i))>=10.0E0**(6-ndec) ) GOTO 100
+      IF( ABS(1.0-c2(i))>=10.0E0**(6-ndec) ) GOTO 100
     END DO
-    IF ( isum==0 ) THEN
-      IF ( Kprint>=2 ) WRITE (Lun,99005)
+    IF( isum==0 ) THEN
+      IF( Kprint>=2 ) WRITE (Lun,99005)
       99005 FORMAT (' ***** TEST 1 (SINGLE PRECISION) PASSED *****')
       GOTO 200
     END IF
     100 CONTINUE
-    IF ( Kprint>=1 ) WRITE (Lun,99006)
+    IF( Kprint>=1 ) WRITE (Lun,99006)
     99006 FORMAT (' ***** TEST 1 (SINGLE PRECISION) FAILED *****')
     ierr = ierr + 1
     Ipass = 0
@@ -163,7 +162,7 @@ CONTAINS
     ! of IERROR should always be returned as zero.
     !
     isum = 0
-    IF ( Kprint>2 ) WRITE (Lun,99007) dnu1, deg
+    IF( Kprint>2 ) WRITE (Lun,99007) dnu1, deg
     99007 FORMAT (/' TEST 2, FIXED NU = ',F6.1,' AND THETA = ',F3.1,&
       ' DEGREES, RECURRENCE IN MU,'/'         CASORATIS SHOULD = 1.0')
     CALL XLEGF(dnu1,nudiff,mu1,mu2,theta,1,p,ip,ierror)
@@ -188,7 +187,7 @@ CONTAINS
     ix22 = ir(6)
     x23 = q(6)
     ix23 = iq(6)
-    IF ( Kprint>2 ) THEN
+    IF( Kprint>2 ) THEN
       WRITE (Lun,'(A)') '     MU   CASORATI 3'
       mu = mu1
       DO i = 1, 5
@@ -203,15 +202,15 @@ CONTAINS
       END DO
     END IF
     DO i = 1, 5
-      IF ( ABS(1.0-c1(i))>=10.0E0**(6-ndec) ) GOTO 300
-      IF ( ABS(1.0-c2(i))>=10.0E0**(6-ndec) ) GOTO 300
-      IF ( isum/=0 ) GOTO 300
+      IF( ABS(1.0-c1(i))>=10.0E0**(6-ndec) ) GOTO 300
+      IF( ABS(1.0-c2(i))>=10.0E0**(6-ndec) ) GOTO 300
+      IF( isum/=0 ) GOTO 300
     END DO
-    IF ( Kprint>=2 ) WRITE (Lun,99008)
+    IF( Kprint>=2 ) WRITE (Lun,99008)
     99008 FORMAT (' ***** TEST 2 (SINGLE PRECISION) PASSED *****')
     GOTO 400
     300 CONTINUE
-    IF ( Kprint>=1 ) WRITE (Lun,99009)
+    IF( Kprint>=1 ) WRITE (Lun,99009)
     99009 FORMAT (' ***** TEST 2 (SINGLE PRECISION) FAILED *****')
     ierr = ierr + 1
     Ipass = 0
@@ -222,7 +221,7 @@ CONTAINS
     ! is a relative error of less than 10.0**(6-NDEC).
     !
     400 CONTINUE
-    IF ( Kprint>2 ) THEN
+    IF( Kprint>2 ) THEN
       WRITE (Lun,99010) deg, mu2, dnu1
       99010 FORMAT (/' TEST 3, COMPARISON OF VALUES FROM TEST 1 AND TEST 2',&
         ' WITH THETA = ',F3.1,' DEGREES,'/'         MU = ',I4,' AND NU = ',F6.1)
@@ -236,13 +235,13 @@ CONTAINS
       WRITE (Lun,fmt) x13, ix13
       WRITE (Lun,fmt) x23, ix23
     END IF
-    IF ( ABS((x11-x21)/x11)<10.0E0**(6-ndec) ) THEN
-      IF ( ABS((x12-x22)/x12)<10.0E0**(6-ndec) ) THEN
-        IF ( ABS((x13-x13)/x13)<10.0E0**(6-ndec) ) THEN
-          IF ( ix11==ix21 ) THEN
-            IF ( ix12==ix22 ) THEN
-              IF ( ix13==ix23 ) THEN
-                IF ( Kprint>=2 ) WRITE (Lun,99011)
+    IF( ABS((x11-x21)/x11)<10.0E0**(6-ndec) ) THEN
+      IF( ABS((x12-x22)/x12)<10.0E0**(6-ndec) ) THEN
+        IF( ABS((x13-x13)/x13)<10.0E0**(6-ndec) ) THEN
+          IF( ix11==ix21 ) THEN
+            IF( ix12==ix22 ) THEN
+              IF( ix13==ix23 ) THEN
+                IF( Kprint>=2 ) WRITE (Lun,99011)
                 99011 FORMAT (' ***** TEST 3 (SINGLE PRECISION) PASSED *****')
                 GOTO 500
               END IF
@@ -251,7 +250,7 @@ CONTAINS
         END IF
       END IF
     END IF
-    IF ( Kprint>=1 ) WRITE (Lun,99012)
+    IF( Kprint>=1 ) WRITE (Lun,99012)
     99012 FORMAT (' ***** TEST 3 (SINGLE PRECISION) FAILED *****')
     ierr = ierr + 1
     Ipass = 0
@@ -267,7 +266,7 @@ CONTAINS
     nudiff = 0
     mu1 = 10
     mu2 = 10
-    IF ( Kprint>2 ) WRITE (Lun,99013) deg, mu1, dnu1
+    IF( Kprint>2 ) WRITE (Lun,99013) deg, mu1, dnu1
     99013 FORMAT (/' TEST 4, COMPARISON OF VALUES FROM XLEGF AND XNRMP',&
       ' WITH THETA = ',F3.1,' DEGREES,'/'         MU = ',I4,' AND NU = ',F6.1)
     CALL XLEGF(dnu1,nudiff,mu1,mu2,theta,4,pn,ipn,ierror)
@@ -279,21 +278,21 @@ CONTAINS
     isum = isum + ierror
     x21 = pn(1)
     ix21 = ipn(1)
-    IF ( Kprint>2 ) THEN
+    IF( Kprint>2 ) THEN
       WRITE (Lun,'(A)') '          NORMALIZED P'
       WRITE (Lun,fmt) x11, ix11
       WRITE (Lun,fmt) x21, ix21
     END IF
-    IF ( ABS((x11-x21)/x11)<10.0E0**(6-ndec) ) THEN
-      IF ( ix11==ix21 ) THEN
-        IF ( isum==0 ) THEN
-          IF ( Kprint>=2 ) WRITE (Lun,99014)
+    IF( ABS((x11-x21)/x11)<10.0E0**(6-ndec) ) THEN
+      IF( ix11==ix21 ) THEN
+        IF( isum==0 ) THEN
+          IF( Kprint>=2 ) WRITE (Lun,99014)
           99014 FORMAT (' ***** TEST 4 (SINGLE PRECISION) PASSED *****')
           GOTO 600
         END IF
       END IF
     END IF
-    IF ( Kprint>=1 ) WRITE (Lun,99015)
+    IF( Kprint>=1 ) WRITE (Lun,99015)
     99015 FORMAT (' ***** TEST 4 (SINGLE PRECISION) FAILED *****')
     ierr = ierr + 1
     Ipass = 0
@@ -306,8 +305,8 @@ CONTAINS
     ! handling package XERROR (which includes XSETF, XERCLR, and NUMXER).
     !
     600  CALL XSETF(-1)
-    IF ( Kprint<=2 ) CALL XSETF(0)
-    IF ( Kprint>2 ) WRITE (Lun,99016)
+    IF( Kprint<=2 ) CALL XSETF(0)
+    IF( Kprint>2 ) WRITE (Lun,99016)
     99016 FORMAT (/' TEST 5, TEST OF ERROR HANDLING. 3 ERROR MESSAGES',&
       ' SHOULD BE PRINTED.')
     nudiff = 0
@@ -316,39 +315,38 @@ CONTAINS
     CALL XERCLR
     CALL XLEGF(dnu1,nudiff,mu1,mu2,theta,id,p,ip,ierror)
     n = NUMXER(nerr)
-    IF ( n==ierror ) THEN
+    IF( n==ierror ) THEN
       mu2 = mu1 + 5
       nudiff = 5
       CALL XERCLR
       CALL XLEGF(dnu1,nudiff,mu1,mu2,theta,1,p,ip,ierror)
       n = NUMXER(nerr)
-      IF ( n==ierror ) THEN
+      IF( n==ierror ) THEN
         nudiff = 0
         theta = 2.0
         CALL XERCLR
         CALL XLEGF(dnu1,nudiff,mu1,mu2,theta,1,p,ip,ierror)
         n = NUMXER(nerr)
-        IF ( n==ierror ) THEN
-          IF ( Kprint>=2 ) WRITE (Lun,99017)
+        IF( n==ierror ) THEN
+          IF( Kprint>=2 ) WRITE (Lun,99017)
           99017 FORMAT (' ***** TEST 5 (SINGLE PRECISION) PASSED *****')
           GOTO 700
         END IF
       END IF
     END IF
-    IF ( Kprint>=1 ) WRITE (Lun,99018)
+    IF( Kprint>=1 ) WRITE (Lun,99018)
     99018 FORMAT (' ***** TEST 5 (SINGLE PRECISION) FAILED *****')
     ierr = ierr + 1
     Ipass = 0
     700 CONTINUE
-    IF ( ierr/=0 ) THEN
-      IF ( Kprint>=2 ) WRITE (Lun,99019) ierr
+    IF( ierr/=0 ) THEN
+      IF( Kprint>=2 ) WRITE (Lun,99019) ierr
       99019 FORMAT (/'  TESTS COMPLETED, NUMBER OF TESTS FAILED = ',I2)
     END IF
   END SUBROUTINE FCNQX1
   !** XCSRT
   SUBROUTINE XCSRT(Dnu1,Nudiff,Mu1,Mu2,Theta,P,Q,R,Ip,Iq,Ir,C1,Ic1,C2,Ic2,Ierror)
-    !>
-    !  TO COMPUTE CHECK VALUES FOR LEGENDRE FUNCTIONS
+    !> TO COMPUTE CHECK VALUES FOR LEGENDRE FUNCTIONS
     !***
     ! **Library:**   SLATEC
     !***
@@ -383,9 +381,9 @@ CONTAINS
     !   901019  Revisions to prologue.  (DWL and WRB)
     !   901106  Changed all specific intrinsics to generic.  (WRB)
     USE slatec, ONLY : XADD, XADJ, XRED
-    INTEGER i, Ic1(*), Ic2(*), Ierror, Ip(*), Iq(*), Ir(*), ix1, ix2, j, k, l, &
+    INTEGER :: i, Ic1(*), Ic2(*), Ierror, Ip(*), Iq(*), Ir(*), ix1, ix2, j, k, l, &
       lm1, mu, Mu1, Mu2, Nudiff
-    REAL(SP) C1(*), C2(*), dmu, dmu1, nu, Dnu1, P(*), Q(*), R(*), Theta, sx, x1, x2
+    REAL(SP) :: C1(*), C2(*), dmu, dmu1, nu, Dnu1, P(*), Q(*), R(*), Theta, sx, x1, x2
     !
     !         PLACE ALL INPUT IN ADJUSTED FORM.
     !
@@ -395,16 +393,16 @@ CONTAINS
     lm1 = l - 1
     DO i = 1, l
       CALL XADJ(P(i),Ip(i),Ierror)
-      IF ( Ierror/=0 ) RETURN
+      IF( Ierror/=0 ) RETURN
       CALL XADJ(Q(i),Iq(i),Ierror)
-      IF ( Ierror/=0 ) RETURN
+      IF( Ierror/=0 ) RETURN
       CALL XADJ(R(i),Ir(i),Ierror)
-      IF ( Ierror/=0 ) RETURN
+      IF( Ierror/=0 ) RETURN
     END DO
     !
     !         CHECKS FOR FIXED MU, VARIABLE NU
     !
-    IF ( Mu2>Mu1 ) THEN
+    IF( Mu2>Mu1 ) THEN
       !
       !         CHECKS FOR FIXED NU, VARIABLE MU
       !
@@ -423,37 +421,37 @@ CONTAINS
         x1 = P(i+1)*Q(i)
         ix1 = Ip(i+1) + Iq(i)
         CALL XADJ(x1,ix1,Ierror)
-        IF ( Ierror/=0 ) RETURN
+        IF( Ierror/=0 ) RETURN
         x2 = P(i)*Q(i+1)
         ix2 = Ip(i) + Iq(i+1)
         CALL XADJ(x2,ix2,Ierror)
-        IF ( Ierror/=0 ) RETURN
+        IF( Ierror/=0 ) RETURN
         x1 = (dmu+Dnu1+1.)*(dmu-Dnu1)*x1
         !
         !         MULTIPLY BY SQRT(1-X**2)*(-1)**MU SO THAT CHECK VALUE IS 1.
         !
         CALL XADD(x1,ix1,-x2,ix2,C1(i),Ic1(i),Ierror)
-        IF ( Ierror/=0 ) RETURN
+        IF( Ierror/=0 ) RETURN
         C1(i) = sx*C1(i)*(-1)**mu
         CALL XADJ(C1(i),Ic1(i),Ierror)
-        IF ( Ierror/=0 ) RETURN
+        IF( Ierror/=0 ) RETURN
         !
         !         CASORATI 3
         !
         !         P(MU+1,NU,X)*Q(MU,NU,X)-P(MU,NU,X)*Q(MU+1,NU,X)=
         !               GAMMA(NU+MU+1)/(GAMMA(NU-MU+1)*SQRT(1-X**2))
         !
-        IF ( dmu<Dnu1+1..OR.MOD(Dnu1,1.)/=0. ) THEN
+        IF( dmu<Dnu1+1. .OR. MOD(Dnu1,1.)/=0. ) THEN
           x1 = R(i+1)*Q(i)
           ix1 = Ir(i+1) + Iq(i)
           CALL XADJ(x1,ix1,Ierror)
-          IF ( Ierror/=0 ) RETURN
+          IF( Ierror/=0 ) RETURN
           x2 = R(i)*Q(i+1)
           ix2 = Ir(i) + Iq(i+1)
           CALL XADJ(x2,ix2,Ierror)
-          IF ( Ierror/=0 ) RETURN
+          IF( Ierror/=0 ) RETURN
           CALL XADD(x1,ix1,-x2,ix2,C2(i),Ic2(i),Ierror)
-          IF ( Ierror/=0 ) RETURN
+          IF( Ierror/=0 ) RETURN
           !
           !         MULTIPLY BY SQRT(1-X**2) AND THEN DIVIDE BY
           !         (NU+MU),(NU+MU-1),(NU+MU-2),...,(NU-MU+1) SO THAT
@@ -461,12 +459,12 @@ CONTAINS
           !
           C2(i) = C2(i)*sx
           k = 2*mu
-          IF ( k>0 ) THEN
+          IF( k>0 ) THEN
             DO j = 1, k
               C2(i) = C2(i)/(Dnu1+dmu+1.-j)
               CALL XADJ(C2(i),Ic2(i),Ierror)
             END DO
-            IF ( Ierror/=0 ) RETURN
+            IF( Ierror/=0 ) RETURN
           END IF
         END IF
       END DO
@@ -485,17 +483,17 @@ CONTAINS
         x1 = P(i+1)*Q(i)
         ix1 = Ip(i+1) + Iq(i)
         CALL XADJ(x1,ix1,Ierror)
-        IF ( Ierror/=0 ) RETURN
+        IF( Ierror/=0 ) RETURN
         x2 = P(i)*Q(i+1)
         ix2 = Ip(i) + Iq(i+1)
         CALL XADJ(x2,ix2,Ierror)
-        IF ( Ierror/=0 ) RETURN
+        IF( Ierror/=0 ) RETURN
         x1 = (dmu1+nu+1.)*x1
         x2 = (dmu1-nu-1.)*x2
         CALL XADD(x1,ix1,x2,ix2,C1(i),Ic1(i),Ierror)
-        IF ( Ierror/=0 ) RETURN
+        IF( Ierror/=0 ) RETURN
         CALL XADJ(C1(i),Ic1(i),Ierror)
-        IF ( Ierror/=0 ) RETURN
+        IF( Ierror/=0 ) RETURN
         !
         !         MULTIPLY BY (-1)**MU SO THAT CHECK VALUE IS 1.
         !
@@ -506,31 +504,31 @@ CONTAINS
         !         P(MU,NU+1,X)*Q(MU,NU,X)-P(MU,NU,X)*Q(MU,NU+1,X)=
         !               GAMMA(NU+MU+1)/GAMMA(NU-MU+2)
         !
-        IF ( dmu1>=nu+1..AND.MOD(nu,1.)==0. ) THEN
+        IF( dmu1>=nu+1. .AND. MOD(nu,1.)==0. ) THEN
           C2(i) = 0.
           Ic2(i) = 0
         ELSE
           x1 = R(i+1)*Q(i)
           ix1 = Ir(i+1) + Iq(i)
           CALL XADJ(x1,ix1,Ierror)
-          IF ( Ierror/=0 ) RETURN
+          IF( Ierror/=0 ) RETURN
           x2 = R(i)*Q(i+1)
           ix2 = Ir(i) + Iq(i+1)
           CALL XADJ(x2,ix2,Ierror)
-          IF ( Ierror/=0 ) RETURN
+          IF( Ierror/=0 ) RETURN
           CALL XADD(x1,ix1,-x2,ix2,C2(i),Ic2(i),Ierror)
-          IF ( Ierror/=0 ) RETURN
+          IF( Ierror/=0 ) RETURN
           !
           !         DIVIDE BY (NU+MU),(NU+MU-1),(NU+MU-2),....(NU-MU+2),
           !         SO THAT CHECK VALUE IS 1.
           !
           k = 2*Mu1 - 1
           DO j = 1, k
-            IF ( k>0 ) C2(i) = C2(i)/(nu+dmu1+1.-j)
+            IF( k>0 ) C2(i) = C2(i)/(nu+dmu1+1.-j)
             CALL XADJ(C2(i),Ic2(i),Ierror)
           END DO
-          IF ( Ierror/=0 ) RETURN
-          IF ( k<=0 ) C2(i) = (nu+1.)*C2(i)
+          IF( Ierror/=0 ) RETURN
+          IF( k<=0 ) C2(i) = (nu+1.)*C2(i)
         END IF
       END DO
     END IF
@@ -539,9 +537,9 @@ CONTAINS
     !
     DO i = 1, lm1
       CALL XRED(C1(i),Ic1(i),Ierror)
-      IF ( Ierror/=0 ) RETURN
+      IF( Ierror/=0 ) RETURN
       CALL XRED(C2(i),Ic2(i),Ierror)
-      IF ( Ierror/=0 ) RETURN
+      IF( Ierror/=0 ) RETURN
     END DO
   END SUBROUTINE XCSRT
 END MODULE TEST11_MOD
@@ -551,8 +549,7 @@ PROGRAM TEST11
   USE slatec, ONLY : I1MACH, XSETF, XSETUN, XERMAX
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
-  !>
-  !  Driver for testing SLATEC subprograms
+  !> Driver for testing SLATEC subprograms
   !***
   ! **Library:**   SLATEC
   !***
@@ -595,7 +592,7 @@ PROGRAM TEST11
 
   !* REVISION HISTORY  (YYMMDD)
   !   901204  DATE WRITTEN
-  INTEGER ipass, kprint, lin, lun, nfail
+  INTEGER :: ipass, kprint, lin, lun, nfail
   !* FIRST EXECUTABLE STATEMENT  TEST11
   lun = I1MACH(2)
   lin = I1MACH(1)
@@ -606,7 +603,7 @@ PROGRAM TEST11
   CALL GET_ARGUMENT(kprint)
   CALL XERMAX(1000)
   CALL XSETUN(lun)
-  IF ( kprint<=1 ) THEN
+  IF( kprint<=1 ) THEN
     CALL XSETF(0)
   ELSE
     CALL XSETF(1)
@@ -615,11 +612,11 @@ PROGRAM TEST11
   !     Test XLEGF and XNRMP
   !
   CALL FCNQX1(lun,kprint,ipass)
-  IF ( ipass==0 ) nfail = nfail + 1
+  IF( ipass==0 ) nfail = nfail + 1
   !
   !     Write PASS or FAIL message
   !
-  IF ( nfail==0 ) THEN
+  IF( nfail==0 ) THEN
     WRITE (lun,99001)
     99001 FORMAT (/' --------------TEST11 PASSED ALL TESTS----------------')
   ELSE

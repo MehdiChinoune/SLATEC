@@ -1,7 +1,6 @@
 !** PSIXN
 REAL(SP) FUNCTION PSIXN(N)
-  !>
-  !  Subsidiary to EXINT
+  !> Subsidiary to EXINT
   !***
   ! **Library:**   SLATEC
   !***
@@ -12,9 +11,9 @@ REAL(SP) FUNCTION PSIXN(N)
   ! **Description:**
   !
   !     This subroutine returns values of PSI(X)=derivative of log
-  !     GAMMA(X), X .GT. 0.0 at integer arguments. A table look-up is
-  !     performed for N .LE. 100, and the asymptotic expansion is
-  !     evaluated for N .GT. 100.
+  !     GAMMA(X), X > 0.0 at integer arguments. A table look-up is
+  !     performed for N <= 100, and the asymptotic expansion is
+  !     evaluated for N > 100.
   !
   !***
   ! **See also:**  EXINT
@@ -28,8 +27,8 @@ REAL(SP) FUNCTION PSIXN(N)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
   USE service, ONLY : R1MACH
-  INTEGER N, k
-  REAL(SP) ax, fn, rfn2, trm, s, wdtol
+  INTEGER :: N, k
+  REAL(SP) :: ax, fn, rfn2, trm, s, wdtol
   !-----------------------------------------------------------------------
   !             PSIXN(N), N = 1,100
   !-----------------------------------------------------------------------
@@ -75,17 +74,17 @@ REAL(SP) FUNCTION PSIXN(N)
     -2.10927960927960928E-02 ]
   !
   !* FIRST EXECUTABLE STATEMENT  PSIXN
-  IF ( N>100 ) THEN
+  IF( N>100 ) THEN
     wdtol = MAX(R1MACH(4),1.0E-18)
     fn = N
     ax = 1.0E0
     s = -0.5E0/fn
-    IF ( ABS(s)>wdtol ) THEN
+    IF( ABS(s)>wdtol ) THEN
       rfn2 = 1.0E0/(fn*fn)
       DO k = 1, 6
         ax = ax*rfn2
         trm = -b(k)*ax
-        IF ( ABS(trm)<wdtol ) EXIT
+        IF( ABS(trm)<wdtol ) EXIT
         s = s + trm
       END DO
     END IF

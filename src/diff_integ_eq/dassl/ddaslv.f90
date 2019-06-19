@@ -1,7 +1,6 @@
 !** DDASLV
 SUBROUTINE DDASLV(Neq,Delta,Wm,Iwm)
-  !>
-  !  Linear system solver for DDASSL.
+  !> Linear system solver for DDASSL.
   !***
   ! **Library:**   SLATEC (DASSL)
   !***

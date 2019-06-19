@@ -1,7 +1,6 @@
 !** SSDSCL
 SUBROUTINE SSDSCL(N,Nelt,Ia,Ja,A,X,B,Dinv,Job,Itol)
-  !>
-  !  Diagonal Scaling of system Ax = b.
+  !> Diagonal Scaling of system Ax = b.
   !            This routine scales (and unscales) the system  Ax = b
   !            by symmetric diagonal scaling.
   !***
@@ -147,20 +146,20 @@ SUBROUTINE SSDSCL(N,Nelt,Ia,Ja,A,X,B,Dinv,Job,Itol)
   !   930701  Updated CATEGORY section.  (FNF, WRB)
   USE SSLBLK, ONLY : soln_com
   !     .. Scalar Arguments ..
-  INTEGER Itol, Job, N, Nelt
+  INTEGER :: Itol, Job, N, Nelt
   !     .. Array Arguments ..
-  REAL(SP) A(Nelt), B(N), Dinv(N), X(N)
-  INTEGER Ia(Nelt), Ja(Nelt)
+  REAL(SP) :: A(Nelt), B(N), Dinv(N), X(N)
+  INTEGER :: Ia(Nelt), Ja(Nelt)
   !     .. Local Scalars ..
-  REAL(SP) di
-  INTEGER icol, j, jbgn, jend
+  REAL(SP) :: di
+  INTEGER :: icol, j, jbgn, jend
   !     .. Intrinsic Functions ..
   INTRINSIC SQRT
   !* FIRST EXECUTABLE STATEMENT  SSDSCL
   !
   !         SCALING...
   !
-  IF ( Job/=0 ) THEN
+  IF( Job/=0 ) THEN
     DO icol = 1, N
       Dinv(icol) = 1.0E0/SQRT(A(Ja(icol)))
     END DO
@@ -189,7 +188,7 @@ SUBROUTINE SSDSCL(N,Nelt,Ia,Ja,A,X,B,Dinv,Job,Itol)
   !
   !         Check to see if we need to scale the "true solution" as well.
   !
-  IF ( Itol==11 ) THEN
+  IF( Itol==11 ) THEN
     DO icol = 1, N
       soln_com(icol) = soln_com(icol)/Dinv(icol)
     END DO

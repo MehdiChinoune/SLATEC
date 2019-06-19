@@ -1,7 +1,6 @@
 !** DEFER
 SUBROUTINE DEFER(COFX,COFY,Idmn,Usol,Grhs)
-  !>
-  !  Subsidiary to SEPELI
+  !> Subsidiary to SEPELI
   !***
   ! **Library:**   SLATEC
   !***
@@ -71,9 +70,9 @@ SUBROUTINE DEFER(COFX,COFY,Idmn,Usol,Grhs)
       !
       !     RESET FORM OF TRUNCATION IF AT BOUNDARY WHICH IS NON-PERIODIC
       !
-      IF ( .NOT.(kswx_com==1.OR.(i>1.AND.i<k_com)) )&
+      IF( .NOT. (kswx_com==1 .OR. (i>1 .AND. i<k_com)) )&
         tx = ai/3.0*(uxxxx/4.0+uxxx/dlx_com)
-      IF ( .NOT.(kswy_com==1.OR.(j>1.AND.j<l_com)) )&
+      IF( .NOT. (kswy_com==1 .OR. (j>1 .AND. j<l_com)) )&
         ty = dj/3.0*(uyyyy/4.0+uyyy/dly_com)
       Grhs(i,j) = Grhs(i,j) + dlx_com**2*tx + dly_com**2*ty
     END DO

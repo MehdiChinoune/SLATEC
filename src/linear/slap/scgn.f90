@@ -1,8 +1,7 @@
 !** SCGN
 SUBROUTINE SCGN(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MTTVEC,MSOLVE,Itol,Tol,&
     Itmax,Iter,Err,Ierr,Iunit,R,Z,P,Atp,Atz,Dz,Atdz,Rwork,Iwork)
-  !>
-  !  Preconditioned CG Sparse Ax=b Solver for Normal Equations.
+  !> Preconditioned CG Sparse Ax=b Solver for Normal Equations.
   !            Routine to solve a general linear system  Ax = b  using the
   !            Preconditioned Conjugate Gradient method applied to the
   !            normal equations  AA'y = b, x=A'y.
@@ -245,7 +244,7 @@ SUBROUTINE SCGN(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MTTVEC,MSOLVE,Itol,Tol,&
   !
   !- Cautions:
   !     This routine will attempt to write to the Fortran logical output
-  !     unit IUNIT, if IUNIT .ne. 0.  Thus, the user must make sure that
+  !     unit IUNIT, if IUNIT /= 0.  Thus, the user must make sure that
   !     this logical unit is attached to a file or terminal before calling
   !     this routine with a non-zero value for IUNIT.  This routine does
   !     not check for the validity of a non-zero IUNIT unit number.
@@ -311,12 +310,12 @@ SUBROUTINE SCGN(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MTTVEC,MSOLVE,Itol,Tol,&
   !
   Iter = 0
   Ierr = 0
-  IF ( N<1 ) THEN
+  IF( N<1 ) THEN
     Ierr = 3
     RETURN
   END IF
   tolmin = 500*R1MACH(3)
-  IF ( Tol<tolmin ) THEN
+  IF( Tol<tolmin ) THEN
     Tol = tolmin
     Ierr = 4
   END IF
@@ -329,10 +328,10 @@ SUBROUTINE SCGN(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MTTVEC,MSOLVE,Itol,Tol,&
   CALL MSOLVE(N,R,Z,Rwork,Iwork)
   CALL MTTVEC(N,Z,Atz,Nelt,Ia,Ja,A,Isym)
   !
-  IF ( ISSCGN(N,B,X,Nelt,Ia,Ja,A,Isym,MTTVEC,MSOLVE,Itol,Tol,&
+  IF( ISSCGN(N,B,X,Nelt,Ia,Ja,A,Isym,MTTVEC,MSOLVE,Itol,Tol,&
       Iter,Err,Ierr,Iunit,R,Atz,Dz,Atdz,Rwork,Iwork,ak,bk,bnrm,&
       solnrm)==0 ) THEN
-    IF ( Ierr/=0 ) RETURN
+    IF( Ierr/=0 ) RETURN
     !
     !         ***** iteration loop *****
     !
@@ -341,11 +340,11 @@ SUBROUTINE SCGN(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MTTVEC,MSOLVE,Itol,Tol,&
       !
       !         Calculate coefficient BK and direction vector P.
       bknum = DOT_PRODUCT(Z,R)
-      IF ( bknum<=0.0E0 ) THEN
+      IF( bknum<=0.0E0 ) THEN
         Ierr = 6
         RETURN
       END IF
-      IF ( Iter==1 ) THEN
+      IF( Iter==1 ) THEN
         P = Z
       ELSE
         bk = bknum/bkden
@@ -357,10 +356,10 @@ SUBROUTINE SCGN(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MTTVEC,MSOLVE,Itol,Tol,&
       !
       !         Calculate coefficient AK, new iterate X, new residual R,
       !         and new pseudo-residual ATZ.
-      IF ( Iter/=1 ) CALL SAXPY(N,bk,Atp,1,Atz,1)
+      IF( Iter/=1 ) CALL SAXPY(N,bk,Atp,1,Atz,1)
       Atp = Atz
       akden = DOT_PRODUCT(Atp,Atp)
-      IF ( akden<=0.0E0 ) THEN
+      IF( akden<=0.0E0 ) THEN
         Ierr = 6
         RETURN
       END IF
@@ -372,7 +371,7 @@ SUBROUTINE SCGN(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MTTVEC,MSOLVE,Itol,Tol,&
       CALL MTTVEC(N,Z,Atz,Nelt,Ia,Ja,A,Isym)
       !
       !         check stopping criterion.
-      IF ( ISSCGN(N,B,X,Nelt,Ia,Ja,A,Isym,MTTVEC,MSOLVE,Itol,Tol,&
+      IF( ISSCGN(N,B,X,Nelt,Ia,Ja,A,Isym,MTTVEC,MSOLVE,Itol,Tol,&
         Iter,Err,Ierr,Iunit,R,Atz,Dz,Atdz,Rwork,Iwork,ak,&
         bk,bnrm,solnrm)/=0 ) RETURN
       !

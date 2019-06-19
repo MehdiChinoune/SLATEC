@@ -1,7 +1,6 @@
 !** DOGLEG
 SUBROUTINE DOGLEG(N,R,Lr,Diag,Qtb,Delta,X,Wa1,Wa2)
-  !>
-  !  Subsidiary to SNSQ and SNSQE
+  !> Subsidiary to SNSQ and SNSQE
   !***
   ! **Library:**   SLATEC
   !***
@@ -86,21 +85,21 @@ SUBROUTINE DOGLEG(N,R,Lr,Diag,Qtb,Delta,X,Wa1,Wa2)
     jj = jj - k
     l = jj + 1
     summ = zero
-    IF ( N>=jp1 ) THEN
+    IF( N>=jp1 ) THEN
       DO i = jp1, N
         summ = summ + R(l)*X(i)
         l = l + 1
       END DO
     END IF
     temp = R(jj)
-    IF ( temp==zero ) THEN
+    IF( temp==zero ) THEN
       l = j
       DO i = 1, j
         temp = MAX(temp,ABS(R(l)))
         l = l + N - i
       END DO
       temp = epsmch*temp
-      IF ( temp==zero ) temp = epsmch
+      IF( temp==zero ) temp = epsmch
     END IF
     X(j) = (Qtb(j)-summ)/temp
   END DO
@@ -112,7 +111,7 @@ SUBROUTINE DOGLEG(N,R,Lr,Diag,Qtb,Delta,X,Wa1,Wa2)
     Wa2(j) = Diag(j)*X(j)
   END DO
   qnorm = ENORM(N,Wa2)
-  IF ( qnorm>Delta ) THEN
+  IF( qnorm>Delta ) THEN
     !
     !     THE GAUSS-NEWTON DIRECTION IS NOT ACCEPTABLE.
     !     NEXT, CALCULATE THE SCALED GRADIENT DIRECTION.
@@ -133,7 +132,7 @@ SUBROUTINE DOGLEG(N,R,Lr,Diag,Qtb,Delta,X,Wa1,Wa2)
     gnorm = ENORM(N,Wa1)
     sgnorm = zero
     alpha = Delta/qnorm
-    IF ( gnorm/=zero ) THEN
+    IF( gnorm/=zero ) THEN
       DO j = 1, N
         Wa1(j) = (Wa1(j)/gnorm)/Diag(j)
       END DO
@@ -156,7 +155,7 @@ SUBROUTINE DOGLEG(N,R,Lr,Diag,Qtb,Delta,X,Wa1,Wa2)
       !     TEST WHETHER THE SCALED GRADIENT DIRECTION IS ACCEPTABLE.
       !
       alpha = zero
-      IF ( sgnorm<Delta ) THEN
+      IF( sgnorm<Delta ) THEN
         !
         !     THE SCALED GRADIENT DIRECTION IS NOT ACCEPTABLE.
         !     FINALLY, CALCULATE THE POINT ALONG THE DOGLEG

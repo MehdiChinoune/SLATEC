@@ -1,7 +1,6 @@
 !** ALBETA
 REAL(SP) FUNCTION ALBETA(A,B)
-  !>
-  !  Compute the natural logarithm of the complete Beta
+  !> Compute the natural logarithm of the complete Beta
   !            function.
   !***
   ! **Library:**   SLATEC (FNLIB)
@@ -38,22 +37,22 @@ REAL(SP) FUNCTION ALBETA(A,B)
   !           (WRB)
   !   900727  Added EXTERNAL statement.  (WRB)
   USE service, ONLY : XERMSG
-  REAL(SP) A, B, corr, p, q
+  REAL(SP) :: A, B, corr, p, q
   REAL(SP), PARAMETER :: sq2pil = 0.91893853320467274E0
   !* FIRST EXECUTABLE STATEMENT  ALBETA
   p = MIN(A,B)
   q = MAX(A,B)
   !
-  IF ( p<=0.0 ) CALL XERMSG('ALBETA',&
+  IF( p<=0.0 ) CALL XERMSG('ALBETA',&
     'BOTH ARGUMENTS MUST BE GT ZERO',1,2)
-  IF ( p>=10.0 ) THEN
+  IF( p>=10.0 ) THEN
     !
     ! P AND Q ARE BIG.
     !
     corr = R9LGMC(p) + R9LGMC(q) - R9LGMC(p+q)
     ALBETA = -0.5*LOG(q) + sq2pil + corr + (p-0.5)*LOG(p/(p+q))+ q*ALNREL(-p/(p+q))
     RETURN
-  ELSEIF ( q<10.0 ) THEN
+  ELSEIF( q<10.0 ) THEN
     !
     ! P AND Q ARE SMALL.
     !

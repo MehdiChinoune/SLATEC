@@ -1,7 +1,6 @@
 !** REORT
 SUBROUTINE REORT(Ncomp,Y,Yp,Yhp,Niv,W,S,P,Ip,Stowa,Iflag)
-  !>
-  !  Subsidiary to BVSUP
+  !> Subsidiary to BVSUP
   !***
   ! **Library:**   SLATEC
   !***
@@ -67,10 +66,10 @@ SUBROUTINE REORT(Ncomp,Y,Yp,Yhp,Niv,W,S,P,Ip,Stowa,Iflag)
   !
   !     CHECK TO SEE IF ORTHONORMALIZATION TEST IS TO BE PERFORMED
   !
-  IF ( Iflag==1 ) THEN
+  IF( Iflag==1 ) THEN
     knswot_com = knswot_com + 1
-    IF ( knswot_com<nswot_com ) THEN
-      IF ( (xend_com-x_com)*(x_com-xot_com)<0. ) RETURN
+    IF( knswot_com<nswot_com ) THEN
+      IF( (xend_com-x_com)*(x_com-xot_com)<0. ) RETURN
     END IF
   END IF
   CALL STOR1(Y(:,1),Yhp(:,1),Yp,Yhp(:,nfcp),1,0,0)
@@ -87,17 +86,17 @@ SUBROUTINE REORT(Ncomp,Y,Yp,Yhp,Niv,W,S,P,Ip,Stowa,Iflag)
   !
   !  CHECK FOR LINEAR DEPENDENCE OF THE SOLUTIONS.
   !
-  IF ( mflag==0 ) THEN
+  IF( mflag==0 ) THEN
     !
     !     ****************************************
     !
-    IF ( Iflag==1 ) THEN
+    IF( Iflag==1 ) THEN
       !
       !     TEST FOR ORTHONORMALIZATION
       !
-      IF ( wcnd>=50.*tol_com ) THEN
+      IF( wcnd>=50.*tol_com ) THEN
         DO ijk = 1, nfcp
-          IF ( S(ijk)>1.0E+20 ) GOTO 50
+          IF( S(ijk)>1.0E+20 ) GOTO 50
         END DO
         !
         !     USE LINEAR EXTRAPOLATION ON LOGARITHMIC VALUES OF THE NORM
@@ -109,15 +108,15 @@ SUBROUTINE REORT(Ncomp,Y,Yp,Yhp,Niv,W,S,P,Ip,Stowa,Iflag)
         knswot_com = 0
         lotjp_com = 0
         wcnd = LOG10(wcnd)
-        IF ( wcnd>tnd_com+3. ) nswot_com = 2*nswot_com
-        IF ( wcnd>=pwcnd_com ) THEN
+        IF( wcnd>tnd_com+3. ) nswot_com = 2*nswot_com
+        IF( wcnd>=pwcnd_com ) THEN
           xot_com = xend_com
         ELSE
           dx = x_com - px_com
           dnd = pwcnd_com - wcnd
-          IF ( dnd>=4 ) nswot_com = nswot_com/2
+          IF( dnd>=4 ) nswot_com = nswot_com/2
           dndt = wcnd - tnd_com
-          IF ( ABS(dx*dndt)>dnd*ABS(xend_com-x_com) ) THEN
+          IF( ABS(dx*dndt)>dnd*ABS(xend_com-x_com) ) THEN
             xot_com = xend_com
           ELSE
             xot_com = x_com + dx*dndt/dnd
@@ -142,12 +141,12 @@ SUBROUTINE REORT(Ncomp,Y,Yp,Yhp,Niv,W,S,P,Ip,Stowa,Iflag)
     l = 1
     DO k = 1, nfcc_com
       srp = SQRT(P(kk))
-      IF ( inhomo_com==1 ) W(k) = srp*W(k)
+      IF( inhomo_com==1 ) W(k) = srp*W(k)
       vnorm = 1./srp
       P(kk) = vnorm
       kk = kk + nfcc_com + 1 - k
-      IF ( nfc_com/=nfcc_com ) THEN
-        IF ( l/=k/2 ) CYCLE
+      IF( nfc_com/=nfcc_com ) THEN
+        IF( l/=k/2 ) CYCLE
       END IF
       DO j = 1, Ncomp
         Y(j,l) = Y(j,l)*vnorm
@@ -155,12 +154,12 @@ SUBROUTINE REORT(Ncomp,Y,Yp,Yhp,Niv,W,S,P,Ip,Stowa,Iflag)
       l = l + 1
     END DO
     !
-    IF ( inhomo_com==1.AND.nps_com/=1 ) THEN
+    IF( inhomo_com==1 .AND. nps_com/=1 ) THEN
       !
       !     NORMALIZE THE PARTICULAR SOLUTION
       !
       ypnm = NORM2(Yp(1:Ncomp))**2
-      IF ( ypnm==0.0 ) ypnm = 1.0
+      IF( ypnm==0.0 ) ypnm = 1.0
       ypnm = SQRT(ypnm)
       S(nfcp) = ypnm
       DO j = 1, Ncomp
@@ -171,11 +170,11 @@ SUBROUTINE REORT(Ncomp,Y,Yp,Yhp,Niv,W,S,P,Ip,Stowa,Iflag)
       END DO
     END IF
     !
-    IF ( Iflag==1 ) CALL STWAY(Y(:,1),Yp,Yhp(:,1),0,Stowa)
+    IF( Iflag==1 ) CALL STWAY(Y(:,1),Yp,Yhp(:,1),0,Stowa)
     Iflag = 0
   ELSE
-    IF ( Iflag/=2 ) THEN
-      IF ( nswot_com>1.OR.lotjp_com==0 ) THEN
+    IF( Iflag/=2 ) THEN
+      IF( nswot_com>1 .OR. lotjp_com==0 ) THEN
         !
         !     RETRIEVE DATA FOR A RESTART AT LAST ORTHONORMALIZATION POINT
         !

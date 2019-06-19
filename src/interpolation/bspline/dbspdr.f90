@@ -1,7 +1,6 @@
 !** DBSPDR
 SUBROUTINE DBSPDR(T,A,N,K,Nderiv,Ad)
-  !>
-  !  Use the B-representation to construct a divided difference
+  !> Use the B-representation to construct a divided difference
   !            table preparatory to a (right) derivative calculation.
   !***
   ! **Library:**   SLATEC
@@ -39,8 +38,8 @@ SUBROUTINE DBSPDR(T,A,N,K,Nderiv,Ad)
   !          A       - B-spline coefficient vector of length N
   !          N       - number of B-spline coefficients
   !                    N = sum of knot multiplicities-K
-  !          K       - order of the spline, K .GE. 1
-  !          NDERIV  - number of derivatives, 1 .LE. NDERIV .LE. K.
+  !          K       - order of the spline, K >= 1
+  !          NDERIV  - number of derivatives, 1 <= NDERIV <= K.
   !                    NDERIV=1 gives the zero-th derivative =
   !                    function value
   !
@@ -70,26 +69,26 @@ SUBROUTINE DBSPDR(T,A,N,K,Nderiv,Ad)
   !
   INTEGER :: K, N, Nderiv
   REAL(DP) :: A(N), Ad((2*N-Nderiv+1)*Nderiv/2), T(N+K)
-  INTEGER i, id, ii, ipkmid, jj, jm, kmid
+  INTEGER :: i, id, ii, ipkmid, jj, jm, kmid
   REAL(DP) :: diff, fkmid
   !     DIMENSION T(N+K), AD((2*N-NDERIV+1)*NDERIV/2)
   !* FIRST EXECUTABLE STATEMENT  DBSPDR
-  IF ( K<1 ) THEN
+  IF( K<1 ) THEN
     !
     !
-    CALL XERMSG('DBSPDR','K DOES NOT SATISFY K.GE.1',2,1)
+    CALL XERMSG('DBSPDR','K DOES NOT SATISFY K>=1',2,1)
     RETURN
-  ELSEIF ( N<K ) THEN
-    CALL XERMSG('DBSPDR','N DOES NOT SATISFY N.GE.K',2,1)
+  ELSEIF( N<K ) THEN
+    CALL XERMSG('DBSPDR','N DOES NOT SATISFY N>=K',2,1)
     RETURN
-  ELSEIF ( Nderiv<1.OR.Nderiv>K ) THEN
-    CALL XERMSG('DBSPDR','NDERIV DOES NOT SATISFY 1.LE.NDERIV.LE.K',2,1)
+  ELSEIF( Nderiv<1 .OR. Nderiv>K ) THEN
+    CALL XERMSG('DBSPDR','NDERIV DOES NOT SATISFY 1<=NDERIV<=K',2,1)
     RETURN
   END IF
   DO i = 1, N
     Ad(i) = A(i)
   END DO
-  IF ( Nderiv==1 ) RETURN
+  IF( Nderiv==1 ) RETURN
   kmid = K
   jj = N
   jm = 0
@@ -100,7 +99,7 @@ SUBROUTINE DBSPDR(T,A,N,K,Nderiv,Ad)
     DO i = id, N
       ipkmid = i + kmid
       diff = T(ipkmid) - T(i)
-      IF ( diff/=0.0D0 ) Ad(ii+jj) = (Ad(ii+jm+1)-Ad(ii+jm))/diff*fkmid
+      IF( diff/=0.0D0 ) Ad(ii+jj) = (Ad(ii+jm+1)-Ad(ii+jm))/diff*fkmid
       ii = ii + 1
     END DO
     jm = jj

@@ -1,7 +1,6 @@
 !** BI
 REAL(SP) FUNCTION BI(X)
-  !>
-  !  Evaluate the Bairy function (the Airy function of the
+  !> Evaluate the Bairy function (the Airy function of the
   !            second kind).
   !***
   ! **Library:**   SLATEC (FNLIB)
@@ -79,7 +78,7 @@ REAL(SP) FUNCTION BI(X)
     .0000000000000005167E0, .0000000000000000011E0 ]
   LOGICAL, SAVE :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  BI
-  IF ( first ) THEN
+  IF( first ) THEN
     nbif = INITS(bifcs,9,eta)
     nbig = INITS(bigcs,8,eta)
     nbif2 = INITS(bif2cs,10,eta)
@@ -87,20 +86,20 @@ REAL(SP) FUNCTION BI(X)
     first = .FALSE.
   END IF
   !
-  IF ( X<(-1.0) ) THEN
+  IF( X<(-1.0) ) THEN
     CALL R9AIMP(X,xm,theta)
     BI = xm*SIN(theta)
     RETURN
     !
-  ELSEIF ( X<=1.0 ) THEN
+  ELSEIF( X<=1.0 ) THEN
     z = 0.0
-    IF ( ABS(X)>x3sml ) z = X**3
+    IF( ABS(X)>x3sml ) z = X**3
     BI = 0.625 + CSEVL(z,bifcs,nbif) + X*(0.4375+CSEVL(z,bigcs,nbig))
     RETURN
     !
-  ELSEIF ( X>2.0 ) THEN
+  ELSEIF( X>2.0 ) THEN
     !
-    IF ( X>xmax ) CALL XERMSG('BI','X SO BIG THAT BI OVERFLOWS',1,2)
+    IF( X>xmax ) CALL XERMSG('BI','X SO BIG THAT BI OVERFLOWS',1,2)
     !
     BI = BIE(X)*EXP(2.0*X*SQRT(X)/3.0)
     RETURN

@@ -1,8 +1,7 @@
 !** DEFCMN
 SUBROUTINE DEFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Mdein,Mdeout,&
     Coeff,Bf,Xtemp,Ptemp,Bkpt,G,Mdg,W,Mdw,Lw)
-  !>
-  !  Subsidiary to DEFC
+  !> Subsidiary to DEFC
   !***
   ! **Library:**   SLATEC
   !***
@@ -40,7 +39,7 @@ SUBROUTINE DEFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Mdein,Mdeout,&
     Xdata(Ndata), Xtemp(MAX(Nbkpt,Ndata)), Ydata(Ndata)
   !
   REAL(DP) :: dummy(1), rnorm, xmax, xmin, xval
-  INTEGER i, idata, ileft, intseq, ip, ir, irow, l, mt, n, nb, nordm1, nordp1, np1
+  INTEGER :: i, idata, ileft, intseq, ip, ir, irow, l, mt, n, nb, nordm1, nordp1, np1
   CHARACTER(8) :: xern1, xern2
   !
   !* FIRST EXECUTABLE STATEMENT  DEFCMN
@@ -55,19 +54,19 @@ SUBROUTINE DEFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Mdein,Mdeout,&
   !
   Coeff(1:n) = 0.D0
   Mdeout = -1
-  IF ( Nord<1.OR.Nord>20 ) THEN
+  IF( Nord<1 .OR. Nord>20 ) THEN
     CALL XERMSG('DEFCMN',&
       'IN DEFC, THE ORDER OF THE B-SPLINE MUST BE 1 THRU 20.',3,1)
     RETURN
   END IF
   !
-  IF ( Nbkpt<2*Nord ) THEN
+  IF( Nbkpt<2*Nord ) THEN
     CALL XERMSG('DEFCMN',&
       'IN DEFC, THE NUMBER OF KNOTS MUST BE AT LEAST TWICE THE B-SPLINE ORDER.',4,1)
     RETURN
   END IF
   !
-  IF ( Ndata<0 ) THEN
+  IF( Ndata<0 ) THEN
     CALL XERMSG('DEFCMN',&
       'IN DEFC, THE NUMBER OF DATA POINTS MUST BE NONNEGATIVE.',5,1)
     RETURN
@@ -75,17 +74,17 @@ SUBROUTINE DEFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Mdein,Mdeout,&
   !
   nb = (Nbkpt-Nord+3)*(Nord+1) + (Nbkpt+1)*(Nord+1) + 2*MAX(Nbkpt,Ndata)&
     + Nbkpt + Nord**2
-  IF ( Lw<nb ) THEN
+  IF( Lw<nb ) THEN
     WRITE (xern1,'(I8)') nb
     WRITE (xern2,'(I8)') Lw
     CALL XERMSG('DEFCMN','IN DEFC, INSUFFICIENT STORAGE FOR W(*).&
-      & CHECK FORMULA THAT READS LW.GE. ... .  NEED = '&
+      & CHECK FORMULA THAT READS LW>= ... .  NEED = '&
       //xern1//' GIVEN = '//xern2,6,1)
     Mdeout = -1
     RETURN
   END IF
   !
-  IF ( Mdein/=1.AND.Mdein/=2 ) THEN
+  IF( Mdein/=1 .AND. Mdein/=2 ) THEN
     CALL XERMSG('DEFCMN',&
       'IN DEFC, INPUT VALUE OF MDEIN MUST BE 1-2.',7,1)
     RETURN
@@ -112,7 +111,7 @@ SUBROUTINE DEFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Mdein,Mdeout,&
     Ptemp(i) = i
   END DO
   !
-  IF ( Ndata>0 ) THEN
+  IF( Ndata>0 ) THEN
     CALL DSORT(Xtemp,Ptemp,Ndata,2)
     xmin = MIN(xmin,Xtemp(1))
     xmax = MAX(xmax,Xtemp(Ndata))
@@ -145,15 +144,15 @@ SUBROUTINE DEFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Mdein,Mdeout,&
     !
     !        When interval changes, process equations in the last block.
     !
-    IF ( xval>=Bkpt(ileft+1) ) THEN
+    IF( xval>=Bkpt(ileft+1) ) THEN
       CALL DBNDAC(G,Mdg,Nord,ip,ir,mt,ileft-nordm1)
       mt = 0
       !
-      !           Move pointer up to have BKPT(ILEFT).LE.XVAL, ILEFT.LE.N.
+      !           Move pointer up to have BKPT(ILEFT)<=XVAL, ILEFT<=N.
       !
       DO ileft = ileft, n
-        IF ( xval<Bkpt(ileft+1) ) EXIT
-        IF ( Mdein==2 ) THEN
+        IF( xval<Bkpt(ileft+1) ) EXIT
+        IF( Mdein==2 ) THEN
           !
           !                 Data is being sequentially accumulated.
           !                 Transfer previously accumulated rows from W(*,*) to
@@ -179,11 +178,11 @@ SUBROUTINE DEFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Mdein,Mdeout,&
     !
     !        Scale data if uncertainty is nonzero.
     !
-    IF ( Sddata(l)/=0.D0 ) G(irow,1:nordp1) = G(irow,1:nordp1)/Sddata(l)
+    IF( Sddata(l)/=0.D0 ) G(irow,1:nordp1) = G(irow,1:nordp1)/Sddata(l)
     !
     !        When staging work area is exhausted, process rows.
     !
-    IF ( irow==Mdg-1 ) THEN
+    IF( irow==Mdg-1 ) THEN
       CALL DBNDAC(G,Mdg,Nord,ip,ir,mt,ileft-nordm1)
       mt = 0
     END IF
@@ -196,7 +195,7 @@ SUBROUTINE DEFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Mdein,Mdeout,&
   !     Finish processing any previously accumulated rows from W(*,*)
   !     to G(*,*).
   !
-  IF ( Mdein==2 ) THEN
+  IF( Mdein==2 ) THEN
     DO i = intseq, np1
       G(ir,1:nordp1) = W(i,1:nordp1)
       CALL DBNDAC(G,Mdg,Nord,ip,ir,1,MIN(n,i))
@@ -218,7 +217,7 @@ SUBROUTINE DEFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Mdein,Mdeout,&
   !     Solve for coefficients when possible.
   !
   DO i = 1, n
-    IF ( G(i,1)==0.D0 ) THEN
+    IF( G(i,1)==0.D0 ) THEN
       Mdeout = 2
       RETURN
     END IF

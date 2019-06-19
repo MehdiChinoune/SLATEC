@@ -1,7 +1,6 @@
 !** CFFTB
 SUBROUTINE CFFTB(N,C,Wsave)
-  !>
-  !  Compute the unnormalized inverse of CFFTF.
+  !> Compute the unnormalized inverse of CFFTF.
   !***
   ! **Library:**   SLATEC (FFTPACK)
   !***
@@ -91,7 +90,7 @@ SUBROUTINE CFFTB(N,C,Wsave)
   REAL(SP) :: rc(2*N)
   INTEGER :: ifac(15), i
   !* FIRST EXECUTABLE STATEMENT  CFFTF
-  IF ( N==1 ) RETURN
+  IF( N==1 ) RETURN
   rc = [ ( [REAL(C(i)), AIMAG(C(i))], i=1,N ) ]
   ifac = INT( Wsave(4*N+1:4*N+15) )
   CALL CFFTB1(N,rc,Wsave,Wsave(2*N+1),ifac)

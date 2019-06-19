@@ -1,7 +1,6 @@
 !** DMACON
 SUBROUTINE DMACON
-  !>
-  !  Subsidiary to DBVSUP
+  !> Subsidiary to DBVSUP
   !***
   ! **Library:**   SLATEC
   !***
@@ -24,7 +23,7 @@ SUBROUTINE DMACON
   !   900328  Added TYPE section.  (WRB)
   USE DML, ONLY : uro_com, sru_com, eps_com, sqovfl_com, twou_com, fouru_com, lpar_com
   USE service, ONLY : D1MACH
-  INTEGER ke
+  INTEGER :: ke
   REAL(DP) :: dd
   !* FIRST EXECUTABLE STATEMENT  DMACON
   uro_com = D1MACH(4)

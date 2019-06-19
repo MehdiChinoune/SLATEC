@@ -1,7 +1,6 @@
 !** CRATI
 SUBROUTINE CRATI(Z,Fnu,N,Cy,Tol)
-  !>
-  !  Subsidiary to CBESH, CBESI and CBESK
+  !> Subsidiary to CBESH, CBESI and CBESK
   !***
   ! **Library:**   SLATEC
   !***
@@ -27,9 +26,9 @@ SUBROUTINE CRATI(Z,Fnu,N,Cy,Tol)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
 
-  INTEGER i, id, idnu, inu, itime, k, kk, magz, N
-  COMPLEX(SP) cdfnu, Cy(N), pt, p1, p2, rz, t1, Z
-  REAL(SP) ak, amagz, ap1, ap2, arg, az, dfnu, fdnu, flam, Fnu, fnup, &
+  INTEGER :: i, id, idnu, inu, itime, k, kk, magz, N
+  COMPLEX(SP) :: cdfnu, Cy(N), pt, p1, p2, rz, t1, Z
+  REAL(SP) :: ak, amagz, ap1, ap2, arg, az, dfnu, fdnu, flam, Fnu, fnup, &
     rap1, rho, test, test1, Tol
   COMPLEX(SP), PARAMETER :: czero = (0.0E0,0.0E0), cone = (1.0E0,0.0E0)
   !* FIRST EXECUTABLE STATEMENT  CRATI
@@ -48,7 +47,7 @@ SUBROUTINE CRATI(Z,Fnu,N,Cy,Tol)
   p2 = -t1
   p1 = cone
   t1 = t1 + rz
-  IF ( id>0 ) id = 0
+  IF( id>0 ) id = 0
   ap2 = ABS(p2)
   ap1 = ABS(p1)
   !-----------------------------------------------------------------------
@@ -72,8 +71,8 @@ SUBROUTINE CRATI(Z,Fnu,N,Cy,Tol)
     p1 = pt
     t1 = t1 + rz
     ap2 = ABS(p2)
-    IF ( ap1>test ) THEN
-      IF ( itime==2 ) THEN
+    IF( ap1>test ) THEN
+      IF( itime==2 ) THEN
         kk = k + 1 - id
         ak = kk
         dfnu = Fnu + (N-1)
@@ -87,16 +86,16 @@ SUBROUTINE CRATI(Z,Fnu,N,Cy,Tol)
           p2 = pt
           t1 = t1 - cone
         END DO
-        IF ( REAL(p1)==0.0E0.AND.AIMAG(p1)==0.0E0 ) p1 = CMPLX(Tol,Tol)
+        IF( REAL(p1)==0.0E0 .AND. AIMAG(p1)==0.0E0 ) p1 = CMPLX(Tol,Tol)
         Cy(N) = p2/p1
-        IF ( N==1 ) RETURN
+        IF( N==1 ) RETURN
         k = N - 1
         ak = k
         t1 = CMPLX(ak,0.0E0)
         cdfnu = CMPLX(Fnu,0.0E0)*rz
         DO i = 2, N
           pt = cdfnu + t1*rz + Cy(k+1)
-          IF ( REAL(pt)==0.0E0.AND.AIMAG(pt)==0.0E0 ) pt = CMPLX(Tol,Tol)
+          IF( REAL(pt)==0.0E0 .AND. AIMAG(pt)==0.0E0 ) pt = CMPLX(Tol,Tol)
           Cy(k) = cone/pt
           t1 = t1 - cone
           k = k - 1

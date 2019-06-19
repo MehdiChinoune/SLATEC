@@ -1,7 +1,6 @@
 !** CUNI2
 SUBROUTINE CUNI2(Z,Fnu,Kode,N,Y,Nz,Nlast,Fnul,Tol,Elim,Alim)
-  !>
-  !  Subsidiary to CBESI and CBESK
+  !> Subsidiary to CBESI and CBESK
   !***
   ! **Library:**   SLATEC
   !***
@@ -17,8 +16,8 @@ SUBROUTINE CUNI2(Z,Fnu,Kode,N,Y,Nz,Nlast,Fnul,Tol,Elim,Alim)
   !
   !     FNUL IS THE SMALLEST ORDER PERMITTED FOR THE ASYMPTOTIC
   !     EXPANSION. NLAST=0 MEANS ALL OF THE Y VALUES WERE SET.
-  !     NLAST.NE.0 IS THE NUMBER LEFT TO BE COMPUTED BY ANOTHER
-  !     FORMULA FOR ORDERS FNU TO FNU+NLAST-1 BECAUSE FNU+NLAST-1.LT.FNUL.
+  !     NLAST/=0 IS THE NUMBER LEFT TO BE COMPUTED BY ANOTHER
+  !     FORMULA FOR ORDERS FNU TO FNU+NLAST-1 BECAUSE FNU+NLAST-1<FNUL.
   !     Y(I)=CZERO FOR I=NLAST+1,N
   !
   !***
@@ -30,10 +29,10 @@ SUBROUTINE CUNI2(Z,Fnu,Kode,N,Y,Nz,Nlast,Fnul,Tol,Elim,Alim)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
   USE service, ONLY : R1MACH
-  INTEGER i, iflag, in, inu, j, k, Kode, N, nai, nd, ndai, Nlast, nn, nuf, nw, Nz, idum
-  COMPLEX(SP) ai, arg, asum, bsum, cfn, cid, crsc, cscl, csr(3), css(3), cy(2), c1, &
+  INTEGER :: i, iflag, in, inu, j, k, Kode, N, nai, nd, ndai, Nlast, nn, nuf, nw, Nz, idum
+  COMPLEX(SP) :: ai, arg, asum, bsum, cfn, cid, crsc, cscl, csr(3), css(3), cy(2), c1, &
     c2, dai, phi, rz, s1, s2, Y(N), Z, zb, zeta1, zeta2, zn, zar
-  REAL(SP) aarg, Alim, ang, aphi, ascle, ay, bry(3), car, c2i, c2m, c2r, Elim, fn, &
+  REAL(SP) :: aarg, Alim, ang, aphi, ascle, ay, bry(3), car, c2i, c2m, c2r, Elim, fn, &
     Fnu, Fnul, rs1, sar, Tol, yy
   COMPLEX(SP), PARAMETER :: czero = (0.0E0,0.0E0), cone = (1.0E0,0.0E0), ci= (0.0E0,1.0E0)
   COMPLEX(SP), PARAMETER :: cip(4) = [ (1.0E0,0.0E0), (0.0E0,1.0E0), &
@@ -73,7 +72,7 @@ SUBROUTINE CUNI2(Z,Fnu,Kode,N,Y,Nz,Nlast,Fnul,Tol,Elim,Alim)
   in = inu + N - 1
   in = MOD(in,4)
   c2 = c2*cip(in+1)
-  IF ( yy<=0.0E0 ) THEN
+  IF( yy<=0.0E0 ) THEN
     zn = CONJG(-zn)
     zb = CONJG(zb)
     cid = -cid
@@ -84,15 +83,15 @@ SUBROUTINE CUNI2(Z,Fnu,Kode,N,Y,Nz,Nlast,Fnul,Tol,Elim,Alim)
   !-----------------------------------------------------------------------
   fn = MAX(Fnu,1.0E0)
   CALL CUNHJ(zn,fn,1,Tol,phi,arg,zeta1,zeta2,asum,bsum)
-  IF ( Kode==1 ) THEN
+  IF( Kode==1 ) THEN
     s1 = -zeta1 + zeta2
   ELSE
     cfn = CMPLX(Fnu,0.0E0)
     s1 = -zeta1 + cfn*(cfn/(zb+zeta2))
   END IF
   rs1 = REAL(s1)
-  IF ( ABS(rs1)>Elim ) THEN
-    IF ( rs1>0.0E0 ) GOTO 400
+  IF( ABS(rs1)>Elim ) THEN
+    IF( rs1>0.0E0 ) GOTO 400
     Nz = N
     DO i = 1, N
       Y(i) = czero
@@ -103,7 +102,7 @@ SUBROUTINE CUNI2(Z,Fnu,Kode,N,Y,Nz,Nlast,Fnul,Tol,Elim,Alim)
   DO i = 1, nn
     fn = Fnu + (nd-i)
     CALL CUNHJ(zn,fn,0,Tol,phi,arg,zeta1,zeta2,asum,bsum)
-    IF ( Kode==1 ) THEN
+    IF( Kode==1 ) THEN
       s1 = -zeta1 + zeta2
     ELSE
       cfn = CMPLX(fn,0.0E0)
@@ -114,9 +113,9 @@ SUBROUTINE CUNI2(Z,Fnu,Kode,N,Y,Nz,Nlast,Fnul,Tol,Elim,Alim)
     !     TEST FOR UNDERFLOW AND OVERFLOW
     !-----------------------------------------------------------------------
     rs1 = REAL(s1)
-    IF ( ABS(rs1)>Elim ) GOTO 300
-    IF ( i==1 ) iflag = 2
-    IF ( ABS(rs1)>=Alim ) THEN
+    IF( ABS(rs1)>Elim ) GOTO 300
+    IF( i==1 ) iflag = 2
+    IF( ABS(rs1)>=Alim ) THEN
       !-----------------------------------------------------------------------
       !     REFINE  TEST AND SCALE
       !-----------------------------------------------------------------------
@@ -124,10 +123,10 @@ SUBROUTINE CUNI2(Z,Fnu,Kode,N,Y,Nz,Nlast,Fnul,Tol,Elim,Alim)
       aphi = ABS(phi)
       aarg = ABS(arg)
       rs1 = rs1 + LOG(aphi) - 0.25E0*LOG(aarg) - aic
-      IF ( ABS(rs1)>Elim ) GOTO 300
-      IF ( i==1 ) iflag = 1
-      IF ( rs1>=0.0E0 ) THEN
-        IF ( i==1 ) iflag = 3
+      IF( ABS(rs1)>Elim ) GOTO 300
+      IF( i==1 ) iflag = 1
+      IF( rs1>=0.0E0 ) THEN
+        IF( i==1 ) iflag = 3
       END IF
     END IF
     !-----------------------------------------------------------------------
@@ -142,18 +141,18 @@ SUBROUTINE CUNI2(Z,Fnu,Kode,N,Y,Nz,Nlast,Fnul,Tol,Elim,Alim)
     c2m = EXP(c2r)*REAL(css(iflag))
     s1 = CMPLX(c2m,0.0E0)*CMPLX(COS(c2i),SIN(c2i))
     s2 = s2*s1
-    IF ( iflag==1 ) THEN
+    IF( iflag==1 ) THEN
       CALL CUCHK(s2,nw,bry(1),Tol)
-      IF ( nw/=0 ) GOTO 300
+      IF( nw/=0 ) GOTO 300
     END IF
-    IF ( yy<=0.0E0 ) s2 = CONJG(s2)
+    IF( yy<=0.0E0 ) s2 = CONJG(s2)
     j = nd - i + 1
     s2 = s2*c2
     cy(i) = s2
     Y(j) = s2*csr(iflag)
     c2 = c2*cid
   END DO
-  IF ( nd>2 ) THEN
+  IF( nd>2 ) THEN
     rz = CMPLX(2.0E0,0.0E0)/Z
     bry(2) = 1.0E0/bry(1)
     bry(3) = R1MACH(2)
@@ -171,13 +170,13 @@ SUBROUTINE CUNI2(Z,Fnu,Kode,N,Y,Nz,Nlast,Fnul,Tol,Elim,Alim)
       Y(k) = c2
       k = k - 1
       fn = fn - 1.0E0
-      IF ( iflag<3 ) THEN
+      IF( iflag<3 ) THEN
         c2r = REAL(c2)
         c2i = AIMAG(c2)
         c2r = ABS(c2r)
         c2i = ABS(c2i)
         c2m = MAX(c2r,c2i)
-        IF ( c2m>ascle ) THEN
+        IF( c2m>ascle ) THEN
           iflag = iflag + 1
           ascle = bry(iflag)
           s1 = s1*c1
@@ -191,21 +190,21 @@ SUBROUTINE CUNI2(Z,Fnu,Kode,N,Y,Nz,Nlast,Fnul,Tol,Elim,Alim)
   END IF
   200  RETURN
   300 CONTINUE
-  IF ( rs1<=0.0E0 ) THEN
+  IF( rs1<=0.0E0 ) THEN
     !-----------------------------------------------------------------------
     !     SET UNDERFLOW AND UPDATE PARAMETERS
     !-----------------------------------------------------------------------
     Y(nd) = czero
     Nz = Nz + 1
     nd = nd - 1
-    IF ( nd==0 ) GOTO 200
+    IF( nd==0 ) GOTO 200
     CALL CUOIK(Z,Fnu,Kode,1,nd,Y,nuf,Tol,Elim,Alim)
-    IF ( nuf>=0 ) THEN
+    IF( nuf>=0 ) THEN
       nd = nd - nuf
       Nz = Nz + nuf
-      IF ( nd==0 ) GOTO 200
+      IF( nd==0 ) GOTO 200
       fn = Fnu + (nd-1)
-      IF ( fn<Fnul ) THEN
+      IF( fn<Fnul ) THEN
         Nlast = nd
         RETURN
       ELSE
@@ -213,12 +212,12 @@ SUBROUTINE CUNI2(Z,Fnu,Kode,N,Y,Nz,Nlast,Fnul,Tol,Elim,Alim)
         !      J = NUF + 1
         !      K = MOD(J,4) + 1
         !      S1 = CIP(K)
-        !      IF (FN.LT.0.0E0) S1 = CONJG(S1)
+        !      IF(FN<0.0E0) S1 = CONJG(S1)
         !      C2 = C2*S1
         in = inu + nd - 1
         in = MOD(in,4) + 1
         c2 = zar*cip(in)
-        IF ( yy<=0.0E0 ) c2 = CONJG(c2)
+        IF( yy<=0.0E0 ) c2 = CONJG(c2)
         GOTO 100
       END IF
     END IF

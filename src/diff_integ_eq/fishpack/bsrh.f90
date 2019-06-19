@@ -1,7 +1,6 @@
 !** BSRH
 REAL(SP) FUNCTION BSRH(Xll,Xrr,Iz,C,A,Bh,F,Sgn)
-  !>
-  !  Subsidiary to BLKTRI
+  !> Subsidiary to BLKTRI
   !***
   ! **Library:**   SLATEC
   !***
@@ -36,16 +35,16 @@ REAL(SP) FUNCTION BSRH(Xll,Xrr,Iz,C,A,Bh,F,Sgn)
   xr = Xrr
   dx = .5*ABS(xr-xl)
   100  x = .5*(xl+xr)
-  IF ( Sgn*F(x,Iz,C,A,Bh)<0 ) THEN
+  IF( Sgn*F(x,Iz,C,A,Bh)<0 ) THEN
     xl = x
-  ELSEIF ( Sgn*F(x,Iz,C,A,Bh)==0 ) THEN
+  ELSEIF( Sgn*F(x,Iz,C,A,Bh)==0 ) THEN
     BSRH = .5*(xl+xr)
     RETURN
   ELSE
     xr = x
   END IF
   dx = .5*dx
-  IF ( dx>cnv_com ) GOTO 100
+  IF( dx>cnv_com ) GOTO 100
   BSRH = .5*(xl+xr)
   RETURN
 END FUNCTION BSRH

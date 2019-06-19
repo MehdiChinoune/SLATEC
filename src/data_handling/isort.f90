@@ -1,7 +1,6 @@
 !** ISORT
 SUBROUTINE ISORT(Ix,Iy,N,Kflag)
-  !>
-  !  Sort an array and optionally make the same interchanges in
+  !> Sort an array and optionally make the same interchanges in
   !            an auxiliary array.  The array may be sorted in increasing
   !            or decreasing order.  A slightly modified QUICKSORT
   !            algorithm is used.
@@ -57,25 +56,25 @@ SUBROUTINE ISORT(Ix,Iy,N,Kflag)
   !           IF-THEN-ELSE-ENDIF.  (RWC, WRB)
   USE service, ONLY : XERMSG
   !     .. Scalar Arguments ..
-  INTEGER Kflag, N
+  INTEGER :: Kflag, N
   !     .. Array Arguments ..
-  INTEGER Ix(N), Iy(N)
+  INTEGER :: Ix(N), Iy(N)
   !     .. Local Scalars ..
-  REAL(SP) r
-  INTEGER i, ij, j, k, kk, l, m, nn, t, tt, tty, ty
+  REAL(SP) :: r
+  INTEGER :: i, ij, j, k, kk, l, m, nn, t, tt, tty, ty
   !     .. Local Arrays ..
-  INTEGER il(21), iu(21)  !     .. Intrinsic Functions ..
+  INTEGER :: il(21), iu(21)  !     .. Intrinsic Functions ..
   INTRINSIC ABS, INT
   !* FIRST EXECUTABLE STATEMENT  ISORT
   nn = N
-  IF ( nn<1 ) THEN
+  IF( nn<1 ) THEN
     CALL XERMSG('ISORT',&
       'The number of values to be sorted is not positive.',1,1)
     RETURN
   END IF
   !
   kk = ABS(Kflag)
-  IF ( kk/=1.AND.kk/=2 ) THEN
+  IF( kk/=1 .AND. kk/=2 ) THEN
     CALL XERMSG('ISORT',&
       'The sort control parameter, K, is not 2, 1, -1, or -2.',2,1)
     RETURN
@@ -83,13 +82,13 @@ SUBROUTINE ISORT(Ix,Iy,N,Kflag)
   !
   !     Alter array IX to get decreasing order if needed
   !
-  IF ( Kflag<=-1 ) THEN
+  IF( Kflag<=-1 ) THEN
     DO i = 1, nn
       Ix(i) = -Ix(i)
     END DO
   END IF
   !
-  IF ( kk==2 ) THEN
+  IF( kk==2 ) THEN
     !
     !     Sort IX and carry IY along
     !
@@ -109,8 +108,8 @@ SUBROUTINE ISORT(Ix,Iy,N,Kflag)
   END IF
   !
   100 CONTINUE
-  IF ( i==j ) GOTO 300
-  IF ( r<=0.5898437E0 ) THEN
+  IF( i==j ) GOTO 300
+  IF( r<=0.5898437E0 ) THEN
     r = r + 3.90625E-2
   ELSE
     r = r - 0.21875E0
@@ -125,7 +124,7 @@ SUBROUTINE ISORT(Ix,Iy,N,Kflag)
   !
   !     If first element of array is greater than T, interchange with T
   !
-  IF ( Ix(i)>t ) THEN
+  IF( Ix(i)>t ) THEN
     Ix(ij) = Ix(i)
     Ix(i) = t
     t = Ix(ij)
@@ -134,14 +133,14 @@ SUBROUTINE ISORT(Ix,Iy,N,Kflag)
   !
   !     If last element of array is less than than T, interchange with T
   !
-  IF ( Ix(j)<t ) THEN
+  IF( Ix(j)<t ) THEN
     Ix(ij) = Ix(j)
     Ix(j) = t
     t = Ix(ij)
     !
     !        If first element of array is greater than T, interchange with T
     !
-    IF ( Ix(i)>t ) THEN
+    IF( Ix(i)>t ) THEN
       Ix(ij) = Ix(i)
       Ix(i) = t
       t = Ix(ij)
@@ -153,18 +152,18 @@ SUBROUTINE ISORT(Ix,Iy,N,Kflag)
     !     than T
     !
     l = l - 1
-    IF ( Ix(l)<=t ) THEN
+    IF( Ix(l)<=t ) THEN
       DO
         !
         !     Find an element in the first half of the array which is greater
         !     than T
         !
         k = k + 1
-        IF ( Ix(k)>=t ) THEN
+        IF( Ix(k)>=t ) THEN
           !
           !     Interchange these elements
           !
-          IF ( k<=l ) THEN
+          IF( k<=l ) THEN
             tt = Ix(l)
             Ix(l) = Ix(k)
             Ix(k) = tt
@@ -173,7 +172,7 @@ SUBROUTINE ISORT(Ix,Iy,N,Kflag)
           !
           !     Save upper and lower subscripts of the array yet to be sorted
           !
-          IF ( l-i>j-k ) THEN
+          IF( l-i>j-k ) THEN
             il(m) = i
             iu(m) = l
             i = k
@@ -193,26 +192,26 @@ SUBROUTINE ISORT(Ix,Iy,N,Kflag)
   !     Begin again on another portion of the unsorted array
   !
   300  m = m - 1
-  IF ( m==0 ) GOTO 900
+  IF( m==0 ) GOTO 900
   i = il(m)
   j = iu(m)
   !
   400 CONTINUE
-  IF ( j-i>=1 ) GOTO 200
-  IF ( i==1 ) GOTO 100
+  IF( j-i>=1 ) GOTO 200
+  IF( i==1 ) GOTO 100
   i = i - 1
   DO
     !
     i = i + 1
-    IF ( i==j ) GOTO 300
+    IF( i==j ) GOTO 300
     t = Ix(i+1)
-    IF ( Ix(i)>t ) THEN
+    IF( Ix(i)>t ) THEN
       k = i
       DO
         !
         Ix(k+1) = Ix(k)
         k = k - 1
-        IF ( t>=Ix(k) ) THEN
+        IF( t>=Ix(k) ) THEN
           Ix(k+1) = t
           EXIT
         END IF
@@ -221,8 +220,8 @@ SUBROUTINE ISORT(Ix,Iy,N,Kflag)
   END DO
   !
   500 CONTINUE
-  IF ( i==j ) GOTO 700
-  IF ( r<=0.5898437E0 ) THEN
+  IF( i==j ) GOTO 700
+  IF( r<=0.5898437E0 ) THEN
     r = r + 3.90625E-2
   ELSE
     r = r - 0.21875E0
@@ -238,7 +237,7 @@ SUBROUTINE ISORT(Ix,Iy,N,Kflag)
   !
   !     If first element of array is greater than T, interchange with T
   !
-  IF ( Ix(i)>t ) THEN
+  IF( Ix(i)>t ) THEN
     Ix(ij) = Ix(i)
     Ix(i) = t
     t = Ix(ij)
@@ -250,7 +249,7 @@ SUBROUTINE ISORT(Ix,Iy,N,Kflag)
   !
   !     If last element of array is less than T, interchange with T
   !
-  IF ( Ix(j)<t ) THEN
+  IF( Ix(j)<t ) THEN
     Ix(ij) = Ix(j)
     Ix(j) = t
     t = Ix(ij)
@@ -260,7 +259,7 @@ SUBROUTINE ISORT(Ix,Iy,N,Kflag)
     !
     !        If first element of array is greater than T, interchange with T
     !
-    IF ( Ix(i)>t ) THEN
+    IF( Ix(i)>t ) THEN
       Ix(ij) = Ix(i)
       Ix(i) = t
       t = Ix(ij)
@@ -275,18 +274,18 @@ SUBROUTINE ISORT(Ix,Iy,N,Kflag)
     !     than T
     !
     l = l - 1
-    IF ( Ix(l)<=t ) THEN
+    IF( Ix(l)<=t ) THEN
       DO
         !
         !     Find an element in the first half of the array which is greater
         !     than T
         !
         k = k + 1
-        IF ( Ix(k)>=t ) THEN
+        IF( Ix(k)>=t ) THEN
           !
           !     Interchange these elements
           !
-          IF ( k<=l ) THEN
+          IF( k<=l ) THEN
             tt = Ix(l)
             Ix(l) = Ix(k)
             Ix(k) = tt
@@ -298,7 +297,7 @@ SUBROUTINE ISORT(Ix,Iy,N,Kflag)
           !
           !     Save upper and lower subscripts of the array yet to be sorted
           !
-          IF ( l-i>j-k ) THEN
+          IF( l-i>j-k ) THEN
             il(m) = i
             iu(m) = l
             i = k
@@ -318,28 +317,28 @@ SUBROUTINE ISORT(Ix,Iy,N,Kflag)
   !     Begin again on another portion of the unsorted array
   !
   700  m = m - 1
-  IF ( m==0 ) GOTO 900
+  IF( m==0 ) GOTO 900
   i = il(m)
   j = iu(m)
   !
   800 CONTINUE
-  IF ( j-i>=1 ) GOTO 600
-  IF ( i==1 ) GOTO 500
+  IF( j-i>=1 ) GOTO 600
+  IF( i==1 ) GOTO 500
   i = i - 1
   DO
     !
     i = i + 1
-    IF ( i==j ) GOTO 700
+    IF( i==j ) GOTO 700
     t = Ix(i+1)
     ty = Iy(i+1)
-    IF ( Ix(i)>t ) THEN
+    IF( Ix(i)>t ) THEN
       k = i
       DO
         !
         Ix(k+1) = Ix(k)
         Iy(k+1) = Iy(k)
         k = k - 1
-        IF ( t>=Ix(k) ) THEN
+        IF( t>=Ix(k) ) THEN
           Ix(k+1) = t
           Iy(k+1) = ty
           EXIT
@@ -351,7 +350,7 @@ SUBROUTINE ISORT(Ix,Iy,N,Kflag)
   !     Clean up
   !
   900 CONTINUE
-  IF ( Kflag<=-1 ) THEN
+  IF( Kflag<=-1 ) THEN
     DO i = 1, nn
       Ix(i) = -Ix(i)
     END DO

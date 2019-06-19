@@ -1,7 +1,6 @@
 !** FZERO
 SUBROUTINE FZERO(F,B,C,R,Re,Ae,Iflag)
-  !>
-  !  Search for a zero of a function F(X) in a given interval
+  !> Search for a zero of a function F(X) in a given interval
   !            (B,C).  It is designed primarily for problems where F(B)
   !            and F(C) have opposite signs.
   !***
@@ -22,7 +21,7 @@ SUBROUTINE FZERO(F,B,C,R,Re,Ae,Iflag)
   !     given REAL values B and C until the width of the interval (B,C)
   !     has collapsed to within a tolerance specified by the stopping
   !     criterion,
-  !        ABS(B-C) .LE. 2.*(RW*ABS(B)+AE).
+  !        ABS(B-C) <= 2.*(RW*ABS(B)+AE).
   !     The method used is an efficient combination of bisection and the
   !     secant rule and is due to T. J. Dekker.
   !
@@ -73,7 +72,7 @@ SUBROUTINE FZERO(F,B,C,R,Re,Ae,Iflag)
   !                   The interval (B,C) collapsed to the requested tol-
   !                   erance and the function changes sign in (B,C), but
   !                   F(X) increased in magnitude as (B,C) collapsed, i.e.
-  !                     ABS(F(B out)) .GT. MAX(ABS(F(B in)),ABS(F(C in)))
+  !                     ABS(F(B out)) > MAX(ABS(F(B in)),ABS(F(C in)))
   !
   !                4  No change in sign of F(X) was found although the
   !                   interval (B,C) collapsed to the requested tolerance.
@@ -81,7 +80,7 @@ SUBROUTINE FZERO(F,B,C,R,Re,Ae,Iflag)
   !                   B is near a local minimum of F(X), or B is near a
   !                   zero of even multiplicity, or neither of these.
   !
-  !                5  Too many (.GT. 500) function evaluations used.
+  !                5  Too many (> 500) function evaluations used.
   !
   !***
   ! **References:**  L. F. Shampine and H. A. Watts, FZERO, a root-solving
@@ -109,7 +108,7 @@ SUBROUTINE FZERO(F,B,C,R,Re,Ae,Iflag)
   END INTERFACE
   INTEGER :: Iflag
   REAL(SP) :: Ae, B, C, R, Re
-  INTEGER ic, kount
+  INTEGER :: ic, kount
   REAL(SP) :: a, acbs, acmb, aw, cmb, er, fa, fb, fc, fx, fz, p, q, rw, t, tol, z
   !* FIRST EXECUTABLE STATEMENT  FZERO
   !
@@ -121,7 +120,7 @@ SUBROUTINE FZERO(F,B,C,R,Re,Ae,Iflag)
   !   Initialize.
   !
   z = R
-  IF ( R<=MIN(B,C).OR.R>=MAX(B,C) ) z = C
+  IF( R<=MIN(B,C) .OR. R>=MAX(B,C) ) z = C
   rw = MAX(Re,er)
   aw = MAX(Ae,0.E0)
   ic = 0
@@ -131,13 +130,13 @@ SUBROUTINE FZERO(F,B,C,R,Re,Ae,Iflag)
   t = B
   fb = F(t)
   kount = 2
-  IF ( SIGN(1.0E0,fz)/=SIGN(1.0E0,fb) ) THEN
+  IF( SIGN(1.0E0,fz)/=SIGN(1.0E0,fb) ) THEN
     C = z
-  ELSEIF ( z/=C ) THEN
+  ELSEIF( z/=C ) THEN
     t = C
     fc = F(t)
     kount = 3
-    IF ( SIGN(1.0E0,fz)/=SIGN(1.0E0,fc) ) THEN
+    IF( SIGN(1.0E0,fz)/=SIGN(1.0E0,fc) ) THEN
       B = z
       fb = fz
     END IF
@@ -148,7 +147,7 @@ SUBROUTINE FZERO(F,B,C,R,Re,Ae,Iflag)
   fx = MAX(ABS(fb),ABS(fc))
   DO
     !
-    IF ( ABS(fc)<ABS(fb) ) THEN
+    IF( ABS(fc)<ABS(fb) ) THEN
       !
       !   Perform interchange.
       !
@@ -166,35 +165,35 @@ SUBROUTINE FZERO(F,B,C,R,Re,Ae,Iflag)
     !
     !   Test stopping criterion and function count.
     !
-    IF ( acmb<=tol ) THEN
+    IF( acmb<=tol ) THEN
       !
       !   Finished.  Process results for proper setting of IFLAG.
       !
-      IF ( SIGN(1.0E0,fb)==SIGN(1.0E0,fc) ) THEN
+      IF( SIGN(1.0E0,fb)==SIGN(1.0E0,fc) ) THEN
         Iflag = 4
         RETURN
-      ELSEIF ( ABS(fb)>fx ) THEN
+      ELSEIF( ABS(fb)>fx ) THEN
         Iflag = 3
         RETURN
       ELSE
         Iflag = 1
         RETURN
       END IF
-    ELSEIF ( fb==0.E0 ) THEN
+    ELSEIF( fb==0.E0 ) THEN
       Iflag = 2
       RETURN
     ELSE
-      IF ( kount>=500 ) THEN
+      IF( kount>=500 ) THEN
         Iflag = 5
         EXIT
       ELSE
         !
         !   Calculate new iterate implicitly as B+P/Q, where we arrange
-        !   P .GE. 0.  The implicit form is used to prevent overflow.
+        !   P >= 0.  The implicit form is used to prevent overflow.
         !
         p = (B-a)*fb
         q = fa - fb
-        IF ( p<0.E0 ) THEN
+        IF( p<0.E0 ) THEN
           p = -p
           q = -q
         END IF
@@ -205,8 +204,8 @@ SUBROUTINE FZERO(F,B,C,R,Re,Ae,Iflag)
         a = B
         fa = fb
         ic = ic + 1
-        IF ( ic>=4 ) THEN
-          IF ( 8.0E0*acmb>=acbs ) THEN
+        IF( ic>=4 ) THEN
+          IF( 8.0E0*acmb>=acbs ) THEN
             !
             !   Use bisection (C+B)/2.
             !
@@ -220,7 +219,7 @@ SUBROUTINE FZERO(F,B,C,R,Re,Ae,Iflag)
         !
         !   Test for too small a change.
         !
-        IF ( p<=ABS(q)*tol ) THEN
+        IF( p<=ABS(q)*tol ) THEN
           !
           !   Increment by TOLerance.
           !
@@ -228,7 +227,7 @@ SUBROUTINE FZERO(F,B,C,R,Re,Ae,Iflag)
           !
           !   Root ought to be between B and (C+B)/2.
           !
-        ELSEIF ( p>=cmb*q ) THEN
+        ELSEIF( p>=cmb*q ) THEN
           B = B + cmb
         ELSE
           !
@@ -246,7 +245,7 @@ SUBROUTINE FZERO(F,B,C,R,Re,Ae,Iflag)
       !
       !   Decide whether next step is interpolation or extrapolation.
       !
-      IF ( SIGN(1.0E0,fb)==SIGN(1.0E0,fc) ) THEN
+      IF( SIGN(1.0E0,fb)==SIGN(1.0E0,fc) ) THEN
         C = a
         fc = fa
       END IF

@@ -1,8 +1,7 @@
 !** ISSOMN
 INTEGER FUNCTION ISSOMN(N,B,X,MSOLVE,Nsave,Itol,Tol,&
     Iter,Err,Ierr,Iunit,R,Z,Dz,Rwork,Iwork,Ak,Bnrm,Solnrm)
-  !>
-  !  Preconditioned Orthomin Stop Test.
+  !> Preconditioned Orthomin Stop Test.
   !            This routine calculates the stop test for the Orthomin
   !            iteration scheme.  It returns a non-zero if the error
   !            estimate (the type of which is determined by ITOL) is
@@ -38,7 +37,7 @@ INTEGER FUNCTION ISSOMN(N,B,X,MSOLVE,Nsave,Itol,Tol,&
   !     IF( ISSOMN(N, B, X, NELT, IA, JA, A, ISYM, MSOLVE, NSAVE,
   !    $     ITOL, TOL, ITMAX, ITER, ERR, IERR, IUNIT, R, Z, P, AP,
   !    $     EMAP, DZ, CSAV, RWORK, IWORK, AK, BNRM, SOLNRM)
-  !    $     .NE.0 ) THEN ITERATION CONVERGED
+  !    $     /=0 ) THEN ITERATION CONVERGED
   !
   !- Arguments:
   ! N      :IN       Integer.
@@ -149,7 +148,7 @@ INTEGER FUNCTION ISSOMN(N,B,X,MSOLVE,Nsave,Itol,Tol,&
   !
   !- Cautions:
   !     This routine will attempt to write to the Fortran logical output
-  !     unit IUNIT, if IUNIT .ne. 0.  Thus, the user must make sure that
+  !     unit IUNIT, if IUNIT /= 0.  Thus, the user must make sure that
   !     this logical unit is attached to a file or terminal before calling
   !     this routine with a non-zero value for IUNIT.  This routine does
   !     not check for the validity of a non-zero IUNIT unit number.
@@ -197,21 +196,21 @@ INTEGER FUNCTION ISSOMN(N,B,X,MSOLVE,Nsave,Itol,Tol,&
   !* FIRST EXECUTABLE STATEMENT  ISSOMN
   ISSOMN = 0
   !
-  IF ( Itol==1 ) THEN
+  IF( Itol==1 ) THEN
     !         err = ||Residual||/||RightHandSide|| (2-Norms).
-    IF ( Iter==0 ) Bnrm = NORM2(B)
+    IF( Iter==0 ) Bnrm = NORM2(B)
     Err = NORM2(R)/Bnrm
-  ELSEIF ( Itol==2 ) THEN
+  ELSEIF( Itol==2 ) THEN
     !                  -1              -1
     !         err = ||M  Residual||/||M  RightHandSide|| (2-Norms).
-    IF ( Iter==0 ) THEN
+    IF( Iter==0 ) THEN
       CALL MSOLVE(N,B,Dz,Rwork,Iwork)
       Bnrm = NORM2(Dz)
     END IF
     Err = NORM2(Z)/Bnrm
-  ELSEIF ( Itol==11 ) THEN
+  ELSEIF( Itol==11 ) THEN
     !         err = ||x-TrueSolution||/||TrueSolution|| (2-Norms).
-    IF ( Iter==0 ) Solnrm = NORM2(soln_com(1:N))
+    IF( Iter==0 ) Solnrm = NORM2(soln_com(1:N))
     DO i = 1, N
       Dz(i) = X(i) - soln_com(i)
     END DO
@@ -223,8 +222,8 @@ INTEGER FUNCTION ISSOMN(N,B,X,MSOLVE,Nsave,Itol,Tol,&
     Ierr = 3
   END IF
   !
-  IF ( Iunit/=0 ) THEN
-    IF ( Iter==0 ) THEN
+  IF( Iunit/=0 ) THEN
+    IF( Iter==0 ) THEN
       WRITE (Iunit,99001) Nsave, N, Itol
       99001 FORMAT (' Preconditioned Orthomin(',I3,') for ','N, ITOL = ',I5,I5,&
         /' ITER','   Error Estimate','            Alpha')
@@ -233,7 +232,7 @@ INTEGER FUNCTION ISSOMN(N,B,X,MSOLVE,Nsave,Itol,Tol,&
       WRITE (Iunit,99002) Iter, Err, Ak
     END IF
   END IF
-  IF ( Err<=Tol ) ISSOMN = 1
+  IF( Err<=Tol ) ISSOMN = 1
   !
   RETURN
   99002 FORMAT (1X,I4,1X,E16.7,1X,E16.7)

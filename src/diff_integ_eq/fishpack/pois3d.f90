@@ -1,7 +1,6 @@
 !** POIS3D
 SUBROUTINE POIS3D(Lperod,L,C1,Mperod,M,C2,Nperod,N,A,B,C,Ldimf,Mdimf,F,Ierror,W)
-  !>
-  !  Solve a three-dimensional block tridiagonal linear system
+  !> Solve a three-dimensional block tridiagonal linear system
   !            which arises from a finite difference approximation to a
   !            three-dimensional Poisson equation using the Fourier
   !            transform package FFTPAK written by Paul Swarztrauber.
@@ -116,17 +115,17 @@ SUBROUTINE POIS3D(Lperod,L,C1,Mperod,M,C2,Nperod,N,A,B,C,Ldimf,Mdimf,F,Ierror,W)
   !     IERROR   An error flag that indicates invalid input parameters.
   !              Except for number zero, a solution is not attempted.
   !              = 0  No error
-  !              = 1  If LPEROD .LT. 0 or .GT. 4
-  !              = 2  If L .LT. 3
-  !              = 3  If MPEROD .LT. 0 or .GT. 4
-  !              = 4  If M .LT. 3
-  !              = 5  If NPEROD .LT. 0 or .GT. 1
-  !              = 6  If N .LT. 3
-  !              = 7  If LDIMF .LT. L
-  !              = 8  If MDIMF .LT. M
-  !              = 9  If A(K) .NE. C(1) or C(K) .NE. C(1) or B(I) .NE.B(1)
+  !              = 1  If LPEROD < 0 or > 4
+  !              = 2  If L < 3
+  !              = 3  If MPEROD < 0 or > 4
+  !              = 4  If M < 3
+  !              = 5  If NPEROD < 0 or > 1
+  !              = 6  If N < 3
+  !              = 7  If LDIMF < L
+  !              = 8  If MDIMF < M
+  !              = 9  If A(K) /= C(1) or C(K) /= C(1) or B(I) /=B(1)
   !                      for some K=1,2,...,N.
-  !              = 10 If NPEROD = 1 and A(1) .NE. 0 or C(N) .NE. 0
+  !              = 10 If NPEROD = 1 and A(1) /= 0 or C(N) /= 0
   !
   !              Since this is the only means of indicating a possibly
   !              incorrect call to POIS3D, the user should test IERROR
@@ -252,40 +251,40 @@ SUBROUTINE POIS3D(Lperod,L,C1,Mperod,M,C2,Nperod,N,A,B,C,Ldimf,Mdimf,F,Ierror,W)
   !     CHECK FOR INVALID INPUT.
   !
   Ierror = 0
-  IF ( lp<1.OR.lp>5 ) Ierror = 1
-  IF ( L<3 ) Ierror = 2
-  IF ( mp<1.OR.mp>5 ) Ierror = 3
-  IF ( M<3 ) Ierror = 4
-  IF ( np<1.OR.np>2 ) Ierror = 5
-  IF ( N<3 ) Ierror = 6
-  IF ( Ldimf<L ) Ierror = 7
-  IF ( Mdimf<M ) Ierror = 8
-  IF ( np/=1 ) GOTO 200
+  IF( lp<1 .OR. lp>5 ) Ierror = 1
+  IF( L<3 ) Ierror = 2
+  IF( mp<1 .OR. mp>5 ) Ierror = 3
+  IF( M<3 ) Ierror = 4
+  IF( np<1 .OR. np>2 ) Ierror = 5
+  IF( N<3 ) Ierror = 6
+  IF( Ldimf<L ) Ierror = 7
+  IF( Mdimf<M ) Ierror = 8
+  IF( np/=1 ) GOTO 200
   DO k = 1, N
-    IF ( A(k)/=C(1) ) GOTO 100
-    IF ( C(k)/=C(1) ) GOTO 100
-    IF ( B(k)/=B(1) ) GOTO 100
+    IF( A(k)/=C(1) ) GOTO 100
+    IF( C(k)/=C(1) ) GOTO 100
+    IF( B(k)/=B(1) ) GOTO 100
   END DO
   GOTO 300
   100  Ierror = 9
   200 CONTINUE
-  IF ( Nperod==1.AND.(A(1)/=0..OR.C(N)/=0.) ) Ierror = 10
+  IF( Nperod==1 .AND. (A(1)/=0. .OR. C(N)/=0.) ) Ierror = 10
   300 CONTINUE
-  IF ( Ierror==0 ) THEN
+  IF( Ierror==0 ) THEN
     iwyrt = L + 1
     iwt = iwyrt + M
     iwd = iwt + MAX(L,M,N) + 1
     iwbb = iwd + N
     iwx = iwbb + N
     iwy = iwx + 7*((L+1)/2) + 15
-    IF ( np/=2 ) THEN
+    IF( np/=2 ) THEN
       !
       !     REORDER UNKNOWNS WHEN NPEROD = 0.
       !
       nh = (N+1)/2
       nhm1 = nh - 1
       nodd = 1
-      IF ( 2*nh==N ) nodd = 2
+      IF( 2*nh==N ) nodd = 2
       DO i = 1, L
         DO j = 1, M
           DO k = 1, nhm1
@@ -295,7 +294,7 @@ SUBROUTINE POIS3D(Lperod,L,C1,Mperod,M,C2,Nperod,N,A,B,C,Ldimf,Mdimf,F,Ierror,W)
             W(nhpk) = F(i,j,nhmk) + F(i,j,nhpk)
           END DO
           W(nh) = 2.*F(i,j,nh)
-          IF ( nodd/=1 ) W(N) = 2.*F(i,j,N)
+          IF( nodd/=1 ) W(N) = 2.*F(i,j,N)
           DO k = 1, N
             F(i,j,k) = W(k)
           END DO
@@ -310,7 +309,7 @@ SUBROUTINE POIS3D(Lperod,L,C1,Mperod,M,C2,Nperod,N,A,B,C,Ldimf,Mdimf,F,Ierror,W)
       C(nhm1) = 0.
       A(nh) = 0.
       C(nh) = 2.*C(nh)
-      IF ( nodd==2 ) THEN
+      IF( nodd==2 ) THEN
         A(N) = C(nh)
       ELSE
         B(nhm1) = B(nhm1) - A(nh-1)
@@ -319,7 +318,7 @@ SUBROUTINE POIS3D(Lperod,L,C1,Mperod,M,C2,Nperod,N,A,B,C,Ldimf,Mdimf,F,Ierror,W)
     END IF
     CALL POS3D1(lp,L,mp,M,N,A,B,C,Ldimf,Mdimf,F,W,W(iwyrt:iwt-1),W(iwt:iwd-1),&
       W(iwd:iwbb-1),W(iwx:iwy-1),W(iwy:),C1,C2,W(iwbb:iwx-1))
-    IF ( np/=2 ) THEN
+    IF( np/=2 ) THEN
       DO i = 1, L
         DO j = 1, M
           DO k = 1, nhm1
@@ -329,7 +328,7 @@ SUBROUTINE POIS3D(Lperod,L,C1,Mperod,M,C2,Nperod,N,A,B,C,Ldimf,Mdimf,F,Ierror,W)
             W(nhpk) = .5*(F(i,j,nhpk)-F(i,j,k))
           END DO
           W(nh) = .5*F(i,j,nh)
-          IF ( nodd/=1 ) W(N) = .5*F(i,j,N)
+          IF( nodd/=1 ) W(N) = .5*F(i,j,N)
           DO k = 1, N
             F(i,j,k) = W(k)
           END DO

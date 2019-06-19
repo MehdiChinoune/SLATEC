@@ -1,7 +1,6 @@
 !** WNNLS
 SUBROUTINE WNNLS(W,Mdw,Me,Ma,N,L,Prgopt,X,Rnorm,Mode,Iwork,Work)
-  !>
-  !  Solve a linearly constrained least squares problem with
+  !> Solve a linearly constrained least squares problem with
   !            equality constraints and nonnegativity constraints on
   !            selected variables.
   !***
@@ -35,7 +34,7 @@ SUBROUTINE WNNLS(W,Mdw,Me,Ma,N,L,Prgopt,X,Rnorm,Mode,Iwork,Work)
   !
   !               subject to components L+1,...,N nonnegative
   !
-  !     Any values ME.GE.0, MA.GE.0 and 0.LE. L .LE.N are permitted.
+  !     Any values ME>=0, MA>=0 and 0<= L <=N are permitted.
   !
   !     The problem is reposed as problem WNNLS
   !
@@ -52,7 +51,7 @@ SUBROUTINE WNNLS(W,Mdw,Me,Ma,N,L,Prgopt,X,Rnorm,Mode,Iwork,Work)
   !     W(*,*),MDW,  The array W(*,*) is double subscripted with first
   !     ME,MA,N,L    dimensioning parameter equal to MDW.  For this
   !                  discussion let us call M = ME + MA.  Then MDW
-  !                  must satisfy MDW.GE.M.  The condition MDW.LT.M
+  !                  must satisfy MDW>=M.  The condition MDW<M
   !                  is an error.
   !
   !                  The array W(*,*) contains the matrices and vectors
@@ -64,7 +63,7 @@ SUBROUTINE WNNLS(W,Mdw,Me,Ma,N,L,Prgopt,X,Rnorm,Mode,Iwork,Work)
   !                  respectively.  Columns 1,...,L correspond to
   !                  unconstrained variables X(1),...,X(L).  The
   !                  remaining variables are constrained to be
-  !                  nonnegative. The condition L.LT.0 or L.GT.N is
+  !                  nonnegative. The condition L<0 or L>N is
   !                  an error.
   !
   !     PRGOPT(*)    This real-valued array is the option vector.
@@ -107,7 +106,7 @@ SUBROUTINE WNNLS(W,Mdw,Me,Ma,N,L,Prgopt,X,Rnorm,Mode,Iwork,Work)
   !               ...PRGOPT(LINK)=1 (no more options to change)
   !
   !                  Values of LINK that are nonpositive are errors.
-  !                  A value of LINK.GT.NLINK=100000 is also an error.
+  !                  A value of LINK>NLINK=100000 is also an error.
   !                  This helps prevent using invalid but positive
   !                  values of LINK that will probably extend
   !                  beyond the program limits of PRGOPT(*).
@@ -200,12 +199,12 @@ SUBROUTINE WNNLS(W,Mdw,Me,Ma,N,L,Prgopt,X,Rnorm,Mode,Iwork,Work)
   !                  The length of WORK(*) must be at least
   !
   !                  LW = ME+MA+5*N
-  !                  This test will not be made if IWORK(1).LE.0.
+  !                  This test will not be made if IWORK(1)<=0.
   !
   !                  The length of IWORK(*) must be at least
   !
   !                  LIW = ME+MA+N
-  !                  This test will not be made if IWORK(2).LE.0.
+  !                  This test will not be made if IWORK(2)<=0.
   !
   !     OUTPUT..
   !
@@ -281,10 +280,10 @@ SUBROUTINE WNNLS(W,Mdw,Me,Ma,N,L,Prgopt,X,Rnorm,Mode,Iwork,Work)
   !
   !* FIRST EXECUTABLE STATEMENT  WNNLS
   Mode = 0
-  IF ( Ma+Me<=0.OR.N<=0 ) RETURN
-  IF ( Iwork(1)>0 ) THEN
+  IF( Ma+Me<=0 .OR. N<=0 ) RETURN
+  IF( Iwork(1)>0 ) THEN
     lw = Me + Ma + 5*N
-    IF ( Iwork(1)<lw ) THEN
+    IF( Iwork(1)<lw ) THEN
       WRITE (xern1,'(I8)') lw
       CALL XERMSG('WNNLS','INSUFFICIENT STORAGE ALLOCATED FOR WORK(*), NEED LW = '//xern1,2,1)
       Mode = 2
@@ -292,9 +291,9 @@ SUBROUTINE WNNLS(W,Mdw,Me,Ma,N,L,Prgopt,X,Rnorm,Mode,Iwork,Work)
     END IF
   END IF
   !
-  IF ( Iwork(2)>0 ) THEN
+  IF( Iwork(2)>0 ) THEN
     liw = Me + Ma + N
-    IF ( Iwork(2)<liw ) THEN
+    IF( Iwork(2)<liw ) THEN
       WRITE (xern1,'(I8)') liw
       CALL XERMSG('WNNLS','INSUFFICIENT STORAGE ALLOCATED FOR IWORK(*), NEED LIW = '//xern1,2,1)
       Mode = 2
@@ -302,14 +301,14 @@ SUBROUTINE WNNLS(W,Mdw,Me,Ma,N,L,Prgopt,X,Rnorm,Mode,Iwork,Work)
     END IF
   END IF
   !
-  IF ( Mdw<Me+Ma ) THEN
-    CALL XERMSG('WNNLS','THE VALUE MDW.LT.ME+MA IS AN ERROR',1,1)
+  IF( Mdw<Me+Ma ) THEN
+    CALL XERMSG('WNNLS','THE VALUE MDW<ME+MA IS AN ERROR',1,1)
     Mode = 2
     RETURN
   END IF
   !
-  IF ( L<0.OR.L>N ) THEN
-    CALL XERMSG('WNNLS','L.GE.0 .AND. L.LE.N IS REQUIRED',2,1)
+  IF( L<0 .OR. L>N ) THEN
+    CALL XERMSG('WNNLS','L>=0 .AND. L<=N IS REQUIRED',2,1)
     Mode = 2
     RETURN
   END IF

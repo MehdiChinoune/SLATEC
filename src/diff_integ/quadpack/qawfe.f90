@@ -1,13 +1,12 @@
 !** QAWFE
 SUBROUTINE QAWFE(F,A,Omega,Integr,Epsabs,Limlst,Limit,Maxp1,Result,Abserr,&
     Neval,Ier,Rslst,Erlst,Ierlst,Lst,Alist,Blist,Rlist,Elist,Iord,Nnlog,Chebmo)
-  !>
-  !  The routine calculates an approximation result to a
+  !> The routine calculates an approximation result to a
   !            given Fourier integral
   !            I = Integral of F(X)*W(X) over (A,INFINITY)
   !             where W(X) = COS(OMEGA*X) or W(X) = SIN(OMEGA*X),
   !            hopefully satisfying following claim for accuracy
-  !            ABS(I-RESULT).LE.EPSABS.
+  !            ABS(I-RESULT)<=EPSABS.
   !***
   ! **Library:**   SLATEC (QUADPACK)
   !***
@@ -49,28 +48,28 @@ SUBROUTINE QAWFE(F,A,Omega,Integr,Epsabs,Limlst,Limit,Maxp1,Result,Abserr,&
   !                     Indicates which WEIGHT function is used
   !                     INTEGR = 1      W(X) = COS(OMEGA*X)
   !                     INTEGR = 2      W(X) = SIN(OMEGA*X)
-  !                     If INTEGR.NE.1.AND.INTEGR.NE.2, the routine will
+  !                     If INTEGR/=1 .AND. INTEGR/=2, the routine will
   !                     end with IER = 6.
   !
   !            EPSABS - Real
-  !                     absolute accuracy requested, EPSABS.GT.0
-  !                     If EPSABS.LE.0, the routine will end with IER = 6.
+  !                     absolute accuracy requested, EPSABS>0
+  !                     If EPSABS<=0, the routine will end with IER = 6.
   !
   !            LIMLST - Integer
   !                     LIMLST gives an upper bound on the number of
-  !                     cycles, LIMLST.GE.1.
-  !                     If LIMLST.LT.3, the routine will end with IER = 6.
+  !                     cycles, LIMLST>=1.
+  !                     If LIMLST<3, the routine will end with IER = 6.
   !
   !            LIMIT  - Integer
   !                     Gives an upper bound on the number of subintervals
-  !                     allowed in the partition of each cycle, LIMIT.GE.1
-  !                     each cycle, LIMIT.GE.1.
+  !                     allowed in the partition of each cycle, LIMIT>=1
+  !                     each cycle, LIMIT>=1.
   !
   !            MAXP1  - Integer
   !                     Gives an upper bound on the number of
   !                     Chebyshev moments which can be stored, I.E.
   !                     for the intervals of lengths ABS(B-A)*2**(-L),
-  !                     L=0,1, ..., MAXP1-2, MAXP1.GE.1
+  !                     L=0,1, ..., MAXP1-2, MAXP1>=1
   !
   !         ON RETURN
   !            RESULT - Real
@@ -86,12 +85,12 @@ SUBROUTINE QAWFE(F,A,Omega,Integr,Epsabs,Limlst,Limit,Maxp1,Result,Abserr,&
   !            IER    - IER = 0 Normal and reliable termination of
   !                             the routine. It is assumed that the
   !                             requested accuracy has been achieved.
-  !                     IER.GT.0 Abnormal termination of the routine. The
+  !                     IER>0 Abnormal termination of the routine. The
   !                             estimates for integral and error are less
   !                             reliable. It is assumed that the requested
   !                             accuracy has not been achieved.
   !            ERROR MESSAGES
-  !                    If OMEGA.NE.0
+  !                    If OMEGA/=0
   !                     IER = 1 Maximum number of  cycles  allowed
   !                             Has been achieved., i.e. of subintervals
   !                             (A+(K-1)C,A+KC) where
@@ -120,8 +119,8 @@ SUBROUTINE QAWFE(F,A,Omega,Integr,Epsabs,Limlst,Limit,Maxp1,Result,Abserr,&
   !                             array IWORK which contains the error
   !                             flags on the cycles.
   !                         = 6 The input is invalid because
-  !                             (INTEGR.NE.1 AND INTEGR.NE.2) or
-  !                              EPSABS.LE.0 or LIMLST.LT.3.
+  !                             (INTEGR/=1 AND INTEGR/=2) or
+  !                              EPSABS<=0 or LIMLST<3.
   !                              RESULT, ABSERR, NEVAL, LST are set
   !                              to zero.
   !                         = 7 Bad integrand behaviour occurs within one
@@ -265,9 +264,9 @@ SUBROUTINE QAWFE(F,A,Omega,Integr,Epsabs,Limlst,Limit,Maxp1,Result,Abserr,&
   Neval = 0
   Lst = 0
   Ier = 0
-  IF ( (Integr/=1.AND.Integr/=2).OR.Epsabs<=0.0E+00.OR.Limlst<3 ) Ier = 6
-  IF ( Ier/=6 ) THEN
-    IF ( Omega/=0.0E+00 ) THEN
+  IF( (Integr/=1 .AND. Integr/=2) .OR. Epsabs<=0.0E+00 .OR. Limlst<3 ) Ier = 6
+  IF( Ier/=6 ) THEN
+    IF( Omega/=0.0E+00 ) THEN
       !
       !           INITIALIZATIONS
       !           ---------------
@@ -285,7 +284,7 @@ SUBROUTINE QAWFE(F,A,Omega,Integr,Epsabs,Limlst,Limit,Maxp1,Result,Abserr,&
       p1 = 0.1E+01 - p
       eps = Epsabs
       uflow = R1MACH(1)
-      IF ( Epsabs>uflow/p1 ) eps = Epsabs*p1
+      IF( Epsabs>uflow/p1 ) eps = Epsabs*p1
       ep = eps
       fact = 0.1E+01
       correc = 0.0E+00
@@ -310,19 +309,19 @@ SUBROUTINE QAWFE(F,A,Omega,Integr,Epsabs,Limlst,Limit,Maxp1,Result,Abserr,&
         !
         !           TEST ON ACCURACY WITH PARTIAL SUM
         !
-        IF ( errsum+drl<=Epsabs.AND.Lst>=6 ) GOTO 50
+        IF( errsum+drl<=Epsabs .AND. Lst>=6 ) GOTO 50
         correc = MAX(correc,Erlst(Lst))
-        IF ( Ierlst(Lst)/=0 ) eps = MAX(ep,correc*p1)
-        IF ( Ierlst(Lst)/=0 ) Ier = 7
-        IF ( Ier==7.AND.(errsum+drl)<=correc*0.1E+02.AND.Lst>5 ) GOTO 50
+        IF( Ierlst(Lst)/=0 ) eps = MAX(ep,correc*p1)
+        IF( Ierlst(Lst)/=0 ) Ier = 7
+        IF( Ier==7 .AND. (errsum+drl)<=correc*0.1E+02 .AND. Lst>5 ) GOTO 50
         numrl2 = numrl2 + 1
-        IF ( Lst>1 ) THEN
+        IF( Lst>1 ) THEN
           psum(numrl2) = psum(ll) + Rslst(Lst)
-          IF ( Lst/=2 ) THEN
+          IF( Lst/=2 ) THEN
             !
             !           TEST ON MAXIMUM NUMBER OF SUBINTERVALS
             !
-            IF ( Lst==Limlst ) Ier = 1
+            IF( Lst==Limlst ) Ier = 1
             !
             !           PERFORM NEW EXTRAPOLATION
             !
@@ -332,8 +331,8 @@ SUBROUTINE QAWFE(F,A,Omega,Integr,Epsabs,Limlst,Limit,Maxp1,Result,Abserr,&
             !           ROUNDOFF
             !
             ktmin = ktmin + 1
-            IF ( ktmin>=15.AND.Abserr<=0.1E-02*(errsum+drl) ) Ier = 4
-            IF ( abseps<=Abserr.OR.Lst==3 ) THEN
+            IF( ktmin>=15 .AND. Abserr<=0.1E-02*(errsum+drl) ) Ier = 4
+            IF( abseps<=Abserr .OR. Lst==3 ) THEN
               Abserr = abseps
               Result = reseps
               ktmin = 0
@@ -342,10 +341,10 @@ SUBROUTINE QAWFE(F,A,Omega,Integr,Epsabs,Limlst,Limit,Maxp1,Result,Abserr,&
               !           SUM) OR EXTRAPOLATED RESULT YIELDS THE BEST INTEGRAL
               !           APPROXIMATION
               !
-              IF ( (Abserr+0.1E+02*correc)<=Epsabs.OR.&
-                (Abserr<=Epsabs.AND.0.1E+02*correc>=Epsabs) ) EXIT
+              IF( (Abserr+0.1E+02*correc)<=Epsabs .OR. &
+                (Abserr<=Epsabs .AND. 0.1E+02*correc>=Epsabs) ) EXIT
             END IF
-            IF ( Ier/=0.AND.Ier/=7 ) EXIT
+            IF( Ier/=0 .AND. Ier/=7 ) EXIT
           END IF
         ELSE
           psum(1) = Rslst(1)
@@ -359,13 +358,13 @@ SUBROUTINE QAWFE(F,A,Omega,Integr,Epsabs,Limlst,Limit,Maxp1,Result,Abserr,&
       !         -----------------------------------
       !
       Abserr = Abserr + 0.1E+02*correc
-      IF ( Ier==0 ) RETURN
-      IF ( Result==0.0E+00.OR.psum(numrl2)==0.0E+00 ) THEN
-        IF ( Abserr>errsum ) GOTO 50
-        IF ( psum(numrl2)==0.0E+00 ) RETURN
+      IF( Ier==0 ) RETURN
+      IF( Result==0.0E+00 .OR. psum(numrl2)==0.0E+00 ) THEN
+        IF( Abserr>errsum ) GOTO 50
+        IF( psum(numrl2)==0.0E+00 ) RETURN
       END IF
-      IF ( Abserr/ABS(Result)<=(errsum+drl)/ABS(psum(numrl2)) ) THEN
-        IF ( Ier>=1.AND.Ier/=7 ) Abserr = Abserr + drl
+      IF( Abserr/ABS(Result)<=(errsum+drl)/ABS(psum(numrl2)) ) THEN
+        IF( Ier>=1 .AND. Ier/=7 ) Abserr = Abserr + drl
         RETURN
       END IF
     ELSE
@@ -373,7 +372,7 @@ SUBROUTINE QAWFE(F,A,Omega,Integr,Epsabs,Limlst,Limit,Maxp1,Result,Abserr,&
       !           INTEGRATION BY QAGIE IF OMEGA IS ZERO
       !           --------------------------------------
       !
-      IF ( Integr==1 ) CALL QAGIE(F,A,1,Epsabs,0.0E+00,Limit,Result,Abserr,&
+      IF( Integr==1 ) CALL QAGIE(F,A,1,Epsabs,0.0E+00,Limit,Result,Abserr,&
         Neval,Ier,Alist,Blist,Rlist,Elist,Iord,last)
       Rslst(1) = Result
       Erlst(1) = Abserr

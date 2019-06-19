@@ -1,7 +1,6 @@
 !** CDCST
 SUBROUTINE CDCST(Maxord,Mint,Iswflg,El,Tq)
-  !>
-  !  CDCST sets coefficients used by the core integrator CDSTP.
+  !> CDCST sets coefficients used by the core integrator CDSTP.
   !***
   ! **Library:**   SLATEC (SDRIVE)
   !***
@@ -20,7 +19,7 @@ SUBROUTINE CDCST(Maxord,Mint,Iswflg,El,Tq)
   !  CDCST is called by CDNTL.  The array EL determines the basic method.
   !  The array TQ is involved in adjusting the step size in relation
   !  to truncation error.  EL and TQ depend upon MINT, and are calculated
-  !  for orders 1 to MAXORD(.LE. 12).  For each order NQ, the coefficients
+  !  for orders 1 to MAXORD(<= 12).  For each order NQ, the coefficients
   !  EL are calculated from the generating polynomial:
   !    L(T) = EL(1,NQ) + EL(2,NQ)*T + ... + EL(NQ+1,NQ)*T**NQ.
   !  For the implicit Adams methods, L(T) is given by
@@ -38,15 +37,15 @@ SUBROUTINE CDCST(Maxord,Mint,Iswflg,El,Tq)
   !   790601  DATE WRITTEN
   !   900329  Initial submission to SLATEC.
 
-  REAL(SP) El(13,12), factrl(12), gama(14), summ, Tq(3,12)
-  INTEGER i, Iswflg, j, Maxord, Mint, mxrd
+  REAL(SP) :: El(13,12), factrl(12), gama(14), summ, Tq(3,12)
+  INTEGER :: i, Iswflg, j, Maxord, Mint, mxrd
   !* FIRST EXECUTABLE STATEMENT  CDCST
   factrl(1) = 1.E0
   DO i = 2, Maxord
     factrl(i) = i*factrl(i-1)
   END DO
   !                                             Compute Adams coefficients
-  IF ( Mint==1 ) THEN
+  IF( Mint==1 ) THEN
     gama(1) = 1.E0
     DO i = 1, Maxord + 1
       summ = 0.E0
@@ -79,7 +78,7 @@ SUBROUTINE CDCST(Maxord,Mint,Iswflg,El,Tq)
       Tq(3,j) = -1.E0/gama(j+2)
     END DO
     !                                              Compute Gear coefficients
-  ELSEIF ( Mint==2 ) THEN
+  ELSEIF( Mint==2 ) THEN
     El(1,1) = 1.E0
     El(2,1) = 1.E0
     DO j = 2, Maxord
@@ -97,7 +96,7 @@ SUBROUTINE CDCST(Maxord,Mint,Iswflg,El,Tq)
       END DO
     END DO
     DO j = 1, Maxord
-      IF ( j>1 ) Tq(1,j) = 1.E0/factrl(j-1)
+      IF( j>1 ) Tq(1,j) = 1.E0/factrl(j-1)
       Tq(2,j) = (j+1)/El(1,j)
       Tq(3,j) = (j+2)/El(1,j)
     END DO
@@ -105,9 +104,9 @@ SUBROUTINE CDCST(Maxord,Mint,Iswflg,El,Tq)
   !                          Compute constants used in the stiffness test.
   !                          These are the ratio of TQ(2,NQ) for the Gear
   !                          methods to those for the Adams methods.
-  IF ( Iswflg==3 ) THEN
+  IF( Iswflg==3 ) THEN
     mxrd = MIN(Maxord,5)
-    IF ( Mint==2 ) THEN
+    IF( Mint==2 ) THEN
       gama(1) = 1.E0
       DO i = 1, mxrd
         summ = 0.E0

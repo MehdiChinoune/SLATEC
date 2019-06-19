@@ -1,7 +1,6 @@
 !** RAND
 REAL(SP) FUNCTION RAND(R)
-  !>
-  !  Generate a uniformly distributed random number.
+  !> Generate a uniformly distributed random number.
   !***
   ! **Library:**   SLATEC (FNLIB)
   !***
@@ -81,9 +80,9 @@ REAL(SP) FUNCTION RAND(R)
   !
   !             Input Argument --
   ! R      If R=0., the next random number of the sequence is generated.
-  !        If R .LT. 0., the last generated number will be returned for
+  !        If R < 0., the last generated number will be returned for
   !          possible use in a restart procedure.
-  !        If R .GT. 0., the sequence of random numbers will start with
+  !        If R > 0., the sequence of random numbers will start with
   !          the seed R mod 1.  This seed is also returned as the value of
   !          RAND provided the arithmetic is done exactly.
   !
@@ -107,8 +106,8 @@ REAL(SP) FUNCTION RAND(R)
   INTEGER, PARAMETER :: ia1 = 1536, ia0 = 1029, ia1ma0 = 507
   INTEGER, PARAMETER :: ic = 1731
   !* FIRST EXECUTABLE STATEMENT  RAND
-  IF ( R>=0. ) THEN
-    IF ( R>0. ) THEN
+  IF( R>=0. ) THEN
+    IF( R>0. ) THEN
       !
       ix1 = INT( MOD(R,1.)*4194304. + 0.5 )
       ix0 = MOD(ix1,2048)

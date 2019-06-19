@@ -1,8 +1,7 @@
 !** SCOEF
 SUBROUTINE SCOEF(Yh,Yp,Ncomp,Nrowb,Nfc,B,Beta,Coef,Inhomo,Re,Ae,By,&
     Cvec,Work,Iwork,Iflag,Nfcc)
-  !>
-  !  Subsidiary to BVSUP
+  !> Subsidiary to BVSUP
   !***
   ! **Library:**   SLATEC
   !***
@@ -33,9 +32,9 @@ SUBROUTINE SCOEF(Yh,Yp,Ncomp,Nrowb,Nfc,B,Beta,Coef,Inhomo,Re,Ae,By,&
   !     AE = Absolute error tolerance
   !     BY = Storage space for the matrix  B*YH
   !     CVEC = Storage space for the vector  BETA-B*YP
-  !     WORK = Real array of internal storage. Dimension must be .GE.
+  !     WORK = Real array of internal storage. Dimension must be >=
   !            NFCC*(NFCC+4)
-  !     IWORK = Integer array of internal storage. Dimension must be .GE.
+  !     IWORK = Integer array of internal storage. Dimension must be >=
   !             3+NFCC
   !
   !- *********************************************************************
@@ -83,7 +82,7 @@ SUBROUTINE SCOEF(Yh,Yp,Ncomp,Nrowb,Nfc,B,Beta,Coef,Inhomo,Re,Ae,By,&
   REAL(SP) :: B(Nrowb,Ncomp), Beta(Nrowb), By(Nfcc,Ncomp), Coef(Nfcc), Cvec(Nrowb), &
     Work(*), Yh(Ncomp,Nfcc), Yp(Ncomp)
   INTEGER :: i, j, k, kflag, ki, l, mlso, ncomp2, nf, nfccm1
-  REAL(SP) bbn, bn, brn, bykl, bys, cons, &
+  REAL(SP) :: bbn, bn, brn, bykl, bys, cons, &
     gam, un, ypn
   !
   !     SET UP MATRIX  B*YH  AND VECTOR  BETA - B*YP
@@ -93,10 +92,10 @@ SUBROUTINE SCOEF(Yh,Yp,Ncomp,Nrowb,Nfc,B,Beta,Coef,Inhomo,Re,Ae,By,&
   DO k = 1, Nfcc
     DO j = 1, Nfc
       l = j
-      IF ( Nfc/=Nfcc ) l = 2*j - 1
+      IF( Nfc/=Nfcc ) l = 2*j - 1
       By(k,l) = DOT_PRODUCT(B(k,1:Ncomp),Yh(1:Ncomp,j))
     END DO
-    IF ( Nfc/=Nfcc ) THEN
+    IF( Nfc/=Nfcc ) THEN
       DO j = 1, Nfc
         l = 2*j
         bykl = DOT_PRODUCT(B(k,1:ncomp2),Yh(ncomp2+1:2*ncomp2,j))
@@ -123,16 +122,16 @@ SUBROUTINE SCOEF(Yh,Yp,Ncomp,Nrowb,Nfc,B,Beta,Coef,Inhomo,Re,Ae,By,&
   !
   Iflag = 0
   mlso = 0
-  IF ( Inhomo==3 ) mlso = 1
+  IF( Inhomo==3 ) mlso = 1
   kflag = INT( 0.5*LOG10(eps_com) )
   CALL XGETF(nf)
   CALL XSETF(0)
   DO
     CALL SUDS(By,Coef,Cvec,Nfcc,Nfcc,Nfcc,kflag,mlso,Work,Iwork)
-    IF ( kflag/=3 ) THEN
-      IF ( kflag==4 ) Iflag = 2
+    IF( kflag/=3 ) THEN
+      IF( kflag==4 ) Iflag = 2
       CALL XSETF(nf)
-      IF ( Nfcc==1 ) THEN
+      IF( Nfcc==1 ) THEN
         !
         !- *********************************************************************
         !     TESTING FOR EXISTENCE AND UNIQUENESS OF BOUNDARY-VALUE PROBLEM
@@ -147,14 +146,14 @@ SUBROUTINE SCOEF(Yh,Yp,Ncomp,Nrowb,Nfc,B,Beta,Coef,Inhomo,Re,Ae,By,&
           bn = MAX(bn,ABS(B(1,k)))
         END DO
         bbn = MAX(bn,ABS(Beta(1)))
-        IF ( bys<=10.*(Re*un+Ae)*bn ) EXIT
-        IF ( Inhomo/=3 ) RETURN
+        IF( bys<=10.*(Re*un+Ae)*bn ) EXIT
+        IF( Inhomo/=3 ) RETURN
         Iflag = 3
         Coef(1) = 1.
         RETURN
       ELSE
-        IF ( Inhomo/=3 ) RETURN
-        IF ( Iwork(1)<Nfcc ) THEN
+        IF( Inhomo/=3 ) RETURN
+        IF( Iwork(1)<Nfcc ) THEN
           DO k = 1, Nfcc
             ki = 4*Nfcc + k
             Coef(k) = Work(ki)
@@ -183,9 +182,9 @@ SUBROUTINE SCOEF(Yh,Yp,Ncomp,Nrowb,Nfc,B,Beta,Coef,Inhomo,Re,Ae,By,&
     END IF
   END DO
   brn = bbn/bn*bys
-  IF ( cons>=0.1*brn.AND.cons<=10.*brn ) Iflag = 1
-  IF ( cons>10.*brn ) Iflag = 2
-  IF ( cons<=Re*ABS(Beta(1))+Ae+(Re*ypn+Ae)*bn ) Iflag = 1
-  IF ( Inhomo==3 ) Coef(1) = 1.
+  IF( cons>=0.1*brn .AND. cons<=10.*brn ) Iflag = 1
+  IF( cons>10.*brn ) Iflag = 2
+  IF( cons<=Re*ABS(Beta(1))+Ae+(Re*ypn+Ae)*bn ) Iflag = 1
+  IF( Inhomo==3 ) Coef(1) = 1.
   RETURN
 END SUBROUTINE SCOEF

@@ -1,7 +1,6 @@
 !** QWGTS
 REAL(SP) FUNCTION QWGTS(X,A,B,Alfa,Beta,Integr)
-  !>
-  !  This function subprogram is used together with the
+  !> This function subprogram is used together with the
   !            routine QAWS and defines the WEIGHT function.
   !***
   ! **Library:**   SLATEC
@@ -30,8 +29,8 @@ REAL(SP) FUNCTION QWGTS(X,A,B,Alfa,Beta,Integr)
   !   900328  Added TYPE section.  (WRB)
 
   !
-  REAL(SP) A, Alfa, B, Beta, bmx, X, xma
-  INTEGER Integr
+  REAL(SP) :: A, Alfa, B, Beta, bmx, X, xma
+  INTEGER :: Integr
   !* FIRST EXECUTABLE STATEMENT  QWGTS
   xma = X - A
   bmx = B - X

@@ -1,7 +1,6 @@
 !** DXQMU
 SUBROUTINE DXQMU(Nu1,Nu2,Mu1,Mu2,Theta,X,Sx,Id,Pqa,Ipqa,Ierror)
-  !>
-  !  To compute the values of Legendre functions for DXLEGF.
+  !> To compute the values of Legendre functions for DXLEGF.
   !            Method: forward mu-wise recurrence for Q(MU,NU,X) for fixed
   !            nu to obtain Q(MU1,NU,X), Q(MU1+1,NU,X), ..., Q(MU2,NU,X).
   !***
@@ -36,7 +35,7 @@ SUBROUTINE DXQMU(Nu1,Nu2,Mu1,Mu2,Theta,X,Sx,Id,Pqa,Ipqa,Ierror)
   !        CALL DXPQNU TO OBTAIN Q(0.,NU1,X)
   !
   CALL DXPQNU(Nu1,Nu2,mu,Theta,Id,Pqa,Ipqa,Ierror)
-  IF ( Ierror/=0 ) RETURN
+  IF( Ierror/=0 ) RETURN
   pq2 = Pqa(1)
   ipq2 = Ipqa(1)
   mu = 1
@@ -44,24 +43,24 @@ SUBROUTINE DXQMU(Nu1,Nu2,Mu1,Mu2,Theta,X,Sx,Id,Pqa,Ipqa,Ierror)
   !        CALL DXPQNU TO OBTAIN Q(1.,NU1,X)
   !
   CALL DXPQNU(Nu1,Nu2,mu,Theta,Id,Pqa,Ipqa,Ierror)
-  IF ( Ierror/=0 ) RETURN
+  IF( Ierror/=0 ) RETURN
   nu = Nu1
   k = 0
   mu = 1
   dmu = 1.D0
   pq1 = Pqa(1)
   ipq1 = Ipqa(1)
-  IF ( Mu1<=0 ) THEN
+  IF( Mu1<=0 ) THEN
     k = k + 1
     Pqa(k) = pq2
     Ipqa(k) = ipq2
-    IF ( Mu2<1 ) RETURN
+    IF( Mu2<1 ) RETURN
   END IF
-  IF ( Mu1<=1 ) THEN
+  IF( Mu1<=1 ) THEN
     k = k + 1
     Pqa(k) = pq1
     Ipqa(k) = ipq1
-    IF ( Mu2<=1 ) RETURN
+    IF( Mu2<=1 ) RETURN
   END IF
   DO
     !
@@ -73,20 +72,20 @@ SUBROUTINE DXQMU(Nu1,Nu2,Mu1,Mu2,Theta,X,Sx,Id,Pqa,Ipqa,Ierror)
     x1 = -2.D0*dmu*X*Sx*pq1
     x2 = (nu+dmu)*(nu-dmu+1.D0)*pq2
     CALL DXADD(x1,ipq1,-x2,ipq2,pq,ipq,Ierror)
-    IF ( Ierror/=0 ) RETURN
+    IF( Ierror/=0 ) RETURN
     CALL DXADJ(pq,ipq,Ierror)
-    IF ( Ierror/=0 ) RETURN
+    IF( Ierror/=0 ) RETURN
     pq2 = pq1
     ipq2 = ipq1
     pq1 = pq
     ipq1 = ipq
     mu = mu + 1
     dmu = dmu + 1.D0
-    IF ( mu>=Mu1 ) THEN
+    IF( mu>=Mu1 ) THEN
       k = k + 1
       Pqa(k) = pq
       Ipqa(k) = ipq
-      IF ( Mu2<=mu ) EXIT
+      IF( Mu2<=mu ) EXIT
     END IF
   END DO
   RETURN

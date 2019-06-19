@@ -1,7 +1,6 @@
 !** CHFEV
 SUBROUTINE CHFEV(X1,X2,F1,F2,D1,D2,Ne,Xe,Fe,Next,Ierr)
-  !>
-  !  Evaluate a cubic polynomial given in Hermite form at an
+  !> Evaluate a cubic polynomial given in Hermite form at an
   !            array of points.  While designed for use by PCHFE, it may
   !            be useful directly as an evaluator for a piecewise cubic
   !            Hermite function in applications, such as graphing, where
@@ -42,14 +41,14 @@ SUBROUTINE CHFEV(X1,X2,F1,F2,D1,D2,Ne,Xe,Fe,Next,Ierr)
   !   Parameters:
   !
   !     X1,X2 -- (input) endpoints of interval of definition of cubic.
-  !           (Error return if  X1.EQ.X2 .)
+  !           (Error return if  X1=X2 .)
   !
   !     F1,F2 -- (input) values of function at X1 and X2, respectively.
   !
   !     D1,D2 -- (input) values of derivative at X1 and X2, respectively.
   !
   !     NE -- (input) number of evaluation points.  (Error return if
-  !           NE.LT.1 .)
+  !           NE<1 .)
   !
   !     XE -- (input) real array of points at which the function is to be
   !           evaluated.  If any of the XE are outside the interval
@@ -67,8 +66,8 @@ SUBROUTINE CHFEV(X1,X2,F1,F2,D1,D2,Ne,Xe,Fe,Next,Ierr)
   !           Normal return:
   !              IERR = 0  (no errors).
   !           "Recoverable" errors:
-  !              IERR = -1  if NE.LT.1 .
-  !              IERR = -2  if X1.EQ.X2 .
+  !              IERR = -1  if NE<1 .
+  !              IERR = -2  if X1=X2 .
   !                (The FE-array has not been changed in either case.)
   !
   !***
@@ -95,32 +94,32 @@ SUBROUTINE CHFEV(X1,X2,F1,F2,D1,D2,Ne,Xe,Fe,Next,Ierr)
   !
   !  DECLARE ARGUMENTS.
   !
-  INTEGER Ne, Next(2), Ierr
-  REAL(SP) X1, X2, F1, F2, D1, D2, Xe(Ne), Fe(Ne)
+  INTEGER :: Ne, Next(2), Ierr
+  REAL(SP) :: X1, X2, F1, F2, D1, D2, Xe(Ne), Fe(Ne)
   !
   !  DECLARE LOCAL VARIABLES.
   !
-  INTEGER i
-  REAL(SP) c2, c3, del1, del2, delta, h, x, xmi, xma
+  INTEGER :: i
+  REAL(SP) :: c2, c3, del1, del2, delta, h, x, xmi, xma
   REAL(SP), PARAMETER :: zero = 0.
   !
   !  VALIDITY-CHECK ARGUMENTS.
   !
   !* FIRST EXECUTABLE STATEMENT  CHFEV
-  IF ( Ne<1 ) THEN
+  IF( Ne<1 ) THEN
     !
     !  ERROR RETURNS.
     !
-    !     NE.LT.1 RETURN.
+    !     NE<1 RETURN.
     Ierr = -1
     CALL XERMSG('CHFEV','NUMBER OF EVALUATION POINTS LESS THAN ONE'&
       ,Ierr,1)
     RETURN
   ELSE
     h = X2 - X1
-    IF ( h==zero ) THEN
+    IF( h==zero ) THEN
       !
-      !     X1.EQ.X2 RETURN.
+      !     X1=X2 RETURN.
       Ierr = -2
       CALL XERMSG('CHFEV','INTERVAL ENDPOINTS EQUAL',Ierr,1)
       RETURN
@@ -151,8 +150,8 @@ SUBROUTINE CHFEV(X1,X2,F1,F2,D1,D2,Ne,Xe,Fe,Next,Ierr)
     x = Xe(i) - X1
     Fe(i) = F1 + x*(D1+x*(c2+x*c3))
     !          COUNT EXTRAPOLATION POINTS.
-    IF ( x<xmi ) Next(1) = Next(1) + 1
-    IF ( x>xma ) Next(2) = Next(2) + 1
+    IF( x<xmi ) Next(1) = Next(1) + 1
+    IF( x>xma ) Next(2) = Next(2) + 1
     !        (NOTE REDUNDANCY--IF EITHER CONDITION IS TRUE, OTHER IS FALSE.)
   END DO
   !

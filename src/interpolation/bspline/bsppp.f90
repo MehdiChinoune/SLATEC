@@ -1,7 +1,6 @@
 !** BSPPP
 SUBROUTINE BSPPP(T,A,N,K,Ldc,C,Xi,Lxi,Work)
-  !>
-  !  Convert the B-representation of a B-spline to the piecewise
+  !> Convert the B-representation of a B-spline to the piecewise
   !            polynomial (PP) form.
   !***
   ! **Library:**   SLATEC
@@ -27,9 +26,9 @@ SUBROUTINE BSPPP(T,A,N,K,Ldc,C,Xi,Lxi,Work)
   !         the knot array T(*) with multiplicities removed.  The columns
   !         of the matrix C(I,J) contain the right Taylor derivatives
   !         for the polynomial expansion about XI(J) for the intervals
-  !         XI(J) .LE. X .LE. XI(J+1), I=1,K, J=1,LXI.  Function PPVAL
+  !         XI(J) <= X <= XI(J+1), I=1,K, J=1,LXI.  Function PPVAL
   !         makes this evaluation at a specified point X in
-  !         XI(1) .LE. X .LE. XI(LXI(1) .LE. X .LE. XI+1)
+  !         XI(1) <= X <= XI(LXI(1) <= X <= XI+1)
   !
   !     Description of Arguments
   !         Input
@@ -37,14 +36,14 @@ SUBROUTINE BSPPP(T,A,N,K,Ldc,C,Xi,Lxi,Work)
   !          A       - B-spline coefficient vector of length N
   !          N       - number of B-spline coefficients
   !                    N = sum of knot multiplicities-K
-  !          K       - order of the B-spline, K .GE. 1
-  !          LDC     - leading dimension of C, LDC .GE. K
+  !          K       - order of the B-spline, K >= 1
+  !          LDC     - leading dimension of C, LDC >= K
   !
   !         Output
   !          C       - matrix of dimension at least (K,LXI) containing
   !                    right derivatives at break points
   !          XI      - XI break point vector of length LXI+1
-  !          LXI     - number of break points, LXI .LE. N-K+1
+  !          LXI     - number of break points, LXI <= N-K+1
   !          WORK    - work vector of length K*(N+3)
   !
   !     Error Conditions
@@ -74,14 +73,14 @@ SUBROUTINE BSPPP(T,A,N,K,Ldc,C,Xi,Lxi,Work)
   !     DIMENSION T(N+K),XI(LXI+1),C(LDC,*)
   !     HERE, * = THE FINAL VALUE OF THE OUTPUT PARAMETER LXI.
   !* FIRST EXECUTABLE STATEMENT  BSPPP
-  IF ( K<1 ) THEN
-    CALL XERMSG('BSPPP','K DOES NOT SATISFY K.GE.1',2,1)
+  IF( K<1 ) THEN
+    CALL XERMSG('BSPPP','K DOES NOT SATISFY K>=1',2,1)
     RETURN
-  ELSEIF ( N<K ) THEN
-    CALL XERMSG('BSPPP','N DOES NOT SATISFY N.GE.K',2,1)
+  ELSEIF( N<K ) THEN
+    CALL XERMSG('BSPPP','N DOES NOT SATISFY N>=K',2,1)
     RETURN
-  ELSEIF ( Ldc<K ) THEN
-    CALL XERMSG('BSPPP','LDC DOES NOT SATISFY LDC.GE.K',2,1)
+  ELSEIF( Ldc<K ) THEN
+    CALL XERMSG('BSPPP','LDC DOES NOT SATISFY LDC>=K',2,1)
     RETURN
   END IF
   CALL BSPDR(T,A,N,K,K,Work)
@@ -90,7 +89,7 @@ SUBROUTINE BSPPP(T,A,N,K,Ldc,C,Xi,Lxi,Work)
   inev = 1
   nk = N*K + 1
   DO ileft = K, N
-    IF ( T(ileft+1)/=T(ileft) ) THEN
+    IF( T(ileft+1)/=T(ileft) ) THEN
       Lxi = Lxi + 1
       Xi(Lxi+1) = T(ileft+1)
       CALL BSPEV(T,Work(1),N,K,K,Xi(Lxi),inev,C(1,Lxi),Work(nk))

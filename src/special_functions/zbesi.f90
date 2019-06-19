@@ -1,7 +1,6 @@
 !** ZBESI
 SUBROUTINE ZBESI(Zr,Zi,Fnu,Kode,N,Cyr,Cyi,Nz,Ierr)
-  !>
-  !  Compute a sequence of the Bessel functions I(a,z) for
+  !> Compute a sequence of the Bessel functions I(a,z) for
   !            complex argument z and real nonnegative orders a=b,b+1,
   !            b+2,... where b>0.  A scaling option is available to
   !            help avoid overflow.
@@ -165,7 +164,7 @@ SUBROUTINE ZBESI(Zr,Zi,Fnu,Kode,N,Cyr,Cyi,Nz,Ierr)
   !   920811  Prologue revised.  (DWL)
   USE service, ONLY : XERMSG, D1MACH, I1MACH
   !     COMPLEX CONE,CSGN,CW,CY,CZERO,Z,ZN
-  INTEGER i, Ierr, inu, k, Kode, k1, k2, N, Nz, nn
+  INTEGER :: i, Ierr, inu, k, Kode, k1, k2, N, Nz, nn
   REAL(DP) :: aa, alim, arg, csgni, csgnr, Cyi(N), Cyr(N), dig, elim, Fnu, fnul, &
     rl, r1m5, str, tol, Zi, zni, znr, Zr, az, bb, fn, ascle, rtol, atol, sti
   REAL(DP), PARAMETER :: pi = 3.14159265358979324D0
@@ -174,16 +173,16 @@ SUBROUTINE ZBESI(Zr,Zi,Fnu,Kode,N,Cyr,Cyi,Nz,Ierr)
   !* FIRST EXECUTABLE STATEMENT  ZBESI
   Ierr = 0
   Nz = 0
-  IF ( Fnu<0.0D0 ) Ierr = 1
-  IF ( Kode<1.OR.Kode>2 ) Ierr = 1
-  IF ( N<1 ) Ierr = 1
-  IF ( Ierr/=0 ) RETURN
+  IF( Fnu<0.0D0 ) Ierr = 1
+  IF( Kode<1 .OR. Kode>2 ) Ierr = 1
+  IF( N<1 ) Ierr = 1
+  IF( Ierr/=0 ) RETURN
   !-----------------------------------------------------------------------
   !     SET PARAMETERS RELATED TO MACHINE CONSTANTS.
   !     TOL IS THE APPROXIMATE UNIT ROUNDOFF LIMITED TO 1.0E-18.
   !     ELIM IS THE APPROXIMATE EXPONENTIAL OVER- AND UNDERFLOW LIMIT.
-  !     EXP(-ELIM).LT.EXP(-ALIM)=EXP(-ELIM)/TOL    AND
-  !     EXP(ELIM).GT.EXP(ALIM)=EXP(ELIM)*TOL       ARE INTERVALS NEAR
+  !     EXP(-ELIM)<EXP(-ALIM)=EXP(-ELIM)/TOL    AND
+  !     EXP(ELIM)>EXP(ALIM)=EXP(ELIM)*TOL       ARE INTERVALS NEAR
   !     UNDERFLOW AND OVERFLOW LIMITS WHERE SCALED ARITHMETIC IS DONE.
   !     RL IS THE LOWER BOUNDARY OF THE ASYMPTOTIC EXPANSION FOR LARGE Z.
   !     DIG = NUMBER OF BASE 10 DIGITS IN TOL = 10**(-DIG).
@@ -210,16 +209,16 @@ SUBROUTINE ZBESI(Zr,Zi,Fnu,Kode,N,Cyr,Cyi,Nz,Ierr)
   aa = 0.5D0/tol
   bb = I1MACH(9)*0.5D0
   aa = MIN(aa,bb)
-  IF ( az<=aa ) THEN
-    IF ( fn<=aa ) THEN
+  IF( az<=aa ) THEN
+    IF( fn<=aa ) THEN
       aa = SQRT(aa)
-      IF ( az>aa ) Ierr = 3
-      IF ( fn>aa ) Ierr = 3
+      IF( az>aa ) Ierr = 3
+      IF( fn>aa ) Ierr = 3
       znr = Zr
       zni = Zi
       csgnr = coner
       csgni = conei
-      IF ( Zr<0.0D0 ) THEN
+      IF( Zr<0.0D0 ) THEN
         znr = -Zr
         zni = -Zi
         !-----------------------------------------------------------------------
@@ -228,22 +227,22 @@ SUBROUTINE ZBESI(Zr,Zi,Fnu,Kode,N,Cyr,Cyi,Nz,Ierr)
         !-----------------------------------------------------------------------
         inu = INT( Fnu )
         arg = (Fnu-inu)*pi
-        IF ( Zi<0.0D0 ) arg = -arg
+        IF( Zi<0.0D0 ) arg = -arg
         csgnr = COS(arg)
         csgni = SIN(arg)
-        IF ( MOD(inu,2)/=0 ) THEN
+        IF( MOD(inu,2)/=0 ) THEN
           csgnr = -csgnr
           csgni = -csgni
         END IF
       END IF
       CALL ZBINU(znr,zni,Fnu,Kode,N,Cyr,Cyi,Nz,rl,fnul,tol,elim,alim)
-      IF ( Nz>=0 ) THEN
-        IF ( Zr>=0.0D0 ) RETURN
+      IF( Nz>=0 ) THEN
+        IF( Zr>=0.0D0 ) RETURN
         !-----------------------------------------------------------------------
         !     ANALYTIC CONTINUATION TO THE LEFT HALF PLANE
         !-----------------------------------------------------------------------
         nn = N - Nz
-        IF ( nn==0 ) RETURN
+        IF( nn==0 ) RETURN
         rtol = 1.0D0/tol
         ascle = D1MACH(1)*rtol*1.0D+3
         DO i = 1, nn
@@ -253,7 +252,7 @@ SUBROUTINE ZBESI(Zr,Zi,Fnu,Kode,N,Cyr,Cyi,Nz,Ierr)
           aa = Cyr(i)
           bb = Cyi(i)
           atol = 1.0D0
-          IF ( MAX(ABS(aa),ABS(bb))<=ascle ) THEN
+          IF( MAX(ABS(aa),ABS(bb))<=ascle ) THEN
             aa = aa*rtol
             bb = bb*rtol
             atol = tol
@@ -266,7 +265,7 @@ SUBROUTINE ZBESI(Zr,Zi,Fnu,Kode,N,Cyr,Cyi,Nz,Ierr)
           csgni = -csgni
         END DO
         RETURN
-      ELSEIF ( Nz==(-2) ) THEN
+      ELSEIF( Nz==(-2) ) THEN
         Nz = 0
         Ierr = 5
         RETURN

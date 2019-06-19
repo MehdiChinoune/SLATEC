@@ -1,7 +1,6 @@
 !** SS2Y
 SUBROUTINE SS2Y(N,Nelt,Ia,Ja,A)
-  !>
-  !  SLAP Triad to SLAP Column Format Converter.
+  !> SLAP Triad to SLAP Column Format Converter.
   !            Routine to convert from the SLAP Triad to SLAP Column
   !            format.
   !***
@@ -132,19 +131,19 @@ SUBROUTINE SS2Y(N,Nelt,Ia,Ja,A)
   !   930701  Updated CATEGORY section.  (FNF, WRB)
 
   !     .. Scalar Arguments ..
-  INTEGER N, Nelt
+  INTEGER :: N, Nelt
   !     .. Array Arguments ..
-  REAL(SP) A(Nelt)
-  INTEGER Ia(Nelt), Ja(Nelt)
+  REAL(SP) :: A(Nelt)
+  INTEGER :: Ia(Nelt), Ja(Nelt)
   !     .. Local Scalars ..
-  REAL(SP) temp
-  INTEGER i, ibgn, icol, iend, itemp, j
+  REAL(SP) :: temp
+  INTEGER :: i, ibgn, icol, iend, itemp, j
   !* FIRST EXECUTABLE STATEMENT  SS2Y
   !
   !         Check to see if the (IA,JA,A) arrays are in SLAP Column
   !         format.  If it's not then transform from SLAP Triad.
   !
-  IF ( Ja(N+1)==Nelt+1 ) RETURN
+  IF( Ja(N+1)==Nelt+1 ) RETURN
   !
   !         Sort into ascending order by COLUMN (on the ja array).
   !         This will line up the columns.
@@ -158,7 +157,7 @@ SUBROUTINE SS2Y(N,Nelt,Ia,Ja,A)
   Ja(1) = 1
   DO icol = 1, N - 1
     DO j = Ja(icol) + 1, Nelt
-      IF ( Ja(j)/=icol ) THEN
+      IF( Ja(j)/=icol ) THEN
         Ja(icol+1) = j
         EXIT
       END IF
@@ -179,7 +178,7 @@ SUBROUTINE SS2Y(N,Nelt,Ia,Ja,A)
     ibgn = Ja(icol)
     iend = Ja(icol+1) - 1
     DO i = ibgn, iend
-      IF ( Ia(i)==icol ) THEN
+      IF( Ia(i)==icol ) THEN
         !
         !              Swap the diagonal element with the first element in the
         !              column.
@@ -194,10 +193,10 @@ SUBROUTINE SS2Y(N,Nelt,Ia,Ja,A)
       END IF
     END DO
     ibgn = ibgn + 1
-    IF ( ibgn<iend ) THEN
+    IF( ibgn<iend ) THEN
       DO i = ibgn, iend
         DO j = i + 1, iend
-          IF ( Ia(i)>Ia(j) ) THEN
+          IF( Ia(i)>Ia(j) ) THEN
             itemp = Ia(i)
             Ia(i) = Ia(j)
             Ia(j) = itemp

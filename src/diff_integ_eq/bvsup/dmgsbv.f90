@@ -1,7 +1,6 @@
 !** DMGSBV
 SUBROUTINE DMGSBV(M,N,A,Ia,Niv,Iflag,S,P,Ip,Inhomo,V,W,Wcnd)
-  !>
-  !  Subsidiary to DBVSUP
+  !> Subsidiary to DBVSUP
   !***
   ! **Library:**   SLATEC
   !***
@@ -40,10 +39,10 @@ SUBROUTINE DMGSBV(M,N,A,Ia,Niv,Iflag,S,P,Ip,Inhomo,V,W,Wcnd)
   !   P = decomposition matrix.  P is upper triangular and
   !             (old vectors) = (new vectors) * P.
   !         The old vectors will be reordered due to pivoting.
-  !         The dimension of P must be .GE. N*(N+1)/2.
-  !             (  N*(2*N+1) when N .NE. NFCC )
-  !   IP = pivoting vector. The dimension of IP must be .GE. N.
-  !             (  2*N when N .NE. NFCC )
+  !         The dimension of P must be >= N*(N+1)/2.
+  !             (  N*(2*N+1) when N /= NFCC )
+  !   IP = pivoting vector. The dimension of IP must be >= N.
+  !             (  2*N when N /= NFCC )
   !   S = square of norms of incoming vectors.
   !   V = vector which is orthogonal to the vectors of A.
   !   W = orthogonalization information for the vector V.
@@ -78,7 +77,7 @@ SUBROUTINE DMGSBV(M,N,A,Ia,Niv,Iflag,S,P,Ip,Inhomo,V,W,Wcnd)
   REAL(DP) :: dot, pjp, psave, ry, sv, t, vl, vnorm, y
   !
   !* FIRST EXECUTABLE STATEMENT  DMGSBV
-  IF ( M>0.AND.N>0.AND.Ia>=M ) THEN
+  IF( M>0 .AND. N>0 .AND. Ia>=M ) THEN
     !        BEGIN BLOCK PERMITTING ...EXITS TO 270
     !           BEGIN BLOCK PERMITTING ...EXITS TO 260
     !
@@ -95,7 +94,7 @@ SUBROUTINE DMGSBV(M,N,A,Ia,Niv,Iflag,S,P,Ip,Inhomo,V,W,Wcnd)
     DO i = 1, N
       vl = NORM2(A(1:M,i))**2
       S(i) = vl
-      IF ( N/=nfcc_com ) THEN
+      IF( N/=nfcc_com ) THEN
         j = 2*i - 1
         P(j) = vl
         Ip(j) = j
@@ -103,45 +102,45 @@ SUBROUTINE DMGSBV(M,N,A,Ia,Niv,Iflag,S,P,Ip,Inhomo,V,W,Wcnd)
       j = j + 1
       P(j) = vl
       Ip(j) = j
-      IF ( vl>y ) THEN
+      IF( vl>y ) THEN
         y = vl
         ix = i
       END IF
     END DO
-    IF ( indpvt_com==1 ) THEN
+    IF( indpvt_com==1 ) THEN
       ix = 1
       y = P(1)
     END IF
     lix = ix
-    IF ( N/=nfcc_com ) lix = 2*ix - 1
+    IF( N/=nfcc_com ) lix = 2*ix - 1
     P(lix) = P(1)
     S(np1) = 0.0D0
-    IF ( Inhomo==1 ) S(np1) = NORM2(V(1:M))**2
+    IF( Inhomo==1 ) S(np1) = NORM2(V(1:M))**2
     Wcnd = 1.0D0
     nivn = Niv
     Niv = 0
     !
     !           ...EXIT
-    IF ( y/=0.0D0 ) THEN
+    IF( y/=0.0D0 ) THEN
       !              *********************************************************
       DO nr = 1, N
         !                 BEGIN BLOCK PERMITTING ...EXITS TO 230
         !              ......EXIT
-        IF ( nivn==Niv ) EXIT
+        IF( nivn==Niv ) EXIT
         Niv = nr
-        IF ( ix/=nr ) THEN
+        IF( ix/=nr ) THEN
           !
           !                       PIVOTING OF COLUMNS OF P MATRIX
           !
           nn = N
           lix = ix
           lr = nr
-          IF ( N/=nfcc_com ) THEN
+          IF( N/=nfcc_com ) THEN
             nn = nfcc_com
             lix = 2*ix - 1
             lr = 2*nr - 1
           END IF
-          IF ( nr/=1 ) THEN
+          IF( nr/=1 ) THEN
             kd = lix - lr
             kj = lr
             nrm1 = lr - 1
@@ -162,8 +161,8 @@ SUBROUTINE DMGSBV(M,N,A,Ia,Niv,Iflag,S,P,Ip,Inhomo,V,W,Wcnd)
           sv = S(ix)
           S(ix) = S(nr)
           S(nr) = sv
-          IF ( N/=nfcc_com ) THEN
-            IF ( nr/=1 ) THEN
+          IF( N/=nfcc_com ) THEN
+            IF( nr/=1 ) THEN
               kj = lr + 1
               DO k = 1, nrm1
                 psave = P(kj)
@@ -194,14 +193,14 @@ SUBROUTINE DMGSBV(M,N,A,Ia,Niv,Iflag,S,P,Ip,Inhomo,V,W,Wcnd)
         P(jp) = y
         ry = 1.0D0/y
         nmnr = N - nr
-        IF ( N/=nfcc_com ) THEN
+        IF( N/=nfcc_com ) THEN
           nmnr = nfcc_com - (2*nr-1)
           jp = jp + 1
           P(jp) = 0.0D0
           kp = jp + nmnr
           P(kp) = y
         END IF
-        IF ( nr/=N.AND.nivn/=Niv ) THEN
+        IF( nr/=N .AND. nivn/=Niv ) THEN
           !
           !                       CALCULATE ORTHOGONAL PROJECTION VECTORS AND
           !                       SEARCH FOR LARGEST NORM
@@ -214,13 +213,13 @@ SUBROUTINE DMGSBV(M,N,A,Ia,Niv,Iflag,S,P,Ip,Inhomo,V,W,Wcnd)
             dot = DOT_PRODUCT(A(1:M,nr),A(1:M,j))
             jp = jp + 1
             jq = jp + nmnr
-            IF ( N/=nfcc_com ) jq = jq + nmnr - 1
+            IF( N/=nfcc_com ) jq = jq + nmnr - 1
             P(jq) = P(jp) - dot*(dot*ry)
             P(jp) = dot*ry
             DO i = 1, M
               A(i,j) = A(i,j) - P(jp)*A(i,nr)
             END DO
-            IF ( N/=nfcc_com ) THEN
+            IF( N/=nfcc_com ) THEN
               kp = jp + nmnr
               jp = jp + 1
               pjp = ry*DPRVEC(M,A(1,nr),A(1,j))
@@ -238,22 +237,22 @@ SUBROUTINE DMGSBV(M,N,A,Ia,Niv,Iflag,S,P,Ip,Inhomo,V,W,Wcnd)
             !
             !                          TEST FOR CANCELLATION IN RECURRENCE RELATION
             !
-            IF ( P(jq)<=S(j)*sru_com ) P(jq) = NORM2(A(1:M,j))**2
-            IF ( P(jq)>y ) THEN
+            IF( P(jq)<=S(j)*sru_com ) P(jq) = NORM2(A(1:M,j))**2
+            IF( P(jq)>y ) THEN
               y = P(jq)
               ix = j
             END IF
           END DO
-          IF ( N/=nfcc_com ) jp = kp
+          IF( N/=nfcc_com ) jp = kp
           !                       ************************************************
-          IF ( indpvt_com==1 ) ix = ip1
+          IF( indpvt_com==1 ) ix = ip1
           !
           !                       RECOMPUTE NORM SQUARED OF PIVOTAL VECTOR WITH
           !                       SCALAR PRODUCT
           !
           y = NORM2(A(1:M,ix))**2
           !           ............EXIT
-          IF ( y<=eps_com*S(ix) ) GOTO 50
+          IF( y<=eps_com*S(ix) ) GOTO 50
           Wcnd = MIN(Wcnd,y/S(ix))
         END IF
         !
@@ -261,15 +260,15 @@ SUBROUTINE DMGSBV(M,N,A,Ia,Niv,Iflag,S,P,Ip,Inhomo,V,W,Wcnd)
         !                    SOLUTION
         !
         !                 ...EXIT
-        IF ( Inhomo==1 ) THEN
+        IF( Inhomo==1 ) THEN
           lr = nr
-          IF ( N/=nfcc_com ) lr = 2*nr - 1
+          IF( N/=nfcc_com ) lr = 2*nr - 1
           W(lr) = DOT_PRODUCT(A(1:M,nr),V(1:M))*ry
           DO i = 1, M
             V(i) = V(i) - W(lr)*A(i,nr)
           END DO
           !                 ...EXIT
-          IF ( N/=nfcc_com ) THEN
+          IF( N/=nfcc_com ) THEN
             lr = 2*nr
             W(lr) = ry*DPRVEC(M,V,A(1,nr))
             DO k = 1, m2
@@ -285,12 +284,12 @@ SUBROUTINE DMGSBV(M,N,A,Ia,Niv,Iflag,S,P,Ip,Inhomo,V,W,Wcnd)
       !                  TEST FOR LINEAR DEPENDENCE OF PARTICULAR SOLUTION
       !
       !        ......EXIT
-      IF ( Inhomo/=1 ) RETURN
-      IF ( (N>1).AND.(S(np1)<1.0) ) RETURN
+      IF( Inhomo/=1 ) RETURN
+      IF( (N>1) .AND. (S(np1)<1.0) ) RETURN
       vnorm = NORM2(V(1:M))**2
-      IF ( S(np1)/=0.0D0 ) Wcnd = MIN(Wcnd,vnorm/S(np1))
+      IF( S(np1)/=0.0D0 ) Wcnd = MIN(Wcnd,vnorm/S(np1))
       !        ......EXIT
-      IF ( vnorm>=eps_com*S(np1) ) RETURN
+      IF( vnorm>=eps_com*S(np1) ) RETURN
     END IF
     50  Iflag = 2
     Wcnd = eps_com

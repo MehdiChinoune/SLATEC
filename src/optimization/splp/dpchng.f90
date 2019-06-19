@@ -1,7 +1,6 @@
 !** DPCHNG
 SUBROUTINE DPCHNG(Ii,Xval,Iplace,Sx,Ix,Ircx)
-  !>
-  !  Subsidiary to DSPLP
+  !> Subsidiary to DSPLP
   !***
   ! **Library:**   SLATEC
   !***
@@ -68,11 +67,11 @@ SUBROUTINE DPCHNG(Ii,Xval,Iplace,Sx,Ix,Ircx)
   iopt = 1
   !
   !     DETERMINE NULL-CASES..
-  IF ( Ii==0 ) RETURN
+  IF( Ii==0 ) RETURN
   !
   !     CHECK VALIDITY OF ROW/COL. INDEX.
   !
-  IF ( Ircx==0 ) THEN
+  IF( Ircx==0 ) THEN
     nerr = 55
     CALL XERMSG('DPCHNG','IRCX=0',nerr,iopt)
   END IF
@@ -80,21 +79,21 @@ SUBROUTINE DPCHNG(Ii,Xval,Iplace,Sx,Ix,Ircx)
   !
   !     LMX IS THE LENGTH OF THE IN-MEMORY STORAGE AREA.
   !
-  IF ( Ircx>=0 ) THEN
+  IF( Ircx>=0 ) THEN
     !
-    !     CHECK SUBSCRIPTS OF THE COLUMN. THE COL. NUMBER MUST BE .LE. N AND
-    !     THE INDEX MUST BE .LE. M.
+    !     CHECK SUBSCRIPTS OF THE COLUMN. THE COL. NUMBER MUST BE <= N AND
+    !     THE INDEX MUST BE <= M.
     !
-    IF ( Ix(3)<Ircx.OR.Ix(2)<ABS(Ii) ) THEN
+    IF( Ix(3)<Ircx .OR. Ix(2)<ABS(Ii) ) THEN
       nerr = 55
       CALL XERMSG('DPCHNG',&
         'SUBSCRIPTS FOR ARRAY ELEMENT TO BE ACCESSED WERE OUT OF BOUNDS',nerr,iopt)
     END IF
     !
-    !     CHECK SUBSCRIPTS OF THE ROW. THE ROW NUMBER MUST BE .LE. M AND
-    !     THE INDEX MUST BE .LE. N.
+    !     CHECK SUBSCRIPTS OF THE ROW. THE ROW NUMBER MUST BE <= M AND
+    !     THE INDEX MUST BE <= N.
     !
-  ELSEIF ( Ix(2)<-Ircx.OR.Ix(3)<ABS(Ii) ) THEN
+  ELSEIF( Ix(2)<-Ircx .OR. Ix(3)<ABS(Ii) ) THEN
     nerr = 55
     CALL XERMSG('DPCHNG',&
       'SUBSCRIPTS FOR ARRAY ELEMENT TO BE ACCESSED WERE OUT OF BOUNDS',nerr,iopt)
@@ -102,7 +101,7 @@ SUBROUTINE DPCHNG(Ii,Xval,Iplace,Sx,Ix,Ircx)
   !
   !     SET I TO BE THE ELEMENT OF ROW/COLUMN J TO BE CHANGED.
   !
-  IF ( Ircx<=0 ) THEN
+  IF( Ircx<=0 ) THEN
     i = ABS(Ircx)
     j = ABS(Ii)
   ELSE
@@ -119,7 +118,7 @@ SUBROUTINE DPCHNG(Ii,Xval,Iplace,Sx,Ix,Ircx)
   !     SET IPLACE TO START OUR SCAN FOR THE ELEMENT AT THE BEGINNING
   !     OF THE VECTOR.
   !
-  IF ( j/=1 ) THEN
+  IF( j/=1 ) THEN
     Iplace = Ix(j+3) + 1
   ELSE
     Iplace = ll + 1
@@ -139,39 +138,39 @@ SUBROUTINE DPCHNG(Ii,Xval,Iplace,Sx,Ix,Ircx)
   100  ilast = MIN(iend,np*lpg+ll-2)
   !
   !     THE RELATIVE END OF DATA FOR THIS PAGE IS IL.
-  !     SEARCH FOR A MATRIX VALUE WITH AN INDEX .GE. I ON THE PRESENT
+  !     SEARCH FOR A MATRIX VALUE WITH AN INDEX >= I ON THE PRESENT
   !     PAGE.
   !
   il = IDLOC(ilast,Sx,Ix)
   il = MIN(il,lmx-2)
-  DO WHILE ( .NOT.(ipl>=il.OR.Ix(ipl)>=i) )
+  DO WHILE( .NOT. (ipl>=il .OR. Ix(ipl)>=i) )
     ipl = ipl + 1
   END DO
   !
   !     SET IPLACE AND STORE DATA ITEM IF FOUND.
   !
-  IF ( Ix(ipl)/=i.OR.ipl>il ) THEN
+  IF( Ix(ipl)/=i .OR. ipl>il ) THEN
     !
     !     EXIT FROM LOOP IF ITEM WAS FOUND.
     !
-    IF ( Ix(ipl)>i.AND.ipl<=il ) ilast = iend
-    IF ( ilast/=iend ) THEN
+    IF( Ix(ipl)>i .AND. ipl<=il ) ilast = iend
+    IF( ilast/=iend ) THEN
       ipl = ll + 1
       np = np + 1
     END IF
-    IF ( ilast/=iend ) GOTO 100
+    IF( ilast/=iend ) GOTO 100
     !
     !     INSERT NEW DATA ITEM INTO LOCATION AT IPLACE(IPL).
     !
-    IF ( ipl>il.OR.(ipl==il.AND.i>Ix(ipl)) ) THEN
+    IF( ipl>il .OR. (ipl==il .AND. i>Ix(ipl)) ) THEN
       ipl = il + 1
-      IF ( ipl==lmx-1 ) ipl = ipl + 2
+      IF( ipl==lmx-1 ) ipl = ipl + 2
     END IF
     Iplace = (np-1)*lpg + ipl
     !
     !     GO TO A NEW PAGE, IF NECESSARY, TO INSERT THE ITEM.
     !
-    IF ( ipl<=lmx.OR.Ix(lmx-1)>=0 ) ipl = IDLOC(Iplace,Sx,Ix)
+    IF( ipl<=lmx .OR. Ix(lmx-1)>=0 ) ipl = IDLOC(Iplace,Sx,Ix)
     iend = Ix(ll)
     np = ABS(Ix(lmx-1))
     !
@@ -191,7 +190,7 @@ SUBROUTINE DPCHNG(Ii,Xval,Iplace,Sx,Ix,Ircx)
   sxlast = Sx(il)
   ixlast = Ix(il)
   istart = ipl + 1
-  IF ( istart<=il ) THEN
+  IF( istart<=il ) THEN
     k = istart + il
     DO jj = istart, il
       Sx(k-jj) = Sx(k-jj-1)
@@ -199,25 +198,25 @@ SUBROUTINE DPCHNG(Ii,Xval,Iplace,Sx,Ix,Ircx)
     END DO
     Sx(lmx) = one
   END IF
-  IF ( ipl<=lmx ) THEN
+  IF( ipl<=lmx ) THEN
     Sx(ipl) = sxval
     Ix(ipl) = i
     sxval = sxlast
     i = ixlast
     Sx(lmx) = one
-    IF ( Ix(lmx-1)>0 ) THEN
+    IF( Ix(lmx-1)>0 ) THEN
       ipl = ll + 1
       np = np + 1
     END IF
   END IF
-  IF ( Ix(lmx-1)>0 ) GOTO 200
+  IF( Ix(lmx-1)>0 ) GOTO 200
   np = ABS(Ix(lmx-1))
   !
   !     DETERMINE IF A NEW PAGE IS TO BE CREATED FOR THE LAST ELEMENT
   !     MOVED DOWN.
   !
   il = il + 1
-  IF ( il==lmx-1 ) THEN
+  IF( il==lmx-1 ) THEN
     !
     !     CREATE A NEW PAGE.
     !
@@ -240,7 +239,7 @@ SUBROUTINE DPCHNG(Ii,Xval,Iplace,Sx,Ix,Ircx)
     !
     !     LAST ELEMENT MOVED REMAINED ON THE OLD PAGE.
     !
-  ELSEIF ( ipl/=il ) THEN
+  ELSEIF( ipl/=il ) THEN
     Sx(il) = sxval
     Ix(il) = i
     Sx(lmx) = one
@@ -251,9 +250,9 @@ SUBROUTINE DPCHNG(Ii,Xval,Iplace,Sx,Ix,Ircx)
   jstart = j + 4
   jj = jstart
   n20055 = ll
-  DO WHILE ( (n20055-jj)>=0 )
+  DO WHILE( (n20055-jj)>=0 )
     Ix(jj) = Ix(jj) + 1
-    IF ( MOD(Ix(jj)-ll,lpg)==lpg-1 ) Ix(jj) = Ix(jj) + 2
+    IF( MOD(Ix(jj)-ll,lpg)==lpg-1 ) Ix(jj) = Ix(jj) + 2
     jj = jj + 1
   END DO
   !

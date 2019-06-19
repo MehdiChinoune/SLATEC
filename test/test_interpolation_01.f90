@@ -5,8 +5,7 @@ MODULE TEST29_MOD
 CONTAINS
   !** PNTCHK
   SUBROUTINE PNTCHK(Lun,Kprint,Ipass)
-    !>
-    !  Quick check for POLINT, POLCOF and POLYVL
+    !> Quick check for POLINT, POLCOF and POLYVL
     !***
     ! **Library:**   SLATEC
     !***
@@ -28,13 +27,13 @@ CONTAINS
     !           of KPRINT.  (WRB)
     USE slatec, ONLY : NUMXER, POLCOF, POLINT, POLYVL, R1MACH, XERCLR, XGETF, XSETF
     !     .. Scalar Arguments ..
-    INTEGER Ipass, Kprint, Lun
+    INTEGER :: Ipass, Kprint, Lun
     !     .. Local Scalars ..
-    REAL(SP) tol, yf
-    INTEGER i, ierr, kontrl, n, nerr
-    LOGICAL fatal
+    REAL(SP) :: tol, yf
+    INTEGER :: i, ierr, kontrl, n, nerr
+    LOGICAL :: fatal
     !     .. Local Arrays ..
-    REAL(SP) c(6), d(6), w(12)
+    REAL(SP) :: c(6), d(6), w(12)
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, SQRT
     !     .. Data statements ..
@@ -43,7 +42,7 @@ CONTAINS
     REAL, PARAMETER :: xchk(6) = [ 1.0E0, 0.0E0, -2.0E0, 0.0E0, 1.0E0, 0.0E0 ]
     REAL, PARAMETER :: dchk(6) = [ 1.0E0, 0.0E0, -4.0E0, 0.0E0, 24.0E0, 0.0E0 ]
     !* FIRST EXECUTABLE STATEMENT  PNTCHK
-    IF ( Kprint>=2 ) WRITE (Lun,99001)
+    IF( Kprint>=2 ) WRITE (Lun,99001)
     !
     99001 FORMAT ('1'/' Test POLINT, POLCOF and POLYVL')
     !
@@ -62,30 +61,30 @@ CONTAINS
     !
     fatal = .FALSE.
     DO i = 1, n
-      IF ( ABS(d(i)-xchk(i))>tol ) THEN
+      IF( ABS(d(i)-xchk(i))>tol ) THEN
         Ipass = 0
         fatal = .TRUE.
       END IF
     END DO
-    IF ( fatal ) THEN
-      IF ( Kprint>=2 ) WRITE (Lun,99007) 'FAILED', (d(i),i=1,n)
+    IF( fatal ) THEN
+      IF( Kprint>=2 ) WRITE (Lun,99007) 'FAILED', (d(i),i=1,n)
     ELSE
-      IF ( Kprint>=3 ) WRITE (Lun,99007) 'PASSED', (d(i),i=1,n)
+      IF( Kprint>=3 ) WRITE (Lun,99007) 'PASSED', (d(i),i=1,n)
     END IF
     !
     !     Test POLYVL.
     !
     CALL POLYVL(5,0.0E0,yf,d,n,x,c,w,ierr)
-    IF ( ABS(dchk(1)-yf)<=tol ) THEN
-      IF ( Kprint>=3 ) WRITE (Lun,99008) 'PASSED', yf, (d(i),i=1,5)
+    IF( ABS(dchk(1)-yf)<=tol ) THEN
+      IF( Kprint>=3 ) WRITE (Lun,99008) 'PASSED', yf, (d(i),i=1,5)
     ELSE
       Ipass = 0
-      IF ( Kprint>=2 ) WRITE (Lun,99008) 'FAILED', yf, (d(i),i=1,5)
+      IF( Kprint>=2 ) WRITE (Lun,99008) 'FAILED', yf, (d(i),i=1,5)
     END IF
     !
     fatal = .FALSE.
     DO i = 1, 5
-      IF ( ABS(dchk(i+1)-d(i))>tol ) THEN
+      IF( ABS(dchk(i+1)-d(i))>tol ) THEN
         Ipass = 0
         fatal = .TRUE.
       END IF
@@ -94,7 +93,7 @@ CONTAINS
     !     Trigger 2 error conditions
     !
     CALL XGETF(kontrl)
-    IF ( Kprint<=2 ) THEN
+    IF( Kprint<=2 ) THEN
       CALL XSETF(0)
     ELSE
       CALL XSETF(1)
@@ -102,10 +101,10 @@ CONTAINS
     fatal = .FALSE.
     CALL XERCLR
     !
-    IF ( Kprint>=3 ) WRITE (Lun,99002)
+    IF( Kprint>=3 ) WRITE (Lun,99002)
     99002 FORMAT (/' 2 Error messages expected')
     CALL POLINT(0,x,y,c)
-    IF ( NUMXER(nerr)/=2 ) THEN
+    IF( NUMXER(nerr)/=2 ) THEN
       Ipass = 0
       fatal = .TRUE.
     END IF
@@ -113,26 +112,26 @@ CONTAINS
     !
     x(1) = -1.0E0
     CALL POLINT(n,x,y,c)
-    IF ( NUMXER(nerr)/=2 ) THEN
+    IF( NUMXER(nerr)/=2 ) THEN
       Ipass = 0
       fatal = .TRUE.
     END IF
     CALL XERCLR
     !
     CALL XSETF(kontrl)
-    IF ( fatal ) THEN
-      IF ( Kprint>=2 ) THEN
+    IF( fatal ) THEN
+      IF( Kprint>=2 ) THEN
         WRITE (Lun,99003)
         99003 FORMAT (/' AT LEAST ONE INCORRECT ARGUMENT TEST FAILED')
       END IF
-    ELSEIF ( Kprint>=3 ) THEN
+    ELSEIF( Kprint>=3 ) THEN
       WRITE (Lun,99004)
       99004 FORMAT (/' ALL INCORRECT ARGUMENT TESTS PASSED')
     END IF
     !
-    IF ( Ipass==1.AND.Kprint>=2 ) WRITE (Lun,99005)
+    IF( Ipass==1 .AND. Kprint>=2 ) WRITE (Lun,99005)
     99005 FORMAT (/' ****************POLINT PASSED ALL TESTS**************')
-    IF ( Ipass==0.AND.Kprint>=1 ) WRITE (Lun,99006)
+    IF( Ipass==0 .AND. Kprint>=1 ) WRITE (Lun,99006)
     99006 FORMAT (/' ***************POLINT FAILED SOME TESTS**************')
     RETURN
     99007 FORMAT (/'POLCOF ',A,&
@@ -145,8 +144,7 @@ CONTAINS
   END SUBROUTINE PNTCHK
   !** DPNTCK
   SUBROUTINE DPNTCK(Lun,Kprint,Ipass)
-    !>
-    !  Quick check for DPLINT, DPOLCF and DPOLVL
+    !> Quick check for DPLINT, DPOLCF and DPOLVL
     !***
     ! **Library:**   SLATEC
     !***
@@ -163,11 +161,11 @@ CONTAINS
     !   920212  DATE WRITTEN
     USE slatec, ONLY : D1MACH, DPLINT, DPOLCF, DPOLVL, NUMXER, XERCLR, XGETF, XSETF
     !     .. Scalar Arguments ..
-    INTEGER Ipass, Kprint, Lun
+    INTEGER :: Ipass, Kprint, Lun
     !     .. Local Scalars ..
     REAL(DP) :: tol, yf
-    INTEGER i, ierr, kontrl, n, nerr
-    LOGICAL fatal
+    INTEGER :: i, ierr, kontrl, n, nerr
+    LOGICAL :: fatal
     !     .. Local Arrays ..
     REAL(DP) :: c(6), d(6), w(12)
     !     .. Data statements ..
@@ -178,7 +176,7 @@ CONTAINS
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, SQRT
     !* FIRST EXECUTABLE STATEMENT  DPNTCK
-    IF ( Kprint>=2 ) WRITE (Lun,99001)
+    IF( Kprint>=2 ) WRITE (Lun,99001)
     !
     99001 FORMAT ('1'/' Test DPLINT, DPOLCF and DPOLVL')
     !
@@ -197,30 +195,30 @@ CONTAINS
     !
     fatal = .FALSE.
     DO i = 1, n
-      IF ( ABS(d(i)-xchk(i))>tol ) THEN
+      IF( ABS(d(i)-xchk(i))>tol ) THEN
         Ipass = 0
         fatal = .TRUE.
       END IF
     END DO
-    IF ( fatal ) THEN
-      IF ( Kprint>=2 ) WRITE (Lun,99007) 'FAILED', (d(i),i=1,n)
+    IF( fatal ) THEN
+      IF( Kprint>=2 ) WRITE (Lun,99007) 'FAILED', (d(i),i=1,n)
     ELSE
-      IF ( Kprint>=3 ) WRITE (Lun,99007) 'PASSED', (d(i),i=1,n)
+      IF( Kprint>=3 ) WRITE (Lun,99007) 'PASSED', (d(i),i=1,n)
     END IF
     !
     !     Test DPOLVL.
     !
     CALL DPOLVL(5,0.0D0,yf,d,n,x,c,w,ierr)
-    IF ( ABS(dchk(1)-yf)<=tol ) THEN
-      IF ( Kprint>=3 ) WRITE (Lun,99008) 'PASSED', yf, (d(i),i=1,5)
+    IF( ABS(dchk(1)-yf)<=tol ) THEN
+      IF( Kprint>=3 ) WRITE (Lun,99008) 'PASSED', yf, (d(i),i=1,5)
     ELSE
       Ipass = 0
-      IF ( Kprint>=2 ) WRITE (Lun,99008) 'FAILED', yf, (d(i),i=1,5)
+      IF( Kprint>=2 ) WRITE (Lun,99008) 'FAILED', yf, (d(i),i=1,5)
     END IF
     !
     fatal = .FALSE.
     DO i = 1, 5
-      IF ( ABS(dchk(i+1)-d(i))>tol ) THEN
+      IF( ABS(dchk(i+1)-d(i))>tol ) THEN
         Ipass = 0
         fatal = .TRUE.
       END IF
@@ -229,7 +227,7 @@ CONTAINS
     !     Trigger 2 error conditions
     !
     CALL XGETF(kontrl)
-    IF ( Kprint<=2 ) THEN
+    IF( Kprint<=2 ) THEN
       CALL XSETF(0)
     ELSE
       CALL XSETF(1)
@@ -237,10 +235,10 @@ CONTAINS
     fatal = .FALSE.
     CALL XERCLR
     !
-    IF ( Kprint>=3 ) WRITE (Lun,99002)
+    IF( Kprint>=3 ) WRITE (Lun,99002)
     99002 FORMAT (/' 2 Error messages expected')
     CALL DPLINT(0,x,y,c)
-    IF ( NUMXER(nerr)/=2 ) THEN
+    IF( NUMXER(nerr)/=2 ) THEN
       Ipass = 0
       fatal = .TRUE.
     END IF
@@ -248,26 +246,26 @@ CONTAINS
     !
     x(1) = -1.0D0
     CALL DPLINT(n,x,y,c)
-    IF ( NUMXER(nerr)/=2 ) THEN
+    IF( NUMXER(nerr)/=2 ) THEN
       Ipass = 0
       fatal = .TRUE.
     END IF
     CALL XERCLR
     !
     CALL XSETF(kontrl)
-    IF ( fatal ) THEN
-      IF ( Kprint>=2 ) THEN
+    IF( fatal ) THEN
+      IF( Kprint>=2 ) THEN
         WRITE (Lun,99003)
         99003 FORMAT (/' AT LEAST ONE INCORRECT ARGUMENT TEST FAILED')
       END IF
-    ELSEIF ( Kprint>=3 ) THEN
+    ELSEIF( Kprint>=3 ) THEN
       WRITE (Lun,99004)
       99004 FORMAT (/' ALL INCORRECT ARGUMENT TESTS PASSED')
     END IF
     !
-    IF ( Ipass==1.AND.Kprint>=2 ) WRITE (Lun,99005)
+    IF( Ipass==1 .AND. Kprint>=2 ) WRITE (Lun,99005)
     99005 FORMAT (/' ****************DPLINT PASSED ALL TESTS**************')
-    IF ( Ipass==0.AND.Kprint>=1 ) WRITE (Lun,99006)
+    IF( Ipass==0 .AND. Kprint>=1 ) WRITE (Lun,99006)
     99006 FORMAT (/' ***************DPLINT FAILED SOME TESTS**************')
     RETURN
     99007 FORMAT (/'DPOLCF ',A,&
@@ -285,8 +283,7 @@ PROGRAM TEST29
   USE slatec, ONLY : I1MACH, XSETF, XSETUN, XERMAX
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
-  !>
-  !  Driver for testing SLATEC subprograms
+  !> Driver for testing SLATEC subprograms
   !***
   ! **Library:**   SLATEC
   !***
@@ -334,7 +331,7 @@ PROGRAM TEST29
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900524  Cosmetic changes to code.  (WRB)
   !   920225  Added CALL to DPNTCK.  (WRB)
-  INTEGER ipass, kprint, lin, lun, nfail
+  INTEGER :: ipass, kprint, lin, lun, nfail
   !* FIRST EXECUTABLE STATEMENT  TEST29
   lun = I1MACH(2)
   lin = I1MACH(1)
@@ -345,7 +342,7 @@ PROGRAM TEST29
   CALL GET_ARGUMENT(kprint)
   CALL XERMAX(1000)
   CALL XSETUN(lun)
-  IF ( kprint<=1 ) THEN
+  IF( kprint<=1 ) THEN
     CALL XSETF(0)
   ELSE
     CALL XSETF(1)
@@ -354,16 +351,16 @@ PROGRAM TEST29
   !     Test POLINT, POLCOF and POLYVL.
   !
   CALL PNTCHK(lun,kprint,ipass)
-  IF ( ipass==0 ) nfail = nfail + 1
+  IF( ipass==0 ) nfail = nfail + 1
   !
   !     Test DPLINT, DPOLCF and DPOLVL.
   !
   CALL DPNTCK(lun,kprint,ipass)
-  IF ( ipass==0 ) nfail = nfail + 1
+  IF( ipass==0 ) nfail = nfail + 1
   !
   !     Write PASS or FAIL message
   !
-  IF ( nfail==0 ) THEN
+  IF( nfail==0 ) THEN
     WRITE (lun,99001)
     99001 FORMAT (/' --------------TEST29 PASSED ALL TESTS----------------')
   ELSE

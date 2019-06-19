@@ -1,7 +1,6 @@
 !** RUNIF
 REAL(SP) FUNCTION RUNIF(T,N)
-  !>
-  !  Generate a uniformly distributed random number.
+  !> Generate a uniformly distributed random number.
   !***
   ! **Library:**   SLATEC (FNLIB)
   !***
@@ -69,12 +68,12 @@ REAL(SP) FUNCTION RUNIF(T,N)
   REAL(SP), SAVE :: floatn
   INTEGER, SAVE :: nold = -1
   !* FIRST EXECUTABLE STATEMENT  RUNIF
-  IF ( N/=nold ) THEN
+  IF( N/=nold ) THEN
     !
     nold = ABS(N)
     floatn = nold
-    IF ( N<0 ) dummy = RAND(T(nold+1))
-    IF ( N>=0 ) THEN
+    IF( N<0 ) dummy = RAND(T(nold+1))
+    IF( N>=0 ) THEN
       !
       DO i = 1, nold
         T(i) = RAND(0.)

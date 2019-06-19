@@ -1,7 +1,6 @@
 !** CPOFA
 SUBROUTINE CPOFA(A,Lda,N,Info)
-  !>
-  !  Factor a complex Hermitian positive definite matrix.
+  !> Factor a complex Hermitian positive definite matrix.
   !***
   ! **Library:**   SLATEC (LINPACK)
   !***
@@ -39,7 +38,7 @@ SUBROUTINE CPOFA(A,Lda,N,Info)
   !        A       an upper triangular matrix  R  so that  A =
   !                CTRANS(R)*R where  CTRANS(R)  is the conjugate
   !                transpose.  The strict lower triangle is unaltered.
-  !                If  INFO .NE. 0, the factorization is not complete.
+  !                If  INFO /= 0, the factorization is not complete.
   !
   !        INFO    INTEGER
   !                = 0  for normal return.
@@ -72,7 +71,7 @@ SUBROUTINE CPOFA(A,Lda,N,Info)
     Info = j
     s = 0.0E0
     jm1 = j - 1
-    IF ( jm1>=1 ) THEN
+    IF( jm1>=1 ) THEN
       DO k = 1, jm1
         t = A(k,j) - DOT_PRODUCT(A(1:k-1,k),A(1:k-1,j))
         t = t/A(k,k)
@@ -81,7 +80,7 @@ SUBROUTINE CPOFA(A,Lda,N,Info)
       END DO
     END IF
     s = REAL(A(j,j)) - s
-    IF ( s<=0.0E0.OR.AIMAG(A(j,j))/=0.0E0 ) RETURN
+    IF( s<=0.0E0 .OR. AIMAG(A(j,j))/=0.0E0 ) RETURN
     A(j,j) = CMPLX(SQRT(s),0.0E0)
   END DO
   Info = 0

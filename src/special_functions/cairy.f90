@@ -1,7 +1,6 @@
 !** CAIRY
 SUBROUTINE CAIRY(Z,Id,Kode,Ai,Nz,Ierr)
-  !>
-  !  Compute the Airy function Ai(z) or its derivative dAi/dz
+  !> Compute the Airy function Ai(z) or its derivative dAi/dz
   !            for complex argument z.  A scaling option is available
   !            to help avoid underflow and overflow.
   !***
@@ -152,23 +151,23 @@ SUBROUTINE CAIRY(Z,Id,Kode,Ai,Nz,Ierr)
   !* FIRST EXECUTABLE STATEMENT  CAIRY
   Ierr = 0
   Nz = 0
-  IF ( Id<0.OR.Id>1 ) Ierr = 1
-  IF ( Kode<1.OR.Kode>2 ) Ierr = 1
-  IF ( Ierr/=0 ) RETURN
+  IF( Id<0 .OR. Id>1 ) Ierr = 1
+  IF( Kode<1 .OR. Kode>2 ) Ierr = 1
+  IF( Ierr/=0 ) RETURN
   az = ABS(Z)
   tol = MAX(R1MACH(4),1.0E-18)
   fid = Id
-  IF ( az>1.0E0 ) THEN
+  IF( az>1.0E0 ) THEN
     !-----------------------------------------------------------------------
-    !     CASE FOR ABS(Z).GT.1.0
+    !     CASE FOR ABS(Z)>1.0
     !-----------------------------------------------------------------------
     fnu = (1.0E0+fid)/3.0E0
     !-----------------------------------------------------------------------
     !     SET PARAMETERS RELATED TO MACHINE CONSTANTS.
     !     TOL IS THE APPROXIMATE UNIT ROUNDOFF LIMITED TO 1.0E-18.
     !     ELIM IS THE APPROXIMATE EXPONENTIAL OVER- AND UNDERFLOW LIMIT.
-    !     EXP(-ELIM).LT.EXP(-ALIM)=EXP(-ELIM)/TOL    AND
-    !     EXP(ELIM).GT.EXP(ALIM)=EXP(ELIM)*TOL       ARE INTERVALS NEAR
+    !     EXP(-ELIM)<EXP(-ALIM)=EXP(-ELIM)/TOL    AND
+    !     EXP(ELIM)>EXP(ALIM)=EXP(ELIM)*TOL       ARE INTERVALS NEAR
     !     UNDERFLOW AND OVERFLOW LIMITS WHERE SCALED ARITHMETIC IS DONE.
     !     RL IS THE LOWER BOUNDARY OF THE ASYMPTOTIC EXPANSION FOR LARGE Z.
     !     DIG = NUMBER OF BASE 10 DIGITS IN TOL = 10**(-DIG).
@@ -192,68 +191,68 @@ SUBROUTINE CAIRY(Z,Id,Kode,Ai,Nz,Ierr)
     bb = 0.5E0*I1MACH(9)
     aa = MIN(aa,bb)
     aa = aa**tth
-    IF ( az>aa ) THEN
+    IF( az>aa ) THEN
       Ierr = 4
       Nz = 0
       RETURN
     ELSE
       aa = SQRT(aa)
-      IF ( az>aa ) Ierr = 3
+      IF( az>aa ) Ierr = 3
       csq = SQRT(Z)
       zta = Z*csq*CMPLX(tth,0.0E0)
       !-----------------------------------------------------------------------
-      !     RE(ZTA).LE.0 WHEN RE(Z).LT.0, ESPECIALLY WHEN IM(Z) IS SMALL
+      !     RE(ZTA)<=0 WHEN RE(Z)<0, ESPECIALLY WHEN IM(Z) IS SMALL
       !-----------------------------------------------------------------------
       iflag = 0
       sfac = 1.0E0
       zi = AIMAG(Z)
       zr = REAL(Z)
       ak = AIMAG(zta)
-      IF ( zr<0.0E0 ) THEN
+      IF( zr<0.0E0 ) THEN
         bk = REAL(zta)
         ck = -ABS(bk)
         zta = CMPLX(ck,ak)
       END IF
-      IF ( zi==0.0E0 ) THEN
-        IF ( zr<=0.0E0 ) zta = CMPLX(0.0E0,ak)
+      IF( zi==0.0E0 ) THEN
+        IF( zr<=0.0E0 ) zta = CMPLX(0.0E0,ak)
       END IF
       aa = REAL(zta)
-      IF ( aa<0.0E0.OR.zr<=0.0E0 ) THEN
-        IF ( Kode/=2 ) THEN
+      IF( aa<0.0E0 .OR. zr<=0.0E0 ) THEN
+        IF( Kode/=2 ) THEN
           !-----------------------------------------------------------------------
           !     OVERFLOW TEST
           !-----------------------------------------------------------------------
-          IF ( aa<=(-alim) ) THEN
+          IF( aa<=(-alim) ) THEN
             aa = -aa + 0.25E0*alaz
             iflag = 1
             sfac = tol
-            IF ( aa>elim ) GOTO 50
+            IF( aa>elim ) GOTO 50
           END IF
         END IF
         !-----------------------------------------------------------------------
         !     CBKNU AND CACAI RETURN EXP(ZTA)*K(FNU,ZTA) ON KODE=2
         !-----------------------------------------------------------------------
         mr = 1
-        IF ( zi<0.0E0 ) mr = -1
+        IF( zi<0.0E0 ) mr = -1
         CALL CACAI(zta,fnu,Kode,mr,1,cy,nn,rl,tol,elim,alim)
-        IF ( nn<0 ) THEN
-          IF ( nn/=(-1) ) GOTO 100
+        IF( nn<0 ) THEN
+          IF( nn/=(-1) ) GOTO 100
           GOTO 50
         ELSE
           Nz = Nz + nn
         END IF
-      ELSEIF ( Kode==2 ) THEN
+      ELSEIF( Kode==2 ) THEN
         CALL CBKNU(zta,fnu,Kode,1,cy,Nz,tol,elim,alim)
         !-----------------------------------------------------------------------
         !     UNDERFLOW TEST
         !-----------------------------------------------------------------------
-      ELSEIF ( aa<alim ) THEN
+      ELSEIF( aa<alim ) THEN
         CALL CBKNU(zta,fnu,Kode,1,cy,Nz,tol,elim,alim)
       ELSE
         aa = -aa - 0.25E0*alaz
         iflag = 2
         sfac = 1.0E0/tol
-        IF ( aa<(-elim) ) THEN
+        IF( aa<(-elim) ) THEN
           Nz = 1
           Ai = CMPLX(0.0E0,0.0E0)
           RETURN
@@ -262,9 +261,9 @@ SUBROUTINE CAIRY(Z,Id,Kode,Ai,Nz,Ierr)
         END IF
       END IF
       s1 = cy(1)*CMPLX(coef,0.0E0)
-      IF ( iflag/=0 ) THEN
+      IF( iflag/=0 ) THEN
         s1 = s1*CMPLX(sfac,0.0E0)
-        IF ( Id==1 ) THEN
+        IF( Id==1 ) THEN
           s1 = -s1*Z
           Ai = s1*CMPLX(1.0E0/sfac,0.0E0)
           RETURN
@@ -273,7 +272,7 @@ SUBROUTINE CAIRY(Z,Id,Kode,Ai,Nz,Ierr)
           Ai = s1*CMPLX(1.0E0/sfac,0.0E0)
           RETURN
         END IF
-      ELSEIF ( Id==1 ) THEN
+      ELSEIF( Id==1 ) THEN
         Ai = -Z*s1
         RETURN
       ELSE
@@ -286,27 +285,27 @@ SUBROUTINE CAIRY(Z,Id,Kode,Ai,Nz,Ierr)
     RETURN
   ELSE
     !-----------------------------------------------------------------------
-    !     POWER SERIES FOR ABS(Z).LE.1.
+    !     POWER SERIES FOR ABS(Z)<=1.
     !-----------------------------------------------------------------------
     s1 = cone
     s2 = cone
-    IF ( az<tol ) THEN
+    IF( az<tol ) THEN
       aa = 1.0E+3*R1MACH(1)
       s1 = CMPLX(0.0E0,0.0E0)
-      IF ( Id==1 ) THEN
+      IF( Id==1 ) THEN
         Ai = -CMPLX(c2,0.0E0)
         aa = SQRT(aa)
-        IF ( az>aa ) s1 = Z*Z*CMPLX(0.5E0,0.0E0)
+        IF( az>aa ) s1 = Z*Z*CMPLX(0.5E0,0.0E0)
         Ai = Ai + s1*CMPLX(c1,0.0E0)
         RETURN
       ELSE
-        IF ( az>aa ) s1 = CMPLX(c2,0.0E0)*Z
+        IF( az>aa ) s1 = CMPLX(c2,0.0E0)*Z
         Ai = CMPLX(c1,0.0E0) - s1
         RETURN
       END IF
     ELSE
       aa = az*az
-      IF ( aa>=tol/az ) THEN
+      IF( aa>=tol/az ) THEN
         trm1 = cone
         trm2 = cone
         atrm = 1.0E0
@@ -332,21 +331,21 @@ SUBROUTINE CAIRY(Z,Id,Kode,Ai,Nz,Ierr)
           d1 = d1 + ak
           d2 = d2 + bk
           ad = MIN(d1,d2)
-          IF ( atrm<tol*ad ) EXIT
+          IF( atrm<tol*ad ) EXIT
           ak = ak + 18.0E0
           bk = bk + 18.0E0
         END DO
       END IF
-      IF ( Id==1 ) THEN
+      IF( Id==1 ) THEN
         Ai = -s2*CMPLX(c2,0.0E0)
-        IF ( az>tol ) Ai = Ai + Z*Z*s1*CMPLX(c1/(1.0E0+fid),0.0E0)
-        IF ( Kode==1 ) RETURN
+        IF( az>tol ) Ai = Ai + Z*Z*s1*CMPLX(c1/(1.0E0+fid),0.0E0)
+        IF( Kode==1 ) RETURN
         zta = Z*SQRT(Z)*CMPLX(tth,0.0E0)
         Ai = Ai*EXP(zta)
         RETURN
       ELSE
         Ai = s1*CMPLX(c1,0.0E0) - Z*s2*CMPLX(c2,0.0E0)
-        IF ( Kode==1 ) RETURN
+        IF( Kode==1 ) RETURN
         zta = Z*SQRT(Z)*CMPLX(tth,0.0E0)
         Ai = Ai*EXP(zta)
         RETURN

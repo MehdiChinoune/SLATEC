@@ -1,7 +1,6 @@
 !** EZFFT1
 SUBROUTINE EZFFT1(N,Wa,Ifac)
-  !>
-  !  EZFFTI calls EZFFT1 with appropriate work array
+  !> EZFFTI calls EZFFT1 with appropriate work array
   !            partitioning.
   !***
   ! **Library:**   SLATEC (FFTPACK)
@@ -39,7 +38,7 @@ SUBROUTINE EZFFT1(N,Wa,Ifac)
   nf = 0
   j = 0
   100  j = j + 1
-  IF ( j<=4 ) THEN
+  IF( j<=4 ) THEN
     ntry = ntryh(j)
   ELSE
     ntry = ntry + 2
@@ -47,12 +46,12 @@ SUBROUTINE EZFFT1(N,Wa,Ifac)
   DO
     nq = nl/ntry
     nr = nl - ntry*nq
-    IF ( nr/=0 ) GOTO 100
+    IF( nr/=0 ) GOTO 100
     nf = nf + 1
     Ifac(nf+2) = ntry
     nl = nq
-    IF ( ntry==2 ) THEN
-      IF ( nf/=1 ) THEN
+    IF( ntry==2 ) THEN
+      IF( nf/=1 ) THEN
         DO i = 2, nf
           ib = nf - i + 2
           Ifac(ib+2) = Ifac(ib+1)
@@ -60,14 +59,14 @@ SUBROUTINE EZFFT1(N,Wa,Ifac)
         Ifac(3) = 2
       END IF
     END IF
-    IF ( nl==1 ) THEN
+    IF( nl==1 ) THEN
       Ifac(1) = N
       Ifac(2) = nf
       argh = tpi/N
       is = 0
       nfm1 = nf - 1
       l1 = 1
-      IF ( nfm1==0 ) RETURN
+      IF( nfm1==0 ) RETURN
       DO k1 = 1, nfm1
         ip = Ifac(k1+2)
         l2 = l1*ip
@@ -85,7 +84,7 @@ SUBROUTINE EZFFT1(N,Wa,Ifac)
           i = is + 2
           Wa(i-1) = ch1
           Wa(i) = sh1
-          IF ( ido>=5 ) THEN
+          IF( ido>=5 ) THEN
             DO ii = 5, ido, 2
               i = i + 2
               Wa(i-1) = ch1*Wa(i-3) - sh1*Wa(i-2)

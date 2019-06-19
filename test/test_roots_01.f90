@@ -5,8 +5,7 @@ MODULE TEST34_MOD
 CONTAINS
   !** CPRPQX
   SUBROUTINE CPRPQX(Lun,Kprint,Ipass)
-    !>
-    !  Quick check for CPZERO and RPZERO.
+    !> Quick check for CPZERO and RPZERO.
     !***
     ! **Library:**   SLATEC
     !***
@@ -29,11 +28,11 @@ CONTAINS
     !   890618  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     USE slatec, ONLY : CPZERO, R1MACH, RPZERO
-    INTEGER Kprint, Ipass, Lun
-    INTEGER idegp1, info, i, j, id
-    REAL(SP) err, erri, relerr
-    COMPLEX(SP) ac(6), z(5), w(21)
-    REAL(SP) w_r(42)
+    INTEGER :: Kprint, Ipass, Lun
+    INTEGER :: idegp1, info, i, j, id
+    REAL(SP) :: err, erri, relerr
+    COMPLEX(SP) :: ac(6), z(5), w(21)
+    REAL(SP) :: w_r(42)
     INTEGER, PARAMETER :: ideg = 5
     REAL, PARAMETER :: a(6) = [ 1., -3.7, 7.4, -10.8, 10.8, -6.8 ]
     COMPLEX(SP), PARAMETER :: zk(5) = [ (1.7,0.), (1.,1.), (1.,-1.), &
@@ -48,13 +47,13 @@ CONTAINS
     info = 0
     w_r = [ ( [REAL(w(i)), AIMAG(w(i))], i=1,21 ) ]
     CALL CPZERO(ideg,ac,z,w(4),info,w_r)
-    IF ( info/=0 ) THEN
+    IF( info/=0 ) THEN
       Ipass = 0
-      IF ( info==1.AND.Kprint>=1 ) WRITE (Lun,99001)
+      IF( info==1 .AND. Kprint>=1 ) WRITE (Lun,99001)
       !
       99001 FORMAT (' CPZERO TEST FAILS: LEADING COEFFICIENT OR DEGREE OF',&
         ' POLYNOMIAL IS ZERO')
-      IF ( info==2.AND.Kprint>=1 ) WRITE (Lun,99002)
+      IF( info==2 .AND. Kprint>=1 ) WRITE (Lun,99002)
       99002 FORMAT (' CPZERO TEST FAILS: NON-CONVERGENCE IN 125 ITERATIONS')
     END IF
     DO j = 1, ideg
@@ -62,20 +61,20 @@ CONTAINS
       id = 1
       DO i = 2, ideg
         erri = ABS(z(j)-zk(i))
-        IF ( erri<err ) id = i
+        IF( erri<err ) id = i
         err = MIN(erri,err)
       END DO
-      IF ( ABS(z(j)-zk(id))/ABS(zk(id))>=relerr ) Ipass = 0
+      IF( ABS(z(j)-zk(id))/ABS(zk(id))>=relerr ) Ipass = 0
     END DO
     info = 0
     w_r = [ ( [REAL(w(i)), AIMAG(w(i))], i=1,21 ) ]
     CALL RPZERO(ideg,a,z,w(4),info,w_r)
-    IF ( info/=0 ) THEN
+    IF( info/=0 ) THEN
       Ipass = 0
-      IF ( info==1.AND.Kprint>=1 ) WRITE (Lun,99003)
+      IF( info==1 .AND. Kprint>=1 ) WRITE (Lun,99003)
       99003 FORMAT (' RPZERO TEST FAILS: LEADING COEFFICIENT OR DEGREE OF',&
         ' POLYNOMIAL IS ZERO')
-      IF ( info==2.AND.Kprint>=1 ) WRITE (Lun,99004)
+      IF( info==2 .AND. Kprint>=1 ) WRITE (Lun,99004)
       99004 FORMAT (' RPZERO TEST FAILS: NON-CONVERGENCE IN 125 ITERATIONS')
     END IF
     DO j = 1, ideg
@@ -83,21 +82,20 @@ CONTAINS
       id = 1
       DO i = 2, ideg
         erri = ABS(z(j)-zk(i))
-        IF ( erri<err ) id = i
+        IF( erri<err ) id = i
         err = MIN(erri,err)
       END DO
-      IF ( ABS(z(j)-zk(id))/ABS(zk(id))>=relerr ) Ipass = 0
+      IF( ABS(z(j)-zk(id))/ABS(zk(id))>=relerr ) Ipass = 0
     END DO
-    IF ( Kprint>=2.AND.Ipass/=0 ) WRITE (Lun,99005)
+    IF( Kprint>=2 .AND. Ipass/=0 ) WRITE (Lun,99005)
     99005 FORMAT (' CPRPQX PASSES ALL TESTS.')
-    IF ( Kprint>=1.AND.Ipass==0 ) WRITE (Lun,99006)
+    IF( Kprint>=1 .AND. Ipass==0 ) WRITE (Lun,99006)
     99006 FORMAT (' CPRPQX FAILS SOME TESTS.')
     RETURN
   END SUBROUTINE CPRPQX
   !** FZTEST
   SUBROUTINE FZTEST(Lun,Kprint,Ipass)
-    !>
-    !  Quick check for FZERO.
+    !> Quick check for FZERO.
     !***
     ! **Library:**   SLATEC
     !***
@@ -117,15 +115,15 @@ CONTAINS
     !           of KPRINT.  (WRB)
     USE slatec, ONLY : FZERO, R1MACH, XERCLR, XGETF, XSETF
     !     .. Scalar Arguments ..
-    INTEGER Ipass, Kprint, Lun
+    INTEGER :: Ipass, Kprint, Lun
     !     .. Local Scalars ..
-    INTEGER iflag, kontrl
-    REAL(SP) ae, b, c, pi, r, re, tol
-    LOGICAL fatal
+    INTEGER :: iflag, kontrl
+    REAL(SP) :: ae, b, c, pi, r, re, tol
+    LOGICAL :: fatal
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, ATAN, MAX, SIN, SQRT, TAN
     !* FIRST EXECUTABLE STATEMENT  FZTEST
-    IF ( Kprint>=2 ) WRITE (Lun,99001)
+    IF( Kprint>=2 ) WRITE (Lun,99001)
     99001 FORMAT ('1'/' FZERO QUICK CHECK')
     Ipass = 1
     pi = 4.0E0*ATAN(1.0E0)
@@ -142,17 +140,17 @@ CONTAINS
     !
     !     See if test was passed.
     !
-    IF ( ABS(b-pi)<=tol.AND.ABS(c-pi)<=tol ) THEN
-      IF ( Kprint>=3 ) WRITE (Lun,99007) 'PASSED', b, c, iflag
+    IF( ABS(b-pi)<=tol .AND. ABS(c-pi)<=tol ) THEN
+      IF( Kprint>=3 ) WRITE (Lun,99007) 'PASSED', b, c, iflag
     ELSE
       Ipass = 0
-      IF ( Kprint>=2 ) WRITE (Lun,99007) 'FAILED', b, c, iflag
+      IF( Kprint>=2 ) WRITE (Lun,99007) 'FAILED', b, c, iflag
     END IF
     !
     !     Trigger 2 error conditions
     !
     CALL XGETF(kontrl)
-    IF ( Kprint<=2 ) THEN
+    IF( Kprint<=2 ) THEN
       CALL XSETF(0)
     ELSE
       CALL XSETF(1)
@@ -160,7 +158,7 @@ CONTAINS
     fatal = .FALSE.
     CALL XERCLR
     !
-    IF ( Kprint>=3 ) WRITE (Lun,99002)
+    IF( Kprint>=3 ) WRITE (Lun,99002)
     99002 FORMAT (/' IFLAG 3 and 4 tests')
     b = 1.0E0
     !
@@ -169,10 +167,10 @@ CONTAINS
     c = 2.0E0
     r = 0.5E0*(b+c)
     CALL FZERO(TAN,b,c,b,re,ae,iflag)
-    IF ( iflag/=3 ) THEN
+    IF( iflag/=3 ) THEN
       Ipass = 0
       fatal = .TRUE.
-      IF ( Kprint>=2 ) WRITE (Lun,99008) iflag, 2
+      IF( Kprint>=2 ) WRITE (Lun,99008) iflag, 2
     END IF
     !
     !     IFLAG=4 (No sign change)
@@ -181,28 +179,28 @@ CONTAINS
     c = -0.1E0
     r = 0.5E0*(b+c)
     CALL FZERO(SIN,b,c,r,re,ae,iflag)
-    IF ( iflag/=4 ) THEN
+    IF( iflag/=4 ) THEN
       Ipass = 0
       fatal = .TRUE.
-      IF ( Kprint>=2 ) WRITE (Lun,99008) iflag, 4
+      IF( Kprint>=2 ) WRITE (Lun,99008) iflag, 4
     END IF
     !
     CALL XERCLR
     !
     CALL XSETF(kontrl)
-    IF ( fatal ) THEN
-      IF ( Kprint>=2 ) THEN
+    IF( fatal ) THEN
+      IF( Kprint>=2 ) THEN
         WRITE (Lun,99003)
         99003 FORMAT (/' At least IFLAG test failed')
       END IF
-    ELSEIF ( Kprint>=3 ) THEN
+    ELSEIF( Kprint>=3 ) THEN
       WRITE (Lun,99004)
       99004 FORMAT (/' All IFLAG tests passed')
     END IF
     !
-    IF ( Ipass==1.AND.Kprint>=2 ) WRITE (Lun,99005)
+    IF( Ipass==1 .AND. Kprint>=2 ) WRITE (Lun,99005)
     99005 FORMAT (/' ***************FZERO PASSED ALL TESTS**************')
-    IF ( Ipass==0.AND.Kprint>=1 ) WRITE (Lun,99006)
+    IF( Ipass==0 .AND. Kprint>=1 ) WRITE (Lun,99006)
     99006 FORMAT (/' ***************FZERO FAILED SOME TESTS*************')
     RETURN
     99007 FORMAT (' Accuracy test ',&
@@ -212,8 +210,7 @@ CONTAINS
   END SUBROUTINE FZTEST
   !** DFZTST
   SUBROUTINE DFZTST(Lun,Kprint,Ipass)
-    !>
-    !  Quick check for DFZERO.
+    !> Quick check for DFZERO.
     !***
     ! **Library:**   SLATEC
     !***
@@ -227,15 +224,15 @@ CONTAINS
     !   920212  DATE WRITTEN
     USE slatec, ONLY : D1MACH, DFZERO, XERCLR, XGETF, XSETF
     !     .. Scalar Arguments ..
-    INTEGER Ipass, Kprint, Lun
+    INTEGER :: Ipass, Kprint, Lun
     !     .. Local Scalars ..
-    INTEGER iflag, kontrl
+    INTEGER :: iflag, kontrl
     REAL(DP) :: ae, b, c, pi, r, re, tol
-    LOGICAL fatal
+    LOGICAL :: fatal
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, ATAN, DSIN, DTAN, MAX, SQRT
     !* FIRST EXECUTABLE STATEMENT  DFZTST
-    IF ( Kprint>=2 ) WRITE (Lun,99001)
+    IF( Kprint>=2 ) WRITE (Lun,99001)
     99001 FORMAT ('1'/' DFZERO QUICK CHECK')
     Ipass = 1
     pi = 4.0D0*ATAN(1.0D0)
@@ -252,17 +249,17 @@ CONTAINS
     !
     !     See if test was passed.
     !
-    IF ( ABS(b-pi)<=tol.AND.ABS(c-pi)<=tol ) THEN
-      IF ( Kprint>=3 ) WRITE (Lun,99007) 'PASSED', b, c, iflag
+    IF( ABS(b-pi)<=tol .AND. ABS(c-pi)<=tol ) THEN
+      IF( Kprint>=3 ) WRITE (Lun,99007) 'PASSED', b, c, iflag
     ELSE
       Ipass = 0
-      IF ( Kprint>=2 ) WRITE (Lun,99007) 'FAILED', b, c, iflag
+      IF( Kprint>=2 ) WRITE (Lun,99007) 'FAILED', b, c, iflag
     END IF
     !
     !     Trigger 2 error conditions
     !
     CALL XGETF(kontrl)
-    IF ( Kprint<=2 ) THEN
+    IF( Kprint<=2 ) THEN
       CALL XSETF(0)
     ELSE
       CALL XSETF(1)
@@ -270,7 +267,7 @@ CONTAINS
     fatal = .FALSE.
     CALL XERCLR
     !
-    IF ( Kprint>=3 ) WRITE (Lun,99002)
+    IF( Kprint>=3 ) WRITE (Lun,99002)
     99002 FORMAT (/' IFLAG 3 and 4 tests')
     b = 1.0D0
     !
@@ -279,10 +276,10 @@ CONTAINS
     c = 2.0D0
     r = 0.5D0*(b+c)
     CALL DFZERO(DTAN,b,c,b,re,ae,iflag)
-    IF ( iflag/=3 ) THEN
+    IF( iflag/=3 ) THEN
       Ipass = 0
       fatal = .TRUE.
-      IF ( Kprint>=2 ) WRITE (Lun,99008) iflag, 2
+      IF( Kprint>=2 ) WRITE (Lun,99008) iflag, 2
     END IF
     !
     !     IFLAG=4 (No sign change)
@@ -291,28 +288,28 @@ CONTAINS
     c = -0.1D0
     r = 0.5D0*(b+c)
     CALL DFZERO(DSIN,b,c,r,re,ae,iflag)
-    IF ( iflag/=4 ) THEN
+    IF( iflag/=4 ) THEN
       Ipass = 0
       fatal = .TRUE.
-      IF ( Kprint>=2 ) WRITE (Lun,99008) iflag, 4
+      IF( Kprint>=2 ) WRITE (Lun,99008) iflag, 4
     END IF
     !
     CALL XERCLR
     !
     CALL XSETF(kontrl)
-    IF ( fatal ) THEN
-      IF ( Kprint>=2 ) THEN
+    IF( fatal ) THEN
+      IF( Kprint>=2 ) THEN
         WRITE (Lun,99003)
         99003 FORMAT (/' At least IFLAG test failed')
       END IF
-    ELSEIF ( Kprint>=3 ) THEN
+    ELSEIF( Kprint>=3 ) THEN
       WRITE (Lun,99004)
       99004 FORMAT (/' All IFLAG tests passed')
     END IF
     !
-    IF ( Ipass==1.AND.Kprint>=2 ) WRITE (Lun,99005)
+    IF( Ipass==1 .AND. Kprint>=2 ) WRITE (Lun,99005)
     99005 FORMAT (/' ***************DFZERO PASSED ALL TESTS**************')
-    IF ( Ipass==0.AND.Kprint>=1 ) WRITE (Lun,99006)
+    IF( Ipass==0 .AND. Kprint>=1 ) WRITE (Lun,99006)
     99006 FORMAT (/' ***************DFZERO FAILED SOME TESTS*************')
     RETURN
     99007 FORMAT (' Accuracy test ',&
@@ -322,8 +319,7 @@ CONTAINS
   END SUBROUTINE DFZTST
   !** RQRTST
   SUBROUTINE RQRTST(Lun,Kprint,Ipass)
-    !>
-    !  Quick check for RPQR79.
+    !> Quick check for RPQR79.
     !***
     ! **Library:**   SLATEC
     !***
@@ -342,19 +338,19 @@ CONTAINS
     !   911010  Code reworked and simplified.  (RWC and WRB)
     USE slatec, ONLY : NUMXER, R1MACH, RPQR79, XERCLR, XGETF, XSETF
     USE common_mod, ONLY : PASS
-    REAL(SP) beta, tol, work(63)
-    INTEGER i, ierr, Ipass, j, kontrl, Kprint, Lun, nerr
-    INTEGER itmp(7)
-    COMPLEX(SP) root(7)
-    REAL(SP) coef(8)
-    LOGICAL fatal
+    REAL(SP) :: beta, tol, work(63)
+    INTEGER :: i, ierr, Ipass, j, kontrl, Kprint, Lun, nerr
+    INTEGER :: itmp(7)
+    COMPLEX(SP) :: root(7)
+    REAL(SP) :: coef(8)
+    LOGICAL :: fatal
     !
     COMPLEX(SP), PARAMETER :: chk(7) = [ (1.4142135623731,1.4142135623731), &
       (1.4142135623731,-1.4142135623731), (0.0,2.0), (0.0,-2.0), &
       (-2.0,0.0), (-1.4142135623731,1.4142135623731), &
       (-1.4142135623731,-1.4142135623731) ]
     !* FIRST EXECUTABLE STATEMENT  RQRTST
-    IF ( Kprint>=2 ) WRITE (Lun,99001)
+    IF( Kprint>=2 ) WRITE (Lun,99001)
     !
     99001 FORMAT ('1',/,' RPQR79 QUICK CHECK')
     tol = SQRT(R1MACH(4))
@@ -380,7 +376,7 @@ CONTAINS
     !
     DO i = 1, 7
       DO j = 1, 7
-        IF ( ABS(root(i)-chk(j))<=tol ) THEN
+        IF( ABS(root(i)-chk(j))<=tol ) THEN
           itmp(j) = 1
           EXIT
         END IF
@@ -396,7 +392,7 @@ CONTAINS
     !
     !     Print test results.
     !
-    IF ( Kprint>=3.OR.(Kprint>=2.AND.Ipass==0) ) THEN
+    IF( Kprint>=3 .OR. (Kprint>=2 .AND. Ipass==0) ) THEN
       WRITE (Lun,99002)
       99002 FORMAT (/,' CHECK REAL AND IMAGINARY PARTS OF ROOT'/' COEFFICIENTS')
       WRITE (Lun,99003) (j,coef(j),j=1,8)
@@ -407,56 +403,55 @@ CONTAINS
       WRITE (Lun,99005) (j,root(j),j=1,7)
       99005 FORMAT (I6,3X,1P,2E22.14)
     END IF
-    IF ( Kprint>=2 ) CALL PASS(Lun,1,Ipass)
+    IF( Kprint>=2 ) CALL PASS(Lun,1,Ipass)
     !
     !     Trigger 2 error conditions
     !
     CALL XGETF(kontrl)
-    IF ( Kprint<=2 ) THEN
+    IF( Kprint<=2 ) THEN
       CALL XSETF(0)
     ELSE
       CALL XSETF(1)
     END IF
     fatal = .FALSE.
     CALL XERCLR
-    IF ( Kprint>=3 ) WRITE (Lun,99006)
+    IF( Kprint>=3 ) WRITE (Lun,99006)
     99006 FORMAT (//' TRIGGER 2 ERROR CONDITIONS'//)
     !
     !     CALL RPQR79 with 0 degree polynomial.
     !
     CALL RPQR79(0,coef,root,ierr,work)
-    IF ( NUMXER(nerr)/=3 ) fatal = .TRUE.
+    IF( NUMXER(nerr)/=3 ) fatal = .TRUE.
     CALL XERCLR
     !
     !     CALL RPQR79 with zero leading coefficient.
     !
     coef(1) = 0.0
     CALL RPQR79(2,coef,root,ierr,work)
-    IF ( NUMXER(nerr)/=2 ) fatal = .TRUE.
+    IF( NUMXER(nerr)/=2 ) fatal = .TRUE.
     CALL XERCLR
     !
     CALL XSETF(kontrl)
-    IF ( fatal ) THEN
+    IF( fatal ) THEN
       Ipass = 0
-      IF ( Kprint>=2 ) THEN
+      IF( Kprint>=2 ) THEN
         WRITE (Lun,99007)
         99007 FORMAT (/' AT LEAST ONE INCORRECT ARGUMENT TEST FAILED')
       END IF
-    ELSEIF ( Kprint>=3 ) THEN
+    ELSEIF( Kprint>=3 ) THEN
       WRITE (Lun,99008)
       99008 FORMAT (/' ALL INCORRECT ARGUMENT TESTS PASSED')
     END IF
     !
-    IF ( Ipass==1.AND.Kprint>1 ) WRITE (Lun,99009)
+    IF( Ipass==1 .AND. Kprint>1 ) WRITE (Lun,99009)
     99009 FORMAT (/' **************RPQR79 PASSED ALL TESTS**************')
-    IF ( Ipass==0.AND.Kprint/=0 ) WRITE (Lun,99010)
+    IF( Ipass==0 .AND. Kprint/=0 ) WRITE (Lun,99010)
     99010 FORMAT (/' **************RPQR79 FAILED SOME TESTS*************')
     RETURN
   END SUBROUTINE RQRTST
   !** CQRTST
   SUBROUTINE CQRTST(Lun,Kprint,Ipass)
-    !>
-    !  Quick check for CPQR79.
+    !> Quick check for CPQR79.
     !***
     ! **Library:**   SLATEC
     !***
@@ -473,12 +468,12 @@ CONTAINS
     !   911010  Code reworked and simplified.  (RWC and WRB)
     USE slatec, ONLY : CPQR79, NUMXER, R1MACH, XERCLR, XGETF, XSETF
     USE common_mod, ONLY : PASS
-    INTEGER i, ierr, Ipass, j, kontrl, Kprint, Lun, nerr
-    REAL(SP) tol
-    INTEGER itest(2), itmp(7)
-    REAL(SP) work(144)
-    COMPLEX(SP) root(8)
-    LOGICAL fatal
+    INTEGER :: i, ierr, Ipass, j, kontrl, Kprint, Lun, nerr
+    REAL(SP) :: tol
+    INTEGER :: itest(2), itmp(7)
+    REAL(SP) :: work(144)
+    COMPLEX(SP) :: root(8)
+    LOGICAL :: fatal
     !
     COMPLEX(SP), PARAMETER :: coeff1(9) = [ (1.0,0.0), (-7.0,-2.0), (8.0,6.0), &
       (28.0,8.0), (-49.0,-24.0), (7.0,2.0), (-8.0,-6.0), (-28.0,-8.0), (48.0,24.0) ]
@@ -488,7 +483,7 @@ CONTAINS
       (2.0,0.0), (0.0,-1.0), (-1.0,0.0), (0.0,1.0), (1.0,0.0) ]
     COMPLEX(SP), PARAMETER :: chk2 = (-2.0,-1.0)
     !* FIRST EXECUTABLE STATEMENT  CQRTST
-    IF ( Kprint>=2 ) WRITE (Lun,99001)
+    IF( Kprint>=2 ) WRITE (Lun,99001)
     !
     99001 FORMAT ('1',/,' CPQR79 QUICK CHECK')
     tol = SQRT(R1MACH(4))
@@ -508,7 +503,7 @@ CONTAINS
     !
     DO i = 1, 7
       DO j = 1, 7
-        IF ( ABS(root(i)-chk1(j))<=tol ) THEN
+        IF( ABS(root(i)-chk1(j))<=tol ) THEN
           itmp(j) = 1
           EXIT
         END IF
@@ -524,13 +519,13 @@ CONTAINS
     !
     !     Print test results.
     !
-    IF ( Kprint>=3.OR.(Kprint>=2.AND.itest(1)==0) ) THEN
+    IF( Kprint>=3 .OR. (Kprint>=2 .AND. itest(1)==0) ) THEN
       WRITE (Lun,99008)
       WRITE (Lun,99009) (j,coeff1(j),j=1,9)
       WRITE (Lun,99010)
       WRITE (Lun,99011) (j,root(j),j=1,7)
     END IF
-    IF ( Kprint>=2 ) CALL PASS(Lun,1,itest(1))
+    IF( Kprint>=2 ) CALL PASS(Lun,1,itest(1))
     !
     !     Set up next problem.
     !
@@ -539,11 +534,11 @@ CONTAINS
     !     Check to see if test passed.
     !
     itest(2) = 1
-    IF ( ABS(root(1)-chk2)>tol ) itest(2) = 0
+    IF( ABS(root(1)-chk2)>tol ) itest(2) = 0
     !
     !     Print test results for second test.
     !
-    IF ( Kprint>=3.OR.(Kprint>=2.AND.itest(1)==0) ) THEN
+    IF( Kprint>=3 .OR. (Kprint>=2 .AND. itest(1)==0) ) THEN
       WRITE (Lun,99002)
       99002 FORMAT (/,' TEST SUBSEQUENT RELATED CALL')
       WRITE (Lun,99008)
@@ -551,41 +546,41 @@ CONTAINS
       WRITE (Lun,99010)
       WRITE (Lun,99011) (j,root(j),j=1,1)
     END IF
-    IF ( Kprint>=2 ) CALL PASS(Lun,2,itest(2))
+    IF( Kprint>=2 ) CALL PASS(Lun,2,itest(2))
     !
     !     Trigger 2 error conditions
     !
     CALL XGETF(kontrl)
-    IF ( Kprint<=2 ) THEN
+    IF( Kprint<=2 ) THEN
       CALL XSETF(0)
     ELSE
       CALL XSETF(1)
     END IF
     fatal = .FALSE.
     CALL XERCLR
-    IF ( Kprint>=3 ) WRITE (Lun,99003)
+    IF( Kprint>=3 ) WRITE (Lun,99003)
     99003 FORMAT (//' TRIGGER 2 ERROR CONDITIONS'//)
     !
     !     CALL CPQR79 with 0 degree polynomial.
     !
     CALL CPQR79(0,coeff2,root,ierr,work)
-    IF ( NUMXER(nerr)/=3 ) fatal = .TRUE.
+    IF( NUMXER(nerr)/=3 ) fatal = .TRUE.
     CALL XERCLR
     !
     !     CALL CPQR79 with zero leading coefficient.
     !
     CALL CPQR79(2,coeff3,root,ierr,work)
-    IF ( NUMXER(nerr)/=2 ) fatal = .TRUE.
+    IF( NUMXER(nerr)/=2 ) fatal = .TRUE.
     CALL XERCLR
     !
     CALL XSETF(kontrl)
-    IF ( fatal ) THEN
+    IF( fatal ) THEN
       Ipass = 0
-      IF ( Kprint>=2 ) THEN
+      IF( Kprint>=2 ) THEN
         WRITE (Lun,99004)
         99004 FORMAT (/' AT LEAST ONE INCORRECT ARGUMENT TEST FAILED')
       END IF
-    ELSEIF ( Kprint>=3 ) THEN
+    ELSEIF( Kprint>=3 ) THEN
       WRITE (Lun,99005)
       99005 FORMAT (/' ALL INCORRECT ARGUMENT TESTS PASSED')
     END IF
@@ -594,9 +589,9 @@ CONTAINS
     !
     Ipass = Ipass*itest(1)*itest(2)
     !
-    IF ( Ipass==1.AND.Kprint>1 ) WRITE (Lun,99006)
+    IF( Ipass==1 .AND. Kprint>1 ) WRITE (Lun,99006)
     99006 FORMAT (/' **************CPQR79 PASSED ALL TESTS**************')
-    IF ( Ipass==0.AND.Kprint/=0 ) WRITE (Lun,99007)
+    IF( Ipass==0 .AND. Kprint/=0 ) WRITE (Lun,99007)
     99007 FORMAT (/' **************CPQR79 FAILED SOME TESTS*************')
     RETURN
     99008 FORMAT (/,' CHECK REAL AND IMAGINARY PARTS OF ROOT'/' COEFFICIENTS')
@@ -612,8 +607,7 @@ PROGRAM TEST34
   USE slatec, ONLY : I1MACH, XSETF, XSETUN, XERMAX
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
-  !>
-  !  Driver for testing SLATEC subprograms
+  !> Driver for testing SLATEC subprograms
   !***
   ! **Library:**   SLATEC
   !***
@@ -662,7 +656,7 @@ PROGRAM TEST34
   !   890618  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900524  Cosmetic changes to code.  (WRB)
-  INTEGER ipass, kprint, lin, lun, nfail
+  INTEGER :: ipass, kprint, lin, lun, nfail
   !* FIRST EXECUTABLE STATEMENT  TEST34
   lun = I1MACH(2)
   lin = I1MACH(1)
@@ -673,7 +667,7 @@ PROGRAM TEST34
   CALL GET_ARGUMENT(kprint)
   CALL XERMAX(1000)
   CALL XSETUN(lun)
-  IF ( kprint<=1 ) THEN
+  IF( kprint<=1 ) THEN
     CALL XSETF(0)
   ELSE
     CALL XSETF(1)
@@ -682,31 +676,31 @@ PROGRAM TEST34
   !     Test CPZERO and RPZERO
   !
   CALL CPRPQX(lun,kprint,ipass)
-  IF ( ipass==0 ) nfail = nfail + 1
+  IF( ipass==0 ) nfail = nfail + 1
   !
   !     Test FZERO
   !
   CALL FZTEST(lun,kprint,ipass)
-  IF ( ipass==0 ) nfail = nfail + 1
+  IF( ipass==0 ) nfail = nfail + 1
   !
   !     Test DFZERO
   !
   CALL DFZTST(lun,kprint,ipass)
-  IF ( ipass==0 ) nfail = nfail + 1
+  IF( ipass==0 ) nfail = nfail + 1
   !
   !     Test RPQR79
   !
   CALL RQRTST(lun,kprint,ipass)
-  IF ( ipass==0 ) nfail = nfail + 1
+  IF( ipass==0 ) nfail = nfail + 1
   !
   !     Test CPQR79
   !
   CALL CQRTST(lun,kprint,ipass)
-  IF ( ipass==0 ) nfail = nfail + 1
+  IF( ipass==0 ) nfail = nfail + 1
   !
   !     Write PASS or FAIL message
   !
-  IF ( nfail==0 ) THEN
+  IF( nfail==0 ) THEN
     WRITE (lun,99001)
     99001 FORMAT (/' --------------TEST34 PASSED ALL TESTS----------------')
   ELSE

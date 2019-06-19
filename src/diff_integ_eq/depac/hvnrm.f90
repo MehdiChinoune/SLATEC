@@ -1,7 +1,6 @@
 !** HVNRM
 REAL(SP) FUNCTION HVNRM(V,Ncomp)
-  !>
-  !  Subsidiary to DEABM, DEBDF and DERKF
+  !> Subsidiary to DEABM, DEBDF and DERKF
   !***
   ! **Library:**   SLATEC
   !***

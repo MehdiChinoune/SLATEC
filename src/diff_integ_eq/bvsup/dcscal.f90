@@ -1,7 +1,6 @@
 !** DCSCAL
 SUBROUTINE DCSCAL(A,Nrda,Nrow,Ncol,Cols,Colsav,Rows,Rowsav,Anorm,Scales,Iscale,Ic)
-  !>
-  !  Subsidiary to DBVSUP and DSUDS
+  !> Subsidiary to DBVSUP and DSUDS
   !***
   ! **Library:**   SLATEC
   !***
@@ -37,9 +36,9 @@ SUBROUTINE DCSCAL(A,Nrda,Nrow,Ncol,Cols,Colsav,Rows,Rowsav,Anorm,Scales,Iscale,I
   !     BEGIN BLOCK PERMITTING ...EXITS TO 130
   !        BEGIN BLOCK PERMITTING ...EXITS TO 60
   !* FIRST EXECUTABLE STATEMENT  DCSCAL
-  IF ( Iscale==(-1) ) THEN
+  IF( Iscale==(-1) ) THEN
     !
-    IF ( Ic/=0 ) THEN
+    IF( Ic/=0 ) THEN
       DO k = 1, Ncol
         Cols(k) = NORM2(A(1:Nrow,k))**2
       END DO
@@ -49,9 +48,9 @@ SUBROUTINE DCSCAL(A,Nrda,Nrow,Ncol,Cols,Colsav,Rows,Rowsav,Anorm,Scales,Iscale,I
     DO k = 1, Ncol
       cs = Cols(k)
       !        .........EXIT
-      IF ( (cs>ten4*ascale).OR.(ten4*cs<ascale) ) GOTO 100
+      IF( (cs>ten4*ascale) .OR. (ten4*cs<ascale) ) GOTO 100
       !        .........EXIT
-      IF ( (cs<1.0D0/ten20).OR.(cs>ten20) ) GOTO 100
+      IF( (cs<1.0D0/ten20) .OR. (cs>ten20) ) GOTO 100
     END DO
   END IF
   !
@@ -65,12 +64,12 @@ SUBROUTINE DCSCAL(A,Nrda,Nrow,Ncol,Cols,Colsav,Rows,Rowsav,Anorm,Scales,Iscale,I
   Anorm = 0.0D0
   DO k = 1, Ncol
     cs = Cols(k)
-    IF ( cs/=0.0D0 ) THEN
+    IF( cs/=0.0D0 ) THEN
       p = LOG(cs)/alog2
       ip = INT( -0.5D0*p )
       s = 2.0D0**ip
       Scales(k) = s
-      IF ( Ic/=1 ) THEN
+      IF( Ic/=1 ) THEN
         Cols(k) = s*s*Cols(k)
         Anorm = Anorm + Cols(k)
         Colsav(k) = Cols(k)
@@ -84,7 +83,7 @@ SUBROUTINE DCSCAL(A,Nrda,Nrow,Ncol,Cols,Colsav,Rows,Rowsav,Anorm,Scales,Iscale,I
   END DO
   !
   !     ...EXIT
-  IF ( Ic/=0 ) THEN
+  IF( Ic/=0 ) THEN
     !
     DO k = 1, Nrow
       Rows(k) = NORM2(A(k,1:Ncol))**2

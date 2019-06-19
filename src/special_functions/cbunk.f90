@@ -1,7 +1,6 @@
 !** CBUNK
 SUBROUTINE CBUNK(Z,Fnu,Kode,Mr,N,Y,Nz,Tol,Elim,Alim)
-  !>
-  !  Subsidiary to CBESH and CBESK
+  !> Subsidiary to CBESH and CBESK
   !***
   ! **Library:**   SLATEC
   !***
@@ -11,7 +10,7 @@ SUBROUTINE CBUNK(Z,Fnu,Kode,Mr,N,Y,Nz,Tol,Elim,Alim)
   !***
   ! **Description:**
   !
-  !     CBUNK COMPUTES THE K BESSEL FUNCTION FOR FNU.GT.FNUL.
+  !     CBUNK COMPUTES THE K BESSEL FUNCTION FOR FNU>FNUL.
   !     ACCORDING TO THE UNIFORM ASYMPTOTIC EXPANSION FOR K(FNU,Z)
   !     IN CUNK1 AND THE EXPANSION FOR H(2,FNU,Z) IN CUNK2
   !
@@ -24,26 +23,26 @@ SUBROUTINE CBUNK(Z,Fnu,Kode,Mr,N,Y,Nz,Tol,Elim,Alim)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
 
-  INTEGER Kode, Mr, N, Nz
-  COMPLEX(SP) Y(N), Z
-  REAL(SP) Alim, ax, ay, Elim, Fnu, Tol, xx, yy
+  INTEGER :: Kode, Mr, N, Nz
+  COMPLEX(SP) :: Y(N), Z
+  REAL(SP) :: Alim, ax, ay, Elim, Fnu, Tol, xx, yy
   !* FIRST EXECUTABLE STATEMENT  CBUNK
   Nz = 0
   xx = REAL(Z)
   yy = AIMAG(Z)
   ax = ABS(xx)*1.7321E0
   ay = ABS(yy)
-  IF ( ay>ax ) THEN
+  IF( ay>ax ) THEN
     !-----------------------------------------------------------------------
     !     ASYMPTOTIC EXPANSION FOR H(2,FNU,Z*EXP(M*HPI)) FOR LARGE FNU
-    !     APPLIED IN PI/3.LT.ABS(ARG(Z)).LE.PI/2 WHERE M=+I OR -I
+    !     APPLIED IN PI/3<ABS(ARG(Z))<=PI/2 WHERE M=+I OR -I
     !     AND HPI=PI/2
     !-----------------------------------------------------------------------
     CALL CUNK2(Z,Fnu,Kode,Mr,N,Y,Nz,Tol,Elim,Alim)
   ELSE
     !-----------------------------------------------------------------------
     !     ASYMPTOTIC EXPANSION FOR K(FNU,Z) FOR LARGE FNU APPLIED IN
-    !     -PI/3.LE.ARG(Z).LE.PI/3
+    !     -PI/3<=ARG(Z)<=PI/3
     !-----------------------------------------------------------------------
     CALL CUNK1(Z,Fnu,Kode,Mr,N,Y,Nz,Tol,Elim,Alim)
   END IF

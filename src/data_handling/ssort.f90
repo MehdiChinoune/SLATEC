@@ -1,7 +1,6 @@
 !** SSORT
 SUBROUTINE SSORT(X,Y,N,Kflag)
-  !>
-  !  Sort an array and optionally make the same interchanges in
+  !> Sort an array and optionally make the same interchanges in
   !            an auxiliary array.  The array may be sorted in increasing
   !            or decreasing order.  A slightly modified QUICKSORT
   !            algorithm is used.
@@ -57,26 +56,26 @@ SUBROUTINE SSORT(X,Y,N,Kflag)
   !           IF-THEN-ELSE-ENDIF.  (RWC, WRB)
   USE service, ONLY : XERMSG
   !     .. Scalar Arguments ..
-  INTEGER Kflag, N
+  INTEGER :: Kflag, N
   !     .. Array Arguments ..
   REAL(SP) :: X(N), Y(N)
   !     .. Local Scalars ..
-  REAL(SP) r, t, tt, tty, ty
-  INTEGER i, ij, j, k, kk, l, m, nn
+  REAL(SP) :: r, t, tt, tty, ty
+  INTEGER :: i, ij, j, k, kk, l, m, nn
   !     .. Local Arrays ..
-  INTEGER il(21), iu(21)
+  INTEGER :: il(21), iu(21)
   !     .. Intrinsic Functions ..
   INTRINSIC ABS, INT
   !* FIRST EXECUTABLE STATEMENT  SSORT
   nn = N
-  IF ( nn<1 ) THEN
+  IF( nn<1 ) THEN
     CALL XERMSG('SSORT',&
       'The number of values to be sorted is not positive.',1,1)
     RETURN
   END IF
   !
   kk = ABS(Kflag)
-  IF ( kk/=1.AND.kk/=2 ) THEN
+  IF( kk/=1 .AND. kk/=2 ) THEN
     CALL XERMSG('SSORT',&
       'The sort control parameter, K, is not 2, 1, -1, or -2.',2,1)
     RETURN
@@ -84,13 +83,13 @@ SUBROUTINE SSORT(X,Y,N,Kflag)
   !
   !     Alter array X to get decreasing order if needed
   !
-  IF ( Kflag<=-1 ) THEN
+  IF( Kflag<=-1 ) THEN
     DO i = 1, nn
       X(i) = -X(i)
     END DO
   END IF
   !
-  IF ( kk==2 ) THEN
+  IF( kk==2 ) THEN
     !
     !     Sort X and carry Y along
     !
@@ -110,8 +109,8 @@ SUBROUTINE SSORT(X,Y,N,Kflag)
   END IF
   !
   100 CONTINUE
-  IF ( i==j ) GOTO 300
-  IF ( r<=0.5898437E0 ) THEN
+  IF( i==j ) GOTO 300
+  IF( r<=0.5898437E0 ) THEN
     r = r + 3.90625E-2
   ELSE
     r = r - 0.21875E0
@@ -126,7 +125,7 @@ SUBROUTINE SSORT(X,Y,N,Kflag)
   !
   !     If first element of array is greater than T, interchange with T
   !
-  IF ( X(i)>t ) THEN
+  IF( X(i)>t ) THEN
     X(ij) = X(i)
     X(i) = t
     t = X(ij)
@@ -135,14 +134,14 @@ SUBROUTINE SSORT(X,Y,N,Kflag)
   !
   !     If last element of array is less than than T, interchange with T
   !
-  IF ( X(j)<t ) THEN
+  IF( X(j)<t ) THEN
     X(ij) = X(j)
     X(j) = t
     t = X(ij)
     !
     !        If first element of array is greater than T, interchange with T
     !
-    IF ( X(i)>t ) THEN
+    IF( X(i)>t ) THEN
       X(ij) = X(i)
       X(i) = t
       t = X(ij)
@@ -154,18 +153,18 @@ SUBROUTINE SSORT(X,Y,N,Kflag)
     !     than T
     !
     l = l - 1
-    IF ( X(l)<=t ) THEN
+    IF( X(l)<=t ) THEN
       DO
         !
         !     Find an element in the first half of the array which is greater
         !     than T
         !
         k = k + 1
-        IF ( X(k)>=t ) THEN
+        IF( X(k)>=t ) THEN
           !
           !     Interchange these elements
           !
-          IF ( k<=l ) THEN
+          IF( k<=l ) THEN
             tt = X(l)
             X(l) = X(k)
             X(k) = tt
@@ -174,7 +173,7 @@ SUBROUTINE SSORT(X,Y,N,Kflag)
           !
           !     Save upper and lower subscripts of the array yet to be sorted
           !
-          IF ( l-i>j-k ) THEN
+          IF( l-i>j-k ) THEN
             il(m) = i
             iu(m) = l
             i = k
@@ -194,26 +193,26 @@ SUBROUTINE SSORT(X,Y,N,Kflag)
   !     Begin again on another portion of the unsorted array
   !
   300  m = m - 1
-  IF ( m==0 ) GOTO 900
+  IF( m==0 ) GOTO 900
   i = il(m)
   j = iu(m)
   !
   400 CONTINUE
-  IF ( j-i>=1 ) GOTO 200
-  IF ( i==1 ) GOTO 100
+  IF( j-i>=1 ) GOTO 200
+  IF( i==1 ) GOTO 100
   i = i - 1
   DO
     !
     i = i + 1
-    IF ( i==j ) GOTO 300
+    IF( i==j ) GOTO 300
     t = X(i+1)
-    IF ( X(i)>t ) THEN
+    IF( X(i)>t ) THEN
       k = i
       DO
         !
         X(k+1) = X(k)
         k = k - 1
-        IF ( t>=X(k) ) THEN
+        IF( t>=X(k) ) THEN
           X(k+1) = t
           EXIT
         END IF
@@ -222,8 +221,8 @@ SUBROUTINE SSORT(X,Y,N,Kflag)
   END DO
   !
   500 CONTINUE
-  IF ( i==j ) GOTO 700
-  IF ( r<=0.5898437E0 ) THEN
+  IF( i==j ) GOTO 700
+  IF( r<=0.5898437E0 ) THEN
     r = r + 3.90625E-2
   ELSE
     r = r - 0.21875E0
@@ -239,7 +238,7 @@ SUBROUTINE SSORT(X,Y,N,Kflag)
   !
   !     If first element of array is greater than T, interchange with T
   !
-  IF ( X(i)>t ) THEN
+  IF( X(i)>t ) THEN
     X(ij) = X(i)
     X(i) = t
     t = X(ij)
@@ -251,7 +250,7 @@ SUBROUTINE SSORT(X,Y,N,Kflag)
   !
   !     If last element of array is less than T, interchange with T
   !
-  IF ( X(j)<t ) THEN
+  IF( X(j)<t ) THEN
     X(ij) = X(j)
     X(j) = t
     t = X(ij)
@@ -261,7 +260,7 @@ SUBROUTINE SSORT(X,Y,N,Kflag)
     !
     !        If first element of array is greater than T, interchange with T
     !
-    IF ( X(i)>t ) THEN
+    IF( X(i)>t ) THEN
       X(ij) = X(i)
       X(i) = t
       t = X(ij)
@@ -276,18 +275,18 @@ SUBROUTINE SSORT(X,Y,N,Kflag)
     !     than T
     !
     l = l - 1
-    IF ( X(l)<=t ) THEN
+    IF( X(l)<=t ) THEN
       DO
         !
         !     Find an element in the first half of the array which is greater
         !     than T
         !
         k = k + 1
-        IF ( X(k)>=t ) THEN
+        IF( X(k)>=t ) THEN
           !
           !     Interchange these elements
           !
-          IF ( k<=l ) THEN
+          IF( k<=l ) THEN
             tt = X(l)
             X(l) = X(k)
             X(k) = tt
@@ -299,7 +298,7 @@ SUBROUTINE SSORT(X,Y,N,Kflag)
           !
           !     Save upper and lower subscripts of the array yet to be sorted
           !
-          IF ( l-i>j-k ) THEN
+          IF( l-i>j-k ) THEN
             il(m) = i
             iu(m) = l
             i = k
@@ -319,28 +318,28 @@ SUBROUTINE SSORT(X,Y,N,Kflag)
   !     Begin again on another portion of the unsorted array
   !
   700  m = m - 1
-  IF ( m==0 ) GOTO 900
+  IF( m==0 ) GOTO 900
   i = il(m)
   j = iu(m)
   !
   800 CONTINUE
-  IF ( j-i>=1 ) GOTO 600
-  IF ( i==1 ) GOTO 500
+  IF( j-i>=1 ) GOTO 600
+  IF( i==1 ) GOTO 500
   i = i - 1
   DO
     !
     i = i + 1
-    IF ( i==j ) GOTO 700
+    IF( i==j ) GOTO 700
     t = X(i+1)
     ty = Y(i+1)
-    IF ( X(i)>t ) THEN
+    IF( X(i)>t ) THEN
       k = i
       DO
         !
         X(k+1) = X(k)
         Y(k+1) = Y(k)
         k = k - 1
-        IF ( t>=X(k) ) THEN
+        IF( t>=X(k) ) THEN
           X(k+1) = t
           Y(k+1) = ty
           EXIT
@@ -352,7 +351,7 @@ SUBROUTINE SSORT(X,Y,N,Kflag)
   !     Clean up
   !
   900 CONTINUE
-  IF ( Kflag<=-1 ) THEN
+  IF( Kflag<=-1 ) THEN
     DO i = 1, nn
       X(i) = -X(i)
     END DO

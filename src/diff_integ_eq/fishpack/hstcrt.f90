@@ -1,8 +1,7 @@
 !** HSTCRT
 SUBROUTINE HSTCRT(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
     Idimf,Pertrb,Ierror,W)
-  !>
-  !  Solve the standard five-point finite difference
+  !> Solve the standard five-point finite difference
   !            approximation on a staggered grid to the Helmholtz equation
   !            in Cartesian coordinates.
   !***
@@ -33,7 +32,7 @@ SUBROUTINE HSTCRT(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   !             * * * * * *   On Input    * * * * * *
   !
   !    A,B
-  !      The range of X, i.e. A .LE. X .LE. B.  A must be less than B.
+  !      The range of X, i.e. A <= X <= B.  A must be less than B.
   !
   !    M
   !      The number of grid points in the interval (A,B).  The grid points
@@ -78,7 +77,7 @@ SUBROUTINE HSTCRT(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   !               BDB(J) = (d/dX)U(B,Y(J)),    J=1,2,...,N.
   !
   !    C,D
-  !      The range of Y, i.e. C .LE. Y .LE. D.  C must be less
+  !      The range of Y, i.e. C <= Y <= D.  C must be less
   !      than D.
   !
   !    N
@@ -179,21 +178,21 @@ SUBROUTINE HSTCRT(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   !
   !      =  0  No error
   !
-  !      =  1  A .GE. B
+  !      =  1  A >= B
   !
-  !      =  2  MBDCND .LT. 0 or MBDCND .GT. 4
+  !      =  2  MBDCND < 0 or MBDCND > 4
   !
-  !      =  3  C .GE. D
+  !      =  3  C >= D
   !
-  !      =  4  N .LE. 2
+  !      =  4  N <= 2
   !
-  !      =  5  NBDCND .LT. 0 or NBDCND .GT. 4
+  !      =  5  NBDCND < 0 or NBDCND > 4
   !
-  !      =  6  LAMBDA .GT. 0
+  !      =  6  LAMBDA > 0
   !
-  !      =  7  IDIMF .LT. M
+  !      =  7  IDIMF < M
   !
-  !      =  8  M .LE. 2
+  !      =  8  M <= 2
   !
   !      Since this is the only means of indicating a possibly
   !      incorrect call to HSTCRT, the user should test IERROR after
@@ -297,17 +296,17 @@ SUBROUTINE HSTCRT(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   REAL(SP) :: deltax, deltay, delxsq, delysq, s, st2, twdelx, twdely, twdysq
   !* FIRST EXECUTABLE STATEMENT  HSTCRT
   Ierror = 0
-  IF ( A>=B ) Ierror = 1
-  IF ( Mbdcnd<0.OR.Mbdcnd>4 ) Ierror = 2
-  IF ( C>=D ) Ierror = 3
-  IF ( N<=2 ) Ierror = 4
-  IF ( Nbdcnd<0.OR.Nbdcnd>4 ) Ierror = 5
-  IF ( Idimf<M ) Ierror = 7
-  IF ( M<=2 ) Ierror = 8
-  IF ( Ierror/=0 ) RETURN
+  IF( A>=B ) Ierror = 1
+  IF( Mbdcnd<0 .OR. Mbdcnd>4 ) Ierror = 2
+  IF( C>=D ) Ierror = 3
+  IF( N<=2 ) Ierror = 4
+  IF( Nbdcnd<0 .OR. Nbdcnd>4 ) Ierror = 5
+  IF( Idimf<M ) Ierror = 7
+  IF( M<=2 ) Ierror = 8
+  IF( Ierror/=0 ) RETURN
   nperod = Nbdcnd
   mperod = 0
-  IF ( Mbdcnd>0 ) mperod = 1
+  IF( Mbdcnd>0 ) mperod = 1
   deltax = (B-A)/M
   twdelx = 1./deltax
   delxsq = 2./deltax**2
@@ -395,13 +394,13 @@ SUBROUTINE HSTCRT(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
       F(i,j) = F(i,j)*delysq
     END DO
   END DO
-  IF ( mperod/=0 ) THEN
+  IF( mperod/=0 ) THEN
     W(1) = 0.
     W(id4) = 0.
   END IF
   Pertrb = 0.
-  IF ( Elmbda<0 ) THEN
-  ELSEIF ( Elmbda==0 ) THEN
+  IF( Elmbda<0 ) THEN
+  ELSEIF( Elmbda==0 ) THEN
     SELECT CASE (mp)
       CASE (2,3,5)
       CASE DEFAULT
@@ -433,7 +432,7 @@ SUBROUTINE HSTCRT(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   !
   !     SOLVE THE EQUATION.
   !
-  IF ( nperod==0 ) THEN
+  IF( nperod==0 ) THEN
     CALL GENBUN(nperod,N,mperod,M,W(1:id2),W(id2+1:id3),W(id3+1:id4),Idimf,F,&
       ierr1,W(id4+1:))
   ELSE

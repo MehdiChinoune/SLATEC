@@ -1,7 +1,6 @@
 !** POSTG2
 SUBROUTINE POSTG2(Nperod,N,M,A,Bb,C,Idimq,Q,B,B2,B3,W,W2,W3,D,Tcos,P)
-  !>
-  !  Subsidiary to POISTG
+  !> Subsidiary to POISTG
   !***
   ! **Library:**   SLATEC
   !***
@@ -46,15 +45,15 @@ SUBROUTINE POSTG2(Nperod,N,M,A,Bb,C,Idimq,Q,B,B2,B3,W,W2,W3,D,Tcos,P)
   nlast = N
   kr = 1
   lr = 0
-  IF ( nr<=3 ) GOTO 200
+  IF( nr<=3 ) GOTO 200
   100  jr = 2*i2r
   nrod = 1
-  IF ( (nr/2)*2==nr ) nrod = 0
+  IF( (nr/2)*2==nr ) nrod = 0
   jstart = 1
   jstop = nlast - jr
-  IF ( nrod==0 ) jstop = jstop - i2r
+  IF( nrod==0 ) jstop = jstop - i2r
   i2rby2 = i2r/2
-  IF ( jstop>=jstart ) THEN
+  IF( jstop>=jstart ) THEN
     !
     !     REGULAR REDUCTION.
     !
@@ -66,12 +65,12 @@ SUBROUTINE POSTG2(Nperod,N,M,A,Bb,C,Idimq,Q,B,B2,B3,W,W2,W3,D,Tcos,P)
       jm1 = j - i2rby2
       jm2 = j - i2r
       jm3 = jm2 - i2rby2
-      IF ( j/=1 ) THEN
-        IF ( ijump/=2 ) THEN
+      IF( j/=1 ) THEN
+        IF( ijump/=2 ) THEN
           ijump = 2
           CALL COSGEN(i2r,1,0.5,0.0,Tcos)
         END IF
-        IF ( i2r/=1 ) THEN
+        IF( i2r/=1 ) THEN
           DO i = 1, mr
             fi = Q(i,j)
             Q(i,j) = Q(i,j) - Q(i,jm1) - Q(i,jp1) + Q(i,jm2) + Q(i,jp2)
@@ -85,7 +84,7 @@ SUBROUTINE POSTG2(Nperod,N,M,A,Bb,C,Idimq,Q,B,B2,B3,W,W2,W3,D,Tcos,P)
         END IF
       ELSE
         CALL COSGEN(i2r,1,fnum,0.5,Tcos)
-        IF ( i2r/=1 ) THEN
+        IF( i2r/=1 ) THEN
           DO i = 1, mr
             B(i) = Q(i,1) + 0.5*(Q(i,jp2)-Q(i,jp1)-Q(i,jp3))
             Q(i,1) = Q(i,jp2) + Q(i,1) - Q(i,jp1)
@@ -116,17 +115,17 @@ SUBROUTINE POSTG2(Nperod,N,M,A,Bb,C,Idimq,Q,B,B2,B3,W,W2,W3,D,Tcos,P)
   jm1 = j - i2rby2
   jm2 = j - i2r
   jm3 = jm2 - i2rby2
-  IF ( nrod==0 ) THEN
+  IF( nrod==0 ) THEN
     !
     !     EVEN NUMBER OF UNKNOWNS
     !
     jp1 = j + i2rby2
     jp2 = j + i2r
-    IF ( i2r/=1 ) THEN
+    IF( i2r/=1 ) THEN
       DO i = 1, mr
         B(i) = Q(i,j) + .5*(Q(i,jm2)-Q(i,jm1)-Q(i,jm3))
       END DO
-      IF ( nrodpr/=0 ) THEN
+      IF( nrodpr/=0 ) THEN
         DO i = 1, mr
           B(i) = B(i) + Q(i,jp2) - Q(i,jp1)
         END DO
@@ -145,7 +144,7 @@ SUBROUTINE POSTG2(Nperod,N,M,A,Bb,C,Idimq,Q,B,B2,B3,W,W2,W3,D,Tcos,P)
         P(ii) = B(i) + .5*(Q(i,j)-Q(i,jm1)-Q(i,jp1))
         B(i) = P(ii) + Q(i,jp2)
       END DO
-      IF ( lr==0 ) THEN
+      IF( lr==0 ) THEN
         DO i = 1, i2r
           ii = kr + i
           Tcos(ii) = Tcos(i)
@@ -185,11 +184,11 @@ SUBROUTINE POSTG2(Nperod,N,M,A,Bb,C,Idimq,Q,B,B2,B3,W,W2,W3,D,Tcos,P)
     !
     !     ODD NUMBER OF UNKNOWNS
     !
-    IF ( i2r/=1 ) THEN
+    IF( i2r/=1 ) THEN
       DO i = 1, mr
         B(i) = Q(i,j) + .5*(Q(i,jm2)-Q(i,jm1)-Q(i,jm3))
       END DO
-      IF ( nrodpr/=0 ) THEN
+      IF( nrodpr/=0 ) THEN
         DO i = 1, mr
           Q(i,j) = Q(i,j) - Q(i,jm1) + Q(i,jm2)
         END DO
@@ -200,7 +199,7 @@ SUBROUTINE POSTG2(Nperod,N,M,A,Bb,C,Idimq,Q,B,B2,B3,W,W2,W3,D,Tcos,P)
         END DO
         ip = ip - mr
       END IF
-      IF ( lr/=0 ) CALL COSGEN(lr,1,fnum2,0.5,Tcos(kr+1))
+      IF( lr/=0 ) CALL COSGEN(lr,1,fnum2,0.5,Tcos(kr+1))
     ELSE
       DO i = 1, mr
         B(i) = Q(i,j)
@@ -215,7 +214,7 @@ SUBROUTINE POSTG2(Nperod,N,M,A,Bb,C,Idimq,Q,B,B2,B3,W,W2,W3,D,Tcos,P)
     kr = kr + i2r
   END IF
   nr = (nlast-1)/jr + 1
-  IF ( nr>3 ) THEN
+  IF( nr>3 ) THEN
     i2r = jr
     nrodpr = nrod
     GOTO 100
@@ -227,7 +226,7 @@ SUBROUTINE POSTG2(Nperod,N,M,A,Bb,C,Idimq,Q,B,B2,B3,W,W2,W3,D,Tcos,P)
   jm1 = j - i2r
   jp1 = j + i2r
   jm2 = nlast - i2r
-  IF ( nr==2 ) THEN
+  IF( nr==2 ) THEN
     !
     !     CASE OF GENERAL N AND NR = 2 .
     !
@@ -250,7 +249,7 @@ SUBROUTINE POSTG2(Nperod,N,M,A,Bb,C,Idimq,Q,B,B2,B3,W,W2,W3,D,Tcos,P)
     END SELECT
     k(4) = 1 - np/3
     CALL S1MERG(Tcos,k(1),jr-k(4),k(2)-k(4),kr+k(4),0)
-    IF ( np==3 ) k(1) = k(1) - 1
+    IF( np==3 ) k(1) = k(1) - 1
     k(2) = kr
     CALL COSGEN(kr,1,fnum2,0.5,Tcos(k(1)+1))
     k(4) = k(1) + kr
@@ -261,21 +260,21 @@ SUBROUTINE POSTG2(Nperod,N,M,A,Bb,C,Idimq,Q,B,B2,B3,W,W2,W3,D,Tcos,P)
     DO i = 1, mr
       B(i) = B(i) + B2(i)
     END DO
-    IF ( np==3 ) THEN
+    IF( np==3 ) THEN
       Tcos(1) = 2.
       CALL TRIX(1,0,mr,A,Bb,C,B,Tcos,D,W)
     END IF
     DO i = 1, mr
       Q(i,1) = Q(i,1) + B(i)
     END DO
-  ELSEIF ( lr/=0 ) THEN
+  ELSEIF( lr/=0 ) THEN
     !
     !     CASE OF GENERAL N WITH NR = 3 .
     !
     DO i = 1, mr
       B(i) = Q(i,1) - Q(i,jm1) + Q(i,j)
     END DO
-    IF ( nrod/=0 ) THEN
+    IF( nrod/=0 ) THEN
       DO i = 1, mr
         B(i) = B(i) + Q(i,nlast) - Q(i,jm2)
       END DO
@@ -300,7 +299,7 @@ SUBROUTINE POSTG2(Nperod,N,M,A,Bb,C,Idimq,Q,B,B2,B3,W,W2,W3,D,Tcos,P)
     CALL COSGEN(kr+jr+k(4),1,k(4)/2.,1.-k(4),Tcos(k(3)))
     k(4) = 1 - np/3
     CALL S1MERG(Tcos,k(1),jr-k(4),k(2)-k(4),kr+jr+k(4),0)
-    IF ( np==3 ) k(1) = k(1) - 1
+    IF( np==3 ) k(1) = k(1) - 1
     k(2) = kr + jr
     k(4) = k(1) + k(2)
     CALL COSGEN(kr,1,fnum2,0.5,Tcos(k(4)+1))
@@ -317,7 +316,7 @@ SUBROUTINE POSTG2(Nperod,N,M,A,Bb,C,Idimq,Q,B,B2,B3,W,W2,W3,D,Tcos,P)
     DO i = 1, mr
       B(i) = B(i) + B2(i) + B3(i)
     END DO
-    IF ( np==3 ) THEN
+    IF( np==3 ) THEN
       Tcos(1) = 2.
       CALL TRIX(1,0,mr,A,Bb,C,B,Tcos,D,W)
     END IF
@@ -327,7 +326,7 @@ SUBROUTINE POSTG2(Nperod,N,M,A,Bb,C,Idimq,Q,B,B2,B3,W,W2,W3,D,Tcos,P)
     END DO
     CALL COSGEN(jr,1,fnum,0.5,Tcos)
     CALL TRIX(jr,0,mr,A,Bb,C,B,Tcos,D,W)
-    IF ( jr/=1 ) THEN
+    IF( jr/=1 ) THEN
       DO i = 1, mr
         Q(i,1) = Q(i,1) - Q(i,jm1) + B(i)
       END DO
@@ -336,7 +335,7 @@ SUBROUTINE POSTG2(Nperod,N,M,A,Bb,C,Idimq,Q,B,B2,B3,W,W2,W3,D,Tcos,P)
         Q(i,1) = B(i)
       END DO
     END IF
-  ELSEIF ( N/=3 ) THEN
+  ELSEIF( N/=3 ) THEN
     !
     !     CASE N = 2**P+1
     !
@@ -385,7 +384,7 @@ SUBROUTINE POSTG2(Nperod,N,M,A,Bb,C,Idimq,Q,B,B2,B3,W,W2,W3,D,Tcos,P)
     DO i = 1, mr
       B(i) = B(i) + B2(i) + B3(i)
     END DO
-    IF ( np==3 ) THEN
+    IF( np==3 ) THEN
       Tcos(1) = 2.
       CALL TRIX(1,0,mr,A,Bb,C,B,Tcos,D,W)
     END IF
@@ -469,11 +468,11 @@ SUBROUTINE POSTG2(Nperod,N,M,A,Bb,C,Idimq,Q,B,B2,B3,W,W2,W3,D,Tcos,P)
     B(i) = Q(i,nlast) + Q(i,j)
   END DO
   jm2 = nlast - i2r
-  IF ( jr==1 ) THEN
+  IF( jr==1 ) THEN
     DO i = 1, mr
       Q(i,nlast) = 0.
     END DO
-  ELSEIF ( nrod/=0 ) THEN
+  ELSEIF( nrod/=0 ) THEN
     DO i = 1, mr
       Q(i,nlast) = Q(i,nlast) - Q(i,jm2)
     END DO
@@ -495,7 +494,7 @@ SUBROUTINE POSTG2(Nperod,N,M,A,Bb,C,Idimq,Q,B,B2,B3,W,W2,W3,D,Tcos,P)
     jstep = jr
     jr = i2r
     i2r = i2r/2
-    IF ( jr==0 ) THEN
+    IF( jr==0 ) THEN
       !
       !     RETURN STORAGE REQUIREMENTS FOR P VECTORS.
       !
@@ -504,7 +503,7 @@ SUBROUTINE POSTG2(Nperod,N,M,A,Bb,C,Idimq,Q,B,B2,B3,W,W2,W3,D,Tcos,P)
     ELSE
       jstart = 1 + jr
       kr = kr - jr
-      IF ( nlast+jr>N ) THEN
+      IF( nlast+jr>N ) THEN
         jstop = nlast - jr
       ELSE
         kr = kr - jr
@@ -516,7 +515,7 @@ SUBROUTINE POSTG2(Nperod,N,M,A,Bb,C,Idimq,Q,B,B2,B3,W,W2,W3,D,Tcos,P)
       DO j = jstart, jstop, jstep
         jm2 = j - jr
         jp2 = j + jr
-        IF ( j/=jr ) THEN
+        IF( j/=jr ) THEN
           DO i = 1, mr
             B(i) = Q(i,j) + Q(i,jm2) + Q(i,jp2)
           END DO
@@ -525,7 +524,7 @@ SUBROUTINE POSTG2(Nperod,N,M,A,Bb,C,Idimq,Q,B,B2,B3,W,W2,W3,D,Tcos,P)
             B(i) = Q(i,j) + Q(i,jp2)
           END DO
         END IF
-        IF ( jr/=1 ) THEN
+        IF( jr/=1 ) THEN
           jm1 = j - i2r
           jp1 = j + i2r
           DO i = 1, mr
@@ -542,8 +541,8 @@ SUBROUTINE POSTG2(Nperod,N,M,A,Bb,C,Idimq,Q,B,B2,B3,W,W2,W3,D,Tcos,P)
         END DO
       END DO
       nrod = 1
-      IF ( nlast+i2r<=N ) nrod = 0
-      IF ( nlastp/=nlast ) GOTO 300
+      IF( nlast+i2r<=N ) nrod = 0
+      IF( nlastp/=nlast ) GOTO 300
     END IF
   END DO
 END SUBROUTINE POSTG2

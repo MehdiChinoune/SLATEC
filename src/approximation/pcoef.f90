@@ -1,7 +1,6 @@
 !** PCOEF
 SUBROUTINE PCOEF(L,C,Tc,A)
-  !>
-  !  Convert the POLFIT coefficients to Taylor series form.
+  !> Convert the POLFIT coefficients to Taylor series form.
   !***
   ! **Library:**   SLATEC
   !***
@@ -43,10 +42,10 @@ SUBROUTINE PCOEF(L,C,Tc,A)
   !
   !     OUTPUT --
   !         TC -     Vector containing the first LL+1 Taylor coefficients
-  !                  where LL=ABS(L).  If  L.GT.0, the coefficients are
+  !                  where LL=ABS(L).  If  L>0, the coefficients are
   !                  in the usual Taylor series order, i.e.
   !                    P(X) = TC(1) + TC(2)*(X-C) + ... + TC(N+1)*(X-C)**N
-  !                  If L .LT. 0, the coefficients are in reverse order,
+  !                  If L < 0, the coefficients are in reverse order,
   !                  i.e.
   !                    P(X) = TC(1)*(X-C)**N + ... + TC(N)*(X-C) + TC(N+1)
   !
@@ -72,14 +71,14 @@ SUBROUTINE PCOEF(L,C,Tc,A)
   ll = ABS(L)
   llp1 = ll + 1
   CALL PVALUE(ll,ll,C,Tc(1),Tc(2),A)
-  IF ( ll>=2 ) THEN
+  IF( ll>=2 ) THEN
     fac = 1.0
     DO i = 3, llp1
       fac = fac*(i-1)
       Tc(i) = Tc(i)/fac
     END DO
   END IF
-  IF ( L<0 ) THEN
+  IF( L<0 ) THEN
     nr = llp1/2
     llp2 = ll + 2
     DO i = 1, nr

@@ -1,7 +1,6 @@
 !** MPADD2
 SUBROUTINE MPADD2(X,Y,Z,Y1,Trunc)
-  !>
-  !  Subsidiary to DQDOTA and DQDOTI
+  !> Subsidiary to DQDOTA and DQDOTI
   !***
   ! **Library:**   SLATEC
   !***
@@ -16,7 +15,7 @@ SUBROUTINE MPADD2(X,Y,Z,Y1,Trunc)
   !  To force call by reference rather than value/result, Y1 is
   !  declared as an array, but only Y1(1) is ever used.
   !  Sets Z = X + Y1(1)*ABS(Y), where Y1(1) = +- Y(1).
-  !  If TRUNC .EQ. 0, R*-rounding is used;  otherwise, truncation.
+  !  If TRUNC = 0, R*-rounding is used;  otherwise, truncation.
   !  R*-rounding is defined in the Kuki and Cody reference.
   !
   !  The arguments X(*), Y(*), and Z(*) are all INTEGER arrays of size
@@ -57,30 +56,30 @@ SUBROUTINE MPADD2(X,Y,Z,Y1,Trunc)
   INTEGER :: X(30), Y(30), Z(30), Y1(30)
   INTEGER :: j, med, s, ed, rs, re
   !* FIRST EXECUTABLE STATEMENT  MPADD2
-  IF ( X(1)/=0 ) THEN
-    IF ( Y1(1)==0 ) GOTO 100
+  IF( X(1)/=0 ) THEN
+    IF( Y1(1)==0 ) GOTO 100
     ! COMPARE SIGNS
     s = X(1)*Y1(1)
-    IF ( ABS(s)<=1 ) THEN
+    IF( ABS(s)<=1 ) THEN
       ! COMPARE EXPONENTS
       ed = X(2) - Y(2)
       med = ABS(ed)
-      IF ( ed<0 ) THEN
-        ! HERE EXPONENT(Y) .GE. EXPONENT(X)
-        IF ( med<=t_com ) GOTO 200
-      ELSEIF ( ed==0 ) THEN
+      IF( ed<0 ) THEN
+        ! HERE EXPONENT(Y) >= EXPONENT(X)
+        IF( med<=t_com ) GOTO 200
+      ELSEIF( ed==0 ) THEN
         ! EXPONENTS EQUAL SO COMPARE SIGNS, THEN FRACTIONS IF NEC.
-        IF ( s>0 ) GOTO 200
+        IF( s>0 ) GOTO 200
         DO j = 1, t_com
-          IF ( X(j+2)<Y(j+2) ) GOTO 200
-          IF ( X(j+2)/=Y(j+2) ) GOTO 400
+          IF( X(j+2)<Y(j+2) ) GOTO 200
+          IF( X(j+2)/=Y(j+2) ) GOTO 400
         END DO
         ! RESULT IS ZERO
         Z(1) = 0
         RETURN
       ELSE
-        ! ABS(X) .GT. ABS(Y)
-        IF ( med<=t_com ) GOTO 400
+        ! ABS(X) > ABS(Y)
+        IF( med<=t_com ) GOTO 400
         GOTO 100
       END IF
     ELSE

@@ -1,8 +1,7 @@
 !** HWSCSP
 SUBROUTINE HWSCSP(Intl,Ts,Tf,M,Mbdcnd,Bdts,Bdtf,Rs,Rf,N,Nbdcnd,Bdrs,Bdrf,&
     Elmbda,F,Idimf,Pertrb,Ierror,W)
-  !>
-  !  Solve a finite difference approximation to the modified
+  !> Solve a finite difference approximation to the modified
   !            Helmholtz equation in spherical coordinates assuming
   !            axisymmetry  (no dependence on longitude).
   !***
@@ -49,7 +48,7 @@ SUBROUTINE HWSCSP(Intl,Ts,Tf,M,Mbdcnd,Bdts,Bdtf,Rs,Rf,N,Nbdcnd,Bdrs,Bdrf,&
   !              not repeated.
   !
   !     TS,TF
-  !       The range of THETA (colatitude), i.e., TS .LE. THETA .LE. TF.
+  !       The range of THETA (colatitude), i.e., TS <= THETA <= TF.
   !       TS must be less than TF.  TS and TF are in radians.  A TS of
   !       zero corresponds to the north pole and a TF of PI corresponds
   !       to the south pole.
@@ -118,7 +117,7 @@ SUBROUTINE HWSCSP(Intl,Ts,Tf,M,Mbdcnd,Bdts,Bdtf,Rs,Rf,N,Nbdcnd,Bdrs,Bdrf,&
   !       When MBDCND has any other value, BDTF is a dummy variable.
   !
   !     RS,RF
-  !       The range of R, i.e., RS .LE. R .LT. RF.  RS must be less than
+  !       The range of R, i.e., RS <= R < RF.  RS must be less than
   !       RF.  RS must be non-negative.
   !
   !       N
@@ -171,7 +170,7 @@ SUBROUTINE HWSCSP(Intl,Ts,Tf,M,Mbdcnd,Bdts,Bdtf,Rs,Rf,N,Nbdcnd,Bdrs,Bdrf,&
   !
   !     ELMBDA
   !       The constant LAMBDA in the Helmholtz equation.  If
-  !       LAMBDA .GT. 0, a solution may not exist.  However, HWSCSP will
+  !       LAMBDA > 0, a solution may not exist.  However, HWSCSP will
   !       attempt to find a solution.  If NBDCND = 5 or 6 or
   !       MBDCND = 5,6,7,8, or 9, ELMBDA must be zero.
   !
@@ -259,24 +258,24 @@ SUBROUTINE HWSCSP(Intl,Ts,Tf,M,Mbdcnd,Bdts,Bdtf,Rs,Rf,N,Nbdcnd,Bdrs,Bdrf,&
   !       An error flag that indicates invalid input parameters.  Except
   !       for numbers 0 and 10, a solution is not attempted.
   !
-  !       = 1  TS.LT.0. or TF.GT.PI
-  !       = 2  TS.GE.TF
-  !       = 3  M.LT.5
-  !       = 4  MBDCND.LT.1 or MBDCND.GT.9
-  !       = 5  RS.LT.0
-  !       = 6  RS.GE.RF
-  !       = 7  N.LT.5
-  !       = 8  NBDCND.LT.1 or NBDCND.GT.6
-  !       = 9  ELMBDA.GT.0
-  !       = 10 IDIMF.LT.M+1
-  !       = 11 ELMBDA.NE.0 and MBDCND.GE.5
-  !       = 12 ELMBDA.NE.0 and NBDCND equals 5 or 6
-  !       = 13 MBDCND equals 5,6 or 9 and TS.NE.0
-  !       = 14 MBDCND.GE.7 and TF.NE.PI
-  !       = 15 TS.EQ.0 and MBDCND equals 3,4 or 8
-  !       = 16 TF.EQ.PI and MBDCND equals 2,3 or 6
-  !       = 17 NBDCND.GE.5 and RS.NE.0
-  !       = 18 NBDCND.GE.5 and MBDCND equals 1,2,4,5 or 7
+  !       = 1  TS<0. or TF>PI
+  !       = 2  TS>=TF
+  !       = 3  M<5
+  !       = 4  MBDCND<1 or MBDCND>9
+  !       = 5  RS<0
+  !       = 6  RS>=RF
+  !       = 7  N<5
+  !       = 8  NBDCND<1 or NBDCND>6
+  !       = 9  ELMBDA>0
+  !       = 10 IDIMF<M+1
+  !       = 11 ELMBDA/=0 and MBDCND>=5
+  !       = 12 ELMBDA/=0 and NBDCND equals 5 or 6
+  !       = 13 MBDCND equals 5,6 or 9 and TS/=0
+  !       = 14 MBDCND>=7 and TF/=PI
+  !       = 15 TS=0 and MBDCND equals 3,4 or 8
+  !       = 16 TF=PI and MBDCND equals 2,3 or 6
+  !       = 17 NBDCND>=5 and RS/=0
+  !       = 18 NBDCND>=5 and MBDCND equals 1,2,4,5 or 7
   !
   !       Since this is the only means of indicating a possibly incorrect
   !       call to HWSCSP, the user should test IERROR after a call.
@@ -360,26 +359,26 @@ SUBROUTINE HWSCSP(Intl,Ts,Tf,M,Mbdcnd,Bdts,Bdtf,Rs,Rf,N,Nbdcnd,Bdrs,Bdrf,&
   REAL(SP), PARAMETER :: pi = 3.14159265358979
   !* FIRST EXECUTABLE STATEMENT  HWSCSP
   Ierror = 0
-  IF ( Ts<0..OR.Tf>pi ) Ierror = 1
-  IF ( Ts>=Tf ) Ierror = 2
-  IF ( M<5 ) Ierror = 3
-  IF ( Mbdcnd<1.OR.Mbdcnd>9 ) Ierror = 4
-  IF ( Rs<0. ) Ierror = 5
-  IF ( Rs>=Rf ) Ierror = 6
-  IF ( N<5 ) Ierror = 7
-  IF ( Nbdcnd<1.OR.Nbdcnd>6 ) Ierror = 8
-  IF ( Elmbda>0. ) Ierror = 9
-  IF ( Idimf<M+1 ) Ierror = 10
-  IF ( Elmbda/=0..AND.Mbdcnd>=5 ) Ierror = 11
-  IF ( Elmbda/=0..AND.(Nbdcnd==5.OR.Nbdcnd==6) ) Ierror = 12
-  IF ( (Mbdcnd==5.OR.Mbdcnd==6.OR.Mbdcnd==9).AND.Ts/=0. ) Ierror = 13
-  IF ( Mbdcnd>=7.AND.Tf/=pi ) Ierror = 14
-  IF ( Ts==0..AND.(Mbdcnd==4.OR.Mbdcnd==8.OR.Mbdcnd==3) ) Ierror = 15
-  IF ( Tf==pi.AND.(Mbdcnd==2.OR.Mbdcnd==3.OR.Mbdcnd==6) ) Ierror = 16
-  IF ( Nbdcnd>=5.AND.Rs/=0. ) Ierror = 17
-  IF ( Nbdcnd>=5.AND.(Mbdcnd==1.OR.Mbdcnd==2.OR.Mbdcnd==5.OR.Mbdcnd==7) )&
+  IF( Ts<0. .OR. Tf>pi ) Ierror = 1
+  IF( Ts>=Tf ) Ierror = 2
+  IF( M<5 ) Ierror = 3
+  IF( Mbdcnd<1 .OR. Mbdcnd>9 ) Ierror = 4
+  IF( Rs<0. ) Ierror = 5
+  IF( Rs>=Rf ) Ierror = 6
+  IF( N<5 ) Ierror = 7
+  IF( Nbdcnd<1 .OR. Nbdcnd>6 ) Ierror = 8
+  IF( Elmbda>0. ) Ierror = 9
+  IF( Idimf<M+1 ) Ierror = 10
+  IF( Elmbda/=0. .AND. Mbdcnd>=5 ) Ierror = 11
+  IF( Elmbda/=0. .AND. (Nbdcnd==5 .OR. Nbdcnd==6) ) Ierror = 12
+  IF( (Mbdcnd==5 .OR. Mbdcnd==6 .OR. Mbdcnd==9) .AND. Ts/=0. ) Ierror = 13
+  IF( Mbdcnd>=7 .AND. Tf/=pi ) Ierror = 14
+  IF( Ts==0. .AND. (Mbdcnd==4 .OR. Mbdcnd==8 .OR. Mbdcnd==3) ) Ierror = 15
+  IF( Tf==pi .AND. (Mbdcnd==2 .OR. Mbdcnd==3 .OR. Mbdcnd==6) ) Ierror = 16
+  IF( Nbdcnd>=5 .AND. Rs/=0. ) Ierror = 17
+  IF( Nbdcnd>=5 .AND. (Mbdcnd==1 .OR. Mbdcnd==2 .OR. Mbdcnd==5 .OR. Mbdcnd==7) )&
     Ierror = 18
-  IF ( Ierror/=0.AND.Ierror/=9 ) RETURN
+  IF( Ierror/=0 .AND. Ierror/=9 ) RETURN
   nck = N
   SELECT CASE (Nbdcnd)
     CASE (2,4,6)
@@ -393,7 +392,7 @@ SUBROUTINE HWSCSP(Intl,Ts,Tf,M,Mbdcnd,Bdts,Bdtf,Rs,Rf,N,Nbdcnd,Bdrs,Bdrf,&
   DO
     l = l + l
     k = k + 1
-    IF ( nck<=l ) THEN
+    IF( nck<=l ) THEN
       l = l + l
       np1 = N + 1
       mp1 = M + 1

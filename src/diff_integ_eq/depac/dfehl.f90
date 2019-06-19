@@ -1,7 +1,6 @@
 !** DFEHL
 SUBROUTINE DFEHL(DF,Neq,T,Y,H,Yp,F1,F2,F3,F4,F5,Ys)
-  !>
-  !  Subsidiary to DDERKF
+  !> Subsidiary to DDERKF
   !***
   ! **Library:**   SLATEC
   !***

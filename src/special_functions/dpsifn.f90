@@ -1,7 +1,6 @@
 !** DPSIFN
 SUBROUTINE DPSIFN(X,N,Kode,M,Ans,Nz,Ierr)
-  !>
-  !  Compute derivatives of the Psi function.
+  !> Compute derivatives of the Psi function.
   !***
   ! **Library:**   SLATEC
   !***
@@ -44,8 +43,8 @@ SUBROUTINE DPSIFN(X,N,Kode,M,Ans,Nz,Ierr)
   !                   ANS = -PSI(X)
   !
   !     Input      X is DOUBLE PRECISION
-  !           X      - Argument, X .gt. 0.0D0
-  !           N      - First member of the sequence, 0 .le. N .le. 100
+  !           X      - Argument, X > 0.0D0
+  !           N      - First member of the sequence, 0 <= N <= 100
   !                    N=0 gives ANS(1) = -PSI(X)       for KODE=1
   !                                       -PSI(X)+LN(X) for KODE=2
   !           KODE   - Selection parameter
@@ -54,15 +53,15 @@ SUBROUTINE DPSIFN(X,N,Kode,M,Ans,Nz,Ierr)
   !                    KODE=2 returns scaled derivatives of the PSI
   !                    function EXCEPT when N=0. In this case,
   !                    ANS(1) = -PSI(X) + LN(X) is returned.
-  !           M      - Number of members of the sequence, M.ge.1
+  !           M      - Number of members of the sequence, M>=1
   !
   !    Output     ANS is DOUBLE PRECISION
   !           ANS    - A vector of length at least M whose first M
   !                    components contain the sequence of derivatives
   !                    scaled according to KODE.
   !           NZ     - Underflow flag
-  !                    NZ.eq.0, A normal return
-  !                    NZ.ne.0, Underflow, last NZ components of ANS are
+  !                    NZ=0, A normal return
+  !                    NZ/=0, Underflow, last NZ components of ANS are
   !                             set to zero, ANS(M-K+1)=0.0, K=1,...,NZ
   !           IERR   - Error flag
   !                    IERR=0, A normal return, computation completed
@@ -81,7 +80,7 @@ SUBROUTINE DPSIFN(X,N,Kode,M,Ans,Nz,Ierr)
   !- Long Description:
   !
   !         The basic method of evaluation is the asymptotic expansion
-  !         for large X.ge.XMIN followed by backward recursion on a two
+  !         for large X>=XMIN followed by backward recursion on a two
   !         term recursion relation
   !
   !                  W(X+1) + X**(-N-1) = W(X).
@@ -137,11 +136,11 @@ SUBROUTINE DPSIFN(X,N,Kode,M,Ans,Nz,Ierr)
   !* FIRST EXECUTABLE STATEMENT  DPSIFN
   Ierr = 0
   Nz = 0
-  IF ( X<=0.0D0 ) Ierr = 1
-  IF ( N<0 ) Ierr = 1
-  IF ( Kode<1.OR.Kode>2 ) Ierr = 1
-  IF ( M<1 ) Ierr = 1
-  IF ( Ierr/=0 ) RETURN
+  IF( X<=0.0D0 ) Ierr = 1
+  IF( N<0 ) Ierr = 1
+  IF( Kode<1 .OR. Kode>2 ) Ierr = 1
+  IF( M<1 ) Ierr = 1
+  IF( Ierr/=0 ) RETURN
   mm = M
   nx = MIN(-I1MACH(15),I1MACH(16))
   r1m5 = D1MACH(5)
@@ -158,21 +157,21 @@ SUBROUTINE DPSIFN(X,N,Kode,M,Ans,Nz,Ierr)
   !-----------------------------------------------------------------------
   !     OVERFLOW AND UNDERFLOW TEST FOR SMALL AND LARGE X
   !-----------------------------------------------------------------------
-  IF ( ABS(t)<=elim ) THEN
-    IF ( X<wdtol ) THEN
+  IF( ABS(t)<=elim ) THEN
+    IF( X<wdtol ) THEN
       !-----------------------------------------------------------------------
-      !     SMALL X.LT.UNIT ROUND OFF
+      !     SMALL X<UNIT ROUND OFF
       !-----------------------------------------------------------------------
       Ans(1) = X**(-N-1)
-      IF ( mm/=1 ) THEN
+      IF( mm/=1 ) THEN
         k = 1
         DO i = 2, mm
           Ans(k+1) = Ans(k)/X
           k = k + 1
         END DO
       END IF
-      IF ( N/=0 ) RETURN
-      IF ( Kode==2 ) Ans(1) = Ans(1) + xln
+      IF( N/=0 ) RETURN
+      IF( Kode==2 ) Ans(1) = Ans(1) + xln
       RETURN
     ELSE
       !-----------------------------------------------------------------------
@@ -186,16 +185,16 @@ SUBROUTINE DPSIFN(X,N,Kode,M,Ans,Nz,Ierr)
       xm = yint + slope*fn
       mx = INT(xm) + 1
       xmin = mx
-      IF ( N/=0 ) THEN
+      IF( N/=0 ) THEN
         xm = -2.302D0*rln - MIN(0.0D0,xln)
         arg = xm/N
         arg = MIN(0.0D0,arg)
         eps = EXP(arg)
         xm = 1.0D0 - eps
-        IF ( ABS(arg)<1.0D-3 ) xm = -arg
+        IF( ABS(arg)<1.0D-3 ) xm = -arg
         fln = X*xm/eps
         xm = xmin - X
-        IF ( xm>7.0D0.AND.fln<15.0D0 ) THEN
+        IF( xm>7.0D0 .AND. fln<15.0D0 ) THEN
           !-----------------------------------------------------------------------
           !     COMPUTE BY SERIES (X+K)**(-(N+1)), K=0,1,2,...
           !-----------------------------------------------------------------------
@@ -211,12 +210,12 @@ SUBROUTINE DPSIFN(X,N,Kode,M,Ans,Nz,Ierr)
             s = s + trm(i)
           END DO
           Ans(1) = s
-          IF ( N==0 ) THEN
-            IF ( Kode==2 ) Ans(1) = s + xln
+          IF( N==0 ) THEN
+            IF( Kode==2 ) Ans(1) = s + xln
           END IF
-          IF ( mm==1 ) RETURN
+          IF( mm==1 ) RETURN
           !-----------------------------------------------------------------------
-          !     GENERATE HIGHER DERIVATIVES, J.GT.N
+          !     GENERATE HIGHER DERIVATIVES, J>N
           !-----------------------------------------------------------------------
           tol = wdtol/5.0D0
           DO j = 2, mm
@@ -228,7 +227,7 @@ SUBROUTINE DPSIFN(X,N,Kode,M,Ans,Nz,Ierr)
               den = den + 1.0D0
               trm(i) = trm(i)/den
               s = s + trm(i)
-              IF ( trm(i)<tols ) EXIT
+              IF( trm(i)<tols ) EXIT
             END DO
             Ans(j) = s
           END DO
@@ -238,7 +237,7 @@ SUBROUTINE DPSIFN(X,N,Kode,M,Ans,Nz,Ierr)
       xdmy = X
       xdmln = xln
       xinc = 0.0D0
-      IF ( X<xmin ) THEN
+      IF( X<xmin ) THEN
         nx = INT(X)
         xinc = xmin - nx
         xdmy = X + xinc
@@ -251,39 +250,39 @@ SUBROUTINE DPSIFN(X,N,Kode,M,Ans,Nz,Ierr)
       t1 = xdmln + xdmln
       t2 = t + xdmln
       tk = MAX(ABS(t),ABS(t1),ABS(t2))
-      IF ( tk>elim ) GOTO 200
+      IF( tk>elim ) GOTO 200
       tss = EXP(-t)
       tt = 0.5D0/xdmy
       t1 = tt
       tst = wdtol*tt
-      IF ( nn/=0 ) t1 = tt + 1.0D0/fn
+      IF( nn/=0 ) t1 = tt + 1.0D0/fn
       rxsq = 1.0D0/(xdmy*xdmy)
       ta = 0.5D0*rxsq
       t = (fn+1)*ta
       s = t*b(3)
-      IF ( ABS(s)>=tst ) THEN
+      IF( ABS(s)>=tst ) THEN
         tk = 2.0D0
         DO k = 4, 22
           t = t*((tk+fn+1)/(tk+1.0D0))*((tk+fn)/(tk+2.0D0))*rxsq
           trm(k) = t*b(k)
-          IF ( ABS(trm(k))<tst ) EXIT
+          IF( ABS(trm(k))<tst ) EXIT
           s = s + trm(k)
           tk = tk + 2.0D0
         END DO
       END IF
       s = (s+t1)*tss
-      IF ( xinc/=0.0D0 ) THEN
+      IF( xinc/=0.0D0 ) THEN
         !-----------------------------------------------------------------------
         !     BACKWARD RECUR FROM XDMY TO X
         !-----------------------------------------------------------------------
         nx = INT(xinc)
         np = nn + 1
-        IF ( nx>nmax ) THEN
+        IF( nx>nmax ) THEN
           Nz = 0
           Ierr = 3
           RETURN
         ELSE
-          IF ( nn==0 ) GOTO 120
+          IF( nn==0 ) GOTO 120
           xm = xinc - 1.0D0
           fx = X + xm
           !-----------------------------------------------------------------------
@@ -298,30 +297,30 @@ SUBROUTINE DPSIFN(X,N,Kode,M,Ans,Nz,Ierr)
         END IF
       END IF
       Ans(mm) = s
-      IF ( fn==0 ) GOTO 150
+      IF( fn==0 ) GOTO 150
       !-----------------------------------------------------------------------
-      !     GENERATE LOWER DERIVATIVES, J.LT.N+MM-1
+      !     GENERATE LOWER DERIVATIVES, J<N+MM-1
       !-----------------------------------------------------------------------
-      IF ( mm==1 ) RETURN
+      IF( mm==1 ) RETURN
       DO j = 2, mm
         fn = fn - 1
         tss = tss*xdmy
         t1 = tt
-        IF ( fn/=0 ) t1 = tt + 1.0D0/fn
+        IF( fn/=0 ) t1 = tt + 1.0D0/fn
         t = (fn+1)*ta
         s = t*b(3)
-        IF ( ABS(s)>=tst ) THEN
+        IF( ABS(s)>=tst ) THEN
           tk = 4 + fn
           DO k = 4, 22
             trm(k) = trm(k)*(fn+1)/tk
-            IF ( ABS(trm(k))<tst ) EXIT
+            IF( ABS(trm(k))<tst ) EXIT
             s = s + trm(k)
             tk = tk + 2.0D0
           END DO
         END IF
         s = (s+t1)*tss
-        IF ( xinc/=0.0D0 ) THEN
-          IF ( fn==0 ) GOTO 120
+        IF( xinc/=0.0D0 ) THEN
+          IF( fn==0 ) GOTO 120
           xm = xinc - 1.0D0
           fx = X + xm
           DO i = 1, nx
@@ -333,7 +332,7 @@ SUBROUTINE DPSIFN(X,N,Kode,M,Ans,Nz,Ierr)
         END IF
         mx = mm - j + 1
         Ans(mx) = s
-        IF ( fn==0 ) GOTO 150
+        IF( fn==0 ) GOTO 150
       END DO
       RETURN
       !-----------------------------------------------------------------------
@@ -345,8 +344,8 @@ SUBROUTINE DPSIFN(X,N,Kode,M,Ans,Nz,Ierr)
       END DO
     END IF
     150 CONTINUE
-    IF ( Kode==2 ) THEN
-      IF ( xdmy==X ) RETURN
+    IF( Kode==2 ) THEN
+      IF( xdmy==X ) RETURN
       xq = xdmy/X
       Ans(1) = s - LOG(xq)
       RETURN
@@ -354,7 +353,7 @@ SUBROUTINE DPSIFN(X,N,Kode,M,Ans,Nz,Ierr)
       Ans(1) = s - xdmln
       RETURN
     END IF
-  ELSEIF ( t<=0.0D0 ) THEN
+  ELSEIF( t<=0.0D0 ) THEN
     Nz = 0
     Ierr = 2
     RETURN
@@ -362,7 +361,7 @@ SUBROUTINE DPSIFN(X,N,Kode,M,Ans,Nz,Ierr)
   200  Nz = Nz + 1
   Ans(mm) = 0.0D0
   mm = mm - 1
-  IF ( mm==0 ) RETURN
+  IF( mm==0 ) RETURN
   GOTO 100
   RETURN
 END SUBROUTINE DPSIFN

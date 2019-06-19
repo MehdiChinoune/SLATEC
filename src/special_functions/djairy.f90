@@ -1,7 +1,6 @@
 !** DJAIRY
 SUBROUTINE DJAIRY(X,Rx,C,Ai,Dai)
-  !>
-  !  Subsidiary to DBESJ and DBESY
+  !> Subsidiary to DBESJ and DBESY
   !***
   ! **Library:**   SLATEC
   !***
@@ -41,7 +40,7 @@ SUBROUTINE DJAIRY(X,Rx,C,Ai,Dai)
   !   910408  Updated the AUTHOR section.  (WRB)
 
   !
-  INTEGER i, j
+  INTEGER :: i, j
   REAL(DP) :: Ai, C, ccv, cv, Dai, ec, e1, e2, f1, f2, rtrx, Rx, scv, t, &
   temp1, temp2, tt, X
   INTEGER, PARAMETER :: n1 = 14, n2 = 23, n3 = 19, n4 = 15
@@ -141,9 +140,9 @@ SUBROUTINE DJAIRY(X,Rx,C,Ai,Dai)
     -4.90190576608710D-14, -1.77253430678112D-14, 5.55950610442662D-15, &
     -7.11793337579530D-16 ]
   !* FIRST EXECUTABLE STATEMENT  DJAIRY
-  IF ( X<0.0D0 ) THEN
+  IF( X<0.0D0 ) THEN
     !
-    IF ( C>5.0D0 ) THEN
+    IF( C>5.0D0 ) THEN
       !
       t = 10.0D0/C - 1.0D0
       tt = t + t
@@ -189,7 +188,7 @@ SUBROUTINE DJAIRY(X,Rx,C,Ai,Dai)
       Dai = (temp1*e1-temp2*e2)*rtrx
       RETURN
     END IF
-  ELSEIF ( C>5.0D0 ) THEN
+  ELSEIF( C>5.0D0 ) THEN
     !
     t = 10.0D0/C - 1.0D0
     tt = t + t
@@ -216,7 +215,7 @@ SUBROUTINE DJAIRY(X,Rx,C,Ai,Dai)
     END DO
     Dai = -rtrx*ec*(t*f1-f2+dak3(1))
     RETURN
-  ELSEIF ( X>1.20D0 ) THEN
+  ELSEIF( X>1.20D0 ) THEN
     !
     t = (X+X-con2)*con3
     tt = t + t

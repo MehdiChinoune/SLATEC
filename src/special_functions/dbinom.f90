@@ -1,7 +1,6 @@
 !** DBINOM
 REAL(DP) FUNCTION DBINOM(N,M)
-  !>
-  !  Compute the binomial coefficients.
+  !> Compute the binomial coefficients.
   !***
   ! **Library:**   SLATEC (FNLIB)
   !***
@@ -38,28 +37,28 @@ REAL(DP) FUNCTION DBINOM(N,M)
   REAL(DP), PARAMETER :: sq2pil = 0.91893853320467274178032973640562D0
   !* FIRST EXECUTABLE STATEMENT  DBINOM
   !
-  IF ( N<0.OR.M<0 ) CALL XERMSG('DBINOM','N OR M LT ZERO',1,2)
-  IF ( N<M ) CALL XERMSG('DBINOM','N LT M',2,2)
+  IF( N<0 .OR. M<0 ) CALL XERMSG('DBINOM','N OR M LT ZERO',1,2)
+  IF( N<M ) CALL XERMSG('DBINOM','N LT M',2,2)
   !
   k = MIN(M,N-M)
-  IF ( k<=20 ) THEN
-    IF ( k*LOG(AMAX0(N,1))<=bilnmx ) THEN
+  IF( k<=20 ) THEN
+    IF( k*LOG(AMAX0(N,1))<=bilnmx ) THEN
       !
       DBINOM = 1.0D0
-      IF ( k==0 ) RETURN
+      IF( k==0 ) RETURN
       DO i = 1, k
         xn = N - i + 1
         xk = i
         DBINOM = DBINOM*(xn/xk)
       END DO
       !
-      IF ( DBINOM<fintmx ) DBINOM = AINT(DBINOM+0.5D0)
+      IF( DBINOM<fintmx ) DBINOM = AINT(DBINOM+0.5D0)
       RETURN
     END IF
   END IF
   !
-  ! IF K.LT.9, APPROX IS NOT VALID AND ANSWER IS CLOSE TO THE OVERFLOW LIM
-  IF ( k<9 ) CALL XERMSG('DBINOM','RESULT OVERFLOWS BECAUSE N AND/OR M TOO BIG',3,2)
+  ! IF K<9, APPROX IS NOT VALID AND ANSWER IS CLOSE TO THE OVERFLOW LIM
+  IF( k<9 ) CALL XERMSG('DBINOM','RESULT OVERFLOWS BECAUSE N AND/OR M TOO BIG',3,2)
   !
   xn = N + 1
   xk = k + 1
@@ -69,10 +68,10 @@ REAL(DP) FUNCTION DBINOM(N,M)
   DBINOM = xk*LOG(xnk/xk) - xn*DLNREL(-(xk-1.0D0)/xn) - 0.5D0*LOG(xn*xnk/xk)&
     + 1.0D0 - sq2pil + corr
   !
-  IF ( DBINOM>bilnmx ) CALL XERMSG('DBINOM',&
+  IF( DBINOM>bilnmx ) CALL XERMSG('DBINOM',&
     'RESULT OVERFLOWS BECAUSE N AND/OR M TOO BIG',3,2)
   !
   DBINOM = EXP(DBINOM)
-  IF ( DBINOM<fintmx ) DBINOM = AINT(DBINOM+0.5D0)
+  IF( DBINOM<fintmx ) DBINOM = AINT(DBINOM+0.5D0)
   !
 END FUNCTION DBINOM

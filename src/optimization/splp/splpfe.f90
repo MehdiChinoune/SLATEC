@@ -2,8 +2,7 @@
 SUBROUTINE SPLPFE(Mrelas,Nvars,Lmx,Lbm,Ienter,Ibasis,Imat,Ibrc,Ipr,Iwr,&
     Ind,Ibb,Erdnrm,Eps,Gg,Dulnrm,Dirnrm,Amat,Basmat,Csc,Wr,&
     Ww,Bl,Bu,Rz,Rg,Colnrm,Duals,Found)
-  !>
-  !  Subsidiary to SPLP
+  !> Subsidiary to SPLP
   !***
   ! **Library:**   SLATEC
   !***
@@ -56,38 +55,38 @@ SUBROUTINE SPLPFE(Mrelas,Nvars,Lmx,Lbm,Ienter,Ibasis,Imat,Ibrc,Ipr,Iwr,&
   Found = .FALSE.
   i = Mrelas + 1
   n20002 = Mrelas + Nvars
-  DO WHILE ( (n20002-i)>=0 )
+  DO WHILE( (n20002-i)>=0 )
     j = Ibasis(i)
     !
-    !     IF J=IBASIS(I) .LT. 0 THEN THE VARIABLE LEFT AT A ZERO LEVEL
+    !     IF J=IBASIS(I) < 0 THEN THE VARIABLE LEFT AT A ZERO LEVEL
     !     AND IS NOT CONSIDERED AS A CANDIDATE TO ENTER.
-    IF ( j>0 ) THEN
+    IF( j>0 ) THEN
       !
       !     DO NOT CONSIDER VARIABLES CORRESPONDING TO UNBOUNDED STEP LENGTHS.
-      IF ( Ibb(j)/=0 ) THEN
+      IF( Ibb(j)/=0 ) THEN
         !
         !     IF A VARIABLE CORRESPONDS TO AN EQUATION(IND=3 AND BL=BU),
         !     THEN DO NOT CONSIDER IT AS A CANDIDATE TO ENTER.
-        IF ( Ind(j)==3 ) THEN
-          IF ( (Bu(j)-Bl(j))<=Eps*(ABS(Bl(j))+ABS(Bu(j))) ) GOTO 50
+        IF( Ind(j)==3 ) THEN
+          IF( (Bu(j)-Bl(j))<=Eps*(ABS(Bl(j))+ABS(Bu(j))) ) GOTO 50
         END IF
         rcost = Rz(j)
         !
         !     IF VARIABLE IS AT UPPER BOUND IT CAN ONLY DECREASE.  THIS
         !     ACCOUNTS FOR THE POSSIBLE CHANGE OF SIGN.
-        IF ( MOD(Ibb(j),2)==0 ) rcost = -rcost
+        IF( MOD(Ibb(j),2)==0 ) rcost = -rcost
         !
         !     IF THE VARIABLE IS FREE, USE THE NEGATIVE MAGNITUDE OF THE
         !     REDUCED COST FOR THAT VARIABLE.
-        IF ( Ind(j)==4 ) rcost = -ABS(rcost)
+        IF( Ind(j)==4 ) rcost = -ABS(rcost)
         cnorm = one
-        IF ( j<=Nvars ) cnorm = Colnrm(j)
+        IF( j<=Nvars ) cnorm = Colnrm(j)
         !
         !     TEST FOR NEGATIVITY OF REDUCED COSTS.
-        IF ( rcost+Erdnrm*Dulnrm*cnorm<zero ) THEN
+        IF( rcost+Erdnrm*Dulnrm*cnorm<zero ) THEN
           Found = .TRUE.
           ratio = rcost**2/Rg(j)
-          IF ( ratio>rmax ) THEN
+          IF( ratio>rmax ) THEN
             rmax = ratio
             Ienter = i
           END IF
@@ -98,17 +97,17 @@ SUBROUTINE SPLPFE(Mrelas,Nvars,Lmx,Lbm,Ienter,Ibasis,Imat,Ibrc,Ipr,Iwr,&
   END DO
   !
   !     USE COL. CHOSEN TO COMPUTE SEARCH DIRECTION.
-  IF ( Found ) THEN
+  IF( Found ) THEN
     j = Ibasis(Ienter)
     Ww(1:Mrelas) = zero
-    IF ( j<=Nvars ) THEN
-      IF ( j/=1 ) THEN
+    IF( j<=Nvars ) THEN
+      IF( j/=1 ) THEN
         ilow = Imat(j+3) + 1
       ELSE
         ilow = Nvars + 5
       END IF
       il1 = IPLOC(ilow,Amat,Imat)
-      IF ( il1>=Lmx-1 ) THEN
+      IF( il1>=Lmx-1 ) THEN
         ilow = ilow + 2
         il1 = IPLOC(ilow,Amat,Imat)
       END IF
@@ -116,18 +115,18 @@ SUBROUTINE SPLPFE(Mrelas,Nvars,Lmx,Lbm,Ienter,Ibasis,Imat,Ibrc,Ipr,Iwr,&
       ihi = Imat(j+4) - (ilow-il1)
       DO
         iu1 = MIN(Lmx-2,ihi)
-        IF ( il1>iu1 ) EXIT
+        IF( il1>iu1 ) EXIT
         DO i = il1, iu1
           Ww(Imat(i)) = Amat(i)*Csc(j)
         END DO
-        IF ( ihi<=Lmx-2 ) EXIT
+        IF( ihi<=Lmx-2 ) EXIT
         ipage = ipage + 1
         key = 1
         CALL PRWPGE(key,ipage,lpg,Amat,Imat)
         il1 = Nvars + 5
         ihi = ihi - lpg
       END DO
-    ELSEIF ( Ind(j)/=2 ) THEN
+    ELSEIF( Ind(j)/=2 ) THEN
       Ww(j-Nvars) = -one
     ELSE
       Ww(j-Nvars) = one
@@ -140,10 +139,10 @@ SUBROUTINE SPLPFE(Mrelas,Nvars,Lmx,Lbm,Ienter,Ibasis,Imat,Ibrc,Ipr,Iwr,&
     !     THE SEARCH DIRECTION REQUIRES THE FOLLOWING SIGN CHANGE IF EITHER
     !     VARIABLE ENTERING IS AT ITS UPPER BOUND OR IS FREE AND HAS
     !     POSITIVE REDUCED COST.
-    IF ( MOD(Ibb(j),2)==0.OR.(Ind(j)==4.AND.Rz(j)>zero) ) THEN
+    IF( MOD(Ibb(j),2)==0 .OR. (Ind(j)==4 .AND. Rz(j)>zero) ) THEN
       i = 1
       n20050 = Mrelas
-      DO WHILE ( (n20050-i)>=0 )
+      DO WHILE( (n20050-i)>=0 )
         Ww(i) = -Ww(i)
         i = i + 1
       END DO

@@ -1,7 +1,6 @@
 !** RC3JM
 SUBROUTINE RC3JM(L1,L2,L3,M1,M2min,M2max,Thrcof,Ndim,Ier)
-  !>
-  !  Evaluate the 3j symbol g(M2) = (L1 L2   L3  )
+  !> Evaluate the 3j symbol g(M2) = (L1 L2   L3  )
   !                                           (M1 M2 -M1-M2)
   !            for all allowed values of M2, the other parameters
   !            being held fixed.
@@ -50,8 +49,8 @@ SUBROUTINE RC3JM(L1,L2,L3,M1,M2min,M2max,Thrcof,Ndim,Ier)
   !
   !     IER :OUT    Error flag.
   !                 IER=0 No errors.
-  !                 IER=1 Either L1.LT.ABS(M1) or L1+ABS(M1) non-integer.
-  !                 IER=2 ABS(L1-L2).LE.L3.LE.L1+L2 not satisfied.
+  !                 IER=1 Either L1<ABS(M1) or L1+ABS(M1) non-integer.
+  !                 IER=2 ABS(L1-L2)<=L3<=L1+L2 not satisfied.
   !                 IER=3 L1+L2+L3 not an integer.
   !                 IER=4 M2MAX-M2MIN not an integer.
   !                 IER=5 M2MAX less than M2MIN.
@@ -65,8 +64,8 @@ SUBROUTINE RC3JM(L1,L2,L3,M1,M2min,M2max,Thrcof,Ndim,Ier)
   !  subroutine are somewhat weaker. See, for example, Section 27.9 of
   !  Abramowitz and Stegun or Appendix C of Volume II of A. Messiah.
   !  The restrictions imposed by this subroutine are
-  !       1. L1.GE.ABS(M1) and L1+ABS(M1) must be an integer;
-  !       2. ABS(L1-L2).LE.L3.LE.L1+L2;
+  !       1. L1>=ABS(M1) and L1+ABS(M1) must be an integer;
+  !       2. ABS(L1-L2)<=L3<=L1+L2;
   !       3. L1+L2+L3 must be an integer;
   !       4. M2MAX-M2MIN must be an integer, where
   !          M2MAX=MIN(L2,L3-M1) and M2MIN=MAX(-L2,-L3-M1).
@@ -134,11 +133,11 @@ SUBROUTINE RC3JM(L1,L2,L3,M1,M2min,M2max,Thrcof,Ndim,Ier)
   !           D. W. Lozier.
   USE service, ONLY : XERMSG, R1MACH
   !
-  INTEGER Ndim, Ier
-  REAL(SP) L1, L2, L3, M1, M2min, M2max, Thrcof(Ndim)
+  INTEGER :: Ndim, Ier
+  REAL(SP) :: L1, L2, L3, M1, M2min, M2max, Thrcof(Ndim)
   !
-  INTEGER i, indexx, lstep, n, nfin, nfinp1, nfinp2, nfinp3, nlim, nstep2
-  REAL(SP) a1, a1s, c1, c1old, c2, cnorm, dv, hugee, m2, m3, newfac, oldfac, &
+  INTEGER :: i, indexx, lstep, n, nfin, nfinp1, nfinp2, nfinp3, nlim, nstep2
+  REAL(SP) :: a1, a1s, c1, c1old, c2, cnorm, dv, hugee, m2, m3, newfac, oldfac, &
     ratio, sign1, sign2, srhuge, srtiny, sum1, sum2, sumbac, sumfor, sumuni, &
     thresh, tinyy, x, x1, x2, x3, y, y1, y2, y3
   REAL(SP), PARAMETER ::  zero = 0.0, eps = 0.01, one = 1.0, two = 2.0
@@ -156,15 +155,15 @@ SUBROUTINE RC3JM(L1,L2,L3,M1,M2min,M2max,Thrcof,Ndim,Ier)
   !
   !
   !  Check error conditions 1, 2, and 3.
-  IF ( (L1-ABS(M1)+eps<zero).OR.(MOD(L1+ABS(M1)+eps,one)>=eps+eps) ) THEN
+  IF( (L1-ABS(M1)+eps<zero) .OR. (MOD(L1+ABS(M1)+eps,one)>=eps+eps) ) THEN
     Ier = 1
     CALL XERMSG('RC3JM','L1-ABS(M1) less than zero or L1+ABS(M1) not integer.',Ier,1)
     RETURN
-  ELSEIF ( (L1+L2-L3<-eps).OR.(L1-L2+L3<-eps).OR.(-L1+L2+L3<-eps) ) THEN
+  ELSEIF( (L1+L2-L3<-eps) .OR. (L1-L2+L3<-eps) .OR. (-L1+L2+L3<-eps) ) THEN
     Ier = 2
     CALL XERMSG('RC3JM','L1, L2, L3 do not satisfy triangular condition.',Ier,1)
     RETURN
-  ELSEIF ( MOD(L1+L2+L3+eps,one)>=eps+eps ) THEN
+  ELSEIF( MOD(L1+L2+L3+eps,one)>=eps+eps ) THEN
     Ier = 3
     CALL XERMSG('RC3JM','L1+L2+L3 not integer.',Ier,1)
     RETURN
@@ -176,17 +175,17 @@ SUBROUTINE RC3JM(L1,L2,L3,M1,M2min,M2max,Thrcof,Ndim,Ier)
   M2max = MIN(L2,L3-M1)
   !
   !  Check error condition 4.
-  IF ( MOD(M2max-M2min+eps,one)>=eps+eps ) THEN
+  IF( MOD(M2max-M2min+eps,one)>=eps+eps ) THEN
     Ier = 4
     CALL XERMSG('RC3JM','M2MAX-M2MIN not integer.',Ier,1)
     RETURN
   END IF
-  IF ( M2min<M2max-eps ) THEN
+  IF( M2min<M2max-eps ) THEN
     !
     !  This is reached in case that M1 and M2 take more than one value.
     !     MSCALE = 0
     nfin = INT(M2max-M2min+one+eps)
-    IF ( Ndim<nfin ) THEN
+    IF( Ndim<nfin ) THEN
       !
       !  Check error condition 6.
       Ier = 6
@@ -207,7 +206,7 @@ SUBROUTINE RC3JM(L1,L2,L3,M1,M2min,M2max,Thrcof,Ndim,Ier)
       !
       lstep = 1
     END IF
-  ELSEIF ( M2min<M2max+eps ) THEN
+  ELSEIF( M2min<M2max+eps ) THEN
     !
     !
     !  This is reached in case that M2 and M3 can take only one value.
@@ -236,10 +235,10 @@ SUBROUTINE RC3JM(L1,L2,L3,M1,M2min,M2max,Thrcof,Ndim,Ier)
       *(L3-m3-one)
     !
     !
-    IF ( lstep>2 ) c1old = ABS(c1)
+    IF( lstep>2 ) c1old = ABS(c1)
     c1 = -dv/newfac
     !
-    IF ( lstep>2 ) THEN
+    IF( lstep>2 ) THEN
       !
       !
       c2 = -oldfac/newfac
@@ -249,11 +248,11 @@ SUBROUTINE RC3JM(L1,L2,L3,M1,M2min,M2max,Thrcof,Ndim,Ier)
       Thrcof(lstep) = x
       sumfor = sum1
       sum1 = sum1 + x*x
-      IF ( lstep/=nfin ) THEN
+      IF( lstep/=nfin ) THEN
         !
         !  See if last unnormalized 3j coefficient exceeds SRHUGE
         !
-        IF ( ABS(x)>=srhuge ) THEN
+        IF( ABS(x)>=srhuge ) THEN
           !
           !  This is reached if last 3j coefficient larger than SRHUGE,
           !  so that the recursion series THRCOF(1), ..., THRCOF(LSTEP)
@@ -261,7 +260,7 @@ SUBROUTINE RC3JM(L1,L2,L3,M1,M2min,M2max,Thrcof,Ndim,Ier)
           !
           !     MSCALE = MSCALE + 1
           DO i = 1, lstep
-            IF ( ABS(Thrcof(i))<srtiny ) Thrcof(i) = zero
+            IF( ABS(Thrcof(i))<srtiny ) Thrcof(i) = zero
             Thrcof(i) = Thrcof(i)/srhuge
           END DO
           sum1 = sum1/hugee
@@ -275,7 +274,7 @@ SUBROUTINE RC3JM(L1,L2,L3,M1,M2min,M2max,Thrcof,Ndim,Ier)
         !  an increase of ABS(C1) is detected, the recursion direction is
         !  reversed.
         !
-        IF ( c1old>ABS(c1) ) CYCLE
+        IF( c1old>ABS(c1) ) CYCLE
       END IF
       !
       !
@@ -312,7 +311,7 @@ SUBROUTINE RC3JM(L1,L2,L3,M1,M2min,M2max,Thrcof,Ndim,Ier)
         dv = (L1+L2+L3+one)*(L2+L3-L1) - (L2-m2+one)*(L3+m3+one)&
           - (L2+m2-one)*(L3-m3-one)
         c1 = -dv/newfac
-        IF ( lstep>2 ) THEN
+        IF( lstep>2 ) THEN
           !
           c2 = -oldfac/newfac
           !
@@ -320,7 +319,7 @@ SUBROUTINE RC3JM(L1,L2,L3,M1,M2min,M2max,Thrcof,Ndim,Ier)
           !
           y = c1*Thrcof(nfinp2-lstep) + c2*Thrcof(nfinp3-lstep)
           !
-          IF ( lstep==nstep2 ) EXIT
+          IF( lstep==nstep2 ) EXIT
           !
           Thrcof(nfinp1-lstep) = y
           sumbac = sum2
@@ -329,7 +328,7 @@ SUBROUTINE RC3JM(L1,L2,L3,M1,M2min,M2max,Thrcof,Ndim,Ier)
           !
           !  See if last 3j coefficient exceeds SRHUGE
           !
-          IF ( ABS(y)>=srhuge ) THEN
+          IF( ABS(y)>=srhuge ) THEN
             !
             !  This is reached if last 3j coefficient larger than SRHUGE,
             !  so that the recursion series THRCOF(NFIN), ..., THRCOF(NFIN-LSTEP+1)
@@ -338,7 +337,7 @@ SUBROUTINE RC3JM(L1,L2,L3,M1,M2min,M2max,Thrcof,Ndim,Ier)
             !     MSCALE = MSCALE + 1
             DO i = 1, lstep
               indexx = nfin - i + 1
-              IF ( ABS(Thrcof(indexx))<srtiny ) Thrcof(indexx) = zero
+              IF( ABS(Thrcof(indexx))<srtiny ) Thrcof(indexx) = zero
               Thrcof(indexx) = Thrcof(indexx)/srhuge
             END DO
             sum2 = sum2/hugee
@@ -351,7 +350,7 @@ SUBROUTINE RC3JM(L1,L2,L3,M1,M2min,M2max,Thrcof,Ndim,Ier)
           !
           y = srtiny*c1
           Thrcof(nfin-1) = y
-          IF ( lstep==nstep2 ) EXIT
+          IF( lstep==nstep2 ) EXIT
           sumbac = sum2
           sum2 = sum2 + y*y
         END IF
@@ -373,7 +372,7 @@ SUBROUTINE RC3JM(L1,L2,L3,M1,M2min,M2max,Thrcof,Ndim,Ier)
       ratio = (x1*y1+x2*y2+x3*y3)/(x1*x1+x2*x2+x3*x3)
       nlim = nfin - nstep2 + 1
       !
-      IF ( ABS(ratio)<one ) THEN
+      IF( ABS(ratio)<one ) THEN
         !
         nlim = nlim + 1
         ratio = one/ratio
@@ -398,7 +397,7 @@ SUBROUTINE RC3JM(L1,L2,L3,M1,M2min,M2max,Thrcof,Ndim,Ier)
       x = srtiny*c1
       Thrcof(2) = x
       sum1 = sum1 + tinyy*c1*c1
-      IF ( lstep==nfin ) THEN
+      IF( lstep==nfin ) THEN
         !
         sumuni = sum1
         EXIT
@@ -415,13 +414,13 @@ SUBROUTINE RC3JM(L1,L2,L3,M1,M2min,M2max,Thrcof,Ndim,Ier)
   !
   sign1 = SIGN(one,Thrcof(nfin))
   sign2 = (-one)**INT(ABS(L2-L3-M1)+eps)
-  IF ( sign1*sign2<=0 ) cnorm = -cnorm
+  IF( sign1*sign2<=0 ) cnorm = -cnorm
   !
-  IF ( ABS(cnorm)<one ) THEN
+  IF( ABS(cnorm)<one ) THEN
     !
     thresh = tinyy/ABS(cnorm)
     DO n = 1, nfin
-      IF ( ABS(Thrcof(n))<thresh ) Thrcof(n) = zero
+      IF( ABS(Thrcof(n))<thresh ) Thrcof(n) = zero
       Thrcof(n) = cnorm*Thrcof(n)
     END DO
     RETURN

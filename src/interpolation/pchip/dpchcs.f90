@@ -1,7 +1,6 @@
 !** DPCHCS
 SUBROUTINE DPCHCS(Switch,N,H,Slope,D,Incfd,Ierr)
-  !>
-  !  Adjusts derivative values for DPCHIC
+  !> Adjusts derivative values for DPCHIC
   !***
   ! **Library:**   SLATEC (PCHIP)
   !***
@@ -32,7 +31,7 @@ SUBROUTINE DPCHCS(Switch,N,H,Slope,D,Incfd,Ierr)
   !     SWITCH -- (input) indicates the amount of control desired over
   !           local excursions from data.
   !
-  !     N -- (input) number of data points.  (assumes N.GT.2 .)
+  !     N -- (input) number of data points.  (assumes N>2 .)
   !
   !     H -- (input) real*8 array of interval lengths.
   !     SLOPE -- (input) real*8 array of data slopes.
@@ -98,12 +97,12 @@ SUBROUTINE DPCHCS(Switch,N,H,Slope,D,Incfd,Ierr)
   !
   !  DECLARE ARGUMENTS.
   !
-  INTEGER N, Incfd, Ierr
+  INTEGER :: N, Incfd, Ierr
   REAL(DP) :: Switch, H(N), Slope(N), D(Incfd,N)
   !
   !  DECLARE LOCAL VARIABLES.
   !
-  INTEGER i, indx, k, nless1
+  INTEGER :: i, indx, k, nless1
   REAL(DP) :: del(3), dext, dfloc, dfmx, fact, slmax, wtave(2)
   !
   !  INITIALIZE.
@@ -117,19 +116,19 @@ SUBROUTINE DPCHCS(Switch,N,H,Slope,D,Incfd,Ierr)
   !  LOOP OVER SEGMENTS.
   !
   DO i = 2, nless1
-    IF ( DPCHST(Slope(i-1),Slope(i))<0 ) THEN
+    IF( DPCHST(Slope(i-1),Slope(i))<0 ) THEN
       !             --------------------------
       !
       !
       !....... SLOPE SWITCHES MONOTONICITY AT I-TH POINT .....................
       !
       !           DO NOT CHANGE D IF 'UP-DOWN-UP'.
-      IF ( i>2 ) THEN
-        IF ( DPCHST(Slope(i-2),Slope(i))>zero ) CYCLE
+      IF( i>2 ) THEN
+        IF( DPCHST(Slope(i-2),Slope(i))>zero ) CYCLE
         !                   --------------------------
       END IF
-      IF ( i<nless1 ) THEN
-        IF ( DPCHST(Slope(i+1),Slope(i-1))>zero ) CYCLE
+      IF( i<nless1 ) THEN
+        IF( DPCHST(Slope(i+1),Slope(i-1))>zero ) CYCLE
         !                   ----------------------------
       END IF
       !
@@ -139,7 +138,7 @@ SUBROUTINE DPCHCS(Switch,N,H,Slope,D,Incfd,Ierr)
       !
       !   ....... DETERMINE WHICH INTERVAL CONTAINS THE EXTREMUM.
       !
-      IF ( DPCHST(dext,Slope(i-1))<0 ) THEN
+      IF( DPCHST(dext,Slope(i-1))<0 ) THEN
         !                -----------------------
         !
         !              DEXT AND SLOPE(I-1) HAVE OPPOSITE SIGNS --
@@ -147,8 +146,8 @@ SUBROUTINE DPCHCS(Switch,N,H,Slope,D,Incfd,Ierr)
         k = i - 1
         !              SET UP TO COMPUTE NEW VALUES FOR D(1,I-1) AND D(1,I).
         wtave(2) = dext
-        IF ( k>1 ) wtave(1) = DPCHSD(Slope(k-1),Slope(k),H(k-1),H(k))
-      ELSEIF ( DPCHST(dext,Slope(i-1))==0 ) THEN
+        IF( k>1 ) wtave(1) = DPCHSD(Slope(k-1),Slope(k),H(k-1),H(k))
+      ELSEIF( DPCHST(dext,Slope(i-1))==0 ) THEN
         CYCLE
       ELSE
         !
@@ -157,16 +156,16 @@ SUBROUTINE DPCHCS(Switch,N,H,Slope,D,Incfd,Ierr)
         k = i
         !              SET UP TO COMPUTE NEW VALUES FOR D(1,I) AND D(1,I+1).
         wtave(1) = dext
-        IF ( k<nless1 ) wtave(2) = DPCHSD(Slope(k),Slope(k+1),H(k),H(k+1))
+        IF( k<nless1 ) wtave(2) = DPCHSD(Slope(k),Slope(k+1),H(k),H(k+1))
       END IF
-    ELSEIF ( DPCHST(Slope(i-1),Slope(i))==0 ) THEN
+    ELSEIF( DPCHST(Slope(i-1),Slope(i))==0 ) THEN
       !
       !
       !....... AT LEAST ONE OF SLOPE(I-1) AND SLOPE(I) IS ZERO --
       !                     CHECK FOR FLAT-TOPPED PEAK .......................
       !
-      IF ( i==nless1 ) CYCLE
-      IF ( DPCHST(Slope(i-1),Slope(i+1))>=zero ) CYCLE
+      IF( i==nless1 ) CYCLE
+      IF( DPCHST(Slope(i-1),Slope(i+1))>=zero ) CYCLE
       !                -----------------------------
       !
       !           WE HAVE FLAT-TOPPED PEAK ON (X(I),X(I+1)).
@@ -182,19 +181,19 @@ SUBROUTINE DPCHCS(Switch,N,H,Slope,D,Incfd,Ierr)
     !....... AT THIS POINT WE HAVE DETERMINED THAT THERE WILL BE AN EXTREMUM
     !        ON (X(K),X(K+1)), WHERE K=I OR I-1, AND HAVE SET ARRAY WTAVE--
     !           WTAVE(1) IS A WEIGHTED AVERAGE OF SLOPE(K-1) AND SLOPE(K),
-    !                    IF K.GT.1
+    !                    IF K>1
     !           WTAVE(2) IS A WEIGHTED AVERAGE OF SLOPE(K) AND SLOPE(K+1),
-    !                    IF K.LT.N-1
+    !                    IF K<N-1
     !
     slmax = ABS(Slope(k))
-    IF ( k>1 ) slmax = MAX(slmax,ABS(Slope(k-1)))
-    IF ( k<nless1 ) slmax = MAX(slmax,ABS(Slope(k+1)))
+    IF( k>1 ) slmax = MAX(slmax,ABS(Slope(k-1)))
+    IF( k<nless1 ) slmax = MAX(slmax,ABS(Slope(k+1)))
     !
-    IF ( k>1 ) del(1) = Slope(k-1)/slmax
+    IF( k>1 ) del(1) = Slope(k-1)/slmax
     del(2) = Slope(k)/slmax
-    IF ( k<nless1 ) del(3) = Slope(k+1)/slmax
+    IF( k<nless1 ) del(3) = Slope(k+1)/slmax
     !
-    IF ( (k>1).AND.(k<nless1) ) THEN
+    IF( (k>1) .AND. (k<nless1) ) THEN
       !           NORMAL CASE -- EXTREMUM IS NOT IN A BOUNDARY INTERVAL.
       fact = fudge*ABS(del(3)*(del(1)-del(2))*(wtave(2)/slmax))
       D(1,k) = D(1,k) + MIN(fact,one)*(wtave(1)-D(1,k))
@@ -212,18 +211,18 @@ SUBROUTINE DPCHCS(Switch,N,H,Slope,D,Incfd,Ierr)
     !
     !....... ADJUST IF NECESSARY TO LIMIT EXCURSIONS FROM DATA.
     !
-    IF ( Switch>zero ) THEN
+    IF( Switch>zero ) THEN
       !
       dfloc = H(k)*ABS(Slope(k))
-      IF ( k>1 ) dfloc = MAX(dfloc,H(k-1)*ABS(Slope(k-1)))
-      IF ( k<nless1 ) dfloc = MAX(dfloc,H(k+1)*ABS(Slope(k+1)))
+      IF( k>1 ) dfloc = MAX(dfloc,H(k-1)*ABS(Slope(k-1)))
+      IF( k<nless1 ) dfloc = MAX(dfloc,H(k+1)*ABS(Slope(k+1)))
       dfmx = Switch*dfloc
       indx = i - k + 1
       !        INDX = 1 IF K=I, 2 IF K=I-1.
       !        ---------------------------------------------------------------
       CALL DPCHSW(dfmx,indx,D(1,k),D(1,k+1),H(k),Slope(k),Ierr)
       !        ---------------------------------------------------------------
-      IF ( Ierr/=0 ) RETURN
+      IF( Ierr/=0 ) RETURN
     END IF
     !
     !....... END OF SEGMENT LOOP.

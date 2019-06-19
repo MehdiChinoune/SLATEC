@@ -1,7 +1,6 @@
 !** ZACAI
 SUBROUTINE ZACAI(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Rl,Tol,Elim,Alim)
-  !>
-  !  Subsidiary to ZAIRY
+  !> Subsidiary to ZAIRY
   !***
   ! **Library:**   SLATEC
   !***
@@ -32,7 +31,7 @@ SUBROUTINE ZACAI(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Rl,Tol,Elim,Alim)
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
   USE service, ONLY : D1MACH
   !     COMPLEX CSGN,CSPN,C1,C2,Y,Z,ZN,CY
-  INTEGER inu, iuf, Kode, Mr, N, nn, nw, Nz
+  INTEGER :: inu, iuf, Kode, Mr, N, nn, nw, Nz
   REAL(DP) :: Alim, arg, ascle, az, csgnr, csgni, cspnr, cspni, &
     c1r, c1i, c2r, c2i, cyr(2), cyi(2), dfnu, Elim, fmr, &
     Fnu, Rl, sgn, Tol, yy, Yr(N), Yi(N), Zr, Zi, znr, zni
@@ -44,24 +43,24 @@ SUBROUTINE ZACAI(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Rl,Tol,Elim,Alim)
   az = ZABS(Zr,Zi)
   nn = N
   dfnu = Fnu + (N-1)
-  IF ( az<=2.0D0 ) THEN
+  IF( az<=2.0D0 ) THEN
     !-----------------------------------------------------------------------
     !     POWER SERIES FOR THE I FUNCTION
     !-----------------------------------------------------------------------
     CALL ZSERI(znr,zni,Fnu,Kode,nn,Yr,Yi,nw,Tol,Elim,Alim)
-  ELSEIF ( az*az*0.25D0>dfnu+1.0D0 ) THEN
-    IF ( az<Rl ) THEN
+  ELSEIF( az*az*0.25D0>dfnu+1.0D0 ) THEN
+    IF( az<Rl ) THEN
       !-----------------------------------------------------------------------
       !     MILLER ALGORITHM NORMALIZED BY THE SERIES FOR THE I FUNCTION
       !-----------------------------------------------------------------------
       CALL ZMLRI(znr,zni,Fnu,Kode,nn,Yr,Yi,nw,Tol)
-      IF ( nw<0 ) GOTO 100
+      IF( nw<0 ) GOTO 100
     ELSE
       !-----------------------------------------------------------------------
       !     ASYMPTOTIC EXPANSION FOR LARGE Z FOR THE I FUNCTION
       !-----------------------------------------------------------------------
       CALL ZASYI(znr,zni,Fnu,Kode,nn,Yr,Yi,nw,Rl,Tol,Elim,Alim)
-      IF ( nw<0 ) GOTO 100
+      IF( nw<0 ) GOTO 100
     END IF
   ELSE
     CALL ZSERI(znr,zni,Fnu,Kode,nn,Yr,Yi,nw,Tol,Elim,Alim)
@@ -70,12 +69,12 @@ SUBROUTINE ZACAI(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Rl,Tol,Elim,Alim)
   !     ANALYTIC CONTINUATION TO THE LEFT HALF PLANE FOR THE K FUNCTION
   !-----------------------------------------------------------------------
   CALL ZBKNU(znr,zni,Fnu,Kode,1,cyr,cyi,nw,Tol,Elim,Alim)
-  IF ( nw==0 ) THEN
+  IF( nw==0 ) THEN
     fmr = Mr
     sgn = -SIGN(pi,fmr)
     csgnr = 0.0D0
     csgni = sgn
-    IF ( Kode/=1 ) THEN
+    IF( Kode/=1 ) THEN
       yy = -zni
       csgnr = -csgni*SIN(yy)
       csgni = csgni*COS(yy)
@@ -88,7 +87,7 @@ SUBROUTINE ZACAI(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Rl,Tol,Elim,Alim)
     arg = (Fnu-inu)*sgn
     cspnr = COS(arg)
     cspni = SIN(arg)
-    IF ( MOD(inu,2)/=0 ) THEN
+    IF( MOD(inu,2)/=0 ) THEN
       cspnr = -cspnr
       cspni = -cspni
     END IF
@@ -96,7 +95,7 @@ SUBROUTINE ZACAI(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Rl,Tol,Elim,Alim)
     c1i = cyi(1)
     c2r = Yr(1)
     c2i = Yi(1)
-    IF ( Kode/=1 ) THEN
+    IF( Kode/=1 ) THEN
       iuf = 0
       ascle = 1.0D+3*D1MACH(1)/Tol
       CALL ZS1S2(znr,zni,c1r,c1i,c2r,c2i,nw,ascle,Alim,iuf)
@@ -107,5 +106,5 @@ SUBROUTINE ZACAI(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Rl,Tol,Elim,Alim)
     RETURN
   END IF
   100  Nz = -1
-  IF ( nw==(-2) ) Nz = -2
+  IF( nw==(-2) ) Nz = -2
 END SUBROUTINE ZACAI

@@ -1,7 +1,6 @@
 !** DORTH
 SUBROUTINE DORTH(Vnew,V,Hes,N,Ll,Ldhes,Kmp,Snormw)
-  !>
-  !  Internal routine for DGMRES.
+  !> Internal routine for DGMRES.
   !***
   ! **Library:**   SLATEC (SLAP)
   !***
@@ -42,7 +41,7 @@ SUBROUTINE DORTH(Vnew,V,Hes,N,Ll,Ldhes,Kmp,Snormw)
   !         orthogonal vectors V(*,1) to V(*,LL).
   ! HES    :INOUT    Double Precision HES(LDHES,LL)
   !         On input, an LL x LL upper Hessenberg matrix containing,
-  !         in HES(I,K), K.lt.LL, the scaled inner products of
+  !         in HES(I,K), K<LL, the scaled inner products of
   !         A*V(*,K) and V(*,i).
   !         On return, column LL of HES is filled in with
   !         the scaled inner products of A*V(*,LL) and V(*,i).
@@ -54,7 +53,7 @@ SUBROUTINE DORTH(Vnew,V,Hes,N,Ll,Ldhes,Kmp,Snormw)
   !         The leading dimension of the HES array.
   ! KMP    :IN       Integer
   !         The number of previous vectors the new vector VNEW
-  !         must be made orthogonal to (KMP .le. MAXL).
+  !         must be made orthogonal to (KMP <= MAXL).
   ! SNORMW :OUT      DOUBLE PRECISION
   !         Scalar containing the l-2 norm of VNEW.
   !
@@ -109,17 +108,17 @@ SUBROUTINE DORTH(Vnew,V,Hes,N,Ll,Ldhes,Kmp,Snormw)
   !         the dot products involved.
   !   -------------------------------------------------------------------
   Snormw = NORM2(Vnew(1:N))
-  IF ( vnrm+0.001D0*Snormw/=vnrm ) RETURN
+  IF( vnrm+0.001D0*Snormw/=vnrm ) RETURN
   sumdsq = 0
   DO i = i0, Ll
     tem = -DOT_PRODUCT(V(1:N,i),Vnew)
-    IF ( Hes(i,Ll)+0.001D0*tem/=Hes(i,Ll) ) THEN
+    IF( Hes(i,Ll)+0.001D0*tem/=Hes(i,Ll) ) THEN
       Hes(i,Ll) = Hes(i,Ll) - tem
       CALL DAXPY(N,tem,V(1,i),1,Vnew,1)
       sumdsq = sumdsq + tem**2
     END IF
   END DO
-  IF ( sumdsq==0.0D0 ) RETURN
+  IF( sumdsq==0.0D0 ) RETURN
   arg = MAX(0.0D0,Snormw**2-sumdsq)
   Snormw = SQRT(arg)
   !

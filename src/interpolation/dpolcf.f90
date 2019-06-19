@@ -1,7 +1,6 @@
 !** DPOLCF
 SUBROUTINE DPOLCF(Xx,N,X,C,D,Work)
-  !>
-  !  Compute the coefficients of the polynomial fit (including
+  !> Compute the coefficients of the polynomial fit (including
   !            Hermite polynomial fits) produced by a previous call to
   !            POLINT.
   !***
@@ -78,7 +77,7 @@ SUBROUTINE DPOLCF(Xx,N,X,C,D,Work)
   DO k = 1, N
     D(k) = C(k)
   END DO
-  IF ( N==1 ) RETURN
+  IF( N==1 ) RETURN
   Work(1) = 1.0D0
   pone = C(1)
   nm1 = N - 1
@@ -91,7 +90,7 @@ SUBROUTINE DPOLCF(Xx,N,X,C,D,Work)
     pone = ptwo
   END DO
   D(1) = ptwo
-  IF ( N==2 ) RETURN
+  IF( N==2 ) RETURN
   DO k = 2, nm1
     km1 = k - 1
     km2n = k - 2 + N

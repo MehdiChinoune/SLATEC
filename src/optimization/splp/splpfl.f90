@@ -1,8 +1,7 @@
 !** SPLPFL
 SUBROUTINE SPLPFL(Mrelas,Nvars,Ienter,Ileave,Ibasis,Ind,Theta,Dirnrm,&
     Rprnrm,Csc,Ww,Bl,Bu,Erp,Rprim,Primal,Finite,Zerolv)
-  !>
-  !  Subsidiary to SPLP
+  !> Subsidiary to SPLP
   !***
   ! **Library:**   SLATEC
   !***
@@ -50,9 +49,9 @@ SUBROUTINE SPLPFL(Mrelas,Nvars,Ienter,Ileave,Ibasis,Ind,Theta,Dirnrm,&
   !     BECAUSE OF AN UPPER BOUND.
   Finite = .FALSE.
   j = Ibasis(Ienter)
-  IF ( Ind(j)==3 ) THEN
+  IF( Ind(j)==3 ) THEN
     Theta = Bu(j) - Bl(j)
-    IF ( j<=Nvars ) Theta = Theta/Csc(j)
+    IF( j<=Nvars ) Theta = Theta/Csc(j)
     Finite = .TRUE.
     Ileave = Ienter
   END IF
@@ -61,45 +60,45 @@ SUBROUTINE SPLPFL(Mrelas,Nvars,Ienter,Ileave,Ibasis,Ind,Theta,Dirnrm,&
   !     LENGTH EVEN FURTHER.
   i = 1
   n20005 = Mrelas
-  DO WHILE ( (n20005-i)>=0 )
+  DO WHILE( (n20005-i)>=0 )
     j = Ibasis(i)
     !
     !     IF THIS IS A FREE VARIABLE, DO NOT USE IT TO
     !     RESTRICT THE STEP LENGTH.
-    IF ( Ind(j)==4 ) THEN
+    IF( Ind(j)==4 ) THEN
       i = i + 1
       !
       !     IF DIRECTION COMPONENT IS ABOUT ZERO, IGNORE IT FOR COMPUTING
       !     THE STEP LENGTH.
-    ELSEIF ( ABS(Ww(i))<=Dirnrm*Erp(i) ) THEN
+    ELSEIF( ABS(Ww(i))<=Dirnrm*Erp(i) ) THEN
       i = i + 1
-    ELSEIF ( Ww(i)<=zero ) THEN
+    ELSEIF( Ww(i)<=zero ) THEN
       !
       !     IF THE VARIABLE IS LESS THAN ITS LOWER BOUND, IT CAN
       !     INCREASE ONLY TO ITS LOWER BOUND.
-      IF ( Primal(i+Nvars)<zero ) THEN
+      IF( Primal(i+Nvars)<zero ) THEN
         ratio = Rprim(i)/Ww(i)
-        IF ( ratio<zero ) ratio = zero
-        IF ( .NOT.Finite ) THEN
+        IF( ratio<zero ) ratio = zero
+        IF( .NOT. Finite ) THEN
           Ileave = i
           Theta = ratio
           Finite = .TRUE.
-        ELSEIF ( ratio<Theta ) THEN
+        ELSEIF( ratio<Theta ) THEN
           Ileave = i
           !
           !     IF THE BASIC VARIABLE IS FEASIBLE AND IS NOT AT ITS UPPER BOUND,
           !     THEN IT CAN INCREASE TO ITS UPPER BOUND.
           Theta = ratio
         END IF
-      ELSEIF ( Ind(j)==3.AND.Primal(i+Nvars)==zero ) THEN
+      ELSEIF( Ind(j)==3 .AND. Primal(i+Nvars)==zero ) THEN
         bound = Bu(j) - Bl(j)
-        IF ( j<=Nvars ) bound = bound/Csc(j)
+        IF( j<=Nvars ) bound = bound/Csc(j)
         ratio = (bound-Rprim(i))/(-Ww(i))
-        IF ( .NOT.Finite ) THEN
+        IF( .NOT. Finite ) THEN
           Ileave = -i
           Theta = ratio
           Finite = .TRUE.
-        ELSEIF ( ratio<Theta ) THEN
+        ELSEIF( ratio<Theta ) THEN
           Ileave = -i
           Theta = ratio
         END IF
@@ -107,22 +106,22 @@ SUBROUTINE SPLPFL(Mrelas,Nvars,Ienter,Ileave,Ibasis,Ind,Theta,Dirnrm,&
       i = i + 1
       !
       !     IF RPRIM(I) IS ESSENTIALLY ZERO, SET RATIO TO ZERO AND EXIT LOOP.
-    ELSEIF ( ABS(Rprim(i))>Rprnrm*Erp(i) ) THEN
+    ELSEIF( ABS(Rprim(i))>Rprnrm*Erp(i) ) THEN
       !
       !     THE VALUE OF RPRIM(I) WILL DECREASE ONLY TO ITS LOWER BOUND OR
       !     ONLY TO ITS UPPER BOUND.  IF IT DECREASES TO ITS
       !     UPPER BOUND, THEN RPRIM(I) HAS ALREADY BEEN TRANSLATED
       !     TO ITS UPPER BOUND AND NOTHING NEEDS TO BE DONE TO IBB(J).
-      IF ( Rprim(i)>zero ) THEN
+      IF( Rprim(i)>zero ) THEN
         ratio = Rprim(i)/Ww(i)
-        IF ( .NOT.Finite ) THEN
+        IF( .NOT. Finite ) THEN
           Ileave = i
           Theta = ratio
           Finite = .TRUE.
-        ELSEIF ( ratio<Theta ) THEN
+        ELSEIF( ratio<Theta ) THEN
           Ileave = i
           !
-          !     THE VALUE RPRIM(I).LT.ZERO WILL NOT RESTRICT THE STEP.
+          !     THE VALUE RPRIM(I)<ZERO WILL NOT RESTRICT THE STEP.
           !
           !     THE DIRECTION COMPONENT IS NEGATIVE, THEREFORE THE VARIABLE WILL
           !     INCREASE.
@@ -139,13 +138,13 @@ SUBROUTINE SPLPFL(Mrelas,Nvars,Ienter,Ileave,Ibasis,Ind,Theta,Dirnrm,&
   END DO
   !
   !     IF STEP LENGTH IS FINITE, SEE IF STEP LENGTH IS ABOUT ZERO.
-  IF ( Finite ) THEN
+  IF( Finite ) THEN
     Zerolv = .TRUE.
     i = 1
     n20036 = Mrelas
-    DO WHILE ( (n20036-i)>=0 )
+    DO WHILE( (n20036-i)>=0 )
       Zerolv = Zerolv .AND. ABS(Theta*Ww(i))<=Erp(i)*Rprnrm
-      IF ( .NOT.Zerolv ) EXIT
+      IF( .NOT. Zerolv ) EXIT
       i = i + 1
     END DO
   END IF

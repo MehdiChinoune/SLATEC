@@ -5,8 +5,7 @@ MODULE TEST36_MOD
 CONTAINS
   !** DNSQQK
   SUBROUTINE DNSQQK(Lun,Kprint,Ipass)
-    !>
-    !  Quick check for DNSQE and DNSQ.
+    !> Quick check for DNSQE and DNSQ.
     !***
     ! **Library:**   SLATEC
     !***
@@ -32,13 +31,13 @@ CONTAINS
     USE slatec, ONLY : D1MACH, DENORM, DNSQE
     USE common_mod, ONLY : PASS
     !     .. Scalar Arguments ..
-    INTEGER Ipass, Kprint, Lun
+    INTEGER :: Ipass, Kprint, Lun
     !     .. Local Scalars ..
     REAL(DP) :: fnorm, fnorms, tol
-    INTEGER icnt, info, infos, iopt, lwa, n, nprint
+    INTEGER :: icnt, info, infos, iopt, lwa, n, nprint
     !     .. Local Arrays ..
     REAL(DP) :: fvec(2), wa(19), x(2)
-    INTEGER itest(3)
+    INTEGER :: itest(3)
     !     .. Intrinsic Functions ..
     INTRINSIC SQRT
     !* FIRST EXECUTABLE STATEMENT  DNSQQK
@@ -48,7 +47,7 @@ CONTAINS
     lwa = 19
     nprint = -1
     tol = SQRT(D1MACH(4))
-    IF ( Kprint>=2 ) WRITE (Lun,99001)
+    IF( Kprint>=2 ) WRITE (Lun,99001)
     99001 FORMAT ('1'/'  DNSQE QUICK CHECK'/)
     !
     !     Option 1, the user provides the Jacobian.
@@ -60,12 +59,12 @@ CONTAINS
     icnt = 1
     fnorm = DENORM(n,fvec)
     itest(icnt) = 0
-    IF ( (info==infos).AND.(fnorm-fnorms<=tol) ) itest(icnt) = 1
+    IF( (info==infos) .AND. (fnorm-fnorms<=tol) ) itest(icnt) = 1
     !
-    IF ( Kprint/=0 ) THEN
-      IF ( (Kprint>=2.AND.itest(icnt)/=1).OR.Kprint>=3 ) WRITE (Lun,99004)&
+    IF( Kprint/=0 ) THEN
+      IF( (Kprint>=2 .AND. itest(icnt)/=1) .OR. Kprint>=3 ) WRITE (Lun,99004)&
         infos, fnorms, info, fnorm
-      IF ( (Kprint>=2).OR.(Kprint==1.AND.itest(icnt)/=1) )&
+      IF( (Kprint>=2) .OR. (Kprint==1 .AND. itest(icnt)/=1) )&
         CALL PASS(Lun,icnt,itest(icnt))
     END IF
     !
@@ -78,12 +77,12 @@ CONTAINS
     icnt = 2
     fnorm = DENORM(n,fvec)
     itest(icnt) = 0
-    IF ( (info==infos).AND.(fnorm-fnorms<=tol) ) itest(icnt) = 1
+    IF( (info==infos) .AND. (fnorm-fnorms<=tol) ) itest(icnt) = 1
     !
-    IF ( Kprint/=0 ) THEN
-      IF ( Kprint>=3.OR.(Kprint>=2.AND.itest(icnt)/=1) ) WRITE (Lun,99004)&
+    IF( Kprint/=0 ) THEN
+      IF( Kprint>=3 .OR. (Kprint>=2 .AND. itest(icnt)/=1) ) WRITE (Lun,99004)&
         infos, fnorms, info, fnorm
-      IF ( Kprint>=2.OR.(Kprint==1.AND.itest(icnt)/=1) )&
+      IF( Kprint>=2 .OR. (Kprint==1 .AND. itest(icnt)/=1) )&
         CALL PASS(Lun,icnt,itest(icnt))
     END IF
     !
@@ -96,17 +95,17 @@ CONTAINS
     CALL DNSQE(DQFCN2,DQJAC2,iopt,n,x,fvec,tol,nprint,info,wa,lwa)
     icnt = 3
     itest(icnt) = 0
-    IF ( info==0 ) itest(icnt) = 1
-    IF ( Kprint>=2.OR.(Kprint==1.AND.itest(icnt)/=1) )&
+    IF( info==0 ) itest(icnt) = 1
+    IF( Kprint>=2 .OR. (Kprint==1 .AND. itest(icnt)/=1) )&
       CALL PASS(Lun,icnt,itest(icnt))
     !
     !     Set IPASS.
     !
     Ipass = itest(1)*itest(2)*itest(3)
-    IF ( Kprint>=1.AND.Ipass/=1 ) WRITE (Lun,99002)
+    IF( Kprint>=1 .AND. Ipass/=1 ) WRITE (Lun,99002)
     99002 FORMAT (/' **********WARNING -- DNSQE/DNSQ FAILED SOME TESTS****',&
       '******')
-    IF ( Kprint>=2.AND.Ipass==1 ) WRITE (Lun,99003)
+    IF( Kprint>=2 .AND. Ipass==1 ) WRITE (Lun,99003)
     99003 FORMAT (/' ----------DNSQE/DNSQ PASSED ALL TESTS----------')
     RETURN
     99004 FORMAT (' EXPECTED VALUE OF INFO AND RESIDUAL NORM',I5,&
@@ -114,8 +113,7 @@ CONTAINS
   END SUBROUTINE DNSQQK
   !** DSOSFN
   REAL(DP) FUNCTION DSOSFN(X,K)
-    !>
-    !  Function evaluator for DSOS quick check.
+    !> Function evaluator for DSOS quick check.
     !***
     ! **Library:**   SLATEC
     !***
@@ -139,9 +137,9 @@ CONTAINS
     INTEGER :: K
     REAL(DP) :: X(:)
     !* FIRST EXECUTABLE STATEMENT  DSOSFN
-    IF ( K==1 ) THEN
+    IF( K==1 ) THEN
       DSOSFN = 1.0D0 - X(1)
-    ELSEIF ( K==2 ) THEN
+    ELSEIF( K==2 ) THEN
       DSOSFN = 1.0D1*(X(2)-X(1)**2)
     ELSE
       DSOSFN = 0.D0
@@ -149,8 +147,7 @@ CONTAINS
   END FUNCTION DSOSFN
   !** DSOSQX
   SUBROUTINE DSOSQX(Lun,Kprint,Ipass)
-    !>
-    !  Quick check for DSOS.
+    !> Quick check for DSOS.
     !***
     ! **Library:**   SLATEC
     !***
@@ -175,13 +172,13 @@ CONTAINS
     USE slatec, ONLY : D1MACH, DSOS
     USE common_mod, ONLY : PASS
     !     .. Scalar Arguments ..
-    INTEGER Ipass, Kprint, Lun
+    INTEGER :: Ipass, Kprint, Lun
     !     .. Local Scalars ..
     REAL(DP) :: aer, fnorm, fnorms, rer, tolf
-    INTEGER icnt, iflag, iflags, liw, lwa, n
+    INTEGER :: icnt, iflag, iflags, liw, lwa, n
     !     .. Local Arrays ..
     REAL(DP) :: fvec(2), wa(17), x(2)
-    INTEGER itest(2), iw(6)
+    INTEGER :: itest(2), iw(6)
     !     .. Intrinsic Functions ..
     INTRINSIC SQRT
     !* FIRST EXECUTABLE STATEMENT  DSOSQX
@@ -193,7 +190,7 @@ CONTAINS
     tolf = SQRT(D1MACH(4))
     rer = SQRT(D1MACH(4))
     aer = 0.0D0
-    IF ( Kprint>=2 ) WRITE (Lun,99001)
+    IF( Kprint>=2 ) WRITE (Lun,99001)
     99001 FORMAT ('1'/'  DSOS QUICK CHECK'/)
     !
     !     Test the code with proper input values.
@@ -207,14 +204,14 @@ CONTAINS
     fvec(2) = DSOSFN(x,2)
     fnorm = NORM2(fvec(1:n))
     itest(icnt) = 0
-    IF ( iflag<=iflags.AND.fnorm-fnorms<=rer ) itest(icnt) = 1
+    IF( iflag<=iflags .AND. fnorm-fnorms<=rer ) itest(icnt) = 1
     !
-    IF ( Kprint/=0 ) THEN
-      IF ( Kprint>=3.OR.(Kprint>=2.AND.itest(icnt)/=1) ) WRITE (Lun,99002)&
+    IF( Kprint/=0 ) THEN
+      IF( Kprint>=3 .OR. (Kprint>=2 .AND. itest(icnt)/=1) ) WRITE (Lun,99002)&
         iflags, fnorms, iflag, fnorm
       99002 FORMAT (' EXPECTED VALUE OF IFLAG AND RESIDUAL NORM',I5,&
         D20.5/' RETURNED VALUE OF IFLAG AND RESIDUAL NORM',I5,D20.5/)
-      IF ( Kprint>=2.OR.(Kprint==1.AND.itest(icnt)/=1) )&
+      IF( Kprint>=2 .OR. (Kprint==1 .AND. itest(icnt)/=1) )&
         CALL PASS(Lun,icnt,itest(icnt))
     END IF
     !
@@ -227,23 +224,22 @@ CONTAINS
     CALL DSOS(DSOSFN,n,x,rer,aer,tolf,iflag,wa,lwa,iw,liw)
     icnt = 2
     itest(icnt) = 0
-    IF ( iflag==9 ) itest(icnt) = 1
-    IF ( Kprint>=2.OR.(Kprint==1.AND.itest(icnt)/=1) )&
+    IF( iflag==9 ) itest(icnt) = 1
+    IF( Kprint>=2 .OR. (Kprint==1 .AND. itest(icnt)/=1) )&
       CALL PASS(Lun,icnt,itest(icnt))
     !
     !     Set IPASS.
     !
     Ipass = itest(1)*itest(2)
-    IF ( Kprint>=1.AND.Ipass/=1 ) WRITE (Lun,99003)
+    IF( Kprint>=1 .AND. Ipass/=1 ) WRITE (Lun,99003)
     99003 FORMAT (/' **********WARNING -- DSOS FAILED SOME TESTS**********')
-    IF ( Kprint>=2.AND.Ipass==1 ) WRITE (Lun,99004)
+    IF( Kprint>=2 .AND. Ipass==1 ) WRITE (Lun,99004)
     99004 FORMAT (/' ----------DSOS PASSED ALL TESTS----------')
     RETURN
   END SUBROUTINE DSOSQX
   !** DQFCN2
   SUBROUTINE DQFCN2(N,X,Fvec,Iflag)
-    !>
-    !  Evaluate function used in DNSQE.
+    !> Evaluate function used in DNSQE.
     !***
     ! **Library:**   SLATEC
     !***
@@ -278,8 +274,7 @@ CONTAINS
   END SUBROUTINE DQFCN2
   !** DQJAC2
   SUBROUTINE DQJAC2(N,X,Fvec,Fjac,Ldfjac,Iflag)
-    !>
-    ! **Library:**   SLATEC
+    !> **Library:**   SLATEC
     !***
     ! **Keywords:**  QUICK CHECK
     !***
@@ -314,8 +309,7 @@ PROGRAM TEST36
   USE slatec, ONLY : I1MACH, XSETF, XSETUN, XERMAX
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
-  !>
-  !  Driver for testing SLATEC subprograms
+  !> Driver for testing SLATEC subprograms
   !***
   ! **Library:**   SLATEC
   !***
@@ -361,7 +355,7 @@ PROGRAM TEST36
   !   890618  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900524  Cosmetic changes to code.  (WRB)
-  INTEGER ipass, kprint, lin, lun, nfail
+  INTEGER :: ipass, kprint, lin, lun, nfail
   !* FIRST EXECUTABLE STATEMENT  TEST36
   lun = I1MACH(2)
   lin = I1MACH(1)
@@ -372,7 +366,7 @@ PROGRAM TEST36
   CALL GET_ARGUMENT(kprint)
   CALL XERMAX(1000)
   CALL XSETUN(lun)
-  IF ( kprint<=1 ) THEN
+  IF( kprint<=1 ) THEN
     CALL XSETF(0)
   ELSE
     CALL XSETF(1)
@@ -381,16 +375,16 @@ PROGRAM TEST36
   !     Test DNSQE and DNSQ
   !
   CALL DNSQQK(lun,kprint,ipass)
-  IF ( ipass==0 ) nfail = nfail + 1
+  IF( ipass==0 ) nfail = nfail + 1
   !
   !     Test DSOS
   !
   CALL DSOSQX(lun,kprint,ipass)
-  IF ( ipass==0 ) nfail = nfail + 1
+  IF( ipass==0 ) nfail = nfail + 1
   !
   !     Write PASS or FAIL message
   !
-  IF ( nfail==0 ) THEN
+  IF( nfail==0 ) THEN
     WRITE (lun,99001)
     99001 FORMAT (/' --------------TEST36 PASSED ALL TESTS----------------')
   ELSE

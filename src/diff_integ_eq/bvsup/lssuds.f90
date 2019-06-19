@@ -1,8 +1,7 @@
 !** LSSUDS
 SUBROUTINE LSSUDS(A,X,B,N,M,Nrda,U,Nrdu,Iflag,Mlso,Irank,Iscale,Q,Diag,&
     Kpivot,S,Div,Td,Isflg,Scales)
-  !>
-  !  Subsidiary to BVSUP
+  !> Subsidiary to BVSUP
   !***
   ! **Library:**   SLATEC
   !***
@@ -13,7 +12,7 @@ SUBROUTINE LSSUDS(A,X,B,N,M,Nrda,U,Nrdu,Iflag,Mlso,Irank,Iscale,Q,Diag,&
   ! **Description:**
   !
   !    LSSUDS solves the underdetermined system of equations  A Z = B,
-  !    where A is N by M and N .LE. M.  In particular, if rank A equals
+  !    where A is N by M and N <= M.  In particular, if rank A equals
   !    IRA, a vector X and a matrix U are determined such that X is the
   !    UNIQUE solution of smallest length, satisfying A X = B, and the
   !    columns of U form an orthonormal basis for the null space of A,
@@ -135,17 +134,17 @@ SUBROUTINE LSSUDS(A,X,B,N,M,Nrda,U,Nrdu,Iflag,Mlso,Irank,Iscale,Q,Diag,&
   !
   !- *********************************************************************
   !
-  IF ( N>=1.AND.M>=N.AND.Nrda>=N ) THEN
-    IF ( Nrdu==0.OR.Nrdu>=M ) THEN
-      IF ( Iflag<=0 ) THEN
+  IF( N>=1 .AND. M>=N .AND. Nrda>=N ) THEN
+    IF( Nrdu==0 .OR. Nrdu>=M ) THEN
+      IF( Iflag<=0 ) THEN
         !
         CALL XGETF(nfatal)
         maxmes = J4SAVE(4,0,.FALSE.)
         Isflg = -15
-        IF ( Iflag/=0 ) THEN
+        IF( Iflag/=0 ) THEN
           Isflg = Iflag
           nfat = -1
-          IF ( nfatal==0 ) nfat = 0
+          IF( nfatal==0 ) nfat = 0
           CALL XSETF(nfat)
           CALL XERMAX(1)
         END IF
@@ -165,7 +164,7 @@ SUBROUTINE LSSUDS(A,X,B,N,M,Nrda,U,Nrdu,Iflag,Mlso,Irank,Iscale,Q,Diag,&
         !
         CALL XSETF(nfatal)
         CALL XERMAX(maxmes)
-        IF ( Irank==N ) THEN
+        IF( Irank==N ) THEN
           !
           !     STORE DIVISORS FOR THE TRIANGULAR SOLUTION
           !
@@ -178,10 +177,10 @@ SUBROUTINE LSSUDS(A,X,B,N,M,Nrda,U,Nrdu,Iflag,Mlso,Irank,Iscale,Q,Diag,&
           !     FOR RANK DEFICIENT PROBLEMS USE ADDITIONAL ORTHOGONAL
           !     TRANSFORMATIONS TO FURTHER REDUCE Q
           !
-          IF ( Irank/=0 ) CALL OHTROL(Q,N,Nrda,Diag,Irank,Div,Td)
+          IF( Irank/=0 ) CALL OHTROL(Q,N,Nrda,Diag,Irank,Div,Td)
           RETURN
         END IF
-      ELSEIF ( Iflag==1 ) THEN
+      ELSEIF( Iflag==1 ) THEN
         GOTO 100
       END IF
     END IF
@@ -194,7 +193,7 @@ SUBROUTINE LSSUDS(A,X,B,N,M,Nrda,U,Nrdu,Iflag,Mlso,Irank,Iscale,Q,Diag,&
   !
   !
   100 CONTINUE
-  IF ( Irank>0 ) THEN
+  IF( Irank>0 ) THEN
     !
     !     COPY CONSTANT VECTOR INTO S AFTER FIRST INTERCHANGING
     !     THE ELEMENTS ACCORDING TO THE PIVOTAL SEQUENCE
@@ -209,8 +208,8 @@ SUBROUTINE LSSUDS(A,X,B,N,M,Nrda,U,Nrdu,Iflag,Mlso,Irank,Iscale,Q,Diag,&
     !
     irp = Irank + 1
     nu = 1
-    IF ( Mlso==0 ) nu = 0
-    IF ( Irank/=N ) THEN
+    IF( Mlso==0 ) nu = 0
+    IF( Irank/=N ) THEN
       !
       !     FOR RANK DEFICIENT PROBLEMS WE MUST APPLY THE
       !     ORTHOGONAL TRANSFORMATION TO S
@@ -228,7 +227,7 @@ SUBROUTINE LSSUDS(A,X,B,N,M,Nrda,U,Nrdu,Iflag,Mlso,Irank,Iscale,Q,Diag,&
         END DO
       END DO
       res = NORM2(S(irp:irp+nmir-1))**2
-      IF ( res>ss*(10.*MAX(10.**Isflg,10.*uro))**2 ) THEN
+      IF( res>ss*(10.*MAX(10.**Isflg,10.*uro))**2 ) THEN
         !
         !     INCONSISTENT SYSTEM
         Iflag = 4
@@ -239,7 +238,7 @@ SUBROUTINE LSSUDS(A,X,B,N,M,Nrda,U,Nrdu,Iflag,Mlso,Irank,Iscale,Q,Diag,&
     !     APPLY FORWARD SUBSTITUTION TO SOLVE LOWER TRIANGULAR SYSTEM
     !
     S(1) = S(1)/Div(1)
-    IF ( Irank/=1 ) THEN
+    IF( Irank/=1 ) THEN
       DO k = 2, Irank
         S(k) = (S(k)-DOT_PRODUCT(Q(k,1:k-1),S(1:k-1)))/Div(k)
       END DO
@@ -249,7 +248,7 @@ SUBROUTINE LSSUDS(A,X,B,N,M,Nrda,U,Nrdu,Iflag,Mlso,Irank,Iscale,Q,Diag,&
     !
     DO k = 1, M
       X(k) = 0.
-      IF ( k<=Irank ) X(k) = S(k)
+      IF( k<=Irank ) X(k) = S(k)
     END DO
     !
     DO jr = 1, Irank
@@ -266,7 +265,7 @@ SUBROUTINE LSSUDS(A,X,B,N,M,Nrda,U,Nrdu,Iflag,Mlso,Irank,Iscale,Q,Diag,&
       X(k) = X(k)*Scales(k)
     END DO
     !
-    IF ( (nu==0).OR.(M==Irank) ) RETURN
+    IF( (nu==0) .OR. (M==Irank) ) RETURN
     !
     !     INITIALIZE U MATRIX AND THEN APPLY ORTHOGONAL TRANSFORMATION
     !
@@ -274,7 +273,7 @@ SUBROUTINE LSSUDS(A,X,B,N,M,Nrda,U,Nrdu,Iflag,Mlso,Irank,Iscale,Q,Diag,&
     DO k = 1, l
       DO i = 1, M
         U(i,k) = 0.
-        IF ( i==Irank+k ) U(i,k) = 1.
+        IF( i==Irank+k ) U(i,k) = 1.
       END DO
       !
       DO jr = 1, Irank
@@ -290,15 +289,15 @@ SUBROUTINE LSSUDS(A,X,B,N,M,Nrda,U,Nrdu,Iflag,Mlso,Irank,Iscale,Q,Diag,&
     !     SPECIAL CASE FOR THE NULL MATRIX
     DO k = 1, M
       X(k) = 0.
-      IF ( Mlso/=0 ) THEN
+      IF( Mlso/=0 ) THEN
         U(k,k) = 1.
         DO j = 1, M
-          IF ( j/=k ) U(j,k) = 0.
+          IF( j/=k ) U(j,k) = 0.
         END DO
       END IF
     END DO
     DO k = 1, N
-      IF ( B(k)>0. ) Iflag = 4
+      IF( B(k)>0. ) Iflag = 4
     END DO
     RETURN
   END IF

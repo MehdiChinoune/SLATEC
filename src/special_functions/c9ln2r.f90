@@ -1,7 +1,6 @@
 !** C9LN2R
 COMPLEX(SP) FUNCTION C9LN2R(Z)
-  !>
-  !  Evaluate LOG(1+Z) from second order relative accuracy so
+  !> Evaluate LOG(1+Z) from second order relative accuracy so
   !            that  LOG(1+Z) = Z - Z**2/2 + Z**3*C9LN2R(Z).
   !***
   ! **Library:**   SLATEC (FNLIB)
@@ -53,21 +52,21 @@ COMPLEX(SP) FUNCTION C9LN2R(Z)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
 
-  REAL(SP) aipart, arg, cabsz, rpart, x, xz, y, y1x, yz
-  COMPLEX(SP) Z
+  REAL(SP) :: aipart, arg, cabsz, rpart, x, xz, y, y1x, yz
+  COMPLEX(SP) :: Z
   !* FIRST EXECUTABLE STATEMENT  C9LN2R
   x = REAL(Z)
   y = AIMAG(Z)
   !
   cabsz = ABS(Z)
-  IF ( cabsz>0.8125 ) THEN
+  IF( cabsz>0.8125 ) THEN
     !
     C9LN2R = (LOG(1.0+Z)-Z*(1.0-0.5*Z))/Z**3
     RETURN
   END IF
   !
   C9LN2R = CMPLX(1.0/3.0,0.0)
-  IF ( cabsz==0.0 ) RETURN
+  IF( cabsz==0.0 ) RETURN
   !
   xz = x/cabsz
   yz = y/cabsz

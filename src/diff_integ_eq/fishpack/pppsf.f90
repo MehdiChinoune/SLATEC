@@ -1,7 +1,6 @@
 !** PPPSF
 REAL(SP) FUNCTION PPPSF(X,Iz,C,A,Bh)
-  !>
-  !  Subsidiary to CBLKTR
+  !> Subsidiary to CBLKTR
   !***
   ! **Library:**   SLATEC
   !***

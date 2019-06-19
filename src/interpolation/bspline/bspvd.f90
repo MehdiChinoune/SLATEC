@@ -1,7 +1,6 @@
 !** BSPVD
 SUBROUTINE BSPVD(T,K,Nderiv,X,Ileft,Ldvnik,Vnikx,Work)
-  !>
-  !  Calculate the value and all derivatives of order less than
+  !> Calculate the value and all derivatives of order less than
   !            NDERIV of all basis functions which do not vanish at X.
   !***
   ! **Library:**   SLATEC
@@ -24,13 +23,13 @@ SUBROUTINE BSPVD(T,K,Nderiv,X,Ileft,Ldvnik,Vnikx,Work)
   !         BSPVD calculates the value and all derivatives of order
   !         less than NDERIV of all basis functions which do not
   !         (possibly) vanish at X.  ILEFT is input such that
-  !         T(ILEFT) .LE. X .LT. T(ILEFT+1).  A call to INTRV(T,N+1,X,
+  !         T(ILEFT) <= X < T(ILEFT+1).  A call to INTRV(T,N+1,X,
   !         ILO,ILEFT,MFLAG) will produce the proper ILEFT.  The output of
   !         BSPVD is a matrix VNIKX(I,J) of dimension at least (K,NDERIV)
   !         whose columns contain the K nonzero basis functions and
   !         their NDERIV-1 right derivatives at X, I=1,K, J=1,NDERIV.
   !         These basis functions have indices ILEFT-K+I, I=1,K,
-  !         K .LE. ILEFT .LE. N. The nonzero part of the I-th basis
+  !         K <= ILEFT <= N. The nonzero part of the I-th basis
   !         function lies in (T(I),T(I+K)), I=1,N.
   !
   !         If X=T(ILEFT+1) then VNIKX contains left limiting values
@@ -45,13 +44,13 @@ SUBROUTINE BSPVD(T,K,Nderiv,X,Ileft,Ldvnik,Vnikx,Work)
   !          T       - knot vector of length N+K, where
   !                    N = number of B-spline basis functions
   !                    N = sum of knot multiplicities-K
-  !          K       - order of the B-spline, K .GE. 1
+  !          K       - order of the B-spline, K >= 1
   !          NDERIV  - number of derivatives = NDERIV-1,
-  !                    1 .LE. NDERIV .LE. K
+  !                    1 <= NDERIV <= K
   !          X       - argument of basis functions,
-  !                    T(K) .LE. X .LE. T(N+1)
+  !                    T(K) <= X <= T(N+1)
   !          ILEFT   - largest integer such that
-  !                    T(ILEFT) .LE. X .LT. T(ILEFT+1)
+  !                    T(ILEFT) <= X < T(ILEFT+1)
   !          LDVNIK  - leading dimension of matrix VNIKX
   !
   !         Output
@@ -91,23 +90,23 @@ SUBROUTINE BSPVD(T,K,Nderiv,X,Ileft,Ldvnik,Vnikx,Work)
   !     A(I,K) = W0RK(I+K*(K-1)/2)  I=1.K
   !     WORK(1) AND WORK((K+1)*(K+2)/2) ARE NOT USED.
   !* FIRST EXECUTABLE STATEMENT  BSPVD
-  IF ( K<1 ) THEN
+  IF( K<1 ) THEN
     !
     !
-    CALL XERMSG('BSPVD','K DOES NOT SATISFY K.GE.1',2,1)
+    CALL XERMSG('BSPVD','K DOES NOT SATISFY K>=1',2,1)
     RETURN
-  ELSEIF ( Nderiv<1.OR.Nderiv>K ) THEN
-    CALL XERMSG('BSPVD','NDERIV DOES NOT SATISFY 1.LE.NDERIV.LE.K',2,1)
+  ELSEIF( Nderiv<1 .OR. Nderiv>K ) THEN
+    CALL XERMSG('BSPVD','NDERIV DOES NOT SATISFY 1<=NDERIV<=K',2,1)
     RETURN
-  ELSEIF ( Ldvnik<K ) THEN
-    CALL XERMSG('BSPVD','LDVNIK DOES NOT SATISFY LDVNIK.GE.K',2,1)
+  ELSEIF( Ldvnik<K ) THEN
+    CALL XERMSG('BSPVD','LDVNIK DOES NOT SATISFY LDVNIK>=K',2,1)
     RETURN
   ELSE
     ideriv = Nderiv
     kp1 = K + 1
     jj = kp1 - ideriv
     CALL BSPVN(T,jj,K,1,X,Ileft,Vnikx,Work,iwork)
-    IF ( ideriv/=1 ) THEN
+    IF( ideriv/=1 ) THEN
       mhigh = ideriv
       DO m = 2, mhigh
         jp1mid = 1

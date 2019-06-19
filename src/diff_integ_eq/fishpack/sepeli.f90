@@ -1,8 +1,7 @@
 !** SEPELI
 SUBROUTINE SEPELI(Intl,Iorder,A,B,M,Mbdcnd,Bda,Alpha,Bdb,Beta,C,D,N,&
     Nbdcnd,Bdc,Gama,Bdd,Xnu,COFX,COFY,Grhs,Usol,Idmn,W,Pertrb,Ierror)
-  !>
-  !  Discretize and solve a second and, optionally, a fourth
+  !> Discretize and solve a second and, optionally, a fourth
   !            order finite difference approximation on a uniform grid to
   !            the general separable elliptic partial differential
   !            equation on a rectangle with any combination of periodic or
@@ -487,27 +486,27 @@ SUBROUTINE SEPELI(Intl,Iorder,A,B,M,Mbdcnd,Bda,Alpha,Bdb,Beta,C,D,N,&
   INTEGER :: Idmn, Ierror, Intl, Iorder, M, Mbdcnd, N, Nbdcnd
   REAL(SP) :: A, Alpha, B, Beta, C, D, Gama, Pertrb, Xnu
   REAL(SP) :: Bda(N+1), Bdb(N+1), Bdc(M+1), Bdd(M+1), Grhs(Idmn,N+1), Usol(Idmn,N+1), W(:)
-  INTEGER i1, i10, i11, i12, i13, i2, i3, i4, i5, i6, i7, i8, &
+  INTEGER :: i1, i10, i11, i12, i13, i2, i3, i4, i5, i6, i7, i8, &
     i9, k, l, length, linput, ll, logb2n, loutpt
   !* FIRST EXECUTABLE STATEMENT  SEPELI
   CALL CHKPRM(Intl,Iorder,A,B,M,Mbdcnd,C,D,N,Nbdcnd,COFX,COFY,Idmn,Ierror)
-  IF ( Ierror/=0 ) RETURN
+  IF( Ierror/=0 ) RETURN
   !
   !     COMPUTE MINIMUM WORK SPACE AND CHECK WORK SPACE LENGTH INPUT
   !
   l = N + 1
-  IF ( Nbdcnd==0 ) l = N
+  IF( Nbdcnd==0 ) l = N
   logb2n = INT(LOG(l+0.5)/LOG(2.0)) + 1
   ll = 2**(logb2n+1)
   k = M + 1
   l = N + 1
   length = (logb2n-2)*ll + logb2n + MAX(2*l,6*k) + 5
-  IF ( Nbdcnd==0 ) length = length + 2*l
+  IF( Nbdcnd==0 ) length = length + 2*l
   Ierror = 11
   linput = INT(W(1)+0.5)
   loutpt = length + 6*(k+l) + 1
   W(1) = loutpt
-  IF ( loutpt>linput ) RETURN
+  IF( loutpt>linput ) RETURN
   Ierror = 0
   !
   !     SET WORK SPACE INDICES

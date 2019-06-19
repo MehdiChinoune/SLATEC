@@ -2,8 +2,7 @@
 SUBROUTINE DPINCW(Mrelas,Nvars,Lmx,Lbm,Npp,Jstrt,Imat,Ibrc,Ipr,Iwr,&
     Ind,Ibb,Costsc,Gg,Erdnrm,Dulnrm,Amat,Basmat,Csc,Wr,Ww,&
     Rz,Rg,Costs,Colnrm,Duals,Stpedg)
-  !>
-  !  Subsidiary to DSPLP
+  !> Subsidiary to DSPLP
   !***
   ! **Library:**   SLATEC
   !***
@@ -58,20 +57,20 @@ SUBROUTINE DPINCW(Mrelas,Nvars,Lmx,Lbm,Npp,Jstrt,Imat,Ibrc,Ipr,Iwr,&
   nnegrc = 0
   j = Jstrt
   100 CONTINUE
-  IF ( Ibb(j)<=0 ) THEN
+  IF( Ibb(j)<=0 ) THEN
     pagepl = .TRUE.
     !
     !     THESE ARE NONBASIC INDEPENDENT VARIABLES. THE COLS. ARE IN SPARSE
     !     MATRIX FORMAT.
-  ELSEIF ( j>Nvars ) THEN
+  ELSEIF( j>Nvars ) THEN
     pagepl = .TRUE.
     Ww(1:Mrelas) = zero
     scalr = -one
-    IF ( Ind(j)==2 ) scalr = one
+    IF( Ind(j)==2 ) scalr = one
     i = j - Nvars
     Rz(j) = -scalr*Duals(i)
     Ww(i) = scalr
-    IF ( Stpedg ) THEN
+    IF( Stpedg ) THEN
       trans = .FALSE.
       CALL LA05BD(Basmat,Ibrc,Lbm,Mrelas,Ipr,Iwr,Wr,Gg,Ww,trans)
       Rg(j) = NORM2(Ww(1:Mrelas))**2 + one
@@ -79,16 +78,16 @@ SUBROUTINE DPINCW(Mrelas,Nvars,Lmx,Lbm,Npp,Jstrt,Imat,Ibrc,Ipr,Iwr,&
   ELSE
     rzj = Costsc*Costs(j)
     Ww(1:Mrelas) = zero
-    IF ( j/=1 ) THEN
+    IF( j/=1 ) THEN
       ilow = Imat(j+3) + 1
     ELSE
       ilow = Nvars + 5
     END IF
-    IF ( .NOT.(pagepl) ) THEN
+    IF( .NOT. (pagepl) ) THEN
       il1 = ihi + 1
     ELSE
       il1 = IDLOC(ilow,Amat,Imat)
-      IF ( il1>=Lmx-1 ) THEN
+      IF( il1>=Lmx-1 ) THEN
         ilow = ilow + 2
         il1 = IDLOC(ilow,Amat,Imat)
       END IF
@@ -97,12 +96,12 @@ SUBROUTINE DPINCW(Mrelas,Nvars,Lmx,Lbm,Npp,Jstrt,Imat,Ibrc,Ipr,Iwr,&
     ihi = Imat(j+4) - (ilow-il1)
     DO
       iu1 = MIN(Lmx-2,ihi)
-      IF ( il1>iu1 ) EXIT
+      IF( il1>iu1 ) EXIT
       DO i = il1, iu1
         rzj = rzj - Amat(i)*Duals(Imat(i))
         Ww(Imat(i)) = Amat(i)*Csc(j)
       END DO
-      IF ( ihi<=Lmx-2 ) EXIT
+      IF( ihi<=Lmx-2 ) EXIT
       ipage = ipage + 1
       key = 1
       CALL DPRWPG(key,ipage,lpg,Amat,Imat)
@@ -111,7 +110,7 @@ SUBROUTINE DPINCW(Mrelas,Nvars,Lmx,Lbm,Npp,Jstrt,Imat,Ibrc,Ipr,Iwr,&
     END DO
     pagepl = ihi==(Lmx-2)
     Rz(j) = rzj*Csc(j)
-    IF ( Stpedg ) THEN
+    IF( Stpedg ) THEN
       trans = .FALSE.
       CALL LA05BD(Basmat,Ibrc,Lbm,Mrelas,Ipr,Iwr,Wr,Gg,Ww,trans)
       !
@@ -122,12 +121,12 @@ SUBROUTINE DPINCW(Mrelas,Nvars,Lmx,Lbm,Npp,Jstrt,Imat,Ibrc,Ipr,Iwr,&
   END IF
   !
   rcost = Rz(j)
-  IF ( MOD(Ibb(j),2)==0 ) rcost = -rcost
-  IF ( Ind(j)==4 ) rcost = -ABS(rcost)
+  IF( MOD(Ibb(j),2)==0 ) rcost = -rcost
+  IF( Ind(j)==4 ) rcost = -ABS(rcost)
   cnorm = one
-  IF ( j<=Nvars ) cnorm = Colnrm(j)
-  IF ( rcost+Erdnrm*Dulnrm*cnorm<zero ) nnegrc = nnegrc + 1
+  IF( j<=Nvars ) cnorm = Colnrm(j)
+  IF( rcost+Erdnrm*Dulnrm*cnorm<zero ) nnegrc = nnegrc + 1
   j = MOD(j,Mrelas+Nvars) + 1
-  IF ( nnegrc<Npp.AND.j/=Jstrt ) GOTO 100
+  IF( nnegrc<Npp .AND. j/=Jstrt ) GOTO 100
   Jstrt = j
 END SUBROUTINE DPINCW

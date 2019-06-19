@@ -1,7 +1,6 @@
 !** ZMLT
 SUBROUTINE ZMLT(Ar,Ai,Br,Bi,Cr,Ci)
-  !>
-  !  Subsidiary to ZBESH, ZBESI, ZBESJ, ZBESK, ZBESY, ZAIRY and
+  !> Subsidiary to ZBESH, ZBESI, ZBESJ, ZBESK, ZBESY, ZAIRY and
   !            ZBIRY
   !***
   ! **Library:**   SLATEC

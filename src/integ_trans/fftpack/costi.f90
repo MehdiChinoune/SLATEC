@@ -1,7 +1,6 @@
 !** COSTI
 SUBROUTINE COSTI(N,Wsave)
-  !>
-  !  Initialize a work array for COST.
+  !> Initialize a work array for COST.
   !***
   ! **Library:**   SLATEC (FFTPACK)
   !***
@@ -60,7 +59,7 @@ SUBROUTINE COSTI(N,Wsave)
   INTEGER :: k, kc, nm1, np1, ns2
   REAL(SP) :: dt, fk, pi
   !* FIRST EXECUTABLE STATEMENT  COSTI
-  IF ( N<=3 ) RETURN
+  IF( N<=3 ) RETURN
   pi = 4.*ATAN(1.)
   nm1 = N - 1
   np1 = N + 1

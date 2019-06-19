@@ -1,7 +1,6 @@
 !** SMOUT
 SUBROUTINE SMOUT(M,N,Lda,A,Ifmt,Idigit)
-  !>
-  !  Subsidiary to FC and SBOCLS
+  !> Subsidiary to FC and SBOCLS
   !***
   ! **Library:**   SLATEC
   !***
@@ -29,10 +28,10 @@ SUBROUTINE SMOUT(M,N,Lda,A,Ifmt,Idigit)
   !  IDIGIT         PRINT AT LEAST ABS(IDIGIT) DECIMAL DIGITS PER NUMBER.
   !                 THE SUBPROGRAM WILL CHOOSE THAT INTEGER 4,6,10, OR 14
   !                 WHICH WILL PRINT AT LEAST ABS(IDIGIT) NUMBER OF
-  !                 PLACES.  IF IDIGIT.LT.0, 72 PRINTING COLUMNS ARE
+  !                 PLACES.  IF IDIGIT<0, 72 PRINTING COLUMNS ARE
   !                 UTILIZED TO WRITE EACH LINE OF OUTPUT OF THE ARRAY
   !                 A(*,*). (THIS CAN BE USED ON MOST TIME-SHARING
-  !                 TERMINALS).  IF IDIGIT.GE.0, 133 PRINTING COLUMNS ARE
+  !                 TERMINALS).  IF IDIGIT>=0, 133 PRINTING COLUMNS ARE
   !                 UTILIZED. (THIS CAN BE USED ON MOST LINE PRINTERS).
   !
   !  EXAMPLE..
@@ -69,13 +68,13 @@ SUBROUTINE SMOUT(M,N,Lda,A,Ifmt,Idigit)
   !* FIRST EXECUTABLE STATEMENT  SMOUT
   lout = I1MACH(2)
   WRITE (lout,Ifmt)
-  IF ( M<=0.OR.N<=0.OR.Lda<=0 ) RETURN
+  IF( M<=0 .OR. N<=0 .OR. Lda<=0 ) RETURN
   ndigit = Idigit
-  IF ( Idigit==0 ) ndigit = 4
-  IF ( Idigit<0 ) THEN
+  IF( Idigit==0 ) ndigit = 4
+  IF( Idigit<0 ) THEN
     !
     ndigit = -Idigit
-    IF ( ndigit<=4 ) THEN
+    IF( ndigit<=4 ) THEN
       !
       DO k1 = 1, N, 5
         k2 = MIN(N,k1+4)
@@ -86,7 +85,7 @@ SUBROUTINE SMOUT(M,N,Lda,A,Ifmt,Idigit)
       END DO
       RETURN
       !
-    ELSEIF ( ndigit<=6 ) THEN
+    ELSEIF( ndigit<=6 ) THEN
       !
       DO k1 = 1, N, 4
         k2 = MIN(N,k1+3)
@@ -97,7 +96,7 @@ SUBROUTINE SMOUT(M,N,Lda,A,Ifmt,Idigit)
       END DO
       RETURN
       !
-    ELSEIF ( ndigit>10 ) THEN
+    ELSEIF( ndigit>10 ) THEN
       !
       DO k1 = 1, N, 2
         k2 = MIN(N,k1+1)
@@ -119,7 +118,7 @@ SUBROUTINE SMOUT(M,N,Lda,A,Ifmt,Idigit)
       RETURN
     END IF
     !
-  ELSEIF ( ndigit<=4 ) THEN
+  ELSEIF( ndigit<=4 ) THEN
     !
     DO k1 = 1, N, 10
       k2 = MIN(N,k1+9)
@@ -130,7 +129,7 @@ SUBROUTINE SMOUT(M,N,Lda,A,Ifmt,Idigit)
     END DO
     RETURN
     !
-  ELSEIF ( ndigit<=6 ) THEN
+  ELSEIF( ndigit<=6 ) THEN
     !
     DO k1 = 1, N, 8
       k2 = MIN(N,k1+7)
@@ -141,7 +140,7 @@ SUBROUTINE SMOUT(M,N,Lda,A,Ifmt,Idigit)
     END DO
     RETURN
     !
-  ELSEIF ( ndigit>10 ) THEN
+  ELSEIF( ndigit>10 ) THEN
     !
     DO k1 = 1, N, 5
       k2 = MIN(N,k1+4)

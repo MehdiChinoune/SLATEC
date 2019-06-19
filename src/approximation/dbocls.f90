@@ -1,8 +1,7 @@
 !** DBOCLS
 SUBROUTINE DBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,&
     Mode,Rw,Iw)
-  !>
-  !  Solve the bounded and constrained least squares
+  !> Solve the bounded and constrained least squares
   !            problem consisting of solving the equation
   !                      E*X = F  (in the least squares sense)
   !             subject to the linear constraints
@@ -71,12 +70,12 @@ SUBROUTINE DBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,&
   !     array W(*,*) must satisfy the inequality:
   !
   !     If using option 1,
-  !                     MDW .ge. MCON + max(max. number of
+  !                     MDW >= MCON + max(max. number of
   !                     rows accumulated, NCOLS) + 1.
   !     If using option 8,
-  !                     MDW .ge. MCON + MROWS.
+  !                     MDW >= MCON + MROWS.
   !     Else
-  !                     MDW .ge. MCON + max(MROWS, NCOLS).
+  !                     MDW >= MCON + max(MROWS, NCOLS).
   !
   !     Other values are errors, but this is checked only when using
   !     option=2.  The value of MROWS is an output parameter when
@@ -94,27 +93,27 @@ SUBROUTINE DBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,&
   !     The first NVARS entries of IND(*), BL(*) and BU(*) specify
   !     bounds on X; the next MCON entries specify bounds on Y.
   !
-  !    1.    For IND(J)=1, require X(J) .ge. BL(J);
-  !          IF J.gt.NCOLS,        Y(J-NCOLS) .ge. BL(J).
+  !    1.    For IND(J)=1, require X(J) >= BL(J);
+  !          IF J>NCOLS,        Y(J-NCOLS) >= BL(J).
   !          (the value of BU(J) is not used.)
-  !    2.    For IND(J)=2, require X(J) .le. BU(J);
-  !          IF J.gt.NCOLS,        Y(J-NCOLS) .le. BU(J).
+  !    2.    For IND(J)=2, require X(J) <= BU(J);
+  !          IF J>NCOLS,        Y(J-NCOLS) <= BU(J).
   !          (the value of BL(J) is not used.)
-  !    3.    For IND(J)=3, require X(J) .ge. BL(J) and
-  !                                X(J) .le. BU(J);
-  !          IF J.gt.NCOLS,        Y(J-NCOLS) .ge. BL(J) and
-  !                                Y(J-NCOLS) .le. BU(J).
+  !    3.    For IND(J)=3, require X(J) >= BL(J) and
+  !                                X(J) <= BU(J);
+  !          IF J>NCOLS,        Y(J-NCOLS) >= BL(J) and
+  !                                Y(J-NCOLS) <= BU(J).
   !          (to impose equality constraints have BL(J)=BU(J)=
   !          constraining value.)
   !    4.    For IND(J)=4, no bounds on X(J) or Y(J-NCOLS) are required.
   !          (the values of BL(J) and BU(J) are not used.)
   !
   !     Values other than 1,2,3 or 4 for IND(J) are errors. In the case
-  !     IND(J)=3 (upper and lower bounds) the condition BL(J) .gt. BU(J)
-  !     is  an  error.   The values BL(J), BU(J), J .gt. NCOLS, will be
+  !     IND(J)=3 (upper and lower bounds) the condition BL(J) > BU(J)
+  !     is  an  error.   The values BL(J), BU(J), J > NCOLS, will be
   !     changed.  Significant changes mean that the constraints are
   !     infeasible.  (Users must make this decision themselves.)
-  !     The new values for BL(J), BU(J), J .gt. NCOLS, define a
+  !     The new values for BL(J), BU(J), J > NCOLS, define a
   !     region such that the perturbed problem is feasible.  If users
   !     know that their problem is feasible, this step can be skipped
   !     by using option number 8 described below.
@@ -168,7 +167,7 @@ SUBROUTINE DBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,&
   !    -----------------
   !    X(*),RNORMC,RNORM
   !    -----------------
-  !     The array X(*) contains a solution (if MODE .ge.0 or .eq.-22) for
+  !     The array X(*) contains a solution (if MODE >=0 or =-22) for
   !     the constrained least squares problem. The value RNORMC is the
   !     minimum residual vector length for the constraints C*X - Y = 0.
   !     The value RNORM is the minimum residual vector length for the
@@ -182,11 +181,11 @@ SUBROUTINE DBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,&
   !    ----
   !     The sign of MODE determines whether the subprogram has completed
   !     normally, or encountered an error condition or abnormal status. A
-  !     value of MODE .ge. 0 signifies that the subprogram has completed
-  !     normally. The value of mode (.ge. 0) is the number of variables
+  !     value of MODE >= 0 signifies that the subprogram has completed
+  !     normally. The value of mode (>= 0) is the number of variables
   !     in an active status: not at a bound nor at the value zero, for
   !     the case of free variables. A negative value of MODE will be one
-  !     of the cases (-57)-(-41), (-37)-(-22), (-19)-(-2). Values .lt. -1
+  !     of the cases (-57)-(-41), (-37)-(-22), (-19)-(-2). Values < -1
   !     correspond to an abnormal completion of the subprogram. These
   !     error messages are in groups for the subprograms DBOCLS(),
   !     SBOLSM(), and SBOLS().  An approximate solution will be returned
@@ -227,8 +226,8 @@ SUBROUTINE DBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,&
   !     new least squares equations from the calling program unit.
   !     Eventually the user signals "that's all" and a solution is then
   !     computed. The value of MROWS is an output variable when this
-  !     option is used. Its value is always in the range 0 .le. MROWS
-  !     .le. NCOLS+1. It is the number of rows after the
+  !     option is used. Its value is always in the range 0 <= MROWS
+  !     <= NCOLS+1. It is the number of rows after the
   !     triangularization of the entire set of equations. If LP is the
   !     processing pointer for IOPT(*), the usage for the sequential
   !     processing of blocks of equations is
@@ -249,7 +248,7 @@ SUBROUTINE DBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,&
   !
   !      .<LOOP
   !      . CALL DBOCLS( )
-  !      . IF(IOPT(LP+1) .EQ. 1) THEN
+  !      . IF(IOPT(LP+1) = 1) THEN
   !      .    IOPT(LP+3)=# OF ROWS IN THE NEW BLOCK; USER DEFINED
   !      .    PLACE NEW BLOCK OF IOPT(LP+3) ROWS IN
   !      .    W(*,*) STARTING AT ROW MCON + IOPT(LP+2).
@@ -257,8 +256,8 @@ SUBROUTINE DBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,&
   !      .    IF( THIS IS THE LAST BLOCK OF EQUATIONS ) THEN
   !      .       IOPT(LP+1)=2
   !      .<------CYCLE LOOP
-  !      .    ELSE IF (IOPT(LP+1) .EQ. 2) THEN
-  !      <-------EXIT LOOP SOLUTION COMPUTED IF MODE .GE. 0
+  !      .    ELSE IF(IOPT(LP+1) = 2) THEN
+  !      <-------EXIT LOOP SOLUTION COMPUTED IF MODE >= 0
   !      . ELSE
   !      . ERROR CONDITION; SHOULD NOT HAPPEN.
   !      .<END LOOP
@@ -416,14 +415,14 @@ SUBROUTINE DBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,&
   !    ----- -------- --- --------
   !
   ! WARNING in...
-  ! DBOCLS(). THE ROW DIMENSION OF W(,)=(I1) MUST BE .GE. THE NUMBER
+  ! DBOCLS(). THE ROW DIMENSION OF W(,)=(I1) MUST BE >= THE NUMBER
   ! OF EFFECTIVE ROWS=(I2).
   !           IN ABOVE MESSAGE, I1=         1
   !           IN ABOVE MESSAGE, I2=         2
   ! ERROR NUMBER =        41
   !
   ! WARNING IN...
-  ! DBOCLS(). THE COLUMN DIMENSION OF W(,)=(I1) MUST BE .GE. NCOLS+
+  ! DBOCLS(). THE COLUMN DIMENSION OF W(,)=(I1) MUST BE >= NCOLS+
   ! MCON+1=(I2).
   !           IN ABOVE MESSAGE, I1=         2
   !           IN ABOVE MESSAGE, I2=         3
@@ -431,27 +430,27 @@ SUBROUTINE DBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,&
   !
   ! WARNING IN...
   ! DBOCLS(). THE DIMENSIONS OF THE ARRAYS BL(),BU(), AND IND()=(I1)
-  ! MUST BE .GE. NCOLS+MCON=(I2).
+  ! MUST BE >= NCOLS+MCON=(I2).
   !           IN ABOVE MESSAGE, I1=         1
   !           IN ABOVE MESSAGE, I2=         2
   ! ERROR NUMBER =        43
   !
   ! WARNING IN...
   ! DBOCLS(). THE DIMENSION OF X()=(I1) MUST BE
-  ! .GE. THE REQD.LENGTH=(I2).
+  ! >= THE REQD.LENGTH=(I2).
   !           IN ABOVE MESSAGE, I1=         1
   !           IN ABOVE MESSAGE, I2=         2
   ! ERROR NUMBER =        44
   !
   ! WARNING IN...
   ! DBOCLS(). THE .
-  ! DBOCLS() THE DIMENSION OF IW()=(I1) MUST BE .GE. 2*NCOLS+2*MCON=(I2).
+  ! DBOCLS() THE DIMENSION OF IW()=(I1) MUST BE >= 2*NCOLS+2*MCON=(I2).
   !           IN ABOVE MESSAGE, I1=         1
   !           IN ABOVE MESSAGE, I2=         4
   ! ERROR NUMBER =        46
   !
   ! WARNING IN...
-  ! DBOCLS(). THE DIMENSION OF IOPT()=(I1) MUST BE .GE. THE REQD.
+  ! DBOCLS(). THE DIMENSION OF IOPT()=(I1) MUST BE >= THE REQD.
   ! LEN.=(I2).
   !           IN ABOVE MESSAGE, I1=        16
   !           IN ABOVE MESSAGE, I2=        18
@@ -481,7 +480,7 @@ SUBROUTINE DBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,&
   ! ERROR NUMBER =        51
   !
   ! WARNING IN...
-  ! DBOCLS(). NO. OF ROWS=(I1) MUST BE .GE. 0 .AND. .LE. MDW-MCON=(I2).
+  ! DBOCLS(). NO. OF ROWS=(I1) MUST BE >= 0 .AND. <= MDW-MCON=(I2).
   !           IN ABOVE MESSAGE, I1=         2
   !           IN ABOVE MESSAGE, I2=         1
   ! ERROR NUMBER =        52
@@ -508,7 +507,7 @@ SUBROUTINE DBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,&
   ! ERROR NUMBER =        56
   !
   ! WARNING IN...
-  ! DBOCLS(). FOR J=(I1), BOUND BL(J)=(R1) IS .GT. BU(J)=(R2).
+  ! DBOCLS(). FOR J=(I1), BOUND BL(J)=(R1) IS > BU(J)=(R2).
   !           IN ABOVE MESSAGE, I1=         1
   !           IN ABOVE MESSAGE, R1=     .1000000000E+01
   !           IN ABOVE MESSAGE, R2=    0.
@@ -583,12 +582,12 @@ SUBROUTINE DBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,&
   !* FIRST EXECUTABLE STATEMENT  DBOCLS
   nerr = 0
   Mode = 0
-  IF ( igo==0 ) THEN
+  IF( igo==0 ) THEN
     !     DO(CHECK VALIDITY OF INPUT DATA)
     !     PROCEDURE(CHECK VALIDITY OF INPUT DATA)
     !
-    !     SEE THAT MDW IS .GT.0. GROSS CHECK ONLY.
-    IF ( Mdw<=0 ) THEN
+    !     SEE THAT MDW IS >0. GROSS CHECK ONLY.
+    IF( Mdw<=0 ) THEN
       WRITE (xern1,'(I8)') Mdw
       CALL XERMSG('DBOCLS','MDW = '//xern1//' MUST BE POSITIVE.',53,1)
       !     DO(RETURN TO USER PROGRAM UNIT)
@@ -596,7 +595,7 @@ SUBROUTINE DBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,&
     END IF
     !
     !     SEE THAT NUMBER OF CONSTRAINTS IS NONNEGATIVE.
-    IF ( Mcon<0 ) THEN
+    IF( Mcon<0 ) THEN
       WRITE (xern1,'(I8)') Mcon
       CALL XERMSG('DBOCLS','MCON = '//xern1//&
         ' MUST BE NON-NEGATIVE',54,1)
@@ -605,7 +604,7 @@ SUBROUTINE DBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,&
     END IF
     !
     !     SEE THAT NUMBER OF UNKNOWNS IS POSITIVE.
-    IF ( Ncols<=0 ) THEN
+    IF( Ncols<=0 ) THEN
       WRITE (xern1,'(I8)') Ncols
       CALL XERMSG('DBOCLS','NCOLS = '//xern1//&
         ' THE NO. OF VARIABLES, MUST BE POSITIVE.',55,1)
@@ -615,7 +614,7 @@ SUBROUTINE DBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,&
     !
     !     SEE THAT CONSTRAINT INDICATORS ARE ALL WELL-DEFINED.
     DO j = 1, Ncols + Mcon
-      IF ( Ind(j)<1.OR.Ind(j)>4 ) THEN
+      IF( Ind(j)<1 .OR. Ind(j)>4 ) THEN
         WRITE (xern1,'(I8)') j
         WRITE (xern2,'(I8)') Ind(j)
         CALL XERMSG('DBOCLS','IND('//xern1//') = '//xern2//&
@@ -627,13 +626,13 @@ SUBROUTINE DBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,&
     !
     !     SEE THAT BOUNDS ARE CONSISTENT.
     DO j = 1, Ncols + Mcon
-      IF ( Ind(j)==3 ) THEN
-        IF ( Bl(j)>Bu(j) ) THEN
+      IF( Ind(j)==3 ) THEN
+        IF( Bl(j)>Bu(j) ) THEN
           WRITE (xern1,'(I8)') j
           WRITE (xern3,'(1PE15.6)') Bl(j)
           WRITE (xern4,'(1PE15.6)') Bu(j)
           CALL XERMSG('DBOCLS','BOUND BL('//xern1//') = '//xern3//&
-            ' IS .GT. BU('//xern1//') = '//xern4,57,1)
+            ' IS > BU('//xern1//') = '//xern4,57,1)
           !     DO(RETURN TO USER PROGRAM UNIT)
           GOTO 100
         END IF
@@ -663,10 +662,10 @@ SUBROUTINE DBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,&
       jp = ABS(ip)
       !
       !     TEST FOR NO MORE OPTIONS TO CHANGE.
-      IF ( ip==99 ) THEN
-        IF ( lopt==0 ) lopt = -(lp+2)
-        IF ( mopt==0 ) mopt = -(ABS(lopt)+7)
-        IF ( lopt<0 ) THEN
+      IF( ip==99 ) THEN
+        IF( lopt==0 ) lopt = -(lp+2)
+        IF( mopt==0 ) mopt = -(ABS(lopt)+7)
+        IF( lopt<0 ) THEN
           lbou = ABS(lopt)
         ELSE
           lbou = lopt - 15
@@ -685,12 +684,12 @@ SUBROUTINE DBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,&
         !     SKIP TO START OF USER-GIVEN OPTION ARRAY FOR DBOLS().
         Iopt(lbou+4) = 6
         Iopt(lbou+6) = 99
-        IF ( lopt>0 ) THEN
+        IF( lopt>0 ) THEN
           Iopt(lbou+5) = lopt - lbou + 1
         ELSE
           Iopt(lbou+4) = -Iopt(lbou+4)
         END IF
-        IF ( mopt<0 ) THEN
+        IF( mopt<0 ) THEN
           lboum = ABS(mopt)
         ELSE
           lboum = mopt - 8
@@ -708,19 +707,19 @@ SUBROUTINE DBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,&
         !     SKIP TO USER-GIVEN OPTION ARRAY FOR DBOLSM( ).
         Iopt(lboum+5) = 1
         Iopt(lboum+7) = 99
-        IF ( mopt>0 ) THEN
+        IF( mopt>0 ) THEN
           Iopt(lboum+6) = mopt - lboum + 1
         ELSE
           Iopt(lboum+5) = -Iopt(lboum+5)
         END IF
         !     EXIT FOREVER
         EXIT
-      ELSEIF ( jp==99 ) THEN
+      ELSEIF( jp==99 ) THEN
         lds = 1
         !     CYCLE FOREVER
         EXIT
-      ELSEIF ( jp==1 ) THEN
-        IF ( ip>0 ) THEN
+      ELSEIF( jp==1 ) THEN
+        IF( ip>0 ) THEN
           !
           !     SET UP DIRECTION FLAG LOCATION, ROW STACKING POINTER
           !     LOCATION, AND LOCATION FOR NUMBER OF NEW ROWS.
@@ -738,13 +737,13 @@ SUBROUTINE DBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,&
           !              LOOP
           !              CALL DBOCLS()
           !
-          !                  IF(IOPT(LOCACC) .EQ. 1) THEN
+          !                  IF(IOPT(LOCACC) = 1) THEN
           !                      STACK EQUAS. INTO W(*,*), STARTING AT
           !                      ROW IOPT(LOCACC+1).
           !                       INTO W(*,*).
           !                       SET IOPT(LOCACC+2)=NO. OF EQUAS.
           !                      IF LAST BLOCK OF EQUAS., SET IOPT(LOCACC)=2.
-          !                  ELSE IF IOPT(LOCACC) .EQ. 2) THEN
+          !                  ELSE IF IOPT(LOCACC) = 2) THEN
           !                      (PROCESS IS OVER. EXIT LOOP.)
           !                  ELSE
           !                      (ERROR CONDITION. SHOULD NOT HAPPEN.)
@@ -756,21 +755,21 @@ SUBROUTINE DBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,&
         END IF
         !     CYCLE FOREVER
         lds = 4
-      ELSEIF ( jp==2 ) THEN
-        IF ( ip>0 ) THEN
+      ELSEIF( jp==2 ) THEN
+        IF( ip>0 ) THEN
           !
           !     GET ACTUAL LENGTHS OF ARRAYS FOR CHECKING AGAINST NEEDS.
           locdim = lp + 2
           !
-          !     LMDW.GE.MCON+MAX(MOUT,NCOLS), IF MCON.GT.0 .AND FILTER
-          !     LMDW.GE.MCON+MOUT, OTHERWISE
+          !     LMDW>=MCON+MAX(MOUT,NCOLS), IF MCON>0 .AND FILTER
+          !     LMDW>=MCON+MOUT, OTHERWISE
           !
-          !     LNDW.GE.NCOLS+MCON+1
-          !     LLB .GE.NCOLS+MCON
-          !     LLX .GE.2*(NCOLS+MCON)+2+EXTRA REQD. IN OPTIONS.
-          !     LLRW.GE.6*NCOLS+5*MCON
-          !     LLIW.GE.2*(NCOLS+MCON)
-          !     LIOP.GE. AMOUNT REQD. FOR OPTION ARRAY.
+          !     LNDW>=NCOLS+MCON+1
+          !     LLB >=NCOLS+MCON
+          !     LLX >=2*(NCOLS+MCON)+2+EXTRA REQD. IN OPTIONS.
+          !     LLRW>=6*NCOLS+5*MCON
+          !     LLIW>=2*(NCOLS+MCON)
+          !     LIOP>= AMOUNT REQD. FOR OPTION ARRAY.
           lmdw = Iopt(locdim)
           lndw = Iopt(locdim+1)
           llb = Iopt(locdim+2)
@@ -784,12 +783,12 @@ SUBROUTINE DBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,&
         lds = 8
         !
         !     OPTION TO MODIFY THE COLUMN SCALING.
-      ELSEIF ( jp==3 ) THEN
-        IF ( ip>0 ) THEN
+      ELSEIF( jp==3 ) THEN
+        IF( ip>0 ) THEN
           iscale = Iopt(lp+2)
           !
           !     SEE THAT ISCALE IS 1 THRU 3.
-          IF ( iscale<1.OR.iscale>3 ) THEN
+          IF( iscale<1 .OR. iscale>3 ) THEN
             WRITE (xern1,'(I8)') iscale
             CALL XERMSG('DBOCLS','ISCALE OPTION = '//xern1//&
               ' MUST BE 1-3',48,1)
@@ -802,10 +801,10 @@ SUBROUTINE DBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,&
         !
         !     IN THIS OPTION THE USER HAS PROVIDED SCALING.  THE
         !     SCALE FACTORS FOR THE COLUMNS BEGIN IN X(NCOLS+IOPT(LP+2)).
-      ELSEIF ( jp==4 ) THEN
-        IF ( ip>0 ) THEN
+      ELSEIF( jp==4 ) THEN
+        IF( ip>0 ) THEN
           iscale = 4
-          IF ( Iopt(lp+2)<=0 ) THEN
+          IF( Iopt(lp+2)<=0 ) THEN
             WRITE (xern1,'(I8)') Iopt(lp+2)
             CALL XERMSG('DBOCLS','OFFSET PAST X(NCOLS) ('//xern1//&
               ') FOR USER-PROVIDED COLUMN SCALING MUST BE POSITIVE.',49,1)
@@ -815,7 +814,7 @@ SUBROUTINE DBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,&
           Rw(1:Ncols) = X(Ncols+Iopt(lp+2):2*Ncols+Iopt(lp+2)-1)
           lenx = lenx + Ncols
           DO j = 1, Ncols
-            IF ( Rw(j)<=zero ) THEN
+            IF( Rw(j)<=zero ) THEN
               WRITE (xern1,'(I8)') j
               WRITE (xern3,'(1PE15.6)') Rw(j)
               CALL XERMSG('DBOCLS',&
@@ -830,21 +829,21 @@ SUBROUTINE DBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,&
         lds = 2
         !
         !     IN THIS OPTION AN OPTION ARRAY IS PROVIDED TO DBOLS().
-      ELSEIF ( jp==5 ) THEN
-        IF ( ip>0 ) lopt = Iopt(lp+2)
+      ELSEIF( jp==5 ) THEN
+        IF( ip>0 ) lopt = Iopt(lp+2)
         !     CYCLE FOREVER
         lds = 2
         !
         !     IN THIS OPTION AN OPTION ARRAY IS PROVIDED TO DBOLSM().
-      ELSEIF ( jp==6 ) THEN
-        IF ( ip>0 ) mopt = Iopt(lp+2)
+      ELSEIF( jp==6 ) THEN
+        IF( ip>0 ) mopt = Iopt(lp+2)
         !     CYCLE FOREVER
         lds = 2
         !
         !     THIS OPTION USES THE NEXT LOC OF IOPT(*) AS A
         !     POINTER VALUE TO SKIP TO NEXT.
-      ELSEIF ( jp==7 ) THEN
-        IF ( ip>0 ) THEN
+      ELSEIF( jp==7 ) THEN
+        IF( ip>0 ) THEN
           lp = Iopt(lp+2) - 1
           lds = 0
         ELSE
@@ -854,15 +853,15 @@ SUBROUTINE DBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,&
         !
         !     THIS OPTION AVOIDS THE CONSTRAINT RESOLVING PHASE FOR
         !     THE LINEAR CONSTRAINTS C*X=Y.
-      ELSEIF ( jp==8 ) THEN
-        filter = .NOT.(ip>0)
+      ELSEIF( jp==8 ) THEN
+        filter = .NOT. (ip>0)
         !     CYCLE FOREVER
         lds = 1
         !
         !     THIS OPTION SUPPRESSES PRE-TRIANGULARIZATION OF THE LEAST
         !     SQUARES EQUATIONS.
-      ELSEIF ( jp==9 ) THEN
-        pretri = .NOT.(ip>0)
+      ELSEIF( jp==9 ) THEN
+        pretri = .NOT. (ip>0)
         !     CYCLE FOREVER
         lds = 1
         !
@@ -877,71 +876,71 @@ SUBROUTINE DBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,&
     END DO
     !     END FOREVER
     !     END PROCEDURE
-    IF ( checkl ) THEN
+    IF( checkl ) THEN
       !     DO(CHECK LENGTHS OF ARRAYS)
       !     PROCEDURE(CHECK LENGTHS OF ARRAYS)
       !
       !     THIS FEATURE ALLOWS THE USER TO MAKE SURE THAT THE
       !     ARRAYS ARE LONG ENOUGH FOR THE INTENDED PROBLEM SIZE AND USE.
-      IF ( filter.AND..NOT.accum ) THEN
+      IF( filter .AND. .NOT. accum ) THEN
         mdwl = Mcon + MAX(Mrows,Ncols)
       ELSE
         mdwl = Mcon + Ncols + 1
       END IF
-      IF ( lmdw<mdwl ) THEN
+      IF( lmdw<mdwl ) THEN
         WRITE (xern1,'(I8)') lmdw
         WRITE (xern2,'(I8)') mdwl
         CALL XERMSG('DBOCLS','THE ROW DIMENSION OF W(,) = '//&
-          xern1//' MUST BE .GE. THE NUMBER OF EFFECTIVE ROWS = '//xern2,41,1)
+          xern1//' MUST BE >= THE NUMBER OF EFFECTIVE ROWS = '//xern2,41,1)
         !     DO(RETURN TO USER PROGRAM UNIT)
         GOTO 100
       END IF
-      IF ( lndw<Ncols+Mcon+1 ) THEN
+      IF( lndw<Ncols+Mcon+1 ) THEN
         WRITE (xern1,'(I8)') lndw
         WRITE (xern2,'(I8)') Ncols + Mcon + 1
         CALL XERMSG('DBOCLS','THE COLUMN DIMENSION OF W(,) = '//&
-          xern1//' MUST BE .GE. NCOLS+MCON+1 = '//xern2,42,1)
+          xern1//' MUST BE >= NCOLS+MCON+1 = '//xern2,42,1)
         !     DO(RETURN TO USER PROGRAM UNIT)
         GOTO 100
       END IF
-      IF ( llb<Ncols+Mcon ) THEN
+      IF( llb<Ncols+Mcon ) THEN
         WRITE (xern1,'(I8)') llb
         WRITE (xern2,'(I8)') Ncols + Mcon
         CALL XERMSG('DBOCLS',&
           'THE DIMENSIONS OF THE ARRAYS BS(), BU(), AND IND() = '&
-          //xern1//' MUST BE .GE. NCOLS+MCON = '//xern2,43,1)
+          //xern1//' MUST BE >= NCOLS+MCON = '//xern2,43,1)
         !     DO(RETURN TO USER PROGRAM UNIT)
         GOTO 100
       END IF
-      IF ( llx<lenx ) THEN
+      IF( llx<lenx ) THEN
         WRITE (xern1,'(I8)') llx
         WRITE (xern2,'(I8)') lenx
         CALL XERMSG('DBOCLS','THE DIMENSION OF X() = '//xern1//&
-          ' MUST BE .GE. THE REQUIRED LENGTH = '//xern2,44,1)
+          ' MUST BE >= THE REQUIRED LENGTH = '//xern2,44,1)
         !     DO(RETURN TO USER PROGRAM UNIT)
         GOTO 100
       END IF
-      IF ( llrw<6*Ncols+5*Mcon ) THEN
+      IF( llrw<6*Ncols+5*Mcon ) THEN
         WRITE (xern1,'(I8)') llrw
         WRITE (xern2,'(I8)') 6*Ncols + 5*Mcon
         CALL XERMSG('DBOCLS','THE DIMENSION OF RW() = '//xern1//&
-          ' MUST BE .GE. 6*NCOLS+5*MCON = '//xern2,45,1)
+          ' MUST BE >= 6*NCOLS+5*MCON = '//xern2,45,1)
         !     DO(RETURN TO USER PROGRAM UNIT)
         GOTO 100
       END IF
-      IF ( lliw<2*Ncols+2*Mcon ) THEN
+      IF( lliw<2*Ncols+2*Mcon ) THEN
         WRITE (xern1,'(I8)') lliw
         WRITE (xern2,'(I8)') 2*Ncols + 2*Mcon
         CALL XERMSG('DBOCLS','THE DIMENSION OF IW() = '//xern1//&
-          ' MUST BE .GE. 2*NCOLS+2*MCON = '//xern2,46,1)
+          ' MUST BE >= 2*NCOLS+2*MCON = '//xern2,46,1)
         !     DO(RETURN TO USER PROGRAM UNIT)
         GOTO 100
       END IF
-      IF ( liopt<lp+17 ) THEN
+      IF( liopt<lp+17 ) THEN
         WRITE (xern1,'(I8)') liopt
         WRITE (xern2,'(I8)') lp + 17
         CALL XERMSG('DBOCLS','THE DIMENSION OF IOPT() = '//xern1//&
-          ' MUST BE .GE. THE REQUIRED LEN = '//xern2,47,1)
+          ' MUST BE >= THE REQUIRED LEN = '//xern2,47,1)
         !     DO(RETURN TO USER PROGRAM UNIT)
         GOTO 100
       END IF
@@ -953,15 +952,15 @@ SUBROUTINE DBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,&
   !     EQUATIONS AND DIRECTIONS FOR PROCESSING THESE EQUATIONS.
   !     DO(ACCUMULATE LEAST SQUARES EQUATIONS)
   !     PROCEDURE(ACCUMULATE LEAST SQUARES EQUATIONS)
-  IF ( accum ) THEN
+  IF( accum ) THEN
     Mrows = Iopt(locacc+1) - 1 - Mcon
     inrows = Iopt(locacc+2)
     mnew = Mrows + inrows
-    IF ( mnew<0.OR.mnew+Mcon>Mdw ) THEN
+    IF( mnew<0 .OR. mnew+Mcon>Mdw ) THEN
       WRITE (xern1,'(I8)') mnew
       WRITE (xern2,'(I8)') Mdw - Mcon
       CALL XERMSG('DBOCLS','NO. OF ROWS = '//xern1//&
-        ' MUST BE .GE. 0 .AND. .LE. MDW-MCON = '//xern2,52,1)
+        ' MUST BE >= 0 .AND. <= MDW-MCON = '//xern2,52,1)
       !    (RETURN TO USER PROGRAM UNIT)
       GOTO 100
     END IF
@@ -977,24 +976,24 @@ SUBROUTINE DBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,&
   jopt(05) = 99
   irw = Ncols + 1
   iiw = 1
-  IF ( accum.OR.pretri ) THEN
+  IF( accum .OR. pretri ) THEN
     CALL DBOLS(W(Mcon+1,1),Mdw,mout,Ncols,Bl,Bu,Ind,jopt,X,Rnorm,Mode,Rw(irw),Iw(iiw))
   ELSE
     mout = Mrows
   END IF
-  IF ( accum ) THEN
+  IF( accum ) THEN
     accum = Iopt(locacc)==1
     Iopt(locacc+1) = jopt(03) + Mcon
     Mrows = MIN(Ncols+1,mnew)
   END IF
   !     END PROCEDURE
-  IF ( accum ) RETURN
+  IF( accum ) RETURN
   !     DO(SOLVE CONSTRAINED AND BOUNDED LEAST SQUARES PROBLEM)
   !     PROCEDURE(SOLVE CONSTRAINED AND BOUNDED LEAST SQUARES PROBLEM)
   !
   !     MOVE RIGHT HAND SIDE OF LEAST SQUARES EQUATIONS.
   W(Mcon+1:Mcon+mout,Ncols+Mcon+1) = W(Mcon+1:Mcon+mout,Ncols+1)
-  IF ( Mcon>0.AND.filter ) THEN
+  IF( Mcon>0 .AND. filter ) THEN
     !
     !     PROJECT THE LINEAR CONSTRAINTS INTO A REACHABLE SET.
     DO i = 1, Mcon
@@ -1019,7 +1018,7 @@ SUBROUTINE DBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,&
     !     CAN BE REACHED.
     DO j = Ncols + 1, Ncols + Mcon
       icase = Ind(j)
-      IF ( icase<4 ) t = DOT_PRODUCT(W(Mcon+1:Mcon+Ncols,j),X(1:Ncols))
+      IF( icase<4 ) t = DOT_PRODUCT(W(Mcon+1:Mcon+Ncols,j),X(1:Ncols))
       SELECT CASE (icase)
         CASE (1)
           !     CASE 1
@@ -1041,7 +1040,7 @@ SUBROUTINE DBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,&
       W(j-Ncols,1:Ncols) = W(Mcon+1:Mcon+Ncols,j)
     END DO
   END IF
-  IF ( Mcon>0 ) THEN
+  IF( Mcon>0 ) THEN
     DO j = Ncols + 1, Ncols + Mcon
       W(Mcon+1:Mcon+mout,j) = zero
     END DO
@@ -1062,7 +1061,7 @@ SUBROUTINE DBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,&
     t1 = SUM(ABS(W(1:Mcon,j)))
     t2 = SUM(ABS(W(Mcon+1:Mcon+mout,1)))
     t = t1 + t2
-    IF ( t==zero ) t = one
+    IF( t==zero ) t = one
     cnorm = MAX(cnorm,t1)
     anorm = MAX(anorm,t2)
     X(Ncols+Mcon+j) = one/t
@@ -1074,7 +1073,7 @@ SUBROUTINE DBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,&
       !     SCALE COLS. (BEFORE WEIGHTING) TO HAVE LENGTH ONE.
       DO j = 1, Ncols
         t = NORM2(W(1:Mcon+mout,j))
-        IF ( t==zero ) t = one
+        IF( t==zero ) t = one
         X(Ncols+Mcon+j) = one/t
       END DO
     CASE (3)
@@ -1096,8 +1095,8 @@ SUBROUTINE DBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,&
   !
   !     WEIGHT THE LEAST SQUARES EQUATIONS.
   wt = drelpr
-  IF ( anorm>zero ) wt = wt/anorm
-  IF ( cnorm>zero ) wt = wt*cnorm
+  IF( anorm>zero ) wt = wt/anorm
+  IF( cnorm>zero ) wt = wt*cnorm
   DO i = 1, mout
     W(i+Mcon,1:Ncols) = W(i+Mcon,1:Ncols)*wt
   END DO
@@ -1108,7 +1107,7 @@ SUBROUTINE DBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,&
   !     SET THE NEW TRIANGULARIZATION FACTOR.
   X(2*(Ncols+Mcon)+1) = zero
   !
-  !     SET THE WEIGHT TO USE IN COMPONENTS .GT. MCON,
+  !     SET THE WEIGHT TO USE IN COMPONENTS > MCON,
   !     WHEN MAKING LINEAR INDEPENDENCE TEST.
   X(2*(Ncols+Mcon)+2) = one/wt
   m = mout + Mcon
@@ -1117,7 +1116,7 @@ SUBROUTINE DBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,&
   !     END PROCEDURE
   !     PROCEDURE(RETURN TO USER PROGRAM UNIT)
   100 CONTINUE
-  IF ( Mode>=0 ) Mode = -nerr
+  IF( Mode>=0 ) Mode = -nerr
   igo = 0
   !     END PROGRAM
 END SUBROUTINE DBOCLS

@@ -1,7 +1,6 @@
 !** R9UPAK
 SUBROUTINE R9UPAK(X,Y,N)
-  !>
-  !  Unpack a floating point number X so that X = Y*2**N.
+  !> Unpack a floating point number X so that X = Y*2**N.
   !***
   ! **Library:**   SLATEC (FNLIB)
   !***
@@ -16,7 +15,7 @@ SUBROUTINE R9UPAK(X,Y,N)
   ! **Description:**
   !
   !   Unpack a floating point number X so that X = Y*2.0**N, where
-  !   0.5 .LE. ABS(Y) .LT. 1.0.
+  !   0.5 <= ABS(Y) < 1.0.
   !
   !***
   ! **References:**  (NONE)
@@ -29,21 +28,21 @@ SUBROUTINE R9UPAK(X,Y,N)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
   !* FIRST EXECUTABLE STATEMENT  R9UPAK
-  REAL(SP) absx, X, Y
-  INTEGER N
+  REAL(SP) :: absx, X, Y
+  INTEGER :: N
   absx = ABS(X)
   N = 0
-  IF ( X==0.0E0 ) THEN
+  IF( X==0.0E0 ) THEN
     !
     Y = SIGN(absx,X)
   ELSE
     !
-    DO WHILE ( absx<0.5E0 )
+    DO WHILE( absx<0.5E0 )
       N = N - 1
       absx = absx*2.0E0
     END DO
     !
-    DO WHILE ( absx>=1.0E0 )
+    DO WHILE( absx>=1.0E0 )
       N = N + 1
       absx = absx*0.5E0
     END DO

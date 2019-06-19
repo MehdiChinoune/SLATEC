@@ -1,7 +1,6 @@
 !** CHKSN4
 SUBROUTINE CHKSN4(Mbdcnd,Nbdcnd,Alpha,Beta,COFX,Singlr)
-  !>
-  !  Subsidiary to SEPX4
+  !> Subsidiary to SEPX4
   !***
   ! **Library:**   SLATEC
   !***
@@ -44,12 +43,12 @@ SUBROUTINE CHKSN4(Mbdcnd,Nbdcnd,Alpha,Beta,COFX,Singlr)
   !     CHECK IF THE BOUNDARY CONDITIONS ARE
   !     ENTIRELY PERIODIC AND/OR MIXED
   !
-  IF ( (Mbdcnd/=0.AND.Mbdcnd/=3).OR.(Nbdcnd/=0.AND.Nbdcnd/=3) ) RETURN
+  IF( (Mbdcnd/=0 .AND. Mbdcnd/=3) .OR. (Nbdcnd/=0 .AND. Nbdcnd/=3) ) RETURN
   !
   !     CHECK THAT MIXED CONDITIONS ARE PURE NEUMAN
   !
-  IF ( Mbdcnd==3 ) THEN
-    IF ( Alpha/=0.0.OR.Beta/=0.0 ) RETURN
+  IF( Mbdcnd==3 ) THEN
+    IF( Alpha/=0.0 .OR. Beta/=0.0 ) RETURN
   END IF
   !
   !     CHECK THAT NON-DERIVATIVE COEFFICIENT FUNCTIONS
@@ -58,7 +57,7 @@ SUBROUTINE CHKSN4(Mbdcnd,Nbdcnd,Alpha,Beta,COFX,Singlr)
   DO i = is_com, ms_com
     xi = ait_com + (i-1)*dlx_com
     CALL COFX(xi,ai,bi,ci)
-    IF ( ci/=0.0 ) RETURN
+    IF( ci/=0.0 ) RETURN
   END DO
   !
   !     THE OPERATOR MUST BE SINGULAR IF THIS POINT IS REACHED

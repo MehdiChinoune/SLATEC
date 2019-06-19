@@ -1,7 +1,6 @@
 !** EXPREL
 REAL(SP) FUNCTION EXPREL(X)
-  !>
-  !  Calculate the relative error exponential (EXP(X)-1)/X.
+  !> Calculate the relative error exponential (EXP(X)-1)/X.
   !***
   ! **Library:**   SLATEC (FNLIB)
   !***
@@ -42,11 +41,11 @@ REAL(SP) FUNCTION EXPREL(X)
   !* FIRST EXECUTABLE STATEMENT  EXPREL
   !
   absx = ABS(X)
-  IF ( absx>0.5 ) EXPREL = (EXP(X)-1.0)/X
-  IF ( absx>0.5 ) RETURN
+  IF( absx>0.5 ) EXPREL = (EXP(X)-1.0)/X
+  IF( absx>0.5 ) RETURN
   !
   EXPREL = 1.0
-  IF ( absx<xbnd ) RETURN
+  IF( absx<xbnd ) RETURN
   !
   EXPREL = 0.0
   DO i = 1, nterms

@@ -1,7 +1,6 @@
 !** DQWGTF
 REAL(DP) FUNCTION DQWGTF(X,Omega,P2,P3,P4,Integr)
-  !>
-  !  This function subprogram is used together with the
+  !> This function subprogram is used together with the
   !            routine DQAWF and defines the WEIGHT function.
   !***
   ! **Library:**   SLATEC
@@ -30,10 +29,10 @@ REAL(DP) FUNCTION DQWGTF(X,Omega,P2,P3,P4,Integr)
 
   !
   REAL(DP) :: Omega, omx, P2, P3, P4, X
-  INTEGER Integr
+  INTEGER :: Integr
   !* FIRST EXECUTABLE STATEMENT  DQWGTF
   omx = Omega*X
-  IF ( Integr==2 ) THEN
+  IF( Integr==2 ) THEN
     DQWGTF = SIN(omx)
   ELSE
     DQWGTF = COS(omx)

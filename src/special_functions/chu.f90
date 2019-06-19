@@ -1,7 +1,6 @@
 !** CHU
 REAL(SP) FUNCTION CHU(A,B,X)
-  !>
-  !  Compute the logarithmic confluent hypergeometric function.
+  !> Compute the logarithmic confluent hypergeometric function.
   !***
   ! **Library:**   SLATEC (FNLIB)
   !***
@@ -48,19 +47,19 @@ REAL(SP) FUNCTION CHU(A,B,X)
   REAL(SP), PARAMETER :: eps = R1MACH(3)
   !* FIRST EXECUTABLE STATEMENT  CHU
   !
-  IF ( X==0.0 ) CALL XERMSG('CHU','X IS ZERO SO CHU IS INFINITE',1,2)
-  IF ( X<0.0 ) CALL XERMSG('CHU','X IS NEGATIVE, USE CCHU',2,2)
+  IF( X==0.0 ) CALL XERMSG('CHU','X IS ZERO SO CHU IS INFINITE',1,2)
+  IF( X<0.0 ) CALL XERMSG('CHU','X IS NEGATIVE, USE CCHU',2,2)
   !
-  IF ( MAX(ABS(A),1.0)*MAX(ABS(1.0+A-B),1.0)>=0.99*ABS(X) ) THEN
+  IF( MAX(ABS(A),1.0)*MAX(ABS(1.0+A-B),1.0)>=0.99*ABS(X) ) THEN
     !
     ! THE ASCENDING SERIES WILL BE USED, BECAUSE THE DESCENDING RATIONAL
     ! APPROXIMATION (WHICH IS BASED ON THE ASYMPTOTIC SERIES) IS UNSTABLE.
     !
-    IF ( ABS(1.0+A-B)<SQRT(eps) ) CALL XERMSG('CHU',&
+    IF( ABS(1.0+A-B)<SQRT(eps) ) CALL XERMSG('CHU',&
       'ALGORITHM IS BAD WHEN 1+A-B IS NEAR ZERO FOR SMALL X',10,2)
     !
     aintb = AINT(B+0.5)
-    IF ( B<0.0 ) aintb = AINT(B-0.5)
+    IF( B<0.0 ) aintb = AINT(B-0.5)
     beps = B - aintb
     n = INT( aintb )
     !
@@ -69,16 +68,16 @@ REAL(SP) FUNCTION CHU(A,B,X)
     !
     ! EVALUATE THE FINITE SUM.     -----------------------------------------
     !
-    IF ( n>=1 ) THEN
+    IF( n>=1 ) THEN
       !
-      ! NOW CONSIDER THE CASE B .GE. 1.0.
+      ! NOW CONSIDER THE CASE B >= 1.0.
       !
       summ = 0.0
       m = n - 2
-      IF ( m>=0 ) THEN
+      IF( m>=0 ) THEN
         t = 1.0
         summ = 1.0
-        IF ( m/=0 ) THEN
+        IF( m/=0 ) THEN
           !
           DO i = 1, m
             xi = i
@@ -91,10 +90,10 @@ REAL(SP) FUNCTION CHU(A,B,X)
       END IF
     ELSE
       !
-      ! CONSIDER THE CASE B .LT. 1.0 FIRST.
+      ! CONSIDER THE CASE B < 1.0 FIRST.
       !
       summ = 1.0
-      IF ( n/=0 ) THEN
+      IF( n/=0 ) THEN
         !
         t = 1.0
         m = -n
@@ -111,18 +110,18 @@ REAL(SP) FUNCTION CHU(A,B,X)
     ! NOW EVALUATE THE INFINITE SUM.     -----------------------------------
     !
     istrt = 0
-    IF ( n<1 ) istrt = 1 - n
+    IF( n<1 ) istrt = 1 - n
     xi = istrt
     !
     factor = (-1.0)**n*GAMR(1.0+A-B)*X**istrt
-    IF ( beps/=0.0 ) factor = factor*beps*pi/SIN(beps*pi)
+    IF( beps/=0.0 ) factor = factor*beps*pi/SIN(beps*pi)
     !
     pochai = POCH(A,xi)
     gamri1 = GAMR(xi+1.0)
     gamrni = GAMR(aintb+xi)
     b0 = factor*POCH(A,xi-beps)*gamrni*GAMR(xi+1.0-beps)
     !
-    IF ( ABS(xtoeps-1.0)<=0.5 ) THEN
+    IF( ABS(xtoeps-1.0)<=0.5 ) THEN
       !
       ! X**(-BEPS) IS CLOSE TO 1.0, SO WE MUST BE CAREFUL IN EVALUATING
       ! THE DIFFERENCES
@@ -146,7 +145,7 @@ REAL(SP) FUNCTION CHU(A,B,X)
           *b0/(xi*(B+xi1)*(A+xi1-beps))
         t = c0 + xeps1*b0
         CHU = CHU + t
-        IF ( ABS(t)<eps*ABS(CHU) ) RETURN
+        IF( ABS(t)<eps*ABS(CHU) ) RETURN
       END DO
       CALL XERMSG('CHU',&
         'NO CONVERGENCE IN 1000 TERMS OF THE ASCENDING SERIES',3,2)
@@ -166,7 +165,7 @@ REAL(SP) FUNCTION CHU(A,B,X)
       b0 = (A+xi1-beps)*b0*X/((aintb+xi1)*(xi-beps))
       t = a0 - b0
       CHU = CHU + t
-      IF ( ABS(t)<eps*ABS(CHU) ) RETURN
+      IF( ABS(t)<eps*ABS(CHU) ) RETURN
     END DO
     CALL XERMSG('CHU',&
       'NO CONVERGENCE IN 1000 TERMS OF THE ASCENDING SERIES',3,2)

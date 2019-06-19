@@ -1,7 +1,6 @@
 !** D1UPDT
 SUBROUTINE D1UPDT(M,N,S,Ls,U,V,W,Sing)
-  !>
-  !  Subsidiary to DNSQ and DNSQE
+  !> Subsidiary to DNSQ and DNSQE
   !***
   ! **Library:**   SLATEC
   !***
@@ -106,17 +105,17 @@ SUBROUTINE D1UPDT(M,N,S,Ls,U,V,W,Sing)
   !     IN SUCH A WAY THAT A SPIKE IS INTRODUCED INTO W.
   !
   nm1 = N - 1
-  IF ( nm1>=1 ) THEN
+  IF( nm1>=1 ) THEN
     DO nmj = 1, nm1
       j = N - nmj
       jj = jj - (M-j+1)
       W(j) = zero
-      IF ( V(j)/=zero ) THEN
+      IF( V(j)/=zero ) THEN
         !
         !        DETERMINE A GIVENS ROTATION WHICH ELIMINATES THE
         !        J-TH ELEMENT OF V.
         !
-        IF ( ABS(V(N))>=ABS(V(j)) ) THEN
+        IF( ABS(V(N))>=ABS(V(j)) ) THEN
           tann = V(j)/V(N)
           coss = p5/SQRT(p25+p25*tann**2)
           sinn = coss*tann
@@ -126,7 +125,7 @@ SUBROUTINE D1UPDT(M,N,S,Ls,U,V,W,Sing)
           sinn = p5/SQRT(p25+p25*cotan**2)
           coss = sinn*cotan
           tau = one
-          IF ( ABS(coss)*giant>one ) tau = one/coss
+          IF( ABS(coss)*giant>one ) tau = one/coss
         END IF
         !
         !        APPLY THE TRANSFORMATION TO V AND STORE THE INFORMATION
@@ -157,14 +156,14 @@ SUBROUTINE D1UPDT(M,N,S,Ls,U,V,W,Sing)
   !     ELIMINATE THE SPIKE.
   !
   Sing = .FALSE.
-  IF ( nm1>=1 ) THEN
+  IF( nm1>=1 ) THEN
     DO j = 1, nm1
-      IF ( W(j)/=zero ) THEN
+      IF( W(j)/=zero ) THEN
         !
         !        DETERMINE A GIVENS ROTATION WHICH ELIMINATES THE
         !        J-TH ELEMENT OF THE SPIKE.
         !
-        IF ( ABS(S(jj))>=ABS(W(j)) ) THEN
+        IF( ABS(S(jj))>=ABS(W(j)) ) THEN
           tann = W(j)/S(jj)
           coss = p5/SQRT(p25+p25*tann**2)
           sinn = coss*tann
@@ -174,7 +173,7 @@ SUBROUTINE D1UPDT(M,N,S,Ls,U,V,W,Sing)
           sinn = p5/SQRT(p25+p25*cotan**2)
           coss = sinn*cotan
           tau = one
-          IF ( ABS(coss)*giant>one ) tau = one/coss
+          IF( ABS(coss)*giant>one ) tau = one/coss
         END IF
         !
         !        APPLY THE TRANSFORMATION TO S AND REDUCE THE SPIKE IN W.
@@ -195,7 +194,7 @@ SUBROUTINE D1UPDT(M,N,S,Ls,U,V,W,Sing)
       !
       !        TEST FOR ZERO DIAGONAL ELEMENTS IN THE OUTPUT S.
       !
-      IF ( S(jj)==zero ) Sing = .TRUE.
+      IF( S(jj)==zero ) Sing = .TRUE.
       jj = jj + (M-j+1)
     END DO
   END IF
@@ -207,7 +206,7 @@ SUBROUTINE D1UPDT(M,N,S,Ls,U,V,W,Sing)
     S(l) = W(i)
     l = l + 1
   END DO
-  IF ( S(jj)==zero ) Sing = .TRUE.
+  IF( S(jj)==zero ) Sing = .TRUE.
   !
   !     LAST CARD OF SUBROUTINE D1UPDT.
   !

@@ -1,7 +1,6 @@
 !** H12
 SUBROUTINE H12(Mode,Lpivot,L1,M,U,Iue,Up,C,Ice,Icv,Ncv)
-  !>
-  !  Subsidiary to HFTI, LSEI and WNNLS
+  !> Subsidiary to HFTI, LSEI and WNNLS
   !***
   ! **Library:**   SLATEC
   !***
@@ -19,7 +18,7 @@ SUBROUTINE H12(Mode,Lpivot,L1,M,U,Iue,Up,C,Ice,Icv,Ncv)
   !
   !     MODE    = 1 or 2   to select algorithm  H1  or  H2 .
   !     LPIVOT is the index of the pivot element.
-  !     L1,M   If L1 .LE. M   the transformation will be constructed to
+  !     L1,M   If L1 <= M   the transformation will be constructed to
   !            zero elements indexed from L1 through M.   If L1 GT. M
   !            THE SUBROUTINE DOES AN IDENTITY TRANSFORMATION.
   !     U(),IUE,UP    On entry to H1 U() contains the pivot vector.
@@ -35,7 +34,7 @@ SUBROUTINE H12(Mode,Lpivot,L1,M,U,Iue,Up,C,Ice,Icv,Ncv)
   !            set of transformed vectors.
   !     ICE    Storage increment between elements of vectors in C().
   !     ICV    Storage increment between vectors in C().
-  !     NCV    Number of vectors in C() to be transformed. If NCV .LE. 0
+  !     NCV    Number of vectors in C() to be transformed. If NCV <= 0
   !            no operations will be done on C().
   !
   !***
@@ -58,43 +57,43 @@ SUBROUTINE H12(Mode,Lpivot,L1,M,U,Iue,Up,C,Ice,Icv,Ncv)
   !* FIRST EXECUTABLE STATEMENT  H12
   one = 1.
   !
-  IF ( 0>=Lpivot.OR.Lpivot>=L1.OR.L1>M ) RETURN
+  IF( 0>=Lpivot .OR. Lpivot>=L1 .OR. L1>M ) RETURN
   cl = ABS(U(1,Lpivot))
-  IF ( Mode/=2 ) THEN
+  IF( Mode/=2 ) THEN
     !                            ****** CONSTRUCT THE TRANSFORMATION. ******
     DO j = L1, M
       cl = MAX(ABS(U(1,j)),cl)
     END DO
-    IF ( cl<=0 ) GOTO 100
+    IF( cl<=0 ) GOTO 100
     clinv = one/cl
     sm = (U(1,Lpivot)*clinv)**2
     DO j = L1, M
       sm = sm + (U(1,j)*clinv)**2
     END DO
     cl = cl*SQRT(sm)
-    IF ( U(1,Lpivot)>0 ) cl = -cl
+    IF( U(1,Lpivot)>0 ) cl = -cl
     Up = U(1,Lpivot) - cl
     U(1,Lpivot) = cl
     !            ****** APPLY THE TRANSFORMATION  I+U*(U**T)/B  TO C. ******
     !
-  ELSEIF ( cl<=0 ) THEN
+  ELSEIF( cl<=0 ) THEN
     GOTO 100
   END IF
-  IF ( Ncv<=0 ) RETURN
+  IF( Ncv<=0 ) RETURN
   b = Up*U(1,Lpivot)
   !                       B  MUST BE NONPOSITIVE HERE.  IF B = 0., RETURN.
   !
-  IF ( b<0 ) THEN
+  IF( b<0 ) THEN
     b = one/b
     mml1p2 = M - L1 + 2
-    IF ( mml1p2>20 ) THEN
+    IF( mml1p2>20 ) THEN
       l1m1 = L1 - 1
       kl1 = 1 + (l1m1-1)*Ice
       kl2 = kl1
       klp = 1 + (Lpivot-1)*Ice
       ul1m1 = U(1,l1m1)
       U(1,l1m1) = Up
-      IF ( Lpivot/=l1m1 ) CALL SSWAP(Ncv,C(kl1),Icv,C(klp),Icv)
+      IF( Lpivot/=l1m1 ) CALL SSWAP(Ncv,C(kl1),Icv,C(klp),Icv)
       DO j = 1, Ncv
         sm = DOT_PRODUCT(U(1,l1m1:M),C(kl1:M+(L1-2)*(Ice-1)))
         sm = sm*b
@@ -102,7 +101,7 @@ SUBROUTINE H12(Mode,Lpivot,L1,M,U,Iue,Up,C,Ice,Icv,Ncv)
         kl1 = kl1 + Icv
       END DO
       U(1,l1m1) = ul1m1
-      IF ( Lpivot==l1m1 ) RETURN
+      IF( Lpivot==l1m1 ) RETURN
       kl1 = kl2
       CALL SSWAP(Ncv,C(kl1),Icv,C(klp),Icv)
       RETURN
@@ -118,7 +117,7 @@ SUBROUTINE H12(Mode,Lpivot,L1,M,U,Iue,Up,C,Ice,Icv,Ncv)
           sm = sm + C(i3)*U(1,i)
           i3 = i3 + Ice
         END DO
-        IF ( sm/=0 ) THEN
+        IF( sm/=0 ) THEN
           sm = sm*b
           C(i2) = C(i2) + sm*Up
           DO i = L1, M

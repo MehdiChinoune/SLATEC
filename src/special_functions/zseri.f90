@@ -1,7 +1,6 @@
 !** ZSERI
 SUBROUTINE ZSERI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol,Elim,Alim)
-  !>
-  !  Subsidiary to ZBESI and ZBESK
+  !> Subsidiary to ZBESI and ZBESK
   !***
   ! **Library:**   SLATEC
   !***
@@ -11,12 +10,12 @@ SUBROUTINE ZSERI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol,Elim,Alim)
   !***
   ! **Description:**
   !
-  !     ZSERI COMPUTES THE I BESSEL FUNCTION FOR REAL(Z).GE.0.0 BY
+  !     ZSERI COMPUTES THE I BESSEL FUNCTION FOR REAL(Z)>=0.0 BY
   !     MEANS OF THE POWER SERIES FOR LARGE ABS(Z) IN THE
-  !     REGION ABS(Z).LE.2*SQRT(FNU+1). NZ=0 IS A NORMAL RETURN.
-  !     NZ.GT.0 MEANS THAT THE LAST NZ COMPONENTS WERE SET TO ZERO
-  !     DUE TO UNDERFLOW. NZ.LT.0 MEANS UNDERFLOW OCCURRED, BUT THE
-  !     CONDITION ABS(Z).LE.2*SQRT(FNU+1) WAS VIOLATED AND THE
+  !     REGION ABS(Z)<=2*SQRT(FNU+1). NZ=0 IS A NORMAL RETURN.
+  !     NZ>0 MEANS THAT THE LAST NZ COMPONENTS WERE SET TO ZERO
+  !     DUE TO UNDERFLOW. NZ<0 MEANS UNDERFLOW OCCURRED, BUT THE
+  !     CONDITION ABS(Z)<=2*SQRT(FNU+1) WAS VIOLATED AND THE
   !     COMPUTATION MUST BE COMPLETED IN ANOTHER ROUTINE WITH N=N-ABS(NZ).
   !
   !***
@@ -30,7 +29,7 @@ SUBROUTINE ZSERI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol,Elim,Alim)
   !   930122  Added ZLOG to EXTERNAL statement.  (RWC)
   USE service, ONLY : D1MACH
   !     COMPLEX AK1,CK,COEF,CONE,CRSC,CSCL,CZ,CZERO,HZ,RZ,S1,S2,Y,Z
-  INTEGER i, ib, idum, iflag, il, k, Kode, l, m, N, nn, Nz, nw
+  INTEGER :: i, ib, idum, iflag, il, k, Kode, l, m, N, nn, Nz, nw
   REAL(DP) :: aa, acz, ak, ak1i, ak1r, Alim, arm, ascle, atol, az, cki, ckr, &
     coefi, coefr, crscr, czi, czr, dfnu, Elim, Fnu, fnup, hzi, hzr, raz, rs, &
     rtr1, rzi, rzr, s, ss, sti, str, s1i, s1r, s2i, s2r, Tol, Yi(N), Yr(N), &
@@ -39,21 +38,21 @@ SUBROUTINE ZSERI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol,Elim,Alim)
   !* FIRST EXECUTABLE STATEMENT  ZSERI
   Nz = 0
   az = ZABS(Zr,Zi)
-  IF ( az==0.0D0 ) GOTO 500
+  IF( az==0.0D0 ) GOTO 500
   arm = 1.0D+3*D1MACH(1)
   rtr1 = SQRT(arm)
   crscr = 1.0D0
   iflag = 0
-  IF ( az<arm ) THEN
+  IF( az<arm ) THEN
     Nz = N
-    IF ( Fnu==0.0D0 ) Nz = Nz - 1
+    IF( Fnu==0.0D0 ) Nz = Nz - 1
     GOTO 500
   ELSE
     hzr = 0.5D0*Zr
     hzi = 0.5D0*Zi
     czr = zeror
     czi = zeroi
-    IF ( az>rtr1 ) CALL ZMLT(hzr,hzi,hzr,hzi,czr,czi)
+    IF( az>rtr1 ) CALL ZMLT(hzr,hzi,hzr,hzi,czr,czi)
     acz = ZABS(czr,czi)
     nn = N
     CALL ZLOG(hzr,hzi,ckr,cki,idum)
@@ -67,16 +66,16 @@ SUBROUTINE ZSERI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol,Elim,Alim)
   ak1i = cki*dfnu
   ak = DGAMLN(fnup,idum)
   ak1r = ak1r - ak
-  IF ( Kode==2 ) ak1r = ak1r - Zr
-  IF ( ak1r>(-Elim) ) THEN
-    IF ( ak1r<=(-Alim) ) THEN
+  IF( Kode==2 ) ak1r = ak1r - Zr
+  IF( ak1r>(-Elim) ) THEN
+    IF( ak1r<=(-Alim) ) THEN
       iflag = 1
       ss = 1.0D0/Tol
       crscr = Tol
       ascle = arm*ss
     END IF
     aa = EXP(ak1r)
-    IF ( iflag==1 ) aa = aa*ss
+    IF( iflag==1 ) aa = aa*ss
     coefr = aa*COS(ak1i)
     coefi = aa*SIN(ak1i)
     atol = Tol*acz/fnup
@@ -86,7 +85,7 @@ SUBROUTINE ZSERI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol,Elim,Alim)
       fnup = dfnu + 1.0D0
       s1r = coner
       s1i = conei
-      IF ( acz>=Tol*fnup ) THEN
+      IF( acz>=Tol*fnup ) THEN
         ak1r = coner
         ak1i = conei
         ak = fnup + 2.0D0
@@ -103,27 +102,27 @@ SUBROUTINE ZSERI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol,Elim,Alim)
           s = s + ak
           ak = ak + 2.0D0
           aa = aa*acz*rs
-          IF ( aa<=atol ) EXIT
+          IF( aa<=atol ) EXIT
         END DO
       END IF
       s2r = s1r*coefr - s1i*coefi
       s2i = s1r*coefi + s1i*coefr
       wr(i) = s2r
       wi(i) = s2i
-      IF ( iflag/=0 ) THEN
+      IF( iflag/=0 ) THEN
         CALL ZUCHK(s2r,s2i,nw,ascle,Tol)
-        IF ( nw/=0 ) GOTO 200
+        IF( nw/=0 ) GOTO 200
       END IF
       m = nn - i + 1
       Yr(m) = s2r*crscr
       Yi(m) = s2i*crscr
-      IF ( i/=il ) THEN
+      IF( i/=il ) THEN
         CALL ZDIV(coefr,coefi,hzr,hzi,str,sti)
         coefr = str*dfnu
         coefi = sti*dfnu
       END IF
     END DO
-    IF ( nn<=2 ) RETURN
+    IF( nn<=2 ) RETURN
     k = nn - 2
     ak = k
     raz = 1.0D0/az
@@ -131,7 +130,7 @@ SUBROUTINE ZSERI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol,Elim,Alim)
     sti = -Zi*raz
     rzr = (str+str)*raz
     rzi = (sti+sti)*raz
-    IF ( iflag==1 ) THEN
+    IF( iflag==1 ) THEN
       !-----------------------------------------------------------------------
       !     RECUR BACKWARD WITH SCALED VALUES
       !-----------------------------------------------------------------------
@@ -156,7 +155,7 @@ SUBROUTINE ZSERI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol,Elim,Alim)
         Yi(k) = cki
         ak = ak - 1.0D0
         k = k - 1
-        IF ( ZABS(ckr,cki)>ascle ) GOTO 400
+        IF( ZABS(ckr,cki)>ascle ) GOTO 400
       END DO
       RETURN
     ELSE
@@ -167,16 +166,16 @@ SUBROUTINE ZSERI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol,Elim,Alim)
   200  Nz = Nz + 1
   Yr(nn) = zeror
   Yi(nn) = zeroi
-  IF ( acz>dfnu ) THEN
+  IF( acz>dfnu ) THEN
     !-----------------------------------------------------------------------
-    !     RETURN WITH NZ.LT.0 IF ABS(Z*Z/4).GT.FNU+N-NZ-1 COMPLETE
+    !     RETURN WITH NZ<0 IF ABS(Z*Z/4)>FNU+N-NZ-1 COMPLETE
     !     THE CALCULATION IN CBINU WITH N=N-ABS(NZ)
     !-----------------------------------------------------------------------
     Nz = -Nz
     RETURN
   ELSE
     nn = nn - 1
-    IF ( nn==0 ) RETURN
+    IF( nn==0 ) RETURN
     GOTO 100
   END IF
   300 CONTINUE
@@ -188,15 +187,15 @@ SUBROUTINE ZSERI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol,Elim,Alim)
   END DO
   RETURN
   400  ib = l + 1
-  IF ( ib>nn ) RETURN
+  IF( ib>nn ) RETURN
   GOTO 300
   500  Yr(1) = zeror
   Yi(1) = zeroi
-  IF ( Fnu==0.0D0 ) THEN
+  IF( Fnu==0.0D0 ) THEN
     Yr(1) = coner
     Yi(1) = conei
   END IF
-  IF ( N==1 ) RETURN
+  IF( N==1 ) RETURN
   DO i = 2, N
     Yr(i) = zeror
     Yi(i) = zeroi

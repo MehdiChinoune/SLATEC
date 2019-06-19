@@ -1,7 +1,6 @@
 !** SSLI
 SUBROUTINE SSLI(N,B,X,Rwork,Iwork)
-  !>
-  !  SLAP MSOLVE for Lower Triangle Matrix.
+  !> SLAP MSOLVE for Lower Triangle Matrix.
   !            This routine acts as an interface between the SLAP generic
   !            MSOLVE calling convention and the routine that actually
   !                      -1
@@ -48,12 +47,12 @@ SUBROUTINE SSLI(N,B,X,Rwork,Iwork)
   !   930701  Updated CATEGORY section.  (FNF, WRB)
 
   !     .. Scalar Arguments ..
-  INTEGER N
+  INTEGER :: N
   !     .. Array Arguments ..
-  REAL(SP) B(N), Rwork(*), X(N)
-  INTEGER Iwork(*)
+  REAL(SP) :: B(N), Rwork(*), X(N)
+  INTEGER :: Iwork(*)
   !     .. Local Scalars ..
-  INTEGER locel, lociel, locjel, nel
+  INTEGER :: locel, lociel, locjel, nel
   !* FIRST EXECUTABLE STATEMENT  SSLI
   !
   nel = Iwork(1)

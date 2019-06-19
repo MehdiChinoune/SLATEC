@@ -1,7 +1,6 @@
 !** SDSCL
 SUBROUTINE SDSCL(Hmax,N,Nq,Rmax,H,Rc,Rh,Yh)
-  !>
-  !  Subroutine SDSCL rescales the YH array whenever the step
+  !> Subroutine SDSCL rescales the YH array whenever the step
   !            size is changed.
   !***
   ! **Library:**   SLATEC (SDRIVE)
@@ -27,7 +26,7 @@ SUBROUTINE SDSCL(Hmax,N,Nq,Rmax,H,Rc,Rh,Yh)
   INTEGER :: i, j
   REAL(SP) :: r1
   !* FIRST EXECUTABLE STATEMENT  SDSCL
-  IF ( H<1.E0 ) THEN
+  IF( H<1.E0 ) THEN
     Rh = MIN(ABS(H)*Rh,ABS(H)*Rmax,Hmax)/ABS(H)
   ELSE
     Rh = MIN(Rh,Rmax,Hmax/ABS(H))

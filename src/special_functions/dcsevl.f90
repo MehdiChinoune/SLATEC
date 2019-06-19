@@ -1,7 +1,6 @@
 !** DCSEVL
 REAL(DP) FUNCTION DCSEVL(X,Cs,N)
-  !>
-  !  Evaluate a Chebyshev series.
+  !> Evaluate a Chebyshev series.
   !***
   ! **Library:**   SLATEC (FNLIB)
   !***
@@ -50,9 +49,9 @@ REAL(DP) FUNCTION DCSEVL(X,Cs,N)
   REAL(DP) :: b0, b1, b2, twox
   REAL(DP), PARAMETER :: onepl = 1.0D0 + D1MACH(4)
   !* FIRST EXECUTABLE STATEMENT  DCSEVL
-  IF ( N<1 ) CALL XERMSG('DCSEVL','NUMBER OF TERMS .LE. 0',2,2)
-  IF ( N>1000 ) CALL XERMSG('DCSEVL','NUMBER OF TERMS .GT. 1000',3,2)
-  IF ( ABS(X)>onepl ) CALL XERMSG('DCSEVL','X OUTSIDE THE INTERVAL (-1,+1)',1,1)
+  IF( N<1 ) CALL XERMSG('DCSEVL','NUMBER OF TERMS <= 0',2,2)
+  IF( N>1000 ) CALL XERMSG('DCSEVL','NUMBER OF TERMS > 1000',3,2)
+  IF( ABS(X)>onepl ) CALL XERMSG('DCSEVL','X OUTSIDE THE INTERVAL (-1,+1)',1,1)
   !
   b1 = 0.0D0
   b0 = 0.0D0

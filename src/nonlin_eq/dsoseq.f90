@@ -1,8 +1,7 @@
 !** DSOSEQ
 SUBROUTINE DSOSEQ(FNC,N,S,Rtolx,Atolx,Tolf,Iflag,Mxit,Ncjs,Nsrrc,Nsri,&
     Iprint,Fmax,C,Nc,B,P,Temp,X,Y,Fac,Is)
-  !>
-  !  Subsidiary to DSOS
+  !> Subsidiary to DSOS
   !***
   ! **Library:**   SLATEC
   !***
@@ -38,7 +37,7 @@ SUBROUTINE DSOSEQ(FNC,N,S,Rtolx,Atolx,Tolf,Iflag,Mxit,Ncjs,Nsrrc,Nsri,&
   !          want the intermediate solution iterates and a residual norm
   !          to be printed.
   !     C   -Internal work array, dimensioned at least N*(N+1)/2.
-  !     NC  -Dimension of C array. NC  .GE.  N*(N+1)/2.
+  !     NC  -Dimension of C array. NC  >=  N*(N+1)/2.
   !     B   -Internal work array, dimensioned N.
   !     P   -Internal work array, dimensioned N.
   !     TEMP-Internal work array, dimensioned N.
@@ -76,7 +75,7 @@ SUBROUTINE DSOSEQ(FNC,N,S,Rtolx,Atolx,Tolf,Iflag,Mxit,Ncjs,Nsrrc,Nsri,&
   !
   !- ** URO, the computer unit roundoff value, is defined by D1MACH(3) for
   !- ** machines that round or D1MACH(4) for machines that truncate.
-  !- ** URO is the smallest positive number such that 1.+URO  .GT.  1.
+  !- ** URO is the smallest positive number such that 1.+URO  >  1.
   !
   !- ** The output tape unit number, LOUN, is defined by the function
   !- ** I1MACH(2).
@@ -182,7 +181,7 @@ SUBROUTINE DSOSEQ(FNC,N,S,Rtolx,Atolx,Tolf,Iflag,Mxit,Ncjs,Nsrrc,Nsri,&
         !                                   VARIABLES ARE THEN ELIMINATED FROM
         !                                   THE K-TH EQUATION.
         !
-        IF ( km1/=0 ) THEN
+        IF( km1/=0 ) THEN
           CALL DSOSSL(k,N,km1,Y,C,B,kn)
           DO j = 1, km1
             js = Is(j)
@@ -205,7 +204,7 @@ SUBROUTINE DSOSEQ(FNC,N,S,Rtolx,Atolx,Tolf,Iflag,Mxit,Ncjs,Nsrrc,Nsri,&
         !                                   CONSTANT VECTOR.
         !
         !                                ...EXIT
-        IF ( itry>=Ncjs ) THEN
+        IF( itry>=Ncjs ) THEN
           !
           !
           it = 0
@@ -218,9 +217,9 @@ SUBROUTINE DSOSEQ(FNC,N,S,Rtolx,Atolx,Tolf,Iflag,Mxit,Ncjs,Nsrrc,Nsri,&
             item = Is(j)
             hx = X(item)
             h = Fac(item)*hx
-            IF ( ABS(h)<=zero ) h = Fac(item)
+            IF( ABS(h)<=zero ) h = Fac(item)
             X(item) = hx + h
-            IF ( km1/=0 ) THEN
+            IF( km1/=0 ) THEN
               Y(j) = h
               CALL DSOSSL(k,N,j,Y,C,B,kn)
               DO l = 1, km1
@@ -231,14 +230,14 @@ SUBROUTINE DSOSEQ(FNC,N,S,Rtolx,Atolx,Tolf,Iflag,Mxit,Ncjs,Nsrrc,Nsri,&
             fp = FNC(X,k)
             X(item) = hx
             fdif = fp - f
-            IF ( ABS(fdif)<=uro*ABS(f) ) THEN
+            IF( ABS(fdif)<=uro*ABS(f) ) THEN
               fdif = 0.0D0
               it = it + 1
             END IF
             P(j) = fdif/h
           END DO
           !
-          IF ( it>(N-k) ) THEN
+          IF( it>(N-k) ) THEN
             !
             !                                      ALL COMPUTED PARTIAL DERIVATIVES
             !                                      OF THE K-TH EQUATION ARE
@@ -250,14 +249,14 @@ SUBROUTINE DSOSEQ(FNC,N,S,Rtolx,Atolx,Tolf,Iflag,Mxit,Ncjs,Nsrrc,Nsri,&
               isj = Is(j)
               fact = 100.0D0*Fac(isj)
               !           ..............................EXIT
-              IF ( fact>1.0D10 ) GOTO 300
+              IF( fact>1.0D10 ) GOTO 300
               Fac(isj) = fact
             END DO
             !                          ............EXIT
             GOTO 50
             !
             !                                ...EXIT
-          ELSEIF ( k/=N ) THEN
+          ELSEIF( k/=N ) THEN
             !
             !                                   ACHIEVE A PIVOTING EFFECT BY
             !                                   CHOOSING THE MAXIMAL DERIVATIVE
@@ -266,13 +265,13 @@ SUBROUTINE DSOSEQ(FNC,N,S,Rtolx,Atolx,Tolf,Iflag,Mxit,Ncjs,Nsrrc,Nsri,&
             pmax = 0.0D0
             DO j = k, N
               test = ABS(P(j))
-              IF ( test>pmax ) THEN
+              IF( test>pmax ) THEN
                 pmax = test
                 isv = j
               END IF
             END DO
             !           ........................EXIT
-            IF ( pmax==0.0D0 ) GOTO 300
+            IF( pmax==0.0D0 ) GOTO 300
             !
             !                                   SET UP THE COEFFICIENTS FOR THE K-TH
             !                                   ROW OF THE TRIANGULAR LINEAR SYSTEM
@@ -282,14 +281,14 @@ SUBROUTINE DSOSEQ(FNC,N,S,Rtolx,Atolx,Tolf,Iflag,Mxit,Ncjs,Nsrrc,Nsri,&
             pmax = P(isv)
             kk = kn
             DO j = k, N
-              IF ( j/=isv ) C(kk) = -P(j)/pmax
+              IF( j/=isv ) C(kk) = -P(j)/pmax
               kk = kk + 1
             END DO
             P(k) = pmax
             !
             !
             !                                ...EXIT
-            IF ( isv/=k ) THEN
+            IF( isv/=k ) THEN
               !
               !                                   INTERCHANGE THE TWO COLUMNS OF C
               !                                   DETERMINED BY THE PIVOTAL STRATEGY
@@ -333,7 +332,7 @@ SUBROUTINE DSOSEQ(FNC,N,S,Rtolx,Atolx,Tolf,Iflag,Mxit,Ncjs,Nsrrc,Nsri,&
       !
       kn = kn - 1
       Y(N) = B(N)
-      IF ( N>1 ) CALL DSOSSL(N,N,N,Y,C,B,kn)
+      IF( N>1 ) CALL DSOSSL(N,N,N,Y,C,B,kn)
       xnorm = 0.0D0
       ynorm = 0.0D0
       DO j = 1, N
@@ -348,7 +347,7 @@ SUBROUTINE DSOSEQ(FNC,N,S,Rtolx,Atolx,Tolf,Iflag,Mxit,Ncjs,Nsrrc,Nsri,&
       !                       PRINT INTERMEDIATE SOLUTION ITERATES AND
       !                       RESIDUAL NORM IF DESIRED
       !
-      IF ( Iprint==(-1) ) THEN
+      IF( Iprint==(-1) ) THEN
         mm = m - 1
         WRITE (loun,99001) Fmax, mm, (X(j),j=1,N)
         99001 FORMAT ('0RESIDUAL NORM =',D9.2,/1X,'SOLUTION ITERATE (',I3,')',&
@@ -362,9 +361,9 @@ SUBROUTINE DSOSEQ(FNC,N,S,Rtolx,Atolx,Tolf,Iflag,Mxit,Ncjs,Nsrrc,Nsri,&
       DO j = 1, N
         js = Is(j)
         !                    ......EXIT
-        IF ( ABS(Y(j))>re*ABS(X(js))+Atolx ) GOTO 100
+        IF( ABS(Y(j))>re*ABS(X(js))+Atolx ) GOTO 100
       END DO
-      IF ( Fmax<=fmxs ) Iflag = 1
+      IF( Fmax<=fmxs ) Iflag = 1
       EXIT
       50 CONTINUE
     END DO
@@ -372,17 +371,17 @@ SUBROUTINE DSOSEQ(FNC,N,S,Rtolx,Atolx,Tolf,Iflag,Mxit,Ncjs,Nsrrc,Nsri,&
     !                    TEST FOR CONVERGENCE TO A SOLUTION BASED ON
     !                    RESIDUALS
     !
-    100  IF ( Fmax<=Tolf ) Iflag = Iflag + 2
+    100  IF( Fmax<=Tolf ) Iflag = Iflag + 2
     !        ............EXIT
-    IF ( Iflag>0 ) GOTO 200
+    IF( Iflag>0 ) GOTO 200
     !
     !
-    IF ( m>1 ) THEN
+    IF( m>1 ) THEN
       !                       BEGIN BLOCK PERMITTING ...EXITS TO 320
       !
       !                          SAVE SOLUTION HAVING MINIMUM RESIDUAL NORM.
       !
-      IF ( Fmax<fmin ) THEN
+      IF( Fmax<fmin ) THEN
         mit = m + 1
         yn1 = ynorm
         yn2 = yns
@@ -398,11 +397,11 @@ SUBROUTINE DSOSEQ(FNC,N,S,Rtolx,Atolx,Tolf,Iflag,Mxit,Ncjs,Nsrrc,Nsri,&
       !                          SLOWLY CONVERGENT PROBLEMS MAY ALSO BE
       !                          DETECTED.
       !
-      IF ( ynorm<=sruro*xnorm ) THEN
-        IF ( Fmax>=0.2D0*fmxs.AND.Fmax<=5.0D0*fmxs ) THEN
-          IF ( ynorm>=0.2D0*yns.AND.ynorm<=5.0D0*yns ) THEN
+      IF( ynorm<=sruro*xnorm ) THEN
+        IF( Fmax>=0.2D0*fmxs .AND. Fmax<=5.0D0*fmxs ) THEN
+          IF( ynorm>=0.2D0*yns .AND. ynorm<=5.0D0*yns ) THEN
             icr = icr + 1
-            IF ( icr>=Nsrrc ) THEN
+            IF( icr>=Nsrrc ) THEN
               Iflag = 4
               Fmax = fmin
               !     ........................EXIT
@@ -419,10 +418,10 @@ SUBROUTINE DSOSEQ(FNC,N,S,Rtolx,Atolx,Tolf,Iflag,Mxit,Ncjs,Nsrrc,Nsri,&
       !
       !                          TEST FOR DIVERGENCE OF THE ITERATIVE SCHEME.
       !
-      IF ( ynorm>2.0D0*yns.OR.Fmax>2.0D0*fmxs ) THEN
+      IF( ynorm>2.0D0*yns .OR. Fmax>2.0D0*fmxs ) THEN
         ic = ic + 1
         !                       ......EXIT
-        IF ( ic>=Nsri ) THEN
+        IF( ic>=Nsri ) THEN
           Iflag = 7
           !        .....................EXIT
           GOTO 200
@@ -438,14 +437,14 @@ SUBROUTINE DSOSEQ(FNC,N,S,Rtolx,Atolx,Tolf,Iflag,Mxit,Ncjs,Nsrrc,Nsri,&
     !                    JACOBIAN FACTORIZATION
     !
     150  itry = itry - 1
-    IF ( itry==0 ) THEN
+    IF( itry==0 ) THEN
       itry = Ncjs
-    ELSEIF ( 20.0D0*ynorm>xnorm ) THEN
+    ELSEIF( 20.0D0*ynorm>xnorm ) THEN
       itry = Ncjs
-    ELSEIF ( ynorm>2.0D0*yns ) THEN
+    ELSEIF( ynorm>2.0D0*yns ) THEN
       itry = Ncjs
       !                 ......EXIT
-    ELSEIF ( Fmax>=2.0D0*fmxs ) THEN
+    ELSEIF( Fmax>=2.0D0*fmxs ) THEN
       itry = Ncjs
     END IF
     !
@@ -456,7 +455,7 @@ SUBROUTINE DSOSEQ(FNC,N,S,Rtolx,Atolx,Tolf,Iflag,Mxit,Ncjs,Nsrrc,Nsri,&
     DO j = 1, N
       Temp(j) = X(j)
     END DO
-    IF ( m==mit ) THEN
+    IF( m==mit ) THEN
       fn2 = Fmax
       yn3 = ynorm
     END IF
@@ -474,10 +473,10 @@ SUBROUTINE DSOSEQ(FNC,N,S,Rtolx,Atolx,Tolf,Iflag,Mxit,Ncjs,Nsrrc,Nsri,&
   !               TOO MANY ITERATIONS, CONVERGENCE WAS NOT ACHIEVED.
   m = Mxit
   Iflag = 5
-  IF ( yn1>10.0D0*yn2.OR.yn3>10.0D0*yn1 ) Iflag = 6
-  IF ( fn1>5.0D0*fmin.OR.fn2>5.0D0*fmin ) Iflag = 6
+  IF( yn1>10.0D0*yn2 .OR. yn3>10.0D0*yn1 ) Iflag = 6
+  IF( fn1>5.0D0*fmin .OR. fn2>5.0D0*fmin ) Iflag = 6
   !        ......EXIT
-  IF ( Fmax>5.0D0*fmin ) Iflag = 6
+  IF( Fmax>5.0D0*fmin ) Iflag = 6
   !
   !
   200 CONTINUE

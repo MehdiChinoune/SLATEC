@@ -1,11 +1,10 @@
 !** DDZRO
 SUBROUTINE DDZRO(Ae,F,H,N,Nq,Iroot,Re,T,Yh,Uround,B,C,Fb,Fc,Y)
-  !>
-  !  DDZRO searches for a zero of a function F(N, T, Y, IROOT)
+  !> DDZRO searches for a zero of a function F(N, T, Y, IROOT)
   !            between the given values B and C until the width of the
   !            interval (B, C) has collapsed to within a tolerance
   !            specified by the stopping criterion,
-  !              ABS(B - C) .LE. 2.*(RW*ABS(B) + AE).
+  !              ABS(B - C) <= 2.*(RW*ABS(B) + AE).
   !***
   ! **Library:**   SLATEC (SDRIVE)
   !***
@@ -81,7 +80,7 @@ SUBROUTINE DDZRO(Ae,F,H,N,Nq,Iroot,Re,T,Yh,Uround,B,C,Fb,Fc,Y)
   kount = 0
   !                                                    Perform interchange
   100 CONTINUE
-  IF ( ABS(Fc)<ABS(Fb) ) THEN
+  IF( ABS(Fc)<ABS(Fb) ) THEN
     a = B
     fa = Fb
     B = C
@@ -93,14 +92,14 @@ SUBROUTINE DDZRO(Ae,F,H,N,Nq,Iroot,Re,T,Yh,Uround,B,C,Fb,Fc,Y)
   acmb = ABS(cmb)
   tol = rw*ABS(B) + Ae
   !                                                Test stopping criterion
-  IF ( acmb<=tol ) RETURN
-  IF ( kount>50 ) RETURN
+  IF( acmb<=tol ) RETURN
+  IF( kount>50 ) RETURN
   !                                    Calculate new iterate implicitly as
-  !                                    B + P/Q, where we arrange P .GE. 0.
+  !                                    B + P/Q, where we arrange P >= 0.
   !                         The implicit form is used to prevent overflow.
   p = (B-a)*Fb
   q = fa - Fb
-  IF ( p<0.D0 ) THEN
+  IF( p<0.D0 ) THEN
     p = -p
     q = -q
   END IF
@@ -109,8 +108,8 @@ SUBROUTINE DDZRO(Ae,F,H,N,Nq,Iroot,Re,T,Yh,Uround,B,C,Fb,Fc,Y)
   a = B
   fa = Fb
   ic = ic + 1
-  IF ( ic>=4 ) THEN
-    IF ( 8.D0*acmb>=acbs ) THEN
+  IF( ic>=4 ) THEN
+    IF( 8.D0*acmb>=acbs ) THEN
       !                                                                 Bisect
       B = 0.5D0*(C+B)
       GOTO 200
@@ -119,12 +118,12 @@ SUBROUTINE DDZRO(Ae,F,H,N,Nq,Iroot,Re,T,Yh,Uround,B,C,Fb,Fc,Y)
   END IF
   acbs = acmb
   !                                            Test for too small a change
-  IF ( p<=ABS(q)*tol ) THEN
+  IF( p<=ABS(q)*tol ) THEN
     !                                                 Increment by tolerance
     B = B + SIGN(tol,cmb)
     !                                               Root ought to be between
     !                                               B and (C + B)/2.
-  ELSEIF ( p<cmb*q ) THEN
+  ELSEIF( p<cmb*q ) THEN
     !                                                            Interpolate
     B = B + p/q
   ELSE
@@ -135,13 +134,13 @@ SUBROUTINE DDZRO(Ae,F,H,N,Nq,Iroot,Re,T,Yh,Uround,B,C,Fb,Fc,Y)
   !                                             for new iterate B.
   200  CALL DDNTP(H,0,N,Nq,T,B,Yh,Y)
   Fb = F(N,B,Y,Iroot)
-  IF ( N==0 ) RETURN
-  IF ( Fb==0.D0 ) RETURN
+  IF( N==0 ) RETURN
+  IF( Fb==0.D0 ) RETURN
   kount = kount + 1
   !
   !             Decide whether next step is interpolation or extrapolation
   !
-  IF ( SIGN(1.0D0,Fb)==SIGN(1.0D0,Fc) ) THEN
+  IF( SIGN(1.0D0,Fb)==SIGN(1.0D0,Fc) ) THEN
     C = a
     Fc = fa
   END IF

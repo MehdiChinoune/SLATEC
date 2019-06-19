@@ -5,8 +5,7 @@ MODULE TEST03_MOD
 CONTAINS
   !** DFNCK
   SUBROUTINE DFNCK(Lun,Kprint,Ipass)
-    !>
-    !  Quick check for the double precision Fullerton
+    !> Quick check for the double precision Fullerton
     !            special functions.
     !***
     ! **Library:**   SLATEC
@@ -51,7 +50,7 @@ CONTAINS
       DBESK1, DBESKS, DBETA, DBETAI, DBI, DBIE, DBINOM, DBSI0E, DBSI1E, DBSK0E, &
       DBSK1E, DBSKES, DCBRT, DCHU, DCOSDG, DCOT, DDAWS, DE1, DEI, DEXPRL, DFAC, &
       DGAMI, DGAMIC, DGAMIT, DGAMR, DLI, DLNREL, DPOCH, DPOCH1, DPSI, DSINDG, DSPENC
-    INTEGER i, Lun, Kprint, Ipass
+    INTEGER :: i, Lun, Kprint, Ipass
     REAL(DP) :: y(105), errmax, errtol, abserr, relerr
     !
     !     Correct values through different calculations are stored in V(*)
@@ -239,13 +238,13 @@ CONTAINS
       abserr = ABS(v(i)-y(i))
       relerr = abserr/ABS(v(i))
       errmax = MAX(relerr,errmax)
-      IF ( relerr>errtol.AND.Kprint>=2 ) WRITE (Lun,99001) i, relerr, abserr
+      IF( relerr>errtol .AND. Kprint>=2 ) WRITE (Lun,99001) i, relerr, abserr
       99001 FORMAT (' For I  = ',I3,'  test fails with RELERR  = ',D38.30,&
         '  and ABSERR  = ',D38.30)
     END DO
     Ipass = 0
-    IF ( errmax<=errtol ) Ipass = 1
-    IF ( Ipass/=0.AND.Kprint>=2 ) WRITE (Lun,99002)
+    IF( errmax<=errtol ) Ipass = 1
+    IF( Ipass/=0 .AND. Kprint>=2 ) WRITE (Lun,99002)
     99002 FORMAT (' Double precision Fullerton special function ',' routines o.k.')
     RETURN
   END SUBROUTINE DFNCK
@@ -256,8 +255,7 @@ PROGRAM TEST03
   USE slatec, ONLY : I1MACH, XSETF, XSETUN, XERMAX
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
-  !>
-  !  Driver for testing SLATEC subprograms
+  !> Driver for testing SLATEC subprograms
   !***
   ! **Library:**   SLATEC
   !***
@@ -303,7 +301,7 @@ PROGRAM TEST03
   !   890618  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900524  Cosmetic changes to code.  (WRB)
-  INTEGER ipass, kprint, lin, lun, nfail
+  INTEGER :: ipass, kprint, lin, lun, nfail
   !* FIRST EXECUTABLE STATEMENT  TEST03
   lun = I1MACH(2)
   lin = I1MACH(1)
@@ -314,7 +312,7 @@ PROGRAM TEST03
   CALL GET_ARGUMENT(kprint)
   CALL XERMAX(1000)
   CALL XSETUN(lun)
-  IF ( kprint<=1 ) THEN
+  IF( kprint<=1 ) THEN
     CALL XSETF(0)
   ELSE
     CALL XSETF(1)
@@ -323,11 +321,11 @@ PROGRAM TEST03
   !     Test double precision Fullerton routines
   !
   CALL DFNCK(lun,kprint,ipass)
-  IF ( ipass==0 ) nfail = nfail + 1
+  IF( ipass==0 ) nfail = nfail + 1
   !
   !     Write PASS or FAIL message
   !
-  IF ( nfail==0 ) THEN
+  IF( nfail==0 ) THEN
     WRITE (lun,99001)
     99001 FORMAT (/' --------------TEST03 PASSED ALL TESTS----------------')
   ELSE

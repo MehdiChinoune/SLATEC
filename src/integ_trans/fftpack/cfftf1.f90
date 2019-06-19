@@ -1,7 +1,6 @@
 !** CFFTF1
 SUBROUTINE CFFTF1(N,C,Ch,Wa,Ifac)
-  !>
-  !  Compute the forward transform of a complex, periodic
+  !> Compute the forward transform of a complex, periodic
   !            sequence.
   !***
   ! **Library:**   SLATEC (FFTPACK)
@@ -93,42 +92,42 @@ SUBROUTINE CFFTF1(N,C,Ch,Wa,Ifac)
     ido = N/l2
     idot = ido + ido
     idl1 = idot*l1
-    IF ( ip==4 ) THEN
+    IF( ip==4 ) THEN
       ix2 = iw + idot
       ix3 = ix2 + idot
-      IF ( na/=0 ) THEN
+      IF( na/=0 ) THEN
         CALL PASSF4(idot,l1,Ch,C,Wa(iw),Wa(ix2),Wa(ix3))
       ELSE
         CALL PASSF4(idot,l1,C,Ch,Wa(iw),Wa(ix2),Wa(ix3))
       END IF
       na = 1 - na
-    ELSEIF ( ip==2 ) THEN
-      IF ( na/=0 ) THEN
+    ELSEIF( ip==2 ) THEN
+      IF( na/=0 ) THEN
         CALL PASSF2(idot,l1,Ch,C,Wa(iw))
       ELSE
         CALL PASSF2(idot,l1,C,Ch,Wa(iw))
       END IF
       na = 1 - na
-    ELSEIF ( ip==3 ) THEN
+    ELSEIF( ip==3 ) THEN
       ix2 = iw + idot
-      IF ( na/=0 ) THEN
+      IF( na/=0 ) THEN
         CALL PASSF3(idot,l1,Ch,C,Wa(iw),Wa(ix2))
       ELSE
         CALL PASSF3(idot,l1,C,Ch,Wa(iw),Wa(ix2))
       END IF
       na = 1 - na
-    ELSEIF ( ip/=5 ) THEN
-      IF ( na/=0 ) THEN
+    ELSEIF( ip/=5 ) THEN
+      IF( na/=0 ) THEN
         CALL PASSF(nac,idot,ip,l1,idl1,Ch,Ch,Ch,C,C,Wa(iw:))
       ELSE
         CALL PASSF(nac,idot,ip,l1,idl1,C,C,C,Ch,Ch,Wa(iw:))
       END IF
-      IF ( nac/=0 ) na = 1 - na
+      IF( nac/=0 ) na = 1 - na
     ELSE
       ix2 = iw + idot
       ix3 = ix2 + idot
       ix4 = ix3 + idot
-      IF ( na/=0 ) THEN
+      IF( na/=0 ) THEN
         CALL PASSF5(idot,l1,Ch,C,Wa(iw),Wa(ix2),Wa(ix3),Wa(ix4))
       ELSE
         CALL PASSF5(idot,l1,C,Ch,Wa(iw),Wa(ix2),Wa(ix3),Wa(ix4))
@@ -138,7 +137,7 @@ SUBROUTINE CFFTF1(N,C,Ch,Wa,Ifac)
     l1 = l2
     iw = iw + (ip-1)*idot
   END DO
-  IF ( na==0 ) RETURN
+  IF( na==0 ) RETURN
   n2 = N + N
   DO i = 1, n2
     C(i) = Ch(i)

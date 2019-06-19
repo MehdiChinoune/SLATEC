@@ -1,7 +1,6 @@
 !** SVECS
 SUBROUTINE SVECS(Ncomp,Lnfc,Yhp,Work,Iwork,Inhomo,Iflag)
-  !>
-  !  Subsidiary to BVSUP
+  !> Subsidiary to BVSUP
   !***
   ! **Library:**   SLATEC
   !***
@@ -37,7 +36,7 @@ SUBROUTINE SVECS(Ncomp,Lnfc,Yhp,Work,Iwork,Inhomo,Iflag)
   INTEGER :: idp, k, kp, niv
   REAL(SP) :: dum
   !* FIRST EXECUTABLE STATEMENT  SVECS
-  IF ( Lnfc/=1 ) THEN
+  IF( Lnfc/=1 ) THEN
     niv = Lnfc
     Lnfc = 2*Lnfc
     nfcc_com = 2*nfcc_com
@@ -49,7 +48,7 @@ SUBROUTINE SVECS(Ncomp,Lnfc,Yhp,Work,Iwork,Inhomo,Iflag)
     Lnfc = Lnfc/2
     nfcc_com = nfcc_com/2
     indpvt_com = idp
-    IF ( Iflag/=0.OR.niv/=Lnfc ) THEN
+    IF( Iflag/=0 .OR. niv/=Lnfc ) THEN
       Iflag = 99
       RETURN
     END IF

@@ -1,7 +1,6 @@
 !** DBI
 REAL(DP) FUNCTION DBI(X)
-  !>
-  !  Evaluate the Bairy function (the Airy function of the
+  !> Evaluate the Bairy function (the Airy function of the
   !            second kind).
   !***
   ! **Library:**   SLATEC (FNLIB)
@@ -92,7 +91,7 @@ REAL(DP) FUNCTION DBI(X)
     +.507884996513522346666666666666666D-29, +.491020674696533333333333333333333D-32 ]
   LOGICAL, SAVE :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  DBI
-  IF ( first ) THEN
+  IF( first ) THEN
     nbif = INITDS(bifcs,13,eta)
     nbig = INITDS(bigcs,13,eta)
     nbif2 = INITDS(bif2cs,15,eta)
@@ -100,20 +99,20 @@ REAL(DP) FUNCTION DBI(X)
     first = .FALSE.
   END IF
   !
-  IF ( X<(-1.0D0) ) THEN
+  IF( X<(-1.0D0) ) THEN
     CALL D9AIMP(X,xm,theta)
     DBI = xm*SIN(theta)
     RETURN
     !
-  ELSEIF ( X<=1.0D0 ) THEN
+  ELSEIF( X<=1.0D0 ) THEN
     z = 0.D0
-    IF ( ABS(X)>x3sml ) z = X**3
+    IF( ABS(X)>x3sml ) z = X**3
     DBI = 0.625 + DCSEVL(z,bifcs,nbif) + X*(0.4375D0+DCSEVL(z,bigcs,nbig))
     RETURN
     !
-  ELSEIF ( X>2.0D0 ) THEN
+  ELSEIF( X>2.0D0 ) THEN
     !
-    IF ( X>xmax ) CALL XERMSG('DBI','X SO BIG THAT BI OVERFLOWS',1,2)
+    IF( X>xmax ) CALL XERMSG('DBI','X SO BIG THAT BI OVERFLOWS',1,2)
     !
     DBI = DBIE(X)*EXP(2.0D0*X*SQRT(X)/3.0D0)
     RETURN

@@ -1,7 +1,6 @@
 !** DXADJ
 SUBROUTINE DXADJ(X,Ix,Ierror)
-  !>
-  !  To provide double-precision floating-point arithmetic
+  !> To provide double-precision floating-point arithmetic
   !            with an extended exponent range.
   !***
   ! **Library:**   SLATEC
@@ -20,7 +19,7 @@ SUBROUTINE DXADJ(X,Ix,Ierror)
   !     INTEGER IX
   !
   !                  TRANSFORMS (X,IX) SO THAT
-  !                  RADIX**(-L) .LE. ABS(X) .LT. RADIX**L.
+  !                  RADIX**(-L) <= ABS(X) < RADIX**L.
   !                  ON MOST COMPUTERS THIS TRANSFORMATION DOES
   !                  NOT CHANGE THE MANTISSA OF X PROVIDED RADIX IS
   !                  THE NUMBER BASE OF DOUBLE-PRECISION ARITHMETIC.
@@ -50,33 +49,33 @@ SUBROUTINE DXADJ(X,Ix,Ierror)
   !
   !   THE CONDITION IMPOSED ON L AND KMAX BY THIS SUBROUTINE
   ! IS
-  !     2*L .LE. KMAX
+  !     2*L <= KMAX
   !
   ! THIS CONDITION MUST BE MET BY APPROPRIATE CODING
   ! IN SUBROUTINE DXSET.
   !
   !* FIRST EXECUTABLE STATEMENT  DXADJ
   Ierror = 0
-  IF ( X==0.0D0 ) THEN
+  IF( X==0.0D0 ) THEN
     Ix = 0
     GOTO 200
-  ELSEIF ( ABS(X)>=1.0D0 ) THEN
-    IF ( ABS(X)<radixl_com ) GOTO 200
+  ELSEIF( ABS(X)>=1.0D0 ) THEN
+    IF( ABS(X)<radixl_com ) GOTO 200
     X = X/rad2l_com
-    IF ( Ix<=0 ) THEN
+    IF( Ix<=0 ) THEN
       Ix = Ix + l2_com
       RETURN
-    ELSEIF ( Ix<=kmax_com-l2_com ) THEN
+    ELSEIF( Ix<=kmax_com-l2_com ) THEN
       Ix = Ix + l2_com
       RETURN
     END IF
   ELSE
-    IF ( radixl_com*ABS(X)>=1.0D0 ) GOTO 200
+    IF( radixl_com*ABS(X)>=1.0D0 ) GOTO 200
     X = X*rad2l_com
-    IF ( Ix>=0 ) THEN
+    IF( Ix>=0 ) THEN
       Ix = Ix - l2_com
       RETURN
-    ELSEIF ( Ix>=-kmax_com+l2_com ) THEN
+    ELSEIF( Ix>=-kmax_com+l2_com ) THEN
       Ix = Ix - l2_com
       RETURN
     END IF
@@ -85,6 +84,6 @@ SUBROUTINE DXADJ(X,Ix,Ierror)
   Ierror = 207
   RETURN
   200 CONTINUE
-  IF ( ABS(Ix)>kmax_com ) GOTO 100
+  IF( ABS(Ix)>kmax_com ) GOTO 100
   RETURN
 END SUBROUTINE DXADJ

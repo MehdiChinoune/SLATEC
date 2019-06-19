@@ -1,7 +1,6 @@
 !** CNBCO
 SUBROUTINE CNBCO(Abe,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
-  !>
-  !  Factor a band matrix using Gaussian elimination and
+  !> Factor a band matrix using Gaussian elimination and
   !            estimate the condition number.
   !***
   ! **Library:**   SLATEC
@@ -32,24 +31,24 @@ SUBROUTINE CNBCO(Abe,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
   !                of the original matrix are stored in the rows
   !                of ABE and the diagonals of the original matrix
   !                are stored in columns 1 through ML+MU+1 of ABE.
-  !                NC must be .GE. 2*ML+MU+1 .
+  !                NC must be >= 2*ML+MU+1 .
   !                See the comments below for details.
   !
   !        LDA     INTEGER
   !                the leading dimension of the array ABE.
-  !                LDA must be .GE. N .
+  !                LDA must be >= N .
   !
   !        N       INTEGER
   !                the order of the original matrix.
   !
   !        ML      INTEGER
   !                number of diagonals below the main diagonal.
-  !                0 .LE. ML .LT. N .
+  !                0 <= ML < N .
   !
   !        MU      INTEGER
   !                number of diagonals above the main diagonal.
-  !                0 .LE. MU .LT. N .
-  !                More efficient if ML .LE. MU .
+  !                0 <= MU < N .
+  !                More efficient if ML <= MU .
   !
   !     On Return
   !
@@ -68,7 +67,7 @@ SUBROUTINE CNBCO(Abe,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
   !                in  A  and  B  of size  EPSILON  may cause
   !                relative perturbations in  X  of size  EPSILON/RCOND .
   !                If  RCOND  is so small that the logical expression
-  !                         1.0 + RCOND .EQ. 1.0
+  !                         1.0 + RCOND = 1.0
   !                is true, then  A  may be singular to working
   !                precision.  In particular,  RCOND  is zero  if
   !                exact singularity is detected or the estimate
@@ -111,7 +110,7 @@ SUBROUTINE CNBCO(Abe,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
   !            0  0  0 54 55 56
   !            0  0  0  0 65 66
   !
-  !      then  N = 6, ML = 1, MU = 2, LDA .GE. 5  and ABE should contain
+  !      then  N = 6, ML = 1, MU = 2, LDA >= 5  and ABE should contain
   !
   !            * 11 12 13  +    , * = not used
   !           21 22 23 24  +    , + = used for pivoting
@@ -174,8 +173,8 @@ SUBROUTINE CNBCO(Abe,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
   m = Ml + Mu + 1
   ju = 0
   DO k = 1, N
-    IF ( SCABS1(Z(k))/=0.0E0 ) ek = -Z(k)*SCABS1(ek)/SCABS1(Z(k))
-    IF ( SCABS1(ek-Z(k))>SCABS1(Abe(k,ml1)) ) THEN
+    IF( SCABS1(Z(k))/=0.0E0 ) ek = -Z(k)*SCABS1(ek)/SCABS1(Z(k))
+    IF( SCABS1(ek-Z(k))>SCABS1(Abe(k,ml1)) ) THEN
       s = SCABS1(Abe(k,ml1))/SCABS1(ek-Z(k))
       Z = s*Z
       ek = CMPLX(s,0.0E0)*ek
@@ -184,7 +183,7 @@ SUBROUTINE CNBCO(Abe,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
     wkm = -ek - Z(k)
     s = SCABS1(wk)
     sm = SCABS1(wkm)
-    IF ( SCABS1(Abe(k,ml1))==0.0E0 ) THEN
+    IF( SCABS1(Abe(k,ml1))==0.0E0 ) THEN
       wk = (1.0E0,0.0E0)
       wkm = (1.0E0,0.0E0)
     ELSE
@@ -194,14 +193,14 @@ SUBROUTINE CNBCO(Abe,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
     kp1 = k + 1
     ju = MIN(MAX(ju,Mu+Ipvt(k)),N)
     mm = ml1
-    IF ( kp1<=ju ) THEN
+    IF( kp1<=ju ) THEN
       DO i = kp1, ju
         mm = mm + 1
         sm = sm + SCABS1(Z(i)+wkm*CONJG(Abe(k,mm)))
         Z(i) = Z(i) + wk*CONJG(Abe(k,mm))
         s = s + SCABS1(Z(i))
       END DO
-      IF ( s<sm ) THEN
+      IF( s<sm ) THEN
         t = wkm - wk
         wk = wkm
         mm = ml1
@@ -221,14 +220,14 @@ SUBROUTINE CNBCO(Abe,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
   DO kb = 1, N
     k = N + 1 - kb
     nl = MIN(Ml,kb-1)
-    IF ( k<N ) THEN
+    IF( k<N ) THEN
       DO i = 0, nl-2
         v(i+1) = Abe(k+nl+i,Ml+1-nl-i)
       END DO
       v(nl) = Abe(k+2*nl-2,1)
       Z(k) = Z(k) + DOT_PRODUCT(v(1:nl),Z(k+1:k+nl))
     END IF
-    IF ( SCABS1(Z(k))>1.0E0 ) THEN
+    IF( SCABS1(Z(k))>1.0E0 ) THEN
       s = 1.0E0/SCABS1(Z(k))
       Z = s*Z
     END IF
@@ -250,8 +249,8 @@ SUBROUTINE CNBCO(Abe,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
     Z(l) = Z(k)
     Z(k) = t
     nl = MIN(Ml,N-k)
-    IF ( k<N ) CALL CAXPY(nl,t,Abe(k+nl,ml1-nl),-ldb,Z(k+1),1)
-    IF ( SCABS1(Z(k))>1.0E0 ) THEN
+    IF( k<N ) CALL CAXPY(nl,t,Abe(k+nl,ml1-nl),-ldb,Z(k+1),1)
+    IF( SCABS1(Z(k))>1.0E0 ) THEN
       s = 1.0E0/SCABS1(Z(k))
       Z = s*Z
       ynorm = s*ynorm
@@ -265,13 +264,13 @@ SUBROUTINE CNBCO(Abe,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
   !
   DO kb = 1, N
     k = N + 1 - kb
-    IF ( SCABS1(Z(k))>SCABS1(Abe(k,ml1)) ) THEN
+    IF( SCABS1(Z(k))>SCABS1(Abe(k,ml1)) ) THEN
       s = SCABS1(Abe(k,ml1))/SCABS1(Z(k))
       Z = s*Z
       ynorm = s*ynorm
     END IF
-    IF ( SCABS1(Abe(k,ml1))/=0.0E0 ) Z(k) = Z(k)/Abe(k,ml1)
-    IF ( SCABS1(Abe(k,ml1))==0.0E0 ) Z(k) = 1.0E0
+    IF( SCABS1(Abe(k,ml1))/=0.0E0 ) Z(k) = Z(k)/Abe(k,ml1)
+    IF( SCABS1(Abe(k,ml1))==0.0E0 ) Z(k) = 1.0E0
     lm = MIN(k,m) - 1
     lz = k - lm
     t = -Z(k)
@@ -283,6 +282,6 @@ SUBROUTINE CNBCO(Abe,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
   Z = s*Z
   ynorm = s*ynorm
   !
-  IF ( anorm/=0.0E0 ) Rcond = ynorm/anorm
-  IF ( anorm==0.0E0 ) Rcond = 0.0E0
+  IF( anorm/=0.0E0 ) Rcond = ynorm/anorm
+  IF( anorm==0.0E0 ) Rcond = 0.0E0
 END SUBROUTINE CNBCO

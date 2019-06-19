@@ -1,7 +1,6 @@
 !** DPLINT
 SUBROUTINE DPLINT(N,X,Y,C)
-  !>
-  !  Produce the polynomial which interpolates a set of discrete
+  !> Produce the polynomial which interpolates a set of discrete
   !            data points.
   !***
   ! **Library:**   SLATEC
@@ -25,7 +24,7 @@ SUBROUTINE DPLINT(N,X,Y,C)
   !
   !     Formal Parameters
   !     *** All TYPE REAL variables are DOUBLE PRECISION ***
-  !     N  - the number of data points  (N .GE. 1)
+  !     N  - the number of data points  (N >= 1)
   !     X  - the array of abscissas (all of which must be distinct)
   !     Y  - the array of ordinates
   !     C  - an array of information used by subroutines
@@ -53,19 +52,19 @@ SUBROUTINE DPLINT(N,X,Y,C)
   INTEGER :: i, k, km1
   REAL(DP) :: dif
   !* FIRST EXECUTABLE STATEMENT  DPLINT
-  IF ( N<=0 ) THEN
+  IF( N<=0 ) THEN
     CALL XERMSG('DPLINT','N IS ZERO OR NEGATIVE.',2,1)
     RETURN
   ELSE
     C(1) = Y(1)
-    IF ( N==1 ) RETURN
+    IF( N==1 ) RETURN
     DO k = 2, N
       C(k) = Y(k)
       km1 = k - 1
       DO i = 1, km1
         !     CHECK FOR DISTINCT X VALUES
         dif = X(i) - X(k)
-        IF ( dif==0.0 ) GOTO 100
+        IF( dif==0.0 ) GOTO 100
         C(k) = (C(i)-C(k))/dif
       END DO
     END DO

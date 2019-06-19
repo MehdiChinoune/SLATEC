@@ -1,7 +1,6 @@
 !** D9B0MP
 SUBROUTINE D9B0MP(X,Ampl,Theta)
-  !>
-  !  Evaluate the modulus and phase for the J0 and Y0 Bessel
+  !> Evaluate the modulus and phase for the J0 and Y0 Bessel
   !            functions.
   !***
   ! **Library:**   SLATEC (FNLIB)
@@ -146,7 +145,7 @@ SUBROUTINE D9B0MP(X,Ampl,Theta)
   REAL(DP), PARAMETER ::  pi4 = 0.785398163397448309615660845819876D0
   LOGICAL, SAVE :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  D9B0MP
-  IF ( first ) THEN
+  IF( first ) THEN
     nbm0 = INITDS(bm0cs,37,eta)
     nbt02 = INITDS(bt02cs,39,eta)
     nbm02 = INITDS(bm02cs,40,eta)
@@ -154,11 +153,11 @@ SUBROUTINE D9B0MP(X,Ampl,Theta)
     first = .FALSE.
   END IF
   !
-  IF ( X<4.D0 ) CALL XERMSG('D9B0MP','X MUST BE GE 4',1,2)
+  IF( X<4.D0 ) CALL XERMSG('D9B0MP','X MUST BE GE 4',1,2)
   !
-  IF ( X>8.D0 ) THEN
+  IF( X>8.D0 ) THEN
     !
-    IF ( X>xmax ) CALL XERMSG('D9B0MP',&
+    IF( X>xmax ) CALL XERMSG('D9B0MP',&
       'NO PRECISION BECAUSE X IS BIG',2,2)
     !
     z = 128.D0/(X*X) - 1.D0

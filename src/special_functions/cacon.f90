@@ -1,7 +1,6 @@
 !** CACON
 SUBROUTINE CACON(Z,Fnu,Kode,Mr,N,Y,Nz,Rl,Fnul,Tol,Elim,Alim)
-  !>
-  !  Subsidiary to CBESH and CBESK
+  !> Subsidiary to CBESH and CBESK
   !***
   ! **Library:**   SLATEC
   !***
@@ -28,10 +27,10 @@ SUBROUTINE CACON(Z,Fnu,Kode,Mr,N,Y,Nz,Rl,Fnul,Tol,Elim,Alim)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
   USE service, ONLY : R1MACH
-  INTEGER i, inu, iuf, kflag, Kode, Mr, N, nn, nw, Nz
-  COMPLEX(SP) ck, cs, cscl, cscr, csgn, cspn, css(3), csr(3), c1, c2, &
+  INTEGER :: i, inu, iuf, kflag, Kode, Mr, N, nn, nw, Nz
+  COMPLEX(SP) :: ck, cs, cscl, cscr, csgn, cspn, css(3), csr(3), c1, c2, &
     rz, sc1, sc2, st, s1, s2, Y(N), Z, zn, cy(2)
-  REAL(SP) Alim, arg, ascle, as2, bscle, bry(3), cpn, c1i, c1m, c1r, &
+  REAL(SP) :: Alim, arg, ascle, as2, bscle, bry(3), cpn, c1i, c1m, c1r, &
     Elim, fmr, Fnu, Fnul, Rl, sgn, spn, Tol, yy
   REAL(SP), PARAMETER :: pi = 3.14159265358979324E0
   COMPLEX(SP), PARAMETER :: cone = (1.0E0,0.0E0)
@@ -40,18 +39,18 @@ SUBROUTINE CACON(Z,Fnu,Kode,Mr,N,Y,Nz,Rl,Fnul,Tol,Elim,Alim)
   zn = -Z
   nn = N
   CALL CBINU(zn,Fnu,Kode,nn,Y,nw,Rl,Fnul,Tol,Elim,Alim)
-  IF ( nw>=0 ) THEN
+  IF( nw>=0 ) THEN
     !-----------------------------------------------------------------------
     !     ANALYTIC CONTINUATION TO THE LEFT HALF PLANE FOR THE K FUNCTION
     !-----------------------------------------------------------------------
     nn = MIN(2,N)
     CALL CBKNU(zn,Fnu,Kode,nn,cy,nw,Tol,Elim,Alim)
-    IF ( nw==0 ) THEN
+    IF( nw==0 ) THEN
       s1 = cy(1)
       fmr = Mr
       sgn = -SIGN(pi,fmr)
       csgn = CMPLX(0.0E0,sgn)
-      IF ( Kode/=1 ) THEN
+      IF( Kode/=1 ) THEN
         yy = -AIMAG(zn)
         cpn = COS(yy)
         spn = SIN(yy)
@@ -66,29 +65,29 @@ SUBROUTINE CACON(Z,Fnu,Kode,Mr,N,Y,Nz,Rl,Fnul,Tol,Elim,Alim)
       cpn = COS(arg)
       spn = SIN(arg)
       cspn = CMPLX(cpn,spn)
-      IF ( MOD(inu,2)==1 ) cspn = -cspn
+      IF( MOD(inu,2)==1 ) cspn = -cspn
       iuf = 0
       c1 = s1
       c2 = Y(1)
       ascle = 1.0E+3*R1MACH(1)/Tol
-      IF ( Kode/=1 ) THEN
+      IF( Kode/=1 ) THEN
         CALL CS1S2(zn,c1,c2,nw,ascle,Alim,iuf)
         Nz = Nz + nw
         sc1 = c1
       END IF
       Y(1) = cspn*c1 + csgn*c2
-      IF ( N==1 ) RETURN
+      IF( N==1 ) RETURN
       cspn = -cspn
       s2 = cy(2)
       c1 = s2
       c2 = Y(2)
-      IF ( Kode/=1 ) THEN
+      IF( Kode/=1 ) THEN
         CALL CS1S2(zn,c1,c2,nw,ascle,Alim,iuf)
         Nz = Nz + nw
         sc2 = c1
       END IF
       Y(2) = cspn*c1 + csgn*c2
-      IF ( N==2 ) RETURN
+      IF( N==2 ) RETURN
       cspn = -cspn
       rz = CMPLX(2.0E0,0.0E0)/zn
       ck = CMPLX(Fnu+1.0E0,0.0E0)*rz
@@ -108,9 +107,9 @@ SUBROUTINE CACON(Z,Fnu,Kode,Mr,N,Y,Nz,Rl,Fnul,Tol,Elim,Alim)
       bry(3) = R1MACH(2)
       as2 = ABS(s2)
       kflag = 2
-      IF ( as2<=bry(1) ) THEN
+      IF( as2<=bry(1) ) THEN
         kflag = 1
-      ELSEIF ( as2>=bry(2) ) THEN
+      ELSEIF( as2>=bry(2) ) THEN
         kflag = 3
       END IF
       bscle = bry(kflag)
@@ -124,13 +123,13 @@ SUBROUTINE CACON(Z,Fnu,Kode,Mr,N,Y,Nz,Rl,Fnul,Tol,Elim,Alim)
         c1 = s2*cs
         st = c1
         c2 = Y(i)
-        IF ( Kode/=1 ) THEN
-          IF ( iuf>=0 ) THEN
+        IF( Kode/=1 ) THEN
+          IF( iuf>=0 ) THEN
             CALL CS1S2(zn,c1,c2,nw,ascle,Alim,iuf)
             Nz = Nz + nw
             sc1 = sc2
             sc2 = c1
-            IF ( iuf==3 ) THEN
+            IF( iuf==3 ) THEN
               iuf = -4
               s1 = sc1*css(kflag)
               s2 = sc2*css(kflag)
@@ -141,13 +140,13 @@ SUBROUTINE CACON(Z,Fnu,Kode,Mr,N,Y,Nz,Rl,Fnul,Tol,Elim,Alim)
         Y(i) = cspn*c1 + csgn*c2
         ck = ck + rz
         cspn = -cspn
-        IF ( kflag<3 ) THEN
+        IF( kflag<3 ) THEN
           c1r = REAL(c1)
           c1i = AIMAG(c1)
           c1r = ABS(c1r)
           c1i = ABS(c1i)
           c1m = MAX(c1r,c1i)
-          IF ( c1m>bscle ) THEN
+          IF( c1m>bscle ) THEN
             kflag = kflag + 1
             bscle = bry(kflag)
             s1 = s1*cs
@@ -162,5 +161,5 @@ SUBROUTINE CACON(Z,Fnu,Kode,Mr,N,Y,Nz,Rl,Fnul,Tol,Elim,Alim)
     END IF
   END IF
   Nz = -1
-  IF ( nw==(-2) ) Nz = -2
+  IF( nw==(-2) ) Nz = -2
 END SUBROUTINE CACON

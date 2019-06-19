@@ -1,7 +1,6 @@
 !** ZBIRY
 SUBROUTINE ZBIRY(Zr,Zi,Id,Kode,Bir,Bii,Ierr)
-  !>
-  !  Compute the Airy function Bi(z) or its derivative dBi/dz
+  !> Compute the Airy function Bi(z) or its derivative dBi/dz
   !            for complex argument z.  A scaling option is available
   !            to help avoid overflow.
   !***
@@ -146,7 +145,7 @@ SUBROUTINE ZBIRY(Zr,Zi,Id,Kode,Bir,Bii,Ierr)
     csqi, csqr, cyi(2), cyr(2), dig, dk, d1, d2, eaa, elim, fid, fmr, &
     fnu, fnul, rl, r1m5, sfac, sti, str, s1i, s1r, s2i, s2r, tol, trm1i, &
     trm1r, trm2i, trm2r, Zi, Zr, ztai, ztar, z3i, z3r
-  INTEGER Id, Ierr, k, Kode, k1, k2, nz
+  INTEGER :: Id, Ierr, k, Kode, k1, k2, nz
   REAL(DP), PARAMETER :: tth = 6.66666666666666667D-01, c1 = 6.14926627446000736D-01, &
     c2 = 4.48288357353826359D-01, coef = 5.77350269189625765D-01, &
     pi = 3.14159265358979324D+00
@@ -154,23 +153,23 @@ SUBROUTINE ZBIRY(Zr,Zi,Id,Kode,Bir,Bii,Ierr)
   !* FIRST EXECUTABLE STATEMENT  ZBIRY
   Ierr = 0
   nz = 0
-  IF ( Id<0.OR.Id>1 ) Ierr = 1
-  IF ( Kode<1.OR.Kode>2 ) Ierr = 1
-  IF ( Ierr/=0 ) RETURN
+  IF( Id<0 .OR. Id>1 ) Ierr = 1
+  IF( Kode<1 .OR. Kode>2 ) Ierr = 1
+  IF( Ierr/=0 ) RETURN
   az = ZABS(Zr,Zi)
   tol = MAX(D1MACH(4),1.0D-18)
   fid = Id
-  IF ( az>1.0E0 ) THEN
+  IF( az>1.0E0 ) THEN
     !-----------------------------------------------------------------------
-    !     CASE FOR ABS(Z).GT.1.0
+    !     CASE FOR ABS(Z)>1.0
     !-----------------------------------------------------------------------
     fnu = (1.0D0+fid)/3.0D0
     !-----------------------------------------------------------------------
     !     SET PARAMETERS RELATED TO MACHINE CONSTANTS.
     !     TOL IS THE APPROXIMATE UNIT ROUNDOFF LIMITED TO 1.0E-18.
     !     ELIM IS THE APPROXIMATE EXPONENTIAL OVER- AND UNDERFLOW LIMIT.
-    !     EXP(-ELIM).LT.EXP(-ALIM)=EXP(-ELIM)/TOL    AND
-    !     EXP(ELIM).GT.EXP(ALIM)=EXP(ELIM)*TOL       ARE INTERVALS NEAR
+    !     EXP(-ELIM)<EXP(-ALIM)=EXP(-ELIM)/TOL    AND
+    !     EXP(ELIM)>EXP(ALIM)=EXP(ELIM)*TOL       ARE INTERVALS NEAR
     !     UNDERFLOW AND OVERFLOW LIMITS WHERE SCALED ARITHMETIC IS DONE.
     !     RL IS THE LOWER BOUNDARY OF THE ASYMPTOTIC EXPANSION FOR LARGE Z.
     !     DIG = NUMBER OF BASE 10 DIGITS IN TOL = 10**(-DIG).
@@ -195,47 +194,47 @@ SUBROUTINE ZBIRY(Zr,Zi,Id,Kode,Bir,Bii,Ierr)
     bb = I1MACH(9)*0.5D0
     aa = MIN(aa,bb)
     aa = aa**tth
-    IF ( az>aa ) THEN
+    IF( az>aa ) THEN
       Ierr = 4
       nz = 0
       RETURN
     ELSE
       aa = SQRT(aa)
-      IF ( az>aa ) Ierr = 3
+      IF( az>aa ) Ierr = 3
       CALL ZSQRT(Zr,Zi,csqr,csqi)
       ztar = tth*(Zr*csqr-Zi*csqi)
       ztai = tth*(Zr*csqi+Zi*csqr)
       !-----------------------------------------------------------------------
-      !     RE(ZTA).LE.0 WHEN RE(Z).LT.0, ESPECIALLY WHEN IM(Z) IS SMALL
+      !     RE(ZTA)<=0 WHEN RE(Z)<0, ESPECIALLY WHEN IM(Z) IS SMALL
       !-----------------------------------------------------------------------
       sfac = 1.0D0
       ak = ztai
-      IF ( Zr<0.0D0 ) THEN
+      IF( Zr<0.0D0 ) THEN
         bk = ztar
         ck = -ABS(bk)
         ztar = ck
         ztai = ak
       END IF
-      IF ( Zi==0.0D0.AND.Zr<=0.0D0 ) THEN
+      IF( Zi==0.0D0 .AND. Zr<=0.0D0 ) THEN
         ztar = 0.0D0
         ztai = ak
       END IF
       aa = ztar
-      IF ( Kode/=2 ) THEN
+      IF( Kode/=2 ) THEN
         !-----------------------------------------------------------------------
         !     OVERFLOW TEST
         !-----------------------------------------------------------------------
         bb = ABS(aa)
-        IF ( bb>=alim ) THEN
+        IF( bb>=alim ) THEN
           bb = bb + 0.25D0*LOG(az)
           sfac = tol
-          IF ( bb>elim ) GOTO 50
+          IF( bb>elim ) GOTO 50
         END IF
       END IF
       fmr = 0.0D0
-      IF ( aa<0.0D0.OR.Zr<=0.0D0 ) THEN
+      IF( aa<0.0D0 .OR. Zr<=0.0D0 ) THEN
         fmr = pi
-        IF ( Zi<0.0D0 ) fmr = -pi
+        IF( Zi<0.0D0 ) fmr = -pi
         ztar = -ztar
         ztai = -ztai
       END IF
@@ -244,7 +243,7 @@ SUBROUTINE ZBIRY(Zr,Zi,Id,Kode,Bir,Bii,Ierr)
       !     KODE=2 RETURNS EXP(-ABS(XZTA))*I(FNU,ZTA) FROM CBESI
       !-----------------------------------------------------------------------
       CALL ZBINU(ztar,ztai,fnu,Kode,1,cyr,cyi,nz,rl,fnul,tol,elim,alim)
-      IF ( nz>=0 ) THEN
+      IF( nz>=0 ) THEN
         aa = fmr*fnu
         z3r = sfac
         str = COS(aa)
@@ -268,7 +267,7 @@ SUBROUTINE ZBIRY(Zr,Zi,Id,Kode,Bir,Bii,Ierr)
         sti = SIN(aa)
         s1r = coef*(s1r+s2r*str-s2i*sti)
         s1i = coef*(s1i+s2r*sti+s2i*str)
-        IF ( Id==1 ) THEN
+        IF( Id==1 ) THEN
           str = Zr*s1r - Zi*s1i
           s1i = Zr*s1i + Zi*s1r
           s1r = str
@@ -283,7 +282,7 @@ SUBROUTINE ZBIRY(Zr,Zi,Id,Kode,Bir,Bii,Ierr)
           Bii = s1i/sfac
           RETURN
         END IF
-      ELSEIF ( nz/=(-1) ) THEN
+      ELSEIF( nz/=(-1) ) THEN
         GOTO 100
       END IF
     END IF
@@ -292,20 +291,20 @@ SUBROUTINE ZBIRY(Zr,Zi,Id,Kode,Bir,Bii,Ierr)
     RETURN
   ELSE
     !-----------------------------------------------------------------------
-    !     POWER SERIES FOR ABS(Z).LE.1.
+    !     POWER SERIES FOR ABS(Z)<=1.
     !-----------------------------------------------------------------------
     s1r = coner
     s1i = conei
     s2r = coner
     s2i = conei
-    IF ( az<tol ) THEN
+    IF( az<tol ) THEN
       aa = c1*(1.0D0-fid) + fid*c2
       Bir = aa
       Bii = 0.0D0
       RETURN
     ELSE
       aa = az*az
-      IF ( aa>=tol/az ) THEN
+      IF( aa>=tol/az ) THEN
         trm1r = coner
         trm1i = conei
         trm2r = coner
@@ -340,22 +339,22 @@ SUBROUTINE ZBIRY(Zr,Zi,Id,Kode,Bir,Bii,Ierr)
           d1 = d1 + ak
           d2 = d2 + bk
           ad = MIN(d1,d2)
-          IF ( atrm<tol*ad ) EXIT
+          IF( atrm<tol*ad ) EXIT
           ak = ak + 18.0D0
           bk = bk + 18.0D0
         END DO
       END IF
-      IF ( Id==1 ) THEN
+      IF( Id==1 ) THEN
         Bir = s2r*c2
         Bii = s2i*c2
-        IF ( az>tol ) THEN
+        IF( az>tol ) THEN
           cc = c1/(1.0D0+fid)
           str = s1r*Zr - s1i*Zi
           sti = s1r*Zi + s1i*Zr
           Bir = Bir + cc*(str*Zr-sti*Zi)
           Bii = Bii + cc*(str*Zi+sti*Zr)
         END IF
-        IF ( Kode==1 ) RETURN
+        IF( Kode==1 ) RETURN
         CALL ZSQRT(Zr,Zi,str,sti)
         ztar = tth*(Zr*str-Zi*sti)
         ztai = tth*(Zr*sti+Zi*str)
@@ -368,7 +367,7 @@ SUBROUTINE ZBIRY(Zr,Zi,Id,Kode,Bir,Bii,Ierr)
       ELSE
         Bir = c1*s1r + c2*(Zr*s2r-Zi*s2i)
         Bii = c1*s1i + c2*(Zr*s2i+Zi*s2r)
-        IF ( Kode==1 ) RETURN
+        IF( Kode==1 ) RETURN
         CALL ZSQRT(Zr,Zi,str,sti)
         ztar = tth*(Zr*str-Zi*sti)
         ztai = tth*(Zr*sti+Zi*str)

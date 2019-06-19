@@ -1,7 +1,6 @@
 !** SOSSOL
 SUBROUTINE SOSSOL(K,N,L,X,C,B,M)
-  !>
-  !  Subsidiary to SOS
+  !> Subsidiary to SOS
   !***
   ! **Library:**   SLATEC
   !***
@@ -41,7 +40,7 @@ SUBROUTINE SOSSOL(K,N,L,X,C,B,M)
   REAL(SP) :: xmax
   !* FIRST EXECUTABLE STATEMENT  SOSSOL
   lk = K - 1
-  IF ( L==K ) lk = K
+  IF( L==K ) lk = K
   kn = M
   !
   !
@@ -50,7 +49,7 @@ SUBROUTINE SOSSOL(K,N,L,X,C,B,M)
     k3 = k2 + 1
     xmax = 0.
     kn = kn - N + k2 - 1
-    IF ( k3<=lk ) THEN
+    IF( k3<=lk ) THEN
       j1 = kn
       !
       DO j = k3, lk
@@ -59,7 +58,7 @@ SUBROUTINE SOSSOL(K,N,L,X,C,B,M)
       END DO
     END IF
     !
-    IF ( L>K ) THEN
+    IF( L>K ) THEN
       j1 = kn + L - k2
       xmax = xmax + C(j1)*X(L)
     END IF

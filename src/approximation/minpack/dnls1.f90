@@ -1,8 +1,7 @@
 !** DNLS1
 SUBROUTINE DNLS1(FCN,Iopt,M,N,X,Fvec,Fjac,Ldfjac,Ftol,Xtol,Gtol,Maxfev,&
     Epsfcn,Diag,Mode,Factor,Nprint,Info,Nfev,Njev,Ipvt,Qtf,Wa1,Wa2,Wa3,Wa4)
-  !>
-  !  Minimize the sum of the squares of M nonlinear functions
+  !> Minimize the sum of the squares of M nonlinear functions
   !            in N variables by a modification of the Levenberg-Marquardt
   !            algorithm.
   !***
@@ -276,7 +275,7 @@ SUBROUTINE DNLS1(FCN,Iopt,M,N,X,Fvec,Fjac,Ldfjac,Ftol,Xtol,Gtol,Maxfev,&
   !       First Convergence Test.  If ENORM(Z) denotes the Euclidean norm
   !         of a vector Z, then this test attempts to guarantee that
   !
-  !               ENORM(FVEC) .LE. (1+FTOL)*ENORM(FVECS),
+  !               ENORM(FVEC) <= (1+FTOL)*ENORM(FVECS),
   !
   !         where FVECS denotes the functions evaluated at XSOL.  If this
   !         condition is satisfied with FTOL = 10**(-K), then the final
@@ -290,7 +289,7 @@ SUBROUTINE DNLS1(FCN,Iopt,M,N,X,Fvec,Fjac,Ldfjac,Ftol,Xtol,Gtol,Maxfev,&
   !         entries are defined by the array DIAG, then this test attempts
   !         to guarantee that
   !
-  !               ENORM(D*(X-XSOL)) .LE. XTOL*ENORM(D*XSOL).
+  !               ENORM(D*(X-XSOL)) <= XTOL*ENORM(D*XSOL).
   !
   !         If this condition is satisfied with XTOL = 10**(-K), then the
   !         larger components of D*X have K significant decimal digits and
@@ -318,11 +317,11 @@ SUBROUTINE DNLS1(FCN,Iopt,M,N,X,Fvec,Fjac,Ldfjac,Ftol,Xtol,Gtol,Maxfev,&
   !       parameters, arithmetic interrupts, or an excessive number of
   !       function evaluations.
   !
-  !       Improper Input Parameters.  INFO is set to 0 if IOPT .LT. 1
-  !         or IOPT .GT. 3, or N .LE. 0, or M .LT. N, or for IOPT=1 or 2
-  !         LDFJAC .LT. M, or for IOPT=3 LDFJAC .LT. N, or FTOL .LT. 0.E0,
-  !         or XTOL .LT. 0.E0, or GTOL .LT. 0.E0, or MAXFEV .LE. 0, or
-  !         FACTOR .LE. 0.E0.
+  !       Improper Input Parameters.  INFO is set to 0 if IOPT < 1
+  !         or IOPT > 3, or N <= 0, or M < N, or for IOPT=1 or 2
+  !         LDFJAC < M, or for IOPT=3 LDFJAC < N, or FTOL < 0.E0,
+  !         or XTOL < 0.E0, or GTOL < 0.E0, or MAXFEV <= 0, or
+  !         FACTOR <= 0.E0.
   !
   !       Arithmetic Interrupts.  If these interrupts occur in the FCN
   !         subroutine during an early stage of the computation, they may
@@ -453,7 +452,7 @@ SUBROUTINE DNLS1(FCN,Iopt,M,N,X,Fvec,Fjac,Ldfjac,Ftol,Xtol,Gtol,Maxfev,&
   !      *     /1.4E-1,1.8E-1,2.2E-1,2.5E-1,2.9E-1,3.2E-1,3.5E-1,3.9E-1,
   !      *      3.7E-1,5.8E-1,7.3E-1,9.6E-1,1.34E0,2.1E0,4.39E0/
   ! C
-  !       IF (IFLAG .NE. 0) GO TO 5
+  !       IF(IFLAG /= 0) GO TO 5
   ! C
   ! C     Insert print statements here when NPRINT is positive.
   ! C
@@ -463,7 +462,7 @@ SUBROUTINE DNLS1(FCN,Iopt,M,N,X,Fvec,Fjac,Ldfjac,Ftol,Xtol,Gtol,Maxfev,&
   !          TMP1 = I
   !          TMP2 = 16 - I
   !          TMP3 = TMP1
-  !          IF (I .GT. 8) TMP3 = TMP2
+  !          IF(I > 8) TMP3 = TMP2
   !          FVEC(I) = Y(I) - (X(1) + TMP1/(X(2)*TMP2 + X(3)*TMP3))
   !    10    CONTINUE
   !       RETURN
@@ -502,18 +501,18 @@ SUBROUTINE DNLS1(FCN,Iopt,M,N,X,Fvec,Fjac,Ldfjac,Ftol,Xtol,Gtol,Maxfev,&
   !      *     /1.4E-1,1.8E-1,2.2E-1,2.5E-1,2.9E-1,3.2E-1,3.5E-1,3.9E-1,
   !      *      3.7E-1,5.8E-1,7.3E-1,9.6E-1,1.34E0,2.1E0,4.39E0/
   ! C
-  !       IF (IFLAG .NE. 0) GO TO 5
+  !       IF(IFLAG /= 0) GO TO 5
   ! C
   ! C     Insert print statements here when NPRINT is positive.
   ! C
   !       RETURN
   !     5 CONTINUE
-  !       IF(IFLAG.NE.1) GO TO 20
+  !       IF(IFLAG/=1) GO TO 20
   !       DO 10 I = 1, M
   !          TMP1 = I
   !          TMP2 = 16 - I
   !          TMP3 = TMP1
-  !          IF (I .GT. 8) TMP3 = TMP2
+  !          IF(I > 8) TMP3 = TMP2
   !          FVEC(I) = Y(I) - (X(1) + TMP1/(X(2)*TMP2 + X(3)*TMP3))
   !    10    CONTINUE
   !       RETURN
@@ -526,7 +525,7 @@ SUBROUTINE DNLS1(FCN,Iopt,M,N,X,Fvec,Fjac,Ldfjac,Ftol,Xtol,Gtol,Maxfev,&
   !          TMP1 = I
   !          TMP2 = 16 - I
   !          TMP3 = TMP1
-  !          IF (I .GT. 8) TMP3 = TMP2
+  !          IF(I > 8) TMP3 = TMP2
   !          TMP4 = (X(2)*TMP2 + X(3)*TMP3)**2
   !          FJAC(I,1) = -1.E0
   !          FJAC(I,2) = TMP1*TMP2/TMP4
@@ -551,18 +550,18 @@ SUBROUTINE DNLS1(FCN,Iopt,M,N,X,Fvec,Fjac,Ldfjac,Ftol,Xtol,Gtol,Maxfev,&
   !      *     /1.4E-1,1.8E-1,2.2E-1,2.5E-1,2.9E-1,3.2E-1,3.5E-1,3.9E-1,
   !      *      3.7E-1,5.8E-1,7.3E-1,9.6E-1,1.34E0,2.1E0,4.39E0/
   ! C
-  !       IF (IFLAG .NE. 0) GO TO 5
+  !       IF(IFLAG /= 0) GO TO 5
   ! C
   ! C     Insert print statements here when NPRINT is positive.
   ! C
   !       RETURN
   !     5 CONTINUE
-  !       IF( IFLAG.NE.1) GO TO 20
+  !       IF( IFLAG/=1) GO TO 20
   !       DO 10 I = 1, M
   !          TMP1 = I
   !          TMP2 = 16 - I
   !          TMP3 = TMP1
-  !          IF (I .GT. 8) TMP3 = TMP2
+  !          IF(I > 8) TMP3 = TMP2
   !          FVEC(I) = Y(I) - (X(1) + TMP1/(X(2)*TMP2 + X(3)*TMP3))
   !    10    CONTINUE
   !       RETURN
@@ -575,7 +574,7 @@ SUBROUTINE DNLS1(FCN,Iopt,M,N,X,Fvec,Fjac,Ldfjac,Ftol,Xtol,Gtol,Maxfev,&
   !          TMP1 = I
   !          TMP2 = 16 - I
   !          TMP3 = TMP1
-  !          IF (I .GT. 8) TMP3 = TMP2
+  !          IF(I > 8) TMP3 = TMP2
   !          TMP4 = (X(2)*TMP2 + X(3)*TMP3)**2
   !          FJAC(1) = -1.E0
   !          FJAC(2) = TMP1*TMP2/TMP4
@@ -638,12 +637,12 @@ SUBROUTINE DNLS1(FCN,Iopt,M,N,X,Fvec,Fjac,Ldfjac,Ftol,Xtol,Gtol,Maxfev,&
   !
   !     CHECK THE INPUT PARAMETERS FOR ERRORS.
   !
-  IF ( Iopt<1.OR.Iopt>3.OR.N<=0.OR.M<N.OR.Ldfjac<N.OR.Ftol<zero.OR.&
-    Xtol<zero.OR.Gtol<zero.OR.Maxfev<=0.OR.Factor<=zero ) GOTO 200
-  IF ( Iopt<3.AND.Ldfjac<M ) GOTO 200
-  IF ( Mode==2 ) THEN
+  IF( Iopt<1 .OR. Iopt>3 .OR. N<=0 .OR. M<N .OR. Ldfjac<N .OR. Ftol<zero .OR. &
+    Xtol<zero .OR. Gtol<zero .OR. Maxfev<=0 .OR. Factor<=zero ) GOTO 200
+  IF( Iopt<3 .AND. Ldfjac<M ) GOTO 200
+  IF( Mode==2 ) THEN
     DO j = 1, N
-      IF ( Diag(j)<=zero ) GOTO 200
+      IF( Diag(j)<=zero ) GOTO 200
     END DO
   END IF
   !
@@ -654,7 +653,7 @@ SUBROUTINE DNLS1(FCN,Iopt,M,N,X,Fvec,Fjac,Ldfjac,Ftol,Xtol,Gtol,Maxfev,&
   ijunk = 1
   CALL FCN(iflag,M,N,X,Fvec,Fjac,ijunk)
   Nfev = 1
-  IF ( iflag<0 ) GOTO 200
+  IF( iflag<0 ) GOTO 200
   fnorm = DENORM(M,Fvec)
   !
   !     INITIALIZE LEVENBERG-MARQUARDT PARAMETER AND ITERATION COUNTER.
@@ -668,15 +667,15 @@ SUBROUTINE DNLS1(FCN,Iopt,M,N,X,Fvec,Fjac,Ldfjac,Ftol,Xtol,Gtol,Maxfev,&
   !        IF REQUESTED, CALL FCN TO ENABLE PRINTING OF ITERATES.
   !
   100 CONTINUE
-  IF ( Nprint>0 ) THEN
+  IF( Nprint>0 ) THEN
     iflag = 0
-    IF ( MOD(iter-1,Nprint)==0 ) CALL FCN(iflag,M,N,X,Fvec,Fjac,ijunk)
-    IF ( iflag<0 ) GOTO 200
+    IF( MOD(iter-1,Nprint)==0 ) CALL FCN(iflag,M,N,X,Fvec,Fjac,ijunk)
+    IF( iflag<0 ) GOTO 200
   END IF
   !
   !        CALCULATE THE JACOBIAN MATRIX.
   !
-  IF ( Iopt==3 ) THEN
+  IF( Iopt==3 ) THEN
     !
     !        ACCUMULATE THE JACOBIAN BY ROWS IN ORDER TO SAVE STORAGE.
     !        COMPUTE THE QR FACTORIZATION OF THE JACOBIAN MATRIX
@@ -694,11 +693,11 @@ SUBROUTINE DNLS1(FCN,Iopt,M,N,X,Fvec,Fjac,Ldfjac,Ftol,Xtol,Gtol,Maxfev,&
       nrow = i
       iflag = 3
       CALL FCN(iflag,M,N,X,Fvec,Wa3,nrow)
-      IF ( iflag<0 ) GOTO 200
+      IF( iflag<0 ) GOTO 200
       !
       !            ON THE FIRST ITERATION, CHECK THE USER SUPPLIED JACOBIAN.
       !
-      IF ( iter<=1 ) THEN
+      IF( iter<=1 ) THEN
         !
         !            GET THE INCREMENTED X-VALUES INTO WA1(*).
         !
@@ -707,18 +706,18 @@ SUBROUTINE DNLS1(FCN,Iopt,M,N,X,Fvec,Fjac,Ldfjac,Ftol,Xtol,Gtol,Maxfev,&
         !
         !            EVALUATE AT INCREMENTED VALUES, IF NOT ALREADY EVALUATED.
         !
-        IF ( i==1 ) THEN
+        IF( i==1 ) THEN
           !
           !            EVALUATE FUNCTION AT INCREMENTED VALUE AND PUT INTO WA4(*).
           !
           iflag = 1
           CALL FCN(iflag,M,N,Wa1,Wa4,Fjac,nrow)
           Nfev = Nfev + 1
-          IF ( iflag<0 ) GOTO 200
+          IF( iflag<0 ) GOTO 200
         END IF
         modech = 2
         CALL DCKDER(1,N,X,Fvec(i),Wa3,1,Wa1,Wa4(i),modech,err)
-        IF ( err(1)<chklim ) THEN
+        IF( err(1)<chklim ) THEN
           WRITE (xern1,'(I8)') i
           WRITE (xern3,'(1PE15.6)') err
           CALL XERMSG('DNLS1','DERIVATIVE OF FUNCTION '//xern1//&
@@ -736,14 +735,14 @@ SUBROUTINE DNLS1(FCN,Iopt,M,N,X,Fvec,Fjac,Ldfjac,Ftol,Xtol,Gtol,Maxfev,&
     !
     sing = .FALSE.
     DO j = 1, N
-      IF ( Fjac(j,j)==zero ) sing = .TRUE.
+      IF( Fjac(j,j)==zero ) sing = .TRUE.
       Ipvt(j) = j
       Wa2(j) = DENORM(j,Fjac(1,j))
     END DO
-    IF ( sing ) THEN
+    IF( sing ) THEN
       CALL DQRFAC(N,N,Fjac,Ldfjac,.TRUE.,Ipvt,N,Wa1,Wa2,Wa3)
       DO j = 1, N
-        IF ( Fjac(j,j)/=zero ) THEN
+        IF( Fjac(j,j)/=zero ) THEN
           summ = zero
           DO i = j, N
             summ = summ + Fjac(i,j)*Qtf(i)
@@ -760,7 +759,7 @@ SUBROUTINE DNLS1(FCN,Iopt,M,N,X,Fvec,Fjac,Ldfjac,Ftol,Xtol,Gtol,Maxfev,&
     !
     !     STORE THE FULL JACOBIAN USING M*N STORAGE
     !
-    IF ( Iopt==1 ) THEN
+    IF( Iopt==1 ) THEN
       !
       !     THE CODE APPROXIMATES THE JACOBIAN
       !
@@ -777,8 +776,8 @@ SUBROUTINE DNLS1(FCN,Iopt,M,N,X,Fvec,Fjac,Ldfjac,Ftol,Xtol,Gtol,Maxfev,&
       !
       !             ON THE FIRST ITERATION, CHECK THE USER SUPPLIED JACOBIAN
       !
-      IF ( iter<=1 ) THEN
-        IF ( iflag<0 ) GOTO 200
+      IF( iter<=1 ) THEN
+        IF( iflag<0 ) GOTO 200
         !
         !           GET THE INCREMENTED X-VALUES INTO WA1(*).
         !
@@ -790,11 +789,11 @@ SUBROUTINE DNLS1(FCN,Iopt,M,N,X,Fvec,Fjac,Ldfjac,Ftol,Xtol,Gtol,Maxfev,&
         iflag = 1
         CALL FCN(iflag,M,N,Wa1,Wa4,Fjac,Ldfjac)
         Nfev = Nfev + 1
-        IF ( iflag<0 ) GOTO 200
+        IF( iflag<0 ) GOTO 200
         DO i = 1, M
           modech = 2
           CALL DCKDER(1,N,X,Fvec(i),Fjac(i,1),Ldfjac,Wa1,Wa4(i),modech,err)
-          IF ( err(1)<chklim ) THEN
+          IF( err(1)<chklim ) THEN
             WRITE (xern1,'(I8)') i
             WRITE (xern3,'(1PE15.6)') err
             CALL XERMSG('DNLS1','DERIVATIVE OF FUNCTION '//&
@@ -804,7 +803,7 @@ SUBROUTINE DNLS1(FCN,Iopt,M,N,X,Fvec,Fjac,Ldfjac,Ftol,Xtol,Gtol,Maxfev,&
         !
       END IF
     END IF
-    IF ( iflag<0 ) GOTO 200
+    IF( iflag<0 ) GOTO 200
     !
     !        COMPUTE THE QR FACTORIZATION OF THE JACOBIAN.
     !
@@ -817,7 +816,7 @@ SUBROUTINE DNLS1(FCN,Iopt,M,N,X,Fvec,Fjac,Ldfjac,Ftol,Xtol,Gtol,Maxfev,&
       Wa4(i) = Fvec(i)
     END DO
     DO j = 1, N
-      IF ( Fjac(j,j)/=zero ) THEN
+      IF( Fjac(j,j)/=zero ) THEN
         summ = zero
         DO i = j, M
           summ = summ + Fjac(i,j)*Wa4(i)
@@ -835,11 +834,11 @@ SUBROUTINE DNLS1(FCN,Iopt,M,N,X,Fvec,Fjac,Ldfjac,Ftol,Xtol,Gtol,Maxfev,&
   !        ON THE FIRST ITERATION AND IF MODE IS 1, SCALE ACCORDING
   !        TO THE NORMS OF THE COLUMNS OF THE INITIAL JACOBIAN.
   !
-  IF ( iter==1 ) THEN
-    IF ( Mode/=2 ) THEN
+  IF( iter==1 ) THEN
+    IF( Mode/=2 ) THEN
       DO j = 1, N
         Diag(j) = Wa2(j)
-        IF ( Wa2(j)==zero ) Diag(j) = one
+        IF( Wa2(j)==zero ) Diag(j) = one
       END DO
     END IF
     !
@@ -851,16 +850,16 @@ SUBROUTINE DNLS1(FCN,Iopt,M,N,X,Fvec,Fjac,Ldfjac,Ftol,Xtol,Gtol,Maxfev,&
     END DO
     xnorm = DENORM(N,Wa3)
     delta = Factor*xnorm
-    IF ( delta==zero ) delta = Factor
+    IF( delta==zero ) delta = Factor
   END IF
   !
   !        COMPUTE THE NORM OF THE SCALED GRADIENT.
   !
   gnorm = zero
-  IF ( fnorm/=zero ) THEN
+  IF( fnorm/=zero ) THEN
     DO j = 1, N
       l = Ipvt(j)
-      IF ( Wa2(l)/=zero ) THEN
+      IF( Wa2(l)/=zero ) THEN
         summ = zero
         DO i = 1, j
           summ = summ + Fjac(i,j)*(Qtf(i)/fnorm)
@@ -872,12 +871,12 @@ SUBROUTINE DNLS1(FCN,Iopt,M,N,X,Fvec,Fjac,Ldfjac,Ftol,Xtol,Gtol,Maxfev,&
   !
   !        TEST FOR CONVERGENCE OF THE GRADIENT NORM.
   !
-  IF ( gnorm<=Gtol ) Info = 4
-  IF ( Info==0 ) THEN
+  IF( gnorm<=Gtol ) Info = 4
+  IF( Info==0 ) THEN
     !
     !        RESCALE IF NECESSARY.
     !
-    IF ( Mode/=2 ) THEN
+    IF( Mode/=2 ) THEN
       DO j = 1, N
         Diag(j) = MAX(Diag(j),Wa2(j))
       END DO
@@ -902,20 +901,20 @@ SUBROUTINE DNLS1(FCN,Iopt,M,N,X,Fvec,Fjac,Ldfjac,Ftol,Xtol,Gtol,Maxfev,&
       !
       !           ON THE FIRST ITERATION, ADJUST THE INITIAL STEP BOUND.
       !
-      IF ( iter==1 ) delta = MIN(delta,pnorm)
+      IF( iter==1 ) delta = MIN(delta,pnorm)
       !
       !           EVALUATE THE FUNCTION AT X + P AND CALCULATE ITS NORM.
       !
       iflag = 1
       CALL FCN(iflag,M,N,Wa2,Wa4,Fjac,ijunk)
       Nfev = Nfev + 1
-      IF ( iflag<0 ) EXIT
+      IF( iflag<0 ) EXIT
       fnorm1 = DENORM(M,Wa4)
       !
       !           COMPUTE THE SCALED ACTUAL REDUCTION.
       !
       actred = -one
-      IF ( p1*fnorm1<fnorm ) actred = one - (fnorm1/fnorm)**2
+      IF( p1*fnorm1<fnorm ) actred = one - (fnorm1/fnorm)**2
       !
       !           COMPUTE THE SCALED PREDICTED REDUCTION AND
       !           THE SCALED DIRECTIONAL DERIVATIVE.
@@ -937,24 +936,24 @@ SUBROUTINE DNLS1(FCN,Iopt,M,N,X,Fvec,Fjac,Ldfjac,Ftol,Xtol,Gtol,Maxfev,&
       !           REDUCTION.
       !
       ratio = zero
-      IF ( prered/=zero ) ratio = actred/prered
+      IF( prered/=zero ) ratio = actred/prered
       !
       !           UPDATE THE STEP BOUND.
       !
-      IF ( ratio<=p25 ) THEN
-        IF ( actred>=zero ) temp = p5
-        IF ( actred<zero ) temp = p5*dirder/(dirder+p5*actred)
-        IF ( p1*fnorm1>=fnorm.OR.temp<p1 ) temp = p1
+      IF( ratio<=p25 ) THEN
+        IF( actred>=zero ) temp = p5
+        IF( actred<zero ) temp = p5*dirder/(dirder+p5*actred)
+        IF( p1*fnorm1>=fnorm .OR. temp<p1 ) temp = p1
         delta = temp*MIN(delta,pnorm/p1)
         par = par/temp
-      ELSEIF ( par==zero.OR.ratio>=p75 ) THEN
+      ELSEIF( par==zero .OR. ratio>=p75 ) THEN
         delta = pnorm/p5
         par = p5*par
       END IF
       !
       !           TEST FOR SUCCESSFUL ITERATION.
       !
-      IF ( ratio>=p0001 ) THEN
+      IF( ratio>=p0001 ) THEN
         !
         !           SUCCESSFUL ITERATION. UPDATE X, FVEC, AND THEIR NORMS.
         !
@@ -972,43 +971,43 @@ SUBROUTINE DNLS1(FCN,Iopt,M,N,X,Fvec,Fjac,Ldfjac,Ftol,Xtol,Gtol,Maxfev,&
       !
       !           TESTS FOR CONVERGENCE.
       !
-      IF ( ABS(actred)<=Ftol.AND.prered<=Ftol.AND.p5*ratio<=one ) Info = 1
-      IF ( delta<=Xtol*xnorm ) Info = 2
-      IF ( ABS(actred)<=Ftol.AND.prered<=Ftol.AND.p5*ratio<=one.AND.&
+      IF( ABS(actred)<=Ftol .AND. prered<=Ftol .AND. p5*ratio<=one ) Info = 1
+      IF( delta<=Xtol*xnorm ) Info = 2
+      IF( ABS(actred)<=Ftol .AND. prered<=Ftol .AND. p5*ratio<=one .AND. &
         Info==2 ) Info = 3
-      IF ( Info/=0 ) EXIT
+      IF( Info/=0 ) EXIT
       !
       !           TESTS FOR TERMINATION AND STRINGENT TOLERANCES.
       !
-      IF ( Nfev>=Maxfev ) Info = 5
-      IF ( ABS(actred)<=epsmch.AND.prered<=epsmch.AND.p5*ratio<=one ) Info = 6
-      IF ( delta<=epsmch*xnorm ) Info = 7
-      IF ( gnorm<=epsmch ) Info = 8
-      IF ( Info/=0 ) EXIT
+      IF( Nfev>=Maxfev ) Info = 5
+      IF( ABS(actred)<=epsmch .AND. prered<=epsmch .AND. p5*ratio<=one ) Info = 6
+      IF( delta<=epsmch*xnorm ) Info = 7
+      IF( gnorm<=epsmch ) Info = 8
+      IF( Info/=0 ) EXIT
       !
       !           END OF THE INNER LOOP. REPEAT IF ITERATION UNSUCCESSFUL.
       !
       !
       !        END OF THE OUTER LOOP.
       !
-      IF ( ratio>=p0001 ) GOTO 100
+      IF( ratio>=p0001 ) GOTO 100
     END DO
   END IF
   !
   !     TERMINATION, EITHER NORMAL OR USER IMPOSED.
   !
   200 CONTINUE
-  IF ( iflag<0 ) Info = iflag
+  IF( iflag<0 ) Info = iflag
   iflag = 0
-  IF ( Nprint>0 ) CALL FCN(iflag,M,N,X,Fvec,Fjac,ijunk)
-  IF ( Info<0 ) CALL XERMSG('DNLS1',&
+  IF( Nprint>0 ) CALL FCN(iflag,M,N,X,Fvec,Fjac,ijunk)
+  IF( Info<0 ) CALL XERMSG('DNLS1',&
     'EXECUTION TERMINATED BECAUSE USER SET IFLAG NEGATIVE.',1,1)
-  IF ( Info==0 ) CALL XERMSG('DNLS1','INVALID INPUT PARAMETER.',2,1)
-  IF ( Info==4 ) CALL XERMSG('DNLS1',&
+  IF( Info==0 ) CALL XERMSG('DNLS1','INVALID INPUT PARAMETER.',2,1)
+  IF( Info==4 ) CALL XERMSG('DNLS1',&
     'THIRD CONVERGENCE CONDITION, CHECK RESULTS BEFORE ACCEPTING.',1,1)
-  IF ( Info==5 ) CALL XERMSG('DNLS1',&
+  IF( Info==5 ) CALL XERMSG('DNLS1',&
     'TOO MANY FUNCTION EVALUATIONS.',9,1)
-  IF ( Info>=6 ) CALL XERMSG('DNLS1',&
+  IF( Info>=6 ) CALL XERMSG('DNLS1',&
     'TOLERANCES TOO SMALL, NO FURTHER IMPROVEMENT POSSIBLE.',3,1)
   !
   !     LAST CARD OF SUBROUTINE DNLS1.

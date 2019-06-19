@@ -1,7 +1,6 @@
 !** DGESL
 SUBROUTINE DGESL(A,Lda,N,Ipvt,B,Job)
-  !>
-  !  Solve the real system A*X=B or TRANS(A)*X=B using the
+  !> Solve the real system A*X=B or TRANS(A)*X=B using the
   !            factors computed by DGECO or DGEFA.
   !***
   ! **Library:**   SLATEC (LINPACK)
@@ -52,13 +51,13 @@ SUBROUTINE DGESL(A,Lda,N,Ipvt,B,Job)
   !        zero on the diagonal.  Technically this indicates singularity
   !        but it is often caused by improper arguments or improper
   !        setting of LDA .  It will not occur if the subroutines are
-  !        called correctly and if DGECO has set RCOND .GT. 0.0
-  !        or DGEFA has set INFO .EQ. 0 .
+  !        called correctly and if DGECO has set RCOND > 0.0
+  !        or DGEFA has set INFO = 0 .
   !
   !     To compute  INVERSE(A) * C  where  C  is a matrix
   !     with  P  columns
   !           CALL DGECO(A,LDA,N,IPVT,RCOND,Z)
-  !           IF (RCOND is too small) GO TO ...
+  !           IF(RCOND is too small) GO TO ...
   !           DO 10 J = 1, P
   !              CALL DGESL(A,LDA,N,IPVT,C(1,J),0)
   !        10 CONTINUE
@@ -86,7 +85,7 @@ SUBROUTINE DGESL(A,Lda,N,Ipvt,B,Job)
   REAL(DP) :: t
   !* FIRST EXECUTABLE STATEMENT  DGESL
   nm1 = N - 1
-  IF ( Job/=0 ) THEN
+  IF( Job/=0 ) THEN
     !
     !        JOB = NONZERO, SOLVE  TRANS(A) * X = B
     !        FIRST SOLVE  TRANS(U)*Y = B
@@ -98,12 +97,12 @@ SUBROUTINE DGESL(A,Lda,N,Ipvt,B,Job)
     !
     !        NOW SOLVE TRANS(L)*X = Y
     !
-    IF ( nm1>=1 ) THEN
+    IF( nm1>=1 ) THEN
       DO kb = 1, nm1
         k = N - kb
         B(k) = B(k) + DOT_PRODUCT(A(k+1:N,k),B(k+1:N))
         l = Ipvt(k)
-        IF ( l/=k ) THEN
+        IF( l/=k ) THEN
           t = B(l)
           B(l) = B(k)
           B(k) = t
@@ -115,11 +114,11 @@ SUBROUTINE DGESL(A,Lda,N,Ipvt,B,Job)
     !        JOB = 0, SOLVE  A * X = B
     !        FIRST SOLVE  L*Y = B
     !
-    IF ( nm1>=1 ) THEN
+    IF( nm1>=1 ) THEN
       DO k = 1, nm1
         l = Ipvt(k)
         t = B(l)
-        IF ( l/=k ) THEN
+        IF( l/=k ) THEN
           B(l) = B(k)
           B(k) = t
         END IF

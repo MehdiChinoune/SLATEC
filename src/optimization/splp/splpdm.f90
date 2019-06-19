@@ -1,8 +1,7 @@
 !** SPLPDM
 SUBROUTINE SPLPDM(Mrelas,Nvars,Lbm,Nredc,Info,Iopt,Ibasis,Imat,Ibrc,&
     Ipr,Iwr,Ind,Anorm,Eps,Uu,Gg,Amat,Basmat,Csc,Wr,Singlr,Redbas)
-  !>
-  !  Subsidiary to SPLP
+  !> Subsidiary to SPLP
   !***
   ! **Library:**   SLATEC
   !***
@@ -60,9 +59,9 @@ SUBROUTINE SPLPDM(Mrelas,Nvars,Lbm,Nredc,Info,Iopt,Ibasis,Imat,Ibrc,&
   !
   DO k = 1, Mrelas
     j = Ibasis(k)
-    IF ( j>Nvars ) THEN
+    IF( j>Nvars ) THEN
       nzbm = nzbm + 1
-      IF ( Ind(j)==2 ) THEN
+      IF( Ind(j)==2 ) THEN
         Basmat(nzbm) = one
       ELSE
         Basmat(nzbm) = -one
@@ -77,7 +76,7 @@ SUBROUTINE SPLPDM(Mrelas,Nvars,Lbm,Nredc,Info,Iopt,Ibasis,Imat,Ibrc,&
       i = 0
       DO
         CALL PNNZRS(i,aij,iplace,Amat,Imat,j)
-        IF ( i>0 ) THEN
+        IF( i>0 ) THEN
           nzbm = nzbm + 1
           Basmat(nzbm) = aij*Csc(j)
           Ibrc(nzbm,1) = i
@@ -104,11 +103,11 @@ SUBROUTINE SPLPDM(Mrelas,Nvars,Lbm,Nredc,Info,Iopt,Ibasis,Imat,Ibrc,&
   !
   !     CHECK RETURN VALUE OF ERROR FLAG, GG.
   !
-  IF ( Gg>=zero ) RETURN
-  IF ( Gg==(-7.) ) THEN
+  IF( Gg>=zero ) RETURN
+  IF( Gg==(-7.) ) THEN
     CALL XERMSG('SPLPDM','IN SPLP, SHORT ON STORAGE FOR LA05AS.  USE PRGOPT(*) TO GIVE MORE.',28,Iopt)
     Info = -28
-  ELSEIF ( Gg==(-5.) ) THEN
+  ELSEIF( Gg==(-5.) ) THEN
     Singlr = .TRUE.
   ELSE
     WRITE (xern3,'(1PE15.6)') Gg

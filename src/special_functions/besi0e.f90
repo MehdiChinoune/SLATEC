@@ -1,7 +1,6 @@
 !** BESI0E
 REAL(SP) FUNCTION BESI0E(X)
-  !>
-  !  Compute the exponentially scaled modified (hyperbolic)
+  !> Compute the exponentially scaled modified (hyperbolic)
   !            Bessel function of the first kind of order zero.
   !***
   ! **Library:**   SLATEC (FNLIB)
@@ -80,7 +79,7 @@ REAL(SP) FUNCTION BESI0E(X)
     -.00000000000000027E0, .00000000000000003E0 ]
   LOGICAL, SAVE :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  BESI0E
-  IF ( first ) THEN
+  IF( first ) THEN
     nti0 = INITS(bi0cs,12,0.1*R1MACH(3))
     ntai0 = INITS(ai0cs,21,0.1*R1MACH(3))
     ntai02 = INITS(ai02cs,22,0.1*R1MACH(3))
@@ -88,14 +87,14 @@ REAL(SP) FUNCTION BESI0E(X)
   END IF
   !
   y = ABS(X)
-  IF ( y>3.0 ) THEN
+  IF( y>3.0 ) THEN
     !
-    IF ( y<=8. ) BESI0E = (.375+CSEVL((48./y-11.)/5.,ai0cs,ntai0))/SQRT(y)
-    IF ( y>8. ) BESI0E = (.375+CSEVL(16./y-1.,ai02cs,ntai02))/SQRT(y)
+    IF( y<=8. ) BESI0E = (.375+CSEVL((48./y-11.)/5.,ai0cs,ntai0))/SQRT(y)
+    IF( y>8. ) BESI0E = (.375+CSEVL(16./y-1.,ai02cs,ntai02))/SQRT(y)
     RETURN
   END IF
   !
   BESI0E = 1.0 - X
-  IF ( y>xsml ) BESI0E = EXP(-y)*(2.75+CSEVL(y*y/4.5-1.0,bi0cs,nti0))
+  IF( y>xsml ) BESI0E = EXP(-y)*(2.75+CSEVL(y*y/4.5-1.0,bi0cs,nti0))
   RETURN
 END FUNCTION BESI0E

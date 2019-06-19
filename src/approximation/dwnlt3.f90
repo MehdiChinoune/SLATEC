@@ -1,7 +1,6 @@
 !** DWNLT3
 SUBROUTINE DWNLT3(I,Imax,M,Mdw,Ipivot,H,W)
-  !>
-  !  Subsidiary to WNLIT
+  !> Subsidiary to WNLIT
   !***
   ! **Library:**   SLATEC
   !***
@@ -33,7 +32,7 @@ SUBROUTINE DWNLT3(I,Imax,M,Mdw,Ipivot,H,W)
   REAL(DP) :: t
   !
   !* FIRST EXECUTABLE STATEMENT  DWNLT3
-  IF ( Imax/=I ) THEN
+  IF( Imax/=I ) THEN
     itemp = Ipivot(I)
     Ipivot(I) = Ipivot(Imax)
     Ipivot(Imax) = itemp

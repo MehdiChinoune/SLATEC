@@ -1,7 +1,6 @@
 !** DY
 SUBROUTINE DY(U,Idmn,I,J,Uyyy,Uyyyy)
-  !>
-  !  Subsidiary to SEPELI
+  !> Subsidiary to SEPELI
   !***
   ! **Library:**   SLATEC
   !***
@@ -30,7 +29,7 @@ SUBROUTINE DY(U,Idmn,I,J,Uyyy,Uyyyy)
   INTEGER :: I, Idmn, J
   REAL(SP) :: U(Idmn,l_com), Uyyy, Uyyyy
   !* FIRST EXECUTABLE STATEMENT  DY
-  IF ( J>2.AND.J<(l_com-1) ) THEN
+  IF( J>2 .AND. J<(l_com-1) ) THEN
     !
     !     COMPUTE PARTIAL DERIVATIVE APPROXIMATIONS ON THE INTERIOR
     !
@@ -38,12 +37,12 @@ SUBROUTINE DY(U,Idmn,I,J,Uyyy,Uyyyy)
     Uyyyy = (U(I,J-2)-4.0*U(I,J-1)+6.0*U(I,J)-4.0*U(I,J+1)+U(I,J+2))/dly4_com
     RETURN
   ELSE
-    IF ( J/=1 ) THEN
-      IF ( J==2 ) THEN
+    IF( J/=1 ) THEN
+      IF( J==2 ) THEN
         !
         !     COMPUTE PARTIAL DERIVATIVE APPROXIMATIONS AT Y=C+DLY
         !
-        IF ( kswy_com==1 ) THEN
+        IF( kswy_com==1 ) THEN
           !
           !     PERIODIC AT Y=C+DLY
           !
@@ -56,11 +55,11 @@ SUBROUTINE DY(U,Idmn,I,J,Uyyy,Uyyyy)
             -U(I,6))/dly4_com
           RETURN
         END IF
-      ELSEIF ( J==l_com-1 ) THEN
+      ELSEIF( J==l_com-1 ) THEN
         !
         !     COMPUTE PARTIAL DERIVATIVE APPROXIMATIONS AT Y=D-DLY
         !
-        IF ( kswy_com==1 ) THEN
+        IF( kswy_com==1 ) THEN
           !
           !     PERIODIC AT Y=D-DLY
           !
@@ -74,7 +73,7 @@ SUBROUTINE DY(U,Idmn,I,J,Uyyy,Uyyyy)
             -9.0*U(I,l_com-1)+2.0*U(I,l_com))/dly4_com
           RETURN
         END IF
-      ELSEIF ( J==l_com ) THEN
+      ELSEIF( J==l_com ) THEN
         !
         !     COMPUTE PARTIAL DERIVATIVE APPROXIMATIONS AT Y=D
         !
@@ -88,7 +87,7 @@ SUBROUTINE DY(U,Idmn,I,J,Uyyy,Uyyyy)
     !
     !     COMPUTE PARTIAL DERIVATIVE APPROXIMATIONS AT Y=C
     !
-    IF ( kswy_com/=1 ) THEN
+    IF( kswy_com/=1 ) THEN
       Uyyy = (-5.0*U(I,1)+18.0*U(I,2)-24.0*U(I,3)+14.0*U(I,4)-3.0*U(I,5))/tdly3_com
       Uyyyy = (3.0*U(I,1)-14.0*U(I,2)+26.0*U(I,3)-24.0*U(I,4)+11.0*U(I,5)&
         -2.0*U(I,6))/dly4_com

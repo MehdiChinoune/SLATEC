@@ -1,7 +1,6 @@
 !** CSHCH
 SUBROUTINE CSHCH(Z,Csh,Cch)
-  !>
-  !  Subsidiary to CBESH and CBESK
+  !> Subsidiary to CBESH and CBESK
   !***
   ! **Library:**   SLATEC
   !***
@@ -23,8 +22,8 @@ SUBROUTINE CSHCH(Z,Csh,Cch)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
   
-  COMPLEX(SP) Cch, Csh, Z
-  REAL(SP) cchi, cchr, ch, cn, cshi, cshr, sh, sn, x, y
+  COMPLEX(SP) :: Cch, Csh, Z
+  REAL(SP) :: cchi, cchr, ch, cn, cshi, cshr, sh, sn, x, y
   !* FIRST EXECUTABLE STATEMENT  CSHCH
   x = REAL(Z)
   y = AIMAG(Z)

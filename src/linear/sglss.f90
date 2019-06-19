@@ -1,7 +1,6 @@
 !** SGLSS
 SUBROUTINE SGLSS(A,Mda,M,N,B,Mdb,Nb,Rnorm,Work,Lw,Iwork,Liw,Info)
-  !>
-  !  Solve a linear least squares problems by performing a QR
+  !> Solve a linear least squares problems by performing a QR
   !            factorization of the matrix using Householder
   !            transformations.  Emphasis is put on detecting possible
   !            rank deficiency.
@@ -22,10 +21,10 @@ SUBROUTINE SGLSS(A,Mda,M,N,B,Mdb,Nb,Rnorm,Work,Lw,Iwork,Liw,Info)
   !     SGLSS solves both underdetermined and overdetermined
   !     LINEAR systems AX = B, where A is an M by N matrix
   !     and B is an M by NB matrix of right hand sides. If
-  !     M.GE.N, the least squares solution is computed by
+  !     M>=N, the least squares solution is computed by
   !     decomposing the matrix A into the product of an
   !     orthogonal matrix Q and an upper triangular matrix
-  !     R (QR factorization). If M.LT.N, the minimal
+  !     R (QR factorization). If M<N, the minimal
   !     length solution is computed by factoring the
   !     matrix A into the product of a lower triangular
   !     matrix L and an orthogonal matrix Q (LQ factor-
@@ -60,7 +59,7 @@ SUBROUTINE SGLSS(A,Mda,M,N,B,Mdb,Nb,Rnorm,Work,Lw,Iwork,Liw,Info)
   !     B(,)          Right hand side(s), with MDB the actual first
   !      MDB,NB       dimension of B in the calling program. NB is the
   !                   number of M by 1 right hand sides. Must have
-  !                   MDB.GE.MAX(M,N). If NB = 0, B is never accessed.
+  !                   MDB>=MAX(M,N). If NB = 0, B is never accessed.
   !
   !
   !     RNORM()       Vector of length at least NB.  On input the contents
@@ -103,13 +102,13 @@ SUBROUTINE SGLSS(A,Mda,M,N,B,Mdb,Nb,Rnorm,Work,Lw,Iwork,Liw,Info)
   !
   !     IWORK()       The first M+N locations contain the order in
   !                   which the rows and columns of A were used.
-  !                   If M.GE.N columns then rows. If M.LT.N rows
+  !                   If M>=N columns then rows. If M<N rows
   !                   then columns.
   !
   !     INFO          Flag to indicate status of computation on completion
   !                  -1   Parameter error(s)
   !                   0 - Full rank
-  !                   N.GT.0 - Reduced rank  rank=MIN(M,N)-INFO
+  !                   N>0 - Reduced rank  rank=MIN(M,N)-INFO
   !
   !***
   ! **References:**  T. Manteuffel, An interval analysis approach to rank
@@ -138,19 +137,19 @@ SUBROUTINE SGLSS(A,Mda,M,N,B,Mdb,Nb,Rnorm,Work,Lw,Iwork,Liw,Info)
   mode = 2
   np = 0
   !
-  !     IF M.GE.N CALL LLSIA
-  !     IF M.LT.N CALL ULSIA
+  !     IF M>=N CALL LLSIA
+  !     IF M<N CALL ULSIA
   !
-  IF ( M<N ) THEN
+  IF( M<N ) THEN
     CALL ULSIA(A,Mda,M,N,B,Mdb,Nb,re,ae,key,mode,np,krank,ksure,Rnorm,Work,&
       Lw,Iwork,Liw,Info)
-    IF ( Info==-1 ) RETURN
+    IF( Info==-1 ) RETURN
     Info = M - krank
     RETURN
   END IF
   CALL LLSIA(A,Mda,M,N,B,Mdb,Nb,re,ae,key,mode,np,krank,ksure,Rnorm,Work,Lw,&
     Iwork,Liw,Info)
-  IF ( Info==-1 ) RETURN
+  IF( Info==-1 ) RETURN
   Info = N - krank
   RETURN
 END SUBROUTINE SGLSS

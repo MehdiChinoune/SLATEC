@@ -1,13 +1,12 @@
 !** QAGIE
 SUBROUTINE QAGIE(F,Bound,Inf,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,&
     Alist,Blist,Rlist,Elist,Iord,Last)
-  !>
-  !  The routine calculates an approximation result to a given
+  !> The routine calculates an approximation result to a given
   !            integral   I = Integral of F over (BOUND,+INFINITY)
   !                    or I = Integral of F over (-INFINITY,BOUND)
   !                    or I = Integral of F over (-INFINITY,+INFINITY),
   !                    hopefully satisfying following claim for accuracy
-  !                    ABS(I-RESULT).LE.MAX(EPSABS,EPSREL*ABS(I))
+  !                    ABS(I-RESULT)<=MAX(EPSABS,EPSREL*ABS(I))
   !***
   ! **Library:**   SLATEC (QUADPACK)
   !***
@@ -50,13 +49,13 @@ SUBROUTINE QAGIE(F,Bound,Inf,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,&
   !                     Absolute accuracy requested
   !            EPSREL - Real
   !                     Relative accuracy requested
-  !                     If  EPSABS.LE.0
-  !                     and EPSREL.LT.MAX(50*REL.MACH.ACC.,0.5D-28),
+  !                     If  EPSABS<=0
+  !                     and EPSREL<MAX(50*REL.MACH.ACC.,0.5D-28),
   !                     the routine will end with IER = 6.
   !
   !            LIMIT  - Integer
   !                     Gives an upper bound on the number of subintervals
-  !                     in the partition of (A,B), LIMIT.GE.1
+  !                     in the partition of (A,B), LIMIT>=1
   !
   !         ON RETURN
   !            RESULT - Real
@@ -73,7 +72,7 @@ SUBROUTINE QAGIE(F,Bound,Inf,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,&
   !                     IER = 0 Normal and reliable termination of the
   !                             routine. It is assumed that the requested
   !                             accuracy has been achieved.
-  !                   - IER.GT.0 Abnormal termination of the routine. The
+  !                   - IER>0 Abnormal termination of the routine. The
   !                             estimates for result and error are less
   !                             reliable. It is assumed that the requested
   !                             accuracy has not been achieved.
@@ -113,8 +112,8 @@ SUBROUTINE QAGIE(F,Bound,Inf,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,&
   !                             divergence can occur with any other value
   !                             of IER.
   !                         = 6 The input is invalid, because
-  !                             (EPSABS.LE.0 and
-  !                              EPSREL.LT.MAX(50*REL.MACH.ACC.,0.5D-28),
+  !                             (EPSABS<=0 and
+  !                              EPSREL<MAX(50*REL.MACH.ACC.,0.5D-28),
   !                             RESULT, ABSERR, NEVAL, LAST, RLIST(1),
   !                             ELIST(1) and IORD(1) are set to zero.
   !                             ALIST(1) and BLIST(1) are set to 0
@@ -148,7 +147,7 @@ SUBROUTINE QAGIE(F,Bound,Inf,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,&
   !                     error estimates over the subintervals,
   !                     such that ELIST(IORD(1)), ..., ELIST(IORD(K))
   !                     form a decreasing sequence, with K = LAST
-  !                     If LAST.LE.(LIMIT/2+2), and K = LIMIT+1-LAST
+  !                     If LAST<=(LIMIT/2+2), and K = LIMIT+1-LAST
   !                     otherwise
   !
   !            LAST   - Integer
@@ -254,8 +253,8 @@ SUBROUTINE QAGIE(F,Bound,Inf,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,&
   Rlist(1) = 0.0E+00
   Elist(1) = 0.0E+00
   Iord(1) = 0
-  IF ( Epsabs<=0.0E+00.AND.Epsrel<MAX(0.5E+02*epmach,0.5E-14) ) Ier = 6
-  IF ( Ier==6 ) RETURN
+  IF( Epsabs<=0.0E+00 .AND. Epsrel<MAX(0.5E+02*epmach,0.5E-14) ) Ier = 6
+  IF( Ier==6 ) RETURN
   !
   !
   !           FIRST APPROXIMATION TO THE INTEGRAL
@@ -267,7 +266,7 @@ SUBROUTINE QAGIE(F,Bound,Inf,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,&
   !           I2 = INTEGRAL OF F OVER (0,+INFINITY).
   !
   boun = Bound
-  IF ( Inf==2 ) boun = 0.0E+00
+  IF( Inf==2 ) boun = 0.0E+00
   CALL QK15I(F,boun,Inf,0.0E+00,0.1E+01,Result,Abserr,defabs,resabs)
   !
   !           TEST ON ACCURACY
@@ -278,9 +277,9 @@ SUBROUTINE QAGIE(F,Bound,Inf,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,&
   Iord(1) = 1
   dres = ABS(Result)
   errbnd = MAX(Epsabs,Epsrel*dres)
-  IF ( Abserr<=1.0E+02*epmach*defabs.AND.Abserr>errbnd ) Ier = 2
-  IF ( Limit==1 ) Ier = 1
-  IF ( Ier/=0.OR.(Abserr<=errbnd.AND.Abserr/=resabs).OR.Abserr==0.0E+00 )&
+  IF( Abserr<=1.0E+02*epmach*defabs .AND. Abserr>errbnd ) Ier = 2
+  IF( Limit==1 ) Ier = 1
+  IF( Ier/=0 .OR. (Abserr<=errbnd .AND. Abserr/=resabs) .OR. Abserr==0.0E+00 )&
     GOTO 300
   !
   !           INITIALIZATION
@@ -305,7 +304,7 @@ SUBROUTINE QAGIE(F,Bound,Inf,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,&
   iroff2 = 0
   iroff3 = 0
   ksgn = -1
-  IF ( dres>=(0.1E+01-0.5E+02*epmach)*defabs ) ksgn = 1
+  IF( dres>=(0.1E+01-0.5E+02*epmach)*defabs ) ksgn = 1
   !
   !           MAIN DO-LOOP
   !           ------------
@@ -330,13 +329,13 @@ SUBROUTINE QAGIE(F,Bound,Inf,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,&
     erro12 = error1 + error2
     errsum = errsum + erro12 - errmax
     area = area + area12 - Rlist(maxerr)
-    IF ( defab1/=error1.AND.defab2/=error2 ) THEN
-      IF ( ABS(Rlist(maxerr)-area12)<=0.1E-04*ABS(area12).AND.&
+    IF( defab1/=error1 .AND. defab2/=error2 ) THEN
+      IF( ABS(Rlist(maxerr)-area12)<=0.1E-04*ABS(area12) .AND. &
           erro12>=0.99E+00*errmax ) THEN
-        IF ( extrap ) iroff2 = iroff2 + 1
-        IF ( .NOT.extrap ) iroff1 = iroff1 + 1
+        IF( extrap ) iroff2 = iroff2 + 1
+        IF( .NOT. extrap ) iroff1 = iroff1 + 1
       END IF
-      IF ( Last>10.AND.erro12>errmax ) iroff3 = iroff3 + 1
+      IF( Last>10 .AND. erro12>errmax ) iroff3 = iroff3 + 1
     END IF
     Rlist(maxerr) = area1
     Rlist(Last) = area2
@@ -345,23 +344,23 @@ SUBROUTINE QAGIE(F,Bound,Inf,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,&
     !           TEST FOR ROUNDOFF ERROR AND EVENTUALLY
     !           SET ERROR FLAG.
     !
-    IF ( iroff1+iroff2>=10.OR.iroff3>=20 ) Ier = 2
-    IF ( iroff2>=5 ) ierro = 3
+    IF( iroff1+iroff2>=10 .OR. iroff3>=20 ) Ier = 2
+    IF( iroff2>=5 ) ierro = 3
     !
     !           SET ERROR FLAG IN THE CASE THAT THE NUMBER OF
     !           SUBINTERVALS EQUALS LIMIT.
     !
-    IF ( Last==Limit ) Ier = 1
+    IF( Last==Limit ) Ier = 1
     !
     !           SET ERROR FLAG IN THE CASE OF BAD INTEGRAND BEHAVIOUR
     !           AT SOME POINTS OF THE INTEGRATION RANGE.
     !
-    IF ( MAX(ABS(a1),ABS(b2))<=(0.1E+01+0.1E+03*epmach)&
+    IF( MAX(ABS(a1),ABS(b2))<=(0.1E+01+0.1E+03*epmach)&
       *(ABS(a2)+0.1E+04*uflow) ) Ier = 4
     !
     !           APPEND THE NEWLY-CREATED INTERVALS TO THE LIST.
     !
-    IF ( error2>error1 ) THEN
+    IF( error2>error1 ) THEN
       Alist(maxerr) = a2
       Alist(Last) = a1
       Blist(Last) = b1
@@ -383,26 +382,26 @@ SUBROUTINE QAGIE(F,Bound,Inf,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,&
     !           BISECTED NEXT).
     !
     CALL QPSRT(Limit,Last,maxerr,errmax,Elist,Iord,nrmax)
-    IF ( errsum<=errbnd ) GOTO 200
-    IF ( Ier/=0 ) EXIT
-    IF ( Last==2 ) THEN
+    IF( errsum<=errbnd ) GOTO 200
+    IF( Ier/=0 ) EXIT
+    IF( Last==2 ) THEN
       small = 0.375E+00
       erlarg = errsum
       ertest = errbnd
       rlist2(2) = area
-    ELSEIF ( .NOT.(noext) ) THEN
+    ELSEIF( .NOT. (noext) ) THEN
       erlarg = erlarg - erlast
-      IF ( ABS(b1-a1)>small ) erlarg = erlarg + erro12
-      IF ( .NOT.(extrap) ) THEN
+      IF( ABS(b1-a1)>small ) erlarg = erlarg + erro12
+      IF( .NOT. (extrap) ) THEN
         !
         !           TEST WHETHER THE INTERVAL TO BE BISECTED NEXT IS THE
         !           SMALLEST INTERVAL.
         !
-        IF ( ABS(Blist(maxerr)-Alist(maxerr))>small ) CYCLE
+        IF( ABS(Blist(maxerr)-Alist(maxerr))>small ) CYCLE
         extrap = .TRUE.
         nrmax = 2
       END IF
-      IF ( ierro/=3.AND.erlarg>ertest ) THEN
+      IF( ierro/=3 .AND. erlarg>ertest ) THEN
         !
         !           THE SMALLEST INTERVAL HAS THE LARGEST ERROR.
         !           BEFORE BISECTING DECREASE THE SUM OF THE ERRORS
@@ -411,11 +410,11 @@ SUBROUTINE QAGIE(F,Bound,Inf,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,&
         !
         id = nrmax
         jupbnd = Last
-        IF ( Last>(2+Limit/2) ) jupbnd = Limit + 3 - Last
+        IF( Last>(2+Limit/2) ) jupbnd = Limit + 3 - Last
         DO k = id, jupbnd
           maxerr = Iord(nrmax)
           errmax = Elist(maxerr)
-          IF ( ABS(Blist(maxerr)-Alist(maxerr))>small ) GOTO 100
+          IF( ABS(Blist(maxerr)-Alist(maxerr))>small ) GOTO 100
           nrmax = nrmax + 1
         END DO
       END IF
@@ -426,20 +425,20 @@ SUBROUTINE QAGIE(F,Bound,Inf,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,&
       rlist2(numrl2) = area
       CALL QELG(numrl2,rlist2,reseps,abseps,res3la,nres)
       ktmin = ktmin + 1
-      IF ( ktmin>5.AND.Abserr<0.1E-02*errsum ) Ier = 5
-      IF ( abseps<Abserr ) THEN
+      IF( ktmin>5 .AND. Abserr<0.1E-02*errsum ) Ier = 5
+      IF( abseps<Abserr ) THEN
         ktmin = 0
         Abserr = abseps
         Result = reseps
         correc = erlarg
         ertest = MAX(Epsabs,Epsrel*ABS(reseps))
-        IF ( Abserr<=ertest ) EXIT
+        IF( Abserr<=ertest ) EXIT
       END IF
       !
       !            PREPARE BISECTION OF THE SMALLEST INTERVAL.
       !
-      IF ( numrl2==1 ) noext = .TRUE.
-      IF ( Ier==5 ) EXIT
+      IF( numrl2==1 ) noext = .TRUE.
+      IF( Ier==5 ) EXIT
       maxerr = Iord(1)
       errmax = Elist(maxerr)
       nrmax = 1
@@ -453,22 +452,22 @@ SUBROUTINE QAGIE(F,Bound,Inf,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,&
   !           SET FINAL RESULT AND ERROR ESTIMATE.
   !           ------------------------------------
   !
-  IF ( Abserr/=oflow ) THEN
-    IF ( (Ier+ierro)/=0 ) THEN
-      IF ( ierro==3 ) Abserr = Abserr + correc
-      IF ( Ier==0 ) Ier = 3
-      IF ( Result==0.0E+00.OR.area==0.0E+00 ) THEN
-        IF ( Abserr>errsum ) GOTO 200
-        IF ( area==0.0E+00 ) GOTO 300
-      ELSEIF ( Abserr/ABS(Result)>errsum/ABS(area) ) THEN
+  IF( Abserr/=oflow ) THEN
+    IF( (Ier+ierro)/=0 ) THEN
+      IF( ierro==3 ) Abserr = Abserr + correc
+      IF( Ier==0 ) Ier = 3
+      IF( Result==0.0E+00 .OR. area==0.0E+00 ) THEN
+        IF( Abserr>errsum ) GOTO 200
+        IF( area==0.0E+00 ) GOTO 300
+      ELSEIF( Abserr/ABS(Result)>errsum/ABS(area) ) THEN
         GOTO 200
       END IF
     END IF
     !
     !           TEST ON DIVERGENCE
     !
-    IF ( ksgn/=(-1).OR.MAX(ABS(Result),ABS(area))>defabs*0.1E-01 ) THEN
-      IF ( 0.1E-01>(Result/area).OR.(Result/area)>0.1E+03.OR.&
+    IF( ksgn/=(-1) .OR. MAX(ABS(Result),ABS(area))>defabs*0.1E-01 ) THEN
+      IF( 0.1E-01>(Result/area) .OR. (Result/area)>0.1E+03 .OR. &
         errsum>ABS(area) ) Ier = 6
     END IF
     GOTO 300
@@ -482,7 +481,7 @@ SUBROUTINE QAGIE(F,Bound,Inf,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,&
   END DO
   Abserr = errsum
   300  Neval = 30*Last - 15
-  IF ( Inf==2 ) Neval = 2*Neval
-  IF ( Ier>2 ) Ier = Ier - 1
+  IF( Inf==2 ) Neval = 2*Neval
+  IF( Ier>2 ) Ier = Ier - 1
   RETURN
 END SUBROUTINE QAGIE

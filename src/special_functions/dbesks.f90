@@ -1,7 +1,6 @@
 !** DBESKS
 SUBROUTINE DBESKS(Xnu,X,Nin,Bk)
-  !>
-  !  Compute a sequence of modified Bessel functions of the
+  !> Compute a sequence of modified Bessel functions of the
   !            third kind of fractional order.
   !***
   ! **Library:**   SLATEC (FNLIB)
@@ -19,7 +18,7 @@ SUBROUTINE DBESKS(Xnu,X,Nin,Bk)
   ! **Description:**
   !
   ! DBESKS computes a sequence of modified Bessel functions of the third
-  ! kind of order XNU + I at X, where X .GT. 0, XNU lies in (-1,1),
+  ! kind of order XNU + I at X, where X > 0, XNU lies in (-1,1),
   ! and I = 0, 1, ..., NIN - 1, if NIN is positive and I = 0, 1, ... ,
   ! NIN + 1, if NIN is negative.  On return, the vector BK(.) contains
   ! the results at X for order starting at XNU.  XNU, X, and BK are
@@ -45,7 +44,7 @@ SUBROUTINE DBESKS(Xnu,X,Nin,Bk)
   REAL(DP), PARAMETER :: xmax = -LOG(D1MACH(1))
   !* FIRST EXECUTABLE STATEMENT  DBESKS
   !
-  IF ( X>xmax ) CALL XERMSG('DBESKS','X SO BIG BESSEL K UNDERFLOWS',1,2)
+  IF( X>xmax ) CALL XERMSG('DBESKS','X SO BIG BESSEL K UNDERFLOWS',1,2)
   !
   CALL DBSKES(Xnu,X,Nin,Bk)
   !

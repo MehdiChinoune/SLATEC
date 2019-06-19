@@ -1,7 +1,6 @@
 !** PCHDF
 REAL(SP) FUNCTION PCHDF(K,X,S,Ierr)
-  !>
-  !  Computes divided differences for PCHCE and PCHSP
+  !> Computes divided differences for PCHCE and PCHSP
   !***
   ! **Library:**   SLATEC (PCHIP)
   !***
@@ -33,7 +32,7 @@ REAL(SP) FUNCTION PCHDF(K,X,S,Ierr)
   !
   !     On return:
   !        S      will be destroyed.
-  !        IERR   will be set to -1 if K.LT.2 .
+  !        IERR   will be set to -1 if K<2 .
   !        PCHDF  will be set to the desired derivative approximation if
   !               IERR=0 or to zero if IERR=-1.
   !
@@ -65,23 +64,23 @@ REAL(SP) FUNCTION PCHDF(K,X,S,Ierr)
   !
   !  DECLARE ARGUMENTS.
   !
-  INTEGER K, Ierr
-  REAL(SP) X(K), S(K)
+  INTEGER :: K, Ierr
+  REAL(SP) :: X(K), S(K)
   !
   !  DECLARE LOCAL VARIABLES.
   !
-  INTEGER i, j
-  REAL(SP) value
+  INTEGER :: i, j
+  REAL(SP) :: value
   REAL(SP), PARAMETER :: zero = 0.
   !
   !  CHECK FOR LEGAL VALUE OF K.
   !
   !* FIRST EXECUTABLE STATEMENT  PCHDF
-  IF ( K<3 ) THEN
+  IF( K<3 ) THEN
     !
     !  ERROR RETURN.
     !
-    !     K.LT.3 RETURN.
+    !     K<3 RETURN.
     Ierr = -1
     CALL XERMSG('PCHDF','K LESS THAN THREE',Ierr,1)
     PCHDF = zero

@@ -5,8 +5,7 @@ MODULE TEST07_MOD
 CONTAINS
   !** QCKIN
   SUBROUTINE QCKIN(Lun,Kprint,Ipass)
-    !>
-    !  Quick check for BSKIN.
+    !> Quick check for BSKIN.
     !***
     ! **Library:**   SLATEC
     !***
@@ -44,13 +43,13 @@ CONTAINS
     !   890911  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     USE slatec, ONLY : BSKIN, I1MACH, R1MACH
-    INTEGER Ipass, Kprint
-    INTEGER i, ierr, iflg, ix, i1m12, j, k, kode, Lun, m, mdel, mm, n, ndel, nn, nz
-    REAL(SP) aix, er, tol, v(1), x, xinc, y(10)
+    INTEGER :: Ipass, Kprint
+    INTEGER :: i, ierr, iflg, ix, i1m12, j, k, kode, Lun, m, mdel, mm, n, ndel, nn, nz
+    REAL(SP) :: aix, er, tol, v(1), x, xinc, y(10)
     !* FIRST EXECUTABLE STATEMENT  QCKIN
     tol = 1000.0E0*MAX(R1MACH(4),1.0E-18)
     iflg = 0
-    IF ( Kprint>=3 ) WRITE (Lun,99001)
+    IF( Kprint>=3 ) WRITE (Lun,99001)
     99001 FORMAT ('1 QUICK CHECK DIAGNOSTICS FOR BSKIN'//)
     DO kode = 1, 2
       n = 0
@@ -59,23 +58,23 @@ CONTAINS
         DO mm = 1, 4
           x = 0.0E0
           DO ix = 1, 6
-            IF ( n/=0.OR.ix/=1 ) THEN
+            IF( n/=0 .OR. ix/=1 ) THEN
               CALL BSKIN(x,n,kode,m,y,nz,ierr)
               DO k = 1, m, 2
                 j = n + k - 1
                 CALL BSKIN(x,j,kode,1,v,nz,ierr)
                 er = ABS((v(1)-y(k))/v(1))
-                IF ( er>tol ) THEN
-                  IF ( iflg==0 ) THEN
-                    IF ( Kprint>=2 ) WRITE (Lun,99002)
+                IF( er>tol ) THEN
+                  IF( iflg==0 ) THEN
+                    IF( Kprint>=2 ) WRITE (Lun,99002)
                     99002 FORMAT (8X,'X',13X,'V(1)',11X,'Y(K)',9X,'REL ER','R',5X,&
                       'KODE',3X,'N',4X,'M',4X,'K')
                   END IF
                   iflg = iflg + 1
-                  IF ( Kprint>=2 ) WRITE (Lun,99003) x, v(1), y(k), er, &
+                  IF( Kprint>=2 ) WRITE (Lun,99003) x, v(1), y(k), er, &
                     kode, n, m, k
                   99003 FORMAT (4E15.6,4I5)
-                  IF ( iflg>200 ) GOTO 300
+                  IF( iflg>200 ) GOTO 300
                 END IF
               END DO
             END IF
@@ -99,39 +98,38 @@ CONTAINS
     i1m12 = I1MACH(12)
     x = -2.302E0*R1MACH(5)*i1m12
     CALL BSKIN(x,n,kode,m,y,nz,ierr)
-    IF ( nz==m ) THEN
+    IF( nz==m ) THEN
       DO i = 1, m
-        IF ( y(i)/=0.0E0 ) GOTO 100
+        IF( y(i)/=0.0E0 ) GOTO 100
       END DO
     ELSE
-      IF ( Kprint>=2 ) WRITE (Lun,99004)
+      IF( Kprint>=2 ) WRITE (Lun,99004)
       99004 FORMAT (//' NZ IN UNDERFLOW TEST IS NOT 1'//)
       iflg = iflg + 1
     END IF
     GOTO 200
     100 CONTINUE
     IFlg = iflg + 1
-    IF ( Kprint>=2 ) WRITE (Lun,99005)
+    IF( Kprint>=2 ) WRITE (Lun,99005)
     99005 FORMAT (//' SOME Y VALUE IN UNDERFLOW TEST IS NOT ZERO'//)
     200 CONTINUE
-    IF ( iflg==0.AND.Kprint>=3 ) THEN
+    IF( iflg==0 .AND. Kprint>=3 ) THEN
       WRITE (Lun,99006)
       99006 FORMAT (//' QUICK CHECKS OK'//)
     END IF
     Ipass = 0
-    IF ( iflg==0 ) Ipass = 1
+    IF( iflg==0 ) Ipass = 1
     RETURN
     300 CONTINUE
-    IF ( Kprint>=2 ) WRITE (Lun,99007)
+    IF( Kprint>=2 ) WRITE (Lun,99007)
     99007 FORMAT (//' PROCESSING OF MAIN LOOPS TERMINATED BECAUSE THE NUM',&
       'BER OF DIAGNOSTIC PRINTS EXCEEDS 200'//)
     Ipass = 0
-    IF ( iflg==0 ) Ipass = 1
+    IF( iflg==0 ) Ipass = 1
   END SUBROUTINE QCKIN
   !** QCPSI
   SUBROUTINE QCPSI(Lun,Kprint,Ipass)
-    !>
-    !  Quick check for PSIFN.
+    !> Quick check for PSIFN.
     !***
     ! **Library:**   SLATEC
     !***
@@ -146,7 +144,7 @@ CONTAINS
     !     LOOPS IN SUBROUTINE PSIFN(X,N,KODE,M,ANS,NZ,IERR) FOR DERIVATIVES
     !     OF THE PSI FUNCTION.  FOR N=0, THE PSI FUNCTIONS ARE CALCULATED
     !     EXPLICITLY AND CHECKED AGAINST EVALUATIONS FROM PSIFN. FOR
-    !     N.GT.0, CONSISTENCY CHECKS ARE MADE BY COMPARING A SEQUENCE
+    !     N>0, CONSISTENCY CHECKS ARE MADE BY COMPARING A SEQUENCE
     !     AGAINST SINGLE EVALUATIONS OF PSIFN, ONE AT A TIME.
     !     IF THE RELATIVE ERROR IS LESS THAN 1000 TIMES UNIT ROUNDOFF,
     !     THEN THE TEST IS PASSED--IF NOT,
@@ -168,14 +166,14 @@ CONTAINS
     !   890911  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     USE slatec, ONLY : PSIFN, R1MACH
-    INTEGER Ipass, Kprint
-    INTEGER i, ierr, iflg, ix, kode, Lun, m, n, nm, nn, nz
-    REAL(SP) er, psi1(3), psi2(20), r1m4, s, tol, x
+    INTEGER :: Ipass, Kprint
+    INTEGER :: i, ierr, iflg, ix, kode, Lun, m, n, nm, nn, nz
+    REAL(SP) :: er, psi1(3), psi2(20), r1m4, s, tol, x
     REAL, PARAMETER :: euler = 0.5772156649015328606E0
     !* FIRST EXECUTABLE STATEMENT  QCPSI
     r1m4 = R1MACH(4)
     tol = 1000.0E0*MAX(r1m4,1.0E-18)
-    IF ( Kprint>=3 ) WRITE (Lun,99001)
+    IF( Kprint>=3 ) WRITE (Lun,99001)
     99001 FORMAT ('1 QUICK CHECK DIAGNOSTICS FOR PSIFN'//)
     !-----------------------------------------------------------------------
     !     CHECK PSI(I) AND PSI(I-0.5), I=1,2,...
@@ -190,13 +188,13 @@ CONTAINS
           CALL PSIFN(x,n,kode,1,psi2,nz,ierr)
           psi1(1) = -s + (kode-1)*LOG(x)
           er = ABS((psi1(1)-psi2(1))/psi1(1))
-          IF ( er>tol ) THEN
-            IF ( iflg==0 ) THEN
-              IF ( Kprint>=2 ) WRITE (Lun,99004)
+          IF( er>tol ) THEN
+            IF( iflg==0 ) THEN
+              IF( Kprint>=2 ) WRITE (Lun,99004)
             END IF
             iflg = iflg + 1
-            IF ( Kprint>=2 ) WRITE (Lun,99005) x, psi1(1), psi2(i), er, kode, n
-            IF ( iflg>200 ) GOTO 100
+            IF( Kprint>=2 ) WRITE (Lun,99005) x, psi1(1), psi2(i), er, kode, n
+            IF( iflg>200 ) GOTO 100
           END IF
           s = s + 1.0E0/x
           x = x + 1.0E0
@@ -204,7 +202,7 @@ CONTAINS
       END DO
     END DO
     !-----------------------------------------------------------------------
-    !     CHECK SMALL X.LT.UNIT ROUNDOFF
+    !     CHECK SMALL X<UNIT ROUNDOFF
     !-----------------------------------------------------------------------
     kode = 1
     x = tol/10000.0E0
@@ -212,15 +210,15 @@ CONTAINS
     CALL PSIFN(x,n,kode,1,psi2,nz,ierr)
     psi1(1) = x**(-n-1)
     er = ABS((psi1(1)-psi2(1))/psi1(1))
-    IF ( er>tol ) THEN
-      IF ( iflg==0 ) THEN
-        IF ( Kprint>=2 ) WRITE (Lun,99004)
+    IF( er>tol ) THEN
+      IF( iflg==0 ) THEN
+        IF( Kprint>=2 ) WRITE (Lun,99004)
       END IF
       iflg = iflg + 1
-      IF ( Kprint>=2 ) WRITE (Lun,99005) x, psi1(1), psi2(1), er, kode, n
+      IF( Kprint>=2 ) WRITE (Lun,99005) x, psi1(1), psi2(1), er, kode, n
     END IF
     !-----------------------------------------------------------------------
-    !     CONSISTENCY TESTS FOR N.GE.0
+    !     CONSISTENCY TESTS FOR N>=0
     !-----------------------------------------------------------------------
     DO kode = 1, 2
       DO m = 1, 5
@@ -234,31 +232,31 @@ CONTAINS
               nm = nn + i - 1
               CALL PSIFN(x,nm,kode,1,psi1,nz,ierr)
               er = ABS((psi2(i)-psi1(1))/psi1(1))
-              IF ( er>=tol ) THEN
-                IF ( iflg==0 ) THEN
-                  IF ( Kprint>=2 ) WRITE (Lun,99004)
+              IF( er>=tol ) THEN
+                IF( iflg==0 ) THEN
+                  IF( Kprint>=2 ) WRITE (Lun,99004)
                 END IF
                 iflg = iflg + 1
-                IF ( Kprint>=2 ) WRITE (Lun,99005) x, psi1(1), psi2(i), er, kode, nm
+                IF( Kprint>=2 ) WRITE (Lun,99005) x, psi1(1), psi2(i), er, kode, nm
               END IF
             END DO
           END DO
         END DO
       END DO
     END DO
-    IF ( iflg==0.AND.Kprint>=3 ) THEN
+    IF( iflg==0 .AND. Kprint>=3 ) THEN
       WRITE (Lun,99002)
       99002 FORMAT (//' QUICK CHECKS OK'//)
     END IF
     Ipass = 0
-    IF ( iflg==0 ) Ipass = 1
+    IF( iflg==0 ) Ipass = 1
     RETURN
     100 CONTINUE
-    IF ( Kprint>=2 ) WRITE (Lun,99003)
+    IF( Kprint>=2 ) WRITE (Lun,99003)
     99003 FORMAT (//' PROCESSING OF MAIN LOOPS TERMINATED BECAUSE THE NUM',&
       'BER OF DIAGNOSTIC PRINTS EXCEEDS 200'//)
     Ipass = 0
-    IF ( iflg==0 ) Ipass = 1
+    IF( iflg==0 ) Ipass = 1
     99004 FORMAT (8X,'X',13X,'PSI1',11X,'PSI2',9X,'REL ERR',5X,'KODE',3X,'N')
     99005 FORMAT (4E15.6,2I5)
   END SUBROUTINE QCPSI
@@ -269,8 +267,7 @@ PROGRAM TEST07
   USE slatec, ONLY : I1MACH, XSETF, XSETUN, XERMAX
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
-  !>
-  !  Driver for testing SLATEC subprograms
+  !> Driver for testing SLATEC subprograms
   !***
   ! **Library:**   SLATEC
   !***
@@ -316,7 +313,7 @@ PROGRAM TEST07
   !   890618  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900524  Cosmetic changes to code.  (WRB)
-  INTEGER ipass, kprint, lin, lun, nfail
+  INTEGER :: ipass, kprint, lin, lun, nfail
   !* FIRST EXECUTABLE STATEMENT  TEST07
   lun = I1MACH(2)
   lin = I1MACH(1)
@@ -327,7 +324,7 @@ PROGRAM TEST07
   CALL GET_ARGUMENT(kprint)
   CALL XERMAX(1000)
   CALL XSETUN(lun)
-  IF ( kprint<=1 ) THEN
+  IF( kprint<=1 ) THEN
     CALL XSETF(0)
   ELSE
     CALL XSETF(1)
@@ -336,13 +333,13 @@ PROGRAM TEST07
   !     Test single precision special function routines
   !
   CALL QCKIN(lun,kprint,ipass)
-  IF ( ipass==0 ) nfail = nfail + 1
+  IF( ipass==0 ) nfail = nfail + 1
   CALL QCPSI(lun,kprint,ipass)
-  IF ( ipass==0 ) nfail = nfail + 1
+  IF( ipass==0 ) nfail = nfail + 1
   !
   !     Write PASS or FAIL message
   !
-  IF ( nfail==0 ) THEN
+  IF( nfail==0 ) THEN
     WRITE (lun,99001)
     99001 FORMAT (/' --------------TEST07 PASSED ALL TESTS----------------')
   ELSE

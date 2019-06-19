@@ -1,7 +1,6 @@
 !** ZBESJ
 SUBROUTINE ZBESJ(Zr,Zi,Fnu,Kode,N,Cyr,Cyi,Nz,Ierr)
-  !>
-  !  Compute a sequence of the Bessel functions J(a,z) for
+  !> Compute a sequence of the Bessel functions J(a,z) for
   !            complex argument z and real nonnegative orders a=b,b+1,
   !            b+2,... where b>0.  A scaling option is available to
   !            help avoid overflow.
@@ -162,7 +161,7 @@ SUBROUTINE ZBESJ(Zr,Zi,Fnu,Kode,N,Cyr,Cyi,Nz,Ierr)
   !   920811  Prologue revised.  (DWL)
   USE service, ONLY : XERMSG, D1MACH, I1MACH
   !     COMPLEX CI,CSGN,CY,Z,ZN
-  INTEGER i, Ierr, inu, inuh, ir, k, Kode, k1, k2, N, nl, Nz
+  INTEGER :: i, Ierr, inu, inuh, ir, k, Kode, k1, k2, N, nl, Nz
   REAL(DP) :: aa, alim, arg, cii, csgni, csgnr, Cyi(N), Cyr(N), dig, elim, Fnu, &
     fnul, rl, r1m5, str, tol, Zi, zni, znr, Zr, bb, fn, az, ascle, rtol, atol, sti
   REAL(DP), PARAMETER :: hpi = 1.57079632679489662D0
@@ -170,16 +169,16 @@ SUBROUTINE ZBESJ(Zr,Zi,Fnu,Kode,N,Cyr,Cyi,Nz,Ierr)
   !* FIRST EXECUTABLE STATEMENT  ZBESJ
   Ierr = 0
   Nz = 0
-  IF ( Fnu<0.0D0 ) Ierr = 1
-  IF ( Kode<1.OR.Kode>2 ) Ierr = 1
-  IF ( N<1 ) Ierr = 1
-  IF ( Ierr/=0 ) RETURN
+  IF( Fnu<0.0D0 ) Ierr = 1
+  IF( Kode<1 .OR. Kode>2 ) Ierr = 1
+  IF( N<1 ) Ierr = 1
+  IF( Ierr/=0 ) RETURN
   !-----------------------------------------------------------------------
   !     SET PARAMETERS RELATED TO MACHINE CONSTANTS.
   !     TOL IS THE APPROXIMATE UNIT ROUNDOFF LIMITED TO 1.0E-18.
   !     ELIM IS THE APPROXIMATE EXPONENTIAL OVER- AND UNDERFLOW LIMIT.
-  !     EXP(-ELIM).LT.EXP(-ALIM)=EXP(-ELIM)/TOL    AND
-  !     EXP(ELIM).GT.EXP(ALIM)=EXP(ELIM)*TOL       ARE INTERVALS NEAR
+  !     EXP(-ELIM)<EXP(-ALIM)=EXP(-ELIM)/TOL    AND
+  !     EXP(ELIM)>EXP(ALIM)=EXP(ELIM)*TOL       ARE INTERVALS NEAR
   !     UNDERFLOW AND OVERFLOW LIMITS WHERE SCALED ARITHMETIC IS DONE.
   !     RL IS THE LOWER BOUNDARY OF THE ASYMPTOTIC EXPANSION FOR LARGE Z.
   !     DIG = NUMBER OF BASE 10 DIGITS IN TOL = 10**(-DIG).
@@ -206,11 +205,11 @@ SUBROUTINE ZBESJ(Zr,Zi,Fnu,Kode,N,Cyr,Cyi,Nz,Ierr)
   aa = 0.5D0/tol
   bb = I1MACH(9)*0.5D0
   aa = MIN(aa,bb)
-  IF ( az<=aa ) THEN
-    IF ( fn<=aa ) THEN
+  IF( az<=aa ) THEN
+    IF( fn<=aa ) THEN
       aa = SQRT(aa)
-      IF ( az>aa ) Ierr = 3
-      IF ( fn>aa ) Ierr = 3
+      IF( az>aa ) Ierr = 3
+      IF( fn>aa ) Ierr = 3
       !-----------------------------------------------------------------------
       !     CALCULATE CSGN=EXP(FNU*HPI*I) TO MINIMIZE LOSSES OF SIGNIFICANCE
       !     WHEN FNU IS LARGE
@@ -222,7 +221,7 @@ SUBROUTINE ZBESJ(Zr,Zi,Fnu,Kode,N,Cyr,Cyi,Nz,Ierr)
       arg = (Fnu-(inu-ir))*hpi
       csgnr = COS(arg)
       csgni = SIN(arg)
-      IF ( MOD(inuh,2)/=0 ) THEN
+      IF( MOD(inuh,2)/=0 ) THEN
         csgnr = -csgnr
         csgni = -csgni
       END IF
@@ -231,16 +230,16 @@ SUBROUTINE ZBESJ(Zr,Zi,Fnu,Kode,N,Cyr,Cyi,Nz,Ierr)
       !-----------------------------------------------------------------------
       znr = Zi
       zni = -Zr
-      IF ( Zi<0.0D0 ) THEN
+      IF( Zi<0.0D0 ) THEN
         znr = -znr
         zni = -zni
         csgni = -csgni
         cii = -cii
       END IF
       CALL ZBINU(znr,zni,Fnu,Kode,N,Cyr,Cyi,Nz,rl,fnul,tol,elim,alim)
-      IF ( Nz>=0 ) THEN
+      IF( Nz>=0 ) THEN
         nl = N - Nz
-        IF ( nl==0 ) RETURN
+        IF( nl==0 ) RETURN
         rtol = 1.0D0/tol
         ascle = D1MACH(1)*rtol*1.0D+3
         DO i = 1, nl
@@ -250,7 +249,7 @@ SUBROUTINE ZBESJ(Zr,Zi,Fnu,Kode,N,Cyr,Cyi,Nz,Ierr)
           aa = Cyr(i)
           bb = Cyi(i)
           atol = 1.0D0
-          IF ( MAX(ABS(aa),ABS(bb))<=ascle ) THEN
+          IF( MAX(ABS(aa),ABS(bb))<=ascle ) THEN
             aa = aa*rtol
             bb = bb*rtol
             atol = tol
@@ -264,7 +263,7 @@ SUBROUTINE ZBESJ(Zr,Zi,Fnu,Kode,N,Cyr,Cyi,Nz,Ierr)
           csgnr = str
         END DO
         RETURN
-      ELSEIF ( Nz==(-2) ) THEN
+      ELSEIF( Nz==(-2) ) THEN
         Nz = 0
         Ierr = 5
         RETURN

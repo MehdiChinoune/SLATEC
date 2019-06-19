@@ -1,7 +1,6 @@
 !** XGETF
 SUBROUTINE XGETF(Kontrl)
-  !>
-  !  Return the current value of the error control flag.
+  !> Return the current value of the error control flag.
   !***
   ! **Library:**   SLATEC (XERROR)
   !***
@@ -33,7 +32,7 @@ SUBROUTINE XGETF(Kontrl)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
-  INTEGER Kontrl
+  INTEGER :: Kontrl
   !* FIRST EXECUTABLE STATEMENT  XGETF
   Kontrl = J4SAVE(2,0,.FALSE.)
 END SUBROUTINE XGETF

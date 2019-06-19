@@ -1,7 +1,6 @@
 !** DXPNRM
 SUBROUTINE DXPNRM(Nu1,Nu2,Mu1,Mu2,Pqa,Ipqa,Ierror)
-  !>
-  !  To compute the values of Legendre functions for DXLEGF.
+  !> To compute the values of Legendre functions for DXLEGF.
   !            This subroutine transforms an array of Legendre functions
   !            of the first kind of negative order stored in array PQA
   !            into normalized Legendre polynomials stored in array PQA.
@@ -28,7 +27,7 @@ SUBROUTINE DXPNRM(Nu1,Nu2,Mu1,Mu2,Pqa,Ipqa,Ierror)
   !           section.  (WRB)
   !   920127  Revised PURPOSE section of prologue.  (DWL)
 
-  INTEGER i, Ierror, Ipqa(*), iprod, j, k, l, mu, Mu1, Mu2
+  INTEGER :: i, Ierror, Ipqa(*), iprod, j, k, l, mu, Mu1, Mu2
   REAL(DP) :: c1, dmu, nu, Nu1, Nu2, Pqa(*), prod
   !* FIRST EXECUTABLE STATEMENT  DXPNRM
   Ierror = 0
@@ -37,19 +36,19 @@ SUBROUTINE DXPNRM(Nu1,Nu2,Mu1,Mu2,Pqa,Ipqa,Ierror)
   dmu = Mu1
   nu = Nu1
   !
-  !         IF MU .GT.NU, NORM P =0.
+  !         IF MU >NU, NORM P =0.
   !
   j = 1
-  DO WHILE ( dmu>nu )
+  DO WHILE( dmu>nu )
     Pqa(j) = 0.D0
     Ipqa(j) = 0
     j = j + 1
-    IF ( j>l ) RETURN
+    IF( j>l ) RETURN
     !
     !        INCREMENT EITHER MU OR NU AS APPROPRIATE.
     !
-    IF ( Mu2>Mu1 ) dmu = dmu + 1.D0
-    IF ( Nu2-Nu1>.5D0 ) nu = nu + 1.D0
+    IF( Mu2>Mu1 ) dmu = dmu + 1.D0
+    IF( Nu2-Nu1>.5D0 ) nu = nu + 1.D0
   END DO
   !
   !         TRANSFORM P(-MU,NU,X) INTO NORMALIZED P(MU,NU,X) USING
@@ -60,35 +59,35 @@ SUBROUTINE DXPNRM(Nu1,Nu2,Mu1,Mu2,Pqa,Ipqa,Ierror)
   prod = 1.D0
   iprod = 0
   k = 2*mu
-  IF ( k>0 ) THEN
+  IF( k>0 ) THEN
     DO i = 1, k
       prod = prod*SQRT(nu+dmu+1.D0-i)
       CALL DXADJ(prod,iprod,Ierror)
     END DO
-    IF ( Ierror/=0 ) RETURN
+    IF( Ierror/=0 ) RETURN
   END IF
   DO i = j, l
     c1 = prod*SQRT(nu+.5D0)
     Pqa(i) = Pqa(i)*c1
     Ipqa(i) = Ipqa(i) + iprod
     CALL DXADJ(Pqa(i),Ipqa(i),Ierror)
-    IF ( Ierror/=0 ) RETURN
-    IF ( Nu2-Nu1>.5D0 ) THEN
+    IF( Ierror/=0 ) RETURN
+    IF( Nu2-Nu1>.5D0 ) THEN
       prod = SQRT(nu+dmu+1.D0)*prod
-      IF ( nu/=dmu-1.D0 ) prod = prod/SQRT(nu-dmu+1.D0)
+      IF( nu/=dmu-1.D0 ) prod = prod/SQRT(nu-dmu+1.D0)
       CALL DXADJ(prod,iprod,Ierror)
-      IF ( Ierror/=0 ) RETURN
+      IF( Ierror/=0 ) RETURN
       nu = nu + 1.D0
-    ELSEIF ( dmu>=nu ) THEN
+    ELSEIF( dmu>=nu ) THEN
       prod = 0.D0
       iprod = 0
       mu = mu + 1
       dmu = dmu + 1.D0
     ELSE
       prod = SQRT(nu+dmu+1.D0)*prod
-      IF ( nu>dmu ) prod = prod*SQRT(nu-dmu)
+      IF( nu>dmu ) prod = prod*SQRT(nu-dmu)
       CALL DXADJ(prod,iprod,Ierror)
-      IF ( Ierror/=0 ) RETURN
+      IF( Ierror/=0 ) RETURN
       mu = mu + 1
       dmu = dmu + 1.D0
     END IF

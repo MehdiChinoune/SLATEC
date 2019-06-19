@@ -5,8 +5,7 @@ MODULE TEST16_MOD
 CONTAINS
   !** DQC36J
   SUBROUTINE DQC36J(Lun,Kprint,Ipass)
-    !>
-    !  THIS IS A QUICK CHECK PROGRAM FOR THE SUBROUTINES DRC3JJ,
+    !> THIS IS A QUICK CHECK PROGRAM FOR THE SUBROUTINES DRC3JJ,
     !            DRC3JM, AND DRC6J, WHICH CALCULATE THE WIGNER COEFFICIENTS,
     !            3J AND 6J.
     !***
@@ -45,10 +44,10 @@ CONTAINS
     !           made by M. McClain.
     USE slatec, ONLY : D1MACH, DRC3JJ, DRC3JM, DRC6J, NUMXER, XERCLR, XSETF
     !
-    INTEGER Lun, Kprint, Ipass
+    INTEGER :: Lun, Kprint, Ipass
     !
     CHARACTER string*36, fmt*30, fmt2*13
-    INTEGER ipass1, ipass2, ipass3, ipass4, ipass5, ier, indexx, &
+    INTEGER :: ipass1, ipass2, ipass3, ipass4, ipass5, ier, indexx, &
       i, first, last, nsig, nerr, ierjj, ierjm
     INTEGER, PARAMETER :: NDIM = 15
     REAL(DP) :: tol, l1, l2, l3, m1, m2, m3, l1min, l1max, m2min, m2max, &
@@ -98,7 +97,7 @@ CONTAINS
     !
     ! --- INITIALIZATION OF TESTS
     tol = 100.0D0*D1MACH(3)
-    IF ( Kprint>=2 ) THEN
+    IF( Kprint>=2 ) THEN
       WRITE (Lun,*) ' THIS IS DQC36J, A TEST PROGRAM FOR THE '//&
         'DOUBLE PRECISION 3J6J PACKAGE.'
       WRITE (Lun,*) ' AN EXPLANATION OF THE VARIOUS '//&
@@ -111,13 +110,13 @@ CONTAINS
     WRITE (string,99001) x
     99001 FORMAT (F35.25)
     DO i = 1, 35
-      IF ( string(i:i)=='3' ) THEN
+      IF( string(i:i)=='3' ) THEN
         first = i
         EXIT
       END IF
     END DO
     DO i = first, 35
-      IF ( string(i:i)/='3' ) THEN
+      IF( string(i:i)/='3' ) THEN
         last = i - 1
         GOTO 100
       END IF
@@ -140,23 +139,23 @@ CONTAINS
     m2 = -3.5D0
     m3 = 2.5D0
     CALL DRC3JJ(l2,l3,m2,m3,l1min,l1max,thrcof,NDIM,ier)
-    IF ( ier/=0 ) THEN
+    IF( ier/=0 ) THEN
       ipass1 = 0
     ELSE
       DO indexx = 1, INT(l1max-l1min) + 1
         m1 = 1.0D0
         diff(indexx) = ABS(thrcof(indexx)-r3jj(indexx))
-        IF ( diff(indexx)>ABS(r3jj(indexx))*tol ) ipass1 = 0
+        IF( diff(indexx)>ABS(r3jj(indexx))*tol ) ipass1 = 0
       END DO
     END IF
-    IF ( Kprint>=3.OR.(Kprint==2.AND.ipass1==0) ) THEN
+    IF( Kprint>=3 .OR. (Kprint==2 .AND. ipass1==0) ) THEN
       WRITE (Lun,*) ' TEST 1, RECURRENCE IN L1, COMPARE VALUES OF 3J ', &
         'CALCULATED BY DRC3JJ TO'
       WRITE (Lun,*) ' VALUES CALCULATED BY EXPLICIT FORMULA FROM ', &
         'MESSIAH''S QUANTUM MECHANICS'
       WRITE (Lun,99009) l2, l3
       WRITE (Lun,99010) m1, m2, m3
-      IF ( ier/=0 ) THEN
+      IF( ier/=0 ) THEN
         WRITE (Lun,*) ' ERROR RETURNED FROM SUBROUTINE ', 'DRC3JJ: IER =', ier
       ELSE
         WRITE (Lun,99002)
@@ -164,17 +163,17 @@ CONTAINS
         DO indexx = 1, INT(l1max-l1min) + 1
           l1 = indexx+ l1min - 1
           WRITE (Lun,fmt) l1, thrcof(indexx), r3jj(indexx)
-          IF ( diff(indexx)>ABS(r3jj(indexx))*tol ) WRITE (Lun,'(1X,A,F5.1)')&
+          IF( diff(indexx)>ABS(r3jj(indexx))*tol ) WRITE (Lun,'(1X,A,F5.1)')&
             'DIFFERENCE EXCEEDS ERROR TOLERANCE FOR L1 =', l1
         END DO
       END IF
     END IF
-    IF ( ipass1==0 ) THEN
-      IF ( Kprint>=1 ) THEN
+    IF( ipass1==0 ) THEN
+      IF( Kprint>=1 ) THEN
         WRITE (Lun,*) ' ***** ***** TEST 1 FAILED ***** *****'
         WRITE (Lun,*)
       END IF
-    ELSEIF ( Kprint>=2 ) THEN
+    ELSEIF( Kprint>=2 ) THEN
       WRITE (Lun,*) ' ***** ***** TEST 1 PASSED ***** *****'
       WRITE (Lun,*)
     END IF
@@ -186,17 +185,17 @@ CONTAINS
     l3 = 6.5D0
     m1 = 1.0D0
     CALL DRC3JM(l1,l2,l3,m1,m2min,m2max,thrcof,NDIM,ier)
-    IF ( ier/=0 ) THEN
+    IF( ier/=0 ) THEN
       ipass2 = 0
     ELSE
       DO indexx = 1, INT(m2max-m2min) + 1
         m2 = indexx+ m2min - 1
         m3 = -m1 - m2
         diff(indexx) = ABS(thrcof(indexx)-r3jm(indexx))
-        IF ( diff(indexx)>ABS(r3jm(indexx))*tol ) ipass2 = 0
+        IF( diff(indexx)>ABS(r3jm(indexx))*tol ) ipass2 = 0
       END DO
     END IF
-    IF ( Kprint>=3.OR.(Kprint==2.AND.ipass2==0) ) THEN
+    IF( Kprint>=3 .OR. (Kprint==2 .AND. ipass2==0) ) THEN
       WRITE (Lun,*) ' TEST 2, RECURRENCE IN M2, COMPARE VALUES OF 3J ', &
         'CALCULATED BY DRC3JM TO'
       WRITE (Lun,*) ' VALUES CALCULATED BY EXPLICIT FORMULA FROM ', &
@@ -205,7 +204,7 @@ CONTAINS
       99003 FORMAT (' L1 = ',F5.1,'   L2 = ',F5.1,'   L3 = ',F5.1)
       WRITE (Lun,99004) m1
       99004 FORMAT (' M1 = ',F5.1,'                M3 = -(M1+M2)')
-      IF ( ier/=0 ) THEN
+      IF( ier/=0 ) THEN
         WRITE (Lun,*) ' ERROR RETURNED FROM SUBROUTINE ', 'DRC3JM: IER =', ier
       ELSE
         WRITE (Lun,99005)
@@ -213,17 +212,17 @@ CONTAINS
         DO indexx = 1, INT(m2max-m2min) + 1
           m2 = indexx+ m2min - 1
           WRITE (Lun,fmt) m2, thrcof(indexx), r3jm(indexx)
-          IF ( diff(indexx)>ABS(r3jm(indexx))*tol ) WRITE (Lun,'(1X,A,F5.1)')&
+          IF( diff(indexx)>ABS(r3jm(indexx))*tol ) WRITE (Lun,'(1X,A,F5.1)')&
             'DIFFERENCE EXCEEDS ERROR TOLERANCE FOR M2 =', m2
         END DO
       END IF
     END IF
-    IF ( ipass2==0 ) THEN
-      IF ( Kprint>=1 ) THEN
+    IF( ipass2==0 ) THEN
+      IF( Kprint>=1 ) THEN
         WRITE (Lun,*) ' ***** ***** TEST 2 FAILED ***** *****'
         WRITE (Lun,*)
       END IF
-    ELSEIF ( Kprint>=2 ) THEN
+    ELSEIF( Kprint>=2 ) THEN
       WRITE (Lun,*) ' ***** ***** TEST 2 PASSED ***** *****'
       WRITE (Lun,*)
     END IF
@@ -240,34 +239,34 @@ CONTAINS
     jjval = thrcof(3)
     CALL DRC3JM(l1,l2,l3,m1,m2min,m2max,thrcof,NDIM,ierjm)
     jmval = thrcof(3)
-    IF ( ierjj/=0.OR.ierjm/=0 ) THEN
+    IF( ierjj/=0 .OR. ierjm/=0 ) THEN
       ipass3 = 0
     ELSE
       diff(1) = ABS(jjval-jmval)
-      IF ( diff(1)>0.5*ABS(jjval+jmval)*tol ) ipass3 = 0
+      IF( diff(1)>0.5*ABS(jjval+jmval)*tol ) ipass3 = 0
     END IF
-    IF ( Kprint>=3.OR.(Kprint==2.AND.ipass3==0) ) THEN
+    IF( Kprint>=3 .OR. (Kprint==2 .AND. ipass3==0) ) THEN
       WRITE (Lun,*) ' TEST 3, COMPARE A COMMON VALUE CALCULATED BY ', &
         'BOTH DRC3JJ AND DRC3JM'
       WRITE (Lun,*) ' L1 = 100.0   L2 =   2.0   L3 = 100.0'
       WRITE (Lun,*) ' M1 = -10.0   M2 =   0.0   M3 =  10.0'
-      IF ( ierjj/=0 ) THEN
+      IF( ierjj/=0 ) THEN
         WRITE (Lun,*) ' ERROR RETURNED FROM SUBROUTINE ', 'DRC3JJ: IER =', ierjj
-      ELSEIF ( ierjm/=0 ) THEN
+      ELSEIF( ierjm/=0 ) THEN
         WRITE (Lun,*) ' ERROR RETURNED FROM SUBROUTINE ', 'DRC3JM: IER =', ierjm
       ELSE
         WRITE (Lun,fmt2) 'DRC3JJ VALUE =', jjval
         WRITE (Lun,fmt2) 'DRC3JM VALUE =', jmval
-        IF ( diff(1)>0.5*ABS(jjval+jmval)*tol ) WRITE (Lun,'(1X,A)')&
+        IF( diff(1)>0.5*ABS(jjval+jmval)*tol ) WRITE (Lun,'(1X,A)')&
           'DIFFERENCE EXCEEDS ERROR TOLERANCE'
       END IF
     END IF
-    IF ( ipass3==0 ) THEN
-      IF ( Kprint>=1 ) THEN
+    IF( ipass3==0 ) THEN
+      IF( Kprint>=1 ) THEN
         WRITE (Lun,*) ' ***** ***** TEST 3 FAILED ***** *****'
         WRITE (Lun,*)
       END IF
-    ELSEIF ( Kprint>=2 ) THEN
+    ELSEIF( Kprint>=2 ) THEN
       WRITE (Lun,*) ' ***** ***** TEST 3 PASSED ***** *****'
       WRITE (Lun,*)
     END IF
@@ -280,22 +279,22 @@ CONTAINS
     m2 = 7.5D0
     m3 = 7.5D0
     CALL DRC6J(l2,l3,m1,m2,m3,l1min,l1max,sixcof,NDIM,ier)
-    IF ( ier/=0 ) THEN
+    IF( ier/=0 ) THEN
       ipass4 = 0
     ELSE
       DO indexx = 1, INT(l1max-l1min) + 1
         diff(indexx) = ABS(sixcof(indexx)-r6j(indexx))
-        IF ( diff(indexx)>ABS(r6j(indexx))*tol ) ipass4 = 0
+        IF( diff(indexx)>ABS(r6j(indexx))*tol ) ipass4 = 0
       END DO
     END IF
-    IF ( Kprint>=3.OR.(Kprint==2.AND.ipass4==0) ) THEN
+    IF( Kprint>=3 .OR. (Kprint==2 .AND. ipass4==0) ) THEN
       WRITE (Lun,*) ' TEST 4, RECURRENCE IN L1, COMPARE VALUES OF 6J ', &
         'CALCULATED BY DRC6J TO'
       WRITE (Lun,*) ' VALUES CALCULATED BY EXPLICIT FORMULA FROM ', &
         'MESSIAH''S QUANTUM MECHANICS'
       WRITE (Lun,99009) l2, l3
       WRITE (Lun,99010) m1, m2, m3
-      IF ( ier/=0 ) THEN
+      IF( ier/=0 ) THEN
         WRITE (Lun,*) ' ERROR RETURNED FROM SUBROUTINE ', 'DRC6J: IER =', ier
       ELSE
         WRITE (Lun,99006)
@@ -303,29 +302,29 @@ CONTAINS
         DO indexx = 1, INT(l1max-l1min) + 1
           l1 = indexx+ l1min - 1
           WRITE (Lun,fmt) l1, sixcof(indexx), r6j(indexx)
-          IF ( diff(indexx)>ABS(r6j(indexx))*tol ) WRITE (Lun,'(1X,A,F5.1)')&
+          IF( diff(indexx)>ABS(r6j(indexx))*tol ) WRITE (Lun,'(1X,A,F5.1)')&
             'DIFFERENCE EXCEEDS ERROR TOLERANCE FOR L1 =', l1
         END DO
       END IF
     END IF
-    IF ( ipass4==0 ) THEN
-      IF ( Kprint>=1 ) THEN
+    IF( ipass4==0 ) THEN
+      IF( Kprint>=1 ) THEN
         WRITE (Lun,*) ' ***** ***** TEST 4 FAILED ***** *****'
         WRITE (Lun,*)
       END IF
-    ELSEIF ( Kprint>=2 ) THEN
+    ELSEIF( Kprint>=2 ) THEN
       WRITE (Lun,*) ' ***** ***** TEST 4 PASSED ***** *****'
       WRITE (Lun,*)
     END IF
     !
     ! --- TEST 5: CHECK INVALID INPUT
     ipass5 = 1
-    IF ( Kprint<=2 ) THEN
+    IF( Kprint<=2 ) THEN
       CALL XSETF(0)
     ELSE
       CALL XSETF(-1)
     END IF
-    IF ( Kprint>=3 ) WRITE (Lun,*) ' TEST 5, CHECK FOR PROPER HANDLING ', &
+    IF( Kprint>=3 ) WRITE (Lun,*) ' TEST 5, CHECK FOR PROPER HANDLING ', &
       'OF INVALID INPUT'
     ! --- DRC3JJ: L2-ABS(M2) OR L3-ABS(M3) LESS THAN ZERO (IER=1)
     l2 = 2.0D0
@@ -333,30 +332,30 @@ CONTAINS
     m1 = -6.0D0
     m2 = -4.0D0
     m3 = 10.0D0
-    IF ( Kprint>=3 ) WRITE (Lun,*)
+    IF( Kprint>=3 ) WRITE (Lun,*)
     CALL XERCLR
     CALL DRC3JJ(l2,l3,m2,m3,l1min,l1max,thrcof,NDIM,ier)
-    IF ( NUMXER(nerr)/=ier ) ipass5 = 0
+    IF( NUMXER(nerr)/=ier ) ipass5 = 0
     ! --- DRC3JJ: L2+ABS(M2) OR L3+ABS(M3) NOT INTEGER (IER=2)
     l2 = 2.0D0
     l3 = 99.5D0
     m1 = -10.0D0
     m2 = 0.0D0
     m3 = 10.0D0
-    IF ( Kprint>=3 ) WRITE (Lun,*)
+    IF( Kprint>=3 ) WRITE (Lun,*)
     CALL XERCLR
     CALL DRC3JJ(l2,l3,m2,m3,l1min,l1max,thrcof,NDIM,ier)
-    IF ( NUMXER(nerr)/=ier ) ipass5 = 0
+    IF( NUMXER(nerr)/=ier ) ipass5 = 0
     ! --- DRC3JJ: L1MAX-L1MIN NOT INTEGER (IER=3)
     l2 = 3.2D0
     l3 = 4.5D0
     m1 = -1.3D0
     m2 = 0.8D0
     m3 = 0.5D0
-    IF ( Kprint>=3 ) WRITE (Lun,*)
+    IF( Kprint>=3 ) WRITE (Lun,*)
     CALL XERCLR
     CALL DRC3JJ(l2,l3,m2,m3,l1min,l1max,thrcof,NDIM,ier)
-    IF ( NUMXER(nerr)/=ier ) ipass5 = 0
+    IF( NUMXER(nerr)/=ier ) ipass5 = 0
     ! --- DRC3JJ: L1MIN GREATER THAN L1MAX (IER=4)
     !             (NO TEST -- THIS ERROR SHOULD NEVER OCCUR)
     ! --- DRC3JJ: DIMENSION OF THRCOF TOO SMALL (IER=5)
@@ -365,46 +364,46 @@ CONTAINS
     m1 = -10.0D0
     m2 = 0.0D0
     m3 = 10.0D0
-    IF ( Kprint>=3 ) WRITE (Lun,*)
+    IF( Kprint>=3 ) WRITE (Lun,*)
     CALL XERCLR
     CALL DRC3JJ(l2,l3,m2,m3,l1min,l1max,thrcof,NDIM,ier)
-    IF ( NUMXER(nerr)/=ier ) ipass5 = 0
-    ! --- DRC3JM: L1-ABS(M1) .LT. ZERO OR L1+ABS(M1) NOT INTEGER (IER=1)
+    IF( NUMXER(nerr)/=ier ) ipass5 = 0
+    ! --- DRC3JM: L1-ABS(M1) < ZERO OR L1+ABS(M1) NOT INTEGER (IER=1)
     l1 = 100.0D0
     l2 = 2.0D0
     l3 = 100.0D0
     m1 = 150.0D0
-    IF ( Kprint>=3 ) WRITE (Lun,*)
+    IF( Kprint>=3 ) WRITE (Lun,*)
     CALL XERCLR
     CALL DRC3JM(l1,l2,l3,m1,m2min,m2max,thrcof,NDIM,ier)
-    IF ( NUMXER(nerr)/=ier ) ipass5 = 0
+    IF( NUMXER(nerr)/=ier ) ipass5 = 0
     ! --- DRC3JM: L1, L2, L3 DO NOT SATISFY TRIANGULAR CONDITION (IER=2)
     l1 = 20.0D0
     l2 = 5.0D0
     l3 = 10.0D0
     m1 = -10.0D0
-    IF ( Kprint>=3 ) WRITE (Lun,*)
+    IF( Kprint>=3 ) WRITE (Lun,*)
     CALL XERCLR
     CALL DRC3JM(l1,l2,l3,m1,m2min,m2max,thrcof,NDIM,ier)
-    IF ( NUMXER(nerr)/=ier ) ipass5 = 0
+    IF( NUMXER(nerr)/=ier ) ipass5 = 0
     ! --- DRC3JM: L1+L2+L3 NOT INTEGER (IER=3)
     l1 = 1.0D0
     l2 = 1.3D0
     l3 = 1.5D0
     m1 = 0.0D0
-    IF ( Kprint>=3 ) WRITE (Lun,*)
+    IF( Kprint>=3 ) WRITE (Lun,*)
     CALL XERCLR
     CALL DRC3JM(l1,l2,l3,m1,m2min,m2max,thrcof,NDIM,ier)
-    IF ( NUMXER(nerr)/=ier ) ipass5 = 0
+    IF( NUMXER(nerr)/=ier ) ipass5 = 0
     ! --- DRC3JM: M2MAX-M2MIN NOT INTEGER (IER=4)
     l1 = 1.0D0
     l2 = 1.3D0
     l3 = 1.7D0
     m1 = 0.0D0
-    IF ( Kprint>=3 ) WRITE (Lun,*)
+    IF( Kprint>=3 ) WRITE (Lun,*)
     CALL XERCLR
     CALL DRC3JM(l1,l2,l3,m1,m2min,m2max,thrcof,NDIM,ier)
-    IF ( NUMXER(nerr)/=ier ) ipass5 = 0
+    IF( NUMXER(nerr)/=ier ) ipass5 = 0
     ! --- DRC3JM: M2MIN GREATER THAN M2MAX (IER=5)
     !             (NO TEST -- THIS ERROR SHOULD NEVER OCCUR)
     ! --- DRC3JM: DIMENSION OF THRCOF TOO SMALL (IER=6)
@@ -412,50 +411,50 @@ CONTAINS
     l2 = 10.0D0
     l3 = 110.0D0
     m1 = -10.0D0
-    IF ( Kprint>=3 ) WRITE (Lun,*)
+    IF( Kprint>=3 ) WRITE (Lun,*)
     CALL XERCLR
     CALL DRC3JM(l1,l2,l3,m1,m2min,m2max,thrcof,NDIM,ier)
-    IF ( NUMXER(nerr)/=ier ) ipass5 = 0
+    IF( NUMXER(nerr)/=ier ) ipass5 = 0
     ! --- DRC6J: L2+L3+L5+L6 OR L4+L2+L6 NOT INTEGER (IER=1)
     l2 = 0.5D0
     l3 = 1.0D0
     m1 = 0.5D0
     m2 = 2.0D0
     m3 = 3.0D0
-    IF ( Kprint>=3 ) WRITE (Lun,*)
+    IF( Kprint>=3 ) WRITE (Lun,*)
     CALL XERCLR
     CALL DRC6J(l2,l3,m1,m2,m3,l1min,l1max,sixcof,NDIM,ier)
-    IF ( NUMXER(nerr)/=ier ) ipass5 = 0
+    IF( NUMXER(nerr)/=ier ) ipass5 = 0
     ! --- DRC6J: L4, L2, L6 TRIANGULAR CONDITION NOT SATISFIED (IER=2)
     l2 = 1.0D0
     l3 = 3.0D0
     m1 = 5.0D0
     m2 = 6.0D0
     m3 = 2.0D0
-    IF ( Kprint>=3 ) WRITE (Lun,*)
+    IF( Kprint>=3 ) WRITE (Lun,*)
     CALL XERCLR
     CALL DRC6J(l2,l3,m1,m2,m3,l1min,l1max,sixcof,NDIM,ier)
-    IF ( NUMXER(nerr)/=ier ) ipass5 = 0
+    IF( NUMXER(nerr)/=ier ) ipass5 = 0
     ! --- DRC6J: L4, L5, L3 TRIANGULAR CONDITION NOT SATISFIED (IER=3)
     l2 = 4.0D0
     l3 = 1.0D0
     m1 = 5.0D0
     m2 = 3.0D0
     m3 = 2.0D0
-    IF ( Kprint>=3 ) WRITE (Lun,*)
+    IF( Kprint>=3 ) WRITE (Lun,*)
     CALL XERCLR
     CALL DRC6J(l2,l3,m1,m2,m3,l1min,l1max,sixcof,NDIM,ier)
-    IF ( NUMXER(nerr)/=ier ) ipass5 = 0
+    IF( NUMXER(nerr)/=ier ) ipass5 = 0
     ! --- DRC6J: L1MAX-L1MIN NOT INTEGER (IER=4)
     l2 = 0.9D0
     l3 = 0.5D0
     m1 = 0.9D0
     m2 = 0.4D0
     m3 = 0.2D0
-    IF ( Kprint>=3 ) WRITE (Lun,*)
+    IF( Kprint>=3 ) WRITE (Lun,*)
     CALL XERCLR
     CALL DRC6J(l2,l3,m1,m2,m3,l1min,l1max,sixcof,NDIM,ier)
-    IF ( NUMXER(nerr)/=ier ) ipass5 = 0
+    IF( NUMXER(nerr)/=ier ) ipass5 = 0
     ! --- DRC6J: L1MIN GREATER THAN L1MAX (IER=5)
     !            (NO TEST -- THIS ERROR SHOULD NEVER OCCUR)
     ! --- DRC6J: DIMENSION OF SIXCOF TOO SMALL (IER=6)
@@ -464,29 +463,29 @@ CONTAINS
     m1 = 15.0D0
     m2 = 30.0D0
     m3 = 40.0D0
-    IF ( Kprint>=3 ) WRITE (Lun,*)
+    IF( Kprint>=3 ) WRITE (Lun,*)
     CALL XERCLR
     CALL DRC6J(l2,l3,m1,m2,m3,l1min,l1max,sixcof,NDIM,ier)
-    IF ( NUMXER(nerr)/=ier ) ipass5 = 0
-    IF ( ipass5==0 ) THEN
-      IF ( Kprint>=1 ) THEN
+    IF( NUMXER(nerr)/=ier ) ipass5 = 0
+    IF( ipass5==0 ) THEN
+      IF( Kprint>=1 ) THEN
         WRITE (Lun,*) ' ***** ***** TEST 5 FAILED ***** *****'
         WRITE (Lun,*)
       END IF
-    ELSEIF ( Kprint>=2 ) THEN
+    ELSEIF( Kprint>=2 ) THEN
       WRITE (Lun,*) ' ***** ***** TEST 5 PASSED ***** *****'
       WRITE (Lun,*)
     END IF
     !
     ! --- END OF TESTS
-    IF ( (ipass1==0).OR.(ipass2==0).OR.(ipass3==0).OR.(ipass4==0).OR.&
+    IF( (ipass1==0) .OR. (ipass2==0) .OR. (ipass3==0) .OR. (ipass4==0) .OR. &
         (ipass5==0) ) THEN
       Ipass = 0
-      IF ( Kprint>=1 ) WRITE (Lun,99007)
+      IF( Kprint>=1 ) WRITE (Lun,99007)
       99007 FORMAT (' ***** DQC36J  FAILED SOME TESTS *****')
     ELSE
       Ipass = 1
-      IF ( Kprint>=2 ) WRITE (Lun,99008)
+      IF( Kprint>=2 ) WRITE (Lun,99008)
       99008 FORMAT (' ***** DQC36J  PASSED ALL TESTS  *****')
     END IF
     99009 FORMAT ('              L2 = ',F5.1,'   L3 = ',F5.1)
@@ -500,8 +499,7 @@ PROGRAM TEST16
   USE slatec, ONLY : I1MACH, XSETF, XSETUN, XERMAX
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
-  !>
-  !  Driver for testing SLATEC subprograms
+  !> Driver for testing SLATEC subprograms
   !            DRC3JJ   DRC3JM   DRC6J
   !***
   ! **Library:**   SLATEC
@@ -548,7 +546,7 @@ PROGRAM TEST16
 
   !* REVISION HISTORY  (YYMMDD)
   !   891130  DATE WRITTEN
-  INTEGER ipass, kprint, lin, lun, nfail
+  INTEGER :: ipass, kprint, lin, lun, nfail
   !* FIRST EXECUTABLE STATEMENT  TEST16
   lun = I1MACH(2)
   lin = I1MACH(1)
@@ -559,7 +557,7 @@ PROGRAM TEST16
   CALL GET_ARGUMENT(kprint)
   CALL XERMAX(1000)
   CALL XSETUN(lun)
-  IF ( kprint<=1 ) THEN
+  IF( kprint<=1 ) THEN
     CALL XSETF(0)
   ELSE
     CALL XSETF(1)
@@ -568,11 +566,11 @@ PROGRAM TEST16
   !     Test double precision 3J6J routines
   !
   CALL DQC36J(lun,kprint,ipass)
-  IF ( ipass==0 ) nfail = nfail + 1
+  IF( ipass==0 ) nfail = nfail + 1
   !
   !     Write PASS or FAIL message
   !
-  IF ( nfail==0 ) THEN
+  IF( nfail==0 ) THEN
     WRITE (lun,99001)
     99001 FORMAT (/' --------------TEST16 PASSED ALL TESTS----------------')
   ELSE

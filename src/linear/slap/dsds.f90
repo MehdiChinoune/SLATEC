@@ -1,7 +1,6 @@
 !** DSDS
 SUBROUTINE DSDS(N,Nelt,Ja,A,Dinv)
-  !>
-  !  Diagonal Scaling Preconditioner SLAP Set Up.
+  !> Diagonal Scaling Preconditioner SLAP Set Up.
   !            Routine to compute the inverse of the diagonal of a matrix
   !            stored in the SLAP Column format.
   !***
@@ -110,12 +109,12 @@ SUBROUTINE DSDS(N,Nelt,Ja,A,Dinv)
   !   930701  Updated CATEGORY section.  (FNF, WRB)
 
   !     .. Scalar Arguments ..
-  INTEGER N, Nelt
+  INTEGER :: N, Nelt
   !     .. Array Arguments ..
   REAL(DP) :: A(Nelt), Dinv(N)
-  INTEGER Ja(Nelt)
+  INTEGER :: Ja(Nelt)
   !     .. Local Scalars ..
-  INTEGER icol
+  INTEGER :: icol
   !* FIRST EXECUTABLE STATEMENT  DSDS
   !
   !         Assume the Diagonal elements are the first in each column.

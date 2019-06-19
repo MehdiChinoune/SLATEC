@@ -1,7 +1,6 @@
 !** CPOIR
 SUBROUTINE CPOIR(A,Lda,N,V,Itask,Ind,Work)
-  !>
-  !  Solve a positive definite Hermitian system of linear
+  !> Solve a positive definite Hermitian system of linear
   !            equations.  Iterative refinement is used to obtain an
   !            error estimate.
   !***
@@ -42,7 +41,7 @@ SUBROUTINE CPOIR(A,Lda,N,V,Itask,Ind,Work)
   !
   !    If the equation A*X=B is to be solved for more than one vector
   !    B, the factoring of A does not need to be performed again and
-  !    the option to only solve (ITASK .GT. 1) will be faster for
+  !    the option to only solve (ITASK > 1) will be faster for
   !    the succeeding solutions.  In this case, the contents of A,
   !    LDA, N, and WORK must not have been altered by the user
   !    following factorization (ITASK=1).  IND will not be changed
@@ -69,9 +68,9 @@ SUBROUTINE CPOIR(A,Lda,N,V,Itask,Ind,Work)
   !    ITASK  INTEGER
   !             if ITASK = 1, the matrix A is factored and then the
   !               linear equation is solved.
-  !             if ITASK .GT. 1, the equation is solved using the existing
+  !             if ITASK > 1, the equation is solved using the existing
   !               factored matrix A (stored in WORK).
-  !             if ITASK .LT. 1, then terminal terminal error IND=-3 is
+  !             if ITASK < 1, then terminal terminal error IND=-3 is
   !               printed.
   !    IND    INTEGER
   !             GT. 0  IND is a rough estimate of the number of digits
@@ -126,7 +125,7 @@ SUBROUTINE CPOIR(A,Lda,N,V,Itask,Ind,Work)
   REAL(SP) :: xnorm, dnorm
   CHARACTER(8) :: xern1, xern2
   !* FIRST EXECUTABLE STATEMENT  CPOIR
-  IF ( Lda<N ) THEN
+  IF( Lda<N ) THEN
     Ind = -1
     WRITE (xern1,'(I8)') Lda
     WRITE (xern2,'(I8)') N
@@ -134,21 +133,21 @@ SUBROUTINE CPOIR(A,Lda,N,V,Itask,Ind,Work)
     RETURN
   END IF
   !
-  IF ( N<=0 ) THEN
+  IF( N<=0 ) THEN
     Ind = -2
     WRITE (xern1,'(I8)') N
     CALL XERMSG('CPOIR','N = '//xern1//' IS LESS THAN 1',-2,1)
     RETURN
   END IF
   !
-  IF ( Itask<1 ) THEN
+  IF( Itask<1 ) THEN
     Ind = -3
     WRITE (xern1,'(I8)') Itask
     CALL XERMSG('CPOIR','ITASK = '//xern1//' IS LESS THAN 1',-3,1)
     RETURN
   END IF
   !
-  IF ( Itask==1 ) THEN
+  IF( Itask==1 ) THEN
     !
     !        MOVE MATRIX A TO WORK
     !
@@ -160,7 +159,7 @@ SUBROUTINE CPOIR(A,Lda,N,V,Itask,Ind,Work)
     !
     !        CHECK FOR  SINGULAR OR NOT POS.DEF. MATRIX
     !
-    IF ( info/=0 ) THEN
+    IF( info/=0 ) THEN
       Ind = -4
       CALL XERMSG('CPOIR','SINGULAR OR NOT POSITIVE DEFINITE - NO SOLUTION',-4,1)
       RETURN
@@ -176,7 +175,7 @@ SUBROUTINE CPOIR(A,Lda,N,V,Itask,Ind,Work)
   !     FORM NORM OF X0
   !
   xnorm = SCASUM(N,V(1),1)
-  IF ( xnorm==0.0 ) THEN
+  IF( xnorm==0.0 ) THEN
     Ind = 75
     RETURN
   END IF
@@ -200,7 +199,7 @@ SUBROUTINE CPOIR(A,Lda,N,V,Itask,Ind,Work)
   !     AND CHECK FOR IND GREATER THAN ZERO
   !
   Ind = INT( -LOG10(MAX(R1MACH(4),dnorm/xnorm)) )
-  IF ( Ind<=0 ) THEN
+  IF( Ind<=0 ) THEN
     Ind = -10
     CALL XERMSG('CPOIR','SOLUTION MAY HAVE NO SIGNIFICANCE',-10,0)
   END IF

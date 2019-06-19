@@ -1,8 +1,7 @@
 !** ZUNIK
 SUBROUTINE ZUNIK(Zrr,Zri,Fnu,Ikflg,Ipmtr,Tol,Init,Phir,Phii,Zeta1r,Zeta1i,&
     Zeta2r,Zeta2i,Sumr,Sumi,Cwrkr,Cwrki)
-  !>
-  !  Subsidiary to ZBESI and ZBESK
+  !> Subsidiary to ZBESI and ZBESK
   !***
   ! **Library:**   SLATEC
   !***
@@ -42,7 +41,7 @@ SUBROUTINE ZUNIK(Zrr,Zri,Fnu,Ikflg,Ipmtr,Tol,Init,Phir,Phii,Zeta1r,Zeta1i,&
   REAL(DP) :: ac, crfni, crfnr, Cwrki(16), Cwrkr(16), Fnu, Phii, Phir, rfn, si, sr, &
     sri, srr, sti, str, Sumi, Sumr, test, ti, Tol, tr, t2i, t2r, Zeta1i, Zeta1r, &
     Zeta2i, Zeta2r, zni, znr, Zri, Zrr
-  INTEGER i, idum, Ikflg, Init, Ipmtr, j, k, l
+  INTEGER :: i, idum, Ikflg, Init, Ipmtr, j, k, l
   REAL(DP), PARAMETER :: zeror = 0.0D0, zeroi = 0.0D0, coner = 1.0D0, conei = 0.0D0
   REAL(DP), PARAMETER :: con(2) = [ 3.98942280401432678D-01, 1.25331413731550025D+00 ]
   REAL(DP), PARAMETER :: c(120) = [ 1.00000000000000000D+00, -2.08333333333333333D-01, &
@@ -87,7 +86,7 @@ SUBROUTINE ZUNIK(Zrr,Zri,Fnu,Ikflg,Ipmtr,Tol,Init,Phir,Phii,Zeta1r,Zeta1i,&
     -2.18229277575292237D+10, 1.24700929351271032D+09,-2.91883881222208134D+07, &
     1.18838426256783253D+05 ]
   !* FIRST EXECUTABLE STATEMENT  ZUNIK
-  IF ( Init==0 ) THEN
+  IF( Init==0 ) THEN
     !-----------------------------------------------------------------------
     !     INITIALIZE ALL VARIABLES
     !-----------------------------------------------------------------------
@@ -97,7 +96,7 @@ SUBROUTINE ZUNIK(Zrr,Zri,Fnu,Ikflg,Ipmtr,Tol,Init,Phir,Phii,Zeta1r,Zeta1i,&
     !-----------------------------------------------------------------------
     test = D1MACH(1)*1.0D+3
     ac = Fnu*test
-    IF ( ABS(Zrr)>ac.OR.ABS(Zri)>ac ) THEN
+    IF( ABS(Zrr)>ac .OR. ABS(Zri)>ac ) THEN
       tr = Zrr*rfn
       ti = Zri*rfn
       sr = coner + (tr*tr-ti*ti)
@@ -117,7 +116,7 @@ SUBROUTINE ZUNIK(Zrr,Zri,Fnu,Ikflg,Ipmtr,Tol,Init,Phir,Phii,Zeta1r,Zeta1i,&
       CALL ZSQRT(srr,sri,Cwrkr(16),Cwrki(16))
       Phir = Cwrkr(16)*con(Ikflg)
       Phii = Cwrki(16)*con(Ikflg)
-      IF ( Ipmtr/=0 ) RETURN
+      IF( Ipmtr/=0 ) RETURN
       CALL ZDIV(coner,conei,sr,si,t2r,t2i)
       Cwrkr(1) = coner
       Cwrki(1) = conei
@@ -141,7 +140,7 @@ SUBROUTINE ZUNIK(Zrr,Zri,Fnu,Ikflg,Ipmtr,Tol,Init,Phir,Phii,Zeta1r,Zeta1i,&
         Cwrki(k) = crfnr*si + crfni*sr
         ac = ac*rfn
         test = ABS(Cwrkr(k)) + ABS(Cwrki(k))
-        IF ( ac<Tol.AND.test<Tol ) GOTO 20
+        IF( ac<Tol .AND. test<Tol ) GOTO 20
       END DO
       k = 15
       20  Init = k
@@ -155,7 +154,7 @@ SUBROUTINE ZUNIK(Zrr,Zri,Fnu,Ikflg,Ipmtr,Tol,Init,Phir,Phii,Zeta1r,Zeta1i,&
       RETURN
     END IF
   END IF
-  IF ( Ikflg==2 ) THEN
+  IF( Ikflg==2 ) THEN
     !-----------------------------------------------------------------------
     !     COMPUTE SUM FOR THE K FUNCTION
     !-----------------------------------------------------------------------

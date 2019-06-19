@@ -1,10 +1,9 @@
 !** QNG
 SUBROUTINE QNG(F,A,B,Epsabs,Epsrel,Result,Abserr,Neval,Ier)
-  !>
-  !  The routine calculates an approximation result to a
+  !> The routine calculates an approximation result to a
   !            given definite integral I = integral of F over (A,B),
   !            hopefully satisfying following claim for accuracy
-  !            ABS(I-RESULT).LE.MAX(EPSABS,EPSREL*ABS(I)).
+  !            ABS(I-RESULT)<=MAX(EPSABS,EPSREL*ABS(I)).
   !***
   ! **Library:**   SLATEC (QUADPACK)
   !***
@@ -43,8 +42,8 @@ SUBROUTINE QNG(F,A,B,Epsabs,Epsrel,Result,Abserr,Neval,Ier)
   !                    Absolute accuracy requested
   !           EPSREL - Real
   !                    Relative accuracy requested
-  !                    If  EPSABS.LE.0
-  !                    And EPSREL.LT.MAX(50*REL.MACH.ACC.,0.5D-28),
+  !                    If  EPSABS<=0
+  !                    And EPSREL<MAX(50*REL.MACH.ACC.,0.5D-28),
   !                    The routine will end with IER = 6.
   !
   !         ON RETURN
@@ -69,7 +68,7 @@ SUBROUTINE QNG(F,A,B,Epsabs,Epsrel,Result,Abserr,Neval,Ier)
   !           IER    - IER = 0 normal and reliable termination of the
   !                            routine. It is assumed that the requested
   !                            accuracy has been achieved.
-  !                    IER.GT.0 Abnormal termination of the routine. It is
+  !                    IER>0 Abnormal termination of the routine. It is
   !                            assumed that the requested accuracy has
   !                            not been achieved.
   !           ERROR MESSAGES
@@ -77,8 +76,8 @@ SUBROUTINE QNG(F,A,B,Epsabs,Epsrel,Result,Abserr,Neval,Ier)
   !                            executed. The integral is probably too
   !                            difficult to be calculated by DQNG.
   !                        = 6 The input is invalid, because
-  !                            EPSABS.LE.0 AND
-  !                            EPSREL.LT.MAX(50*REL.MACH.ACC.,0.5D-28).
+  !                            EPSABS<=0 AND
+  !                            EPSREL<MAX(50*REL.MACH.ACC.,0.5D-28).
   !                            RESULT, ABSERR and NEVAL are set to zero.
   !
   !***
@@ -213,7 +212,7 @@ SUBROUTINE QNG(F,A,B,Epsabs,Epsrel,Result,Abserr,Neval,Ier)
   Abserr = 0.0E+00
   Neval = 0
   Ier = 6
-  IF ( Epsabs>0.0E+00.OR.Epsrel>=MAX(0.5E-14,0.5E+02*epmach) ) THEN
+  IF( Epsabs>0.0E+00 .OR. Epsrel>=MAX(0.5E-14,0.5E+02*epmach) ) THEN
     hlgth = 0.5E+00*(B-A)
     dhlgth = ABS(hlgth)
     centr = 0.5E+00*(B+A)
@@ -304,13 +303,13 @@ SUBROUTINE QNG(F,A,B,Epsabs,Epsrel,Result,Abserr,Neval,Ier)
           Abserr = ABS((res21-res10)*hlgth)
           resasc = resasc*dhlgth
       END SELECT
-      IF ( resasc/=0.0E+00.AND.Abserr/=0.0E+00 )&
+      IF( resasc/=0.0E+00 .AND. Abserr/=0.0E+00 )&
         Abserr = resasc*MIN(0.1E+01,(0.2E+03*Abserr/resasc)**1.5E+00)
-      IF ( resabs>uflow/(0.5E+02*epmach) )&
+      IF( resabs>uflow/(0.5E+02*epmach) )&
         Abserr = MAX((epmach*0.5E+02)*resabs,Abserr)
-      IF ( Abserr<=MAX(Epsabs,Epsrel*ABS(Result)) ) Ier = 0
+      IF( Abserr<=MAX(Epsabs,Epsrel*ABS(Result)) ) Ier = 0
       !- **JUMP OUT OF DO-LOOP
-      IF ( Ier==0 ) RETURN
+      IF( Ier==0 ) RETURN
     END DO
   END IF
   CALL XERMSG('QNG','ABNORMAL RETURN',Ier,0)

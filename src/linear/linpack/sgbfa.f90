@@ -1,7 +1,6 @@
 !** SGBFA
 SUBROUTINE SGBFA(Abd,Lda,N,Ml,Mu,Ipvt,Info)
-  !>
-  !  Factor a band matrix using Gaussian elimination.
+  !> Factor a band matrix using Gaussian elimination.
   !***
   ! **Library:**   SLATEC (LINPACK)
   !***
@@ -31,19 +30,19 @@ SUBROUTINE SGBFA(Abd,Lda,N,Ml,Mu,Ipvt,Info)
   !
   !        LDA     INTEGER
   !                the leading dimension of the array  ABD .
-  !                LDA must be .GE. 2*ML + MU + 1 .
+  !                LDA must be >= 2*ML + MU + 1 .
   !
   !        N       INTEGER
   !                the order of the original matrix.
   !
   !        ML      INTEGER
   !                number of diagonals below the main diagonal.
-  !                0 .LE. ML .LT. N .
+  !                0 <= ML < N .
   !
   !        MU      INTEGER
   !                number of diagonals above the main diagonal.
-  !                0 .LE. MU .LT. N .
-  !                More efficient if  ML .LE. MU .
+  !                0 <= MU < N .
+  !                More efficient if  ML <= MU .
   !     On Return
   !
   !        ABD     an upper triangular matrix in band storage and
@@ -57,7 +56,7 @@ SUBROUTINE SGBFA(Abd,Lda,N,Ml,Mu,Ipvt,Info)
   !
   !        INFO    INTEGER
   !                = 0  normal value.
-  !                = K  if  U(K,K) .EQ. 0.0 .  This is not an error
+  !                = K  if  U(K,K) = 0.0 .  This is not an error
   !                     condition for this subroutine, but it does
   !                     indicate that SGBSL will divide by zero if
   !                     called.  Use  RCOND  in SBGCO for a reliable
@@ -118,7 +117,7 @@ SUBROUTINE SGBFA(Abd,Lda,N,Ml,Mu,Ipvt,Info)
   !
   j0 = Mu + 2
   j1 = MIN(N,m) - 1
-  IF ( j1>=j0 ) THEN
+  IF( j1>=j0 ) THEN
     DO jz = j0, j1
       i0 = m + 1 - jz
       DO i = i0, Ml
@@ -132,15 +131,15 @@ SUBROUTINE SGBFA(Abd,Lda,N,Ml,Mu,Ipvt,Info)
   !     GAUSSIAN ELIMINATION WITH PARTIAL PIVOTING
   !
   nm1 = N - 1
-  IF ( nm1>=1 ) THEN
+  IF( nm1>=1 ) THEN
     DO k = 1, nm1
       kp1 = k + 1
       !
       !        ZERO NEXT FILL-IN COLUMN
       !
       jz = jz + 1
-      IF ( jz<=N ) THEN
-        IF ( Ml>=1 ) THEN
+      IF( jz<=N ) THEN
+        IF( Ml>=1 ) THEN
           DO i = 1, Ml
             Abd(i,jz) = 0.0E0
           END DO
@@ -155,13 +154,13 @@ SUBROUTINE SGBFA(Abd,Lda,N,Ml,Mu,Ipvt,Info)
       !
       !        ZERO PIVOT IMPLIES THIS COLUMN ALREADY TRIANGULARIZED
       !
-      IF ( Abd(l,k)==0.0E0 ) THEN
+      IF( Abd(l,k)==0.0E0 ) THEN
         Info = k
       ELSE
         !
         !           INTERCHANGE IF NECESSARY
         !
-        IF ( l/=m ) THEN
+        IF( l/=m ) THEN
           t = Abd(l,k)
           Abd(l,k) = Abd(m,k)
           Abd(m,k) = t
@@ -176,12 +175,12 @@ SUBROUTINE SGBFA(Abd,Lda,N,Ml,Mu,Ipvt,Info)
         !
         ju = MIN(MAX(ju,Mu+Ipvt(k)),N)
         mm = m
-        IF ( ju>=kp1 ) THEN
+        IF( ju>=kp1 ) THEN
           DO j = kp1, ju
             l = l - 1
             mm = mm - 1
             t = Abd(l,j)
-            IF ( l/=mm ) THEN
+            IF( l/=mm ) THEN
               Abd(l,j) = Abd(mm,j)
               Abd(mm,j) = t
             END IF
@@ -192,5 +191,5 @@ SUBROUTINE SGBFA(Abd,Lda,N,Ml,Mu,Ipvt,Info)
     END DO
   END IF
   Ipvt(N) = N
-  IF ( Abd(m,N)==0.0E0 ) Info = N
+  IF( Abd(m,N)==0.0E0 ) Info = N
 END SUBROUTINE SGBFA

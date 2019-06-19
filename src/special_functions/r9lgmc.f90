@@ -1,7 +1,6 @@
 !** R9LGMC
 REAL(SP) FUNCTION R9LGMC(X)
-  !>
-  !  Compute the log Gamma correction factor so that
+  !> Compute the log Gamma correction factor so that
   !            LOG(GAMMA(X)) = LOG(SQRT(2*PI)) + (X-.5)*LOG(X) - X
   !            + R9LGMC(X).
   !***
@@ -18,7 +17,7 @@ REAL(SP) FUNCTION R9LGMC(X)
   !***
   ! **Description:**
   !
-  ! Compute the log gamma correction factor for X .GE. 10.0 so that
+  ! Compute the log gamma correction factor for X >= 10.0 so that
   !  LOG (GAMMA(X)) = LOG(SQRT(2*PI)) + (X-.5)*LOG(X) - X + R9LGMC(X)
   !
   ! Series for ALGM       on the interval  0.          to  1.00000D-02
@@ -49,13 +48,13 @@ REAL(SP) FUNCTION R9LGMC(X)
     -.0000000000000003E0 ]
   LOGICAL, SAVE :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  R9LGMC
-  IF ( first ) THEN
+  IF( first ) THEN
     nalgm = INITS(algmcs,6,R1MACH(3))
     first = .FALSE.
   END IF
   !
-  IF ( X<10.0 ) CALL XERMSG('R9LGMC','X MUST BE GE 10',1,2)
-  IF ( X>=xmax ) THEN
+  IF( X<10.0 ) CALL XERMSG('R9LGMC','X MUST BE GE 10',1,2)
+  IF( X>=xmax ) THEN
     !
     R9LGMC = 0.0
     CALL XERMSG('R9LGMC','X SO BIG R9LGMC UNDERFLOWS',2,1)
@@ -63,6 +62,6 @@ REAL(SP) FUNCTION R9LGMC(X)
   END IF
   !
   R9LGMC = 1.0/(12.0*X)
-  IF ( X<xbig ) R9LGMC = CSEVL(2.0*(10./X)**2-1.,algmcs,nalgm)/X
+  IF( X<xbig ) R9LGMC = CSEVL(2.0*(10./X)**2-1.,algmcs,nalgm)/X
   RETURN
 END FUNCTION R9LGMC

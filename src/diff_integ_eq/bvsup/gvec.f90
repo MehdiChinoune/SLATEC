@@ -1,7 +1,6 @@
 !** GVEC
 SUBROUTINE GVEC(X,G)
-  !>
-  !  Subsidiary to
+  !> Subsidiary to
   !***
   ! **Library:**   SLATEC
   !***

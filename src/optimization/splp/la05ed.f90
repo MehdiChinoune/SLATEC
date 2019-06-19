@@ -1,7 +1,6 @@
 !** LA05ED
 SUBROUTINE LA05ED(A,Irn,Ip,N,Iw,Reals)
-  !>
-  !  Subsidiary to DSPLP
+  !> Subsidiary to DSPLP
   !***
   ! **Library:**   SLATEC
   !***
@@ -55,7 +54,7 @@ SUBROUTINE LA05ED(A,Irn,Ip,N,Iw,Reals)
   DO j = 1, N
     ! STORE THE LAST ELEMENT OF ENTRY J IN IW(J) THEN OVERWRITE IT BY -J.
     nz = Iw(j)
-    IF ( nz>0 ) THEN
+    IF( nz>0 ) THEN
       k = Ip(j) + nz - 1
       Iw(j) = Irn(k)
       Irn(k) = -j
@@ -65,16 +64,16 @@ SUBROUTINE LA05ED(A,Irn,Ip,N,Iw,Reals)
   kn = 0
   ipi = 0
   kl = lcol_com
-  IF ( Reals ) kl = lrow_com
+  IF( Reals ) kl = lrow_com
   ! LOOP THROUGH THE OLD FILE SKIPPING ZERO (DUMMY) ELEMENTS AND
   !     MOVING GENUINE ELEMENTS FORWARD. THE ENTRY NUMBER BECOMES
   !     KNOWN ONLY WHEN ITS END IS DETECTED BY THE PRESENCE OF A NEGATIVE
   !     INTEGER.
   DO k = 1, kl
-    IF ( Irn(k)/=0 ) THEN
+    IF( Irn(k)/=0 ) THEN
       kn = kn + 1
-      IF ( Reals ) A(kn) = A(k)
-      IF ( Irn(k)<0 ) THEN
+      IF( Reals ) A(kn) = A(k)
+      IF( Irn(k)<0 ) THEN
         ! END OF ENTRY. RESTORE IRN(K), SET POINTER TO START OF ENTRY AND
         !     STORE CURRENT KN IN IPI READY FOR USE WHEN NEXT LAST ENTRY
         !     IS DETECTED.
@@ -87,6 +86,6 @@ SUBROUTINE LA05ED(A,Irn,Ip,N,Iw,Reals)
       Irn(kn) = Irn(k)
     END IF
   END DO
-  IF ( Reals ) lrow_com = kn
-  IF ( .NOT.Reals ) lcol_com = kn
+  IF( Reals ) lrow_com = kn
+  IF( .NOT. Reals ) lcol_com = kn
 END SUBROUTINE LA05ED

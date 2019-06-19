@@ -1,7 +1,6 @@
 !** QPDOC
 SUBROUTINE QPDOC
-  !>
-  !  Documentation for QUADPACK, a package of subprograms for
+  !> Documentation for QUADPACK, a package of subprograms for
   !            automatic evaluation of one-dimensional definite integrals.
   !***
   ! **Library:**   SLATEC (QUADPACK)
@@ -96,11 +95,11 @@ SUBROUTINE QPDOC
   !             1956) is applied to the series of the integral
   !             contributions.
   !
-  !    - QAWS : Integrates W(X)*F(X) over (A,B) with A.LT.B finite,
+  !    - QAWS : Integrates W(X)*F(X) over (A,B) with A<B finite,
   !             and   W(X) = ((X-A)**ALFA)*((B-X)**BETA)*V(X)
   !             where V(X) = 1 or LOG(X-A) or LOG(B-X)
   !                            or LOG(X-A)*LOG(B-X)
-  !             and   ALFA.GT.(-1), BETA.GT.(-1).
+  !             and   ALFA>(-1), BETA>(-1).
   !             The user specifies A, B, ALFA, BETA and the type of
   !             the function V.
   !             A globally adaptive subdivision strategy is applied,
@@ -309,7 +308,7 @@ SUBROUTINE QPDOC
   !            REAL FUNCTION F(X)
   !            REAL X
   !            F = 0.0E0
-  !            IF(X.GT.0.0E0) F = 1.0E0/SQRT(X)
+  !            IF(X>0.0E0) F = 1.0E0/SQRT(X)
   !            RETURN
   !            END
   !
@@ -337,7 +336,7 @@ SUBROUTINE QPDOC
   !            REAL FUNCTION F(X)
   !            REAL X
   !            F = 0.0E+00
-  !            IF(X.NE.1.0E0/7.0E0.AND.X.NE.2.0E0/3.0E0) F =
+  !            IF(X/=1.0E0/7.0E0 .AND. X/=2.0E0/3.0E0) F =
   !           *  ABS(X-1.0E0/7.0E0)**(-0.25E0)*
   !           *  ABS(X-2.0E0/3.0E0)**(-0.55E0)
   !            RETURN
@@ -365,7 +364,7 @@ SUBROUTINE QPDOC
   !            REAL FUNCTION F(X)
   !            REAL X
   !            F = 0.0E0
-  !            IF(X.GT.0.0E0) F = SQRT(X)*LOG(X)/
+  !            IF(X>0.0E0) F = SQRT(X)*LOG(X)/
   !           *                   ((X+1.0E0)*(X+2.0E0))
   !            RETURN
   !            END
@@ -396,7 +395,7 @@ SUBROUTINE QPDOC
   !            REAL FUNCTION F(X)
   !            REAL X
   !            F = 0.0E0
-  !            IF(X.GT.0.0E0) F = EXP(-X)*LOG(X)
+  !            IF(X>0.0E0) F = EXP(-X)*LOG(X)
   !            RETURN
   !            END
   !
@@ -425,7 +424,7 @@ SUBROUTINE QPDOC
   !      C
   !            REAL FUNCTION F(X)
   !            REAL X
-  !            IF(X.GT.0.0E0) F = SIN(50.0E0*X)/(X*SQRT(X))
+  !            IF(X>0.0E0) F = SIN(50.0E0*X)/(X*SQRT(X))
   !            RETURN
   !            END
   !

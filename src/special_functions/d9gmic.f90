@@ -1,7 +1,6 @@
 !** D9GMIC
 REAL(DP) FUNCTION D9GMIC(A,X,Alx)
-  !>
-  !  Compute the complementary incomplete Gamma function for A
+  !> Compute the complementary incomplete Gamma function for A
   !            near a negative integer and X small.
   !***
   ! **Library:**   SLATEC (FNLIB)
@@ -41,8 +40,8 @@ REAL(DP) FUNCTION D9GMIC(A,X,Alx)
   REAL(DP), PARAMETER :: euler = 0.57721566490153286060651209008240D0
   !* FIRST EXECUTABLE STATEMENT  D9GMIC
   !
-  IF ( A>0.D0 ) CALL XERMSG('D9GMIC','A MUST BE NEAR A NEGATIVE INTEGER',2,2)
-  IF ( X<=0.D0 ) CALL XERMSG('D9GMIC','X MUST BE GT ZERO',3,2)
+  IF( A>0.D0 ) CALL XERMSG('D9GMIC','A MUST BE NEAR A NEGATIVE INTEGER',2,2)
+  IF( X<=0.D0 ) CALL XERMSG('D9GMIC','X MUST BE GT ZERO',3,2)
   !
   m = INT( -(A-0.5D0) )
   fm = m
@@ -55,16 +54,16 @@ REAL(DP) FUNCTION D9GMIC(A,X,Alx)
     te = -X*te/(fm+fkp1)
     t = te/fkp1
     s = s + t
-    IF ( ABS(t)<eps*s ) GOTO 100
+    IF( ABS(t)<eps*s ) GOTO 100
   END DO
   CALL XERMSG('D9GMIC',&
     'NO CONVERGENCE IN 200 TERMS OF CONTINUED FRACTION',4,2)
   !
   100  D9GMIC = -Alx - euler + X*s/(fm+1.0D0)
-  IF ( m==0 ) RETURN
+  IF( m==0 ) RETURN
   !
-  IF ( m==1 ) D9GMIC = -D9GMIC - 1.D0 + 1.D0/X
-  IF ( m==1 ) RETURN
+  IF( m==1 ) D9GMIC = -D9GMIC - 1.D0 + 1.D0/X
+  IF( m==1 ) RETURN
   !
   te = fm
   t = 1.D0
@@ -75,7 +74,7 @@ REAL(DP) FUNCTION D9GMIC(A,X,Alx)
     te = -X*te/fk
     t = te/(fm-fk)
     s = s + t
-    IF ( ABS(t)<eps*ABS(s) ) EXIT
+    IF( ABS(t)<eps*ABS(s) ) EXIT
   END DO
   !
   DO k = 1, m
@@ -83,14 +82,14 @@ REAL(DP) FUNCTION D9GMIC(A,X,Alx)
   END DO
   !
   sgng = 1.0D0
-  IF ( MOD(m,2)==1 ) sgng = -1.0D0
+  IF( MOD(m,2)==1 ) sgng = -1.0D0
   alng = LOG(D9GMIC) - LOG_GAMMA(fm+1.D0)
   !
   D9GMIC = 0.D0
-  IF ( alng>bot ) D9GMIC = sgng*EXP(alng)
-  IF ( s/=0.D0 ) D9GMIC = D9GMIC + SIGN(EXP(-fm*Alx+LOG(ABS(s)/fm)),s)
+  IF( alng>bot ) D9GMIC = sgng*EXP(alng)
+  IF( s/=0.D0 ) D9GMIC = D9GMIC + SIGN(EXP(-fm*Alx+LOG(ABS(s)/fm)),s)
   !
-  IF ( D9GMIC==0.D0.AND.s==0.D0 )&
+  IF( D9GMIC==0.D0 .AND. s==0.D0 )&
     CALL XERMSG('D9GMIC','RESULT UNDERFLOWS',1,1)
   !
 END FUNCTION D9GMIC

@@ -1,7 +1,6 @@
 !** DPOSL
 SUBROUTINE DPOSL(A,Lda,N,B)
-  !>
-  !  Solve the real symmetric positive definite linear system
+  !> Solve the real symmetric positive definite linear system
   !            using the factors computed by DPOCO or DPOFA.
   !***
   ! **Library:**   SLATEC (LINPACK)
@@ -44,12 +43,12 @@ SUBROUTINE DPOSL(A,Lda,N,B)
   !        a zero on the diagonal.  Technically this indicates
   !        singularity, but it is usually caused by improper subroutine
   !        arguments.  It will not occur if the subroutines are called
-  !        correctly and  INFO .EQ. 0 .
+  !        correctly and  INFO = 0 .
   !
   !     To compute  INVERSE(A) * C  where  C  is a matrix
   !     with  P  columns
   !           CALL DPOCO(A,LDA,N,RCOND,Z,INFO)
-  !           IF (RCOND is too small .OR. INFO .NE. 0) GO TO ...
+  !           IF(RCOND is too small .OR. INFO /= 0) GO TO ...
   !           DO 10 J = 1, P
   !              CALL DPOSL(A,LDA,N,C(1,J))
   !        10 CONTINUE

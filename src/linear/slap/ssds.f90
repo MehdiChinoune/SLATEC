@@ -1,7 +1,6 @@
 !** SSDS
 SUBROUTINE SSDS(N,Nelt,Ja,A,Dinv)
-  !>
-  !  Diagonal Scaling Preconditioner SLAP Set Up.
+  !> Diagonal Scaling Preconditioner SLAP Set Up.
   !            Routine to compute the inverse of the diagonal of a matrix
   !            stored in the SLAP Column format.
   !***
@@ -109,12 +108,12 @@ SUBROUTINE SSDS(N,Nelt,Ja,A,Dinv)
   !   930701  Updated CATEGORY section.  (FNF, WRB)
 
   !     .. Scalar Arguments ..
-  INTEGER N, Nelt
+  INTEGER :: N, Nelt
   !     .. Array Arguments ..
-  REAL(SP) A(Nelt), Dinv(N)
-  INTEGER Ja(Nelt)
+  REAL(SP) :: A(Nelt), Dinv(N)
+  INTEGER :: Ja(Nelt)
   !     .. Local Scalars ..
-  INTEGER icol
+  INTEGER :: icol
   !* FIRST EXECUTABLE STATEMENT  SSDS
   !
   !         Assume the Diagonal elements are the first in each column.

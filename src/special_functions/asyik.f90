@@ -1,7 +1,6 @@
 !** ASYIK
 SUBROUTINE ASYIK(X,Fnu,Kode,Flgik,Ra,Arg,In,Y)
-  !>
-  !  Subsidiary to BESI and BESK
+  !> Subsidiary to BESI and BESK
   !***
   ! **Library:**   SLATEC
   !***
@@ -12,12 +11,12 @@ SUBROUTINE ASYIK(X,Fnu,Kode,Flgik,Ra,Arg,In,Y)
   ! **Description:**
   !
   !                    ASYIK computes Bessel functions I and K
-  !                  for arguments X.GT.0.0 and orders FNU.GE.35
+  !                  for arguments X>0.0 and orders FNU>=35
   !                  on FLGIK = 1 and FLGIK = -1 respectively.
   !
   !                                    INPUT
   !
-  !      X    - argument, X.GT.0.0E0
+  !      X    - argument, X>0.0E0
   !      FNU  - order of first Bessel function
   !      KODE - a parameter to indicate the scaling option
   !             KODE=1 returns Y(I)=        I/SUB(FNU+I-1)/(X), I=1,IN
@@ -39,8 +38,8 @@ SUBROUTINE ASYIK(X,Fnu,Kode,Flgik,Ra,Arg,In,Y)
   !
   !     Abstract
   !         ASYIK implements the uniform asymptotic expansion of
-  !         the I and K Bessel functions for FNU.GE.35 and real
-  !         X.GT.0.0E0. The forms are identical except for a change
+  !         the I and K Bessel functions for FNU>=35 and real
+  !         X>0.0E0. The forms are identical except for a change
   !         in sign of some of the terms. This change in sign is
   !         accomplished by means of the flag FLGIK = 1 or -1.
   !
@@ -91,7 +90,7 @@ SUBROUTINE ASYIK(X,Fnu,Kode,Flgik,Ra,Arg,In,Y)
   z = (3.0E0-Flgik)/2.0E0
   kk = INT(z)
   DO jn = 1, In
-    IF ( jn/=1 ) THEN
+    IF( jn/=1 ) THEN
       fn = fn - Flgik
       z = X/fn
       Ra = SQRT(1.0E0+z*z)
@@ -118,7 +117,7 @@ SUBROUTINE ASYIK(X,Fnu,Kode,Flgik,Ra,Arg,In,Y)
       ap = ap*t
       ak = ap*s1
       s2 = s2 + ak
-      IF ( MAX(ABS(ak),ABS(ap))<tol ) EXIT
+      IF( MAX(ABS(ak),ABS(ap))<tol ) EXIT
     END DO
     t = ABS(t)
     Y(jn) = s2*coef*SQRT(t)*con(kk)

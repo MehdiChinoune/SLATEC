@@ -1,7 +1,6 @@
 !** DXPQNU
 SUBROUTINE DXPQNU(Nu1,Nu2,Mu,Theta,Id,Pqa,Ipqa,Ierror)
-  !>
-  !  To compute the values of Legendre functions for DXLEGF.
+  !> To compute the values of Legendre functions for DXLEGF.
   !            This subroutine calculates initial values of P or Q using
   !            power series, then performs forward nu-wise recurrence to
   !            obtain P(-MU,NU,X), Q(0,NU,X), or Q(1,NU,X). The nu-wise
@@ -49,23 +48,23 @@ SUBROUTINE DXPQNU(Nu1,Nu2,Mu,Theta,Id,Pqa,Ipqa,Ierror)
   ipq = 0
   !        FIND NU IN INTERVAL [-.5,.5) IF ID=2  ( CALCULATION OF Q )
   nu = MOD(Nu1,1.D0)
-  IF ( nu>=.5D0 ) nu = nu - 1.D0
+  IF( nu>=.5D0 ) nu = nu - 1.D0
   !        FIND NU IN INTERVAL (-1.5,-.5] IF ID=1,3, OR 4  ( CALC. OF P )
-  IF ( Id/=2.AND.nu>-.5D0 ) nu = nu - 1.D0
+  IF( Id/=2 .AND. nu>-.5D0 ) nu = nu - 1.D0
   !        CALCULATE MU FACTORIAL
   k = Mu
   dmu = Mu
-  IF ( Mu>0 ) THEN
+  IF( Mu>0 ) THEN
     factmu = 1.D0
     if = 0
     DO i = 1, k
       factmu = factmu*i
       CALL DXADJ(factmu,if,Ierror)
     END DO
-    IF ( Ierror/=0 ) RETURN
+    IF( Ierror/=0 ) RETURN
   END IF
-  IF ( k==0 ) factmu = 1.D0
-  IF ( k==0 ) if = 0
+  IF( k==0 ) factmu = 1.D0
+  IF( k==0 ) if = 0
   !
   !        X=COS(THETA)
   !        Y=SIN(THETA/2)**2=(1-X)/2=.5-.5*X
@@ -81,7 +80,7 @@ SUBROUTINE DXPQNU(Nu1,Nu2,Mu,Theta,Id,Pqa,Ipqa,Ierror)
   pq2 = 0.0D0
   DO j = 1, 2
     ipq1 = 0
-    IF ( Id==2 ) THEN
+    IF( Id==2 ) THEN
       !
       !        Z=-LN(R)=.5*LN((1+X)/(1-X))
       !
@@ -106,31 +105,31 @@ SUBROUTINE DXPQNU(Nu1,Nu2,Mu,Theta,Id,Pqa,Ipqa,Ierror)
       a = 1.D0
       DO k = 1, j0
         flok = k
-        IF ( k/=1 ) THEN
+        IF( k/=1 ) THEN
           a = a*y*(flok-2.D0-nu)*(flok-1.D0+nu)&
             /((flok-1.D0+dmu)*(flok-1.D0))
           CALL DXADJ(a,ia,Ierror)
-          IF ( Ierror/=0 ) RETURN
+          IF( Ierror/=0 ) RETURN
         END IF
-        IF ( Mu>=1 ) THEN
+        IF( Mu>=1 ) THEN
           x1 = (nu*(nu+1.D0)*(z-w+DXPSI(flok,ipsik,ipsix))+(nu-flok+1.D0)&
             *(nu+flok)/(2.D0*flok))*a
           ix1 = ia
           CALL DXADD(pq,ipq,x1,ix1,pq,ipq,Ierror)
-          IF ( Ierror/=0 ) RETURN
+          IF( Ierror/=0 ) RETURN
         ELSE
           x1 = (DXPSI(flok,ipsik,ipsix)-w+z)*a
           ix1 = ia
           CALL DXADD(pq,ipq,x1,ix1,pq,ipq,Ierror)
-          IF ( Ierror/=0 ) RETURN
+          IF( Ierror/=0 ) RETURN
         END IF
       END DO
-      IF ( Mu>=1 ) pq = -r*pq
+      IF( Mu>=1 ) pq = -r*pq
       ixs = 0
-      IF ( Mu>=1 ) CALL DXADD(pq,ipq,-xs,ixs,pq,ipq,Ierror)
-      IF ( Ierror/=0 ) RETURN
-      IF ( j==2 ) Mu = -Mu
-      IF ( j==2 ) dmu = -dmu
+      IF( Mu>=1 ) CALL DXADD(pq,ipq,-xs,ixs,pq,ipq,Ierror)
+      IF( Ierror/=0 ) RETURN
+      IF( j==2 ) Mu = -Mu
+      IF( j==2 ) dmu = -dmu
     ELSE
       !
       !        SERIES FOR P ( ID = 1, 3, OR 4 )
@@ -145,12 +144,12 @@ SUBROUTINE DXPQNU(Nu1,Nu2,Mu,Theta,Id,Pqa,Ipqa,Ierror)
         di = i
         a = a*y*(di-2.D0-nu)*(di-1.D0+nu)/((di-1.D0+dmu)*(di-1.D0))
         CALL DXADJ(a,ia,Ierror)
-        IF ( Ierror/=0 ) RETURN
-        IF ( a==0.D0 ) EXIT
+        IF( Ierror/=0 ) RETURN
+        IF( a==0.D0 ) EXIT
         CALL DXADD(pq,ipq,a,ia,pq,ipq,Ierror)
-        IF ( Ierror/=0 ) RETURN
+        IF( Ierror/=0 ) RETURN
       END DO
-      IF ( Mu>0 ) THEN
+      IF( Mu>0 ) THEN
         x2 = r
         x1 = pq
         k = Mu
@@ -158,31 +157,31 @@ SUBROUTINE DXPQNU(Nu1,Nu2,Mu,Theta,Id,Pqa,Ipqa,Ierror)
           x1 = x1*x2
           CALL DXADJ(x1,ipq,Ierror)
         END DO
-        IF ( Ierror/=0 ) RETURN
+        IF( Ierror/=0 ) RETURN
         pq = x1/factmu
         ipq = ipq - if
         CALL DXADJ(pq,ipq,Ierror)
-        IF ( Ierror/=0 ) RETURN
+        IF( Ierror/=0 ) RETURN
       END IF
     END IF
-    IF ( j==1 ) pq2 = pq
-    IF ( j==1 ) ipq2 = ipq
+    IF( j==1 ) pq2 = pq
+    IF( j==1 ) ipq2 = ipq
     nu = nu + 1.D0
   END DO
   k = 0
-  IF ( nu-1.5D0>=Nu1 ) THEN
+  IF( nu-1.5D0>=Nu1 ) THEN
     k = k + 1
     Pqa(k) = pq2
     Ipqa(k) = ipq2
-    IF ( nu>Nu2+.5D0 ) RETURN
+    IF( nu>Nu2+.5D0 ) RETURN
   END IF
   100  pq1 = pq
   ipq1 = ipq
-  IF ( nu>=Nu1+.5D0 ) THEN
+  IF( nu>=Nu1+.5D0 ) THEN
     k = k + 1
     Pqa(k) = pq
     Ipqa(k) = ipq
-    IF ( nu>Nu2+.5D0 ) RETURN
+    IF( nu>Nu2+.5D0 ) RETURN
   END IF
   !
   !        FORWARD NU-WISE RECURRENCE FOR F(MU,NU,X) FOR FIXED MU
@@ -195,9 +194,9 @@ SUBROUTINE DXPQNU(Nu1,Nu2,Mu,Theta,Id,Pqa,Ipqa,Ierror)
   x1 = (2.D0*nu-1.D0)/(nu+dmu)*x*pq1
   x2 = (nu-1.D0-dmu)/(nu+dmu)*pq2
   CALL DXADD(x1,ipq1,-x2,ipq2,pq,ipq,Ierror)
-  IF ( Ierror/=0 ) RETURN
+  IF( Ierror/=0 ) RETURN
   CALL DXADJ(pq,ipq,Ierror)
-  IF ( Ierror/=0 ) RETURN
+  IF( Ierror/=0 ) RETURN
   nu = nu + 1.D0
   pq2 = pq1
   ipq2 = ipq1

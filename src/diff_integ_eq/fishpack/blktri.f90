@@ -1,7 +1,6 @@
 !** BLKTRI
 SUBROUTINE BLKTRI(Iflg,Np,N,An,Bn,Cn,Mp,M,Am,Bm,Cm,Idimy,Y,Ierror,W)
-  !>
-  !  Solve a block tridiagonal system of linear equations
+  !> Solve a block tridiagonal system of linear equations
   !            (usually resulting from the discretization of separable
   !            two-dimensional elliptic equations).
   !***
@@ -210,27 +209,27 @@ SUBROUTINE BLKTRI(Iflg,Np,N,An,Bn,Cn,Mp,M,Am,Bm,Cm,Idimy,Y,Ierror,W)
   !* FIRST EXECUTABLE STATEMENT  BLKTRI
   nm_com = N
   Ierror = 0
-  IF ( M<5 ) THEN
+  IF( M<5 ) THEN
     Ierror = 1
-  ELSEIF ( nm_com<3 ) THEN
+  ELSEIF( nm_com<3 ) THEN
     Ierror = 2
-  ELSEIF ( Idimy<M ) THEN
+  ELSEIF( Idimy<M ) THEN
     Ierror = 3
   ELSE
     nh = N
     npp_com = Np
-    IF ( npp_com/=0 ) nh = nh + 1
+    IF( npp_com/=0 ) nh = nh + 1
     ik_com = 2
     k_com = 1
     DO
       ik_com = ik_com + ik_com
       k_com = k_com + 1
-      IF ( nh<=ik_com ) THEN
+      IF( nh<=ik_com ) THEN
         nl = ik_com
         ik_com = ik_com + ik_com
         nl = nl - 1
         iwah = (k_com-2)*ik_com + k_com + 6
-        IF ( npp_com/=0 ) THEN
+        IF( npp_com/=0 ) THEN
           !
           !     DIVIDE W INTO WORKING SUB ARRAYS
           !
@@ -246,15 +245,15 @@ SUBROUTINE BLKTRI(Iflg,Np,N,An,Bn,Cn,Mp,M,Am,Bm,Cm,Idimy,Y,Ierror,W)
         !
         ! SUBROUTINE COMP B COMPUTES THE ROOTS OF THE B POLYNOMIALS
         !
-        IF ( Ierror==0 ) THEN
+        IF( Ierror==0 ) THEN
           iw2 = iw1 + M
           iw3 = iw2 + M
           iwd = iw3 + M
           iww = iwd + M
           iwu = iww + M
-          IF ( Iflg==0 ) THEN
+          IF( Iflg==0 ) THEN
             CALL COMPB(Ierror,An,Bn,Cn,W(2:iwah-1),W(iwah:iwbh-1),W(iwbh:))
-          ELSEIF ( Mp/=0 ) THEN
+          ELSEIF( Mp/=0 ) THEN
             !
             ! SUBROUTINE BLKTR1 SOLVES THE LINEAR SYSTEM
             !

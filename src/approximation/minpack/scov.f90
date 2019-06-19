@@ -1,7 +1,6 @@
 !** SCOV
 SUBROUTINE SCOV(FCN,Iopt,M,N,X,Fvec,R,Ldr,Info,Wa1,Wa2,Wa3,Wa4)
-  !>
-  !  Calculate the covariance matrix for a nonlinear data
+  !> Calculate the covariance matrix for a nonlinear data
   !            fitting problem.  It is intended to be used after a
   !            successful return from either SNLS1 or SNLS1E.
   !***
@@ -119,7 +118,7 @@ SUBROUTINE SCOV(FCN,Iopt,M,N,X,Fvec,R,Ldr,Info,Wa1,Wa2,Wa3,Wa4)
   !         execution, INFO is set to the (negative) value of IFLAG.  See
   !         description of FCN. Otherwise, INFO is set as follows.
   !
-  !         INFO = 0 Improper input parameters (M.LE.0 or N.LE.0).
+  !         INFO = 0 Improper input parameters (M<=0 or N<=0).
   !
   !         INFO = 1 Successful return.  The covariance matrix has been
   !                  calculated and stored in the upper N by N
@@ -170,18 +169,18 @@ SUBROUTINE SCOV(FCN,Iopt,M,N,X,Fvec,R,Ldr,Info,Wa1,Wa2,Wa3,Wa4)
   sing = .FALSE.
   iflag = 0
   idum = 0
-  IF ( M>0.AND.N>0 ) THEN
+  IF( M>0 .AND. N>0 ) THEN
     !
     !     CALCULATE SIGMA = (SUM OF THE SQUARED RESIDUALS) / (M-N)
     iflag = 1
     CALL FCN(iflag,M,N,X,Fvec,R,Ldr)
-    IF ( iflag>=0 ) THEN
+    IF( iflag>=0 ) THEN
       temp = ENORM(M,Fvec)
       sigma = one
-      IF ( M/=N ) sigma = temp*temp/(M-N)
+      IF( M/=N ) sigma = temp*temp/(M-N)
       !
       !     CALCULATE THE JACOBIAN
-      IF ( Iopt==3 ) THEN
+      IF( Iopt==3 ) THEN
         !
         !     COMPUTE THE QR FACTORIZATION OF THE JACOBIAN MATRIX CALCULATED ONE
         !     ROW AT A TIME AND STORED IN THE UPPER TRIANGLE OF R.
@@ -196,14 +195,14 @@ SUBROUTINE SCOV(FCN,Iopt,M,N,X,Fvec,R,Ldr,Info,Wa1,Wa2,Wa3,Wa4)
         DO i = 1, M
           nrow = i
           CALL FCN(iflag,M,N,X,Fvec,Wa1,nrow)
-          IF ( iflag<0 ) GOTO 100
+          IF( iflag<0 ) GOTO 100
           temp = Fvec(i)
           CALL RWUPDT(N,R,Ldr,Wa1,Wa2,temp,Wa3,Wa4)
         END DO
       ELSE
         !
         !     STORE THE FULL JACOBIAN USING M*N STORAGE
-        IF ( Iopt==1 ) THEN
+        IF( Iopt==1 ) THEN
           !
           !     CODE APPROXIMATES THE JACOBIAN
           CALL FDJAC3(FCN,M,N,X,Fvec,R,Ldr,iflag,zero,Wa4)
@@ -213,7 +212,7 @@ SUBROUTINE SCOV(FCN,Iopt,M,N,X,Fvec,R,Ldr,Info,Wa1,Wa2,Wa3,Wa4)
           iflag = 2
           CALL FCN(iflag,M,N,X,Fvec,R,Ldr)
         END IF
-        IF ( iflag<0 ) GOTO 100
+        IF( iflag<0 ) GOTO 100
         !
         !     COMPUTE THE QR DECOMPOSITION
         CALL QRFAC(M,N,R,Ldr,.FALSE.,idum,1,Wa1,Wa1,Wa1)
@@ -224,13 +223,13 @@ SUBROUTINE SCOV(FCN,Iopt,M,N,X,Fvec,R,Ldr,Info,Wa1,Wa2,Wa3,Wa4)
       !
       !     CHECK IF R IS SINGULAR.
       DO i = 1, N
-        IF ( R(i,i)==zero ) sing = .TRUE.
+        IF( R(i,i)==zero ) sing = .TRUE.
       END DO
-      IF ( .NOT.(sing) ) THEN
+      IF( .NOT. (sing) ) THEN
         !
         !     R IS UPPER TRIANGULAR.  CALCULATE (R TRANSPOSE) INVERSE AND STORE
         !     IN THE UPPER TRIANGLE OF R.
-        IF ( N/=1 ) THEN
+        IF( N/=1 ) THEN
           nm1 = N - 1
           DO k = 1, nm1
             !
@@ -270,12 +269,12 @@ SUBROUTINE SCOV(FCN,Iopt,M,N,X,Fvec,R,Ldr,Info,Wa1,Wa2,Wa3,Wa4)
   END IF
   !
   100 CONTINUE
-  IF ( M<=0.OR.N<=0 ) Info = 0
-  IF ( iflag<0 ) Info = iflag
-  IF ( sing ) Info = 2
-  IF ( Info<0 ) CALL XERMSG('SCOV',&
+  IF( M<=0 .OR. N<=0 ) Info = 0
+  IF( iflag<0 ) Info = iflag
+  IF( sing ) Info = 2
+  IF( Info<0 ) CALL XERMSG('SCOV',&
     'EXECUTION TERMINATED BECAUSE USER SET IFLAG NEGATIVE.',1,1)
-  IF ( Info==0 ) CALL XERMSG('SCOV','INVALID INPUT PARAMETER.',2,1)
-  IF ( Info==2 ) CALL XERMSG('SCOV',&
+  IF( Info==0 ) CALL XERMSG('SCOV','INVALID INPUT PARAMETER.',2,1)
+  IF( Info==2 ) CALL XERMSG('SCOV',&
     'SINGULAR JACOBIAN MATRIX, COVARIANCE MATRIX CANNOT BE CALCULATED.',1,1)
 END SUBROUTINE SCOV

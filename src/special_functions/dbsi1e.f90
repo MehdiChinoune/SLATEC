@@ -1,7 +1,6 @@
 !** DBSI1E
 REAL(DP) FUNCTION DBSI1E(X)
-  !>
-  !  Compute the exponentially scaled modified (hyperbolic)
+  !> Compute the exponentially scaled modified (hyperbolic)
   !            Bessel function of the first kind of order one.
   !***
   ! **Library:**   SLATEC (FNLIB)
@@ -128,7 +127,7 @@ REAL(DP) FUNCTION DBSI1E(X)
     +.1619029596080341510617909803614D-30, -.1834079908804941413901308439210D-31 ]
   LOGICAL, SAVE :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  DBSI1E
-  IF ( first ) THEN
+  IF( first ) THEN
     nti1 = INITDS(bi1cs,17,eta)
     ntai1 = INITDS(ai1cs,46,eta)
     ntai12 = INITDS(ai12cs,69,eta)
@@ -136,21 +135,21 @@ REAL(DP) FUNCTION DBSI1E(X)
   END IF
   !
   y = ABS(X)
-  IF ( y>3.0D0 ) THEN
+  IF( y>3.0D0 ) THEN
     !
-    IF ( y<=8.D0 ) DBSI1E = (0.375D0+DCSEVL((48.D0/y-11.D0)/5.D0,ai1cs,ntai1))/SQRT(y)
-    IF ( y>8.D0 ) DBSI1E = (0.375D0+DCSEVL(16.D0/y-1.D0,ai12cs,ntai12))/SQRT(y)
+    IF( y<=8.D0 ) DBSI1E = (0.375D0+DCSEVL((48.D0/y-11.D0)/5.D0,ai1cs,ntai1))/SQRT(y)
+    IF( y>8.D0 ) DBSI1E = (0.375D0+DCSEVL(16.D0/y-1.D0,ai12cs,ntai12))/SQRT(y)
     DBSI1E = SIGN(DBSI1E,X)
     RETURN
   END IF
   !
   DBSI1E = 0.0D0
-  IF ( y==0.D0 ) RETURN
+  IF( y==0.D0 ) RETURN
   !
-  IF ( y<=xmin ) CALL XERMSG('DBSI1E',&
+  IF( y<=xmin ) CALL XERMSG('DBSI1E',&
     'ABS(X) SO SMALL I1 UNDERFLOWS',1,1)
-  IF ( y>xmin ) DBSI1E = 0.5D0*X
-  IF ( y>xsml ) DBSI1E = X*(0.875D0+DCSEVL(y*y/4.5D0-1.D0,bi1cs,nti1))
+  IF( y>xmin ) DBSI1E = 0.5D0*X
+  IF( y>xsml ) DBSI1E = X*(0.875D0+DCSEVL(y*y/4.5D0-1.D0,bi1cs,nti1))
   DBSI1E = EXP(-y)*DBSI1E
   RETURN
 END FUNCTION DBSI1E

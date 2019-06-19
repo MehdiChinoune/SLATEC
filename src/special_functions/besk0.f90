@@ -1,7 +1,6 @@
 !** BESK0
 REAL(SP) FUNCTION BESK0(X)
-  !>
-  !  Compute the modified (hyperbolic) Bessel function of the
+  !> Compute the modified (hyperbolic) Bessel function of the
   !            third kind of order zero.
   !***
   ! **Library:**   SLATEC (FNLIB)
@@ -19,7 +18,7 @@ REAL(SP) FUNCTION BESK0(X)
   ! **Description:**
   !
   ! BESK0(X) calculates the modified (hyperbolic) Bessel function
-  ! of the third kind of order zero for real argument X .GT. 0.0.
+  ! of the third kind of order zero for real argument X > 0.0.
   !
   ! Series for BK0        on the interval  0.          to  4.00000D+00
   !                                        with weighted error   3.57E-19
@@ -52,24 +51,24 @@ REAL(SP) FUNCTION BESK0(X)
     .00000000000004259816E0, .00000000000000013744E0, .00000000000000000035E0 ]
   LOGICAL, SAVE :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  BESK0
-  IF ( first ) THEN
+  IF( first ) THEN
     ntk0 = INITS(bk0cs,11,0.1*R1MACH(3))
     first = .FALSE.
   END IF
   !
-  IF ( X<=0. ) CALL XERMSG('BESK0','X IS ZERO OR NEGATIVE',2,2)
-  IF ( X>2. ) THEN
+  IF( X<=0. ) CALL XERMSG('BESK0','X IS ZERO OR NEGATIVE',2,2)
+  IF( X>2. ) THEN
     !
     BESK0 = 0.
-    IF ( X>xmax ) CALL XERMSG('BESK0','X SO BIG K0 UNDERFLOWS',1,1)
-    IF ( X>xmax ) RETURN
+    IF( X>xmax ) CALL XERMSG('BESK0','X SO BIG K0 UNDERFLOWS',1,1)
+    IF( X>xmax ) RETURN
     !
     BESK0 = EXP(-X)*BESK0E(X)
     RETURN
   END IF
   !
   y = 0.
-  IF ( X>xsml ) y = X*X
+  IF( X>xsml ) y = X*X
   BESK0 = -LOG(0.5*X)*BESI0(X) - .25 + CSEVL(.5*y-1.,bk0cs,ntk0)
   RETURN
 END FUNCTION BESK0

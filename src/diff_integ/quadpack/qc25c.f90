@@ -1,7 +1,6 @@
 !** QC25C
 SUBROUTINE QC25C(F,A,B,C,Result,Abserr,Krul,Neval)
-  !>
-  !  To compute I = Integral of F*W over (A,B) with
+  !> To compute I = Integral of F*W over (A,B) with
   !            error estimate, where W(X) = 1/(X-C)
   !***
   ! **Library:**   SLATEC (QUADPACK)
@@ -36,7 +35,7 @@ SUBROUTINE QC25C(F,A,B,C,Result,Abserr,Krul,Neval)
   !                    Left end point of the integration interval
   !
   !           B      - Real
-  !                    Right end point of the integration interval, B.GT.A
+  !                    Right end point of the integration interval, B>A
   !
   !           C      - Real
   !                    Parameter in the WEIGHT function
@@ -115,7 +114,7 @@ SUBROUTINE QC25C(F,A,B,C,Result,Abserr,Krul,Neval)
   !
   !* FIRST EXECUTABLE STATEMENT  QC25C
   cc = (0.2E+01*C-B-A)/(B-A)
-  IF ( ABS(cc)<0.11E+01 ) THEN
+  IF( ABS(cc)<0.11E+01 ) THEN
     !
     !           USE THE GENERALIZED CLENSHAW-CURTIS METHOD.
     !
@@ -147,7 +146,7 @@ SUBROUTINE QC25C(F,A,B,C,Result,Abserr,Krul,Neval)
     DO k = 3, 13
       amom2 = 0.2E+01*cc*amom1 - amom0
       ak22 = (k-2)*(k-2)
-      IF ( (k/2)*2==k ) amom2 = amom2 - 0.4E+01/(ak22-0.1E+01)
+      IF( (k/2)*2==k ) amom2 = amom2 - 0.4E+01/(ak22-0.1E+01)
       res12 = res12 + cheb12(k)*amom2
       res24 = res24 + cheb24(k)*amom2
       amom0 = amom1
@@ -156,7 +155,7 @@ SUBROUTINE QC25C(F,A,B,C,Result,Abserr,Krul,Neval)
     DO k = 14, 25
       amom2 = 0.2E+01*cc*amom1 - amom0
       ak22 = (k-2)*(k-2)
-      IF ( (k/2)*2==k ) amom2 = amom2 - 0.4E+01/(ak22-0.1E+01)
+      IF( (k/2)*2==k ) amom2 = amom2 - 0.4E+01/(ak22-0.1E+01)
       res24 = res24 + cheb24(k)*amom2
       amom0 = amom1
       amom1 = amom2
@@ -170,6 +169,6 @@ SUBROUTINE QC25C(F,A,B,C,Result,Abserr,Krul,Neval)
     Krul = Krul - 1
     CALL QK15W(F,QWGTC,C,p2,p3,p4,kp,A,B,Result,Abserr,resabs,resasc)
     Neval = 15
-    IF ( resasc==Abserr ) Krul = Krul + 1
+    IF( resasc==Abserr ) Krul = Krul + 1
   END IF
 END SUBROUTINE QC25C

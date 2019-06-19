@@ -1,7 +1,6 @@
 !** COST
 SUBROUTINE COST(N,X,Wsave)
-  !>
-  !  Compute the cosine transform of a REAL(SP), even sequence.
+  !> Compute the cosine transform of a REAL(SP), even sequence.
   !***
   ! **Library:**   SLATEC (FFTPACK)
   !***
@@ -79,19 +78,19 @@ SUBROUTINE COST(N,X,Wsave)
 
   INTEGER :: N
   REAL(SP) :: Wsave(3*N+15), X(N)
-  INTEGER i, k, kc, modn, nm1, np1, ns2
+  INTEGER :: i, k, kc, modn, nm1, np1, ns2
   REAL(SP) :: c1, t1, t2, tx2, x1h, x1p3, xi, xim2
   !* FIRST EXECUTABLE STATEMENT  COST
   nm1 = N - 1
   np1 = N + 1
   ns2 = N/2
-  IF ( N<2 ) RETURN
-  IF ( N==2 ) THEN
+  IF( N<2 ) RETURN
+  IF( N==2 ) THEN
     x1h = X(1) + X(2)
     X(2) = X(1) - X(2)
     X(1) = x1h
     RETURN
-  ELSEIF ( N>3 ) THEN
+  ELSEIF( N>3 ) THEN
     c1 = X(1) - X(N)
     X(1) = X(1) + X(N)
     DO k = 2, ns2
@@ -104,7 +103,7 @@ SUBROUTINE COST(N,X,Wsave)
       X(kc) = t1 + t2
     END DO
     modn = MOD(N,2)
-    IF ( modn/=0 ) X(ns2+1) = X(ns2+1) + X(ns2+1)
+    IF( modn/=0 ) X(ns2+1) = X(ns2+1) + X(ns2+1)
     CALL RFFTF(nm1,X,Wsave(N+1))
     xim2 = X(2)
     X(2) = c1
@@ -114,7 +113,7 @@ SUBROUTINE COST(N,X,Wsave)
       X(i-1) = xim2
       xim2 = xi
     END DO
-    IF ( modn/=0 ) X(N) = xim2
+    IF( modn/=0 ) X(N) = xim2
     RETURN
   END IF
   x1p3 = X(1) + X(3)

@@ -1,8 +1,7 @@
 !** HSTCSP
 SUBROUTINE HSTCSP(Intl,A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
     Idimf,Pertrb,Ierror,W)
-  !>
-  !  Solve the standard five-point finite difference
+  !> Solve the standard five-point finite difference
   !            approximation on a staggered grid to the modified Helmholtz
   !            equation in spherical coordinates assuming axisymmetry
   !            (no dependence on longitude).
@@ -58,7 +57,7 @@ SUBROUTINE HSTCSP(Intl,A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   !            faster with INTL = 1 since initialization is not repeated.
   !
   !   A,B
-  !     The range of THETA (colatitude), i.e. A .LE. THETA .LE. B.  A
+  !     The range of THETA (colatitude), i.e. A <= THETA <= B.  A
   !     must be less than B and A must be non-negative.  A and B are in
   !     radians.  A = 0 corresponds to the north pole and B = PI
   !     corresponds to the south pole.
@@ -152,7 +151,7 @@ SUBROUTINE HSTCSP(Intl,A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   !     When MBDCND has any other value, BDB is a dummy variable.
   !
   !   C,D
-  !     The range of R, i.e. C .LE. R .LE. D.
+  !     The range of R, i.e. C <= R <= D.
   !     C must be less than D.  C must be non-negative.
   !
   !   N
@@ -273,39 +272,39 @@ SUBROUTINE HSTCSP(Intl,A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   !
   !     =  0  No error
   !
-  !     =  1  A .LT. 0 or B .GT. PI
+  !     =  1  A < 0 or B > PI
   !
-  !     =  2  A .GE. B
+  !     =  2  A >= B
   !
-  !     =  3  MBDCND .LT. 1 or MBDCND .GT. 9
+  !     =  3  MBDCND < 1 or MBDCND > 9
   !
-  !     =  4  C .LT. 0
+  !     =  4  C < 0
   !
-  !     =  5  C .GE. D
+  !     =  5  C >= D
   !
-  !     =  6  NBDCND .LT. 1 or NBDCND .GT. 6
+  !     =  6  NBDCND < 1 or NBDCND > 6
   !
-  !     =  7  N .LT. 5
+  !     =  7  N < 5
   !
   !     =  8  NBDCND = 5 or 6 and MBDCND = 1, 2, 4, 5, or 7
   !
-  !     =  9  C .GT. 0 and NBDCND .GE. 5
+  !     =  9  C > 0 and NBDCND >= 5
   !
-  !     = 10  ELMBDA .GT. 0
+  !     = 10  ELMBDA > 0
   !
-  !     = 11  IDIMF .LT. M
+  !     = 11  IDIMF < M
   !
-  !     = 12  M .LT. 5
+  !     = 12  M < 5
   !
   !     = 13  A = 0 and MBDCND =1,2,3,4,7 or 8
   !
-  !     = 14  B = PI and MBDCND .LE. 6
+  !     = 14  B = PI and MBDCND <= 6
   !
-  !     = 15  A .GT. 0 and MBDCND = 5, 6, or 9
+  !     = 15  A > 0 and MBDCND = 5, 6, or 9
   !
-  !     = 16  B .LT. PI and MBDCND .GE. 7
+  !     = 16  B < PI and MBDCND >= 7
   !
-  !     = 17  LAMBDA .NE. 0 and NBDCND .GE. 5
+  !     = 17  LAMBDA /= 0 and NBDCND >= 5
   !
   !     Since this is the only means of indicating a possibly
   !     incorrect call to HSTCSP, the user should test IERROR after
@@ -414,24 +413,24 @@ SUBROUTINE HSTCSP(Intl,A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   !     CHECK FOR INVALID INPUT PARAMETERS
   !
   Ierror = 0
-  IF ( A<0..OR.B>pi ) Ierror = 1
-  IF ( A>=B ) Ierror = 2
-  IF ( Mbdcnd<1.OR.Mbdcnd>9 ) Ierror = 3
-  IF ( C<0. ) Ierror = 4
-  IF ( C>=D ) Ierror = 5
-  IF ( Nbdcnd<1.OR.Nbdcnd>6 ) Ierror = 6
-  IF ( N<5 ) Ierror = 7
-  IF ( (Nbdcnd==5.OR.Nbdcnd==6).AND.&
-    (Mbdcnd==1.OR.Mbdcnd==2.OR.Mbdcnd==4.OR.Mbdcnd==5.OR.Mbdcnd==7) ) Ierror = 8
-  IF ( C>0..AND.Nbdcnd>=5 ) Ierror = 9
-  IF ( Idimf<M ) Ierror = 11
-  IF ( M<5 ) Ierror = 12
-  IF ( A==0..AND.Mbdcnd/=5.AND.Mbdcnd/=6.AND.Mbdcnd/=9 ) Ierror = 13
-  IF ( B==pi.AND.Mbdcnd<=6 ) Ierror = 14
-  IF ( A>0..AND.(Mbdcnd==5.OR.Mbdcnd==6.OR.Mbdcnd==9) ) Ierror = 15
-  IF ( B<pi.AND.Mbdcnd>=7 ) Ierror = 16
-  IF ( Elmbda/=0..AND.Nbdcnd>=5 ) Ierror = 17
-  IF ( Ierror==0 ) THEN
+  IF( A<0. .OR. B>pi ) Ierror = 1
+  IF( A>=B ) Ierror = 2
+  IF( Mbdcnd<1 .OR. Mbdcnd>9 ) Ierror = 3
+  IF( C<0. ) Ierror = 4
+  IF( C>=D ) Ierror = 5
+  IF( Nbdcnd<1 .OR. Nbdcnd>6 ) Ierror = 6
+  IF( N<5 ) Ierror = 7
+  IF( (Nbdcnd==5 .OR. Nbdcnd==6) .AND. &
+    (Mbdcnd==1 .OR. Mbdcnd==2 .OR. Mbdcnd==4 .OR. Mbdcnd==5 .OR. Mbdcnd==7) ) Ierror = 8
+  IF( C>0. .AND. Nbdcnd>=5 ) Ierror = 9
+  IF( Idimf<M ) Ierror = 11
+  IF( M<5 ) Ierror = 12
+  IF( A==0. .AND. Mbdcnd/=5 .AND. Mbdcnd/=6 .AND. Mbdcnd/=9 ) Ierror = 13
+  IF( B==pi .AND. Mbdcnd<=6 ) Ierror = 14
+  IF( A>0. .AND. (Mbdcnd==5 .OR. Mbdcnd==6 .OR. Mbdcnd==9) ) Ierror = 15
+  IF( B<pi .AND. Mbdcnd>=7 ) Ierror = 16
+  IF( Elmbda/=0. .AND. Nbdcnd>=5 ) Ierror = 17
+  IF( Ierror==0 ) THEN
     iwbm = M + 1
     iwcm = iwbm + M
     iwan = iwcm + M

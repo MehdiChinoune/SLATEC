@@ -1,7 +1,6 @@
 !** DWRITP
 SUBROUTINE DWRITP(Ipage,List,Rlist,Lpage,Irec)
-  !>
-  !  Subsidiary to DSPLP
+  !> Subsidiary to DSPLP
   !***
   ! **Library:**   SLATEC
   !***

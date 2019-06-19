@@ -1,7 +1,6 @@
 !** COSQF
 SUBROUTINE COSQF(N,X,Wsave)
-  !>
-  !  Compute the forward cosine transform with odd wave numbers.
+  !> Compute the forward cosine transform with odd wave numbers.
   !***
   ! **Library:**   SLATEC (FFTPACK)
   !***
@@ -84,8 +83,8 @@ SUBROUTINE COSQF(N,X,Wsave)
   REAL(SP) :: sqrt2, tsqx
   !* FIRST EXECUTABLE STATEMENT  COSQF
   sqrt2 = SQRT(2.)
-  IF ( N<2 ) THEN
-  ELSEIF ( N==2 ) THEN
+  IF( N<2 ) THEN
+  ELSEIF( N==2 ) THEN
     tsqx = sqrt2*X(2)
     X(2) = X(1) - tsqx
     X(1) = X(1) + tsqx

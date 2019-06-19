@@ -1,7 +1,6 @@
 !** DGAMI
 REAL(DP) FUNCTION DGAMI(A,X)
-  !>
-  !  Evaluate the incomplete Gamma function.
+  !> Evaluate the incomplete Gamma function.
   !***
   ! **Library:**   SLATEC (FNLIB)
   !***
@@ -38,11 +37,11 @@ REAL(DP) FUNCTION DGAMI(A,X)
   USE service, ONLY : XERMSG
   REAL(DP) :: A, X, factor
   !* FIRST EXECUTABLE STATEMENT  DGAMI
-  IF ( A<=0.D0 ) CALL XERMSG('DGAMI','A MUST BE GT ZERO',1,2)
-  IF ( X<0.D0 ) CALL XERMSG('DGAMI','X MUST BE GE ZERO',2,2)
+  IF( A<=0.D0 ) CALL XERMSG('DGAMI','A MUST BE GT ZERO',1,2)
+  IF( X<0.D0 ) CALL XERMSG('DGAMI','X MUST BE GE ZERO',2,2)
   !
   DGAMI = 0.D0
-  IF ( X==0.0D0 ) RETURN
+  IF( X==0.0D0 ) RETURN
   !
   ! THE ONLY ERROR POSSIBLE IN THE EXPRESSION BELOW IS A FATAL OVERFLOW.
   factor = EXP(LOG_GAMMA(A)+A*LOG(X))

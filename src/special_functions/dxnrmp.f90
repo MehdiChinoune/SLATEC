@@ -1,7 +1,6 @@
 !** DXNRMP
 SUBROUTINE DXNRMP(Nu,Mu1,Mu2,Darg,Mode,Dpn,Ipn,Isig,Ierror)
-  !>
-  !  Compute normalized Legendre polynomials.
+  !> Compute normalized Legendre polynomials.
   !***
   ! **Library:**   SLATEC
   !***
@@ -39,16 +38,16 @@ SUBROUTINE DXNRMP(Nu,Mu1,Mu2,Darg,Mode,Dpn,Ipn,Isig,Ierror)
   !
   !        The input values to DXNRMP are NU, MU1, MU2, DARG, and MODE.
   !        These must satisfy
-  !          1. NU .GE. 0 specifies the degree of the normalized Legendre
+  !          1. NU >= 0 specifies the degree of the normalized Legendre
   !             polynomial that is wanted.
-  !          2. MU1 .GE. 0 specifies the lowest-order normalized Legendre
+  !          2. MU1 >= 0 specifies the lowest-order normalized Legendre
   !             polynomial that is wanted.
-  !          3. MU2 .GE. MU1 specifies the highest-order normalized Leg-
+  !          3. MU2 >= MU1 specifies the highest-order normalized Leg-
   !             endre polynomial that is wanted.
-  !         4a. MODE = 1 and -1.0D0 .LE. DARG .LE. 1.0D0 specifies that
+  !         4a. MODE = 1 and -1.0D0 <= DARG <= 1.0D0 specifies that
   !             Normalized Legendre(NU, MU, DARG) is wanted for MU = MU1,
   !             MU1 + 1, ..., MU2.
-  !         4b. MODE = 2 and -3.14159... .LT. DARG .LT. 3.14159... spec-
+  !         4b. MODE = 2 and -3.14159... < DARG < 3.14159... spec-
   !             ifies that Normalized Legendre(NU, MU, COS(DARG)) is
   !             wanted for MU = MU1, MU1 + 1, ..., MU2.
   !
@@ -73,7 +72,7 @@ SUBROUTINE DXNRMP(Nu,Mu1,Mu2,Darg,Mode,Dpn,Ipn,Isig,Ierror)
   !        IPN(I) = 0 the value of the normalized Legendre polynomial is
   !        contained entirely in DPN(I) and subsequent double-precision
   !        computations can be performed without further consideration of
-  !        extended-range arithmetic. However, if IPN(I) .NE. 0 the corre-
+  !        extended-range arithmetic. However, if IPN(I) /= 0 the corre-
   !        sponding value of the normalized Legendre polynomial cannot be
   !        represented in double-precision because of overflow or under-
   !        flow. THE USER MUST TEST IPN(I) IN HIS/HER PROGRAM. In the case
@@ -89,10 +88,10 @@ SUBROUTINE DXNRMP(Nu,Mu1,Mu2,Darg,Mode,Dpn,Ipn,Isig,Ierror)
   !              J = K
   !              DO 20 I = 1, K
   !              CALL DXCON(DPN(I), IPN(I),IERROR)
-  !              IF (IERROR.NE.0) RETURN
+  !              IF(IERROR/=0) RETURN
   !              PRINT 10, DPN(I), IPN(I)
   !           10 FORMAT(1X, D30.18, I15)
-  !              IF ((IPN(I) .EQ. 0) .OR. (J .LT. K)) GO TO 20
+  !              IF((IPN(I) = 0) .OR. (J < K)) GO TO 20
   !              J = I - 1
   !           20 CONTINUE
   !        will print all computed values and determine the largest J
@@ -136,34 +135,34 @@ SUBROUTINE DXNRMP(Nu,Mu1,Mu2,Darg,Mode,Dpn,Ipn,Isig,Ierror)
   !           CALLs to XERROR changed to CALLs to XERMSG.  (WRB)
   !   920127  Revised PURPOSE section of prologue.  (DWL)
   USE service, ONLY : XERMSG
-  INTEGER Nu, Mu1, Mu2, Mode, Ipn(Mu2-Mu1+1), Isig, Ierror
+  INTEGER :: Nu, Mu1, Mu2, Mode, Ipn(Mu2-Mu1+1), Isig, Ierror
   REAL(DP) :: Darg, Dpn(Mu2-Mu1+1)
-  INTEGER i, ip, ip1, ip2, j, k, mu
+  INTEGER :: i, ip, ip1, ip2, j, k, mu
   REAL(DP) :: c1, c2, p, p1, p2, p3, s, sx, t, tx, x, dk
   ! CALL DXSET TO INITIALIZE EXTENDED-RANGE ARITHMETIC (SEE DXSET
   ! LISTING FOR DETAILS)
   !* FIRST EXECUTABLE STATEMENT  DXNRMP
   Ierror = 0
   CALL DXSET(0,0,0.0D0,0,Ierror)
-  IF ( Ierror/=0 ) RETURN
+  IF( Ierror/=0 ) RETURN
   !
   !        TEST FOR PROPER INPUT VALUES.
   !
-  IF ( Nu<0 ) GOTO 300
-  IF ( Mu1<0 ) GOTO 300
-  IF ( Mu1>Mu2 ) GOTO 300
-  IF ( Nu==0 ) GOTO 200
-  IF ( Mode<1.OR.Mode>2 ) GOTO 300
-  IF ( Mode==2 ) THEN
-    IF ( ABS(Darg)>4.0D0*ATAN(1.0D0) ) GOTO 400
-    IF ( Darg==0.0D0 ) GOTO 200
+  IF( Nu<0 ) GOTO 300
+  IF( Mu1<0 ) GOTO 300
+  IF( Mu1>Mu2 ) GOTO 300
+  IF( Nu==0 ) GOTO 200
+  IF( Mode<1 .OR. Mode>2 ) GOTO 300
+  IF( Mode==2 ) THEN
+    IF( ABS(Darg)>4.0D0*ATAN(1.0D0) ) GOTO 400
+    IF( Darg==0.0D0 ) GOTO 200
     x = COS(Darg)
     sx = ABS(SIN(Darg))
     tx = x/sx
     Isig = INT( LOG10(2.0D0*Nu*(5.0D0+ABS(Darg*tx))) )
   ELSE
-    IF ( ABS(Darg)>1.0D0 ) GOTO 400
-    IF ( ABS(Darg)==1.0D0 ) GOTO 200
+    IF( ABS(Darg)>1.0D0 ) GOTO 400
+    IF( ABS(Darg)==1.0D0 ) GOTO 200
     x = Darg
     sx = SQRT((1.0D0+ABS(x))*((0.5D0-ABS(x))+0.5D0))
     tx = x/sx
@@ -175,14 +174,14 @@ SUBROUTINE DXNRMP(Nu,Mu1,Mu2,Darg,Mode,Dpn,Ipn,Isig,Ierror)
   mu = Mu2
   i = Mu2 - Mu1 + 1
   !
-  !        IF MU.GT.NU, NORMALIZED LEGENDRE(NU,MU,X)=0.
+  !        IF MU>NU, NORMALIZED LEGENDRE(NU,MU,X)=0.
   !
-  DO WHILE ( mu>Nu )
+  DO WHILE( mu>Nu )
     Dpn(i) = 0.0D0
     Ipn(i) = 0
     i = i - 1
     mu = mu - 1
-    IF ( i<=0 ) THEN
+    IF( i<=0 ) THEN
       Isig = 0
       RETURN
     END IF
@@ -204,19 +203,19 @@ SUBROUTINE DXNRMP(Nu,Mu1,Mu2,Darg,Mode,Dpn,Ipn,Isig,Ierror)
     p3 = ((dk+1.0D0)/dk)*p3
     p2 = p2*sx
     CALL DXADJ(p2,ip2,Ierror)
-    IF ( Ierror/=0 ) RETURN
+    IF( Ierror/=0 ) RETURN
     dk = dk + 2.0D0
   END DO
   p2 = p2*SQRT(p3)
   CALL DXADJ(p2,ip2,Ierror)
-  IF ( Ierror/=0 ) RETURN
+  IF( Ierror/=0 ) RETURN
   s = 2.0D0*tx
   t = 1.0D0/Nu
-  IF ( Mu2>=Nu ) THEN
+  IF( Mu2>=Nu ) THEN
     Dpn(i) = p2
     Ipn(i) = ip2
     i = i - 1
-    IF ( i==0 ) GOTO 500
+    IF( i==0 ) GOTO 500
   END IF
   !
   !        RECURRENCE PROCESS
@@ -226,22 +225,22 @@ SUBROUTINE DXNRMP(Nu,Mu1,Mu2,Darg,Mode,Dpn,Ipn,Isig,Ierror)
   c2 = s*p*c1*p2
   c1 = -SQRT((1.0D0+p+t)*(1.0D0-p))*c1*p1
   CALL DXADD(c2,ip2,c1,ip1,p,ip,Ierror)
-  IF ( Ierror/=0 ) RETURN
+  IF( Ierror/=0 ) RETURN
   mu = mu - 1
-  IF ( mu<=Mu2 ) THEN
+  IF( mu<=Mu2 ) THEN
     !
     !        STORE IN ARRAY DPN FOR RETURN TO CALLING ROUTINE.
     !
     Dpn(i) = p
     Ipn(i) = ip
     i = i - 1
-    IF ( i==0 ) GOTO 500
+    IF( i==0 ) GOTO 500
   END IF
   p1 = p2
   ip1 = ip2
   p2 = p
   ip2 = ip
-  IF ( mu>Mu1 ) GOTO 100
+  IF( mu>Mu1 ) GOTO 100
   GOTO 500
   !
   !        SPECIAL CASE WHEN X=-1 OR +1, OR NU=0.
@@ -252,13 +251,13 @@ SUBROUTINE DXNRMP(Nu,Mu1,Mu2,Darg,Mode,Dpn,Ipn,Isig,Ierror)
     Ipn(i) = 0
   END DO
   Isig = 0
-  IF ( Mu1<=0 ) THEN
+  IF( Mu1<=0 ) THEN
     Isig = 1
     Dpn(1) = SQRT(Nu+0.5D0)
     Ipn(1) = 0
-    IF ( MOD(Nu,2)/=0 ) THEN
-      IF ( Mode/=1.OR.Darg/=1.0D0 ) THEN
-        IF ( Mode/=2 ) Dpn(1) = -Dpn(1)
+    IF( MOD(Nu,2)/=0 ) THEN
+      IF( Mode/=1 .OR. Darg/=1.0D0 ) THEN
+        IF( Mode/=2 ) Dpn(1) = -Dpn(1)
       END IF
     END IF
   END IF
@@ -278,7 +277,7 @@ SUBROUTINE DXNRMP(Nu,Mu1,Mu2,Darg,Mode,Dpn,Ipn,Isig,Ierror)
   500  k = Mu2 - Mu1 + 1
   DO i = 1, k
     CALL DXRED(Dpn(i),Ipn(i),Ierror)
-    IF ( Ierror/=0 ) RETURN
+    IF( Ierror/=0 ) RETURN
   END DO
   RETURN
 END SUBROUTINE DXNRMP

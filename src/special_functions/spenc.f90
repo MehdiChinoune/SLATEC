@@ -1,7 +1,6 @@
 !** SPENC
 REAL(SP) FUNCTION SPENC(X)
-  !>
-  !  Compute a form of Spence's integral due to K. Mitchell.
+  !> Compute a form of Spence's integral due to K. Mitchell.
   !***
   ! **Library:**   SLATEC (FNLIB)
   !***
@@ -17,7 +16,7 @@ REAL(SP) FUNCTION SPENC(X)
   !
   ! Evaluate a form of Spence's function defined by
   !        integral from 0 to X of  -LOG(1-Y)/Y  DY.
-  ! For ABS(X) .LE. 1, the uniformly convergent expansion
+  ! For ABS(X) <= 1, the uniformly convergent expansion
   !        SPENC = sum K=1,infinity  X**K / K**2     is valid.
   !
   ! Spence's function can be used to evaluate much more general integral
@@ -61,53 +60,53 @@ REAL(SP) FUNCTION SPENC(X)
   REAL(SP), PARAMETER ::  pi26 = 1.644934066848226E0
   LOGICAL, SAVE :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  SPENC
-  IF ( first ) THEN
+  IF( first ) THEN
     nspenc = INITS(spencs,19,0.1*R1MACH(3))
     first = .FALSE.
   END IF
   !
-  IF ( X>2.0 ) THEN
+  IF( X>2.0 ) THEN
     !
-    ! X .GT. 2.0
+    ! X > 2.0
     !
     SPENC = 2.0*pi26 - 0.5*LOG(X)**2
-    IF ( X<xbig ) SPENC = SPENC - (1.0+CSEVL(4.0/X-1.0,spencs,nspenc))/X
+    IF( X<xbig ) SPENC = SPENC - (1.0+CSEVL(4.0/X-1.0,spencs,nspenc))/X
     RETURN
-  ELSEIF ( X<=1.0 ) THEN
-    IF ( X>0.5 ) THEN
+  ELSEIF( X<=1.0 ) THEN
+    IF( X>0.5 ) THEN
       !
-      ! 0.5 .LT. X .LE. 1.0
+      ! 0.5 < X <= 1.0
       !
       SPENC = pi26
-      IF ( X/=1.0 ) SPENC = pi26 - LOG(X)*LOG(1.0-X) - (1.0-X)&
+      IF( X/=1.0 ) SPENC = pi26 - LOG(X)*LOG(1.0-X) - (1.0-X)&
         *(1.0+CSEVL(4.0*(1.0-X)-1.0,spencs,nspenc))
       RETURN
-    ELSEIF ( X>=0.0 ) THEN
+    ELSEIF( X>=0.0 ) THEN
       !
-      ! 0.0 .LE. X .LE. 0.5
+      ! 0.0 <= X <= 0.5
       !
       SPENC = X*(1.0+CSEVL(4.0*X-1.0,spencs,nspenc))
       RETURN
-    ELSEIF ( X>(-1.) ) THEN
+    ELSEIF( X>(-1.) ) THEN
       !
-      ! -1.0 .LT. X .LT. 0.0
+      ! -1.0 < X < 0.0
       !
       SPENC = -0.5*LOG(1.0-X)&
         **2 - X*(1.0+CSEVL(4.0*X/(X-1.0)-1.0,spencs,nspenc))/(X-1.0)
       RETURN
     ELSE
       !
-      ! HERE IF X .LE. -1.0
+      ! HERE IF X <= -1.0
       !
       aln = LOG(1.0-X)
       SPENC = -pi26 - 0.5*aln*(2.0*LOG(-X)-aln)
-      IF ( X>(-xbig) ) SPENC = SPENC + &
+      IF( X>(-xbig) ) SPENC = SPENC + &
         (1.0+CSEVL(4.0/(1.0-X)-1.0,spencs,nspenc))/(1.0-X)
       RETURN
     END IF
   END IF
   !
-  ! 1.0 .LT. X .LE. 2.0
+  ! 1.0 < X <= 2.0
   !
   SPENC = pi26 - 0.5*LOG(X)*LOG((X-1.0)**2/X) + (X-1.)&
     *(1.0+CSEVL(4.0*(X-1.)/X-1.0,spencs,nspenc))/X

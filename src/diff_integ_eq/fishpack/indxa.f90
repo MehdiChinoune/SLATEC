@@ -1,7 +1,6 @@
 !** INDXA
 SUBROUTINE INDXA(I,Ir,Idxa,Na)
-  !>
-  !  Subsidiary to BLKTRI
+  !> Subsidiary to BLKTRI
   !***
   ! **Library:**   SLATEC
   !***
@@ -20,9 +19,9 @@ SUBROUTINE INDXA(I,Ir,Idxa,Na)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   USE CBLKT, ONLY : nm_com
-  INTEGER I, Idxa, Ir, Na
+  INTEGER :: I, Idxa, Ir, Na
   !* FIRST EXECUTABLE STATEMENT  INDXA
   Na = 2**Ir
   Idxa = I - Na + 1
-  IF ( I>nm_com ) Na = 0
+  IF( I>nm_com ) Na = 0
 END SUBROUTINE INDXA

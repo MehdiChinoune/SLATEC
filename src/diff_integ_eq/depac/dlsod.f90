@@ -1,8 +1,7 @@
 !** DLSOD
 SUBROUTINE DLSOD(DF,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,&
     Acor,Wm,Iwm,DJAC,Intout,Tstop,Tolfac,Delsgn)
-  !>
-  !  Subsidiary to DDEBDF
+  !> Subsidiary to DDEBDF
   !***
   ! **Library:**   SLATEC
   !***
@@ -72,7 +71,7 @@ SUBROUTINE DLSOD(DF,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,&
   !     ..................................................................
   !
   !* FIRST EXECUTABLE STATEMENT  DLSOD
-  IF ( ibegin_com==0 ) THEN
+  IF( ibegin_com==0 ) THEN
     !
     !        ON THE FIRST CALL, PERFORM INITIALIZATION --
     !        DEFINE THE MACHINE UNIT ROUNDOFF QUANTITY  U  BY CALLING THE
@@ -98,10 +97,10 @@ SUBROUTINE DLSOD(DF,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,&
     maxord_com = 5
     !                          -- SET ITERATION MATRIX INDICATOR
     !
-    IF ( ijac_com==0.AND.iband_com==0 ) miter_com = 2
-    IF ( ijac_com==1.AND.iband_com==0 ) miter_com = 1
-    IF ( ijac_com==0.AND.iband_com==1 ) miter_com = 5
-    IF ( ijac_com==1.AND.iband_com==1 ) miter_com = 4
+    IF( ijac_com==0 .AND. iband_com==0 ) miter_com = 2
+    IF( ijac_com==1 .AND. iband_com==0 ) miter_com = 1
+    IF( ijac_com==0 .AND. iband_com==1 ) miter_com = 5
+    IF( ijac_com==1 .AND. iband_com==1 ) miter_com = 4
     !
     !                          -- SET OTHER NECESSARY ITEMS IN COMMON BLOCK
     n_com = Neq
@@ -118,7 +117,7 @@ SUBROUTINE DLSOD(DF,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,&
   !
   !      CHECK VALIDITY OF INPUT PARAMETERS ON EACH ENTRY
   !
-  IF ( Neq<1 ) THEN
+  IF( Neq<1 ) THEN
     WRITE (xern1,'(I8)') Neq
     CALL XERMSG('DLSOD',&
       'IN DDEBDF, THE NUMBER OF EQUATIONS MUST BE A POSITIVE INTEGER.$$YOU HAVE CALLED THE CODE WITH NEQ = '//xern1,6,1)
@@ -128,8 +127,8 @@ SUBROUTINE DLSOD(DF,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,&
   nrtolp = 0
   natolp = 0
   DO k = 1, Neq
-    IF ( nrtolp<=0 ) THEN
-      IF ( Rtol(k)<0. ) THEN
+    IF( nrtolp<=0 ) THEN
+      IF( Rtol(k)<0. ) THEN
         WRITE (xern1,'(I8)') k
         WRITE (xern3,'(1PE15.6)') Rtol(k)
         CALL XERMSG('DLSOD','IN DDEBDF, THE RELATIVE ERROR TOLERANCES&
@@ -137,14 +136,14 @@ SUBROUTINE DLSOD(DF,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,&
           & RTOL('//xern1//') = '//xern3//'$$IN THE CASE OF VECTOR ERROR&
           & TOLERANCES, NO FURTHER CHECKING OF RTOL COMPONENTS IS DONE.',7,1)
         Idid = -33
-        IF ( natolp>0 ) EXIT
+        IF( natolp>0 ) EXIT
         nrtolp = 1
-      ELSEIF ( natolp>0 ) THEN
+      ELSEIF( natolp>0 ) THEN
         GOTO 50
       END IF
     END IF
     !
-    IF ( Atol(k)<0. ) THEN
+    IF( Atol(k)<0. ) THEN
       WRITE (xern1,'(I8)') k
       WRITE (xern3,'(1PE15.6)') Atol(k)
       CALL XERMSG('DLSOD','IN DDEBDF, THE ABSOLUTE ERROR TOLERANCES&
@@ -152,14 +151,14 @@ SUBROUTINE DLSOD(DF,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,&
         //xern3// '$$IN THE CASE OF VECTOR ERROR TOLERANCES,&
         & NO FURTHER CHECKING OF ATOL COMPONENTS IS DONE.',8,1)
       Idid = -33
-      IF ( nrtolp>0 ) EXIT
+      IF( nrtolp>0 ) EXIT
       natolp = 1
     END IF
-    50  IF ( itol_com==0 ) EXIT
+    50  IF( itol_com==0 ) EXIT
   END DO
   !
-  IF ( itstop_com==1 ) THEN
-    IF ( SIGN(1.0D0,Tout-T)/=SIGN(1.0D0,Tstop-T).OR.ABS(Tout-T)>ABS(Tstop-T)&
+  IF( itstop_com==1 ) THEN
+    IF( SIGN(1.0D0,Tout-T)/=SIGN(1.0D0,Tstop-T) .OR. ABS(Tout-T)>ABS(Tstop-T)&
         ) THEN
       WRITE (xern3,'(1PE15.6)') Tout
       WRITE (xern4,'(1PE15.6)') Tstop
@@ -172,8 +171,8 @@ SUBROUTINE DLSOD(DF,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,&
   !
   !        CHECK SOME CONTINUATION POSSIBILITIES
   !
-  IF ( init_com/=0 ) THEN
-    IF ( T==Tout ) THEN
+  IF( init_com/=0 ) THEN
+    IF( T==Tout ) THEN
       WRITE (xern3,'(1PE15.6)') T
       CALL XERMSG('DLSOD',&
         'IN DDEBDF, YOU HAVE CALLED THE CODE WITH T = TOUT = '//&
@@ -181,7 +180,7 @@ SUBROUTINE DLSOD(DF,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,&
       Idid = -33
     END IF
     !
-    IF ( T/=told_com ) THEN
+    IF( T/=told_com ) THEN
       WRITE (xern3,'(1PE15.6)') told_com
       WRITE (xern4,'(1PE15.6)') T
       CALL XERMSG('DLSOD',&
@@ -190,8 +189,8 @@ SUBROUTINE DLSOD(DF,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,&
       Idid = -33
     END IF
     !
-    IF ( init_com/=1 ) THEN
-      IF ( Delsgn*(Tout-T)<0.0D0 ) THEN
+    IF( init_com/=1 ) THEN
+      IF( Delsgn*(Tout-T)<0.0D0 ) THEN
         WRITE (xern3,'(1PE15.6)') Tout
         CALL XERMSG('DLSOD',&
           'IN DDEBDF, BY CALLING THE CODE WITH TOUT = '//xern3//&
@@ -201,8 +200,8 @@ SUBROUTINE DLSOD(DF,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,&
     END IF
   END IF
   !
-  IF ( Idid==(-33) ) THEN
-    IF ( iquit_com/=(-33) ) THEN
+  IF( Idid==(-33) ) THEN
+    IF( iquit_com/=(-33) ) THEN
       !                       INVALID INPUT DETECTED
       iquit_com = -33
       ibegin_com = -1
@@ -223,15 +222,15 @@ SUBROUTINE DLSOD(DF,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,&
   !             THIS METHOD AND MACHINE
   !
   DO k = 1, Neq
-    IF ( Rtol(k)+Atol(k)<=0.0D0 ) THEN
+    IF( Rtol(k)+Atol(k)<=0.0D0 ) THEN
       Rtol(k) = 100.0D0*uround_com
       Idid = -2
     END IF
     !     ...EXIT
-    IF ( itol_com==0 ) EXIT
+    IF( itol_com==0 ) EXIT
   END DO
   !
-  IF ( Idid/=(-2) ) THEN
+  IF( Idid/=(-2) ) THEN
     !        BEGIN BLOCK PERMITTING ...EXITS TO 450
     !           BEGIN BLOCK PERMITTING ...EXITS TO 430
     !              BEGIN BLOCK PERMITTING ...EXITS TO 260
@@ -245,7 +244,7 @@ SUBROUTINE DLSOD(DF,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,&
     !                           DIRECTION NOT YET SET INIT=2 MEANS NO
     !                           FURTHER INITIALIZATION REQUIRED
     !
-    IF ( init_com==0 ) THEN
+    IF( init_com==0 ) THEN
       !
       !                    ................................................
       !
@@ -257,7 +256,7 @@ SUBROUTINE DLSOD(DF,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,&
       CALL DF(T,Y,Yh(:,2))
       nfe_com = 1
       !                 ...EXIT
-      IF ( T==Tout ) THEN
+      IF( T==Tout ) THEN
         Idid = 2
         DO l = 1, Neq
           Ypout(l) = Yh(l,2)
@@ -267,7 +266,7 @@ SUBROUTINE DLSOD(DF,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,&
         RETURN
       END IF
       !                 ......EXIT
-    ELSEIF ( init_com/=1 ) THEN
+    ELSEIF( init_com/=1 ) THEN
       GOTO 100
       !              .........EXIT
     END IF
@@ -279,9 +278,9 @@ SUBROUTINE DLSOD(DF,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,&
     !
     ltol = 1
     DO l = 1, Neq
-      IF ( itol_com==1 ) ltol = l
+      IF( itol_com==1 ) ltol = l
       tol = Rtol(ltol)*ABS(Y(l)) + Atol(ltol)
-      IF ( tol==0.0D0 ) GOTO 200
+      IF( tol==0.0D0 ) GOTO 200
       Ewt(l) = tol
     END DO
     !
@@ -319,13 +318,13 @@ SUBROUTINE DLSOD(DF,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,&
   !
   !                 BEGIN BLOCK PERMITTING ...EXITS TO 400
   !                    BEGIN BLOCK PERMITTING ...EXITS TO 380
-  DO WHILE ( ABS(tn_com-T)<absdel )
+  DO WHILE( ABS(tn_com-T)<absdel )
     !
     !                       IF CANNOT GO PAST TSTOP AND SUFFICIENTLY
     !                       CLOSE, EXTRAPOLATE AND RETURN
     !
-    IF ( itstop_com==1 ) THEN
-      IF ( ABS(Tstop-tn_com)<100.0D0*uround_com*ABS(tn_com) ) THEN
+    IF( itstop_com==1 ) THEN
+      IF( ABS(Tstop-tn_com)<100.0D0*uround_com*ABS(tn_com) ) THEN
         dt = Tout - tn_com
         DO l = 1, Neq
           Y(l) = Yh(l,1) + (dt/h_com)*Yh(l,2)
@@ -340,7 +339,7 @@ SUBROUTINE DLSOD(DF,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,&
       END IF
     END IF
     !
-    IF ( .NOT.(iinteg_com==0.OR..NOT.Intout) ) THEN
+    IF( .NOT. (iinteg_com==0 .OR. .NOT. Intout) ) THEN
       !
       !                          INTERMEDIATE-OUTPUT MODE
       !
@@ -351,7 +350,7 @@ SUBROUTINE DLSOD(DF,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,&
       !
       !                            MONITOR NUMBER OF STEPS ATTEMPTED
       !
-    ELSEIF ( ksteps_com<=maxnum ) THEN
+    ELSEIF( ksteps_com<=maxnum ) THEN
       !
       !                          ..........................................
       !
@@ -359,18 +358,18 @@ SUBROUTINE DLSOD(DF,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,&
       !
       hmin_com = 100.0D0*uround_com*ABS(tn_com)
       ha = MAX(ABS(h_com),hmin_com)
-      IF ( itstop_com==1 ) ha = MIN(ha,ABS(Tstop-tn_com))
+      IF( itstop_com==1 ) ha = MIN(ha,ABS(Tstop-tn_com))
       h_com = SIGN(ha,h_com)
       ltol = 1
       DO l = 1, Neq
-        IF ( itol_com==1 ) ltol = l
+        IF( itol_com==1 ) ltol = l
         Ewt(l) = Rtol(ltol)*ABS(Yh(l,1)) + Atol(ltol)
         !                    .........EXIT
-        IF ( Ewt(l)<=0.0D0 ) GOTO 200
+        IF( Ewt(l)<=0.0D0 ) GOTO 200
       END DO
       Tolfac = uround_com*DVNRMS(Neq,Yh,Ewt)
       !                 .........EXIT
-      IF ( Tolfac<=1.0D0 ) THEN
+      IF( Tolfac<=1.0D0 ) THEN
         !
         !                 ...................................................
         !
@@ -380,11 +379,11 @@ SUBROUTINE DLSOD(DF,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,&
         !
         jstart_com = -2
         Intout = .TRUE.
-        IF ( kflag_com/=0 ) THEN
+        IF( kflag_com/=0 ) THEN
           !
           !              ......................................................
           !
-          IF ( kflag_com==-1 ) THEN
+          IF( kflag_com==-1 ) THEN
             !
             !                 REPEATED ERROR TEST FAILURES
             Idid = -7
@@ -404,7 +403,7 @@ SUBROUTINE DLSOD(DF,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,&
         Tolfac = 2.0D0*Tolfac
         Rtol(1) = Tolfac*Rtol(1)
         Atol(1) = Tolfac*Atol(1)
-        IF ( itol_com/=0 ) THEN
+        IF( itol_com/=0 ) THEN
           DO l = 2, Neq
             Rtol(l) = Tolfac*Rtol(l)
             Atol(l) = Tolfac*Atol(l)
@@ -427,7 +426,7 @@ SUBROUTINE DLSOD(DF,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,&
   CALL DINTYD(Tout,0,Yh,Neq,Y,intflg)
   CALL DINTYD(Tout,1,Yh,Neq,Ypout,intflg)
   Idid = 3
-  IF ( tn_com==Tout ) THEN
+  IF( tn_com==Tout ) THEN
     Idid = 2
     Intout = .FALSE.
   END IF

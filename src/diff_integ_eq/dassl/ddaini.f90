@@ -1,8 +1,7 @@
 !** DDAINI
 SUBROUTINE DDAINI(X,Y,Yprime,Neq,RES,JAC,H,Wt,Idid,Phi,Delta,E,&
     Wm,Iwm,Hmin,Uround,Nonneg,Ntemp)
-  !>
-  !  Initialization routine for DDASSL.
+  !> Initialization routine for DDASSL.
   !***
   ! **Library:**   SLATEC (DASSL)
   !***
@@ -130,7 +129,7 @@ SUBROUTINE DDAINI(X,Y,Yprime,Neq,RES,JAC,H,Wt,Idid,Phi,Delta,E,&
     ires = 0
     !
     CALL RES(X,Y,Yprime,Delta,ires)
-    IF ( ires<0 ) THEN
+    IF( ires<0 ) THEN
       !
       !
       !     EXITS FROM CORRECTOR LOOP.
@@ -139,17 +138,17 @@ SUBROUTINE DDAINI(X,Y,Yprime,Neq,RES,JAC,H,Wt,Idid,Phi,Delta,E,&
       !
       !
       !     EVALUATE THE ITERATION MATRIX
-      IF ( jcalc==-1 ) THEN
+      IF( jcalc==-1 ) THEN
         Iwm(LNJE) = Iwm(LNJE) + 1
         jcalc = 0
         CALL DDAJAC(Neq,X,Y,Yprime,Delta,cj,H,ier,Wt,E,Wm,Iwm,RES,ires,&
           Uround,JAC,Ntemp)
         !
         s = 1000000.D0
-        IF ( ires<0 ) THEN
+        IF( ires<0 ) THEN
           convgd = .FALSE.
           EXIT
-        ELSEIF ( ier/=0 ) THEN
+        ELSEIF( ier/=0 ) THEN
           convgd = .FALSE.
           EXIT
         ELSE
@@ -178,12 +177,12 @@ SUBROUTINE DDAINI(X,Y,Yprime,Neq,RES,JAC,H,Wt,Idid,Phi,Delta,E,&
       !     TEST FOR CONVERGENCE OF THE ITERATION.
       !
       delnrm = DDANRM(Neq,Delta,Wt)
-      IF ( delnrm>100.D0*Uround*ynorm ) THEN
+      IF( delnrm>100.D0*Uround*ynorm ) THEN
         !
-        IF ( m>0 ) THEN
+        IF( m>0 ) THEN
           !
           rate = (delnrm/oldnrm)**(1.0D0/m)
-          IF ( rate>0.90D0 ) THEN
+          IF( rate>0.90D0 ) THEN
             convgd = .FALSE.
             EXIT
           ELSE
@@ -193,7 +192,7 @@ SUBROUTINE DDAINI(X,Y,Yprime,Neq,RES,JAC,H,Wt,Idid,Phi,Delta,E,&
           oldnrm = delnrm
         END IF
         !
-        IF ( s*delnrm>0.33D0 ) THEN
+        IF( s*delnrm>0.33D0 ) THEN
           !
           !
           !     THE CORRECTOR HAS NOT YET CONVERGED. UPDATE
@@ -203,12 +202,12 @@ SUBROUTINE DDAINI(X,Y,Yprime,Neq,RES,JAC,H,Wt,Idid,Phi,Delta,E,&
           !     ITERATION MATRIX.
           !
           m = m + 1
-          IF ( m>=maxit ) THEN
+          IF( m>=maxit ) THEN
             convgd = .FALSE.
             EXIT
           ELSE
             !
-            IF ( (m/mjac)*mjac==m ) jcalc = -1
+            IF( (m/mjac)*mjac==m ) jcalc = -1
             CYCLE
           END IF
         END IF
@@ -217,13 +216,13 @@ SUBROUTINE DDAINI(X,Y,Yprime,Neq,RES,JAC,H,Wt,Idid,Phi,Delta,E,&
       !
       !     THE ITERATION HAS CONVERGED.
       !     CHECK NONNEGATIVITY CONSTRAINTS
-      IF ( Nonneg/=0 ) THEN
+      IF( Nonneg/=0 ) THEN
         DO i = 1, Neq
           Delta(i) = MIN(Y(i),0.0D0)
         END DO
         !
         delnrm = DDANRM(Neq,Delta,Wt)
-        IF ( delnrm>0.33D0 ) THEN
+        IF( delnrm>0.33D0 ) THEN
           convgd = .FALSE.
         ELSE
           !
@@ -236,7 +235,7 @@ SUBROUTINE DDAINI(X,Y,Yprime,Neq,RES,JAC,H,Wt,Idid,Phi,Delta,E,&
     END IF
     EXIT
   END DO
-  IF ( convgd ) THEN
+  IF( convgd ) THEN
     !
     !
     !
@@ -251,7 +250,7 @@ SUBROUTINE DDAINI(X,Y,Yprime,Neq,RES,JAC,H,Wt,Idid,Phi,Delta,E,&
     END DO
     err = DDANRM(Neq,E,Wt)
     !
-    IF ( err<=1.0D0 ) RETURN
+    IF( err<=1.0D0 ) RETURN
   END IF
   !
   !
@@ -270,18 +269,18 @@ SUBROUTINE DDAINI(X,Y,Yprime,Neq,RES,JAC,H,Wt,Idid,Phi,Delta,E,&
     Yprime(i) = Phi(i,2)
   END DO
   !
-  IF ( convgd ) THEN
+  IF( convgd ) THEN
     !
     nef = nef + 1
     r = 0.90D0/(2.0D0*err+0.0001D0)
     r = MAX(0.1D0,MIN(0.5D0,r))
     H = H*r
-    IF ( ABS(H)>=Hmin.AND.nef<10 ) GOTO 100
-  ELSEIF ( ier==0 ) THEN
-    IF ( ires>-2 ) THEN
+    IF( ABS(H)>=Hmin .AND. nef<10 ) GOTO 100
+  ELSEIF( ier==0 ) THEN
+    IF( ires>-2 ) THEN
       ncf = ncf + 1
       H = H*0.25D0
-      IF ( ncf<10.AND.ABS(H)>=Hmin ) GOTO 100
+      IF( ncf<10 .AND. ABS(H)>=Hmin ) GOTO 100
       Idid = -12
       RETURN
     ELSE
@@ -291,7 +290,7 @@ SUBROUTINE DDAINI(X,Y,Yprime,Neq,RES,JAC,H,Wt,Idid,Phi,Delta,E,&
   ELSE
     nsf = nsf + 1
     H = H*0.25D0
-    IF ( nsf<3.AND.ABS(H)>=Hmin ) GOTO 100
+    IF( nsf<3 .AND. ABS(H)>=Hmin ) GOTO 100
     Idid = -12
     RETURN
   END IF

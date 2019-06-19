@@ -5,8 +5,7 @@ MODULE TEST51_MOD
 CONTAINS
   !** FFTQX
   SUBROUTINE FFTQX(Lun,Kprint,Ipass)
-    !>
-    !  Quick check for the NCAR FFT routines.
+    !> Quick check for the NCAR FFT routines.
     !***
     ! **Library:**   SLATEC
     !***
@@ -88,7 +87,7 @@ CONTAINS
       EZFFTB, EZFFTF, EZFFTI, R1MACH, RFFTB, RFFTF, RFFTI, SINQB, SINQF, &
       SINQI, SINT, SINTI
     !     .. Scalar Arguments ..
-    INTEGER Ipass, Kprint, Lun
+    INTEGER :: Ipass, Kprint, Lun
     !     .. Local Scalars ..
     REAL(DP) :: arg, arg1, arg2, dt, summ, sum1, sum2, tpi
     REAL(SP) :: azero, azeroh, cf, cosqbt, cosqfb, cosqft, costfb, costt, &
@@ -96,8 +95,8 @@ CONTAINS
       rftf, rftfb, signn, sinqbt, sinqfb, sinqft, sintfb, sintt, sqrt2
     INTEGER :: i, j, k, modn, n, nm1, nns, np1, ns2, ns2m, nz
     !     .. Local Arrays ..
-    COMPLEX(SP) cx(200), cy(200)
-    REAL(SP) a(100), ah(100), b(100), bh(100), w(2000), x(200), xh(200), y(200)
+    COMPLEX(SP) :: cx(200), cy(200)
+    REAL(SP) :: a(100), ah(100), b(100), bh(100), w(2000), x(200), xh(200), y(200)
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, CABS, CMPLX, COS, MAX, MOD, SIN, SQRT
     !     .. Data statements ..
@@ -107,13 +106,13 @@ CONTAINS
     sqrt2 = SQRT(2.0)
     errmax = 2.0*SQRT(R1MACH(4))
     nns = 7
-    IF ( Kprint>=2 ) WRITE (Lun,99001)
+    IF( Kprint>=2 ) WRITE (Lun,99001)
     !
     99001 FORMAT ('1'/' FFT QUICK CHECK')
     Ipass = 1
     DO nz = 1, nns
       n = nd(nz)
-      IF ( Kprint>=2 ) WRITE (Lun,99002) n
+      IF( Kprint>=2 ) WRITE (Lun,99002) n
       99002 FORMAT (/' Test FFT routines with a sequence of length ',I3)
       modn = MOD(n,2)
       np1 = n + 1
@@ -129,7 +128,7 @@ CONTAINS
       CALL RFFTI(n,w)
       dt = (pi+pi)/n
       ns2 = (n+1)/2
-      IF ( ns2>=2 ) THEN
+      IF( ns2>=2 ) THEN
         DO k = 2, ns2
           sum1 = 0.0D0
           sum2 = 0.0D0
@@ -149,9 +148,9 @@ CONTAINS
         sum1 = sum1 + x(i)
         sum2 = sum2 + x(i+1)
       END DO
-      IF ( modn==1 ) sum1 = sum1 + x(n)
+      IF( modn==1 ) sum1 = sum1 + x(n)
       y(1) = REAL( sum1 + sum2, SP )
-      IF ( modn==0 ) y(n) = REAL( sum1 - sum2, SP )
+      IF( modn==0 ) y(n) = REAL( sum1 - sum2, SP )
       CALL RFFTF(n,x,w)
       rftf = 0.0
       DO i = 1, n
@@ -159,25 +158,25 @@ CONTAINS
         x(i) = xh(i)
       END DO
       rftf = rftf/n
-      IF ( rftf<=errmax ) THEN
-        IF ( Kprint>=3 ) WRITE (Lun,99003)
+      IF( rftf<=errmax ) THEN
+        IF( Kprint>=3 ) WRITE (Lun,99003)
         99003 FORMAT (' Test of RFFTF PASSED')
       ELSE
         Ipass = 0
-        IF ( Kprint>=2 ) WRITE (Lun,99004)
+        IF( Kprint>=2 ) WRITE (Lun,99004)
         99004 FORMAT (' Test of RFFTF FAILED')
       END IF
       signn = 1.0
       DO i = 1, n
         summ = 0.5D0*x(1)
         arg = (i-1)*dt
-        IF ( ns2>=2 ) THEN
+        IF( ns2>=2 ) THEN
           DO k = 2, ns2
             arg1 = (k-1)*arg
             summ = summ + x(2*k-2)*COS(arg1) - x(2*k-1)*SIN(arg1)
           END DO
         END IF
-        IF ( modn==0 ) summ = summ + 0.5D0*signn*x(n)
+        IF( modn==0 ) summ = summ + 0.5D0*signn*x(n)
         y(i) = REAL( summ + summ, SP )
         signn = -signn
       END DO
@@ -189,12 +188,12 @@ CONTAINS
         y(i) = xh(i)
       END DO
       rftb = rftb/n
-      IF ( rftb<=errmax ) THEN
-        IF ( Kprint>=3 ) WRITE (Lun,99005)
+      IF( rftb<=errmax ) THEN
+        IF( Kprint>=3 ) WRITE (Lun,99005)
         99005 FORMAT (' Test of RFFTB PASSED')
       ELSE
         Ipass = 0
-        IF ( Kprint>=2 ) WRITE (Lun,99006)
+        IF( Kprint>=2 ) WRITE (Lun,99006)
         99006 FORMAT (' Test of RFFTB FAILED')
       END IF
       !
@@ -205,12 +204,12 @@ CONTAINS
       DO i = 1, n
         rftfb = MAX(rftfb,ABS(cf*y(i)-x(i)))
       END DO
-      IF ( rftfb<=errmax ) THEN
-        IF ( Kprint>=3 ) WRITE (Lun,99007)
+      IF( rftfb<=errmax ) THEN
+        IF( Kprint>=3 ) WRITE (Lun,99007)
         99007 FORMAT (' Test of RFFTF and RFFTB PASSED')
       ELSE
         Ipass = 0
-        IF ( Kprint>=2 ) WRITE (Lun,99008)
+        IF( Kprint>=2 ) WRITE (Lun,99008)
         99008 FORMAT (' Test of RFFTF and RFFTB FAILED')
       END IF
       !
@@ -238,12 +237,12 @@ CONTAINS
         y(i) = x(i)
       END DO
       sintt = cf*sintt
-      IF ( sintt<=errmax ) THEN
-        IF ( Kprint>=3 ) WRITE (Lun,99009)
+      IF( sintt<=errmax ) THEN
+        IF( Kprint>=3 ) WRITE (Lun,99009)
         99009 FORMAT (' First test of SINT PASSED')
       ELSE
         Ipass = 0
-        IF ( Kprint>=2 ) WRITE (Lun,99010)
+        IF( Kprint>=2 ) WRITE (Lun,99010)
         99010 FORMAT (' First test of SINT FAILED')
       END IF
       CALL SINT(nm1,x,w)
@@ -252,12 +251,12 @@ CONTAINS
       DO i = 1, nm1
         sintfb = MAX(sintfb,ABS(cf*x(i)-y(i)))
       END DO
-      IF ( sintfb<=errmax ) THEN
-        IF ( Kprint>=3 ) WRITE (Lun,99011)
+      IF( sintfb<=errmax ) THEN
+        IF( Kprint>=3 ) WRITE (Lun,99011)
         99011 FORMAT (' Second test of SINT PASSED')
       ELSE
         Ipass = 0
-        IF ( Kprint>=2 ) WRITE (Lun,99012)
+        IF( Kprint>=2 ) WRITE (Lun,99012)
         99012 FORMAT (' Second test of SINT FAILED')
       END IF
       !
@@ -285,12 +284,12 @@ CONTAINS
         y(i) = xh(i)
       END DO
       costt = cf*costt
-      IF ( costt<=errmax ) THEN
-        IF ( Kprint>=3 ) WRITE (Lun,99013)
+      IF( costt<=errmax ) THEN
+        IF( Kprint>=3 ) WRITE (Lun,99013)
         99013 FORMAT (' First test of COST PASSED')
       ELSE
         Ipass = 0
-        IF ( Kprint>=2 ) WRITE (Lun,99014)
+        IF( Kprint>=2 ) WRITE (Lun,99014)
         99014 FORMAT (' First test of COST FAILED')
       END IF
       !
@@ -300,12 +299,12 @@ CONTAINS
       DO i = 1, np1
         costfb = MAX(costfb,ABS(cf*x(i)-y(i)))
       END DO
-      IF ( costfb<=errmax ) THEN
-        IF ( Kprint>=3 ) WRITE (Lun,99015)
+      IF( costfb<=errmax ) THEN
+        IF( Kprint>=3 ) WRITE (Lun,99015)
         99015 FORMAT (' Second test of COST PASSED')
       ELSE
         Ipass = 0
-        IF ( Kprint>=2 ) WRITE (Lun,99016)
+        IF( Kprint>=2 ) WRITE (Lun,99016)
         99016 FORMAT (' Second test of COST FAILED')
       END IF
       !
@@ -332,12 +331,12 @@ CONTAINS
         x(i) = xh(i)
       END DO
       sinqbt = cf*sinqbt
-      IF ( sinqbt<=errmax ) THEN
-        IF ( Kprint>=3 ) WRITE (Lun,99017)
+      IF( sinqbt<=errmax ) THEN
+        IF( Kprint>=3 ) WRITE (Lun,99017)
         99017 FORMAT (' Test of SINQB PASSED')
       ELSE
         Ipass = 0
-        IF ( Kprint>=2 ) WRITE (Lun,99018)
+        IF( Kprint>=2 ) WRITE (Lun,99018)
         99018 FORMAT (' Test of SINQB FAILED')
       END IF
       !
@@ -358,12 +357,12 @@ CONTAINS
         y(i) = xh(i)
         x(i) = xh(i)
       END DO
-      IF ( sinqft<=errmax ) THEN
-        IF ( Kprint>=3 ) WRITE (Lun,99019)
+      IF( sinqft<=errmax ) THEN
+        IF( Kprint>=3 ) WRITE (Lun,99019)
         99019 FORMAT (' Test of SINQF PASSED')
       ELSE
         Ipass = 0
-        IF ( Kprint>=2 ) WRITE (Lun,99020)
+        IF( Kprint>=2 ) WRITE (Lun,99020)
         99020 FORMAT (' Test of SINQF FAILED')
       END IF
       !
@@ -373,12 +372,12 @@ CONTAINS
       DO i = 1, n
         sinqfb = MAX(sinqfb,ABS(cf*y(i)-x(i)))
       END DO
-      IF ( sinqfb<=errmax ) THEN
-        IF ( Kprint>=3 ) WRITE (Lun,99021)
+      IF( sinqfb<=errmax ) THEN
+        IF( Kprint>=3 ) WRITE (Lun,99021)
         99021 FORMAT (' Test of SINQF and SINQB PASSED')
       ELSE
         Ipass = 0
-        IF ( Kprint>=2 ) WRITE (Lun,99022)
+        IF( Kprint>=2 ) WRITE (Lun,99022)
         99022 FORMAT (' Test of SINQF and SINQB FAILED')
       END IF
       !
@@ -403,12 +402,12 @@ CONTAINS
         x(i) = xh(i)
       END DO
       cosqbt = cf*cosqbt
-      IF ( cosqbt<=errmax ) THEN
-        IF ( Kprint>=3 ) WRITE (Lun,99023)
+      IF( cosqbt<=errmax ) THEN
+        IF( Kprint>=3 ) WRITE (Lun,99023)
         99023 FORMAT (' Test of COSQB PASSED')
       ELSE
         Ipass = 0
-        IF ( Kprint>=2 ) WRITE (Lun,99024)
+        IF( Kprint>=2 ) WRITE (Lun,99024)
         99024 FORMAT (' Test of COSQB FAILED')
       END IF
       !
@@ -428,12 +427,12 @@ CONTAINS
         y(i) = xh(i)
       END DO
       cosqft = cf*cosqft
-      IF ( cosqft<=errmax ) THEN
-        IF ( Kprint>=3 ) WRITE (Lun,99025)
+      IF( cosqft<=errmax ) THEN
+        IF( Kprint>=3 ) WRITE (Lun,99025)
         99025 FORMAT (' Test of COSQF PASSED')
       ELSE
         Ipass = 0
-        IF ( Kprint>=2 ) WRITE (Lun,99026)
+        IF( Kprint>=2 ) WRITE (Lun,99026)
         99026 FORMAT (' Test of COSQF FAILED')
       END IF
       !
@@ -443,12 +442,12 @@ CONTAINS
       DO i = 1, n
         cosqfb = MAX(cosqfb,ABS(cf*x(i)-y(i)))
       END DO
-      IF ( cosqfb<=errmax ) THEN
-        IF ( Kprint>=3 ) WRITE (Lun,99027)
+      IF( cosqfb<=errmax ) THEN
+        IF( Kprint>=3 ) WRITE (Lun,99027)
         99027 FORMAT (' Test of COSQF and COSQB PASSED')
       ELSE
         Ipass = 0
-        IF ( Kprint>=2 ) WRITE (Lun,99028)
+        IF( Kprint>=2 ) WRITE (Lun,99028)
         99028 FORMAT (' Test of COSQF and COSQB FAILED')
       END IF
       !
@@ -463,7 +462,7 @@ CONTAINS
       ns2 = (n+1)/2
       cf = 2.0/n
       ns2m = ns2 - 1
-      IF ( ns2m>0 ) THEN
+      IF( ns2m>0 ) THEN
         DO k = 1, ns2m
           sum1 = 0.0D0
           sum2 = 0.0D0
@@ -484,28 +483,28 @@ CONTAINS
         sum1 = sum1 + x(i)
         sum2 = sum2 + x(i+1)
       END DO
-      IF ( modn==1 ) sum1 = sum1 + x(n)
+      IF( modn==1 ) sum1 = sum1 + x(n)
       azero = REAL( 0.5*cf*(sum1+sum2), SP )
-      IF ( modn==0 ) a(ns2) = REAL( 0.5*cf*(sum1-sum2), SP )
+      IF( modn==0 ) a(ns2) = REAL( 0.5*cf*(sum1-sum2), SP )
       CALL EZFFTF(n,x,azeroh,ah,bh,w)
       dezf1 = ABS(azeroh-azero)
-      IF ( modn==0 ) dezf1 = MAX(dezf1,ABS(a(ns2)-ah(ns2)))
-      IF ( ns2m>0 ) THEN
+      IF( modn==0 ) dezf1 = MAX(dezf1,ABS(a(ns2)-ah(ns2)))
+      IF( ns2m>0 ) THEN
         DO i = 1, ns2m
           dezf1 = MAX(dezf1,ABS(ah(i)-a(i)),ABS(bh(i)-b(i)))
         END DO
-        IF ( dezf1<=errmax ) THEN
-          IF ( Kprint>=3 ) WRITE (Lun,99029)
+        IF( dezf1<=errmax ) THEN
+          IF( Kprint>=3 ) WRITE (Lun,99029)
           99029 FORMAT (' Test of EZFFTF PASSED')
         ELSE
           Ipass = 0
-          IF ( Kprint>=2 ) WRITE (Lun,99030)
+          IF( Kprint>=2 ) WRITE (Lun,99030)
           99030 FORMAT (' Test of EZFFTF FAILED')
         END IF
       END IF
       !
       ns2 = n/2
-      IF ( modn==0 ) b(ns2) = 0.0
+      IF( modn==0 ) b(ns2) = 0.0
       DO i = 1, n
         summ = azero
         arg1 = (i-1)*dt
@@ -521,12 +520,12 @@ CONTAINS
         dezb1 = MAX(dezb1,ABS(x(i)-y(i)))
         x(i) = xh(i)
       END DO
-      IF ( dezb1<=errmax ) THEN
-        IF ( Kprint>=3 ) WRITE (Lun,99031)
+      IF( dezb1<=errmax ) THEN
+        IF( Kprint>=3 ) WRITE (Lun,99031)
         99031 FORMAT (' Test of EZFFTB PASSED')
       ELSE
         Ipass = 0
-        IF ( Kprint>=2 ) WRITE (Lun,99032)
+        IF( Kprint>=2 ) WRITE (Lun,99032)
         99032 FORMAT (' Test of EZFFTB FAILED')
       END IF
       !
@@ -536,12 +535,12 @@ CONTAINS
       DO i = 1, n
         dezfb = MAX(dezfb,ABS(x(i)-y(i)))
       END DO
-      IF ( dezfb<=errmax ) THEN
-        IF ( Kprint>=3 ) WRITE (Lun,99033)
+      IF( dezfb<=errmax ) THEN
+        IF( Kprint>=3 ) WRITE (Lun,99033)
         99033 FORMAT (' Test of EZFFTF and EZFFTB PASSED')
       ELSE
         Ipass = 0
-        IF ( Kprint>=2 ) WRITE (Lun,99034)
+        IF( Kprint>=2 ) WRITE (Lun,99034)
         99034 FORMAT (' Test of EZFFTF and EZFFTB FAILED')
       END IF
       !
@@ -567,12 +566,12 @@ CONTAINS
         cx(i) = cx(i)/n
       END DO
       dcfftf = dcfftf/n
-      IF ( dcfftf<=errmax ) THEN
-        IF ( Kprint>=3 ) WRITE (Lun,99035)
+      IF( dcfftf<=errmax ) THEN
+        IF( Kprint>=3 ) WRITE (Lun,99035)
         99035 FORMAT (' Test of CFFTF PASSED')
       ELSE
         Ipass = 0
-        IF ( Kprint>=2 ) WRITE (Lun,99036)
+        IF( Kprint>=2 ) WRITE (Lun,99036)
         99036 FORMAT (' Test of CFFTF FAILED')
       END IF
       !
@@ -590,12 +589,12 @@ CONTAINS
         dcfftb = MAX(dcfftb,ABS(cx(i)-cy(i)))
         cx(i) = cy(i)
       END DO
-      IF ( dcfftb<=errmax ) THEN
-        IF ( Kprint>=3 ) WRITE (Lun,99037)
+      IF( dcfftb<=errmax ) THEN
+        IF( Kprint>=3 ) WRITE (Lun,99037)
         99037 FORMAT (' Test of CFFTB PASSED')
       ELSE
         Ipass = 0
-        IF ( Kprint>=2 ) WRITE (Lun,99038)
+        IF( Kprint>=2 ) WRITE (Lun,99038)
         99038 FORMAT (' Test of CFFTB FAILED')
       END IF
       !
@@ -606,15 +605,15 @@ CONTAINS
       DO i = 1, n
         dcfb = MAX(dcfb,ABS(cf*cx(i)-cy(i)))
       END DO
-      IF ( dcfb<=errmax ) THEN
-        IF ( Kprint>=3 ) WRITE (Lun,99039)
+      IF( dcfb<=errmax ) THEN
+        IF( Kprint>=3 ) WRITE (Lun,99039)
         99039 FORMAT (' Test of CFFTF and CFFTB PASSED')
       ELSE
         Ipass = 0
-        IF ( Kprint>=2 ) WRITE (Lun,99040)
+        IF( Kprint>=2 ) WRITE (Lun,99040)
         99040 FORMAT (' Test of CFFTF and CFFTB FAILED')
       END IF
-      IF ( Kprint>=3 ) THEN
+      IF( Kprint>=3 ) THEN
         WRITE (Lun,99041) n, rftf, rftb, rftfb, sintt, sintfb, costt, &
           costfb, sinqft, sinqbt, sinqfb, cosqft, &
           cosqbt, cosqfb, dezf1, dezb1, dezfb, dcfftf, dcfftb, dcfb
@@ -627,9 +626,9 @@ CONTAINS
           '  CFFTFB ',E10.3)
       END IF
     END DO
-    IF ( Kprint>=2.AND.Ipass==1 ) WRITE (Lun,99042)
+    IF( Kprint>=2 .AND. Ipass==1 ) WRITE (Lun,99042)
     99042 FORMAT (/' ***********FFT ROUTINES PASSED ALL TESTS************')
-    IF ( Kprint>=1.AND.Ipass==0 ) WRITE (Lun,99043)
+    IF( Kprint>=1 .AND. Ipass==0 ) WRITE (Lun,99043)
     99043 FORMAT (/' ***********FFT ROUTINES FAILED SOME TESTS***********')
     RETURN
   END SUBROUTINE FFTQX
@@ -640,8 +639,7 @@ PROGRAM TEST51
   USE slatec, ONLY : I1MACH, XSETF, XSETUN, XERMAX
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
-  !>
-  !  Driver for testing SLATEC subprograms
+  !> Driver for testing SLATEC subprograms
   !***
   ! **Library:**   SLATEC
   !***
@@ -689,7 +687,7 @@ PROGRAM TEST51
   !   890618  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900524  Cosmetic changes to code.  (WRB)
-  INTEGER ipass, kprint, lin, lun, nfail
+  INTEGER :: ipass, kprint, lin, lun, nfail
   !* FIRST EXECUTABLE STATEMENT  TEST51
   lun = I1MACH(2)
   lin = I1MACH(1)
@@ -700,7 +698,7 @@ PROGRAM TEST51
   CALL GET_ARGUMENT(kprint)
   CALL XERMAX(1000)
   CALL XSETUN(lun)
-  IF ( kprint<=1 ) THEN
+  IF( kprint<=1 ) THEN
     CALL XSETF(0)
   ELSE
     CALL XSETF(1)
@@ -709,11 +707,11 @@ PROGRAM TEST51
   !     Test FFT package
   !
   CALL FFTQX(lun,kprint,ipass)
-  IF ( ipass==0 ) nfail = nfail + 1
+  IF( ipass==0 ) nfail = nfail + 1
   !
   !     Write PASS or FAIL message
   !
-  IF ( nfail==0 ) THEN
+  IF( nfail==0 ) THEN
     WRITE (lun,99001)
     99001 FORMAT (/' --------------TEST51 PASSED ALL TESTS----------------')
   ELSE

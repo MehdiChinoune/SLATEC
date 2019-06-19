@@ -1,7 +1,6 @@
 !** HPPERM
 SUBROUTINE HPPERM(Hx,N,Iperm,Work,Ier)
-  !>
-  !  Rearrange a given array according to a prescribed
+  !> Rearrange a given array according to a prescribed
   !            permutation vector.
   !***
   ! **Library:**   SLATEC
@@ -50,13 +49,13 @@ SUBROUTINE HPPERM(Hx,N,Iperm,Work,Ier)
   INTEGER :: i, indx, indx0, istrt
   !* FIRST EXECUTABLE STATEMENT  HPPERM
   Ier = 0
-  IF ( N<1 ) THEN
+  IF( N<1 ) THEN
     Ier = 1
     CALL XERMSG('HPPERM',&
       'The number of values to be rearranged, N, is not positive.',Ier,1)
     RETURN
   END IF
-  IF ( LEN(Work)<LEN(Hx(1)) ) THEN
+  IF( LEN(Work)<LEN(Hx(1)) ) THEN
     Ier = 2
     CALL XERMSG('HPPERM',&
       'The length of the work variable, WORK, is too short.',Ier,1)
@@ -67,8 +66,8 @@ SUBROUTINE HPPERM(Hx,N,Iperm,Work,Ier)
   !
   DO i = 1, N
     indx = ABS(Iperm(i))
-    IF ( (indx>=1).AND.(indx<=N) ) THEN
-      IF ( Iperm(indx)>0 ) THEN
+    IF( (indx>=1) .AND. (indx<=N) ) THEN
+      IF( Iperm(indx)>0 ) THEN
         Iperm(indx) = -Iperm(indx)
         CYCLE
       END IF
@@ -85,11 +84,11 @@ SUBROUTINE HPPERM(Hx,N,Iperm,Work,Ier)
   !     IF IPERM(I) > 0, THEN THE I-TH VALUE IS IN CORRECT LOCATION
   !
   DO istrt = 1, N
-    IF ( Iperm(istrt)<=0 ) THEN
+    IF( Iperm(istrt)<=0 ) THEN
       indx = istrt
       indx0 = indx
       Work = Hx(istrt)
-      DO WHILE ( Iperm(indx)<0 )
+      DO WHILE( Iperm(indx)<0 )
         Hx(indx) = Hx(-Iperm(indx))
         indx0 = indx
         Iperm(indx) = -Iperm(indx)

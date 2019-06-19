@@ -1,7 +1,6 @@
 !** QPSRT
 SUBROUTINE QPSRT(Limit,Last,Maxerr,Ermax,Elist,Iord,Nrmax)
-  !>
-  !  Subsidiary to QAGE, QAGIE, QAGPE, QAGSE, QAWCE, QAWOE and
+  !> Subsidiary to QAGE, QAGIE, QAGPE, QAGSE, QAWCE, QAWOE and
   !            QAWSE
   !***
   ! **Library:**   SLATEC
@@ -57,7 +56,7 @@ SUBROUTINE QPSRT(Limit,Last,Maxerr,Ermax,Elist,Iord,Nrmax)
   !                       to the error estimates, such that
   !                       ELIST(IORD(1)),..., ELIST(IORD(K))
   !                       form a decreasing sequence, with
-  !                       K = LAST if LAST.LE.(LIMIT/2+2), and
+  !                       K = LAST if LAST<=(LIMIT/2+2), and
   !                       K = LIMIT+1-LAST otherwise
   !
   !              NRMAX  - INTEGER
@@ -84,7 +83,7 @@ SUBROUTINE QPSRT(Limit,Last,Maxerr,Ermax,Elist,Iord,Nrmax)
   !           TWO ERROR ESTIMATES.
   !
   !* FIRST EXECUTABLE STATEMENT  QPSRT
-  IF ( Last>2 ) THEN
+  IF( Last>2 ) THEN
     !
     !           THIS PART OF THE ROUTINE IS ONLY EXECUTED
     !           IF, DUE TO A DIFFICULT INTEGRAND, SUBDIVISION
@@ -93,12 +92,12 @@ SUBROUTINE QPSRT(Limit,Last,Maxerr,Ermax,Elist,Iord,Nrmax)
     !           NRMAX-TH LARGEST ERROR ESTIMATE.
     !
     errmax = Elist(Maxerr)
-    IF ( Nrmax/=1 ) THEN
+    IF( Nrmax/=1 ) THEN
       ido = Nrmax - 1
       DO i = 1, ido
         isucc = Iord(Nrmax-1)
         !- **JUMP OUT OF DO-LOOP
-        IF ( errmax<=Elist(isucc) ) EXIT
+        IF( errmax<=Elist(isucc) ) EXIT
         Iord(Nrmax) = isucc
         Nrmax = Nrmax - 1
       END DO
@@ -110,7 +109,7 @@ SUBROUTINE QPSRT(Limit,Last,Maxerr,Ermax,Elist,Iord,Nrmax)
     !           ALLOWED.
     !
     jupbn = Last
-    IF ( Last>(Limit/2+2) ) jupbn = Limit + 3 - Last
+    IF( Last>(Limit/2+2) ) jupbn = Limit + 3 - Last
     errmin = Elist(Last)
     !
     !           INSERT ERRMAX BY TRAVERSING THE LIST TOP-DOWN,
@@ -118,11 +117,11 @@ SUBROUTINE QPSRT(Limit,Last,Maxerr,Ermax,Elist,Iord,Nrmax)
     !
     jbnd = jupbn - 1
     ibeg = Nrmax + 1
-    IF ( ibeg<=jbnd ) THEN
+    IF( ibeg<=jbnd ) THEN
       DO i = ibeg, jbnd
         isucc = Iord(i)
         !- **JUMP OUT OF DO-LOOP
-        IF ( errmax>=Elist(isucc) ) GOTO 100
+        IF( errmax>=Elist(isucc) ) GOTO 100
         Iord(i-1) = isucc
       END DO
     END IF
@@ -141,7 +140,7 @@ SUBROUTINE QPSRT(Limit,Last,Maxerr,Ermax,Elist,Iord,Nrmax)
   DO j = i, jbnd
     isucc = Iord(k)
     !- **JUMP OUT OF DO-LOOP
-    IF ( errmin<Elist(isucc) ) GOTO 200
+    IF( errmin<Elist(isucc) ) GOTO 200
     Iord(k+1) = isucc
     k = k - 1
   END DO

@@ -1,7 +1,6 @@
 !** DDAWS
 REAL(DP) FUNCTION DDAWS(X)
-  !>
-  !  Compute Dawson's function.
+  !> Compute Dawson's function.
   !***
   ! **Library:**   SLATEC (FNLIB)
   !***
@@ -128,7 +127,7 @@ REAL(DP) FUNCTION DDAWS(X)
     -.6120087296881677722911435593001D-31, +.1966024640193164686956230217896D-31 ]
   LOGICAL, SAVE :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  DDAWS
-  IF ( first ) THEN
+  IF( first ) THEN
     ntdaw = INITDS(dawcs,21,0.1D0*eps)
     ntdaw2 = INITDS(daw2cs,45,0.1D0*eps)
     ntdawa = INITDS(dawacs,75,0.1D0*eps)
@@ -136,26 +135,26 @@ REAL(DP) FUNCTION DDAWS(X)
   END IF
   !
   y = ABS(X)
-  IF ( y<=1.0D0 ) THEN
+  IF( y<=1.0D0 ) THEN
     !
     DDAWS = X
-    IF ( y<=xsml ) RETURN
+    IF( y<=xsml ) RETURN
     !
     DDAWS = X*(.75D0+DCSEVL(2.D0*y*y-1.D0,dawcs,ntdaw))
     RETURN
     !
-  ELSEIF ( y<=4.D0 ) THEN
+  ELSEIF( y<=4.D0 ) THEN
     DDAWS = X*(.25D0+DCSEVL(.125D0*y*y-1.D0,daw2cs,ntdaw2))
     RETURN
     !
-  ELSEIF ( y>xmax ) THEN
+  ELSEIF( y>xmax ) THEN
     !
     CALL XERMSG('DDAWS','ABS(X) SO LARGE DAWS UNDERFLOWS',1,1)
     DDAWS = 0.0D0
     RETURN
   END IF
   DDAWS = 0.5D0/X
-  IF ( y>xbig ) RETURN
+  IF( y>xbig ) RETURN
   !
   DDAWS = (0.5D0+DCSEVL(32.D0/y**2-1.D0,dawacs,ntdawa))/X
   RETURN

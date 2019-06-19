@@ -5,8 +5,7 @@ MODULE TEST44_MOD
 CONTAINS
   !** DJAC
   SUBROUTINE DJAC(T,U,Pd,Nrowpd)
-    !>
-    !  Evaluate Jacobian for DDEBDF quick check.
+    !> Evaluate Jacobian for DDEBDF quick check.
     !***
     ! **Library:**   SLATEC
     !***
@@ -41,8 +40,7 @@ CONTAINS
   END SUBROUTINE DJAC
   !** DFDEQC
   SUBROUTINE DFDEQC(T,U,Uprime)
-    !>
-    !  Derivative evaluator for DDEPAC quick checks.
+    !> Derivative evaluator for DDEPAC quick checks.
     !***
     ! **Library:**   SLATEC
     !***
@@ -76,8 +74,7 @@ CONTAINS
   END SUBROUTINE DFDEQC
   !** QXDABM
   SUBROUTINE QXDABM(Lun,Kprint,Ipass)
-    !>
-    !  Test the DEPAC routine DDEABM.
+    !> Test the DEPAC routine DDEABM.
     !***
     ! **Library:**   SLATEC
     !***
@@ -129,14 +126,14 @@ CONTAINS
     !
     !     Declare arguments.
     !
-    INTEGER Lun, Kprint, Ipass
+    INTEGER :: Lun, Kprint, Ipass
     !
     !     Declare local variables.
     !
-    INTEGER idid, info(15), iwork(51), n, liw, lrw, nstep
+    INTEGER :: idid, info(15), iwork(51), n, liw, lrw, nstep
     REAL(DP) :: abserr(1), r, relerr(1), reltol, rwork(214), t, tout, u(4)
     !* FIRST EXECUTABLE STATEMENT  QXDABM
-    IF ( Kprint>=2 ) WRITE (Lun,99001)
+    IF( Kprint>=2 ) WRITE (Lun,99001)
     !
     ! FORMATs.
     !
@@ -162,34 +159,34 @@ CONTAINS
     info(2) = 0
     info(3) = 1
     info(4) = 0
-    IF ( Kprint>2 ) WRITE (Lun,99002) relerr, abserr, t, (1.0D0)
+    IF( Kprint>2 ) WRITE (Lun,99002) relerr, abserr, t, (1.0D0)
     99002 FORMAT (/' RELERR = ',D16.8,'   ABSERR =',D16.8/12X,'T',19X,'R'/2D20.8)
     DO
       !
       CALL DDEABM(DFDEQC,n,t,u,tout,info,relerr,abserr,idid,rwork,lrw,iwork,liw)
       r = SQRT(u(1)*u(1)+u(2)*u(2))
-      IF ( ABS(r-1.0D0)>reltol ) Ipass = 0
-      IF ( Kprint>2 ) WRITE (Lun,99003) t, r
+      IF( ABS(r-1.0D0)>reltol ) Ipass = 0
+      IF( Kprint>2 ) WRITE (Lun,99003) t, r
       99003 FORMAT (2D20.8)
       info(1) = 1
-      IF ( idid/=1 ) THEN
+      IF( idid/=1 ) THEN
         !
         !     For the double precision version, we allow the integrator to take
         !     up to 2000 steps before we declare failure.
         !
-        IF ( idid==-1 ) THEN
+        IF( idid==-1 ) THEN
           nstep = nstep + 500
-          IF ( nstep<2000 ) CYCLE
+          IF( nstep<2000 ) CYCLE
         END IF
         !
         !     Finish up.
         !
-        IF ( idid<1 ) Ipass = 0
-        IF ( Kprint>1.AND.idid<1 ) WRITE (Lun,99004) idid
+        IF( idid<1 ) Ipass = 0
+        IF( Kprint>1 .AND. idid<1 ) WRITE (Lun,99004) idid
         99004 FORMAT (1X,'ERROR RETURN FROM DDEABM.  IDID = ',I3)
-        IF ( Kprint>1.AND.Ipass==1 ) WRITE (Lun,99005)
+        IF( Kprint>1 .AND. Ipass==1 ) WRITE (Lun,99005)
         99005 FORMAT (/' ------------  DDEABM PASSED TESTS  ------------')
-        IF ( Kprint>=1.AND.Ipass==0 ) WRITE (Lun,99006)
+        IF( Kprint>=1 .AND. Ipass==0 ) WRITE (Lun,99006)
         99006 FORMAT (/' ************  DDEABM FAILED TESTS  ************')
         RETURN
       END IF
@@ -197,8 +194,7 @@ CONTAINS
   END SUBROUTINE QXDABM
   !** QXDBDF
   SUBROUTINE QXDBDF(Lun,Kprint,Ipass)
-    !>
-    !  Test the DEPAC routine DDEBDF.
+    !> Test the DEPAC routine DDEBDF.
     !***
     ! **Library:**   SLATEC
     !***
@@ -250,14 +246,14 @@ CONTAINS
     !
     !     Declare arguments.
     !
-    INTEGER Lun, Kprint, Ipass
+    INTEGER :: Lun, Kprint, Ipass
     !
     !     Declare local variables.
     !
     INTEGER :: idid, info(15), iwork(60), n, liw, lrw, nstep
     REAL(DP) :: abserr(1), r, reltol, relerr(1), rwork(306), t, tout, u(4)
     !* FIRST EXECUTABLE STATEMENT  QXDBDF
-    IF ( Kprint>=2 ) WRITE (Lun,99001)
+    IF( Kprint>=2 ) WRITE (Lun,99001)
     !
     ! FORMATs.
     !
@@ -285,35 +281,35 @@ CONTAINS
     info(4) = 0
     info(5) = 1
     info(6) = 0
-    IF ( Kprint>2 ) WRITE (Lun,99002) relerr, abserr, t, (1.0D0)
+    IF( Kprint>2 ) WRITE (Lun,99002) relerr, abserr, t, (1.0D0)
     99002 FORMAT (/' RELERR = ',D16.8,'   ABSERR =',D16.8/12X,'T',19X,'R'/2D20.8)
     DO
       !
       CALL DDEBDF(DFDEQC,n,t,u,tout,info,relerr,abserr,idid,rwork,lrw,iwork,&
         liw,DJAC)
       r = SQRT(u(1)*u(1)+u(2)*u(2))
-      IF ( ABS(r-1.0D0)>reltol ) Ipass = 0
-      IF ( Kprint>2 ) WRITE (Lun,99003) t, r
+      IF( ABS(r-1.0D0)>reltol ) Ipass = 0
+      IF( Kprint>2 ) WRITE (Lun,99003) t, r
       99003 FORMAT (2D20.8)
       info(1) = 1
-      IF ( idid/=1 ) THEN
+      IF( idid/=1 ) THEN
         !
         !     For the double precision version, we allow the integrator to take
         !     up to 2000 steps before we declare failure.
         !
-        IF ( idid==-1 ) THEN
+        IF( idid==-1 ) THEN
           nstep = nstep + 500
-          IF ( nstep<2000 ) CYCLE
+          IF( nstep<2000 ) CYCLE
         END IF
         !
         !     Finish up.
         !
-        IF ( idid<1 ) Ipass = 0
-        IF ( Kprint>1.AND.idid<1 ) WRITE (Lun,99004) idid
+        IF( idid<1 ) Ipass = 0
+        IF( Kprint>1 .AND. idid<1 ) WRITE (Lun,99004) idid
         99004 FORMAT (1X,'ERROR RETURN FROM DDEBDF.  IDID = ',I3)
-        IF ( Kprint>1.AND.Ipass==1 ) WRITE (Lun,99005)
+        IF( Kprint>1 .AND. Ipass==1 ) WRITE (Lun,99005)
         99005 FORMAT (/' ------------  DDEBDF PASSED TESTS  ------------')
-        IF ( Kprint>=1.AND.Ipass==0 ) WRITE (Lun,99006)
+        IF( Kprint>=1 .AND. Ipass==0 ) WRITE (Lun,99006)
         99006 FORMAT (/' ************  DDEBDF FAILED TESTS  ************')
         RETURN
       END IF
@@ -321,8 +317,7 @@ CONTAINS
   END SUBROUTINE QXDBDF
   !** QXDBVS
   SUBROUTINE QXDBVS(Lun,Kprint,Ipass)
-    !>
-    !  Quick check for DBVSUP.
+    !> Quick check for DBVSUP.
     !***
     ! **Library:**   SLATEC
     !***
@@ -343,10 +338,10 @@ CONTAINS
     USE DSAVEX, ONLY : xsave_com
     USE slatec, ONLY : DBVSUP
     USE common_mod, ONLY : PASS
-    INTEGER i, iflag, igofx, Ipass, ipss, j, kont, kount, Kprint, l, &
+    INTEGER :: i, iflag, igofx, Ipass, ipss, j, kont, kount, Kprint, l, &
       Lun, ncomp, ndiw, ndw, neqivp, nfc, nic, nrowa, nrowb, nrowy
-    INTEGER numort, nxpts
-    INTEGER itmp(9), iwork(100)
+    INTEGER :: numort, nxpts
+    INTEGER :: itmp(9), iwork(100)
     REAL(DP) :: work(1000), ae, re, sve, tol
     REAL(DP) :: y(4,15), a(2,4), alpha(2), b(2,4), beta(2), reler, abser
     CHARACTER(4) :: msg
@@ -363,7 +358,7 @@ CONTAINS
       40.0D+00, 38.0D+00, 36.0D+00, 34.0D+00, 32.0D+00, 31.0D+00, &
       30.8D+00, 30.6D+00, 30.4D+00, 30.2D+00, 30.0D+00 ]
     !* FIRST EXECUTABLE STATEMENT  QXDBVS
-    IF ( Kprint>=2 ) THEN
+    IF( Kprint>=2 ) THEN
       WRITE (Lun,99001)
       !
       99001 FORMAT ('1')
@@ -410,9 +405,9 @@ CONTAINS
     !-----IF IFLAG = 0, WE HAVE A SUCCESSFUL SOLUTION; OTHERWISE, SKIP
     !     THE ARGUMENT CHECKING AND GO TO THE END.
     !
-    IF ( iflag/=0 ) THEN
+    IF( iflag/=0 ) THEN
       Ipass = 0
-      IF ( Kprint>1 ) WRITE (Lun,99003) iflag
+      IF( Kprint>1 ) WRITE (Lun,99003) iflag
       99003 FORMAT (10X,'IFLAG =',I2)
       GOTO 300
     END IF
@@ -424,16 +419,16 @@ CONTAINS
       DO l = 1, 2
         abser = ABS(yans(l,j)-y(l,j))
         reler = abser/ABS(yans(l,j))
-        IF ( reler>tol.AND.abser>tol ) Ipass = 0
+        IF( reler>tol .AND. abser>tol ) Ipass = 0
       END DO
     END DO
     !
     !-----CHECK FOR SUPPRESSION OF PRINTING.
     !
-    IF ( Kprint==0.OR.(Kprint==1.AND.Ipass==1) ) GOTO 400
+    IF( Kprint==0 .OR. (Kprint==1 .AND. Ipass==1) ) GOTO 400
     !
-    IF ( Kprint/=1.OR.Ipass/=0 ) THEN
-      IF ( Kprint>=3.OR.Ipass==0 ) THEN
+    IF( Kprint/=1 .OR. Ipass/=0 ) THEN
+      IF( Kprint>=3 .OR. Ipass==0 ) THEN
         WRITE (Lun,99004)
         99004 FORMAT (/' ACCURACY TEST')
         WRITE (Lun,99005) numort
@@ -447,10 +442,10 @@ CONTAINS
           msg = 'PASS'
           abser = ABS(yans(1,j)-y(1,j))
           reler = abser/ABS(yans(1,j))
-          IF ( reler>tol.AND.abser>tol ) msg = 'FAIL'
+          IF( reler>tol .AND. abser>tol ) msg = 'FAIL'
           abser = ABS(yans(2,j)-y(2,j))
           reler = abser/ABS(yans(2,j))
-          IF ( reler>tol.AND.abser>tol ) msg = 'FAIL'
+          IF( reler>tol .AND. abser>tol ) msg = 'FAIL'
           WRITE (Lun,99008) xpts(j), y(1,j), y(2,j), yans(1,j), yans(2,j), msg
           99008 FORMAT (F5.1,4E20.7,5X,A)
         END DO
@@ -463,7 +458,7 @@ CONTAINS
     !
     !-----ERROR MESSAGE TESTS.
     !
-    IF ( Kprint==1 ) GOTO 400
+    IF( Kprint==1 ) GOTO 400
     kont = 1
     WRITE (Lun,99009)
     99009 FORMAT (/' (7) TESTS OF IFLAG VALUES')
@@ -483,7 +478,7 @@ CONTAINS
         CASE (2)
           !
           WRITE (Lun,99013) iflag
-          IF ( iflag==-2 ) itmp(kont) = 1
+          IF( iflag==-2 ) itmp(kont) = 1
           kont = kont + 1
           !
           !-----RE OR AE NEGATIVE
@@ -495,7 +490,7 @@ CONTAINS
         CASE (3)
           !
           WRITE (Lun,99013) iflag
-          IF ( iflag==-2 ) itmp(kont) = 1
+          IF( iflag==-2 ) itmp(kont) = 1
           kont = kont + 1
           !
           !-----NROWA LESS THAN NIC
@@ -513,7 +508,7 @@ CONTAINS
           !
           WRITE (Lun,99010) iflag
           99010 FORMAT (/' IFLAG SHOULD BE -1, IFLAG =',I3)
-          IF ( iflag==-1 ) itmp(kont) = 1
+          IF( iflag==-1 ) itmp(kont) = 1
           kont = kont + 1
           !-----INCORRECT ORDERING OF XPTS
           kount = 7
@@ -524,12 +519,12 @@ CONTAINS
         CASE (7)
           !
           WRITE (Lun,99013) iflag
-          IF ( iflag==-2 ) itmp(kont) = 1
+          IF( iflag==-2 ) itmp(kont) = 1
           GOTO 300
         CASE DEFAULT
           !
           WRITE (Lun,99013) iflag
-          IF ( iflag==-2 ) itmp(kont) = 1
+          IF( iflag==-2 ) itmp(kont) = 1
           kont = kont + 1
           !
           !-----IGOFX NOT EQUAL TO 0 OR 1
@@ -541,7 +536,7 @@ CONTAINS
     END DO
     !
     WRITE (Lun,99013) iflag
-    IF ( iflag==-2 ) itmp(kont) = 1
+    IF( iflag==-2 ) itmp(kont) = 1
     kont = kont + 1
     !-----NROWB LESS THAN NFC
     kount = 5
@@ -549,7 +544,7 @@ CONTAINS
     nrowb = 0
     !
     200  WRITE (Lun,99013) iflag
-    IF ( iflag==-2 ) itmp(kont) = 1
+    IF( iflag==-2 ) itmp(kont) = 1
     kont = kont + 1
     !-----STORAGE ALLOCATION IS INSUFFICIENT
     kount = 6
@@ -571,17 +566,16 @@ CONTAINS
     Ipass = Ipass*ipss
     !
     400 CONTINUE
-    IF ( Ipass==1.AND.Kprint>1 ) WRITE (Lun,99011)
+    IF( Ipass==1 .AND. Kprint>1 ) WRITE (Lun,99011)
     99011 FORMAT (/' ***************DBVSUP PASSED ALL TESTS***************')
-    IF ( Ipass==0.AND.Kprint/=0 ) WRITE (Lun,99012)
+    IF( Ipass==0 .AND. Kprint/=0 ) WRITE (Lun,99012)
     99012 FORMAT (/' ***************DBVSUP FAILED SOME TESTS**************')
     RETURN
     99013 FORMAT (/' IFLAG SHOULD BE -2, IFLAG =',I3)
   END SUBROUTINE QXDBVS
   !** QXDRKF
   SUBROUTINE QXDRKF(Lun,Kprint,Ipass)
-    !>
-    !  Test the DEPAC routine DDERKF.
+    !> Test the DEPAC routine DDERKF.
     !***
     ! **Library:**   SLATEC
     !***
@@ -633,14 +627,14 @@ CONTAINS
     !
     !     Declare arguments.
     !
-    INTEGER Lun, Kprint, Ipass
+    INTEGER :: Lun, Kprint, Ipass
     !
     !     Declare local variables.
     !
     INTEGER :: idid, info(15), iwork(34), n, liw, lrw, nstep
     REAL(DP) :: abserr(1), r, relerr(1), reltol, rwork(61), t, tout, u(4)
     !* FIRST EXECUTABLE STATEMENT  QXDRKF
-    IF ( Kprint>=2 ) WRITE (Lun,99001)
+    IF( Kprint>=2 ) WRITE (Lun,99001)
     !
     ! FORMATs.
     !
@@ -666,34 +660,34 @@ CONTAINS
     info(2) = 0
     info(3) = 1
     info(4) = 0
-    IF ( Kprint>2 ) WRITE (Lun,99002) relerr, abserr, t, (1.0D0)
+    IF( Kprint>2 ) WRITE (Lun,99002) relerr, abserr, t, (1.0D0)
     99002 FORMAT (/' RELERR = ',D16.8,'   ABSERR =',D16.8/12X,'T',19X,'R'/2D20.8)
     DO
       !
       CALL DDERKF(DFDEQC,n,t,u,tout,info,relerr,abserr,idid,rwork,lrw,iwork,liw)
       r = SQRT(u(1)*u(1)+u(2)*u(2))
-      IF ( ABS(r-1.0D0)>reltol ) Ipass = 0
-      IF ( Kprint>2 ) WRITE (Lun,99003) t, r
+      IF( ABS(r-1.0D0)>reltol ) Ipass = 0
+      IF( Kprint>2 ) WRITE (Lun,99003) t, r
       99003 FORMAT (2D20.8)
       info(1) = 1
-      IF ( idid/=1 ) THEN
+      IF( idid/=1 ) THEN
         !
         !     For the double precision version, we allow the integrator to take
         !     up to 2000 steps before we declare failure.
         !
-        IF ( idid==-1 ) THEN
+        IF( idid==-1 ) THEN
           nstep = nstep + 500
-          IF ( nstep<2000 ) CYCLE
+          IF( nstep<2000 ) CYCLE
         END IF
         !
         !     Finish up.
         !
-        IF ( idid<1 ) Ipass = 0
-        IF ( Kprint>1.AND.idid<1 ) WRITE (Lun,99004) idid
+        IF( idid<1 ) Ipass = 0
+        IF( Kprint>1 .AND. idid<1 ) WRITE (Lun,99004) idid
         99004 FORMAT (1X,'ERROR RETURN FROM DDERKF.  IDID = ',I3)
-        IF ( Kprint>1.AND.Ipass==1 ) WRITE (Lun,99005)
+        IF( Kprint>1 .AND. Ipass==1 ) WRITE (Lun,99005)
         99005 FORMAT (/' ------------  DDERKF PASSED TESTS  ------------')
-        IF ( Kprint>=1.AND.Ipass==0 ) WRITE (Lun,99006)
+        IF( Kprint>=1 .AND. Ipass==0 ) WRITE (Lun,99006)
         99006 FORMAT (/' ************  DDERKF FAILED TESTS  ************')
         RETURN
       END IF
@@ -706,8 +700,7 @@ PROGRAM TEST44
   USE slatec, ONLY : I1MACH, XSETF, XSETUN, XERMAX
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
-  !>
-  !  Driver for testing SLATEC subprograms
+  !> Driver for testing SLATEC subprograms
   !***
   ! **Library:**   SLATEC
   !***
@@ -754,7 +747,7 @@ PROGRAM TEST44
   !   890618  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900524  Cosmetic changes to code.  (WRB)
-  INTEGER ipass, kprint, lin, lun, nfail
+  INTEGER :: ipass, kprint, lin, lun, nfail
   !* FIRST EXECUTABLE STATEMENT  TEST44
   lun = I1MACH(2)
   lin = I1MACH(1)
@@ -765,7 +758,7 @@ PROGRAM TEST44
   CALL GET_ARGUMENT(kprint)
   CALL XERMAX(1000)
   CALL XSETUN(lun)
-  IF ( kprint<=1 ) THEN
+  IF( kprint<=1 ) THEN
     CALL XSETF(0)
   ELSE
     CALL XSETF(1)
@@ -774,26 +767,26 @@ PROGRAM TEST44
   !     Test DDEABM
   !
   CALL QXDABM(lun,kprint,ipass)
-  IF ( ipass==0 ) nfail = nfail + 1
+  IF( ipass==0 ) nfail = nfail + 1
   !
   !     Test DDEBDF
   !
   CALL QXDBDF(lun,kprint,ipass)
-  IF ( ipass==0 ) nfail = nfail + 1
+  IF( ipass==0 ) nfail = nfail + 1
   !
   !     Test DDERKF
   !
   CALL QXDRKF(lun,kprint,ipass)
-  IF ( ipass==0 ) nfail = nfail + 1
+  IF( ipass==0 ) nfail = nfail + 1
   !
   !     Test DBVSUP
   !
   CALL QXDBVS(lun,kprint,ipass)
-  IF ( ipass==0 ) nfail = nfail + 1
+  IF( ipass==0 ) nfail = nfail + 1
   !
   !     Write PASS or FAIL message
   !
-  IF ( nfail==0 ) THEN
+  IF( nfail==0 ) THEN
     WRITE (lun,99001)
     99001 FORMAT (/' --------------TEST44 PASSED ALL TESTS----------------')
   ELSE

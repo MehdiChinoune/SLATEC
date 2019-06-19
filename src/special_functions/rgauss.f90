@@ -1,7 +1,6 @@
 !** RGAUSS
 REAL(SP) FUNCTION RGAUSS(Xmean,Sd)
-  !>
-  !  Generate a normally distributed (Gaussian) random number.
+  !> Generate a normally distributed (Gaussian) random number.
   !***
   ! **Library:**   SLATEC (FNLIB)
   !***
@@ -39,8 +38,8 @@ REAL(SP) FUNCTION RGAUSS(Xmean,Sd)
   !   910819  Added EXTERNAL statement for RAND due to problem on IBM
   !           RS 6000.  (WRB)
 
-  INTEGER i
-  REAL(SP) Sd, Xmean
+  INTEGER :: i
+  REAL(SP) :: Sd, Xmean
   !* FIRST EXECUTABLE STATEMENT  RGAUSS
   RGAUSS = -6.0
   DO i = 1, 12

@@ -1,7 +1,6 @@
 !** DLPDOC
 SUBROUTINE DLPDOC
-  !>
-  !  Sparse Linear Algebra Package Version 2.0.2 Documentation.
+  !> Sparse Linear Algebra Package Version 2.0.2 Documentation.
   !            Routines to solve large sparse symmetric and nonsymmetric
   !            positive definite linear systems, Ax = b, using precondi-
   !            tioned iterative methods.

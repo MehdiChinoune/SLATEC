@@ -1,7 +1,6 @@
 !** ZMLRI
 SUBROUTINE ZMLRI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol)
-  !>
-  !  Subsidiary to ZBESI and ZBESK
+  !> Subsidiary to ZBESI and ZBESK
   !***
   ! **Library:**   SLATEC
   !***
@@ -11,7 +10,7 @@ SUBROUTINE ZMLRI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol)
   !***
   ! **Description:**
   !
-  !     ZMLRI COMPUTES THE I BESSEL FUNCTION FOR RE(Z).GE.0.0 BY THE
+  !     ZMLRI COMPUTES THE I BESSEL FUNCTION FOR RE(Z)>=0.0 BY THE
   !     MILLER ALGORITHM NORMALIZED BY A NEUMANN SERIES.
   !
   !***
@@ -25,7 +24,7 @@ SUBROUTINE ZMLRI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol)
   !   930122  Added ZEXP and ZLOG to EXTERNAL statement.  (RWC)
   USE service, ONLY : D1MACH
   !     COMPLEX CK,CNORM,CONE,CTWO,CZERO,PT,P1,P2,RZ,SUM,Y,Z
-  INTEGER i, iaz, idum, ifnu, inu, itime, k, kk, km, Kode, m, N, Nz
+  INTEGER :: i, iaz, idum, ifnu, inu, itime, k, kk, km, Kode, m, N, Nz
   REAL(DP) :: ack, ak, ap, at, az, bk, cki, ckr, cnormi, cnormr, fkap, fkk, flam, &
     fnf, Fnu, pti, ptr, p1i, p1r, p2i, p2r, raz, rho, rho2, rzi, rzr, scle, sti, &
     str, sumi, sumr, tfnf, Tol, tst, Yi(N), Yr(N), Zi, Zr
@@ -68,14 +67,14 @@ SUBROUTINE ZMLRI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol)
     ckr = ckr + rzr
     cki = cki + rzi
     ap = ZABS(p2r,p2i)
-    IF ( ap>tst*ak*ak ) GOTO 100
+    IF( ap>tst*ak*ak ) GOTO 100
     ak = ak + 1.0D0
   END DO
   Nz = -2
   RETURN
   100  i = i + 1
   k = 0
-  IF ( inu>=iaz ) THEN
+  IF( inu>=iaz ) THEN
     !-----------------------------------------------------------------------
     !     COMPUTE RELATIVE TRUNCATION ERROR FOR RATIOS
     !-----------------------------------------------------------------------
@@ -101,8 +100,8 @@ SUBROUTINE ZMLRI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol)
       ckr = ckr + rzr
       cki = cki + rzi
       ap = ZABS(p2r,p2i)
-      IF ( ap>=tst ) THEN
-        IF ( itime==2 ) GOTO 200
+      IF( ap>=tst ) THEN
+        IF( itime==2 ) GOTO 200
         ack = ZABS(ckr,cki)
         flam = ack + SQRT(ack*ack-1.0D0)
         fkap = ap/ZABS(p1r,p1i)
@@ -150,7 +149,7 @@ SUBROUTINE ZMLRI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol)
   END DO
   Yr(N) = p2r
   Yi(N) = p2i
-  IF ( N/=1 ) THEN
+  IF( N/=1 ) THEN
     DO i = 2, N
       ptr = p2r
       pti = p2i
@@ -169,7 +168,7 @@ SUBROUTINE ZMLRI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol)
       Yi(m) = p2i
     END DO
   END IF
-  IF ( ifnu>0 ) THEN
+  IF( ifnu>0 ) THEN
     DO i = 1, ifnu
       ptr = p2r
       pti = p2i
@@ -187,7 +186,7 @@ SUBROUTINE ZMLRI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol)
   END IF
   ptr = Zr
   pti = Zi
-  IF ( Kode==2 ) ptr = zeror
+  IF( Kode==2 ) ptr = zeror
   CALL ZLOG(rzr,rzi,str,sti,idum)
   p1r = -fnf*str + ptr
   p1i = -fnf*sti + pti

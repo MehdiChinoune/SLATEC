@@ -1,7 +1,6 @@
 !** CDNTP
 SUBROUTINE CDNTP(H,K,N,Nq,T,Tout,Yh,Y)
-  !>
-  !  Subroutine CDNTP interpolates the K-th derivative of Y at
+  !> Subroutine CDNTP interpolates the K-th derivative of Y at
   !            TOUT, using the data in the YH array.  If K has a value
   !            greater than NQ, the NQ-th derivative is calculated.
   !***
@@ -29,7 +28,7 @@ SUBROUTINE CDNTP(H,K,N,Nq,T,Tout,Yh,Y)
   INTEGER :: i, j, jj, kk, kused
   REAL(SP) :: factor, r
   !* FIRST EXECUTABLE STATEMENT  CDNTP
-  IF ( K==0 ) THEN
+  IF( K==0 ) THEN
     DO i = 1, N
       Y(i) = Yh(i,Nq+1)
     END DO

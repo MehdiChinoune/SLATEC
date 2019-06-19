@@ -1,7 +1,6 @@
 !** CDRIV1
 SUBROUTINE CDRIV1(N,T,Y,F,Tout,Mstate,Eps,Work,Lenw,Ierflg)
-  !>
-  !  The function of CDRIV1 is to solve N (200 or fewer)
+  !> The function of CDRIV1 is to solve N (200 or fewer)
   !            ordinary differential equations of the form
   !            dY(I)/dT = F(Y(I),T), given the initial conditions
   !            Y(I) = YI.  CDRIV1 allows complex-valued differential
@@ -89,7 +88,7 @@ SUBROUTINE CDRIV1(N,T,Y,F,Tout,Mstate,Eps,Work,Lenw,Ierflg)
   !    for those quantities whose value may be altered by CDRIV1.  The
   !    parameters in the call sequence are:
   !
-  !    N      = (Input) The number of differential equations, N .LE. 200
+  !    N      = (Input) The number of differential equations, N <= 200
   !
   !    T      = (Real) The independent variable.  On input for the first
   !             call, T is the initial point.  On output, T is the point
@@ -252,10 +251,10 @@ SUBROUTINE CDRIV1(N,T,Y,F,Tout,Mstate,Eps,Work,Lenw,Ierflg)
   !                EPS = .001E0
   !           10   CALL CDRIV1 (N, T, Y, F, TOUT, MSTATE, EPS, WORK, LENW,
   !               8             IERFLG)
-  !                IF (MSTATE .GT. 2) STOP
+  !                IF(MSTATE > 2) STOP
   !                WRITE(*, '(5E12.3)') TOUT, (Y(I), I=1,3)
   !                TOUT = 10.E0*TOUT
-  !                IF (TOUT .LT. 50.E0) GO TO 10
+  !                IF(TOUT < 50.E0) GO TO 10
   !                END
   !
   !                SUBROUTINE F (N, T, Y, YDOT)
@@ -316,19 +315,19 @@ SUBROUTINE CDRIV1(N,T,Y,F,Tout,Mstate,Eps,Work,Lenw,Ierflg)
     MXORD = 5, MXSTEP = 1000
   REAL(SP), PARAMETER :: ewtcom(1) = 1.E0
   !* FIRST EXECUTABLE STATEMENT  CDRIV1
-  IF ( ABS(Mstate)==0.OR.ABS(Mstate)>7 ) THEN
+  IF( ABS(Mstate)==0 .OR. ABS(Mstate)>7 ) THEN
     WRITE (intgr1,'(I8)') Mstate
     Ierflg = 26
     CALL XERMSG('CDRIV1','Illegal input.  The magnitude of MSTATE, '//intgr1//&
       ', is not in the range 1 to 6 .',Ierflg,1)
     Mstate = SIGN(7,Mstate)
     RETURN
-  ELSEIF ( ABS(Mstate)==7 ) THEN
+  ELSEIF( ABS(Mstate)==7 ) THEN
     Ierflg = 999
     CALL XERMSG('CDRIV1','Illegal input.  The magnitude of MSTATE is 7 .',Ierflg,2)
     RETURN
   END IF
-  IF ( N>MXN ) THEN
+  IF( N>MXN ) THEN
     WRITE (intgr1,'(I8)') N
     Ierflg = 21
     CALL XERMSG('CDRIV1','Illegal input.  The number of equations, '//intgr1//&
@@ -336,7 +335,7 @@ SUBROUTINE CDRIV1(N,T,Y,F,Tout,Mstate,Eps,Work,Lenw,Ierflg)
     Mstate = SIGN(7,Mstate)
     RETURN
   END IF
-  IF ( Mstate>0 ) THEN
+  IF( Mstate>0 ) THEN
     nstate = Mstate
     ntask = 1
   ELSE
@@ -346,7 +345,7 @@ SUBROUTINE CDRIV1(N,T,Y,F,Tout,Mstate,Eps,Work,Lenw,Ierflg)
   hmax = 2.E0*ABS(Tout-T)
   leniw = N + IDLIW
   lenwcm = Lenw - leniw
-  IF ( lenwcm<(N*N+10*N+250) ) THEN
+  IF( lenwcm<(N*N+10*N+250) ) THEN
     lnwchk = N*N + 10*N + 250 + leniw
     WRITE (intgr1,'(I8)') lnwchk
     Ierflg = 32
@@ -355,7 +354,7 @@ SUBROUTINE CDRIV1(N,T,Y,F,Tout,Mstate,Eps,Work,Lenw,Ierflg)
     Mstate = SIGN(7,Mstate)
     RETURN
   END IF
-  IF ( nstate/=1 ) THEN
+  IF( nstate/=1 ) THEN
     DO i = 1, leniw
       iwork(i) = INT( Work(i+lenwcm) )
     END DO
@@ -366,13 +365,13 @@ SUBROUTINE CDRIV1(N,T,Y,F,Tout,Mstate,Eps,Work,Lenw,Ierflg)
   DO i = 1, leniw
     Work(i+lenwcm) = iwork(i)
   END DO
-  IF ( nstate<=4 ) THEN
+  IF( nstate<=4 ) THEN
     Mstate = SIGN(nstate,Mstate)
-  ELSEIF ( nstate==6 ) THEN
+  ELSEIF( nstate==6 ) THEN
     Mstate = SIGN(5,Mstate)
-  ELSEIF ( Ierflg==11 ) THEN
+  ELSEIF( Ierflg==11 ) THEN
     Mstate = SIGN(6,Mstate)
-  ELSEIF ( Ierflg>11 ) THEN
+  ELSEIF( Ierflg>11 ) THEN
     Mstate = SIGN(7,Mstate)
   END IF
 

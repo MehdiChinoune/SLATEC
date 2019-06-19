@@ -1,7 +1,6 @@
 !** QMOMO
 SUBROUTINE QMOMO(Alfa,Beta,Ri,Rj,Rg,Rh,Integr)
-  !>
-  !  This routine computes modified Chebyshev moments.  The K-th
+  !> This routine computes modified Chebyshev moments.  The K-th
   !            modified Chebyshev moment is defined as the integral over
   !            (-1,1) of W(X)*T(K,X), where T(K,X) is the Chebyshev
   !            polynomial of degree K.
@@ -29,10 +28,10 @@ SUBROUTINE QMOMO(Alfa,Beta,Ri,Rj,Rg,Rh,Integr)
   !
   !        PARAMETERS
   !           ALFA   - Real
-  !                    Parameter in the weight function W(X), ALFA.GT.(-1)
+  !                    Parameter in the weight function W(X), ALFA>(-1)
   !
   !           BETA   - Real
-  !                    Parameter in the weight function W(X), BETA.GT.(-1)
+  !                    Parameter in the weight function W(X), BETA>(-1)
   !
   !           RI     - Real
   !                    Vector of dimension 25
@@ -74,9 +73,9 @@ SUBROUTINE QMOMO(Alfa,Beta,Ri,Rj,Rg,Rh,Integr)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
   !
-  REAL(SP) Alfa, alfp1, alfp2, an, anm1, Beta, betp1, betp2, ralf, &
+  REAL(SP) :: Alfa, alfp1, alfp2, an, anm1, Beta, betp1, betp2, ralf, &
     rbet, Rg(25), Rh(25), Ri(25), Rj(25)
-  INTEGER i, im1, Integr
+  INTEGER :: i, im1, Integr
   !* FIRST EXECUTABLE STATEMENT  QMOMO
   alfp1 = Alfa + 0.1E+01
   betp1 = Beta + 0.1E+01
@@ -99,8 +98,8 @@ SUBROUTINE QMOMO(Alfa,Beta,Ri,Rj,Rg,Rh,Integr)
     anm1 = an
     an = an + 0.1E+01
   END DO
-  IF ( Integr/=1 ) THEN
-    IF ( Integr/=3 ) THEN
+  IF( Integr/=1 ) THEN
+    IF( Integr/=3 ) THEN
       !
       !           COMPUTE RG USING A FORWARD RECURRENCE RELATION.
       !
@@ -115,7 +114,7 @@ SUBROUTINE QMOMO(Alfa,Beta,Ri,Rj,Rg,Rh,Integr)
         an = an + 0.1E+01
         im1 = i
       END DO
-      IF ( Integr==2 ) GOTO 100
+      IF( Integr==2 ) GOTO 100
     END IF
     !
     !           COMPUTE RH USING A FORWARD RECURRENCE RELATION.

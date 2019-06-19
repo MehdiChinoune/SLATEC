@@ -1,7 +1,6 @@
 !** ZS1S2
 SUBROUTINE ZS1S2(Zrr,Zri,S1r,S1i,S2r,S2i,Nz,Ascle,Alim,Iuf)
-  !>
-  !  Subsidiary to ZAIRY and ZBESK
+  !> Subsidiary to ZAIRY and ZBESK
   !***
   ! **Library:**   SLATEC
   !***
@@ -32,21 +31,21 @@ SUBROUTINE ZS1S2(Zrr,Zri,S1r,S1i,S2r,S2i,Nz,Ascle,Alim,Iuf)
   !     COMPLEX CZERO,C1,S1,S1D,S2,ZR
   REAL(DP) :: aa, Alim, aln, Ascle, as1, as2, c1i, c1r, s1di, s1dr, S1i, S1r, &
     S2i, S2r, Zri, Zrr
-  INTEGER Iuf, idum, Nz
+  INTEGER :: Iuf, idum, Nz
   REAL(DP), PARAMETER :: zeror = 0.0D0, zeroi = 0.0D0
   !* FIRST EXECUTABLE STATEMENT  ZS1S2
   Nz = 0
   as1 = ZABS(S1r,S1i)
   as2 = ZABS(S2r,S2i)
-  IF ( S1r/=0.0D0.OR.S1i/=0.0D0 ) THEN
-    IF ( as1/=0.0D0 ) THEN
+  IF( S1r/=0.0D0 .OR. S1i/=0.0D0 ) THEN
+    IF( as1/=0.0D0 ) THEN
       aln = -Zrr - Zrr + LOG(as1)
       s1dr = S1r
       s1di = S1i
       S1r = zeror
       S1i = zeroi
       as1 = zeror
-      IF ( aln>=(-Alim) ) THEN
+      IF( aln>=(-Alim) ) THEN
         CALL ZLOG(s1dr,s1di,c1r,c1i,idum)
         c1r = c1r - Zrr - Zrr
         c1i = c1i - Zri - Zri
@@ -57,7 +56,7 @@ SUBROUTINE ZS1S2(Zrr,Zri,S1r,S1i,S2r,S2i,Nz,Ascle,Alim,Iuf)
     END IF
   END IF
   aa = MAX(as1,as2)
-  IF ( aa>Ascle ) RETURN
+  IF( aa>Ascle ) RETURN
   S1r = zeror
   S1i = zeroi
   S2r = zeror

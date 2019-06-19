@@ -1,7 +1,6 @@
 !** SCHKW
 SUBROUTINE SCHKW(Name,Lociw,Leniw,Locw,Lenw,Ierr,Iter,Err)
-  !>
-  !  SLAP WORK/IWORK Array Bounds Checker.
+  !> SLAP WORK/IWORK Array Bounds Checker.
   !            This routine checks the work array lengths and interfaces
   !            to the SLATEC error handler if a problem is found.
   !***
@@ -74,8 +73,8 @@ SUBROUTINE SCHKW(Name,Lociw,Leniw,Locw,Lenw,Ierr,Iter,Err)
   !   921015  Added code to initialize ITER and ERR when IERR=0.  (FNF)
   USE service, ONLY : R1MACH, XERMSG
   !     .. Scalar Arguments ..
-  REAL(SP) Err
-  INTEGER Ierr, Iter, Leniw, Lenw, Lociw, Locw
+  REAL(SP) :: Err
+  INTEGER :: Ierr, Iter, Leniw, Lenw, Lociw, Locw
   CHARACTER Name*(*)
   !     .. Local Scalars ..
   CHARACTER xern1*8, xern2*8, xernam*8
@@ -86,7 +85,7 @@ SUBROUTINE SCHKW(Name,Lociw,Leniw,Locw,Lenw,Ierr,Iter,Err)
   Ierr = 0
   Iter = 0
   Err = R1MACH(1)
-  IF ( Lociw>Leniw ) THEN
+  IF( Lociw>Leniw ) THEN
     Ierr = 1
     Err = R1MACH(2)
     xernam = Name
@@ -98,7 +97,7 @@ SUBROUTINE SCHKW(Name,Lociw,Leniw,Locw,Lenw,Ierr,Iter,Err)
   END IF
   !
   !         Check the Real workspace situation.
-  IF ( Locw>Lenw ) THEN
+  IF( Locw>Lenw ) THEN
     Ierr = 1
     Err = R1MACH(2)
     xernam = Name

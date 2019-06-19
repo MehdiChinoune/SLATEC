@@ -1,7 +1,6 @@
 !** DAIE
 REAL(DP) FUNCTION DAIE(X)
-  !>
-  !  Calculate the Airy function for a negative argument and an
+  !> Calculate the Airy function for a negative argument and an
   !            exponentially scaled Airy function for a non-negative
   !            argument.
   !***
@@ -22,8 +21,8 @@ REAL(DP) FUNCTION DAIE(X)
   ! Airy function depending on the value of the argument.  The function
   ! and argument are both double precision.
   !
-  ! Evaluate AI(X) for X .LE. 0.0 and AI(X)*EXP(ZETA) where
-  ! ZETA = 2/3 * X**(3/2)  for X .GE. 0.0
+  ! Evaluate AI(X) for X <= 0.0 and AI(X)*EXP(ZETA) where
+  ! ZETA = 2/3 * X**(3/2)  for X >= 0.0
   !
   ! Series for AIF        on the interval -1.00000E+00 to  1.00000E+00
   !                                        with weighted error   8.37E-33
@@ -130,7 +129,7 @@ REAL(DP) FUNCTION DAIE(X)
     -.134457433014553385789030399999D-30, +.347570964526601147340117333333D-31 ]
   LOGICAL, SAVE :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  DAIE
-  IF ( first ) THEN
+  IF( first ) THEN
     naif = INITDS(aifcs,13,eta)
     naig = INITDS(aigcs,13,eta)
     naip1 = INITDS(aip1cs,57,eta)
@@ -138,23 +137,23 @@ REAL(DP) FUNCTION DAIE(X)
     first = .FALSE.
   END IF
   !
-  IF ( X<(-1.0D0) ) THEN
+  IF( X<(-1.0D0) ) THEN
     CALL D9AIMP(X,xm,theta)
     DAIE = xm*COS(theta)
     RETURN
     !
-  ELSEIF ( X<=1.0D0 ) THEN
+  ELSEIF( X<=1.0D0 ) THEN
     z = 0.0D0
-    IF ( ABS(X)>x3sml ) z = X**3
+    IF( ABS(X)>x3sml ) z = X**3
     DAIE = 0.375D0 + (DCSEVL(z,aifcs,naif)-X*(0.25D0+DCSEVL(z,aigcs,naig)))
-    IF ( X>x32sml ) DAIE = DAIE*EXP(2.0D0*X*SQRT(X)/3.0D0)
+    IF( X>x32sml ) DAIE = DAIE*EXP(2.0D0*X*SQRT(X)/3.0D0)
     RETURN
     !
-  ELSEIF ( X>4.0D0 ) THEN
+  ELSEIF( X>4.0D0 ) THEN
     !
     sqrtx = SQRT(X)
     z = -1.0D0
-    IF ( X<xbig ) z = 16.0D0/(X*sqrtx) - 1.0D0
+    IF( X<xbig ) z = 16.0D0/(X*sqrtx) - 1.0D0
     DAIE = (0.28125D0+DCSEVL(z,aip2cs,naip2))/SQRT(sqrtx)
     RETURN
   END IF

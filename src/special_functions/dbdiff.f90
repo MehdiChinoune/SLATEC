@@ -1,7 +1,6 @@
 !** DBDIFF
 SUBROUTINE DBDIFF(L,V)
-  !>
-  !  Subsidiary to DBSKIN
+  !> Subsidiary to DBSKIN
   !***
   ! **Library:**   SLATEC
   !***
@@ -31,7 +30,7 @@ SUBROUTINE DBDIFF(L,V)
   REAL(DP) :: V(L)
   INTEGER :: i, j, k
   !* FIRST EXECUTABLE STATEMENT  DBDIFF
-  IF ( L==1 ) RETURN
+  IF( L==1 ) RETURN
   DO j = 2, L
     k = L
     DO i = j, L

@@ -1,7 +1,6 @@
 !** DPCHSP
 SUBROUTINE DPCHSP(Ic,Vc,N,X,F,D,Incfd,Wk,Nwk,Ierr)
-  !>
-  !  Set derivatives needed to determine the Hermite represen-
+  !> Set derivatives needed to determine the Hermite represen-
   !            tation of the cubic spline interpolant to given data, with
   !            specified boundary conditions.
   !***
@@ -61,9 +60,9 @@ SUBROUTINE DPCHSP(Ic,Vc,N,X,F,D,Incfd,Wk,Nwk,Ierr)
   !           IBEG = 1  if first derivative at X(1) is given in VC(1).
   !           IBEG = 2  if second derivative at X(1) is given in VC(1).
   !           IBEG = 3  to use the 3-point difference formula for D(1).
-  !                     (Reverts to the default b.c. if N.LT.3 .)
+  !                     (Reverts to the default b.c. if N<3 .)
   !           IBEG = 4  to use the 4-point difference formula for D(1).
-  !                     (Reverts to the default b.c. if N.LT.4 .)
+  !                     (Reverts to the default b.c. if N<4 .)
   !          NOTES:
   !           1. An error return is taken if IBEG is out of range.
   !           2. For the "natural" boundary condition, use IBEG=2 and
@@ -83,11 +82,11 @@ SUBROUTINE DPCHSP(Ic,Vc,N,X,F,D,Incfd,Wk,Nwk,Ierr)
   !           VC(1) need be set only if IC(1) = 1 or 2 .
   !           VC(2) need be set only if IC(2) = 1 or 2 .
   !
-  !     N -- (input) number of data points.  (Error return if N.LT.2 .)
+  !     N -- (input) number of data points.  (Error return if N<2 .)
   !
   !     X -- (input) real*8 array of independent variable values.  The
   !           elements of X must be strictly increasing:
-  !                X(I-1) .LT. X(I),  I = 2(1)N.
+  !                X(I-1) < X(I),  I = 2(1)N.
   !           (Error return if not.)
   !
   !     F -- (input) real*8 array of dependent variable values to be
@@ -103,22 +102,22 @@ SUBROUTINE DPCHSP(Ic,Vc,N,X,F,D,Incfd,Wk,Nwk,Ierr)
   !
   !     INCFD -- (input) increment between successive values in F and D.
   !           This argument is provided primarily for 2-D applications.
-  !           (Error return if  INCFD.LT.1 .)
+  !           (Error return if  INCFD<1 .)
   !
   !     WK -- (scratch) real*8 array of working storage.
   !
   !     NWK -- (input) length of work array.
-  !           (Error return if NWK.LT.2*N .)
+  !           (Error return if NWK<2*N .)
   !
   !     IERR -- (output) error flag.
   !           Normal return:
   !              IERR = 0  (no errors).
   !           "Recoverable" errors:
-  !              IERR = -1  if N.LT.2 .
-  !              IERR = -2  if INCFD.LT.1 .
+  !              IERR = -1  if N<2 .
+  !              IERR = -2  if INCFD<1 .
   !              IERR = -3  if the X-array is not strictly increasing.
-  !              IERR = -4  if IBEG.LT.0 or IBEG.GT.4 .
-  !              IERR = -5  if IEND.LT.0 of IEND.GT.4 .
+  !              IERR = -4  if IBEG<0 or IBEG>4 .
+  !              IERR = -5  if IEND<0 of IEND>4 .
   !              IERR = -6  if both of the above are true.
   !              IERR = -7  if NWK is too small.
   !               NOTE:  The above errors are checked in the order listed,
@@ -158,12 +157,12 @@ SUBROUTINE DPCHSP(Ic,Vc,N,X,F,D,Incfd,Wk,Nwk,Ierr)
   !
   !  DECLARE ARGUMENTS.
   !
-  INTEGER Ic(2), N, Incfd, Nwk, Ierr
+  INTEGER :: Ic(2), N, Incfd, Nwk, Ierr
   REAL(DP) :: Vc(2), X(N), F(Incfd,N), D(Incfd,N), Wk(2,Nwk)
   !
   !  DECLARE LOCAL VARIABLES.
   !
-  INTEGER ibeg, iend, indexx, j, nm1
+  INTEGER :: ibeg, iend, indexx, j, nm1
   REAL(DP) :: g, stemp(3), xtemp(4)
   !
   REAL(DP), PARAMETER :: zero = 0.D0, half = .5D0, one = 1.D0, two = 2.D0, three = 3.D0
@@ -171,32 +170,32 @@ SUBROUTINE DPCHSP(Ic,Vc,N,X,F,D,Incfd,Wk,Nwk,Ierr)
   !  VALIDITY-CHECK ARGUMENTS.
   !
   !* FIRST EXECUTABLE STATEMENT  DPCHSP
-  IF ( N<2 ) THEN
+  IF( N<2 ) THEN
     !
     !  ERROR RETURNS.
     !
-    !     N.LT.2 RETURN.
+    !     N<2 RETURN.
     Ierr = -1
     CALL XERMSG('DPCHSP','NUMBER OF DATA POINTS LESS THAN TWO',Ierr,1)
     RETURN
   ELSE
-    IF ( Incfd<1 ) THEN
+    IF( Incfd<1 ) THEN
       !
-      !     INCFD.LT.1 RETURN.
+      !     INCFD<1 RETURN.
       Ierr = -2
       CALL XERMSG('DPCHSP','INCREMENT LESS THAN ONE',Ierr,1)
       RETURN
     ELSE
       DO j = 2, N
-        IF ( X(j)<=X(j-1) ) GOTO 20
+        IF( X(j)<=X(j-1) ) GOTO 20
       END DO
       !
       ibeg = Ic(1)
       iend = Ic(2)
       Ierr = 0
-      IF ( (ibeg<0).OR.(ibeg>4) ) Ierr = Ierr - 1
-      IF ( (iend<0).OR.(iend>4) ) Ierr = Ierr - 2
-      IF ( Ierr<0 ) THEN
+      IF( (ibeg<0) .OR. (ibeg>4) ) Ierr = Ierr - 1
+      IF( (iend<0) .OR. (iend>4) ) Ierr = Ierr - 2
+      IF( Ierr<0 ) THEN
         !
         !     IC OUT OF RANGE RETURN.
         Ierr = Ierr - 3
@@ -205,7 +204,7 @@ SUBROUTINE DPCHSP(Ic,Vc,N,X,F,D,Incfd,Wk,Nwk,Ierr)
         !
         !  FUNCTION DEFINITION IS OK -- GO ON.
         !
-      ELSEIF ( Nwk<2*N ) THEN
+      ELSEIF( Nwk<2*N ) THEN
         !
         !     NWK TOO SMALL RETURN.
         Ierr = -7
@@ -222,42 +221,42 @@ SUBROUTINE DPCHSP(Ic,Vc,N,X,F,D,Incfd,Wk,Nwk,Ierr)
         !
         !  SET TO DEFAULT BOUNDARY CONDITIONS IF N IS TOO SMALL.
         !
-        IF ( ibeg>N ) ibeg = 0
-        IF ( iend>N ) iend = 0
+        IF( ibeg>N ) ibeg = 0
+        IF( iend>N ) iend = 0
         !
         !  SET UP FOR BOUNDARY CONDITIONS.
         !
-        IF ( (ibeg==1).OR.(ibeg==2) ) THEN
+        IF( (ibeg==1) .OR. (ibeg==2) ) THEN
           D(1,1) = Vc(1)
-        ELSEIF ( ibeg>2 ) THEN
+        ELSEIF( ibeg>2 ) THEN
           !        PICK UP FIRST IBEG POINTS, IN REVERSE ORDER.
           DO j = 1, ibeg
             indexx = ibeg - j + 1
             !           INDEX RUNS FROM IBEG DOWN TO 1.
             xtemp(j) = X(indexx)
-            IF ( j<ibeg ) stemp(j) = Wk(2,indexx)
+            IF( j<ibeg ) stemp(j) = Wk(2,indexx)
           END DO
           !                 --------------------------------
           D(1,1) = DPCHDF(ibeg,xtemp,stemp,Ierr)
           !                 --------------------------------
-          IF ( Ierr/=0 ) GOTO 100
+          IF( Ierr/=0 ) GOTO 100
           ibeg = 1
         END IF
         !
-        IF ( (iend==1).OR.(iend==2) ) THEN
+        IF( (iend==1) .OR. (iend==2) ) THEN
           D(1,N) = Vc(2)
-        ELSEIF ( iend>2 ) THEN
+        ELSEIF( iend>2 ) THEN
           !        PICK UP LAST IEND POINTS.
           DO j = 1, iend
             indexx = N - iend + j
             !           INDEX RUNS FROM N+1-IEND UP TO N.
             xtemp(j) = X(indexx)
-            IF ( j<iend ) stemp(j) = Wk(2,indexx+1)
+            IF( j<iend ) stemp(j) = Wk(2,indexx+1)
           END DO
           !                 --------------------------------
           D(1,N) = DPCHDF(iend,xtemp,stemp,Ierr)
           !                 --------------------------------
-          IF ( Ierr/=0 ) GOTO 100
+          IF( Ierr/=0 ) GOTO 100
           iend = 1
         END IF
         !
@@ -271,20 +270,20 @@ SUBROUTINE DPCHSP(Ic,Vc,N,X,F,D,Incfd,Wk,Nwk,Ierr)
         !  CONSTRUCT FIRST EQUATION FROM FIRST BOUNDARY CONDITION, OF THE FORM
         !             WK(2,1)*S(1) + WK(1,1)*S(2) = D(1,1)
         !
-        IF ( ibeg==0 ) THEN
-          IF ( N==2 ) THEN
+        IF( ibeg==0 ) THEN
+          IF( N==2 ) THEN
             !           NO CONDITION AT LEFT END AND N = 2.
             Wk(2,1) = one
             Wk(1,1) = one
             D(1,1) = two*Wk(2,2)
           ELSE
-            !           NOT-A-KNOT CONDITION AT LEFT END AND N .GT. 2.
+            !           NOT-A-KNOT CONDITION AT LEFT END AND N > 2.
             Wk(2,1) = Wk(1,3)
             Wk(1,1) = Wk(1,2) + Wk(1,3)
             D(1,1) = ((Wk(1,2)+two*Wk(1,1))*Wk(2,2)*Wk(1,3)+Wk(1,2)&
               **2*Wk(2,3))/Wk(1,1)
           END IF
-        ELSEIF ( ibeg==1 ) THEN
+        ELSEIF( ibeg==1 ) THEN
           !        SLOPE PRESCRIBED AT LEFT END.
           Wk(2,1) = one
           Wk(1,1) = zero
@@ -300,9 +299,9 @@ SUBROUTINE DPCHSP(Ic,Vc,N,X,F,D,Incfd,Wk,Nwk,Ierr)
         !  EQUATION READS    WK(2,J)*S(J) + WK(1,J)*S(J+1) = D(1,J).
         !
         nm1 = N - 1
-        IF ( nm1>1 ) THEN
+        IF( nm1>1 ) THEN
           DO j = 2, nm1
-            IF ( Wk(2,j-1)==zero ) GOTO 50
+            IF( Wk(2,j-1)==zero ) GOTO 50
             g = -Wk(1,j+1)/Wk(2,j-1)
             D(1,j) = g*D(1,j-1) + three*(Wk(1,j)*Wk(2,j+1)+Wk(1,j+1)*Wk(2,j))
             Wk(2,j) = g*Wk(1,j-1) + two*(Wk(1,j)+Wk(1,j+1))
@@ -315,33 +314,33 @@ SUBROUTINE DPCHSP(Ic,Vc,N,X,F,D,Incfd,Wk,Nwk,Ierr)
         !     IF SLOPE IS PRESCRIBED AT RIGHT END, ONE CAN GO DIRECTLY TO BACK-
         !     SUBSTITUTION, SINCE ARRAYS HAPPEN TO BE SET UP JUST RIGHT FOR IT
         !     AT THIS POINT.
-        IF ( iend/=1 ) THEN
+        IF( iend/=1 ) THEN
           !
-          IF ( iend/=0 ) THEN
+          IF( iend/=0 ) THEN
             !        SECOND DERIVATIVE PRESCRIBED AT RIGHT ENDPOINT.
             D(1,N) = three*Wk(2,N) + half*Wk(1,N)*D(1,N)
             Wk(2,N) = two
-            IF ( Wk(2,N-1)==zero ) GOTO 50
+            IF( Wk(2,N-1)==zero ) GOTO 50
             g = -one/Wk(2,N-1)
-          ELSEIF ( N==2.AND.ibeg==0 ) THEN
+          ELSEIF( N==2 .AND. ibeg==0 ) THEN
             !           NOT-A-KNOT AT RIGHT ENDPOINT AND AT LEFT ENDPOINT AND N = 2.
             D(1,2) = Wk(2,2)
             GOTO 10
-          ELSEIF ( (N==2).OR.(N==3.AND.ibeg==0) ) THEN
+          ELSEIF( (N==2) .OR. (N==3 .AND. ibeg==0) ) THEN
             !           EITHER (N=3 AND NOT-A-KNOT ALSO AT LEFT) OR (N=2 AND *NOT*
             !           NOT-A-KNOT AT LEFT END POINT).
             D(1,N) = two*Wk(2,N)
             Wk(2,N) = one
-            IF ( Wk(2,N-1)==zero ) GOTO 50
+            IF( Wk(2,N-1)==zero ) GOTO 50
             g = -one/Wk(2,N-1)
           ELSE
-            !           NOT-A-KNOT AND N .GE. 3, AND EITHER N.GT.3 OR  ALSO NOT-A-
+            !           NOT-A-KNOT AND N >= 3, AND EITHER N>3 OR  ALSO NOT-A-
             !           KNOT AT LEFT END POINT.
             g = Wk(1,N-1) + Wk(1,N)
             !           DO NOT NEED TO CHECK FOLLOWING DENOMINATORS (X-DIFFERENCES).
             D(1,N) = ((Wk(1,N)+two*g)*Wk(2,N)*Wk(1,N-1)+Wk(1,N)&
               **2*(F(1,N-1)-F(1,N-2))/Wk(1,N-1))/g
-            IF ( Wk(2,N-1)==zero ) GOTO 50
+            IF( Wk(2,N-1)==zero ) GOTO 50
             g = -g/Wk(2,N-1)
             Wk(2,N) = Wk(1,N-1)
           END IF
@@ -349,7 +348,7 @@ SUBROUTINE DPCHSP(Ic,Vc,N,X,F,D,Incfd,Wk,Nwk,Ierr)
           !  COMPLETE FORWARD PASS OF GAUSS ELIMINATION.
           !
           Wk(2,N) = g*Wk(1,N-1) + Wk(2,N)
-          IF ( Wk(2,N)==zero ) GOTO 50
+          IF( Wk(2,N)==zero ) GOTO 50
           D(1,N) = (g*D(1,N-1)+D(1,N))/Wk(2,N)
         END IF
         !
@@ -357,7 +356,7 @@ SUBROUTINE DPCHSP(Ic,Vc,N,X,F,D,Incfd,Wk,Nwk,Ierr)
         !
         10 CONTINUE
         DO j = nm1, 1, -1
-          IF ( Wk(2,j)==zero ) GOTO 50
+          IF( Wk(2,j)==zero ) GOTO 50
           D(1,j) = (D(1,j)-Wk(1,j)*D(1,j+1))/Wk(2,j)
         END DO
         ! --------------------(  END  CODING FROM CUBSPL )--------------------

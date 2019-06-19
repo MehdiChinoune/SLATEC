@@ -2,8 +2,7 @@
 SUBROUTINE DDASTP(X,Y,Yprime,Neq,RES,JAC,H,Wt,Jstart,Idid,Phi,&
     Delta,E,Wm,Iwm,Alpha,Beta,Gama,Psi,Sigma,Cj,Cjold,Hold,&
     S,Hmin,Uround,Iphase,Jcalc,K,Kold,Ns,Nonneg,Ntemp)
-  !>
-  !  Perform one step of the DDASSL integration.
+  !> Perform one step of the DDASSL integration.
   !***
   ! **Library:**   SLATEC (DASSL)
   !***
@@ -147,7 +146,7 @@ SUBROUTINE DDASTP(X,Y,Yprime,Neq,RES,JAC,H,Wt,Jstart,Idid,Phi,&
   ncf = 0
   nsf = 0
   nef = 0
-  IF ( Jstart==0 ) THEN
+  IF( Jstart==0 ) THEN
     !
     !     IF THIS IS THE FIRST STEP,PERFORM
     !     OTHER INITIALIZATIONS
@@ -180,10 +179,10 @@ SUBROUTINE DDASTP(X,Y,Yprime,Neq,RES,JAC,H,Wt,Jstart,Idid,Phi,&
   kp2 = K + 2
   km1 = K - 1
   xold = X
-  IF ( H/=Hold.OR.K/=Kold ) Ns = 0
+  IF( H/=Hold .OR. K/=Kold ) Ns = 0
   Ns = MIN(Ns+1,Kold+2)
   nsp1 = Ns + 1
-  IF ( kp1>=Ns ) THEN
+  IF( kp1>=Ns ) THEN
     !
     Beta(1) = 1.0D0
     Alpha(1) = 1.0D0
@@ -221,11 +220,11 @@ SUBROUTINE DDASTP(X,Y,Yprime,Neq,RES,JAC,H,Wt,Jstart,Idid,Phi,&
   !     DECIDE WHETHER NEW JACOBIAN IS NEEDED
   temp1 = (1.0D0-xrate)/(1.0D0+xrate)
   temp2 = 1.0D0/temp1
-  IF ( Cj/Cjold<temp1.OR.Cj/Cjold>temp2 ) Jcalc = -1
-  IF ( Cj/=cjlast ) S = 100.D0
+  IF( Cj/Cjold<temp1 .OR. Cj/Cjold>temp2 ) Jcalc = -1
+  IF( Cj/=cjlast ) S = 100.D0
   !
   !     CHANGE PHI TO PHI STAR
-  IF ( kp1>=nsp1 ) THEN
+  IF( kp1>=nsp1 ) THEN
     DO j = nsp1, kp1
       DO i = 1, Neq
         Phi(i,j) = Beta(j)*Phi(i,j)
@@ -269,7 +268,7 @@ SUBROUTINE DDASTP(X,Y,Yprime,Neq,RES,JAC,H,Wt,Jstart,Idid,Phi,&
     Iwm(LNRE) = Iwm(LNRE) + 1
     ires = 0
     CALL RES(X,Y,Yprime,Delta,ires)
-    IF ( ires<0 ) THEN
+    IF( ires<0 ) THEN
       !
       !
       !     EXITS FROM BLOCK 3
@@ -285,17 +284,17 @@ SUBROUTINE DDASTP(X,Y,Yprime,Neq,RES,JAC,H,Wt,Jstart,Idid,Phi,&
       !     (WHERE G(X,Y,YPRIME)=0). SET
       !     JCALC TO 0 AS AN INDICATOR THAT
       !     THIS HAS BEEN DONE.
-      IF ( Jcalc==-1 ) THEN
+      IF( Jcalc==-1 ) THEN
         Iwm(LNJE) = Iwm(LNJE) + 1
         Jcalc = 0
         CALL DDAJAC(Neq,X,Y,Yprime,Delta,Cj,H,ier,Wt,E,Wm,Iwm,RES,ires,&
           Uround,JAC,Ntemp)
         Cjold = Cj
         S = 100.D0
-        IF ( ires<0 ) THEN
+        IF( ires<0 ) THEN
           convgd = .FALSE.
           GOTO 300
-        ELSEIF ( ier/=0 ) THEN
+        ELSEIF( ier/=0 ) THEN
           convgd = .FALSE.
           GOTO 300
         ELSE
@@ -332,29 +331,29 @@ SUBROUTINE DDASTP(X,Y,Yprime,Neq,RES,JAC,H,Wt,Jstart,Idid,Phi,&
         !
         !     TEST FOR CONVERGENCE OF THE ITERATION
         delnrm = DDANRM(Neq,Delta,Wt)
-        IF ( delnrm<=100.D0*Uround*pnorm ) GOTO 200
-        IF ( m>0 ) THEN
+        IF( delnrm<=100.D0*Uround*pnorm ) GOTO 200
+        IF( m>0 ) THEN
           rate = (delnrm/oldnrm)**(1.0D0/m)
-          IF ( rate>0.90D0 ) EXIT
+          IF( rate>0.90D0 ) EXIT
           S = rate/(1.0D0-rate)
         ELSE
           oldnrm = delnrm
         END IF
-        IF ( S*delnrm<=0.33D0 ) GOTO 200
+        IF( S*delnrm<=0.33D0 ) GOTO 200
         !
         !     THE CORRECTOR HAS NOT YET CONVERGED.
         !     UPDATE M AND TEST WHETHER THE
         !     MAXIMUM NUMBER OF ITERATIONS HAVE
         !     BEEN TRIED.
         m = m + 1
-        IF ( m>=maxit ) EXIT
+        IF( m>=maxit ) EXIT
         !
         !     EVALUATE THE RESIDUAL
         !     AND GO BACK TO DO ANOTHER ITERATION
         Iwm(LNRE) = Iwm(LNRE) + 1
         ires = 0
         CALL RES(X,Y,Yprime,Delta,ires)
-        IF ( ires<0 ) THEN
+        IF( ires<0 ) THEN
           convgd = .FALSE.
           GOTO 300
         END IF
@@ -365,7 +364,7 @@ SUBROUTINE DDASTP(X,Y,Yprime,Neq,RES,JAC,H,Wt,Jstart,Idid,Phi,&
       !     ITERATIONS. IF THE ITERATION MATRIX
       !     IS NOT CURRENT,RE-DO THE STEP WITH
       !     A NEW ITERATION MATRIX.
-      IF ( Jcalc==0 ) THEN
+      IF( Jcalc==0 ) THEN
         convgd = .FALSE.
         GOTO 300
       ELSE
@@ -380,12 +379,12 @@ SUBROUTINE DDASTP(X,Y,Yprime,Neq,RES,JAC,H,Wt,Jstart,Idid,Phi,&
   !     TO DO IT IS SMALL ENOUGH.  IF THE CHANGE IS TOO LARGE, THEN
   !     CONSIDER THE CORRECTOR ITERATION TO HAVE FAILED.
   200 CONTINUE
-  IF ( Nonneg/=0 ) THEN
+  IF( Nonneg/=0 ) THEN
     DO i = 1, Neq
       Delta(i) = MIN(Y(i),0.0D0)
     END DO
     delnrm = DDANRM(Neq,Delta,Wt)
-    IF ( delnrm>0.33D0 ) THEN
+    IF( delnrm>0.33D0 ) THEN
       convgd = .FALSE.
     ELSE
       DO i = 1, Neq
@@ -394,7 +393,7 @@ SUBROUTINE DDASTP(X,Y,Yprime,Neq,RES,JAC,H,Wt,Jstart,Idid,Phi,&
     END IF
   END IF
   300 Jcalc = 1
-  IF ( convgd ) THEN
+  IF( convgd ) THEN
     !
     !
     !
@@ -414,20 +413,20 @@ SUBROUTINE DDASTP(X,Y,Yprime,Neq,RES,JAC,H,Wt,Jstart,Idid,Phi,&
     terk = (K+1)*erk
     est = erk
     knew = K
-    IF ( K/=1 ) THEN
+    IF( K/=1 ) THEN
       DO i = 1, Neq
         Delta(i) = Phi(i,kp1) + E(i)
       END DO
       erkm1 = Sigma(K)*DDANRM(Neq,Delta,Wt)
       terkm1 = K*erkm1
-      IF ( K>2 ) THEN
+      IF( K>2 ) THEN
         DO i = 1, Neq
           Delta(i) = Phi(i,K) + Delta(i)
         END DO
         erkm2 = Sigma(K-1)*DDANRM(Neq,Delta,Wt)
         terkm2 = (K-1)*erkm2
-        IF ( MAX(terkm1,terkm2)>terk ) GOTO 350
-      ELSEIF ( terkm1>0.5D0*terk ) THEN
+        IF( MAX(terkm1,terkm2)>terk ) GOTO 350
+      ELSEIF( terkm1>0.5D0*terk ) THEN
         GOTO 350
       END IF
       !     LOWER THE ORDER
@@ -439,7 +438,7 @@ SUBROUTINE DDASTP(X,Y,Yprime,Neq,RES,JAC,H,Wt,Jstart,Idid,Phi,&
     !     CALCULATE THE LOCAL ERROR FOR THE CURRENT STEP
     !     TO SEE IF THE STEP WAS SUCCESSFUL
     350 err = ck*enorm
-    IF ( err>1.0D0 ) GOTO 500
+    IF( err>1.0D0 ) GOTO 500
     !
     !
     !
@@ -464,8 +463,8 @@ SUBROUTINE DDASTP(X,Y,Yprime,Neq,RES,JAC,H,Wt,Jstart,Idid,Phi,&
     !        ALREADY USING MAXIMUM ORDER, OR
     !        STEPSIZE NOT CONSTANT, OR
     !        ORDER RAISED IN PREVIOUS STEP
-    IF ( knew==km1.OR.K==Iwm(LMXORD) ) Iphase = 1
-    IF ( Iphase==0 ) THEN
+    IF( knew==km1 .OR. K==Iwm(LMXORD) ) Iphase = 1
+    IF( Iphase==0 ) THEN
       !
       !     IF IPHASE = 0, INCREASE ORDER BY ONE AND MULTIPLY STEPSIZE BY
       !     FACTOR TWO
@@ -474,18 +473,18 @@ SUBROUTINE DDASTP(X,Y,Yprime,Neq,RES,JAC,H,Wt,Jstart,Idid,Phi,&
       H = hnew
       GOTO 450
     ELSE
-      IF ( knew/=km1 ) THEN
-        IF ( K/=Iwm(LMXORD) ) THEN
-          IF ( kp1<Ns.AND.kdiff/=1 ) THEN
+      IF( knew/=km1 ) THEN
+        IF( K/=Iwm(LMXORD) ) THEN
+          IF( kp1<Ns .AND. kdiff/=1 ) THEN
             DO i = 1, Neq
               Delta(i) = E(i) - Phi(i,kp2)
             END DO
             erkp1 = (1.0D0/(K+2))*DDANRM(Neq,Delta,Wt)
             terkp1 = (K+2)*erkp1
-            IF ( K>1 ) THEN
-              IF ( terkm1<=MIN(terk,terkp1) ) GOTO 360
-              IF ( terkp1>=terk.OR.K==Iwm(LMXORD) ) GOTO 400
-            ELSEIF ( terkp1>=0.5D0*terk ) THEN
+            IF( K>1 ) THEN
+              IF( terkm1<=MIN(terk,terkp1) ) GOTO 360
+              IF( terkp1>=terk .OR. K==Iwm(LMXORD) ) GOTO 400
+            ELSEIF( terkp1>=0.5D0*terk ) THEN
               GOTO 400
             END IF
             !
@@ -508,9 +507,9 @@ SUBROUTINE DDASTP(X,Y,Yprime,Neq,RES,JAC,H,Wt,Jstart,Idid,Phi,&
     400 hnew = H
     temp2 = K + 1
     r = (2.0D0*est+0.0001D0)**(-1.0D0/temp2)
-    IF ( r>=2.0D0 ) THEN
+    IF( r>=2.0D0 ) THEN
       hnew = 2.0D0*H
-    ELSEIF ( r<=1.0D0 ) THEN
+    ELSEIF( r<=1.0D0 ) THEN
       r = MAX(0.5D0,MIN(0.9D0,r))
       hnew = H*r
     END IF
@@ -519,7 +518,7 @@ SUBROUTINE DDASTP(X,Y,Yprime,Neq,RES,JAC,H,Wt,Jstart,Idid,Phi,&
     !
     !     UPDATE DIFFERENCES FOR NEXT STEP
     450 CONTINUE
-    IF ( Kold/=Iwm(LMXORD) ) THEN
+    IF( Kold/=Iwm(LMXORD) ) THEN
       DO i = 1, Neq
         Phi(i,kp2) = E(i)
       END DO
@@ -552,7 +551,7 @@ SUBROUTINE DDASTP(X,Y,Yprime,Neq,RES,JAC,H,Wt,Jstart,Idid,Phi,&
   !
   !     RESTORE X,PHI,PSI
   X = xold
-  IF ( kp1>=nsp1 ) THEN
+  IF( kp1>=nsp1 ) THEN
     DO j = nsp1, kp1
       temp1 = 1.0D0/Beta(j)
       DO i = 1, Neq
@@ -567,7 +566,7 @@ SUBROUTINE DDASTP(X,Y,Yprime,Neq,RES,JAC,H,Wt,Jstart,Idid,Phi,&
   !
   !     TEST WHETHER FAILURE IS DUE TO CORRECTOR ITERATION
   !     OR ERROR TEST
-  IF ( convgd ) THEN
+  IF( convgd ) THEN
     !
     !
     !     THE NEWTON SCHEME CONVERGED, AND THE CAUSE
@@ -575,7 +574,7 @@ SUBROUTINE DDASTP(X,Y,Yprime,Neq,RES,JAC,H,Wt,Jstart,Idid,Phi,&
     !     EXCEEDING THE TOLERANCE.
     nef = nef + 1
     Iwm(LETF) = Iwm(LETF) + 1
-    IF ( nef<=1 ) THEN
+    IF( nef<=1 ) THEN
       !
       !     ON FIRST ERROR TEST FAILURE, KEEP CURRENT ORDER OR LOWER
       !     ORDER BY ONE.  COMPUTE NEW STEPSIZE BASED ON DIFFERENCES
@@ -585,24 +584,24 @@ SUBROUTINE DDASTP(X,Y,Yprime,Neq,RES,JAC,H,Wt,Jstart,Idid,Phi,&
       r = 0.90D0*(2.0D0*est+0.0001D0)**(-1.0D0/temp2)
       r = MAX(0.25D0,MIN(0.9D0,r))
       H = H*r
-      IF ( ABS(H)>=Hmin ) GOTO 100
+      IF( ABS(H)>=Hmin ) GOTO 100
       Idid = -6
       !
       !     ON SECOND ERROR TEST FAILURE, USE THE CURRENT ORDER OR
       !     DECREASE ORDER BY ONE.  REDUCE THE STEPSIZE BY A FACTOR OF
       !     FOUR.
-    ELSEIF ( nef>2 ) THEN
+    ELSEIF( nef>2 ) THEN
       !
       !     ON THIRD AND SUBSEQUENT ERROR TEST FAILURES, SET THE ORDER TO
       !     ONE AND REDUCE THE STEPSIZE BY A FACTOR OF FOUR.
       K = 1
       H = 0.25D0*H
-      IF ( ABS(H)>=Hmin ) GOTO 100
+      IF( ABS(H)>=Hmin ) GOTO 100
       Idid = -6
     ELSE
       K = knew
       H = 0.25D0*H
-      IF ( ABS(H)>=Hmin ) GOTO 100
+      IF( ABS(H)>=Hmin ) GOTO 100
       Idid = -6
     END IF
   ELSE
@@ -612,7 +611,7 @@ SUBROUTINE DDASTP(X,Y,Yprime,Neq,RES,JAC,H,Wt,Jstart,Idid,Phi,&
     !     THE NEWTON ITERATION FAILED TO CONVERGE WITH
     !     A CURRENT ITERATION MATRIX.  DETERMINE THE CAUSE
     !     OF THE FAILURE AND TAKE APPROPRIATE ACTION.
-    IF ( ier/=0 ) THEN
+    IF( ier/=0 ) THEN
       !
       !     THE ITERATION MATRIX IS SINGULAR. REDUCE
       !     THE STEPSIZE BY A FACTOR OF 4. IF
@@ -621,7 +620,7 @@ SUBROUTINE DDASTP(X,Y,Yprime,Neq,RES,JAC,H,Wt,Jstart,Idid,Phi,&
       nsf = nsf + 1
       r = 0.25D0
       H = H*r
-      IF ( nsf<3.AND.ABS(H)>=Hmin ) GOTO 100
+      IF( nsf<3 .AND. ABS(H)>=Hmin ) GOTO 100
       Idid = -8
       !
       !
@@ -629,14 +628,14 @@ SUBROUTINE DDASTP(X,Y,Yprime,Neq,RES,JAC,H,Wt,Jstart,Idid,Phi,&
       !     OTHER THAN A SINGULAR ITERATION MATRIX.  IF IRES = -2, THEN
       !     RETURN.  OTHERWISE, REDUCE THE STEPSIZE AND TRY AGAIN, UNLESS
       !     TOO MANY FAILURES HAVE OCCURRED.
-    ELSEIF ( ires>-2 ) THEN
+    ELSEIF( ires>-2 ) THEN
       ncf = ncf + 1
       r = 0.25D0
       H = H*r
-      IF ( ncf<10.AND.ABS(H)>=Hmin ) GOTO 100
+      IF( ncf<10 .AND. ABS(H)>=Hmin ) GOTO 100
       Idid = -7
-      IF ( ires<0 ) Idid = -10
-      IF ( nef>=3 ) Idid = -9
+      IF( ires<0 ) Idid = -10
+      IF( nef>=3 ) Idid = -9
     ELSE
       Idid = -11
     END IF

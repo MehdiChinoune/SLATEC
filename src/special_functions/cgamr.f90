@@ -1,7 +1,6 @@
 !** CGAMR
 COMPLEX(SP) FUNCTION CGAMR(Z)
-  !>
-  !  Compute the reciprocal of the Gamma function.
+  !> Compute the reciprocal of the Gamma function.
   !***
   ! **Library:**   SLATEC (FNLIB)
   !***
@@ -28,13 +27,13 @@ COMPLEX(SP) FUNCTION CGAMR(Z)
   !   861211  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   USE service, ONLY : XGETF, XSETF, XERCLR
-  INTEGER irold
-  REAL(SP) x
-  COMPLEX(SP) Z
+  INTEGER :: irold
+  REAL(SP) :: x
+  COMPLEX(SP) :: Z
   !* FIRST EXECUTABLE STATEMENT  CGAMR
   CGAMR = (0.0,0.0)
   x = REAL(Z)
-  IF ( x<=0.0.AND.AINT(x)==x.AND.AIMAG(Z)==0.0 ) RETURN
+  IF( x<=0.0 .AND. AINT(x)==x .AND. AIMAG(Z)==0.0 ) RETURN
   !
   CALL XGETF(irold)
   CALL XSETF(1)

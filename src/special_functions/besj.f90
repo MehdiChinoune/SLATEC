@@ -1,7 +1,6 @@
 !** BESJ
 SUBROUTINE BESJ(X,Alpha,N,Y,Nz)
-  !>
-  !  Compute an N member sequence of J Bessel functions
+  !> Compute an N member sequence of J Bessel functions
   !            J/SUB(ALPHA+K-1)/(X), K=1,...,N for non-negative ALPHA
   !            and X.
   !***
@@ -42,10 +41,10 @@ SUBROUTINE BESJ(X,Alpha,N,Y,Nz)
   !     Description of Arguments
   !
   !         Input
-  !           X      - X .GE. 0.0E0
+  !           X      - X >= 0.0E0
   !           ALPHA  - order of first member of the sequence,
-  !                    ALPHA .GE. 0.0E0
-  !           N      - number of members in the sequence, N .GE. 1
+  !                    ALPHA >= 0.0E0
+  !           N      - number of members in the sequence, N >= 1
   !
   !         Output
   !           Y      - a vector whose first  N components contain
@@ -53,17 +52,17 @@ SUBROUTINE BESJ(X,Alpha,N,Y,Nz)
   !           NZ     - number of components of Y set to zero due to
   !                    underflow,
   !                    NZ=0  , normal return, computation completed
-  !                    NZ .NE. 0, last NZ components of Y set to zero,
+  !                    NZ /= 0, last NZ components of Y set to zero,
   !                             Y(K)=0.0E0, K=N-NZ+1,...,N.
   !
   !     Error Conditions
   !         Improper input arguments - a fatal error
-  !         Underflow  - a non-fatal error (NZ .NE. 0)
+  !         Underflow  - a non-fatal error (NZ /= 0)
   !
   !***
   ! **References:**  D. E. Amos, S. L. Daniel and M. K. Weston, CDC 6600
   !                 subroutines IBESS and JBESS for Bessel functions
-  !                 I(NU,X) and J(NU,X), X .GE. 0, NU .GE. 0, ACM
+  !                 I(NU,X) and J(NU,X), X >= 0, NU >= 0, ACM
   !                 Transactions on Mathematical Software 3, (1977),
   !                 pp. 76-92.
   !               F. W. J. Olver, Tables of Bessel Functions of Moderate
@@ -112,21 +111,21 @@ SUBROUTINE BESJ(X,Alpha,N,Y,Nz)
   !     TOLLN = -LN(TOL)
   tolln = 2.303E0*tb*i1
   tolln = MIN(tolln,34.5388E0)
-  IF ( N<1 ) THEN
+  IF( N<1 ) THEN
     CALL XERMSG('BESJ','N LESS THAN ONE.',2,1)
     RETURN
-  ELSEIF ( N==1 ) THEN
+  ELSEIF( N==1 ) THEN
     kt = 2
   END IF
   nn = N
-  IF ( X<0 ) THEN
+  IF( X<0 ) THEN
     CALL XERMSG('BESJ','X LESS THAN ZERO.',2,1)
     RETURN
-  ELSEIF ( X==0 ) THEN
-    IF ( Alpha<0 ) GOTO 1200
-    IF ( Alpha==0 ) THEN
+  ELSEIF( X==0 ) THEN
+    IF( Alpha<0 ) GOTO 1200
+    IF( Alpha==0 ) THEN
       Y(1) = 1.0E0
-      IF ( N==1 ) RETURN
+      IF( N==1 ) RETURN
       i1 = 2
     ELSE
       i1 = 1
@@ -136,7 +135,7 @@ SUBROUTINE BESJ(X,Alpha,N,Y,Nz)
     END DO
     RETURN
   ELSE
-    IF ( Alpha<0.0E0 ) GOTO 1200
+    IF( Alpha<0.0E0 ) GOTO 1200
     !
     ialp = INT(Alpha)
     fni = ialp + N - 1
@@ -150,27 +149,27 @@ SUBROUTINE BESJ(X,Alpha,N,Y,Nz)
     !     TO INFINITY AND ASYMPTOTIC EXPANSION FOR NU TO INFINITY ARE
     !     APPLIED.
     !
-    IF ( sxo2<=(fnu+1.0E0) ) THEN
+    IF( sxo2<=(fnu+1.0E0) ) THEN
       fn = fnu
       fnp1 = fn + 1.0E0
       xo2l = LOG(xo2)
       is = kt
-      IF ( X<=0.50E0 ) GOTO 200
+      IF( X<=0.50E0 ) GOTO 200
       ns = 0
     ELSE
       ta = MAX(20.0E0,fnu)
-      IF ( X>ta ) THEN
+      IF( X>ta ) THEN
         rtx = SQRT(X)
         tau = rtwo*rtx
         ta = tau + fnulim(kt)
-        IF ( fnu<=ta ) THEN
+        IF( fnu<=ta ) THEN
           !
           !     ASYMPTOTIC EXPANSION FOR X TO INFINITY WITH FORWARD RECURSION IN
-          !     OSCILLATORY REGION X.GT.MAX(20, NU), PROVIDED THE LAST MEMBER
+          !     OSCILLATORY REGION X>MAX(20, NU), PROVIDED THE LAST MEMBER
           !     OF THE SEQUENCE IS ALSO IN THE REGION.
           !
           in = INT(Alpha-tau+2.0E0)
-          IF ( in<=0 ) THEN
+          IF( in<=0 ) THEN
             idalp = ialp
             in = 0
           ELSE
@@ -191,14 +190,14 @@ SUBROUTINE BESJ(X,Alpha,N,Y,Nz)
           is = kt
           GOTO 100
         END IF
-      ELSEIF ( X>12.0E0 ) THEN
+      ELSEIF( X>12.0E0 ) THEN
         ans = MAX(36.0E0-fnu,0.0E0)
         ns = INT(ans)
         fni = fni + ns
         dfn = fni + fnf
         fn = dfn
         is = kt
-        IF ( N-1+ns>0 ) is = 3
+        IF( N-1+ns>0 ) is = 3
         GOTO 100
       ELSE
         xo2l = LOG(xo2)
@@ -210,7 +209,7 @@ SUBROUTINE BESJ(X,Alpha,N,Y,Nz)
     fn = dfn
     fnp1 = fn + 1.0E0
     is = kt
-    IF ( N-1+ns>0 ) is = 3
+    IF( N-1+ns>0 ) is = 3
     GOTO 200
   END IF
   100 CONTINUE
@@ -222,7 +221,7 @@ SUBROUTINE BESJ(X,Alpha,N,Y,Nz)
     i1 = MAX(i1,1)
     flgjy = 1.0E0
     CALL ASYJY(JAIRY,X,fn,flgjy,i1,temp(is),wk,iflw)
-    IF ( iflw/=0 ) THEN
+    IF( iflw/=0 ) THEN
       !
       !     SET UNDERFLOW VALUE AND UPDATE PARAMETERS
       !     UNDERFLOW CAN ONLY OCCUR FOR NS=0 SINCE THE ORDER MUST BE
@@ -233,8 +232,8 @@ SUBROUTINE BESJ(X,Alpha,N,Y,Nz)
       fni = fni - 1.0E0
       dfn = fni + fnf
       fn = dfn
-      IF ( nn<1 ) GOTO 500
-      IF ( nn==1 ) THEN
+      IF( nn<1 ) GOTO 500
+      IF( nn==1 ) THEN
         kt = 2
         is = 2
       END IF
@@ -247,10 +246,10 @@ SUBROUTINE BESJ(X,Alpha,N,Y,Nz)
         CASE (3)
           !     COMPUTATION OF LAST ORDER FOR ASYMPTOTIC EXPANSION NORMALIZATION
           gln = wk(3) + wk(2)
-          IF ( wk(6)>30.0E0 ) THEN
+          IF( wk(6)>30.0E0 ) THEN
             ta = 0.5E0*tolln/wk(4)
             ta = ((0.0493827160E0*ta-0.1111111111E0)*ta+0.6666666667E0)*ta*wk(6)
-            IF ( wk(1)<0.10E0 ) THEN
+            IF( wk(1)<0.10E0 ) THEN
               tb = (1.259921049E0+(0.1679894730E0+0.0887944358E0*wk(1))*wk(1))&
                 /wk(7)
             ELSE
@@ -260,7 +259,7 @@ SUBROUTINE BESJ(X,Alpha,N,Y,Nz)
             rden = (pp(4)*wk(6)+pp(3))*wk(6) + 1.0E0
             rzden = pp(1) + pp(2)*wk(6)
             ta = rzden/rden
-            IF ( wk(1)<0.10E0 ) THEN
+            IF( wk(1)<0.10E0 ) THEN
               tb = (1.259921049E0+(0.1679894730E0+0.0887944358E0*wk(1))*wk(1))&
                 /wk(7)
             ELSE
@@ -268,7 +267,7 @@ SUBROUTINE BESJ(X,Alpha,N,Y,Nz)
             END IF
           END IF
           in = INT(ta/tb+1.5E0)
-          IF ( in<=inlim ) GOTO 900
+          IF( in<=inlim ) GOTO 900
         CASE DEFAULT
       END SELECT
       temp(1) = temp(3)
@@ -280,17 +279,17 @@ SUBROUTINE BESJ(X,Alpha,N,Y,Nz)
   fni = fni - 1.0E0
   dfn = fni + fnf
   fn = dfn
-  IF ( i1/=2 ) GOTO 100
+  IF( i1/=2 ) GOTO 100
   GOTO 600
   !
-  !     SERIES FOR (X/2)**2.LE.NU+1
+  !     SERIES FOR (X/2)**2<=NU+1
   !
   200  gln = LOG_GAMMA(fnp1)
   arg = fn*xo2l - gln
-  IF ( arg<(-elim1) ) GOTO 400
+  IF( arg<(-elim1) ) GOTO 400
   earg = EXP(arg)
   300  s = 1.0E0
-  IF ( X>=tol ) THEN
+  IF( X>=tol ) THEN
     ak = 3.0E0
     t2 = 1.0E0
     t = 1.0E0
@@ -299,7 +298,7 @@ SUBROUTINE BESJ(X,Alpha,N,Y,Nz)
       s2 = t2 + s1
       t = -t*sxo2/s2
       s = s + t
-      IF ( ABS(t)<tol ) EXIT
+      IF( ABS(t)<tol ) EXIT
       t2 = t2 + ak
       ak = ak + 2.0E0
       s1 = s1 + fn
@@ -338,14 +337,14 @@ SUBROUTINE BESJ(X,Alpha,N,Y,Nz)
   fni = fni - 1.0E0
   dfn = fni + fnf
   fn = dfn
-  IF ( nn<1 ) GOTO 500
-  IF ( nn==1 ) THEN
+  IF( nn<1 ) GOTO 500
+  IF( nn==1 ) THEN
     kt = 2
     is = 2
   END IF
-  IF ( sxo2>fnp1 ) GOTO 100
+  IF( sxo2>fnp1 ) GOTO 100
   arg = arg - xo2l + LOG(fnp1)
-  IF ( arg>=(-elim1) ) GOTO 200
+  IF( arg>=(-elim1) ) GOTO 200
   GOTO 400
   500  Nz = N - nn
   RETURN
@@ -353,13 +352,13 @@ SUBROUTINE BESJ(X,Alpha,N,Y,Nz)
   !     BACKWARD RECURSION SECTION
   !
   600 CONTINUE
-  IF ( ns==0 ) THEN
+  IF( ns==0 ) THEN
     Nz = N - nn
-    IF ( kt==2 ) GOTO 700
+    IF( kt==2 ) GOTO 700
     !     BACKWARD RECUR FROM INDEX ALPHA+NN-1 TO ALPHA
     Y(nn) = temp(1)
     Y(nn-1) = temp(2)
-    IF ( nn==2 ) RETURN
+    IF( nn==2 ) RETURN
   END IF
   trx = 2.0E0/X
   dtm = fni
@@ -367,15 +366,15 @@ SUBROUTINE BESJ(X,Alpha,N,Y,Nz)
   ak = 1.0E0
   ta = temp(1)
   tb = temp(2)
-  IF ( ABS(ta)<=slim ) THEN
+  IF( ABS(ta)<=slim ) THEN
     ta = ta*rtol
     tb = tb*rtol
     ak = tol
   END IF
   kk = 2
   in = ns - 1
-  IF ( in==0 ) GOTO 1100
-  IF ( ns/=0 ) GOTO 1000
+  IF( in==0 ) GOTO 1100
+  IF( ns/=0 ) GOTO 1000
   k = nn - 2
   DO i = 3, nn
     s = tb
@@ -392,7 +391,7 @@ SUBROUTINE BESJ(X,Alpha,N,Y,Nz)
   800  dtm = fidal + fidal
   dtm = dtm*dtm
   tm = 0.0E0
-  IF ( fidal/=0.0E0.OR.ABS(fnf)>=tol ) tm = 4.0E0*fnf*(fidal+fidal+fnf)
+  IF( fidal/=0.0E0 .OR. ABS(fnf)>=tol ) tm = 4.0E0*fnf*(fidal+fidal+fnf)
   trx = dtm - 1.0E0
   t2 = (trx+tm)/etx
   s2 = t2
@@ -415,20 +414,20 @@ SUBROUTINE BESJ(X,Alpha,N,Y,Nz)
     ap = trx + tm
     t2 = t2*ap/t1
     s2 = s2 + t2
-    IF ( ABS(t2)<=relb ) EXIT
+    IF( ABS(t2)<=relb ) EXIT
     ak = ak + 8.0E0
   END DO
   temp(is) = coef*(s1*sb-s2*sa)
-  IF ( is==2 ) THEN
+  IF( is==2 ) THEN
     !
     !     FORWARD RECURSION SECTION
     !
-    IF ( kt==2 ) GOTO 700
+    IF( kt==2 ) GOTO 700
     s1 = temp(1)
     s2 = temp(2)
     tx = 2.0E0/X
     tm = dalpha*tx
-    IF ( in/=0 ) THEN
+    IF( in/=0 ) THEN
       !
       !     FORWARD RECUR TO INDEX ALPHA
       !
@@ -438,7 +437,7 @@ SUBROUTINE BESJ(X,Alpha,N,Y,Nz)
         tm = tm + tx
         s1 = s
       END DO
-      IF ( nn==1 ) THEN
+      IF( nn==1 ) THEN
         Y(1) = s2
         RETURN
       ELSE
@@ -453,7 +452,7 @@ SUBROUTINE BESJ(X,Alpha,N,Y,Nz)
     !
     Y(1) = s1
     Y(2) = s2
-    IF ( nn==2 ) RETURN
+    IF( nn==2 ) RETURN
     DO i = 3, nn
       Y(i) = tm*Y(i-1) - Y(i-2)
       tm = tm + tx
@@ -489,12 +488,12 @@ SUBROUTINE BESJ(X,Alpha,N,Y,Nz)
       tm = (dtm+fnf)*trx
     END DO
     !     NORMALIZATION
-    IF ( kk/=1 ) EXIT
+    IF( kk/=1 ) EXIT
     s = temp(3)
     sa = ta/tb
     ta = s
     tb = s
-    IF ( ABS(s)<=slim ) THEN
+    IF( ABS(s)<=slim ) THEN
       ta = ta*rtol
       tb = tb*rtol
       ak = tol
@@ -502,17 +501,17 @@ SUBROUTINE BESJ(X,Alpha,N,Y,Nz)
     ta = ta*sa
     kk = 2
     in = ns
-    IF ( ns==0 ) EXIT
+    IF( ns==0 ) EXIT
   END DO
   1100 Y(nn) = tb*ak
   Nz = N - nn
-  IF ( nn==1 ) RETURN
+  IF( nn==1 ) RETURN
   k = nn - 1
   s = tb
   tb = tm*tb - ta
   ta = s
   Y(k) = tb*ak
-  IF ( nn==2 ) RETURN
+  IF( nn==2 ) RETURN
   dtm = dtm - 1.0E0
   tm = (dtm+fnf)*trx
   k = nn - 2

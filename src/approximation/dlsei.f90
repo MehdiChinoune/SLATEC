@@ -1,7 +1,6 @@
 !** DLSEI
 SUBROUTINE DLSEI(W,Mdw,Me,Ma,Mg,N,Prgopt,X,Rnorme,Rnorml,Mode,Ws,Ip)
-  !>
-  !  Solve a linearly constrained least squares problem with
+  !> Solve a linearly constrained least squares problem with
   !            equality and inequality constraints, and optionally compute
   !            a covariance matrix.
   !***
@@ -37,16 +36,16 @@ SUBROUTINE DLSEI(W,Mdw,Me,Ma,Mg,N,Prgopt,X,Rnorme,Rnorml,Mode,Ws,Ip)
   !                   AX = B, (A MA by N) (equations to be
   !                                       approximately satisfied,
   !                                       least squares sense)
-  !                   GX .GE. H,(G MG by N) (inequality constraints)
+  !                   GX >= H,(G MG by N) (inequality constraints)
   !
-  !     The inequalities GX .GE. H mean that every component of the
-  !     product GX must be .GE. the corresponding component of H.
+  !     The inequalities GX >= H mean that every component of the
+  !     product GX must be >= the corresponding component of H.
   !
   !     In case the equality constraints cannot be satisfied, a
   !     generalized inverse solution residual vector length is obtained
   !     for F-EX.  This is the minimal length possible for F-EX.
   !
-  !     Any values ME .GE. 0, MA .GE. 0, or MG .GE. 0 are permitted.  The
+  !     Any values ME >= 0, MA >= 0, or MG >= 0 are permitted.  The
   !     rank of the matrix E is estimated during the computation.  We call
   !     this value KRANKE.  It is an output parameter in IP(1) defined
   !     below.  Using a generalized inverse solution of EX=F, a reduced
@@ -72,8 +71,8 @@ SUBROUTINE DLSEI(W,Mdw,Me,Ma,Mg,N,Prgopt,X,Rnorme,Rnorml,Mode,Ws,Ip)
   !     W(*,*),MDW,   The array W(*,*) is doubly subscripted with
   !     ME,MA,MG,N    first dimensioning parameter equal to MDW.
   !                   For this discussion let us call M = ME+MA+MG.  Then
-  !                   MDW must satisfy MDW .GE. M.  The condition
-  !                   MDW .LT. M is an error.
+  !                   MDW must satisfy MDW >= M.  The condition
+  !                   MDW < M is an error.
   !
   !                   The array W(*,*) contains the matrices and vectors
   !
@@ -128,7 +127,7 @@ SUBROUTINE DLSEI(W,Mdw,Me,Ma,Mg,N,Prgopt,X,Rnorme,Rnorml,Mode,Ws,Ip)
   !               ...PRGOPT(LINK) = 1 (no more options to change)
   !
   !                  Values of LINK that are nonpositive are errors.
-  !                  A value of LINK .GT. NLINK=100000 is also an error.
+  !                  A value of LINK > NLINK=100000 is also an error.
   !                  This helps prevent using invalid but positive
   !                  values of LINK that will probably extend
   !                  beyond the program limits of PRGOPT(*).
@@ -154,7 +153,7 @@ SUBROUTINE DLSEI(W,Mdw,Me,Ma,Mg,N,Prgopt,X,Rnorme,Rnorml,Mode,Ws,Ip)
   !                  is desired.  If it is zero, the covariance
   !                  matrix is not computed.  When the covariance matrix
   !                  is computed, the first dimensioning parameter
-  !                  of the array W(*,*) must satisfy MDW .GE. MAX(M,N).
+  !                  of the array W(*,*) must satisfy MDW >= MAX(M,N).
   !
   !                  KEY=10
   !                         Suppress scaling of the inverse of the
@@ -200,7 +199,7 @@ SUBROUTINE DLSEI(W,Mdw,Me,Ma,Mg,N,Prgopt,X,Rnorme,Rnorml,Mode,Ws,Ip)
   !                  be no smaller than DRELPR, the arithmetic-
   !                  storage precision.  The quantity DRELPR is the
   !                  largest positive number such that T=1.+DRELPR
-  !                  satisfies T .EQ. 1.  The quantity used
+  !                  satisfies T = 1.  The quantity used
   !                  here is internally restricted to be at
   !                  least DRELPR.  The data set for this option
   !                  is the new tolerance.
@@ -266,12 +265,12 @@ SUBROUTINE DLSEI(W,Mdw,Me,Ma,Mg,N,Prgopt,X,Rnorme,Rnorml,Mode,Ws,Ip)
   !                  LW = 2*(ME+N)+K+(MG+2)*(N+7)
   !
   !                  where K = max(MA+MG,N)
-  !                  This test will not be made if IP(1).LE.0.
+  !                  This test will not be made if IP(1)<=0.
   !
   !                  The length of IP(*) must be at least
   !
   !                  LIP = MG+2*N+2
-  !                  This test will not be made if IP(2).LE.0.
+  !                  This test will not be made if IP(2)<=0.
   !
   !     Output.. All TYPE REAL variables are DOUBLE PRECISION
   !
@@ -282,12 +281,12 @@ SUBROUTINE DLSEI(W,Mdw,Me,Ma,Mg,N,Prgopt,X,Rnorme,Rnorml,Mode,Ws,Ip)
   !                   respectively contain the residual vector
   !                   Euclidean lengths of F - EX and B - AX.  When
   !                   MODE=1 the equality constraint equations EX=F
-  !                   are contradictory, so RNORME .NE. 0.  The residual
+  !                   are contradictory, so RNORME /= 0.  The residual
   !                   vector F-EX has minimal Euclidean length.  For
-  !                   MODE .GE. 2, none of these parameters is defined.
+  !                   MODE >= 2, none of these parameters is defined.
   !
   !     MODE          Integer flag that indicates the subprogram
-  !                   status after completion.  If MODE .GE. 2, no
+  !                   status after completion.  If MODE >= 2, no
   !                   solution has been computed.
   !
   !                   MODE =
@@ -309,7 +308,7 @@ SUBROUTINE DLSEI(W,Mdw,Me,Ma,Mg,N,Prgopt,X,Rnorme,Rnorml,Mode,Ws,Ip)
   !                   MODE=1,2 or 3 must be made.  The
   !                   sets consisting of all solutions
   !                   of the equality constraints EX=F
-  !                   and all vectors satisfying GX .GE. H
+  !                   and all vectors satisfying GX >= H
   !                   have no points in common.  (In
   !                   particular this does not say that
   !                   each individual set has no points
@@ -317,8 +316,8 @@ SUBROUTINE DLSEI(W,Mdw,Me,Ma,Mg,N,Prgopt,X,Rnorme,Rnorml,Mode,Ws,Ip)
   !                   case.)
   !
   !                   4  Usage error occurred.  The value
-  !                      of MDW is .LT. ME+MA+MG, MDW is
-  !                      .LT. N and a covariance matrix is
+  !                      of MDW is < ME+MA+MG, MDW is
+  !                      < N and a covariance matrix is
   !                      requested, or the option vector
   !                      PRGOPT(*) is not properly defined,
   !                      or the lengths of the working arrays
@@ -413,29 +412,29 @@ SUBROUTINE DLSEI(W,Mdw,Me,Ma,Mg,N,Prgopt,X,Rnorme,Rnorml,Mode,Ws,Ip)
   !     Check that enough storage was allocated in WS(*) and IP(*).
   !
   Mode = 4
-  IF ( MIN(N,Me,Ma,Mg)<0 ) THEN
+  IF( MIN(N,Me,Ma,Mg)<0 ) THEN
     WRITE (xern1,'(I8)') N
     WRITE (xern2,'(I8)') Me
     WRITE (xern3,'(I8)') Ma
     WRITE (xern4,'(I8)') Mg
     CALL XERMSG('LSEI', &
-      'ALL OF THE VARIABLES N, ME, MA, MG MUST BE .GE. 0$$ENTERED ROUTINE WITH$$N  = '//&
+      'ALL OF THE VARIABLES N, ME, MA, MG MUST BE >= 0$$ENTERED ROUTINE WITH$$N  = '//&
       xern1//'$$ME = '//xern2//'$$MA = '//xern3//'$$MG = '//xern4,2,1)
     RETURN
   END IF
   !
-  IF ( Ip(1)>0 ) THEN
+  IF( Ip(1)>0 ) THEN
     lchk = 2*(Me+N) + MAX(Ma+Mg,N) + (Mg+2)*(N+7)
-    IF ( Ip(1)<lchk ) THEN
+    IF( Ip(1)<lchk ) THEN
       WRITE (xern1,'(I8)') lchk
       CALL XERMSG('DLSEI','INSUFFICIENT STORAGE ALLOCATED FOR WS(*), NEED LW = '//xern1,2,1)
       RETURN
     END IF
   END IF
   !
-  IF ( Ip(2)>0 ) THEN
+  IF( Ip(2)>0 ) THEN
     lchk = Mg + 2*N + 2
-    IF ( Ip(2)<lchk ) THEN
+    IF( Ip(2)<lchk ) THEN
       WRITE (xern1,'(I8)') lchk
       CALL XERMSG('DLSEI','INSUFFICIENT STORAGE ALLOCATED FOR IP(*), NEED LIP = '//xern1,2,1)
       RETURN
@@ -446,15 +445,15 @@ SUBROUTINE DLSEI(W,Mdw,Me,Ma,Mg,N,Prgopt,X,Rnorme,Rnorml,Mode,Ws,Ip)
   !     transformations.
   !
   m = Me + Ma + Mg
-  IF ( N<=0.OR.m<=0 ) THEN
+  IF( N<=0 .OR. m<=0 ) THEN
     Mode = 0
     Rnorme = 0
     Rnorml = 0
     RETURN
   END IF
   !
-  IF ( Mdw<m ) THEN
-    CALL XERMSG('DLSEI','MDW.LT.ME+MA+MG IS AN ERROR',2,1)
+  IF( Mdw<m ) THEN
+    CALL XERMSG('DLSEI','MDW<ME+MA+MG IS AN ERROR',2,1)
     RETURN
   END IF
   !
@@ -485,37 +484,37 @@ SUBROUTINE DLSEI(W,Mdw,Me,Ma,Mg,N,Prgopt,X,Rnorme,Rnorml,Mode,Ws,Ip)
   nlink = 100000
   last = 1
   link = INT( Prgopt(1) )
-  IF ( link==0.OR.link>nlink ) THEN
+  IF( link==0 .OR. link>nlink ) THEN
     CALL XERMSG('DLSEI','THE OPTION VECTOR IS UNDEFINED',2,1)
     RETURN
   END IF
   DO
     !
-    IF ( link>1 ) THEN
+    IF( link>1 ) THEN
       ntimes = ntimes + 1
-      IF ( ntimes>nopt ) THEN
+      IF( ntimes>nopt ) THEN
         CALL XERMSG('DLSEI',&
           'THE LINKS IN THE OPTION VECTOR ARE CYCLING.',2,1)
         RETURN
       END IF
       !
       key = INT( Prgopt(last+1) )
-      IF ( key==1 ) THEN
+      IF( key==1 ) THEN
         cov = Prgopt(last+2)/=0.D0
-      ELSEIF ( key==2.AND.Prgopt(last+2)/=0.D0 ) THEN
+      ELSEIF( key==2 .AND. Prgopt(last+2)/=0.D0 ) THEN
         DO j = 1, N
           t = NORM2(W(1:m,j))
-          IF ( t/=0.D0 ) t = 1.D0/t
+          IF( t/=0.D0 ) t = 1.D0/t
           Ws(j+n1-1) = t
         END DO
-      ELSEIF ( key==3 ) THEN
+      ELSEIF( key==3 ) THEN
         Ws(n1:n1+N-1) = Prgopt(last+2:last+N+1)
-      ELSEIF ( key==4 ) THEN
+      ELSEIF( key==4 ) THEN
         tau = MAX(drelpr,Prgopt(last+2))
       END IF
       !
       next = INT( Prgopt(link) )
-      IF ( next<=0.OR.next>nlink ) THEN
+      IF( next<=0 .OR. next>nlink ) THEN
         CALL XERMSG('DLSEI','THE OPTION VECTOR IS UNDEFINED',2,1)
         RETURN
       END IF
@@ -529,9 +528,9 @@ SUBROUTINE DLSEI(W,Mdw,Me,Ma,Mg,N,Prgopt,X,Rnorme,Rnorml,Mode,Ws,Ip)
       W(1:m,j) = W(1:m,j)*Ws(n1+j-1)
     END DO
     !
-    IF ( cov.AND.Mdw<N ) THEN
+    IF( cov .AND. Mdw<N ) THEN
       CALL XERMSG('DLSEI',&
-        'MDW .LT. N WHEN COV MATRIX NEEDED, IS AN ERROR',2,1)
+        'MDW < N WHEN COV MATRIX NEEDED, IS AN ERROR',2,1)
       RETURN
     END IF
     !
@@ -557,10 +556,10 @@ SUBROUTINE DLSEI(W,Mdw,Me,Ma,Mg,N,Prgopt,X,Rnorme,Rnorml,Mode,Ws,Ip)
       DO k = i, Me
         sn = NORM2(W(k,i:N))**2
         rn = NORM2(W(k,1:i-1))**2
-        IF ( rn==0.D0.AND.sn>snmax ) THEN
+        IF( rn==0.D0 .AND. sn>snmax ) THEN
           snmax = sn
           imax = k
-        ELSEIF ( k==i.OR.sn*rnmax>rn*snmax ) THEN
+        ELSEIF( k==i .OR. sn*rnmax>rn*snmax ) THEN
           snmax = sn
           rnmax = rn
           imax = k
@@ -569,8 +568,8 @@ SUBROUTINE DLSEI(W,Mdw,Me,Ma,Mg,N,Prgopt,X,Rnorme,Rnorml,Mode,Ws,Ip)
       !
       !        Interchange rows if necessary.
       !
-      IF ( i/=imax ) CALL DSWAP(np1,W(i,1),Mdw,W(imax,1),Mdw)
-      IF ( snmax>rnmax*tau**2 ) THEN
+      IF( i/=imax ) CALL DSWAP(np1,W(i,1),Mdw,W(imax,1),Mdw)
+      IF( snmax>rnmax*tau**2 ) THEN
         !
         !        Eliminate elements I+1,...,N in row I.
         !
@@ -592,7 +591,7 @@ SUBROUTINE DLSEI(W,Mdw,Me,Ma,Mg,N,Prgopt,X,Rnorme,Rnorml,Mode,Ws,Ip)
   !     Use Householder transformation from left to achieve
   !     KRANKE by KRANKE upper triangular form.
   !
-  IF ( kranke<Me ) THEN
+  IF( kranke<Me ) THEN
     DO k = kranke, 1, -1
       !
       !           Apply transformation to matrix cols. 1,...,K-1.
@@ -620,16 +619,16 @@ SUBROUTINE DLSEI(W,Mdw,Me,Ma,Mg,N,Prgopt,X,Rnorme,Rnorml,Mode,Ws,Ip)
     W(i,np1) = W(i,np1) - DOT_PRODUCT(W(i,1:kranke),X(1:kranke))
     sn = NORM2(W(i,1:kranke))**2
     rn = NORM2(W(i,kranke+1:N))**2
-    IF ( rn<=sn*tau**2.AND.kranke<N ) W(i,kranke+1:N) = 0.D0
+    IF( rn<=sn*tau**2 .AND. kranke<N ) W(i,kranke+1:N) = 0.D0
   END DO
   !
   !     Compute equality constraint equations residual length.
   !
   Rnorme = NORM2(W(kranke+1:Me,np1))
   !
-  !     Move reduced problem data upward if KRANKE.LT.ME.
+  !     Move reduced problem data upward if KRANKE<ME.
   !
-  IF ( kranke<Me ) THEN
+  IF( kranke<Me ) THEN
     DO j = 1, np1
       W(kranke+1:kranke+m-Me,j) = W(Me+1:m,j)
     END DO
@@ -642,22 +641,22 @@ SUBROUTINE DLSEI(W,Mdw,Me,Ma,Mg,N,Prgopt,X,Rnorme,Rnorml,Mode,Ws,Ip)
   !
   !     Test for consistency of equality constraints.
   !
-  IF ( Me>0 ) THEN
+  IF( Me>0 ) THEN
     mdeqc = 0
     xnrme = SUM(ABS(W(1:kranke,np1)))
-    IF ( Rnorme>tau*(enorm*xnrme+fnorm) ) mdeqc = 1
+    IF( Rnorme>tau*(enorm*xnrme+fnorm) ) mdeqc = 1
     Mode = Mode + mdeqc
     !
     !        Check if solution to equality constraints satisfies inequality
     !        constraints when there are no degrees of freedom left.
     !
-    IF ( kranke==N.AND.Mg>0 ) THEN
+    IF( kranke==N .AND. Mg>0 ) THEN
       xnorm = SUM(ABS(X(1:N)))
       mapke1 = Ma + kranke + 1
       mend = Ma + kranke + Mg
       DO i = mapke1, mend
         sizee = SUM(ABS(W(i,1:N)))*xnorm + ABS(W(i,np1))
-        IF ( W(i,np1)>tau*sizee ) THEN
+        IF( W(i,np1)>tau*sizee ) THEN
           Mode = Mode + 2
           GOTO 100
         END IF
@@ -667,7 +666,7 @@ SUBROUTINE DLSEI(W,Mdw,Me,Ma,Mg,N,Prgopt,X,Rnorme,Rnorml,Mode,Ws,Ip)
   !
   !     Replace diagonal terms of lower trapezoidal matrix.
   !
-  IF ( kranke>0 ) THEN
+  IF( kranke>0 ) THEN
     DO i = 1, kranke
       W(i,i) = Ws(kranke+i)
     END DO
@@ -680,10 +679,10 @@ SUBROUTINE DLSEI(W,Mdw,Me,Ma,Mg,N,Prgopt,X,Rnorme,Rnorml,Mode,Ws,Ip)
     !
     !        Compute covariance matrix of equality constrained problem.
     !
-    IF ( cov ) THEN
+    IF( cov ) THEN
       DO j = MIN(kranke,N-1), 1, -1
         rb = Ws(j)*W(j,j)
-        IF ( rb/=0.D0 ) rb = 1.D0/rb
+        IF( rb/=0.D0 ) rb = 1.D0/rb
         jp1 = j + 1
         DO i = jp1, N
           W(i,j) = rb*DOT_PRODUCT(W(i,j+1:N),W(j,j+1:N))
@@ -710,7 +709,7 @@ SUBROUTINE DLSEI(W,Mdw,Me,Ma,Mg,N,Prgopt,X,Rnorme,Rnorml,Mode,Ws,Ip)
   !
   !     Apply the scaling to the covariance matrix.
   !
-  IF ( cov ) THEN
+  IF( cov ) THEN
     DO i = 1, N
       W(i,1:N) = W(i,1:N)*Ws(i+n1-1)
       W(1:N,i) = W(1:N,i)*Ws(i+n1-1)
@@ -720,7 +719,7 @@ SUBROUTINE DLSEI(W,Mdw,Me,Ma,Mg,N,Prgopt,X,Rnorme,Rnorml,Mode,Ws,Ip)
   !     Rescale solution vector.
   !
   100 CONTINUE
-  IF ( Mode<=1 ) THEN
+  IF( Mode<=1 ) THEN
     DO j = 1, N
       X(j) = X(j)*Ws(n1+j-1)
     END DO

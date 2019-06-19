@@ -1,7 +1,6 @@
 !** VNWRMS
 REAL(SP) FUNCTION VNWRMS(N,V,W)
-  !>
-  !  Subsidiary to DEBDF
+  !> Subsidiary to DEBDF
   !***
   ! **Library:**   SLATEC
   !***
@@ -34,7 +33,7 @@ REAL(SP) FUNCTION VNWRMS(N,V,W)
   ! CONTAINED IN THE ARRAY W OF LENGTH N..
   !   VNWRMS = SQRT( (1/N) * SUM( V(I)/W(I) )**2 )
   !-----------------------------------------------------------------------
-  INTEGER ::N
+  INTEGER :: N
   REAL(SP) :: V(N), W(N)
   INTEGER :: i
   REAL(SP) :: summ

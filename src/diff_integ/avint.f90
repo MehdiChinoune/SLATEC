@@ -1,7 +1,6 @@
 !** AVINT
 SUBROUTINE AVINT(X,Y,N,Xlo,Xup,Ans,Ierr)
-  !>
-  !  Integrate a function tabulated at arbitrarily spaced
+  !> Integrate a function tabulated at arbitrarily spaced
   !            abscissas using overlapping parabolas.
   !***
   ! **Library:**   SLATEC
@@ -38,10 +37,10 @@ SUBROUTINE AVINT(X,Y,N,Xlo,Xup,Ans,Ierr)
   !                order.
   !         Y    - real array of functional values. i.e., Y(I)=FUNC(X(I)).
   !         N    - the integer number of function values supplied.
-  !                N .GE. 2 unless XLO = XUP.
+  !                N >= 2 unless XLO = XUP.
   !         XLO  - real lower limit of integration.
   !         XUP  - real upper limit of integration.
-  !                Must have XLO .LE. XUP.
+  !                Must have XLO <= XUP.
   !
   !         Output--
   !         ANS  - computed approximate value of integral
@@ -54,8 +53,8 @@ SUBROUTINE AVINT(X,Y,N,Xlo,Xup,Ans,Ierr)
   !                   (inclusive) was less than 3 and neither of the two
   !                   special cases described in the Abstract occurred.
   !                   No integration was performed.
-  !                =4 means the restriction X(I+1) .GT. X(I) was violated.
-  !                =5 means the number N of function values was .LT. 2.
+  !                =4 means the restriction X(I+1) > X(I) was violated.
+  !                =5 means the number N of function values was < 2.
   !                ANS is set to zero if IERR=2,3,4,or 5.
   !
   !     AVINT is documented completely in SC-M-69-335
@@ -89,35 +88,35 @@ SUBROUTINE AVINT(X,Y,N,Xlo,Xup,Ans,Ierr)
   !* FIRST EXECUTABLE STATEMENT  AVINT
   Ierr = 1
   Ans = 0.0
-  IF ( Xlo<Xup ) THEN
-    IF ( N<2 ) THEN
+  IF( Xlo<Xup ) THEN
+    IF( N<2 ) THEN
       Ierr = 5
       CALL XERMSG('AVINT',&
         'LESS THAN TWO FUNCTION VALUES WERE SUPPLIED.',4,1)
       RETURN
     ELSE
       DO i = 2, N
-        IF ( X(i)<=X(i-1) ) GOTO 200
-        IF ( X(i)>Xup ) EXIT
+        IF( X(i)<=X(i-1) ) GOTO 200
+        IF( X(i)>Xup ) EXIT
       END DO
-      IF ( N>=3 ) THEN
-        IF ( X(N-2)<Xlo ) GOTO 100
-        IF ( X(3)>Xup ) GOTO 100
+      IF( N>=3 ) THEN
+        IF( X(N-2)<Xlo ) GOTO 100
+        IF( X(3)>Xup ) GOTO 100
         i = 1
-        DO WHILE ( X(i)<Xlo )
+        DO WHILE( X(i)<Xlo )
           i = i + 1
         END DO
         inlft = i
         i = N
-        DO WHILE ( X(i)>Xup )
+        DO WHILE( X(i)>Xup )
           i = i - 1
         END DO
         inrt = i
-        IF ( (inrt-inlft)<2 ) GOTO 100
+        IF( (inrt-inlft)<2 ) GOTO 100
         istart = inlft
-        IF ( inlft==1 ) istart = 2
+        IF( inlft==1 ) istart = 2
         istop = inrt
-        IF ( inrt==N ) istop = N - 1
+        IF( inrt==N ) istop = N - 1
         !
         r3 = 3.0D0
         rp5 = 0.5D0
@@ -139,7 +138,7 @@ SUBROUTINE AVINT(X,Y,N,Xlo,Xup,Ans,Ierr)
           a = term1 + term2 + term3
           b = -(x2+x3)*term1 - (x1+x3)*term2 - (x1+x2)*term3
           c = x2*x3*term1 + x1*x3*term2 + x1*x2*term3
-          IF ( i<=istart ) THEN
+          IF( i<=istart ) THEN
             ca = a
             cb = b
             cc = c
@@ -172,7 +171,7 @@ SUBROUTINE AVINT(X,Y,N,Xlo,Xup,Ans,Ierr)
         RETURN
       END IF
     END IF
-  ELSEIF ( Xlo/=Xup ) THEN
+  ELSEIF( Xlo/=Xup ) THEN
     Ierr = 2
     CALL XERMSG('AVINT',&
       'THE UPPER LIMIT OF INTEGRATION WAS NOT GREATER THAN THE LOWER LIMIT.',4,1)
@@ -185,6 +184,6 @@ SUBROUTINE AVINT(X,Y,N,Xlo,Xup,Ans,Ierr)
   RETURN
   200  Ierr = 4
   CALL XERMSG('AVINT',&
-    'THE ABSCISSAS WERE NOT STRICTLY INCREASING.  MUST HAVE X(I-1) .LT. X(I) FOR ALL I.',4,1)
+    'THE ABSCISSAS WERE NOT STRICTLY INCREASING.  MUST HAVE X(I-1) < X(I) FOR ALL I.',4,1)
   RETURN
 END SUBROUTINE AVINT

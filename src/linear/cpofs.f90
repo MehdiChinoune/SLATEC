@@ -1,7 +1,6 @@
 !** CPOFS
 SUBROUTINE CPOFS(A,Lda,N,V,Itask,Ind,Work)
-  !>
-  !  Solve a positive definite symmetric complex system of
+  !> Solve a positive definite symmetric complex system of
   !            linear equations.
   !***
   ! **Library:**   SLATEC
@@ -35,7 +34,7 @@ SUBROUTINE CPOFS(A,Lda,N,V,Itask,Ind,Work)
   !
   !    If the equation A*X=B is to be solved for more than one vector
   !    B, the factoring of a does not need to be performed again and
-  !    the option to only solve (ITASK .GT. 1) will be faster for
+  !    the option to only solve (ITASK > 1) will be faster for
   !    the succeeding solutions.  In this case, the contents of A,
   !    LDA, and N must not have been altered by the user following
   !    factorization (ITASK=1).  IND will not be changed by CPOFS
@@ -65,9 +64,9 @@ SUBROUTINE CPOFS(A,Lda,N,V,Itask,Ind,Work)
   !    ITASK  INTEGER
   !             if ITASK = 1, the matrix A is factored and then the
   !               linear equation is solved.
-  !             if ITASK .GT. 1, the equation is solved using the existing
+  !             if ITASK > 1, the equation is solved using the existing
   !               factored matrix A.
-  !             if ITASK .LT. 1, then terminal error message IND=-3 is
+  !             if ITASK < 1, then terminal error message IND=-3 is
   !               printed.
   !    IND    INTEGER
   !             GT. 0  IND is a rough estimate of the number of digits
@@ -117,10 +116,10 @@ SUBROUTINE CPOFS(A,Lda,N,V,Itask,Ind,Work)
   INTEGER :: Lda, N, Itask, Ind
   COMPLEX(SP) :: A(Lda,N), V(N), Work(N)
   INTEGER :: info
-  REAL(SP) rcond
+  REAL(SP) :: rcond
   CHARACTER(8) :: xern1, xern2
   !* FIRST EXECUTABLE STATEMENT  CPOFS
-  IF ( Lda<N ) THEN
+  IF( Lda<N ) THEN
     Ind = -1
     WRITE (xern1,'(I8)') Lda
     WRITE (xern2,'(I8)') N
@@ -128,21 +127,21 @@ SUBROUTINE CPOFS(A,Lda,N,V,Itask,Ind,Work)
     RETURN
   END IF
   !
-  IF ( N<=0 ) THEN
+  IF( N<=0 ) THEN
     Ind = -2
     WRITE (xern1,'(I8)') N
     CALL XERMSG('CPOFS','N = '//xern1//' IS LESS THAN 1',-2,1)
     RETURN
   END IF
   !
-  IF ( Itask<1 ) THEN
+  IF( Itask<1 ) THEN
     Ind = -3
     WRITE (xern1,'(I8)') Itask
     CALL XERMSG('CPOFS','ITASK = '//xern1//' IS LESS THAN 1',-3,1)
     RETURN
   END IF
   !
-  IF ( Itask==1 ) THEN
+  IF( Itask==1 ) THEN
     !
     !        FACTOR MATRIX A INTO R
     !
@@ -150,7 +149,7 @@ SUBROUTINE CPOFS(A,Lda,N,V,Itask,Ind,Work)
     !
     !        CHECK FOR POSITIVE DEFINITE MATRIX
     !
-    IF ( info/=0 ) THEN
+    IF( info/=0 ) THEN
       Ind = -4
       CALL XERMSG('CPOFS',&
         'SINGULAR OR NOT POSITIVE DEFINITE - NO SOLUTION',-4,1)
@@ -161,7 +160,7 @@ SUBROUTINE CPOFS(A,Lda,N,V,Itask,Ind,Work)
     !        AND CHECK FOR IND GREATER THAN ZERO
     !
     Ind = INT( -LOG10(R1MACH(4)/rcond) )
-    IF ( Ind<=0 ) THEN
+    IF( Ind<=0 ) THEN
       Ind = -10
       CALL XERMSG('CPOFS','SOLUTION MAY HAVE NO SIGNIFICANCE',-10,0)
     END IF

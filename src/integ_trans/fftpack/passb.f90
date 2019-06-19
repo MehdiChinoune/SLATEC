@@ -1,7 +1,6 @@
 !** PASSB
 SUBROUTINE PASSB(Nac,Ido,Ip,L1,Idl1,Cc,C1,C2,Ch,Ch2,Wa)
-  !>
-  !  Calculate the fast Fourier transform of subvectors of
+  !> Calculate the fast Fourier transform of subvectors of
   !            arbitrary length.
   !***
   ! **Library:**   SLATEC (FFTPACK)
@@ -33,7 +32,7 @@ SUBROUTINE PASSB(Nac,Ido,Ip,L1,Idl1,Cc,C1,C2,Ch,Ch2,Wa)
   ipph = (Ip+1)/2
   idp = Ip*Ido
   !
-  IF ( Ido<L1 ) THEN
+  IF( Ido<L1 ) THEN
     DO j = 2, ipph
       jc = ipp2 - j
       DO i = 1, Ido
@@ -78,7 +77,7 @@ SUBROUTINE PASSB(Nac,Ido,Ip,L1,Idl1,Cc,C1,C2,Ch,Ch2,Wa)
     DO j = 3, ipph
       jc = ipp2 - j
       idlj = idlj + inc
-      IF ( idlj>idp ) idlj = idlj - idp
+      IF( idlj>idp ) idlj = idlj - idp
       war = Wa(idlj-1)
       wai = Wa(idlj)
       DO ik = 1, Idl1
@@ -102,7 +101,7 @@ SUBROUTINE PASSB(Nac,Ido,Ip,L1,Idl1,Cc,C1,C2,Ch,Ch2,Wa)
     END DO
   END DO
   Nac = 1
-  IF ( Ido==2 ) RETURN
+  IF( Ido==2 ) RETURN
   Nac = 0
   DO ik = 1, Idl1
     C2(ik,1) = Ch2(ik,1)
@@ -113,7 +112,7 @@ SUBROUTINE PASSB(Nac,Ido,Ip,L1,Idl1,Cc,C1,C2,Ch,Ch2,Wa)
       C1(2,k,j) = Ch(2,k,j)
     END DO
   END DO
-  IF ( idot>L1 ) THEN
+  IF( idot>L1 ) THEN
     idj = 2 - Ido
     DO j = 2, Ip
       idj = idj + Ido

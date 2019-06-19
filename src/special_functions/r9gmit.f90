@@ -1,7 +1,6 @@
 !** R9GMIT
 REAL(SP) FUNCTION R9GMIT(A,X,Algap1,Sgngam)
-  !>
-  !  Compute Tricomi's incomplete Gamma function for small
+  !> Compute Tricomi's incomplete Gamma function for small
   !            arguments.
   !***
   ! **Library:**   SLATEC (FNLIB)
@@ -38,14 +37,14 @@ REAL(SP) FUNCTION R9GMIT(A,X,Algap1,Sgngam)
   REAL(SP), PARAMETER :: eps = 0.5*R1MACH(3), bot = LOG(R1MACH(1))
   !* FIRST EXECUTABLE STATEMENT  R9GMIT
   !
-  IF ( X<=0.0 ) CALL XERMSG('R9GMIT','X SHOULD BE GT 0',1,2)
+  IF( X<=0.0 ) CALL XERMSG('R9GMIT','X SHOULD BE GT 0',1,2)
   !
   ma = INT( A + 0.5 )
-  IF ( A<0.0 ) ma = INT( A - 0.5 )
+  IF( A<0.0 ) ma = INT( A - 0.5 )
   aeps = A - ma
   !
   ae = A
-  IF ( A<(-0.5) ) ae = aeps
+  IF( A<(-0.5) ) ae = aeps
   !
   t = 1.0
   te = ae
@@ -55,14 +54,14 @@ REAL(SP) FUNCTION R9GMIT(A,X,Algap1,Sgngam)
     te = -X*te/fk
     t = te/(ae+fk)
     s = s + t
-    IF ( ABS(t)<eps*ABS(s) ) GOTO 100
+    IF( ABS(t)<eps*ABS(s) ) GOTO 100
   END DO
   CALL XERMSG('R9GMIT',&
     'NO CONVERGENCE IN 200 TERMS OF TAYLOR-S SERIES',2,2)
   !
   100 CONTINUE
-  IF ( A>=(-0.5) ) algs = -Algap1 + LOG(s)
-  IF ( A>=(-0.5) ) THEN
+  IF( A>=(-0.5) ) algs = -Algap1 + LOG(s)
+  IF( A>=(-0.5) ) THEN
     !
     R9GMIT = EXP(algs)
   ELSE
@@ -70,26 +69,26 @@ REAL(SP) FUNCTION R9GMIT(A,X,Algap1,Sgngam)
     algs = -LOG_GAMMA(1.0+aeps) + LOG(s)
     s = 1.0
     m = -ma - 1
-    IF ( m/=0 ) THEN
+    IF( m/=0 ) THEN
       t = 1.0
       DO k = 1, m
         t = X*t/(aeps-m-1+k)
         s = s + t
-        IF ( ABS(t)<eps*ABS(s) ) EXIT
+        IF( ABS(t)<eps*ABS(s) ) EXIT
       END DO
     END IF
     !
     R9GMIT = 0.0
     algs = -ma*LOG(X) + algs
-    IF ( s==0.0.OR.aeps==0.0 ) THEN
+    IF( s==0.0 .OR. aeps==0.0 ) THEN
       R9GMIT = EXP(algs)
     ELSE
       !
       sgng2 = Sgngam*SIGN(1.0,s)
       alg2 = -X - Algap1 + LOG(ABS(s))
       !
-      IF ( alg2>bot ) R9GMIT = sgng2*EXP(alg2)
-      IF ( algs>bot ) R9GMIT = R9GMIT + EXP(algs)
+      IF( alg2>bot ) R9GMIT = sgng2*EXP(alg2)
+      IF( algs>bot ) R9GMIT = R9GMIT + EXP(algs)
       RETURN
     END IF
   END IF

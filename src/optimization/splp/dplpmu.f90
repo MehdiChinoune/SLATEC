@@ -4,8 +4,7 @@ SUBROUTINE DPLPMU(Mrelas,Nvars,Lmx,Lbm,Nredc,Info,Ienter,Ileave,Iopt,Npp,&
     Rprnrm,Erdnrm,Dulnrm,Theta,Costsc,Xlamda,Rhsnrm,Amat,&
     Basmat,Csc,Wr,Rprim,Ww,Bu,Bl,Rhs,Erd,Erp,Rz,Rg,Colnrm,&
     Costs,Primal,Duals,Singlr,Redbas,Zerolv,Stpedg)
-  !>
-  !  Subsidiary to DSPLP
+  !> Subsidiary to DSPLP
   !***
   ! **Library:**   SLATEC
   !***
@@ -69,14 +68,14 @@ SUBROUTINE DPLPMU(Mrelas,Nvars,Lmx,Lbm,Nredc,Info,Ienter,Ileave,Iopt,Npp,&
   !     DIRECTION.
   i = 1
   n20002 = Mrelas
-  DO WHILE ( (n20002-i)>=0 )
+  DO WHILE( (n20002-i)>=0 )
     Rprim(i) = Rprim(i) - Theta*Ww(i)
     i = i + 1
   END DO
   !
   !     IF EJECTED VARIABLE IS LEAVING AT AN UPPER BOUND,  THEN
   !     TRANSLATE RIGHT HAND SIDE.
-  IF ( Ileave>=0 ) GOTO 200
+  IF( Ileave>=0 ) GOTO 200
   ibas = Ibasis(ABS(Ileave))
   scalr = Rprim(ABS(Ileave))
   npr001 = 100
@@ -87,20 +86,20 @@ SUBROUTINE DPLPMU(Mrelas,Nvars,Lmx,Lbm,Nredc,Info,Ienter,Ileave,Iopt,Npp,&
   !     RIGHT HAND SIDE.  IF THE VARIABLE DECREASED FROM ITS UPPER
   !     BOUND, A SIGN CHANGE IS REQUIRED IN THE TRANSLATION.
   200 CONTINUE
-  IF ( Ienter/=Ileave ) THEN
+  IF( Ienter/=Ileave ) THEN
     ibas = Ibasis(Ienter)
     !
     !     IF ENTERING VARIABLE IS DECREASING FROM ITS UPPER BOUND,
     !     COMPLEMENT ITS PRIMAL VALUE.
-    IF ( Ind(ibas)/=3.OR.MOD(Ibb(ibas),2)/=0 ) GOTO 500
+    IF( Ind(ibas)/=3 .OR. MOD(Ibb(ibas),2)/=0 ) GOTO 500
     scalr = -(Bu(ibas)-Bl(ibas))
-    IF ( ibas<=Nvars ) scalr = scalr/Csc(ibas)
+    IF( ibas<=Nvars ) scalr = scalr/Csc(ibas)
     npr001 = 400
     GOTO 1800
   ELSE
     ibas = Ibasis(Ienter)
     scalr = Theta
-    IF ( MOD(Ibb(ibas),2)==0 ) scalr = -scalr
+    IF( MOD(Ibb(ibas),2)==0 ) scalr = -scalr
     npr001 = 300
     GOTO 1800
   END IF
@@ -112,7 +111,7 @@ SUBROUTINE DPLPMU(Mrelas,Nvars,Lmx,Lbm,Nredc,Info,Ienter,Ileave,Iopt,Npp,&
   Ibb(ibas) = -ABS(Ibb(ibas))
   i = Ibasis(ABS(Ileave))
   Ibb(i) = ABS(Ibb(i))
-  IF ( Primal(ABS(Ileave)+Nvars)>zero ) Ibb(i) = Ibb(i) + 1
+  IF( Primal(ABS(Ileave)+Nvars)>zero ) Ibb(i) = Ibb(i) + 1
   !
   !     INTERCHANGE COLUMN POINTERS TO NOTE EXCHANGE OF COLUMNS.
   600  ibas = Ibasis(Ienter)
@@ -121,30 +120,30 @@ SUBROUTINE DPLPMU(Mrelas,Nvars,Lmx,Lbm,Nredc,Info,Ienter,Ileave,Iopt,Npp,&
   !
   !     IF VARIABLE WAS EXCHANGED AT A ZERO LEVEL, MARK IT SO THAT
   !     IT CAN'T BE BROUGHT BACK IN.  THIS IS TO HELP PREVENT CYCLING.
-  IF ( Zerolv ) Ibasis(Ienter) = -ABS(Ibasis(Ienter))
+  IF( Zerolv ) Ibasis(Ienter) = -ABS(Ibasis(Ienter))
   Rprnrm = MAX(Rprnrm,SUM(ABS(Rprim(1:Mrelas))) )
   k = 1
   n20018 = Mrelas
   700 CONTINUE
-  DO WHILE ( (n20018-k)>=0 )
+  DO WHILE( (n20018-k)>=0 )
     !
     !     SEE IF VARIABLES THAT WERE CLASSIFIED AS INFEASIBLE HAVE NOW
     !     BECOME FEASIBLE.  THIS MAY REQUIRED TRANSLATING UPPER BOUNDED
     !     VARIABLES.
-    IF ( Primal(k+Nvars)==zero.OR.ABS(Rprim(k))>Rprnrm*Erp(k) ) THEN
+    IF( Primal(k+Nvars)==zero .OR. ABS(Rprim(k))>Rprnrm*Erp(k) ) THEN
       k = k + 1
     ELSE
-      IF ( Primal(k+Nvars)<=zero ) GOTO 900
+      IF( Primal(k+Nvars)<=zero ) GOTO 900
       ibas = Ibasis(k)
       scalr = -(Bu(ibas)-Bl(ibas))
-      IF ( ibas<=Nvars ) scalr = scalr/Csc(ibas)
+      IF( ibas<=Nvars ) scalr = scalr/Csc(ibas)
       npr001 = 800
       GOTO 1800
     END IF
   END DO
   !
   !     UPDATE REDUCED COSTS, EDGE WEIGHTS, AND MATRIX DECOMPOSITION.
-  IF ( Ienter==Ileave ) THEN
+  IF( Ienter==Ileave ) THEN
     !
     !     THIS IS NECESSARY ONLY FOR PRINTING OF INTERMEDIATE RESULTS.
     npr003 = 1700
@@ -166,14 +165,14 @@ SUBROUTINE DPLPMU(Mrelas,Nvars,Lmx,Lbm,Nredc,Info,Ienter,Ileave,Iopt,Npp,&
     !     INCOMING COLUMN.
     CALL LA05CD(Basmat,Ibrc,Lbm,Mrelas,Ipr,Iwr,Duals,Gg,Uu,ABS(Ileave))
     Redbas = .FALSE.
-    IF ( Gg>=zero ) GOTO 1000
+    IF( Gg>=zero ) GOTO 1000
     !
     !     REDECOMPOSE BASIS MATRIX WHEN AN ERROR RETURN FROM
     !     LA05CD( ) IS NOTED.  THIS WILL PROBABLY BE DUE TO
     !     SPACE BEING EXHAUSTED, GG=-7.
     CALL DPLPDM(Mrelas,Nvars,Lbm,Nredc,Info,Iopt,Ibasis,Imat,Ibrc,Ipr,&
       Iwr,Ind,Anorm,Eps,Uu,Gg,Amat,Basmat,Csc,Wr,Singlr,Redbas)
-    IF ( .NOT.(Singlr) ) THEN
+    IF( .NOT. (Singlr) ) THEN
       !     PROCEDURE (COMPUTE NEW PRIMAL)
       !
       !     COPY RHS INTO WW(*), SOLVE SYSTEM.
@@ -200,7 +199,7 @@ SUBROUTINE DPLPMU(Mrelas,Nvars,Lmx,Lbm,Nredc,Info,Ienter,Ileave,Iopt,Npp,&
   !     IF STEEPEST EDGE PRICING IS USED, UPDATE REDUCED COSTS
   !     AND EDGE WEIGHTS.
   1000 CONTINUE
-  IF ( .NOT.(Stpedg) ) THEN
+  IF( .NOT. (Stpedg) ) THEN
     !
     !     COMPUTE THE UPDATED DUALS IN DUALS(*).
     npr003 = 1300
@@ -229,15 +228,15 @@ SUBROUTINE DPLPMU(Mrelas,Nvars,Lmx,Lbm,Nredc,Info,Ienter,Ileave,Iopt,Npp,&
   nnegrc = 0
   j = Jstrt
   1200 CONTINUE
-  IF ( Ibb(j)<=0 ) THEN
+  IF( Ibb(j)<=0 ) THEN
     pagepl = .TRUE.
     Rg(j) = one
     !
     !     NONBASIC INDEPENDENT VARIABLES (COLUMN IN SPARSE MATRIX STORAGE)
-  ELSEIF ( j>Nvars ) THEN
+  ELSEIF( j>Nvars ) THEN
     pagepl = .TRUE.
     scalr = -one
-    IF ( Ind(j)==2 ) scalr = one
+    IF( Ind(j)==2 ) scalr = one
     i = j - Nvars
     alpha = scalr*Erd(i)
     Rz(j) = -scalr*Duals(i)
@@ -250,16 +249,16 @@ SUBROUTINE DPLPMU(Mrelas,Nvars,Lmx,Lbm,Nredc,Info,Ienter,Ileave,Iopt,Npp,&
     !
     !     COMPUTE THE DOT PRODUCT OF THE SPARSE MATRIX NONBASIC COLUMNS
     !     WITH THREE VECTORS INVOLVED IN THE UPDATING STEP.
-    IF ( j/=1 ) THEN
+    IF( j/=1 ) THEN
       ilow = Imat(j+3) + 1
     ELSE
       ilow = Nvars + 5
     END IF
-    IF ( .NOT.(pagepl) ) THEN
+    IF( .NOT. (pagepl) ) THEN
       il1 = ihi + 1
     ELSE
       il1 = IDLOC(ilow,Amat,Imat)
-      IF ( il1>=Lmx-1 ) THEN
+      IF( il1>=Lmx-1 ) THEN
         ilow = ilow + 2
         il1 = IDLOC(ilow,Amat,Imat)
       END IF
@@ -268,13 +267,13 @@ SUBROUTINE DPLPMU(Mrelas,Nvars,Lmx,Lbm,Nredc,Info,Ienter,Ileave,Iopt,Npp,&
     ihi = Imat(j+4) - (ilow-il1)
     DO
       iu1 = MIN(Lmx-2,ihi)
-      IF ( il1>iu1 ) EXIT
+      IF( il1>iu1 ) EXIT
       DO i = il1, iu1
         rzj = rzj - Amat(i)*Duals(Imat(i))
         alpha = alpha + Amat(i)*Erd(Imat(i))
         gama = gama + Amat(i)*Ww(Imat(i))
       END DO
-      IF ( ihi<=Lmx-2 ) EXIT
+      IF( ihi<=Lmx-2 ) EXIT
       ipage = ipage + 1
       key = 1
       CALL DPRWPG(key,ipage,lpg,Amat,Imat)
@@ -291,16 +290,16 @@ SUBROUTINE DPLPMU(Mrelas,Nvars,Lmx,Lbm,Nredc,Info,Ienter,Ileave,Iopt,Npp,&
   END IF
   !
   rcost = Rz(j)
-  IF ( MOD(Ibb(j),2)==0 ) rcost = -rcost
-  IF ( Ind(j)==3 ) THEN
-    IF ( Bu(j)==Bl(j) ) rcost = zero
+  IF( MOD(Ibb(j),2)==0 ) rcost = -rcost
+  IF( Ind(j)==3 ) THEN
+    IF( Bu(j)==Bl(j) ) rcost = zero
   END IF
-  IF ( Ind(j)==4 ) rcost = -ABS(rcost)
+  IF( Ind(j)==4 ) rcost = -ABS(rcost)
   cnorm = one
-  IF ( j<=Nvars ) cnorm = Colnrm(j)
-  IF ( rcost+Erdnrm*Dulnrm*cnorm<zero ) nnegrc = nnegrc + 1
+  IF( j<=Nvars ) cnorm = Colnrm(j)
+  IF( rcost+Erdnrm*Dulnrm*cnorm<zero ) nnegrc = nnegrc + 1
   j = MOD(j,Mrelas+Nvars) + 1
-  IF ( nnegrc<Npp.AND.j/=Jstrt ) GOTO 1200
+  IF( nnegrc<Npp .AND. j/=Jstrt ) GOTO 1200
   Jstrt = j
   !
   !     UPDATE THE EDGE WEIGHT FOR THE EJECTED VARIABLE.
@@ -315,30 +314,30 @@ SUBROUTINE DPLPMU(Mrelas,Nvars,Lmx,Lbm,Nredc,Info,Ienter,Ileave,Iopt,Npp,&
   pagepl = .TRUE.
   !
   1400 CONTINUE
-  IF ( Ibb(j)<=0 ) THEN
+  IF( Ibb(j)<=0 ) THEN
     pagepl = .TRUE.
     GOTO 1600
     !
     !     NONBASIC INDEPENDENT VARIABLE (COLUMN IN SPARSE MATRIX STORAGE)
-  ELSEIF ( j>Nvars ) THEN
+  ELSEIF( j>Nvars ) THEN
     pagepl = .TRUE.
     scalr = -one
-    IF ( Ind(j)==2 ) scalr = one
+    IF( Ind(j)==2 ) scalr = one
     i = j - Nvars
     Rz(j) = -scalr*Duals(i)
     GOTO 1600
   ELSE
     Rz(j) = Costs(j)*Costsc
-    IF ( j/=1 ) THEN
+    IF( j/=1 ) THEN
       ilow = Imat(j+3) + 1
     ELSE
       ilow = Nvars + 5
     END IF
-    IF ( .NOT.(pagepl) ) THEN
+    IF( .NOT. (pagepl) ) THEN
       il1 = ihi + 1
     ELSE
       il1 = IDLOC(ilow,Amat,Imat)
-      IF ( il1>=Lmx-1 ) THEN
+      IF( il1>=Lmx-1 ) THEN
         ilow = ilow + 2
         il1 = IDLOC(ilow,Amat,Imat)
       END IF
@@ -347,18 +346,18 @@ SUBROUTINE DPLPMU(Mrelas,Nvars,Lmx,Lbm,Nredc,Info,Ienter,Ileave,Iopt,Npp,&
     ihi = Imat(j+4) - (ilow-il1)
   END IF
   1500 iu1 = MIN(Lmx-2,ihi)
-  IF ( iu1>=il1.AND.MOD(iu1-il1,2)==0 ) THEN
+  IF( iu1>=il1 .AND. MOD(iu1-il1,2)==0 ) THEN
     Rz(j) = Rz(j) - Amat(il1)*Duals(Imat(il1))
     il1 = il1 + 1
   END IF
-  IF ( il1<=iu1 ) THEN
+  IF( il1<=iu1 ) THEN
     !
     !     UNROLL THE DOT PRODUCT LOOP TO A DEPTH OF TWO.  (THIS IS DONE
     !     FOR INCREASED EFFICIENCY).
     DO i = il1, iu1, 2
       Rz(j) = Rz(j) - Amat(i)*Duals(Imat(i)) - Amat(i+1)*Duals(Imat(i+1))
     END DO
-    IF ( ihi>Lmx-2 ) THEN
+    IF( ihi>Lmx-2 ) THEN
       ipage = ipage + 1
       key = 1
       CALL DPRWPG(key,ipage,lpg,Amat,Imat)
@@ -373,25 +372,25 @@ SUBROUTINE DPLPMU(Mrelas,Nvars,Lmx,Lbm,Nredc,Info,Ienter,Ileave,Iopt,Npp,&
   Rz(j) = Rz(j)*Csc(j)
   !
   1600 rcost = Rz(j)
-  IF ( MOD(Ibb(j),2)==0 ) rcost = -rcost
-  IF ( Ind(j)==3 ) THEN
-    IF ( Bu(j)==Bl(j) ) rcost = zero
+  IF( MOD(Ibb(j),2)==0 ) rcost = -rcost
+  IF( Ind(j)==3 ) THEN
+    IF( Bu(j)==Bl(j) ) rcost = zero
   END IF
-  IF ( Ind(j)==4 ) rcost = -ABS(rcost)
+  IF( Ind(j)==4 ) rcost = -ABS(rcost)
   cnorm = one
-  IF ( j<=Nvars ) cnorm = Colnrm(j)
-  IF ( rcost+Erdnrm*Dulnrm*cnorm<zero ) nnegrc = nnegrc + 1
+  IF( j<=Nvars ) cnorm = Colnrm(j)
+  IF( rcost+Erdnrm*Dulnrm*cnorm<zero ) nnegrc = nnegrc + 1
   j = MOD(j,Mrelas+Nvars) + 1
-  IF ( nnegrc<Npp.AND.j/=Jstrt ) GOTO 1400
+  IF( nnegrc<Npp .AND. j/=Jstrt ) GOTO 1400
   Jstrt = j
   1700 RETURN
   !     PROCEDURE (TRANSLATE RIGHT HAND SIDE)
   !
   !     PERFORM THE TRANSLATION ON THE RIGHT-HAND SIDE.
   1800 CONTINUE
-  IF ( ibas>Nvars ) THEN
+  IF( ibas>Nvars ) THEN
     i = ibas - Nvars
-    IF ( Ind(ibas)/=2 ) THEN
+    IF( Ind(ibas)/=2 ) THEN
       Rhs(i) = Rhs(i) + scalr
     ELSE
       Rhs(i) = Rhs(i) - scalr
@@ -400,7 +399,7 @@ SUBROUTINE DPLPMU(Mrelas,Nvars,Lmx,Lbm,Nredc,Info,Ienter,Ileave,Iopt,Npp,&
     i = 0
     DO
       CALL DPNNZR(i,aij,iplace,Amat,Imat,ibas)
-      IF ( i<=0 ) EXIT
+      IF( i<=0 ) EXIT
       Rhs(i) = Rhs(i) - scalr*aij*Csc(ibas)
     END DO
   END IF
@@ -420,9 +419,9 @@ SUBROUTINE DPLPMU(Mrelas,Nvars,Lmx,Lbm,Nredc,Info,Ienter,Ileave,Iopt,Npp,&
   !     SOLVE FOR DUAL VARIABLES. FIRST COPY COSTS INTO DUALS(*).
   1900 i = 1
   n20121 = Mrelas
-  DO WHILE ( (n20121-i)>=0 )
+  DO WHILE( (n20121-i)>=0 )
     j = Ibasis(i)
-    IF ( j>Nvars ) THEN
+    IF( j>Nvars ) THEN
       Duals(i) = Xlamda*Primal(i+Nvars)
     ELSE
       Duals(i) = Costsc*Costs(j)*Csc(j) + Xlamda*Primal(i+Nvars)

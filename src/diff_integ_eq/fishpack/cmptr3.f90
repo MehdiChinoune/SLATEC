@@ -1,7 +1,6 @@
 !** CMPTR3
 SUBROUTINE CMPTR3(M,A,B,C,K,Y1,Y2,Y3,Tcos,D,W1,W2,W3)
-  !>
-  !  Subsidiary to CMGNBN
+  !> Subsidiary to CMGNBN
   !***
   ! **Library:**   SLATEC
   !***
@@ -42,7 +41,7 @@ SUBROUTINE CMPTR3(M,A,B,C,K,Y1,Y2,Y3,Tcos,D,W1,W2,W3)
   k3p1 = k3 + 1
   k4p1 = k4 + 1
   k2k3k4 = k2 + k3 + k4
-  IF ( k2k3k4/=0 ) THEN
+  IF( k2k3k4/=0 ) THEN
     l1 = k1p1/k2p1
     l2 = k1p1/k3p1
     l3 = k1p1/k4p1
@@ -55,18 +54,18 @@ SUBROUTINE CMPTR3(M,A,B,C,K,Y1,Y2,Y3,Tcos,D,W1,W2,W3)
   END IF
   DO n = 1, k1
     x = Tcos(n)
-    IF ( k2k3k4/=0 ) THEN
-      IF ( n==l1 ) THEN
+    IF( k2k3k4/=0 ) THEN
+      IF( n==l1 ) THEN
         DO i = 1, M
           W1(i) = Y1(i)
         END DO
       END IF
-      IF ( n==l2 ) THEN
+      IF( n==l2 ) THEN
         DO i = 1, M
           W2(i) = Y2(i)
         END DO
       END IF
-      IF ( n==l3 ) THEN
+      IF( n==l3 ) THEN
         DO i = 1, M
           W3(i) = Y3(i)
         END DO
@@ -90,8 +89,8 @@ SUBROUTINE CMPTR3(M,A,B,C,K,Y1,Y2,Y3,Tcos,D,W1,W2,W3)
       Y2(i) = Y2(i) - D(i)*Y2(i+1)
       Y3(i) = Y3(i) - D(i)*Y3(i+1)
     END DO
-    IF ( k2k3k4/=0 ) THEN
-      IF ( n==l1 ) THEN
+    IF( k2k3k4/=0 ) THEN
+      IF( n==l1 ) THEN
         i = lint1 + kint1
         xx = x - Tcos(i)
         DO i = 1, M
@@ -100,7 +99,7 @@ SUBROUTINE CMPTR3(M,A,B,C,K,Y1,Y2,Y3,Tcos,D,W1,W2,W3)
         lint1 = lint1 + 1
         l1 = (lint1*k1p1)/k2p1
       END IF
-      IF ( n==l2 ) THEN
+      IF( n==l2 ) THEN
         i = lint2 + kint2
         xx = x - Tcos(i)
         DO i = 1, M
@@ -109,7 +108,7 @@ SUBROUTINE CMPTR3(M,A,B,C,K,Y1,Y2,Y3,Tcos,D,W1,W2,W3)
         lint2 = lint2 + 1
         l2 = (lint2*k1p1)/k3p1
       END IF
-      IF ( n==l3 ) THEN
+      IF( n==l3 ) THEN
         i = lint3 + kint3
         xx = x - Tcos(i)
         DO i = 1, M

@@ -1,7 +1,6 @@
 !** DEFE4
 SUBROUTINE DEFE4(COFX,Idmn,Usol,Grhs)
-  !>
-  !  Subsidiary to SEPX4
+  !> Subsidiary to SEPX4
   !***
   ! **Library:**   SLATEC
   !***
@@ -65,9 +64,9 @@ SUBROUTINE DEFE4(COFX,Idmn,Usol,Grhs)
       !
       !     RESET FORM OF TRUNCATION IF AT BOUNDARY WHICH IS NON-PERIODIC
       !
-      IF ( .NOT.(kswx_com==1.OR.(i>1.AND.i<k_com)) )&
+      IF( .NOT. (kswx_com==1 .OR. (i>1 .AND. i<k_com)) )&
         tx = ai/3.0*(uxxxx/4.0+uxxx/dlx_com)
-      IF ( .NOT.(kswy_com==1.OR.(j>1.AND.j<l_com)) ) ty = (uyyyy/4.0+uyyy/dly_com)/3.0
+      IF( .NOT. (kswy_com==1 .OR. (j>1 .AND. j<l_com)) ) ty = (uyyyy/4.0+uyyy/dly_com)/3.0
       Grhs(i,j) = Grhs(i,j) + dly_com**2*(dlx_com**2*tx+dly_com**2*ty)
     END DO
   END DO

@@ -1,8 +1,7 @@
 !** SPLP
 SUBROUTINE SPLP(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
     Primal,Duals,Ibasis,Work,Lw,Iwork,Liw)
-  !>
-  !  Solve linear programming problems involving at
+  !> Solve linear programming problems involving at
   !            most a few thousand constraints and variables.
   !            Takes advantage of sparsity in the constraint matrix.
   !***
@@ -71,8 +70,8 @@ SUBROUTINE SPLP(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   !     The values of LW and LIW, the lengths of the arrays WORK(*)
   !     and IWORK(*), must satisfy the inequalities
   !
-  !               LW .GE. 4*NVARS+ 8*MRELAS+LAMAT+  LBM
-  !               LIW.GE.   NVARS+11*MRELAS+LAMAT+2*LBM
+  !               LW >= 4*NVARS+ 8*MRELAS+LAMAT+  LBM
+  !               LIW>=   NVARS+11*MRELAS+LAMAT+2*LBM
   !
   !     It is an error if they do not both satisfy these inequalities.
   !     (The subprogram will inform the user of the required lengths
@@ -94,7 +93,7 @@ SUBROUTINE SPLP(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   !     ------------
   !     These parameters are respectively the number of constraints (the
   !     linear relations A*x=w that the unknowns x and w are to satisfy)
-  !     and the number of entries in the vector x.  Both must be .GE. 1.
+  !     and the number of entries in the vector x.  Both must be >= 1.
   !     Other values are errors.
   !
   !     COSTS(*)
@@ -129,22 +128,22 @@ SUBROUTINE SPLP(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   !     the bounds are found in the arrays BL(*) and BU(*) as follows.
   !
   !     For values of J between 1 and NVARS,
-  !          if IND(J)=1, then X(J) .GE. BL(J); BU(J) is not used.
-  !          if IND(J)=2, then X(J) .LE. BU(J); BL(J) is not used.
-  !          if IND(J)=3, then BL(J) .LE. X(J) .LE. BU(J),(BL(J)=BU(J) ok)
+  !          if IND(J)=1, then X(J) >= BL(J); BU(J) is not used.
+  !          if IND(J)=2, then X(J) <= BU(J); BL(J) is not used.
+  !          if IND(J)=3, then BL(J) <= X(J) <= BU(J),(BL(J)=BU(J) ok)
   !          if IND(J)=4, then X(J) is free to have any value,
   !          and BL(J), BU(J) are not used.
   !
   !     For values of I between NVARS+1 and NVARS+MRELAS,
-  !          if IND(I)=1, then W(I-NVARS) .GE. BL(I); BU(I) is not used.
-  !          if IND(I)=2, then W(I-NVARS) .LE. BU(I); BL(I) is not used.
-  !          if IND(I)=3, then BL(I) .LE. W(I-NVARS) .LE. BU(I),
+  !          if IND(I)=1, then W(I-NVARS) >= BL(I); BU(I) is not used.
+  !          if IND(I)=2, then W(I-NVARS) <= BU(I); BL(I) is not used.
+  !          if IND(I)=3, then BL(I) <= W(I-NVARS) <= BU(I),
   !          (BL(I)=BU(I) is ok).
   !          if IND(I)=4, then W(I-NVARS) is free to have any value,
   !          and BL(I), BU(I) are not used.
   !
   !     A value of IND(*) not equal to 1,2,3 or 4 is an error.  When
-  !     IND(I)=3, BL(I) must be .LE. BU(I).  The condition BL(I).GT.
+  !     IND(I)=3, BL(I) must be <= BU(I).  The condition BL(I)>
   !     BU(I) indicates infeasibility and is an error.
   !
   !     PRGOPT(*)
@@ -271,7 +270,7 @@ SUBROUTINE SPLP(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   !     for the equations A*x=w are in the array DUALS(I)=dual for
   !     equation number I.  The dual value for the component X(J) that
   !     has an upper or lower bound (or both) is returned in
-  !     DUALS(J+MRELAS).  The only other values for INFO are .LT. 0.
+  !     DUALS(J+MRELAS).  The only other values for INFO are < 0.
   !     The meaning of these values can be found by reading
   !     the diagnostic message in the output file, or by looking for
   !     error number = (-INFO) in the Extended Usage Instructions
@@ -349,8 +348,8 @@ SUBROUTINE SPLP(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   !     The values of LW and LIW, the lengths of the arrays WORK(*)
   !     and IWORK(*), must satisfy the inequalities
   !
-  !               LW .GE. 4*NVARS+ 8*MRELAS+LAMAT+  LBM
-  !               LIW.GE.   NVARS+11*MRELAS+LAMAT+2*LBM
+  !               LW >= 4*NVARS+ 8*MRELAS+LAMAT+  LBM
+  !               LIW>=   NVARS+11*MRELAS+LAMAT+2*LBM
   !
   !     It is an error if they do not both satisfy these inequalities.
   !     (The subprogram will inform the user of the required lengths
@@ -379,7 +378,7 @@ SUBROUTINE SPLP(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   !     ------------
   !     These parameters are respectively the number of constraints (the
   !     linear relations A*x=w that the unknowns x and w are to satisfy)
-  !     and the number of entries in the vector x.  Both must be .GE. 1.
+  !     and the number of entries in the vector x.  Both must be >= 1.
   !     Other values are errors.
   !
   !     COSTS(*)
@@ -425,7 +424,7 @@ SUBROUTINE SPLP(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   !
   !          Test IFLAG(1).
   !
-  !             IF(IFLAG(1).EQ.1) THEN
+  !             IF(IFLAG(1)=1) THEN
   !
   !               Initialize the necessary pointers and data
   !               for defining the matrix A.  The contents
@@ -436,7 +435,7 @@ SUBROUTINE SPLP(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   !
   !             END IF
   !
-  !             IF(IFLAG(1).EQ.2) THEN
+  !             IF(IFLAG(1)=2) THEN
   !
   !               Define one set of values for I,J,AIJ, and INDCAT.
   !               Each nonzero entry of A must be defined this way.
@@ -496,13 +495,13 @@ SUBROUTINE SPLP(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   !     SUBROUTINE USRMAT(I,J,AIJ, INDCAT,PRGOPT,DATTRV,IFLAG)
   !     DIMENSION PRGOPT(*),DATTRV(*),IFLAG(10)
   !
-  !     IF(IFLAG(1).EQ.1) THEN
+  !     IF(IFLAG(1)=1) THEN
   !
   !     THIS IS THE INITIALIZATION STEP.  THE VALUES OF IFLAG(K),K=2,3,4,
   !     ARE RESPECTIVELY THE COLUMN INDEX, THE ROW INDEX (OR THE NEXT COL.
   !     INDEX), AND THE POINTER TO THE MATRIX ENTRY'S VALUE WITHIN
   !     DATTRV(*).  ALSO CHECK (DATTRV(1)=0.) SIGNIFYING NO DATA.
-  !          IF(DATTRV(1).EQ.0.) THEN
+  !          IF(DATTRV(1)=0.) THEN
   !          I = 0
   !          J = 0
   !          IFLAG(1) = 3
@@ -517,12 +516,12 @@ SUBROUTINE SPLP(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   !          J=IFLAG(2)
   !          I=IFLAG(3)
   !          L=IFLAG(4)
-  !          IF(I.EQ.0) THEN
+  !          IF(I=0) THEN
   !
   !     SIGNAL THAT ALL OF THE NONZERO ENTRIES HAVE BEEN DEFINED.
   !               IFLAG(1)=3
   !               RETURN
-  !          ELSE IF(I.LT.0) THEN
+  !          ELSE IF(I<0) THEN
   !
   !     SIGNAL THAT A SWITCH IS MADE TO A NEW COLUMN.
   !               J=-I
@@ -572,22 +571,22 @@ SUBROUTINE SPLP(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   !     the bounds are found in the arrays BL(*) and BU(*) as follows.
   !
   !     For values of J between 1 and NVARS,
-  !          if IND(J)=1, then X(J) .GE. BL(J); BU(J) is not used.
-  !          if IND(J)=2, then X(J) .LE. BU(J); BL(J) is not used.
-  !          if IND(J)=3, then BL(J) .LE. X(J) .LE. BU(J),(BL(J)=BU(J) ok)
+  !          if IND(J)=1, then X(J) >= BL(J); BU(J) is not used.
+  !          if IND(J)=2, then X(J) <= BU(J); BL(J) is not used.
+  !          if IND(J)=3, then BL(J) <= X(J) <= BU(J),(BL(J)=BU(J) ok)
   !          if IND(J)=4, then X(J) is free to have any value,
   !          and BL(J), BU(J) are not used.
   !
   !     For values of I between NVARS+1 and NVARS+MRELAS,
-  !          if IND(I)=1, then W(I-NVARS) .GE. BL(I); BU(I) is not used.
-  !          if IND(I)=2, then W(I-NVARS) .LE. BU(I); BL(I) is not used.
-  !          if IND(I)=3, then BL(I) .LE. W(I-NVARS) .LE. BU(I),
+  !          if IND(I)=1, then W(I-NVARS) >= BL(I); BU(I) is not used.
+  !          if IND(I)=2, then W(I-NVARS) <= BU(I); BL(I) is not used.
+  !          if IND(I)=3, then BL(I) <= W(I-NVARS) <= BU(I),
   !          (BL(I)=BU(I) is ok).
   !          if IND(I)=4, then W(I-NVARS) is free to have any value,
   !          and BL(I), BU(I) are not used.
   !
   !     A value of IND(*) not equal to 1,2,3 or 4 is an error.  When
-  !     IND(I)=3, BL(I) must be .LE. BU(I).  The condition BL(I).GT.
+  !     IND(I)=3, BL(I) must be <= BU(I).  The condition BL(I)>
   !     BU(I) indicates infeasibility and is an error.  These
   !     arrays can be changed by the user between restarts.  See
   !     options with KEY=55,57 for details of checkpointing and
@@ -736,7 +735,7 @@ SUBROUTINE SPLP(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   !     for the equations A*x=w are in the array DUALS(I)=dual for
   !     equation number I.  The dual value for the component X(J) that
   !     has an upper or lower bound (or both) is returned in
-  !     DUALS(J+MRELAS).  The only other values for INFO are .LT. 0.
+  !     DUALS(J+MRELAS).  The only other values for INFO are < 0.
   !     The meaning of these values can be found by reading
   !     the diagnostic message in the output file, or by looking for
   !     error number = (-INFO) under the heading "List of SPLP( ) Error
@@ -794,8 +793,8 @@ SUBROUTINE SPLP(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   !
   !         CALL PNNZRS(I,AIJ,IPLACE,WORK,IWORK,J)
   !
-  !     The value of I is also an output parameter.  If I.LE.0 on output,
-  !     then there are no more nonzeroes in column J.  If I.GT.0, the
+  !     The value of I is also an output parameter.  If I<=0 on output,
+  !     then there are no more nonzeroes in column J.  If I>0, the
   !     output value for component number I of column J is in AIJ.  The
   !     parameters WORK(*) and IWORK(*) are the same arguments as in the
   !     call to SPLP( ).  The parameter IPLACE is a single INTEGER
@@ -841,13 +840,13 @@ SUBROUTINE SPLP(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   !    |------------------------|
   !     PROGRAM LPEX
   !     THE OPTIMIZATION PROBLEM IS TO FIND X1, X2, X3 THAT
-  !     MINIMIZE X1 + X2 + X3, X1.GE.0, X2.GE.0, X3 UNCONSTRAINED.
+  !     MINIMIZE X1 + X2 + X3, X1>=0, X2>=0, X3 UNCONSTRAINED.
   !
   !     THE UNKNOWNS X1,X2,X3 ARE TO SATISFY CONSTRAINTS
   !
   !        X1 -3*X2 +4*X3 = 5
-  !        X1 -2*X2     .LE.3
-  !            2*X2 - X3.GE.4
+  !        X1 -2*X2     <=3
+  !            2*X2 - X3>=4
   !
   !     WE FIRST DEFINE THE DEPENDENT VARIABLES
   !          W1=X1 -3*X2 +4*X3
@@ -901,7 +900,7 @@ SUBROUTINE SPLP(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   !     IND(2)=1
   !     IND(3)=4
   !
-  !     CONSTRAIN W1=5,W2.LE.3, AND W3.GE.4.
+  !     CONSTRAIN W1=5,W2<=3, AND W3>=4.
   !     BL(4)=5.
   !     BU(4)=5.
   !     IND(4)=3
@@ -981,7 +980,7 @@ SUBROUTINE SPLP(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   !          .       .
   !          ...PRGOPT(LINK)=1 (no more options to change)
   !
-  !     A value of LINK that is .LE.0 or .GT. 10000 is an error.
+  !     A value of LINK that is <=0 or > 10000 is an error.
   !     In this case SPLP( ) returns with an error message, INFO=-14.
   !     This helps prevent using invalid but positive values of LINK that
   !     will probably extend beyond the program limits of PRGOPT(*).
@@ -1060,7 +1059,7 @@ SUBROUTINE SPLP(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   ! -----KEY = 52.  Redefine the parameter, IDIGIT, which determines the
   !     format and precision used for the printed output.  In the printed
   !     output, at least ABS(IDIGIT) decimal digits per number is printed.
-  !     If IDIGIT.LT.0, 72 printing columns are used.  IF IDIGIT.GT.0, 133
+  !     If IDIGIT<0, 72 printing columns are used.  IF IDIGIT>0, 133
   !     printing columns are used.
   !     If SWITCH=0  option is off; IDIGIT=-4.
   !              =1  option is on.
@@ -1070,7 +1069,7 @@ SUBROUTINE SPLP(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   ! -----KEY = 53.  Redefine LAMAT and LBM, the lengths of the portions of
   !     WORK(*) and IWORK(*) that are allocated to the sparse matrix
   !     storage and the sparse linear equation solver, respectively.
-  !     LAMAT must be .GE. NVARS+7 and LBM must be positive.
+  !     LAMAT must be >= NVARS+7 and LBM must be positive.
   !     If SWITCH=0  option is off; LAMAT=4*NVARS+7
   !                                 LBM  =8*MRELAS.
   !              =1  option is on.
@@ -1144,7 +1143,7 @@ SUBROUTINE SPLP(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   !     In numbering the unknowns,
   !     the components of x are numbered (1-NVARS) and the components
   !     of w are numbered (NVARS+1)-(NVARS+MRELAS).  A value for an
-  !     index .LE. 0 or .GT. (NVARS+MRELAS) is an error (INFO=-16).
+  !     index <= 0 or > (NVARS+MRELAS) is an error (INFO=-16).
   !     If SWITCH=0  option is off; SPLP( ) chooses the initial basis.
   !              =1  option is on; user provides the initial basis.
   !     data set =MRELAS indices of basis; order is arbitrary.
@@ -1173,7 +1172,7 @@ SUBROUTINE SPLP(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   !     nonzero entries of A to see if they are in the range of ASMALL and
   !     ABIG.  If an entry of A is not within this range, SPLP( ) returns
   !     an error message, INFO=-22. Both ASMALL and ABIG must be positive
-  !     with ASMALL .LE. ABIG.  Otherwise,  an error message is returned,
+  !     with ASMALL <= ABIG.  Otherwise,  an error message is returned,
   !     INFO=-17.
   !     If SWITCH=0  option is off; no checking of the data matrix is done
   !              =1  option is on; checking is done.
@@ -1367,11 +1366,11 @@ SUBROUTINE SPLP(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   !     arguments were left out of the call statement to SPLP( ) or
   !     that the values of MRELAS and NVARS have been over-written
   !     by garbage.  Messages:
-  !     SPLP( ). VALUE OF MRELAS MUST BE .GT.0. NOW=(I1).
+  !     SPLP( ). VALUE OF MRELAS MUST BE >0. NOW=(I1).
   !               IN ABOVE MESSAGE, I1=         0
   !     ERROR NUMBER =         5
   !
-  !     SPLP( ). VALUE OF NVARS MUST BE .GT.0. NOW=(I1).
+  !     SPLP( ). VALUE OF NVARS MUST BE >0. NOW=(I1).
   !               IN ABOVE MESSAGE, I1=         0
   !     ERROR NUMBER =         6
   !
@@ -1398,7 +1397,7 @@ SUBROUTINE SPLP(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   ! -----10. and 11.  The type of bound (even no bound) and the bounds
   !     must be specified for each independent variable. If an independent
   !     variable has both an upper and lower bound, the bounds must be
-  !     consistent.  The lower bound must be .LE. the upper bound.
+  !     consistent.  The lower bound must be <= the upper bound.
   !     Messages:
   !     SPLP( ). INDEPENDENT VARIABLE (I1) IS NOT DEFINED.
   !               IN ABOVE MESSAGE, I1=         1
@@ -1414,7 +1413,7 @@ SUBROUTINE SPLP(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   ! -----12. and 13.  The type of bound (even no bound) and the bounds
   !     must be specified for each dependent variable.  If a dependent
   !     variable has both an upper and lower bound, the bounds must be
-  !     consistent. The lower bound must be .LE. the upper bound.
+  !     consistent. The lower bound must be <= the upper bound.
   !     Messages:
   !     SPLP( ). DEPENDENT VARIABLE (I1) IS NOT DEFINED.
   !               IN ABOVE MESSAGE, I1=         1
@@ -1455,11 +1454,11 @@ SUBROUTINE SPLP(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   !     ERROR NUMBER =        19
   !
   !     SPLP( ). USER-DEFINED VALUE OF LAMAT (I1)
-  !     MUST BE .GE. NVARS+7.
+  !     MUST BE >= NVARS+7.
   !               IN ABOVE MESSAGE, I1=         1
   !     ERROR NUMBER =         20
   !
-  !     SPLP( ). USER-DEFINED VALUE OF LBM MUST BE .GE. 0.
+  !     SPLP( ). USER-DEFINED VALUE OF LBM MUST BE >= 0.
   !     ERROR NUMBER =         21
   !
   ! -----22.  The user-option, number 62, to check the size of the matrix
@@ -1566,18 +1565,18 @@ SUBROUTINE SPLP(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   zero = 0.E0
   iopt = 1
   !
-  !     VERIFY THAT MRELAS, NVARS .GT. 0.
+  !     VERIFY THAT MRELAS, NVARS > 0.
   !
-  IF ( Mrelas<=0 ) THEN
+  IF( Mrelas<=0 ) THEN
     WRITE (xern1,'(I8)') Mrelas
-    CALL XERMSG('SPLP','VALUE OF MRELAS MUST BE .GT. 0.  NOW = '//xern1,5,1)
+    CALL XERMSG('SPLP','VALUE OF MRELAS MUST BE > 0.  NOW = '//xern1,5,1)
     Info = -5
     RETURN
   END IF
   !
-  IF ( Nvars<=0 ) THEN
+  IF( Nvars<=0 ) THEN
     WRITE (xern1,'(I8)') Nvars
-    CALL XERMSG('SPLP','VALUE OF NVARS MUST BE .GT. 0.  NOW = '//xern1,6,1)
+    CALL XERMSG('SPLP','VALUE OF NVARS MUST BE > 0.  NOW = '//xern1,6,1)
     Info = -6
     RETURN
   END IF
@@ -1592,7 +1591,7 @@ SUBROUTINE SPLP(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
     !
     !     LOOK IN OPTION ARRAY FOR CHANGES TO WORK ARRAY LENGTHS.
     next = INT( Prgopt(last) )
-    IF ( next<=0.OR.next>iadbig ) THEN
+    IF( next<=0 .OR. next>iadbig ) THEN
       !
       !     THE CHECKS FOR SMALL OR LARGE VALUES OF NEXT ARE TO PREVENT
       !     WORKING WITH UNDEFINED DATA.
@@ -1601,20 +1600,20 @@ SUBROUTINE SPLP(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
         'THE USER OPTION ARRAY HAS UNDEFINED DATA.',nerr,iopt)
       Info = -nerr
       RETURN
-    ELSEIF ( next==1 ) THEN
+    ELSEIF( next==1 ) THEN
       !
       !     CHECK LENGTH VALIDITY OF SPARSE MATRIX STAGING AREA.
       !
-      IF ( lmx<Nvars+7 ) THEN
+      IF( lmx<Nvars+7 ) THEN
         WRITE (xern1,'(I8)') lmx
         CALL XERMSG('SPLP','USER-DEFINED VALUE OF LAMAT = '//&
-          xern1//' MUST BE .GE. NVARS+7.',20,1)
+          xern1//' MUST BE >= NVARS+7.',20,1)
         Info = -20
         RETURN
       END IF
       !
       !     TRIVIAL CHECK ON LENGTH OF LA05*() MATRIX AREA.
-      IF ( lbm<0 ) EXIT
+      IF( lbm<0 ) EXIT
       !
       !     DEFINE POINTERS FOR STARTS OF SUBARRAYS USED IN WORK(*)
       !     AND IWORK(*) IN OTHER SUBPROGRAMS OF THE PACKAGE.
@@ -1640,7 +1639,7 @@ SUBROUTINE SPLP(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
       !
       !     CHECK ARRAY LENGTH VALIDITY OF WORK(*), IWORK(*).
       !
-      IF ( Lw<lwork.OR.Liw<liwork ) THEN
+      IF( Lw<lwork .OR. Liw<liwork ) THEN
         WRITE (xern1,'(I8)') lwork
         WRITE (xern2,'(I8)') liwork
         CALL XERMSG('SPLP','WORK OR IWORK IS NOT LONG ENOUGH. LW MUST BE = '&
@@ -1655,15 +1654,15 @@ SUBROUTINE SPLP(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
         Work(lrg),Work(lrprim),Work(lrhs),Work(lww),lmx,lbm,&
         Ibasis,Iwork(libb),Iwork(limat),Iwork(librc),Iwork(lipr),Iwork(liwr))
       RETURN
-    ELSEIF ( ictopt<=ictmax ) THEN
+    ELSEIF( ictopt<=ictmax ) THEN
       key = INT( Prgopt(last+1) )
       !
       !     IF KEY = 53, USER MAY SPECIFY LENGTHS OF PORTIONS
       !    OF WORK(*) AND IWORK(*) THAT ARE ALLOCATED TO THE
       !     SPARSE MATRIX STORAGE AND SPARSE LINEAR EQUATION
       !     SOLVING.
-      IF ( key==53 ) THEN
-        IF ( Prgopt(last+2)/=zero ) THEN
+      IF( key==53 ) THEN
+        IF( Prgopt(last+2)/=zero ) THEN
           lmx = INT( Prgopt(last+3) )
           lbm = INT( Prgopt(last+4) )
         END IF
@@ -1678,7 +1677,7 @@ SUBROUTINE SPLP(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
     END IF
   END DO
   nerr = 21
-  CALL XERMSG('SPLP','USER-DEFINED VALUE OF LBM MUST BE .GE. 0.',nerr,iopt)
+  CALL XERMSG('SPLP','USER-DEFINED VALUE OF LBM MUST BE >= 0.',nerr,iopt)
   Info = -nerr
   RETURN
   !

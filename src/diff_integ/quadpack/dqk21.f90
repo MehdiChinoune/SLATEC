@@ -1,7 +1,6 @@
 !** DQK21
 SUBROUTINE DQK21(F,A,B,Result,Abserr,Resabs,Resasc)
-  !>
-  !  To compute I = Integral of F over (A,B), with error
+  !> To compute I = Integral of F over (A,B), with error
   !                           estimate
   !                       J = Integral of ABS(F) over (A,B)
   !***
@@ -182,8 +181,8 @@ SUBROUTINE DQK21(F,A,B,Result,Abserr,Resabs,Resasc)
   Resabs = Resabs*dhlgth
   Resasc = Resasc*dhlgth
   Abserr = ABS((resk-resg)*hlgth)
-  IF ( Resasc/=0.0D+00.AND.Abserr/=0.0D+00 )&
+  IF( Resasc/=0.0D+00 .AND. Abserr/=0.0D+00 )&
     Abserr = Resasc*MIN(0.1D+01,(0.2D+03*Abserr/Resasc)**1.5D+00)
-  IF ( Resabs>uflow/(0.5D+02*epmach) ) Abserr = MAX((epmach*0.5D+02)*Resabs,&
+  IF( Resabs>uflow/(0.5D+02*epmach) ) Abserr = MAX((epmach*0.5D+02)*Resabs,&
     Abserr)
 END SUBROUTINE DQK21

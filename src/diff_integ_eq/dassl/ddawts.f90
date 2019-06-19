@@ -1,7 +1,6 @@
 !** DDAWTS
 SUBROUTINE DDAWTS(Neq,Iwt,Rtol,Atol,Y,Wt)
-  !>
-  !  Set error weight vector for DDASSL.
+  !> Set error weight vector for DDASSL.
   !***
   ! **Library:**   SLATEC (DASSL)
   !***
@@ -38,7 +37,7 @@ SUBROUTINE DDAWTS(Neq,Iwt,Rtol,Atol,Y,Wt)
   rtoli = Rtol(1)
   atoli = Atol(1)
   DO i = 1, Neq
-    IF ( Iwt/=0 ) THEN
+    IF( Iwt/=0 ) THEN
       rtoli = Rtol(i)
       atoli = Atol(i)
     END IF

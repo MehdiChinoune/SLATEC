@@ -1,7 +1,6 @@
 !** CBESY
 SUBROUTINE CBESY(Z,Fnu,Kode,N,Cy,Nz,Cwrk,Ierr)
-  !>
-  !  Compute a sequence of the Bessel functions Y(a,z) for
+  !> Compute a sequence of the Bessel functions Y(a,z) for
   !            complex argument z and real nonnegative orders a=b,b+1,
   !            b+2,... where b>0.  A scaling option is available to
   !            help avoid overflow.
@@ -160,31 +159,31 @@ SUBROUTINE CBESY(Z,Fnu,Kode,N,Cy,Nz,Cwrk,Ierr)
   !   920811  Prologue revised.  (DWL)
   USE service, ONLY : R1MACH, I1MACH
   !
-  INTEGER i, Ierr, k, Kode, k1, k2, N, Nz, nz1, nz2
-  COMPLEX(SP) Cwrk(N), Cy(N), c1, c2, ex, hci, Z, zu, zv
-  REAL(SP) elim, ey, Fnu, r1, r2, tay, xx, yy, r1m5, ascle, &
+  INTEGER :: i, Ierr, k, Kode, k1, k2, N, Nz, nz1, nz2
+  COMPLEX(SP) :: Cwrk(N), Cy(N), c1, c2, ex, hci, Z, zu, zv
+  REAL(SP) :: elim, ey, Fnu, r1, r2, tay, xx, yy, r1m5, ascle, &
     rtol, atol, tol, aa, bb
   !* FIRST EXECUTABLE STATEMENT  CBESY
   xx = REAL(Z)
   yy = AIMAG(Z)
   Ierr = 0
   Nz = 0
-  IF ( xx==0.0E0.AND.yy==0.0E0 ) Ierr = 1
-  IF ( Fnu<0.0E0 ) Ierr = 1
-  IF ( Kode<1.OR.Kode>2 ) Ierr = 1
-  IF ( N<1 ) Ierr = 1
-  IF ( Ierr/=0 ) RETURN
+  IF( xx==0.0E0 .AND. yy==0.0E0 ) Ierr = 1
+  IF( Fnu<0.0E0 ) Ierr = 1
+  IF( Kode<1 .OR. Kode>2 ) Ierr = 1
+  IF( N<1 ) Ierr = 1
+  IF( Ierr/=0 ) RETURN
   hci = CMPLX(0.0E0,0.5E0)
   CALL CBESH(Z,Fnu,Kode,1,N,Cy,nz1,Ierr)
-  IF ( Ierr/=0.AND.Ierr/=3 ) THEN
+  IF( Ierr/=0 .AND. Ierr/=3 ) THEN
     Nz = 0
   ELSE
     CALL CBESH(Z,Fnu,Kode,2,N,Cwrk,nz2,Ierr)
-    IF ( Ierr/=0.AND.Ierr/=3 ) THEN
+    IF( Ierr/=0 .AND. Ierr/=3 ) THEN
       Nz = 0
     ELSE
       Nz = MIN(nz1,nz2)
-      IF ( Kode==2 ) THEN
+      IF( Kode==2 ) THEN
         tol = MAX(R1MACH(4),1.0E-18)
         k1 = I1MACH(12)
         k2 = I1MACH(13)
@@ -199,8 +198,8 @@ SUBROUTINE CBESY(Z,Fnu,Kode,N,Cy,Nz,Cwrk,Ierr)
         ex = CMPLX(r1,r2)
         ey = 0.0E0
         tay = ABS(yy+yy)
-        IF ( tay<elim ) ey = EXP(-tay)
-        IF ( yy<0.0E0 ) THEN
+        IF( tay<elim ) ey = EXP(-tay)
+        IF( yy<0.0E0 ) THEN
           c1 = ex
           c2 = CONJG(ex)*CMPLX(ey,0.0E0)
         ELSE
@@ -216,7 +215,7 @@ SUBROUTINE CBESY(Z,Fnu,Kode,N,Cy,Nz,Cwrk,Ierr)
           aa = REAL(zv)
           bb = AIMAG(zv)
           atol = 1.0E0
-          IF ( MAX(ABS(aa),ABS(bb))<=ascle ) THEN
+          IF( MAX(ABS(aa),ABS(bb))<=ascle ) THEN
             zv = zv*CMPLX(rtol,0.0E0)
             atol = tol
           END IF
@@ -226,14 +225,14 @@ SUBROUTINE CBESY(Z,Fnu,Kode,N,Cy,Nz,Cwrk,Ierr)
           aa = REAL(zu)
           bb = AIMAG(zu)
           atol = 1.0E0
-          IF ( MAX(ABS(aa),ABS(bb))<=ascle ) THEN
+          IF( MAX(ABS(aa),ABS(bb))<=ascle ) THEN
             zu = zu*CMPLX(rtol,0.0E0)
             atol = tol
           END IF
           zu = zu*c1*hci
           zu = zu*CMPLX(atol,0.0E0)
           Cy(i) = zv - zu
-          IF ( Cy(i)==CMPLX(0.0E0,0.0E0).AND.ey==0.0E0 ) Nz = Nz + 1
+          IF( Cy(i)==CMPLX(0.0E0,0.0E0) .AND. ey==0.0E0 ) Nz = Nz + 1
         END DO
         RETURN
       ELSE

@@ -1,7 +1,6 @@
 !** DBSI0E
 REAL(DP) FUNCTION DBSI0E(X)
-  !>
-  !  Compute the exponentially scaled modified (hyperbolic)
+  !> Compute the exponentially scaled modified (hyperbolic)
   !            Bessel function of the first kind of order zero.
   !***
   ! **Library:**   SLATEC (FNLIB)
@@ -127,7 +126,7 @@ REAL(DP) FUNCTION DBSI0E(X)
     -.1605454124919743200584465949655D-30, +.1965352984594290603938848073318D-31 ]
   LOGICAL, SAVE :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  DBSI0E
-  IF ( first ) THEN
+  IF( first ) THEN
     nti0 = INITDS(bi0cs,18,eta)
     ntai0 = INITDS(ai0cs,46,eta)
     ntai02 = INITDS(ai02cs,69,eta)
@@ -135,14 +134,14 @@ REAL(DP) FUNCTION DBSI0E(X)
   END IF
   !
   y = ABS(X)
-  IF ( y>3.0D0 ) THEN
+  IF( y>3.0D0 ) THEN
     !
-    IF ( y<=8.D0 ) DBSI0E = (0.375D0+DCSEVL((48.D0/y-11.D0)/5.D0,ai0cs,ntai0))/SQRT(y)
-    IF ( y>8.D0 ) DBSI0E = (0.375D0+DCSEVL(16.D0/y-1.D0,ai02cs,ntai02))/SQRT(y)
+    IF( y<=8.D0 ) DBSI0E = (0.375D0+DCSEVL((48.D0/y-11.D0)/5.D0,ai0cs,ntai0))/SQRT(y)
+    IF( y>8.D0 ) DBSI0E = (0.375D0+DCSEVL(16.D0/y-1.D0,ai02cs,ntai02))/SQRT(y)
     RETURN
   END IF
   !
   DBSI0E = 1.0D0 - X
-  IF ( y>xsml ) DBSI0E = EXP(-y)*(2.75D0+DCSEVL(y*y/4.5D0-1.D0,bi0cs,nti0))
+  IF( y>xsml ) DBSI0E = EXP(-y)*(2.75D0+DCSEVL(y*y/4.5D0-1.D0,bi0cs,nti0))
   RETURN
 END FUNCTION DBSI0E

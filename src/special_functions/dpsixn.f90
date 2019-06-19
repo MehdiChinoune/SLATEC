@@ -1,7 +1,6 @@
 !** DPSIXN
 REAL(DP) FUNCTION DPSIXN(N)
-  !>
-  !  Subsidiary to DEXINT
+  !> Subsidiary to DEXINT
   !***
   ! **Library:**   SLATEC
   !***
@@ -12,9 +11,9 @@ REAL(DP) FUNCTION DPSIXN(N)
   ! **Description:**
   !
   !     This subroutine returns values of PSI(X)=derivative of log
-  !     GAMMA(X), X.GT.0.0 at integer arguments. A table look-up is
-  !     performed for N .LE. 100, and the asymptotic expansion is
-  !     evaluated for N.GT.100.
+  !     GAMMA(X), X>0.0 at integer arguments. A table look-up is
+  !     performed for N <= 100, and the asymptotic expansion is
+  !     evaluated for N>100.
   !
   !***
   ! **See also:**  DEXINT
@@ -30,7 +29,7 @@ REAL(DP) FUNCTION DPSIXN(N)
   !   910722  Updated AUTHOR section.  (ALS)
   USE service, ONLY : D1MACH
   !
-  INTEGER N, k
+  INTEGER :: N, k
   REAL(DP) :: ax, fn, rfn2, trm, s, wdtol
   !
   !             DPSIXN(N), N = 1,100
@@ -74,17 +73,17 @@ REAL(DP) FUNCTION DPSIXN(N)
     -2.10927960927960928D-02 ]
   !
   !* FIRST EXECUTABLE STATEMENT  DPSIXN
-  IF ( N>100 ) THEN
+  IF( N>100 ) THEN
     wdtol = MAX(D1MACH(4),1.0D-18)
     fn = N
     ax = 1.0D0
     s = -0.5D0/fn
-    IF ( ABS(s)>wdtol ) THEN
+    IF( ABS(s)>wdtol ) THEN
       rfn2 = 1.0D0/(fn*fn)
       DO k = 1, 6
         ax = ax*rfn2
         trm = -b(k)*ax
-        IF ( ABS(trm)<wdtol ) EXIT
+        IF( ABS(trm)<wdtol ) EXIT
         s = s + trm
       END DO
     END IF

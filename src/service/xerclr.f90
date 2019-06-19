@@ -1,7 +1,6 @@
 !** XERCLR
 SUBROUTINE XERCLR
-  !>
-  !  Reset current error number to zero.
+  !> Reset current error number to zero.
   !***
   ! **Library:**   SLATEC (XERROR)
   !***
@@ -34,7 +33,7 @@ SUBROUTINE XERCLR
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
-  INTEGER junk
+  INTEGER :: junk
   !* FIRST EXECUTABLE STATEMENT  XERCLR
   junk = J4SAVE(1,0,.TRUE.)
 END SUBROUTINE XERCLR

@@ -1,7 +1,6 @@
 !** IDLOC
 INTEGER FUNCTION IDLOC(Locc,Sx,Ix)
-  !>
-  !  Subsidiary to DSPLP
+  !> Subsidiary to DSPLP
   !***
   ! **Library:**   SLATEC
   !***
@@ -39,19 +38,19 @@ INTEGER FUNCTION IDLOC(Locc,Sx,Ix)
   REAL(DP) :: Sx(:)
   INTEGER :: ipage, itemp, k, key, lmx, lmxm1, lpg, np
   !* FIRST EXECUTABLE STATEMENT  IDLOC
-  IF ( Locc<=0 ) THEN
+  IF( Locc<=0 ) THEN
     CALL XERMSG('IDLOC',&
-      'A value of LOC, the first argument, .LE. 0 was encountered',55,1)
+      'A value of LOC, the first argument, <= 0 was encountered',55,1)
     IDLOC = 0
     RETURN
   END IF
   !
-  !     Two cases exist:  (1.LE.LOC.LE.K) .OR. (LOC.GT.K).
+  !     Two cases exist:  (1<=LOC<=K) .OR. (LOC>K).
   !
   k = Ix(3) + 4
   lmx = Ix(1)
   lmxm1 = lmx - 1
-  IF ( Locc<=k ) THEN
+  IF( Locc<=k ) THEN
     IDLOC = Locc
     RETURN
   END IF
@@ -69,8 +68,8 @@ INTEGER FUNCTION IDLOC(Locc,Sx,Ix)
   !     and read page IPAGE.  Write the page only if it has been
   !     modified.
   !
-  IF ( ipage/=np ) THEN
-    IF ( Sx(lmx)==1.0 ) THEN
+  IF( ipage/=np ) THEN
+    IF( Sx(lmx)==1.0 ) THEN
       Sx(lmx) = 0.0
       key = 2
       CALL DPRWPG(key,np,lpg,Sx,Ix)

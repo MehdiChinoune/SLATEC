@@ -1,7 +1,6 @@
 !** DBETA
 REAL(DP) FUNCTION DBETA(A,B)
-  !>
-  !  Compute the complete Beta function.
+  !> Compute the complete Beta function.
   !***
   ! **Library:**   SLATEC (FNLIB)
   !***
@@ -36,20 +35,20 @@ REAL(DP) FUNCTION DBETA(A,B)
   REAL(DP), PARAMETER :: alnsml = LOG(D1MACH(1))
   LOGICAL, SAVE :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  DBETA
-  IF ( first ) THEN
+  IF( first ) THEN
     CALL DGAMLM(xmin,xmax)
     first = .FALSE.
   END IF
   !
-  IF ( A<=0.D0.OR.B<=0.D0 ) CALL XERMSG('DBETA','BOTH ARGUMENTS MUST BE GT 0',2,2)
+  IF( A<=0.D0 .OR. B<=0.D0 ) CALL XERMSG('DBETA','BOTH ARGUMENTS MUST BE GT 0',2,2)
   !
-  IF ( A+B<xmax ) THEN
+  IF( A+B<xmax ) THEN
     DBETA = GAMMA(A)*GAMMA(B)/GAMMA(A+B)
     RETURN
   END IF
   !
   DBETA = DLBETA(A,B)
-  IF ( DBETA<alnsml ) THEN
+  IF( DBETA<alnsml ) THEN
     !
     DBETA = 0.D0
     CALL XERMSG('DBETA','A AND/OR B SO BIG BETA UNDERFLOWS',1,1)

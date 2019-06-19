@@ -1,8 +1,7 @@
 !** DCOEF
 SUBROUTINE DCOEF(Yh,Yp,Ncomp,Nrowb,Nfc,B,Beta,Coef,Inhomo,Re,Ae,By,&
     Cvec,Work,Iwork,Iflag,Nfcc)
-  !>
-  !  Subsidiary to DBVSUP
+  !> Subsidiary to DBVSUP
   !***
   ! **Library:**   SLATEC
   !***
@@ -95,10 +94,10 @@ SUBROUTINE DCOEF(Yh,Yp,Ncomp,Nrowb,Nfc,B,Beta,Coef,Inhomo,Re,Ae,By,&
   DO k = 1, Nfcc
     DO j = 1, Nfc
       l = j
-      IF ( Nfc/=Nfcc ) l = 2*j - 1
+      IF( Nfc/=Nfcc ) l = 2*j - 1
       By(k,l) = DOT_PRODUCT(B(k,1:Ncomp),Yh(1:Ncomp,j))
     END DO
-    IF ( Nfc/=Nfcc ) THEN
+    IF( Nfc/=Nfcc ) THEN
       DO j = 1, Nfc
         l = 2*j
         bykl = DOT_PRODUCT(B(k,1:ncomp2),Yh(ncomp2+1:2*ncomp2,j))
@@ -125,16 +124,16 @@ SUBROUTINE DCOEF(Yh,Yp,Ncomp,Nrowb,Nfc,B,Beta,Coef,Inhomo,Re,Ae,By,&
   !
   Iflag = 0
   mlso = 0
-  IF ( Inhomo==3 ) mlso = 1
+  IF( Inhomo==3 ) mlso = 1
   kflag = INT( 0.5D0*LOG10(eps_com) )
   CALL XGETF(nf)
   CALL XSETF(0)
   DO
     CALL DSUDS(By,Coef,Cvec,Nfcc,Nfcc,Nfcc,kflag,mlso,Work,Iwork)
-    IF ( kflag/=3 ) THEN
-      IF ( kflag==4 ) Iflag = 2
+    IF( kflag/=3 ) THEN
+      IF( kflag==4 ) Iflag = 2
       CALL XSETF(nf)
-      IF ( Nfcc==1 ) THEN
+      IF( Nfcc==1 ) THEN
         !
         !        ***************************************************************
         !            TESTING FOR EXISTENCE AND UNIQUENESS OF BOUNDARY-VALUE
@@ -149,18 +148,18 @@ SUBROUTINE DCOEF(Yh,Yp,Ncomp,Nrowb,Nfc,B,Beta,Coef,Inhomo,Re,Ae,By,&
           bn = MAX(bn,ABS(B(1,k)))
         END DO
         bbn = MAX(bn,ABS(Beta(1)))
-        IF ( bys<=10.0D0*(Re*un+Ae)*bn ) THEN
+        IF( bys<=10.0D0*(Re*un+Ae)*bn ) THEN
           brn = bbn/bn*bys
-          IF ( cons>=0.1D0*brn.AND.cons<=10.0D0*brn ) Iflag = 1
-          IF ( cons>10.0D0*brn ) Iflag = 2
-          IF ( cons<=Re*ABS(Beta(1))+Ae+(Re*ypn+Ae)*bn ) Iflag = 1
-          IF ( Inhomo==3 ) Coef(1) = 1.0D0
-        ELSEIF ( Inhomo==3 ) THEN
+          IF( cons>=0.1D0*brn .AND. cons<=10.0D0*brn ) Iflag = 1
+          IF( cons>10.0D0*brn ) Iflag = 2
+          IF( cons<=Re*ABS(Beta(1))+Ae+(Re*ypn+Ae)*bn ) Iflag = 1
+          IF( Inhomo==3 ) Coef(1) = 1.0D0
+        ELSEIF( Inhomo==3 ) THEN
           Iflag = 3
           Coef(1) = 1.0D0
         END IF
-      ELSEIF ( Inhomo==3 ) THEN
-        IF ( Iwork(1)<Nfcc ) THEN
+      ELSEIF( Inhomo==3 ) THEN
+        IF( Iwork(1)<Nfcc ) THEN
           DO k = 1, Nfcc
             ki = 4*Nfcc + k
             Coef(k) = Work(ki)

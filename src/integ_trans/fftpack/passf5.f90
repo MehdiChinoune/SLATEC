@@ -1,7 +1,6 @@
 !** PASSF5
 SUBROUTINE PASSF5(Ido,L1,Cc,Ch,Wa1,Wa2,Wa3,Wa4)
-  !>
-  !  Calculate the fast Fourier transform of subvectors of
+  !> Calculate the fast Fourier transform of subvectors of
   !            length five.
   !***
   ! **Library:**   SLATEC (FFTPACK)
@@ -36,7 +35,7 @@ SUBROUTINE PASSF5(Ido,L1,Cc,Ch,Wa1,Wa2,Wa3,Wa4)
   ti11 = -SIN(.4*pi)
   tr12 = -SIN(.3*pi)
   ti12 = -SIN(.2*pi)
-  IF ( Ido==2 ) THEN
+  IF( Ido==2 ) THEN
     DO k = 1, L1
       ti5 = Cc(2,2,k) - Cc(2,5,k)
       ti2 = Cc(2,2,k) + Cc(2,5,k)
@@ -66,7 +65,7 @@ SUBROUTINE PASSF5(Ido,L1,Cc,Ch,Wa1,Wa2,Wa3,Wa4)
       Ch(2,k,5) = ci2 - cr5
     END DO
     RETURN
-  ELSEIF ( Ido/2<L1 ) THEN
+  ELSEIF( Ido/2<L1 ) THEN
     DO i = 2, Ido, 2
       DO k = 1, L1
         ti5 = Cc(i,2,k) - Cc(i,5,k)

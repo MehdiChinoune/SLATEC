@@ -1,7 +1,6 @@
 !** CGEIR
 SUBROUTINE CGEIR(A,Lda,N,V,Itask,Ind,Work,Iwork)
-  !>
-  !  Solve a general system of linear equations.  Iterative
+  !> Solve a general system of linear equations.  Iterative
   !            refinement is used to obtain an error estimate.
   !***
   ! **Library:**   SLATEC
@@ -38,7 +37,7 @@ SUBROUTINE CGEIR(A,Lda,N,V,Itask,Ind,Work,Iwork)
   !
   !    If the equation A*X=B is to be solved for more than one vector
   !    B, the factoring of A does not need to be performed again and
-  !    the option to only solve (ITASK .GT. 1) will be faster for
+  !    the option to only solve (ITASK > 1) will be faster for
   !    the succeeding solutions.  In this case, the contents of A,
   !    LDA, N, WORK, and IWORK must not have been altered by the
   !    user following factorization (ITASK=1).  IND will not be
@@ -66,9 +65,9 @@ SUBROUTINE CGEIR(A,Lda,N,V,Itask,Ind,Work,Iwork)
   !    ITASK  INTEGER
   !             if ITASK=1, the matrix A is factored and then the
   !               linear equation is solved.
-  !             if ITASK .GT. 1, the equation is solved using the existing
+  !             if ITASK > 1, the equation is solved using the existing
   !               factored matrix A (stored in work).
-  !             if ITASK .LT. 1, then terminal error message IND=-3 is
+  !             if ITASK < 1, then terminal error message IND=-3 is
   !               printed.
   !    IND    INTEGER
   !             GT.0  IND is a rough estimate of the number of digits
@@ -124,7 +123,7 @@ SUBROUTINE CGEIR(A,Lda,N,V,Itask,Ind,Work,Iwork)
   REAL(SP) :: xnorm, dnorm
   CHARACTER(8) :: xern1, xern2
   !* FIRST EXECUTABLE STATEMENT  CGEIR
-  IF ( Lda<N ) THEN
+  IF( Lda<N ) THEN
     Ind = -1
     WRITE (xern1,'(I8)') Lda
     WRITE (xern2,'(I8)') N
@@ -132,21 +131,21 @@ SUBROUTINE CGEIR(A,Lda,N,V,Itask,Ind,Work,Iwork)
     RETURN
   END IF
   !
-  IF ( N<=0 ) THEN
+  IF( N<=0 ) THEN
     Ind = -2
     WRITE (xern1,'(I8)') N
     CALL XERMSG('CGEIR','N = '//xern1//' IS LESS THAN 1',-2,1)
     RETURN
   END IF
   !
-  IF ( Itask<1 ) THEN
+  IF( Itask<1 ) THEN
     Ind = -3
     WRITE (xern1,'(I8)') Itask
     CALL XERMSG('CGEIR','ITASK = '//xern1//' IS LESS THAN 1',-3,1)
     RETURN
   END IF
   !
-  IF ( Itask==1 ) THEN
+  IF( Itask==1 ) THEN
     !        MOVE MATRIX A TO WORK
     Work(1:N,1:N) = A(1:N,1:N)
     !
@@ -156,7 +155,7 @@ SUBROUTINE CGEIR(A,Lda,N,V,Itask,Ind,Work,Iwork)
     !
     !        CHECK FOR COMPUTATIONALLY SINGULAR MATRIX
     !
-    IF ( info/=0 ) THEN
+    IF( info/=0 ) THEN
       Ind = -4
       CALL XERMSG('CGEIR','SINGULAR MATRIX A - NO SOLUTION',-4,1)
       RETURN
@@ -172,7 +171,7 @@ SUBROUTINE CGEIR(A,Lda,N,V,Itask,Ind,Work,Iwork)
   !     FORM NORM OF X0
   !
   xnorm = SUM( ABS(REAL(V,SP)) + ABS(AIMAG(V)) )
-  IF ( xnorm==0.0 ) THEN
+  IF( xnorm==0.0 ) THEN
     Ind = 75
     RETURN
   END IF
@@ -195,7 +194,7 @@ SUBROUTINE CGEIR(A,Lda,N,V,Itask,Ind,Work,Iwork)
   !     AND CHECK FOR IND GREATER THAN ZERO
   !
   Ind = INT( -LOG10(MAX(R1MACH(4),dnorm/xnorm)) )
-  IF ( Ind<=0 ) THEN
+  IF( Ind<=0 ) THEN
     Ind = -10
     CALL XERMSG('CGEIR','SOLUTION MAY HAVE NO SIGNIFICANCE',-10,0)
   END IF

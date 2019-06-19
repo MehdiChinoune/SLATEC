@@ -1,7 +1,6 @@
 !** TRISP
 SUBROUTINE TRISP(N,A,B,C,D,U,Z)
-  !>
-  !  Subsidiary to SEPELI
+  !> Subsidiary to SEPELI
   !***
   ! **Library:**   SLATEC
   !***

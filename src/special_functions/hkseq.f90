@@ -1,7 +1,6 @@
 !** HKSEQ
 SUBROUTINE HKSEQ(X,M,H,Ierr)
-  !>
-  !  Subsidiary to BSKIN
+  !> Subsidiary to BSKIN
   !***
   ! **Library:**   SLATEC
   !***
@@ -73,7 +72,7 @@ SUBROUTINE HKSEQ(X,M,H,Ierr)
   !-----------------------------------------------------------------------
   xdmy = X
   xinc = 0.0E0
-  IF ( X<xmin ) THEN
+  IF( X<xmin ) THEN
     nx = INT(X)
     xinc = xmin - nx
     xdmy = X + xinc
@@ -86,31 +85,31 @@ SUBROUTINE HKSEQ(X,M,H,Ierr)
   !     INITIALIZE COEFFICIENT ARRAY
   !-----------------------------------------------------------------------
   s = t*b(3)
-  IF ( ABS(s)>=tst ) THEN
+  IF( ABS(s)>=tst ) THEN
     tk = 2.0E0
     DO k = 4, 22
       t = t*((tk+fn+1.0E0)/(tk+1.0E0))*((tk+fn)/(tk+2.0E0))*rxsq
       trm(k) = t*b(k)
-      IF ( ABS(trm(k))<tst ) GOTO 100
+      IF( ABS(trm(k))<tst ) GOTO 100
       s = s + trm(k)
       tk = tk + 2.0E0
     END DO
     GOTO 200
   END IF
   100  H(M) = s + 0.5E0
-  IF ( M/=1 ) THEN
+  IF( M/=1 ) THEN
     !-----------------------------------------------------------------------
-    !     GENERATE LOWER DERIVATIVES, I.LT.M-1
+    !     GENERATE LOWER DERIVATIVES, I<M-1
     !-----------------------------------------------------------------------
     DO i = 2, M
       fnp = fn
       fn = fn - 1.0E0
       s = fnp*hrx*b(3)
-      IF ( ABS(s)>=tst ) THEN
+      IF( ABS(s)>=tst ) THEN
         fk = fnp + 3.0E0
         DO k = 4, 22
           trm(k) = trm(k)*fnp/fk
-          IF ( ABS(trm(k))<tst ) GOTO 120
+          IF( ABS(trm(k))<tst ) GOTO 120
           s = s + trm(k)
           fk = fk + 2.0E0
         END DO
@@ -120,7 +119,7 @@ SUBROUTINE HKSEQ(X,M,H,Ierr)
       H(mx) = s + 0.5E0
     END DO
   END IF
-  IF ( xinc==0.0E0 ) RETURN
+  IF( xinc==0.0E0 ) RETURN
   !-----------------------------------------------------------------------
   !     RECUR BACKWARD FROM XDMY TO X
   !-----------------------------------------------------------------------
@@ -138,7 +137,7 @@ SUBROUTINE HKSEQ(X,M,H,Ierr)
   trmr(mx) = X/xdmy
   u(mx) = trmr(mx)
   H(1) = H(1)*trmr(mx) + s
-  IF ( M==1 ) RETURN
+  IF( M==1 ) RETURN
   DO j = 2, M
     s = 0.0E0
     DO i = 1, nx

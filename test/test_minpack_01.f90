@@ -5,8 +5,7 @@ MODULE TEST35_MOD
 CONTAINS
   !** SNSQQK
   SUBROUTINE SNSQQK(Lun,Kprint,Ipass)
-    !>
-    !  Quick check for SNSQE and SNSQ.
+    !> Quick check for SNSQE and SNSQ.
     !***
     ! **Library:**   SLATEC
     !***
@@ -33,13 +32,13 @@ CONTAINS
     USE slatec, ONLY : ENORM, R1MACH, SNSQE
     USE common_mod, ONLY : PASS
     !     .. Scalar Arguments ..
-    INTEGER Ipass, Kprint, Lun
+    INTEGER :: Ipass, Kprint, Lun
     !     .. Local Scalars ..
-    REAL(SP) fnorm, fnorms, tol
-    INTEGER icnt, info, infos, iopt, lwa, n, nprint
+    REAL(SP) :: fnorm, fnorms, tol
+    INTEGER :: icnt, info, infos, iopt, lwa, n, nprint
     !     .. Local Arrays ..
-    REAL(SP) fvec(2), wa(19), x(2)
-    INTEGER itest(3)
+    REAL(SP) :: fvec(2), wa(19), x(2)
+    INTEGER :: itest(3)
     !     .. Intrinsic Functions ..
     INTRINSIC SQRT
     !* FIRST EXECUTABLE STATEMENT  SNSQQK
@@ -49,7 +48,7 @@ CONTAINS
     lwa = 19
     nprint = -1
     tol = SQRT(R1MACH(4))
-    IF ( Kprint>=2 ) WRITE (Lun,99001)
+    IF( Kprint>=2 ) WRITE (Lun,99001)
     99001 FORMAT ('1'/'  SNSQE QUICK CHECK'/)
     !
     !     Option 1, the user provides the Jacobian.
@@ -61,12 +60,12 @@ CONTAINS
     icnt = 1
     fnorm = ENORM(n,fvec)
     itest(icnt) = 0
-    IF ( (info==infos).AND.(fnorm-fnorms<=tol) ) itest(icnt) = 1
+    IF( (info==infos) .AND. (fnorm-fnorms<=tol) ) itest(icnt) = 1
     !
-    IF ( Kprint/=0 ) THEN
-      IF ( (Kprint>=2.AND.itest(icnt)/=1).OR.Kprint>=3 ) WRITE (Lun,99004)&
+    IF( Kprint/=0 ) THEN
+      IF( (Kprint>=2 .AND. itest(icnt)/=1) .OR. Kprint>=3 ) WRITE (Lun,99004)&
         infos, fnorms, info, fnorm
-      IF ( (Kprint>=2).OR.(Kprint==1.AND.itest(icnt)/=1) )&
+      IF( (Kprint>=2) .OR. (Kprint==1 .AND. itest(icnt)/=1) )&
         CALL PASS(Lun,icnt,itest(icnt))
     END IF
     !
@@ -79,12 +78,12 @@ CONTAINS
     icnt = 2
     fnorm = ENORM(n,fvec)
     itest(icnt) = 0
-    IF ( (info==infos).AND.(fnorm-fnorms<=tol) ) itest(icnt) = 1
+    IF( (info==infos) .AND. (fnorm-fnorms<=tol) ) itest(icnt) = 1
     !
-    IF ( Kprint/=0 ) THEN
-      IF ( Kprint>=3.OR.(Kprint>=2.AND.itest(icnt)/=1) ) WRITE (Lun,99004)&
+    IF( Kprint/=0 ) THEN
+      IF( Kprint>=3 .OR. (Kprint>=2 .AND. itest(icnt)/=1) ) WRITE (Lun,99004)&
         infos, fnorms, info, fnorm
-      IF ( Kprint>=2.OR.(Kprint==1.AND.itest(icnt)/=1) )&
+      IF( Kprint>=2 .OR. (Kprint==1 .AND. itest(icnt)/=1) )&
         CALL PASS(Lun,icnt,itest(icnt))
     END IF
     !
@@ -97,17 +96,17 @@ CONTAINS
     CALL SNSQE(SQFCN2,SQJAC2,iopt,n,x,fvec,tol,nprint,info,wa,lwa)
     icnt = 3
     itest(icnt) = 0
-    IF ( info==0 ) itest(icnt) = 1
-    IF ( Kprint>=2.OR.(Kprint==1.AND.itest(icnt)/=1) )&
+    IF( info==0 ) itest(icnt) = 1
+    IF( Kprint>=2 .OR. (Kprint==1 .AND. itest(icnt)/=1) )&
       CALL PASS(Lun,icnt,itest(icnt))
     !
     !     Set IPASS.
     !
     Ipass = itest(1)*itest(2)*itest(3)
-    IF ( Kprint>=1.AND.Ipass/=1 ) WRITE (Lun,99002)
+    IF( Kprint>=1 .AND. Ipass/=1 ) WRITE (Lun,99002)
     99002 FORMAT (/' **********WARNING -- SNSQE/SNSQ FAILED SOME TESTS****',&
       '******')
-    IF ( Kprint>=2.AND.Ipass==1 ) WRITE (Lun,99003)
+    IF( Kprint>=2 .AND. Ipass==1 ) WRITE (Lun,99003)
     99003 FORMAT (/' ----------SNSQE/SNSQ PASSED ALL TESTS----------')
     RETURN
     99004 FORMAT (' EXPECTED VALUE OF INFO AND RESIDUAL NORM',I5,&
@@ -115,8 +114,7 @@ CONTAINS
   END SUBROUTINE SNSQQK
   !** SOSFNC
   REAL(SP) FUNCTION SOSFNC(X,K)
-    !>
-    !  Function evaluator for SOS quick check.
+    !> Function evaluator for SOS quick check.
     !***
     ! **Library:**   SLATEC
     !***
@@ -140,9 +138,9 @@ CONTAINS
     INTEGER :: K
     REAL(SP) :: X(:)
     !* FIRST EXECUTABLE STATEMENT  SOSFNC
-    IF ( K==1 ) THEN
+    IF( K==1 ) THEN
       SOSFNC = 1.E0 - X(1)
-    ELSEIF ( K==2 ) THEN
+    ELSEIF( K==2 ) THEN
       SOSFNC = 1.E1*(X(2)-X(1)**2)
     ELSE
       SOSFNC = 0.
@@ -150,8 +148,7 @@ CONTAINS
   END FUNCTION SOSFNC
   !** SOSNQX
   SUBROUTINE SOSNQX(Lun,Kprint,Ipass)
-    !>
-    !  Quick check for SOS.
+    !> Quick check for SOS.
     !***
     ! **Library:**   SLATEC
     !***
@@ -176,13 +173,13 @@ CONTAINS
     USE slatec, ONLY : R1MACH, SOS
     USE common_mod, ONLY : PASS
     !     .. Scalar Arguments ..
-    INTEGER Ipass, Kprint, Lun
+    INTEGER :: Ipass, Kprint, Lun
     !     .. Local Scalars ..
-    REAL(SP) aer, fnorm, fnorms, rer, tolf
-    INTEGER icnt, iflag, iflags, liw, lwa, n
+    REAL(SP) :: aer, fnorm, fnorms, rer, tolf
+    INTEGER :: icnt, iflag, iflags, liw, lwa, n
     !     .. Local Arrays ..
-    REAL(SP) fvec(2), wa(17), x(2)
-    INTEGER itest(2), iw(6)
+    REAL(SP) :: fvec(2), wa(17), x(2)
+    INTEGER :: itest(2), iw(6)
     !     .. Intrinsic Functions ..
     INTRINSIC SQRT
     !* FIRST EXECUTABLE STATEMENT  SOSNQX
@@ -194,7 +191,7 @@ CONTAINS
     tolf = SQRT(R1MACH(4))
     rer = SQRT(R1MACH(4))
     aer = 0.0E0
-    IF ( Kprint>=2 ) WRITE (Lun,99001)
+    IF( Kprint>=2 ) WRITE (Lun,99001)
     99001 FORMAT ('1'/'  SOS QUICK CHECK'/)
     !
     !     Test the code with proper input values.
@@ -208,14 +205,14 @@ CONTAINS
     fvec(2) = SOSFNC(x,2)
     fnorm = NORM2(fvec(1:n))
     itest(icnt) = 0
-    IF ( iflag<=iflags.AND.fnorm-fnorms<=rer ) itest(icnt) = 1
+    IF( iflag<=iflags .AND. fnorm-fnorms<=rer ) itest(icnt) = 1
     !
-    IF ( Kprint/=0 ) THEN
-      IF ( Kprint>=3.OR.(Kprint>=2.AND.itest(icnt)/=1) ) WRITE (Lun,99002)&
+    IF( Kprint/=0 ) THEN
+      IF( Kprint>=3 .OR. (Kprint>=2 .AND. itest(icnt)/=1) ) WRITE (Lun,99002)&
         iflags, fnorms, iflag, fnorm
       99002 FORMAT (' EXPECTED VALUE OF IFLAG AND RESIDUAL NORM',I5,&
         E20.5/' RETURNED VALUE OF IFLAG AND RESIDUAL NORM',I5,E20.5/)
-      IF ( Kprint>=2.OR.(Kprint==1.AND.itest(icnt)/=1) )&
+      IF( Kprint>=2 .OR. (Kprint==1 .AND. itest(icnt)/=1) )&
         CALL PASS(Lun,icnt,itest(icnt))
     END IF
     !
@@ -228,23 +225,22 @@ CONTAINS
     CALL SOS(SOSFNC,n,x,rer,aer,tolf,iflag,wa,lwa,iw,liw)
     icnt = 2
     itest(icnt) = 0
-    IF ( iflag==9 ) itest(icnt) = 1
-    IF ( Kprint>=2.OR.(Kprint==1.AND.itest(icnt)/=1) )&
+    IF( iflag==9 ) itest(icnt) = 1
+    IF( Kprint>=2 .OR. (Kprint==1 .AND. itest(icnt)/=1) )&
       CALL PASS(Lun,icnt,itest(icnt))
     !
     !     Set IPASS.
     !
     Ipass = itest(1)*itest(2)
-    IF ( Kprint>=1.AND.Ipass/=1 ) WRITE (Lun,99003)
+    IF( Kprint>=1 .AND. Ipass/=1 ) WRITE (Lun,99003)
     99003 FORMAT (/' **********WARNING -- SOS FAILED SOME TESTS**********')
-    IF ( Kprint>=2.AND.Ipass==1 ) WRITE (Lun,99004)
+    IF( Kprint>=2 .AND. Ipass==1 ) WRITE (Lun,99004)
     99004 FORMAT (/' ----------SOS PASSED ALL TESTS----------')
     RETURN
   END SUBROUTINE SOSNQX
   !** SQFCN2
   SUBROUTINE SQFCN2(N,X,Fvec,Iflag)
-    !>
-    !  Evaluate function used in SNSQE.
+    !> Evaluate function used in SNSQE.
     !***
     ! **Library:**   SLATEC
     !***
@@ -269,7 +265,7 @@ CONTAINS
     !   930214  TYPE and declarations sections added.  (WRB)
 
     !     .. Scalar Arguments ..
-    INTEGER Iflag, N
+    INTEGER :: Iflag, N
     !     .. Array Arguments ..
     REAL(SP) :: Fvec(N), X(N)
     !* FIRST EXECUTABLE STATEMENT  SQFCN2
@@ -278,8 +274,7 @@ CONTAINS
   END SUBROUTINE SQFCN2
   !** SQJAC2
   SUBROUTINE SQJAC2(N,X,Fvec,Fjac,Ldfjac,Iflag)
-    !>
-    !  Evaluate full Jacobian for SNSQE test.
+    !> Evaluate full Jacobian for SNSQE test.
     !***
     ! **Library:**   SLATEC
     !***
@@ -316,8 +311,7 @@ PROGRAM TEST35
   USE slatec, ONLY : I1MACH, XSETF, XSETUN, XERMAX
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
-  !>
-  !  Driver for testing SLATEC subprograms
+  !> Driver for testing SLATEC subprograms
   !***
   ! **Library:**   SLATEC
   !***
@@ -363,7 +357,7 @@ PROGRAM TEST35
   !   890618  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900524  Cosmetic changes to code.  (WRB)
-  INTEGER ipass, kprint, lin, lun, nfail
+  INTEGER :: ipass, kprint, lin, lun, nfail
   !* FIRST EXECUTABLE STATEMENT  TEST35
   lun = I1MACH(2)
   lin = I1MACH(1)
@@ -374,7 +368,7 @@ PROGRAM TEST35
   CALL GET_ARGUMENT(kprint)
   CALL XERMAX(1000)
   CALL XSETUN(lun)
-  IF ( kprint<=1 ) THEN
+  IF( kprint<=1 ) THEN
     CALL XSETF(0)
   ELSE
     CALL XSETF(1)
@@ -383,16 +377,16 @@ PROGRAM TEST35
   !     Test SNSQE and SNSQ
   !
   CALL SNSQQK(lun,kprint,ipass)
-  IF ( ipass==0 ) nfail = nfail + 1
+  IF( ipass==0 ) nfail = nfail + 1
   !
   !     Test SOS
   !
   CALL SOSNQX(lun,kprint,ipass)
-  IF ( ipass==0 ) nfail = nfail + 1
+  IF( ipass==0 ) nfail = nfail + 1
   !
   !     Write PASS or FAIL message
   !
-  IF ( nfail==0 ) THEN
+  IF( nfail==0 ) THEN
     WRITE (lun,99001)
     99001 FORMAT (/' --------------TEST35 PASSED ALL TESTS----------------')
   ELSE

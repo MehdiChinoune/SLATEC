@@ -1,7 +1,6 @@
 !** DGAMRN
 REAL(DP) FUNCTION DGAMRN(X)
-  !>
-  !  Subsidiary to DBSKIN
+  !> Subsidiary to DBSKIN
   !***
   ! **Library:**   SLATEC
   !***
@@ -13,9 +12,9 @@ REAL(DP) FUNCTION DGAMRN(X)
   !
   !     Abstract   * A Double Precision Routine *
   !         DGAMRN computes the GAMMA function ratio GAMMA(X)/GAMMA(X+0.5)
-  !         for real X.gt.0. If X.ge.XMIN, an asymptotic expansion is
-  !         evaluated. If X.lt.XMIN, an integer is added to X to form a
-  !         new value of X.ge.XMIN and the asymptotic expansion is eval-
+  !         for real X>0. If X>=XMIN, an asymptotic expansion is
+  !         evaluated. If X<XMIN, an integer is added to X to form a
+  !         new value of X>=XMIN and the asymptotic expansion is eval-
   !         uated for this new value of X. Successive application of the
   !         recurrence relation
   !
@@ -29,7 +28,7 @@ REAL(DP) FUNCTION DGAMRN(X)
   !         constants are given to only 18 digits.
   !
   !         Input      X is Double Precision
-  !           X      - Argument, X.gt.0.0D0
+  !           X      - Argument, X>0.0D0
   !
   !         Output      DGAMRN is DOUBLE PRECISION
   !           DGAMRN  - Ratio  GAMMA(X)/GAMMA(X+0.5)
@@ -53,7 +52,7 @@ REAL(DP) FUNCTION DGAMRN(X)
   !   910722  Updated AUTHOR section.  (ALS)
   !   920520  Added REFERENCES section.  (WRB)
   USE service, ONLY : D1MACH, I1MACH
-  INTEGER i, i1m11, k, mx, nx
+  INTEGER :: i, i1m11, k, mx, nx
   REAL(DP) :: fln, rln, s, tol, trm, X, xdmy, xinc, xm, xmin, xp, xsq
   !
   REAL(DP), PARAMETER :: gr(12) = [ 1.00000000000000000D+00, -1.56250000000000000D-02, &
@@ -75,23 +74,23 @@ REAL(DP) FUNCTION DGAMRN(X)
   xmin = mx
   xdmy = X - 0.25D0
   xinc = 0.0D0
-  IF ( X<xmin ) THEN
+  IF( X<xmin ) THEN
     xinc = xmin - nx
     xdmy = xdmy + xinc
   END IF
   s = 1.0D0
-  IF ( xdmy*tol<=1.0D0 ) THEN
+  IF( xdmy*tol<=1.0D0 ) THEN
     xsq = 1.0D0/(xdmy*xdmy)
     xp = xsq
     DO k = 2, 12
       trm = gr(k)*xp
-      IF ( ABS(trm)<tol ) EXIT
+      IF( ABS(trm)<tol ) EXIT
       s = s + trm
       xp = xp*xsq
     END DO
   END IF
   s = s/SQRT(xdmy)
-  IF ( xinc/=0.0D0 ) THEN
+  IF( xinc/=0.0D0 ) THEN
     nx = INT(xinc)
     xp = 0.0D0
     DO i = 1, nx

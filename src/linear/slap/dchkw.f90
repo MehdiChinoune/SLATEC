@@ -1,7 +1,6 @@
 !** DCHKW
 SUBROUTINE DCHKW(Name,Lociw,Leniw,Locw,Lenw,Ierr,Iter,Err)
-  !>
-  !  SLAP WORK/IWORK Array Bounds Checker.
+  !> SLAP WORK/IWORK Array Bounds Checker.
   !            This routine checks the work array lengths and interfaces
   !            to the SLATEC error handler if a problem is found.
   !***
@@ -75,7 +74,7 @@ SUBROUTINE DCHKW(Name,Lociw,Leniw,Locw,Lenw,Ierr,Iter,Err)
   USE service, ONLY : D1MACH, XERMSG
   !     .. Scalar Arguments ..
   REAL(DP) :: Err
-  INTEGER Ierr, Iter, Leniw, Lenw, Lociw, Locw
+  INTEGER :: Ierr, Iter, Leniw, Lenw, Lociw, Locw
   CHARACTER Name*(*)
   !     .. Local Scalars ..
   CHARACTER xern1*8, xern2*8, xernam*8
@@ -86,7 +85,7 @@ SUBROUTINE DCHKW(Name,Lociw,Leniw,Locw,Lenw,Ierr,Iter,Err)
   Ierr = 0
   Iter = 0
   Err = D1MACH(1)
-  IF ( Lociw>Leniw ) THEN
+  IF( Lociw>Leniw ) THEN
     Ierr = 1
     Err = D1MACH(2)
     xernam = Name
@@ -98,7 +97,7 @@ SUBROUTINE DCHKW(Name,Lociw,Leniw,Locw,Lenw,Ierr,Iter,Err)
   END IF
   !
   !         Check the Double Precision workspace situation.
-  IF ( Locw>Lenw ) THEN
+  IF( Locw>Lenw ) THEN
     Ierr = 1
     Err = D1MACH(2)
     xernam = Name

@@ -1,7 +1,6 @@
 !** R9ATN1
 REAL(SP) FUNCTION R9ATN1(X)
-  !>
-  !  Evaluate ATAN(X) from first order relative accuracy so that
+  !> Evaluate ATAN(X) from first order relative accuracy so that
   !            ATAN(X) = X + X**3*R9ATN1(X).
   !***
   ! **Library:**   SLATEC (FNLIB)
@@ -39,7 +38,7 @@ REAL(SP) FUNCTION R9ATN1(X)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
   USE service, ONLY : XERMSG, R1MACH
-  REAL(SP) X, y
+  REAL(SP) :: X, y
   INTEGER, SAVE :: ntatn1
   REAL(SP), PARAMETER :: eps = R1MACH(3), xsml = SQRT(0.1*eps), xbig = 1.571/SQRT(eps), &
     xmax = 1.571/eps
@@ -53,25 +52,25 @@ REAL(SP) FUNCTION R9ATN1(X)
     -.00000000000000002E0 ]
   LOGICAL, SAVE :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  R9ATN1
-  IF ( first ) THEN
+  IF( first ) THEN
     ntatn1 = INITS(atn1cs,21,0.1*eps)
     first = .FALSE.
   END IF
   !
   y = ABS(X)
-  IF ( y>1.0 ) THEN
+  IF( y>1.0 ) THEN
     !
-    IF ( y>xmax ) CALL XERMSG('R9ATN1',&
+    IF( y>xmax ) CALL XERMSG('R9ATN1',&
       'NO PRECISION IN ANSWER BECAUSE X IS TOO BIG',2,2)
-    IF ( y>xbig ) CALL XERMSG('R9ATN1',&
+    IF( y>xbig ) CALL XERMSG('R9ATN1',&
       'ANSWER LT HALF PRECISION BECAUSE X IS TOO BIG',1,1)
     !
     R9ATN1 = (ATAN(X)-X)/X**3
     RETURN
   END IF
   !
-  IF ( y<=xsml ) R9ATN1 = -1.0/3.0
-  IF ( y<=xsml ) RETURN
+  IF( y<=xsml ) R9ATN1 = -1.0/3.0
+  IF( y<=xsml ) RETURN
   !
   R9ATN1 = -0.25 + CSEVL(2.0*y*y-1.,atn1cs,ntatn1)
   RETURN

@@ -1,7 +1,6 @@
 !** DSLVS
 SUBROUTINE DSLVS(Wm,Iwm,X)
-  !>
-  !  Subsidiary to DDEBDF
+  !> Subsidiary to DDEBDF
   !***
   ! **Library:**   SLATEC
   !***
@@ -37,7 +36,7 @@ SUBROUTINE DSLVS(Wm,Iwm,X)
   REAL(DP) :: di, hl0, phl0, r
   !     ------------------------------------------------------------------
   !      THIS ROUTINE MANAGES THE SOLUTION OF THE LINEAR SYSTEM ARISING
-  !      FROM A CHORD ITERATION.  IT IS CALLED BY DSTOD  IF MITER .NE. 0.
+  !      FROM A CHORD ITERATION.  IT IS CALLED BY DSTOD  IF MITER /= 0.
   !      IF MITER IS 1 OR 2, IT CALLS DGESL TO ACCOMPLISH THIS.
   !      IF MITER = 3 IT UPDATES THE COEFFICIENT H*EL0 IN THE DIAGONAL
   !      MATRIX, AND THEN COMPUTES THE SOLUTION.
@@ -72,12 +71,12 @@ SUBROUTINE DSLVS(Wm,Iwm,X)
       phl0 = Wm(2)
       hl0 = h_com*el0_com
       Wm(2) = hl0
-      IF ( hl0/=phl0 ) THEN
+      IF( hl0/=phl0 ) THEN
         r = hl0/phl0
         DO i = 1, n_com
           di = 1.0D0 - r*(1.0D0-1.0D0/Wm(i+2))
           !        .........EXIT
-          IF ( ABS(di)==0.0D0 ) GOTO 100
+          IF( ABS(di)==0.0D0 ) GOTO 100
           Wm(i+2) = 1.0D0/di
         END DO
       END IF

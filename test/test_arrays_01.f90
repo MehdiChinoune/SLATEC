@@ -5,8 +5,7 @@ MODULE TEST54_MOD
 CONTAINS
   !** ISRTQC
   SUBROUTINE ISRTQC(Lun,Kprint,Ipass)
-    !>
-    !  Quick check for SLATEC routines ISORT, IPSORT, IPPERM
+    !> Quick check for SLATEC routines ISORT, IPSORT, IPPERM
     !***
     ! **Library:**   SLATEC
     !***
@@ -28,11 +27,11 @@ CONTAINS
     !   920511  Added error message tests.  (MAM)
     USE slatec, ONLY : IPPERM, IPSORT, ISORT, NUMXER, XSETF, XERCLR
     !
-    INTEGER , PARAMETER :: N = 9, NTEST = 4
+    INTEGER, PARAMETER :: N = 9, NTEST = 4
     !
-    LOGICAL fail
-    INTEGER y(N), yc(N), iy(N)
-    INTEGER Kprint, Lun, Ipass, j, i, kabs, ier, nerr, nn, kkflag
+    LOGICAL :: fail
+    INTEGER :: y(N), yc(N), iy(N)
+    INTEGER :: Kprint, Lun, Ipass, j, i, kabs, ier, nerr, nn, kkflag
     !
     !     ---------
     !     TEST DATA
@@ -56,7 +55,7 @@ CONTAINS
       -1, -2, -3, -4, -5, -6, -7, -8, -9, &
       -1, 1, 29, 36, 54, 55, 80, 98, 99], [N,NTEST] )
     !* FIRST EXECUTABLE STATEMENT  ISRTQC
-    IF ( Kprint>=2 ) THEN
+    IF( Kprint>=2 ) THEN
       WRITE (Lun,99001) '================='
       WRITE (Lun,99002) 'OUTPUT FROM ISRTQC'
       WRITE (Lun,99002) '================='
@@ -85,19 +84,19 @@ CONTAINS
       kabs = ABS(kflag(j))
       fail = .FALSE.
       DO i = 1, N
-        fail = fail .OR. (y(i)/=xs(i,j)) .OR. ((kabs==1).AND.(yc(i)/=x(i,j)))&
-          .OR. ((kabs==2).AND.(yc(i)/=xs(i,j)))
+        fail = fail .OR. (y(i)/=xs(i,j)) .OR. ((kabs==1) .AND. (yc(i)/=x(i,j)))&
+          .OR. ((kabs==2) .AND. (yc(i)/=xs(i,j)))
       END DO
       !
       !        ... PRODUCE REQUIRED OUTPUT
       !
-      IF ( fail ) THEN
+      IF( fail ) THEN
         Ipass = 0
-        IF ( Kprint>0 ) WRITE (Lun,99001) 'ISORT FAILED TEST ', j
+        IF( Kprint>0 ) WRITE (Lun,99001) 'ISORT FAILED TEST ', j
       ELSE
-        IF ( Kprint>=2 ) WRITE (Lun,99001) 'ISORT PASSED TEST ', j
+        IF( Kprint>=2 ) WRITE (Lun,99001) 'ISORT PASSED TEST ', j
       END IF
-      IF ( (fail.AND.(Kprint>=2)).OR.(Kprint>=3) ) THEN
+      IF( (fail .AND. (Kprint>=2)) .OR. (Kprint>=3) ) THEN
         WRITE (Lun,99001) '------------------------'
         WRITE (Lun,99002) 'DETAILS OF ISORT TEST ', j
         WRITE (Lun,99002) '------------------------'
@@ -108,7 +107,7 @@ CONTAINS
         WRITE (Lun,99002) '2ND ARGUMENT (VECTOR CARRIED ALONG)'
         WRITE (Lun,99003) '             INPUT = ', (x(i,j),i=1,N)
         WRITE (Lun,99003) '   COMPUTED OUTPUT = ', (yc(i),i=1,N)
-        IF ( kabs==1 ) THEN
+        IF( kabs==1 ) THEN
           WRITE (Lun,99003) '    CORRECT OUTPUT = ', (x(i,j),i=1,N)
         ELSE
           WRITE (Lun,99003) '    CORRECT OUTPUT = ', (xs(i,j),i=1,N)
@@ -141,26 +140,26 @@ CONTAINS
       kabs = ABS(kflag(j))
       fail = .FALSE. .OR. (ier>0)
       DO i = 1, N
-        fail = fail .OR. (iy(i)/=ix(i,j)) .OR. ((kabs==1).AND.(y(i)/=x(i,j)))&
-          .OR. ((kabs==2).AND.(y(i)/=xs(i,j)))
+        fail = fail .OR. (iy(i)/=ix(i,j)) .OR. ((kabs==1) .AND. (y(i)/=x(i,j)))&
+          .OR. ((kabs==2) .AND. (y(i)/=xs(i,j)))
       END DO
       !
       !        ... PRODUCE REQUIRED OUTPUT
       !
-      IF ( fail ) THEN
+      IF( fail ) THEN
         Ipass = 0
-        IF ( Kprint>0 ) WRITE (Lun,99001) 'IPSORT FAILED TEST ', j
+        IF( Kprint>0 ) WRITE (Lun,99001) 'IPSORT FAILED TEST ', j
       ELSE
-        IF ( Kprint>=2 ) WRITE (Lun,99001) 'IPSORT PASSED TEST ', j
+        IF( Kprint>=2 ) WRITE (Lun,99001) 'IPSORT PASSED TEST ', j
       END IF
-      IF ( (fail.AND.(Kprint>=2)).OR.(Kprint>=3) ) THEN
+      IF( (fail .AND. (Kprint>=2)) .OR. (Kprint>=3) ) THEN
         WRITE (Lun,99001) '-------------------------'
         WRITE (Lun,99002) 'DETAILS OF IPSORT TEST ', j
         WRITE (Lun,99002) '-------------------------'
         WRITE (Lun,99002) '1ST ARGUMENT (VECTOR TO BE SORTED)'
         WRITE (Lun,99003) '             INPUT = ', (x(i,j),i=1,N)
         WRITE (Lun,99003) '   COMPUTED OUTPUT = ', (y(i),i=1,N)
-        IF ( kabs==1 ) THEN
+        IF( kabs==1 ) THEN
           WRITE (Lun,99003) '    CORRECT OUTPUT = ', (x(i,j),i=1,N)
         ELSE
           WRITE (Lun,99003) '    CORRECT OUTPUT = ', (xs(i,j),i=1,N)
@@ -178,7 +177,7 @@ CONTAINS
     !
     !     ... TEST ERROR MESSAGES
     !
-    IF ( Kprint<=2 ) THEN
+    IF( Kprint<=2 ) THEN
       CALL XSETF(0)
     ELSE
       CALL XSETF(-1)
@@ -186,22 +185,22 @@ CONTAINS
     !
     nn = -1
     kkflag = 1
-    IF ( Kprint>=3 ) WRITE (Lun,*)
+    IF( Kprint>=3 ) WRITE (Lun,*)
     CALL XERCLR
     CALL IPSORT(y,nn,iy,kkflag,ier)
-    IF ( NUMXER(nerr)/=ier ) Ipass = 0
+    IF( NUMXER(nerr)/=ier ) Ipass = 0
     !
     nn = 1
     kkflag = 0
-    IF ( Kprint>=3 ) WRITE (Lun,*)
+    IF( Kprint>=3 ) WRITE (Lun,*)
     CALL XERCLR
     CALL IPSORT(y,nn,iy,kkflag,ier)
-    IF ( NUMXER(nerr)/=ier ) Ipass = 0
+    IF( NUMXER(nerr)/=ier ) Ipass = 0
     !
-    IF ( (Kprint>=2).AND.(Ipass==1) ) THEN
+    IF( (Kprint>=2) .AND. (Ipass==1) ) THEN
       WRITE (Lun,*)
       WRITE (Lun,*) ' IPSORT PASSED ERROR MESSAGE TESTS'
-    ELSEIF ( (Kprint>=1).AND.(Ipass==0) ) THEN
+    ELSEIF( (Kprint>=1) .AND. (Ipass==0) ) THEN
       WRITE (Lun,*)
       WRITE (Lun,*) ' IPSORT FAILED ERROR MESSAGE TESTS'
     END IF
@@ -217,7 +216,7 @@ CONTAINS
       kabs = ABS(kflag(j))
       DO i = 1, N
         y(i) = x(i,j)
-        IF ( kabs==1 ) THEN
+        IF( kabs==1 ) THEN
           iy(i) = i
         ELSE
           iy(i) = ix(i,j)
@@ -232,28 +231,28 @@ CONTAINS
       !
       fail = .FALSE. .OR. (ier>0)
       DO i = 1, N
-        fail = fail .OR. ((kabs==1).AND.(iy(i)/=i)) .OR. &
-          ((kabs==2).AND.(iy(i)/=ix(i,j))) .OR. &
-          ((kabs==1).AND.(y(i)/=x(i,j))) .OR. &
-          ((kabs==2).AND.(y(i)/=xs(i,j)))
+        fail = fail .OR. ((kabs==1) .AND. (iy(i)/=i)) .OR. &
+          ((kabs==2) .AND. (iy(i)/=ix(i,j))) .OR. &
+          ((kabs==1) .AND. (y(i)/=x(i,j))) .OR. &
+          ((kabs==2) .AND. (y(i)/=xs(i,j)))
       END DO
       !
       !        ... PRODUCE REQUIRED OUTPUT
       !
-      IF ( fail ) THEN
+      IF( fail ) THEN
         Ipass = 0
-        IF ( Kprint>0 ) WRITE (Lun,99001) 'IPPERM FAILED TEST ', j
+        IF( Kprint>0 ) WRITE (Lun,99001) 'IPPERM FAILED TEST ', j
       ELSE
-        IF ( Kprint>=2 ) WRITE (Lun,99001) 'IPPERM PASSED TEST ', j
+        IF( Kprint>=2 ) WRITE (Lun,99001) 'IPPERM PASSED TEST ', j
       END IF
-      IF ( (fail.AND.(Kprint>=2)).OR.(Kprint>=3) ) THEN
+      IF( (fail .AND. (Kprint>=2)) .OR. (Kprint>=3) ) THEN
         WRITE (Lun,99001) '------------------------'
         WRITE (Lun,99002) 'DETAILS OF IPPERM TEST', j
         WRITE (Lun,99002) '------------------------'
         WRITE (Lun,99002) '1ST ARGUMENT (VECTOR TO BE PERMUTED)'
         WRITE (Lun,99003) '             INPUT =', (x(i,j),i=1,N)
         WRITE (Lun,99003) '   COMPUTED OUTPUT =', (y(i),i=1,N)
-        IF ( kabs==1 ) THEN
+        IF( kabs==1 ) THEN
           WRITE (Lun,99003) '    CORRECT OUTPUT =', (x(i,j),i=1,N)
         ELSE
           WRITE (Lun,99003) '    CORRECT OUTPUT =', (xs(i,j),i=1,N)
@@ -270,29 +269,29 @@ CONTAINS
     !
     !     ... TEST ERROR MESSAGES
     !
-    IF ( Kprint<=2 ) THEN
+    IF( Kprint<=2 ) THEN
       CALL XSETF(0)
     ELSE
       CALL XSETF(-1)
     END IF
     !
     nn = -1
-    IF ( Kprint>=3 ) WRITE (Lun,*)
+    IF( Kprint>=3 ) WRITE (Lun,*)
     CALL XERCLR
     CALL IPPERM(y,nn,iy,ier)
-    IF ( NUMXER(nerr)/=ier ) Ipass = 0
+    IF( NUMXER(nerr)/=ier ) Ipass = 0
     !
     nn = 1
     iy(1) = 5
-    IF ( Kprint>=3 ) WRITE (Lun,*)
+    IF( Kprint>=3 ) WRITE (Lun,*)
     CALL XERCLR
     CALL IPPERM(y,nn,iy,ier)
-    IF ( NUMXER(nerr)/=ier ) Ipass = 0
+    IF( NUMXER(nerr)/=ier ) Ipass = 0
     !
-    IF ( (Kprint>=2).AND.(Ipass==1) ) THEN
+    IF( (Kprint>=2) .AND. (Ipass==1) ) THEN
       WRITE (Lun,*)
       WRITE (Lun,*) ' IPPERM PASSED ERROR MESSAGE TESTS'
-    ELSEIF ( (Kprint>=1).AND.(Ipass==0) ) THEN
+    ELSEIF( (Kprint>=1) .AND. (Ipass==0) ) THEN
       WRITE (Lun,*)
       WRITE (Lun,*) ' IPPERM FAILED ERROR MESSAGE TESTS'
     END IF
@@ -306,8 +305,7 @@ CONTAINS
   END SUBROUTINE ISRTQC
   !** HSRTQC
   SUBROUTINE HSRTQC(Lun,Kprint,Ipass)
-    !>
-    !  Quick check for SLATEC routine HPSORT, HPPERM
+    !> Quick check for SLATEC routine HPSORT, HPPERM
     !***
     ! **Library:**   SLATEC
     !***
@@ -329,12 +327,12 @@ CONTAINS
     !   920511  Added error message tests.  (MAM)
     USE slatec, ONLY : HPPERM, HPSORT, NUMXER, XSETF, XERCLR
     !
-    INTEGER , PARAMETER :: N = 9, NTEST = 4
+    INTEGER, PARAMETER :: N = 9, NTEST = 4
     !
-    LOGICAL fail
+    LOGICAL :: fail
     CHARACTER :: short
     CHARACTER(2) :: y(N), work
-    INTEGER iy(N), Kprint, Lun, Ipass, j, i, kabs, ier, nerr, nn, &
+    INTEGER :: iy(N), Kprint, Lun, Ipass, j, i, kabs, ier, nerr, nn, &
       kkflag, strbeg, strend
     !
     !     ---------
@@ -362,7 +360,7 @@ CONTAINS
       'AA', 'AB', 'AC', 'AD', 'AZ', 'ZA', 'ZX', 'ZY', 'ZZ'], [N,NTEST] )
     !
     !* FIRST EXECUTABLE STATEMENT  HSRTQC
-    IF ( Kprint>=2 ) THEN
+    IF( Kprint>=2 ) THEN
       WRITE (Lun,99001) '================='
       WRITE (Lun,99002) 'OUTPUT FROM HSRTQC'
       WRITE (Lun,99002) '================='
@@ -390,26 +388,26 @@ CONTAINS
       kabs = ABS(kflag(j))
       fail = .FALSE. .OR. (ier>0)
       DO i = 1, N
-        fail = fail .OR. (iy(i)/=ix(i,j)) .OR. ((kabs==1).AND.(y(i)/=x(i,j)))&
-          .OR. ((kabs==2).AND.(y(i)/=xs(i,j)))
+        fail = fail .OR. (iy(i)/=ix(i,j)) .OR. ((kabs==1) .AND. (y(i)/=x(i,j)))&
+          .OR. ((kabs==2) .AND. (y(i)/=xs(i,j)))
       END DO
       !
       !        ... PRODUCE REQUIRED OUTPUT
       !
-      IF ( fail ) THEN
+      IF( fail ) THEN
         Ipass = 0
-        IF ( Kprint>0 ) WRITE (Lun,99001) 'HPSORT FAILED TEST ', j
+        IF( Kprint>0 ) WRITE (Lun,99001) 'HPSORT FAILED TEST ', j
       ELSE
-        IF ( Kprint>=2 ) WRITE (Lun,99001) 'HPSORT PASSED TEST ', j
+        IF( Kprint>=2 ) WRITE (Lun,99001) 'HPSORT PASSED TEST ', j
       END IF
-      IF ( (fail.AND.(Kprint>=2)).OR.(Kprint>=3) ) THEN
+      IF( (fail .AND. (Kprint>=2)) .OR. (Kprint>=3) ) THEN
         WRITE (Lun,99001) '-------------------------'
         WRITE (Lun,99002) 'DETAILS OF HPSORT TEST ', j
         WRITE (Lun,99002) '-------------------------'
         WRITE (Lun,99002) '1ST ARGUMENT (VECTOR TO BE SORTED)'
         WRITE (Lun,99003) '             INPUT = ', (x(i,j),i=1,N)
         WRITE (Lun,99003) '   COMPUTED OUTPUT = ', (y(i),i=1,N)
-        IF ( kabs==1 ) THEN
+        IF( kabs==1 ) THEN
           WRITE (Lun,99003) '    CORRECT OUTPUT = ', (x(i,j),i=1,N)
         ELSE
           WRITE (Lun,99003) '    CORRECT OUTPUT = ', (xs(i,j),i=1,N)
@@ -427,7 +425,7 @@ CONTAINS
     !
     !     ... TEST ERROR MESSAGES
     !
-    IF ( Kprint<=2 ) THEN
+    IF( Kprint<=2 ) THEN
       CALL XSETF(0)
     ELSE
       CALL XSETF(-1)
@@ -437,60 +435,60 @@ CONTAINS
     strbeg = 1
     strend = 2
     kkflag = 1
-    IF ( Kprint>=3 ) WRITE (Lun,*)
+    IF( Kprint>=3 ) WRITE (Lun,*)
     CALL XERCLR
     CALL HPSORT(y,nn,strbeg,strend,iy,kkflag,work,ier)
-    IF ( NUMXER(nerr)/=ier ) Ipass = 0
+    IF( NUMXER(nerr)/=ier ) Ipass = 0
     !
     nn = 1
     strbeg = 1
     strend = 2
     kkflag = 0
-    IF ( Kprint>=3 ) WRITE (Lun,*)
+    IF( Kprint>=3 ) WRITE (Lun,*)
     CALL XERCLR
     CALL HPSORT(y,nn,strbeg,strend,iy,kkflag,work,ier)
-    IF ( NUMXER(nerr)/=ier ) Ipass = 0
+    IF( NUMXER(nerr)/=ier ) Ipass = 0
     !
     nn = 1
     strbeg = 1
     strend = 2
     kkflag = 1
-    IF ( Kprint>=3 ) WRITE (Lun,*)
+    IF( Kprint>=3 ) WRITE (Lun,*)
     CALL XERCLR
     CALL HPSORT(y,nn,strbeg,strend,iy,kkflag,short,ier)
-    IF ( NUMXER(nerr)/=ier ) Ipass = 0
+    IF( NUMXER(nerr)/=ier ) Ipass = 0
     !
     nn = 1
     strbeg = 2
     strend = 1
     kkflag = 1
-    IF ( Kprint>=3 ) WRITE (Lun,*)
+    IF( Kprint>=3 ) WRITE (Lun,*)
     CALL XERCLR
     CALL HPSORT(y,nn,strbeg,strend,iy,kkflag,work,ier)
-    IF ( NUMXER(nerr)/=ier ) Ipass = 0
+    IF( NUMXER(nerr)/=ier ) Ipass = 0
     !
     nn = 1
     strbeg = -1
     strend = 2
     kkflag = 1
-    IF ( Kprint>=3 ) WRITE (Lun,*)
+    IF( Kprint>=3 ) WRITE (Lun,*)
     CALL XERCLR
     CALL HPSORT(y,nn,strbeg,strend,iy,kkflag,work,ier)
-    IF ( NUMXER(nerr)/=ier ) Ipass = 0
+    IF( NUMXER(nerr)/=ier ) Ipass = 0
     !
     nn = 1
     strbeg = 1
     strend = 3
     kkflag = 1
-    IF ( Kprint>=3 ) WRITE (Lun,*)
+    IF( Kprint>=3 ) WRITE (Lun,*)
     CALL XERCLR
     CALL HPSORT(y,nn,strbeg,strend,iy,kkflag,work,ier)
-    IF ( NUMXER(nerr)/=ier ) Ipass = 0
+    IF( NUMXER(nerr)/=ier ) Ipass = 0
     !
-    IF ( (Kprint>=2).AND.(Ipass==1) ) THEN
+    IF( (Kprint>=2) .AND. (Ipass==1) ) THEN
       WRITE (Lun,*)
       WRITE (Lun,*) ' HPSORT PASSED ERROR MESSAGE TESTS'
-    ELSEIF ( (Kprint>=1).AND.(Ipass==0) ) THEN
+    ELSEIF( (Kprint>=1) .AND. (Ipass==0) ) THEN
       WRITE (Lun,*)
       WRITE (Lun,*) ' HPSORT FAILED ERROR MESSAGE TESTS'
     END IF
@@ -506,7 +504,7 @@ CONTAINS
       kabs = ABS(kflag(j))
       DO i = 1, N
         y(i) = x(i,j)
-        IF ( kabs==1 ) THEN
+        IF( kabs==1 ) THEN
           iy(i) = i
         ELSE
           iy(i) = ix(i,j)
@@ -521,28 +519,28 @@ CONTAINS
       !
       fail = .FALSE. .OR. (ier>0)
       DO i = 1, N
-        fail = fail .OR. ((kabs==1).AND.(iy(i)/=i)) .OR.&
-          ((kabs==2).AND.(iy(i)/=ix(i,j))) .OR.&
-          ((kabs==1).AND.(y(i)/=x(i,j))) .OR.&
-          ((kabs==2).AND.(y(i)/=xs(i,j)))
+        fail = fail .OR. ((kabs==1) .AND. (iy(i)/=i))  .OR. &
+          ((kabs==2) .AND. (iy(i)/=ix(i,j)))  .OR. &
+          ((kabs==1) .AND. (y(i)/=x(i,j)))  .OR. &
+          ((kabs==2) .AND. (y(i)/=xs(i,j)))
       END DO
       !
       !        ... PRODUCE REQUIRED OUTPUT
       !
-      IF ( fail ) THEN
+      IF( fail ) THEN
         Ipass = 0
-        IF ( Kprint>0 ) WRITE (Lun,99001) 'HPPERM FAILED TEST ', j
+        IF( Kprint>0 ) WRITE (Lun,99001) 'HPPERM FAILED TEST ', j
       ELSE
-        IF ( Kprint>=2 ) WRITE (Lun,99001) 'HPPERM PASSED TEST ', j
+        IF( Kprint>=2 ) WRITE (Lun,99001) 'HPPERM PASSED TEST ', j
       END IF
-      IF ( (fail.AND.(Kprint>=2)).OR.(Kprint>=3) ) THEN
+      IF( (fail .AND. (Kprint>=2)) .OR. (Kprint>=3) ) THEN
         WRITE (Lun,99001) '------------------------'
         WRITE (Lun,99002) 'DETAILS OF HPPERM TEST', j
         WRITE (Lun,99002) '------------------------'
         WRITE (Lun,99002) '1ST ARGUMENT (VECTOR TO BE PERMUTED)'
         WRITE (Lun,99003) '             INPUT =', (x(i,j),i=1,N)
         WRITE (Lun,99003) '   COMPUTED OUTPUT =', (y(i),i=1,N)
-        IF ( kabs==1 ) THEN
+        IF( kabs==1 ) THEN
           WRITE (Lun,99003) '    CORRECT OUTPUT =', (x(i,j),i=1,N)
         ELSE
           WRITE (Lun,99003) '    CORRECT OUTPUT =', (xs(i,j),i=1,N)
@@ -559,29 +557,29 @@ CONTAINS
     !
     !     ... TEST ERROR MESSAGES
     !
-    IF ( Kprint<=2 ) THEN
+    IF( Kprint<=2 ) THEN
       CALL XSETF(0)
     ELSE
       CALL XSETF(-1)
     END IF
     !
     nn = -1
-    IF ( Kprint>=3 ) WRITE (Lun,*)
+    IF( Kprint>=3 ) WRITE (Lun,*)
     CALL XERCLR
     CALL HPPERM(y,nn,iy,work,ier)
-    IF ( NUMXER(nerr)/=ier ) Ipass = 0
+    IF( NUMXER(nerr)/=ier ) Ipass = 0
     !
     nn = 1
     iy(1) = 5
-    IF ( Kprint>=3 ) WRITE (Lun,*)
+    IF( Kprint>=3 ) WRITE (Lun,*)
     CALL XERCLR
     CALL HPPERM(y,nn,iy,work,ier)
-    IF ( NUMXER(nerr)/=ier ) Ipass = 0
+    IF( NUMXER(nerr)/=ier ) Ipass = 0
     !
-    IF ( (Kprint>=2).AND.(Ipass==1) ) THEN
+    IF( (Kprint>=2) .AND. (Ipass==1) ) THEN
       WRITE (Lun,*)
       WRITE (Lun,*) ' HPPERM PASSED ERROR MESSAGE TESTS'
-    ELSEIF ( (Kprint>=1).AND.(Ipass==0) ) THEN
+    ELSEIF( (Kprint>=1) .AND. (Ipass==0) ) THEN
       WRITE (Lun,*)
       WRITE (Lun,*) ' HPPERM FAILED ERROR MESSAGE TESTS'
     END IF
@@ -595,8 +593,7 @@ CONTAINS
   END SUBROUTINE HSRTQC
   !** SSRTQC
   SUBROUTINE SSRTQC(Lun,Kprint,Ipass)
-    !>
-    !  Quick check for SLATEC routines SSORT, SPSORT, SPPERM
+    !> Quick check for SLATEC routines SSORT, SPSORT, SPPERM
     !***
     ! **Library:**   SLATEC
     !***
@@ -618,11 +615,11 @@ CONTAINS
     !   920511  Added error message tests.  (MAM)
     USE slatec, ONLY : SPPERM, SPSORT, SSORT, NUMXER, XSETF, XERCLR
     !
-    INTEGER , PARAMETER :: N = 9, NTEST = 4
+    INTEGER, PARAMETER :: N = 9, NTEST = 4
     !
-    LOGICAL fail
-    REAL(SP) y(N), yc(N)
-    INTEGER iy(N), Kprint, Lun, Ipass, j, i, kabs, ier, nerr, nn, kkflag
+    LOGICAL :: fail
+    REAL(SP) :: y(N), yc(N)
+    INTEGER :: iy(N), Kprint, Lun, Ipass, j, i, kabs, ier, nerr, nn, kkflag
     !
     !     ---------
     !     TEST DATA
@@ -649,7 +646,7 @@ CONTAINS
       -1., 1., 29., 36., 54., 55., 80., 98., 99. ], [N,NTEST] )
     !
     !* FIRST EXECUTABLE STATEMENT  SSRTQC
-    IF ( Kprint>=2 ) THEN
+    IF( Kprint>=2 ) THEN
       WRITE (Lun,99001) '================='
       WRITE (Lun,99002) 'OUTPUT FROM SSRTQC'
       WRITE (Lun,99002) '================='
@@ -678,19 +675,19 @@ CONTAINS
       kabs = ABS(kflag(j))
       fail = .FALSE.
       DO i = 1, N
-        fail = fail .OR. (y(i)/=xs(i,j)) .OR. ((kabs==1).AND.(yc(i)/=x(i,j)))&
-          .OR. ((kabs==2).AND.(yc(i)/=xs(i,j)))
+        fail = fail .OR. (y(i)/=xs(i,j)) .OR. ((kabs==1) .AND. (yc(i)/=x(i,j)))&
+          .OR. ((kabs==2) .AND. (yc(i)/=xs(i,j)))
       END DO
       !
       !        ... PRODUCE REQUIRED OUTPUT
       !
-      IF ( fail ) THEN
+      IF( fail ) THEN
         Ipass = 0
-        IF ( Kprint>0 ) WRITE (Lun,99001) 'SSORT FAILED TEST ', j
+        IF( Kprint>0 ) WRITE (Lun,99001) 'SSORT FAILED TEST ', j
       ELSE
-        IF ( Kprint>=2 ) WRITE (Lun,99001) 'SSORT PASSED TEST ', j
+        IF( Kprint>=2 ) WRITE (Lun,99001) 'SSORT PASSED TEST ', j
       END IF
-      IF ( (fail.AND.(Kprint>=2)).OR.(Kprint>=3) ) THEN
+      IF( (fail .AND. (Kprint>=2)) .OR. (Kprint>=3) ) THEN
         WRITE (Lun,99001) '------------------------'
         WRITE (Lun,99002) 'DETAILS OF SSORT TEST ', j
         WRITE (Lun,99002) '------------------------'
@@ -701,7 +698,7 @@ CONTAINS
         WRITE (Lun,99002) '2ND ARGUMENT (VECTOR CARRIED ALONG)'
         WRITE (Lun,99003) '             INPUT = ', (x(i,j),i=1,N)
         WRITE (Lun,99003) '   COMPUTED OUTPUT = ', (yc(i),i=1,N)
-        IF ( kabs==1 ) THEN
+        IF( kabs==1 ) THEN
           WRITE (Lun,99003) '    CORRECT OUTPUT = ', (x(i,j),i=1,N)
         ELSE
           WRITE (Lun,99003) '    CORRECT OUTPUT = ', (xs(i,j),i=1,N)
@@ -734,26 +731,26 @@ CONTAINS
       kabs = ABS(kflag(j))
       fail = .FALSE. .OR. (ier>0)
       DO i = 1, N
-        fail = fail .OR. (iy(i)/=ix(i,j)) .OR. ((kabs==1).AND.(y(i)/=x(i,j)))&
-          .OR. ((kabs==2).AND.(y(i)/=xs(i,j)))
+        fail = fail .OR. (iy(i)/=ix(i,j)) .OR. ((kabs==1) .AND. (y(i)/=x(i,j)))&
+          .OR. ((kabs==2) .AND. (y(i)/=xs(i,j)))
       END DO
       !
       !        ... PRODUCE REQUIRED OUTPUT
       !
-      IF ( fail ) THEN
+      IF( fail ) THEN
         Ipass = 0
-        IF ( Kprint>0 ) WRITE (Lun,99001) 'SPSORT FAILED TEST ', j
+        IF( Kprint>0 ) WRITE (Lun,99001) 'SPSORT FAILED TEST ', j
       ELSE
-        IF ( Kprint>=2 ) WRITE (Lun,99001) 'SPSORT PASSED TEST ', j
+        IF( Kprint>=2 ) WRITE (Lun,99001) 'SPSORT PASSED TEST ', j
       END IF
-      IF ( (fail.AND.(Kprint>=2)).OR.(Kprint>=3) ) THEN
+      IF( (fail .AND. (Kprint>=2)) .OR. (Kprint>=3) ) THEN
         WRITE (Lun,99001) '-------------------------'
         WRITE (Lun,99002) 'DETAILS OF SPSORT TEST ', j
         WRITE (Lun,99002) '-------------------------'
         WRITE (Lun,99002) '1ST ARGUMENT (VECTOR TO BE SORTED)'
         WRITE (Lun,99003) '             INPUT = ', (x(i,j),i=1,N)
         WRITE (Lun,99003) '   COMPUTED OUTPUT = ', (y(i),i=1,N)
-        IF ( kabs==1 ) THEN
+        IF( kabs==1 ) THEN
           WRITE (Lun,99003) '    CORRECT OUTPUT = ', (x(i,j),i=1,N)
         ELSE
           WRITE (Lun,99003) '    CORRECT OUTPUT = ', (xs(i,j),i=1,N)
@@ -771,7 +768,7 @@ CONTAINS
     !
     !     ... TEST ERROR MESSAGES
     !
-    IF ( Kprint<=2 ) THEN
+    IF( Kprint<=2 ) THEN
       CALL XSETF(0)
     ELSE
       CALL XSETF(-1)
@@ -779,22 +776,22 @@ CONTAINS
     !
     nn = -1
     kkflag = 1
-    IF ( Kprint>=3 ) WRITE (Lun,*)
+    IF( Kprint>=3 ) WRITE (Lun,*)
     CALL XERCLR
     CALL SPSORT(y,nn,iy,kkflag,ier)
-    IF ( NUMXER(nerr)/=ier ) Ipass = 0
+    IF( NUMXER(nerr)/=ier ) Ipass = 0
     !
     nn = 1
     kkflag = 0
-    IF ( Kprint>=3 ) WRITE (Lun,*)
+    IF( Kprint>=3 ) WRITE (Lun,*)
     CALL XERCLR
     CALL SPSORT(y,nn,iy,kkflag,ier)
-    IF ( NUMXER(nerr)/=ier ) Ipass = 0
+    IF( NUMXER(nerr)/=ier ) Ipass = 0
     !
-    IF ( (Kprint>=2).AND.(Ipass==1) ) THEN
+    IF( (Kprint>=2) .AND. (Ipass==1) ) THEN
       WRITE (Lun,*)
       WRITE (Lun,*) ' SPSORT PASSED ERROR MESSAGE TESTS'
-    ELSEIF ( (Kprint>=1).AND.(Ipass==0) ) THEN
+    ELSEIF( (Kprint>=1) .AND. (Ipass==0) ) THEN
       WRITE (Lun,*)
       WRITE (Lun,*) ' SPSORT FAILED ERROR MESSAGE TESTS'
     END IF
@@ -810,7 +807,7 @@ CONTAINS
       kabs = ABS(kflag(j))
       DO i = 1, N
         y(i) = x(i,j)
-        IF ( kabs==1 ) THEN
+        IF( kabs==1 ) THEN
           iy(i) = i
         ELSE
           iy(i) = ix(i,j)
@@ -825,28 +822,28 @@ CONTAINS
       !
       fail = .FALSE. .OR. (ier>0)
       DO i = 1, N
-        fail = fail .OR. ((kabs==1).AND.(iy(i)/=i)) .OR. &
-          ((kabs==2).AND.(iy(i)/=ix(i,j))) .OR. &
-          ((kabs==1).AND.(y(i)/=x(i,j))) .OR. &
-          ((kabs==2).AND.(y(i)/=xs(i,j)))
+        fail = fail .OR. ((kabs==1) .AND. (iy(i)/=i)) .OR. &
+          ((kabs==2) .AND. (iy(i)/=ix(i,j))) .OR. &
+          ((kabs==1) .AND. (y(i)/=x(i,j))) .OR. &
+          ((kabs==2) .AND. (y(i)/=xs(i,j)))
       END DO
       !
       !        ... PRODUCE REQUIRED OUTPUT
       !
-      IF ( fail ) THEN
+      IF( fail ) THEN
         Ipass = 0
-        IF ( Kprint>0 ) WRITE (Lun,99001) 'SPPERM FAILED TEST ', j
+        IF( Kprint>0 ) WRITE (Lun,99001) 'SPPERM FAILED TEST ', j
       ELSE
-        IF ( Kprint>=2 ) WRITE (Lun,99001) 'SPPERM PASSED TEST ', j
+        IF( Kprint>=2 ) WRITE (Lun,99001) 'SPPERM PASSED TEST ', j
       END IF
-      IF ( (fail.AND.(Kprint>=2)).OR.(Kprint>=3) ) THEN
+      IF( (fail .AND. (Kprint>=2)) .OR. (Kprint>=3) ) THEN
         WRITE (Lun,99001) '------------------------'
         WRITE (Lun,99002) 'DETAILS OF SPPERM TEST', j
         WRITE (Lun,99002) '------------------------'
         WRITE (Lun,99002) '1ST ARGUMENT (VECTOR TO BE PERMUTED)'
         WRITE (Lun,99003) '             INPUT =', (x(i,j),i=1,N)
         WRITE (Lun,99003) '   COMPUTED OUTPUT =', (y(i),i=1,N)
-        IF ( kabs==1 ) THEN
+        IF( kabs==1 ) THEN
           WRITE (Lun,99003) '    CORRECT OUTPUT =', (x(i,j),i=1,N)
         ELSE
           WRITE (Lun,99003) '    CORRECT OUTPUT =', (xs(i,j),i=1,N)
@@ -863,29 +860,29 @@ CONTAINS
     !
     !     ... TEST ERROR MESSAGES
     !
-    IF ( Kprint<=2 ) THEN
+    IF( Kprint<=2 ) THEN
       CALL XSETF(0)
     ELSE
       CALL XSETF(-1)
     END IF
     !
     nn = -1
-    IF ( Kprint>=3 ) WRITE (Lun,*)
+    IF( Kprint>=3 ) WRITE (Lun,*)
     CALL XERCLR
     CALL SPPERM(y,nn,iy,ier)
-    IF ( NUMXER(nerr)/=ier ) Ipass = 0
+    IF( NUMXER(nerr)/=ier ) Ipass = 0
     !
     nn = 1
     iy(1) = 5
-    IF ( Kprint>=3 ) WRITE (Lun,*)
+    IF( Kprint>=3 ) WRITE (Lun,*)
     CALL XERCLR
     CALL SPPERM(y,nn,iy,ier)
-    IF ( NUMXER(nerr)/=ier ) Ipass = 0
+    IF( NUMXER(nerr)/=ier ) Ipass = 0
     !
-    IF ( (Kprint>=2).AND.(Ipass==1) ) THEN
+    IF( (Kprint>=2) .AND. (Ipass==1) ) THEN
       WRITE (Lun,*)
       WRITE (Lun,*) ' SPPERM PASSED ERROR MESSAGE TESTS'
-    ELSEIF ( (Kprint>=1).AND.(Ipass==0) ) THEN
+    ELSEIF( (Kprint>=1) .AND. (Ipass==0) ) THEN
       WRITE (Lun,*)
       WRITE (Lun,*) ' SPPERM FAILED ERROR MESSAGE TESTS'
     END IF
@@ -899,8 +896,7 @@ CONTAINS
   END SUBROUTINE SSRTQC
   !** DSRTQC
   SUBROUTINE DSRTQC(Lun,Kprint,Ipass)
-    !>
-    !  Quick check for SLATEC routines DSORT, DPSORT, DPPERM
+    !> Quick check for SLATEC routines DSORT, DPSORT, DPPERM
     !***
     ! **Library:**   SLATEC
     !***
@@ -922,11 +918,11 @@ CONTAINS
     !   920511  Added error message tests.  (MAM)
     USE slatec, ONLY : DPPERM, DPSORT, DSORT, NUMXER, XSETF, XERCLR
     !
-    INTEGER , PARAMETER :: N = 9, NTEST = 4
+    INTEGER, PARAMETER :: N = 9, NTEST = 4
     !
-    LOGICAL fail
+    LOGICAL :: fail
     REAL(DP) :: y(N), yc(N)
-    INTEGER iy(N), Kprint, Lun, Ipass, j, i, kabs, ier, nerr, nn, kkflag
+    INTEGER :: iy(N), Kprint, Lun, Ipass, j, i, kabs, ier, nerr, nn, kkflag
     !
     !     ---------
     !     TEST DATA
@@ -953,7 +949,7 @@ CONTAINS
      -1D0, 1D0, 29D0, 36D0, 54D0, 55D0, 80D0, 98D0, 99D0 ], [N,NTEST] )
     !
     !* FIRST EXECUTABLE STATEMENT  DSRTQC
-    IF ( Kprint>=2 ) THEN
+    IF( Kprint>=2 ) THEN
       WRITE (Lun,99001) '================='
       WRITE (Lun,99002) 'OUTPUT FROM DSRTQC'
       WRITE (Lun,99002) '================='
@@ -982,19 +978,19 @@ CONTAINS
       kabs = ABS(kflag(j))
       fail = .FALSE.
       DO i = 1, N
-        fail = fail .OR. (y(i)/=xs(i,j)) .OR. ((kabs==1).AND.(yc(i)/=x(i,j)))&
-          .OR. ((kabs==2).AND.(yc(i)/=xs(i,j)))
+        fail = fail .OR. (y(i)/=xs(i,j)) .OR. ((kabs==1) .AND. (yc(i)/=x(i,j)))&
+          .OR. ((kabs==2) .AND. (yc(i)/=xs(i,j)))
       END DO
       !
       !        ... PRODUCE REQUIRED OUTPUT
       !
-      IF ( fail ) THEN
+      IF( fail ) THEN
         Ipass = 0
-        IF ( Kprint>0 ) WRITE (Lun,99001) 'DSORT FAILED TEST ', j
+        IF( Kprint>0 ) WRITE (Lun,99001) 'DSORT FAILED TEST ', j
       ELSE
-        IF ( Kprint>=2 ) WRITE (Lun,99001) 'DSORT PASSED TEST ', j
+        IF( Kprint>=2 ) WRITE (Lun,99001) 'DSORT PASSED TEST ', j
       END IF
-      IF ( (fail.AND.(Kprint>=2)).OR.(Kprint>=3) ) THEN
+      IF( (fail .AND. (Kprint>=2)) .OR. (Kprint>=3) ) THEN
         WRITE (Lun,99001) '------------------------'
         WRITE (Lun,99002) 'DETAILS OF DSORT TEST ', j
         WRITE (Lun,99002) '------------------------'
@@ -1005,7 +1001,7 @@ CONTAINS
         WRITE (Lun,99002) '2ND ARGUMENT (VECTOR CARRIED ALONG)'
         WRITE (Lun,99003) '             INPUT = ', (x(i,j),i=1,N)
         WRITE (Lun,99003) '   COMPUTED OUTPUT = ', (yc(i),i=1,N)
-        IF ( kabs==1 ) THEN
+        IF( kabs==1 ) THEN
           WRITE (Lun,99003) '    CORRECT OUTPUT = ', (x(i,j),i=1,N)
         ELSE
           WRITE (Lun,99003) '    CORRECT OUTPUT = ', (xs(i,j),i=1,N)
@@ -1038,26 +1034,26 @@ CONTAINS
       kabs = ABS(kflag(j))
       fail = .FALSE. .OR. (ier>0)
       DO i = 1, N
-        fail = fail .OR. (iy(i)/=ix(i,j)) .OR. ((kabs==1).AND.(y(i)/=x(i,j)))&
-          .OR. ((kabs==2).AND.(y(i)/=xs(i,j)))
+        fail = fail .OR. (iy(i)/=ix(i,j)) .OR. ((kabs==1) .AND. (y(i)/=x(i,j)))&
+          .OR. ((kabs==2) .AND. (y(i)/=xs(i,j)))
       END DO
       !
       !        ... PRODUCE REQUIRED OUTPUT
       !
-      IF ( fail ) THEN
+      IF( fail ) THEN
         Ipass = 0
-        IF ( Kprint>0 ) WRITE (Lun,99001) 'DPSORT FAILED TEST ', j
+        IF( Kprint>0 ) WRITE (Lun,99001) 'DPSORT FAILED TEST ', j
       ELSE
-        IF ( Kprint>=2 ) WRITE (Lun,99001) 'DPSORT PASSED TEST ', j
+        IF( Kprint>=2 ) WRITE (Lun,99001) 'DPSORT PASSED TEST ', j
       END IF
-      IF ( (fail.AND.(Kprint>=2)).OR.(Kprint>=3) ) THEN
+      IF( (fail .AND. (Kprint>=2)) .OR. (Kprint>=3) ) THEN
         WRITE (Lun,99001) '-------------------------'
         WRITE (Lun,99002) 'DETAILS OF DPSORT TEST ', j
         WRITE (Lun,99002) '-------------------------'
         WRITE (Lun,99002) '1ST ARGUMENT (VECTOR TO BE SORTED)'
         WRITE (Lun,99003) '             INPUT = ', (x(i,j),i=1,N)
         WRITE (Lun,99003) '   COMPUTED OUTPUT = ', (y(i),i=1,N)
-        IF ( kabs==1 ) THEN
+        IF( kabs==1 ) THEN
           WRITE (Lun,99003) '    CORRECT OUTPUT = ', (x(i,j),i=1,N)
         ELSE
           WRITE (Lun,99003) '    CORRECT OUTPUT = ', (xs(i,j),i=1,N)
@@ -1075,7 +1071,7 @@ CONTAINS
     !
     !     ... TEST ERROR MESSAGES
     !
-    IF ( Kprint<=2 ) THEN
+    IF( Kprint<=2 ) THEN
       CALL XSETF(0)
     ELSE
       CALL XSETF(-1)
@@ -1083,22 +1079,22 @@ CONTAINS
     !
     nn = -1
     kkflag = 1
-    IF ( Kprint>=3 ) WRITE (Lun,*)
+    IF( Kprint>=3 ) WRITE (Lun,*)
     CALL XERCLR
     CALL DPSORT(y,nn,iy,kkflag,ier)
-    IF ( NUMXER(nerr)/=ier ) Ipass = 0
+    IF( NUMXER(nerr)/=ier ) Ipass = 0
     !
     nn = 1
     kkflag = 0
-    IF ( Kprint>=3 ) WRITE (Lun,*)
+    IF( Kprint>=3 ) WRITE (Lun,*)
     CALL XERCLR
     CALL DPSORT(y,nn,iy,kkflag,ier)
-    IF ( NUMXER(nerr)/=ier ) Ipass = 0
+    IF( NUMXER(nerr)/=ier ) Ipass = 0
     !
-    IF ( (Kprint>=2).AND.(Ipass==1) ) THEN
+    IF( (Kprint>=2) .AND. (Ipass==1) ) THEN
       WRITE (Lun,*)
       WRITE (Lun,*) ' DPSORT PASSED ERROR MESSAGE TESTS'
-    ELSEIF ( (Kprint>=1).AND.(Ipass==0) ) THEN
+    ELSEIF( (Kprint>=1) .AND. (Ipass==0) ) THEN
       WRITE (Lun,*)
       WRITE (Lun,*) ' DPSORT FAILED ERROR MESSAGE TESTS'
     END IF
@@ -1114,7 +1110,7 @@ CONTAINS
       kabs = ABS(kflag(j))
       DO i = 1, N
         y(i) = x(i,j)
-        IF ( kabs==1 ) THEN
+        IF( kabs==1 ) THEN
           iy(i) = i
         ELSE
           iy(i) = ix(i,j)
@@ -1129,28 +1125,28 @@ CONTAINS
       !
       fail = .FALSE. .OR. (ier>0)
       DO i = 1, N
-        fail = fail .OR. ((kabs==1).AND.(iy(i)/=i)) .OR. &
-          ((kabs==2).AND.(iy(i)/=ix(i,j))) .OR. &
-          ((kabs==1).AND.(y(i)/=x(i,j))) .OR. &
-          ((kabs==2).AND.(y(i)/=xs(i,j)))
+        fail = fail .OR. ((kabs==1) .AND. (iy(i)/=i)) .OR. &
+          ((kabs==2) .AND. (iy(i)/=ix(i,j))) .OR. &
+          ((kabs==1) .AND. (y(i)/=x(i,j))) .OR. &
+          ((kabs==2) .AND. (y(i)/=xs(i,j)))
       END DO
       !
       !        ... PRODUCE REQUIRED OUTPUT
       !
-      IF ( fail ) THEN
+      IF( fail ) THEN
         Ipass = 0
-        IF ( Kprint>0 ) WRITE (Lun,99001) 'DPPERM FAILED TEST ', j
+        IF( Kprint>0 ) WRITE (Lun,99001) 'DPPERM FAILED TEST ', j
       ELSE
-        IF ( Kprint>=2 ) WRITE (Lun,99001) 'DPPERM PASSED TEST ', j
+        IF( Kprint>=2 ) WRITE (Lun,99001) 'DPPERM PASSED TEST ', j
       END IF
-      IF ( (fail.AND.(Kprint>=2)).OR.(Kprint>=3) ) THEN
+      IF( (fail .AND. (Kprint>=2)) .OR. (Kprint>=3) ) THEN
         WRITE (Lun,99001) '------------------------'
         WRITE (Lun,99002) 'DETAILS OF DPPERM TEST', j
         WRITE (Lun,99002) '------------------------'
         WRITE (Lun,99002) '1ST ARGUMENT (VECTOR TO BE PERMUTED)'
         WRITE (Lun,99003) '             INPUT =', (x(i,j),i=1,N)
         WRITE (Lun,99003) '   COMPUTED OUTPUT =', (y(i),i=1,N)
-        IF ( kabs==1 ) THEN
+        IF( kabs==1 ) THEN
           WRITE (Lun,99003) '    CORRECT OUTPUT =', (x(i,j),i=1,N)
         ELSE
           WRITE (Lun,99003) '    CORRECT OUTPUT =', (xs(i,j),i=1,N)
@@ -1167,29 +1163,29 @@ CONTAINS
     !
     !     ... TEST ERROR MESSAGES
     !
-    IF ( Kprint<=2 ) THEN
+    IF( Kprint<=2 ) THEN
       CALL XSETF(0)
     ELSE
       CALL XSETF(-1)
     END IF
     !
     nn = -1
-    IF ( Kprint>=3 ) WRITE (Lun,*)
+    IF( Kprint>=3 ) WRITE (Lun,*)
     CALL XERCLR
     CALL DPPERM(y,nn,iy,ier)
-    IF ( NUMXER(nerr)/=ier ) Ipass = 0
+    IF( NUMXER(nerr)/=ier ) Ipass = 0
     !
     nn = 1
     iy(1) = 5
-    IF ( Kprint>=3 ) WRITE (Lun,*)
+    IF( Kprint>=3 ) WRITE (Lun,*)
     CALL XERCLR
     CALL DPPERM(y,nn,iy,ier)
-    IF ( NUMXER(nerr)/=ier ) Ipass = 0
+    IF( NUMXER(nerr)/=ier ) Ipass = 0
     !
-    IF ( (Kprint>=2).AND.(Ipass==1) ) THEN
+    IF( (Kprint>=2) .AND. (Ipass==1) ) THEN
       WRITE (Lun,*)
       WRITE (Lun,*) ' DPPERM PASSED ERROR MESSAGE TESTS'
-    ELSEIF ( (Kprint>=1).AND.(Ipass==0) ) THEN
+    ELSEIF( (Kprint>=1) .AND. (Ipass==0) ) THEN
       WRITE (Lun,*)
       WRITE (Lun,*) ' DPPERM FAILED ERROR MESSAGE TESTS'
     END IF
@@ -1208,8 +1204,7 @@ PROGRAM TEST54
   USE slatec, ONLY : I1MACH, XSETF, XSETUN, XERMAX
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
-  !>
-  !  Driver for testing SLATEC subprograms
+  !> Driver for testing SLATEC subprograms
   !***
   ! **Library:**   SLATEC
   !***
@@ -1256,7 +1251,7 @@ PROGRAM TEST54
   !* REVISION HISTORY  (YYMMDD)
   !   890620  DATE WRITTEN
 
-  INTEGER lun, lin, nfail, kprint, ipass
+  INTEGER :: lun, lin, nfail, kprint, ipass
   !* FIRST EXECUTABLE STATEMENT  TEST54
   lun = I1MACH(2)
   lin = I1MACH(1)
@@ -1267,7 +1262,7 @@ PROGRAM TEST54
   CALL GET_ARGUMENT(kprint)
   CALL XERMAX(1000)
   CALL XSETUN(lun)
-  IF ( kprint<=1 ) THEN
+  IF( kprint<=1 ) THEN
     CALL XSETF(0)
   ELSE
     CALL XSETF(1)
@@ -1276,26 +1271,26 @@ PROGRAM TEST54
   !     Test ISORT, IPSORT and IPPERM
   !
   CALL ISRTQC(lun,kprint,ipass)
-  IF ( ipass==0 ) nfail = nfail + 1
+  IF( ipass==0 ) nfail = nfail + 1
   !
   !     Test SSORT, SPSORT and SPPERM
   !
   CALL SSRTQC(lun,kprint,ipass)
-  IF ( ipass==0 ) nfail = nfail + 1
+  IF( ipass==0 ) nfail = nfail + 1
   !
   !     Test DSORT, DPSORT and DPPERM
   !
   CALL DSRTQC(lun,kprint,ipass)
-  IF ( ipass==0 ) nfail = nfail + 1
+  IF( ipass==0 ) nfail = nfail + 1
   !
   !     Test HPSORT and HPPERM
   !
   CALL HSRTQC(lun,kprint,ipass)
-  IF ( ipass==0 ) nfail = nfail + 1
+  IF( ipass==0 ) nfail = nfail + 1
   !
   !     Write PASS or FAIL message
   !
-  IF ( nfail==0 ) THEN
+  IF( nfail==0 ) THEN
     WRITE (lun,99001)
     99001 FORMAT (/' --------------TEST54 PASSED ALL TESTS----------------')
   ELSE

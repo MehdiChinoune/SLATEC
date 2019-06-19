@@ -1,7 +1,6 @@
 !** QK15I
 SUBROUTINE QK15I(F,Boun,Inf,A,B,Result,Abserr,Resabs,Resasc)
-  !>
-  !  The original (infinite integration range is mapped
+  !> The original (infinite integration range is mapped
   !            onto the interval (0,1) and (A,B) is a part of (0,1).
   !            it is the purpose to compute
   !            I = Integral of transformed integrand over (A,B),
@@ -155,7 +154,7 @@ SUBROUTINE QK15I(F,Boun,Inf,A,B,Result,Abserr,Resabs,Resasc)
   hlgth = 0.5E+00*(B-A)
   tabsc1 = Boun + dinf*(0.1E+01-centr)/centr
   fval1 = F(tabsc1)
-  IF ( Inf==2 ) fval1 = fval1 + F(-tabsc1)
+  IF( Inf==2 ) fval1 = fval1 + F(-tabsc1)
   fc = (fval1/centr)/centr
   !
   !           COMPUTE THE 15-POINT KRONROD APPROXIMATION TO
@@ -172,8 +171,8 @@ SUBROUTINE QK15I(F,Boun,Inf,A,B,Result,Abserr,Resabs,Resasc)
     tabsc2 = Boun + dinf*(0.1E+01-absc2)/absc2
     fval1 = F(tabsc1)
     fval2 = F(tabsc2)
-    IF ( Inf==2 ) fval1 = fval1 + F(-tabsc1)
-    IF ( Inf==2 ) fval2 = fval2 + F(-tabsc2)
+    IF( Inf==2 ) fval1 = fval1 + F(-tabsc1)
+    IF( Inf==2 ) fval2 = fval2 + F(-tabsc2)
     fval1 = (fval1/absc1)/absc1
     fval2 = (fval2/absc2)/absc2
     fv1(j) = fval1
@@ -192,8 +191,8 @@ SUBROUTINE QK15I(F,Boun,Inf,A,B,Result,Abserr,Resabs,Resasc)
   Resasc = Resasc*hlgth
   Resabs = Resabs*hlgth
   Abserr = ABS((resk-resg)*hlgth)
-  IF ( Resasc/=0.0E+00.AND.Abserr/=0.E0 )&
+  IF( Resasc/=0.0E+00 .AND. Abserr/=0.E0 )&
     Abserr = Resasc*MIN(0.1E+01,(0.2E+03*Abserr/Resasc)**1.5E+00)
-  IF ( Resabs>uflow/(0.5E+02*epmach) ) Abserr = MAX((epmach*0.5E+02)*Resabs,&
+  IF( Resabs>uflow/(0.5E+02*epmach) ) Abserr = MAX((epmach*0.5E+02)*Resabs,&
     Abserr)
 END SUBROUTINE QK15I

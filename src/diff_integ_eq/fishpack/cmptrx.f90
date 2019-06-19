@@ -1,7 +1,6 @@
 !** CMPTRX
 SUBROUTINE CMPTRX(Idegbr,Idegcr,M,A,B,C,Y,Tcos,D,W)
-  !>
-  !  Subsidiary to CMGNBN
+  !> Subsidiary to CMGNBN
   !***
   ! **Library:**   SLATEC
   !***
@@ -39,7 +38,7 @@ SUBROUTINE CMPTRX(Idegbr,Idegcr,M,A,B,C,Y,Tcos,D,W)
   lint = 1
   DO k = 1, Idegbr
     x = Tcos(k)
-    IF ( k==l ) THEN
+    IF( k==l ) THEN
       i = Idegbr + lint
       xx = x - Tcos(i)
       DO i = 1, M
@@ -56,7 +55,7 @@ SUBROUTINE CMPTRX(Idegbr,Idegcr,M,A,B,C,Y,Tcos,D,W)
       Y(i) = (Y(i)-A(i)*Y(i-1))*z
     END DO
     z = B(M) - x - A(M)*D(mm1)
-    IF ( ABS(z)/=0. ) THEN
+    IF( ABS(z)/=0. ) THEN
       Y(M) = (Y(M)-A(M)*Y(mm1))/z
     ELSE
       Y(M) = (0.,0.)
@@ -65,7 +64,7 @@ SUBROUTINE CMPTRX(Idegbr,Idegcr,M,A,B,C,Y,Tcos,D,W)
       i = M - ip
       Y(i) = Y(i) - D(i)*Y(i+1)
     END DO
-    IF ( k==l ) THEN
+    IF( k==l ) THEN
       DO i = 1, M
         Y(i) = Y(i) + W(i)
       END DO

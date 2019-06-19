@@ -1,7 +1,6 @@
 !** BESI1
 REAL(SP) FUNCTION BESI1(X)
-  !>
-  !  Compute the modified (hyperbolic) Bessel function of the
+  !> Compute the modified (hyperbolic) Bessel function of the
   !            first kind of order one.
   !***
   ! **Library:**   SLATEC (FNLIB)
@@ -51,15 +50,15 @@ REAL(SP) FUNCTION BESI1(X)
     .000000000000766380E0, .000000000000004741E0, .000000000000000024E0 ]
   LOGICAL, SAVE :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  BESI1
-  IF ( first ) THEN
+  IF( first ) THEN
     nti1 = INITS(bi1cs,11,0.1*R1MACH(3))
     first = .FALSE.
   END IF
   !
   y = ABS(X)
-  IF ( y>3.0 ) THEN
+  IF( y>3.0 ) THEN
     !
-    IF ( y>xmax ) CALL XERMSG('BESI1','ABS(X) SO BIG I1 OVERFLOWS',&
+    IF( y>xmax ) CALL XERMSG('BESI1','ABS(X) SO BIG I1 OVERFLOWS',&
       2,2)
     !
     BESI1 = EXP(y)*BESI1E(X)
@@ -67,11 +66,11 @@ REAL(SP) FUNCTION BESI1(X)
   END IF
   !
   BESI1 = 0.0
-  IF ( y==0.0 ) RETURN
+  IF( y==0.0 ) RETURN
   !
-  IF ( y<=xmin ) CALL XERMSG('BESI1',&
+  IF( y<=xmin ) CALL XERMSG('BESI1',&
     'ABS(X) SO SMALL I1 UNDERFLOWS',1,1)
-  IF ( y>xmin ) BESI1 = 0.5*X
-  IF ( y>xsml ) BESI1 = X*(.875+CSEVL(y*y/4.5-1.,bi1cs,nti1))
+  IF( y>xmin ) BESI1 = 0.5*X
+  IF( y>xsml ) BESI1 = X*(.875+CSEVL(y*y/4.5-1.,bi1cs,nti1))
   RETURN
 END FUNCTION BESI1

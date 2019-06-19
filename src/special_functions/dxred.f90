@@ -1,7 +1,6 @@
 !** DXRED
 SUBROUTINE DXRED(X,Ix,Ierror)
-  !>
-  !  To provide double-precision floating-point arithmetic
+  !> To provide double-precision floating-point arithmetic
   !            with an extended exponent range.
   !***
   ! **Library:**   SLATEC
@@ -20,9 +19,9 @@ SUBROUTINE DXRED(X,Ix,Ierror)
   !     INTEGER IX
   !
   !                  IF
-  !                  RADIX**(-2L) .LE. (ABS(X),IX) .LE. RADIX**(2L)
+  !                  RADIX**(-2L) <= (ABS(X),IX) <= RADIX**(2L)
   !                  THEN DXRED TRANSFORMS (X,IX) SO THAT IX=0.
-  !                  IF (X,IX) IS OUTSIDE THE ABOVE RANGE,
+  !                  IF(X,IX) IS OUTSIDE THE ABOVE RANGE,
   !                  THEN DXRED TAKES NO ACTION.
   !                  THIS SUBROUTINE IS USEFUL IF THE
   !                  RESULTS OF EXTENDED-RANGE CALCULATIONS
@@ -54,46 +53,46 @@ SUBROUTINE DXRED(X,Ix,Ierror)
   !
   !* FIRST EXECUTABLE STATEMENT  DXRED
   Ierror = 0
-  IF ( X==0.0D0 ) THEN
+  IF( X==0.0D0 ) THEN
     Ix = 0
   ELSE
     xa = ABS(X)
-    IF ( Ix/=0 ) THEN
+    IF( Ix/=0 ) THEN
       ixa = ABS(Ix)
       ixa1 = ixa/l2_com
       ixa2 = MOD(ixa,l2_com)
-      IF ( Ix>0 ) THEN
+      IF( Ix>0 ) THEN
         !
-        DO WHILE ( xa>=1.0D0 )
+        DO WHILE( xa>=1.0D0 )
           xa = xa/rad2l_com
           ixa1 = ixa1 + 1
         END DO
         xa = xa*radixx_com**ixa2
-        IF ( ixa1/=0 ) THEN
+        IF( ixa1/=0 ) THEN
           DO i = 1, ixa1
-            IF ( xa>1.0D0 ) RETURN
+            IF( xa>1.0D0 ) RETURN
             xa = xa*rad2l_com
           END DO
         END IF
       ELSE
-        DO WHILE ( xa<=1.0D0 )
+        DO WHILE( xa<=1.0D0 )
           xa = xa*rad2l_com
           ixa1 = ixa1 + 1
         END DO
         xa = xa/radixx_com**ixa2
-        IF ( ixa1/=0 ) THEN
+        IF( ixa1/=0 ) THEN
           DO i = 1, ixa1
-            IF ( xa<1.0D0 ) RETURN
+            IF( xa<1.0D0 ) RETURN
             xa = xa/rad2l_com
           END DO
         END IF
       END IF
     END IF
-    IF ( xa<=rad2l_com ) THEN
-      IF ( xa>1.0D0 ) THEN
+    IF( xa<=rad2l_com ) THEN
+      IF( xa>1.0D0 ) THEN
         X = SIGN(xa,X)
         Ix = 0
-      ELSEIF ( rad2l_com*xa>=1.0D0 ) THEN
+      ELSEIF( rad2l_com*xa>=1.0D0 ) THEN
         X = SIGN(xa,X)
         Ix = 0
       END IF

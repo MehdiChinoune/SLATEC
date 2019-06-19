@@ -1,8 +1,7 @@
 !** DFC
 SUBROUTINE DFC(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkpt,Nconst,Xconst,&
     Yconst,Nderiv,Mode,Coeff,W,Iw)
-  !>
-  !  Fit a piecewise polynomial curve to discrete data.
+  !> Fit a piecewise polynomial curve to discrete data.
   !            The piecewise polynomials are represented as B-splines.
   !            The fitting is done in a weighted least squares sense.
   !            Equality and inequality constraints can be imposed on the
@@ -73,9 +72,9 @@ SUBROUTINE DFC(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkpt,Nconst,Xconst,&
   !                         to the given knot values.  The contents of
   !                         BKPT(*) is not changed.
   !
-  !                         NORD must be in the range 1 .LE. NORD .LE. 20.
+  !                         NORD must be in the range 1 <= NORD <= 20.
   !                         The value of NBKPT must satisfy the condition
-  !                         NBKPT .GE. 2*NORD.
+  !                         NBKPT >= 2*NORD.
   !                         Other values are considered errors.
   !
   !                         (The order of the spline is one more than the
@@ -103,10 +102,10 @@ SUBROUTINE DFC(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkpt,Nconst,Xconst,&
   !                          YCONST(I)=Y, and
   !                          NDERIV(I)=ITYPE+4*J, where
   !
-  !                          ITYPE = 0,      if (J-th deriv. at X) .LE. Y.
-  !                                = 1,      if (J-th deriv. at X) .GE. Y.
-  !                                = 2,      if (J-th deriv. at X) .EQ. Y.
-  !                                = 3,      if (J-th deriv. at X) .EQ.
+  !                          ITYPE = 0,      if (J-th deriv. at X) <= Y.
+  !                                = 1,      if (J-th deriv. at X) >= Y.
+  !                                = 2,      if (J-th deriv. at X) = Y.
+  !                                = 3,      if (J-th deriv. at X) =
   !                                             (J-th deriv. at Y).
   !                          (A value of NDERIV(I)=-1 will cause this
   !                          constraint to be ignored.  This subprogram
@@ -349,7 +348,7 @@ SUBROUTINE DFC(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkpt,Nconst,Xconst,&
   !                         The output of this subprogram will not be
   !                         defined unless an output value of MODE=0 or 1
   !                         was obtained from DFC( ), XVAL is in the data
-  !                         interval, and IDER is nonnegative and .LT.
+  !                         interval, and IDER is nonnegative and <
   !                         NORD.
   !
   !                         The first time DBVALU( ) is called, INBV=1
@@ -388,13 +387,13 @@ SUBROUTINE DFC(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkpt,Nconst,Xconst,&
   INTEGER :: i1, i2, i3, i4, i5, i6, i7, mdg, mdw
   !
   !* FIRST EXECUTABLE STATEMENT  DFC
-  IF ( Nord<1.OR.Nord>20 ) THEN
+  IF( Nord<1 .OR. Nord>20 ) THEN
     CALL XERMSG('FCMN',&
       'IN FC, THE ORDER OF THE B-SPLINE MUST BE 1 THRU 20.',2,1)
     Mode = -1
     RETURN
     !
-  ELSEIF ( Nbkpt<2*Nord ) THEN
+  ELSEIF( Nbkpt<2*Nord ) THEN
     CALL XERMSG('FCMN',&
       'IN FC, THE NUMBER OF KNOTS MUST BE AT LEAST TWICE THE B-SPLINE ORDER.',2,1)
     Mode = -1

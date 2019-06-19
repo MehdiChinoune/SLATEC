@@ -1,7 +1,6 @@
 !** XSETUN
 SUBROUTINE XSETUN(Iunit)
-  !>
-  !  Set output file to which error messages are to be sent.
+  !> Set output file to which error messages are to be sent.
   !***
   ! **Library:**   SLATEC (XERROR)
   !***
@@ -38,8 +37,8 @@ SUBROUTINE XSETUN(Iunit)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
-  INTEGER Iunit
-  INTEGER junk
+  INTEGER :: Iunit
+  INTEGER :: junk
   !* FIRST EXECUTABLE STATEMENT  XSETUN
   junk = J4SAVE(3,Iunit,.TRUE.)
   junk = J4SAVE(5,1,.TRUE.)

@@ -1,7 +1,6 @@
 !** CUNIK
 SUBROUTINE CUNIK(Zr,Fnu,Ikflg,Ipmtr,Tol,Init,Phi,Zeta1,Zeta2,Summ,Cwrk)
-  !>
-  !  Subsidiary to CBESI and CBESK
+  !> Subsidiary to CBESI and CBESK
   !***
   ! **Library:**   SLATEC
   !***
@@ -35,9 +34,9 @@ SUBROUTINE CUNIK(Zr,Fnu,Ikflg,Ipmtr,Tol,Init,Phi,Zeta1,Zeta2,Summ,Cwrk)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
   USE service, ONLY : R1MACH
-  COMPLEX(SP) cfn, crfn, Cwrk(16), Phi, s, sr, Summ, t, t2, Zeta1, Zeta2, zn, Zr
-  REAL(SP) ac, Fnu, rfn, test, Tol, tstr, tsti
-  INTEGER i, Ikflg, Init, Ipmtr, j, k, l
+  COMPLEX(SP) :: cfn, crfn, Cwrk(16), Phi, s, sr, Summ, t, t2, Zeta1, Zeta2, zn, Zr
+  REAL(SP) :: ac, Fnu, rfn, test, Tol, tstr, tsti
+  INTEGER :: i, Ikflg, Init, Ipmtr, j, k, l
   COMPLEX(SP), PARAMETER :: czero = (0.0E0,0.0E0), cone = (1.0E0,0.0E0)
   COMPLEX(SP), PARAMETER :: con(2) = [ (3.98942280401432678E-01,0.0E0), &
     (1.25331413731550025E+00,0.0E0) ]
@@ -83,7 +82,7 @@ SUBROUTINE CUNIK(Zr,Fnu,Ikflg,Ipmtr,Tol,Init,Phi,Zeta1,Zeta2,Summ,Cwrk)
     -2.18229277575292237E+10, 1.24700929351271032E+09, -2.91883881222208134E+07, &
     1.18838426256783253E+05 ]
   !* FIRST EXECUTABLE STATEMENT  CUNIK
-  IF ( Init==0 ) THEN
+  IF( Init==0 ) THEN
     !-----------------------------------------------------------------------
     !     INITIALIZE ALL VARIABLES
     !-----------------------------------------------------------------------
@@ -97,7 +96,7 @@ SUBROUTINE CUNIK(Zr,Fnu,Ikflg,Ipmtr,Tol,Init,Phi,Zeta1,Zeta2,Summ,Cwrk)
     tsti = AIMAG(Zr)
     test = R1MACH(1)*1.0E+3
     ac = Fnu*test
-    IF ( ABS(tstr)>ac.OR.ABS(tsti)>ac ) THEN
+    IF( ABS(tstr)>ac .OR. ABS(tsti)>ac ) THEN
       t = Zr*crfn
       s = cone + t*t
       sr = SQRT(s)
@@ -109,7 +108,7 @@ SUBROUTINE CUNIK(Zr,Fnu,Ikflg,Ipmtr,Tol,Init,Phi,Zeta1,Zeta2,Summ,Cwrk)
       sr = t*crfn
       Cwrk(16) = SQRT(sr)
       Phi = Cwrk(16)*con(Ikflg)
-      IF ( Ipmtr/=0 ) RETURN
+      IF( Ipmtr/=0 ) RETURN
       t2 = cone/s
       Cwrk(1) = cone
       crfn = cone
@@ -127,7 +126,7 @@ SUBROUTINE CUNIK(Zr,Fnu,Ikflg,Ipmtr,Tol,Init,Phi,Zeta1,Zeta2,Summ,Cwrk)
         tstr = REAL(Cwrk(k))
         tsti = AIMAG(Cwrk(k))
         test = ABS(tstr) + ABS(tsti)
-        IF ( ac<Tol.AND.test<Tol ) GOTO 20
+        IF( ac<Tol .AND. test<Tol ) GOTO 20
       END DO
       k = 15
       20  Init = k
@@ -139,7 +138,7 @@ SUBROUTINE CUNIK(Zr,Fnu,Ikflg,Ipmtr,Tol,Init,Phi,Zeta1,Zeta2,Summ,Cwrk)
       RETURN
     END IF
   END IF
-  IF ( Ikflg==2 ) THEN
+  IF( Ikflg==2 ) THEN
     !-----------------------------------------------------------------------
     !     COMPUTE SUM FOR THE K FUNCTION
     !-----------------------------------------------------------------------

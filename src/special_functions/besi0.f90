@@ -1,7 +1,6 @@
 !** BESI0
 REAL(SP) FUNCTION BESI0(X)
-  !>
-  !  Compute the hyperbolic Bessel function of the first kind
+  !> Compute the hyperbolic Bessel function of the first kind
   !            of order zero.
   !***
   ! **Library:**   SLATEC (FNLIB)
@@ -51,21 +50,21 @@ REAL(SP) FUNCTION BESI0(X)
     .00000000000000000245E0 ]
   LOGICAL, SAVE :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  BESI0
-  IF ( first ) THEN
+  IF( first ) THEN
     nti0 = INITS(bi0cs,12,0.1*R1MACH(3))
     first = .FALSE.
   END IF
   !
   y = ABS(X)
-  IF ( y>3.0 ) THEN
+  IF( y>3.0 ) THEN
     !
-    IF ( y>xmax ) CALL XERMSG('BESI0','ABS(X) SO BIG I0 OVERFLOWS',1,2)
+    IF( y>xmax ) CALL XERMSG('BESI0','ABS(X) SO BIG I0 OVERFLOWS',1,2)
     !
     BESI0 = EXP(y)*BESI0E(X)
     RETURN
   END IF
   !
   BESI0 = 1.0
-  IF ( y>xsml ) BESI0 = 2.75 + CSEVL(y*y/4.5-1.0,bi0cs,nti0)
+  IF( y>xsml ) BESI0 = 2.75 + CSEVL(y*y/4.5-1.0,bi0cs,nti0)
   RETURN
 END FUNCTION BESI0

@@ -1,8 +1,7 @@
 !** QAG
 SUBROUTINE QAG(F,A,B,Epsabs,Epsrel,Key,Result,Abserr,Neval,Ier,Limit,Lenw,&
     Last,Iwork,Work)
-  !>
-  !  The routine calculates an approximation result to a given
+  !> The routine calculates an approximation result to a given
   !            definite integral I = integral of F over (A,B),
   !            hopefully satisfying following claim for accuracy
   !            ABS(I-RESULT)LE.MAX(EPSABS,EPSREL*ABS(I)).
@@ -45,19 +44,19 @@ SUBROUTINE QAG(F,A,B,Epsabs,Epsrel,Key,Result,Abserr,Neval,Ier,Limit,Lenw,&
   !                     Absolute accuracy requested
   !            EPSREL - Real
   !                     Relative accuracy requested
-  !                     If  EPSABS.LE.0
-  !                     And EPSREL.LT.MAX(50*REL.MACH.ACC.,0.5D-28),
+  !                     If  EPSABS<=0
+  !                     And EPSREL<MAX(50*REL.MACH.ACC.,0.5D-28),
   !                     The routine will end with IER = 6.
   !
   !            KEY    - Integer
   !                     Key for choice of local integration rule
   !                     A GAUSS-KRONROD PAIR is used with
-  !                       7 - 15 POINTS If KEY.LT.2,
+  !                       7 - 15 POINTS If KEY<2,
   !                      10 - 21 POINTS If KEY = 2,
   !                      15 - 31 POINTS If KEY = 3,
   !                      20 - 41 POINTS If KEY = 4,
   !                      25 - 51 POINTS If KEY = 5,
-  !                      30 - 61 POINTS If KEY.GT.5.
+  !                      30 - 61 POINTS If KEY>5.
   !
   !         ON RETURN
   !            RESULT - Real
@@ -74,7 +73,7 @@ SUBROUTINE QAG(F,A,B,Epsabs,Epsrel,Key,Result,Abserr,Neval,Ier,Limit,Lenw,&
   !                     IER = 0 Normal and reliable termination of the
   !                             routine. It is assumed that the requested
   !                             accuracy has been achieved.
-  !                     IER.GT.0 Abnormal termination of the routine
+  !                     IER>0 Abnormal termination of the routine
   !                             The estimates for RESULT and ERROR are
   !                             Less reliable. It is assumed that the
   !                             requested accuracy has not been achieved.
@@ -103,9 +102,9 @@ SUBROUTINE QAG(F,A,B,Epsabs,Epsrel,Key,Result,Abserr,Neval,Ier,Limit,Lenw,&
   !                             at some points of the integration
   !                             interval.
   !                         = 6 The input is invalid, because
-  !                             (EPSABS.LE.0 AND
-  !                              EPSREL.LT.MAX(50*REL.MACH.ACC.,0.5D-28))
-  !                             OR LIMIT.LT.1 OR LENW.LT.LIMIT*4.
+  !                             (EPSABS<=0 AND
+  !                              EPSREL<MAX(50*REL.MACH.ACC.,0.5D-28))
+  !                             OR LIMIT<1 OR LENW<LIMIT*4.
   !                             RESULT, ABSERR, NEVAL, LAST are set
   !                             to zero.
   !                             EXCEPT when LENW is invalid, IWORK(1),
@@ -118,13 +117,13 @@ SUBROUTINE QAG(F,A,B,Epsabs,Epsrel,Key,Result,Abserr,Neval,Ier,Limit,Lenw,&
   !                    Dimensioning parameter for IWORK
   !                    Limit determines the maximum number of subintervals
   !                    in the partition of the given integration interval
-  !                    (A,B), LIMIT.GE.1.
-  !                    If LIMIT.LT.1, the routine will end with IER = 6.
+  !                    (A,B), LIMIT>=1.
+  !                    If LIMIT<1, the routine will end with IER = 6.
   !
   !            LENW  - Integer
   !                    Dimensioning parameter for work
   !                    LENW must be at least LIMIT*4.
-  !                    IF LENW.LT.LIMIT*4, the routine will end with
+  !                    IF LENW<LIMIT*4, the routine will end with
   !                    IER = 6.
   !
   !            LAST  - Integer
@@ -140,7 +139,7 @@ SUBROUTINE QAG(F,A,B,Epsabs,Epsrel,Key,Result,Abserr,Neval,Ier,Limit,Lenw,&
   !                    estimates over the subintervals, such that
   !                    WORK(LIMIT*3+IWORK(1)),..., WORK(LIMIT*3+IWORK(K))
   !                    form a decreasing sequence with K = LAST If
-  !                    LAST.LE.(LIMIT/2+2), and K = LIMIT+1-LAST otherwise
+  !                    LAST<=(LIMIT/2+2), and K = LIMIT+1-LAST otherwise
   !
   !            WORK  - Real
   !                    Vector of dimension at least LENW
@@ -182,7 +181,7 @@ SUBROUTINE QAG(F,A,B,Epsabs,Epsrel,Key,Result,Abserr,Neval,Ier,Limit,Lenw,&
   Last = 0
   Result = 0.0E+00
   Abserr = 0.0E+00
-  IF ( Limit>=1.AND.Lenw>=Limit*4 ) THEN
+  IF( Limit>=1 .AND. Lenw>=Limit*4 ) THEN
     !
     !        PREPARE CALL FOR QAGE.
     !
@@ -198,6 +197,6 @@ SUBROUTINE QAG(F,A,B,Epsabs,Epsrel,Key,Result,Abserr,Neval,Ier,Limit,Lenw,&
     lvl = 0
   END IF
   !
-  IF ( Ier==6 ) lvl = 1
-  IF ( Ier/=0 ) CALL XERMSG('QAG','ABNORMAL RETURN',Ier,lvl)
+  IF( Ier==6 ) lvl = 1
+  IF( Ier/=0 ) CALL XERMSG('QAG','ABNORMAL RETURN',Ier,lvl)
 END SUBROUTINE QAG

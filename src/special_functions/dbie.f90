@@ -1,7 +1,6 @@
 !** DBIE
 REAL(DP) FUNCTION DBIE(X)
-  !>
-  !  Calculate the Bairy function for a negative argument and an
+  !> Calculate the Bairy function for a negative argument and an
   !            exponentially scaled Bairy function for a non-negative
   !            argument.
   !***
@@ -23,8 +22,8 @@ REAL(DP) FUNCTION DBIE(X)
   ! function of the second kind, depending on the value of the
   ! double precision argument X.
   !
-  ! Evaluate BI(X) for X .LE. 0.0  and  BI(X)*EXP(-ZETA)  where
-  ! ZETA = 2/3 * X**(3/2)  for X .GE. 0.0
+  ! Evaluate BI(X) for X <= 0.0  and  BI(X)*EXP(-ZETA)  where
+  ! ZETA = 2/3 * X**(3/2)  for X >= 0.0
   !
   !
   ! Series for BIF        on the interval -1.00000E+00 to  1.00000E+00
@@ -187,7 +186,7 @@ REAL(DP) FUNCTION DBIE(X)
   REAL(DP), PARAMETER :: btr = -2.09383632135605431360096498526268D0
   LOGICAL, SAVE :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  DBIE
-  IF ( first ) THEN
+  IF( first ) THEN
     nbif = INITDS(bifcs,13,eta)
     nbig = INITDS(bigcs,13,eta)
     nbif2 = INITDS(bif2cs,15,eta)
@@ -197,30 +196,30 @@ REAL(DP) FUNCTION DBIE(X)
     first = .FALSE.
   END IF
   !
-  IF ( X<(-1.0D0) ) THEN
+  IF( X<(-1.0D0) ) THEN
     CALL D9AIMP(X,xm,theta)
     DBIE = xm*SIN(theta)
     RETURN
     !
-  ELSEIF ( X<=1.0D0 ) THEN
+  ELSEIF( X<=1.0D0 ) THEN
     z = 0.D0
-    IF ( ABS(X)>x3sml ) z = X**3
+    IF( ABS(X)>x3sml ) z = X**3
     DBIE = 0.625D0 + DCSEVL(z,bifcs,nbif)&
       + X*(0.4375D0+DCSEVL(z,bigcs,nbig))
-    IF ( X>x32sml ) DBIE = DBIE*EXP(-2.0D0*X*SQRT(X)/3.0D0)
+    IF( X>x32sml ) DBIE = DBIE*EXP(-2.0D0*X*SQRT(X)/3.0D0)
     RETURN
     !
-  ELSEIF ( X<=2.0D0 ) THEN
+  ELSEIF( X<=2.0D0 ) THEN
     z = (2.0D0*X**3-9.0D0)/7.0D0
     DBIE = EXP(-2.0D0*X*SQRT(X)/3.0D0)&
       *(1.125D0+DCSEVL(z,bif2cs,nbif2)+X*(0.625D0+DCSEVL(z,big2cs,nbig2)))
     RETURN
     !
-  ELSEIF ( X>4.0D0 ) THEN
+  ELSEIF( X>4.0D0 ) THEN
     !
     sqrtx = SQRT(X)
     z = -1.0D0
-    IF ( X<xbig ) z = 16.D0/(X*sqrtx) - 1.0D0
+    IF( X<xbig ) z = 16.D0/(X*sqrtx) - 1.0D0
     DBIE = (0.625D0+DCSEVL(z,bip2cs,nbip2))/SQRT(sqrtx)
     RETURN
   END IF

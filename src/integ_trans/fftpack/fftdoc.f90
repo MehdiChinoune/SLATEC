@@ -1,7 +1,6 @@
 !** FFTDOC
 SUBROUTINE FFTDOC
-  !>
-  !  Documentation for FFTPACK, a collection of Fast Fourier
+  !> Documentation for FFTPACK, a collection of Fast Fourier
   !            Transform routines.
   !***
   ! **Library:**   SLATEC

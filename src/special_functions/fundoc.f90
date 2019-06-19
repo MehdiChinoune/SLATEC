@@ -1,7 +1,6 @@
 !** FUNDOC
 SUBROUTINE FUNDOC
-  !>
-  !  Documentation for FNLIB, a collection of routines for
+  !> Documentation for FNLIB, a collection of routines for
   !            evaluating elementary and special functions.
   !***
   ! **Library:**   SLATEC
@@ -169,7 +168,7 @@ SUBROUTINE FUNDOC
   ! Third kind, order zero   e**x * K sub 0 (x)   BESK0E(X) DBSK0E   --
   ! Third kind, order one    e**x * K sub 1 (x)   BESK1E(X) DBSK1E   --
   !   Sequences of Bessel functions of general order.
-  !   N values are computed where  k = 1,2,...N and v .ge. 0.
+  !   N values are computed where  k = 1,2,...N and v >= 0.
   ! Modified first kind      I sub v+k-1 (x) Call BESI(X,   DBESI    --
   !                          optional scaling  ALPHA,KODE,N,
   !                          by e**(-x)        Y,NZ)

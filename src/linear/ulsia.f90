@@ -1,8 +1,7 @@
 !** ULSIA
 SUBROUTINE ULSIA(A,Mda,M,N,B,Mdb,Nb,Re,Ae,Key,Mode,Np,Krank,Ksure,Rnorm,W,&
     Lw,Iwork,Liw,Info)
-  !>
-  !  Solve an underdetermined linear system of equations by
+  !> Solve an underdetermined linear system of equations by
   !            performing an LQ factorization of the matrix using
   !            Householder transformations.  Emphasis is put on detecting
   !            possible rank deficiency.
@@ -21,7 +20,7 @@ SUBROUTINE ULSIA(A,Mda,M,N,B,Mdb,Nb,Re,Ae,Key,Mode,Np,Krank,Ksure,Rnorm,W,&
   ! **Description:**
   !
   !     ULSIA computes the minimal length solution(s) to the problem AX=B
-  !     where A is an M by N matrix with M.LE.N and B is the M by NB
+  !     where A is an M by N matrix with M<=N and B is the M by NB
   !     matrix of right hand sides.  User input bounds on the uncertainty
   !     in the elements of A are used to detect numerical rank deficiency.
   !     The algorithm employs a row and column pivot strategy to
@@ -41,12 +40,12 @@ SUBROUTINE ULSIA(A,Mda,M,N,B,Mdb,Nb,Re,Ae,Key,Mode,Np,Krank,Ksure,Rnorm,W,&
   !      MDA,M,N      actual first dimension of A in the calling program.
   !                   M is the row dimension (no. of EQUATIONS of the
   !                   problem) and N the col dimension (no. of UNKNOWNS).
-  !                   Must have MDA.GE.M and M.LE.N.
+  !                   Must have MDA>=M and M<=N.
   !
   !     B(,)          Right hand side(s), with MDB the actual first
   !      MDB,NB       dimension of B in the calling program. NB is the
   !                   number of M by 1 right hand sides.  Since the
-  !                   solution is returned in B, must have MDB.GE.N. If
+  !                   solution is returned in B, must have MDB>=N. If
   !                   NB = 0, B is never accessed.
   !
   !   ******************************************************************
@@ -115,7 +114,7 @@ SUBROUTINE ULSIA(A,Mda,M,N,B,Mdb,Nb,Re,Ae,Key,Mode,Np,Krank,Ksure,Rnorm,W,&
   !                   LW, IWORK, LIW, and the first 2*M locations of WORK
   !                   as output by the original call to ULSIA. MODE must
   !                   be equal to the value of MODE in the original call.
-  !                   If MODE.LT.2, only the first N locations of WORK
+  !                   If MODE<2, only the first N locations of WORK
   !                   are accessed. AE, RE, KEY, and NP are not accessed.
   !
   !
@@ -155,7 +154,7 @@ SUBROUTINE ULSIA(A,Mda,M,N,B,Mdb,Nb,Re,Ae,Key,Mode,Np,Krank,Ksure,Rnorm,W,&
   !                   1 - Rank deficient, truncated solution
   !                   2 - Rank deficient, minimal length least squares sol
   !                   3 - Numerical rank 0, zero solution
-  !                   4 - Rank .LT. NP
+  !                   4 - Rank < NP
   !                   5 - Full rank
   !
   !***
@@ -182,62 +181,62 @@ SUBROUTINE ULSIA(A,Mda,M,N,B,Mdb,Nb,Re,Ae,Key,Mode,Np,Krank,Ksure,Rnorm,W,&
   REAL(SP) :: eps
   !
   !* FIRST EXECUTABLE STATEMENT  ULSIA
-  IF ( Info<0.OR.Info>1 ) THEN
+  IF( Info<0 .OR. Info>1 ) THEN
     CALL XERMSG('ULSIA','INFO OUT OF RANGE',2,1)
     RETURN
   ELSE
     it = Info
     Info = -1
-    IF ( Nb==0.AND.it==1 ) THEN
+    IF( Nb==0 .AND. it==1 ) THEN
       !
       !     ERROR MESSAGES
       !
       CALL XERMSG('ULSIA',&
         'SOLUTION ONLY (INFO=1) BUT NO RIGHT HAND SIDE (NB=0)',1,0)
       RETURN
-    ELSEIF ( M<1 ) THEN
-      CALL XERMSG('ULSIA','M.LT.1',2,1)
+    ELSEIF( M<1 ) THEN
+      CALL XERMSG('ULSIA','M<1',2,1)
       RETURN
-    ELSEIF ( N<1 ) THEN
-      CALL XERMSG('ULSIA','N.LT.1',2,1)
+    ELSEIF( N<1 ) THEN
+      CALL XERMSG('ULSIA','N<1',2,1)
       RETURN
     ELSE
-      IF ( N<M ) THEN
-        CALL XERMSG('ULSIA','N.LT.M',2,1)
+      IF( N<M ) THEN
+        CALL XERMSG('ULSIA','N<M',2,1)
         RETURN
       ELSE
-        IF ( Mda<M ) THEN
-          CALL XERMSG('ULSIA','MDA.LT.M',2,1)
+        IF( Mda<M ) THEN
+          CALL XERMSG('ULSIA','MDA<M',2,1)
           RETURN
         ELSE
-          IF ( Liw<M+N ) THEN
-            CALL XERMSG('ULSIA','LIW.LT.M+N',2,1)
+          IF( Liw<M+N ) THEN
+            CALL XERMSG('ULSIA','LIW<M+N',2,1)
             RETURN
           ELSE
-            IF ( Mode<0.OR.Mode>3 ) THEN
+            IF( Mode<0 .OR. Mode>3 ) THEN
               CALL XERMSG('ULSIA','MODE OUT OF RANGE',2,1)
               RETURN
             ELSE
-              IF ( Nb/=0 ) THEN
-                IF ( Nb<0 ) THEN
-                  CALL XERMSG('ULSIA','NB.LT.0',2,1)
+              IF( Nb/=0 ) THEN
+                IF( Nb<0 ) THEN
+                  CALL XERMSG('ULSIA','NB<0',2,1)
                   RETURN
-                ELSEIF ( Mdb<N ) THEN
-                  CALL XERMSG('ULSIA','MDB.LT.N',2,1)
+                ELSEIF( Mdb<N ) THEN
+                  CALL XERMSG('ULSIA','MDB<N',2,1)
                   RETURN
-                ELSEIF ( it/=0 ) THEN
+                ELSEIF( it/=0 ) THEN
                   GOTO 2
                 END IF
               END IF
-              IF ( Key<0.OR.Key>3 ) THEN
+              IF( Key<0 .OR. Key>3 ) THEN
                 CALL XERMSG('ULSIA','KEY OUT OF RANGE',2,1)
                 RETURN
               ELSE
-                IF ( Key==0.AND.Lw<5*M ) GOTO 5
-                IF ( Key==1.AND.Lw<4*M ) GOTO 5
-                IF ( Key==2.AND.Lw<4*M ) GOTO 5
-                IF ( Key==3.AND.Lw<3*M ) GOTO 5
-                IF ( Np<0.OR.Np>M ) THEN
+                IF( Key==0 .AND. Lw<5*M ) GOTO 5
+                IF( Key==1 .AND. Lw<4*M ) GOTO 5
+                IF( Key==2 .AND. Lw<4*M ) GOTO 5
+                IF( Key==3 .AND. Lw<3*M ) GOTO 5
+                IF( Np<0 .OR. Np>M ) THEN
                   CALL XERMSG('ULSIA','NP OUT OF RANGE',2,1)
                   RETURN
                 ELSE
@@ -249,44 +248,44 @@ SUBROUTINE ULSIA(A,Mda,M,N,B,Mdb,Nb,Re,Ae,Key,Mode,Np,Krank,Ksure,Rnorm,W,&
                   m4 = m3 + M
                   m5 = m4 + M
                   !
-                  IF ( Key==1 ) THEN
+                  IF( Key==1 ) THEN
                     !
-                    IF ( Ae(1)<0.0 ) GOTO 100
+                    IF( Ae(1)<0.0 ) GOTO 100
                     DO i = 1, M
-                      IF ( Re(i)<0.0 ) GOTO 10
-                      IF ( Re(i)>1.0 ) GOTO 20
-                      IF ( Re(i)<eps ) Re(i) = eps
+                      IF( Re(i)<0.0 ) GOTO 10
+                      IF( Re(i)>1.0 ) GOTO 20
+                      IF( Re(i)<eps ) Re(i) = eps
                       W(m4-1+i) = Ae(1)
                     END DO
                     CALL U11US(A,Mda,M,N,Re,W(m4),Mode,Np,Krank,Ksure,W(m1),&
                       W(m2),W(m3),Iwork(m1),Iwork(m2))
-                  ELSEIF ( Key==2 ) THEN
+                  ELSEIF( Key==2 ) THEN
                     !
-                    IF ( Re(1)<0.0 ) GOTO 10
-                    IF ( Re(1)>1.0 ) GOTO 20
-                    IF ( Re(1)<eps ) Re(1) = eps
+                    IF( Re(1)<0.0 ) GOTO 10
+                    IF( Re(1)>1.0 ) GOTO 20
+                    IF( Re(1)<eps ) Re(1) = eps
                     DO i = 1, M
                       W(m4-1+i) = Re(1)
-                      IF ( Ae(i)<0.0 ) GOTO 100
+                      IF( Ae(i)<0.0 ) GOTO 100
                     END DO
                     CALL U11US(A,Mda,M,N,W(m4),Ae,Mode,Np,Krank,Ksure,W(m1),&
                       W(m2),W(m3),Iwork(m1),Iwork(m2))
-                  ELSEIF ( Key==3 ) THEN
+                  ELSEIF( Key==3 ) THEN
                     !
                     DO i = 1, M
-                      IF ( Re(i)<0.0 ) GOTO 10
-                      IF ( Re(i)>1.0 ) GOTO 20
-                      IF ( Re(i)<eps ) Re(i) = eps
-                      IF ( Ae(i)<0.0 ) GOTO 100
+                      IF( Re(i)<0.0 ) GOTO 10
+                      IF( Re(i)>1.0 ) GOTO 20
+                      IF( Re(i)<eps ) Re(i) = eps
+                      IF( Ae(i)<0.0 ) GOTO 100
                     END DO
                     CALL U11US(A,Mda,M,N,Re,Ae,Mode,Np,Krank,Ksure,W(m1),&
                       W(m2),W(m3),Iwork(m1),Iwork(m2))
                   ELSE
                     !
-                    IF ( Re(1)<0.0 ) GOTO 10
-                    IF ( Re(1)>1.0 ) GOTO 20
-                    IF ( Re(1)<eps ) Re(1) = eps
-                    IF ( Ae(1)<0.0 ) GOTO 100
+                    IF( Re(1)<0.0 ) GOTO 10
+                    IF( Re(1)>1.0 ) GOTO 20
+                    IF( Re(1)<eps ) Re(1) = eps
+                    IF( Ae(1)<0.0 ) GOTO 100
                     DO i = 1, M
                       W(m4-1+i) = Re(1)
                       W(m5-1+i) = Ae(1)
@@ -301,18 +300,18 @@ SUBROUTINE ULSIA(A,Mda,M,N,B,Mdb,Nb,Re,Ae,Key,Mode,Np,Krank,Ksure,Rnorm,W,&
             !     DETERMINE INFO
             !
             2 CONTINUE
-            IF ( Krank==M ) THEN
+            IF( Krank==M ) THEN
               Info = 5
-            ELSEIF ( Krank==0 ) THEN
+            ELSEIF( Krank==0 ) THEN
               Info = 3
-            ELSEIF ( Krank>=Np ) THEN
+            ELSEIF( Krank>=Np ) THEN
               Info = Mode
-              IF ( Mode==0 ) RETURN
+              IF( Mode==0 ) RETURN
             ELSE
               Info = 4
               RETURN
             END IF
-            IF ( Nb==0 ) RETURN
+            IF( Nb==0 ) RETURN
             !
             !
             !     SOLUTION PHASE
@@ -320,14 +319,14 @@ SUBROUTINE ULSIA(A,Mda,M,N,B,Mdb,Nb,Re,Ae,Key,Mode,Np,Krank,Ksure,Rnorm,W,&
             m1 = 1
             m2 = m1 + M
             m3 = m2 + M
-            IF ( Info==2 ) THEN
+            IF( Info==2 ) THEN
               !
-              IF ( Lw>=m3-1 ) THEN
+              IF( Lw>=m3-1 ) THEN
                 CALL U12US(A,Mda,M,N,B,Mdb,Nb,Mode,Krank,Rnorm,W(m1),W(m2),&
                   Iwork(m1),Iwork(m2))
                 RETURN
               END IF
-            ELSEIF ( Lw>=m2-1 ) THEN
+            ELSEIF( Lw>=m2-1 ) THEN
               CALL U12US(A,Mda,M,N,B,Mdb,Nb,Mode,Krank,Rnorm,W(m1),W(m1),&
                 Iwork(m1),Iwork(m2))
               RETURN
@@ -337,13 +336,13 @@ SUBROUTINE ULSIA(A,Mda,M,N,B,Mdb,Nb,Re,Ae,Key,Mode,Np,Krank,Ksure,Rnorm,W,&
           Info = -1
           RETURN
         END IF
-        10  CALL XERMSG('ULSIA','RE(I) .LT. 0',2,1)
+        10  CALL XERMSG('ULSIA','RE(I) < 0',2,1)
         RETURN
       END IF
-      20  CALL XERMSG('ULSIA','RE(I) .GT. 1',2,1)
+      20  CALL XERMSG('ULSIA','RE(I) > 1',2,1)
       RETURN
     END IF
   END IF
-  100  CALL XERMSG('ULSIA','AE(I) .LT. 0',2,1)
+  100  CALL XERMSG('ULSIA','AE(I) < 0',2,1)
   RETURN
 END SUBROUTINE ULSIA

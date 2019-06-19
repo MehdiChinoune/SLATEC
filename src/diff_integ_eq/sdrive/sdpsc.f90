@@ -1,7 +1,6 @@
 !** SDPSC
 SUBROUTINE SDPSC(Ksgn,N,Nq,Yh)
-  !>
-  !  Subroutine SDPSC computes the predicted YH values by
+  !> Subroutine SDPSC computes the predicted YH values by
   !            effectively multiplying the YH array by the Pascal triangle
   !            matrix when KSGN is +1, and performs the inverse function
   !            when KSGN is -1.
@@ -28,7 +27,7 @@ SUBROUTINE SDPSC(Ksgn,N,Nq,Yh)
   REAL(SP) :: Yh(N,Nq+1)
   INTEGER :: i, j, j1, j2
   !* FIRST EXECUTABLE STATEMENT  SDPSC
-  IF ( Ksgn>0 ) THEN
+  IF( Ksgn>0 ) THEN
     DO j1 = 1, Nq
       DO j2 = j1, Nq
         j = Nq - j2 + j1

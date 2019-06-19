@@ -1,7 +1,6 @@
 !** PPADD
 SUBROUTINE PPADD(N,Ierror,A,C,Cbp,Bp,Bh)
-  !>
-  !  Subsidiary to BLKTRI
+  !> Subsidiary to BLKTRI
   !***
   ! **Library:**   SLATEC
   !***
@@ -42,12 +41,12 @@ SUBROUTINE PPADD(N,Ierror,A,C,Cbp,Bp,Bh)
   !* FIRST EXECUTABLE STATEMENT  PPADD
   scnv = SQRT(cnv_com)
   iz = N
-  IF ( Bp(N)<Bp(1) ) THEN
+  IF( Bp(N)<Bp(1) ) THEN
     DO j = 1, N
       nt = N - j
       Bh(j) = Bp(nt+1)
     END DO
-  ELSEIF ( Bp(N)==Bp(1) ) THEN
+  ELSEIF( Bp(N)==Bp(1) ) THEN
     GOTO 300
   ELSE
     DO j = 1, N
@@ -57,15 +56,15 @@ SUBROUTINE PPADD(N,Ierror,A,C,Cbp,Bp,Bh)
   ncmplx_com = 0
   modiz = MOD(iz,2)
   is = 1
-  IF ( modiz/=0 ) THEN
-    IF ( A(1)<0 ) GOTO 100
-    IF ( A(1)==0 ) GOTO 300
+  IF( modiz/=0 ) THEN
+    IF( A(1)<0 ) GOTO 100
+    IF( A(1)==0 ) GOTO 300
   END IF
   xl = Bh(1)
   db = Bh(3) - Bh(1)
   DO
     xl = xl - db
-    IF ( PSGF(xl,iz,C,A,Bh)>0 ) THEN
+    IF( PSGF(xl,iz,C,A,Bh)>0 ) THEN
       sgn = -1.
       Cbp(1) = CMPLX(BSRH(xl,Bh(1),iz,C,A,Bh,PSGF,sgn),0.)
       is = 2
@@ -74,9 +73,9 @@ SUBROUTINE PPADD(N,Ierror,A,C,Cbp,Bp,Bh)
   END DO
   100 CONTINUE
   IF = iz - 1
-  IF ( modiz/=0 ) THEN
-    IF ( A(1)<0 ) THEN
-    ELSEIF ( A(1)==0 ) THEN
+  IF( modiz/=0 ) THEN
+    IF( A(1)<0 ) THEN
+    ELSEIF( A(1)==0 ) THEN
       GOTO 300
     ELSE
       GOTO 200
@@ -86,7 +85,7 @@ SUBROUTINE PPADD(N,Ierror,A,C,Cbp,Bp,Bh)
   db = Bh(iz) - Bh(iz-2)
   DO
     xr = xr + db
-    IF ( PSGF(xr,iz,C,A,Bh)>=0 ) THEN
+    IF( PSGF(xr,iz,C,A,Bh)>=0 ) THEN
       sgn = 1.
       Cbp(iz) = CMPLX(BSRH(Bh(iz),xr,iz,C,A,Bh,PSGF,sgn),0.)
       if = iz - 2
@@ -100,8 +99,8 @@ SUBROUTINE PPADD(N,Ierror,A,C,Cbp,Bp,Bh)
     sgn = -1.
     xm = BSRH(xl,xr,iz,C,A,Bh,PPSPF,sgn)
     psg = PSGF(xm,iz,C,A,Bh)
-    IF ( ABS(psg)>eps_com ) THEN
-      IF ( psg*PPSGF(xm,iz,C,A,Bh)<0 ) THEN
+    IF( ABS(psg)>eps_com ) THEN
+      IF( psg*PPSGF(xm,iz,C,A,Bh)<0 ) THEN
         !
         !     CASE OF A REAL ZERO
         !
@@ -110,7 +109,7 @@ SUBROUTINE PPADD(N,Ierror,A,C,Cbp,Bp,Bh)
         sgn = -1.
         Cbp(ig+1) = CMPLX(BSRH(xm,Bh(ig+1),iz,C,A,Bh,PSGF,sgn),0.)
         CYCLE
-      ELSEIF ( psg*PPSGF(xm,iz,C,A,Bh)/=0 ) THEN
+      ELSEIF( psg*PPSGF(xm,iz,C,A,Bh)/=0 ) THEN
         !
         !     CASE OF A COMPLEX ZERO
         !
@@ -137,38 +136,38 @@ SUBROUTINE PPADD(N,Ierror,A,C,Cbp,Bp,Bh)
       fp = fp + dd
       fpp = fpp - dd*dd
     END DO
-    IF ( modiz/=0 ) THEN
+    IF( modiz/=0 ) THEN
       f = (1.,0.) + fsg + hsg
     ELSE
       f = (1.,0.) - fsg - hsg
     END IF
     i3 = 0
-    IF ( ABS(fp)>0 ) THEN
+    IF( ABS(fp)>0 ) THEN
       i3 = 1
       r3 = -f/fp
     END IF
-    IF ( ABS(fpp)<=0 ) THEN
+    IF( ABS(fpp)<=0 ) THEN
       r1 = r3
     ELSE
       cdis = SQRT(fp**2-2.*f*fpp)
       r1 = cdis - fp
       r2 = -fp - cdis
-      IF ( ABS(r1)<=ABS(r2) ) THEN
+      IF( ABS(r1)<=ABS(r2) ) THEN
         r1 = r2/fpp
       ELSE
         r1 = r1/fpp
       END IF
       r2 = 2.*f/fpp/r1
-      IF ( ABS(r2)<ABS(r1) ) r1 = r2
-      IF ( i3>0 ) THEN
-        IF ( ABS(r3)<ABS(r1) ) r1 = r3
+      IF( ABS(r2)<ABS(r1) ) r1 = r2
+      IF( i3>0 ) THEN
+        IF( ABS(r3)<ABS(r1) ) r1 = r3
       END IF
     END IF
     cx = cx + r1
     it = it + 1
-    IF ( it>50 ) GOTO 300
-    IF ( ABS(r1)>scnv ) GOTO 250
-    IF ( icv<=0 ) THEN
+    IF( it>50 ) GOTO 300
+    IF( ABS(r1)>scnv ) GOTO 250
+    IF( icv<=0 ) THEN
       icv = 1
       GOTO 250
     ELSE
@@ -176,7 +175,7 @@ SUBROUTINE PPADD(N,Ierror,A,C,Cbp,Bp,Bh)
       Cbp(ig+1) = CONJG(cx)
     END IF
   END DO
-  IF ( ABS(Cbp(N))<ABS(Cbp(1)) ) THEN
+  IF( ABS(Cbp(N))<ABS(Cbp(1)) ) THEN
     nhalf = N/2
     DO j = 1, nhalf
       nt = N - j
@@ -184,12 +183,12 @@ SUBROUTINE PPADD(N,Ierror,A,C,Cbp,Bp,Bh)
       Cbp(j) = Cbp(nt+1)
       Cbp(nt+1) = cx
     END DO
-  ELSEIF ( ABS(Cbp(N))==ABS(Cbp(1)) ) THEN
+  ELSEIF( ABS(Cbp(N))==ABS(Cbp(1)) ) THEN
     GOTO 300
   END IF
   ncmplx_com = 1
   DO j = 2, iz
-    IF ( AIMAG(Cbp(j))/=0 ) RETURN
+    IF( AIMAG(Cbp(j))/=0 ) RETURN
   END DO
   ncmplx_com = 0
   DO j = 2, iz

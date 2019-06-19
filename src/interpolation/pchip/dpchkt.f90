@@ -1,7 +1,6 @@
 !** DPCHKT
 SUBROUTINE DPCHKT(N,X,Knotyp,T)
-  !>
-  !  Compute B-spline knot sequence for DPCHBS.
+  !> Compute B-spline knot sequence for DPCHBS.
   !***
   ! **Library:**   SLATEC (PCHIP)
   !***
@@ -24,9 +23,9 @@ SUBROUTINE DPCHKT(N,X,Knotyp,T)
   !  Output arguments:  T.
   !
   !  Restrictions/assumptions:
-  !     1. N.GE.2 .  (not checked)
-  !     2. X(i).LT.X(i+1), i=1,...,N .  (not checked)
-  !     3. 0.LE.KNOTYP.LE.2 .  (Acts like KNOTYP=0 for any other value.)
+  !     1. N>=2 .  (not checked)
+  !     2. X(i)<X(i+1), i=1,...,N .  (not checked)
+  !     3. 0<=KNOTYP<=2 .  (Acts like KNOTYP=0 for any other value.)
   !
   !***
   ! **See also:**  DPCHBS
@@ -52,12 +51,12 @@ SUBROUTINE DPCHKT(N,X,Knotyp,T)
   !
   !  Declare arguments.
   !
-  INTEGER N, Knotyp
+  INTEGER :: N, Knotyp
   REAL(DP) :: X(N), T(2*N+4)
   !
   !  Declare local variables.
   !
-  INTEGER j, k, ndim
+  INTEGER :: j, k, ndim
   REAL(DP) :: hbeg, hend
   !* FIRST EXECUTABLE STATEMENT  DPCHKT
   !
@@ -80,11 +79,11 @@ SUBROUTINE DPCHKT(N,X,Knotyp,T)
   !
   hbeg = X(2) - X(1)
   hend = X(N) - X(N-1)
-  IF ( Knotyp==1 ) THEN
+  IF( Knotyp==1 ) THEN
     !          Extrapolate.
     T(2) = X(1) - hbeg
     T(ndim+3) = X(N) + hend
-  ELSEIF ( Knotyp==2 ) THEN
+  ELSEIF( Knotyp==2 ) THEN
     !          Periodic.
     T(2) = X(1) - hend
     T(ndim+3) = X(N) + hbeg

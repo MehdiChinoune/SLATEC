@@ -1,7 +1,6 @@
 !** SINQI
 SUBROUTINE SINQI(N,Wsave)
-  !>
-  !  Initialize a work array for SINQF and SINQB.
+  !> Initialize a work array for SINQF and SINQB.
   !***
   ! **Library:**   SLATEC (FFTPACK)
   !***

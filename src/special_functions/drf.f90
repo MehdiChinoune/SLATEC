@@ -1,7 +1,6 @@
 !** DRF
 REAL(DP) FUNCTION DRF(X,Y,Z,Ier)
-  !>
-  !  Compute the incomplete or complete elliptic integral of the
+  !> Compute the incomplete or complete elliptic integral of the
   !            1st kind.  For X, Y, and Z non-negative and at most one of
   !            them zero, RF(X,Y,Z) = Integral from zero to infinity of
   !                                -1/2     -1/2     -1/2
@@ -84,9 +83,9 @@ REAL(DP) FUNCTION DRF(X,Y,Z,Ier)
   !         Value of IER assigned by the DRF routine
   !
   !                  Value assigned         Error Message Printed
-  !                  IER = 1                MIN(X,Y,Z) .LT. 0.0D0
-  !                      = 2                MIN(X+Y,X+Z,Y+Z) .LT. LOLIM
-  !                      = 3                MAX(X,Y,Z) .GT. UPLIM
+  !                  IER = 1                MIN(X,Y,Z) < 0.0D0
+  !                      = 2                MIN(X+Y,X+Z,Y+Z) < LOLIM
+  !                      = 3                MAX(X,Y,Z) > UPLIM
   !
   !
   !
@@ -271,34 +270,34 @@ REAL(DP) FUNCTION DRF(X,Y,Z,Ier)
   !         CALL ERROR HANDLER IF NECESSARY.
   !
   DRF = 0.0D0
-  IF ( MIN(X,Y,Z)<0.0D0 ) THEN
+  IF( MIN(X,Y,Z)<0.0D0 ) THEN
     Ier = 1
     WRITE (xern3,'(1PE15.6)') X
     WRITE (xern4,'(1PE15.6)') Y
     WRITE (xern5,'(1PE15.6)') Z
-    CALL XERMSG('DRF','MIN(X,Y,Z).LT.0 WHERE X = '//xern3//&
+    CALL XERMSG('DRF','MIN(X,Y,Z)<0 WHERE X = '//xern3//&
       ' Y = '//xern4//' AND Z = '//xern5,1,1)
     RETURN
   END IF
   !
-  IF ( MAX(X,Y,Z)>uplim ) THEN
+  IF( MAX(X,Y,Z)>uplim ) THEN
     Ier = 3
     WRITE (xern3,'(1PE15.6)') X
     WRITE (xern4,'(1PE15.6)') Y
     WRITE (xern5,'(1PE15.6)') Z
     WRITE (xern6,'(1PE15.6)') uplim
-    CALL XERMSG('DRF','MAX(X,Y,Z).GT.UPLIM WHERE X = '//xern3//&
+    CALL XERMSG('DRF','MAX(X,Y,Z)>UPLIM WHERE X = '//xern3//&
       ' Y = '//xern4//' Z = '//xern5//' AND UPLIM = '//xern6,3,1)
     RETURN
   END IF
   !
-  IF ( MIN(X+Y,X+Z,Y+Z)<lolim ) THEN
+  IF( MIN(X+Y,X+Z,Y+Z)<lolim ) THEN
     Ier = 2
     WRITE (xern3,'(1PE15.6)') X
     WRITE (xern4,'(1PE15.6)') Y
     WRITE (xern5,'(1PE15.6)') Z
     WRITE (xern6,'(1PE15.6)') lolim
-    CALL XERMSG('DRF','MIN(X+Y,X+Z,Y+Z).LT.LOLIM WHERE X = '//&
+    CALL XERMSG('DRF','MIN(X+Y,X+Z,Y+Z)<LOLIM WHERE X = '//&
       xern3//' Y = '//xern4//' Z = '//xern5//' AND LOLIM = '//xern6,2,1)
     RETURN
   END IF
@@ -314,7 +313,7 @@ REAL(DP) FUNCTION DRF(X,Y,Z,Ier)
     yndev = 2.0D0 - (mu+yn)/mu
     zndev = 2.0D0 - (mu+zn)/mu
     epslon = MAX(ABS(xndev),ABS(yndev),ABS(zndev))
-    IF ( epslon<errtol ) THEN
+    IF( epslon<errtol ) THEN
       !
       e2 = xndev*yndev - zndev*zndev
       e3 = xndev*yndev*zndev

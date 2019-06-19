@@ -1,7 +1,6 @@
 !** DDATRP
 SUBROUTINE DDATRP(X,Xout,Yout,Ypout,Neq,Kold,Phi,Psi)
-  !>
-  !  Interpolation routine for DDASSL.
+  !> Interpolation routine for DDASSL.
   !***
   ! **Library:**   SLATEC (DASSL)
   !***

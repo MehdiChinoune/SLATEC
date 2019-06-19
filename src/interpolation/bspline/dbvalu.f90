@@ -1,7 +1,6 @@
 !** DBVALU
 REAL(DP) FUNCTION DBVALU(T,A,N,K,Ideriv,X,Inbv,Work)
-  !>
-  !  Evaluate the B-representation of a B-spline at X for the
+  !> Evaluate the B-representation of a B-spline at X for the
   !            function value or any of its derivatives.
   !***
   ! **Library:**   SLATEC
@@ -26,7 +25,7 @@ REAL(DP) FUNCTION DBVALU(T,A,N,K,Ideriv,X,Inbv,Work)
   !         derivatives on IDERIV=1,2,...,K-1.  Right limiting values
   !         (right derivatives) are returned except at the right end
   !         point X=T(N+1) where left limiting values are computed.  The
-  !         spline is defined on T(K) .LE. X .LE. T(N+1).  DBVALU returns
+  !         spline is defined on T(K) <= X <= T(N+1).  DBVALU returns
   !         a fatal error message when X is outside of this interval.
   !
   !         To compute left derivatives or left limiting values at a
@@ -41,10 +40,10 @@ REAL(DP) FUNCTION DBVALU(T,A,N,K,Ideriv,X,Inbv,Work)
   !          A       - B-spline coefficient vector of length N
   !          N       - number of B-spline coefficients
   !                    N = sum of knot multiplicities-K
-  !          K       - order of the B-spline, K .GE. 1
-  !          IDERIV  - order of the derivative, 0 .LE. IDERIV .LE. K-1
+  !          K       - order of the B-spline, K >= 1
+  !          IDERIV  - order of the derivative, 0 <= IDERIV <= K-1
   !                    IDERIV = 0 returns the B-spline value
-  !          X       - argument, T(K) .LE. X .LE. T(N+1)
+  !          X       - argument, T(K) <= X <= T(N+1)
   !          INBV    - an initialization parameter which must be set
   !                    to 1 the first time DBVALU is called.
   !
@@ -78,43 +77,43 @@ REAL(DP) FUNCTION DBVALU(T,A,N,K,Ideriv,X,Inbv,Work)
   !
   INTEGER :: Ideriv, Inbv, K, N
   REAL(DP) :: A(N), T(N+K), Work(3*K), X
-  INTEGER i, iderp1, ihi, ihmkmj, ilo, imk, imkpj, &
+  INTEGER :: i, iderp1, ihi, ihmkmj, ilo, imk, imkpj, &
     ipj, ip1, ip1mj, j, jj, j1, j2, kmider, kmj, km1, kpk, mflag
   REAL(DP) :: fkmj
   !* FIRST EXECUTABLE STATEMENT  DBVALU
   DBVALU = 0.0D0
-  IF ( K<1 ) THEN
-    CALL XERMSG('DBVALU','K DOES NOT SATISFY K.GE.1',2,1)
+  IF( K<1 ) THEN
+    CALL XERMSG('DBVALU','K DOES NOT SATISFY K>=1',2,1)
     RETURN
-  ELSEIF ( N<K ) THEN
+  ELSEIF( N<K ) THEN
     !
     !
-    CALL XERMSG('DBVALU','N DOES NOT SATISFY N.GE.K',2,1)
+    CALL XERMSG('DBVALU','N DOES NOT SATISFY N>=K',2,1)
     RETURN
-  ELSEIF ( Ideriv<0.OR.Ideriv>=K ) THEN
-    CALL XERMSG('DBVALU','IDERIV DOES NOT SATISFY 0.LE.IDERIV.LT.K',2,1)
+  ELSEIF( Ideriv<0 .OR. Ideriv>=K ) THEN
+    CALL XERMSG('DBVALU','IDERIV DOES NOT SATISFY 0<=IDERIV<K',2,1)
     RETURN
   ELSE
     kmider = K - Ideriv
     !
-    !- ** FIND *I* IN (K,N) SUCH THAT T(I) .LE. X .LT. T(I+1)
-    !     (OR, .LE. T(I+1) IF T(I) .LT. T(I+1) = T(N+1)).
+    !- ** FIND *I* IN (K,N) SUCH THAT T(I) <= X < T(I+1)
+    !     (OR, <= T(I+1) IF T(I) < T(I+1) = T(N+1)).
     km1 = K - 1
     CALL DINTRV(T,N+1,X,Inbv,i,mflag)
-    IF ( X<T(K) ) THEN
+    IF( X<T(K) ) THEN
       CALL XERMSG('DBVALU',&
         'X IS N0T GREATER THAN OR EQUAL TO T(K)',2,1)
       RETURN
     ELSE
-      IF ( mflag/=0 ) THEN
-        IF ( X>T(i) ) THEN
+      IF( mflag/=0 ) THEN
+        IF( X>T(i) ) THEN
           CALL XERMSG('DBVALU',&
             'X IS NOT LESS THAN OR EQUAL TO T(N+1)',2,1)
           RETURN
         ELSE
-          DO WHILE ( i/=K )
+          DO WHILE( i/=K )
             i = i - 1
-            IF ( X/=T(i) ) GOTO 20
+            IF( X/=T(i) ) GOTO 20
           END DO
           CALL XERMSG('DBVALU',&
             'A LEFT LIMITING VALUE CANNOT BE OBTAINED AT T(K)',2,1)
@@ -130,7 +129,7 @@ REAL(DP) FUNCTION DBVALU(T,A,N,K,Ideriv,X,Inbv,Work)
         imkpj = imk + j
         Work(j) = A(imkpj)
       END DO
-      IF ( Ideriv/=0 ) THEN
+      IF( Ideriv/=0 ) THEN
         DO j = 1, Ideriv
           kmj = K - j
           fkmj = kmj
@@ -144,7 +143,7 @@ REAL(DP) FUNCTION DBVALU(T,A,N,K,Ideriv,X,Inbv,Work)
       !
       !- ** COMPUTE VALUE AT *X* IN (T(I),(T(I+1)) OF IDERIV-TH DERIVATIVE,
       !     GIVEN ITS RELEVANT B-SPLINE COEFF. IN AJ(1),...,AJ(K-IDERIV).
-      IF ( Ideriv/=km1 ) THEN
+      IF( Ideriv/=km1 ) THEN
         ip1 = i + 1
         kpk = K + K
         j1 = K + 1

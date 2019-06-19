@@ -1,7 +1,6 @@
 !** SBHIN
 SUBROUTINE SBHIN(N,Nelt,Ia,Ja,A,Isym,Soln,Rhs,Iunit,Job)
-  !>
-  !  Read a Sparse Linear System in the Boeing/Harwell Format.
+  !> Read a Sparse Linear System in the Boeing/Harwell Format.
   !            The matrix is read in and if the right hand side is also
   !            present in the input file then it too is read in.  The
   !            matrix is then modified to be in the SLAP Column format.
@@ -160,13 +159,13 @@ SUBROUTINE SBHIN(N,Nelt,Ia,Ja,A,Isym,Soln,Rhs,Iunit,Job)
   !   930701  Updated CATEGORY section.  (FNF, WRB)
 
   !     .. Scalar Arguments ..
-  INTEGER Isym, Iunit, Job, N, Nelt
+  INTEGER :: Isym, Iunit, Job, N, Nelt
   !     .. Array Arguments ..
-  REAL(SP) A(Nelt), Rhs(N), Soln(N)
-  INTEGER Ia(Nelt), Ja(Nelt)
+  REAL(SP) :: A(Nelt), Rhs(N), Soln(N)
+  INTEGER :: Ia(Nelt), Ja(Nelt)
   !     .. Local Scalars ..
-  REAL(SP) temp
-  INTEGER i, ibgn, icol, iend, itemp, j, jobret, ncol, nele, nind, &
+  REAL(SP) :: temp
+  INTEGER :: i, ibgn, icol, iend, itemp, j, jobret, ncol, nele, nind, &
     nline, nnvls, npls, nrhsls, nrils, nrow
   CHARACTER code*3, pntfmt*16, rinfmt*16, nvlfmt*20, rhsfmt*20, title*80
   !     .. Intrinsic Functions ..
@@ -192,12 +191,12 @@ SUBROUTINE SBHIN(N,Nelt,Ia,Ja,A,Isym,Soln,Rhs,Iunit,Job)
   READ (Iunit,99004) pntfmt, rinfmt, nvlfmt, rhsfmt
   99004 FORMAT (2A16,2A20)
   !
-  IF ( nrow>N ) THEN
+  IF( nrow>N ) THEN
     N = nrow
     jobret = -1
     GOTO 100
   END IF
-  IF ( nind>Nelt ) THEN
+  IF( nind>Nelt ) THEN
     Nelt = nind
     jobret = -2
     GOTO 100
@@ -207,9 +206,9 @@ SUBROUTINE SBHIN(N,Nelt,Ia,Ja,A,Isym,Soln,Rhs,Iunit,Job)
   !
   N = nrow
   Nelt = nind
-  IF ( code=='RUA' ) THEN
+  IF( code=='RUA' ) THEN
     Isym = 0
-  ELSEIF ( code=='RSA' ) THEN
+  ELSEIF( code=='RSA' ) THEN
     Isym = 1
   ELSE
     jobret = -3
@@ -218,16 +217,16 @@ SUBROUTINE SBHIN(N,Nelt,Ia,Ja,A,Isym,Soln,Rhs,Iunit,Job)
   READ (Iunit,pntfmt) (Ja(i),i=1,N+1)
   READ (Iunit,rinfmt) (Ia(i),i=1,Nelt)
   jobret = 10
-  IF ( nnvls>0 ) THEN
+  IF( nnvls>0 ) THEN
     READ (Iunit,nvlfmt) (A(i),i=1,Nelt)
     jobret = 0
   END IF
-  IF ( MOD(Job,2)==1 ) THEN
+  IF( MOD(Job,2)==1 ) THEN
     !
     !         User requests that the RHS be read in.  If it is in the input
     !         file, read it in; otherwise just zero it out.
     !
-    IF ( nrhsls>0 ) THEN
+    IF( nrhsls>0 ) THEN
       READ (5,rhsfmt) (Rhs(i),i=1,N)
       jobret = jobret + 1
     ELSE
@@ -236,7 +235,7 @@ SUBROUTINE SBHIN(N,Nelt,Ia,Ja,A,Isym,Soln,Rhs,Iunit,Job)
       END DO
     END IF
   END IF
-  IF ( (Job==2).OR.(Job==3) ) THEN
+  IF( (Job==2) .OR. (Job==3) ) THEN
     !
     !         User requests that the SOLN be read in.
     !         Just zero out the array.
@@ -254,7 +253,7 @@ SUBROUTINE SBHIN(N,Nelt,Ia,Ja,A,Isym,Soln,Rhs,Iunit,Job)
     ibgn = Ja(icol)
     iend = Ja(icol+1) - 1
     DO i = ibgn, iend
-      IF ( Ia(i)==icol ) THEN
+      IF( Ia(i)==icol ) THEN
         !
         !              Swap the diagonal element with the first element in the
         !              column.
@@ -269,10 +268,10 @@ SUBROUTINE SBHIN(N,Nelt,Ia,Ja,A,Isym,Soln,Rhs,Iunit,Job)
       END IF
     END DO
     ibgn = ibgn + 1
-    IF ( ibgn<iend ) THEN
+    IF( ibgn<iend ) THEN
       DO i = ibgn, iend
         DO j = i + 1, iend
-          IF ( Ia(i)>Ia(j) ) THEN
+          IF( Ia(i)>Ia(j) ) THEN
             itemp = Ia(i)
             Ia(i) = Ia(j)
             Ia(j) = itemp

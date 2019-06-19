@@ -1,7 +1,6 @@
 !** XERPRN
 SUBROUTINE XERPRN(Prefix,Npref,Messg,Nwrap)
-  !>
-  !  Print error messages processed by XERMSG.
+  !> Print error messages processed by XERMSG.
   !***
   ! **Library:**   SLATEC (XERROR)
   !***
@@ -82,11 +81,11 @@ SUBROUTINE XERPRN(Prefix,Npref,Messg,Nwrap)
   !   900510  Added code to break messages between words.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
-  INTEGER i, idelta, lenmsg, lpiece, lpref, lwrap, n, nextc
+  INTEGER :: i, idelta, lenmsg, lpiece, lpref, lwrap, n, nextc
   CHARACTER(*) Prefix, Messg
-  INTEGER Npref, Nwrap
+  INTEGER :: Npref, Nwrap
   CHARACTER(148) :: cbuff
-  INTEGER iu(5), nunit
+  INTEGER :: iu(5), nunit
   CHARACTER(2), PARAMETER :: NEWLIN = '$$'
   !* FIRST EXECUTABLE STATEMENT  XERPRN
   CALL XGETUA(iu,nunit)
@@ -97,20 +96,20 @@ SUBROUTINE XERPRN(Prefix,Npref,Messg,Nwrap)
   !
   n = I1MACH(4)
   DO i = 1, nunit
-    IF ( iu(i)==0 ) iu(i) = n
+    IF( iu(i)==0 ) iu(i) = n
   END DO
   !
   !       LPREF IS THE LENGTH OF THE PREFIX.  THE PREFIX IS PLACED AT THE
   !       BEGINNING OF CBUFF, THE CHARACTER BUFFER, AND KEPT THERE DURING
   !       THE REST OF THIS ROUTINE.
   !
-  IF ( Npref<0 ) THEN
+  IF( Npref<0 ) THEN
     lpref = LEN(Prefix)
   ELSE
     lpref = Npref
   END IF
   lpref = MIN(16,lpref)
-  IF ( lpref/=0 ) cbuff(1:lpref) = Prefix
+  IF( lpref/=0 ) cbuff(1:lpref) = Prefix
   !
   !       LWRAP IS THE MAXIMUM NUMBER OF CHARACTERS WE WANT TO TAKE AT ONE
   !       TIME FROM MESSG TO PRINT ON ONE LINE.
@@ -122,13 +121,13 @@ SUBROUTINE XERPRN(Prefix,Npref,Messg,Nwrap)
   lenmsg = LEN(Messg)
   n = lenmsg
   DO i = 1, n
-    IF ( Messg(lenmsg:lenmsg)/=' ' ) EXIT
+    IF( Messg(lenmsg:lenmsg)/=' ' ) EXIT
     lenmsg = lenmsg - 1
   END DO
   !
   !       IF THE MESSAGE IS ALL BLANKS, THEN PRINT ONE BLANK LINE.
   !
-  IF ( lenmsg==0 ) THEN
+  IF( lenmsg==0 ) THEN
     cbuff(lpref+1:lpref+1) = ' '
     DO i = 1, nunit
       WRITE (iu(i),'(A)') cbuff(1:lpref+1)
@@ -151,12 +150,12 @@ SUBROUTINE XERPRN(Prefix,Npref,Messg,Nwrap)
   !       OF CHARACTERS THAT SHOULD BE TAKEN FROM MESSG STARTING AT
   !       POSITION NEXTC.
   !
-  !       LPIECE .EQ. 0   THE NEW LINE SENTINEL DOES NOT OCCUR IN THE
+  !       LPIECE = 0   THE NEW LINE SENTINEL DOES NOT OCCUR IN THE
   !                       REMAINDER OF THE CHARACTER STRING.  LPIECE
   !                       SHOULD BE SET TO LWRAP OR LENMSG+1-NEXTC,
   !                       WHICHEVER IS LESS.
   !
-  !       LPIECE .EQ. 1   THE NEW LINE SENTINEL STARTS AT MESSG(NEXTC:
+  !       LPIECE = 1   THE NEW LINE SENTINEL STARTS AT MESSG(NEXTC:
   !                       NEXTC).  LPIECE IS EFFECTIVELY ZERO, AND WE
   !                       PRINT NOTHING TO AVOID PRODUCING UNNECESSARY
   !                       BLANK LINES.  THIS TAKES CARE OF THE SITUATION
@@ -165,26 +164,26 @@ SUBROUTINE XERPRN(Prefix,Npref,Messg,Nwrap)
   !                       SENTINEL FOLLOWED BY MORE CHARACTERS.  NEXTC
   !                       SHOULD BE INCREMENTED BY 2.
   !
-  !       LPIECE .GT. LWRAP+1  REDUCE LPIECE TO LWRAP.
+  !       LPIECE > LWRAP+1  REDUCE LPIECE TO LWRAP.
   !
-  !       ELSE            THIS LAST CASE MEANS 2 .LE. LPIECE .LE. LWRAP+1
+  !       ELSE            THIS LAST CASE MEANS 2 <= LPIECE <= LWRAP+1
   !                       RESET LPIECE = LPIECE-1.  NOTE THAT THIS
-  !                       PROPERLY HANDLES THE END CASE WHERE LPIECE .EQ.
+  !                       PROPERLY HANDLES THE END CASE WHERE LPIECE =
   !                       LWRAP+1.  THAT IS, THE SENTINEL FALLS EXACTLY
   !                       AT THE END OF A LINE.
   !
   nextc = 1
   DO
     lpiece = INDEX(Messg(nextc:lenmsg),NEWLIN)
-    IF ( lpiece==0 ) THEN
+    IF( lpiece==0 ) THEN
       !
       !       THERE WAS NO NEW LINE SENTINEL FOUND.
       !
       idelta = 0
       lpiece = MIN(lwrap,lenmsg+1-nextc)
-      IF ( lpiece<lenmsg+1-nextc ) THEN
+      IF( lpiece<lenmsg+1-nextc ) THEN
         DO i = lpiece + 1, 2, -1
-          IF ( Messg(nextc+i-1:nextc+i-1)==' ' ) THEN
+          IF( Messg(nextc+i-1:nextc+i-1)==' ' ) THEN
             lpiece = i - 1
             idelta = 1
             EXIT
@@ -193,21 +192,21 @@ SUBROUTINE XERPRN(Prefix,Npref,Messg,Nwrap)
       END IF
       cbuff(lpref+1:lpref+lpiece) = Messg(nextc:nextc+lpiece-1)
       nextc = nextc + lpiece + idelta
-    ELSEIF ( lpiece==1 ) THEN
+    ELSEIF( lpiece==1 ) THEN
       !
       !       WE HAVE A NEW LINE SENTINEL AT MESSG(NEXTC:NEXTC+1).
       !       DON'T PRINT A BLANK LINE.
       !
       nextc = nextc + 2
       CYCLE
-    ELSEIF ( lpiece>lwrap+1 ) THEN
+    ELSEIF( lpiece>lwrap+1 ) THEN
       !
       !       LPIECE SHOULD BE SET DOWN TO LWRAP.
       !
       idelta = 0
       lpiece = lwrap
       DO i = lpiece + 1, 2, -1
-        IF ( Messg(nextc+i-1:nextc+i-1)==' ' ) THEN
+        IF( Messg(nextc+i-1:nextc+i-1)==' ' ) THEN
           lpiece = i - 1
           idelta = 1
           EXIT
@@ -217,7 +216,7 @@ SUBROUTINE XERPRN(Prefix,Npref,Messg,Nwrap)
       nextc = nextc + lpiece + idelta
     ELSE
       !
-      !       IF WE ARRIVE HERE, IT MEANS 2 .LE. LPIECE .LE. LWRAP+1.
+      !       IF WE ARRIVE HERE, IT MEANS 2 <= LPIECE <= LWRAP+1.
       !       WE SHOULD DECREMENT LPIECE BY ONE.
       !
       lpiece = lpiece - 1
@@ -231,6 +230,6 @@ SUBROUTINE XERPRN(Prefix,Npref,Messg,Nwrap)
       WRITE (iu(i),'(A)') cbuff(1:lpref+lpiece)
     END DO
     !
-    IF ( nextc>lenmsg ) EXIT
+    IF( nextc>lenmsg ) EXIT
   END DO
 END SUBROUTINE XERPRN

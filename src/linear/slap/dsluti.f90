@@ -1,7 +1,6 @@
 !** DSLUTI
 SUBROUTINE DSLUTI(N,B,X,Rwork,Iwork)
-  !>
-  !  SLAP MTSOLV for LDU Factorization.
+  !> SLAP MTSOLV for LDU Factorization.
   !            This routine acts as an interface between the SLAP generic
   !            MTSOLV calling convention and the routine that actually
   !                           -T
@@ -51,12 +50,12 @@ SUBROUTINE DSLUTI(N,B,X,Rwork,Iwork)
   !   930701  Updated CATEGORY section.  (FNF, WRB)
 
   !     .. Scalar Arguments ..
-  INTEGER N
+  INTEGER :: N
   !     .. Array Arguments ..
   REAL(DP) :: B(N), Rwork(*), X(N)
-  INTEGER Iwork(*)
+  INTEGER :: Iwork(*)
   !     .. Local Scalars ..
-  INTEGER locdin, locil, lociu, locjl, locju, locl, locu
+  INTEGER :: locdin, locil, lociu, locjl, locju, locl, locu
   !* FIRST EXECUTABLE STATEMENT  DSLUTI
   !
   !         Pull out the pointers to the L, D and U matrices and call

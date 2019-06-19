@@ -1,7 +1,6 @@
 !** DBVDER
 SUBROUTINE DBVDER(X,Y,Yp,G)
-  !>
-  !  Subsidiary to DBVSUP
+  !> Subsidiary to DBVSUP
   !***
   ! **Library:**   SLATEC
   !***
@@ -33,7 +32,7 @@ SUBROUTINE DBVDER(X,Y,Yp,G)
   !           0   ( if  NEQIVP = 0 )
   !     IVP =
   !           Number of differential equations integrated due to
-  !           the original boundary value problem   ( if  NEQIVP .GT. 0 )
+  !           the original boundary value problem   ( if  NEQIVP > 0 )
   !
   !     NOFST - For problems with auxiliary initial value equations,
   !             NOFST communicates to the routine DFMAT how to access
@@ -68,7 +67,7 @@ SUBROUTINE DBVDER(X,Y,Yp,G)
   !- *********************************************************************
   !
   !* FIRST EXECUTABLE STATEMENT  DBVDER
-  IF ( ivp_com>0 ) STOP
+  IF( ivp_com>0 ) STOP
   nofst_com = ivp_com
   na = 1
   DO k = 1, nfc_com
@@ -77,13 +76,13 @@ SUBROUTINE DBVDER(X,Y,Yp,G)
     na = na + ncomp_com
   END DO
   !
-  IF ( inhomo_com/=1 ) RETURN
+  IF( inhomo_com/=1 ) RETURN
   CALL DFMAT(X,Y(na:),Yp(na:))
   !
-  IF ( igofx_com==0 ) RETURN
-  IF ( X/=xsav_com ) THEN
-    IF ( ivp_com==0 ) CALL DGVEC(X,G)
-    IF ( ivp_com>0 ) STOP
+  IF( igofx_com==0 ) RETURN
+  IF( X/=xsav_com ) THEN
+    IF( ivp_com==0 ) CALL DGVEC(X,G)
+    IF( ivp_com>0 ) STOP
     xsav_com = X
   END IF
   !

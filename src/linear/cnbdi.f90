@@ -1,7 +1,6 @@
 !** CNBDI
 SUBROUTINE CNBDI(Abe,Lda,N,Ml,Mu,Ipvt,Det)
-  !>
-  !  Compute the determinant of a band matrix using the factors
+  !> Compute the determinant of a band matrix using the factors
   !            computed by CNBCO or CNBFA.
   !***
   ! **Library:**   SLATEC
@@ -24,7 +23,7 @@ SUBROUTINE CNBDI(Abe,Lda,N,Ml,Mu,Ipvt,Det)
   !
   !        ABE     COMPLEX(LDA, NC)
   !                the output from CNBCO or CNBFA.
-  !                NC must be .GE. 2*ML+MU+1 .
+  !                NC must be >= 2*ML+MU+1 .
   !
   !        LDA     INTEGER
   !                the leading dimension of the array  ABE .
@@ -46,7 +45,7 @@ SUBROUTINE CNBDI(Abe,Lda,N,Ml,Mu,Ipvt,Det)
   !        DET     COMPLEX(2)
   !                determinant of original matrix.
   !                Determinant = DET(1) * 10.0**DET(2)
-  !                with  1.0 .LE. CABS1(DET(1)) .LT. 10.0
+  !                with  1.0 <= CABS1(DET(1)) < 10.0
   !                or  DET(1) = 0.0 .
   !
   !***
@@ -74,14 +73,14 @@ SUBROUTINE CNBDI(Abe,Lda,N,Ml,Mu,Ipvt,Det)
   Det(2) = (0.0E0,0.0E0)
   ten = 10.0E0
   DO i = 1, N
-    IF ( Ipvt(i)/=i ) Det(1) = -Det(1)
+    IF( Ipvt(i)/=i ) Det(1) = -Det(1)
     Det(1) = Abe(i,Ml+1)*Det(1)
-    IF ( SCABS1(Det(1))==0.0E0 ) EXIT
-    DO WHILE ( SCABS1(Det(1))<1.0E0 )
+    IF( SCABS1(Det(1))==0.0E0 ) EXIT
+    DO WHILE( SCABS1(Det(1))<1.0E0 )
       Det(1) = CMPLX(ten,0.0E0)*Det(1)
       Det(2) = Det(2) - (1.0E0,0.0E0)
     END DO
-    DO WHILE ( SCABS1(Det(1))>=ten )
+    DO WHILE( SCABS1(Det(1))>=ten )
       Det(1) = Det(1)/CMPLX(ten,0.0E0)
       Det(2) = Det(2) + (1.0E0,0.0E0)
     END DO

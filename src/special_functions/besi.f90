@@ -1,7 +1,6 @@
 !** BESI
 SUBROUTINE BESI(X,Alpha,Kode,N,Y,Nz)
-  !>
-  !  Compute an N member sequence of I Bessel functions
+  !> Compute an N member sequence of I Bessel functions
   !            I/SUB(ALPHA+K-1)/(X), K=1,...,N or scaled Bessel functions
   !            EXP(-X)*I/SUB(ALPHA+K-1)/(X), K=1,...,N for non-negative
   !            ALPHA and X.
@@ -42,9 +41,9 @@ SUBROUTINE BESI(X,Alpha,Kode,N,Y,Nz)
   !     Description of Arguments
   !
   !         Input
-  !           X      - X .GE. 0.0E0
+  !           X      - X >= 0.0E0
   !           ALPHA  - order of first member of the sequence,
-  !                    ALPHA .GE. 0.0E0
+  !                    ALPHA >= 0.0E0
   !           KODE   - a parameter to indicate the scaling option
   !                    KODE=1 returns
   !                           Y(K)=        I/sub(ALPHA+K-1)/(X),
@@ -52,7 +51,7 @@ SUBROUTINE BESI(X,Alpha,Kode,N,Y,Nz)
   !                    KODE=2 returns
   !                           Y(K)=EXP(-X)*I/sub(ALPHA+K-1)/(X),
   !                                K=1,...,N
-  !           N      - number of members in the sequence, N .GE. 1
+  !           N      - number of members in the sequence, N >= 1
   !
   !         Output
   !           Y      - a vector whose first N components contain
@@ -62,18 +61,18 @@ SUBROUTINE BESI(X,Alpha,Kode,N,Y,Nz)
   !           NZ     - number of components of Y set to zero due to
   !                    underflow,
   !                    NZ=0  , normal return, computation completed
-  !                    NZ .NE. 0, last NZ components of Y set to zero,
+  !                    NZ /= 0, last NZ components of Y set to zero,
   !                             Y(K)=0.0E0, K=N-NZ+1,...,N.
   !
   !     Error Conditions
   !         Improper input arguments - a fatal error
   !         Overflow with KODE=1 - a fatal error
-  !         Underflow - a non-fatal error (NZ .NE. 0)
+  !         Underflow - a non-fatal error (NZ /= 0)
   !
   !***
   ! **References:**  D. E. Amos, S. L. Daniel and M. K. Weston, CDC 6600
   !                 subroutines IBESS and JBESS for Bessel functions
-  !                 I(NU,X) and J(NU,X), X .GE. 0, NU .GE. 0, ACM
+  !                 I(NU,X) and J(NU,X), X >= 0, NU >= 0, ACM
   !                 Transactions on Mathematical Software 3, (1977),
   !                 pp. 76-92.
   !               F. W. J. Olver, Tables of Bessel Functions of Moderate
@@ -95,8 +94,8 @@ SUBROUTINE BESI(X,Alpha,Kode,N,Y,Nz)
   !
   INTEGER :: Kode, N, Nz
   REAL(SP) :: Alpha, X, Y(N)
-  INTEGER i, ialp, in, is, i1, k, kk, km, kt, nn, ns
-  REAL(SP) ain, ak, akm, ans, ap, arg, atol, tolln, dfn, dtm, dx, earg, elim, &
+  INTEGER :: i, ialp, in, is, i1, k, kk, km, kt, nn, ns
+  REAL(SP) :: ain, ak, akm, ans, ap, arg, atol, tolln, dfn, dtm, dx, earg, elim, &
     etx, flgik, fn, fnf, fni, fnp1, fnu, gln, ra, s, sx, sxo2, s1, s2, t, ta, tb, &
     temp(3), tfn, tm, tol, trx, t2, xo2, xo2l, z
   REAL(SP), PARAMETER :: rttpi = 3.98942280401433E-01
@@ -115,27 +114,27 @@ SUBROUTINE BESI(X,Alpha,Kode,N,Y,Nz)
   i1 = I1MACH(11) + 1
   tolln = 2.303E0*gln*i1
   tolln = MIN(tolln,34.5388E0)
-  IF ( N<1 ) THEN
+  IF( N<1 ) THEN
     CALL XERMSG('BESI','N LESS THAN ONE.',2,1)
     RETURN
-  ELSEIF ( N==1 ) THEN
+  ELSEIF( N==1 ) THEN
     kt = 2
   END IF
   nn = N
-  IF ( Kode<1.OR.Kode>2 ) THEN
+  IF( Kode<1 .OR. Kode>2 ) THEN
     !
     !
     !
     CALL XERMSG('BESI','SCALING OPTION, KODE, NOT 1 OR 2.',2,1)
     RETURN
-  ELSEIF ( X<0 ) THEN
+  ELSEIF( X<0 ) THEN
     CALL XERMSG('BESI','X LESS THAN ZERO.',2,1)
     RETURN
-  ELSEIF ( X==0 ) THEN
-    IF ( Alpha<0 ) GOTO 1300
-    IF ( Alpha==0 ) THEN
+  ELSEIF( X==0 ) THEN
+    IF( Alpha<0 ) GOTO 1300
+    IF( Alpha==0 ) THEN
       Y(1) = 1.0E0
-      IF ( N==1 ) RETURN
+      IF( N==1 ) RETURN
       i1 = 2
     ELSE
       i1 = 1
@@ -145,7 +144,7 @@ SUBROUTINE BESI(X,Alpha,Kode,N,Y,Nz)
     END DO
     RETURN
   ELSE
-    IF ( Alpha<0.0E0 ) GOTO 1300
+    IF( Alpha<0.0E0 ) GOTO 1300
     !
     ialp = INT(Alpha)
     fni = ialp + N - 1
@@ -162,26 +161,26 @@ SUBROUTINE BESI(X,Alpha,Kode,N,Y,Nz)
     !     TO INFINITY AND ASYMPTOTIC EXPANSION FOR NU TO INFINITY ARE
     !     APPLIED.
     !
-    IF ( sxo2<=(fnu+1.0E0) ) THEN
+    IF( sxo2<=(fnu+1.0E0) ) THEN
       fn = fnu
       fnp1 = fn + 1.0E0
       xo2l = LOG(xo2)
       is = kt
-      IF ( X<=0.5E0 ) GOTO 500
+      IF( X<=0.5E0 ) GOTO 500
       ns = 0
-    ELSEIF ( X<=12.0E0 ) THEN
+    ELSEIF( X<=12.0E0 ) THEN
       xo2l = LOG(xo2)
       ns = INT(sxo2-fnu)
     ELSE
       fn = 0.55E0*fnu*fnu
       fn = MAX(17.0E0,fn)
-      IF ( X>=fn ) THEN
+      IF( X>=fn ) THEN
         !
         !     ASYMPTOTIC EXPANSION FOR X TO INFINITY
         !
         earg = rttpi/SQRT(X)
-        IF ( Kode==2 ) GOTO 1000
-        IF ( X>elim ) THEN
+        IF( Kode==2 ) GOTO 1000
+        IF( X>elim ) THEN
           CALL XERMSG('BESI','OVERFLOW, X TOO LARGE FOR KODE = 1.',6,1)
           RETURN
         ELSE
@@ -196,13 +195,13 @@ SUBROUTINE BESI(X,Alpha,Kode,N,Y,Nz)
         fn = dfn
         is = kt
         km = N - 1 + ns
-        IF ( km>0 ) is = 3
+        IF( km>0 ) is = 3
         !
         !     OVERFLOW TEST ON UNIFORM ASYMPTOTIC EXPANSION
         !
-        IF ( Kode==2 ) GOTO 100
-        IF ( Alpha<1.0E0 ) THEN
-          IF ( X<=elim ) GOTO 100
+        IF( Kode==2 ) GOTO 100
+        IF( Alpha<1.0E0 ) THEN
+          IF( X<=elim ) GOTO 100
           CALL XERMSG('BESI','OVERFLOW, X TOO LARGE FOR KODE = 1.',6,1)
           RETURN
         ELSE
@@ -211,12 +210,12 @@ SUBROUTINE BESI(X,Alpha,Kode,N,Y,Nz)
           gln = LOG((1.0E0+ra)/z)
           t = ra*(1.0E0-etx) + etx/(z+ra)
           arg = Alpha*(t-gln)
-          IF ( arg>elim ) THEN
+          IF( arg>elim ) THEN
             CALL XERMSG('BESI',&
               'OVERFLOW, X TOO LARGE FOR KODE = 1.',6,1)
             RETURN
           ELSE
-            IF ( km/=0 ) GOTO 100
+            IF( km/=0 ) GOTO 100
             GOTO 200
           END IF
         END IF
@@ -227,7 +226,7 @@ SUBROUTINE BESI(X,Alpha,Kode,N,Y,Nz)
     fn = dfn
     fnp1 = fn + 1.0E0
     is = kt
-    IF ( N-1+ns>0 ) is = 3
+    IF( N-1+ns>0 ) is = 3
     GOTO 500
   END IF
   !
@@ -239,7 +238,7 @@ SUBROUTINE BESI(X,Alpha,Kode,N,Y,Nz)
   t = ra*(1.0E0-etx) + etx/(z+ra)
   arg = fn*(t-gln)
   200 CONTINUE
-  IF ( arg>=(-elim) ) GOTO 400
+  IF( arg>=(-elim) ) GOTO 400
   !
   !     SET UNDERFLOW VALUE AND UPDATE PARAMETERS
   !
@@ -248,8 +247,8 @@ SUBROUTINE BESI(X,Alpha,Kode,N,Y,Nz)
   fni = fni - 1.0E0
   dfn = fni + fnf
   fn = dfn
-  IF ( nn<1 ) GOTO 800
-  IF ( nn==1 ) THEN
+  IF( nn<1 ) GOTO 800
+  IF( nn==1 ) THEN
     kt = 2
     is = 2
   END IF
@@ -258,7 +257,7 @@ SUBROUTINE BESI(X,Alpha,Kode,N,Y,Nz)
   fni = fni - 1.0E0
   dfn = fni + fnf
   fn = dfn
-  IF ( i1==2 ) THEN
+  IF( i1==2 ) THEN
     !
     !     BACKWARD RECURSION SECTION
     !
@@ -286,11 +285,11 @@ SUBROUTINE BESI(X,Alpha,Kode,N,Y,Nz)
       t = 1.0E0/(fn*ra)
       ain = tolln/(gln+SQRT(gln*gln+t*tolln)) + 1.5E0
       in = INT(ain)
-      IF ( in<=inlim ) GOTO 1200
+      IF( in<=inlim ) GOTO 1200
       !
       !     UNIFORM ASYMPTOTIC EXPANSION FOR NU TO INFINITY
       !
-      IF ( km/=0 ) THEN
+      IF( km/=0 ) THEN
         temp(1) = temp(3)
         in = ns
         kt = 1
@@ -303,14 +302,14 @@ SUBROUTINE BESI(X,Alpha,Kode,N,Y,Nz)
     CASE DEFAULT
   END SELECT
   !
-  !     SERIES FOR (X/2)**2.LE.NU+1
+  !     SERIES FOR (X/2)**2<=NU+1
   !
   500  gln = LOG_GAMMA(fnp1)
   arg = fn*xo2l - gln - sx
-  IF ( arg<(-elim) ) GOTO 700
+  IF( arg<(-elim) ) GOTO 700
   earg = EXP(arg)
   600  s = 1.0E0
-  IF ( X>=tol ) THEN
+  IF( X>=tol ) THEN
     ak = 3.0E0
     t2 = 1.0E0
     t = 1.0E0
@@ -319,7 +318,7 @@ SUBROUTINE BESI(X,Alpha,Kode,N,Y,Nz)
       s2 = t2 + s1
       t = t*sxo2/s2
       s = s + t
-      IF ( ABS(t)<tol ) EXIT
+      IF( ABS(t)<tol ) EXIT
       t2 = t2 + ak
       ak = ak + 2.0E0
       s1 = s1 + fn
@@ -360,19 +359,19 @@ SUBROUTINE BESI(X,Alpha,Kode,N,Y,Nz)
   fni = fni - 1.0E0
   dfn = fni + fnf
   fn = dfn
-  IF ( nn<1 ) GOTO 800
-  IF ( nn==1 ) THEN
+  IF( nn<1 ) GOTO 800
+  IF( nn==1 ) THEN
     kt = 2
     is = 2
   END IF
-  IF ( sxo2>fnp1 ) GOTO 100
+  IF( sxo2>fnp1 ) GOTO 100
   arg = arg - xo2l + LOG(fnp1)
-  IF ( arg>=(-elim) ) GOTO 500
+  IF( arg>=(-elim) ) GOTO 500
   GOTO 700
   800  Nz = N - nn
   RETURN
   900 CONTINUE
-  IF ( kt==2 ) THEN
+  IF( kt==2 ) THEN
     Y(1) = temp(2)
     RETURN
   ELSE
@@ -381,11 +380,11 @@ SUBROUTINE BESI(X,Alpha,Kode,N,Y,Nz)
     trx = 2.0E0/X
     dtm = fni
     tm = (dtm+fnf)*trx
-    IF ( in==0 ) THEN
+    IF( in==0 ) THEN
       !     BACKWARD RECUR FROM INDEX ALPHA+NN-1 TO ALPHA
       Y(nn) = s1
       Y(nn-1) = s2
-      IF ( nn==2 ) RETURN
+      IF( nn==2 ) RETURN
     ELSE
       !     BACKWARD RECUR TO INDEX ALPHA+NN-1
       DO i = 1, in
@@ -396,9 +395,9 @@ SUBROUTINE BESI(X,Alpha,Kode,N,Y,Nz)
         tm = (dtm+fnf)*trx
       END DO
       Y(nn) = s1
-      IF ( nn==1 ) RETURN
+      IF( nn==1 ) RETURN
       Y(nn-1) = s2
-      IF ( nn==2 ) RETURN
+      IF( nn==2 ) RETURN
     END IF
     k = nn + 1
     DO i = 3, nn
@@ -415,7 +414,7 @@ SUBROUTINE BESI(X,Alpha,Kode,N,Y,Nz)
   fn = fnu
   1100 dx = fni + fni
   tm = 0.0E0
-  IF ( fni/=0.0E0.OR.ABS(fnf)>=tol ) tm = 4.0E0*fnf*(fni+fni+fnf)
+  IF( fni/=0.0E0 .OR. ABS(fnf)>=tol ) tm = 4.0E0*fnf*(fni+fni+fnf)
   dtm = dx*dx
   s1 = etx
   trx = dtm - 1.0E0
@@ -432,11 +431,11 @@ SUBROUTINE BESI(X,Alpha,Kode,N,Y,Nz)
     ap = dx + tm
     t = -t*ap/s1
     s = s + t
-    IF ( ABS(t)<=atol ) EXIT
+    IF( ABS(t)<=atol ) EXIT
     ak = ak + 8.0E0
   END DO
   temp(is) = s*earg
-  IF ( is==2 ) GOTO 900
+  IF( is==2 ) GOTO 900
   is = 2
   fni = fni - 1.0E0
   dfn = fni + fnf
@@ -460,20 +459,20 @@ SUBROUTINE BESI(X,Alpha,Kode,N,Y,Nz)
       tm = (dtm+fnf)*trx
     END DO
     !     NORMALIZATION
-    IF ( kk/=1 ) EXIT
+    IF( kk/=1 ) EXIT
     ta = (ta/tb)*temp(3)
     tb = temp(3)
     kk = 2
     in = ns
-    IF ( ns==0 ) EXIT
+    IF( ns==0 ) EXIT
   END DO
   Y(nn) = tb
   Nz = N - nn
-  IF ( nn==1 ) RETURN
+  IF( nn==1 ) RETURN
   tb = tm*tb + ta
   k = nn - 1
   Y(k) = tb
-  IF ( nn==2 ) RETURN
+  IF( nn==2 ) RETURN
   dtm = dtm - 1.0E0
   tm = (dtm+fnf)*trx
   km = k - 1

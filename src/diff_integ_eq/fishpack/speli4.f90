@@ -1,8 +1,7 @@
 !** SPELI4
 SUBROUTINE SPELI4(Iorder,A,B,M,Mbdcnd,Bda,Alpha,Bdb,Beta,C,D,N,Nbdcnd,Bdc,&
     Bdd,COFX,An,Bn,Cn,Dn,Un,Zn,Am,Bm,Cm,Dm,Um,Zm,Grhs,Usol,Idmn,W,Pertrb,Ierror)
-  !>
-  !  Subsidiary to SEPX4
+  !> Subsidiary to SEPX4
   !***
   ! **Library:**   SLATEC
   !***
@@ -66,35 +65,35 @@ SUBROUTINE SPELI4(Iorder,A,B,M,Mbdcnd,Bda,Alpha,Bdb,Beta,C,D,N,Nbdcnd,Bdc,&
       Usol(i,j) = dly_com**2*Grhs(i,j)
     END DO
   END DO
-  IF ( kswx_com/=2.AND.kswx_com/=3 ) THEN
+  IF( kswx_com/=2 .AND. kswx_com/=3 ) THEN
     DO j = 2, N
       Usol(1,j) = dly_com**2*Grhs(1,j)
     END DO
   END IF
-  IF ( kswx_com/=2.AND.kswx_com/=5 ) THEN
+  IF( kswx_com/=2 .AND. kswx_com/=5 ) THEN
     DO j = 2, N
       Usol(k_com,j) = dly_com**2*Grhs(k_com,j)
     END DO
   END IF
-  IF ( kswy_com/=2.AND.kswy_com/=3 ) THEN
+  IF( kswy_com/=2 .AND. kswy_com/=3 ) THEN
     DO i = 2, M
       Usol(i,1) = dly_com**2*Grhs(i,1)
     END DO
   END IF
-  IF ( kswy_com/=2.AND.kswy_com/=5 ) THEN
+  IF( kswy_com/=2 .AND. kswy_com/=5 ) THEN
     DO i = 2, M
       Usol(i,l_com) = dly_com**2*Grhs(i,l_com)
     END DO
   END IF
-  IF ( kswx_com/=2.AND.kswx_com/=3.AND.kswy_com/=2.AND.kswy_com/=3 ) Usol(1,1) = dly_com**2*Grhs(1,1)
-  IF ( kswx_com/=2.AND.kswx_com/=5.AND.kswy_com/=2.AND.kswy_com/=3 ) Usol(k_com,1) = dly_com**2*Grhs(k_com,1)
-  IF ( kswx_com/=2.AND.kswx_com/=3.AND.kswy_com/=2.AND.kswy_com/=5 ) Usol(1,l_com) = dly_com**2*Grhs(1,l_com)
-  IF ( kswx_com/=2.AND.kswx_com/=5.AND.kswy_com/=2.AND.kswy_com/=5 ) Usol(k_com,l_com) = dly_com**2*Grhs(k_com,l_com)
+  IF( kswx_com/=2 .AND. kswx_com/=3 .AND. kswy_com/=2 .AND. kswy_com/=3 ) Usol(1,1) = dly_com**2*Grhs(1,1)
+  IF( kswx_com/=2 .AND. kswx_com/=5 .AND. kswy_com/=2 .AND. kswy_com/=3 ) Usol(k_com,1) = dly_com**2*Grhs(k_com,1)
+  IF( kswx_com/=2 .AND. kswx_com/=3 .AND. kswy_com/=2 .AND. kswy_com/=5 ) Usol(1,l_com) = dly_com**2*Grhs(1,l_com)
+  IF( kswx_com/=2 .AND. kswx_com/=5 .AND. kswy_com/=2 .AND. kswy_com/=5 ) Usol(k_com,l_com) = dly_com**2*Grhs(k_com,l_com)
   !
   !     SET SWITCHES FOR PERIODIC OR NON-PERIODIC BOUNDARIES
   !
   mp = 1
-  IF ( kswx_com==1 ) mp = 0
+  IF( kswx_com==1 ) mp = 0
   np = Nbdcnd
   !
   !     SET DLX,DLY AND SIZE OF BLOCK TRI-DIAGONAL SYSTEM GENERATED
@@ -102,12 +101,12 @@ SUBROUTINE SPELI4(Iorder,A,B,M,Mbdcnd,Bda,Alpha,Bdb,Beta,C,D,N,Nbdcnd,Bdc,&
   !
   dlx_com = (bit_com-ait_com)/M
   mit_com = k_com - 1
-  IF ( kswx_com==2 ) mit_com = k_com - 2
-  IF ( kswx_com==4 ) mit_com = k_com
+  IF( kswx_com==2 ) mit_com = k_com - 2
+  IF( kswx_com==4 ) mit_com = k_com
   dly_com = (dit_com-cit_com)/N
   nit_com = l_com - 1
-  IF ( kswy_com==2 ) nit_com = l_com - 2
-  IF ( kswy_com==4 ) nit_com = l_com
+  IF( kswy_com==2 ) nit_com = l_com - 2
+  IF( kswy_com==4 ) nit_com = l_com
   tdlx3_com = 2.0*dlx_com**3
   dlx4_com = dlx_com**4
   tdly3_com = 2.0*dly_com**3
@@ -117,8 +116,8 @@ SUBROUTINE SPELI4(Iorder,A,B,M,Mbdcnd,Bda,Alpha,Bdb,Beta,C,D,N,Nbdcnd,Bdc,&
   !
   is_com = 1
   js_com = 1
-  IF ( kswx_com==2.OR.kswx_com==3 ) is_com = 2
-  IF ( kswy_com==2.OR.kswy_com==3 ) js_com = 2
+  IF( kswx_com==2 .OR. kswx_com==3 ) is_com = 2
+  IF( kswy_com==2 .OR. kswy_com==3 ) js_com = 2
   ns_com = nit_com + js_com - 1
   ms_com = mit_com + is_com - 1
   !
@@ -227,34 +226,34 @@ SUBROUTINE SPELI4(Iorder,A,B,M,Mbdcnd,Bda,Alpha,Bdb,Beta,C,D,N,Nbdcnd,Bdc,&
       An(1) = 0.0
       Cn(nit_com) = 0.0
   END SELECT
-  IF ( kswx_com/=1 ) THEN
+  IF( kswx_com/=1 ) THEN
     !
     !     ADJUST USOL ALONG X EDGE
     !
     DO j = js_com, ns_com
-      IF ( kswx_com/=2.AND.kswx_com/=3 ) THEN
+      IF( kswx_com/=2 .AND. kswx_com/=3 ) THEN
         Usol(is_com,j) = Usol(is_com,j) + 2.0*dlx_com*ax1*Bda(j)
       ELSE
         Usol(is_com,j) = Usol(is_com,j) - ax1*Usol(1,j)
       END IF
-      IF ( kswx_com/=2.AND.kswx_com/=5 ) THEN
+      IF( kswx_com/=2 .AND. kswx_com/=5 ) THEN
         Usol(ms_com,j) = Usol(ms_com,j) - 2.0*dlx_com*cxm*Bdb(j)
       ELSE
         Usol(ms_com,j) = Usol(ms_com,j) - cxm*Usol(k_com,j)
       END IF
     END DO
   END IF
-  IF ( kswy_com/=1 ) THEN
+  IF( kswy_com/=1 ) THEN
     !
     !     ADJUST USOL ALONG Y EDGE
     !
     DO i = is_com, ms_com
-      IF ( kswy_com/=2.AND.kswy_com/=3 ) THEN
+      IF( kswy_com/=2 .AND. kswy_com/=3 ) THEN
         Usol(i,js_com) = Usol(i,js_com) + 2.0*dly_com*dy1*Bdc(i)
       ELSE
         Usol(i,js_com) = Usol(i,js_com) - dy1*Usol(i,1)
       END IF
-      IF ( kswy_com/=2.AND.kswy_com/=5 ) THEN
+      IF( kswy_com/=2 .AND. kswy_com/=5 ) THEN
         Usol(i,ns_com) = Usol(i,ns_com) - 2.0*dly_com*fyn*Bdd(i)
       ELSE
         Usol(i,ns_com) = Usol(i,ns_com) - fyn*Usol(i,l_com)
@@ -264,7 +263,7 @@ SUBROUTINE SPELI4(Iorder,A,B,M,Mbdcnd,Bda,Alpha,Bdb,Beta,C,D,N,Nbdcnd,Bdc,&
   !
   !     SAVE ADJUSTED EDGES IN GRHS IF IORDER=4
   !
-  IF ( Iorder==4 ) THEN
+  IF( Iorder==4 ) THEN
     DO j = js_com, ns_com
       Grhs(is_com,j) = Usol(is_com,j)
       Grhs(ms_com,j) = Usol(ms_com,j)
@@ -284,13 +283,13 @@ SUBROUTINE SPELI4(Iorder,A,B,M,Mbdcnd,Bda,Alpha,Bdb,Beta,C,D,N,Nbdcnd,Bdc,&
   !     COMPUTE NON-ZERO EIGENVECTOR IN NULL SPACE OF TRANSPOSE
   !     IF SINGULAR
   !
-  IF ( singlr ) CALL TRIS4(mit_com,Am,Bm,Cm,Dm,Um,Zm)
-  IF ( singlr ) CALL TRIS4(nit_com,An,Bn,Cn,Dn,Un,Zn)
+  IF( singlr ) CALL TRIS4(mit_com,Am,Bm,Cm,Dm,Um,Zm)
+  IF( singlr ) CALL TRIS4(nit_com,An,Bn,Cn,Dn,Un,Zn)
   DO
     !
     !     ADJUST RIGHT HAND SIDE IF NECESSARY
     !
-    IF ( singlr ) CALL ORTHO4(Usol,Idmn,Zn,Zm,Pertrb)
+    IF( singlr ) CALL ORTHO4(Usol,Idmn,Zn,Zm,Pertrb)
     !
     !     COMPUTE SOLUTION
     !
@@ -303,17 +302,17 @@ SUBROUTINE SPELI4(Iorder,A,B,M,Mbdcnd,Bda,Alpha,Bdb,Beta,C,D,N,Nbdcnd,Bdc,&
     CALL GENBUN(np,nit_com,mp,mit_com,Am,Bm,Cm,Idmn,Usol(is_com,js_com),ieror,W)
     !     CHECK IF ERROR DETECTED IN POIS
     !     THIS CAN ONLY CORRESPOND TO IERROR=12
-    IF ( ieror==0 ) THEN
-      IF ( Ierror/=0 ) RETURN
+    IF( ieror==0 ) THEN
+      IF( Ierror/=0 ) RETURN
       !
       !     SET PERIODIC BOUNDARIES IF NECESSARY
       !
-      IF ( kswx_com==1 ) THEN
+      IF( kswx_com==1 ) THEN
         DO j = 1, l_com
           Usol(k_com,j) = Usol(1,j)
         END DO
       END IF
-      IF ( kswy_com==1 ) THEN
+      IF( kswy_com==1 ) THEN
         DO i = 1, k_com
           Usol(i,l_com) = Usol(i,1)
         END DO
@@ -322,12 +321,12 @@ SUBROUTINE SPELI4(Iorder,A,B,M,Mbdcnd,Bda,Alpha,Bdb,Beta,C,D,N,Nbdcnd,Bdc,&
       !     MINIMIZE SOLUTION WITH RESPECT TO WEIGHTED LEAST SQUARES
       !     NORM IF OPERATOR IS SINGULAR
       !
-      IF ( singlr ) CALL MINSO4(Usol,Idmn,Zn,Zm)
+      IF( singlr ) CALL MINSO4(Usol,Idmn,Zn,Zm)
       !
       !     RETURN IF DEFERRED CORRECTIONS AND A FOURTH ORDER SOLUTION ARE
       !     NOT FLAGGED
       !
-      IF ( iord==2 ) RETURN
+      IF( iord==2 ) RETURN
       iord = 2
       !
       !     COMPUTE NEW RIGHT HAND SIDE FOR FOURTH ORDER SOLUTION

@@ -1,7 +1,6 @@
 !** CFFTI1
 SUBROUTINE CFFTI1(N,Wa,Ifac)
-  !>
-  !  Initialize a real and an integer work array for CFFTF1 and
+  !> Initialize a real and an integer work array for CFFTF1 and
   !            CFFTB1.
   !***
   ! **Library:**   SLATEC (FFTPACK)
@@ -62,15 +61,15 @@ SUBROUTINE CFFTI1(N,Wa,Ifac)
 
   INTEGER :: N, Ifac(15)
   REAL(SP) :: Wa(2*N)
-  REAL(SP) arg, argh, argld, fi, tpi
-  INTEGER i, i1, ib, ido, idot, ii, ip, ipm, j, k1, l1, l2, ld, nf, nl, nq, nr, ntry
+  REAL(SP) :: arg, argh, argld, fi, tpi
+  INTEGER :: i, i1, ib, ido, idot, ii, ip, ipm, j, k1, l1, l2, ld, nf, nl, nq, nr, ntry
   INTEGER, PARAMETER :: ntryh(4) = [ 3, 4, 2, 5 ]
   !* FIRST EXECUTABLE STATEMENT  CFFTI1
   nl = N
   nf = 0
   j = 0
   100  j = j + 1
-  IF ( j<=4 ) THEN
+  IF( j<=4 ) THEN
     ntry = ntryh(j)
   ELSE
     ntry = ntry + 2
@@ -78,12 +77,12 @@ SUBROUTINE CFFTI1(N,Wa,Ifac)
   DO
     nq = nl/ntry
     nr = nl - ntry*nq
-    IF ( nr/=0 ) GOTO 100
+    IF( nr/=0 ) GOTO 100
     nf = nf + 1
     Ifac(nf+2) = ntry
     nl = nq
-    IF ( ntry==2 ) THEN
-      IF ( nf/=1 ) THEN
+    IF( ntry==2 ) THEN
+      IF( nf/=1 ) THEN
         DO i = 2, nf
           ib = nf - i + 2
           Ifac(ib+2) = Ifac(ib+1)
@@ -91,7 +90,7 @@ SUBROUTINE CFFTI1(N,Wa,Ifac)
         Ifac(3) = 2
       END IF
     END IF
-    IF ( nl==1 ) THEN
+    IF( nl==1 ) THEN
       Ifac(1) = N
       Ifac(2) = nf
       tpi = 8.*ATAN(1.)
@@ -119,7 +118,7 @@ SUBROUTINE CFFTI1(N,Wa,Ifac)
             Wa(i-1) = COS(arg)
             Wa(i) = SIN(arg)
           END DO
-          IF ( ip>5 ) THEN
+          IF( ip>5 ) THEN
             Wa(i1-1) = Wa(i-1)
             Wa(i1) = Wa(i)
           END IF

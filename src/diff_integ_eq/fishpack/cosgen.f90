@@ -1,7 +1,6 @@
 !** COSGEN
 SUBROUTINE COSGEN(N,Ijump,Fnum,Fden,A)
-  !>
-  !  Subsidiary to GENBUN
+  !> Subsidiary to GENBUN
   !***
   ! **Library:**   SLATEC
   !***
@@ -12,9 +11,9 @@ SUBROUTINE COSGEN(N,Ijump,Fnum,Fden,A)
   ! **Description:**
   !
   !     This subroutine computes required cosine values in ascending
-  !     order.  When IJUMP .GT. 1 the routine computes values
+  !     order.  When IJUMP > 1 the routine computes values
   !
-  !        2*COS(J*PI/L), J=1,2,...,L and J .NE. 0(MOD N/IJUMP+1)
+  !        2*COS(J*PI/L), J=1,2,...,L and J /= 0(MOD N/IJUMP+1)
   !
   !     where L = IJUMP*(N/IJUMP+1).
   !
@@ -48,8 +47,8 @@ SUBROUTINE COSGEN(N,Ijump,Fnum,Fden,A)
   REAL(SP) :: pibyn, x, y
   REAL(SP), PARAMETER :: pi = 3.14159265358979
   !* FIRST EXECUTABLE STATEMENT  COSGEN
-  IF ( N/=0 ) THEN
-    IF ( Ijump==1 ) THEN
+  IF( N/=0 ) THEN
+    IF( Ijump==1 ) THEN
       np1 = N + 1
       y = pi/(N+Fden)
       DO i = 1, N

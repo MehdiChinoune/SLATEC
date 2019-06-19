@@ -1,7 +1,6 @@
 !** CCOT
 COMPLEX(SP) FUNCTION CCOT(Z)
-  !>
-  !  Compute the cotangent.
+  !> Compute the cotangent.
   !***
   ! **Library:**   SLATEC (FNLIB)
   !***
@@ -43,10 +42,10 @@ COMPLEX(SP) FUNCTION CCOT(Z)
   CALL XERCLR
   !
   den = COSH(y2) - COS(x2)
-  IF ( den==0. ) CALL XERMSG('CCOT',&
+  IF( den==0. ) CALL XERMSG('CCOT',&
     'COT IS SINGULAR FOR INPUT Z (X IS 0 OR PI AND Y IS 0)',2,2)
   !
-  IF ( ABS(den)<=MAX(ABS(x2),1.)*sqeps ) THEN
+  IF( ABS(den)<=MAX(ABS(x2),1.)*sqeps ) THEN
     CALL XERCLR
     CALL XERMSG('CCOT',&
       'ANSWER LT HALF PRECISION, ABS(X) TOO BIG OR X TOO NEAR 0 OR PI',1,1)

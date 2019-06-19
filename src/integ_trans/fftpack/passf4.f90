@@ -1,7 +1,6 @@
 !** PASSF4
 SUBROUTINE PASSF4(Ido,L1,Cc,Ch,Wa1,Wa2,Wa3)
-  !>
-  !  Calculate the fast Fourier transform of subvectors of
+  !> Calculate the fast Fourier transform of subvectors of
   !            length four.
   !***
   ! **Library:**   SLATEC (FFTPACK)
@@ -27,7 +26,7 @@ SUBROUTINE PASSF4(Ido,L1,Cc,Ch,Wa1,Wa2,Wa3)
   INTEGER :: i, k
   REAL(SP) :: ci2, ci3, ci4, cr2, cr3, cr4, ti1, ti2, ti3, ti4, tr1, tr2, tr3, tr4
   !* FIRST EXECUTABLE STATEMENT  PASSF4
-  IF ( Ido==2 ) THEN
+  IF( Ido==2 ) THEN
     DO k = 1, L1
       ti1 = Cc(2,1,k) - Cc(2,3,k)
       ti2 = Cc(2,1,k) + Cc(2,3,k)
@@ -47,7 +46,7 @@ SUBROUTINE PASSF4(Ido,L1,Cc,Ch,Wa1,Wa2,Wa3)
       Ch(2,k,4) = ti1 - ti4
     END DO
     RETURN
-  ELSEIF ( Ido/2<L1 ) THEN
+  ELSEIF( Ido/2<L1 ) THEN
     DO i = 2, Ido, 2
       DO k = 1, L1
         ti1 = Cc(i,1,k) - Cc(i,3,k)

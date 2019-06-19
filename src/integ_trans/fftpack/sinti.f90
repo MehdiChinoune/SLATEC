@@ -1,7 +1,6 @@
 !** SINTI
 SUBROUTINE SINTI(N,Wsave)
-  !>
-  !  Initialize a work array for SINT.
+  !> Initialize a work array for SINT.
   !***
   ! **Library:**   SLATEC (FFTPACK)
   !***
@@ -60,7 +59,7 @@ SUBROUTINE SINTI(N,Wsave)
   INTEGER :: k, kf, ks, np1, ns2
   REAL(SP) :: dt, fk, pi
   !* FIRST EXECUTABLE STATEMENT  SINTI
-  IF ( N<=1 ) RETURN
+  IF( N<=1 ) RETURN
   pi = 4.*ATAN(1.)
   np1 = N + 1
   ns2 = N/2

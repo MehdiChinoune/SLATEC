@@ -1,8 +1,7 @@
 !** ISSCGN
 INTEGER FUNCTION ISSCGN(N,B,X,Nelt,Ia,Ja,A,Isym,MTTVEC,MSOLVE,Itol,&
     Tol,Iter,Err,Ierr,Iunit,R,Atz,Dz,Atdz,Rwork,Iwork,Ak,Bk,Bnrm,Solnrm)
-  !>
-  !  Preconditioned CG on Normal Equations Stop Test.
+  !> Preconditioned CG on Normal Equations Stop Test.
   !            This routine calculates the stop test for the Conjugate
   !            Gradient iteration scheme applied to the normal equations.
   !            It returns a non-zero if the error estimate (the type of
@@ -38,7 +37,7 @@ INTEGER FUNCTION ISSCGN(N,B,X,Nelt,Ia,Ja,A,Isym,MTTVEC,MSOLVE,Itol,&
   !     IF( ISTPCGN(N, B, X, NELT, IA, JA, A, ISYM, MATVEC, MTTVEC,
   !    $     MSOLVE, ITOL, TOL, ITMAX, ITER, ERR, IERR, IUNIT, R, Z, P,
   !    $     ATP, ATZ, DZ, ATDZ, RWORK, IWORK, AK, BK, BNRM, SOLNRM)
-  !    $     .NE. 0 ) THEN ITERATION DONE
+  !    $     /= 0 ) THEN ITERATION DONE
   !
   !- Arguments:
   ! N      :IN       Integer
@@ -173,7 +172,7 @@ INTEGER FUNCTION ISSCGN(N,B,X,Nelt,Ia,Ja,A,Isym,MTTVEC,MSOLVE,Itol,&
   !
   !- Cautions:
   !     This routine will attempt to write to the Fortran logical output
-  !     unit IUNIT, if IUNIT .ne. 0.  Thus, the user must make sure that
+  !     unit IUNIT, if IUNIT /= 0.  Thus, the user must make sure that
   !     this logical unit is attached to a file or terminal before calling
   !     this routine with a non-zero value for IUNIT.  This routine does
   !     not check for the validity of a non-zero IUNIT unit number.
@@ -227,22 +226,22 @@ INTEGER FUNCTION ISSCGN(N,B,X,Nelt,Ia,Ja,A,Isym,MTTVEC,MSOLVE,Itol,&
   !* FIRST EXECUTABLE STATEMENT  ISSCGN
   ISSCGN = 0
   !
-  IF ( Itol==1 ) THEN
+  IF( Itol==1 ) THEN
     !         err = ||Residual||/||RightHandSide|| (2-Norms).
-    IF ( Iter==0 ) Bnrm = NORM2(B)
+    IF( Iter==0 ) Bnrm = NORM2(B)
     Err = NORM2(R)/Bnrm
-  ELSEIF ( Itol==2 ) THEN
+  ELSEIF( Itol==2 ) THEN
     !                  -1              -1
     !         err = ||M  Residual||/||M  RightHandSide|| (2-Norms).
-    IF ( Iter==0 ) THEN
+    IF( Iter==0 ) THEN
       CALL MSOLVE(N,B,Dz,Rwork,Iwork)
       CALL MTTVEC(N,Dz,Atdz,Nelt,Ia,Ja,A,Isym)
       Bnrm = NORM2(Atdz)
     END IF
     Err = NORM2(Atz)/Bnrm
-  ELSEIF ( Itol==11 ) THEN
+  ELSEIF( Itol==11 ) THEN
     !         err = ||x-TrueSolution||/||TrueSolution|| (2-Norms).
-    IF ( Iter==0 ) Solnrm = NORM2(soln_com(1:N))
+    IF( Iter==0 ) Solnrm = NORM2(soln_com(1:N))
     DO i = 1, N
       Dz(i) = X(i) - soln_com(i)
     END DO
@@ -254,8 +253,8 @@ INTEGER FUNCTION ISSCGN(N,B,X,Nelt,Ia,Ja,A,Isym,MTTVEC,MSOLVE,Itol,&
     Ierr = 3
   END IF
   !
-  IF ( Iunit/=0 ) THEN
-    IF ( Iter==0 ) THEN
+  IF( Iunit/=0 ) THEN
+    IF( Iter==0 ) THEN
       WRITE (Iunit,99001) N, Itol
       99001 FORMAT (' PCG Applied to the Normal Equations for N, ITOL = ',I5,&
         I5,/' ITER   Error Estimate            Alpha             Beta')
@@ -264,7 +263,7 @@ INTEGER FUNCTION ISSCGN(N,B,X,Nelt,Ia,Ja,A,Isym,MTTVEC,MSOLVE,Itol,&
       WRITE (Iunit,99002) Iter, Err, Ak, Bk
     END IF
   END IF
-  IF ( Err<=Tol ) ISSCGN = 1
+  IF( Err<=Tol ) ISSCGN = 1
   !
   RETURN
   99002 FORMAT (1X,I4,1X,E16.7,1X,E16.7,1X,E16.7)

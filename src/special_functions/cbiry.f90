@@ -1,7 +1,6 @@
 !** CBIRY
 SUBROUTINE CBIRY(Z,Id,Kode,Bi,Ierr)
-  !>
-  !  Compute the Airy function Bi(z) or its derivative dBi/dz
+  !> Compute the Airy function Bi(z) or its derivative dBi/dz
   !            for complex argument z.  A scaling option is available
   !            to help avoid overflow.
   !***
@@ -149,23 +148,23 @@ SUBROUTINE CBIRY(Z,Id,Kode,Bi,Ierr)
   !* FIRST EXECUTABLE STATEMENT  CBIRY
   Ierr = 0
   nz = 0
-  IF ( Id<0.OR.Id>1 ) Ierr = 1
-  IF ( Kode<1.OR.Kode>2 ) Ierr = 1
-  IF ( Ierr/=0 ) RETURN
+  IF( Id<0 .OR. Id>1 ) Ierr = 1
+  IF( Kode<1 .OR. Kode>2 ) Ierr = 1
+  IF( Ierr/=0 ) RETURN
   az = ABS(Z)
   tol = MAX(R1MACH(4),1.0E-18)
   fid = Id
-  IF ( az>1.0E0 ) THEN
+  IF( az>1.0E0 ) THEN
     !-----------------------------------------------------------------------
-    !     CASE FOR ABS(Z).GT.1.0
+    !     CASE FOR ABS(Z)>1.0
     !-----------------------------------------------------------------------
     fnu = (1.0E0+fid)/3.0E0
     !-----------------------------------------------------------------------
     !     SET PARAMETERS RELATED TO MACHINE CONSTANTS.
     !     TOL IS THE APPROXIMATE UNIT ROUNDOFF LIMITED TO 1.0E-18.
     !     ELIM IS THE APPROXIMATE EXPONENTIAL OVER- AND UNDERFLOW LIMIT.
-    !     EXP(-ELIM).LT.EXP(-ALIM)=EXP(-ELIM)/TOL    AND
-    !     EXP(ELIM).GT.EXP(ALIM)=EXP(ELIM)*TOL       ARE INTERVALS NEAR
+    !     EXP(-ELIM)<EXP(-ALIM)=EXP(-ELIM)/TOL    AND
+    !     EXP(ELIM)>EXP(ALIM)=EXP(ELIM)*TOL       ARE INTERVALS NEAR
     !     UNDERFLOW AND OVERFLOW LIMITS WHERE SCALED ARITHMETIC IS DONE.
     !     RL IS THE LOWER BOUNDARY OF THE ASYMPTOTIC EXPANSION FOR LARGE Z.
     !     DIG = NUMBER OF BASE 10 DIGITS IN TOL = 10**(-DIG).
@@ -190,44 +189,44 @@ SUBROUTINE CBIRY(Z,Id,Kode,Bi,Ierr)
     bb = 0.5E0*I1MACH(9)
     aa = MIN(aa,bb)
     aa = aa**tth
-    IF ( az>aa ) THEN
+    IF( az>aa ) THEN
       Ierr = 4
       nz = 0
       RETURN
     ELSE
       aa = SQRT(aa)
-      IF ( az>aa ) Ierr = 3
+      IF( az>aa ) Ierr = 3
       csq = SQRT(Z)
       zta = Z*csq*CMPLX(tth,0.0E0)
       !-----------------------------------------------------------------------
-      !     RE(ZTA).LE.0 WHEN RE(Z).LT.0, ESPECIALLY WHEN IM(Z) IS SMALL
+      !     RE(ZTA)<=0 WHEN RE(Z)<0, ESPECIALLY WHEN IM(Z) IS SMALL
       !-----------------------------------------------------------------------
       sfac = 1.0E0
       zi = AIMAG(Z)
       zr = REAL(Z)
       ak = AIMAG(zta)
-      IF ( zr<0.0E0 ) THEN
+      IF( zr<0.0E0 ) THEN
         bk = REAL(zta)
         ck = -ABS(bk)
         zta = CMPLX(ck,ak)
       END IF
-      IF ( zi==0.0E0.AND.zr<=0.0E0 ) zta = CMPLX(0.0E0,ak)
+      IF( zi==0.0E0 .AND. zr<=0.0E0 ) zta = CMPLX(0.0E0,ak)
       aa = REAL(zta)
-      IF ( Kode/=2 ) THEN
+      IF( Kode/=2 ) THEN
         !-----------------------------------------------------------------------
         !     OVERFLOW TEST
         !-----------------------------------------------------------------------
         bb = ABS(aa)
-        IF ( bb>=alim ) THEN
+        IF( bb>=alim ) THEN
           bb = bb + 0.25E0*LOG(az)
           sfac = tol
-          IF ( bb>elim ) GOTO 50
+          IF( bb>elim ) GOTO 50
         END IF
       END IF
       fmr = 0.0E0
-      IF ( aa<0.0E0.OR.zr<=0.0E0 ) THEN
+      IF( aa<0.0E0 .OR. zr<=0.0E0 ) THEN
         fmr = pi
-        IF ( zi<0.0E0 ) fmr = -pi
+        IF( zi<0.0E0 ) fmr = -pi
         zta = -zta
       END IF
       !-----------------------------------------------------------------------
@@ -235,7 +234,7 @@ SUBROUTINE CBIRY(Z,Id,Kode,Bi,Ierr)
       !     KODE=2 RETURNS EXP(-ABS(XZTA))*I(FNU,ZTA) FROM CBINU
       !-----------------------------------------------------------------------
       CALL CBINU(zta,fnu,Kode,1,cy,nz,rl,fnul,tol,elim,alim)
-      IF ( nz>=0 ) THEN
+      IF( nz>=0 ) THEN
         aa = fmr*fnu
         z3 = CMPLX(sfac,0.0E0)
         s1 = cy(1)*CMPLX(COS(aa),SIN(aa))*z3
@@ -249,7 +248,7 @@ SUBROUTINE CBIRY(Z,Id,Kode,Bi,Ierr)
         s2 = cy(1)*CMPLX(fnu+fnu,0.0E0)/zta + cy(2)
         aa = fmr*(fnu-1.0E0)
         s1 = (s1+s2*CMPLX(COS(aa),SIN(aa)))*CMPLX(coef,0.0E0)
-        IF ( Id==1 ) THEN
+        IF( Id==1 ) THEN
           s1 = Z*s1
           Bi = s1*CMPLX(1.0E0/sfac,0.0E0)
           RETURN
@@ -258,7 +257,7 @@ SUBROUTINE CBIRY(Z,Id,Kode,Bi,Ierr)
           Bi = s1*CMPLX(1.0E0/sfac,0.0E0)
           RETURN
         END IF
-      ELSEIF ( nz/=(-1) ) THEN
+      ELSEIF( nz/=(-1) ) THEN
         GOTO 100
       END IF
     END IF
@@ -267,17 +266,17 @@ SUBROUTINE CBIRY(Z,Id,Kode,Bi,Ierr)
     RETURN
   ELSE
     !-----------------------------------------------------------------------
-    !     POWER SERIES FOR ABS(Z).LE.1.
+    !     POWER SERIES FOR ABS(Z)<=1.
     !-----------------------------------------------------------------------
     s1 = cone
     s2 = cone
-    IF ( az<tol ) THEN
+    IF( az<tol ) THEN
       aa = c1*(1.0E0-fid) + fid*c2
       Bi = CMPLX(aa,0.0E0)
       RETURN
     ELSE
       aa = az*az
-      IF ( aa>=tol/az ) THEN
+      IF( aa>=tol/az ) THEN
         trm1 = cone
         trm2 = cone
         atrm = 1.0E0
@@ -303,15 +302,15 @@ SUBROUTINE CBIRY(Z,Id,Kode,Bi,Ierr)
           d1 = d1 + ak
           d2 = d2 + bk
           ad = MIN(d1,d2)
-          IF ( atrm<tol*ad ) EXIT
+          IF( atrm<tol*ad ) EXIT
           ak = ak + 18.0E0
           bk = bk + 18.0E0
         END DO
       END IF
-      IF ( Id==1 ) THEN
+      IF( Id==1 ) THEN
         Bi = s2*CMPLX(c2,0.0E0)
-        IF ( az>tol ) Bi = Bi + Z*Z*s1*CMPLX(c1/(1.0E0+fid),0.0E0)
-        IF ( Kode==1 ) RETURN
+        IF( az>tol ) Bi = Bi + Z*Z*s1*CMPLX(c1/(1.0E0+fid),0.0E0)
+        IF( Kode==1 ) RETURN
         zta = Z*SQRT(Z)*CMPLX(tth,0.0E0)
         aa = REAL(zta)
         aa = -ABS(aa)
@@ -319,7 +318,7 @@ SUBROUTINE CBIRY(Z,Id,Kode,Bi,Ierr)
         RETURN
       ELSE
         Bi = s1*CMPLX(c1,0.0E0) + Z*s2*CMPLX(c2,0.0E0)
-        IF ( Kode==1 ) RETURN
+        IF( Kode==1 ) RETURN
         zta = Z*SQRT(Z)*CMPLX(tth,0.0E0)
         aa = REAL(zta)
         aa = -ABS(aa)

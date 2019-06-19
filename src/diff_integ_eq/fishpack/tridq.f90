@@ -1,7 +1,6 @@
 !** TRIDQ
 SUBROUTINE TRIDQ(Mr,A,B,C,Y,D)
-  !>
-  !  Subsidiary to POIS3D
+  !> Subsidiary to POIS3D
   !***
   ! **Library:**   SLATEC
   !***
@@ -35,7 +34,7 @@ SUBROUTINE TRIDQ(Mr,A,B,C,Y,D)
     Y(i) = (Y(i)-A(i)*Y(i-1))*z
   END DO
   z = B(m) - A(m)*D(mm1)
-  IF ( z/=0. ) THEN
+  IF( z/=0. ) THEN
     Y(m) = (Y(m)-A(m)*Y(mm1))/z
   ELSE
     Y(m) = 0.

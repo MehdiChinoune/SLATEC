@@ -1,7 +1,6 @@
 !** CFFTB1
 SUBROUTINE CFFTB1(N,C,Ch,Wa,Ifac)
-  !>
-  !  Compute the unnormalized inverse of CFFTF1.
+  !> Compute the unnormalized inverse of CFFTF1.
   !***
   ! **Library:**   SLATEC (FFTPACK)
   !***
@@ -91,42 +90,42 @@ SUBROUTINE CFFTB1(N,C,Ch,Wa,Ifac)
     ido = N/l2
     idot = ido + ido
     idl1 = idot*l1
-    IF ( ip==4 ) THEN
+    IF( ip==4 ) THEN
       ix2 = iw + idot
       ix3 = ix2 + idot
-      IF ( na/=0 ) THEN
+      IF( na/=0 ) THEN
         CALL PASSB4(idot,l1,Ch,C,Wa(iw),Wa(ix2),Wa(ix3))
       ELSE
         CALL PASSB4(idot,l1,C,Ch,Wa(iw),Wa(ix2),Wa(ix3))
       END IF
       na = 1 - na
-    ELSEIF ( ip==2 ) THEN
-      IF ( na/=0 ) THEN
+    ELSEIF( ip==2 ) THEN
+      IF( na/=0 ) THEN
         CALL PASSB2(idot,l1,Ch,C,Wa(iw))
       ELSE
         CALL PASSB2(idot,l1,C,Ch,Wa(iw))
       END IF
       na = 1 - na
-    ELSEIF ( ip==3 ) THEN
+    ELSEIF( ip==3 ) THEN
       ix2 = iw + idot
-      IF ( na/=0 ) THEN
+      IF( na/=0 ) THEN
         CALL PASSB3(idot,l1,Ch,C,Wa(iw),Wa(ix2))
       ELSE
         CALL PASSB3(idot,l1,C,Ch,Wa(iw),Wa(ix2))
       END IF
       na = 1 - na
-    ELSEIF ( ip/=5 ) THEN
-      IF ( na/=0 ) THEN
+    ELSEIF( ip/=5 ) THEN
+      IF( na/=0 ) THEN
         CALL PASSB(nac,idot,ip,l1,idl1,Ch,Ch,Ch,C,C,Wa(iw:))
       ELSE
         CALL PASSB(nac,idot,ip,l1,idl1,C,C,C,Ch,Ch,Wa(iw:))
       END IF
-      IF ( nac/=0 ) na = 1 - na
+      IF( nac/=0 ) na = 1 - na
     ELSE
       ix2 = iw + idot
       ix3 = ix2 + idot
       ix4 = ix3 + idot
-      IF ( na/=0 ) THEN
+      IF( na/=0 ) THEN
         CALL PASSB5(idot,l1,Ch,C,Wa(iw),Wa(ix2),Wa(ix3),Wa(ix4))
       ELSE
         CALL PASSB5(idot,l1,C,Ch,Wa(iw),Wa(ix2),Wa(ix3),Wa(ix4))
@@ -136,7 +135,7 @@ SUBROUTINE CFFTB1(N,C,Ch,Wa,Ifac)
     l1 = l2
     iw = iw + (ip-1)*idot
   END DO
-  IF ( na==0 ) RETURN
+  IF( na==0 ) RETURN
   n2 = N + N
   DO i = 1, n2
     C(i) = Ch(i)

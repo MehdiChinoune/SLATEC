@@ -1,8 +1,7 @@
 !** ISSBCG
 INTEGER FUNCTION ISSBCG(N,B,X,MSOLVE,Itol,Tol,&
     Iter,Err,Ierr,Iunit,R,Z,Dz,Rwork,Iwork,Ak,Bk,Bnrm,Solnrm)
-  !>
-  !  Preconditioned BiConjugate Gradient Stop Test.
+  !> Preconditioned BiConjugate Gradient Stop Test.
   !            This routine calculates the stop test for the BiConjugate
   !            Gradient iteration scheme.  It returns a non-zero if the
   !            error estimate (the type of which is determined by ITOL)
@@ -36,7 +35,7 @@ INTEGER FUNCTION ISSBCG(N,B,X,MSOLVE,Itol,Tol,&
   !
   !     IF( ISSBCG(N, B, X, NELT, IA, JA, A, ISYM, MSOLVE, ITOL, TOL,
   !    $     ITMAX, ITER, ERR, IERR, IUNIT, R, Z, P, RR, ZZ, PP, DZ,
-  !    $     RWORK, IWORK, AK, BK, BNRM, SOLNRM) .NE. 0 )
+  !    $     RWORK, IWORK, AK, BK, BNRM, SOLNRM) /= 0 )
   !    $     THEN ITERATION DONE
   !
   !- Arguments:
@@ -122,8 +121,8 @@ INTEGER FUNCTION ISSBCG(N,B,X,MSOLVE,Itol,Tol,&
   ! PP     :DUMMY    Real PP(N).
   !         Real arrays used for workspace.
   ! DZ     :WORK     Real DZ(N).
-  !         If ITOL.eq.0 then DZ is used to hold M-inv * B on the first
-  !         call.  If ITOL.eq.11 then DZ is used to hold X-SOLN.
+  !         If ITOL=0 then DZ is used to hold M-inv * B on the first
+  !         call.  If ITOL=11 then DZ is used to hold X-SOLN.
   ! RWORK  :WORK     Real RWORK(USER DEFINED).
   !         Real array that can be used for workspace in MSOLVE
   !         and MTSOLV.
@@ -150,7 +149,7 @@ INTEGER FUNCTION ISSBCG(N,B,X,MSOLVE,Itol,Tol,&
   !
   !- Cautions:
   !     This routine will attempt to write to the Fortran logical output
-  !     unit IUNIT, if IUNIT .ne. 0.  Thus, the user must make sure that
+  !     unit IUNIT, if IUNIT /= 0.  Thus, the user must make sure that
   !     this logical unit is attached to a file or terminal before calling
   !     this routine with a non-zero value for IUNIT.  This routine does
   !     not check for the validity of a non-zero IUNIT unit number.
@@ -198,21 +197,21 @@ INTEGER FUNCTION ISSBCG(N,B,X,MSOLVE,Itol,Tol,&
   !* FIRST EXECUTABLE STATEMENT  ISSBCG
   ISSBCG = 0
   !
-  IF ( Itol==1 ) THEN
+  IF( Itol==1 ) THEN
     !         err = ||Residual||/||RightHandSide|| (2-Norms).
-    IF ( Iter==0 ) Bnrm = NORM2(B)
+    IF( Iter==0 ) Bnrm = NORM2(B)
     Err = NORM2(R)/Bnrm
-  ELSEIF ( Itol==2 ) THEN
+  ELSEIF( Itol==2 ) THEN
     !                  -1              -1
     !         err = ||M  Residual||/||M  RightHandSide|| (2-Norms).
-    IF ( Iter==0 ) THEN
+    IF( Iter==0 ) THEN
       CALL MSOLVE(N,B,Dz,Rwork,Iwork)
       Bnrm = NORM2(Dz)
     END IF
     Err = NORM2(Z)/Bnrm
-  ELSEIF ( Itol==11 ) THEN
+  ELSEIF( Itol==11 ) THEN
     !         err = ||x-TrueSolution||/||TrueSolution|| (2-Norms).
-    IF ( Iter==0 ) Solnrm = NORM2(soln_com(1:N))
+    IF( Iter==0 ) Solnrm = NORM2(soln_com(1:N))
     DO i = 1, N
       Dz(i) = X(i) - soln_com(i)
     END DO
@@ -224,8 +223,8 @@ INTEGER FUNCTION ISSBCG(N,B,X,MSOLVE,Itol,Tol,&
     Ierr = 3
   END IF
   !
-  IF ( Iunit/=0 ) THEN
-    IF ( Iter==0 ) THEN
+  IF( Iunit/=0 ) THEN
+    IF( Iter==0 ) THEN
       WRITE (Iunit,99001) N, Itol
       99001 FORMAT (' Preconditioned BiConjugate Gradient for N, ITOL = ',I5,I5,&
         /' ITER   Error Estimate            Alpha             Beta')
@@ -234,7 +233,7 @@ INTEGER FUNCTION ISSBCG(N,B,X,MSOLVE,Itol,Tol,&
       WRITE (Iunit,99002) Iter, Err, Ak, Bk
     END IF
   END IF
-  IF ( Err<=Tol ) ISSBCG = 1
+  IF( Err<=Tol ) ISSBCG = 1
   !
   RETURN
   99002 FORMAT (1X,I4,1X,E16.7,1X,E16.7,1X,E16.7)

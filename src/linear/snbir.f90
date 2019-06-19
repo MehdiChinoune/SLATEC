@@ -1,7 +1,6 @@
 !** SNBIR
 SUBROUTINE SNBIR(Abe,Lda,N,Ml,Mu,V,Itask,Ind,Work,Iwork)
-  !>
-  !  Solve a general nonsymmetric banded system of linear
+  !> Solve a general nonsymmetric banded system of linear
   !            equations.  Iterative refinement is used to obtain an error
   !            estimate.
   !***
@@ -35,7 +34,7 @@ SUBROUTINE SNBIR(Abe,Lda,N,Ml,Mu,V,Itask,Ind,Work,Iwork)
   !    MU .  The integers ML and MU are called the lower and upper
   !    band widths and  M = ML+MU+1  is the total band width.
   !    SNBIR uses less time and storage than the corresponding
-  !    program for general matrices (SGEIR) if 2*ML+MU .LT. N .
+  !    program for general matrices (SGEIR) if 2*ML+MU < N .
   !
   !    The matrix A is first factored into upper and lower tri-
   !    angular matrices U and L using partial pivoting.  These
@@ -48,7 +47,7 @@ SUBROUTINE SNBIR(Abe,Lda,N,Ml,Mu,V,Itask,Ind,Work,Iwork)
   !
   !    If the equation A*X=B is to be solved for more than one vector
   !    B, the factoring of A does not need to be performed again and
-  !    the option to only solve (ITASK .GT. 1) will be faster for
+  !    the option to only solve (ITASK > 1) will be faster for
   !    the succeeding solutions.  In this case, the contents of A, LDA,
   !    N, work and IWORK must not have been altered by the user follow-
   !    ing factorization (ITASK=1).  IND will not be changed by SNBIR
@@ -82,7 +81,7 @@ SUBROUTINE SNBIR(Abe,Lda,N,Ml,Mu,V,Itask,Ind,Work,Iwork)
   !           0  0  0 54 55 56
   !           0  0  0  0 65 66
   !
-  !     then  N = 6, ML = 1, MU = 2, LDA .GE. 5  and ABE should contain
+  !     then  N = 6, ML = 1, MU = 2, LDA >= 5  and ABE should contain
   !
   !           * 11 12 13       , * = not used
   !          21 22 23 24
@@ -126,9 +125,9 @@ SUBROUTINE SNBIR(Abe,Lda,N,Ml,Mu,V,Itask,Ind,Work,Iwork)
   !    ITASK  INTEGER
   !             If ITASK=1, the matrix A is factored and then the
   !               linear equation is solved.
-  !             If ITASK .GT. 1, the equation is solved using the existing
+  !             If ITASK > 1, the equation is solved using the existing
   !               factored matrix A and IWORK.
-  !             If ITASK .LT. 1, then terminal error message IND=-3 is
+  !             If ITASK < 1, then terminal error message IND=-3 is
   !               printed.
   !    IND    INTEGER
   !             GT. 0  IND is a rough estimate of the number of digits
@@ -186,7 +185,7 @@ SUBROUTINE SNBIR(Abe,Lda,N,Ml,Mu,V,Itask,Ind,Work,Iwork)
   REAL(SP) :: xnorm, dnorm
   CHARACTER(8) :: xern1, xern2
   !* FIRST EXECUTABLE STATEMENT  SNBIR
-  IF ( Lda<N ) THEN
+  IF( Lda<N ) THEN
     Ind = -1
     WRITE (xern1,'(I8)') Lda
     WRITE (xern2,'(I8)') N
@@ -194,28 +193,28 @@ SUBROUTINE SNBIR(Abe,Lda,N,Ml,Mu,V,Itask,Ind,Work,Iwork)
     RETURN
   END IF
   !
-  IF ( N<=0 ) THEN
+  IF( N<=0 ) THEN
     Ind = -2
     WRITE (xern1,'(I8)') N
     CALL XERMSG('SNBIR','N = '//xern1//' IS LESS THAN 1',-2,1)
     RETURN
   END IF
   !
-  IF ( Itask<1 ) THEN
+  IF( Itask<1 ) THEN
     Ind = -3
     WRITE (xern1,'(I8)') Itask
     CALL XERMSG('SNBIR','ITASK = '//xern1//' IS LESS THAN 1',-3,1)
     RETURN
   END IF
   !
-  IF ( Ml<0.OR.Ml>=N ) THEN
+  IF( Ml<0 .OR. Ml>=N ) THEN
     Ind = -5
     WRITE (xern1,'(I8)') Ml
     CALL XERMSG('SNBIR','ML = '//xern1//' IS OUT OF RANGE',-5,1)
     RETURN
   END IF
   !
-  IF ( Mu<0.OR.Mu>=N ) THEN
+  IF( Mu<0 .OR. Mu>=N ) THEN
     Ind = -6
     WRITE (xern1,'(I8)') Mu
     CALL XERMSG('SNBIR','MU = '//xern1//' IS OUT OF RANGE',-6,1)
@@ -223,7 +222,7 @@ SUBROUTINE SNBIR(Abe,Lda,N,Ml,Mu,V,Itask,Ind,Work,Iwork)
   END IF
   !
   nc = 2*Ml + Mu + 1
-  IF ( Itask==1 ) THEN
+  IF( Itask==1 ) THEN
     !
     !        MOVE MATRIX ABE TO WORK
     !
@@ -236,7 +235,7 @@ SUBROUTINE SNBIR(Abe,Lda,N,Ml,Mu,V,Itask,Ind,Work,Iwork)
     !
     !        CHECK FOR COMPUTATIONALLY SINGULAR MATRIX
     !
-    IF ( info/=0 ) THEN
+    IF( info/=0 ) THEN
       Ind = -4
       CALL XERMSG('SNBIR','SINGULAR MATRIX A - NO SOLUTION',-4,1)
       RETURN
@@ -252,7 +251,7 @@ SUBROUTINE SNBIR(Abe,Lda,N,Ml,Mu,V,Itask,Ind,Work,Iwork)
   !     FORM NORM OF X0
   !
   xnorm = SUM( ABS(V) )
-  IF ( xnorm==0.0 ) THEN
+  IF( xnorm==0.0 ) THEN
     Ind = 75
     RETURN
   END IF
@@ -278,7 +277,7 @@ SUBROUTINE SNBIR(Abe,Lda,N,Ml,Mu,V,Itask,Ind,Work,Iwork)
   !     AND CHECK FOR IND GREATER THAN ZERO
   !
   Ind = INT( -LOG10(MAX(R1MACH(4),dnorm/xnorm)) )
-  IF ( Ind<=0 ) THEN
+  IF( Ind<=0 ) THEN
     Ind = -10
     CALL XERMSG('SNBIR','SOLUTION MAY HAVE NO SIGNIFICANCE',-10,0)
   END IF

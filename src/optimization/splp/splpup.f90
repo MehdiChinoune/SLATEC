@@ -1,8 +1,7 @@
 !** SPLPUP
 SUBROUTINE SPLPUP(USRMAT,Mrelas,Nvars,Dattrv,Bl,Bu,Ind,Info,Amat,&
     Imat,Sizeup,Asmall,Abig)
-  !>
-  !  Subsidiary to SPLP
+  !> Subsidiary to SPLP
   !***
   ! **Library:**   SLATEC
   !***
@@ -68,7 +67,7 @@ SUBROUTINE SPLPUP(USRMAT,Mrelas,Nvars,Dattrv,Bl,Bu,Ind,Info,Amat,&
   !     ALSO CHECK CONSISTENCY OF UPPER AND LOWER BOUNDS.
   !
   DO j = 1, Nvars
-    IF ( Ind(j)<1.OR.Ind(j)>4 ) THEN
+    IF( Ind(j)<1 .OR. Ind(j)>4 ) THEN
       WRITE (xern1,'(I8)') j
       CALL XERMSG('SPLPUP','IN SPLP, INDEPENDENT VARIABLE = '//&
         xern1//' IS NOT DEFINED.',10,1)
@@ -76,8 +75,8 @@ SUBROUTINE SPLPUP(USRMAT,Mrelas,Nvars,Dattrv,Bl,Bu,Ind,Info,Amat,&
       RETURN
     END IF
     !
-    IF ( Ind(j)==3 ) THEN
-      IF ( Bl(j)>Bu(j) ) THEN
+    IF( Ind(j)==3 ) THEN
+      IF( Bl(j)>Bu(j) ) THEN
         WRITE (xern1,'(I8)') j
         WRITE (xern3,'(1PE15.6)') Bl(j)
         WRITE (xern4,'(1PE15.6)') Bu(j)
@@ -91,7 +90,7 @@ SUBROUTINE SPLPUP(USRMAT,Mrelas,Nvars,Dattrv,Bl,Bu,Ind,Info,Amat,&
   END DO
   !
   DO i = Nvars + 1, Nvars + Mrelas
-    IF ( Ind(i)<1.OR.Ind(i)>4 ) THEN
+    IF( Ind(i)<1 .OR. Ind(i)>4 ) THEN
       WRITE (xern1,'(I8)') i - Nvars
       CALL XERMSG('SPLPUP','IN SPLP, DEPENDENT VARIABLE = '//&
         xern1//' IS NOT DEFINED.',12,1)
@@ -99,8 +98,8 @@ SUBROUTINE SPLPUP(USRMAT,Mrelas,Nvars,Dattrv,Bl,Bu,Ind,Info,Amat,&
       RETURN
     END IF
     !
-    IF ( Ind(i)==3 ) THEN
-      IF ( Bl(i)>Bu(i) ) THEN
+    IF( Ind(i)==3 ) THEN
+      IF( Bl(i)>Bu(i) ) THEN
         WRITE (xern1,'(I8)') i
         WRITE (xern3,'(1PE15.6)') Bl(i)
         WRITE (xern4,'(1PE15.6)') Bu(i)
@@ -133,7 +132,7 @@ SUBROUTINE SPLPUP(USRMAT,Mrelas,Nvars,Dattrv,Bl,Bu,Ind,Info,Amat,&
     !     CHECK ON THE ITERATION COUNT.
     !
     itcnt = itcnt + 1
-    IF ( itcnt>itmax ) THEN
+    IF( itcnt>itmax ) THEN
       CALL XERMSG('SPLPUP',&
         'IN SPLP, MORE THAN 2*NVARS*MRELAS ITERATIONS DEFINING OR UPDATING MATRIX DATA.',7,1)
       Info = -7
@@ -142,27 +141,27 @@ SUBROUTINE SPLPUP(USRMAT,Mrelas,Nvars,Dattrv,Bl,Bu,Ind,Info,Amat,&
     !
     aij = zero
     CALL USRMAT(i,j,aij,indcat,Dattrv,iflag)
-    IF ( iflag(1)==1 ) THEN
+    IF( iflag(1)==1 ) THEN
       iflag(1) = 2
       CYCLE
     END IF
     !
     !     CHECK TO SEE THAT THE SUBSCRIPTS I AND J ARE VALID.
     !
-    IF ( i<1.OR.i>Mrelas.OR.j<1.OR.j>Nvars ) THEN
+    IF( i<1 .OR. i>Mrelas .OR. j<1 .OR. j>Nvars ) THEN
       !
       !        CHECK ON SIZE OF MATRIX DATA
       !        RECORD THE LARGEST AND SMALLEST(IN MAGNITUDE) NONZERO ELEMENTS.
       !
-      IF ( iflag(1)==3 ) THEN
-        IF ( Sizeup.AND.ABS(aij)/=zero ) THEN
-          IF ( first ) THEN
+      IF( iflag(1)==3 ) THEN
+        IF( Sizeup .AND. ABS(aij)/=zero ) THEN
+          IF( first ) THEN
             amx = ABS(aij)
             amn = ABS(aij)
             first = .FALSE.
-          ELSEIF ( ABS(aij)>amx ) THEN
+          ELSEIF( ABS(aij)>amx ) THEN
             amx = ABS(aij)
-          ELSEIF ( ABS(aij)<amn ) THEN
+          ELSEIF( ABS(aij)<amn ) THEN
             amn = ABS(aij)
           END IF
         END IF
@@ -180,12 +179,12 @@ SUBROUTINE SPLPUP(USRMAT,Mrelas,Nvars,Dattrv,Bl,Bu,Ind,Info,Amat,&
     !     IF INDCAT=0 THEN SET A(I,J)=AIJ.
     !     IF INDCAT=1 THEN ACCUMULATE ELEMENT, A(I,J)=A(I,J)+AIJ.
     !
-    IF ( indcat==0 ) THEN
+    IF( indcat==0 ) THEN
       CALL PCHNGS(i,aij,iplace,Amat,Imat,j)
-    ELSEIF ( indcat==1 ) THEN
+    ELSEIF( indcat==1 ) THEN
       indexx = -(i-1)
       CALL PNNZRS(indexx,xval,iplace,Amat,Imat,j)
-      IF ( indexx==i ) aij = aij + xval
+      IF( indexx==i ) aij = aij + xval
       CALL PCHNGS(i,aij,iplace,Amat,Imat,j)
     ELSE
       WRITE (xern1,'(I8)') indcat
@@ -198,22 +197,22 @@ SUBROUTINE SPLPUP(USRMAT,Mrelas,Nvars,Dattrv,Bl,Bu,Ind,Info,Amat,&
     !     CHECK ON SIZE OF MATRIX DATA
     !     RECORD THE LARGEST AND SMALLEST(IN MAGNITUDE) NONZERO ELEMENTS.
     !
-    IF ( Sizeup.AND.ABS(aij)/=zero ) THEN
-      IF ( first ) THEN
+    IF( Sizeup .AND. ABS(aij)/=zero ) THEN
+      IF( first ) THEN
         amx = ABS(aij)
         amn = ABS(aij)
         first = .FALSE.
-      ELSEIF ( ABS(aij)>amx ) THEN
+      ELSEIF( ABS(aij)>amx ) THEN
         amx = ABS(aij)
-      ELSEIF ( ABS(aij)<amn ) THEN
+      ELSEIF( ABS(aij)<amn ) THEN
         amn = ABS(aij)
       END IF
     END IF
-    IF ( iflag(1)==3 ) EXIT
+    IF( iflag(1)==3 ) EXIT
   END DO
   !
-  IF ( Sizeup.AND..NOT.first ) THEN
-    IF ( amn<Asmall.OR.amx>Abig ) THEN
+  IF( Sizeup .AND. .NOT. first ) THEN
+    IF( amn<Asmall .OR. amx>Abig ) THEN
       CALL XERMSG('SPLPUP',&
         'IN SPLP, A MATRIX ELEMENT''S SIZE IS OUT OF THE SPECIFIED RANGE.',22,1)
       Info = -22

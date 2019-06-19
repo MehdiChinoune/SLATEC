@@ -1,7 +1,6 @@
 !** DHELS
 SUBROUTINE DHELS(A,Lda,N,Q,B)
-  !>
-  !  Internal routine for DGMRES.
+  !> Internal routine for DGMRES.
   !***
   ! **Library:**   SLATEC (SLAP)
   !***
@@ -69,12 +68,12 @@ SUBROUTINE DHELS(A,Lda,N,Q,B)
 
   USE blas, ONLY : DAXPY
   !     .. Scalar Arguments ..
-  INTEGER Lda, N
+  INTEGER :: Lda, N
   !     .. Array Arguments ..
   REAL(DP) :: A(Lda,*), B(*), Q(*)
   !     .. Local Scalars ..
   REAL(DP) :: c, s, t, t1, t2
-  INTEGER iq, k, kb, kp1
+  INTEGER :: iq, k, kb, kp1
   !* FIRST EXECUTABLE STATEMENT  DHELS
   !
   !         Minimize(B-A*X,B-A*X).  First form Q*B.

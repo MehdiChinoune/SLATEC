@@ -1,7 +1,6 @@
 !** DEXBVP
 SUBROUTINE DEXBVP(Y,Nrowy,Xpts,A,Nrowa,Alpha,B,Nrowb,Beta,Iflag,Work,Iwork)
-  !>
-  !  Subsidiary to DBVSUP
+  !> Subsidiary to DBVSUP
   !***
   ! **Library:**   SLATEC
   !***
@@ -47,7 +46,7 @@ SUBROUTINE DEXBVP(Y,Nrowy,Xpts,A,Nrowa,Alpha,B,Nrowb,Beta,Iflag,Work,Iwork)
   !* FIRST EXECUTABLE STATEMENT  DEXBVP
   kotc = 1
   iexp = 0
-  IF ( Iwork(7)==-1 ) iexp = Iwork(8)
+  IF( Iwork(7)==-1 ) iexp = Iwork(8)
   DO
     !
     !     COMPUTE ORTHONORMALIZATION TOLERANCES.
@@ -71,18 +70,18 @@ SUBROUTINE DEXBVP(Y,Nrowy,Xpts,A,Nrowa,Alpha,B,Nrowb,Beta,Iflag,Work,Iwork)
     !     ORTHONORMALIZATION TOLERANCE AND TRY AGAIN. THIS IS DONE
     !     A MAXIMUM OF 2 TIMES.
     !
-    IF ( Iflag/=30 ) THEN
+    IF( Iflag/=30 ) THEN
       !
       !- *********************************************************************
       !     IF DBVPOR RETURNS MESSAGE THAT THE MAXIMUM NUMBER OF
       !     ORTHONORMALIZATIONS HAS BEEN ATTAINED AND WE CANNOT CONTINUE, THEN
       !     WE ESTIMATE THE NEW STORAGE REQUIREMENTS IN ORDER TO SOLVE PROBLEM
       !
-      IF ( Iflag==13 ) THEN
+      IF( Iflag==13 ) THEN
         xl = ABS(xend_com-xbeg_com)
         zquit = ABS(x_com-xbeg_com)
         inc = INT( 1.5D0*xl/zquit*(mxnon_com+1) )
-        IF ( ndisk_com/=1 ) THEN
+        IF( ndisk_com/=1 ) THEN
           nsafw = inc*kkkzpw_com + needw_com
           nsafiw = inc*nfcc_com + neediw_com
         ELSE
@@ -99,7 +98,7 @@ SUBROUTINE DEXBVP(Y,Nrowy,Xpts,A,Nrowa,Alpha,B,Nrowb,Beta,Iflag,Work,Iwork)
       !
       Iwork(1) = mxnon_com
       EXIT
-    ELSEIF ( kotc==3.OR.nopg_com==1 ) THEN
+    ELSEIF( kotc==3 .OR. nopg_com==1 ) THEN
       Iwork(1) = mxnon_com
       EXIT
     ELSE

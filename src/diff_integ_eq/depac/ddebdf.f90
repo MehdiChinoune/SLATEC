@@ -1,7 +1,6 @@
 !** DDEBDF
 SUBROUTINE DDEBDF(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,DJAC)
-  !>
-  !  Solve an initial value problem in ordinary differential
+  !> Solve an initial value problem in ordinary differential
   !            equations using backward differentiation formulas.  It is
   !            intended primarily for stiff problems.
   !***
@@ -188,7 +187,7 @@ SUBROUTINE DDEBDF(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,DJAC)
   !             length.
   !
   !      NEQ -- Set it to the number of differential equations.
-  !             (NEQ .GE. 1)
+  !             (NEQ >= 1)
   !
   !      T -- Set it to the initial point of the integration.
   !             You must use a program variable for T because the code
@@ -201,8 +200,8 @@ SUBROUTINE DDEBDF(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,DJAC)
   !      TOUT -- Set it to the first point at which a solution is desired.
   !             You can take TOUT = T, in which case the code
   !             will evaluate the derivative of the solution at T and
-  !             return.  Integration either forward in T  (TOUT .GT. T)
-  !             or backward in T  (TOUT .LT. T)  is permitted.
+  !             return.  Integration either forward in T  (TOUT > T)
+  !             or backward in T  (TOUT < T)  is permitted.
   !
   !             The code advances the solution from T to TOUT using
   !             step sizes which are automatically selected so as to
@@ -324,7 +323,7 @@ SUBROUTINE DDEBDF(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,DJAC)
   !               faster.  The differential equation is said to have
   !               half-bandwidths ML (lower) and MU (upper) if equation I
   !               involves only unknowns Y(J) with
-  !                              I-ML .LE. J .LE. I+MU
+  !                              I-ML <= J <= I+MU
   !               for all I=1,2,...,NEQ.  Thus, ML and MU are the widths
   !               of the lower and upper parts of the band, respectively,
   !               with the main diagonal being excluded.  If you do not
@@ -332,7 +331,7 @@ SUBROUTINE DDEBDF(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,DJAC)
   !               the code works with a full matrix of NEQ**2 elements
   !               (stored in the conventional way).  Computations with
   !               banded matrices cost less time and storage than with
-  !               full matrices if  2*ML+MU .LT. NEQ.  If you tell the
+  !               full matrices if  2*ML+MU < NEQ.  If you tell the
   !               code that the Jacobian matrix has a banded structure and
   !               you want to provide subroutine DJAC to compute the
   !               partial derivatives, then you must be careful to store
@@ -360,7 +359,7 @@ SUBROUTINE DDEBDF(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,DJAC)
   !
   !             The tolerances are used by the code in a local error test
   !             at each step which requires roughly that
-  !                     ABS(LOCAL ERROR) .LE. RTOL*ABS(Y)+ATOL
+  !                     ABS(LOCAL ERROR) <= RTOL*ABS(Y)+ATOL
   !             for each vector component.
   !             (More specifically, a root-mean-square norm is used to
   !             measure the size of vectors, and the error test uses the
@@ -419,9 +418,9 @@ SUBROUTINE DDEBDF(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,DJAC)
   !
   !      LRW -- Set it to the declared length of the RWORK array.
   !             You must have
-  !                  LRW .GE. 250+10*NEQ+NEQ**2
+  !                  LRW >= 250+10*NEQ+NEQ**2
   !             for the full (dense) Jacobian case (when INFO(6)=0),  or
-  !                  LRW .GE. 250+10*NEQ+(2*ML+MU+1)*NEQ
+  !                  LRW >= 250+10*NEQ+(2*ML+MU+1)*NEQ
   !             for the banded Jacobian case (when INFO(6)=1).
   !
   !      IWORK(*) -- Dimension this INTEGER work array of length LIW in
@@ -437,7 +436,7 @@ SUBROUTINE DDEBDF(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,DJAC)
   !             a matrix containing at most  (2*ML+MU+1)*NEQ  elements.)
   !
   !      LIW -- Set it to the declared length of the IWORK array.
-  !             You must have LIW .GE. 56+NEQ.
+  !             You must have LIW >= 56+NEQ.
   !
   !      RPAR, IPAR -- These are parameter arrays, of DOUBLE PRECISION and
   !             INTEGER type, respectively. You can use them for
@@ -774,10 +773,10 @@ SUBROUTINE DDEBDF(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,DJAC)
   !        CHECK FOR AN APPARENT INFINITE LOOP
   !
   !* FIRST EXECUTABLE STATEMENT  DDEBDF
-  IF ( Info(1)==0 ) Iwork(Liw) = 0
+  IF( Info(1)==0 ) Iwork(Liw) = 0
   !
-  IF ( Iwork(Liw)>=5 ) THEN
-    IF ( T==Rwork(21+Neq) ) THEN
+  IF( Iwork(Liw)>=5 ) THEN
+    IF( T==Rwork(21+Neq) ) THEN
       WRITE (xern3,'(1PE15.6)') T
       CALL XERMSG('DDEBDF','AN APPARENT INFINITE LOOP HAS BEEN DETECTED.&
         &$$YOU HAVE MADE REPEATED CALLS AT T = '//xern3//' AND THE INTEGRATION&
@@ -791,7 +790,7 @@ SUBROUTINE DDEBDF(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,DJAC)
   !
   !        CHECK VALIDITY OF INFO PARAMETERS
   !
-  IF ( Info(1)/=0.AND.Info(1)/=1 ) THEN
+  IF( Info(1)/=0 .AND. Info(1)/=1 ) THEN
     WRITE (xern1,'(I8)') Info(1)
     CALL XERMSG('DDEBDF','INFO(1) MUST BE SET TO 0 FOR THE  START&
       & OF A NEW PROBLEM, AND MUST BE SET TO 1 FOLLOWING AN INTERRUPTED TASK.&
@@ -800,7 +799,7 @@ SUBROUTINE DDEBDF(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,DJAC)
     Idid = -33
   END IF
   !
-  IF ( Info(2)/=0.AND.Info(2)/=1 ) THEN
+  IF( Info(2)/=0 .AND. Info(2)/=1 ) THEN
     WRITE (xern1,'(I8)') Info(2)
     CALL XERMSG('DDEBDF','INFO(2) MUST BE 0 OR 1 INDICATING SCALAR&
       & AND VECTOR ERROR TOLERANCES, RESPECTIVELY.&
@@ -808,7 +807,7 @@ SUBROUTINE DDEBDF(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,DJAC)
     Idid = -33
   END IF
   !
-  IF ( Info(3)/=0.AND.Info(3)/=1 ) THEN
+  IF( Info(3)/=0 .AND. Info(3)/=1 ) THEN
     WRITE (xern1,'(I8)') Info(3)
     CALL XERMSG('DDEBDF','INFO(3) MUST BE 0 OR 1 INDICATING THE&
       & INTERVAL OR INTERMEDIATE-OUTPUT MODE OF INTEGRATION, RESPECTIVELY.&
@@ -816,7 +815,7 @@ SUBROUTINE DDEBDF(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,DJAC)
     Idid = -33
   END IF
   !
-  IF ( Info(4)/=0.AND.Info(4)/=1 ) THEN
+  IF( Info(4)/=0 .AND. Info(4)/=1 ) THEN
     WRITE (xern1,'(I8)') Info(4)
     CALL XERMSG('DDEBDF','INFO(4) MUST BE 0 OR 1 INDICATING WHETHER&
       & OR NOT THE INTEGRATION INTERVAL IS TO BE RESTRICTED BY A POINT TSTOP.&
@@ -824,7 +823,7 @@ SUBROUTINE DDEBDF(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,DJAC)
     Idid = -33
   END IF
   !
-  IF ( Info(5)/=0.AND.Info(5)/=1 ) THEN
+  IF( Info(5)/=0 .AND. Info(5)/=1 ) THEN
     WRITE (xern1,'(I8)') Info(5)
     CALL XERMSG('DDEBDF','INFO(5) MUST BE 0 OR 1 INDICATING WHETHER&
       & THE CODE IS TOLD TO FORM THE JACOBIAN MATRIX BY NUMERICAL DIFFERENCING&
@@ -833,7 +832,7 @@ SUBROUTINE DDEBDF(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,DJAC)
     Idid = -33
   END IF
   !
-  IF ( Info(6)/=0.AND.Info(6)/=1 ) THEN
+  IF( Info(6)/=0 .AND. Info(6)/=1 ) THEN
     WRITE (xern1,'(I8)') Info(6)
     CALL XERMSG('DDEBDF','INFO(6) MUST BE 0 OR 1 INDICATING WHETHER&
       & THE CODE IS TOLD TO TREAT THE JACOBIAN AS A FULL (DENSE) MATRIX OR AS&
@@ -842,7 +841,7 @@ SUBROUTINE DDEBDF(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,DJAC)
   END IF
   !
   ilrw = Neq
-  IF ( Info(6)/=0 ) THEN
+  IF( Info(6)/=0 ) THEN
     !
     !        CHECK BANDWIDTH PARAMETERS
     !
@@ -850,13 +849,13 @@ SUBROUTINE DDEBDF(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,DJAC)
     mu = Iwork(2)
     ilrw = 2*ml + mu + 1
     !
-    IF ( ml<0.OR.ml>=Neq.OR.mu<0.OR.mu>=Neq ) THEN
+    IF( ml<0 .OR. ml>=Neq .OR. mu<0 .OR. mu>=Neq ) THEN
       WRITE (xern1,'(I8)') ml
       WRITE (xern2,'(I8)') mu
       CALL XERMSG('DDEBDF','YOU HAVE SET INFO(6) = 1,&
         & TELLING THE CODE THAT THE JACOBIAN MATRIX HAS A SPECIAL BANDED STRUCTURE.&
         & HOWEVER, THE LOWER (UPPER) BANDWIDTHS  ML (MU) VIOLATE THE CONSTRAINTS&
-        & ML,MU .GE. 0 AND  ML,MU .LT. NEQ.  YOU HAVE CALLED THE CODE WITH ML = '&
+        & ML,MU >= 0 AND  ML,MU < NEQ.  YOU HAVE CALLED THE CODE WITH ML = '&
         //xern1//' AND MU = '//xern2,17,1)
       Idid = -33
     END IF
@@ -864,9 +863,9 @@ SUBROUTINE DDEBDF(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,DJAC)
   !
   !        CHECK LRW AND LIW FOR SUFFICIENT STORAGE ALLOCATION
   !
-  IF ( Lrw<250+(10+ilrw)*Neq ) THEN
+  IF( Lrw<250+(10+ilrw)*Neq ) THEN
     WRITE (xern1,'(I8)') Lrw
-    IF ( Info(6)==0 ) THEN
+    IF( Info(6)==0 ) THEN
       CALL XERMSG('DDEBDF','LENGTH OF ARRAY RWORK MUST BE AT LEAST 250&
         & + 10*NEQ + NEQ*NEQ.$$YOU HAVE CALLED THE CODE WITH  LRW = '//xern1,1,1)
     ELSE
@@ -876,7 +875,7 @@ SUBROUTINE DDEBDF(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,DJAC)
     Idid = -33
   END IF
   !
-  IF ( Liw<56+Neq ) THEN
+  IF( Liw<56+Neq ) THEN
     WRITE (xern1,'(I8)') Liw
     CALL XERMSG('DDEBDF','LENGTH OF ARRAY IWORK BE AT LEAST  56 + NEQ.  YOU HAVE CALLED THE CODE WITH LIW = '//xern1,2,1)
     Idid = -33
@@ -892,7 +891,7 @@ SUBROUTINE DDEBDF(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,DJAC)
   itstar = 21 + Neq
   icomr = 22 + Neq
   !
-  IF ( Info(1)/=0 ) intout = Iwork(iinout)/=(-1)
+  IF( Info(1)/=0 ) intout = Iwork(iinout)/=(-1)
   !     CALL DRSCO(RWORK(ICOMR),IWORK(ICOMI))
   !
   iyh_com = icomr + 218
@@ -915,10 +914,10 @@ SUBROUTINE DDEBDF(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,DJAC)
     Rwork(iwm_com:idelsn),Iwork,DJAC,intout,Rwork(1),Rwork(12),Rwork(idelsn))
   !
   Iwork(iinout) = -1
-  IF ( intout ) Iwork(iinout) = 1
+  IF( intout ) Iwork(iinout) = 1
   !
-  IF ( Idid/=(-2) ) Iwork(Liw) = Iwork(Liw) + 1
-  IF ( T/=Rwork(itstar) ) Iwork(Liw) = 0
+  IF( Idid/=(-2) ) Iwork(Liw) = Iwork(Liw) + 1
+  IF( T/=Rwork(itstar) ) Iwork(Liw) = 0
   !     CALL DSVCO(RWORK(ICOMR),IWORK(ICOMI))
   Rwork(11) = h_com
   Rwork(13) = tn_com

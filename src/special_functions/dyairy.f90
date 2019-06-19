@@ -1,7 +1,6 @@
 !** DYAIRY
 SUBROUTINE DYAIRY(X,Rx,C,Bi,Dbi)
-  !>
-  !  Subsidiary to DBESJ and DBESY
+  !> Subsidiary to DBESJ and DBESY
   !***
   ! **Library:**   SLATEC
   !***
@@ -38,7 +37,7 @@ SUBROUTINE DYAIRY(X,Rx,C,Bi,Dbi)
   !   910408  Updated the AUTHOR section.  (WRB)
 
   !
-  INTEGER i, j
+  INTEGER :: i, j
   REAL(DP) :: ax, Bi, C, cv, Dbi, d1, d2, ex, e1, e2, f1, f2, rtrx, Rx, s1, s2, &
     t, tc, temp1, temp2, tt, X
   INTEGER, PARAMETER :: n1 = 20, n2 = 19, n3 = 14
@@ -153,9 +152,9 @@ SUBROUTINE DYAIRY(X,Rx,C,Bi,Dbi)
   ax = ABS(X)
   Rx = SQRT(ax)
   C = con1*ax*Rx
-  IF ( X<0.0D0 ) THEN
+  IF( X<0.0D0 ) THEN
     !
-    IF ( C>5.0D0 ) THEN
+    IF( C>5.0D0 ) THEN
       !
       rtrx = SQRT(Rx)
       t = 10.0D0/C - 1.0D0
@@ -198,7 +197,7 @@ SUBROUTINE DYAIRY(X,Rx,C,Bi,Dbi)
       Dbi = (temp1*COS(cv)-temp2*SIN(cv))*rtrx
       RETURN
     END IF
-  ELSEIF ( C>8.0D0 ) THEN
+  ELSEIF( C>8.0D0 ) THEN
     !
     rtrx = SQRT(Rx)
     t = 16.0D0/C - 1.0D0
@@ -225,7 +224,7 @@ SUBROUTINE DYAIRY(X,Rx,C,Bi,Dbi)
     d1 = t*f1 - f2 + dbk3(1)
     tc = C + C
     ex = EXP(C)
-    IF ( tc>35.0D0 ) THEN
+    IF( tc>35.0D0 ) THEN
       Bi = ex*s1/rtrx
       Dbi = ex*rtrx*d1
       RETURN
@@ -258,7 +257,7 @@ SUBROUTINE DYAIRY(X,Rx,C,Bi,Dbi)
       Dbi = Dbi*ex
       RETURN
     END IF
-  ELSEIF ( X>2.5D0 ) THEN
+  ELSEIF( X>2.5D0 ) THEN
     rtrx = SQRT(Rx)
     t = (X+X-con2)*con3
     tt = t + t

@@ -1,8 +1,7 @@
 !** D9LGIC
 REAL(DP) FUNCTION D9LGIC(A,X,Alx)
-  !>
-  !  Compute the log complementary incomplete Gamma function
-  !            for large X and for A .LE. X.
+  !> Compute the log complementary incomplete Gamma function
+  !            for large X and for A <= X.
   !***
   ! **Library:**   SLATEC (FNLIB)
   !***
@@ -18,7 +17,7 @@ REAL(DP) FUNCTION D9LGIC(A,X,Alx)
   ! **Description:**
   !
   ! Compute the log complementary incomplete gamma function for large X
-  ! and for A .LE. X.
+  ! and for A <= X.
   !
   !***
   ! **References:**  (NONE)
@@ -51,7 +50,7 @@ REAL(DP) FUNCTION D9LGIC(A,X,Alx)
     r = -t/((xma+2.D0*fk)*(xpa+2.D0*fk)+t)
     p = r*p
     s = s + p
-    IF ( ABS(p)<eps*s ) GOTO 100
+    IF( ABS(p)<eps*s ) GOTO 100
   END DO
   CALL XERMSG('D9LGIC',&
     'NO CONVERGENCE IN 300 TERMS OF CONTINUED FRACTION',1,2)

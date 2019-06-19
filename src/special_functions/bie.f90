@@ -1,7 +1,6 @@
 !** BIE
 REAL(SP) FUNCTION BIE(X)
-  !>
-  !  Calculate the Bairy function for a negative argument and an
+  !> Calculate the Bairy function for a negative argument and an
   !            exponentially scaled Bairy function for a non-negative
   !            argument.
   !***
@@ -18,8 +17,8 @@ REAL(SP) FUNCTION BIE(X)
   !***
   ! **Description:**
   !
-  ! Evaluate BI(X) for X .LE. 0  and  BI(X)*EXP(ZETA)  where
-  ! ZETA = 2/3 * X**(3/2)  for X .GE. 0.0
+  ! Evaluate BI(X) for X <= 0  and  BI(X)*EXP(ZETA)  where
+  ! ZETA = 2/3 * X**(3/2)  for X >= 0.0
   !
   ! Series for BIF        on the interval -1.00000D+00 to  1.00000D+00
   !                                        with weighted error   1.88E-19
@@ -110,7 +109,7 @@ REAL(SP) FUNCTION BIE(X)
   REAL(SP), PARAMETER :: btr = -2.093836321356054E0
   LOGICAL, SAVE :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  BIE
-  IF ( first ) THEN
+  IF( first ) THEN
     nbif = INITS(bifcs,9,eta)
     nbig = INITS(bigcs,8,eta)
     nbif2 = INITS(bif2cs,10,eta)
@@ -120,29 +119,29 @@ REAL(SP) FUNCTION BIE(X)
     first = .FALSE.
   END IF
   !
-  IF ( X<(-1.0) ) THEN
+  IF( X<(-1.0) ) THEN
     CALL R9AIMP(X,xm,theta)
     BIE = xm*SIN(theta)
     RETURN
     !
-  ELSEIF ( X<=1.0 ) THEN
+  ELSEIF( X<=1.0 ) THEN
     z = 0.0
-    IF ( ABS(X)>x3sml ) z = X**3
+    IF( ABS(X)>x3sml ) z = X**3
     BIE = 0.625 + CSEVL(z,bifcs,nbif) + X*(0.4375+CSEVL(z,bigcs,nbig))
-    IF ( X>x32sml ) BIE = BIE*EXP(-2.0*X*SQRT(X)/3.0)
+    IF( X>x32sml ) BIE = BIE*EXP(-2.0*X*SQRT(X)/3.0)
     RETURN
     !
-  ELSEIF ( X<=2.0 ) THEN
+  ELSEIF( X<=2.0 ) THEN
     z = (2.0*X**3-9.0)/7.0
     BIE = EXP(-2.0*X*SQRT(X)/3.0)&
       *(1.125+CSEVL(z,bif2cs,nbif2)+X*(0.625+CSEVL(z,big2cs,nbig2)))
     RETURN
     !
-  ELSEIF ( X>4.0 ) THEN
+  ELSEIF( X>4.0 ) THEN
     !
     sqrtx = SQRT(X)
     z = -1.0
-    IF ( X<xbig ) z = 16.0/(X*sqrtx) - 1.0
+    IF( X<xbig ) z = 16.0/(X*sqrtx) - 1.0
     BIE = (0.625+CSEVL(z,bip2cs,nbip2))/SQRT(sqrtx)
     RETURN
   END IF

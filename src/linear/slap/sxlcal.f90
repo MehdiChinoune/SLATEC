@@ -1,8 +1,7 @@
 !** SXLCAL
 SUBROUTINE SXLCAL(N,Lgmr,X,Xl,Zl,Hes,Maxlp1,Q,V,R0nrm,Wk,Sz,Jscal,Jpre,&
     MSOLVE,Nmsl,Rpar,Ipar)
-  !>
-  !  Internal routine for SGMRES.
+  !> Internal routine for SGMRES.
   !***
   ! **Library:**   SLATEC (SLAP)
   !***
@@ -172,12 +171,12 @@ SUBROUTINE SXLCAL(N,Lgmr,X,Xl,Zl,Hes,Maxlp1,Q,V,R0nrm,Wk,Sz,Jscal,Jpre,&
   DO i = 1, ll
     CALL SAXPY(N,Wk(i),V(1,i),1,Zl,1)
   END DO
-  IF ( (Jscal==1).OR.(Jscal==3) ) THEN
+  IF( (Jscal==1) .OR. (Jscal==3) ) THEN
     DO k = 1, N
       Zl(k) = Zl(k)/Sz(k)
     END DO
   END IF
-  IF ( Jpre>0 ) THEN
+  IF( Jpre>0 ) THEN
     Wk = Zl
     CALL MSOLVE(N,Wk,Zl,Rpar,Ipar)
     Nmsl = Nmsl + 1

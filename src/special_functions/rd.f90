@@ -1,7 +1,6 @@
 !** RD
 REAL(SP) FUNCTION RD(X,Y,Z,Ier)
-  !>
-  !  Compute the incomplete or complete elliptic integral of the
+  !> Compute the incomplete or complete elliptic integral of the
   !            2nd kind.  For X and Y nonnegative, X+Y and Z positive,
   !             RD(X,Y,Z) = Integral from zero to infinity of
   !                                -1/2     -1/2     -3/2
@@ -85,9 +84,9 @@ REAL(SP) FUNCTION RD(X,Y,Z,Ier)
   !         Value of IER assigned by the RD routine
   !
   !                  Value Assigned         Error Message Printed
-  !                  IER = 1                MIN(X,Y) .LT. 0.0E0
-  !                      = 2                MIN(X + Y, Z ) .LT. LOLIM
-  !                      = 3                MAX(X,Y,Z) .GT. UPLIM
+  !                  IER = 1                MIN(X,Y) < 0.0E0
+  !                      = 2                MIN(X + Y, Z ) < LOLIM
+  !                      = 3                MAX(X,Y,Z) > UPLIM
   !
   !
   !   4.     Control Parameters
@@ -332,33 +331,33 @@ REAL(SP) FUNCTION RD(X,Y,Z,Ier)
   !         CALL ERROR HANDLER IF NECESSARY.
   !
   RD = 0.0E0
-  IF ( MIN(X,Y)<0.0E0 ) THEN
+  IF( MIN(X,Y)<0.0E0 ) THEN
     Ier = 1
     WRITE (xern3,'(1PE15.6)') X
     WRITE (xern4,'(1PE15.6)') Y
-    CALL XERMSG('RD','MIN(X,Y).LT.0 WHERE X = '//xern3//&
+    CALL XERMSG('RD','MIN(X,Y)<0 WHERE X = '//xern3//&
       ' AND Y = '//xern4,1,1)
     RETURN
   END IF
   !
-  IF ( MAX(X,Y,Z)>uplim ) THEN
+  IF( MAX(X,Y,Z)>uplim ) THEN
     Ier = 3
     WRITE (xern3,'(1PE15.6)') X
     WRITE (xern4,'(1PE15.6)') Y
     WRITE (xern5,'(1PE15.6)') Z
     WRITE (xern6,'(1PE15.6)') uplim
-    CALL XERMSG('RD','MAX(X,Y,Z).GT.UPLIM WHERE X = '//xern3//&
+    CALL XERMSG('RD','MAX(X,Y,Z)>UPLIM WHERE X = '//xern3//&
       ' Y = '//xern4//' Z = '//xern5//' AND UPLIM = '//xern6,3,1)
     RETURN
   END IF
   !
-  IF ( MIN(X+Y,Z)<lolim ) THEN
+  IF( MIN(X+Y,Z)<lolim ) THEN
     Ier = 2
     WRITE (xern3,'(1PE15.6)') X
     WRITE (xern4,'(1PE15.6)') Y
     WRITE (xern5,'(1PE15.6)') Z
     WRITE (xern6,'(1PE15.6)') lolim
-    CALL XERMSG('RD','MIN(X+Y,Z).LT.LOLIM WHERE X = '//xern3//&
+    CALL XERMSG('RD','MIN(X+Y,Z)<LOLIM WHERE X = '//xern3//&
       ' Y = '//xern4//' Z = '//xern5//' AND LOLIM = '//xern6,2,1)
     RETURN
   END IF
@@ -376,7 +375,7 @@ REAL(SP) FUNCTION RD(X,Y,Z,Ier)
     yndev = (mu-yn)/mu
     zndev = (mu-zn)/mu
     epslon = MAX(ABS(xndev),ABS(yndev),ABS(zndev))
-    IF ( epslon<errtol ) THEN
+    IF( epslon<errtol ) THEN
       !
       ea = xndev*yndev
       eb = zndev*zndev

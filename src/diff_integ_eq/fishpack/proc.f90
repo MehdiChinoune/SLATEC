@@ -1,7 +1,6 @@
 !** PROC
 SUBROUTINE PROC(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Y,M,A,B,C,D,W,U)
-  !>
-  !  Subsidiary to CBLKTR
+  !> Subsidiary to CBLKTR
   !***
   ! **Library:**   SLATEC
   !***
@@ -53,9 +52,9 @@ SUBROUTINE PROC(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Y,M,A,B,C,D,W,U)
   ia = Na
   100 CONTINUE
   DO
-    IF ( ia>0 ) THEN
+    IF( ia>0 ) THEN
       rt = Aa(ia)
-      IF ( Nd==0 ) rt = -rt
+      IF( Nd==0 ) rt = -rt
       ia = ia - 1
       !
       ! SCALAR MULTIPLICATION
@@ -64,10 +63,10 @@ SUBROUTINE PROC(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Y,M,A,B,C,D,W,U)
         Y(j) = rt*W(j)
       END DO
     END IF
-    IF ( id<=0 ) RETURN
+    IF( id<=0 ) RETURN
     rt = Bd(id)
     id = id - 1
-    IF ( id==0 ) ibr = 1
+    IF( id==0 ) ibr = 1
     !
     ! BEGIN SOLUTION TO SYSTEM
     !
@@ -81,17 +80,17 @@ SUBROUTINE PROC(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Y,M,A,B,C,D,W,U)
     END DO
     den = B(1) - rt - C(1)*D(2)
     W(1) = (1.,0.)
-    IF ( ABS(den)/=0 ) W(1) = (Y(1)-C(1)*W(2))/den
+    IF( ABS(den)/=0 ) W(1) = (Y(1)-C(1)*W(2))/den
     DO j = 2, M
       W(j) = W(j) - D(j)*W(j-1)
     END DO
-    IF ( Na<=0 ) THEN
-      IF ( m1<=0 ) THEN
-        IF ( m2>0 ) GOTO 400
+    IF( Na<=0 ) THEN
+      IF( m1<=0 ) THEN
+        IF( m2>0 ) GOTO 400
         EXIT
       ELSE
-        IF ( m2<=0 ) GOTO 300
-        IF ( ABS(Bm1(m1))>ABS(Bm2(m2)) ) GOTO 300
+        IF( m2<=0 ) GOTO 300
+        IF( ABS(Bm1(m1))>ABS(Bm2(m2)) ) GOTO 300
         GOTO 400
       END IF
     END IF
@@ -103,15 +102,15 @@ SUBROUTINE PROC(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Y,M,A,B,C,D,W,U)
   ibr = 1
   GOTO 100
   300 CONTINUE
-  IF ( ibr<=0 ) THEN
-    IF ( ABS(Bm1(m1)-Bd(id))<ABS(Bm1(m1)-rt) ) GOTO 200
+  IF( ibr<=0 ) THEN
+    IF( ABS(Bm1(m1)-Bd(id))<ABS(Bm1(m1)-rt) ) GOTO 200
   END IF
   rt = rt - Bm1(m1)
   m1 = m1 - 1
   GOTO 500
   400 CONTINUE
-  IF ( ibr<=0 ) THEN
-    IF ( ABS(Bm2(m2)-Bd(id))<ABS(Bm2(m2)-rt) ) GOTO 200
+  IF( ibr<=0 ) THEN
+    IF( ABS(Bm2(m2)-Bd(id))<ABS(Bm2(m2)-rt) ) GOTO 200
   END IF
   rt = rt - Bm2(m2)
   m2 = m2 - 1

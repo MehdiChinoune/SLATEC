@@ -1,7 +1,6 @@
 !** CPZERO
 SUBROUTINE CPZERO(In,A,R,T,Iflg,S)
-  !>
-  !  Find the zeros of a polynomial with complex coefficients.
+  !> Find the zeros of a polynomial with complex coefficients.
   !***
   ! **Library:**   SLATEC
   !***
@@ -27,8 +26,8 @@ SUBROUTINE CPZERO(In,A,R,T,Iflg,S)
   !       T = 4(N+1) word array used for temporary storage
   !       IFLG = flag to indicate if initial estimates of
   !              zeros are input.
-  !            If IFLG .EQ. 0, no estimates are input.
-  !            If IFLG .NE. 0, the vector R contains estimates of
+  !            If IFLG = 0, no estimates are input.
+  !            If IFLG /= 0, the vector R contains estimates of
   !               the zeros
   !       ** WARNING ****** If estimates are input, they must
   !                         be separated, that is, distinct or
@@ -40,9 +39,9 @@ SUBROUTINE CPZERO(In,A,R,T,Iflg,S)
   !       S(I) = bound for R(I) .
   !       IFLG = error diagnostic
   !    Error Diagnostics...
-  !       If IFLG .EQ. 0 on return, all is well
-  !       If IFLG .EQ. 1 on return, A(1)=0.0 or N=0 on input
-  !       If IFLG .EQ. 2 on return, the program failed to converge
+  !       If IFLG = 0 on return, all is well
+  !       If IFLG = 1 on return, A(1)=0.0 or N=0 on input
+  !       If IFLG = 2 on return, the program failed to converge
   !                after 25*N iterations.  Best current estimates of the
   !                zeros are in R(I).  Error bounds are not calculated.
   !
@@ -64,7 +63,7 @@ SUBROUTINE CPZERO(In,A,R,T,Iflg,S)
   REAL(SP) :: u, v, x
   COMPLEX(SP) :: pn(1), temp(1)
   !* FIRST EXECUTABLE STATEMENT  CPZERO
-  IF ( In<=0.OR.ABS(A(1))==0.0 ) THEN
+  IF( In<=0 .OR. ABS(A(1))==0.0 ) THEN
     Iflg = 1
     RETURN
   ELSE
@@ -73,14 +72,14 @@ SUBROUTINE CPZERO(In,A,R,T,Iflg,S)
     !
     n = In
     n1 = n + 1
-    IF ( Iflg==0 ) THEN
+    IF( Iflg==0 ) THEN
       DO
         n1 = n + 1
-        IF ( n<=1 ) THEN
+        IF( n<=1 ) THEN
           R(1) = -A(2)/A(1)
           S(1) = 0.0
           RETURN
-        ELSEIF ( ABS(A(n1))/=0.0 ) THEN
+        ELSEIF( ABS(A(n1))/=0.0 ) THEN
           !
           !          IF INITIAL ESTIMATES FOR ZEROS NOT GIVEN, FIND SOME
           !
@@ -90,21 +89,21 @@ SUBROUTINE CPZERO(In,A,R,T,Iflg,S)
           T(n1) = ABS(T(n1))
           DO i = 2, n1
             T(n+i) = -ABS(T(n+2-i))
-            IF ( REAL(T(n+i))<REAL(T(imax)) ) imax = n + i
+            IF( REAL(T(n+i))<REAL(T(imax)) ) imax = n + i
           END DO
           x = (-REAL(T(imax))/REAL(T(n1)))**(1./(imax-n1))
           DO
             x = 2.*x
             CALL CPEVL(n,0,T(n1),CMPLX(x,0.0),pn,pn,.FALSE.)
-            IF ( REAL(pn(1))>=0. ) THEN
+            IF( REAL(pn(1))>=0. ) THEN
               u = .5*x
               v = x
               DO
                 x = .5*(u+v)
                 CALL CPEVL(n,0,T(n1),CMPLX(x,0.0),pn,pn,.FALSE.)
-                IF ( REAL(pn(1))>0. ) v = x
-                IF ( REAL(pn(1))<=0. ) u = x
-                IF ( (v-u)<=.001*(1.+v) ) THEN
+                IF( REAL(pn(1))>0. ) v = x
+                IF( REAL(pn(1))<=0. ) u = x
+                IF( (v-u)<=.001*(1.+v) ) THEN
                   DO i = 1, n
                     u = (3.14159265/n)*(2*i-1.5)
                     R(i) = MAX(x,.001*ABS(temp(1)))*CMPLX(COS(u),SIN(u)) + temp(1)
@@ -128,12 +127,12 @@ SUBROUTINE CPZERO(In,A,R,T,Iflg,S)
     nmax = 25*n
     DO nit = 1, nmax
       DO i = 1, n
-        IF ( nit==1.OR.ABS(T(i))/=0. ) THEN
+        IF( nit==1 .OR. ABS(T(i))/=0. ) THEN
           CALL CPEVL(n,0,A,R(i),pn,temp,.TRUE.)
-          IF ( ABS(REAL(pn(1)))+ABS(AIMAG(pn(1)))>REAL(temp(1))+AIMAG(temp(1)) ) THEN
+          IF( ABS(REAL(pn(1)))+ABS(AIMAG(pn(1)))>REAL(temp(1))+AIMAG(temp(1)) ) THEN
             temp = A(1)
             DO j = 1, n
-              IF ( j/=i ) temp = temp*(R(i)-R(j))
+              IF( j/=i ) temp = temp*(R(i)-R(j))
             END DO
             T(i) = pn(1)/temp(1)
           ELSE
@@ -145,7 +144,7 @@ SUBROUTINE CPZERO(In,A,R,T,Iflg,S)
       DO i = 1, n
         R(i) = R(i) - T(i)
       END DO
-      IF ( nr==n ) GOTO 100
+      IF( nr==n ) GOTO 100
     END DO
     GOTO 200
   END IF

@@ -1,8 +1,7 @@
 !** SDAJAC
 SUBROUTINE SDAJAC(Neq,X,Y,Yprime,Delta,Cj,H,Ier,Wt,E,Wm,Iwm,RES,Ires,&
     Uround,JAC,Ntemp)
-  !>
-  !  Compute the iteration matrix for SDASSL and form the
+  !> Compute the iteration matrix for SDASSL and form the
   !            LU-decomposition.
   !***
   ! **Library:**   SLATEC (DASSL)
@@ -26,7 +25,7 @@ SUBROUTINE SDAJAC(Neq,X,Y,Yprime,Delta,Cj,H,Ier,Wt,E,Wm,Iwm,RES,Ires,&
   !                (USED ONLY IF IWM(MTYPE)=2 OR 5)
   !     CJ       = SCALAR PARAMETER DEFINING ITERATION MATRIX
   !     H        = CURRENT STEPSIZE IN INTEGRATION
-  !     IER      = VARIABLE WHICH IS .NE. 0
+  !     IER      = VARIABLE WHICH IS /= 0
   !                IF ITERATION MATRIX IS SINGULAR,
   !                AND 0 OTHERWISE.
   !     WT       = VECTOR OF WEIGHTS FOR COMPUTING NORMS
@@ -41,7 +40,7 @@ SUBROUTINE SDAJAC(Neq,X,Y,Yprime,Delta,Cj,H,Ier,Wt,E,Wm,Iwm,RES,Ires,&
   !     IRES     = FLAG WHICH IS EQUAL TO ZERO IF NO ILLEGAL VALUES
   !                IN RES, AND LESS THAN ZERO OTHERWISE.  (IF IRES
   !                IS LESS THAN ZERO, THE MATRIX WAS NOT COMPLETED)
-  !                IN THIS CASE (IF IRES .LT. 0), THEN IER = 0.
+  !                IN THIS CASE (IF IRES < 0), THEN IER = 0.
   !     UROUND   = THE UNIT ROUNDOFF ERROR OF THE MACHINE BEING USED.
   !     JAC      = NAME OF THE EXTERNAL USER-SUPPLIED ROUTINE
   !                TO EVALUATE THE ITERATION MATRIX (THIS ROUTINE
@@ -108,7 +107,7 @@ SUBROUTINE SDAJAC(Neq,X,Y,Yprime,Delta,Cj,H,Ier,Wt,E,Wm,Iwm,RES,Ires,&
         Y(i) = Y(i) + del
         Yprime(i) = Yprime(i) + Cj*del
         CALL RES(X,Y,Yprime,E,Ires)
-        IF ( Ires<0 ) RETURN
+        IF( Ires<0 ) RETURN
         delinv = 1.0E0/del
         DO l = 1, Neq
           Wm(nrow+l) = (E(l)-Delta(l))*delinv
@@ -166,7 +165,7 @@ SUBROUTINE SDAJAC(Neq,X,Y,Yprime,Delta,Cj,H,Ier,Wt,E,Wm,Iwm,RES,Ires,&
           Yprime(n) = Yprime(n) + Cj*del
         END DO
         CALL RES(X,Y,Yprime,E,Ires)
-        IF ( Ires<0 ) RETURN
+        IF( Ires<0 ) RETURN
         DO n = j, Neq, mband
           k = (n-j)/mband + 1
           Y(n) = Wm(isave+k)

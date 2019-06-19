@@ -1,7 +1,6 @@
 !** DNSQE
 SUBROUTINE DNSQE(FCN,JAC,Iopt,N,X,Fvec,Tol,Nprint,Info,Wa,Lwa)
-  !>
-  !  An easy-to-use code to find a zero of a system of N
+  !> An easy-to-use code to find a zero of a system of N
   !            nonlinear functions in N variables by a modification of
   !            the Powell hybrid method.
   !***
@@ -163,7 +162,7 @@ SUBROUTINE DNSQE(FCN,JAC,Iopt,N,X,Fvec,Tol,Nprint,Info,Wa,Lwa)
   !       Convergence Test.  If DENORM(Z) denotes the Euclidean norm of a
   !         vector Z, then this test attempts to guarantee that
   !
-  !               DENORM(X-XSOL) .LE. TOL*DENORM(XSOL).
+  !               DENORM(X-XSOL) <= TOL*DENORM(XSOL).
   !
   !         If this condition is satisfied with TOL = 10**(-K), then the
   !         larger components of X have K significant decimal digits and
@@ -178,9 +177,9 @@ SUBROUTINE DNSQE(FCN,JAC,Iopt,N,X,Fvec,Tol,Nprint,Info,Wa,Lwa)
   !       function evaluations, errors in the functions, or lack of good
   !       progress.
   !
-  !       Improper Input Parameters.  INFO is set to 0 if IOPT .LT. 1, or
-  !         IOPT .GT. 2, or N .LE. 0, or TOL .LT. 0.E0, or
-  !         LWA .LT. (3*N**2+13*N)/2.
+  !       Improper Input Parameters.  INFO is set to 0 if IOPT < 1, or
+  !         IOPT > 2, or N <= 0, or TOL < 0.E0, or
+  !         LWA < (3*N**2+13*N)/2.
   !
   !       Arithmetic Interrupts.  If these interrupts occur in the FCN
   !         subroutine during an early stage of the computation, they may
@@ -303,9 +302,9 @@ SUBROUTINE DNSQE(FCN,JAC,Iopt,N,X,Fvec,Tol,Nprint,Info,Wa,Lwa)
   !       DO 10 K = 1, N
   !          TEMP = (THREE - TWO*X(K))*X(K)
   !          TEMP1 = ZERO
-  !          IF (K .NE. 1) TEMP1 = X(K-1)
+  !          IF(K /= 1) TEMP1 = X(K-1)
   !          TEMP2 = ZERO
-  !          IF (K .NE. N) TEMP2 = X(K+1)
+  !          IF(K /= N) TEMP2 = X(K+1)
   !          FVEC(K) = TEMP - TEMP1 - TWO*TEMP2 + ONE
   !    10    CONTINUE
   !       RETURN
@@ -366,13 +365,13 @@ SUBROUTINE DNSQE(FCN,JAC,Iopt,N,X,Fvec,Tol,Nprint,Info,Wa,Lwa)
   !        CHECK THE INPUT PARAMETERS FOR ERRORS.
   !
   !     ...EXIT
-  IF ( Iopt>=1.AND.Iopt<=2.AND.N>0.AND.Tol>=zero.AND.Lwa>=(3*N**2+13*N)/2 )&
+  IF( Iopt>=1 .AND. Iopt<=2 .AND. N>0 .AND. Tol>=zero .AND. Lwa>=(3*N**2+13*N)/2 )&
       THEN
     !
     !        CALL DNSQ.
     !
     maxfev = 100*(N+1)
-    IF ( Iopt==2 ) maxfev = 2*maxfev
+    IF( Iopt==2 ) maxfev = 2*maxfev
     xtol = Tol
     ml = N - 1
     mu = N - 1
@@ -386,9 +385,9 @@ SUBROUTINE DNSQE(FCN,JAC,Iopt,N,X,Fvec,Tol,Nprint,Info,Wa,Lwa)
     CALL DNSQ(FCN,JAC,Iopt,N,X,Fvec,Wa(indexx+1),N,xtol,maxfev,ml,mu,epsfcn,&
       Wa(1),mode,factor,Nprint,Info,nfev,njev,Wa(6*N+1),lr,Wa(N+1),&
       Wa(2*N+1),Wa(3*N+1),Wa(4*N+1),Wa(5*N+1))
-    IF ( Info==5 ) Info = 4
+    IF( Info==5 ) Info = 4
   END IF
-  IF ( Info==0 ) CALL XERMSG('DNSQE','INVALID INPUT PARAMETER.',2,1)
+  IF( Info==0 ) CALL XERMSG('DNSQE','INVALID INPUT PARAMETER.',2,1)
   !
   !     LAST CARD OF SUBROUTINE DNSQE.
   !

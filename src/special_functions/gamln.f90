@@ -1,7 +1,6 @@
 !** GAMLN
 REAL(SP) FUNCTION GAMLN(Z,Ierr)
-  !>
-  !  Compute the logarithm of the Gamma function
+  !> Compute the logarithm of the Gamma function
   !***
   ! **Library:**   SLATEC
   !***
@@ -16,9 +15,9 @@ REAL(SP) FUNCTION GAMLN(Z,Ierr)
   ! **Description:**
   !
   !         GAMLN COMPUTES THE NATURAL LOG OF THE GAMMA FUNCTION FOR
-  !         Z.GT.0.  THE ASYMPTOTIC EXPANSION IS USED TO GENERATE VALUES
+  !         Z>0.  THE ASYMPTOTIC EXPANSION IS USED TO GENERATE VALUES
   !         GREATER THAN ZMIN WHICH ARE ADJUSTED BY THE RECURSION
-  !         G(Z+1)=Z*G(Z) FOR Z.LE.ZMIN.  THE FUNCTION WAS MADE AS
+  !         G(Z+1)=Z*G(Z) FOR Z<=ZMIN.  THE FUNCTION WAS MADE AS
   !         PORTABLE AS POSSIBLE BY COMPUTING ZMIN FROM THE NUMBER OF BASE
   !         10 DIGITS IN A WORD, RLN=MAX(-ALOG10(R1MACH(4)),0.5E-18)
   !         LIMITED TO 18 DIGITS OF (RELATIVE) ACCURACY.
@@ -29,13 +28,13 @@ REAL(SP) FUNCTION GAMLN(Z,Ierr)
   !     DESCRIPTION OF ARGUMENTS
   !
   !         INPUT
-  !           Z      - REAL ARGUMENT, Z.GT.0.0E0
+  !           Z      - REAL ARGUMENT, Z>0.0E0
   !
   !         OUTPUT
   !           GAMLN  - NATURAL LOG OF THE GAMMA FUNCTION AT Z
   !           IERR   - ERROR FLAG
   !                    IERR=0, NORMAL RETURN, COMPUTATION COMPLETED
-  !                    IERR=1, Z.LE.0.0E0,    NO COMPUTATION
+  !                    IERR=1, Z<=0.0E0,    NO COMPUTATION
   !
   !***
   ! **References:**  COMPUTATION OF BESSEL FUNCTIONS OF COMPLEX ARGUMENT
@@ -51,8 +50,8 @@ REAL(SP) FUNCTION GAMLN(Z,Ierr)
   !   921215  GAMLN defined for Z negative.  (WRB)
   USE service, ONLY : R1MACH, I1MACH
   !
-  INTEGER i, i1m, k, mz, nz, Ierr
-  REAL(SP) fln, fz, rln, s, tlg, trm, tst, t1, wdtol, Z, zdmy, zinc, zm, zmin, zp, zsq
+  INTEGER :: i, i1m, k, mz, nz, Ierr
+  REAL(SP) :: fln, fz, rln, s, tlg, trm, tst, t1, wdtol, Z, zdmy, zinc, zm, zmin, zp, zsq
   !           LNGAMMA(N), N=1,100
   REAL(SP), PARAMETER :: gln(100) = [ 0.00000000000000000E+00, 0.00000000000000000E+00, &
     6.93147180559945309E-01, 1.79175946922805500E+00, 3.17805383034794562E+00, &
@@ -103,18 +102,18 @@ REAL(SP) FUNCTION GAMLN(Z,Ierr)
   !
   !* FIRST EXECUTABLE STATEMENT  GAMLN
   Ierr = 0
-  IF ( Z<=0.0E0 ) THEN
+  IF( Z<=0.0E0 ) THEN
     !
     !
     GAMLN = R1MACH(2)
     Ierr = 1
     RETURN
   ELSE
-    IF ( Z<=101.0E0 ) THEN
+    IF( Z<=101.0E0 ) THEN
       nz = INT( Z )
       fz = Z - nz
-      IF ( fz<=0.0E0 ) THEN
-        IF ( nz<=100 ) THEN
+      IF( fz<=0.0E0 ) THEN
+        IF( nz<=100 ) THEN
           GAMLN = gln(nz)
           RETURN
         END IF
@@ -132,24 +131,24 @@ REAL(SP) FUNCTION GAMLN(Z,Ierr)
     zmin = mz
     zdmy = Z
     zinc = 0.0E0
-    IF ( Z<zmin ) THEN
+    IF( Z<zmin ) THEN
       zinc = zmin - nz
       zdmy = Z + zinc
     END IF
     zp = 1.0E0/zdmy
     t1 = cf(1)*zp
     s = t1
-    IF ( zp>=wdtol ) THEN
+    IF( zp>=wdtol ) THEN
       zsq = zp*zp
       tst = t1*wdtol
       DO k = 2, 22
         zp = zp*zsq
         trm = cf(k)*zp
-        IF ( ABS(trm)<tst ) EXIT
+        IF( ABS(trm)<tst ) EXIT
         s = s + trm
       END DO
     END IF
-    IF ( zinc==0.0E0 ) THEN
+    IF( zinc==0.0E0 ) THEN
       tlg = LOG(Z)
       GAMLN = Z*(tlg-1.0E0) + 0.5E0*(con-tlg) + s
       RETURN

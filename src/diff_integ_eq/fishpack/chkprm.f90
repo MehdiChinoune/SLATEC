@@ -1,7 +1,6 @@
 !** CHKPRM
 SUBROUTINE CHKPRM(Intl,Iorder,A,B,M,Mbdcnd,C,D,N,Nbdcnd,COFX,COFY,Idmn,Ierror)
-  !>
-  !  Subsidiary to SEPELI
+  !> Subsidiary to SEPELI
   !***
   ! **Library:**   SLATEC
   !***
@@ -40,39 +39,39 @@ SUBROUTINE CHKPRM(Intl,Iorder,A,B,M,Mbdcnd,C,D,N,Nbdcnd,COFX,COFY,Idmn,Ierror)
   REAL(SP) :: ai, bi, ci, dj, dlx, dly, ej, fj, xi, yj
   !* FIRST EXECUTABLE STATEMENT  CHKPRM
   Ierror = 1
-  IF ( A>=B.OR.C>=D ) RETURN
+  IF( A>=B .OR. C>=D ) RETURN
   !
   !     CHECK BOUNDARY SWITCHES
   !
   Ierror = 2
-  IF ( Mbdcnd<0.OR.Mbdcnd>4 ) RETURN
+  IF( Mbdcnd<0 .OR. Mbdcnd>4 ) RETURN
   Ierror = 3
-  IF ( Nbdcnd<0.OR.Nbdcnd>4 ) RETURN
+  IF( Nbdcnd<0 .OR. Nbdcnd>4 ) RETURN
   !
   !     CHECK FIRST DIMENSION IN CALLING ROUTINE
   !
   Ierror = 5
-  IF ( Idmn<7 ) RETURN
+  IF( Idmn<7 ) RETURN
   !
   !     CHECK M
   !
   Ierror = 6
-  IF ( M>(Idmn-1).OR.M<6 ) RETURN
+  IF( M>(Idmn-1) .OR. M<6 ) RETURN
   !
   !     CHECK N
   !
   Ierror = 7
-  IF ( N<5 ) RETURN
+  IF( N<5 ) RETURN
   !
   !     CHECK IORDER
   !
   Ierror = 8
-  IF ( Iorder/=2.AND.Iorder/=4 ) RETURN
+  IF( Iorder/=2 .AND. Iorder/=4 ) RETURN
   !
   !     CHECK INTL
   !
   Ierror = 9
-  IF ( Intl/=0.AND.Intl/=1 ) RETURN
+  IF( Intl/=0 .AND. Intl/=1 ) RETURN
   !
   !     CHECK THAT EQUATION IS ELLIPTIC
   !
@@ -84,7 +83,7 @@ SUBROUTINE CHKPRM(Intl,Iorder,A,B,M,Mbdcnd,C,D,N,Nbdcnd,COFX,COFY,Idmn,Ierror)
     DO j = 2, N
       yj = C + (j-1)*dly
       CALL COFY(yj,dj,ej,fj)
-      IF ( ai*dj<=0.0 ) THEN
+      IF( ai*dj<=0.0 ) THEN
         Ierror = 10
         RETURN
       END IF

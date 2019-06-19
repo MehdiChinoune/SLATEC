@@ -1,7 +1,6 @@
 !** C0LGMC
 COMPLEX(SP) FUNCTION C0LGMC(Z)
-  !>
-  !  Evaluate (Z+0.5)*LOG((Z+1.)/Z) - 1.0 with relative
+  !> Evaluate (Z+0.5)*LOG((Z+1.)/Z) - 1.0 with relative
   !            accuracy.
   !***
   ! **Library:**   SLATEC (FNLIB)
@@ -40,11 +39,11 @@ COMPLEX(SP) FUNCTION C0LGMC(Z)
   !* FIRST EXECUTABLE STATEMENT  C0LGMC
   !
   cabsz = ABS(Z)
-  IF ( cabsz>rbig ) C0LGMC = -(Z+0.5)*LOG(Z) - Z
-  IF ( cabsz>rbig ) RETURN
+  IF( cabsz>rbig ) C0LGMC = -(Z+0.5)*LOG(Z) - Z
+  IF( cabsz>rbig ) RETURN
   !
   q = 1.0/Z
-  IF ( cabsz<=1.23 ) C0LGMC = (Z+0.5)*LOG(1.0+q) - 1.0
-  IF ( cabsz>1.23 ) C0LGMC = ((1.+.5*q)*C9LN2R(q)-.25)*q**2
+  IF( cabsz<=1.23 ) C0LGMC = (Z+0.5)*LOG(1.0+q) - 1.0
+  IF( cabsz>1.23 ) C0LGMC = ((1.+.5*q)*C9LN2R(q)-.25)*q**2
   !
 END FUNCTION C0LGMC

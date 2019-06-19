@@ -1,8 +1,7 @@
 !** SBCG
 SUBROUTINE SBCG(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MTTVEC,MSOLVE,MTSOLV,Itol,&
     Tol,Itmax,Iter,Err,Ierr,Iunit,R,Z,P,Rr,Zz,Pp,Dz,Rwork,Iwork)
-  !>
-  !  Preconditioned BiConjugate Gradient Sparse Ax = b Solver.
+  !> Preconditioned BiConjugate Gradient Sparse Ax = b Solver.
   !            Routine to solve a Non-Symmetric linear system  Ax = b
   !            using the Preconditioned BiConjugate Gradient method.
   !***
@@ -240,7 +239,7 @@ SUBROUTINE SBCG(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MTTVEC,MSOLVE,MTSOLV,Itol,&
   !
   !- Cautions:
   !     This routine will attempt to write to the Fortran logical output
-  !     unit IUNIT, if IUNIT .ne. 0.  Thus, the user must make sure that
+  !     unit IUNIT, if IUNIT /= 0.  Thus, the user must make sure that
   !     this logical unit is attached to a file or terminal before calling
   !     this routine with a non-zero value for IUNIT.  This routine does
   !     not check for the validity of a non-zero IUNIT unit number.
@@ -313,14 +312,14 @@ SUBROUTINE SBCG(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MTTVEC,MSOLVE,MTSOLV,Itol,&
   !
   Iter = 0
   Ierr = 0
-  IF ( N<1 ) THEN
+  IF( N<1 ) THEN
     Ierr = 3
     RETURN
   END IF
   fuzz = R1MACH(3)
   tolmin = 500*fuzz
   fuzz = fuzz*fuzz
-  IF ( Tol<tolmin ) THEN
+  IF( Tol<tolmin ) THEN
     Tol = tolmin
     Ierr = 4
   END IF
@@ -335,9 +334,9 @@ SUBROUTINE SBCG(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MTTVEC,MSOLVE,MTSOLV,Itol,&
   CALL MSOLVE(N,R,Z,Rwork,Iwork)
   CALL MTSOLV(N,Rr,Zz,Rwork,Iwork)
   !
-  IF ( ISSBCG(N,B,X,MSOLVE,Itol,Tol,Iter,Err,Ierr,&
+  IF( ISSBCG(N,B,X,MSOLVE,Itol,Tol,Iter,Err,Ierr,&
       Iunit,R,Z,Dz,Rwork,Iwork,ak,bk,bnrm,solnrm)==0 ) THEN
-    IF ( Ierr/=0 ) RETURN
+    IF( Ierr/=0 ) RETURN
     !
     !         ***** iteration loop *****
     !
@@ -346,11 +345,11 @@ SUBROUTINE SBCG(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MTTVEC,MSOLVE,MTSOLV,Itol,&
       !
       !         Calculate coefficient BK and direction vectors P and PP.
       bknum = DOT_PRODUCT(Z,Rr)
-      IF ( ABS(bknum)<=fuzz ) THEN
+      IF( ABS(bknum)<=fuzz ) THEN
         Ierr = 6
         RETURN
       END IF
-      IF ( Iter==1 ) THEN
+      IF( Iter==1 ) THEN
         P = Z
         Pp = Zz
       ELSE
@@ -367,7 +366,7 @@ SUBROUTINE SBCG(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MTTVEC,MSOLVE,MTSOLV,Itol,&
       CALL MATVEC(N,P,Z,Nelt,Ia,Ja,A,Isym)
       akden = DOT_PRODUCT(Pp,Z)
       ak = bknum/akden
-      IF ( ABS(akden)<=fuzz ) THEN
+      IF( ABS(akden)<=fuzz ) THEN
         Ierr = 6
         RETURN
       END IF
@@ -379,7 +378,7 @@ SUBROUTINE SBCG(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MTTVEC,MSOLVE,MTSOLV,Itol,&
       CALL MTSOLV(N,Rr,Zz,Rwork,Iwork)
       !
       !         check stopping criterion.
-      IF ( ISSBCG(N,B,X,MSOLVE,Itol,Tol,Iter,Err,&
+      IF( ISSBCG(N,B,X,MSOLVE,Itol,Tol,Iter,Err,&
         Ierr,Iunit,R,Z,Dz,Rwork,Iwork,ak,bk,bnrm,solnrm)/=0 )&
         RETURN
       !

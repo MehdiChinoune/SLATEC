@@ -1,8 +1,7 @@
 !** QC25S
 SUBROUTINE QC25S(F,A,B,Bl,Br,Alfa,Beta,Ri,Rj,Rg,Rh,Result,Abserr,Resasc,&
     Integr,Nev)
-  !>
-  !  To compute I = Integral of F*W over (BL,BR), with error
+  !> To compute I = Integral of F*W over (BL,BR), with error
   !            estimate, where the weight function W has a singular
   !            behaviour of ALGEBRAICO-LOGARITHMIC type at the points
   !            A and/or B. (BL,BR) is a part of (A,B).
@@ -39,13 +38,13 @@ SUBROUTINE QC25S(F,A,B,Bl,Br,Alfa,Beta,Ri,Rj,Rg,Rh,Result,Abserr,Resasc,&
   !                    Left end point of the original interval
   !
   !           B      - Real
-  !                    Right end point of the original interval, B.GT.A
+  !                    Right end point of the original interval, B>A
   !
   !           BL     - Real
-  !                    Lower limit of integration, BL.GE.A
+  !                    Lower limit of integration, BL>=A
   !
   !           BR     - Real
-  !                    Upper limit of integration, BR.LE.B
+  !                    Upper limit of integration, BR<=B
   !
   !           ALFA   - Real
   !                    PARAMETER IN THE WEIGHT FUNCTION
@@ -139,7 +138,7 @@ SUBROUTINE QC25S(F,A,B,Bl,Br,Alfa,Beta,Ri,Rj,Rg,Rh,Result,Abserr,Resasc,&
   !
   !* FIRST EXECUTABLE STATEMENT  QC25S
   Nev = 25
-  IF ( Bl==A.AND.(Alfa/=0.0E+00.OR.Integr==2.OR.Integr==4) ) THEN
+  IF( Bl==A .AND. (Alfa/=0.0E+00 .OR. Integr==2 .OR. Integr==4) ) THEN
     !
     !           THIS PART OF THE PROGRAM IS EXECUTED ONLY IF A = BL.
     !           ----------------------------------------------------
@@ -166,7 +165,7 @@ SUBROUTINE QC25S(F,A,B,Bl,Br,Alfa,Beta,Ri,Rj,Rg,Rh,Result,Abserr,Resasc,&
     Abserr = 0.0E+00
     res12 = 0.0E+00
     res24 = 0.0E+00
-    IF ( Integr>2 ) THEN
+    IF( Integr>2 ) THEN
       !
       !           COMPUTE THE CHEBYSHEV SERIES EXPANSION OF THE
       !           FOLLOWING FUNCTION
@@ -192,7 +191,7 @@ SUBROUTINE QC25S(F,A,B,Bl,Br,Alfa,Beta,Ri,Rj,Rg,Rh,Result,Abserr,Resasc,&
       DO i = 14, 25
         res24 = res24 + cheb24(i)*Ri(i)
       END DO
-      IF ( Integr/=3 ) THEN
+      IF( Integr/=3 ) THEN
         !
         !           INTEGR = 4
         !
@@ -221,7 +220,7 @@ SUBROUTINE QC25S(F,A,B,Bl,Br,Alfa,Beta,Ri,Rj,Rg,Rh,Result,Abserr,Resasc,&
       DO i = 14, 25
         res24 = res24 + cheb24(i)*Ri(i)
       END DO
-      IF ( Integr/=1 ) THEN
+      IF( Integr/=1 ) THEN
         !
         !           INTEGR = 2
         !
@@ -241,7 +240,7 @@ SUBROUTINE QC25S(F,A,B,Bl,Br,Alfa,Beta,Ri,Rj,Rg,Rh,Result,Abserr,Resasc,&
     END IF
     Result = (Result+res24)*factor
     Abserr = (Abserr+ABS(res24-res12))*factor
-  ELSEIF ( Br==B.AND.(Beta/=0.0E+00.OR.Integr==3.OR.Integr==4) ) THEN
+  ELSEIF( Br==B .AND. (Beta/=0.0E+00 .OR. Integr==3 .OR. Integr==4) ) THEN
     !
     !           THIS PART OF THE PROGRAM IS EXECUTED ONLY IF B = BR.
     !           ----------------------------------------------------
@@ -268,7 +267,7 @@ SUBROUTINE QC25S(F,A,B,Bl,Br,Alfa,Beta,Ri,Rj,Rg,Rh,Result,Abserr,Resasc,&
     Abserr = 0.0E+00
     res12 = 0.0E+00
     res24 = 0.0E+00
-    IF ( Integr==2.OR.Integr==4 ) THEN
+    IF( Integr==2 .OR. Integr==4 ) THEN
       !
       !           COMPUTE THE CHEBYSHEV SERIES EXPANSION OF THE
       !           FOLLOWING FUNCTION
@@ -294,7 +293,7 @@ SUBROUTINE QC25S(F,A,B,Bl,Br,Alfa,Beta,Ri,Rj,Rg,Rh,Result,Abserr,Resasc,&
       DO i = 14, 25
         res24 = res24 + cheb24(i)*Rj(i)
       END DO
-      IF ( Integr/=2 ) THEN
+      IF( Integr/=2 ) THEN
         dc = LOG(Br-Bl)
         Result = res24*dc
         Abserr = ABS((res24-res12)*dc)
@@ -323,7 +322,7 @@ SUBROUTINE QC25S(F,A,B,Bl,Br,Alfa,Beta,Ri,Rj,Rg,Rh,Result,Abserr,Resasc,&
       DO i = 14, 25
         res24 = res24 + cheb24(i)*Rj(i)
       END DO
-      IF ( Integr/=1 ) THEN
+      IF( Integr/=1 ) THEN
         !
         !           INTEGR = 3
         !
@@ -345,7 +344,7 @@ SUBROUTINE QC25S(F,A,B,Bl,Br,Alfa,Beta,Ri,Rj,Rg,Rh,Result,Abserr,Resasc,&
     Abserr = (Abserr+ABS(res24-res12))*factor
   ELSE
     !
-    !           IF A.GT.BL AND B.LT.BR, APPLY THE 15-POINT GAUSS-KRONROD
+    !           IF A>BL AND B<BR, APPLY THE 15-POINT GAUSS-KRONROD
     !           SCHEME.
     !
     !

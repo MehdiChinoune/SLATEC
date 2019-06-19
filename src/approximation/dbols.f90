@@ -1,8 +1,6 @@
 !** DBOLS
 SUBROUTINE DBOLS(W,Mdw,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Iw)
-  !>
-  !  Solve the problem
-  !                 E*X = F (in the least  squares  sense)
+  !> Solve the problem E*X = F (in the least  squares  sense)
   !            with bounds on selected X values.
   !***
   ! **Library:**   SLATEC
@@ -40,7 +38,7 @@ SUBROUTINE DBOLS(W,Mdw,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Iw)
   !     [E:F] has MROWS rows and NCOLS+1 columns. This data is placed in
   !     the array W(*,*) with E occupying the first NCOLS columns and the
   !     right side vector F in column NCOLS+1. The row dimension, MDW, of
-  !     the array W(*,*) must satisfy the inequality MDW .ge. MROWS.
+  !     the array W(*,*) must satisfy the inequality MDW >= MROWS.
   !     Other values of MDW are errors. The values of MROWS and NCOLS
   !     must be positive. Other values are errors. There is an exception
   !     to this when using option 1 for accumulation of blocks of
@@ -59,17 +57,17 @@ SUBROUTINE DBOLS(W,Mdw,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Iw)
   !     type of bound and BL(J) and BU(J) give the explicit values for
   !     the respective upper and lower bounds.
   !
-  !    1.    For IND(J)=1, require X(J) .ge. BL(J).
+  !    1.    For IND(J)=1, require X(J) >= BL(J).
   !          (the value of BU(J) is not used.)
-  !    2.    For IND(J)=2, require X(J) .le. BU(J).
+  !    2.    For IND(J)=2, require X(J) <= BU(J).
   !          (the value of BL(J) is not used.)
-  !    3.    For IND(J)=3, require X(J) .ge. BL(J) and
-  !                                X(J) .le. BU(J).
+  !    3.    For IND(J)=3, require X(J) >= BL(J) and
+  !                                X(J) <= BU(J).
   !    4.    For IND(J)=4, no bounds on X(J) are required.
   !          (the values of BL(J) and BU(J) are not used.)
   !
   !     Values other than 1,2,3 or 4 for IND(J) are errors. In the case
-  !     IND(J)=3 (upper and lower bounds) the condition BL(J) .gt. BU(J)
+  !     IND(J)=3 (upper and lower bounds) the condition BL(J) > BU(J)
   !     is an error.
   !
   !    -------
@@ -107,7 +105,7 @@ SUBROUTINE DBOLS(W,Mdw,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Iw)
   !    ----------
   !    X(*),RNORM
   !    ----------
-  !     The array X(*) contains a solution (if MODE .ge.0 or .eq.-22) for
+  !     The array X(*) contains a solution (if MODE >=0 or =-22) for
   !     the constrained least squares problem. The value RNORM is the
   !     minimum residual vector length.
   !
@@ -116,11 +114,11 @@ SUBROUTINE DBOLS(W,Mdw,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Iw)
   !    ----
   !     The sign of MODE determines whether the subprogram has completed
   !     normally, or encountered an error condition or abnormal status. A
-  !     value of MODE .ge. 0 signifies that the subprogram has completed
-  !     normally. The value of MODE (.GE. 0) is the number of variables
+  !     value of MODE >= 0 signifies that the subprogram has completed
+  !     normally. The value of MODE (>= 0) is the number of variables
   !     in an active status: not at a bound nor at the value ZERO, for
   !     the case of free variables. A negative value of MODE will be one
-  !     of the cases -37,-36,...,-22, or -17,...,-2. Values .lt. -1
+  !     of the cases -37,-36,...,-22, or -17,...,-2. Values < -1
   !     correspond to an abnormal completion of the subprogram. To
   !     understand the abnormal completion codes see below: ERROR
   !     MESSAGES for DBOLS( ). AN approximate solution will be returned
@@ -166,7 +164,7 @@ SUBROUTINE DBOLS(W,Mdw,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Iw)
   !     Eventually the user signals "that's all" and then computes the
   !     solution with one final call to subprogram DBOLS( ). The value of
   !     MROWS is an OUTPUT variable when this option is used. Its value
-  !     is always in the range 0 .le. MROWS .le. NCOLS+1. It is equal to
+  !     is always in the range 0 <= MROWS <= NCOLS+1. It is equal to
   !     the number of rows after the triangularization of the entire set
   !     of equations. If LP is the processing pointer for IOPT(*), the
   !     usage for the sequential processing of blocks of equations is
@@ -182,7 +180,7 @@ SUBROUTINE DBOLS(W,Mdw,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Iw)
   !
   !      .<LOOP
   !      . CALL DBOLS()
-  !      . IF(IOPT(LP+1) .EQ. 1) THEN
+  !      . IF(IOPT(LP+1) = 1) THEN
   !      .    IOPT(LP+3)=# OF ROWS IN THE NEW BLOCK; USER DEFINED
   !      .    PLACE NEW BLOCK OF IOPT(LP+3) ROWS IN
   !      .    W(*,*) STARTING AT ROW IOPT(LP+2).
@@ -190,8 +188,8 @@ SUBROUTINE DBOLS(W,Mdw,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Iw)
   !      .    IF( THIS IS THE LAST BLOCK OF EQUATIONS ) THEN
   !      .       IOPT(LP+1)=2
   !      .<------CYCLE LOOP
-  !      .    ELSE IF (IOPT(LP+1) .EQ. 2) THEN
-  !      <-------EXIT LOOP SOLUTION COMPUTED IF MODE .GE. 0
+  !      .    ELSE IF(IOPT(LP+1) = 2) THEN
+  !      <-------EXIT LOOP SOLUTION COMPUTED IF MODE >= 0
   !      . ELSE
   !      . ERROR CONDITION; SHOULD NOT HAPPEN.
   !      .<END LOOP
@@ -323,7 +321,7 @@ SUBROUTINE DBOLS(W,Mdw,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Iw)
   ! (NORMALLY A RETURN TO THE USER TAKES PLACE FOLLOWING THIS MESSAGE.)
   !
   ! WARNING IN...
-  ! DBOLS(). FOR J=(I1), BOUND BL(J)=(R1) IS .GT. BU(J)=(R2).
+  ! DBOLS(). FOR J=(I1), BOUND BL(J)=(R1) IS > BU(J)=(R2).
   !           IN ABOVE MESSAGE, I1=         1
   !           IN ABOVE MESSAGE, R1=    0.
   !           IN ABOVE MESSAGE, R2=    ABOVE MESSAGE, I1=         0
@@ -346,14 +344,14 @@ SUBROUTINE DBOLS(W,Mdw,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Iw)
   ! WARNING IN...
   ! DBOLS(). EACH PROVIDED COL. SCALE FACTOR MUST BE POSITIVE.
   ! COMPONENT (I1) NOW = (R1).
-  !           IN ABOVE MESSAGE, I1=        ND. .LE. MDW=(I2).
+  !           IN ABOVE MESSAGE, I1=        ND. <= MDW=(I2).
   !           IN ABOVE MESSAGE, I1=         1
   !           IN ABOVE MESSAGE, I2=         0
   ! ERROR NUMBER =        10
   ! (NORMALLY A RETURN TO THE USER TAKES PLACE FOLLOWING THIS MESSAGE.)
   !
   ! WARNING IN...
-  ! DBOLS().THE ROW DIMENSION OF W(,)=(I1) MUST BE .GE.THE NUMBER OF ROWS=
+  ! DBOLS().THE ROW DIMENSION OF W(,)=(I1) MUST BE >=THE NUMBER OF ROWS=
   ! (I2).
   !           IN ABOVE MESSAGE, I1=         0
   !           IN ABOVE MESSAGE, I2=         1
@@ -361,7 +359,7 @@ SUBROUTINE DBOLS(W,Mdw,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Iw)
   ! (NORMALLY A RETURN TO THE USER TAKES PLACE FOLLOWING THIS MESSAGE.)
   !
   ! WARNING IN...
-  ! DBOLS(). THE COLUMN DIMENSION OF W(,)=(I1) MUST BE .GE. NCOLS+1=(I2).
+  ! DBOLS(). THE COLUMN DIMENSION OF W(,)=(I1) MUST BE >= NCOLS+1=(I2).
   !           IN ABOVE MESSAGE, I1=         0
   !           IN ABOVE MESSAGE, I2=         2
   ! ERROR NUMBER =        12
@@ -369,35 +367,35 @@ SUBROUTINE DBOLS(W,Mdw,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Iw)
   !
   ! WARNING IN...
   ! DBOLS().THE DIMENSIONS OF THE ARRAYS BL(),BU(), AND IND()=(I1) MUST BE
-  ! .GE. NCOLS=(I2).
+  ! >= NCOLS=(I2).
   !           IN ABOVE MESSAGE, I1=         0
   !           IN ABOVE MESSAGE, I2=         1
   ! ERROR NUMBER =        13
   ! (NORMALLY A RETURN TO THE USER TAKES PLACE FOLLOWING THIS MESSAGE.)
   !
   ! WARNING IN...
-  ! DBOLS(). THE DIMENSION OF X()=(I1) MUST BE .GE. THE REQD. LENGTH=(I2).
+  ! DBOLS(). THE DIMENSION OF X()=(I1) MUST BE >= THE REQD. LENGTH=(I2).
   !           IN ABOVE MESSAGE, I1=         0
   !           IN ABOVE MESSAGE, I2=         2
   ! ERROR NUMBER =        14
   ! (NORMALLY A RETURN TO THE USER TAKES PLACE FOLLOWING THIS MESSAGE.)
   !
   ! WARNING IN...
-  ! DBOLS(). THE DIMENSION OF RW()=(I1) MUST BE .GE. 5*NCOLS=(I2).
+  ! DBOLS(). THE DIMENSION OF RW()=(I1) MUST BE >= 5*NCOLS=(I2).
   !           IN ABOVE MESSAGE, I1=         0
   !           IN ABOVE MESSAGE, I2=         3
   ! ERROR NUMBER =        15
   ! (NORMALLY A RETURN TO THE USER TAKES PLACE FOLLOWING THIS MESSAGE.)
   !
   ! WARNING IN...
-  ! DBOLS() THE DIMENSION OF IW()=(I1) MUST BE .GE. 2*NCOLS=(I2).
+  ! DBOLS() THE DIMENSION OF IW()=(I1) MUST BE >= 2*NCOLS=(I2).
   !           IN ABOVE MESSAGE, I1=         0
   !           IN ABOVE MESSAGE, I2=         2
   ! ERROR NUMBER =        16
   ! (NORMALLY A RETURN TO THE USER TAKES PLACE FOLLOWING THIS MESSAGE.)
   !
   ! WARNING IN...
-  ! DBOLS() THE DIMENSION OF IOPT()=(I1) MUST BE .GE. THE REQD. LEN.=(I2).
+  ! DBOLS() THE DIMENSION OF IOPT()=(I1) MUST BE >= THE REQD. LEN.=(I2).
   !           IN ABOVE MESSAGE, I1=         0
   !           IN ABOVE MESSAGE, I2=         1
   ! ERROR NUMBER =        17
@@ -447,12 +445,12 @@ SUBROUTINE DBOLS(W,Mdw,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Iw)
   !* FIRST EXECUTABLE STATEMENT  DBOLS
   nerr = 0
   Mode = 0
-  IF ( igo==0 ) THEN
+  IF( igo==0 ) THEN
     !     DO(CHECK VALIDITY OF INPUT DATA)
     !     PROCEDURE(CHECK VALIDITY OF INPUT DATA)
     !
-    !     SEE THAT MDW IS .GT.0. GROSS CHECK ONLY.
-    IF ( Mdw<=0 ) THEN
+    !     SEE THAT MDW IS >0. GROSS CHECK ONLY.
+    IF( Mdw<=0 ) THEN
       WRITE (xern1,'(I8)') Mdw
       CALL XERMSG('DBOLS','MDW = '//xern1//' MUST BE POSITIVE.',2,1)
       !     DO(RETURN TO USER PROGRAM UNIT)
@@ -460,7 +458,7 @@ SUBROUTINE DBOLS(W,Mdw,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Iw)
     END IF
     !
     !     SEE THAT NUMBER OF UNKNOWNS IS POSITIVE.
-    IF ( Ncols<=0 ) THEN
+    IF( Ncols<=0 ) THEN
       WRITE (xern1,'(I8)') Ncols
       CALL XERMSG('DBOLS','NCOLS = '//xern1//&
         ' THE NO. OF VARIABLES MUST BE POSITIVE.',3,1)
@@ -470,7 +468,7 @@ SUBROUTINE DBOLS(W,Mdw,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Iw)
     !
     !     SEE THAT CONSTRAINT INDICATORS ARE ALL WELL-DEFINED.
     DO j = 1, Ncols
-      IF ( Ind(j)<1.OR.Ind(j)>4 ) THEN
+      IF( Ind(j)<1 .OR. Ind(j)>4 ) THEN
         WRITE (xern1,'(I8)') j
         WRITE (xern2,'(I8)') Ind(j)
         CALL XERMSG('DBOLS','IND('//xern1//') = '//xern2//&
@@ -482,13 +480,13 @@ SUBROUTINE DBOLS(W,Mdw,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Iw)
     !
     !     SEE THAT BOUNDS ARE CONSISTENT.
     DO j = 1, Ncols
-      IF ( Ind(j)==3 ) THEN
-        IF ( Bl(j)>Bu(j) ) THEN
+      IF( Ind(j)==3 ) THEN
+        IF( Bl(j)>Bu(j) ) THEN
           WRITE (xern1,'(I8)') j
           WRITE (xern3,'(1PE15.6)') Bl(j)
           WRITE (xern4,'(1PE15.6)') Bu(j)
           CALL XERMSG('DBOLS','BOUND BL('//xern1//') = '//xern3//&
-            ' IS .GT. BU('//xern1//') = '//xern4,5,1)
+            ' IS > BU('//xern1//') = '//xern4,5,1)
           !     DO(RETURN TO USER PROGRAM UNIT)
           GOTO 100
         END IF
@@ -512,78 +510,78 @@ SUBROUTINE DBOLS(W,Mdw,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Iw)
       jp = ABS(ip)
       !
       !     TEST FOR NO MORE OPTIONS.
-      IF ( ip==99 ) THEN
-        IF ( lopt==0 ) lopt = lp + 1
+      IF( ip==99 ) THEN
+        IF( lopt==0 ) lopt = lp + 1
         !     END PROCEDURE
-        IF ( checkl ) THEN
+        IF( checkl ) THEN
           !     DO(CHECK LENGTHS OF ARRAYS)
           !     PROCEDURE(CHECK LENGTHS OF ARRAYS)
           !
           !     THIS FEATURE ALLOWS THE USER TO MAKE SURE THAT THE
           !     ARRAYS ARE LONG ENOUGH FOR THE INTENDED PROBLEM SIZE AND USE.
-          IF ( lmdw<Mrows ) THEN
+          IF( lmdw<Mrows ) THEN
             WRITE (xern1,'(I8)') lmdw
             WRITE (xern2,'(I8)') Mrows
             CALL XERMSG('DBOLS','THE ROW DIMENSION OF W(,) = '//&
-              xern1//' MUST BE .GE. THE NUMBER OF ROWS = '//xern2,11,1)
+              xern1//' MUST BE >= THE NUMBER OF ROWS = '//xern2,11,1)
             !     DO(RETURN TO USER PROGRAM UNIT)
             GOTO 100
           END IF
-          IF ( lndw<Ncols+1 ) THEN
+          IF( lndw<Ncols+1 ) THEN
             WRITE (xern1,'(I8)') lndw
             WRITE (xern2,'(I8)') Ncols + 1
             CALL XERMSG('DBOLS','THE COLUMN DIMENSION OF W(,) = '//&
-              xern1//' MUST BE .GE. NCOLS+1 = '//xern2,12,1)
+              xern1//' MUST BE >= NCOLS+1 = '//xern2,12,1)
             GOTO 100
           END IF
-          IF ( llb<Ncols ) THEN
+          IF( llb<Ncols ) THEN
             WRITE (xern1,'(I8)') llb
             WRITE (xern2,'(I8)') Ncols
             CALL XERMSG('DBOLS',&
               'THE DIMENSIONS OF THE ARRAYS BL(), BU(), AND IND() = '&
-              //xern1//' MUST BE .GE. NCOLS = '//xern2,13,1)
+              //xern1//' MUST BE >= NCOLS = '//xern2,13,1)
             !     DO(RETURN TO USER PROGRAM UNIT)
             GOTO 100
           END IF
-          IF ( llx<lenx ) THEN
+          IF( llx<lenx ) THEN
             WRITE (xern1,'(I8)') llx
             WRITE (xern2,'(I8)') lenx
             CALL XERMSG('DBOLS','THE DIMENSION OF X() = '//xern1//&
-              ' MUST BE .GE. THE REQUIRED LENGTH = '//xern2,14,1)
+              ' MUST BE >= THE REQUIRED LENGTH = '//xern2,14,1)
             !     DO(RETURN TO USER PROGRAM UNIT)
             GOTO 100
           END IF
-          IF ( llrw<5*Ncols ) THEN
+          IF( llrw<5*Ncols ) THEN
             WRITE (xern1,'(I8)') llrw
             WRITE (xern2,'(I8)') 5*Ncols
             CALL XERMSG('DBOLS','THE DIMENSION OF RW() = '//xern1//&
-              ' MUST BE .GE. 5*NCOLS = '//xern2,15,1)
+              ' MUST BE >= 5*NCOLS = '//xern2,15,1)
             !     DO(RETURN TO USER PROGRAM UNIT)
             GOTO 100
           END IF
-          IF ( lliw<2*Ncols ) THEN
+          IF( lliw<2*Ncols ) THEN
             WRITE (xern1,'(I8)') lliw
             WRITE (xern2,'(I8)') 2*Ncols
             CALL XERMSG('DBOLS','THE DIMENSION OF IW() = '//xern1//&
-              ' MUST BE .GE. 2*NCOLS = '//xern2,16,1)
+              ' MUST BE >= 2*NCOLS = '//xern2,16,1)
             !     DO(RETURN TO USER PROGRAM UNIT)
             GOTO 100
           END IF
-          IF ( liopt<lp+1 ) THEN
+          IF( liopt<lp+1 ) THEN
             WRITE (xern1,'(I8)') liopt
             WRITE (xern2,'(I8)') lp + 1
             CALL XERMSG('DBOLS','THE DIMENSION OF IOPT() = '//&
-              xern1//' MUST BE .GE. THE REQUIRED LEN = '//xern2,17,1)
+              xern1//' MUST BE >= THE REQUIRED LEN = '//xern2,17,1)
             !     DO(RETURN TO USER PROGRAM UNIT)
             GOTO 100
           END IF
           !     END PROCEDURE
         END IF
         EXIT
-      ELSEIF ( jp==99 ) THEN
+      ELSEIF( jp==99 ) THEN
         lds = 1
-      ELSEIF ( jp==1 ) THEN
-        IF ( ip>0 ) THEN
+      ELSEIF( jp==1 ) THEN
+        IF( ip>0 ) THEN
           !
           !     SET UP DIRECTION FLAG, ROW STACKING POINTER
           !     LOCATION, AND LOCATION FOR NUMBER OF NEW ROWS.
@@ -601,12 +599,12 @@ SUBROUTINE DBOLS(W,Mdw,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Iw)
           !              LOOP
           !              CALL DBOLS()
           !
-          !                  IF(IOPT(LOCACC) .EQ. 1) THEN
+          !                  IF(IOPT(LOCACC) = 1) THEN
           !                      STACK EQUAS., STARTING AT ROW IOPT(LOCACC+1),
           !                       INTO W(*,*).
           !                       SET IOPT(LOCACC+2)=NO. OF EQUAS.
           !                      IF LAST BLOCK OF EQUAS., SET IOPT(LOCACC)=2.
-          !                  ELSE IF IOPT(LOCACC) .EQ. 2) THEN
+          !                  ELSE IF IOPT(LOCACC) = 2) THEN
           !                      (PROCESS IS OVER. EXIT LOOP.)
           !                  ELSE
           !                      (ERROR CONDITION. SHOULD NOT HAPPEN.)
@@ -618,19 +616,19 @@ SUBROUTINE DBOLS(W,Mdw,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Iw)
           igo = 1
         END IF
         lds = 4
-      ELSEIF ( jp==2 ) THEN
-        IF ( ip>0 ) THEN
+      ELSEIF( jp==2 ) THEN
+        IF( ip>0 ) THEN
           !
           !     GET ACTUAL LENGTHS OF ARRAYS FOR CHECKING AGAINST NEEDS.
           locdim = lp + 2
           !
-          !     LMDW.GE.MROWS
-          !     LNDW.GE.NCOLS+1
-          !     LLB .GE.NCOLS
-          !     LLX .GE.NCOLS+EXTRA REQD. IN OPTIONS.
-          !     LLRW.GE.5*NCOLS
-          !     LLIW.GE.2*NCOLS
-          !     LIOP.GE. AMOUNT REQD. FOR IOPTION ARRAY.
+          !     LMDW>=MROWS
+          !     LNDW>=NCOLS+1
+          !     LLB >=NCOLS
+          !     LLX >=NCOLS+EXTRA REQD. IN OPTIONS.
+          !     LLRW>=5*NCOLS
+          !     LLIW>=2*NCOLS
+          !     LIOP>= AMOUNT REQD. FOR IOPTION ARRAY.
           lmdw = Iopt(locdim)
           lndw = Iopt(locdim+1)
           llb = Iopt(locdim+2)
@@ -643,12 +641,12 @@ SUBROUTINE DBOLS(W,Mdw,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Iw)
         lds = 8
         !
         !     OPTION TO MODIFY THE COLUMN SCALING.
-      ELSEIF ( jp==3 ) THEN
-        IF ( ip>0 ) THEN
+      ELSEIF( jp==3 ) THEN
+        IF( ip>0 ) THEN
           iscale = Iopt(lp+2)
           !
           !     SEE THAT ISCALE IS 1 THRU 3.
-          IF ( iscale<1.OR.iscale>3 ) THEN
+          IF( iscale<1 .OR. iscale>3 ) THEN
             WRITE (xern1,'(I8)') iscale
             CALL XERMSG('DBOLS','ISCALE OPTION = '//xern1//&
               ' MUST BE 1-3',7,1)
@@ -661,10 +659,10 @@ SUBROUTINE DBOLS(W,Mdw,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Iw)
         !
         !     IN THIS OPTION THE USER HAS PROVIDED SCALING.  THE
         !     SCALE FACTORS FOR THE COLUMNS BEGIN IN X(NCOLS+IOPT(LP+2)).
-      ELSEIF ( jp==4 ) THEN
-        IF ( ip>0 ) THEN
+      ELSEIF( jp==4 ) THEN
+        IF( ip>0 ) THEN
           iscale = 4
-          IF ( Iopt(lp+2)<=0 ) THEN
+          IF( Iopt(lp+2)<=0 ) THEN
             WRITE (xern1,'(I8)') Iopt(lp+2)
             CALL XERMSG('DBOLS','OFFSET PAST X(NCOLS) ('//xern1//&
               ') FOR USER-PROVIDED COLUMN SCALING MUST BE POSITIVE.',8,1)
@@ -674,7 +672,7 @@ SUBROUTINE DBOLS(W,Mdw,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Iw)
           Rw(1:Ncols) = X(Ncols+Iopt(lp+2):2*Ncols+Iopt(lp+2)-1)
           lenx = lenx + Ncols
           DO j = 1, Ncols
-            IF ( Rw(j)<=zero ) THEN
+            IF( Rw(j)<=zero ) THEN
               WRITE (xern1,'(I8)') j
               WRITE (xern3,'(1PE15.6)') Rw(j)
               CALL XERMSG('DBOLS',&
@@ -688,15 +686,15 @@ SUBROUTINE DBOLS(W,Mdw,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Iw)
         lds = 2
         !
         !     IN THIS OPTION AN OPTION ARRAY IS PROVIDED TO DBOLSM().
-      ELSEIF ( jp==5 ) THEN
-        IF ( ip>0 ) lopt = Iopt(lp+2)
+      ELSEIF( jp==5 ) THEN
+        IF( ip>0 ) lopt = Iopt(lp+2)
         !     CYCLE FOREVER
         lds = 2
         !
         !     THIS OPTION USES THE NEXT LOC OF IOPT(*) AS AN
         !     INCREMENT TO SKIP.
-      ELSEIF ( jp==6 ) THEN
-        IF ( ip>0 ) THEN
+      ELSEIF( jp==6 ) THEN
+        IF( ip>0 ) THEN
           lp = Iopt(lp+2) - 1
           lds = 0
         ELSE
@@ -714,7 +712,7 @@ SUBROUTINE DBOLS(W,Mdw,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Iw)
       END IF
     END DO
   END IF
-  IF ( igo==1 ) THEN
+  IF( igo==1 ) THEN
     !
     !     GO BACK TO THE USER FOR ACCUMULATION OF LEAST SQUARES
     !     EQUATIONS AND DIRECTIONS TO QUIT PROCESSING.
@@ -724,11 +722,11 @@ SUBROUTINE DBOLS(W,Mdw,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Iw)
     Mrows = Iopt(locacc+1) - 1
     inrows = Iopt(locacc+2)
     mnew = Mrows + inrows
-    IF ( mnew<0.OR.mnew>Mdw ) THEN
+    IF( mnew<0 .OR. mnew>Mdw ) THEN
       WRITE (xern1,'(I8)') mnew
       WRITE (xern2,'(I8)') Mdw
       CALL XERMSG('DBOLS','NO. OF ROWS = '//xern1//&
-        ' MUST BE .GE. 0 .AND. .LE. MDW = '//xern2,10,1)
+        ' MUST BE >= 0 .AND. <= MDW = '//xern2,10,1)
       !     DO(RETURN TO USER PROGRAM UNIT)
       GOTO 100
     END IF
@@ -746,8 +744,8 @@ SUBROUTINE DBOLS(W,Mdw,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Iw)
     Iopt(locacc+1) = Mrows + 1
     igo = Iopt(locacc)
     !     END PROCEDURE
-    IF ( igo==2 ) igo = 0
-  ELSEIF ( igo==2 ) THEN
+    IF( igo==2 ) igo = 0
+  ELSEIF( igo==2 ) THEN
     !     CASE 2
     !     DO(INITIALIZE VARIABLES AND DATA VALUES)
     !     PROCEDURE(INITIALIZE VARIABLES AND DATA VALUES)
@@ -760,7 +758,7 @@ SUBROUTINE DBOLS(W,Mdw,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Iw)
           !     COL. HAS MAX. NORM EQUAL TO ONE.
           ibig = MAXLOC(W(1:Mrows,j),1)
           Rw(j) = ABS(W(ibig,j))
-          IF ( Rw(j)==zero ) THEN
+          IF( Rw(j)==zero ) THEN
             Rw(j) = one
           ELSE
             Rw(j) = one/Rw(j)
@@ -771,7 +769,7 @@ SUBROUTINE DBOLS(W,Mdw,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Iw)
           !     THIS CHOICE OF SCALING MAKES EACH NONZERO COLUMN
           !     HAVE EUCLIDEAN LENGTH EQUAL TO ONE.
           Rw(j) = NORM2(W(1:Mrows,j))
-          IF ( Rw(j)==zero ) THEN
+          IF( Rw(j)==zero ) THEN
             Rw(j) = one
           ELSE
             Rw(j) = one/Rw(j)
@@ -809,7 +807,7 @@ SUBROUTINE DBOLS(W,Mdw,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Iw)
   RETURN
   !     PROCEDURE(RETURN TO USER PROGRAM UNIT)
   100 CONTINUE
-  IF ( Mode>=0 ) Mode = -nerr
+  IF( Mode>=0 ) Mode = -nerr
   igo = 0
   !     END PROCEDURE
 END SUBROUTINE DBOLS

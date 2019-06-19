@@ -1,7 +1,6 @@
 !** PJAC
 SUBROUTINE PJAC(Neq,Y,Yh,Nyh,Ewt,Ftem,Savf,Wm,Iwm,F,JAC)
-  !>
-  !  Subsidiary to DEBDF
+  !> Subsidiary to DEBDF
   !***
   ! **Library:**   SLATEC
   !***
@@ -56,7 +55,7 @@ SUBROUTINE PJAC(Neq,Y,Yh,Nyh,Ewt,Ftem,Savf,Wm,Iwm,F,JAC)
   ! HERE J IS COMPUTED BY THE USER-SUPPLIED ROUTINE JAC IF
   ! MITER = 1 OR 4, OR BY FINITE DIFFERENCING IF MITER = 2, 3, OR 5.
   ! IF MITER = 3, A DIAGONAL APPROXIMATION TO J IS USED.
-  ! J IS STORED IN WM AND REPLACED BY P.  IF MITER .NE. 3, P IS THEN
+  ! J IS STORED IN WM AND REPLACED BY P.  IF MITER /= 3, P IS THEN
   ! SUBJECTED TO LU DECOMPOSITION IN PREPARATION FOR LATER SOLUTION
   ! OF LINEAR SYSTEMS WITH P AS COEFFICIENT MATRIX. THIS IS DONE
   ! BY SGEFA IF MITER = 1 OR 2, AND BY SGBFA IF MITER = 4 OR 5.
@@ -77,7 +76,7 @@ SUBROUTINE PJAC(Neq,Y,Yh,Nyh,Ewt,Ftem,Savf,Wm,Iwm,F,JAC)
   !        IWM(21), IF MITER IS 1, 2, 4, OR 5.  IWM ALSO CONTAINS THE
   !        BAND PARAMETERS ML = IWM(1) AND MU = IWM(2) IF MITER IS 4 OR 5.
   ! EL0  = EL(1) (INPUT).
-  ! IER  = OUTPUT ERROR FLAG,  = 0 IF NO TROUBLE, .NE. 0 IF
+  ! IER  = OUTPUT ERROR FLAG,  = 0 IF NO TROUBLE, /= 0 IF
   !        P MATRIX FOUND TO BE SINGULAR.
   ! THIS ROUTINE ALSO USES THE COMMON VARIABLES EL0, H, TN, UROUND,
   ! MITER, N, NFE, AND NJE.
@@ -90,7 +89,7 @@ SUBROUTINE PJAC(Neq,Y,Yh,Nyh,Ewt,Ftem,Savf,Wm,Iwm,F,JAC)
       ! IF MITER = 2, MAKE N CALLS TO F TO APPROXIMATE J. --------------------
       fac = VNWRMS(n_com,Savf,Ewt)
       r0 = 1000.0E0*ABS(h_com)*uround_com*n_com*fac
-      IF ( r0==0.0E0 ) r0 = 1.0E0
+      IF( r0==0.0E0 ) r0 = 1.0E0
       srur = Wm(1)
       j1 = 2
       DO j = 1, n_com
@@ -120,8 +119,8 @@ SUBROUTINE PJAC(Neq,Y,Yh,Nyh,Ewt,Ftem,Savf,Wm,Iwm,F,JAC)
         r0 = h_com*Savf(i) - Yh(i,2)
         di = 0.1E0*r0 - h_com*(Wm(i+2)-Savf(i))
         Wm(i+2) = 1.0E0
-        IF ( ABS(r0)>=uround_com*Ewt(i) ) THEN
-          IF ( ABS(di)==0.0E0 ) GOTO 100
+        IF( ABS(r0)>=uround_com*Ewt(i) ) THEN
+          IF( ABS(di)==0.0E0 ) GOTO 100
           Wm(i+2) = 0.1E0*r0/di
         END IF
       END DO
@@ -154,7 +153,7 @@ SUBROUTINE PJAC(Neq,Y,Yh,Nyh,Ewt,Ftem,Savf,Wm,Iwm,F,JAC)
       srur = Wm(1)
       fac = VNWRMS(n_com,Savf,Ewt)
       r0 = 1000.0E0*ABS(h_com)*uround_com*n_com*fac
-      IF ( r0==0.0E0 ) r0 = 1.0E0
+      IF( r0==0.0E0 ) r0 = 1.0E0
       DO j = 1, mba
         DO i = j, n_com, mband
           yi = Y(i)

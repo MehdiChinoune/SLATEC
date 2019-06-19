@@ -1,7 +1,6 @@
 !** SDANRM
 REAL(SP) FUNCTION SDANRM(Neq,V,Wt)
-  !>
-  !  Compute vector norm for SDASSL.
+  !> Compute vector norm for SDASSL.
   !***
   ! **Library:**   SLATEC (DASSL)
   !***
@@ -38,9 +37,9 @@ REAL(SP) FUNCTION SDANRM(Neq,V,Wt)
   SDANRM = 0.0E0
   vmax = 0.0E0
   DO i = 1, Neq
-    IF ( ABS(V(i)/Wt(i))>vmax ) vmax = ABS(V(i)/Wt(i))
+    IF( ABS(V(i)/Wt(i))>vmax ) vmax = ABS(V(i)/Wt(i))
   END DO
-  IF ( vmax>0.0E0 ) THEN
+  IF( vmax>0.0E0 ) THEN
     summ = 0.0E0
     DO i = 1, Neq
       summ = summ + ((V(i)/Wt(i))/vmax)**2

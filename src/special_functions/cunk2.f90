@@ -1,7 +1,6 @@
 !** CUNK2
 SUBROUTINE CUNK2(Z,Fnu,Kode,Mr,N,Y,Nz,Tol,Elim,Alim)
-  !>
-  !  Subsidiary to CBESK
+  !> Subsidiary to CBESK
   !***
   ! **Library:**   SLATEC
   !***
@@ -29,12 +28,12 @@ SUBROUTINE CUNK2(Z,Fnu,Kode,Mr,N,Y,Nz,Tol,Elim,Alim)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
   USE service, ONLY : R1MACH
-  INTEGER i, ib, iflag, ifn, il, in, inu, iuf, k, kdflg, kflag, &
+  INTEGER :: i, ib, iflag, ifn, il, in, inu, iuf, k, kdflg, kflag, &
     kk, Kode, Mr, N, nai, ndai, nw, Nz, idum, j, ipard, ic
-  COMPLEX(SP) ai, arg(2), asum(2), bsum(2), cfn, ck, crsc, cs, cscl, csgn, cspn, &
+  COMPLEX(SP) :: ai, arg(2), asum(2), bsum(2), cfn, ck, crsc, cs, cscl, csgn, cspn, &
     csr(3), css(3), cy(2), c1, c2, dai, phi(2), rz, s1, s2, Y(N), Z, zb, zeta1(2), &
     zeta2(2), zn, zr, phid, argd, zeta1d, zeta2d, asumd, bsumd
-  REAL(SP) aarg, Alim, ang, aphi, asc, ascle, bry(3), car, cpn, c2i, c2m, c2r, Elim, &
+  REAL(SP) :: aarg, Alim, ang, aphi, asc, ascle, bry(3), car, cpn, c2i, c2m, c2r, Elim, &
     fmr, fn, fnf, Fnu, rs1, sar, sgn, spn, Tol, x, yy
   COMPLEX(SP), PARAMETER :: czero = (0.0E0,0.0E0), cone = (1.0E0,0.0E0), &
     ci = (0.0E0,1.0E0), cr1 = (1.0E0,1.73205080756887729E0), &
@@ -63,7 +62,7 @@ SUBROUTINE CUNK2(Z,Fnu,Kode,Mr,N,Y,Nz,Tol,Elim,Alim)
   bry(3) = R1MACH(2)
   x = REAL(Z)
   zr = Z
-  IF ( x<0.0E0 ) zr = -Z
+  IF( x<0.0E0 ) zr = -Z
   yy = AIMAG(zr)
   zn = -zr*ci
   zb = zr
@@ -77,13 +76,13 @@ SUBROUTINE CUNK2(Z,Fnu,Kode,Mr,N,Y,Nz,Tol,Elim,Alim)
   c2 = CMPLX(-spn,cpn)
   kk = MOD(inu,4) + 1
   cs = cr1*c2*cip(kk)
-  IF ( yy<=0.0E0 ) THEN
+  IF( yy<=0.0E0 ) THEN
     zn = CONJG(-zn)
     zb = CONJG(zb)
   END IF
   !-----------------------------------------------------------------------
   !     K(FNU,Z) IS COMPUTED FROM H(2,FNU,-I*Z) WHERE Z IS IN THE FIRST
-  !     QUADRANT. FOURTH QUADRANT VALUES (YY.LE.0.0E0) ARE COMPUTED BY
+  !     QUADRANT. FOURTH QUADRANT VALUES (YY<=0.0E0) ARE COMPUTED BY
   !     CONJUGATION SINCE THE K FUNCTION IS REAL ON THE POSITIVE REAL AXIS
   !-----------------------------------------------------------------------
   j = 2
@@ -94,7 +93,7 @@ SUBROUTINE CUNK2(Z,Fnu,Kode,Mr,N,Y,Nz,Tol,Elim,Alim)
     j = 3 - j
     fn = Fnu + (i-1)
     CALL CUNHJ(zn,fn,0,Tol,phi(j),arg(j),zeta1(j),zeta2(j),asum(j),bsum(j))
-    IF ( Kode==1 ) THEN
+    IF( Kode==1 ) THEN
       s1 = zeta1(j) - zeta2(j)
     ELSE
       cfn = CMPLX(fn,0.0E0)
@@ -104,19 +103,19 @@ SUBROUTINE CUNK2(Z,Fnu,Kode,Mr,N,Y,Nz,Tol,Elim,Alim)
     !     TEST FOR UNDERFLOW AND OVERFLOW
     !-----------------------------------------------------------------------
     rs1 = REAL(s1)
-    IF ( ABS(rs1)<=Elim ) THEN
-      IF ( kdflg==1 ) kflag = 2
-      IF ( ABS(rs1)>=Alim ) THEN
+    IF( ABS(rs1)<=Elim ) THEN
+      IF( kdflg==1 ) kflag = 2
+      IF( ABS(rs1)>=Alim ) THEN
         !-----------------------------------------------------------------------
         !     REFINE  TEST AND SCALE
         !-----------------------------------------------------------------------
         aphi = ABS(phi(j))
         aarg = ABS(arg(j))
         rs1 = rs1 + LOG(aphi) - 0.25E0*LOG(aarg) - aic
-        IF ( ABS(rs1)>Elim ) GOTO 50
-        IF ( kdflg==1 ) kflag = 1
-        IF ( rs1>=0.0E0 ) THEN
-          IF ( kdflg==1 ) kflag = 3
+        IF( ABS(rs1)>Elim ) GOTO 50
+        IF( kdflg==1 ) kflag = 1
+        IF( rs1>=0.0E0 ) THEN
+          IF( kdflg==1 ) kflag = 3
         END IF
       END IF
       !-----------------------------------------------------------------------
@@ -132,29 +131,29 @@ SUBROUTINE CUNK2(Z,Fnu,Kode,Mr,N,Y,Nz,Tol,Elim,Alim)
       c2m = EXP(c2r)*REAL(css(kflag))
       s1 = CMPLX(c2m,0.0E0)*CMPLX(COS(c2i),SIN(c2i))
       s2 = s2*s1
-      IF ( kflag==1 ) THEN
+      IF( kflag==1 ) THEN
         CALL CUCHK(s2,nw,bry(1),Tol)
-        IF ( nw/=0 ) GOTO 50
+        IF( nw/=0 ) GOTO 50
       END IF
-      IF ( yy<=0.0E0 ) s2 = CONJG(s2)
+      IF( yy<=0.0E0 ) s2 = CONJG(s2)
       cy(kdflg) = s2
       Y(i) = s2*csr(kflag)
       cs = -ci*cs
-      IF ( kdflg==2 ) GOTO 100
+      IF( kdflg==2 ) GOTO 100
       kdflg = 2
       CYCLE
     END IF
-    50  IF ( rs1>0.0E0 ) GOTO 600
+    50  IF( rs1>0.0E0 ) GOTO 600
     !-----------------------------------------------------------------------
-    !     FOR X.LT.0.0, THE I FUNCTION TO BE ADDED WILL OVERFLOW
+    !     FOR X<0.0, THE I FUNCTION TO BE ADDED WILL OVERFLOW
     !-----------------------------------------------------------------------
-    IF ( x<0.0E0 ) GOTO 600
+    IF( x<0.0E0 ) GOTO 600
     kdflg = 1
     Y(i) = czero
     cs = -ci*cs
     Nz = Nz + 1
-    IF ( i/=1 ) THEN
-      IF ( Y(i-1)/=czero ) THEN
+    IF( i/=1 ) THEN
+      IF( Y(i-1)/=czero ) THEN
         Y(i-1) = czero
         Nz = Nz + 1
       END IF
@@ -164,37 +163,37 @@ SUBROUTINE CUNK2(Z,Fnu,Kode,Mr,N,Y,Nz,Tol,Elim,Alim)
   100  rz = CMPLX(2.0E0,0.0E0)/zr
   ck = CMPLX(fn,0.0E0)*rz
   ib = i + 1
-  IF ( N<ib ) GOTO 300
+  IF( N<ib ) GOTO 300
   !-----------------------------------------------------------------------
   !     TEST LAST MEMBER FOR UNDERFLOW AND OVERFLOW, SET SEQUENCE TO ZERO
   !     ON UNDERFLOW
   !-----------------------------------------------------------------------
   fn = Fnu + (N-1)
   ipard = 1
-  IF ( Mr/=0 ) ipard = 0
+  IF( Mr/=0 ) ipard = 0
   CALL CUNHJ(zn,fn,ipard,Tol,phid,argd,zeta1d,zeta2d,asumd,bsumd)
-  IF ( Kode==1 ) THEN
+  IF( Kode==1 ) THEN
     s1 = zeta1d - zeta2d
   ELSE
     cfn = CMPLX(fn,0.0E0)
     s1 = zeta1d - cfn*(cfn/(zb+zeta2d))
   END IF
   rs1 = REAL(s1)
-  IF ( ABS(rs1)<=Elim ) THEN
-    IF ( ABS(rs1)<Alim ) GOTO 200
+  IF( ABS(rs1)<=Elim ) THEN
+    IF( ABS(rs1)<Alim ) GOTO 200
     !-----------------------------------------------------------------------
     !     REFINE ESTIMATE AND TEST
     !-----------------------------------------------------------------------
     aphi = ABS(phid)
     aarg = ABS(argd)
     rs1 = rs1 + LOG(aphi) - 0.25E0*LOG(aarg) - aic
-    IF ( ABS(rs1)<Elim ) GOTO 200
+    IF( ABS(rs1)<Elim ) GOTO 200
   END IF
-  IF ( rs1>0.0E0 ) GOTO 600
+  IF( rs1>0.0E0 ) GOTO 600
   !-----------------------------------------------------------------------
-  !     FOR X.LT.0.0, THE I FUNCTION TO BE ADDED WILL OVERFLOW
+  !     FOR X<0.0, THE I FUNCTION TO BE ADDED WILL OVERFLOW
   !-----------------------------------------------------------------------
-  IF ( x<0.0E0 ) GOTO 600
+  IF( x<0.0E0 ) GOTO 600
   Nz = N
   DO i = 1, N
     Y(i) = czero
@@ -214,13 +213,13 @@ SUBROUTINE CUNK2(Z,Fnu,Kode,Mr,N,Y,Nz,Tol,Elim,Alim)
     ck = ck + rz
     c2 = s2*c1
     Y(i) = c2
-    IF ( kflag<3 ) THEN
+    IF( kflag<3 ) THEN
       c2r = REAL(c2)
       c2i = AIMAG(c2)
       c2r = ABS(c2r)
       c2i = ABS(c2i)
       c2m = MAX(c2r,c2i)
-      IF ( c2m>ascle ) THEN
+      IF( c2m>ascle ) THEN
         kflag = kflag + 1
         ascle = bry(kflag)
         s1 = s1*c1
@@ -232,9 +231,9 @@ SUBROUTINE CUNK2(Z,Fnu,Kode,Mr,N,Y,Nz,Tol,Elim,Alim)
     END IF
   END DO
   300 CONTINUE
-  IF ( Mr==0 ) RETURN
+  IF( Mr==0 ) RETURN
   !-----------------------------------------------------------------------
-  !     ANALYTIC CONTINUATION FOR RE(Z).LT.0.0E0
+  !     ANALYTIC CONTINUATION FOR RE(Z)<0.0E0
   !-----------------------------------------------------------------------
   Nz = 0
   fmr = Mr
@@ -243,17 +242,17 @@ SUBROUTINE CUNK2(Z,Fnu,Kode,Mr,N,Y,Nz,Tol,Elim,Alim)
   !     CSPN AND CSGN ARE COEFF OF K AND I FUNCTIONS RESP.
   !-----------------------------------------------------------------------
   csgn = CMPLX(0.0E0,sgn)
-  IF ( yy<=0.0E0 ) csgn = CONJG(csgn)
+  IF( yy<=0.0E0 ) csgn = CONJG(csgn)
   ifn = inu + N - 1
   ang = fnf*sgn
   cpn = COS(ang)
   spn = SIN(ang)
   cspn = CMPLX(cpn,spn)
-  IF ( MOD(ifn,2)==1 ) cspn = -cspn
+  IF( MOD(ifn,2)==1 ) cspn = -cspn
   !-----------------------------------------------------------------------
   !     CS=COEFF OF THE J FUNCTION TO GET THE I FUNCTION. I(FNU,Z) IS
   !     COMPUTED FROM EXP(I*FNU*HPI)*J(FNU,-I*Z) WHERE Z IS IN THE FIRST
-  !     QUADRANT. FOURTH QUADRANT VALUES (YY.LE.0.0E0) ARE COMPUTED BY
+  !     QUADRANT. FOURTH QUADRANT VALUES (YY<=0.0E0) ARE COMPUTED BY
   !     CONJUGATION SINCE THE I FUNCTION IS REAL ON THE POSITIVE REAL AXIS
   !-----------------------------------------------------------------------
   cs = CMPLX(car,-sar)*csgn
@@ -272,9 +271,9 @@ SUBROUTINE CUNK2(Z,Fnu,Kode,Mr,N,Y,Nz,Tol,Elim,Alim)
     !     FUNCTION ABOVE
     !-----------------------------------------------------------------------
     fn = Fnu + (kk-1)
-    IF ( N>2 ) THEN
-      IF ( (kk==N).AND.(ib<N) ) GOTO 350
-      IF ( (kk/=ib).AND.(kk/=ic) ) THEN
+    IF( N>2 ) THEN
+      IF( (kk==N) .AND. (ib<N) ) GOTO 350
+      IF( (kk/=ib) .AND. (kk/=ic) ) THEN
         CALL CUNHJ(zn,fn,0,Tol,phid,argd,zeta1d,zeta2d,asumd,bsumd)
         GOTO 350
       END IF
@@ -287,7 +286,7 @@ SUBROUTINE CUNK2(Z,Fnu,Kode,Mr,N,Y,Nz,Tol,Elim,Alim)
     bsumd = bsum(j)
     j = 3 - j
     350 CONTINUE
-    IF ( Kode==1 ) THEN
+    IF( Kode==1 ) THEN
       s1 = -zeta1d + zeta2d
     ELSE
       cfn = CMPLX(fn,0.0E0)
@@ -297,19 +296,19 @@ SUBROUTINE CUNK2(Z,Fnu,Kode,Mr,N,Y,Nz,Tol,Elim,Alim)
     !     TEST FOR UNDERFLOW AND OVERFLOW
     !-----------------------------------------------------------------------
     rs1 = REAL(s1)
-    IF ( ABS(rs1)>Elim ) GOTO 450
-    IF ( kdflg==1 ) iflag = 2
-    IF ( ABS(rs1)>=Alim ) THEN
+    IF( ABS(rs1)>Elim ) GOTO 450
+    IF( kdflg==1 ) iflag = 2
+    IF( ABS(rs1)>=Alim ) THEN
       !-----------------------------------------------------------------------
       !     REFINE  TEST AND SCALE
       !-----------------------------------------------------------------------
       aphi = ABS(phid)
       aarg = ABS(argd)
       rs1 = rs1 + LOG(aphi) - 0.25E0*LOG(aarg) - aic
-      IF ( ABS(rs1)>Elim ) GOTO 450
-      IF ( kdflg==1 ) iflag = 1
-      IF ( rs1>=0.0E0 ) THEN
-        IF ( kdflg==1 ) iflag = 3
+      IF( ABS(rs1)>Elim ) GOTO 450
+      IF( kdflg==1 ) iflag = 1
+      IF( rs1>=0.0E0 ) THEN
+        IF( kdflg==1 ) iflag = 3
       END IF
     END IF
     CALL CAIRY(argd,0,2,ai,nai,idum)
@@ -320,11 +319,11 @@ SUBROUTINE CUNK2(Z,Fnu,Kode,Mr,N,Y,Nz,Tol,Elim,Alim)
     c2m = EXP(c2r)*REAL(css(iflag))
     s1 = CMPLX(c2m,0.0E0)*CMPLX(COS(c2i),SIN(c2i))
     s2 = s2*s1
-    IF ( iflag==1 ) THEN
+    IF( iflag==1 ) THEN
       CALL CUCHK(s2,nw,bry(1),Tol)
-      IF ( nw/=0 ) s2 = CMPLX(0.0E0,0.0E0)
+      IF( nw/=0 ) s2 = CMPLX(0.0E0,0.0E0)
     END IF
-    400  IF ( yy<=0.0E0 ) s2 = CONJG(s2)
+    400  IF( yy<=0.0E0 ) s2 = CONJG(s2)
     cy(kdflg) = s2
     c2 = s2
     s2 = s2*csr(iflag)
@@ -332,7 +331,7 @@ SUBROUTINE CUNK2(Z,Fnu,Kode,Mr,N,Y,Nz,Tol,Elim,Alim)
     !     ADD I AND K FUNCTIONS, K SEQUENCE IN Y(I), I=1,N
     !-----------------------------------------------------------------------
     s1 = Y(kk)
-    IF ( Kode/=1 ) THEN
+    IF( Kode/=1 ) THEN
       CALL CS1S2(zr,s1,s2,nw,asc,Alim,iuf)
       Nz = Nz + nw
     END IF
@@ -340,21 +339,21 @@ SUBROUTINE CUNK2(Z,Fnu,Kode,Mr,N,Y,Nz,Tol,Elim,Alim)
     kk = kk - 1
     cspn = -cspn
     cs = -cs*ci
-    IF ( c2/=czero ) THEN
-      IF ( kdflg==2 ) GOTO 500
+    IF( c2/=czero ) THEN
+      IF( kdflg==2 ) GOTO 500
       kdflg = 2
       CYCLE
     ELSE
       kdflg = 1
       CYCLE
     END IF
-    450  IF ( rs1>0.0E0 ) GOTO 600
+    450  IF( rs1>0.0E0 ) GOTO 600
     s2 = czero
     GOTO 400
   END DO
   k = N
   500  il = N - k
-  IF ( il==0 ) RETURN
+  IF( il==0 ) RETURN
   !-----------------------------------------------------------------------
   !     RECUR BACKWARD FOR REMAINDER OF I SEQUENCE AND ADD IN THE
   !     K FUNCTIONS, SCALING THE I SEQUENCE DURING RECURRENCE TO KEEP
@@ -373,20 +372,20 @@ SUBROUTINE CUNK2(Z,Fnu,Kode,Mr,N,Y,Nz,Tol,Elim,Alim)
     c2 = s2*cs
     ck = c2
     c1 = Y(kk)
-    IF ( Kode/=1 ) THEN
+    IF( Kode/=1 ) THEN
       CALL CS1S2(zr,c1,c2,nw,asc,Alim,iuf)
       Nz = Nz + nw
     END IF
     Y(kk) = c1*cspn + c2
     kk = kk - 1
     cspn = -cspn
-    IF ( iflag<3 ) THEN
+    IF( iflag<3 ) THEN
       c2r = REAL(ck)
       c2i = AIMAG(ck)
       c2r = ABS(c2r)
       c2i = ABS(c2i)
       c2m = MAX(c2r,c2i)
-      IF ( c2m>ascle ) THEN
+      IF( c2m>ascle ) THEN
         iflag = iflag + 1
         ascle = bry(iflag)
         s1 = s1*cs

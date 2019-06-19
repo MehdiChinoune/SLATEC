@@ -1,7 +1,6 @@
 !** DCHFDV
 SUBROUTINE DCHFDV(X1,X2,F1,F2,D1,D2,Ne,Xe,Fe,De,Next,Ierr)
-  !>
-  !  Evaluate a cubic polynomial given in Hermite form and its
+  !> Evaluate a cubic polynomial given in Hermite form and its
   !            first derivative at an array of points.  While designed for
   !            use by DPCHFD, it may be useful directly as an evaluator
   !            for a piecewise cubic Hermite function in applications,
@@ -46,14 +45,14 @@ SUBROUTINE DCHFDV(X1,X2,F1,F2,D1,D2,Ne,Xe,Fe,De,Next,Ierr)
   !   Parameters:
   !
   !     X1,X2 -- (input) endpoints of interval of definition of cubic.
-  !           (Error return if  X1.EQ.X2 .)
+  !           (Error return if  X1=X2 .)
   !
   !     F1,F2 -- (input) values of function at X1 and X2, respectively.
   !
   !     D1,D2 -- (input) values of derivative at X1 and X2, respectively.
   !
   !     NE -- (input) number of evaluation points.  (Error return if
-  !           NE.LT.1 .)
+  !           NE<1 .)
   !
   !     XE -- (input) real*8 array of points at which the functions are to
   !           be evaluated.  If any of the XE are outside the interval
@@ -74,8 +73,8 @@ SUBROUTINE DCHFDV(X1,X2,F1,F2,D1,D2,Ne,Xe,Fe,De,Next,Ierr)
   !           Normal return:
   !              IERR = 0  (no errors).
   !           "Recoverable" errors:
-  !              IERR = -1  if NE.LT.1 .
-  !              IERR = -2  if X1.EQ.X2 .
+  !              IERR = -1  if NE<1 .
+  !              IERR = -2  if X1=X2 .
   !                (Output arrays have not been changed in either case.)
   !
   !***
@@ -105,32 +104,32 @@ SUBROUTINE DCHFDV(X1,X2,F1,F2,D1,D2,Ne,Xe,Fe,De,Next,Ierr)
   !
   !  DECLARE ARGUMENTS.
   !
-  INTEGER Ne, Next(2), Ierr
+  INTEGER :: Ne, Next(2), Ierr
   REAL(DP) :: X1, X2, F1, F2, D1, D2, Xe(Ne), Fe(Ne), De(ne)
   !
   !  DECLARE LOCAL VARIABLES.
   !
-  INTEGER i
+  INTEGER :: i
   REAL(DP) :: c2, c2t2, c3, c3t3, del1, del2, delta, h, x, xmi, xma
   REAL(DP), PARAMETER :: zero = 0.D0
   !
   !  VALIDITY-CHECK ARGUMENTS.
   !
   !* FIRST EXECUTABLE STATEMENT  DCHFDV
-  IF ( Ne<1 ) THEN
+  IF( Ne<1 ) THEN
     !
     !  ERROR RETURNS.
     !
-    !     NE.LT.1 RETURN.
+    !     NE<1 RETURN.
     Ierr = -1
     CALL XERMSG('DCHFDV',&
       'NUMBER OF EVALUATION POINTS LESS THAN ONE',Ierr,1)
     RETURN
   ELSE
     h = X2 - X1
-    IF ( h==zero ) THEN
+    IF( h==zero ) THEN
       !
-      !     X1.EQ.X2 RETURN.
+      !     X1=X2 RETURN.
       Ierr = -2
       CALL XERMSG('DCHFDV','INTERVAL ENDPOINTS EQUAL',Ierr,1)
       RETURN
@@ -164,8 +163,8 @@ SUBROUTINE DCHFDV(X1,X2,F1,F2,D1,D2,Ne,Xe,Fe,De,Next,Ierr)
     Fe(i) = F1 + x*(D1+x*(c2+x*c3))
     De(i) = D1 + x*(c2t2+x*c3t3)
     !          COUNT EXTRAPOLATION POINTS.
-    IF ( x<xmi ) Next(1) = Next(1) + 1
-    IF ( x>xma ) Next(2) = Next(2) + 1
+    IF( x<xmi ) Next(1) = Next(1) + 1
+    IF( x>xma ) Next(2) = Next(2) + 1
     !        (NOTE REDUNDANCY--IF EITHER CONDITION IS TRUE, OTHER IS FALSE.)
   END DO
   !

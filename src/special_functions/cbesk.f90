@@ -1,7 +1,6 @@
 !** CBESK
 SUBROUTINE CBESK(Z,Fnu,Kode,N,Cy,Nz,Ierr)
-  !>
-  !  Compute a sequence of the Bessel functions K(a,z) for
+  !> Compute a sequence of the Bessel functions K(a,z) for
   !            complex argument z and real nonnegative orders a=b,b+1,
   !            b+2,... where b>0.  A scaling option is available to
   !            help avoid overflow.
@@ -21,7 +20,7 @@ SUBROUTINE CBESK(Z,Fnu,Kode,N,Cy,Nz,Ierr)
   !
   !         On KODE=1, CBESK computes an N member sequence of complex
   !         Bessel functions CY(L)=K(FNU+L-1,Z) for real nonnegative
-  !         orders FNU+L-1, L=1,...,N and complex Z.NE.0 in the cut
+  !         orders FNU+L-1, L=1,...,N and complex Z/=0 in the cut
   !         plane -pi<arg(Z)<=pi.  On KODE=2, CBESJ returns the scaled
   !         functions
   !
@@ -159,27 +158,27 @@ SUBROUTINE CBESK(Z,Fnu,Kode,N,Cy,Nz,Ierr)
   !   920811  Prologue revised.  (DWL)
   USE service, ONLY : R1MACH, I1MACH
   !
-  INTEGER Ierr, k, Kode, k1, k2, mr, N, nn, nuf, nw, Nz
-  COMPLEX(SP) Cy(N), Z
-  REAL(SP) aa, alim, aln, arg, az, dig, elim, fn, Fnu, fnul, rl, &
+  INTEGER :: Ierr, k, Kode, k1, k2, mr, N, nn, nuf, nw, Nz
+  COMPLEX(SP) :: Cy(N), Z
+  REAL(SP) :: aa, alim, aln, arg, az, dig, elim, fn, Fnu, fnul, rl, &
     r1m5, tol, ufl, xx, yy, bb
   !* FIRST EXECUTABLE STATEMENT  CBESK
   Ierr = 0
   Nz = 0
   xx = REAL(Z)
   yy = AIMAG(Z)
-  IF ( yy==0.0E0.AND.xx==0.0E0 ) Ierr = 1
-  IF ( Fnu<0.0E0 ) Ierr = 1
-  IF ( Kode<1.OR.Kode>2 ) Ierr = 1
-  IF ( N<1 ) Ierr = 1
-  IF ( Ierr/=0 ) RETURN
+  IF( yy==0.0E0 .AND. xx==0.0E0 ) Ierr = 1
+  IF( Fnu<0.0E0 ) Ierr = 1
+  IF( Kode<1 .OR. Kode>2 ) Ierr = 1
+  IF( N<1 ) Ierr = 1
+  IF( Ierr/=0 ) RETURN
   nn = N
   !-----------------------------------------------------------------------
   !     SET PARAMETERS RELATED TO MACHINE CONSTANTS.
   !     TOL IS THE APPROXIMATE UNIT ROUNDOFF LIMITED TO 1.0E-18.
   !     ELIM IS THE APPROXIMATE EXPONENTIAL OVER- AND UNDERFLOW LIMIT.
-  !     EXP(-ELIM).LT.EXP(-ALIM)=EXP(-ELIM)/TOL    AND
-  !     EXP(ELIM).GT.EXP(ALIM)=EXP(ELIM)*TOL       ARE INTERVALS NEAR
+  !     EXP(-ELIM)<EXP(-ALIM)=EXP(-ELIM)/TOL    AND
+  !     EXP(ELIM)>EXP(ALIM)=EXP(ELIM)*TOL       ARE INTERVALS NEAR
   !     UNDERFLOW AND OVERFLOW LIMITS WHERE SCALED ARITHMETIC IS DONE.
   !     RL IS THE LOWER BOUNDARY OF THE ASYMPTOTIC EXPANSION FOR LARGE Z.
   !     DIG = NUMBER OF BASE 10 DIGITS IN TOL = 10**(-DIG).
@@ -206,68 +205,68 @@ SUBROUTINE CBESK(Z,Fnu,Kode,N,Cy,Nz,Ierr)
   aa = 0.5E0/tol
   bb = I1MACH(9)*0.5E0
   aa = MIN(aa,bb)
-  IF ( az>aa ) GOTO 300
-  IF ( fn>aa ) GOTO 300
+  IF( az>aa ) GOTO 300
+  IF( fn>aa ) GOTO 300
   aa = SQRT(aa)
-  IF ( az>aa ) Ierr = 3
-  IF ( fn>aa ) Ierr = 3
+  IF( az>aa ) Ierr = 3
+  IF( fn>aa ) Ierr = 3
   !-----------------------------------------------------------------------
   !     OVERFLOW TEST ON THE LAST MEMBER OF THE SEQUENCE
   !-----------------------------------------------------------------------
   !     UFL = EXP(-ELIM)
   ufl = R1MACH(1)*1.0E+3
-  IF ( az>=ufl ) THEN
-    IF ( Fnu>fnul ) THEN
+  IF( az>=ufl ) THEN
+    IF( Fnu>fnul ) THEN
       !-----------------------------------------------------------------------
-      !     UNIFORM ASYMPTOTIC EXPANSIONS FOR FNU.GT.FNUL
+      !     UNIFORM ASYMPTOTIC EXPANSIONS FOR FNU>FNUL
       !-----------------------------------------------------------------------
       mr = 0
-      IF ( xx<0.0E0 ) THEN
+      IF( xx<0.0E0 ) THEN
         mr = 1
-        IF ( yy<0.0E0 ) mr = -1
+        IF( yy<0.0E0 ) mr = -1
       END IF
       CALL CBUNK(Z,Fnu,Kode,mr,nn,Cy,nw,tol,elim,alim)
-      IF ( nw<0 ) GOTO 200
+      IF( nw<0 ) GOTO 200
       Nz = Nz + nw
       RETURN
     ELSE
-      IF ( fn>1.0E0 ) THEN
-        IF ( fn>2.0E0 ) THEN
+      IF( fn>1.0E0 ) THEN
+        IF( fn>2.0E0 ) THEN
           CALL CUOIK(Z,Fnu,Kode,2,nn,Cy,nuf,tol,elim,alim)
-          IF ( nuf<0 ) GOTO 100
+          IF( nuf<0 ) GOTO 100
           Nz = Nz + nuf
           nn = nn - nuf
           !-----------------------------------------------------------------------
           !     HERE NN=N OR NN=0 SINCE NUF=0,NN, OR -1 ON RETURN FROM CUOIK
           !     IF NUF=NN, THEN CY(I)=CZERO FOR ALL I
           !-----------------------------------------------------------------------
-          IF ( nn==0 ) THEN
-            IF ( xx<0.0E0 ) GOTO 100
+          IF( nn==0 ) THEN
+            IF( xx<0.0E0 ) GOTO 100
             RETURN
           END IF
-        ELSEIF ( az<=tol ) THEN
+        ELSEIF( az<=tol ) THEN
           arg = 0.5E0*az
           aln = -fn*LOG(arg)
-          IF ( aln>elim ) GOTO 100
+          IF( aln>elim ) GOTO 100
         END IF
       END IF
-      IF ( xx>=0.0E0 ) THEN
+      IF( xx>=0.0E0 ) THEN
         !-----------------------------------------------------------------------
-        !     RIGHT HALF PLANE COMPUTATION, REAL(Z).GE.0.
+        !     RIGHT HALF PLANE COMPUTATION, REAL(Z)>=0.
         !-----------------------------------------------------------------------
         CALL CBKNU(Z,Fnu,Kode,nn,Cy,nw,tol,elim,alim)
-        IF ( nw<0 ) GOTO 200
+        IF( nw<0 ) GOTO 200
         Nz = nw
         RETURN
         !-----------------------------------------------------------------------
         !     LEFT HALF PLANE COMPUTATION
-        !     PI/2.LT.ARG(Z).LE.PI AND -PI.LT.ARG(Z).LT.-PI/2.
+        !     PI/2<ARG(Z)<=PI AND -PI<ARG(Z)<-PI/2.
         !-----------------------------------------------------------------------
-      ELSEIF ( Nz==0 ) THEN
+      ELSEIF( Nz==0 ) THEN
         mr = 1
-        IF ( yy<0.0E0 ) mr = -1
+        IF( yy<0.0E0 ) mr = -1
         CALL CACON(Z,Fnu,Kode,mr,nn,Cy,nw,rl,fnul,tol,elim,alim)
-        IF ( nw<0 ) GOTO 200
+        IF( nw<0 ) GOTO 200
         Nz = nw
         RETURN
       END IF
@@ -277,7 +276,7 @@ SUBROUTINE CBESK(Z,Fnu,Kode,N,Cy,Nz,Ierr)
   Ierr = 2
   RETURN
   200 CONTINUE
-  IF ( nw==(-1) ) GOTO 100
+  IF( nw==(-1) ) GOTO 100
   Nz = 0
   Ierr = 5
   RETURN

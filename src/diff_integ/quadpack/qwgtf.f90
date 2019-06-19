@@ -1,7 +1,6 @@
 !** QWGTF
 REAL(SP) FUNCTION QWGTF(X,Omega,P2,P3,P4,Integr)
-  !>
-  !  This function subprogram is used together with the
+  !> This function subprogram is used together with the
   !            routine QAWF and defines the WEIGHT function.
   !***
   ! **Library:**   SLATEC
@@ -28,11 +27,11 @@ REAL(SP) FUNCTION QWGTF(X,Omega,P2,P3,P4,Integr)
   !   900328  Added TYPE section.  (WRB)
 
   !
-  REAL(SP) Omega, omx, P2, P3, P4, X
-  INTEGER Integr
+  REAL(SP) :: Omega, omx, P2, P3, P4, X
+  INTEGER :: Integr
   !* FIRST EXECUTABLE STATEMENT  QWGTF
   omx = Omega*X
-  IF ( Integr==2 ) THEN
+  IF( Integr==2 ) THEN
     QWGTF = SIN(omx)
   ELSE
     QWGTF = COS(omx)

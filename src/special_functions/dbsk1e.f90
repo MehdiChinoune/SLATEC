@@ -1,7 +1,6 @@
 !** DBSK1E
 REAL(DP) FUNCTION DBSK1E(X)
-  !>
-  !  Compute the exponentially scaled modified (hyperbolic)
+  !> Compute the exponentially scaled modified (hyperbolic)
   !            Bessel function of the third kind of order one.
   !***
   ! **Library:**   SLATEC (FNLIB)
@@ -105,17 +104,17 @@ REAL(DP) FUNCTION DBSK1E(X)
     +.1202021939369815834623999999999D-30, -.2412930801459408841386666666666D-31 ]
   LOGICAL, SAVE :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  DBSK1E
-  IF ( first ) THEN
+  IF( first ) THEN
     ntk1 = INITDS(bk1cs,16,eta)
     ntak1 = INITDS(ak1cs,38,eta)
     ntak12 = INITDS(ak12cs,33,eta)
     first = .FALSE.
   END IF
   !
-  IF ( X<=0.D0 ) CALL XERMSG('DBSK1E','X IS ZERO OR NEGATIVE',2,2)
-  IF ( X>2.0D0 ) THEN
+  IF( X<=0.D0 ) CALL XERMSG('DBSK1E','X IS ZERO OR NEGATIVE',2,2)
+  IF( X>2.0D0 ) THEN
     !
-    IF ( X<=8.D0 ) THEN
+    IF( X<=8.D0 ) THEN
       DBSK1E = (1.25D0+DCSEVL((16.D0/X-5.D0)/3.D0,ak1cs,ntak1))/SQRT(X)
     ELSE
       DBSK1E = (1.25D0+DCSEVL(16.D0/X-1.D0,ak12cs,ntak12))/SQRT(X)
@@ -123,9 +122,9 @@ REAL(DP) FUNCTION DBSK1E(X)
     RETURN
   END IF
   !
-  IF ( X<xmin ) CALL XERMSG('DBSK1E','X SO SMALL K1 OVERFLOWS',3,2)
+  IF( X<xmin ) CALL XERMSG('DBSK1E','X SO SMALL K1 OVERFLOWS',3,2)
   y = 0.D0
-  IF ( X>xsml ) y = X*X
+  IF( X>xsml ) y = X*X
   DBSK1E = EXP(X)&
     *(LOG(0.5D0*X)*DBESI1(X)+(0.75D0+DCSEVL(0.5D0*y-1.D0,bk1cs,ntk1))/X)
   RETURN

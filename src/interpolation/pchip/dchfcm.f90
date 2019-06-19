@@ -1,7 +1,6 @@
 !** DCHFCM
 INTEGER FUNCTION DCHFCM(D1,D2,Delta)
-  !>
-  !  Check a single cubic for monotonicity.
+  !> Check a single cubic for monotonicity.
   !***
   ! **Library:**   SLATEC (PCHIP)
   !***
@@ -47,10 +46,10 @@ INTEGER FUNCTION DCHFCM(D1,D2,Delta)
   !     This is essentially the same as old DCHFMC, except that a
   !     new output value, -3, was added February 1989.  (Formerly, -3
   !     and +3 were lumped together in the single value 3.)  Codes that
-  !     flag nonmonotonicity by "IF (ISMON.EQ.2)" need not be changed.
-  !     Codes that check via "IF (ISMON.GE.3)" should change the test to
-  !     "IF (IABS(ISMON).GE.3)".  Codes that declare monotonicity via
-  !     "IF (ISMON.LE.1)" should change to "IF (IABS(ISMON).LE.1)".
+  !     flag nonmonotonicity by "IF(ISMON=2)" need not be changed.
+  !     Codes that check via "IF(ISMON>=3)" should change the test to
+  !     "IF(IABS(ISMON)>=3)".  Codes that declare monotonicity via
+  !     "IF(ISMON<=1)" should change to "IF(IABS(ISMON)<=1)".
   !
   !   REFER TO  DPCHCM
   !
@@ -61,7 +60,7 @@ INTEGER FUNCTION DCHFCM(D1,D2,Delta)
   !   820518  DATE WRITTEN
   !   820805  Converted to SLATEC library version.
   !   831201  Changed from  ISIGN  to SIGN  to correct bug that
-  !           produced wrong sign when -1 .LT. DELTA .LT. 0 .
+  !           produced wrong sign when -1 < DELTA < 0 .
   !   890206  Added SAVE statements.
   !   890209  Added sign to returned value ISMON=3 and corrected
   !           argument description accordingly.
@@ -95,7 +94,7 @@ INTEGER FUNCTION DCHFCM(D1,D2,Delta)
   !
   !  DECLARE LOCAL VARIABLES.
   !
-  INTEGER ismon, itrue
+  INTEGER :: ismon, itrue
   REAL(DP) :: a, b, eps, phi
   !
   !  INITIALIZE.
@@ -109,17 +108,17 @@ INTEGER FUNCTION DCHFCM(D1,D2,Delta)
   !
   !  MAKE THE CHECK.
   !
-  IF ( Delta/=zero ) THEN
+  IF( Delta/=zero ) THEN
     !        DATA IS NOT CONSTANT -- PICK UP SIGN.
     itrue = INT( SIGN(one,Delta) )
     a = D1/Delta
     b = D2/Delta
-    IF ( (a<zero).OR.(b<zero) ) THEN
+    IF( (a<zero) .OR. (b<zero) ) THEN
       ismon = 2
-    ELSEIF ( (a<=three-eps).AND.(b<=three-eps) ) THEN
+    ELSEIF( (a<=three-eps) .AND. (b<=three-eps) ) THEN
       !           INSIDE SQUARE (0,3)X(0,3)  IMPLIES   OK.
       ismon = itrue
-    ELSEIF ( (a>four+eps).AND.(b>four+eps) ) THEN
+    ELSEIF( (a>four+eps) .AND. (b>four+eps) ) THEN
       !           OUTSIDE SQUARE (0,4)X(0,4)  IMPLIES   NONMONOTONIC.
       ismon = 2
     ELSE
@@ -127,9 +126,9 @@ INTEGER FUNCTION DCHFCM(D1,D2,Delta)
       a = a - two
       b = b - two
       phi = ((a*a+b*b)+a*b) - three
-      IF ( phi<-eps ) THEN
+      IF( phi<-eps ) THEN
         ismon = itrue
-      ELSEIF ( phi>eps ) THEN
+      ELSEIF( phi>eps ) THEN
         ismon = 2
       ELSE
         !              TO CLOSE TO BOUNDARY TO TELL,
@@ -138,7 +137,7 @@ INTEGER FUNCTION DCHFCM(D1,D2,Delta)
       END IF
     END IF
     !        CASE OF CONSTANT DATA.
-  ELSEIF ( (D1==zero).AND.(D2==zero) ) THEN
+  ELSEIF( (D1==zero) .AND. (D2==zero) ) THEN
     ismon = 0
   ELSE
     ismon = 2

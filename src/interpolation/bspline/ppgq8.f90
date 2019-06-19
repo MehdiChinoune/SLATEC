@@ -1,7 +1,6 @@
 !** PPGQ8
 SUBROUTINE PPGQ8(FUN,Ldc,C,Xi,Lxi,Kk,Id,A,B,Inppv,Err,Ans,Ierr)
-  !>
-  !  Subsidiary to PFQAD
+  !> Subsidiary to PFQAD
   !***
   ! **Library:**   SLATEC
   !***
@@ -21,18 +20,18 @@ SUBROUTINE PPGQ8(FUN,Ldc,C,Xi,Lxi,Kk,Id,A,B,Inppv,Err,Ans,Ierr)
   !        INPUT--
   !        FUN - Name of external function of one argument which
   !              multiplies PPVAL.
-  !        LDC - Leading dimension of matrix C, LDC.GE.KK
+  !        LDC - Leading dimension of matrix C, LDC>=KK
   !        C   - Matrix of Taylor derivatives of dimension at least
   !              (K,LXI)
   !        XI  - Breakpoint vector of length LXI+1
   !        LXI - Number of polynomial pieces
-  !        KK  - Order of the spline, KK.GE.1
-  !        ID  - Order of the spline derivative, 0.LE.ID.LE.KK-1
+  !        KK  - Order of the spline, KK>=1
+  !        ID  - Order of the spline derivative, 0<=ID<=KK-1
   !        A   - Lower limit of integral
   !        B   - Upper limit of integral (may be less than A)
   !        INPPV- Initialization parameter for PPVAL
   !        ERR - Is a requested pseudorelative error tolerance.  Normally
-  !              pick a value of ABS(ERR).LT.1E-3.  ANS will normally
+  !              pick a value of ABS(ERR)<1E-3.  ANS will normally
   !              have no more error than ABS(ERR) times the integral of
   !              the absolute value of FUN(X)*PPVAL(LDC,C,XI,LXI,KK,ID,X,
   !              INPPV).
@@ -97,28 +96,28 @@ SUBROUTINE PPGQ8(FUN,Ldc,C,Xi,Lxi,Kk,Id,A,B,Inppv,Err,Ans,Ierr)
   Ans = 0.0E0
   Ierr = 1
   be = 0.0E0
-  IF ( A==B ) THEN
-    IF ( Err<0.0E0 ) Err = be
+  IF( A==B ) THEN
+    IF( Err<0.0E0 ) Err = be
     RETURN
   ELSE
     lmx = nlmx
     lmn = nlmn
-    IF ( B/=0.0E0 ) THEN
-      IF ( SIGN(1.0E0,B)*A>0.0E0 ) THEN
+    IF( B/=0.0E0 ) THEN
+      IF( SIGN(1.0E0,B)*A>0.0E0 ) THEN
         cc = ABS(1.0E0-A/B)
-        IF ( cc<=0.1E0 ) THEN
-          IF ( cc<=0.0E0 ) THEN
-            IF ( Err<0.0E0 ) Err = be
+        IF( cc<=0.1E0 ) THEN
+          IF( cc<=0.0E0 ) THEN
+            IF( Err<0.0E0 ) Err = be
             RETURN
           ELSE
             anib = 0.5E0 - LOG(cc)/0.69314718E0
             nib = INT(anib)
             lmx = MIN(nlmx,nbits-nib-7)
-            IF ( lmx<1 ) THEN
+            IF( lmx<1 ) THEN
               Ierr = -1
               CALL XERMSG('PPGQ8',&
                 'A AND B ARE TOO NEARLY EQUAL TO ALLOW NORMAL INTEGRATION. ANS IS SET TO ZERO AND IERR TO -1.',1,-1)
-              IF ( Err<0.0E0 ) Err = be
+              IF( Err<0.0E0 ) Err = be
               RETURN
             ELSE
               lmn = MIN(lmn,lmx)
@@ -128,7 +127,7 @@ SUBROUTINE PPGQ8(FUN,Ldc,C,Xi,Lxi,Kk,Id,A,B,Inppv,Err,Ans,Ierr)
       END IF
     END IF
     tol = MAX(ABS(Err),2.0E0**(5-nbits))/2.0E0
-    IF ( Err==0.0E0 ) tol = SQRT(R1MACH(4))
+    IF( Err==0.0E0 ) tol = SQRT(R1MACH(4))
     eps = tol
     hh(1) = (B-A)/4.0E0
     aa(1) = A
@@ -152,12 +151,12 @@ SUBROUTINE PPGQ8(FUN,Ldc,C,Xi,Lxi,Kk,Id,A,B,Inppv,Err,Ans,Ierr)
     glr = gl + gr(l)
     ee = ABS(est-glr)*ef
     ae = MAX(eps*area,tol*ABS(glr))
-    IF ( ee<=ae ) EXIT
+    IF( ee<=ae ) EXIT
     !
     !     CONSIDER THE LEFT HALF OF THIS LEVEL
     !
-    IF ( k>kmx ) lmx = kml
-    IF ( l>=lmx ) THEN
+    IF( k>kmx ) lmx = kml
+    IF( l>=lmx ) THEN
       mxl = 1
       EXIT
     ELSE
@@ -171,7 +170,7 @@ SUBROUTINE PPGQ8(FUN,Ldc,C,Xi,Lxi,Kk,Id,A,B,Inppv,Err,Ans,Ierr)
     END IF
   END DO
   be = be + (est-glr)
-  IF ( lr(l)<=0 ) THEN
+  IF( lr(l)<=0 ) THEN
     !
     !     PROCEED TO RIGHT HALF AT THIS LEVEL
     !
@@ -181,11 +180,11 @@ SUBROUTINE PPGQ8(FUN,Ldc,C,Xi,Lxi,Kk,Id,A,B,Inppv,Err,Ans,Ierr)
     !     RETURN ONE LEVEL
     !
     vr = glr
-    DO WHILE ( l>1 )
+    DO WHILE( l>1 )
       l = l - 1
       eps = eps*2.0E0
       ef = ef*sq2
-      IF ( lr(l)<=0 ) THEN
+      IF( lr(l)<=0 ) THEN
         vl(l) = vl(l+1) + vr
         GOTO 200
       ELSE
@@ -196,12 +195,12 @@ SUBROUTINE PPGQ8(FUN,Ldc,C,Xi,Lxi,Kk,Id,A,B,Inppv,Err,Ans,Ierr)
     !      EXIT
     !
     Ans = vr
-    IF ( (mxl/=0).AND.(ABS(be)>2.0E0*tol*area) ) THEN
+    IF( (mxl/=0) .AND. (ABS(be)>2.0E0*tol*area) ) THEN
       Ierr = 2
       CALL XERMSG('PPGQ8',&
         'ANS IS PROBABLY INSUFFICIENTLY ACCURATE.',3,1)
     END IF
-    IF ( Err<0.0E0 ) Err = be
+    IF( Err<0.0E0 ) Err = be
     RETURN
   END IF
   200  est = gr(l-1)

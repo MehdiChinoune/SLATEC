@@ -5,8 +5,7 @@ MODULE TEST47_MOD
 CONTAINS
   !** CDQCK
   SUBROUTINE CDQCK(Lun,Kprint,Ipass)
-    !>
-    !  Quick check for SLATEC routines CDRIV1, CDRIV2 and CDRIV3.
+    !> Quick check for SLATEC routines CDRIV1, CDRIV2 and CDRIV3.
     !***
     ! **Library:**   SLATEC (SDRIVE)
     !***
@@ -38,14 +37,14 @@ CONTAINS
     !   890405  DATE WRITTEN
     !   890405  Revised to meet SLATEC standards.
     USE slatec, ONLY : CDRIV1, CDRIV2, CDRIV3, R1MACH, XERCLR
-    REAL(SP) eps, t, tout
-    INTEGER ierflg, Ipass, Kprint, leniw, leniwx, lenw, lenwx, Lun, mint, &
+    REAL(SP) :: eps, t, tout
+    INTEGER :: ierflg, Ipass, Kprint, leniw, leniwx, lenw, lenwx, Lun, mint, &
       mstate, nde, nfe, nje, nstate, nstep, nx
     REAL, PARAMETER :: HMAX = 15.E0
     INTEGER, PARAMETER :: IERROR = 3, IMPL = 0, LENWMX = 342, LIWMX = 53, &
       MITER = 5, ML = 2, MU = 2, MXORD = 5, MXSTEP = 1000, N = 3, NROOT = 0, NTASK = 1
-    COMPLEX(SP) alfa, work(LENWMX), y(N+1)
-    INTEGER iwork(LIWMX)
+    COMPLEX(SP) :: alfa, work(LENWMX), y(N+1)
+    INTEGER :: iwork(LIWMX)
     REAL, PARAMETER :: ewt(1)  = .00001E0
     !* FIRST EXECUTABLE STATEMENT  CDQCK
     alfa = (1.E0,1.E0)
@@ -65,11 +64,11 @@ CONTAINS
     nstep = INT( work(lenw-(N+50)+3) )
     nfe = INT( work(lenw-(N+50)+4) )
     nje = INT( work(lenw-(N+50)+5) )
-    IF ( mstate/=2 ) THEN
-      IF ( Kprint==1 ) THEN
+    IF( mstate/=2 ) THEN
+      IF( Kprint==1 ) THEN
         WRITE (Lun,&
           '('' While using CDRIV1, a solution was not obtained.'' //)' )
-      ELSEIF ( Kprint>=2 ) THEN
+      ELSEIF( Kprint>=2 ) THEN
         WRITE (Lun,&
           '('' While using CDRIV1, a solution was not obtained.'')' )
         WRITE (Lun,&
@@ -86,13 +85,13 @@ CONTAINS
         WRITE (Lun,'(/)')
       END IF
       Ipass = 0
-    ELSEIF ( ABS(0.620174E0-ABS(y(1)))>eps**(2.E0/3.E0).OR.&
-        ABS(0.392232E0-ABS(y(2)))>eps**(2.E0/3.E0).OR.ABS(1.E0-ABS(y(3)))&
+    ELSEIF( ABS(0.620174E0-ABS(y(1)))>eps**(2.E0/3.E0) .OR. &
+        ABS(0.392232E0-ABS(y(2)))>eps**(2.E0/3.E0) .OR. ABS(1.E0-ABS(y(3)))&
         >eps**(2.E0/3.E0) ) THEN
-      IF ( Kprint==1 ) THEN
+      IF( Kprint==1 ) THEN
         WRITE (Lun,&
           '('' CDRIV1:The solution determined is not accurate enough.'' //)')
-      ELSEIF ( Kprint==2 ) THEN
+      ELSEIF( Kprint==2 ) THEN
         WRITE (Lun,&
           '('' CDRIV1:The solution determined is not accurate enough.'')')
         WRITE (Lun,&
@@ -108,10 +107,10 @@ CONTAINS
         WRITE (Lun,'(/)')
       END IF
       Ipass = 0
-    ELSEIF ( Kprint==2 ) THEN
+    ELSEIF( Kprint==2 ) THEN
       WRITE (Lun,&
         '('' CDRIV1:The solution determined met the expected values.'' //)')
-    ELSEIF ( Kprint==3 ) THEN
+    ELSEIF( Kprint==3 ) THEN
       WRITE (Lun,&
         '('' CDRIV1:The solution determined met the expected values.'')')
       WRITE (Lun,'('' The values of results are '')')
@@ -133,11 +132,11 @@ CONTAINS
     mstate = 1
     lenw = 342
     CALL CDRIV1(nx,t,y,CDF,tout,mstate,eps,work,lenw,ierflg)
-    IF ( ierflg/=21 ) THEN
-      IF ( Kprint==1 ) THEN
+    IF( ierflg/=21 ) THEN
+      IF( Kprint==1 ) THEN
         WRITE (Lun,&
           '('' CDRIV1:An invalid parameter has not been correctly detected.'' //)')
-      ELSEIF ( Kprint>=2 ) THEN
+      ELSEIF( Kprint>=2 ) THEN
         WRITE (Lun,&
           '('' CDRIV1:An invalid parameter has not been correctly detected.'')')
         WRITE (Lun,*) ' The value of N was set to ', nx
@@ -155,10 +154,10 @@ CONTAINS
         WRITE (Lun,'(/)')
       END IF
       Ipass = 0
-    ELSEIF ( Kprint==2 ) THEN
+    ELSEIF( Kprint==2 ) THEN
       WRITE (Lun,&
         '('' CDRIV1:An invalid parameter has been correctly detected.'' //)')
-    ELSEIF ( Kprint==3 ) THEN
+    ELSEIF( Kprint==3 ) THEN
       WRITE (Lun,&
         '('' CDRIV1:An invalid parameter has been correctly detected.'')')
       WRITE (Lun,*) ' The value of N was set to ', nx
@@ -183,11 +182,11 @@ CONTAINS
     nstep = iwork(3)
     nfe = iwork(4)
     nje = iwork(5)
-    IF ( mstate/=2 ) THEN
-      IF ( Kprint==1 ) THEN
+    IF( mstate/=2 ) THEN
+      IF( Kprint==1 ) THEN
         WRITE (Lun,&
           '('' While using CDRIV2, a solution was not obtained.'' //)' )
-      ELSEIF ( Kprint>=2 ) THEN
+      ELSEIF( Kprint>=2 ) THEN
         WRITE (Lun,&
           '('' While using CDRIV2, a solution was not obtained.'')')
         WRITE (Lun,*) ' MSTATE = ', mstate, ', Error number = ', ierflg
@@ -205,13 +204,13 @@ CONTAINS
         WRITE (Lun,'(/)')
       END IF
       Ipass = 0
-    ELSEIF ( ABS(0.620174E0-ABS(y(1)))>eps**(2.E0/3.E0).OR.&
-        ABS(0.392232E0-ABS(y(2)))>eps**(2.E0/3.E0).OR.ABS(1.E0-ABS(y(3)))&
+    ELSEIF( ABS(0.620174E0-ABS(y(1)))>eps**(2.E0/3.E0) .OR. &
+        ABS(0.392232E0-ABS(y(2)))>eps**(2.E0/3.E0) .OR. ABS(1.E0-ABS(y(3)))&
         >eps**(2.E0/3.E0) ) THEN
-      IF ( Kprint==1 ) THEN
+      IF( Kprint==1 ) THEN
         WRITE (Lun,&
           '('' CDRIV2:The solution determined is not accurate enough. //'')')
-      ELSEIF ( Kprint==2 ) THEN
+      ELSEIF( Kprint==2 ) THEN
         WRITE (Lun,&
           '('' CDRIV2:The solution determined is not accurate enough.'')')
         WRITE (Lun,&
@@ -227,10 +226,10 @@ CONTAINS
         WRITE (Lun,'(/)')
       END IF
       Ipass = 0
-    ELSEIF ( Kprint==2 ) THEN
+    ELSEIF( Kprint==2 ) THEN
       WRITE (Lun,&
         '('' CDRIV2:The solution determined met the expected values.'' //)')
-    ELSEIF ( Kprint==3 ) THEN
+    ELSEIF( Kprint==3 ) THEN
       WRITE (Lun,&
         '('' CDRIV2:The solution determined met the expected values.'')')
       WRITE (Lun,'('' The values of results are '')')
@@ -254,11 +253,11 @@ CONTAINS
     leniw = 50
     CALL CDRIV2(N,t,y,CDF,tout,mstate,NROOT,eps,ewt(1),mint,work,lenwx,iwork,&
       leniw,dum_G,ierflg)
-    IF ( ierflg/=32 ) THEN
-      IF ( Kprint==1 ) THEN
+    IF( ierflg/=32 ) THEN
+      IF( Kprint==1 ) THEN
         WRITE (Lun,&
           '('' CDRIV2:An invalid parameter has not been correctly detected.'' //)')
-      ELSEIF ( Kprint>=2 ) THEN
+      ELSEIF( Kprint>=2 ) THEN
         WRITE (Lun,&
           '('' CDRIV2:An invalid parameter has not been correctly detected.'')')
         WRITE (Lun,*) ' The value of LENW was set to ', lenwx
@@ -277,10 +276,10 @@ CONTAINS
         WRITE (Lun,'(/)')
       END IF
       Ipass = 0
-    ELSEIF ( Kprint==2 ) THEN
+    ELSEIF( Kprint==2 ) THEN
       WRITE (Lun,&
         '('' CDRIV2:An invalid parameter has been correctly detected.'' //)')
-    ELSEIF ( Kprint==3 ) THEN
+    ELSEIF( Kprint==3 ) THEN
       WRITE (Lun,&
         '('' CDRIV2:An invalid parameter has been correctly detected.'')')
       WRITE (Lun,*) ' The value of LENW was set to ', lenwx
@@ -306,11 +305,11 @@ CONTAINS
     nstep = iwork(3)
     nfe = iwork(4)
     nje = iwork(5)
-    IF ( nstate/=2 ) THEN
-      IF ( Kprint==1 ) THEN
+    IF( nstate/=2 ) THEN
+      IF( Kprint==1 ) THEN
         WRITE (Lun,&
           '('' While using CDRIV3, a solution was not obtained.'' //)' )
-      ELSEIF ( Kprint>=2 ) THEN
+      ELSEIF( Kprint>=2 ) THEN
         WRITE (Lun,&
           '('' While using CDRIV3, a solution was not obtained.'')')
         WRITE (Lun,*) ' MSTATE = ', mstate, ', Error number = ', ierflg
@@ -328,13 +327,13 @@ CONTAINS
         WRITE (Lun,'(/)')
       END IF
       Ipass = 0
-    ELSEIF ( ABS(0.620174E0-ABS(y(1)))>eps**(2.E0/3.E0).OR.&
-        ABS(0.392232E0-ABS(y(2)))>eps**(2.E0/3.E0).OR.ABS(1.E0-ABS(y(3)))&
+    ELSEIF( ABS(0.620174E0-ABS(y(1)))>eps**(2.E0/3.E0) .OR. &
+        ABS(0.392232E0-ABS(y(2)))>eps**(2.E0/3.E0) .OR. ABS(1.E0-ABS(y(3)))&
         >eps**(2.E0/3.E0) ) THEN
-      IF ( Kprint==1 ) THEN
+      IF( Kprint==1 ) THEN
         WRITE (Lun,&
           '('' CDRIV3:The solution determined is not accurate enough.'' //)')
-      ELSEIF ( Kprint>=2 ) THEN
+      ELSEIF( Kprint>=2 ) THEN
         WRITE (Lun,&
           '('' CDRIV3:The solution determined is not accurate enough.'')')
         WRITE (Lun,&
@@ -351,10 +350,10 @@ CONTAINS
         WRITE (Lun,'(/)')
       END IF
       Ipass = 0
-    ELSEIF ( Kprint==2 ) THEN
+    ELSEIF( Kprint==2 ) THEN
       WRITE (Lun,&
         '('' CDRIV3:The solution determined met the expected values.'' //)')
-    ELSEIF ( Kprint==3 ) THEN
+    ELSEIF( Kprint==3 ) THEN
       WRITE (Lun,&
         '('' CDRIV3:The solution determined met the expected values.'')')
       WRITE (Lun,'('' The values of results are '')')
@@ -379,11 +378,11 @@ CONTAINS
     CALL CDRIV3(N,t,y,CDF,nstate,tout,NTASK,NROOT,eps,ewt,IERROR,mint,MITER,&
       IMPL,ML,MU,MXORD,HMAX,work,lenw,iwork,leniwx,dum_JACOBN,dum_FA,nde,&
       MXSTEP,dum_G,dum_USERS,ierflg)
-    IF ( ierflg/=33 ) THEN
-      IF ( Kprint==1 ) THEN
+    IF( ierflg/=33 ) THEN
+      IF( Kprint==1 ) THEN
         WRITE (Lun,&
           '('' CDRIV3:An invalid parameter has not been correctly detected.'' //)')
-      ELSEIF ( Kprint>=2 ) THEN
+      ELSEIF( Kprint>=2 ) THEN
         WRITE (Lun,&
           '('' CDRIV3:An invalid parameter has not been correctly detected.'')')
         WRITE (Lun,*) ' The value of LENIW was set to ', leniwx
@@ -402,10 +401,10 @@ CONTAINS
         WRITE (Lun,'(/)')
       END IF
       Ipass = 0
-    ELSEIF ( Kprint==2 ) THEN
+    ELSEIF( Kprint==2 ) THEN
       WRITE (Lun,&
         '('' CDRIV3:An invalid parameter has been correctly detected.'' //)')
-    ELSEIF ( Kprint==3 ) THEN
+    ELSEIF( Kprint==3 ) THEN
       WRITE (Lun,&
         '('' CDRIV3:An invalid parameter has been correctly detected.'')')
       WRITE (Lun,*) ' The value of LENIW was set to ', leniwx
@@ -447,8 +446,7 @@ CONTAINS
   END SUBROUTINE CDQCK
   !** CDF
   SUBROUTINE CDF(N,T,Y,Yp)
-    !>
-    !  Quick check for SLATEC routines CDRIV1, CDRIV2 and CDRIV3.
+    !> Quick check for SLATEC routines CDRIV1, CDRIV2 and CDRIV3.
     !***
     ! **Library:**   SLATEC (SDRIVE)
     !***
@@ -491,8 +489,7 @@ PROGRAM TEST47
   USE slatec, ONLY : I1MACH, XSETF, XSETUN, XERMAX
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
-  !>
-  !  Driver for testing SLATEC subprograms
+  !> Driver for testing SLATEC subprograms
   !            CDRIV1  CDRIV2  CDRIV3
   !***
   ! **Library:**   SLATEC
@@ -536,7 +533,7 @@ PROGRAM TEST47
 
   !* REVISION HISTORY  (YYMMDD)
   !   920801  DATE WRITTEN
-  INTEGER ipass, kprint, lin, lun, nfail
+  INTEGER :: ipass, kprint, lin, lun, nfail
   !* FIRST EXECUTABLE STATEMENT  TEST47
   lun = I1MACH(2)
   lin = I1MACH(1)
@@ -547,7 +544,7 @@ PROGRAM TEST47
   CALL GET_ARGUMENT(kprint)
   CALL XERMAX(1000)
   CALL XSETUN(lun)
-  IF ( kprint<=1 ) THEN
+  IF( kprint<=1 ) THEN
     CALL XSETF(0)
   ELSE
     CALL XSETF(1)
@@ -556,11 +553,11 @@ PROGRAM TEST47
   !     Test complex SDRIVE
   !
   CALL CDQCK(lun,kprint,ipass)
-  IF ( ipass==0 ) nfail = nfail + 1
+  IF( ipass==0 ) nfail = nfail + 1
   !
   !     Write PASS or FAIL message
   !
-  IF ( nfail==0 ) THEN
+  IF( nfail==0 ) THEN
     WRITE (lun,99001)
     99001 FORMAT (/' --------------TEST47 PASSED ALL TESTS----------------')
   ELSE

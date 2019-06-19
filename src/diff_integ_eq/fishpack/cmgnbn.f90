@@ -1,7 +1,6 @@
 !** CMGNBN
 SUBROUTINE CMGNBN(Nperod,N,Mperod,M,A,B,C,Idimy,Y,Ierror,W)
-  !>
-  !  Solve a complex block tridiagonal linear system of
+  !> Solve a complex block tridiagonal linear system of
   !            equations by a cyclic reduction algorithm.
   !***
   ! **Library:**   SLATEC (FISHPACK)
@@ -100,14 +99,14 @@ SUBROUTINE CMGNBN(Nperod,N,Mperod,M,A,B,C,Idimy,Y,Ierror,W)
   !       for number zero, a solution is not attempted.
   !
   !       = 0  No error.
-  !       = 1  M .LE. 2
-  !       = 2  N .LE. 2
-  !       = 3  IDIMY .LT. M
-  !       = 4  NPEROD .LT. 0 or NPEROD .GT. 4
-  !       = 5  MPEROD .LT. 0 or MPEROD .GT. 1
-  !       = 6  A(I) .NE. C(1) or C(I) .NE. C(1) or B(I) .NE. B(1) for
+  !       = 1  M <= 2
+  !       = 2  N <= 2
+  !       = 3  IDIMY < M
+  !       = 4  NPEROD < 0 or NPEROD > 4
+  !       = 5  MPEROD < 0 or MPEROD > 1
+  !       = 6  A(I) /= C(1) or C(I) /= C(1) or B(I) /= B(1) for
   !            some I=1,2,...,M.
-  !       = 7  A(1) .NE. 0 or C(M) .NE. 0 and MPEROD = 1
+  !       = 7  A(1) /= 0 or C(M) /= 0 and MPEROD = 1
   !
   !     W
   !       W(1) contains the required length of W.
@@ -237,24 +236,24 @@ SUBROUTINE CMGNBN(Nperod,N,Mperod,M,A,B,C,Idimy,Y,Ierror,W)
   COMPLEX(SP) :: a1
   !* FIRST EXECUTABLE STATEMENT  CMGNBN
   Ierror = 0
-  IF ( M<=2 ) Ierror = 1
-  IF ( N<=2 ) Ierror = 2
-  IF ( Idimy<M ) Ierror = 3
-  IF ( Nperod<0.OR.Nperod>4 ) Ierror = 4
-  IF ( Mperod<0.OR.Mperod>1 ) Ierror = 5
-  IF ( Mperod==1 ) THEN
-    IF ( ABS(A(1))/=0..AND.ABS(C(M))/=0. ) Ierror = 7
+  IF( M<=2 ) Ierror = 1
+  IF( N<=2 ) Ierror = 2
+  IF( Idimy<M ) Ierror = 3
+  IF( Nperod<0 .OR. Nperod>4 ) Ierror = 4
+  IF( Mperod<0 .OR. Mperod>1 ) Ierror = 5
+  IF( Mperod==1 ) THEN
+    IF( ABS(A(1))/=0. .AND. ABS(C(M))/=0. ) Ierror = 7
   ELSE
     DO i = 2, M
-      IF ( ABS(A(i)-C(1))/=0. ) GOTO 100
-      IF ( ABS(C(i)-C(1))/=0. ) GOTO 100
-      IF ( ABS(B(i)-B(1))/=0. ) GOTO 100
+      IF( ABS(A(i)-C(1))/=0. ) GOTO 100
+      IF( ABS(C(i)-C(1))/=0. ) GOTO 100
+      IF( ABS(B(i)-B(1))/=0. ) GOTO 100
     END DO
   END IF
   GOTO 200
   100  Ierror = 6
   200 CONTINUE
-  IF ( Ierror/=0 ) RETURN
+  IF( Ierror/=0 ) RETURN
   iwba = M + 1
   iwbb = iwba + M
   iwbc = iwbb + M
@@ -279,7 +278,7 @@ SUBROUTINE CMGNBN(Nperod,N,Mperod,M,A,B,C,Idimy,Y,Ierror,W)
   END DO
   mp = Mperod + 1
   np = Nperod + 1
-  IF ( mp==1 ) GOTO 600
+  IF( mp==1 ) GOTO 600
   300 CONTINUE
   SELECT CASE (np)
     CASE (2)
@@ -307,17 +306,17 @@ SUBROUTINE CMGNBN(Nperod,N,Mperod,M,A,B,C,Idimy,Y,Ierror,W)
   END SELECT
   400  ipstor = INT(W(iww1))
   irev = 2
-  IF ( Nperod==4 ) GOTO 700
+  IF( Nperod==4 ) GOTO 700
   500 CONTINUE
-  IF ( mp==1 ) GOTO 800
-  IF ( mp==2 ) GOTO 900
+  IF( mp==1 ) GOTO 800
+  IF( mp==2 ) GOTO 900
   !
   !     REORDER UNKNOWNS WHEN MP =0
   !
   600  mh = (M+1)/2
   mhm1 = mh - 1
   modd = 1
-  IF ( mh*2==M ) modd = 2
+  IF( mh*2==M ) modd = 2
   DO j = 1, N
     DO i = 1, mhm1
       mhpi = mh + i
@@ -326,7 +325,7 @@ SUBROUTINE CMGNBN(Nperod,N,Mperod,M,A,B,C,Idimy,Y,Ierror,W)
       W(mhpi) = Y(mhmi,j) + Y(mhpi,j)
     END DO
     W(mh) = 2.*Y(mh,j)
-    IF ( modd/=1 ) W(M) = 2.*Y(M,j)
+    IF( modd/=1 ) W(M) = 2.*Y(M,j)
     DO i = 1, M
       Y(i,j) = W(i)
     END DO
@@ -336,7 +335,7 @@ SUBROUTINE CMGNBN(Nperod,N,Mperod,M,A,B,C,Idimy,Y,Ierror,W)
   W(k) = (0.,0.)
   W(i) = (0.,0.)
   W(k+1) = 2.*W(k+1)
-  IF ( modd==2 ) THEN
+  IF( modd==2 ) THEN
     W(iwbb-1) = W(k+1)
   ELSE
     k = iwbb + mhm1 - 1
@@ -353,12 +352,12 @@ SUBROUTINE CMGNBN(Nperod,N,Mperod,M,A,B,C,Idimy,Y,Ierror,W)
       Y(i,mskip) = a1
     END DO
   END DO
-  IF ( irev==1 ) THEN
+  IF( irev==1 ) THEN
     CALL CMPOSN(M,N,1,2,W(iwba:iwbb-1),W(iwbb:iwbc-1),W(iwbc:iwb2-1),Y,Idimy,W,&
       W(iwb2:iwb3-1),W(iwb3:iww1-1),W(iww1:iww2-1),W(iww2:iww3-1),W(iww3:iwd-1),&
       W(iwd:iwtcos-1),W(iwtcos:iwp-1),W(iwp:))
     GOTO 400
-  ELSEIF ( irev==2 ) THEN
+  ELSEIF( irev==2 ) THEN
     GOTO 500
   END IF
   800 CONTINUE
@@ -370,7 +369,7 @@ SUBROUTINE CMGNBN(Nperod,N,Mperod,M,A,B,C,Idimy,Y,Ierror,W)
       W(mhpi) = .5*(Y(mhpi,j)-Y(i,j))
     END DO
     W(mh) = .5*Y(mh,j)
-    IF ( modd/=1 ) W(M) = .5*Y(M,j)
+    IF( modd/=1 ) W(M) = .5*Y(M,j)
     DO i = 1, M
       Y(i,j) = W(i)
     END DO

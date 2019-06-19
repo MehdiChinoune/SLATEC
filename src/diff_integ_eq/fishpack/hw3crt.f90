@@ -1,8 +1,7 @@
 !** HW3CRT
 SUBROUTINE HW3CRT(Xs,Xf,L,Lbdcnd,Bdxs,Bdxf,Ys,Yf,M,Mbdcnd,Bdys,Bdyf,Zs,Zf,&
     N,Nbdcnd,Bdzs,Bdzf,Elmbda,Ldimf,Mdimf,F,Pertrb,Ierror,W)
-  !>
-  !  Solve the standard seven-point finite difference
+  !> Solve the standard seven-point finite difference
   !            approximation to the Helmholtz equation in Cartesian
   !            coordinates.
   !***
@@ -37,7 +36,7 @@ SUBROUTINE HW3CRT(Xs,Xf,L,Lbdcnd,Bdxs,Bdxf,Ys,Yf,M,Mbdcnd,Bdys,Bdyf,Zs,Zf,&
   !            * * * * * *   On Input    * * * * * *
   !
   !     XS,XF
-  !        The range of X, i.e. XS .LE. X .LE. XF .
+  !        The range of X, i.e. XS <= X <= XF .
   !        XS must be less than XF.
   !
   !     L
@@ -83,7 +82,7 @@ SUBROUTINE HW3CRT(Xs,Xf,L,Lbdcnd,Bdxs,Bdxf,Ys,Yf,M,Mbdcnd,Bdys,Bdyf,Zs,Zf,&
   !        BDXF must be dimensioned at least (M+1)*(N+1).
   !
   !     YS,YF
-  !        The range of Y, i.e. YS .LE. Y .LE. YF.
+  !        The range of Y, i.e. YS <= Y <= YF.
   !        YS must be less than YF.
   !
   !     M
@@ -129,7 +128,7 @@ SUBROUTINE HW3CRT(Xs,Xf,L,Lbdcnd,Bdxs,Bdxf,Ys,Yf,M,Mbdcnd,Bdys,Bdyf,Zs,Zf,&
   !        BDYF must be dimensioned at least (L+1)*(N+1).
   !
   !     ZS,ZF
-  !        The range of Z, i.e. ZS .LE. Z .LE. ZF.
+  !        The range of Z, i.e. ZS <= Z <= ZF.
   !        ZS must be less than ZF.
   !
   !     N
@@ -175,7 +174,7 @@ SUBROUTINE HW3CRT(Xs,Xf,L,Lbdcnd,Bdxs,Bdxf,Ys,Yf,M,Mbdcnd,Bdys,Bdyf,Zs,Zf,&
   !
   !     ELMBDA
   !        The constant LAMBDA in the Helmholtz equation. If
-  !        LAMBDA .GT. 0, a solution may not exist.  However, HW3CRT will
+  !        LAMBDA > 0, a solution may not exist.  However, HW3CRT will
   !        attempt to find a solution.
   !
   !     F
@@ -264,18 +263,18 @@ SUBROUTINE HW3CRT(Xs,Xf,L,Lbdcnd,Bdxs,Bdxf,Ys,Yf,M,Mbdcnd,Bdys,Bdyf,Zs,Zf,&
   !        for numbers 0 and 12, a solution is not attempted.
   !
   !        =  0  No error
-  !        =  1  XS .GE. XF
-  !        =  2  L .LT. 5
-  !        =  3  LBDCND .LT. 0 .OR. LBDCND .GT. 4
-  !        =  4  YS .GE. YF
-  !        =  5  M .LT. 5
-  !        =  6  MBDCND .LT. 0 .OR. MBDCND .GT. 4
-  !        =  7  ZS .GE. ZF
-  !        =  8  N .LT. 5
-  !        =  9  NBDCND .LT. 0 .OR. NBDCND .GT. 4
-  !        = 10  LDIMF .LT. L+1
-  !        = 11  MDIMF .LT. M+1
-  !        = 12  LAMBDA .GT. 0
+  !        =  1  XS >= XF
+  !        =  2  L < 5
+  !        =  3  LBDCND < 0 .OR. LBDCND > 4
+  !        =  4  YS >= YF
+  !        =  5  M < 5
+  !        =  6  MBDCND < 0 .OR. MBDCND > 4
+  !        =  7  ZS >= ZF
+  !        =  8  N < 5
+  !        =  9  NBDCND < 0 .OR. NBDCND > 4
+  !        = 10  LDIMF < L+1
+  !        = 11  MDIMF < M+1
+  !        = 12  LAMBDA > 0
   !
   !        Since this is the only means of indicating a possibly incorrect
   !        call to HW3CRT, the user should test IERROR after the call.
@@ -377,18 +376,18 @@ SUBROUTINE HW3CRT(Xs,Xf,L,Lbdcnd,Bdxs,Bdxf,Ys,Yf,M,Mbdcnd,Bdys,Bdyf,Zs,Zf,&
   REAL(SP) :: c1, c2, c3, dx, dy, dz, s, s1, s2, twbydx, twbydy, twbydz, xlp, ylp, zlp
   !* FIRST EXECUTABLE STATEMENT  HW3CRT
   Ierror = 0
-  IF ( Xf<=Xs ) Ierror = 1
-  IF ( L<5 ) Ierror = 2
-  IF ( Lbdcnd<0.OR.Lbdcnd>4 ) Ierror = 3
-  IF ( Yf<=Ys ) Ierror = 4
-  IF ( M<5 ) Ierror = 5
-  IF ( Mbdcnd<0.OR.Mbdcnd>4 ) Ierror = 6
-  IF ( Zf<=Zs ) Ierror = 7
-  IF ( N<5 ) Ierror = 8
-  IF ( Nbdcnd<0.OR.Nbdcnd>4 ) Ierror = 9
-  IF ( Ldimf<L+1 ) Ierror = 10
-  IF ( Mdimf<M+1 ) Ierror = 11
-  IF ( Ierror==0 ) THEN
+  IF( Xf<=Xs ) Ierror = 1
+  IF( L<5 ) Ierror = 2
+  IF( Lbdcnd<0 .OR. Lbdcnd>4 ) Ierror = 3
+  IF( Yf<=Ys ) Ierror = 4
+  IF( M<5 ) Ierror = 5
+  IF( Mbdcnd<0 .OR. Mbdcnd>4 ) Ierror = 6
+  IF( Zf<=Zs ) Ierror = 7
+  IF( N<5 ) Ierror = 8
+  IF( Nbdcnd<0 .OR. Nbdcnd>4 ) Ierror = 9
+  IF( Ldimf<L+1 ) Ierror = 10
+  IF( Mdimf<M+1 ) Ierror = 11
+  IF( Ierror==0 ) THEN
     dy = (Yf-Ys)/M
     twbydy = 2./dy
     c2 = 1./(dy**2)
@@ -580,8 +579,8 @@ SUBROUTINE HW3CRT(Xs,Xf,L,Lbdcnd,Bdxs,Bdxf,Ys,Yf,M,Mbdcnd,Bdys,Bdyf,Zs,Zf,&
             SELECT CASE (np)
               CASE (2,3,5)
               CASE DEFAULT
-                IF ( Elmbda<0 ) THEN
-                ELSEIF ( Elmbda==0 ) THEN
+                IF( Elmbda<0 ) THEN
+                ELSEIF( Elmbda==0 ) THEN
                   mstpm1 = mstop - 1
                   lstpm1 = lstop - 1
                   nstpm1 = nstop - 1
@@ -639,7 +638,7 @@ SUBROUTINE HW3CRT(Xs,Xf,L,Lbdcnd,Bdxs,Bdxf,Ys,Yf,M,Mbdcnd,Bdys,Bdyf,Zs,Zf,&
         END SELECT
     END SELECT
     nperod = 0
-    IF ( Nbdcnd/=0 ) THEN
+    IF( Nbdcnd/=0 ) THEN
       nperod = 1
       W(1) = 0.
       W(iww-1) = 0.
@@ -649,14 +648,14 @@ SUBROUTINE HW3CRT(Xs,Xf,L,Lbdcnd,Bdxs,Bdxf,Ys,Yf,M,Mbdcnd,Bdys,Bdyf,Zs,Zf,&
     !
     !     FILL IN SIDES FOR PERIODIC BOUNDARY CONDITIONS.
     !
-    IF ( lp==1 ) THEN
-      IF ( mp==1 ) THEN
+    IF( lp==1 ) THEN
+      IF( mp==1 ) THEN
         DO k = nstart, nstop
           F(1,mp1,k) = F(1,1,k)
         END DO
         mstop = mp1
       END IF
-      IF ( np==1 ) THEN
+      IF( np==1 ) THEN
         DO j = mstart, mstop
           F(1,j,np1) = F(1,j,1)
         END DO
@@ -668,8 +667,8 @@ SUBROUTINE HW3CRT(Xs,Xf,L,Lbdcnd,Bdxs,Bdxf,Ys,Yf,M,Mbdcnd,Bdys,Bdyf,Zs,Zf,&
         END DO
       END DO
     END IF
-    IF ( mp==1 ) THEN
-      IF ( np==1 ) THEN
+    IF( mp==1 ) THEN
+      IF( np==1 ) THEN
         DO i = lstart, lstop
           F(i,1,np1) = F(i,1,1)
         END DO
@@ -681,7 +680,7 @@ SUBROUTINE HW3CRT(Xs,Xf,L,Lbdcnd,Bdxs,Bdxf,Ys,Yf,M,Mbdcnd,Bdys,Bdyf,Zs,Zf,&
         END DO
       END DO
     END IF
-    IF ( np==1 ) THEN
+    IF( np==1 ) THEN
       DO i = lstart, lstop
         DO j = mstart, mstop
           F(i,j,np1) = F(i,j,1)

@@ -1,7 +1,6 @@
 !** ZASYI
 SUBROUTINE ZASYI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Rl,Tol,Elim,Alim)
-  !>
-  !  Subsidiary to ZBESI and ZBESK
+  !> Subsidiary to ZBESI and ZBESK
   !***
   ! **Library:**   SLATEC
   !***
@@ -11,10 +10,10 @@ SUBROUTINE ZASYI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Rl,Tol,Elim,Alim)
   !***
   ! **Description:**
   !
-  !     ZASYI COMPUTES THE I BESSEL FUNCTION FOR REAL(Z).GE.0.0 BY
+  !     ZASYI COMPUTES THE I BESSEL FUNCTION FOR REAL(Z)>=0.0 BY
   !     MEANS OF THE ASYMPTOTIC EXPANSION FOR LARGE ABS(Z) IN THE
-  !     REGION ABS(Z).GT.MAX(RL,FNU*FNU/2). NZ=0 IS A NORMAL RETURN.
-  !     NZ.LT.0 INDICATES AN OVERFLOW ON KODE=1.
+  !     REGION ABS(Z)>MAX(RL,FNU*FNU/2). NZ=0 IS A NORMAL RETURN.
+  !     NZ<0 INDICATES AN OVERFLOW ON KODE=1.
   !
   !***
   ! **See also:**  ZBESI, ZBESK
@@ -27,7 +26,7 @@ SUBROUTINE ZASYI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Rl,Tol,Elim,Alim)
   !   930122  Added ZEXP and ZSQRT to EXTERNAL statement.  (RWC)
   USE service, ONLY : D1MACH
   !     COMPLEX AK1,CK,CONE,CS1,CS2,CZ,CZERO,DK,EZ,P1,RZ,S2,Y,Z
-  INTEGER i, ib, il, inu, j, jl, k, Kode, koded, m, N, nn, Nz
+  INTEGER :: i, ib, il, inu, j, jl, k, Kode, koded, m, N, nn, Nz
   REAL(DP) :: aa, aez, ak, ak1i, ak1r, Alim, arg, arm, atol, az, bb, bk, cki, &
     ckr, cs1i, cs1r, cs2i, cs2r, czi, czr, dfnu, dki, dkr, dnu2, Elim, ezi, &
     ezr, fdn, Fnu, p1i, p1r, raz, Rl, rtr1, rzi, rzr, s, sgn, sqk, sti, str, &
@@ -52,23 +51,23 @@ SUBROUTINE ZASYI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Rl,Tol,Elim,Alim)
   CALL ZSQRT(ak1r,ak1i,ak1r,ak1i)
   czr = Zr
   czi = Zi
-  IF ( Kode==2 ) THEN
+  IF( Kode==2 ) THEN
     czr = zeror
     czi = Zi
   END IF
-  IF ( ABS(czr)>Elim ) THEN
+  IF( ABS(czr)>Elim ) THEN
     Nz = -1
     RETURN
   ELSE
     dnu2 = dfnu + dfnu
     koded = 1
-    IF ( (ABS(czr)<=Alim).OR.(N<=2) ) THEN
+    IF( (ABS(czr)<=Alim) .OR. (N<=2) ) THEN
       koded = 0
       CALL ZEXP(czr,czi,str,sti)
       CALL ZMLT(ak1r,ak1i,str,sti,ak1r,ak1i)
     END IF
     fdn = 0.0D0
-    IF ( dnu2>rtr1 ) fdn = dnu2*dnu2
+    IF( dnu2>rtr1 ) fdn = dnu2*dnu2
     ezr = Zr*8.0D0
     ezi = Zi*8.0D0
     !-----------------------------------------------------------------------
@@ -81,7 +80,7 @@ SUBROUTINE ZASYI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Rl,Tol,Elim,Alim)
     jl = INT( Rl + Rl ) + 2
     p1r = zeror
     p1i = zeroi
-    IF ( Zi/=0.0D0 ) THEN
+    IF( Zi/=0.0D0 ) THEN
       !-----------------------------------------------------------------------
       !     CALCULATE EXP(PI*(0.5+FNU+N-IL)*I) TO MINIMIZE LOSSES OF
       !     SIGNIFICANCE WHEN FNU OR N IS LARGE
@@ -91,10 +90,10 @@ SUBROUTINE ZASYI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Rl,Tol,Elim,Alim)
       inu = inu + N - il
       ak = -SIN(arg)
       bk = COS(arg)
-      IF ( Zi<0.0D0 ) bk = -bk
+      IF( Zi<0.0D0 ) bk = -bk
       p1r = ak
       p1i = bk
-      IF ( MOD(inu,2)/=0 ) THEN
+      IF( MOD(inu,2)/=0 ) THEN
         p1r = -p1r
         p1i = -p1i
       END IF
@@ -129,12 +128,12 @@ SUBROUTINE ZASYI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Rl,Tol,Elim,Alim)
         bb = bb + aez
         ak = ak + 8.0D0
         sqk = sqk - ak
-        IF ( aa<=atol ) GOTO 20
+        IF( aa<=atol ) GOTO 20
       END DO
       GOTO 100
       20  s2r = cs1r
       s2i = cs1i
-      IF ( Zr+Zr<Elim ) THEN
+      IF( Zr+Zr<Elim ) THEN
         tzr = Zr + Zr
         tzi = Zi + Zi
         CALL ZEXP(-tzr,-tzi,str,sti)
@@ -150,7 +149,7 @@ SUBROUTINE ZASYI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Rl,Tol,Elim,Alim)
       Yr(m) = s2r*ak1r - s2i*ak1i
       Yi(m) = s2r*ak1i + s2i*ak1r
     END DO
-    IF ( N<=2 ) RETURN
+    IF( N<=2 ) RETURN
     nn = N
     k = nn - 2
     ak = k
@@ -165,7 +164,7 @@ SUBROUTINE ZASYI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Rl,Tol,Elim,Alim)
       ak = ak - 1.0D0
       k = k - 1
     END DO
-    IF ( koded==0 ) RETURN
+    IF( koded==0 ) RETURN
     CALL ZEXP(czr,czi,ckr,cki)
     DO i = 1, nn
       str = Yr(i)*ckr - Yi(i)*cki

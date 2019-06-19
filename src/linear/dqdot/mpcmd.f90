@@ -1,7 +1,6 @@
 !** MPCMD
 SUBROUTINE MPCMD(X,Dz)
-  !>
-  !  Subsidiary to DQDOTA and DQDOTI
+  !> Subsidiary to DQDOTA and DQDOTI
   !***
   ! **Library:**   SLATEC
   !***
@@ -41,24 +40,24 @@ SUBROUTINE MPCMD(X,Dz)
   !* FIRST EXECUTABLE STATEMENT  MPCMD
   CALL MPCHK(1,4)
   Dz = 0D0
-  IF ( X(1)==0 ) RETURN
+  IF( X(1)==0 ) RETURN
   db = REAL( b_com, DP )
   DO i = 1, t_com
     Dz = db*Dz + REAL( X(i+2), DP )
     tm = i
     ! CHECK IF FULL DOUBLE-PRECISION ACCURACY ATTAINED
     dz2 = Dz + 1D0
-    ! TEST BELOW NOT ALWAYS EQUIVALENT TO - IF (DZ2.LE.DZ) GO TO 20,
+    ! TEST BELOW NOT ALWAYS EQUIVALENT TO - IF(DZ2<=DZ) GO TO 20,
     ! FOR EXAMPLE ON CYBER 76.
-    IF ( (dz2-Dz)<=0D0 ) EXIT
+    IF( (dz2-Dz)<=0D0 ) EXIT
   END DO
   ! NOW ALLOW FOR EXPONENT
   Dz = Dz*(db**(X(2)-tm))
   ! CHECK REASONABLENESS OF RESULT.
-  IF ( Dz>0D0 ) THEN
-    ! LHS SHOULD BE .LE. 0.5 BUT ALLOW FOR SOME ERROR IN LOG
-    IF ( ABS(REAL(X(2), DP)-(LOG(Dz)/LOG(REAL(b_com, DP))+0.5D0))<=0.6D0 ) THEN
-      IF ( X(1)<0 ) Dz = -Dz
+  IF( Dz>0D0 ) THEN
+    ! LHS SHOULD BE <= 0.5 BUT ALLOW FOR SOME ERROR IN LOG
+    IF( ABS(REAL(X(2), DP)-(LOG(Dz)/LOG(REAL(b_com, DP))+0.5D0))<=0.6D0 ) THEN
+      IF( X(1)<0 ) Dz = -Dz
       RETURN
     END IF
   END IF

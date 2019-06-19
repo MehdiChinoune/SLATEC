@@ -1,8 +1,7 @@
 !** HWSCS1
 SUBROUTINE HWSCS1(Intl,Ts,Tf,M,Mbdcnd,Bdts,Bdtf,Rs,Rf,N,Nbdcnd,Bdrs,Bdrf,&
     Elmbda,F,Idimf,Pertrb,W,S,An,Bn,Cn,R,Am,Bm,Cm,Sint,Bmh)
-  !>
-  !  Subsidiary to HWSCSP
+  !> Subsidiary to HWSCSP
   !***
   ! **Library:**   SLATEC
   !***
@@ -39,7 +38,7 @@ SUBROUTINE HWSCS1(Intl,Ts,Tf,M,Mbdcnd,Bdts,Bdtf,Rs,Rf,N,Nbdcnd,Bdrs,Bdrf,&
   DO i = 1, mp1
     theta = Ts + (i-1)*dth
     Sint(i) = SIN(theta)
-    IF ( Sint(i)/=0 ) THEN
+    IF( Sint(i)/=0 ) THEN
       t1 = sdts/Sint(i)
       Am(i) = t1*SIN(theta-hdth)
       Cm(i) = t1*SIN(theta+hdth)
@@ -155,10 +154,10 @@ SUBROUTINE HWSCS1(Intl,Ts,Tf,M,Mbdcnd,Bdts,Bdtf,Rs,Rf,N,Nbdcnd,Bdrs,Bdrf,&
       SELECT CASE (Mbdcnd)
         CASE (1,2,4,5,7)
         CASE DEFAULT
-          IF ( Elmbda>=0 ) THEN
+          IF( Elmbda>=0 ) THEN
             ising = 1
             summ = wts*wrs + wts*wrf + wtf*wrs + wtf*wrf
-            IF ( ictr/=0 ) summ = summ + wrz
+            IF( ictr/=0 ) summ = summ + wrz
             DO j = jrsp, jrfm
               r2 = R(j)**2
               DO i = itsp, itfm
@@ -221,7 +220,7 @@ SUBROUTINE HWSCS1(Intl,Ts,Tf,M,Mbdcnd,Bdts,Bdtf,Rs,Rf,N,Nbdcnd,Bdrs,Bdrf,&
         F(i,1) = F(i,1) + tdr*Bdrs(i)*ar/Rs**2
       END DO
     CASE DEFAULT
-      IF ( Mbdcnd==3 ) THEN
+      IF( Mbdcnd==3 ) THEN
         yhld = F(its,1) - czr/tdt*(SIN(Tf)*Bdtf(2)-SIN(Ts)*Bdts(2))
         DO i = 1, mp1
           F(i,1) = yhld
@@ -240,10 +239,10 @@ SUBROUTINE HWSCS1(Intl,Ts,Tf,M,Mbdcnd,Bdts,Bdtf,Rs,Rf,N,Nbdcnd,Bdrs,Bdrf,&
       END DO
   END SELECT
   Pertrb = 0.
-  IF ( ising/=0 ) THEN
+  IF( ising/=0 ) THEN
     summ = wts*wrs*F(its,jrs) + wts*wrf*F(its,jrf) + wtf*wrs*F(itf,jrs)&
       + wtf*wrf*F(itf,jrf)
-    IF ( ictr/=0 ) summ = summ + wrz*F(its,1)
+    IF( ictr/=0 ) summ = summ + wrz*F(its,1)
     DO j = jrsp, jrfm
       r2 = R(j)**2
       DO i = itsp, itfm
@@ -274,20 +273,20 @@ SUBROUTINE HWSCS1(Intl,Ts,Tf,M,Mbdcnd,Bdts,Bdtf,Rs,Rf,N,Nbdcnd,Bdrs,Bdrf,&
     CALL BLKTRI(iflg,np,nunk,An(jrs),Bn(jrs),Cn(jrs),mp,munk,Am(its),Bm(its)&
       ,Cm(its),Idimf,F(its,jrs),ierror,W)
     iflg = iflg + 1
-    IF ( iflg/=1 ) THEN
-      IF ( Nbdcnd==0 ) THEN
+    IF( iflg/=1 ) THEN
+      IF( Nbdcnd==0 ) THEN
         DO i = 1, mp1
           F(i,jrf+1) = F(i,jrs)
         END DO
       END IF
-      IF ( Mbdcnd==0 ) THEN
+      IF( Mbdcnd==0 ) THEN
         DO j = 1, np1
           F(itf+1,j) = F(its,j)
         END DO
       END IF
       xp = 0.
-      IF ( ictr/=0 ) THEN
-        IF ( ising==0 ) THEN
+      IF( ictr/=0 ) THEN
+        IF( ising==0 ) THEN
           summ = wts*F(its,2) + wtf*F(itf,2)
           DO i = itsp, itfm
             summ = summ + Sint(i)*F(i,2)

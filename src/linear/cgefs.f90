@@ -1,7 +1,6 @@
 !** CGEFS
 SUBROUTINE CGEFS(A,Lda,N,V,Itask,Ind,Work,Iwork)
-  !>
-  !  Solve a general system of linear equations.
+  !> Solve a general system of linear equations.
   !***
   ! **Library:**   SLATEC
   !***
@@ -33,7 +32,7 @@ SUBROUTINE CGEFS(A,Lda,N,V,Itask,Ind,Work,Iwork)
   !
   !    If the equation A*X=B is to be solved for more than one vector
   !    B, the factoring of A does not need to be performed again and
-  !    the option to only solve (ITASK .GT. 1) will be faster for
+  !    the option to only solve (ITASK > 1) will be faster for
   !    the succeeding solutions.  In this case, the contents of A,
   !    LDA, N and IWORK must not have been altered by the user follow-
   !    ing factorization (ITASK=1).  IND will not be changed by CGEFS
@@ -63,9 +62,9 @@ SUBROUTINE CGEFS(A,Lda,N,V,Itask,Ind,Work,Iwork)
   !    ITASK  INTEGER
   !             if ITASK=1, the matrix A is factored and then the
   !               linear equation is solved.
-  !             if ITASK .GT. 1, the equation is solved using the existing
+  !             if ITASK > 1, the equation is solved using the existing
   !               factored matrix A and IWORK.
-  !             if ITASK .LT. 1, then terminal error message IND=-3 is
+  !             if ITASK < 1, then terminal error message IND=-3 is
   !               printed.
   !    IND    INTEGER
   !             GT.0  IND is a rough estimate of the number of digits
@@ -118,7 +117,7 @@ SUBROUTINE CGEFS(A,Lda,N,V,Itask,Ind,Work,Iwork)
   REAL(SP) :: rcond
   CHARACTER(8) :: xern1, xern2
   !* FIRST EXECUTABLE STATEMENT  CGEFS
-  IF ( Lda<N ) THEN
+  IF( Lda<N ) THEN
     Ind = -1
     WRITE (xern1,'(I8)') Lda
     WRITE (xern2,'(I8)') N
@@ -126,14 +125,14 @@ SUBROUTINE CGEFS(A,Lda,N,V,Itask,Ind,Work,Iwork)
     RETURN
   END IF
   !
-  IF ( N<=0 ) THEN
+  IF( N<=0 ) THEN
     Ind = -2
     WRITE (xern1,'(I8)') N
     CALL XERMSG('CGEFS','N = '//xern1//' IS LESS THAN 1',-2,1)
     RETURN
   END IF
   !
-  IF ( Itask<1 ) THEN
+  IF( Itask<1 ) THEN
     Ind = -3
     WRITE (xern1,'(I8)') Itask
     CALL XERMSG('CGEFS','ITASK = '//xern1//' IS LESS THAN 1',-3,1)
@@ -142,12 +141,12 @@ SUBROUTINE CGEFS(A,Lda,N,V,Itask,Ind,Work,Iwork)
   !
   !     FACTOR MATRIX A INTO LU
   !
-  IF ( Itask==1 ) THEN
+  IF( Itask==1 ) THEN
     CALL CGECO(A,Lda,N,Iwork,rcond,Work)
     !
     !        CHECK FOR COMPUTATIONALLY SINGULAR MATRIX
     !
-    IF ( rcond==0.0 ) THEN
+    IF( rcond==0.0 ) THEN
       Ind = -4
       CALL XERMSG('CGEFS','SINGULAR MATRIX A - NO SOLUTION',-4,1)
       RETURN
@@ -159,7 +158,7 @@ SUBROUTINE CGEFS(A,Lda,N,V,Itask,Ind,Work,Iwork)
     !
     !        CHECK FOR IND GREATER THAN ZERO
     !
-    IF ( Ind<=0 ) THEN
+    IF( Ind<=0 ) THEN
       Ind = -10
       CALL XERMSG('CGEFS','SOLUTION MAY HAVE NO SIGNIFICANCE',-10,0)
     END IF

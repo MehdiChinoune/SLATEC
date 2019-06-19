@@ -1,7 +1,6 @@
 !** DXPMU
 SUBROUTINE DXPMU(Nu1,Nu2,Mu1,Mu2,Theta,X,Sx,Id,Pqa,Ipqa,Ierror)
-  !>
-  !  To compute the values of Legendre functions for DXLEGF.
+  !> To compute the values of Legendre functions for DXLEGF.
   !            Method: backward mu-wise recurrence for P(-MU,NU,X) for
   !            fixed nu to obtain P(-MU2,NU1,X), P(-(MU2-1),NU1,X), ...,
   !            P(-MU1,NU1,X) and store in ascending mu order.
@@ -37,7 +36,7 @@ SUBROUTINE DXPMU(Nu1,Nu2,Mu1,Mu2,Theta,X,Sx,Id,Pqa,Ipqa,Ierror)
   !* FIRST EXECUTABLE STATEMENT  DXPMU
   Ierror = 0
   CALL DXPQNU(Nu1,Nu2,Mu2,Theta,Id,Pqa,Ipqa,Ierror)
-  IF ( Ierror/=0 ) RETURN
+  IF( Ierror/=0 ) RETURN
   p0 = Pqa(1)
   ip0 = Ipqa(1)
   mu = Mu2 - 1
@@ -45,14 +44,14 @@ SUBROUTINE DXPMU(Nu1,Nu2,Mu1,Mu2,Theta,X,Sx,Id,Pqa,Ipqa,Ierror)
   !        CALL DXPQNU TO OBTAIN P(-MU2-1,NU,X)
   !
   CALL DXPQNU(Nu1,Nu2,mu,Theta,Id,Pqa,Ipqa,Ierror)
-  IF ( Ierror/=0 ) RETURN
+  IF( Ierror/=0 ) RETURN
   n = Mu2 - Mu1 + 1
   Pqa(n) = p0
   Ipqa(n) = ip0
-  IF ( n/=1 ) THEN
+  IF( n/=1 ) THEN
     Pqa(n-1) = Pqa(1)
     Ipqa(n-1) = Ipqa(1)
-    IF ( n/=2 ) THEN
+    IF( n/=2 ) THEN
       j = n - 2
       DO
         !
@@ -65,10 +64,10 @@ SUBROUTINE DXPMU(Nu1,Nu2,Mu1,Mu2,Theta,X,Sx,Id,Pqa,Ipqa,Ierror)
         x1 = 2.D0*mu*X*Sx*Pqa(j+1)
         x2 = -(Nu1-mu)*(Nu1+mu+1.D0)*Pqa(j+2)
         CALL DXADD(x1,Ipqa(j+1),x2,Ipqa(j+2),Pqa(j),Ipqa(j),Ierror)
-        IF ( Ierror/=0 ) RETURN
+        IF( Ierror/=0 ) RETURN
         CALL DXADJ(Pqa(j),Ipqa(j),Ierror)
-        IF ( Ierror/=0 ) RETURN
-        IF ( j==1 ) EXIT
+        IF( Ierror/=0 ) RETURN
+        IF( j==1 ) EXIT
         j = j - 1
         mu = mu - 1
       END DO

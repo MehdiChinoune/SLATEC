@@ -1,7 +1,6 @@
 !** RPQR79
 SUBROUTINE RPQR79(Ndeg,Coeff,Root,Ierr,Work)
-  !>
-  !  Find the zeros of a polynomial with real coefficients.
+  !> Find the zeros of a polynomial with real coefficients.
   !***
   ! **Library:**   SLATEC
   !***
@@ -65,19 +64,19 @@ SUBROUTINE RPQR79(Ndeg,Coeff,Root,Ierr,Work)
   REAL(SP) :: z(1,Ndeg), h(Ndeg,Ndeg)
   !* FIRST EXECUTABLE STATEMENT  RPQR79
   Ierr = 0
-  IF ( ABS(Coeff(1))==0.0 ) THEN
+  IF( ABS(Coeff(1))==0.0 ) THEN
     Ierr = 2
     CALL XERMSG('RPQR79','LEADING COEFFICIENT IS ZERO.',2,1)
     RETURN
   END IF
   !
-  IF ( Ndeg<=0 ) THEN
+  IF( Ndeg<=0 ) THEN
     Ierr = 3
     CALL XERMSG('RPQR79','DEGREE INVALID.',3,1)
     RETURN
   END IF
   !
-  IF ( Ndeg==1 ) THEN
+  IF( Ndeg==1 ) THEN
     Root(1) = CMPLX(-Coeff(2)/Coeff(1),0.0)
     RETURN
   END IF
@@ -97,7 +96,7 @@ SUBROUTINE RPQR79(Ndeg,Coeff,Root,Ierr,Work)
   !
   CALL SHSEQR('E','N',Ndeg,1,Ndeg,h,Ndeg,Work(kwr),Work(kwi),z,1,Work,Ndeg,Ierr)
   !
-  IF ( Ierr/=0 ) THEN
+  IF( Ierr/=0 ) THEN
     Ierr = 1
     CALL XERMSG('CPQR79','NO CONVERGENCE IN 30 QR ITERATIONS.',1,1)
     RETURN

@@ -1,7 +1,6 @@
 !** POCH1
 REAL(SP) FUNCTION POCH1(A,X)
-  !>
-  !  Calculate a generalization of Pochhammer's symbol starting
+  !> Calculate a generalization of Pochhammer's symbol starting
   !            from first order.
   !***
   ! **Library:**   SLATEC (FNLIB)
@@ -67,24 +66,24 @@ REAL(SP) FUNCTION POCH1(A,X)
   REAL(SP), PARAMETER :: pi = 3.14159265358979324E0
   !* FIRST EXECUTABLE STATEMENT  POCH1
   !
-  IF ( X==0.0 ) THEN
+  IF( X==0.0 ) THEN
     POCH1 = PSI(A)
     RETURN
   END IF
   !
   absx = ABS(X)
   absa = ABS(A)
-  IF ( absx>0.1*absa ) THEN
+  IF( absx>0.1*absa ) THEN
     !
     POCH1 = (POCH(A,X)-1.0)/X
-  ELSEIF ( absx*LOG(MAX(absa,2.0))>0.1 ) THEN
+  ELSEIF( absx*LOG(MAX(absa,2.0))>0.1 ) THEN
     POCH1 = (POCH(A,X)-1.0)/X
   ELSE
     !
     bp = A
-    IF ( A<(-0.5) ) bp = 1.0 - A - X
+    IF( A<(-0.5) ) bp = 1.0 - A - X
     incr = 0
-    IF ( bp<10.0 ) incr = 11 - INT( bp )
+    IF( bp<10.0 ) incr = 11 - INT( bp )
     b = bp + incr
     !
     var = b + 0.5*(X-1.0)
@@ -92,7 +91,7 @@ REAL(SP) FUNCTION POCH1(A,X)
     q = X*alnvar
     !
     poly1 = 0.0
-    IF ( var<sqtbig ) THEN
+    IF( var<sqtbig ) THEN
       var2 = (1.0/var)**2
       !
       rho = 0.5*(X+1.0)
@@ -102,9 +101,9 @@ REAL(SP) FUNCTION POCH1(A,X)
       poly1 = gbern(2)*term
       !
       nterms = INT( -0.5*alneps/alnvar ) + 1
-      IF ( nterms>9 ) CALL XERMSG('POCH1',&
+      IF( nterms>9 ) CALL XERMSG('POCH1',&
         'NTERMS IS TOO BIG, MAYBE R1MACH(3) IS BAD',1,2)
-      IF ( nterms>=2 ) THEN
+      IF( nterms>=2 ) THEN
         !
         DO k = 2, nterms
           gbk = 0.0
@@ -123,7 +122,7 @@ REAL(SP) FUNCTION POCH1(A,X)
     poly1 = (X-1.0)*poly1
     POCH1 = EXPREL(q)*(alnvar+q*poly1) + poly1
     !
-    IF ( incr/=0 ) THEN
+    IF( incr/=0 ) THEN
       !
       ! WE HAVE POCH1(B,X).  BUT BP IS SMALL, SO WE USE BACKWARDS RECURSION
       ! TO OBTAIN POCH1(BP,X).
@@ -135,7 +134,7 @@ REAL(SP) FUNCTION POCH1(A,X)
       END DO
     END IF
     !
-    IF ( bp==A ) RETURN
+    IF( bp==A ) RETURN
     !
     ! WE HAVE POCH1(BP,X), BUT A IS LT -0.5.  WE THEREFORE USE A REFLECTION
     ! FORMULA TO OBTAIN POCH1(A,X).

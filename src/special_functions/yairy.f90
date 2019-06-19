@@ -1,7 +1,6 @@
 !** YAIRY
 SUBROUTINE YAIRY(X,Rx,C,Bi,Dbi)
-  !>
-  !  Subsidiary to BESJ and BESY
+  !> Subsidiary to BESJ and BESY
   !***
   ! **Library:**   SLATEC
   !***
@@ -152,9 +151,9 @@ SUBROUTINE YAIRY(X,Rx,C,Bi,Dbi)
   ax = ABS(X)
   Rx = SQRT(ax)
   C = con1*ax*Rx
-  IF ( X<0.0E0 ) THEN
+  IF( X<0.0E0 ) THEN
     !
-    IF ( C>5.0E0 ) THEN
+    IF( C>5.0E0 ) THEN
       !
       rtrx = SQRT(Rx)
       t = 10.0E0/C - 1.0E0
@@ -197,7 +196,7 @@ SUBROUTINE YAIRY(X,Rx,C,Bi,Dbi)
       Dbi = (temp1*COS(cv)-temp2*SIN(cv))*rtrx
       RETURN
     END IF
-  ELSEIF ( C>8.0E0 ) THEN
+  ELSEIF( C>8.0E0 ) THEN
     !
     rtrx = SQRT(Rx)
     t = 16.0E0/C - 1.0E0
@@ -224,7 +223,7 @@ SUBROUTINE YAIRY(X,Rx,C,Bi,Dbi)
     d1 = t*f1 - f2 + dbk3(1)
     tc = C + C
     ex = EXP(C)
-    IF ( tc>35.0E0 ) THEN
+    IF( tc>35.0E0 ) THEN
       Bi = ex*s1/rtrx
       Dbi = ex*rtrx*d1
       RETURN
@@ -257,7 +256,7 @@ SUBROUTINE YAIRY(X,Rx,C,Bi,Dbi)
       Dbi = Dbi*ex
       RETURN
     END IF
-  ELSEIF ( X>2.5E0 ) THEN
+  ELSEIF( X>2.5E0 ) THEN
     rtrx = SQRT(Rx)
     t = (X+X-con2)*con3
     tt = t + t

@@ -1,7 +1,6 @@
 !** DSUDS
 SUBROUTINE DSUDS(A,X,B,Neq,Nuk,Nrda,Iflag,Mlso,Work,Iwork)
-  !>
-  !  Subsidiary to DBVSUP
+  !> Subsidiary to DBVSUP
   !***
   ! **Library:**   SLATEC
   !***
@@ -12,7 +11,7 @@ SUBROUTINE DSUDS(A,X,B,Neq,Nuk,Nrda,Iflag,Mlso,Work,Iwork)
   ! **Description:**
   !
   !     DSUDS solves the underdetermined system of linear equations A Z =
-  !     B where A is NEQ by NUK and NEQ .LE. NUK. in particular, if rank
+  !     B where A is NEQ by NUK and NEQ <= NUK. in particular, if rank
   !     A equals IRA, a vector X and a matrix U are determined such that
   !     X is the UNIQUE solution of smallest length, satisfying A X = B,
   !     and the columns of U form an orthonormal basis for the null
@@ -56,7 +55,7 @@ SUBROUTINE DSUDS(A,X,B,Neq,Nuk,Nrda,Iflag,Mlso,Work,Iwork)
   !     WORK(*),IWORK(*) -- Arrays for storage of internal information,
   !                WORK must be dimensioned at least
   !                       NUK + 3*NEQ + MLSO*NUK*(NUK-RANK A)
-  !                where it is possible for   0 .LE. RANK A .LE. NEQ
+  !                where it is possible for   0 <= RANK A <= NEQ
   !                IWORK must be dimensioned at least   3 + NEQ
   !     IWORK(2) -- Scaling indicator
   !                 =-1 if the matrix is to be pre-scaled by

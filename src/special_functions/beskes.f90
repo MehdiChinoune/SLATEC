@@ -1,7 +1,6 @@
 !** BESKES
 SUBROUTINE BESKES(Xnu,X,Nin,Bke)
-  !>
-  !  Compute a sequence of exponentially scaled modified Bessel
+  !> Compute a sequence of exponentially scaled modified Bessel
   !            functions of the third kind of fractional order.
   !***
   ! **Library:**   SLATEC (FNLIB)
@@ -20,7 +19,7 @@ SUBROUTINE BESKES(Xnu,X,Nin,Bke)
   !
   ! BESKES computes a sequence of exponentially scaled
   ! (i.e., multipled by EXP(X)) modified Bessel
-  ! functions of the third kind of order XNU + I at X, where X .GT. 0,
+  ! functions of the third kind of order XNU + I at X, where X > 0,
   ! XNU lies in (-1,1), and I = 0, 1, ..., NIN - 1, if NIN is positive
   ! and I = 0, -1, ..., NIN + 1, if NIN is negative.  On return, the
   ! vector BKE(.) contains the results at X for order starting at XNU.
@@ -50,26 +49,26 @@ SUBROUTINE BESKES(Xnu,X,Nin,Bke)
   v = ABS(Xnu)
   n = ABS(Nin)
   !
-  IF ( v>=1. ) CALL XERMSG('BESKES','ABS(XNU) MUST BE LT 1',2,2)
-  IF ( X<=0. ) CALL XERMSG('BESKES','X IS LE 0',3,2)
-  IF ( n==0 ) CALL XERMSG('BESKES',&
+  IF( v>=1. ) CALL XERMSG('BESKES','ABS(XNU) MUST BE LT 1',2,2)
+  IF( X<=0. ) CALL XERMSG('BESKES','X IS LE 0',3,2)
+  IF( n==0 ) CALL XERMSG('BESKES',&
     'N THE NUMBER IN THE SEQUENCE IS 0',4,2)
   !
   CALL R9KNUS(v,X,Bke(1),bknu1,iswtch)
-  IF ( n==1 ) RETURN
+  IF( n==1 ) RETURN
   !
   vincr = SIGN(1.0,REAL(Nin))
   direct = vincr
-  IF ( Xnu/=0. ) direct = vincr*SIGN(1.0,Xnu)
-  IF ( iswtch==1.AND.direct>0. ) CALL XERMSG('BESKES',&
+  IF( Xnu/=0. ) direct = vincr*SIGN(1.0,Xnu)
+  IF( iswtch==1 .AND. direct>0. ) CALL XERMSG('BESKES',&
     'X SO SMALL BESSEL K-SUB-XNU+1 OVERFLOWS',5,2)
   Bke(2) = bknu1
   !
-  IF ( direct<0. ) CALL R9KNUS(ABS(Xnu+vincr),X,Bke(2),bknu1,iswtch)
-  IF ( n==2 ) RETURN
+  IF( direct<0. ) CALL R9KNUS(ABS(Xnu+vincr),X,Bke(2),bknu1,iswtch)
+  IF( n==2 ) RETURN
   !
   vend = ABS(Xnu+Nin) - 1.0
-  IF ( (vend-0.5)*LOG(vend)+0.27-vend*(LOG(X)-.694)>alnbig )&
+  IF( (vend-0.5)*LOG(vend)+0.27-vend*(LOG(X)-.694)>alnbig )&
     CALL XERMSG('BESKES',&
     'X SO SMALL OR ABS(NU) SO BIG THAT BESSEL K-SUB-NU OVERFLOWS',5,2)
   !

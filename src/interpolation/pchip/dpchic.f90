@@ -1,7 +1,6 @@
 !** DPCHIC
 SUBROUTINE DPCHIC(Ic,Vc,Switch,N,X,F,D,Incfd,Wk,Nwk,Ierr)
-  !>
-  !  Set derivatives needed to determine a piecewise monotone
+  !> Set derivatives needed to determine a piecewise monotone
   !            piecewise cubic Hermite interpolant to given data.
   !            User control is available over boundary conditions and/or
   !            treatment of points where monotonicity switches direction.
@@ -59,33 +58,33 @@ SUBROUTINE DPCHIC(Ic,Vc,Switch,N,X,F,D,Incfd,Wk,Nwk,Ierr)
   !
   !           IBEG = 0  for the default boundary condition (the same as
   !                     used by DPCHIM).
-  !           If IBEG.NE.0, then its sign indicates whether the boundary
+  !           If IBEG/=0, then its sign indicates whether the boundary
   !                     derivative is to be adjusted, if necessary, to be
   !                     compatible with monotonicity:
-  !              IBEG.GT.0  if no adjustment is to be performed.
-  !              IBEG.LT.0  if the derivative is to be adjusted for
+  !              IBEG>0  if no adjustment is to be performed.
+  !              IBEG<0  if the derivative is to be adjusted for
   !                     monotonicity.
   !
   !           Allowable values for the magnitude of IBEG are:
   !           IBEG = 1  if first derivative at X(1) is given in VC(1).
   !           IBEG = 2  if second derivative at X(1) is given in VC(1).
   !           IBEG = 3  to use the 3-point difference formula for D(1).
-  !                     (Reverts to the default b.c. if N.LT.3 .)
+  !                     (Reverts to the default b.c. if N<3 .)
   !           IBEG = 4  to use the 4-point difference formula for D(1).
-  !                     (Reverts to the default b.c. if N.LT.4 .)
+  !                     (Reverts to the default b.c. if N<4 .)
   !           IBEG = 5  to set D(1) so that the second derivative is con-
-  !              tinuous at X(2). (Reverts to the default b.c. if N.LT.4.)
+  !              tinuous at X(2). (Reverts to the default b.c. if N<4.)
   !              This option is somewhat analogous to the "not a knot"
   !              boundary condition provided by DPCHSP.
   !
   !          NOTES (IBEG):
-  !           1. An error return is taken if ABS(IBEG).GT.5 .
-  !           2. Only in case  IBEG.LE.0  is it guaranteed that the
+  !           1. An error return is taken if ABS(IBEG)>5 .
+  !           2. Only in case  IBEG<=0  is it guaranteed that the
   !              interpolant will be monotonic in the first interval.
   !              If the returned value of D(1) lies between zero and
   !              3*SLOPE(1), the interpolant will be monotonic.  This
-  !              is **NOT** checked if IBEG.GT.0 .
-  !           3. If IBEG.LT.0 and D(1) had to be changed to achieve mono-
+  !              is **NOT** checked if IBEG>0 .
+  !           3. If IBEG<0 and D(1) had to be changed to achieve mono-
   !              tonicity, a warning error is returned.
   !
   !           IEND may take on the same values as IBEG, but applied to
@@ -93,13 +92,13 @@ SUBROUTINE DPCHIC(Ic,Vc,Switch,N,X,F,D,Incfd,Wk,Nwk,Ierr)
   !           given in VC(2).
   !
   !          NOTES (IEND):
-  !           1. An error return is taken if ABS(IEND).GT.5 .
-  !           2. Only in case  IEND.LE.0  is it guaranteed that the
+  !           1. An error return is taken if ABS(IEND)>5 .
+  !           2. Only in case  IEND<=0  is it guaranteed that the
   !              interpolant will be monotonic in the last interval.
   !              If the returned value of D(1+(N-1)*INCFD) lies between
   !              zero and 3*SLOPE(N-1), the interpolant will be monotonic.
-  !              This is **NOT** checked if IEND.GT.0 .
-  !           3. If IEND.LT.0 and D(1+(N-1)*INCFD) had to be changed to
+  !              This is **NOT** checked if IEND>0 .
+  !           3. If IEND<0 and D(1+(N-1)*INCFD) had to be changed to
   !              achieve monotonicity, a warning error is returned.
   !
   !     VC -- (input) real*8 array of length 2 specifying desired boundary
@@ -128,11 +127,11 @@ SUBROUTINE DPCHIC(Ic,Vc,Switch,N,X,F,D,Incfd,Wk,Nwk,Ierr)
   !              immediate neighbors.
   !           If SWITCH is negative, no such control is to be imposed.
   !
-  !     N -- (input) number of data points.  (Error return if N.LT.2 .)
+  !     N -- (input) number of data points.  (Error return if N<2 .)
   !
   !     X -- (input) real*8 array of independent variable values.  The
   !           elements of X must be strictly increasing:
-  !                X(I-1) .LT. X(I),  I = 2(1)N.
+  !                X(I-1) < X(I),  I = 2(1)N.
   !           (Error return if not.)
   !
   !     F -- (input) real*8 array of dependent variable values to be
@@ -149,7 +148,7 @@ SUBROUTINE DPCHIC(Ic,Vc,Switch,N,X,F,D,Incfd,Wk,Nwk,Ierr)
   !
   !     INCFD -- (input) increment between successive values in F and D.
   !           This argument is provided primarily for 2-D applications.
-  !           (Error return if  INCFD.LT.1 .)
+  !           (Error return if  INCFD<1 .)
   !
   !     WK -- (scratch) real*8 array of working storage.  The user may
   !           wish to know that the returned values are:
@@ -158,25 +157,25 @@ SUBROUTINE DPCHIC(Ic,Vc,Switch,N,X,F,D,Incfd,Wk,Nwk,Ierr)
   !           for  I = 1(1)N-1.
   !
   !     NWK -- (input) length of work array.
-  !           (Error return if  NWK.LT.2*(N-1) .)
+  !           (Error return if  NWK<2*(N-1) .)
   !
   !     IERR -- (output) error flag.
   !           Normal return:
   !              IERR = 0  (no errors).
   !           Warning errors:
-  !              IERR = 1  if IBEG.LT.0 and D(1) had to be adjusted for
+  !              IERR = 1  if IBEG<0 and D(1) had to be adjusted for
   !                        monotonicity.
-  !              IERR = 2  if IEND.LT.0 and D(1+(N-1)*INCFD) had to be
+  !              IERR = 2  if IEND<0 and D(1+(N-1)*INCFD) had to be
   !                        adjusted for monotonicity.
   !              IERR = 3  if both of the above are true.
   !           "Recoverable" errors:
-  !              IERR = -1  if N.LT.2 .
-  !              IERR = -2  if INCFD.LT.1 .
+  !              IERR = -1  if N<2 .
+  !              IERR = -2  if INCFD<1 .
   !              IERR = -3  if the X-array is not strictly increasing.
-  !              IERR = -4  if ABS(IBEG).GT.5 .
-  !              IERR = -5  if ABS(IEND).GT.5 .
+  !              IERR = -4  if ABS(IBEG)>5 .
+  !              IERR = -5  if ABS(IEND)>5 .
   !              IERR = -6  if both of the above are true.
-  !              IERR = -7  if NWK.LT.2*(N-1) .
+  !              IERR = -7  if NWK<2*(N-1) .
   !             (The D-array has not been changed in any of these cases.)
   !               NOTE:  The above errors are checked in the order listed,
   !                   and following arguments have **NOT** been validated.
@@ -224,42 +223,42 @@ SUBROUTINE DPCHIC(Ic,Vc,Switch,N,X,F,D,Incfd,Wk,Nwk,Ierr)
   !
   !  DECLARE ARGUMENTS.
   !
-  INTEGER Ic(2), N, Incfd, Nwk, Ierr
+  INTEGER :: Ic(2), N, Incfd, Nwk, Ierr
   REAL(DP) :: Vc(2), Switch, X(N), F(Incfd,N), D(Incfd,N), Wk(Nwk)
   !
   !  DECLARE LOCAL VARIABLES.
   !
-  INTEGER i, ibeg, iend, nless1
+  INTEGER :: i, ibeg, iend, nless1
   REAL(DP), PARAMETER :: zero = 0.D0
   !
   !  VALIDITY-CHECK ARGUMENTS.
   !
   !* FIRST EXECUTABLE STATEMENT  DPCHIC
-  IF ( N<2 ) THEN
+  IF( N<2 ) THEN
     !
     !  ERROR RETURNS.
     !
-    !     N.LT.2 RETURN.
+    !     N<2 RETURN.
     Ierr = -1
     CALL XERMSG('DPCHIC','NUMBER OF DATA POINTS LESS THAN TWO',Ierr,1)
     RETURN
-  ELSEIF ( Incfd<1 ) THEN
+  ELSEIF( Incfd<1 ) THEN
     !
-    !     INCFD.LT.1 RETURN.
+    !     INCFD<1 RETURN.
     Ierr = -2
     CALL XERMSG('DPCHIC','INCREMENT LESS THAN ONE',Ierr,1)
     RETURN
   ELSE
     DO i = 2, N
-      IF ( X(i)<=X(i-1) ) GOTO 100
+      IF( X(i)<=X(i-1) ) GOTO 100
     END DO
     !
     ibeg = Ic(1)
     iend = Ic(2)
     Ierr = 0
-    IF ( ABS(ibeg)>5 ) Ierr = Ierr - 1
-    IF ( ABS(iend)>5 ) Ierr = Ierr - 2
-    IF ( Ierr<0 ) THEN
+    IF( ABS(ibeg)>5 ) Ierr = Ierr - 1
+    IF( ABS(iend)>5 ) Ierr = Ierr - 2
+    IF( Ierr<0 ) THEN
       !
       !     IC OUT OF RANGE RETURN.
       Ierr = Ierr - 3
@@ -270,9 +269,9 @@ SUBROUTINE DPCHIC(Ic,Vc,Switch,N,X,F,D,Incfd,Wk,Nwk,Ierr)
       !  FUNCTION DEFINITION IS OK -- GO ON.
       !
       nless1 = N - 1
-      IF ( Nwk<2*nless1 ) THEN
+      IF( Nwk<2*nless1 ) THEN
         !
-        !     NWK .LT. 2*(N-1)  RETURN.
+        !     NWK < 2*(N-1)  RETURN.
         Ierr = -7
         CALL XERMSG('DPCHIC','WORK ARRAY TOO SMALL',Ierr,1)
         RETURN
@@ -287,9 +286,9 @@ SUBROUTINE DPCHIC(Ic,Vc,Switch,N,X,F,D,Incfd,Wk,Nwk,Ierr)
         !
         !  SPECIAL CASE N=2 -- USE LINEAR INTERPOLATION.
         !
-        IF ( nless1>1 ) THEN
+        IF( nless1>1 ) THEN
           !
-          !  NORMAL CASE  (N .GE. 3) .
+          !  NORMAL CASE  (N >= 3) .
           !
           !
           !  SET INTERIOR DERIVATIVES AND DEFAULT END CONDITIONS.
@@ -300,11 +299,11 @@ SUBROUTINE DPCHIC(Ic,Vc,Switch,N,X,F,D,Incfd,Wk,Nwk,Ierr)
           !
           !  SET DERIVATIVES AT POINTS WHERE MONOTONICITY SWITCHES DIRECTION.
           !
-          IF ( Switch/=zero ) THEN
+          IF( Switch/=zero ) THEN
             !     ----------------------------------------------------
             CALL DPCHCS(Switch,N,Wk(1),Wk(N),D,Incfd,Ierr)
             !     ----------------------------------------------------
-            IF ( Ierr/=0 ) THEN
+            IF( Ierr/=0 ) THEN
               !
               !     ERROR RETURN FROM DPCHCS.
               Ierr = -8
@@ -319,11 +318,11 @@ SUBROUTINE DPCHIC(Ic,Vc,Switch,N,X,F,D,Incfd,Wk,Nwk,Ierr)
         !
         !  SET END CONDITIONS.
         !
-        IF ( (ibeg/=0).OR.(iend/=0) ) THEN
+        IF( (ibeg/=0) .OR. (iend/=0) ) THEN
           !     -------------------------------------------------------
           CALL DPCHCE(Ic,Vc,N,X,Wk(1),Wk(N),D,Incfd,Ierr)
           !     -------------------------------------------------------
-          IF ( Ierr<0 ) THEN
+          IF( Ierr<0 ) THEN
             !
             !     ERROR RETURN FROM DPCHCE.
             !   *** THIS CASE SHOULD NEVER OCCUR ***

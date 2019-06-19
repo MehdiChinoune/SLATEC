@@ -1,7 +1,6 @@
 !** JAIRY
 SUBROUTINE JAIRY(X,Rx,C,Ai,Dai)
-  !>
-  !  Subsidiary to BESJ and BESY
+  !> Subsidiary to BESJ and BESY
   !***
   ! **Library:**   SLATEC
   !***
@@ -140,9 +139,9 @@ SUBROUTINE JAIRY(X,Rx,C,Ai,Dai)
     -4.90190576608710E-14, -1.77253430678112E-14, 5.55950610442662E-15, &
     -7.11793337579530E-16 ]
   !* FIRST EXECUTABLE STATEMENT  JAIRY
-  IF ( X<0.0E0 ) THEN
+  IF( X<0.0E0 ) THEN
     !
-    IF ( C>5.0E0 ) THEN
+    IF( C>5.0E0 ) THEN
       !
       t = 10.0E0/C - 1.0E0
       tt = t + t
@@ -188,7 +187,7 @@ SUBROUTINE JAIRY(X,Rx,C,Ai,Dai)
       Dai = (temp1*e1-temp2*e2)*rtrx
       RETURN
     END IF
-  ELSEIF ( C>5.0E0 ) THEN
+  ELSEIF( C>5.0E0 ) THEN
     !
     t = 10.0E0/C - 1.0E0
     tt = t + t
@@ -215,7 +214,7 @@ SUBROUTINE JAIRY(X,Rx,C,Ai,Dai)
     END DO
     Dai = -rtrx*ec*(t*f1-f2+dak3(1))
     RETURN
-  ELSEIF ( X>1.20E0 ) THEN
+  ELSEIF( X>1.20E0 ) THEN
     !
     t = (X+X-con2)*con3
     tt = t + t

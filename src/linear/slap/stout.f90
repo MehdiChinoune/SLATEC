@@ -1,7 +1,6 @@
 !** STOUT
 SUBROUTINE STOUT(N,Nelt,Ia,Ja,A,Isym,Soln,Rhs,Iunit,Job)
-  !>
-  !  Write out SLAP Triad Format Linear System.
+  !> Write out SLAP Triad Format Linear System.
   !            Routine to write out a SLAP Triad format matrix and right
   !            hand side and solution to the system, if known.
   !***
@@ -102,7 +101,7 @@ SUBROUTINE STOUT(N,Nelt,Ia,Ja,A,Isym,Soln,Rhs,Iunit,Job)
   !
   !- Cautions:
   !     This routine will attempt to write to the Fortran logical output
-  !     unit IUNIT, if IUNIT .ne. 0.  Thus, the user must make sure that
+  !     unit IUNIT, if IUNIT /= 0.  Thus, the user must make sure that
   !     this logical unit is attached to a file or terminal before calling
   !     this routine with a non-zero value for IUNIT.  This routine does
   !     not check for the validity of a non-zero IUNIT unit number.
@@ -123,12 +122,12 @@ SUBROUTINE STOUT(N,Nelt,Ia,Ja,A,Isym,Soln,Rhs,Iunit,Job)
   !   930701  Updated CATEGORY section.  (FNF, WRB)
   
   !     .. Scalar Arguments ..
-  INTEGER Isym, Iunit, Job, N, Nelt
+  INTEGER :: Isym, Iunit, Job, N, Nelt
   !     .. Array Arguments ..
-  REAL(SP) A(Nelt), Rhs(N), Soln(N)
-  INTEGER Ia(Nelt), Ja(Nelt)
+  REAL(SP) :: A(Nelt), Rhs(N), Soln(N)
+  INTEGER :: Ia(Nelt), Ja(Nelt)
   !     .. Local Scalars ..
-  INTEGER i, irhs, isoln
+  INTEGER :: i, irhs, isoln
   !* FIRST EXECUTABLE STATEMENT  STOUT
   !
   !         If RHS and SOLN are to be printed also.
@@ -136,8 +135,8 @@ SUBROUTINE STOUT(N,Nelt,Ia,Ja,A,Isym,Soln,Rhs,Iunit,Job)
   !
   irhs = 0
   isoln = 0
-  IF ( Job==1.OR.Job==3 ) irhs = 1
-  IF ( Job>1 ) isoln = 1
+  IF( Job==1 .OR. Job==3 ) irhs = 1
+  IF( Job>1 ) isoln = 1
   WRITE (Iunit,99001) N, Nelt, Isym, irhs, isoln
   99001 FORMAT (5I10)
   !
@@ -148,10 +147,10 @@ SUBROUTINE STOUT(N,Nelt,Ia,Ja,A,Isym,Soln,Rhs,Iunit,Job)
   END DO
   !
   !         If requested, write out the rhs.
-  IF ( irhs==1 ) WRITE (Iunit,99003) (Rhs(i),i=1,N)
+  IF( irhs==1 ) WRITE (Iunit,99003) (Rhs(i),i=1,N)
   !
   !         If requested, write out the solution.
-  IF ( isoln==1 ) WRITE (Iunit,99003) (Soln(i),i=1,N)
+  IF( isoln==1 ) WRITE (Iunit,99003) (Soln(i),i=1,N)
   RETURN
   99003 FORMAT (1X,E16.7)
   !------------- LAST LINE OF STOUT FOLLOWS ----------------------------

@@ -2,14 +2,13 @@ MODULE TEST53_MOD
   USE service, ONLY : SP, DP
   IMPLICIT NONE
   REAL(DP) :: EPS, RP, SVEps, TOL
-  INTEGER IERp, IERr, NORd, NORdp
+  INTEGER :: IERp, IERr, NORd, NORdp
   REAL(DP) :: R(11)
 
 CONTAINS
   !** DCMPAR
   SUBROUTINE DCMPAR(Icnt,Itest)
-    !>
-    !  Compare values in COMMON block DCHECK for quick check
+    !> Compare values in COMMON block DCHECK for quick check
     !            routine DPFITT.
     !***
     ! **Library:**   SLATEC
@@ -30,14 +29,14 @@ CONTAINS
     !   920214  Minor improvements to code for readability.  (WRB)
 
     !     .. Scalar Arguments ..
-    INTEGER Icnt
+    INTEGER :: Icnt
     !     .. Array Arguments ..
-    INTEGER Itest(9)
+    INTEGER :: Itest(9)
     !     .. Local Scalars ..
     REAL(DP) :: rpp, ss
-    INTEGER ierpp, nrdp
+    INTEGER :: ierpp, nrdp
     !     .. Local Arrays ..
-    INTEGER itemp(4)
+    INTEGER :: itemp(4)
     !     .. Intrinsic Functions ..
     INTRINSIC ABS
     !* FIRST EXECUTABLE STATEMENT  DCMPAR
@@ -50,11 +49,11 @@ CONTAINS
     nrdp = NORdp - NORd
     rpp = RP - R(11)
     ierpp = IERp - IERr
-    IF ( ABS(ss)<=TOL.OR.Icnt<=2.OR.Icnt>=6 ) itemp(1) = 1
-    IF ( ABS(nrdp)==0 ) itemp(2) = 1
-    IF ( Icnt==2 ) itemp(2) = 1
-    IF ( ABS(rpp)<=TOL ) itemp(3) = 1
-    IF ( ABS(ierpp)==0 ) itemp(4) = 1
+    IF( ABS(ss)<=TOL .OR. Icnt<=2 .OR. Icnt>=6 ) itemp(1) = 1
+    IF( ABS(nrdp)==0 ) itemp(2) = 1
+    IF( Icnt==2 ) itemp(2) = 1
+    IF( ABS(rpp)<=TOL ) itemp(3) = 1
+    IF( ABS(ierpp)==0 ) itemp(4) = 1
     !
     !     Check to see if all four tests were good.
     !     If so, set the test number equal to 1.
@@ -63,8 +62,7 @@ CONTAINS
   END SUBROUTINE DCMPAR
   !** DPFITT
   SUBROUTINE DPFITT(Lun,Kprint,Ipass)
-    !>
-    !  Quick check for DPOLFT, DPCOEF and DP1VLU.
+    !> Quick check for DPOLFT, DPCOEF and DP1VLU.
     !***
     ! **Library:**   SLATEC
     !***
@@ -93,19 +91,19 @@ CONTAINS
     !           provide more PASS/FAIL information.  (WRB)
     USE slatec, ONLY : D1MACH, DP1VLU, DPCOEF, DPOLFT, XERCLR, XGETF, XSETF
     USE common_mod, ONLY : PASS
-    INTEGER kontrl
+    INTEGER :: kontrl
     !     .. Scalar Arguments ..
-    INTEGER Ipass, Kprint, Lun
+    INTEGER :: Ipass, Kprint, Lun
     !     .. Local Scalars ..
     REAL(DP) :: yfit
-    INTEGER i, icnt, m, maxord
+    INTEGER :: i, icnt, m, maxord
     !     .. Local Arrays ..
     REAL(DP) :: a(97), tc(5), w(11), x(11), y(11), yp(5)
-    INTEGER itest(9)
+    INTEGER :: itest(9)
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, SQRT
     !* FIRST EXECUTABLE STATEMENT  DPFITT
-    IF ( Kprint>=2 ) WRITE (Lun,FMT=99002)
+    IF( Kprint>=2 ) WRITE (Lun,FMT=99002)
     !
     !     Initialize variables for testing passage or failure of tests
     !
@@ -138,11 +136,11 @@ CONTAINS
     !
     !     Check for suppression of printing.
     !
-    IF ( Kprint/=0 ) THEN
-      IF ( Kprint/=1.OR.itest(icnt)/=1 ) THEN
+    IF( Kprint/=0 ) THEN
+      IF( Kprint/=1 .OR. itest(icnt)/=1 ) THEN
         WRITE (Lun,FMT=99003)
         WRITE (Lun,FMT=99004)
-        IF ( Kprint>2.OR.itest(icnt)/=1 ) THEN
+        IF( Kprint>2 .OR. itest(icnt)/=1 ) THEN
           WRITE (Lun,FMT=99005) SVEps, NORdp, RP, IERp
           WRITE (Lun,FMT=99006) EPS, NORd, R(11), IERr
         END IF
@@ -165,10 +163,10 @@ CONTAINS
     !
     !     Check for suppression of printing.
     !
-    IF ( Kprint/=0 ) THEN
-      IF ( Kprint/=1.OR.itest(icnt)/=1 ) THEN
+    IF( Kprint/=0 ) THEN
+      IF( Kprint/=1 .OR. itest(icnt)/=1 ) THEN
         WRITE (Lun,FMT=99007)
-        IF ( Kprint>2.OR.itest(icnt)/=1 ) THEN
+        IF( Kprint>2 .OR. itest(icnt)/=1 ) THEN
           WRITE (Lun,FMT=99008) maxord
           WRITE (Lun,FMT=99005) SVEps, NORdp, RP, IERp
           WRITE (Lun,FMT=99006) EPS, NORd, R(11), IERr
@@ -195,10 +193,10 @@ CONTAINS
     !
     !     Check for suppression of printing.
     !
-    IF ( Kprint/=0 ) THEN
-      IF ( Kprint/=1.OR.itest(icnt)/=1 ) THEN
+    IF( Kprint/=0 ) THEN
+      IF( Kprint/=1 .OR. itest(icnt)/=1 ) THEN
         WRITE (Lun,FMT=99009)
-        IF ( Kprint>2.OR.itest(icnt)/=1 ) THEN
+        IF( Kprint>2 .OR. itest(icnt)/=1 ) THEN
           WRITE (Lun,FMT=99008) maxord
           WRITE (Lun,FMT=99005) SVEps, NORdp, RP, IERp
           WRITE (Lun,FMT=99006) EPS, NORd, R(11), IERr
@@ -224,10 +222,10 @@ CONTAINS
     !
     !     Check for suppression of printing.
     !
-    IF ( Kprint/=0 ) THEN
-      IF ( Kprint/=1.OR.itest(icnt)/=1 ) THEN
+    IF( Kprint/=0 ) THEN
+      IF( Kprint/=1 .OR. itest(icnt)/=1 ) THEN
         WRITE (Lun,FMT=99010)
-        IF ( Kprint>2.OR.itest(icnt)/=1 ) THEN
+        IF( Kprint>2 .OR. itest(icnt)/=1 ) THEN
           WRITE (Lun,FMT=99008) maxord
           WRITE (Lun,FMT=99005) SVEps, NORdp, RP, IERp
           WRITE (Lun,FMT=99006) EPS, NORd, R(11), IERr
@@ -247,32 +245,32 @@ CONTAINS
     !     Check for suppression of printing.
     !
     CALL XGETF(kontrl)
-    IF ( Kprint<=2 ) THEN
+    IF( Kprint<=2 ) THEN
       CALL XSETF(0)
     ELSE
       CALL XSETF(1)
     END IF
     CALL XERCLR
     !
-    IF ( Kprint>=3 ) WRITE (Lun,99001)
+    IF( Kprint>=3 ) WRITE (Lun,99001)
     99001 FORMAT (/' Invalid input')
     CALL DPOLFT(m,x,y,w,maxord,NORd,EPS,R,IERr,a)
     !
     !     See if test passed
     !
     icnt = icnt + 1
-    IF ( IERr==2 ) THEN
+    IF( IERr==2 ) THEN
       itest(icnt) = 1
-      IF ( Kprint>=3 ) WRITE (Lun,99011) 'PASSED', IERr
-    ELSEIF ( Kprint>=2 ) THEN
+      IF( Kprint>=3 ) WRITE (Lun,99011) 'PASSED', IERr
+    ELSEIF( Kprint>=2 ) THEN
       WRITE (Lun,99011) 'FAILED', IERr
     END IF
     !
     !     Check for suppression of printing.
     !
-    IF ( Kprint/=0 ) THEN
-      IF ( Kprint/=1.OR.itest(icnt)/=1 ) THEN
-        IF ( Kprint<=2.AND.itest(icnt)==1 ) THEN
+    IF( Kprint/=0 ) THEN
+      IF( Kprint/=1 .OR. itest(icnt)/=1 ) THEN
+        IF( Kprint<=2 .AND. itest(icnt)==1 ) THEN
         END IF
         !
         !     Send message indicating passage or failure of test
@@ -302,10 +300,10 @@ CONTAINS
     !
     !     Check for suppression of printing.
     !
-    IF ( Kprint/=0 ) THEN
-      IF ( Kprint/=1.OR.itest(icnt)/=1 ) THEN
+    IF( Kprint/=0 ) THEN
+      IF( Kprint/=1 .OR. itest(icnt)/=1 ) THEN
         WRITE (Lun,FMT=99012)
-        IF ( Kprint>2.OR.itest(icnt)/=1 ) THEN
+        IF( Kprint>2 .OR. itest(icnt)/=1 ) THEN
           WRITE (Lun,FMT=99008) maxord
           WRITE (Lun,FMT=99005) SVEps, NORdp, RP, IERp
           WRITE (Lun,FMT=99006) EPS, NORd, R(11), IERr
@@ -333,10 +331,10 @@ CONTAINS
     !
     !     Check for suppression of printing.
     !
-    IF ( Kprint/=0 ) THEN
-      IF ( Kprint/=1.OR.itest(icnt)/=1 ) THEN
+    IF( Kprint/=0 ) THEN
+      IF( Kprint/=1 .OR. itest(icnt)/=1 ) THEN
         WRITE (Lun,FMT=99013)
-        IF ( Kprint>2.OR.itest(icnt)/=1 ) THEN
+        IF( Kprint>2 .OR. itest(icnt)/=1 ) THEN
           WRITE (Lun,FMT=99008) maxord
           WRITE (Lun,FMT=99005) SVEps, NORdp, RP, IERp
           WRITE (Lun,FMT=99006) EPS, NORd, R(11), IERr
@@ -364,14 +362,14 @@ CONTAINS
     !     See if test passed
     !
     icnt = icnt + 1
-    IF ( ABS(R(11)-tc(1))<=TOL ) itest(icnt) = 1
+    IF( ABS(R(11)-tc(1))<=TOL ) itest(icnt) = 1
     !
     !     Check for suppression of printing
     !
-    IF ( Kprint/=0 ) THEN
-      IF ( Kprint/=1.OR.itest(icnt)/=1 ) THEN
+    IF( Kprint/=0 ) THEN
+      IF( Kprint/=1 .OR. itest(icnt)/=1 ) THEN
         WRITE (Lun,FMT=99014)
-        IF ( Kprint>2.OR.itest(icnt)/=1 ) WRITE (Lun,FMT=99015) R(11), tc(1)
+        IF( Kprint>2 .OR. itest(icnt)/=1 ) WRITE (Lun,FMT=99015) R(11), tc(1)
         !
         !     Send message indicating passage or failure of test
         !
@@ -387,15 +385,15 @@ CONTAINS
     !     See if test passed
     !
     icnt = icnt + 1
-    IF ( ABS(R(8)-yfit)<=TOL ) itest(icnt) = 1
+    IF( ABS(R(8)-yfit)<=TOL ) itest(icnt) = 1
     !
     !     Check for suppression of printing
     !
-    IF ( Kprint/=0 ) THEN
-      IF ( Kprint/=1.OR.itest(icnt)/=1 ) THEN
+    IF( Kprint/=0 ) THEN
+      IF( Kprint/=1 .OR. itest(icnt)/=1 ) THEN
         WRITE (Lun,FMT=99016)
         WRITE (Lun,FMT=99017)
-        IF ( Kprint>2.OR.itest(icnt)/=1 ) WRITE (Lun,FMT=99018) x(8), R(8), yfit
+        IF( Kprint>2 .OR. itest(icnt)/=1 ) WRITE (Lun,FMT=99018) x(8), R(8), yfit
         !
         !     Send message indicating passage or failure of test
         !
@@ -410,8 +408,8 @@ CONTAINS
       Ipass = Ipass*itest(i)
     END DO
     !
-    IF ( Ipass==1.AND.Kprint>=3 ) WRITE (Lun,FMT=99019)
-    IF ( Ipass==0.AND.Kprint>=2 ) WRITE (Lun,FMT=99020)
+    IF( Ipass==1 .AND. Kprint>=3 ) WRITE (Lun,FMT=99019)
+    IF( Ipass==0 .AND. Kprint>=2 ) WRITE (Lun,FMT=99020)
     RETURN
     !
     99002 FORMAT ('1'/' Test DPOLFT, DPCOEF and DP1VLU')
@@ -441,8 +439,7 @@ CONTAINS
   END SUBROUTINE DPFITT
   !** DNLS1Q
   SUBROUTINE DNLS1Q(Lun,Kprint,Ipass)
-    !>
-    !  Quick check for DNLS1E, DNLS1 and DCOV.
+    !> Quick check for DNLS1E, DNLS1 and DCOV.
     !***
     ! **Library:**   SLATEC
     !***
@@ -472,18 +469,18 @@ CONTAINS
       XERCLR, NUMXER
     USE common_mod, ONLY : PASS
     !     .. Scalar Arguments ..
-    INTEGER Ipass, Kprint, Lun
+    INTEGER :: Ipass, Kprint, Lun
     !     .. Local Scalars ..
     REAL(DP) :: fnorm, fnorms, one, sigma, temp1, temp2, temp3, tol, tol2, zero
-    INTEGER i, iflag, info, infos, iopt, kontrl, ldfjac, lwa, m, n, nerr, nprint
-    LOGICAL fatal
+    INTEGER :: i, iflag, info, infos, iopt, kontrl, ldfjac, lwa, m, n, nerr, nprint
+    LOGICAL :: fatal
     !     .. Local Arrays ..
     REAL(DP) :: fjac(10,2), fjrow(2,1), fjtj(3), fvec(10), wa(40), x(2)
-    INTEGER iw(2)
+    INTEGER :: iw(2)
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, SQRT
     !* FIRST EXECUTABLE STATEMENT  DNLS1Q
-    IF ( Kprint>=2 ) WRITE (Lun,99001)
+    IF( Kprint>=2 ) WRITE (Lun,99001)
     !
     99001 FORMAT ('1'/' Test DNLS1E, DNLS1 and DCOV')
     !
@@ -509,15 +506,15 @@ CONTAINS
     x(2) = 4.0D-1
     CALL DNLS1E(DFCN2,iopt,m,n,x,fvec,tol,nprint,info,iw,wa,lwa)
     fnorm = DENORM(m,fvec)
-    IF ( info==infos.AND.ABS(fnorm-fnorms)/fnorms<=tol2 ) THEN
+    IF( info==infos .AND. ABS(fnorm-fnorms)/fnorms<=tol2 ) THEN
       fatal = .FALSE.
-      IF ( Kprint>=3 ) CALL PASS(Lun,1,1)
+      IF( Kprint>=3 ) CALL PASS(Lun,1,1)
     ELSE
       Ipass = 0
       fatal = .TRUE.
-      IF ( Kprint>=2 ) CALL PASS(Lun,1,0)
+      IF( Kprint>=2 ) CALL PASS(Lun,1,0)
     END IF
-    IF ( (fatal.AND.Kprint>=2).OR.Kprint>=3 ) WRITE (Lun,99007) infos, &
+    IF( (fatal .AND. Kprint>=2) .OR. Kprint>=3 ) WRITE (Lun,99007) infos, &
       fnorms, info, fnorm
     !
     !     Form JAC-transpose*JAC.
@@ -544,16 +541,16 @@ CONTAINS
     temp1 = (fjtj(1)*fjac(1,1)+fjtj(2)*fjac(1,2))/sigma
     temp2 = (fjtj(1)*fjac(1,2)+fjtj(2)*fjac(2,2))/sigma
     temp3 = (fjtj(2)*fjac(1,2)+fjtj(3)*fjac(2,2))/sigma
-    IF ( info==infos.AND.ABS(temp1-one)<tol2.AND.ABS(temp2)<tol2.AND.&
+    IF( info==infos .AND. ABS(temp1-one)<tol2 .AND. ABS(temp2)<tol2 .AND. &
         ABS(temp3-one)<tol2 ) THEN
       fatal = .FALSE.
-      IF ( Kprint>=3 ) CALL PASS(Lun,2,1)
+      IF( Kprint>=3 ) CALL PASS(Lun,2,1)
     ELSE
       Ipass = 0
       fatal = .TRUE.
-      IF ( Kprint>=2 ) CALL PASS(Lun,2,0)
+      IF( Kprint>=2 ) CALL PASS(Lun,2,0)
     END IF
-    IF ( (fatal.AND.Kprint>=2).OR.Kprint>=3 ) WRITE (Lun,99008) infos, info, &
+    IF( (fatal .AND. Kprint>=2) .OR. Kprint>=3 ) WRITE (Lun,99008) infos, info, &
       temp1, temp2, temp3
     !
     !     OPTION=1, the full Jacobian is stored and the code approximates
@@ -564,15 +561,15 @@ CONTAINS
     x(2) = 4.0D-1
     CALL DNLS1E(DFCN1,iopt,m,n,x,fvec,tol,nprint,info,iw,wa,lwa)
     fnorm = DENORM(m,fvec)
-    IF ( info==infos.AND.ABS(fnorm-fnorms)/fnorms<=tol2 ) THEN
+    IF( info==infos .AND. ABS(fnorm-fnorms)/fnorms<=tol2 ) THEN
       fatal = .FALSE.
-      IF ( Kprint>=3 ) CALL PASS(Lun,3,1)
+      IF( Kprint>=3 ) CALL PASS(Lun,3,1)
     ELSE
       Ipass = 0
       fatal = .TRUE.
-      IF ( Kprint>=2 ) CALL PASS(Lun,3,0)
+      IF( Kprint>=2 ) CALL PASS(Lun,3,0)
     END IF
-    IF ( (fatal.AND.Kprint>=2).OR.Kprint>=3 ) WRITE (Lun,99007) infos, &
+    IF( (fatal .AND. Kprint>=2) .OR. Kprint>=3 ) WRITE (Lun,99007) infos, &
       fnorms, info, fnorm
     !
     !     Form JAC-transpose*JAC.
@@ -599,16 +596,16 @@ CONTAINS
     temp1 = (fjtj(1)*fjac(1,1)+fjtj(2)*fjac(1,2))/sigma
     temp2 = (fjtj(1)*fjac(1,2)+fjtj(2)*fjac(2,2))/sigma
     temp3 = (fjtj(2)*fjac(1,2)+fjtj(3)*fjac(2,2))/sigma
-    IF ( info==infos.AND.ABS(temp1-one)<tol2.AND.ABS(temp2)<tol2.AND.&
+    IF( info==infos .AND. ABS(temp1-one)<tol2 .AND. ABS(temp2)<tol2 .AND. &
         ABS(temp3-one)<tol2 ) THEN
       fatal = .FALSE.
-      IF ( Kprint>=3 ) CALL PASS(Lun,4,1)
+      IF( Kprint>=3 ) CALL PASS(Lun,4,1)
     ELSE
       Ipass = 0
       fatal = .TRUE.
-      IF ( Kprint>=2 ) CALL PASS(Lun,4,0)
+      IF( Kprint>=2 ) CALL PASS(Lun,4,0)
     END IF
-    IF ( (fatal.AND.Kprint>=2).OR.Kprint>=3 ) WRITE (Lun,99008) infos, info, &
+    IF( (fatal .AND. Kprint>=2) .OR. Kprint>=3 ) WRITE (Lun,99008) infos, info, &
       temp1, temp2, temp3
     !
     !     OPTION=3, the full Jacobian is not stored.  Only the product of
@@ -620,15 +617,15 @@ CONTAINS
     x(2) = 4.0D-1
     CALL DNLS1E(DFCN3,iopt,m,n,x,fvec,tol,nprint,info,iw,wa,lwa)
     fnorm = DENORM(m,fvec)
-    IF ( info==infos.AND.ABS(fnorm-fnorms)/fnorms<=tol2 ) THEN
+    IF( info==infos .AND. ABS(fnorm-fnorms)/fnorms<=tol2 ) THEN
       fatal = .FALSE.
-      IF ( Kprint>=3 ) CALL PASS(Lun,5,1)
+      IF( Kprint>=3 ) CALL PASS(Lun,5,1)
     ELSE
       Ipass = 0
       fatal = .TRUE.
-      IF ( Kprint>=2 ) CALL PASS(Lun,5,0)
+      IF( Kprint>=2 ) CALL PASS(Lun,5,0)
     END IF
-    IF ( (fatal.AND.Kprint>=2).OR.Kprint>=3 ) WRITE (Lun,99007) infos, &
+    IF( (fatal .AND. Kprint>=2) .OR. Kprint>=3 ) WRITE (Lun,99007) infos, &
       fnorms, info, fnorm
     !
     !     Form JAC-transpose*JAC.
@@ -655,22 +652,22 @@ CONTAINS
     temp1 = (fjtj(1)*fjac(1,1)+fjtj(2)*fjac(1,2))/sigma
     temp2 = (fjtj(1)*fjac(1,2)+fjtj(2)*fjac(2,2))/sigma
     temp3 = (fjtj(2)*fjac(1,2)+fjtj(3)*fjac(2,2))/sigma
-    IF ( info==infos.AND.ABS(temp1-one)<tol2.AND.ABS(temp2)<tol2.AND.&
+    IF( info==infos .AND. ABS(temp1-one)<tol2 .AND. ABS(temp2)<tol2 .AND. &
         ABS(temp3-one)<tol2 ) THEN
       fatal = .FALSE.
-      IF ( Kprint>=3 ) CALL PASS(Lun,6,1)
+      IF( Kprint>=3 ) CALL PASS(Lun,6,1)
     ELSE
       Ipass = 0
       fatal = .TRUE.
-      IF ( Kprint>=2 ) CALL PASS(Lun,6,0)
+      IF( Kprint>=2 ) CALL PASS(Lun,6,0)
     END IF
-    IF ( (fatal.AND.Kprint>=2).OR.Kprint>=3 ) WRITE (Lun,99008) infos, info, &
+    IF( (fatal .AND. Kprint>=2) .OR. Kprint>=3 ) WRITE (Lun,99008) infos, info, &
       temp1, temp2, temp3
     !
     !     Test improper input parameters.
     !
     CALL XGETF(kontrl)
-    IF ( Kprint<=2 ) THEN
+    IF( Kprint<=2 ) THEN
       CALL XSETF(0)
     ELSE
       CALL XSETF(1)
@@ -678,7 +675,7 @@ CONTAINS
     fatal = .FALSE.
     CALL XERCLR
     !
-    IF ( Kprint>=3 ) WRITE (Lun,99002)
+    IF( Kprint>=3 ) WRITE (Lun,99002)
     99002 FORMAT (/' TRIGGER 2 ERROR MESSAGES',/)
     !
     lwa = 35
@@ -686,33 +683,33 @@ CONTAINS
     x(1) = 3.0D-1
     x(2) = 4.0D-1
     CALL DNLS1E(DFCN2,iopt,m,n,x,fvec,tol,nprint,info,iw,wa,lwa)
-    IF ( info/=0.OR.NUMXER(nerr)/=2 ) fatal = .TRUE.
+    IF( info/=0 .OR. NUMXER(nerr)/=2 ) fatal = .TRUE.
     !
     m = 0
     CALL DCOV(DFCN2,iopt,m,n,x,fvec,fjac,ldfjac,info,wa(1),wa(n+1),wa(2*n+1),&
       wa(3*n+1))
-    IF ( info/=0.OR.NUMXER(nerr)/=2 ) fatal = .TRUE.
+    IF( info/=0 .OR. NUMXER(nerr)/=2 ) fatal = .TRUE.
     !
     !     Restore KONTRL and check to see if the tests of error detection
     !     passed.
     !
     CALL XSETF(kontrl)
-    IF ( fatal ) THEN
+    IF( fatal ) THEN
       Ipass = 0
-      IF ( Kprint>=2 ) THEN
+      IF( Kprint>=2 ) THEN
         WRITE (Lun,99003)
         99003 FORMAT (' AT LEAST ONE INCORRECT ARGUMENT TEST FAILED')
       END IF
-    ELSEIF ( Kprint>=3 ) THEN
+    ELSEIF( Kprint>=3 ) THEN
       WRITE (Lun,99004)
       99004 FORMAT (' ALL INCORRECT ARGUMENT TESTS PASSED')
     END IF
     !
     !     Print PASS/FAIL message.
     !
-    IF ( Ipass==1.AND.Kprint>=2 ) WRITE (Lun,99005)
+    IF( Ipass==1 .AND. Kprint>=2 ) WRITE (Lun,99005)
     99005 FORMAT (/' *************DNLS1E PASSED ALL TESTS*****************')
-    IF ( Ipass==0.AND.Kprint>=1 ) WRITE (Lun,99006)
+    IF( Ipass==0 .AND. Kprint>=1 ) WRITE (Lun,99006)
     99006 FORMAT (/' ************DNLS1E FAILED SOME TESTS*****************')
     !
     RETURN
@@ -724,8 +721,7 @@ CONTAINS
   END SUBROUTINE DNLS1Q
   !** DFCQX
   SUBROUTINE DFCQX(Lun,Kprint,Ipass)
-    !>
-    !  Quick check for DFC.
+    !> Quick check for DFC.
     !***
     ! **Library:**   SLATEC
     !***
@@ -772,14 +768,14 @@ CONTAINS
     USE slatec, ONLY : D1MACH, DBVALU, DCV, DFC, DMOUT, DVOUT, IVOUT, &
       XGETF, XSETF, XERCLR, NUMXER
     !     .. Scalar Arguments ..
-    INTEGER Ipass, Kprint, Lun
+    INTEGER :: Ipass, Kprint, Lun
     !     .. Local Scalars ..
     REAL(DP) :: diff, one, t, tol, xval, zero
-    INTEGER kontrl, i, idigit, ii, j, l, mode, n, nconst, ndeg, nerr, nval
-    LOGICAL fatal
+    INTEGER :: kontrl, i, idigit, ii, j, l, mode, n, nconst, ndeg, nerr, nval
+    LOGICAL :: fatal
     !     .. Local Arrays ..
     REAL(DP) :: coeff(9), v(51,5), w(529), work(12), xconst(11), yconst(11)
-    INTEGER iw(30), nderiv(11)
+    INTEGER :: iw(30), nderiv(11)
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, REAL, SQRT
     !     .. Data statements ..
@@ -814,7 +810,7 @@ CONTAINS
       9.926011645D-01, 9.954598055D-01, 9.978139804D-01, 9.994114563D-01, &
       1.000000000D+00 ]
     !* FIRST EXECUTABLE STATEMENT  DFCQX
-    IF ( Kprint>=2 ) WRITE (Lun,99001)
+    IF( Kprint>=2 ) WRITE (Lun,99001)
     !
     99001 FORMAT ('1'/' Test DFC')
     Ipass = 1
@@ -882,7 +878,7 @@ CONTAINS
     !
     idigit = -4
     !
-    IF ( Kprint>=3 ) THEN
+    IF( Kprint>=3 ) THEN
       CALL DVOUT(nbkpt,bkpt,'('' ARRAY OF KNOTS.'')',idigit)
       CALL DVOUT(ndata,xdata,'('' INDEPENDENT VARIABLE VALUES'')',idigit)
       CALL DVOUT(ndata,ydata,'('' DEPENDENT VARIABLE VALUES'')',idigit)
@@ -915,18 +911,18 @@ CONTAINS
     DO i = 1, ndata
       diff = MAX(diff,ABS(coeff(i)-coefck(i)))
     END DO
-    IF ( diff<=tol ) THEN
+    IF( diff<=tol ) THEN
       fatal = .FALSE.
-      IF ( Kprint>=3 ) WRITE (Lun,99002)
+      IF( Kprint>=3 ) WRITE (Lun,99002)
       99002 FORMAT (/' DFC PASSED TEST 1')
     ELSE
       Ipass = 0
       fatal = .TRUE.
-      IF ( Kprint>=2 ) WRITE (Lun,99003)
+      IF( Kprint>=2 ) WRITE (Lun,99003)
       99003 FORMAT (/' DFC FAILED TEST 1')
     END IF
     !
-    IF ( (fatal.AND.Kprint>=2).OR.Kprint>=3 ) THEN
+    IF( (fatal .AND. Kprint>=2) .OR. Kprint>=3 ) THEN
       CALL DVOUT(ndata,coefck,'(/'' PREDICTED COEFFICIENTS OF THE B-SPLINE '//&
         'FROM SAMPLE'')',idigit)
       CALL DVOUT(ndata,coeff,'(/'' COEFFICIENTS OF THE B-SPLINE COMPUTED '//&
@@ -957,18 +953,18 @@ CONTAINS
     DO i = 1, nval
       diff = MAX(diff,ABS(v(i,2)-check(i)))
     END DO
-    IF ( diff<=tol ) THEN
+    IF( diff<=tol ) THEN
       fatal = .FALSE.
-      IF ( Kprint>=3 ) WRITE (Lun,99004)
+      IF( Kprint>=3 ) WRITE (Lun,99004)
       99004 FORMAT (/' DFC (AND DBVALU) PASSED TEST 2')
     ELSE
       Ipass = 0
       fatal = .TRUE.
-      IF ( Kprint>=2 ) WRITE (Lun,99005)
+      IF( Kprint>=2 ) WRITE (Lun,99005)
       99005 FORMAT (/' DFC (AND DBVALU) FAILED TEST 2')
     END IF
     !
-    IF ( (fatal.AND.Kprint>=2).OR.Kprint>=3 ) THEN
+    IF( (fatal .AND. Kprint>=2) .OR. Kprint>=3 ) THEN
       !
       !       Print these values.
       !
@@ -982,7 +978,7 @@ CONTAINS
     !     Trigger error conditions.
     !
     CALL XGETF(kontrl)
-    IF ( Kprint<=2 ) THEN
+    IF( Kprint<=2 ) THEN
       CALL XSETF(0)
     ELSE
       CALL XSETF(1)
@@ -990,70 +986,69 @@ CONTAINS
     fatal = .FALSE.
     CALL XERCLR
     !
-    IF ( Kprint>=3 ) WRITE (Lun,99007)
+    IF( Kprint>=3 ) WRITE (Lun,99007)
     99007 FORMAT (/' TRIGGER 6 ERROR MESSAGES',/)
     !
     CALL DFC(ndata,xdata,ydata,sddata,0,nbkpt,bkpt,nconst,xconst,yconst,&
       nderiv,mode,coeff,w,iw)
-    IF ( NUMXER(nerr)/=2 ) fatal = .TRUE.
+    IF( NUMXER(nerr)/=2 ) fatal = .TRUE.
     CALL XERCLR
     !
     CALL DFC(ndata,xdata,ydata,sddata,nord,0,bkpt,nconst,xconst,yconst,nderiv,&
       mode,coeff,w,iw)
-    IF ( NUMXER(nerr)/=2 ) fatal = .TRUE.
+    IF( NUMXER(nerr)/=2 ) fatal = .TRUE.
     CALL XERCLR
     !
     CALL DFC(-1,xdata,ydata,sddata,nord,nbkpt,bkpt,nconst,xconst,yconst,&
       nderiv,mode,coeff,w,iw)
-    IF ( NUMXER(nerr)/=2 ) fatal = .TRUE.
+    IF( NUMXER(nerr)/=2 ) fatal = .TRUE.
     CALL XERCLR
     !
     mode = 0
     CALL DFC(ndata,xdata,ydata,sddata,nord,nbkpt,bkpt,nconst,xconst,yconst,&
       nderiv,mode,coeff,w,iw)
-    IF ( NUMXER(nerr)/=2 ) fatal = .TRUE.
+    IF( NUMXER(nerr)/=2 ) fatal = .TRUE.
     CALL XERCLR
     !
     iw(1) = 10
     CALL DFC(ndata,xdata,ydata,sddata,nord,nbkpt,bkpt,nconst,xconst,yconst,&
       nderiv,mode,coeff,w,iw)
-    IF ( NUMXER(nerr)/=2 ) fatal = .TRUE.
+    IF( NUMXER(nerr)/=2 ) fatal = .TRUE.
     CALL XERCLR
     !
     iw(1) = 529
     iw(2) = 2
     CALL DFC(ndata,xdata,ydata,sddata,nord,nbkpt,bkpt,nconst,xconst,yconst,&
       nderiv,mode,coeff,w,iw)
-    IF ( NUMXER(nerr)/=2 ) fatal = .TRUE.
+    IF( NUMXER(nerr)/=2 ) fatal = .TRUE.
     CALL XERCLR
     !
     !     Restore KONTRL and check to see if the tests of error detection
     !     passed.
     !
     CALL XSETF(kontrl)
-    IF ( fatal ) THEN
+    IF( fatal ) THEN
       Ipass = 0
-      IF ( Kprint>=2 ) THEN
+      IF( Kprint>=2 ) THEN
         WRITE (Lun,99008)
         99008 FORMAT (' AT LEAST ONE INCORRECT ARGUMENT TEST FAILED')
       END IF
-    ELSEIF ( Kprint>=3 ) THEN
+    ELSEIF( Kprint>=3 ) THEN
       WRITE (Lun,99009)
       99009 FORMAT (' ALL INCORRECT ARGUMENT TESTS PASSED')
     END IF
     !
     !     Print PASS/FAIL message.
     !
-    IF ( Ipass==1.AND.Kprint>=2 ) WRITE (Lun,99010)
+    IF( Ipass==1 .AND. Kprint>=2 ) WRITE (Lun,99010)
     99010 FORMAT (/' ****************DFC PASSED ALL TESTS*****************')
-    IF ( Ipass==0.AND.Kprint>=1 ) WRITE (Lun,99011)
+    IF( Ipass==0 .AND. Kprint>=1 ) WRITE (Lun,99011)
     99011 FORMAT (/' ***************DFC FAILED SOME TESTS*****************')
     RETURN
   END SUBROUTINE DFCQX
   !** DFCN1
   SUBROUTINE DFCN1(Iflag,M,N,X,Fvec,Fjac,Ldfjac)
-    !>
-    !  Subsidiary to DNLS1Q.
+    !> Subsidiary to DNLS1Q.
     !***
     ! **Library:**   SLATEC
     !***
@@ -1092,7 +1087,7 @@ CONTAINS
     !     .. Data statements ..
     REAL(DP), PARAMETER :: two = 2.0D0
     !* FIRST EXECUTABLE STATEMENT  DFCN1
-    IF ( Iflag/=1 ) RETURN
+    IF( Iflag/=1 ) RETURN
     DO i = 1, M
       temp = i
       Fvec(i) = two + two*temp - EXP(temp*X(1)) - EXP(temp*X(2))
@@ -1100,8 +1095,7 @@ CONTAINS
   END SUBROUTINE DFCN1
   !** DFCN2
   SUBROUTINE DFCN2(Iflag,M,N,X,Fvec,Fjac,Ldfjac)
-    !>
-    !  Subsidiary to DNLS1Q.
+    !> Subsidiary to DNLS1Q.
     !***
     ! **Library:**   SLATEC
     !***
@@ -1139,11 +1133,11 @@ CONTAINS
     !     .. Data statements ..
     REAL(DP), PARAMETER :: two = 2.0D0
     !* FIRST EXECUTABLE STATEMENT  DFCN2
-    IF ( Iflag==0 ) RETURN
+    IF( Iflag==0 ) RETURN
     !
     !     Should we evaluate function or Jacobian?
     !
-    IF ( Iflag==1 ) THEN
+    IF( Iflag==1 ) THEN
       !
       !       Evaluate functions.
       !
@@ -1155,7 +1149,7 @@ CONTAINS
       !
       !       Evaluate Jacobian.
       !
-      IF ( Iflag/=2 ) RETURN
+      IF( Iflag/=2 ) RETURN
       DO i = 1, M
         temp = i
         Fjac(i,1) = -temp*EXP(temp*X(1))
@@ -1165,8 +1159,7 @@ CONTAINS
   END SUBROUTINE DFCN2
   !** DFCN3
   SUBROUTINE DFCN3(Iflag,M,N,X,Fvec,Fjrow,Nrow)
-    !>
-    !  Subsidiary to DNLS1Q.
+    !> Subsidiary to DNLS1Q.
     !***
     ! **Library:**   SLATEC
     !***
@@ -1198,17 +1191,17 @@ CONTAINS
     REAL(DP) :: Fjrow(:,:), Fvec(M), X(N)
     !     .. Local Scalars ..
     REAL(DP) :: temp
-    INTEGER i
+    INTEGER :: i
     !     .. Intrinsic Functions ..
     INTRINSIC EXP
     !     .. Data statements ..
     REAL(DP), PARAMETER :: two = 2.0D0
     !* FIRST EXECUTABLE STATEMENT  DFCN3
-    IF ( Iflag==0 ) RETURN
+    IF( Iflag==0 ) RETURN
     !
     !     Should we evaluate functions or Jacobian?
     !
-    IF ( Iflag==1 ) THEN
+    IF( Iflag==1 ) THEN
       !
       !       Evaluate functions.
       !
@@ -1220,7 +1213,7 @@ CONTAINS
       !
       !       Evaluate one row of Jacobian.
       !
-      IF ( Iflag/=3 ) RETURN
+      IF( Iflag/=3 ) RETURN
       temp = Nrow
       Fjrow(1,1) = -temp*EXP(temp*X(1))
       Fjrow(2,1) = -temp*EXP(temp*X(2))
@@ -1233,8 +1226,7 @@ PROGRAM TEST53
   USE slatec, ONLY : I1MACH, XSETF, XSETUN, XERMAX
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
-  !>
-  !  Driver for testing SLATEC subprograms
+  !> Driver for testing SLATEC subprograms
   !***
   ! **Library:**   SLATEC
   !***
@@ -1283,7 +1275,7 @@ PROGRAM TEST53
   !   890618  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900524  Cosmetic changes to code.  (WRB)
-  INTEGER ipass, kprint, lin, lun, nfail
+  INTEGER :: ipass, kprint, lin, lun, nfail
   !* FIRST EXECUTABLE STATEMENT  TEST53
   lun = I1MACH(2)
   lin = I1MACH(1)
@@ -1294,7 +1286,7 @@ PROGRAM TEST53
   CALL GET_ARGUMENT(kprint)
   CALL XERMAX(1000)
   CALL XSETUN(lun)
-  IF ( kprint<=1 ) THEN
+  IF( kprint<=1 ) THEN
     CALL XSETF(0)
   ELSE
     CALL XSETF(1)
@@ -1303,21 +1295,21 @@ PROGRAM TEST53
   !     Test DNLS1E and DNLS1
   !
   CALL DNLS1Q(lun,kprint,ipass)
-  IF ( ipass==0 ) nfail = nfail + 1
+  IF( ipass==0 ) nfail = nfail + 1
   !
   !     Test DFC (also DBVALU and DCV)
   !
   CALL DFCQX(lun,kprint,ipass)
-  IF ( ipass==0 ) nfail = nfail + 1
+  IF( ipass==0 ) nfail = nfail + 1
   !
   !     Test DPOLFT (also DPCOEF and DPLVlU)
   !
   CALL DPFITT(lun,kprint,ipass)
-  IF ( ipass==0 ) nfail = nfail + 1
+  IF( ipass==0 ) nfail = nfail + 1
   !
   !     Write PASS or FAIL message
   !
-  IF ( nfail==0 ) THEN
+  IF( nfail==0 ) THEN
     WRITE (lun,99001)
     99001 FORMAT (/' --------------TEST53 PASSED ALL TESTS----------------')
   ELSE

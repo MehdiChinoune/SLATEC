@@ -1,7 +1,6 @@
 !** XGETUA
 SUBROUTINE XGETUA(Iunita,N)
-  !>
-  !  Return unit number(s) to which error messages are being
+  !> Return unit number(s) to which error messages are being
   !            sent.
   !***
   ! **Library:**   SLATEC (XERROR)
@@ -29,7 +28,7 @@ SUBROUTINE XGETUA(Iunita,N)
   !                default unit, as defined by the I1MACH machine
   !                constant routine.  Only IUNIT(1),...,IUNIT(N) are
   !                defined by XGETUA.  The values of IUNIT(N+1),...,
-  !                IUNIT(5) are not defined (for N .LT. 5) or altered
+  !                IUNIT(5) are not defined (for N < 5) or altered
   !                in any way by XGETUA.
   !        N     - the number of units to which copies of the
   !                error messages are being sent.  N will be in the
@@ -48,12 +47,12 @@ SUBROUTINE XGETUA(Iunita,N)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
-  INTEGER i, indexx, Iunita(5), N
+  INTEGER :: i, indexx, Iunita(5), N
   !* FIRST EXECUTABLE STATEMENT  XGETUA
   N = J4SAVE(5,0,.FALSE.)
   DO i = 1, N
     indexx = i + 4
-    IF ( i==1 ) indexx = 3
+    IF( i==1 ) indexx = 3
     Iunita(i) = J4SAVE(indexx,0,.FALSE.)
   END DO
 END SUBROUTINE XGETUA

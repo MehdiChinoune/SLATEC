@@ -1,7 +1,6 @@
 !** R9LN2R
 REAL(SP) FUNCTION R9LN2R(X)
-  !>
-  !  Evaluate LOG(1+X) from second order relative accuracy so
+  !> Evaluate LOG(1+X) from second order relative accuracy so
   !            that LOG(1+X) = X - X**2/2 + X**3*R9LN2R(X).
   !***
   ! **Library:**   SLATEC (FNLIB)
@@ -68,26 +67,26 @@ REAL(SP) FUNCTION R9LN2R(X)
     -.000000000000000713E0, .000000000000000100E0,-.000000000000000014E0 ]
   LOGICAL, SAVE :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  R9LN2R
-  IF ( first ) THEN
+  IF( first ) THEN
     ntln21 = INITS(ln21cs,26,0.1*eps)
     ntln22 = INITS(ln22cs,20,0.1*eps)
     first = .FALSE.
   END IF
   !
-  IF ( X<(-0.625).OR.X>0.8125 ) THEN
+  IF( X<(-0.625) .OR. X>0.8125 ) THEN
     !
-    IF ( X<xmin ) CALL XERMSG('R9LN2R',&
+    IF( X<xmin ) CALL XERMSG('R9LN2R',&
       'ANSWER LT HALF PRECISION BECAUSE X IS TOO NEAR -1',1,1)
-    IF ( X>xmax ) CALL XERMSG('R9LN2R',&
+    IF( X>xmax ) CALL XERMSG('R9LN2R',&
       'NO PRECISION IN ANSWER BECAUSE X IS TOO BIG',3,2)
-    IF ( X>xbig ) CALL XERMSG('R9LN2R',&
+    IF( X>xbig ) CALL XERMSG('R9LN2R',&
       'ANSWER LT HALF PRECISION BECAUSE X IS TOO BIG',2,1)
     !
     R9LN2R = (LOG(1.0+X)-X*(1.0-0.5*X))/X**3
     RETURN
   END IF
   !
-  IF ( X<0.0 ) THEN
+  IF( X<0.0 ) THEN
     R9LN2R = 0.375 + CSEVL(16.*X/5.+1.0,ln21cs,ntln21)
   ELSE
     R9LN2R = 0.375 + CSEVL(32.*X/13.-1.0,ln22cs,ntln22)

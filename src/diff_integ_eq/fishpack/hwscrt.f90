@@ -1,8 +1,7 @@
 !** HWSCRT
 SUBROUTINE HWSCRT(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
     Idimf,Pertrb,Ierror,W)
-  !>
-  !  Solves the standard five-point finite difference
+  !> Solves the standard five-point finite difference
   !            approximation to the Helmholtz equation in Cartesian
   !            coordinates.
   !***
@@ -33,7 +32,7 @@ SUBROUTINE HWSCRT(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   !             * * * * * *   On Input    * * * * * *
   !
   !     A,B
-  !       The range of X, i.e., A .LE. X .LE. B.  A must be less than B.
+  !       The range of X, i.e., A <= X <= B.  A must be less than B.
   !
   !     M
   !       The number of panels into which the interval (A,B) is
@@ -72,7 +71,7 @@ SUBROUTINE HWSCRT(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   !       When MBDCND has any other value BDB is a dummy variable.
   !
   !     C,D
-  !       The range of Y, i.e., C .LE. Y .LE. D.  C must be less than D.
+  !       The range of Y, i.e., C <= Y <= D.  C must be less than D.
   !
   !     N
   !       The number of panels into which the interval (C,D) is
@@ -112,7 +111,7 @@ SUBROUTINE HWSCRT(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   !
   !     ELMBDA
   !       The constant LAMBDA in the Helmholtz equation.  If
-  !       LAMBDA .GT. 0, a solution may not exist.  However, HWSCRT will
+  !       LAMBDA > 0, a solution may not exist.  However, HWSCRT will
   !       attempt to find a solution.
   !
   !     F
@@ -188,14 +187,14 @@ SUBROUTINE HWSCRT(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   !       for numbers 0 and 6, a solution is not attempted.
   !
   !       = 0  No error.
-  !       = 1  A .GE. B.
-  !       = 2  MBDCND .LT. 0 or MBDCND .GT. 4  .
-  !       = 3  C .GE. D.
-  !       = 4  N .LE. 3
-  !       = 5  NBDCND .LT. 0 or NBDCND .GT. 4  .
-  !       = 6  LAMBDA .GT. 0  .
-  !       = 7  IDIMF .LT. M+1  .
-  !       = 8  M .LE. 3
+  !       = 1  A >= B.
+  !       = 2  MBDCND < 0 or MBDCND > 4  .
+  !       = 3  C >= D.
+  !       = 4  N <= 3
+  !       = 5  NBDCND < 0 or NBDCND > 4  .
+  !       = 6  LAMBDA > 0  .
+  !       = 7  IDIMF < M+1  .
+  !       = 8  M <= 3
   !
   !       Since this is the only means of indicating a possibly incorrect
   !       call to HWSCRT, the user should test IERROR after the call.
@@ -297,17 +296,17 @@ SUBROUTINE HWSCRT(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
     mstm1, mstop, munk, np, np1, nperod, nskip, nsp1, nstart, nstm1, nstop, nunk
   !* FIRST EXECUTABLE STATEMENT  HWSCRT
   Ierror = 0
-  IF ( A>=B ) Ierror = 1
-  IF ( Mbdcnd<0.OR.Mbdcnd>4 ) Ierror = 2
-  IF ( C>=D ) Ierror = 3
-  IF ( N<=3 ) Ierror = 4
-  IF ( Nbdcnd<0.OR.Nbdcnd>4 ) Ierror = 5
-  IF ( Idimf<M+1 ) Ierror = 7
-  IF ( M<=3 ) Ierror = 8
-  IF ( Ierror/=0 ) RETURN
+  IF( A>=B ) Ierror = 1
+  IF( Mbdcnd<0 .OR. Mbdcnd>4 ) Ierror = 2
+  IF( C>=D ) Ierror = 3
+  IF( N<=3 ) Ierror = 4
+  IF( Nbdcnd<0 .OR. Nbdcnd>4 ) Ierror = 5
+  IF( Idimf<M+1 ) Ierror = 7
+  IF( M<=3 ) Ierror = 8
+  IF( Ierror/=0 ) RETURN
   nperod = Nbdcnd
   mperod = 0
-  IF ( Mbdcnd>0 ) mperod = 1
+  IF( Mbdcnd>0 ) mperod = 1
   deltax = (B-A)/M
   twdelx = 2./deltax
   delxsq = 1./deltax**2
@@ -366,7 +365,7 @@ SUBROUTINE HWSCRT(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
     F(1,j) = F(1,j) + Bda(j)*twdelx
   END DO
   400 CONTINUE
-  IF ( mskip==2 ) THEN
+  IF( mskip==2 ) THEN
     DO j = nstart, nstop
       F(mp1,j) = F(mp1,j) - Bdb(j)*twdelx
     END DO
@@ -391,7 +390,7 @@ SUBROUTINE HWSCRT(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
         F(i,2) = F(i,2) - F(i,1)*delysq
       END DO
   END SELECT
-  IF ( nskip==2 ) THEN
+  IF( nskip==2 ) THEN
     DO i = mstart, mstop
       F(i,np1) = F(i,np1) - Bdd(i)*twdely
     END DO
@@ -424,7 +423,7 @@ SUBROUTINE HWSCRT(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
     j = id3 + i
     W(j) = s
   END DO
-  IF ( mp/=1 ) THEN
+  IF( mp/=1 ) THEN
     W(1) = 0.
     W(id4) = 0.
   END IF
@@ -439,17 +438,17 @@ SUBROUTINE HWSCRT(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
       W(id2) = st2
   END SELECT
   Pertrb = 0.
-  IF ( Elmbda<0 ) THEN
-  ELSEIF ( Elmbda==0 ) THEN
-    IF ( (Nbdcnd==0.OR.Nbdcnd==3).AND.(Mbdcnd==0.OR.Mbdcnd==3) ) THEN
+  IF( Elmbda<0 ) THEN
+  ELSEIF( Elmbda==0 ) THEN
+    IF( (Nbdcnd==0 .OR. Nbdcnd==3) .AND. (Mbdcnd==0 .OR. Mbdcnd==3) ) THEN
       !
       !     FOR SINGULAR PROBLEMS MUST ADJUST DATA TO INSURE THAT A SOLUTION
       !     WILL EXIST.
       !
       a1 = 1.
       a2 = 1.
-      IF ( Nbdcnd==3 ) a2 = 2.
-      IF ( Mbdcnd==3 ) a1 = 2.
+      IF( Nbdcnd==3 ) a2 = 2.
+      IF( Mbdcnd==3 ) a1 = 2.
       s1 = 0.
       msp1 = mstart + 1
       mstm1 = mstop - 1
@@ -490,15 +489,15 @@ SUBROUTINE HWSCRT(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   !
   !     FILL IN IDENTICAL VALUES WHEN HAVE PERIODIC BOUNDARY CONDITIONS.
   !
-  IF ( Nbdcnd==0 ) THEN
+  IF( Nbdcnd==0 ) THEN
     DO i = mstart, mstop
       F(i,np1) = F(i,1)
     END DO
   END IF
-  IF ( Mbdcnd==0 ) THEN
+  IF( Mbdcnd==0 ) THEN
     DO j = nstart, nstop
       F(mp1,j) = F(1,j)
     END DO
-    IF ( Nbdcnd==0 ) F(mp1,np1) = F(1,np1)
+    IF( Nbdcnd==0 ) F(mp1,np1) = F(1,np1)
   END IF
 END SUBROUTINE HWSCRT

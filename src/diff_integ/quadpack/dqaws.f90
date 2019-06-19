@@ -1,13 +1,12 @@
 !** DQAWS
 SUBROUTINE DQAWS(F,A,B,Alfa,Beta,Integr,Epsabs,Epsrel,Result,Abserr,Neval,&
     Ier,Limit,Lenw,Last,Iwork,Work)
-  !>
-  !  The routine calculates an approximation result to a given
+  !> The routine calculates an approximation result to a given
   !            definite integral I = Integral of F*W over (A,B),
   !            (where W shows a singular behaviour at the end points
   !            see parameter INTEGR).
   !            Hopefully satisfying following claim for accuracy
-  !            ABS(I-RESULT).LE.MAX(EPSABS,EPSREL*ABS(I)).
+  !            ABS(I-RESULT)<=MAX(EPSABS,EPSREL*ABS(I)).
   !***
   ! **Library:**   SLATEC (QUADPACK)
   !***
@@ -44,17 +43,17 @@ SUBROUTINE DQAWS(F,A,B,Alfa,Beta,Integr,Epsabs,Epsrel,Result,Abserr,Neval,&
   !                     Lower limit of integration
   !
   !            B      - Double precision
-  !                     Upper limit of integration, B.GT.A
-  !                     If B.LE.A, the routine will end with IER = 6.
+  !                     Upper limit of integration, B>A
+  !                     If B<=A, the routine will end with IER = 6.
   !
   !            ALFA   - Double precision
-  !                     Parameter in the integrand function, ALFA.GT.(-1)
-  !                     If ALFA.LE.(-1), the routine will end with
+  !                     Parameter in the integrand function, ALFA>(-1)
+  !                     If ALFA<=(-1), the routine will end with
   !                     IER = 6.
   !
   !            BETA   - Double precision
-  !                     Parameter in the integrand function, BETA.GT.(-1)
-  !                     If BETA.LE.(-1), the routine will end with
+  !                     Parameter in the integrand function, BETA>(-1)
+  !                     If BETA<=(-1), the routine will end with
   !                     IER = 6.
   !
   !            INTEGR - Integer
@@ -63,15 +62,15 @@ SUBROUTINE DQAWS(F,A,B,Alfa,Beta,Integr,Epsabs,Epsrel,Result,Abserr,Neval,&
   !                     = 2  (X-A)**ALFA*(B-X)**BETA*LOG(X-A)
   !                     = 3  (X-A)**ALFA*(B-X)**BETA*LOG(B-X)
   !                     = 4  (X-A)**ALFA*(B-X)**BETA*LOG(X-A)*LOG(B-X)
-  !                     If INTEGR.LT.1 or INTEGR.GT.4, the routine
+  !                     If INTEGR<1 or INTEGR>4, the routine
   !                     will end with IER = 6.
   !
   !            EPSABS - Double precision
   !                     Absolute accuracy requested
   !            EPSREL - Double precision
   !                     Relative accuracy requested
-  !                     If  EPSABS.LE.0
-  !                     and EPSREL.LT.MAX(50*REL.MACH.ACC.,0.5D-28),
+  !                     If  EPSABS<=0
+  !                     and EPSREL<MAX(50*REL.MACH.ACC.,0.5D-28),
   !                     the routine will end with IER = 6.
   !
   !         ON RETURN
@@ -89,7 +88,7 @@ SUBROUTINE DQAWS(F,A,B,Alfa,Beta,Integr,Epsabs,Epsrel,Result,Abserr,Neval,&
   !                     IER = 0 Normal and reliable termination of the
   !                             routine. It is assumed that the requested
   !                             accuracy has been achieved.
-  !                     IER.GT.0 Abnormal termination of the routine
+  !                     IER>0 Abnormal termination of the routine
   !                             The estimates for the integral and error
   !                             are less reliable. It is assumed that the
   !                             requested accuracy has not been achieved.
@@ -117,11 +116,11 @@ SUBROUTINE DQAWS(F,A,B,Alfa,Beta,Integr,Epsabs,Epsrel,Result,Abserr,Neval,&
   !                             at some points of the integration
   !                             interval.
   !                         = 6 The input is invalid, because
-  !                             B.LE.A or ALFA.LE.(-1) or BETA.LE.(-1) or
-  !                             or INTEGR.LT.1 or INTEGR.GT.4 or
-  !                             (EPSABS.LE.0 and
-  !                              EPSREL.LT.MAX(50*REL.MACH.ACC.,0.5D-28))
-  !                             or LIMIT.LT.2 or LENW.LT.LIMIT*4.
+  !                             B<=A or ALFA<=(-1) or BETA<=(-1) or
+  !                             or INTEGR<1 or INTEGR>4 or
+  !                             (EPSABS<=0 and
+  !                              EPSREL<MAX(50*REL.MACH.ACC.,0.5D-28))
+  !                             or LIMIT<2 or LENW<LIMIT*4.
   !                             RESULT, ABSERR, NEVAL, LAST are set to
   !                             zero. Except when LENW or LIMIT is invalid
   !                             IWORK(1), WORK(LIMIT*2+1) and
@@ -133,13 +132,13 @@ SUBROUTINE DQAWS(F,A,B,Alfa,Beta,Integr,Epsabs,Epsrel,Result,Abserr,Neval,&
   !                     Dimensioning parameter for IWORK
   !                     LIMIT determines the maximum number of
   !                     subintervals in the partition of the given
-  !                     integration interval (A,B), LIMIT.GE.2.
-  !                     If LIMIT.LT.2, the routine will end with IER = 6.
+  !                     integration interval (A,B), LIMIT>=2.
+  !                     If LIMIT<2, the routine will end with IER = 6.
   !
   !            LENW   - Integer
   !                     Dimensioning parameter for WORK
   !                     LENW must be at least LIMIT*4.
-  !                     If LENW.LT.LIMIT*4, the routine will end
+  !                     If LENW<LIMIT*4, the routine will end
   !                     with IER = 6.
   !
   !            LAST   - Integer
@@ -155,7 +154,7 @@ SUBROUTINE DQAWS(F,A,B,Alfa,Beta,Integr,Epsabs,Epsrel,Result,Abserr,Neval,&
   !                     to the error estimates over the subintervals,
   !                     such that WORK(LIMIT*3+IWORK(1)), ...,
   !                     WORK(LIMIT*3+IWORK(K)) form a decreasing
-  !                     sequence with K = LAST if LAST.LE.(LIMIT/2+2),
+  !                     sequence with K = LAST if LAST<=(LIMIT/2+2),
   !                     and K = LIMIT+1-LAST otherwise
   !
   !            WORK   - Double precision
@@ -203,7 +202,7 @@ SUBROUTINE DQAWS(F,A,B,Alfa,Beta,Integr,Epsabs,Epsrel,Result,Abserr,Neval,&
   Last = 0
   Result = 0.0D+00
   Abserr = 0.0D+00
-  IF ( Limit>=2.AND.Lenw>=Limit*4 ) THEN
+  IF( Limit>=2 .AND. Lenw>=Limit*4 ) THEN
     !
     !         PREPARE CALL FOR DQAWSE.
     !
@@ -218,6 +217,6 @@ SUBROUTINE DQAWS(F,A,B,Alfa,Beta,Integr,Epsabs,Epsrel,Result,Abserr,Neval,&
     !
     lvl = 0
   END IF
-  IF ( Ier==6 ) lvl = 1
-  IF ( Ier/=0 ) CALL XERMSG('DQAWS','ABNORMAL RETURN',Ier,lvl)
+  IF( Ier==6 ) lvl = 1
+  IF( Ier/=0 ) CALL XERMSG('DQAWS','ABNORMAL RETURN',Ier,lvl)
 END SUBROUTINE DQAWS

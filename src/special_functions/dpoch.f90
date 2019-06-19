@@ -1,7 +1,6 @@
 !** DPOCH
 REAL(DP) FUNCTION DPOCH(A,X)
-  !>
-  !  Evaluate a generalization of Pochhammer's symbol.
+  !> Evaluate a generalization of Pochhammer's symbol.
   !***
   ! **Library:**   SLATEC (FNLIB)
   !***
@@ -36,24 +35,24 @@ REAL(DP) FUNCTION DPOCH(A,X)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900727  Added EXTERNAL statement.  (WRB)
   USE service, ONLY : XERMSG
-  INTEGER i, ia, n
+  INTEGER :: i, ia, n
   REAL(DP) :: A, X, absa, absax, alnga, alngax, ax, b, sgnga, sgngax
   REAL(DP), PARAMETER :: pi = 3.141592653589793238462643383279503D0
   !* FIRST EXECUTABLE STATEMENT  DPOCH
   ax = A + X
-  IF ( ax<=0.0D0 ) THEN
-    IF ( AINT(ax)==ax ) THEN
+  IF( ax<=0.0D0 ) THEN
+    IF( AINT(ax)==ax ) THEN
       !
-      IF ( A>0.0D0.OR.AINT(A)/=A ) CALL XERMSG('DPOCH',&
+      IF( A>0.0D0 .OR. AINT(A)/=A ) CALL XERMSG('DPOCH',&
         'A+X IS NON-POSITIVE INTEGER BUT A IS NOT',2,2)
       !
       ! WE KNOW HERE THAT BOTH A+X AND A ARE NON-POSITIVE INTEGERS.
       !
       DPOCH = 1.0D0
-      IF ( X==0.D0 ) RETURN
+      IF( X==0.D0 ) RETURN
       !
       n = INT( X )
-      IF ( MIN(A+X,A)<(-20.0D0) ) THEN
+      IF( MIN(A+X,A)<(-20.0D0) ) THEN
         !
         DPOCH = (-1.0D0)&
           **n*EXP((A-0.5D0)*DLNREL(X/(A-1.0D0))+X*LOG(-A+1.0D0-X)&
@@ -71,18 +70,18 @@ REAL(DP) FUNCTION DPOCH(A,X)
   ! A+X IS NOT ZERO OR A NEGATIVE INTEGER.
   !
   DPOCH = 0.0D0
-  IF ( A<=0.0D0 .AND. AINT(A)==A ) RETURN
+  IF( A<=0.0D0 .AND. AINT(A)==A ) RETURN
   !
   n = INT( ABS(X) )
-  IF ( REAL( n, DP )/=X .OR. n>20 ) THEN
+  IF( REAL( n, DP )/=X .OR. n>20 ) THEN
     !
     absax = ABS(A+X)
     absa = ABS(A)
-    IF ( MAX(absax,absa)<=20.0D0 ) THEN
+    IF( MAX(absax,absa)<=20.0D0 ) THEN
       DPOCH = GAMMA(A+X)*DGAMR(A)
       RETURN
       !
-    ELSEIF ( ABS(X)>0.5D0*absa ) THEN
+    ELSEIF( ABS(X)>0.5D0*absa ) THEN
       !
       CALL DLGAMS(A+X,alngax,sgngax)
       CALL DLGAMS(A,alnga,sgnga)
@@ -94,7 +93,7 @@ REAL(DP) FUNCTION DPOCH(A,X)
     ! X IS A SMALL NON-POSITIVE INTEGER, PRESUMMABLY A COMMON CASE.
     !
     DPOCH = 1.0D0
-    IF ( n==0 ) RETURN
+    IF( n==0 ) RETURN
     DO i = 1, n
       DPOCH = DPOCH*(A+i-1)
     END DO
@@ -107,9 +106,9 @@ REAL(DP) FUNCTION DPOCH(A,X)
   ! SIN(PI*A)/SIN(PI*(A+X))
   !
   b = A
-  IF ( b<0.0D0 ) b = -A - X + 1.0D0
+  IF( b<0.0D0 ) b = -A - X + 1.0D0
   DPOCH = EXP((b-0.5D0)*DLNREL(X/b)+X*LOG(b+X)-X+D9LGMC(b+X)-D9LGMC(b))
-  IF ( A<0.0D0.AND.DPOCH/=0.0D0 )&
+  IF( A<0.0D0 .AND. DPOCH/=0.0D0 )&
     DPOCH = DPOCH/(COS(pi*X)+DCOT(pi*A)*SIN(pi*X))
   RETURN
 END FUNCTION DPOCH

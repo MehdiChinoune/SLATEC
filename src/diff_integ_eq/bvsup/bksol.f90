@@ -1,7 +1,6 @@
 !** BKSOL
 SUBROUTINE BKSOL(N,A,X)
-  !>
-  !  Subsidiary to BVSUP
+  !> Subsidiary to BVSUP
   !***
   ! **Library:**   SLATEC
   !***
@@ -39,7 +38,7 @@ SUBROUTINE BKSOL(N,A,X)
   !* FIRST EXECUTABLE STATEMENT  BKSOL
   m = (N*(N+1))/2
   X(N) = X(N)*A(m)
-  IF ( N/=1 ) THEN
+  IF( N/=1 ) THEN
     DO k = 1, N - 1
       j = N - k
       m = m - k - 1

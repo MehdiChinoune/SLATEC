@@ -1,7 +1,6 @@
 !** CCBRT
 COMPLEX(SP) FUNCTION CCBRT(Z)
-  !>
-  !  Compute the cube root.
+  !> Compute the cube root.
   !***
   ! **Library:**   SLATEC (FNLIB)
   !***
@@ -16,7 +15,7 @@ COMPLEX(SP) FUNCTION CCBRT(Z)
   ! **Description:**
   !
   ! CCBRT(Z) calculates the complex cube root of Z.  The principal root
-  ! for which -PI .LT. arg(Z) .LE. +PI is returned.
+  ! for which -PI < arg(Z) <= +PI is returned.
   !
   !***
   ! **References:**  (NONE)
@@ -29,8 +28,8 @@ COMPLEX(SP) FUNCTION CCBRT(Z)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-  REAL(SP) r, theta
-  COMPLEX(SP) Z
+  REAL(SP) :: r, theta
+  COMPLEX(SP) :: Z
   !* FIRST EXECUTABLE STATEMENT  CCBRT
   theta = CARG(Z)/3.0
   r = CBRT(ABS(Z))

@@ -1,7 +1,6 @@
 !** QRFAC
 SUBROUTINE QRFAC(M,N,A,Lda,Pivot,Ipvt,Lipvt,Sigma,Acnorm,Wa)
-  !>
-  !  Subsidiary to SNLS1, SNLS1E, SNSQ and SNSQE
+  !> Subsidiary to SNLS1, SNLS1E, SNSQ and SNSQE
   !***
   ! **Library:**   SLATEC
   !***
@@ -102,22 +101,22 @@ SUBROUTINE QRFAC(M,N,A,Lda,Pivot,Ipvt,Lipvt,Sigma,Acnorm,Wa)
     Acnorm(j) = ENORM(M,A(1,j))
     Sigma(j) = Acnorm(j)
     Wa(j) = Sigma(j)
-    IF ( Pivot ) Ipvt(j) = j
+    IF( Pivot ) Ipvt(j) = j
   END DO
   !
   !     REDUCE A TO R WITH HOUSEHOLDER TRANSFORMATIONS.
   !
   minmn = MIN(M,N)
   DO j = 1, minmn
-    IF ( Pivot ) THEN
+    IF( Pivot ) THEN
       !
       !        BRING THE COLUMN OF LARGEST NORM INTO THE PIVOT POSITION.
       !
       kmax = j
       DO k = j, N
-        IF ( Sigma(k)>Sigma(kmax) ) kmax = k
+        IF( Sigma(k)>Sigma(kmax) ) kmax = k
       END DO
-      IF ( kmax/=j ) THEN
+      IF( kmax/=j ) THEN
         DO i = 1, M
           temp = A(i,j)
           A(i,j) = A(i,kmax)
@@ -135,8 +134,8 @@ SUBROUTINE QRFAC(M,N,A,Lda,Pivot,Ipvt,Lipvt,Sigma,Acnorm,Wa)
     !        J-TH COLUMN OF A TO A MULTIPLE OF THE J-TH UNIT VECTOR.
     !
     ajnorm = ENORM(M-j+1,A(j,j))
-    IF ( ajnorm/=zero ) THEN
-      IF ( A(j,j)<zero ) ajnorm = -ajnorm
+    IF( ajnorm/=zero ) THEN
+      IF( A(j,j)<zero ) ajnorm = -ajnorm
       DO i = j, M
         A(i,j) = A(i,j)/ajnorm
       END DO
@@ -146,7 +145,7 @@ SUBROUTINE QRFAC(M,N,A,Lda,Pivot,Ipvt,Lipvt,Sigma,Acnorm,Wa)
       !        AND UPDATE THE NORMS.
       !
       jp1 = j + 1
-      IF ( N>=jp1 ) THEN
+      IF( N>=jp1 ) THEN
         DO k = jp1, N
           summ = zero
           DO i = j, M
@@ -156,10 +155,10 @@ SUBROUTINE QRFAC(M,N,A,Lda,Pivot,Ipvt,Lipvt,Sigma,Acnorm,Wa)
           DO i = j, M
             A(i,k) = A(i,k) - temp*A(i,j)
           END DO
-          IF ( .NOT.(.NOT.Pivot.OR.Sigma(k)==zero) ) THEN
+          IF( .NOT. ( .NOT. Pivot .OR. Sigma(k)==zero) ) THEN
             temp = A(j,k)/Sigma(k)
             Sigma(k) = Sigma(k)*SQRT(MAX(zero,one-temp**2))
-            IF ( p05*(Sigma(k)/Wa(k))**2<=epsmch ) THEN
+            IF( p05*(Sigma(k)/Wa(k))**2<=epsmch ) THEN
               Sigma(k) = ENORM(M-j,A(jp1,k))
               Wa(k) = Sigma(k)
             END IF

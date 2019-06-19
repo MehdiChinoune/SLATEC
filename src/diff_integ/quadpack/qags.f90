@@ -1,11 +1,10 @@
 !** QAGS
 SUBROUTINE QAGS(F,A,B,Epsabs,Epsrel,Result,Abserr,Neval,Ier,Limit,Lenw,&
     Last,Iwork,Work)
-  !>
-  !  The routine calculates an approximation result to a given
+  !> The routine calculates an approximation result to a given
   !            Definite integral  I = Integral of F over (A,B),
   !            Hopefully satisfying following claim for accuracy
-  !            ABS(I-RESULT).LE.MAX(EPSABS,EPSREL*ABS(I)).
+  !            ABS(I-RESULT)<=MAX(EPSABS,EPSREL*ABS(I)).
   !***
   ! **Library:**   SLATEC (QUADPACK)
   !***
@@ -48,8 +47,8 @@ SUBROUTINE QAGS(F,A,B,Epsabs,Epsrel,Result,Abserr,Neval,Ier,Limit,Lenw,&
   !                     Absolute accuracy requested
   !            EPSREL - Real
   !                     Relative accuracy requested
-  !                     If  EPSABS.LE.0
-  !                     And EPSREL.LT.MAX(50*REL.MACH.ACC.,0.5D-28),
+  !                     If  EPSABS<=0
+  !                     And EPSREL<MAX(50*REL.MACH.ACC.,0.5D-28),
   !                     The routine will end with IER = 6.
   !
   !         ON RETURN
@@ -67,7 +66,7 @@ SUBROUTINE QAGS(F,A,B,Epsabs,Epsrel,Result,Abserr,Neval,Ier,Limit,Lenw,&
   !                     IER = 0 Normal and reliable termination of the
   !                             routine. It is assumed that the requested
   !                             accuracy has been achieved.
-  !                     IER.GT.0 Abnormal termination of the routine
+  !                     IER>0 Abnormal termination of the routine
   !                             The estimates for integral and error are
   !                             less reliable. It is assumed that the
   !                             requested accuracy has not been achieved.
@@ -107,9 +106,9 @@ SUBROUTINE QAGS(F,A,B,Epsabs,Epsrel,Result,Abserr,Neval,Ier,Limit,Lenw,&
   !                             divergence can occur with any other value
   !                             of IER.
   !                         = 6 The input is invalid, because
-  !                             (EPSABS.LE.0 AND
-  !                              EPSREL.LT.MAX(50*REL.MACH.ACC.,0.5D-28)
-  !                             OR LIMIT.LT.1 OR LENW.LT.LIMIT*4.
+  !                             (EPSABS<=0 AND
+  !                              EPSREL<MAX(50*REL.MACH.ACC.,0.5D-28)
+  !                             OR LIMIT<1 OR LENW<LIMIT*4.
   !                             RESULT, ABSERR, NEVAL, LAST are set to
   !                             zero.  Except when LIMIT or LENW is
   !                             invalid, IWORK(1), WORK(LIMIT*2+1) and
@@ -121,13 +120,13 @@ SUBROUTINE QAGS(F,A,B,Epsabs,Epsrel,Result,Abserr,Neval,Ier,Limit,Lenw,&
   !                    Dimensioning parameter for IWORK
   !                    LIMIT determines the maximum number of subintervals
   !                    in the partition of the given integration interval
-  !                    (A,B), LIMIT.GE.1.
-  !                    IF LIMIT.LT.1, the routine will end with IER = 6.
+  !                    (A,B), LIMIT>=1.
+  !                    IF LIMIT<1, the routine will end with IER = 6.
   !
   !            LENW  - Integer
   !                    Dimensioning parameter for WORK
   !                    LENW must be at least LIMIT*4.
-  !                    If LENW.LT.LIMIT*4, the routine will end
+  !                    If LENW<LIMIT*4, the routine will end
   !                    with IER = 6.
   !
   !            LAST  - Integer
@@ -143,7 +142,7 @@ SUBROUTINE QAGS(F,A,B,Epsabs,Epsrel,Result,Abserr,Neval,Ier,Limit,Lenw,&
   !                    to the error estimates over the subintervals
   !                    such that WORK(LIMIT*3+IWORK(1)),... ,
   !                    WORK(LIMIT*3+IWORK(K)) form a decreasing
-  !                    sequence, with K = LAST IF LAST.LE.(LIMIT/2+2),
+  !                    sequence, with K = LAST IF LAST<=(LIMIT/2+2),
   !                    and K = LIMIT+1-LAST otherwise
   !
   !            WORK  - Real
@@ -189,7 +188,7 @@ SUBROUTINE QAGS(F,A,B,Epsabs,Epsrel,Result,Abserr,Neval,Ier,Limit,Lenw,&
   Last = 0
   Result = 0.0E+00
   Abserr = 0.0E+00
-  IF ( Limit>=1.AND.Lenw>=Limit*4 ) THEN
+  IF( Limit>=1 .AND. Lenw>=Limit*4 ) THEN
     !
     !         PREPARE CALL FOR QAGSE.
     !
@@ -204,6 +203,6 @@ SUBROUTINE QAGS(F,A,B,Epsabs,Epsrel,Result,Abserr,Neval,Ier,Limit,Lenw,&
     !
     lvl = 0
   END IF
-  IF ( Ier==6 ) lvl = 1
-  IF ( Ier/=0 ) CALL XERMSG('QAGS','ABNORMAL RETURN',Ier,lvl)
+  IF( Ier==6 ) lvl = 1
+  IF( Ier/=0 ) CALL XERMSG('QAGS','ABNORMAL RETURN',Ier,lvl)
 END SUBROUTINE QAGS

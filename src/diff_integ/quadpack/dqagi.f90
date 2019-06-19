@@ -1,13 +1,12 @@
 !** DQAGI
 SUBROUTINE DQAGI(F,Bound,Inf,Epsabs,Epsrel,Result,Abserr,Neval,Ier,Limit,&
     Lenw,Last,Iwork,Work)
-  !>
-  !  The routine calculates an approximation result to a given
+  !> The routine calculates an approximation result to a given
   !            INTEGRAL   I = Integral of F over (BOUND,+INFINITY)
   !            OR I = Integral of F over (-INFINITY,BOUND)
   !            OR I = Integral of F over (-INFINITY,+INFINITY)
   !            Hopefully satisfying following claim for accuracy
-  !            ABS(I-RESULT).LE.MAX(EPSABS,EPSREL*ABS(I)).
+  !            ABS(I-RESULT)<=MAX(EPSABS,EPSREL*ABS(I)).
   !***
   ! **Library:**   SLATEC (QUADPACK)
   !***
@@ -52,8 +51,8 @@ SUBROUTINE DQAGI(F,Bound,Inf,Epsabs,Epsrel,Result,Abserr,Neval,Ier,Limit,&
   !                     Absolute accuracy requested
   !            EPSREL - Double precision
   !                     Relative accuracy requested
-  !                     If  EPSABS.LE.0
-  !                     and EPSREL.LT.MAX(50*REL.MACH.ACC.,0.5D-28),
+  !                     If  EPSABS<=0
+  !                     and EPSREL<MAX(50*REL.MACH.ACC.,0.5D-28),
   !                     the routine will end with IER = 6.
   !
   !
@@ -72,7 +71,7 @@ SUBROUTINE DQAGI(F,Bound,Inf,Epsabs,Epsrel,Result,Abserr,Neval,Ier,Limit,&
   !                     IER = 0 normal and reliable termination of the
   !                             routine. It is assumed that the requested
   !                             accuracy has been achieved.
-  !                   - IER.GT.0 abnormal termination of the routine. The
+  !                   - IER>0 abnormal termination of the routine. The
   !                             estimates for result and error are less
   !                             reliable. It is assumed that the requested
   !                             accuracy has not been achieved.
@@ -112,9 +111,9 @@ SUBROUTINE DQAGI(F,Bound,Inf,Epsabs,Epsrel,Result,Abserr,Neval,Ier,Limit,&
   !                             divergence can occur with any other value
   !                             of IER.
   !                         = 6 The input is invalid, because
-  !                             (EPSABS.LE.0 and
-  !                              EPSREL.LT.MAX(50*REL.MACH.ACC.,0.5D-28))
-  !                              or LIMIT.LT.1 or LENIW.LT.LIMIT*4.
+  !                             (EPSABS<=0 and
+  !                              EPSREL<MAX(50*REL.MACH.ACC.,0.5D-28))
+  !                              or LIMIT<1 or LENIW<LIMIT*4.
   !                             RESULT, ABSERR, NEVAL, LAST are set to
   !                             zero.  Except when LIMIT or LENIW is
   !                             invalid, IWORK(1), WORK(LIMIT*2+1) and
@@ -126,13 +125,13 @@ SUBROUTINE DQAGI(F,Bound,Inf,Epsabs,Epsrel,Result,Abserr,Neval,Ier,Limit,&
   !                    Dimensioning parameter for IWORK
   !                    LIMIT determines the maximum number of subintervals
   !                    in the partition of the given integration interval
-  !                    (A,B), LIMIT.GE.1.
-  !                    If LIMIT.LT.1, the routine will end with IER = 6.
+  !                    (A,B), LIMIT>=1.
+  !                    If LIMIT<1, the routine will end with IER = 6.
   !
   !            LENW  - Integer
   !                    Dimensioning parameter for WORK
   !                    LENW must be at least LIMIT*4.
-  !                    If LENW.LT.LIMIT*4, the routine will end
+  !                    If LENW<LIMIT*4, the routine will end
   !                    with IER = 6.
   !
   !            LAST  - Integer
@@ -148,7 +147,7 @@ SUBROUTINE DQAGI(F,Bound,Inf,Epsabs,Epsrel,Result,Abserr,Neval,Ier,Limit,&
   !                    to the error estimates over the subintervals,
   !                    such that WORK(LIMIT*3+IWORK(1)),... ,
   !                    WORK(LIMIT*3+IWORK(K)) form a decreasing
-  !                    sequence, with K = LAST if LAST.LE.(LIMIT/2+2), and
+  !                    sequence, with K = LAST if LAST<=(LIMIT/2+2), and
   !                    K = LIMIT+1-LAST otherwise
   !
   !            WORK  - Double precision
@@ -195,7 +194,7 @@ SUBROUTINE DQAGI(F,Bound,Inf,Epsabs,Epsrel,Result,Abserr,Neval,Ier,Limit,&
   Last = 0
   Result = 0.0D+00
   Abserr = 0.0D+00
-  IF ( Limit>=1.AND.Lenw>=Limit*4 ) THEN
+  IF( Limit>=1 .AND. Lenw>=Limit*4 ) THEN
     !
     !         PREPARE CALL FOR DQAGIE.
     !
@@ -210,6 +209,6 @@ SUBROUTINE DQAGI(F,Bound,Inf,Epsabs,Epsrel,Result,Abserr,Neval,Ier,Limit,&
     !
     lvl = 0
   END IF
-  IF ( Ier==6 ) lvl = 1
-  IF ( Ier/=0 ) CALL XERMSG('DQAGI','ABNORMAL RETURN',Ier,lvl)
+  IF( Ier==6 ) lvl = 1
+  IF( Ier/=0 ) CALL XERMSG('DQAGI','ABNORMAL RETURN',Ier,lvl)
 END SUBROUTINE DQAGI

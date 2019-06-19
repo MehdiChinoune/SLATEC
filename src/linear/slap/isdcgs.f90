@@ -1,8 +1,7 @@
 !** ISDCGS
 INTEGER FUNCTION ISDCGS(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,&
     Iter,Err,Ierr,Iunit,R,V2,Rwork,Iwork,Ak,Bk,Bnrm,Solnrm)
-  !>
-  !  Preconditioned BiConjugate Gradient Squared Stop Test.
+  !> Preconditioned BiConjugate Gradient Squared Stop Test.
   !            This routine calculates the stop test for the BiConjugate
   !            Gradient Squared iteration scheme.  It returns a non-zero
   !            if the error estimate (the type of which is determined by
@@ -36,7 +35,7 @@ INTEGER FUNCTION ISDCGS(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,&
   !
   !     IF( ISDCGS(N, B, X, NELT, IA, JA, A, ISYM, MATVEC, MSOLVE, ITOL,
   !    $     TOL, ITMAX, ITER, ERR, IERR, IUNIT, R, R0, P, Q, U, V1,
-  !    $     V2, RWORK, IWORK, AK, BK, BNRM, SOLNRM) .NE. 0 )
+  !    $     V2, RWORK, IWORK, AK, BK, BNRM, SOLNRM) /= 0 )
   !    $     THEN ITERATION DONE
   !
   !- Arguments:
@@ -137,10 +136,10 @@ INTEGER FUNCTION ISDCGS(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,&
   ! V1     :DUMMY    Double Precision V1(N).
   !         Double Precision arrays used for workspace.
   ! V2     :WORK     Double Precision V2(N).
-  !         If ITOL.eq.1 then V2 is used to hold A * X - B on every call.
-  !         If ITOL.eq.2 then V2 is used to hold M-inv * B on the first
+  !         If ITOL=1 then V2 is used to hold A * X - B on every call.
+  !         If ITOL=2 then V2 is used to hold M-inv * B on the first
   !         call.
-  !         If ITOL.eq.11 then V2 is used to X - SOLN.
+  !         If ITOL=11 then V2 is used to X - SOLN.
   ! RWORK  :WORK     Double Precision RWORK(USER DEFINED).
   !         Double Precision array that can be used for workspace in
   !         MSOLVE.
@@ -166,7 +165,7 @@ INTEGER FUNCTION ISDCGS(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,&
   !
   !- Cautions:
   !     This routine will attempt to write to the Fortran logical output
-  !     unit IUNIT, if IUNIT .ne. 0.  Thus, the user must make sure that
+  !     unit IUNIT, if IUNIT /= 0.  Thus, the user must make sure that
   !     this logical unit is attached to a file or terminal before calling
   !     this routine with a non-zero value for IUNIT.  This routine does
   !     not check for the validity of a non-zero IUNIT unit number.
@@ -220,25 +219,25 @@ INTEGER FUNCTION ISDCGS(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,&
   !* FIRST EXECUTABLE STATEMENT  ISDCGS
   ISDCGS = 0
   !
-  IF ( Itol==1 ) THEN
+  IF( Itol==1 ) THEN
     !         err = ||Residual||/||RightHandSide|| (2-Norms).
-    IF ( Iter==0 ) Bnrm = NORM2(B)
+    IF( Iter==0 ) Bnrm = NORM2(B)
     CALL MATVEC(N,X,V2,Nelt,Ia,Ja,A,Isym)
     DO i = 1, N
       V2(i) = V2(i) - B(i)
     END DO
     Err = NORM2(V2)/Bnrm
-  ELSEIF ( Itol==2 ) THEN
+  ELSEIF( Itol==2 ) THEN
     !                  -1              -1
     !         err = ||M  Residual||/||M  RightHandSide|| (2-Norms).
-    IF ( Iter==0 ) THEN
+    IF( Iter==0 ) THEN
       CALL MSOLVE(N,B,V2,Rwork,Iwork)
       Bnrm = NORM2(V2)
     END IF
     Err = NORM2(R)/Bnrm
-  ELSEIF ( Itol==11 ) THEN
+  ELSEIF( Itol==11 ) THEN
     !         err = ||x-TrueSolution||/||TrueSolution|| (2-Norms).
-    IF ( Iter==0 ) Solnrm = NORM2(soln_com(1:N))
+    IF( Iter==0 ) Solnrm = NORM2(soln_com(1:N))
     DO i = 1, N
       V2(i) = X(i) - soln_com(i)
     END DO
@@ -252,8 +251,8 @@ INTEGER FUNCTION ISDCGS(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,&
   !
   !         Print the error and Coefficients AK, BK on each step,
   !         if desired.
-  IF ( Iunit/=0 ) THEN
-    IF ( Iter==0 ) THEN
+  IF( Iunit/=0 ) THEN
+    IF( Iter==0 ) THEN
       WRITE (Iunit,99001) N, Itol
       99001 FORMAT (' Preconditioned BiConjugate Gradient Squared for ',&
         'N, ITOL = ',I5,I5,/' ITER','   Error Estimate',&
@@ -263,7 +262,7 @@ INTEGER FUNCTION ISDCGS(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,&
       WRITE (Iunit,99002) Iter, Err, Ak, Bk
     END IF
   END IF
-  IF ( Err<=Tol ) ISDCGS = 1
+  IF( Err<=Tol ) ISDCGS = 1
   !
   RETURN
   99002 FORMAT (1X,I4,1X,D16.7,1X,D16.7,1X,D16.7)

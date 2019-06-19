@@ -1,7 +1,6 @@
 !** DWNLIT
 SUBROUTINE DWNLIT(W,Mdw,M,N,L,Ipivot,Itype,H,Scalee,Rnorm,Idope,Dope,Done)
-  !>
-  !  Subsidiary to DWNNLS
+  !> Subsidiary to DWNNLS
   !***
   ! **Library:**   SLATEC
   !***
@@ -80,7 +79,7 @@ SUBROUTINE DWNLIT(W,Mdw,M,N,L,Ipivot,Itype,H,Scalee,Rnorm,Idope,Dope,Done)
       !        Perform column interchange.
       !        Test independence of incoming column.
       !
-      IF ( DWNLT2(me,mend,ir,factor,tau,Scalee,W(:,i)) ) THEN
+      IF( DWNLT2(me,mend,ir,factor,tau,Scalee,W(:,i)) ) THEN
         !
         !           Eliminate I-th column below diagonal using modified Givens
         !           transformations applied to (A B).
@@ -90,12 +89,12 @@ SUBROUTINE DWNLIT(W,Mdw,M,N,L,Ipivot,Itype,H,Scalee,Rnorm,Idope,Dope,Done)
         !
         DO j = M, i + 1, -1
           jp = j - 1
-          IF ( j==me+1 ) THEN
+          IF( j==me+1 ) THEN
             imax = me
             amax = Scalee(me)*W(me,i)**2
             DO jp = j - 1, i, -1
               t = Scalee(jp)*W(jp,i)**2
-              IF ( t>amax ) THEN
+              IF( t>amax ) THEN
                 imax = jp
                 amax = t
               END IF
@@ -103,13 +102,13 @@ SUBROUTINE DWNLIT(W,Mdw,M,N,L,Ipivot,Itype,H,Scalee,Rnorm,Idope,Dope,Done)
             jp = imax
           END IF
           !
-          IF ( W(j,i)/=0.D0 ) THEN
+          IF( W(j,i)/=0.D0 ) THEN
             CALL DROTMG(Scalee(jp),Scalee(j),W(jp,i),W(j,i),sparam)
             W(j,i) = 0.D0
             CALL DROTM(N+1-i,W(jp,i+1),Mdw,W(j,i+1),Mdw,sparam)
           END IF
         END DO
-      ELSEIF ( lend>i ) THEN
+      ELSEIF( lend>i ) THEN
         !
         !           Column I is dependent.  Swap with column LEND.
         !           Perform column interchange,
@@ -130,7 +129,7 @@ SUBROUTINE DWNLIT(W,Mdw,M,N,L,Ipivot,Itype,H,Scalee,Rnorm,Idope,Dope,Done)
   krank = l1
   !
   100 CONTINUE
-  IF ( krank<me ) THEN
+  IF( krank<me ) THEN
     factor = alsq
     DO i = krank + 1, me
       W(i,1:L) = 0.D0
@@ -156,7 +155,7 @@ SUBROUTINE DWNLIT(W,Mdw,M,N,L,Ipivot,Itype,H,Scalee,Rnorm,Idope,Dope,Done)
       !           Eliminate elements in the I-th col.
       !
       DO j = me, ir + 1, -1
-        IF ( W(j,i)/=0.D0 ) THEN
+        IF( W(j,i)/=0.D0 ) THEN
           CALL DROTMG(Scalee(j-1),Scalee(j),W(j-1,i),W(j,i),sparam)
           W(j,i) = 0.D0
           CALL DROTM(N+1-i,W(j-1,i+1),Mdw,W(j,i+1),Mdw,sparam)
@@ -167,7 +166,7 @@ SUBROUTINE DWNLIT(W,Mdw,M,N,L,Ipivot,Itype,H,Scalee,Rnorm,Idope,Dope,Done)
       !           Test independence of incoming column.
       !           Remove any redundant or dependent equality constraints.
       !
-      IF ( .NOT.DWNLT2(me,mend,ir,factor,tau,Scalee,W(:,i)) ) THEN
+      IF( .NOT. DWNLT2(me,mend,ir,factor,tau,Scalee,W(:,i)) ) THEN
         jj = ir
         DO ir = jj, me
           W(ir,1:N) = 0.D0
@@ -193,7 +192,7 @@ SUBROUTINE DWNLIT(W,Mdw,M,N,L,Ipivot,Itype,H,Scalee,Rnorm,Idope,Dope,Done)
   !     least squares equations.  Continue the triangularization with
   !     pivot element W(ME+1,I).
   !
-  IF ( krank<l1 ) THEN
+  IF( krank<l1 ) THEN
     recalc = .TRUE.
     !
     !        Set FACTOR=ALSQ to remove effect of heavy weight from
@@ -217,7 +216,7 @@ SUBROUTINE DWNLIT(W,Mdw,M,N,L,Ipivot,Itype,H,Scalee,Rnorm,Idope,Dope,Done)
       !           Eliminate I-th column below the IR-th element.
       !
       DO j = M, ir + 1, -1
-        IF ( W(j,i)/=0.D0 ) THEN
+        IF( W(j,i)/=0.D0 ) THEN
           CALL DROTMG(Scalee(j-1),Scalee(j),W(j-1,i),W(j,i),sparam)
           W(j,i) = 0.D0
           CALL DROTM(N+1-i,W(j-1,i+1),Mdw,W(j,i+1),Mdw,sparam)
@@ -230,7 +229,7 @@ SUBROUTINE DWNLIT(W,Mdw,M,N,L,Ipivot,Itype,H,Scalee,Rnorm,Idope,Dope,Done)
       !
       t = Scalee(ir)*W(ir,i)**2
       indep = t>(tau*eanorm)**2
-      IF ( indep ) THEN
+      IF( indep ) THEN
         rn = 0.D0
         DO i1 = ir, M
           DO j1 = i + 1, N
@@ -244,7 +243,7 @@ SUBROUTINE DWNLIT(W,Mdw,M,N,L,Ipivot,Itype,H,Scalee,Rnorm,Idope,Dope,Done)
       !           maintain the triangular form.  Update the rank indicator
       !           KRANK and the equality constraint pointer ME.
       !
-      IF ( .NOT.indep ) EXIT
+      IF( .NOT. indep ) EXIT
       CALL DSWAP(N+1,W(krank+1,1),Mdw,W(ir,1),Mdw)
       CALL DSWAP(1,Scalee(krank+1),1,Scalee(ir),1)
       !
@@ -263,14 +262,14 @@ SUBROUTINE DWNLIT(W,Mdw,M,N,L,Ipivot,Itype,H,Scalee,Rnorm,Idope,Dope,Done)
   !     If pseudorank is less than L, apply Householder transformation.
   !     from right.
   !
-  IF ( krank<L ) THEN
+  IF( krank<L ) THEN
     DO j = krank, 1, -1
       CALL DH12(1,j,krank+1,L,W(j,1),Mdw,H(j),W,Mdw,1,j-1)
     END DO
   END IF
   !
   niv = krank + nsoln - L
-  IF ( L==N ) Done = .TRUE.
+  IF( L==N ) Done = .TRUE.
   !
   !     End of initial triangularization.
   !

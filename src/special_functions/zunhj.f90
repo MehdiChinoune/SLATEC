@@ -1,8 +1,7 @@
 !** ZUNHJ
 SUBROUTINE ZUNHJ(Zr,Zi,Fnu,Ipmtr,Tol,Phir,Phii,Argr,Argi,Zeta1r,Zeta1i,&
     Zeta2r,Zeta2i,Asumr,Asumi,Bsumr,Bsumi)
-  !>
-  !  Subsidiary to ZBESI and ZBESK
+  !> Subsidiary to ZBESI and ZBESK
   !***
   ! **Library:**   SLATEC
   !***
@@ -58,7 +57,7 @@ SUBROUTINE ZUNHJ(Zr,Zi,Fnu,Ipmtr,Tol,Phir,Phii,Argr,Argi,Zeta1r,Zeta1i,&
     sumai, sumar, sumbi, sumbr, test, tfni, tfnr, Tol, tzai, tzar, t2i, &
     t2r, upi(14), upr(14), wi, wr, w2i, w2r, zai, zar, zbi, zbr, zci, zcr, &
     zetai, zetar, Zeta1i, Zeta1r, Zeta2i, Zeta2r, Zi, Zr, zthi, zthr, ac
-  INTEGER ias, ibs, Ipmtr, is, j, jr, ju, k, kmax, kp1, ks, l, &
+  INTEGER :: ias, ibs, Ipmtr, is, j, jr, ju, k, kmax, kp1, ks, l, &
     lr, lrp1, l1, l2, m, idum
   REAL(DP), PARAMETER :: ar(14) = [ 1.00000000000000000D+00, 1.04166666666666667D-01, &
     8.35503472222222222D-02, 1.28226574556327160D-01, 2.91849026464140464D-01, &
@@ -260,7 +259,7 @@ SUBROUTINE ZUNHJ(Zr,Zi,Fnu,Ipmtr,Tol,Phir,Phii,Argr,Argi,Zeta1r,Zeta1i,&
   !-----------------------------------------------------------------------
   test = D1MACH(1)*1.0D+3
   ac = Fnu*test
-  IF ( ABS(Zr)>ac.OR.ABS(Zi)>ac ) THEN
+  IF( ABS(Zr)>ac .OR. ABS(Zi)>ac ) THEN
     zbr = Zr*rfnu
     zbi = Zi*rfnu
     rfnu2 = rfnu*rfnu
@@ -273,20 +272,20 @@ SUBROUTINE ZUNHJ(Zr,Zi,Fnu,Ipmtr,Tol,Phir,Phii,Argr,Argi,Zeta1r,Zeta1i,&
     w2r = coner - zbr*zbr + zbi*zbi
     w2i = conei - zbr*zbi - zbr*zbi
     aw2 = ZABS(w2r,w2i)
-    IF ( aw2>0.25D0 ) THEN
+    IF( aw2>0.25D0 ) THEN
       !-----------------------------------------------------------------------
-      !     ABS(W2).GT.0.25D0
+      !     ABS(W2)>0.25D0
       !-----------------------------------------------------------------------
       CALL ZSQRT(w2r,w2i,wr,wi)
-      IF ( wr<0.0D0 ) wr = 0.0D0
-      IF ( wi<0.0D0 ) wi = 0.0D0
+      IF( wr<0.0D0 ) wr = 0.0D0
+      IF( wi<0.0D0 ) wi = 0.0D0
       str = coner + wr
       sti = wi
       CALL ZDIV(str,sti,zbr,zbi,zar,zai)
       CALL ZLOG(zar,zai,zcr,zci,idum)
-      IF ( zci<0.0D0 ) zci = 0.0D0
-      IF ( zci>hpi ) zci = hpi
-      IF ( zcr<0.0D0 ) zcr = 0.0D0
+      IF( zci<0.0D0 ) zci = 0.0D0
+      IF( zci>hpi ) zci = hpi
+      IF( zcr<0.0D0 ) zcr = 0.0D0
       zthr = (zcr-wr)*1.5D0
       zthi = (zci-wi)*1.5D0
       Zeta1r = zcr*Fnu
@@ -295,18 +294,18 @@ SUBROUTINE ZUNHJ(Zr,Zi,Fnu,Ipmtr,Tol,Phir,Phii,Argr,Argi,Zeta1r,Zeta1i,&
       Zeta2i = wi*Fnu
       azth = ZABS(zthr,zthi)
       ang = thpi
-      IF ( zthr<0.0D0.OR.zthi>=0.0D0 ) THEN
+      IF( zthr<0.0D0 .OR. zthi>=0.0D0 ) THEN
         ang = hpi
-        IF ( zthr/=0.0D0 ) THEN
+        IF( zthr/=0.0D0 ) THEN
           ang = ATAN(zthi/zthr)
-          IF ( zthr<0.0D0 ) ang = ang + gpi
+          IF( zthr<0.0D0 ) ang = ang + gpi
         END IF
       END IF
       pp = azth**ex2
       ang = ang*ex2
       zetar = pp*COS(ang)
       zetai = pp*SIN(ang)
-      IF ( zetai<0.0D0 ) zetai = 0.0D0
+      IF( zetai<0.0D0 ) zetai = 0.0D0
       Argr = zetar*fn23
       Argi = zetai*fn23
       CALL ZDIV(zthr,zthi,zetar,zetai,rtztr,rtzti)
@@ -316,7 +315,7 @@ SUBROUTINE ZUNHJ(Zr,Zi,Fnu,Ipmtr,Tol,Phir,Phii,Argr,Argi,Zeta1r,Zeta1i,&
       CALL ZSQRT(tzar,tzai,str,sti)
       Phir = str*rfn13
       Phii = sti*rfn13
-      IF ( Ipmtr/=1 ) THEN
+      IF( Ipmtr/=1 ) THEN
         raw = 1.0D0/SQRT(aw2)
         str = wr*raw
         sti = -wi*raw
@@ -342,7 +341,7 @@ SUBROUTINE ZUNHJ(Zr,Zi,Fnu,Ipmtr,Tol,Phir,Phii,Argr,Argi,Zeta1r,Zeta1i,&
         Bsumi = upi(2) + zci
         Asumr = zeror
         Asumi = zeroi
-        IF ( rfnu>=Tol ) THEN
+        IF( rfnu>=Tol ) THEN
           przthr = rzthr
           przthi = rzthi
           ptfnr = tfnr
@@ -388,7 +387,7 @@ SUBROUTINE ZUNHJ(Zr,Zi,Fnu,Ipmtr,Tol,Phir,Phii,Argr,Argi,Zeta1r,Zeta1i,&
               dri(ks) = przthi*ar(ks+2)
             END DO
             pp = pp*rfnu2
-            IF ( ias/=1 ) THEN
+            IF( ias/=1 ) THEN
               sumar = upr(lrp1)
               sumai = upi(lrp1)
               ju = lrp1
@@ -400,9 +399,9 @@ SUBROUTINE ZUNHJ(Zr,Zi,Fnu,Ipmtr,Tol,Phir,Phii,Argr,Argi,Zeta1r,Zeta1i,&
               Asumr = Asumr + sumar
               Asumi = Asumi + sumai
               test = ABS(sumar) + ABS(sumai)
-              IF ( pp<Tol.AND.test<Tol ) ias = 1
+              IF( pp<Tol .AND. test<Tol ) ias = 1
             END IF
-            IF ( ibs/=1 ) THEN
+            IF( ibs/=1 ) THEN
               sumbr = upr(lr+2) + upr(lrp1)*zcr - upi(lrp1)*zci
               sumbi = upi(lr+2) + upr(lrp1)*zci + upi(lrp1)*zcr
               ju = lrp1
@@ -414,9 +413,9 @@ SUBROUTINE ZUNHJ(Zr,Zi,Fnu,Ipmtr,Tol,Phir,Phii,Argr,Argi,Zeta1r,Zeta1i,&
               Bsumr = Bsumr + sumbr
               Bsumi = Bsumi + sumbi
               test = ABS(sumbr) + ABS(sumbi)
-              IF ( pp<btol.AND.test<btol ) ibs = 1
+              IF( pp<btol .AND. test<btol ) ibs = 1
             END IF
-            IF ( ias==1.AND.ibs==1 ) EXIT
+            IF( ias==1 .AND. ibs==1 ) EXIT
           END DO
         END IF
         Asumr = Asumr + coner
@@ -426,7 +425,7 @@ SUBROUTINE ZUNHJ(Zr,Zi,Fnu,Ipmtr,Tol,Phir,Phii,Argr,Argi,Zeta1r,Zeta1i,&
       END IF
     ELSE
       !-----------------------------------------------------------------------
-      !     POWER SERIES FOR ABS(W2).LE.0.25D0
+      !     POWER SERIES FOR ABS(W2)<=0.25D0
       !-----------------------------------------------------------------------
       k = 1
       pr(1) = coner
@@ -434,14 +433,14 @@ SUBROUTINE ZUNHJ(Zr,Zi,Fnu,Ipmtr,Tol,Phir,Phii,Argr,Argi,Zeta1r,Zeta1i,&
       sumar = gama(1)
       sumai = zeroi
       ap(1) = 1.0D0
-      IF ( aw2>=Tol ) THEN
+      IF( aw2>=Tol ) THEN
         DO k = 2, 30
           pr(k) = pr(k-1)*w2r - pi(k-1)*w2i
           pi(k) = pr(k-1)*w2i + pi(k-1)*w2r
           sumar = sumar + pr(k)*gama(k)
           sumai = sumai + pi(k)*gama(k)
           ap(k) = ap(k-1)*aw2
-          IF ( ap(k)<Tol ) GOTO 20
+          IF( ap(k)<Tol ) GOTO 20
         END DO
         k = 30
       END IF
@@ -463,7 +462,7 @@ SUBROUTINE ZUNHJ(Zr,Zi,Fnu,Ipmtr,Tol,Phir,Phii,Argr,Argi,Zeta1r,Zeta1i,&
       CALL ZSQRT(zar,zai,str,sti)
       Phir = str*rfn13
       Phii = sti*rfn13
-      IF ( Ipmtr/=1 ) THEN
+      IF( Ipmtr/=1 ) THEN
         !-----------------------------------------------------------------------
         !     SUM SERIES FOR ASUM AND BSUM
         !-----------------------------------------------------------------------
@@ -484,37 +483,37 @@ SUBROUTINE ZUNHJ(Zr,Zi,Fnu,Ipmtr,Tol,Phir,Phii,Argr,Argi,Zeta1r,Zeta1i,&
         pp = 1.0D0
         ias = 0
         ibs = 0
-        IF ( rfnu2>=Tol ) THEN
+        IF( rfnu2>=Tol ) THEN
           DO is = 2, 7
             atol = atol/rfnu2
             pp = pp*rfnu2
-            IF ( ias/=1 ) THEN
+            IF( ias/=1 ) THEN
               sumar = zeror
               sumai = zeroi
               DO k = 1, kmax
                 m = l1 + k
                 sumar = sumar + pr(k)*alfa(m)
                 sumai = sumai + pi(k)*alfa(m)
-                IF ( ap(k)<atol ) EXIT
+                IF( ap(k)<atol ) EXIT
               END DO
               Asumr = Asumr + sumar*pp
               Asumi = Asumi + sumai*pp
-              IF ( pp<Tol ) ias = 1
+              IF( pp<Tol ) ias = 1
             END IF
-            IF ( ibs/=1 ) THEN
+            IF( ibs/=1 ) THEN
               sumbr = zeror
               sumbi = zeroi
               DO k = 1, kmax
                 m = l2 + k
                 sumbr = sumbr + pr(k)*beta(m)
                 sumbi = sumbi + pi(k)*beta(m)
-                IF ( ap(k)<atol ) EXIT
+                IF( ap(k)<atol ) EXIT
               END DO
               Bsumr = Bsumr + sumbr*pp
               Bsumi = Bsumi + sumbi*pp
-              IF ( pp<btol ) ibs = 1
+              IF( pp<btol ) ibs = 1
             END IF
-            IF ( ias==1.AND.ibs==1 ) EXIT
+            IF( ias==1 .AND. ibs==1 ) EXIT
             l1 = l1 + 30
             l2 = l2 + 30
           END DO

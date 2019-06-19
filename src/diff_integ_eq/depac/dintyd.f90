@@ -1,7 +1,6 @@
 !** DINTYD
 SUBROUTINE DINTYD(T,K,Yh,Nyh,Dky,Iflag)
-  !>
-  !  Subsidiary to DDEBDF
+  !> Subsidiary to DDEBDF
   !***
   ! **Library:**   SLATEC
   !***
@@ -59,16 +58,16 @@ SUBROUTINE DINTYD(T,K,Yh,Nyh,Dky,Iflag)
   !     BEGIN BLOCK PERMITTING ...EXITS TO 130
   !* FIRST EXECUTABLE STATEMENT  DINTYD
   Iflag = 0
-  IF ( K<0.OR.K>nq_com ) THEN
+  IF( K<0 .OR. K>nq_com ) THEN
     !
     Iflag = -1
   ELSE
     tp = tn_com - hu_com*(1.0D0+100.0D0*uround_com)
-    IF ( (T-tp)*(T-tn_com)<=0.0D0 ) THEN
+    IF( (T-tp)*(T-tn_com)<=0.0D0 ) THEN
       !
       s = (T-tn_com)/h_com
       ic = 1
-      IF ( K/=0 ) THEN
+      IF( K/=0 ) THEN
         jj1 = l_com - K
         DO jj = jj1, nq_com
           ic = ic*jj
@@ -78,13 +77,13 @@ SUBROUTINE DINTYD(T,K,Yh,Nyh,Dky,Iflag)
       DO i = 1, n_com
         Dky(i) = c*Yh(i,l_com)
       END DO
-      IF ( K/=nq_com ) THEN
+      IF( K/=nq_com ) THEN
         jb2 = nq_com - K
         DO jb = 1, jb2
           j = nq_com - jb
           jp1 = j + 1
           ic = 1
-          IF ( K/=0 ) THEN
+          IF( K/=0 ) THEN
             jj1 = jp1 - K
             DO jj = jj1, j
               ic = ic*jj
@@ -96,7 +95,7 @@ SUBROUTINE DINTYD(T,K,Yh,Nyh,Dky,Iflag)
           END DO
         END DO
         !     .........EXIT
-        IF ( K==0 ) RETURN
+        IF( K==0 ) RETURN
       END IF
       r = h_com**(-K)
       DO i = 1, n_com

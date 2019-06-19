@@ -1,8 +1,7 @@
 !** HSTCS1
 SUBROUTINE HSTCS1(Intl,A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
     Idimf,Pertrb,Ierr1,Am,Bm,Cm,An,Bn,Cn,Snth,Rsq,Wrk)
-  !>
-  !  Subsidiary to HSTCSP
+  !> Subsidiary to HSTCSP
   !***
   ! **Library:**   SLATEC
   !***
@@ -73,7 +72,7 @@ SUBROUTINE HSTCS1(Intl,A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   END DO
   isw = 1
   nb = Nbdcnd
-  IF ( C==0..AND.nb==2 ) nb = 6
+  IF( C==0. .AND. nb==2 ) nb = 6
   !
   !     ENTER DATA ON THETA BOUNDARIES
   !
@@ -149,8 +148,8 @@ SUBROUTINE HSTCS1(Intl,A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
       SELECT CASE (nb)
         CASE (1,2,4,5)
         CASE DEFAULT
-          IF ( Elmbda<0 ) THEN
-          ELSEIF ( Elmbda==0 ) THEN
+          IF( Elmbda<0 ) THEN
+          ELSEIF( Elmbda==0 ) THEN
             isw = 2
             DO i = 1, M
               x = 0.
@@ -183,12 +182,12 @@ SUBROUTINE HSTCS1(Intl,A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   !
   !     INITIALIZE BLKTRI
   !
-  IF ( Intl==0 ) CALL BLKTRI(0,1,N,An,Bn,Cn,1,M,Am,Bm,Cm,Idimf,F,Ierr1,Wrk)
+  IF( Intl==0 ) CALL BLKTRI(0,1,N,An,Bn,Cn,1,M,Am,Bm,Cm,Idimf,F,Ierr1,Wrk)
   !
   !     CALL BLKTRI TO SOLVE SYSTEM OF EQUATIONS.
   !
   CALL BLKTRI(1,1,N,An,Bn,Cn,1,M,Am,Bm,Cm,Idimf,F,Ierr1,Wrk)
-  IF ( isw==2.AND.C==0..AND.Nbdcnd==2 ) THEN
+  IF( isw==2 .AND. C==0. .AND. Nbdcnd==2 ) THEN
     a1 = 0.
     a3 = 0.
     DO i = 1, M
@@ -196,7 +195,7 @@ SUBROUTINE HSTCS1(Intl,A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
       a3 = a3 + Snth(i)
     END DO
     a1 = a1 + Rsq(1)*a2/2.
-    IF ( Mbdcnd==3 ) a1 = a1 + (SIN(B)*Bdb(1)-SIN(A)*Bda(1))/(2.*(B-A))
+    IF( Mbdcnd==3 ) a1 = a1 + (SIN(B)*Bdb(1)-SIN(A)*Bda(1))/(2.*(B-A))
     a1 = a1/a3
     a1 = Bdc(1) - a1
     DO i = 1, M

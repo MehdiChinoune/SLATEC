@@ -1,7 +1,6 @@
 !** DVECS
 SUBROUTINE DVECS(Ncomp,Lnfc,Yhp,Work,Iwork,Inhomo,Iflag)
-  !>
-  !  Subsidiary to DBVSUP
+  !> Subsidiary to DBVSUP
   !***
   ! **Library:**   SLATEC
   !***
@@ -40,7 +39,7 @@ SUBROUTINE DVECS(Ncomp,Lnfc,Yhp,Work,Iwork,Inhomo,Iflag)
   INTEGER :: idp, k, kp, niv
   REAL(DP) :: dum
   !* FIRST EXECUTABLE STATEMENT  DVECS
-  IF ( Lnfc/=1 ) THEN
+  IF( Lnfc/=1 ) THEN
     niv = Lnfc
     Lnfc = 2*Lnfc
     nfcc_com = 2*nfcc_com
@@ -52,7 +51,7 @@ SUBROUTINE DVECS(Ncomp,Lnfc,Yhp,Work,Iwork,Inhomo,Iflag)
     Lnfc = Lnfc/2
     nfcc_com = nfcc_com/2
     indpvt_com = idp
-    IF ( Iflag/=0.OR.niv/=Lnfc ) THEN
+    IF( Iflag/=0 .OR. niv/=Lnfc ) THEN
       Iflag = 99
     ELSE
       DO k = 1, Ncomp

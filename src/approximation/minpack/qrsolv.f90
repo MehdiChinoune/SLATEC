@@ -1,7 +1,6 @@
 !** QRSOLV
 SUBROUTINE QRSOLV(N,R,Ldr,Ipvt,Diag,Qtb,X,Sigma,Wa)
-  !>
-  !  Subsidiary to SNLS1 and SNLS1E
+  !> Subsidiary to SNLS1 and SNLS1E
   !***
   ! **Library:**   SLATEC
   !***
@@ -112,7 +111,7 @@ SUBROUTINE QRSOLV(N,R,Ldr,Ipvt,Diag,Qtb,X,Sigma,Wa)
     !        DIAGONAL ELEMENT USING P FROM THE QR FACTORIZATION.
     !
     l = Ipvt(j)
-    IF ( Diag(l)/=zero ) THEN
+    IF( Diag(l)/=zero ) THEN
       DO k = j, N
         Sigma(k) = zero
       END DO
@@ -128,8 +127,8 @@ SUBROUTINE QRSOLV(N,R,Ldr,Ipvt,Diag,Qtb,X,Sigma,Wa)
         !           DETERMINE A GIVENS ROTATION WHICH ELIMINATES THE
         !           APPROPRIATE ELEMENT IN THE CURRENT ROW OF D.
         !
-        IF ( Sigma(k)/=zero ) THEN
-          IF ( ABS(R(k,k))>=ABS(Sigma(k)) ) THEN
+        IF( Sigma(k)/=zero ) THEN
+          IF( ABS(R(k,k))>=ABS(Sigma(k)) ) THEN
             tann = Sigma(k)/R(k,k)
             coss = p5/SQRT(p25+p25*tann**2)
             sinn = coss*tann
@@ -150,7 +149,7 @@ SUBROUTINE QRSOLV(N,R,Ldr,Ipvt,Diag,Qtb,X,Sigma,Wa)
           !           ACCUMULATE THE TRANSFORMATION IN THE ROW OF S.
           !
           kp1 = k + 1
-          IF ( N>=kp1 ) THEN
+          IF( N>=kp1 ) THEN
             DO i = kp1, N
               temp = coss*R(i,k) + sinn*Sigma(i)
               Sigma(i) = -sinn*R(i,k) + coss*Sigma(i)
@@ -173,15 +172,15 @@ SUBROUTINE QRSOLV(N,R,Ldr,Ipvt,Diag,Qtb,X,Sigma,Wa)
   !
   nsing = N
   DO j = 1, N
-    IF ( Sigma(j)==zero.AND.nsing==N ) nsing = j - 1
-    IF ( nsing<N ) Wa(j) = zero
+    IF( Sigma(j)==zero .AND. nsing==N ) nsing = j - 1
+    IF( nsing<N ) Wa(j) = zero
   END DO
-  IF ( nsing>=1 ) THEN
+  IF( nsing>=1 ) THEN
     DO k = 1, nsing
       j = nsing - k + 1
       summ = zero
       jp1 = j + 1
-      IF ( nsing>=jp1 ) THEN
+      IF( nsing>=jp1 ) THEN
         DO i = jp1, nsing
           summ = summ + R(i,j)*Wa(i)
         END DO

@@ -1,7 +1,6 @@
 !** DU12LS
 SUBROUTINE DU12LS(A,Mda,M,N,B,Mdb,Nb,Mode,Krank,Rnorm,H,W,Ic,Ir)
-  !>
-  !  Subsidiary to DLLSIA
+  !> Subsidiary to DLLSIA
   !***
   ! **Library:**   SLATEC
   !***
@@ -16,7 +15,7 @@ SUBROUTINE DU12LS(A,Mda,M,N,B,Mdb,Nb,Mode,Krank,Rnorm,H,W,Ic,Ir)
   !        is of reduced rank, this routine returns a solution
   !        according to the selected mode.
   !
-  !       Note - If MODE.NE.2, W is never accessed.
+  !       Note - If MODE/=2, W is never accessed.
   !
   !***
   ! **See also:**  DLLSIA
@@ -42,14 +41,14 @@ SUBROUTINE DU12LS(A,Mda,M,N,B,Mdb,Nb,Mode,Krank,Rnorm,H,W,Ic,Ir)
   !
   !        RANK=0
   !
-  IF ( k>0 ) THEN
+  IF( k>0 ) THEN
     !
     !     REORDER B TO REFLECT ROW INTERCHANGES
     !
     i = 0
     DO
       i = i + 1
-      IF ( i==M ) THEN
+      IF( i==M ) THEN
         DO i = 1, M
           Ir(i) = ABS(Ir(i))
         END DO
@@ -79,19 +78,19 @@ SUBROUTINE DU12LS(A,Mda,M,N,B,Mdb,Nb,Mode,Krank,Rnorm,H,W,Ic,Ir)
           DO jb = 1, Nb
             B(i,jb) = B(i,jb)/A(i,i)
           END DO
-          IF ( i==1 ) THEN
+          IF( i==1 ) THEN
             !
             !     RANK LT N
             !
             !      TRUNCATED SOLUTION
             !
-            IF ( k/=N ) THEN
+            IF( k/=N ) THEN
               DO jb = 1, Nb
                 DO i = kp1, N
                   B(i,jb) = 0.0D0
                 END DO
               END DO
-              IF ( Mode/=1 ) THEN
+              IF( Mode/=1 ) THEN
                 !
                 !      MINIMAL LENGTH SOLUTION
                 !
@@ -113,22 +112,22 @@ SUBROUTINE DU12LS(A,Mda,M,N,B,Mdb,Nb,Mode,Krank,Rnorm,H,W,Ic,Ir)
             i = 0
             DO
               i = i + 1
-              IF ( i==N ) THEN
+              IF( i==N ) THEN
                 DO i = 1, N
                   Ic(i) = ABS(Ic(i))
                 END DO
                 RETURN
               ELSE
                 j = Ic(i)
-                IF ( j/=i ) THEN
-                  IF ( j>=0 ) THEN
+                IF( j/=i ) THEN
+                  IF( j>=0 ) THEN
                     Ic(i) = -Ic(i)
                     DO
                       CALL DSWAP(Nb,B(j,1),Mdb,B(i,1),Mdb)
                       ij = Ic(j)
                       Ic(j) = -Ic(j)
                       j = ij
-                      IF ( j==i ) EXIT
+                      IF( j==i ) EXIT
                     END DO
                   END IF
                 END IF
@@ -144,8 +143,8 @@ SUBROUTINE DU12LS(A,Mda,M,N,B,Mdb,Nb,Mode,Krank,Rnorm,H,W,Ic,Ir)
         END DO
       ELSE
         j = Ir(i)
-        IF ( j/=i ) THEN
-          IF ( j>=0 ) THEN
+        IF( j/=i ) THEN
+          IF( j>=0 ) THEN
             Ir(i) = -Ir(i)
             DO jb = 1, Nb
               Rnorm(jb) = B(i,jb)
@@ -158,7 +157,7 @@ SUBROUTINE DU12LS(A,Mda,M,N,B,Mdb,Nb,Mode,Krank,Rnorm,H,W,Ic,Ir)
               ij = j
               j = Ir(ij)
               Ir(ij) = -Ir(ij)
-              IF ( j==i ) THEN
+              IF( j==i ) THEN
                 DO jb = 1, Nb
                   B(ij,jb) = Rnorm(jb)
                 END DO

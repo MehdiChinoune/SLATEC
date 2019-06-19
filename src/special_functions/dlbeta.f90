@@ -1,7 +1,6 @@
 !** DLBETA
 REAL(DP) FUNCTION DLBETA(A,B)
-  !>
-  !  Compute the natural logarithm of the complete Beta
+  !> Compute the natural logarithm of the complete Beta
   !            function.
   !***
   ! **Library:**   SLATEC (FNLIB)
@@ -40,10 +39,10 @@ REAL(DP) FUNCTION DLBETA(A,B)
   p = MIN(A,B)
   q = MAX(A,B)
   !
-  IF ( p<=0.D0 ) CALL XERMSG('DLBETA',&
+  IF( p<=0.D0 ) CALL XERMSG('DLBETA',&
     'BOTH ARGUMENTS MUST BE GT ZERO',1,2)
   !
-  IF ( p>=10.D0 ) THEN
+  IF( p>=10.D0 ) THEN
     !
     ! P AND Q ARE BIG.
     !
@@ -51,7 +50,7 @@ REAL(DP) FUNCTION DLBETA(A,B)
     DLBETA = -0.5D0*LOG(q) + sq2pil + corr + (p-0.5D0)*LOG(p/(p+q))&
       + q*DLNREL(-p/(p+q))
     RETURN
-  ELSEIF ( q<10.D0 ) THEN
+  ELSEIF( q<10.D0 ) THEN
     !
     ! P AND Q ARE SMALL.
     !

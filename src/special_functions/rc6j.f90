@@ -1,7 +1,6 @@
 !** RC6J
 SUBROUTINE RC6J(L2,L3,L4,L5,L6,L1min,L1max,Sixcof,Ndim,Ier)
-  !>
-  !  Evaluate the 6j symbol h(L1) = {L1 L2 L3}
+  !> Evaluate the 6j symbol h(L1) = {L1 L2 L3}
   !                                           {L4 L5 L6}
   !            for all allowed values of L1, the other parameters
   !            being held fixed.
@@ -68,8 +67,8 @@ SUBROUTINE RC6J(L2,L3,L4,L5,L6,L1min,L1max,Sixcof,Ndim,Ier)
   !  integers or non-negative integers plus 1/2 is not imposed on input
   !  to this subroutine. The restrictions imposed are
   !       1. L2+L3+L5+L6 and L2+L4+L6 must be integers;
-  !       2. ABS(L2-L4).LE.L6.LE.L2+L4 must be satisfied;
-  !       3. ABS(L4-L5).LE.L3.LE.L4+L5 must be satisfied;
+  !       2. ABS(L2-L4)<=L6<=L2+L4 must be satisfied;
+  !       3. ABS(L4-L5)<=L3<=L4+L5 must be satisfied;
   !       4. L1MAX-L1MIN must be a non-negative integer, where
   !          L1MAX=MIN(L2+L3,L5+L6) and L1MIN=MAX(ABS(L2-L3),ABS(L5-L6)).
   !  If all the conventional restrictions are satisfied, then these
@@ -134,11 +133,11 @@ SUBROUTINE RC6J(L2,L3,L4,L5,L6,L1min,L1max,Sixcof,Ndim,Ier)
   !           D. W. Lozier.
   USE service, ONLY : XERMSG, R1MACH
   !
-  INTEGER Ndim, Ier
-  REAL(SP) L2, L3, L4, L5, L6, L1min, L1max, Sixcof(Ndim)
+  INTEGER :: Ndim, Ier
+  REAL(SP) :: L2, L3, L4, L5, L6, L1min, L1max, Sixcof(Ndim)
   !
-  INTEGER i, indexx, lstep, n, nfin, nfinp1, nfinp2, nfinp3, nlim, nstep2
-  REAL(SP) a1, a1s, a2, a2s, c1, c1old, c2, cnorm, denom, dv, hugee, l1, &
+  INTEGER :: i, indexx, lstep, n, nfin, nfinp1, nfinp2, nfinp3, nlim, nstep2
+  REAL(SP) :: a1, a1s, a2, a2s, c1, c1old, c2, cnorm, denom, dv, hugee, l1, &
     newfac, oldfac, ratio, sign1, sign2, srhuge, srtiny, sum1, sum2, sumbac, &
     sumfor, sumuni, thresh, tinyy, x, x1, x2, x3, y, y1, y2, y3
   REAL(SP), PARAMETER :: zero = 0.0, eps = 0.01, one = 1.0, two = 2.0, three = 3.0
@@ -155,16 +154,16 @@ SUBROUTINE RC6J(L2,L3,L4,L5,L6,L1min,L1max,Sixcof,Ndim,Ier)
   !     LMATCH = ZERO
   !
   !  Check error conditions 1, 2, and 3.
-  IF ( (MOD(L2+L3+L5+L6+eps,one)>=eps+eps).OR.&
+  IF( (MOD(L2+L3+L5+L6+eps,one)>=eps+eps) .OR. &
       (MOD(L4+L2+L6+eps,one)>=eps+eps) ) THEN
     Ier = 1
     CALL XERMSG('RC6J','L2+L3+L5+L6 or L4+L2+L6 not integer.',Ier,1)
     RETURN
-  ELSEIF ( (L4+L2-L6<zero).OR.(L4-L2+L6<zero).OR.(-L4+L2+L6<zero) ) THEN
+  ELSEIF( (L4+L2-L6<zero) .OR. (L4-L2+L6<zero) .OR. (-L4+L2+L6<zero) ) THEN
     Ier = 2
     CALL XERMSG('RC6J','L4, L2, L6 triangular condition not satisfied.',Ier,1)
     RETURN
-  ELSEIF ( (L4-L5+L3<zero).OR.(L4+L5-L3<zero).OR.(-L4+L5+L3<zero) ) THEN
+  ELSEIF( (L4-L5+L3<zero) .OR. (L4+L5-L3<zero) .OR. (-L4+L5+L3<zero) ) THEN
     Ier = 3
     CALL XERMSG('RC6J','L4, L5, L3 triangular condition not satisfied.',Ier,1)
     RETURN
@@ -176,19 +175,19 @@ SUBROUTINE RC6J(L2,L3,L4,L5,L6,L1min,L1max,Sixcof,Ndim,Ier)
   L1max = MIN(L2+L3,L5+L6)
   !
   !  Check error condition 4.
-  IF ( MOD(L1max-L1min+eps,one)>=eps+eps ) THEN
+  IF( MOD(L1max-L1min+eps,one)>=eps+eps ) THEN
     Ier = 4
     CALL XERMSG('RC6J','L1MAX-L1MIN not integer.',Ier,1)
     RETURN
   END IF
-  IF ( L1min<L1max-eps ) THEN
+  IF( L1min<L1max-eps ) THEN
     !
     !
     !  This is reached in case that L1 can take more than one value.
     !
     !     LSCALE = 0
     nfin = INT(L1max-L1min+one+eps)
-    IF ( Ndim<nfin ) THEN
+    IF( Ndim<nfin ) THEN
       !
       !  Check error condition 6.
       Ier = 6
@@ -207,7 +206,7 @@ SUBROUTINE RC6J(L2,L3,L4,L5,L6,L1min,L1max,Sixcof,Ndim,Ier)
       !
       lstep = 1
     END IF
-  ELSEIF ( L1min<L1max+eps ) THEN
+  ELSEIF( L1min<L1max+eps ) THEN
     !
     !
     !  This is reached in case that L1 can take only one value
@@ -231,7 +230,7 @@ SUBROUTINE RC6J(L2,L3,L4,L5,L6,L1min,L1max,Sixcof,Ndim,Ier)
   a2 = (l1+L5+L6+one)*(l1-L5+L6)*(l1+L5-L6)*(-l1+L5+L6+one)
   newfac = SQRT(a1*a2)
   !
-  IF ( l1<one+eps ) THEN
+  IF( l1<one+eps ) THEN
     !
     !  If L1 = 1, (L1 - 1) has to be factored out of DV, hence
     !
@@ -245,11 +244,11 @@ SUBROUTINE RC6J(L2,L3,L4,L5,L6,L1min,L1max,Sixcof,Ndim,Ier)
     denom = (l1-one)*newfac
     !
     !
-    IF ( lstep>2 ) c1old = ABS(c1)
+    IF( lstep>2 ) c1old = ABS(c1)
     c1 = -(l1+l1-one)*dv/denom
   END IF
   !
-  IF ( lstep>2 ) THEN
+  IF( lstep>2 ) THEN
     !
     !
     c2 = -l1*oldfac/denom
@@ -261,11 +260,11 @@ SUBROUTINE RC6J(L2,L3,L4,L5,L6,L1min,L1max,Sixcof,Ndim,Ier)
     !
     sumfor = sum1
     sum1 = sum1 + (l1+l1+one)*x*x
-    IF ( lstep/=nfin ) THEN
+    IF( lstep/=nfin ) THEN
       !
       !  See if last unnormalized 6j coefficient exceeds SRHUGE
       !
-      IF ( ABS(x)>=srhuge ) THEN
+      IF( ABS(x)>=srhuge ) THEN
         !
         !  This is reached if last 6j coefficient larger than SRHUGE,
         !  so that the recursion series SIXCOF(1), ... ,SIXCOF(LSTEP)
@@ -273,7 +272,7 @@ SUBROUTINE RC6J(L2,L3,L4,L5,L6,L1min,L1max,Sixcof,Ndim,Ier)
         !
         !     LSCALE = LSCALE + 1
         DO i = 1, lstep
-          IF ( ABS(Sixcof(i))<srtiny ) Sixcof(i) = zero
+          IF( ABS(Sixcof(i))<srtiny ) Sixcof(i) = zero
           Sixcof(i) = Sixcof(i)/srhuge
         END DO
         sum1 = sum1/hugee
@@ -287,7 +286,7 @@ SUBROUTINE RC6J(L2,L3,L4,L5,L6,L1min,L1max,Sixcof,Ndim,Ier)
       !  stable.  Once an increase of ABS(C1) is detected, the recursion
       !  direction is reversed.
       !
-      IF ( c1old>ABS(c1) ) GOTO 100
+      IF( c1old>ABS(c1) ) GOTO 100
     END IF
     !
     !
@@ -332,7 +331,7 @@ SUBROUTINE RC6J(L2,L3,L4,L5,L6,L1min,L1max,Sixcof,Ndim,Ier)
       !
       denom = l1*newfac
       c1 = -(l1+l1-one)*dv/denom
-      IF ( lstep>2 ) THEN
+      IF( lstep>2 ) THEN
         !
         !
         c2 = -(l1-one)*oldfac/denom
@@ -340,14 +339,14 @@ SUBROUTINE RC6J(L2,L3,L4,L5,L6,L1min,L1max,Sixcof,Ndim,Ier)
         !  Recursion to the next 6j coefficient Y
         !
         y = c1*Sixcof(nfinp2-lstep) + c2*Sixcof(nfinp3-lstep)
-        IF ( lstep==nstep2 ) EXIT
+        IF( lstep==nstep2 ) EXIT
         Sixcof(nfinp1-lstep) = y
         sumbac = sum2
         sum2 = sum2 + (l1+l1-three)*y*y
         !
         !  See if last unnormalized 6j coefficient exceeds SRHUGE
         !
-        IF ( ABS(y)>=srhuge ) THEN
+        IF( ABS(y)>=srhuge ) THEN
           !
           !  This is reached if last 6j coefficient larger than SRHUGE,
           !  so that the recursion series SIXCOF(NFIN), ... ,SIXCOF(NFIN-LSTEP+1)
@@ -356,7 +355,7 @@ SUBROUTINE RC6J(L2,L3,L4,L5,L6,L1min,L1max,Sixcof,Ndim,Ier)
           !     LSCALE = LSCALE + 1
           DO i = 1, lstep
             indexx = nfin - i + 1
-            IF ( ABS(Sixcof(indexx))<srtiny ) Sixcof(indexx) = zero
+            IF( ABS(Sixcof(indexx))<srtiny ) Sixcof(indexx) = zero
             Sixcof(indexx) = Sixcof(indexx)/srhuge
           END DO
           sumbac = sumbac/hugee
@@ -369,7 +368,7 @@ SUBROUTINE RC6J(L2,L3,L4,L5,L6,L1min,L1max,Sixcof,Ndim,Ier)
         !
         y = srtiny*c1
         Sixcof(nfin-1) = y
-        IF ( lstep==nstep2 ) EXIT
+        IF( lstep==nstep2 ) EXIT
         sumbac = sum2
         sum2 = sum2 + (l1+l1-three)*c1*c1*tinyy
       END IF
@@ -390,7 +389,7 @@ SUBROUTINE RC6J(L2,L3,L4,L5,L6,L1min,L1max,Sixcof,Ndim,Ier)
     ratio = (x1*y1+x2*y2+x3*y3)/(x1*x1+x2*x2+x3*x3)
     nlim = nfin - nstep2 + 1
     !
-    IF ( ABS(ratio)<one ) THEN
+    IF( ABS(ratio)<one ) THEN
       !
       nlim = nlim + 1
       ratio = one/ratio
@@ -413,7 +412,7 @@ SUBROUTINE RC6J(L2,L3,L4,L5,L6,L1min,L1max,Sixcof,Ndim,Ier)
     Sixcof(2) = x
     sum1 = sum1 + tinyy*(l1+l1+one)*c1*c1
     !
-    IF ( lstep/=nfin ) GOTO 100
+    IF( lstep/=nfin ) GOTO 100
     !
     sumuni = sum1
   END IF
@@ -427,13 +426,13 @@ SUBROUTINE RC6J(L2,L3,L4,L5,L6,L1min,L1max,Sixcof,Ndim,Ier)
   !
   sign1 = SIGN(one,Sixcof(nfin))
   sign2 = (-one)**INT(L2+L3+L5+L6+eps)
-  IF ( sign1*sign2<=0 ) cnorm = -cnorm
+  IF( sign1*sign2<=0 ) cnorm = -cnorm
   !
-  IF ( ABS(cnorm)<one ) THEN
+  IF( ABS(cnorm)<one ) THEN
     !
     thresh = tinyy/ABS(cnorm)
     DO n = 1, nfin
-      IF ( ABS(Sixcof(n))<thresh ) Sixcof(n) = zero
+      IF( ABS(Sixcof(n))<thresh ) Sixcof(n) = zero
       Sixcof(n) = cnorm*Sixcof(n)
     END DO
     RETURN

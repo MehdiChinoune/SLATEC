@@ -1,7 +1,6 @@
 !** PNNZRS
 SUBROUTINE PNNZRS(I,Xval,Iplace,Sx,Ix,Ircx)
-  !>
-  !  Subsidiary to SPLP
+  !> Subsidiary to SPLP
   !***
   ! **Library:**   SLATEC
   !***
@@ -70,7 +69,7 @@ SUBROUTINE PNNZRS(I,Xval,Iplace,Sx,Ix,Ircx)
   !
   !     CHECK VALIDITY OF ROW/COL. INDEX.
   !
-  IF ( Ircx==0 ) THEN
+  IF( Ircx==0 ) THEN
     nerr = 55
     CALL XERMSG('PNNZRS','IRCX=0.',nerr,iopt)
   END IF
@@ -78,12 +77,12 @@ SUBROUTINE PNNZRS(I,Xval,Iplace,Sx,Ix,Ircx)
   !     LMX IS THE LENGTH OF THE IN-MEMORY STORAGE AREA.
   !
   lmx = Ix(1)
-  IF ( Ircx>=0 ) THEN
+  IF( Ircx>=0 ) THEN
     !
-    !     CHECK SUBSCRIPTS OF THE COLUMN. THE COL. NUMBER MUST BE .LE. N AND
-    !     THE INDEX MUST BE .LE. M.
+    !     CHECK SUBSCRIPTS OF THE COLUMN. THE COL. NUMBER MUST BE <= N AND
+    !     THE INDEX MUST BE <= M.
     !
-    IF ( Ircx>Ix(3).OR.ABS(I)>Ix(2) ) THEN
+    IF( Ircx>Ix(3) .OR. ABS(I)>Ix(2) ) THEN
       nerr = 55
       CALL XERMSG('PNNZRS',&
         'SUBSCRIPTS FOR ARRAY ELEMENT TO BE ACCESSED WERE OUT OF BOUNDS.',nerr,iopt)
@@ -91,10 +90,10 @@ SUBROUTINE PNNZRS(I,Xval,Iplace,Sx,Ix,Ircx)
     l = Ix(2)
   ELSE
     !
-    !     CHECK SUBSCRIPTS OF THE ROW. THE ROW NUMBER MUST BE .LE. M AND
-    !     THE INDEX MUST BE .LE. N.
+    !     CHECK SUBSCRIPTS OF THE ROW. THE ROW NUMBER MUST BE <= M AND
+    !     THE INDEX MUST BE <= N.
     !
-    IF ( Ix(2)<-Ircx.OR.Ix(3)<ABS(I) ) THEN
+    IF( Ix(2)<-Ircx .OR. Ix(3)<ABS(I) ) THEN
       nerr = 55
       CALL XERMSG('PNNZRS',&
         'SUBSCRIPTS FOR ARRAY ELEMENT TO BE ACCESSED WERE OUT OF BOUNDS.',nerr,iopt)
@@ -107,7 +106,7 @@ SUBROUTINE PNNZRS(I,Xval,Iplace,Sx,Ix,Ircx)
   j = ABS(Ircx)
   ll = Ix(3) + 4
   lpg = lmx - ll
-  IF ( Ircx<=0 ) THEN
+  IF( Ircx<=0 ) THEN
     !
     !     SEARCH A ROW FOR THE NEXT NONZERO.
     !     FIND ELEMENT J=ABS(IRCX) IN ROWS ABS(I)+1,...,L.
@@ -116,7 +115,7 @@ SUBROUTINE PNNZRS(I,Xval,Iplace,Sx,Ix,Ircx)
     !
     !     CHECK FOR END OF VECTOR.
     !
-    IF ( I/=l ) THEN
+    IF( I/=l ) THEN
       i1 = I + 1
       ii = i1
       n20046 = l
@@ -131,19 +130,19 @@ SUBROUTINE PNNZRS(I,Xval,Iplace,Sx,Ix,Ircx)
     !     SEARCHING FOR THE NEXT NONZERO IN A COLUMN.
     !
     !     INITIALIZE STARTING LOCATIONS..
-    IF ( I<=0 ) THEN
-      IF ( j/=1 ) THEN
+    IF( I<=0 ) THEN
+      IF( j/=1 ) THEN
         Iplace = Ix(j+3) + 1
       ELSE
         Iplace = ll + 1
       END IF
     END IF
     !
-    !     THE CASE I.LE.0 SIGNALS THAT THE SCAN FOR THE ENTRY
+    !     THE CASE I<=0 SIGNALS THAT THE SCAN FOR THE ENTRY
     !     IS TO BEGIN AT THE START OF THE VECTOR.
     !
     I = ABS(I)
-    IF ( j/=1 ) THEN
+    IF( j/=1 ) THEN
       istart = Ix(j+3) + 1
     ELSE
       istart = ll + 1
@@ -152,8 +151,8 @@ SUBROUTINE PNNZRS(I,Xval,Iplace,Sx,Ix,Ircx)
     !
     !     VALIDATE IPLACE. SET TO START OF VECTOR IF OUT OF RANGE.
     !
-    IF ( istart>Iplace.OR.Iplace>iend ) THEN
-      IF ( j/=1 ) THEN
+    IF( istart>Iplace .OR. Iplace>iend ) THEN
+      IF( j/=1 ) THEN
         Iplace = Ix(j+3) + 1
       ELSE
         Iplace = ll + 1
@@ -169,7 +168,7 @@ SUBROUTINE PNNZRS(I,Xval,Iplace,Sx,Ix,Ircx)
     !     END OF EACH PAGE.
     !
     idiff = lmx - ipl
-    IF ( idiff<=1.AND.Ix(lmx-1)>0 ) THEN
+    IF( idiff<=1 .AND. Ix(lmx-1)>0 ) THEN
       !
       !     UPDATE THE RELATIVE ADDRESS IN A NEW PAGE.
       !
@@ -186,28 +185,28 @@ SUBROUTINE PNNZRS(I,Xval,Iplace,Sx,Ix,Ircx)
   il = MIN(il,lmx-2)
   !
   !     THE RELATIVE END OF DATA FOR THIS PAGE IS IL.
-  !     SEARCH FOR A NONZERO VALUE WITH AN INDEX .GT. I ON THE PRESENT
+  !     SEARCH FOR A NONZERO VALUE WITH AN INDEX > I ON THE PRESENT
   !     PAGE.
   !
-  DO WHILE ( .NOT.(ipl>=il.OR.(Ix(ipl)>I.AND.Sx(ipl)/=zero)) )
+  DO WHILE( .NOT. (ipl>=il .OR. (Ix(ipl)>I .AND. Sx(ipl)/=zero)) )
     ipl = ipl + 1
   END DO
   !
   !     TEST IF WE HAVE FOUND THE NEXT NONZERO.
   !
-  IF ( Ix(ipl)<=I.OR.Sx(ipl)==zero.OR.ipl>il ) THEN
+  IF( Ix(ipl)<=I .OR. Sx(ipl)==zero .OR. ipl>il ) THEN
     !
     !     UPDATE TO SCAN THE NEXT PAGE.
     ipl = ll + 1
     np = np + 1
-    IF ( ilast/=iend ) GOTO 100
+    IF( ilast/=iend ) GOTO 100
     !
     !     NO DATA WAS FOUND. END OF VECTOR ENCOUNTERED.
     !
     I = 0
     Xval = zero
     il = il + 1
-    IF ( il==lmx-1 ) il = il + 2
+    IF( il==lmx-1 ) il = il + 2
     !
     !     IF A NEW ITEM WOULD BE INSERTED, IPLACE POINTS TO THE PLACE
     !     TO PUT IT.
@@ -221,7 +220,7 @@ SUBROUTINE PNNZRS(I,Xval,Iplace,Sx,Ix,Ircx)
     RETURN
   END IF
   200 CONTINUE
-  IF ( (n20046-ii)<0 ) THEN
+  IF( (n20046-ii)<0 ) THEN
     !
     !     ORTHOGONAL SCAN FAILED. THE VALUE J WAS NOT A SUBSCRIPT
     !     IN ANY ROW.
@@ -234,7 +233,7 @@ SUBROUTINE PNNZRS(I,Xval,Iplace,Sx,Ix,Ircx)
     !     INITIALIZE IPPLOC FOR ORTHOGONAL SCAN.
     !     LOOK FOR J AS A SUBSCRIPT IN ROWS II, II=I+1,...,L.
     !
-    IF ( ii/=1 ) THEN
+    IF( ii/=1 ) THEN
       ipploc = Ix(ii+3) + 1
     ELSE
       ipploc = ll + 1
@@ -248,7 +247,7 @@ SUBROUTINE PNNZRS(I,Xval,Iplace,Sx,Ix,Ircx)
     !     FIX UP IPPLOC AND IPL TO POINT TO MATRIX DATA.
     !
     idiff = lmx - ipl
-    IF ( idiff<=1.AND.Ix(lmx-1)>0 ) THEN
+    IF( idiff<=1 .AND. Ix(lmx-1)>0 ) THEN
       ipploc = ipploc + idiff + 1
       ipl = IPLOC(ipploc,Sx,Ix)
     END IF
@@ -257,17 +256,17 @@ SUBROUTINE PNNZRS(I,Xval,Iplace,Sx,Ix,Ircx)
   300  ilast = MIN(iend,np*lpg+ll-2)
   il = IPLOC(ilast,Sx,Ix)
   il = MIN(il,lmx-2)
-  DO WHILE ( .NOT.(ipl>=il.OR.Ix(ipl)>=j) )
+  DO WHILE( .NOT. (ipl>=il .OR. Ix(ipl)>=j) )
     ipl = ipl + 1
   END DO
   !
   !     TEST IF WE HAVE FOUND THE NEXT NONZERO.
   !
-  IF ( Ix(ipl)/=j.OR.Sx(ipl)==zero.OR.ipl>il ) THEN
-    IF ( Ix(ipl)>=j ) ilast = iend
+  IF( Ix(ipl)/=j .OR. Sx(ipl)==zero .OR. ipl>il ) THEN
+    IF( Ix(ipl)>=j ) ilast = iend
     ipl = ll + 1
     np = np + 1
-    IF ( ilast/=iend ) GOTO 300
+    IF( ilast/=iend ) GOTO 300
     ii = ii + 1
     GOTO 200
   END IF

@@ -1,7 +1,6 @@
 !** POLYVL
 SUBROUTINE POLYVL(Nder,Xx,Yfit,Yp,N,X,C,Work,Ierr)
-  !>
-  !  Calculate the value of a polynomial and its first NDER
+  !> Calculate the value of a polynomial and its first NDER
   !            derivatives where the polynomial was produced by a previous
   !            call to POLINT.
   !***
@@ -31,7 +30,7 @@ SUBROUTINE POLYVL(Nder,Xx,Yfit,Yp,N,X,C,Work,Ierr)
   !     YP   must be dimensioned by at least NDER
   !     X    must be dimensioned by at least N (see the abstract )
   !     C    must be dimensioned by at least N (see the abstract )
-  !     WORK must be dimensioned by at least 2*N if NDER is .GT. 0.
+  !     WORK must be dimensioned by at least 2*N if NDER is > 0.
   !
   !     *** Note ***
   !       If NDER=0, neither YP nor WORK need to be dimensioned variables.
@@ -65,7 +64,7 @@ SUBROUTINE POLYVL(Nder,Xx,Yfit,Yp,N,X,C,Work,Ierr)
   !
   !     WORK  = this is an array to provide internal working storage for
   !             POLYVL.  It must be dimensioned by at least 2*N if NDER is
-  !             .GT. 0.  If NDER=0, WORK does not need to be a dimensioned
+  !             > 0.  If NDER=0, WORK does not need to be a dimensioned
   !             variable.
   !
   !***
@@ -84,18 +83,18 @@ SUBROUTINE POLYVL(Nder,Xx,Yfit,Yp,N,X,C,Work,Ierr)
 
   INTEGER :: Ierr, N, Nder
   REAL(SP) :: C(N), Work(2*N), X(N), Yp(Nder), Xx, Yfit
-  INTEGER i, im1, izero, k, km1, km1pi, km2pn, km2pni, m, mm, ndr, nmkp1, npkm1
+  INTEGER :: i, im1, izero, k, km1, km1pi, km2pn, km2pni, m, mm, ndr, nmkp1, npkm1
   REAL(SP) :: fac, pione, pitwo, pone, ptwo, xk
   !* FIRST EXECUTABLE STATEMENT  POLYVL
   Ierr = 1
-  IF ( Nder<=0 ) THEN
+  IF( Nder<=0 ) THEN
     !
     !     *****   CODING FOR THE CASE NDER = 0
     !
     pione = 1.0
     pone = C(1)
     Yfit = pone
-    IF ( N==1 ) RETURN
+    IF( N==1 ) RETURN
     DO k = 2, N
       pitwo = (Xx-X(k-1))*pione
       pione = pitwo
@@ -107,11 +106,11 @@ SUBROUTINE POLYVL(Nder,Xx,Yfit,Yp,N,X,C,Work,Ierr)
     !
     !     *****   END OF NDER = 0 CASE
     !
-  ELSEIF ( N>1 ) THEN
+  ELSEIF( N>1 ) THEN
     !
-    !     *****  END OF THE CASE  N = 1 AND  NDER .GT. 0
+    !     *****  END OF THE CASE  N = 1 AND  NDER > 0
     !
-    IF ( Nder<N ) THEN
+    IF( Nder<N ) THEN
       izero = 0
       ndr = Nder
     ELSE
@@ -125,7 +124,7 @@ SUBROUTINE POLYVL(Nder,Xx,Yfit,Yp,N,X,C,Work,Ierr)
     m = ndr + 1
     mm = m
     !
-    !     *****  START OF THE CASE NDER .GT. 0  AND N .GT. 1
+    !     *****  START OF THE CASE NDER > 0  AND N > 1
     !     *****  THE POLYNOMIAL AND ITS DERIVATIVES WILL BE EVALUATED AT XX
     !
     DO k = 1, ndr
@@ -160,8 +159,8 @@ SUBROUTINE POLYVL(Nder,Xx,Yfit,Yp,N,X,C,Work,Ierr)
     !     ** AT THIS POINT THE POLYNOMIAL HAS BEEN EVALUATED AND INFORMATION
     !        FOR THE DERIVATIVE EVALUATIONS HAVE BEEN STORED IN THE ARRAY
     !        WORK
-    IF ( N/=2 ) THEN
-      IF ( m==N ) mm = ndr
+    IF( N/=2 ) THEN
+      IF( m==N ) mm = ndr
       !
       !     ***** EVALUATE THE DERIVATIVES AT XX
       !
@@ -183,7 +182,7 @@ SUBROUTINE POLYVL(Nder,Xx,Yfit,Yp,N,X,C,Work,Ierr)
           Yp(km1) = Yp(km1) + Work(i)*C(km1pi)
         END DO
       END DO
-      IF ( ndr/=1 ) THEN
+      IF( ndr/=1 ) THEN
         fac = 1.0
         DO k = 2, ndr
           xk = k
@@ -195,7 +194,7 @@ SUBROUTINE POLYVL(Nder,Xx,Yfit,Yp,N,X,C,Work,Ierr)
     !
     !     ***** END OF DERIVATIVE EVALUATIONS
     !
-    IF ( izero==0 ) RETURN
+    IF( izero==0 ) RETURN
     !
     !     *****  SET EXCESS DERIVATIVES TO ZERO.
     !
@@ -205,7 +204,7 @@ SUBROUTINE POLYVL(Nder,Xx,Yfit,Yp,N,X,C,Work,Ierr)
   ELSE
     Yfit = C(1)
     !
-    !     *****  CODING FOR THE CASE  N=1 AND NDER .GT. 0
+    !     *****  CODING FOR THE CASE  N=1 AND NDER > 0
     !
     DO k = 1, Nder
       Yp(k) = 0.0

@@ -1,8 +1,7 @@
 !** HSTPLR
 SUBROUTINE HSTPLR(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
     Idimf,Pertrb,Ierror,W)
-  !>
-  !  Solve the standard five-point finite difference
+  !> Solve the standard five-point finite difference
   !            approximation on a staggered grid to the Helmholtz equation
   !            in polar coordinates.
   !***
@@ -35,7 +34,7 @@ SUBROUTINE HSTPLR(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   !             * * * * * *   On Input    * * * * * *
   !
   !    A,B
-  !      The range of R, i.e. A .LE. R .LE. B.  A must be less than B and
+  !      The range of R, i.e. A <= R <= B.  A must be less than B and
   !      A must be non-negative.
   !
   !    M
@@ -98,7 +97,7 @@ SUBROUTINE HSTPLR(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   !               BDB(J) = (d/dR)U(B,THETA(J)),    J=1,2,...,N.
   !
   !    C,D
-  !      The range of THETA, i.e. C .LE. THETA .LE. D.  C must be less
+  !      The range of THETA, i.e. C <= THETA <= D.  C must be less
   !      than D.
   !
   !    N
@@ -208,29 +207,29 @@ SUBROUTINE HSTPLR(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   !
   !      =  0  No error
   !
-  !      =  1  A .LT. 0
+  !      =  1  A < 0
   !
-  !      =  2  A .GE. B
+  !      =  2  A >= B
   !
-  !      =  3  MBDCND .LT. 1 or MBDCND .GT. 6
+  !      =  3  MBDCND < 1 or MBDCND > 6
   !
-  !      =  4  C .GE. D
+  !      =  4  C >= D
   !
-  !      =  5  N .LE. 2
+  !      =  5  N <= 2
   !
-  !      =  6  NBDCND .LT. 0 or NBDCND .GT. 4
+  !      =  6  NBDCND < 0 or NBDCND > 4
   !
   !      =  7  A = 0 and MBDCND = 3 or 4
   !
-  !      =  8  A .GT. 0 and MBDCND .GE. 5
+  !      =  8  A > 0 and MBDCND >= 5
   !
-  !      =  9  MBDCND .GE. 5 and NBDCND .NE. 0 or 3
+  !      =  9  MBDCND >= 5 and NBDCND /= 0 or 3
   !
-  !      = 10  IDIMF .LT. M
+  !      = 10  IDIMF < M
   !
-  !      = 11  LAMBDA .GT. 0
+  !      = 11  LAMBDA > 0
   !
-  !      = 12  M .LE. 2
+  !      = 12  M <= 2
   !
   !      Since this is the only means of indicating a possibly
   !      incorrect call to HSTPLR, the user should test IERROR after
@@ -334,18 +333,18 @@ SUBROUTINE HSTPLR(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   REAL(SP) :: a1, a2, deltar, deltht, dlrsq, dlthsq
   !* FIRST EXECUTABLE STATEMENT  HSTPLR
   Ierror = 0
-  IF ( A<0. ) Ierror = 1
-  IF ( A>=B ) Ierror = 2
-  IF ( Mbdcnd<=0.OR.Mbdcnd>=7 ) Ierror = 3
-  IF ( C>=D ) Ierror = 4
-  IF ( N<=2 ) Ierror = 5
-  IF ( Nbdcnd<0.OR.Nbdcnd>=5 ) Ierror = 6
-  IF ( A==0..AND.(Mbdcnd==3.OR.Mbdcnd==4) ) Ierror = 7
-  IF ( A>0..AND.Mbdcnd>=5 ) Ierror = 8
-  IF ( Mbdcnd>=5.AND.Nbdcnd/=0.AND.Nbdcnd/=3 ) Ierror = 9
-  IF ( Idimf<M ) Ierror = 10
-  IF ( M<=2 ) Ierror = 12
-  IF ( Ierror/=0 ) RETURN
+  IF( A<0. ) Ierror = 1
+  IF( A>=B ) Ierror = 2
+  IF( Mbdcnd<=0 .OR. Mbdcnd>=7 ) Ierror = 3
+  IF( C>=D ) Ierror = 4
+  IF( N<=2 ) Ierror = 5
+  IF( Nbdcnd<0 .OR. Nbdcnd>=5 ) Ierror = 6
+  IF( A==0. .AND. (Mbdcnd==3 .OR. Mbdcnd==4) ) Ierror = 7
+  IF( A>0. .AND. Mbdcnd>=5 ) Ierror = 8
+  IF( Mbdcnd>=5 .AND. Nbdcnd/=0 .AND. Nbdcnd/=3 ) Ierror = 9
+  IF( Idimf<M ) Ierror = 10
+  IF( M<=2 ) Ierror = 12
+  IF( Ierror/=0 ) RETURN
   deltar = (B-A)/M
   dlrsq = deltar**2
   deltht = (D-C)/N
@@ -353,7 +352,7 @@ SUBROUTINE HSTPLR(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   np = Nbdcnd + 1
   isw = 1
   mb = Mbdcnd
-  IF ( A==0..AND.Mbdcnd==2 ) mb = 6
+  IF( A==0. .AND. Mbdcnd==2 ) mb = 6
   !
   !     DEFINE A,B,C COEFFICIENTS IN W-ARRAY.
   !
@@ -447,8 +446,8 @@ SUBROUTINE HSTPLR(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   !     SOLUTION.
   !
   100  Pertrb = 0.
-  IF ( Elmbda<0 ) THEN
-  ELSEIF ( Elmbda==0 ) THEN
+  IF( Elmbda<0 ) THEN
+  ELSEIF( Elmbda==0 ) THEN
     SELECT CASE (mb)
       CASE (1,2,4,5)
       CASE DEFAULT
@@ -500,19 +499,19 @@ SUBROUTINE HSTPLR(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   !
   !     CALL POISTG OR GENBUN TO SOLVE THE SYSTEM OF EQUATIONS.
   !
-  IF ( lp==0 ) THEN
+  IF( lp==0 ) THEN
     CALL GENBUN(lp,N,1,M,W(1:iwb),W(iwb+1:iwc),W(iwc+1:iwr),Idimf,F,ierr1,W(iwr+1:))
   ELSE
     CALL POISTG(lp,N,1,M,W(1:iwb),W(iwb+1:iwc),W(iwc+1:iwr),Idimf,F,ierr1,W(iwr+1:))
   END IF
   W(1) = W(iwr+1) + 3*M
-  IF ( A==0..AND.Mbdcnd==2.AND.isw==2 ) THEN
+  IF( A==0. .AND. Mbdcnd==2 .AND. isw==2 ) THEN
     a1 = 0.
     DO j = 1, N
       a1 = a1 + F(1,j)
     END DO
     a1 = (a1-dlrsq*a2/16.)/N
-    IF ( Nbdcnd==3 ) a1 = a1 + (Bdd(1)-Bdc(1))/(D-C)
+    IF( Nbdcnd==3 ) a1 = a1 + (Bdd(1)-Bdc(1))/(D-C)
     a1 = Bda(1) - a1
     DO i = 1, M
       DO j = 1, N

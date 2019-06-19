@@ -1,8 +1,7 @@
 !** DLLSIA
 SUBROUTINE DLLSIA(A,Mda,M,N,B,Mdb,Nb,Re,Ae,Key,Mode,Np,Krank,Ksure,Rnorm,&
     W,Lw,Iwork,Liw,Info)
-  !>
-  !  Solve linear least squares problems by performing a QR
+  !> Solve linear least squares problems by performing a QR
   !            factorization of the input matrix using Householder
   !            transformations.  Emphasis is put on detecting possible
   !            rank deficiency.
@@ -20,7 +19,7 @@ SUBROUTINE DLLSIA(A,Mda,M,N,B,Mdb,Nb,Re,Ae,Key,Mode,Np,Krank,Ksure,Rnorm,&
   ! **Description:**
   !
   !     DLLSIA computes the least squares solution(s) to the problem AX=B
-  !     where A is an M by N matrix with M.GE.N and B is the M by NB
+  !     where A is an M by N matrix with M>=N and B is the M by NB
   !     matrix of right hand sides.  User input bounds on the uncertainty
   !     in the elements of A are used to detect numerical rank deficiency.
   !     The algorithm employs a row and column pivot strategy to
@@ -42,12 +41,12 @@ SUBROUTINE DLLSIA(A,Mda,M,N,B,Mdb,Nb,Re,Ae,Key,Mode,Np,Krank,Ksure,Rnorm,&
   !      MDA,M,N      actual first dimension of A in the calling program.
   !                   M is the row dimension (no. of EQUATIONS of the
   !                   problem) and N the col dimension (no. of UNKNOWNS).
-  !                   Must have MDA.GE.M and M.GE.N.
+  !                   Must have MDA>=M and M>=N.
   !
   !     B(,)          Right hand side(s), with MDB the actual first
   !      MDB,NB       dimension of B in the calling program. NB is the
   !                   number of M by 1 right hand sides. Must have
-  !                   MDB.GE.M. If NB = 0, B is never accessed.
+  !                   MDB>=M. If NB = 0, B is never accessed.
   !
   !   ******************************************************************
   !   *                                                                *
@@ -112,7 +111,7 @@ SUBROUTINE DLLSIA(A,Mda,M,N,B,Mdb,Nb,Re,Ae,Key,Mode,Np,Krank,Ksure,Rnorm,&
   !                   LW, IWORK, LIW, and the first 2*N locations of WORK
   !                   as output by the original call to DLLSIA. MODE must
   !                   be equal to the value of MODE in the original call.
-  !                   If MODE.LT.2, only the first N locations of WORK
+  !                   If MODE<2, only the first N locations of WORK
   !                   are accessed. AE, RE, KEY, and NP are not accessed.
   !
   !     Output..All TYPE REAL variable are DOUBLE PRECISION
@@ -148,7 +147,7 @@ SUBROUTINE DLLSIA(A,Mda,M,N,B,Mdb,Nb,Re,Ae,Key,Mode,Np,Krank,Ksure,Rnorm,&
   !                   1 - Rank deficient, truncated solution
   !                   2 - Rank deficient, minimal length solution
   !                   3 - Numerical rank 0, zero solution
-  !                   4 - Rank .LT. NP
+  !                   4 - Rank < NP
   !                   5 - Full rank
   !
   !***
@@ -169,68 +168,68 @@ SUBROUTINE DLLSIA(A,Mda,M,N,B,Mdb,Nb,Re,Ae,Key,Mode,Np,Krank,Ksure,Rnorm,&
   !   900510  Fixed an error message.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   USE service, ONLY : D1MACH, XERMSG
-  INTEGER i, Info, it, Key, Krank, Ksure, Liw, Lw, M, Mda, Mdb, &
+  INTEGER :: i, Info, it, Key, Krank, Ksure, Liw, Lw, M, Mda, Mdb, &
     Mode, N, n1, n2, n3, n4, n5, Nb, Np
   REAL(DP) :: A(Mda,N), Ae(N), B(Mdb,Nb), eps, Re(N), Rnorm(Nb), W(5*N)
-  INTEGER Iwork(N+M)
+  INTEGER :: Iwork(N+M)
   !
   !* FIRST EXECUTABLE STATEMENT  DLLSIA
-  IF ( Info<0.OR.Info>1 ) THEN
+  IF( Info<0 .OR. Info>1 ) THEN
     CALL XERMSG('DLLSIA','INFO OUT OF RANGE',2,1)
     RETURN
   ELSE
     it = Info
     Info = -1
-    IF ( Nb==0.AND.it==1 ) THEN
+    IF( Nb==0 .AND. it==1 ) THEN
       !
       !     ERROR MESSAGES
       !
       CALL XERMSG('DLLSIA',&
         'SOLUTION ONLY (INFO=1) BUT NO RIGHT HAND SIDE (NB=0)',1,0)
       RETURN
-    ELSEIF ( M<1 ) THEN
-      CALL XERMSG('DLLSIA','M.LT.1',2,1)
+    ELSEIF( M<1 ) THEN
+      CALL XERMSG('DLLSIA','M<1',2,1)
       RETURN
-    ELSEIF ( N<1 ) THEN
-      CALL XERMSG('DLLSIA','N.LT.1',2,1)
+    ELSEIF( N<1 ) THEN
+      CALL XERMSG('DLLSIA','N<1',2,1)
       RETURN
     ELSE
-      IF ( N>M ) THEN
-        CALL XERMSG('DLLSIA','N.GT.M',2,1)
+      IF( N>M ) THEN
+        CALL XERMSG('DLLSIA','N>M',2,1)
         RETURN
       ELSE
-        IF ( Mda<M ) THEN
-          CALL XERMSG('DLLSIA','MDA.LT.M',2,1)
+        IF( Mda<M ) THEN
+          CALL XERMSG('DLLSIA','MDA<M',2,1)
           RETURN
         ELSE
-          IF ( Liw<M+N ) THEN
-            CALL XERMSG('DLLSIA','LIW.LT.M+N',2,1)
+          IF( Liw<M+N ) THEN
+            CALL XERMSG('DLLSIA','LIW<M+N',2,1)
             RETURN
           ELSE
-            IF ( Mode<0.OR.Mode>3 ) THEN
+            IF( Mode<0 .OR. Mode>3 ) THEN
               CALL XERMSG('DLLSIA','MODE OUT OF RANGE',2,1)
               RETURN
             ELSE
-              IF ( Nb/=0 ) THEN
-                IF ( Nb<0 ) THEN
-                  CALL XERMSG('DLLSIA','NB.LT.0',2,1)
+              IF( Nb/=0 ) THEN
+                IF( Nb<0 ) THEN
+                  CALL XERMSG('DLLSIA','NB<0',2,1)
                   RETURN
-                ELSEIF ( Mdb<M ) THEN
-                  CALL XERMSG('DLLSIA','MDB.LT.M',2,1)
+                ELSEIF( Mdb<M ) THEN
+                  CALL XERMSG('DLLSIA','MDB<M',2,1)
                   RETURN
-                ELSEIF ( it/=0 ) THEN
+                ELSEIF( it/=0 ) THEN
                   GOTO 2
                 END IF
               END IF
-              IF ( Key<0.OR.Key>3 ) THEN
+              IF( Key<0 .OR. Key>3 ) THEN
                 CALL XERMSG('DLLSIA','KEY OUT OF RANGE',2,1)
                 RETURN
               ELSE
-                IF ( Key==0.AND.Lw<5*N ) GOTO 5
-                IF ( Key==1.AND.Lw<4*N ) GOTO 5
-                IF ( Key==2.AND.Lw<4*N ) GOTO 5
-                IF ( Key==3.AND.Lw<3*N ) GOTO 5
-                IF ( Np<0.OR.Np>N ) THEN
+                IF( Key==0 .AND. Lw<5*N ) GOTO 5
+                IF( Key==1 .AND. Lw<4*N ) GOTO 5
+                IF( Key==2 .AND. Lw<4*N ) GOTO 5
+                IF( Key==3 .AND. Lw<3*N ) GOTO 5
+                IF( Np<0 .OR. Np>N ) THEN
                   CALL XERMSG('DLLSIA','NP OUT OF RANGE',2,1)
                   RETURN
                 ELSE
@@ -242,44 +241,44 @@ SUBROUTINE DLLSIA(A,Mda,M,N,B,Mdb,Nb,Re,Ae,Key,Mode,Np,Krank,Ksure,Rnorm,&
                   n4 = n3 + N
                   n5 = n4 + N
                   !
-                  IF ( Key==1 ) THEN
+                  IF( Key==1 ) THEN
                     !
-                    IF ( Ae(1)<0.0D0 ) GOTO 100
+                    IF( Ae(1)<0.0D0 ) GOTO 100
                     DO i = 1, N
-                      IF ( Re(i)<0.0D0 ) GOTO 10
-                      IF ( Re(i)>1.0D0 ) GOTO 20
-                      IF ( Re(i)<eps ) Re(i) = eps
+                      IF( Re(i)<0.0D0 ) GOTO 10
+                      IF( Re(i)>1.0D0 ) GOTO 20
+                      IF( Re(i)<eps ) Re(i) = eps
                       W(n4-1+i) = Ae(1)
                     END DO
                     CALL DU11LS(A,Mda,M,N,Re,W(n4),Mode,Np,Krank,Ksure,&
                       W(n1),W(n2),W(n3),Iwork(n1),Iwork(n2))
-                  ELSEIF ( Key==2 ) THEN
+                  ELSEIF( Key==2 ) THEN
                     !
-                    IF ( Re(1)<0.0D0 ) GOTO 10
-                    IF ( Re(1)>1.0D0 ) GOTO 20
-                    IF ( Re(1)<eps ) Re(1) = eps
+                    IF( Re(1)<0.0D0 ) GOTO 10
+                    IF( Re(1)>1.0D0 ) GOTO 20
+                    IF( Re(1)<eps ) Re(1) = eps
                     DO i = 1, N
                       W(n4-1+i) = Re(1)
-                      IF ( Ae(i)<0.0D0 ) GOTO 100
+                      IF( Ae(i)<0.0D0 ) GOTO 100
                     END DO
                     CALL DU11LS(A,Mda,M,N,W(n4),Ae,Mode,Np,Krank,Ksure,&
                       W(n1),W(n2),W(n3),Iwork(n1),Iwork(n2))
-                  ELSEIF ( Key==3 ) THEN
+                  ELSEIF( Key==3 ) THEN
                     !
                     DO i = 1, N
-                      IF ( Re(i)<0.0D0 ) GOTO 10
-                      IF ( Re(i)>1.0D0 ) GOTO 20
-                      IF ( Re(i)<eps ) Re(i) = eps
-                      IF ( Ae(i)<0.0D0 ) GOTO 100
+                      IF( Re(i)<0.0D0 ) GOTO 10
+                      IF( Re(i)>1.0D0 ) GOTO 20
+                      IF( Re(i)<eps ) Re(i) = eps
+                      IF( Ae(i)<0.0D0 ) GOTO 100
                     END DO
                     CALL DU11LS(A,Mda,M,N,Re,Ae,Mode,Np,Krank,Ksure,W(n1),&
                       W(n2),W(n3),Iwork(n1),Iwork(n2))
                   ELSE
                     !
-                    IF ( Re(1)<0.0D0 ) GOTO 10
-                    IF ( Re(1)>1.0D0 ) GOTO 20
-                    IF ( Re(1)<eps ) Re(1) = eps
-                    IF ( Ae(1)<0.0D0 ) GOTO 100
+                    IF( Re(1)<0.0D0 ) GOTO 10
+                    IF( Re(1)>1.0D0 ) GOTO 20
+                    IF( Re(1)<eps ) Re(1) = eps
+                    IF( Ae(1)<0.0D0 ) GOTO 100
                     DO i = 1, N
                       W(n4-1+i) = Re(1)
                       W(n5-1+i) = Ae(1)
@@ -294,32 +293,32 @@ SUBROUTINE DLLSIA(A,Mda,M,N,B,Mdb,Nb,Re,Ae,Key,Mode,Np,Krank,Ksure,Rnorm,&
             !     DETERMINE INFO
             !
             2 CONTINUE
-            IF ( Krank==N ) THEN
+            IF( Krank==N ) THEN
               Info = 5
-            ELSEIF ( Krank==0 ) THEN
+            ELSEIF( Krank==0 ) THEN
               Info = 3
-            ELSEIF ( Krank>=Np ) THEN
+            ELSEIF( Krank>=Np ) THEN
               Info = Mode
-              IF ( Mode==0 ) RETURN
+              IF( Mode==0 ) RETURN
             ELSE
               Info = 4
               RETURN
             END IF
-            IF ( Nb==0 ) RETURN
+            IF( Nb==0 ) RETURN
             !
             !     SOLUTION PHASE
             !
             n1 = 1
             n2 = n1 + N
             n3 = n2 + N
-            IF ( Info==2 ) THEN
+            IF( Info==2 ) THEN
               !
-              IF ( Lw>=n3-1 ) THEN
+              IF( Lw>=n3-1 ) THEN
                 CALL DU12LS(A,Mda,M,N,B,Mdb,Nb,Mode,Krank,Rnorm,W(n1),W(n2),&
                   Iwork(n1),Iwork(n2))
                 RETURN
               END IF
-            ELSEIF ( Lw>=n2-1 ) THEN
+            ELSEIF( Lw>=n2-1 ) THEN
               CALL DU12LS(A,Mda,M,N,B,Mdb,Nb,Mode,Krank,Rnorm,W(n1),W(n1),&
                 Iwork(n1),Iwork(n2))
               RETURN
@@ -329,13 +328,13 @@ SUBROUTINE DLLSIA(A,Mda,M,N,B,Mdb,Nb,Re,Ae,Key,Mode,Np,Krank,Ksure,Rnorm,&
           Info = -1
           RETURN
         END IF
-        10  CALL XERMSG('DLLSIA','RE(I) .LT. 0',2,1)
+        10  CALL XERMSG('DLLSIA','RE(I) < 0',2,1)
         RETURN
       END IF
-      20  CALL XERMSG('DLLSIA','RE(I) .GT. 1',2,1)
+      20  CALL XERMSG('DLLSIA','RE(I) > 1',2,1)
       RETURN
     END IF
   END IF
-  100  CALL XERMSG('DLLSIA','AE(I) .LT. 0',2,1)
+  100  CALL XERMSG('DLLSIA','AE(I) < 0',2,1)
   RETURN
 END SUBROUTINE DLLSIA

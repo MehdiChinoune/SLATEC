@@ -1,7 +1,6 @@
 !** EZFFTF
 SUBROUTINE EZFFTF(N,R,Azero,A,B,Wsave)
-  !>
-  !  Compute a simplified REAL(SP), periodic, fast Fourier forward
+  !> Compute a simplified REAL(SP), periodic, fast Fourier forward
   !            transform.
   !***
   ! **Library:**   SLATEC (FFTPACK)
@@ -84,10 +83,10 @@ SUBROUTINE EZFFTF(N,R,Azero,A,B,Wsave)
   REAL(SP) :: cf, cfm
   INTEGER :: i, ns2, ns2m
   !* FIRST EXECUTABLE STATEMENT  EZFFTF
-  IF ( N<2 ) THEN
+  IF( N<2 ) THEN
     Azero = R(1)
     RETURN
-  ELSEIF ( N==2 ) THEN
+  ELSEIF( N==2 ) THEN
     Azero = .5*(R(1)+R(2))
     A(1) = .5*(R(1)-R(2))
     RETURN
@@ -105,6 +104,6 @@ SUBROUTINE EZFFTF(N,R,Azero,A,B,Wsave)
       A(i) = cf*Wsave(2*i)
       B(i) = cfm*Wsave(2*i+1)
     END DO
-    IF ( MOD(N,2)==0 ) A(ns2) = .5*cf*Wsave(N)
+    IF( MOD(N,2)==0 ) A(ns2) = .5*cf*Wsave(N)
   END IF
 END SUBROUTINE EZFFTF

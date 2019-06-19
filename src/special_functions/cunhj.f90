@@ -1,7 +1,6 @@
 !** CUNHJ
 SUBROUTINE CUNHJ(Z,Fnu,Ipmtr,Tol,Phi,Arg,Zeta1,Zeta2,Asum,Bsum)
-  !>
-  !  Subsidiary to CBESI and CBESK
+  !> Subsidiary to CBESI and CBESK
   !***
   ! **Library:**   SLATEC
   !***
@@ -46,13 +45,13 @@ SUBROUTINE CUNHJ(Z,Fnu,Ipmtr,Tol,Phi,Arg,Zeta1,Zeta2,Asum,Bsum)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
   USE service, ONLY : R1MACH
-  COMPLEX(SP) Arg, Asum, Bsum, cfnu, cr(14), dr(14), p(30), Phi, &
+  COMPLEX(SP) :: Arg, Asum, Bsum, cfnu, cr(14), dr(14), p(30), Phi, &
     przth, ptfn, rfn13, rtzta, rzth, suma, sumb, tfn, t2, &
     up(14), w, w2, Z, za, zb, zc, zeta, Zeta1, Zeta2, zth
-  REAL(SP) ang, ap(30), atol, aw2, azth, btol, Fnu, fn13, fn23, pp, rfnu, rfnu2, Tol, &
+  REAL(SP) :: ang, ap(30), atol, aw2, azth, btol, Fnu, fn13, fn23, pp, rfnu, rfnu2, Tol, &
     wi, wr, zci, zcr, zetai, zetar, zthi, zthr, asumr, asumi, bsumr, bsumi, test, &
     tstr, tsti, ac
-  INTEGER ias, ibs, Ipmtr, is, j, jr, ju, k, kmax, kp1, ks, l, &
+  INTEGER :: ias, ibs, Ipmtr, is, j, jr, ju, k, kmax, kp1, ks, l, &
     lr, lrp1, l1, l2, m
   REAL(SP), PARAMETER :: ar(14) = [ 1.00000000000000000E+00, 1.04166666666666667E-01, &
     8.35503472222222222E-02, 1.28226574556327160E-01, 2.91849026464140464E-01, &
@@ -257,7 +256,7 @@ SUBROUTINE CUNHJ(Z,Fnu,Ipmtr,Tol,Phi,Arg,Zeta1,Zeta2,Asum,Bsum)
   tsti = AIMAG(Z)
   test = R1MACH(1)*1.0E+3
   ac = Fnu*test
-  IF ( ABS(tstr)>ac.OR.ABS(tsti)>ac ) THEN
+  IF( ABS(tstr)>ac .OR. ABS(tsti)>ac ) THEN
     zb = Z*CMPLX(rfnu,0.0E0)
     rfnu2 = rfnu*rfnu
     !-----------------------------------------------------------------------
@@ -268,23 +267,23 @@ SUBROUTINE CUNHJ(Z,Fnu,Ipmtr,Tol,Phi,Arg,Zeta1,Zeta2,Asum,Bsum)
     rfn13 = CMPLX(1.0E0/fn13,0.0E0)
     w2 = cone - zb*zb
     aw2 = ABS(w2)
-    IF ( aw2>0.25E0 ) THEN
+    IF( aw2>0.25E0 ) THEN
       !-----------------------------------------------------------------------
-      !     ABS(W2).GT.0.25E0
+      !     ABS(W2)>0.25E0
       !-----------------------------------------------------------------------
       w = SQRT(w2)
       wr = REAL(w)
       wi = AIMAG(w)
-      IF ( wr<0.0E0 ) wr = 0.0E0
-      IF ( wi<0.0E0 ) wi = 0.0E0
+      IF( wr<0.0E0 ) wr = 0.0E0
+      IF( wi<0.0E0 ) wi = 0.0E0
       w = CMPLX(wr,wi)
       za = (cone+w)/zb
       zc = LOG(za)
       zcr = REAL(zc)
       zci = AIMAG(zc)
-      IF ( zci<0.0E0 ) zci = 0.0E0
-      IF ( zci>hpi ) zci = hpi
-      IF ( zcr<0.0E0 ) zcr = 0.0E0
+      IF( zci<0.0E0 ) zci = 0.0E0
+      IF( zci>hpi ) zci = hpi
+      IF( zcr<0.0E0 ) zcr = 0.0E0
       zc = CMPLX(zcr,zci)
       zth = (zc-w)*CMPLX(1.5E0,0.0E0)
       cfnu = CMPLX(Fnu,0.0E0)
@@ -294,24 +293,24 @@ SUBROUTINE CUNHJ(Z,Fnu,Ipmtr,Tol,Phi,Arg,Zeta1,Zeta2,Asum,Bsum)
       zthr = REAL(zth)
       zthi = AIMAG(zth)
       ang = thpi
-      IF ( zthr<0.0E0.OR.zthi>=0.0E0 ) THEN
+      IF( zthr<0.0E0 .OR. zthi>=0.0E0 ) THEN
         ang = hpi
-        IF ( zthr/=0.0E0 ) THEN
+        IF( zthr/=0.0E0 ) THEN
           ang = ATAN(zthi/zthr)
-          IF ( zthr<0.0E0 ) ang = ang + pi
+          IF( zthr<0.0E0 ) ang = ang + pi
         END IF
       END IF
       pp = azth**ex2
       ang = ang*ex2
       zetar = pp*COS(ang)
       zetai = pp*SIN(ang)
-      IF ( zetai<0.0E0 ) zetai = 0.0E0
+      IF( zetai<0.0E0 ) zetai = 0.0E0
       zeta = CMPLX(zetar,zetai)
       Arg = zeta*CMPLX(fn23,0.0E0)
       rtzta = zth/zeta
       za = rtzta/w
       Phi = SQRT(za+za)*rfn13
-      IF ( Ipmtr/=1 ) THEN
+      IF( Ipmtr/=1 ) THEN
         tfn = CMPLX(rfnu,0.0E0)/w
         rzth = CMPLX(rfnu,0.0E0)/zth
         zc = rzth*CMPLX(ar(2),0.0E0)
@@ -319,7 +318,7 @@ SUBROUTINE CUNHJ(Z,Fnu,Ipmtr,Tol,Phi,Arg,Zeta1,Zeta2,Asum,Bsum)
         up(2) = (t2*CMPLX(c(2),0.0E0)+CMPLX(c(3),0.0E0))*tfn
         Bsum = up(2) + zc
         Asum = czero
-        IF ( rfnu>=Tol ) THEN
+        IF( rfnu>=Tol ) THEN
           przth = rzth
           ptfn = tfn
           up(1) = cone
@@ -354,7 +353,7 @@ SUBROUTINE CUNHJ(Z,Fnu,Ipmtr,Tol,Phi,Arg,Zeta1,Zeta2,Asum,Bsum)
               dr(ks) = przth*CMPLX(ar(ks+2),0.0E0)
             END DO
             pp = pp*rfnu2
-            IF ( ias/=1 ) THEN
+            IF( ias/=1 ) THEN
               suma = up(lrp1)
               ju = lrp1
               DO jr = 1, lr
@@ -365,9 +364,9 @@ SUBROUTINE CUNHJ(Z,Fnu,Ipmtr,Tol,Phi,Arg,Zeta1,Zeta2,Asum,Bsum)
               asumr = REAL(Asum)
               asumi = AIMAG(Asum)
               test = ABS(asumr) + ABS(asumi)
-              IF ( pp<Tol.AND.test<Tol ) ias = 1
+              IF( pp<Tol .AND. test<Tol ) ias = 1
             END IF
-            IF ( ibs/=1 ) THEN
+            IF( ibs/=1 ) THEN
               sumb = up(lr+2) + up(lrp1)*zc
               ju = lrp1
               DO jr = 1, lr
@@ -378,9 +377,9 @@ SUBROUTINE CUNHJ(Z,Fnu,Ipmtr,Tol,Phi,Arg,Zeta1,Zeta2,Asum,Bsum)
               bsumr = REAL(Bsum)
               bsumi = AIMAG(Bsum)
               test = ABS(bsumr) + ABS(bsumi)
-              IF ( pp<btol.AND.test<Tol ) ibs = 1
+              IF( pp<btol .AND. test<Tol ) ibs = 1
             END IF
-            IF ( ias==1.AND.ibs==1 ) EXIT
+            IF( ias==1 .AND. ibs==1 ) EXIT
           END DO
         END IF
         Asum = Asum + cone
@@ -388,18 +387,18 @@ SUBROUTINE CUNHJ(Z,Fnu,Ipmtr,Tol,Phi,Arg,Zeta1,Zeta2,Asum,Bsum)
       END IF
     ELSE
       !-----------------------------------------------------------------------
-      !     POWER SERIES FOR ABS(W2).LE.0.25E0
+      !     POWER SERIES FOR ABS(W2)<=0.25E0
       !-----------------------------------------------------------------------
       k = 1
       p(1) = cone
       suma = CMPLX(gama(1),0.0E0)
       ap(1) = 1.0E0
-      IF ( aw2>=Tol ) THEN
+      IF( aw2>=Tol ) THEN
         DO k = 2, 30
           p(k) = p(k-1)*w2
           suma = suma + p(k)*CMPLX(gama(k),0.0E0)
           ap(k) = ap(k-1)*aw2
-          IF ( ap(k)<Tol ) GOTO 20
+          IF( ap(k)<Tol ) GOTO 20
         END DO
         k = 30
       END IF
@@ -411,7 +410,7 @@ SUBROUTINE CUNHJ(Z,Fnu,Ipmtr,Tol,Phi,Arg,Zeta1,Zeta2,Asum,Bsum)
       Zeta1 = Zeta2*(cone+zeta*za*CMPLX(ex2,0.0E0))
       za = za + za
       Phi = SQRT(za)*rfn13
-      IF ( Ipmtr/=1 ) THEN
+      IF( Ipmtr/=1 ) THEN
         !-----------------------------------------------------------------------
         !     SUM SERIES FOR ASUM AND BSUM
         !-----------------------------------------------------------------------
@@ -428,31 +427,31 @@ SUBROUTINE CUNHJ(Z,Fnu,Ipmtr,Tol,Phi,Arg,Zeta1,Zeta2,Asum,Bsum)
         pp = 1.0E0
         ias = 0
         ibs = 0
-        IF ( rfnu2>=Tol ) THEN
+        IF( rfnu2>=Tol ) THEN
           DO is = 2, 7
             atol = atol/rfnu2
             pp = pp*rfnu2
-            IF ( ias/=1 ) THEN
+            IF( ias/=1 ) THEN
               suma = czero
               DO k = 1, kmax
                 m = l1 + k
                 suma = suma + p(k)*CMPLX(alfa(m),0.0E0)
-                IF ( ap(k)<atol ) EXIT
+                IF( ap(k)<atol ) EXIT
               END DO
               Asum = Asum + suma*CMPLX(pp,0.0E0)
-              IF ( pp<Tol ) ias = 1
+              IF( pp<Tol ) ias = 1
             END IF
-            IF ( ibs/=1 ) THEN
+            IF( ibs/=1 ) THEN
               sumb = czero
               DO k = 1, kmax
                 m = l2 + k
                 sumb = sumb + p(k)*CMPLX(beta(m),0.0E0)
-                IF ( ap(k)<atol ) EXIT
+                IF( ap(k)<atol ) EXIT
               END DO
               Bsum = Bsum + sumb*CMPLX(pp,0.0E0)
-              IF ( pp<btol ) ibs = 1
+              IF( pp<btol ) ibs = 1
             END IF
-            IF ( ias==1.AND.ibs==1 ) EXIT
+            IF( ias==1 .AND. ibs==1 ) EXIT
             l1 = l1 + 30
             l2 = l2 + 30
           END DO

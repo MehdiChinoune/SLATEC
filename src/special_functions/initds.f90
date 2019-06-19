@@ -1,7 +1,6 @@
 !** INITDS
 INTEGER FUNCTION INITDS(Os,Nos,Eta)
-  !>
-  !  Determine the number of terms needed in an orthogonal
+  !> Determine the number of terms needed in an orthogonal
   !            polynomial series so that it meets a specified accuracy.
   !***
   ! **Library:**   SLATEC (FNLIB)
@@ -49,16 +48,16 @@ INTEGER FUNCTION INITDS(Os,Nos,Eta)
   INTEGER :: i, ii
   REAL(DP) :: err
   !* FIRST EXECUTABLE STATEMENT  INITDS
-  IF ( Nos<1 ) CALL XERMSG('INITDS','Number of coefficients is less than 1',2,1)
+  IF( Nos<1 ) CALL XERMSG('INITDS','Number of coefficients is less than 1',2,1)
   !
   err = 0.
   DO ii = 1, Nos
     i = Nos + 1 - ii
     err = err + ABS(REAL(Os(i)))
-    IF ( err>Eta ) EXIT
+    IF( err>Eta ) EXIT
   END DO
   !
-  IF ( i==Nos ) CALL XERMSG('INITDS',&
+  IF( i==Nos ) CALL XERMSG('INITDS',&
     'Chebyshev series too short for specified accuracy',1,1)
   INITDS = i
   !

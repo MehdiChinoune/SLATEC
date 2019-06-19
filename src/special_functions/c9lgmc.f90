@@ -1,7 +1,6 @@
 !** C9LGMC
 COMPLEX(SP) FUNCTION C9LGMC(Zin)
-  !>
-  !  Compute the log gamma correction factor so that
+  !> Compute the log gamma correction factor so that
   !            LOG(CGAMMA(Z)) = 0.5*LOG(2.*PI) + (Z-0.5)*LOG(Z) - Z
   !            + C9LGMC(Z).
   !***
@@ -19,7 +18,7 @@ COMPLEX(SP) FUNCTION C9LGMC(Zin)
   ! **Description:**
   !
   ! Compute the LOG GAMMA correction term for large ABS(Z) when REAL(Z)
-  ! .GE. 0.0 and for large ABS(AIMAG(Y)) when REAL(Z) .LT. 0.0.  We find
+  ! >= 0.0 and for large ABS(AIMAG(Y)) when REAL(Z) < 0.0.  We find
   ! C9LGMC so that
   !   LOG(Z) = 0.5*LOG(2.*PI) + (Z-0.5)*LOG(Z) - Z + C9LGMC(Z)
   !
@@ -51,7 +50,7 @@ COMPLEX(SP) FUNCTION C9LGMC(Zin)
     .17964437236883057E0, -1.3924322169059011E0,   13.402864044168392E0 ]
   LOGICAL, SAVE :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  C9LGMC
-  IF ( first ) THEN
+  IF( first ) THEN
 
     first = .FALSE.
   END IF
@@ -61,20 +60,20 @@ COMPLEX(SP) FUNCTION C9LGMC(Zin)
   y = AIMAG(z)
   cabsz = ABS(z)
   !
-  IF ( x<0.0.AND.ABS(y)<bound ) CALL XERMSG('C9LGMC',&
+  IF( x<0.0 .AND. ABS(y)<bound ) CALL XERMSG('C9LGMC',&
     'NOT VALID FOR NEGATIVE REAL(Z) AND SMALL ABS(AIMAG(Z))',2,2)
-  IF ( cabsz<bound ) CALL XERMSG('C9LGMC',&
+  IF( cabsz<bound ) CALL XERMSG('C9LGMC',&
     'NOT VALID FOR SMALL ABS(Z)',3,2)
   !
-  IF ( cabsz>=xmax ) THEN
+  IF( cabsz>=xmax ) THEN
     !
     C9LGMC = (0.0,0.0)
     CALL XERMSG('C9LGMC','Z SO BIG C9LGMC UNDERFLOWS',1,1)
     RETURN
   END IF
   !
-  IF ( cabsz>=xbig ) C9LGMC = 1.0/(12.0*z)
-  IF ( cabsz>=xbig ) RETURN
+  IF( cabsz>=xbig ) C9LGMC = 1.0/(12.0*z)
+  IF( cabsz>=xbig ) RETURN
   !
   z2inv = 1.0/z**2
   C9LGMC = (0.0,0.0)

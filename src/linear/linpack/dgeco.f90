@@ -1,7 +1,6 @@
 !** DGECO
 SUBROUTINE DGECO(A,Lda,N,Ipvt,Rcond,Z)
-  !>
-  !  Factor a matrix using Gaussian elimination and estimate
+  !> Factor a matrix using Gaussian elimination and estimate
   !            the condition number of the matrix.
   !***
   ! **Library:**   SLATEC (LINPACK)
@@ -54,7 +53,7 @@ SUBROUTINE DGECO(A,Lda,N,Ipvt,Rcond,Z)
   !                in  A  and  B  of size  EPSILON  may cause
   !                relative perturbations in  X  of size  EPSILON/RCOND .
   !                If  RCOND  is so small that the logical expression
-  !                           1.0 + RCOND .EQ. 1.0
+  !                           1.0 + RCOND = 1.0
   !                is true, then  A  may be singular to working
   !                precision.  In particular,  RCOND  is zero  if
   !                exact singularity is detected or the estimate
@@ -117,8 +116,8 @@ SUBROUTINE DGECO(A,Lda,N,Ipvt,Rcond,Z)
     Z(j) = 0.0D0
   END DO
   DO k = 1, N
-    IF ( Z(k)/=0.0D0 ) ek = SIGN(ek,-Z(k))
-    IF ( ABS(ek-Z(k))>ABS(A(k,k)) ) THEN
+    IF( Z(k)/=0.0D0 ) ek = SIGN(ek,-Z(k))
+    IF( ABS(ek-Z(k))>ABS(A(k,k)) ) THEN
       s = ABS(A(k,k))/ABS(ek-Z(k))
       Z = s*Z
       ek = s*ek
@@ -127,7 +126,7 @@ SUBROUTINE DGECO(A,Lda,N,Ipvt,Rcond,Z)
     wkm = -ek - Z(k)
     s = ABS(wk)
     sm = ABS(wkm)
-    IF ( A(k,k)==0.0D0 ) THEN
+    IF( A(k,k)==0.0D0 ) THEN
       wk = 1.0D0
       wkm = 1.0D0
     ELSE
@@ -135,13 +134,13 @@ SUBROUTINE DGECO(A,Lda,N,Ipvt,Rcond,Z)
       wkm = wkm/A(k,k)
     END IF
     kp1 = k + 1
-    IF ( kp1<=N ) THEN
+    IF( kp1<=N ) THEN
       DO j = kp1, N
         sm = sm + ABS(Z(j)+wkm*A(k,j))
         Z(j) = Z(j) + wk*A(k,j)
         s = s + ABS(Z(j))
       END DO
-      IF ( s<sm ) THEN
+      IF( s<sm ) THEN
         t = wkm - wk
         wk = wkm
         DO j = kp1, N
@@ -158,8 +157,8 @@ SUBROUTINE DGECO(A,Lda,N,Ipvt,Rcond,Z)
   !
   DO kb = 1, N
     k = N + 1 - kb
-    IF ( k<N ) Z(k) = Z(k) + DOT_PRODUCT(A(k+1:N,k),Z(k+1:N))
-    IF ( ABS(Z(k))>1.0D0 ) THEN
+    IF( k<N ) Z(k) = Z(k) + DOT_PRODUCT(A(k+1:N,k),Z(k+1:N))
+    IF( ABS(Z(k))>1.0D0 ) THEN
       s = 1.0D0/ABS(Z(k))
       Z = s*Z
     END IF
@@ -180,8 +179,8 @@ SUBROUTINE DGECO(A,Lda,N,Ipvt,Rcond,Z)
     t = Z(l)
     Z(l) = Z(k)
     Z(k) = t
-    IF ( k<N ) CALL DAXPY(N-k,t,A(k+1,k),1,Z(k+1),1)
-    IF ( ABS(Z(k))>1.0D0 ) THEN
+    IF( k<N ) CALL DAXPY(N-k,t,A(k+1,k),1,Z(k+1),1)
+    IF( ABS(Z(k))>1.0D0 ) THEN
       s = 1.0D0/ABS(Z(k))
       Z = s*Z
       ynorm = s*ynorm
@@ -195,13 +194,13 @@ SUBROUTINE DGECO(A,Lda,N,Ipvt,Rcond,Z)
   !
   DO kb = 1, N
     k = N + 1 - kb
-    IF ( ABS(Z(k))>ABS(A(k,k)) ) THEN
+    IF( ABS(Z(k))>ABS(A(k,k)) ) THEN
       s = ABS(A(k,k))/ABS(Z(k))
       Z = s*Z
       ynorm = s*ynorm
     END IF
-    IF ( A(k,k)/=0.0D0 ) Z(k) = Z(k)/A(k,k)
-    IF ( A(k,k)==0.0D0 ) Z(k) = 1.0D0
+    IF( A(k,k)/=0.0D0 ) Z(k) = Z(k)/A(k,k)
+    IF( A(k,k)==0.0D0 ) Z(k) = 1.0D0
     t = -Z(k)
     CALL DAXPY(k-1,t,A(1,k),1,Z(1),1)
   END DO
@@ -210,6 +209,6 @@ SUBROUTINE DGECO(A,Lda,N,Ipvt,Rcond,Z)
   Z = s*Z
   ynorm = s*ynorm
   !
-  IF ( anorm/=0.0D0 ) Rcond = ynorm/anorm
-  IF ( anorm==0.0D0 ) Rcond = 0.0D0
+  IF( anorm/=0.0D0 ) Rcond = ynorm/anorm
+  IF( anorm==0.0D0 ) Rcond = 0.0D0
 END SUBROUTINE DGECO

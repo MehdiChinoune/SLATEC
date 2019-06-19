@@ -1,7 +1,6 @@
 !** BETA
 REAL(SP) FUNCTION BETA(A,B)
-  !>
-  !  Compute the complete Beta function.
+  !> Compute the complete Beta function.
   !***
   ! **Library:**   SLATEC (FNLIB)
   !***
@@ -41,20 +40,20 @@ REAL(SP) FUNCTION BETA(A,B)
   REAL(SP), SAVE :: xmax = 0.
   REAL(SP), PARAMETER :: alnsml = LOG(R1MACH(1))
   !* FIRST EXECUTABLE STATEMENT  BETA
-  IF ( xmax==0.0 ) THEN
+  IF( xmax==0.0 ) THEN
     CALL GAMLIM(xmin,xmax)
   END IF
   !
-  IF ( A<=0..OR.B<=0. ) CALL XERMSG('BETA',&
+  IF( A<=0. .OR. B<=0. ) CALL XERMSG('BETA',&
     'BOTH ARGUMENTS MUST BE GT 0',2,2)
   !
-  IF ( A+B<xmax ) THEN
+  IF( A+B<xmax ) THEN
     BETA = GAMMA(A)*GAMMA(B)/GAMMA(A+B)
     RETURN
   END IF
   !
   BETA = ALBETA(A,B)
-  IF ( BETA<alnsml ) CALL XERMSG('BETA',&
+  IF( BETA<alnsml ) CALL XERMSG('BETA',&
     'A AND/OR B SO BIG BETA UNDERFLOWS',1,2)
   !
   BETA = EXP(BETA)

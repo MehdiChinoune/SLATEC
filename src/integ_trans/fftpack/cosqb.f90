@@ -1,7 +1,6 @@
 !** COSQB
 SUBROUTINE COSQB(N,X,Wsave)
-  !>
-  !  Compute the unnormalized inverse cosine transform.
+  !> Compute the unnormalized inverse cosine transform.
   !***
   ! **Library:**   SLATEC (FFTPACK)
   !***
@@ -79,15 +78,15 @@ SUBROUTINE COSQB(N,X,Wsave)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
-  INTEGER N
+  INTEGER :: N
   REAL(SP) :: Wsave(3*N+15), X(N)
   REAL(SP) :: tsqrt2, x1
   !* FIRST EXECUTABLE STATEMENT  COSQB
   tsqrt2 = 2.*SQRT(2.)
-  IF ( N<2 ) THEN
+  IF( N<2 ) THEN
     X(1) = 4.*X(1)
     RETURN
-  ELSEIF ( N==2 ) THEN
+  ELSEIF( N==2 ) THEN
     x1 = 4.*(X(1)+X(2))
     X(2) = tsqrt2*(X(1)-X(2))
     X(1) = x1

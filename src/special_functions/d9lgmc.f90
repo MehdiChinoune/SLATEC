@@ -1,7 +1,6 @@
 !** D9LGMC
 REAL(DP) FUNCTION D9LGMC(X)
-  !>
-  !  Compute the log Gamma correction factor so that
+  !> Compute the log Gamma correction factor so that
   !            LOG(GAMMA(X)) = LOG(SQRT(2*PI)) + (X-5.)*LOG(X) - X
   !            + D9LGMC(X).
   !***
@@ -18,7 +17,7 @@ REAL(DP) FUNCTION D9LGMC(X)
   !***
   ! **Description:**
   !
-  ! Compute the log gamma correction factor for X .GE. 10. so that
+  ! Compute the log gamma correction factor for X >= 10. so that
   ! LOG (GAMMA(X)) = LOG(SQRT(2*PI)) + (X-.5)*LOG(X) - X + D9lGMC(X)
   !
   ! Series for ALGM       on the interval  0.          to  1.00000E-02
@@ -54,13 +53,13 @@ REAL(DP) FUNCTION D9LGMC(X)
     -.3401102254316748799999999999999D-29, +.1276642195630062933333333333333D-30 ]
   LOGICAL, SAVE :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  D9LGMC
-  IF ( first ) THEN
+  IF( first ) THEN
     nalgm = INITDS(algmcs,15,D1MACH(3))
     first = .FALSE.
   END IF
   !
-  IF ( X<10.D0 ) CALL XERMSG('D9LGMC','X MUST BE GE 10',1,2)
-  IF ( X>=xmax ) THEN
+  IF( X<10.D0 ) CALL XERMSG('D9LGMC','X MUST BE GE 10',1,2)
+  IF( X>=xmax ) THEN
     !
     D9LGMC = 0.D0
     CALL XERMSG('D9LGMC','X SO BIG D9LGMC UNDERFLOWS',2,1)
@@ -68,6 +67,6 @@ REAL(DP) FUNCTION D9LGMC(X)
   END IF
   !
   D9LGMC = 1.D0/(12.D0*X)
-  IF ( X<xbig ) D9LGMC = DCSEVL(2.0D0*(10.D0/X)**2-1.D0,algmcs,nalgm)/X
+  IF( X<xbig ) D9LGMC = DCSEVL(2.0D0*(10.D0/X)**2-1.D0,algmcs,nalgm)/X
   RETURN
 END FUNCTION D9LGMC

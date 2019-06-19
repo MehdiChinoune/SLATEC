@@ -1,7 +1,6 @@
 !** DBSK0E
 REAL(DP) FUNCTION DBSK0E(X)
-  !>
-  !  Compute the exponentially scaled modified (hyperbolic)
+  !> Compute the exponentially scaled modified (hyperbolic)
   !            Bessel function of the third kind of order zero.
   !***
   ! **Library:**   SLATEC (FNLIB)
@@ -104,17 +103,17 @@ REAL(DP) FUNCTION DBSK0E(X)
     -.1145035994347681332155733333333D-30, +.2301266594249682802005333333333D-31 ]
   LOGICAL, SAVE :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  DBSK0E
-  IF ( first ) THEN
+  IF( first ) THEN
     ntk0 = INITDS(bk0cs,16,eta)
     ntak0 = INITDS(ak0cs,38,eta)
     ntak02 = INITDS(ak02cs,33,eta)
     first = .FALSE.
   END IF
   !
-  IF ( X<=0.D0 ) CALL XERMSG('DBSK0E','X IS ZERO OR NEGATIVE',2,2)
-  IF ( X>2.0D0 ) THEN
+  IF( X<=0.D0 ) CALL XERMSG('DBSK0E','X IS ZERO OR NEGATIVE',2,2)
+  IF( X>2.0D0 ) THEN
     !
-    IF ( X<=8.D0 ) THEN
+    IF( X<=8.D0 ) THEN
       DBSK0E = (1.25D0+DCSEVL((16.D0/X-5.D0)/3.D0,ak0cs,ntak0))/SQRT(X)
     ELSE
       DBSK0E = (1.25D0+DCSEVL(16.D0/X-1.D0,ak02cs,ntak02))/SQRT(X)
@@ -123,7 +122,7 @@ REAL(DP) FUNCTION DBSK0E(X)
   END IF
   !
   y = 0.D0
-  IF ( X>xsml ) y = X*X
+  IF( X>xsml ) y = X*X
   DBSK0E = EXP(X)&
     *(-LOG(0.5D0*X)*DBESI0(X)-0.25D0+DCSEVL(.5D0*y-1.D0,bk0cs,ntk0))
   RETURN

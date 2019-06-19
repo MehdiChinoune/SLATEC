@@ -5,8 +5,7 @@ MODULE TEST50_MOD
 CONTAINS
   !** QXBLKT
   SUBROUTINE QXBLKT(Lun,Kprint,Ipass)
-    !>
-    ! **Library:**   SLATEC
+    !> **Library:**   SLATEC
     !***
     ! **Keywords:**  QUICK CHECK
     !***
@@ -54,10 +53,10 @@ CONTAINS
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   901010  Added PASS/FAIL message and cleaned up FORMATs.  (RWC)
     USE slatec, ONLY : BLKTRI
-    REAL(SP) am(75), an(105), bm(75), bn(105), cm(75), cn(105), deltas, deltat, &
+    REAL(SP) :: am(75), an(105), bm(75), bn(105), cm(75), cn(105), deltas, deltat, &
       ermax, err, hds, hdt, s(75), t(105), tds, tdt, temp1, temp2, temp3, w(1952)
-    REAL(SP) y(75,105), z
-    INTEGER i, idimy, ierror, iflg, Ipass, j, Kprint, Lun, m, mp, n, np
+    REAL(SP) :: y(75,105), z
+    INTEGER :: i, idimy, ierror, iflg, Ipass, j, Kprint, Lun, m, mp, n, np
     !* FIRST EXECUTABLE STATEMENT  QXBLKT
     ermax = 1.E-3
     iflg = 0
@@ -128,7 +127,7 @@ CONTAINS
       !
       CALL BLKTRI(iflg,np,n,an,bn,cn,mp,m,am,bm,cm,idimy,y,ierror,w)
       iflg = iflg + 1
-      IF ( iflg>1 ) THEN
+      IF( iflg>1 ) THEN
         !
         !     COMPUTE DISCRETIZATION ERROR
         !
@@ -136,14 +135,14 @@ CONTAINS
         DO j = 1, n
           DO i = 1, m
             z = ABS(y(i,j)-(s(i)*t(j))**5.)
-            IF ( z>err ) err = z
+            IF( z>err ) err = z
           END DO
         END DO
         !
         Ipass = 1
-        IF ( err>ermax ) Ipass = 0
-        IF ( Kprint==0 ) RETURN
-        IF ( Kprint>=2.OR.Ipass==0 ) THEN
+        IF( err>ermax ) Ipass = 0
+        IF( Kprint==0 ) RETURN
+        IF( Kprint>=2 .OR. Ipass==0 ) THEN
           WRITE (Lun,99001) ierror, err, INT(w(1))
           !
           99001 FORMAT ('1',20X,'SUBROUTINE BLKTRI EXAMPLE'///10X,&
@@ -153,7 +152,7 @@ CONTAINS
             'THE OUTPUT FROM YOUR COMPUTER IS'//32X,'IERROR =',I2/18X,&
             'DISCRETIZATION ERROR =',1PE12.5/12X,&
             'REQUIRED LENGTH OF W ARRAY =',I4)
-          IF ( Ipass==1 ) THEN
+          IF( Ipass==1 ) THEN
             WRITE (Lun,99002)
             99002 FORMAT (60X,'PASS'/)
           ELSE
@@ -167,8 +166,7 @@ CONTAINS
   END SUBROUTINE QXBLKT
   !** QXCRT
   SUBROUTINE QXCRT(Lun,Kprint,Ipass)
-    !>
-    ! **Library:**   SLATEC
+    !> **Library:**   SLATEC
     !***
     ! **Keywords:**  QUICK CHECK
     !***
@@ -212,10 +210,10 @@ CONTAINS
     !     = (2 - (4 + PI**2/4)*X**2)*COS((Y+1)*PI/2)
     !
     !     WITH THE BOUNDARY CONDITIONS
-    !     ON THE RECTANGLE 0 .LT. X .LT. 2, -1 .LT. Y .LT. 3 WITH THE
+    !     ON THE RECTANGLE 0 < X < 2, -1 < Y < 3 WITH THE
     !
     !     U(0,Y) = 0
-    !                                          -1 .LE. Y .LE. 3
+    !                                          -1 <= Y <= 3
     !     (DU/DX)(2,Y) = 4*COS((Y+1)*PI/2)
     !
     !     AND WITH U PERIODIC IN Y.
@@ -233,10 +231,10 @@ CONTAINS
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   901010  Added PASS/FAIL message and cleaned up FORMATs.  (RWC)
     USE slatec, ONLY : HWSCRT
-    REAL(SP) a, b, bda(1), bdb(81), bdc(1), bdd(1), c, d, elmbda, ermax, err, &
+    REAL(SP) :: a, b, bda(1), bdb(81), bdc(1), bdd(1), c, d, elmbda, ermax, err, &
       f(45,82), pertrb, piby2, pisq, w(1200), x(41)
-    REAL(SP) y(81), z
-    INTEGER i, idimf, ierror, Ipass, j, Kprint, Lun, m, mbdcnd, mp1, &
+    REAL(SP) :: y(81), z
+    INTEGER :: i, idimf, ierror, Ipass, j, Kprint, Lun, m, mbdcnd, mp1, &
       n, nbdcnd, np1
     REAL, PARAMETER :: pi = 3.14159265358979
     !* FIRST EXECUTABLE STATEMENT  QXCRT
@@ -302,14 +300,14 @@ CONTAINS
     DO i = 1, mp1
       DO j = 1, np1
         z = ABS(f(i,j)-x(i)**2*COS((y(j)+1.)*piby2))
-        IF ( z>err ) err = z
+        IF( z>err ) err = z
       END DO
     END DO
     !
     Ipass = 1
-    IF ( err>ermax ) Ipass = 0
-    IF ( Kprint==0 ) RETURN
-    IF ( Kprint>=2.OR.Ipass==0 ) THEN
+    IF( err>ermax ) Ipass = 0
+    IF( Kprint==0 ) RETURN
+    IF( Kprint>=2 .OR. Ipass==0 ) THEN
       WRITE (Lun,99001) ierror, err, INT(w(1))
       !
       99001 FORMAT ('1',20X,'SUBROUTINE HWSCRT EXAMPLE'///10X,&
@@ -319,7 +317,7 @@ CONTAINS
         'THE OUTPUT FROM YOUR COMPUTER IS'//32X,'IERROR =',I2/18X,&
         'DISCRETIZATION ERROR =',1PE12.5/12X,&
         'REQUIRED LENGTH OF W ARRAY =',I4)
-      IF ( Ipass==1 ) THEN
+      IF( Ipass==1 ) THEN
         WRITE (Lun,99002)
         99002 FORMAT (60X,'PASS'/)
       ELSE
@@ -331,8 +329,7 @@ CONTAINS
   END SUBROUTINE QXCRT
   !** QXCSP
   SUBROUTINE QXCSP(Lun,Kprint,Ipass)
-    !>
-    ! **Library:**   SLATEC
+    !> **Library:**   SLATEC
     !***
     ! **Keywords:**  QUICK CHECK
     !***
@@ -381,10 +378,10 @@ CONTAINS
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   901010  Added PASS/FAIL message and cleaned up FORMATs.  (RWC)
     USE slatec, ONLY : HWSCSP
-    REAL(SP) bdrf(1), bdrs(1), bdtf(33), bdts(1), ci4, dphi, dr, dtheta, elmbda, &
+    REAL(SP) :: bdrf(1), bdrs(1), bdtf(33), bdts(1), ci4, dphi, dr, dtheta, elmbda, &
       ermax, err, f(48,33), pertrb, r(33), rf, rs, si
-    REAL(SP) tf, theta(48), ts, w(1200), z
-    INTEGER i, idimf, ierror, intl, Ipass, j, Kprint, Lun, m, &
+    REAL(SP) :: tf, theta(48), ts, w(1200), z
+    INTEGER :: i, idimf, ierror, intl, Ipass, j, Kprint, Lun, m, &
       mbdcnd, mp1, n, nbdcnd, np1
     REAL, PARAMETER :: pi = 3.14159265358979
     !* FIRST EXECUTABLE STATEMENT  QXCSP
@@ -451,14 +448,14 @@ CONTAINS
       ci4 = COS(theta(i))**4
       DO j = 1, n
         z = ABS(f(i,j)-ci4*r(j)**4)
-        IF ( z>err ) err = z
+        IF( z>err ) err = z
       END DO
     END DO
     !
     Ipass = 1
-    IF ( err>ermax ) Ipass = 0
-    IF ( Kprint/=0 ) THEN
-      IF ( Kprint>=2.OR.Ipass==0 ) THEN
+    IF( err>ermax ) Ipass = 0
+    IF( Kprint/=0 ) THEN
+      IF( Kprint>=2 .OR. Ipass==0 ) THEN
         WRITE (Lun,99001) ierror, err, INT(w(1))
         !
         99001 FORMAT ('1',20X,'SUBROUTINE HWSCSP EXAMPLE 1'///10X,&
@@ -468,7 +465,7 @@ CONTAINS
           'THE OUTPUT FROM YOUR COMPUTER IS'//32X,'IERROR =',I2/18X,&
           'DISCRETIZATION ERROR =',1PE12.5/12X,&
           'REQUIRED LENGTH OF W ARRAY =',I4)
-        IF ( Ipass==1 ) THEN
+        IF( Ipass==1 ) THEN
           WRITE (Lun,99003)
         ELSE
           WRITE (Lun,99004)
@@ -508,13 +505,13 @@ CONTAINS
       si = SIN(theta(i))
       DO j = 1, np1
         z = ABS(f(i,j)-r(j)*si)
-        IF ( z>err ) err = z
+        IF( z>err ) err = z
       END DO
     END DO
     !
-    IF ( err>ermax ) Ipass = 0
-    IF ( Kprint==0 ) RETURN
-    IF ( Kprint>=2.OR.Ipass==0 ) THEN
+    IF( err>ermax ) Ipass = 0
+    IF( Kprint==0 ) RETURN
+    IF( Kprint>=2 .OR. Ipass==0 ) THEN
       WRITE (Lun,99002) ierror, err, INT(w(1))
       99002 FORMAT ('1',20X,'SUBROUTINE HWSCSP EXAMPLE 2'///10X,&
         'THE OUTPUT FROM THE NCAR CONTROL DATA 7600 WAS'//32X,&
@@ -523,7 +520,7 @@ CONTAINS
         'THE OUTPUT FROM YOUR COMPUTER IS'//32X,'IERROR =',I2/18X,&
         'DISCRETIZATION ERROR =',1PE12.5/12X,&
         'REQUIRED LENGTH OF W ARRAY =',I4)
-      IF ( Ipass==1 ) THEN
+      IF( Ipass==1 ) THEN
         WRITE (Lun,99003)
       ELSE
         WRITE (Lun,99004)
@@ -535,8 +532,7 @@ CONTAINS
   END SUBROUTINE QXCSP
   !** QXCYL
   SUBROUTINE QXCYL(Lun,Kprint,Ipass)
-    !>
-    ! **Library:**   SLATEC
+    !> **Library:**   SLATEC
     !***
     ! **Keywords:**  QUICK CHECK
     !***
@@ -579,17 +575,17 @@ CONTAINS
     !
     !     = (2*R*Z)**2*(4*Z**2 + 3*R**2)
     !
-    !     ON THE RECTANGLE 0 .LT. R .LT. 1, 0 .LT. Z .LT. 1 WITH THE
+    !     ON THE RECTANGLE 0 < R < 1, 0 < Z < 1 WITH THE
     !     BOUNDARY CONDITIONS
     !
     !     U(0,Z) UNSPECIFIED
-    !                                            0 .LE. Z .LE. 1
+    !                                            0 <= Z <= 1
     !     (DU/DR)(1,Z) = 4*Z**4
     !
     !     AND
     !
     !     (DU/DZ)(R,0) = 0
-    !                                            0 .LE. R .LE. 1
+    !                                            0 <= R <= 1
     !     (DU/DZ)(R,1) = 4*R**4 .
     !
     !          THE R-INTERVAL WILL BE DIVIDED INTO 50 PANELS AND THE
@@ -606,11 +602,11 @@ CONTAINS
     !   901010  Added PASS/FAIL message and cleaned up FORMATs.  (RWC)
     !   930415  Test modified to use a 64 by 128 grid.  (WRB)
     USE slatec, ONLY : HWSCYL
-    REAL(SP) a, b, bda(129), bdb(129), bdc(65), bdd(65), c, d, elmbda, ermax, err, &
+    REAL(SP) :: a, b, bda(129), bdb(129), bdc(65), bdd(65), c, d, elmbda, ermax, err, &
       f(65,129), pertrb, r(65), w(1400), x, z(129)
-    INTEGER i, idimf, ierror, Ipass, j, Kprint, Lun, m, mbdcnd, mp1, n, nbdcnd, np1
+    INTEGER :: i, idimf, ierror, Ipass, j, Kprint, Lun, m, mbdcnd, mp1, n, nbdcnd, np1
     !* FIRST EXECUTABLE STATEMENT  QXCYL
-    IF ( Kprint>=2 ) WRITE (Lun,99001)
+    IF( Kprint>=2 ) WRITE (Lun,99001)
     !
     99001 FORMAT ('1',20X,'SUBROUTINE HWSCYL EXAMPLE'//)
     !
@@ -685,13 +681,13 @@ CONTAINS
     DO i = 1, mp1
       DO j = 1, np1
         x = ABS(f(i,j)-(r(i)*z(j))**4)
-        IF ( x>err ) err = x
+        IF( x>err ) err = x
       END DO
     END DO
     !
     Ipass = 1
-    IF ( err>ermax ) Ipass = 0
-    IF ( Kprint>=3.OR.(Kprint>=2.AND.Ipass==0) ) WRITE (Lun,99002) ierror, &
+    IF( err>ermax ) Ipass = 0
+    IF( Kprint>=3 .OR. (Kprint>=2 .AND. Ipass==0) ) WRITE (Lun,99002) ierror, &
       pertrb, err, INT(w(1))
     99002 FORMAT (10X,'THE OUTPUT FROM YOUR COMPUTER IS'//32X,'IERROR =',I2/32X,&
       'PERTRB =',E12.5/18X,'DISCRETIZATION ERROR =',1PE12.5/12X,&
@@ -699,16 +695,15 @@ CONTAINS
     !
     !     Print PASS/FAIL message.
     !
-    IF ( Ipass==1.AND.Kprint>=2 ) WRITE (Lun,99003)
+    IF( Ipass==1 .AND. Kprint>=2 ) WRITE (Lun,99003)
     99003 FORMAT (25X,'HWSCYL TEST PASSED'/)
-    IF ( Ipass==0.AND.Kprint>=1 ) WRITE (Lun,99004)
+    IF( Ipass==0 .AND. Kprint>=1 ) WRITE (Lun,99004)
     99004 FORMAT (25X,'HWSCYL TEST FAILED'/)
     RETURN
   END SUBROUTINE QXCYL
   !** QXGBUN
   SUBROUTINE QXGBUN(Lun,Kprint,Ipass)
-    !>
-    ! **Library:**   SLATEC
+    !> **Library:**   SLATEC
     !***
     ! **Keywords:**  QUICK CHECK
     !***
@@ -757,9 +752,9 @@ CONTAINS
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   901010  Added PASS/FAIL message and cleaned up FORMATs.  (RWC)
     USE slatec, ONLY : GENBUN
-    REAL(SP) a(20), b(20), c(20), deltax, deltay, dysq, ermax, err, f(25,130), &
+    REAL(SP) :: a(20), b(20), c(20), deltax, deltay, dysq, ermax, err, f(25,130), &
       s, t, w(1200), x(20), y(120), z
-    INTEGER i, idimy, ierror, Ipass, j, Kprint, Lun, m, mm1, mperod, n, nperod
+    INTEGER :: i, idimy, ierror, Ipass, j, Kprint, Lun, m, mm1, mperod, n, nperod
     REAL, PARAMETER :: pi = 3.14159265358979
     !* FIRST EXECUTABLE STATEMENT  QXGBUN
     !
@@ -832,14 +827,14 @@ CONTAINS
     DO i = 1, m
       DO j = 1, n
         z = ABS(f(i,j)-(1.+x(i))**4*SIN(y(j)))
-        IF ( z>err ) err = z
+        IF( z>err ) err = z
       END DO
     END DO
     !
     Ipass = 1
-    IF ( err>ermax ) Ipass = 0
-    IF ( Kprint==0 ) RETURN
-    IF ( Kprint>=2.OR.Ipass==0 ) THEN
+    IF( err>ermax ) Ipass = 0
+    IF( Kprint==0 ) RETURN
+    IF( Kprint>=2 .OR. Ipass==0 ) THEN
       WRITE (Lun,99001) ierror, err, INT(w(1))
       !
       99001 FORMAT ('1',20X,'SUBROUTINE GENBUN EXAMPLE'///10X,&
@@ -849,7 +844,7 @@ CONTAINS
         'THE OUTPUT FROM YOUR COMPUTER IS'//32X,'IERROR =',I2/18X,&
         'DISCRETIZATION ERROR =',1PE12.5/12X,&
         'REQUIRED LENGTH OF W ARRAY =',I4)
-      IF ( Ipass==1 ) THEN
+      IF( Ipass==1 ) THEN
         WRITE (Lun,99002)
         99002 FORMAT (60X,'PASS'/)
       ELSE
@@ -861,8 +856,7 @@ CONTAINS
   END SUBROUTINE QXGBUN
   !** QXPLR
   SUBROUTINE QXPLR(Lun,Kprint,Ipass)
-    !>
-    ! **Library:**   SLATEC
+    !> **Library:**   SLATEC
     !***
     ! **Keywords:**  QUICK CHECK
     !***
@@ -903,14 +897,14 @@ CONTAINS
     !
     !     (1/R)(D/DR)(R*(DU/DR)) + (1/R**2)(D/DTHETA)(DU/DTHETA) = 16*R**2
     !
-    !     ON THE QUARTER-DISK 0 .LT. R .LT. 1, 0 .LT. THETA .LT. PI/2 WITH
+    !     ON THE QUARTER-DISK 0 < R < 1, 0 < THETA < PI/2 WITH
     !     WITH THE BOUNDARY CONDITIONS
     !
-    !     U(1,THETA) = 1 - COS(4*THETA), 0 .LE. THETA .LE. 1
+    !     U(1,THETA) = 1 - COS(4*THETA), 0 <= THETA <= 1
     !
     !     AND
     !
-    !     (DU/DTHETA)(R,0) = (DU/DTHETA)(R,PI/2) = 0,  0 .LE. R .LE. 1.
+    !     (DU/DTHETA)(R,0) = (DU/DTHETA)(R,PI/2) = 0,  0 <= R <= 1.
     !
     !     (NOTE THAT THE SOLUTION U IS UNSPECIFIED AT R = 0.)
     !          THE R-INTERVAL WILL BE DIVIDED INTO 50 PANELS AND THE
@@ -927,9 +921,9 @@ CONTAINS
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   901010  Added PASS/FAIL message and cleaned up FORMATs.  (RWC)
     USE slatec, ONLY : HWSPLR
-    REAL(SP) a, b, bda(1), bdb(1), bdc(51), bdd(51), c, d, elmbda, ermax, err, &
+    REAL(SP) :: a, b, bda(1), bdb(1), bdc(51), bdd(51), c, d, elmbda, ermax, err, &
       f(100,50), pertrb, r(51), theta(49), w(1200), z
-    INTEGER i, idimf, ierror, Ipass, j, Kprint, Lun, m, mbdcnd, mp1, &
+    INTEGER :: i, idimf, ierror, Ipass, j, Kprint, Lun, m, mbdcnd, mp1, &
       n, nbdcnd, np1
     REAL, PARAMETER :: pi = 3.14159265358979
     !* FIRST EXECUTABLE STATEMENT  QXPLR
@@ -994,14 +988,14 @@ CONTAINS
     DO i = 1, mp1
       DO j = 1, np1
         z = ABS(f(i,j)-r(i)**4*(1.-COS(4.*theta(j))))
-        IF ( z>err ) err = z
+        IF( z>err ) err = z
       END DO
     END DO
     !
     Ipass = 1
-    IF ( err>ermax ) Ipass = 0
-    IF ( Kprint==0 ) RETURN
-    IF ( Kprint>=2.OR.Ipass==0 ) THEN
+    IF( err>ermax ) Ipass = 0
+    IF( Kprint==0 ) RETURN
+    IF( Kprint>=2 .OR. Ipass==0 ) THEN
       WRITE (Lun,99001) ierror, err, INT(w(1))
       !
       99001 FORMAT ('1',20X,'SUBROUTINE HWSPLR EXAMPLE'///10X,&
@@ -1011,7 +1005,7 @@ CONTAINS
         'THE OUTPUT FROM YOUR COMPUTER IS'//32X,'IERROR =',I2/18X,&
         'DISCRETIZATION ERROR =',1PE12.5/12X,&
         'REQUIRED LENGTH OF W ARRAY =',I4)
-      IF ( Ipass==1 ) THEN
+      IF( Ipass==1 ) THEN
         WRITE (Lun,99002)
         99002 FORMAT (60X,'PASS'/)
       ELSE
@@ -1023,8 +1017,7 @@ CONTAINS
   END SUBROUTINE QXPLR
   !** QXSSP
   SUBROUTINE QXSSP(Lun,Kprint,Ipass)
-    !>
-    ! **Library:**   SLATEC
+    !> **Library:**   SLATEC
     !***
     ! **Keywords:**  QUICK CHECK
     !***
@@ -1074,10 +1067,10 @@ CONTAINS
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   901010  Added PASS/FAIL message and cleaned up FORMATs.  (RWC)
     USE slatec, ONLY : HWSSSP
-    REAL(SP) bdpf(1), bdps(1), bdtf(73), bdts(1), dphi, dtheta, elmbda, ermax, &
+    REAL(SP) :: bdpf(1), bdps(1), bdtf(73), bdts(1), dphi, dtheta, elmbda, ermax, &
       err, f(19,73), pertrb, pf, ps, sinp(73), sint(19), tf, ts
-    REAL(SP) w(1200), z
-    INTEGER i, idimf, ierror, Ipass, j, Kprint, Lun, m, mbdcnd, mp1, n, nbdcnd, np1
+    REAL(SP) :: w(1200), z
+    INTEGER :: i, idimf, ierror, Ipass, j, Kprint, Lun, m, mbdcnd, mp1, n, nbdcnd, np1
     REAL, PARAMETER :: pi = 3.14159265358979
     !* FIRST EXECUTABLE STATEMENT  QXSSP
     !
@@ -1133,14 +1126,14 @@ CONTAINS
     DO j = 1, np1
       DO i = 1, mp1
         z = ABS(f(i,j)-(sint(i)*sinp(j))**2-f(1,1))
-        IF ( z>err ) err = z
+        IF( z>err ) err = z
       END DO
     END DO
     !
     Ipass = 1
-    IF ( err>ermax ) Ipass = 0
-    IF ( Kprint==0 ) RETURN
-    IF ( Kprint>=2.OR.Ipass==0 ) THEN
+    IF( err>ermax ) Ipass = 0
+    IF( Kprint==0 ) RETURN
+    IF( Kprint>=2 .OR. Ipass==0 ) THEN
       WRITE (Lun,99001) ierror, err, INT(w(1))
       !
       99001 FORMAT ('1',20X,'SUBROUTINE HWSSSP EXAMPLE'///10X,&
@@ -1150,7 +1143,7 @@ CONTAINS
         'THE OUTPUT FROM YOUR COMPUTER IS'//32X,'IERROR =',I2/18X,&
         'DISCRETIZATION ERROR =',1PE12.5/12X,&
         'REQUIRED LENGTH OF W ARRAY =',I4)
-      IF ( Ipass==1 ) THEN
+      IF( Ipass==1 ) THEN
         WRITE (Lun,99002)
         99002 FORMAT (60X,'PASS'/)
       ELSE
@@ -1167,8 +1160,7 @@ PROGRAM TEST50
   USE slatec, ONLY : I1MACH, XSETF, XSETUN, XERMAX
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
-  !>
-  !  Driver for testing SLATEC subprograms
+  !> Driver for testing SLATEC subprograms
   !***
   ! **Library:**   SLATEC
   !***
@@ -1221,7 +1213,7 @@ PROGRAM TEST50
   !   890618  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900524  Cosmetic changes to code.  (WRB)
-  INTEGER ipass, kprint, lin, lun, nfail
+  INTEGER :: ipass, kprint, lin, lun, nfail
   !* FIRST EXECUTABLE STATEMENT  TEST50
   lun = I1MACH(2)
   lin = I1MACH(1)
@@ -1232,7 +1224,7 @@ PROGRAM TEST50
   CALL GET_ARGUMENT(kprint)
   CALL XERMAX(1000)
   CALL XSETUN(lun)
-  IF ( kprint<=1 ) THEN
+  IF( kprint<=1 ) THEN
     CALL XSETF(0)
   ELSE
     CALL XSETF(1)
@@ -1241,41 +1233,41 @@ PROGRAM TEST50
   !     Test HWSCRT
   !
   CALL QXCRT(lun,kprint,ipass)
-  IF ( ipass==0 ) nfail = nfail + 1
+  IF( ipass==0 ) nfail = nfail + 1
   !
   !     Test HWSPLR
   !
   CALL QXPLR(lun,kprint,ipass)
-  IF ( ipass==0 ) nfail = nfail + 1
+  IF( ipass==0 ) nfail = nfail + 1
   !
   !     Test HWSCYL
   !
   CALL QXCYL(lun,kprint,ipass)
-  IF ( ipass==0 ) nfail = nfail + 1
+  IF( ipass==0 ) nfail = nfail + 1
   !
   !     Test HWSSSP
   !
   CALL QXSSP(lun,kprint,ipass)
-  IF ( ipass==0 ) nfail = nfail + 1
+  IF( ipass==0 ) nfail = nfail + 1
   !
   !     Test HWSCSP
   !
   CALL QXCSP(lun,kprint,ipass)
-  IF ( ipass==0 ) nfail = nfail + 1
+  IF( ipass==0 ) nfail = nfail + 1
   !
   !     Test GENBUN
   !
   CALL QXGBUN(lun,kprint,ipass)
-  IF ( ipass==0 ) nfail = nfail + 1
+  IF( ipass==0 ) nfail = nfail + 1
   !
   !     Test BLKTRI
   !
   CALL QXBLKT(lun,kprint,ipass)
-  IF ( ipass==0 ) nfail = nfail + 1
+  IF( ipass==0 ) nfail = nfail + 1
   !
   !     Write PASS or FAIL message
   !
-  IF ( nfail==0 ) THEN
+  IF( nfail==0 ) THEN
     WRITE (lun,99001)
     99001 FORMAT (/' --------------TEST50 PASSED ALL TESTS----------------')
   ELSE

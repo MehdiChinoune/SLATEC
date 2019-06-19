@@ -1,7 +1,6 @@
 !** DLNREL
 REAL(DP) FUNCTION DLNREL(X)
-  !>
-  !  Evaluate ln(1+X) accurate in the sense of relative error.
+  !> Evaluate ln(1+X) accurate in the sense of relative error.
   !***
   ! **Library:**   SLATEC (FNLIB)
   !***
@@ -66,15 +65,15 @@ REAL(DP) FUNCTION DLNREL(X)
     -.33410026677731010351377066666666D-30, +.63533936180236187354180266666666D-31 ]
   LOGICAL, SAVE :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  DLNREL
-  IF ( first ) THEN
+  IF( first ) THEN
     nlnrel = INITDS(alnrcs,43,0.1*D1MACH(3))
     first = .FALSE.
   END IF
   !
-  IF ( X<=(-1.D0) ) CALL XERMSG('DLNREL','X IS LE -1',2,2)
-  IF ( X<xmin ) CALL XERMSG('DLNREL','ANSWER LT HALF PRECISION BECAUSE X TOO NEAR -1',1,1)
+  IF( X<=(-1.D0) ) CALL XERMSG('DLNREL','X IS LE -1',2,2)
+  IF( X<xmin ) CALL XERMSG('DLNREL','ANSWER LT HALF PRECISION BECAUSE X TOO NEAR -1',1,1)
   !
-  IF ( ABS(X)<=0.375D0 ) THEN
+  IF( ABS(X)<=0.375D0 ) THEN
     DLNREL = X*(1.D0-X*DCSEVL(X/.375D0,alnrcs,nlnrel))
   ELSE
     DLNREL = LOG(1.0D0+X)

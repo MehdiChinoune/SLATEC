@@ -1,7 +1,6 @@
 !** DBSPVN
 SUBROUTINE DBSPVN(T,Jhigh,K,Indexx,X,Ileft,Vnikx,Work,Iwork)
-  !>
-  !  Calculate the value of all (possibly) nonzero basis
+  !> Calculate the value of all (possibly) nonzero basis
   !            functions at X.
   !***
   ! **Library:**   SLATEC
@@ -23,9 +22,9 @@ SUBROUTINE DBSPVN(T,Jhigh,K,Indexx,X,Ileft,Vnikx,Work,Iwork)
   !
   !         DBSPVN calculates the value of all (possibly) nonzero basis
   !         functions at X of order MAX(JHIGH,(J+1)*(INDEX-1)), where T(K)
-  !         .LE. X .LE. T(N+1) and J=IWORK is set inside the routine on
-  !         the first call when INDEX=1.  ILEFT is such that T(ILEFT) .LE.
-  !         X .LT. T(ILEFT+1).  A call to DINTRV(T,N+1,X,ILO,ILEFT,MFLAG)
+  !         <= X <= T(N+1) and J=IWORK is set inside the routine on
+  !         the first call when INDEX=1.  ILEFT is such that T(ILEFT) <=
+  !         X < T(ILEFT+1).  A call to DINTRV(T,N+1,X,ILO,ILEFT,MFLAG)
   !         produces the proper ILEFT.  DBSPVN calculates using the basic
   !         algorithm needed in DBSPVD.  If only basis functions are
   !         desired, setting JHIGH=K and INDEX=1 can be faster than
@@ -40,16 +39,16 @@ SUBROUTINE DBSPVN(T,Jhigh,K,Indexx,X,Ileft,Vnikx,Work,Iwork)
   !          T       - knot vector of length N+K, where
   !                    N = number of B-spline basis functions
   !                    N = sum of knot multiplicities-K
-  !          JHIGH   - order of B-spline, 1 .LE. JHIGH .LE. K
+  !          JHIGH   - order of B-spline, 1 <= JHIGH <= K
   !          K       - highest possible order
   !          INDEX   - INDEX = 1 gives basis functions of order JHIGH
   !                          = 2 denotes previous entry with work, IWORK
   !                              values saved for subsequent calls to
   !                              DBSPVN.
   !          X       - argument of basis functions,
-  !                    T(K) .LE. X .LE. T(N+1)
+  !                    T(K) <= X <= T(N+1)
   !          ILEFT   - largest integer such that
-  !                    T(ILEFT) .LE. X .LT.  T(ILEFT+1)
+  !                    T(ILEFT) <= X <  T(ILEFT+1)
   !
   !         Output     VNIKX, WORK are double precision
   !          VNIKX   - vector of length K for spline values.
@@ -86,26 +85,26 @@ SUBROUTINE DBSPVN(T,Jhigh,K,Indexx,X,Ileft,Vnikx,Work,Iwork)
   !     CONTENT OF J, DELTAM, DELTAP IS EXPECTED UNCHANGED BETWEEN CALLS.
   !     WORK(I) = DELTAP(I), WORK(K+I) = DELTAM(I), I = 1,K
   !* FIRST EXECUTABLE STATEMENT  DBSPVN
-  IF ( K<1 ) THEN
+  IF( K<1 ) THEN
     !
     !
-    CALL XERMSG('DBSPVN','K DOES NOT SATISFY K.GE.1',2,1)
+    CALL XERMSG('DBSPVN','K DOES NOT SATISFY K>=1',2,1)
     RETURN
-  ELSEIF ( Jhigh>K.OR.Jhigh<1 ) THEN
-    CALL XERMSG('DBSPVN','JHIGH DOES NOT SATISFY 1.LE.JHIGH.LE.K',2,1)
+  ELSEIF( Jhigh>K .OR. Jhigh<1 ) THEN
+    CALL XERMSG('DBSPVN','JHIGH DOES NOT SATISFY 1<=JHIGH<=K',2,1)
     RETURN
-  ELSEIF ( Indexx<1.OR.Indexx>2 ) THEN
+  ELSEIF( Indexx<1 .OR. Indexx>2 ) THEN
     CALL XERMSG('DBSPVN','INDEX IS NOT 1 OR 2',2,1)
     RETURN
-  ELSEIF ( X<T(Ileft).OR.X>T(Ileft+1) ) THEN
+  ELSEIF( X<T(Ileft) .OR. X>T(Ileft+1) ) THEN
     CALL XERMSG('DBSPVN',&
-      'X DOES NOT SATISFY T(ILEFT).LE.X.LE.T(ILEFT+1)',2,1)
+      'X DOES NOT SATISFY T(ILEFT)<=X<=T(ILEFT+1)',2,1)
     RETURN
   ELSE
-    IF ( Indexx/=2 ) THEN
+    IF( Indexx/=2 ) THEN
       Iwork = 1
       Vnikx(1) = 1.0D0
-      IF ( Iwork>=Jhigh ) RETURN
+      IF( Iwork>=Jhigh ) RETURN
     END IF
     DO
       !
@@ -123,7 +122,7 @@ SUBROUTINE DBSPVN(T,Jhigh,K,Indexx,X,Ileft,Vnikx,Work,Iwork)
       END DO
       Vnikx(jp1) = vmprev
       Iwork = jp1
-      IF ( Iwork>=Jhigh ) EXIT
+      IF( Iwork>=Jhigh ) EXIT
     END DO
   END IF
   !

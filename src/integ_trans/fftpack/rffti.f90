@@ -1,7 +1,6 @@
 !** RFFTI
 SUBROUTINE RFFTI(N,Wsave)
-  !>
-  !  Initialize a work array for RFFTF and RFFTB.
+  !> Initialize a work array for RFFTF and RFFTB.
   !***
   ! **Library:**   SLATEC (FFTPACK)
   !***
@@ -66,7 +65,7 @@ SUBROUTINE RFFTI(N,Wsave)
   REAL(SP) :: Wsave(2*N+15)
   INTEGER :: ifac(15)
   !* FIRST EXECUTABLE STATEMENT  RFFTI
-  IF ( N==1 ) RETURN
+  IF( N==1 ) RETURN
   ifac = INT( Wsave(2*N+1:2*N+15) )
   CALL RFFTI1(N,Wsave(N+1),ifac)
   Wsave(2*N+1:2*N+15) = ifac

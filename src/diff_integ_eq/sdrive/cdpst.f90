@@ -1,8 +1,7 @@
 !** CDPST
 SUBROUTINE CDPST(El,F,FA,H,Impl,JACOBN,Matdim,Miter,Ml,Mu,N,Nde,Nq,Save2,&
     T,USERS,Y,Yh,Ywt,Uround,Nfe,Nje,A,Dfdy,Fac,Ier,Ipvt,Save1,Iswflg,Bnd,Jstate)
-  !>
-  !  Subroutine CDPST evaluates the Jacobian matrix of the right
+  !> Subroutine CDPST evaluates the Jacobian matrix of the right
   !            hand side of the differential equations.
   !***
   ! **Library:**   SLATEC (SDRIVE)
@@ -70,35 +69,35 @@ SUBROUTINE CDPST(El,F,FA,H,Impl,JACOBN,Matdim,Miter,Ml,Mu,N,Nde,Nq,Save2,&
   !* FIRST EXECUTABLE STATEMENT  CDPST
   Nje = Nje + 1
   Ier = .FALSE.
-  IF ( Miter==1.OR.Miter==2 ) THEN
-    IF ( Miter==1 ) THEN
+  IF( Miter==1 .OR. Miter==2 ) THEN
+    IF( Miter==1 ) THEN
       CALL JACOBN(N,T,Y,Dfdy,Matdim,Ml,Mu)
-      IF ( N==0 ) THEN
+      IF( N==0 ) THEN
         Jstate = 8
         RETURN
       END IF
-      IF ( Iswflg==3 ) Bnd = SCNRM2(N*N,Dfdy,1)
+      IF( Iswflg==3 ) Bnd = SCNRM2(N*N,Dfdy,1)
       factor = -El(1,Nq)*H
       DO j = 1, N
         DO i = 1, N
           Dfdy(i,j) = factor*Dfdy(i,j)
         END DO
       END DO
-    ELSEIF ( Miter==2 ) THEN
+    ELSEIF( Miter==2 ) THEN
       br = Uround**(.875E0)
       bl = Uround**(.75E0)
       bp = Uround**(-.15E0)
       facmin = Uround**(.78E0)
       DO j = 1, N
-        IF ( ABS(Y(j))>ABS(Ywt(j)) ) THEN
+        IF( ABS(Y(j))>ABS(Ywt(j)) ) THEN
           ys = Y(j)
         ELSE
           ys = Ywt(j)
         END IF
         DO
           dy = Fac(j)*ys
-          IF ( dy==0.E0 ) THEN
-            IF ( REAL(Fac(j))<FACMAX ) THEN
+          IF( dy==0.E0 ) THEN
+            IF( REAL(Fac(j))<FACMAX ) THEN
               Fac(j) = MIN(100.E0*REAL(Fac(j)),FACMAX)
               CYCLE
             ELSE
@@ -109,7 +108,7 @@ SUBROUTINE CDPST(El,F,FA,H,Impl,JACOBN,Matdim,Miter,Ml,Mu,N,Nde,Nq,Save2,&
           yj = Y(j)
           Y(j) = Y(j) + dy
           CALL F(N,T,Y,Save1)
-          IF ( N==0 ) THEN
+          IF( N==0 ) THEN
             Jstate = 6
             RETURN
           END IF
@@ -122,37 +121,37 @@ SUBROUTINE CDPST(El,F,FA,H,Impl,JACOBN,Matdim,Miter,Ml,Mu,N,Nde,Nq,Save2,&
           diff = ABS(Save2(1)-Save1(1))
           imax = 1
           DO i = 2, N
-            IF ( ABS(Save2(i)-Save1(i))>diff ) THEN
+            IF( ABS(Save2(i)-Save1(i))>diff ) THEN
               imax = i
               diff = ABS(Save2(i)-Save1(i))
             END IF
           END DO
           !                                                                 Step 2
-          IF ( MIN(ABS(Save2(imax)),ABS(Save1(imax)))>0.E0 ) THEN
+          IF( MIN(ABS(Save2(imax)),ABS(Save1(imax)))>0.E0 ) THEN
             scalee = MAX(ABS(Save2(imax)),ABS(Save1(imax)))
             !                                                                 Step 3
-            IF ( diff>BU*scalee ) THEN
+            IF( diff>BU*scalee ) THEN
               Fac(j) = MAX(facmin,REAL(Fac(j))*.5E0)
-            ELSEIF ( br*scalee<=diff.AND.diff<=bl*scalee ) THEN
+            ELSEIF( br*scalee<=diff .AND. diff<=bl*scalee ) THEN
               Fac(j) = MIN(REAL(Fac(j))*2.E0,FACMAX)
               !                                                                 Step 4
-            ELSEIF ( diff<br*scalee ) THEN
+            ELSEIF( diff<br*scalee ) THEN
               Fac(j) = MIN(bp*REAL(Fac(j)),FACMAX)
             END IF
           END IF
           EXIT
         END DO
       END DO
-      IF ( Iswflg==3 ) Bnd = SCNRM2(N*N,Dfdy,1)/(-El(1,Nq)*H)
+      IF( Iswflg==3 ) Bnd = SCNRM2(N*N,Dfdy,1)/(-El(1,Nq)*H)
       Nfe = Nfe + N
     END IF
-    IF ( Impl==0 ) THEN
+    IF( Impl==0 ) THEN
       DO i = 1, N
         Dfdy(i,i) = Dfdy(i,i) + 1.E0
       END DO
-    ELSEIF ( Impl==1 ) THEN
+    ELSEIF( Impl==1 ) THEN
       CALL FA(N,T,Y,A,Matdim,Ml,Mu,Nde)
-      IF ( N==0 ) THEN
+      IF( N==0 ) THEN
         Jstate = 9
         RETURN
       END IF
@@ -161,18 +160,18 @@ SUBROUTINE CDPST(El,F,FA,H,Impl,JACOBN,Matdim,Miter,Ml,Mu,N,Nde,Nq,Save2,&
           Dfdy(i,j) = Dfdy(i,j) + A(i,j)
         END DO
       END DO
-    ELSEIF ( Impl==2 ) THEN
+    ELSEIF( Impl==2 ) THEN
       CALL FA(N,T,Y,A,Matdim,Ml,Mu,Nde)
-      IF ( N==0 ) THEN
+      IF( N==0 ) THEN
         Jstate = 9
         RETURN
       END IF
       DO i = 1, Nde
         Dfdy(i,i) = Dfdy(i,i) + A(i,1)
       END DO
-    ELSEIF ( Impl==3 ) THEN
+    ELSEIF( Impl==3 ) THEN
       CALL FA(N,T,Y,A,Matdim,Ml,Mu,Nde)
-      IF ( N==0 ) THEN
+      IF( N==0 ) THEN
         Jstate = 9
         RETURN
       END IF
@@ -183,11 +182,11 @@ SUBROUTINE CDPST(El,F,FA,H,Impl,JACOBN,Matdim,Miter,Ml,Mu,N,Nde,Nq,Save2,&
       END DO
     END IF
     CALL CGEFA(Dfdy,Matdim,N,Ipvt,info)
-    IF ( info/=0 ) Ier = .TRUE.
-  ELSEIF ( Miter==4.OR.Miter==5 ) THEN
-    IF ( Miter==4 ) THEN
+    IF( info/=0 ) Ier = .TRUE.
+  ELSEIF( Miter==4 .OR. Miter==5 ) THEN
+    IF( Miter==4 ) THEN
       CALL JACOBN(N,T,Y,Dfdy(Ml+1,1),Matdim,Ml,Mu)
-      IF ( N==0 ) THEN
+      IF( N==0 ) THEN
         Jstate = 8
         RETURN
       END IF
@@ -198,7 +197,7 @@ SUBROUTINE CDPST(El,F,FA,H,Impl,JACOBN,Matdim,Miter,Ml,Mu,N,Nde,Nq,Save2,&
           Dfdy(i,j) = factor*Dfdy(i,j)
         END DO
       END DO
-    ELSEIF ( Miter==5 ) THEN
+    ELSEIF( Miter==5 ) THEN
       br = Uround**(.875E0)
       bl = Uround**(.75E0)
       bp = Uround**(-.15E0)
@@ -207,15 +206,15 @@ SUBROUTINE CDPST(El,F,FA,H,Impl,JACOBN,Matdim,Miter,Ml,Mu,N,Nde,Nq,Save2,&
       j2 = MIN(mw,N)
       DO j = 1, j2
         DO k = j, N, mw
-          IF ( ABS(Y(k))>ABS(Ywt(k)) ) THEN
+          IF( ABS(Y(k))>ABS(Ywt(k)) ) THEN
             ys = Y(k)
           ELSE
             ys = Ywt(k)
           END IF
           DO
             dy = Fac(k)*ys
-            IF ( dy==0.E0 ) THEN
-              IF ( REAL(Fac(k))<FACMAX ) THEN
+            IF( dy==0.E0 ) THEN
+              IF( REAL(Fac(k))<FACMAX ) THEN
                 Fac(k) = MIN(100.E0*REAL(Fac(k)),FACMAX)
                 CYCLE
               ELSE
@@ -229,7 +228,7 @@ SUBROUTINE CDPST(El,F,FA,H,Impl,JACOBN,Matdim,Miter,Ml,Mu,N,Nde,Nq,Save2,&
           END DO
         END DO
         CALL F(N,T,Y,Save1)
-        IF ( N==0 ) THEN
+        IF( N==0 ) THEN
           Jstate = 6
           RETURN
         END IF
@@ -244,21 +243,21 @@ SUBROUTINE CDPST(El,F,FA,H,Impl,JACOBN,Matdim,Miter,Ml,Mu,N,Nde,Nq,Save2,&
           imax = MAX(1,k-Mu)
           diff = ABS(Save2(imax)-Save1(imax))
           DO i = MAX(1,k-Mu) + 1, MIN(k+Ml,N)
-            IF ( ABS(Save2(i)-Save1(i))>diff ) THEN
+            IF( ABS(Save2(i)-Save1(i))>diff ) THEN
               imax = i
               diff = ABS(Save2(i)-Save1(i))
             END IF
           END DO
           !                                                                 Step 2
-          IF ( MIN(ABS(Save2(imax)),ABS(Save1(imax)))>0.E0 ) THEN
+          IF( MIN(ABS(Save2(imax)),ABS(Save1(imax)))>0.E0 ) THEN
             scalee = MAX(ABS(Save2(imax)),ABS(Save1(imax)))
             !                                                                 Step 3
-            IF ( diff>BU*scalee ) THEN
+            IF( diff>BU*scalee ) THEN
               Fac(j) = MAX(facmin,REAL(Fac(j))*.5E0)
-            ELSEIF ( br*scalee<=diff.AND.diff<=bl*scalee ) THEN
+            ELSEIF( br*scalee<=diff .AND. diff<=bl*scalee ) THEN
               Fac(j) = MIN(REAL(Fac(j))*2.E0,FACMAX)
               !                                                                 Step 4
-            ELSEIF ( diff<br*scalee ) THEN
+            ELSEIF( diff<br*scalee ) THEN
               Fac(k) = MIN(bp*REAL(Fac(k)),FACMAX)
             END IF
           END IF
@@ -266,18 +265,18 @@ SUBROUTINE CDPST(El,F,FA,H,Impl,JACOBN,Matdim,Miter,Ml,Mu,N,Nde,Nq,Save2,&
       END DO
       Nfe = Nfe + j2
     END IF
-    IF ( Iswflg==3 ) THEN
+    IF( Iswflg==3 ) THEN
       dfdymx = 0.E0
       DO j = 1, N
         DO i = MAX(Ml+1,mw+1-j), MIN(mw+N-j,mw+Ml)
           zmax = MAX(ABS(REAL(Dfdy(i,j))),ABS(AIMAG(Dfdy(i,j))))
           zmin = MIN(ABS(REAL(Dfdy(i,j))),ABS(AIMAG(Dfdy(i,j))))
-          IF ( zmax/=0.E0 )&
+          IF( zmax/=0.E0 )&
             dfdymx = MAX(dfdymx,zmax*SQRT(1.E0+(zmin/zmax)**2))
         END DO
       END DO
       Bnd = 0.E0
-      IF ( dfdymx/=0.E0 ) THEN
+      IF( dfdymx/=0.E0 ) THEN
         DO j = 1, N
           DO i = MAX(Ml+1,mw+1-j), MIN(mw+N-j,mw+Ml)
             Bnd = Bnd + (REAL(Dfdy(i,j))/dfdymx)&
@@ -287,13 +286,13 @@ SUBROUTINE CDPST(El,F,FA,H,Impl,JACOBN,Matdim,Miter,Ml,Mu,N,Nde,Nq,Save2,&
         Bnd = dfdymx*SQRT(Bnd)/(-El(1,Nq)*H)
       END IF
     END IF
-    IF ( Impl==0 ) THEN
+    IF( Impl==0 ) THEN
       DO j = 1, N
         Dfdy(mw,j) = Dfdy(mw,j) + 1.E0
       END DO
-    ELSEIF ( Impl==1 ) THEN
+    ELSEIF( Impl==1 ) THEN
       CALL FA(N,T,Y,A(Ml+1:,:),Matdim,Ml,Mu,Nde)
-      IF ( N==0 ) THEN
+      IF( N==0 ) THEN
         Jstate = 9
         RETURN
       END IF
@@ -302,18 +301,18 @@ SUBROUTINE CDPST(El,F,FA,H,Impl,JACOBN,Matdim,Miter,Ml,Mu,N,Nde,Nq,Save2,&
           Dfdy(i,j) = Dfdy(i,j) + A(i,j)
         END DO
       END DO
-    ELSEIF ( Impl==2 ) THEN
+    ELSEIF( Impl==2 ) THEN
       CALL FA(N,T,Y,A,Matdim,Ml,Mu,Nde)
-      IF ( N==0 ) THEN
+      IF( N==0 ) THEN
         Jstate = 9
         RETURN
       END IF
       DO j = 1, Nde
         Dfdy(mw,j) = Dfdy(mw,j) + A(j,1)
       END DO
-    ELSEIF ( Impl==3 ) THEN
+    ELSEIF( Impl==3 ) THEN
       CALL FA(N,T,Y,A(Ml+1:,:),Matdim,Ml,Mu,Nde)
-      IF ( N==0 ) THEN
+      IF( N==0 ) THEN
         Jstate = 9
         RETURN
       END IF
@@ -324,15 +323,15 @@ SUBROUTINE CDPST(El,F,FA,H,Impl,JACOBN,Matdim,Miter,Ml,Mu,N,Nde,Nq,Save2,&
       END DO
     END IF
     CALL CGBFA(Dfdy,Matdim,N,Ml,Mu,Ipvt,info)
-    IF ( info/=0 ) Ier = .TRUE.
-  ELSEIF ( Miter==3 ) THEN
+    IF( info/=0 ) Ier = .TRUE.
+  ELSEIF( Miter==3 ) THEN
     iflag = 1
     CALL USERS(Y,Yh(1,2),Ywt,Save1,Save2,T,H,El(1,Nq),Impl,N,Nde,iflag)
-    IF ( iflag==-1 ) THEN
+    IF( iflag==-1 ) THEN
       Ier = .TRUE.
       RETURN
     END IF
-    IF ( N==0 ) THEN
+    IF( N==0 ) THEN
       Jstate = 10
       RETURN
     END IF

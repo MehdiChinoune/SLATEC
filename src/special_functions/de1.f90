@@ -1,7 +1,6 @@
 !** DE1
 REAL(DP) FUNCTION DE1(X)
-  !>
-  !  Compute the exponential integral E1(X).
+  !> Compute the exponential integral E1(X).
   !***
   ! **Library:**   SLATEC (FNLIB)
   !***
@@ -259,7 +258,7 @@ REAL(DP) FUNCTION DE1(X)
     -.5069814875800460855562584719360D-31 ]
   LOGICAL, SAVE :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  DE1
-  IF ( first ) THEN
+  IF( first ) THEN
     ntae10 = INITDS(ae10cs,50,eta)
     ntae11 = INITDS(ae11cs,60,eta)
     ntae12 = INITDS(ae12cs,41,eta)
@@ -270,30 +269,30 @@ REAL(DP) FUNCTION DE1(X)
     first = .FALSE.
   END IF
   !
-  IF ( X>(-1.D0) ) THEN
+  IF( X>(-1.D0) ) THEN
     !
-    IF ( X<=1.0D0 ) THEN
-      IF ( X==0.D0 ) CALL XERMSG('DE1','X IS 0',2,2)
+    IF( X<=1.0D0 ) THEN
+      IF( X==0.D0 ) CALL XERMSG('DE1','X IS 0',2,2)
       DE1 = (-LOG(ABS(X))-0.6875D0+X) + DCSEVL(X,e12cs,nte12)
       RETURN
       !
-    ELSEIF ( X<=4.0D0 ) THEN
+    ELSEIF( X<=4.0D0 ) THEN
       DE1 = EXP(-X)/X*(1.D0+DCSEVL((8.D0/X-5.D0)/3.D0,ae13cs,ntae13))
       RETURN
       !
-    ELSEIF ( X>xmax ) THEN
+    ELSEIF( X>xmax ) THEN
       !
       CALL XERMSG('DE1','X SO BIG E1 UNDERFLOWS',1,1)
       DE1 = 0.D0
       RETURN
     END IF
-  ELSEIF ( X>(-32.D0) ) THEN
+  ELSEIF( X>(-32.D0) ) THEN
     !
-    IF ( X<=(-8.D0) ) THEN
+    IF( X<=(-8.D0) ) THEN
       DE1 = EXP(-X)/X*(1.D0+DCSEVL((64.D0/X+5.D0)/3.D0,ae11cs,ntae11))
       RETURN
       !
-    ELSEIF ( X>(-4.D0) ) THEN
+    ELSEIF( X>(-4.D0) ) THEN
       !
       DE1 = -LOG(-X) + DCSEVL((2.D0*X+5.D0)/3.D0,e11cs,nte11)
       RETURN

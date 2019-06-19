@@ -1,7 +1,6 @@
 !** DBSKIN
 SUBROUTINE DBSKIN(X,N,Kode,M,Y,Nz,Ierr)
-  !>
-  !  Compute repeated integrals of the K-zero Bessel function.
+  !> Compute repeated integrals of the K-zero Bessel function.
   !***
   ! **Library:**   SLATEC
   !***
@@ -24,7 +23,7 @@ SUBROUTINE DBSKIN(X,N,Kode,M,Y,Nz,Ierr)
   !     Definition 2
   !         KI(N,X) = Bickley Function
   !                 =  integral from X to infinity of KI(N-1,t)dt
-  !                     for X .ge. 0 and N = 1,2,...
+  !                     for X >= 0 and N = 1,2,...
   !  _____________________________________________________________________
   !    DBSKIN computes a sequence of Bickley functions (repeated integrals
   !    of the K0 Bessel function); i.e. for fixed X and N and for K=1,...,
@@ -34,15 +33,15 @@ SUBROUTINE DBSKIN(X,N,Kode,M,Y,Nz,Ierr)
   !          or
   !                     Y(K) = EXP(X)*KI(N+K-1,X) for KODE=2,
   !
-  !         for N.ge.0 and X.ge.0 (N and X cannot be zero simultaneously).
+  !         for N>=0 and X>=0 (N and X cannot be zero simultaneously).
   !
   !      INPUT      X is DOUBLE PRECISION
-  !        X      - Argument, X .ge. 0.0D0
-  !        N      - Order of first member of the sequence N .ge. 0
+  !        X      - Argument, X >= 0.0D0
+  !        N      - Order of first member of the sequence N >= 0
   !        KODE   - Selection parameter
   !             KODE = 1 returns Y(K)=        KI(N+K-1,X), K=1,M
   !                  = 2 returns Y(K)=EXP(X)*KI(N+K-1,X), K=1,M
-  !        M      - Number of members in the sequence, M.ge.1
+  !        M      - Number of members in the sequence, M>=1
   !
   !       OUTPUT     Y is a DOUBLE PRECISION VECTOR
   !         Y      - A vector of dimension at least M containing the
@@ -72,10 +71,10 @@ SUBROUTINE DBSKIN(X,N,Kode,M,Y,Nz,Ierr)
   !
   !         is stable where recurrence is carried forward or backward
   !         away from INT(X+0.5).  The power series for indices 0,1 and 2
-  !         on 0.le.X.le.2 starts a stable recurrence for indices
-  !         greater than 2.  If N is sufficiently large (N.gt.NLIM), the
+  !         on 0<=X<=2 starts a stable recurrence for indices
+  !         greater than 2.  If N is sufficiently large (N>NLIM), the
   !         uniform asymptotic expansion for N to INFINITY is more
-  !         economical.  On X.gt.2 the recursion is started by evaluating
+  !         economical.  On X>2 the recursion is started by evaluating
   !         the uniform expansion for the three members whose indices are
   !         closest to INT(X+0.5) within the set N,...,N+M-1.  Forward
   !         recurrence, backward recurrence or both complete the
@@ -136,13 +135,13 @@ SUBROUTINE DBSKIN(X,N,Kode,M,Y,Nz,Ierr)
   !* FIRST EXECUTABLE STATEMENT  DBSKIN
   Ierr = 0
   Nz = 0
-  IF ( X<0.0D0 ) Ierr = 1
-  IF ( N<0 ) Ierr = 1
-  IF ( Kode<1.OR.Kode>2 ) Ierr = 1
-  IF ( M<1 ) Ierr = 1
-  IF ( X==0.0D0.AND.N==0 ) Ierr = 1
-  IF ( Ierr/=0 ) RETURN
-  IF ( X==0.0D0 ) THEN
+  IF( X<0.0D0 ) Ierr = 1
+  IF( N<0 ) Ierr = 1
+  IF( Kode<1 .OR. Kode>2 ) Ierr = 1
+  IF( M<1 ) Ierr = 1
+  IF( X==0.0D0 .AND. N==0 ) Ierr = 1
+  IF( Ierr/=0 ) RETURN
+  IF( X==0.0D0 ) THEN
     !-----------------------------------------------------------------------
     !     X=0 CASE
     !-----------------------------------------------------------------------
@@ -150,9 +149,9 @@ SUBROUTINE DBSKIN(X,N,Kode,M,Y,Nz,Ierr)
     hn = 0.5D0*fn
     gr = DGAMRN(hn)
     Y(1) = hrtpi*gr
-    IF ( M==1 ) RETURN
+    IF( M==1 ) RETURN
     Y(2) = hrtpi/(hn*gr)
-    IF ( M==2 ) RETURN
+    IF( M==2 ) RETURN
     DO k = 3, M
       Y(k) = fn*Y(k-2)/(fn+1.0D0)
       fn = fn + 1.0D0
@@ -163,8 +162,8 @@ SUBROUTINE DBSKIN(X,N,Kode,M,Y,Nz,Ierr)
     t1 = 2.3026D0*D1MACH(5)*i1m
     xlim = t1 - 3.228086D0
     t2 = t1 + (N+M-1)
-    IF ( t2>1000.0D0 ) xlim = t1 - 0.5D0*(LOG(t2)-0.451583D0)
-    IF ( X>xlim.AND.Kode==1 ) GOTO 400
+    IF( t2>1000.0D0 ) xlim = t1 - 0.5D0*(LOG(t2)-0.451583D0)
+    IF( X>xlim .AND. Kode==1 ) GOTO 400
     tol = MAX(D1MACH(4),1.0D-18)
     i1m = I1MACH(14)
     !-----------------------------------------------------------------------
@@ -177,16 +176,16 @@ SUBROUTINE DBSKIN(X,N,Kode,M,Y,Nz,Ierr)
     nlim = MAX(20,nlim)
     m3 = MIN(M,3)
     nl = N + M - 1
-    IF ( X>2.0D0 ) THEN
+    IF( X>2.0D0 ) THEN
       !-----------------------------------------------------------------------
-      !     COMPUTATION BY ASYMPTOTIC EXPANSION FOR X.GT.2
+      !     COMPUTATION BY ASYMPTOTIC EXPANSION FOR X>2
       !-----------------------------------------------------------------------
       w = X + 0.5D0
       nt = INT(w)
-      IF ( nl>nt ) THEN
-        IF ( N>=nt ) GOTO 300
+      IF( nl>nt ) THEN
+        IF( N>=nt ) GOTO 300
         !-----------------------------------------------------------------------
-        !     ICASE=2, N.LT.NT.LT.NL WITH BOTH FORWARD AND BACKWARD RECURSION
+        !     ICASE=2, N<NT<NL WITH BOTH FORWARD AND BACKWARD RECURSION
         !-----------------------------------------------------------------------
         nn = nt + 1
         nflg = MIN(M-m3,1)
@@ -194,7 +193,7 @@ SUBROUTINE DBSKIN(X,N,Kode,M,Y,Nz,Ierr)
         GOTO 200
       ELSE
         !-----------------------------------------------------------------------
-        !     CASE NL.LE.NT, ICASE=0
+        !     CASE NL<=NT, ICASE=0
         !-----------------------------------------------------------------------
         icase = 0
         nn = nl
@@ -202,31 +201,31 @@ SUBROUTINE DBSKIN(X,N,Kode,M,Y,Nz,Ierr)
         GOTO 200
       END IF
     ELSE
-      IF ( N>nlim ) GOTO 300
+      IF( N>nlim ) GOTO 300
       !-----------------------------------------------------------------------
-      !     COMPUTATION BY SERIES FOR 0.LE.X.LE.2
+      !     COMPUTATION BY SERIES FOR 0<=X<=2
       !-----------------------------------------------------------------------
       nflg = 0
       nn = N
-      IF ( nl>2 ) THEN
+      IF( nl>2 ) THEN
         m3 = 3
         nn = 0
         nflg = 1
       END IF
       xp = 1.0D0
-      IF ( Kode==2 ) xp = EXP(X)
+      IF( Kode==2 ) xp = EXP(X)
       DO i = 1, m3
         CALL DBKISR(X,nn,w,Ierr)
-        IF ( Ierr/=0 ) RETURN
+        IF( Ierr/=0 ) RETURN
         w = w*xp
-        IF ( nn>=N ) THEN
+        IF( nn>=N ) THEN
           kk = nn - N + 1
           Y(kk) = w
         END IF
         ys(i) = w
         nn = nn + 1
       END DO
-      IF ( nflg==0 ) RETURN
+      IF( nflg==0 ) RETURN
       ns = nn
       xp = 1.0D0
     END IF
@@ -236,7 +235,7 @@ SUBROUTINE DBSKIN(X,N,Kode,M,Y,Nz,Ierr)
   !-----------------------------------------------------------------------
   100  fn = ns - 1
   il = nl - ns + 1
-  IF ( il<=0 ) RETURN
+  IF( il<=0 ) RETURN
   DO i = 1, il
     t1 = ys(2)
     t2 = ys(3)
@@ -244,7 +243,7 @@ SUBROUTINE DBSKIN(X,N,Kode,M,Y,Nz,Ierr)
     ys(2) = t2
     ys(1) = t1
     fn = fn + 1.0D0
-    IF ( ns>=N ) THEN
+    IF( ns>=N ) THEN
       kk = ns - N + 1
       Y(kk) = ys(3)*xp
     END IF
@@ -256,26 +255,26 @@ SUBROUTINE DBSKIN(X,N,Kode,M,Y,Nz,Ierr)
   ns = nn + 1
   np = nn - m3 + 1
   xp = 1.0D0
-  IF ( Kode==1 ) xp = EXP(-X)
+  IF( Kode==1 ) xp = EXP(-X)
   DO i = 1, m3
     kk = i
     CALL DBKIAS(X,np,ktrms,a,w,kk,ne,gr,h,Ierr)
-    IF ( Ierr/=0 ) RETURN
+    IF( Ierr/=0 ) RETURN
     ys(i) = w
     np = np + 1
   END DO
   !-----------------------------------------------------------------------
   !     SUM SERIES OF EXPONENTIAL INTEGRALS BACKWARD
   !-----------------------------------------------------------------------
-  IF ( ktrms/=0 ) THEN
+  IF( ktrms/=0 ) THEN
     ne = ktrms + ktrms + 1
     np = nn - m3 + 2
     CALL DEXINT(X,np,2,ne,tol,exi,Nz,Ierr)
-    IF ( Nz/=0 ) GOTO 400
+    IF( Nz/=0 ) GOTO 400
   END IF
   DO i = 1, m3
     ss = 0.0D0
-    IF ( ktrms/=0 ) THEN
+    IF( ktrms/=0 ) THEN
       kk = i + ktrms + ktrms - 2
       il = ktrms
       DO k = 1, ktrms
@@ -286,8 +285,8 @@ SUBROUTINE DBSKIN(X,N,Kode,M,Y,Nz,Ierr)
     END IF
     ys(i) = ys(i) + ss
   END DO
-  IF ( icase/=1 ) THEN
-    IF ( nflg/=0 ) THEN
+  IF( icase/=1 ) THEN
+    IF( nflg/=0 ) THEN
       !-----------------------------------------------------------------------
       !     BACKWARD RECURSION SCALED BY EXP(X) ICASE=0,2
       !-----------------------------------------------------------------------
@@ -300,7 +299,7 @@ SUBROUTINE DBSKIN(X,N,Kode,M,Y,Nz,Ierr)
         k = k - 1
       END DO
       il = kk
-      IF ( il>0 ) THEN
+      IF( il>0 ) THEN
         fn = nn - 3
         DO i = 1, il
           t1 = ys(2)
@@ -313,7 +312,7 @@ SUBROUTINE DBSKIN(X,N,Kode,M,Y,Nz,Ierr)
           fn = fn - 1.0D0
         END DO
       END IF
-      IF ( icase/=2 ) RETURN
+      IF( icase/=2 ) RETURN
       DO i = 1, m3
         ys(i) = yss(i)
       END DO
@@ -323,17 +322,17 @@ SUBROUTINE DBSKIN(X,N,Kode,M,Y,Nz,Ierr)
   DO i = 1, m3
     Y(i) = ys(i)*xp
   END DO
-  IF ( icase==1.AND.nflg==1 ) GOTO 100
+  IF( icase==1 .AND. nflg==1 ) GOTO 100
   RETURN
   !-----------------------------------------------------------------------
-  !     ICASE=1, NT.LE.N.LE.NL WITH FORWARD RECURSION
+  !     ICASE=1, NT<=N<=NL WITH FORWARD RECURSION
   !-----------------------------------------------------------------------
   300  nn = N + m3 - 1
   nflg = MIN(M-m3,1)
   icase = 1
   GOTO 200
   !-----------------------------------------------------------------------
-  !     UNDERFLOW ON KODE=1, X.GT.XLIM
+  !     UNDERFLOW ON KODE=1, X>XLIM
   !-----------------------------------------------------------------------
   400  Nz = M
   DO i = 1, M

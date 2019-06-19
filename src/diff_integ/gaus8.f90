@@ -1,7 +1,6 @@
 !** GAUS8
 SUBROUTINE GAUS8(FUN,A,B,Err,Ans,Ierr)
-  !>
-  !  Integrate a real function of one variable over a finite
+  !> Integrate a real function of one variable over a finite
   !            interval using an adaptive 8-point Legendre-Gauss
   !            algorithm.  Intended primarily for high accuracy
   !            integration or integration of smooth functions.
@@ -36,7 +35,7 @@ SUBROUTINE GAUS8(FUN,A,B,Err,Ans,Ierr)
   !        A   - lower limit of integration
   !        B   - upper limit of integration (may be less than A)
   !        ERR - is a requested pseudorelative error tolerance.  Normally
-  !              pick a value of ABS(ERR) so that STOL .LT. ABS(ERR) .LE.
+  !              pick a value of ABS(ERR) so that STOL < ABS(ERR) <=
   !              1.0E-3 where STOL is the single precision unit roundoff
   !              R1MACH(4).  ANS will normally have no more error than
   !              ABS(ERR) times the integral of the absolute value of
@@ -85,8 +84,8 @@ SUBROUTINE GAUS8(FUN,A,B,Err,Ans,Ierr)
       REAL(SP), INTENT(IN) :: X
     END FUNCTION
   END INTERFACE
-  INTEGER Ierr, k, l, lmn, lmx, lr(30), mxl, nbits, nib, nlmx
-  REAL(SP) A, aa(30), ae, anib, Ans, area, B, c, ce, ee, ef, eps, Err, &
+  INTEGER :: Ierr, k, l, lmn, lmx, lr(30), mxl, nbits, nib, nlmx
+  REAL(SP) :: A, aa(30), ae, anib, Ans, area, B, c, ce, ee, ef, eps, Err, &
     est, gl, glr, gr(30), hh(30), tol, vl(30), vr
   REAL(SP), PARAMETER :: x1 = 1.83434642495649805E-01, x2 = 5.25532409916328986E-01, &
     x3 =7.96666477413626740E-01 , x4 = 9.60289856497536232E-01
@@ -105,29 +104,29 @@ SUBROUTINE GAUS8(FUN,A,B,Err,Ans,Ierr)
   Ans = 0.0E0
   Ierr = 1
   ce = 0.0E0
-  IF ( A==B ) THEN
-    IF ( Err<0.0E0 ) Err = ce
+  IF( A==B ) THEN
+    IF( Err<0.0E0 ) Err = ce
     RETURN
   ELSE
     lmx = nlmx
     lmn = nlmn
-    IF ( B/=0.0E0 ) THEN
-      IF ( SIGN(1.0E0,B)*A>0.0E0 ) THEN
+    IF( B/=0.0E0 ) THEN
+      IF( SIGN(1.0E0,B)*A>0.0E0 ) THEN
         c = ABS(1.0E0-A/B)
-        IF ( c<=0.1E0 ) THEN
-          IF ( c<=0.0E0 ) THEN
-            IF ( Err<0.0E0 ) Err = ce
+        IF( c<=0.1E0 ) THEN
+          IF( c<=0.0E0 ) THEN
+            IF( Err<0.0E0 ) Err = ce
             RETURN
           ELSE
             anib = 0.5E0 - LOG(c)/0.69314718E0
             nib = INT( anib )
             lmx = MIN(nlmx,nbits-nib-7)
-            IF ( lmx<1 ) THEN
+            IF( lmx<1 ) THEN
               Ierr = -1
               CALL XERMSG('GAUS8',&
                 'A and B are too nearly equal to allow normal integration.&
                 & $$ANS is set to zero and IERR to -1.',1,-1)
-              IF ( Err<0.0E0 ) Err = ce
+              IF( Err<0.0E0 ) Err = ce
               RETURN
             ELSE
               lmn = MIN(lmn,lmx)
@@ -137,7 +136,7 @@ SUBROUTINE GAUS8(FUN,A,B,Err,Ans,Ierr)
       END IF
     END IF
     tol = MAX(ABS(Err),2.0E0**(5-nbits))/2.0E0
-    IF ( Err==0.0E0 ) tol = SQRT(R1MACH(4))
+    IF( Err==0.0E0 ) tol = SQRT(R1MACH(4))
     eps = tol
     hh(1) = (B-A)/4.0E0
     aa(1) = A
@@ -158,16 +157,16 @@ SUBROUTINE GAUS8(FUN,A,B,Err,Ans,Ierr)
     gr(l) = G8(aa(l)+3.0E0*hh(l),hh(l))
     k = k + 16
     area = area + (ABS(gl)+ABS(gr(l))-ABS(est))
-    !     IF (L .LT. LMN) GO TO 11
+    !     IF(L < LMN) GO TO 11
     glr = gl + gr(l)
     ee = ABS(est-glr)*ef
     ae = MAX(eps*area,tol*ABS(glr))
-    IF ( ee<=ae ) EXIT
+    IF( ee<=ae ) EXIT
     !
     !     Consider the left half of this level
     !
-    IF ( k>kmx ) lmx = kml
-    IF ( l>=lmx ) THEN
+    IF( k>kmx ) lmx = kml
+    IF( l>=lmx ) THEN
       mxl = 1
       EXIT
     ELSE
@@ -181,7 +180,7 @@ SUBROUTINE GAUS8(FUN,A,B,Err,Ans,Ierr)
     END IF
   END DO
   ce = ce + (est-glr)
-  IF ( lr(l)<=0 ) THEN
+  IF( lr(l)<=0 ) THEN
     !
     !     Proceed to right half at this level
     !
@@ -191,11 +190,11 @@ SUBROUTINE GAUS8(FUN,A,B,Err,Ans,Ierr)
     !     Return one level
     !
     vr = glr
-    DO WHILE ( l>1 )
+    DO WHILE( l>1 )
       l = l - 1
       eps = eps*2.0E0
       ef = ef*sq2
-      IF ( lr(l)<=0 ) THEN
+      IF( lr(l)<=0 ) THEN
         vl(l) = vl(l+1) + vr
         GOTO 200
       ELSE
@@ -206,12 +205,12 @@ SUBROUTINE GAUS8(FUN,A,B,Err,Ans,Ierr)
     !     Exit
     !
     Ans = vr
-    IF ( (mxl/=0).AND.(ABS(ce)>2.0E0*tol*area) ) THEN
+    IF( (mxl/=0) .AND. (ABS(ce)>2.0E0*tol*area) ) THEN
       Ierr = 2
       CALL XERMSG('GAUS8',&
         'ANS is probably insufficiently accurate.',3,1)
     END IF
-    IF ( Err<0.0E0 ) Err = ce
+    IF( Err<0.0E0 ) Err = ce
     RETURN
   END IF
   200  est = gr(l-1)

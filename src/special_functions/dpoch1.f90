@@ -1,7 +1,6 @@
 !** DPOCH1
 REAL(DP) FUNCTION DPOCH1(A,X)
-  !>
-  !  Calculate a generalization of Pochhammer's symbol starting
+  !> Calculate a generalization of Pochhammer's symbol starting
   !            from first order.
   !***
   ! **Library:**   SLATEC (FNLIB)
@@ -76,24 +75,24 @@ REAL(DP) FUNCTION DPOCH1(A,X)
     -.236502241570062993455963519636983D-31 ]
   REAL(DP), PARAMETER :: pi = 3.141592653589793238462643383279503D0
   !* FIRST EXECUTABLE STATEMENT  DPOCH1
-  IF ( X==0.0D0 ) THEN
+  IF( X==0.0D0 ) THEN
     DPOCH1 = DPSI(A)
     RETURN
   END IF
   !
   absx = ABS(X)
   absa = ABS(A)
-  IF ( absx>0.1D0*absa ) THEN
+  IF( absx>0.1D0*absa ) THEN
     !
     DPOCH1 = (DPOCH(A,X)-1.0D0)/X
-  ELSEIF ( absx*LOG(MAX(absa,2.0D0))>0.1D0 ) THEN
+  ELSEIF( absx*LOG(MAX(absa,2.0D0))>0.1D0 ) THEN
     DPOCH1 = (DPOCH(A,X)-1.0D0)/X
   ELSE
     !
     bp = A
-    IF ( A<(-0.5D0) ) bp = 1.0D0 - A - X
+    IF( A<(-0.5D0) ) bp = 1.0D0 - A - X
     incr = 0
-    IF ( bp<10.0D0 ) incr = 11 - INT( bp )
+    IF( bp<10.0D0 ) incr = 11 - INT( bp )
     b = bp + incr
     !
     var = b + 0.5D0*(X-1.0D0)
@@ -101,7 +100,7 @@ REAL(DP) FUNCTION DPOCH1(A,X)
     q = X*alnvar
     !
     poly1 = 0.0D0
-    IF ( var<sqtbig ) THEN
+    IF( var<sqtbig ) THEN
       var2 = (1.0D0/var)**2
       !
       rho = 0.5D0*(X+1.0D0)
@@ -111,9 +110,9 @@ REAL(DP) FUNCTION DPOCH1(A,X)
       poly1 = gbern(2)*term
       !
       nterms = INT( -0.5D0*alneps/alnvar ) + 1
-      IF ( nterms>20 ) CALL XERMSG('DPOCH1',&
+      IF( nterms>20 ) CALL XERMSG('DPOCH1',&
         'NTERMS IS TOO BIG, MAYBE D1MACH(3) IS BAD',1,2)
-      IF ( nterms>=2 ) THEN
+      IF( nterms>=2 ) THEN
         !
         DO k = 2, nterms
           gbk = 0.0D0
@@ -132,7 +131,7 @@ REAL(DP) FUNCTION DPOCH1(A,X)
     poly1 = (X-1.0D0)*poly1
     DPOCH1 = DEXPRL(q)*(alnvar+q*poly1) + poly1
     !
-    IF ( incr/=0 ) THEN
+    IF( incr/=0 ) THEN
       !
       ! WE HAVE DPOCH1(B,X), BUT BP IS SMALL, SO WE USE BACKWARDS RECURSION
       ! TO OBTAIN DPOCH1(BP,X).
@@ -144,7 +143,7 @@ REAL(DP) FUNCTION DPOCH1(A,X)
       END DO
     END IF
     !
-    IF ( bp==A ) RETURN
+    IF( bp==A ) RETURN
     !
     ! WE HAVE DPOCH1(BP,X), BUT A IS LT -0.5.  WE THEREFORE USE A REFLECTION
     ! FORMULA TO OBTAIN DPOCH1(A,X).

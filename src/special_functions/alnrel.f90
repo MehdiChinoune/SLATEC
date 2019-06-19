@@ -1,7 +1,6 @@
 !** ALNREL
 REAL(SP) FUNCTION ALNREL(X)
-  !>
-  !  Evaluate ln(1+X) accurate in the sense of relative error.
+  !> Evaluate ln(1+X) accurate in the sense of relative error.
   !***
   ! **Library:**   SLATEC (FNLIB)
   !***
@@ -53,15 +52,15 @@ REAL(SP) FUNCTION ALNREL(X)
     .000000000000000554E0, -.000000000000000103E0, .000000000000000019E0 ]
   LOGICAL, SAVE :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  ALNREL
-  IF ( first ) THEN
+  IF( first ) THEN
     nlnrel = INITS(alnrcs,23,0.1*R1MACH(3))
   END IF
   !
-  IF ( X<=(-1.0) ) CALL XERMSG('ALNREL','X IS LE -1',2,2)
-  IF ( X<xmin ) CALL XERMSG('ALNREL',&
+  IF( X<=(-1.0) ) CALL XERMSG('ALNREL','X IS LE -1',2,2)
+  IF( X<xmin ) CALL XERMSG('ALNREL',&
     'ANSWER LT HALF PRECISION BECAUSE X TOO NEAR -1',1,1)
   !
-  IF ( ABS(X)<=0.375 ) THEN
+  IF( ABS(X)<=0.375 ) THEN
     ALNREL = X*(1.-X*CSEVL(X/.375,alnrcs,nlnrel))
   ELSE
     ALNREL = LOG(1.0+X)

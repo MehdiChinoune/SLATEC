@@ -1,7 +1,6 @@
 !** ZABS
 REAL(DP) FUNCTION ZABS(Zr,Zi)
-  !>
-  !  Subsidiary to ZBESH, ZBESI, ZBESJ, ZBESK, ZBESY, ZAIRY and
+  !> Subsidiary to ZBESH, ZBESI, ZBESJ, ZBESK, ZBESY, ZAIRY and
   !            ZBIRY
   !***
   ! **Library:**   SLATEC
@@ -34,10 +33,10 @@ REAL(DP) FUNCTION ZABS(Zr,Zi)
   !     TRUE FLOATING ZERO
   !-----------------------------------------------------------------------
   s = s*1.0D+0
-  IF ( s==0.0D+0 ) THEN
+  IF( s==0.0D+0 ) THEN
     ZABS = 0.0D+0
     RETURN
-  ELSEIF ( u<=v ) THEN
+  ELSEIF( u<=v ) THEN
     q = u/v
     ZABS = v*SQRT(1.D+0+q*q)
     RETURN

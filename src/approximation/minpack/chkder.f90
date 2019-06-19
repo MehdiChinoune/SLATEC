@@ -1,7 +1,6 @@
 !** CHKDER
 SUBROUTINE CHKDER(M,N,X,Fvec,Fjac,Ldfjac,Xp,Fvecp,Mode,Err)
-  !>
-  !  Check the gradients of M nonlinear functions in N
+  !> Check the gradients of M nonlinear functions in N
   !            variables, evaluated at a point X, for consistency
   !            with the functions themselves.
   !***
@@ -117,7 +116,7 @@ SUBROUTINE CHKDER(M,N,X,Fvec,Fjac,Ldfjac,Xp,Fvecp,Mode,Err)
   !
   eps = SQRT(epsmch)
   !
-  IF ( Mode==2 ) THEN
+  IF( Mode==2 ) THEN
     !
     !        MODE = 2.
     !
@@ -128,19 +127,19 @@ SUBROUTINE CHKDER(M,N,X,Fvec,Fjac,Ldfjac,Xp,Fvecp,Mode,Err)
     END DO
     DO j = 1, N
       temp = ABS(X(j))
-      IF ( temp==zero ) temp = one
+      IF( temp==zero ) temp = one
       DO i = 1, M
         Err(i) = Err(i) + temp*Fjac(i,j)
       END DO
     END DO
     DO i = 1, M
       temp = one
-      IF ( Fvec(i)/=zero.AND.Fvecp(i)/=zero.AND.ABS(Fvecp(i)-Fvec(i))&
+      IF( Fvec(i)/=zero .AND. Fvecp(i)/=zero .AND. ABS(Fvecp(i)-Fvec(i))&
         >=epsf*ABS(Fvec(i)) ) temp = eps*ABS((Fvecp(i)-Fvec(i))/eps-Err(i))&
         /(ABS(Fvec(i))+ABS(Fvecp(i)))
       Err(i) = one
-      IF ( temp>epsmch.AND.temp<eps ) Err(i) = (LOG10(temp)-epslog)/epslog
-      IF ( temp>=eps ) Err(i) = zero
+      IF( temp>epsmch .AND. temp<eps ) Err(i) = (LOG10(temp)-epslog)/epslog
+      IF( temp>=eps ) Err(i) = zero
     END DO
   ELSE
     !
@@ -148,7 +147,7 @@ SUBROUTINE CHKDER(M,N,X,Fvec,Fjac,Ldfjac,Xp,Fvecp,Mode,Err)
     !
     DO j = 1, N
       temp = eps*ABS(X(j))
-      IF ( temp==zero ) temp = eps
+      IF( temp==zero ) temp = eps
       Xp(j) = X(j) + temp
     END DO
   END IF

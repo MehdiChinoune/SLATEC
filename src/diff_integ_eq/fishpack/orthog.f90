@@ -1,7 +1,6 @@
 !** ORTHOG
 SUBROUTINE ORTHOG(Usol,Idmn,Zn,Zm,Pertrb)
-  !>
-  !  Subsidiary to SEPELI
+  !> Subsidiary to SEPELI
   !***
   ! **Library:**   SLATEC
   !***

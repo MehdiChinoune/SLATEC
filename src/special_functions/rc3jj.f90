@@ -1,7 +1,6 @@
 !** RC3JJ
 SUBROUTINE RC3JJ(L2,L3,M2,M3,L1min,L1max,Thrcof,Ndim,Ier)
-  !>
-  !  Evaluate the 3j symbol f(L1) = (  L1   L2 L3)
+  !> Evaluate the 3j symbol f(L1) = (  L1   L2 L3)
   !                                           (-M2-M3 M2 M3)
   !            for all allowed values of L1, the other parameters
   !            being held fixed.
@@ -50,7 +49,7 @@ SUBROUTINE RC3JJ(L2,L3,M2,M3,L1min,L1max,Thrcof,Ndim,Ier)
   !
   !     IER :OUT    Error flag.
   !                 IER=0 No errors.
-  !                 IER=1 Either L2.LT.ABS(M2) or L3.LT.ABS(M3).
+  !                 IER=1 Either L2<ABS(M2) or L3<ABS(M3).
   !                 IER=2 Either L2+ABS(M2) or L3+ABS(M3) non-integer.
   !                 IER=3 L1MAX-L1MIN not an integer.
   !                 IER=4 L1MAX less than L1MIN.
@@ -64,7 +63,7 @@ SUBROUTINE RC3JJ(L2,L3,M2,M3,L1min,L1max,Thrcof,Ndim,Ier)
   !  subroutine are somewhat weaker. See, for example, Section 27.9 of
   !  Abramowitz and Stegun or Appendix C of Volume II of A. Messiah.
   !  The restrictions imposed by this subroutine are
-  !       1. L2 .GE. ABS(M2) and L3 .GE. ABS(M3);
+  !       1. L2 >= ABS(M2) and L3 >= ABS(M3);
   !       2. L2+ABS(M2) and L3+ABS(M3) must be integers;
   !       3. L1MAX-L1MIN must be a non-negative integer, where
   !          L1MAX=L2+L3 and L1MIN=MAX(ABS(L2-L3),ABS(M2+M3)).
@@ -132,11 +131,11 @@ SUBROUTINE RC3JJ(L2,L3,M2,M3,L1min,L1max,Thrcof,Ndim,Ier)
   !           D. W. Lozier.
   USE service, ONLY : XERMSG, R1MACH
   !
-  INTEGER Ndim, Ier
-  REAL(SP) L2, L3, M2, M3, L1min, L1max, Thrcof(Ndim)
+  INTEGER :: Ndim, Ier
+  REAL(SP) :: L2, L3, M2, M3, L1min, L1max, Thrcof(Ndim)
   !
-  INTEGER i, indexx, lstep, n, nfin, nfinp1, nfinp2, nfinp3, nlim, nstep2
-  REAL(SP) a1, a1s, a2, a2s, c1, c1old, c2, cnorm, denom, dv, hugee, l1, m1, &
+  INTEGER :: i, indexx, lstep, n, nfin, nfinp1, nfinp2, nfinp3, nlim, nstep2
+  REAL(SP) :: a1, a1s, a2, a2s, c1, c1old, c2, cnorm, denom, dv, hugee, l1, m1, &
     newfac, oldfac, ratio, sign1, sign2, srhuge, srtiny, sum1, sum2, sumbac, &
     sumfor, sumuni, thresh, tinyy, x, x1, x2, x3, y, y1, y2, y3
   REAL(SP), PARAMETER :: zero = 0.0, eps = 0.01, one = 1.0, two = 2.0, three = 3.0
@@ -154,11 +153,11 @@ SUBROUTINE RC3JJ(L2,L3,M2,M3,L1min,L1max,Thrcof,Ndim,Ier)
   m1 = -M2 - M3
   !
   !  Check error conditions 1 and 2.
-  IF ( (L2-ABS(M2)+eps<zero).OR.(L3-ABS(M3)+eps<zero) ) THEN
+  IF( (L2-ABS(M2)+eps<zero) .OR. (L3-ABS(M3)+eps<zero) ) THEN
     Ier = 1
     CALL XERMSG('RC3JJ','L2-ABS(M2) or L3-ABS(M3) less than zero.',Ier,1)
     RETURN
-  ELSEIF ( (MOD(L2+ABS(M2)+eps,one)>=eps+eps).OR.&
+  ELSEIF( (MOD(L2+ABS(M2)+eps,one)>=eps+eps) .OR. &
       (MOD(L3+ABS(M3)+eps,one)>=eps+eps) ) THEN
     Ier = 2
     CALL XERMSG('RC3JJ','L2+ABS(M2) or L3+ABS(M3) not integer.',Ier,1)
@@ -173,19 +172,19 @@ SUBROUTINE RC3JJ(L2,L3,M2,M3,L1min,L1max,Thrcof,Ndim,Ier)
   L1max = L2 + L3
   !
   !  Check error condition 3.
-  IF ( MOD(L1max-L1min+eps,one)>=eps+eps ) THEN
+  IF( MOD(L1max-L1min+eps,one)>=eps+eps ) THEN
     Ier = 3
     CALL XERMSG('RC3JJ','L1MAX-L1MIN not integer.',Ier,1)
     RETURN
   END IF
-  IF ( L1min<L1max-eps ) THEN
+  IF( L1min<L1max-eps ) THEN
     !
     !  This is reached in case that L1 takes more than one value,
     !  i.e. L1MIN < L1MAX.
     !
     !     LSCALE = 0
     nfin = INT(L1max-L1min+one+eps)
-    IF ( Ndim<nfin ) THEN
+    IF( Ndim<nfin ) THEN
       !
       !  Check error condition 5.
       Ier = 5
@@ -205,7 +204,7 @@ SUBROUTINE RC3JJ(L2,L3,M2,M3,L1min,L1max,Thrcof,Ndim,Ier)
       !
       lstep = 1
     END IF
-  ELSEIF ( L1min<L1max+eps ) THEN
+  ELSEIF( L1min<L1max+eps ) THEN
     !
     !  This is reached in case that L1 can take only one value,
     !  i.e. L1MIN = L1MAX
@@ -228,7 +227,7 @@ SUBROUTINE RC3JJ(L2,L3,M2,M3,L1min,L1max,Thrcof,Ndim,Ier)
   a1 = (l1+L2+L3+one)*(l1-L2+L3)*(l1+L2-L3)*(-l1+L2+L3+one)
   a2 = (l1+m1)*(l1-m1)
   newfac = SQRT(a1*a2)
-  IF ( l1<one+eps ) THEN
+  IF( l1<one+eps ) THEN
     !
     !  If L1 = 1, (L1-1) has to be factored out of DV, hence
     !
@@ -240,11 +239,11 @@ SUBROUTINE RC3JJ(L2,L3,M2,M3,L1min,L1max,Thrcof,Ndim,Ier)
     denom = (l1-one)*newfac
     !
     !
-    IF ( lstep>2 ) c1old = ABS(c1)
+    IF( lstep>2 ) c1old = ABS(c1)
     c1 = -(l1+l1-one)*dv/denom
   END IF
   !
-  IF ( lstep>2 ) THEN
+  IF( lstep>2 ) THEN
     !
     !
     c2 = -l1*oldfac/denom
@@ -255,11 +254,11 @@ SUBROUTINE RC3JJ(L2,L3,M2,M3,L1min,L1max,Thrcof,Ndim,Ier)
     Thrcof(lstep) = x
     sumfor = sum1
     sum1 = sum1 + (l1+l1+one)*x*x
-    IF ( lstep/=nfin ) THEN
+    IF( lstep/=nfin ) THEN
       !
       !  See if last unnormalized 3j coefficient exceeds SRHUGE
       !
-      IF ( ABS(x)>=srhuge ) THEN
+      IF( ABS(x)>=srhuge ) THEN
         !
         !  This is reached if last 3j coefficient larger than SRHUGE,
         !  so that the recursion series THRCOF(1), ..., THRCOF(LSTEP)
@@ -267,7 +266,7 @@ SUBROUTINE RC3JJ(L2,L3,M2,M3,L1min,L1max,Thrcof,Ndim,Ier)
         !
         !     LSCALE = LSCALE + 1
         DO i = 1, lstep
-          IF ( ABS(Thrcof(i))<srtiny ) Thrcof(i) = zero
+          IF( ABS(Thrcof(i))<srtiny ) Thrcof(i) = zero
           Thrcof(i) = Thrcof(i)/srhuge
         END DO
         sum1 = sum1/hugee
@@ -280,7 +279,7 @@ SUBROUTINE RC3JJ(L2,L3,M2,M3,L1min,L1max,Thrcof,Ndim,Ier)
       !  an increase of ABS(C1) is detected, the recursion direction is
       !  reversed.
       !
-      IF ( c1old>ABS(c1) ) GOTO 100
+      IF( c1old>ABS(c1) ) GOTO 100
     END IF
     !
     !
@@ -322,7 +321,7 @@ SUBROUTINE RC3JJ(L2,L3,M2,M3,L1min,L1max,Thrcof,Ndim,Ier)
       !
       denom = l1*newfac
       c1 = -(l1+l1-one)*dv/denom
-      IF ( lstep>2 ) THEN
+      IF( lstep>2 ) THEN
         !
         !
         c2 = -(l1-one)*oldfac/denom
@@ -331,7 +330,7 @@ SUBROUTINE RC3JJ(L2,L3,M2,M3,L1min,L1max,Thrcof,Ndim,Ier)
         !
         y = c1*Thrcof(nfinp2-lstep) + c2*Thrcof(nfinp3-lstep)
         !
-        IF ( lstep==nstep2 ) THEN
+        IF( lstep==nstep2 ) THEN
           !
           !
           !  The forward recursion 3j coefficients X1, X2, X3 are to be matched
@@ -348,7 +347,7 @@ SUBROUTINE RC3JJ(L2,L3,M2,M3,L1min,L1max,Thrcof,Ndim,Ier)
           ratio = (x1*y1+x2*y2+x3*y3)/(x1*x1+x2*x2+x3*x3)
           nlim = nfin - nstep2 + 1
           !
-          IF ( ABS(ratio)<one ) THEN
+          IF( ABS(ratio)<one ) THEN
             !
             nlim = nlim + 1
             ratio = one/ratio
@@ -372,7 +371,7 @@ SUBROUTINE RC3JJ(L2,L3,M2,M3,L1min,L1max,Thrcof,Ndim,Ier)
           !
           !  See if last unnormalized 3j coefficient exceeds SRHUGE
           !
-          IF ( ABS(y)>=srhuge ) THEN
+          IF( ABS(y)>=srhuge ) THEN
             !
             !  This is reached if last 3j coefficient larger than SRHUGE,
             !  so that the recursion series THRCOF(NFIN), ... ,THRCOF(NFIN-LSTEP+1)
@@ -381,7 +380,7 @@ SUBROUTINE RC3JJ(L2,L3,M2,M3,L1min,L1max,Thrcof,Ndim,Ier)
             !     LSCALE = LSCALE + 1
             DO i = 1, lstep
               indexx = nfin - i + 1
-              IF ( ABS(Thrcof(indexx))<srtiny ) Thrcof(indexx) = zero
+              IF( ABS(Thrcof(indexx))<srtiny ) Thrcof(indexx) = zero
               Thrcof(indexx) = Thrcof(indexx)/srhuge
             END DO
             sum2 = sum2/hugee
@@ -409,7 +408,7 @@ SUBROUTINE RC3JJ(L2,L3,M2,M3,L1min,L1max,Thrcof,Ndim,Ier)
     x = srtiny*c1
     Thrcof(2) = x
     sum1 = sum1 + tinyy*(l1+l1+one)*c1*c1
-    IF ( lstep/=nfin ) GOTO 100
+    IF( lstep/=nfin ) GOTO 100
     !
     sumuni = sum1
   END IF
@@ -423,13 +422,13 @@ SUBROUTINE RC3JJ(L2,L3,M2,M3,L1min,L1max,Thrcof,Ndim,Ier)
   !
   sign1 = SIGN(one,Thrcof(nfin))
   sign2 = (-one)**INT(ABS(L2+M2-L3+M3)+eps)
-  IF ( sign1*sign2<=0 ) cnorm = -cnorm
+  IF( sign1*sign2<=0 ) cnorm = -cnorm
   !
-  IF ( ABS(cnorm)<one ) THEN
+  IF( ABS(cnorm)<one ) THEN
     !
     thresh = tinyy/ABS(cnorm)
     DO n = 1, nfin
-      IF ( ABS(Thrcof(n))<thresh ) Thrcof(n) = zero
+      IF( ABS(Thrcof(n))<thresh ) Thrcof(n) = zero
       Thrcof(n) = cnorm*Thrcof(n)
     END DO
     RETURN

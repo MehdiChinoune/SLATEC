@@ -1,8 +1,7 @@
 !** DSLUGM
 SUBROUTINE DSLUGM(N,B,X,Nelt,Ia,Ja,A,Isym,Nsave,Tol,Itmax,Iter,Err,&
     Ierr,Iunit,Rwork,Lenw,Iwork,Leniw)
-  !>
-  !  Incomplete LU GMRES iterative sparse Ax=b solver.
+  !> Incomplete LU GMRES iterative sparse Ax=b solver.
   !            This routine uses the generalized minimum residual
   !            (GMRES) method with incomplete LU factorization for
   !            preconditioning to solve possibly non-symmetric linear
@@ -206,11 +205,11 @@ SUBROUTINE DSLUGM(N,B,X,Nelt,Ia,Ja,A,Isym,Nsave,Tol,Itmax,Iter,Err,&
   !       the size  of the  scaled norm of  the residual  R(L)  =  B -
   !       A*X(L).  The actual stopping test is either:
   !
-  !               norm(SB*(B-A*X(L))) .le. TOL*norm(SB*B),
+  !               norm(SB*(B-A*X(L))) <= TOL*norm(SB*B),
   !
   !       for right preconditioning, or
   !
-  !               norm(SB*(M-inverse)*(B-A*X(L))) .le.
+  !               norm(SB*(M-inverse)*(B-A*X(L))) <=
   !                       TOL*norm(SB*(M-inverse)*B),
   !
   !       for left preconditioning, where norm() denotes the Euclidean
@@ -307,7 +306,7 @@ SUBROUTINE DSLUGM(N,B,X,Nelt,Ia,Ja,A,Isym,Nsave,Tol,Itmax,Iter,Err,&
   !
   !- Cautions:
   !     This routine will attempt to write to the Fortran logical output
-  !     unit IUNIT, if IUNIT .ne. 0.  Thus, the user must make sure that
+  !     unit IUNIT, if IUNIT /= 0.  Thus, the user must make sure that
   !     this logical unit is attached to a file or terminal before calling
   !     this routine with a non-zero value for IUNIT.  This routine does
   !     not check for the validity of a non-zero IUNIT unit number.
@@ -334,21 +333,21 @@ SUBROUTINE DSLUGM(N,B,X,Nelt,Ia,Ja,A,Isym,Nsave,Tol,Itmax,Iter,Err,&
   !   921019  Corrected NEL to NL.  (FNF)
 
   !     .. Parameters ..
-  INTEGER , PARAMETER :: LOCRB = 1, LOCIB = 11
+  INTEGER, PARAMETER :: LOCRB = 1, LOCIB = 11
   !     .. Scalar Arguments ..
   REAL(DP) :: Err, Tol
-  INTEGER Ierr, Isym, Iter, Itmax, Iunit, Leniw, Lenw, N, Nelt, Nsave
+  INTEGER :: Ierr, Isym, Iter, Itmax, Iunit, Leniw, Lenw, N, Nelt, Nsave
   !     .. Array Arguments ..
   REAL(DP) :: A(Nelt), B(N), Rwork(Lenw), X(N)
-  INTEGER Ia(Nelt), Iwork(Leniw), Ja(Nelt)
+  INTEGER :: Ia(Nelt), Iwork(Leniw), Ja(Nelt)
   !     .. Local Scalars ..
-  INTEGER icol, j, jbgn, jend, locdin, locigw, locil, lociu, lociw, &
+  INTEGER :: icol, j, jbgn, jend, locdin, locigw, locil, lociu, lociw, &
     locjl, locju, locl, locnc, locnr, locrgw, locu, locw, myitol, nl, nu
   !* FIRST EXECUTABLE STATEMENT  DSLUGM
   !
   Ierr = 0
   Err = 0
-  IF ( Nsave<=1 ) THEN
+  IF( Nsave<=1 ) THEN
     Ierr = 3
     RETURN
   END IF
@@ -364,11 +363,11 @@ SUBROUTINE DSLUGM(N,B,X,Nelt,Ia,Ja,A,Isym,Nsave,Tol,Itmax,Iter,Err,&
     !         Don't count diagonal.
     jbgn = Ja(icol) + 1
     jend = Ja(icol+1) - 1
-    IF ( jbgn<=jend ) THEN
+    IF( jbgn<=jend ) THEN
       DO j = jbgn, jend
-        IF ( Ia(j)>icol ) THEN
+        IF( Ia(j)>icol ) THEN
           nl = nl + 1
-          IF ( Isym/=0 ) nu = nu + 1
+          IF( Isym/=0 ) nu = nu + 1
         ELSE
           nu = nu + 1
         END IF
@@ -393,7 +392,7 @@ SUBROUTINE DSLUGM(N,B,X,Nelt,Ia,Ja,A,Isym,Nsave,Tol,Itmax,Iter,Err,&
   !
   !         Check the workspace allocations.
   CALL DCHKW('DSLUGM',lociw,Leniw,locw,Lenw,Ierr,Iter,Err)
-  IF ( Ierr/=0 ) RETURN
+  IF( Ierr/=0 ) RETURN
   !
   Iwork(1) = locil
   Iwork(2) = locjl
@@ -424,6 +423,6 @@ SUBROUTINE DSLUGM(N,B,X,Nelt,Ia,Ja,A,Isym,Nsave,Tol,Itmax,Iter,Err,&
   CALL DGMRES(N,B,X,Nelt,Ia,Ja,A,Isym,DSMV,DSLUI,myitol,Tol,Iter,Err,&
     Ierr,Iunit,Rwork,Rwork,Rwork(locrgw),Lenw-locrgw,Iwork(locigw),20,Rwork,Iwork)
   !
-  IF ( Iter>Itmax ) Ierr = 2
+  IF( Iter>Itmax ) Ierr = 2
   !------------- LAST LINE OF DSLUGM FOLLOWS ----------------------------
 END SUBROUTINE DSLUGM

@@ -1,7 +1,6 @@
 !** DSOSSL
 SUBROUTINE DSOSSL(K,N,L,X,C,B,M)
-  !>
-  !  Subsidiary to DSOS
+  !> Subsidiary to DSOS
   !***
   ! **Library:**   SLATEC
   !***
@@ -45,7 +44,7 @@ SUBROUTINE DSOSSL(K,N,L,X,C,B,M)
   !* FIRST EXECUTABLE STATEMENT  DSOSSL
   km1 = K - 1
   lk = km1
-  IF ( L==K ) lk = K
+  IF( L==K ) lk = K
   kn = M
   !
   !
@@ -54,7 +53,7 @@ SUBROUTINE DSOSSL(K,N,L,X,C,B,M)
     k3 = k2 + 1
     xmax = 0.0D0
     kn = kn - N + k2 - 1
-    IF ( k3<=lk ) THEN
+    IF( k3<=lk ) THEN
       j1 = kn
       !
       DO j = k3, lk
@@ -63,7 +62,7 @@ SUBROUTINE DSOSSL(K,N,L,X,C,B,M)
       END DO
     END IF
     !
-    IF ( L>K ) THEN
+    IF( L>K ) THEN
       j1 = kn + L - k2
       xmax = xmax + C(j1)*X(L)
     END IF

@@ -1,7 +1,6 @@
 !** OHTROR
 SUBROUTINE OHTROR(Q,N,Nrda,Diag,Irank,Div,Td)
-  !>
-  !  Subsidiary to BVSUP
+  !> Subsidiary to BVSUP
   !***
   ! **Library:**   SLATEC
   !***
@@ -45,7 +44,7 @@ SUBROUTINE OHTROR(Q,N,Nrda,Diag,Irank,Div,Td)
     Div(kir) = dd
     tdv = diagk - dd
     Td(kir) = tdv
-    IF ( k/=Irank ) THEN
+    IF( k/=Irank ) THEN
       kirm = kir - 1
       sqd = dd*diagk - sig
       DO j = 1, kirm

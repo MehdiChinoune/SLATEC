@@ -1,7 +1,6 @@
 !** DGAMLN
 REAL(DP) FUNCTION DGAMLN(Z,Ierr)
-  !>
-  !  Compute the logarithm of the Gamma function
+  !> Compute the logarithm of the Gamma function
   !***
   ! **Library:**   SLATEC
   !***
@@ -17,9 +16,9 @@ REAL(DP) FUNCTION DGAMLN(Z,Ierr)
   !
   !               **** A DOUBLE PRECISION ROUTINE ****
   !         DGAMLN COMPUTES THE NATURAL LOG OF THE GAMMA FUNCTION FOR
-  !         Z.GT.0.  THE ASYMPTOTIC EXPANSION IS USED TO GENERATE VALUES
+  !         Z>0.  THE ASYMPTOTIC EXPANSION IS USED TO GENERATE VALUES
   !         GREATER THAN ZMIN WHICH ARE ADJUSTED BY THE RECURSION
-  !         G(Z+1)=Z*G(Z) FOR Z.LE.ZMIN.  THE FUNCTION WAS MADE AS
+  !         G(Z+1)=Z*G(Z) FOR Z<=ZMIN.  THE FUNCTION WAS MADE AS
   !         PORTABLE AS POSSIBLE BY COMPUTING ZMIN FROM THE NUMBER OF BASE
   !         10 DIGITS IN A WORD, RLN=MAX(-ALOG10(R1MACH(4)),0.5E-18)
   !         LIMITED TO 18 DIGITS OF (RELATIVE) ACCURACY.
@@ -30,13 +29,13 @@ REAL(DP) FUNCTION DGAMLN(Z,Ierr)
   !     DESCRIPTION OF ARGUMENTS
   !
   !         INPUT      Z IS D0UBLE PRECISION
-  !           Z      - ARGUMENT, Z.GT.0.0D0
+  !           Z      - ARGUMENT, Z>0.0D0
   !
   !         OUTPUT      DGAMLN IS DOUBLE PRECISION
-  !           DGAMLN  - NATURAL LOG OF THE GAMMA FUNCTION AT Z.NE.0.0D0
+  !           DGAMLN  - NATURAL LOG OF THE GAMMA FUNCTION AT Z/=0.0D0
   !           IERR    - ERROR FLAG
   !                     IERR=0, NORMAL RETURN, COMPUTATION COMPLETED
-  !                     IERR=1, Z.LE.0.0D0,    NO COMPUTATION
+  !                     IERR=1, Z<=0.0D0,    NO COMPUTATION
   !
   !
   !***
@@ -54,7 +53,7 @@ REAL(DP) FUNCTION DGAMLN(Z,Ierr)
   USE service, ONLY : D1MACH, I1MACH
   REAL(DP) :: fln, fz, rln, s, tlg, trm, tst, t1, wdtol, Z, zdmy, zinc, zm, &
     zmin, zp, zsq
-  INTEGER i, Ierr, i1m, k, mz, nz
+  INTEGER :: i, Ierr, i1m, k, mz, nz
   !           LNGAMMA(N), N=1,100
   REAL(DP), PARAMETER :: gln(100) = [ 0.00000000000000000D+00, 0.00000000000000000D+00, &
     6.93147180559945309D-01, 1.79175946922805500D+00, 3.17805383034794562D+00, &
@@ -105,18 +104,18 @@ REAL(DP) FUNCTION DGAMLN(Z,Ierr)
   !
   !* FIRST EXECUTABLE STATEMENT  DGAMLN
   Ierr = 0
-  IF ( Z<=0.0D0 ) THEN
+  IF( Z<=0.0D0 ) THEN
     !
     !
     DGAMLN = D1MACH(2)
     Ierr = 1
     RETURN
   ELSE
-    IF ( Z<=101.0D0 ) THEN
+    IF( Z<=101.0D0 ) THEN
       nz = INT( Z )
       fz = Z - nz
-      IF ( fz<=0.0D0 ) THEN
-        IF ( nz<=100 ) THEN
+      IF( fz<=0.0D0 ) THEN
+        IF( nz<=100 ) THEN
           DGAMLN = gln(nz)
           RETURN
         END IF
@@ -134,24 +133,24 @@ REAL(DP) FUNCTION DGAMLN(Z,Ierr)
     zmin = mz
     zdmy = Z
     zinc = 0.0D0
-    IF ( Z<zmin ) THEN
+    IF( Z<zmin ) THEN
       zinc = zmin - nz
       zdmy = Z + zinc
     END IF
     zp = 1.0D0/zdmy
     t1 = cf(1)*zp
     s = t1
-    IF ( zp>=wdtol ) THEN
+    IF( zp>=wdtol ) THEN
       zsq = zp*zp
       tst = t1*wdtol
       DO k = 2, 22
         zp = zp*zsq
         trm = cf(k)*zp
-        IF ( ABS(trm)<tst ) EXIT
+        IF( ABS(trm)<tst ) EXIT
         s = s + trm
       END DO
     END IF
-    IF ( zinc==0.0D0 ) THEN
+    IF( zinc==0.0D0 ) THEN
       tlg = LOG(Z)
       DGAMLN = Z*(tlg-1.0D0) + 0.5D0*(con-tlg) + s
       RETURN

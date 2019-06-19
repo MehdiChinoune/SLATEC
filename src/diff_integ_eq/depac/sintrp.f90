@@ -1,8 +1,7 @@
 !** SINTRP
 SUBROUTINE SINTRP(X,Y,Xout,Yout,Ypout,Neqn,Kold,Phi,Ivc,Iv,Kgi,Gi,Alpha,&
     Og,Ow,Ox,Oy)
-  !>
-  !  Approximate the solution at XOUT by evaluating the
+  !> Approximate the solution at XOUT by evaluating the
   !            polynomial computed in STEPS at XOUT.  Must be used in
   !            conjunction with STEPS.
   !***
@@ -88,10 +87,10 @@ SUBROUTINE SINTRP(X,Y,Xout,Yout,Ypout,Neqn,Kold,Phi,Ivc,Iv,Kgi,Gi,Alpha,&
   !
   !   COMPUTE THE DOUBLE INTEGRAL TERM GDI
   !
-  IF ( Kold<=Kgi ) THEN
+  IF( Kold<=Kgi ) THEN
     gdi = Gi(Kold)
   ELSE
-    IF ( Ivc>0 ) THEN
+    IF( Ivc>0 ) THEN
       iw = Iv(Ivc)
       gdi = Ow(iw)
       m = Kold - iw + 3
@@ -99,7 +98,7 @@ SUBROUTINE SINTRP(X,Y,Xout,Yout,Ypout,Neqn,Kold,Phi,Ivc,Iv,Kgi,Gi,Alpha,&
       gdi = 1.0/temp1
       m = 2
     END IF
-    IF ( m<=Kold ) THEN
+    IF( m<=Kold ) THEN
       DO i = m, Kold
         gdi = Ow(kp2-i) - Alpha(i)*gdi
       END DO
@@ -112,7 +111,7 @@ SUBROUTINE SINTRP(X,Y,Xout,Yout,Ypout,Neqn,Kold,Phi,Ivc,Iv,Kgi,Gi,Alpha,&
   g(2) = 0.5*xi*xi
   c(1) = 1.0
   c(2) = xi
-  IF ( Kold>=2 ) THEN
+  IF( Kold>=2 ) THEN
     DO i = 2, Kold
       alp = Alpha(i)
       gama = 1.0 + xim1*alp

@@ -1,7 +1,6 @@
 !** RFFTI1
 SUBROUTINE RFFTI1(N,Wa,Ifac)
-  !>
-  !  Initialize a real and an integer work array for RFFTF1 and
+  !> Initialize a real and an integer work array for RFFTF1 and
   !            RFFTB1.
   !***
   ! **Library:**   SLATEC (FFTPACK)
@@ -69,7 +68,7 @@ SUBROUTINE RFFTI1(N,Wa,Ifac)
   nf = 0
   j = 0
   100  j = j + 1
-  IF ( j<=4 ) THEN
+  IF( j<=4 ) THEN
     ntry = ntryh(j)
   ELSE
     ntry = ntry + 2
@@ -77,12 +76,12 @@ SUBROUTINE RFFTI1(N,Wa,Ifac)
   DO
     nq = nl/ntry
     nr = nl - ntry*nq
-    IF ( nr/=0 ) GOTO 100
+    IF( nr/=0 ) GOTO 100
     nf = nf + 1
     Ifac(nf+2) = ntry
     nl = nq
-    IF ( ntry==2 ) THEN
-      IF ( nf/=1 ) THEN
+    IF( ntry==2 ) THEN
+      IF( nf/=1 ) THEN
         DO i = 2, nf
           ib = nf - i + 2
           Ifac(ib+2) = Ifac(ib+1)
@@ -90,7 +89,7 @@ SUBROUTINE RFFTI1(N,Wa,Ifac)
         Ifac(3) = 2
       END IF
     END IF
-    IF ( nl==1 ) THEN
+    IF( nl==1 ) THEN
       Ifac(1) = N
       Ifac(2) = nf
       tpi = 8.*ATAN(1.)
@@ -98,7 +97,7 @@ SUBROUTINE RFFTI1(N,Wa,Ifac)
       is = 0
       nfm1 = nf - 1
       l1 = 1
-      IF ( nfm1==0 ) RETURN
+      IF( nfm1==0 ) RETURN
       DO k1 = 1, nfm1
         ip = Ifac(k1+2)
         ld = 0

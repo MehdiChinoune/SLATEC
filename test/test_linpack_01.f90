@@ -5,8 +5,7 @@ MODULE TEST23_MOD
 CONTAINS
   !** CGBQC
   SUBROUTINE CGBQC(Lun,Kprint,Nerr)
-    !>
-    !  Quick check for CGBFA, CGBCO, CGBSL and CGBDI.
+    !> Quick check for CGBFA, CGBCO, CGBSL and CGBDI.
     !***
     ! **Library:**   SLATEC
     !***
@@ -45,10 +44,10 @@ CONTAINS
     !           record and cleaned up FORMATs.  (RWC)
     USE linpack, ONLY : CGBFA
     USE blas, ONLY : SCABS1
-    INTEGER Kprint, Lun
+    INTEGER :: Kprint, Lun
     COMPLEX(SP) :: at(7,4), bt(4)
-    INTEGER lda, n, ipvt(4), info, i, j, Nerr
-    INTEGER ml, mu
+    INTEGER :: lda, n, ipvt(4), info, i, j, Nerr
+    INTEGER :: ml, mu
     COMPLEX(SP), PARAMETER :: abd(6,4) = RESHAPE( [ &
       (0.E0,0.E0), (0.E0,0.E0), (0.E0,0.E0), (0.E0,0.E0), (2.E0,0.E0), (0.E0,1.E0), &
       (0.E0,0.E0), (0.E0,0.E0), (0.E0,0.E0), (0.E0,-1.E0), (2.E0,0.E0), (0.E0,0.E0), &
@@ -76,12 +75,12 @@ CONTAINS
     END DO
     !
     CALL CGBFA(at,lda,n,ml,mu,ipvt,info)
-    IF ( info/=0 ) THEN
+    IF( info/=0 ) THEN
       WRITE (Lun,99002) kprog(1:4), kfail(1:4)
       Nerr = Nerr + 1
     END IF
     !
-    IF ( Kprint>=2.OR.Nerr/=0 ) WRITE (Lun,99001) Nerr
+    IF( Kprint>=2 .OR. Nerr/=0 ) WRITE (Lun,99001) Nerr
     !
     99001 FORMAT (/' * CGBQC - TEST FOR CGBFA FOUND ',I1,' ERRORS.'/)
     RETURN
@@ -89,8 +88,7 @@ CONTAINS
   END SUBROUTINE CGBQC
   !** CGECK
   SUBROUTINE CGECK(Lun,Kprint,Nerr)
-    !>
-    !  Quick check for CGEFA, CGECO, CGESL and CGEDI.
+    !> Quick check for CGEFA, CGECO, CGESL and CGEDI.
     !***
     ! **Library:**   SLATEC
     !***
@@ -129,10 +127,10 @@ CONTAINS
     !           FORMATs.  (RWC)
     USE linpack, ONLY : CGECO, CGEFA, CGESL
     USE blas, ONLY : SCABS1
-    INTEGER Kprint, Lun
-    COMPLEX(SP) at(5,4), bt(4), z(4)
-    REAL(SP) r, rcond
-    INTEGER lda, n, ipvt(4), info, i, j, indx, Nerr
+    INTEGER :: Kprint, Lun
+    COMPLEX(SP) :: at(5,4), bt(4), z(4)
+    REAL(SP) :: r, rcond
+    INTEGER :: lda, n, ipvt(4), info, i, j, indx, Nerr
     COMPLEX(SP), PARAMETER :: a(4,4) = RESHAPE( [ &
       (2.E0,0.E0), (0.E0,1.E0), (0.E0,0.E0), (0.E0,0.E0), &
       (0.E0,-1.E0), (2.E0,0.E0), (0.E0,0.E0), (0.E0,0.E0), &
@@ -160,7 +158,7 @@ CONTAINS
     END DO
     !
     CALL CGEFA(at,lda,n,ipvt,info)
-    IF ( info/=0 ) THEN
+    IF( info/=0 ) THEN
       WRITE (Lun,99002) kprog(1:4), kfail(1:4)
       Nerr = Nerr + 1
     END IF
@@ -170,10 +168,10 @@ CONTAINS
     CALL CGESL(at,lda,n,ipvt,bt,0)
     indx = 0
     DO i = 1, n
-      IF ( SCABS1(c(i)-bt(i))>.0001 ) indx = indx + 1
+      IF( SCABS1(c(i)-bt(i))>.0001 ) indx = indx + 1
     END DO
     !
-    IF ( indx/=0 ) THEN
+    IF( indx/=0 ) THEN
       WRITE (Lun,99002) kprog(11:14), kfail(12:19)
       Nerr = Nerr + 1
     END IF
@@ -189,7 +187,7 @@ CONTAINS
     !
     CALL CGECO(at,lda,n,ipvt,rcond,z)
     r = ABS(rcnd-rcond)
-    IF ( r>=.0001 ) THEN
+    IF( r>=.0001 ) THEN
       WRITE (Lun,99002) kprog(6:9), kfail(6:10)
       Nerr = Nerr + 1
     END IF
@@ -199,15 +197,15 @@ CONTAINS
     CALL CGESL(at,lda,n,ipvt,bt,1)
     indx = 0
     DO i = 1, n
-      IF ( SCABS1(c(i)-bt(i))>.0001 ) indx = indx + 1
+      IF( SCABS1(c(i)-bt(i))>.0001 ) indx = indx + 1
     END DO
     !
-    IF ( indx/=0 ) THEN
+    IF( indx/=0 ) THEN
       WRITE (Lun,99002) kprog(11:14), kfail(12:19)
       Nerr = Nerr + 1
     END IF
     !
-    IF ( Kprint>=2.OR.Nerr/=0 ) WRITE (Lun,99001) Nerr
+    IF( Kprint>=2 .OR. Nerr/=0 ) WRITE (Lun,99001) Nerr
     !
     99001 FORMAT (/' * CGECK - TEST FOR CGEFA, CGECO AND CGESL FOUND ',I1,&
       ' ERRORS.'/)
@@ -216,8 +214,7 @@ CONTAINS
   END SUBROUTINE CGECK
   !** CPOQC
   SUBROUTINE CPOQC(Lun,Kprint,Nerr)
-    !>
-    !  Quick check for CPOFA, CPOCO, CPOSL and CPODI.
+    !> Quick check for CPOFA, CPOCO, CPOSL and CPODI.
     !***
     ! **Library:**   SLATEC
     !***
@@ -256,10 +253,10 @@ CONTAINS
     !           FORMATs.  (RWC)
     USE linpack, ONLY : CPOCO, CPOFA, CPOSL
     USE blas, ONLY : SCABS1
-    INTEGER Kprint, Lun
-    COMPLEX(SP) at(5,4), bt(4), z(4)
-    REAL(SP) r, rcond
-    INTEGER lda, n, info, i, j, indx, Nerr
+    INTEGER :: Kprint, Lun
+    COMPLEX(SP) :: at(5,4), bt(4), z(4)
+    REAL(SP) :: r, rcond
+    INTEGER :: lda, n, info, i, j, indx, Nerr
     COMPLEX(SP), PARAMETER :: a(4,4) = RESHAPE( [ &
       (2.E0,0.E0), (0.E0,1.E0), (0.E0,0.E0), (0.E0,0.E0), &
       (0.E0,-1.E0), (2.E0,0.E0), (0.E0,0.E0), (0.E0,0.E0), &
@@ -287,7 +284,7 @@ CONTAINS
     END DO
     !
     CALL CPOFA(at,lda,n,info)
-    IF ( info/=0 ) THEN
+    IF( info/=0 ) THEN
       WRITE (Lun,99002) kprog(1:4), kfail(1:4)
       Nerr = Nerr + 1
     END IF
@@ -297,10 +294,10 @@ CONTAINS
     CALL CPOSL(at,lda,n,bt)
     indx = 0
     DO i = 1, n
-      IF ( SCABS1(c(i)-bt(i))>.0001 ) indx = indx + 1
+      IF( SCABS1(c(i)-bt(i))>.0001 ) indx = indx + 1
     END DO
     !
-    IF ( indx/=0 ) THEN
+    IF( indx/=0 ) THEN
       WRITE (Lun,99002) kprog(11:14), kfail(12:19)
       Nerr = Nerr + 1
     END IF
@@ -315,17 +312,17 @@ CONTAINS
     !
     CALL CPOCO(at,lda,n,rcond,z,info)
     r = ABS(rcnd-rcond)
-    IF ( r>=.0001 ) THEN
+    IF( r>=.0001 ) THEN
       WRITE (Lun,99002) kprog(6:9), kfail(6:10)
       Nerr = Nerr + 1
     END IF
     !
-    IF ( info/=0 ) THEN
+    IF( info/=0 ) THEN
       WRITE (Lun,99002) kprog(6:9), kfail(1:4)
       Nerr = Nerr + 1
     END IF
     !
-    IF ( Kprint>=2.OR.Nerr/=0 ) WRITE (Lun,99001) Nerr
+    IF( Kprint>=2 .OR. Nerr/=0 ) WRITE (Lun,99001) Nerr
     !
     99001 FORMAT (/' * CPOQC - TEST FOR CPOFA, CPOCO AND CPOSL FOUND ',I1,&
       ' ERRORS.'/)
@@ -339,8 +336,7 @@ PROGRAM TEST23
   USE slatec, ONLY : I1MACH, XSETF, XSETUN, XERMAX
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
-  !>
-  !  Driver for testing SLATEC subprograms
+  !> Driver for testing SLATEC subprograms
   !***
   ! **Library:**   SLATEC
   !***
@@ -402,7 +398,7 @@ PROGRAM TEST23
   !   890618  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900524  Cosmetic changes to code.  (WRB)
-  INTEGER kprint, lin, lun, nerr, nfail
+  INTEGER :: kprint, lin, lun, nerr, nfail
   !* FIRST EXECUTABLE STATEMENT  TEST23
   lun = I1MACH(2)
   lin = I1MACH(1)
@@ -413,7 +409,7 @@ PROGRAM TEST23
   CALL GET_ARGUMENT(kprint)
   CALL XERMAX(1000)
   CALL XSETUN(lun)
-  IF ( kprint<=1 ) THEN
+  IF( kprint<=1 ) THEN
     CALL XSETF(0)
   ELSE
     CALL XSETF(1)
@@ -431,7 +427,7 @@ PROGRAM TEST23
   !
   !     Write PASS or FAIL message
   !
-  IF ( nfail==0 ) THEN
+  IF( nfail==0 ) THEN
     WRITE (lun,99001)
     99001 FORMAT (/' --------------TEST23 PASSED ALL TESTS----------------')
   ELSE

@@ -1,7 +1,6 @@
 !** DU11US
 SUBROUTINE DU11US(A,Mda,M,N,Ub,Db,Mode,Np,Krank,Ksure,H,W,Eb,Ir,Ic)
-  !>
-  !  Subsidiary to DULSIA
+  !> Subsidiary to DULSIA
   !***
   ! **Library:**   SLATEC
   !***
@@ -75,15 +74,15 @@ SUBROUTINE DU11US(A,Mda,M,N,Ub,Db,Mode,Np,Krank,Ksure,H,W,Eb,Ir,Ic)
   !
   i = 1
   DO
-    IF ( Eb(i)>=H(i) ) THEN
+    IF( Eb(i)>=H(i) ) THEN
       !
       !          MATRIX REDUCTION
       !
       kk = Krank
       Krank = Krank - 1
-      IF ( Mode==0 ) RETURN
-      IF ( i>Np ) THEN
-        IF ( i>Krank ) EXIT
+      IF( Mode==0 ) RETURN
+      IF( i>Np ) THEN
+        IF( i>Krank ) EXIT
         CALL DSWAP(1,Eb(i),1,Eb(kk),1)
         CALL DSWAP(1,Ub(i),1,Ub(kk),1)
         CALL DSWAP(1,W(i),1,W(kk),1)
@@ -97,14 +96,14 @@ SUBROUTINE DU11US(A,Mda,M,N,Ub,Db,Mode,Np,Krank,Ksure,H,W,Eb,Ir,Ic)
         RETURN
       END IF
     ELSE
-      IF ( i==Krank ) EXIT
+      IF( i==Krank ) EXIT
       i = i + 1
     END IF
   END DO
   !
   !           TEST FOR ZERO RANK
   !
-  IF ( Krank<=0 ) THEN
+  IF( Krank<=0 ) THEN
     Krank = 0
     Ksure = 0
     RETURN
@@ -116,7 +115,7 @@ SUBROUTINE DU11US(A,Mda,M,N,Ub,Db,Mode,Np,Krank,Ksure,H,W,Eb,Ir,Ic)
   jp1 = j + 1
   jm1 = j - 1
   kz = Krank
-  IF ( j<=Np ) kz = j
+  IF( j<=Np ) kz = j
   !
   !        EACH ROW HAS NN=N-J+1 COMPONENTS
   !
@@ -125,10 +124,10 @@ SUBROUTINE DU11US(A,Mda,M,N,Ub,Db,Mode,Np,Krank,Ksure,H,W,Eb,Ir,Ic)
   !         UB DETERMINES ROW PIVOT
   !
   200  imin = j
-  IF ( H(j)/=0.D0 ) THEN
+  IF( H(j)/=0.D0 ) THEN
     rmin = Ub(j)/H(j)
     DO i = j, kz
-      IF ( Ub(i)<H(i)*rmin ) THEN
+      IF( Ub(i)<H(i)*rmin ) THEN
         rmin = Ub(i)/H(i)
         imin = i
       END IF
@@ -136,9 +135,9 @@ SUBROUTINE DU11US(A,Mda,M,N,Ub,Db,Mode,Np,Krank,Ksure,H,W,Eb,Ir,Ic)
     !
     !     TEST FOR RANK DEFICIENCY
     !
-    IF ( rmin<1.0D0 ) GOTO 400
+    IF( rmin<1.0D0 ) GOTO 400
     tt = (Eb(imin)+ABS(Db(imin)))/H(imin)
-    IF ( tt<1.0D0 ) THEN
+    IF( tt<1.0D0 ) THEN
       !     COMPUTE EXACT UB
       DO i = 1, jm1
         W(i) = A(imin,i)
@@ -146,13 +145,13 @@ SUBROUTINE DU11US(A,Mda,M,N,Ub,Db,Mode,Np,Krank,Ksure,H,W,Eb,Ir,Ic)
       l = jm1
       DO
         W(l) = W(l)/A(l,l)
-        IF ( l==1 ) THEN
+        IF( l==1 ) THEN
           tt = Eb(imin)
           DO i = 1, jm1
             tt = tt + ABS(W(i))*Eb(i)
           END DO
           Ub(imin) = tt
-          IF ( Ub(imin)/H(imin)<1.0D0 ) GOTO 400
+          IF( Ub(imin)/H(imin)<1.0D0 ) GOTO 400
           EXIT
         ELSE
           lm1 = l - 1
@@ -170,9 +169,9 @@ SUBROUTINE DU11US(A,Mda,M,N,Ub,Db,Mode,Np,Krank,Ksure,H,W,Eb,Ir,Ic)
   300  kk = Krank
   Krank = Krank - 1
   kz = Krank
-  IF ( Mode==0 ) RETURN
-  IF ( j>Np ) THEN
-    IF ( imin<=Krank ) THEN
+  IF( Mode==0 ) RETURN
+  IF( j>Np ) THEN
+    IF( imin<=Krank ) THEN
       CALL ISWAP(1,Ir(imin),1,Ir(kk),1)
       CALL DSWAP(N,A(imin,1),Mda,A(kk,1),Mda)
       CALL DSWAP(1,Eb(imin),1,Eb(kk),1)
@@ -181,7 +180,7 @@ SUBROUTINE DU11US(A,Mda,M,N,Ub,Db,Mode,Np,Krank,Ksure,H,W,Eb,Ir,Ic)
       CALL DSWAP(1,W(imin),1,W(kk),1)
       CALL DSWAP(1,H(imin),1,H(kk),1)
     END IF
-    IF ( j<=Krank ) GOTO 200
+    IF( j<=Krank ) GOTO 200
     GOTO 500
   ELSE
     CALL XERMSG('DU11US','FIRST NP ROWS ARE LINEARLY DEPENDENT',8,0)
@@ -192,7 +191,7 @@ SUBROUTINE DU11US(A,Mda,M,N,Ub,Db,Mode,Np,Krank,Ksure,H,W,Eb,Ir,Ic)
   !        ROW PIVOT
   !
   400 CONTINUE
-  IF ( imin/=j ) THEN
+  IF( imin/=j ) THEN
     CALL DSWAP(1,H(j),1,H(imin),1)
     CALL DSWAP(N,A(j,1),Mda,A(imin,1),Mda)
     CALL DSWAP(1,Eb(j),1,Eb(imin),1)
@@ -206,7 +205,7 @@ SUBROUTINE DU11US(A,Mda,M,N,Ub,Db,Mode,Np,Krank,Ksure,H,W,Eb,Ir,Ic)
   !
   jmax = MAXLOC(A(j:N,j),1)
   jmax = jmax + j - 1
-  IF ( jmax/=j ) THEN
+  IF( jmax/=j ) THEN
     CALL DSWAP(M,A(1,j),1,A(1,jmax),1)
     CALL ISWAP(1,Ic(j),1,Ic(jmax),1)
   END IF
@@ -214,21 +213,21 @@ SUBROUTINE DU11US(A,Mda,M,N,Ub,Db,Mode,Np,Krank,Ksure,H,W,Eb,Ir,Ic)
   !     APPLY HOUSEHOLDER TRANSFORMATION
   !
   tn = NORM2(A(j,j:N))
-  IF ( tn==0.0D0 ) GOTO 300
-  IF ( A(j,j)/=0.0D0 ) tn = SIGN(tn,A(j,j))
+  IF( tn==0.0D0 ) GOTO 300
+  IF( A(j,j)/=0.0D0 ) tn = SIGN(tn,A(j,j))
   A(j,j:N) = A(j,j:N)/tn
   A(j,j) = A(j,j) + 1.0D0
-  IF ( j/=M ) THEN
+  IF( j/=M ) THEN
     DO i = jp1, M
       bb = -DOT_PRODUCT(A(j,j:N),A(i,j:N))/A(j,j)
       CALL DAXPY(nn,bb,A(j,j),Mda,A(i,j),Mda)
-      IF ( i>Np ) THEN
-        IF ( H(i)/=0.0D0 ) THEN
+      IF( i>Np ) THEN
+        IF( H(i)/=0.0D0 ) THEN
           tt = 1.0D0 - (ABS(A(i,j))/H(i))**2
           tt = MAX(tt,0.0D0)
           t = tt
           tt = 1.0D0 + .05D0*tt*(H(i)/W(i))**2
-          IF ( tt==1.0D0 ) THEN
+          IF( tt==1.0D0 ) THEN
             H(i) = NORM2(A(i,j+1:N))
             W(i) = H(i)
           ELSE
@@ -246,7 +245,7 @@ SUBROUTINE DU11US(A,Mda,M,N,Ub,Db,Mode,Np,Krank,Ksure,H,W,Eb,Ir,Ic)
   !
   Ub(j) = Ub(j)/ABS(A(j,j))
   Db(j) = (SIGN(Eb(j),Db(j))+Db(j))/A(j,j)
-  IF ( j/=Krank ) THEN
+  IF( j/=Krank ) THEN
     DO i = jp1, Krank
       Ub(i) = Ub(i) + ABS(A(i,j))*Ub(j)
       Db(i) = Db(i) - A(i,j)*Db(j)
@@ -264,20 +263,20 @@ SUBROUTINE DU11US(A,Mda,M,N,Ub,Db,Mode,Np,Krank,Ksure,H,W,Eb,Ir,Ic)
     is = 0
     kmi = Krank - i
     DO ii = 1, kmi
-      IF ( Ub(ii)>Ub(ii+1) ) THEN
+      IF( Ub(ii)>Ub(ii+1) ) THEN
         is = 1
         temp = Ub(ii)
         Ub(ii) = Ub(ii+1)
         Ub(ii+1) = temp
       END IF
     END DO
-    IF ( is==0 ) EXIT
+    IF( is==0 ) EXIT
   END DO
   Ksure = 0
   summ = 0.0D0
   DO i = 1, Krank
     r2 = Ub(i)*Ub(i)
-    IF ( r2+summ>=1.0D0 ) EXIT
+    IF( r2+summ>=1.0D0 ) EXIT
     summ = summ + r2
     Ksure = Ksure + 1
   END DO
@@ -285,7 +284,7 @@ SUBROUTINE DU11US(A,Mda,M,N,Ub,Db,Mode,Np,Krank,Ksure,H,W,Eb,Ir,Ic)
   !     IF SYSTEM IS OF REDUCED RANK AND MODE = 2
   !     COMPLETE THE DECOMPOSITION FOR SHORTEST LEAST SQUARES SOLUTION
   !
-  IF ( Krank/=M.AND.Mode>=2 ) THEN
+  IF( Krank/=M .AND. Mode>=2 ) THEN
     mmk = M - Krank
     kp1 = Krank + 1
     i = Krank
@@ -295,7 +294,7 @@ SUBROUTINE DU11US(A,Mda,M,N,Ub,Db,Mode,Np,Krank,Ksure,H,W,Eb,Ir,Ic)
       A(kp1:M,i) = A(kp1:M,i)/tn
       W(i) = A(i,i)/tn + 1.0D0
       A(i,i) = -tn
-      IF ( i==1 ) EXIT
+      IF( i==1 ) EXIT
       im1 = i - 1
       DO ii = 1, im1
         tt = -DOT_PRODUCT(A(kp1:M,ii),A(kp1:M,i))/W(i)

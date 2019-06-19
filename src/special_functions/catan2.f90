@@ -1,7 +1,6 @@
 !** CATAN2
 COMPLEX(SP) FUNCTION CATAN2(Csn,Ccs)
-  !>
-  !  Compute the complex arc tangent in the proper quadrant.
+  !> Compute the complex arc tangent in the proper quadrant.
   !***
   ! **Library:**   SLATEC (FNLIB)
   !***
@@ -36,12 +35,12 @@ COMPLEX(SP) FUNCTION CATAN2(Csn,Ccs)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   USE service, ONLY : XERMSG
-  COMPLEX(SP) Csn, Ccs
+  COMPLEX(SP) :: Csn, Ccs
   REAL(SP), PARAMETER :: pi = 3.14159265358979323846E0
   !* FIRST EXECUTABLE STATEMENT  CATAN2
-  IF ( ABS(Ccs)==0. ) THEN
+  IF( ABS(Ccs)==0. ) THEN
     !
-    IF ( ABS(Csn)==0. ) CALL XERMSG('CATAN2',&
+    IF( ABS(Csn)==0. ) CALL XERMSG('CATAN2',&
       'CALLED WITH BOTH ARGUMENTS ZERO',1,2)
     !
     CATAN2 = CMPLX(SIGN(0.5*pi,REAL(Csn)),0.0)
@@ -49,7 +48,7 @@ COMPLEX(SP) FUNCTION CATAN2(Csn,Ccs)
   END IF
   !
   CATAN2 = ATAN(Csn/Ccs)
-  IF ( REAL(Ccs)<0. ) CATAN2 = CATAN2 + pi
-  IF ( REAL(CATAN2)>pi ) CATAN2 = CATAN2 - 2.0*pi
+  IF( REAL(Ccs)<0. ) CATAN2 = CATAN2 + pi
+  IF( REAL(CATAN2)>pi ) CATAN2 = CATAN2 - 2.0*pi
   RETURN
 END FUNCTION CATAN2

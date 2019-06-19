@@ -1,7 +1,6 @@
 !** INXCA
 SUBROUTINE INXCA(I,Ir,Idxa,Na)
-  !>
-  !  Subsidiary to CBLKTR
+  !> Subsidiary to CBLKTR
   !***
   ! **Library:**   SLATEC
   !***
@@ -24,5 +23,5 @@ SUBROUTINE INXCA(I,Ir,Idxa,Na)
   !* FIRST EXECUTABLE STATEMENT  INXCA
   Na = 2**Ir
   Idxa = I - Na + 1
-  IF ( I>nm_com ) Na = 0
+  IF( I>nm_com ) Na = 0
 END SUBROUTINE INXCA

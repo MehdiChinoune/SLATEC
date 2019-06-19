@@ -1,7 +1,6 @@
 !** DCBRT
 REAL(DP) FUNCTION DCBRT(X)
-  !>
-  !  Compute the cube root.
+  !> Compute the cube root.
   !***
   ! **Library:**   SLATEC (FNLIB)
   !***
@@ -40,7 +39,7 @@ REAL(DP) FUNCTION DCBRT(X)
   !* FIRST EXECUTABLE STATEMENT  DCBRT
   !
   DCBRT = 0.D0
-  IF ( X==0.D0 ) RETURN
+  IF( X==0.D0 ) RETURN
   !
   CALL D9UPAK(ABS(X),y,n)
   ixpnt = n/3

@@ -1,7 +1,6 @@
 !** SODS
 SUBROUTINE SODS(A,X,B,Neq,Nuk,Nrda,Iflag,Work,Iwork)
-  !>
-  !  Subsidiary to BVSUP
+  !> Subsidiary to BVSUP
   !***
   ! **Library:**   SLATEC
   !***
@@ -12,11 +11,11 @@ SUBROUTINE SODS(A,X,B,Neq,Nuk,Nrda,Iflag,Work,Iwork)
   ! **Description:**
   !
   !     SODS solves the overdetermined system of linear equations A X = B,
-  !     where A is NEQ by NUK and NEQ .GE. NUK. If rank A = NUK,
+  !     where A is NEQ by NUK and NEQ >= NUK. If rank A = NUK,
   !     X is the UNIQUE least squares solution vector. That is,
   !              R(1)**2 + ..... + R(NEQ)**2 = minimum
   !     where R is the residual vector  R = B - A X.
-  !     If rank A .LT. NUK, the least squares solution of minimal
+  !     If rank A < NUK, the least squares solution of minimal
   !     length can be provided.
   !     SODS is an interfacing routine which calls subroutine LSSODS
   !     for the solution. LSSODS in turn calls subroutine ORTHOL and

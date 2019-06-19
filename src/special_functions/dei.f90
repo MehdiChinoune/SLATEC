@@ -1,7 +1,6 @@
 !** DEI
 REAL(DP) FUNCTION DEI(X)
-  !>
-  !  Compute the exponential integral Ei(X).
+  !> Compute the exponential integral Ei(X).
   !***
   ! **Library:**   SLATEC (FNLIB)
   !***

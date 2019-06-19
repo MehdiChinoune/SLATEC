@@ -2,8 +2,7 @@
 SUBROUTINE DRKFS(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
     F4,F5,Ys,Told,Dtsign,U26,Rer,Init,Ksteps,Kop,Iquit,Stiff,&
     Nonstf,Ntstep,Nstifs)
-  !>
-  !  Subsidiary to DDERKF
+  !> Subsidiary to DDERKF
   !***
   ! **Library:**   SLATEC
   !***
@@ -105,7 +104,7 @@ SUBROUTINE DRKFS(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
   !     ..................................................................
   !
   !* FIRST EXECUTABLE STATEMENT  DRKFS
-  IF ( Info(1)==0 ) THEN
+  IF( Info(1)==0 ) THEN
     !
     ! ON THE FIRST CALL, PERFORM INITIALIZATION --
     !        DEFINE THE MACHINE UNIT ROUNDOFF QUANTITY  U  BY CALLING THE
@@ -138,7 +137,7 @@ SUBROUTINE DRKFS(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
   !
   !        CHECK VALIDITY OF INPUT PARAMETERS ON EACH ENTRY
   !
-  IF ( Info(1)/=0.AND.Info(1)/=1 ) THEN
+  IF( Info(1)/=0 .AND. Info(1)/=1 ) THEN
     WRITE (xern1,'(I8)') Info(1)
     CALL XERMSG('DRKFS','IN DDERKF, INFO(1) MUST BE SET TO 0 FOR&
       & THE START OF A NEW PROBLEM, AND MUST BE SET TO 1 FOLLOWING AN&
@@ -147,7 +146,7 @@ SUBROUTINE DRKFS(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
     Idid = -33
   END IF
   !
-  IF ( Info(2)/=0.AND.Info(2)/=1 ) THEN
+  IF( Info(2)/=0 .AND. Info(2)/=1 ) THEN
     WRITE (xern1,'(I8)') Info(2)
     CALL XERMSG('DRKFS','IN DDERKF, INFO(2) MUST BE 0 OR 1 INDICATING&
       & SCALAR AND VECTOR ERROR TOLERANCES, RESPECTIVELY.&
@@ -155,7 +154,7 @@ SUBROUTINE DRKFS(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
     Idid = -33
   END IF
   !
-  IF ( Info(3)/=0.AND.Info(3)/=1 ) THEN
+  IF( Info(3)/=0 .AND. Info(3)/=1 ) THEN
     WRITE (xern1,'(I8)') Info(3)
     CALL XERMSG('DRKFS','IN DDERKF, INFO(3) MUST BE 0 OR 1 INDICATING&
       & THE INTERVAL OR INTERMEDIATE-OUTPUT MODE OF INTEGRATION, RESPECTIVELY.&
@@ -163,7 +162,7 @@ SUBROUTINE DRKFS(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
     Idid = -33
   END IF
   !
-  IF ( Neq<1 ) THEN
+  IF( Neq<1 ) THEN
     WRITE (xern1,'(I8)') Neq
     CALL XERMSG('DRKFS','IN DDERKF, THE NUMBER OF EQUATIONS NEQ MUST&
       & BE A POSITIVE INTEGER.  YOU HAVE CALLED THE CODE WITH NEQ = '//xern1,6,1)
@@ -173,7 +172,7 @@ SUBROUTINE DRKFS(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
   nrtolp = 0
   natolp = 0
   DO k = 1, Neq
-    IF ( nrtolp==0.AND.Rtol(k)<0.D0 ) THEN
+    IF( nrtolp==0 .AND. Rtol(k)<0.D0 ) THEN
       WRITE (xern1,'(I8)') k
       WRITE (xern3,'(1PE15.6)') Rtol(k)
       CALL XERMSG('DRKFS','IN DDERKF, THE RELATIVE ERROR TOLERANCES&
@@ -184,7 +183,7 @@ SUBROUTINE DRKFS(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
       nrtolp = 1
     END IF
     !
-    IF ( natolp==0.AND.Atol(k)<0.D0 ) THEN
+    IF( natolp==0 .AND. Atol(k)<0.D0 ) THEN
       WRITE (xern1,'(I8)') k
       WRITE (xern3,'(1PE15.6)') Atol(k)
       CALL XERMSG('DRKFS','IN DDERKF, THE ABSOLUTE ERROR TOLERANCES&
@@ -195,22 +194,22 @@ SUBROUTINE DRKFS(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
       natolp = 1
     END IF
     !
-    IF ( Info(2)==0 ) EXIT
-    IF ( natolp>0.AND.nrtolp>0 ) EXIT
+    IF( Info(2)==0 ) EXIT
+    IF( natolp>0 .AND. nrtolp>0 ) EXIT
   END DO
   !
   !
   !     CHECK SOME CONTINUATION POSSIBILITIES
   !
-  IF ( Init/=0 ) THEN
-    IF ( T==Tout ) THEN
+  IF( Init/=0 ) THEN
+    IF( T==Tout ) THEN
       WRITE (xern3,'(1PE15.6)') T
       CALL XERMSG('DRKFS','IN DDERKF, YOU HAVE CALLED THE CODE WITH&
         & T = TOUT = '//xern3//'$$THIS IS NOT ALLOWED ON CONTINUATION CALLS.',9,1)
       Idid = -33
     END IF
     !
-    IF ( T/=Told ) THEN
+    IF( T/=Told ) THEN
       WRITE (xern3,'(1PE15.6)') Told
       WRITE (xern4,'(1PE15.6)') T
       CALL XERMSG('DRKFS','IN DDERKF, YOU HAVE CHANGED THE VALUE OF T FROM '//xern3//' TO '//xern4//&
@@ -218,8 +217,8 @@ SUBROUTINE DRKFS(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
       Idid = -33
     END IF
     !
-    IF ( Init/=1 ) THEN
-      IF ( Dtsign*(Tout-T)<0.D0 ) THEN
+    IF( Init/=1 ) THEN
+      IF( Dtsign*(Tout-T)<0.D0 ) THEN
         WRITE (xern3,'(1PE15.6)') Tout
         CALL XERMSG('DRKFS',&
           'IN DDERKF, BY CALLING THE CODE WITH TOUT = '//xern3//&
@@ -231,8 +230,8 @@ SUBROUTINE DRKFS(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
   !
   !     INVALID INPUT DETECTED
   !
-  IF ( Idid==(-33) ) THEN
-    IF ( Iquit/=(-33) ) THEN
+  IF( Idid==(-33) ) THEN
+    IF( Iquit/=(-33) ) THEN
       Iquit = -33
       GOTO 200
     ELSE
@@ -252,15 +251,15 @@ SUBROUTINE DRKFS(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
   !                TO BE REASONABLE FOR THIS METHOD AND MACHINE.
   !
   DO k = 1, Neq
-    IF ( Rtol(k)+Atol(k)<=0.0D0 ) THEN
+    IF( Rtol(k)+Atol(k)<=0.0D0 ) THEN
       Rtol(k) = Rer
       Idid = -2
     END IF
     !           ...EXIT
-    IF ( Info(2)==0 ) EXIT
+    IF( Info(2)==0 ) EXIT
   END DO
   !
-  IF ( Idid/=(-2) ) THEN
+  IF( Idid/=(-2) ) THEN
     !
     !                       BRANCH ON STATUS OF INITIALIZATION INDICATOR
     !                              INIT=0 MEANS INITIAL DERIVATIVES AND
@@ -270,7 +269,7 @@ SUBROUTINE DRKFS(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
     !                              COMPUTED INIT=2 MEANS NO FURTHER
     !                              INITIALIZATION REQUIRED
     !
-    IF ( Init==0 ) THEN
+    IF( Init==0 ) THEN
       !
       !                       ................................................
       !
@@ -281,7 +280,7 @@ SUBROUTINE DRKFS(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
       Init = 1
       a = T
       CALL DF(a,Y,Yp)
-      IF ( T==Tout ) THEN
+      IF( T==Tout ) THEN
         !
         !                          INTERVAL MODE
         Idid = 2
@@ -291,7 +290,7 @@ SUBROUTINE DRKFS(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
         RETURN
       END IF
       !                    ......EXIT
-    ELSEIF ( Init/=1 ) THEN
+    ELSEIF( Init/=1 ) THEN
       GOTO 100
       !                 .........EXIT
     END IF
@@ -305,12 +304,12 @@ SUBROUTINE DRKFS(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
     big = SQRT(D1MACH(2))
     ute = u**0.375D0
     dy = ute*DHVNRM(Y,Neq)
-    IF ( dy==0.0D0 ) dy = ute
+    IF( dy==0.0D0 ) dy = ute
     ktol = 1
     DO k = 1, Neq
-      IF ( Info(2)==1 ) ktol = k
+      IF( Info(2)==1 ) ktol = k
       tol = Rtol(ktol)*ABS(Y(k)) + Atol(ktol)
-      IF ( tol==0.0D0 ) tol = dy*Rtol(ktol)
+      IF( tol==0.0D0 ) tol = dy*Rtol(ktol)
       F1(k) = tol
     END DO
     !
@@ -335,10 +334,10 @@ SUBROUTINE DRKFS(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
   !                 TEST TO SEE IF DDERKF IS BEING SEVERELY IMPACTED BY
   !                 TOO MANY OUTPUT POINTS
   !
-  IF ( ABS(H)>=2.0D0*ABS(dt) ) Kop = Kop + 1
-  IF ( Kop<=mxkop ) THEN
+  IF( ABS(H)>=2.0D0*ABS(dt) ) Kop = Kop + 1
+  IF( Kop<=mxkop ) THEN
     !
-    IF ( ABS(dt)>U26*ABS(T) ) THEN
+    IF( ABS(dt)>U26*ABS(T) ) THEN
       DO
         !                       BEGIN BLOCK PERMITTING ...EXITS TO 490
         !
@@ -358,15 +357,15 @@ SUBROUTINE DRKFS(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
         Tolfac = 0.0D0
         ktol = 1
         DO k = 1, Neq
-          IF ( Info(2)==1 ) ktol = k
+          IF( Info(2)==1 ) ktol = k
           et = Rtol(ktol)*ABS(Y(k)) + Atol(ktol)
-          IF ( et>0.0D0 ) THEN
+          IF( et>0.0D0 ) THEN
             Tolfac = MAX(Tolfac,ABS(Y(k))*(Rer/et))
           ELSE
             Tolfac = MAX(Tolfac,Rer/Rtol(ktol))
           END IF
         END DO
-        IF ( Tolfac<=1.0D0 ) THEN
+        IF( Tolfac<=1.0D0 ) THEN
           !
           !                                SET SMALLEST ALLOWABLE STEP SIZE
           !
@@ -381,8 +380,8 @@ SUBROUTINE DRKFS(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
           !                                TO THE SAFETY FACTOR OF 9/10.
           !
           dt = Tout - T
-          IF ( ABS(dt)<2.0D0*ABS(H) ) THEN
-            IF ( ABS(dt)>ABS(H)/0.9D0 ) THEN
+          IF( ABS(dt)<2.0D0*ABS(H) ) THEN
+            IF( ABS(dt)>ABS(H)/0.9D0 ) THEN
               !
               H = 0.5D0*dt
             ELSE
@@ -439,7 +438,7 @@ SUBROUTINE DRKFS(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
           !
           !                                     MONITOR NUMBER OF STEPS ATTEMPTED
           !
-          DO WHILE ( Ksteps<=mxstep )
+          DO WHILE( Ksteps<=mxstep )
             !
             !                                   ADVANCE AN APPROXIMATE SOLUTION OVER
             !                                   ONE STEP OF LENGTH H
@@ -467,13 +466,13 @@ SUBROUTINE DRKFS(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
             ktol = 1
             DO k = 1, Neq
               yavg = 0.5D0*(ABS(Y(k))+ABS(Ys(k)))
-              IF ( Info(2)==1 ) ktol = k
+              IF( Info(2)==1 ) ktol = k
               et = Rtol(ktol)*yavg + Atol(ktol)
-              IF ( et>0.0D0 ) THEN
+              IF( et>0.0D0 ) THEN
                 !
                 ee = ABS((-2090.0D0*Yp(k)+(21970.0D0*F3(k)-15048.0D0*F4(k)))&
                   +(22528.0D0*F2(k)-27360.0D0*F5(k)))
-                IF ( .NOT.(Stiff.OR.Nonstf) ) THEN
+                IF( .NOT. (Stiff .OR. Nonstf) ) THEN
                   es = ABS&
                     (H*(0.055455D0*Yp(k)-0.035493D0*F1(k)-0.036571D0*F2&
                     (k)+0.023107D0*F3(k)-0.009515D0*F4(k)+0.003017D0*F5(k)))
@@ -493,7 +492,7 @@ SUBROUTINE DRKFS(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
             esttol = ABS(H)*eeoet/752400.0D0
             !
             !                                ...EXIT
-            IF ( esttol<=1.0D0 ) THEN
+            IF( esttol<=1.0D0 ) THEN
               !
               !                                .......................................
               !
@@ -516,8 +515,8 @@ SUBROUTINE DRKFS(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
               !                                   STEP SIZE IS NOT ALLOWED TO INCREASE
               !
               s = 5.0D0
-              IF ( esttol>1.889568D-4 ) s = 0.9D0/esttol**0.2D0
-              IF ( hfaild ) s = MIN(s,1.0D0)
+              IF( esttol>1.889568D-4 ) s = 0.9D0/esttol**0.2D0
+              IF( hfaild ) s = MIN(s,1.0D0)
               H = SIGN(MAX(s*ABS(H),hmin),H)
               !
               !                                .......................................
@@ -536,23 +535,23 @@ SUBROUTINE DRKFS(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
               !                                     THE FEHLBERG METHOD IS COMPLETED.
               !
               !                             ...EXIT
-              IF ( .NOT.(Stiff) ) THEN
+              IF( .NOT. (Stiff) ) THEN
                 Ntstep = MOD(Ntstep+1,50)
-                IF ( Ntstep==1 ) Nonstf = .FALSE.
+                IF( Ntstep==1 ) Nonstf = .FALSE.
                 !                             ...EXIT
-                IF ( .NOT.(Nonstf) ) THEN
-                  IF ( estiff<=1.0D0 ) THEN
+                IF( .NOT. (Nonstf) ) THEN
+                  IF( estiff<=1.0D0 ) THEN
                     !
                     !                                   SUCCESSFUL STEP WITH FIRST ORDER
                     !                                   METHOD
                     Nstifs = Nstifs + 1
                     !                                   TURN TEST OFF AFTER 25 INDICATIONS
                     !                                   OF STIFFNESS
-                    IF ( Nstifs==25 ) Stiff = .TRUE.
+                    IF( Nstifs==25 ) Stiff = .TRUE.
                     !
                     !                                UNSUCCESSFUL STEP WITH FIRST ORDER
                     !                                METHOD
-                  ELSEIF ( Ntstep-Nstifs>25 ) THEN
+                  ELSEIF( Ntstep-Nstifs>25 ) THEN
                     !               TURN STIFFNESS DETECTION OFF FOR THIS BLOCK OF
                     !                                                  FIFTY STEPS
                     Nonstf = .TRUE.
@@ -570,8 +569,8 @@ SUBROUTINE DRKFS(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
               !                                  SHOULD WE TAKE ANOTHER STEP
               !
               !                       ......EXIT
-              IF ( output ) GOTO 150
-              IF ( Info(3)==0 ) GOTO 120
+              IF( output ) GOTO 150
+              IF( Info(3)==0 ) GOTO 120
               !
               !                          *********************************************
               !                          *********************************************
@@ -588,7 +587,7 @@ SUBROUTINE DRKFS(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
               !
               !                                        UNSUCCESSFUL STEP
               !
-            ELSEIF ( ABS(H)>hmin ) THEN
+            ELSEIF( ABS(H)>hmin ) THEN
               !
               !                                   REDUCE THE STEP SIZE, TRY AGAIN
               !                                   THE DECREASE IS LIMITED TO A FACTOR
@@ -597,7 +596,7 @@ SUBROUTINE DRKFS(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
               hfaild = .TRUE.
               output = .FALSE.
               s = 0.1D0
-              IF ( esttol<59049.0D0 ) s = 0.9D0/esttol**0.2D0
+              IF( esttol<59049.0D0 ) s = 0.9D0/esttol**0.2D0
               H = SIGN(MAX(s*ABS(H),hmin),H)
             ELSE
               !
@@ -615,7 +614,7 @@ SUBROUTINE DRKFS(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
           Idid = -1
           Ksteps = 0
           !              ........................EXIT
-          IF ( Stiff ) THEN
+          IF( Stiff ) THEN
             !
             !                                      PROBLEM APPEARS TO BE STIFF
             Idid = -4
@@ -669,14 +668,14 @@ SUBROUTINE DRKFS(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
   200  Info(1) = -1
   Told = T
   !     ...EXIT
-  IF ( Idid==(-2) ) THEN
+  IF( Idid==(-2) ) THEN
     !
     !        THE ERROR TOLERANCES ARE INCREASED TO VALUES
     !                WHICH ARE APPROPRIATE FOR CONTINUING
     Rtol(1) = Tolfac*Rtol(1)
     Atol(1) = Tolfac*Atol(1)
     !     ...EXIT
-    IF ( Info(2)/=0 ) THEN
+    IF( Info(2)/=0 ) THEN
       DO k = 2, Neq
         Rtol(k) = Tolfac*Rtol(k)
         Atol(k) = Tolfac*Atol(k)

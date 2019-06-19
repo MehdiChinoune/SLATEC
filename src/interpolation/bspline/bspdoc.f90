@@ -1,7 +1,6 @@
 !** BSPDOC
 SUBROUTINE BSPDOC
-  !>
-  !  Documentation for BSPLINE, a package of subprograms for
+  !> Documentation for BSPLINE, a package of subprograms for
   !            working with piecewise polynomial functions
   !            in B-representation.
   !***
@@ -90,7 +89,7 @@ SUBROUTINE BSPDOC
   !     total number of knots for this representation is NU+2K-2 = N+K.
   !     These knots are carried in an array T(*) dimensioned by at least
   !     N+K.  From the construction, A=T(K) and B=T(N+1) and the spline is
-  !     defined on T(K).LE.X.LE.T(N+1).  The nonzero part of each basis
+  !     defined on T(K)<=X<=T(N+1).  The nonzero part of each basis
   !     function lies in the  Interval (T(I),T(I+K)).  In many problems
   !     where extrapolation beyond A or B is not anticipated, it is common
   !     practice to set T(1)=T(2)=...=T(K)=A and T(N+1)=T(N+2)=...=
@@ -113,15 +112,15 @@ SUBROUTINE BSPDOC
   !     B-spline coefficients BCOEF(*), the number of coefficients N,
   !     and the order K of the polynomial pieces (of degree K-1) are
   !     usually given.  While the knot array runs from T(1) to T(N+K),
-  !     the B-spline is normally defined on the interval T(K).LE.X.LE.
+  !     the B-spline is normally defined on the interval T(K)<=X<=
   !     T(N+1).  To evaluate the B-spline or any of its derivatives
   !     on this interval, one can use
   !
   !                  Y = BVALU(T,BCOEF,N,K,ID,X,INBV,WORK)
   !
-  !     where ID is an integer for the ID-th derivative, 0.LE.ID.LE.K-1.
+  !     where ID is an integer for the ID-th derivative, 0<=ID<=K-1.
   !     ID=0 gives the zero-th derivative or B-spline value at X.
-  !     If X.LT.T(K) or X.GT.T(N+1), whether by mistake or the result
+  !     If X<T(K) or X>T(N+1), whether by mistake or the result
   !     of round off accumulation in incrementing X, BVALU gives a
   !     diagnostic.  INBV is an initialization parameter which is set
   !     to 1 on the first call.  Distinct splines require distinct
@@ -134,16 +133,16 @@ SUBROUTINE BSPDOC
   !     the breakpoints (distinct knots) XI(*), the number of
   !     polynomial pieces LXI, and the (right) derivatives C(*,J) at
   !     each breakpoint XI(J) are needed to define the Taylor
-  !     expansion to the right of XI(J) on each interval XI(J).LE.
-  !     X.LT.XI(J+1), J=1,LXI where XI(1)=A and XI(LXI+1)=B.
+  !     expansion to the right of XI(J) on each interval XI(J)<=
+  !     X<XI(J+1), J=1,LXI where XI(1)=A and XI(LXI+1)=B.
   !     These are obtained from the (T,BCOEF,N,K) representation by
   !
   !                CALL BSPPP(T,BCOEF,N,K,LDC,C,XI,LXI,WORK)
   !
-  !     where LDC.GE.K is the leading dimension of the matrix C and
+  !     where LDC>=K is the leading dimension of the matrix C and
   !     WORK is a scratch vector of length at least K*(N+3).
   !     Then the PP-representation (C,XI,LXI,K) of Y(X), denoted
-  !     by Y(J,X) on each interval XI(J).LE.X.LT.XI(J+1), is
+  !     by Y(J,X) on each interval XI(J)<=X<XI(J+1), is
   !
   !     Y(J,X) = sum( C(I,J)*((X-XI(J))**(I-1))/factorial(I-1), I=1,K)
   !
@@ -214,7 +213,7 @@ SUBROUTINE BSPDOC
   !     caution should be exercised, especially when several knots
   !     are located at A or B or when the extrapolation is carried
   !     significantly beyond A or B.  On the other hand, direct
-  !     evaluation with BVALU outside A=T(K).LE.X.LE.T(N+1)=B
+  !     evaluation with BVALU outside A=T(K)<=X<=T(N+1)=B
   !     produces an error message, and some manipulation of the knots
   !     and coefficients are needed to extrapolate with BVALU.  This
   !     process is described in reference 6.

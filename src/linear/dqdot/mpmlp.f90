@@ -1,7 +1,6 @@
 !** MPMLP
 SUBROUTINE MPMLP(U,V,W,J)
-  !>
-  !  Subsidiary to DQDOTA and DQDOTI
+  !> Subsidiary to DQDOTA and DQDOTI
   !***
   ! **Library:**   SLATEC
   !***

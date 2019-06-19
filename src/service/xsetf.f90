@@ -1,7 +1,6 @@
 !** XSETF
 SUBROUTINE XSETF(Kontrl)
-  !>
-  !  Set the error control flag.
+  !> Set the error control flag.
   !***
   ! **Library:**   SLATEC (XERROR)
   !***
@@ -55,10 +54,10 @@ SUBROUTINE XSETF(Kontrl)
   !   900510  Change call to XERRWV to XERMSG.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
-  INTEGER junk, Kontrl
+  INTEGER :: junk, Kontrl
   CHARACTER(8) :: xern1
   !* FIRST EXECUTABLE STATEMENT  XSETF
-  IF ( ABS(Kontrl)>2 ) THEN
+  IF( ABS(Kontrl)>2 ) THEN
     WRITE (xern1,'(I8)') Kontrl
     CALL XERMSG('XSETF','INVALID ARGUMENT = '//xern1,1,2)
     RETURN

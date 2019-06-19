@@ -1,12 +1,11 @@
 !** DQAWC
 SUBROUTINE DQAWC(F,A,B,C,Epsabs,Epsrel,Result,Abserr,Neval,Ier,Limit,Lenw,&
     Last,Iwork,Work)
-  !>
-  !  The routine calculates an approximation result to a
+  !> The routine calculates an approximation result to a
   !            Cauchy principal value I = INTEGRAL of F*W over (A,B)
-  !            (W(X) = 1/((X-C), C.NE.A, C.NE.B), hopefully satisfying
+  !            (W(X) = 1/((X-C), C/=A, C/=B), hopefully satisfying
   !            following claim for accuracy
-  !            ABS(I-RESULT).LE.MAX(EPSABE,EPSREL*ABS(I)).
+  !            ABS(I-RESULT)<=MAX(EPSABE,EPSREL*ABS(I)).
   !***
   ! **Library:**   SLATEC (QUADPACK)
   !***
@@ -45,7 +44,7 @@ SUBROUTINE DQAWC(F,A,B,C,Epsabs,Epsrel,Result,Abserr,Neval,Ier,Limit,Lenw,&
   !            B      - Double precision
   !                     Upper limit of integration
   !
-  !            C      - Parameter in the weight function, C.NE.A, C.NE.B.
+  !            C      - Parameter in the weight function, C/=A, C/=B.
   !                     If C = A or C = B, the routine will end with
   !                     IER = 6 .
   !
@@ -53,8 +52,8 @@ SUBROUTINE DQAWC(F,A,B,C,Epsabs,Epsrel,Result,Abserr,Neval,Ier,Limit,Lenw,&
   !                     Absolute accuracy requested
   !            EPSREL - Double precision
   !                     Relative accuracy requested
-  !                     If  EPSABS.LE.0
-  !                     and EPSREL.LT.MAX(50*REL.MACH.ACC.,0.5D-28),
+  !                     If  EPSABS<=0
+  !                     and EPSREL<MAX(50*REL.MACH.ACC.,0.5D-28),
   !                     the routine will end with IER = 6.
   !
   !         ON RETURN
@@ -72,7 +71,7 @@ SUBROUTINE DQAWC(F,A,B,C,Epsabs,Epsrel,Result,Abserr,Neval,Ier,Limit,Lenw,&
   !                     IER = 0 Normal and reliable termination of the
   !                             routine. It is assumed that the requested
   !                             accuracy has been achieved.
-  !                     IER.GT.0 Abnormal termination of the routine
+  !                     IER>0 Abnormal termination of the routine
   !                             the estimates for integral and error are
   !                             less reliable. It is assumed that the
   !                             requested accuracy has not been achieved.
@@ -99,9 +98,9 @@ SUBROUTINE DQAWC(F,A,B,C,Epsabs,Epsrel,Result,Abserr,Neval,Ier,Limit,Lenw,&
   !                             interval.
   !                         = 6 The input is invalid, because
   !                             C = A or C = B or
-  !                             (EPSABS.LE.0 and
-  !                              EPSREL.LT.MAX(50*REL.MACH.ACC.,0.5D-28))
-  !                             or LIMIT.LT.1 or LENW.LT.LIMIT*4.
+  !                             (EPSABS<=0 and
+  !                              EPSREL<MAX(50*REL.MACH.ACC.,0.5D-28))
+  !                             or LIMIT<1 or LENW<LIMIT*4.
   !                             RESULT, ABSERR, NEVAL, LAST are set to
   !                             zero.  Except when LENW or LIMIT is
   !                             invalid, IWORK(1), WORK(LIMIT*2+1) and
@@ -113,13 +112,13 @@ SUBROUTINE DQAWC(F,A,B,C,Epsabs,Epsrel,Result,Abserr,Neval,Ier,Limit,Lenw,&
   !                    Dimensioning parameter for IWORK
   !                    LIMIT determines the maximum number of subintervals
   !                    in the partition of the given integration interval
-  !                    (A,B), LIMIT.GE.1.
-  !                    If LIMIT.LT.1, the routine will end with IER = 6.
+  !                    (A,B), LIMIT>=1.
+  !                    If LIMIT<1, the routine will end with IER = 6.
   !
   !           LENW   - Integer
   !                    Dimensioning parameter for WORK
   !                    LENW must be at least LIMIT*4.
-  !                    If LENW.LT.LIMIT*4, the routine will end with
+  !                    If LENW<LIMIT*4, the routine will end with
   !                    IER = 6.
   !
   !            LAST  - Integer
@@ -135,7 +134,7 @@ SUBROUTINE DQAWC(F,A,B,C,Epsabs,Epsrel,Result,Abserr,Neval,Ier,Limit,Lenw,&
   !                    to the error estimates over the subintervals,
   !                    such that WORK(LIMIT*3+IWORK(1)), ... ,
   !                    WORK(LIMIT*3+IWORK(K)) form a decreasing
-  !                    sequence, with K = LAST if LAST.LE.(LIMIT/2+2),
+  !                    sequence, with K = LAST if LAST<=(LIMIT/2+2),
   !                    and K = LIMIT+1-LAST otherwise
   !
   !            WORK  - Double precision
@@ -182,7 +181,7 @@ SUBROUTINE DQAWC(F,A,B,C,Epsabs,Epsrel,Result,Abserr,Neval,Ier,Limit,Lenw,&
   Last = 0
   Result = 0.0D+00
   Abserr = 0.0D+00
-  IF ( Limit>=1.AND.Lenw>=Limit*4 ) THEN
+  IF( Limit>=1 .AND. Lenw>=Limit*4 ) THEN
     !
     !         PREPARE CALL FOR DQAWCE.
     !
@@ -196,6 +195,6 @@ SUBROUTINE DQAWC(F,A,B,C,Epsabs,Epsrel,Result,Abserr,Neval,Ier,Limit,Lenw,&
     !
     lvl = 0
   END IF
-  IF ( Ier==6 ) lvl = 1
-  IF ( Ier/=0 ) CALL XERMSG('DQAWC','ABNORMAL RETURN',Ier,lvl)
+  IF( Ier==6 ) lvl = 1
+  IF( Ier/=0 ) CALL XERMSG('DQAWC','ABNORMAL RETURN',Ier,lvl)
 END SUBROUTINE DQAWC

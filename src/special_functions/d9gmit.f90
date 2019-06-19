@@ -1,7 +1,6 @@
 !** D9GMIT
 REAL(DP) FUNCTION D9GMIT(A,X,Algap1,Sgngam)
-  !>
-  !  Compute Tricomi's incomplete Gamma function for small
+  !> Compute Tricomi's incomplete Gamma function for small
   !            arguments.
   !***
   ! **Library:**   SLATEC (FNLIB)
@@ -39,14 +38,14 @@ REAL(DP) FUNCTION D9GMIT(A,X,Algap1,Sgngam)
   REAL(DP), PARAMETER :: eps = 0.5D0*D1MACH(3), bot = LOG(D1MACH(1))
   !* FIRST EXECUTABLE STATEMENT  D9GMIT
   !
-  IF ( X<=0.D0 ) CALL XERMSG('D9GMIT','X SHOULD BE GT 0',1,2)
+  IF( X<=0.D0 ) CALL XERMSG('D9GMIT','X SHOULD BE GT 0',1,2)
   !
   ma = INT( A + 0.5D0 )
-  IF ( A<0.D0 ) ma = INT( A - 0.5D0 )
+  IF( A<0.D0 ) ma = INT( A - 0.5D0 )
   aeps = A - ma
   !
   ae = A
-  IF ( A<(-0.5D0) ) ae = aeps
+  IF( A<(-0.5D0) ) ae = aeps
   !
   t = 1.D0
   te = ae
@@ -56,14 +55,14 @@ REAL(DP) FUNCTION D9GMIT(A,X,Algap1,Sgngam)
     te = -X*te/fk
     t = te/(ae+fk)
     s = s + t
-    IF ( ABS(t)<eps*ABS(s) ) GOTO 100
+    IF( ABS(t)<eps*ABS(s) ) GOTO 100
   END DO
   CALL XERMSG('D9GMIT',&
     'NO CONVERGENCE IN 200 TERMS OF TAYLOR-S SERIES',2,2)
   !
   100 CONTINUE
-  IF ( A>=(-0.5D0) ) algs = -Algap1 + LOG(s)
-  IF ( A>=(-0.5D0) ) THEN
+  IF( A>=(-0.5D0) ) algs = -Algap1 + LOG(s)
+  IF( A>=(-0.5D0) ) THEN
     !
     D9GMIT = EXP(algs)
   ELSE
@@ -71,26 +70,26 @@ REAL(DP) FUNCTION D9GMIT(A,X,Algap1,Sgngam)
     algs = -LOG_GAMMA(1.D0+aeps) + LOG(s)
     s = 1.0D0
     m = -ma - 1
-    IF ( m/=0 ) THEN
+    IF( m/=0 ) THEN
       t = 1.0D0
       DO k = 1, m
         t = X*t/(aeps-(m+1-k))
         s = s + t
-        IF ( ABS(t)<eps*ABS(s) ) EXIT
+        IF( ABS(t)<eps*ABS(s) ) EXIT
       END DO
     END IF
     !
     D9GMIT = 0.0D0
     algs = -ma*LOG(X) + algs
-    IF ( s==0.D0.OR.aeps==0.D0 ) THEN
+    IF( s==0.D0 .OR. aeps==0.D0 ) THEN
       D9GMIT = EXP(algs)
     ELSE
       !
       sgng2 = Sgngam*SIGN(1.0D0,s)
       alg2 = -X - Algap1 + LOG(ABS(s))
       !
-      IF ( alg2>bot ) D9GMIT = sgng2*EXP(alg2)
-      IF ( algs>bot ) D9GMIT = D9GMIT + EXP(algs)
+      IF( alg2>bot ) D9GMIT = sgng2*EXP(alg2)
+      IF( algs>bot ) D9GMIT = D9GMIT + EXP(algs)
       RETURN
     END IF
   END IF

@@ -1,8 +1,7 @@
 !** BVSUP
 SUBROUTINE BVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
     Nfc,Igofx,Re,Ae,Iflag,Work,Ndw,Iwork,Ndiw,Neqivp)
-  !>
-  !  Solve a linear two-point boundary value problem using
+  !> Solve a linear two-point boundary value problem using
   !            superposition coupled with an orthonormalization procedure
   !            and a variable-step integration scheme.
   !***
@@ -47,7 +46,7 @@ SUBROUTINE BVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
   !- *********************************************************************
   !
   !     NROWY = Actual row dimension of Y in calling program.
-  !             NROWY must be .GE. NCOMP
+  !             NROWY must be >= NCOMP
   !
   !     NCOMP = Number of components per solution vector.
   !             NCOMP is equal to number of original differential
@@ -63,10 +62,10 @@ SUBROUTINE BVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
   !                      must be contained in (NIC,NCOMP) sub-matrix.
   !
   !     NROWA = Actual row dimension of A in calling program,
-  !             NROWA must be .GE. NIC.
+  !             NROWA must be >= NIC.
   !
   !     ALPHA(NIC+NEQIVP) = Boundary conditions at Xinitial.
-  !                         If NEQIVP .GT. 0 (see below), the boundary
+  !                         If NEQIVP > 0 (see below), the boundary
   !                         conditions at Xinitial for the initial value
   !                         equations must be stored starting in
   !                         position (NIC + 1) of ALPHA.
@@ -78,7 +77,7 @@ SUBROUTINE BVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
   !                      must be contained in (NFC,NCOMP) sub-matrix.
   !
   !     NROWB = Actual row dimension of B in calling program,
-  !             NROWB must be .GE. NFC.
+  !             NROWB must be >= NFC.
   !
   !     BETA(NFC) = Boundary conditions at Xfinal.
   !
@@ -157,7 +156,7 @@ SUBROUTINE BVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
   !            Compute the derivatives for the HOMOGENEOUS problem
   !              YP(I) = dY(I)/dX = MATRIX(X) * Y(I) , I = 1,...,NCOMP
   !
-  !            When (NEQIVP .GT. 0) and  MATRIX  is dependent on  U  as
+  !            When (NEQIVP > 0) and  MATRIX  is dependent on  U  as
   !            well as on  X, the following common statement must be
   !            included in FMAT
   !                    COMMON /MLIVP/ NOFST
@@ -179,7 +178,7 @@ SUBROUTINE BVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
   !            computed if X is unequal to XS, whereupon XS is reset to X.
   !
   !
-  !        B. If  NEQIVP .GT. 0,  UIVP must also be supplied.
+  !        B. If  NEQIVP > 0,  UIVP must also be supplied.
   !
   !              SUBROUTINE UIVP(X,U,UP)
   !              X = Independent variable (input to UIVP)
@@ -210,7 +209,7 @@ SUBROUTINE BVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
   !            via the BVDER subroutine.
   !
   !
-  !        D. If  NEQIVP .GT. 0  and  IGOFX = 1,  UVEC must be supplied.
+  !        D. If  NEQIVP > 0  and  IGOFX = 1,  UVEC must be supplied.
   !
   !              SUBROUTINE UVEC(X,U,G)
   !              X = Independent variable (input to UVEC)
@@ -430,24 +429,24 @@ SUBROUTINE BVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
   !- *********************************************************************
   !     TEST FOR INVALID INPUT
   !
-  IF ( Nrowy>=Ncomp ) THEN
-    IF ( Ncomp==Nic+Nfc ) THEN
-      IF ( Nxpts>=2 ) THEN
-        IF ( Nic>0 ) THEN
-          IF ( Nrowa>=Nic ) THEN
-            IF ( Nfc>0 ) THEN
-              IF ( Nrowb>=Nfc ) THEN
-                IF ( Igofx>=0.AND.Igofx<=1 ) THEN
-                  IF ( Re>=0.0 ) THEN
-                    IF ( Ae>=0.0 ) THEN
-                      IF ( Re/=0.0.OR.Ae/=0.0 ) THEN
+  IF( Nrowy>=Ncomp ) THEN
+    IF( Ncomp==Nic+Nfc ) THEN
+      IF( Nxpts>=2 ) THEN
+        IF( Nic>0 ) THEN
+          IF( Nrowa>=Nic ) THEN
+            IF( Nfc>0 ) THEN
+              IF( Nrowb>=Nfc ) THEN
+                IF( Igofx>=0 .AND. Igofx<=1 ) THEN
+                  IF( Re>=0.0 ) THEN
+                    IF( Ae>=0.0 ) THEN
+                      IF( Re/=0.0 .OR. Ae/=0.0 ) THEN
                         is = 1
-                        IF ( Xpts(Nxpts)<Xpts(1) ) is = 2
+                        IF( Xpts(Nxpts)<Xpts(1) ) is = 2
                         nxptsm = Nxpts - 1
                         DO k = 1, nxptsm
-                          IF ( is==2 ) THEN
-                            IF ( Xpts(k)<=Xpts(k+1) ) GOTO 100
-                          ELSEIF ( Xpts(k+1)<=Xpts(k) ) THEN
+                          IF( is==2 ) THEN
+                            IF( Xpts(k)<=Xpts(k+1) ) GOTO 100
+                          ELSEIF( Xpts(k+1)<=Xpts(k) ) THEN
                             GOTO 100
                           END IF
                         END DO
@@ -457,7 +456,7 @@ SUBROUTINE BVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
                         !
                         kpts = Nxpts
                         ndisk_com = 0
-                        IF ( Iwork(12)/=0 ) THEN
+                        IF( Iwork(12)/=0 ) THEN
                           ntape_com = Iwork(12)
                           kpts = 1
                           ndisk_com = 1
@@ -467,17 +466,17 @@ SUBROUTINE BVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
                         !     SET INTEG PARAMETER ACCORDING TO CHOICE OF INTEGRATOR.
                         !
                         integ_com = 1
-                        IF ( Iwork(9)==2 ) integ_com = 2
+                        IF( Iwork(9)==2 ) integ_com = 2
                         !
                         !- *********************************************************************
                         !     COMPUTE INHOMO
                         !
-                        IF ( Igofx==1 ) GOTO 300
+                        IF( Igofx==1 ) GOTO 300
                         DO j = 1, Nic
-                          IF ( Alpha(j)/=0.0 ) GOTO 300
+                          IF( Alpha(j)/=0.0 ) GOTO 300
                         END DO
                         DO j = 1, Nfc
-                          IF ( Beta(j)/=0.0 ) GOTO 200
+                          IF( Beta(j)/=0.0 ) GOTO 200
                         END DO
                         inhomo_com = 3
                         GOTO 400
@@ -505,7 +504,7 @@ SUBROUTINE BVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
   !     THE INTERNAL VALUE OF NFC
   !
   400  nfcc_com = Nfc
-  IF ( Iflag==13 ) Nfc = Nfc/2
+  IF( Iflag==13 ) Nfc = Nfc/2
   !
   !- *********************************************************************
   !     DETERMINE NECESSARY STORAGE REQUIREMENTS
@@ -533,8 +532,8 @@ SUBROUTINE BVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
   lllsvc = 2*nfcc_com
   !
   ndeq = Ncomp*Nfc + Neqivp
-  IF ( inhomo_com==1 ) ndeq = ndeq + Ncomp
-  IF ( integ_com==2 ) THEN
+  IF( inhomo_com==1 ) ndeq = ndeq + Ncomp
+  IF( integ_com==2 ) THEN
     !   (DEABM)
     kkkint_com = 130 + 21*ndeq
     lllint_com = 51
@@ -563,10 +562,10 @@ SUBROUTINE BVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
   Iwork(6) = lllip
   nrtemp = Ndw - needw_com
   nitemp = Ndiw - neediw_com
-  IF ( nrtemp>=0 ) THEN
-    IF ( nitemp>=0 ) THEN
+  IF( nrtemp>=0 ) THEN
+    IF( nitemp>=0 ) THEN
       !
-      IF ( ndisk_com==0 ) THEN
+      IF( ndisk_com==0 ) THEN
         !
         mxnonr = nrtemp/kkkzpw_com
         mxnoni = nitemp/lllip
@@ -583,8 +582,8 @@ SUBROUTINE BVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
       !     CHECK FOR PRE-ASSIGNED ORTHONORMALIZATION POINTS
       !
       nopg_com = 0
-      IF ( Iwork(11)/=1 ) GOTO 500
-      IF ( mxnon_com>=Iwork(1) ) THEN
+      IF( Iwork(11)/=1 ) GOTO 500
+      IF( mxnon_com>=Iwork(1) ) THEN
         nopg_com = 1
         mxnon_com = Iwork(1)
         Work(mxnon_com+1) = 2.*Xpts(Nxpts) - Xpts(1)
@@ -594,7 +593,7 @@ SUBROUTINE BVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
   END IF
   !
   Iflag = -1
-  IF ( ndisk_com/=1 ) THEN
+  IF( ndisk_com/=1 ) THEN
     WRITE (xern1,'(I8)') needw_com
     WRITE (xern2,'(I8)') kkkzpw_com
     WRITE (xern3,'(I8)') neediw_com
@@ -650,13 +649,13 @@ SUBROUTINE BVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
   !     SET INDICATOR FOR NORMALIZATION OF PARTICULAR SOLUTION
   !
   nps_com = 0
-  IF ( Iwork(10)==1 ) nps_com = 1
+  IF( Iwork(10)==1 ) nps_com = 1
   !
   !- *********************************************************************
   !     SET PIVOTING PARAMETER
   !
   indpvt_com = 0
-  IF ( Iwork(15)==1 ) indpvt_com = 1
+  IF( Iwork(15)==1 ) indpvt_com = 1
   !
   !- *********************************************************************
   !     SET OTHER COMMON BLOCK PARAMETERS
@@ -670,12 +669,12 @@ SUBROUTINE BVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
   ae_com = Ae
   neqivp_com = Neqivp
   mnswot_com = 20
-  IF ( Iwork(13)==-1 ) mnswot_com = MAX(1,Iwork(14))
+  IF( Iwork(13)==-1 ) mnswot_com = MAX(1,Iwork(14))
   xbeg_com = Xpts(1)
   xend_com = Xpts(Nxpts)
   xsav_com = xend_com
   icoco_com = 1
-  IF ( inhomo_com==3.AND.nopg_com==1 ) Work(mxnon_com+1) = xend_com
+  IF( inhomo_com==3 .AND. nopg_com==1 ) Work(mxnon_com+1) = xend_com
   !
   !- *********************************************************************
   !

@@ -1,7 +1,6 @@
 !** RPZERO
 SUBROUTINE RPZERO(N,A,R,T,Iflg,S)
-  !>
-  !  Find the zeros of a polynomial with real coefficients.
+  !> Find the zeros of a polynomial with real coefficients.
   !***
   ! **Library:**   SLATEC
   !***
@@ -27,8 +26,8 @@ SUBROUTINE RPZERO(N,A,R,T,Iflg,S)
   !       T = 6(N+1) word array used for temporary storage
   !       IFLG = flag to indicate if initial estimates of
   !              zeros are input.
-  !            If IFLG .EQ. 0, no estimates are input.
-  !            If IFLG .NE. 0, the vector R contains estimates of
+  !            If IFLG = 0, no estimates are input.
+  !            If IFLG /= 0, the vector R contains estimates of
   !               the zeros
   !       ** Warning ****** If estimates are input, they must
   !                         be separated; that is, distinct or
@@ -40,9 +39,9 @@ SUBROUTINE RPZERO(N,A,R,T,Iflg,S)
   !       S(I) = bound for R(I) .
   !       IFLG = error diagnostic
   !    Error Diagnostics...
-  !       If IFLG .EQ. 0 on return, all is well.
-  !       If IFLG .EQ. 1 on return, A(1)=0.0 or N=0 on input.
-  !       If IFLG .EQ. 2 on return, the program failed to converge
+  !       If IFLG = 0 on return, all is well.
+  !       If IFLG = 1 on return, A(1)=0.0 or N=0 on input.
+  !       If IFLG = 2 on return, the program failed to converge
   !                after 25*N iterations.  Best current estimates of the
   !                zeros are in R(I).  Error bounds are not calculated.
   !

@@ -1,7 +1,6 @@
 !** XCON
 SUBROUTINE XCON(X,Ix,Ierror)
-  !>
-  !  To provide single-precision floating-point arithmetic
+  !> To provide single-precision floating-point arithmetic
   !            with an extended exponent range.
   !***
   ! **Library:**   SLATEC
@@ -22,7 +21,7 @@ SUBROUTINE XCON(X,Ix,Ierror)
   !                  CONVERTS (X,IX) = X*RADIX**IX
   !                  TO DECIMAL FORM IN PREPARATION FOR
   !                  PRINTING, SO THAT (X,IX) = X*10**IX
-  !                  WHERE 1/10 .LE. ABS(X) .LT. 1
+  !                  WHERE 1/10 <= ABS(X) < 1
   !                  IS RETURNED, EXCEPT THAT IF
   !                  (ABS(X),IX) IS BETWEEN RADIX**(-2L)
   !                  AND RADIX**(2L) THEN THE REDUCED
@@ -52,9 +51,9 @@ SUBROUTINE XCON(X,Ix,Ierror)
   !
   !   THE CONDITIONS IMPOSED ON L AND KMAX BY THIS SUBROUTINE
   ! ARE
-  !    (1) 4 .LE. L .LE. 2**NBITS - 1 - KMAX
+  !    (1) 4 <= L <= 2**NBITS - 1 - KMAX
   !
-  !    (2) KMAX .LE. ((2**NBITS)-2)/LOG10R - L
+  !    (2) KMAX <= ((2**NBITS)-2)/LOG10R - L
   !
   ! THESE CONDITIONS MUST BE MET BY APPROPRIATE CODING
   ! IN SUBROUTINE XSET.
@@ -66,112 +65,112 @@ SUBROUTINE XCON(X,Ix,Ierror)
   !   THE PARAMETER ISPACE IS THE INCREMENT USED IN FORM-
   ! ING THE AUXILIARY INDEX OF THE DECIMAL EXTENDED-RANGE
   ! FORM. THE RETURNED VALUE OF IX WILL BE AN INTEGER MULT-
-  ! IPLE OF ISPACE. ISPACE MUST SATISFY 1 .LE. ISPACE .LE.
+  ! IPLE OF ISPACE. ISPACE MUST SATISFY 1 <= ISPACE <=
   ! L/2. IF A VALUE GREATER THAN 1 IS TAKEN, THE RETURNED
-  ! VALUE OF X WILL SATISFY 10**(-ISPACE) .LE. ABS(X) .LE. 1
-  ! WHEN (ABS(X),IX) .LT. RADIX**(-2L) AND 1/10 .LE. ABS(X)
-  ! .LT. 10**(ISPACE-1) WHEN (ABS(X),IX) .GT. RADIX**(2L).
+  ! VALUE OF X WILL SATISFY 10**(-ISPACE) <= ABS(X) <= 1
+  ! WHEN (ABS(X),IX) < RADIX**(-2L) AND 1/10 <= ABS(X)
+  ! < 10**(ISPACE-1) WHEN (ABS(X),IX) > RADIX**(2L).
   !
   !* FIRST EXECUTABLE STATEMENT  XCON
   Ierror = 0
   CALL XRED(X,Ix,Ierror)
-  IF ( Ierror/=0 ) RETURN
-  IF ( Ix/=0 ) THEN
+  IF( Ierror/=0 ) RETURN
+  IF( Ix/=0 ) THEN
     CALL XADJ(X,Ix,Ierror)
-    IF ( Ierror/=0 ) RETURN
+    IF( Ierror/=0 ) RETURN
     !
     ! CASE 1 IS WHEN (X,IX) IS LESS THAN RADIX**(-2L) IN MAGNITUDE,
     ! CASE 2 IS WHEN (X,IX) IS GREATER THAN RADIX**(2L) IN MAGNITUDE.
     itemp = 1
     icase = (3+SIGN(itemp,Ix))/2
-    IF ( icase==2 ) THEN
-      IF ( ABS(X)<1.0 ) THEN
+    IF( icase==2 ) THEN
+      IF( ABS(X)<1.0 ) THEN
         X = X*radixl_com
         Ix = Ix - l_com
       END IF
-    ELSEIF ( ABS(X)>=1.0 ) THEN
+    ELSEIF( ABS(X)>=1.0 ) THEN
       X = X/radixl_com
       Ix = Ix + l_com
     END IF
     !
-    ! AT THIS POINT, RADIX**(-L) .LE. ABS(X) .LT. 1.0     IN CASE 1,
-    !                      1.0 .LE. ABS(X) .LT. RADIX**L  IN CASE 2.
+    ! AT THIS POINT, RADIX**(-L) <= ABS(X) < 1.0     IN CASE 1,
+    !                      1.0 <= ABS(X) < RADIX**L  IN CASE 2.
     i = INT( LOG10(ABS(X))/dlg10r_com )
     a = radixx_com**i
-    IF ( icase==2 ) THEN
-      DO WHILE ( a>ABS(X) )
+    IF( icase==2 ) THEN
+      DO WHILE( a>ABS(X) )
         i = i - 1
         a = a/radixx_com
       END DO
-      DO WHILE ( ABS(X)>=radixx_com*a )
+      DO WHILE( ABS(X)>=radixx_com*a )
         i = i + 1
         a = a*radixx_com
       END DO
     ELSE
-      DO WHILE ( a>radixx_com*ABS(X) )
+      DO WHILE( a>radixx_com*ABS(X) )
         i = i - 1
         a = a/radixx_com
       END DO
-      DO WHILE ( ABS(X)>=a )
+      DO WHILE( ABS(X)>=a )
         i = i + 1
         a = a*radixx_com
       END DO
     END IF
     !
     ! AT THIS POINT I IS SUCH THAT
-    ! RADIX**(I-1) .LE. ABS(X) .LT. RADIX**I      IN CASE 1,
-    !     RADIX**I .LE. ABS(X) .LT. RADIX**(I+1)  IN CASE 2.
+    ! RADIX**(I-1) <= ABS(X) < RADIX**I      IN CASE 1,
+    !     RADIX**I <= ABS(X) < RADIX**(I+1)  IN CASE 2.
     itemp = INT( ispace/dlg10r_com )
     a = radixx_com**itemp
     b = 10.0**ispace
-    DO WHILE ( a>b )
+    DO WHILE( a>b )
       itemp = itemp - 1
       a = a/radixx_com
     END DO
-    DO WHILE ( b>=a*radixx_com )
+    DO WHILE( b>=a*radixx_com )
       itemp = itemp + 1
       a = a*radixx_com
     END DO
     !
     ! AT THIS POINT ITEMP IS SUCH THAT
-    ! RADIX**ITEMP .LE. 10**ISPACE .LT. RADIX**(ITEMP+1).
-    IF ( itemp<=0 ) THEN
+    ! RADIX**ITEMP <= 10**ISPACE < RADIX**(ITEMP+1).
+    IF( itemp<=0 ) THEN
       ! ITEMP = 0 IF, AND ONLY IF, ISPACE = 1 AND RADIX = 16.0
       X = X*radixx_com**(-i)
       Ix = Ix + i
       CALL XC210(Ix,z,j,Ierror)
-      IF ( Ierror/=0 ) RETURN
+      IF( Ierror/=0 ) RETURN
       X = X*z
       Ix = j
-      IF ( icase==1 ) GOTO 50
-      IF ( icase==2 ) GOTO 100
+      IF( icase==1 ) GOTO 50
+      IF( icase==2 ) GOTO 100
     END IF
     i1 = i/itemp
     X = X*radixx_com**(-i1*itemp)
     Ix = Ix + i1*itemp
     !
     ! AT THIS POINT,
-    ! RADIX**(-ITEMP) .LE. ABS(X) .LT. 1.0        IN CASE 1,
-    !           1.0 .LE. ABS(X) .LT. RADIX**ITEMP IN CASE 2.
+    ! RADIX**(-ITEMP) <= ABS(X) < 1.0        IN CASE 1,
+    !           1.0 <= ABS(X) < RADIX**ITEMP IN CASE 2.
     CALL XC210(Ix,z,j,Ierror)
-    IF ( Ierror/=0 ) RETURN
+    IF( Ierror/=0 ) RETURN
     j1 = j/ispace
     j2 = j - j1*ispace
     X = X*z*10.0**j2
     Ix = j1*ispace
     !
     ! AT THIS POINT,
-    !  10.0**(-2*ISPACE) .LE. ABS(X) .LT. 1.0                IN CASE 1,
-    !           10.0**-1 .LE. ABS(X) .LT. 10.0**(2*ISPACE-1) IN CASE 2.
-    IF ( icase==2 ) GOTO 100
+    !  10.0**(-2*ISPACE) <= ABS(X) < 1.0                IN CASE 1,
+    !           10.0**-1 <= ABS(X) < 10.0**(2*ISPACE-1) IN CASE 2.
+    IF( icase==2 ) GOTO 100
     50 CONTINUE
-    DO WHILE ( b*ABS(X)<1.0 )
+    DO WHILE( b*ABS(X)<1.0 )
       X = X*b
       Ix = Ix - ispace
     END DO
     RETURN
     100 CONTINUE
-    DO WHILE ( 10.0*ABS(X)>=b )
+    DO WHILE( 10.0*ABS(X)>=b )
       X = X/b
       Ix = Ix + ispace
     END DO

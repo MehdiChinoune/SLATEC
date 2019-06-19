@@ -1,7 +1,6 @@
 !** DBKISR
 SUBROUTINE DBKISR(X,N,Summ,Ierr)
-  !>
-  !  Subsidiary to DBSKIN
+  !> Subsidiary to DBSKIN
   !***
   ! **Library:**   SLATEC
   !***
@@ -27,17 +26,17 @@ SUBROUTINE DBKISR(X,N,Summ,Ierr)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
   USE service, ONLY : D1MACH
-  INTEGER i, Ierr, k, kk, kkn, k1, N, np
+  INTEGER :: i, Ierr, k, kk, kkn, k1, N, np
   REAL(DP) :: ak, atol, bk, fk, fn, hx, hxs, pol, pr, Summ, tkp, tol, trm, X, xln
   !
   REAL(DP), PARAMETER :: c(2) = [ 1.57079632679489662D+00, 1.0D0 ]
   !* FIRST EXECUTABLE STATEMENT  DBKISR
   Ierr = 0
   tol = MAX(D1MACH(4),1.0D-18)
-  IF ( X>=tol ) THEN
+  IF( X>=tol ) THEN
     pr = 1.0D0
     pol = 0.0D0
-    IF ( N/=0 ) THEN
+    IF( N/=0 ) THEN
       DO i = 1, N
         pol = -pol*X + c(i)
         pr = pr*X/i
@@ -61,7 +60,7 @@ SUBROUTINE DBKISR(X,N,Summ,Ierr)
       kkn = kk + N
       trm = (DPSIXN(k1)+DPSIXN(kkn)-DPSIXN(kk)-xln)*ak
       Summ = Summ + trm
-      IF ( ABS(trm)<=atol ) GOTO 100
+      IF( ABS(trm)<=atol ) GOTO 100
       tkp = tkp + 2.0D0
       bk = bk + tkp
       fk = fk + 1.0D0
@@ -69,9 +68,9 @@ SUBROUTINE DBKISR(X,N,Summ,Ierr)
     Ierr = 2
     RETURN
     !-----------------------------------------------------------------------
-    !     SMALL X CASE, X.LT.WORD TOLERANCE
+    !     SMALL X CASE, X<WORD TOLERANCE
     !-----------------------------------------------------------------------
-  ELSEIF ( N>0 ) THEN
+  ELSEIF( N>0 ) THEN
     Summ = c(N)
     RETURN
   ELSE
@@ -80,7 +79,7 @@ SUBROUTINE DBKISR(X,N,Summ,Ierr)
     RETURN
   END IF
   100  Summ = (Summ*hxs+DPSIXN(np)-xln)*pr
-  IF ( N==1 ) Summ = -Summ
+  IF( N==1 ) Summ = -Summ
   Summ = pol + Summ
   RETURN
 END SUBROUTINE DBKISR

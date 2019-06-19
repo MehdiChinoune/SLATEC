@@ -1,7 +1,6 @@
 !** HSTART
 SUBROUTINE HSTART(F,Neq,A,B,Y,Yprime,Etol,Morder,Small,Big,Spy,Pv,Yp,Sf,H)
-  !>
-  !  Subsidiary to DEABM, DEBDF and DERKF
+  !> Subsidiary to DEABM, DEBDF and DERKF
   !***
   ! **Library:**   SLATEC
   !***
@@ -85,7 +84,7 @@ SUBROUTINE HSTART(F,Neq,A,B,Y,Yprime,Etol,Morder,Small,Big,Spy,Pv,Yp,Sf,H)
   !             elements are positive.  Following the first integration
   !             step, the tolerances are expected to be used by the
   !             integrator in an error test which roughly requires that
-  !                        ABS(local error) .LE. ETOL
+  !                        ABS(local error) <= ETOL
   !             for each vector component.
   !
   !      MORDER -- This is the order of the formula which will be used by
@@ -97,7 +96,7 @@ SUBROUTINE HSTART(F,Neq,A,B,Y,Yprime,Etol,Morder,Small,Big,Spy,Pv,Yp,Sf,H)
   !             numbers which are too small relative to the precision of
   !             floating point arithmetic.  SMALL  should be set to
   !             (approximately) the smallest positive real number such
-  !             that  (1.+SMALL) .GT. 1.  on the machine being used. the
+  !             that  (1.+SMALL) > 1.  on the machine being used. the
   !             quantity  SMALL**(3/8)  is used in computing increments of
   !             variables for approximating derivatives by differences.
   !             also the algorithm will not compute a starting step length
@@ -171,10 +170,10 @@ SUBROUTINE HSTART(F,Neq,A,B,Y,Yprime,Etol,Morder,Small,Big,Spy,Pv,Yp,Sf,H)
   !     COMPUTE A WEIGHTED BOUND (FBND) ON THE FIRST DERIVATIVE LOCALLY.
   !
   da = SIGN(MAX(MIN(relper*ABS(A),absdx),100.*Small*ABS(A)),dx)
-  IF ( da==0. ) da = relper*dx
+  IF( da==0. ) da = relper*dx
   CALL F(A+da,Y,Sf)
   !
-  IF ( Morder==1 ) THEN
+  IF( Morder==1 ) THEN
     !
     DO j = 1, Neq
       Spy(j) = Sf(j)/Etol(j)
@@ -193,7 +192,7 @@ SUBROUTINE HSTART(F,Neq,A,B,Y,Yprime,Etol,Morder,Small,Big,Spy,Pv,Yp,Sf,H)
   !
   delf = HVNRM(Pv,Neq)
   dfdxb = Big
-  IF ( delf<Big*ABS(da) ) dfdxb = delf/ABS(da)
+  IF( delf<Big*ABS(da) ) dfdxb = delf/ABS(da)
   ypnorm = HVNRM(Yp,Neq)
   fbnd = MAX(HVNRM(Spy,Neq),ypnorm)
   !
@@ -216,7 +215,7 @@ SUBROUTINE HSTART(F,Neq,A,B,Y,Yprime,Etol,Morder,Small,Big,Spy,Pv,Yp,Sf,H)
   !     ALSO CHOOSE THE LARGEST BOUND (FBND) FOR THE FIRST DERIVATIVE.
   !     NO ATTEMPT IS MADE TO KEEP THE PERTURBATION VECTOR SIZE CONSTANT.
   !
-  IF ( ypnorm==0. ) THEN
+  IF( ypnorm==0. ) THEN
     !                       CANNOT HAVE A NULL PERTURBATION VECTOR
     icase = 2
     DO j = 1, Neq
@@ -237,16 +236,16 @@ SUBROUTINE HSTART(F,Neq,A,B,Y,Yprime,Etol,Morder,Small,Big,Spy,Pv,Yp,Sf,H)
   DO k = 1, lk
     !                       SET YPNORM AND DELX
     ypnorm = HVNRM(Yp,Neq)
-    IF ( icase==1.OR.icase==3 ) THEN
+    IF( icase==1 .OR. icase==3 ) THEN
       !                       TRY TO ENFORCE MEANINGFUL PERTURBATION VALUES
       delx = dx
-      IF ( ABS(delx)*ypnorm<relper*ynorm ) THEN
+      IF( ABS(delx)*ypnorm<relper*ynorm ) THEN
         delxb = Big
-        IF ( relper*ynorm<Big*ypnorm ) delxb = relper*ynorm/ypnorm
+        IF( relper*ynorm<Big*ypnorm ) delxb = relper*ynorm/ypnorm
         delx = SIGN(delxb,dx)
       END IF
       DO j = 1, Neq
-        IF ( ABS(delx*Yp(j))>Etol(j) ) delx = SIGN(Etol(j)/Yp(j),dx)
+        IF( ABS(delx*Yp(j))>Etol(j) ) delx = SIGN(Etol(j)/Yp(j),dx)
       END DO
     ELSE
       delx = SIGN(1.0,dx)
@@ -255,7 +254,7 @@ SUBROUTINE HSTART(F,Neq,A,B,Y,Yprime,Etol,Morder,Small,Big,Spy,Pv,Yp,Sf,H)
     DO j = 1, Neq
       Pv(j) = Y(j) + delx*Yp(j)
     END DO
-    IF ( k==2 ) THEN
+    IF( k==2 ) THEN
       !                       USE A SHIFTED VALUE OF THE INDEPENDENT VARIABLE
       !                                             IN COMPUTING ONE ESTIMATE
       CALL F(A+da,Pv,Yp)
@@ -272,7 +271,7 @@ SUBROUTINE HSTART(F,Neq,A,B,Y,Yprime,Etol,Morder,Small,Big,Spy,Pv,Yp,Sf,H)
     END IF
     !                       CHOOSE LARGEST BOUND ON THE WEIGHTED FIRST
     !                                                   DERIVATIVE
-    IF ( Morder==1 ) THEN
+    IF( Morder==1 ) THEN
       DO j = 1, Neq
         Yp(j) = Yp(j)/Etol(j)
       END DO
@@ -284,25 +283,25 @@ SUBROUTINE HSTART(F,Neq,A,B,Y,Yprime,Etol,Morder,Small,Big,Spy,Pv,Yp,Sf,H)
     fbnd = MAX(fbnd,HVNRM(Yp,Neq))
     !                       COMPUTE BOUND ON A LOCAL LIPSCHITZ CONSTANT
     delf = HVNRM(Pv,Neq)
-    IF ( delf/=0. ) THEN
+    IF( delf/=0. ) THEN
       dely = ABS(delx)*ypnorm
-      IF ( delf>=Big*dely ) EXIT
+      IF( delf>=Big*dely ) EXIT
       dfdub = MAX(dfdub,delf/dely)
     END IF
     !
-    IF ( k==lk ) GOTO 100
+    IF( k==lk ) GOTO 100
     !                       CHOOSE NEXT PERTURBATION VECTOR
     DO j = 1, Neq
-      IF ( k==lk-1 ) THEN
+      IF( k==lk-1 ) THEN
         icase = 4
         dy = MAX(relper*ABS(Y(j)),Etol(j))
       ELSE
         icase = 3
         dy = ABS(Pv(j))
-        IF ( dy==0. ) dy = MAX(delf,Etol(j))
+        IF( dy==0. ) dy = MAX(delf,Etol(j))
       END IF
-      IF ( Spy(j)==0. ) Spy(j) = Yp(j)
-      IF ( Spy(j)/=0. ) dy = SIGN(dy,Spy(j))
+      IF( Spy(j)==0. ) Spy(j) = Yp(j)
+      IF( Spy(j)/=0. ) dy = SIGN(dy,Spy(j))
       Yp(j) = dy
     END DO
   END DO
@@ -325,17 +324,17 @@ SUBROUTINE HSTART(F,Neq,A,B,Y,Yprime,Etol,Morder,Small,Big,Spy,Pv,Yp,Sf,H)
   !                       ABS(B-A).   (UNLESS  B  IS TOO CLOSE TO  A)
   H = absdx
   !
-  IF ( ydpb/=0..OR.fbnd/=0. ) THEN
+  IF( ydpb/=0. .OR. fbnd/=0. ) THEN
     !
-    IF ( ydpb/=0. ) THEN
+    IF( ydpb/=0. ) THEN
       !
       !                       SECOND DERIVATIVE TERM (YDPB) IS NON-ZERO
       srydpb = SQRT(0.5*ydpb)
-      IF ( 1.0<srydpb*absdx ) H = 1./srydpb
+      IF( 1.0<srydpb*absdx ) H = 1./srydpb
     ELSE
       !
       !                       ONLY SECOND DERIVATIVE TERM (YDPB) IS ZERO
-      IF ( 1.0<fbnd*absdx ) H = 1./fbnd
+      IF( 1.0<fbnd*absdx ) H = 1./fbnd
     END IF
     !
     !                       BOTH FIRST DERIVATIVE TERM (FBND) AND SECOND
@@ -344,7 +343,7 @@ SUBROUTINE HSTART(F,Neq,A,B,Y,Yprime,Etol,Morder,Small,Big,Spy,Pv,Yp,Sf,H)
   !
   !                       FURTHER RESTRICT THE STEP LENGTH TO BE NOT
   !                                                 BIGGER THAN  1/DFDUB
-  IF ( H*dfdub>1. ) H = 1./dfdub
+  IF( H*dfdub>1. ) H = 1./dfdub
   !
   !                       FINALLY, RESTRICT THE STEP LENGTH TO BE NOT
   !                       SMALLER THAN  100*SMALL*ABS(A).  HOWEVER, IF
@@ -352,7 +351,7 @@ SUBROUTINE HSTART(F,Neq,A,B,Y,Yprime,Etol,Morder,Small,Big,Spy,Pv,Yp,Sf,H)
   !                       THE ALGORITHM RETURNS  SMALL*ABS(B)  FOR THE
   !                                                       STEP LENGTH.
   H = MAX(H,100.*Small*ABS(A))
-  IF ( H==0. ) H = Small*ABS(B)
+  IF( H==0. ) H = Small*ABS(B)
   !
   !                       NOW SET DIRECTION OF INTEGRATION
   H = SIGN(H,dx)

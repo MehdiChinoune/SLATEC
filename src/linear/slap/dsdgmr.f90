@@ -1,8 +1,7 @@
 !** DSDGMR
 SUBROUTINE DSDGMR(N,B,X,Nelt,Ia,Ja,A,Isym,Nsave,Tol,Itmax,Iter,Err,&
     Ierr,Iunit,Rwork,Lenw,Iwork,Leniw)
-  !>
-  !  Diagonally scaled GMRES iterative sparse Ax=b solver.
+  !> Diagonally scaled GMRES iterative sparse Ax=b solver.
   !            This routine uses the generalized minimum residual
   !            (GMRES) method with diagonal scaling to solve possibly
   !            non-symmetric linear systems of the form: Ax = b.
@@ -200,11 +199,11 @@ SUBROUTINE DSDGMR(N,B,X,Nelt,Ia,Ja,A,Isym,Nsave,Tol,Itmax,Iter,Err,&
   !       the size  of the  scaled norm of  the residual  R(L)  =  B -
   !       A*X(L).  The actual stopping test is either:
   !
-  !               norm(SB*(B-A*X(L))) .le. TOL*norm(SB*B),
+  !               norm(SB*(B-A*X(L))) <= TOL*norm(SB*B),
   !
   !       for right preconditioning, or
   !
-  !               norm(SB*(M-inverse)*(B-A*X(L))) .le.
+  !               norm(SB*(M-inverse)*(B-A*X(L))) <=
   !                       TOL*norm(SB*(M-inverse)*B),
   !
   !       for left preconditioning, where norm() denotes the Euclidean
@@ -301,7 +300,7 @@ SUBROUTINE DSDGMR(N,B,X,Nelt,Ia,Ja,A,Isym,Nsave,Tol,Itmax,Iter,Err,&
   !
   !- Cautions:
   !     This routine will attempt to write to the Fortran logical output
-  !     unit IUNIT, if IUNIT .ne. 0.  Thus, the user must make sure that
+  !     unit IUNIT, if IUNIT /= 0.  Thus, the user must make sure that
   !     this logical unit is attached to a file or terminal before calling
   !     this routine with a non-zero value for IUNIT.  This routine does
   !     not check for the validity of a non-zero IUNIT unit number.
@@ -327,20 +326,20 @@ SUBROUTINE DSDGMR(N,B,X,Nelt,Ia,Ja,A,Isym,Nsave,Tol,Itmax,Iter,Err,&
   !   920929  Corrected format of references.  (FNF)
 
   !     .. Parameters ..
-  INTEGER , PARAMETER :: LOCRB = 1, LOCIB = 11
+  INTEGER, PARAMETER :: LOCRB = 1, LOCIB = 11
   !     .. Scalar Arguments ..
   REAL(DP) :: Err, Tol
-  INTEGER Ierr, Isym, Iter, Itmax, Iunit, Leniw, Lenw, N, Nelt, Nsave
+  INTEGER :: Ierr, Isym, Iter, Itmax, Iunit, Leniw, Lenw, N, Nelt, Nsave
   !     .. Array Arguments ..
   REAL(DP) :: A(Nelt), B(N), Rwork(Lenw), X(N)
-  INTEGER Ia(Nelt), Iwork(Leniw), Ja(Nelt)
+  INTEGER :: Ia(Nelt), Iwork(Leniw), Ja(Nelt)
   !     .. Local Scalars ..
-  INTEGER locdin, locigw, lociw, locrgw, locw, myitol
+  INTEGER :: locdin, locigw, lociw, locrgw, locw, myitol
   !* FIRST EXECUTABLE STATEMENT  DSDGMR
   !
   Ierr = 0
   Err = 0
-  IF ( Nsave<=1 ) THEN
+  IF( Nsave<=1 ) THEN
     Ierr = 3
     RETURN
   END IF
@@ -362,7 +361,7 @@ SUBROUTINE DSDGMR(N,B,X,Nelt,Ia,Ja,A,Isym,Nsave,Tol,Itmax,Iter,Err,&
   !
   !         Check the workspace allocations.
   CALL DCHKW('DSDGMR',lociw,Leniw,locw,Lenw,Ierr,Iter,Err)
-  IF ( Ierr/=0 ) RETURN
+  IF( Ierr/=0 ) RETURN
   !
   !         Compute the inverse of the diagonal of the matrix.
   CALL DSDS(N,Nelt,Ja,A,Rwork(locdin))
@@ -382,6 +381,6 @@ SUBROUTINE DSDGMR(N,B,X,Nelt,Ia,Ja,A,Isym,Nsave,Tol,Itmax,Iter,Err,&
     Ierr,Iunit,Rwork,Rwork,Rwork(locrgw),Lenw-locrgw,Iwork(locigw)&
     ,20,Rwork,Iwork)
   !
-  IF ( Iter>Itmax ) Ierr = 2
+  IF( Iter>Itmax ) Ierr = 2
   !------------- LAST LINE OF DSDGMR FOLLOWS ----------------------------
 END SUBROUTINE DSDGMR

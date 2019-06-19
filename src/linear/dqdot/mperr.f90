@@ -1,7 +1,6 @@
 !** MPERR
 SUBROUTINE MPERR
-  !>
-  !  Subsidiary to DQDOTA and DQDOTI
+  !> Subsidiary to DQDOTA and DQDOTI
   !***
   ! **Library:**   SLATEC
   !***

@@ -1,7 +1,6 @@
 !** ZBESY
 SUBROUTINE ZBESY(Zr,Zi,Fnu,Kode,N,Cyr,Cyi,Nz,Cwrkr,Cwrki,Ierr)
-  !>
-  !  Compute a sequence of the Bessel functions Y(a,z) for
+  !> Compute a sequence of the Bessel functions Y(a,z) for
   !            complex argument z and real nonnegative orders a=b,b+1,
   !            b+2,... where b>0.  A scaling option is available to
   !            help avoid overflow.
@@ -165,29 +164,29 @@ SUBROUTINE ZBESY(Zr,Zi,Fnu,Kode,N,Cyr,Cyi,Nz,Cwrkr,Cwrki,Ierr)
   !   920811  Prologue revised.  (DWL)
   USE service, ONLY : XERMSG, D1MACH, I1MACH
   !     COMPLEX CWRK,CY,C1,C2,EX,HCI,Z,ZU,ZV
-  INTEGER i, Ierr, k, Kode, k1, k2, N, Nz, nz1, nz2
+  INTEGER :: i, Ierr, k, Kode, k1, k2, N, Nz, nz1, nz2
   REAL(DP) :: Cwrki(N), Cwrkr(N), Cyi(N), Cyr(N), c1i, c1r, c2i, c2r, &
     elim, exi, exr, ey, Fnu, hcii, sti, str, tay, &
     Zi, Zr, ascle, rtol, atol, aa, bb, tol, r1m5
   !* FIRST EXECUTABLE STATEMENT  ZBESY
   Ierr = 0
   Nz = 0
-  IF ( Zr==0.0D0.AND.Zi==0.0D0 ) Ierr = 1
-  IF ( Fnu<0.0D0 ) Ierr = 1
-  IF ( Kode<1.OR.Kode>2 ) Ierr = 1
-  IF ( N<1 ) Ierr = 1
-  IF ( Ierr/=0 ) RETURN
+  IF( Zr==0.0D0 .AND. Zi==0.0D0 ) Ierr = 1
+  IF( Fnu<0.0D0 ) Ierr = 1
+  IF( Kode<1 .OR. Kode>2 ) Ierr = 1
+  IF( N<1 ) Ierr = 1
+  IF( Ierr/=0 ) RETURN
   hcii = 0.5D0
   CALL ZBESH(Zr,Zi,Fnu,Kode,1,N,Cyr,Cyi,nz1,Ierr)
-  IF ( Ierr/=0.AND.Ierr/=3 ) THEN
+  IF( Ierr/=0 .AND. Ierr/=3 ) THEN
     Nz = 0
   ELSE
     CALL ZBESH(Zr,Zi,Fnu,Kode,2,N,Cwrkr,Cwrki,nz2,Ierr)
-    IF ( Ierr/=0.AND.Ierr/=3 ) THEN
+    IF( Ierr/=0 .AND. Ierr/=3 ) THEN
       Nz = 0
     ELSE
       Nz = MIN(nz1,nz2)
-      IF ( Kode==2 ) THEN
+      IF( Kode==2 ) THEN
         tol = MAX(D1MACH(4),1.0D-18)
         k1 = I1MACH(15)
         k2 = I1MACH(16)
@@ -201,8 +200,8 @@ SUBROUTINE ZBESY(Zr,Zi,Fnu,Kode,N,Cyr,Cyi,Nz,Cwrkr,Cwrki,Ierr)
         exi = SIN(Zr)
         ey = 0.0D0
         tay = ABS(Zi+Zi)
-        IF ( tay<elim ) ey = EXP(-tay)
-        IF ( Zi<0.0D0 ) THEN
+        IF( tay<elim ) ey = EXP(-tay)
+        IF( Zi<0.0D0 ) THEN
           c1r = exr
           c1i = exi
           c2r = exr*ey
@@ -226,7 +225,7 @@ SUBROUTINE ZBESY(Zr,Zi,Fnu,Kode,N,Cyr,Cyi,Nz,Cwrkr,Cwrki,Ierr)
           aa = Cwrkr(i)
           bb = Cwrki(i)
           atol = 1.0D0
-          IF ( MAX(ABS(aa),ABS(bb))<=ascle ) THEN
+          IF( MAX(ABS(aa),ABS(bb))<=ascle ) THEN
             aa = aa*rtol
             bb = bb*rtol
             atol = tol
@@ -236,7 +235,7 @@ SUBROUTINE ZBESY(Zr,Zi,Fnu,Kode,N,Cyr,Cyi,Nz,Cwrkr,Cwrki,Ierr)
           aa = Cyr(i)
           bb = Cyi(i)
           atol = 1.0D0
-          IF ( MAX(ABS(aa),ABS(bb))<=ascle ) THEN
+          IF( MAX(ABS(aa),ABS(bb))<=ascle ) THEN
             aa = aa*rtol
             bb = bb*rtol
             atol = tol
@@ -245,7 +244,7 @@ SUBROUTINE ZBESY(Zr,Zi,Fnu,Kode,N,Cyr,Cyi,Nz,Cwrkr,Cwrki,Ierr)
           sti = sti - (aa*c1i+bb*c1r)*atol
           Cyr(i) = -sti*hcii
           Cyi(i) = str*hcii
-          IF ( str==0.0D0.AND.sti==0.0D0.AND.ey==0.0D0 ) Nz = Nz + 1
+          IF( str==0.0D0 .AND. sti==0.0D0 .AND. ey==0.0D0 ) Nz = Nz + 1
         END DO
         RETURN
       ELSE

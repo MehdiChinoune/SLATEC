@@ -1,7 +1,6 @@
 !** STOR1
 SUBROUTINE STOR1(U,Yh,V,Yp,Ntemp,Ndisk,Ntape)
-  !>
-  !  Subsidiary to BVSUP
+  !> Subsidiary to BVSUP
   !***
   ! **Library:**   SLATEC
   !***
@@ -43,19 +42,19 @@ SUBROUTINE STOR1(U,Yh,V,Yp,Ntemp,Ndisk,Ntape)
   DO j = 1, nctnf
     U(j) = Yh(j)
   END DO
-  IF ( inhomo_com/=1 ) THEN
+  IF( inhomo_com/=1 ) THEN
     !
     !   ZERO PARTICULAR SOLUTION
     !
-    IF ( Ntemp==1 ) RETURN
+    IF( Ntemp==1 ) RETURN
     DO j = 1, ncomp_com
       V(j) = 0.
     END DO
-    IF ( Ndisk==1 ) WRITE (Ntape) (V(j),j=1,ncomp_com), (U(j),j=1,nctnf)
+    IF( Ndisk==1 ) WRITE (Ntape) (V(j),j=1,ncomp_com), (U(j),j=1,nctnf)
     !
     !   NONZERO PARTICULAR SOLUTION
     !
-  ELSEIF ( Ntemp==0 ) THEN
+  ELSEIF( Ntemp==0 ) THEN
     !
     DO j = 1, ncomp_com
       V(j) = c_com*Yp(j)
@@ -63,7 +62,7 @@ SUBROUTINE STOR1(U,Yh,V,Yp,Ntemp,Ndisk,Ntape)
     !
     !  IS OUTPUT INFORMATION TO BE WRITTEN TO DISK
     !
-    IF ( Ndisk==1 ) WRITE (Ntape) (V(j),j=1,ncomp_com), (U(j),j=1,nctnf)
+    IF( Ndisk==1 ) WRITE (Ntape) (V(j),j=1,ncomp_com), (U(j),j=1,nctnf)
   ELSE
     !
     DO j = 1, ncomp_com

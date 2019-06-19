@@ -1,7 +1,6 @@
 !** NUMXER
 INTEGER FUNCTION NUMXER(Nerr)
-  !>
-  !  Return the most recent error number.
+  !> Return the most recent error number.
   !***
   ! **Library:**   SLATEC (XERROR)
   !***
@@ -33,7 +32,7 @@ INTEGER FUNCTION NUMXER(Nerr)
   !   910411  Made user-callable and added KEYWORDS section.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
-  INTEGER Nerr
+  INTEGER :: Nerr
   !* FIRST EXECUTABLE STATEMENT  NUMXER
   Nerr = J4SAVE(1,0,.FALSE.)
   NUMXER = Nerr

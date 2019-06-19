@@ -1,7 +1,6 @@
 !** DCOT
 REAL(DP) FUNCTION DCOT(X)
-  !>
-  !  Compute the cotangent.
+  !> Compute the cotangent.
   !***
   ! **Library:**   SLATEC (FNLIB)
   !***
@@ -54,15 +53,15 @@ REAL(DP) FUNCTION DCOT(X)
   REAL(DP), PARAMETER :: pi2rec = .011619772367581343075535053490057D0
   LOGICAL, SAVE :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  DCOT
-  IF ( first ) THEN
+  IF( first ) THEN
     nterms = INITDS(cotcs,15,0.1*D1MACH(3))
     first = .FALSE.
   END IF
   !
   y = ABS(X)
-  IF ( y<xmin ) CALL XERMSG('DCOT',&
+  IF( y<xmin ) CALL XERMSG('DCOT',&
     'ABS(X) IS ZERO OR SO SMALL DCOT OVERFLOWS',2,2)
-  IF ( y>xmax ) CALL XERMSG('DCOT',&
+  IF( y>xmax ) CALL XERMSG('DCOT',&
     'NO PRECISION BECAUSE ABS(X) IS TOO BIG',3,2)
   !
   ! CAREFULLY COMPUTE Y * (2/PI) = (AINT(Y) + REM(Y)) * (.625 + PI2REC)
@@ -79,16 +78,16 @@ REAL(DP) FUNCTION DCOT(X)
   y = y - ainty2
   !
   ifn = INT( MOD(ainty,2.0D0) )
-  IF ( ifn==1 ) y = 1.0D0 - y
+  IF( ifn==1 ) y = 1.0D0 - y
   !
-  IF ( ABS(X)>0.5D0.AND.y<ABS(X)*sqeps ) CALL XERMSG('DCOT',&
-    'ANSWER LT HALF PRECISION, ABS(X) TOO BIG OR X NEAR N*PI (N.NE.0)',1,1)
+  IF( ABS(X)>0.5D0 .AND. y<ABS(X)*sqeps ) CALL XERMSG('DCOT',&
+    'ANSWER LT HALF PRECISION, ABS(X) TOO BIG OR X NEAR N*PI (N/=0)',1,1)
   !
-  IF ( y<=0.25D0 ) THEN
+  IF( y<=0.25D0 ) THEN
     DCOT = 1.0D0/X
-    IF ( y>xsml ) DCOT = (0.5D0+DCSEVL(32.0D0*y*y-1.D0,cotcs,nterms))/y
+    IF( y>xsml ) DCOT = (0.5D0+DCSEVL(32.0D0*y*y-1.D0,cotcs,nterms))/y
     !
-  ELSEIF ( y>0.5D0 ) THEN
+  ELSEIF( y>0.5D0 ) THEN
     !
     DCOT = (0.5D0+DCSEVL(2.D0*y*y-1.D0,cotcs,nterms))/(.25D0*y)
     DCOT = (DCOT*DCOT-1.D0)*0.5D0/DCOT
@@ -98,7 +97,7 @@ REAL(DP) FUNCTION DCOT(X)
     DCOT = (DCOT*DCOT-1.D0)*0.5D0/DCOT
   END IF
   !
-  IF ( X/=0.D0 ) DCOT = SIGN(DCOT,X)
-  IF ( ifn==1 ) DCOT = -DCOT
+  IF( X/=0.D0 ) DCOT = SIGN(DCOT,X)
+  IF( ifn==1 ) DCOT = -DCOT
   !
 END FUNCTION DCOT

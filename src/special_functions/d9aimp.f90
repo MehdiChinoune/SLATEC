@@ -1,7 +1,6 @@
 !** D9AIMP
 SUBROUTINE D9AIMP(X,Ampl,Theta)
-  !>
-  !  Evaluate the Airy modulus and phase.
+  !> Evaluate the Airy modulus and phase.
   !***
   ! **Library:**   SLATEC (FNLIB)
   !***
@@ -15,7 +14,7 @@ SUBROUTINE D9AIMP(X,Ampl,Theta)
   !***
   ! **Description:**
   !
-  ! Evaluate the Airy modulus and phase for X .LE. -1.0
+  ! Evaluate the Airy modulus and phase for X <= -1.0
   !
   ! Series for AM20       on the interval -1.56250E-02 to  0.
   !                                        with weighted error   3.12E-32
@@ -265,7 +264,7 @@ SUBROUTINE D9AIMP(X,Ampl,Theta)
   REAL(DP), PARAMETER ::  pi4 = 0.78539816339744830961566084581988D0
   LOGICAL, SAVE :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  D9AIMP
-  IF ( first ) THEN
+  IF( first ) THEN
     nam20 = INITDS(am20cs,57,eta)
     nath0 = INITDS(ath0cs,53,eta)
     nam21 = INITDS(am21cs,60,eta)
@@ -275,15 +274,15 @@ SUBROUTINE D9AIMP(X,Ampl,Theta)
     first = .FALSE.
   END IF
   !
-  IF ( X<(-4.0D0) ) THEN
+  IF( X<(-4.0D0) ) THEN
     z = 1.0D0
-    IF ( X>xsml ) z = 128.D0/X**3 + 1.0D0
+    IF( X>xsml ) z = 128.D0/X**3 + 1.0D0
     Ampl = 0.3125D0 + DCSEVL(z,am20cs,nam20)
     Theta = -0.625D0 + DCSEVL(z,ath0cs,nath0)
     !
-  ELSEIF ( X>=(-2.0D0) ) THEN
+  ELSEIF( X>=(-2.0D0) ) THEN
     !
-    IF ( X>=(-1.0D0) ) CALL XERMSG('D9AIMP','X MUST BE LE -1.0',1,2)
+    IF( X>=(-1.0D0) ) CALL XERMSG('D9AIMP','X MUST BE LE -1.0',1,2)
     !
     z = (16.D0/X**3+9.0D0)/7.0D0
     Ampl = 0.3125D0 + DCSEVL(z,am22cs,nam22)

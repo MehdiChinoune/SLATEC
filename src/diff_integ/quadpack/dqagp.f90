@@ -1,8 +1,7 @@
 !** DQAGP
 SUBROUTINE DQAGP(F,A,B,Npts2,Points,Epsabs,Epsrel,Result,Abserr,Neval,Ier,&
     Leniw,Lenw,Last,Iwork,Work)
-  !>
-  !  The routine calculates an approximation result to a given
+  !> The routine calculates an approximation result to a given
   !            definite integral I = Integral of F over (A,B),
   !            hopefully satisfying following claim for accuracy
   !            break points of the integration interval, where local
@@ -48,8 +47,8 @@ SUBROUTINE DQAGP(F,A,B,Npts2,Points,Epsabs,Epsrel,Result,Abserr,Neval,Ier,&
   !            NPTS2  - Integer
   !                     Number equal to two more than the number of
   !                     user-supplied break points within the integration
-  !                     range, NPTS.GE.2.
-  !                     If NPTS2.LT.2, The routine will end with IER = 6.
+  !                     range, NPTS>=2.
+  !                     If NPTS2<2, The routine will end with IER = 6.
   !
   !            POINTS - Double precision
   !                     Vector of dimension NPTS2, the first (NPTS2-2)
@@ -62,8 +61,8 @@ SUBROUTINE DQAGP(F,A,B,Npts2,Points,Epsabs,Epsrel,Result,Abserr,Neval,Ier,&
   !                     Absolute accuracy requested
   !            EPSREL - Double precision
   !                     Relative accuracy requested
-  !                     If  EPSABS.LE.0
-  !                     And EPSREL.LT.MAX(50*REL.MACH.ACC.,0.5D-28),
+  !                     If  EPSABS<=0
+  !                     And EPSREL<MAX(50*REL.MACH.ACC.,0.5D-28),
   !                     The routine will end with IER = 6.
   !
   !         ON RETURN
@@ -81,7 +80,7 @@ SUBROUTINE DQAGP(F,A,B,Npts2,Points,Epsabs,Epsrel,Result,Abserr,Neval,Ier,&
   !                     IER = 0 Normal and reliable termination of the
   !                             routine. It is assumed that the requested
   !                             accuracy has been achieved.
-  !                     IER.GT.0 Abnormal termination of the routine.
+  !                     IER>0 Abnormal termination of the routine.
   !                             The estimates for integral and error are
   !                             less reliable. it is assumed that the
   !                             requested accuracy has not been achieved.
@@ -119,13 +118,13 @@ SUBROUTINE DQAGP(F,A,B,Npts2,Points,Epsabs,Epsrel,Result,Abserr,Neval,Ier,&
   !                         = 5 The integral is probably divergent, or
   !                             slowly convergent. it must be noted that
   !                             divergence can occur with any other value
-  !                             of IER.GT.0.
+  !                             of IER>0.
   !                         = 6 The input is invalid because
-  !                             NPTS2.LT.2 or
+  !                             NPTS2<2 or
   !                             break points are specified outside
   !                             the integration range or
-  !                             (EPSABS.LE.0 and
-  !                              EPSREL.LT.MAX(50*REL.MACH.ACC.,0.5D-28))
+  !                             (EPSABS<=0 and
+  !                              EPSREL<MAX(50*REL.MACH.ACC.,0.5D-28))
   !                             RESULT, ABSERR, NEVAL, LAST are set to
   !                             zero.  Except when LENIW or LENW or NPTS2
   !                             is invalid, IWORK(1), IWORK(LIMIT+1),
@@ -140,14 +139,14 @@ SUBROUTINE DQAGP(F,A,B,Npts2,Points,Epsabs,Epsrel,Result,Abserr,Neval,Ier,&
   !                    LENIW determines LIMIT = (LENIW-NPTS2)/2,
   !                    which is the maximum number of subintervals in the
   !                    partition of the given integration interval (A,B),
-  !                    LENIW.GE.(3*NPTS2-2).
-  !                    If LENIW.LT.(3*NPTS2-2), the routine will end with
+  !                    LENIW>=(3*NPTS2-2).
+  !                    If LENIW<(3*NPTS2-2), the routine will end with
   !                    IER = 6.
   !
   !            LENW  - Integer
   !                    Dimensioning parameter for WORK
   !                    LENW must be at least LENIW*2-NPTS2.
-  !                    If LENW.LT.LENIW*2-NPTS2, the routine will end
+  !                    If LENW<LENIW*2-NPTS2, the routine will end
   !                    with IER = 6.
   !
   !            LAST  - Integer
@@ -163,7 +162,7 @@ SUBROUTINE DQAGP(F,A,B,Npts2,Points,Epsabs,Epsrel,Result,Abserr,Neval,Ier,&
   !                    pointers to the error estimates over the
   !                    subintervals, such that WORK(LIMIT*3+IWORK(1)),...,
   !                    WORK(LIMIT*3+IWORK(K)) form a decreasing
-  !                    sequence, with K = LAST if LAST.LE.(LIMIT/2+2), and
+  !                    sequence, with K = LAST if LAST<=(LIMIT/2+2), and
   !                    K = LIMIT+1-LAST otherwise
   !                    IWORK(LIMIT+1), ...,IWORK(LIMIT+LAST) Contain the
   !                     subdivision levels of the subintervals, i.e.
@@ -223,7 +222,7 @@ SUBROUTINE DQAGP(F,A,B,Npts2,Points,Epsabs,Epsrel,Result,Abserr,Neval,Ier,&
   Last = 0
   Result = 0.0D+00
   Abserr = 0.0D+00
-  IF ( Leniw>=(3*Npts2-2).AND.Lenw>=(Leniw*2-Npts2).AND.Npts2>=2 ) THEN
+  IF( Leniw>=(3*Npts2-2) .AND. Lenw>=(Leniw*2-Npts2) .AND. Npts2>=2 ) THEN
     !
     !         PREPARE CALL FOR DQAGPE.
     !
@@ -241,6 +240,6 @@ SUBROUTINE DQAGP(F,A,B,Npts2,Points,Epsabs,Epsrel,Result,Abserr,Neval,Ier,&
     !
     lvl = 0
   END IF
-  IF ( Ier==6 ) lvl = 1
-  IF ( Ier/=0 ) CALL XERMSG('DQAGP','ABNORMAL RETURN',Ier,lvl)
+  IF( Ier==6 ) lvl = 1
+  IF( Ier/=0 ) CALL XERMSG('DQAGP','ABNORMAL RETURN',Ier,lvl)
 END SUBROUTINE DQAGP

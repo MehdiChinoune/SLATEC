@@ -1,7 +1,6 @@
 !** DQNC79
 SUBROUTINE DQNC79(FUN,A,B,Err,Ans,Ierr,K)
-  !>
-  !  Integrate a function using a 7-point adaptive Newton-Cotes
+  !> Integrate a function using a 7-point adaptive Newton-Cotes
   !            quadrature rule.
   !***
   ! **Library:**   SLATEC
@@ -48,7 +47,7 @@ SUBROUTINE DQNC79(FUN,A,B,Err,Ans,Ierr,K)
   !       A    - lower limit of integration
   !       B    - upper limit of integration (may be less than A)
   !       ERR  - is a requested error tolerance.  Normally, pick a value
-  !              0 .LT. ERR .LT. 1.0D-8.
+  !              0 < ERR < 1.0D-8.
   !
   !     --Output--
   !       ANS  - computed value of the integral.  Hopefully, ANS is
@@ -61,7 +60,7 @@ SUBROUTINE DQNC79(FUN,A,B,Err,Ans,Ierr,K)
   !            - Abnormal code
   !               2  ANS probably does not meet requested error tolerance.
   !       K    - the number of function evaluations actually used to do
-  !              the integration.  A value of K .GT. 1000 indicates a
+  !              the integration.  A value of K > 1000 indicates a
   !              difficult problem; other programs may be more efficient.
   !              DQNC79 will gracefully give up if K exceeds 2000.
   !
@@ -110,23 +109,23 @@ SUBROUTINE DQNC79(FUN,A,B,Err,Ans,Ierr,K)
   Ans = 0.0D0
   Ierr = 1
   ce = 0.0D0
-  IF ( A==B ) GOTO 400
+  IF( A==B ) GOTO 400
   lmx = nlmx
   lmn = nlmn
-  IF ( B/=0.0D0 ) THEN
-    IF ( SIGN(1.0D0,B)*A>0.0D0 ) THEN
+  IF( B/=0.0D0 ) THEN
+    IF( SIGN(1.0D0,B)*A>0.0D0 ) THEN
       c = ABS(1.0D0-A/B)
-      IF ( c<=0.1D0 ) THEN
-        IF ( c<=0.0D0 ) GOTO 400
+      IF( c<=0.1D0 ) THEN
+        IF( c<=0.0D0 ) GOTO 400
         nib = INT( 0.5D0 - LOG(c)/LOG(2.0D0) )
         lmx = MIN(nlmx,nbits-nib-4)
-        IF ( lmx<2 ) GOTO 400
+        IF( lmx<2 ) GOTO 400
         lmn = MIN(lmn,lmx)
       END IF
     END IF
   END IF
   tol = MAX(ABS(Err),2.0D0**(5-nbits))
-  IF ( Err==0.0D0 ) tol = SQRT(D1MACH(4))
+  IF( Err==0.0D0 ) tol = SQRT(D1MACH(4))
   eps = tol
   hh(1) = (B-A)/12.0D0
   aa(1) = A
@@ -163,7 +162,7 @@ SUBROUTINE DQNC79(FUN,A,B,Err,Ans,Ierr,K)
   !
   !     Do not bother to test convergence before minimum refinement level
   !
-  IF ( l>=lmn ) THEN
+  IF( l>=lmn ) THEN
     !
     !     Estimate the error in new value for whole interval, Q13
     !
@@ -184,7 +183,7 @@ SUBROUTINE DQNC79(FUN,A,B,Err,Ans,Ierr,K)
     !
     !     Now, did this interval pass or not?
     !
-    IF ( ee<=test ) THEN
+    IF( ee<=test ) THEN
       !
       !     On good intervals accumulate the theoretical estimate
       !
@@ -193,8 +192,8 @@ SUBROUTINE DQNC79(FUN,A,B,Err,Ans,Ierr,K)
       !
       !     Consider the left half of next deeper level
       !
-      IF ( K>kmx ) lmx = MIN(kml,lmx)
-      IF ( l<lmx ) GOTO 200
+      IF( K>kmx ) lmx = MIN(kml,lmx)
+      IF( l<lmx ) GOTO 200
       !
       !     Have hit maximum refinement level -- penalize the cumulative error
       !
@@ -204,11 +203,11 @@ SUBROUTINE DQNC79(FUN,A,B,Err,Ans,Ierr,K)
     !     Update the bank account.  Don't go into debt.
     !
     bank = bank + (ae-ee)
-    IF ( bank<0.0D0 ) bank = 0.0D0
+    IF( bank<0.0D0 ) bank = 0.0D0
     !
     !     Did we just finish a left half or a right half?
     !
-    IF ( lr(l)<=0 ) THEN
+    IF( lr(l)<=0 ) THEN
       !
       !     Proceed to right half at this level
       !
@@ -219,11 +218,11 @@ SUBROUTINE DQNC79(FUN,A,B,Err,Ans,Ierr,K)
       !     Left and right halves are done, so go back up a level
       !
       vr = q13
-      DO WHILE ( l>1 )
-        IF ( l<=17 ) ef = ef*sq2
+      DO WHILE( l>1 )
+        IF( l<=17 ) ef = ef*sq2
         eps = eps*2.0D0
         l = l - 1
-        IF ( lr(l)<=0 ) THEN
+        IF( lr(l)<=0 ) THEN
           vl(l) = vl(l+1) + vr
           GOTO 300
         ELSE
@@ -234,7 +233,7 @@ SUBROUTINE DQNC79(FUN,A,B,Err,Ans,Ierr,K)
       !     Exit
       !
       Ans = vr
-      IF ( ABS(ce)>2.0D0*tol*area ) THEN
+      IF( ABS(ce)>2.0D0*tol*area ) THEN
         Ierr = 2
         CALL XERMSG('DQNC79',&
           'ANS is probably insufficiently accurate.',2,1)
@@ -244,7 +243,7 @@ SUBROUTINE DQNC79(FUN,A,B,Err,Ans,Ierr,K)
   END IF
   200  l = l + 1
   eps = eps*0.5D0
-  IF ( l<=17 ) ef = ef/sq2
+  IF( l<=17 ) ef = ef/sq2
   hh(l) = hh(l-1)*0.5D0
   lr(l) = -1
   aa(l) = aa(l-1)

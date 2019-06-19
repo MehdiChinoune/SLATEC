@@ -1,7 +1,6 @@
 !** XERMSG
 SUBROUTINE XERMSG(Subrou,Messg,Nerr,Level)
-  !>
-  !  Process error messages for SLATEC and other libraries.
+  !> Process error messages for SLATEC and other libraries.
   !***
   ! **Library:**   SLATEC (XERROR)
   !***
@@ -188,7 +187,7 @@ SUBROUTINE XERMSG(Subrou,Messg,Nerr,Level)
   !   891013  REVISED TO CORRECT COMMENTS.
   !   891214  Prologue converted to Version 4.0 format.  (WRB)
   !   900510  Changed test on NERR to be -9999999 < NERR < 99999999, but
-  !           NERR .ne. 0, and on LEVEL to be -2 < LEVEL < 3.  Added
+  !           NERR /= 0, and on LEVEL to be -2 < LEVEL < 3.  Added
   !           LEVEL=-1 logic, changed calls to XERSAV to XERSVE, and
   !           XERCTL to XERCNT.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
@@ -211,7 +210,7 @@ SUBROUTINE XERMSG(Subrou,Messg,Nerr,Level)
   !          CALLING XERMSG.  THE ERROR NUMBER SHOULD BE POSITIVE,
   !          AND THE LEVEL SHOULD BE BETWEEN 0 AND 2.
   !
-  IF ( Nerr<-9999999.OR.Nerr>99999999.OR.Nerr==0.OR.Level<-1.OR.Level>2 ) THEN
+  IF( Nerr<-9999999 .OR. Nerr>99999999 .OR. Nerr==0 .OR. Level<-1 .OR. Level>2 ) THEN
     CALL XERPRN(' ***',-1,'FATAL ERROR IN...$$ XERMSG -- INVALID ERROR NUMBER OR LEVEL$$ JOB ABORT DUE TO FATAL ERROR.',72)
     CALL XERSVE(' ',' ',0,0,0,kdummy)
     PRINT*,' ***XERMSG -- INVALID INPUT'
@@ -225,7 +224,7 @@ SUBROUTINE XERMSG(Subrou,Messg,Nerr,Level)
   !
   !       HANDLE PRINT-ONCE WARNING MESSAGES.
   !
-  IF ( Level==-1.AND.kount>1 ) RETURN
+  IF( Level==-1 .AND. kount>1 ) RETURN
   !
   !       ALLOW TEMPORARY USER OVERRIDE OF THE CONTROL FLAG.
   !
@@ -241,17 +240,17 @@ SUBROUTINE XERMSG(Subrou,Messg,Nerr,Level)
   !       SKIP PRINTING IF THE CONTROL FLAG VALUE AS RESET IN XERCNT IS
   !       ZERO AND THE ERROR IS NOT FATAL.
   !
-  IF ( Level>=2.OR.lkntrl/=0 ) THEN
-    IF ( Level/=0.OR.kount<=maxmes ) THEN
-      IF ( Level/=1.OR.kount<=maxmes.OR.mkntrl/=1 ) THEN
-        IF ( Level/=2.OR.kount<=MAX(1,maxmes) ) THEN
+  IF( Level>=2 .OR. lkntrl/=0 ) THEN
+    IF( Level/=0 .OR. kount<=maxmes ) THEN
+      IF( Level/=1 .OR. kount<=maxmes .OR. mkntrl/=1 ) THEN
+        IF( Level/=2 .OR. kount<=MAX(1,maxmes) ) THEN
           !
           !       ANNOUNCE THE NAMES OF THE LIBRARY AND SUBROUTINE BY BUILDING A
           !       MESSAGE IN CHARACTER VARIABLE TEMP (NOT EXCEEDING 66 CHARACTERS)
           !       AND SENDING IT OUT VIA XERPRN.  PRINT ONLY IF CONTROL FLAG
           !       IS NOT ZERO.
           !
-          IF ( lkntrl/=0 ) THEN
+          IF( lkntrl/=0 ) THEN
             temp(1:21) = 'MESSAGE FROM ROUTINE '
             i = MIN(LEN(Subrou),16)
             temp(22:21+i) = Subrou(1:i)
@@ -279,14 +278,14 @@ SUBROUTINE XERMSG(Subrou,Messg,Nerr,Level)
           !       EXCEED 74 CHARACTERS.
           !       WE SKIP THE NEXT BLOCK IF THE INTRODUCTORY LINE IS NOT NEEDED.
           !
-          IF ( lkntrl>0 ) THEN
+          IF( lkntrl>0 ) THEN
             !
             !       THE FIRST PART OF THE MESSAGE TELLS ABOUT THE LEVEL.
             !
-            IF ( Level<=0 ) THEN
+            IF( Level<=0 ) THEN
               temp(1:20) = 'INFORMATIVE MESSAGE,'
               ltemp = 20
-            ELSEIF ( Level==1 ) THEN
+            ELSEIF( Level==1 ) THEN
               temp(1:30) = 'POTENTIALLY RECOVERABLE ERROR,'
               ltemp = 30
             ELSE
@@ -296,7 +295,7 @@ SUBROUTINE XERMSG(Subrou,Messg,Nerr,Level)
             !
             !       THEN WHETHER THE PROGRAM WILL CONTINUE.
             !
-            IF ( (mkntrl==2.AND.Level>=1).OR.(mkntrl==1.AND.Level==2) ) THEN
+            IF( (mkntrl==2 .AND. Level>=1) .OR. (mkntrl==1 .AND. Level==2) ) THEN
               temp(ltemp+1:ltemp+14) = ' PROG ABORTED,'
               ltemp = ltemp + 14
             ELSE
@@ -306,7 +305,7 @@ SUBROUTINE XERMSG(Subrou,Messg,Nerr,Level)
             !
             !       FINALLY TELL WHETHER THERE SHOULD BE A TRACEBACK.
             !
-            IF ( lkntrl>0 ) THEN
+            IF( lkntrl>0 ) THEN
               temp(ltemp+1:ltemp+20) = ' TRACEBACK REQUESTED'
               ltemp = ltemp + 20
             ELSE
@@ -323,10 +322,10 @@ SUBROUTINE XERMSG(Subrou,Messg,Nerr,Level)
           !       IF LKNTRL IS POSITIVE, WRITE THE ERROR NUMBER AND REQUEST A
           !          TRACEBACK.
           !
-          IF ( lkntrl>0 ) THEN
+          IF( lkntrl>0 ) THEN
             WRITE (temp,'(''ERROR NUMBER = '', I8)') Nerr
             DO i = 16, 22
-              IF ( temp(i:i)/=' ' ) EXIT
+              IF( temp(i:i)/=' ' ) EXIT
             END DO
             !
             CALL XERPRN(' *  ',-1,temp(1:15)//temp(i:23),72)
@@ -335,7 +334,7 @@ SUBROUTINE XERMSG(Subrou,Messg,Nerr,Level)
           !
           !       IF LKNTRL IS NOT ZERO, PRINT A BLANK LINE AND AN END OF MESSAGE.
           !
-          IF ( lkntrl/=0 ) THEN
+          IF( lkntrl/=0 ) THEN
             CALL XERPRN(' *  ',-1,' ',72)
             CALL XERPRN(' ***',-1,'END OF MESSAGE',72)
             CALL XERPRN('    ',0,' ',72)
@@ -348,14 +347,14 @@ SUBROUTINE XERMSG(Subrou,Messg,Nerr,Level)
   !       IF THE ERROR IS NOT FATAL OR THE ERROR IS RECOVERABLE AND THE
   !       CONTROL FLAG IS SET FOR RECOVERY, THEN RETURN.
   !
-  IF ( Level<=0.OR.(Level==1.AND.mkntrl<=1) ) RETURN
+  IF( Level<=0 .OR. (Level==1 .AND. mkntrl<=1) ) RETURN
   !
   !       THE PROGRAM WILL BE STOPPED DUE TO AN UNRECOVERED ERROR OR A
   !       FATAL ERROR.  PRINT THE REASON FOR THE ABORT AND THE ERROR
   !       SUMMARY IF THE CONTROL FLAG AND THE MAXIMUM ERROR COUNT PERMIT.
   !
-  IF ( lkntrl>0.AND.kount<MAX(1,maxmes) ) THEN
-    IF ( Level==1 ) THEN
+  IF( lkntrl>0 .AND. kount<MAX(1,maxmes) ) THEN
+    IF( Level==1 ) THEN
       CALL XERPRN(' ***',-1,'JOB ABORT DUE TO UNRECOVERED ERROR.',72)
     ELSE
       CALL XERPRN(' ***',-1,'JOB ABORT DUE TO FATAL ERROR.',72)

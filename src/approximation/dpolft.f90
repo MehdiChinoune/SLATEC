@@ -1,7 +1,6 @@
 !** DPOLFT
 SUBROUTINE DPOLFT(N,X,Y,W,Maxdeg,Ndeg,Eps,R,Ierr,A)
-  !>
-  !  Fit discrete data in a least squares sense by polynomials
+  !> Fit discrete data in a least squares sense by polynomials
   !            in one variable.
   !***
   ! **Library:**   SLATEC
@@ -35,7 +34,7 @@ SUBROUTINE DPOLFT(N,X,Y,W,Maxdeg,Ndeg,Eps,R,Ierr,A)
   !
   !     Input -- All TYPE REAL variables are DOUBLE PRECISION
   !         N -      the number of data points.  The arrays X, Y and W
-  !                  must be dimensioned at least  N  (N .GE. 1).
+  !                  must be dimensioned at least  N  (N >= 1).
   !         X -      array of values of the independent variable.  These
   !                  values may appear in any order and need not all be
   !                  distinct.
@@ -93,10 +92,10 @@ SUBROUTINE DPOLFT(N,X,Y,W,Maxdeg,Ndeg,Eps,R,Ierr,A)
   !                  parameters has an illegal value and must be corrected
   !                  before  DPOLFT  can proceed.  Valid input results
   !                  when the following restrictions are observed
-  !                       N .GE. 1
-  !                       0 .LE. MAXDEG .LE. N-1  for  EPS .GE. 0.
-  !                       0 .LE. MAXDEG .LE. N-2  for  EPS .LT. 0.
-  !                       W(1)=-1.0  or  W(I) .GT. 0., I=1,...,N .
+  !                       N >= 1
+  !                       0 <= MAXDEG <= N-1  for  EPS >= 0.
+  !                       0 <= MAXDEG <= N-2  for  EPS < 0.
+  !                       W(1)=-1.0  or  W(I) > 0., I=1,...,N .
   !             3 -- cannot satisfy the RMS error requirement with a
   !                  polynomial of degree no greater than  MAXDEG .  Best
   !                  fit found is of degree  MAXDEG .
@@ -146,37 +145,37 @@ SUBROUTINE DPOLFT(N,X,Y,W,Maxdeg,Ndeg,Eps,R,Ierr,A)
   !* FIRST EXECUTABLE STATEMENT  DPOLFT
   m = ABS(N)
   yp = 0.D0
-  IF ( m==0 ) GOTO 700
-  IF ( Maxdeg<0 ) GOTO 700
+  IF( m==0 ) GOTO 700
+  IF( Maxdeg<0 ) GOTO 700
   A(1) = Maxdeg
   mop1 = Maxdeg + 1
-  IF ( m<mop1 ) GOTO 700
-  IF ( Eps<0.0D0.AND.m==mop1 ) GOTO 700
+  IF( m<mop1 ) GOTO 700
+  IF( Eps<0.0D0 .AND. m==mop1 ) GOTO 700
   xm = m
   etst = Eps*Eps*xm
-  IF ( W(1)<0.0D0 ) THEN
+  IF( W(1)<0.0D0 ) THEN
     DO i = 1, m
       W(i) = 1.0D0
     END DO
   ELSE
     DO i = 1, m
-      IF ( W(i)<=0.0D0 ) GOTO 700
+      IF( W(i)<=0.0D0 ) GOTO 700
     END DO
   END IF
-  IF ( Eps<0.0D0 ) THEN
+  IF( Eps<0.0D0 ) THEN
     !
     ! DETERMINE SIGNIFICANCE LEVEL INDEX TO BE USED IN STATISTICAL TEST FOR
     ! CHOOSING DEGREE OF POLYNOMIAL FIT
     !
-    IF ( Eps>(-.55D0) ) THEN
+    IF( Eps>(-.55D0) ) THEN
       ksig = 1
-      IF ( Eps<(-.03D0) ) ksig = 2
-      IF ( Eps<(-.07D0) ) ksig = 3
+      IF( Eps<(-.03D0) ) ksig = 2
+      IF( Eps<(-.07D0) ) ksig = 3
     ELSE
       idegf = m - Maxdeg - 1
       ksig = 1
-      IF ( idegf<10 ) ksig = 2
-      IF ( idegf<5 ) ksig = 3
+      IF( idegf<10 ) ksig = 2
+      IF( idegf<5 ) ksig = 3
     END IF
   END IF
   !
@@ -191,7 +190,7 @@ SUBROUTINE DPOLFT(N,X,Y,W,Maxdeg,Ndeg,Eps,R,Ierr,A)
     A(i) = 0.0D0
   END DO
   w11 = 0.0D0
-  IF ( N<0 ) THEN
+  IF( N<0 ) THEN
     !
     ! CONSTRAINED CASE
     !
@@ -232,8 +231,8 @@ SUBROUTINE DPOLFT(N,X,Y,W,Maxdeg,Ndeg,Eps,R,Ierr,A)
   !
   ! SEE IF POLYNOMIAL OF DEGREE 0 SATISFIES THE DEGREE SELECTION CRITERION
   !
-  IF ( Eps<0 ) GOTO 200
-  IF ( Eps==0 ) GOTO 300
+  IF( Eps<0 ) GOTO 200
+  IF( Eps==0 ) GOTO 300
   GOTO 400
   100 CONTINUE
   DO
@@ -248,7 +247,7 @@ SUBROUTINE DPOLFT(N,X,Y,W,Maxdeg,Ndeg,Eps,R,Ierr,A)
     !
     ! COMPUTE NEW B COEFFICIENT EXCEPT WHEN J = 1
     !
-    IF ( j>1 ) A(k1pj) = w11/w1
+    IF( j>1 ) A(k1pj) = w11/w1
     !
     ! COMPUTE NEW A COEFFICIENT
     !
@@ -305,25 +304,25 @@ SUBROUTINE DPOLFT(N,X,Y,W,Maxdeg,Ndeg,Eps,R,Ierr,A)
     ! SEE IF DEGREE SELECTION CRITERION HAS BEEN SATISFIED OR IF DEGREE
     ! MAXDEG  HAS BEEN REACHED
     !
-    IF ( Eps<0 ) THEN
+    IF( Eps<0 ) THEN
       !
-      ! COMPUTE F STATISTICS  (INPUT EPS .LT. 0.)
+      ! COMPUTE F STATISTICS  (INPUT EPS < 0.)
       !
-      IF ( sigj==0.0D0 ) GOTO 600
+      IF( sigj==0.0D0 ) GOTO 600
       degf = m - j - 1
       den = (co(4,ksig)*degf+1.0D0)*degf
       fcrit = (((co(3,ksig)*degf)+co(2,ksig))*degf+co(1,ksig))/den
       fcrit = fcrit*fcrit
       f = (sigjm1-sigj)*degf/sigj
-      IF ( f>=fcrit ) EXIT
+      IF( f>=fcrit ) EXIT
       !
       ! POLYNOMIAL OF DEGREE J FAILS F TEST.  IF THERE HAVE BEEN THREE
       ! SUCCESSIVE FAILURES, A STATISTICALLY BEST DEGREE HAS BEEN FOUND.
       !
       nfail = nfail + 1
-      IF ( nfail>=3 ) GOTO 600
-      IF ( Maxdeg==j ) GOTO 800
-    ELSEIF ( Eps==0 ) THEN
+      IF( nfail>=3 ) GOTO 600
+      IF( Maxdeg==j ) GOTO 800
+    ELSEIF( Eps==0 ) THEN
       GOTO 300
     ELSE
       GOTO 400
@@ -335,21 +334,21 @@ SUBROUTINE DPOLFT(N,X,Y,W,Maxdeg,Ndeg,Eps,R,Ierr,A)
   200  sigpas = sigj
   jpas = j
   nfail = 0
-  IF ( Maxdeg/=j ) GOTO 100
+  IF( Maxdeg/=j ) GOTO 100
   GOTO 800
   !
   ! RAISE THE DEGREE IF DEGREE  MAXDEG  HAS NOT YET BEEN REACHED  (INPUT
   ! EPS = 0.)
   !
   300 CONTINUE
-  IF ( Maxdeg/=j ) GOTO 100
+  IF( Maxdeg/=j ) GOTO 100
   GOTO 500
   !
-  ! SEE IF RMS ERROR CRITERION IS SATISFIED  (INPUT EPS .GT. 0.)
+  ! SEE IF RMS ERROR CRITERION IS SATISFIED  (INPUT EPS > 0.)
   !
   400 CONTINUE
-  IF ( sigj>etst ) THEN
-    IF ( Maxdeg/=j ) GOTO 100
+  IF( sigj>etst ) THEN
+    IF( Maxdeg/=j ) GOTO 100
     Ierr = 3
     Ndeg = Maxdeg
     sig = sigj
@@ -378,7 +377,7 @@ SUBROUTINE DPOLFT(N,X,Y,W,Maxdeg,Ndeg,Eps,R,Ierr,A)
   ! WHEN STATISTICAL TEST HAS BEEN USED, EVALUATE THE BEST POLYNOMIAL AT
   ! ALL THE DATA POINTS IF  R  DOES NOT ALREADY CONTAIN THESE VALUES
   !
-  IF ( Eps<0.0.AND.Ndeg/=Maxdeg ) THEN
+  IF( Eps<0.0 .AND. Ndeg/=Maxdeg ) THEN
     nder = 0
     DO i = 1, m
       CALL DP1VLU(Ndeg,nder,X(i),R(i),yp,A)

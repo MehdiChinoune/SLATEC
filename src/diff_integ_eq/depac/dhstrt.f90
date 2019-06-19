@@ -1,7 +1,6 @@
 !** DHSTRT
 SUBROUTINE DHSTRT(DF,Neq,A,B,Y,Yprime,Etol,Morder,Small,Big,Spy,Pv,Yp,Sf,H)
-  !>
-  !  Subsidiary to DDEABM, DDEBDF and DDERKF
+  !> Subsidiary to DDEABM, DDEBDF and DDERKF
   !***
   ! **Library:**   SLATEC
   !***
@@ -86,7 +85,7 @@ SUBROUTINE DHSTRT(DF,Neq,A,B,Y,Yprime,Etol,Morder,Small,Big,Spy,Pv,Yp,Sf,H)
   !             elements are positive. Following the first integration
   !             step, the tolerances are expected to be used by the
   !             integrator in an error test which roughly requires that
-  !                        ABS(LOCAL ERROR)  .LE.  ETOL
+  !                        ABS(LOCAL ERROR)  <=  ETOL
   !             for each vector component.
   !
   !      MORDER -- This is the order of the formula which will be used by
@@ -98,7 +97,7 @@ SUBROUTINE DHSTRT(DF,Neq,A,B,Y,Yprime,Etol,Morder,Small,Big,Spy,Pv,Yp,Sf,H)
   !             numbers which are too small relative to the precision of
   !             floating point arithmetic.  SMALL  should be set to
   !             (approximately) the smallest positive DOUBLE PRECISION
-  !             number such that  (1.+SMALL) .GT. 1.  on the machine being
+  !             number such that  (1.+SMALL) > 1.  on the machine being
   !             used. The quantity  SMALL**(3/8)  is used in computing
   !             increments of variables for approximating derivatives by
   !             differences.  Also the algorithm will not compute a
@@ -179,14 +178,14 @@ SUBROUTINE DHSTRT(DF,Neq,A,B,Y,Yprime,Etol,Morder,Small,Big,Spy,Pv,Yp,Sf,H)
   !             LOCALLY.
   !
   da = SIGN(MAX(MIN(relper*ABS(A),absdx),100.0D0*Small*ABS(A)),dx)
-  IF ( da==0.0D0 ) da = relper*dx
+  IF( da==0.0D0 ) da = relper*dx
   CALL DF(A+da,Y,Sf)
   DO j = 1, Neq
     Yp(j) = Sf(j) - Yprime(j)
   END DO
   delf = DHVNRM(Yp,Neq)
   dfdxb = Big
-  IF ( delf<Big*ABS(da) ) dfdxb = delf/ABS(da)
+  IF( delf<Big*ABS(da) ) dfdxb = delf/ABS(da)
   fbnd = DHVNRM(Sf,Neq)
   !
   !        ...............................................................
@@ -215,11 +214,11 @@ SUBROUTINE DHSTRT(DF,Neq,A,B,Y,Yprime,Etol,Morder,Small,Big,Spy,Pv,Yp,Sf,H)
   !                                       SIZE OF THE VECTOR OF INITIAL
   !                                       VALUES.
   dely = relper*DHVNRM(Y,Neq)
-  IF ( dely==0.0D0 ) dely = relper
+  IF( dely==0.0D0 ) dely = relper
   dely = SIGN(dely,dx)
   delf = DHVNRM(Yprime,Neq)
   fbnd = MAX(fbnd,delf)
-  IF ( delf==0.0D0 ) THEN
+  IF( delf==0.0D0 ) THEN
     !           CANNOT HAVE A NULL PERTURBATION VECTOR
     DO j = 1, Neq
       Spy(j) = 0.0D0
@@ -241,7 +240,7 @@ SUBROUTINE DHSTRT(DF,Neq,A,B,Y,Yprime,Etol,Morder,Small,Big,Spy,Pv,Yp,Sf,H)
     DO j = 1, Neq
       Pv(j) = Y(j) + dely*(Yp(j)/delf)
     END DO
-    IF ( k==2 ) THEN
+    IF( k==2 ) THEN
       !              USE A SHIFTED VALUE OF THE INDEPENDENT VARIABLE
       !                                    IN COMPUTING ONE ESTIMATE
       CALL DF(A+da,Pv,Yp)
@@ -261,22 +260,22 @@ SUBROUTINE DHSTRT(DF,Neq,A,B,Y,Yprime,Etol,Morder,Small,Big,Spy,Pv,Yp,Sf,H)
     fbnd = MAX(fbnd,DHVNRM(Yp,Neq))
     delf = DHVNRM(Pv,Neq)
     !        ...EXIT
-    IF ( delf>=Big*ABS(dely) ) EXIT
+    IF( delf>=Big*ABS(dely) ) EXIT
     dfdub = MAX(dfdub,delf/ABS(dely))
     !     ......EXIT
-    IF ( k==lk ) GOTO 100
+    IF( k==lk ) GOTO 100
     !           CHOOSE NEXT PERTURBATION VECTOR
-    IF ( delf==0.0D0 ) delf = 1.0D0
+    IF( delf==0.0D0 ) delf = 1.0D0
     DO j = 1, Neq
-      IF ( k==2 ) THEN
+      IF( k==2 ) THEN
         dy = Y(j)
-        IF ( dy==0.0D0 ) dy = dely/relper
+        IF( dy==0.0D0 ) dy = dely/relper
       ELSE
         dy = ABS(Pv(j))
-        IF ( dy==0.0D0 ) dy = delf
+        IF( dy==0.0D0 ) dy = delf
       END IF
-      IF ( Spy(j)==0.0D0 ) Spy(j) = Yp(j)
-      IF ( Spy(j)/=0.0D0 ) dy = SIGN(dy,Spy(j))
+      IF( Spy(j)==0.0D0 ) Spy(j) = Yp(j)
+      IF( Spy(j)/=0.0D0 ) dy = SIGN(dy,Spy(j))
       Yp(j) = dy
     END DO
     delf = DHVNRM(Yp,Neq)
@@ -316,26 +315,26 @@ SUBROUTINE DHSTRT(DF,Neq,A,B,Y,Yprime,Etol,Morder,Small,Big,Spy,Pv,Yp,Sf,H)
   !                            TO  A)
   H = absdx
   !
-  IF ( ydpb==0.0D0.AND.fbnd==0.0D0 ) THEN
+  IF( ydpb==0.0D0 .AND. fbnd==0.0D0 ) THEN
     !
     !        BOTH FIRST DERIVATIVE TERM (FBND) AND SECOND
     !                     DERIVATIVE TERM (YDPB) ARE ZERO
-    IF ( tolp<1.0D0 ) H = absdx*tolp
+    IF( tolp<1.0D0 ) H = absdx*tolp
     !
-  ELSEIF ( ydpb/=0.0D0 ) THEN
+  ELSEIF( ydpb/=0.0D0 ) THEN
     !
     !        SECOND DERIVATIVE TERM (YDPB) IS NON-ZERO
     srydpb = SQRT(0.5D0*ydpb)
-    IF ( tolp<srydpb*absdx ) H = tolp/srydpb
+    IF( tolp<srydpb*absdx ) H = tolp/srydpb
   ELSE
     !
     !        ONLY SECOND DERIVATIVE TERM (YDPB) IS ZERO
-    IF ( tolp<fbnd*absdx ) H = tolp/fbnd
+    IF( tolp<fbnd*absdx ) H = tolp/fbnd
   END IF
   !
   !     FURTHER RESTRICT THE STEP LENGTH TO BE NOT
   !                               BIGGER THAN  1/DFDUB
-  IF ( H*dfdub>1.0D0 ) H = 1.0D0/dfdub
+  IF( H*dfdub>1.0D0 ) H = 1.0D0/dfdub
   !
   !     FINALLY, RESTRICT THE STEP LENGTH TO BE NOT
   !     SMALLER THAN  100*SMALL*ABS(A).  HOWEVER, IF
@@ -343,7 +342,7 @@ SUBROUTINE DHSTRT(DF,Neq,A,B,Y,Yprime,Etol,Morder,Small,Big,Spy,Pv,Yp,Sf,H)
   !     THE ALGORITHM RETURNS  SMALL*ABS(B)  FOR THE
   !                                     STEP LENGTH.
   H = MAX(H,100.0D0*Small*ABS(A))
-  IF ( H==0.0D0 ) H = Small*ABS(B)
+  IF( H==0.0D0 ) H = Small*ABS(B)
   !
   !     NOW SET DIRECTION OF INTEGRATION
   H = SIGN(H,dx)

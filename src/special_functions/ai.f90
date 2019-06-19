@@ -1,7 +1,6 @@
 !** AI
 REAL(SP) FUNCTION AI(X)
-  !>
-  !  Evaluate the Airy function.
+  !> Evaluate the Airy function.
   !***
   ! **Library:**   SLATEC (FNLIB)
   !***
@@ -57,24 +56,24 @@ REAL(SP) FUNCTION AI(X)
     .00000000000952517E0, .00000000000001392E0, .00000000000000001E0 ]
   LOGICAL, SAVE :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  AI
-  IF ( first ) THEN
+  IF( first ) THEN
     naif = INITS(aifcs,9,0.1*R1MACH(3))
     naig = INITS(aigcs,8,0.1*R1MACH(3))
     first = .FALSE.
   END IF
   !
-  IF ( X<(-1.0) ) THEN
+  IF( X<(-1.0) ) THEN
     CALL R9AIMP(X,xm,theta)
     AI = xm*COS(theta)
     RETURN
     !
-  ELSEIF ( X<=1.0 ) THEN
+  ELSEIF( X<=1.0 ) THEN
     z = 0.0
-    IF ( ABS(X)>x3sml ) z = X**3
+    IF( ABS(X)>x3sml ) z = X**3
     AI = 0.375 + (CSEVL(z,aifcs,naif)-X*(0.25+CSEVL(z,aigcs,naig)))
     RETURN
     !
-  ELSEIF ( X>xmax ) THEN
+  ELSEIF( X>xmax ) THEN
     !
     AI = 0.0
     CALL XERMSG('AI','X SO BIG AI UNDERFLOWS',1,1)

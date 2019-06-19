@@ -1,7 +1,6 @@
 !** XGETUN
 SUBROUTINE XGETUN(Iunit)
-  !>
-  !  Return the (first) output file to which error messages
+  !> Return the (first) output file to which error messages
   !            are being sent.
   !***
   ! **Library:**   SLATEC (XERROR)
@@ -41,7 +40,7 @@ SUBROUTINE XGETUN(Iunit)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
-  INTEGER Iunit
+  INTEGER :: Iunit
   !* FIRST EXECUTABLE STATEMENT  XGETUN
   Iunit = J4SAVE(3,0,.FALSE.)
 END SUBROUTINE XGETUN

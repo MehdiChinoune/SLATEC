@@ -1,7 +1,6 @@
 !** XSETUA
 SUBROUTINE XSETUA(Iunita,N)
-  !>
-  !  Set logical unit numbers (up to 5) to which error
+  !> Set logical unit numbers (up to 5) to which error
   !            messages are to be sent.
   !***
   ! **Library:**   SLATEC (XERROR)
@@ -31,7 +30,7 @@ SUBROUTINE XSETUA(Iunita,N)
   !                Normally these numbers should all be different
   !                (but duplicates are not prohibited.)
   !        N     - the number of unit numbers provided in IUNIT
-  !                must have 1 .LE. N .LE. 5.
+  !                must have 1 <= N <= 5.
   !
   !***
   ! **References:**  R. E. Jones and D. K. Kahaner, XERROR, the SLATEC
@@ -47,11 +46,11 @@ SUBROUTINE XSETUA(Iunita,N)
   !   900510  Change call to XERRWV to XERMSG.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
-  INTEGER i, indexx, Iunita(5), junk, N
+  INTEGER :: i, indexx, Iunita(5), junk, N
   CHARACTER(8) :: xern1
   !* FIRST EXECUTABLE STATEMENT  XSETUA
   !
-  IF ( N<1.OR.N>5 ) THEN
+  IF( N<1 .OR. N>5 ) THEN
     WRITE (xern1,'(I8)') N
     CALL XERMSG('XSETUA','INVALID NUMBER OF UNITS, N = '//xern1,1,2)
     RETURN
@@ -59,7 +58,7 @@ SUBROUTINE XSETUA(Iunita,N)
   !
   DO i = 1, N
     indexx = i + 4
-    IF ( i==1 ) indexx = 3
+    IF( i==1 ) indexx = 3
     junk = J4SAVE(indexx,Iunita(i),.TRUE.)
   END DO
   junk = J4SAVE(5,N,.TRUE.)

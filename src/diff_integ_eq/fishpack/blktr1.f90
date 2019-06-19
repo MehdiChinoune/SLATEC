@@ -1,7 +1,6 @@
 !** BLKTR1
 SUBROUTINE BLKTR1(An,Cn,M,Am,Bm,Cm,Idimy,Y,B,W1,W2,W3,Wd,Ww,Wu,PRDCT,CPRDCT)
-  !>
-  !  Subsidiary to BLKTRI
+  !> Subsidiary to BLKTRI
   !***
   ! **Library:**   SLATEC
   !***
@@ -50,7 +49,7 @@ SUBROUTINE BLKTR1(An,Cn,M,Am,Bm,Cm,Idimy,Y,B,W1,W2,W3,Wd,Ww,Wu,PRDCT,CPRDCT)
   INTEGER :: Idimy, M
   REAL(SP) :: Am(M), An(nm_com), B(:), Bm(M), Cm(M), Cn(nm_com), W1(M), W2(M), W3(M), &
     Wd(M), Wu(M), Ww(M), Y(Idimy,nm_com)
-  INTEGER i, i1, i2, i3, i4, idxa, idxc, if, ifd, im1, im2, im3, imi1, &
+  INTEGER :: i, i1, i2, i3, i4, idxa, idxc, if, ifd, im1, im2, im3, imi1, &
     imi2, ip, ip1, ip2, ip3, ipi1, ipi2, ipi3, ir, irm1, iz, izr, j, kdo, l, &
     ll, na, nc, nm1, nm2, nm3, np, np1, np2, np3, nz
   REAL(SP) :: dum(0), dum2(0,0)
@@ -71,12 +70,12 @@ SUBROUTINE BLKTR1(An,Cn,M,Am,Bm,Cm,Idimy,Y,B,W1,W2,W3,Wd,Ww,Wu,PRDCT,CPRDCT)
       dum,Y(1,i2),W3,M,Am,Bm,Cm,Wd,Ww,Wu)
     if = 2**k_com
     DO i = i4, if, i4
-      IF ( i<=nm_com ) THEN
+      IF( i<=nm_com ) THEN
         ipi1 = i + i1
         ipi2 = i + i2
         ipi3 = i + i3
         CALL INDXC(i,ir,idxc,nc)
-        IF ( i<if ) THEN
+        IF( i<if ) THEN
           CALL INDXA(i,ir,idxa,na)
           CALL INDXB(i-i1,irm1,im1,nm1)
           CALL INDXB(ipi2,ir,ip2,np2)
@@ -84,7 +83,7 @@ SUBROUTINE BLKTR1(An,Cn,M,Am,Bm,Cm,Idimy,Y,B,W1,W2,W3,Wd,Ww,Wu,PRDCT,CPRDCT)
           CALL INDXB(ipi3,irm1,ip3,np3)
           CALL PRDCT(nm1,B(im1:im1+nm1-1),0,dum,0,dum,na,An(idxa),W3,W1,M,Am,Bm,&
             Cm,Wd,Ww,Wu)
-          IF ( ipi2<=nm_com ) THEN
+          IF( ipi2<=nm_com ) THEN
             CALL PRDCT(np2,B(ip2:ip2+np2-1),np1,B(ip1:ip1+np1-1),np3,B(ip3:ip3+np3-1),&
               0,dum,Y(1,ipi2),W3,M,Am,Bm,Cm,Wd,Ww,Wu)
             CALL PRDCT(np1,B(ip1:ip1+np1-1),0,dum,0,dum,nc,Cn(idxc),W3,W2,M,Am,Bm,Cm,&
@@ -102,7 +101,7 @@ SUBROUTINE BLKTR1(An,Cn,M,Am,Bm,Cm,Idimy,Y,B,W1,W2,W3,Wd,Ww,Wu,PRDCT,CPRDCT)
       END IF
     END DO
   END DO
-  IF ( npp_com==0 ) THEN
+  IF( npp_com==0 ) THEN
     !
     !     THE PERIODIC CASE IS TREATED USING THE CAPACITANCE MATRIX METHOD
     !
@@ -143,8 +142,8 @@ SUBROUTINE BLKTR1(An,Cn,M,Am,Bm,Cm,Idimy,Y,B,W1,W2,W3,Wd,Ww,Wu,PRDCT,CPRDCT)
       i4 = i2 + i2
       ifd = if - i2
       DO i = i2, ifd, i4
-        IF ( i-i2==izr ) THEN
-          IF ( i>nm_com ) EXIT
+        IF( i-i2==izr ) THEN
+          IF( i>nm_com ) EXIT
           CALL INDXA(i,ir,idxa,na)
           CALL INDXB(i,ir,iz,nz)
           CALL INDXB(i-i1,ir-1,im1,nm1)
@@ -157,7 +156,7 @@ SUBROUTINE BLKTR1(An,Cn,M,Am,Bm,Cm,Idimy,Y,B,W1,W2,W3,Wd,Ww,Wu,PRDCT,CPRDCT)
           CALL PRDCT(nz,B(iz:iz+nz-1),nm1,B(im1:im1+nm1-1),np1,B(ip1:ip1+np1-1),&
             0,dum,W2,W2,M,Am,Bm,Cm,Wd,Ww,Wu)
           izr = i
-          IF ( i==nm_com ) GOTO 50
+          IF( i==nm_com ) GOTO 50
         END IF
       END DO
     END DO
@@ -167,7 +166,7 @@ SUBROUTINE BLKTR1(An,Cn,M,Am,Bm,Cm,Idimy,Y,B,W1,W2,W3,Wd,Ww,Wu,PRDCT,CPRDCT)
     END DO
     CALL INDXB(if/2,k_com-1,im1,nm1)
     CALL INDXB(if,k_com-1,ip,np)
-    IF ( ncmplx_com/=0 ) THEN
+    IF( ncmplx_com/=0 ) THEN
       bc = [ ( CMPLX( B(ip+i), B(ip+i+1) ), i = 1, nm_com, 2 ) ]
       CALL CPRDCT(nm_com+1,bc,nm1,B(im1:im1+nm1-1),0,dum,0,dum,Y(1,nm_com+1),Y(1,nm_com+1),M,&
         Am,Bm,Cm,dc,wc,yc)
@@ -214,7 +213,7 @@ SUBROUTINE BLKTR1(An,Cn,M,Am,Bm,Cm,Idimy,Y,B,W1,W2,W3,Wd,Ww,Wu,PRDCT,CPRDCT)
         ipi1 = i + i1
         ipi2 = i + i2
         ipi3 = i + i3
-        IF ( ipi2==izr ) THEN
+        IF( ipi2==izr ) THEN
           CALL INDXC(i,ir,idxc,nc)
           CALL INDXB(ipi2,ir,ip2,np2)
           CALL INDXB(ipi1,irm1,ip1,np1)
@@ -228,7 +227,7 @@ SUBROUTINE BLKTR1(An,Cn,M,Am,Bm,Cm,Idimy,Y,B,W1,W2,W3,Wd,Ww,Wu,PRDCT,CPRDCT)
           END DO
           izr = i
           EXIT
-        ELSEIF ( i==izr ) THEN
+        ELSEIF( i==izr ) THEN
           EXIT
         END IF
       END DO
@@ -246,7 +245,7 @@ SUBROUTINE BLKTR1(An,Cn,M,Am,Bm,Cm,Idimy,Y,B,W1,W2,W3,Wd,Ww,Wu,PRDCT,CPRDCT)
     i4 = i2 + i2
     ifd = if - i2
     DO i = i2, ifd, i4
-      IF ( i<=nm_com ) THEN
+      IF( i<=nm_com ) THEN
         imi1 = i - i1
         imi2 = i - i2
         ipi1 = i + i1
@@ -256,7 +255,7 @@ SUBROUTINE BLKTR1(An,Cn,M,Am,Bm,Cm,Idimy,Y,B,W1,W2,W3,Wd,Ww,Wu,PRDCT,CPRDCT)
         CALL INDXB(i,ir,iz,nz)
         CALL INDXB(imi1,irm1,im1,nm1)
         CALL INDXB(ipi1,irm1,ip1,np1)
-        IF ( i<=i2 ) THEN
+        IF( i<=i2 ) THEN
           DO j = 1, M
             W1(j) = 0.
           END DO
@@ -264,7 +263,7 @@ SUBROUTINE BLKTR1(An,Cn,M,Am,Bm,Cm,Idimy,Y,B,W1,W2,W3,Wd,Ww,Wu,PRDCT,CPRDCT)
           CALL PRDCT(nm1,B(im1:im1+nm1-1),0,dum,0,dum,na,An(idxa),Y(1,imi2),W1,M,Am,&
             Bm,Cm,Wd,Ww,Wu)
         END IF
-        IF ( ipi2<=nm_com ) THEN
+        IF( ipi2<=nm_com ) THEN
           CALL PRDCT(np1,B(ip1:ip1+np1-1),0,dum,0,dum,nc,Cn(idxc),Y(1,ipi2),W2,M,Am,&
             Bm,Cm,Wd,Ww,Wu)
         ELSE

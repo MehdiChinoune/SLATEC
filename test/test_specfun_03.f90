@@ -5,8 +5,7 @@ MODULE TEST04_MOD
 CONTAINS
   !** CFNCK
   SUBROUTINE CFNCK(Lun,Kprint,Ipass)
-    !>
-    !  Quick check for the complex Fullerton special functions.
+    !> Quick check for the complex Fullerton special functions.
     !***
     ! **Library:**   SLATEC
     !***
@@ -45,9 +44,9 @@ CONTAINS
     !   900727  Added EXTERNAL statement.  (WRB)
     USE slatec, ONLY : C0LGMC, CATAN2, CBETA, CCBRT, CCOT, CEXPRL, CGAMMA, CGAMR, &
       CLBETA, CLNGAM, CLNREL, CLOG10, CPSI, R1MACH
-    INTEGER i, Lun, Kprint, Ipass
-    REAL(SP) errmax, errtol, abserr, relerr
-    COMPLEX(SP) w(48)
+    INTEGER :: i, Lun, Kprint, Ipass
+    REAL(SP) :: errmax, errtol, abserr, relerr
+    COMPLEX(SP) :: w(48)
     !
     !     Constants to be used
     !
@@ -144,13 +143,13 @@ CONTAINS
       abserr = ABS(c(i)-w(i))
       relerr = abserr/ABS(c(i))
       errmax = MAX(relerr,errmax)
-      IF ( relerr>errtol.AND.Kprint>=2 ) WRITE (Lun,99001) i, relerr, abserr
+      IF( relerr>errtol .AND. Kprint>=2 ) WRITE (Lun,99001) i, relerr, abserr
       99001 FORMAT (' For I  = ',I3,'  test fails with RELERR  = ',E38.30,&
         '  and ABSERR  = ',E38.30)
     END DO
     Ipass = 0
-    IF ( errmax<=errtol ) Ipass = 1
-    IF ( Ipass/=0.AND.Kprint>=2 ) WRITE (Lun,99002)
+    IF( errmax<=errtol ) Ipass = 1
+    IF( Ipass/=0 .AND. Kprint>=2 ) WRITE (Lun,99002)
     99002 FORMAT (' Complex Fullerton special function routines o.k.')
     RETURN
   END SUBROUTINE CFNCK
@@ -161,8 +160,7 @@ PROGRAM TEST04
   USE slatec, ONLY : I1MACH, XSETF, XSETUN, XERMAX
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
-  !>
-  !  Driver for testing SLATEC subprograms
+  !> Driver for testing SLATEC subprograms
   !***
   ! **Library:**   SLATEC
   !***
@@ -208,7 +206,7 @@ PROGRAM TEST04
   !   890618  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900524  Cosmetic changes to code.  (WRB)
-  INTEGER ipass, kprint, lin, lun, nfail
+  INTEGER :: ipass, kprint, lin, lun, nfail
   !* FIRST EXECUTABLE STATEMENT  TEST04
   lun = I1MACH(2)
   lin = I1MACH(1)
@@ -219,7 +217,7 @@ PROGRAM TEST04
   CALL GET_ARGUMENT(kprint)
   CALL XERMAX(1000)
   CALL XSETUN(lun)
-  IF ( kprint<=1 ) THEN
+  IF( kprint<=1 ) THEN
     CALL XSETF(0)
   ELSE
     CALL XSETF(1)
@@ -228,11 +226,11 @@ PROGRAM TEST04
   !     Test complex Fullerton routines
   !
   CALL CFNCK(lun,kprint,ipass)
-  IF ( ipass==0 ) nfail = nfail + 1
+  IF( ipass==0 ) nfail = nfail + 1
   !
   !     Write PASS or FAIL message
   !
-  IF ( nfail==0 ) THEN
+  IF( nfail==0 ) THEN
     WRITE (lun,99001)
     99001 FORMAT (/' --------------TEST04 PASSED ALL TESTS----------------')
   ELSE

@@ -1,7 +1,6 @@
 !** J4SAVE
 INTEGER FUNCTION J4SAVE(Iwhich,Ivalue,Iset)
-  !>
-  !  Save or recall global variables needed by error
+  !> Save or recall global variables needed by error
   !            handling routines.
   !***
   ! **Library:**   SLATEC (XERROR)
@@ -60,10 +59,10 @@ INTEGER FUNCTION J4SAVE(Iwhich,Ivalue,Iset)
   !   910411  Added KEYWORDS section.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
-  INTEGER Ivalue, Iwhich
-  LOGICAL Iset
+  INTEGER :: Ivalue, Iwhich
+  LOGICAL :: Iset
   INTEGER, SAVE :: iparam(9) = [ 0, 2, 0, 10, 1, 0, 0, 0, 0 ]
   !* FIRST EXECUTABLE STATEMENT  J4SAVE
   J4SAVE = iparam(Iwhich)
-  IF ( Iset ) iparam(Iwhich) = Ivalue
+  IF( Iset ) iparam(Iwhich) = Ivalue
 END FUNCTION J4SAVE

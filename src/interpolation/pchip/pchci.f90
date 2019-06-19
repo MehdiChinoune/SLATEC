@@ -1,7 +1,6 @@
 !** PCHCI
 SUBROUTINE PCHCI(N,H,Slope,D,Incfd)
-  !>
-  !  Set interior derivatives for PCHIC
+  !> Set interior derivatives for PCHIC
   !***
   ! **Library:**   SLATEC (PCHIP)
   !***
@@ -95,13 +94,13 @@ SUBROUTINE PCHCI(N,H,Slope,D,Incfd)
   !
   !  DECLARE ARGUMENTS.
   !
-  INTEGER N, Incfd
-  REAL(SP) H(N), Slope(N), D(Incfd,N)
+  INTEGER :: N, Incfd
+  REAL(SP) :: H(N), Slope(N), D(Incfd,N)
   !
   !  DECLARE LOCAL VARIABLES.
   !
-  INTEGER i, nless1
-  REAL(SP) del1, del2, dmax, dmin, drat1, drat2, hsum, hsumt3, w1, w2
+  INTEGER :: i, nless1
+  REAL(SP) :: del1, del2, dmax, dmin, drat1, drat2, hsum, hsumt3, w1, w2
   !
   !  INITIALIZE.
   !
@@ -112,9 +111,9 @@ SUBROUTINE PCHCI(N,H,Slope,D,Incfd)
   !
   !  SPECIAL CASE N=2 -- USE LINEAR INTERPOLATION.
   !
-  IF ( nless1>1 ) THEN
+  IF( nless1>1 ) THEN
     !
-    !  NORMAL CASE  (N .GE. 3).
+    !  NORMAL CASE  (N >= 3).
     !
     del2 = Slope(2)
     !
@@ -125,18 +124,18 @@ SUBROUTINE PCHCI(N,H,Slope,D,Incfd)
     w1 = (H(1)+hsum)/hsum
     w2 = -H(1)/hsum
     D(1,1) = w1*del1 + w2*del2
-    IF ( PCHST(D(1,1),del1)<=zero ) THEN
+    IF( PCHST(D(1,1),del1)<=zero ) THEN
       D(1,1) = zero
-    ELSEIF ( PCHST(del1,del2)<zero ) THEN
+    ELSEIF( PCHST(del1,del2)<zero ) THEN
       !        NEED DO THIS CHECK ONLY IF MONOTONICITY SWITCHES.
       dmax = three*del1
-      IF ( ABS(D(1,1))>ABS(dmax) ) D(1,1) = dmax
+      IF( ABS(D(1,1))>ABS(dmax) ) D(1,1) = dmax
     END IF
     !
     !  LOOP THROUGH INTERIOR POINTS.
     !
     DO i = 2, nless1
-      IF ( i/=2 ) THEN
+      IF( i/=2 ) THEN
         !
         hsum = H(i-1) + H(i)
         del1 = del2
@@ -146,7 +145,7 @@ SUBROUTINE PCHCI(N,H,Slope,D,Incfd)
       !        SET D(I)=0 UNLESS DATA ARE STRICTLY MONOTONIC.
       !
       D(1,i) = zero
-      IF ( PCHST(del1,del2)>zero ) THEN
+      IF( PCHST(del1,del2)>zero ) THEN
         !
         !        USE BRODLIE MODIFICATION OF BUTLAND FORMULA.
         !
@@ -168,12 +167,12 @@ SUBROUTINE PCHCI(N,H,Slope,D,Incfd)
     w1 = -H(N-1)/hsum
     w2 = (H(N-1)+hsum)/hsum
     D(1,N) = w1*del1 + w2*del2
-    IF ( PCHST(D(1,N),del2)<=zero ) THEN
+    IF( PCHST(D(1,N),del2)<=zero ) THEN
       D(1,N) = zero
-    ELSEIF ( PCHST(del1,del2)<zero ) THEN
+    ELSEIF( PCHST(del1,del2)<zero ) THEN
       !        NEED DO THIS CHECK ONLY IF MONOTONICITY SWITCHES.
       dmax = three*del2
-      IF ( ABS(D(1,N))>ABS(dmax) ) D(1,N) = dmax
+      IF( ABS(D(1,N))>ABS(dmax) ) D(1,N) = dmax
     END IF
   ELSE
     D(1,1) = del1

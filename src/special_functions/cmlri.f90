@@ -1,7 +1,6 @@
 !** CMLRI
 SUBROUTINE CMLRI(Z,Fnu,Kode,N,Y,Nz,Tol)
-  !>
-  !  Subsidiary to CBESI and CBESK
+  !> Subsidiary to CBESI and CBESK
   !***
   ! **Library:**   SLATEC
   !***
@@ -11,7 +10,7 @@ SUBROUTINE CMLRI(Z,Fnu,Kode,N,Y,Nz,Tol)
   !***
   ! **Description:**
   !
-  !     CMLRI COMPUTES THE I BESSEL FUNCTION FOR RE(Z).GE.0.0 BY THE
+  !     CMLRI COMPUTES THE I BESSEL FUNCTION FOR RE(Z)>=0.0 BY THE
   !     MILLER ALGORITHM NORMALIZED BY A NEUMANN SERIES.
   !
   !***
@@ -23,9 +22,9 @@ SUBROUTINE CMLRI(Z,Fnu,Kode,N,Y,Nz,Tol)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
   USE service, ONLY : R1MACH
-  INTEGER i, iaz, idum, ifnu, inu, itime, k, kk, km, Kode, m, N, Nz
-  COMPLEX(SP) ck, cnorm, pt, p1, p2, rz, summ, Y(N), Z
-  REAL(SP) ack, ak, ap, at, az, bk, fkap, fkk, flam, fnf, Fnu, rho, &
+  INTEGER :: i, iaz, idum, ifnu, inu, itime, k, kk, km, Kode, m, N, Nz
+  COMPLEX(SP) :: ck, cnorm, pt, p1, p2, rz, summ, Y(N), Z
+  REAL(SP) :: ack, ak, ap, at, az, bk, fkap, fkk, flam, fnf, Fnu, rho, &
     rho2, scle, tfnf, Tol, tst, x
   COMPLEX(SP), PARAMETER :: czero = (0.0E0,0.0E0), cone = (1.0E0,0.0E0), ctwo = (2.0E0,0.0E0)
   scle = 1.0E+3*R1MACH(1)/Tol
@@ -56,14 +55,14 @@ SUBROUTINE CMLRI(Z,Fnu,Kode,N,Y,Nz,Tol)
     p1 = pt
     ck = ck + rz
     ap = ABS(p2)
-    IF ( ap>tst*ak*ak ) GOTO 100
+    IF( ap>tst*ak*ak ) GOTO 100
     ak = ak + 1.0E0
   END DO
   Nz = -2
   RETURN
   100  i = i + 1
   k = 0
-  IF ( inu>=iaz ) THEN
+  IF( inu>=iaz ) THEN
     !-----------------------------------------------------------------------
     !     COMPUTE RELATIVE TRUNCATION ERROR FOR RATIOS
     !-----------------------------------------------------------------------
@@ -80,8 +79,8 @@ SUBROUTINE CMLRI(Z,Fnu,Kode,N,Y,Nz,Tol)
       p1 = pt
       ck = ck + rz
       ap = ABS(p2)
-      IF ( ap>=tst ) THEN
-        IF ( itime==2 ) GOTO 200
+      IF( ap>=tst ) THEN
+        IF( itime==2 ) GOTO 200
         ack = ABS(ck)
         flam = ack + SQRT(ack*ack-1.0E0)
         fkap = ap/ABS(p1)
@@ -121,7 +120,7 @@ SUBROUTINE CMLRI(Z,Fnu,Kode,N,Y,Nz,Tol)
     fkk = fkk - 1.0E0
   END DO
   Y(N) = p2
-  IF ( N/=1 ) THEN
+  IF( N/=1 ) THEN
     DO i = 2, N
       pt = p2
       p2 = p1 + CMPLX(fkk+fnf,0.0E0)*rz*p2
@@ -135,7 +134,7 @@ SUBROUTINE CMLRI(Z,Fnu,Kode,N,Y,Nz,Tol)
       Y(m) = p2
     END DO
   END IF
-  IF ( ifnu>0 ) THEN
+  IF( ifnu>0 ) THEN
     DO i = 1, ifnu
       pt = p2
       p2 = p1 + CMPLX(fkk+fnf,0.0E0)*rz*p2
@@ -148,7 +147,7 @@ SUBROUTINE CMLRI(Z,Fnu,Kode,N,Y,Nz,Tol)
     END DO
   END IF
   pt = Z
-  IF ( Kode==2 ) pt = pt - CMPLX(x,0.0E0)
+  IF( Kode==2 ) pt = pt - CMPLX(x,0.0E0)
   p1 = -CMPLX(fnf,0.0E0)*LOG(rz) + pt
   ap = GAMLN(1.0E0+fnf,idum)
   pt = p1 - CMPLX(ap,0.0E0)

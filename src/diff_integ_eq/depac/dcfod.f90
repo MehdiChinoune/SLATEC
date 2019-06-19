@@ -1,7 +1,6 @@
 !** DCFOD
 SUBROUTINE DCFOD(Meth,Elco,Tesco)
-  !>
-  !  Subsidiary to DDEBDF
+  !> Subsidiary to DDEBDF
   !***
   ! **Library:**   SLATEC
   !***
@@ -26,7 +25,7 @@ SUBROUTINE DCFOD(Meth,Elco,Tesco)
 
   !
   !
-  INTEGER i, ib, Meth, nq, nqm1, nqp1
+  INTEGER :: i, ib, Meth, nq, nqm1, nqp1
   REAL(DP) :: agamq, Elco(13,12), fnq, fnqm1, pc(12), pint, ragq, rq1fac, &
     rqfac, Tesco(3,12), tsign, xpin
   !     ------------------------------------------------------------------
@@ -39,7 +38,7 @@ SUBROUTINE DCFOD(Meth,Elco,Tesco)
   !      AND IS NOT CALLED AGAIN UNLESS AND UNTIL METH IS CHANGED.
   !
   !      THE ELCO ARRAY CONTAINS THE BASIC METHOD COEFFICIENTS.
-  !      THE COEFFICIENTS EL(I), 1 .LE. I .LE. NQ+1, FOR THE METHOD OF
+  !      THE COEFFICIENTS EL(I), 1 <= I <= NQ+1, FOR THE METHOD OF
   !      ORDER NQ ARE STORED IN ELCO(I,NQ).  THEY ARE GIVEN BY A
   !      GENERATING POLYNOMIAL, I.E.,
   !          L(X) = EL(1) + EL(2)*X + ... + EL(NQ+1)*X**NQ.
@@ -57,7 +56,7 @@ SUBROUTINE DCFOD(Meth,Elco,Tesco)
   !     ------------------------------------------------------------------
 
   !* FIRST EXECUTABLE STATEMENT  DCFOD
-  IF ( Meth==2 ) THEN
+  IF( Meth==2 ) THEN
     !
     pc(1) = 1.0D0
     rq1fac = 1.0D0
@@ -137,7 +136,7 @@ SUBROUTINE DCFOD(Meth,Elco,Tesco)
       agamq = rqfac*xpin
       ragq = 1.0D0/agamq
       Tesco(2,nq) = ragq
-      IF ( nq<12 ) Tesco(1,nqp1) = ragq*rqfac/nqp1
+      IF( nq<12 ) Tesco(1,nqp1) = ragq*rqfac/nqp1
       Tesco(3,nqm1) = ragq
     END DO
   END IF

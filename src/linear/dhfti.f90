@@ -1,7 +1,6 @@
 !** DHFTI
 SUBROUTINE DHFTI(A,Mda,M,N,B,Mdb,Nb,Tau,Krank,Rnorm,H,G,Ip)
-  !>
-  !  Solve a least squares problem for banded matrices using
+  !> Solve a least squares problem for banded matrices using
   !            sequential accumulation of rows of the data matrix.
   !            Exactly one right-hand side vector is permitted.
   !***
@@ -43,7 +42,7 @@ SUBROUTINE DHFTI(A,Mda,M,N,B,Mdb,Nb,Tau,Krank,Rnorm,H,G,Ip)
   !     column interchanges.  All subdiagonal elements in the matrix R are
   !     zero and its diagonal elements satisfy
   !
-  !                       ABS(R(I,I)).GE.ABS(R(I+1,I+1)),
+  !                       ABS(R(I,I))>=ABS(R(I+1,I+1)),
   !
   !                       I = 1,...,L-1, where
   !
@@ -74,25 +73,25 @@ SUBROUTINE DHFTI(A,Mda,M,N,B,Mdb,Nb,Tau,Krank,Rnorm,H,G,Ip)
   !     A(*,*),MDA,M,N    The array A(*,*) initially contains the M by N
   !                       matrix A of the least squares problem AX = B.
   !                       The first dimensioning parameter of the array
-  !                       A(*,*) is MDA, which must satisfy MDA.GE.M
-  !                       Either M.GE.N or M.LT.N is permitted.  There
+  !                       A(*,*) is MDA, which must satisfy MDA>=M
+  !                       Either M>=N or M<N is permitted.  There
   !                       is no restriction on the rank of A.  The
-  !                       condition MDA.LT.M is considered an error.
+  !                       condition MDA<M is considered an error.
   !
   !     B(*),MDB,NB       If NB = 0 the subroutine will perform the
   !                       orthogonal decomposition but will make no
-  !                       references to the array B(*).  If NB.GT.0
+  !                       references to the array B(*).  If NB>0
   !                       the array B(*) must initially contain the M by
   !                       NB matrix B of the least squares problem AX =
-  !                       B.  If NB.GE.2 the array B(*) must be doubly
+  !                       B.  If NB>=2 the array B(*) must be doubly
   !                       subscripted with first dimensioning parameter
-  !                       MDB.GE.MAX(M,N).  If NB = 1 the array B(*) may
+  !                       MDB>=MAX(M,N).  If NB = 1 the array B(*) may
   !                       be either doubly or singly subscripted.  In
   !                       the latter case the value of MDB is arbitrary
   !                       but it should be set to some valid integer
   !                       value such as MDB = M.
   !
-  !                       The condition of NB.GT.1.AND.MDB.LT. MAX(M,N)
+  !                       The condition of NB>1 .AND. MDB< MAX(M,N)
   !                       is considered an error.
   !
   !     TAU               Absolute tolerance parameter provided by user
@@ -156,26 +155,26 @@ SUBROUTINE DHFTI(A,Mda,M,N,B,Mdb,Nb,Tau,Krank,Rnorm,H,G,Ip)
   !
   k = 0
   ldiag = MIN(M,N)
-  IF ( ldiag>0 ) THEN
+  IF( ldiag>0 ) THEN
     !           BEGIN BLOCK PERMITTING ...EXITS TO 130
     !              BEGIN BLOCK PERMITTING ...EXITS TO 120
-    IF ( Mda>=M ) THEN
+    IF( Mda>=M ) THEN
       !
-      IF ( Nb<=1.OR.MAX(M,N)<=Mdb ) THEN
+      IF( Nb<=1 .OR. MAX(M,N)<=Mdb ) THEN
         !
         DO j = 1, ldiag
           !                    BEGIN BLOCK PERMITTING ...EXITS TO 70
-          IF ( j/=1 ) THEN
+          IF( j/=1 ) THEN
             !
             !                           UPDATE SQUARED COLUMN LENGTHS AND FIND LMAX
             !                          ..
             lmax = j
             DO l = j, N
               H(l) = H(l) - A(j-1,l)**2
-              IF ( H(l)>H(lmax) ) lmax = l
+              IF( H(l)>H(lmax) ) lmax = l
             END DO
             !                    ......EXIT
-            IF ( factor*H(lmax)>hmax*releps ) GOTO 5
+            IF( factor*H(lmax)>hmax*releps ) GOTO 5
           END IF
           !
           !                        COMPUTE SQUARED COLUMN LENGTHS AND FIND LMAX
@@ -186,7 +185,7 @@ SUBROUTINE DHFTI(A,Mda,M,N,B,Mdb,Nb,Tau,Krank,Rnorm,H,G,Ip)
             DO i = j, M
               H(l) = H(l) + A(i,l)**2
             END DO
-            IF ( H(l)>H(lmax) ) lmax = l
+            IF( H(l)>H(lmax) ) lmax = l
           END DO
           hmax = H(lmax)
           !                    ..
@@ -195,7 +194,7 @@ SUBROUTINE DHFTI(A,Mda,M,N,B,Mdb,Nb,Tau,Krank,Rnorm,H,G,Ip)
           !                     DO COLUMN INTERCHANGES IF NEEDED.
           !                    ..
           5  Ip(j) = lmax
-          IF ( Ip(j)/=j ) THEN
+          IF( Ip(j)/=j ) THEN
             DO i = 1, M
               tmp = A(i,j)
               A(i,j) = A(i,lmax)
@@ -216,7 +215,7 @@ SUBROUTINE DHFTI(A,Mda,M,N,B,Mdb,Nb,Tau,Krank,Rnorm,H,G,Ip)
         !                 ..
         DO j = 1, ldiag
           !              ......EXIT
-          IF ( ABS(A(j,j))<=Tau ) GOTO 20
+          IF( ABS(A(j,j))<=Tau ) GOTO 20
         END DO
         k = ldiag
         !           ......EXIT
@@ -225,7 +224,7 @@ SUBROUTINE DHFTI(A,Mda,M,N,B,Mdb,Nb,Tau,Krank,Rnorm,H,G,Ip)
         nerr = 2
         iopt = 2
         CALL XERMSG('DHFTI',&
-          'MDB.LT.MAX(M,N).AND.NB.GT.1. PROBABLE ERROR.',nerr,iopt)
+          'MDB<MAX(M,N) .AND. NB>1. PROBABLE ERROR.',nerr,iopt)
         !     ...............EXIT
         RETURN
       END IF
@@ -233,7 +232,7 @@ SUBROUTINE DHFTI(A,Mda,M,N,B,Mdb,Nb,Tau,Krank,Rnorm,H,G,Ip)
     ELSE
       nerr = 1
       iopt = 2
-      CALL XERMSG('DHFTI','MDA.LT.M, PROBABLE ERROR.',nerr,iopt)
+      CALL XERMSG('DHFTI','MDA<M, PROBABLE ERROR.',nerr,iopt)
       !     ...............EXIT
       RETURN
     END IF
@@ -241,10 +240,10 @@ SUBROUTINE DHFTI(A,Mda,M,N,B,Mdb,Nb,Tau,Krank,Rnorm,H,G,Ip)
     !
     !           COMPUTE THE NORMS OF THE RESIDUAL VECTORS.
     !
-    IF ( Nb>=1 ) THEN
+    IF( Nb>=1 ) THEN
       DO jb = 1, Nb
         tmp = szero
-        IF ( M>=kp1 ) THEN
+        IF( M>=kp1 ) THEN
           DO i = kp1, M
             tmp = tmp + B(i,jb)**2
           END DO
@@ -253,12 +252,12 @@ SUBROUTINE DHFTI(A,Mda,M,N,B,Mdb,Nb,Tau,Krank,Rnorm,H,G,Ip)
       END DO
     END IF
     !           SPECIAL FOR PSEUDORANK = 0
-    IF ( k>0 ) THEN
+    IF( k>0 ) THEN
       !
       !               IF THE PSEUDORANK IS LESS THAN N COMPUTE HOUSEHOLDER
       !               DECOMPOSITION OF FIRST K ROWS.
       !              ..
-      IF ( k/=N ) THEN
+      IF( k/=N ) THEN
         DO ii = 1, k
           i = kp1 - ii
           CALL DH12(1,i,kp1,N,A(i,1),Mda,G(i),A,Mda,1,i-1)
@@ -266,7 +265,7 @@ SUBROUTINE DHFTI(A,Mda,M,N,B,Mdb,Nb,Tau,Krank,Rnorm,H,G,Ip)
       END IF
       !
       !
-      IF ( Nb>=1 ) THEN
+      IF( Nb>=1 ) THEN
         DO jb = 1, Nb
           !
           !                  SOLVE THE K BY K TRIANGULAR SYSTEM.
@@ -275,7 +274,7 @@ SUBROUTINE DHFTI(A,Mda,M,N,B,Mdb,Nb,Tau,Krank,Rnorm,H,G,Ip)
             sm = dzero
             i = kp1 - l
             ip1 = i + 1
-            IF ( k>=ip1 ) THEN
+            IF( k>=ip1 ) THEN
               DO j = ip1, k
                 sm = sm + A(i,j)*B(j,jb)
               END DO
@@ -286,7 +285,7 @@ SUBROUTINE DHFTI(A,Mda,M,N,B,Mdb,Nb,Tau,Krank,Rnorm,H,G,Ip)
           !
           !                  COMPLETE COMPUTATION OF SOLUTION VECTOR.
           !                 ..
-          IF ( k/=N ) THEN
+          IF( k/=N ) THEN
             DO j = kp1, N
               B(j,jb) = szero
             END DO
@@ -300,7 +299,7 @@ SUBROUTINE DHFTI(A,Mda,M,N,B,Mdb,Nb,Tau,Krank,Rnorm,H,G,Ip)
           !                 ..
           DO jj = 1, ldiag
             j = ldiag + 1 - jj
-            IF ( Ip(j)/=j ) THEN
+            IF( Ip(j)/=j ) THEN
               l = Ip(j)
               tmp = B(l,jb)
               B(l,jb) = B(j,jb)
@@ -309,7 +308,7 @@ SUBROUTINE DHFTI(A,Mda,M,N,B,Mdb,Nb,Tau,Krank,Rnorm,H,G,Ip)
           END DO
         END DO
       END IF
-    ELSEIF ( Nb>=1 ) THEN
+    ELSEIF( Nb>=1 ) THEN
       DO jb = 1, Nb
         DO i = 1, N
           B(i,jb) = szero

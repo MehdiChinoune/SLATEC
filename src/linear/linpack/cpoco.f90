@@ -1,7 +1,6 @@
 !** CPOCO
 SUBROUTINE CPOCO(A,Lda,N,Rcond,Z,Info)
-  !>
-  !  Factor a complex Hermitian positive definite matrix
+  !> Factor a complex Hermitian positive definite matrix
   !            and estimate the condition number of the matrix.
   !***
   ! **Library:**   SLATEC (LINPACK)
@@ -43,7 +42,7 @@ SUBROUTINE CPOCO(A,Lda,N,Rcond,Z,Info)
   !        A       an upper triangular matrix  R  so that  A =
   !                CTRANS(R)*R where  CTRANS(R)  is the conjugate
   !                transpose.  The strict lower triangle is unaltered.
-  !                If  INFO .NE. 0, the factorization is not complete.
+  !                If  INFO /= 0, the factorization is not complete.
   !
   !        RCOND   REAL
   !                an estimate of the reciprocal condition of  A .
@@ -51,18 +50,18 @@ SUBROUTINE CPOCO(A,Lda,N,Rcond,Z,Info)
   !                in  A  and  B  of size  EPSILON  may cause
   !                relative perturbations in  X  of size  EPSILON/RCOND .
   !                If  RCOND  is so small that the logical expression
-  !                           1.0 + RCOND .EQ. 1.0
+  !                           1.0 + RCOND = 1.0
   !                is true, then  A  may be singular to working
   !                precision.  In particular,  RCOND  is zero  if
   !                exact singularity is detected or the estimate
-  !                underflows.  If INFO .NE. 0, RCOND is unchanged.
+  !                underflows.  If INFO /= 0, RCOND is unchanged.
   !
   !        Z       COMPLEX(N)
   !                a work vector whose contents are usually unimportant.
   !                If  A  is close to a singular matrix, then  Z  is
   !                an approximate null vector in the sense that
   !                NORM(A*Z) = RCOND*NORM(A)*NORM(Z) .
-  !                If  INFO .NE. 0, Z  is unchanged.
+  !                If  INFO /= 0, Z  is unchanged.
   !
   !        INFO    INTEGER
   !                = 0  for normal return.
@@ -100,7 +99,7 @@ SUBROUTINE CPOCO(A,Lda,N,Rcond,Z,Info)
   DO j = 1, N
     Z(j) = CMPLX(SCASUM(j,A(1,j),1),0.0E0)
     jm1 = j - 1
-    IF ( jm1>=1 ) THEN
+    IF( jm1>=1 ) THEN
       DO i = 1, jm1
         Z(i) = CMPLX(REAL(Z(i))+SCABS1(A(i,j)),0.0E0)
       END DO
@@ -114,7 +113,7 @@ SUBROUTINE CPOCO(A,Lda,N,Rcond,Z,Info)
   !     FACTOR
   !
   CALL CPOFA(A,Lda,N,Info)
-  IF ( Info==0 ) THEN
+  IF( Info==0 ) THEN
     !
     !        RCOND = 1/(NORM(A)*(ESTIMATE OF NORM(INVERSE(A)))) .
     !        ESTIMATE = NORM(Z)/NORM(Y) WHERE  A*Z = Y  AND  A*Y = E .
@@ -129,8 +128,8 @@ SUBROUTINE CPOCO(A,Lda,N,Rcond,Z,Info)
       Z(j) = (0.0E0,0.0E0)
     END DO
     DO k = 1, N
-      IF ( SCABS1(Z(k))/=0.0E0 ) ek = CSIGN1(ek,-Z(k))
-      IF ( SCABS1(ek-Z(k))>REAL(A(k,k)) ) THEN
+      IF( SCABS1(Z(k))/=0.0E0 ) ek = CSIGN1(ek,-Z(k))
+      IF( SCABS1(ek-Z(k))>REAL(A(k,k)) ) THEN
         s = REAL(A(k,k))/SCABS1(ek-Z(k))
         Z = s*Z
         ek = CMPLX(s,0.0E0)*ek
@@ -142,13 +141,13 @@ SUBROUTINE CPOCO(A,Lda,N,Rcond,Z,Info)
       wk = wk/A(k,k)
       wkm = wkm/A(k,k)
       kp1 = k + 1
-      IF ( kp1<=N ) THEN
+      IF( kp1<=N ) THEN
         DO j = kp1, N
           sm = sm + SCABS1(Z(j)+wkm*CONJG(A(k,j)))
           Z(j) = Z(j) + wk*CONJG(A(k,j))
           s = s + SCABS1(Z(j))
         END DO
-        IF ( s<sm ) THEN
+        IF( s<sm ) THEN
           t = wkm - wk
           wk = wkm
           DO j = kp1, N
@@ -165,7 +164,7 @@ SUBROUTINE CPOCO(A,Lda,N,Rcond,Z,Info)
     !
     DO kb = 1, N
       k = N + 1 - kb
-      IF ( SCABS1(Z(k))>REAL(A(k,k)) ) THEN
+      IF( SCABS1(Z(k))>REAL(A(k,k)) ) THEN
         s = REAL(A(k,k))/SCABS1(Z(k))
         Z = s*Z
       END IF
@@ -182,7 +181,7 @@ SUBROUTINE CPOCO(A,Lda,N,Rcond,Z,Info)
     !
     DO k = 1, N
       Z(k) = Z(k) - DOT_PRODUCT(A(1:k-1,k),Z(1:k-1))
-      IF ( SCABS1(Z(k))>REAL(A(k,k)) ) THEN
+      IF( SCABS1(Z(k))>REAL(A(k,k)) ) THEN
         s = REAL(A(k,k))/SCABS1(Z(k))
         Z = s*Z
         ynorm = s*ynorm
@@ -197,7 +196,7 @@ SUBROUTINE CPOCO(A,Lda,N,Rcond,Z,Info)
     !
     DO kb = 1, N
       k = N + 1 - kb
-      IF ( SCABS1(Z(k))>REAL(A(k,k)) ) THEN
+      IF( SCABS1(Z(k))>REAL(A(k,k)) ) THEN
         s = REAL(A(k,k))/SCABS1(Z(k))
         Z = s*Z
         ynorm = s*ynorm
@@ -211,7 +210,7 @@ SUBROUTINE CPOCO(A,Lda,N,Rcond,Z,Info)
     Z = s*Z
     ynorm = s*ynorm
     !
-    IF ( anorm/=0.0E0 ) Rcond = ynorm/anorm
-    IF ( anorm==0.0E0 ) Rcond = 0.0E0
+    IF( anorm/=0.0E0 ) Rcond = ynorm/anorm
+    IF( anorm==0.0E0 ) Rcond = 0.0E0
   END IF
 END SUBROUTINE CPOCO
