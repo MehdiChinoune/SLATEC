@@ -192,7 +192,6 @@ CONTAINS
   include"exint.f90"
   include"exprel.f90"
   include"fac.f90"
-  include"fundoc.f90"
   include"gami.f90"
   include"gamic.f90"
   include"gamit.f90"

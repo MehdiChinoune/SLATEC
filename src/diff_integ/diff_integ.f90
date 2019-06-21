@@ -77,7 +77,6 @@ CONTAINS
   include"quadpack/qk61.f90"
   include"quadpack/qmomo.f90"
   include"quadpack/qng.f90"
-  include"quadpack/qpdoc.f90"
   include"quadpack/qpsrt.f90"
   include"quadpack/qwgtc.f90"
   include"quadpack/qwgtf.f90"

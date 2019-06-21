@@ -20,7 +20,6 @@ CONTAINS
   include"fftpack/ezfftb.f90"
   include"fftpack/ezfftf.f90"
   include"fftpack/ezffti.f90"
-  include"fftpack/fftdoc.f90"
   include"fftpack/passb.f90"
   include"fftpack/passb2.f90"
   include"fftpack/passb3.f90"
