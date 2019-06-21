@@ -304,7 +304,7 @@ INTEGER FUNCTION ISSGMR(N,X,Xl,MSOLVE,Nmsl,Itol,Tol,Iter,Err,Iunit,R,Dz,Rwork, &
       !         Unscale R by R0NRM*PROD when KMP < MAXL.
       !
       IF( (Kmp<Maxl) .AND. (Lgmr/=0) ) THEN
-        tem = 1.0E0/(R0nrm*Prod)
+        tem = 1._SP/(R0nrm*Prod)
         R = tem*R
       END IF
     ELSEIF( Itol==3 ) THEN
@@ -318,7 +318,7 @@ INTEGER FUNCTION ISSGMR(N,X,Xl,MSOLVE,Nmsl,Itol,Tol,Iter,Err,Iunit,R,Dz,Rwork, &
       !         Unscale R by R0NRM*PROD when KMP < MAXL.
       !
       IF( (Kmp<Maxl) .AND. (Lgmr/=0) ) THEN
-        tem = 1.0E0/(R0nrm*Prod)
+        tem = 1._SP/(R0nrm*Prod)
         R = tem*R
       END IF
       !

@@ -43,7 +43,7 @@ CONTAINS
     !
     IF( Kprint>=3 ) WRITE (Lun,99001)
     99001 FORMAT (' DRC - FORCE ERROR 1 TO OCCUR')
-    trc = DRC(-1.0D0,-1.0D0,ier)
+    trc = DRC(-1._DP,-1._DP,ier)
     ier = NUMXER(ier)
     IF( ier==1 ) THEN
       ipass1 = 1
@@ -80,11 +80,11 @@ CONTAINS
     !
     !  ARGUMENTS IN RANGE
     !
-    pi = 3.141592653589793238462643383279D0
-    trc = DRC(0.0D0,0.25D0,ier)
+    pi = 3.141592653589793238462643383279_DP
+    trc = DRC(0._DP,0.25_DP,ier)
     CALL XERCLR
     dif = trc - pi
-    IF( (ABS(dif/pi)<1000.0D0*D1MACH(4)) .AND. (ier==0) ) THEN
+    IF( (ABS(dif/pi)<1000._DP*D1MACH(4)) .AND. (ier==0) ) THEN
       ipass4 = 1
     ELSE
       ipass4 = 0
@@ -146,7 +146,7 @@ CONTAINS
     !
     IF( Kprint>=3 ) WRITE (Lun,99001)
     99001 FORMAT (' DRD - FORCE ERROR 1 TO OCCUR')
-    trd = DRD(-1.0D0,-1.0D0,-1.0D0,ier)
+    trd = DRD(-1._DP,-1._DP,-1._DP,ier)
     ier = NUMXER(ier)
     IF( ier==1 ) THEN
       ipass1 = 1
@@ -159,7 +159,7 @@ CONTAINS
     !
     IF( Kprint>=3 ) WRITE (Lun,99002)
     99002 FORMAT (' DRD - FORCE ERROR 2 TO OCCUR')
-    trd = DRD(1.0D0,1.0D0,-1.0D0,ier)
+    trd = DRD(1._DP,1._DP,-1._DP,ier)
     ier = NUMXER(ier)
     IF( ier==2 ) THEN
       ipass2 = 1
@@ -184,11 +184,11 @@ CONTAINS
     !  ARGUMENTS IN RANGE
     !  BLEM=3 * LEMNISCATE CONSTANT B
     !
-    blem = 1.797210352103388311159883738420485817341D0
-    trd = DRD(0.0D0,2.0D0,1.0D0,ier)
+    blem = 1.797210352103388311159883738420485817341_DP
+    trd = DRD(0._DP,2._DP,1._DP,ier)
     CALL XERCLR
     dif = trd - blem
-    IF( (ABS(dif/blem)<1000.0D0*D1MACH(4)) .AND. (ier==0) ) THEN
+    IF( (ABS(dif/blem)<1000._DP*D1MACH(4)) .AND. (ier==0) ) THEN
       ipass4 = 1
     ELSE
       Ipass = 0
@@ -250,7 +250,7 @@ CONTAINS
     !
     IF( Kprint>=3 ) WRITE (Lun,99001)
     99001 FORMAT (' DRF - FORCE ERROR 1 TO OCCUR')
-    trf = DRF(-1.0D0,-1.0D0,-1.0D0,ier)
+    trf = DRF(-1._DP,-1._DP,-1._DP,ier)
     ier = NUMXER(ier)
     IF( ier==1 ) THEN
       ipass1 = 1
@@ -288,11 +288,11 @@ CONTAINS
     !  ARGUMENTS IN RANGE
     !  ALEM=LEMNISCATE CONSTANT A
     !
-    alem = 1.3110287771460599052324197949455597068D0
-    trf = DRF(0.0D0,1.0D0,2.0D0,ier)
+    alem = 1.3110287771460599052324197949455597068_DP
+    trf = DRF(0._DP,1._DP,2._DP,ier)
     CALL XERCLR
     dif = trf - alem
-    IF( (ABS(dif/alem)<1000.0D0*D1MACH(4)) .AND. (ier==0) ) THEN
+    IF( (ABS(dif/alem)<1000._DP*D1MACH(4)) .AND. (ier==0) ) THEN
       ipass4 = 1
     ELSE
       ipass4 = 0
@@ -354,7 +354,7 @@ CONTAINS
     !
     IF( Kprint>=3 ) WRITE (Lun,99001)
     99001 FORMAT (' DRJ - FORCE ERROR 1 TO OCCUR')
-    trj = DRJ(-1.0D0,-1.0D0,-1.0D0,-1.0D0,ier)
+    trj = DRJ(-1._DP,-1._DP,-1._DP,-1._DP,ier)
     ier = NUMXER(ier)
     IF( ier==1 ) THEN
       ipass1 = 1
@@ -391,11 +391,11 @@ CONTAINS
     !
     !  ARGUMENTS IN RANGE
     !
-    consj = 0.14297579667156753833233879421985774801D0
-    trj = DRJ(2.0D0,3.0D0,4.0D0,5.0D0,ier)
+    consj = 0.14297579667156753833233879421985774801_DP
+    trj = DRJ(2._DP,3._DP,4._DP,5._DP,ier)
     CALL XERCLR
     dif = trj - consj
-    IF( (ABS(dif/consj)<1000.0D0*D1MACH(4)) .AND. (ier==0) ) THEN
+    IF( (ABS(dif/consj)<1000._DP*D1MACH(4)) .AND. (ier==0) ) THEN
       ipass4 = 1
     ELSE
       ipass4 = 0

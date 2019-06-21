@@ -53,7 +53,7 @@ SUBROUTINE DQFORM(M,N,Q,Ldq,Wa)
   REAL(DP) :: Q(Ldq,M), Wa(M)
   INTEGER :: i, j, jm1, k, l, minmn, np1
   REAL(DP) :: summ, temp
-  REAL(DP), PARAMETER :: one = 1.0D0, zero = 0.0D0
+  REAL(DP), PARAMETER :: one = 1._DP, zero = 0._DP
   !
   !     ZERO OUT UPPER TRIANGLE OF Q IN THE FIRST MIN(M,N) COLUMNS.
   !

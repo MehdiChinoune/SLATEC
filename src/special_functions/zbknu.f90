@@ -35,68 +35,68 @@ SUBROUTINE ZBKNU(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol,Elim,Alim)
   !     COMPLEX CK,P,Q,COEF,P1,P2,CBK,PT,CZERO,CONE,CTWO,ST,EZ,CS,DK
   !
   INTEGER, PARAMETER :: kmax = 30
-  REAL(DP), PARAMETER :: czeror = 0.0D0, czeroi = 0.0D0, coner = 1.0D0, &
-    conei = 0.0D0, ctwor = 2.0D0, r1 = 2.0D0
-  REAL(DP), PARAMETER :: dpi = 3.14159265358979324D0, rthpi= 1.25331413731550025D0, &
-    spi = 1.90985931710274403D0, hpi = 1.57079632679489662D0, &
-    fpi = 1.89769999331517738D0, tth = 6.66666666666666666D-01
-  REAL(DP), PARAMETER :: cc(8) = [ 5.77215664901532861D-01, -4.20026350340952355D-02, &
-    -4.21977345555443367D-02, 7.21894324666309954D-03,-2.15241674114950973D-04, &
-    -2.01348547807882387D-05, 1.13302723198169588D-06, 6.11609510448141582D-09 ]
+  REAL(DP), PARAMETER :: czeror = 0._DP, czeroi = 0._DP, coner = 1._DP, &
+    conei = 0._DP, ctwor = 2._DP, r1 = 2._DP
+  REAL(DP), PARAMETER :: dpi = 3.14159265358979324_DP, rthpi= 1.25331413731550025_DP, &
+    spi = 1.90985931710274403_DP, hpi = 1.57079632679489662_DP, &
+    fpi = 1.89769999331517738_DP, tth = 6.66666666666666666E-01_DP
+  REAL(DP), PARAMETER :: cc(8) = [ 5.77215664901532861E-01_DP, -4.20026350340952355E-02_DP, &
+    -4.21977345555443367E-02_DP, 7.21894324666309954E-03_DP,-2.15241674114950973E-04_DP, &
+    -2.01348547807882387E-05_DP, 1.13302723198169588E-06_DP, 6.11609510448141582E-09_DP ]
   !* FIRST EXECUTABLE STATEMENT  ZBKNU
   caz = ZABS(Zr,Zi)
-  csclr = 1.0D0/Tol
+  csclr = 1._DP/Tol
   crscr = Tol
   cssr(1) = csclr
-  cssr(2) = 1.0D0
+  cssr(2) = 1._DP
   cssr(3) = crscr
   csrr(1) = crscr
-  csrr(2) = 1.0D0
+  csrr(2) = 1._DP
   csrr(3) = csclr
-  bry(1) = 1.0D+3*D1MACH(1)/Tol
-  bry(2) = 1.0D0/bry(1)
+  bry(1) = 1.E3_DP*D1MACH(1)/Tol
+  bry(2) = 1._DP/bry(1)
   bry(3) = D1MACH(2)
   Nz = 0
   iflag = 0
   koded = Kode
-  rcaz = 1.0D0/caz
+  rcaz = 1._DP/caz
   str = Zr*rcaz
   sti = -Zi*rcaz
   rzr = (str+str)*rcaz
   rzi = (sti+sti)*rcaz
-  inu = INT( Fnu + 0.5D0 )
+  inu = INT( Fnu + 0.5_DP )
   dnu = Fnu - inu
-  IF( ABS(dnu)/=0.5D0 ) THEN
-    dnu2 = 0.0D0
+  IF( ABS(dnu)/=0.5_DP ) THEN
+    dnu2 = 0._DP
     IF( ABS(dnu)>Tol ) dnu2 = dnu*dnu
     IF( caz<=r1 ) THEN
       !-----------------------------------------------------------------------
       !     SERIES FOR ABS(Z)<=R1
       !-----------------------------------------------------------------------
-      fc = 1.0D0
+      fc = 1._DP
       CALL ZLOG(rzr,rzi,smur,smui,idum)
       fmur = smur*dnu
       fmui = smui*dnu
       CALL ZSHCH(fmur,fmui,cshr,cshi,cchr,cchi)
-      IF( dnu/=0.0D0 ) THEN
+      IF( dnu/=0._DP ) THEN
         fc = dnu*dpi
         fc = fc/SIN(fc)
         smur = cshr/dnu
         smui = cshi/dnu
       END IF
-      a2 = 1.0D0 + dnu
+      a2 = 1._DP + dnu
       !-----------------------------------------------------------------------
       !     GAM(1-Z)*GAM(1+Z)=PI*Z/SIN(PI*Z), T1=1/GAM(1-DNU), T2=1/GAM(1+DNU)
       !-----------------------------------------------------------------------
       t2 = EXP(-DGAMLN(a2,idum))
-      t1 = 1.0D0/(t2*fc)
-      IF( ABS(dnu)>0.1D0 ) THEN
+      t1 = 1._DP/(t2*fc)
+      IF( ABS(dnu)>0.1_DP ) THEN
         g1 = (t1-t2)/(dnu+dnu)
       ELSE
         !-----------------------------------------------------------------------
         !     SERIES FOR F0 TO RESOLVE INDETERMINACY FOR SMALL ABS(DNU)
         !-----------------------------------------------------------------------
-        ak = 1.0D0
+        ak = 1._DP
         s = cc(1)
         DO k = 2, 8
           ak = ak*dnu2
@@ -106,44 +106,44 @@ SUBROUTINE ZBKNU(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol,Elim,Alim)
         END DO
         g1 = -s
       END IF
-      g2 = (t1+t2)*0.5D0
+      g2 = (t1+t2)*0.5_DP
       fr = fc*(cchr*g1+smur*g2)
       fi = fc*(cchi*g1+smui*g2)
       CALL ZEXP(fmur,fmui,str,sti)
-      pr = 0.5D0*str/t2
-      pi = 0.5D0*sti/t2
-      CALL ZDIV(0.5D0,0.0D0,str,sti,ptr,pti)
+      pr = 0.5_DP*str/t2
+      pi = 0.5_DP*sti/t2
+      CALL ZDIV(0.5_DP,0._DP,str,sti,ptr,pti)
       qr = ptr/t1
       qi = pti/t1
       s1r = fr
       s1i = fi
       s2r = pr
       s2i = pi
-      ak = 1.0D0
-      a1 = 1.0D0
+      ak = 1._DP
+      a1 = 1._DP
       ckr = coner
       cki = conei
-      bk = 1.0D0 - dnu2
+      bk = 1._DP - dnu2
       IF( inu>0 .OR. N>1 ) THEN
         !-----------------------------------------------------------------------
         !     GENERATE K(DNU,Z) AND K(DNU+1,Z) FOR FORWARD RECURRENCE
         !-----------------------------------------------------------------------
         IF( caz>=Tol ) THEN
           CALL ZMLT(Zr,Zi,Zr,Zi,czr,czi)
-          czr = 0.25D0*czr
-          czi = 0.25D0*czi
-          t1 = 0.25D0*caz*caz
+          czr = 0.25_DP*czr
+          czi = 0.25_DP*czi
+          t1 = 0.25_DP*caz*caz
           DO
             fr = (fr*ak+pr+qr)/bk
             fi = (fi*ak+pi+qi)/bk
-            str = 1.0D0/(ak-dnu)
+            str = 1._DP/(ak-dnu)
             pr = pr*str
             pi = pi*str
-            str = 1.0D0/(ak+dnu)
+            str = 1._DP/(ak+dnu)
             qr = qr*str
             qi = qi*str
             str = ckr*czr - cki*czi
-            rak = 1.0D0/ak
+            rak = 1._DP/ak
             cki = (ckr*czi+cki*czr)*rak
             ckr = str*rak
             s1r = ckr*fr - cki*fi + s1r
@@ -153,13 +153,13 @@ SUBROUTINE ZBKNU(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol,Elim,Alim)
             s2r = ckr*str - cki*sti + s2r
             s2i = ckr*sti + cki*str + s2i
             a1 = a1*t1*rak
-            bk = bk + ak + ak + 1.0D0
-            ak = ak + 1.0D0
+            bk = bk + ak + ak + 1._DP
+            ak = ak + 1._DP
             IF( a1<=Tol ) EXIT
           END DO
         END IF
         kflag = 2
-        a1 = Fnu + 1.0D0
+        a1 = Fnu + 1._DP
         ak = a1*ABS(smur)
         IF( ak>Alim ) kflag = 3
         str = cssr(kflag)
@@ -180,27 +180,27 @@ SUBROUTINE ZBKNU(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol,Elim,Alim)
         !-----------------------------------------------------------------------
         IF( caz>=Tol ) THEN
           CALL ZMLT(Zr,Zi,Zr,Zi,czr,czi)
-          czr = 0.25D0*czr
-          czi = 0.25D0*czi
-          t1 = 0.25D0*caz*caz
+          czr = 0.25_DP*czr
+          czi = 0.25_DP*czi
+          t1 = 0.25_DP*caz*caz
           DO
             fr = (fr*ak+pr+qr)/bk
             fi = (fi*ak+pi+qi)/bk
-            str = 1.0D0/(ak-dnu)
+            str = 1._DP/(ak-dnu)
             pr = pr*str
             pi = pi*str
-            str = 1.0D0/(ak+dnu)
+            str = 1._DP/(ak+dnu)
             qr = qr*str
             qi = qi*str
             str = ckr*czr - cki*czi
-            rak = 1.0D0/ak
+            rak = 1._DP/ak
             cki = (ckr*czi+cki*czr)*rak
             ckr = str*rak
             s1r = ckr*fr - cki*fi + s1r
             s1i = ckr*fi + cki*fr + s1i
             a1 = a1*t1*rak
-            bk = bk + ak + ak + 1.0D0
-            ak = ak + 1.0D0
+            bk = bk + ak + ak + 1._DP
+            ak = ak + 1._DP
             IF( a1<=Tol ) EXIT
           END DO
         END IF
@@ -238,14 +238,14 @@ SUBROUTINE ZBKNU(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol,Elim,Alim)
       CALL ZMLT(coefr,coefi,str,sti,coefr,coefi)
     END IF
   END IF
-  IF( ABS(dnu)==0.5D0 ) GOTO 800
+  IF( ABS(dnu)==0.5_DP ) GOTO 800
   !-----------------------------------------------------------------------
   !     MILLER ALGORITHM FOR ABS(Z)>R1
   !-----------------------------------------------------------------------
   ak = COS(dpi*dnu)
   ak = ABS(ak)
   IF( ak==czeror ) GOTO 800
-  fhs = ABS(0.25D0-dnu2)
+  fhs = ABS(0.25_DP-dnu2)
   IF( fhs==czeror ) GOTO 800
   !-----------------------------------------------------------------------
   !     COMPUTE R2=F(E). IF ABS(Z)>=R2, USE FORWARD RECURRENCE TO
@@ -254,11 +254,11 @@ SUBROUTINE ZBKNU(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol,Elim,Alim)
   !     TOL WHERE B IS THE BASE OF THE ARITHMETIC.
   !-----------------------------------------------------------------------
   t1 = I1MACH(14) - 1
-  t1 = t1*D1MACH(5)*3.321928094D0
-  t1 = MAX(t1,12.0D0)
-  t1 = MIN(t1,60.0D0)
-  t2 = tth*t1 - 6.0D0
-  IF( Zr/=0.0D0 ) THEN
+  t1 = t1*D1MACH(5)*3.321928094_DP
+  t1 = MAX(t1,12._DP)
+  t1 = MIN(t1,60._DP)
+  t2 = tth*t1 - 6._DP
+  IF( Zr/=0._DP ) THEN
     t1 = ATAN(Zi/Zr)
     t1 = ABS(t1)
   ELSE
@@ -270,10 +270,10 @@ SUBROUTINE ZBKNU(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol,Elim,Alim)
     !-----------------------------------------------------------------------
     a2 = SQRT(caz)
     ak = fpi*ak/(Tol*SQRT(a2))
-    aa = 3.0D0*t1/(1.0D0+caz)
-    bb = 14.7D0*t1/(28.0D0+caz)
-    ak = (LOG(ak)+caz*COS(aa)/(1.0D0+0.008D0*caz))/COS(bb)
-    fk = 0.12125D0*ak*ak/caz + 1.5D0
+    aa = 3._DP*t1/(1._DP+caz)
+    bb = 14.7_DP*t1/(28._DP+caz)
+    ak = (LOG(ak)+caz*COS(aa)/(1._DP+0.008_DP*caz))/COS(bb)
+    fk = 0.12125_DP*ak*ak/caz + 1.5_DP
   ELSE
     !-----------------------------------------------------------------------
     !     FORWARD RECURRENCE LOOP WHEN ABS(Z)>=R2
@@ -303,7 +303,7 @@ SUBROUTINE ZBKNU(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol,Elim,Alim)
     Nz = -2
     RETURN
     50  fk = fk + spi*t1*SQRT(t2/caz)
-    fhs = ABS(0.25D0-dnu2)
+    fhs = ABS(0.25_DP-dnu2)
   END IF
   !-----------------------------------------------------------------------
   !     BACKWARD RECURRENCE LOOP FOR MILLER ALGORITHM
@@ -320,7 +320,7 @@ SUBROUTINE ZBKNU(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol,Elim,Alim)
   DO i = 1, k
     a1 = fks - fk
     ak = (fks+fk)/(a1+fhs)
-    rak = 2.0D0/(fk+coner)
+    rak = 2._DP/(fk+coner)
     cbr = (fk+Zr)*rak
     cbi = Zi*rak
     ptr = p2r
@@ -339,7 +339,7 @@ SUBROUTINE ZBKNU(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol,Elim,Alim)
   !     SCALING
   !-----------------------------------------------------------------------
   tm = ZABS(csr,csi)
-  ptr = 1.0D0/tm
+  ptr = 1._DP/tm
   s1r = p2r*ptr
   s1i = p2i*ptr
   csr = csr*ptr
@@ -351,16 +351,16 @@ SUBROUTINE ZBKNU(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol,Elim,Alim)
     !     COMPUTE P1/P2=(P1/ABS(P2)*CONJG(P2)/ABS(P2) FOR SCALING
     !-----------------------------------------------------------------------
     tm = ZABS(p2r,p2i)
-    ptr = 1.0D0/tm
+    ptr = 1._DP/tm
     p1r = p1r*ptr
     p1i = p1i*ptr
     p2r = p2r*ptr
     p2i = -p2i*ptr
     CALL ZMLT(p1r,p1i,p2r,p2i,ptr,pti)
-    str = dnu + 0.5D0 - ptr
+    str = dnu + 0.5_DP - ptr
     sti = -pti
     CALL ZDIV(str,sti,Zr,Zi,str,sti)
-    str = str + 1.0D0
+    str = str + 1._DP
     CALL ZMLT(str,sti,s1r,s1i,s2r,s2i)
   ELSE
     zdr = Zr
@@ -372,7 +372,7 @@ SUBROUTINE ZBKNU(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol,Elim,Alim)
   !     FORWARD RECURSION ON THE THREE TERM RECURSION WITH RELATION WITH
   !     SCALING NEAR EXPONENT EXTREMES ON KFLAG=1 OR KFLAG=3
   !-----------------------------------------------------------------------
-  200  str = dnu + 1.0D0
+  200  str = dnu + 1._DP
   ckr = str*rzr
   cki = str*rzi
   IF( N==1 ) inu = inu - 1
@@ -382,7 +382,7 @@ SUBROUTINE ZBKNU(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol,Elim,Alim)
       !-----------------------------------------------------------------------
       !     IFLAG=1 CASES, FORWARD RECURRENCE ON SCALED VALUES ON UNDERFLOW
       !-----------------------------------------------------------------------
-      helim = 0.5D0*Elim
+      helim = 0.5_DP*Elim
       elm = EXP(-Elim)
       celmr = elm
       ascle = bry(1)

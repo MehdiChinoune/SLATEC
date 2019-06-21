@@ -83,11 +83,11 @@ SUBROUTINE DXCON(X,Ix,Ierror)
     itemp = 1
     icase = (3+SIGN(itemp,Ix))/2
     IF( icase==2 ) THEN
-      IF( ABS(X)<1.0D0 ) THEN
+      IF( ABS(X)<1._DP ) THEN
         X = X*radixl_com
         Ix = Ix - l_com
       END IF
-    ELSEIF( ABS(X)>=1.0D0 ) THEN
+    ELSEIF( ABS(X)>=1._DP ) THEN
       X = X/radixl_com
       Ix = Ix + l_com
     END IF
@@ -121,7 +121,7 @@ SUBROUTINE DXCON(X,Ix,Ierror)
     !     RADIX**I <= ABS(X) < RADIX**(I+1)  IN CASE 2.
     itemp = INT( ispace/dlg10r_com )
     a = radixx_com**itemp
-    b = 10.0D0**ispace
+    b = 10._DP**ispace
     DO WHILE( a>b )
       itemp = itemp - 1
       a = a/radixx_com
@@ -134,7 +134,7 @@ SUBROUTINE DXCON(X,Ix,Ierror)
     ! AT THIS POINT ITEMP IS SUCH THAT
     ! RADIX**ITEMP <= 10**ISPACE < RADIX**(ITEMP+1).
     IF( itemp<=0 ) THEN
-      ! ITEMP = 0 IF, AND ONLY IF, ISPACE = 1 AND RADIX = 16.0D0
+      ! ITEMP = 0 IF, AND ONLY IF, ISPACE = 1 AND RADIX = 16._DP
       X = X*radixx_com**(-i)
       Ix = Ix + i
       CALL DXC210(Ix,z,j,Ierror)
@@ -155,7 +155,7 @@ SUBROUTINE DXCON(X,Ix,Ierror)
     IF( Ierror/=0 ) RETURN
     j1 = j/ispace
     j2 = j - j1*ispace
-    X = X*z*10.0D0**j2
+    X = X*z*10._DP**j2
     Ix = j1*ispace
     !
     ! AT THIS POINT,
@@ -163,13 +163,13 @@ SUBROUTINE DXCON(X,Ix,Ierror)
     !           10.0D0**-1 <= ABS(X) < 10.0D0**(2*ISPACE-1) IN CASE 2.
     IF( icase==2 ) GOTO 100
     50 CONTINUE
-    DO WHILE( b*ABS(X)<1.0D0 )
+    DO WHILE( b*ABS(X)<1._DP )
       X = X*b
       Ix = Ix - ispace
     END DO
     RETURN
     100 CONTINUE
-    DO WHILE( 10.0D0*ABS(X)>=b )
+    DO WHILE( 10._DP*ABS(X)>=b )
       X = X/b
       Ix = Ix + ispace
     END DO

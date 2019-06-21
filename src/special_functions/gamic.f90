@@ -54,39 +54,39 @@ REAL(SP) FUNCTION GAMIC(A,X)
   REAL(SP) :: A, X
   INTEGER :: izero, ma
   REAL(SP) :: aeps, algap1, alngs, alx, e, fm, gstar, h, sga, sgng,  sgngam, sgngs, t
-  REAL(SP), PARAMETER :: eps = 0.5*R1MACH(3), sqeps = SQRT(R1MACH(4)), &
+  REAL(SP), PARAMETER :: eps = 0.5_SP*R1MACH(3), sqeps = SQRT(R1MACH(4)), &
     alneps = -LOG(R1MACH(3)), bot = LOG(R1MACH(1))
   !* FIRST EXECUTABLE STATEMENT  GAMIC
   !
-  IF( X<0.0 ) CALL XERMSG('GAMIC','X IS NEGATIVE',2,2)
+  IF( X<0._SP ) CALL XERMSG('GAMIC','X IS NEGATIVE',2,2)
   !
-  IF( X>0.0 ) THEN
+  IF( X>0._SP ) THEN
     !
     alx = LOG(X)
-    sga = 1.0
-    IF( A/=0.0 ) sga = SIGN(1.0,A)
-    ma = INT( A + 0.5*sga )
+    sga = 1._SP
+    IF( A/=0._SP ) sga = SIGN(1._SP,A)
+    ma = INT( A + 0.5_SP*sga )
     aeps = A - ma
     !
     izero = 0
-    IF( X>=1.0 ) THEN
+    IF( X>=1._SP ) THEN
       !
       IF( A<X ) THEN
         GAMIC = EXP(R9LGIC(A,X,alx))
         RETURN
       END IF
       !
-      sgngam = 1.0
-      algap1 = LOG_GAMMA(A+1.0)
-      sgngs = 1.0
+      sgngam = 1._SP
+      algap1 = LOG_GAMMA(A+1._SP)
+      sgngs = 1._SP
       alngs = R9LGIT(A,X,algap1)
     ELSE
       !
-      IF( A<=0.5 .AND. ABS(aeps)<=0.001 ) THEN
+      IF( A<=0.5_SP .AND. ABS(aeps)<=0.001 ) THEN
         fm = -ma
-        e = 2.0
-        IF( fm>1.0 ) e = 2.0*(fm+2.0)/(fm*fm-1.0)
-        e = e - alx*X**(-0.001)
+        e = 2._SP
+        IF( fm>1._SP ) e = 2._SP*(fm+2._SP)/(fm*fm-1._SP)
+        e = e - alx*X**(-0.001_SP)
         IF( e*ABS(aeps)<=eps ) THEN
           !
           GAMIC = R9GMIC(A,X,alx)
@@ -94,16 +94,16 @@ REAL(SP) FUNCTION GAMIC(A,X)
         END IF
       END IF
       !
-      CALL ALGAMS(A+1.0,algap1,sgngam)
+      CALL ALGAMS(A+1._SP,algap1,sgngam)
       gstar = R9GMIT(A,X,algap1,sgngam)
-      IF( gstar==0.0 ) izero = 1
-      IF( gstar/=0.0 ) alngs = LOG(ABS(gstar))
-      IF( gstar/=0.0 ) sgngs = SIGN(1.0,gstar)
+      IF( gstar==0._SP ) izero = 1
+      IF( gstar/=0._SP ) alngs = LOG(ABS(gstar))
+      IF( gstar/=0._SP ) sgngs = SIGN(1._SP,gstar)
     END IF
     !
     ! EVALUATION OF GAMIC(A,X) IN TERMS OF TRICOMI-S INCOMPLETE GAMMA FN.
     !
-    h = 1.0
+    h = 1._SP
     IF( izero/=1 ) THEN
       !
       t = A*alx + alngs
@@ -115,7 +115,7 @@ REAL(SP) FUNCTION GAMIC(A,X)
         GAMIC = sgng*EXP(t)
         RETURN
       ELSE
-        IF( t>(-alneps) ) h = 1.0 - sgngs*EXP(t)
+        IF( t>(-alneps) ) h = 1._SP - sgngs*EXP(t)
         !
         IF( ABS(h)<sqeps ) CALL XERCLR
         IF( ABS(h)<sqeps )&
@@ -123,14 +123,14 @@ REAL(SP) FUNCTION GAMIC(A,X)
       END IF
     END IF
   ELSE
-    IF( A<=0.0 ) CALL XERMSG('GAMIC',&
+    IF( A<=0._SP ) CALL XERMSG('GAMIC',&
       'X = 0 AND A LE 0 SO GAMIC IS UNDEFINED',3,2)
     !
-    GAMIC = EXP(LOG_GAMMA(A+1.0)-LOG(A))
+    GAMIC = EXP(LOG_GAMMA(A+1._SP)-LOG(A))
     RETURN
   END IF
   !
-  sgng = SIGN(1.0,h)*sga*sgngam
+  sgng = SIGN(1._SP,h)*sga*sgngam
   t = LOG(ABS(h)) + algap1 - LOG(ABS(A))
   IF( t<bot ) CALL XERCLR
   GAMIC = sgng*EXP(t)

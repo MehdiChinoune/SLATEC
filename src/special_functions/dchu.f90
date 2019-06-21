@@ -39,23 +39,23 @@ REAL(DP) FUNCTION DCHU(A,B,X)
   INTEGER :: i, istrt, m, n
   REAL(DP) :: aintb, alnx, a0, beps, b0, c0, factor, gamri1, gamrni, &
     pch1ai, pch1i, pochai, summ, t, xeps1, xi, xi1, xn, xtoeps
-  REAL(DP), PARAMETER :: pi = 3.141592653589793238462643383279503D0
+  REAL(DP), PARAMETER :: pi = 3.141592653589793238462643383279503_DP
   REAL(DP), PARAMETER :: eps = D1MACH(3)
   !* FIRST EXECUTABLE STATEMENT  DCHU
   !
-  IF( X==0.0D0 ) CALL XERMSG('DCHU','X IS ZERO SO DCHU IS INFINITE',1,2)
-  IF( X<0.0D0 ) CALL XERMSG('DCHU','X IS NEGATIVE, USE CCHU',2,2)
+  IF( X==0._DP ) CALL XERMSG('DCHU','X IS ZERO SO DCHU IS INFINITE',1,2)
+  IF( X<0._DP ) CALL XERMSG('DCHU','X IS NEGATIVE, USE CCHU',2,2)
   !
-  IF( MAX(ABS(A),1.0D0)*MAX(ABS(1.0D0+A-B),1.0D0)>=0.99D0*ABS(X) ) THEN
+  IF( MAX(ABS(A),1._DP)*MAX(ABS(1._DP+A-B),1._DP)>=0.99_DP*ABS(X) ) THEN
     !
     ! THE ASCENDING SERIES WILL BE USED, BECAUSE THE DESCENDING RATIONAL
     ! APPROXIMATION (WHICH IS BASED ON THE ASYMPTOTIC SERIES) IS UNSTABLE.
     !
-    IF( ABS(1.0D0+A-B)<SQRT(eps) ) CALL XERMSG('DCHU',&
+    IF( ABS(1._DP+A-B)<SQRT(eps) ) CALL XERMSG('DCHU',&
       'ALGORITHMIS BAD WHEN 1+A-B IS NEAR ZERO FOR SMALL X',10,2)
     !
-    IF( B>=0.0D0 ) aintb = AINT(B+0.5D0)
-    IF( B<0.0D0 ) aintb = AINT(B-0.5D0)
+    IF( B>=0._DP ) aintb = AINT(B+0.5_DP)
+    IF( B<0._DP ) aintb = AINT(B-0.5_DP)
     beps = B - aintb
     n = INT( aintb )
     !
@@ -68,39 +68,39 @@ REAL(DP) FUNCTION DCHU(A,B,X)
       !
       ! NOW CONSIDER THE CASE B >= 1.0.
       !
-      summ = 0.0D0
+      summ = 0._DP
       m = n - 2
       IF( m>=0 ) THEN
-        t = 1.0D0
-        summ = 1.0D0
+        t = 1._DP
+        summ = 1._DP
         IF( m/=0 ) THEN
           !
           DO i = 1, m
             xi = i
-            t = t*(A-B+xi)*X/((1.0D0-B+xi)*xi)
+            t = t*(A-B+xi)*X/((1._DP-B+xi)*xi)
             summ = summ + t
           END DO
         END IF
         !
-        summ = GAMMA(B-1.0D0)*DGAMR(A)*X**(1-n)*xtoeps*summ
+        summ = GAMMA(B-1._DP)*DGAMR(A)*X**(1-n)*xtoeps*summ
       END IF
     ELSE
       !
       ! CONSIDER THE CASE B < 1.0 FIRST.
       !
-      summ = 1.0D0
+      summ = 1._DP
       IF( n/=0 ) THEN
         !
-        t = 1.0D0
+        t = 1._DP
         m = -n
         DO i = 1, m
           xi1 = i - 1
-          t = t*(A+xi1)*X/((B+xi1)*(xi1+1.0D0))
+          t = t*(A+xi1)*X/((B+xi1)*(xi1+1._DP))
           summ = summ + t
         END DO
       END IF
       !
-      summ = DPOCH(1.0D0+A-B,-A)*summ
+      summ = DPOCH(1._DP+A-B,-A)*summ
     END IF
     !
     ! NEXT EVALUATE THE INFINITE SUM.     ----------------------------------
@@ -109,21 +109,21 @@ REAL(DP) FUNCTION DCHU(A,B,X)
     IF( n<1 ) istrt = 1 - n
     xi = istrt
     !
-    factor = (-1.0D0)**n*DGAMR(1.0D0+A-B)*X**istrt
-    IF( beps/=0.0D0 ) factor = factor*beps*pi/SIN(beps*pi)
+    factor = (-1._DP)**n*DGAMR(1._DP+A-B)*X**istrt
+    IF( beps/=0._DP ) factor = factor*beps*pi/SIN(beps*pi)
     !
     pochai = DPOCH(A,xi)
-    gamri1 = DGAMR(xi+1.0D0)
+    gamri1 = DGAMR(xi+1._DP)
     gamrni = DGAMR(aintb+xi)
-    b0 = factor*DPOCH(A,xi-beps)*gamrni*DGAMR(xi+1.0D0-beps)
+    b0 = factor*DPOCH(A,xi-beps)*gamrni*DGAMR(xi+1._DP-beps)
     !
-    IF( ABS(xtoeps-1.0D0)<=0.5D0 ) THEN
+    IF( ABS(xtoeps-1._DP)<=0.5_DP ) THEN
       !
       ! X**(-BEPS) IS CLOSE TO 1.0D0, SO WE MUST BE CAREFUL IN EVALUATING THE
       ! DIFFERENCES.
       !
       pch1ai = DPOCH1(A+xi,-beps)
-      pch1i = DPOCH1(xi+1.0D0-beps,beps)
+      pch1i = DPOCH1(xi+1._DP-beps,beps)
       c0 = factor*pochai*gamrni*gamri1*(-DPOCH1(B+xi,-beps)+pch1ai-pch1i+&
         beps*pch1ai*pch1i)
       !
@@ -137,7 +137,7 @@ REAL(DP) FUNCTION DCHU(A,B,X)
         xi1 = istrt + i - 1
         b0 = (A+xi1-beps)*b0*X/((xn+xi1)*(xi-beps))
         c0 = (A+xi1)*c0*X/((B+xi1)*xi)&
-          - ((A-1.0D0)*(xn+2.D0*xi-1.0D0)+xi*(xi-beps))&
+          - ((A-1._DP)*(xn+2._DP*xi-1._DP)+xi*(xi-beps))&
           *b0/(xi*(B+xi1)*(A+xi1-beps))
         t = c0 + xeps1*b0
         DCHU = DCHU + t

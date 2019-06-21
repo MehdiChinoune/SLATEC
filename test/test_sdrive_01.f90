@@ -40,23 +40,23 @@ CONTAINS
     REAL(SP) :: eps, t, tout
     INTEGER :: ierflg, Ipass, Kprint, leniw, leniwx, lenw, lenwx, &
       Lun, mint, mstate, nde, nfe, nje, nstate, nstep, nx
-    REAL, PARAMETER :: ALFA = 1.E0, HMAX = 15.E0
+    REAL(SP), PARAMETER :: ALFA = 1._SP, HMAX = 15._SP
     INTEGER, PARAMETER :: IERROR = 3, IMPL = 0, LENWMX = 342, LIWMX = 53, &
       MITER = 5, ML = 2, MU = 2, MXORD = 5, MXSTEP = 1000, N = 3, NROOT = 0, NTASK = 1
     REAL(SP) :: work(LENWMX), y(N+1)
     INTEGER :: iwork(LIWMX)
-    REAL, PARAMETER :: ewt(1) = .00001E0
+    REAL(SP), PARAMETER :: ewt(1) = .00001_SP
     !* FIRST EXECUTABLE STATEMENT  SDQCK
-    eps = R1MACH(4)**(1.E0/3.E0)
+    eps = R1MACH(4)**(1._SP/3._SP)
     Ipass = 1
     !                                            Exercise SDRIV1 for problem
     !                                            with known solution.
     y(4) = ALFA
-    t = 0.E0
-    y(1) = 10.E0
-    y(2) = 0.E0
-    y(3) = 10.E0
-    tout = 10.E0
+    t = 0._SP
+    y(1) = 10._SP
+    y(2) = 0._SP
+    y(3) = 10._SP
+    tout = 10._SP
     mstate = 1
     lenw = 342
     CALL SDRIV1(N,t,y,SDF,tout,mstate,eps,work,lenw,ierflg)
@@ -84,8 +84,8 @@ CONTAINS
         WRITE (Lun,'(//)')
       END IF
       Ipass = 0
-    ELSEIF( ABS(1.E0-y(1)*1.5E0)>eps**(2.E0/3.E0) .OR. ABS(1.E0-y(2)*3.E0)&
-        >eps**(2.E0/3.E0) .OR. ABS(1.E0-y(3))>eps**(2.E0/3.E0) ) THEN
+    ELSEIF( ABS(1._SP-y(1)*1.5_SP)>eps**(2._SP/3._SP) .OR. ABS(1._SP-y(2)*3._SP)&
+        >eps**(2._SP/3._SP) .OR. ABS(1._SP-y(3))>eps**(2._SP/3._SP) ) THEN
       IF( Kprint==1 ) THEN
         WRITE (Lun,&
           '('' SDRIV1:The solution determined is not accurate enough.'' //)')
@@ -121,12 +121,12 @@ CONTAINS
     CALL XERCLR
     !                                         Run SDRIV1 with invalid input.
     nx = 201
-    t = 0.E0
-    y(1) = 10.E0
-    y(2) = 0.E0
-    y(3) = 10.E0
+    t = 0._SP
+    y(1) = 10._SP
+    y(2) = 0._SP
+    y(3) = 10._SP
     y(4) = ALFA
-    tout = 10.E0
+    tout = 10._SP
     mstate = 1
     lenw = 342
     CALL SDRIV1(nx,t,y,SDF,tout,mstate,eps,work,lenw,ierflg)
@@ -165,13 +165,13 @@ CONTAINS
     CALL XERCLR
     !                                            Exercise SDRIV2 for problem
     !                                            with known solution.
-    t = 0.E0
-    y(1) = 10.E0
-    y(2) = 0.E0
-    y(3) = 10.E0
+    t = 0._SP
+    y(1) = 10._SP
+    y(2) = 0._SP
+    y(3) = 10._SP
     y(4) = ALFA
     mstate = 1
-    tout = 10.E0
+    tout = 10._SP
     mint = 1
     lenw = 298
     leniw = 50
@@ -202,8 +202,8 @@ CONTAINS
         WRITE (Lun,'(//)')
       END IF
       Ipass = 0
-    ELSEIF( ABS(1.E0-y(1)*1.5E0)>eps**(2.E0/3.E0) .OR. ABS(1.E0-y(2)*3.E0)&
-        >eps**(2.E0/3.E0) .OR. ABS(1.E0-y(3))>eps**(2.E0/3.E0) ) THEN
+    ELSEIF( ABS(1._SP-y(1)*1.5_SP)>eps**(2._SP/3._SP) .OR. ABS(1._SP-y(2)*3._SP)&
+        >eps**(2._SP/3._SP) .OR. ABS(1._SP-y(3))>eps**(2._SP/3._SP) ) THEN
       IF( Kprint==1 ) THEN
         WRITE (Lun,&
           '('' SDRIV2:The solution determined is not accurate enough.'' //)')
@@ -238,12 +238,12 @@ CONTAINS
     END IF
     CALL XERCLR
     !                                         Run SDRIV2 with invalid input.
-    t = 0.E0
-    y(1) = 10.E0
-    y(2) = 0.E0
-    y(3) = 10.E0
+    t = 0._SP
+    y(1) = 10._SP
+    y(2) = 0._SP
+    y(3) = 10._SP
     y(4) = ALFA
-    tout = 10.E0
+    tout = 10._SP
     mstate = 1
     mint = 1
     lenwx = 1
@@ -286,13 +286,13 @@ CONTAINS
     CALL XERCLR
     !                                            Exercise SDRIV3 for problem
     !                                            with known solution.
-    t = 0.E0
-    y(1) = 10.E0
-    y(2) = 0.E0
-    y(3) = 10.E0
+    t = 0._SP
+    y(1) = 10._SP
+    y(2) = 0._SP
+    y(3) = 10._SP
     y(4) = ALFA
     nstate = 1
-    tout = 10.E0
+    tout = 10._SP
     mint = 2
     lenw = 301
     leniw = 53
@@ -324,8 +324,8 @@ CONTAINS
         WRITE (Lun,'(//)')
       END IF
       Ipass = 0
-    ELSEIF( ABS(1.E0-y(1)*1.5E0)>eps**(2.E0/3.E0) .OR. ABS(1.E0-y(2)*3.E0)&
-        >eps**(2.E0/3.E0) .OR. ABS(1.E0-y(3))>eps**(2.E0/3.E0) ) THEN
+    ELSEIF( ABS(1._SP-y(1)*1.5_SP)>eps**(2._SP/3._SP) .OR. ABS(1._SP-y(2)*3._SP)&
+        >eps**(2._SP/3._SP) .OR. ABS(1._SP-y(3))>eps**(2._SP/3._SP) ) THEN
       IF( Kprint==1 ) THEN
         WRITE (Lun,&
           '('' SDRIV3:The solution determined is not accurate enough.''//)')
@@ -361,13 +361,13 @@ CONTAINS
     END IF
     CALL XERCLR
     !                                         Run SDRIV3 with invalid input.
-    t = 0.E0
-    y(1) = 10.E0
-    y(2) = 0.E0
-    y(3) = 10.E0
+    t = 0._SP
+    y(1) = 10._SP
+    y(2) = 0._SP
+    y(3) = 10._SP
     y(4) = ALFA
     nstate = 1
-    tout = 10.E0
+    tout = 10._SP
     mint = 2
     lenw = 301
     leniwx = 1
@@ -412,31 +412,31 @@ CONTAINS
   CONTAINS
     REAL(SP) FUNCTION dum_G(N,T,Y,Iroot)
       INTEGER :: N, Iroot
-      REAL :: T
-      REAL :: Y(N)
+      REAL(SP) :: T
+      REAL(SP) :: Y(N)
       dum_G = SUM(Y) + T
     END FUNCTION dum_G
     SUBROUTINE dum_JACOBN(N,T,Y,Dfdy,Matdim,Ml,Mu)
       INTEGER :: N, Matdim, Ml, Mu
-      REAL :: T
-      REAL :: Y(N), Dfdy(Matdim,N)
+      REAL(SP) :: T
+      REAL(SP) :: Y(N), Dfdy(Matdim,N)
       Dfdy = T
       Y = Ml + Mu
     END SUBROUTINE dum_JACOBN
     SUBROUTINE dum_USERS(Y,Yh,Ywt,Save1,Save2,T,H,El,Impl,N,Nde,Iflag)
       INTEGER :: Impl, N, Nde, Iflag
-      REAL :: T, H, El
-      REAL :: Y(N), Yh(N,13), Ywt(N), Save1(N), Save2(N)
+      REAL(SP) :: T, H, El
+      REAL(SP) :: Y(N), Yh(N,13), Ywt(N), Save1(N), Save2(N)
       Y = Ywt + Save1 + Save2
       Yh = T + H + El
       Impl = Nde + Iflag
     END SUBROUTINE dum_USERS
     SUBROUTINE dum_FA(N,T,Y,A,Matdim,Ml,Mu,Nde)
       INTEGER :: N, Matdim, Ml, Mu, Nde
-      REAL :: T, Y(N), A(:,:)
+      REAL(SP) :: T, Y(N), A(:,:)
       T = Matdim + Ml + Mu + Nde
-      Y = 0.
-      A = 0.
+      Y = 0._SP
+      A = 0._SP
     END SUBROUTINE dum_FA
   END SUBROUTINE SDQCK
   !** SDF
@@ -472,9 +472,9 @@ CONTAINS
     REAL(SP) :: alfa
     !* FIRST EXECUTABLE STATEMENT  SDF
     alfa = Y(N+1)
-    Yp(1) = 1.E0 + alfa*(Y(2)-Y(1)) - Y(1)*Y(3)
+    Yp(1) = 1._SP + alfa*(Y(2)-Y(1)) - Y(1)*Y(3)
     Yp(2) = alfa*(Y(1)-Y(2)) - Y(2)*Y(3)
-    Yp(3) = 1.E0 - Y(3)*(Y(1)+Y(2))
+    Yp(3) = 1._SP - Y(3)*(Y(1)+Y(2))
   END SUBROUTINE SDF
 END MODULE TEST45_MOD
 !** TEST45

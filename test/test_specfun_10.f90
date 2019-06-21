@@ -50,13 +50,13 @@ CONTAINS
     Ipass = 1
     irad = I1MACH(10)
     nradpl = 0
-    dzero = 0.0
+    dzero = 0._SP
     nbits = 0
     CALL XSET(irad,nradpl,dzero,nbits,ierror)
     IF( ierror/=0 ) Ipass = 0
     ierr = 0
-    dnu1 = 2000.4
-    IF( I1MACH(13)*LOG10(REAL(I1MACH(10)))<150. ) dnu1 = 100.4
+    dnu1 = 2000.4_SP
+    IF( I1MACH(13)*LOG10(REAL(I1MACH(10)))<150._SP ) dnu1 = 100.4_SP
     IF( Kprint>2 ) THEN
       IF( I1MACH(13)<500 ) WRITE (Lun,99002)
       99002 FORMAT (' ON COMPUTERS WITH MAXIMUM EXPONENT LESS THAN 500, SMALL'/&
@@ -70,8 +70,8 @@ CONTAINS
     nudiff = 5
     mu1 = INT( dnu1 )
     mu2 = mu1
-    deg = 0.1
-    theta = deg*4.*ATAN(1.0)/180.0
+    deg = 0.1_SP
+    theta = deg*4._SP*ATAN(1._SP)/180._SP
     !
     ! In TEST 1 the Legendre functions P (of both positive and negative
     ! order) and Q are calculated.  Large values of mu and nu are used
@@ -127,18 +127,18 @@ CONTAINS
       nu = dnu1
       DO i = 1, 5
         WRITE (Lun,fmtf) nu, c1(i), ic1(i)
-        nu = nu + 1.
+        nu = nu + 1._SP
       END DO
       WRITE (Lun,'(A)') '     NU   CASORATI 2'
       nu = dnu1
       DO i = 1, 5
         WRITE (Lun,fmtf) nu, c2(i), ic2(i)
-        nu = nu + 1.
+        nu = nu + 1._SP
       END DO
     END IF
     DO i = 1, 5
-      IF( ABS(1.0-c1(i))>=10.0E0**(6-ndec) ) GOTO 100
-      IF( ABS(1.0-c2(i))>=10.0E0**(6-ndec) ) GOTO 100
+      IF( ABS(1.0-c1(i))>=10._SP**(6-ndec) ) GOTO 100
+      IF( ABS(1.0-c2(i))>=10._SP**(6-ndec) ) GOTO 100
     END DO
     IF( isum==0 ) THEN
       IF( Kprint>=2 ) WRITE (Lun,99005)
@@ -202,8 +202,8 @@ CONTAINS
       END DO
     END IF
     DO i = 1, 5
-      IF( ABS(1.0-c1(i))>=10.0E0**(6-ndec) ) GOTO 300
-      IF( ABS(1.0-c2(i))>=10.0E0**(6-ndec) ) GOTO 300
+      IF( ABS(1.0-c1(i))>=10._SP**(6-ndec) ) GOTO 300
+      IF( ABS(1.0-c2(i))>=10._SP**(6-ndec) ) GOTO 300
       IF( isum/=0 ) GOTO 300
     END DO
     IF( Kprint>=2 ) WRITE (Lun,99008)
@@ -235,9 +235,9 @@ CONTAINS
       WRITE (Lun,fmt) x13, ix13
       WRITE (Lun,fmt) x23, ix23
     END IF
-    IF( ABS((x11-x21)/x11)<10.0E0**(6-ndec) ) THEN
-      IF( ABS((x12-x22)/x12)<10.0E0**(6-ndec) ) THEN
-        IF( ABS((x13-x13)/x13)<10.0E0**(6-ndec) ) THEN
+    IF( ABS((x11-x21)/x11)<10._SP**(6-ndec) ) THEN
+      IF( ABS((x12-x22)/x12)<10._SP**(6-ndec) ) THEN
+        IF( ABS((x13-x13)/x13)<10._SP**(6-ndec) ) THEN
           IF( ix11==ix21 ) THEN
             IF( ix12==ix22 ) THEN
               IF( ix13==ix23 ) THEN
@@ -262,7 +262,7 @@ CONTAINS
     ! should always be returned as zero.
     !
     500  isum = 0
-    dnu1 = 100.0
+    dnu1 = 100._SP
     nudiff = 0
     mu1 = 10
     mu2 = 10
@@ -283,7 +283,7 @@ CONTAINS
       WRITE (Lun,fmt) x11, ix11
       WRITE (Lun,fmt) x21, ix21
     END IF
-    IF( ABS((x11-x21)/x11)<10.0E0**(6-ndec) ) THEN
+    IF( ABS((x11-x21)/x11)<10._SP**(6-ndec) ) THEN
       IF( ix11==ix21 ) THEN
         IF( isum==0 ) THEN
           IF( Kprint>=2 ) WRITE (Lun,99014)
@@ -323,7 +323,7 @@ CONTAINS
       n = NUMXER(nerr)
       IF( n==ierror ) THEN
         nudiff = 0
-        theta = 2.0
+        theta = 2._SP
         CALL XERCLR
         CALL XLEGF(dnu1,nudiff,mu1,mu2,theta,1,p,ip,ierror)
         n = NUMXER(nerr)
@@ -408,8 +408,8 @@ CONTAINS
       !
       sx = SIN(Theta)
       DO i = 1, lm1
-        C1(i) = 0.
-        C2(i) = 0.
+        C1(i) = 0._SP
+        C2(i) = 0._SP
         !
         !         CASORATI 4
         !
@@ -426,7 +426,7 @@ CONTAINS
         ix2 = Ip(i) + Iq(i+1)
         CALL XADJ(x2,ix2,Ierror)
         IF( Ierror/=0 ) RETURN
-        x1 = (dmu+Dnu1+1.)*(dmu-Dnu1)*x1
+        x1 = (dmu+Dnu1+1._SP)*(dmu-Dnu1)*x1
         !
         !         MULTIPLY BY SQRT(1-X**2)*(-1)**MU SO THAT CHECK VALUE IS 1.
         !
@@ -441,7 +441,7 @@ CONTAINS
         !         P(MU+1,NU,X)*Q(MU,NU,X)-P(MU,NU,X)*Q(MU+1,NU,X)=
         !               GAMMA(NU+MU+1)/(GAMMA(NU-MU+1)*SQRT(1-X**2))
         !
-        IF( dmu<Dnu1+1. .OR. MOD(Dnu1,1.)/=0. ) THEN
+        IF( dmu<Dnu1+1. .OR. MOD(Dnu1,1._SP)/=0._SP ) THEN
           x1 = R(i+1)*Q(i)
           ix1 = Ir(i+1) + Iq(i)
           CALL XADJ(x1,ix1,Ierror)
@@ -461,7 +461,7 @@ CONTAINS
           k = 2*mu
           IF( k>0 ) THEN
             DO j = 1, k
-              C2(i) = C2(i)/(Dnu1+dmu+1.-j)
+              C2(i) = C2(i)/(Dnu1+dmu+1._SP-j)
               CALL XADJ(C2(i),Ic2(i),Ierror)
             END DO
             IF( Ierror/=0 ) RETURN
@@ -471,9 +471,9 @@ CONTAINS
     ELSE
       dmu1 = Mu1
       DO i = 1, lm1
-        C1(i) = 0.
-        C2(i) = 0.
-        nu = Dnu1 + i - 1.
+        C1(i) = 0._SP
+        C2(i) = 0._SP
+        nu = Dnu1 + i - 1._SP
         !
         !         CASORATI 2
         !
@@ -488,8 +488,8 @@ CONTAINS
         ix2 = Ip(i) + Iq(i+1)
         CALL XADJ(x2,ix2,Ierror)
         IF( Ierror/=0 ) RETURN
-        x1 = (dmu1+nu+1.)*x1
-        x2 = (dmu1-nu-1.)*x2
+        x1 = (dmu1+nu+1._SP)*x1
+        x2 = (dmu1-nu-1._SP)*x2
         CALL XADD(x1,ix1,x2,ix2,C1(i),Ic1(i),Ierror)
         IF( Ierror/=0 ) RETURN
         CALL XADJ(C1(i),Ic1(i),Ierror)
@@ -504,8 +504,8 @@ CONTAINS
         !         P(MU,NU+1,X)*Q(MU,NU,X)-P(MU,NU,X)*Q(MU,NU+1,X)=
         !               GAMMA(NU+MU+1)/GAMMA(NU-MU+2)
         !
-        IF( dmu1>=nu+1. .AND. MOD(nu,1.)==0. ) THEN
-          C2(i) = 0.
+        IF( dmu1>=nu+1. .AND. MOD(nu,1._SP)==0._SP ) THEN
+          C2(i) = 0._SP
           Ic2(i) = 0
         ELSE
           x1 = R(i+1)*Q(i)
@@ -524,11 +524,11 @@ CONTAINS
           !
           k = 2*Mu1 - 1
           DO j = 1, k
-            IF( k>0 ) C2(i) = C2(i)/(nu+dmu1+1.-j)
+            IF( k>0 ) C2(i) = C2(i)/(nu+dmu1+1._SP-j)
             CALL XADJ(C2(i),Ic2(i),Ierror)
           END DO
           IF( Ierror/=0 ) RETURN
-          IF( k<=0 ) C2(i) = (nu+1.)*C2(i)
+          IF( k<=0 ) C2(i) = (nu+1._SP)*C2(i)
         END IF
       END DO
     END IF

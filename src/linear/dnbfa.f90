@@ -137,7 +137,7 @@ SUBROUTINE DNBFA(Abe,Lda,N,Ml,Mu,Ipvt,Info)
   !
   IF( N>1 ) THEN
     IF( Ml>0 ) THEN
-      Abe(1:N,m+1:m+Ml) = 0.0D0
+      Abe(1:N,m+1:m+Ml) = 0._DP
     END IF
     !
     !     GAUSSIAN ELIMINATION WITH PARTIAL ELIMINATION
@@ -162,13 +162,13 @@ SUBROUTINE DNBFA(Abe,Lda,N,Ml,Mu,Ipvt,Info)
       !
       !     SKIP COLUMN REDUCTION IF PIVOT IS ZERO
       !
-      IF( Abe(k,ml1)==0.0D0 ) THEN
+      IF( Abe(k,ml1)==0._DP ) THEN
         Info = k
       ELSE
         !
         !     COMPUTE MULTIPLIERS
         !
-        t = -1.0/Abe(k,ml1)
+        t = -1._DP/Abe(k,ml1)
         DO i = 0, lm-1
           Abe(lm+k-i,lm2+i) = t*Abe(lm+k-i,lm2+i)
         END DO
@@ -182,5 +182,5 @@ SUBROUTINE DNBFA(Abe,Lda,N,Ml,Mu,Ipvt,Info)
     END DO
   END IF
   Ipvt(N) = N
-  IF( Abe(N,ml1)==0.0D0 ) Info = N
+  IF( Abe(N,ml1)==0._DP ) Info = N
 END SUBROUTINE DNBFA

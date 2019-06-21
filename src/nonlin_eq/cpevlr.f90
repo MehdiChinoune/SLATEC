@@ -26,7 +26,7 @@ SUBROUTINE CPEVLR(N,M,A,X,C)
   !* FIRST EXECUTABLE STATEMENT  CPEVLR
   np1 = N + 1
   DO j = 1, np1
-    ci = 0.0
+    ci = 0._SP
     cim1 = A(j)
     mini = MIN(M+1,N+2-j)
     DO i = 1, mini

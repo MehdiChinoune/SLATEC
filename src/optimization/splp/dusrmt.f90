@@ -34,7 +34,7 @@ SUBROUTINE DUSRMT(I,J,Aij,Indcat,Dattrv,Iflag)
     !     ARE RESPECTIVELY THE COLUMN INDEX, THE ROW INDEX (OR THE NEXT COL.
     !     INDEX), AND THE POINTER TO THE MATRIX ENTRY'S VALUE WITHIN
     !     DATTRV(*).  ALSO CHECK (DATTRV(1)=0.) SIGNIFYING NO DATA.
-    IF( Dattrv(1)==0.D0 ) THEN
+    IF( Dattrv(1)==0._DP ) THEN
       I = 0
       J = 0
       Iflag(1) = 3

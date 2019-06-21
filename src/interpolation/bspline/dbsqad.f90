@@ -69,17 +69,17 @@ SUBROUTINE DBSQAD(T,Bcoef,N,K,X1,X2,Bquad,Work)
   INTEGER :: i, il1, il2, ilo, inbv, jf, left, m, mf, mflag, npk, np1
   REAL(DP) :: a, aa, b, bb, bma, bpa, c1, gx, q, summ(5), ta, tb, y1, y2
   !
-  REAL(DP), PARAMETER :: gpts(9) = [ 5.77350269189625764D-01, 2.38619186083196909D-01, &
-    6.61209386466264514D-01, 9.32469514203152028D-01, 1.48874338981631211D-01, &
-    4.33395394129247191D-01, 6.79409568299024406D-01, 8.65063366688984511D-01, &
-    9.73906528517171720D-01 ]
-  REAL(DP), PARAMETER :: gwts(9) = [ 1.00000000000000000D+00, 4.67913934572691047D-01, &
-    3.60761573048138608D-01, 1.71324492379170345D-01, 2.95524224714752870D-01, &
-    2.69266719309996355D-01, 2.19086362515982044D-01, 1.49451349150580593D-01, &
-    6.66713443086881376D-02 ]
+  REAL(DP), PARAMETER :: gpts(9) = [ 5.77350269189625764E-01_DP, 2.38619186083196909E-01_DP, &
+    6.61209386466264514E-01_DP, 9.32469514203152028E-01_DP, 1.48874338981631211E-01_DP, &
+    4.33395394129247191E-01_DP, 6.79409568299024406E-01_DP, 8.65063366688984511E-01_DP, &
+    9.73906528517171720E-01_DP ]
+  REAL(DP), PARAMETER :: gwts(9) = [ 1.00000000000000000E+00_DP, 4.67913934572691047E-01_DP, &
+    3.60761573048138608E-01_DP, 1.71324492379170345E-01_DP, 2.95524224714752870E-01_DP, &
+    2.69266719309996355E-01_DP, 2.19086362515982044E-01_DP, 1.49451349150580593E-01_DP, &
+    6.66713443086881376E-02_DP ]
   !
   !* FIRST EXECUTABLE STATEMENT  DBSQAD
-  Bquad = 0.0D0
+  Bquad = 0._DP
   IF( K<1 .OR. K>20 ) THEN
     CALL XERMSG('DBSQAD','K DOES NOT SATISFY 1<=K<=20',2,1)
     RETURN
@@ -107,7 +107,7 @@ SUBROUTINE DBSQAD(T,Bcoef,N,K,X1,X2,Bquad,Work)
         END IF
         !
         DO i = 1, mf
-          summ(i) = 0.0D0
+          summ(i) = 0._DP
         END DO
         ilo = 1
         inbv = 1
@@ -120,8 +120,8 @@ SUBROUTINE DBSQAD(T,Bcoef,N,K,X1,X2,Bquad,Work)
           IF( ta/=tb ) THEN
             a = MAX(aa,ta)
             b = MIN(bb,tb)
-            bma = 0.5D0*(b-a)
-            bpa = 0.5D0*(b+a)
+            bma = 0.5_DP*(b-a)
+            bpa = 0.5_DP*(b+a)
             DO m = 1, mf
               c1 = bma*gpts(jf+m)
               gx = -c1 + bpa
@@ -132,7 +132,7 @@ SUBROUTINE DBSQAD(T,Bcoef,N,K,X1,X2,Bquad,Work)
             END DO
           END IF
         END DO
-        q = 0.0D0
+        q = 0._DP
         DO m = 1, mf
           q = q + gwts(jf+m)*summ(m)
         END DO

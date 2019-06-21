@@ -55,9 +55,9 @@ CONTAINS
       work(35), r, delx, delmax, signn
     INTEGER :: lda, n, ml, mu, ind, iwork(4), Nerr, i, j, j1, j2, jd, &
       mlp, k, kcase, kprog
-    REAL, PARAMETER :: a(4,4) = RESHAPE( [ 5.0E0, 4.0E0, 1.0E0, 1.0E0, &
-      4.0E0, 5.0E0, 1.0E0, 1.0E0,    1.0E0, 1.0E0, 4.0E0, 2.0E0, &
-      1.0E0, 1.0E0, 2.0E0, 4.0E0 ], [4,4] )
+    REAL(SP), PARAMETER :: a(4,4) = RESHAPE( [ 5._SP, 4._SP, 1._SP, 1._SP, &
+      4._SP, 5._SP, 1._SP, 1._SP,    1._SP, 1._SP, 4._SP, 2._SP, &
+      1._SP, 1._SP, 2._SP, 4._SP ], [4,4] )
     CHARACTER(4), PARAMETER :: list(4) = [ 'POFS', 'POIR', 'NBFS', 'NBIR' ]
     !* FIRST EXECUTABLE STATEMENT  SQCK
     IF( Kprint>=3 ) WRITE (Lun,99001)
@@ -69,11 +69,11 @@ CONTAINS
     mu = 1
     jd = 2*ml + mu + 1
     Nerr = 0
-    r = R1MACH(4)**0.8E0
+    r = R1MACH(4)**0.8_SP
     !
     !     COMPUTE C VECTOR.
     !
-    signn = 1.0E0
+    signn = 1._SP
     DO i = 1, n
       c(i) = signn/i
       signn = -signn
@@ -85,7 +85,7 @@ CONTAINS
       DO kprog = 1, 4
         !           SET VECTOR B TO ZERO.
         DO i = 1, n
-          b(i) = 0.0E0
+          b(i) = 0._SP
         END DO
         !
         !           FORM VECTOR B FOR NON-BANDED.
@@ -103,7 +103,7 @@ CONTAINS
           !
           DO j = 1, jd
             DO i = 1, n
-              abe(i,j) = 0.0E0
+              abe(i,j) = 0._SP
             END DO
           END DO
           !
@@ -138,11 +138,11 @@ CONTAINS
         !
         IF( kcase==2 ) THEN
           DO j = 1, n
-            at(1,j) = 0.0E0
+            at(1,j) = 0._SP
           END DO
           !
           DO j = 1, jd
-            abet(1,j) = 0.0E0
+            abet(1,j) = 0._SP
           END DO
         END IF
         !
@@ -156,7 +156,7 @@ CONTAINS
         !           COMPARE EXACT AND COMPUTED SOLUTIONS FOR CASE 1
         !
         IF( kcase==1 ) THEN
-          delmax = 0.0E0
+          delmax = 0._SP
           DO i = 1, n
             delx = ABS(bt(i)-c(i))
             delmax = MAX(delmax,delx)
@@ -236,9 +236,9 @@ CONTAINS
     REAL(SP) :: r, delx, delmax
     INTEGER :: lda, n, ml, mu, ind, iwork(4), Nerr, i, j, j1, j2, jd, &
       mlp, k, kcase, kprog
-    REAL(DP), PARAMETER :: a(4,4) = RESHAPE( [ 5.0D0, 4.0D0, 1.0D0, 1.0D0, &
-      4.0D0, 5.0D0, 1.0D0, 1.0D0,    1.0D0, 1.0D0, 4.0D0, 2.0D0, &
-      1.0D0, 1.0D0, 2.0D0, 4.0D0 ], [4,4] )
+    REAL(DP), PARAMETER :: a(4,4) = RESHAPE( [ 5._DP, 4._DP, 1._DP, 1._DP, &
+      4._DP, 5._DP, 1._DP, 1._DP,    1._DP, 1._DP, 4._DP, 2._DP, &
+      1._DP, 1._DP, 2._DP, 4._DP ], [4,4] )
     CHARACTER(4), PARAMETER :: list(2) = [ 'POFS', 'NBFS' ]
     !* FIRST EXECUTABLE STATEMENT  DQCK
     IF( Kprint>=3 ) WRITE (Lun,99001)
@@ -250,11 +250,11 @@ CONTAINS
     mu = 1
     jd = 2*ml + mu + 1
     Nerr = 0
-    r = REAL( D1MACH(4)**0.8D0, SP )
+    r = REAL( D1MACH(4)**0.8_DP, SP )
     !
     !     COMPUTE C VECTOR.
     !
-    signn = 1.0D0
+    signn = 1._DP
     DO i = 1, n
       c(i) = signn/i
       signn = -signn
@@ -266,7 +266,7 @@ CONTAINS
       DO kprog = 1, 2
         !           SET VECTOR B TO ZERO.
         DO i = 1, n
-          b(i) = 0.0D0
+          b(i) = 0._DP
         END DO
         !
         !           FORM VECTOR B FOR NON-BANDED.
@@ -284,7 +284,7 @@ CONTAINS
           !
           DO j = 1, jd
             DO i = 1, n
-              abe(i,j) = 0.0D0
+              abe(i,j) = 0._DP
             END DO
           END DO
           !
@@ -319,11 +319,11 @@ CONTAINS
         !
         IF( kcase==2 ) THEN
           DO j = 1, n
-            at(1,j) = 0.0D0
+            at(1,j) = 0._DP
           END DO
           !
           DO j = 1, jd
-            abet(1,j) = 0.0D0
+            abet(1,j) = 0._DP
           END DO
         END IF
         !
@@ -335,7 +335,7 @@ CONTAINS
         !           COMPARE EXACT AND COMPUTED SOLUTIONS FOR CASE 1
         !
         IF( kcase==1 ) THEN
-          delmax = 0.0E0
+          delmax = 0._SP
           DO i = 1, n
             delx = REAL( ABS(bt(i)-c(i)), SP )
             delmax = MAX(delmax,delx)
@@ -416,12 +416,12 @@ CONTAINS
     INTEGER :: lda, n, ml, mu, ind, iwork(4), Nerr, i, j, j1, j2, jd, &
       mlp, k, kcase, kprog
     COMPLEX(SP), PARAMETER :: a(4,4) = RESHAPE( [ &
-      (2.E0,0.E0), (0.E0,1.E0), (0.E0,0.E0), (0.E0,0.E0), &
-      (0.E0,-1.E0), (2.E0,0.E0), (0.E0,0.E0), (0.E0,0.E0), &
-      (0.E0,0.E0), (0.E0,0.E0), (3.E0,0.E0), (0.E0,1.E0), &
-      (0.E0,0.E0), (0.E0,0.E0), (0.E0,-1.E0), (4.E0,0.E0) ], [4,4] )
-    COMPLEX(SP), PARAMETER :: c(4) = [ (1.E0,1.E0), (0.E0,1.E0), (0.E0,-1.E0), (1.E0,0.E0) ]
-    COMPLEX(SP), PARAMETER :: b(4) = [ (3.E0,2.E0), (-1.E0,3.E0), (0.E0,-4.E0), (5.E0,0.E0) ]
+      (2._SP,0._SP), (0._SP,1._SP), (0._SP,0._SP), (0._SP,0._SP), &
+      (0._SP,-1._SP), (2._SP,0._SP), (0._SP,0._SP), (0._SP,0._SP), &
+      (0._SP,0._SP), (0._SP,0._SP), (3._SP,0._SP), (0._SP,1._SP), &
+      (0._SP,0._SP), (0._SP,0._SP), (0._SP,-1._SP), (4._SP,0._SP) ], [4,4] )
+    COMPLEX(SP), PARAMETER :: c(4) = [ (1._SP,1._SP), (0._SP,1._SP), (0._SP,-1._SP), (1._SP,0._SP) ]
+    COMPLEX(SP), PARAMETER :: b(4) = [ (3._SP,2._SP), (-1._SP,3._SP), (0._SP,-4._SP), (5._SP,0._SP) ]
     CHARACTER(4), PARAMETER :: list(4) = [ 'POFS', 'POIR', 'NBFS', 'NBIR' ]
     !* FIRST EXECUTABLE STATEMENT  CQCK
     IF( Kprint>=3 ) WRITE (Lun,99001)
@@ -433,13 +433,13 @@ CONTAINS
     mu = 1
     jd = 2*ml + mu + 1
     Nerr = 0
-    r = R1MACH(4)**0.8E0
+    r = R1MACH(4)**0.8_SP
     !
     !     FORM ABE(NB ARRAY) FROM MATRIX A.
     !
     DO j = 1, jd
       DO i = 1, n
-        abe(i,j) = (0.0E0,0.0E0)
+        abe(i,j) = (0._SP,0._SP)
       END DO
     END DO
     !
@@ -475,11 +475,11 @@ CONTAINS
         !
         IF( kcase==2 ) THEN
           DO j = 1, n
-            at(1,j) = (0.0E0,0.0E0)
+            at(1,j) = (0._SP,0._SP)
           END DO
           !
           DO j = 1, jd
-            abet(1,j) = (0.0E0,0.0E0)
+            abet(1,j) = (0._SP,0._SP)
           END DO
         END IF
         !
@@ -493,7 +493,7 @@ CONTAINS
         !           COMPARE EXACT AND COMPUTED SOLUTIONS FOR CASE 1
         !
         IF( kcase==1 ) THEN
-          delmax = 0.0E0
+          delmax = 0._SP
           DO i = 1, n
             delx = ABS(REAL(bt(i))-REAL(c(i)))
             delmax = MAX(delmax,delx)

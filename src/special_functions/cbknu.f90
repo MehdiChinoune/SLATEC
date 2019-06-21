@@ -30,68 +30,68 @@ SUBROUTINE CBKNU(Z,Fnu,Kode,N,Y,Nz,Tol,Elim,Alim)
     t1, t2, xx, yy, helim, elm, xd, yd, alas, as
   !
   INTEGER, PARAMETER :: kmax = 30
-  REAL(SP), PARAMETER ::  r1 = 2.0E0
-  COMPLEX(SP), PARAMETER ::  czero = (0.0E0,0.0E0), cone = (1.0E0,0.0E0), &
-    ctwo = (2.0E0,0.0E0)
+  REAL(SP), PARAMETER ::  r1 = 2._SP
+  COMPLEX(SP), PARAMETER ::  czero = (0._SP,0._SP), cone = (1._SP,0._SP), &
+    ctwo = (2._SP,0._SP)
   !
-  REAL(SP), PARAMETER ::  pi = 3.14159265358979324E0, rthpi = 1.25331413731550025E0, &
-    spi= 1.90985931710274403E0, hpi = 1.57079632679489662E0, &
-    fpi = 1.89769999331517738E0, tth = 6.66666666666666666E-01
+  REAL(SP), PARAMETER ::  pi = 3.14159265358979324_SP, rthpi = 1.25331413731550025_SP, &
+    spi= 1.90985931710274403_SP, hpi = 1.57079632679489662_SP, &
+    fpi = 1.89769999331517738_SP, tth = 6.66666666666666666E-01_SP
   !
-  REAL(SP), PARAMETER :: cc(8) = [ 5.77215664901532861E-01, -4.20026350340952355E-02, &
-    -4.21977345555443367E-02, 7.21894324666309954E-03, -2.15241674114950973E-04, &
-    -2.01348547807882387E-05, 1.13302723198169588E-06, 6.11609510448141582E-09 ]
+  REAL(SP), PARAMETER :: cc(8) = [ 5.77215664901532861E-01_SP, -4.20026350340952355E-02_SP, &
+    -4.21977345555443367E-02_SP, 7.21894324666309954E-03_SP, -2.15241674114950973E-04_SP, &
+    -2.01348547807882387E-05_SP, 1.13302723198169588E-06_SP, 6.11609510448141582E-09_SP ]
   !
   !* FIRST EXECUTABLE STATEMENT  CBKNU
   xx = REAL(Z)
   yy = AIMAG(Z)
   caz = ABS(Z)
-  cscl = CMPLX(1.0E0/Tol,0.0E0)
-  crsc = CMPLX(Tol,0.0E0)
+  cscl = CMPLX(1._SP/Tol,0._SP,SP)
+  crsc = CMPLX(Tol,0._SP,SP)
   css(1) = cscl
   css(2) = cone
   css(3) = crsc
   csr(1) = crsc
   csr(2) = cone
   csr(3) = cscl
-  bry(1) = 1.0E+3*R1MACH(1)/Tol
-  bry(2) = 1.0E0/bry(1)
+  bry(1) = 1.E+3_SP*R1MACH(1)/Tol
+  bry(2) = 1._SP/bry(1)
   bry(3) = R1MACH(2)
   Nz = 0
   iflag = 0
   koded = Kode
   rz = ctwo/Z
-  inu = INT( Fnu + 0.5E0 )
+  inu = INT( Fnu + 0.5_SP )
   dnu = Fnu - inu
-  IF( ABS(dnu)/=0.5E0 ) THEN
-    dnu2 = 0.0E0
+  IF( ABS(dnu)/=0.5_SP ) THEN
+    dnu2 = 0._SP
     IF( ABS(dnu)>Tol ) dnu2 = dnu*dnu
     IF( caz<=r1 ) THEN
       !-----------------------------------------------------------------------
       !     SERIES FOR ABS(Z)<=R1
       !-----------------------------------------------------------------------
-      fc = 1.0E0
+      fc = 1._SP
       smu = LOG(rz)
-      fmu = smu*CMPLX(dnu,0.0E0)
+      fmu = smu*CMPLX(dnu,0._SP,SP)
       CALL CSHCH(fmu,csh,cch)
-      IF( dnu/=0.0E0 ) THEN
+      IF( dnu/=0._SP ) THEN
         fc = dnu*pi
         fc = fc/SIN(fc)
-        smu = csh*CMPLX(1.0E0/dnu,0.0E0)
+        smu = csh*CMPLX(1._SP/dnu,0._SP,SP)
       END IF
-      a2 = 1.0E0 + dnu
+      a2 = 1._SP + dnu
       !-----------------------------------------------------------------------
       !     GAM(1-Z)*GAM(1+Z)=PI*Z/SIN(PI*Z), T1=1/GAM(1-DNU), T2=1/GAM(1+DNU)
       !-----------------------------------------------------------------------
       t2 = EXP(-GAMLN(a2,idum))
-      t1 = 1.0E0/(t2*fc)
-      IF( ABS(dnu)>0.1E0 ) THEN
+      t1 = 1._SP/(t2*fc)
+      IF( ABS(dnu)>0.1_SP ) THEN
         g1 = (t1-t2)/(dnu+dnu)
       ELSE
         !-----------------------------------------------------------------------
         !     SERIES FOR F0 TO RESOLVE INDETERMINACY FOR SMALL ABS(DNU)
         !-----------------------------------------------------------------------
-        ak = 1.0E0
+        ak = 1._SP
         s = cc(1)
         DO k = 2, 8
           ak = ak*dnu2
@@ -101,42 +101,42 @@ SUBROUTINE CBKNU(Z,Fnu,Kode,N,Y,Nz,Tol,Elim,Alim)
         END DO
         g1 = -s
       END IF
-      g2 = 0.5E0*(t1+t2)*fc
+      g2 = 0.5_SP*(t1+t2)*fc
       g1 = g1*fc
-      f = CMPLX(g1,0.0E0)*cch + smu*CMPLX(g2,0.0E0)
+      f = CMPLX(g1,0._SP,SP)*cch + smu*CMPLX(g2,0._SP,SP)
       pt = EXP(fmu)
-      p = CMPLX(0.5E0/t2,0.0E0)*pt
-      q = CMPLX(0.5E0/t1,0.0E0)/pt
+      p = CMPLX(0.5_SP/t2,0._SP,SP)*pt
+      q = CMPLX(0.5_SP/t1,0._SP,SP)/pt
       s1 = f
       s2 = p
-      ak = 1.0E0
-      a1 = 1.0E0
+      ak = 1._SP
+      a1 = 1._SP
       ck = cone
-      bk = 1.0E0 - dnu2
+      bk = 1._SP - dnu2
       IF( inu>0 .OR. N>1 ) THEN
         !-----------------------------------------------------------------------
         !     GENERATE K(DNU,Z) AND K(DNU+1,Z) FOR FORWARD RECURRENCE
         !-----------------------------------------------------------------------
         IF( caz>=Tol ) THEN
-          cz = Z*Z*CMPLX(0.25E0,0.0E0)
-          t1 = 0.25E0*caz*caz
+          cz = Z*Z*CMPLX(0.25_SP,0._SP,SP)
+          t1 = 0.25_SP*caz*caz
           DO
-            f = (f*CMPLX(ak,0.0E0)+p+q)*CMPLX(1.0E0/bk,0.0E0)
-            p = p*CMPLX(1.0E0/(ak-dnu),0.0E0)
-            q = q*CMPLX(1.0E0/(ak+dnu),0.0E0)
-            rk = 1.0E0/ak
-            ck = ck*cz*CMPLX(rk,0.0E0)
+            f = (f*CMPLX(ak,0._SP,SP)+p+q)*CMPLX(1._SP/bk,0._SP,SP)
+            p = p*CMPLX(1._SP/(ak-dnu),0._SP,SP)
+            q = q*CMPLX(1._SP/(ak+dnu),0._SP,SP)
+            rk = 1._SP/ak
+            ck = ck*cz*CMPLX(rk,0._SP,SP)
             s1 = s1 + ck*f
-            s2 = s2 + ck*(p-f*CMPLX(ak,0.0E0))
+            s2 = s2 + ck*(p-f*CMPLX(ak,0._SP,SP))
             a1 = a1*t1*rk
-            bk = bk + ak + ak + 1.0E0
-            ak = ak + 1.0E0
+            bk = bk + ak + ak + 1._SP
+            ak = ak + 1._SP
             IF( a1<=Tol ) EXIT
           END DO
         END IF
         kflag = 2
         bk = REAL(smu)
-        a1 = Fnu + 1.0E0
+        a1 = Fnu + 1._SP
         ak = a1*ABS(bk)
         IF( ak>Alim ) kflag = 3
         p2 = s2*css(kflag)
@@ -153,18 +153,18 @@ SUBROUTINE CBKNU(Z,Fnu,Kode,N,Y,Nz,Tol,Elim,Alim)
         !     GENERATE K(FNU,Z), 0.0D0 <= FNU < 0.5D0 AND N=1
         !-----------------------------------------------------------------------
         IF( caz>=Tol ) THEN
-          cz = Z*Z*CMPLX(0.25E0,0.0E0)
-          t1 = 0.25E0*caz*caz
+          cz = Z*Z*CMPLX(0.25_SP,0._SP,SP)
+          t1 = 0.25_SP*caz*caz
           DO
-            f = (f*CMPLX(ak,0.0E0)+p+q)*CMPLX(1.0E0/bk,0.0E0)
-            p = p*CMPLX(1.0E0/(ak-dnu),0.0E0)
-            q = q*CMPLX(1.0E0/(ak+dnu),0.0E0)
-            rk = 1.0E0/ak
-            ck = ck*cz*CMPLX(rk,0.0)
+            f = (f*CMPLX(ak,0._SP,SP)+p+q)*CMPLX(1._SP/bk,0._SP,SP)
+            p = p*CMPLX(1._SP/(ak-dnu),0._SP,SP)
+            q = q*CMPLX(1._SP/(ak+dnu),0._SP,SP)
+            rk = 1._SP/ak
+            ck = ck*cz*CMPLX(rk,0._SP,SP)
             s1 = s1 + ck*f
             a1 = a1*t1*rk
-            bk = bk + ak + ak + 1.0E0
-            ak = ak + 1.0E0
+            bk = bk + ak + ak + 1._SP
+            ak = ak + 1._SP
             IF( a1<=Tol ) EXIT
           END DO
         END IF
@@ -181,7 +181,7 @@ SUBROUTINE CBKNU(Z,Fnu,Kode,N,Y,Nz,Tol,Elim,Alim)
   !     KODED=2 AND A TEST FOR ON SCALE VALUES IS MADE DURING FORWARD
   !     RECURSION
   !-----------------------------------------------------------------------
-  coef = CMPLX(rthpi,0.0E0)/SQRT(Z)
+  coef = CMPLX(rthpi,0._SP,SP)/SQRT(Z)
   kflag = 2
   IF( koded/=2 ) THEN
     IF( xx>Alim ) THEN
@@ -194,30 +194,30 @@ SUBROUTINE CBKNU(Z,Fnu,Kode,N,Y,Nz,Tol,Elim,Alim)
     ELSE
       !     BLANK LINE
       a1 = EXP(-xx)*REAL(css(kflag))
-      pt = CMPLX(a1,0.0E0)*CMPLX(COS(yy),-SIN(yy))
+      pt = CMPLX(a1,0._SP,SP)*CMPLX(COS(yy),-SIN(yy),SP)
       coef = coef*pt
     END IF
   END IF
-  IF( ABS(dnu)==0.5E0 ) GOTO 800
+  IF( ABS(dnu)==0.5_SP ) GOTO 800
   !-----------------------------------------------------------------------
   !     MILLER ALGORITHM FOR ABS(Z)>R1
   !-----------------------------------------------------------------------
   ak = COS(pi*dnu)
   ak = ABS(ak)
-  IF( ak==0.0E0 ) GOTO 800
-  fhs = ABS(0.25E0-dnu2)
-  IF( fhs==0.0E0 ) GOTO 800
+  IF( ak==0._SP ) GOTO 800
+  fhs = ABS(0.25_SP-dnu2)
+  IF( fhs==0._SP ) GOTO 800
   !-----------------------------------------------------------------------
   !     COMPUTE R2=F(E). IF ABS(Z)>=R2, USE FORWARD RECURRENCE TO
   !     DETERMINE THE BACKWARD INDEX K. R2=F(E) IS A STRAIGHT LINE ON
   !     12<=E<=60. E IS COMPUTED FROM 2**(-E)=B**(1-I1MACH(11))=
   !     TOL WHERE B IS THE BASE OF THE ARITHMETIC.
   !-----------------------------------------------------------------------
-  t1 = (I1MACH(11)-1)*R1MACH(5)*3.321928094E0
-  t1 = MAX(t1,12.0E0)
-  t1 = MIN(t1,60.0E0)
-  t2 = tth*t1 - 6.0E0
-  IF( xx/=0.0E0 ) THEN
+  t1 = (I1MACH(11)-1)*R1MACH(5)*3.321928094_SP
+  t1 = MAX(t1,12._SP)
+  t1 = MIN(t1,60._SP)
+  t2 = tth*t1 - 6._SP
+  IF( xx/=0._SP ) THEN
     t1 = ATAN(yy/xx)
     t1 = ABS(t1)
   ELSE
@@ -229,38 +229,38 @@ SUBROUTINE CBKNU(Z,Fnu,Kode,N,Y,Nz,Tol,Elim,Alim)
     !-----------------------------------------------------------------------
     a2 = SQRT(caz)
     ak = fpi*ak/(Tol*SQRT(a2))
-    aa = 3.0E0*t1/(1.0E0+caz)
-    bb = 14.7E0*t1/(28.0E0+caz)
-    ak = (LOG(ak)+caz*COS(aa)/(1.0E0+0.008E0*caz))/COS(bb)
-    fk = 0.12125E0*ak*ak/caz + 1.5E0
+    aa = 3._SP*t1/(1._SP+caz)
+    bb = 14.7_SP*t1/(28._SP+caz)
+    ak = (LOG(ak)+caz*COS(aa)/(1._SP+0.008_SP*caz))/COS(bb)
+    fk = 0.12125_SP*ak*ak/caz + 1.5_SP
   ELSE
     !-----------------------------------------------------------------------
     !     FORWARD RECURRENCE LOOP WHEN ABS(Z)>=R2
     !-----------------------------------------------------------------------
     etest = ak/(pi*caz*Tol)
-    fk = 1.0E0
-    IF( etest<1.0E0 ) GOTO 100
-    fks = 2.0E0
-    rk = caz + caz + 2.0E0
-    a1 = 0.0E0
-    a2 = 1.0E0
+    fk = 1._SP
+    IF( etest<1._SP ) GOTO 100
+    fks = 2._SP
+    rk = caz + caz + 2._SP
+    a1 = 0._SP
+    a2 = 1._SP
     DO i = 1, kmax
       ak = fhs/fks
-      bk = rk/(fk+1.0E0)
+      bk = rk/(fk+1._SP)
       tm = a2
       a2 = bk*a2 - ak*a1
       a1 = tm
-      rk = rk + 2.0E0
-      fks = fks + fk + fk + 2.0E0
+      rk = rk + 2._SP
+      fks = fks + fk + fk + 2._SP
       fhs = fhs + fk + fk
-      fk = fk + 1.0E0
+      fk = fk + 1._SP
       tm = ABS(a2)*fk
       IF( etest<tm ) GOTO 50
     END DO
     Nz = -2
     RETURN
     50  fk = fk + spi*t1*SQRT(t2/caz)
-    fhs = ABS(0.25E0-dnu2)
+    fhs = ABS(0.25_SP-dnu2)
   END IF
   100  k = INT( fk )
   !-----------------------------------------------------------------------
@@ -269,27 +269,27 @@ SUBROUTINE CBKNU(Z,Fnu,Kode,N,Y,Nz,Tol,Elim,Alim)
   fk = k
   fks = fk*fk
   p1 = czero
-  p2 = CMPLX(Tol,0.0E0)
+  p2 = CMPLX(Tol,0._SP,SP)
   cs = p2
   DO i = 1, k
     a1 = fks - fk
     a2 = (fks+fk)/(a1+fhs)
-    rk = 2.0E0/(fk+1.0E0)
+    rk = 2._SP/(fk+1._SP)
     t1 = (fk+xx)*rk
     t2 = yy*rk
     pt = p2
-    p2 = (p2*CMPLX(t1,t2)-p1)*CMPLX(a2,0.0E0)
+    p2 = (p2*CMPLX(t1,t2,SP)-p1)*CMPLX(a2,0._SP,SP)
     p1 = pt
     cs = cs + p2
-    fks = a1 - fk + 1.0E0
-    fk = fk - 1.0E0
+    fks = a1 - fk + 1._SP
+    fk = fk - 1._SP
   END DO
   !-----------------------------------------------------------------------
   !     COMPUTE (P2/CS)=(P2/ABS(CS))*(CONJG(CS)/ABS(CS)) FOR BETTER
   !     SCALING
   !-----------------------------------------------------------------------
   tm = ABS(cs)
-  pt = CMPLX(1.0E0/tm,0.0E0)
+  pt = CMPLX(1._SP/tm,0._SP,SP)
   s1 = pt*p2
   cs = CONJG(cs)*pt
   s1 = coef*s1*cs
@@ -298,11 +298,11 @@ SUBROUTINE CBKNU(Z,Fnu,Kode,N,Y,Nz,Tol,Elim,Alim)
     !     COMPUTE P1/P2=(P1/ABS(P2)*CONJG(P2)/ABS(P2) FOR SCALING
     !-----------------------------------------------------------------------
     tm = ABS(p2)
-    pt = CMPLX(1.0E0/tm,0.0E0)
+    pt = CMPLX(1._SP/tm,0._SP,SP)
     p1 = pt*p1
     p2 = CONJG(p2)*pt
     pt = p1*p2
-    s2 = s1*(cone+(CMPLX(dnu+0.5E0,0.0E0)-pt)/Z)
+    s2 = s1*(cone+(CMPLX(dnu+0.5_SP,0._SP,SP)-pt)/Z)
   ELSE
     zd = Z
     IF( iflag/=1 ) GOTO 400
@@ -312,7 +312,7 @@ SUBROUTINE CBKNU(Z,Fnu,Kode,N,Y,Nz,Tol,Elim,Alim)
   !     FORWARD RECURSION ON THE THREE TERM RECURSION RELATION WITH
   !     SCALING NEAR EXPONENT EXTREMES ON KFLAG=1 OR KFLAG=3
   !-----------------------------------------------------------------------
-  200  ck = CMPLX(dnu+1.0E0,0.0E0)*rz
+  200  ck = CMPLX(dnu+1._SP,0._SP,SP)*rz
   IF( N==1 ) inu = inu - 1
   IF( inu>0 ) THEN
     inub = 1
@@ -320,9 +320,9 @@ SUBROUTINE CBKNU(Z,Fnu,Kode,N,Y,Nz,Tol,Elim,Alim)
       !-----------------------------------------------------------------------
       !     IFLAG=1 CASES, FORWARD RECURRENCE ON SCALED VALUES ON UNDERFLOW
       !-----------------------------------------------------------------------
-      helim = 0.5E0*Elim
+      helim = 0.5_SP*Elim
       elm = EXP(-Elim)
-      celm = CMPLX(elm,0.0)
+      celm = CMPLX(elm,0._SP,SP)
       ascle = bry(1)
       zd = Z
       xd = xx
@@ -342,7 +342,7 @@ SUBROUTINE CBKNU(Z,Fnu,Kode,N,Y,Nz,Tol,Elim,Alim)
           p2r = REAL(p2)
           p2i = AIMAG(p2)
           p2m = EXP(p2r)/Tol
-          p1 = CMPLX(p2m,0.0E0)*CMPLX(COS(p2i),SIN(p2i))
+          p1 = CMPLX(p2m,0._SP,SP)*CMPLX(COS(p2i),SIN(p2i),SP)
           CALL CUCHK(p1,nw,ascle,Tol)
           IF( nw==0 ) THEN
             j = 3 - j
@@ -356,7 +356,7 @@ SUBROUTINE CBKNU(Z,Fnu,Kode,N,Y,Nz,Tol,Elim,Alim)
           xd = xd - Elim
           s1 = s1*celm
           s2 = s2*celm
-          zd = CMPLX(xd,yd)
+          zd = CMPLX(xd,yd,SP)
         END IF
       END DO
       IF( N==1 ) s1 = s2
@@ -451,7 +451,7 @@ SUBROUTINE CBKNU(Z,Fnu,Kode,N,Y,Nz,Tol,Elim,Alim)
   Y(kk) = s2*csr(1)
   IF( inu==2 ) RETURN
   t2 = Fnu + (kk-1)
-  ck = CMPLX(t2,0.0E0)*rz
+  ck = CMPLX(t2,0._SP,SP)*rz
   kflag = 1
   GOTO 500
   !-----------------------------------------------------------------------

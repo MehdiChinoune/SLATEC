@@ -167,13 +167,13 @@ SUBROUTINE ZBESI(Zr,Zi,Fnu,Kode,N,Cyr,Cyi,Nz,Ierr)
   INTEGER :: i, Ierr, inu, k, Kode, k1, k2, N, Nz, nn
   REAL(DP) :: aa, alim, arg, csgni, csgnr, Cyi(N), Cyr(N), dig, elim, Fnu, fnul, &
     rl, r1m5, str, tol, Zi, zni, znr, Zr, az, bb, fn, ascle, rtol, atol, sti
-  REAL(DP), PARAMETER :: pi = 3.14159265358979324D0
-  REAL(DP), PARAMETER :: coner = 1.0D0, conei = 0.0D0
+  REAL(DP), PARAMETER :: pi = 3.14159265358979324_DP
+  REAL(DP), PARAMETER :: coner = 1._DP, conei = 0._DP
   !
   !* FIRST EXECUTABLE STATEMENT  ZBESI
   Ierr = 0
   Nz = 0
-  IF( Fnu<0.0D0 ) Ierr = 1
+  IF( Fnu<0._DP ) Ierr = 1
   IF( Kode<1 .OR. Kode>2 ) Ierr = 1
   IF( N<1 ) Ierr = 1
   IF( Ierr/=0 ) RETURN
@@ -188,26 +188,26 @@ SUBROUTINE ZBESI(Zr,Zi,Fnu,Kode,N,Cyr,Cyi,Nz,Ierr)
   !     DIG = NUMBER OF BASE 10 DIGITS IN TOL = 10**(-DIG).
   !     FNUL IS THE LOWER BOUNDARY OF THE ASYMPTOTIC SERIES FOR LARGE FNU.
   !-----------------------------------------------------------------------
-  tol = MAX(D1MACH(4),1.0D-18)
+  tol = MAX(D1MACH(4),1.E-18_DP)
   k1 = I1MACH(15)
   k2 = I1MACH(16)
   r1m5 = D1MACH(5)
   k = MIN(ABS(k1),ABS(k2))
-  elim = 2.303D0*(k*r1m5-3.0D0)
+  elim = 2.303_DP*(k*r1m5-3._DP)
   k1 = I1MACH(14) - 1
   aa = r1m5*k1
-  dig = MIN(aa,18.0D0)
-  aa = aa*2.303D0
-  alim = elim + MAX(-aa,-41.45D0)
-  rl = 1.2D0*dig + 3.0D0
-  fnul = 10.0D0 + 6.0D0*(dig-3.0D0)
+  dig = MIN(aa,18._DP)
+  aa = aa*2.303_DP
+  alim = elim + MAX(-aa,-41.45_DP)
+  rl = 1.2_DP*dig + 3._DP
+  fnul = 10._DP + 6._DP*(dig-3._DP)
   !-----------------------------------------------------------------------
   !     TEST FOR PROPER RANGE
   !-----------------------------------------------------------------------
   az = ZABS(Zr,Zi)
   fn = Fnu + (N-1)
-  aa = 0.5D0/tol
-  bb = I1MACH(9)*0.5D0
+  aa = 0.5_DP/tol
+  bb = I1MACH(9)*0.5_DP
   aa = MIN(aa,bb)
   IF( az<=aa ) THEN
     IF( fn<=aa ) THEN
@@ -218,7 +218,7 @@ SUBROUTINE ZBESI(Zr,Zi,Fnu,Kode,N,Cyr,Cyi,Nz,Ierr)
       zni = Zi
       csgnr = coner
       csgni = conei
-      IF( Zr<0.0D0 ) THEN
+      IF( Zr<0._DP ) THEN
         znr = -Zr
         zni = -Zi
         !-----------------------------------------------------------------------
@@ -227,7 +227,7 @@ SUBROUTINE ZBESI(Zr,Zi,Fnu,Kode,N,Cyr,Cyi,Nz,Ierr)
         !-----------------------------------------------------------------------
         inu = INT( Fnu )
         arg = (Fnu-inu)*pi
-        IF( Zi<0.0D0 ) arg = -arg
+        IF( Zi<0._DP ) arg = -arg
         csgnr = COS(arg)
         csgni = SIN(arg)
         IF( MOD(inu,2)/=0 ) THEN
@@ -237,21 +237,21 @@ SUBROUTINE ZBESI(Zr,Zi,Fnu,Kode,N,Cyr,Cyi,Nz,Ierr)
       END IF
       CALL ZBINU(znr,zni,Fnu,Kode,N,Cyr,Cyi,Nz,rl,fnul,tol,elim,alim)
       IF( Nz>=0 ) THEN
-        IF( Zr>=0.0D0 ) RETURN
+        IF( Zr>=0._DP ) RETURN
         !-----------------------------------------------------------------------
         !     ANALYTIC CONTINUATION TO THE LEFT HALF PLANE
         !-----------------------------------------------------------------------
         nn = N - Nz
         IF( nn==0 ) RETURN
-        rtol = 1.0D0/tol
-        ascle = D1MACH(1)*rtol*1.0D+3
+        rtol = 1._DP/tol
+        ascle = D1MACH(1)*rtol*1.E+3_DP
         DO i = 1, nn
           !       STR = CYR(I)*CSGNR - CYI(I)*CSGNI
           !       CYI(I) = CYR(I)*CSGNI + CYI(I)*CSGNR
           !       CYR(I) = STR
           aa = Cyr(i)
           bb = Cyi(i)
-          atol = 1.0D0
+          atol = 1._DP
           IF( MAX(ABS(aa),ABS(bb))<=ascle ) THEN
             aa = aa*rtol
             bb = bb*rtol

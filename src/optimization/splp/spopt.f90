@@ -47,11 +47,11 @@ SUBROUTINE SPOPT(Prgopt,Mrelas,Nvars,Info,Csc,Ibasis,Ropt,Intopt,Lopt)
   !
   !* FIRST EXECUTABLE STATEMENT  SPOPT
   iopt = 1
-  zero = 0.E0
-  one = 1.E0
-  asmall = 0.
-  abig = 0.
-  costsc = 0.
+  zero = 0._SP
+  one = 1._SP
+  asmall = 0._SP
+  abig = 0._SP
+  costsc = 0._SP
   !
   !
   !     PROCEDURE (INITIALIZE PARAMETERS AND PROCESS USER OPTIONS)

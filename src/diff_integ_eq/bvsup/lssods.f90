@@ -196,12 +196,12 @@ SUBROUTINE LSSODS(A,X,B,M,N,Nrda,Iflag,Irank,Iscale,Q,Diag,Kpivot,Iter,&
   100  irm = Irank - 1
   irp = Irank + 1
   iterp = MIN(Iter+1,11)
-  acc = 10.*uro
+  acc = 10._SP*uro
   !
   !     ZERO OUT SOLUTION ARRAY
   !
   DO k = 1, N
-    X(k) = 0.
+    X(k) = 0._SP
   END DO
   !
   IF( Irank>0 ) THEN
@@ -247,7 +247,7 @@ SUBROUTINE LSSODS(A,X,B,M,N,Nrda,Iflag,Irank,Iscale,Q,Diag,Kpivot,Iter,&
         !
         nmir = N - Irank
         DO k = irp, N
-          Z(k) = 0.
+          Z(k) = 0._SP
         END DO
         DO k = 1, Irank
           gam = ((Td(k)*Z(k))+DOT_PRODUCT(Q(k,irp:N),Z(irp:N)))/(Td(k)*Div(k))
@@ -288,7 +288,7 @@ SUBROUTINE LSSODS(A,X,B,M,N,Nrda,Iflag,Irank,Iscale,Q,Diag,Kpivot,Iter,&
           !        COMPARE SUCCESSIVE REFINEMENT VECTOR NORMS
           !        FOR LOOP TERMINATION CRITERIA
           !
-          IF( znorm>0.25*znrm0 ) THEN
+          IF( znorm>0.25_SP*znrm0 ) THEN
             IF( it==2 ) THEN
               !
               Iflag = 5
@@ -315,7 +315,7 @@ SUBROUTINE LSSODS(A,X,B,M,N,Nrda,Iflag,Irank,Iscale,Q,Diag,Kpivot,Iter,&
         !
         mmir = M - Irank
         IF( mmir==0 ) THEN
-          Resnrm = 0.
+          Resnrm = 0._SP
           RETURN
         ELSE
           Resnrm = NORM2(R(irp:irp+mmir-1))
@@ -334,7 +334,7 @@ SUBROUTINE LSSODS(A,X,B,M,N,Nrda,Iflag,Irank,Iscale,Q,Diag,Kpivot,Iter,&
   !
   !     SPECIAL CASE FOR THE NULL MATRIX
   Iter = 0
-  Xnorm = 0.
+  Xnorm = 0._SP
   Resnrm = NORM2(B(1:M))
   RETURN
 END SUBROUTINE LSSODS

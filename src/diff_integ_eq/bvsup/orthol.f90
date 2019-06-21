@@ -91,21 +91,21 @@ SUBROUTINE ORTHOL(A,M,N,Nrda,Iflag,Irank,Iscale,Diag,Kpivot,Scales,Cols,Cs)
   !
   !* FIRST EXECUTABLE STATEMENT  ORTHOL
   uro = R1MACH(3)
-  dum = 0.
+  dum = 0._SP
   !
   !- *********************************************************************
   !
   IF( M>=N .AND. N>=1 .AND. Nrda>=M ) THEN
     !
-    acc = 10.*uro
-    IF( Iflag<0 ) acc = MAX(acc,10.**Iflag)
+    acc = 10._SP*uro
+    IF( Iflag<0 ) acc = MAX(acc,10._SP**Iflag)
     sruro = SQRT(uro)
     Iflag = 1
     Irank = N
     !
     !     COMPUTE NORM**2 OF JTH COLUMN AND A MATRIX NORM
     !
-    anorm = 0.
+    anorm = 0._SP
     DO j = 1, N
       Kpivot(j) = j
       Cols(j) = NORM2(A(1:M,j))**2

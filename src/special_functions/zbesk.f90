@@ -168,8 +168,8 @@ SUBROUTINE ZBESK(Zr,Zi,Fnu,Kode,N,Cyr,Cyi,Nz,Ierr)
   !* FIRST EXECUTABLE STATEMENT  ZBESK
   Ierr = 0
   Nz = 0
-  IF( Zi==0.0E0 .AND. Zr==0.0E0 ) Ierr = 1
-  IF( Fnu<0.0D0 ) Ierr = 1
+  IF( Zi==0._SP .AND. Zr==0._SP ) Ierr = 1
+  IF( Fnu<0._DP ) Ierr = 1
   IF( Kode<1 .OR. Kode>2 ) Ierr = 1
   IF( N<1 ) Ierr = 1
   IF( Ierr/=0 ) RETURN
@@ -185,26 +185,26 @@ SUBROUTINE ZBESK(Zr,Zi,Fnu,Kode,N,Cyr,Cyi,Nz,Ierr)
   !     DIG = NUMBER OF BASE 10 DIGITS IN TOL = 10**(-DIG).
   !     FNUL IS THE LOWER BOUNDARY OF THE ASYMPTOTIC SERIES FOR LARGE FNU
   !-----------------------------------------------------------------------
-  tol = MAX(D1MACH(4),1.0D-18)
+  tol = MAX(D1MACH(4),1.E-18_DP)
   k1 = I1MACH(15)
   k2 = I1MACH(16)
   r1m5 = D1MACH(5)
   k = MIN(ABS(k1),ABS(k2))
-  elim = 2.303D0*(k*r1m5-3.0D0)
+  elim = 2.303_DP*(k*r1m5-3._DP)
   k1 = I1MACH(14) - 1
   aa = r1m5*k1
-  dig = MIN(aa,18.0D0)
-  aa = aa*2.303D0
-  alim = elim + MAX(-aa,-41.45D0)
-  fnul = 10.0D0 + 6.0D0*(dig-3.0D0)
-  rl = 1.2D0*dig + 3.0D0
+  dig = MIN(aa,18._DP)
+  aa = aa*2.303_DP
+  alim = elim + MAX(-aa,-41.45_DP)
+  fnul = 10._DP + 6._DP*(dig-3._DP)
+  rl = 1.2_DP*dig + 3._DP
   !-----------------------------------------------------------------------
   !     TEST FOR PROPER RANGE
   !-----------------------------------------------------------------------
   az = ZABS(Zr,Zi)
   fn = Fnu + (nn-1)
-  aa = 0.5D0/tol
-  bb = I1MACH(9)*0.5D0
+  aa = 0.5_DP/tol
+  bb = I1MACH(9)*0.5_DP
   aa = MIN(aa,bb)
   IF( az>aa ) GOTO 300
   IF( fn>aa ) GOTO 300
@@ -215,24 +215,24 @@ SUBROUTINE ZBESK(Zr,Zi,Fnu,Kode,N,Cyr,Cyi,Nz,Ierr)
   !     OVERFLOW TEST ON THE LAST MEMBER OF THE SEQUENCE
   !-----------------------------------------------------------------------
   !     UFL = EXP(-ELIM)
-  ufl = D1MACH(1)*1.0D+3
+  ufl = D1MACH(1)*1.E+3_DP
   IF( az>=ufl ) THEN
     IF( Fnu>fnul ) THEN
       !-----------------------------------------------------------------------
       !     UNIFORM ASYMPTOTIC EXPANSIONS FOR FNU>FNUL
       !-----------------------------------------------------------------------
       mr = 0
-      IF( Zr<0.0D0 ) THEN
+      IF( Zr<0._DP ) THEN
         mr = 1
-        IF( Zi<0.0D0 ) mr = -1
+        IF( Zi<0._DP ) mr = -1
       END IF
       CALL ZBUNK(Zr,Zi,Fnu,Kode,mr,nn,Cyr,Cyi,nw,tol,elim,alim)
       IF( nw<0 ) GOTO 200
       Nz = Nz + nw
       RETURN
     ELSE
-      IF( fn>1.0D0 ) THEN
-        IF( fn>2.0D0 ) THEN
+      IF( fn>1._DP ) THEN
+        IF( fn>2._DP ) THEN
           CALL ZUOIK(Zr,Zi,Fnu,Kode,2,nn,Cyr,Cyi,nuf,tol,elim,alim)
           IF( nuf<0 ) GOTO 100
           Nz = Nz + nuf
@@ -242,16 +242,16 @@ SUBROUTINE ZBESK(Zr,Zi,Fnu,Kode,N,Cyr,Cyi,Nz,Ierr)
           !     IF NUF=NN, THEN CY(I)=CZERO FOR ALL I
           !-----------------------------------------------------------------------
           IF( nn==0 ) THEN
-            IF( Zr<0.0D0 ) GOTO 100
+            IF( Zr<0._DP ) GOTO 100
             RETURN
           END IF
         ELSEIF( az<=tol ) THEN
-          arg = 0.5D0*az
+          arg = 0.5_DP*az
           aln = -fn*LOG(arg)
           IF( aln>elim ) GOTO 100
         END IF
       END IF
-      IF( Zr>=0.0D0 ) THEN
+      IF( Zr>=0._DP ) THEN
         !-----------------------------------------------------------------------
         !     RIGHT HALF PLANE COMPUTATION, REAL(Z)>=0.
         !-----------------------------------------------------------------------
@@ -265,7 +265,7 @@ SUBROUTINE ZBESK(Zr,Zi,Fnu,Kode,N,Cyr,Cyi,Nz,Ierr)
         !-----------------------------------------------------------------------
       ELSEIF( Nz==0 ) THEN
         mr = 1
-        IF( Zi<0.0D0 ) mr = -1
+        IF( Zi<0._DP ) mr = -1
         CALL ZACON(Zr,Zi,Fnu,Kode,mr,nn,Cyr,Cyi,nw,rl,fnul,tol,elim,alim)
         IF( nw<0 ) GOTO 200
         Nz = nw

@@ -261,16 +261,16 @@ REAL(DP) FUNCTION DRF(X,Y,Z,Ier)
   REAL(DP) :: epslon, e2, e3, lamda, mu, s, xn, xndev, xnroot, yn, yndev, ynroot, &
     zn, zndev, znroot
   CHARACTER(16) :: xern3, xern4, xern5, xern6
-  REAL(DP), PARAMETER :: errtol = (4.0D0*D1MACH(3))**(1.0D0/6.0D0), &
-    lolim = 5.0D0*D1MACH(1), uplim = D1MACH(2)/5.0D0
-  REAL(DP), PARAMETER :: c1 = 1.0D0/24.0D0, c2 = 3.0D0/44.0D0, c3 = 1.0D0/14.0D0
+  REAL(DP), PARAMETER :: errtol = (4._DP*D1MACH(3))**(1._DP/6._DP), &
+    lolim = 5._DP*D1MACH(1), uplim = D1MACH(2)/5._DP
+  REAL(DP), PARAMETER :: c1 = 1._DP/24._DP, c2 = 3._DP/44._DP, c3 = 1._DP/14._DP
   !
   !* FIRST EXECUTABLE STATEMENT  DRF
   !
   !         CALL ERROR HANDLER IF NECESSARY.
   !
-  DRF = 0.0D0
-  IF( MIN(X,Y,Z)<0.0D0 ) THEN
+  DRF = 0._DP
+  IF( MIN(X,Y,Z)<0._DP ) THEN
     Ier = 1
     WRITE (xern3,'(1PE15.6)') X
     WRITE (xern4,'(1PE15.6)') Y
@@ -308,16 +308,16 @@ REAL(DP) FUNCTION DRF(X,Y,Z,Ier)
   zn = Z
   DO
     !
-    mu = (xn+yn+zn)/3.0D0
-    xndev = 2.0D0 - (mu+xn)/mu
-    yndev = 2.0D0 - (mu+yn)/mu
-    zndev = 2.0D0 - (mu+zn)/mu
+    mu = (xn+yn+zn)/3._DP
+    xndev = 2._DP - (mu+xn)/mu
+    yndev = 2._DP - (mu+yn)/mu
+    zndev = 2._DP - (mu+zn)/mu
     epslon = MAX(ABS(xndev),ABS(yndev),ABS(zndev))
     IF( epslon<errtol ) THEN
       !
       e2 = xndev*yndev - zndev*zndev
       e3 = xndev*yndev*zndev
-      s = 1.0D0 + (c1*e2-0.10D0-c2*e3)*e2 + c3*e3
+      s = 1._DP + (c1*e2-0.10_DP-c2*e3)*e2 + c3*e3
       DRF = s/SQRT(mu)
       EXIT
     ELSE
@@ -325,9 +325,9 @@ REAL(DP) FUNCTION DRF(X,Y,Z,Ier)
       ynroot = SQRT(yn)
       znroot = SQRT(zn)
       lamda = xnroot*(ynroot+znroot) + ynroot*znroot
-      xn = (xn+lamda)*0.250D0
-      yn = (yn+lamda)*0.250D0
-      zn = (zn+lamda)*0.250D0
+      xn = (xn+lamda)*0.250_DP
+      yn = (yn+lamda)*0.250_DP
+      zn = (zn+lamda)*0.250_DP
     END IF
   END DO
   !

@@ -34,19 +34,19 @@ REAL(SP) FUNCTION R9GMIT(A,X,Algap1,Sgngam)
   REAL(SP) :: A, Algap1, Sgngam, X
   INTEGER :: k, m, ma
   REAL(SP) :: ae, aeps, alg2, algs, fk, s, sgng2, t, te
-  REAL(SP), PARAMETER :: eps = 0.5*R1MACH(3), bot = LOG(R1MACH(1))
+  REAL(SP), PARAMETER :: eps = 0.5_SP*R1MACH(3), bot = LOG(R1MACH(1))
   !* FIRST EXECUTABLE STATEMENT  R9GMIT
   !
-  IF( X<=0.0 ) CALL XERMSG('R9GMIT','X SHOULD BE GT 0',1,2)
+  IF( X<=0._SP ) CALL XERMSG('R9GMIT','X SHOULD BE GT 0',1,2)
   !
-  ma = INT( A + 0.5 )
-  IF( A<0.0 ) ma = INT( A - 0.5 )
+  ma = INT( A + 0.5_SP )
+  IF( A<0._SP ) ma = INT( A - 0.5_SP )
   aeps = A - ma
   !
   ae = A
-  IF( A<(-0.5) ) ae = aeps
+  IF( A<(-0.5_SP) ) ae = aeps
   !
-  t = 1.0
+  t = 1._SP
   te = ae
   s = t
   DO k = 1, 200
@@ -60,17 +60,17 @@ REAL(SP) FUNCTION R9GMIT(A,X,Algap1,Sgngam)
     'NO CONVERGENCE IN 200 TERMS OF TAYLOR-S SERIES',2,2)
   !
   100 CONTINUE
-  IF( A>=(-0.5) ) algs = -Algap1 + LOG(s)
-  IF( A>=(-0.5) ) THEN
+  IF( A>=(-0.5_SP) ) algs = -Algap1 + LOG(s)
+  IF( A>=(-0.5_SP) ) THEN
     !
     R9GMIT = EXP(algs)
   ELSE
     !
-    algs = -LOG_GAMMA(1.0+aeps) + LOG(s)
-    s = 1.0
+    algs = -LOG_GAMMA(1._SP+aeps) + LOG(s)
+    s = 1._SP
     m = -ma - 1
     IF( m/=0 ) THEN
-      t = 1.0
+      t = 1._SP
       DO k = 1, m
         t = X*t/(aeps-m-1+k)
         s = s + t
@@ -78,13 +78,13 @@ REAL(SP) FUNCTION R9GMIT(A,X,Algap1,Sgngam)
       END DO
     END IF
     !
-    R9GMIT = 0.0
+    R9GMIT = 0._SP
     algs = -ma*LOG(X) + algs
-    IF( s==0.0 .OR. aeps==0.0 ) THEN
+    IF( s==0._SP .OR. aeps==0._SP ) THEN
       R9GMIT = EXP(algs)
     ELSE
       !
-      sgng2 = Sgngam*SIGN(1.0,s)
+      sgng2 = Sgngam*SIGN(1._SP,s)
       alg2 = -X - Algap1 + LOG(ABS(s))
       !
       IF( alg2>bot ) R9GMIT = sgng2*EXP(alg2)

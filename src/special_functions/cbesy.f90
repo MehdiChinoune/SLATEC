@@ -168,12 +168,12 @@ SUBROUTINE CBESY(Z,Fnu,Kode,N,Cy,Nz,Cwrk,Ierr)
   yy = AIMAG(Z)
   Ierr = 0
   Nz = 0
-  IF( xx==0.0E0 .AND. yy==0.0E0 ) Ierr = 1
-  IF( Fnu<0.0E0 ) Ierr = 1
+  IF( xx==0._SP .AND. yy==0._SP ) Ierr = 1
+  IF( Fnu<0._SP ) Ierr = 1
   IF( Kode<1 .OR. Kode>2 ) Ierr = 1
   IF( N<1 ) Ierr = 1
   IF( Ierr/=0 ) RETURN
-  hci = CMPLX(0.0E0,0.5E0)
+  hci = CMPLX(0._SP,0.5_SP,SP)
   CALL CBESH(Z,Fnu,Kode,1,N,Cy,nz1,Ierr)
   IF( Ierr/=0 .AND. Ierr/=3 ) THEN
     Nz = 0
@@ -184,7 +184,7 @@ SUBROUTINE CBESY(Z,Fnu,Kode,N,Cy,Nz,Cwrk,Ierr)
     ELSE
       Nz = MIN(nz1,nz2)
       IF( Kode==2 ) THEN
-        tol = MAX(R1MACH(4),1.0E-18)
+        tol = MAX(R1MACH(4),1.0E-18_SP)
         k1 = I1MACH(12)
         k2 = I1MACH(13)
         k = MIN(ABS(k1),ABS(k2))
@@ -192,47 +192,47 @@ SUBROUTINE CBESY(Z,Fnu,Kode,N,Cy,Nz,Cwrk,Ierr)
         !-----------------------------------------------------------------------
         !     ELIM IS THE APPROXIMATE EXPONENTIAL UNDER- AND OVERFLOW LIMIT
         !-----------------------------------------------------------------------
-        elim = 2.303E0*(k*r1m5-3.0E0)
+        elim = 2.303_SP*(k*r1m5-3._SP)
         r1 = COS(xx)
         r2 = SIN(xx)
-        ex = CMPLX(r1,r2)
-        ey = 0.0E0
+        ex = CMPLX(r1,r2,SP)
+        ey = 0._SP
         tay = ABS(yy+yy)
         IF( tay<elim ) ey = EXP(-tay)
-        IF( yy<0.0E0 ) THEN
+        IF( yy<0._SP ) THEN
           c1 = ex
-          c2 = CONJG(ex)*CMPLX(ey,0.0E0)
+          c2 = CONJG(ex)*CMPLX(ey,0._SP,SP)
         ELSE
-          c1 = ex*CMPLX(ey,0.0E0)
+          c1 = ex*CMPLX(ey,0._SP,SP)
           c2 = CONJG(ex)
         END IF
         Nz = 0
-        rtol = 1.0E0/tol
-        ascle = R1MACH(1)*rtol*1.0E+3
+        rtol = 1._SP/tol
+        ascle = R1MACH(1)*rtol*1.E+3_SP
         DO i = 1, N
           !       CY(I) = HCI*(C2*CWRK(I)-C1*CY(I))
           zv = Cwrk(i)
           aa = REAL(zv)
           bb = AIMAG(zv)
-          atol = 1.0E0
+          atol = 1._SP
           IF( MAX(ABS(aa),ABS(bb))<=ascle ) THEN
-            zv = zv*CMPLX(rtol,0.0E0)
+            zv = zv*CMPLX(rtol,0._SP,SP)
             atol = tol
           END IF
           zv = zv*c2*hci
-          zv = zv*CMPLX(atol,0.0E0)
+          zv = zv*CMPLX(atol,0._SP,SP)
           zu = Cy(i)
           aa = REAL(zu)
           bb = AIMAG(zu)
-          atol = 1.0E0
+          atol = 1._SP
           IF( MAX(ABS(aa),ABS(bb))<=ascle ) THEN
-            zu = zu*CMPLX(rtol,0.0E0)
+            zu = zu*CMPLX(rtol,0._SP,SP)
             atol = tol
           END IF
           zu = zu*c1*hci
-          zu = zu*CMPLX(atol,0.0E0)
+          zu = zu*CMPLX(atol,0._SP,SP)
           Cy(i) = zv - zu
-          IF( Cy(i)==CMPLX(0.0E0,0.0E0) .AND. ey==0.0E0 ) Nz = Nz + 1
+          IF( Cy(i)==CMPLX(0._SP,0._SP,SP) .AND. ey==0._SP ) Nz = Nz + 1
         END DO
         RETURN
       ELSE

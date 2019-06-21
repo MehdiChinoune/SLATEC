@@ -35,8 +35,8 @@ SUBROUTINE ZACON(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Rl,Fnul,Tol,Elim,Alim)
     c1i, c1m, c1r, c2i, c2r, Elim, fmr, fn, Fnu, Fnul, pti, ptr, razn, Rl, rzi, &
     rzr, sc1i, sc1r, sc2i, sc2r, sgn, spn, sti, str, s1i, s1r, s2i, s2r, Tol, &
     Yi(N), Yr(N), yy, Zi, zni, znr, Zr
-  REAL(DP), PARAMETER :: pi = 3.14159265358979324D0
-  REAL(DP), PARAMETER :: zeror = 0.0D0, coner = 1.0D0
+  REAL(DP), PARAMETER :: pi = 3.14159265358979324_DP
+  REAL(DP), PARAMETER :: zeror = 0._DP, coner = 1._DP
   !* FIRST EXECUTABLE STATEMENT  ZACON
   Nz = 0
   znr = -Zr
@@ -81,7 +81,7 @@ SUBROUTINE ZACON(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Rl,Fnul,Tol,Elim,Alim)
       c1i = s1i
       c2r = Yr(1)
       c2i = Yi(1)
-      ascle = 1.0D+3*D1MACH(1)/Tol
+      ascle = 1.E3_DP*D1MACH(1)/Tol
       IF( Kode/=1 ) THEN
         CALL ZS1S2(znr,zni,c1r,c1i,c2r,c2i,nw,ascle,Alim,iuf)
         Nz = Nz + nw
@@ -115,18 +115,18 @@ SUBROUTINE ZACON(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Rl,Fnul,Tol,Elim,Alim)
       cspnr = -cspnr
       cspni = -cspni
       azn = ZABS(znr,zni)
-      razn = 1.0D0/azn
+      razn = 1._DP/azn
       str = znr*razn
       sti = -zni*razn
       rzr = (str+str)*razn
       rzi = (sti+sti)*razn
-      fn = Fnu + 1.0D0
+      fn = Fnu + 1._DP
       ckr = fn*rzr
       cki = fn*rzi
       !-----------------------------------------------------------------------
       !     SCALE NEAR EXPONENT EXTREMES DURING RECURRENCE ON K FUNCTIONS
       !-----------------------------------------------------------------------
-      cscl = 1.0D0/Tol
+      cscl = 1._DP/Tol
       cscr = Tol
       cssr(1) = cscl
       cssr(2) = coner
@@ -135,7 +135,7 @@ SUBROUTINE ZACON(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Rl,Fnul,Tol,Elim,Alim)
       csrr(2) = coner
       csrr(3) = cscl
       bry(1) = ascle
-      bry(2) = 1.0D0/ascle
+      bry(2) = 1._DP/ascle
       bry(3) = D1MACH(2)
       as2 = ZABS(s2r,s2i)
       kflag = 2

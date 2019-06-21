@@ -43,7 +43,7 @@ CONTAINS
     INTRINSIC SQRT
     !* FIRST EXECUTABLE STATEMENT  SNSQQK
     infos = 1
-    fnorms = 0.0E0
+    fnorms = 0._SP
     n = 2
     lwa = 19
     nprint = -1
@@ -54,8 +54,8 @@ CONTAINS
     !     Option 1, the user provides the Jacobian.
     !
     iopt = 1
-    x(1) = -1.2E0
-    x(2) = 1.0E0
+    x(1) = -1.2_SP
+    x(2) = 1._SP
     CALL SNSQE(SQFCN2,SQJAC2,iopt,n,x,fvec,tol,nprint,info,wa,lwa)
     icnt = 1
     fnorm = ENORM(n,fvec)
@@ -72,8 +72,8 @@ CONTAINS
     !     Option 2, the code approximates the Jacobian.
     !
     iopt = 2
-    x(1) = -1.2E0
-    x(2) = 1.0E0
+    x(1) = -1.2_SP
+    x(2) = 1._SP
     CALL SNSQE(SQFCN2,SQJAC2,iopt,n,x,fvec,tol,nprint,info,wa,lwa)
     icnt = 2
     fnorm = ENORM(n,fvec)
@@ -91,8 +91,8 @@ CONTAINS
     !
     lwa = 15
     iopt = 1
-    x(1) = -1.2E0
-    x(2) = 1.0E0
+    x(1) = -1.2_SP
+    x(2) = 1._SP
     CALL SNSQE(SQFCN2,SQJAC2,iopt,n,x,fvec,tol,nprint,info,wa,lwa)
     icnt = 3
     itest(icnt) = 0
@@ -139,11 +139,11 @@ CONTAINS
     REAL(SP) :: X(:)
     !* FIRST EXECUTABLE STATEMENT  SOSFNC
     IF( K==1 ) THEN
-      SOSFNC = 1.E0 - X(1)
+      SOSFNC = 1._SP - X(1)
     ELSEIF( K==2 ) THEN
-      SOSFNC = 1.E1*(X(2)-X(1)**2)
+      SOSFNC = 1.E1_SP*(X(2)-X(1)**2)
     ELSE
-      SOSFNC = 0.
+      SOSFNC = 0._SP
     END IF
   END FUNCTION SOSFNC
   !** SOSNQX
@@ -184,21 +184,21 @@ CONTAINS
     INTRINSIC SQRT
     !* FIRST EXECUTABLE STATEMENT  SOSNQX
     iflags = 3
-    fnorms = 0.0E0
+    fnorms = 0._SP
     n = 2
     lwa = 17
     liw = 6
     tolf = SQRT(R1MACH(4))
     rer = SQRT(R1MACH(4))
-    aer = 0.0E0
+    aer = 0._SP
     IF( Kprint>=2 ) WRITE (Lun,99001)
     99001 FORMAT ('1'/'  SOS QUICK CHECK'/)
     !
     !     Test the code with proper input values.
     !
     iflag = 0
-    x(1) = -1.2E0
-    x(2) = 1.0E0
+    x(1) = -1.2_SP
+    x(2) = 1._SP
     CALL SOS(SOSFNC,n,x,rer,aer,tolf,iflag,wa,lwa,iw,liw)
     icnt = 1
     fvec(1) = SOSFNC(x,1)
@@ -220,8 +220,8 @@ CONTAINS
     !
     lwa = 15
     iflag = 0
-    x(1) = -1.2E0
-    x(2) = 1.0E0
+    x(1) = -1.2_SP
+    x(2) = 1._SP
     CALL SOS(SOSFNC,n,x,rer,aer,tolf,iflag,wa,lwa,iw,liw)
     icnt = 2
     itest(icnt) = 0
@@ -269,8 +269,8 @@ CONTAINS
     !     .. Array Arguments ..
     REAL(SP) :: Fvec(N), X(N)
     !* FIRST EXECUTABLE STATEMENT  SQFCN2
-    Fvec(1) = 1.0E0 - X(1)
-    Fvec(2) = 10.0E0*(X(2)-X(1)**2)
+    Fvec(1) = 1._SP - X(1)
+    Fvec(2) = 10._SP*(X(2)-X(1)**2)
   END SUBROUTINE SQFCN2
   !** SQJAC2
   SUBROUTINE SQJAC2(N,X,Fvec,Fjac,Ldfjac,Iflag)
@@ -299,10 +299,10 @@ CONTAINS
     INTEGER :: Iflag, Ldfjac, N
     REAL(SP) :: Fjac(Ldfjac,N), Fvec(N), X(N)
     !* FIRST EXECUTABLE STATEMENT  SQJAC2
-    Fjac(1,1) = -1.E0
-    Fjac(1,2) = 0.E0
-    Fjac(2,1) = -2.E1*X(1)
-    Fjac(2,2) = 1.E1
+    Fjac(1,1) = -1._SP
+    Fjac(1,2) = 0._SP
+    Fjac(2,1) = -2.E1_SP*X(1)
+    Fjac(2,2) = 1.E1_SP
   END SUBROUTINE SQJAC2
 END MODULE TEST35_MOD
 !** TEST35

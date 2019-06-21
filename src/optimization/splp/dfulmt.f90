@@ -43,7 +43,7 @@ SUBROUTINE DFULMT(I,J,Aij,Indcat,Prgopt,Dattrv,Iflag)
   INTEGER :: Iflag(10)
   REAL(DP) :: Aij, Dattrv(:), Prgopt(:)
   INTEGER :: key, level, lp, nerr, next
-  REAL(DP), PARAMETER :: zero = 0.D0
+  REAL(DP), PARAMETER :: zero = 0._DP
   !* FIRST EXECUTABLE STATEMENT  DFULMT
   IF( Iflag(1)==1 ) THEN
     !     INITIALIZE POINTERS TO PROCESS FULL TWO-DIMENSIONAL FORTRAN

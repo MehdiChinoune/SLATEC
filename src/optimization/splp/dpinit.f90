@@ -42,7 +42,7 @@ SUBROUTINE DPINIT(Mrelas,Nvars,Costs,Bl,Bu,Ind,Primal,Amat,Csc,&
   INTEGER :: i, ip, iplace, j, n20007, n20019, n20028, n20041, n20056, n20066, &
     n20070, n20074, n20078
   REAL(DP) :: aij, cmax, csum, scalr, testsc
-  REAL(DP), PARAMETER :: zero = 0.D0, one = 1.D0
+  REAL(DP), PARAMETER :: zero = 0._DP, one = 1._DP
   LOGICAL :: contin, usrbas, colscp, cstscp, minprb
   !
   !* FIRST EXECUTABLE STATEMENT  DPINIT

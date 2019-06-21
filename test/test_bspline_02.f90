@@ -61,8 +61,8 @@ CONTAINS
     99001 FORMAT ('1 QUICK CHECK FOR SPLINE ROUTINES',//)
     !
     Ipass = 1
-    pi = 3.14159265358979324D0
-    tol = 1000.0D0*MAX(D1MACH(4),1.0D-18)
+    pi = 3.14159265358979324_DP
+    tol = 1000._DP*MAX(D1MACH(4),1.E-18_DP)
     !
     !     Generate data.
     !
@@ -72,7 +72,7 @@ CONTAINS
       x(i) = (i-1)/den
       y(i) = SIN(pi*x(i))
     END DO
-    x(3) = 2.0D0/den
+    x(3) = 2._DP/den
     y(3) = SIN(pi*x(3))
     !
     !     Compute splines for two knot arrays.
@@ -82,7 +82,7 @@ CONTAINS
       ibcl = 1
       ibcr = 2
       fbcl = pi
-      fbcr = 0.0D0
+      fbcr = 0._DP
       CALL DBINT4(x,y,ndata,ibcl,ibcr,fbcl,fbcr,knt,t,bc,n,k,w)
       !
       !       Error test on DBINT4.
@@ -161,26 +161,26 @@ CONTAINS
         spv = DBVALU(t,bc,n,k,j-1,xx,inbv,w)
         er = ABS(spv-sv(j))
         x2 = ABS(sv(j))
-        IF( x2>1.0D0 ) er = er/x2
+        IF( x2>1._DP ) er = er/x2
         IF( er>atol ) THEN
           Ipass = 0
           IF( Kprint>=2 ) WRITE (Lun,99007)
           99007 FORMAT (' COMPARISONS FROM DBSPEV AND DBVALU DO NOT AGREE')
         END IF
-        atol = 10.0D0*atol
+        atol = 10._DP*atol
       END DO
       atol = tol
       DO j = 1, k
         spv = DPPVAL(ldc,c,xi,lxi,k,j-1,xx,inppv)
         er = ABS(spv-sv(j))
         x2 = ABS(sv(j))
-        IF( x2>1.0D0 ) er = er/x2
+        IF( x2>1._DP ) er = er/x2
         IF( er>atol ) THEN
           Ipass = 0
           IF( Kprint>=2 ) WRITE (Lun,99008)
           99008 FORMAT (' COMPARISONS FROM DBSPEV AND DPPVAL DO NOT AGREE')
         END IF
-        atol = 10.0D0*atol
+        atol = 10._DP*atol
       END DO
       atol = tol
       ldcc = 4
@@ -190,19 +190,19 @@ CONTAINS
       CALL DINTRV(t,nn,x1,ilo,ileft,mflag)
       DO j = 1, k
         CALL DBSPVD(t,k,j,xx,ileft,ldcc,cc,w)
-        er = 0.0D0
+        er = 0._DP
         DO jj = 1, k
           er = er + bc(ileft-k+jj)*cc(jj,j)
         END DO
         er = ABS(er-sv(j))
         x2 = ABS(sv(j))
-        IF( x2>1.0D0 ) er = er/x2
+        IF( x2>1._DP ) er = er/x2
         IF( er>atol ) THEN
           Ipass = 0
           IF( Kprint>=2 ) WRITE (Lun,99009)
           99009 FORMAT (' COMPARISONS FROM DBSPEV AND DBSPVD DO NOT AGREE')
         END IF
-        atol = 10.0D0*atol
+        atol = 10._DP*atol
       END DO
     END DO
     DO k = 2, 4
@@ -248,11 +248,11 @@ CONTAINS
     IF( Kprint>=3 ) WRITE (Lun,99011)
     99011 FORMAT (/' TRIGGER 52 ERROR CONDITIONS',/)
     !
-    w(1) = 11.0D0
-    w(2) = 4.0D0
-    w(3) = 2.0D0
-    w(4) = 0.5D0
-    w(5) = 4.0D0
+    w(1) = 11._DP
+    w(2) = 4._DP
+    w(3) = 2._DP
+    w(4) = 0.5_DP
+    w(5) = 4._DP
     ilo = 1
     inev = 1
     inbv = 1
@@ -353,7 +353,7 @@ CONTAINS
       w(i) = -w(i)
     END DO
     kntopt = 1
-    x(1) = 1.0D0
+    x(1) = 1._DP
     CALL DBINT4(x,y,n,ibcl,ibcr,fbcl,fbcr,kntopt,t,bc,n,k,qq)
     IF( NUMXER(nerr)/=2 ) THEN
       Ipass = 0
@@ -368,14 +368,14 @@ CONTAINS
     END IF
     CALL XERCLR
     !
-    x(1) = 0.0D0
-    atol = 1.0D0
+    x(1) = 0._DP
+    atol = 1._DP
     kntopt = 3
     DO i = 1, 3
-      qq(i) = -0.30D0 + 0.10D0*(i-1)
-      qq(i+3) = 1.1D0 + 0.10D0*(i-1)
+      qq(i) = -0.30_DP + 0.10_DP*(i-1)
+      qq(i+3) = 1.1_DP + 0.10_DP*(i-1)
     END DO
-    qq(1) = 1.0D0
+    qq(1) = 1._DP
     CALL DBINT4(x,y,ndata,1,1,fbcl,fbcr,3,t,bc,n,k,qq)
     IF( NUMXER(nerr)/=2 ) THEN
       Ipass = 0
@@ -472,7 +472,7 @@ CONTAINS
 
     REAL(DP), INTENT(IN) :: X
     !* FIRST EXECUTABLE STATEMENT  DFB
-    DFB = 1.0D0
+    DFB = 1._DP
   END FUNCTION DFB
 END MODULE TEST31_MOD
 !** TEST31

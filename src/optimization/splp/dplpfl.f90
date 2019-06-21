@@ -43,7 +43,7 @@ SUBROUTINE DPLPFL(Mrelas,Nvars,Ienter,Ileave,Ibasis,Ind,Theta,Dirnrm,&
   INTEGER :: i, j, n20005, n20036
   REAL(DP) :: bound, ratio, zero
   !* FIRST EXECUTABLE STATEMENT  DPLPFL
-  zero = 0.D0
+  zero = 0._DP
   !
   !     SEE IF THE ENTERING VARIABLE IS RESTRICTING THE STEP LENGTH
   !     BECAUSE OF AN UPPER BOUND.

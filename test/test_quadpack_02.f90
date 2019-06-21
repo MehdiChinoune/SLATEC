@@ -27,10 +27,10 @@ CONTAINS
     INTEGER :: ierv(2), Lun
     REAL(DP) :: a, abserr, b, epmach, epsabs, epsrel, error, result, uflow, work(400)
     INTEGER :: ier, ip, Ipass, iwork(100), key, Kprint, last, lenw, limit, neval
-    REAL(DP), PARAMETER :: pi = 0.31415926535897932D+01
-    REAL(DP), PARAMETER :: exact1 = 0.1154700538379252D+01
-    REAL(DP), PARAMETER :: exact2 = 0.11780972450996172D+00
-    REAL(DP), PARAMETER :: exact3 = 0.1855802D+02
+    REAL(DP), PARAMETER :: pi = 0.31415926535897932E+01_DP
+    REAL(DP), PARAMETER :: exact1 = 0.1154700538379252E+01_DP
+    REAL(DP), PARAMETER :: exact2 = 0.11780972450996172_DP
+    REAL(DP), PARAMETER :: exact3 = 0.1855802E+02_DP
     !* FIRST EXECUTABLE STATEMENT  CDQAG
     IF( Kprint>=2 ) WRITE (Lun,'(''1DQAG QUICK CHECK''/)')
     !
@@ -39,12 +39,12 @@ CONTAINS
     Ipass = 1
     limit = 100
     lenw = limit*4
-    epsabs = 0.0D+00
+    epsabs = 0._DP
     epmach = D1MACH(4)
     key = 6
-    epsrel = MAX(SQRT(epmach),0.1D-07)
-    a = 0.0D+00
-    b = 0.1D+01
+    epsrel = MAX(SQRT(epmach),0.1E-7_DP)
+    a = 0._DP
+    b = 1._DP
     CALL DQAG(DF1G,a,b,epsabs,epsrel,key,result,abserr,neval,ier,limit,lenw,&
       last,iwork,work)
     ierv(1) = ier
@@ -58,7 +58,7 @@ CONTAINS
     !
     limit = 1
     lenw = limit*4
-    b = pi*0.2D+01
+    b = pi*2._DP
     CALL DQAG(DF2G,a,b,epsabs,epsrel,key,result,abserr,neval,ier,limit,lenw,&
       last,iwork,work)
     ierv(1) = ier
@@ -72,7 +72,7 @@ CONTAINS
     uflow = D1MACH(1)
     limit = 100
     lenw = limit*4
-    CALL DQAG(DF2G,a,b,uflow,0.0D+00,key,result,abserr,neval,ier,limit,lenw,&
+    CALL DQAG(DF2G,a,b,uflow,0._DP,key,result,abserr,neval,ier,limit,lenw,&
       last,iwork,work)
     ierv(1) = ier
     ierv(2) = 1
@@ -83,7 +83,7 @@ CONTAINS
     !
     ! TEST ON IER = 3 OR 1
     !
-    b = 0.1D+01
+    b = 1._DP
     CALL DQAG(DF3G,a,b,epsabs,epsrel,1,result,abserr,neval,ier,limit,lenw,&
       last,iwork,work)
     ierv(1) = ier
@@ -100,7 +100,7 @@ CONTAINS
       last,iwork,work)
     ierv(1) = ier
     ip = 0
-    IF( ier==6 .AND. result==0.0D+00 .AND. abserr==0.0D+00 .AND. neval==0 .AND. &
+    IF( ier==6 .AND. result==0._DP .AND. abserr==0._DP .AND. neval==0 .AND. &
       last==0 ) ip = 1
     IF( ip==0 ) Ipass = 0
     CALL DPRIN(Lun,6,Kprint,ip,exact1,result,abserr,neval,ierv,1)
@@ -139,10 +139,10 @@ CONTAINS
     REAL(DP) :: abserr, bound, epmach, epsabs, epsrel, error, oflow, result, &
       uflow, work(800)
     INTEGER :: ier, ip, Ipass, iwork(200), Kprint, last, lenw, limit, Lun, neval
-    REAL(DP), PARAMETER :: exact0 = 2.0D+00, exact1 = 0.115470066904D1
-    REAL(DP), PARAMETER :: exact2 = 0.909864525656D-02
-    REAL(DP), PARAMETER :: exact3 = 0.31415926535897932D+01
-    REAL(DP), PARAMETER :: exact4 = 0.19984914554328673D+04
+    REAL(DP), PARAMETER :: exact0 = 2._DP, exact1 = 0.115470066904E1_DP
+    REAL(DP), PARAMETER :: exact2 = 0.909864525656E-02_DP
+    REAL(DP), PARAMETER :: exact3 = 0.31415926535897932E+01_DP
+    REAL(DP), PARAMETER :: exact4 = 0.19984914554328673E+04_DP
     !* FIRST EXECUTABLE STATEMENT  CDQAGI
     IF( Kprint>=2 ) WRITE (Lun,'(''1DQAGI QUICK CHECK''/)')
     !
@@ -151,10 +151,10 @@ CONTAINS
     Ipass = 1
     limit = 200
     lenw = limit*4
-    epsabs = 0.0D+00
+    epsabs = 0._DP
     epmach = D1MACH(4)
-    epsrel = MAX(SQRT(epmach),0.1D-07)
-    bound = 0.0D+00
+    epsrel = MAX(SQRT(epmach),0.1E-7_DP)
+    bound = 0._DP
     inf = 1
     CALL DQAGI(DT0,bound,inf,epsabs,epsrel,result,abserr,neval,ier,limit,lenw,&
       last,iwork,work)
@@ -178,7 +178,7 @@ CONTAINS
     ! TEST ON IER = 2 OR 4 OR 1
     !
     uflow = D1MACH(1)
-    CALL DQAGI(DT2,bound,inf,uflow,0.0D+00,result,abserr,neval,ier,limit,lenw,&
+    CALL DQAGI(DT2,bound,inf,uflow,0._DP,result,abserr,neval,ier,limit,lenw,&
       last,iwork,work)
     ierv(1) = ier
     ierv(2) = 4
@@ -190,7 +190,7 @@ CONTAINS
     !
     ! TEST ON IER = 3 OR 4 OR 1 OR 2
     !
-    CALL DQAGI(DT3,bound,inf,uflow,0.0D+00,result,abserr,neval,ier,limit,lenw,&
+    CALL DQAGI(DT3,bound,inf,uflow,0._DP,result,abserr,neval,ier,limit,lenw,&
       last,iwork,work)
     ierv(1) = ier
     ierv(2) = 4
@@ -227,11 +227,11 @@ CONTAINS
     !
     ! TEST ON IER = 6
     !
-    CALL DQAGI(DT1,bound,inf,epsabs,0.0D+00,result,abserr,neval,ier,limit,&
+    CALL DQAGI(DT1,bound,inf,epsabs,0._DP,result,abserr,neval,ier,limit,&
       lenw,last,iwork,work)
     ierv(1) = ier
     ip = 0
-    IF( ier==6 .AND. result==0.0D+00 .AND. abserr==0.0D+00 .AND. neval==0 .AND. &
+    IF( ier==6 .AND. result==0._DP .AND. abserr==0._DP .AND. neval==0 .AND. &
       last==0 ) ip = 1
     IF( ip==0 ) Ipass = 0
     CALL DPRIN(Lun,6,Kprint,ip,exact1,result,abserr,neval,ierv,1)
@@ -270,11 +270,11 @@ CONTAINS
       points(5), result, uflow, work(405)
     INTEGER :: ier, ip, Ipass, iwork(205), Kprint, last, leniw, lenw, limit, &
       Lun, neval, npts2
-    REAL(DP), PARAMETER :: exact1 = 0.4285277667368085D+01
-    REAL(DP), PARAMETER :: exact2 = 0.909864525656D-2
-    REAL(DP), PARAMETER :: exact3 = 0.31415926535897932D+01
-    REAL(DP), PARAMETER :: p1 = 0.1428571428571428D+00
-    REAL(DP), PARAMETER :: p2 = 0.6666666666666667D+00
+    REAL(DP), PARAMETER :: exact1 = 0.4285277667368085E+01_DP
+    REAL(DP), PARAMETER :: exact2 = 0.909864525656E-2_DP
+    REAL(DP), PARAMETER :: exact3 = 0.31415926535897932E+01_DP
+    REAL(DP), PARAMETER :: p1 = 0.1428571428571428_DP
+    REAL(DP), PARAMETER :: p2 = 0.6666666666666667_DP
     !* FIRST EXECUTABLE STATEMENT  CDQAGP
     IF( Kprint>=2 ) WRITE (Lun,'(''1DQAGP QUICK CHECK''/)')
     !
@@ -285,11 +285,11 @@ CONTAINS
     limit = 100
     leniw = limit*2 + npts2
     lenw = limit*4 + npts2
-    epsabs = 0.0D+00
+    epsabs = 0._DP
     epmach = D1MACH(4)
-    epsrel = MAX(SQRT(epmach),0.1D-07)
-    a = 0.0D+00
-    b = 0.1D+01
+    epsrel = MAX(SQRT(epmach),0.1E-7_DP)
+    a = 0._DP
+    b = 1._DP
     points(1) = p1
     points(2) = p2
     CALL DQAGP(DF1P,a,b,npts2,points,epsabs,epsrel,result,abserr,neval,ier,&
@@ -316,12 +316,12 @@ CONTAINS
     ! TEST ON IER = 2, 4, 1 OR 3
     !
     npts2 = 3
-    points(1) = 0.1D+00
+    points(1) = 0.1_DP
     leniw = limit*2 + npts2
     lenw = limit*4 + npts2
     uflow = D1MACH(1)
-    a = 0.1D+00
-    CALL DQAGP(DF2P,a,b,npts2,points,uflow,0.0D+00,result,abserr,neval,ier,&
+    a = 0.1_DP
+    CALL DQAGP(DF2P,a,b,npts2,points,uflow,0._DP,result,abserr,neval,ier,&
       leniw,lenw,last,iwork,work)
     ierv(1) = ier
     ierv(2) = 4
@@ -337,9 +337,9 @@ CONTAINS
     npts2 = 2
     leniw = limit*2 + npts2
     lenw = limit*4 + npts2
-    a = 0.0D+00
-    b = 0.5D+01
-    CALL DQAGP(DF3P,a,b,npts2,points,uflow,0.0D+00,result,abserr,neval,ier,&
+    a = 0._DP
+    b = 5._DP
+    CALL DQAGP(DF3P,a,b,npts2,points,uflow,0._DP,result,abserr,neval,ier,&
       leniw,lenw,last,iwork,work)
     ierv(1) = ier
     ierv(2) = 4
@@ -352,7 +352,7 @@ CONTAINS
     !
     ! TEST ON IER = 5
     !
-    b = 0.1D+01
+    b = 1._DP
     CALL DQAGP(DF4P,a,b,npts2,points,epsabs,epsrel,result,abserr,neval,ier,&
       leniw,lenw,last,iwork,work)
     ierv(1) = ier
@@ -369,12 +369,12 @@ CONTAINS
     lenw = limit*4 + npts2
     points(1) = p1
     points(2) = p2
-    points(3) = 0.3D+01
+    points(3) = 0.3E+01_DP
     CALL DQAGP(DF1P,a,b,npts2,points,epsabs,epsrel,result,abserr,neval,ier,&
       leniw,lenw,last,iwork,work)
     ierv(1) = ier
     ip = 0
-    IF( ier==6 .AND. result==0.0D+00 .AND. abserr==0.0D+00 .AND. neval==0 .AND. &
+    IF( ier==6 .AND. result==0._DP .AND. abserr==0._DP .AND. neval==0 .AND. &
       last==0 ) ip = 1
     IF( ip==0 ) Ipass = 0
     CALL DPRIN(Lun,6,Kprint,ip,exact1,result,abserr,neval,ierv,1)
@@ -414,11 +414,11 @@ CONTAINS
     REAL(DP) :: a, abserr, b, epmach, epsabs, epsrel, error, oflow, result, &
       uflow, work(800)
     INTEGER :: ier, ip, Ipass, iwork(200), Kprint, last, lenw, limit, neval
-    REAL(DP), PARAMETER :: exact0 = 0.2D+01
-    REAL(DP), PARAMETER :: exact1 = 0.115470066904D+01
-    REAL(DP), PARAMETER :: exact2 = 0.909864525656D-02
-    REAL(DP), PARAMETER :: exact3 = 0.31415926535897932D+01
-    REAL(DP), PARAMETER :: exact4 = 0.19984914554328673D+04
+    REAL(DP), PARAMETER :: exact0 = 2._DP
+    REAL(DP), PARAMETER :: exact1 = 0.115470066904E+01_DP
+    REAL(DP), PARAMETER :: exact2 = 0.909864525656E-02_DP
+    REAL(DP), PARAMETER :: exact3 = 0.31415926535897932E+01_DP
+    REAL(DP), PARAMETER :: exact4 = 0.19984914554328673E+04_DP
     !* FIRST EXECUTABLE STATEMENT  CDQAGS
     IF( Kprint>=2 ) WRITE (Lun,'(''1DQAGS QUICK CHECK''/)')
     !
@@ -427,11 +427,11 @@ CONTAINS
     Ipass = 1
     limit = 200
     lenw = limit*4
-    epsabs = 0.0D+00
+    epsabs = 0._DP
     epmach = D1MACH(4)
-    epsrel = MAX(SQRT(epmach),0.1D-07)
-    a = 0.0D+00
-    b = 0.1D+01
+    epsrel = MAX(SQRT(epmach),0.1E-7_DP)
+    a = 0._DP
+    b = 1._DP
     CALL DQAGS(DF0S,a,b,epsabs,epsrel,result,abserr,neval,ier,limit,lenw,last,&
       iwork,work)
     error = ABS(result-exact0)
@@ -453,8 +453,8 @@ CONTAINS
     ! TEST ON IER = 2 OR 4 OR 1
     !
     uflow = D1MACH(1)
-    a = 0.1D+00
-    CALL DQAGS(DF2S,a,b,uflow,0.0D+00,result,abserr,neval,ier,limit,lenw,last,&
+    a = 0.1_DP
+    CALL DQAGS(DF2S,a,b,uflow,0._DP,result,abserr,neval,ier,limit,lenw,last,&
       iwork,work)
     ierv(1) = ier
     ierv(2) = 4
@@ -466,9 +466,9 @@ CONTAINS
     !
     ! TEST ON IER = 3 OR 4 OR 1 OR 2
     !
-    a = 0.0D+00
-    b = 0.5D+01
-    CALL DQAGS(DF3S,a,b,uflow,0.0D+00,result,abserr,neval,ier,limit,lenw,last,&
+    a = 0._DP
+    b = 5._DP
+    CALL DQAGS(DF3S,a,b,uflow,0._DP,result,abserr,neval,ier,limit,lenw,last,&
       iwork,work)
     ierv(1) = ier
     ierv(2) = 4
@@ -481,7 +481,7 @@ CONTAINS
     !
     ! TEST ON IER = 4, OR 5 OR 3 OR 1 OR 0
     !
-    b = 0.1D+01
+    b = 1._DP
     CALL DQAGS(DF4S,a,b,epsabs,epsrel,result,abserr,neval,ier,limit,lenw,last,&
       iwork,work)
     ierv(1) = ier
@@ -507,11 +507,11 @@ CONTAINS
     !
     ! TEST ON IER = 6
     !
-    CALL DQAGS(DF1S,a,b,epsabs,0.0D+00,result,abserr,neval,ier,limit,lenw,&
+    CALL DQAGS(DF1S,a,b,epsabs,0._DP,result,abserr,neval,ier,limit,lenw,&
       last,iwork,work)
     ierv(1) = ier
     ip = 0
-    IF( ier==6 .AND. result==0.0D+00 .AND. abserr==0.0D+00 .AND. neval==0 .AND. &
+    IF( ier==6 .AND. result==0._DP .AND. abserr==0._DP .AND. neval==0 .AND. &
       last==0 ) ip = 1
     IF( ip==0 ) Ipass = 0
     CALL DPRIN(Lun,6,Kprint,ip,exact1,result,abserr,neval,ierv,1)
@@ -549,22 +549,22 @@ CONTAINS
     REAL(DP) :: a, abserr, b, epmach, epsabs, epsrel, error, c, result, &
       uflow, work(800)
     INTEGER :: ier, ip, Ipass, iwork(200), Kprint, last, lenw, limit, neval
-    REAL(DP), PARAMETER :: exact0 = -0.6284617285065624D+03
-    REAL(DP), PARAMETER :: exact1 = 0.1855802D+01
+    REAL(DP), PARAMETER :: exact0 = -0.6284617285065624E+03_DP
+    REAL(DP), PARAMETER :: exact1 = 0.1855802E+01_DP
     !* FIRST EXECUTABLE STATEMENT  CDQAWC
     IF( Kprint>=2 ) WRITE (Lun,'(''1DQAWC QUICK CHECK''/)')
     !
     ! TEST ON IER = 0
     !
     Ipass = 1
-    c = 0.5D+00
-    a = -1.0D+00
-    b = 1.0D+00
+    c = 0.5_DP
+    a = -1._DP
+    b = 1._DP
     limit = 200
     lenw = limit*4
-    epsabs = 0.0D+00
+    epsabs = 0._DP
     epmach = D1MACH(4)
-    epsrel = MAX(SQRT(epmach),0.1D-07)
+    epsrel = MAX(SQRT(epmach),0.1E-7_DP)
     CALL DQAWC(DF0C,a,b,c,epsabs,epsrel,result,abserr,neval,ier,limit,lenw,&
       last,iwork,work)
     ierv(1) = ier
@@ -587,7 +587,7 @@ CONTAINS
     ! TEST ON IER = 2 OR 1
     !
     uflow = D1MACH(1)
-    CALL DQAWC(DF0C,a,b,c,uflow,0.0D+00,result,abserr,neval,ier,limit,lenw,&
+    CALL DQAWC(DF0C,a,b,c,uflow,0._DP,result,abserr,neval,ier,limit,lenw,&
       last,iwork,work)
     ierv(1) = ier
     ierv(2) = 1
@@ -598,7 +598,7 @@ CONTAINS
     !
     ! TEST ON IER = 3 OR 1
     !
-    CALL DQAWC(DF1C,0.0D+00,b,c,uflow,0.0D+00,result,abserr,neval,ier,limit,&
+    CALL DQAWC(DF1C,0._DP,b,c,uflow,0._DP,result,abserr,neval,ier,limit,&
       lenw,last,iwork,work)
     ierv(1) = ier
     ierv(2) = 1
@@ -609,8 +609,8 @@ CONTAINS
     !
     ! TEST ON IER = 6
     !
-    epsabs = 0.0D+00
-    epsrel = 0.0D+00
+    epsabs = 0._DP
+    epsrel = 0._DP
     CALL DQAWC(DF0C,a,b,c,epsabs,epsrel,result,abserr,neval,ier,limit,lenw,&
       last,iwork,work)
     ierv(1) = ier
@@ -651,8 +651,8 @@ CONTAINS
     INTEGER :: ierv(4), integr, iwork(450), leniw, Lun, maxp1
     REAL(DP) :: a, abserr, epsabs, epmach, error, omega, result, uflow, work(1425)
     INTEGER :: ier, ip, Ipass, Kprint, lenw, limit, limlst, lst, neval
-    REAL(DP), PARAMETER :: exact0 = 0.1422552162575912D+01
-    REAL(DP), PARAMETER :: pi = 0.31415926535897932D+01
+    REAL(DP), PARAMETER :: exact0 = 0.1422552162575912E+01_DP
+    REAL(DP), PARAMETER :: pi = 0.31415926535897932E+01_DP
     !* FIRST EXECUTABLE STATEMENT  CDQAWF
     IF( Kprint>=2 ) WRITE (Lun,'(''1DQAWF QUICK CHECK''/)')
     !
@@ -665,9 +665,9 @@ CONTAINS
     leniw = limit*2 + limlst
     lenw = leniw*2 + maxp1*25
     epmach = D1MACH(4)
-    epsabs = MAX(SQRT(epmach),0.1D-02)
-    a = 0.0D+00
-    omega = 0.8D+01
+    epsabs = MAX(SQRT(epmach),0.1E-2_DP)
+    a = 0._DP
+    omega = 0.8E+01_DP
     integr = 2
     CALL DQAWF(DF0F,a,omega,integr,epsabs,result,abserr,neval,ier,limlst,lst,&
       leniw,maxp1,lenw,iwork,work)
@@ -697,7 +697,7 @@ CONTAINS
     leniw = limit*2 + limlst
     lenw = leniw*2 + maxp1*25
     uflow = D1MACH(1)
-    CALL DQAWF(DF1F,a,0.0D+00,1,uflow,result,abserr,neval,ier,limlst,lst,&
+    CALL DQAWF(DF1F,a,0._DP,1,uflow,result,abserr,neval,ier,limlst,lst,&
       leniw,maxp1,lenw,iwork,work)
     ierv(1) = ier
     ierv(2) = 4
@@ -767,8 +767,8 @@ CONTAINS
       uflow, work(1325)
     INTEGER :: ier, ierv(4), integr, ip, Ipass, iwork(400), Kprint, last, lenw, &
       Lun, maxp1, neval
-    REAL(DP), PARAMETER :: exact0 = 0.1042872789432789D+05
-    REAL(DP), PARAMETER :: pi = 0.31415926535897932D+01
+    REAL(DP), PARAMETER :: exact0 = 0.1042872789432789E+05_DP
+    REAL(DP), PARAMETER :: pi = 0.31415926535897932E+01_DP
     !* FIRST EXECUTABLE STATEMENT  CDQAWO
     IF( Kprint>=2 ) WRITE (Lun,'(''1DQAWO QUICK CHECK''/)')
     !
@@ -778,12 +778,12 @@ CONTAINS
     maxp1 = 21
     leniw = 400
     lenw = leniw*2 + maxp1*25
-    epsabs = 0.0D+00
+    epsabs = 0._DP
     epmach = D1MACH(4)
-    epsrel = MAX(SQRT(epmach),0.1D-07)
-    a = 0.0D+00
+    epsrel = MAX(SQRT(epmach),0.1E-7_DP)
+    a = 0._DP
     b = pi
-    omega = 0.1D+01
+    omega = 1._DP
     integr = 2
     CALL DQAWO(DF0O,a,b,omega,integr,epsabs,epsrel,result,abserr,neval,ier,&
       leniw,maxp1,lenw,last,iwork,work)
@@ -811,7 +811,7 @@ CONTAINS
     uflow = D1MACH(1)
     leniw = 400
     lenw = leniw*2 + maxp1*25
-    CALL DQAWO(DF0O,a,b,omega,integr,uflow,0.0D+00,result,abserr,neval,ier,&
+    CALL DQAWO(DF0O,a,b,omega,integr,uflow,0._DP,result,abserr,neval,ier,&
       leniw,maxp1,lenw,last,iwork,work)
     ierv(1) = ier
     ierv(2) = 4
@@ -823,10 +823,10 @@ CONTAINS
     !
     ! TEST ON IER = 3 OR 4 OR 1 OR 2
     !
-    b = 0.5D+01
-    omega = 0.0D+00
+    b = 5._DP
+    omega = 0._DP
     integr = 1
-    CALL DQAWO(DF1O,a,b,omega,integr,uflow,0.0D+00,result,abserr,neval,ier,&
+    CALL DQAWO(DF1O,a,b,omega,integr,uflow,0._DP,result,abserr,neval,ier,&
       leniw,maxp1,lenw,last,iwork,work)
     ierv(1) = ier
     ierv(2) = 4
@@ -839,7 +839,7 @@ CONTAINS
     !
     ! TEST ON IER = 5
     !
-    b = 0.1D+01
+    b = 1._DP
     oflow = D1MACH(2)
     CALL DQAWO(DF2O,a,b,omega,integr,epsabs,epsrel,result,abserr,neval,ier,&
       leniw,maxp1,lenw,last,iwork,work)
@@ -856,7 +856,7 @@ CONTAINS
       leniw,maxp1,lenw,last,iwork,work)
     ierv(1) = ier
     ip = 0
-    IF( ier==6 .AND. result==0.0D+00 .AND. abserr==0.0D+00 .AND. neval==0 .AND. &
+    IF( ier==6 .AND. result==0._DP .AND. abserr==0._DP .AND. neval==0 .AND. &
       last==0 ) ip = 1
     IF( ip==0 ) Ipass = 0
     CALL DPRIN(Lun,6,Kprint,ip,exact0,result,abserr,neval,ierv,1)
@@ -894,24 +894,24 @@ CONTAINS
     REAL(DP) :: a, abserr, b, epmach, epsabs, epsrel, error, alfa, beta, &
       result, uflow, work(800)
     INTEGER :: ier, ip, Ipass, iwork(200), Kprint, last, lenw, limit, neval, integr
-    REAL(DP), PARAMETER :: exact0 = 0.5350190569223644D+00
-    REAL(DP), PARAMETER :: exact1 = 0.1998491554328673D+04
+    REAL(DP), PARAMETER :: exact0 = 0.5350190569223644_DP
+    REAL(DP), PARAMETER :: exact1 = 0.1998491554328673E+04_DP
     !* FIRST EXECUTABLE STATEMENT  CDQAWS
     IF( Kprint>=2 ) WRITE (Lun,'(''1DQAWS QUICK CHECK''/)')
     !
     ! TEST ON IER = 0
     !
     Ipass = 1
-    alfa = -0.5D+00
-    beta = -0.5D+00
+    alfa = -0.5_DP
+    beta = -0.5_DP
     integr = 1
-    a = 0.0D+00
-    b = 0.1D+01
+    a = 0._DP
+    b = 1._DP
     limit = 200
     lenw = limit*4
-    epsabs = 0.0D+00
+    epsabs = 0._DP
     epmach = D1MACH(4)
-    epsrel = MAX(SQRT(epmach),0.1D-07)
+    epsrel = MAX(SQRT(epmach),0.1E-7_DP)
     CALL DQAWS(DF0WS,a,b,alfa,beta,integr,epsabs,epsrel,result,abserr,neval,&
       ier,limit,lenw,last,iwork,work)
     ierv(1) = ier
@@ -934,7 +934,7 @@ CONTAINS
     ! TEST ON IER = 2 OR 1
     !
     uflow = D1MACH(1)
-    CALL DQAWS(DF0WS,a,b,alfa,beta,integr,uflow,0.0D+00,result,abserr,neval,&
+    CALL DQAWS(DF0WS,a,b,alfa,beta,integr,uflow,0._DP,result,abserr,neval,&
       ier,limit,lenw,last,iwork,work)
     ierv(1) = ier
     ierv(2) = 1
@@ -997,20 +997,20 @@ CONTAINS
     INTEGER :: Lun
     REAL(DP) :: a, abserr, b, epmach, epsabs, epsrel, error, result, uflow
     INTEGER :: ier, ierv(1), ip, Ipass, Kprint, neval
-    REAL(DP), PARAMETER :: exact1 = 0.7281029132255818D+00
-    REAL(DP), PARAMETER :: exact2 = 0.1D+02
+    REAL(DP), PARAMETER :: exact1 = 0.7281029132255818_DP
+    REAL(DP), PARAMETER :: exact2 = 0.1E+02_DP
     !* FIRST EXECUTABLE STATEMENT  CDQNG
     IF( Kprint>=2 ) WRITE (Lun,'(''1DQNG QUICK CHECK''/)')
     !
     ! TEST ON IER = 0
     !
     Ipass = 1
-    epsabs = 0.0D+00
+    epsabs = 0._DP
     epmach = D1MACH(4)
     uflow = D1MACH(1)
-    epsrel = MAX(SQRT(epmach),0.1D-07)
-    a = 0.0D+00
-    b = 0.1D+01
+    epsrel = MAX(SQRT(epmach),0.1E-7_DP)
+    a = 0._DP
+    b = 1._DP
     CALL DQNG(DF1N,a,b,epsabs,epsrel,result,abserr,neval,ier)
     CALL DQNG(DF1N,a,b,epsabs,epsrel,result,abserr,neval,ier)
     ierv(1) = ier
@@ -1022,7 +1022,7 @@ CONTAINS
     !
     ! TEST ON IER = 1
     !
-    CALL DQNG(DF2N,a,b,uflow,0.0D+00,result,abserr,neval,ier)
+    CALL DQNG(DF2N,a,b,uflow,0._DP,result,abserr,neval,ier)
     ierv(1) = ier
     ip = 0
     IF( ier==1 ) ip = 1
@@ -1031,12 +1031,12 @@ CONTAINS
     !
     ! TEST ON IER = 6
     !
-    epsabs = 0.0D+00
-    epsrel = 0.0D+00
-    CALL DQNG(DF1N,a,b,epsabs,0.0D+00,result,abserr,neval,ier)
+    epsabs = 0._DP
+    epsrel = 0._DP
+    CALL DQNG(DF1N,a,b,epsabs,0._DP,result,abserr,neval,ier)
     ierv(1) = ier
     ip = 0
-    IF( ier==6 .AND. result==0.0D+00 .AND. abserr==0.0D+00 .AND. neval==0 ) ip = 1
+    IF( ier==6 .AND. result==0._DP .AND. abserr==0._DP .AND. neval==0 ) ip = 1
     IF( ip==0 ) Ipass = 0
     IF( Kprint/=0 ) CALL DPRIN(Lun,6,Kprint,ip,exact1,result,abserr,neval,ierv,1)
     !
@@ -1064,7 +1064,7 @@ CONTAINS
 
     REAL(DP) :: X
     !* FIRST EXECUTABLE STATEMENT  DF0C
-    DF0C = 1.D0/(X*X+1.D-4)
+    DF0C = 1._DP/(X*X+1.E-4_DP)
   END FUNCTION DF0C
   !** DF0F
   REAL(DP) FUNCTION DF0F(X)
@@ -1082,8 +1082,8 @@ CONTAINS
 
     REAL(DP) :: X
     !* FIRST EXECUTABLE STATEMENT  DF0F
-    DF0F = 0.0D+00
-    IF( X/=0.0D+00 ) DF0F = SIN(0.5D+02*X)/(X*SQRT(X))
+    DF0F = 0._DP
+    IF( X/=0._DP ) DF0F = SIN(0.5E+02_DP*X)/(X*SQRT(X))
   END FUNCTION DF0F
   !** DF0O
   REAL(DP) FUNCTION DF0O(X)
@@ -1101,7 +1101,7 @@ CONTAINS
 
     REAL(DP) :: X
     !* FIRST EXECUTABLE STATEMENT  DF0O
-    DF0O = (0.2D+01*SIN(X))**14
+    DF0O = (2._DP*SIN(X))**14
   END FUNCTION DF0O
   !** DF0S
   REAL(DP) FUNCTION DF0S(X)
@@ -1119,8 +1119,8 @@ CONTAINS
 
     REAL(DP) :: X
     !* FIRST EXECUTABLE STATEMENT  DF0S
-    DF0S = 0.0D+00
-    IF( X/=0.0D+00 ) DF0S = 0.1D+01/SQRT(X)
+    DF0S = 0._DP
+    IF( X/=0._DP ) DF0S = 1._DP/SQRT(X)
   END FUNCTION DF0S
   !** DF0WS
   REAL(DP) FUNCTION DF0WS(X)
@@ -1138,7 +1138,7 @@ CONTAINS
 
     REAL(DP) :: X
     !* FIRST EXECUTABLE STATEMENT  DF0WS
-    DF0WS = SIN(0.1D+02*X)
+    DF0WS = SIN(0.1E+02_DP*X)
   END FUNCTION DF0WS
   !** DF1C
   REAL(DP) FUNCTION DF1C(X)
@@ -1156,8 +1156,8 @@ CONTAINS
 
     REAL(DP) :: X
     !* FIRST EXECUTABLE STATEMENT  DF1C
-    DF1C = 0.0D+00
-    IF( X/=0.33D+00 ) DF1C = (X-0.5D+00)*ABS(X-0.33D+00)**(-0.9D+00)
+    DF1C = 0._DP
+    IF( X/=0.33_DP ) DF1C = (X-0.5_DP)*ABS(X-0.33_DP)**(-0.9_DP)
   END FUNCTION DF1C
   !** DF1F
   REAL(DP) FUNCTION DF1F(X)
@@ -1175,10 +1175,10 @@ CONTAINS
 
     REAL(DP) :: X, x1, y
     !* FIRST EXECUTABLE STATEMENT  DF1F
-    x1 = X + 0.1D+01
-    DF1F = 0.5D+01/x1/x1
-    y = 0.5D+01/x1
-    IF( y>3.1415926535897932D0 ) DF1F = 0.0D0
+    x1 = X + 1._DP
+    DF1F = 5._DP/x1/x1
+    y = 5._DP/x1
+    IF( y>3.1415926535897932_DP ) DF1F = 0._DP
   END FUNCTION DF1F
   !** DF1G
   REAL(DP) FUNCTION DF1G(X)
@@ -1195,9 +1195,9 @@ CONTAINS
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
     REAL(DP) :: X
-    REAL(DP), PARAMETER :: pi = 3.1415926535897932D0
+    REAL(DP), PARAMETER :: pi = 3.1415926535897932_DP
     !* FIRST EXECUTABLE STATEMENT  DF1G
-    DF1G = 2.0D0/(2.0D0+SIN(10.0D0*pi*X))
+    DF1G = 2._DP/(2._DP+SIN(10._DP*pi*X))
   END FUNCTION DF1G
   !** DF1N
   REAL(DP) FUNCTION DF1N(X)
@@ -1215,7 +1215,7 @@ CONTAINS
 
     REAL(DP) :: X
     !* FIRST EXECUTABLE STATEMENT  DF1N
-    DF1N = 1.0D0/(X**4+X**2+1.0D0)
+    DF1N = 1._DP/(X**4+X**2+1._DP)
   END FUNCTION DF1N
   !** DF1O
   REAL(DP) FUNCTION DF1O(X)
@@ -1233,8 +1233,8 @@ CONTAINS
 
     REAL(DP) :: X
     !* FIRST EXECUTABLE STATEMENT  DF1O
-    DF1O = 0.1D+01
-    IF( X>0.31415926535897932D+01 ) DF1O = 0.0D+00
+    DF1O = 1._DP
+    IF( X>0.31415926535897932E+01_DP ) DF1O = 0._DP
   END FUNCTION DF1O
   !** DF1P
   REAL(DP) FUNCTION DF1P(X)
@@ -1253,14 +1253,14 @@ CONTAINS
     REAL(DP) :: alfa1, alfa2, X, d1, d2
     !* FIRST EXECUTABLE STATEMENT  DF1P
     !  P1 = 1/7, P2 = 2/3
-    REAL(DP), PARAMETER :: p1 = 0.1428571428571428D+00
-    REAL(DP), PARAMETER :: p2 = 0.6666666666666667D+00
-    alfa1 = -0.25D0
-    alfa2 = -0.5D0
+    REAL(DP), PARAMETER :: p1 = 0.1428571428571428_DP
+    REAL(DP), PARAMETER :: p2 = 0.6666666666666667_DP
+    alfa1 = -0.25_DP
+    alfa2 = -0.5_DP
     d1 = ABS(X-p1)
     d2 = ABS(X-p2)
-    DF1P = 0.0D+00
-    IF( d1/=0.0D+00 .AND. d2/=0.0D+00 ) DF1P = d1**alfa1 + d2**alfa2
+    DF1P = 0._DP
+    IF( d1/=0._DP .AND. d2/=0._DP ) DF1P = d1**alfa1 + d2**alfa2
   END FUNCTION DF1P
   !** DF1S
   REAL(DP) FUNCTION DF1S(X)
@@ -1278,7 +1278,7 @@ CONTAINS
 
     REAL(DP) :: X
     !* FIRST EXECUTABLE STATEMENT  DF1S
-    DF1S = 0.2D+01/(0.2D+01+SIN(0.314159D+02*X))
+    DF1S = 2._DP/(2._DP+SIN(0.314159E+02_DP*X))
   END FUNCTION DF1S
   !** DF1WS
   REAL(DP) FUNCTION DF1WS(X)
@@ -1296,8 +1296,8 @@ CONTAINS
 
     REAL(DP) :: X
     !* FIRST EXECUTABLE STATEMENT  DF1WS
-    DF1WS = 0.00D+00
-    IF( X-0.33D+00/=0.00D+00 ) DF1WS = ABS(X-0.33D+00)**(-0.999D+00)
+    DF1WS = 0.00_DP
+    IF( X-0.33_DP/=0._DP ) DF1WS = ABS(X-0.33_DP)**(-0.999_DP)
   END FUNCTION DF1WS
   !** DF2G
   REAL(DP) FUNCTION DF2G(X)
@@ -1315,7 +1315,7 @@ CONTAINS
 
     REAL(DP) :: X
     !* FIRST EXECUTABLE STATEMENT  DF2G
-    DF2G = X*SIN(0.3D+02*X)*COS(0.5D+02*X)
+    DF2G = X*SIN(0.3E+02_DP*X)*COS(0.5E+02_DP*X)
   END FUNCTION DF2G
   !** DF2N
   REAL(DP) FUNCTION DF2N(X)
@@ -1333,7 +1333,7 @@ CONTAINS
 
     REAL(DP) :: X
     !* FIRST EXECUTABLE STATEMENT  DF2N
-    DF2N = X**(-0.9D+00)
+    DF2N = X**(-0.9_DP)
   END FUNCTION DF2N
   !** DF2O
   REAL(DP) FUNCTION DF2O(X)
@@ -1351,8 +1351,8 @@ CONTAINS
 
     REAL(DP) :: X
     !* FIRST EXECUTABLE STATEMENT  DF2O
-    DF2O = 0.0D+00
-    IF( X/=0.0D+00 ) DF2O = 0.1D+01/(X*X*SQRT(X))
+    DF2O = 0._DP
+    IF( X/=0._DP ) DF2O = 1._DP/(X*X*SQRT(X))
   END FUNCTION DF2O
   !** DF2P
   REAL(DP) FUNCTION DF2P(X)
@@ -1370,7 +1370,7 @@ CONTAINS
 
     REAL(DP) :: X
     !* FIRST EXECUTABLE STATEMENT  DF2P
-    DF2P = SIN(0.314159D+03*X)/(0.314159D+01*X)
+    DF2P = SIN(0.314159E+03_DP*X)/(0.314159E+01_DP*X)
   END FUNCTION DF2P
   !** DF2S
   REAL(DP) FUNCTION DF2S(X)
@@ -1388,8 +1388,8 @@ CONTAINS
 
     REAL(DP) :: X
     !* FIRST EXECUTABLE STATEMENT  DF2S
-    DF2S = 0.1D+03
-    IF( X/=0.0D+00 ) DF2S = SIN(0.314159D+03*X)/(0.314159D+01*X)
+    DF2S = 0.1E+03_DP
+    IF( X/=0._DP ) DF2S = SIN(0.314159E+03_DP*X)/(0.314159E+01_DP*X)
   END FUNCTION DF2S
   !** DF3G
   REAL(DP) FUNCTION DF3G(X)
@@ -1407,7 +1407,7 @@ CONTAINS
 
     REAL(DP) :: X
     !* FIRST EXECUTABLE STATEMENT  DF3G
-    DF3G = ABS(X-0.33D+00)**(-.90D+00)
+    DF3G = ABS(X-0.33_DP)**(-.90_DP)
   END FUNCTION DF3G
   !** DF3P
   REAL(DP) FUNCTION DF3P(X)
@@ -1425,8 +1425,8 @@ CONTAINS
 
     REAL(DP) :: X
     !* FIRST EXECUTABLE STATEMENT  DF3P
-    DF3P = 0.1D+01
-    IF( X>0.31415926535897932D+01 ) DF3P = 0.0D+00
+    DF3P = 1._DP
+    IF( X>0.31415926535897932E+01_DP ) DF3P = 0._DP
   END FUNCTION DF3P
   !** DF3S
   REAL(DP) FUNCTION DF3S(X)
@@ -1444,8 +1444,8 @@ CONTAINS
 
     REAL(DP) :: X
     !* FIRST EXECUTABLE STATEMENT  DF3S
-    DF3S = 0.1D+01
-    IF( X>0.31415926535897932D+01 ) DF3S = 0.0D+00
+    DF3S = 1._DP
+    IF( X>0.31415926535897932E+01_DP ) DF3S = 0._DP
   END FUNCTION DF3S
   !** DF4P
   REAL(DP) FUNCTION DF4P(X)
@@ -1463,8 +1463,8 @@ CONTAINS
 
     REAL(DP) :: X
     !* FIRST EXECUTABLE STATEMENT  DF4P
-    DF4P = 0.0D+00
-    IF( X>0.0D+00 ) DF4P = 0.1D+01/(X*SQRT(X))
+    DF4P = 0._DP
+    IF( X>0._DP ) DF4P = 1._DP/(X*SQRT(X))
   END FUNCTION DF4P
   !** DF4S
   REAL(DP) FUNCTION DF4S(X)
@@ -1482,8 +1482,8 @@ CONTAINS
 
     REAL(DP) :: X
     !* FIRST EXECUTABLE STATEMENT  DF4S
-    DF4S = 0.00D+00
-    IF( X-0.33D+00/=0.00D+00 ) DF4S = ABS(X-0.33D+00)**(-0.999D+00)
+    DF4S = 0.00_DP
+    IF( X-0.33_DP/=0._DP ) DF4S = ABS(X-0.33_DP)**(-0.999_DP)
   END FUNCTION DF4S
   !** DF5S
   REAL(DP) FUNCTION DF5S(X)
@@ -1501,8 +1501,8 @@ CONTAINS
 
     REAL(DP) :: X
     !* FIRST EXECUTABLE STATEMENT  DF5S
-    DF5S = 0.0D+00
-    IF( X/=0.0D+00 ) DF5S = 1.0D+00/(X*SQRT(X))
+    DF5S = 0._DP
+    IF( X/=0._DP ) DF5S = 1._DP/(X*SQRT(X))
   END FUNCTION DF5S
   !** DT0
   REAL(DP) FUNCTION DT0(X)
@@ -1520,9 +1520,9 @@ CONTAINS
 
     REAL(DP) :: a, b, X, x1, y
     !* FIRST EXECUTABLE STATEMENT  DT0
-    a = 0.0D+00
-    b = 0.1D+01
-    x1 = X + 0.1D+01
+    a = 0._DP
+    b = 1._DP
+    x1 = X + 1._DP
     y = (b-a)/x1 + a
     DT0 = (b-a)*DF0S(y)/x1/x1
   END FUNCTION DT0
@@ -1542,9 +1542,9 @@ CONTAINS
 
     REAL(DP) :: a, b, X, x1, y
     !* FIRST EXECUTABLE STATEMENT  DT1
-    a = 0.0D+00
-    b = 0.1D+01
-    x1 = X + 0.1D+01
+    a = 0._DP
+    b = 1._DP
+    x1 = X + 1._DP
     y = (b-a)/x1 + a
     DT1 = (b-a)*DF1S(y)/x1/x1
   END FUNCTION DT1
@@ -1564,9 +1564,9 @@ CONTAINS
 
     REAL(DP) :: a, b, X, x1, y
     !* FIRST EXECUTABLE STATEMENT  DT2
-    a = 0.1D+00
-    b = 0.1D+01
-    x1 = X + 0.1D+01
+    a = 0.1_DP
+    b = 1._DP
+    x1 = X + 1._DP
     y = (b-a)/x1 + a
     DT2 = (b-a)*DF2S(y)/x1/x1
   END FUNCTION DT2
@@ -1586,9 +1586,9 @@ CONTAINS
 
     REAL(DP) :: a, b, X, x1, y
     !* FIRST EXECUTABLE STATEMENT  DT3
-    a = 0.0D+00
-    b = 0.5D+01
-    x1 = X + 0.1D+01
+    a = 0._DP
+    b = 5._DP
+    x1 = X + 1._DP
     y = (b-a)/x1 + a
     DT3 = (b-a)*DF3S(y)/x1/x1
   END FUNCTION DT3
@@ -1608,9 +1608,9 @@ CONTAINS
 
     REAL(DP) :: a, b, X, x1, y
     !* FIRST EXECUTABLE STATEMENT  DT4
-    a = 0.0D+00
-    b = 0.1D+01
-    x1 = X + 0.1D+01
+    a = 0._DP
+    b = 1._DP
+    x1 = X + 1._DP
     y = (b-a)/x1 + a
     DT4 = (b-a)*DF4S(y)/x1/x1
   END FUNCTION DT4
@@ -1630,9 +1630,9 @@ CONTAINS
 
     REAL(DP) :: a, b, X, x1, y
     !* FIRST EXECUTABLE STATEMENT  DT5
-    a = 0.0D+00
-    b = 0.1D+01
-    x1 = X + 0.1D+01
+    a = 0._DP
+    b = 1._DP
+    x1 = X + 1._DP
     y = (b-a)/x1 + a
     DT5 = (b-a)*DF5S(y)/x1/x1
   END FUNCTION DT5

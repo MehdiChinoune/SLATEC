@@ -30,7 +30,7 @@ SUBROUTINE RADF3(Ido,L1,Cc,Ch,Wa1,Wa2)
   REAL(SP) :: ci2, cr2, di2, di3, dr2, dr3, taui, taur, ti2, ti3, tr2, tr3
   !* FIRST EXECUTABLE STATEMENT  RADF3
   taur = -.5
-  taui = .5*SQRT(3.)
+  taui = 0.5_SP*SQRT(3._SP)
   DO k = 1, L1
     cr2 = Cc(1,k,2) + Cc(1,k,3)
     Ch(1,1,k) = Cc(1,k,1) + cr2

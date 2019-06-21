@@ -389,8 +389,8 @@ SUBROUTINE HW3CRT(Xs,Xf,L,Lbdcnd,Bdxs,Bdxf,Ys,Yf,M,Mbdcnd,Bdys,Bdyf,Zs,Zf,&
   IF( Mdimf<M+1 ) Ierror = 11
   IF( Ierror==0 ) THEN
     dy = (Yf-Ys)/M
-    twbydy = 2./dy
-    c2 = 1./(dy**2)
+    twbydy = 2._SP/dy
+    c2 = 1._SP/(dy**2)
     mstart = 1
     mstop = M
     mp1 = M + 1
@@ -409,9 +409,9 @@ SUBROUTINE HW3CRT(Xs,Xf,L,Lbdcnd,Bdxs,Bdxf,Ys,Yf,M,Mbdcnd,Bdys,Bdyf,Zs,Zf,&
     END SELECT
     50  munk = mstop - mstart + 1
     dz = (Zf-Zs)/N
-    twbydz = 2./dz
+    twbydz = 2._SP/dz
     np = Nbdcnd + 1
-    c3 = 1./(dz**2)
+    c3 = 1._SP/(dz**2)
     np1 = N + 1
     nstart = 1
     nstop = N
@@ -430,8 +430,8 @@ SUBROUTINE HW3CRT(Xs,Xf,L,Lbdcnd,Bdxs,Bdxf,Ys,Yf,M,Mbdcnd,Bdys,Bdyf,Zs,Zf,&
     100  nunk = nstop - nstart + 1
     lp1 = L + 1
     dx = (Xf-Xs)/L
-    c1 = 1./(dx**2)
-    twbydx = 2./dx
+    c1 = 1._SP/(dx**2)
+    twbydx = 2._SP/dx
     lp = Lbdcnd + 1
     lstart = 1
     lstop = L
@@ -552,21 +552,21 @@ SUBROUTINE HW3CRT(Xs,Xf,L,Lbdcnd,Bdxs,Bdxf,Ys,Yf,M,Mbdcnd,Bdys,Bdyf,Zs,Zf,&
       W(k) = c3
       W(i) = c3
       i = iwb + k - 1
-      W(i) = -2.*c3 + Elmbda
+      W(i) = -2._SP*c3 + Elmbda
     END DO
     SELECT CASE (np)
       CASE (1,2)
         GOTO 300
       CASE (3)
       CASE DEFAULT
-        W(iwc) = 2.*c3
+        W(iwc) = 2._SP*c3
     END SELECT
     SELECT CASE (np)
       CASE (1,2,5)
       CASE DEFAULT
-        W(iwb-1) = 2.*c3
+        W(iwb-1) = 2._SP*c3
     END SELECT
-    300  Pertrb = 0.
+    300  Pertrb = 0._SP
     !
     !     FOR SINGULAR PROBLEMS ADJUST DATA TO INSURE A SOLUTION WILL EXIST.
     !
@@ -587,7 +587,7 @@ SUBROUTINE HW3CRT(Xs,Xf,L,Lbdcnd,Bdxs,Bdxf,Ys,Yf,M,Mbdcnd,Bdys,Bdyf,Zs,Zf,&
                   xlp = (2+lp)/3
                   ylp = (2+mp)/3
                   zlp = (2+np)/3
-                  s1 = 0.
+                  s1 = 0._SP
                   DO k = 2, nstpm1
                     DO j = 2, mstpm1
                       DO i = 2, lstpm1
@@ -595,7 +595,7 @@ SUBROUTINE HW3CRT(Xs,Xf,L,Lbdcnd,Bdxs,Bdxf,Ys,Yf,M,Mbdcnd,Bdys,Bdyf,Zs,Zf,&
                       END DO
                       s1 = s1 + (F(1,j,k)+F(lstop,j,k))/xlp
                     END DO
-                    s2 = 0.
+                    s2 = 0._SP
                     DO i = 2, lstpm1
                       s2 = s2 + F(i,1,k) + F(i,mstop,k)
                     END DO
@@ -611,19 +611,19 @@ SUBROUTINE HW3CRT(Xs,Xf,L,Lbdcnd,Bdxs,Bdxf,Ys,Yf,M,Mbdcnd,Bdys,Bdyf,Zs,Zf,&
                       s = s + F(i,j,1) + F(i,j,nstop)
                     END DO
                   END DO
-                  s2 = 0.
+                  s2 = 0._SP
                   DO i = 2, lstpm1
                     s2 = s2 + F(i,1,1) + F(i,1,nstop) + F(i,mstop,1)&
                       + F(i,mstop,nstop)
                   END DO
                   s = s2/ylp + s
-                  s2 = 0.
+                  s2 = 0._SP
                   DO j = 2, mstpm1
                     s2 = s2 + F(1,j,1) + F(1,j,nstop) + F(lstop,j,1)&
                       + F(lstop,j,nstop)
                   END DO
                   s = s2/xlp + s
-                  Pertrb = (s/zlp+s1)/((lunk+1.-xlp)*(munk+1.-ylp)*(nunk+1.-zlp))
+                  Pertrb = (s/zlp+s1)/((lunk+1._SP-xlp)*(munk+1._SP-ylp)*(nunk+1._SP-zlp))
                   DO i = 1, lunk
                     DO j = 1, munk
                       DO k = 1, nunk
@@ -640,8 +640,8 @@ SUBROUTINE HW3CRT(Xs,Xf,L,Lbdcnd,Bdxs,Bdxf,Ys,Yf,M,Mbdcnd,Bdys,Bdyf,Zs,Zf,&
     nperod = 0
     IF( Nbdcnd/=0 ) THEN
       nperod = 1
-      W(1) = 0.
-      W(iww-1) = 0.
+      W(1) = 0._SP
+      W(iww-1) = 0._SP
     END IF
     CALL POIS3D(Lbdcnd,lunk,c1,Mbdcnd,munk,c2,nperod,nunk,W,W(iwb:iwc-1),W(iwc:iww-1),&
       Ldimf,Mdimf,F(lstart,mstart,nstart),ir,W(iww:))

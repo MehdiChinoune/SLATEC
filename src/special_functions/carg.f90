@@ -28,10 +28,10 @@ REAL(SP) FUNCTION CARG(Z)
   !   770401  DATE WRITTEN
   !   861211  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
-  
+
   COMPLEX(SP) :: Z
   !* FIRST EXECUTABLE STATEMENT  CARG
-  CARG = 0.0
+  CARG = 0._SP
   IF( REAL(Z)/=0. .OR. AIMAG(Z)/=0. ) CARG = ATAN2(AIMAG(Z),REAL(Z))
   !
 END FUNCTION CARG

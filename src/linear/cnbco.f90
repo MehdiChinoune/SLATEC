@@ -147,7 +147,7 @@ SUBROUTINE CNBCO(Abe,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
   !* FIRST EXECUTABLE STATEMENT  CNBCO
   ml1 = Ml + 1
   ldb = Lda - 1
-  anorm = 0.0E0
+  anorm = 0._SP
   DO j = 1, N
     nu = MIN(Mu,j-1)
     nl = MIN(Ml,N-j)
@@ -168,24 +168,24 @@ SUBROUTINE CNBCO(Abe,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
   !
   !     SOLVE CTRANS(U)*W = E
   !
-  ek = (1.0E0,0.0E0)
+  ek = (1._SP,0._SP)
   Z = CMPLX( 0._SP, 0._SP, SP )
   m = Ml + Mu + 1
   ju = 0
   DO k = 1, N
-    IF( SCABS1(Z(k))/=0.0E0 ) ek = -Z(k)*SCABS1(ek)/SCABS1(Z(k))
+    IF( SCABS1(Z(k))/=0._SP ) ek = -Z(k)*SCABS1(ek)/SCABS1(Z(k))
     IF( SCABS1(ek-Z(k))>SCABS1(Abe(k,ml1)) ) THEN
       s = SCABS1(Abe(k,ml1))/SCABS1(ek-Z(k))
       Z = s*Z
-      ek = CMPLX(s,0.0E0)*ek
+      ek = CMPLX(s,0._SP,SP)*ek
     END IF
     wk = ek - Z(k)
     wkm = -ek - Z(k)
     s = SCABS1(wk)
     sm = SCABS1(wkm)
-    IF( SCABS1(Abe(k,ml1))==0.0E0 ) THEN
-      wk = (1.0E0,0.0E0)
-      wkm = (1.0E0,0.0E0)
+    IF( SCABS1(Abe(k,ml1))==0._SP ) THEN
+      wk = (1._SP,0._SP)
+      wkm = (1._SP,0._SP)
     ELSE
       wk = wk/CONJG(Abe(k,ml1))
       wkm = wkm/CONJG(Abe(k,ml1))
@@ -212,7 +212,7 @@ SUBROUTINE CNBCO(Abe,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
     END IF
     Z(k) = wk
   END DO
-  s = 1.0E0/SCASUM(N,Z,1)
+  s = 1._SP/SCASUM(N,Z,1)
   Z = s*Z
   !
   !     SOLVE CTRANS(L)*Y = W
@@ -227,8 +227,8 @@ SUBROUTINE CNBCO(Abe,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
       v(nl) = Abe(k+2*nl-2,1)
       Z(k) = Z(k) + DOT_PRODUCT(v(1:nl),Z(k+1:k+nl))
     END IF
-    IF( SCABS1(Z(k))>1.0E0 ) THEN
-      s = 1.0E0/SCABS1(Z(k))
+    IF( SCABS1(Z(k))>1._SP ) THEN
+      s = 1._SP/SCABS1(Z(k))
       Z = s*Z
     END IF
     l = Ipvt(k)
@@ -236,10 +236,10 @@ SUBROUTINE CNBCO(Abe,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
     Z(l) = Z(k)
     Z(k) = t
   END DO
-  s = 1.0E0/SCASUM(N,Z,1)
+  s = 1._SP/SCASUM(N,Z,1)
   Z = s*Z
   !
-  ynorm = 1.0E0
+  ynorm = 1._SP
   !
   !     SOLVE L*V = Y
   !
@@ -250,13 +250,13 @@ SUBROUTINE CNBCO(Abe,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
     Z(k) = t
     nl = MIN(Ml,N-k)
     IF( k<N ) CALL CAXPY(nl,t,Abe(k+nl,ml1-nl),-ldb,Z(k+1),1)
-    IF( SCABS1(Z(k))>1.0E0 ) THEN
-      s = 1.0E0/SCABS1(Z(k))
+    IF( SCABS1(Z(k))>1._SP ) THEN
+      s = 1._SP/SCABS1(Z(k))
       Z = s*Z
       ynorm = s*ynorm
     END IF
   END DO
-  s = 1.0E0/SCASUM(N,Z,1)
+  s = 1._SP/SCASUM(N,Z,1)
   Z = s*Z
   ynorm = s*ynorm
   !
@@ -269,8 +269,8 @@ SUBROUTINE CNBCO(Abe,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
       Z = s*Z
       ynorm = s*ynorm
     END IF
-    IF( SCABS1(Abe(k,ml1))/=0.0E0 ) Z(k) = Z(k)/Abe(k,ml1)
-    IF( SCABS1(Abe(k,ml1))==0.0E0 ) Z(k) = 1.0E0
+    IF( SCABS1(Abe(k,ml1))/=0._SP ) Z(k) = Z(k)/Abe(k,ml1)
+    IF( SCABS1(Abe(k,ml1))==0._SP ) Z(k) = 1._SP
     lm = MIN(k,m) - 1
     lz = k - lm
     t = -Z(k)
@@ -278,10 +278,10 @@ SUBROUTINE CNBCO(Abe,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
     CALL CAXPY(lm,t,Abe(k-1,Ml+2),-ldb,Z(lz),1)
   END DO
   !     MAKE ZNORM = 1.0E0
-  s = 1.0E0/SCASUM(N,Z,1)
+  s = 1._SP/SCASUM(N,Z,1)
   Z = s*Z
   ynorm = s*ynorm
   !
-  IF( anorm/=0.0E0 ) Rcond = ynorm/anorm
-  IF( anorm==0.0E0 ) Rcond = 0.0E0
+  IF( anorm/=0._SP ) Rcond = ynorm/anorm
+  IF( anorm==0._SP ) Rcond = 0._SP
 END SUBROUTINE CNBCO

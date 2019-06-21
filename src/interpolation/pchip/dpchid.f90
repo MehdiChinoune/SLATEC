@@ -125,7 +125,7 @@ REAL(DP) FUNCTION DPCHID(N,X,F,D,Incfd,Skip,Ia,Ib,Ierr)
   !
   !  INITIALIZE.
   !
-  REAL(DP), PARAMETER :: zero = 0.D0, half = .5D0, six = 6.D0
+  REAL(DP), PARAMETER :: zero = 0._DP, half = .5_DP, six = 6._DP
   !* FIRST EXECUTABLE STATEMENT  DPCHID
   value = zero
   !

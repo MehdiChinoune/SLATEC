@@ -28,23 +28,23 @@ SUBROUTINE CASYI(Z,Fnu,Kode,N,Y,Nz,Rl,Tol,Elim,Alim)
   COMPLEX(SP) :: ak1, ck, cs1, cs2, cz, dk, ez, p1, rz, s2, Y(N), Z
   REAL(SP) :: aa, acz, aez, ak, Alim, arg, arm, atol, az, bb, bk, dfnu, &
     dnu2, Elim, fdn, Fnu, Rl, rtr1, s, sgn, sqk, Tol, x, yy
-  REAL(SP), PARAMETER ::  pi = 3.14159265358979324E0, rtpi = 0.159154943091895336E0
-  COMPLEX(SP), PARAMETER ::  czero = (0.0E0,0.0E0), cone = (1.0E0,0.0E0)
+  REAL(SP), PARAMETER ::  pi = 3.14159265358979324_SP, rtpi = 0.159154943091895336_SP
+  COMPLEX(SP), PARAMETER ::  czero = (0._SP,0._SP), cone = (1._SP,0._SP)
   !* FIRST EXECUTABLE STATEMENT  CASYI
   Nz = 0
   az = ABS(Z)
   x = REAL(Z)
-  arm = 1.0E+3*R1MACH(1)
+  arm = 1.E+3_SP*R1MACH(1)
   rtr1 = SQRT(arm)
   il = MIN(2,N)
   dfnu = Fnu + (N-il)
   !-----------------------------------------------------------------------
   !     OVERFLOW TEST
   !-----------------------------------------------------------------------
-  ak1 = CMPLX(rtpi,0.0E0)/Z
+  ak1 = CMPLX(rtpi,0._SP,SP)/Z
   ak1 = SQRT(ak1)
   cz = Z
-  IF( Kode==2 ) cz = Z - CMPLX(x,0.0E0)
+  IF( Kode==2 ) cz = Z - CMPLX(x,0._SP,SP)
   acz = REAL(cz)
   IF( ABS(acz)>Elim ) THEN
     Nz = -1
@@ -56,20 +56,20 @@ SUBROUTINE CASYI(Z,Fnu,Kode,N,Y,Nz,Rl,Tol,Elim,Alim)
       koded = 0
       ak1 = ak1*EXP(cz)
     END IF
-    fdn = 0.0E0
+    fdn = 0._SP
     IF( dnu2>rtr1 ) fdn = dnu2*dnu2
-    ez = Z*CMPLX(8.0E0,0.0E0)
+    ez = Z*CMPLX(8._SP,0._SP,SP)
     !-----------------------------------------------------------------------
     !     WHEN Z IS IMAGINARY, THE ERROR TEST MUST BE MADE RELATIVE TO THE
     !     FIRST RECIPROCAL POWER SINCE THIS IS THE LEADING TERM OF THE
     !     EXPANSION FOR THE IMAGINARY PART.
     !-----------------------------------------------------------------------
-    aez = 8.0E0*az
+    aez = 8._SP*az
     s = Tol/aez
     jl = INT( Rl + Rl ) + 2
     yy = AIMAG(Z)
     p1 = czero
-    IF( yy/=0.0E0 ) THEN
+    IF( yy/=0._SP ) THEN
       !-----------------------------------------------------------------------
       !     CALCULATE EXP(PI*(0.5+FNU+N-IL)*I) TO MINIMIZE LOSSES OF
       !     SIGNIFICANCE WHEN FNU OR N IS LARGE
@@ -79,37 +79,37 @@ SUBROUTINE CASYI(Z,Fnu,Kode,N,Y,Nz,Rl,Tol,Elim,Alim)
       inu = inu + N - il
       ak = -SIN(arg)
       bk = COS(arg)
-      IF( yy<0.0E0 ) bk = -bk
-      p1 = CMPLX(ak,bk)
+      IF( yy<0._SP ) bk = -bk
+      p1 = CMPLX(ak,bk,SP)
       IF( MOD(inu,2)==1 ) p1 = -p1
     END IF
     DO k = 1, il
-      sqk = fdn - 1.0E0
+      sqk = fdn - 1._SP
       atol = s*ABS(sqk)
-      sgn = 1.0E0
+      sgn = 1._SP
       cs1 = cone
       cs2 = cone
       ck = cone
-      ak = 0.0E0
-      aa = 1.0E0
+      ak = 0._SP
+      aa = 1._SP
       bb = aez
       dk = ez
       DO j = 1, jl
-        ck = ck*CMPLX(sqk,0.0E0)/dk
+        ck = ck*CMPLX(sqk,0._SP,SP)/dk
         cs2 = cs2 + ck
         sgn = -sgn
-        cs1 = cs1 + ck*CMPLX(sgn,0.0E0)
+        cs1 = cs1 + ck*CMPLX(sgn,0._SP,SP)
         dk = dk + ez
         aa = aa*ABS(sqk)/bb
         bb = bb + aez
-        ak = ak + 8.0E0
+        ak = ak + 8._SP
         sqk = sqk - ak
         IF( aa<=atol ) GOTO 20
       END DO
       GOTO 100
       20  s2 = cs1
       IF( x+x<Elim ) s2 = s2 + p1*cs2*EXP(-Z-Z)
-      fdn = fdn + 8.0E0*dfnu + 4.0E0
+      fdn = fdn + 8._SP*dfnu + 4._SP
       p1 = -p1
       m = N - il + k
       Y(m) = s2*ak1
@@ -121,8 +121,8 @@ SUBROUTINE CASYI(Z,Fnu,Kode,N,Y,Nz,Rl,Tol,Elim,Alim)
     rz = (cone+cone)/Z
     ib = 3
     DO i = ib, nn
-      Y(k) = CMPLX(ak+Fnu,0.0E0)*rz*Y(k+1) + Y(k+2)
-      ak = ak - 1.0E0
+      Y(k) = CMPLX(ak+Fnu,0._SP,SP)*rz*Y(k+1) + Y(k+2)
+      ak = ak - 1._SP
       k = k - 1
     END DO
     IF( koded==0 ) RETURN

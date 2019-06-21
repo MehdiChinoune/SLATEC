@@ -246,14 +246,14 @@ SUBROUTINE QAGIE(F,Bound,Inf,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,&
   Ier = 0
   Neval = 0
   Last = 0
-  Result = 0.0E+00
-  Abserr = 0.0E+00
-  Alist(1) = 0.0E+00
-  Blist(1) = 0.1E+01
-  Rlist(1) = 0.0E+00
-  Elist(1) = 0.0E+00
+  Result = 0._SP
+  Abserr = 0._SP
+  Alist(1) = 0._SP
+  Blist(1) = 1._SP
+  Rlist(1) = 0._SP
+  Elist(1) = 0._SP
   Iord(1) = 0
-  IF( Epsabs<=0.0E+00 .AND. Epsrel<MAX(0.5E+02*epmach,0.5E-14) ) Ier = 6
+  IF( Epsabs<=0._SP .AND. Epsrel<MAX(50._SP*epmach,0.5E-14_SP) ) Ier = 6
   IF( Ier==6 ) RETURN
   !
   !
@@ -266,8 +266,8 @@ SUBROUTINE QAGIE(F,Bound,Inf,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,&
   !           I2 = INTEGRAL OF F OVER (0,+INFINITY).
   !
   boun = Bound
-  IF( Inf==2 ) boun = 0.0E+00
-  CALL QK15I(F,boun,Inf,0.0E+00,0.1E+01,Result,Abserr,defabs,resabs)
+  IF( Inf==2 ) boun = 0._SP
+  CALL QK15I(F,boun,Inf,0._SP,1._SP,Result,Abserr,defabs,resabs)
   !
   !           TEST ON ACCURACY
   !
@@ -277,9 +277,9 @@ SUBROUTINE QAGIE(F,Bound,Inf,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,&
   Iord(1) = 1
   dres = ABS(Result)
   errbnd = MAX(Epsabs,Epsrel*dres)
-  IF( Abserr<=1.0E+02*epmach*defabs .AND. Abserr>errbnd ) Ier = 2
+  IF( Abserr<=100._SP*epmach*defabs .AND. Abserr>errbnd ) Ier = 2
   IF( Limit==1 ) Ier = 1
-  IF( Ier/=0 .OR. (Abserr<=errbnd .AND. Abserr/=resabs) .OR. Abserr==0.0E+00 )&
+  IF( Ier/=0 .OR. (Abserr<=errbnd .AND. Abserr/=resabs) .OR. Abserr==0._SP )&
     GOTO 300
   !
   !           INITIALIZATION
@@ -304,7 +304,7 @@ SUBROUTINE QAGIE(F,Bound,Inf,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,&
   iroff2 = 0
   iroff3 = 0
   ksgn = -1
-  IF( dres>=(0.1E+01-0.5E+02*epmach)*defabs ) ksgn = 1
+  IF( dres>=(1._SP-50._SP*epmach)*defabs ) ksgn = 1
   !
   !           MAIN DO-LOOP
   !           ------------
@@ -315,7 +315,7 @@ SUBROUTINE QAGIE(F,Bound,Inf,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,&
     !           ERROR ESTIMATE.
     !
     a1 = Alist(maxerr)
-    b1 = 0.5E+00*(Alist(maxerr)+Blist(maxerr))
+    b1 = 0.5_SP*(Alist(maxerr)+Blist(maxerr))
     a2 = b1
     b2 = Blist(maxerr)
     erlast = errmax
@@ -355,7 +355,7 @@ SUBROUTINE QAGIE(F,Bound,Inf,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,&
     !           SET ERROR FLAG IN THE CASE OF BAD INTEGRAND BEHAVIOUR
     !           AT SOME POINTS OF THE INTEGRATION RANGE.
     !
-    IF( MAX(ABS(a1),ABS(b2))<=(0.1E+01+0.1E+03*epmach)&
+    IF( MAX(ABS(a1),ABS(b2))<=(1._SP+100._SP*epmach)&
       *(ABS(a2)+0.1E+04*uflow) ) Ier = 4
     !
     !           APPEND THE NEWLY-CREATED INTERVALS TO THE LIST.
@@ -385,7 +385,7 @@ SUBROUTINE QAGIE(F,Bound,Inf,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,&
     IF( errsum<=errbnd ) GOTO 200
     IF( Ier/=0 ) EXIT
     IF( Last==2 ) THEN
-      small = 0.375E+00
+      small = 0.375_SP
       erlarg = errsum
       ertest = errbnd
       rlist2(2) = area
@@ -443,7 +443,7 @@ SUBROUTINE QAGIE(F,Bound,Inf,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,&
       errmax = Elist(maxerr)
       nrmax = 1
       extrap = .FALSE.
-      small = small*0.5E+00
+      small = small*0.5_SP
       erlarg = errsum
     END IF
     100 CONTINUE
@@ -456,9 +456,9 @@ SUBROUTINE QAGIE(F,Bound,Inf,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,&
     IF( (Ier+ierro)/=0 ) THEN
       IF( ierro==3 ) Abserr = Abserr + correc
       IF( Ier==0 ) Ier = 3
-      IF( Result==0.0E+00 .OR. area==0.0E+00 ) THEN
+      IF( Result==0._SP .OR. area==0._SP ) THEN
         IF( Abserr>errsum ) GOTO 200
-        IF( area==0.0E+00 ) GOTO 300
+        IF( area==0._SP ) GOTO 300
       ELSEIF( Abserr/ABS(Result)>errsum/ABS(area) ) THEN
         GOTO 200
       END IF
@@ -467,7 +467,7 @@ SUBROUTINE QAGIE(F,Bound,Inf,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,&
     !           TEST ON DIVERGENCE
     !
     IF( ksgn/=(-1) .OR. MAX(ABS(Result),ABS(area))>defabs*0.1E-01 ) THEN
-      IF( 0.1E-01>(Result/area) .OR. (Result/area)>0.1E+03 .OR. &
+      IF( 0.1E-01>(Result/area) .OR. (Result/area)>100._SP .OR. &
         errsum>ABS(area) ) Ier = 6
     END IF
     GOTO 300
@@ -475,7 +475,7 @@ SUBROUTINE QAGIE(F,Bound,Inf,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,&
   !
   !           COMPUTE GLOBAL INTEGRAL SUM.
   !
-  200  Result = 0.0E+00
+  200  Result = 0._SP
   DO k = 1, Last
     Result = Result + Rlist(k)
   END DO

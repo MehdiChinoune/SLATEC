@@ -299,16 +299,16 @@ SUBROUTINE QAWOE(F,A,B,Omega,Integr,Epsabs,Epsrel,Limit,Icall,Maxp1,&
   Ier = 0
   Neval = 0
   Last = 0
-  Result = 0.0E+00
-  Abserr = 0.0E+00
+  Result = 0._SP
+  Abserr = 0._SP
   Alist(1) = A
   Blist(1) = B
-  Rlist(1) = 0.0E+00
-  Elist(1) = 0.0E+00
+  Rlist(1) = 0._SP
+  Elist(1) = 0._SP
   Iord(1) = 0
   Nnlog(1) = 0
   IF( (Integr/=1 .AND. Integr/=2) .OR. &
-    (Epsabs<=0.0E+00 .AND. Epsrel<MAX(0.5E+02*epmach,0.5E-14)) .OR. &
+    (Epsabs<=0._SP .AND. Epsrel<MAX(50._SP*epmach,0.5E-14_SP)) .OR. &
     Icall<1 .OR. Maxp1<1 ) Ier = 6
   IF( Ier/=6 ) THEN
     !
@@ -328,10 +328,10 @@ SUBROUTINE QAWOE(F,A,B,Omega,Integr,Epsabs,Epsrel,Limit,Icall,Maxp1,&
     Rlist(1) = Result
     Elist(1) = Abserr
     Iord(1) = 1
-    IF( Abserr<=0.1E+03*epmach*defabs .AND. Abserr>errbnd ) Ier = 2
+    IF( Abserr<=100._SP*epmach*defabs .AND. Abserr>errbnd ) Ier = 2
     IF( Limit==1 ) Ier = 1
     IF( Ier/=0 .OR. Abserr<=errbnd ) THEN
-      IF( Integr==2 .AND. Omega<0.0E+00 ) Result = -Result
+      IF( Integr==2 .AND. Omega<0._SP ) Result = -Result
       RETURN
     ELSE
       !
@@ -353,18 +353,18 @@ SUBROUTINE QAWOE(F,A,B,Omega,Integr,Epsabs,Epsrel,Limit,Icall,Maxp1,&
       iroff2 = 0
       iroff3 = 0
       ktmin = 0
-      small = ABS(B-A)*0.75E+00
+      small = ABS(B-A)*0.75_SP
       nres = 0
       numrl2 = 0
       extall = .FALSE.
-      IF( 0.5E+00*ABS(B-A)*domega<=0.2E+01 ) THEN
+      IF( 0.5_SP*ABS(B-A)*domega<=2._SP ) THEN
         numrl2 = 1
         extall = .TRUE.
         rlist2(1) = Result
       END IF
-      IF( 0.25E+00*ABS(B-A)*domega<=0.2E+01 ) extall = .TRUE.
+      IF( 0.25E+00*ABS(B-A)*domega<=2._SP ) extall = .TRUE.
       ksgn = -1
-      IF( dres>=(0.1E+01-0.5E+02*epmach)*defabs ) ksgn = 1
+      IF( dres>=(1._SP-50._SP*epmach)*defabs ) ksgn = 1
       !
       !           MAIN DO-LOOP
       !           ------------
@@ -376,7 +376,7 @@ SUBROUTINE QAWOE(F,A,B,Omega,Integr,Epsabs,Epsrel,Limit,Icall,Maxp1,&
         !
         nrmom = Nnlog(maxerr) + 1
         a1 = Alist(maxerr)
-        b1 = 0.5E+00*(Alist(maxerr)+Blist(maxerr))
+        b1 = 0.5_SP*(Alist(maxerr)+Blist(maxerr))
         a2 = b1
         b2 = Blist(maxerr)
         erlast = errmax
@@ -422,7 +422,7 @@ SUBROUTINE QAWOE(F,A,B,Omega,Integr,Epsabs,Epsrel,Limit,Icall,Maxp1,&
         !           SET ERROR FLAG IN THE CASE OF BAD INTEGRAND BEHAVIOUR
         !           AT A POINT OF THE INTEGRATION RANGE.
         !
-        IF( MAX(ABS(a1),ABS(b2))<=(0.1E+01+0.1E+03*epmach)&
+        IF( MAX(ABS(a1),ABS(b2))<=(1._SP+100._SP*epmach)&
           *(ABS(a2)+0.1E+04*uflow) ) Ier = 4
         !
         !           APPEND THE NEWLY-CREATED INTERVALS TO THE LIST.
@@ -453,7 +453,7 @@ SUBROUTINE QAWOE(F,A,B,Omega,Integr,Epsabs,Epsrel,Limit,Icall,Maxp1,&
         IF( errsum<=errbnd ) GOTO 50
         IF( Ier/=0 ) EXIT
         IF( Last==2 .AND. extall ) THEN
-          small = small*0.5E+00
+          small = small*0.5_SP
           numrl2 = numrl2 + 1
           rlist2(numrl2) = area
         ELSE
@@ -479,8 +479,8 @@ SUBROUTINE QAWOE(F,A,B,Omega,Integr,Epsabs,Epsrel,Limit,Icall,Maxp1,&
             !           NEXT INTERVAL WITH USE OF A GAUSS-KRONROD RULE - SEE
             !           SUBROUTINE QC25F).
             !
-            small = small*0.5E+00
-            IF( 0.25E+00*width*domega>0.2E+01 ) CYCLE
+            small = small*0.5_SP
+            IF( 0.25E+00*width*domega>2._SP ) CYCLE
             extall = .TRUE.
             GOTO 10
           END IF
@@ -530,7 +530,7 @@ SUBROUTINE QAWOE(F,A,B,Omega,Integr,Epsabs,Epsrel,Limit,Icall,Maxp1,&
           errmax = Elist(maxerr)
           nrmax = 1
           extrap = .FALSE.
-          small = small*0.5E+00
+          small = small*0.5_SP
           erlarg = errsum
           CYCLE
         END IF
@@ -546,11 +546,11 @@ SUBROUTINE QAWOE(F,A,B,Omega,Integr,Epsabs,Epsrel,Limit,Icall,Maxp1,&
         IF( Ier+ierro/=0 ) THEN
           IF( ierro==3 ) Abserr = Abserr + correc
           IF( Ier==0 ) Ier = 3
-          IF( Result==0.0E+00 .OR. area==0.0E+00 ) THEN
+          IF( Result==0._SP .OR. area==0._SP ) THEN
             IF( Abserr>errsum ) GOTO 50
-            IF( area==0.0E+00 ) THEN
+            IF( area==0._SP ) THEN
               IF( Ier>2 ) Ier = Ier - 1
-              IF( Integr==2 .AND. Omega<0.0E+00 ) Result = -Result
+              IF( Integr==2 .AND. Omega<0._SP ) Result = -Result
               RETURN
             END IF
           ELSEIF( Abserr/ABS(Result)>errsum/ABS(area) ) THEN
@@ -561,24 +561,24 @@ SUBROUTINE QAWOE(F,A,B,Omega,Integr,Epsabs,Epsrel,Limit,Icall,Maxp1,&
         !           TEST ON DIVERGENCE.
         !
         IF( ksgn/=(-1) .OR. MAX(ABS(Result),ABS(area))>defabs*0.1E-01 ) THEN
-          IF( 0.1E-01>(Result/area) .OR. (Result/area)>0.1E+03 .OR. &
+          IF( 0.1E-01>(Result/area) .OR. (Result/area)>100._SP .OR. &
             errsum>=ABS(area) ) Ier = 6
         END IF
         IF( Ier>2 ) Ier = Ier - 1
-        IF( Integr==2 .AND. Omega<0.0E+00 ) Result = -Result
+        IF( Integr==2 .AND. Omega<0._SP ) Result = -Result
         RETURN
       END IF
     END IF
     !
     !           COMPUTE GLOBAL INTEGRAL SUM.
     !
-    50  Result = 0.0E+00
+    50  Result = 0._SP
     DO k = 1, Last
       Result = Result + Rlist(k)
     END DO
     Abserr = errsum
     IF( Ier>2 ) Ier = Ier - 1
-    IF( Integr==2 .AND. Omega<0.0E+00 ) Result = -Result
+    IF( Integr==2 .AND. Omega<0._SP ) Result = -Result
   END IF
   RETURN
 END SUBROUTINE QAWOE

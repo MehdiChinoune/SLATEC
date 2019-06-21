@@ -55,7 +55,7 @@ SUBROUTINE LA05CS(A,Ind,Ia,N,Ip,Iw,W,G,U,Mm)
     !
     IF( lp_com>0 ) CALL XERMSG('LA05CS',&
       'EARLIER ENTRY GAVE ERROR RETURN.',-8,2)
-    G = -8.0E0
+    G = -8._SP
     RETURN
   ELSE
     jm = Mm
@@ -127,7 +127,7 @@ SUBROUTINE LA05CS(A,Ind,Ia,N,Ip,Iw,W,G,U,Mm)
       20  Iw(i,1) = nz + 1
       A(kpl) = W(i)
       Ind(kpl,2) = jm
-      40  W(i) = 0.0E0
+      40  W(i) = 0._SP
     END DO
     IF( Iw(im,1)==0 .OR. Iw(jm,2)==0 .OR. m>last ) GOTO 200
     !
@@ -136,7 +136,7 @@ SUBROUTINE LA05CS(A,Ind,Ia,N,Ip,Iw,W,G,U,Mm)
     !     FOR WORKSPACE.
     ins = m
     m1 = m
-    W(jm) = 1.0E0
+    W(jm) = 1._SP
     DO ii = m, last
       i = Iw(ii,3)
       j = Iw(ii,4)
@@ -149,7 +149,7 @@ SUBROUTINE LA05CS(A,Ind,Ia,N,Ip,Iw,W,G,U,Mm)
         kl = kp + Iw(i,1) - 1
         DO k = kp, kl
           j = Ind(k,2)
-          W(j) = 1.0E0
+          W(j) = 1._SP
         END DO
         Iw(ins,4) = i
         ins = ins + 1
@@ -169,7 +169,7 @@ SUBROUTINE LA05CS(A,Ind,Ia,N,Ip,Iw,W,G,U,Mm)
     !     FOR WORKSPACE.
     last1 = last
     jns = last
-    W(im) = 2.0E0
+    W(im) = 2._SP
     j = jm
     DO ij = m1, last
       ii = last + m1 - ij
@@ -186,14 +186,14 @@ SUBROUTINE LA05CS(A,Ind,Ia,N,Ip,Iw,W,G,U,Mm)
         jns = jns - 1
         DO k = kp, kl
           i = Ind(k,1)
-          W(i) = 2.0E0
+          W(i) = 2._SP
         END DO
       END IF
     END DO
     DO ii = m1, last1
       jns = jns + 1
       i = Iw(jns,4)
-      W(i) = 3.0E0
+      W(i) = 3._SP
       Iw(ii,3) = i
     END DO
     !
@@ -227,7 +227,7 @@ SUBROUTINE LA05CS(A,Ind,Ia,N,Ip,Iw,W,G,U,Mm)
       Ind(kp,2) = jm
       jm = Ind(k,2)
       Iw(ii,4) = i
-      W(i) = 2.0E0
+      W(i) = 2._SP
     END DO
     ii = last1
     GOTO 100
@@ -247,7 +247,7 @@ SUBROUTINE LA05CS(A,Ind,Ia,N,Ip,Iw,W,G,U,Mm)
       !
       ! CLEAR W
       DO i = 1, N
-        W(i) = 0.0E0
+        W(i) = 0._SP
       END DO
       !
       ! PERFORM ELIMINATION
@@ -340,7 +340,7 @@ SUBROUTINE LA05CS(A,Ind,Ia,N,Ip,Iw,W,G,U,Mm)
                 A(lrow_com) = au
                 Ind(lrow_com,2) = j
               END IF
-              W(j) = 0.0E0
+              W(j) = 0._SP
             END DO
           END IF
           !
@@ -390,7 +390,7 @@ SUBROUTINE LA05CS(A,Ind,Ia,N,Ip,Iw,W,G,U,Mm)
               Ind(lcol_com,1) = ir
               122  G = MAX(G,ABS(au))
               Iw(j,2) = nz + 1
-              124  W(j) = 0.0E0
+              124  W(j) = 0._SP
             END DO
           END IF
           Iw(ir,1) = lrow_com + 1 - Ip(ir,1)
@@ -438,12 +438,12 @@ SUBROUTINE LA05CS(A,Ind,Ia,N,Ip,Iw,W,G,U,Mm)
     WRITE (xern1,'(I8)') Mm
     CALL XERMSG('LA05CS','SINGULAR MATRIX AFTER REPLACEMENT OF COLUMN.  INDEX = '//xern1,-6,1)
   END IF
-  G = -6.0E0
+  G = -6._SP
   RETURN
   !
   300 CONTINUE
   IF( lp_com>0 ) CALL XERMSG('LA05CS',&
     'LENGTHS OF ARRAYS A(*) AND IND(*,2) ARE TOO SMALL.',-7,1)
-  G = -7.0E0
+  G = -7._SP
   RETURN
 END SUBROUTINE LA05CS

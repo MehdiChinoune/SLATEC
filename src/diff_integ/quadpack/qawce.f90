@@ -209,13 +209,13 @@ SUBROUTINE QAWCE(F,A,B,C,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,&
   Last = 0
   Alist(1) = A
   Blist(1) = B
-  Rlist(1) = 0.0E+00
-  Elist(1) = 0.0E+00
+  Rlist(1) = 0._SP
+  Elist(1) = 0._SP
   Iord(1) = 0
-  Result = 0.0E+00
-  Abserr = 0.0E+00
-  IF( .NOT. (C==A .OR. C==B .OR. (Epsabs<=0.0E+00 .AND. Epsrel<MAX(0.5E+02*epmach,&
-      0.5E-14))) ) THEN
+  Result = 0._SP
+  Abserr = 0._SP
+  IF( .NOT. (C==A .OR. C==B .OR. (Epsabs<=0._SP .AND. Epsrel<MAX(50._SP*epmach,&
+      0.5E-14_SP))) ) THEN
     !
     !           FIRST APPROXIMATION TO THE INTEGRAL
     !           -----------------------------------
@@ -240,7 +240,7 @@ SUBROUTINE QAWCE(F,A,B,C,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,&
     !
     errbnd = MAX(Epsabs,Epsrel*ABS(Result))
     IF( Limit==1 ) Ier = 1
-    IF( Abserr>=MIN(0.1E-01*ABS(Result),errbnd) .AND. Ier/=1 ) THEN
+    IF( Abserr>=MIN(0.1E-01_SP*ABS(Result),errbnd) .AND. Ier/=1 ) THEN
       !
       !           INITIALIZATION
       !           --------------
@@ -265,10 +265,10 @@ SUBROUTINE QAWCE(F,A,B,C,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,&
         !           ERROR ESTIMATE.
         !
         a1 = Alist(maxerr)
-        b1 = 0.5E+00*(Alist(maxerr)+Blist(maxerr))
+        b1 = 0.5_SP*(Alist(maxerr)+Blist(maxerr))
         b2 = Blist(maxerr)
-        IF( C<=b1 .AND. C>a1 ) b1 = 0.5E+00*(C+b2)
-        IF( C>b1 .AND. C<b2 ) b1 = 0.5E+00*(a1+C)
+        IF( C<=b1 .AND. C>a1 ) b1 = 0.5_SP*(C+b2)
+        IF( C>b1 .AND. C<b2 ) b1 = 0.5_SP*(a1+C)
         a2 = b1
         krule = 2
         CALL QC25C(F,a1,b1,C,area1,error1,krule,nev)
@@ -304,7 +304,7 @@ SUBROUTINE QAWCE(F,A,B,C,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,&
           !           SET ERROR FLAG IN THE CASE OF BAD INTEGRAND BEHAVIOUR
           !           AT A POINT OF THE INTEGRATION RANGE.
           !
-          IF( MAX(ABS(a1),ABS(b2))<=(0.1E+01+0.1E+03*epmach)&
+          IF( MAX(ABS(a1),ABS(b2))<=(1._SP+100._SP*epmach)&
             *(ABS(a2)+0.1E+04*uflow) ) Ier = 3
         END IF
         !
@@ -339,7 +339,7 @@ SUBROUTINE QAWCE(F,A,B,C,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,&
       !           COMPUTE FINAL RESULT.
       !           ---------------------
       !
-      Result = 0.0E+00
+      Result = 0._SP
       DO k = 1, Last
         Result = Result + Rlist(k)
       END DO

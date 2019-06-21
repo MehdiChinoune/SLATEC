@@ -34,21 +34,21 @@ COMPLEX(SP) FUNCTION CEXPRL(Z)
   COMPLEX(SP) :: Z
   INTEGER :: i
   REAL(SP) :: r
-  REAL(SP), PARAMETER :: alneps = LOG(R1MACH(3)), xn = 3.72 - 0.3*alneps, &
-    xln = LOG((xn+1.0)/1.36), rbnd = R1MACH(3)
-  INTEGER, PARAMETER :: nterms = INT( xn - (xn*xln+alneps)/(xln+1.36) + 1.5 )
+  REAL(SP), PARAMETER :: alneps = LOG(R1MACH(3)), xn = 3.72_SP - 0.3_SP*alneps, &
+    xln = LOG((xn+1._SP)/1.36_SP), rbnd = R1MACH(3)
+  INTEGER, PARAMETER :: nterms = INT( xn - (xn*xln+alneps)/(xln+1.36_SP) + 1.5_SP )
   !* FIRST EXECUTABLE STATEMENT  CEXPRL
   !
   r = ABS(Z)
-  IF( r>0.5 ) CEXPRL = (EXP(Z)-1.0)/Z
-  IF( r>0.5 ) RETURN
+  IF( r>0.5_SP ) CEXPRL = (EXP(Z)-1._SP)/Z
+  IF( r>0.5_SP ) RETURN
   !
-  CEXPRL = (1.0,0.0)
+  CEXPRL = (1._SP,0._SP)
   IF( r<rbnd ) RETURN
   !
-  CEXPRL = (0.0,0.0)
+  CEXPRL = (0._SP,0._SP)
   DO i = 1, nterms
-    CEXPRL = 1.0 + CEXPRL*Z/(nterms+2-i)
+    CEXPRL = 1._SP + CEXPRL*Z/(nterms+2-i)
   END DO
   !
 END FUNCTION CEXPRL

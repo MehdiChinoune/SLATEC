@@ -73,8 +73,8 @@ SUBROUTINE DES(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Ypout,Yp,Yy,Wt,P,Phi,&
     !
     u = R1MACH(4)
     !                       -- SET ASSOCIATED MACHINE DEPENDENT PARAMETERS
-    Twou = 2.*u
-    Fouru = 4.*u
+    Twou = 2._SP*u
+    Fouru = 4._SP*u
     !                       -- SET TERMINATION FLAG
     Iquit = 0
     !                       -- SET INITIALIZATION INDICATOR
@@ -169,7 +169,7 @@ SUBROUTINE DES(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Ypout,Yp,Yy,Wt,P,Phi,&
   END DO
   !
   IF( Info(4)==1 ) THEN
-    IF( SIGN(1.,Tout-T)/=SIGN(1.,Tstop-T) .OR. ABS(Tout-T)>ABS(Tstop-T) ) THEN
+    IF( SIGN(1._SP,Tout-T)/=SIGN(1._SP,Tstop-T) .OR. ABS(Tout-T)>ABS(Tstop-T) ) THEN
       WRITE (xern3,'(1PE15.6)') Tout
       WRITE (xern4,'(1PE15.6)') Tstop
       CALL XERMSG('DES','IN DEABM, YOU HAVE CALLED THE CODE WITH  TOUT = '&
@@ -277,7 +277,7 @@ SUBROUTINE DES(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Ypout,Yp,Yy,Wt,P,Phi,&
     DO l = 1, Neq
       Yy(l) = Y(l)
     END DO
-    Delsgn = SIGN(1.0,Tout-T)
+    Delsgn = SIGN(1._SP,Tout-T)
     H = SIGN(MAX(Fouru*ABS(X),ABS(Tout-X)),Tout-X)
   ELSE
     !                       RTOL=ATOL=0 ON INPUT, SO RTOL IS CHANGED TO A
@@ -344,12 +344,12 @@ SUBROUTINE DES(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Ypout,Yp,Yy,Wt,P,Phi,&
       ha = ABS(H)
       IF( Info(4)==1 ) ha = MIN(ha,ABS(Tstop-X))
       H = SIGN(ha,H)
-      Eps = 1.0
+      Eps = 1._SP
       ltol = 1
       DO l = 1, Neq
         IF( Info(2)==1 ) ltol = l
         Wt(l) = Rtol(ltol)*ABS(Yy(l)) + Atol(ltol)
-        IF( Wt(l)<=0.0 ) GOTO 120
+        IF( Wt(l)<=0._SP ) GOTO 120
       END DO
       !
       CALL STEPS(F,Neq,Yy,X,H,Eps,Wt,Start,Hold,Kord,Kold,crash,Phi,P,Yp,&

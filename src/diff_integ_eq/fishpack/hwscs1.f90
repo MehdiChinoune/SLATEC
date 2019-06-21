@@ -33,8 +33,8 @@ SUBROUTINE HWSCS1(Intl,Ts,Tf,M,Mbdcnd,Bdts,Bdtf,Rs,Rf,N,Nbdcnd,Bdrs,Bdrf,&
   mp1 = M + 1
   dth = (Tf-Ts)/M
   tdt = dth + dth
-  hdth = dth/2.
-  sdts = 1./(dth*dth)
+  hdth = dth/2._SP
+  sdts = 1._SP/(dth*dth)
   DO i = 1, mp1
     theta = Ts + (i-1)*dth
     Sint(i) = SIN(theta)
@@ -47,10 +47,10 @@ SUBROUTINE HWSCS1(Intl,Ts,Tf,M,Mbdcnd,Bdts,Bdtf,Rs,Rf,N,Nbdcnd,Bdrs,Bdrf,&
   END DO
   np1 = N + 1
   dr = (Rf-Rs)/N
-  hdr = dr/2.
+  hdr = dr/2._SP
   tdr = dr + dr
   dr2 = dr*dr
-  czr = 6.*dth/(dr2*(COS(Ts)-COS(Tf)))
+  czr = 6._SP*dth/(dr2*(COS(Ts)-COS(Tf)))
   DO j = 1, np1
     R(j) = Rs + (j-1)*dr
     An(j) = (R(j)-hdr)**2/dr2
@@ -69,7 +69,7 @@ SUBROUTINE HWSCS1(Intl,Ts,Tf,M,Mbdcnd,Bdts,Bdtf,Rs,Rf,N,Nbdcnd,Bdrs,Bdrf,&
       Cm(1) = Cm(1) + Am(1)
     CASE (5,6,9)
       its = 1
-      Bm(1) = -4.*sdts
+      Bm(1) = -4._SP*sdts
       Cm(1) = -Bm(1)
     CASE DEFAULT
       at = Am(2)
@@ -85,7 +85,7 @@ SUBROUTINE HWSCS1(Intl,Ts,Tf,M,Mbdcnd,Bdts,Bdtf,Rs,Rf,N,Nbdcnd,Bdrs,Bdrf,&
       itf = M + 1
     CASE (7,8,9)
       itf = M + 1
-      Am(M+1) = 4.*sdts
+      Am(M+1) = 4._SP*sdts
       Bm(M+1) = -Am(M+1)
     CASE DEFAULT
       ct = Cm(M)
@@ -120,7 +120,7 @@ SUBROUTINE HWSCS1(Intl,Ts,Tf,M,Mbdcnd,Bdts,Bdtf,Rs,Rf,N,Nbdcnd,Bdrs,Bdrf,&
       DO i = itsp, itfm
         wtnm = wtnm + Sint(i)
       END DO
-      yps = czr*wtnm*(S(2)-1.)
+      yps = czr*wtnm*(S(2)-1._SP)
     CASE DEFAULT
       ar = An(2)
       jrs = 2
@@ -238,7 +238,7 @@ SUBROUTINE HWSCS1(Intl,Ts,Tf,M,Mbdcnd,Bdts,Bdtf,Rs,Rf,N,Nbdcnd,Bdrs,Bdrf,&
         F(i,N) = F(i,N) - cr*F(i,N+1)/rf2
       END DO
   END SELECT
-  Pertrb = 0.
+  Pertrb = 0._SP
   IF( ising/=0 ) THEN
     summ = wts*wrs*F(its,jrs) + wts*wrf*F(its,jrf) + wtf*wrs*F(itf,jrs)&
       + wtf*wrf*F(itf,jrf)
@@ -284,7 +284,7 @@ SUBROUTINE HWSCS1(Intl,Ts,Tf,M,Mbdcnd,Bdts,Bdtf,Rs,Rf,N,Nbdcnd,Bdrs,Bdrf,&
           F(itf+1,j) = F(its,j)
         END DO
       END IF
-      xp = 0.
+      xp = 0._SP
       IF( ictr/=0 ) THEN
         IF( ising==0 ) THEN
           summ = wts*F(its,2) + wtf*F(itf,2)

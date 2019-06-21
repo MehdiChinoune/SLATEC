@@ -29,7 +29,7 @@ SUBROUTINE ZKSCL(Zrr,Zri,Fnu,N,Yr,Yi,Nz,Rzr,Rzi,Ascle,Tol,Elim)
   REAL(DP) :: acs, as, Ascle, cki, ckr, csi, csr, cyi(2), cyr(2), Elim, fn, Fnu, &
     Rzi, Rzr, str, s1i, s1r, s2i, s2r, Tol, Yi(N), Yr(N), Zri, Zrr, zdr, zdi, &
     celmr, elm, helim, alas
-  REAL(DP), PARAMETER :: zeror = 0.0D0, zeroi = 0.0D0
+  REAL(DP), PARAMETER :: zeror = 0._DP, zeroi = 0._DP
   !* FIRST EXECUTABLE STATEMENT  ZKSCL
   Nz = 0
   ic = 0
@@ -68,14 +68,14 @@ SUBROUTINE ZKSCL(Zrr,Zri,Fnu,N,Yr,Yi,Nz,Rzr,Rzi,Ascle,Tol,Elim)
   END IF
   IF( N==2 ) RETURN
   IF( Nz==0 ) RETURN
-  fn = Fnu + 1.0D0
+  fn = Fnu + 1._DP
   ckr = fn*Rzr
   cki = fn*Rzi
   s1r = cyr(1)
   s1i = cyi(1)
   s2r = cyr(2)
   s2i = cyi(2)
-  helim = 0.5D0*Elim
+  helim = 0.5_DP*Elim
   elm = EXP(-Elim)
   celmr = elm
   zdr = Zrr

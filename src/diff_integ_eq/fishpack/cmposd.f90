@@ -38,7 +38,7 @@ SUBROUTINE CMPOSD(Mr,Nr,Istag,Ba,Bb,Bc,Q,Idimq,B,W,D,Tcos,P)
   !* FIRST EXECUTABLE STATEMENT  CMPOSD
   m = Mr
   n = Nr
-  fi = 1./Istag
+  fi = 1._SP/Istag
   ip = -m
   ipstor = 0
   jsh = 0
@@ -47,12 +47,12 @@ SUBROUTINE CMPOSD(Mr,Nr,Istag,Ba,Bb,Bc,Q,Idimq,B,W,D,Tcos,P)
     jstsav = 1
     irreg = 2
     IF( n>1 ) GOTO 100
-    Tcos(1) = CMPLX(-1.,0.)
+    Tcos(1) = CMPLX(-1._SP,0._SP,SP)
   ELSE
     kr = 0
     irreg = 1
     IF( n>1 ) GOTO 100
-    Tcos(1) = (0.,0.)
+    Tcos(1) = (0._SP,0._SP)
   END IF
   DO i = 1, m
     B(i) = Q(i,1)
@@ -64,11 +64,11 @@ SUBROUTINE CMPOSD(Mr,Nr,Istag,Ba,Bb,Bc,Q,Idimq,B,W,D,Tcos,P)
   !
   !     RETURN STORAGE REQUIREMENTS FOR P VECTORS.
   !
-  W(1) = CMPLX(REAL(ipstor),0.)
+  W(1) = CMPLX(REAL(ipstor,SP),0._SP,SP)
   RETURN
   100  lr = 0
   DO i = 1, m
-    P(i) = CMPLX(0.,0.)
+    P(i) = CMPLX(0._SP,0._SP,SP)
   END DO
   nun = n
   jst = 1
@@ -90,7 +90,7 @@ SUBROUTINE CMPOSD(Mr,Nr,Istag,Ba,Bb,Bc,Q,Idimq,B,W,D,Tcos,P)
   !
   !     REGULAR REDUCTION
   !
-  CALL CMPCSG(jst,1,0.5,0.0,Tcos)
+  CALL CMPCSG(jst,1,0.5_SP,0._SP,Tcos)
   IF( l<=jsp ) THEN
     DO j = l, jsp, l
       jm1 = j - jsh
@@ -107,7 +107,7 @@ SUBROUTINE CMPOSD(Mr,Nr,Istag,Ba,Bb,Bc,Q,Idimq,B,W,D,Tcos,P)
         END DO
       ELSE
         DO i = 1, m
-          B(i) = 2.*Q(i,j)
+          B(i) = 2._SP*Q(i,j)
           Q(i,j) = Q(i,jm2) + Q(i,jp2)
         END DO
       END IF
@@ -132,8 +132,8 @@ SUBROUTINE CMPOSD(Mr,Nr,Istag,Ba,Bb,Bc,Q,Idimq,B,W,D,Tcos,P)
     jp2 = j + jst
     jm3 = jm2 - jsh
     IF( irreg==2 ) THEN
-      CALL CMPCSG(kr,jstsav,0.0,fi,Tcos)
-      CALL CMPCSG(lr,jstsav,0.0,fi,Tcos(kr+1))
+      CALL CMPCSG(kr,jstsav,0._SP,fi,Tcos)
+      CALL CMPCSG(lr,jstsav,0._SP,fi,Tcos(kr+1))
       ideg = kr
       kr = kr + jst
     ELSE
@@ -143,11 +143,11 @@ SUBROUTINE CMPOSD(Mr,Nr,Istag,Ba,Bb,Bc,Q,Idimq,B,W,D,Tcos,P)
     END IF
     IF( jst/=1 ) THEN
       DO i = 1, m
-        B(i) = Q(i,j) + .5*(Q(i,jm2)-Q(i,jm1)-Q(i,jm3))
+        B(i) = Q(i,j) + 0.5_SP*(Q(i,jm2)-Q(i,jm1)-Q(i,jm3))
       END DO
       IF( irreg/=2 ) THEN
         DO i = 1, m
-          Q(i,j) = Q(i,jm2) + .5*(Q(i,j)-Q(i,jm1)-Q(i,jp1))
+          Q(i,j) = Q(i,jm2) + 0.5_SP*(Q(i,j)-Q(i,jm1)-Q(i,jp1))
         END DO
         irreg = 2
       ELSEIF( noddpr==2 ) THEN
@@ -188,23 +188,23 @@ SUBROUTINE CMPOSD(Mr,Nr,Istag,Ba,Bb,Bc,Q,Idimq,B,W,D,Tcos,P)
       IF( jst==1 ) THEN
         DO i = 1, m
           B(i) = Q(i,j)
-          Q(i,j) = CMPLX(0.,0.)
+          Q(i,j) = CMPLX(0._SP,0._SP)
         END DO
         GOTO 250
       END IF
     END IF
     IF( noddpr==2 ) THEN
       DO i = 1, m
-        B(i) = .5*(Q(i,jm2)-Q(i,jm1)-Q(i,jm3)) + Q(i,jp2) - Q(i,jp1) + Q(i,j)
+        B(i) = 0.5_SP*(Q(i,jm2)-Q(i,jm1)-Q(i,jm3)) + Q(i,jp2) - Q(i,jp1) + Q(i,j)
       END DO
     ELSE
       DO i = 1, m
         ip1 = ip + i
-        B(i) = .5*(Q(i,jm2)-Q(i,jm1)-Q(i,jm3)) + P(ip1) + Q(i,j)
+        B(i) = 0.5_SP*(Q(i,jm2)-Q(i,jm1)-Q(i,jm3)) + P(ip1) + Q(i,j)
       END DO
     END IF
     DO i = 1, m
-      Q(i,j) = .5*(Q(i,j)-Q(i,jm1)-Q(i,jp1))
+      Q(i,j) = 0.5_SP*(Q(i,j)-Q(i,jm1)-Q(i,jp1))
     END DO
     250  CALL CMPTRX(jst,0,m,Ba,Bb,Bc,B,Tcos,D,W)
     ip = ip + m
@@ -215,7 +215,7 @@ SUBROUTINE CMPOSD(Mr,Nr,Istag,Ba,Bb,Bc,Q,Idimq,B,W,D,Tcos,P)
       B(i) = Q(i,jp2) + P(ip1)
     END DO
     IF( lr/=0 ) THEN
-      CALL CMPCSG(lr,jstsav,0.,fi,Tcos(jst+1))
+      CALL CMPCSG(lr,jstsav,0._SP,fi,Tcos(jst+1))
       CALL C1MERG(Tcos,0,jst,jst,lr,kr)
     ELSE
       DO i = 1, jst
@@ -223,7 +223,7 @@ SUBROUTINE CMPOSD(Mr,Nr,Istag,Ba,Bb,Bc,Q,Idimq,B,W,D,Tcos,P)
         Tcos(krpi) = Tcos(i)
       END DO
     END IF
-    CALL CMPCSG(kr,jstsav,0.0,fi,Tcos)
+    CALL CMPCSG(kr,jstsav,0._SP,fi,Tcos)
     CALL CMPTRX(kr,kr,m,Ba,Bb,Bc,B,Tcos,D,W)
     DO i = 1, m
       ip1 = ip + i
@@ -246,11 +246,11 @@ SUBROUTINE CMPOSD(Mr,Nr,Istag,Ba,Bb,Bc,Q,Idimq,B,W,D,Tcos,P)
   END DO
   IF( irreg==2 ) THEN
     kr = lr + jst
-    CALL CMPCSG(kr,jstsav,0.0,fi,Tcos)
-    CALL CMPCSG(lr,jstsav,0.0,fi,Tcos(kr+1))
+    CALL CMPCSG(kr,jstsav,0._SP,fi,Tcos)
+    CALL CMPCSG(lr,jstsav,0._SP,fi,Tcos(kr+1))
     ideg = kr
   ELSE
-    CALL CMPCSG(jst,1,0.5,0.0,Tcos)
+    CALL CMPCSG(jst,1,0.5_SP,0._SP,Tcos)
     ideg = jst
   END IF
   CALL CMPTRX(ideg,lr,m,Ba,Bb,Bc,B,Tcos,D,W)
@@ -258,7 +258,7 @@ SUBROUTINE CMPOSD(Mr,Nr,Istag,Ba,Bb,Bc,Q,Idimq,B,W,D,Tcos,P)
   jp1 = j + jsh
   IF( irreg/=2 ) THEN
     DO i = 1, m
-      Q(i,j) = .5*(Q(i,j)-Q(i,jm1)-Q(i,jp1)) + B(i)
+      Q(i,j) = 0.5_SP*(Q(i,j)-Q(i,jm1)-Q(i,jp1)) + B(i)
     END DO
   ELSEIF( noddpr==2 ) THEN
     DO i = 1, m
@@ -279,7 +279,7 @@ SUBROUTINE CMPOSD(Mr,Nr,Istag,Ba,Bb,Bc,Q,Idimq,B,W,D,Tcos,P)
     jsh = jst/2
     nun = 2*nun
     IF( nun>n ) THEN
-      W(1) = CMPLX(REAL(ipstor),0.)
+      W(1) = CMPLX(REAL(ipstor,SP),0._SP,SP)
       EXIT
     ELSE
       DO j = jst, n, l
@@ -297,8 +297,8 @@ SUBROUTINE CMPOSD(Mr,Nr,Istag,Ba,Bb,Bc,Q,Idimq,B,W,D,Tcos,P)
             IF( irreg==2 ) THEN
               IF( j+l>n ) lr = lr - jst
               kr = jst + lr
-              CALL CMPCSG(kr,jstsav,0.0,fi,Tcos)
-              CALL CMPCSG(lr,jstsav,0.0,fi,Tcos(kr+1))
+              CALL CMPCSG(kr,jstsav,0._SP,fi,Tcos)
+              CALL CMPCSG(lr,jstsav,0._SP,fi,Tcos(kr+1))
               ideg = kr
               jdeg = lr
               GOTO 320
@@ -312,7 +312,7 @@ SUBROUTINE CMPOSD(Mr,Nr,Istag,Ba,Bb,Bc,Q,Idimq,B,W,D,Tcos,P)
             B(i) = Q(i,j) + Q(i,jp2)
           END DO
         END IF
-        310  CALL CMPCSG(jst,1,0.5,0.0,Tcos)
+        310  CALL CMPCSG(jst,1,0.5_SP,0._SP,Tcos)
         ideg = jst
         jdeg = 0
         320  CALL CMPTRX(ideg,jdeg,m,Ba,Bb,Bc,B,Tcos,D,W)
@@ -334,7 +334,7 @@ SUBROUTINE CMPOSD(Mr,Nr,Istag,Ba,Bb,Bc,Q,Idimq,B,W,D,Tcos,P)
             END IF
           END IF
           DO i = 1, m
-            Q(i,j) = .5*(Q(i,j)-Q(i,jm1)-Q(i,jp1)) + B(i)
+            Q(i,j) = 0.5_SP*(Q(i,j)-Q(i,jm1)-Q(i,jp1)) + B(i)
           END DO
         ELSE
           DO i = 1, m

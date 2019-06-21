@@ -308,7 +308,7 @@ SUBROUTINE SDRIV1(N,T,Y,F,Tout,Mstate,Eps,Work,Lenw,Ierflg)
   INTEGER :: iwork(IDLIW+MXN)
   INTEGER, PARAMETER :: NROOT = 0, IERROR = 2, MINT = 2, MITER = 2, IMPL = 0, &
     MXORD = 5, MXSTEP = 1000
-  REAL(SP), PARAMETER :: ewtcom(1) = 1.E0
+  REAL(SP), PARAMETER :: ewtcom(1) = 1._SP
   !* FIRST EXECUTABLE STATEMENT  SDRIV1
   IF( ABS(Mstate)==0 .OR. ABS(Mstate)>7 ) THEN
     WRITE (intgr1,'(I8)') Mstate
@@ -337,7 +337,7 @@ SUBROUTINE SDRIV1(N,T,Y,F,Tout,Mstate,Eps,Work,Lenw,Ierflg)
     nstate = -Mstate
     ntask = 3
   END IF
-  hmax = 2.E0*ABS(Tout-T)
+  hmax = 2._SP*ABS(Tout-T)
   leniw = N + IDLIW
   lenwcm = Lenw - leniw
   IF( lenwcm<(N*N+10*N+250) ) THEN
@@ -397,7 +397,7 @@ CONTAINS
     INTEGER :: N, Matdim, Ml, Mu, Nde
     REAL(SP) :: T, Y(N), A(:,:)
     T = Matdim + Ml + Mu + Nde
-    Y = 0.
-    A = 0.
+    Y = 0._SP
+    A = 0._SP
   END SUBROUTINE dum_FA
 END SUBROUTINE SDRIV1

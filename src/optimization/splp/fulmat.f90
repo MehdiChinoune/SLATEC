@@ -42,7 +42,7 @@ SUBROUTINE FULMAT(I,J,Aij,Indcat,Prgopt,Dattrv,Iflag)
   INTEGER :: Iflag(10)
   REAL(SP) :: Aij, Dattrv(:), Prgopt(:)
   INTEGER :: key, level, lp, nerr, next
-  REAL(SP), PARAMETER :: zero = 0.
+  REAL(SP), PARAMETER :: zero = 0._SP
   !* FIRST EXECUTABLE STATEMENT  FULMAT
   IF( Iflag(1)==1 ) THEN
     !     INITIALIZE POINTERS TO PROCESS FULL TWO-DIMENSIONAL FORTRAN

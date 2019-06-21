@@ -141,10 +141,10 @@ SUBROUTINE CBIRY(Z,Id,Kode,Bi,Ierr)
   REAL(SP) :: aa, ad, ak, alim, atrm, az, az3, bb, bk, ck, dig, dk, d1, d2, elim, fid, &
     fmr, fnu, fnul, rl, r1m5, sfac, tol, zi, zr, z3i, z3r
   COMPLEX(SP) :: csq, cy(2), s1, s2, trm1, trm2, zta, z3
-  REAL(SP), PARAMETER :: tth = 6.66666666666666667E-01, c1 = 6.14926627446000736E-01, &
-    c2 = 4.48288357353826359E-01, coef = 5.77350269189625765E-01, &
-    pi =  3.14159265358979324E+00
-  COMPLEX(SP), PARAMETER :: cone = (1.0E0,0.0E0)
+  REAL(SP), PARAMETER :: tth = 6.66666666666666667E-01_SP, c1 = 6.14926627446000736E-01_SP, &
+    c2 = 4.48288357353826359E-01_SP, coef = 5.77350269189625765E-01_SP, &
+    pi =  3.14159265358979324_SP
+  COMPLEX(SP), PARAMETER :: cone = (1._SP,0._SP)
   !* FIRST EXECUTABLE STATEMENT  CBIRY
   Ierr = 0
   nz = 0
@@ -152,13 +152,13 @@ SUBROUTINE CBIRY(Z,Id,Kode,Bi,Ierr)
   IF( Kode<1 .OR. Kode>2 ) Ierr = 1
   IF( Ierr/=0 ) RETURN
   az = ABS(Z)
-  tol = MAX(R1MACH(4),1.0E-18)
+  tol = MAX(R1MACH(4),1.0E-18_SP)
   fid = Id
-  IF( az>1.0E0 ) THEN
+  IF( az>1._SP ) THEN
     !-----------------------------------------------------------------------
     !     CASE FOR ABS(Z)>1.0
     !-----------------------------------------------------------------------
-    fnu = (1.0E0+fid)/3.0E0
+    fnu = (1._SP+fid)/3._SP
     !-----------------------------------------------------------------------
     !     SET PARAMETERS RELATED TO MACHINE CONSTANTS.
     !     TOL IS THE APPROXIMATE UNIT ROUNDOFF LIMITED TO 1.0E-18.
@@ -174,19 +174,19 @@ SUBROUTINE CBIRY(Z,Id,Kode,Bi,Ierr)
     k2 = I1MACH(13)
     r1m5 = R1MACH(5)
     k = MIN(ABS(k1),ABS(k2))
-    elim = 2.303E0*(k*r1m5-3.0E0)
+    elim = 2.303_SP*(k*r1m5-3._SP)
     k1 = I1MACH(11) - 1
     aa = r1m5*k1
-    dig = MIN(aa,18.0E0)
-    aa = aa*2.303E0
-    alim = elim + MAX(-aa,-41.45E0)
-    rl = 1.2E0*dig + 3.0E0
-    fnul = 10.0E0 + 6.0E0*(dig-3.0E0)
+    dig = MIN(aa,18._SP)
+    aa = aa*2.303_SP
+    alim = elim + MAX(-aa,-41.45E0_SP)
+    rl = 1.2_SP*dig + 3._SP
+    fnul = 10._SP + 6._SP*(dig-3._SP)
     !-----------------------------------------------------------------------
     !     TEST FOR RANGE
     !-----------------------------------------------------------------------
-    aa = 0.5E0/tol
-    bb = 0.5E0*I1MACH(9)
+    aa = 0.5_SP/tol
+    bb = 0.5_SP*I1MACH(9)
     aa = MIN(aa,bb)
     aa = aa**tth
     IF( az>aa ) THEN
@@ -197,20 +197,20 @@ SUBROUTINE CBIRY(Z,Id,Kode,Bi,Ierr)
       aa = SQRT(aa)
       IF( az>aa ) Ierr = 3
       csq = SQRT(Z)
-      zta = Z*csq*CMPLX(tth,0.0E0)
+      zta = Z*csq*CMPLX(tth,0._SP,SP)
       !-----------------------------------------------------------------------
       !     RE(ZTA)<=0 WHEN RE(Z)<0, ESPECIALLY WHEN IM(Z) IS SMALL
       !-----------------------------------------------------------------------
-      sfac = 1.0E0
+      sfac = 1._SP
       zi = AIMAG(Z)
       zr = REAL(Z)
       ak = AIMAG(zta)
-      IF( zr<0.0E0 ) THEN
+      IF( zr<0._SP ) THEN
         bk = REAL(zta)
         ck = -ABS(bk)
-        zta = CMPLX(ck,ak)
+        zta = CMPLX(ck,ak,SP)
       END IF
-      IF( zi==0.0E0 .AND. zr<=0.0E0 ) zta = CMPLX(0.0E0,ak)
+      IF( zi==0._SP .AND. zr<=0._SP ) zta = CMPLX(0._SP,ak,SP)
       aa = REAL(zta)
       IF( Kode/=2 ) THEN
         !-----------------------------------------------------------------------
@@ -218,15 +218,15 @@ SUBROUTINE CBIRY(Z,Id,Kode,Bi,Ierr)
         !-----------------------------------------------------------------------
         bb = ABS(aa)
         IF( bb>=alim ) THEN
-          bb = bb + 0.25E0*LOG(az)
+          bb = bb + 0.25_SP*LOG(az)
           sfac = tol
           IF( bb>elim ) GOTO 50
         END IF
       END IF
-      fmr = 0.0E0
-      IF( aa<0.0E0 .OR. zr<=0.0E0 ) THEN
+      fmr = 0._SP
+      IF( aa<0._SP .OR. zr<=0._SP ) THEN
         fmr = pi
-        IF( zi<0.0E0 ) fmr = -pi
+        IF( zi<0._SP ) fmr = -pi
         zta = -zta
       END IF
       !-----------------------------------------------------------------------
@@ -236,25 +236,25 @@ SUBROUTINE CBIRY(Z,Id,Kode,Bi,Ierr)
       CALL CBINU(zta,fnu,Kode,1,cy,nz,rl,fnul,tol,elim,alim)
       IF( nz>=0 ) THEN
         aa = fmr*fnu
-        z3 = CMPLX(sfac,0.0E0)
-        s1 = cy(1)*CMPLX(COS(aa),SIN(aa))*z3
-        fnu = (2.0E0-fid)/3.0E0
+        z3 = CMPLX(sfac,0._SP,SP)
+        s1 = cy(1)*CMPLX(COS(aa),SIN(aa),SP)*z3
+        fnu = (2._SP-fid)/3._SP
         CALL CBINU(zta,fnu,Kode,2,cy,nz,rl,fnul,tol,elim,alim)
         cy(1) = cy(1)*z3
         cy(2) = cy(2)*z3
         !-----------------------------------------------------------------------
         !     BACKWARD RECUR ONE STEP FOR ORDERS -1/3 OR -2/3
         !-----------------------------------------------------------------------
-        s2 = cy(1)*CMPLX(fnu+fnu,0.0E0)/zta + cy(2)
-        aa = fmr*(fnu-1.0E0)
-        s1 = (s1+s2*CMPLX(COS(aa),SIN(aa)))*CMPLX(coef,0.0E0)
+        s2 = cy(1)*CMPLX(fnu+fnu,0._SP,SP)/zta + cy(2)
+        aa = fmr*(fnu-1._SP)
+        s1 = (s1+s2*CMPLX(COS(aa),SIN(aa),SP))*CMPLX(coef,0._SP,SP)
         IF( Id==1 ) THEN
           s1 = Z*s1
-          Bi = s1*CMPLX(1.0E0/sfac,0.0E0)
+          Bi = s1*CMPLX(1._SP/sfac,0._SP,SP)
           RETURN
         ELSE
           s1 = csq*s1
-          Bi = s1*CMPLX(1.0E0/sfac,0.0E0)
+          Bi = s1*CMPLX(1._SP/sfac,0._SP,SP)
           RETURN
         END IF
       ELSEIF( nz/=(-1) ) THEN
@@ -271,58 +271,58 @@ SUBROUTINE CBIRY(Z,Id,Kode,Bi,Ierr)
     s1 = cone
     s2 = cone
     IF( az<tol ) THEN
-      aa = c1*(1.0E0-fid) + fid*c2
-      Bi = CMPLX(aa,0.0E0)
+      aa = c1*(1._SP-fid) + fid*c2
+      Bi = CMPLX(aa,0._SP,SP)
       RETURN
     ELSE
       aa = az*az
       IF( aa>=tol/az ) THEN
         trm1 = cone
         trm2 = cone
-        atrm = 1.0E0
+        atrm = 1._SP
         z3 = Z*Z*Z
         az3 = az*aa
-        ak = 2.0E0 + fid
-        bk = 3.0E0 - fid - fid
-        ck = 4.0E0 - fid
-        dk = 3.0E0 + fid + fid
+        ak = 2._SP + fid
+        bk = 3._SP - fid - fid
+        ck = 4._SP - fid
+        dk = 3._SP + fid + fid
         d1 = ak*dk
         d2 = bk*ck
         ad = MIN(d1,d2)
-        ak = 24.0E0 + 9.0E0*fid
-        bk = 30.0E0 - 9.0E0*fid
+        ak = 24._SP + 9._SP*fid
+        bk = 30._SP - 9._SP*fid
         z3r = REAL(z3)
         z3i = AIMAG(z3)
         DO k = 1, 25
-          trm1 = trm1*CMPLX(z3r/d1,z3i/d1)
+          trm1 = trm1*CMPLX(z3r/d1,z3i/d1,SP)
           s1 = s1 + trm1
-          trm2 = trm2*CMPLX(z3r/d2,z3i/d2)
+          trm2 = trm2*CMPLX(z3r/d2,z3i/d2,SP)
           s2 = s2 + trm2
           atrm = atrm*az3/ad
           d1 = d1 + ak
           d2 = d2 + bk
           ad = MIN(d1,d2)
           IF( atrm<tol*ad ) EXIT
-          ak = ak + 18.0E0
-          bk = bk + 18.0E0
+          ak = ak + 18._SP
+          bk = bk + 18._SP
         END DO
       END IF
       IF( Id==1 ) THEN
-        Bi = s2*CMPLX(c2,0.0E0)
-        IF( az>tol ) Bi = Bi + Z*Z*s1*CMPLX(c1/(1.0E0+fid),0.0E0)
+        Bi = s2*CMPLX(c2,0._SP,SP)
+        IF( az>tol ) Bi = Bi + Z*Z*s1*CMPLX(c1/(1._SP+fid),0._SP,SP)
         IF( Kode==1 ) RETURN
-        zta = Z*SQRT(Z)*CMPLX(tth,0.0E0)
+        zta = Z*SQRT(Z)*CMPLX(tth,0._SP,SP)
         aa = REAL(zta)
         aa = -ABS(aa)
-        Bi = Bi*CMPLX(EXP(aa),0.0E0)
+        Bi = Bi*CMPLX(EXP(aa),0._SP,SP)
         RETURN
       ELSE
-        Bi = s1*CMPLX(c1,0.0E0) + Z*s2*CMPLX(c2,0.0E0)
+        Bi = s1*CMPLX(c1,0._SP,SP) + Z*s2*CMPLX(c2,0._SP,SP)
         IF( Kode==1 ) RETURN
-        zta = Z*SQRT(Z)*CMPLX(tth,0.0E0)
+        zta = Z*SQRT(Z)*CMPLX(tth,0._SP,SP)
         aa = REAL(zta)
         aa = -ABS(aa)
-        Bi = Bi*CMPLX(EXP(aa),0.0E0)
+        Bi = Bi*CMPLX(EXP(aa),0._SP,SP)
         RETURN
       END IF
     END IF

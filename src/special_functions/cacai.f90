@@ -34,19 +34,19 @@ SUBROUTINE CACAI(Z,Fnu,Kode,Mr,N,Y,Nz,Rl,Tol,Elim,Alim)
   COMPLEX(SP) :: csgn, cspn, c1, c2, Y(N), Z, zn, cy(2)
   REAL(SP) :: Alim, arg, ascle, az, cpn, dfnu, Elim, fmr, Fnu, Rl, &
     sgn, spn, Tol, yy
-  REAL(SP), PARAMETER :: pi = 3.14159265358979324E0
+  REAL(SP), PARAMETER :: pi = 3.14159265358979324_SP
   !* FIRST EXECUTABLE STATEMENT  CACAI
   Nz = 0
   zn = -Z
   az = ABS(Z)
   nn = N
   dfnu = Fnu + (N-1)
-  IF( az<=2.0E0 ) THEN
+  IF( az<=2._SP ) THEN
     !-----------------------------------------------------------------------
     !     POWER SERIES FOR THE I FUNCTION
     !-----------------------------------------------------------------------
     CALL CSERI(zn,Fnu,Kode,nn,Y,nw,Tol,Elim,Alim)
-  ELSEIF( az*az*0.25E0>dfnu+1.0E0 ) THEN
+  ELSEIF( az*az*0.25E0>dfnu+1._SP ) THEN
     IF( az<Rl ) THEN
       !-----------------------------------------------------------------------
       !     MILLER ALGORITHM NORMALIZED BY THE SERIES FOR THE I FUNCTION
@@ -70,12 +70,12 @@ SUBROUTINE CACAI(Z,Fnu,Kode,Mr,N,Y,Nz,Rl,Tol,Elim,Alim)
   IF( nw==0 ) THEN
     fmr = Mr
     sgn = -SIGN(pi,fmr)
-    csgn = CMPLX(0.0E0,sgn)
+    csgn = CMPLX(0._SP,sgn,SP)
     IF( Kode/=1 ) THEN
       yy = -AIMAG(zn)
       cpn = COS(yy)
       spn = SIN(yy)
-      csgn = csgn*CMPLX(cpn,spn)
+      csgn = csgn*CMPLX(cpn,spn,SP)
     END IF
     !-----------------------------------------------------------------------
     !     CALCULATE CSPN=EXP(FNU*PI*I) TO MINIMIZE LOSSES OF SIGNIFICANCE
@@ -85,13 +85,13 @@ SUBROUTINE CACAI(Z,Fnu,Kode,Mr,N,Y,Nz,Rl,Tol,Elim,Alim)
     arg = (Fnu-inu)*sgn
     cpn = COS(arg)
     spn = SIN(arg)
-    cspn = CMPLX(cpn,spn)
+    cspn = CMPLX(cpn,spn,SP)
     IF( MOD(inu,2)==1 ) cspn = -cspn
     c1 = cy(1)
     c2 = Y(1)
     IF( Kode/=1 ) THEN
       iuf = 0
-      ascle = 1.0E+3*R1MACH(1)/Tol
+      ascle = 1.E+3_SP*R1MACH(1)/Tol
       CALL CS1S2(zn,c1,c2,nw,ascle,Alim,iuf)
       Nz = Nz + nw
     END IF

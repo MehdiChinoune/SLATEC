@@ -32,13 +32,13 @@ SUBROUTINE ZS1S2(Zrr,Zri,S1r,S1i,S2r,S2i,Nz,Ascle,Alim,Iuf)
   REAL(DP) :: aa, Alim, aln, Ascle, as1, as2, c1i, c1r, s1di, s1dr, S1i, S1r, &
     S2i, S2r, Zri, Zrr
   INTEGER :: Iuf, idum, Nz
-  REAL(DP), PARAMETER :: zeror = 0.0D0, zeroi = 0.0D0
+  REAL(DP), PARAMETER :: zeror = 0._DP, zeroi = 0._DP
   !* FIRST EXECUTABLE STATEMENT  ZS1S2
   Nz = 0
   as1 = ZABS(S1r,S1i)
   as2 = ZABS(S2r,S2i)
-  IF( S1r/=0.0D0 .OR. S1i/=0.0D0 ) THEN
-    IF( as1/=0.0D0 ) THEN
+  IF( S1r/=0._DP .OR. S1i/=0._DP ) THEN
+    IF( as1/=0._DP ) THEN
       aln = -Zrr - Zrr + LOG(as1)
       s1dr = S1r
       s1di = S1i

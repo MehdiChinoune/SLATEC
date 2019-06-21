@@ -69,20 +69,20 @@ SUBROUTINE CNBDI(Abe,Lda,N,Ml,Mu,Ipvt,Det)
   INTEGER :: i
   !
   !* FIRST EXECUTABLE STATEMENT  CNBDI
-  Det(1) = (1.0E0,0.0E0)
-  Det(2) = (0.0E0,0.0E0)
-  ten = 10.0E0
+  Det(1) = (1._SP,0._SP)
+  Det(2) = (0._SP,0._SP)
+  ten = 10._SP
   DO i = 1, N
     IF( Ipvt(i)/=i ) Det(1) = -Det(1)
     Det(1) = Abe(i,Ml+1)*Det(1)
-    IF( SCABS1(Det(1))==0.0E0 ) EXIT
-    DO WHILE( SCABS1(Det(1))<1.0E0 )
-      Det(1) = CMPLX(ten,0.0E0)*Det(1)
-      Det(2) = Det(2) - (1.0E0,0.0E0)
+    IF( SCABS1(Det(1))==0._SP ) EXIT
+    DO WHILE( SCABS1(Det(1))<1._SP )
+      Det(1) = CMPLX(ten,0._SP,SP)*Det(1)
+      Det(2) = Det(2) - (1._SP,0._SP)
     END DO
     DO WHILE( SCABS1(Det(1))>=ten )
-      Det(1) = Det(1)/CMPLX(ten,0.0E0)
-      Det(2) = Det(2) + (1.0E0,0.0E0)
+      Det(1) = Det(1)/CMPLX(ten,0._SP,SP)
+      Det(2) = Det(2) + (1._SP,0._SP)
     END DO
   END DO
 END SUBROUTINE CNBDI

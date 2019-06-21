@@ -53,7 +53,8 @@ REAL(DP) FUNCTION DENORM(N,X)
   REAL(DP) :: X(N)
   INTEGER :: i
   REAL(DP) :: agiant, floatn, s1, s2, s3, x1max, x3max, xabs
-  REAL(DP), PARAMETER :: one = 1.0D0, zero = 0.0D0, rdwarf = 3.834D-20, rgiant = 1.304D19
+  REAL(DP), PARAMETER :: one = 1._DP, zero = 0._DP, rdwarf = 3.834E-20_DP, &
+    rgiant = 1.304E19_DP
   !* FIRST EXECUTABLE STATEMENT  DENORM
   s1 = zero
   s2 = zero

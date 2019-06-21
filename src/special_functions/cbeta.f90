@@ -36,13 +36,13 @@ COMPLEX(SP) FUNCTION CBETA(A,B)
   USE service, ONLY : XERMSG
   COMPLEX(SP) :: A, B
   REAL(SP) :: xmin
-  REAL(SP), SAVE :: xmax = 0.0
+  REAL(SP), SAVE :: xmax = 0._SP
   !* FIRST EXECUTABLE STATEMENT  CBETA
-  IF( xmax==0.0 ) THEN
+  IF( xmax==0._SP ) THEN
     CALL GAMLIM(xmin,xmax)
   END IF
   !
-  IF( REAL(A)<=0.0 .OR. REAL(B)<=0.0 ) CALL XERMSG('CBETA',&
+  IF( REAL(A)<=0._SP .OR. REAL(B)<=0._SP ) CALL XERMSG('CBETA',&
     'REAL PART OF BOTH ARGUMENTS MUST BE GT 0',1,2)
   !
   IF( REAL(A)+REAL(B)<xmax ) THEN

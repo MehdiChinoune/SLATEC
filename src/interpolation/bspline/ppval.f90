@@ -75,7 +75,7 @@ REAL(SP) FUNCTION PPVAL(Ldc,C,Xi,Lxi,K,Ideriv,X,Inppv)
   INTEGER :: i, j, ndummy
   REAL(SP) :: dx, fltk
   !* FIRST EXECUTABLE STATEMENT  PPVAL
-  PPVAL = 0.0E0
+  PPVAL = 0._SP
   IF( K<1 ) THEN
     CALL XERMSG('PPVAL','K DOES NOT SATISFY K>=1',2,1)
     RETURN
@@ -99,8 +99,8 @@ REAL(SP) FUNCTION PPVAL(Ldc,C,Xi,Lxi,K,Ideriv,X,Inppv)
     DO
       PPVAL = (PPVAL/fltk)*dx + C(j,i)
       j = j - 1
-      fltk = fltk - 1.0E0
-      IF( fltk<=0.0E0 ) EXIT
+      fltk = fltk - 1._SP
+      IF( fltk<=0._SP ) EXIT
     END DO
   END IF
   RETURN

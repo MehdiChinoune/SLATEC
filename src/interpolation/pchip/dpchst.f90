@@ -49,7 +49,7 @@ REAL(DP) FUNCTION DPCHST(Arg1,Arg2)
   !
   !  DECLARE LOCAL VARIABLES.
   !
-  REAL(DP), PARAMETER :: zero = 0.D0, one = 1.D0
+  REAL(DP), PARAMETER :: zero = 0._DP, one = 1._DP
   !
   !  PERFORM THE TEST.
   !

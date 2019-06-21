@@ -46,8 +46,8 @@ LOGICAL FUNCTION DWNLT2(Me,Mend,Ir,Factor,Tau,Scalee,Wic)
   REAL(DP) :: rn, sn, t
   !
   !* FIRST EXECUTABLE STATEMENT  DWNLT2
-  sn = 0.E0
-  rn = 0.E0
+  sn = 0._SP
+  rn = 0._SP
   DO j = 1, Mend
     t = Scalee(j)
     IF( j<=Me ) t = t/Factor

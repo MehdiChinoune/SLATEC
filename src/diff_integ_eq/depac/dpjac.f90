@@ -98,8 +98,8 @@ SUBROUTINE DPJAC(Neq,Y,Yh,Nyh,Ewt,Ftem,Savf,Wm,Iwm,DF,DJAC)
       !                 IF MITER = 2, MAKE N CALLS TO DF TO APPROXIMATE J.
       !                 --------------------
       fac = DVNRMS(n_com,Savf,Ewt)
-      r0 = 1000.0D0*ABS(h_com)*uround_com*n_com*fac
-      IF( r0==0.0D0 ) r0 = 1.0D0
+      r0 = 1000._DP*ABS(h_com)*uround_com*n_com*fac
+      IF( r0==0._DP ) r0 = 1._DP
       srur = Wm(1)
       j1 = 2
       DO j = 1, n_com
@@ -120,7 +120,7 @@ SUBROUTINE DPJAC(Neq,Y,Yh,Nyh,Ewt,Ftem,Savf,Wm,Iwm,DF,DJAC)
       !              P. ---------
       Wm(2) = hl0
       ier_com = 0
-      r = el0_com*0.1D0
+      r = el0_com*0.1_DP
       DO i = 1, n_com
         Y(i) = Y(i) + r*(h_com*Savf(i)-Yh(i,2))
       END DO
@@ -128,12 +128,12 @@ SUBROUTINE DPJAC(Neq,Y,Yh,Nyh,Ewt,Ftem,Savf,Wm,Iwm,DF,DJAC)
       nfe_com = nfe_com + 1
       DO i = 1, n_com
         r0 = h_com*Savf(i) - Yh(i,2)
-        di = 0.1D0*r0 - h_com*(Wm(i+2)-Savf(i))
-        Wm(i+2) = 1.0D0
+        di = 0.1_DP*r0 - h_com*(Wm(i+2)-Savf(i))
+        Wm(i+2) = 1._DP
         IF( ABS(r0)>=uround_com*Ewt(i) ) THEN
           !           .........EXIT
-          IF( ABS(di)==0.0D0 ) GOTO 100
-          Wm(i+2) = 0.1D0*r0/di
+          IF( ABS(di)==0._DP ) GOTO 100
+          Wm(i+2) = 0.1_DP*r0/di
         END IF
       END DO
       !     .........EXIT
@@ -147,7 +147,7 @@ SUBROUTINE DPJAC(Neq,Y,Yh,Nyh,Ewt,Ftem,Savf,Wm,Iwm,DF,DJAC)
       mband = ml + mu + 1
       meband = 2*ml + mu + 1
       ALLOCATE( pd(meband,n_com) )
-      pd = 0.D0
+      pd = 0._DP
       CALL DJAC(tn_com,Y,pd,meband)
       con = -hl0
       DO j = 1, n_com
@@ -167,8 +167,8 @@ SUBROUTINE DPJAC(Neq,Y,Yh,Nyh,Ewt,Ftem,Savf,Wm,Iwm,DF,DJAC)
       meb1 = meband - 1
       srur = Wm(1)
       fac = DVNRMS(n_com,Savf,Ewt)
-      r0 = 1000.0D0*ABS(h_com)*uround_com*n_com*fac
-      IF( r0==0.0D0 ) r0 = 1.0D0
+      r0 = 1000._DP*ABS(h_com)*uround_com*n_com*fac
+      IF( r0==0._DP ) r0 = 1._DP
       DO j = 1, mba
         DO i = j, n_com, mband
           yi = Y(i)
@@ -195,7 +195,7 @@ SUBROUTINE DPJAC(Neq,Y,Yh,Nyh,Ewt,Ftem,Savf,Wm,Iwm,DF,DJAC)
       !                 IF MITER = 1, CALL DJAC AND MULTIPLY BY SCALAR.
       !                 -----------------------
       ALLOCATE( pd(n_com,n_com) )
-      pd = 0.D0
+      pd = 0._DP
       CALL DJAC(tn_com,Y,pd,n_com)
       con = -hl0
       DO j = 1, n_com
@@ -208,7 +208,7 @@ SUBROUTINE DPJAC(Neq,Y,Yh,Nyh,Ewt,Ftem,Savf,Wm,Iwm,DF,DJAC)
   !              -------------------------------------------------
   j = 3
   DO i = 1, n_com
-    Wm(j) = Wm(j) + 1.0D0
+    Wm(j) = Wm(j) + 1._DP
     j = j + (n_com+1)
   END DO
   !              DO LU DECOMPOSITION ON P.
@@ -223,7 +223,7 @@ SUBROUTINE DPJAC(Neq,Y,Yh,Nyh,Ewt,Ftem,Savf,Wm,Iwm,DF,DJAC)
   !        -------------------------------------------------
   200  ii = mband + 2
   DO i = 1, n_com
-    Wm(ii) = Wm(ii) + 1.0D0
+    Wm(ii) = Wm(ii) + 1._DP
     ii = ii + meband
   END DO
   !        DO LU DECOMPOSITION OF P.

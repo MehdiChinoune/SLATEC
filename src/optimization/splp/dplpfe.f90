@@ -50,8 +50,8 @@ SUBROUTINE DPLPFE(Mrelas,Nvars,Lmx,Lbm,Ienter,Ibasis,Imat,Ibrc,Ipr,Iwr,&
   LOGICAL :: trans
   !* FIRST EXECUTABLE STATEMENT  DPLPFE
   lpg = Lmx - (Nvars+4)
-  zero = 0.D0
-  one = 1.D0
+  zero = 0._DP
+  one = 1._DP
   rmax = zero
   Found = .FALSE.
   i = Mrelas + 1

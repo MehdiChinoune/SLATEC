@@ -36,7 +36,7 @@ SUBROUTINE ISMPL(N,M,Indx)
   !
   !     Check the input
   !
-  dummy = 0.0
+  dummy = 0._SP
   IF( N*M<=0 .OR. M>N ) RETURN
   !
   !     Set the indices.

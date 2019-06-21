@@ -52,17 +52,17 @@ CONTAINS
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, MAX
     !     .. Data statements ..
-    REAL, PARAMETER :: a(5,4) = RESHAPE( [ 5.0E0, 1.0E0, 0.3E0, 2.1E0, 0.0E0, &
-      -1.0E0, -0.5E0, 1.0E0, 1.0E0, 0.0E0, 4.5E0, -1.0E0, -1.7E0, 2.0E0, 0.0E0, &
-      0.5E0, 2.0E0, 0.6E0, 1.3E0, 0.0E0 ], [5,4] )
-    REAL, PARAMETER :: b(4) = [ 0.0E0, 3.5E0, 3.6E0, 2.4E0 ]
-    REAL, PARAMETER :: bxex(4) = [ 0.10E+01, 0.10E+01, -0.10E+01, 0.10E+01 ]
+    REAL(SP), PARAMETER :: a(5,4) = RESHAPE( [ 5._SP, 1._SP, 0.3_SP, 2.1_SP, 0._SP, &
+      -1._SP, -0.5_SP, 1._SP, 1._SP, 0._SP, 4.5_SP, -1._SP, -1.7_SP, 2._SP, 0._SP, &
+      0.5_SP, 2._SP, 0.6_SP, 1.3_SP, 0._SP ], [5,4] )
+    REAL(SP), PARAMETER :: b(4) = [ 0._SP, 3.5_SP, 3.6_SP, 2.4_SP ]
+    REAL(SP), PARAMETER :: bxex(4) = [ 1._SP, 1._SP, -1._SP, 1._SP ]
     CHARACTER(4), PARAMETER :: list(2) = [ 'GEFS', 'GEIR' ]
     !* FIRST EXECUTABLE STATEMENT  SGEQC
     n = 4
     lda = 5
     Nerr = 0
-    errcmp = R1MACH(4)**0.8E0
+    errcmp = R1MACH(4)**0.8_SP
     IF( Kprint>=2 ) WRITE (Lun,99001)
     !
     99001 FORMAT (//,2X,'SGEFS and SGEIR Quick Check'/)
@@ -92,7 +92,7 @@ CONTAINS
       !
       !       Calculate error for first test
       !
-      errmax = 0.0E0
+      errmax = 0._SP
       !
       DO i = 1, n
         errmax = MAX(errmax,ABS(btemp(i)-bxex(i)))
@@ -116,7 +116,7 @@ CONTAINS
         END DO
       END DO
       DO j = 1, n
-        atemp(1,j) = 0.0E0
+        atemp(1,j) = 0._SP
       END DO
       IF( kprog==1 ) THEN
         CALL SGEFS(atemp,lda,n,btemp,itask,ind,work,iwork)
@@ -191,18 +191,18 @@ CONTAINS
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, MAX
     !     .. Data statements ..
-    REAL(DP), PARAMETER :: a(5,4) = RESHAPE( [ 5.0D0, 1.0D0, 0.3D0, 2.1D0, 0.0D0, &
-      -1.0D0, -0.5D0, 1.0D0, 1.0D0, 0.0D0, &
-      4.5D0,  -1.0D0, -1.7D0, 2.0D0, 0.0D0, &
-      0.5D0, 2.0D0, 0.6D0, 1.3D0, 0.0D0 ], [5,4] )
-    REAL(DP), PARAMETER :: b(4) = [ 0.0D0, 3.5D0, 3.6D0, 2.4D0 ]
-    REAL(DP), PARAMETER :: bxex(4) = [ 0.10D+01, 0.10D+01, -0.10D+01, 0.10D+01 ]
+    REAL(DP), PARAMETER :: a(5,4) = RESHAPE( [ 5._DP, 1._DP, 0.3_DP, 2.1_DP, 0._DP, &
+      -1._DP, -0.5_DP, 1._DP, 1._DP, 0._DP, &
+      4.5_DP,  -1._DP, -1.7_DP, 2._DP, 0._DP, &
+      0.5_DP, 2._DP, 0.6_DP, 1.3_DP, 0._DP ], [5,4] )
+    REAL(DP), PARAMETER :: b(4) = [ 0._DP, 3.5_DP, 3.6_DP, 2.4_DP ]
+    REAL(DP), PARAMETER :: bxex(4) = [ 1._DP, 1._DP, -1._DP, 1._DP ]
     CHARACTER(4), PARAMETER :: list(2) = [ 'GEFS', 'GEIR' ]
     !* FIRST EXECUTABLE STATEMENT  DGEQC
     n = 4
     lda = 5
     Nerr = 0
-    errcmp = D1MACH(4)**0.8D0
+    errcmp = D1MACH(4)**0.8_DP
     IF( Kprint>=2 ) WRITE (Lun,99001)
     !
     99001 FORMAT (//,2X,'DGEFS Quick Check'/)
@@ -228,7 +228,7 @@ CONTAINS
     !
     !     Calculate error for first test
     !
-    errmax = 0.0D0
+    errmax = 0._DP
     !
     DO i = 1, n
       errmax = MAX(errmax,ABS(btemp(i)-bxex(i)))
@@ -252,7 +252,7 @@ CONTAINS
       END DO
     END DO
     DO j = 1, n
-      atemp(1,j) = 0.0D0
+      atemp(1,j) = 0._DP
     END DO
     CALL DGEFS(atemp,lda,n,btemp,itask,ind,work,iwork)
     IF( ind==-4 ) THEN
@@ -320,11 +320,13 @@ CONTAINS
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, AIMAG, REAL
     !     .. Data statements ..
-    COMPLEX(SP), PARAMETER :: a(3,3) = RESHAPE( [ (2.,3.), (1.,1.), (1.,2.), &
-      (2.,0.), (1.,-1.), (0.,0.),   (0.,0.), (2.,5.), (3.,2.) ], [3,3] )
-    COMPLEX(SP), PARAMETER :: b(3) = [ (-1.,1.), (-5.,4.), (-4.,7.) ]
-    COMPLEX(SP), PARAMETER :: bxex(3) = [ (.21459E-01,.209012E+01), &
-      (.261373E+01,-.162231E+01), (.785407E+00,.109871E+01) ]
+    COMPLEX(SP), PARAMETER :: a(3,3) = RESHAPE( [ &
+      (2._SP,3._SP), (1._SP,1._SP), (1._SP,2._SP), &
+      (2._SP,0._SP), (1._SP,-1._SP), (0._SP,0._SP), &
+      (0._SP,0._SP), (2._SP,5._SP), (3._SP,2._SP) ], [3,3] )
+    COMPLEX(SP), PARAMETER :: b(3) = [ (-1._SP,1._SP), (-5._SP,4._SP), (-4._SP,7._SP) ]
+    COMPLEX(SP), PARAMETER :: bxex(3) = [ (.21459E-01_SP,.209012E+01_SP), &
+      (.261373E+01_SP,-.162231E+01_SP), (.785407E+00_SP,.109871E+01_SP) ]
     CHARACTER(4), PARAMETER :: list(2) = [ 'GEFS', 'GEIR' ]
     !* FIRST EXECUTABLE STATEMENT  CGEQC
     n = 3
@@ -382,7 +384,7 @@ CONTAINS
         END DO
       END DO
       DO j = 1, n
-        atemp(1,j) = (0.E0,0.E0)
+        atemp(1,j) = (0._SP,0._SP)
       END DO
       IF( kprog==1 ) THEN
         CALL CGEFS(atemp,lda,n,btemp,itask,ind,work,iwork)

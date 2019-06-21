@@ -628,9 +628,9 @@ SUBROUTINE SNLS1(FCN,Iopt,M,N,X,Fvec,Fjac,Ldfjac,Ftol,Xtol,Gtol,Maxfev,&
   CHARACTER(8) :: xern1
   CHARACTER(16) :: xern3
   !
-  REAL(SP), PARAMETER :: chklim = .1E0
-  REAL(SP), PARAMETER :: one = 1.0E0, p1 = 1.0E-1, p5 = 5.0E-1, p25 = 2.5E-1, &
-    p75 = 7.5E-1, p0001 = 1.0E-4, zero = 0.0E0
+  REAL(SP), PARAMETER :: chklim = .1_SP
+  REAL(SP), PARAMETER :: one = 1._SP, p1 = 1.E-1_SP, p5 = 5.E-1_SP, p25 = 2.5E-1, &
+    p75 = 7.5E-1, p0001 = 1.E-4_SP, zero = 0._SP
   !
   !* FIRST EXECUTABLE STATEMENT  SNLS1
   epsmch = R1MACH(4)

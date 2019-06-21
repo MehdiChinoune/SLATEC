@@ -441,7 +441,7 @@ SUBROUTINE DGMRES(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,&
         !         If NRMAX = -1, then set NRMAX = 0 to turn off restarting.
         IF( nrmax==-1 ) nrmax = 0
         !         If input value of TOL is zero, set it to its default value.
-        IF( Tol==0.0D0 ) Tol = 500*D1MACH(3)
+        IF( Tol==0._DP ) Tol = 500*D1MACH(3)
         !
         !         Initialize counters.
         Iter = 0

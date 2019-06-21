@@ -54,30 +54,33 @@ CONTAINS
     !     the least squares equations.  (There are no equality constraints
     !     in this example).
     !
-    REAL, PARAMETER :: a(6,5) = RESHAPE( [ &
-      -74., 80., 18., -11., -4.,    14., -69., 21., 28., 0., &
-      66., -72., -5., 7., 1.,      -12., 66., -30., -23., 3., &
-      3., 8., -7., -4., 1.,         4., -12., 4., 4., 0. ], [6,5], ORDER = [2,1] )
+    REAL(SP), PARAMETER :: a(6,5) = RESHAPE( [ &
+      -74._SP, 80._SP, 18._SP, -11._SP, -4._SP,    14._SP, -69._SP, 21._SP, 28._SP, 0._SP, &
+      66._SP, -72._SP, -5._SP, 7._SP, 1._SP,      -12._SP, 66._SP, -30._SP, -23._SP, 3._SP, &
+      3._SP, 8._SP, -7._SP, -4._SP, 1._SP,         4._SP, -12._SP, 4._SP, 4._SP, 0._SP ], &
+      [6,5], ORDER = [2,1] )
     !
     !     The array G contains the inequality constraint equations,
     !     written in the sense
     !     (row vector)*(solution vector) >= (given value).
     !
-    REAL, PARAMETER :: g(5,5) = RESHAPE( [ -1., -1., -1., -1., -1., &
-      10., 10., -3., 5., 4.,    -8., 1., -2., -5., 3.,      8., -1., 2., 5., -3., &
-      -4., -2., 3., -5., 1. ], [5,5], ORDER = [2,1] )
+    REAL(SP), PARAMETER :: g(5,5) = RESHAPE( [ -1._SP, -1._SP, -1._SP, -1._SP, -1._SP, &
+      10._SP, 10._SP, -3._SP, 5._SP, 4._SP,    -8._SP, 1._SP, -2._SP, -5._SP, 3._SP, &
+      8._SP, -1._SP, 2._SP, 5._SP, -3._SP,     -4._SP, -2._SP, 3._SP, -5._SP, 1._SP ], &
+      [5,5], ORDER = [2,1] )
     !
     !     Define the least squares right-side vector.
     !
-    REAL, PARAMETER :: f(6) = [ -5., -9., 708., 4165., -13266., 8409. ]
+    REAL(SP), PARAMETER :: f(6) = [ -5._SP, -9._SP, 708._SP, 4165._SP, &
+      -13266._SP, 8409._SP ]
     !
     !     Define the inequality constraint right-side vector.
     !
-    REAL, PARAMETER :: h(5) = [ -5., 20., -40., 11., -30. ]
+    REAL(SP), PARAMETER :: h(5) = [ -5._SP, 20._SP, -40._SP, 11._SP, -30._SP ]
     !
     !     Define the vector that is the known solution.
     !
-    REAL, PARAMETER :: sol(5) = [ 1., 2., -1., 3., -4. ]
+    REAL(SP), PARAMETER :: sol(5) = [ 1._SP, 2._SP, -1._SP, 3._SP, -4._SP ]
     !* FIRST EXECUTABLE STATEMENT  LSEIQX
     IF( Kprint>=2 ) WRITE (Lun,99001)
     !
@@ -137,12 +140,12 @@ CONTAINS
     !
     tnorm = NORM2(sol(1:n))
     err = sol
-    CALL SAXPY(n,-1.0E0,x,1,err,1)
+    CALL SAXPY(n,-1._SP,x,1,err,1)
     cnorm = NORM2(err(1:n))
     relerr = cnorm/tnorm
     relnrm = (resnrm-rnorml)/resnrm
     !
-    IF( relerr(1)<=70.0E0*SQRT(R1MACH(4)) .AND. relnrm(1)<=5.0E0*R1MACH(4) ) THEN
+    IF( relerr(1)<=70._SP*SQRT(R1MACH(4)) .AND. relnrm(1)<=5._SP*R1MACH(4) ) THEN
       Ipass = 1
       IF( Kprint>=3 ) WRITE (Lun,99002)
       99002 FORMAT (/' LSEI PASSED TEST')
@@ -276,15 +279,18 @@ CONTAINS
     USE slatec, ONLY : R1MACH, SGLSS
     INTEGER :: i, Ipass, j, kk, Kprint, nerr, kprog, kcase, iwork(7), info, Lun
     REAL(SP) :: rnorm(1), a(4,4), b(4), delmax, delx, r, work(20)
-    REAL, PARAMETER :: aa(4,4,2) = RESHAPE( [ 1., .5, 1., .25, 0., 2., 0., 1., 2., &
-      -1., 1., 0., 0., 0., 0., 0., 1., 2., -1., 0., 0., 1., 2., 0., -1., 0., 1., &
-      0., 1., 0., 1., 0. ], [4,4,2] )
-    REAL, PARAMETER :: bb(4,2) = RESHAPE( [ 3., 1.5, 2., 1.25, 1., 3., 3., 0. ], [4,2] )
-    REAL, PARAMETER :: xx(4,4) = RESHAPE( [ &
-      .9999999999999787, 1.000000000000007, 1.000000000000007, 0., &
-      .8095238095238102, 1.047619047619044, 1.095238095238081, 0., &
-      .7777777777777857, 1.444444444444429, .3333333333333393, .5555555555555500, &
-      .3333333333333321, 0.0, -.3333333333333286, .3333333333333286 ], [4,4] )
+    REAL(SP), PARAMETER :: aa(4,4,2) = RESHAPE( [ 1._SP, .5_SP, 1._SP, .25_SP, &
+      0._SP, 2._SP, 0._SP, 1._SP,   2._SP, -1._SP, 1._SP, 0._SP, &
+      0._SP, 0._SP, 0._SP, 0._SP,   1._SP, 2._SP, -1._SP, 0._SP, &
+      0._SP, 1._SP, 2._SP, 0._SP,  -1._SP, 0._SP, 1._SP, 0._SP, &
+      1._SP, 0._SP, 1._SP, 0._SP ], [4,4,2] )
+    REAL(SP), PARAMETER :: bb(4,2) = RESHAPE( [ 3._SP, 1.5_SP, 2._SP, 1.25_SP, &
+      1._SP, 3._SP, 3._SP, 0._SP ], [4,2] )
+    REAL(SP), PARAMETER :: xx(4,4) = RESHAPE( [ &
+      .9999999999999787_SP, 1.000000000000007_SP, 1.000000000000007_SP, 0._SP, &
+      .8095238095238102_SP, 1.047619047619044_SP, 1.095238095238081_SP, 0._SP, &
+      .7777777777777857_SP, 1.444444444444429_SP, .3333333333333393_SP, .5555555555555500_SP, &
+      .3333333333333321_SP, 0.0_SP, -.3333333333333286_SP, .3333333333333286_SP ], [4,4] )
     INTEGER, PARAMETER :: inf(4) = [ 0, 1, 0, 2 ]
     CHARACTER, PARAMETER :: list(2) = [ 'L', 'U' ]
     !* FIRST EXECUTABLE STATEMENT  QCGLSS
@@ -325,7 +331,7 @@ CONTAINS
         !           TEST COMPUTED  X, RNORM, AND  INFO .
         !
         kk = 2*(kprog-1) + kcase
-        delmax = 0.0E0
+        delmax = 0._SP
         DO i = 1, 4
           delx = ABS(b(i)-xx(i,kk))
           delmax = MAX(delmax,delx)

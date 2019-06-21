@@ -31,7 +31,7 @@ SUBROUTINE DCSCAL(A,Nrda,Nrow,Ncol,Cols,Colsav,Rows,Rowsav,Anorm,Scales,Iscale,I
     Scales(Ncol)
   INTEGER :: ip, j, k
   REAL(DP) :: alog2, ascale, cs, p, s
-  REAL(DP), PARAMETER :: ten4 = 1.0D4, ten20 = 1.0D20
+  REAL(DP), PARAMETER :: ten4 = 1.E4_DP, ten20 = 1.E20_DP
   !
   !     BEGIN BLOCK PERMITTING ...EXITS TO 130
   !        BEGIN BLOCK PERMITTING ...EXITS TO 60
@@ -50,24 +50,24 @@ SUBROUTINE DCSCAL(A,Nrda,Nrow,Ncol,Cols,Colsav,Rows,Rowsav,Anorm,Scales,Iscale,I
       !        .........EXIT
       IF( (cs>ten4*ascale) .OR. (ten4*cs<ascale) ) GOTO 100
       !        .........EXIT
-      IF( (cs<1.0D0/ten20) .OR. (cs>ten20) ) GOTO 100
+      IF( (cs<1._DP/ten20) .OR. (cs>ten20) ) GOTO 100
     END DO
   END IF
   !
   DO k = 1, Ncol
-    Scales(k) = 1.0D0
+    Scales(k) = 1._DP
   END DO
   !     ......EXIT
   RETURN
   !
-  100  alog2 = LOG(2.0D0)
-  Anorm = 0.0D0
+  100  alog2 = LOG(2._DP)
+  Anorm = 0._DP
   DO k = 1, Ncol
     cs = Cols(k)
-    IF( cs/=0.0D0 ) THEN
+    IF( cs/=0._DP ) THEN
       p = LOG(cs)/alog2
-      ip = INT( -0.5D0*p )
-      s = 2.0D0**ip
+      ip = INT( -0.5_DP*p )
+      s = 2._DP**ip
       Scales(k) = s
       IF( Ic/=1 ) THEN
         Cols(k) = s*s*Cols(k)
@@ -78,7 +78,7 @@ SUBROUTINE DCSCAL(A,Nrda,Nrow,Ncol,Cols,Colsav,Rows,Rowsav,Anorm,Scales,Iscale,I
         A(j,k) = s*A(j,k)
       END DO
     ELSE
-      Scales(k) = 1.0D0
+      Scales(k) = 1._DP
     END IF
   END DO
   !

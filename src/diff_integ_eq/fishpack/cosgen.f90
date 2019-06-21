@@ -45,7 +45,7 @@ SUBROUTINE COSGEN(N,Ijump,Fnum,Fden,A)
   REAL(SP) :: A(N)
   INTEGER :: i, k, k1, k2, k3, k4, k5, np1
   REAL(SP) :: pibyn, x, y
-  REAL(SP), PARAMETER :: pi = 3.14159265358979
+  REAL(SP), PARAMETER :: pi = 3.14159265358979_SP
   !* FIRST EXECUTABLE STATEMENT  COSGEN
   IF( N/=0 ) THEN
     IF( Ijump==1 ) THEN
@@ -53,7 +53,7 @@ SUBROUTINE COSGEN(N,Ijump,Fnum,Fden,A)
       y = pi/(N+Fden)
       DO i = 1, N
         x = np1 - i - Fnum
-        A(i) = 2.*COS(x*y)
+        A(i) = 2._SP*COS(x*y)
       END DO
     ELSE
       k3 = N/Ijump + 1
@@ -65,7 +65,7 @@ SUBROUTINE COSGEN(N,Ijump,Fnum,Fden,A)
         DO i = 1, k4
           x = k1 + i
           k2 = k5 + i
-          A(k2) = -2.*COS(x*pibyn)
+          A(k2) = -2._SP*COS(x*pibyn)
         END DO
       END DO
     END IF

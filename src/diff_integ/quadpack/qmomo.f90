@@ -77,12 +77,12 @@ SUBROUTINE QMOMO(Alfa,Beta,Ri,Rj,Rg,Rh,Integr)
     rbet, Rg(25), Rh(25), Ri(25), Rj(25)
   INTEGER :: i, im1, Integr
   !* FIRST EXECUTABLE STATEMENT  QMOMO
-  alfp1 = Alfa + 0.1E+01
-  betp1 = Beta + 0.1E+01
-  alfp2 = Alfa + 0.2E+01
-  betp2 = Beta + 0.2E+01
-  ralf = 0.2E+01**alfp1
-  rbet = 0.2E+01**betp1
+  alfp1 = Alfa + 1._SP
+  betp1 = Beta + 1._SP
+  alfp2 = Alfa + 2._SP
+  betp2 = Beta + 2._SP
+  ralf = 2._SP**alfp1
+  rbet = 2._SP**betp1
   !
   !           COMPUTE RI, RJ USING A FORWARD RECURRENCE RELATION.
   !
@@ -90,13 +90,13 @@ SUBROUTINE QMOMO(Alfa,Beta,Ri,Rj,Rg,Rh,Integr)
   Rj(1) = rbet/betp1
   Ri(2) = Ri(1)*Alfa/alfp2
   Rj(2) = Rj(1)*Beta/betp2
-  an = 0.2E+01
-  anm1 = 0.1E+01
+  an = 2._SP
+  anm1 = 1._SP
   DO i = 3, 25
     Ri(i) = -(ralf+an*(an-alfp2)*Ri(i-1))/(anm1*(an+alfp1))
     Rj(i) = -(rbet+an*(an-betp2)*Rj(i-1))/(anm1*(an+betp1))
     anm1 = an
-    an = an + 0.1E+01
+    an = an + 1._SP
   END DO
   IF( Integr/=1 ) THEN
     IF( Integr/=3 ) THEN
@@ -105,13 +105,13 @@ SUBROUTINE QMOMO(Alfa,Beta,Ri,Rj,Rg,Rh,Integr)
       !
       Rg(1) = -Ri(1)/alfp1
       Rg(2) = -(ralf+ralf)/(alfp2*alfp2) - Rg(1)
-      an = 0.2E+01
-      anm1 = 0.1E+01
+      an = 2._SP
+      anm1 = 1._SP
       im1 = 2
       DO i = 3, 25
         Rg(i) = -(an*(an-alfp2)*Rg(im1)-an*Ri(im1)+anm1*Ri(i))/(anm1*(an+alfp1))
         anm1 = an
-        an = an + 0.1E+01
+        an = an + 1._SP
         im1 = i
       END DO
       IF( Integr==2 ) GOTO 100
@@ -121,13 +121,13 @@ SUBROUTINE QMOMO(Alfa,Beta,Ri,Rj,Rg,Rh,Integr)
     !
     Rh(1) = -Rj(1)/betp1
     Rh(2) = -(rbet+rbet)/(betp2*betp2) - Rh(1)
-    an = 0.2E+01
-    anm1 = 0.1E+01
+    an = 2._SP
+    anm1 = 1._SP
     im1 = 2
     DO i = 3, 25
       Rh(i) = -(an*(an-betp2)*Rh(im1)-an*Rj(im1)+anm1*Rj(i))/(anm1*(an+betp1))
       anm1 = an
-      an = an + 0.1E+01
+      an = an + 1._SP
       im1 = i
     END DO
     DO i = 2, 25, 2

@@ -140,16 +140,16 @@ SUBROUTINE RC3JM(L1,L2,L3,M1,M2min,M2max,Thrcof,Ndim,Ier)
   REAL(SP) :: a1, a1s, c1, c1old, c2, cnorm, dv, hugee, m2, m3, newfac, oldfac, &
     ratio, sign1, sign2, srhuge, srtiny, sum1, sum2, sumbac, sumfor, sumuni, &
     thresh, tinyy, x, x1, x2, x3, y, y1, y2, y3
-  REAL(SP), PARAMETER ::  zero = 0.0, eps = 0.01, one = 1.0, two = 2.0
+  REAL(SP), PARAMETER ::  zero = 0._SP, eps = 0.01_SP, one = 1._SP, two = 2._SP
   !
   !* FIRST EXECUTABLE STATEMENT  RC3JM
   Ier = 0
   !  HUGE is the square root of one twentieth of the largest floating
   !  point number, approximately.
-  hugee = SQRT(R1MACH(2)/20.0)
+  hugee = SQRT(R1MACH(2)/20._SP)
   srhuge = SQRT(hugee)
-  tinyy = 1.0/hugee
-  srtiny = 1.0/srhuge
+  tinyy = 1._SP/hugee
+  srtiny = 1._SP/srhuge
   !
   !     MMATCH = ZERO
   !
@@ -199,8 +199,8 @@ SUBROUTINE RC3JM(L1,L2,L3,M1,M2min,M2max,Thrcof,Ndim,Ier)
       !
       m2 = M2min
       Thrcof(1) = srtiny
-      newfac = 0.0
-      c1 = 0.0
+      newfac = 0._SP
+      c1 = 0._SP
       sum1 = tinyy
       !
       !

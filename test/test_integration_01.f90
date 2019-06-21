@@ -32,18 +32,18 @@ CONTAINS
     IF( Kprint>=2 ) WRITE (Lun,99001)
     99001 FORMAT ('1'/' AVINT Quick Check')
     Ipass = 1
-    tol = MAX(.0001E0,SQRT(R1MACH(4)))
-    tol1 = 1.0E-2*tol
+    tol = MAX(.0001_SP,SQRT(R1MACH(4)))
+    tol1 = 1.E-2_SP*tol
     !
     !     Perform first accuracy test.
     !
-    a = 0.0E0
-    b = 5.0E0
-    xint = EXP(5.) - 1.
+    a = 0._SP
+    b = 5._SP
+    xint = EXP(5._SP) - 1._SP
     n = 500
     rn1 = n - 1
     sqb = SQRT(b)
-    del = 0.4E0*(b-a)/(n-1)
+    del = 0.4_SP*(b-a)/(n-1)
     DO i = 1, n
       x(i) = sqb*SQRT(a+(i-1)*(b-a)/rn1) + del
       y(i) = EXP(x(i))
@@ -59,13 +59,13 @@ CONTAINS
     !
     !     Perform second accuracy test.
     !
-    x(1) = 0.0E0
-    x(2) = 5.0E0
-    y(1) = 1.0E0
-    y(2) = 0.5E0
-    a = -0.5E0
-    b = 0.5E0
-    xint = 1.0E0
+    x(1) = 0._SP
+    x(2) = 5._SP
+    y(1) = 1._SP
+    y(2) = 0.5_SP
+    a = -0.5_SP
+    b = 0.5_SP
+    xint = 1._SP
     CALL AVINT(x,y,2,a,b,ans,ierr)
     !
     !     See if test was passed.
@@ -103,14 +103,14 @@ CONTAINS
       99004 FORMAT (/' Test error returns from AVINT'/' 4 error messages expected'/)
     END IF
     DO i = 1, 20
-      x(i) = (i-1)/19.0E0 - 0.01E0
-      IF( i/=1 ) y(i) = x(i)/(EXP(x(i))-1.0)
+      x(i) = (i-1)/19._SP - 0.01_SP
+      IF( i/=1 ) y(i) = x(i)/(EXP(x(i))-1._SP)
     END DO
     !
     !     Test IERR = 1 error return.
     !
-    y(1) = 1.0E0
-    CALL AVINT(x,y,20,0.0E0,1.0E0,ans,ierr)
+    y(1) = 1._SP
+    CALL AVINT(x,y,20,0._SP,1._SP,ans,ierr)
     IF( ierr/=1 ) THEN
       Ipass = 0
       fatal = .TRUE.
@@ -120,13 +120,13 @@ CONTAINS
     !
     !     Test IERR = 2 error return.
     !
-    CALL AVINT(x,y,20,1.0E0,0.0E0,ans,ierr)
+    CALL AVINT(x,y,20,1._SP,0._SP,ans,ierr)
     IF( ierr/=2 ) THEN
       Ipass = 0
       fatal = .TRUE.
       IF( Kprint>=3 ) WRITE (Lun,99010) ierr, 2
     END IF
-    IF( ans/=0.0E0 ) THEN
+    IF( ans/=0._SP ) THEN
       Ipass = 0
       fatal = .TRUE.
       IF( Kprint>=3 ) WRITE (Lun,99011)
@@ -135,13 +135,13 @@ CONTAINS
     !
     !     Test IERR = 5 error return.
     !
-    CALL AVINT(x,y,1,0.0E0,1.0E0,ans,ierr)
+    CALL AVINT(x,y,1,0._SP,1._SP,ans,ierr)
     IF( ierr/=5 ) THEN
       Ipass = 0
       fatal = .TRUE.
       IF( Kprint>=3 ) WRITE (Lun,99010) ierr, 5
     END IF
-    IF( ans/=0.0E0 ) THEN
+    IF( ans/=0._SP ) THEN
       Ipass = 0
       fatal = .TRUE.
       IF( Kprint>=3 ) WRITE (Lun,99011)
@@ -150,15 +150,15 @@ CONTAINS
     !
     !     Test IERR = 4 error return.
     !
-    x(1) = 1.0E0/19.0E0
-    x(2) = 0.0E0
-    CALL AVINT(x,y,20,0.0E0,1.0E0,ans,ierr)
+    x(1) = 1._SP/19._SP
+    x(2) = 0._SP
+    CALL AVINT(x,y,20,0._SP,1._SP,ans,ierr)
     IF( ierr/=4 ) THEN
       Ipass = 0
       fatal = .TRUE.
       IF( Kprint>=3 ) WRITE (Lun,99010) ierr, 4
     END IF
-    IF( ans/=0.0E0 ) THEN
+    IF( ans/=0._SP ) THEN
       Ipass = 0
       fatal = .TRUE.
       IF( Kprint>=3 ) WRITE (Lun,99011)
@@ -167,15 +167,15 @@ CONTAINS
     !
     !     Test IERR = 3 error return.
     !
-    x(1) = 0.0E0
-    x(2) = 1.0E0/19.0E0
-    CALL AVINT(x,y,20,0.0E0,.01E0,ans,ierr)
+    x(1) = 0._SP
+    x(2) = 1._SP/19._SP
+    CALL AVINT(x,y,20,0._SP,.01_SP,ans,ierr)
     IF( ierr/=3 ) THEN
       Ipass = 0
       fatal = .TRUE.
       IF( Kprint>=3 ) WRITE (Lun,99010) ierr, 3
     END IF
-    IF( ans/=0.0E0 ) THEN
+    IF( ans/=0._SP ) THEN
       Ipass = 0
       fatal = .TRUE.
       IF( Kprint>=3 ) WRITE (Lun,99011)
@@ -247,11 +247,11 @@ CONTAINS
     !
     !     First accuracy test.
     !
-    a = 1.0E0
-    b = 4.0E0
-    err = tol/100.0E0
+    a = 1._SP
+    b = 4._SP
+    err = tol/100._SP
     CALL GAUS8(FQD1,a,b,err,ans,ierr)
-    cor = 2.0E0
+    cor = 2._SP
     IF( ABS(ans-cor)<=tol .AND. ierr==1 ) THEN
       IF( Kprint>=3 ) WRITE (Lun,99004) 'PASSED', a, b, ans, cor, err, ierr
     ELSE
@@ -261,11 +261,11 @@ CONTAINS
     !
     !     Second accuracy test.
     !
-    a = 0.0E0
-    b = 4.0E0*ATAN(1.0E0)
-    err = tol/100.0E0
+    a = 0._SP
+    b = 4._SP*ATAN(1._SP)
+    err = tol/100._SP
     CALL GAUS8(FQD2,a,b,err,ans,ierr)
-    cor = (EXP(b)-1.0E0)/101.0E0
+    cor = (EXP(b)-1._SP)/101._SP
     IF( ABS(ans-cor)<=tol .AND. ierr==1 ) THEN
       IF( Kprint>=3 ) WRITE (Lun,99004) 'PASSED', a, b, ans, cor, err, ierr
     ELSE
@@ -287,10 +287,10 @@ CONTAINS
     !
     !     Test with a discontinuous integrand and a tight error tolerance.
     !
-    a = 0.0E0
-    b = 1.0E0
-    cor = 2.0E0
-    err = 100.0E0*R1MACH(4)
+    a = 0._SP
+    b = 1._SP
+    cor = 2._SP
+    err = 100._SP*R1MACH(4)
     req = err
     CALL GAUS8(FQD1,a,b,err,ans,ierr)
     !
@@ -306,16 +306,16 @@ CONTAINS
     !
     !     Test GAUS8 with A and B nearly equal.
     !
-    a = 2.0E0
-    b = a*(1.0E0+R1MACH(4))
-    cor = 0.0E0
+    a = 2._SP
+    b = a*(1._SP+R1MACH(4))
+    cor = 0._SP
     err = tol
     !
     CALL GAUS8(FQD1,a,b,err,ans,ierr)
     !
     !     Check to see if test passed.
     !
-    IF( ierr==-1 .AND. ans==0.0E0 ) THEN
+    IF( ierr==-1 .AND. ans==0._SP ) THEN
       IF( Kprint>=3 ) WRITE (Lun,99007) 'PASSED'
     ELSE
       Ipass = 0
@@ -390,11 +390,11 @@ CONTAINS
     !
     !     First accuracy test.
     !
-    a = 1.0E0
-    b = 4.0E0
-    err = tol/100.0E0
+    a = 1._SP
+    b = 4._SP
+    err = tol/100._SP
     CALL QNC79(FQD1,a,b,err,ans,ierr,nfct)
-    cor = 2.0E0
+    cor = 2._SP
     IF( ABS(ans-cor)<=tol .AND. ierr==1 ) THEN
       IF( Kprint>=3 ) WRITE (Lun,99004) 'PASSED', a, b, ans, cor, err, ierr, nfct
     ELSE
@@ -404,11 +404,11 @@ CONTAINS
     !
     !     Second accuracy test.
     !
-    a = 0.0E0
-    b = 4.0E0*ATAN(1.0E0)
-    err = tol/10.0E0
+    a = 0._SP
+    b = 4._SP*ATAN(1._SP)
+    err = tol/10._SP
     CALL QNC79(FQD2,a,b,err,ans,ierr,nfct)
-    cor = (EXP(b)-1.0E0)/101.0E0
+    cor = (EXP(b)-1._SP)/101._SP
     IF( ABS(ans-cor)<=tol .AND. ierr==1 ) THEN
       IF( Kprint>=3 ) WRITE (Lun,99004) 'PASSED', a, b, ans, cor, err, ierr, nfct
     ELSE
@@ -430,10 +430,10 @@ CONTAINS
     !
     !     Test with a discontinuous integrand and a tight error tolerance.
     !
-    a = 0.0E0
-    b = 1.0E0
-    cor = 2.0E0
-    err = 100.0E0*R1MACH(4)
+    a = 0._SP
+    b = 1._SP
+    cor = 2._SP
+    err = 100._SP*R1MACH(4)
     req = err
     CALL QNC79(FQD1,a,b,err,ans,ierr,nfct)
     !
@@ -449,16 +449,16 @@ CONTAINS
     !
     !     Test QNC79 with A and B nearly equal.
     !
-    a = 2.0E0
-    b = a*(1.0E0+R1MACH(4))
-    cor = 0.0E0
+    a = 2._SP
+    b = a*(1._SP+R1MACH(4))
+    cor = 0._SP
     err = tol
     !
     CALL QNC79(FQD1,a,b,err,ans,ierr,nfct)
     !
     !     Check to see if test passed.
     !
-    IF( ierr==-1 .AND. ans==0.0E0 ) THEN
+    IF( ierr==-1 .AND. ans==0._SP ) THEN
       IF( Kprint>=3 ) WRITE (Lun,99007) 'PASSED'
     ELSE
       Ipass = 0
@@ -511,12 +511,12 @@ CONTAINS
     !   920229  DATE WRITTEN
 
     !     .. Scalar Arguments ..
-    REAL, INTENT(IN) :: X
+    REAL(SP),INTENT(IN) :: X
     !     .. Intrinsic Functions ..
     INTRINSIC SQRT
     !* FIRST EXECUTABLE STATEMENT  FQD1
-    FQD1 = 0.0E0
-    IF( X>0.0E0 ) FQD1 = 1.0E0/SQRT(X)
+    FQD1 = 0._SP
+    IF( X>0._SP ) FQD1 = 1._SP/SQRT(X)
   END FUNCTION FQD1
   !** FQD2
   REAL(SP) FUNCTION FQD2(X)
@@ -536,11 +536,11 @@ CONTAINS
     !   920229  DATE WRITTEN
 
     !     .. Scalar Arguments ..
-    REAL, INTENT(IN) :: X
+    REAL(SP),INTENT(IN) :: X
     !     .. Intrinsic Functions ..
     INTRINSIC COS, EXP
     !* FIRST EXECUTABLE STATEMENT  FQD2
-    FQD2 = EXP(X)*COS(10.0E0*X)
+    FQD2 = EXP(X)*COS(10._SP*X)
   END FUNCTION FQD2
 END MODULE TEST41_MOD
 !** TEST41

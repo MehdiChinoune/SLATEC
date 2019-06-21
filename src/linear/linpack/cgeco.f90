@@ -93,7 +93,7 @@ SUBROUTINE CGECO(A,Lda,N,Ipvt,Rcond,Z)
   !     COMPUTE 1-NORM OF A
   !
   !* FIRST EXECUTABLE STATEMENT  CGECO
-  anorm = 0.0E0
+  anorm = 0._SP
   DO j = 1, N
     anorm = MAX(anorm,SCASUM(N,A(1,j),1))
   END DO
@@ -111,24 +111,24 @@ SUBROUTINE CGECO(A,Lda,N,Ipvt,Rcond,Z)
   !
   !     SOLVE CTRANS(U)*W = E
   !
-  ek = (1.0E0,0.0E0)
+  ek = (1._SP,0._SP)
   DO j = 1, N
-    Z(j) = (0.0E0,0.0E0)
+    Z(j) = (0._SP,0._SP)
   END DO
   DO k = 1, N
-    IF( SCABS1(Z(k))/=0.0E0 ) ek = CSIGN1(ek,-Z(k))
+    IF( SCABS1(Z(k))/=0._SP ) ek = CSIGN1(ek,-Z(k))
     IF( SCABS1(ek-Z(k))>SCABS1(A(k,k)) ) THEN
       s = SCABS1(A(k,k))/SCABS1(ek-Z(k))
       Z = s*Z
-      ek = CMPLX(s,0.0E0)*ek
+      ek = CMPLX(s,0._SP,SP)*ek
     END IF
     wk = ek - Z(k)
     wkm = -ek - Z(k)
     s = SCABS1(wk)
     sm = SCABS1(wkm)
-    IF( SCABS1(A(k,k))==0.0E0 ) THEN
-      wk = (1.0E0,0.0E0)
-      wkm = (1.0E0,0.0E0)
+    IF( SCABS1(A(k,k))==0._SP ) THEN
+      wk = (1._SP,0._SP)
+      wkm = (1._SP,0._SP)
     ELSE
       wk = wk/CONJG(A(k,k))
       wkm = wkm/CONJG(A(k,k))
@@ -150,7 +150,7 @@ SUBROUTINE CGECO(A,Lda,N,Ipvt,Rcond,Z)
     END IF
     Z(k) = wk
   END DO
-  s = 1.0E0/SCASUM(N,Z,1)
+  s = 1._SP/SCASUM(N,Z,1)
   Z = s*Z
   !
   !     SOLVE CTRANS(L)*Y = W
@@ -158,8 +158,8 @@ SUBROUTINE CGECO(A,Lda,N,Ipvt,Rcond,Z)
   DO kb = 1, N
     k = N + 1 - kb
     IF( k<N ) Z(k) = Z(k) + DOT_PRODUCT(A(k+1:N,k),Z(k+1:N))
-    IF( SCABS1(Z(k))>1.0E0 ) THEN
-      s = 1.0E0/SCABS1(Z(k))
+    IF( SCABS1(Z(k))>1._SP ) THEN
+      s = 1._SP/SCABS1(Z(k))
       Z = s*Z
     END IF
     l = Ipvt(k)
@@ -167,10 +167,10 @@ SUBROUTINE CGECO(A,Lda,N,Ipvt,Rcond,Z)
     Z(l) = Z(k)
     Z(k) = t
   END DO
-  s = 1.0E0/SCASUM(N,Z,1)
+  s = 1._SP/SCASUM(N,Z,1)
   Z = s*Z
   !
-  ynorm = 1.0E0
+  ynorm = 1._SP
   !
   !     SOLVE L*V = Y
   !
@@ -180,13 +180,13 @@ SUBROUTINE CGECO(A,Lda,N,Ipvt,Rcond,Z)
     Z(l) = Z(k)
     Z(k) = t
     IF( k<N ) CALL CAXPY(N-k,t,A(k+1,k),1,Z(k+1),1)
-    IF( SCABS1(Z(k))>1.0E0 ) THEN
-      s = 1.0E0/SCABS1(Z(k))
+    IF( SCABS1(Z(k))>1._SP ) THEN
+      s = 1._SP/SCABS1(Z(k))
       Z = s*Z
       ynorm = s*ynorm
     END IF
   END DO
-  s = 1.0E0/SCASUM(N,Z,1)
+  s = 1._SP/SCASUM(N,Z,1)
   Z = s*Z
   ynorm = s*ynorm
   !
@@ -199,16 +199,16 @@ SUBROUTINE CGECO(A,Lda,N,Ipvt,Rcond,Z)
       Z = s*Z
       ynorm = s*ynorm
     END IF
-    IF( SCABS1(A(k,k))/=0.0E0 ) Z(k) = Z(k)/A(k,k)
-    IF( SCABS1(A(k,k))==0.0E0 ) Z(k) = (1.0E0,0.0E0)
+    IF( SCABS1(A(k,k))/=0._SP ) Z(k) = Z(k)/A(k,k)
+    IF( SCABS1(A(k,k))==0._SP ) Z(k) = (1._SP,0._SP)
     t = -Z(k)
     CALL CAXPY(k-1,t,A(1,k),1,Z(1),1)
   END DO
   !     MAKE ZNORM = 1.0
-  s = 1.0E0/SCASUM(N,Z,1)
+  s = 1._SP/SCASUM(N,Z,1)
   Z = s*Z
   ynorm = s*ynorm
   !
-  IF( anorm/=0.0E0 ) Rcond = ynorm/anorm
-  IF( anorm==0.0E0 ) Rcond = 0.0E0
+  IF( anorm/=0._SP ) Rcond = ynorm/anorm
+  IF( anorm==0._SP ) Rcond = 0._SP
 END SUBROUTINE CGECO

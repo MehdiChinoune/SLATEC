@@ -45,8 +45,8 @@ LOGICAL FUNCTION WNLT2(Me,Mend,Ir,Factor,Tau,Scalee,Wic)
   INTEGER :: j
   !
   !* FIRST EXECUTABLE STATEMENT  WNLT2
-  sn = 0.E0
-  rn = 0.E0
+  sn = 0._SP
+  rn = 0._SP
   DO j = 1, Mend
     t = Scalee(j)
     IF( j<=Me ) t = t/Factor

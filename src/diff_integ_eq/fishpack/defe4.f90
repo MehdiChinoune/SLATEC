@@ -59,14 +59,14 @@ SUBROUTINE DEFE4(COFX,Idmn,Usol,Grhs)
       !
       CALL DX4(Usol,Idmn,i,j,uxxx,uxxxx)
       CALL DY4(Usol,Idmn,i,j,uyyy,uyyyy)
-      tx = ai*uxxxx/12.0 + bi*uxxx/6.0
-      ty = uyyyy/12.0
+      tx = ai*uxxxx/12._SP + bi*uxxx/6._SP
+      ty = uyyyy/12._SP
       !
       !     RESET FORM OF TRUNCATION IF AT BOUNDARY WHICH IS NON-PERIODIC
       !
       IF( .NOT. (kswx_com==1 .OR. (i>1 .AND. i<k_com)) )&
-        tx = ai/3.0*(uxxxx/4.0+uxxx/dlx_com)
-      IF( .NOT. (kswy_com==1 .OR. (j>1 .AND. j<l_com)) ) ty = (uyyyy/4.0+uyyy/dly_com)/3.0
+        tx = ai/3._SP*(uxxxx/4._SP+uxxx/dlx_com)
+      IF( .NOT. (kswy_com==1 .OR. (j>1 .AND. j<l_com)) ) ty = (uyyyy/4._SP+uyyy/dly_com)/3._SP
       Grhs(i,j) = Grhs(i,j) + dly_com**2*(dlx_com**2*tx+dly_com**2*ty)
     END DO
   END DO

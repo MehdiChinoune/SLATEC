@@ -31,12 +31,12 @@ CONTAINS
     rsq = u1sq + u2sq
     r = SQRT(rsq)
     r5 = rsq*rsq*r
-    Pd(3,1) = (3.D0*u1sq-rsq)/r5
-    Pd(4,1) = 3.D0*u1u2/r5
+    Pd(3,1) = (3._DP*u1sq-rsq)/r5
+    Pd(4,1) = 3._DP*u1u2/r5
     Pd(3,2) = Pd(4,1)
-    Pd(4,2) = (3.D0*u2sq-rsq)/r5
-    Pd(1,3) = 1.D0
-    Pd(2,4) = 1.D0
+    Pd(4,2) = (3._DP*u2sq-rsq)/r5
+    Pd(1,3) = 1._DP
+    Pd(2,4) = 1._DP
   END SUBROUTINE DJAC
   !** DFDEQC
   SUBROUTINE DFDEQC(T,U,Uprime)
@@ -144,28 +144,28 @@ CONTAINS
     n = 4
     lrw = 214
     liw = 51
-    t = 0.0D0
-    tout = 8.0D0*ATAN(1.0D0)
-    u(1) = 1.0D0
-    u(2) = 0.0D0
-    u(3) = 0.0D0
-    u(4) = 1.0D0
+    t = 0._DP
+    tout = 8._DP*ATAN(1._DP)
+    u(1) = 1._DP
+    u(2) = 0._DP
+    u(3) = 0._DP
+    u(4) = 1._DP
     Ipass = 1
     nstep = 0
     reltol = SQRT(D1MACH(4))
-    relerr = 0.1D0*reltol
-    abserr = relerr**1.5D0
+    relerr = 0.1_DP*reltol
+    abserr = relerr**1.5_DP
     info(1) = 0
     info(2) = 0
     info(3) = 1
     info(4) = 0
-    IF( Kprint>2 ) WRITE (Lun,99002) relerr, abserr, t, (1.0D0)
+    IF( Kprint>2 ) WRITE (Lun,99002) relerr, abserr, t, (1._DP)
     99002 FORMAT (/' RELERR = ',D16.8,'   ABSERR =',D16.8/12X,'T',19X,'R'/2D20.8)
     DO
       !
       CALL DDEABM(DFDEQC,n,t,u,tout,info,relerr,abserr,idid,rwork,lrw,iwork,liw)
       r = SQRT(u(1)*u(1)+u(2)*u(2))
-      IF( ABS(r-1.0D0)>reltol ) Ipass = 0
+      IF( ABS(r-1._DP)>reltol ) Ipass = 0
       IF( Kprint>2 ) WRITE (Lun,99003) t, r
       99003 FORMAT (2D20.8)
       info(1) = 1
@@ -264,31 +264,31 @@ CONTAINS
     n = 4
     lrw = 306
     liw = 60
-    t = 0.0D0
-    tout = 8.0D0*ATAN(1.0D0)
-    u(1) = 1.0D0
-    u(2) = 0.0D0
-    u(3) = 0.0D0
-    u(4) = 1.0D0
+    t = 0._DP
+    tout = 8._DP*ATAN(1._DP)
+    u(1) = 1._DP
+    u(2) = 0._DP
+    u(3) = 0._DP
+    u(4) = 1._DP
     Ipass = 1
     nstep = 0
-    reltol = MAX(SQRT(D1MACH(4)),1.D-9)
-    relerr = MAX(0.0001D0*reltol,1.D-12)
-    abserr = relerr**1.5D0
+    reltol = MAX(SQRT(D1MACH(4)),1.E-9_DP)
+    relerr = MAX(0.0001_DP*reltol,1.E-12_DP)
+    abserr = relerr**1.5_DP
     info(1) = 0
     info(2) = 0
     info(3) = 1
     info(4) = 0
     info(5) = 1
     info(6) = 0
-    IF( Kprint>2 ) WRITE (Lun,99002) relerr, abserr, t, (1.0D0)
+    IF( Kprint>2 ) WRITE (Lun,99002) relerr, abserr, t, (1._DP)
     99002 FORMAT (/' RELERR = ',D16.8,'   ABSERR =',D16.8/12X,'T',19X,'R'/2D20.8)
     DO
       !
       CALL DDEBDF(DFDEQC,n,t,u,tout,info,relerr,abserr,idid,rwork,lrw,iwork,&
         liw,DJAC)
       r = SQRT(u(1)*u(1)+u(2)*u(2))
-      IF( ABS(r-1.0D0)>reltol ) Ipass = 0
+      IF( ABS(r-1._DP)>reltol ) Ipass = 0
       IF( Kprint>2 ) WRITE (Lun,99003) t, r
       99003 FORMAT (2D20.8)
       info(1) = 1
@@ -346,17 +346,17 @@ CONTAINS
     REAL(DP) :: y(4,15), a(2,4), alpha(2), b(2,4), beta(2), reler, abser
     CHARACTER(4) :: msg
     REAL(DP), PARAMETER :: yans(2,15) = RESHAPE( [ &
-      5.000000000D+00, -6.888880126D-01,   8.609248635D+00, -1.083092311D+00, &
-      1.674923836D+01, -2.072210073D+00,   3.351098494D+01, -4.479263780D+00, &
-      6.601103894D+01, -8.909222513D+00,   8.579580988D+01, -1.098742758D+01, &
-      1.106536877D+02, -1.402469444D+01,   1.421228220D+02, -1.742236546D+01, &
-      1.803383474D+02, -2.086465851D+01,   2.017054332D+02, -1.990879843D+01, &
-      2.051622475D+02, -1.324886978D+01,   2.059197452D+02, 1.051529813D+01, &
-      1.972191446D+02, 9.320592785D+01,    1.556894846D+02, 3.801682434D+02, &
-      1.818989404D-12, 1.379853993D+03 ], [2,15] )
-    REAL(DP) :: xpts(15) = [ 60.0D+00, 55.0D+00, 50.0D+00, 45.0D+00, &
-      40.0D+00, 38.0D+00, 36.0D+00, 34.0D+00, 32.0D+00, 31.0D+00, &
-      30.8D+00, 30.6D+00, 30.4D+00, 30.2D+00, 30.0D+00 ]
+      5.000000000E+00_DP, -6.888880126E-01_DP,   8.609248635E+00_DP, -1.083092311E+00_DP, &
+      1.674923836E+01_DP, -2.072210073E+00_DP,   3.351098494E+01_DP, -4.479263780E+00_DP, &
+      6.601103894E+01_DP, -8.909222513E+00_DP,   8.579580988E+01_DP, -1.098742758E+01_DP, &
+      1.106536877E+02_DP, -1.402469444E+01_DP,   1.421228220E+02_DP, -1.742236546E+01_DP, &
+      1.803383474E+02_DP, -2.086465851E+01_DP,   2.017054332E+02_DP, -1.990879843E+01_DP, &
+      2.051622475E+02_DP, -1.324886978E+01_DP,   2.059197452E+02_DP, 1.051529813E+01_DP, &
+      1.972191446E+02_DP, 9.320592785E+01_DP,    1.556894846E+02_DP, 3.801682434E+02_DP, &
+      1.818989404E-12_DP, 1.379853993E+03_DP ], [2,15] )
+    REAL(DP) :: xpts(15) = [ 60.0_DP, 55.0_DP, 50.0_DP, 45.0_DP, &
+      40.0_DP, 38.0_DP, 36.0_DP, 34.0_DP, 32.0_DP, 31.0_DP, &
+      30.8_DP, 30.6_DP, 30.4_DP, 30.2_DP, 30.0_DP ]
     !* FIRST EXECUTABLE STATEMENT  QXDBVS
     IF( Kprint>=2 ) THEN
       WRITE (Lun,99001)
@@ -372,24 +372,24 @@ CONTAINS
       itmp(i) = 0
     END DO
     !
-    tol = 1.0D-03
-    xsave_com = 0.0D+00
+    tol = 1.E-03_DP
+    xsave_com = 0._DP
     nrowy = 4
     ncomp = 2
     nxpts = 15
-    a(1,1) = 1.0D+00
-    a(1,2) = 0.0D+00
+    a(1,1) = 1._DP
+    a(1,2) = 0._DP
     nrowa = 2
-    alpha(1) = 5.0D+00
+    alpha(1) = 5._DP
     nic = 1
-    b(1,1) = 1.0D+00
-    b(1,2) = 0.0D+00
+    b(1,1) = 1._DP
+    b(1,2) = 0._DP
     nrowb = 2
-    beta(1) = 0.0D+00
+    beta(1) = 0._DP
     nfc = 1
     igofx = 1
-    re = 1.0D-05
-    ae = 1.0D-05
+    re = 1.0E-05_DP
+    ae = 1.0E-05_DP
     ndw = 1000
     ndiw = 100
     neqivp = 0
@@ -485,8 +485,8 @@ CONTAINS
           !
           kount = 3
           igofx = 1
-          re = -1.0D+00
-          ae = -2.0D+00
+          re = -1._DP
+          ae = -2._DP
         CASE (3)
           !
           WRITE (Lun,99013) iflag
@@ -496,8 +496,8 @@ CONTAINS
           !-----NROWA LESS THAN NIC
           !
           kount = 4
-          re = 1.0D-05
-          ae = 1.0D-05
+          re = 1.0E-05_DP
+          ae = 1.0E-05_DP
           nrowa = 0
           EXIT
         CASE (4)
@@ -645,28 +645,28 @@ CONTAINS
     n = 4
     lrw = 61
     liw = 34
-    t = 0.0D0
-    tout = 8.0D0*ATAN(1.0D0)
-    u(1) = 1.0D0
-    u(2) = 0.0D0
-    u(3) = 0.0D0
-    u(4) = 1.0D0
+    t = 0._DP
+    tout = 8._DP*ATAN(1._DP)
+    u(1) = 1._DP
+    u(2) = 0._DP
+    u(3) = 0._DP
+    u(4) = 1._DP
     Ipass = 1
     nstep = 0
-    reltol = MAX(SQRT(D1MACH(4)),1.D-10)
-    relerr = MAX(.1D0*reltol,1.D-12)
-    abserr = relerr**1.5D0
+    reltol = MAX(SQRT(D1MACH(4)),1.E-10_DP)
+    relerr = MAX(.1_DP*reltol,1.E-12_DP)
+    abserr = relerr**1.5_DP
     info(1) = 0
     info(2) = 0
     info(3) = 1
     info(4) = 0
-    IF( Kprint>2 ) WRITE (Lun,99002) relerr, abserr, t, (1.0D0)
+    IF( Kprint>2 ) WRITE (Lun,99002) relerr, abserr, t, (1._DP)
     99002 FORMAT (/' RELERR = ',D16.8,'   ABSERR =',D16.8/12X,'T',19X,'R'/2D20.8)
     DO
       !
       CALL DDERKF(DFDEQC,n,t,u,tout,info,relerr,abserr,idid,rwork,lrw,iwork,liw)
       r = SQRT(u(1)*u(1)+u(2)*u(2))
-      IF( ABS(r-1.0D0)>reltol ) Ipass = 0
+      IF( ABS(r-1._DP)>reltol ) Ipass = 0
       IF( Kprint>2 ) WRITE (Lun,99003) t, r
       99003 FORMAT (2D20.8)
       info(1) = 1

@@ -60,7 +60,7 @@ SUBROUTINE DPLPUP(DUSRMT,Mrelas,Nvars,Dattrv,Bl,Bu,Ind,Info,Amat,&
   CHARACTER(16) :: xern3, xern4
   !
   !* FIRST EXECUTABLE STATEMENT  DPLPUP
-  zero = 0.D0
+  zero = 0._DP
   !
   !     CHECK USER-SUPPLIED BOUNDS
   !

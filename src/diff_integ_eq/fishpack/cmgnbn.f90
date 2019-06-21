@@ -271,7 +271,7 @@ SUBROUTINE CMGNBN(Nperod,N,Mperod,M,A,B,C,Idimy,Y,Ierror,W)
     k = iwbc + i - 1
     W(k) = -C(i)
     k = iwbb + i - 1
-    W(k) = 2. - B(i)
+    W(k) = 2._SP - B(i)
     DO j = 1, N
       Y(i,j) = -Y(i,j)
     END DO
@@ -324,17 +324,17 @@ SUBROUTINE CMGNBN(Nperod,N,Mperod,M,A,B,C,Idimy,Y,Ierror,W)
       W(i) = Y(mhmi,j) - Y(mhpi,j)
       W(mhpi) = Y(mhmi,j) + Y(mhpi,j)
     END DO
-    W(mh) = 2.*Y(mh,j)
-    IF( modd/=1 ) W(M) = 2.*Y(M,j)
+    W(mh) = 2._SP*Y(mh,j)
+    IF( modd/=1 ) W(M) = 2._SP*Y(M,j)
     DO i = 1, M
       Y(i,j) = W(i)
     END DO
   END DO
   k = iwbc + mhm1 - 1
   i = iwba + mhm1
-  W(k) = (0.,0.)
-  W(i) = (0.,0.)
-  W(k+1) = 2.*W(k+1)
+  W(k) = (0._SP,0._SP)
+  W(i) = (0._SP,0._SP)
+  W(k+1) = 2._SP*W(k+1)
   IF( modd==2 ) THEN
     W(iwbb-1) = W(k+1)
   ELSE
@@ -365,11 +365,11 @@ SUBROUTINE CMGNBN(Nperod,N,Mperod,M,A,B,C,Idimy,Y,Ierror,W)
     DO i = 1, mhm1
       mhmi = mh - i
       mhpi = mh + i
-      W(mhmi) = .5*(Y(mhpi,j)+Y(i,j))
-      W(mhpi) = .5*(Y(mhpi,j)-Y(i,j))
+      W(mhmi) = 0.5_SP*(Y(mhpi,j)+Y(i,j))
+      W(mhpi) = 0.5_SP*(Y(mhpi,j)-Y(i,j))
     END DO
-    W(mh) = .5*Y(mh,j)
-    IF( modd/=1 ) W(M) = .5*Y(M,j)
+    W(mh) = 0.5_SP*Y(mh,j)
+    IF( modd/=1 ) W(M) = 0.5_SP*Y(M,j)
     DO i = 1, M
       Y(i,j) = W(i)
     END DO
@@ -377,5 +377,5 @@ SUBROUTINE CMGNBN(Nperod,N,Mperod,M,A,B,C,Idimy,Y,Ierror,W)
   !
   !     RETURN STORAGE REQUIREMENTS FOR W ARRAY.
   !
-  900  W(1) = CMPLX(REAL(ipstor+iwp-1),0.)
+  900  W(1) = CMPLX(REAL(ipstor+iwp-1,SP),0._SP,SP)
 END SUBROUTINE CMGNBN

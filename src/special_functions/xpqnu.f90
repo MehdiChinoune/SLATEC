@@ -47,15 +47,15 @@ SUBROUTINE XPQNU(Nu1,Nu2,Mu,Theta,Id,Pqa,Ipqa,Ierror)
   ipsix = 5*ipsik
   ipq = 0
   !        FIND NU IN INTERVAL [-.5,.5) IF ID=2  ( CALCULATION OF Q )
-  nu = MOD(Nu1,1.)
-  IF( nu>=.5 ) nu = nu - 1.
+  nu = MOD(Nu1,1._SP)
+  IF( nu>=.5_SP ) nu = nu - 1._SP
   !        FIND NU IN INTERVAL (-1.5,-.5] IF ID=1,3, OR 4  ( CALC. OF P )
-  IF( Id/=2 .AND. nu>-.5 ) nu = nu - 1.
+  IF( Id/=2 .AND. nu>-.5_SP ) nu = nu - 1._SP
   !        CALCULATE MU FACTORIAL
   k = Mu
   dmu = Mu
   IF( Mu>0 ) THEN
-    factmu = 1.
+    factmu = 1._SP
     if = 0
     DO i = 1, k
       factmu = factmu*i
@@ -63,7 +63,7 @@ SUBROUTINE XPQNU(Nu1,Nu2,Mu,Theta,Id,Pqa,Ipqa,Ierror)
     END DO
     IF( Ierror/=0 ) RETURN
   END IF
-  IF( k==0 ) factmu = 1.
+  IF( k==0 ) factmu = 1._SP
   IF( k==0 ) if = 0
   !
   !        X=COS(THETA)
@@ -71,13 +71,13 @@ SUBROUTINE XPQNU(Nu1,Nu2,Mu,Theta,Id,Pqa,Ipqa,Ierror)
   !        R=TAN(THETA/2)=SQRT((1-X)/(1+X)
   !
   x = COS(Theta)
-  y = SIN(Theta/2.)**2
-  r = TAN(Theta/2.)
+  y = SIN(Theta/2._SP)**2
+  r = TAN(Theta/2._SP)
   !
   !        USE ASCENDING SERIES TO CALCULATE TWO VALUES OF P OR Q
   !        FOR USE AS STARTING VALUES IN RECURRENCE RELATION.
   !
-  pq2 = 0.0
+  pq2 = 0._SP
   DO j = 1, 2
     ipq1 = 0
     IF( Id==2 ) THEN
@@ -85,8 +85,8 @@ SUBROUTINE XPQNU(Nu1,Nu2,Mu,Theta,Id,Pqa,Ipqa,Ierror)
       !        Z=-LN(R)=.5*LN((1+X)/(1-X))
       !
       z = -LOG(r)
-      w = XPSI(nu+1.,ipsik,ipsix)
-      xs = 1./SIN(Theta)
+      w = XPSI(nu+1._SP,ipsik,ipsix)
+      xs = 1._SP/SIN(Theta)
       !
       !        SERIES SUMMATION FOR Q ( ID = 2 )
       !        Q(0,NU,X)=SUM(FROM 0 TO J0-1)((.5*LN((1+X)/(1-X))
@@ -102,17 +102,17 @@ SUBROUTINE XPQNU(Nu1,Nu2,Mu,Theta,Id,Pqa,Ipqa,Ierror)
       pq = 0.
       ipq = 0
       ia = 0
-      a = 1.
+      a = 1._SP
       DO k = 1, j0
         flok = k
         IF( k/=1 ) THEN
-          a = a*y*(flok-2.-nu)*(flok-1.+nu)/((flok-1.+dmu)*(flok-1.))
+          a = a*y*(flok-2._SP-nu)*(flok-1._SP+nu)/((flok-1._SP+dmu)*(flok-1._SP))
           CALL XADJ(a,ia,Ierror)
           IF( Ierror/=0 ) RETURN
         END IF
         IF( Mu>=1 ) THEN
-          x1 = (nu*(nu+1.)*(z-w+XPSI(flok,ipsik,ipsix))+(nu-flok+1.)&
-            *(nu+flok)/(2.*flok))*a
+          x1 = (nu*(nu+1._SP)*(z-w+XPSI(flok,ipsik,ipsix))+(nu-flok+1._SP)&
+            *(nu+flok)/(2._SP*flok))*a
           ix1 = ia
           CALL XADD(pq,ipq,x1,ix1,pq,ipq,Ierror)
           IF( Ierror/=0 ) RETURN
@@ -136,12 +136,12 @@ SUBROUTINE XPQNU(Nu1,Nu2,Mu,Theta,Id,Pqa,Ipqa,Ierror)
       !                *SUM(FROM 0 TO J0-1)A(J)*(.5-.5*X)**J
       !
       ipq = 0
-      pq = 1.
-      a = 1.
+      pq = 1._SP
+      a = 1._SP
       ia = 0
       DO i = 2, j0
         di = i
-        a = a*y*(di-2.-nu)*(di-1.+nu)/((di-1.+dmu)*(di-1.))
+        a = a*y*(di-2._SP-nu)*(di-1._SP+nu)/((di-1._SP+dmu)*(di-1._SP))
         CALL XADJ(a,ia,Ierror)
         IF( Ierror/=0 ) RETURN
         IF( a==0. ) EXIT
@@ -165,22 +165,22 @@ SUBROUTINE XPQNU(Nu1,Nu2,Mu,Theta,Id,Pqa,Ipqa,Ierror)
     END IF
     IF( j==1 ) pq2 = pq
     IF( j==1 ) ipq2 = ipq
-    nu = nu + 1.
+    nu = nu + 1._SP
   END DO
   k = 0
   IF( nu-1.5>=Nu1 ) THEN
     k = k + 1
     Pqa(k) = pq2
     Ipqa(k) = ipq2
-    IF( nu>Nu2+.5 ) RETURN
+    IF( nu>Nu2+.5_SP ) RETURN
   END IF
   100  pq1 = pq
   ipq1 = ipq
-  IF( nu>=Nu1+.5 ) THEN
+  IF( nu>=Nu1+.5_SP ) THEN
     k = k + 1
     Pqa(k) = pq
     Ipqa(k) = ipq
-    IF( nu>Nu2+.5 ) RETURN
+    IF( nu>Nu2+.5_SP ) RETURN
   END IF
   !
   !        FORWARD NU-WISE RECURRENCE FOR F(MU,NU,X) FOR FIXED MU
@@ -190,13 +190,13 @@ SUBROUTINE XPQNU(Nu1,Nu2,Mu,Theta,Id,Pqa,Ipqa,Ierror)
   !        BY -MU THEN F(MU,NU,X) MAY BE Q(MU,NU,X).
   !        NOTE, IN THIS LOOP, NU=NU+1
   !
-  x1 = (2.*nu-1.)/(nu+dmu)*x*pq1
-  x2 = (nu-1.-dmu)/(nu+dmu)*pq2
+  x1 = (2._SP*nu-1._SP)/(nu+dmu)*x*pq1
+  x2 = (nu-1._SP-dmu)/(nu+dmu)*pq2
   CALL XADD(x1,ipq1,-x2,ipq2,pq,ipq,Ierror)
   IF( Ierror/=0 ) RETURN
   CALL XADJ(pq,ipq,Ierror)
   IF( Ierror/=0 ) RETURN
-  nu = nu + 1.
+  nu = nu + 1._SP
   pq2 = pq1
   ipq2 = ipq1
   GOTO 100

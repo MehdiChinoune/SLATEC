@@ -60,11 +60,11 @@ SUBROUTINE COSQI(N,Wsave)
   INTEGER :: k
   REAL(SP) :: dt, fk, pih
   !* FIRST EXECUTABLE STATEMENT  COSQI
-  pih = 2.*ATAN(1.)
+  pih = 2._SP*ATAN(1._SP)
   dt = pih/N
-  fk = 0.
+  fk = 0._SP
   DO k = 1, N
-    fk = fk + 1.
+    fk = fk + 1._SP
     Wsave(k) = COS(fk*dt)
   END DO
   CALL RFFTI(N,Wsave(N+1))

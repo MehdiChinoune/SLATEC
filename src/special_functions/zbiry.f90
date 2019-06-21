@@ -146,10 +146,10 @@ SUBROUTINE ZBIRY(Zr,Zi,Id,Kode,Bir,Bii,Ierr)
     fnu, fnul, rl, r1m5, sfac, sti, str, s1i, s1r, s2i, s2r, tol, trm1i, &
     trm1r, trm2i, trm2r, Zi, Zr, ztai, ztar, z3i, z3r
   INTEGER :: Id, Ierr, k, Kode, k1, k2, nz
-  REAL(DP), PARAMETER :: tth = 6.66666666666666667D-01, c1 = 6.14926627446000736D-01, &
-    c2 = 4.48288357353826359D-01, coef = 5.77350269189625765D-01, &
-    pi = 3.14159265358979324D+00
-  REAL(DP), PARAMETER :: coner = 1.0D0, conei = 0.0D0
+  REAL(DP), PARAMETER :: tth = 6.66666666666666667E-01_DP, c1 = 6.14926627446000736E-01_DP, &
+    c2 = 4.48288357353826359E-01_DP, coef = 5.77350269189625765E-01_DP, &
+    pi = 3.14159265358979324_DP
+  REAL(DP), PARAMETER :: coner = 1._DP, conei = 0._DP
   !* FIRST EXECUTABLE STATEMENT  ZBIRY
   Ierr = 0
   nz = 0
@@ -157,13 +157,13 @@ SUBROUTINE ZBIRY(Zr,Zi,Id,Kode,Bir,Bii,Ierr)
   IF( Kode<1 .OR. Kode>2 ) Ierr = 1
   IF( Ierr/=0 ) RETURN
   az = ZABS(Zr,Zi)
-  tol = MAX(D1MACH(4),1.0D-18)
+  tol = MAX(D1MACH(4),1.E-18_DP)
   fid = Id
-  IF( az>1.0E0 ) THEN
+  IF( az>1._SP ) THEN
     !-----------------------------------------------------------------------
     !     CASE FOR ABS(Z)>1.0
     !-----------------------------------------------------------------------
-    fnu = (1.0D0+fid)/3.0D0
+    fnu = (1._DP+fid)/3._DP
     !-----------------------------------------------------------------------
     !     SET PARAMETERS RELATED TO MACHINE CONSTANTS.
     !     TOL IS THE APPROXIMATE UNIT ROUNDOFF LIMITED TO 1.0E-18.
@@ -179,19 +179,19 @@ SUBROUTINE ZBIRY(Zr,Zi,Id,Kode,Bir,Bii,Ierr)
     k2 = I1MACH(16)
     r1m5 = D1MACH(5)
     k = MIN(ABS(k1),ABS(k2))
-    elim = 2.303D0*(k*r1m5-3.0D0)
+    elim = 2.303_DP*(k*r1m5-3._DP)
     k1 = I1MACH(14) - 1
     aa = r1m5*k1
-    dig = MIN(aa,18.0D0)
-    aa = aa*2.303D0
-    alim = elim + MAX(-aa,-41.45D0)
-    rl = 1.2D0*dig + 3.0D0
-    fnul = 10.0D0 + 6.0D0*(dig-3.0D0)
+    dig = MIN(aa,18._DP)
+    aa = aa*2.303_DP
+    alim = elim + MAX(-aa,-41.45_DP)
+    rl = 1.2_DP*dig + 3._DP
+    fnul = 10._DP + 6._DP*(dig-3._DP)
     !-----------------------------------------------------------------------
     !     TEST FOR RANGE
     !-----------------------------------------------------------------------
-    aa = 0.5D0/tol
-    bb = I1MACH(9)*0.5D0
+    aa = 0.5_DP/tol
+    bb = I1MACH(9)*0.5_DP
     aa = MIN(aa,bb)
     aa = aa**tth
     IF( az>aa ) THEN
@@ -207,16 +207,16 @@ SUBROUTINE ZBIRY(Zr,Zi,Id,Kode,Bir,Bii,Ierr)
       !-----------------------------------------------------------------------
       !     RE(ZTA)<=0 WHEN RE(Z)<0, ESPECIALLY WHEN IM(Z) IS SMALL
       !-----------------------------------------------------------------------
-      sfac = 1.0D0
+      sfac = 1._DP
       ak = ztai
-      IF( Zr<0.0D0 ) THEN
+      IF( Zr<0._DP ) THEN
         bk = ztar
         ck = -ABS(bk)
         ztar = ck
         ztai = ak
       END IF
-      IF( Zi==0.0D0 .AND. Zr<=0.0D0 ) THEN
-        ztar = 0.0D0
+      IF( Zi==0._DP .AND. Zr<=0._DP ) THEN
+        ztar = 0._DP
         ztai = ak
       END IF
       aa = ztar
@@ -226,15 +226,15 @@ SUBROUTINE ZBIRY(Zr,Zi,Id,Kode,Bir,Bii,Ierr)
         !-----------------------------------------------------------------------
         bb = ABS(aa)
         IF( bb>=alim ) THEN
-          bb = bb + 0.25D0*LOG(az)
+          bb = bb + 0.25_DP*LOG(az)
           sfac = tol
           IF( bb>elim ) GOTO 50
         END IF
       END IF
-      fmr = 0.0D0
-      IF( aa<0.0D0 .OR. Zr<=0.0D0 ) THEN
+      fmr = 0._DP
+      IF( aa<0._DP .OR. Zr<=0._DP ) THEN
         fmr = pi
-        IF( Zi<0.0D0 ) fmr = -pi
+        IF( Zi<0._DP ) fmr = -pi
         ztar = -ztar
         ztai = -ztai
       END IF
@@ -250,7 +250,7 @@ SUBROUTINE ZBIRY(Zr,Zi,Id,Kode,Bir,Bii,Ierr)
         sti = SIN(aa)
         s1r = (str*cyr(1)-sti*cyi(1))*z3r
         s1i = (str*cyi(1)+sti*cyr(1))*z3r
-        fnu = (2.0D0-fid)/3.0D0
+        fnu = (2._DP-fid)/3._DP
         CALL ZBINU(ztar,ztai,fnu,Kode,2,cyr,cyi,nz,rl,fnul,tol,elim,alim)
         cyr(1) = cyr(1)*z3r
         cyi(1) = cyi(1)*z3r
@@ -262,7 +262,7 @@ SUBROUTINE ZBIRY(Zr,Zi,Id,Kode,Bir,Bii,Ierr)
         CALL ZDIV(cyr(1),cyi(1),ztar,ztai,str,sti)
         s2r = (fnu+fnu)*str + cyr(2)
         s2i = (fnu+fnu)*sti + cyi(2)
-        aa = fmr*(fnu-1.0D0)
+        aa = fmr*(fnu-1._DP)
         str = COS(aa)
         sti = SIN(aa)
         s1r = coef*(s1r+s2r*str-s2i*sti)
@@ -298,9 +298,9 @@ SUBROUTINE ZBIRY(Zr,Zi,Id,Kode,Bir,Bii,Ierr)
     s2r = coner
     s2i = conei
     IF( az<tol ) THEN
-      aa = c1*(1.0D0-fid) + fid*c2
+      aa = c1*(1._DP-fid) + fid*c2
       Bir = aa
-      Bii = 0.0D0
+      Bii = 0._DP
       RETURN
     ELSE
       aa = az*az
@@ -309,21 +309,21 @@ SUBROUTINE ZBIRY(Zr,Zi,Id,Kode,Bir,Bii,Ierr)
         trm1i = conei
         trm2r = coner
         trm2i = conei
-        atrm = 1.0D0
+        atrm = 1._DP
         str = Zr*Zr - Zi*Zi
         sti = Zr*Zi + Zi*Zr
         z3r = str*Zr - sti*Zi
         z3i = str*Zi + sti*Zr
         az3 = az*aa
-        ak = 2.0D0 + fid
-        bk = 3.0D0 - fid - fid
-        ck = 4.0D0 - fid
-        dk = 3.0D0 + fid + fid
+        ak = 2._DP + fid
+        bk = 3._DP - fid - fid
+        ck = 4._DP - fid
+        dk = 3._DP + fid + fid
         d1 = ak*dk
         d2 = bk*ck
         ad = MIN(d1,d2)
-        ak = 24.0D0 + 9.0D0*fid
-        bk = 30.0D0 - 9.0D0*fid
+        ak = 24._DP + 9._DP*fid
+        bk = 30._DP - 9._DP*fid
         DO k = 1, 25
           str = (trm1r*z3r-trm1i*z3i)/d1
           trm1i = (trm1r*z3i+trm1i*z3r)/d1
@@ -340,15 +340,15 @@ SUBROUTINE ZBIRY(Zr,Zi,Id,Kode,Bir,Bii,Ierr)
           d2 = d2 + bk
           ad = MIN(d1,d2)
           IF( atrm<tol*ad ) EXIT
-          ak = ak + 18.0D0
-          bk = bk + 18.0D0
+          ak = ak + 18._DP
+          bk = bk + 18._DP
         END DO
       END IF
       IF( Id==1 ) THEN
         Bir = s2r*c2
         Bii = s2i*c2
         IF( az>tol ) THEN
-          cc = c1/(1.0D0+fid)
+          cc = c1/(1._DP+fid)
           str = s1r*Zr - s1i*Zi
           sti = s1r*Zi + s1i*Zr
           Bir = Bir + cc*(str*Zr-sti*Zi)

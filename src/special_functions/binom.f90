@@ -33,8 +33,8 @@ REAL(SP) FUNCTION BINOM(N,M)
   INTEGER :: M, N
   INTEGER :: i, k
   REAL(SP) :: corr, xk, xn, xnk
-  REAL(SP), PARAMETER :: bilnmx = LOG(R1MACH(2)), fintmx = 0.9/R1MACH(3)
-  REAL(SP), PARAMETER :: sq2pil = 0.91893853320467274E0
+  REAL(SP), PARAMETER :: bilnmx = LOG(R1MACH(2)), fintmx = 0.9_SP/R1MACH(3)
+  REAL(SP), PARAMETER :: sq2pil = 0.91893853320467274_SP
   !* FIRST EXECUTABLE STATEMENT  BINOM
   !
   IF( N<0 .OR. M<0 ) CALL XERMSG('BINOM','N OR M LT ZERO',1,2)
@@ -44,14 +44,14 @@ REAL(SP) FUNCTION BINOM(N,M)
   IF( k<=20 ) THEN
     IF( k*LOG(AMAX0(N,1))<=bilnmx ) THEN
       !
-      BINOM = 1.
+      BINOM = 1._SP
       IF( k==0 ) RETURN
       !
       DO i = 1, k
-        BINOM = BINOM*REAL(N-i+1)/i
+        BINOM = BINOM*REAL(N-i+1,SP)/i
       END DO
       !
-      IF( BINOM<fintmx ) BINOM = AINT(BINOM+0.5)
+      IF( BINOM<fintmx ) BINOM = AINT(BINOM+0.5_SP)
       RETURN
     END IF
   END IF
@@ -65,13 +65,13 @@ REAL(SP) FUNCTION BINOM(N,M)
   xnk = N - k + 1
   !
   corr = R9LGMC(xn) - R9LGMC(xk) - R9LGMC(xnk)
-  BINOM = xk*LOG(xnk/xk) - xn*ALNREL(-(xk-1.)/xn) - 0.5*LOG(xn*xnk/xk)&
-    + 1.0 - sq2pil + corr
+  BINOM = xk*LOG(xnk/xk) - xn*ALNREL(-(xk-1._SP)/xn) - 0.5_SP*LOG(xn*xnk/xk)&
+    + 1._SP - sq2pil + corr
   !
   IF( BINOM>bilnmx ) CALL XERMSG('BINOM',&
     'RESULT OVERFLOWS BECAUSE N AND/OR M TOO BIG',3,2)
   !
   BINOM = EXP(BINOM)
-  IF( BINOM<fintmx ) BINOM = AINT(BINOM+0.5)
+  IF( BINOM<fintmx ) BINOM = AINT(BINOM+0.5_SP)
   !
 END FUNCTION BINOM

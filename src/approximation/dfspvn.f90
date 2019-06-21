@@ -30,11 +30,11 @@ SUBROUTINE DFSPVN(T,Jhigh,Indexx,X,Ileft,Vnikx)
   REAL(DP) :: vm, vmprev
   INTEGER :: imjp1, ipj, jp1, jp1ml, l
   INTEGER, SAVE :: j = 1
-  REAL(DP), SAVE :: deltam(20) = 0.0D0, deltap(20) = 0.0D0
+  REAL(DP), SAVE :: deltam(20) = 0._DP, deltap(20) = 0._DP
   !* FIRST EXECUTABLE STATEMENT  DFSPVN
   IF( Indexx/=2 ) THEN
     j = 1
-    Vnikx(1) = 1.D0
+    Vnikx(1) = 1._DP
     IF( j>=Jhigh ) RETURN
   END IF
   DO
@@ -43,7 +43,7 @@ SUBROUTINE DFSPVN(T,Jhigh,Indexx,X,Ileft,Vnikx)
     deltap(j) = T(ipj) - X
     imjp1 = Ileft - j + 1
     deltam(j) = X - T(imjp1)
-    vmprev = 0.D0
+    vmprev = 0._DP
     jp1 = j + 1
     DO l = 1, j
       jp1ml = jp1 - l

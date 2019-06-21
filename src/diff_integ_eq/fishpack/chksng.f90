@@ -52,10 +52,10 @@ SUBROUTINE CHKSNG(Mbdcnd,Nbdcnd,Alpha,Beta,Gama,Xnu,COFX,COFY,Singlr)
   !     CHECK THAT MIXED CONDITIONS ARE PURE NEUMAN
   !
   IF( Mbdcnd==3 ) THEN
-    IF( Alpha/=0.0 .OR. Beta/=0.0 ) RETURN
+    IF( Alpha/=0._SP .OR. Beta/=0._SP ) RETURN
   END IF
   IF( Nbdcnd==3 ) THEN
-    IF( Gama/=0.0 .OR. Xnu/=0.0 ) RETURN
+    IF( Gama/=0._SP .OR. Xnu/=0._SP ) RETURN
   END IF
   !
   !     CHECK THAT NON-DERIVATIVE COEFFICIENT FUNCTIONS
@@ -64,12 +64,12 @@ SUBROUTINE CHKSNG(Mbdcnd,Nbdcnd,Alpha,Beta,Gama,Xnu,COFX,COFY,Singlr)
   DO i = is_com, ms_com
     xi = ait_com + (i-1)*dlx_com
     CALL COFX(xi,ai,bi,ci)
-    IF( ci/=0.0 ) RETURN
+    IF( ci/=0._SP ) RETURN
   END DO
   DO j = js_com, ns_com
     yj = cit_com + (j-1)*dly_com
     CALL COFY(yj,dj,ej,fj)
-    IF( fj/=0.0 ) RETURN
+    IF( fj/=0._SP ) RETURN
   END DO
   !
   !     THE OPERATOR MUST BE SINGULAR IF THIS POINT IS REACHED

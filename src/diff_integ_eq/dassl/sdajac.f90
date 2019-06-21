@@ -108,7 +108,7 @@ SUBROUTINE SDAJAC(Neq,X,Y,Yprime,Delta,Cj,H,Ier,Wt,E,Wm,Iwm,RES,Ires,&
         Yprime(i) = Yprime(i) + Cj*del
         CALL RES(X,Y,Yprime,E,Ires)
         IF( Ires<0 ) RETURN
-        delinv = 1.0E0/del
+        delinv = 1._SP/del
         DO l = 1, Neq
           Wm(nrow+l) = (E(l)-Delta(l))*delinv
         END DO
@@ -127,7 +127,7 @@ SUBROUTINE SDAJAC(Neq,X,Y,Yprime,Delta,Cj,H,Ier,Wt,E,Wm,Iwm,RES,Ires,&
       !     BANDED USER-SUPPLIED MATRIX
       meband = 2*Iwm(LML) + Iwm(LMU) + 1
       ALLOCATE( pd(meband,Neq) )
-      pd = 0.E0
+      pd = 0._SP
       CALL JAC(X,Y,Yprime,Pd,Cj)
       !
       !
@@ -173,7 +173,7 @@ SUBROUTINE SDAJAC(Neq,X,Y,Yprime,Delta,Cj,H,Ier,Wt,E,Wm,Iwm,RES,Ires,&
           del = squr*MAX(ABS(Y(n)),ABS(H*Yprime(n)),ABS(Wt(n)))
           del = SIGN(del,H*Yprime(n))
           del = (Y(n)+del) - Y(n)
-          delinv = 1.0E0/del
+          delinv = 1._SP/del
           i1 = MAX(1,(n-Iwm(LMU)))
           i2 = MIN(Neq,(n+Iwm(LML)))
           ii = n*meb1 - Iwm(LML) + npdm1
@@ -190,7 +190,7 @@ SUBROUTINE SDAJAC(Neq,X,Y,Yprime,Delta,Cj,H,Ier,Wt,E,Wm,Iwm,RES,Ires,&
       !
       !     DENSE USER-SUPPLIED MATRIX
       ALLOCATE( pd(Neq,Neq) )
-      Pd = 0.E0
+      Pd = 0._SP
       CALL JAC(X,Y,Yprime,pd,Cj)
       DO j = 1, Neq
         DO i = 1, Neq

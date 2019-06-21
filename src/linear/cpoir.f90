@@ -175,7 +175,7 @@ SUBROUTINE CPOIR(A,Lda,N,V,Itask,Ind,Work)
   !     FORM NORM OF X0
   !
   xnorm = SCASUM(N,V(1),1)
-  IF( xnorm==0.0 ) THEN
+  IF( xnorm==0._SP ) THEN
     Ind = 75
     RETURN
   END IF

@@ -46,7 +46,7 @@ SUBROUTINE SPINCW(Mrelas,Nvars,Lmx,Lbm,Npp,Jstrt,Imat,Ibrc,Ipr,Iwr,&
   LOGICAL :: pagepl, trans
   !* FIRST EXECUTABLE STATEMENT  SPINCW
   lpg = Lmx - (Nvars+4)
-  zero = 0.
+  zero = 0._SP
   one = 1.
   !
   !     FORM REDUCED COSTS, RZ(*), AND STEEPEST EDGE WEIGHTS, RG(*).

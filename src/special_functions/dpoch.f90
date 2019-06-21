@@ -37,31 +37,31 @@ REAL(DP) FUNCTION DPOCH(A,X)
   USE service, ONLY : XERMSG
   INTEGER :: i, ia, n
   REAL(DP) :: A, X, absa, absax, alnga, alngax, ax, b, sgnga, sgngax
-  REAL(DP), PARAMETER :: pi = 3.141592653589793238462643383279503D0
+  REAL(DP), PARAMETER :: pi = 3.141592653589793238462643383279503_DP
   !* FIRST EXECUTABLE STATEMENT  DPOCH
   ax = A + X
-  IF( ax<=0.0D0 ) THEN
+  IF( ax<=0._DP ) THEN
     IF( AINT(ax)==ax ) THEN
       !
-      IF( A>0.0D0 .OR. AINT(A)/=A ) CALL XERMSG('DPOCH',&
+      IF( A>0._DP .OR. AINT(A)/=A ) CALL XERMSG('DPOCH',&
         'A+X IS NON-POSITIVE INTEGER BUT A IS NOT',2,2)
       !
       ! WE KNOW HERE THAT BOTH A+X AND A ARE NON-POSITIVE INTEGERS.
       !
-      DPOCH = 1.0D0
-      IF( X==0.D0 ) RETURN
+      DPOCH = 1._DP
+      IF( X==0._DP ) RETURN
       !
       n = INT( X )
-      IF( MIN(A+X,A)<(-20.0D0) ) THEN
+      IF( MIN(A+X,A)<(-20._DP) ) THEN
         !
-        DPOCH = (-1.0D0)&
-          **n*EXP((A-0.5D0)*DLNREL(X/(A-1.0D0))+X*LOG(-A+1.0D0-X)&
-          -X+D9LGMC(-A+1.0D0)-D9LGMC(-A-X+1.D0))
+        DPOCH = (-1._DP)&
+          **n*EXP((A-0.5_DP)*DLNREL(X/(A-1._DP))+X*LOG(-A+1._DP-X)&
+          -X+D9LGMC(-A+1._DP)-D9LGMC(-A-X+1._DP))
         RETURN
       ELSE
         !
         ia = INT( A )
-        DPOCH = (-1.0D0)**n*DFAC(-ia)/DFAC(-ia-n)
+        DPOCH = (-1._DP)**n*DFAC(-ia)/DFAC(-ia-n)
         RETURN
       END IF
     END IF
@@ -69,19 +69,19 @@ REAL(DP) FUNCTION DPOCH(A,X)
   !
   ! A+X IS NOT ZERO OR A NEGATIVE INTEGER.
   !
-  DPOCH = 0.0D0
-  IF( A<=0.0D0 .AND. AINT(A)==A ) RETURN
+  DPOCH = 0._DP
+  IF( A<=0._DP .AND. AINT(A)==A ) RETURN
   !
   n = INT( ABS(X) )
   IF( REAL( n, DP )/=X .OR. n>20 ) THEN
     !
     absax = ABS(A+X)
     absa = ABS(A)
-    IF( MAX(absax,absa)<=20.0D0 ) THEN
+    IF( MAX(absax,absa)<=20._DP ) THEN
       DPOCH = GAMMA(A+X)*DGAMR(A)
       RETURN
       !
-    ELSEIF( ABS(X)>0.5D0*absa ) THEN
+    ELSEIF( ABS(X)>0.5_DP*absa ) THEN
       !
       CALL DLGAMS(A+X,alngax,sgngax)
       CALL DLGAMS(A,alnga,sgnga)
@@ -92,7 +92,7 @@ REAL(DP) FUNCTION DPOCH(A,X)
     !
     ! X IS A SMALL NON-POSITIVE INTEGER, PRESUMMABLY A COMMON CASE.
     !
-    DPOCH = 1.0D0
+    DPOCH = 1._DP
     IF( n==0 ) RETURN
     DO i = 1, n
       DPOCH = DPOCH*(A+i-1)
@@ -106,9 +106,9 @@ REAL(DP) FUNCTION DPOCH(A,X)
   ! SIN(PI*A)/SIN(PI*(A+X))
   !
   b = A
-  IF( b<0.0D0 ) b = -A - X + 1.0D0
-  DPOCH = EXP((b-0.5D0)*DLNREL(X/b)+X*LOG(b+X)-X+D9LGMC(b+X)-D9LGMC(b))
-  IF( A<0.0D0 .AND. DPOCH/=0.0D0 )&
+  IF( b<0._DP ) b = -A - X + 1._DP
+  DPOCH = EXP((b-0.5_DP)*DLNREL(X/b)+X*LOG(b+X)-X+D9LGMC(b+X)-D9LGMC(b))
+  IF( A<0._DP .AND. DPOCH/=0._DP )&
     DPOCH = DPOCH/(COS(pi*X)+DCOT(pi*A)*SIN(pi*X))
   RETURN
 END FUNCTION DPOCH

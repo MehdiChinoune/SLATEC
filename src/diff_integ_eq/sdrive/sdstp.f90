@@ -106,13 +106,13 @@ SUBROUTINE SDSTP(Eps,F,FA,Hmax,Impl,Ierror,JACOBN,Matdim,Maxord,Mint,&
     rh2, rh3, told, y0nrm
   LOGICAL :: evalfa, evaljc, switch
   INTEGER, PARAMETER :: MXFAIL = 3, MXITER = 3, MXTRY = 50
-  REAL(SP), PARAMETER :: BIAS1 = 1.3E0, BIAS2 = 1.2E0, BIAS3 = 1.4E0, RCTEST = 0.3E0, &
-    RMFAIL = 2.E0, RMNORM = 10.E0, TRSHLD = 1.E0
+  REAL(SP), PARAMETER :: BIAS1 = 1.3_SP, BIAS2 = 1.2_SP, BIAS3 = 1.4_SP, RCTEST = 0.3_SP, &
+    RMFAIL = 2._SP, RMNORM = 10._SP, TRSHLD = 1._SP
   INTEGER, PARAMETER :: NDJSTP=10
   LOGICAL, SAVE :: ier = .FALSE.
   !* FIRST EXECUTABLE STATEMENT  SDSTP
   nsv = N
-  bnd = 0.E0
+  bnd = 0._SP
   switch = .FALSE.
   ntry = 0
   told = T
@@ -122,7 +122,7 @@ SUBROUTINE SDSTP(Eps,F,FA,Hmax,Impl,Ierror,JACOBN,Matdim,Maxord,Mint,&
       N,Nde,Save1,T,Uround,USERS,Y,Ywt,H,Mntold,Mtrold,Nfe,Rc,Yh,A,&
       Convrg,El,Fac,ier,Ipvt,Nq,Nwait,rh,Rmax,Save2,Tq,Trend,Iswflg,Jstate)
     IF( N==0 ) GOTO 800
-    IF( H==0.E0 ) GOTO 500
+    IF( H==0._SP ) GOTO 500
     IF( ier ) GOTO 600
   END IF
   100  ntry = ntry + 1
@@ -134,7 +134,7 @@ SUBROUTINE SDSTP(Eps,F,FA,Hmax,Impl,Ierror,JACOBN,Matdim,Maxord,Mint,&
   ELSE
     T = T + H
     CALL SDPSC(1,N,Nq,Yh)
-    evaljc = (((ABS(Rc-1.E0)>RCTEST) .OR. (Nstep>=Jstepl+NDJSTP)) .AND. (Miter/=0))
+    evaljc = (((ABS(Rc-1._SP)>RCTEST) .OR. (Nstep>=Jstepl+NDJSTP)) .AND. (Miter/=0))
     evalfa = .NOT. evaljc
   END IF
   !
@@ -154,11 +154,11 @@ SUBROUTINE SDSTP(Eps,F,FA,Hmax,Impl,Ierror,JACOBN,Matdim,Maxord,Mint,&
     IF( N==0 ) GOTO 700
     IF( ier ) GOTO 300
     Convrg = .FALSE.
-    Rc = 1.E0
+    Rc = 1._SP
     Jstepl = Nstep
   END IF
   DO i = 1, N
-    Save1(i) = 0.E0
+    Save1(i) = 0._SP
   END DO
   DO
     !                      Up to MXITER corrector iterations are taken.
@@ -192,7 +192,7 @@ SUBROUTINE SDSTP(Eps,F,FA,Hmax,Impl,Ierror,JACOBN,Matdim,Maxord,Mint,&
           Dfdy(1,i) = Save1(i) - Dfdy(1,i)
         END DO
         numer = NORM2(Dfdy(1,1:N))
-        IF( El(1,Nq)*numer<=100.E0*Uround*y0nrm ) THEN
+        IF( El(1,Nq)*numer<=100._SP*Uround*y0nrm ) THEN
           IF( Rmax==RMFAIL ) THEN
             switch = .TRUE.
             GOTO 400
@@ -201,12 +201,12 @@ SUBROUTINE SDSTP(Eps,F,FA,Hmax,Impl,Ierror,JACOBN,Matdim,Maxord,Mint,&
         DO i = 1, N
           Dfdy(1,i) = Save1(i)
         END DO
-        IF( denom/=0.E0 ) bnd = MAX(bnd,numer/(denom*ABS(H)*El(1,Nq)))
+        IF( denom/=0._SP ) bnd = MAX(bnd,numer/(denom*ABS(H)*El(1,Nq)))
       END IF
     END IF
-    IF( iter>0 ) Trend = MAX(.9E0*Trend,d/d1)
+    IF( iter>0 ) Trend = MAX(.9_SP*Trend,d/d1)
     d1 = d
-    ctest = MIN(2.E0*Trend,1.E0)*d
+    ctest = MIN(2._SP*Trend,1._SP)*d
     IF( ctest<=Eps ) GOTO 400
     iter = iter + 1
     IF( iter<MXITER ) THEN
@@ -239,11 +239,11 @@ SUBROUTINE SDSTP(Eps,F,FA,Hmax,Impl,Ierror,JACOBN,Matdim,Maxord,Mint,&
   Nwait = Nq + 2
   IF( Jtask/=0 .AND. Jtask/=2 ) Rmax = RMFAIL
   IF( iter==0 ) THEN
-    rh = .3E0
+    rh = .3_SP
   ELSE
-    rh = .9E0*(Eps/ctest)**(.2E0)
+    rh = .9_SP*(Eps/ctest)**(.2_SP)
   END IF
-  IF( rh*H==0.E0 ) GOTO 500
+  IF( rh*H==0._SP ) GOTO 500
   CALL SDSCL(Hmax,N,Nq,Rmax,H,Rc,rh,Yh)
   GOTO 100
   !                          The corrector has converged.  CONVRG is set
@@ -260,7 +260,7 @@ SUBROUTINE SDSTP(Eps,F,FA,Hmax,Impl,Ierror,JACOBN,Matdim,Maxord,Mint,&
       Save2(i) = Save1(i)/MAX(ABS(Y(i)),Ywt(i))
     END DO
   END IF
-  etest = NORM2(Save2(1:Nde))/(Tq(2,Nq)*SQRT(REAL(Nde)))
+  etest = NORM2(Save2(1:Nde))/(Tq(2,Nq)*SQRT(REAL(Nde,SP)))
   !
   !                           The error test failed.  NFAIL keeps track of
   !                           multiple failures.  Restore T and the YH
@@ -273,7 +273,7 @@ SUBROUTINE SDSTP(Eps,F,FA,Hmax,Impl,Ierror,JACOBN,Matdim,Maxord,Mint,&
     nfail = nfail + 1
     IF( nfail<MXFAIL .OR. Nq==1 ) THEN
       IF( Jtask/=0 .AND. Jtask/=2 ) Rmax = RMFAIL
-      rh2 = 1.E0/(BIAS2*(etest/Eps)**(1.E0/(Nq+1)))
+      rh2 = 1._SP/(BIAS2*(etest/Eps)**(1._SP/(Nq+1)))
       IF( Nq>1 ) THEN
         IF( Ierror==1 .OR. Ierror==5 ) THEN
           DO i = 1, Nde
@@ -284,8 +284,8 @@ SUBROUTINE SDSTP(Eps,F,FA,Hmax,Impl,Ierror,JACOBN,Matdim,Maxord,Mint,&
             Save2(i) = Yh(i,Nq+1)/MAX(ABS(Y(i)),Ywt(i))
           END DO
         END IF
-        erdn = NORM2(Save2(1:Nde))/(Tq(1,Nq)*SQRT(REAL(Nde)))
-        rh1 = 1.E0/MAX(1.E0,BIAS1*(erdn/Eps)**(1.E0/Nq))
+        erdn = NORM2(Save2(1:Nde))/(Tq(1,Nq)*SQRT(REAL(Nde,SP)))
+        rh1 = 1._SP/MAX(1._SP,BIAS1*(erdn/Eps)**(1._SP/Nq))
         IF( rh2<rh1 ) THEN
           Nq = Nq - 1
           Rc = Rc*El(1,Nq)/El(1,Nq+1)
@@ -297,7 +297,7 @@ SUBROUTINE SDSTP(Eps,F,FA,Hmax,Impl,Ierror,JACOBN,Matdim,Maxord,Mint,&
         rh = rh2
       END IF
       Nwait = Nq + 2
-      IF( rh*H==0.E0 ) GOTO 500
+      IF( rh*H==0._SP ) GOTO 500
       CALL SDSCL(Hmax,N,Nq,Rmax,H,Rc,rh,Yh)
       GOTO 100
     END IF
@@ -317,7 +317,7 @@ SUBROUTINE SDSTP(Eps,F,FA,Hmax,Impl,Ierror,JACOBN,Matdim,Maxord,Mint,&
       Convrg,El,Fac,ier,Ipvt,Nq,Nwait,rh,Rmax,Save2,Tq,Trend,Iswflg,Jstate)
     Rmax = RMNORM
     IF( N==0 ) GOTO 800
-    IF( H==0.E0 ) GOTO 500
+    IF( H==0._SP ) GOTO 500
     IF( .NOT. (ier) ) GOTO 100
     GOTO 600
   END IF
@@ -338,27 +338,27 @@ SUBROUTINE SDSTP(Eps,F,FA,Hmax,Impl,Ierror,JACOBN,Matdim,Maxord,Mint,&
   !                                          If ISWFLG is 3, consider
   !                                          changing integration methods.
   IF( Iswflg==3 ) THEN
-    IF( bnd/=0.E0 ) THEN
+    IF( bnd/=0._SP ) THEN
       IF( Mint==1 .AND. Nq<=5 ) THEN
-        hn = ABS(H)/MAX(Uround,(etest/Eps)**(1.E0/(Nq+1)))
-        hn = MIN(hn,1.E0/(2.E0*El(1,Nq)*bnd))
-        hs = ABS(H)/MAX(Uround,(etest/(Eps*El(Nq+1,1)))**(1.E0/(Nq+1)))
-        IF( hs>1.2E0*hn ) THEN
+        hn = ABS(H)/MAX(Uround,(etest/Eps)**(1._SP/(Nq+1)))
+        hn = MIN(hn,1._SP/(2._SP*El(1,Nq)*bnd))
+        hs = ABS(H)/MAX(Uround,(etest/(Eps*El(Nq+1,1)))**(1._SP/(Nq+1)))
+        IF( hs>1.2_SP*hn ) THEN
           Mint = 2
           Mntold = Mint
           Miter = Mtrsv
           Mtrold = Miter
           Maxord = MIN(Mxrdsv,5)
-          Rc = 0.E0
+          Rc = 0._SP
           Rmax = RMNORM
-          Trend = 1.E0
+          Trend = 1._SP
           CALL SDCST(Maxord,Mint,Iswflg,El,Tq)
           Nwait = Nq + 2
         END IF
       ELSEIF( Mint==2 ) THEN
-        hs = ABS(H)/MAX(Uround,(etest/Eps)**(1.E0/(Nq+1)))
-        hn = ABS(H)/MAX(Uround,(etest*El(Nq+1,1)/Eps)**(1.E0/(Nq+1)))
-        hn = MIN(hn,1.E0/(2.E0*El(1,Nq)*bnd))
+        hs = ABS(H)/MAX(Uround,(etest/Eps)**(1._SP/(Nq+1)))
+        hn = ABS(H)/MAX(Uround,(etest*El(Nq+1,1)/Eps)**(1._SP/(Nq+1)))
+        hn = MIN(hn,1._SP/(2._SP*El(1,Nq)*bnd))
         IF( hn>=hs ) THEN
           Mint = 1
           Mntold = Mint
@@ -366,7 +366,7 @@ SUBROUTINE SDSTP(Eps,F,FA,Hmax,Impl,Ierror,JACOBN,Matdim,Maxord,Mint,&
           Mtrold = Miter
           Maxord = MIN(Mxrdsv,12)
           Rmax = RMNORM
-          Trend = 1.E0
+          Trend = 1._SP
           Convrg = .FALSE.
           CALL SDCST(Maxord,Mint,Iswflg,El,Tq)
           Nwait = Nq + 2
@@ -381,9 +381,9 @@ SUBROUTINE SDSTP(Eps,F,FA,Hmax,Impl,Ierror,JACOBN,Matdim,Maxord,Mint,&
     Mtrold = Miter
     Maxord = MIN(Mxrdsv,5)
     Nq = MIN(Nq,Maxord)
-    Rc = 0.E0
+    Rc = 0._SP
     Rmax = RMNORM
-    Trend = 1.E0
+    Trend = 1._SP
     CALL SDCST(Maxord,Mint,Iswflg,El,Tq)
     Nwait = Nq + 2
   END IF
@@ -393,7 +393,7 @@ SUBROUTINE SDSTP(Eps,F,FA,Hmax,Impl,Ierror,JACOBN,Matdim,Maxord,Mint,&
   !                           a possible order increase on the next step.
   !
   IF( Jtask==0 .OR. Jtask==2 ) THEN
-    rh = 1.E0/MAX(Uround,BIAS2*(etest/Eps)**(1.E0/(Nq+1)))
+    rh = 1._SP/MAX(Uround,BIAS2*(etest/Eps)**(1._SP/(Nq+1)))
     IF( rh>TRSHLD ) CALL SDSCL(Hmax,N,Nq,Rmax,H,Rc,rh,Yh)
   ELSEIF( Nwait>1 ) THEN
     Nwait = Nwait - 1
@@ -415,7 +415,7 @@ SUBROUTINE SDSTP(Eps,F,FA,Hmax,Impl,Ierror,JACOBN,Matdim,Maxord,Mint,&
     !             the YH array is rescaled.
   ELSE
     IF( Nq==1 ) THEN
-      rh1 = 0.E0
+      rh1 = 0._SP
     ELSE
       IF( Ierror==1 .OR. Ierror==5 ) THEN
         DO i = 1, Nde
@@ -426,12 +426,12 @@ SUBROUTINE SDSTP(Eps,F,FA,Hmax,Impl,Ierror,JACOBN,Matdim,Maxord,Mint,&
           Save2(i) = Yh(i,Nq+1)/MAX(ABS(Y(i)),Ywt(i))
         END DO
       END IF
-      erdn = NORM2(Save2(1:Nde))/(Tq(1,Nq)*SQRT(REAL(Nde)))
-      rh1 = 1.E0/MAX(Uround,BIAS1*(erdn/Eps)**(1.E0/Nq))
+      erdn = NORM2(Save2(1:Nde))/(Tq(1,Nq)*SQRT(REAL(Nde,SP)))
+      rh1 = 1._SP/MAX(Uround,BIAS1*(erdn/Eps)**(1._SP/Nq))
     END IF
-    rh2 = 1.E0/MAX(Uround,BIAS2*(etest/Eps)**(1.E0/(Nq+1)))
+    rh2 = 1._SP/MAX(Uround,BIAS2*(etest/Eps)**(1._SP/(Nq+1)))
     IF( Nq==Maxord ) THEN
-      rh3 = 0.E0
+      rh3 = 0._SP
     ELSE
       IF( Ierror==1 .OR. Ierror==5 ) THEN
         DO i = 1, Nde
@@ -442,8 +442,8 @@ SUBROUTINE SDSTP(Eps,F,FA,Hmax,Impl,Ierror,JACOBN,Matdim,Maxord,Mint,&
           Save2(i) = (Save1(i)-Yh(i,Maxord+1))/MAX(ABS(Y(i)),Ywt(i))
         END DO
       END IF
-      erup = NORM2(Save2(1:Nde))/(Tq(3,Nq)*SQRT(REAL(Nde)))
-      rh3 = 1.E0/MAX(Uround,BIAS3*(erup/Eps)**(1.E0/(Nq+2)))
+      erup = NORM2(Save2(1:Nde))/(Tq(3,Nq)*SQRT(REAL(Nde,SP)))
+      rh3 = 1._SP/MAX(Uround,BIAS3*(erup/Eps)**(1._SP/(Nq+2)))
     END IF
     IF( rh1>rh2 .AND. rh1>=rh3 ) THEN
       rh = rh1
@@ -463,7 +463,7 @@ SUBROUTINE SDSTP(Eps,F,FA,Hmax,Impl,Ierror,JACOBN,Matdim,Maxord,Mint,&
       Rc = Rc*El(1,Nq)/El(1,Nq-1)
     END IF
     IF( Iswflg==3 .AND. Mint==1 ) THEN
-      IF( bnd/=0.E0 ) rh = MIN(rh,1.E0/(2.E0*El(1,Nq)*bnd*ABS(H)))
+      IF( bnd/=0._SP ) rh = MIN(rh,1._SP/(2._SP*El(1,Nq)*bnd*ABS(H)))
     END IF
     CALL SDSCL(Hmax,N,Nq,Rmax,H,Rc,rh,Yh)
     Rmax = RMNORM

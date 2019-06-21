@@ -30,7 +30,7 @@ SUBROUTINE PASSB3(Ido,L1,Cc,Ch,Wa1,Wa2)
   REAL(SP) :: ci2, ci3, cr2, cr3, di2, di3, dr2, dr3, taui, taur, ti2, tr2
   !* FIRST EXECUTABLE STATEMENT  PASSB3
   taur = -.5
-  taui = .5*SQRT(3.)
+  taui = 0.5_SP*SQRT(3._SP)
   IF( Ido==2 ) THEN
     DO k = 1, L1
       tr2 = Cc(1,2,k) + Cc(1,3,k)

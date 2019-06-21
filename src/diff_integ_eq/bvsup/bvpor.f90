@@ -149,7 +149,7 @@ SUBROUTINE BVPOR(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
   !* FIRST EXECUTABLE STATEMENT  BVPOR
   nfcp1 = Nfc + 1
   numort_com = 0
-  c_com = 1.0
+  c_com = 1._SP
   !
   !- *********************************************************************
   !     CALCULATE INITIAL CONDITIONS WHICH SATISFY
@@ -197,7 +197,7 @@ SUBROUTINE BVPOR(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
       nswot_com = 1
       knswot_com = 0
       lotjp_com = 1
-      tnd_com = LOG10(10.*tol_com)
+      tnd_com = LOG10(10._SP*tol_com)
       pwcnd_com = LOG10(SQRT(tol_com))
       x_com = xbeg_com
       px_com = x_com

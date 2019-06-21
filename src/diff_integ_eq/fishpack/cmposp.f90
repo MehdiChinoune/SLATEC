@@ -47,7 +47,7 @@ SUBROUTINE CMPOSP(M,N,A,Bb,C,Q,Idimq,B,B2,B3,W,W2,W3,D,Tcos,P)
       END DO
     END DO
     DO i = 1, mr
-      Q(i,nr) = 2.*Q(i,nr)
+      Q(i,nr) = 2._SP*Q(i,nr)
     END DO
     lh = nrm1/2
     DO j = 1, lh
@@ -65,14 +65,14 @@ SUBROUTINE CMPOSP(M,N,A,Bb,C,Q,Idimq,B,B2,B3,W,W2,W3,D,Tcos,P)
     DO j = 1, nrm1
       nrpj = nr + j
       DO i = 1, mr
-        s = .5*(Q(i,nrpj)+Q(i,j))
-        t = .5*(Q(i,nrpj)-Q(i,j))
+        s = 0.5_SP*(Q(i,nrpj)+Q(i,j))
+        t = 0.5_SP*(Q(i,nrpj)-Q(i,j))
         Q(i,nrpj) = t
         Q(i,j) = s
       END DO
     END DO
     DO i = 1, mr
-      Q(i,nr) = .5*Q(i,nr)
+      Q(i,nr) = 0.5_SP*Q(i,nr)
     END DO
     DO j = 1, lh
       nrmj = nr - j
@@ -97,8 +97,8 @@ SUBROUTINE CMPOSP(M,N,A,Bb,C,Q,Idimq,B,B2,B3,W,W2,W3,D,Tcos,P)
       END DO
     END DO
     DO i = 1, mr
-      Q(i,nr) = 2.*Q(i,nr)
-      Q(i,N) = 2.*Q(i,N)
+      Q(i,nr) = 2._SP*Q(i,nr)
+      Q(i,N) = 2._SP*Q(i,N)
     END DO
     CALL CMPOSD(mr,nrm1,1,A,Bb,C,Q,Idimq,B,W,D,Tcos,P)
     ipstor = INT(W(1))
@@ -108,19 +108,19 @@ SUBROUTINE CMPOSP(M,N,A,Bb,C,Q,Idimq,B,B2,B3,W,W2,W3,D,Tcos,P)
       nrmj = nr - j
       nrpj = nr + j
       DO i = 1, mr
-        s = .5*(Q(i,nrpj)+Q(i,nrmj))
-        t = .5*(Q(i,nrpj)-Q(i,nrmj))
+        s = 0.5_SP*(Q(i,nrpj)+Q(i,nrmj))
+        t = 0.5_SP*(Q(i,nrpj)-Q(i,nrmj))
         Q(i,nrmj) = s
         Q(i,nrpj) = t
       END DO
     END DO
     DO i = 1, mr
-      Q(i,nr) = .5*Q(i,nr)
-      Q(i,N) = .5*Q(i,N)
+      Q(i,nr) = 0.5_SP*Q(i,nr)
+      Q(i,N) = 0.5_SP*Q(i,N)
     END DO
   END IF
   !
   !     RETURN STORAGE REQUIREMENTS FOR P VECTORS.
   !
-  W(1) = CMPLX(REAL(ipstor),0.)
+  W(1) = CMPLX(REAL(ipstor,SP),0._SP,SP)
 END SUBROUTINE CMPOSP

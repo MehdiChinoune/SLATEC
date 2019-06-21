@@ -149,9 +149,9 @@ SUBROUTINE HFTI(A,Mda,M,N,B,Mdb,Nb,Tau,Krank,Rnorm,H,G,Ip)
   REAL(DP) :: sm, dzero
   REAL(SP), PARAMETER :: releps = R1MACH(4)
   !* FIRST EXECUTABLE STATEMENT  HFTI
-  szero = 0.
-  dzero = 0.D0
-  factor = 0.001
+  szero = 0._SP
+  dzero = 0._DP
+  factor = 0.001_SP
   !
   k = 0
   ldiag = MIN(M,N)

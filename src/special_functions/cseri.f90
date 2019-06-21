@@ -31,22 +31,22 @@ SUBROUTINE CSERI(Z,Fnu,Kode,N,Y,Nz,Tol,Elim,Alim)
   COMPLEX(SP) :: ak1, ck, coef, crsc, cz, hz, rz, s1, s2, w(2), Y(N), Z
   REAL(SP) :: aa, acz, ak, Alim, arm, ascle, atol, az, dfnu, Elim, Fnu, &
     fnup, rak1, rs, rtr1, s, ss, Tol, x
-  COMPLEX(SP), PARAMETER :: czero = (0.0E0,0.0E0), cone = (1.0E0,0.0E0)
+  COMPLEX(SP), PARAMETER :: czero = (0._SP,0._SP), cone = (1._SP,0._SP)
   !* FIRST EXECUTABLE STATEMENT  CSERI
   Nz = 0
   az = ABS(Z)
-  IF( az==0.0E0 ) GOTO 500
+  IF( az==0._SP ) GOTO 500
   x = REAL(Z)
-  arm = 1.0E+3*R1MACH(1)
+  arm = 1.E+3_SP*R1MACH(1)
   rtr1 = SQRT(arm)
-  crsc = CMPLX(1.0E0,0.0E0)
+  crsc = CMPLX(1._SP,0._SP,SP)
   iflag = 0
   IF( az<arm ) THEN
     Nz = N
-    IF( Fnu==0.0E0 ) Nz = Nz - 1
+    IF( Fnu==0._SP ) Nz = Nz - 1
     GOTO 500
   ELSE
-    hz = Z*CMPLX(0.5E0,0.0E0)
+    hz = Z*CMPLX(0.5_SP,0._SP,SP)
     cz = czero
     IF( az>rtr1 ) cz = hz*hz
     acz = ABS(cz)
@@ -54,43 +54,43 @@ SUBROUTINE CSERI(Z,Fnu,Kode,N,Y,Nz,Tol,Elim,Alim)
     ck = LOG(hz)
   END IF
   100  dfnu = Fnu + (nn-1)
-  fnup = dfnu + 1.0E0
+  fnup = dfnu + 1._SP
   !-----------------------------------------------------------------------
   !     UNDERFLOW TEST
   !-----------------------------------------------------------------------
-  ak1 = ck*CMPLX(dfnu,0.0E0)
+  ak1 = ck*CMPLX(dfnu,0._SP,SP)
   ak = GAMLN(fnup,idum)
-  ak1 = ak1 - CMPLX(ak,0.0E0)
-  IF( Kode==2 ) ak1 = ak1 - CMPLX(x,0.0E0)
+  ak1 = ak1 - CMPLX(ak,0._SP,SP)
+  IF( Kode==2 ) ak1 = ak1 - CMPLX(x,0._SP,SP)
   rak1 = REAL(ak1)
   IF( rak1>(-Elim) ) THEN
     IF( rak1<=(-Alim) ) THEN
       iflag = 1
-      ss = 1.0E0/Tol
-      crsc = CMPLX(Tol,0.0E0)
+      ss = 1._SP/Tol
+      crsc = CMPLX(Tol,0._SP,SP)
       ascle = arm*ss
     END IF
     ak = AIMAG(ak1)
     aa = EXP(rak1)
     IF( iflag==1 ) aa = aa*ss
-    coef = CMPLX(aa,0.0E0)*CMPLX(COS(ak),SIN(ak))
+    coef = CMPLX(aa,0._SP,SP)*CMPLX(COS(ak),SIN(ak),SP)
     atol = Tol*acz/fnup
     il = MIN(2,nn)
     DO i = 1, il
       dfnu = Fnu + (nn-i)
-      fnup = dfnu + 1.0E0
+      fnup = dfnu + 1._SP
       s1 = cone
       IF( acz>=Tol*fnup ) THEN
         ak1 = cone
-        ak = fnup + 2.0E0
+        ak = fnup + 2._SP
         s = fnup
-        aa = 2.0E0
+        aa = 2._SP
         DO
-          rs = 1.0E0/s
-          ak1 = ak1*cz*CMPLX(rs,0.0E0)
+          rs = 1._SP/s
+          ak1 = ak1*cz*CMPLX(rs,0._SP,SP)
           s1 = s1 + ak1
           s = s + ak
-          ak = ak + 2.0E0
+          ak = ak + 2._SP
           aa = aa*acz*rs
           IF( aa<=atol ) EXIT
         END DO
@@ -103,7 +103,7 @@ SUBROUTINE CSERI(Z,Fnu,Kode,N,Y,Nz,Tol,Elim,Alim)
         IF( nw/=0 ) GOTO 200
       END IF
       Y(m) = s2*crsc
-      IF( i/=il ) coef = coef*CMPLX(dfnu,0.0E0)/hz
+      IF( i/=il ) coef = coef*CMPLX(dfnu,0._SP,SP)/hz
     END DO
     IF( nn<=2 ) RETURN
     k = nn - 2
@@ -121,11 +121,11 @@ SUBROUTINE CSERI(Z,Fnu,Kode,N,Y,Nz,Tol,Elim,Alim)
       s2 = w(2)
       DO l = 3, nn
         ck = s2
-        s2 = s1 + CMPLX(ak+Fnu,0.0E0)*rz*s2
+        s2 = s1 + CMPLX(ak+Fnu,0._SP,SP)*rz*s2
         s1 = ck
         ck = s2*crsc
         Y(k) = ck
-        ak = ak - 1.0E0
+        ak = ak - 1._SP
         k = k - 1
         IF( ABS(ck)>ascle ) GOTO 400
       END DO
@@ -151,8 +151,8 @@ SUBROUTINE CSERI(Z,Fnu,Kode,N,Y,Nz,Tol,Elim,Alim)
   END IF
   300 CONTINUE
   DO i = ib, nn
-    Y(k) = CMPLX(ak+Fnu,0.0E0)*rz*Y(k+1) + Y(k+2)
-    ak = ak - 1.0E0
+    Y(k) = CMPLX(ak+Fnu,0._SP,SP)*rz*Y(k+1) + Y(k+2)
+    ak = ak - 1._SP
     k = k - 1
   END DO
   RETURN
@@ -160,7 +160,7 @@ SUBROUTINE CSERI(Z,Fnu,Kode,N,Y,Nz,Tol,Elim,Alim)
   IF( ib>nn ) RETURN
   GOTO 300
   500  Y(1) = czero
-  IF( Fnu==0.0E0 ) Y(1) = cone
+  IF( Fnu==0._SP ) Y(1) = cone
   IF( N==1 ) RETURN
   DO i = 2, N
     Y(i) = czero

@@ -61,21 +61,21 @@ REAL(DP) FUNCTION DGAMIT(A,X)
   REAL(DP), PARAMETER :: alneps = -LOG(D1MACH(3)), sqeps = SQRT(D1MACH(4)), &
     bot = LOG(D1MACH(1))
   !* FIRST EXECUTABLE STATEMENT  DGAMIT
-  IF( X<0.D0 ) CALL XERMSG('DGAMIT','X IS NEGATIVE',2,2)
+  IF( X<0._DP ) CALL XERMSG('DGAMIT','X IS NEGATIVE',2,2)
   !
-  IF( X/=0.D0 ) alx = LOG(X)
-  sga = 1.0D0
-  IF( A/=0.D0 ) sga = SIGN(1.0D0,A)
-  ainta = AINT(A+0.5D0*sga)
+  IF( X/=0._DP ) alx = LOG(X)
+  sga = 1._DP
+  IF( A/=0._DP ) sga = SIGN(1._DP,A)
+  ainta = AINT(A+0.5_DP*sga)
   aeps = A - ainta
   !
-  IF( X<=0.D0 ) THEN
-    DGAMIT = 0.0D0
-    IF( ainta>0.D0 .OR. aeps/=0.D0 ) DGAMIT = DGAMR(A+1.0D0)
+  IF( X<=0._DP ) THEN
+    DGAMIT = 0._DP
+    IF( ainta>0._DP .OR. aeps/=0._DP ) DGAMIT = DGAMR(A+1._DP)
     RETURN
     !
-  ELSEIF( X<=1.D0 ) THEN
-    IF( A>=(-0.5D0) .OR. aeps/=0.D0 ) CALL DLGAMS(A+1.0D0,algap1,sgngam)
+  ELSEIF( X<=1._DP ) THEN
+    IF( A>=(-0.5_DP) .OR. aeps/=0._DP ) CALL DLGAMS(A+1._DP,algap1,sgngam)
     DGAMIT = D9GMIT(A,X,algap1,sgngam)
     RETURN
     !
@@ -85,10 +85,10 @@ REAL(DP) FUNCTION DGAMIT(A,X)
     !
     ! EVALUATE DGAMIT IN TERMS OF LOG (DGAMIC (A, X))
     !
-    h = 1.0D0
-    IF( aeps/=0.D0 .OR. ainta>0.D0 ) THEN
+    h = 1._DP
+    IF( aeps/=0._DP .OR. ainta>0._DP ) THEN
       !
-      CALL DLGAMS(A+1.0D0,algap1,sgngam)
+      CALL DLGAMS(A+1._DP,algap1,sgngam)
       t = LOG(ABS(A)) + alng - algap1
       IF( t>alneps ) THEN
         !
@@ -98,7 +98,7 @@ REAL(DP) FUNCTION DGAMIT(A,X)
         RETURN
       ELSE
         !
-        IF( t>(-alneps) ) h = 1.0D0 - sga*sgngam*EXP(t)
+        IF( t>(-alneps) ) h = 1._DP - sga*sgngam*EXP(t)
         IF( ABS(h)<=sqeps ) THEN
           !
           CALL XERCLR
@@ -107,7 +107,7 @@ REAL(DP) FUNCTION DGAMIT(A,X)
       END IF
     END IF
   ELSE
-    t = D9LGIT(A,X,LOG_GAMMA(A+1.0D0))
+    t = D9LGIT(A,X,LOG_GAMMA(A+1._DP))
     IF( t<bot ) CALL XERCLR
     DGAMIT = EXP(t)
     RETURN

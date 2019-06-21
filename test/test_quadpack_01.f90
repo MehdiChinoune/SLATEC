@@ -28,10 +28,10 @@ CONTAINS
     REAL(SP) :: a, abserr, b, epmach, epsabs, epsrel, error, &
       result, uflow, work(400)
     INTEGER :: ier, ip, Ipass, iwork(100), key, Kprint, last, lenw, limit, neval
-    REAL, PARAMETER :: pi = 0.31415926535897932E+01
-    REAL, PARAMETER :: exact1 = 0.1154700538379252E+01
-    REAL, PARAMETER :: exact2 = 0.11780972450996172E+00
-    REAL, PARAMETER :: exact3 = 0.1855802E+02
+    REAL(SP), PARAMETER :: pi = 0.31415926535897932E+01_SP
+    REAL(SP), PARAMETER :: exact1 = 0.1154700538379252E+01_SP
+    REAL(SP), PARAMETER :: exact2 = 0.11780972450996172_SP
+    REAL(SP), PARAMETER :: exact3 = 0.1855802E+02_SP
     !* FIRST EXECUTABLE STATEMENT  CQAG
     IF( Kprint>=2 ) WRITE (Lun,'(''1QAG QUICK CHECK''/)')
     !
@@ -40,12 +40,12 @@ CONTAINS
     Ipass = 1
     limit = 100
     lenw = limit*4
-    epsabs = 0.0E+00
+    epsabs = 0._SP
     epmach = R1MACH(4)
     key = 6
-    epsrel = MAX(SQRT(epmach),0.1E-07)
-    a = 0.0E+00
-    b = 0.1E+01
+    epsrel = MAX(SQRT(epmach),0.1E-7_SP)
+    a = 0._SP
+    b = 1._SP
     CALL QAG(F1G,a,b,epsabs,epsrel,key,result,abserr,neval,ier,limit,lenw,&
       last,iwork,work)
     ierv(1) = ier
@@ -59,7 +59,7 @@ CONTAINS
     !
     limit = 1
     lenw = limit*4
-    b = pi*0.2E+01
+    b = pi*2._SP
     CALL QAG(F2G,a,b,epsabs,epsrel,key,result,abserr,neval,ier,limit,lenw,&
       last,iwork,work)
     ierv(1) = ier
@@ -73,7 +73,7 @@ CONTAINS
     uflow = R1MACH(1)
     limit = 100
     lenw = limit*4
-    CALL QAG(F2G,a,b,uflow,0.0E+00,key,result,abserr,neval,ier,limit,lenw,&
+    CALL QAG(F2G,a,b,uflow,0._SP,key,result,abserr,neval,ier,limit,lenw,&
       last,iwork,work)
     ierv(1) = ier
     ierv(2) = 1
@@ -84,7 +84,7 @@ CONTAINS
     !
     ! TEST ON IER = 3 OR 1
     !
-    b = 0.1E+01
+    b = 1._SP
     CALL QAG(F3G,a,b,epsabs,epsrel,1,result,abserr,neval,ier,limit,lenw,last,&
       iwork,work)
     ierv(1) = ier
@@ -101,7 +101,7 @@ CONTAINS
       last,iwork,work)
     ierv(1) = ier
     ip = 0
-    IF( ier==6 .AND. result==0.0E+00 .AND. abserr==0.0E+00 .AND. neval==0 .AND. &
+    IF( ier==6 .AND. result==0._SP .AND. abserr==0._SP .AND. neval==0 .AND. &
       last==0 ) ip = 1
     IF( ip==0 ) Ipass = 0
     CALL CPRIN(Lun,6,Kprint,ip,exact1,result,abserr,neval,ierv,1)
@@ -140,10 +140,10 @@ CONTAINS
     REAL(SP) :: abserr, bound, epmach, epsabs, epsrel, error, &
       oflow, result, uflow, work(800)
     INTEGER :: ier, ip, Ipass, iwork(200), Kprint, last, lenw, limit, Lun, neval
-    REAL, PARAMETER :: exact0 = 2.0E+00, exact1 = 0.115470066904E1
-    REAL, PARAMETER :: exact2 = 0.909864525656E-02
-    REAL, PARAMETER :: exact3 = 0.31415926535897932E+01
-    REAL, PARAMETER :: exact4 = 0.19984914554328673E+04
+    REAL(SP), PARAMETER :: exact0 = 2._SP, exact1 = 0.115470066904E1_SP
+    REAL(SP), PARAMETER :: exact2 = 0.909864525656E-02_SP
+    REAL(SP), PARAMETER :: exact3 = 0.31415926535897932E+01_SP
+    REAL(SP), PARAMETER :: exact4 = 0.19984914554328673E+04_SP
     !* FIRST EXECUTABLE STATEMENT  CQAGI
     IF( Kprint>=2 ) WRITE (Lun,'(''1QAGI QUICK CHECK''/)')
     !
@@ -152,10 +152,10 @@ CONTAINS
     Ipass = 1
     limit = 200
     lenw = limit*4
-    epsabs = 0.0E+00
+    epsabs = 0._SP
     epmach = R1MACH(4)
-    epsrel = MAX(SQRT(epmach),0.1E-07)
-    bound = 0.0E+00
+    epsrel = MAX(SQRT(epmach),0.1E-7_SP)
+    bound = 0._SP
     inf = 1
     CALL QAGI(T0,bound,inf,epsabs,epsrel,result,abserr,neval,ier,limit,lenw,&
       last,iwork,work)
@@ -179,7 +179,7 @@ CONTAINS
     ! TEST ON IER = 2 OR 4 OR 1
     !
     uflow = R1MACH(1)
-    CALL QAGI(T2,bound,inf,uflow,0.0E+00,result,abserr,neval,ier,limit,lenw,&
+    CALL QAGI(T2,bound,inf,uflow,0._SP,result,abserr,neval,ier,limit,lenw,&
       last,iwork,work)
     ierv(1) = ier
     ierv(2) = 4
@@ -191,7 +191,7 @@ CONTAINS
     !
     ! TEST ON IER = 3 OR 4 OR 1
     !
-    CALL QAGI(T3,bound,inf,uflow,0.0E+00,result,abserr,neval,ier,limit,lenw,&
+    CALL QAGI(T3,bound,inf,uflow,0._SP,result,abserr,neval,ier,limit,lenw,&
       last,iwork,work)
     ierv(1) = ier
     ierv(2) = 4
@@ -227,11 +227,11 @@ CONTAINS
     !
     ! TEST ON IER = 6
     !
-    CALL QAGI(T1,bound,inf,epsabs,0.0E+00,result,abserr,neval,ier,limit,lenw,&
+    CALL QAGI(T1,bound,inf,epsabs,0._SP,result,abserr,neval,ier,limit,lenw,&
       last,iwork,work)
     ierv(1) = ier
     ip = 0
-    IF( ier==6 .AND. result==0.0E+00 .AND. abserr==0.0E+00 .AND. neval==0 .AND. &
+    IF( ier==6 .AND. result==0._SP .AND. abserr==0._SP .AND. neval==0 .AND. &
       last==0 ) ip = 1
     IF( ip==0 ) Ipass = 0
     CALL CPRIN(Lun,6,Kprint,ip,exact1,result,abserr,neval,ierv,1)
@@ -270,11 +270,11 @@ CONTAINS
       oflow, points(5), result, uflow, work(405)
     INTEGER :: ier, ip, Ipass, iwork(205), Kprint, last, leniw, lenw, limit, &
       Lun, neval, npts2
-    REAL, PARAMETER :: exact1 = 0.4285277667368085E+01
-    REAL, PARAMETER :: exact2 = 0.909864525656E-2
-    REAL, PARAMETER :: exact3 = 0.31415926535897932E+01
-    REAL, PARAMETER :: p1 = 0.1428571428571428E+00
-    REAL, PARAMETER :: p2 = 0.6666666666666667E+00
+    REAL(SP), PARAMETER :: exact1 = 0.4285277667368085E+01_SP
+    REAL(SP), PARAMETER :: exact2 = 0.909864525656E-2_SP
+    REAL(SP), PARAMETER :: exact3 = 0.31415926535897932E+01_SP
+    REAL(SP), PARAMETER :: p1 = 0.1428571428571428_SP
+    REAL(SP), PARAMETER :: p2 = 0.6666666666666667_SP
     !* FIRST EXECUTABLE STATEMENT  CQAGP
     IF( Kprint>=2 ) WRITE (Lun,'(''1QAGP QUICK CHECK''/)')
     !
@@ -285,11 +285,11 @@ CONTAINS
     limit = 100
     leniw = limit*2 + npts2
     lenw = limit*4 + npts2
-    epsabs = 0.0E+00
+    epsabs = 0._SP
     epmach = R1MACH(4)
-    epsrel = MAX(SQRT(epmach),0.1E-07)
-    a = 0.0E+00
-    b = 0.1E+01
+    epsrel = MAX(SQRT(epmach),0.1E-7_SP)
+    a = 0._SP
+    b = 1._SP
     points(1) = p1
     points(2) = p2
     CALL QAGP(F1P,a,b,npts2,points,epsabs,epsrel,result,abserr,neval,ier,&
@@ -316,12 +316,12 @@ CONTAINS
     ! TEST ON IER = 2, 4, 1 OR 3
     !
     npts2 = 3
-    points(1) = 0.1E+00
+    points(1) = 0.1_SP
     leniw = limit*2 + npts2
     lenw = limit*4 + npts2
     uflow = R1MACH(1)
-    a = 0.1E+00
-    CALL QAGP(F2P,a,b,npts2,points,uflow,0.0E+00,result,abserr,neval,ier,&
+    a = 0.1_SP
+    CALL QAGP(F2P,a,b,npts2,points,uflow,0._SP,result,abserr,neval,ier,&
       leniw,lenw,last,iwork,work)
     ierv(1) = ier
     ierv(2) = 4
@@ -337,9 +337,9 @@ CONTAINS
     npts2 = 2
     leniw = limit*2 + npts2
     lenw = limit*4 + npts2
-    a = 0.0E+00
-    b = 0.5E+01
-    CALL QAGP(F3P,a,b,npts2,points,uflow,0.0E+00,result,abserr,neval,ier,&
+    a = 0._SP
+    b = 5._SP
+    CALL QAGP(F3P,a,b,npts2,points,uflow,0._SP,result,abserr,neval,ier,&
       leniw,lenw,last,iwork,work)
     ierv(1) = ier
     ierv(2) = 4
@@ -352,7 +352,7 @@ CONTAINS
     !
     ! TEST ON IER = 5
     !
-    b = 0.1E+01
+    b = 1._SP
     CALL QAGP(F4P,a,b,npts2,points,epsabs,epsrel,result,abserr,neval,ier,&
       leniw,lenw,last,iwork,work)
     ierv(1) = ier
@@ -374,7 +374,7 @@ CONTAINS
       leniw,lenw,last,iwork,work)
     ierv(1) = ier
     ip = 0
-    IF( ier==6 .AND. result==0.0E+00 .AND. abserr==0.0E+00 .AND. neval==0 .AND. &
+    IF( ier==6 .AND. result==0._SP .AND. abserr==0._SP .AND. neval==0 .AND. &
       last==0 ) ip = 1
     IF( ip==0 ) Ipass = 0
     CALL CPRIN(Lun,6,Kprint,ip,exact1,result,abserr,neval,ierv,1)
@@ -413,11 +413,11 @@ CONTAINS
     REAL(SP) :: a, abserr, b, epmach, epsabs, epsrel, error, &
       oflow, result, uflow, work(800)
     INTEGER :: ier, ip, Ipass, iwork(200), Kprint, last, lenw, limit, neval
-    REAL, PARAMETER :: exact0 = 0.2E+01
-    REAL, PARAMETER :: exact1 = 0.115470066904E+01
-    REAL, PARAMETER :: exact2 = 0.909864525656E-02
-    REAL, PARAMETER :: exact3 = 0.31415926535897932E+01
-    REAL, PARAMETER :: exact4 = 0.19984914554328673E+04
+    REAL(SP), PARAMETER :: exact0 = 2._SP
+    REAL(SP), PARAMETER :: exact1 = 0.115470066904E+01_SP
+    REAL(SP), PARAMETER :: exact2 = 0.909864525656E-02_SP
+    REAL(SP), PARAMETER :: exact3 = 0.31415926535897932E+01_SP
+    REAL(SP), PARAMETER :: exact4 = 0.19984914554328673E+04_SP
     !* FIRST EXECUTABLE STATEMENT  CQAGS
     IF( Kprint>=2 ) WRITE (Lun,'(''1QAGS QUICK CHECK''/)')
     !
@@ -426,11 +426,11 @@ CONTAINS
     Ipass = 1
     limit = 200
     lenw = limit*4
-    epsabs = 0.0E+00
+    epsabs = 0._SP
     epmach = R1MACH(4)
-    epsrel = MAX(SQRT(epmach),0.1E-07)
-    a = 0.0E+00
-    b = 0.1E+01
+    epsrel = MAX(SQRT(epmach),0.1E-7_SP)
+    a = 0._SP
+    b = 1._SP
     CALL QAGS(F0S,a,b,epsabs,epsrel,result,abserr,neval,ier,limit,lenw,last,&
       iwork,work)
     error = ABS(result-exact0)
@@ -452,8 +452,8 @@ CONTAINS
     ! TEST ON IER = 2 OR 4 OR 1
     !
     uflow = R1MACH(1)
-    a = 0.1E+00
-    CALL QAGS(F2S,a,b,uflow,0.0E+00,result,abserr,neval,ier,limit,lenw,last,&
+    a = 0.1_SP
+    CALL QAGS(F2S,a,b,uflow,0._SP,result,abserr,neval,ier,limit,lenw,last,&
       iwork,work)
     ierv(1) = ier
     ierv(2) = 4
@@ -465,9 +465,9 @@ CONTAINS
     !
     ! TEST ON IER = 3 OR 4 OR 1 OR 2
     !
-    a = 0.0E+00
-    b = 0.5E+01
-    CALL QAGS(F3S,a,b,uflow,0.0E+00,result,abserr,neval,ier,limit,lenw,last,&
+    a = 0._SP
+    b = 5._SP
+    CALL QAGS(F3S,a,b,uflow,0._SP,result,abserr,neval,ier,limit,lenw,last,&
       iwork,work)
     ierv(1) = ier
     ierv(2) = 4
@@ -480,8 +480,8 @@ CONTAINS
     !
     ! TEST ON IER = 4, OR 5 OR 3 OR 1 OR 0
     !
-    b = 0.1E+01
-    epsrel = 1.E-4
+    b = 1._SP
+    epsrel = 1.E-4_SP
     CALL QAGS(F4S,a,b,epsabs,epsrel,result,abserr,neval,ier,limit,lenw,last,&
       iwork,work)
     !      IER=4
@@ -508,11 +508,11 @@ CONTAINS
     !
     ! TEST ON IER = 6
     !
-    CALL QAGS(F1S,a,b,epsabs,0.0E+00,result,abserr,neval,ier,limit,lenw,last,&
+    CALL QAGS(F1S,a,b,epsabs,0._SP,result,abserr,neval,ier,limit,lenw,last,&
       iwork,work)
     ierv(1) = ier
     ip = 0
-    IF( ier==6 .AND. result==0.0E+00 .AND. abserr==0.0E+00 .AND. neval==0 .AND. &
+    IF( ier==6 .AND. result==0._SP .AND. abserr==0._SP .AND. neval==0 .AND. &
       last==0 ) ip = 1
     IF( ip==0 ) Ipass = 0
     CALL CPRIN(Lun,6,Kprint,ip,exact1,result,abserr,neval,ierv,1)
@@ -550,22 +550,22 @@ CONTAINS
     REAL(SP) :: a, abserr, b, epmach, epsabs, epsrel, error, &
       c, result, uflow, work(800)
     INTEGER :: ier, ip, Ipass, iwork(200), Kprint, last, lenw, limit, neval
-    REAL, PARAMETER :: exact0 = -0.6284617285065624E+03
-    REAL, PARAMETER :: exact1 = 0.1855802E+01
+    REAL(SP), PARAMETER :: exact0 = -0.6284617285065624E+03_SP
+    REAL(SP), PARAMETER :: exact1 = 0.1855802E+01_SP
     !* FIRST EXECUTABLE STATEMENT  CQAWC
     IF( Kprint>=2 ) WRITE (Lun,'(''1QAWC QUICK CHECK''/)')
     !
     ! TEST ON IER = 0
     !
     Ipass = 1
-    c = 0.5E+00
-    a = -1.0E+00
-    b = 1.0E+00
+    c = 0.5_SP
+    a = -1._SP
+    b = 1._SP
     limit = 200
     lenw = limit*4
-    epsabs = 0.0E+00
+    epsabs = 0._SP
     epmach = R1MACH(4)
-    epsrel = MAX(SQRT(epmach),0.1E-07)
+    epsrel = MAX(SQRT(epmach),0.1E-7_SP)
     CALL QAWC(F0C,a,b,c,epsabs,epsrel,result,abserr,neval,ier,limit,lenw,last,&
       iwork,work)
     ierv(1) = ier
@@ -587,7 +587,7 @@ CONTAINS
     ! TEST ON IER = 2 OR 1
     !
     uflow = R1MACH(1)
-    CALL QAWC(F0C,a,b,c,uflow,0.0E+00,result,abserr,neval,ier,limit,lenw,last,&
+    CALL QAWC(F0C,a,b,c,uflow,0._SP,result,abserr,neval,ier,limit,lenw,last,&
       iwork,work)
     ierv(1) = ier
     ierv(2) = 1
@@ -598,7 +598,7 @@ CONTAINS
     !
     ! TEST ON IER = 3 OR 1
     !
-    CALL QAWC(F1C,0.0E+00,b,c,uflow,0.0E+00,result,abserr,neval,ier,limit,&
+    CALL QAWC(F1C,0._SP,b,c,uflow,0._SP,result,abserr,neval,ier,limit,&
       lenw,last,iwork,work)
     ierv(1) = ier
     ierv(2) = 1
@@ -609,8 +609,8 @@ CONTAINS
     !
     ! TEST ON IER = 6
     !
-    epsabs = 0.0E+00
-    epsrel = 0.0E+00
+    epsabs = 0._SP
+    epsrel = 0._SP
     CALL QAWC(F0C,a,b,c,epsabs,epsrel,result,abserr,neval,ier,limit,lenw,last,&
       iwork,work)
     ierv(1) = ier
@@ -651,8 +651,8 @@ CONTAINS
     INTEGER :: ierv(3), integr, iwork(450), leniw, Lun, maxp1
     REAL(SP) :: a, abserr, epsabs, epmach, error, omega, result, uflow, work(1425)
     INTEGER :: ier, ip, Ipass, Kprint, lenw, limit, limlst, lst, neval
-    REAL, PARAMETER :: exact0 = 0.1422552162575912E+01
-    REAL, PARAMETER :: pi = 0.31415926535897932E+01
+    REAL(SP), PARAMETER :: exact0 = 0.1422552162575912E+01_SP
+    REAL(SP), PARAMETER :: pi = 0.31415926535897932E+01_SP
     !* FIRST EXECUTABLE STATEMENT  CQAWF
     IF( Kprint>=2 ) WRITE (Lun,'(''1QAWF QUICK CHECK''/)')
     !
@@ -665,8 +665,8 @@ CONTAINS
     leniw = limit*2 + limlst
     lenw = leniw*2 + maxp1*25
     epmach = R1MACH(4)
-    epsabs = MAX(SQRT(epmach),0.1E-02)
-    a = 0.0E+00
+    epsabs = MAX(SQRT(epmach),0.1E-02_SP)
+    a = 0._SP
     omega = 0.8E+01
     integr = 2
     CALL QAWF(F0F,a,omega,integr,epsabs,result,abserr,neval,ier,limlst,lst,&
@@ -697,7 +697,7 @@ CONTAINS
     leniw = limit*2 + limlst
     lenw = leniw*2 + maxp1*25
     uflow = R1MACH(1)
-    CALL QAWF(F1F,a,0.0E+00,1,uflow,result,abserr,neval,ier,limlst,lst,leniw,&
+    CALL QAWF(F1F,a,0._SP,1,uflow,result,abserr,neval,ier,limlst,lst,leniw,&
       maxp1,lenw,iwork,work)
     ierv(1) = ier
     ierv(2) = 4
@@ -766,8 +766,8 @@ CONTAINS
       oflow, omega, result, uflow, work(1325)
     INTEGER :: ier, ierv(4), integr, ip, Ipass, iwork(400), Kprint, last, lenw, &
       Lun, maxp1, neval
-    REAL, PARAMETER :: exact0 = 0.1042872789432789E+05
-    REAL, PARAMETER :: pi = 0.31415926535897932E+01
+    REAL(SP), PARAMETER :: exact0 = 0.1042872789432789E+05_SP
+    REAL(SP), PARAMETER :: pi = 0.31415926535897932E+01_SP
     !* FIRST EXECUTABLE STATEMENT  CQAWO
     IF( Kprint>=2 ) WRITE (Lun,'(''1QAWO QUICK CHECK''/)')
     !
@@ -777,12 +777,12 @@ CONTAINS
     maxp1 = 21
     leniw = 400
     lenw = leniw*2 + maxp1*25
-    epsabs = 0.0E+00
+    epsabs = 0._SP
     epmach = R1MACH(4)
-    epsrel = MAX(SQRT(epmach),0.1E-07)
-    a = 0.0E+00
+    epsrel = MAX(SQRT(epmach),0.1E-7_SP)
+    a = 0._SP
     b = pi
-    omega = 0.1E+01
+    omega = 1._SP
     integr = 2
     CALL QAWO(F0O,a,b,omega,integr,epsabs,epsrel,result,abserr,neval,ier,&
       leniw,maxp1,lenw,last,iwork,work)
@@ -810,7 +810,7 @@ CONTAINS
     uflow = R1MACH(1)
     leniw = 400
     lenw = leniw*2 + maxp1*25
-    CALL QAWO(F0O,a,b,omega,integr,uflow,0.0E+00,result,abserr,neval,ier,&
+    CALL QAWO(F0O,a,b,omega,integr,uflow,0._SP,result,abserr,neval,ier,&
       leniw,maxp1,lenw,last,iwork,work)
     ierv(1) = ier
     ierv(2) = 4
@@ -822,10 +822,10 @@ CONTAINS
     !
     ! TEST ON IER = 3 OR 4 OR 1
     !
-    b = 0.5E+01
-    omega = 0.0E+00
+    b = 5._SP
+    omega = 0._SP
     integr = 1
-    CALL QAWO(F1O,a,b,omega,integr,uflow,0.0E+00,result,abserr,neval,ier,&
+    CALL QAWO(F1O,a,b,omega,integr,uflow,0._SP,result,abserr,neval,ier,&
       leniw,maxp1,lenw,last,iwork,work)
     ierv(1) = ier
     ierv(2) = 4
@@ -837,7 +837,7 @@ CONTAINS
     !
     ! TEST ON IER = 5
     !
-    b = 0.1E+01
+    b = 1._SP
     oflow = R1MACH(2)
     CALL QAWO(F2O,a,b,omega,integr,epsabs,epsrel,result,abserr,neval,ier,&
       leniw,maxp1,lenw,last,iwork,work)
@@ -854,7 +854,7 @@ CONTAINS
       leniw,maxp1,lenw,last,iwork,work)
     ierv(1) = ier
     ip = 0
-    IF( ier==6 .AND. result==0.0E+00 .AND. abserr==0.0E+00 .AND. neval==0 .AND. &
+    IF( ier==6 .AND. result==0._SP .AND. abserr==0._SP .AND. neval==0 .AND. &
       last==0 ) ip = 1
     IF( ip==0 ) Ipass = 0
     CALL CPRIN(Lun,6,Kprint,ip,exact0,result,abserr,neval,ierv,1)
@@ -892,24 +892,24 @@ CONTAINS
     REAL(SP) :: a, abserr, b, epmach, epsabs, epsrel, error, &
       alfa, beta, result, uflow, work(800)
     INTEGER :: ier, ip, Ipass, iwork(200), Kprint, last, lenw, limit, neval, integr
-    REAL, PARAMETER :: exact0 = 0.5350190569223644E+00
-    REAL, PARAMETER :: exact1 = 0.1998491554328673E+04
+    REAL(SP), PARAMETER :: exact0 = 0.5350190569223644_SP
+    REAL(SP), PARAMETER :: exact1 = 0.1998491554328673E+04_SP
     !* FIRST EXECUTABLE STATEMENT  CQAWS
     IF( Kprint>=2 ) WRITE (Lun,'(''1QAWS QUICK CHECK''/)')
     !
     ! TEST ON IER = 0
     !
     Ipass = 1
-    alfa = -0.5E+00
-    beta = -0.5E+00
+    alfa = -0.5_SP
+    beta = -0.5_SP
     integr = 1
-    a = 0.0E+00
-    b = 0.1E+01
+    a = 0._SP
+    b = 1._SP
     limit = 200
     lenw = limit*4
-    epsabs = 0.0E+00
+    epsabs = 0._SP
     epmach = R1MACH(4)
-    epsrel = MAX(SQRT(epmach),0.1E-07)
+    epsrel = MAX(SQRT(epmach),0.1E-7_SP)
     CALL QAWS(F0WS,a,b,alfa,beta,integr,epsabs,epsrel,result,abserr,neval,ier,&
       limit,lenw,last,iwork,work)
     ierv(1) = ier
@@ -932,7 +932,7 @@ CONTAINS
     ! TEST ON IER = 2 OR 1
     !
     uflow = R1MACH(1)
-    CALL QAWS(F0WS,a,b,alfa,beta,integr,uflow,0.0E+00,result,abserr,neval,ier,&
+    CALL QAWS(F0WS,a,b,alfa,beta,integr,uflow,0._SP,result,abserr,neval,ier,&
       limit,lenw,last,iwork,work)
     ierv(1) = ier
     ierv(2) = 1
@@ -995,20 +995,20 @@ CONTAINS
     INTEGER :: Lun
     REAL(SP) :: a, abserr, b, epmach, epsabs, epsrel, error, result, uflow
     INTEGER :: ier, ierv(1), ip, Ipass, Kprint, neval
-    REAL, PARAMETER :: exact1 = 0.7281029132255818E+00
-    REAL, PARAMETER :: exact2 = 0.1E+02
+    REAL(SP), PARAMETER :: exact1 = 0.7281029132255818_SP
+    REAL(SP), PARAMETER :: exact2 = 0.1E+02_SP
     !* FIRST EXECUTABLE STATEMENT  CQNG
     IF( Kprint>=2 ) WRITE (Lun,'(''1QNG QUICK CHECK''/)')
     !
     ! TEST ON IER = 0
     !
     Ipass = 1
-    epsabs = 0.0E+00
+    epsabs = 0._SP
     epmach = R1MACH(4)
     uflow = R1MACH(1)
-    epsrel = MAX(SQRT(epmach),0.1E-07)
-    a = 0.0E+00
-    b = 0.1E+01
+    epsrel = MAX(SQRT(epmach),0.1E-07_SP)
+    a = 0._SP
+    b = 1._SP
     CALL QNG(F1N,a,b,epsabs,epsrel,result,abserr,neval,ier)
     ierv(1) = ier
     ip = 0
@@ -1019,7 +1019,7 @@ CONTAINS
     !
     ! TEST ON IER = 1
     !
-    CALL QNG(F2N,a,b,uflow,0.0E+00,result,abserr,neval,ier)
+    CALL QNG(F2N,a,b,uflow,0._SP,result,abserr,neval,ier)
     ierv(1) = ier
     ip = 0
     IF( ier==1 ) ip = 1
@@ -1028,12 +1028,12 @@ CONTAINS
     !
     ! TEST ON IER = 6
     !
-    epsabs = 0.0E+00
-    epsrel = 0.0E+00
-    CALL QNG(F1N,a,b,epsabs,0.0E+00,result,abserr,neval,ier)
+    epsabs = 0._SP
+    epsrel = 0._SP
+    CALL QNG(F1N,a,b,epsabs,0._SP,result,abserr,neval,ier)
     ierv(1) = ier
     ip = 0
-    IF( ier==6 .AND. result==0.0E+00 .AND. abserr==0.0E+00 .AND. neval==0 ) ip = 1
+    IF( ier==6 .AND. result==0._SP .AND. abserr==0._SP .AND. neval==0 ) ip = 1
     IF( ip==0 ) Ipass = 0
     IF( Kprint/=0 ) CALL CPRIN(Lun,6,Kprint,ip,exact1,result,abserr,neval,ierv,1)
     !
@@ -1061,7 +1061,7 @@ CONTAINS
 
     REAL(SP) :: X
     !* FIRST EXECUTABLE STATEMENT  F0C
-    F0C = 1.E0/(X*X+1.E-4)
+    F0C = 1._SP/(X*X+1.E-4_SP)
   END FUNCTION F0C
   !** F0F
   REAL(SP) FUNCTION F0F(X)
@@ -1079,8 +1079,8 @@ CONTAINS
 
     REAL(SP) :: X
     !* FIRST EXECUTABLE STATEMENT  F0F
-    F0F = 0.0
-    IF( X/=0.0 ) F0F = SIN(0.5E+02*X)/(X*SQRT(X))
+    F0F = 0._SP
+    IF( X/=0._SP ) F0F = SIN(0.5E+02_SP*X)/(X*SQRT(X))
   END FUNCTION F0F
   !** F0O
   REAL(SP) FUNCTION F0O(X)
@@ -1098,7 +1098,7 @@ CONTAINS
 
     REAL(SP) :: X
     !* FIRST EXECUTABLE STATEMENT  F0O
-    F0O = (2.0E0*SIN(X))**14
+    F0O = (2._SP*SIN(X))**14
   END FUNCTION F0O
   !** F0S
   REAL(SP) FUNCTION F0S(X)
@@ -1116,8 +1116,8 @@ CONTAINS
 
     REAL(SP) :: X
     !* FIRST EXECUTABLE STATEMENT  F0S
-    F0S = 0.0
-    IF( X/=0.0 ) F0S = 1.0/SQRT(X)
+    F0S = 0._SP
+    IF( X/=0.0 ) F0S = 1._SP/SQRT(X)
   END FUNCTION F0S
   !** F0WS
   REAL(SP) FUNCTION F0WS(X)
@@ -1135,7 +1135,7 @@ CONTAINS
 
     REAL(SP) :: X
     !* FIRST EXECUTABLE STATEMENT  F0WS
-    F0WS = SIN(10.0*X)
+    F0WS = SIN(10._SP*X)
   END FUNCTION F0WS
   !** F1C
   REAL(SP) FUNCTION F1C(X)
@@ -1153,8 +1153,8 @@ CONTAINS
 
     REAL(SP) :: X
     !* FIRST EXECUTABLE STATEMENT  F1C
-    F1C = 0.0
-    IF( X/=0.33 ) F1C = (X-0.5)*ABS(X-0.33)**(-0.9)
+    F1C = 0._SP
+    IF( X/=0.33_SP ) F1C = (X-0.5_SP)*ABS(X-0.33_SP)**(-0.9_SP)
   END FUNCTION F1C
   !** F1F
   REAL(SP) FUNCTION F1F(X)
@@ -1172,10 +1172,10 @@ CONTAINS
 
     REAL(SP) :: X, x1, y
     !* FIRST EXECUTABLE STATEMENT  F1F
-    x1 = X + 1.0
-    F1F = 5.0/x1/x1
-    y = 5.0/x1
-    IF( y>3.1415926535897932 ) F1F = 0.0
+    x1 = X + 1._SP
+    F1F = 5._SP/x1/x1
+    y = 5._SP/x1
+    IF( y>3.1415926535897932 ) F1F = 0._SP
   END FUNCTION F1F
   !** F1G
   REAL(SP) FUNCTION F1G(X)
@@ -1192,9 +1192,9 @@ CONTAINS
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
     REAL(SP) :: X
-    REAL, PARAMETER :: pi = 3.1415926535897932
+    REAL(SP), PARAMETER :: pi = 3.1415926535897932_SP
     !* FIRST EXECUTABLE STATEMENT  F1G
-    F1G = 2.0/(2.0+SIN(10.0*pi*X))
+    F1G = 2._SP/(2._SP+SIN(10._SP*pi*X))
   END FUNCTION F1G
   !** F1N
   REAL(SP) FUNCTION F1N(X)
@@ -1212,7 +1212,7 @@ CONTAINS
 
     REAL(SP) :: X
     !* FIRST EXECUTABLE STATEMENT  F1N
-    F1N = 1.0E0/(X**4+X**2+1.0E0)
+    F1N = 1._SP/(X**4+X**2+1._SP)
   END FUNCTION F1N
   !** F1O
   REAL(SP) FUNCTION F1O(X)
@@ -1230,8 +1230,8 @@ CONTAINS
 
     REAL(SP) :: X
     !* FIRST EXECUTABLE STATEMENT  F1O
-    F1O = 1.0
-    IF( X>3.1415926535897932 ) F1O = 0.0
+    F1O = 1._SP
+    IF( X>3.1415926535897932 ) F1O = 0._SP
   END FUNCTION F1O
   !** F1P
   REAL(SP) FUNCTION F1P(X)
@@ -1249,15 +1249,15 @@ CONTAINS
 
     REAL(SP) :: alfa1, alfa2, X, d1, d2
     !  P1 = 1/7, P2 = 2/3
-    REAL, PARAMETER :: p1 = 0.1428571428571428E+00
-    REAL, PARAMETER :: p2 = 0.6666666666666667E+00
+    REAL(SP), PARAMETER :: p1 = 0.1428571428571428_SP
+    REAL(SP), PARAMETER :: p2 = 0.6666666666666667_SP
     !* FIRST EXECUTABLE STATEMENT  F1P
-    alfa1 = -0.25E0
-    alfa2 = -0.5E0
+    alfa1 = -0.25_SP
+    alfa2 = -0.5_SP
     d1 = ABS(X-p1)
     d2 = ABS(X-p2)
-    F1P = 0.0E+00
-    IF( d1/=0.0E+00 .AND. d2/=0.0E+00 ) F1P = d1**alfa1 + d2**alfa2
+    F1P = 0._SP
+    IF( d1/=0._SP .AND. d2/=0._SP ) F1P = d1**alfa1 + d2**alfa2
   END FUNCTION F1P
   !** F1S
   REAL(SP) FUNCTION F1S(X)
@@ -1275,7 +1275,7 @@ CONTAINS
 
     REAL(SP) :: X
     !* FIRST EXECUTABLE STATEMENT  F1S
-    F1S = 0.2E+01/(0.2E+01+SIN(0.314159E+02*X))
+    F1S = 2._SP/(2._SP+SIN(0.314159E+02_SP*X))
   END FUNCTION F1S
   !** F1WS
   REAL(SP) FUNCTION F1WS(X)
@@ -1293,7 +1293,7 @@ CONTAINS
 
     REAL(SP) :: X
     !* FIRST EXECUTABLE STATEMENT  F1WS
-    F1WS = ABS(X-0.33E+00)**(-0.999E+00)
+    F1WS = ABS(X-0.33_SP)**(-0.999_SP)
   END FUNCTION F1WS
   !** F2G
   REAL(SP) FUNCTION F2G(X)
@@ -1311,7 +1311,7 @@ CONTAINS
 
     REAL(SP) :: X
     !* FIRST EXECUTABLE STATEMENT  F2G
-    F2G = X*SIN(0.3E+02*X)*COS(0.5E+02*X)
+    F2G = X*SIN(0.3E+02_SP*X)*COS(0.5E+02_SP*X)
   END FUNCTION F2G
   !** F2N
   REAL(SP) FUNCTION F2N(X)
@@ -1329,7 +1329,7 @@ CONTAINS
 
     REAL(SP) :: X
     !* FIRST EXECUTABLE STATEMENT  F2N
-    F2N = X**(-0.9E+00)
+    F2N = X**(-0.9_SP)
   END FUNCTION F2N
   !** F2O
   REAL(SP) FUNCTION F2O(X)
@@ -1347,8 +1347,8 @@ CONTAINS
 
     REAL(SP) :: X
     !* FIRST EXECUTABLE STATEMENT  F2O
-    F2O = 0.0E+00
-    IF( X/=0.0E+00 ) F2O = 1.0/(X*X*SQRT(X))
+    F2O = 0._SP
+    IF( X/=0._SP ) F2O = 1._SP/(X*X*SQRT(X))
   END FUNCTION F2O
   !** F2P
   REAL(SP) FUNCTION F2P(X)
@@ -1366,7 +1366,7 @@ CONTAINS
 
     REAL(SP) :: X
     !* FIRST EXECUTABLE STATEMENT  F2P
-    F2P = SIN(0.314159E+03*X)/(0.314159E+01*X)
+    F2P = SIN(0.314159E+03_SP*X)/(0.314159E+01_SP*X)
   END FUNCTION F2P
   !** F2S
   REAL(SP) FUNCTION F2S(X)
@@ -1384,8 +1384,8 @@ CONTAINS
 
     REAL(SP) :: X
     !* FIRST EXECUTABLE STATEMENT  F2S
-    F2S = 100.0
-    IF( X/=0.0 ) F2S = SIN(0.314159E+03*X)/(0.314159E+01*X)
+    F2S = 100._SP
+    IF( X/=0._SP ) F2S = SIN(0.314159E+03_SP*X)/(0.314159E+01_SP*X)
   END FUNCTION F2S
   !** F3G
   REAL(SP) FUNCTION F3G(X)
@@ -1403,7 +1403,7 @@ CONTAINS
 
     REAL(SP) :: X
     !* FIRST EXECUTABLE STATEMENT  F3G
-    F3G = ABS(X-0.33E+00)**(-0.9E+00)
+    F3G = ABS(X-0.33_SP)**(-0.9_SP)
   END FUNCTION F3G
   !** F3P
   REAL(SP) FUNCTION F3P(X)
@@ -1421,8 +1421,8 @@ CONTAINS
 
     REAL(SP) :: X
     !* FIRST EXECUTABLE STATEMENT  F3P
-    F3P = 1.0
-    IF( X>3.1415926535897932 ) F3P = 0.0
+    F3P = 1._SP
+    IF( X>3.1415926535897932 ) F3P = 0._SP
   END FUNCTION F3P
   !** F3S
   REAL(SP) FUNCTION F3S(X)
@@ -1440,8 +1440,8 @@ CONTAINS
 
     REAL(SP) :: X
     !* FIRST EXECUTABLE STATEMENT  F3S
-    F3S = 0.1E+01
-    IF( X>3.1415926535897932 ) F3S = 0.0
+    F3S = 1._SP
+    IF( X>3.1415926535897932 ) F3S = 0._SP
   END FUNCTION F3S
   !** F4P
   REAL(SP) FUNCTION F4P(X)
@@ -1459,8 +1459,8 @@ CONTAINS
 
     REAL(SP) :: X
     !* FIRST EXECUTABLE STATEMENT  F4P
-    F4P = 0.0
-    IF( X>0.0 ) F4P = 1.0/(X*SQRT(X))
+    F4P = 0._SP
+    IF( X>0.0 ) F4P = 1._SP/(X*SQRT(X))
   END FUNCTION F4P
   !** F4S
   REAL(SP) FUNCTION F4S(X)
@@ -1478,11 +1478,11 @@ CONTAINS
 
     REAL(SP) :: X
     !* FIRST EXECUTABLE STATEMENT  F4S
-    IF( X==.33E+00 ) THEN
-      F4S = 0.0
+    IF( X==.33_SP ) THEN
+      F4S = 0._SP
       RETURN
     END IF
-    F4S = ABS(X-0.33E+00)**(-0.999E+00)
+    F4S = ABS(X-0.33_SP)**(-0.999_SP)
     RETURN
     RETURN
   END FUNCTION F4S
@@ -1502,8 +1502,8 @@ CONTAINS
 
     REAL(SP) :: X
     !* FIRST EXECUTABLE STATEMENT  F5S
-    F5S = 0.0
-    IF( X/=0.0 ) F5S = 1.0/(X*SQRT(X))
+    F5S = 0._SP
+    IF( X/=0.0 ) F5S = 1._SP/(X*SQRT(X))
   END FUNCTION F5S
   !** T0
   REAL(SP) FUNCTION T0(X)
@@ -1521,9 +1521,9 @@ CONTAINS
 
     REAL(SP) :: a, b, X, x1, y
     !* FIRST EXECUTABLE STATEMENT  T0
-    a = 0.0E+00
-    b = 0.1E+01
-    x1 = X + 0.1E+01
+    a = 0._SP
+    b = 1._SP
+    x1 = X + 1._SP
     y = (b-a)/x1 + a
     T0 = (b-a)*F0S(y)/x1/x1
   END FUNCTION T0
@@ -1543,9 +1543,9 @@ CONTAINS
 
     REAL(SP) :: a, b, X, x1, y
     !* FIRST EXECUTABLE STATEMENT  T1
-    a = 0.0E+00
-    b = 0.1E+01
-    x1 = X + 0.1E+01
+    a = 0._SP
+    b = 1._SP
+    x1 = X + 1._SP
     y = (b-a)/x1 + a
     T1 = (b-a)*F1S(y)/x1/x1
   END FUNCTION T1
@@ -1565,9 +1565,9 @@ CONTAINS
 
     REAL(SP) :: a, b, X, x1, y
     !* FIRST EXECUTABLE STATEMENT  T2
-    a = 0.1E+00
-    b = 0.1E+01
-    x1 = X + 0.1E+01
+    a = 0.1_SP
+    b = 1._SP
+    x1 = X + 1._SP
     y = (b-a)/x1 + a
     T2 = (b-a)*F2S(y)/x1/x1
   END FUNCTION T2
@@ -1587,9 +1587,9 @@ CONTAINS
 
     REAL(SP) :: a, b, X, x1, y
     !* FIRST EXECUTABLE STATEMENT  T3
-    a = 0.0E+00
-    b = 0.5E+01
-    x1 = X + 0.1E+01
+    a = 0._SP
+    b = 5._SP
+    x1 = X + 1._SP
     y = (b-a)/x1 + a
     T3 = (b-a)*F3S(y)/x1/x1
   END FUNCTION T3
@@ -1609,9 +1609,9 @@ CONTAINS
 
     REAL(SP) :: a, b, X, x1, y
     !* FIRST EXECUTABLE STATEMENT  T4
-    a = 0.0E+00
-    b = 0.1E+01
-    x1 = X + 0.1E+01
+    a = 0._SP
+    b = 1._SP
+    x1 = X + 1._SP
     y = (b-a)/x1 + a
     T4 = (b-a)*F4S(y)/x1/x1
   END FUNCTION T4
@@ -1631,9 +1631,9 @@ CONTAINS
 
     REAL(SP) :: a, b, X, x1, y
     !* FIRST EXECUTABLE STATEMENT  T5
-    a = 0.0E+00
-    b = 0.1E+01
-    x1 = X + 0.1E+01
+    a = 0._SP
+    b = 1._SP
+    x1 = X + 1._SP
     y = (b-a)/x1 + a
     T5 = (b-a)*F5S(y)/x1/x1
   END FUNCTION T5

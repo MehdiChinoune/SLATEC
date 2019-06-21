@@ -73,7 +73,7 @@ REAL(DP) FUNCTION DCHFIE(X1,X2,F1,F2,D1,D2,A,B)
   !
   !  INITIALIZE.
   !
-  REAL(DP), PARAMETER :: half = .5D0, two = 2.D0, three = 3.D0, four = 4.D0, six = 6.D0
+  REAL(DP), PARAMETER :: half = .5_DP, two = 2._DP, three = 3._DP, four = 4._DP, six = 6._DP
   !
   !  VALIDITY CHECK INPUT.
   !

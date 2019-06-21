@@ -43,23 +43,23 @@ REAL(SP) FUNCTION CHU(A,B,X)
   INTEGER :: i, istrt, m, n
   REAL(SP) :: a0, aintb, alnx, b0, beps, c0, factor,gamri1, gamrni, pch1ai, &
     pch1i, pochai, summ, t, xeps1, xi, xi1, xn, xtoeps
-  REAL(SP), PARAMETER :: pi = 3.14159265358979324E0
+  REAL(SP), PARAMETER :: pi = 3.14159265358979324_SP
   REAL(SP), PARAMETER :: eps = R1MACH(3)
   !* FIRST EXECUTABLE STATEMENT  CHU
   !
-  IF( X==0.0 ) CALL XERMSG('CHU','X IS ZERO SO CHU IS INFINITE',1,2)
-  IF( X<0.0 ) CALL XERMSG('CHU','X IS NEGATIVE, USE CCHU',2,2)
+  IF( X==0._SP ) CALL XERMSG('CHU','X IS ZERO SO CHU IS INFINITE',1,2)
+  IF( X<0._SP ) CALL XERMSG('CHU','X IS NEGATIVE, USE CCHU',2,2)
   !
-  IF( MAX(ABS(A),1.0)*MAX(ABS(1.0+A-B),1.0)>=0.99*ABS(X) ) THEN
+  IF( MAX(ABS(A),1._SP)*MAX(ABS(1._SP+A-B),1._SP)>=0.99*ABS(X) ) THEN
     !
     ! THE ASCENDING SERIES WILL BE USED, BECAUSE THE DESCENDING RATIONAL
     ! APPROXIMATION (WHICH IS BASED ON THE ASYMPTOTIC SERIES) IS UNSTABLE.
     !
-    IF( ABS(1.0+A-B)<SQRT(eps) ) CALL XERMSG('CHU',&
+    IF( ABS(1._SP+A-B)<SQRT(eps) ) CALL XERMSG('CHU',&
       'ALGORITHM IS BAD WHEN 1+A-B IS NEAR ZERO FOR SMALL X',10,2)
     !
-    aintb = AINT(B+0.5)
-    IF( B<0.0 ) aintb = AINT(B-0.5)
+    aintb = AINT(B+0.5_SP)
+    IF( B<0._SP ) aintb = AINT(B-0.5_SP)
     beps = B - aintb
     n = INT( aintb )
     !
@@ -72,39 +72,39 @@ REAL(SP) FUNCTION CHU(A,B,X)
       !
       ! NOW CONSIDER THE CASE B >= 1.0.
       !
-      summ = 0.0
+      summ = 0._SP
       m = n - 2
       IF( m>=0 ) THEN
-        t = 1.0
-        summ = 1.0
+        t = 1._SP
+        summ = 1._SP
         IF( m/=0 ) THEN
           !
           DO i = 1, m
             xi = i
-            t = t*(A-B+xi)*X/((1.0-B+xi)*xi)
+            t = t*(A-B+xi)*X/((1._SP-B+xi)*xi)
             summ = summ + t
           END DO
         END IF
         !
-        summ = GAMMA(B-1.0)*GAMR(A)*X**(1-n)*xtoeps*summ
+        summ = GAMMA(B-1._SP)*GAMR(A)*X**(1-n)*xtoeps*summ
       END IF
     ELSE
       !
       ! CONSIDER THE CASE B < 1.0 FIRST.
       !
-      summ = 1.0
+      summ = 1._SP
       IF( n/=0 ) THEN
         !
-        t = 1.0
+        t = 1._SP
         m = -n
         DO i = 1, m
           xi1 = i - 1
-          t = t*(A+xi1)*X/((B+xi1)*(xi1+1.0))
+          t = t*(A+xi1)*X/((B+xi1)*(xi1+1._SP))
           summ = summ + t
         END DO
       END IF
       !
-      summ = POCH(1.0+A-B,-A)*summ
+      summ = POCH(1._SP+A-B,-A)*summ
     END IF
     !
     ! NOW EVALUATE THE INFINITE SUM.     -----------------------------------
@@ -113,21 +113,21 @@ REAL(SP) FUNCTION CHU(A,B,X)
     IF( n<1 ) istrt = 1 - n
     xi = istrt
     !
-    factor = (-1.0)**n*GAMR(1.0+A-B)*X**istrt
-    IF( beps/=0.0 ) factor = factor*beps*pi/SIN(beps*pi)
+    factor = (-1._SP)**n*GAMR(1._SP+A-B)*X**istrt
+    IF( beps/=0._SP ) factor = factor*beps*pi/SIN(beps*pi)
     !
     pochai = POCH(A,xi)
-    gamri1 = GAMR(xi+1.0)
+    gamri1 = GAMR(xi+1._SP)
     gamrni = GAMR(aintb+xi)
-    b0 = factor*POCH(A,xi-beps)*gamrni*GAMR(xi+1.0-beps)
+    b0 = factor*POCH(A,xi-beps)*gamrni*GAMR(xi+1._SP-beps)
     !
-    IF( ABS(xtoeps-1.0)<=0.5 ) THEN
+    IF( ABS(xtoeps-1._SP)<=0.5_SP ) THEN
       !
       ! X**(-BEPS) IS CLOSE TO 1.0, SO WE MUST BE CAREFUL IN EVALUATING
       ! THE DIFFERENCES
       !
       pch1ai = POCH1(A+xi,-beps)
-      pch1i = POCH1(xi+1.0-beps,beps)
+      pch1i = POCH1(xi+1._SP-beps,beps)
       c0 = factor*pochai*gamrni*gamri1*(-POCH1(B+xi,-beps)+pch1ai-pch1i+&
         beps*pch1ai*pch1i)
       !
@@ -141,7 +141,7 @@ REAL(SP) FUNCTION CHU(A,B,X)
         xi1 = istrt + i - 1
         b0 = (A+xi1-beps)*b0*X/((xn+xi1)*(xi-beps))
         c0 = (A+xi1)*c0*X/((B+xi1)*xi)&
-          - ((A-1.0)*(xn+2.*xi-1.0)+xi*(xi-beps))&
+          - ((A-1._SP)*(xn+2._SP*xi-1._SP)+xi*(xi-beps))&
           *b0/(xi*(B+xi1)*(A+xi1-beps))
         t = c0 + xeps1*b0
         CHU = CHU + t

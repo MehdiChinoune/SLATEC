@@ -37,8 +37,8 @@ SUBROUTINE ORTHOG(Usol,Idmn,Zn,Zm,Pertrb)
   !
   !     COMPUTE WEIGHTED INNER PRODUCTS
   !
-  ute = 0.0
-  ete = 0.0
+  ute = 0._SP
+  ete = 0._SP
   DO i = is_com, ms_com
     ii = i - is_com + 1
     DO j = js_com, ns_com

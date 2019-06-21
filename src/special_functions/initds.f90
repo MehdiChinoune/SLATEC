@@ -53,7 +53,7 @@ INTEGER FUNCTION INITDS(Os,Nos,Eta)
   err = 0.
   DO ii = 1, Nos
     i = Nos + 1 - ii
-    err = err + ABS(REAL(Os(i)))
+    err = err + ABS(REAL(Os(i),DP))
     IF( err>Eta ) EXIT
   END DO
   !

@@ -40,16 +40,16 @@ REAL(SP) FUNCTION COT(X)
   INTEGER :: ifn
   REAL(SP) :: ainty, ainty2, prodbg, y, yrem
   INTEGER, SAVE :: nterms
-  REAL(SP), PARAMETER :: xmax = 1.0/R1MACH(4), xsml = SQRT(3.0*R1MACH(3)), &
-    xmin = EXP(MAX(LOG(R1MACH(1)),-LOG(R1MACH(2)))+0.01), sqeps = SQRT(R1MACH(4))
-  REAL(SP), PARAMETER :: cotcs(8) = [ .24025916098295630E0,-.016533031601500228E0, &
-    -.000042998391931724E0,-.000000159283223327E0,-.000000000619109313E0, &
-    -.000000000002430197E0,-.000000000000009560E0,-.000000000000000037E0 ]
-  REAL(SP), PARAMETER :: pi2rec = .0116197723675813430E0
+  REAL(SP), PARAMETER :: xmax = 1._SP/R1MACH(4), xsml = SQRT(3._SP*R1MACH(3)), &
+    xmin = EXP(MAX(LOG(R1MACH(1)),-LOG(R1MACH(2)))+0.01_SP), sqeps = SQRT(R1MACH(4))
+  REAL(SP), PARAMETER :: cotcs(8) = [ .24025916098295630_SP,-.016533031601500228_SP, &
+    -.000042998391931724_SP,-.000000159283223327_SP,-.000000000619109313_SP, &
+    -.000000000002430197_SP,-.000000000000009560_SP,-.000000000000000037_SP ]
+  REAL(SP), PARAMETER :: pi2rec = .0116197723675813430_SP
   LOGICAL, SAVE :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  COT
   IF( first ) THEN
-    nterms = INITS(cotcs,8,0.1*R1MACH(3))
+    nterms = INITS(cotcs,8,0.1_SP*R1MACH(3))
     first = .FALSE.
   END IF
   !
@@ -65,31 +65,31 @@ REAL(SP) FUNCTION COT(X)
   !
   ainty = AINT(y)
   yrem = y - ainty
-  prodbg = 0.625*ainty
+  prodbg = 0.625_SP*ainty
   ainty = AINT(prodbg)
-  y = (prodbg-ainty) + 0.625*yrem + y*pi2rec
+  y = (prodbg-ainty) + 0.625_SP*yrem + y*pi2rec
   ainty2 = AINT(y)
   ainty = ainty + ainty2
   y = y - ainty2
   !
-  ifn = INT( MOD(ainty,2.) )
-  IF( ifn==1 ) y = 1.0 - y
+  ifn = INT( MOD(ainty,2._SP) )
+  IF( ifn==1 ) y = 1._SP - y
   !
-  IF( ABS(X)>0.5 .AND. y<ABS(X)*sqeps ) CALL XERMSG('COT',&
+  IF( ABS(X)>0.5_SP .AND. y<ABS(X)*sqeps ) CALL XERMSG('COT',&
     'ANSWER LT HALF PRECISION, ABS(X) TOO BIG OR X NEAR N*PI (N/=0)',1,1)
   !
   IF( y<=0.25 ) THEN
-    COT = 1.0/X
-    IF( y>xsml ) COT = (0.5+CSEVL(32.0*y*y-1.,cotcs,nterms))/y
+    COT = 1._SP/X
+    IF( y>xsml ) COT = (0.5_SP+CSEVL(32._SP*y*y-1._SP,cotcs,nterms))/y
     !
-  ELSEIF( y>0.5 ) THEN
+  ELSEIF( y>0.5_SP ) THEN
     !
-    COT = (0.5+CSEVL(2.0*y*y-1.,cotcs,nterms))/(0.25*y)
-    COT = (COT**2-1.0)*0.5/COT
-    COT = (COT**2-1.0)*0.5/COT
+    COT = (0.5_SP+CSEVL(2._SP*y*y-1._SP,cotcs,nterms))/(0.25_SP*y)
+    COT = (COT**2-1._SP)*0.5_SP/COT
+    COT = (COT**2-1._SP)*0.5_SP/COT
   ELSE
-    COT = (0.5+CSEVL(8.0*y*y-1.,cotcs,nterms))/(0.5*y)
-    COT = (COT**2-1.0)*0.5/COT
+    COT = (0.5_SP+CSEVL(8._SP*y*y-1._SP,cotcs,nterms))/(0.5_SP*y)
+    COT = (COT**2-1._SP)*0.5_SP/COT
   END IF
   !
   IF( X/=0. ) COT = SIGN(COT,X)

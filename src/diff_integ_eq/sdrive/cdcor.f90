@@ -63,7 +63,7 @@ SUBROUTINE CDCOR(Dfdy,El,FA,H,Ierror,Impl,Ipvt,Matdim,Miter,Ml,Mu,N,Nde,&
         Save1(i) = (H*Save2(i)-Yh(i,2)-Save1(i))/MAX(ABS(Y(i)),ABS(Ywt(i)))
       END DO
     END IF
-    D = SCNRM2(N,Save1,1)/SQRT(REAL(N))
+    D = SCNRM2(N,Save1,1)/SQRT(REAL(N,SP))
     DO i = 1, N
       Save1(i) = H*Save2(i) - Yh(i,2)
     END DO
@@ -134,7 +134,7 @@ SUBROUTINE CDCOR(Dfdy,El,FA,H,Ierror,Impl,Ipvt,Matdim,Miter,Ml,Mu,N,Nde,&
         Save2(i) = Save2(i)/MAX(ABS(Y(i)),ABS(Ywt(i)))
       END DO
     END IF
-    D = SCNRM2(N,Save2,1)/SQRT(REAL(N))
+    D = SCNRM2(N,Save2,1)/SQRT(REAL(N,SP))
   ELSEIF( Miter==4 .OR. Miter==5 ) THEN
     IF( Impl==0 ) THEN
       DO i = 1, N
@@ -204,7 +204,7 @@ SUBROUTINE CDCOR(Dfdy,El,FA,H,Ierror,Impl,Ipvt,Matdim,Miter,Ml,Mu,N,Nde,&
         Save2(i) = Save2(i)/MAX(ABS(Y(i)),ABS(Ywt(i)))
       END DO
     END IF
-    D = SCNRM2(N,Save2,1)/SQRT(REAL(N))
+    D = SCNRM2(N,Save2,1)/SQRT(REAL(N,SP))
   ELSEIF( Miter==3 ) THEN
     iflag = 2
     CALL USERS(Y,Yh(1,2),Ywt,Save1,Save2,T,H,El(1,Nq),Impl,N,Nde,iflag)
@@ -223,6 +223,6 @@ SUBROUTINE CDCOR(Dfdy,El,FA,H,Ierror,Impl,Ipvt,Matdim,Miter,Ml,Mu,N,Nde,&
         Save2(i) = Save2(i)/MAX(ABS(Y(i)),ABS(Ywt(i)))
       END DO
     END IF
-    D = SCNRM2(N,Save2,1)/SQRT(REAL(N))
+    D = SCNRM2(N,Save2,1)/SQRT(REAL(N,SP))
   END IF
 END SUBROUTINE CDCOR

@@ -97,7 +97,7 @@ SUBROUTINE DBNFAC(W,Nroww,Nrow,Nbandl,Nbandu,Iflag)
     IF( Nbandl<=0 ) THEN
       !                A IS UPPER TRIANGULAR. CHECK THAT DIAGONAL IS NONZERO .
       DO i = 1, nrowm1
-        IF( W(middle,i)==0.0D0 ) GOTO 100
+        IF( W(middle,i)==0._DP ) GOTO 100
       END DO
     ELSEIF( Nbandu>0 ) THEN
       !
@@ -105,7 +105,7 @@ SUBROUTINE DBNFAC(W,Nroww,Nrow,Nbandl,Nbandu,Iflag)
       DO i = 1, nrowm1
         !                                  W(MIDDLE,I)  IS PIVOT FOR I-TH STEP .
         pivot = W(middle,i)
-        IF( pivot==0.0D0 ) GOTO 100
+        IF( pivot==0._DP ) GOTO 100
         !                 JMAX  IS THE NUMBER OF (NONZERO) ENTRIES IN COLUMN  I
         !                     BELOW THE DIAGONAL .
         jmax = MIN(Nbandl,Nrow-i)
@@ -132,7 +132,7 @@ SUBROUTINE DBNFAC(W,Nroww,Nrow,Nbandl,Nbandu,Iflag)
       !                 DIVIDE EACH COLUMN BY ITS DIAGONAL .
       DO i = 1, nrowm1
         pivot = W(middle,i)
-        IF( pivot==0.0D0 ) GOTO 100
+        IF( pivot==0._DP ) GOTO 100
         jmax = MIN(Nbandl,Nrow-i)
         DO j = 1, jmax
           W(middle+j,i) = W(middle+j,i)/pivot
@@ -142,7 +142,7 @@ SUBROUTINE DBNFAC(W,Nroww,Nrow,Nbandl,Nbandu,Iflag)
     END IF
   END IF
   !                                       CHECK THE LAST DIAGONAL ENTRY .
-  IF( W(middle,Nrow)/=0.0D0 ) RETURN
+  IF( W(middle,Nrow)/=0._DP ) RETURN
   100 CONTINUE
   IFlag = 2
 END SUBROUTINE DBNFAC

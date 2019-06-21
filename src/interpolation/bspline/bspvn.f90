@@ -104,7 +104,7 @@ SUBROUTINE BSPVN(T,Jhigh,K,Indexx,X,Ileft,Vnikx,Work,Iwork)
   ELSE
     IF( Indexx/=2 ) THEN
       Iwork = 1
-      Vnikx(1) = 1.0E0
+      Vnikx(1) = 1._SP
       IF( Iwork>=Jhigh ) GOTO 100
     END IF
     DO
@@ -113,7 +113,7 @@ SUBROUTINE BSPVN(T,Jhigh,K,Indexx,X,Ileft,Vnikx,Work,Iwork)
       Work(Iwork) = T(ipj) - X
       imjp1 = Ileft - Iwork + 1
       Work(K+Iwork) = X - T(imjp1)
-      vmprev = 0.0E0
+      vmprev = 0._SP
       jp1 = Iwork + 1
       DO l = 1, Iwork
         jp1ml = jp1 - l

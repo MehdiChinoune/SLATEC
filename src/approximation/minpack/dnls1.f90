@@ -623,9 +623,9 @@ SUBROUTINE DNLS1(FCN,Iopt,M,N,X,Fvec,Fjac,Ldfjac,Ftol,Xtol,Gtol,Maxfev,&
   CHARACTER(8) :: xern1
   CHARACTER(16) :: xern3
   !
-  REAL(DP), PARAMETER :: chklim = .1D0
-  REAL(DP), PARAMETER :: one = 1.0D0, p1 = 1.0D-1, p5 = 5.0D-1, p25 = 2.5D-1, &
-    p75 = 7.5D-1, p0001 = 1.0D-4, zero = 0.0D0
+  REAL(DP), PARAMETER :: chklim = .1_DP
+  REAL(DP), PARAMETER :: one = 1._DP, p1 = 1.0E-1_DP, p5 = 5.0E-1_DP, p25 = 2.5E-1_DP, &
+    p75 = 7.5E-1_DP, p0001 = 1.0E-4_DP, zero = 0._DP
   !* FIRST EXECUTABLE STATEMENT  DNLS1
   epsmch = D1MACH(4)
   err = 0.

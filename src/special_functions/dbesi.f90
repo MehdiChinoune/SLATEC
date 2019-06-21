@@ -103,7 +103,7 @@ SUBROUTINE DBESI(X,Alpha,Kode,N,Y,Nz)
   REAL(DP) :: ain, ak, akm, ans, ap, arg, atol, tolln, dfn, dtm, dx, earg, &
     elim, etx, flgik, fn, fnf, fni, fnp1, fnu, gln, ra, s, sx, sxo2, s1, s2, t, &
     ta, tb, temp(3), tfn, tm, tol, trx, t2, xo2, xo2l, z
-  REAL(DP), PARAMETER :: rttpi = 3.98942280401433D-01
+  REAL(DP), PARAMETER :: rttpi = 3.98942280401433E-01_DP
   INTEGER, PARAMETER :: inlim = 80
   !* FIRST EXECUTABLE STATEMENT  DBESI
   Nz = 0
@@ -111,14 +111,14 @@ SUBROUTINE DBESI(X,Alpha,Kode,N,Y,Nz)
   !     I1MACH(15) REPLACES I1MACH(12) IN A DOUBLE PRECISION CODE
   !     I1MACH(14) REPLACES I1MACH(11) IN A DOUBLE PRECISION CODE
   ra = D1MACH(3)
-  tol = MAX(ra,1.0D-15)
+  tol = MAX(ra,1.E-15_DP)
   i1 = -I1MACH(15)
   gln = D1MACH(5)
-  elim = 2.303D0*(i1*gln-3.0D0)
+  elim = 2.303_DP*(i1*gln-3._DP)
   !     TOLLN = -LN(TOL)
   i1 = I1MACH(14) + 1
-  tolln = 2.303D0*gln*i1
-  tolln = MIN(tolln,34.5388D0)
+  tolln = 2.303_DP*gln*i1
+  tolln = MIN(tolln,34.5388_DP)
   IF( N<1 ) THEN
     CALL XERMSG('DBESI','N LESS THAN ONE.',2,1)
     RETURN
@@ -138,18 +138,18 @@ SUBROUTINE DBESI(X,Alpha,Kode,N,Y,Nz)
   ELSEIF( X==0 ) THEN
     IF( Alpha<0 ) GOTO 1300
     IF( Alpha==0 ) THEN
-      Y(1) = 1.0D0
+      Y(1) = 1._DP
       IF( N==1 ) RETURN
       i1 = 2
     ELSE
       i1 = 1
     END IF
     DO i = i1, N
-      Y(i) = 0.0D0
+      Y(i) = 0._DP
     END DO
     RETURN
   ELSE
-    IF( Alpha<0.0D0 ) GOTO 1300
+    IF( Alpha<0._DP ) GOTO 1300
     !
     ialp = INT(Alpha)
     fni = ialp + N - 1
@@ -157,7 +157,7 @@ SUBROUTINE DBESI(X,Alpha,Kode,N,Y,Nz)
     dfn = fni + fnf
     fnu = dfn
     in = 0
-    xo2 = X*0.5D0
+    xo2 = X*0.5_DP
     sxo2 = xo2*xo2
     etx = Kode - 1
     sx = etx*X
@@ -166,19 +166,19 @@ SUBROUTINE DBESI(X,Alpha,Kode,N,Y,Nz)
     !     TO INFINITY AND ASYMPTOTIC EXPANSION FOR NU TO INFINITY ARE
     !     APPLIED.
     !
-    IF( sxo2<=(fnu+1.0D0) ) THEN
+    IF( sxo2<=(fnu+1._DP) ) THEN
       fn = fnu
-      fnp1 = fn + 1.0D0
+      fnp1 = fn + 1._DP
       xo2l = LOG(xo2)
       is = kt
-      IF( X<=0.5D0 ) GOTO 500
+      IF( X<=0.5_DP ) GOTO 500
       ns = 0
-    ELSEIF( X<=12.0D0 ) THEN
+    ELSEIF( X<=12._DP ) THEN
       xo2l = LOG(xo2)
       ns = INT(sxo2-fnu)
     ELSE
-      fn = 0.55D0*fnu*fnu
-      fn = MAX(17.0D0,fn)
+      fn = 0.55_DP*fnu*fnu
+      fn = MAX(17._DP,fn)
       IF( X>=fn ) THEN
         !
         !     ASYMPTOTIC EXPANSION FOR X TO INFINITY
@@ -194,7 +194,7 @@ SUBROUTINE DBESI(X,Alpha,Kode,N,Y,Nz)
           GOTO 1000
         END IF
       ELSE
-        ans = MAX(36.0D0-fnu,0.0D0)
+        ans = MAX(36._DP-fnu,0._DP)
         ns = INT(ans)
         fni = fni + ns
         dfn = fni + fnf
@@ -206,16 +206,16 @@ SUBROUTINE DBESI(X,Alpha,Kode,N,Y,Nz)
         !     OVERFLOW TEST ON UNIFORM ASYMPTOTIC EXPANSION
         !
         IF( Kode==2 ) GOTO 100
-        IF( Alpha<1.0D0 ) THEN
+        IF( Alpha<1._DP ) THEN
           IF( X<=elim ) GOTO 100
           CALL XERMSG('DBESI',&
             'OVERFLOW, X TOO LARGE FOR KODE = 1.',6,1)
           RETURN
         ELSE
           z = X/Alpha
-          ra = SQRT(1.0D0+z*z)
-          gln = LOG((1.0D0+ra)/z)
-          t = ra*(1.0D0-etx) + etx/(z+ra)
+          ra = SQRT(1._DP+z*z)
+          gln = LOG((1._DP+ra)/z)
+          t = ra*(1._DP-etx) + etx/(z+ra)
           arg = Alpha*(t-gln)
           IF( arg>elim ) THEN
             CALL XERMSG('DBESI',&
@@ -231,7 +231,7 @@ SUBROUTINE DBESI(X,Alpha,Kode,N,Y,Nz)
     fni = fni + ns
     dfn = fni + fnf
     fn = dfn
-    fnp1 = fn + 1.0D0
+    fnp1 = fn + 1._DP
     is = kt
     IF( N-1+ns>0 ) is = 3
     GOTO 500
@@ -240,18 +240,18 @@ SUBROUTINE DBESI(X,Alpha,Kode,N,Y,Nz)
   !     UNDERFLOW TEST ON UNIFORM ASYMPTOTIC EXPANSION
   !
   100  z = X/fn
-  ra = SQRT(1.0D0+z*z)
-  gln = LOG((1.0D0+ra)/z)
-  t = ra*(1.0D0-etx) + etx/(z+ra)
+  ra = SQRT(1._DP+z*z)
+  gln = LOG((1._DP+ra)/z)
+  t = ra*(1._DP-etx) + etx/(z+ra)
   arg = fn*(t-gln)
   200 CONTINUE
   IF( arg>=(-elim) ) GOTO 400
   !
   !     SET UNDERFLOW VALUE AND UPDATE PARAMETERS
   !
-  Y(nn) = 0.0D0
+  Y(nn) = 0._DP
   nn = nn - 1
-  fni = fni - 1.0D0
+  fni = fni - 1._DP
   dfn = fni + fnf
   fn = dfn
   IF( nn<1 ) GOTO 800
@@ -261,7 +261,7 @@ SUBROUTINE DBESI(X,Alpha,Kode,N,Y,Nz)
   END IF
   GOTO 100
   300  is = 2
-  fni = fni - 1.0D0
+  fni = fni - 1._DP
   dfn = fni + fnf
   fn = dfn
   IF( i1==2 ) THEN
@@ -272,14 +272,14 @@ SUBROUTINE DBESI(X,Alpha,Kode,N,Y,Nz)
     GOTO 900
   ELSE
     z = X/fn
-    ra = SQRT(1.0D0+z*z)
-    gln = LOG((1.0D0+ra)/z)
-    t = ra*(1.0D0-etx) + etx/(z+ra)
+    ra = SQRT(1._DP+z*z)
+    gln = LOG((1._DP+ra)/z)
+    t = ra*(1._DP-etx) + etx/(z+ra)
     arg = fn*(t-gln)
   END IF
   400  i1 = ABS(3-is)
   i1 = MAX(i1,1)
-  flgik = 1.0D0
+  flgik = 1._DP
   CALL DASYIK(X,fn,Kode,flgik,ra,arg,i1,temp(is))
   SELECT CASE (is)
     CASE (1)
@@ -289,8 +289,8 @@ SUBROUTINE DBESI(X,Alpha,Kode,N,Y,Nz)
       GOTO 900
     CASE (3)
       !     COMPUTATION OF LAST ORDER FOR ASYMPTOTIC EXPANSION NORMALIZATION
-      t = 1.0D0/(fn*ra)
-      ain = tolln/(gln+SQRT(gln*gln+t*tolln)) + 1.5D0
+      t = 1._DP/(fn*ra)
+      ain = tolln/(gln+SQRT(gln*gln+t*tolln)) + 1.5_DP
       in = INT(ain)
       IF( in<=inlim ) GOTO 1200
       !
@@ -315,11 +315,11 @@ SUBROUTINE DBESI(X,Alpha,Kode,N,Y,Nz)
   arg = fn*xo2l - gln - sx
   IF( arg<(-elim) ) GOTO 700
   earg = EXP(arg)
-  600  s = 1.0D0
+  600  s = 1._DP
   IF( X>=tol ) THEN
-    ak = 3.0D0
-    t2 = 1.0D0
-    t = 1.0D0
+    ak = 3._DP
+    t2 = 1._DP
+    t = 1._DP
     s1 = fn
     DO k = 1, 17
       s2 = t2 + s1
@@ -327,7 +327,7 @@ SUBROUTINE DBESI(X,Alpha,Kode,N,Y,Nz)
       s = s + t
       IF( ABS(t)<tol ) EXIT
       t2 = t2 + ak
-      ak = ak + 2.0D0
+      ak = ak + 2._DP
       s1 = s1 + fn
     END DO
   END IF
@@ -342,28 +342,28 @@ SUBROUTINE DBESI(X,Alpha,Kode,N,Y,Nz)
       !     ASYMPTOTIC EXPANSION FOR NU TO INFINITY OR POWER SERIES.
       !
       !     COMPUTATION OF LAST ORDER FOR SERIES NORMALIZATION
-      akm = MAX(3.0D0-fn,0.0D0)
+      akm = MAX(3._DP-fn,0._DP)
       km = INT(akm)
       tfn = fn + km
-      ta = (gln+tfn-0.9189385332D0-0.0833333333D0/tfn)/(tfn+0.5D0)
+      ta = (gln+tfn-0.9189385332_DP-0.0833333333_DP/tfn)/(tfn+0.5_DP)
       ta = xo2l - ta
-      tb = -(1.0D0-1.0D0/tfn)/tfn
-      ain = tolln/(-ta+SQRT(ta*ta-tolln*tb)) + 1.5D0
+      tb = -(1._DP-1._DP/tfn)/tfn
+      ain = tolln/(-ta+SQRT(ta*ta-tolln*tb)) + 1.5_DP
       in = INT(ain)
       in = in + km
       GOTO 1200
     CASE DEFAULT
       earg = earg*fn/xo2
-      fni = fni - 1.0D0
+      fni = fni - 1._DP
       dfn = fni + fnf
       fn = dfn
       is = 2
       GOTO 600
   END SELECT
-  700  Y(nn) = 0.0D0
+  700  Y(nn) = 0._DP
   nn = nn - 1
   fnp1 = fn
-  fni = fni - 1.0D0
+  fni = fni - 1._DP
   dfn = fni + fnf
   fn = dfn
   IF( nn<1 ) GOTO 800
@@ -384,7 +384,7 @@ SUBROUTINE DBESI(X,Alpha,Kode,N,Y,Nz)
   ELSE
     s1 = temp(1)
     s2 = temp(2)
-    trx = 2.0D0/X
+    trx = 2._DP/X
     dtm = fni
     tm = (dtm+fnf)*trx
     IF( in==0 ) THEN
@@ -398,7 +398,7 @@ SUBROUTINE DBESI(X,Alpha,Kode,N,Y,Nz)
         s = s2
         s2 = tm*s2 + s1
         s1 = s
-        dtm = dtm - 1.0D0
+        dtm = dtm - 1._DP
         tm = (dtm+fnf)*trx
       END DO
       Y(nn) = s1
@@ -410,27 +410,27 @@ SUBROUTINE DBESI(X,Alpha,Kode,N,Y,Nz)
     DO i = 3, nn
       k = k - 1
       Y(k-2) = tm*Y(k-1) + Y(k)
-      dtm = dtm - 1.0D0
+      dtm = dtm - 1._DP
       tm = (dtm+fnf)*trx
     END DO
     RETURN
   END IF
-  1000 etx = 8.0D0*X
+  1000 etx = 8._DP*X
   is = kt
   in = 0
   fn = fnu
   1100 dx = fni + fni
-  tm = 0.0D0
-  IF( fni/=0.0D0 .OR. ABS(fnf)>=tol ) tm = 4.0D0*fnf*(fni+fni+fnf)
+  tm = 0._DP
+  IF( fni/=0._DP .OR. ABS(fnf)>=tol ) tm = 4._DP*fnf*(fni+fni+fnf)
   dtm = dx*dx
   s1 = etx
-  trx = dtm - 1.0D0
+  trx = dtm - 1._DP
   dx = -(trx+tm)/etx
   t = dx
-  s = 1.0D0 + dx
+  s = 1._DP + dx
   atol = tol*ABS(s)
-  s2 = 1.0D0
-  ak = 8.0D0
+  s2 = 1._DP
+  ak = 8._DP
   DO k = 1, 25
     s1 = s1 + etx
     s2 = s2 + ak
@@ -439,19 +439,19 @@ SUBROUTINE DBESI(X,Alpha,Kode,N,Y,Nz)
     t = -t*ap/s1
     s = s + t
     IF( ABS(t)<=atol ) EXIT
-    ak = ak + 8.0D0
+    ak = ak + 8._DP
   END DO
   temp(is) = s*earg
   IF( is==2 ) GOTO 900
   is = 2
-  fni = fni - 1.0D0
+  fni = fni - 1._DP
   dfn = fni + fnf
   fn = dfn
   GOTO 1100
-  1200 trx = 2.0D0/X
+  1200 trx = 2._DP/X
   dtm = fni + in
   tm = (dtm+fnf)*trx
-  ta = 0.0D0
+  ta = 0._DP
   tb = tol
   kk = 1
   DO
@@ -462,7 +462,7 @@ SUBROUTINE DBESI(X,Alpha,Kode,N,Y,Nz)
       s = tb
       tb = tm*tb + ta
       ta = s
-      dtm = dtm - 1.0D0
+      dtm = dtm - 1._DP
       tm = (dtm+fnf)*trx
     END DO
     !     NORMALIZATION
@@ -480,7 +480,7 @@ SUBROUTINE DBESI(X,Alpha,Kode,N,Y,Nz)
   k = nn - 1
   Y(k) = tb
   IF( nn==2 ) RETURN
-  dtm = dtm - 1.0D0
+  dtm = dtm - 1._DP
   tm = (dtm+fnf)*trx
   km = k - 1
   !
@@ -488,7 +488,7 @@ SUBROUTINE DBESI(X,Alpha,Kode,N,Y,Nz)
   !
   DO i = 1, km
     Y(k-1) = tm*Y(k) + Y(k+1)
-    dtm = dtm - 1.0D0
+    dtm = dtm - 1._DP
     tm = (dtm+fnf)*trx
     k = k - 1
   END DO

@@ -66,9 +66,9 @@ SUBROUTINE TEVLC(N,D,E2,Ierr)
       E2(i-1) = E2(i)*E2(i)
     END DO
     !
-    f = 0.0
-    b = 0.0
-    E2(N) = 0.0
+    f = 0._SP
+    b = 0._SP
+    E2(N) = 0._SP
     !
     DO l = 1, N
       j = 0
@@ -97,8 +97,8 @@ SUBROUTINE TEVLC(N,D,E2,Ierr)
           l1 = l + 1
           s = SQRT(E2(l))
           g = D(l)
-          p = (D(l1)-g)/(2.0*s)
-          r = SQRT(p*p+1.0)
+          p = (D(l1)-g)/(2._SP*s)
+          r = SQRT(p*p+1._SP)
           D(l) = s/(p+SIGN(r,p))
           h = g - D(l)
           !
@@ -111,9 +111,9 @@ SUBROUTINE TEVLC(N,D,E2,Ierr)
           !     ********** RATIONAL QL TRANSFORMATION **********
           !
           g = D(m)
-          IF( g==0.0 ) g = b
+          IF( g==0._SP ) g = b
           h = g
-          s = 0.0
+          s = 0._SP
           mml = m - l
           !
           !     ********** FOR I=M-1 STEP -1 UNTIL L DO -- **********
@@ -126,7 +126,7 @@ SUBROUTINE TEVLC(N,D,E2,Ierr)
             s = E2(i)/r
             D(i+1) = h + s*(h+D(i))
             g = D(i) - E2(i)/g
-            IF( g==0.0 ) g = b
+            IF( g==0._SP ) g = b
             h = g*p/r
           END DO
           !
@@ -135,10 +135,10 @@ SUBROUTINE TEVLC(N,D,E2,Ierr)
           !
           !     ********** GUARD AGAINST UNDERFLOWED H **********
           !
-          IF( h==0.0 ) GOTO 20
+          IF( h==0._SP ) GOTO 20
           IF( ABS(E2(l))<=ABS(c/h) ) GOTO 20
           E2(l) = h*E2(l)
-          IF( E2(l)==0.0 ) GOTO 20
+          IF( E2(l)==0._SP ) GOTO 20
         END DO
         GOTO 50
       END IF

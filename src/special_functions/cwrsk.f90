@@ -43,12 +43,12 @@ SUBROUTINE CWRSK(Zr,Fnu,Kode,N,Y,Nz,Cw,Tol,Elim,Alim)
     !     RECUR FORWARD ON I(FNU+1,Z) = R(FNU,Z)*I(FNU,Z),
     !     R(FNU+J-1,Z)=Y(J),  J=1,...,N
     !-----------------------------------------------------------------------
-    cinu = CMPLX(1.0E0,0.0E0)
+    cinu = CMPLX(1._SP,0._SP,SP)
     IF( Kode/=1 ) THEN
       yy = AIMAG(Zr)
       s1 = COS(yy)
       s2 = SIN(yy)
-      cinu = CMPLX(s1,s2)
+      cinu = CMPLX(s1,s2,SP)
     END IF
     !-----------------------------------------------------------------------
     !     ON LOW EXPONENT MACHINES THE K FUNCTIONS CAN BE CLOSE TO BOTH
@@ -57,13 +57,13 @@ SUBROUTINE CWRSK(Zr,Fnu,Kode,N,Y,Nz,Cw,Tol,Elim,Alim)
     !     THE RESULT IS ON SCALE.
     !-----------------------------------------------------------------------
     acw = ABS(Cw(2))
-    ascle = 1.0E+3*R1MACH(1)/Tol
-    cscl = CMPLX(1.0E0,0.0E0)
+    ascle = 1.E+3_SP*R1MACH(1)/Tol
+    cscl = CMPLX(1._SP,0._SP,SP)
     IF( acw>ascle ) THEN
-      ascle = 1.0E0/ascle
-      IF( acw>=ascle ) cscl = CMPLX(Tol,0.0E0)
+      ascle = 1._SP/ascle
+      IF( acw>=ascle ) cscl = CMPLX(Tol,0._SP,SP)
     ELSE
-      cscl = CMPLX(1.0E0/Tol,0.0E0)
+      cscl = CMPLX(1._SP/Tol,0._SP,SP)
     END IF
   END IF
   c1 = Cw(1)*cscl
@@ -75,7 +75,7 @@ SUBROUTINE CWRSK(Zr,Fnu,Kode,N,Y,Nz,Cw,Tol,Elim,Alim)
   !-----------------------------------------------------------------------
   ct = Zr*(c2+st*c1)
   act = ABS(ct)
-  rct = CMPLX(1.0E0/act,0.0E0)
+  rct = CMPLX(1._SP/act,0._SP,SP)
   ct = CONJG(ct)*rct
   cinu = cinu*rct*ct
   Y(1) = cinu*cscl

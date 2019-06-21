@@ -52,10 +52,10 @@ SUBROUTINE DDATRP(X,Xout,Yout,Ypout,Neq,Kold,Phi,Psi)
   temp1 = Xout - X
   DO i = 1, Neq
     Yout(i) = Phi(i,1)
-    Ypout(i) = 0.0D0
+    Ypout(i) = 0._DP
   END DO
-  c = 1.0D0
-  d = 0.0D0
+  c = 1._DP
+  d = 0._DP
   gama = temp1/Psi(1)
   DO j = 2, koldp1
     d = d*gama + c/Psi(j-1)

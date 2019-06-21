@@ -435,7 +435,7 @@ SUBROUTINE SBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
   CHARACTER(8) :: xern1, xern2
   CHARACTER(16) :: xern3, xern4
   !
-  REAL(SP), PARAMETER :: ZERO = 0.0E0, ONE = 1.0E0, TWO = 2.0E0
+  REAL(SP), PARAMETER :: ZERO = 0._SP, ONE = 1._SP, TWO = 2._SP
   !
   !* FIRST EXECUTABLE STATEMENT  SBOLSM
   !
@@ -519,7 +519,7 @@ SUBROUTINE SBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
   !
   !     Process the option array.
   !
-  fac = 0.75E0
+  fac = 0.75_SP
   tolind = SQRT(R1MACH(4))
   tolsze = SQRT(R1MACH(4))
   itmax = 5*MAX(Minput,Ncols)

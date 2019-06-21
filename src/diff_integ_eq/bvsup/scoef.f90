@@ -108,7 +108,7 @@ SUBROUTINE SCOEF(Yh,Yp,Ncomp,Nrowb,Nfc,B,Beta,Coef,Inhomo,Re,Ae,By,&
         Cvec(k) = Beta(k)
       CASE (3)
         !     CASE 3
-        Cvec(k) = 0.
+        Cvec(k) = 0._SP
       CASE DEFAULT
         !     CASE 1
         Cvec(k) = Beta(k) - DOT_PRODUCT(B(k,1:Ncomp),Yp(1:Ncomp))
@@ -123,7 +123,7 @@ SUBROUTINE SCOEF(Yh,Yp,Ncomp,Nrowb,Nfc,B,Beta,Coef,Inhomo,Re,Ae,By,&
   Iflag = 0
   mlso = 0
   IF( Inhomo==3 ) mlso = 1
-  kflag = INT( 0.5*LOG10(eps_com) )
+  kflag = INT( 0.5_SP*LOG10(eps_com) )
   CALL XGETF(nf)
   CALL XSETF(0)
   DO
@@ -137,19 +137,19 @@ SUBROUTINE SCOEF(Yh,Yp,Ncomp,Nrowb,Nfc,B,Beta,Coef,Inhomo,Re,Ae,By,&
         !     TESTING FOR EXISTENCE AND UNIQUENESS OF BOUNDARY-VALUE PROBLEM
         !     SOLUTION IN A SCALAR CASE
         !
-        bn = 0.
-        un = 0.
-        ypn = 0.
+        bn = 0._SP
+        un = 0._SP
+        ypn = 0._SP
         DO k = 1, Ncomp
           un = MAX(un,ABS(Yh(k,1)))
           ypn = MAX(ypn,ABS(Yp(k)))
           bn = MAX(bn,ABS(B(1,k)))
         END DO
         bbn = MAX(bn,ABS(Beta(1)))
-        IF( bys<=10.*(Re*un+Ae)*bn ) EXIT
+        IF( bys<=10._SP*(Re*un+Ae)*bn ) EXIT
         IF( Inhomo/=3 ) RETURN
         Iflag = 3
-        Coef(1) = 1.
+        Coef(1) = 1._SP
         RETURN
       ELSE
         IF( Inhomo/=3 ) RETURN
@@ -162,9 +162,9 @@ SUBROUTINE SCOEF(Yh,Yp,Ncomp,Nrowb,Nfc,B,Beta,Coef,Inhomo,Re,Ae,By,&
         ELSE
           Iflag = 3
           DO k = 1, Nfcc
-            Coef(k) = 0.
+            Coef(k) = 0._SP
           END DO
-          Coef(Nfcc) = 1.
+          Coef(Nfcc) = 1._SP
           nfccm1 = Nfcc - 1
           DO k = 1, nfccm1
             j = Nfcc - k
@@ -182,9 +182,9 @@ SUBROUTINE SCOEF(Yh,Yp,Ncomp,Nrowb,Nfc,B,Beta,Coef,Inhomo,Re,Ae,By,&
     END IF
   END DO
   brn = bbn/bn*bys
-  IF( cons>=0.1*brn .AND. cons<=10.*brn ) Iflag = 1
-  IF( cons>10.*brn ) Iflag = 2
+  IF( cons>=0.1*brn .AND. cons<=10._SP*brn ) Iflag = 1
+  IF( cons>10._SP*brn ) Iflag = 2
   IF( cons<=Re*ABS(Beta(1))+Ae+(Re*ypn+Ae)*bn ) Iflag = 1
-  IF( Inhomo==3 ) Coef(1) = 1.
+  IF( Inhomo==3 ) Coef(1) = 1._SP
   RETURN
 END SUBROUTINE SCOEF

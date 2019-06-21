@@ -93,7 +93,7 @@ SUBROUTINE QRSOLV(N,R,Ldr,Ipvt,Diag,Qtb,X,Sigma,Wa)
   REAL(SP) :: R(Ldr,N), Diag(N), Qtb(N), X(N), Sigma(N), Wa(N)
   INTEGER :: i, j, jp1, k, kp1, l, nsing
   REAL(SP) :: coss, cotan, qtbpj, sinn, summ, tann, temp
-  REAL(SP), PARAMETER :: p5 = 5.0E-1, p25 = 2.5E-1, zero = 0.0E0
+  REAL(SP), PARAMETER :: p5 = 5.E-1_SP, p25 = 2.5E-1, zero = 0._SP
   !* FIRST EXECUTABLE STATEMENT  QRSOLV
   DO j = 1, N
     DO i = j, N

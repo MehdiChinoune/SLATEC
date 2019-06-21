@@ -62,8 +62,8 @@ SUBROUTINE DINTYD(T,K,Yh,Nyh,Dky,Iflag)
     !
     Iflag = -1
   ELSE
-    tp = tn_com - hu_com*(1.0D0+100.0D0*uround_com)
-    IF( (T-tp)*(T-tn_com)<=0.0D0 ) THEN
+    tp = tn_com - hu_com*(1.0_DP+100._DP*uround_com)
+    IF( (T-tp)*(T-tn_com)<=0._DP ) THEN
       !
       s = (T-tn_com)/h_com
       ic = 1

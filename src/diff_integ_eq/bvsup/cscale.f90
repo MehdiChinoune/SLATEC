@@ -31,7 +31,7 @@ SUBROUTINE CSCALE(A,Nrda,Nrow,Ncol,Cols,Colsav,Rows,Rowsav,Anorm,Scales,&
   INTEGER :: ip, j, k
   REAL(SP) :: alog2, ascale, cs, p, s
   !
-  REAL(SP), PARAMETER :: ten4 = 1.E+4, ten20 = 1.E+20
+  REAL(SP), PARAMETER :: ten4 = 1.E+4_SP, ten20 = 1.E+20_SP
   !
   !* FIRST EXECUTABLE STATEMENT  CSCALE
   IF( Iscale==(-1) ) THEN
@@ -46,23 +46,23 @@ SUBROUTINE CSCALE(A,Nrda,Nrow,Ncol,Cols,Colsav,Rows,Rowsav,Anorm,Scales,&
     DO k = 1, Ncol
       cs = Cols(k)
       IF( (cs>ten4*ascale) .OR. (ten4*cs<ascale) ) GOTO 100
-      IF( (cs<1./ten20) .OR. (cs>ten20) ) GOTO 100
+      IF( (cs<1._SP/ten20) .OR. (cs>ten20) ) GOTO 100
     END DO
   END IF
   !
   DO k = 1, Ncol
-    Scales(k) = 1.
+    Scales(k) = 1._SP
   END DO
   RETURN
   !
-  100  alog2 = LOG(2.)
-  Anorm = 0.
+  100  alog2 = LOG(2._SP)
+  Anorm = 0._SP
   DO k = 1, Ncol
     cs = Cols(k)
     IF( cs/=0. ) THEN
       p = LOG(cs)/alog2
-      ip = INT( -0.5*p )
-      s = 2.**ip
+      ip = INT( -0.5_SP*p )
+      s = 2._SP**ip
       Scales(k) = s
       IF( Ic/=1 ) THEN
         Cols(k) = s*s*Cols(k)
@@ -73,7 +73,7 @@ SUBROUTINE CSCALE(A,Nrda,Nrow,Ncol,Cols,Colsav,Rows,Rowsav,Anorm,Scales,&
         A(j,k) = s*A(j,k)
       END DO
     ELSE
-      Scales(k) = 1.
+      Scales(k) = 1._SP
     END IF
   END DO
   !

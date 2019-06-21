@@ -71,18 +71,18 @@ SUBROUTINE LA05AS(A,Ind,Nz,Ia,N,Ip,Iw,W,G,U)
   !     THE USAGE OF THIS ERROR PROCESSOR IS DOCUMENTED IN THE
   !     SANDIA LABS. TECH. REPT. SAND78-1189, BY R E JONES.
   CALL XSETUN(lp_com)
-  IF( U>1.0E0 ) U = 1.0E0
+  IF( U>1.0E0 ) U = 1._SP
   IF( U<eps ) U = eps
   IF( N<1 ) THEN
     !
     IF( lp_com>0 ) CALL XERMSG('LA05AS',&
       'THE ORDER OF THE SYSTEM, N, IS NOT POSITIVE.',-1,1)
-    G = -1.0E0
+    G = -1._SP
     RETURN
   ELSE
-    G = 0.
+    G = 0._SP
     DO i = 1, N
-      W(i) = 0.
+      W(i) = 0._SP
       DO j = 1, 5
         Iw(i,j) = 0
       END DO
@@ -184,7 +184,7 @@ SUBROUTINE LA05AS(A,Ind,Nz,Ia,N,Ip,Iw,W,G,U)
             IF( kcost<jcost ) THEN
               IF( Nz/=1 ) THEN
                 ! FIND LARGEST ELEMENT IN ROW OF POTENTIAL PIVOT.
-                amax = 0.
+                amax = 0._SP
                 k1 = Ip(i,1)
                 k2 = Iw(i,1) + k1 - 1
                 DO kk = k1, k2
@@ -206,7 +206,7 @@ SUBROUTINE LA05AS(A,Ind,Nz,Ia,N,Ip,Iw,W,G,U)
         i = Iw(Nz,3)
         DO idummy = 1, N
           IF( i<=0 ) EXIT
-          amax = 0.
+          amax = 0._SP
           kp = Ip(i,1)
           kl = kp + Iw(i,1) - 1
           ! FIND LARGEST ELEMENT IN THE ROW
@@ -338,7 +338,7 @@ SUBROUTINE LA05AS(A,Ind,Nz,Ia,N,Ip,Iw,W,G,U)
                 A(lrow_com) = au
                 Ind(lrow_com,2) = j
               END IF
-              W(j) = 0.
+              W(j) = 0._SP
             END DO
           END IF
           !
@@ -392,7 +392,7 @@ SUBROUTINE LA05AS(A,Ind,Nz,Ia,N,Ip,Iw,W,G,U)
               Ind(lcol_com,1) = ir
               42  G = MAX(G,ABS(au))
               Iw(j,2) = Nz + 1
-              44  W(j) = 0.
+              44  W(j) = 0._SP
             END DO
           END IF
           Iw(ir,1) = lrow_com + 1 - Ip(ir,1)

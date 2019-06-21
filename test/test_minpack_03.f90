@@ -118,12 +118,12 @@ CONTAINS
     !     Test POLFIT
     !     Input EPS is negative - specified level
     !
-    w(1) = -1.0E0
-    EPS = -0.01E0
+    w(1) = -1._SP
+    EPS = -0.01_SP
     SVEps = EPS
     maxord = 8
     NORdp = 4
-    RP = 625.0E0
+    RP = 625._SP
     IERp = 1
     CALL POLFIT(m,x,y,w,maxord,NORd,EPS,R,IERr,a)
     !
@@ -150,7 +150,7 @@ CONTAINS
     !
     !     Input EPS is negative - computed level
     !
-    EPS = -1.0E0
+    EPS = -1._SP
     SVEps = EPS
     CALL POLFIT(m,x,y,w,maxord,NORd,EPS,R,IERr,a)
     !
@@ -177,8 +177,8 @@ CONTAINS
     !
     !     Input EPS is zero
     !
-    w(1) = -1.0E0
-    EPS = 0.0E0
+    w(1) = -1._SP
+    EPS = 0._SP
     SVEps = EPS
     NORdp = 5
     maxord = 5
@@ -209,7 +209,7 @@ CONTAINS
     !
     IERp = 1
     NORdp = 4
-    EPS = 75.0E0*R1MACH(4)
+    EPS = 75._SP*R1MACH(4)
     SVEps = EPS
     CALL POLFIT(m,x,y,w,maxord,NORd,EPS,R,IERr,a)
     !
@@ -282,10 +282,10 @@ CONTAINS
     !     MAXORD too small to meet RMS error
     !
     m = 11
-    w(1) = -1.0E0
-    EPS = 5.0E0*R1MACH(4)
+    w(1) = -1._SP
+    EPS = 5._SP*R1MACH(4)
     SVEps = EPS
-    RP = 553.0E0
+    RP = 553._SP
     maxord = 2
     IERp = 3
     NORdp = 2
@@ -316,8 +316,8 @@ CONTAINS
     !
     NORdp = 4
     IERp = 4
-    RP = 625.0E0
-    EPS = -0.01E0
+    RP = 625._SP
+    EPS = -0.01_SP
     SVEps = EPS
     maxord = 5
     CALL POLFIT(m,x,y,w,maxord,NORd,EPS,R,IERr,a)
@@ -346,15 +346,15 @@ CONTAINS
     !     Test PCOEF
     !
     maxord = 6
-    EPS = 0.0E0
+    EPS = 0._SP
     SVEps = EPS
-    y(6) = 1.0E0
+    y(6) = 1._SP
     DO i = 1, m
-      w(i) = 1.0E0/(y(i)**2)
+      w(i) = 1._SP/(y(i)**2)
     END DO
-    y(6) = 0.0E0
+    y(6) = 0._SP
     CALL POLFIT(m,x,y,w,maxord,NORd,EPS,R,IERr,a)
-    CALL PCOEF(4,5.0E0,tc,a)
+    CALL PCOEF(4,5._SP,tc,a)
     !
     !     See if test passed
     !
@@ -483,24 +483,24 @@ CONTAINS
     !
     Ipass = 1
     infos = 1
-    fnorms = 1.1151779E+01
+    fnorms = 1.1151779E+01_SP
     m = 10
     n = 2
     lwa = 40
     ldfjac = 10
     nprint = -1
     iflag = 1
-    zero = 0.0E0
-    one = 1.0E0
-    tol = SQRT(40.0E0*R1MACH(4))
+    zero = 0._SP
+    one = 1._SP
+    tol = SQRT(40._SP*R1MACH(4))
     tol2 = SQRT(tol)
     !
     !     OPTION=2, the full Jacobian is stored and the user provides the
     !     Jacobian.
     !
     iopt = 2
-    x(1) = 3.0E-1
-    x(2) = 4.0E-1
+    x(1) = 3.0E-1_SP
+    x(2) = 4.0E-1_SP
     CALL SNLS1E(FCN2,iopt,m,n,x,fvec,tol,nprint,info,iw,wa,lwa)
     fnorm = ENORM(m,fvec)
     IF( info==infos .AND. ABS(fnorm-fnorms)/fnorms<=tol ) THEN
@@ -554,8 +554,8 @@ CONTAINS
     !     the Jacobian.
     !
     iopt = 1
-    x(1) = 3.0E-1
-    x(2) = 4.0E-1
+    x(1) = 3.0E-1_SP
+    x(2) = 4.0E-1_SP
     CALL SNLS1E(FCN1,iopt,m,n,x,fvec,tol,nprint,info,iw,wa,lwa)
     fnorm = ENORM(m,fvec)
     IF( info==infos .AND. ABS(fnorm-fnorms)/fnorms<=tol ) THEN
@@ -610,8 +610,8 @@ CONTAINS
     !     the Jacobian one row at a time.
     !
     iopt = 3
-    x(1) = 3.0E-1
-    x(2) = 4.0E-1
+    x(1) = 3.0E-1_SP
+    x(2) = 4.0E-1_SP
     CALL SNLS1E(FCN3,iopt,m,n,x,fvec,tol,nprint,info,iw,wa,lwa)
     fnorm = ENORM(m,fvec)
     IF( info==infos .AND. ABS(fnorm-fnorms)/fnorms<=tol ) THEN
@@ -677,8 +677,8 @@ CONTAINS
     !
     lwa = 35
     iopt = 2
-    x(1) = 3.0E-1
-    x(2) = 4.0E-1
+    x(1) = 3.0E-1_SP
+    x(2) = 4.0E-1_SP
     CALL SNLS1E(FCN2,iopt,m,n,x,fvec,tol,nprint,info,iw,wa,lwa)
     IF( info/=0 .OR. NUMXER(nerr)/=2 ) fatal = .TRUE.
     !
@@ -777,34 +777,34 @@ CONTAINS
     !     .. Data statements ..
     !
     INTEGER, PARAMETER :: ndata = 9, nord = 4, nbkpt = 13, last = 10
-    REAL, PARAMETER :: xdata(9) = [ 0.15E0, 0.27E0, 0.33E0, 0.40E0, 0.43E0, 0.47E0, &
-      0.53E0, 0.58E0, 0.63E0 ]
-    REAL, PARAMETER :: ydata(9) = [ 0.025E0, 0.05E0, 0.13E0, 0.27E0, 0.37E0, 0.47E0, &
-      0.64E0, 0.77E0, 0.87E0 ]
-    REAL, PARAMETER :: sddata(9) = 0.015E0
-    REAL, PARAMETER :: bkpt(13) = [ -0.6E0, -0.4E0, -0.2E0, 0.0E0, 0.2E0, 0.4E0, &
-      0.6E0, 0.8E0, 0.9E0, 1.0E0, 1.1E0, 1.2E0, 1.3E0 ]
+    REAL(SP), PARAMETER :: xdata(9) = [ 0.15_SP, 0.27_SP, 0.33_SP, 0.40_SP, 0.43_SP, &
+      0.47_SP, 0.53_SP, 0.58_SP, 0.63_SP ]
+    REAL(SP), PARAMETER :: ydata(9) = [ 0.025_SP, 0.05_SP, 0.13_SP, 0.27_SP, 0.37_SP, &
+      0.47_SP, 0.64_SP, 0.77_SP, 0.87_SP ]
+    REAL(SP), PARAMETER :: sddata(9) = 0.015_SP
+    REAL(SP), PARAMETER :: bkpt(13) = [ -0.6_SP, -0.4_SP, -0.2_SP, 0._SP, 0.2_SP, &
+      0.4_SP, 0.6_SP, 0.8_SP, 0.9_SP, 1._SP, 1.1_SP, 1.2_SP, 1.3_SP ]
     !
     !     Store the data to be used to check the accuracy of the computed
     !     results.  See SAND78-1291, p.26.
     !
-    REAL, PARAMETER :: coefck(9) = [ 1.186380846E-13, -2.826166426E-14, &
-      -4.333929094E-15, 1.722113311E-01, 9.421965984E-01, 9.684708719E-01, &
-      9.894902905E-01, 1.005254855E+00, 9.894902905E-01 ]
-    REAL, PARAMETER :: check(51) = [ 2.095830752E-16, 2.870188850E-05, &
-      2.296151081E-04, 7.749509897E-04, 1.836920865E-03, 3.587736064E-03, &
-      6.199607918E-03, 9.844747759E-03, 1.469536692E-02, 2.092367672E-02, &
-      2.870188851E-02, 3.824443882E-02, 4.993466504E-02, 6.419812979E-02, &
-      8.146039566E-02, 1.021470253E-01, 1.266835812E-01, 1.554956261E-01, &
-      1.890087225E-01, 2.276484331E-01, 2.718403204E-01, 3.217163150E-01, &
-      3.762338189E-01, 4.340566020E-01, 4.938484342E-01, 5.542730855E-01, &
-      6.139943258E-01, 6.716759250E-01, 7.259816530E-01, 7.755752797E-01, &
-      8.191205752E-01, 8.556270903E-01, 8.854875002E-01, 9.094402609E-01, &
-      9.282238286E-01, 9.425766596E-01, 9.532372098E-01, 9.609439355E-01, &
-      9.664352927E-01, 9.704497377E-01, 9.737257265E-01, 9.768786393E-01, &
-      9.800315521E-01, 9.831844649E-01, 9.863373777E-01, 9.894902905E-01, &
-      9.926011645E-01, 9.954598055E-01, 9.978139804E-01, 9.994114563E-01, &
-      1.000000000E+00 ]
+    REAL(SP), PARAMETER :: coefck(9) = [ 1.186380846E-13_SP, -2.826166426E-14_SP, &
+      -4.333929094E-15_SP, 1.722113311E-01_SP, 9.421965984E-01_SP, 9.684708719E-01_SP, &
+      9.894902905E-01_SP, 1.005254855E+00_SP, 9.894902905E-01_SP ]
+    REAL(SP), PARAMETER :: check(51) = [ 2.095830752E-16_SP, 2.870188850E-05_SP, &
+      2.296151081E-04_SP, 7.749509897E-04_SP, 1.836920865E-03_SP, 3.587736064E-03_SP, &
+      6.199607918E-03_SP, 9.844747759E-03_SP, 1.469536692E-02_SP, 2.092367672E-02_SP, &
+      2.870188851E-02_SP, 3.824443882E-02_SP, 4.993466504E-02_SP, 6.419812979E-02_SP, &
+      8.146039566E-02_SP, 1.021470253E-01_SP, 1.266835812E-01_SP, 1.554956261E-01_SP, &
+      1.890087225E-01_SP, 2.276484331E-01_SP, 2.718403204E-01_SP, 3.217163150E-01_SP, &
+      3.762338189E-01_SP, 4.340566020E-01_SP, 4.938484342E-01_SP, 5.542730855E-01_SP, &
+      6.139943258E-01_SP, 6.716759250E-01_SP, 7.259816530E-01_SP, 7.755752797E-01_SP, &
+      8.191205752E-01_SP, 8.556270903E-01_SP, 8.854875002E-01_SP, 9.094402609E-01_SP, &
+      9.282238286E-01_SP, 9.425766596E-01_SP, 9.532372098E-01_SP, 9.609439355E-01_SP, &
+      9.664352927E-01_SP, 9.704497377E-01_SP, 9.737257265E-01_SP, 9.768786393E-01_SP, &
+      9.800315521E-01_SP, 9.831844649E-01_SP, 9.863373777E-01_SP, 9.894902905E-01_SP, &
+      9.926011645E-01_SP, 9.954598055E-01_SP, 9.978139804E-01_SP, 9.994114563E-01_SP, &
+      1.000000000E+00_SP ]
     !* FIRST EXECUTABLE STATEMENT  FCQX
     IF( Kprint>=2 ) WRITE (Lun,99001)
     !
@@ -902,8 +902,8 @@ CONTAINS
     !
     !     Check coefficients.
     !
-    tol = 7.0E0*SQRT(R1MACH(4))
-    diff = 0.0E0
+    tol = 7._SP*SQRT(R1MACH(4))
+    diff = 0._SP
     DO i = 1, ndata
       diff = MAX(diff,ABS(coeff(i)-coefck(i)))
     END DO
@@ -933,7 +933,7 @@ CONTAINS
       !
       !       The function BVALU is in the de Boor B-spline package.
       !
-      xval = REAL(i-1)/(nval-1)
+      xval = REAL(i-1,SP)/(nval-1)
       ii = 1
       DO j = 1, 3
         v(i,j+1) = BVALU(bkpt,coeff,n,nord,j-1,xval,ii,work)
@@ -945,7 +945,7 @@ CONTAINS
       v(i,5) = SQRT(CV(xval,ndata,nconst,nord,nbkpt,bkpt,w))
     END DO
     !
-    diff = 0.0E0
+    diff = 0._SP
     DO i = 1, nval
       diff = MAX(diff,ABS(v(i,2)-check(i)))
     END DO
@@ -1080,7 +1080,7 @@ CONTAINS
     !     .. Intrinsic Functions ..
     INTRINSIC EXP
     !     .. Data statements ..
-    REAL, PARAMETER :: two = 2.0E0
+    REAL(SP), PARAMETER :: two = 2._SP
     !* FIRST EXECUTABLE STATEMENT  FCN1
     IF( Iflag/=1 ) RETURN
     DO i = 1, M
@@ -1126,7 +1126,7 @@ CONTAINS
     !     .. Intrinsic Functions ..
     INTRINSIC EXP
     !     .. Data statements ..
-    REAL, PARAMETER :: two = 2.0E0
+    REAL(SP), PARAMETER :: two = 2._SP
     !* FIRST EXECUTABLE STATEMENT  FCN2
     IF( Iflag==0 ) RETURN
     !
@@ -1190,7 +1190,7 @@ CONTAINS
     !     .. Intrinsic Functions ..
     INTRINSIC EXP
     !     .. Data statements ..
-    REAL, PARAMETER :: two = 2.0E0
+    REAL(SP), PARAMETER :: two = 2._SP
     !* FIRST EXECUTABLE STATEMENT  FCN3
     IF( Iflag==0 ) RETURN
     !

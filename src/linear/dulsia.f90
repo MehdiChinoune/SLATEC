@@ -242,7 +242,7 @@ SUBROUTINE DULSIA(A,Mda,M,N,B,Mdb,Nb,Re,Ae,Key,Mode,Np,Krank,Ksure,Rnorm,&
                   RETURN
                 ELSE
                   !
-                  eps = 10.*D1MACH(3)
+                  eps = 10._SP*D1MACH(3)
                   m1 = 1
                   m2 = m1 + M
                   m3 = m2 + M
@@ -251,10 +251,10 @@ SUBROUTINE DULSIA(A,Mda,M,N,B,Mdb,Nb,Re,Ae,Key,Mode,Np,Krank,Ksure,Rnorm,&
                   !
                   IF( Key==1 ) THEN
                     !
-                    IF( Ae(1)<0.0D0 ) GOTO 100
+                    IF( Ae(1)<0._DP ) GOTO 100
                     DO i = 1, M
-                      IF( Re(i)<0.0D0 ) GOTO 10
-                      IF( Re(i)>1.0D0 ) GOTO 20
+                      IF( Re(i)<0._DP ) GOTO 10
+                      IF( Re(i)>1._DP ) GOTO 20
                       IF( Re(i)<eps ) Re(i) = eps
                       W(m4-1+i) = Ae(1)
                     END DO
@@ -262,31 +262,31 @@ SUBROUTINE DULSIA(A,Mda,M,N,B,Mdb,Nb,Re,Ae,Key,Mode,Np,Krank,Ksure,Rnorm,&
                       W(m1),W(m2),W(m3),Iwork(m1),Iwork(m2))
                   ELSEIF( Key==2 ) THEN
                     !
-                    IF( Re(1)<0.0D0 ) GOTO 10
-                    IF( Re(1)>1.0D0 ) GOTO 20
+                    IF( Re(1)<0._DP ) GOTO 10
+                    IF( Re(1)>1._DP ) GOTO 20
                     IF( Re(1)<eps ) Re(1) = eps
                     DO i = 1, M
                       W(m4-1+i) = Re(1)
-                      IF( Ae(i)<0.0D0 ) GOTO 100
+                      IF( Ae(i)<0._DP ) GOTO 100
                     END DO
                     CALL DU11US(A,Mda,M,N,W(m4),Ae,Mode,Np,Krank,Ksure,&
                       W(m1),W(m2),W(m3),Iwork(m1),Iwork(m2))
                   ELSEIF( Key==3 ) THEN
                     !
                     DO i = 1, M
-                      IF( Re(i)<0.0D0 ) GOTO 10
-                      IF( Re(i)>1.0D0 ) GOTO 20
+                      IF( Re(i)<0._DP ) GOTO 10
+                      IF( Re(i)>1._DP ) GOTO 20
                       IF( Re(i)<eps ) Re(i) = eps
-                      IF( Ae(i)<0.0D0 ) GOTO 100
+                      IF( Ae(i)<0._DP ) GOTO 100
                     END DO
                     CALL DU11US(A,Mda,M,N,Re,Ae,Mode,Np,Krank,Ksure,W(m1),&
                       W(m2),W(m3),Iwork(m1),Iwork(m2))
                   ELSE
                     !
                     IF( Re(1)<0.D00 ) GOTO 10
-                    IF( Re(1)>1.0D0 ) GOTO 20
+                    IF( Re(1)>1._DP ) GOTO 20
                     IF( Re(1)<eps ) Re(1) = eps
-                    IF( Ae(1)<0.0D0 ) GOTO 100
+                    IF( Ae(1)<0._DP ) GOTO 100
                     DO i = 1, M
                       W(m4-1+i) = Re(1)
                       W(m5-1+i) = Ae(1)

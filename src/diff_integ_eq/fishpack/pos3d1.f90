@@ -29,7 +29,7 @@ SUBROUTINE POS3D1(Lp,L,Mp,M,N,A,B,C,Ldimf,Mdimf,F,Xrt,Yrt,T,D,Wx,Wy,C1,C2,Bb)
     Xrt(L), Yrt(M)
   INTEGER :: i, ifwrd, j, k, lr, lrdel, mr, mrdel, nr
   REAL(SP) :: di, dj, dx, dy, scalx, scaly
-  REAL(SP), PARAMETER :: pi = 3.14159265358979
+  REAL(SP), PARAMETER :: pi = 3.14159265358979_SP
   !* FIRST EXECUTABLE STATEMENT  POS3D1
   lr = L
   mr = M
@@ -39,29 +39,29 @@ SUBROUTINE POS3D1(Lp,L,Mp,M,N,A,B,C,Ldimf,Mdimf,F,Xrt,Yrt,T,D,Wx,Wy,C1,C2,Bb)
   !
   lrdel = ((Lp-1)*(Lp-3)*(Lp-5))/3
   scalx = lr + lrdel
-  dx = pi/(2.*scalx)
+  dx = pi/(2._SP*scalx)
   SELECT CASE (Lp)
     CASE (1)
-      Xrt(1) = 0.
-      Xrt(lr) = -4.*C1
+      Xrt(1) = 0._SP
+      Xrt(lr) = -4._SP*C1
       DO i = 3, lr, 2
-        Xrt(i-1) = -4.*C1*(SIN((i-1)*dx))**2
+        Xrt(i-1) = -4._SP*C1*(SIN((i-1)*dx))**2
         Xrt(i) = Xrt(i-1)
       END DO
       CALL RFFTI(lr,Wx)
       GOTO 100
     CASE (2)
-      di = 0.0
+      di = 0._SP
     CASE (4)
-      di = 1.0
+      di = 1._SP
     CASE DEFAULT
       di = 0.5
-      scalx = 2.*scalx
+      scalx = 2._SP*scalx
   END SELECT
   DO i = 1, lr
-    Xrt(i) = -4.*C1*(SIN((i-di)*dx))**2
+    Xrt(i) = -4._SP*C1*(SIN((i-di)*dx))**2
   END DO
-  scalx = 2.*scalx
+  scalx = 2._SP*scalx
   SELECT CASE (Lp)
     CASE (1)
     CASE (3)
@@ -75,29 +75,29 @@ SUBROUTINE POS3D1(Lp,L,Mp,M,N,A,B,C,Ldimf,Mdimf,F,Xrt,Yrt,T,D,Wx,Wy,C1,C2,Bb)
   END SELECT
   100  mrdel = ((Mp-1)*(Mp-3)*(Mp-5))/3
   scaly = mr + mrdel
-  dy = pi/(2.*scaly)
+  dy = pi/(2._SP*scaly)
   SELECT CASE (Mp)
     CASE (1)
-      Yrt(1) = 0.
-      Yrt(mr) = -4.*C2
+      Yrt(1) = 0._SP
+      Yrt(mr) = -4._SP*C2
       DO j = 3, mr, 2
-        Yrt(j-1) = -4.*C2*(SIN((j-1)*dy))**2
+        Yrt(j-1) = -4._SP*C2*(SIN((j-1)*dy))**2
         Yrt(j) = Yrt(j-1)
       END DO
       CALL RFFTI(mr,Wy)
       GOTO 200
     CASE (2)
-      dj = 0.0
+      dj = 0._SP
     CASE (4)
-      dj = 1.0
+      dj = 1._SP
     CASE DEFAULT
       dj = 0.5
-      scaly = 2.*scaly
+      scaly = 2._SP*scaly
   END SELECT
   DO j = 1, mr
-    Yrt(j) = -4.*C2*(SIN((j-dj)*dy))**2
+    Yrt(j) = -4._SP*C2*(SIN((j-dj)*dy))**2
   END DO
-  scaly = 2.*scaly
+  scaly = 2._SP*scaly
   SELECT CASE (Mp)
     CASE (1)
     CASE (3)

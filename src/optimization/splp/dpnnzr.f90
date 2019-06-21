@@ -64,7 +64,7 @@ SUBROUTINE DPNNZR(I,Xval,Iplace,Sx,Ix,Ircx)
   REAL(DP) :: Xval, Sx(:)
   INTEGER :: i1, idiff, iend, ii, il, ilast, iopt, ipl, ipploc, istart, j, l, &
     ll, lmx, lpg, n20046, nerr, np
-  REAL(DP), PARAMETER :: zero = 0.D0
+  REAL(DP), PARAMETER :: zero = 0._DP
   !* FIRST EXECUTABLE STATEMENT  DPNNZR
   iopt = 1
   !

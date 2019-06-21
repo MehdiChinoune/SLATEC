@@ -34,10 +34,10 @@ SUBROUTINE MACON
   uro_com = R1MACH(4)
   sru_com = SQRT(uro_com)
   dd = -LOG10(uro_com)
-  lpar_com = INT( 0.5*dd )
+  lpar_com = INT( 0.5_SP*dd )
   ke = INT( 0.5 + 0.75*dd )
-  eps_com = 10.**(-2*ke)
+  eps_com = 10._SP**(-2*ke)
   sqovfl_com = SQRT(R1MACH(2))
-  twou_com = 2.0*uro_com
-  fouru_com = 4.0*uro_com
+  twou_com = 2._SP*uro_com
+  fouru_com = 4._SP*uro_com
 END SUBROUTINE MACON

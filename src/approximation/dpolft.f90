@@ -139,30 +139,30 @@ SUBROUTINE DPOLFT(N,X,Y,W,Maxdeg,Ndeg,Eps,R,Ierr,A)
   REAL(DP) :: temd1, temd2, degf, den, etst, f, fcrit, sig, sigj, sigjm1, sigpas, &
     temp, xm, yp(1), w1, w11
   REAL(DP), PARAMETER :: co(4,3)= RESHAPE( [ &
-    -13.086850D0, -2.4648165D0, -3.3846535D0, -1.2973162D0, &
-    -3.3381146D0, -1.7812271D0, -3.2578406D0, -1.6589279D0, &
-    -1.6282703D0, -1.3152745D0, -3.2640179D0, -1.9829776D0 ], [4,3] )
+    -13.086850_DP, -2.4648165_DP, -3.3846535_DP, -1.2973162_DP, &
+    -3.3381146_DP, -1.7812271_DP, -3.2578406_DP, -1.6589279_DP, &
+    -1.6282703_DP, -1.3152745_DP, -3.2640179_DP, -1.9829776_DP ], [4,3] )
   !* FIRST EXECUTABLE STATEMENT  DPOLFT
   m = ABS(N)
-  yp = 0.D0
+  yp = 0._DP
   IF( m==0 ) GOTO 700
   IF( Maxdeg<0 ) GOTO 700
   A(1) = Maxdeg
   mop1 = Maxdeg + 1
   IF( m<mop1 ) GOTO 700
-  IF( Eps<0.0D0 .AND. m==mop1 ) GOTO 700
+  IF( Eps<0._DP .AND. m==mop1 ) GOTO 700
   xm = m
   etst = Eps*Eps*xm
-  IF( W(1)<0.0D0 ) THEN
+  IF( W(1)<0._DP ) THEN
     DO i = 1, m
-      W(i) = 1.0D0
+      W(i) = 1._DP
     END DO
   ELSE
     DO i = 1, m
-      IF( W(i)<=0.0D0 ) GOTO 700
+      IF( W(i)<=0._DP ) GOTO 700
     END DO
   END IF
-  IF( Eps<0.0D0 ) THEN
+  IF( Eps<0._DP ) THEN
     !
     ! DETERMINE SIGNIFICANCE LEVEL INDEX TO BE USED IN STATISTICAL TEST FOR
     ! CHOOSING DEGREE OF POLYNOMIAL FIT
@@ -187,9 +187,9 @@ SUBROUTINE DPOLFT(N,X,Y,W,Maxdeg,Ndeg,Eps,R,Ierr,A)
   k4 = k3 + m
   k5 = k4 + m
   DO i = 2, k4
-    A(i) = 0.0D0
+    A(i) = 0._DP
   END DO
-  w11 = 0.0D0
+  w11 = 0._DP
   IF( N<0 ) THEN
     !
     ! CONSTRAINED CASE
@@ -204,21 +204,21 @@ SUBROUTINE DPOLFT(N,X,Y,W,Maxdeg,Ndeg,Eps,R,Ierr,A)
     !
     DO i = 1, m
       k4pi = k4 + i
-      A(k4pi) = 1.0D0
+      A(k4pi) = 1._DP
       w11 = w11 + W(i)
     END DO
   END IF
   !
   ! COMPUTE FIT OF DEGREE ZERO
   !
-  temd1 = 0.0D0
+  temd1 = 0._DP
   DO i = 1, m
     k4pi = k4 + i
     temd1 = temd1 + W(i)*Y(i)*A(k4pi)
   END DO
   temd1 = temd1/w11
   A(k2+1) = temd1
-  sigj = 0.0D0
+  sigj = 0._DP
   DO i = 1, m
     k4pi = k4 + i
     k5pi = k5 + i
@@ -251,7 +251,7 @@ SUBROUTINE DPOLFT(N,X,Y,W,Maxdeg,Ndeg,Eps,R,Ierr,A)
     !
     ! COMPUTE NEW A COEFFICIENT
     !
-    temd1 = 0.0D0
+    temd1 = 0._DP
     DO i = 1, m
       k4pi = k4 + i
       temd2 = A(k4pi)
@@ -262,7 +262,7 @@ SUBROUTINE DPOLFT(N,X,Y,W,Maxdeg,Ndeg,Eps,R,Ierr,A)
     ! EVALUATE ORTHOGONAL POLYNOMIAL AT DATA POINTS
     !
     w1 = w11
-    w11 = 0.0D0
+    w11 = 0._DP
     DO i = 1, m
       k3pi = k3 + i
       k4pi = k4 + i
@@ -275,7 +275,7 @@ SUBROUTINE DPOLFT(N,X,Y,W,Maxdeg,Ndeg,Eps,R,Ierr,A)
     ! GET NEW ORTHOGONAL POLYNOMIAL COEFFICIENT USING PARTIAL DOUBLE
     ! PRECISION
     !
-    temd1 = 0.0D0
+    temd1 = 0._DP
     DO i = 1, m
       k4pi = k4 + i
       k5pi = k5 + i
@@ -291,7 +291,7 @@ SUBROUTINE DPOLFT(N,X,Y,W,Maxdeg,Ndeg,Eps,R,Ierr,A)
     ! THE MOST SIGNIFICANT BITS ARE STORED IN  R(I), AND THE LEAST
     ! SIGNIFICANT BITS ARE IN  A(K5PI) .
     !
-    sigj = 0.0D0
+    sigj = 0._DP
     DO i = 1, m
       k4pi = k4 + i
       k5pi = k5 + i
@@ -308,9 +308,9 @@ SUBROUTINE DPOLFT(N,X,Y,W,Maxdeg,Ndeg,Eps,R,Ierr,A)
       !
       ! COMPUTE F STATISTICS  (INPUT EPS < 0.)
       !
-      IF( sigj==0.0D0 ) GOTO 600
+      IF( sigj==0._DP ) GOTO 600
       degf = m - j - 1
-      den = (co(4,ksig)*degf+1.0D0)*degf
+      den = (co(4,ksig)*degf+1._DP)*degf
       fcrit = (((co(3,ksig)*degf)+co(2,ksig))*degf+co(1,ksig))/den
       fcrit = fcrit*fcrit
       f = (sigjm1-sigj)*degf/sigj

@@ -201,7 +201,7 @@ SUBROUTINE DBNDAC(G,Mdg,Nb,Ip,Ir,Mt,Jt)
   INTEGER :: i, ie, ig, ig1, ig2, iopt, j, jg, k, kh, l, lp1, mh, mu, nbp1, nerr
   REAL(DP) :: rho, zero
   !* FIRST EXECUTABLE STATEMENT  DBNDAC
-  zero = 0.D0
+  zero = 0._DP
   !
   ! ALG. STEPS 1-4 ARE PERFORMED EXTERNAL TO THIS SUBROUTINE.
   !

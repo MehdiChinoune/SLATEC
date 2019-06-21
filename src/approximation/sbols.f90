@@ -493,8 +493,8 @@ SUBROUTINE SBOLS(W,Mdw,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Iw)
     !     END PROCEDURE
     !     DO(PROCESS OPTION ARRAY)
     !     PROCEDURE(PROCESS OPTION ARRAY)
-    zero = 0.E0
-    one = 1.E0
+    zero = 0._SP
+    one = 1._SP
     checkl = .FALSE.
     lenx = Ncols
     iscale = 1

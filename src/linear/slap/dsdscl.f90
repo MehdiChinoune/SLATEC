@@ -162,14 +162,14 @@ SUBROUTINE DSDSCL(N,Nelt,Ia,Ja,A,X,B,Dinv,Job,Itol)
   !
   IF( Job/=0 ) THEN
     DO icol = 1, N
-      Dinv(icol) = 1.0D0/SQRT(A(Ja(icol)))
+      Dinv(icol) = 1._DP/SQRT(A(Ja(icol)))
     END DO
   ELSE
     !
     !         UNSCALING...
     !
     DO icol = 1, N
-      Dinv(icol) = 1.0D0/Dinv(icol)
+      Dinv(icol) = 1._DP/Dinv(icol)
     END DO
   END IF
   !

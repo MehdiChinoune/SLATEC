@@ -162,13 +162,13 @@ SUBROUTINE CBESI(Z,Fnu,Kode,N,Cy,Nz,Ierr)
   COMPLEX(SP) :: csgn, Cy(N), Z, zn
   REAL(SP) :: aa, alim, arg, dig, elim, Fnu, fnul, rl, r1m5, s1, &
     s2, tol, xx, yy, az, fn, bb, ascle, rtol, atol
-  REAL(SP), PARAMETER :: pi = 3.14159265358979324E0
-  COMPLEX(SP), PARAMETER :: cone = (1.0E0,0.0E0)
+  REAL(SP), PARAMETER :: pi = 3.14159265358979324_SP
+  COMPLEX(SP), PARAMETER :: cone = (1._SP,0._SP)
   !
   !* FIRST EXECUTABLE STATEMENT  CBESI
   Ierr = 0
   Nz = 0
-  IF( Fnu<0.0E0 ) Ierr = 1
+  IF( Fnu<0._SP ) Ierr = 1
   IF( Kode<1 .OR. Kode>2 ) Ierr = 1
   IF( N<1 ) Ierr = 1
   IF( Ierr/=0 ) RETURN
@@ -185,25 +185,25 @@ SUBROUTINE CBESI(Z,Fnu,Kode,N,Cy,Nz,Ierr)
   !     DIG = NUMBER OF BASE 10 DIGITS IN TOL = 10**(-DIG).
   !     FNUL IS THE LOWER BOUNDARY OF THE ASYMPTOTIC SERIES FOR LARGE FNU.
   !-----------------------------------------------------------------------
-  tol = MAX(R1MACH(4),1.0E-18)
+  tol = MAX(R1MACH(4),1.0E-18_SP)
   k1 = I1MACH(12)
   k2 = I1MACH(13)
   r1m5 = R1MACH(5)
   k = MIN(ABS(k1),ABS(k2))
-  elim = 2.303E0*(k*r1m5-3.0E0)
+  elim = 2.303_SP*(k*r1m5-3._SP)
   k1 = I1MACH(11) - 1
   aa = r1m5*k1
-  dig = MIN(aa,18.0E0)
-  aa = aa*2.303E0
-  alim = elim + MAX(-aa,-41.45E0)
-  rl = 1.2E0*dig + 3.0E0
-  fnul = 10.0E0 + 6.0E0*(dig-3.0E0)
+  dig = MIN(aa,18._SP)
+  aa = aa*2.303_SP
+  alim = elim + MAX(-aa,-41.45E0_SP)
+  rl = 1.2_SP*dig + 3._SP
+  fnul = 10._SP + 6._SP*(dig-3._SP)
   az = ABS(Z)
   !-----------------------------------------------------------------------
   !     TEST FOR RANGE
   !-----------------------------------------------------------------------
-  aa = 0.5E0/tol
-  bb = I1MACH(9)*0.5E0
+  aa = 0.5_SP/tol
+  bb = I1MACH(9)*0.5_SP
   aa = MIN(aa,bb)
   IF( az<=aa ) THEN
     fn = Fnu + (N-1)
@@ -213,7 +213,7 @@ SUBROUTINE CBESI(Z,Fnu,Kode,N,Cy,Nz,Ierr)
       IF( fn>aa ) Ierr = 3
       zn = Z
       csgn = cone
-      IF( xx<0.0E0 ) THEN
+      IF( xx<0._SP ) THEN
         zn = -Z
         !-----------------------------------------------------------------------
         !     CALCULATE CSGN=EXP(FNU*PI*I) TO MINIMIZE LOSSES OF SIGNIFICANCE
@@ -221,34 +221,34 @@ SUBROUTINE CBESI(Z,Fnu,Kode,N,Cy,Nz,Ierr)
         !-----------------------------------------------------------------------
         inu = INT( Fnu )
         arg = (Fnu-inu)*pi
-        IF( yy<0.0E0 ) arg = -arg
+        IF( yy<0._SP ) arg = -arg
         s1 = COS(arg)
         s2 = SIN(arg)
-        csgn = CMPLX(s1,s2)
+        csgn = CMPLX(s1,s2,SP)
         IF( MOD(inu,2)==1 ) csgn = -csgn
       END IF
       CALL CBINU(zn,Fnu,Kode,N,Cy,Nz,rl,fnul,tol,elim,alim)
       IF( Nz>=0 ) THEN
-        IF( xx>=0.0E0 ) RETURN
+        IF( xx>=0._SP ) RETURN
         !-----------------------------------------------------------------------
         !     ANALYTIC CONTINUATION TO THE LEFT HALF PLANE
         !-----------------------------------------------------------------------
         nn = N - Nz
         IF( nn==0 ) RETURN
-        rtol = 1.0E0/tol
-        ascle = R1MACH(1)*rtol*1.0E+3
+        rtol = 1._SP/tol
+        ascle = R1MACH(1)*rtol*1.E+3_SP
         DO i = 1, nn
           !       CY(I) = CY(I)*CSGN
           zn = Cy(i)
           aa = REAL(zn)
           bb = AIMAG(zn)
-          atol = 1.0E0
+          atol = 1._SP
           IF( MAX(ABS(aa),ABS(bb))<=ascle ) THEN
-            zn = zn*CMPLX(rtol,0.0E0)
+            zn = zn*CMPLX(rtol,0._SP,SP)
             atol = tol
           END IF
           zn = zn*csgn
-          Cy(i) = zn*CMPLX(atol,0.0E0)
+          Cy(i) = zn*CMPLX(atol,0._SP,SP)
           csgn = -csgn
         END DO
         RETURN

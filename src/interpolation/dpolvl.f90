@@ -92,7 +92,7 @@ SUBROUTINE DPOLVL(Nder,Xx,Yfit,Yp,N,X,C,Work,Ierr)
     !
     !     *****   CODING FOR THE CASE NDER = 0
     !
-    pione = 1.0D0
+    pione = 1._DP
     pone = C(1)
     Yfit = pone
     IF( N==1 ) RETURN
@@ -145,7 +145,7 @@ SUBROUTINE DPOLVL(Nder,Xx,Yfit,Yp,N,X,C,Work,Ierr)
     !
     !               YFIT = PTWO
     !
-    Work(1) = 1.0D0
+    Work(1) = 1._DP
     pone = C(1)
     DO k = 2, N
       km1 = k - 1
@@ -184,7 +184,7 @@ SUBROUTINE DPOLVL(Nder,Xx,Yfit,Yp,N,X,C,Work,Ierr)
         END DO
       END DO
       IF( ndr/=1 ) THEN
-        fac = 1.0D0
+        fac = 1._DP
         DO k = 2, ndr
           xk = k
           fac = xk*fac
@@ -200,7 +200,7 @@ SUBROUTINE DPOLVL(Nder,Xx,Yfit,Yp,N,X,C,Work,Ierr)
     !     *****  SET EXCESS DERIVATIVES TO ZERO.
     !
     DO k = N, Nder
-      Yp(k) = 0.0D0
+      Yp(k) = 0._DP
     END DO
   ELSE
     Yfit = C(1)
@@ -208,7 +208,7 @@ SUBROUTINE DPOLVL(Nder,Xx,Yfit,Yp,N,X,C,Work,Ierr)
     !     *****  CODING FOR THE CASE  N=1 AND NDER > 0
     !
     DO k = 1, Nder
-      Yp(k) = 0.0D0
+      Yp(k) = 0._DP
     END DO
     RETURN
   END IF

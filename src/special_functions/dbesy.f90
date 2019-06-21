@@ -84,15 +84,15 @@ SUBROUTINE DBESY(X,Fnu,N,Y)
   INTEGER, PARAMETER :: nulim(2) = [ 70, 100 ]
   !* FIRST EXECUTABLE STATEMENT  DBESY
   nn = -I1MACH(15)
-  elim = 2.303D0*(nn*D1MACH(5)-3.0D0)
-  xlim = D1MACH(1)*1.0D+3
-  IF( Fnu<0.0D0 ) THEN
+  elim = 2.303_DP*(nn*D1MACH(5)-3._DP)
+  xlim = D1MACH(1)*1.E+3_DP
+  IF( Fnu<0._DP ) THEN
     !
     !
     !
     CALL XERMSG('DBESY','ORDER, FNU, LESS THAN ZERO',2,1)
     RETURN
-  ELSEIF( X<=0.0D0 ) THEN
+  ELSEIF( X<=0._DP ) THEN
     CALL XERMSG('DBESY','X LESS THAN OR EQUAL TO ZERO',2,1)
     RETURN
   ELSEIF( X<xlim ) THEN
@@ -111,11 +111,11 @@ SUBROUTINE DBESY(X,Fnu,N,Y)
     dnu = Fnu - nud
     nn = MIN(2,nd)
     fn = Fnu + N - 1
-    IF( fn<2.0D0 ) THEN
+    IF( fn<2._DP ) THEN
       !
       !     OVERFLOW TEST
-      IF( fn<=1.0D0 ) GOTO 200
-      IF( -fn*(LOG(X)-0.693D0)<=elim ) GOTO 200
+      IF( fn<=1._DP ) GOTO 200
+      IF( -fn*(LOG(X)-0.693_DP)<=elim ) GOTO 200
       CALL XERMSG('DBESY',&
         'OVERFLOW, FNU OR N TOO LARGE OR X TOO SMALL',6,1)
       RETURN
@@ -125,10 +125,10 @@ SUBROUTINE DBESY(X,Fnu,N,Y)
       !     FOR THE LAST ORDER, FNU+N-1>=NULIM
       !
       xxn = X/fn
-      w2n = 1.0D0 - xxn*xxn
-      IF( w2n>0.0D0 ) THEN
+      w2n = 1._DP - xxn*xxn
+      IF( w2n>0._DP ) THEN
         rann = SQRT(w2n)
-        azn = LOG((1.0D0+rann)/xxn) - rann
+        azn = LOG((1._DP+rann)/xxn) - rann
         cn = fn*azn
         IF( cn>elim ) THEN
           CALL XERMSG('DBESY',&
@@ -138,7 +138,7 @@ SUBROUTINE DBESY(X,Fnu,N,Y)
       END IF
       IF( nud<nulim(nn) ) THEN
         !
-        IF( dnu/=0.0D0 ) THEN
+        IF( dnu/=0._DP ) THEN
           nb = 2
           IF( nud==0 .AND. nd==1 ) nb = 1
           CALL DBSYNU(X,dnu,nb,w)
@@ -150,8 +150,8 @@ SUBROUTINE DBESY(X,Fnu,N,Y)
           IF( nud==0 .AND. nd==1 ) GOTO 20
           s2 = BESSEL_Y1(X)
         END IF
-        trx = 2.0D0/X
-        tm = (dnu+dnu+2.0D0)/X
+        trx = 2._DP/X
+        tm = (dnu+dnu+2._DP)/X
         !     FORWARD RECUR FROM DNU TO FNU+1 TO GET Y(1) AND Y(2)
         IF( nd==1 ) nud = nud - 1
         IF( nud>0 ) THEN
@@ -169,7 +169,7 @@ SUBROUTINE DBESY(X,Fnu,N,Y)
         !
         !     ASYMPTOTIC EXPANSION FOR ORDERS FNU AND FNU+1>=NULIM
         !
-        flgjy = -1.0D0
+        flgjy = -1._DP
         CALL DASYJY(DYAIRY,X,Fnu,flgjy,nn,Y,wk,iflw)
         IF( iflw/=0 ) THEN
           CALL XERMSG('DBESY',&
@@ -177,8 +177,8 @@ SUBROUTINE DBESY(X,Fnu,N,Y)
           RETURN
         ELSE
           IF( nn==1 ) RETURN
-          trx = 2.0D0/X
-          tm = (Fnu+Fnu+2.0D0)/X
+          trx = 2._DP/X
+          tm = (Fnu+Fnu+2._DP)/X
           GOTO 100
         END IF
       END IF
@@ -196,7 +196,7 @@ SUBROUTINE DBESY(X,Fnu,N,Y)
   END DO
   RETURN
   200 CONTINUE
-  IF( dnu==0.0D0 ) THEN
+  IF( dnu==0._DP ) THEN
     j = nud
     IF( j/=1 ) THEN
       j = j + 1
@@ -206,7 +206,7 @@ SUBROUTINE DBESY(X,Fnu,N,Y)
     END IF
     Y(j) = BESSEL_Y1(X)
     IF( nd==1 ) RETURN
-    trx = 2.0D0/X
+    trx = 2._DP/X
     tm = trx
     GOTO 100
   ELSE

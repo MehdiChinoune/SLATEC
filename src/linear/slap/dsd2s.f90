@@ -148,7 +148,7 @@ SUBROUTINE DSD2S(N,Nelt,Ia,Ja,A,Isym,Dinv)
     END IF
   END DO
   DO i = 1, N
-    Dinv(i) = 1.0D0/Dinv(i)
+    Dinv(i) = 1._DP/Dinv(i)
   END DO
   !
   !------------- LAST LINE OF DSD2S FOLLOWS ----------------------------

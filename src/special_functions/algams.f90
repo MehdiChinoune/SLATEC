@@ -38,10 +38,10 @@ SUBROUTINE ALGAMS(X,Algam,Sgngam)
   REAL(SP) :: Algam, Sgngam, X
   INTEGER :: i
   Algam = LOG_GAMMA(X)
-  Sgngam = 1.0
-  IF( X>0.0 ) RETURN
+  Sgngam = 1._SP
+  IF( X>0._SP ) RETURN
   !
-  i = INT( MOD(-AINT(X),2.0) + 0.1 )
-  IF( i==0 ) Sgngam = -1.0
+  i = INT( MOD(-AINT(X),2._SP) + 0.1 )
+  IF( i==0 ) Sgngam = -1._SP
   !
 END SUBROUTINE ALGAMS

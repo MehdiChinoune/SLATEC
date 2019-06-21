@@ -66,7 +66,7 @@ SUBROUTINE U11US(A,Mda,M,N,Ub,Db,Mode,Np,Krank,Ksure,H,W,Eb,Ir,Ic)
   DO i = 1, M
     Eb(i) = MAX(Db(i),Ub(i)*H(i))
     Ub(i) = Eb(i)
-    Db(i) = 0.0
+    Db(i) = 0._SP
   END DO
   !
   !          DISCARD SELF DEPENDENT ROWS
@@ -133,9 +133,9 @@ SUBROUTINE U11US(A,Mda,M,N,Ub,Db,Mode,Np,Krank,Ksure,H,W,Eb,Ir,Ic)
     !
     !     TEST FOR RANK DEFICIENCY
     !
-    IF( rmin<1.0 ) GOTO 400
+    IF( rmin<1._SP ) GOTO 400
     tt = (Eb(imin)+ABS(Db(imin)))/H(imin)
-    IF( tt<1.0 ) THEN
+    IF( tt<1._SP ) THEN
       !     COMPUTE EXACT UB
       DO i = 1, jm1
         W(i) = A(imin,i)
@@ -149,7 +149,7 @@ SUBROUTINE U11US(A,Mda,M,N,Ub,Db,Mode,Np,Krank,Ksure,H,W,Eb,Ir,Ic)
             tt = tt + ABS(W(i))*Eb(i)
           END DO
           Ub(imin) = tt
-          IF( Ub(imin)/H(imin)<1.0 ) GOTO 400
+          IF( Ub(imin)/H(imin)<1._SP ) GOTO 400
           EXIT
         ELSE
           lm1 = l - 1
@@ -211,21 +211,21 @@ SUBROUTINE U11US(A,Mda,M,N,Ub,Db,Mode,Np,Krank,Ksure,H,W,Eb,Ir,Ic)
   !     APPLY HOUSEHOLDER TRANSFORMATION
   !
   tn = NORM2(A(j,j:N))
-  IF( tn==0.0 ) GOTO 300
-  IF( A(j,j)/=0.0 ) tn = SIGN(tn,A(j,j))
+  IF( tn==0._SP ) GOTO 300
+  IF( A(j,j)/=0._SP ) tn = SIGN(tn,A(j,j))
   A(j,j:N) = A(j,j:N)/tn
-  A(j,j) = A(j,j) + 1.0
+  A(j,j) = A(j,j) + 1._SP
   IF( j/=M ) THEN
     DO i = jp1, M
       bb = -DOT_PRODUCT(A(j,j:N),A(i,j:N))/A(j,j)
       CALL SAXPY(nn,bb,A(j,j:N),1,A(i,j:N),1)
       IF( i>Np ) THEN
-        IF( H(i)/=0.0 ) THEN
-          tt = 1.0 - (ABS(A(i,j))/H(i))**2
-          tt = MAX(tt,0.0)
+        IF( H(i)/=0._SP ) THEN
+          tt = 1._SP - (ABS(A(i,j))/H(i))**2
+          tt = MAX(tt,0._SP)
           t = tt
-          tt = 1.0 + .05*tt*(H(i)/W(i))**2
-          IF( tt==1.0 ) THEN
+          tt = 1._SP + 0.05_SP*tt*(H(i)/W(i))**2
+          IF( tt==1._SP ) THEN
             H(i) = NORM2(A(i,j+1:N))
             W(i) = H(i)
           ELSE
@@ -271,10 +271,10 @@ SUBROUTINE U11US(A,Mda,M,N,Ub,Db,Mode,Np,Krank,Ksure,H,W,Eb,Ir,Ic)
     IF( is==0 ) EXIT
   END DO
   Ksure = 0
-  summ = 0.0
+  summ = 0._SP
   DO i = 1, Krank
     r2 = Ub(i)*Ub(i)
-    IF( r2+summ>=1.0 ) EXIT
+    IF( r2+summ>=1._SP ) EXIT
     summ = summ + r2
     Ksure = Ksure + 1
   END DO
@@ -288,9 +288,9 @@ SUBROUTINE U11US(A,Mda,M,N,Ub,Db,Mode,Np,Krank,Ksure,H,W,Eb,Ir,Ic)
     i = Krank
     DO
       tn = NORM2(A(kp1:M,i))/A(i,i)
-      tn = A(i,i)*SQRT(1.0+tn*tn)
+      tn = A(i,i)*SQRT(1._SP+tn*tn)
       A(kp1:M,i) = A(kp1:M,i)/tn
-      W(i) = A(i,i)/tn + 1.0
+      W(i) = A(i,i)/tn + 1._SP
       A(i,i) = -tn
       IF( i==1 ) EXIT
       im1 = i - 1

@@ -84,11 +84,11 @@ SUBROUTINE XCON(X,Ix,Ierror)
     itemp = 1
     icase = (3+SIGN(itemp,Ix))/2
     IF( icase==2 ) THEN
-      IF( ABS(X)<1.0 ) THEN
+      IF( ABS(X)<1._SP ) THEN
         X = X*radixl_com
         Ix = Ix - l_com
       END IF
-    ELSEIF( ABS(X)>=1.0 ) THEN
+    ELSEIF( ABS(X)>=1._SP ) THEN
       X = X/radixl_com
       Ix = Ix + l_com
     END IF
@@ -122,7 +122,7 @@ SUBROUTINE XCON(X,Ix,Ierror)
     !     RADIX**I <= ABS(X) < RADIX**(I+1)  IN CASE 2.
     itemp = INT( ispace/dlg10r_com )
     a = radixx_com**itemp
-    b = 10.0**ispace
+    b = 10._SP**ispace
     DO WHILE( a>b )
       itemp = itemp - 1
       a = a/radixx_com
@@ -156,7 +156,7 @@ SUBROUTINE XCON(X,Ix,Ierror)
     IF( Ierror/=0 ) RETURN
     j1 = j/ispace
     j2 = j - j1*ispace
-    X = X*z*10.0**j2
+    X = X*z*10._SP**j2
     Ix = j1*ispace
     !
     ! AT THIS POINT,
@@ -164,13 +164,13 @@ SUBROUTINE XCON(X,Ix,Ierror)
     !           10.0**-1 <= ABS(X) < 10.0**(2*ISPACE-1) IN CASE 2.
     IF( icase==2 ) GOTO 100
     50 CONTINUE
-    DO WHILE( b*ABS(X)<1.0 )
+    DO WHILE( b*ABS(X)<1._SP )
       X = X*b
       Ix = Ix - ispace
     END DO
     RETURN
     100 CONTINUE
-    DO WHILE( 10.0*ABS(X)>=b )
+    DO WHILE( 10._SP*ABS(X)>=b )
       X = X/b
       Ix = Ix + ispace
     END DO

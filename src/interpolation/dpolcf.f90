@@ -78,7 +78,7 @@ SUBROUTINE DPOLCF(Xx,N,X,C,D,Work)
     D(k) = C(k)
   END DO
   IF( N==1 ) RETURN
-  Work(1) = 1.0D0
+  Work(1) = 1._DP
   pone = C(1)
   nm1 = N - 1
   DO k = 2, N

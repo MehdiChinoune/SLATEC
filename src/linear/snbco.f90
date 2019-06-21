@@ -143,7 +143,7 @@ SUBROUTINE SNBCO(Abe,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
   !* FIRST EXECUTABLE STATEMENT  SNBCO
   ml1 = Ml + 1
   ldb = Lda - 1
-  anorm = 0.0E0
+  anorm = 0._SP
   DO j = 1, N
     nu = MIN(Mu,j-1)
     nl = MIN(Ml,N-j)
@@ -167,12 +167,12 @@ SUBROUTINE SNBCO(Abe,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
   !
   !     SOLVE TRANS(U)*W = E
   !
-  ek = 1.0E0
+  ek = 1._SP
   Z = 0._SP
   m = Ml + Mu + 1
   ju = 0
   DO k = 1, N
-    IF( Z(k)/=0.0E0 ) ek = SIGN(ek,-Z(k))
+    IF( Z(k)/=0._SP ) ek = SIGN(ek,-Z(k))
     IF( ABS(ek-Z(k))>ABS(Abe(k,ml1)) ) THEN
       s = ABS(Abe(k,ml1))/ABS(ek-Z(k))
       Z = s*Z
@@ -182,9 +182,9 @@ SUBROUTINE SNBCO(Abe,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
     wkm = -ek - Z(k)
     s = ABS(wk)
     sm = ABS(wkm)
-    IF( Abe(k,ml1)==0.0E0 ) THEN
-      wk = 1.0E0
-      wkm = 1.0E0
+    IF( Abe(k,ml1)==0._SP ) THEN
+      wk = 1._SP
+      wkm = 1._SP
     ELSE
       wk = wk/Abe(k,ml1)
       wkm = wkm/Abe(k,ml1)
@@ -211,7 +211,7 @@ SUBROUTINE SNBCO(Abe,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
     END IF
     Z(k) = wk
   END DO
-  s = 1.0E0/SUM( ABS(Z) )
+  s = 1._SP/SUM( ABS(Z) )
   Z = s*Z
   !
   !     SOLVE TRANS(L)*Y = W
@@ -226,8 +226,8 @@ SUBROUTINE SNBCO(Abe,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
       v(nl) = Abe(k+2*nl-2,1)
       Z(k) = Z(k) + DOT_PRODUCT(v(1:nl),Z(k+1:k+nl))
     END IF
-    IF( ABS(Z(k))>1.0E0 ) THEN
-      s = 1.0E0/ABS(Z(k))
+    IF( ABS(Z(k))>1._SP ) THEN
+      s = 1._SP/ABS(Z(k))
       Z = s*Z
     END IF
     l = Ipvt(k)
@@ -235,10 +235,10 @@ SUBROUTINE SNBCO(Abe,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
     Z(l) = Z(k)
     Z(k) = t
   END DO
-  s = 1.0E0/SUM( ABS(Z) )
+  s = 1._SP/SUM( ABS(Z) )
   Z = s*Z
   !
-  ynorm = 1.0E0
+  ynorm = 1._SP
   !
   !     SOLVE L*V = Y
   !
@@ -249,13 +249,13 @@ SUBROUTINE SNBCO(Abe,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
     Z(k) = t
     nl = MIN(Ml,N-k)
     IF( k<N ) CALL SAXPY(nl,t,Abe(k+nl,ml1-nl),-ldb,Z(k+1),1)
-    IF( ABS(Z(k))>1.0E0 ) THEN
-      s = 1.0E0/ABS(Z(k))
+    IF( ABS(Z(k))>1._SP ) THEN
+      s = 1._SP/ABS(Z(k))
       Z = s*Z
       ynorm = s*ynorm
     END IF
   END DO
-  s = 1.0E0/SUM( ABS(Z) )
+  s = 1._SP/SUM( ABS(Z) )
   Z = s*Z
   ynorm = s*ynorm
   !
@@ -268,8 +268,8 @@ SUBROUTINE SNBCO(Abe,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
       Z = s*Z
       ynorm = s*ynorm
     END IF
-    IF( Abe(k,ml1)/=0.0E0 ) Z(k) = Z(k)/Abe(k,ml1)
-    IF( Abe(k,ml1)==0.0E0 ) Z(k) = 1.0E0
+    IF( Abe(k,ml1)/=0._SP ) Z(k) = Z(k)/Abe(k,ml1)
+    IF( Abe(k,ml1)==0._SP ) Z(k) = 1._SP
     lm = MIN(k,m) - 1
     lz = k - lm
     t = -Z(k)
@@ -277,10 +277,10 @@ SUBROUTINE SNBCO(Abe,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
     CALL SAXPY(lm,t,Abe(k-1,Ml+2),-ldb,Z(lz),1)
   END DO
   !     MAKE ZNORM = 1.0E0
-  s = 1.0E0/SUM( ABS(Z) )
+  s = 1._SP/SUM( ABS(Z) )
   Z = s*Z
   ynorm = s*ynorm
   !
-  IF( anorm/=0.0E0 ) Rcond = ynorm/anorm
-  IF( anorm==0.0E0 ) Rcond = 0.0E0
+  IF( anorm/=0._SP ) Rcond = ynorm/anorm
+  IF( anorm==0._SP ) Rcond = 0._SP
 END SUBROUTINE SNBCO

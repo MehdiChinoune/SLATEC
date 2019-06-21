@@ -70,7 +70,7 @@ SUBROUTINE CHKPR4(Iorder,A,B,M,Mbdcnd,C,D,N,Nbdcnd,COFX,Idmn,Ierror)
   DO i = 2, M
     xi = A + (i-1)*dlx
     CALL COFX(xi,ai,bi,ci)
-    IF( ai<=0.0 ) THEN
+    IF( ai<=0._SP ) THEN
       Ierror = 10
       RETURN
     END IF

@@ -73,7 +73,7 @@ REAL(DP) FUNCTION DPCHDF(K,X,S,Ierr)
   !
   INTEGER :: i, j
   REAL(DP) :: value
-  REAL(DP), PARAMETER :: zero = 0.D0
+  REAL(DP), PARAMETER :: zero = 0._DP
   !
   !  CHECK FOR LEGAL VALUE OF K.
   !

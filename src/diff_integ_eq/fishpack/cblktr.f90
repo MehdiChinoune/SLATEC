@@ -210,7 +210,7 @@ SUBROUTINE CBLKTR(Iflg,Np,N,An,Bn,Cn,Mp,M,Am,Bm,Cm,Idimy,Y,Ierror,W)
   COMPLEX(SP) :: Am(M), Bm(M), Cm(M), Y(Idimy,N), WC(100)
   INTEGER :: iw1, iw2, iw3, iwah, iwbh, iwd, i, iwu, iww, m2, nh, nl
   !* FIRST EXECUTABLE STATEMENT  CBLKTR
-  WC = [ ( CMPLX(W(i),W(i+1)), i=1,199,2 ) ]
+  WC = [ ( CMPLX(W(i),W(i+1),SP), i=1,199,2 ) ]
   nm_com = N
   m2 = M + M
   Ierror = 0

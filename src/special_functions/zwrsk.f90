@@ -46,8 +46,8 @@ SUBROUTINE ZWRSK(Zrr,Zri,Fnu,Kode,N,Yr,Yi,Nz,Cwr,Cwi,Tol,Elim,Alim)
     !     RECUR FORWARD ON I(FNU+1,Z) = R(FNU,Z)*I(FNU,Z),
     !     R(FNU+J-1,Z)=Y(J),  J=1,...,N
     !-----------------------------------------------------------------------
-    cinur = 1.0D0
-    cinui = 0.0D0
+    cinur = 1._DP
+    cinui = 0._DP
     IF( Kode/=1 ) THEN
       cinur = COS(Zri)
       cinui = SIN(Zri)
@@ -59,13 +59,13 @@ SUBROUTINE ZWRSK(Zrr,Zri,Fnu,Kode,N,Yr,Yi,Nz,Cwr,Cwi,Tol,Elim,Alim)
     !     THE RESULT IS ON SCALE.
     !-----------------------------------------------------------------------
     acw = ZABS(Cwr(2),Cwi(2))
-    ascle = 1.0D+3*D1MACH(1)/Tol
-    csclr = 1.0D0
+    ascle = 1.E3_DP*D1MACH(1)/Tol
+    csclr = 1._DP
     IF( acw>ascle ) THEN
-      ascle = 1.0D0/ascle
+      ascle = 1._DP/ascle
       IF( acw>=ascle ) csclr = Tol
     ELSE
-      csclr = 1.0D0/Tol
+      csclr = 1._DP/Tol
     END IF
   END IF
   c1r = Cwr(1)*csclr
@@ -85,7 +85,7 @@ SUBROUTINE ZWRSK(Zrr,Zri,Fnu,Kode,N,Yr,Yi,Nz,Cwr,Cwi,Tol,Elim,Alim)
   ctr = Zrr*ptr - Zri*pti
   cti = Zrr*pti + Zri*ptr
   act = ZABS(ctr,cti)
-  ract = 1.0D0/act
+  ract = 1._DP/act
   ctr = ctr*ract
   cti = -cti*ract
   ptr = cinur*ract

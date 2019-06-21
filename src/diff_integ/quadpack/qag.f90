@@ -179,8 +179,8 @@ SUBROUTINE QAG(F,A,B,Epsabs,Epsrel,Key,Result,Abserr,Neval,Ier,Limit,Lenw,&
   Ier = 6
   Neval = 0
   Last = 0
-  Result = 0.0E+00
-  Abserr = 0.0E+00
+  Result = 0._SP
+  Abserr = 0._SP
   IF( Limit>=1 .AND. Lenw>=Limit*4 ) THEN
     !
     !        PREPARE CALL FOR QAGE.

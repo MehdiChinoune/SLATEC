@@ -224,8 +224,8 @@ SUBROUTINE QAWF(F,A,Omega,Integr,Epsabs,Result,Abserr,Neval,Ier,Limlst,&
   !* FIRST EXECUTABLE STATEMENT  QAWF
   Ier = 6
   Neval = 0
-  Result = 0.0E+00
-  Abserr = 0.0E+00
+  Result = 0._SP
+  Abserr = 0._SP
   IF( Limlst>=3 .AND. Leniw>=(Limlst+2) .AND. Maxp1>=1 .AND. &
       Lenw>=(Leniw*2+Maxp1*25) ) THEN
     !

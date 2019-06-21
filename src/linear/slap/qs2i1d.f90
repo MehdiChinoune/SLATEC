@@ -115,12 +115,12 @@ SUBROUTINE QS2I1D(Ia,Ja,A,N,Kflag)
   m = 1
   i = 1
   j = nn
-  r = .375D0
+  r = .375_DP
   100 CONTINUE
-  IF( r<=0.5898437D0 ) THEN
-    r = r + 3.90625D-2
+  IF( r<=0.5898437_DP ) THEN
+    r = r + 3.90625E-2_DP
   ELSE
-    r = r - .21875D0
+    r = r - .21875_DP
   END IF
   200  k = i
   !

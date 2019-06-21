@@ -67,7 +67,7 @@ SUBROUTINE LPDP(A,Mda,M,N1,N2,Prgopt,X,Wnorm,Mode,Ws,Is)
   REAL(SP) :: Wnorm, A(Mda,N1+N2+1), Prgopt(:), Ws((M+2)*(N1+N2+7)), X(N1+N2)
   INTEGER :: i, iw, ix, j, l, modew, n, np1
   REAL(SP) :: rnorm, sc, ynorm
-  REAL(SP), PARAMETER :: zero = 0.E0, one = 1.E0, fac = 0.1E0
+  REAL(SP), PARAMETER :: zero = 0._SP, one = 1._SP, fac = 0.1_SP
   !* FIRST EXECUTABLE STATEMENT  LPDP
   n = N1 + N2
   Mode = 1

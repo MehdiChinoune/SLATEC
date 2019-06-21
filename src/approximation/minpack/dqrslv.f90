@@ -96,7 +96,7 @@ SUBROUTINE DQRSLV(N,R,Ldr,Ipvt,Diag,Qtb,X,Sigma,Wa)
   REAL(DP) :: R(Ldr,N), Diag(N), Qtb(N), X(N), Sigma(N), Wa(N)
   INTEGER :: i, j, jp1, k, kp1, l, nsing
   REAL(DP) :: coss, cotan, qtbpj, sinn, summ, tann, temp
-  REAL(DP), PARAMETER :: p5 = 5.0D-1, p25 = 2.5D-1, zero = 0.0D0
+  REAL(DP), PARAMETER :: p5 = 5.0E-1_DP, p25 = 2.5E-1_DP, zero = 0._DP
   !* FIRST EXECUTABLE STATEMENT  DQRSLV
   DO j = 1, N
     DO i = j, N

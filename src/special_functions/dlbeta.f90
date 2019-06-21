@@ -34,23 +34,23 @@ REAL(DP) FUNCTION DLBETA(A,B)
   !   900727  Added EXTERNAL statement.  (WRB)
   USE service, ONLY : XERMSG
   REAL(DP) :: A, B, p, q, corr
-  REAL(DP), PARAMETER :: sq2pil = 0.91893853320467274178032973640562D0
+  REAL(DP), PARAMETER :: sq2pil = 0.91893853320467274178032973640562_DP
   !* FIRST EXECUTABLE STATEMENT  DLBETA
   p = MIN(A,B)
   q = MAX(A,B)
   !
-  IF( p<=0.D0 ) CALL XERMSG('DLBETA',&
+  IF( p<=0._DP ) CALL XERMSG('DLBETA',&
     'BOTH ARGUMENTS MUST BE GT ZERO',1,2)
   !
-  IF( p>=10.D0 ) THEN
+  IF( p>=10._DP ) THEN
     !
     ! P AND Q ARE BIG.
     !
     corr = D9LGMC(p) + D9LGMC(q) - D9LGMC(p+q)
-    DLBETA = -0.5D0*LOG(q) + sq2pil + corr + (p-0.5D0)*LOG(p/(p+q))&
+    DLBETA = -0.5_DP*LOG(q) + sq2pil + corr + (p-0.5_DP)*LOG(p/(p+q))&
       + q*DLNREL(-p/(p+q))
     RETURN
-  ELSEIF( q<10.D0 ) THEN
+  ELSEIF( q<10._DP ) THEN
     !
     ! P AND Q ARE SMALL.
     !
@@ -61,6 +61,6 @@ REAL(DP) FUNCTION DLBETA(A,B)
   ! P IS SMALL, BUT Q IS BIG.
   !
   corr = D9LGMC(q) - D9LGMC(p+q)
-  DLBETA = LOG_GAMMA(p) + corr + p - p*LOG(p+q) + (q-0.5D0)*DLNREL(-p/(p+q))
+  DLBETA = LOG_GAMMA(p) + corr + p - p*LOG(p+q) + (q-0.5_DP)*DLNREL(-p/(p+q))
   RETURN
 END FUNCTION DLBETA

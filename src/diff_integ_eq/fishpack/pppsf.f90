@@ -22,9 +22,9 @@ REAL(SP) FUNCTION PPPSF(X,Iz,C,A,Bh)
   INTEGER :: j
   REAL(SP) :: summ
   !* FIRST EXECUTABLE STATEMENT  PPPSF
-  summ = 0.
+  summ = 0._SP
   DO j = 1, Iz
-    summ = summ + 1./(X-Bh(j))
+    summ = summ + 1._SP/(X-Bh(j))
   END DO
   PPPSF = summ
 END FUNCTION PPPSF

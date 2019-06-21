@@ -165,7 +165,7 @@ SUBROUTINE DPCHSP(Ic,Vc,N,X,F,D,Incfd,Wk,Nwk,Ierr)
   INTEGER :: ibeg, iend, indexx, j, nm1
   REAL(DP) :: g, stemp(3), xtemp(4)
   !
-  REAL(DP), PARAMETER :: zero = 0.D0, half = .5D0, one = 1.D0, two = 2.D0, three = 3.D0
+  REAL(DP), PARAMETER :: zero = 0._DP, half = .5_DP, one = 1._DP, two = 2._DP, three = 3._DP
   !
   !  VALIDITY-CHECK ARGUMENTS.
   !

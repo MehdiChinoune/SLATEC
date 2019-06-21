@@ -27,16 +27,16 @@ CONTAINS
     REAL(SP) :: Y(*), T, Erm
     INTEGER :: i, j, k
     REAL(SP) :: a1, a2, er, ex, yt
-    REAL, PARAMETER :: alph1 = 1.0E0, alph2 = 1.0E0
+    REAL(SP), PARAMETER :: alph1 = 1._SP, alph2 = 1._SP
     INTEGER, PARAMETER :: ng = 5
     !* FIRST EXECUTABLE STATEMENT  EDIT2
-    Erm = 0.0E0
-    IF( T==0.0E0 ) RETURN
-    ex = 0.0E0
-    IF( T<=30.0E0 ) ex = EXP(-2.0E0*T)
-    a2 = 1.0E0
+    Erm = 0._SP
+    IF( T==0._SP ) RETURN
+    ex = 0._SP
+    IF( T<=30._SP ) ex = EXP(-2._SP*T)
+    a2 = 1._SP
     DO j = 1, ng
-      a1 = 1.0E0
+      a1 = 1._SP
       DO i = 1, ng
         k = i + (j-1)*ng
         yt = T**(i+j-2)*ex*a1*a2
@@ -101,13 +101,13 @@ CONTAINS
     REAL(SP) :: atol(1), delta(25), er, er1, er2, erm, ero, hu, &
       rtol(1), rwork(550), t, tout, y(25), yprime(25), yt1, yt2
     !
-    REAL, PARAMETER :: tout1 = 1.0E0, dtout = 1.0E0
+    REAL(SP), PARAMETER :: tout1 = 1._SP, dtout = 1._SP
     !
     !* FIRST EXECUTABLE STATEMENT  SDASQC
     Ipass = 1
     nerr = 0
-    rtol = 0.0E0
-    atol = 1.0E-3
+    rtol = 0._SP
+    atol = 1.0E-3_SP
     lrw = 550
     liw = 45
     !
@@ -132,13 +132,13 @@ CONTAINS
       99002 FORMAT (////1X,' INFO(5) =',I3//6X,'T',15X,'X1',14X,'X2',12X,'NQ',6X,&
         'H',12X/)
       !
-      t = 0.0E0
-      y(1) = 1.0E0
-      y(2) = 0.0E0
-      yprime(1) = -10.0E0
-      yprime(2) = 10.0E0
+      t = 0._SP
+      y(1) = 1._SP
+      y(2) = 0._SP
+      yprime(1) = -10._SP
+      yprime(2) = 10._SP
       tout = tout1
-      ero = 0.0E0
+      ero = 0._SP
       DO iout = 1, nout
         CALL SDASSL(SDRES1,neq,t,y,yprime,tout,info,rtol,atol,idid,rwork,lrw,&
           iwork,liw,SDJAC1)
@@ -150,13 +150,13 @@ CONTAINS
         END IF
         !
         IF( idid<0 ) EXIT
-        yt1 = EXP(-10.0E0*t)
-        yt2 = 1.0E0 - yt1
+        yt1 = EXP(-10._SP*t)
+        yt2 = 1._SP - yt1
         er1 = ABS(yt1-y(1))
         er2 = ABS(yt2-y(2))
         er = MAX(er1,er2)/atol(1)
         ero = MAX(ero,er)
-        IF( er>1000.0E0 ) THEN
+        IF( er>1000._SP ) THEN
           IF( Kprint>=2 ) WRITE (Lun,99010) t
           !
           nerr = nerr + 1
@@ -200,18 +200,18 @@ CONTAINS
       IF( Kprint>2 ) WRITE (Lun,99005) info(5)
       99005 FORMAT (////1X,' INFO(5) =',I3//6X,'T',14X,'MAX.ERR.',5X,'NQ',6X,'H'/)
       !
-      t = 0.0E0
+      t = 0._SP
       DO i = 2, neq
-        y(i) = 0.0E0
+        y(i) = 0._SP
       END DO
-      y(1) = 1.0E0
+      y(1) = 1._SP
       DO i = 1, neq
-        delta(i) = 0.0E0
+        delta(i) = 0._SP
       END DO
       !        Following is to initialize YPRIME.
       CALL SDRES2(t,y,delta,yprime,ires)
-      tout = 0.01E0
-      ero = 0.0E0
+      tout = 0.01_SP
+      ero = 0._SP
       DO iout = 1, nout
         CALL SDASSL(SDRES2,neq,t,y,yprime,tout,info,rtol,atol,idid,rwork,lrw,&
           iwork,liw,SDJAC2)
@@ -224,11 +224,11 @@ CONTAINS
         IF( idid<0 ) EXIT
         er = erm/atol(1)
         ero = MAX(ero,er)
-        IF( er>1000.0E0 ) THEN
+        IF( er>1000._SP ) THEN
           IF( Kprint>=2 ) WRITE (Lun,99010) t
           nerr = nerr + 1
         END IF
-        tout = tout*10.0E0
+        tout = tout*10._SP
       END DO
       IF( idid<0 ) THEN
         IF( Kprint>=2 ) WRITE (Lun,99011) idid, t
@@ -277,10 +277,10 @@ CONTAINS
 
     REAL(SP) :: T, Y(:), Yprime(:), Pd(:,:), Cj
     !* FIRST EXECUTABLE STATEMENT  SDJAC1
-    Pd(1,1) = Cj + 10.0E0
-    Pd(1,2) = 0.0E0
-    Pd(2,1) = 1.0E0
-    Pd(2,2) = 1.0E0
+    Pd(1,1) = Cj + 10._SP
+    Pd(1,2) = 0._SP
+    Pd(2,1) = 1._SP
+    Pd(2,2) = 1._SP
   END SUBROUTINE SDJAC1
   !** SDJAC2
   SUBROUTINE SDJAC2(T,Y,Yprime,Pd,Cj)
@@ -306,21 +306,21 @@ CONTAINS
 
     REAL(SP) :: T, Y(:), Yprime(:), Pd(:,:), Cj
     INTEGER :: j, mband
-    REAL, PARAMETER :: alph1 = 1.0E0, alph2 = 1.0E0
+    REAL(SP), PARAMETER :: alph1 = 1._SP, alph2 = 1._SP
     INTEGER, PARAMETER :: ng = 5
     INTEGER, PARAMETER :: ml = 5, mu = 0, neq = 25
     !* FIRST EXECUTABLE STATEMENT  SDJAC2
     mband = ml + mu + 1
     DO j = 1, neq
-      Pd(mband,j) = -2.0E0 - Cj
+      Pd(mband,j) = -2._SP - Cj
       Pd(mband+1,j) = alph1
-      Pd(mband+2,j) = 0.0E0
-      Pd(mband+3,j) = 0.0E0
-      Pd(mband+4,j) = 0.0E0
+      Pd(mband+2,j) = 0._SP
+      Pd(mband+3,j) = 0._SP
+      Pd(mband+4,j) = 0._SP
       Pd(mband+5,j) = alph2
     END DO
     DO j = 1, neq, ng
-      Pd(mband+1,j) = 0.0E0
+      Pd(mband+1,j) = 0._SP
     END DO
   END SUBROUTINE SDJAC2
   !** SDRES1
@@ -345,8 +345,8 @@ CONTAINS
     INTEGER :: Ires
     REAL(SP) :: T, Y(:), Yprime(:), Delta(:)
     !* FIRST EXECUTABLE STATEMENT  SDRES1
-    Delta(1) = Yprime(1) + 10.0E0*Y(1)
-    Delta(2) = Y(2) + Y(1) - 1.0E0
+    Delta(1) = Yprime(1) + 10._SP*Y(1)
+    Delta(2) = Y(2) + Y(1) - 1._SP
   END SUBROUTINE SDRES1
   !** SDRES2
   SUBROUTINE SDRES2(T,Y,Yprime,Delta,Ires)
@@ -372,13 +372,13 @@ CONTAINS
     REAL(SP) :: T, Y(:), Yprime(:), Delta(:)
     INTEGER :: i, j, k
     REAL(SP) :: d
-    REAL, PARAMETER :: alph1 = 1.0E0, alph2 = 1.0E0
+    REAL(SP), PARAMETER :: alph1 = 1._SP, alph2 = 1._SP
     INTEGER, PARAMETER :: ng = 5
     !* FIRST EXECUTABLE STATEMENT  SDRES2
     DO j = 1, ng
       DO i = 1, ng
         k = i + (j-1)*ng
-        d = -2.0E0*Y(k)
+        d = -2._SP*Y(k)
         IF( i/=1 ) d = d + Y(k-1)*alph1
         IF( j/=1 ) d = d + Y(k-ng)*alph2
         Delta(k) = d - Yprime(k)

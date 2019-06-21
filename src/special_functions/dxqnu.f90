@@ -31,9 +31,9 @@ SUBROUTINE DXQNU(Nu1,Nu2,Mu1,Theta,X,Sx,Id,Pqa,Ipqa,Ierror)
   !* FIRST EXECUTABLE STATEMENT  DXQNU
   Ierror = 0
   k = 0
-  pq2 = 0.0D0
+  pq2 = 0._DP
   ipq2 = 0
-  pql2 = 0.0D0
+  pql2 = 0._DP
   ipql2 = 0
   IF( Mu1/=1 ) THEN
     mu = 0
@@ -43,7 +43,7 @@ SUBROUTINE DXQNU(Nu1,Nu2,Mu1,Theta,X,Sx,Id,Pqa,Ipqa,Ierror)
     CALL DXPQNU(Nu1,Nu2,mu,Theta,Id,Pqa,Ipqa,Ierror)
     IF( Ierror/=0 ) RETURN
     IF( Mu1==0 ) RETURN
-    k = INT( (Nu2-Nu1+1.5D0) )
+    k = INT( (Nu2-Nu1+1.5_DP) )
     pq2 = Pqa(k)
     ipq2 = Ipqa(k)
     pql2 = Pqa(k-1)
@@ -62,7 +62,7 @@ SUBROUTINE DXQNU(Nu1,Nu2,Mu1,Theta,X,Sx,Id,Pqa,Ipqa,Ierror)
   pql1 = Pqa(k-1)
   ipql1 = Ipqa(k-1)
   100  mu = 1
-  dmu = 1.D0
+  dmu = 1._DP
   DO
     !
     !        FORWARD RECURRENCE IN MU TO OBTAIN Q(MU1,NU2,X) AND
@@ -72,8 +72,8 @@ SUBROUTINE DXQNU(Nu1,Nu2,Mu1,Theta,X,Sx,Id,Pqa,Ipqa,Ierror)
     !
     !              FIRST FOR NU=NU2
     !
-    x1 = -2.D0*dmu*X*Sx*pq1
-    x2 = (nu+dmu)*(nu-dmu+1.D0)*pq2
+    x1 = -2._DP*dmu*X*Sx*pq1
+    x2 = (nu+dmu)*(nu-dmu+1._DP)*pq2
     CALL DXADD(x1,ipq1,-x2,ipq2,pq,ipq,Ierror)
     IF( Ierror/=0 ) RETURN
     CALL DXADJ(pq,ipq,Ierror)
@@ -83,7 +83,7 @@ SUBROUTINE DXQNU(Nu1,Nu2,Mu1,Theta,X,Sx,Id,Pqa,Ipqa,Ierror)
     pq1 = pq
     ipq1 = ipq
     mu = mu + 1
-    dmu = dmu + 1.D0
+    dmu = dmu + 1._DP
     IF( mu>=Mu1 ) THEN
       Pqa(k) = pq
       Ipqa(k) = ipq
@@ -103,8 +103,8 @@ SUBROUTINE DXQNU(Nu1,Nu2,Mu1,Theta,X,Sx,Id,Pqa,Ipqa,Ierror)
         DO
           IF( nu<=Nu1 ) RETURN
           k = k - 1
-          x1 = (2.D0*nu+1.D0)*X*pq1/(nu+dmu)
-          x2 = -(nu-dmu+1.D0)*pq2/(nu+dmu)
+          x1 = (2._DP*nu+1._DP)*X*pq1/(nu+dmu)
+          x2 = -(nu-dmu+1._DP)*pq2/(nu+dmu)
           CALL DXADD(x1,ipq1,x2,ipq2,pq,ipq,Ierror)
           IF( Ierror/=0 ) RETURN
           CALL DXADJ(pq,ipq,Ierror)
@@ -115,13 +115,13 @@ SUBROUTINE DXQNU(Nu1,Nu2,Mu1,Theta,X,Sx,Id,Pqa,Ipqa,Ierror)
           ipq1 = ipq
           Pqa(k) = pq
           Ipqa(k) = ipq
-          nu = nu - 1.D0
+          nu = nu - 1._DP
         END DO
       ELSE
         !
         !              THEN FOR NU=NU2-1
         !
-        nu = nu - 1.D0
+        nu = nu - 1._DP
         pq2 = pql2
         ipq2 = ipql2
         pq1 = pql1

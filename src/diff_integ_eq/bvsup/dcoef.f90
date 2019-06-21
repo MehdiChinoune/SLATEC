@@ -110,7 +110,7 @@ SUBROUTINE DCOEF(Yh,Yp,Ncomp,Nrowb,Nfc,B,Beta,Coef,Inhomo,Re,Ae,By,&
         Cvec(k) = Beta(k)
       CASE (3)
         !        CASE 3
-        Cvec(k) = 0.0D0
+        Cvec(k) = 0._DP
       CASE DEFAULT
         !        CASE 1
         Cvec(k) = Beta(k) - DOT_PRODUCT(B(k,1:Ncomp),Yp(1:Ncomp))
@@ -125,7 +125,7 @@ SUBROUTINE DCOEF(Yh,Yp,Ncomp,Nrowb,Nfc,B,Beta,Coef,Inhomo,Re,Ae,By,&
   Iflag = 0
   mlso = 0
   IF( Inhomo==3 ) mlso = 1
-  kflag = INT( 0.5D0*LOG10(eps_com) )
+  kflag = INT( 0.5_DP*LOG10(eps_com) )
   CALL XGETF(nf)
   CALL XSETF(0)
   DO
@@ -139,24 +139,24 @@ SUBROUTINE DCOEF(Yh,Yp,Ncomp,Nrowb,Nfc,B,Beta,Coef,Inhomo,Re,Ae,By,&
         !            TESTING FOR EXISTENCE AND UNIQUENESS OF BOUNDARY-VALUE
         !            PROBLEM SOLUTION IN A SCALAR CASE
         !
-        bn = 0.0D0
-        un = 0.0D0
-        ypn = 0.0D0
+        bn = 0._DP
+        un = 0._DP
+        ypn = 0._DP
         DO k = 1, Ncomp
           un = MAX(un,ABS(Yh(k,1)))
           ypn = MAX(ypn,ABS(Yp(k)))
           bn = MAX(bn,ABS(B(1,k)))
         END DO
         bbn = MAX(bn,ABS(Beta(1)))
-        IF( bys<=10.0D0*(Re*un+Ae)*bn ) THEN
+        IF( bys<=10._DP*(Re*un+Ae)*bn ) THEN
           brn = bbn/bn*bys
-          IF( cons>=0.1D0*brn .AND. cons<=10.0D0*brn ) Iflag = 1
-          IF( cons>10.0D0*brn ) Iflag = 2
+          IF( cons>=0.1_DP*brn .AND. cons<=10._DP*brn ) Iflag = 1
+          IF( cons>10._DP*brn ) Iflag = 2
           IF( cons<=Re*ABS(Beta(1))+Ae+(Re*ypn+Ae)*bn ) Iflag = 1
-          IF( Inhomo==3 ) Coef(1) = 1.0D0
+          IF( Inhomo==3 ) Coef(1) = 1._DP
         ELSEIF( Inhomo==3 ) THEN
           Iflag = 3
-          Coef(1) = 1.0D0
+          Coef(1) = 1._DP
         END IF
       ELSEIF( Inhomo==3 ) THEN
         IF( Iwork(1)<Nfcc ) THEN
@@ -167,9 +167,9 @@ SUBROUTINE DCOEF(Yh,Yp,Ncomp,Nrowb,Nfc,B,Beta,Coef,Inhomo,Re,Ae,By,&
         ELSE
           Iflag = 3
           DO k = 1, Nfcc
-            Coef(k) = 0.0D0
+            Coef(k) = 0._DP
           END DO
-          Coef(Nfcc) = 1.0D0
+          Coef(Nfcc) = 1._DP
           nfccm1 = Nfcc - 1
           DO k = 1, nfccm1
             j = Nfcc - k

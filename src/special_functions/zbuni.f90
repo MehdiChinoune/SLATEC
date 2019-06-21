@@ -32,7 +32,7 @@ SUBROUTINE ZBUNI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Nui,Nlast,Fnul,Tol,Elim,Alim)
     str, s1i, s1r, s2i, s2r, Tol, Yi(N), Yr(N), Zi, Zr, ascle, bry(3), c1r, c1i, c1m
   !* FIRST EXECUTABLE STATEMENT  ZBUNI
   Nz = 0
-  ax = ABS(Zr)*1.7321D0
+  ax = ABS(Zr)*1.7321_DP
   ay = ABS(Zi)
   iform = 1
   IF( ay>ax ) iform = 2
@@ -79,27 +79,27 @@ SUBROUTINE ZBUNI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Nui,Nlast,Fnul,Tol,Elim,Alim)
         !----------------------------------------------------------------------
         !     SCALE BACKWARD RECURRENCE, BRY(3) IS DEFINED BUT NEVER USED
         !----------------------------------------------------------------------
-        bry(1) = 1.0D+3*D1MACH(1)/Tol
-        bry(2) = 1.0D0/bry(1)
+        bry(1) = 1.E3_DP*D1MACH(1)/Tol
+        bry(2) = 1._DP/bry(1)
         bry(3) = bry(2)
         iflag = 2
         ascle = bry(2)
-        csclr = 1.0D0
+        csclr = 1._DP
         IF( str<=bry(1) ) THEN
           iflag = 1
           ascle = bry(1)
-          csclr = 1.0D0/Tol
+          csclr = 1._DP/Tol
         ELSEIF( str>=bry(2) ) THEN
           iflag = 3
           ascle = bry(3)
           csclr = Tol
         END IF
-        cscrr = 1.0D0/csclr
+        cscrr = 1._DP/csclr
         s1r = cyr(2)*csclr
         s1i = cyi(2)*csclr
         s2r = cyr(1)*csclr
         s2i = cyi(1)*csclr
-        raz = 1.0D0/ZABS(Zr,Zi)
+        raz = 1._DP/ZABS(Zr,Zi)
         str = Zr*raz
         sti = -Zi*raz
         rzr = (str+str)*raz
@@ -111,7 +111,7 @@ SUBROUTINE ZBUNI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Nui,Nlast,Fnul,Tol,Elim,Alim)
           s2i = (dfnu+fnui)*(rzr*sti+rzi*str) + s1i
           s1r = str
           s1i = sti
-          fnui = fnui - 1.0D0
+          fnui = fnui - 1._DP
           IF( iflag<3 ) THEN
             str = s2r*cscrr
             sti = s2i*cscrr
@@ -126,7 +126,7 @@ SUBROUTINE ZBUNI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Nui,Nlast,Fnul,Tol,Elim,Alim)
               s2r = str
               s2i = sti
               csclr = csclr*Tol
-              cscrr = 1.0D0/csclr
+              cscrr = 1._DP/csclr
               s1r = s1r*csclr
               s1i = s1i*csclr
               s2r = s2r*csclr
@@ -151,7 +151,7 @@ SUBROUTINE ZBUNI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Nui,Nlast,Fnul,Tol,Elim,Alim)
           sti = s2i*cscrr
           Yr(k) = str
           Yi(k) = sti
-          fnui = fnui - 1.0D0
+          fnui = fnui - 1._DP
           k = k - 1
           IF( iflag<3 ) THEN
             c1r = ABS(str)
@@ -165,7 +165,7 @@ SUBROUTINE ZBUNI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Nui,Nlast,Fnul,Tol,Elim,Alim)
               s2r = str
               s2i = sti
               csclr = csclr*Tol
-              cscrr = 1.0D0/csclr
+              cscrr = 1._DP/csclr
               s1r = s1r*csclr
               s1i = s1i*csclr
               s2r = s2r*csclr

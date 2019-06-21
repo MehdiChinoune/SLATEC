@@ -35,19 +35,19 @@ REAL(SP) FUNCTION R9GMIC(A,X,Alx)
   REAL(SP) :: A, Alx, X
   INTEGER :: k, m, ma, mm1
   REAL(SP) :: alng, fk, fkp1, fm, s, sgng, t, te
-  REAL(SP), PARAMETER :: euler = .5772156649015329E0
-  REAL(SP), PARAMETER :: eps = 0.5*R1MACH(3), bot = LOG(R1MACH(1))
+  REAL(SP), PARAMETER :: euler = .5772156649015329_SP
+  REAL(SP), PARAMETER :: eps = 0.5_SP*R1MACH(3), bot = LOG(R1MACH(1))
   !* FIRST EXECUTABLE STATEMENT  R9GMIC
   !
-  IF( A>0.0 ) CALL XERMSG('R9GMIC','A MUST BE NEAR A NEGATIVE INTEGER',2,2)
-  IF( X<=0.0 ) CALL XERMSG('R9GMIC','X MUST BE GT ZERO',3,2)
+  IF( A>0._SP ) CALL XERMSG('R9GMIC','A MUST BE NEAR A NEGATIVE INTEGER',2,2)
+  IF( X<=0._SP ) CALL XERMSG('R9GMIC','X MUST BE GT ZERO',3,2)
   !
-  ma = INT( A - 0.5 )
+  ma = INT( A - 0.5_SP )
   fm = -ma
   m = -ma
   !
-  te = 1.0
-  t = 1.0
+  te = 1._SP
+  t = 1._SP
   s = t
   DO k = 1, 200
     fkp1 = k + 1
@@ -59,14 +59,14 @@ REAL(SP) FUNCTION R9GMIC(A,X,Alx)
   CALL XERMSG('R9GMIC',&
     'NO CONVERGENCE IN 200 TERMS OF CONTINUED FRACTION',4,2)
   !
-  100  R9GMIC = -Alx - euler + X*s/(fm+1.0)
+  100  R9GMIC = -Alx - euler + X*s/(fm+1._SP)
   IF( m==0 ) RETURN
   !
-  IF( m==1 ) R9GMIC = -R9GMIC - 1.0 + 1.0/X
+  IF( m==1 ) R9GMIC = -R9GMIC - 1._SP + 1._SP/X
   IF( m==1 ) RETURN
   !
   te = fm
-  t = 1.0
+  t = 1._SP
   s = t
   mm1 = m - 1
   DO k = 1, mm1
@@ -78,18 +78,18 @@ REAL(SP) FUNCTION R9GMIC(A,X,Alx)
   END DO
   !
   DO k = 1, m
-    R9GMIC = R9GMIC + 1.0/k
+    R9GMIC = R9GMIC + 1._SP/k
   END DO
   !
-  sgng = 1.0
-  IF( MOD(m,2)==1 ) sgng = -1.0
-  alng = LOG(R9GMIC) - LOG_GAMMA(fm+1.0)
+  sgng = 1._SP
+  IF( MOD(m,2)==1 ) sgng = -1._SP
+  alng = LOG(R9GMIC) - LOG_GAMMA(fm+1._SP)
   !
-  R9GMIC = 0.0
+  R9GMIC = 0._SP
   IF( alng>bot ) R9GMIC = sgng*EXP(alng)
-  IF( s/=0.0 ) R9GMIC = R9GMIC + SIGN(EXP(-fm*Alx+LOG(ABS(s)/fm)),s)
+  IF( s/=0._SP ) R9GMIC = R9GMIC + SIGN(EXP(-fm*Alx+LOG(ABS(s)/fm)),s)
   !
-  IF( R9GMIC==0.0 .AND. s==0.0 )&
+  IF( R9GMIC==0._SP .AND. s==0._SP )&
     CALL XERMSG('R9GMIC','RESULT UNDERFLOWS',1,1)
   !
 END FUNCTION R9GMIC

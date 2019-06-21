@@ -94,7 +94,7 @@ SUBROUTINE REORT(Ncomp,Y,Yp,Yhp,Niv,W,S,P,Ip,Stowa,Iflag)
       !
       !     TEST FOR ORTHONORMALIZATION
       !
-      IF( wcnd>=50.*tol_com ) THEN
+      IF( wcnd>=50._SP*tol_com ) THEN
         DO ijk = 1, nfcp
           IF( S(ijk)>1.0E+20 ) GOTO 50
         END DO
@@ -142,7 +142,7 @@ SUBROUTINE REORT(Ncomp,Y,Yp,Yhp,Niv,W,S,P,Ip,Stowa,Iflag)
     DO k = 1, nfcc_com
       srp = SQRT(P(kk))
       IF( inhomo_com==1 ) W(k) = srp*W(k)
-      vnorm = 1./srp
+      vnorm = 1._SP/srp
       P(kk) = vnorm
       kk = kk + nfcc_com + 1 - k
       IF( nfc_com/=nfcc_com ) THEN
@@ -159,7 +159,7 @@ SUBROUTINE REORT(Ncomp,Y,Yp,Yhp,Niv,W,S,P,Ip,Stowa,Iflag)
       !     NORMALIZE THE PARTICULAR SOLUTION
       !
       ypnm = NORM2(Yp(1:Ncomp))**2
-      IF( ypnm==0.0 ) ypnm = 1.0
+      IF( ypnm==0._SP ) ypnm = 1._SP
       ypnm = SQRT(ypnm)
       S(nfcp) = ypnm
       DO j = 1, Ncomp
@@ -183,7 +183,7 @@ SUBROUTINE REORT(Ncomp,Y,Yp,Yhp,Niv,W,S,P,Ip,Stowa,Iflag)
         nswot_com = 1
         knswot_com = 0
         mnswot_com = mnswot_com/2
-        tnd_com = tnd_com + 1.
+        tnd_com = tnd_com + 1._SP
         Iflag = 10
         RETURN
       END IF

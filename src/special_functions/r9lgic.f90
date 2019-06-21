@@ -35,19 +35,19 @@ REAL(SP) FUNCTION R9LGIC(A,X,Alx)
   REAL(SP) :: A, Alx, X
   INTEGER :: k
   REAL(SP) :: fk, p, r, s, t, xma, xpa
-  REAL(SP), PARAMETER :: eps = 0.5*R1MACH(3)
+  REAL(SP), PARAMETER :: eps = 0.5_SP*R1MACH(3)
   !* FIRST EXECUTABLE STATEMENT  R9LGIC
   !
-  xpa = X + 1.0 - A
-  xma = X - 1.0 - A
+  xpa = X + 1._SP - A
+  xma = X - 1._SP - A
   !
-  r = 0.0
-  p = 1.0
+  r = 0._SP
+  p = 1._SP
   s = p
   DO k = 1, 200
     fk = k
-    t = fk*(A-fk)*(1.0+r)
-    r = -t/((xma+2.0*fk)*(xpa+2.0*fk)+t)
+    t = fk*(A-fk)*(1._SP+r)
+    r = -t/((xma+2._SP*fk)*(xpa+2._SP*fk)+t)
     p = r*p
     s = s + p
     IF( ABS(p)<eps*s ) GOTO 100

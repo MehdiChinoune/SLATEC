@@ -55,32 +55,32 @@ REAL(DP) FUNCTION DGAMRN(X)
   INTEGER :: i, i1m11, k, mx, nx
   REAL(DP) :: fln, rln, s, tol, trm, X, xdmy, xinc, xm, xmin, xp, xsq
   !
-  REAL(DP), PARAMETER :: gr(12) = [ 1.00000000000000000D+00, -1.56250000000000000D-02, &
-    2.56347656250000000D-03, -1.27983093261718750D-03, 1.34351104497909546D-03, &
-    -2.43289663922041655D-03, 6.75423753364157164D-03, -2.66369606131178216D-02, &
-    1.41527455519564332D-01, -9.74384543032201613D-01, 8.43686251229783675D+00, &
-    -8.97258321640552515D+01 ]
+  REAL(DP), PARAMETER :: gr(12) = [ 1.00000000000000000E+00_DP, -1.56250000000000000E-02_DP, &
+    2.56347656250000000E-03_DP, -1.27983093261718750E-03_DP, 1.34351104497909546E-03_DP, &
+    -2.43289663922041655E-03_DP, 6.75423753364157164E-03_DP, -2.66369606131178216E-02_DP, &
+    1.41527455519564332E-01_DP, -9.74384543032201613E-01_DP, 8.43686251229783675E+00_DP, &
+    -8.97258321640552515E+01_DP ]
   !
   !* FIRST EXECUTABLE STATEMENT  DGAMRN
   nx = INT(X)
-  tol = MAX(D1MACH(4),1.0D-18)
+  tol = MAX(D1MACH(4),1.E-18_DP)
   i1m11 = I1MACH(14)
   rln = D1MACH(5)*i1m11
-  fln = MIN(rln,20.0D0)
-  fln = MAX(fln,3.0D0)
-  fln = fln - 3.0D0
-  xm = 2.0D0 + fln*(0.2366D0+0.01723D0*fln)
+  fln = MIN(rln,20._DP)
+  fln = MAX(fln,3._DP)
+  fln = fln - 3._DP
+  xm = 2._DP + fln*(0.2366_DP+0.01723_DP*fln)
   mx = INT(xm) + 1
   xmin = mx
-  xdmy = X - 0.25D0
-  xinc = 0.0D0
+  xdmy = X - 0.25_DP
+  xinc = 0._DP
   IF( X<xmin ) THEN
     xinc = xmin - nx
     xdmy = xdmy + xinc
   END IF
-  s = 1.0D0
-  IF( xdmy*tol<=1.0D0 ) THEN
-    xsq = 1.0D0/(xdmy*xdmy)
+  s = 1._DP
+  IF( xdmy*tol<=1._DP ) THEN
+    xsq = 1._DP/(xdmy*xdmy)
     xp = xsq
     DO k = 2, 12
       trm = gr(k)*xp
@@ -90,12 +90,12 @@ REAL(DP) FUNCTION DGAMRN(X)
     END DO
   END IF
   s = s/SQRT(xdmy)
-  IF( xinc/=0.0D0 ) THEN
+  IF( xinc/=0._DP ) THEN
     nx = INT(xinc)
-    xp = 0.0D0
+    xp = 0._DP
     DO i = 1, nx
-      s = s*(1.0D0+0.5D0/(X+xp))
-      xp = xp + 1.0D0
+      s = s*(1._DP+0.5_DP/(X+xp))
+      xp = xp + 1._DP
     END DO
     DGAMRN = s
     RETURN

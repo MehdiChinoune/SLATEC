@@ -31,9 +31,9 @@ COMPLEX(SP) FUNCTION CCBRT(Z)
   REAL(SP) :: r, theta
   COMPLEX(SP) :: Z
   !* FIRST EXECUTABLE STATEMENT  CCBRT
-  theta = CARG(Z)/3.0
+  theta = CARG(Z)/3._SP
   r = CBRT(ABS(Z))
   !
-  CCBRT = CMPLX(r*COS(theta),r*SIN(theta))
+  CCBRT = CMPLX(r*COS(theta),r*SIN(theta),SP)
   !
 END FUNCTION CCBRT

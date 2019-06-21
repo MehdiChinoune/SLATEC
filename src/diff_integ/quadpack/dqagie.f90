@@ -245,14 +245,14 @@ SUBROUTINE DQAGIE(F,Bound,Inf,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,&
   Ier = 0
   Neval = 0
   Last = 0
-  Result = 0.0D+00
-  Abserr = 0.0D+00
-  Alist(1) = 0.0D+00
-  Blist(1) = 0.1D+01
-  Rlist(1) = 0.0D+00
-  Elist(1) = 0.0D+00
+  Result = 0._DP
+  Abserr = 0._DP
+  Alist(1) = 0._DP
+  Blist(1) = 1._DP
+  Rlist(1) = 0._DP
+  Elist(1) = 0._DP
   Iord(1) = 0
-  IF( Epsabs<=0.0D+00 .AND. Epsrel<MAX(0.5D+02*epmach,0.5D-28) ) Ier = 6
+  IF( Epsabs<=0._DP .AND. Epsrel<MAX(0.5E+02_DP*epmach,0.5E-28_DP) ) Ier = 6
   IF( Ier==6 ) RETURN
   !
   !
@@ -265,8 +265,8 @@ SUBROUTINE DQAGIE(F,Bound,Inf,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,&
   !           I2 = INTEGRAL OF F OVER (0,+INFINITY).
   !
   boun = Bound
-  IF( Inf==2 ) boun = 0.0D+00
-  CALL DQK15I(F,boun,Inf,0.0D+00,0.1D+01,Result,Abserr,defabs,resabs)
+  IF( Inf==2 ) boun = 0._DP
+  CALL DQK15I(F,boun,Inf,0._DP,1._DP,Result,Abserr,defabs,resabs)
   !
   !           TEST ON ACCURACY
   !
@@ -276,9 +276,9 @@ SUBROUTINE DQAGIE(F,Bound,Inf,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,&
   Iord(1) = 1
   dres = ABS(Result)
   errbnd = MAX(Epsabs,Epsrel*dres)
-  IF( Abserr<=1.0D+02*epmach*defabs .AND. Abserr>errbnd ) Ier = 2
+  IF( Abserr<=100._DP*epmach*defabs .AND. Abserr>errbnd ) Ier = 2
   IF( Limit==1 ) Ier = 1
-  IF( Ier/=0 .OR. (Abserr<=errbnd .AND. Abserr/=resabs) .OR. Abserr==0.0D+00 )&
+  IF( Ier/=0 .OR. (Abserr<=errbnd .AND. Abserr/=resabs) .OR. Abserr==0._DP )&
     GOTO 300
   !
   !           INITIALIZATION
@@ -303,7 +303,7 @@ SUBROUTINE DQAGIE(F,Bound,Inf,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,&
   iroff2 = 0
   iroff3 = 0
   ksgn = -1
-  IF( dres>=(0.1D+01-0.5D+02*epmach)*defabs ) ksgn = 1
+  IF( dres>=(1._DP-0.5E+02_DP*epmach)*defabs ) ksgn = 1
   !
   !           MAIN DO-LOOP
   !           ------------
@@ -313,7 +313,7 @@ SUBROUTINE DQAGIE(F,Bound,Inf,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,&
     !           BISECT THE SUBINTERVAL WITH NRMAX-TH LARGEST ERROR ESTIMATE.
     !
     a1 = Alist(maxerr)
-    b1 = 0.5D+00*(Alist(maxerr)+Blist(maxerr))
+    b1 = 0.5_DP*(Alist(maxerr)+Blist(maxerr))
     a2 = b1
     b2 = Blist(maxerr)
     erlast = errmax
@@ -329,7 +329,7 @@ SUBROUTINE DQAGIE(F,Bound,Inf,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,&
     area = area + area12 - Rlist(maxerr)
     IF( defab1/=error1 .AND. defab2/=error2 ) THEN
       IF( ABS(Rlist(maxerr)-area12)<=0.1D-04*ABS(area12) .AND. &
-          erro12>=0.99D+00*errmax ) THEN
+          erro12>=0.99_DP*errmax ) THEN
         IF( extrap ) iroff2 = iroff2 + 1
         IF( .NOT. extrap ) iroff1 = iroff1 + 1
       END IF
@@ -352,7 +352,7 @@ SUBROUTINE DQAGIE(F,Bound,Inf,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,&
     !           SET ERROR FLAG IN THE CASE OF BAD INTEGRAND BEHAVIOUR
     !           AT SOME POINTS OF THE INTEGRATION RANGE.
     !
-    IF( MAX(ABS(a1),ABS(b2))<=(0.1D+01+0.1D+03*epmach)&
+    IF( MAX(ABS(a1),ABS(b2))<=(1._DP+100._DP*epmach)&
       *(ABS(a2)+0.1D+04*uflow) ) Ier = 4
     !
     !           APPEND THE NEWLY-CREATED INTERVALS TO THE LIST.
@@ -381,7 +381,7 @@ SUBROUTINE DQAGIE(F,Bound,Inf,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,&
     IF( errsum<=errbnd ) GOTO 200
     IF( Ier/=0 ) EXIT
     IF( Last==2 ) THEN
-      small = 0.375D+00
+      small = 0.375_DP
       erlarg = errsum
       ertest = errbnd
       rlist2(2) = area
@@ -438,7 +438,7 @@ SUBROUTINE DQAGIE(F,Bound,Inf,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,&
       errmax = Elist(maxerr)
       nrmax = 1
       extrap = .FALSE.
-      small = small*0.5D+00
+      small = small*0.5_DP
       erlarg = errsum
     END IF
     100 CONTINUE
@@ -451,9 +451,9 @@ SUBROUTINE DQAGIE(F,Bound,Inf,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,&
     IF( (Ier+ierro)/=0 ) THEN
       IF( ierro==3 ) Abserr = Abserr + correc
       IF( Ier==0 ) Ier = 3
-      IF( Result==0.0D+00 .OR. area==0.0D+00 ) THEN
+      IF( Result==0._DP .OR. area==0._DP ) THEN
         IF( Abserr>errsum ) GOTO 200
-        IF( area==0.0D+00 ) GOTO 300
+        IF( area==0._DP ) GOTO 300
       ELSEIF( Abserr/ABS(Result)>errsum/ABS(area) ) THEN
         GOTO 200
       END IF
@@ -470,7 +470,7 @@ SUBROUTINE DQAGIE(F,Bound,Inf,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,&
   !
   !           COMPUTE GLOBAL INTEGRAL SUM.
   !
-  200  Result = 0.0D+00
+  200  Result = 0._DP
   DO k = 1, Last
     Result = Result + Rlist(k)
   END DO

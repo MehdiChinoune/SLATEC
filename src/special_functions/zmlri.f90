@@ -28,7 +28,7 @@ SUBROUTINE ZMLRI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol)
   REAL(DP) :: ack, ak, ap, at, az, bk, cki, ckr, cnormi, cnormr, fkap, fkk, flam, &
     fnf, Fnu, pti, ptr, p1i, p1r, p2i, p2r, raz, rho, rho2, rzi, rzr, scle, sti, &
     str, sumi, sumr, tfnf, Tol, tst, Yi(N), Yr(N), Zi, Zr
-  REAL(DP), PARAMETER :: zeror = 0.0D0, zeroi = 0.0D0, coner = 1.0D0, conei = 0.0D0
+  REAL(DP), PARAMETER :: zeror = 0._DP, zeroi = 0._DP, coner = 1._DP, conei = 0._DP
   !* FIRST EXECUTABLE STATEMENT  ZMLRI
   scle = D1MACH(1)/Tol
   Nz = 0
@@ -36,8 +36,8 @@ SUBROUTINE ZMLRI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol)
   iaz = INT( az )
   ifnu = INT( Fnu )
   inu = ifnu + N - 1
-  at = iaz + 1.0D0
-  raz = 1.0D0/az
+  at = iaz + 1._DP
+  raz = 1._DP/az
   str = Zr*raz
   sti = -Zi*raz
   ckr = str*at*raz
@@ -48,10 +48,10 @@ SUBROUTINE ZMLRI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol)
   p1i = zeroi
   p2r = coner
   p2i = conei
-  ack = (at+1.0D0)*raz
-  rho = ack + SQRT(ack*ack-1.0D0)
+  ack = (at+1._DP)*raz
+  rho = ack + SQRT(ack*ack-1._DP)
   rho2 = rho*rho
-  tst = (rho2+rho2)/((rho2-1.0D0)*(rho-1.0D0))
+  tst = (rho2+rho2)/((rho2-1._DP)*(rho-1._DP))
   tst = tst/Tol
   !-----------------------------------------------------------------------
   !     COMPUTE RELATIVE TRUNCATION ERROR INDEX FOR SERIES
@@ -68,7 +68,7 @@ SUBROUTINE ZMLRI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol)
     cki = cki + rzi
     ap = ZABS(p2r,p2i)
     IF( ap>tst*ak*ak ) GOTO 100
-    ak = ak + 1.0D0
+    ak = ak + 1._DP
   END DO
   Nz = -2
   RETURN
@@ -82,7 +82,7 @@ SUBROUTINE ZMLRI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol)
     p1i = zeroi
     p2r = coner
     p2i = conei
-    at = inu + 1.0D0
+    at = inu + 1._DP
     str = Zr*raz
     sti = -Zi*raz
     ckr = str*at*raz
@@ -103,10 +103,10 @@ SUBROUTINE ZMLRI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol)
       IF( ap>=tst ) THEN
         IF( itime==2 ) GOTO 200
         ack = ZABS(ckr,cki)
-        flam = ack + SQRT(ack*ack-1.0D0)
+        flam = ack + SQRT(ack*ack-1._DP)
         fkap = ap/ZABS(p1r,p1i)
         rho = MIN(flam,fkap)
-        tst = tst*SQRT(rho/(rho*rho-1.0D0))
+        tst = tst*SQRT(rho/(rho*rho-1._DP))
         itime = 2
       END IF
     END DO
@@ -128,7 +128,7 @@ SUBROUTINE ZMLRI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol)
   p2i = zeroi
   fnf = Fnu - ifnu
   tfnf = fnf + fnf
-  bk = DGAMLN(fkk+tfnf+1.0D0,idum) - DGAMLN(fkk+1.0D0,idum) - DGAMLN(tfnf+1.0D0,idum)
+  bk = DGAMLN(fkk+tfnf+1._DP,idum) - DGAMLN(fkk+1._DP,idum) - DGAMLN(tfnf+1._DP,idum)
   bk = EXP(bk)
   sumr = zeror
   sumi = zeroi
@@ -140,12 +140,12 @@ SUBROUTINE ZMLRI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol)
     p2i = p1i + (fkk+fnf)*(rzi*ptr+rzr*pti)
     p1r = ptr
     p1i = pti
-    ak = 1.0D0 - tfnf/(fkk+tfnf)
+    ak = 1._DP - tfnf/(fkk+tfnf)
     ack = bk*ak
     sumr = sumr + (ack+bk)*p1r
     sumi = sumi + (ack+bk)*p1i
     bk = ack
-    fkk = fkk - 1.0D0
+    fkk = fkk - 1._DP
   END DO
   Yr(N) = p2r
   Yi(N) = p2i
@@ -157,12 +157,12 @@ SUBROUTINE ZMLRI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol)
       p2i = p1i + (fkk+fnf)*(rzi*ptr+rzr*pti)
       p1r = ptr
       p1i = pti
-      ak = 1.0D0 - tfnf/(fkk+tfnf)
+      ak = 1._DP - tfnf/(fkk+tfnf)
       ack = bk*ak
       sumr = sumr + (ack+bk)*p1r
       sumi = sumi + (ack+bk)*p1i
       bk = ack
-      fkk = fkk - 1.0D0
+      fkk = fkk - 1._DP
       m = N - i + 1
       Yr(m) = p2r
       Yi(m) = p2i
@@ -176,12 +176,12 @@ SUBROUTINE ZMLRI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol)
       p2i = p1i + (fkk+fnf)*(rzr*pti+rzi*ptr)
       p1r = ptr
       p1i = pti
-      ak = 1.0D0 - tfnf/(fkk+tfnf)
+      ak = 1._DP - tfnf/(fkk+tfnf)
       ack = bk*ak
       sumr = sumr + (ack+bk)*p1r
       sumi = sumi + (ack+bk)*p1i
       bk = ack
-      fkk = fkk - 1.0D0
+      fkk = fkk - 1._DP
     END DO
   END IF
   ptr = Zr
@@ -190,7 +190,7 @@ SUBROUTINE ZMLRI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol)
   CALL ZLOG(rzr,rzi,str,sti,idum)
   p1r = -fnf*str + ptr
   p1i = -fnf*sti + pti
-  ap = DGAMLN(1.0D0+fnf,idum)
+  ap = DGAMLN(1._DP+fnf,idum)
   ptr = p1r - ap
   pti = p1i
   !-----------------------------------------------------------------------
@@ -200,7 +200,7 @@ SUBROUTINE ZMLRI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol)
   p2r = p2r + sumr
   p2i = p2i + sumi
   ap = ZABS(p2r,p2i)
-  p1r = 1.0D0/ap
+  p1r = 1._DP/ap
   CALL ZEXP(ptr,pti,str,sti)
   ckr = str*p1r
   cki = sti*p1r

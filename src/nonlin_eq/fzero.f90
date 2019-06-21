@@ -122,7 +122,7 @@ SUBROUTINE FZERO(F,B,C,R,Re,Ae,Iflag)
   z = R
   IF( R<=MIN(B,C) .OR. R>=MAX(B,C) ) z = C
   rw = MAX(Re,er)
-  aw = MAX(Ae,0.E0)
+  aw = MAX(Ae,0._SP)
   ic = 0
   t = z
   fz = F(t)
@@ -130,13 +130,13 @@ SUBROUTINE FZERO(F,B,C,R,Re,Ae,Iflag)
   t = B
   fb = F(t)
   kount = 2
-  IF( SIGN(1.0E0,fz)/=SIGN(1.0E0,fb) ) THEN
+  IF( SIGN(1._SP,fz)/=SIGN(1._SP,fb) ) THEN
     C = z
   ELSEIF( z/=C ) THEN
     t = C
     fc = F(t)
     kount = 3
-    IF( SIGN(1.0E0,fz)/=SIGN(1.0E0,fc) ) THEN
+    IF( SIGN(1._SP,fz)/=SIGN(1._SP,fc) ) THEN
       B = z
       fb = fz
     END IF
@@ -159,7 +159,7 @@ SUBROUTINE FZERO(F,B,C,R,Re,Ae,Iflag)
       fc = fa
     END IF
     !
-    cmb = 0.5E0*(C-B)
+    cmb = 0.5_SP*(C-B)
     acmb = ABS(cmb)
     tol = rw*ABS(B) + aw
     !
@@ -169,7 +169,7 @@ SUBROUTINE FZERO(F,B,C,R,Re,Ae,Iflag)
       !
       !   Finished.  Process results for proper setting of IFLAG.
       !
-      IF( SIGN(1.0E0,fb)==SIGN(1.0E0,fc) ) THEN
+      IF( SIGN(1._SP,fb)==SIGN(1._SP,fc) ) THEN
         Iflag = 4
         RETURN
       ELSEIF( ABS(fb)>fx ) THEN
@@ -245,7 +245,7 @@ SUBROUTINE FZERO(F,B,C,R,Re,Ae,Iflag)
       !
       !   Decide whether next step is interpolation or extrapolation.
       !
-      IF( SIGN(1.0E0,fb)==SIGN(1.0E0,fc) ) THEN
+      IF( SIGN(1._SP,fb)==SIGN(1._SP,fc) ) THEN
         C = a
         fc = fa
       END IF

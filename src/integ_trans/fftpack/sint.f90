@@ -83,7 +83,7 @@ SUBROUTINE SINT(N,X,Wsave)
   INTEGER :: i, k, kc, kw, modn, nf, np1, ns2
   REAL(SP) :: sqrt3, t1, t2, xh
   !* FIRST EXECUTABLE STATEMENT  SINT
-  sqrt3 = SQRT(3.)
+  sqrt3 = SQRT(3._SP)
   IF( N<2 ) THEN
     X(1) = X(1) + X(1)
     RETURN
@@ -95,7 +95,7 @@ SUBROUTINE SINT(N,X,Wsave)
   ELSE
     np1 = N + 1
     ns2 = N/2
-    Wsave(1) = 0.
+    Wsave(1) = 0._SP
     kw = np1
     DO k = 1, ns2
       kw = kw + 1
@@ -106,10 +106,10 @@ SUBROUTINE SINT(N,X,Wsave)
       Wsave(kc+1) = t2 - t1
     END DO
     modn = MOD(N,2)
-    IF( modn/=0 ) Wsave(ns2+2) = 4.*X(ns2+1)
+    IF( modn/=0 ) Wsave(ns2+2) = 4._SP*X(ns2+1)
     nf = np1 + ns2 + 1
     CALL RFFTF(np1,Wsave,Wsave(nf))
-    X(1) = .5*Wsave(1)
+    X(1) = 0.5_SP*Wsave(1)
     DO i = 3, N, 2
       X(i-1) = -Wsave(i)
       X(i) = X(i-2) + Wsave(i-1)

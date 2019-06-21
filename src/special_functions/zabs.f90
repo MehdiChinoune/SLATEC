@@ -32,16 +32,16 @@ REAL(DP) FUNCTION ZABS(Zr,Zi)
   !     S*1.0D0 MAKES AN UNNORMALIZED UNDERFLOW ON CDC MACHINES INTO A
   !     TRUE FLOATING ZERO
   !-----------------------------------------------------------------------
-  s = s*1.0D+0
-  IF( s==0.0D+0 ) THEN
-    ZABS = 0.0D+0
+  s = s*1._DP
+  IF( s==0._DP ) THEN
+    ZABS = 0._DP
     RETURN
   ELSEIF( u<=v ) THEN
     q = u/v
-    ZABS = v*SQRT(1.D+0+q*q)
+    ZABS = v*SQRT(1._DP+q*q)
     RETURN
   END IF
   q = v/u
-  ZABS = u*SQRT(1.D+0+q*q)
+  ZABS = u*SQRT(1._DP+q*q)
   RETURN
 END FUNCTION ZABS

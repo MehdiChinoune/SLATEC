@@ -145,9 +145,9 @@ SUBROUTINE CAIRY(Z,Id,Kode,Ai,Nz,Ierr)
   REAL(SP) :: aa, ad, ak, alim, atrm, az, az3, bk, ck, dig, dk, d1, d2, elim, fid, fnu, &
   rl, r1m5, sfac, tol, zi, zr, z3i, z3r, bb, alaz
   COMPLEX(SP) :: csq, cy(1), s1, s2, trm1, trm2, Z, zta, z3
-  REAL(SP), PARAMETER :: tth = 6.66666666666666667E-01, c1 = 3.55028053887817240E-01, &
-    c2 = 2.58819403792806799E-01, coef = 1.83776298473930683E-01
-  COMPLEX(SP), PARAMETER :: cone = (1.0E0,0.0E0)
+  REAL(SP), PARAMETER :: tth = 6.66666666666666667E-01_SP, c1 = 3.55028053887817240E-01_SP, &
+    c2 = 2.58819403792806799E-01_SP, coef = 1.83776298473930683E-01_SP
+  COMPLEX(SP), PARAMETER :: cone = (1._SP,0._SP)
   !* FIRST EXECUTABLE STATEMENT  CAIRY
   Ierr = 0
   Nz = 0
@@ -155,13 +155,13 @@ SUBROUTINE CAIRY(Z,Id,Kode,Ai,Nz,Ierr)
   IF( Kode<1 .OR. Kode>2 ) Ierr = 1
   IF( Ierr/=0 ) RETURN
   az = ABS(Z)
-  tol = MAX(R1MACH(4),1.0E-18)
+  tol = MAX(R1MACH(4),1.0E-18_SP)
   fid = Id
-  IF( az>1.0E0 ) THEN
+  IF( az>1._SP ) THEN
     !-----------------------------------------------------------------------
     !     CASE FOR ABS(Z)>1.0
     !-----------------------------------------------------------------------
-    fnu = (1.0E0+fid)/3.0E0
+    fnu = (1._SP+fid)/3._SP
     !-----------------------------------------------------------------------
     !     SET PARAMETERS RELATED TO MACHINE CONSTANTS.
     !     TOL IS THE APPROXIMATE UNIT ROUNDOFF LIMITED TO 1.0E-18.
@@ -176,19 +176,19 @@ SUBROUTINE CAIRY(Z,Id,Kode,Ai,Nz,Ierr)
     k2 = I1MACH(13)
     r1m5 = R1MACH(5)
     k = MIN(ABS(k1),ABS(k2))
-    elim = 2.303E0*(k*r1m5-3.0E0)
+    elim = 2.303_SP*(k*r1m5-3._SP)
     k1 = I1MACH(11) - 1
     aa = r1m5*k1
-    dig = MIN(aa,18.0E0)
-    aa = aa*2.303E0
-    alim = elim + MAX(-aa,-41.45E0)
-    rl = 1.2E0*dig + 3.0E0
+    dig = MIN(aa,18._SP)
+    aa = aa*2.303_SP
+    alim = elim + MAX(-aa,-41.45E0_SP)
+    rl = 1.2_SP*dig + 3._SP
     alaz = LOG(az)
     !-----------------------------------------------------------------------
     !     TEST FOR RANGE
     !-----------------------------------------------------------------------
-    aa = 0.5E0/tol
-    bb = 0.5E0*I1MACH(9)
+    aa = 0.5_SP/tol
+    bb = 0.5_SP*I1MACH(9)
     aa = MIN(aa,bb)
     aa = aa**tth
     IF( az>aa ) THEN
@@ -199,31 +199,31 @@ SUBROUTINE CAIRY(Z,Id,Kode,Ai,Nz,Ierr)
       aa = SQRT(aa)
       IF( az>aa ) Ierr = 3
       csq = SQRT(Z)
-      zta = Z*csq*CMPLX(tth,0.0E0)
+      zta = Z*csq*CMPLX(tth,0._SP,SP)
       !-----------------------------------------------------------------------
       !     RE(ZTA)<=0 WHEN RE(Z)<0, ESPECIALLY WHEN IM(Z) IS SMALL
       !-----------------------------------------------------------------------
       iflag = 0
-      sfac = 1.0E0
+      sfac = 1._SP
       zi = AIMAG(Z)
       zr = REAL(Z)
       ak = AIMAG(zta)
-      IF( zr<0.0E0 ) THEN
+      IF( zr<0._SP ) THEN
         bk = REAL(zta)
         ck = -ABS(bk)
-        zta = CMPLX(ck,ak)
+        zta = CMPLX(ck,ak,SP)
       END IF
-      IF( zi==0.0E0 ) THEN
-        IF( zr<=0.0E0 ) zta = CMPLX(0.0E0,ak)
+      IF( zi==0._SP ) THEN
+        IF( zr<=0._SP ) zta = CMPLX(0._SP,ak,SP)
       END IF
       aa = REAL(zta)
-      IF( aa<0.0E0 .OR. zr<=0.0E0 ) THEN
+      IF( aa<0._SP .OR. zr<=0._SP ) THEN
         IF( Kode/=2 ) THEN
           !-----------------------------------------------------------------------
           !     OVERFLOW TEST
           !-----------------------------------------------------------------------
           IF( aa<=(-alim) ) THEN
-            aa = -aa + 0.25E0*alaz
+            aa = -aa + 0.25_SP*alaz
             iflag = 1
             sfac = tol
             IF( aa>elim ) GOTO 50
@@ -233,7 +233,7 @@ SUBROUTINE CAIRY(Z,Id,Kode,Ai,Nz,Ierr)
         !     CBKNU AND CACAI RETURN EXP(ZTA)*K(FNU,ZTA) ON KODE=2
         !-----------------------------------------------------------------------
         mr = 1
-        IF( zi<0.0E0 ) mr = -1
+        IF( zi<0._SP ) mr = -1
         CALL CACAI(zta,fnu,Kode,mr,1,cy,nn,rl,tol,elim,alim)
         IF( nn<0 ) THEN
           IF( nn/=(-1) ) GOTO 100
@@ -249,27 +249,27 @@ SUBROUTINE CAIRY(Z,Id,Kode,Ai,Nz,Ierr)
       ELSEIF( aa<alim ) THEN
         CALL CBKNU(zta,fnu,Kode,1,cy,Nz,tol,elim,alim)
       ELSE
-        aa = -aa - 0.25E0*alaz
+        aa = -aa - 0.25_SP*alaz
         iflag = 2
-        sfac = 1.0E0/tol
+        sfac = 1._SP/tol
         IF( aa<(-elim) ) THEN
           Nz = 1
-          Ai = CMPLX(0.0E0,0.0E0)
+          Ai = CMPLX(0._SP,0._SP,SP)
           RETURN
         ELSE
           CALL CBKNU(zta,fnu,Kode,1,cy,Nz,tol,elim,alim)
         END IF
       END IF
-      s1 = cy(1)*CMPLX(coef,0.0E0)
+      s1 = cy(1)*CMPLX(coef,0._SP,SP)
       IF( iflag/=0 ) THEN
-        s1 = s1*CMPLX(sfac,0.0E0)
+        s1 = s1*CMPLX(sfac,0._SP,SP)
         IF( Id==1 ) THEN
           s1 = -s1*Z
-          Ai = s1*CMPLX(1.0E0/sfac,0.0E0)
+          Ai = s1*CMPLX(1._SP/sfac,0._SP,SP)
           RETURN
         ELSE
           s1 = s1*csq
-          Ai = s1*CMPLX(1.0E0/sfac,0.0E0)
+          Ai = s1*CMPLX(1._SP/sfac,0._SP,SP)
           RETURN
         END IF
       ELSEIF( Id==1 ) THEN
@@ -290,17 +290,17 @@ SUBROUTINE CAIRY(Z,Id,Kode,Ai,Nz,Ierr)
     s1 = cone
     s2 = cone
     IF( az<tol ) THEN
-      aa = 1.0E+3*R1MACH(1)
-      s1 = CMPLX(0.0E0,0.0E0)
+      aa = 1.E+3_SP*R1MACH(1)
+      s1 = CMPLX(0._SP,0._SP,SP)
       IF( Id==1 ) THEN
-        Ai = -CMPLX(c2,0.0E0)
+        Ai = -CMPLX(c2,0._SP,SP)
         aa = SQRT(aa)
-        IF( az>aa ) s1 = Z*Z*CMPLX(0.5E0,0.0E0)
-        Ai = Ai + s1*CMPLX(c1,0.0E0)
+        IF( az>aa ) s1 = Z*Z*CMPLX(0.5_SP,0._SP,SP)
+        Ai = Ai + s1*CMPLX(c1,0._SP,SP)
         RETURN
       ELSE
-        IF( az>aa ) s1 = CMPLX(c2,0.0E0)*Z
-        Ai = CMPLX(c1,0.0E0) - s1
+        IF( az>aa ) s1 = CMPLX(c2,0._SP,SP)*Z
+        Ai = CMPLX(c1,0._SP,SP) - s1
         RETURN
       END IF
     ELSE
@@ -308,45 +308,45 @@ SUBROUTINE CAIRY(Z,Id,Kode,Ai,Nz,Ierr)
       IF( aa>=tol/az ) THEN
         trm1 = cone
         trm2 = cone
-        atrm = 1.0E0
+        atrm = 1._SP
         z3 = Z*Z*Z
         az3 = az*aa
-        ak = 2.0E0 + fid
-        bk = 3.0E0 - fid - fid
-        ck = 4.0E0 - fid
-        dk = 3.0E0 + fid + fid
+        ak = 2._SP + fid
+        bk = 3._SP - fid - fid
+        ck = 4._SP - fid
+        dk = 3._SP + fid + fid
         d1 = ak*dk
         d2 = bk*ck
         ad = MIN(d1,d2)
-        ak = 24.0E0 + 9.0E0*fid
-        bk = 30.0E0 - 9.0E0*fid
+        ak = 24._SP + 9._SP*fid
+        bk = 30._SP - 9._SP*fid
         z3r = REAL(z3)
         z3i = AIMAG(z3)
         DO k = 1, 25
-          trm1 = trm1*CMPLX(z3r/d1,z3i/d1)
+          trm1 = trm1*CMPLX(z3r/d1,z3i/d1,SP)
           s1 = s1 + trm1
-          trm2 = trm2*CMPLX(z3r/d2,z3i/d2)
+          trm2 = trm2*CMPLX(z3r/d2,z3i/d2,SP)
           s2 = s2 + trm2
           atrm = atrm*az3/ad
           d1 = d1 + ak
           d2 = d2 + bk
           ad = MIN(d1,d2)
           IF( atrm<tol*ad ) EXIT
-          ak = ak + 18.0E0
-          bk = bk + 18.0E0
+          ak = ak + 18._SP
+          bk = bk + 18._SP
         END DO
       END IF
       IF( Id==1 ) THEN
-        Ai = -s2*CMPLX(c2,0.0E0)
-        IF( az>tol ) Ai = Ai + Z*Z*s1*CMPLX(c1/(1.0E0+fid),0.0E0)
+        Ai = -s2*CMPLX(c2,0._SP,SP)
+        IF( az>tol ) Ai = Ai + Z*Z*s1*CMPLX(c1/(1._SP+fid),0._SP,SP)
         IF( Kode==1 ) RETURN
-        zta = Z*SQRT(Z)*CMPLX(tth,0.0E0)
+        zta = Z*SQRT(Z)*CMPLX(tth,0._SP,SP)
         Ai = Ai*EXP(zta)
         RETURN
       ELSE
-        Ai = s1*CMPLX(c1,0.0E0) - Z*s2*CMPLX(c2,0.0E0)
+        Ai = s1*CMPLX(c1,0._SP,SP) - Z*s2*CMPLX(c2,0._SP,SP)
         IF( Kode==1 ) RETURN
-        zta = Z*SQRT(Z)*CMPLX(tth,0.0E0)
+        zta = Z*SQRT(Z)*CMPLX(tth,0._SP,SP)
         Ai = Ai*EXP(zta)
         RETURN
       END IF

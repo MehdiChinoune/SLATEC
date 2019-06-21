@@ -72,7 +72,7 @@ SUBROUTINE CDZRO(Ae,F,H,N,Nq,Iroot,Re,T,Yh,Uround,B,C,Fb,Fc,Y)
   INTEGER :: ic, kount
   REAL(SP) :: a, acbs, acmb, cmb, er, fa, p, q, rw, tol
   !* FIRST EXECUTABLE STATEMENT  CDZRO
-  er = 4.E0*Uround
+  er = 4._SP*Uround
   rw = MAX(Re,er)
   ic = 0
   acbs = ABS(B-C)
@@ -89,7 +89,7 @@ SUBROUTINE CDZRO(Ae,F,H,N,Nq,Iroot,Re,T,Yh,Uround,B,C,Fb,Fc,Y)
     C = a
     Fc = fa
   END IF
-  cmb = 0.5E0*(C-B)
+  cmb = 0.5_SP*(C-B)
   acmb = ABS(cmb)
   tol = rw*ABS(B) + Ae
   !                                                Test stopping criterion
@@ -100,7 +100,7 @@ SUBROUTINE CDZRO(Ae,F,H,N,Nq,Iroot,Re,T,Yh,Uround,B,C,Fb,Fc,Y)
   !                         The implicit form is used to prevent overflow.
   p = (B-a)*Fb
   q = fa - Fb
-  IF( p<0.E0 ) THEN
+  IF( p<0._SP ) THEN
     p = -p
     q = -q
   END IF
@@ -110,9 +110,9 @@ SUBROUTINE CDZRO(Ae,F,H,N,Nq,Iroot,Re,T,Yh,Uround,B,C,Fb,Fc,Y)
   fa = Fb
   ic = ic + 1
   IF( ic>=4 ) THEN
-    IF( 8.E0*acmb>=acbs ) THEN
+    IF( 8._SP*acmb>=acbs ) THEN
       !                                                                 Bisect
-      B = 0.5E0*(C+B)
+      B = 0.5_SP*(C+B)
       GOTO 200
     END IF
     ic = 0
@@ -129,19 +129,19 @@ SUBROUTINE CDZRO(Ae,F,H,N,Nq,Iroot,Re,T,Yh,Uround,B,C,Fb,Fc,Y)
     B = B + p/q
   ELSE
     !                                                                 Bisect
-    B = 0.5E0*(C+B)
+    B = 0.5_SP*(C+B)
   END IF
   !                                             Have completed computation
   !                                             for new iterate B.
   200  CALL CDNTP(H,0,N,Nq,T,B,Yh,Y)
   Fb = F(N,B,Y,Iroot)
   IF( N==0 ) RETURN
-  IF( Fb==0.E0 ) RETURN
+  IF( Fb==0._SP ) RETURN
   kount = kount + 1
   !
   !             Decide whether next step is interpolation or extrapolation
   !
-  IF( SIGN(1.0E0,Fb)==SIGN(1.0E0,Fc) ) THEN
+  IF( SIGN(1._SP,Fb)==SIGN(1._SP,Fc) ) THEN
     C = a
     Fc = fa
   END IF

@@ -34,15 +34,15 @@ CONTAINS
     COMPLEX(SP) :: ac(6), z(5), w(21)
     REAL(SP) :: w_r(42)
     INTEGER, PARAMETER :: ideg = 5
-    REAL, PARAMETER :: a(6) = [ 1., -3.7, 7.4, -10.8, 10.8, -6.8 ]
-    COMPLEX(SP), PARAMETER :: zk(5) = [ (1.7,0.), (1.,1.), (1.,-1.), &
-      (0.,1.4142135623730950488), (0.,-1.4142135623730950488) ]
+    REAL(SP), PARAMETER :: a(6) = [ 1._SP, -3.7_SP, 7.4_SP, -10.8_SP, 10.8_SP, -6.8_SP ]
+    COMPLEX(SP), PARAMETER :: zk(5) = [ (1.7_SP,0._SP), (1._SP,1._SP), (1._SP,-1._SP), &
+      (0._SP,1.4142135623730950488_SP), (0._SP,-1.4142135623730950488_SP) ]
     !* FIRST EXECUTABLE STATEMENT  CPRPQX
     Ipass = 1
     idegp1 = ideg + 1
     relerr = SQRT(R1MACH(4))
     DO j = 1, idegp1
-      ac(j) = CMPLX(a(j),0.)
+      ac(j) = CMPLX(a(j),0._SP,SP)
     END DO
     info = 0
     w_r = [ ( [REAL(w(i)), AIMAG(w(i))], i=1,21 ) ]
@@ -126,17 +126,17 @@ CONTAINS
     IF( Kprint>=2 ) WRITE (Lun,99001)
     99001 FORMAT ('1'/' FZERO QUICK CHECK')
     Ipass = 1
-    pi = 4.0E0*ATAN(1.0E0)
-    re = 1.0E-6
-    ae = 1.0E-6
-    tol = MAX(1.0E-5,SQRT(R1MACH(4)))
+    pi = 4._SP*ATAN(1._SP)
+    re = 1.0E-6_SP
+    ae = 1.0E-6_SP
+    tol = MAX(1.0E-5_SP,SQRT(R1MACH(4)))
     !
     !     Set up and solve example problem
     !
-    b = 0.1E0
-    c = 4.0E0
+    b = 0.1_SP
+    c = 4._SP
     r = c - b
-    CALL FZERO(SIN,b,c,r,re,ae,iflag)
+    CALL FZERO(SIN_SP,b,c,r,re,ae,iflag)
     !
     !     See if test was passed.
     !
@@ -160,13 +160,13 @@ CONTAINS
     !
     IF( Kprint>=3 ) WRITE (Lun,99002)
     99002 FORMAT (/' IFLAG 3 and 4 tests')
-    b = 1.0E0
+    b = 1._SP
     !
     !     IFLAG=3 (Singular point)
     !
-    c = 2.0E0
-    r = 0.5E0*(b+c)
-    CALL FZERO(TAN,b,c,b,re,ae,iflag)
+    c = 2._SP
+    r = 0.5_SP*(b+c)
+    CALL FZERO(TAN_SP,b,c,b,re,ae,iflag)
     IF( iflag/=3 ) THEN
       Ipass = 0
       fatal = .TRUE.
@@ -175,10 +175,10 @@ CONTAINS
     !
     !     IFLAG=4 (No sign change)
     !
-    b = -3.0E0
-    c = -0.1E0
-    r = 0.5E0*(b+c)
-    CALL FZERO(SIN,b,c,r,re,ae,iflag)
+    b = -3._SP
+    c = -0.1_SP
+    r = 0.5_SP*(b+c)
+    CALL FZERO(SIN_SP,b,c,r,re,ae,iflag)
     IF( iflag/=4 ) THEN
       Ipass = 0
       fatal = .TRUE.
@@ -208,6 +208,16 @@ CONTAINS
       F20.14/' IFLAG =',I2)
     99008 FORMAT (/' IFLAG test FAILED.  IFLAG =',I2,', but should ','have been',I2)
   END SUBROUTINE FZTEST
+  ! Single precision sinus
+  REAL(SP) FUNCTION SIN_SP(X)
+    REAL(SP), INTENT(IN) :: X
+    SIN_SP = SIN(X)
+  END FUNCTION SIN_SP
+  ! Single precision tangent
+  REAL(SP) FUNCTION TAN_SP(X)
+    REAL(SP), INTENT(IN) :: X
+    TAN_SP = TAN(X)
+  END FUNCTION TAN_SP
   !** DFZTST
   SUBROUTINE DFZTST(Lun,Kprint,Ipass)
     !> Quick check for DFZERO.
@@ -235,17 +245,17 @@ CONTAINS
     IF( Kprint>=2 ) WRITE (Lun,99001)
     99001 FORMAT ('1'/' DFZERO QUICK CHECK')
     Ipass = 1
-    pi = 4.0D0*ATAN(1.0D0)
-    re = 1.0D-10
-    ae = 1.0D-10
-    tol = MAX(1.0D-9,SQRT(D1MACH(4)))
+    pi = 4._DP*ATAN(1._DP)
+    re = 1.0E-10_DP
+    ae = 1.0E-10_DP
+    tol = MAX(1.E-9_DP,SQRT(D1MACH(4)))
     !
     !     Set up and solve example problem
     !
-    b = 0.1D0
-    c = 4.0D0
+    b = 0.1_DP
+    c = 4._DP
     r = c - b
-    CALL DFZERO(DSIN,b,c,r,re,ae,iflag)
+    CALL DFZERO(SIN_DP,b,c,r,re,ae,iflag)
     !
     !     See if test was passed.
     !
@@ -269,13 +279,13 @@ CONTAINS
     !
     IF( Kprint>=3 ) WRITE (Lun,99002)
     99002 FORMAT (/' IFLAG 3 and 4 tests')
-    b = 1.0D0
+    b = 1._DP
     !
     !     IFLAG=3 (Singular point)
     !
-    c = 2.0D0
-    r = 0.5D0*(b+c)
-    CALL DFZERO(DTAN,b,c,b,re,ae,iflag)
+    c = 2._DP
+    r = 0.5_DP*(b+c)
+    CALL DFZERO(TAN_DP,b,c,b,re,ae,iflag)
     IF( iflag/=3 ) THEN
       Ipass = 0
       fatal = .TRUE.
@@ -284,10 +294,10 @@ CONTAINS
     !
     !     IFLAG=4 (No sign change)
     !
-    b = -3.0D0
-    c = -0.1D0
-    r = 0.5D0*(b+c)
-    CALL DFZERO(DSIN,b,c,r,re,ae,iflag)
+    b = -3._DP
+    c = -0.1_DP
+    r = 0.5_DP*(b+c)
+    CALL DFZERO(SIN_DP,b,c,r,re,ae,iflag)
     IF( iflag/=4 ) THEN
       Ipass = 0
       fatal = .TRUE.
@@ -317,6 +327,16 @@ CONTAINS
       F20.14/' IFLAG =',I2)
     99008 FORMAT (/' IFLAG test FAILED.  IFLAG =',I2,', but should ','have been',I2)
   END SUBROUTINE DFZTST
+  ! Double precision sinus
+  REAL(DP) FUNCTION SIN_DP(X)
+    REAL(DP), INTENT(IN) :: X
+    SIN_DP = SIN(X)
+  END FUNCTION SIN_DP
+  ! Double precision tangent
+  REAL(DP) FUNCTION TAN_DP(X)
+    REAL(DP), INTENT(IN) :: X
+    TAN_DP = TAN(X)
+  END FUNCTION TAN_DP
   !** RQRTST
   SUBROUTINE RQRTST(Lun,Kprint,Ipass)
     !> Quick check for RPQR79.
@@ -345,10 +365,10 @@ CONTAINS
     REAL(SP) :: coef(8)
     LOGICAL :: fatal
     !
-    COMPLEX(SP), PARAMETER :: chk(7) = [ (1.4142135623731,1.4142135623731), &
-      (1.4142135623731,-1.4142135623731), (0.0,2.0), (0.0,-2.0), &
-      (-2.0,0.0), (-1.4142135623731,1.4142135623731), &
-      (-1.4142135623731,-1.4142135623731) ]
+    COMPLEX(SP), PARAMETER :: chk(7) = [ (1.4142135623731_SP,1.4142135623731_SP), &
+      (1.4142135623731_SP,-1.4142135623731_SP), (0._SP,2._SP), (0._SP,-2._SP), &
+      (-2._SP,0._SP), (-1.4142135623731_SP,1.4142135623731_SP), &
+      (-1.4142135623731_SP,-1.4142135623731_SP) ]
     !* FIRST EXECUTABLE STATEMENT  RQRTST
     IF( Kprint>=2 ) WRITE (Lun,99001)
     !
@@ -361,7 +381,7 @@ CONTAINS
     beta = 0.0078125
     DO j = 1, 8
       coef(j) = beta
-      beta = 2.0*beta
+      beta = 2._SP*beta
     END DO
     !
     CALL RPQR79(7,coef,root,ierr,work)
@@ -426,7 +446,7 @@ CONTAINS
     !
     !     CALL RPQR79 with zero leading coefficient.
     !
-    coef(1) = 0.0
+    coef(1) = 0._SP
     CALL RPQR79(2,coef,root,ierr,work)
     IF( NUMXER(nerr)/=2 ) fatal = .TRUE.
     CALL XERCLR
@@ -475,13 +495,13 @@ CONTAINS
     COMPLEX(SP) :: root(8)
     LOGICAL :: fatal
     !
-    COMPLEX(SP), PARAMETER :: coeff1(9) = [ (1.0,0.0), (-7.0,-2.0), (8.0,6.0), &
-      (28.0,8.0), (-49.0,-24.0), (7.0,2.0), (-8.0,-6.0), (-28.0,-8.0), (48.0,24.0) ]
-    COMPLEX(SP), PARAMETER :: coeff2(2) = [ (1.0,1.0), (1.0,3.0) ]
-    COMPLEX(SP), PARAMETER :: coeff3(2) = [ (0.0,0.0), (1.0,3.0) ]
-    COMPLEX(SP), PARAMETER :: chk1(8) = [ (4.0,2.0), (3.0,0.0), (-2.0,0.0), &
-      (2.0,0.0), (0.0,-1.0), (-1.0,0.0), (0.0,1.0), (1.0,0.0) ]
-    COMPLEX(SP), PARAMETER :: chk2 = (-2.0,-1.0)
+    COMPLEX(SP), PARAMETER :: coeff1(9) = [ (1._SP,0._SP), (-7._SP,-2._SP), (8._SP,6._SP), &
+      (28._SP,8._SP), (-49._SP,-24._SP), (7._SP,2._SP), (-8._SP,-6._SP), (-28._SP,-8._SP), (48._SP,24._SP) ]
+    COMPLEX(SP), PARAMETER :: coeff2(2) = [ (1._SP,1._SP), (1._SP,3._SP) ]
+    COMPLEX(SP), PARAMETER :: coeff3(2) = [ (0._SP,0._SP), (1._SP,3._SP) ]
+    COMPLEX(SP), PARAMETER :: chk1(8) = [ (4._SP,2._SP), (3._SP,0._SP), (-2._SP,0._SP), &
+      (2._SP,0._SP), (0._SP,-1._SP), (-1._SP,0._SP), (0._SP,1._SP), (1._SP,0._SP) ]
+    COMPLEX(SP), PARAMETER :: chk2 = (-2._SP,-1._SP)
     !* FIRST EXECUTABLE STATEMENT  CQRTST
     IF( Kprint>=2 ) WRITE (Lun,99001)
     !

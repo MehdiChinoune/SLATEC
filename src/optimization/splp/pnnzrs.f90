@@ -63,7 +63,7 @@ SUBROUTINE PNNZRS(I,Xval,Iplace,Sx,Ix,Ircx)
   REAL(SP) :: Xval, Sx(:)
   INTEGER :: i1, idiff, iend, ii, il, ilast, iopt, ipl, ipploc, istart,  j, l, &
     ll, lmx, lpg, n20046, nerr, np
-  REAL(SP), PARAMETER :: zero = 0.E0
+  REAL(SP), PARAMETER :: zero = 0._SP
   !* FIRST EXECUTABLE STATEMENT  PNNZRS
   iopt = 1
   !

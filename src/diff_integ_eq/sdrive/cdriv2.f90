@@ -399,7 +399,7 @@ SUBROUTINE CDRIV2(N,T,Y,F,Tout,Mstate,Nroot,Eps,Ewt,Mint,Work,Lenw,Iwork,&
     ntask = 3
   END IF
   ewtcom(1) = Ewt
-  IF( Ewt/=0.E0 ) THEN
+  IF( Ewt/=0._SP ) THEN
     ierror = 3
   ELSE
     ierror = 2
@@ -414,7 +414,7 @@ SUBROUTINE CDRIV2(N,T,Y,F,Tout,Mstate,Nroot,Eps,Ewt,Mint,Work,Lenw,Iwork,&
     miter = 2
     mxord = 12
   END IF
-  hmax = 2.E0*ABS(Tout-T)
+  hmax = 2._SP*ABS(Tout-T)
   CALL CDRIV3(N,T,Y,F,nstate,Tout,ntask,Nroot,Eps,ewtcom,ierror,Mint,miter,&
     IMPL,ml,mu,mxord,hmax,Work,Lenw,Iwork,Leniw,dum_JACOBN,dum_FA,nde,MXSTEP,G,&
     dum_USERS,Ierflg)
@@ -447,7 +447,7 @@ CONTAINS
     REAL(SP) :: T
     COMPLEX(SP) :: Y(N), A(:,:)
     T = Matdim + Ml + Mu + Nde
-    Y = 0.
-    A = 0.
+    Y = 0._SP
+    A = 0._SP
   END SUBROUTINE dum_FA
 END SUBROUTINE CDRIV2

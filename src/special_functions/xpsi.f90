@@ -30,10 +30,10 @@ REAL(SP) FUNCTION XPSI(A,Ipsik,Ipsix)
   !        AND 2*I*DENOMINATOR RESPECTIVELY OF THE 2*I TH BERNOULLI
   !        NUMBER.
   !
-  REAL(SP), PARAMETER :: cnum(12) = [ 1., -1., 1., -1., 1., -691., 1., -3617., 43867., &
-    -174611., 77683., -236364091. ]
-  REAL(SP), PARAMETER :: cdenom(12) = [ 12., 120., 252., 240., 132., 32760., 12., 8160., &
-    14364., 6600., 276., 65520. ]
+  REAL(SP), PARAMETER :: cnum(12) = [ 1._SP, -1._SP, 1._SP, -1._SP, 1._SP, -691._SP, &
+    1._SP, -3617._SP, 43867._SP, -174611._SP, 77683._SP, -236364091._SP ]
+  REAL(SP), PARAMETER :: cdenom(12) = [ 12._SP, 120._SP, 252._SP, 240._SP, 132._SP, &
+    32760._SP, 12._SP, 8160._SP, 14364._SP, 6600._SP, 276._SP, 65520._SP ]
   !* FIRST EXECUTABLE STATEMENT  XPSI
   n = MAX(0,Ipsix-INT(A))
   b = n + A
@@ -46,14 +46,14 @@ REAL(SP) FUNCTION XPSI(A,Ipsik,Ipsix)
     k = Ipsik - i
     c = (c+cnum(k)/cdenom(k))/b**2
   END DO
-  XPSI = LOG(b) - (c+.5/b)
+  XPSI = LOG(b) - (c+.5_SP/b)
   IF( n/=0 ) THEN
     b = 0.
     !
     !        RECURRENCE FOR A <= IPSIX.
     !
     DO m = 1, n
-      b = b + 1./(n-m+A)
+      b = b + 1._SP/(n-m+A)
     END DO
     XPSI = XPSI - b
   END IF

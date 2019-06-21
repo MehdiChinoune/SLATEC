@@ -285,24 +285,24 @@ SUBROUTINE DQAGPE(F,A,B,Npts2,Points,Epsabs,Epsrel,Limit,Result,Abserr,&
   Ier = 0
   Neval = 0
   Last = 0
-  Result = 0.0D+00
-  Abserr = 0.0D+00
+  Result = 0._DP
+  Abserr = 0._DP
   Alist(1) = A
   Blist(1) = B
-  Rlist(1) = 0.0D+00
-  Elist(1) = 0.0D+00
+  Rlist(1) = 0._DP
+  Elist(1) = 0._DP
   Iord(1) = 0
   Level(1) = 0
   npts = Npts2 - 2
   IF( Npts2<2 .OR. Limit<=npts .OR. &
-    (Epsabs<=0.0D+00 .AND. Epsrel<MAX(0.5D+02*epmach,0.5D-28)) ) Ier = 6
+    (Epsabs<=0._DP .AND. Epsrel<MAX(0.5E+02_DP*epmach,0.5E-28_DP)) ) Ier = 6
   IF( Ier==6 ) RETURN
   !
   !            IF ANY BREAK POINTS ARE PROVIDED, SORT THEM INTO AN
   !            ASCENDING SEQUENCE.
   !
-  signn = 1.0D+00
-  IF( A>B ) signn = -1.0D+00
+  signn = 1._DP
+  IF( A>B ) signn = -1._DP
   Pts(1) = MIN(A,B)
   IF( npts/=0 ) THEN
     DO i = 1, npts
@@ -331,14 +331,14 @@ SUBROUTINE DQAGPE(F,A,B,Npts2,Points,Epsabs,Epsrel,Limit,Result,Abserr,&
   !            COMPUTE FIRST INTEGRAL AND ERROR APPROXIMATIONS.
   !            ------------------------------------------------
   !
-  resabs = 0.0D+00
+  resabs = 0._DP
   DO i = 1, nintt
     b1 = Pts(i+1)
     CALL DQK21(F,a1,b1,area1,error1,defabs,resa)
     Abserr = Abserr + error1
     Result = Result + area1
     Ndin(i) = 0
-    IF( error1==resa .AND. error1/=0.0D+00 ) Ndin(i) = 1
+    IF( error1==resa .AND. error1/=0._DP ) Ndin(i) = 1
     resabs = resabs + defabs
     Level(i) = 0
     Elist(i) = error1
@@ -348,7 +348,7 @@ SUBROUTINE DQAGPE(F,A,B,Npts2,Points,Epsabs,Epsrel,Limit,Result,Abserr,&
     Iord(i) = i
     a1 = b1
   END DO
-  errsum = 0.0D+00
+  errsum = 0._DP
   DO i = 1, nintt
     IF( Ndin(i)==1 ) Elist(i) = Abserr
     errsum = errsum + Elist(i)
@@ -360,7 +360,7 @@ SUBROUTINE DQAGPE(F,A,B,Npts2,Points,Epsabs,Epsrel,Limit,Result,Abserr,&
   Neval = 21*nintt
   dres = ABS(Result)
   errbnd = MAX(Epsabs,Epsrel*dres)
-  IF( Abserr<=0.1D+03*epmach*resabs .AND. Abserr>errbnd ) Ier = 2
+  IF( Abserr<=100._DP*epmach*resabs .AND. Abserr>errbnd ) Ier = 2
   IF( nintt/=1 ) THEN
     DO i = 1, npts
       jlow = i + 1
@@ -405,7 +405,7 @@ SUBROUTINE DQAGPE(F,A,B,Npts2,Points,Epsabs,Epsrel,Limit,Result,Abserr,&
   oflow = D1MACH(2)
   Abserr = oflow
   ksgn = -1
-  IF( dres>=(0.1D+01-0.5D+02*epmach)*resabs ) ksgn = 1
+  IF( dres>=(1._DP-0.5E+02_DP*epmach)*resabs ) ksgn = 1
   !
   !           MAIN DO-LOOP
   !           ------------
@@ -417,7 +417,7 @@ SUBROUTINE DQAGPE(F,A,B,Npts2,Points,Epsabs,Epsrel,Limit,Result,Abserr,&
     !
     levcur = Level(maxerr) + 1
     a1 = Alist(maxerr)
-    b1 = 0.5D+00*(Alist(maxerr)+Blist(maxerr))
+    b1 = 0.5_DP*(Alist(maxerr)+Blist(maxerr))
     a2 = b1
     b2 = Blist(maxerr)
     erlast = errmax
@@ -434,7 +434,7 @@ SUBROUTINE DQAGPE(F,A,B,Npts2,Points,Epsabs,Epsrel,Limit,Result,Abserr,&
     area = area + area12 - Rlist(maxerr)
     IF( defab1/=error1 .AND. defab2/=error2 ) THEN
       IF( ABS(Rlist(maxerr)-area12)<=0.1D-04*ABS(area12) .AND. &
-          erro12>=0.99D+00*errmax ) THEN
+          erro12>=0.99_DP*errmax ) THEN
         IF( extrap ) iroff2 = iroff2 + 1
         IF( .NOT. extrap ) iroff1 = iroff1 + 1
       END IF
@@ -459,7 +459,7 @@ SUBROUTINE DQAGPE(F,A,B,Npts2,Points,Epsabs,Epsrel,Limit,Result,Abserr,&
     !           SET ERROR FLAG IN THE CASE OF BAD INTEGRAND BEHAVIOUR
     !           AT A POINT OF THE INTEGRATION RANGE
     !
-    IF( MAX(ABS(a1),ABS(b2))<=(0.1D+01+0.1D+03*epmach)&
+    IF( MAX(ABS(a1),ABS(b2))<=(1._DP+100._DP*epmach)&
       *(ABS(a2)+0.1D+04*uflow) ) Ier = 4
     !
     !           APPEND THE NEWLY-CREATED INTERVALS TO THE LIST.
@@ -560,9 +560,9 @@ SUBROUTINE DQAGPE(F,A,B,Npts2,Points,Epsabs,Epsrel,Limit,Result,Abserr,&
     IF( (Ier+ierro)/=0 ) THEN
       IF( ierro==3 ) Abserr = Abserr + correc
       IF( Ier==0 ) Ier = 3
-      IF( Result==0.0D+00 .OR. area==0.0D+00 ) THEN
+      IF( Result==0._DP .OR. area==0._DP ) THEN
         IF( Abserr>errsum ) GOTO 200
-        IF( area==0.0D+00 ) GOTO 300
+        IF( area==0._DP ) GOTO 300
       ELSEIF( Abserr/ABS(Result)>errsum/ABS(area) ) THEN
         GOTO 200
       END IF
@@ -579,7 +579,7 @@ SUBROUTINE DQAGPE(F,A,B,Npts2,Points,Epsabs,Epsrel,Limit,Result,Abserr,&
   !
   !           COMPUTE GLOBAL INTEGRAL SUM.
   !
-  200  Result = 0.0D+00
+  200  Result = 0._DP
   DO k = 1, Last
     Result = Result + Rlist(k)
   END DO

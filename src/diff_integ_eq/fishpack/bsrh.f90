@@ -33,18 +33,18 @@ REAL(SP) FUNCTION BSRH(Xll,Xrr,Iz,C,A,Bh,F,Sgn)
   !* FIRST EXECUTABLE STATEMENT  BSRH
   xl = Xll
   xr = Xrr
-  dx = .5*ABS(xr-xl)
-  100  x = .5*(xl+xr)
+  dx = 0.5_SP*ABS(xr-xl)
+  100  x = 0.5_SP*(xl+xr)
   IF( Sgn*F(x,Iz,C,A,Bh)<0 ) THEN
     xl = x
   ELSEIF( Sgn*F(x,Iz,C,A,Bh)==0 ) THEN
-    BSRH = .5*(xl+xr)
+    BSRH = 0.5_SP*(xl+xr)
     RETURN
   ELSE
     xr = x
   END IF
-  dx = .5*dx
+  dx = 0.5_SP*dx
   IF( dx>cnv_com ) GOTO 100
-  BSRH = .5*(xl+xr)
+  BSRH = 0.5_SP*(xl+xr)
   RETURN
 END FUNCTION BSRH

@@ -48,7 +48,7 @@ SUBROUTINE WNLT1(I,Lend,Mend,Ir,Mdw,Recalc,Imax,Hbar,H,Scalee,W)
   !
   IF( Recalc ) THEN
     DO j = I, Lend
-      H(j) = 0.E0
+      H(j) = 0._SP
       DO k = Ir, Mend
         H(j) = H(j) + Scalee(k)*W(k,j)**2
       END DO

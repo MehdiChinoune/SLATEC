@@ -47,7 +47,7 @@ SUBROUTINE DXQMU(Nu1,Nu2,Mu1,Mu2,Theta,X,Sx,Id,Pqa,Ipqa,Ierror)
   nu = Nu1
   k = 0
   mu = 1
-  dmu = 1.D0
+  dmu = 1._DP
   pq1 = Pqa(1)
   ipq1 = Ipqa(1)
   IF( Mu1<=0 ) THEN
@@ -69,8 +69,8 @@ SUBROUTINE DXQMU(Nu1,Nu2,Mu1,Mu2,Theta,X,Sx,Id,Pqa,Ipqa,Ierror)
     !             Q(MU+1,NU,X)=-2.*MU*X*SQRT(1./(1.-X**2))*Q(MU,NU,X)
     !                               -(NU+MU)*(NU-MU+1.)*Q(MU-1,NU,X)
     !
-    x1 = -2.D0*dmu*X*Sx*pq1
-    x2 = (nu+dmu)*(nu-dmu+1.D0)*pq2
+    x1 = -2._DP*dmu*X*Sx*pq1
+    x2 = (nu+dmu)*(nu-dmu+1._DP)*pq2
     CALL DXADD(x1,ipq1,-x2,ipq2,pq,ipq,Ierror)
     IF( Ierror/=0 ) RETURN
     CALL DXADJ(pq,ipq,Ierror)
@@ -80,7 +80,7 @@ SUBROUTINE DXQMU(Nu1,Nu2,Mu1,Mu2,Theta,X,Sx,Id,Pqa,Ipqa,Ierror)
     pq1 = pq
     ipq1 = ipq
     mu = mu + 1
-    dmu = dmu + 1.D0
+    dmu = dmu + 1._DP
     IF( mu>=Mu1 ) THEN
       k = k + 1
       Pqa(k) = pq

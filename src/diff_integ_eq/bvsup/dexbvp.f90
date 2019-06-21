@@ -51,7 +51,7 @@ SUBROUTINE DEXBVP(Y,Nrowy,Xpts,A,Nrowa,Alpha,B,Nrowb,Beta,Iflag,Work,Iwork)
     !
     !     COMPUTE ORTHONORMALIZATION TOLERANCES.
     !
-    tol_com = 10.0D0**((-lpar_com-iexp)*2)
+    tol_com = 10._DP**((-lpar_com-iexp)*2)
     !
     Iwork(8) = iexp
     mxnon_com = Iwork(2)
@@ -80,7 +80,7 @@ SUBROUTINE DEXBVP(Y,Nrowy,Xpts,A,Nrowa,Alpha,B,Nrowb,Beta,Iflag,Work,Iwork)
       IF( Iflag==13 ) THEN
         xl = ABS(xend_com-xbeg_com)
         zquit = ABS(x_com-xbeg_com)
-        inc = INT( 1.5D0*xl/zquit*(mxnon_com+1) )
+        inc = INT( 1.5_DP*xl/zquit*(mxnon_com+1) )
         IF( ndisk_com/=1 ) THEN
           nsafw = inc*kkkzpw_com + needw_com
           nsafiw = inc*nfcc_com + neediw_com

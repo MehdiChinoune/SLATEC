@@ -407,7 +407,7 @@ SUBROUTINE HSTCSP(Intl,A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   REAL(SP) :: A, B, C, D, Elmbda, Pertrb
   REAL(SP) :: Bda(N), Bdb(N), Bdc(M), Bdd(M), F(Idimf,N), W(:)
   INTEGER :: ierr1, iwan, iwbm, iwbn, iwcm, iwcn, iwrsq, iwsnth, iwwrk
-  REAL(SP), PARAMETER :: pi = 3.14159265358979
+  REAL(SP), PARAMETER :: pi = 3.14159265358979_SP
   !* FIRST EXECUTABLE STATEMENT  HSTCSP
   !
   !     CHECK FOR INVALID INPUT PARAMETERS

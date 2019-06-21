@@ -26,8 +26,8 @@ SUBROUTINE CMLRI(Z,Fnu,Kode,N,Y,Nz,Tol)
   COMPLEX(SP) :: ck, cnorm, pt, p1, p2, rz, summ, Y(N), Z
   REAL(SP) :: ack, ak, ap, at, az, bk, fkap, fkk, flam, fnf, Fnu, rho, &
     rho2, scle, tfnf, Tol, tst, x
-  COMPLEX(SP), PARAMETER :: czero = (0.0E0,0.0E0), cone = (1.0E0,0.0E0), ctwo = (2.0E0,0.0E0)
-  scle = 1.0E+3*R1MACH(1)/Tol
+  COMPLEX(SP), PARAMETER :: czero = (0._SP,0._SP), cone = (1._SP,0._SP), ctwo = (2._SP,0._SP)
+  scle = 1.E+3_SP*R1MACH(1)/Tol
   !* FIRST EXECUTABLE STATEMENT  CMLRI
   Nz = 0
   az = ABS(Z)
@@ -35,15 +35,15 @@ SUBROUTINE CMLRI(Z,Fnu,Kode,N,Y,Nz,Tol)
   iaz = INT( az )
   ifnu = INT( Fnu )
   inu = ifnu + N - 1
-  at = iaz + 1.0E0
-  ck = CMPLX(at,0.0E0)/Z
+  at = iaz + 1._SP
+  ck = CMPLX(at,0._SP,SP)/Z
   rz = ctwo/Z
   p1 = czero
   p2 = cone
-  ack = (at+1.0E0)/az
-  rho = ack + SQRT(ack*ack-1.0E0)
+  ack = (at+1._SP)/az
+  rho = ack + SQRT(ack*ack-1._SP)
   rho2 = rho*rho
-  tst = (rho2+rho2)/((rho2-1.0E0)*(rho-1.0E0))
+  tst = (rho2+rho2)/((rho2-1._SP)*(rho-1._SP))
   tst = tst/Tol
   !-----------------------------------------------------------------------
   !     COMPUTE RELATIVE TRUNCATION ERROR INDEX FOR SERIES
@@ -56,7 +56,7 @@ SUBROUTINE CMLRI(Z,Fnu,Kode,N,Y,Nz,Tol)
     ck = ck + rz
     ap = ABS(p2)
     IF( ap>tst*ak*ak ) GOTO 100
-    ak = ak + 1.0E0
+    ak = ak + 1._SP
   END DO
   Nz = -2
   RETURN
@@ -68,8 +68,8 @@ SUBROUTINE CMLRI(Z,Fnu,Kode,N,Y,Nz,Tol)
     !-----------------------------------------------------------------------
     p1 = czero
     p2 = cone
-    at = inu + 1.0E0
-    ck = CMPLX(at,0.0E0)/Z
+    at = inu + 1._SP
+    ck = CMPLX(at,0._SP,SP)/Z
     ack = at/az
     tst = SQRT(ack/Tol)
     itime = 1
@@ -82,10 +82,10 @@ SUBROUTINE CMLRI(Z,Fnu,Kode,N,Y,Nz,Tol)
       IF( ap>=tst ) THEN
         IF( itime==2 ) GOTO 200
         ack = ABS(ck)
-        flam = ack + SQRT(ack*ack-1.0E0)
+        flam = ack + SQRT(ack*ack-1._SP)
         fkap = ap/ABS(p1)
         rho = MIN(flam,fkap)
-        tst = tst*SQRT(rho/(rho*rho-1.0E0))
+        tst = tst*SQRT(rho/(rho*rho-1._SP))
         itime = 2
       END IF
     END DO
@@ -102,34 +102,34 @@ SUBROUTINE CMLRI(Z,Fnu,Kode,N,Y,Nz,Tol)
   !-----------------------------------------------------------------------
   !     SCALE P2 AND SUM BY SCLE
   !-----------------------------------------------------------------------
-  p2 = CMPLX(scle,0.0E0)
+  p2 = CMPLX(scle,0._SP,SP)
   fnf = Fnu - ifnu
   tfnf = fnf + fnf
-  bk = GAMLN(fkk+tfnf+1.0E0,idum) - GAMLN(fkk+1.0E0,idum)- GAMLN(tfnf+1.0E0,idum)
+  bk = GAMLN(fkk+tfnf+1._SP,idum) - GAMLN(fkk+1._SP,idum)- GAMLN(tfnf+1._SP,idum)
   bk = EXP(bk)
   summ = czero
   km = kk - inu
   DO i = 1, km
     pt = p2
-    p2 = p1 + CMPLX(fkk+fnf,0.0E0)*rz*p2
+    p2 = p1 + CMPLX(fkk+fnf,0._SP,SP)*rz*p2
     p1 = pt
-    ak = 1.0E0 - tfnf/(fkk+tfnf)
+    ak = 1._SP - tfnf/(fkk+tfnf)
     ack = bk*ak
-    summ = summ + CMPLX(ack+bk,0.0E0)*p1
+    summ = summ + CMPLX(ack+bk,0._SP,SP)*p1
     bk = ack
-    fkk = fkk - 1.0E0
+    fkk = fkk - 1._SP
   END DO
   Y(N) = p2
   IF( N/=1 ) THEN
     DO i = 2, N
       pt = p2
-      p2 = p1 + CMPLX(fkk+fnf,0.0E0)*rz*p2
+      p2 = p1 + CMPLX(fkk+fnf,0._SP,SP)*rz*p2
       p1 = pt
-      ak = 1.0E0 - tfnf/(fkk+tfnf)
+      ak = 1._SP - tfnf/(fkk+tfnf)
       ack = bk*ak
-      summ = summ + CMPLX(ack+bk,0.0E0)*p1
+      summ = summ + CMPLX(ack+bk,0._SP,SP)*p1
       bk = ack
-      fkk = fkk - 1.0E0
+      fkk = fkk - 1._SP
       m = N - i + 1
       Y(m) = p2
     END DO
@@ -137,27 +137,27 @@ SUBROUTINE CMLRI(Z,Fnu,Kode,N,Y,Nz,Tol)
   IF( ifnu>0 ) THEN
     DO i = 1, ifnu
       pt = p2
-      p2 = p1 + CMPLX(fkk+fnf,0.0E0)*rz*p2
+      p2 = p1 + CMPLX(fkk+fnf,0._SP,SP)*rz*p2
       p1 = pt
-      ak = 1.0E0 - tfnf/(fkk+tfnf)
+      ak = 1._SP - tfnf/(fkk+tfnf)
       ack = bk*ak
-      summ = summ + CMPLX(ack+bk,0.0E0)*p1
+      summ = summ + CMPLX(ack+bk,0._SP,SP)*p1
       bk = ack
-      fkk = fkk - 1.0E0
+      fkk = fkk - 1._SP
     END DO
   END IF
   pt = Z
-  IF( Kode==2 ) pt = pt - CMPLX(x,0.0E0)
-  p1 = -CMPLX(fnf,0.0E0)*LOG(rz) + pt
-  ap = GAMLN(1.0E0+fnf,idum)
-  pt = p1 - CMPLX(ap,0.0E0)
+  IF( Kode==2 ) pt = pt - CMPLX(x,0._SP,SP)
+  p1 = -CMPLX(fnf,0._SP,SP)*LOG(rz) + pt
+  ap = GAMLN(1._SP+fnf,idum)
+  pt = p1 - CMPLX(ap,0._SP,SP)
   !-----------------------------------------------------------------------
   !     THE DIVISION EXP(PT)/(SUM+P2) IS ALTERED TO AVOID OVERFLOW
   !     IN THE DENOMINATOR BY SQUARING LARGE QUANTITIES
   !-----------------------------------------------------------------------
   p2 = p2 + summ
   ap = ABS(p2)
-  p1 = CMPLX(1.0E0/ap,0.0E0)
+  p1 = CMPLX(1._SP/ap,0._SP,SP)
   ck = EXP(pt)*p1
   pt = CONJG(p2)*p1
   cnorm = ck*pt

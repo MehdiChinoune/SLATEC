@@ -59,7 +59,7 @@ SUBROUTINE SPLPUP(USRMAT,Mrelas,Nvars,Dattrv,Bl,Bu,Ind,Info,Amat,&
   CHARACTER(16) :: xern3, xern4
   !
   !* FIRST EXECUTABLE STATEMENT  SPLPUP
-  zero = 0.E0
+  zero = 0._SP
   !
   !     CHECK USER-SUPPLIED BOUNDS
   !

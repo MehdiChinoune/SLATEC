@@ -108,22 +108,22 @@ SUBROUTINE EXINT(X,N,Kode,M,Tol,En,Nz,Ierr)
   !* FIRST EXECUTABLE STATEMENT  EXINT
   Ierr = 0
   Nz = 0
-  etol = MAX(R1MACH(4),0.5E-18)
-  IF( X<0.0E0 ) Ierr = 1
+  etol = MAX(R1MACH(4),0.5E-18_SP)
+  IF( X<0._SP ) Ierr = 1
   IF( N<1 ) Ierr = 1
   IF( Kode<1 .OR. Kode>2 ) Ierr = 1
   IF( M<1 ) Ierr = 1
-  IF( Tol<etol .OR. Tol>0.1E0 ) Ierr = 1
-  IF( X==0.0E0 .AND. N==1 ) Ierr = 1
+  IF( Tol<etol .OR. Tol>0.1_SP ) Ierr = 1
+  IF( X==0._SP .AND. N==1 ) Ierr = 1
   IF( Ierr/=0 ) RETURN
   i1m = -I1MACH(12)
-  pt = 2.3026E0*R1MACH(5)*i1m
-  xlim = pt - 6.907755E0
+  pt = 2.3026_SP*R1MACH(5)*i1m
+  xlim = pt - 6.907755_SP
   bt = pt + (N+M-1)
-  IF( bt>1000.0E0 ) xlim = pt - LOG(bt)
+  IF( bt>1000._SP ) xlim = pt - LOG(bt)
   !
-  xcut = 2.0E0
-  IF( etol>2.0E-7 ) xcut = 1.0E0
+  xcut = 2._SP
+  IF( etol>2.0E-7 ) xcut = 1._SP
   IF( X>xcut ) THEN
     !-----------------------------------------------------------------------
     !     BACKWARD RECURSIVE MILLER ALGORITHM FOR
@@ -131,19 +131,19 @@ SUBROUTINE EXINT(X,N,Kode,M,Tol,En,Nz,Ierr)
     !     WITH RECURSION AWAY FROM N=INTEGER CLOSEST TO X.
     !     U(A,B,X) IS THE SECOND CONFLUENT HYPERGEOMETRIC FUNCTION
     !-----------------------------------------------------------------------
-    emx = 1.0E0
+    emx = 1._SP
     IF( Kode/=2 ) THEN
       IF( X<=xlim ) THEN
         emx = EXP(-X)
       ELSE
         Nz = M
         DO i = 1, M
-          En(i) = 0.0E0
+          En(i) = 0._SP
         END DO
         RETURN
       END IF
     END IF
-    ix = INT( X + 0.5E0 )
+    ix = INT( X + 0.5_SP )
     kn = N + M - 1
     IF( kn<=ix ) THEN
       icase = 1
@@ -172,16 +172,16 @@ SUBROUTINE EXINT(X,N,Kode,M,Tol,En,Nz,Ierr)
     ks = 2
     icase = 3
     GOTO 200
-  ELSEIF( X==0.0E0 .AND. N>1 ) THEN
+  ELSEIF( X==0._SP .AND. N>1 ) THEN
     DO i = 1, M
-      En(i) = 1.0E0/(N+i-2)
+      En(i) = 1._SP/(N+i-2)
     END DO
     RETURN
   ELSE
     !-----------------------------------------------------------------------
     !     SERIES FOR E(N,X) FOR X<=XCUT
     !-----------------------------------------------------------------------
-    tx = X + 0.5E0
+    tx = X + 0.5_SP
     ix = INT( tx )
     !-----------------------------------------------------------------------
     !     ICASE=1 MEANS INTEGER CLOSEST TO X IS 2 AND N=1
@@ -196,33 +196,33 @@ SUBROUTINE EXINT(X,N,Kode,M,Tol,En,Nz,Ierr)
     ml = 1
     ks = nd
     fnm = nm
-    s = 0.0E0
-    xtol = 3.0E0*Tol
+    s = 0._SP
+    xtol = 3._SP*Tol
     IF( nd/=1 ) THEN
-      xtol = 0.3333E0*Tol
-      s = 1.0E0/fnm
+      xtol = 0.3333_SP*Tol
+      s = 1._SP/fnm
     END IF
-    aa = 1.0E0
-    ak = 1.0E0
+    aa = 1._SP
+    ak = 1._SP
     ic = 35
     IF( X<etol ) ic = 1
     DO i = 1, ic
       aa = -aa*X/ak
       IF( i==nm ) THEN
         s = s + aa*(-LOG(X)+PSIXN(nd))
-        xtol = 3.0E0*Tol
+        xtol = 3._SP*Tol
       ELSE
         s = s - aa/(ak-fnm)
         IF( ABS(aa)>xtol*ABS(s) ) THEN
-          ak = ak + 1.0E0
+          ak = ak + 1._SP
           CYCLE
         ELSEIF( i>=2 ) THEN
           IF( nd-2>i .OR. i>nd-1 ) GOTO 50
-          ak = ak + 1.0E0
+          ak = ak + 1._SP
           CYCLE
         END IF
       END IF
-      ak = ak + 1.0E0
+      ak = ak + 1._SP
     END DO
     IF( ic/=1 ) THEN
       Ierr = 2
@@ -231,7 +231,7 @@ SUBROUTINE EXINT(X,N,Kode,M,Tol,En,Nz,Ierr)
     50  IF( nd==1 ) s = s + (-LOG(X)+PSIXN(1))
     IF( Kode==2 ) s = s*EXP(X)
     En(1) = s
-    emx = 1.0E0
+    emx = 1._SP
     IF( M/=1 ) THEN
       En(ind) = s
       aa = ks
@@ -260,42 +260,42 @@ SUBROUTINE EXINT(X,N,Kode,M,Tol,En,Nz,Ierr)
   !-----------------------------------------------------------------------
   ic = 0
   aa = ah + ah
-  aams = aa - 1.0E0
+  aams = aa - 1._SP
   aams = aams*aams
   tx = X + X
   fx = tx + tx
   ak = ah
   xtol = Tol
-  IF( Tol<=1.0E-3 ) xtol = 20.0E0*Tol
+  IF( Tol<=1.0E-3 ) xtol = 20._SP*Tol
   ct = aams + fx*ah
-  em = (ah+1.0E0)/((X+aa)*xtol*SQRT(ct))
+  em = (ah+1._SP)/((X+aa)*xtol*SQRT(ct))
   bk = aa
   cc = ah*ah
   !-----------------------------------------------------------------------
   !     FORWARD RECURSION FOR P(IC),P(IC+1) AND INDEX IC FOR BACKWARD
   !     RECURSION
   !-----------------------------------------------------------------------
-  p1 = 0.0E0
-  p2 = 1.0E0
+  p1 = 0._SP
+  p2 = 1._SP
   DO WHILE( ic/=99 )
     ic = ic + 1
-    ak = ak + 1.0E0
+    ak = ak + 1._SP
     at = bk/(bk+ak+cc+ic)
     bk = bk + ak + ak
     a(ic) = at
-    bt = (ak+ak+X)/(ak+1.0E0)
+    bt = (ak+ak+X)/(ak+1._SP)
     b(ic) = bt
     pt = p2
     p2 = bt*p2 - at*p1
     p1 = pt
     ct = ct + fx
-    em = em*at*(1.0E0-tx/ct)
-    IF( em*(ak+1.0E0)<=p1*p1 ) THEN
+    em = em*at*(1._SP-tx/ct)
+    IF( em*(ak+1._SP)<=p1*p1 ) THEN
       ict = ic
       kk = ic + 1
       bt = tx/(ct+fx)
-      y2 = (bk/(bk+cc+kk))*(p1/p2)*(1.0E0-bt+0.375E0*bt*bt)
-      y1 = 1.0E0
+      y2 = (bk/(bk+cc+kk))*(p1/p2)*(1._SP-bt+0.375_SP*bt*bt)
+      y1 = 1._SP
       !-----------------------------------------------------------------------
       !     BACKWARD RECURRENCE FOR
       !              Y1=             C*U( A ,A,X)
@@ -315,8 +315,8 @@ SUBROUTINE EXINT(X,N,Kode,M,Tol,En,Nz,Ierr)
       !     X IS INCORPORATED INTO THE NORMALIZING RELATION
       !-----------------------------------------------------------------------
       pt = y2/y1
-      cnorm = 1.0E0 - pt*(ah+1.0E0)/aa
-      y(1) = 1.0E0/(cnorm*aa+X)
+      cnorm = 1._SP - pt*(ah+1._SP)/aa
+      y(1) = 1._SP/(cnorm*aa+X)
       y(2) = cnorm*y(1)
       IF( icase/=3 ) THEN
         En(ind) = emx*y(jset)
@@ -328,7 +328,7 @@ SUBROUTINE EXINT(X,N,Kode,M,Tol,En,Nz,Ierr)
       !-----------------------------------------------------------------------
       !     RECURSION SECTION  N*E(N+1,X) + X*E(N,X)=EMX
       !-----------------------------------------------------------------------
-      En(1) = emx*(1.0E0-y(1))/X
+      En(1) = emx*(1._SP-y(1))/X
       RETURN
     END IF
   END DO
@@ -336,7 +336,7 @@ SUBROUTINE EXINT(X,N,Kode,M,Tol,En,Nz,Ierr)
   RETURN
   300  k = ind - 1
   DO i = 1, ml
-    aa = aa - 1.0E0
+    aa = aa - 1._SP
     En(k) = (emx-aa*En(k+1))/X
     k = k - 1
   END DO
@@ -345,7 +345,7 @@ SUBROUTINE EXINT(X,N,Kode,M,Tol,En,Nz,Ierr)
   400  k = ind
   DO i = 1, mu
     En(k+1) = (emx-X*En(k))/aa
-    aa = aa + 1.0E0
+    aa = aa + 1._SP
     k = k + 1
   END DO
   RETURN

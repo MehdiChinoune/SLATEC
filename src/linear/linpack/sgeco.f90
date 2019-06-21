@@ -92,7 +92,7 @@ SUBROUTINE SGECO(A,Lda,N,Ipvt,Rcond,Z)
   !     COMPUTE 1-NORM OF A
   !
   !* FIRST EXECUTABLE STATEMENT  SGECO
-  anorm = 0.0E0
+  anorm = 0._SP
   DO j = 1, N
     anorm = MAX(anorm,SUM( ABS(A(1:N,j)) ) )
   END DO
@@ -110,12 +110,12 @@ SUBROUTINE SGECO(A,Lda,N,Ipvt,Rcond,Z)
   !
   !     SOLVE TRANS(U)*W = E
   !
-  ek = 1.0E0
+  ek = 1._SP
   DO j = 1, N
-    Z(j) = 0.0E0
+    Z(j) = 0._SP
   END DO
   DO k = 1, N
-    IF( Z(k)/=0.0E0 ) ek = SIGN(ek,-Z(k))
+    IF( Z(k)/=0._SP ) ek = SIGN(ek,-Z(k))
     IF( ABS(ek-Z(k))>ABS(A(k,k)) ) THEN
       s = ABS(A(k,k))/ABS(ek-Z(k))
       Z = s*Z
@@ -125,9 +125,9 @@ SUBROUTINE SGECO(A,Lda,N,Ipvt,Rcond,Z)
     wkm = -ek - Z(k)
     s = ABS(wk)
     sm = ABS(wkm)
-    IF( A(k,k)==0.0E0 ) THEN
-      wk = 1.0E0
-      wkm = 1.0E0
+    IF( A(k,k)==0._SP ) THEN
+      wk = 1._SP
+      wkm = 1._SP
     ELSE
       wk = wk/A(k,k)
       wkm = wkm/A(k,k)
@@ -149,7 +149,7 @@ SUBROUTINE SGECO(A,Lda,N,Ipvt,Rcond,Z)
     END IF
     Z(k) = wk
   END DO
-  s = 1.0E0/SUM( ABS(Z) )
+  s = 1._SP/SUM( ABS(Z) )
   Z = s*Z
   !
   !     SOLVE TRANS(L)*Y = W
@@ -157,8 +157,8 @@ SUBROUTINE SGECO(A,Lda,N,Ipvt,Rcond,Z)
   DO kb = 1, N
     k = N + 1 - kb
     IF( k<N ) Z(k) = Z(k) + DOT_PRODUCT(A(k+1:N,k),Z(k+1:N))
-    IF( ABS(Z(k))>1.0E0 ) THEN
-      s = 1.0E0/ABS(Z(k))
+    IF( ABS(Z(k))>1._SP ) THEN
+      s = 1._SP/ABS(Z(k))
       Z = s*Z
     END IF
     l = Ipvt(k)
@@ -166,10 +166,10 @@ SUBROUTINE SGECO(A,Lda,N,Ipvt,Rcond,Z)
     Z(l) = Z(k)
     Z(k) = t
   END DO
-  s = 1.0E0/SUM( ABS(Z) )
+  s = 1._SP/SUM( ABS(Z) )
   Z = s*Z
   !
-  ynorm = 1.0E0
+  ynorm = 1._SP
   !
   !     SOLVE L*V = Y
   !
@@ -179,13 +179,13 @@ SUBROUTINE SGECO(A,Lda,N,Ipvt,Rcond,Z)
     Z(l) = Z(k)
     Z(k) = t
     IF( k<N ) CALL SAXPY(N-k,t,A(k+1:N,k),1,Z(k+1:N),1)
-    IF( ABS(Z(k))>1.0E0 ) THEN
-      s = 1.0E0/ABS(Z(k))
+    IF( ABS(Z(k))>1._SP ) THEN
+      s = 1._SP/ABS(Z(k))
       Z = s*Z
       ynorm = s*ynorm
     END IF
   END DO
-  s = 1.0E0/SUM( ABS(Z) )
+  s = 1._SP/SUM( ABS(Z) )
   Z = s*Z
   ynorm = s*ynorm
   !
@@ -198,16 +198,16 @@ SUBROUTINE SGECO(A,Lda,N,Ipvt,Rcond,Z)
       Z = s*Z
       ynorm = s*ynorm
     END IF
-    IF( A(k,k)/=0.0E0 ) Z(k) = Z(k)/A(k,k)
-    IF( A(k,k)==0.0E0 ) Z(k) = 1.0E0
+    IF( A(k,k)/=0._SP ) Z(k) = Z(k)/A(k,k)
+    IF( A(k,k)==0._SP ) Z(k) = 1._SP
     t = -Z(k)
     CALL SAXPY(k-1,t,A(1:k-1,k),1,Z(1:k-1),1)
   END DO
   !     MAKE ZNORM = 1.0
-  s = 1.0E0/SUM( ABS(Z) )
+  s = 1._SP/SUM( ABS(Z) )
   Z = s*Z
   ynorm = s*ynorm
   !
-  IF( anorm/=0.0E0 ) Rcond = ynorm/anorm
-  IF( anorm==0.0E0 ) Rcond = 0.0E0
+  IF( anorm/=0._SP ) Rcond = ynorm/anorm
+  IF( anorm==0._SP ) Rcond = 0._SP
 END SUBROUTINE SGECO

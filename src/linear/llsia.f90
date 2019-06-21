@@ -234,7 +234,7 @@ SUBROUTINE LLSIA(A,Mda,M,N,B,Mdb,Nb,Re,Ae,Key,Mode,Np,Krank,Ksure,Rnorm,W,&
                   RETURN
                 ELSE
                   !
-                  eps = 10.*R1MACH(4)
+                  eps = 10._SP*R1MACH(4)
                   n1 = 1
                   n2 = n1 + N
                   n3 = n2 + N
@@ -243,10 +243,10 @@ SUBROUTINE LLSIA(A,Mda,M,N,B,Mdb,Nb,Re,Ae,Key,Mode,Np,Krank,Ksure,Rnorm,W,&
                   !
                   IF( Key==1 ) THEN
                     !
-                    IF( Ae(1)<0.0 ) GOTO 100
+                    IF( Ae(1)<0._SP ) GOTO 100
                     DO i = 1, N
-                      IF( Re(i)<0.0 ) GOTO 10
-                      IF( Re(i)>1.0 ) GOTO 20
+                      IF( Re(i)<0._SP ) GOTO 10
+                      IF( Re(i)>1._SP ) GOTO 20
                       IF( Re(i)<eps ) Re(i) = eps
                       W(n4-1+i) = Ae(1)
                     END DO
@@ -254,31 +254,31 @@ SUBROUTINE LLSIA(A,Mda,M,N,B,Mdb,Nb,Re,Ae,Key,Mode,Np,Krank,Ksure,Rnorm,W,&
                       W(n2),W(n3),Iwork(n1),Iwork(n2))
                   ELSEIF( Key==2 ) THEN
                     !
-                    IF( Re(1)<0.0 ) GOTO 10
-                    IF( Re(1)>1.0 ) GOTO 20
+                    IF( Re(1)<0._SP ) GOTO 10
+                    IF( Re(1)>1._SP ) GOTO 20
                     IF( Re(1)<eps ) Re(1) = eps
                     DO i = 1, N
                       W(n4-1+i) = Re(1)
-                      IF( Ae(i)<0.0 ) GOTO 100
+                      IF( Ae(i)<0._SP ) GOTO 100
                     END DO
                     CALL U11LS(A,Mda,M,N,W(n4),Ae,Mode,Np,Krank,Ksure,W(n1),&
                       W(n2),W(n3),Iwork(n1),Iwork(n2))
                   ELSEIF( Key==3 ) THEN
                     !
                     DO i = 1, N
-                      IF( Re(i)<0.0 ) GOTO 10
-                      IF( Re(i)>1.0 ) GOTO 20
+                      IF( Re(i)<0._SP ) GOTO 10
+                      IF( Re(i)>1._SP ) GOTO 20
                       IF( Re(i)<eps ) Re(i) = eps
-                      IF( Ae(i)<0.0 ) GOTO 100
+                      IF( Ae(i)<0._SP ) GOTO 100
                     END DO
                     CALL U11LS(A,Mda,M,N,Re,Ae,Mode,Np,Krank,Ksure,W(n1),&
                       W(n2),W(n3),Iwork(n1),Iwork(n2))
                   ELSE
                     !
-                    IF( Re(1)<0.0 ) GOTO 10
-                    IF( Re(1)>1.0 ) GOTO 20
+                    IF( Re(1)<0._SP ) GOTO 10
+                    IF( Re(1)>1._SP ) GOTO 20
                     IF( Re(1)<eps ) Re(1) = eps
-                    IF( Ae(1)<0.0 ) GOTO 100
+                    IF( Ae(1)<0._SP ) GOTO 100
                     DO i = 1, N
                       W(n4-1+i) = Re(1)
                       W(n5-1+i) = Ae(1)

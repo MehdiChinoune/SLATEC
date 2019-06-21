@@ -88,12 +88,12 @@ SUBROUTINE BESJ(X,Alpha,N,Y,Nz)
     flgjy, fn, fnf, fni, fnp1, fnu, gln, rden, relb, rtx, rzden, s, sa, sb, sxo2, &
     s1, s2, t, ta, tau, tb, temp(3), tfn, tm, tol, tolln, trx, tx, t1, &
     t2, wk(7), xo2, xo2l, rtol, slim
-  REAL(SP), PARAMETER :: rtwo = 1.34839972492648E+00, pdf = 7.85398163397448E-01, &
-    rttp = 7.97884560802865E-01, pidt = 1.57079632679490E+00
-  REAL(SP), PARAMETER :: pp(4) = [ 8.72909153935547E+00, 2.65693932265030E-01, &
-    1.24578576865586E-01, 7.70133747430388E-04 ]
+  REAL(SP), PARAMETER :: rtwo = 1.34839972492648E+00_SP, pdf = 7.85398163397448E-01_SP, &
+    rttp = 7.97884560802865E-01_SP, pidt = 1.57079632679490_SP
+  REAL(SP), PARAMETER :: pp(4) = [ 8.72909153935547E+00_SP, 2.65693932265030E-01_SP, &
+    1.24578576865586E-01_SP, 7.70133747430388E-04_SP ]
   INTEGER, PARAMETER :: inlim = 150
-  REAL(SP), PARAMETER :: fnulim(2) = [ 100.0E0, 60.0E0 ]
+  REAL(SP), PARAMETER :: fnulim(2) = [ 100._SP, 60._SP ]
   !* FIRST EXECUTABLE STATEMENT  BESJ
   Nz = 0
   kt = 1
@@ -101,16 +101,16 @@ SUBROUTINE BESJ(X,Alpha,N,Y,Nz)
   !     I1MACH(14) REPLACES I1MACH(11) IN A DOUBLE PRECISION CODE
   !     I1MACH(15) REPLACES I1MACH(12) IN A DOUBLE PRECISION CODE
   ta = R1MACH(3)
-  tol = MAX(ta,1.0E-15)
+  tol = MAX(ta,1.0E-15_SP)
   i1 = I1MACH(11) + 1
   i2 = I1MACH(12)
   tb = R1MACH(5)
-  elim1 = -2.303E0*(i2*tb+3.0E0)
-  rtol = 1.0E0/tol
-  slim = R1MACH(1)*1.0E+3*rtol
+  elim1 = -2.303_SP*(i2*tb+3._SP)
+  rtol = 1._SP/tol
+  slim = R1MACH(1)*1.0E+3_SP*rtol
   !     TOLLN = -LN(TOL)
-  tolln = 2.303E0*tb*i1
-  tolln = MIN(tolln,34.5388E0)
+  tolln = 2.303_SP*tb*i1
+  tolln = MIN(tolln,34.5388E0_SP)
   IF( N<1 ) THEN
     CALL XERMSG('BESJ','N LESS THAN ONE.',2,1)
     RETURN
@@ -124,40 +124,40 @@ SUBROUTINE BESJ(X,Alpha,N,Y,Nz)
   ELSEIF( X==0 ) THEN
     IF( Alpha<0 ) GOTO 1200
     IF( Alpha==0 ) THEN
-      Y(1) = 1.0E0
+      Y(1) = 1._SP
       IF( N==1 ) RETURN
       i1 = 2
     ELSE
       i1 = 1
     END IF
     DO i = i1, N
-      Y(i) = 0.0E0
+      Y(i) = 0._SP
     END DO
     RETURN
   ELSE
-    IF( Alpha<0.0E0 ) GOTO 1200
+    IF( Alpha<0._SP ) GOTO 1200
     !
     ialp = INT(Alpha)
     fni = ialp + N - 1
     fnf = Alpha - ialp
     dfn = fni + fnf
     fnu = dfn
-    xo2 = X*0.5E0
+    xo2 = X*0.5_SP
     sxo2 = xo2*xo2
     !
     !     DECISION TREE FOR REGION WHERE SERIES, ASYMPTOTIC EXPANSION FOR X
     !     TO INFINITY AND ASYMPTOTIC EXPANSION FOR NU TO INFINITY ARE
     !     APPLIED.
     !
-    IF( sxo2<=(fnu+1.0E0) ) THEN
+    IF( sxo2<=(fnu+1._SP) ) THEN
       fn = fnu
-      fnp1 = fn + 1.0E0
+      fnp1 = fn + 1._SP
       xo2l = LOG(xo2)
       is = kt
-      IF( X<=0.50E0 ) GOTO 200
+      IF( X<=0.50_SP ) GOTO 200
       ns = 0
     ELSE
-      ta = MAX(20.0E0,fnu)
+      ta = MAX(20._SP,fnu)
       IF( X>ta ) THEN
         rtx = SQRT(X)
         tau = rtwo*rtx
@@ -168,7 +168,7 @@ SUBROUTINE BESJ(X,Alpha,N,Y,Nz)
           !     OSCILLATORY REGION X>MAX(20, NU), PROVIDED THE LAST MEMBER
           !     OF THE SEQUENCE IS ALSO IN THE REGION.
           !
-          in = INT(Alpha-tau+2.0E0)
+          in = INT(Alpha-tau+2._SP)
           IF( in<=0 ) THEN
             idalp = ialp
             in = 0
@@ -183,15 +183,15 @@ SUBROUTINE BESJ(X,Alpha,N,Y,Nz)
           sa = SIN(arg)
           sb = COS(arg)
           coef = rttp/rtx
-          etx = 8.0E0*X
+          etx = 8._SP*X
           GOTO 800
         ELSE
           fn = fnu
           is = kt
           GOTO 100
         END IF
-      ELSEIF( X>12.0E0 ) THEN
-        ans = MAX(36.0E0-fnu,0.0E0)
+      ELSEIF( X>12._SP ) THEN
+        ans = MAX(36._SP-fnu,0._SP)
         ns = INT(ans)
         fni = fni + ns
         dfn = fni + fnf
@@ -207,7 +207,7 @@ SUBROUTINE BESJ(X,Alpha,N,Y,Nz)
     fni = fni + ns
     dfn = fni + fnf
     fn = dfn
-    fnp1 = fn + 1.0E0
+    fnp1 = fn + 1._SP
     is = kt
     IF( N-1+ns>0 ) is = 3
     GOTO 200
@@ -219,7 +219,7 @@ SUBROUTINE BESJ(X,Alpha,N,Y,Nz)
     !
     i1 = ABS(3-is)
     i1 = MAX(i1,1)
-    flgjy = 1.0E0
+    flgjy = 1._SP
     CALL ASYJY(JAIRY,X,fn,flgjy,i1,temp(is),wk,iflw)
     IF( iflw/=0 ) THEN
       !
@@ -227,9 +227,9 @@ SUBROUTINE BESJ(X,Alpha,N,Y,Nz)
       !     UNDERFLOW CAN ONLY OCCUR FOR NS=0 SINCE THE ORDER MUST BE
       !     LARGER THAN 36. THEREFORE, NS NEED NOT BE CONSIDERED.
       !
-      Y(nn) = 0.0E0
+      Y(nn) = 0._SP
       nn = nn - 1
-      fni = fni - 1.0E0
+      fni = fni - 1._SP
       dfn = fni + fnf
       fn = dfn
       IF( nn<1 ) GOTO 500
@@ -246,27 +246,27 @@ SUBROUTINE BESJ(X,Alpha,N,Y,Nz)
         CASE (3)
           !     COMPUTATION OF LAST ORDER FOR ASYMPTOTIC EXPANSION NORMALIZATION
           gln = wk(3) + wk(2)
-          IF( wk(6)>30.0E0 ) THEN
-            ta = 0.5E0*tolln/wk(4)
-            ta = ((0.0493827160E0*ta-0.1111111111E0)*ta+0.6666666667E0)*ta*wk(6)
-            IF( wk(1)<0.10E0 ) THEN
-              tb = (1.259921049E0+(0.1679894730E0+0.0887944358E0*wk(1))*wk(1))&
+          IF( wk(6)>30._SP ) THEN
+            ta = 0.5_SP*tolln/wk(4)
+            ta = ((0.0493827160_SP*ta-0.1111111111E0_SP)*ta+0.6666666667E0_SP)*ta*wk(6)
+            IF( wk(1)<0.10_SP ) THEN
+              tb = (1.259921049_SP+(0.1679894730_SP+0.0887944358_SP*wk(1))*wk(1))&
                 /wk(7)
             ELSE
               tb = gln/wk(5)
             END IF
           ELSE
-            rden = (pp(4)*wk(6)+pp(3))*wk(6) + 1.0E0
+            rden = (pp(4)*wk(6)+pp(3))*wk(6) + 1._SP
             rzden = pp(1) + pp(2)*wk(6)
             ta = rzden/rden
-            IF( wk(1)<0.10E0 ) THEN
-              tb = (1.259921049E0+(0.1679894730E0+0.0887944358E0*wk(1))*wk(1))&
+            IF( wk(1)<0.10_SP ) THEN
+              tb = (1.259921049_SP+(0.1679894730_SP+0.0887944358_SP*wk(1))*wk(1))&
                 /wk(7)
             ELSE
               tb = gln/wk(5)
             END IF
           END IF
-          in = INT(ta/tb+1.5E0)
+          in = INT(ta/tb+1.5E0_SP)
           IF( in<=inlim ) GOTO 900
         CASE DEFAULT
       END SELECT
@@ -276,7 +276,7 @@ SUBROUTINE BESJ(X,Alpha,N,Y,Nz)
     END IF
   END DO
   is = 2
-  fni = fni - 1.0E0
+  fni = fni - 1._SP
   dfn = fni + fnf
   fn = dfn
   IF( i1/=2 ) GOTO 100
@@ -288,11 +288,11 @@ SUBROUTINE BESJ(X,Alpha,N,Y,Nz)
   arg = fn*xo2l - gln
   IF( arg<(-elim1) ) GOTO 400
   earg = EXP(arg)
-  300  s = 1.0E0
+  300  s = 1._SP
   IF( X>=tol ) THEN
-    ak = 3.0E0
-    t2 = 1.0E0
-    t = 1.0E0
+    ak = 3._SP
+    t2 = 1._SP
+    t = 1._SP
     s1 = fn
     DO k = 1, 17
       s2 = t2 + s1
@@ -300,7 +300,7 @@ SUBROUTINE BESJ(X,Alpha,N,Y,Nz)
       s = s + t
       IF( ABS(t)<tol ) EXIT
       t2 = t2 + ak
-      ak = ak + 2.0E0
+      ak = ak + 2._SP
       s1 = s1 + fn
     END DO
   END IF
@@ -314,27 +314,27 @@ SUBROUTINE BESJ(X,Alpha,N,Y,Nz)
       !     ASYMPTOTIC EXPANSION FOR NU TO INFINITY OR POWER SERIES.
       !
       !     COMPUTATION OF LAST ORDER FOR SERIES NORMALIZATION
-      akm = MAX(3.0E0-fn,0.0E0)
+      akm = MAX(3._SP-fn,0._SP)
       km = INT(akm)
       tfn = fn + km
-      ta = (gln+tfn-0.9189385332E0-0.0833333333E0/tfn)/(tfn+0.5E0)
+      ta = (gln+tfn-0.9189385332_SP-0.0833333333_SP/tfn)/(tfn+0.5E0_SP)
       ta = xo2l - ta
-      tb = -(1.0E0-1.5E0/tfn)/tfn
-      akm = tolln/(-ta+SQRT(ta*ta-tolln*tb)) + 1.5E0
+      tb = -(1._SP-1.5_SP/tfn)/tfn
+      akm = tolln/(-ta+SQRT(ta*ta-tolln*tb)) + 1.5_SP
       in = km + INT(akm)
       GOTO 900
     CASE DEFAULT
       earg = earg*fn/xo2
-      fni = fni - 1.0E0
+      fni = fni - 1._SP
       dfn = fni + fnf
       fn = dfn
       is = 2
       GOTO 300
   END SELECT
-  400  Y(nn) = 0.0E0
+  400  Y(nn) = 0._SP
   nn = nn - 1
   fnp1 = fn
-  fni = fni - 1.0E0
+  fni = fni - 1._SP
   dfn = fni + fnf
   fn = dfn
   IF( nn<1 ) GOTO 500
@@ -360,10 +360,10 @@ SUBROUTINE BESJ(X,Alpha,N,Y,Nz)
     Y(nn-1) = temp(2)
     IF( nn==2 ) RETURN
   END IF
-  trx = 2.0E0/X
+  trx = 2._SP/X
   dtm = fni
   tm = (dtm+fnf)*trx
-  ak = 1.0E0
+  ak = 1._SP
   ta = temp(1)
   tb = temp(2)
   IF( ABS(ta)<=slim ) THEN
@@ -382,7 +382,7 @@ SUBROUTINE BESJ(X,Alpha,N,Y,Nz)
     ta = s
     Y(k) = tb*ak
     k = k - 1
-    dtm = dtm - 1.0E0
+    dtm = dtm - 1._SP
     tm = (dtm+fnf)*trx
   END DO
   RETURN
@@ -390,16 +390,16 @@ SUBROUTINE BESJ(X,Alpha,N,Y,Nz)
   RETURN
   800  dtm = fidal + fidal
   dtm = dtm*dtm
-  tm = 0.0E0
-  IF( fidal/=0.0E0 .OR. ABS(fnf)>=tol ) tm = 4.0E0*fnf*(fidal+fidal+fnf)
-  trx = dtm - 1.0E0
+  tm = 0._SP
+  IF( fidal/=0._SP .OR. ABS(fnf)>=tol ) tm = 4._SP*fnf*(fidal+fidal+fnf)
+  trx = dtm - 1._SP
   t2 = (trx+tm)/etx
   s2 = t2
   relb = tol*ABS(t2)
   t1 = etx
-  s1 = 1.0E0
-  fn = 1.0E0
-  ak = 8.0E0
+  s1 = 1._SP
+  fn = 1._SP
+  ak = 8._SP
   DO k = 1, 13
     t1 = t1 + etx
     fn = fn + ak
@@ -408,14 +408,14 @@ SUBROUTINE BESJ(X,Alpha,N,Y,Nz)
     t2 = -t2*ap/t1
     s1 = s1 + t2
     t1 = t1 + etx
-    ak = ak + 8.0E0
+    ak = ak + 8._SP
     fn = fn + ak
     trx = dtm - fn
     ap = trx + tm
     t2 = t2*ap/t1
     s2 = s2 + t2
     IF( ABS(t2)<=relb ) EXIT
-    ak = ak + 8.0E0
+    ak = ak + 8._SP
   END DO
   temp(is) = coef*(s1*sb-s2*sa)
   IF( is==2 ) THEN
@@ -425,7 +425,7 @@ SUBROUTINE BESJ(X,Alpha,N,Y,Nz)
     IF( kt==2 ) GOTO 700
     s1 = temp(1)
     s2 = temp(2)
-    tx = 2.0E0/X
+    tx = 2._SP/X
     tm = dalpha*tx
     IF( in/=0 ) THEN
       !
@@ -459,7 +459,7 @@ SUBROUTINE BESJ(X,Alpha,N,Y,Nz)
     END DO
     RETURN
   ELSE
-    fidal = fidal + 1.0E0
+    fidal = fidal + 1._SP
     dalpha = fidal + fnf
     is = 2
     tb = sa
@@ -468,12 +468,12 @@ SUBROUTINE BESJ(X,Alpha,N,Y,Nz)
     GOTO 800
   END IF
   900  dtm = fni + in
-  trx = 2.0E0/X
+  trx = 2._SP/X
   tm = (dtm+fnf)*trx
-  ta = 0.0E0
+  ta = 0._SP
   tb = tol
   kk = 1
-  ak = 1.0E0
+  ak = 1._SP
   1000 CONTINUE
   DO
     !
@@ -484,7 +484,7 @@ SUBROUTINE BESJ(X,Alpha,N,Y,Nz)
       s = tb
       tb = tm*tb - ta
       ta = s
-      dtm = dtm - 1.0E0
+      dtm = dtm - 1._SP
       tm = (dtm+fnf)*trx
     END DO
     !     NORMALIZATION
@@ -512,7 +512,7 @@ SUBROUTINE BESJ(X,Alpha,N,Y,Nz)
   ta = s
   Y(k) = tb*ak
   IF( nn==2 ) RETURN
-  dtm = dtm - 1.0E0
+  dtm = dtm - 1._SP
   tm = (dtm+fnf)*trx
   k = nn - 2
   !
@@ -523,7 +523,7 @@ SUBROUTINE BESJ(X,Alpha,N,Y,Nz)
     tb = tm*tb - ta
     ta = s
     Y(k) = tb*ak
-    dtm = dtm - 1.0E0
+    dtm = dtm - 1._SP
     tm = (dtm+fnf)*trx
     k = k - 1
   END DO

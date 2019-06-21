@@ -121,7 +121,7 @@ SUBROUTINE CGBFA(Abd,Lda,N,Ml,Mu,Ipvt,Info)
     DO jz = j0, j1
       i0 = m + 1 - jz
       DO i = i0, Ml
-        Abd(i,jz) = (0.0E0,0.0E0)
+        Abd(i,jz) = (0._SP,0._SP)
       END DO
     END DO
   END IF
@@ -141,7 +141,7 @@ SUBROUTINE CGBFA(Abd,Lda,N,Ml,Mu,Ipvt,Info)
       IF( jz<=N ) THEN
         IF( Ml>=1 ) THEN
           DO i = 1, Ml
-            Abd(i,jz) = (0.0E0,0.0E0)
+            Abd(i,jz) = (0._SP,0._SP)
           END DO
         END IF
       END IF
@@ -154,7 +154,7 @@ SUBROUTINE CGBFA(Abd,Lda,N,Ml,Mu,Ipvt,Info)
       !
       !        ZERO PIVOT IMPLIES THIS COLUMN ALREADY TRIANGULARIZED
       !
-      IF( SCABS1(Abd(l,k))==0.0E0 ) THEN
+      IF( SCABS1(Abd(l,k))==0._SP ) THEN
         Info = k
       ELSE
         !
@@ -168,7 +168,7 @@ SUBROUTINE CGBFA(Abd,Lda,N,Ml,Mu,Ipvt,Info)
         !
         !           COMPUTE MULTIPLIERS
         !
-        t = -(1.0E0,0.0E0)/Abd(m,k)
+        t = -(1._SP,0._SP)/Abd(m,k)
         Abd(m+1:m+ml,k) = t*Abd(m+1:m+ml,k)
         !
         !           ROW ELIMINATION WITH COLUMN INDEXING
@@ -191,5 +191,5 @@ SUBROUTINE CGBFA(Abd,Lda,N,Ml,Mu,Ipvt,Info)
     END DO
   END IF
   Ipvt(N) = N
-  IF( SCABS1(Abd(m,N))==0.0E0 ) Info = N
+  IF( SCABS1(Abd(m,N))==0._SP ) Info = N
 END SUBROUTINE CGBFA

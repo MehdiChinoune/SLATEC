@@ -105,9 +105,9 @@ SUBROUTINE LSOD(F,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,Acor,&
     n_com = Neq
     nst_com = 0
     nje_com = 0
-    hmxi_com = 0.
+    hmxi_com = 0._SP
     nq_com = 1
-    h_com = 1.
+    h_com = 1._SP
     !                          -- RESET IBEGIN FOR SUBSEQUENT CALLS
     ibegin_com = 1
   END IF
@@ -157,7 +157,7 @@ SUBROUTINE LSOD(F,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,Acor,&
   END DO
   !
   IF( itstop_com==1 ) THEN
-    IF( SIGN(1.,Tout-T)/=SIGN(1.,Tstop-T) .OR. ABS(Tout-T)>ABS(Tstop-T) ) THEN
+    IF( SIGN(1._SP,Tout-T)/=SIGN(1._SP,Tstop-T) .OR. ABS(Tout-T)>ABS(Tstop-T) ) THEN
       WRITE (xern3,'(1PE15.6)') Tout
       WRITE (xern4,'(1PE15.6)') Tstop
       CALL XERMSG('LSOD','IN DEBDF, YOU HAVE CALLED THE CODE WITH TOUT = '&
@@ -220,7 +220,7 @@ SUBROUTINE LSOD(F,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,Acor,&
   !
   DO k = 1, Neq
     IF( Rtol(k)+Atol(k)<=0. ) THEN
-      Rtol(k) = 100.*uround_com
+      Rtol(k) = 100._SP*uround_com
       Idid = -2
     END IF
     IF( itol_com==0 ) EXIT
@@ -273,7 +273,7 @@ SUBROUTINE LSOD(F,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,Acor,&
     CALL HSTART(F,Neq,T,Tout,Y,Yh(1,2),Ewt,1,uround_com,big,Yh(1,3),Yh(1,4),Yh(1,5),&
       Yh(1,6),h_com)
     !
-    Delsgn = SIGN(1.0,Tout-T)
+    Delsgn = SIGN(1._SP,Tout-T)
     tn_com = T
     DO l = 1, Neq
       Yh(l,1) = Y(l)
@@ -305,7 +305,7 @@ SUBROUTINE LSOD(F,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,Acor,&
     !   EXTRAPOLATE AND RETURN
     !
     IF( itstop_com==1 ) THEN
-      IF( ABS(Tstop-tn_com)<100.*uround_com*ABS(tn_com) ) THEN
+      IF( ABS(Tstop-tn_com)<100._SP*uround_com*ABS(tn_com) ) THEN
         dt = Tout - tn_com
         DO l = 1, Neq
           Y(l) = Yh(l,1) + (dt/h_com)*Yh(l,2)
@@ -336,7 +336,7 @@ SUBROUTINE LSOD(F,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,Acor,&
       !
       !   LIMIT STEP SIZE AND SET WEIGHT VECTOR
       !
-      hmin_com = 100.*uround_com*ABS(tn_com)
+      hmin_com = 100._SP*uround_com*ABS(tn_com)
       ha = MAX(ABS(h_com),hmin_com)
       IF( itstop_com==1 ) ha = MIN(ha,ABS(Tstop-tn_com))
       h_com = SIGN(ha,h_com)
@@ -344,7 +344,7 @@ SUBROUTINE LSOD(F,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,Acor,&
       DO l = 1, Neq
         IF( itol_com==1 ) ltol = l
         Ewt(l) = Rtol(ltol)*ABS(Yh(l,1)) + Atol(ltol)
-        IF( Ewt(l)<=0.0 ) GOTO 200
+        IF( Ewt(l)<=0._SP ) GOTO 200
       END DO
       Tolfac = uround_com*VNWRMS(Neq,Yh,Ewt)
       IF( Tolfac<=1. ) THEN
@@ -378,7 +378,7 @@ SUBROUTINE LSOD(F,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,Acor,&
         !
         !                       TOLERANCES TOO SMALL
         Idid = -2
-        Tolfac = 2.*Tolfac
+        Tolfac = 2._SP*Tolfac
         Rtol(1) = Tolfac*Rtol(1)
         Atol(1) = Tolfac*Atol(1)
         IF( itol_com/=0 ) THEN

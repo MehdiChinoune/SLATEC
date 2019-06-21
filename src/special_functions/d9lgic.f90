@@ -35,19 +35,19 @@ REAL(DP) FUNCTION D9LGIC(A,X,Alx)
   REAL(DP) :: A, X, Alx
   INTEGER :: k
   REAL(DP) :: fk, p, r, s, t, xma, xpa
-  REAL(DP) :: eps = 0.5D0*D1MACH(3)
+  REAL(DP) :: eps = 0.5_DP*D1MACH(3)
   !* FIRST EXECUTABLE STATEMENT  D9LGIC
   !
-  xpa = X + 1.0D0 - A
-  xma = X - 1.D0 - A
+  xpa = X + 1._DP - A
+  xma = X - 1._DP - A
   !
-  r = 0.D0
-  p = 1.D0
+  r = 0._DP
+  p = 1._DP
   s = p
   DO k = 1, 300
     fk = k
-    t = fk*(A-fk)*(1.D0+r)
-    r = -t/((xma+2.D0*fk)*(xpa+2.D0*fk)+t)
+    t = fk*(A-fk)*(1._DP+r)
+    r = -t/((xma+2._DP*fk)*(xpa+2._DP*fk)+t)
     p = r*p
     s = s + p
     IF( ABS(p)<eps*s ) GOTO 100

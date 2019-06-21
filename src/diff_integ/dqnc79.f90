@@ -100,34 +100,34 @@ SUBROUTINE DQNC79(FUN,A,B,Err,Ans,Ierr,K)
   !     .. Intrinsic Functions ..
   INTRINSIC ABS, LOG, MAX, MIN, SIGN, SQRT
   !     .. Data statements ..
-  INTEGER, PARAMETER :: nbits = INT( D1MACH(5)*I1MACH(14)/0.30102000D0 ), &
+  INTEGER, PARAMETER :: nbits = INT( D1MACH(5)*I1MACH(14)/0.30102000_DP ), &
     nlmx = MIN(99,(nbits*4)/5)
-  REAL(DP), PARAMETER :: sq2 = SQRT(2.0D0), w1 = 41.0D0/140.0D0, w2 = 216.0D0/140.0D0, &
-    w3 = 27.0D0/140.0D0, w4 = 272.0D0/140.0D0
+  REAL(DP), PARAMETER :: sq2 = SQRT(2._DP), w1 = 41._DP/140._DP, w2 = 216._DP/140._DP, &
+    w3 = 27._DP/140._DP, w4 = 272._DP/140._DP
   INTEGER, PARAMETER :: kml = 7, kmx = 5000, nlmn = 2
   !* FIRST EXECUTABLE STATEMENT  DQNC79
-  Ans = 0.0D0
+  Ans = 0._DP
   Ierr = 1
-  ce = 0.0D0
+  ce = 0._DP
   IF( A==B ) GOTO 400
   lmx = nlmx
   lmn = nlmn
-  IF( B/=0.0D0 ) THEN
-    IF( SIGN(1.0D0,B)*A>0.0D0 ) THEN
-      c = ABS(1.0D0-A/B)
-      IF( c<=0.1D0 ) THEN
-        IF( c<=0.0D0 ) GOTO 400
-        nib = INT( 0.5D0 - LOG(c)/LOG(2.0D0) )
+  IF( B/=0._DP ) THEN
+    IF( SIGN(1._DP,B)*A>0._DP ) THEN
+      c = ABS(1._DP-A/B)
+      IF( c<=0.1_DP ) THEN
+        IF( c<=0._DP ) GOTO 400
+        nib = INT( 0.5_DP - LOG(c)/LOG(2._DP) )
         lmx = MIN(nlmx,nbits-nib-4)
         IF( lmx<2 ) GOTO 400
         lmn = MIN(lmn,lmx)
       END IF
     END IF
   END IF
-  tol = MAX(ABS(Err),2.0D0**(5-nbits))
-  IF( Err==0.0D0 ) tol = SQRT(D1MACH(4))
+  tol = MAX(ABS(Err),2._DP**(5-nbits))
+  IF( Err==0._DP ) tol = SQRT(D1MACH(4))
   eps = tol
-  hh(1) = (B-A)/12.0D0
+  hh(1) = (B-A)/12._DP
   aa(1) = A
   lr(1) = 1
   DO i = 1, 11, 2
@@ -137,10 +137,10 @@ SUBROUTINE DQNC79(FUN,A,B,Err,Ans,Ierr,K)
   f(13) = FUN(blocal)
   K = 7
   l = 1
-  area = 0.0D0
-  q7 = 0.0D0
-  ef = 256.0D0/255.0D0
-  bank = 0.0D0
+  area = 0._DP
+  q7 = 0._DP
+  ef = 256._DP/255._DP
+  bank = 0._DP
   !
   !     Compute refined estimates, estimate the error, etc.
   !
@@ -175,11 +175,11 @@ SUBROUTINE DQNC79(FUN,A,B,Err,Ans,Ierr,K)
     !
     !     Borrow from bank account, but not too much
     !
-    test = MIN(ae+0.8D0*bank,10.0D0*ae)
+    test = MIN(ae+0.8_DP*bank,10._DP*ae)
     !
     !     Don't ask for excessive accuracy
     !
-    test = MAX(test,tol*ABS(q13),0.00003D0*tol*area)
+    test = MAX(test,tol*ABS(q13),0.00003_DP*tol*area)
     !
     !     Now, did this interval pass or not?
     !
@@ -187,7 +187,7 @@ SUBROUTINE DQNC79(FUN,A,B,Err,Ans,Ierr,K)
       !
       !     On good intervals accumulate the theoretical estimate
       !
-      ce = ce + (q7-q13)/255.0D0
+      ce = ce + (q7-q13)/255._DP
     ELSE
       !
       !     Consider the left half of next deeper level
@@ -203,7 +203,7 @@ SUBROUTINE DQNC79(FUN,A,B,Err,Ans,Ierr,K)
     !     Update the bank account.  Don't go into debt.
     !
     bank = bank + (ae-ee)
-    IF( bank<0.0D0 ) bank = 0.0D0
+    IF( bank<0._DP ) bank = 0._DP
     !
     !     Did we just finish a left half or a right half?
     !
@@ -220,7 +220,7 @@ SUBROUTINE DQNC79(FUN,A,B,Err,Ans,Ierr,K)
       vr = q13
       DO WHILE( l>1 )
         IF( l<=17 ) ef = ef*sq2
-        eps = eps*2.0D0
+        eps = eps*2._DP
         l = l - 1
         IF( lr(l)<=0 ) THEN
           vl(l) = vl(l+1) + vr
@@ -233,7 +233,7 @@ SUBROUTINE DQNC79(FUN,A,B,Err,Ans,Ierr,K)
       !     Exit
       !
       Ans = vr
-      IF( ABS(ce)>2.0D0*tol*area ) THEN
+      IF( ABS(ce)>2._DP*tol*area ) THEN
         Ierr = 2
         CALL XERMSG('DQNC79',&
           'ANS is probably insufficiently accurate.',2,1)
@@ -242,9 +242,9 @@ SUBROUTINE DQNC79(FUN,A,B,Err,Ans,Ierr,K)
     END IF
   END IF
   200  l = l + 1
-  eps = eps*0.5D0
+  eps = eps*0.5_DP
   IF( l<=17 ) ef = ef/sq2
-  hh(l) = hh(l-1)*0.5D0
+  hh(l) = hh(l-1)*0.5_DP
   lr(l) = -1
   aa(l) = aa(l-1)
   q7 = q7l
@@ -264,7 +264,7 @@ SUBROUTINE DQNC79(FUN,A,B,Err,Ans,Ierr,K)
   GOTO 100
   300  q7 = q7r(l-1)
   lr(l) = 1
-  aa(l) = aa(l) + 12.0D0*hh(l)
+  aa(l) = aa(l) + 12._DP*hh(l)
   f(1) = f1(l)
   f(3) = f2(l)
   f(5) = f3(l)

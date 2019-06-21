@@ -89,18 +89,18 @@ SUBROUTINE DORTHR(A,N,M,Nrda,Iflag,Irank,Iscale,Diag,Kpivot,Scales,Rows,Rs)
   !
   !* FIRST EXECUTABLE STATEMENT  DORTHR
   uro = D1MACH(4)
-  dum = 0.D0
+  dum = 0._DP
   IF( M>=N .AND. N>=1 .AND. Nrda>=N ) THEN
     !
-    acc = 10.0D0*uro
-    IF( Iflag<0 ) acc = MAX(acc,10.0D0**Iflag)
+    acc = 10._DP*uro
+    IF( Iflag<0 ) acc = MAX(acc,10._DP**Iflag)
     sruro = SQRT(uro)
     Iflag = 1
     Irank = N
     !
     !        COMPUTE NORM**2 OF JTH ROW AND A MATRIX NORM
     !
-    anorm = 0.0D0
+    anorm = 0._DP
     DO j = 1, N
       Kpivot(j) = j
       Rows(j) = NORM2(A(j,1:M))
@@ -136,7 +136,7 @@ SUBROUTINE DORTHR(A,N,M,Nrda,Iflag,Irank,Iscale,Diag,Kpivot,Scales,Rows,Rs)
           END IF
           IF( j/=k ) THEN
             !                 ......EXIT
-            IF( sigma>=0.99D0*Rows(j) ) CYCLE
+            IF( sigma>=0.99_DP*Rows(j) ) CYCLE
           END IF
           sigma = Rows(j)
           jrow = j
@@ -171,7 +171,7 @@ SUBROUTINE DORTHR(A,N,M,Nrda,Iflag,Irank,Iscale,Diag,Kpivot,Scales,Rows,Rs)
         !           CONSTRUCT AND APPLY TRANSFORMATION TO MATRIX A
         !
         akk = A(k,k)
-        IF( akk>0.0D0 ) diagk = -diagk
+        IF( akk>0._DP ) diagk = -diagk
         Diag(k) = diagk
         A(k,k) = akk - diagk
         IF( k/=N ) THEN

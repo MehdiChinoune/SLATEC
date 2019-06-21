@@ -37,10 +37,10 @@ SUBROUTINE ZUNI2(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Nlast,Fnul,Tol,Elim,Alim)
     daii, dair, Elim, fn, Fnu, Fnul, phii, phir, rast, raz, rs1, rzi, rzr, &
     sti, str, s1i, s1r, s2i, s2r, Tol, Yi(N), Yr(N), zbi, zbr, zeta1i, zeta1r, &
     zeta2i, zeta2r, Zi, zni, znr, Zr, cyr(2), cyi(2), car, sar
-  REAL(DP), PARAMETER :: zeror = 0.0D0, zeroi = 0.0D0, coner = 1.0D0
-  REAL(DP), PARAMETER :: cipr(4) = [ 1.0D0, 0.0D0, -1.0D0, 0.0D0 ]
-  REAL(DP), PARAMETER :: cipi(4) = [ 0.0D0, 1.0D0, 0.0D0, -1.0D0 ]
-  REAL(DP), PARAMETER :: hpi = 1.57079632679489662D+00, aic = 1.265512123484645396D+00
+  REAL(DP), PARAMETER :: zeror = 0._DP, zeroi = 0._DP, coner = 1._DP
+  REAL(DP), PARAMETER :: cipr(4) = [ 1._DP, 0._DP, -1._DP, 0._DP ]
+  REAL(DP), PARAMETER :: cipi(4) = [ 0._DP, 1._DP, 0._DP, -1._DP ]
+  REAL(DP), PARAMETER :: hpi = 1.57079632679489662E+00_DP, aic = 1.265512123484645396_DP
   !* FIRST EXECUTABLE STATEMENT  ZUNI2
   Nz = 0
   nd = N
@@ -50,7 +50,7 @@ SUBROUTINE ZUNI2(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Nlast,Fnul,Tol,Elim,Alim)
   !     NITUDE ARE SCALED TO KEEP INTERMEDIATE ARITHMETIC ON SCALE,
   !     EXP(ALIM)=EXP(ELIM)*TOL
   !-----------------------------------------------------------------------
-  cscl = 1.0D0/Tol
+  cscl = 1._DP/Tol
   crsc = Tol
   cssr(1) = cscl
   cssr(2) = coner
@@ -58,7 +58,7 @@ SUBROUTINE ZUNI2(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Nlast,Fnul,Tol,Elim,Alim)
   csrr(1) = crsc
   csrr(2) = coner
   csrr(3) = cscl
-  bry(1) = 1.0D+3*D1MACH(1)/Tol
+  bry(1) = 1.E3_DP*D1MACH(1)/Tol
   !-----------------------------------------------------------------------
   !     ZN IS IN THE RIGHT HALF PLANE AFTER ROTATION BY CI OR -CI
   !-----------------------------------------------------------------------
@@ -78,7 +78,7 @@ SUBROUTINE ZUNI2(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Nlast,Fnul,Tol,Elim,Alim)
   str = c2r*cipr(in) - c2i*cipi(in)
   c2i = c2r*cipi(in) + c2i*cipr(in)
   c2r = str
-  IF( Zi<=0.0D0 ) THEN
+  IF( Zi<=0._DP ) THEN
     znr = -znr
     zbi = -zbi
     cidi = -cidi
@@ -87,7 +87,7 @@ SUBROUTINE ZUNI2(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Nlast,Fnul,Tol,Elim,Alim)
   !-----------------------------------------------------------------------
   !     CHECK FOR UNDERFLOW AND OVERFLOW ON FIRST MEMBER
   !-----------------------------------------------------------------------
-  fn = MAX(Fnu,1.0D0)
+  fn = MAX(Fnu,1._DP)
   CALL ZUNHJ(znr,zni,fn,1,Tol,phir,phii,argr,argi,zeta1r,zeta1i,zeta2r,&
     zeta2i,asumr,asumi,bsumr,bsumi)
   IF( Kode==1 ) THEN
@@ -104,7 +104,7 @@ SUBROUTINE ZUNI2(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Nlast,Fnul,Tol,Elim,Alim)
   END IF
   rs1 = s1r
   IF( ABS(rs1)>Elim ) THEN
-    IF( rs1>0.0D0 ) GOTO 400
+    IF( rs1>0._DP ) GOTO 400
     Nz = N
     DO i = 1, N
       Yr(i) = zeror
@@ -142,10 +142,10 @@ SUBROUTINE ZUNI2(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Nlast,Fnul,Tol,Elim,Alim)
       !-----------------------------------------------------------------------
       aphi = ZABS(phir,phii)
       aarg = ZABS(argr,argi)
-      rs1 = rs1 + LOG(aphi) - 0.25D0*LOG(aarg) - aic
+      rs1 = rs1 + LOG(aphi) - 0.25_DP*LOG(aarg) - aic
       IF( ABS(rs1)>Elim ) GOTO 300
       IF( i==1 ) iflag = 1
-      IF( rs1>=0.0D0 ) THEN
+      IF( rs1>=0._DP ) THEN
         IF( i==1 ) iflag = 3
       END IF
     END IF
@@ -171,7 +171,7 @@ SUBROUTINE ZUNI2(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Nlast,Fnul,Tol,Elim,Alim)
       CALL ZUCHK(s2r,s2i,nw,bry(1),Tol)
       IF( nw/=0 ) GOTO 300
     END IF
-    IF( Zi<=0.0D0 ) s2i = -s2i
+    IF( Zi<=0._DP ) s2i = -s2i
     str = s2r*c2r - s2i*c2i
     s2i = s2r*c2i + s2i*c2r
     s2r = str
@@ -185,12 +185,12 @@ SUBROUTINE ZUNI2(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Nlast,Fnul,Tol,Elim,Alim)
     c2r = str
   END DO
   IF( nd>2 ) THEN
-    raz = 1.0D0/ZABS(Zr,Zi)
+    raz = 1._DP/ZABS(Zr,Zi)
     str = Zr*raz
     sti = -Zi*raz
     rzr = (str+str)*raz
     rzi = (sti+sti)*raz
-    bry(2) = 1.0D0/bry(1)
+    bry(2) = 1._DP/bry(1)
     bry(3) = D1MACH(2)
     s1r = cyr(1)
     s1i = cyi(1)
@@ -212,7 +212,7 @@ SUBROUTINE ZUNI2(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Nlast,Fnul,Tol,Elim,Alim)
       Yr(k) = c2r
       Yi(k) = c2i
       k = k - 1
-      fn = fn - 1.0D0
+      fn = fn - 1._DP
       IF( iflag<3 ) THEN
         str = ABS(c2r)
         sti = ABS(c2i)
@@ -235,7 +235,7 @@ SUBROUTINE ZUNI2(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Nlast,Fnul,Tol,Elim,Alim)
   END IF
   200  RETURN
   300 CONTINUE
-  IF( rs1<=0.0D0 ) THEN
+  IF( rs1<=0._DP ) THEN
     !-----------------------------------------------------------------------
     !     SET UNDERFLOW AND UPDATE PARAMETERS
     !-----------------------------------------------------------------------
@@ -267,7 +267,7 @@ SUBROUTINE ZUNI2(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Nlast,Fnul,Tol,Elim,Alim)
         in = MOD(in,4) + 1
         c2r = car*cipr(in) - sar*cipi(in)
         c2i = car*cipi(in) + sar*cipr(in)
-        IF( Zi<=0.0D0 ) c2i = -c2i
+        IF( Zi<=0._DP ) c2i = -c2i
         GOTO 100
       END IF
     END IF

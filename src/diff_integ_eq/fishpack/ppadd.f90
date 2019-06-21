@@ -65,8 +65,8 @@ SUBROUTINE PPADD(N,Ierror,A,C,Cbp,Bp,Bh)
   DO
     xl = xl - db
     IF( PSGF(xl,iz,C,A,Bh)>0 ) THEN
-      sgn = -1.
-      Cbp(1) = CMPLX(BSRH(xl,Bh(1),iz,C,A,Bh,PSGF,sgn),0.)
+      sgn = -1._SP
+      Cbp(1) = CMPLX(BSRH(xl,Bh(1),iz,C,A,Bh,PSGF,sgn),0._SP,SP)
       is = 2
       EXIT
     END IF
@@ -86,8 +86,8 @@ SUBROUTINE PPADD(N,Ierror,A,C,Cbp,Bp,Bh)
   DO
     xr = xr + db
     IF( PSGF(xr,iz,C,A,Bh)>=0 ) THEN
-      sgn = 1.
-      Cbp(iz) = CMPLX(BSRH(Bh(iz),xr,iz,C,A,Bh,PSGF,sgn),0.)
+      sgn = 1._SP
+      Cbp(iz) = CMPLX(BSRH(Bh(iz),xr,iz,C,A,Bh,PSGF,sgn),0._SP,SP)
       if = iz - 2
       EXIT
     END IF
@@ -96,7 +96,7 @@ SUBROUTINE PPADD(N,Ierror,A,C,Cbp,Bp,Bh)
   DO ig = is, if, 2
     xl = Bh(ig)
     xr = Bh(ig+1)
-    sgn = -1.
+    sgn = -1._SP
     xm = BSRH(xl,xr,iz,C,A,Bh,PPSPF,sgn)
     psg = PSGF(xm,iz,C,A,Bh)
     IF( ABS(psg)>eps_com ) THEN
@@ -104,10 +104,10 @@ SUBROUTINE PPADD(N,Ierror,A,C,Cbp,Bp,Bh)
         !
         !     CASE OF A REAL ZERO
         !
-        sgn = 1.
-        Cbp(ig) = CMPLX(BSRH(Bh(ig),xm,iz,C,A,Bh,PSGF,sgn),0.)
-        sgn = -1.
-        Cbp(ig+1) = CMPLX(BSRH(xm,Bh(ig+1),iz,C,A,Bh,PSGF,sgn),0.)
+        sgn = 1._SP
+        Cbp(ig) = CMPLX(BSRH(Bh(ig),xm,iz,C,A,Bh,PSGF,sgn),0._SP,SP)
+        sgn = -1._SP
+        Cbp(ig+1) = CMPLX(BSRH(xm,Bh(ig+1),iz,C,A,Bh,PSGF,sgn),0._SP,SP)
         CYCLE
       ELSEIF( psg*PPSGF(xm,iz,C,A,Bh)/=0 ) THEN
         !
@@ -115,31 +115,31 @@ SUBROUTINE PPADD(N,Ierror,A,C,Cbp,Bp,Bh)
         !
         it = 0
         icv = 0
-        cx = CMPLX(xm,0.)
+        cx = CMPLX(xm,0._SP,SP)
         GOTO 250
       END IF
     END IF
     !
     !     CASE OF A MULTIPLE ZERO
     !
-    Cbp(ig) = CMPLX(xm,0.)
-    Cbp(ig+1) = CMPLX(xm,0.)
+    Cbp(ig) = CMPLX(xm,0._SP,SP)
+    Cbp(ig+1) = CMPLX(xm,0._SP,SP)
     CYCLE
-    250  fsg = (1.,0.)
-    hsg = (1.,0.)
-    fp = (0.,0.)
-    fpp = (0.,0.)
+    250  fsg = (1._SP,0._SP)
+    hsg = (1._SP,0._SP)
+    fp = (0._SP,0._SP)
+    fpp = (0._SP,0._SP)
     DO j = 1, iz
-      dd = 1./(cx-Bh(j))
+      dd = 1._SP/(cx-Bh(j))
       fsg = fsg*A(j)*dd
       hsg = hsg*C(j)*dd
       fp = fp + dd
       fpp = fpp - dd*dd
     END DO
     IF( modiz/=0 ) THEN
-      f = (1.,0.) + fsg + hsg
+      f = (1._SP,0._SP) + fsg + hsg
     ELSE
-      f = (1.,0.) - fsg - hsg
+      f = (1._SP,0._SP) - fsg - hsg
     END IF
     i3 = 0
     IF( ABS(fp)>0 ) THEN
@@ -149,7 +149,7 @@ SUBROUTINE PPADD(N,Ierror,A,C,Cbp,Bp,Bh)
     IF( ABS(fpp)<=0 ) THEN
       r1 = r3
     ELSE
-      cdis = SQRT(fp**2-2.*f*fpp)
+      cdis = SQRT(fp**2-2._SP*f*fpp)
       r1 = cdis - fp
       r2 = -fp - cdis
       IF( ABS(r1)<=ABS(r2) ) THEN
@@ -157,7 +157,7 @@ SUBROUTINE PPADD(N,Ierror,A,C,Cbp,Bp,Bh)
       ELSE
         r1 = r1/fpp
       END IF
-      r2 = 2.*f/fpp/r1
+      r2 = 2._SP*f/fpp/r1
       IF( ABS(r2)<ABS(r1) ) r1 = r2
       IF( i3>0 ) THEN
         IF( ABS(r3)<ABS(r1) ) r1 = r3

@@ -81,7 +81,7 @@ SUBROUTINE R1UPDT(M,N,S,Ls,U,V,W,Sing)
   REAL(SP) :: S(Ls), U(M), V(N), W(M)
   INTEGER :: i, j, jj, l, nmj, nm1
   REAL(SP) :: coss, cotan, giant, sinn, tann, tau, temp
-  REAL(SP), PARAMETER :: one = 1.0E0, p5 = 5.0E-1, p25 = 2.5E-1, zero = 0.0E0
+  REAL(SP), PARAMETER :: one = 1._SP, p5 = 5.E-1_SP, p25 = 2.5E-1, zero = 0._SP
   !* FIRST EXECUTABLE STATEMENT  R1UPDT
   giant = R1MACH(2)
   !

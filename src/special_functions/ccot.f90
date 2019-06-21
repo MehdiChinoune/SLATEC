@@ -35,8 +35,8 @@ COMPLEX(SP) FUNCTION CCOT(Z)
   REAL(SP), PARAMETER :: sqeps = SQRT(R1MACH(4))
   !* FIRST EXECUTABLE STATEMENT  CCOT
   !
-  x2 = 2.0*REAL(Z)
-  y2 = 2.0*AIMAG(Z)
+  x2 = 2._SP*REAL(Z)
+  y2 = 2._SP*AIMAG(Z)
   !
   sn2x = SIN(x2)
   CALL XERCLR
@@ -45,12 +45,12 @@ COMPLEX(SP) FUNCTION CCOT(Z)
   IF( den==0. ) CALL XERMSG('CCOT',&
     'COT IS SINGULAR FOR INPUT Z (X IS 0 OR PI AND Y IS 0)',2,2)
   !
-  IF( ABS(den)<=MAX(ABS(x2),1.)*sqeps ) THEN
+  IF( ABS(den)<=MAX(ABS(x2),1._SP)*sqeps ) THEN
     CALL XERCLR
     CALL XERMSG('CCOT',&
       'ANSWER LT HALF PRECISION, ABS(X) TOO BIG OR X TOO NEAR 0 OR PI',1,1)
   END IF
   !
-  CCOT = CMPLX(sn2x/den,-SINH(y2)/den)
+  CCOT = CMPLX(sn2x/den,-SINH(y2)/den,SP)
   !
 END FUNCTION CCOT

@@ -31,12 +31,12 @@ REAL(SP) FUNCTION GAMR(X)
   REAL(SP) :: alngx, sgngx, X
   INTEGER :: irold
   !* FIRST EXECUTABLE STATEMENT  GAMR
-  GAMR = 0.0
-  IF( X<=0.0 .AND. AINT(X)==X ) RETURN
+  GAMR = 0._SP
+  IF( X<=0._SP .AND. AINT(X)==X ) RETURN
   !
   CALL XGETF(irold)
   CALL XSETF(1)
-  IF( ABS(X)>10.0 ) THEN
+  IF( ABS(X)>10._SP ) THEN
     !
     CALL ALGAMS(X,alngx,sgngx)
     CALL XERCLR
@@ -44,7 +44,7 @@ REAL(SP) FUNCTION GAMR(X)
     GAMR = sgngx*EXP(-alngx)
     RETURN
   END IF
-  GAMR = 1.0/GAMMA(X)
+  GAMR = 1._SP/GAMMA(X)
   CALL XERCLR
   CALL XSETF(irold)
   RETURN

@@ -79,7 +79,7 @@ SUBROUTINE DWUPDT(N,R,Ldr,W,B,Alpha,Coss,Sinn)
   REAL(DP) :: R(Ldr,N), W(N), B(N), Coss(N), Sinn(N)
   INTEGER :: i, j, jm1
   REAL(DP) :: cotan, rowj, tann, temp
-  REAL(DP), PARAMETER :: one = 1.0D0, p5 = 5.0D-1, p25 = 2.5D-1, zero = 0.0D0
+  REAL(DP), PARAMETER :: one = 1._DP, p5 = 5.0E-1_DP, p25 = 2.5E-1_DP, zero = 0._DP
   !* FIRST EXECUTABLE STATEMENT  DWUPDT
   DO j = 1, N
     rowj = W(j)

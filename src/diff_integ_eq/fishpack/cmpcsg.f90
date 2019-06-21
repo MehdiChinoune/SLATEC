@@ -45,7 +45,7 @@ SUBROUTINE CMPCSG(N,Ijump,Fnum,Fden,A)
   COMPLEX(SP) :: A(N)
   INTEGER :: i, k, k1, k2, k3, k4, k5, np1
   REAL(SP) :: pibyn, x, y
-  REAL(SP), PARAMETER :: pi = 3.14159265358979
+  REAL(SP), PARAMETER :: pi = 3.14159265358979_SP
   !
   !* FIRST EXECUTABLE STATEMENT  CMPCSG
   IF( N/=0 ) THEN
@@ -54,7 +54,7 @@ SUBROUTINE CMPCSG(N,Ijump,Fnum,Fden,A)
       y = pi/(N+Fden)
       DO i = 1, N
         x = np1 - i - Fnum
-        A(i) = CMPLX(2.*COS(x*y),0.)
+        A(i) = CMPLX(2._SP*COS(x*y),0._SP,SP)
       END DO
     ELSE
       k3 = N/Ijump + 1
@@ -66,7 +66,7 @@ SUBROUTINE CMPCSG(N,Ijump,Fnum,Fden,A)
         DO i = 1, k4
           x = k1 + i
           k2 = k5 + i
-          A(k2) = CMPLX(-2.*COS(x*pibyn),0.)
+          A(k2) = CMPLX(-2._SP*COS(x*pibyn),0._SP,SP)
         END DO
       END DO
     END IF

@@ -139,25 +139,25 @@ SUBROUTINE DXLEGF(Dnu1,Nudiff,Mu1,Mu2,Theta,Id,Pqa,Ipqa,Ierror)
   !
   !* FIRST EXECUTABLE STATEMENT  DXLEGF
   Ierror = 0
-  CALL DXSET(0,0,0.0D0,0,Ierror)
+  CALL DXSET(0,0,0._DP,0,Ierror)
   IF( Ierror/=0 ) RETURN
-  pi2 = 2.D0*ATAN(1.D0)
+  pi2 = 2._DP*ATAN(1._DP)
   !
   !        ZERO OUTPUT ARRAYS
   !
   l = Nudiff + Mu2 - Mu1 + 1
   DO i = 1, l
-    Pqa(i) = 0.D0
+    Pqa(i) = 0._DP
     Ipqa(i) = 0
   END DO
   !
   !        CHECK FOR VALID INPUT VALUES
   !
   IF( Nudiff>=0 ) THEN
-    IF( Dnu1>=-.5D0 ) THEN
+    IF( Dnu1>=-.5_DP ) THEN
       IF( Mu2>=Mu1 ) THEN
         IF( Mu1>=0 ) THEN
-          IF( Theta<=0.D0 .OR. Theta>pi2 ) THEN
+          IF( Theta<=0._DP .OR. Theta>pi2 ) THEN
             CALL XERMSG('DXLEGF','THETA out of range',211,1)
             Ierror = 211
             RETURN
@@ -170,13 +170,13 @@ SUBROUTINE DXLEGF(Dnu1,Nudiff,Mu1,Mu2,Theta,Id,Pqa,Ipqa,Ierror)
               !        NORMALIZED P(MU,NU,X) WILL BE ZERO.
               !
               dnu2 = Dnu1 + Nudiff
-              IF( (Id/=3) .OR. (MOD(Dnu1,1.D0)==0.D0) ) THEN
-                IF( (Id==4) .AND. (MOD(Dnu1,1.D0)/=0.D0) ) GOTO 100
+              IF( (Id/=3) .OR. (MOD(Dnu1,1._DP)==0._DP) ) THEN
+                IF( (Id==4) .AND. (MOD(Dnu1,1._DP)/=0._DP) ) GOTO 100
                 IF( (Id==3 .OR. Id==4) .AND. Mu1>dnu2 ) RETURN
               END IF
               !
               x = COS(Theta)
-              sx = 1.D0/SIN(Theta)
+              sx = 1._DP/SIN(Theta)
               IF( Id/=2 ) THEN
                 IF( Mu2<=Mu1 ) THEN
                   !

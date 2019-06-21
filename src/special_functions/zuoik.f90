@@ -47,27 +47,27 @@ SUBROUTINE ZUOIK(Zr,Zi,Fnu,Kode,Ikflg,N,Yr,Yi,Nuf,Tol,Elim,Alim)
     bsumr, cwrki(16), cwrkr(16), czi, czr, Elim, fnn, Fnu, gnn, gnu, phii, phir, &
     rcz, str, sti, sumi, sumr, Tol, Yi(N), Yr(N), zbi, zbr, zeta1i, zeta1r, &
     zeta2i, zeta2r, Zi, zni, znr, Zr, zri, zrr
-  REAL(DP), PARAMETER :: zeror = 0.0D0, zeroi = 0.0D0
-  REAL(DP), PARAMETER :: aic = 1.265512123484645396D+00
+  REAL(DP), PARAMETER :: zeror = 0._DP, zeroi = 0._DP
+  REAL(DP), PARAMETER :: aic = 1.265512123484645396_DP
   !* FIRST EXECUTABLE STATEMENT  ZUOIK
   Nuf = 0
   nn = N
   zrr = Zr
   zri = Zi
-  IF( Zr<0.0D0 ) THEN
+  IF( Zr<0._DP ) THEN
     zrr = -Zr
     zri = -Zi
   END IF
   zbr = zrr
   zbi = zri
-  ax = ABS(Zr)*1.7321D0
+  ax = ABS(Zr)*1.7321_DP
   ay = ABS(Zi)
   iform = 1
   IF( ay>ax ) iform = 2
-  gnu = MAX(Fnu,1.0D0)
+  gnu = MAX(Fnu,1._DP)
   IF( Ikflg/=1 ) THEN
     fnn = nn
-    gnn = Fnu + fnn - 1.0D0
+    gnn = Fnu + fnn - 1._DP
     gnu = MAX(gnn,fnn)
   END IF
   !-----------------------------------------------------------------------
@@ -78,7 +78,7 @@ SUBROUTINE ZUOIK(Zr,Zi,Fnu,Kode,Ikflg,N,Yr,Yi,Nuf,Tol,Elim,Alim)
   IF( iform==2 ) THEN
     znr = zri
     zni = -zrr
-    IF( Zi<=0.0D0 ) znr = -znr
+    IF( Zi<=0._DP ) znr = -znr
     CALL ZUNHJ(znr,zni,gnu,1,Tol,phir,phii,argr,argi,zeta1r,zeta1i,zeta2r,&
       zeta2i,asumr,asumi,bsumr,bsumi)
     czr = -zeta1r + zeta2r
@@ -115,16 +115,16 @@ SUBROUTINE ZUOIK(Zr,Zi,Fnu,Kode,Ikflg,N,Yr,Yi,Nuf,Tol,Elim,Alim)
       IF( rcz>=(-Elim) ) THEN
         IF( rcz>(-Alim) ) GOTO 50
         rcz = rcz + LOG(aphi)
-        IF( iform==2 ) rcz = rcz - 0.25D0*LOG(aarg) - aic
+        IF( iform==2 ) rcz = rcz - 0.25_DP*LOG(aarg) - aic
         IF( rcz>(-Elim) ) THEN
-          ascle = 1.0D+3*D1MACH(1)/Tol
+          ascle = 1.E3_DP*D1MACH(1)/Tol
           CALL ZLOG(phir,phii,str,sti,idum)
           czr = czr + str
           czi = czi + sti
           IF( iform/=1 ) THEN
             CALL ZLOG(argr,argi,str,sti,idum)
-            czr = czr - 0.25D0*str - aic
-            czi = czi - 0.25D0*sti
+            czr = czr - 0.25_DP*str - aic
+            czi = czi - 0.25_DP*sti
           END IF
           ax = EXP(rcz)/Tol
           ay = czi
@@ -142,7 +142,7 @@ SUBROUTINE ZUOIK(Zr,Zi,Fnu,Kode,Ikflg,N,Yr,Yi,Nuf,Tol,Elim,Alim)
       RETURN
     ELSE
       rcz = rcz + LOG(aphi)
-      IF( iform==2 ) rcz = rcz - 0.25D0*LOG(aarg) - aic
+      IF( iform==2 ) rcz = rcz - 0.25_DP*LOG(aarg) - aic
       IF( rcz>Elim ) THEN
         Nuf = -1
         RETURN
@@ -177,16 +177,16 @@ SUBROUTINE ZUOIK(Zr,Zi,Fnu,Kode,Ikflg,N,Yr,Yi,Nuf,Tol,Elim,Alim)
   IF( rcz>=(-Elim) ) THEN
     IF( rcz>(-Alim) ) RETURN
     rcz = rcz + LOG(aphi)
-    IF( iform==2 ) rcz = rcz - 0.25D0*LOG(aarg) - aic
+    IF( iform==2 ) rcz = rcz - 0.25_DP*LOG(aarg) - aic
     IF( rcz>(-Elim) ) THEN
-      ascle = 1.0D+3*D1MACH(1)/Tol
+      ascle = 1.E3_DP*D1MACH(1)/Tol
       CALL ZLOG(phir,phii,str,sti,idum)
       czr = czr + str
       czi = czi + sti
       IF( iform/=1 ) THEN
         CALL ZLOG(argr,argi,str,sti,idum)
-        czr = czr - 0.25D0*str - aic
-        czi = czi - 0.25D0*sti
+        czr = czr - 0.25_DP*str - aic
+        czi = czi - 0.25_DP*sti
       END IF
       ax = EXP(rcz)/Tol
       ay = czi

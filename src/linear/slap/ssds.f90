@@ -124,7 +124,7 @@ SUBROUTINE SSDS(N,Nelt,Ja,A,Dinv)
   !         in!  It will run much slower.
   !
   DO icol = 1, N
-    Dinv(icol) = 1.0E0/A(Ja(icol))
+    Dinv(icol) = 1._SP/A(Ja(icol))
   END DO
   !
   !------------- LAST LINE OF SSDS FOLLOWS ----------------------------

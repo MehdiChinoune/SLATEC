@@ -447,8 +447,8 @@ SUBROUTINE DNSQ(FCN,JAC,Iopt,N,X,Fvec,Fjac,Ldfjac,Xtol,Maxfev,Ml,Mu,&
     temp, xnorm
   INTEGER :: i, iflag, iter, iwa(1), j, jm1, l, ncfail, ncsuc, nslow1, nslow2
   LOGICAL :: jeval, sing
-  REAL(DP), PARAMETER :: one = 1.0D0, p1 = 1.0D-1, p5 = 5.0D-1, p001 = 1.0D-3, &
-    p0001 = 1.0D-4, zero = 0.0D0
+  REAL(DP), PARAMETER :: one = 1._DP, p1 = 1.0E-1_DP, p5 = 5.0E-1_DP, p001 = 1.0E-3_DP, &
+    p0001 = 1.0E-4_DP, zero = 0._DP
   !
   !     BEGIN BLOCK PERMITTING ...EXITS TO 320
   !* FIRST EXECUTABLE STATEMENT  DNSQ

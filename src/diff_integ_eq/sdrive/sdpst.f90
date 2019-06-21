@@ -59,7 +59,7 @@ SUBROUTINE SDPST(El,F,FA,H,Impl,JACOBN,Matdim,Miter,Ml,Mu,N,Nde,Nq,Save2,&
   LOGICAL :: Ier
   INTEGER :: i, iflag, imax, info, j, j2, k, mw
   REAL(SP) :: bl, bp, br, dfdymx, diff, dy, facmin, factor, scalee, yj, ys
-  REAL(SP), PARAMETER :: FACMAX = 0.5E0, BU = 0.5E0
+  REAL(SP), PARAMETER :: FACMAX = 0.5_SP, BU = 0.5_SP
   !* FIRST EXECUTABLE STATEMENT  SDPST
   Nje = Nje + 1
   Ier = .FALSE.
@@ -78,17 +78,17 @@ SUBROUTINE SDPST(El,F,FA,H,Impl,JACOBN,Matdim,Miter,Ml,Mu,N,Nde,Nq,Save2,&
         END DO
       END DO
     ELSEIF( Miter==2 ) THEN
-      br = Uround**(.875E0)
-      bl = Uround**(.75E0)
-      bp = Uround**(-.15E0)
-      facmin = Uround**(.78E0)
+      br = Uround**(.875_SP)
+      bl = Uround**(.75_SP)
+      bp = Uround**(-.15_SP)
+      facmin = Uround**(.78_SP)
       DO j = 1, N
         ys = MAX(ABS(Ywt(j)),ABS(Y(j)))
         DO
           dy = Fac(j)*ys
-          IF( dy==0.E0 ) THEN
+          IF( dy==0._SP ) THEN
             IF( Fac(j)<FACMAX ) THEN
-              Fac(j) = MIN(100.E0*Fac(j),FACMAX)
+              Fac(j) = MIN(100._SP*Fac(j),FACMAX)
               CYCLE
             ELSE
               dy = ys
@@ -122,13 +122,13 @@ SUBROUTINE SDPST(El,F,FA,H,Impl,JACOBN,Matdim,Miter,Ml,Mu,N,Nde,Nq,Save2,&
             END IF
           END DO
           !                                                                 Step 2
-          IF( MIN(ABS(Save2(imax)),ABS(Save1(imax)))>0.E0 ) THEN
+          IF( MIN(ABS(Save2(imax)),ABS(Save1(imax)))>0._SP ) THEN
             scalee = MAX(ABS(Save2(imax)),ABS(Save1(imax)))
             !                                                                 Step 3
             IF( diff>BU*scalee ) THEN
-              Fac(j) = MAX(facmin,Fac(j)*.5E0)
+              Fac(j) = MAX(facmin,Fac(j)*.5_SP)
             ELSEIF( br*scalee<=diff .AND. diff<=bl*scalee ) THEN
-              Fac(j) = MIN(Fac(j)*2.E0,FACMAX)
+              Fac(j) = MIN(Fac(j)*2._SP,FACMAX)
               !                                                                 Step 4
             ELSEIF( diff<br*scalee ) THEN
               Fac(j) = MIN(bp*Fac(j),FACMAX)
@@ -142,7 +142,7 @@ SUBROUTINE SDPST(El,F,FA,H,Impl,JACOBN,Matdim,Miter,Ml,Mu,N,Nde,Nq,Save2,&
     END IF
     IF( Impl==0 ) THEN
       DO i = 1, N
-        Dfdy(i,i) = Dfdy(i,i) + 1.E0
+        Dfdy(i,i) = Dfdy(i,i) + 1._SP
       END DO
     ELSEIF( Impl==1 ) THEN
       CALL FA(N,T,Y,A,Matdim,Ml,Mu,Nde)
@@ -193,10 +193,10 @@ SUBROUTINE SDPST(El,F,FA,H,Impl,JACOBN,Matdim,Miter,Ml,Mu,N,Nde,Nq,Save2,&
         END DO
       END DO
     ELSEIF( Miter==5 ) THEN
-      br = Uround**(.875E0)
-      bl = Uround**(.75E0)
-      bp = Uround**(-.15E0)
-      facmin = Uround**(.78E0)
+      br = Uround**(.875_SP)
+      bl = Uround**(.75_SP)
+      bp = Uround**(-.15_SP)
+      facmin = Uround**(.78_SP)
       mw = Ml + Mu + 1
       j2 = MIN(mw,N)
       DO j = 1, j2
@@ -204,9 +204,9 @@ SUBROUTINE SDPST(El,F,FA,H,Impl,JACOBN,Matdim,Miter,Ml,Mu,N,Nde,Nq,Save2,&
           ys = MAX(ABS(Ywt(k)),ABS(Y(k)))
           DO
             dy = Fac(k)*ys
-            IF( dy==0.E0 ) THEN
+            IF( dy==0._SP ) THEN
               IF( Fac(k)<FACMAX ) THEN
-                Fac(k) = MIN(100.E0*Fac(k),FACMAX)
+                Fac(k) = MIN(100._SP*Fac(k),FACMAX)
                 CYCLE
               ELSE
                 dy = ys
@@ -232,7 +232,7 @@ SUBROUTINE SDPST(El,F,FA,H,Impl,JACOBN,Matdim,Miter,Ml,Mu,N,Nde,Nq,Save2,&
           Y(k) = Dfdy(mw,k)
           ys = MAX(ABS(Ywt(k)),ABS(Y(k)))
           dy = Fac(k)*ys
-          IF( dy==0.E0 ) dy = ys
+          IF( dy==0._SP ) dy = ys
           IF( Nq==1 ) THEN
             dy = SIGN(dy,Save2(k))
           ELSE
@@ -253,13 +253,13 @@ SUBROUTINE SDPST(El,F,FA,H,Impl,JACOBN,Matdim,Miter,Ml,Mu,N,Nde,Nq,Save2,&
             END IF
           END DO
           !                                                                 Step 2
-          IF( MIN(ABS(Save2(imax)),ABS(Save1(imax)))>0.E0 ) THEN
+          IF( MIN(ABS(Save2(imax)),ABS(Save1(imax)))>0._SP ) THEN
             scalee = MAX(ABS(Save2(imax)),ABS(Save1(imax)))
             !                                                                 Step 3
             IF( diff>BU*scalee ) THEN
-              Fac(j) = MAX(facmin,Fac(j)*.5E0)
+              Fac(j) = MAX(facmin,Fac(j)*.5_SP)
             ELSEIF( br*scalee<=diff .AND. diff<=bl*scalee ) THEN
-              Fac(j) = MIN(Fac(j)*2.E0,FACMAX)
+              Fac(j) = MIN(Fac(j)*2._SP,FACMAX)
               !                                                                 Step 4
             ELSEIF( diff<br*scalee ) THEN
               Fac(k) = MIN(bp*Fac(k),FACMAX)
@@ -270,14 +270,14 @@ SUBROUTINE SDPST(El,F,FA,H,Impl,JACOBN,Matdim,Miter,Ml,Mu,N,Nde,Nq,Save2,&
       Nfe = Nfe + j2
     END IF
     IF( Iswflg==3 ) THEN
-      dfdymx = 0.E0
+      dfdymx = 0._SP
       DO j = 1, N
         DO i = MAX(Ml+1,mw+1-j), MIN(mw+N-j,mw+Ml)
           dfdymx = MAX(dfdymx,ABS(Dfdy(i,j)))
         END DO
       END DO
-      Bnd = 0.E0
-      IF( dfdymx/=0.E0 ) THEN
+      Bnd = 0._SP
+      IF( dfdymx/=0._SP ) THEN
         DO j = 1, N
           DO i = MAX(Ml+1,mw+1-j), MIN(mw+N-j,mw+Ml)
             Bnd = Bnd + (Dfdy(i,j)/dfdymx)**2
@@ -288,7 +288,7 @@ SUBROUTINE SDPST(El,F,FA,H,Impl,JACOBN,Matdim,Miter,Ml,Mu,N,Nde,Nq,Save2,&
     END IF
     IF( Impl==0 ) THEN
       DO j = 1, N
-        Dfdy(mw,j) = Dfdy(mw,j) + 1.E0
+        Dfdy(mw,j) = Dfdy(mw,j) + 1._SP
       END DO
     ELSEIF( Impl==1 ) THEN
       CALL FA(N,T,Y,A(Ml+1:,:),Matdim,Ml,Mu,Nde)

@@ -109,14 +109,14 @@ SUBROUTINE DQK15W(F,W,P1,P2,P3,P4,Kp,A,B,Result,Abserr,Resabs,Resasc)
   !
   !           WG     - WEIGHTS OF THE 7-POINT GAUSS RULE
   !
-  REAL(DP), PARAMETER :: xgk(8) = [ 0.9914553711208126D+00, 0.9491079123427585D+00, &
-    0.8648644233597691D+00, 0.7415311855993944D+00, 0.5860872354676911D+00, &
-    0.4058451513773972D+00, 0.2077849550078985D+00, 0.0000000000000000D+00 ]
-  REAL(DP), PARAMETER :: wgk(8) = [ 0.2293532201052922D-01, 0.6309209262997855D-01, &
-    0.1047900103222502D+00, 0.1406532597155259D+00, 0.1690047266392679D+00, &
-    0.1903505780647854D+00, 0.2044329400752989D+00, 0.2094821410847278D+00 ]
-  REAL(DP), PARAMETER :: wg(4) = [ 0.1294849661688697D+00, 0.2797053914892767D+00, &
-    0.3818300505051889D+00, 0.4179591836734694D+00 ]
+  REAL(DP), PARAMETER :: xgk(8) = [ 0.9914553711208126E+00_DP, 0.9491079123427585E+00_DP, &
+    0.8648644233597691E+00_DP, 0.7415311855993944E+00_DP, 0.5860872354676911E+00_DP, &
+    0.4058451513773972E+00_DP, 0.2077849550078985E+00_DP, 0.0000000000000000E+00_DP ]
+  REAL(DP), PARAMETER :: wgk(8) = [ 0.2293532201052922E-01_DP, 0.6309209262997855E-01_DP, &
+    0.1047900103222502E+00_DP, 0.1406532597155259E+00_DP, 0.1690047266392679E+00_DP, &
+    0.1903505780647854E+00_DP, 0.2044329400752989E+00_DP, 0.2094821410847278E+00_DP ]
+  REAL(DP), PARAMETER :: wg(4) = [ 0.1294849661688697E+00_DP, 0.2797053914892767E+00_DP, &
+    0.3818300505051889E+00_DP, 0.4179591836734694E+00_DP ]
   !
   !           LIST OF MAJOR VARIABLES
   !           -----------------------
@@ -140,8 +140,8 @@ SUBROUTINE DQK15W(F,W,P1,P2,P3,P4,Kp,A,B,Result,Abserr,Resabs,Resasc)
   epmach = D1MACH(4)
   uflow = D1MACH(1)
   !
-  centr = 0.5D+00*(A+B)
-  hlgth = 0.5D+00*(B-A)
+  centr = 0.5_DP*(A+B)
+  hlgth = 0.5_DP*(B-A)
   dhlgth = ABS(hlgth)
   !
   !           COMPUTE THE 15-POINT KRONROD APPROXIMATION TO THE
@@ -178,7 +178,7 @@ SUBROUTINE DQK15W(F,W,P1,P2,P3,P4,Kp,A,B,Result,Abserr,Resabs,Resasc)
     resk = resk + wgk(jtwm1)*fsum
     Resabs = Resabs + wgk(jtwm1)*(ABS(fval1)+ABS(fval2))
   END DO
-  reskh = resk*0.5D+00
+  reskh = resk*0.5_DP
   Resasc = wgk(8)*ABS(fc-reskh)
   DO j = 1, 7
     Resasc = Resasc + wgk(j)*(ABS(fv1(j)-reskh)+ABS(fv2(j)-reskh))
@@ -187,8 +187,8 @@ SUBROUTINE DQK15W(F,W,P1,P2,P3,P4,Kp,A,B,Result,Abserr,Resabs,Resasc)
   Resabs = Resabs*dhlgth
   Resasc = Resasc*dhlgth
   Abserr = ABS((resk-resg)*hlgth)
-  IF( Resasc/=0.0D+00 .AND. Abserr/=0.0D+00 )&
-    Abserr = Resasc*MIN(0.1D+01,(0.2D+03*Abserr/Resasc)**1.5D+00)
-  IF( Resabs>uflow/(0.5D+02*epmach) ) Abserr = MAX((epmach*0.5D+02)*Resabs,&
+  IF( Resasc/=0._DP .AND. Abserr/=0._DP )&
+    Abserr = Resasc*MIN(1._DP,(0.2E+03_DP*Abserr/Resasc)**1.5_DP)
+  IF( Resabs>uflow/(0.5E+02_DP*epmach) ) Abserr = MAX((epmach*0.5E+02_DP)*Resabs,&
     Abserr)
 END SUBROUTINE DQK15W

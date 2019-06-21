@@ -91,22 +91,22 @@ SUBROUTINE BESKNU(X,Fnu,Kode,N,Y,Nz)
   REAL(SP) :: a(160), ak, a1, a2, b(160), bk, ck, coef, cx, dk, dnu, dnu2, elim, etest, &
     ex, f, fc, fhs, fk, fks, flrx, fmu, g1, g2, p, pt, p1, p2, q, rx, s, smu, sqk, &
     st, s1, s2, tm, tol, t1, t2
-  REAL(SP), PARAMETER :: x1 = 2.0E0, x2 = 17.0E0
-  REAL(SP), PARAMETER :: pi = 3.14159265358979E+00, rthpi = 1.25331413731550E+00
-  REAL(SP), PARAMETER :: cc(8) = [ 5.77215664901533E-01, -4.20026350340952E-02, &
-    -4.21977345555443E-02, 7.21894324666300E-03, -2.15241674114900E-04, &
-    -2.01348547807000E-05, 1.13302723200000E-06, 6.11609500000000E-09 ]
+  REAL(SP), PARAMETER :: x1 = 2._SP, x2 = 17._SP
+  REAL(SP), PARAMETER :: pi = 3.14159265358979E+00_SP, rthpi = 1.25331413731550_SP
+  REAL(SP), PARAMETER :: cc(8) = [ 5.77215664901533E-01_SP, -4.20026350340952E-02_SP, &
+    -4.21977345555443E-02_SP, 7.21894324666300E-03_SP, -2.15241674114900E-04_SP, &
+    -2.01348547807000E-05_SP, 1.13302723200000E-06_SP, 6.11609500000000E-09_SP ]
   !* FIRST EXECUTABLE STATEMENT  BESKNU
   kk = -I1MACH(12)
-  elim = 2.303E0*(kk*R1MACH(5)-3.0E0)
+  elim = 2.303_SP*(kk*R1MACH(5)-3._SP)
   ak = R1MACH(3)
-  tol = MAX(ak,1.0E-15)
-  IF( X<=0.0E0 ) THEN
+  tol = MAX(ak,1.0E-15_SP)
+  IF( X<=0._SP ) THEN
     !
     !
     CALL XERMSG('BESKNU','X NOT GREATER THAN ZERO',2,1)
     RETURN
-  ELSEIF( Fnu<0.0E0 ) THEN
+  ELSEIF( Fnu<0._SP ) THEN
     CALL XERMSG('BESKNU','FNU NOT ZERO OR POSITIVE',2,1)
     RETURN
   ELSE
@@ -121,26 +121,26 @@ SUBROUTINE BESKNU(X,Fnu,Kode,N,Y,Nz)
         Nz = 0
         iflag = 0
         koded = Kode
-        rx = 2.0E0/X
-        inu = INT(Fnu+0.5E0)
+        rx = 2._SP/X
+        inu = INT(Fnu+0.5E0_SP)
         dnu = Fnu - inu
-        IF( ABS(dnu)/=0.5E0 ) THEN
-          dnu2 = 0.0E0
+        IF( ABS(dnu)/=0.5_SP ) THEN
+          dnu2 = 0._SP
           IF( ABS(dnu)>=tol ) dnu2 = dnu*dnu
           IF( X<=x1 ) THEN
             !
             !     SERIES FOR X<=X1
             !
-            a1 = 1.0E0 - dnu
-            a2 = 1.0E0 + dnu
-            t1 = 1.0E0/GAMMA(a1)
-            t2 = 1.0E0/GAMMA(a2)
-            IF( ABS(dnu)>0.1E0 ) THEN
+            a1 = 1._SP - dnu
+            a2 = 1._SP + dnu
+            t1 = 1._SP/GAMMA(a1)
+            t2 = 1._SP/GAMMA(a2)
+            IF( ABS(dnu)>0.1_SP ) THEN
               g1 = (t1-t2)/(dnu+dnu)
             ELSE
               !     SERIES FOR F0 TO RESOLVE INDETERMINACY FOR SMALL ABS(DNU)
               s = cc(1)
-              ak = 1.0E0
+              ak = 1._SP
               DO k = 2, 8
                 ak = ak*dnu2
                 tm = cc(k)*ak
@@ -149,28 +149,28 @@ SUBROUTINE BESKNU(X,Fnu,Kode,N,Y,Nz)
               END DO
               g1 = -s
             END IF
-            g2 = (t1+t2)*0.5E0
-            smu = 1.0E0
-            fc = 1.0E0
+            g2 = (t1+t2)*0.5_SP
+            smu = 1._SP
+            fc = 1._SP
             flrx = LOG(rx)
             fmu = dnu*flrx
-            IF( dnu/=0.0E0 ) THEN
+            IF( dnu/=0._SP ) THEN
               fc = dnu*pi
               fc = fc/SIN(fc)
-              IF( fmu/=0.0E0 ) smu = SINH(fmu)/fmu
+              IF( fmu/=0._SP ) smu = SINH(fmu)/fmu
             END IF
             f = fc*(g1*COSH(fmu)+g2*flrx*smu)
             fc = EXP(fmu)
-            p = 0.5E0*fc/t2
-            q = 0.5E0/(fc*t1)
-            ak = 1.0E0
-            ck = 1.0E0
-            bk = 1.0E0
+            p = 0.5_SP*fc/t2
+            q = 0.5_SP/(fc*t1)
+            ak = 1._SP
+            ck = 1._SP
+            bk = 1._SP
             s1 = f
             s2 = p
             IF( inu>0 .OR. N>1 ) THEN
               IF( X>=tol ) THEN
-                cx = X*X*0.25E0
+                cx = X*X*0.25_SP
                 DO
                   f = (ak*f+p+q)/(bk-dnu2)
                   p = p/(ak-dnu)
@@ -180,9 +180,9 @@ SUBROUTINE BESKNU(X,Fnu,Kode,N,Y,Nz)
                   s1 = s1 + t1
                   t2 = ck*(p-ak*f)
                   s2 = s2 + t2
-                  bk = bk + ak + ak + 1.0E0
-                  ak = ak + 1.0E0
-                  s = ABS(t1)/(1.0E0+ABS(s1)) + ABS(t2)/(1.0E0+ABS(s2))
+                  bk = bk + ak + ak + 1._SP
+                  ak = ak + 1._SP
+                  s = ABS(t1)/(1._SP+ABS(s1)) + ABS(t2)/(1._SP+ABS(s2))
                   IF( s<=tol ) EXIT
                 END DO
               END IF
@@ -195,7 +195,7 @@ SUBROUTINE BESKNU(X,Fnu,Kode,N,Y,Nz)
               GOTO 20
             ELSE
               IF( X>=tol ) THEN
-                cx = X*X*0.25E0
+                cx = X*X*0.25_SP
                 DO
                   f = (ak*f+p+q)/(bk-dnu2)
                   p = p/(ak-dnu)
@@ -203,9 +203,9 @@ SUBROUTINE BESKNU(X,Fnu,Kode,N,Y,Nz)
                   ck = ck*cx/ak
                   t1 = ck*f
                   s1 = s1 + t1
-                  bk = bk + ak + ak + 1.0E0
-                  ak = ak + 1.0E0
-                  s = ABS(t1)/(1.0E0+ABS(s1))
+                  bk = bk + ak + ak + 1._SP
+                  ak = ak + 1._SP
+                  s = ABS(t1)/(1._SP+ABS(s1))
                   IF( s<=tol ) EXIT
                 END DO
               END IF
@@ -227,7 +227,7 @@ SUBROUTINE BESKNU(X,Fnu,Kode,N,Y,Nz)
             EXIT
           END IF
         END DO
-        IF( ABS(dnu)==0.5E0 ) THEN
+        IF( ABS(dnu)==0.5_SP ) THEN
           !
           !     FNU=HALF ODD INTEGER CASE
           !
@@ -244,27 +244,27 @@ SUBROUTINE BESKNU(X,Fnu,Kode,N,Y,Nz)
           nn = 2
           IF( inu==0 .AND. N==1 ) nn = 1
           dnu2 = dnu + dnu
-          fmu = 0.0E0
+          fmu = 0._SP
           IF( ABS(dnu2)>=tol ) fmu = dnu2*dnu2
-          ex = X*8.0E0
-          s2 = 0.0E0
+          ex = X*8._SP
+          s2 = 0._SP
           DO k = 1, nn
             s1 = s2
-            s = 1.0E0
-            ak = 0.0E0
-            ck = 1.0E0
-            sqk = 1.0E0
+            s = 1._SP
+            ak = 0._SP
+            ck = 1._SP
+            sqk = 1._SP
             dk = ex
             DO j = 1, 30
               ck = ck*(fmu-sqk)/dk
               s = s + ck
               dk = dk + ex
-              ak = ak + 8.0E0
+              ak = ak + 8._SP
               sqk = sqk + ak
               IF( ABS(ck)<tol ) EXIT
             END DO
             s2 = s*coef
-            fmu = fmu + 8.0E0*dnu + 4.0E0
+            fmu = fmu + 8._SP*dnu + 4._SP
           END DO
           IF( nn<=1 ) THEN
             s1 = s2
@@ -275,31 +275,31 @@ SUBROUTINE BESKNU(X,Fnu,Kode,N,Y,Nz)
           !     MILLER ALGORITHM FOR X1<X<=X2
           !
           etest = COS(pi*dnu)/(pi*X*tol)
-          fks = 1.0E0
-          fhs = 0.25E0
-          fk = 0.0E0
-          ck = X + X + 2.0E0
-          p1 = 0.0E0
-          p2 = 1.0E0
+          fks = 1._SP
+          fhs = 0.25_SP
+          fk = 0._SP
+          ck = X + X + 2._SP
+          p1 = 0._SP
+          p2 = 1._SP
           k = 0
           DO
             k = k + 1
-            fk = fk + 1.0E0
+            fk = fk + 1._SP
             ak = (fhs-dnu2)/(fks+fk)
-            bk = ck/(fk+1.0E0)
+            bk = ck/(fk+1._SP)
             pt = p2
             p2 = bk*p2 - ak*p1
             p1 = pt
             a(k) = ak
             b(k) = bk
-            ck = ck + 2.0E0
-            fks = fks + fk + fk + 1.0E0
+            ck = ck + 2._SP
+            fks = fks + fk + fk + 1._SP
             fhs = fhs + fk + fk
             IF( etest<=fk*p1 ) THEN
               kk = k
-              s = 1.0E0
-              p1 = 0.0E0
-              p2 = 1.0E0
+              s = 1._SP
+              p1 = 0._SP
+              p2 = 1._SP
               DO i = 1, k
                 pt = p2
                 p2 = (b(kk)*p2-p1)/a(kk)
@@ -309,7 +309,7 @@ SUBROUTINE BESKNU(X,Fnu,Kode,N,Y,Nz)
               END DO
               s1 = coef*(p2/s)
               IF( inu<=0 .AND. N<=1 ) GOTO 50
-              s2 = s1*(X+dnu+0.5E0-p1/p2)/X
+              s2 = s1*(X+dnu+0.5_SP-p1/p2)/X
               EXIT
             END IF
           END DO
@@ -318,7 +318,7 @@ SUBROUTINE BESKNU(X,Fnu,Kode,N,Y,Nz)
       !
       !     FORWARD RECURSION ON THE THREE TERM RECURSION RELATION
       !
-      20  ck = (dnu+dnu+2.0E0)/X
+      20  ck = (dnu+dnu+2._SP)/X
       IF( N==1 ) inu = inu - 1
       IF( inu>0 ) THEN
         DO i = 1, inu
@@ -336,7 +336,7 @@ SUBROUTINE BESKNU(X,Fnu,Kode,N,Y,Nz)
     IF( iflag==1 ) THEN
       !     IFLAG=1 CASES
       s = -X + LOG(s1)
-      Y(1) = 0.0E0
+      Y(1) = 0._SP
       Nz = 1
       IF( s>=-elim ) THEN
         Y(1) = EXP(s)
@@ -344,7 +344,7 @@ SUBROUTINE BESKNU(X,Fnu,Kode,N,Y,Nz)
       END IF
       IF( N==1 ) RETURN
       s = -X + LOG(s2)
-      Y(2) = 0.0E0
+      Y(2) = 0._SP
       Nz = Nz + 1
       IF( s>=-elim ) THEN
         Nz = Nz - 1
@@ -361,7 +361,7 @@ SUBROUTINE BESKNU(X,Fnu,Kode,N,Y,Nz)
           ck = ck + rx
           s = -X + LOG(s2)
           Nz = Nz + 1
-          Y(i) = 0.0E0
+          Y(i) = 0._SP
           IF( s>=-elim ) THEN
             Y(i) = EXP(s)
             Nz = Nz - 1

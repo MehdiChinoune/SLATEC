@@ -49,9 +49,9 @@ SUBROUTINE DFSPVD(T,K,X,Ileft,Vnikx,Nderiv)
     !
     DO i = 1, K
       DO j = 1, K
-        a(i,j) = 0.D0
+        a(i,j) = 0._DP
       END DO
-      a(i,i) = 1.D0
+      a(i,i) = 1._DP
     END DO
     kmd = K
     DO m = 2, Nderiv
@@ -67,7 +67,7 @@ SUBROUTINE DFSPVD(T,K,X,Ileft,Vnikx,Nderiv)
           IF( diff/=0. ) a(1,1) = a(1,1)/diff*fkmd
           !
           DO i = 1, K
-            v = 0.D0
+            v = 0._DP
             jlow = MAX(i,m)
             DO j = jlow, K
               v = a(i,j)*Vnikx(j,m) + v
@@ -76,7 +76,7 @@ SUBROUTINE DFSPVD(T,K,X,Ileft,Vnikx,Nderiv)
           END DO
           EXIT
         ELSE
-          IF( diff/=0.D0 ) THEN
+          IF( diff/=0._DP ) THEN
             DO l = 1, j
               a(l,j) = (a(l,j)-a(l,j-1))/diff*fkmd
             END DO

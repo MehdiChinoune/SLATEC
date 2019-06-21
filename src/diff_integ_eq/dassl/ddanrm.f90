@@ -34,13 +34,13 @@ REAL(DP) FUNCTION DDANRM(Neq,V,Wt)
   REAL(DP) :: summ, vmax
   !
   !* FIRST EXECUTABLE STATEMENT  DDANRM
-  DDANRM = 0.0D0
-  vmax = 0.0D0
+  DDANRM = 0._DP
+  vmax = 0._DP
   DO i = 1, Neq
     IF( ABS(V(i)/Wt(i))>vmax ) vmax = ABS(V(i)/Wt(i))
   END DO
-  IF( vmax>0.0D0 ) THEN
-    summ = 0.0D0
+  IF( vmax>0._DP ) THEN
+    summ = 0._DP
     DO i = 1, Neq
       summ = summ + ((V(i)/Wt(i))/vmax)**2
     END DO

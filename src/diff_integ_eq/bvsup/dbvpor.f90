@@ -152,7 +152,7 @@ SUBROUTINE DBVPOR(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
   !* FIRST EXECUTABLE STATEMENT  DBVPOR
   nfcp1 = Nfc + 1
   numort_com = 0
-  c_com = 1.0D0
+  c_com = 1._DP
   !
   !     ******************************************************************
   !         CALCULATE INITIAL CONDITIONS WHICH SATISFY
@@ -202,7 +202,7 @@ SUBROUTINE DBVPOR(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
       nswot_com = 1
       knswot_com = 0
       lotjp_com = 1
-      tnd_com = LOG10(10.0D0*tol_com)
+      tnd_com = LOG10(10._DP*tol_com)
       pwcnd_com = LOG10(SQRT(tol_com))
       x_com = xbeg_com
       px_com = x_com

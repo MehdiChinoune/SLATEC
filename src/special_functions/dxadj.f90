@@ -56,10 +56,10 @@ SUBROUTINE DXADJ(X,Ix,Ierror)
   !
   !* FIRST EXECUTABLE STATEMENT  DXADJ
   Ierror = 0
-  IF( X==0.0D0 ) THEN
+  IF( X==0._DP ) THEN
     Ix = 0
     GOTO 200
-  ELSEIF( ABS(X)>=1.0D0 ) THEN
+  ELSEIF( ABS(X)>=1._DP ) THEN
     IF( ABS(X)<radixl_com ) GOTO 200
     X = X/rad2l_com
     IF( Ix<=0 ) THEN
@@ -70,7 +70,7 @@ SUBROUTINE DXADJ(X,Ix,Ierror)
       RETURN
     END IF
   ELSE
-    IF( radixl_com*ABS(X)>=1.0D0 ) GOTO 200
+    IF( radixl_com*ABS(X)>=1._DP ) GOTO 200
     X = X*rad2l_com
     IF( Ix>=0 ) THEN
       Ix = Ix - l2_com

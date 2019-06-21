@@ -58,7 +58,7 @@ CONTAINS
     REAL(SP) :: y(75,105), z
     INTEGER :: i, idimy, ierror, iflg, Ipass, j, Kprint, Lun, m, mp, n, np
     !* FIRST EXECUTABLE STATEMENT  QXBLKT
-    ermax = 1.E-3
+    ermax = 1.E-3_SP
     iflg = 0
     np = 1
     n = 63
@@ -69,11 +69,11 @@ CONTAINS
     !     GENERATE AND STORE GRID POINTS FOR THE PURPOSE OF COMPUTING THE
     !     COEFFICIENTS AND THE ARRAY Y.
     !
-    deltas = 1.0E0/(m+1)
+    deltas = 1._SP/(m+1)
     DO i = 1, m
       s(i) = i*deltas
     END DO
-    deltat = 1.0E0/(n+1)
+    deltat = 1._SP/(n+1)
     DO j = 1, n
       t(j) = j*deltat
     END DO
@@ -81,12 +81,12 @@ CONTAINS
     !     COMPUTE THE COEFFICIENTS AM, BM AND CM CORRESPONDING TO THE S
     !     DIRECTION.
     !
-    hds = deltas/2.
+    hds = deltas/2._SP
     tds = deltas + deltas
     DO i = 1, m
-      temp1 = 1./(s(i)*tds)
-      temp2 = 1./((s(i)-hds)*tds)
-      temp3 = 1./((s(i)+hds)*tds)
+      temp1 = 1._SP/(s(i)*tds)
+      temp2 = 1._SP/((s(i)-hds)*tds)
+      temp3 = 1._SP/((s(i)+hds)*tds)
       am(i) = temp1*temp2
       cm(i) = temp1*temp3
       bm(i) = -(am(i)+cm(i))
@@ -95,12 +95,12 @@ CONTAINS
     !     COMPUTE THE COEFFICIENTS AN, BN AND CN CORRESPONDING TO THE T
     !     DIRECTION.
     !
-    hdt = deltat/2.
+    hdt = deltat/2._SP
     tdt = deltat + deltat
     DO j = 1, n
-      temp1 = 1./(t(j)*tdt)
-      temp2 = 1./((t(j)-hdt)*tdt)
-      temp3 = 1./((t(j)+hdt)*tdt)
+      temp1 = 1._SP/(t(j)*tdt)
+      temp2 = 1._SP/((t(j)-hdt)*tdt)
+      temp3 = 1._SP/((t(j)+hdt)*tdt)
       an(j) = temp1*temp2
       cn(j) = temp1*temp3
       bn(j) = -(an(j)+cn(j))
@@ -110,7 +110,7 @@ CONTAINS
     !
     DO j = 1, n
       DO i = 1, m
-        y(i,j) = 3.75*s(i)*t(j)*(s(i)**4.+t(j)**4.)
+        y(i,j) = 3.75_SP*s(i)*t(j)*(s(i)**4._SP+t(j)**4._SP)
       END DO
     END DO
     !
@@ -118,10 +118,10 @@ CONTAINS
     !     CORNER AT J=N,I=M INCLUDES CONTRIBUTIONS FROM BOTH BOUNDARIES.
     !
     DO j = 1, n
-      y(m,j) = y(m,j) - cm(m)*t(j)**5.
+      y(m,j) = y(m,j) - cm(m)*t(j)**5._SP
     END DO
     DO i = 1, m
-      y(i,n) = y(i,n) - cn(n)*s(i)**5.
+      y(i,n) = y(i,n) - cn(n)*s(i)**5._SP
     END DO
     DO
       !
@@ -131,10 +131,10 @@ CONTAINS
         !
         !     COMPUTE DISCRETIZATION ERROR
         !
-        err = 0.
+        err = 0._SP
         DO j = 1, n
           DO i = 1, m
-            z = ABS(y(i,j)-(s(i)*t(j))**5.)
+            z = ABS(y(i,j)-(s(i)*t(j))**5._SP)
             IF( z>err ) err = z
           END DO
         END DO
@@ -236,19 +236,19 @@ CONTAINS
     REAL(SP) :: y(81), z
     INTEGER :: i, idimf, ierror, Ipass, j, Kprint, Lun, m, mbdcnd, mp1, &
       n, nbdcnd, np1
-    REAL, PARAMETER :: pi = 3.14159265358979
+    REAL(SP), PARAMETER :: pi = 3.14159265358979_SP
     !* FIRST EXECUTABLE STATEMENT  QXCRT
     !
     !     FROM DIMENSION STATEMENT WE GET VALUE OF IDIMF.  ALSO NOTE THAT W
     !     IS DIMENSIONED 6*(N+1) + 8*(M+1).
     !
     idimf = 45
-    ermax = 1.E-3
-    a = 0.
-    b = 2.
+    ermax = 1.E-3_SP
+    a = 0._SP
+    b = 2._SP
     m = 40
     mbdcnd = 2
-    c = -1.
+    c = -1._SP
     d = 3.
     n = 80
     nbdcnd = 0
@@ -256,7 +256,7 @@ CONTAINS
     !
     !     AUXILIARY QUANTITIES.
     !
-    piby2 = pi/2.
+    piby2 = pi/2._SP
     pisq = pi**2
     mp1 = m + 1
     np1 = n + 1
@@ -265,29 +265,29 @@ CONTAINS
     !     BOUNDARY DATA AND THE RIGHT SIDE OF THE HELMHOLTZ EQUATION.
     !
     DO i = 1, mp1
-      x(i) = (i-1)/20.0E0
+      x(i) = (i-1)/20._SP
     END DO
     DO j = 1, np1
-      y(j) = -1.0E0 + (j-1)/20.0E0
+      y(j) = -1._SP + (j-1)/20._SP
     END DO
     !
     !     GENERATE BOUNDARY DATA.
     !
     DO j = 1, np1
-      bdb(j) = 4.*COS((y(j)+1.)*piby2)
+      bdb(j) = 4._SP*COS((y(j)+1._SP)*piby2)
     END DO
     !
     !     BDA, BDC, AND BDD ARE DUMMY VARIABLES.
     !
     DO j = 1, np1
-      f(1,j) = 0.
+      f(1,j) = 0._SP
     END DO
     !
     !     GENERATE RIGHT SIDE OF EQUATION.
     !
     DO i = 2, mp1
       DO j = 1, np1
-        f(i,j) = (2.-(4.+pisq/4.)*x(i)**2)*COS((y(j)+1.)*piby2)
+        f(i,j) = (2._SP-(4._SP+pisq/4._SP)*x(i)**2)*COS((y(j)+1._SP)*piby2)
       END DO
     END DO
     CALL HWSCRT(a,b,m,mbdcnd,bda,bdb,c,d,n,nbdcnd,bdc,bdd,elmbda,f,idimf,&
@@ -296,10 +296,10 @@ CONTAINS
     !     COMPUTE DISCRETIZATION ERROR.  THE EXACT SOLUTION IS
     !                U(X,Y) = X**2*COS((Y+1)*PIBY2)
     !
-    err = 0.
+    err = 0._SP
     DO i = 1, mp1
       DO j = 1, np1
-        z = ABS(f(i,j)-x(i)**2*COS((y(j)+1.)*piby2))
+        z = ABS(f(i,j)-x(i)**2*COS((y(j)+1._SP)*piby2))
         IF( z>err ) err = z
       END DO
     END DO
@@ -383,24 +383,24 @@ CONTAINS
     REAL(SP) :: tf, theta(48), ts, w(1200), z
     INTEGER :: i, idimf, ierror, intl, Ipass, j, Kprint, Lun, m, &
       mbdcnd, mp1, n, nbdcnd, np1
-    REAL, PARAMETER :: pi = 3.14159265358979
+    REAL(SP), PARAMETER :: pi = 3.14159265358979_SP
     !* FIRST EXECUTABLE STATEMENT  QXCSP
     !
     !     THE VALUE OF IDIMF IS THE FIRST DIMENSION OF F.  SINCE M=36, N=32,
     !     L=N THEREFORE K=5 AND W IS DIMENSIONED 2*(L+1)*(K-1) + 6*(M+N)
     !     + MAX(4*N,6*M) + 14 = 902.
     !
-    ermax = 1.E-3
+    ermax = 1.E-3_SP
     intl = 0
-    ts = 0.
-    tf = pi/2.
+    ts = 0._SP
+    tf = pi/2._SP
     m = 36
     mbdcnd = 6
-    rs = 0.
-    rf = 1.
+    rs = 0._SP
+    rf = 1._SP
     n = 32
     nbdcnd = 5
-    elmbda = 0.
+    elmbda = 0._SP
     idimf = 48
     !
     !     GENERATE AND STORE GRID POINTS FOR THE PURPOSE OF COMPUTING THE
@@ -412,7 +412,7 @@ CONTAINS
       theta(i) = (i-1)*dtheta
     END DO
     np1 = n + 1
-    dr = 1.0E0/n
+    dr = 1._SP/n
     DO j = 1, np1
       r(j) = (j-1)*dr
     END DO
@@ -420,7 +420,7 @@ CONTAINS
     !     GENERATE NORMAL DERIVATIVE DATA AT EQUATOR
     !
     DO j = 1, np1
-      bdtf(j) = 0.
+      bdtf(j) = 0._SP
     END DO
     !
     !     COMPUTE BOUNDARY DATA ON THE SURFACE OF THE SPHERE
@@ -432,7 +432,7 @@ CONTAINS
     !     COMPUTE RIGHT SIDE OF EQUATION
     !
     DO i = 1, mp1
-      ci4 = 12.0E0*COS(theta(i))**2
+      ci4 = 12._SP*COS(theta(i))**2
       DO j = 1, n
         f(i,j) = ci4*r(j)**2
       END DO
@@ -443,7 +443,7 @@ CONTAINS
     !
     !     COMPUTE DISCRETIZATION ERROR
     !
-    err = 0.
+    err = 0._SP
     DO i = 1, mp1
       ci4 = COS(theta(i))**4
       DO j = 1, n
@@ -478,8 +478,8 @@ CONTAINS
     !
     mbdcnd = 2
     nbdcnd = 1
-    dphi = pi/72.
-    elmbda = -2.0E0*(1.0E0-COS(dphi))/dphi**2
+    dphi = pi/72._SP
+    elmbda = -2._SP*(1._SP-COS(dphi))/dphi**2
     !
     !     COMPUTE BOUNDARY DATA ON THE SURFACE OF THE SPHERE
     !
@@ -491,7 +491,7 @@ CONTAINS
     !
     DO j = 1, n
       DO i = 1, mp1
-        f(i,j) = 0.
+        f(i,j) = 0._SP
       END DO
     END DO
     !
@@ -500,7 +500,7 @@ CONTAINS
     !
     !     COMPUTE DISCRETIZATION ERROR   (FOURIER COEFFICIENTS)
     !
-    err = 0.
+    err = 0._SP
     DO i = 1, mp1
       si = SIN(theta(i))
       DO j = 1, np1
@@ -613,16 +613,16 @@ CONTAINS
     !     FROM DIMENSION STATEMENT WE GET VALUE OF IDIMF.
     !
     idimf = 65
-    ermax = 1.0E-3
-    a = 0.0
-    b = 1.0
+    ermax = 1.0E-3_SP
+    a = 0._SP
+    b = 1._SP
     m = 64
     mbdcnd = 6
-    c = 0.0
-    d = 1.0
+    c = 0._SP
+    d = 1._SP
     n = 128
     nbdcnd = 3
-    elmbda = 0.0
+    elmbda = 0._SP
     !
     !     AUXILIARY QUANTITIES.
     !
@@ -633,20 +633,20 @@ CONTAINS
     !     BOUNDARY DATA AND THE RIGHT SIDE OF THE POISSON EQUATION.
     !
     DO i = 1, mp1
-      r(i) = (i-1)/64.0E0
+      r(i) = (i-1)/64._SP
     END DO
     DO j = 1, np1
-      z(j) = (j-1)/128.0E0
+      z(j) = (j-1)/128._SP
     END DO
     !
     !     GENERATE BOUNDARY DATA.
     !
     DO j = 1, np1
-      bdb(j) = 4.0*z(j)**4
+      bdb(j) = 4._SP*z(j)**4
     END DO
     DO i = 1, mp1
-      bdc(i) = 0.0
-      bdd(i) = 4.0*r(i)**4
+      bdc(i) = 0._SP
+      bdd(i) = 4._SP*r(i)**4
     END DO
     !
     !     BDA IS A DUMMY VARIABLE.
@@ -655,7 +655,7 @@ CONTAINS
     !
     DO i = 1, mp1
       DO j = 1, np1
-        f(i,j) = 4.0*r(i)**2*z(j)**2*(4.0*z(j)**2+3.0*r(i)**2)
+        f(i,j) = 4._SP*r(i)**2*z(j)**2*(4._SP*z(j)**2+3._SP*r(i)**2)
       END DO
     END DO
     CALL HWSCYL(a,b,m,mbdcnd,bda,bdb,c,d,n,nbdcnd,bdc,bdd,elmbda,f,idimf,&
@@ -665,7 +665,7 @@ CONTAINS
     !     NORM(F(I,J) - A - U(R(I),Z(J))).  THE EXACT SOLUTION IS
     !     U(R,Z) = (R*Z)**4 + ARBITRARY CONSTANT.
     !
-    x = 0.0
+    x = 0._SP
     DO i = 1, mp1
       DO j = 1, np1
         x = x + f(i,j) - (r(i)*z(j))**4
@@ -677,7 +677,7 @@ CONTAINS
         f(i,j) = f(i,j) - x
       END DO
     END DO
-    err = 0.0
+    err = 0._SP
     DO i = 1, mp1
       DO j = 1, np1
         x = ABS(f(i,j)-(r(i)*z(j))**4)
@@ -755,20 +755,20 @@ CONTAINS
     REAL(SP) :: a(20), b(20), c(20), deltax, deltay, dysq, ermax, err, f(25,130), &
       s, t, w(1200), x(20), y(120), z
     INTEGER :: i, idimy, ierror, Ipass, j, Kprint, Lun, m, mm1, mperod, n, nperod
-    REAL, PARAMETER :: pi = 3.14159265358979
+    REAL(SP), PARAMETER :: pi = 3.14159265358979_SP
     !* FIRST EXECUTABLE STATEMENT  QXGBUN
     !
     !     FROM DIMENSION STATEMENT WE GET VALUE OF IDIMY.  ALSO NOTE THAT
     !     W(.) IS DIMENSIONED 6*N + 5*M.
     !
-    ermax = 1.E-2
+    ermax = 1.E-2_SP
     idimy = 25
     mperod = 1
     m = 20
-    deltax = 1.0E0/m
+    deltax = 1._SP/m
     nperod = 0
     n = 120
-    deltay = 2.0E0*pi/n
+    deltay = 2._SP*pi/n
     !
     !     GENERATE AND STORE GRID POINTS FOR THE PURPOSE OF COMPUTING
     !     COEFFICIENTS AND RIGHT SIDE OF EQUATION.
@@ -784,22 +784,22 @@ CONTAINS
     !
     s = (deltay/deltax)**2
     t = s*deltax
-    a(1) = 0.
-    b(1) = -2.0E0*s
-    c(1) = 2.0E0*s
+    a(1) = 0._SP
+    b(1) = -2._SP*s
+    c(1) = 2._SP*s
     DO i = 2, m
-      a(i) = (1.+x(i))**2*s + (1.+x(i))*t
-      c(i) = (1.+x(i))**2*s - (1.+x(i))*t
-      b(i) = -2.0E0*(1.0E0+x(i))**2*s
+      a(i) = (1._SP+x(i))**2*s + (1._SP+x(i))*t
+      c(i) = (1._SP+x(i))**2*s - (1._SP+x(i))*t
+      b(i) = -2._SP*(1._SP+x(i))**2*s
     END DO
-    c(m) = 0.
+    c(m) = 0._SP
     !
     !     GENERATE RIGHT SIDE OF EQUATION FOR I = 1 SHOWING INTRODUCTION OF
     !     BOUNDARY DATA.
     !
     dysq = deltay**2
     DO j = 1, n
-      f(1,j) = dysq*(11.+8./deltax)*SIN(y(j))
+      f(1,j) = dysq*(11._SP+8._SP/deltax)*SIN(y(j))
     END DO
     !
     !     GENERATE RIGHT SIDE.
@@ -807,7 +807,7 @@ CONTAINS
     mm1 = m - 1
     DO i = 2, mm1
       DO j = 1, n
-        f(i,j) = dysq*3.*(1.+x(i))**4*SIN(y(j))
+        f(i,j) = dysq*3._SP*(1._SP+x(i))**4*SIN(y(j))
       END DO
     END DO
     !
@@ -815,7 +815,7 @@ CONTAINS
     !     BOUNDARY DATA.
     !
     DO j = 1, n
-      f(m,j) = dysq*(3.*(1.+x(m))**4-16.*((1.+x(m))/deltax)**2+16.*(1.+x(m))&
+      f(m,j) = dysq*(3._SP*(1._SP+x(m))**4-16._SP*((1._SP+x(m))/deltax)**2+16._SP*(1._SP+x(m))&
         /deltax)*SIN(y(j))
     END DO
     CALL GENBUN(nperod,n,mperod,m,a,b,c,idimy,f,ierror,w)
@@ -823,10 +823,10 @@ CONTAINS
     !     COMPUTE DISCRETIZATION ERROR.  THE EXACT SOLUTION IS
     !                   U(X,Y) = (1+X)**4*SIN(Y)
     !
-    err = 0.
+    err = 0._SP
     DO i = 1, m
       DO j = 1, n
-        z = ABS(f(i,j)-(1.+x(i))**4*SIN(y(j)))
+        z = ABS(f(i,j)-(1._SP+x(i))**4*SIN(y(j)))
         IF( z>err ) err = z
       END DO
     END DO
@@ -925,23 +925,23 @@ CONTAINS
       f(100,50), pertrb, r(51), theta(49), w(1200), z
     INTEGER :: i, idimf, ierror, Ipass, j, Kprint, Lun, m, mbdcnd, mp1, &
       n, nbdcnd, np1
-    REAL, PARAMETER :: pi = 3.14159265358979
+    REAL(SP), PARAMETER :: pi = 3.14159265358979_SP
     !* FIRST EXECUTABLE STATEMENT  QXPLR
     !
     !     FROM DIMENSION STATEMENT WE GET VALUE OF IDIMF.  ALSO NOTE THAT W
     !     IS DIMENSIONED 6*(N+1) + 8*(M+1).
     !
     idimf = 100
-    ermax = 1.E-3
-    a = 0.
-    b = 1.
+    ermax = 1.E-3_SP
+    a = 0._SP
+    b = 1._SP
     m = 50
     mbdcnd = 5
-    c = 0.
-    d = pi/2.
+    c = 0._SP
+    d = pi/2._SP
     n = 48
     nbdcnd = 3
-    elmbda = 0.
+    elmbda = 0._SP
     !
     !     AUXILIARY QUANTITIES.
     !
@@ -952,30 +952,30 @@ CONTAINS
     !     BOUNDARY DATA AND THE RIGHT SIDE OF THE POISSON EQUATION.
     !
     DO i = 1, mp1
-      r(i) = (i-1)/50.0E0
+      r(i) = (i-1)/50._SP
     END DO
     DO j = 1, np1
-      theta(j) = (j-1)*pi/96.0E0
+      theta(j) = (j-1)*pi/96._SP
     END DO
     !
     !     GENERATE BOUNDARY DATA.
     !
     DO i = 1, mp1
-      bdc(i) = 0.
-      bdd(i) = 0.
+      bdc(i) = 0._SP
+      bdd(i) = 0._SP
     END DO
     !
     !     BDA AND BDB ARE DUMMY VARIABLES.
     !
     DO j = 1, np1
-      f(mp1,j) = 1. - COS(4.*theta(j))
+      f(mp1,j) = 1._SP - COS(4._SP*theta(j))
     END DO
     !
     !     GENERATE RIGHT SIDE OF EQUATION.
     !
     DO i = 1, m
       DO j = 1, np1
-        f(i,j) = 16.*r(i)**2
+        f(i,j) = 16._SP*r(i)**2
       END DO
     END DO
     CALL HWSPLR(a,b,m,mbdcnd,bda,bdb,c,d,n,nbdcnd,bdc,bdd,elmbda,f,idimf,&
@@ -984,10 +984,10 @@ CONTAINS
     !     COMPUTE DISCRETIZATION ERROR.  THE EXACT SOLUTION IS
     !                U(R,THETA) = R**4*(1 - COS(4*THETA))
     !
-    err = 0.
+    err = 0._SP
     DO i = 1, mp1
       DO j = 1, np1
-        z = ABS(f(i,j)-r(i)**4*(1.-COS(4.*theta(j))))
+        z = ABS(f(i,j)-r(i)**4*(1._SP-COS(4._SP*theta(j))))
         IF( z>err ) err = z
       END DO
     END DO
@@ -1071,22 +1071,22 @@ CONTAINS
       err, f(19,73), pertrb, pf, ps, sinp(73), sint(19), tf, ts
     REAL(SP) :: w(1200), z
     INTEGER :: i, idimf, ierror, Ipass, j, Kprint, Lun, m, mbdcnd, mp1, n, nbdcnd, np1
-    REAL, PARAMETER :: pi = 3.14159265358979
+    REAL(SP), PARAMETER :: pi = 3.14159265358979_SP
     !* FIRST EXECUTABLE STATEMENT  QXSSP
     !
     !     THE VALUE OF IDIMF IS THE FIRST DIMENSION OF F.  W IS
     !     DIMENSIONED 11*(M+1)+6*(N+1)=647 SINCE M=18 AND N=72.
     !
-    ermax = 5.E-3
-    ts = 0.0
-    tf = pi/2.
+    ermax = 5.E-3_SP
+    ts = 0._SP
+    tf = pi/2._SP
     m = 18
     mbdcnd = 6
-    ps = 0.0
+    ps = 0._SP
     pf = pi + pi
     n = 72
     nbdcnd = 0
-    elmbda = 0.
+    elmbda = 0._SP
     idimf = 19
     !
     !     GENERATE SINES FOR USE IN SUBSEQUENT COMPUTATIONS
@@ -1106,14 +1106,14 @@ CONTAINS
     !
     DO j = 1, np1
       DO i = 1, mp1
-        f(i,j) = 2. - 6.*(sint(i)*sinp(j))**2
+        f(i,j) = 2._SP - 6._SP*(sint(i)*sinp(j))**2
       END DO
     END DO
     !
     !     STORE DERIVATIVE DATA AT THE EQUATOR
     !
     DO j = 1, np1
-      bdtf(j) = 0.
+      bdtf(j) = 0._SP
     END DO
     !
     CALL HWSSSP(ts,tf,m,mbdcnd,bdts,bdtf,ps,pf,n,nbdcnd,bdps,bdpf,elmbda,f,&
@@ -1122,7 +1122,7 @@ CONTAINS
     !     COMPUTE DISCRETIZATION ERROR. SINCE PROBLEM IS SINGULAR, THE
     !     SOLUTION MUST BE NORMALIZED.
     !
-    err = 0.0
+    err = 0._SP
     DO j = 1, np1
       DO i = 1, mp1
         z = ABS(f(i,j)-(sint(i)*sinp(j))**2-f(1,1))

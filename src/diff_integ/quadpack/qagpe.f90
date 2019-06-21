@@ -286,24 +286,24 @@ SUBROUTINE QAGPE(F,A,B,Npts2,Points,Epsabs,Epsrel,Limit,Result,Abserr,&
   Ier = 0
   Neval = 0
   Last = 0
-  Result = 0.0E+00
-  Abserr = 0.0E+00
+  Result = 0._SP
+  Abserr = 0._SP
   Alist(1) = A
   Blist(1) = B
-  Rlist(1) = 0.0E+00
-  Elist(1) = 0.0E+00
+  Rlist(1) = 0._SP
+  Elist(1) = 0._SP
   Iord(1) = 0
   Level(1) = 0
   npts = Npts2 - 2
   IF( Npts2<2 .OR. Limit<=npts .OR. &
-    (Epsabs<=0.0E+00 .AND. Epsrel<MAX(0.5E+02*epmach,0.5E-14)) ) Ier = 6
+    (Epsabs<=0._SP .AND. Epsrel<MAX(50._SP*epmach,0.5E-14_SP)) ) Ier = 6
   IF( Ier==6 ) RETURN
   !
   !            IF ANY BREAK POINTS ARE PROVIDED, SORT THEM INTO AN
   !            ASCENDING SEQUENCE.
   !
-  signn = 1.0E+00
-  IF( A>B ) signn = -1.0E+00
+  signn = 1._SP
+  IF( A>B ) signn = -1._SP
   Pts(1) = MIN(A,B)
   IF( npts/=0 ) THEN
     DO i = 1, npts
@@ -332,14 +332,14 @@ SUBROUTINE QAGPE(F,A,B,Npts2,Points,Epsabs,Epsrel,Limit,Result,Abserr,&
   !            COMPUTE FIRST INTEGRAL AND ERROR APPROXIMATIONS.
   !            ------------------------------------------------
   !
-  resabs = 0.0E+00
+  resabs = 0._SP
   DO i = 1, nintt
     b1 = Pts(i+1)
     CALL QK21(F,a1,b1,area1,error1,defabs,resa)
     Abserr = Abserr + error1
     Result = Result + area1
     Ndin(i) = 0
-    IF( error1==resa .AND. error1/=0.0E+00 ) Ndin(i) = 1
+    IF( error1==resa .AND. error1/=0._SP ) Ndin(i) = 1
     resabs = resabs + defabs
     Level(i) = 0
     Elist(i) = error1
@@ -349,7 +349,7 @@ SUBROUTINE QAGPE(F,A,B,Npts2,Points,Epsabs,Epsrel,Limit,Result,Abserr,&
     Iord(i) = i
     a1 = b1
   END DO
-  errsum = 0.0E+00
+  errsum = 0._SP
   DO i = 1, nintt
     IF( Ndin(i)==1 ) Elist(i) = Abserr
     errsum = errsum + Elist(i)
@@ -361,7 +361,7 @@ SUBROUTINE QAGPE(F,A,B,Npts2,Points,Epsabs,Epsrel,Limit,Result,Abserr,&
   Neval = 21*nintt
   dres = ABS(Result)
   errbnd = MAX(Epsabs,Epsrel*dres)
-  IF( Abserr<=0.1E+03*epmach*resabs .AND. Abserr>errbnd ) Ier = 2
+  IF( Abserr<=100._SP*epmach*resabs .AND. Abserr>errbnd ) Ier = 2
   IF( nintt/=1 ) THEN
     DO i = 1, npts
       jlow = i + 1
@@ -406,7 +406,7 @@ SUBROUTINE QAGPE(F,A,B,Npts2,Points,Epsabs,Epsrel,Limit,Result,Abserr,&
   oflow = R1MACH(2)
   Abserr = oflow
   ksgn = -1
-  IF( dres>=(0.1E+01-0.5E+02*epmach)*resabs ) ksgn = 1
+  IF( dres>=(1._SP-50._SP*epmach)*resabs ) ksgn = 1
   !
   !           MAIN DO-LOOP
   !           ------------
@@ -418,7 +418,7 @@ SUBROUTINE QAGPE(F,A,B,Npts2,Points,Epsabs,Epsrel,Limit,Result,Abserr,&
     !
     levcur = Level(maxerr) + 1
     a1 = Alist(maxerr)
-    b1 = 0.5E+00*(Alist(maxerr)+Blist(maxerr))
+    b1 = 0.5_SP*(Alist(maxerr)+Blist(maxerr))
     a2 = b1
     b2 = Blist(maxerr)
     erlast = errmax
@@ -461,7 +461,7 @@ SUBROUTINE QAGPE(F,A,B,Npts2,Points,Epsabs,Epsrel,Limit,Result,Abserr,&
     !           SET ERROR FLAG IN THE CASE OF BAD INTEGRAND BEHAVIOUR
     !           AT A POINT OF THE INTEGRATION RANGE
     !
-    IF( MAX(ABS(a1),ABS(b2))<=(0.1E+01+0.1E+03*epmach)&
+    IF( MAX(ABS(a1),ABS(b2))<=(1._SP+100._SP*epmach)&
       *(ABS(a2)+0.1E+04*uflow) ) Ier = 4
     !
     !           APPEND THE NEWLY-CREATED INTERVALS TO THE LIST.
@@ -564,9 +564,9 @@ SUBROUTINE QAGPE(F,A,B,Npts2,Points,Epsabs,Epsrel,Limit,Result,Abserr,&
     IF( (Ier+ierro)/=0 ) THEN
       IF( ierro==3 ) Abserr = Abserr + correc
       IF( Ier==0 ) Ier = 3
-      IF( Result==0.0E+00 .OR. area==0.0E+00 ) THEN
+      IF( Result==0._SP .OR. area==0._SP ) THEN
         IF( Abserr>errsum ) GOTO 200
-        IF( area==0.0E+00 ) GOTO 300
+        IF( area==0._SP ) GOTO 300
       ELSEIF( Abserr/ABS(Result)>errsum/ABS(area) ) THEN
         GOTO 200
       END IF
@@ -575,7 +575,7 @@ SUBROUTINE QAGPE(F,A,B,Npts2,Points,Epsabs,Epsrel,Limit,Result,Abserr,&
     !           TEST ON DIVERGENCE.
     !
     IF( ksgn/=(-1) .OR. MAX(ABS(Result),ABS(area))>defabs*0.1E-01 ) THEN
-      IF( 0.1E-01>(Result/area) .OR. (Result/area)>0.1E+03 .OR. &
+      IF( 0.1E-01>(Result/area) .OR. (Result/area)>100._SP .OR. &
         errsum>ABS(area) ) Ier = 6
     END IF
     GOTO 300
@@ -583,7 +583,7 @@ SUBROUTINE QAGPE(F,A,B,Npts2,Points,Epsabs,Epsrel,Limit,Result,Abserr,&
   !
   !           COMPUTE GLOBAL INTEGRAL SUM.
   !
-  200  Result = 0.0E+00
+  200  Result = 0._SP
   DO k = 1, Last
     Result = Result + Rlist(k)
   END DO

@@ -87,23 +87,23 @@ SUBROUTINE EZFFTF(N,R,Azero,A,B,Wsave)
     Azero = R(1)
     RETURN
   ELSEIF( N==2 ) THEN
-    Azero = .5*(R(1)+R(2))
-    A(1) = .5*(R(1)-R(2))
+    Azero = 0.5_SP*(R(1)+R(2))
+    A(1) = 0.5_SP*(R(1)-R(2))
     RETURN
   ELSE
     DO i = 1, N
       Wsave(i) = R(i)
     END DO
     CALL RFFTF(N,Wsave,Wsave(N+1))
-    cf = 2./N
+    cf = 2._SP/N
     cfm = -cf
-    Azero = .5*cf*Wsave(1)
+    Azero = 0.5_SP*cf*Wsave(1)
     ns2 = (N+1)/2
     ns2m = ns2 - 1
     DO i = 1, ns2m
       A(i) = cf*Wsave(2*i)
       B(i) = cfm*Wsave(2*i+1)
     END DO
-    IF( MOD(N,2)==0 ) A(ns2) = .5*cf*Wsave(N)
+    IF( MOD(N,2)==0 ) A(ns2) = 0.5_SP*cf*Wsave(N)
   END IF
 END SUBROUTINE EZFFTF

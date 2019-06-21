@@ -32,9 +32,9 @@ REAL(DP) FUNCTION DBINOM(N,M)
   INTEGER :: M, N
   INTEGER :: i, k
   REAL(DP) :: corr, xk, xn, xnk
-  REAL(DP), PARAMETER :: bilnmx = LOG(D1MACH(2)) - 0.0001D0, &
-    fintmx = 0.9D0/D1MACH(3)
-  REAL(DP), PARAMETER :: sq2pil = 0.91893853320467274178032973640562D0
+  REAL(DP), PARAMETER :: bilnmx = LOG(D1MACH(2)) - 0.0001_DP, &
+    fintmx = 0.9_DP/D1MACH(3)
+  REAL(DP), PARAMETER :: sq2pil = 0.91893853320467274178032973640562_DP
   !* FIRST EXECUTABLE STATEMENT  DBINOM
   !
   IF( N<0 .OR. M<0 ) CALL XERMSG('DBINOM','N OR M LT ZERO',1,2)
@@ -44,7 +44,7 @@ REAL(DP) FUNCTION DBINOM(N,M)
   IF( k<=20 ) THEN
     IF( k*LOG(AMAX0(N,1))<=bilnmx ) THEN
       !
-      DBINOM = 1.0D0
+      DBINOM = 1._DP
       IF( k==0 ) RETURN
       DO i = 1, k
         xn = N - i + 1
@@ -52,7 +52,7 @@ REAL(DP) FUNCTION DBINOM(N,M)
         DBINOM = DBINOM*(xn/xk)
       END DO
       !
-      IF( DBINOM<fintmx ) DBINOM = AINT(DBINOM+0.5D0)
+      IF( DBINOM<fintmx ) DBINOM = AINT(DBINOM+0.5_DP)
       RETURN
     END IF
   END IF
@@ -65,13 +65,13 @@ REAL(DP) FUNCTION DBINOM(N,M)
   xnk = N - k + 1
   !
   corr = D9LGMC(xn) - D9LGMC(xk) - D9LGMC(xnk)
-  DBINOM = xk*LOG(xnk/xk) - xn*DLNREL(-(xk-1.0D0)/xn) - 0.5D0*LOG(xn*xnk/xk)&
-    + 1.0D0 - sq2pil + corr
+  DBINOM = xk*LOG(xnk/xk) - xn*DLNREL(-(xk-1._DP)/xn) - 0.5_DP*LOG(xn*xnk/xk)&
+    + 1._DP - sq2pil + corr
   !
   IF( DBINOM>bilnmx ) CALL XERMSG('DBINOM',&
     'RESULT OVERFLOWS BECAUSE N AND/OR M TOO BIG',3,2)
   !
   DBINOM = EXP(DBINOM)
-  IF( DBINOM<fintmx ) DBINOM = AINT(DBINOM+0.5D0)
+  IF( DBINOM<fintmx ) DBINOM = AINT(DBINOM+0.5_DP)
   !
 END FUNCTION DBINOM

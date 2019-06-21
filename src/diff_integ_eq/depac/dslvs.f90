@@ -74,10 +74,10 @@ SUBROUTINE DSLVS(Wm,Iwm,X)
       IF( hl0/=phl0 ) THEN
         r = hl0/phl0
         DO i = 1, n_com
-          di = 1.0D0 - r*(1.0D0-1.0D0/Wm(i+2))
+          di = 1._DP - r*(1._DP-1._DP/Wm(i+2))
           !        .........EXIT
-          IF( ABS(di)==0.0D0 ) GOTO 100
-          Wm(i+2) = 1.0D0/di
+          IF( ABS(di)==0._DP ) GOTO 100
+          Wm(i+2) = 1._DP/di
         END DO
       END IF
       DO i = 1, n_com

@@ -41,7 +41,7 @@ SUBROUTINE SDNTP(H,K,N,Nq,T,Tout,Yh,Y)
     END DO
   ELSE
     kused = MIN(K,Nq)
-    factor = 1.E0
+    factor = 1._SP
     DO kk = 1, kused
       factor = factor*(Nq+1-kk)
     END DO
@@ -51,7 +51,7 @@ SUBROUTINE SDNTP(H,K,N,Nq,T,Tout,Yh,Y)
     r = ((Tout-T)/H)
     DO jj = kused + 1, Nq
       j = kused + 1 + Nq - jj
-      factor = 1.E0
+      factor = 1._SP
       DO kk = 1, kused
         factor = factor*(j-kk)
       END DO

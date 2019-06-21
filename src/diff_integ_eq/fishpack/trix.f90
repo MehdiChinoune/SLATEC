@@ -44,11 +44,11 @@ SUBROUTINE TRIX(Idegbr,Idegcr,M,A,B,C,Y,Tcos,D,W)
         Y(i) = xx*Y(i)
       END DO
     END IF
-    z = 1./(B(1)-x)
+    z = 1._SP/(B(1)-x)
     D(1) = C(1)*z
     Y(1) = Y(1)*z
     DO i = 2, mm1
-      z = 1./(B(i)-x-A(i)*D(i-1))
+      z = 1._SP/(B(i)-x-A(i)*D(i-1))
       D(i) = C(i)*z
       Y(i) = (Y(i)-A(i)*Y(i-1))*z
     END DO
@@ -56,7 +56,7 @@ SUBROUTINE TRIX(Idegbr,Idegcr,M,A,B,C,Y,Tcos,D,W)
     IF( z/=0. ) THEN
       Y(M) = (Y(M)-A(M)*Y(mm1))/z
     ELSE
-      Y(M) = 0.
+      Y(M) = 0._SP
     END IF
     DO ip = 1, mm1
       i = M - ip

@@ -191,9 +191,9 @@ SUBROUTINE DPLPMN(DUSRMT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   lp_com = 0
   !
   !     THE VALUES ZERO AND ONE.
-  zero = 0.D0
-  one = 1.D0
-  factor = 0.01D0
+  zero = 0._DP
+  one = 1._DP
+  factor = 0.01_DP
   lpg = Lmx - (Nvars+4)
   iopt = 1
   Info = 0
@@ -644,7 +644,7 @@ SUBROUTINE DPLPMN(DUSRMT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   !++  END
   !
   !     SET RELATIVE PIVOTING FACTOR FOR USE IN LA05 () PACKAGE.
-  uu = 0.1
+  uu = 0.1_DP
   CALL DPLPDM(Mrelas,Nvars,Lbm,nredc,Info,iopt,Ibasis,Imat,Ibrc,Ipr,Iwr,&
     Ind,anorm,eps,uu,gg,Amat,Basmat,Csc,Wr,singlr,redbas)
   IF( Info<0 ) GOTO 4600

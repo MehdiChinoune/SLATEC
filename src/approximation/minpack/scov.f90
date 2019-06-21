@@ -164,7 +164,7 @@ SUBROUTINE SCOV(FCN,Iopt,M,N,X,Fvec,R,Ldr,Info,Wa1,Wa2,Wa3,Wa4)
   INTEGER :: i, idum(1), iflag, j, k, kp1, nm1, nrow
   REAL(SP) :: sigma, temp
   LOGICAL :: sing
-  REAL(SP), PARAMETER :: zero = 0.E0, one = 1.E0
+  REAL(SP), PARAMETER :: zero = 0._SP, one = 1._SP
   !* FIRST EXECUTABLE STATEMENT  SCOV
   sing = .FALSE.
   iflag = 0

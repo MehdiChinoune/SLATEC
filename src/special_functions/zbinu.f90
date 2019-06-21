@@ -24,14 +24,14 @@ SUBROUTINE ZBINU(Zr,Zi,Fnu,Kode,N,Cyr,Cyi,Nz,Rl,Fnul,Tol,Elim,Alim)
   INTEGER :: i, inw, Kode, N, nlast, nn, nui, nw, Nz
   REAL(DP) :: Alim, az, cwi(2), cwr(2), Cyi(N), Cyr(N), dfnu, Elim, Fnu, &
     Fnul, Rl, Tol, Zi, Zr
-  REAL(DP), PARAMETER :: zeror = 0.0D0, zeroi = 0.0D0
+  REAL(DP), PARAMETER :: zeror = 0._DP, zeroi = 0._DP
   !* FIRST EXECUTABLE STATEMENT  ZBINU
   Nz = 0
   az = ZABS(Zr,Zi)
   nn = N
   dfnu = Fnu + (N-1)
-  IF( az>2.0D0 ) THEN
-    IF( az*az*0.25D0>dfnu+1.0D0 ) GOTO 100
+  IF( az>2._DP ) THEN
+    IF( az*az*0.25D0>dfnu+1._DP ) GOTO 100
   END IF
   !-----------------------------------------------------------------------
   !     POWER SERIES
@@ -45,7 +45,7 @@ SUBROUTINE ZBINU(Zr,Zi,Fnu,Kode,N,Cyr,Cyi,Nz,Rl,Fnul,Tol,Elim,Alim)
   dfnu = Fnu + (nn-1)
   100 CONTINUE
   IF( az>=Rl ) THEN
-    IF( dfnu>1.0D0 ) THEN
+    IF( dfnu>1._DP ) THEN
       IF( az+az<dfnu*dfnu ) GOTO 200
     END IF
     !-----------------------------------------------------------------------
@@ -54,7 +54,7 @@ SUBROUTINE ZBINU(Zr,Zi,Fnu,Kode,N,Cyr,Cyi,Nz,Rl,Fnul,Tol,Elim,Alim)
     CALL ZASYI(Zr,Zi,Fnu,Kode,nn,Cyr,Cyi,nw,Rl,Tol,Elim,Alim)
     IF( nw>=0 ) GOTO 600
     GOTO 700
-  ELSEIF( dfnu<=1.0D0 ) THEN
+  ELSEIF( dfnu<=1._DP ) THEN
     GOTO 400
   END IF
   !-----------------------------------------------------------------------

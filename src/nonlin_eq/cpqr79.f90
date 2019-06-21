@@ -84,7 +84,7 @@ SUBROUTINE CPQR79(Ndeg,Coeff,Root,Ierr,Work)
     RETURN
   END IF
   !
-  scalee = 1.0E0/Coeff(1)
+  scalee = 1._SP/Coeff(1)
   khr = 1
   khi = khr + Ndeg*Ndeg
   !

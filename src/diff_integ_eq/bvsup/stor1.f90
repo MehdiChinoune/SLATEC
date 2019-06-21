@@ -48,7 +48,7 @@ SUBROUTINE STOR1(U,Yh,V,Yp,Ntemp,Ndisk,Ntape)
     !
     IF( Ntemp==1 ) RETURN
     DO j = 1, ncomp_com
-      V(j) = 0.
+      V(j) = 0._SP
     END DO
     IF( Ndisk==1 ) WRITE (Ntape) (V(j),j=1,ncomp_com), (U(j),j=1,nctnf)
     !

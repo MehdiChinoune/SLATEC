@@ -35,19 +35,19 @@ REAL(DP) FUNCTION D9GMIT(A,X,Algap1,Sgngam)
   INTEGER :: k, m, ma
   REAL(DP) :: A, X, Algap1, Sgngam
   REAL(DP) :: ae, aeps, algs, alg2, fk, s, sgng2, t, te
-  REAL(DP), PARAMETER :: eps = 0.5D0*D1MACH(3), bot = LOG(D1MACH(1))
+  REAL(DP), PARAMETER :: eps = 0.5_DP*D1MACH(3), bot = LOG(D1MACH(1))
   !* FIRST EXECUTABLE STATEMENT  D9GMIT
   !
-  IF( X<=0.D0 ) CALL XERMSG('D9GMIT','X SHOULD BE GT 0',1,2)
+  IF( X<=0._DP ) CALL XERMSG('D9GMIT','X SHOULD BE GT 0',1,2)
   !
-  ma = INT( A + 0.5D0 )
-  IF( A<0.D0 ) ma = INT( A - 0.5D0 )
+  ma = INT( A + 0.5_DP )
+  IF( A<0._DP ) ma = INT( A - 0.5_DP )
   aeps = A - ma
   !
   ae = A
-  IF( A<(-0.5D0) ) ae = aeps
+  IF( A<(-0.5_DP) ) ae = aeps
   !
-  t = 1.D0
+  t = 1._DP
   te = ae
   s = t
   DO k = 1, 200
@@ -61,17 +61,17 @@ REAL(DP) FUNCTION D9GMIT(A,X,Algap1,Sgngam)
     'NO CONVERGENCE IN 200 TERMS OF TAYLOR-S SERIES',2,2)
   !
   100 CONTINUE
-  IF( A>=(-0.5D0) ) algs = -Algap1 + LOG(s)
-  IF( A>=(-0.5D0) ) THEN
+  IF( A>=(-0.5_DP) ) algs = -Algap1 + LOG(s)
+  IF( A>=(-0.5_DP) ) THEN
     !
     D9GMIT = EXP(algs)
   ELSE
     !
-    algs = -LOG_GAMMA(1.D0+aeps) + LOG(s)
-    s = 1.0D0
+    algs = -LOG_GAMMA(1._DP+aeps) + LOG(s)
+    s = 1._DP
     m = -ma - 1
     IF( m/=0 ) THEN
-      t = 1.0D0
+      t = 1._DP
       DO k = 1, m
         t = X*t/(aeps-(m+1-k))
         s = s + t
@@ -79,13 +79,13 @@ REAL(DP) FUNCTION D9GMIT(A,X,Algap1,Sgngam)
       END DO
     END IF
     !
-    D9GMIT = 0.0D0
+    D9GMIT = 0._DP
     algs = -ma*LOG(X) + algs
-    IF( s==0.D0 .OR. aeps==0.D0 ) THEN
+    IF( s==0._DP .OR. aeps==0._DP ) THEN
       D9GMIT = EXP(algs)
     ELSE
       !
-      sgng2 = Sgngam*SIGN(1.0D0,s)
+      sgng2 = Sgngam*SIGN(1._DP,s)
       alg2 = -X - Algap1 + LOG(ABS(s))
       !
       IF( alg2>bot ) D9GMIT = sgng2*EXP(alg2)

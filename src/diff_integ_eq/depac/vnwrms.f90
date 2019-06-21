@@ -38,7 +38,7 @@ REAL(SP) FUNCTION VNWRMS(N,V,W)
   INTEGER :: i
   REAL(SP) :: summ
   !* FIRST EXECUTABLE STATEMENT  VNWRMS
-  summ = 0.0E0
+  summ = 0._SP
   DO i = 1, N
     summ = summ + (V(i)/W(i))**2
   END DO

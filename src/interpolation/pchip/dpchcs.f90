@@ -107,8 +107,8 @@ SUBROUTINE DPCHCS(Switch,N,H,Slope,D,Incfd,Ierr)
   !
   !  INITIALIZE.
   !
-  REAL(DP), PARAMETER :: zero = 0.D0, one = 1.D0
-  REAL(DP), PARAMETER :: fudge = 4.D0
+  REAL(DP), PARAMETER :: zero = 0._DP, one = 1._DP
+  REAL(DP), PARAMETER :: fudge = 4._DP
   !* FIRST EXECUTABLE STATEMENT  DPCHCS
   Ierr = 0
   nless1 = N - 1

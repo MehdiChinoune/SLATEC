@@ -225,8 +225,8 @@ SUBROUTINE SOSEQS(FNC,N,S,Rtolx,Atolx,Tolf,Iflag,Mxit,Ncjs,Nsrrc,Nsri,&
             !
             DO j = k, N
               isj = Is(j)
-              fact = 100.*Fac(isj)
-              IF( fact>1.E+10 ) GOTO 300
+              fact = 100._SP*Fac(isj)
+              IF( fact>1.E+10_SP ) GOTO 300
               Fac(isj) = fact
             END DO
             GOTO 50
@@ -358,8 +358,8 @@ SUBROUTINE SOSEQS(FNC,N,S,Rtolx,Atolx,Tolf,Iflag,Mxit,Ncjs,Nsrrc,Nsri,&
       !     PROBLEMS MAY ALSO BE DETECTED.
       !
       IF( ynorm<=sruro*xnorm ) THEN
-        IF( (Fmax>=0.2*fmxs) .AND. (Fmax<=5.*fmxs) ) THEN
-          IF( (ynorm>=0.2*yns) .AND. (ynorm<=5.*yns) ) THEN
+        IF( (Fmax>=0.2*fmxs) .AND. (Fmax<=5._SP*fmxs) ) THEN
+          IF( (ynorm>=0.2*yns) .AND. (ynorm<=5._SP*yns) ) THEN
             icr = icr + 1
             IF( icr<Nsrrc ) THEN
               ic = 0
@@ -376,7 +376,7 @@ SUBROUTINE SOSEQS(FNC,N,S,Rtolx,Atolx,Tolf,Iflag,Mxit,Ncjs,Nsrrc,Nsri,&
       !
       !     TEST FOR DIVERGENCE OF THE ITERATIVE SCHEME.
       !
-      IF( (ynorm<=2.*yns) .AND. (Fmax<=2.*fmxs) ) THEN
+      IF( (ynorm<=2._SP*yns) .AND. (Fmax<=2._SP*fmxs) ) THEN
         ic = 0
       ELSE
         ic = ic + 1
@@ -395,11 +395,11 @@ SUBROUTINE SOSEQS(FNC,N,S,Rtolx,Atolx,Tolf,Iflag,Mxit,Ncjs,Nsrrc,Nsri,&
     150  itry = itry - 1
     IF( itry==0 ) THEN
       itry = Ncjs
-    ELSEIF( 20.*ynorm>xnorm ) THEN
+    ELSEIF( 20._SP*ynorm>xnorm ) THEN
       itry = Ncjs
-    ELSEIF( ynorm>2.*yns ) THEN
+    ELSEIF( ynorm>2._SP*yns ) THEN
       itry = Ncjs
-    ELSEIF( Fmax>=2.*fmxs ) THEN
+    ELSEIF( Fmax>=2._SP*fmxs ) THEN
       itry = Ncjs
     END IF
     !

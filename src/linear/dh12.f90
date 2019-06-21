@@ -59,7 +59,7 @@ SUBROUTINE DH12(Mode,Lpivot,L1,M,U,Iue,Up,C,Ice,Icv,Ncv)
   REAL(DP) :: b, cl, clinv, one, ul1m1, sm
   !     BEGIN BLOCK PERMITTING ...EXITS TO 140
   !* FIRST EXECUTABLE STATEMENT  DH12
-  one = 1.0D0
+  one = 1._DP
   !
   !     ...EXIT
   IF( 0<Lpivot .AND. Lpivot<L1 .AND. L1<=M ) THEN
@@ -70,19 +70,19 @@ SUBROUTINE DH12(Mode,Lpivot,L1,M,U,Iue,Up,C,Ice,Icv,Ncv)
         cl = MAX(ABS(U(1,j)),cl)
       END DO
       !     .........EXIT
-      IF( cl<=0.0D0 ) RETURN
+      IF( cl<=0._DP ) RETURN
       clinv = one/cl
       sm = (U(1,Lpivot)*clinv)**2
       DO j = L1, M
         sm = sm + (U(1,j)*clinv)**2
       END DO
       cl = cl*SQRT(sm)
-      IF( U(1,Lpivot)>0.0D0 ) cl = -cl
+      IF( U(1,Lpivot)>0._DP ) cl = -cl
       Up = U(1,Lpivot) - cl
       U(1,Lpivot) = cl
       !        ****** APPLY THE TRANSFORMATION  I+U*(U**T)/B  TO C. ******
       !
-    ELSEIF( cl<=0.0D0 ) THEN
+    ELSEIF( cl<=0._DP ) THEN
       RETURN
       !     ......EXIT
     END IF
@@ -91,7 +91,7 @@ SUBROUTINE DH12(Mode,Lpivot,L1,M,U,Iue,Up,C,Ice,Icv,Ncv)
       b = Up*U(1,Lpivot)
       !        B  MUST BE NONPOSITIVE HERE.  IF B = 0., RETURN.
       !
-      IF( b<0.0D0 ) THEN
+      IF( b<0._DP ) THEN
         b = one/b
         mml1p2 = M - L1 + 2
         IF( mml1p2<=20 ) THEN
@@ -106,7 +106,7 @@ SUBROUTINE DH12(Mode,Lpivot,L1,M,U,Iue,Up,C,Ice,Icv,Ncv)
               sm = sm + C(i3)*U(1,i)
               i3 = i3 + Ice
             END DO
-            IF( sm/=0.0D0 ) THEN
+            IF( sm/=0._DP ) THEN
               sm = sm*b
               C(i2) = C(i2) + sm*Up
               DO i = L1, M

@@ -33,8 +33,8 @@ SUBROUTINE DX4(U,Idmn,I,J,Uxxx,Uxxxx)
     !
     !     COMPUTE PARTIAL DERIVATIVE APPROXIMATIONS ON THE INTERIOR
     !
-    Uxxx = (-U(I-2,J)+2.0*U(I-1,J)-2.0*U(I+1,J)+U(I+2,J))/tdlx3_com
-    Uxxxx = (U(I-2,J)-4.0*U(I-1,J)+6.0*U(I,J)-4.0*U(I+1,J)+U(I+2,J))/dlx4_com
+    Uxxx = (-U(I-2,J)+2._SP*U(I-1,J)-2._SP*U(I+1,J)+U(I+2,J))/tdlx3_com
+    Uxxxx = (U(I-2,J)-4._SP*U(I-1,J)+6._SP*U(I,J)-4._SP*U(I+1,J)+U(I+2,J))/dlx4_com
     RETURN
   ELSE
     IF( I/=1 ) THEN
@@ -46,12 +46,12 @@ SUBROUTINE DX4(U,Idmn,I,J,Uxxx,Uxxxx)
           !
           !     PERIODIC AT X=A+DLX
           !
-          Uxxx = (-U(k_com-1,J)+2.0*U(1,J)-2.0*U(3,J)+U(4,J))/(tdlx3_com)
-          Uxxxx = (U(k_com-1,J)-4.0*U(1,J)+6.0*U(2,J)-4.0*U(3,J)+U(4,J))/dlx4_com
+          Uxxx = (-U(k_com-1,J)+2._SP*U(1,J)-2._SP*U(3,J)+U(4,J))/(tdlx3_com)
+          Uxxxx = (U(k_com-1,J)-4._SP*U(1,J)+6._SP*U(2,J)-4._SP*U(3,J)+U(4,J))/dlx4_com
           RETURN
         ELSE
-          Uxxx = (-3.0*U(1,J)+10.0*U(2,J)-12.0*U(3,J)+6.0*U(4,J)-U(5,J))/tdlx3_com
-          Uxxxx = (2.0*U(1,J)-9.0*U(2,J)+16.0*U(3,J)-14.0*U(4,J)+6.0*U(5,J)&
+          Uxxx = (-3._SP*U(1,J)+10._SP*U(2,J)-12._SP*U(3,J)+6._SP*U(4,J)-U(5,J))/tdlx3_com
+          Uxxxx = (2._SP*U(1,J)-9._SP*U(2,J)+16._SP*U(3,J)-14._SP*U(4,J)+6._SP*U(5,J)&
             -U(6,J))/dlx4_com
           RETURN
         END IF
@@ -63,24 +63,24 @@ SUBROUTINE DX4(U,Idmn,I,J,Uxxx,Uxxxx)
           !
           !     PERIODIC AT X=B-DLX
           !
-          Uxxx = (-U(k_com-3,J)+2.0*U(k_com-2,J)-2.0*U(1,J)+U(2,J))/tdlx3_com
-          Uxxxx = (U(k_com-3,J)-4.0*U(k_com-2,J)+6.0*U(k_com-1,J)-4.0*U(1,J)+U(2,J))/dlx4_com
+          Uxxx = (-U(k_com-3,J)+2._SP*U(k_com-2,J)-2._SP*U(1,J)+U(2,J))/tdlx3_com
+          Uxxxx = (U(k_com-3,J)-4._SP*U(k_com-2,J)+6._SP*U(k_com-1,J)-4._SP*U(1,J)+U(2,J))/dlx4_com
           RETURN
         ELSE
-          Uxxx = (U(k_com-4,J)-6.0*U(k_com-3,J)+12.0*U(k_com-2,J)-10.0*U(k_com-1,J)&
-            +3.0*U(k_com,J))/tdlx3_com
-          Uxxxx = (-U(k_com-5,J)+6.0*U(k_com-4,J)-14.0*U(k_com-3,J)+16.0*U(k_com-2,J)&
-            -9.0*U(k_com-1,J)+2.0*U(k_com,J))/dlx4_com
+          Uxxx = (U(k_com-4,J)-6._SP*U(k_com-3,J)+12._SP*U(k_com-2,J)-10._SP*U(k_com-1,J)&
+            +3._SP*U(k_com,J))/tdlx3_com
+          Uxxxx = (-U(k_com-5,J)+6._SP*U(k_com-4,J)-14._SP*U(k_com-3,J)+16._SP*U(k_com-2,J)&
+            -9._SP*U(k_com-1,J)+2._SP*U(k_com,J))/dlx4_com
           RETURN
         END IF
       ELSEIF( I==k_com ) THEN
         !
         !     COMPUTE PARTIAL DERIVATIVE APPROXIMATIONS AT X=B
         !
-        Uxxx = -(3.0*U(k_com-4,J)-14.0*U(k_com-3,J)+24.0*U(k_com-2,J)-18.0*U(k_com-1,J)&
-          +5.0*U(k_com,J))/tdlx3_com
-        Uxxxx = (-2.0*U(k_com-5,J)+11.0*U(k_com-4,J)-24.0*U(k_com-3,J)+26.0*U(k_com-2,J)&
-          -14.0*U(k_com-1,J)+3.0*U(k_com,J))/dlx4_com
+        Uxxx = -(3._SP*U(k_com-4,J)-14._SP*U(k_com-3,J)+24._SP*U(k_com-2,J)-18._SP*U(k_com-1,J)&
+          +5._SP*U(k_com,J))/tdlx3_com
+        Uxxxx = (-2._SP*U(k_com-5,J)+11._SP*U(k_com-4,J)-24._SP*U(k_com-3,J)+26._SP*U(k_com-2,J)&
+          -14._SP*U(k_com-1,J)+3._SP*U(k_com,J))/dlx4_com
         RETURN
       END IF
     END IF
@@ -88,16 +88,16 @@ SUBROUTINE DX4(U,Idmn,I,J,Uxxx,Uxxxx)
     !     COMPUTE PARTIAL DERIVATIVE APPROXIMATIONS AT X=A
     !
     IF( kswx_com/=1 ) THEN
-      Uxxx = (-5.0*U(1,J)+18.0*U(2,J)-24.0*U(3,J)+14.0*U(4,J)-3.0*U(5,J))/tdlx3_com
-      Uxxxx = (3.0*U(1,J)-14.0*U(2,J)+26.0*U(3,J)-24.0*U(4,J)+11.0*U(5,J)&
-        -2.0*U(6,J))/dlx4_com
+      Uxxx = (-5._SP*U(1,J)+18._SP*U(2,J)-24._SP*U(3,J)+14._SP*U(4,J)-3._SP*U(5,J))/tdlx3_com
+      Uxxxx = (3._SP*U(1,J)-14._SP*U(2,J)+26._SP*U(3,J)-24._SP*U(4,J)+11._SP*U(5,J)&
+        -2._SP*U(6,J))/dlx4_com
       RETURN
     END IF
   END IF
   !
   !     PERIODIC AT X=A
   !
-  Uxxx = (-U(k_com-2,J)+2.0*U(k_com-1,J)-2.0*U(2,J)+U(3,J))/(tdlx3_com)
-  Uxxxx = (U(k_com-2,J)-4.0*U(k_com-1,J)+6.0*U(1,J)-4.0*U(2,J)+U(3,J))/dlx4_com
+  Uxxx = (-U(k_com-2,J)+2._SP*U(k_com-1,J)-2._SP*U(2,J)+U(3,J))/(tdlx3_com)
+  Uxxxx = (U(k_com-2,J)-4._SP*U(k_com-1,J)+6._SP*U(1,J)-4._SP*U(2,J)+U(3,J))/dlx4_com
   RETURN
 END SUBROUTINE DX4

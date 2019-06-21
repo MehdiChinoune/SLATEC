@@ -121,8 +121,8 @@ SUBROUTINE EZFFTB(N,R,Azero,A,B,Wsave)
   ELSE
     ns2 = (N-1)/2
     DO i = 1, ns2
-      R(2*i) = .5*A(i)
-      R(2*i+1) = -.5*B(i)
+      R(2*i) = 0.5_SP*A(i)
+      R(2*i+1) = -0.5_SP*B(i)
     END DO
     R(1) = Azero
     IF( MOD(N,2)==0 ) R(N) = A(ns2+1)

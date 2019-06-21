@@ -94,6 +94,6 @@ SUBROUTINE CFFTB(N,C,Wsave)
   rc = [ ( [REAL(C(i)), AIMAG(C(i))], i=1,N ) ]
   ifac = INT( Wsave(4*N+1:4*N+15) )
   CALL CFFTB1(N,rc,Wsave,Wsave(2*N+1),ifac)
-  C(1:N) = [ ( CMPLX(rc(i),rc(i+1)), i=1,2*N-1,2 ) ]
+  C(1:N) = [ ( CMPLX(rc(i),rc(i+1),SP), i=1,2*N-1,2 ) ]
   Wsave(4*N+1:4*N+15) = ifac
 END SUBROUTINE CFFTB

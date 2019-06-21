@@ -167,15 +167,15 @@ SUBROUTINE CBESH(Z,Fnu,Kode,M,N,Cy,Nz,Ierr)
   COMPLEX(SP) :: zn, zt, csgn
   REAL(SP) :: aa, alim, aln, arg, az, cpn, dig, elim, fmm, fn, fnul, rhpi, rl, &
     r1m5, sgn, spn, tol, ufl, xn, xx, yn, yy, bb, ascle, rtol, atol
-  REAL(SP), PARAMETER :: hpi = 1.57079632679489662E0
+  REAL(SP), PARAMETER :: hpi = 1.57079632679489662_SP
   !
   !* FIRST EXECUTABLE STATEMENT  CBESH
   Nz = 0
   xx = REAL(Z)
   yy = AIMAG(Z)
   Ierr = 0
-  IF( xx==0.0E0 .AND. yy==0.0E0 ) Ierr = 1
-  IF( Fnu<0.0E0 ) Ierr = 1
+  IF( xx==0._SP .AND. yy==0._SP ) Ierr = 1
+  IF( Fnu<0._SP ) Ierr = 1
   IF( M<1 .OR. M>2 ) Ierr = 1
   IF( Kode<1 .OR. Kode>2 ) Ierr = 1
   IF( N<1 ) Ierr = 1
@@ -192,31 +192,31 @@ SUBROUTINE CBESH(Z,Fnu,Kode,M,N,Cy,Nz,Ierr)
   !     DIG = NUMBER OF BASE 10 DIGITS IN TOL = 10**(-DIG).
   !     FNUL IS THE LOWER BOUNDARY OF THE ASYMPTOTIC SERIES FOR LARGE FNU
   !-----------------------------------------------------------------------
-  tol = MAX(R1MACH(4),1.0E-18)
+  tol = MAX(R1MACH(4),1.0E-18_SP)
   k1 = I1MACH(12)
   k2 = I1MACH(13)
   r1m5 = R1MACH(5)
   k = MIN(ABS(k1),ABS(k2))
-  elim = 2.303E0*(k*r1m5-3.0E0)
+  elim = 2.303_SP*(k*r1m5-3._SP)
   k1 = I1MACH(11) - 1
   aa = r1m5*k1
-  dig = MIN(aa,18.0E0)
-  aa = aa*2.303E0
-  alim = elim + MAX(-aa,-41.45E0)
-  fnul = 10.0E0 + 6.0E0*(dig-3.0E0)
-  rl = 1.2E0*dig + 3.0E0
+  dig = MIN(aa,18._SP)
+  aa = aa*2.303_SP
+  alim = elim + MAX(-aa,-41.45E0_SP)
+  fnul = 10._SP + 6._SP*(dig-3._SP)
+  rl = 1.2_SP*dig + 3._SP
   fn = Fnu + (nn-1)
   mm = 3 - M - M
   fmm = mm
-  zn = Z*CMPLX(0.0E0,-fmm)
+  zn = Z*CMPLX(0._SP,-fmm,SP)
   xn = REAL(zn)
   yn = AIMAG(zn)
   az = ABS(Z)
   !-----------------------------------------------------------------------
   !     TEST FOR RANGE
   !-----------------------------------------------------------------------
-  aa = 0.5E0/tol
-  bb = I1MACH(9)*0.5E0
+  aa = 0.5_SP/tol
+  bb = I1MACH(9)*0.5_SP
   aa = MIN(aa,bb)
   IF( az>aa ) GOTO 300
   IF( fn>aa ) GOTO 300
@@ -226,23 +226,23 @@ SUBROUTINE CBESH(Z,Fnu,Kode,M,N,Cy,Nz,Ierr)
   !-----------------------------------------------------------------------
   !     OVERFLOW TEST ON THE LAST MEMBER OF THE SEQUENCE
   !-----------------------------------------------------------------------
-  ufl = R1MACH(1)*1.0E+3
+  ufl = R1MACH(1)*1.E+3_SP
   IF( az>=ufl ) THEN
     IF( Fnu>fnul ) THEN
       !-----------------------------------------------------------------------
       !     UNIFORM ASYMPTOTIC EXPANSIONS FOR FNU>FNUL
       !-----------------------------------------------------------------------
       mr = 0
-      IF( .NOT. ((xn>=0.0E0) .AND. (xn/=0.0E0 .OR. yn>=0.0E0 .OR. M/=2)) ) THEN
+      IF( .NOT. ((xn>=0._SP) .AND. (xn/=0._SP .OR. yn>=0._SP .OR. M/=2)) ) THEN
         mr = -mm
-        IF( xn==0.0E0 .AND. yn<0.0E0 ) zn = -zn
+        IF( xn==0._SP .AND. yn<0._SP ) zn = -zn
       END IF
       CALL CBUNK(zn,Fnu,Kode,mr,nn,Cy,nw,tol,elim,alim)
       IF( nw<0 ) GOTO 200
       Nz = Nz + nw
     ELSE
-      IF( fn>1.0E0 ) THEN
-        IF( fn>2.0E0 ) THEN
+      IF( fn>1._SP ) THEN
+        IF( fn>2._SP ) THEN
           CALL CUOIK(zn,Fnu,Kode,2,nn,Cy,nuf,tol,elim,alim)
           IF( nuf<0 ) GOTO 100
           Nz = Nz + nuf
@@ -252,16 +252,16 @@ SUBROUTINE CBESH(Z,Fnu,Kode,M,N,Cy,Nz,Ierr)
           !     IF NUF=NN, THEN CY(I)=CZERO FOR ALL I
           !-----------------------------------------------------------------------
           IF( nn==0 ) THEN
-            IF( xn<0.0E0 ) GOTO 100
+            IF( xn<0._SP ) GOTO 100
             RETURN
           END IF
         ELSEIF( az<=tol ) THEN
-          arg = 0.5E0*az
+          arg = 0.5_SP*az
           aln = -fn*LOG(arg)
           IF( aln>elim ) GOTO 100
         END IF
       END IF
-      IF( (xn<0.0E0) .OR. (xn==0.0E0 .AND. yn<0.0E0 .AND. M==2) ) THEN
+      IF( (xn<0._SP) .OR. (xn==0._SP .AND. yn<0._SP .AND. M==2) ) THEN
         !-----------------------------------------------------------------------
         !     LEFT HALF PLANE COMPUTATION
         !-----------------------------------------------------------------------
@@ -271,7 +271,7 @@ SUBROUTINE CBESH(Z,Fnu,Kode,M,N,Cy,Nz,Ierr)
         Nz = nw
       ELSE
         !-----------------------------------------------------------------------
-        !     RIGHT HALF PLANE COMPUTATION, XN>=0. .AND. (XN/=0.  .OR. 
+        !     RIGHT HALF PLANE COMPUTATION, XN>=0. .AND. (XN/=0.  .OR.
         !     YN>=0. .OR. M=1)
         !-----------------------------------------------------------------------
         CALL CBKNU(zn,Fnu,Kode,nn,Cy,Nz,tol,elim,alim)
@@ -291,15 +291,15 @@ SUBROUTINE CBESH(Z,Fnu,Kode,M,N,Cy,Nz,Ierr)
     inuh = inu/2
     ir = inu - 2*inuh
     arg = (Fnu-(inu-ir))*sgn
-    rhpi = 1.0E0/sgn
+    rhpi = 1._SP/sgn
     cpn = rhpi*COS(arg)
     spn = rhpi*SIN(arg)
     !     ZN = CMPLX(-SPN,CPN)
-    csgn = CMPLX(-spn,cpn)
+    csgn = CMPLX(-spn,cpn,SP)
     !     IF(MOD(INUH,2)=1) ZN = -ZN
     IF( MOD(inuh,2)==1 ) csgn = -csgn
-    zt = CMPLX(0.0E0,-fmm)
-    rtol = 1.0E0/tol
+    zt = CMPLX(0._SP,-fmm,SP)
+    rtol = 1._SP/tol
     ascle = ufl*rtol
     DO i = 1, nn
       !       CY(I) = CY(I)*ZN
@@ -307,13 +307,13 @@ SUBROUTINE CBESH(Z,Fnu,Kode,M,N,Cy,Nz,Ierr)
       zn = Cy(i)
       aa = REAL(zn)
       bb = AIMAG(zn)
-      atol = 1.0E0
+      atol = 1._SP
       IF( MAX(ABS(aa),ABS(bb))<=ascle ) THEN
-        zn = zn*CMPLX(rtol,0.0E0)
+        zn = zn*CMPLX(rtol,0._SP,SP)
         atol = tol
       END IF
       zn = zn*csgn
-      Cy(i) = zn*CMPLX(atol,0.0E0)
+      Cy(i) = zn*CMPLX(atol,0._SP,SP)
       csgn = csgn*zt
     END DO
     RETURN

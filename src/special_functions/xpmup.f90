@@ -36,14 +36,14 @@ SUBROUTINE XPMUP(Nu1,Nu2,Mu1,Mu2,Pqa,Ipqa,Ierror)
   dmu = mu
   n = INT(Nu2-Nu1+.1) + (Mu2-Mu1) + 1
   j = 1
-  IF( MOD(nu,1.)==0. ) THEN
+  IF( MOD(nu,1._SP)==0. ) THEN
     DO WHILE( dmu>=nu+1. )
       Pqa(j) = 0.
       Ipqa(j) = 0
       j = j + 1
       IF( j>n ) RETURN
       !        INCREMENT EITHER MU OR NU AS APPROPRIATE.
-      IF( Nu2-Nu1>.5 ) nu = nu + 1.
+      IF( Nu2-Nu1>.5_SP ) nu = nu + 1._SP
       IF( Mu2>Mu1 ) mu = mu + 1
     END DO
   END IF
@@ -51,7 +51,7 @@ SUBROUTINE XPMUP(Nu1,Nu2,Mu1,Mu2,Pqa,Ipqa,Ierror)
   !        TRANSFORM P(-MU,NU,X) TO P(MU,NU,X) USING
   !        P(MU,NU,X)=(NU-MU+1)*(NU-MU+2)*...*(NU+MU)*P(-MU,NU,X)*(-1)**MU
   !
-  prod = 1.
+  prod = 1._SP
   iprod = 0
   k = 2*mu
   IF( k/=0 ) THEN
@@ -68,17 +68,17 @@ SUBROUTINE XPMUP(Nu1,Nu2,Mu1,Mu2,Pqa,Ipqa,Ierror)
       CALL XADJ(Pqa(i),Ipqa(i),Ierror)
       IF( Ierror/=0 ) RETURN
     END IF
-    IF( Nu2-Nu1>.5 ) THEN
-      prod = prod*(-dmu-nu-1.)/(dmu-nu-1.)
+    IF( Nu2-Nu1>.5_SP ) THEN
+      prod = prod*(-dmu-nu-1._SP)/(dmu-nu-1._SP)
       CALL XADJ(prod,iprod,Ierror)
       IF( Ierror/=0 ) RETURN
-      nu = nu + 1.
+      nu = nu + 1._SP
     ELSE
-      prod = (dmu-nu)*prod*(-dmu-nu-1.)
+      prod = (dmu-nu)*prod*(-dmu-nu-1._SP)
       CALL XADJ(prod,iprod,Ierror)
       IF( Ierror/=0 ) RETURN
       mu = mu + 1
-      dmu = dmu + 1.
+      dmu = dmu + 1._SP
     END IF
   END DO
 END SUBROUTINE XPMUP

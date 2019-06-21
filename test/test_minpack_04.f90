@@ -121,12 +121,12 @@ CONTAINS
     !     Test DPOLFT
     !     Input EPS is negative - specified level
     !
-    w(1) = -1.0D0
-    EPS = -0.01D0
+    w(1) = -1._DP
+    EPS = -0.01_DP
     SVEps = EPS
     maxord = 8
     NORdp = 4
-    RP = 625.0D0
+    RP = 625._DP
     IERp = 1
     CALL DPOLFT(m,x,y,w,maxord,NORd,EPS,R,IERr,a)
     !
@@ -153,7 +153,7 @@ CONTAINS
     !
     !     Input EPS is negative - computed level
     !
-    EPS = -1.0D0
+    EPS = -1._DP
     SVEps = EPS
     CALL DPOLFT(m,x,y,w,maxord,NORd,EPS,R,IERr,a)
     !
@@ -180,8 +180,8 @@ CONTAINS
     !
     !     Input EPS is zero
     !
-    w(1) = -1.0D0
-    EPS = 0.0D0
+    w(1) = -1._DP
+    EPS = 0._DP
     SVEps = EPS
     NORdp = 5
     maxord = 5
@@ -212,7 +212,7 @@ CONTAINS
     !
     IERp = 1
     NORdp = 4
-    EPS = 75.0D0*D1MACH(4)
+    EPS = 75._DP*D1MACH(4)
     SVEps = EPS
     CALL DPOLFT(m,x,y,w,maxord,NORd,EPS,R,IERr,a)
     !
@@ -285,10 +285,10 @@ CONTAINS
     !     MAXORD too small to meet RMS error
     !
     m = 11
-    w(1) = -1.0D0
-    EPS = 5.0D0*D1MACH(4)
+    w(1) = -1._DP
+    EPS = 5._DP*D1MACH(4)
     SVEps = EPS
-    RP = 553.0D0
+    RP = 553._DP
     maxord = 2
     IERp = 3
     NORdp = 2
@@ -319,8 +319,8 @@ CONTAINS
     !
     NORdp = 4
     IERp = 4
-    RP = 625.0D0
-    EPS = -0.01D0
+    RP = 625._DP
+    EPS = -0.01_DP
     SVEps = EPS
     maxord = 5
     CALL DPOLFT(m,x,y,w,maxord,NORd,EPS,R,IERr,a)
@@ -349,15 +349,15 @@ CONTAINS
     !     Test DPCOEF
     !
     maxord = 6
-    EPS = 0.0D0
+    EPS = 0._DP
     SVEps = EPS
-    y(6) = 1.0D0
+    y(6) = 1._DP
     DO i = 1, m
-      w(i) = 1.0D0/(y(i)**2)
+      w(i) = 1._DP/(y(i)**2)
     END DO
-    y(6) = 0.0D0
+    y(6) = 0._DP
     CALL DPOLFT(m,x,y,w,maxord,NORd,EPS,R,IERr,a)
-    CALL DPCOEF(4,5.0D0,tc,a)
+    CALL DPCOEF(4,5._DP,tc,a)
     !
     !     See if test passed
     !
@@ -486,24 +486,24 @@ CONTAINS
     !
     Ipass = 1
     infos = 1
-    fnorms = 1.1151779D+01
+    fnorms = 1.1151779E+01_DP
     m = 10
     n = 2
     lwa = 40
     ldfjac = 10
     nprint = -1
     iflag = 1
-    zero = 0.0D0
-    one = 1.0D0
-    tol = MAX(SQRT(40.0D0*D1MACH(4)),1.0D-12)
+    zero = 0._DP
+    one = 1._DP
+    tol = MAX(SQRT(40._DP*D1MACH(4)),1.E-12_DP)
     tol2 = SQRT(tol)
     !
     !     OPTION=2, the full Jacobian is stored and the user provides the
     !     Jacobian.
     !
     iopt = 2
-    x(1) = 3.0D-1
-    x(2) = 4.0D-1
+    x(1) = 3.0E-1_DP
+    x(2) = 4.0E-1_DP
     CALL DNLS1E(DFCN2,iopt,m,n,x,fvec,tol,nprint,info,iw,wa,lwa)
     fnorm = DENORM(m,fvec)
     IF( info==infos .AND. ABS(fnorm-fnorms)/fnorms<=tol2 ) THEN
@@ -557,8 +557,8 @@ CONTAINS
     !     the Jacobian.
     !
     iopt = 1
-    x(1) = 3.0D-1
-    x(2) = 4.0D-1
+    x(1) = 3.0E-1_DP
+    x(2) = 4.0E-1_DP
     CALL DNLS1E(DFCN1,iopt,m,n,x,fvec,tol,nprint,info,iw,wa,lwa)
     fnorm = DENORM(m,fvec)
     IF( info==infos .AND. ABS(fnorm-fnorms)/fnorms<=tol2 ) THEN
@@ -613,8 +613,8 @@ CONTAINS
     !     the Jacobian one row at a time.
     !
     iopt = 3
-    x(1) = 3.0D-1
-    x(2) = 4.0D-1
+    x(1) = 3.0E-1_DP
+    x(2) = 4.0E-1_DP
     CALL DNLS1E(DFCN3,iopt,m,n,x,fvec,tol,nprint,info,iw,wa,lwa)
     fnorm = DENORM(m,fvec)
     IF( info==infos .AND. ABS(fnorm-fnorms)/fnorms<=tol2 ) THEN
@@ -680,8 +680,8 @@ CONTAINS
     !
     lwa = 35
     iopt = 2
-    x(1) = 3.0D-1
-    x(2) = 4.0D-1
+    x(1) = 3.0E-1_DP
+    x(2) = 4.0E-1_DP
     CALL DNLS1E(DFCN2,iopt,m,n,x,fvec,tol,nprint,info,iw,wa,lwa)
     IF( info/=0 .OR. NUMXER(nerr)/=2 ) fatal = .TRUE.
     !
@@ -781,34 +781,34 @@ CONTAINS
     !     .. Data statements ..
     !
     INTEGER, PARAMETER :: ndata = 9, nord = 4, nbkpt = 13, last = 10
-    REAL(DP), PARAMETER :: xdata(9) = [ 0.15D0, 0.27D0, 0.33D0, 0.40D0, 0.43D0, &
-      0.47D0, 0.53D0, 0.58D0, 0.63D0 ]
-    REAL(DP), PARAMETER :: ydata(9) = [ 0.025D0, 0.05D0, 0.13D0, 0.27D0, 0.37D0, &
-      0.47D0, 0.64D0, 0.77D0, 0.87D0 ]
-    REAL(DP), PARAMETER :: sddata(9)  = 0.015D0
-    REAL(DP), PARAMETER :: bkpt(13) = [ -0.6D0, -0.4D0, -0.2D0, 0.0D0, 0.2D0, &
-      0.4D0, 0.6D0, 0.8D0, 0.9D0, 1.0D0, 1.1D0, 1.2D0, 1.3D0 ]
+    REAL(DP), PARAMETER :: xdata(9) = [ 0.15_DP, 0.27_DP, 0.33_DP, 0.40_DP, 0.43_DP, &
+      0.47_DP, 0.53_DP, 0.58_DP, 0.63_DP ]
+    REAL(DP), PARAMETER :: ydata(9) = [ 0.025_DP, 0.05_DP, 0.13_DP, 0.27_DP, 0.37_DP, &
+      0.47_DP, 0.64_DP, 0.77_DP, 0.87_DP ]
+    REAL(DP), PARAMETER :: sddata(9)  = 0.015_DP
+    REAL(DP), PARAMETER :: bkpt(13) = [ -0.6_DP, -0.4_DP, -0.2_DP, 0._DP, 0.2_DP, &
+      0.4_DP, 0.6_DP, 0.8_DP, 0.9_DP, 1._DP, 1.1_DP, 1.2_DP, 1.3_DP ]
     !
     !     Store the data to be used to check the accuracy of the computed
     !     results.  See SAND78-1291, p.26.
     !
-    REAL(DP), PARAMETER :: coefck(9) = [ 1.186380846D-13, -2.826166426D-14, &
-      -4.333929094D-15, 1.722113311D-01, 9.421965984D-01, 9.684708719D-01, &
-      9.894902905D-01,  1.005254855D+00, 9.894902905D-01 ]
-    REAL(DP), PARAMETER :: check(51) = [ 2.095830752D-16, 2.870188850D-05, &
-      2.296151081D-04, 7.749509897D-04, 1.836920865D-03, 3.587736064D-03, &
-      6.199607918D-03, 9.844747759D-03, 1.469536692D-02, 2.092367672D-02, &
-      2.870188851D-02, 3.824443882D-02, 4.993466504D-02, 6.419812979D-02, &
-      8.146039566D-02, 1.021470253D-01, 1.266835812D-01, 1.554956261D-01, &
-      1.890087225D-01, 2.276484331D-01, 2.718403204D-01, 3.217163150D-01, &
-      3.762338189D-01, 4.340566020D-01, 4.938484342D-01, 5.542730855D-01, &
-      6.139943258D-01, 6.716759250D-01, 7.259816530D-01, 7.755752797D-01, &
-      8.191205752D-01, 8.556270903D-01, 8.854875002D-01, 9.094402609D-01, &
-      9.282238286D-01, 9.425766596D-01, 9.532372098D-01, 9.609439355D-01, &
-      9.664352927D-01, 9.704497377D-01, 9.737257265D-01, 9.768786393D-01, &
-      9.800315521D-01, 9.831844649D-01, 9.863373777D-01, 9.894902905D-01, &
-      9.926011645D-01, 9.954598055D-01, 9.978139804D-01, 9.994114563D-01, &
-      1.000000000D+00 ]
+    REAL(DP), PARAMETER :: coefck(9) = [ 1.186380846E-13_DP, -2.826166426E-14_DP, &
+      -4.333929094E-15_DP, 1.722113311E-01_DP, 9.421965984E-01_DP, 9.684708719E-01_DP, &
+      9.894902905E-01_DP,  1.005254855E+00_DP, 9.894902905E-01_DP ]
+    REAL(DP), PARAMETER :: check(51) = [ 2.095830752E-16_DP, 2.870188850E-05_DP, &
+      2.296151081E-04_DP, 7.749509897E-04_DP, 1.836920865E-03_DP, 3.587736064E-03_DP, &
+      6.199607918E-03_DP, 9.844747759E-03_DP, 1.469536692E-02_DP, 2.092367672E-02_DP, &
+      2.870188851E-02_DP, 3.824443882E-02_DP, 4.993466504E-02_DP, 6.419812979E-02_DP, &
+      8.146039566E-02_DP, 1.021470253E-01_DP, 1.266835812E-01_DP, 1.554956261E-01_DP, &
+      1.890087225E-01_DP, 2.276484331E-01_DP, 2.718403204E-01_DP, 3.217163150E-01_DP, &
+      3.762338189E-01_DP, 4.340566020E-01_DP, 4.938484342E-01_DP, 5.542730855E-01_DP, &
+      6.139943258E-01_DP, 6.716759250E-01_DP, 7.259816530E-01_DP, 7.755752797E-01_DP, &
+      8.191205752E-01_DP, 8.556270903E-01_DP, 8.854875002E-01_DP, 9.094402609E-01_DP, &
+      9.282238286E-01_DP, 9.425766596E-01_DP, 9.532372098E-01_DP, 9.609439355E-01_DP, &
+      9.664352927E-01_DP, 9.704497377E-01_DP, 9.737257265E-01_DP, 9.768786393E-01_DP, &
+      9.800315521E-01_DP, 9.831844649E-01_DP, 9.863373777E-01_DP, 9.894902905E-01_DP, &
+      9.926011645E-01_DP, 9.954598055E-01_DP, 9.978139804E-01_DP, 9.994114563E-01_DP, &
+      1.000000000E+00_DP ]
     !* FIRST EXECUTABLE STATEMENT  DFCQX
     IF( Kprint>=2 ) WRITE (Lun,99001)
     !
@@ -906,8 +906,8 @@ CONTAINS
     !
     !     Check coefficients.
     !
-    tol = MAX(7.0D0*SQRT(D1MACH(4)),1.0D-8)
-    diff = 0.0D0
+    tol = MAX(7._DP*SQRT(D1MACH(4)),1.E-8_DP)
+    diff = 0._DP
     DO i = 1, ndata
       diff = MAX(diff,ABS(coeff(i)-coefck(i)))
     END DO
@@ -949,7 +949,7 @@ CONTAINS
       v(i,5) = SQRT(DCV(xval,ndata,nconst,nord,nbkpt,bkpt,w))
     END DO
     !
-    diff = 0.0D0
+    diff = 0._DP
     DO i = 1, nval
       diff = MAX(diff,ABS(v(i,2)-check(i)))
     END DO
@@ -1085,7 +1085,7 @@ CONTAINS
     !     .. Intrinsic Functions ..
     INTRINSIC EXP
     !     .. Data statements ..
-    REAL(DP), PARAMETER :: two = 2.0D0
+    REAL(DP), PARAMETER :: two = 2._DP
     !* FIRST EXECUTABLE STATEMENT  DFCN1
     IF( Iflag/=1 ) RETURN
     DO i = 1, M
@@ -1131,7 +1131,7 @@ CONTAINS
     !     .. Intrinsic Functions ..
     INTRINSIC EXP
     !     .. Data statements ..
-    REAL(DP), PARAMETER :: two = 2.0D0
+    REAL(DP), PARAMETER :: two = 2._DP
     !* FIRST EXECUTABLE STATEMENT  DFCN2
     IF( Iflag==0 ) RETURN
     !
@@ -1195,7 +1195,7 @@ CONTAINS
     !     .. Intrinsic Functions ..
     INTRINSIC EXP
     !     .. Data statements ..
-    REAL(DP), PARAMETER :: two = 2.0D0
+    REAL(DP), PARAMETER :: two = 2._DP
     !* FIRST EXECUTABLE STATEMENT  DFCN3
     IF( Iflag==0 ) RETURN
     !

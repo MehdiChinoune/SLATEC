@@ -79,7 +79,7 @@ REAL(DP) FUNCTION DQDOTI(N,Db,Qc,Dx,Incx,Dy,Incy)
   !* FIRST EXECUTABLE STATEMENT  DQDOTI
   IF( i1==0 ) CALL MPBLAS(i1)
   Qc(1) = 0
-  IF( Db/=0.D0 ) THEN
+  IF( Db/=0._DP ) THEN
     CALL MPCDM(Db,qx)
     CALL MPADD(Qc,qx,Qc)
   END IF

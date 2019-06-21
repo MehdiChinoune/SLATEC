@@ -39,24 +39,24 @@ SUBROUTINE MPCMD(X,Dz)
   REAL(DP) :: db, dz2
   !* FIRST EXECUTABLE STATEMENT  MPCMD
   CALL MPCHK(1,4)
-  Dz = 0D0
+  Dz = 0_DP
   IF( X(1)==0 ) RETURN
   db = REAL( b_com, DP )
   DO i = 1, t_com
     Dz = db*Dz + REAL( X(i+2), DP )
     tm = i
     ! CHECK IF FULL DOUBLE-PRECISION ACCURACY ATTAINED
-    dz2 = Dz + 1D0
+    dz2 = Dz + 1_DP
     ! TEST BELOW NOT ALWAYS EQUIVALENT TO - IF(DZ2<=DZ) GO TO 20,
     ! FOR EXAMPLE ON CYBER 76.
-    IF( (dz2-Dz)<=0D0 ) EXIT
+    IF( (dz2-Dz)<=0_DP ) EXIT
   END DO
   ! NOW ALLOW FOR EXPONENT
   Dz = Dz*(db**(X(2)-tm))
   ! CHECK REASONABLENESS OF RESULT.
-  IF( Dz>0D0 ) THEN
+  IF( Dz>0_DP ) THEN
     ! LHS SHOULD BE <= 0.5 BUT ALLOW FOR SOME ERROR IN LOG
-    IF( ABS(REAL(X(2), DP)-(LOG(Dz)/LOG(REAL(b_com, DP))+0.5D0))<=0.6D0 ) THEN
+    IF( ABS(REAL(X(2), DP)-(LOG(Dz)/LOG(REAL(b_com, DP))+0.5D0))<=0.6_DP ) THEN
       IF( X(1)<0 ) Dz = -Dz
       RETURN
     END IF

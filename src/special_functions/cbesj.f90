@@ -160,12 +160,12 @@ SUBROUTINE CBESJ(Z,Fnu,Kode,N,Cy,Nz,Ierr)
   COMPLEX(SP) :: ci, csgn, Cy(N), Z, zn
   REAL(SP) :: aa, alim, arg, dig, elim, Fnu, fnul, rl, r1, r1m5, &
     r2, tol, yy, az, fn, bb, ascle, rtol, atol
-  REAL(SP), PARAMETER :: hpi = 1.57079632679489662E0
+  REAL(SP), PARAMETER :: hpi = 1.57079632679489662_SP
   !
   !* FIRST EXECUTABLE STATEMENT  CBESJ
   Ierr = 0
   Nz = 0
-  IF( Fnu<0.0E0 ) Ierr = 1
+  IF( Fnu<0._SP ) Ierr = 1
   IF( Kode<1 .OR. Kode>2 ) Ierr = 1
   IF( N<1 ) Ierr = 1
   IF( Ierr/=0 ) RETURN
@@ -180,27 +180,27 @@ SUBROUTINE CBESJ(Z,Fnu,Kode,N,Cy,Nz,Ierr)
   !     DIG = NUMBER OF BASE 10 DIGITS IN TOL = 10**(-DIG).
   !     FNUL IS THE LOWER BOUNDARY OF THE ASYMPTOTIC SERIES FOR LARGE FNU.
   !-----------------------------------------------------------------------
-  tol = MAX(R1MACH(4),1.0E-18)
+  tol = MAX(R1MACH(4),1.0E-18_SP)
   k1 = I1MACH(12)
   k2 = I1MACH(13)
   r1m5 = R1MACH(5)
   k = MIN(ABS(k1),ABS(k2))
-  elim = 2.303E0*(k*r1m5-3.0E0)
+  elim = 2.303_SP*(k*r1m5-3._SP)
   k1 = I1MACH(11) - 1
   aa = r1m5*k1
-  dig = MIN(aa,18.0E0)
-  aa = aa*2.303E0
-  alim = elim + MAX(-aa,-41.45E0)
-  rl = 1.2E0*dig + 3.0E0
-  fnul = 10.0E0 + 6.0E0*(dig-3.0E0)
-  ci = CMPLX(0.0E0,1.0E0)
+  dig = MIN(aa,18._SP)
+  aa = aa*2.303_SP
+  alim = elim + MAX(-aa,-41.45E0_SP)
+  rl = 1.2_SP*dig + 3._SP
+  fnul = 10._SP + 6._SP*(dig-3._SP)
+  ci = CMPLX(0._SP,1._SP,SP)
   yy = AIMAG(Z)
   az = ABS(Z)
   !-----------------------------------------------------------------------
   !     TEST FOR RANGE
   !-----------------------------------------------------------------------
-  aa = 0.5E0/tol
-  bb = I1MACH(9)*0.5E0
+  aa = 0.5_SP/tol
+  bb = I1MACH(9)*0.5_SP
   aa = MIN(aa,bb)
   fn = Fnu + (N-1)
   IF( az<=aa ) THEN
@@ -218,13 +218,13 @@ SUBROUTINE CBESJ(Z,Fnu,Kode,N,Cy,Nz,Ierr)
       arg = (Fnu-(inu-ir))*hpi
       r1 = COS(arg)
       r2 = SIN(arg)
-      csgn = CMPLX(r1,r2)
+      csgn = CMPLX(r1,r2,SP)
       IF( MOD(inuh,2)==1 ) csgn = -csgn
       !-----------------------------------------------------------------------
       !     ZN IS IN THE RIGHT HALF PLANE
       !-----------------------------------------------------------------------
       zn = -Z*ci
-      IF( yy<0.0E0 ) THEN
+      IF( yy<0._SP ) THEN
         zn = -zn
         csgn = CONJG(csgn)
         ci = CONJG(ci)
@@ -233,20 +233,20 @@ SUBROUTINE CBESJ(Z,Fnu,Kode,N,Cy,Nz,Ierr)
       IF( Nz>=0 ) THEN
         nl = N - Nz
         IF( nl==0 ) RETURN
-        rtol = 1.0E0/tol
-        ascle = R1MACH(1)*rtol*1.0E+3
+        rtol = 1._SP/tol
+        ascle = R1MACH(1)*rtol*1.E+3_SP
         DO i = 1, nl
           !       CY(I)=CY(I)*CSGN
           zn = Cy(i)
           aa = REAL(zn)
           bb = AIMAG(zn)
-          atol = 1.0E0
+          atol = 1._SP
           IF( MAX(ABS(aa),ABS(bb))<=ascle ) THEN
-            zn = zn*CMPLX(rtol,0.0E0)
+            zn = zn*CMPLX(rtol,0._SP,SP)
             atol = tol
           END IF
           zn = zn*csgn
-          Cy(i) = zn*CMPLX(atol,0.0E0)
+          Cy(i) = zn*CMPLX(atol,0._SP,SP)
           csgn = csgn*ci
         END DO
         RETURN

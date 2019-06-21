@@ -496,14 +496,14 @@ SUBROUTINE SEPELI(Intl,Iorder,A,B,M,Mbdcnd,Bda,Alpha,Bdb,Beta,C,D,N,&
   !
   l = N + 1
   IF( Nbdcnd==0 ) l = N
-  logb2n = INT(LOG(l+0.5)/LOG(2.0)) + 1
+  logb2n = INT(LOG(l+0.5_SP)/LOG(2._SP)) + 1
   ll = 2**(logb2n+1)
   k = M + 1
   l = N + 1
   length = (logb2n-2)*ll + logb2n + MAX(2*l,6*k) + 5
   IF( Nbdcnd==0 ) length = length + 2*l
   Ierror = 11
-  linput = INT(W(1)+0.5)
+  linput = INT(W(1)+0.5_SP)
   loutpt = length + 6*(k+l) + 1
   W(1) = loutpt
   IF( loutpt>linput ) RETURN

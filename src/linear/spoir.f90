@@ -168,7 +168,7 @@ SUBROUTINE SPOIR(A,Lda,N,V,Itask,Ind,Work)
   !     FORM NORM OF X0
   !
   xnorm = SUM( ABS(V) )
-  IF( xnorm==0.0 ) THEN
+  IF( xnorm==0._SP ) THEN
     Ind = 75
     RETURN
   END IF

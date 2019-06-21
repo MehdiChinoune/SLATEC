@@ -52,29 +52,34 @@ CONTAINS
     REAL(SP) :: tol, l1, l2, l3, m1, m2, m3, l1min, l1max, m2min, m2max, &
       diff(NDIM), x, jjval, jmval, thrcof(NDIM), sixcof(NDIM)
     !
-    REAL, PARAMETER :: r3jj(8) = [ 2.78886675511358515993E-1, &
-      -9.53462589245592315447E-2, -6.74199862463242086246E-2, 1.53311035167966641297E-1, &
-      -1.56446554693685969725E-1, 1.09945041215655051079E-1, -5.53623569313171943334E-2, &
-      1.79983545113778583298E-2 ]
+    REAL(SP), PARAMETER :: r3jj(8) = [ 2.78886675511358515993E-1_SP, &
+      -9.53462589245592315447E-2_SP, -6.74199862463242086246E-2_SP, &
+      1.53311035167966641297E-1_SP, -1.56446554693685969725E-1_SP, &
+      1.09945041215655051079E-1_SP, -5.53623569313171943334E-2_SP, &
+      1.79983545113778583298E-2_SP ]
     !
-    REAL, PARAMETER :: r3jm(14) = [ 2.09158973288615242614E-2, &
-      8.53756555321524722127E-2,  9.08295370868692516943E-2, -3.89054377846499391700E-2, &
-      -6.63734970165680635691E-2, 6.49524040528389395031E-2, 2.15894310595403759392E-2, &
-      -7.78912711785239219992E-2, 3.59764371059543401880E-2, 5.47301500021263423079E-2, &
-      -7.59678665956761514629E-2,-2.19224445539892113776E-2, 1.01167744280772202424E-1, &
-      7.34825726244719704696E-2 ]
+    REAL(SP), PARAMETER :: r3jm(14) = [ 2.09158973288615242614E-2_SP, &
+      8.53756555321524722127E-2_SP,  9.08295370868692516943E-2_SP, &
+      -3.89054377846499391700E-2_SP, -6.63734970165680635691E-2_SP, &
+      6.49524040528389395031E-2_SP, 2.15894310595403759392E-2_SP, &
+      -7.78912711785239219992E-2_SP, 3.59764371059543401880E-2_SP, &
+      5.47301500021263423079E-2_SP, -7.59678665956761514629E-2_SP, &
+      -2.19224445539892113776E-2_SP, 1.01167744280772202424E-1_SP, &
+      7.34825726244719704696E-2_SP ]
     !
-    REAL, PARAMETER :: r6j(15) = [ 3.49090513837329977746E-2, &
-      -3.74302503965979160859E-2, 1.89086639095956018415E-2, 7.34244825492864345709E-3, &
-      -2.35893518508179445858E-2, 1.91347695521543652000E-2, 1.28801739772417220844E-3, &
-      -1.93001836629052653977E-2, 1.67730594938288876974E-2, 5.50114727485094871674E-3, &
-      -2.13543979089683097421E-2, 3.46036445143538730828E-3, 2.52095005479558458604E-2, &
-      1.48399056122171330285E-2, 2.70857768063318559724E-3 ]
+    REAL(SP), PARAMETER :: r6j(15) = [ 3.49090513837329977746E-2_SP, &
+      -3.74302503965979160859E-2_SP, 1.89086639095956018415E-2_SP, &
+      7.34244825492864345709E-3_SP, -2.35893518508179445858E-2_SP, &
+      1.91347695521543652000E-2_SP, 1.28801739772417220844E-3_SP, &
+      -1.93001836629052653977E-2_SP, 1.67730594938288876974E-2_SP, &
+      5.50114727485094871674E-3_SP, -2.13543979089683097421E-2_SP, &
+      3.46036445143538730828E-3_SP, 2.52095005479558458604E-2_SP, &
+      1.48399056122171330285E-2_SP, 2.70857768063318559724E-3_SP ]
     !
     !* FIRST EXECUTABLE STATEMENT  QC36J
     !
     ! --- INITIALIZATION OF TESTS
-    tol = 100.0*R1MACH(3)
+    tol = 100._SP*R1MACH(3)
     IF( Kprint>=2 ) THEN
       WRITE (Lun,*) ' THIS IS QC36J, A TEST PROGRAM FOR THE '//&
         'SINGLE PRECISION 3J6J PACKAGE.'
@@ -84,7 +89,7 @@ CONTAINS
     END IF
     !
     ! --- FIND NUMBER OF SIGNIFICANT FIGURES FOR FORMATTING
-    x = 1.0/3.0
+    x = 1._SP/3._SP
     WRITE (string,99001) x
     99001 FORMAT (F35.25)
     DO i = 1, 35
@@ -112,16 +117,16 @@ CONTAINS
     !
     ! --- TEST 1: COMPARE RC3JJ VALUES WITH FORMULA
     ipass1 = 1
-    l2 = 4.5
-    l3 = 3.5
-    m2 = -3.5
-    m3 = 2.5
+    l2 = 4.5_SP
+    l3 = 3.5_SP
+    m2 = -3.5_SP
+    m3 = 2.5_SP
     CALL RC3JJ(l2,l3,m2,m3,l1min,l1max,thrcof,NDIM,ier)
     IF( ier/=0 ) THEN
       ipass1 = 0
     ELSE
       DO indexx = 1, INT(l1max-l1min) + 1
-        m1 = 1.0
+        m1 = 1._SP
         diff(indexx) = ABS(thrcof(indexx)-r3jj(indexx))
         IF( diff(indexx)>ABS(r3jj(indexx))*tol ) ipass1 = 0
       END DO
@@ -158,10 +163,10 @@ CONTAINS
     !
     ! --- TEST 2: COMPARE RC3JM VALUES WITH FORMULA
     ipass2 = 1
-    l1 = 8.0
-    l2 = 7.5
-    l3 = 6.5
-    m1 = 1.0
+    l1 = 8._SP
+    l2 = 7.5_SP
+    l3 = 6.5_SP
+    m1 = 1._SP
     CALL RC3JM(l1,l2,l3,m1,m2min,m2max,thrcof,NDIM,ier)
     IF( ier/=0 ) THEN
       ipass2 = 0
@@ -207,12 +212,12 @@ CONTAINS
     !
     ! --- TEST3: COMPARE COMMON VALUE OF RC3JJ AND RC3JM
     ipass3 = 1
-    l1 = 100.0
-    l2 = 2.0
-    l3 = 100.0
-    m1 = -10.0
-    m2 = 0.0
-    m3 = 10.0
+    l1 = 100._SP
+    l2 = 2._SP
+    l3 = 100._SP
+    m1 = -10._SP
+    m2 = 0._SP
+    m3 = 10._SP
     CALL RC3JJ(l2,l3,m2,m3,l1min,l1max,thrcof,NDIM,ierjj)
     jjval = thrcof(3)
     CALL RC3JM(l1,l2,l3,m1,m2min,m2max,thrcof,NDIM,ierjm)
@@ -221,7 +226,7 @@ CONTAINS
       ipass3 = 0
     ELSE
       diff(1) = ABS(jjval-jmval)
-      IF( diff(1)>0.5*ABS(jjval+jmval)*tol ) ipass3 = 0
+      IF( diff(1)>0.5_SP*ABS(jjval+jmval)*tol ) ipass3 = 0
     END IF
     IF( Kprint>=3 .OR. (Kprint==2 .AND. ipass3==0) ) THEN
       WRITE (Lun,*) ' TEST 3, COMPARE A COMMON VALUE CALCULATED BY ', &
@@ -235,7 +240,7 @@ CONTAINS
       ELSE
         WRITE (Lun,fmt2) 'RC3JJ VALUE =', jjval
         WRITE (Lun,fmt2) 'RC3JM VALUE =', jmval
-        IF( diff(1)>0.5*ABS(jjval+jmval)*tol ) WRITE (Lun,'(1X,A)')&
+        IF( diff(1)>0.5_SP*ABS(jjval+jmval)*tol ) WRITE (Lun,'(1X,A)')&
           'DIFFERENCE EXCEEDS ERROR TOLERANCE'
       END IF
     END IF
@@ -251,11 +256,11 @@ CONTAINS
     !
     ! --- TEST 4: COMPARE RC6J VALUES WITH FORMULA
     ipass4 = 1
-    l2 = 8.0
-    l3 = 7.0
-    m1 = 6.5
-    m2 = 7.5
-    m3 = 7.5
+    l2 = 8._SP
+    l3 = 7._SP
+    m1 = 6.5_SP
+    m2 = 7.5_SP
+    m3 = 7.5_SP
     CALL RC6J(l2,l3,m1,m2,m3,l1min,l1max,sixcof,NDIM,ier)
     IF( ier/=0 ) THEN
       ipass4 = 0
@@ -305,31 +310,31 @@ CONTAINS
     IF( Kprint>=3 ) WRITE (Lun,*) ' TEST 5, CHECK FOR PROPER HANDLING ', &
       'OF INVALID INPUT'
     ! --- RC3JJ: L2-ABS(M2) OR L3-ABS(M3) LESS THAN ZERO (IER=1)
-    l2 = 2.0
-    l3 = 100.0
-    m1 = -6.0
-    m2 = -4.0
-    m3 = 10.0
+    l2 = 2._SP
+    l3 = 100._SP
+    m1 = -6._SP
+    m2 = -4._SP
+    m3 = 10._SP
     IF( Kprint>=3 ) WRITE (Lun,*)
     CALL XERCLR
     CALL RC3JJ(l2,l3,m2,m3,l1min,l1max,thrcof,NDIM,ier)
     IF( NUMXER(nerr)/=ier ) ipass5 = 0
     ! --- RC3JJ: L2+ABS(M2) OR L3+ABS(M3) NOT INTEGER (IER=2)
-    l2 = 2.0
-    l3 = 99.5
-    m1 = -10.0
-    m2 = 0.0
-    m3 = 10.0
+    l2 = 2._SP
+    l3 = 99.5_SP
+    m1 = -10._SP
+    m2 = 0._SP
+    m3 = 10._SP
     IF( Kprint>=3 ) WRITE (Lun,*)
     CALL XERCLR
     CALL RC3JJ(l2,l3,m2,m3,l1min,l1max,thrcof,NDIM,ier)
     IF( NUMXER(nerr)/=ier ) ipass5 = 0
     ! --- RC3JJ: L1MAX-L1MIN NOT INTEGER (IER=3)
-    l2 = 3.2
-    l3 = 4.5
-    m1 = -1.3
-    m2 = 0.8
-    m3 = 0.5
+    l2 = 3.2_SP
+    l3 = 4.5_SP
+    m1 = -1.3_SP
+    m2 = 0.8_SP
+    m3 = 0.5_SP
     IF( Kprint>=3 ) WRITE (Lun,*)
     CALL XERCLR
     CALL RC3JJ(l2,l3,m2,m3,l1min,l1max,thrcof,NDIM,ier)
@@ -337,47 +342,47 @@ CONTAINS
     ! --- RC3JJ: L1MIN GREATER THAN L1MAX (IER=4)
     !            (NO TEST -- THIS ERROR SHOULD NEVER OCCUR)
     ! --- RC3JJ: DIMENSION OF THRCOF TOO SMALL (IER=5)
-    l2 = 10.0
-    l3 = 150.0
-    m1 = -10.0
-    m2 = 0.0
-    m3 = 10.0
+    l2 = 10._SP
+    l3 = 150._SP
+    m1 = -10._SP
+    m2 = 0._SP
+    m3 = 10._SP
     IF( Kprint>=3 ) WRITE (Lun,*)
     CALL XERCLR
     CALL RC3JJ(l2,l3,m2,m3,l1min,l1max,thrcof,NDIM,ier)
     IF( NUMXER(nerr)/=ier ) ipass5 = 0
     ! --- RC3JM: L1-ABS(M1) LESS THAN ZERO OR L1+ABS(M1) NOT INTEGER (IER=1)
-    l1 = 100.0
-    l2 = 2.0
-    l3 = 100.0
-    m1 = 150.0
+    l1 = 100._SP
+    l2 = 2._SP
+    l3 = 100._SP
+    m1 = 150._SP
     IF( Kprint>=3 ) WRITE (Lun,*)
     CALL XERCLR
     CALL RC3JM(l1,l2,l3,m1,m2min,m2max,thrcof,NDIM,ier)
     IF( NUMXER(nerr)/=ier ) ipass5 = 0
     ! --- RC3JM: L1, L2, L3 DO NOT SATISFY TRIANGULAR CONDITION (IER=2)
-    l1 = 20.0
-    l2 = 5.0
-    l3 = 10.0
-    m1 = -10.0
+    l1 = 20._SP
+    l2 = 5._SP
+    l3 = 10._SP
+    m1 = -10._SP
     IF( Kprint>=3 ) WRITE (Lun,*)
     CALL XERCLR
     CALL RC3JM(l1,l2,l3,m1,m2min,m2max,thrcof,NDIM,ier)
     IF( NUMXER(nerr)/=ier ) ipass5 = 0
     ! --- RC3JM: L1+L2+L3 NOT INTEGER (IER=3)
-    l1 = 1.0
-    l2 = 1.3
-    l3 = 1.5
-    m1 = 0.0
+    l1 = 1._SP
+    l2 = 1.3_SP
+    l3 = 1.5_SP
+    m1 = 0._SP
     IF( Kprint>=3 ) WRITE (Lun,*)
     CALL XERCLR
     CALL RC3JM(l1,l2,l3,m1,m2min,m2max,thrcof,NDIM,ier)
     IF( NUMXER(nerr)/=ier ) ipass5 = 0
     ! --- RC3JM: M2MAX-M2MIN NOT INTEGER (IER=4)
-    l1 = 1.0
-    l2 = 1.3
-    l3 = 1.7
-    m1 = 0.0
+    l1 = 1._SP
+    l2 = 1.3_SP
+    l3 = 1.7_SP
+    m1 = 0._SP
     IF( Kprint>=3 ) WRITE (Lun,*)
     CALL XERCLR
     CALL RC3JM(l1,l2,l3,m1,m2min,m2max,thrcof,NDIM,ier)
@@ -385,50 +390,50 @@ CONTAINS
     ! --- RC3JM: M2MIN GREATER THAN M2MAX (IER=5)
     !            (NO TEST -- THIS ERROR SHOULD NEVER OCCUR)
     ! --- RC3JM: DIMENSION OF THRCOF TOO SMALL (IER=6)
-    l1 = 100.0
-    l2 = 10.0
-    l3 = 110.0
-    m1 = -10.0
+    l1 = 100._SP
+    l2 = 10._SP
+    l3 = 110._SP
+    m1 = -10._SP
     IF( Kprint>=3 ) WRITE (Lun,*)
     CALL XERCLR
     CALL RC3JM(l1,l2,l3,m1,m2min,m2max,thrcof,NDIM,ier)
     IF( NUMXER(nerr)/=ier ) ipass5 = 0
     ! --- RC6J: L2+L3+L5+L6 OR L4+L2+L6 NOT INTEGER (IER=1)
-    l2 = 0.5
-    l3 = 1.0
-    m1 = 0.5
-    m2 = 2.0
-    m3 = 3.0
+    l2 = 0.5_SP
+    l3 = 1._SP
+    m1 = 0.5_SP
+    m2 = 2._SP
+    m3 = 3._SP
     IF( Kprint>=3 ) WRITE (Lun,*)
     CALL XERCLR
     CALL RC6J(l2,l3,m1,m2,m3,l1min,l1max,sixcof,NDIM,ier)
     IF( NUMXER(nerr)/=ier ) ipass5 = 0
     ! --- RC6J: L4, L2, L6 TRIANGULAR CONDITION NOT SATISFIED (IER=2)
-    l2 = 1.0
-    l3 = 3.0
-    m1 = 5.0
-    m2 = 6.0
-    m3 = 2.0
+    l2 = 1._SP
+    l3 = 3._SP
+    m1 = 5._SP
+    m2 = 6._SP
+    m3 = 2._SP
     IF( Kprint>=3 ) WRITE (Lun,*)
     CALL XERCLR
     CALL RC6J(l2,l3,m1,m2,m3,l1min,l1max,sixcof,NDIM,ier)
     IF( NUMXER(nerr)/=ier ) ipass5 = 0
     ! --- RC6J: L4, L5, L3 TRIANGULAR CONDITION NOT SATISFIED (IER=3)
-    l2 = 4.0
-    l3 = 1.0
-    m1 = 5.0
-    m2 = 3.0
-    m3 = 2.0
+    l2 = 4._SP
+    l3 = 1._SP
+    m1 = 5._SP
+    m2 = 3._SP
+    m3 = 2._SP
     IF( Kprint>=3 ) WRITE (Lun,*)
     CALL XERCLR
     CALL RC6J(l2,l3,m1,m2,m3,l1min,l1max,sixcof,NDIM,ier)
     IF( NUMXER(nerr)/=ier ) ipass5 = 0
     ! --- RC6J: L1MAX-L1MIN NOT INTEGER (IER=4)
-    l2 = 0.9
-    l3 = 0.5
-    m1 = 0.9
-    m2 = 0.4
-    m3 = 0.2
+    l2 = 0.9_SP
+    l3 = 0.5_SP
+    m1 = 0.9_SP
+    m2 = 0.4_SP
+    m3 = 0.2_SP
     IF( Kprint>=3 ) WRITE (Lun,*)
     CALL XERCLR
     CALL RC6J(l2,l3,m1,m2,m3,l1min,l1max,sixcof,NDIM,ier)
@@ -436,11 +441,11 @@ CONTAINS
     ! --- RC6J: L1MIN GREATER THAN L1MAX (IER=5)
     !           (NO TEST -- THIS ERROR SHOULD NEVER OCCUR)
     ! --- RC6J: DIMENSION OF SIXCOF TOO SMALL (IER=6)
-    l2 = 50.0
-    l3 = 25.0
-    m1 = 15.0
-    m2 = 30.0
-    m3 = 40.0
+    l2 = 50._SP
+    l3 = 25._SP
+    m1 = 15._SP
+    m2 = 30._SP
+    m3 = 40._SP
     IF( Kprint>=3 ) WRITE (Lun,*)
     CALL XERCLR
     CALL RC6J(l2,l3,m1,m2,m3,l1min,l1max,sixcof,NDIM,ier)

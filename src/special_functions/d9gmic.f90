@@ -36,18 +36,18 @@ REAL(DP) FUNCTION D9GMIC(A,X,Alx)
   REAL(DP) :: A, X, Alx
   INTEGER :: k, m, mm1
   REAL(DP) :: alng, fk, fkp1, fm, s, sgng, t, te
-  REAL(DP), PARAMETER :: eps = 0.5D0*D1MACH(3), bot = LOG(D1MACH(1))
-  REAL(DP), PARAMETER :: euler = 0.57721566490153286060651209008240D0
+  REAL(DP), PARAMETER :: eps = 0.5_DP*D1MACH(3), bot = LOG(D1MACH(1))
+  REAL(DP), PARAMETER :: euler = 0.57721566490153286060651209008240_DP
   !* FIRST EXECUTABLE STATEMENT  D9GMIC
   !
-  IF( A>0.D0 ) CALL XERMSG('D9GMIC','A MUST BE NEAR A NEGATIVE INTEGER',2,2)
-  IF( X<=0.D0 ) CALL XERMSG('D9GMIC','X MUST BE GT ZERO',3,2)
+  IF( A>0._DP ) CALL XERMSG('D9GMIC','A MUST BE NEAR A NEGATIVE INTEGER',2,2)
+  IF( X<=0._DP ) CALL XERMSG('D9GMIC','X MUST BE GT ZERO',3,2)
   !
-  m = INT( -(A-0.5D0) )
+  m = INT( -(A-0.5_DP) )
   fm = m
   !
-  te = 1.0D0
-  t = 1.0D0
+  te = 1._DP
+  t = 1._DP
   s = t
   DO k = 1, 200
     fkp1 = k + 1
@@ -59,14 +59,14 @@ REAL(DP) FUNCTION D9GMIC(A,X,Alx)
   CALL XERMSG('D9GMIC',&
     'NO CONVERGENCE IN 200 TERMS OF CONTINUED FRACTION',4,2)
   !
-  100  D9GMIC = -Alx - euler + X*s/(fm+1.0D0)
+  100  D9GMIC = -Alx - euler + X*s/(fm+1._DP)
   IF( m==0 ) RETURN
   !
-  IF( m==1 ) D9GMIC = -D9GMIC - 1.D0 + 1.D0/X
+  IF( m==1 ) D9GMIC = -D9GMIC - 1._DP + 1._DP/X
   IF( m==1 ) RETURN
   !
   te = fm
-  t = 1.D0
+  t = 1._DP
   s = t
   mm1 = m - 1
   DO k = 1, mm1
@@ -78,18 +78,18 @@ REAL(DP) FUNCTION D9GMIC(A,X,Alx)
   END DO
   !
   DO k = 1, m
-    D9GMIC = D9GMIC + 1.0D0/k
+    D9GMIC = D9GMIC + 1._DP/k
   END DO
   !
-  sgng = 1.0D0
-  IF( MOD(m,2)==1 ) sgng = -1.0D0
-  alng = LOG(D9GMIC) - LOG_GAMMA(fm+1.D0)
+  sgng = 1._DP
+  IF( MOD(m,2)==1 ) sgng = -1._DP
+  alng = LOG(D9GMIC) - LOG_GAMMA(fm+1._DP)
   !
-  D9GMIC = 0.D0
+  D9GMIC = 0._DP
   IF( alng>bot ) D9GMIC = sgng*EXP(alng)
-  IF( s/=0.D0 ) D9GMIC = D9GMIC + SIGN(EXP(-fm*Alx+LOG(ABS(s)/fm)),s)
+  IF( s/=0._DP ) D9GMIC = D9GMIC + SIGN(EXP(-fm*Alx+LOG(ABS(s)/fm)),s)
   !
-  IF( D9GMIC==0.D0 .AND. s==0.D0 )&
+  IF( D9GMIC==0._DP .AND. s==0._DP )&
     CALL XERMSG('D9GMIC','RESULT UNDERFLOWS',1,1)
   !
 END FUNCTION D9GMIC

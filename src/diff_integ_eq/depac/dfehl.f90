@@ -65,44 +65,44 @@ SUBROUTINE DFEHL(DF,Neq,T,Y,H,Yp,F1,F2,F3,F4,F5,Ys)
   REAL(DP) :: ch
   !
   !* FIRST EXECUTABLE STATEMENT  DFEHL
-  ch = H/4.0D0
+  ch = H/4._DP
   DO k = 1, Neq
     Ys(k) = Y(k) + ch*Yp(k)
   END DO
   CALL DF(T+ch,Ys,F1)
   !
-  ch = 3.0D0*H/32.0D0
+  ch = 3._DP*H/32._DP
   DO k = 1, Neq
-    Ys(k) = Y(k) + ch*(Yp(k)+3.0D0*F1(k))
+    Ys(k) = Y(k) + ch*(Yp(k)+3._DP*F1(k))
   END DO
-  CALL DF(T+3.0D0*H/8.0D0,Ys,F2)
+  CALL DF(T+3._DP*H/8._DP,Ys,F2)
   !
-  ch = H/2197.0D0
+  ch = H/2197._DP
   DO k = 1, Neq
-    Ys(k) = Y(k) + ch*(1932.0D0*Yp(k)+(7296.0D0*F2(k)-7200.0D0*F1(k)))
+    Ys(k) = Y(k) + ch*(1932._DP*Yp(k)+(7296._DP*F2(k)-7200._DP*F1(k)))
   END DO
-  CALL DF(T+12.0D0*H/13.0D0,Ys,F3)
+  CALL DF(T+12._DP*H/13._DP,Ys,F3)
   !
-  ch = H/4104.0D0
+  ch = H/4104._DP
   DO k = 1, Neq
-    Ys(k) = Y(k) + ch*((8341.0D0*Yp(k)-845.0D0*F3(k))+(29440.0D0*F2(k)-32832.0D0*F1(k)))
+    Ys(k) = Y(k) + ch*((8341._DP*Yp(k)-845._DP*F3(k))+(29440._DP*F2(k)-32832._DP*F1(k)))
   END DO
   CALL DF(T+H,Ys,F4)
   !
-  ch = H/20520.0D0
+  ch = H/20520._DP
   DO k = 1, Neq
-    Ys(k) = Y(k) + ch*((-6080.0D0*Yp(k)+(9295.0D0*F3(k)-5643.0D0*F4(k)))&
-      +(41040.0D0*F1(k)-28352.0D0*F2(k)))
+    Ys(k) = Y(k) + ch*((-6080._DP*Yp(k)+(9295._DP*F3(k)-5643._DP*F4(k)))&
+      +(41040._DP*F1(k)-28352._DP*F2(k)))
   END DO
-  CALL DF(T+H/2.0D0,Ys,F5)
+  CALL DF(T+H/2._DP,Ys,F5)
   !
   !     COMPUTE APPROXIMATE SOLUTION AT T+H
   !
-  ch = H/7618050.0D0
+  ch = H/7618050._DP
   DO k = 1, Neq
     Ys(k) = Y(k)&
-      + ch*((902880.0D0*Yp(k)+(3855735.0D0*F3(k)-1371249.0D0*F4(k)))&
-      +(3953664.0D0*F2(k)+277020.0D0*F5(k)))
+      + ch*((902880._DP*Yp(k)+(3855735._DP*F3(k)-1371249._DP*F4(k)))&
+      +(3953664._DP*F2(k)+277020._DP*F5(k)))
   END DO
   !
 END SUBROUTINE DFEHL

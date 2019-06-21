@@ -110,7 +110,7 @@ SUBROUTINE CHKDER(M,N,X,Fvec,Fjac,Ldfjac,Xp,Fvecp,Mode,Err)
   REAL(SP) :: X(N), Fvec(M), Fjac(Ldfjac,N), Xp(N), Fvecp(M), Err(M)
   INTEGER :: i, j
   REAL(SP) :: eps, epsf, epslog, epsmch, temp
-  REAL(SP), PARAMETER :: factor = 1.0E2, one = 1.0E0, zero = 0.0E0
+  REAL(SP), PARAMETER :: factor = 1.0E2, one = 1._SP, zero = 0._SP
   !* FIRST EXECUTABLE STATEMENT  CHKDER
   epsmch = R1MACH(4)
   !

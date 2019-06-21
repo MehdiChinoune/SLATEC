@@ -33,18 +33,18 @@ CONTAINS
     IF( Kprint>=2 ) WRITE (Lun,99001)
     99001 FORMAT ('1'/' DAVINT Quick Check')
     Ipass = 1
-    tol = MAX(.0001D0,SQRT(D1MACH(4)))
-    tol1 = 1.0D-2*tol
+    tol = MAX(.0001_DP,SQRT(D1MACH(4)))
+    tol1 = 1.E-2_DP*tol
     !
     !     Perform first accuracy test.
     !
-    a = 0.0D0
-    b = 5.0D0
-    xint = EXP(5.0D0) - 1.0D0
+    a = 0._DP
+    b = 5._DP
+    xint = EXP(5._DP) - 1._DP
     n = 500
     rn1 = n - 1
     sqb = SQRT(b)
-    del = 0.4D0*(b-a)/(n-1)
+    del = 0.4_DP*(b-a)/(n-1)
     DO i = 1, n
       x(i) = sqb*SQRT(a+(i-1)*(b-a)/rn1) + del
       y(i) = EXP(x(i))
@@ -60,13 +60,13 @@ CONTAINS
     !
     !     Perform second accuracy test.
     !
-    x(1) = 0.0D0
-    x(2) = 5.0D0
-    y(1) = 1.0D0
-    y(2) = 0.5D0
-    a = -0.5D0
-    b = 0.5D0
-    xint = 1.0D0
+    x(1) = 0._DP
+    x(2) = 5._DP
+    y(1) = 1._DP
+    y(2) = 0.5_DP
+    a = -0.5_DP
+    b = 0.5_DP
+    xint = 1._DP
     CALL DAVINT(x,y,2,a,b,ans,ierr)
     !
     !     See if test was passed.
@@ -104,14 +104,14 @@ CONTAINS
       99004 FORMAT (/' Test error returns from DAVINT'/' 4 error messages expected'/ )
     END IF
     DO i = 1, 20
-      x(i) = (i-1)/19.0D0 - 0.01D0
-      IF( i/=1 ) y(i) = x(i)/(EXP(x(i))-1.0)
+      x(i) = (i-1)/19._DP - 0.01_DP
+      IF( i/=1 ) y(i) = x(i)/(EXP(x(i))-1._SP)
     END DO
     !
     !     Test IERR = 1 error return.
     !
-    y(1) = 1.0D0
-    CALL DAVINT(x,y,20,0.0D0,1.0D0,ans,ierr)
+    y(1) = 1._DP
+    CALL DAVINT(x,y,20,0._DP,1._DP,ans,ierr)
     IF( ierr/=1 ) THEN
       Ipass = 0
       fatal = .TRUE.
@@ -121,13 +121,13 @@ CONTAINS
     !
     !     Test IERR = 2 error return.
     !
-    CALL DAVINT(x,y,20,1.0D0,0.0D0,ans,ierr)
+    CALL DAVINT(x,y,20,1._DP,0._DP,ans,ierr)
     IF( ierr/=2 ) THEN
       Ipass = 0
       fatal = .TRUE.
       IF( Kprint>=3 ) WRITE (Lun,99010) ierr, 2
     END IF
-    IF( ans/=0.0D0 ) THEN
+    IF( ans/=0._DP ) THEN
       Ipass = 0
       fatal = .TRUE.
       IF( Kprint>=3 ) WRITE (Lun,99011)
@@ -136,13 +136,13 @@ CONTAINS
     !
     !     Test IERR = 5 error return.
     !
-    CALL DAVINT(x,y,1,0.0D0,1.0D0,ans,ierr)
+    CALL DAVINT(x,y,1,0._DP,1._DP,ans,ierr)
     IF( ierr/=5 ) THEN
       Ipass = 0
       fatal = .TRUE.
       IF( Kprint>=3 ) WRITE (Lun,99010) ierr, 5
     END IF
-    IF( ans/=0.0D0 ) THEN
+    IF( ans/=0._DP ) THEN
       Ipass = 0
       fatal = .TRUE.
       IF( Kprint>=3 ) WRITE (Lun,99011)
@@ -151,15 +151,15 @@ CONTAINS
     !
     !     Test IERR = 4 error return.
     !
-    x(1) = 1.0D0/19.0D0
-    x(2) = 0.0D0
-    CALL DAVINT(x,y,20,0.0D0,1.0D0,ans,ierr)
+    x(1) = 1._DP/19._DP
+    x(2) = 0._DP
+    CALL DAVINT(x,y,20,0._DP,1._DP,ans,ierr)
     IF( ierr/=4 ) THEN
       Ipass = 0
       fatal = .TRUE.
       IF( Kprint>=3 ) WRITE (Lun,99010) ierr, 4
     END IF
-    IF( ans/=0.0D0 ) THEN
+    IF( ans/=0._DP ) THEN
       Ipass = 0
       fatal = .TRUE.
       IF( Kprint>=3 ) WRITE (Lun,99011)
@@ -168,15 +168,15 @@ CONTAINS
     !
     !     Test IERR = 3 error return.
     !
-    x(1) = 0.0D0
-    x(2) = 1.0D0/19.0D0
-    CALL DAVINT(x,y,20,0.0D0,.01D0,ans,ierr)
+    x(1) = 0._DP
+    x(2) = 1._DP/19._DP
+    CALL DAVINT(x,y,20,0._DP,.01_DP,ans,ierr)
     IF( ierr/=3 ) THEN
       Ipass = 0
       fatal = .TRUE.
       IF( Kprint>=3 ) WRITE (Lun,99010) ierr, 3
     END IF
-    IF( ans/=0.0D0 ) THEN
+    IF( ans/=0._DP ) THEN
       Ipass = 0
       fatal = .TRUE.
       IF( Kprint>=3 ) WRITE (Lun,99011)
@@ -248,11 +248,11 @@ CONTAINS
     !
     !     First accuracy test.
     !
-    a = 1.0D0
-    b = 4.0D0
-    err = tol/100.0D0
+    a = 1._DP
+    b = 4._DP
+    err = tol/100._DP
     CALL DGAUS8(DFQD1,a,b,err,ans,ierr)
-    cor = 2.0D0
+    cor = 2._DP
     IF( ABS(ans-cor)<=tol .AND. ierr==1 ) THEN
       IF( Kprint>=3 ) WRITE (Lun,99004) 'PASSED', a, b, ans, cor, err, ierr
     ELSE
@@ -262,11 +262,11 @@ CONTAINS
     !
     !     Second accuracy test.
     !
-    a = 0.0D0
-    b = 4.0D0*ATAN(1.0D0)
-    err = tol/100.0D0
+    a = 0._DP
+    b = 4._DP*ATAN(1._DP)
+    err = tol/100._DP
     CALL DGAUS8(DFQD2,a,b,err,ans,ierr)
-    cor = (EXP(b)-1.0D0)/101.0D0
+    cor = (EXP(b)-1._DP)/101._DP
     IF( ABS(ans-cor)<=tol .AND. ierr==1 ) THEN
       IF( Kprint>=3 ) WRITE (Lun,99004) 'PASSED', a, b, ans, cor, err, ierr
     ELSE
@@ -288,10 +288,10 @@ CONTAINS
     !
     !     Test with a discontinuous integrand and a tight error tolerance.
     !
-    a = 0.0D0
-    b = 1.0D0
-    cor = 2.0D0
-    err = 100.0D0*D1MACH(4)
+    a = 0._DP
+    b = 1._DP
+    cor = 2._DP
+    err = 100._DP*D1MACH(4)
     req = err
     CALL DGAUS8(DFQD1,a,b,err,ans,ierr)
     !
@@ -307,16 +307,16 @@ CONTAINS
     !
     !     Test DGAUS8 with A and B nearly equal.
     !
-    a = 2.0D0
-    b = a*(1.0D0+D1MACH(4))
-    cor = 0.0D0
+    a = 2._DP
+    b = a*(1._DP+D1MACH(4))
+    cor = 0._DP
     err = tol
     !
     CALL DGAUS8(DFQD1,a,b,err,ans,ierr)
     !
     !     Check to see if test passed.
     !
-    IF( ierr==-1 .AND. ans==0.0D0 ) THEN
+    IF( ierr==-1 .AND. ans==0._DP ) THEN
       IF( Kprint>=3 ) WRITE (Lun,99007) 'PASSED'
     ELSE
       Ipass = 0
@@ -390,11 +390,11 @@ CONTAINS
     !
     !     First accuracy test.
     !
-    a = 1.0D0
-    b = 4.0D0
-    err = tol/100.0D0
+    a = 1._DP
+    b = 4._DP
+    err = tol/100._DP
     CALL DQNC79(DFQD1,a,b,err,ans,ierr,nfct)
-    cor = 2.0D0
+    cor = 2._DP
     IF( ABS(ans-cor)<=tol .AND. ierr==1 ) THEN
       IF( Kprint>=3 ) WRITE (Lun,99004) 'PASSED', a, b, ans, cor, err, ierr, nfct
     ELSE
@@ -404,11 +404,11 @@ CONTAINS
     !
     !     Second accuracy test.
     !
-    a = 0.0D0
-    b = 4.0D0*ATAN(1.0D0)
-    err = tol/10.0D0
+    a = 0._DP
+    b = 4._DP*ATAN(1._DP)
+    err = tol/10._DP
     CALL DQNC79(DFQD2,a,b,err,ans,ierr,nfct)
-    cor = (EXP(b)-1.0D0)/101.0D0
+    cor = (EXP(b)-1._DP)/101._DP
     IF( ABS(ans-cor)<=tol .AND. ierr==1 ) THEN
       IF( Kprint>=3 ) WRITE (Lun,99004) 'PASSED', a, b, ans, cor, err, ierr, nfct
     ELSE
@@ -430,10 +430,10 @@ CONTAINS
     !
     !     Test with a discontinuous integrand and a tight error tolerance.
     !
-    a = 0.0D0
-    b = 1.0D0
-    cor = 2.0D0
-    err = 100.0D0*D1MACH(4)
+    a = 0._DP
+    b = 1._DP
+    cor = 2._DP
+    err = 100._DP*D1MACH(4)
     req = err
     CALL DQNC79(DFQD1,a,b,err,ans,ierr,nfct)
     !
@@ -449,16 +449,16 @@ CONTAINS
     !
     !     Test DQNC79 with A and B nearly equal.
     !
-    a = 2.0D0
-    b = a*(1.0D0+D1MACH(4))
-    cor = 0.0D0
+    a = 2._DP
+    b = a*(1._DP+D1MACH(4))
+    cor = 0._DP
     err = tol
     !
     CALL DQNC79(DFQD1,a,b,err,ans,ierr,nfct)
     !
     !     Check to see if test passed.
     !
-    IF( ierr==-1 .AND. ans==0.0D0 ) THEN
+    IF( ierr==-1 .AND. ans==0._DP ) THEN
       IF( Kprint>=3 ) WRITE (Lun,99007) 'PASSED'
     ELSE
       Ipass = 0
@@ -515,8 +515,8 @@ CONTAINS
     !     .. Intrinsic Functions ..
     INTRINSIC SQRT
     !* FIRST EXECUTABLE STATEMENT  DFQD1
-    DFQD1 = 0.0D0
-    IF( X>0.0D0 ) DFQD1 = 1.0D0/SQRT(X)
+    DFQD1 = 0._DP
+    IF( X>0._DP ) DFQD1 = 1._DP/SQRT(X)
   END FUNCTION DFQD1
   !** DFQD2
   REAL(DP) FUNCTION DFQD2(X)
@@ -540,7 +540,7 @@ CONTAINS
     !     .. Intrinsic Functions ..
     INTRINSIC COS, EXP
     !* FIRST EXECUTABLE STATEMENT  DFQD2
-    DFQD2 = EXP(X)*COS(10.0D0*X)
+    DFQD2 = EXP(X)*COS(10._DP*X)
   END FUNCTION DFQD2
 END MODULE TEST42_MOD
 !** TEST42

@@ -60,17 +60,17 @@ SUBROUTINE COSTI(N,Wsave)
   REAL(SP) :: dt, fk, pi
   !* FIRST EXECUTABLE STATEMENT  COSTI
   IF( N<=3 ) RETURN
-  pi = 4.*ATAN(1.)
+  pi = 4._SP*ATAN(1._SP)
   nm1 = N - 1
   np1 = N + 1
   ns2 = N/2
   dt = pi/nm1
-  fk = 0.
+  fk = 0._SP
   DO k = 2, ns2
     kc = np1 - k
-    fk = fk + 1.
-    Wsave(k) = 2.*SIN(fk*dt)
-    Wsave(kc) = 2.*COS(fk*dt)
+    fk = fk + 1._SP
+    Wsave(k) = 2._SP*SIN(fk*dt)
+    Wsave(kc) = 2._SP*COS(fk*dt)
   END DO
   CALL RFFTI(nm1,Wsave(N+1))
 END SUBROUTINE COSTI

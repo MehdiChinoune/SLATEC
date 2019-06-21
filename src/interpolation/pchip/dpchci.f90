@@ -105,7 +105,7 @@ SUBROUTINE DPCHCI(N,H,Slope,D,Incfd)
   !
   !  INITIALIZE.
   !
-  REAL(DP), PARAMETER :: zero = 0.D0, three = 3.D0
+  REAL(DP), PARAMETER :: zero = 0._DP, three = 3._DP
   !* FIRST EXECUTABLE STATEMENT  DPCHCI
   nless1 = N - 1
   del1 = Slope(1)

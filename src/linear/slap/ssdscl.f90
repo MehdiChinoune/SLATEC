@@ -161,14 +161,14 @@ SUBROUTINE SSDSCL(N,Nelt,Ia,Ja,A,X,B,Dinv,Job,Itol)
   !
   IF( Job/=0 ) THEN
     DO icol = 1, N
-      Dinv(icol) = 1.0E0/SQRT(A(Ja(icol)))
+      Dinv(icol) = 1._SP/SQRT(A(Ja(icol)))
     END DO
   ELSE
     !
     !         UNSCALING...
     !
     DO icol = 1, N
-      Dinv(icol) = 1.0E0/Dinv(icol)
+      Dinv(icol) = 1._SP/Dinv(icol)
     END DO
   END IF
   !

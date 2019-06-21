@@ -242,13 +242,13 @@ SUBROUTINE QAGSE(F,A,B,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,Alist,&
   Ier = 0
   Neval = 0
   Last = 0
-  Result = 0.0E+00
-  Abserr = 0.0E+00
+  Result = 0._SP
+  Abserr = 0._SP
   Alist(1) = A
   Blist(1) = B
-  Rlist(1) = 0.0E+00
-  Elist(1) = 0.0E+00
-  IF( Epsabs<=0.0E+00 .AND. Epsrel<MAX(0.5E+02*epmach,0.5E-14) ) Ier = 6
+  Rlist(1) = 0._SP
+  Elist(1) = 0._SP
+  IF( Epsabs<=0._SP .AND. Epsrel<MAX(50._SP*epmach,0.5E-14_SP) ) Ier = 6
   IF( Ier/=6 ) THEN
     !
     !           FIRST APPROXIMATION TO THE INTEGRAL
@@ -267,9 +267,9 @@ SUBROUTINE QAGSE(F,A,B,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,Alist,&
     Rlist(1) = Result
     Elist(1) = Abserr
     Iord(1) = 1
-    IF( Abserr<=1.0E+02*epmach*defabs .AND. Abserr>errbnd ) Ier = 2
+    IF( Abserr<=100._SP*epmach*defabs .AND. Abserr>errbnd ) Ier = 2
     IF( Limit==1 ) Ier = 1
-    IF( Ier/=0 .OR. (Abserr<=errbnd .AND. Abserr/=resabs) .OR. Abserr==0.0E+00 )&
+    IF( Ier/=0 .OR. (Abserr<=errbnd .AND. Abserr/=resabs) .OR. Abserr==0._SP )&
         THEN
       Neval = 42*Last - 21
       RETURN
@@ -294,7 +294,7 @@ SUBROUTINE QAGSE(F,A,B,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,Alist,&
       iroff2 = 0
       iroff3 = 0
       ksgn = -1
-      IF( dres>=(0.1E+01-0.5E+02*epmach)*defabs ) ksgn = 1
+      IF( dres>=(1._SP-50._SP*epmach)*defabs ) ksgn = 1
       !
       !           MAIN DO-LOOP
       !           ------------
@@ -305,7 +305,7 @@ SUBROUTINE QAGSE(F,A,B,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,Alist,&
         !           ERROR ESTIMATE.
         !
         a1 = Alist(maxerr)
-        b1 = 0.5E+00*(Alist(maxerr)+Blist(maxerr))
+        b1 = 0.5_SP*(Alist(maxerr)+Blist(maxerr))
         a2 = b1
         b2 = Blist(maxerr)
         erlast = errmax
@@ -345,7 +345,7 @@ SUBROUTINE QAGSE(F,A,B,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,Alist,&
         !           SET ERROR FLAG IN THE CASE OF BAD INTEGRAND BEHAVIOUR
         !           AT A POINT OF THE INTEGRATION RANGE.
         !
-        IF( MAX(ABS(a1),ABS(b2))<=(0.1E+01+0.1E+03*epmach)&
+        IF( MAX(ABS(a1),ABS(b2))<=(1._SP+100._SP*epmach)&
           *(ABS(a2)+0.1E+04*uflow) ) Ier = 4
         !
         !           APPEND THE NEWLY-CREATED INTERVALS TO THE LIST.
@@ -377,7 +377,7 @@ SUBROUTINE QAGSE(F,A,B,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,Alist,&
         !- **JUMP OUT OF DO-LOOP
         IF( Ier/=0 ) EXIT
         IF( Last==2 ) THEN
-          small = ABS(B-A)*0.375E+00
+          small = ABS(B-A)*0.375_SP
           erlarg = errsum
           ertest = errbnd
           rlist2(2) = area
@@ -437,7 +437,7 @@ SUBROUTINE QAGSE(F,A,B,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,Alist,&
           errmax = Elist(maxerr)
           nrmax = 1
           extrap = .FALSE.
-          small = small*0.5E+00
+          small = small*0.5_SP
           erlarg = errsum
         END IF
         20 CONTINUE
@@ -450,9 +450,9 @@ SUBROUTINE QAGSE(F,A,B,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,Alist,&
         IF( Ier+ierro/=0 ) THEN
           IF( ierro==3 ) Abserr = Abserr + correc
           IF( Ier==0 ) Ier = 3
-          IF( Result==0.0E+00 .OR. area==0.0E+00 ) THEN
+          IF( Result==0._SP .OR. area==0._SP ) THEN
             IF( Abserr>errsum ) GOTO 50
-            IF( area==0.0E+00 ) THEN
+            IF( area==0._SP ) THEN
               IF( Ier>2 ) Ier = Ier - 1
               Neval = 42*Last - 21
               RETURN
@@ -465,7 +465,7 @@ SUBROUTINE QAGSE(F,A,B,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,Alist,&
         !           TEST ON DIVERGENCE.
         !
         IF( ksgn/=(-1) .OR. MAX(ABS(Result),ABS(area))>defabs*0.1E-01 ) THEN
-          IF( 0.1E-01>(Result/area) .OR. (Result/area)>0.1E+03 .OR. &
+          IF( 0.1E-01>(Result/area) .OR. (Result/area)>100._SP .OR. &
             errsum>ABS(area) ) Ier = 6
         END IF
         IF( Ier>2 ) Ier = Ier - 1
@@ -476,7 +476,7 @@ SUBROUTINE QAGSE(F,A,B,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,Alist,&
     !
     !           COMPUTE GLOBAL INTEGRAL SUM.
     !
-    50  Result = 0.0E+00
+    50  Result = 0._SP
     DO k = 1, Last
       Result = Result + Rlist(k)
     END DO

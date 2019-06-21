@@ -47,7 +47,7 @@ CONTAINS
     INTEGER :: i, ierr, iflg, ix, i1m12, j, k, kode, Lun, m, mdel, mm, n, ndel, nn
     REAL(DP) :: aix, er, tol, v(1), x, xinc, y(10)
     !* FIRST EXECUTABLE STATEMENT  DQCKIN
-    tol = 1000.0D0*MAX(D1MACH(4),1.0D-18)
+    tol = 1000._DP*MAX(D1MACH(4),1.E-18_DP)
     iflg = 0
     IF( Kprint>=3 ) WRITE (Lun,99001)
     99001 FORMAT ('1 QUICK CHECK DIAGNOSTICS FOR DBSKIN'//)
@@ -56,7 +56,7 @@ CONTAINS
       DO nn = 1, 7
         m = 1
         DO mm = 1, 4
-          x = 0.0D0
+          x = 0._DP
           DO ix = 1, 6
             IF( n/=0 .OR. ix/=1 ) THEN
               CALL DBSKIN(x,n,kode,m,y,nz,ierr)
@@ -79,7 +79,7 @@ CONTAINS
               END DO
             END IF
             aix = 2*ix - 3
-            xinc = MAX(1.0D0,aix)
+            xinc = MAX(1._DP,aix)
             x = x + xinc
           END DO
           mdel = MAX(1,mm-1)
@@ -96,11 +96,11 @@ CONTAINS
     m = 10
     n = 10
     i1m12 = I1MACH(15)
-    x = -2.302D0*D1MACH(5)*i1m12
+    x = -2.302_DP*D1MACH(5)*i1m12
     CALL DBSKIN(x,n,kode,m,y,nz,ierr)
     IF( nz==m ) THEN
       DO i = 1, m
-        IF( y(i)/=0.0D0 ) GOTO 100
+        IF( y(i)/=0._DP ) GOTO 100
       END DO
     ELSE
       IF( Kprint>=2 ) WRITE (Lun,99004)
@@ -168,10 +168,10 @@ CONTAINS
     INTEGER :: Ipass, Kprint
     INTEGER :: i, ierr, iflg, ix, kode, Lun, m, n, nm, nn, nz
     REAL(DP) :: er, psi1(3), psi2(20), r1m4, s, tol, x
-    REAL(DP), PARAMETER :: euler = 0.5772156649015328606D0
+    REAL(DP), PARAMETER :: euler = 0.5772156649015328606_DP
     !* FIRST EXECUTABLE STATEMENT  DQCPSI
     r1m4 = D1MACH(4)
-    tol = 1000.0D0*MAX(r1m4,1.0D-18)
+    tol = 1000._DP*MAX(r1m4,1.E-18_DP)
     IF( Kprint>=3 ) WRITE (Lun,99001)
     99001 FORMAT ('1 QUICK CHECK DIAGNOSTICS FOR DPSIFN'//)
     !-----------------------------------------------------------------------
@@ -181,8 +181,8 @@ CONTAINS
     n = 0
     DO kode = 1, 2
       DO m = 1, 2
-        s = -euler + (m-1)*(-2.0D0*LOG(2.0D0))
-        x = 1.0D0 - (m-1)*0.5D0
+        s = -euler + (m-1)*(-2._DP*LOG(2._DP))
+        x = 1._DP - (m-1)*0.5_DP
         DO i = 1, 20
           CALL DPSIFN(x,n,kode,1,psi2,nz,ierr)
           psi1(1) = -s + (kode-1)*LOG(x)
@@ -195,8 +195,8 @@ CONTAINS
             IF( Kprint>=2 ) WRITE (Lun,99005) x, psi1(1), psi2(i), er, kode, n
             IF( iflg>200 ) GOTO 100
           END IF
-          s = s + 1.0D0/x
-          x = x + 1.0D0
+          s = s + 1._DP/x
+          x = x + 1._DP
         END DO
       END DO
     END DO
@@ -204,7 +204,7 @@ CONTAINS
     !     CHECK SMALL X<UNIT ROUNDOFF
     !-----------------------------------------------------------------------
     kode = 1
-    x = tol/10000.0D0
+    x = tol/10000._DP
     n = 1
     CALL DPSIFN(x,n,kode,1,psi2,nz,ierr)
     psi1(1) = x**(-n-1)
@@ -223,9 +223,9 @@ CONTAINS
       DO m = 1, 5
         DO n = 1, 16, 5
           nn = n - 1
-          x = 0.1D0
+          x = 0.1_DP
           DO ix = 1, 25, 2
-            x = x + 1.0D0
+            x = x + 1._DP
             CALL DPSIFN(x,nn,kode,m,psi2,nz,ierr)
             DO i = 1, m
               nm = nn + i - 1

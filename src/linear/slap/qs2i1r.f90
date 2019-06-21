@@ -118,9 +118,9 @@ SUBROUTINE QS2I1R(Ia,Ja,A,N,Kflag)
   r = .375E0
   100 CONTINUE
   IF( r<=0.5898437E0 ) THEN
-    r = r + 3.90625E-2
+    r = r + 3.90625E-2_SP
   ELSE
-    r = r - .21875E0
+    r = r - .21875_SP
   END IF
   200  k = i
   !

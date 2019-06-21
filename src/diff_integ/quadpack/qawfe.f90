@@ -253,20 +253,20 @@ SUBROUTINE QAWFE(F,A,Omega,Integr,Epsabs,Limlst,Limit,Maxp1,Result,Abserr,&
   !           CHEBMO    - ARRAY CONTAINING THE MODIFIED CHEBYSHEV
   !                       MOMENTS (SEE ALSO ROUTINE QC25F)
   !
-  REAL(SP), PARAMETER :: p = 0.9E+00, pi = 0.31415926535897932E+01
+  REAL(SP), PARAMETER :: p = 0.9_SP, pi = 0.31415926535897932E+01_SP
   !
   !           TEST ON VALIDITY OF PARAMETERS
   !           ------------------------------
   !
   !* FIRST EXECUTABLE STATEMENT  QAWFE
-  Result = 0.0E+00
-  Abserr = 0.0E+00
+  Result = 0._SP
+  Abserr = 0._SP
   Neval = 0
   Lst = 0
   Ier = 0
-  IF( (Integr/=1 .AND. Integr/=2) .OR. Epsabs<=0.0E+00 .OR. Limlst<3 ) Ier = 6
+  IF( (Integr/=1 .AND. Integr/=2) .OR. Epsabs<=0._SP .OR. Limlst<3 ) Ier = 6
   IF( Ier/=6 ) THEN
-    IF( Omega/=0.0E+00 ) THEN
+    IF( Omega/=0._SP ) THEN
       !
       !           INITIALIZATIONS
       !           ---------------
@@ -281,15 +281,15 @@ SUBROUTINE QAWFE(F,A,Omega,Integr,Epsabs,Limlst,Limit,Maxp1,Result,Abserr,&
       nres = 0
       c1 = A
       c2 = cycle + A
-      p1 = 0.1E+01 - p
+      p1 = 1._SP - p
       eps = Epsabs
       uflow = R1MACH(1)
       IF( Epsabs>uflow/p1 ) eps = Epsabs*p1
       ep = eps
-      fact = 0.1E+01
-      correc = 0.0E+00
-      Abserr = 0.0E+00
-      errsum = 0.0E+00
+      fact = 1._SP
+      correc = 0._SP
+      Abserr = 0._SP
+      errsum = 0._SP
       !
       !           MAIN DO-LOOP
       !           ------------
@@ -299,13 +299,13 @@ SUBROUTINE QAWFE(F,A,Omega,Integr,Epsabs,Limlst,Limit,Maxp1,Result,Abserr,&
         !           INTEGRATE OVER CURRENT SUBINTERVAL.
         !
         epsa = eps*fact
-        CALL QAWOE(F,c1,c2,Omega,Integr,epsa,0.0E+00,Limit,Lst,Maxp1,&
+        CALL QAWOE(F,c1,c2,Omega,Integr,epsa,0._SP,Limit,Lst,Maxp1,&
           Rslst(Lst),Erlst(Lst),nev,Ierlst(Lst),last,Alist,Blist,&
           Rlist,Elist,Iord,Nnlog,momcom,Chebmo)
         Neval = Neval + nev
         fact = fact*p
         errsum = errsum + Erlst(Lst)
-        drl = 0.5E+02*ABS(Rslst(Lst))
+        drl = 50._SP*ABS(Rslst(Lst))
         !
         !           TEST ON ACCURACY WITH PARTIAL SUM
         !
@@ -313,7 +313,7 @@ SUBROUTINE QAWFE(F,A,Omega,Integr,Epsabs,Limlst,Limit,Maxp1,Result,Abserr,&
         correc = MAX(correc,Erlst(Lst))
         IF( Ierlst(Lst)/=0 ) eps = MAX(ep,correc*p1)
         IF( Ierlst(Lst)/=0 ) Ier = 7
-        IF( Ier==7 .AND. (errsum+drl)<=correc*0.1E+02 .AND. Lst>5 ) GOTO 50
+        IF( Ier==7 .AND. (errsum+drl)<=correc*10._SP .AND. Lst>5 ) GOTO 50
         numrl2 = numrl2 + 1
         IF( Lst>1 ) THEN
           psum(numrl2) = psum(ll) + Rslst(Lst)
@@ -341,8 +341,8 @@ SUBROUTINE QAWFE(F,A,Omega,Integr,Epsabs,Limlst,Limit,Maxp1,Result,Abserr,&
               !           SUM) OR EXTRAPOLATED RESULT YIELDS THE BEST INTEGRAL
               !           APPROXIMATION
               !
-              IF( (Abserr+0.1E+02*correc)<=Epsabs .OR. &
-                (Abserr<=Epsabs .AND. 0.1E+02*correc>=Epsabs) ) EXIT
+              IF( (Abserr+10._SP*correc)<=Epsabs .OR. &
+                (Abserr<=Epsabs .AND. 10._SP*correc>=Epsabs) ) EXIT
             END IF
             IF( Ier/=0 .AND. Ier/=7 ) EXIT
           END IF
@@ -357,11 +357,11 @@ SUBROUTINE QAWFE(F,A,Omega,Integr,Epsabs,Limlst,Limit,Maxp1,Result,Abserr,&
       !         SET FINAL RESULT AND ERROR ESTIMATE
       !         -----------------------------------
       !
-      Abserr = Abserr + 0.1E+02*correc
+      Abserr = Abserr + 10._SP*correc
       IF( Ier==0 ) RETURN
-      IF( Result==0.0E+00 .OR. psum(numrl2)==0.0E+00 ) THEN
+      IF( Result==0._SP .OR. psum(numrl2)==0._SP ) THEN
         IF( Abserr>errsum ) GOTO 50
-        IF( psum(numrl2)==0.0E+00 ) RETURN
+        IF( psum(numrl2)==0._SP ) RETURN
       END IF
       IF( Abserr/ABS(Result)<=(errsum+drl)/ABS(psum(numrl2)) ) THEN
         IF( Ier>=1 .AND. Ier/=7 ) Abserr = Abserr + drl
@@ -372,7 +372,7 @@ SUBROUTINE QAWFE(F,A,Omega,Integr,Epsabs,Limlst,Limit,Maxp1,Result,Abserr,&
       !           INTEGRATION BY QAGIE IF OMEGA IS ZERO
       !           --------------------------------------
       !
-      IF( Integr==1 ) CALL QAGIE(F,A,1,Epsabs,0.0E+00,Limit,Result,Abserr,&
+      IF( Integr==1 ) CALL QAGIE(F,A,1,Epsabs,0._SP,Limit,Result,Abserr,&
         Neval,Ier,Alist,Blist,Rlist,Elist,Iord,last)
       Rslst(1) = Result
       Erlst(1) = Abserr

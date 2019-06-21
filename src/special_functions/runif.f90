@@ -76,15 +76,15 @@ REAL(SP) FUNCTION RUNIF(T,N)
     IF( N>=0 ) THEN
       !
       DO i = 1, nold
-        T(i) = RAND(0.)
+        T(i) = RAND(0._SP)
       END DO
-      T(nold+1) = RAND(0.)
+      T(nold+1) = RAND(0._SP)
     END IF
   END IF
   !
   j = INT( T(nold+1)*floatn ) + 1
   T(nold+1) = T(j)
   RUNIF = T(j)
-  T(j) = RAND(0.)
+  T(j) = RAND(0._SP)
   !
 END FUNCTION RUNIF

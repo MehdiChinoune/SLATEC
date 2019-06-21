@@ -51,7 +51,7 @@ SUBROUTINE DSOSSL(K,N,L,X,C,B,M)
   DO k1 = 1, km1
     k2 = K - k1
     k3 = k2 + 1
-    xmax = 0.0D0
+    xmax = 0._DP
     kn = kn - N + k2 - 1
     IF( k3<=lk ) THEN
       j1 = kn

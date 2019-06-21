@@ -84,7 +84,7 @@ SUBROUTINE DMGSBV(M,N,A,Ia,Niv,Iflag,S,P,Ip,Inhomo,V,W,Wcnd)
     jp = 0
     Iflag = 0
     np1 = N + 1
-    y = 0.0D0
+    y = 0._DP
     m2 = M/2
     !
     !              CALCULATE SQUARE OF NORMS OF INCOMING VECTORS AND SEARCH
@@ -114,14 +114,14 @@ SUBROUTINE DMGSBV(M,N,A,Ia,Niv,Iflag,S,P,Ip,Inhomo,V,W,Wcnd)
     lix = ix
     IF( N/=nfcc_com ) lix = 2*ix - 1
     P(lix) = P(1)
-    S(np1) = 0.0D0
+    S(np1) = 0._DP
     IF( Inhomo==1 ) S(np1) = NORM2(V(1:M))**2
-    Wcnd = 1.0D0
+    Wcnd = 1._DP
     nivn = Niv
     Niv = 0
     !
     !           ...EXIT
-    IF( y/=0.0D0 ) THEN
+    IF( y/=0._DP ) THEN
       !              *********************************************************
       DO nr = 1, N
         !                 BEGIN BLOCK PERMITTING ...EXITS TO 230
@@ -191,12 +191,12 @@ SUBROUTINE DMGSBV(M,N,A,Ia,Niv,Iflag,S,P,Ip,Inhomo,V,W,Wcnd)
         !
         jp = jp + 1
         P(jp) = y
-        ry = 1.0D0/y
+        ry = 1._DP/y
         nmnr = N - nr
         IF( N/=nfcc_com ) THEN
           nmnr = nfcc_com - (2*nr-1)
           jp = jp + 1
-          P(jp) = 0.0D0
+          P(jp) = 0._DP
           kp = jp + nmnr
           P(kp) = y
         END IF
@@ -205,7 +205,7 @@ SUBROUTINE DMGSBV(M,N,A,Ia,Niv,Iflag,S,P,Ip,Inhomo,V,W,Wcnd)
           !                       CALCULATE ORTHOGONAL PROJECTION VECTORS AND
           !                       SEARCH FOR LARGEST NORM
           !
-          y = 0.0D0
+          y = 0._DP
           ip1 = nr + 1
           ix = ip1
           !                       ************************************************
@@ -285,9 +285,9 @@ SUBROUTINE DMGSBV(M,N,A,Ia,Niv,Iflag,S,P,Ip,Inhomo,V,W,Wcnd)
       !
       !        ......EXIT
       IF( Inhomo/=1 ) RETURN
-      IF( (N>1) .AND. (S(np1)<1.0) ) RETURN
+      IF( (N>1) .AND. (S(np1)<1._SP) ) RETURN
       vnorm = NORM2(V(1:M))**2
-      IF( S(np1)/=0.0D0 ) Wcnd = MIN(Wcnd,vnorm/S(np1))
+      IF( S(np1)/=0._DP ) Wcnd = MIN(Wcnd,vnorm/S(np1))
       !        ......EXIT
       IF( vnorm>=eps_com*S(np1) ) RETURN
     END IF

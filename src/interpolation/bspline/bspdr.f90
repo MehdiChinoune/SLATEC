@@ -99,7 +99,7 @@ SUBROUTINE BSPDR(T,A,N,K,Nderiv,Ad)
     DO i = id, N
       ipkmid = i + kmid
       diff = T(ipkmid) - T(i)
-      IF( diff/=0.0E0 ) Ad(ii+jj) = (Ad(ii+jm+1)-Ad(ii+jm))/diff*fkmid
+      IF( diff/=0._SP ) Ad(ii+jj) = (Ad(ii+jm+1)-Ad(ii+jm))/diff*fkmid
       ii = ii + 1
     END DO
     jm = jj

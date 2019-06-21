@@ -59,7 +59,7 @@ SUBROUTINE DPLPMU(Mrelas,Nvars,Lmx,Lbm,Nredc,Info,Ienter,Ileave,Iopt,Npp,&
     n20018, n20121, nerr, nnegrc, npr001, npr003
   REAL(DP) :: aij, alpha, gama, gq, rzj, scalr, wp, rcost, cnorm
   LOGICAL :: pagepl, trans, Stpedg
-  REAL(DP), PARAMETER :: zero = 0.D0, one = 1.D0, two = 2.D0
+  REAL(DP), PARAMETER :: zero = 0._DP, one = 1._DP, two = 2._DP
   !
   !* FIRST EXECUTABLE STATEMENT  DPLPMU
   lpg = Lmx - (Nvars+4)

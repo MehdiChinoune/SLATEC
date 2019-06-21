@@ -37,10 +37,10 @@ CONTAINS
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, SQRT
     !     .. Data statements ..
-    REAL(SP) :: x(6) = [ 1.0E0, 2.0E0, 3.0E0, -1.0E0, -2.0E0, -3.0E0 ]
-    REAL, PARAMETER :: y(6) = [ .0E0, 9.0E0, 64.0E0, 0.0E0, 9.0E0, 64.0E0 ]
-    REAL, PARAMETER :: xchk(6) = [ 1.0E0, 0.0E0, -2.0E0, 0.0E0, 1.0E0, 0.0E0 ]
-    REAL, PARAMETER :: dchk(6) = [ 1.0E0, 0.0E0, -4.0E0, 0.0E0, 24.0E0, 0.0E0 ]
+    REAL(SP) :: x(6) = [ 1._SP, 2._SP, 3._SP, -1._SP, -2._SP, -3._SP ]
+    REAL(SP), PARAMETER :: y(6) = [ 0._SP, 9._SP, 64._SP, 0._SP, 9._SP, 64._SP ]
+    REAL(SP), PARAMETER :: xchk(6) = [ 1._SP, 0._SP, -2._SP, 0._SP, 1._SP, 0._SP ]
+    REAL(SP), PARAMETER :: dchk(6) = [ 1._SP, 0._SP, -4._SP, 0._SP, 24._SP, 0._SP ]
     !* FIRST EXECUTABLE STATEMENT  PNTCHK
     IF( Kprint>=2 ) WRITE (Lun,99001)
     !
@@ -55,7 +55,7 @@ CONTAINS
     !     Set up polynomial test.
     !
     CALL POLINT(n,x,y,c)
-    CALL POLCOF(0.0E0,n,x,c,d,w)
+    CALL POLCOF(0._SP,n,x,c,d,w)
     !
     !     Check to see if POLCOF test passed.
     !
@@ -74,7 +74,7 @@ CONTAINS
     !
     !     Test POLYVL.
     !
-    CALL POLYVL(5,0.0E0,yf,d,n,x,c,w,ierr)
+    CALL POLYVL(5,0._SP,yf,d,n,x,c,w,ierr)
     IF( ABS(dchk(1)-yf)<=tol ) THEN
       IF( Kprint>=3 ) WRITE (Lun,99008) 'PASSED', yf, (d(i),i=1,5)
     ELSE
@@ -110,7 +110,7 @@ CONTAINS
     END IF
     CALL XERCLR
     !
-    x(1) = -1.0E0
+    x(1) = -1._SP
     CALL POLINT(n,x,y,c)
     IF( NUMXER(nerr)/=2 ) THEN
       Ipass = 0
@@ -169,10 +169,10 @@ CONTAINS
     !     .. Local Arrays ..
     REAL(DP) :: c(6), d(6), w(12)
     !     .. Data statements ..
-    REAL(DP) :: x(6) = [ 1.0D0, 2.0D0, 3.0D0, -1.0D0, -2.0D0, -3.0D0 ]
-    REAL(DP), PARAMETER :: y(6) = [ 0.0D0, 9.0D0, 64.0D0, 0.0D0, 9.0D0, 64.0D0 ]
-    REAL(DP), PARAMETER :: xchk(6) = [ 1.0D0, 0.0D0, -2.0D0, 0.0D0, 1.0D0, 0.0D0 ]
-    REAL(DP), PARAMETER :: dchk(6) = [ 1.0D0, 0.0D0, -4.0D0, 0.0D0, 24.0D0, 0.0D0 ]
+    REAL(DP) :: x(6) = [ 1._DP, 2._DP, 3._DP, -1._DP, -2._DP, -3._DP ]
+    REAL(DP), PARAMETER :: y(6) = [ 0._DP, 9._DP, 64._DP, 0._DP, 9._DP, 64._DP ]
+    REAL(DP), PARAMETER :: xchk(6) = [ 1._DP, 0._DP, -2._DP, 0._DP, 1._DP, 0._DP ]
+    REAL(DP), PARAMETER :: dchk(6) = [ 1._DP, 0._DP, -4._DP, 0._DP, 24._DP, 0._DP ]
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, SQRT
     !* FIRST EXECUTABLE STATEMENT  DPNTCK
@@ -189,7 +189,7 @@ CONTAINS
     !     Set up polynomial test.
     !
     CALL DPLINT(n,x,y,c)
-    CALL DPOLCF(0.0D0,n,x,c,d,w)
+    CALL DPOLCF(0._DP,n,x,c,d,w)
     !
     !     Check to see if DPOLCF test passed.
     !
@@ -208,7 +208,7 @@ CONTAINS
     !
     !     Test DPOLVL.
     !
-    CALL DPOLVL(5,0.0D0,yf,d,n,x,c,w,ierr)
+    CALL DPOLVL(5,0._DP,yf,d,n,x,c,w,ierr)
     IF( ABS(dchk(1)-yf)<=tol ) THEN
       IF( Kprint>=3 ) WRITE (Lun,99008) 'PASSED', yf, (d(i),i=1,5)
     ELSE
@@ -244,7 +244,7 @@ CONTAINS
     END IF
     CALL XERCLR
     !
-    x(1) = -1.0D0
+    x(1) = -1._DP
     CALL DPLINT(n,x,y,c)
     IF( NUMXER(nerr)/=2 ) THEN
       Ipass = 0

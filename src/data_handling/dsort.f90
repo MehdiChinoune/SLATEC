@@ -96,7 +96,7 @@ SUBROUTINE DSORT(Dx,Dy,N,Kflag)
     m = 1
     i = 1
     j = nn
-    r = 0.375D0
+    r = 0.375_DP
     GOTO 500
   ELSE
     !
@@ -105,15 +105,15 @@ SUBROUTINE DSORT(Dx,Dy,N,Kflag)
     m = 1
     i = 1
     j = nn
-    r = 0.375D0
+    r = 0.375_DP
   END IF
   !
   100 CONTINUE
   IF( i==j ) GOTO 300
-  IF( r<=0.5898437D0 ) THEN
-    r = r + 3.90625D-2
+  IF( r<=0.5898437_DP ) THEN
+    r = r + 3.90625E-2_DP
   ELSE
-    r = r - 0.21875D0
+    r = r - 0.21875_DP
   END IF
   !
   200  k = i
@@ -222,10 +222,10 @@ SUBROUTINE DSORT(Dx,Dy,N,Kflag)
   !
   500 CONTINUE
   IF( i==j ) GOTO 700
-  IF( r<=0.5898437D0 ) THEN
-    r = r + 3.90625D-2
+  IF( r<=0.5898437_DP ) THEN
+    r = r + 3.90625E-2_DP
   ELSE
-    r = r - 0.21875D0
+    r = r - 0.21875_DP
   END IF
   !
   600  k = i

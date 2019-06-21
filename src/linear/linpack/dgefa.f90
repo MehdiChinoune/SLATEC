@@ -89,7 +89,7 @@ SUBROUTINE DGEFA(A,Lda,N,Ipvt,Info)
       !
       !        ZERO PIVOT IMPLIES THIS COLUMN ALREADY TRIANGULARIZED
       !
-      IF( A(l,k)==0.0D0 ) THEN
+      IF( A(l,k)==0._DP ) THEN
         Info = k
       ELSE
         !
@@ -103,7 +103,7 @@ SUBROUTINE DGEFA(A,Lda,N,Ipvt,Info)
         !
         !           COMPUTE MULTIPLIERS
         !
-        t = -1.0D0/A(k,k)
+        t = -1._DP/A(k,k)
         A(k+1:N,k) = t*A(k+1:N,k)
         !
         !           ROW ELIMINATION WITH COLUMN INDEXING
@@ -120,5 +120,5 @@ SUBROUTINE DGEFA(A,Lda,N,Ipvt,Info)
     END DO
   END IF
   Ipvt(N) = N
-  IF( A(N,N)==0.0D0 ) Info = N
+  IF( A(N,N)==0._DP ) Info = N
 END SUBROUTINE DGEFA

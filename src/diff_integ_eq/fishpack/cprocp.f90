@@ -87,7 +87,7 @@ SUBROUTINE CPROCP(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Y,M,A,B,C,D,U,Yy)
     IF( ABS(den)/=0 ) THEN
       Y(M) = (ym-am*Y(M-1))/den
     ELSE
-      Y(M) = (1.,0.)
+      Y(M) = (1._SP,0._SP)
     END IF
     Y(M-1) = Y(M-1) - D(M-1)*Y(M)
     DO j = 2, mm

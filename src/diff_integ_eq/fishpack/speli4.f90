@@ -107,9 +107,9 @@ SUBROUTINE SPELI4(Iorder,A,B,M,Mbdcnd,Bda,Alpha,Bdb,Beta,C,D,N,Nbdcnd,Bdc,&
   nit_com = l_com - 1
   IF( kswy_com==2 ) nit_com = l_com - 2
   IF( kswy_com==4 ) nit_com = l_com
-  tdlx3_com = 2.0*dlx_com**3
+  tdlx3_com = 2._SP*dlx_com**3
   dlx4_com = dlx_com**4
-  tdly3_com = 2.0*dly_com**3
+  tdly3_com = 2._SP*dly_com**3
   dly4_com = dly_com**4
   !
   !     SET SUBSCRIPT LIMITS FOR PORTION OF ARRAY TO INPUT TO BLKTRI
@@ -126,9 +126,9 @@ SUBROUTINE SPELI4(Iorder,A,B,M,Mbdcnd,Bda,Alpha,Bdb,Beta,C,D,N,Nbdcnd,Bdc,&
   DO i = 1, mit_com
     xi = ait_com + (is_com+i-2)*dlx_com
     CALL COFX(xi,ai,bi,ci)
-    axi = (ai/dlx_com-0.5*bi)/dlx_com
-    bxi = -2.*ai/dlx_com**2 + ci
-    cxi = (ai/dlx_com+0.5*bi)/dlx_com
+    axi = (ai/dlx_com-0.5_SP*bi)/dlx_com
+    bxi = -2._SP*ai/dlx_com**2 + ci
+    cxi = (ai/dlx_com+0.5_SP*bi)/dlx_com
     Am(i) = dly_com**2*axi
     Bm(i) = dly_com**2*bxi
     Cm(i) = dly_com**2*cxi
@@ -137,9 +137,9 @@ SUBROUTINE SPELI4(Iorder,A,B,M,Mbdcnd,Bda,Alpha,Bdb,Beta,C,D,N,Nbdcnd,Bdc,&
   !     SET Y DIRECTION
   !
   DO j = 1, nit_com
-    dyj = 1.0
-    eyj = -2.0
-    fyj = 1.0
+    dyj = 1._SP
+    eyj = -2._SP
+    fyj = 1._SP
     An(j) = dyj
     Bn(j) = eyj
     Cn(j) = fyj
@@ -155,76 +155,76 @@ SUBROUTINE SPELI4(Iorder,A,B,M,Mbdcnd,Bda,Alpha,Bdb,Beta,C,D,N,Nbdcnd,Bdc,&
       !
       !     DIRICHLET-MIXED IN X DIRECTION
       !
-      Am(1) = 0.0
+      Am(1) = 0._SP
       Am(mit_com) = Am(mit_com) + cxm
-      Bm(mit_com) = Bm(mit_com) - 2.*Beta*dlx_com*cxm
-      Cm(mit_com) = 0.0
+      Bm(mit_com) = Bm(mit_com) - 2._SP*Beta*dlx_com*cxm
+      Cm(mit_com) = 0._SP
     CASE (4)
       !
       !     MIXED - MIXED IN X DIRECTION
       !
-      Am(1) = 0.0
-      Bm(1) = Bm(1) + 2.*dlx_com*Alpha*ax1
+      Am(1) = 0._SP
+      Bm(1) = Bm(1) + 2._SP*dlx_com*Alpha*ax1
       Cm(1) = Cm(1) + ax1
       Am(mit_com) = Am(mit_com) + cxm
-      Bm(mit_com) = Bm(mit_com) - 2.*dlx_com*Beta*cxm
-      Cm(mit_com) = 0.0
+      Bm(mit_com) = Bm(mit_com) - 2._SP*dlx_com*Beta*cxm
+      Cm(mit_com) = 0._SP
     CASE (5)
       !
       !     MIXED-DIRICHLET IN X DIRECTION
       !
-      Am(1) = 0.0
-      Bm(1) = Bm(1) + 2.*Alpha*dlx_com*ax1
+      Am(1) = 0._SP
+      Bm(1) = Bm(1) + 2._SP*Alpha*dlx_com*ax1
       Cm(1) = Cm(1) + ax1
-      Cm(mit_com) = 0.0
+      Cm(mit_com) = 0._SP
     CASE DEFAULT
       !
       !     DIRICHLET-DIRICHLET IN X DIRECTION
       !
-      Am(1) = 0.0
-      Cm(mit_com) = 0.0
+      Am(1) = 0._SP
+      Cm(mit_com) = 0._SP
   END SELECT
   !
   !     ADJUST IN Y DIRECTION UNLESS PERIODIC
   !
   dy1 = An(1)
   fyn = Cn(nit_com)
-  gama = 0.0
-  xnu = 0.0
+  gama = 0._SP
+  xnu = 0._SP
   SELECT CASE (kswy_com)
     CASE (1)
     CASE (3)
       !
       !     DIRICHLET-MIXED IN Y DIRECTION
       !
-      An(1) = 0.0
+      An(1) = 0._SP
       An(nit_com) = An(nit_com) + fyn
-      Bn(nit_com) = Bn(nit_com) - 2.*dly_com*xnu*fyn
-      Cn(nit_com) = 0.0
+      Bn(nit_com) = Bn(nit_com) - 2._SP*dly_com*xnu*fyn
+      Cn(nit_com) = 0._SP
     CASE (4)
       !
       !     MIXED - MIXED DIRECTION IN Y DIRECTION
       !
-      An(1) = 0.0
-      Bn(1) = Bn(1) + 2.*dly_com*gama*dy1
+      An(1) = 0._SP
+      Bn(1) = Bn(1) + 2._SP*dly_com*gama*dy1
       Cn(1) = Cn(1) + dy1
       An(nit_com) = An(nit_com) + fyn
-      Bn(nit_com) = Bn(nit_com) - 2.0*dly_com*xnu*fyn
-      Cn(nit_com) = 0.0
+      Bn(nit_com) = Bn(nit_com) - 2._SP*dly_com*xnu*fyn
+      Cn(nit_com) = 0._SP
     CASE (5)
       !
       !     MIXED-DIRICHLET IN Y DIRECTION
       !
-      An(1) = 0.0
-      Bn(1) = Bn(1) + 2.*dly_com*gama*dy1
+      An(1) = 0._SP
+      Bn(1) = Bn(1) + 2._SP*dly_com*gama*dy1
       Cn(1) = Cn(1) + dy1
-      Cn(nit_com) = 0.0
+      Cn(nit_com) = 0._SP
     CASE DEFAULT
       !
       !     DIRICHLET-DIRICHLET IN Y DIRECTION
       !
-      An(1) = 0.0
-      Cn(nit_com) = 0.0
+      An(1) = 0._SP
+      Cn(nit_com) = 0._SP
   END SELECT
   IF( kswx_com/=1 ) THEN
     !
@@ -232,12 +232,12 @@ SUBROUTINE SPELI4(Iorder,A,B,M,Mbdcnd,Bda,Alpha,Bdb,Beta,C,D,N,Nbdcnd,Bdc,&
     !
     DO j = js_com, ns_com
       IF( kswx_com/=2 .AND. kswx_com/=3 ) THEN
-        Usol(is_com,j) = Usol(is_com,j) + 2.0*dlx_com*ax1*Bda(j)
+        Usol(is_com,j) = Usol(is_com,j) + 2._SP*dlx_com*ax1*Bda(j)
       ELSE
         Usol(is_com,j) = Usol(is_com,j) - ax1*Usol(1,j)
       END IF
       IF( kswx_com/=2 .AND. kswx_com/=5 ) THEN
-        Usol(ms_com,j) = Usol(ms_com,j) - 2.0*dlx_com*cxm*Bdb(j)
+        Usol(ms_com,j) = Usol(ms_com,j) - 2._SP*dlx_com*cxm*Bdb(j)
       ELSE
         Usol(ms_com,j) = Usol(ms_com,j) - cxm*Usol(k_com,j)
       END IF
@@ -249,12 +249,12 @@ SUBROUTINE SPELI4(Iorder,A,B,M,Mbdcnd,Bda,Alpha,Bdb,Beta,C,D,N,Nbdcnd,Bdc,&
     !
     DO i = is_com, ms_com
       IF( kswy_com/=2 .AND. kswy_com/=3 ) THEN
-        Usol(i,js_com) = Usol(i,js_com) + 2.0*dly_com*dy1*Bdc(i)
+        Usol(i,js_com) = Usol(i,js_com) + 2._SP*dly_com*dy1*Bdc(i)
       ELSE
         Usol(i,js_com) = Usol(i,js_com) - dy1*Usol(i,1)
       END IF
       IF( kswy_com/=2 .AND. kswy_com/=5 ) THEN
-        Usol(i,ns_com) = Usol(i,ns_com) - 2.0*dly_com*fyn*Bdd(i)
+        Usol(i,ns_com) = Usol(i,ns_com) - 2._SP*dly_com*fyn*Bdd(i)
       ELSE
         Usol(i,ns_com) = Usol(i,ns_com) - fyn*Usol(i,l_com)
       END IF
@@ -274,7 +274,7 @@ SUBROUTINE SPELI4(Iorder,A,B,M,Mbdcnd,Bda,Alpha,Bdb,Beta,C,D,N,Nbdcnd,Bdc,&
     END DO
   END IF
   iord = Iorder
-  Pertrb = 0.0
+  Pertrb = 0._SP
   !
   !     CHECK IF OPERATOR IS SINGULAR
   !

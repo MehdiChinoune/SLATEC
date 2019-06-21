@@ -210,13 +210,13 @@ SUBROUTINE DQAWCE(F,A,B,C,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,&
   Last = 0
   Alist(1) = A
   Blist(1) = B
-  Rlist(1) = 0.0D+00
-  Elist(1) = 0.0D+00
+  Rlist(1) = 0._DP
+  Elist(1) = 0._DP
   Iord(1) = 0
-  Result = 0.0D+00
-  Abserr = 0.0D+00
-  IF( .NOT. (C==A .OR. C==B .OR. (Epsabs<=0.0D+00 .AND. Epsrel<MAX(0.5D+02*epmach,&
-      0.5D-28))) ) THEN
+  Result = 0._DP
+  Abserr = 0._DP
+  IF( .NOT. (C==A .OR. C==B .OR. (Epsabs<=0._DP .AND. Epsrel<MAX(0.5E+02_DP*epmach,&
+      0.5E-28_DP))) ) THEN
     !
     !           FIRST APPROXIMATION TO THE INTEGRAL
     !           -----------------------------------
@@ -241,7 +241,7 @@ SUBROUTINE DQAWCE(F,A,B,C,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,&
     !
     errbnd = MAX(Epsabs,Epsrel*ABS(Result))
     IF( Limit==1 ) Ier = 1
-    IF( Abserr>=MIN(0.1D-01*ABS(Result),errbnd) .AND. Ier/=1 ) THEN
+    IF( Abserr>=MIN(0.1E-01_DP*ABS(Result),errbnd) .AND. Ier/=1 ) THEN
       !
       !           INITIALIZATION
       !           --------------
@@ -266,10 +266,10 @@ SUBROUTINE DQAWCE(F,A,B,C,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,&
         !           ERROR ESTIMATE.
         !
         a1 = Alist(maxerr)
-        b1 = 0.5D+00*(Alist(maxerr)+Blist(maxerr))
+        b1 = 0.5_DP*(Alist(maxerr)+Blist(maxerr))
         b2 = Blist(maxerr)
-        IF( C<=b1 .AND. C>a1 ) b1 = 0.5D+00*(C+b2)
-        IF( C>b1 .AND. C<b2 ) b1 = 0.5D+00*(a1+C)
+        IF( C<=b1 .AND. C>a1 ) b1 = 0.5_DP*(C+b2)
+        IF( C>b1 .AND. C<b2 ) b1 = 0.5_DP*(a1+C)
         a2 = b1
         krule = 2
         CALL DQC25C(F,a1,b1,C,area1,error1,krule,nev)
@@ -285,7 +285,7 @@ SUBROUTINE DQAWCE(F,A,B,C,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,&
         errsum = errsum + erro12 - errmax
         area = area + area12 - Rlist(maxerr)
         IF( ABS(Rlist(maxerr)-area12)<0.1D-04*ABS(area12) .AND. &
-          erro12>=0.99D+00*errmax .AND. krule==0 ) iroff1 = iroff1 + 1
+          erro12>=0.99_DP*errmax .AND. krule==0 ) iroff1 = iroff1 + 1
         IF( Last>10 .AND. erro12>errmax .AND. krule==0 ) iroff2 = iroff2 + 1
         Rlist(maxerr) = area1
         Rlist(Last) = area2
@@ -304,7 +304,7 @@ SUBROUTINE DQAWCE(F,A,B,C,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,&
           !           SET ERROR FLAG IN THE CASE OF BAD INTEGRAND BEHAVIOUR
           !           AT A POINT OF THE INTEGRATION RANGE.
           !
-          IF( MAX(ABS(a1),ABS(b2))<=(0.1D+01+0.1D+03*epmach)&
+          IF( MAX(ABS(a1),ABS(b2))<=(1._DP+100._DP*epmach)&
             *(ABS(a2)+0.1D+04*uflow) ) Ier = 3
         END IF
         !
@@ -338,7 +338,7 @@ SUBROUTINE DQAWCE(F,A,B,C,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,&
       !           COMPUTE FINAL RESULT.
       !           ---------------------
       !
-      Result = 0.0D+00
+      Result = 0._DP
       DO k = 1, Last
         Result = Result + Rlist(k)
       END DO

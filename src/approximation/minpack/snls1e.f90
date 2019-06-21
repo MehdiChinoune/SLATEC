@@ -521,7 +521,7 @@ SUBROUTINE SNLS1E(FCN,Iopt,M,N,X,Fvec,Tol,Nprint,Info,Iw,Wa,Lwa)
   REAL(SP) :: X(N), Fvec(M), Wa(Lwa)
   INTEGER :: indexx, maxfev, mode, nfev, njev
   REAL(SP) :: ftol, gtol, xtol, epsfcn
-  REAL(SP), PARAMETER :: factor = 1.0E2, zero = 0.0E0
+  REAL(SP), PARAMETER :: factor = 1.0E2, zero = 0._SP
   !* FIRST EXECUTABLE STATEMENT  SNLS1E
   Info = 0
   !

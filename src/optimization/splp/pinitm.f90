@@ -52,7 +52,7 @@ SUBROUTINE PINITM(M,N,Sx,Ix,Lmx,Ipagef)
   INTEGER :: Ipagef, Lmx, Ix(Lmx), M, N
   REAL(SP) :: Sx(Lmx)
   INTEGER :: i, iopt, lp4, n20008, n20012, nerr
-  REAL(SP), PARAMETER :: zero = 0.E0, one = 1.E0
+  REAL(SP), PARAMETER :: zero = 0.E0, one = 1._SP
   !* FIRST EXECUTABLE STATEMENT  PINITM
   iopt = 1
   !

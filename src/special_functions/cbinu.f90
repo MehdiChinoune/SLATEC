@@ -24,14 +24,14 @@ SUBROUTINE CBINU(Z,Fnu,Kode,N,Cy,Nz,Rl,Fnul,Tol,Elim,Alim)
   INTEGER :: i, inw, Kode, N, nlast, nn, nui, nw, Nz
   COMPLEX(SP) :: cw(2), Cy(N), Z
   REAL(SP) :: Alim, az, dfnu, Elim, Fnu, Fnul, Rl, Tol
-  COMPLEX(SP), PARAMETER :: czero = (0.0E0,0.0E0)
+  COMPLEX(SP), PARAMETER :: czero = (0._SP,0._SP)
   !* FIRST EXECUTABLE STATEMENT  CBINU
   Nz = 0
   az = ABS(Z)
   nn = N
   dfnu = Fnu + (N-1)
-  IF( az>2.0E0 ) THEN
-    IF( az*az*0.25E0>dfnu+1.0E0 ) GOTO 100
+  IF( az>2._SP ) THEN
+    IF( az*az*0.25E0>dfnu+1._SP ) GOTO 100
   END IF
   !-----------------------------------------------------------------------
   !     POWER SERIES
@@ -45,7 +45,7 @@ SUBROUTINE CBINU(Z,Fnu,Kode,N,Cy,Nz,Rl,Fnul,Tol,Elim,Alim)
   dfnu = Fnu + (nn-1)
   100 CONTINUE
   IF( az>=Rl ) THEN
-    IF( dfnu>1.0E0 ) THEN
+    IF( dfnu>1._SP ) THEN
       IF( az+az<dfnu*dfnu ) GOTO 200
     END IF
     !-----------------------------------------------------------------------
@@ -54,7 +54,7 @@ SUBROUTINE CBINU(Z,Fnu,Kode,N,Cy,Nz,Rl,Fnul,Tol,Elim,Alim)
     CALL CASYI(Z,Fnu,Kode,nn,Cy,nw,Rl,Tol,Elim,Alim)
     IF( nw>=0 ) GOTO 600
     GOTO 700
-  ELSEIF( dfnu<=1.0E0 ) THEN
+  ELSEIF( dfnu<=1._SP ) THEN
     GOTO 400
   END IF
   !-----------------------------------------------------------------------

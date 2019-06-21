@@ -72,7 +72,7 @@ SUBROUTINE DOGLEG(N,R,Lr,Diag,Qtb,Delta,X,Wa1,Wa2)
   REAL(SP) :: R(Lr), Diag(N), Qtb(N), X(N), Wa1(N), Wa2(N)
   INTEGER :: i, j, jj, jp1, k, l
   REAL(SP) :: alpha, bnorm, epsmch, gnorm, qnorm, sgnorm, summ, temp
-  REAL(SP), PARAMETER :: one = 1.0E0, zero = 0.0E0
+  REAL(SP), PARAMETER :: one = 1._SP, zero = 0._SP
   !* FIRST EXECUTABLE STATEMENT  DOGLEG
   epsmch = R1MACH(4)
   !

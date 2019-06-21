@@ -69,7 +69,7 @@ SUBROUTINE CPOFA(A,Lda,N,Info)
   !* FIRST EXECUTABLE STATEMENT  CPOFA
   DO j = 1, N
     Info = j
-    s = 0.0E0
+    s = 0._SP
     jm1 = j - 1
     IF( jm1>=1 ) THEN
       DO k = 1, jm1
@@ -80,8 +80,8 @@ SUBROUTINE CPOFA(A,Lda,N,Info)
       END DO
     END IF
     s = REAL(A(j,j)) - s
-    IF( s<=0.0E0 .OR. AIMAG(A(j,j))/=0.0E0 ) RETURN
-    A(j,j) = CMPLX(SQRT(s),0.0E0)
+    IF( s<=0._SP .OR. AIMAG(A(j,j))/=0._SP ) RETURN
+    A(j,j) = CMPLX(SQRT(s),0._SP,SP)
   END DO
   Info = 0
   RETURN

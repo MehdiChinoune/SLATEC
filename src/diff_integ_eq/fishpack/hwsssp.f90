@@ -377,9 +377,9 @@ SUBROUTINE HWSSSP(Ts,Tf,M,Mbdcnd,Bdts,Bdtf,Ps,Pf,N,Nbdcnd,Bdps,Bdpf,&
   REAL(SP) :: Elmbda, Pertrb, Pf, Ps, Tf, Ts
   REAL(SP) :: Bdpf(M+1), Bdps(M+1), Bdtf(N+1), Bdts(N+1), F(Idimf,N+1), W(:)
   REAL(SP) :: tpi
-  REAL(SP), PARAMETER :: pi = 3.14159265358979
+  REAL(SP), PARAMETER :: pi = 3.14159265358979_SP
   !* FIRST EXECUTABLE STATEMENT  HWSSSP
-  tpi = 2.*pi
+  tpi = 2._SP*pi
   Ierror = 0
   IF( Ts<0. .OR. Tf>pi ) Ierror = 1
   IF( Ts>=Tf ) Ierror = 2

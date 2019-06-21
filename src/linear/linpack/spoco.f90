@@ -105,7 +105,7 @@ SUBROUTINE SPOCO(A,Lda,N,Rcond,Z,Info)
       END DO
     END IF
   END DO
-  anorm = 0.0E0
+  anorm = 0._SP
   DO j = 1, N
     anorm = MAX(anorm,Z(j))
   END DO
@@ -123,12 +123,12 @@ SUBROUTINE SPOCO(A,Lda,N,Rcond,Z,Info)
     !
     !        SOLVE TRANS(R)*W = E
     !
-    ek = 1.0E0
+    ek = 1._SP
     DO j = 1, N
-      Z(j) = 0.0E0
+      Z(j) = 0._SP
     END DO
     DO k = 1, N
-      IF( Z(k)/=0.0E0 ) ek = SIGN(ek,-Z(k))
+      IF( Z(k)/=0._SP ) ek = SIGN(ek,-Z(k))
       IF( ABS(ek-Z(k))>A(k,k) ) THEN
         s = A(k,k)/ABS(ek-Z(k))
         Z = s*Z
@@ -157,7 +157,7 @@ SUBROUTINE SPOCO(A,Lda,N,Rcond,Z,Info)
       END IF
       Z(k) = wk
     END DO
-    s = 1.0E0/SUM( ABS(Z) )
+    s = 1._SP/SUM( ABS(Z) )
     Z = s*Z
     !
     !        SOLVE R*Y = W
@@ -172,10 +172,10 @@ SUBROUTINE SPOCO(A,Lda,N,Rcond,Z,Info)
       t = -Z(k)
       CALL SAXPY(k-1,t,A(1:k-1,k),1,Z(1:k-1),1)
     END DO
-    s = 1.0E0/SUM( ABS(Z) )
+    s = 1._SP/SUM( ABS(Z) )
     Z = s*Z
     !
-    ynorm = 1.0E0
+    ynorm = 1._SP
     !
     !        SOLVE TRANS(R)*V = Y
     !
@@ -188,7 +188,7 @@ SUBROUTINE SPOCO(A,Lda,N,Rcond,Z,Info)
       END IF
       Z(k) = Z(k)/A(k,k)
     END DO
-    s = 1.0E0/SUM( ABS(Z) )
+    s = 1._SP/SUM( ABS(Z) )
     Z = s*Z
     ynorm = s*ynorm
     !
@@ -206,11 +206,11 @@ SUBROUTINE SPOCO(A,Lda,N,Rcond,Z,Info)
       CALL SAXPY(k-1,t,A(1:k-1,k),1,Z(1:k-1),1)
     END DO
     !        MAKE ZNORM = 1.0
-    s = 1.0E0/SUM( ABS(Z) )
+    s = 1._SP/SUM( ABS(Z) )
     Z = s*Z
     ynorm = s*ynorm
     !
-    IF( anorm/=0.0E0 ) Rcond = ynorm/anorm
-    IF( anorm==0.0E0 ) Rcond = 0.0E0
+    IF( anorm/=0._SP ) Rcond = ynorm/anorm
+    IF( anorm==0._SP ) Rcond = 0._SP
   END IF
 END SUBROUTINE SPOCO

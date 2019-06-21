@@ -36,21 +36,21 @@ REAL(DP) FUNCTION DEXPRL(X)
   REAL(DP) :: X
   INTEGER :: i
   REAL(DP) :: absx
-  REAL(DP), PARAMETER :: alneps = LOG(D1MACH(3)), xn = 3.72D0 - 0.3D0*alneps, &
-    xln = LOG((xn+1.0D0)/1.36D0), xbnd = D1MACH(3)
-  INTEGER, PARAMETER :: nterms = INT( xn - (xn*xln+alneps)/(xln+1.36D0) + 1.5D0 )
+  REAL(DP), PARAMETER :: alneps = LOG(D1MACH(3)), xn = 3.72_DP - 0.3_DP*alneps, &
+    xln = LOG((xn+1._DP)/1.36_DP), xbnd = D1MACH(3)
+  INTEGER, PARAMETER :: nterms = INT( xn - (xn*xln+alneps)/(xln+1.36_DP) + 1.5_DP )
   !* FIRST EXECUTABLE STATEMENT  DEXPRL
   !
   absx = ABS(X)
-  IF( absx>0.5D0 ) DEXPRL = (EXP(X)-1.0D0)/X
-  IF( absx>0.5D0 ) RETURN
+  IF( absx>0.5_DP ) DEXPRL = (EXP(X)-1._DP)/X
+  IF( absx>0.5_DP ) RETURN
   !
-  DEXPRL = 1.0D0
+  DEXPRL = 1._DP
   IF( absx<xbnd ) RETURN
   !
-  DEXPRL = 0.0D0
+  DEXPRL = 0._DP
   DO i = 1, nterms
-    DEXPRL = 1.0D0 + DEXPRL*X/(nterms+2-i)
+    DEXPRL = 1._DP + DEXPRL*X/(nterms+2-i)
   END DO
   !
 END FUNCTION DEXPRL

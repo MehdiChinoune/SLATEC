@@ -35,21 +35,21 @@ REAL(SP) FUNCTION EXPREL(X)
   REAL(SP) :: X
   INTEGER :: i
   REAL(SP) :: absx
-  REAL(SP), PARAMETER :: alneps = LOG(R1MACH(3)), xn = 3.72 - 0.3*alneps, &
-    xln = LOG((xn+1.0)/1.36), xbnd = R1MACH(3)
-  INTEGER, PARAMETER :: nterms = INT( xn - (xn*xln+alneps)/(xln+1.36) + 1.5 )
+  REAL(SP), PARAMETER :: alneps = LOG(R1MACH(3)), xn = 3.72_SP - 0.3_SP*alneps, &
+    xln = LOG((xn+1._SP)/1.36_SP), xbnd = R1MACH(3)
+  INTEGER, PARAMETER :: nterms = INT( xn - (xn*xln+alneps)/(xln+1.36_SP) + 1.5_SP )
   !* FIRST EXECUTABLE STATEMENT  EXPREL
   !
   absx = ABS(X)
-  IF( absx>0.5 ) EXPREL = (EXP(X)-1.0)/X
-  IF( absx>0.5 ) RETURN
+  IF( absx>0.5_SP ) EXPREL = (EXP(X)-1._SP)/X
+  IF( absx>0.5_SP ) RETURN
   !
-  EXPREL = 1.0
+  EXPREL = 1._SP
   IF( absx<xbnd ) RETURN
   !
-  EXPREL = 0.0
+  EXPREL = 0._SP
   DO i = 1, nterms
-    EXPREL = 1.0 + EXPREL*X/(nterms+2-i)
+    EXPREL = 1._SP + EXPREL*X/(nterms+2-i)
   END DO
   !
 END FUNCTION EXPREL

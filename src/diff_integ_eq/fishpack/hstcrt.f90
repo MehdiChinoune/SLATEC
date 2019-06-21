@@ -308,12 +308,12 @@ SUBROUTINE HSTCRT(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   mperod = 0
   IF( Mbdcnd>0 ) mperod = 1
   deltax = (B-A)/M
-  twdelx = 1./deltax
-  delxsq = 2./deltax**2
+  twdelx = 1._SP/deltax
+  delxsq = 2._SP/deltax**2
   deltay = (D-C)/N
-  twdely = 1./deltay
+  twdely = 1._SP/deltay
   delysq = deltay**2
-  twdysq = 2./delysq
+  twdysq = 2._SP/delysq
   np = Nbdcnd + 1
   mp = Mbdcnd + 1
   !
@@ -323,7 +323,7 @@ SUBROUTINE HSTCRT(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   id3 = id2 + M
   id4 = id3 + M
   s = (deltay/deltax)**2
-  st2 = 2.*s
+  st2 = 2._SP*s
   DO i = 1, M
     W(i) = s
     j = id2 + i
@@ -395,10 +395,10 @@ SUBROUTINE HSTCRT(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
     END DO
   END DO
   IF( mperod/=0 ) THEN
-    W(1) = 0.
-    W(id4) = 0.
+    W(1) = 0._SP
+    W(id4) = 0._SP
   END IF
-  Pertrb = 0.
+  Pertrb = 0._SP
   IF( Elmbda<0 ) THEN
   ELSEIF( Elmbda==0 ) THEN
     SELECT CASE (mp)
@@ -411,7 +411,7 @@ SUBROUTINE HSTCRT(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
             !     FOR SINGULAR PROBLEMS MUST ADJUST DATA TO INSURE THAT A SOLUTION
             !     WILL EXIST.
             !
-            s = 0.
+            s = 0._SP
             DO j = 1, N
               DO i = 1, M
                 s = s + F(i,j)

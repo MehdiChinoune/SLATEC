@@ -138,17 +138,17 @@ SUBROUTINE DRC3JJ(L2,L3,M2,M3,L1min,L1max,Thrcof,Ndim,Ier)
   REAL(DP) :: a1, a1s, a2, a2s, c1, c1old, c2, cnorm, denom, dv, hugee, &
     l1, m1, newfac, oldfac, ratio, sign1, sign2, srhuge, srtiny, sum1, sum2, &
     sumbac, sumfor, sumuni, thresh, tinyy, x, x1, x2, x3, y, y1, y2, y3
-  REAL(DP), PARAMETER :: zero = 0.0D0, eps = 0.01D0, one = 1.0D0, two = 2.0D0, &
-    three = 3.0D0
+  REAL(DP), PARAMETER :: zero = 0._DP, eps = 0.01_DP, one = 1._DP, two = 2._DP, &
+    three = 3._DP
   !
   !* FIRST EXECUTABLE STATEMENT  DRC3JJ
   Ier = 0
   !  HUGE is the square root of one twentieth of the largest floating
   !  point number, approximately.
-  hugee = SQRT(D1MACH(2)/20.0D0)
+  hugee = SQRT(D1MACH(2)/20._DP)
   srhuge = SQRT(hugee)
-  tinyy = 1.0D0/hugee
-  srtiny = 1.0D0/srhuge
+  tinyy = 1._DP/hugee
+  srtiny = 1._DP/srhuge
   !
   !     LMATCH = ZERO
   m1 = -M2 - M3
@@ -197,8 +197,8 @@ SUBROUTINE DRC3JJ(L2,L3,M2,M3,L1min,L1max,Thrcof,Ndim,Ier)
       !  Starting forward recursion from L1MIN taking NSTEP1 steps
       !
       l1 = L1min
-      newfac = 0.0D0
-      c1 = 0.0D0
+      newfac = 0._DP
+      c1 = 0._DP
       Thrcof(1) = srtiny
       sum1 = (l1+l1+one)*tinyy
       !

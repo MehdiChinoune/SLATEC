@@ -79,7 +79,7 @@ SUBROUTINE DLSI(W,Mdw,Ma,Mg,N,Prgopt,X,Rnorm,Mode,Ws,Ip)
   tol = SQRT(drelpr)
   !
   Mode = 0
-  Rnorm = 0.D0
+  Rnorm = 0._DP
   m = Ma + Mg
   np1 = N + 1
   krank = 0
@@ -95,8 +95,8 @@ SUBROUTINE DLSI(W,Mdw,Ma,Mg,N,Prgopt,X,Rnorm,Mode,Ws,Ip)
       !
       IF( link>1 ) THEN
         key = INT( Prgopt(last+1) )
-        IF( key==1 ) cov = Prgopt(last+2)/=0.D0
-        IF( key==10 ) sclcov = Prgopt(last+2)==0.D0
+        IF( key==1 ) cov = Prgopt(last+2)/=0._DP
+        IF( key==10 ) sclcov = Prgopt(last+2)==0._DP
         IF( key==5 ) tol = MAX(drelpr,Prgopt(last+2))
         next = INT( Prgopt(link) )
         last = link
@@ -106,7 +106,7 @@ SUBROUTINE DLSI(W,Mdw,Ma,Mg,N,Prgopt,X,Rnorm,Mode,Ws,Ip)
       !
       !     Compute matrix norm of least squares equations.
       !
-      anorm = 0.D0
+      anorm = 0._DP
       DO j = 1, N
         anorm = MAX(anorm,SUM(ABS(W(1:Ma,j))))
       END DO
@@ -117,7 +117,7 @@ SUBROUTINE DLSI(W,Mdw,Ma,Mg,N,Prgopt,X,Rnorm,Mode,Ws,Ip)
       !
       !     Compute Householder orthogonal decomposition of matrix.
       !
-      Ws(1:N) = 0.D0
+      Ws(1:N) = 0._DP
       Ws(1:Ma) = W(1:Ma,np1)
       k = MAX(m,N)
       minman = MIN(Ma,N)
@@ -125,7 +125,7 @@ SUBROUTINE DLSI(W,Mdw,Ma,Mg,N,Prgopt,X,Rnorm,Mode,Ws,Ip)
       n2 = n1 + N
       CALL DHFTI(W,Mdw,Ma,N,Ws,Ma,1,tau,krank,temp,Ws(n2),Ws(n1),Ip)
       Rnorm = temp(1)
-      fac = 1.D0
+      fac = 1._DP
       gam = Ma - krank
       IF( krank<Ma .AND. sclcov ) fac = Rnorm**2/gam
       !
@@ -226,7 +226,7 @@ SUBROUTINE DLSI(W,Mdw,Ma,Mg,N,Prgopt,X,Rnorm,Mode,Ws,Ip)
         !     Reciprocate diagonal terms.
         !
         DO j = 1, krank
-          W(j,j) = 1.D0/W(j,j)
+          W(j,j) = 1._DP/W(j,j)
         END DO
         !
         !     Invert the upper triangular QR factor on itself.
@@ -256,7 +256,7 @@ SUBROUTINE DLSI(W,Mdw,Ma,Mg,N,Prgopt,X,Rnorm,Mode,Ws,Ip)
           END DO
           !
           DO i = krp1, N
-            W(i,1:i) = 0.D0
+            W(i,1:i) = 0._DP
           END DO
           !
           !        Apply right side transformations to lower triangle.
@@ -269,12 +269,12 @@ SUBROUTINE DLSI(W,Mdw,Ma,Mg,N,Prgopt,X,Rnorm,Mode,Ws,Ip)
             !
             !           If RB>=0.D0, transformation can be regarded as zero.
             !
-            IF( rb<0.D0 ) THEN
-              rb = 1.D0/rb
+            IF( rb<0._DP ) THEN
+              rb = 1._DP/rb
               !
               !              Store unscaled rank one Householder update in work array.
               !
-              Ws(n3:N+n3-1) = 0.D0
+              Ws(n3:N+n3-1) = 0._DP
               l = n1 + i
               k = n3 + i
               Ws(k-1) = Ws(l-1)
@@ -289,7 +289,7 @@ SUBROUTINE DLSI(W,Mdw,Ma,Mg,N,Prgopt,X,Rnorm,Mode,Ws,Ip)
               END DO
               !
               l = n3 + i
-              gam = 0.5D0*rb*DOT_PRODUCT(Ws(l-1:l+N-i-1),Ws(i:N))
+              gam = 0.5_DP*rb*DOT_PRODUCT(Ws(l-1:l+N-i-1),Ws(i:N))
               CALL DAXPY(N-i+1,gam,Ws(l-1),1,Ws(i),1)
               DO j = i, N
                 DO l = 1, i - 1

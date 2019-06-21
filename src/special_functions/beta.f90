@@ -40,7 +40,7 @@ REAL(SP) FUNCTION BETA(A,B)
   REAL(SP), SAVE :: xmax = 0.
   REAL(SP), PARAMETER :: alnsml = LOG(R1MACH(1))
   !* FIRST EXECUTABLE STATEMENT  BETA
-  IF( xmax==0.0 ) THEN
+  IF( xmax==0._SP ) THEN
     CALL GAMLIM(xmin,xmax)
   END IF
   !

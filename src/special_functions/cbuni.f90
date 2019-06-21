@@ -33,7 +33,7 @@ SUBROUTINE CBUNI(Z,Fnu,Kode,N,Y,Nz,Nui,Nlast,Fnul,Tol,Elim,Alim)
   Nz = 0
   xx = REAL(Z)
   yy = AIMAG(Z)
-  ax = ABS(xx)*1.7321E0
+  ax = ABS(xx)*1.7321_SP
   ay = ABS(yy)
   iform = 1
   IF( ay>ax ) iform = 2
@@ -80,34 +80,34 @@ SUBROUTINE CBUNI(Z,Fnu,Kode,N,Y,Nz,Nui,Nlast,Fnul,Tol,Elim,Alim)
         !----------------------------------------------------------------------
         !     SCALE BACKWARD RECURRENCE, BRY(3) IS DEFINED BUT NEVER USED
         !----------------------------------------------------------------------
-        bry(1) = 1.0E+3*R1MACH(1)/Tol
-        bry(2) = 1.0E0/bry(1)
+        bry(1) = 1.E+3_SP*R1MACH(1)/Tol
+        bry(2) = 1._SP/bry(1)
         bry(3) = bry(2)
         iflag = 2
         ascle = bry(2)
-        ax = 1.0E0
-        cscl = CMPLX(ax,0.0E0)
+        ax = 1._SP
+        cscl = CMPLX(ax,0._SP,SP)
         IF( ay<=bry(1) ) THEN
           iflag = 1
           ascle = bry(1)
-          ax = 1.0E0/Tol
-          cscl = CMPLX(ax,0.0E0)
+          ax = 1._SP/Tol
+          cscl = CMPLX(ax,0._SP,SP)
         ELSEIF( ay>=bry(2) ) THEN
           iflag = 3
           ascle = bry(3)
           ax = Tol
-          cscl = CMPLX(ax,0.0E0)
+          cscl = CMPLX(ax,0._SP,SP)
         END IF
-        ay = 1.0E0/ax
-        cscr = CMPLX(ay,0.0E0)
+        ay = 1._SP/ax
+        cscr = CMPLX(ay,0._SP,SP)
         s1 = cy(2)*cscl
         s2 = cy(1)*cscl
-        rz = CMPLX(2.0E0,0.0E0)/Z
+        rz = CMPLX(2._SP,0._SP,SP)/Z
         DO i = 1, Nui
           st = s2
-          s2 = CMPLX(dfnu+fnui,0.0E0)*rz*s2 + s1
+          s2 = CMPLX(dfnu+fnui,0._SP,SP)*rz*s2 + s1
           s1 = st
-          fnui = fnui - 1.0E0
+          fnui = fnui - 1._SP
           IF( iflag<3 ) THEN
             st = s2*cscr
             str = REAL(st)
@@ -121,9 +121,9 @@ SUBROUTINE CBUNI(Z,Fnu,Kode,N,Y,Nz,Nui,Nlast,Fnul,Tol,Elim,Alim)
               s1 = s1*cscr
               s2 = st
               ax = ax*Tol
-              ay = 1.0E0/ax
-              cscl = CMPLX(ax,0.0E0)
-              cscr = CMPLX(ay,0.0E0)
+              ay = 1._SP/ax
+              cscl = CMPLX(ax,0._SP,SP)
+              cscr = CMPLX(ay,0._SP,SP)
               s1 = s1*cscl
               s2 = s2*cscl
             END IF
@@ -136,11 +136,11 @@ SUBROUTINE CBUNI(Z,Fnu,Kode,N,Y,Nz,Nui,Nlast,Fnul,Tol,Elim,Alim)
         k = nl
         DO i = 1, nl
           st = s2
-          s2 = CMPLX(Fnu+fnui,0.0E0)*rz*s2 + s1
+          s2 = CMPLX(Fnu+fnui,0._SP,SP)*rz*s2 + s1
           s1 = st
           st = s2*cscr
           Y(k) = st
-          fnui = fnui - 1.0E0
+          fnui = fnui - 1._SP
           k = k - 1
           IF( iflag<3 ) THEN
             str = REAL(st)
@@ -154,9 +154,9 @@ SUBROUTINE CBUNI(Z,Fnu,Kode,N,Y,Nz,Nui,Nlast,Fnul,Tol,Elim,Alim)
               s1 = s1*cscr
               s2 = st
               ax = ax*Tol
-              ay = 1.0E0/ax
-              cscl = CMPLX(ax,0.0E0)
-              cscr = CMPLX(ay,0.0E0)
+              ay = 1._SP/ax
+              cscl = CMPLX(ax,0._SP,SP)
+              cscr = CMPLX(ay,0._SP,SP)
               s1 = s1*cscl
               s2 = s2*cscl
             END IF

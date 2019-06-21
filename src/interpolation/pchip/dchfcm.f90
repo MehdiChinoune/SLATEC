@@ -99,8 +99,8 @@ INTEGER FUNCTION DCHFCM(D1,D2,Delta)
   !
   !  INITIALIZE.
   !
-  REAL(DP), PARAMETER :: zero = 0.D0, one = 1.D0, two = 2.D0, three = 3.D0, &
-    four = 4.D0, ten = 10.D0
+  REAL(DP), PARAMETER :: zero = 0._DP, one = 1._DP, two = 2._DP, three = 3._DP, &
+    four = 4._DP, ten = 10._DP
   !
   !        MACHINE-DEPENDENT PARAMETER -- SHOULD BE ABOUT 10*UROUND.
   !* FIRST EXECUTABLE STATEMENT  DCHFCM

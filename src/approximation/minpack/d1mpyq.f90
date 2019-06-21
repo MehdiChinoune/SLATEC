@@ -65,7 +65,7 @@ SUBROUTINE D1MPYQ(M,N,A,Lda,V,W)
   REAL(DP) :: A(Lda,N), V(N), W(N)
   INTEGER :: i, j, nm1, nmj
   REAL(DP) :: coss, sinn, temp
-  REAL(DP), PARAMETER :: one = 1.0D0
+  REAL(DP), PARAMETER :: one = 1._DP
   !
   !     APPLY THE FIRST SET OF GIVENS ROTATIONS TO A.
   !

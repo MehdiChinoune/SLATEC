@@ -155,9 +155,9 @@ SUBROUTINE DCPPLT(N,Nelt,Ia,Ja,A,Isym,Iunit)
       IF( irow<=nmax ) THEN
         IF( Isym/=0 ) THEN
           !         Put in non-sym part as well...
-          IF( A(j)==0.0D0 ) THEN
+          IF( A(j)==0._DP ) THEN
             chmat(irow)(icol:icol) = '0'
-          ELSEIF( A(j)>0.0D0 ) THEN
+          ELSEIF( A(j)>0._DP ) THEN
             chmat(irow)(icol:icol) = '#'
           ELSE
             chmat(irow)(icol:icol) = '*'
@@ -165,17 +165,17 @@ SUBROUTINE DCPPLT(N,Nelt,Ia,Ja,A,Isym,Iunit)
         END IF
         IF( irow==icol ) THEN
           !         Diagonal entry.
-          IF( A(j)==0.0D0 ) THEN
+          IF( A(j)==0._DP ) THEN
             chmat(irow)(icol:icol) = '0'
-          ELSEIF( A(j)>0.0D0 ) THEN
+          ELSEIF( A(j)>0._DP ) THEN
             chmat(irow)(icol:icol) = 'D'
           ELSE
             chmat(irow)(icol:icol) = 'N'
           END IF
           !         Off-Diagonal entry
-        ELSEIF( A(j)==0.0D0 ) THEN
+        ELSEIF( A(j)==0._DP ) THEN
           chmat(irow)(icol:icol) = '0'
-        ELSEIF( A(j)>0.0D0 ) THEN
+        ELSEIF( A(j)>0._DP ) THEN
           chmat(irow)(icol:icol) = '#'
         ELSE
           chmat(irow)(icol:icol) = '*'

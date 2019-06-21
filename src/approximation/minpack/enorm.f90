@@ -52,7 +52,8 @@ REAL(SP) FUNCTION ENORM(N,X)
   REAL(SP) :: X(N)
   INTEGER :: i
   REAL(SP) :: agiant, floatn, s1, s2, s3, xabs, x1max, x3max
-  REAL(SP), PARAMETER :: one = 1.0E0, zero = 0.0E0, rdwarf = 3.834E-20, rgiant = 1.304E19
+  REAL(SP), PARAMETER :: one = 1._SP, zero = 0._SP, rdwarf = 3.834E-20_SP, &
+    rgiant = 1.304E19_SP
   !* FIRST EXECUTABLE STATEMENT  ENORM
   s1 = zero
   s2 = zero

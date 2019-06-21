@@ -83,7 +83,7 @@ SUBROUTINE CHKPRM(Intl,Iorder,A,B,M,Mbdcnd,C,D,N,Nbdcnd,COFX,COFY,Idmn,Ierror)
     DO j = 2, N
       yj = C + (j-1)*dly
       CALL COFY(yj,dj,ej,fj)
-      IF( ai*dj<=0.0 ) THEN
+      IF( ai*dj<=0._SP ) THEN
         Ierror = 10
         RETURN
       END IF

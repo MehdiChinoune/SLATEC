@@ -36,19 +36,19 @@ REAL(SP) FUNCTION R9LGIT(A,X,Algap1)
   REAL(SP) :: A, Algap1, X
   INTEGER :: k
   REAL(SP) :: a1x, ax, fk, hstar, p, r, s, t
-  REAL(SP), PARAMETER :: eps = 0.5*R1MACH(3), sqeps = SQRT(R1MACH(4))
+  REAL(SP), PARAMETER :: eps = 0.5_SP*R1MACH(3), sqeps = SQRT(R1MACH(4))
   !* FIRST EXECUTABLE STATEMENT  R9LGIT
   !
-  IF( X<=0.0 .OR. A<X ) CALL XERMSG('R9LGIT','X SHOULD BE GT 0.0 AND LE A',2,2)
+  IF( X<=0._SP .OR. A<X ) CALL XERMSG('R9LGIT','X SHOULD BE GT 0.0 AND LE A',2,2)
   !
   ax = A + X
-  a1x = ax + 1.0
-  r = 0.0
-  p = 1.0
+  a1x = ax + 1._SP
+  r = 0._SP
+  p = 1._SP
   s = p
   DO k = 1, 200
     fk = k
-    t = (A+fk)*X*(1.0+r)
+    t = (A+fk)*X*(1._SP+r)
     r = t/((ax+fk)*(a1x+fk)-t)
     p = r*p
     s = s + p
@@ -57,7 +57,7 @@ REAL(SP) FUNCTION R9LGIT(A,X,Algap1)
   CALL XERMSG('R9LGIT',&
     'NO CONVERGENCE IN 200 TERMS OF CONTINUED FRACTION',3,2)
   !
-  100  hstar = 1.0 - X*s/a1x
+  100  hstar = 1._SP - X*s/a1x
   IF( hstar<sqeps ) CALL XERMSG('R9LGIT',&
     'RESULT LESS THAN HALF PRECISION',1,1)
   !

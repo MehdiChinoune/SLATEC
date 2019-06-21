@@ -630,20 +630,20 @@ CONTAINS
     !         IX  = PERMUTATION VECTOR, I.E.  X(IX(J)) = XS(J)
     !
     INTEGER, PARAMETER :: kflag(NTEST) = [ 2, -1, -2, 1 ]
-    REAL, PARAMETER :: x(N,NTEST) = RESHAPE( [ &
-      36., 54., -1., 29., 1., 80., 98., 99., 55., &
-      1., 2., 3., 4., 5., 6., 7., 8., 9. ,&
-      -9., -8., -7., -6., -5., -4., -3., -2., -1., &
-      36., 54., -1., 29., 1., 80., 98., 99., 55. ], [N,NTEST] )
+    REAL(SP), PARAMETER :: x(N,NTEST) = RESHAPE( [ &
+      36._SP, 54._SP, -1._SP, 29._SP, 1._SP, 80._SP, 98._SP, 99._SP, 55._SP, &
+      1._SP, 2._SP, 3._SP, 4._SP, 5._SP, 6._SP, 7._SP, 8._SP, 9._SP, &
+      -9._SP, -8._SP, -7._SP, -6._SP, -5._SP, -4._SP, -3._SP, -2._SP, -1._SP, &
+      36._SP, 54._SP, -1._SP, 29._SP, 1._SP, 80._SP, 98._SP, 99._SP, 55._SP ], [N,NTEST] )
     INTEGER, PARAMETER :: ix(N,NTEST) = RESHAPE( [ 3, 5, 4, 1, 2, 9, 6, 7, 8, &
       9, 8, 7, 6, 5, 4, 3, 2, 1, &
       9, 8, 7, 6, 5, 4, 3, 2, 1, &
       3, 5, 4, 1, 2, 9, 6, 7, 8 ], [N,NTEST] )
-    REAL, PARAMETER :: xs(N,NTEST) = RESHAPE( [ &
-      -1., 1., 29., 36., 54., 55., 80., 98., 99., &
-      9., 8., 7., 6., 5., 4., 3., 2., 1., &
-      -1., -2., -3., -4., -5., -6., -7., -8., -9., &
-      -1., 1., 29., 36., 54., 55., 80., 98., 99. ], [N,NTEST] )
+    REAL(SP), PARAMETER :: xs(N,NTEST) = RESHAPE( [ &
+      -1._SP, 1._SP, 29._SP, 36._SP, 54._SP, 55._SP, 80._SP, 98._SP, 99._SP, &
+      9._SP, 8._SP, 7._SP, 6._SP, 5._SP, 4._SP, 3._SP, 2._SP, 1._SP, &
+      -1._SP, -2._SP, -3._SP, -4._SP, -5._SP, -6._SP, -7._SP, -8._SP, -9._SP, &
+      -1._SP, 1._SP, 29._SP, 36._SP, 54._SP, 55._SP, 80._SP, 98._SP, 99._SP ], [N,NTEST] )
     !
     !* FIRST EXECUTABLE STATEMENT  SSRTQC
     IF( Kprint>=2 ) THEN
@@ -934,19 +934,19 @@ CONTAINS
     !
     INTEGER, PARAMETER :: kflag(NTEST) = [ 2, -1, -2, 1 ]
     REAL(DP), PARAMETER ::  x(N,NTEST) = RESHAPE( [ &
-      36D0, 54D0, -1D0, 29D0, 1D0, 80D0, 98D0, 99D0, 55D0, &
-      1D0, 2D0, 3D0, 4D0, 5D0, 6D0, 7D0, 8D0, 9D0, &
-      -9D0, -8D0, -7D0, -6D0, -5D0, -4D0, -3D0, -2D0, -1D0, &
-      36D0, 54D0, -1D0, 29D0, 1D0, 80D0, 98D0, 99D0, 55D0 ], [N,NTEST] )
+      36_DP, 54_DP, -1_DP, 29_DP, 1_DP, 80_DP, 98_DP, 99_DP, 55_DP, &
+      1_DP, 2_DP, 3_DP, 4_DP, 5_DP, 6_DP, 7_DP, 8_DP, 9_DP, &
+      -9_DP, -8_DP, -7_DP, -6_DP, -5_DP, -4_DP, -3_DP, -2_DP, -1_DP, &
+      36_DP, 54_DP, -1_DP, 29_DP, 1_DP, 80_DP, 98_DP, 99_DP, 55_DP ], [N,NTEST] )
     INTEGER, PARAMETER :: ix(N,NTEST) = RESHAPE( [ 3, 5, 4, 1, 2, 9, 6, 7, 8, &
       9, 8, 7, 6, 5, 4, 3, 2, 1, &
       9, 8, 7, 6, 5, 4, 3, 2, 1, &
       3, 5, 4, 1, 2, 9, 6, 7, 8 ], [N,NTEST] )
     REAL(DP), PARAMETER ::  xs(N,NTEST) = RESHAPE( [ &
-      -1D0, 1D0, 29D0, 36D0, 54D0, 55D0, 80D0, 98D0, 99D0, &
-      9D0, 8D0, 7D0, 6D0, 5D0, 4D0, 3D0, 2D0, 1D0, &
-      -1D0, -2D0, -3D0, -4D0, -5D0, -6D0, -7D0, -8D0, -9D0, &
-     -1D0, 1D0, 29D0, 36D0, 54D0, 55D0, 80D0, 98D0, 99D0 ], [N,NTEST] )
+      -1_DP, 1_DP, 29_DP, 36_DP, 54_DP, 55_DP, 80_DP, 98_DP, 99_DP, &
+      9_DP, 8_DP, 7_DP, 6_DP, 5_DP, 4_DP, 3_DP, 2_DP, 1_DP, &
+      -1_DP, -2_DP, -3_DP, -4_DP, -5_DP, -6_DP, -7_DP, -8_DP, -9_DP, &
+     -1_DP, 1_DP, 29_DP, 36_DP, 54_DP, 55_DP, 80_DP, 98_DP, 99_DP ], [N,NTEST] )
     !
     !* FIRST EXECUTABLE STATEMENT  DSRTQC
     IF( Kprint>=2 ) THEN

@@ -1562,7 +1562,7 @@ SUBROUTINE SPLP(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   REAL(SP) :: zero
   CHARACTER(8) :: xern1, xern2
   !* FIRST EXECUTABLE STATEMENT  SPLP
-  zero = 0.E0
+  zero = 0._SP
   iopt = 1
   !
   !     VERIFY THAT MRELAS, NVARS > 0.

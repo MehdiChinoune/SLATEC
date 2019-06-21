@@ -82,7 +82,7 @@ SUBROUTINE COSQF(N,X,Wsave)
   REAL(SP) :: Wsave(3*N+15), X(N)
   REAL(SP) :: sqrt2, tsqx
   !* FIRST EXECUTABLE STATEMENT  COSQF
-  sqrt2 = SQRT(2.)
+  sqrt2 = SQRT(2._SP)
   IF( N<2 ) THEN
   ELSEIF( N==2 ) THEN
     tsqx = sqrt2*X(2)

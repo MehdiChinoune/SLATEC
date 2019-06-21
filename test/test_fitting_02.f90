@@ -55,29 +55,32 @@ CONTAINS
     !     in this example).
     !
     REAL(DP), PARAMETER :: a(6,5) = RESHAPE( [ &
-      -74., 80., 18., -11., -4.,   14., -69., 21., 28., 0., &
-      66., -72., -5., 7., 1.,     -12., 66., -30., -23., 3., &
-      3., 8., -7., -4., 1.,        4., -12., 4., 4., 0. ], [6,5], ORDER = [2,1] )
+      -74._DP, 80._DP, 18._DP, -11._DP, -4._DP,   14._DP, -69._DP, 21._DP, 28._DP, 0._DP, &
+      66._DP, -72._DP, -5._DP, 7._DP, 1._DP,     -12._DP, 66._DP, -30._DP, -23._DP, 3._DP, &
+      3._DP, 8._DP, -7._DP, -4._DP, 1._DP,        4._DP, -12._DP, 4._DP, 4._DP, 0._DP ], &
+      [6,5], ORDER = [2,1] )
     !
     !     The array G contains the inequality constraint equations,
     !     written in the sense
     !     (row vector)*(solution vector) >= (given value).
     !
-    REAL(DP), PARAMETER :: g(5,5) = RESHAPE( [ -1., -1., -1., -1., -1., &
-      10., 10., -3., 5., 4.,    -8., 1., -2., -5., 3.,    8., -1., 2., 5., -3., &
-      -4., -2., 3., -5., 1. ], [5,5], ORDER = [2,1] )
+    REAL(DP), PARAMETER :: g(5,5) = RESHAPE( [ -1._DP, -1._DP, -1._DP, -1._DP, -1._DP, &
+      10._DP, 10._DP, -3._DP, 5._DP, 4._DP,    -8._DP, 1._DP, -2._DP, -5._DP, 3._DP, &
+      8._DP, -1._DP, 2._DP, 5._DP, -3._DP,    -4._DP, -2._DP, 3._DP, -5._DP, 1._DP ], &
+      [5,5], ORDER = [2,1] )
     !
     !     Define the least squares right-side vector.
     !
-    REAL(DP), PARAMETER :: f(6) = [ -5., -9., 708., 4165., -13266., 8409. ]
+    REAL(DP), PARAMETER :: f(6) = [ -5._DP, -9._DP, 708._DP, 4165._DP, &
+      -13266._DP, 8409._DP ]
     !
     !     Define the inequality constraint right-side vector.
     !
-    REAL(DP), PARAMETER :: h(5) = [ -5., 20., -40., 11., -30. ]
+    REAL(DP), PARAMETER :: h(5) = [ -5._DP, 20._DP, -40._DP, 11._DP, -30._DP ]
     !
     !     Define the vector that is the known solution.
     !
-    REAL(DP), PARAMETER :: sol(5) = [ 1., 2., -1., 3., -4. ]
+    REAL(DP), PARAMETER :: sol(5) = [ 1._DP, 2._DP, -1._DP, 3._DP, -4._DP ]
     !* FIRST EXECUTABLE STATEMENT  DDLSEIT
     IF( Kprint>=2 ) WRITE (Lun,99001)
     !
@@ -136,12 +139,12 @@ CONTAINS
     !
     tnorm = NORM2(sol(1:n))
     err = sol
-    CALL DAXPY(n,-1.0D0,x,1,err,1)
+    CALL DAXPY(n,-1._DP,x,1,err,1)
     cnorm = NORM2(err(1:n))
     relerr = cnorm/tnorm
     relnrm = (resnrm-rnorml)/resnrm
     !
-    IF( relerr(1)<=70.0D0*SQRT(D1MACH(4)) .AND. relnrm(1)<=5.0D0*D1MACH(4) ) THEN
+    IF( relerr(1)<=70._DP*SQRT(D1MACH(4)) .AND. relnrm(1)<=5._DP*D1MACH(4) ) THEN
       Ipass = 1
       IF( Kprint>=3 ) WRITE (Lun,99002)
       99002 FORMAT (/' DLSEI PASSED TEST')
@@ -275,23 +278,23 @@ CONTAINS
     USE slatec, ONLY : D1MACH, DGLSS
     REAL(DP) :: a(4,4), b(4), delmax, delx, r, rnorm(1), work(50)
     INTEGER :: i, Ipass, j, kk, Kprint, nerr, kprog, kcase, iwork(20), info, Lun
-    REAL(DP), PARAMETER :: aa(4,4,2) = RESHAPE( [1.D0, .5D0, 1.D0, .25D0, &
-      0.D0, 2.D0, 0.D0, 1.D0, 2.D0, -1.D0, 1.D0, 0.D0, 0.D0, 0.D0, 0.D0, 0.D0, &
-      1.D0, 2.D0, -1.D0, 0.D0, 0.D0, 1.D0, 2.D0, 0.D0, -1.D0, 0.D0, 1.D0, 0.D0, &
-      1.D0, 0.D0, 1.D0, 0.D0 ], [4,4,2] )
-    REAL(DP), PARAMETER :: bb(4,2) = RESHAPE( [ 3.D0, 1.5D0, 2.D0, 1.25D0, &
-      1.D0, 3.D0, 3.D0, 0.D0 ], [4,2] )
-    REAL(DP), PARAMETER :: xx(4,4) = RESHAPE( [ .9999999999999787D0, 1.000000000000007D0, &
-      1.000000000000007D0, 0.D0, .8095238095238102D0, 1.047619047619044D0, &
-      1.095238095238081D0, 0.D0, .7777777777777857D0, 1.444444444444429D0, &
-      .3333333333333393D0, .5555555555555500D0, .3333333333333321D0, 0.0D0, &
-      -.3333333333333286D0,.3333333333333286D0 ], [4,4] )
+    REAL(DP), PARAMETER :: aa(4,4,2) = RESHAPE( [1._DP, .5_DP, 1._DP, .25_DP, &
+      0._DP, 2._DP, 0._DP, 1._DP, 2._DP, -1._DP, 1._DP, 0._DP, 0._DP, 0._DP, 0._DP, 0._DP, &
+      1._DP, 2._DP, -1._DP, 0._DP, 0._DP, 1._DP, 2._DP, 0._DP, -1._DP, 0._DP, 1._DP, 0._DP, &
+      1._DP, 0._DP, 1._DP, 0._DP ], [4,4,2] )
+    REAL(DP), PARAMETER :: bb(4,2) = RESHAPE( [ 3._DP, 1.5_DP, 2._DP, 1.25_DP, &
+      1._DP, 3._DP, 3._DP, 0._DP ], [4,2] )
+    REAL(DP), PARAMETER :: xx(4,4) = RESHAPE( [ .9999999999999787_DP, 1.000000000000007_DP, &
+      1.000000000000007_DP, 0._DP, .8095238095238102_DP, 1.047619047619044_DP, &
+      1.095238095238081_DP, 0._DP, .7777777777777857_DP, 1.444444444444429_DP, &
+      .3333333333333393_DP, .5555555555555500_DP, .3333333333333321_DP, 0._DP, &
+      -.3333333333333286_DP,.3333333333333286_DP ], [4,4] )
     INTEGER, PARAMETER :: inf(4) = [ 0, 1, 0, 2 ]
     CHARACTER, PARAMETER :: list(2) = [ 'L', 'U' ]
     !* FIRST EXECUTABLE STATEMENT  DQCGLS
     info = 0
     nerr = 0
-    r = MAX(SQRT(D1MACH(4)),1.D-12)
+    r = MAX(SQRT(D1MACH(4)),1.E-12_DP)
     IF( Kprint>=2 ) WRITE (Lun,99001)
     99001 FORMAT (/' *  DQCGLS - QUICK CHECK FOR DGLSS (DLLSIA AND DULSIA)'/)
     DO kprog = 1, 2
@@ -326,7 +329,7 @@ CONTAINS
         !           TEST COMPUTED  X, RNORM, AND  INFO .
         !
         kk = 2*(kprog-1) + kcase
-        delmax = 0.0D0
+        delmax = 0._DP
         DO i = 1, 4
           delx = ABS(b(i)-xx(i,kk))
           delmax = MAX(delmax,delx)

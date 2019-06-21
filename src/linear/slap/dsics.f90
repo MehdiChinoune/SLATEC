@@ -286,7 +286,7 @@ SUBROUTINE DSICS(N,Nelt,Ia,Ja,A,Isym,Nel,Iel,Jel,El,D,R,Iwarn)
       !
       !         Check to see if we have a problem with the diagonal.
       !
-      IF( D(irow)<=0.0D0 ) THEN
+      IF( D(irow)<=0._DP ) THEN
         IF( Iwarn==0 ) Iwarn = irow
         D(irow) = 1
       END IF
@@ -336,7 +336,7 @@ SUBROUTINE DSICS(N,Nelt,Ia,Ja,A,Isym,Nel,Iel,Jel,El,D,R,Iwarn)
   !         Replace diagonals by their inverses.
   !
   DO i = 1, N
-    D(i) = 1.0D0/D(i)
+    D(i) = 1._DP/D(i)
   END DO
   !------------- LAST LINE OF DSICS FOLLOWS ----------------------------
 END SUBROUTINE DSICS

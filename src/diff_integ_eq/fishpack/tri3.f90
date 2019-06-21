@@ -73,13 +73,13 @@ SUBROUTINE TRI3(M,A,B,C,K,Y1,Y2,Y3,Tcos,D,W1,W2,W3)
         END DO
       END IF
     END IF
-    z = 1./(B(1)-x)
+    z = 1._SP/(B(1)-x)
     D(1) = C(1)*z
     Y1(1) = Y1(1)*z
     Y2(1) = Y2(1)*z
     Y3(1) = Y3(1)*z
     DO i = 2, M
-      z = 1./(B(i)-x-A(i)*D(i-1))
+      z = 1._SP/(B(i)-x-A(i)*D(i-1))
       D(i) = C(i)*z
       Y1(i) = (Y1(i)-A(i)*Y1(i-1))*z
       Y2(i) = (Y2(i)-A(i)*Y2(i-1))*z

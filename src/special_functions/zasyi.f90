@@ -31,19 +31,19 @@ SUBROUTINE ZASYI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Rl,Tol,Elim,Alim)
     ckr, cs1i, cs1r, cs2i, cs2r, czi, czr, dfnu, dki, dkr, dnu2, Elim, ezi, &
     ezr, fdn, Fnu, p1i, p1r, raz, Rl, rtr1, rzi, rzr, s, sgn, sqk, sti, str, &
     s2i, s2r, Tol, tzi, tzr, Yi(N), Yr(N), Zi, Zr
-  REAL(DP), PARAMETER :: pi = 3.14159265358979324D0, rtpi = 0.159154943091895336D0
-  REAL(DP), PARAMETER ::  zeror = 0.0D0, zeroi = 0.0D0, coner = 1.0D0, conei = 0.0D0
+  REAL(DP), PARAMETER :: pi = 3.14159265358979324_DP, rtpi = 0.159154943091895336_DP
+  REAL(DP), PARAMETER ::  zeror = 0._DP, zeroi = 0._DP, coner = 1._DP, conei = 0._DP
   !* FIRST EXECUTABLE STATEMENT  ZASYI
   Nz = 0
   az = ZABS(Zr,Zi)
-  arm = 1.0D+3*D1MACH(1)
+  arm = 1.E3_DP*D1MACH(1)
   rtr1 = SQRT(arm)
   il = MIN(2,N)
   dfnu = Fnu + (N-il)
   !-----------------------------------------------------------------------
   !     OVERFLOW TEST
   !-----------------------------------------------------------------------
-  raz = 1.0D0/az
+  raz = 1._DP/az
   str = Zr*raz
   sti = -Zi*raz
   ak1r = rtpi*str*raz
@@ -66,21 +66,21 @@ SUBROUTINE ZASYI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Rl,Tol,Elim,Alim)
       CALL ZEXP(czr,czi,str,sti)
       CALL ZMLT(ak1r,ak1i,str,sti,ak1r,ak1i)
     END IF
-    fdn = 0.0D0
+    fdn = 0._DP
     IF( dnu2>rtr1 ) fdn = dnu2*dnu2
-    ezr = Zr*8.0D0
-    ezi = Zi*8.0D0
+    ezr = Zr*8._DP
+    ezi = Zi*8._DP
     !-----------------------------------------------------------------------
     !     WHEN Z IS IMAGINARY, THE ERROR TEST MUST BE MADE RELATIVE TO THE
     !     FIRST RECIPROCAL POWER SINCE THIS IS THE LEADING TERM OF THE
     !     EXPANSION FOR THE IMAGINARY PART.
     !-----------------------------------------------------------------------
-    aez = 8.0D0*az
+    aez = 8._DP*az
     s = Tol/aez
     jl = INT( Rl + Rl ) + 2
     p1r = zeror
     p1i = zeroi
-    IF( Zi/=0.0D0 ) THEN
+    IF( Zi/=0._DP ) THEN
       !-----------------------------------------------------------------------
       !     CALCULATE EXP(PI*(0.5+FNU+N-IL)*I) TO MINIMIZE LOSSES OF
       !     SIGNIFICANCE WHEN FNU OR N IS LARGE
@@ -90,7 +90,7 @@ SUBROUTINE ZASYI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Rl,Tol,Elim,Alim)
       inu = inu + N - il
       ak = -SIN(arg)
       bk = COS(arg)
-      IF( Zi<0.0D0 ) bk = -bk
+      IF( Zi<0._DP ) bk = -bk
       p1r = ak
       p1i = bk
       IF( MOD(inu,2)/=0 ) THEN
@@ -99,17 +99,17 @@ SUBROUTINE ZASYI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Rl,Tol,Elim,Alim)
       END IF
     END IF
     DO k = 1, il
-      sqk = fdn - 1.0D0
+      sqk = fdn - 1._DP
       atol = s*ABS(sqk)
-      sgn = 1.0D0
+      sgn = 1._DP
       cs1r = coner
       cs1i = conei
       cs2r = coner
       cs2i = conei
       ckr = coner
       cki = conei
-      ak = 0.0D0
-      aa = 1.0D0
+      ak = 0._DP
+      aa = 1._DP
       bb = aez
       dkr = ezr
       dki = ezi
@@ -126,7 +126,7 @@ SUBROUTINE ZASYI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Rl,Tol,Elim,Alim)
         dki = dki + ezi
         aa = aa*ABS(sqk)/bb
         bb = bb + aez
-        ak = ak + 8.0D0
+        ak = ak + 8._DP
         sqk = sqk - ak
         IF( aa<=atol ) GOTO 20
       END DO
@@ -142,7 +142,7 @@ SUBROUTINE ZASYI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Rl,Tol,Elim,Alim)
         s2r = s2r + str
         s2i = s2i + sti
       END IF
-      fdn = fdn + 8.0D0*dfnu + 4.0D0
+      fdn = fdn + 8._DP*dfnu + 4._DP
       p1r = -p1r
       p1i = -p1i
       m = N - il + k
@@ -161,7 +161,7 @@ SUBROUTINE ZASYI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Rl,Tol,Elim,Alim)
     DO i = ib, nn
       Yr(k) = (ak+Fnu)*(rzr*Yr(k+1)-rzi*Yi(k+1)) + Yr(k+2)
       Yi(k) = (ak+Fnu)*(rzr*Yi(k+1)+rzi*Yr(k+1)) + Yi(k+2)
-      ak = ak - 1.0D0
+      ak = ak - 1._DP
       k = k - 1
     END DO
     IF( koded==0 ) RETURN

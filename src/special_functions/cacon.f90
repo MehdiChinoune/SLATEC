@@ -32,8 +32,8 @@ SUBROUTINE CACON(Z,Fnu,Kode,Mr,N,Y,Nz,Rl,Fnul,Tol,Elim,Alim)
     rz, sc1, sc2, st, s1, s2, Y(N), Z, zn, cy(2)
   REAL(SP) :: Alim, arg, ascle, as2, bscle, bry(3), cpn, c1i, c1m, c1r, &
     Elim, fmr, Fnu, Fnul, Rl, sgn, spn, Tol, yy
-  REAL(SP), PARAMETER :: pi = 3.14159265358979324E0
-  COMPLEX(SP), PARAMETER :: cone = (1.0E0,0.0E0)
+  REAL(SP), PARAMETER :: pi = 3.14159265358979324_SP
+  COMPLEX(SP), PARAMETER :: cone = (1._SP,0._SP)
   !* FIRST EXECUTABLE STATEMENT  CACON
   Nz = 0
   zn = -Z
@@ -49,12 +49,12 @@ SUBROUTINE CACON(Z,Fnu,Kode,Mr,N,Y,Nz,Rl,Fnul,Tol,Elim,Alim)
       s1 = cy(1)
       fmr = Mr
       sgn = -SIGN(pi,fmr)
-      csgn = CMPLX(0.0E0,sgn)
+      csgn = CMPLX(0._SP,sgn,SP)
       IF( Kode/=1 ) THEN
         yy = -AIMAG(zn)
         cpn = COS(yy)
         spn = SIN(yy)
-        csgn = csgn*CMPLX(cpn,spn)
+        csgn = csgn*CMPLX(cpn,spn,SP)
       END IF
       !-----------------------------------------------------------------------
       !     CALCULATE CSPN=EXP(FNU*PI*I) TO MINIMIZE LOSSES OF SIGNIFICANCE
@@ -64,12 +64,12 @@ SUBROUTINE CACON(Z,Fnu,Kode,Mr,N,Y,Nz,Rl,Fnul,Tol,Elim,Alim)
       arg = (Fnu-inu)*sgn
       cpn = COS(arg)
       spn = SIN(arg)
-      cspn = CMPLX(cpn,spn)
+      cspn = CMPLX(cpn,spn,SP)
       IF( MOD(inu,2)==1 ) cspn = -cspn
       iuf = 0
       c1 = s1
       c2 = Y(1)
-      ascle = 1.0E+3*R1MACH(1)/Tol
+      ascle = 1.E+3_SP*R1MACH(1)/Tol
       IF( Kode/=1 ) THEN
         CALL CS1S2(zn,c1,c2,nw,ascle,Alim,iuf)
         Nz = Nz + nw
@@ -89,13 +89,13 @@ SUBROUTINE CACON(Z,Fnu,Kode,Mr,N,Y,Nz,Rl,Fnul,Tol,Elim,Alim)
       Y(2) = cspn*c1 + csgn*c2
       IF( N==2 ) RETURN
       cspn = -cspn
-      rz = CMPLX(2.0E0,0.0E0)/zn
-      ck = CMPLX(Fnu+1.0E0,0.0E0)*rz
+      rz = CMPLX(2._SP,0._SP,SP)/zn
+      ck = CMPLX(Fnu+1._SP,0._SP,SP)*rz
       !-----------------------------------------------------------------------
       !     SCALE NEAR EXPONENT EXTREMES DURING RECURRENCE ON K FUNCTIONS
       !-----------------------------------------------------------------------
-      cscl = CMPLX(1.0E0/Tol,0.0E0)
-      cscr = CMPLX(Tol,0.0E0)
+      cscl = CMPLX(1._SP/Tol,0._SP,SP)
+      cscr = CMPLX(Tol,0._SP,SP)
       css(1) = cscl
       css(2) = cone
       css(3) = cscr
@@ -103,7 +103,7 @@ SUBROUTINE CACON(Z,Fnu,Kode,Mr,N,Y,Nz,Rl,Fnul,Tol,Elim,Alim)
       csr(2) = cone
       csr(3) = cscl
       bry(1) = ascle
-      bry(2) = 1.0E0/ascle
+      bry(2) = 1._SP/ascle
       bry(3) = R1MACH(2)
       as2 = ABS(s2)
       kflag = 2

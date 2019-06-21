@@ -256,16 +256,16 @@ REAL(SP) FUNCTION RF(X,Y,Z,Ier)
   REAL(SP) :: epslon, e2, e3, lamda, mu, s, xn, xndev, xnroot, yn, yndev, ynroot, &
     zn, zndev, znroot
   CHARACTER(16) :: xern3, xern4, xern5, xern6
-  REAL(SP), PARAMETER :: errtol = (4.0E0*R1MACH(3))**(1.0E0/6.0E0), &
-    lolim = 5.0E0*R1MACH(1), uplim = R1MACH(2)/5.0E0
-  REAL(SP), PARAMETER :: c1 = 1.0E0/24.0E0, c2 = 3.0E0/44.0E0, c3 = 1.0E0/14.0E0
+  REAL(SP), PARAMETER :: errtol = (4._SP*R1MACH(3))**(1._SP/6._SP), &
+    lolim = 5._SP*R1MACH(1), uplim = R1MACH(2)/5._SP
+  REAL(SP), PARAMETER :: c1 = 1._SP/24._SP, c2 = 3._SP/44._SP, c3 = 1._SP/14._SP
   !
   !* FIRST EXECUTABLE STATEMENT  RF
   !
   !         CALL ERROR HANDLER IF NECESSARY.
   !
-  RF = 0.0E0
-  IF( MIN(X,Y,Z)<0.0E0 ) THEN
+  RF = 0._SP
+  IF( MIN(X,Y,Z)<0._SP ) THEN
     Ier = 1
     WRITE (xern3,'(1PE15.6)') X
     WRITE (xern4,'(1PE15.6)') Y
@@ -303,16 +303,16 @@ REAL(SP) FUNCTION RF(X,Y,Z,Ier)
   zn = Z
   DO
     !
-    mu = (xn+yn+zn)/3.0E0
-    xndev = 2.0E0 - (mu+xn)/mu
-    yndev = 2.0E0 - (mu+yn)/mu
-    zndev = 2.0E0 - (mu+zn)/mu
+    mu = (xn+yn+zn)/3._SP
+    xndev = 2._SP - (mu+xn)/mu
+    yndev = 2._SP - (mu+yn)/mu
+    zndev = 2._SP - (mu+zn)/mu
     epslon = MAX(ABS(xndev),ABS(yndev),ABS(zndev))
     IF( epslon<errtol ) THEN
       !
       e2 = xndev*yndev - zndev*zndev
       e3 = xndev*yndev*zndev
-      s = 1.0E0 + (c1*e2-0.10E0-c2*e3)*e2 + c3*e3
+      s = 1._SP + (c1*e2-0.10_SP-c2*e3)*e2 + c3*e3
       RF = s/SQRT(mu)
       EXIT
     ELSE
@@ -320,9 +320,9 @@ REAL(SP) FUNCTION RF(X,Y,Z,Ier)
       ynroot = SQRT(yn)
       znroot = SQRT(zn)
       lamda = xnroot*(ynroot+znroot) + ynroot*znroot
-      xn = (xn+lamda)*0.250E0
-      yn = (yn+lamda)*0.250E0
-      zn = (zn+lamda)*0.250E0
+      xn = (xn+lamda)*0.250_SP
+      yn = (yn+lamda)*0.250_SP
+      zn = (zn+lamda)*0.250_SP
     END IF
   END DO
   !

@@ -512,7 +512,7 @@ SUBROUTINE DNLS1E(FCN,Iopt,M,N,X,Fvec,Tol,Nprint,Info,Iw,Wa,Lwa)
   REAL(DP) :: X(N), Fvec(M), Wa(Lwa)
   INTEGER :: indexx, maxfev, mode, nfev, njev
   REAL(DP) :: ftol, gtol, xtol, epsfcn
-  REAL(DP), PARAMETER :: factor = 1.0D2, zero = 0.0D0
+  REAL(DP), PARAMETER :: factor = 1.0D2, zero = 0._DP
   !* FIRST EXECUTABLE STATEMENT  DNLS1E
   Info = 0
   !

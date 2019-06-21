@@ -49,15 +49,15 @@ CONTAINS
     99001 FORMAT (/' QUICK CHECKS FOR BESI AND BESK'//)
     !
     Ipass = 1
-    xx(1) = 0.49E0
-    xx(2) = 1.3E0
-    xx(3) = 5.3E0
-    xx(4) = 13.3E0
-    xx(5) = 21.3E0
-    fn(1) = 0.095E0
-    fn(2) = 0.70E0
-    fn(3) = 0.0E0
-    tol = 500.0E0*MAX(R1MACH(4),7.1E-15)
+    xx(1) = 0.49_SP
+    xx(2) = 1.3_SP
+    xx(3) = 5.3_SP
+    xx(4) = 13.3_SP
+    xx(5) = 21.3_SP
+    fn(1) = 0.095_SP
+    fn(2) = 0.70_SP
+    fn(3) = 0._SP
+    tol = 500._SP*MAX(R1MACH(4),7.1E-15_SP)
     DO kode = 1, 2
       DO m = 1, 3
         DO n = 1, 4
@@ -66,7 +66,7 @@ CONTAINS
             DO ix = 1, 5
               IF( ix>=2 .OR. nu<=3 ) THEN
                 x = xx(ix)
-                rx = 1.0E0/x
+                rx = 1._SP/x
                 CALL BESI(x,fnu,kode,n,y,ny)
                 IF( ny==0 ) THEN
                   CALL BESK(x,fnu,kode,n,w,nw)
@@ -106,13 +106,13 @@ CONTAINS
     !     Check small values of X and order
     !
     n = 2
-    fnu = 1.0E0
-    x = R1MACH(4)/100.0E0
+    fnu = 1._SP
+    x = R1MACH(4)/100._SP
     DO i = 1, 3
       DO kode = 1, 2
         CALL BESI(x,fnu,kode,n,y,ny)
         CALL BESK(x,fnu,kode,n,w,nw)
-        er = y(2)*w(1) + w(2)*y(1) - 1.0E0/x
+        er = y(2)*w(1) + w(2)*y(1) - 1._SP/x
         er = ABS(er)*x
         IF( er>tol ) THEN
           Ipass = 0
@@ -126,7 +126,7 @@ CONTAINS
         END IF
       END DO
       !
-      fnu = R1MACH(4)/100.0E0
+      fnu = R1MACH(4)/100._SP
       x = xx(2*i-1)
     END DO
     !
@@ -135,17 +135,17 @@ CONTAINS
     kode = 2
     DO k = 1, 2
       del = 30*(k-1)
-      fnu = 45.0E0 + del
+      fnu = 45._SP + del
       DO n = 1, 2
-        x = 20.0E0 + del
+        x = 20._SP + del
         DO i = 1, 5
-          rx = 1.0E0/x
+          rx = 1._SP/x
           CALL BESI(x,fnu,kode,n,y,ny)
           IF( ny==0 ) THEN
             CALL BESK(x,fnu,kode,n,w,nw)
             IF( nw==0 ) THEN
               IF( n==1 ) THEN
-                fnup = fnu + 1.0E0
+                fnup = fnu + 1._SP
                 CALL BESI(x,fnup,kode,1,y(2),ny)
                 IF( ny/=0 ) CYCLE
                 CALL BESK(x,fnup,kode,1,w(2),nw)
@@ -164,7 +164,7 @@ CONTAINS
                   E14.7,', W(2) = ',E14.7)
                 GOTO 100
               END IF
-              x = x + 10.0E0
+              x = x + 10._SP
             END IF
           END IF
         END DO
@@ -173,8 +173,8 @@ CONTAINS
     !
     !     Check underflow flags
     !
-    100  x = R1MACH(1)*10.0E0
-    alp = 12.3E0
+    100  x = R1MACH(1)*10._SP
+    alp = 12.3_SP
     n = 3
     CALL BESI(x,alp,1,n,y,ny)
     IF( ny/=3 ) THEN
@@ -183,8 +183,8 @@ CONTAINS
       99005 FORMAT (/' ERROR IN BESI UNDERFLOW TEST'/)
     END IF
     !
-    x = LOG(R1MACH(2)/10.0E0) + 20.0E0
-    alp = 1.3E0
+    x = LOG(R1MACH(2)/10._SP) + 20._SP
+    alp = 1.3_SP
     n = 3
     CALL BESK(x,alp,1,n,w,nw)
     IF( nw/=3 ) THEN
@@ -206,10 +206,10 @@ CONTAINS
     !
     IF( Kprint>=3 ) WRITE (Lun,99007)
     99007 FORMAT (//' TRIGGER 10 ERROR CONDITIONS'//)
-    xx(1) = 1.0E0
-    xx(2) = 1.0E0
-    xx(3) = 1.0E0
-    xx(4) = 1.0E0
+    xx(1) = 1._SP
+    xx(2) = 1._SP
+    xx(3) = 1._SP
+    xx(4) = 1._SP
     !
     !     Illegal arguments
     !
@@ -234,9 +234,9 @@ CONTAINS
     !
     !     Trigger overflow
     !
-    x = LOG(R1MACH(2)/10.0E0) + 20.0E0
+    x = LOG(R1MACH(2)/10._SP) + 20._SP
     n = 3
-    alp = 2.3E0
+    alp = 2.3_SP
     CALL BESI(x,alp,1,n,y,ny)
     IF( NUMXER(nerr)/=6 ) THEN
       Ipass = 0
@@ -244,7 +244,7 @@ CONTAINS
     END IF
     CALL XERCLR
     !
-    x = R1MACH(1)*10.0E0
+    x = R1MACH(1)*10._SP
     CALL BESK(x,alp,1,n,w,nw)
     IF( NUMXER(nerr)/=6 ) THEN
       Ipass = 0
@@ -314,16 +314,16 @@ CONTAINS
     99001 FORMAT (/' QUICK CHECKS FOR BESJ AND BESY'//)
     !
     Ipass = 1
-    rhpi = 0.5E0/ATAN(1.0E0)
-    xx(1) = 0.49E0
-    xx(2) = 1.3E0
-    xx(3) = 5.3E0
-    xx(4) = 13.3E0
-    xx(5) = 21.3E0
-    fn(1) = 0.095E0
-    fn(2) = 0.70E0
-    fn(3) = 0.0E0
-    tol = 500.0E0*MAX(R1MACH(4),7.1E-15)
+    rhpi = 0.5_SP/ATAN(1._SP)
+    xx(1) = 0.49_SP
+    xx(2) = 1.3_SP
+    xx(3) = 5.3_SP
+    xx(4) = 13.3_SP
+    xx(5) = 21.3_SP
+    fn(1) = 0.095_SP
+    fn(2) = 0.70_SP
+    fn(3) = 0._SP
+    tol = 500._SP*MAX(R1MACH(4),7.1E-15_SP)
     DO m = 1, 3
       DO n = 1, 4
         DO nu = 1, 4
@@ -365,8 +365,8 @@ CONTAINS
     !     Check small values of X and order
     !
     n = 2
-    fnu = 1.0E0
-    x = R1MACH(4)/100.0E0
+    fnu = 1._SP
+    x = R1MACH(4)/100._SP
     rx = rhpi/x
     DO i = 1, 3
       CALL BESJ(x,fnu,n,y,ny)
@@ -384,7 +384,7 @@ CONTAINS
         EXIT
       END IF
       !
-      fnu = R1MACH(4)/100.0E0
+      fnu = R1MACH(4)/100._SP
       x = xx(2*i-1)
       rx = rhpi/x
     END DO
@@ -393,16 +393,16 @@ CONTAINS
     !
     DO k = 1, 2
       del = 30*(k-1)
-      fnu = 70.0E0 + del
+      fnu = 70._SP + del
       DO n = 1, 2
-        x = 50.0E0 + del
+        x = 50._SP + del
         DO i = 1, 5
           rx = rhpi/x
           CALL BESJ(x,fnu,n,y,ny)
           IF( ny==0 ) THEN
             CALL BESY(x,fnu,n,w)
             IF( n==1 ) THEN
-              fnup = fnu + 1.0E0
+              fnup = fnu + 1._SP
               CALL BESJ(x,fnup,1,y(2),ny)
               IF( ny/=0 ) CYCLE
               CALL BESY(x,fnup,1,w(2))
@@ -419,7 +419,7 @@ CONTAINS
                 ', Y(2) = ',E14.7/' W(1) = ',E14.7,', W(2) = ',E14.7)
               GOTO 100
             END IF
-            x = x + 10.0E0
+            x = x + 10._SP
           END IF
         END DO
       END DO
@@ -427,8 +427,8 @@ CONTAINS
     !
     !     Check underflow flags
     !
-    100  x = R1MACH(1)*10.0E0
-    alp = 12.3E0
+    100  x = R1MACH(1)*10._SP
+    alp = 12.3_SP
     n = 3
     CALL BESJ(x,alp,n,y,ny)
     IF( ny/=3 ) THEN
@@ -450,9 +450,9 @@ CONTAINS
     !
     IF( Kprint>=3 ) WRITE (Lun,99006)
     99006 FORMAT (//' TRIGGER 7 ERROR CONDITIONS'//)
-    xx(1) = 1.0E0
-    xx(2) = 1.0E0
-    xx(3) = 1.0E0
+    xx(1) = 1._SP
+    xx(2) = 1._SP
+    xx(3) = 1._SP
     !
     !     Illegal arguments
     !
@@ -476,9 +476,9 @@ CONTAINS
     !
     !     Trigger overflow
     !
-    x = R1MACH(1)*10.0E0
+    x = R1MACH(1)*10._SP
     n = 3
-    alp = 2.3E0
+    alp = 2.3_SP
     CALL BESY(x,alp,n,w)
     IF( NUMXER(nerr)/=6 ) THEN
       Ipass = 0
@@ -543,7 +543,7 @@ CONTAINS
     !
     99001 FORMAT ('1'/' QUICK CHECK FOR EXINT AND GAUS8'/)
     Ipass = 1
-    tol = SQRT(MAX(R1MACH(4),1.0E-18))
+    tol = SQRT(MAX(R1MACH(4),1.E-18_SP))
     DO kode = 1, 2
       ik = kode - 1
       FKM = ik
@@ -551,9 +551,9 @@ CONTAINS
         DO m = 1, 4
           nm = n + m - 1
           DO ix = 1, 25, 8
-            X = ix - 0.20E0
+            X = ix - 0.20_SP
             CALL EXINT(X,n,kode,m,tol,en,nz,ierr)
-            kx = INT( X + 0.5E0 )
+            kx = INT( X + 0.5_SP )
             IF( kx==0 ) kx = 1
             icase = 1
             A = n
@@ -565,9 +565,9 @@ CONTAINS
                 A = kx
               END IF
             END IF
-            sig = 3.0E0/X
-            t2 = 1.0E0
-            summ = 0.0E0
+            sig = 3._SP/X
+            t2 = 1._SP
+            summ = 0._SP
             DO
               t1 = t2
               t2 = t2 + sig
@@ -575,7 +575,7 @@ CONTAINS
               CALL GAUS8(FEIN,t1,t2,atol,ans,ierr)
               summ = summ + ans
               IF( ABS(ans)<ABS(summ)*tol ) THEN
-                ex = 1.0E0
+                ex = 1._SP
                 IF( kode==1 ) ex = EXP(-X)
                 bb = A
                 IF( icase==3 ) THEN
@@ -602,20 +602,20 @@ CONTAINS
                 !
                 DO k = 1, ke
                   y(kk+1) = (ex-X*y(kk))/bb
-                  bb = bb + 1.0E0
+                  bb = bb + 1._SP
                   kk = kk + 1
                 END DO
                 IF( icase==3 ) EXIT
                 GOTO 5
               END IF
             END DO
-            bb = A - 1.0E0
+            bb = A - 1._SP
             !
             !             Backward recur
             !
             DO i = 1, ie
               y(ii-1) = (ex-bb*y(ii))/X
-              bb = bb - 1.0E0
+              bb = bb - 1._SP
               ii = ii - 1
             END DO
             5 CONTINUE
@@ -639,11 +639,11 @@ CONTAINS
     !
     IF( Kprint>=3 ) WRITE (Lun,99003)
     99003 FORMAT (/' TRIGGER 6 ERROR CONDITIONS')
-    xx(1) = 1.0E0
-    xx(2) = 1.0E0
-    xx(3) = 1.0E0
-    xx(4) = 1.0E0
-    xx(5) = 0.01E0
+    xx(1) = 1._SP
+    xx(2) = 1._SP
+    xx(3) = 1._SP
+    xx(4) = 1._SP
+    xx(5) = 0.01_SP
     DO i = 1, 5
       xx(i) = -xx(i)
       k = INT( xx(2) )
@@ -658,8 +658,8 @@ CONTAINS
       END IF
       xx(i) = -xx(i)
     END DO
-    X = 0.0E0
-    tol = 1.0E-2
+    X = 0._SP
+    tol = 1.0E-2_SP
     CALL EXINT(X,1,1,1,tol,en,nz,ierr)
     IF( ierr/=1 ) THEN
       Ipass = 0
@@ -699,7 +699,7 @@ CONTAINS
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-    REAL, INTENT(IN) :: T
+    REAL(SP),INTENT(IN) :: T
     REAL(SP) :: aln
     !* FIRST EXECUTABLE STATEMENT  FEIN
     aln = (FKM-T)*X - A*LOG(T)

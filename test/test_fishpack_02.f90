@@ -101,10 +101,10 @@ CONTAINS
     INTRINSIC ABS, CABS, CMPLX, COS, MAX, MOD, SIN, SQRT
     !     .. Data statements ..
     INTEGER, PARAMETER :: nd(7) = [ 120, 54, 49, 32, 4, 3, 2 ]
-    REAL(DP), PARAMETER :: pi = 3.14159265358979D0
+    REAL(DP), PARAMETER :: pi = 3.14159265358979_DP
     !* FIRST EXECUTABLE STATEMENT  FFTQX
-    sqrt2 = SQRT(2.0)
-    errmax = 2.0*SQRT(R1MACH(4))
+    sqrt2 = SQRT(2._SP)
+    errmax = 2._SP*SQRT(R1MACH(4))
     nns = 7
     IF( Kprint>=2 ) WRITE (Lun,99001)
     !
@@ -130,8 +130,8 @@ CONTAINS
       ns2 = (n+1)/2
       IF( ns2>=2 ) THEN
         DO k = 2, ns2
-          sum1 = 0.0D0
-          sum2 = 0.0D0
+          sum1 = 0._DP
+          sum2 = 0._DP
           arg = (k-1)*dt
           DO i = 1, n
             arg1 = (i-1)*arg
@@ -142,8 +142,8 @@ CONTAINS
           y(2*k-1) = REAL( -sum2, SP )
         END DO
       END IF
-      sum1 = 0.0D0
-      sum2 = 0.0D0
+      sum1 = 0._DP
+      sum2 = 0._DP
       DO i = 1, nm1, 2
         sum1 = sum1 + x(i)
         sum2 = sum2 + x(i+1)
@@ -152,7 +152,7 @@ CONTAINS
       y(1) = REAL( sum1 + sum2, SP )
       IF( modn==0 ) y(n) = REAL( sum1 - sum2, SP )
       CALL RFFTF(n,x,w)
-      rftf = 0.0
+      rftf = 0._SP
       DO i = 1, n
         rftf = MAX(rftf,ABS(x(i)-y(i)))
         x(i) = xh(i)
@@ -166,9 +166,9 @@ CONTAINS
         IF( Kprint>=2 ) WRITE (Lun,99004)
         99004 FORMAT (' Test of RFFTF FAILED')
       END IF
-      signn = 1.0
+      signn = 1._SP
       DO i = 1, n
-        summ = 0.5D0*x(1)
+        summ = 0.5_DP*x(1)
         arg = (i-1)*dt
         IF( ns2>=2 ) THEN
           DO k = 2, ns2
@@ -176,12 +176,12 @@ CONTAINS
             summ = summ + x(2*k-2)*COS(arg1) - x(2*k-1)*SIN(arg1)
           END DO
         END IF
-        IF( modn==0 ) summ = summ + 0.5D0*signn*x(n)
+        IF( modn==0 ) summ = summ + 0.5_DP*signn*x(n)
         y(i) = REAL( summ + summ, SP )
         signn = -signn
       END DO
       CALL RFFTB(n,x,w)
-      rftb = 0.0
+      rftb = 0._SP
       DO i = 1, n
         rftb = MAX(rftb,ABS(x(i)-y(i)))
         x(i) = xh(i)
@@ -199,8 +199,8 @@ CONTAINS
       !
       CALL RFFTB(n,y,w)
       CALL RFFTF(n,y,w)
-      cf = 1.0/n
-      rftfb = 0.0
+      cf = 1._SP/n
+      rftfb = 0._SP
       DO i = 1, n
         rftfb = MAX(rftfb,ABS(cf*y(i)-x(i)))
       END DO
@@ -220,7 +220,7 @@ CONTAINS
         x(i) = xh(i)
       END DO
       DO i = 1, nm1
-        y(i) = 0.0
+        y(i) = 0._SP
         arg1 = i*dt
         DO k = 1, nm1
           y(i) = y(i) + x(k)*REAL( SIN((k)*arg1), SP )
@@ -229,8 +229,8 @@ CONTAINS
       END DO
       CALL SINTI(nm1,w)
       CALL SINT(nm1,x,w)
-      cf = 0.5/n
-      sintt = 0.0
+      cf = 0.5_SP/n
+      sintt = 0._SP
       DO i = 1, nm1
         sintt = MAX(sintt,ABS(x(i)-y(i)))
         x(i) = xh(i)
@@ -247,7 +247,7 @@ CONTAINS
       END IF
       CALL SINT(nm1,x,w)
       CALL SINT(nm1,x,w)
-      sintfb = 0.0
+      sintfb = 0._SP
       DO i = 1, nm1
         sintfb = MAX(sintfb,ABS(cf*x(i)-y(i)))
       END DO
@@ -265,9 +265,9 @@ CONTAINS
       DO i = 1, np1
         x(i) = xh(i)
       END DO
-      signn = 1.0
+      signn = 1._SP
       DO i = 1, np1
-        y(i) = 0.5*(x(1)+signn*x(n+1))
+        y(i) = 0.5_SP*(x(1)+signn*x(n+1))
         arg = (i-1)*dt
         DO k = 2, n
           y(i) = y(i) + x(k)*REAL( COS((k-1)*arg), SP )
@@ -277,7 +277,7 @@ CONTAINS
       END DO
       CALL COSTI(np1,w)
       CALL COST(np1,x,w)
-      costt = 0.0
+      costt = 0._SP
       DO i = 1, np1
         costt = MAX(costt,ABS(x(i)-y(i)))
         x(i) = xh(i)
@@ -295,7 +295,7 @@ CONTAINS
       !
       CALL COST(np1,x,w)
       CALL COST(np1,x,w)
-      costfb = 0.0
+      costfb = 0._SP
       DO i = 1, np1
         costfb = MAX(costfb,ABS(cf*x(i)-y(i)))
       END DO
@@ -310,22 +310,22 @@ CONTAINS
       !
       !       Test Subroutines SINQI, SINQF and SINQB
       !
-      cf = 0.25/n
+      cf = 0.25_SP/n
       DO i = 1, n
         y(i) = xh(i)
       END DO
       dt = pi/(n+n)
       DO i = 1, n
-        x(i) = 0.0
+        x(i) = 0._SP
         arg = i*dt
         DO k = 1, n
           x(i) = x(i) + y(k)*REAL( SIN((k+k-1)*arg), SP )
         END DO
-        x(i) = 4.0*x(i)
+        x(i) = 4._SP*x(i)
       END DO
       CALL SINQI(n,w)
       CALL SINQB(n,y,w)
-      sinqbt = 0.0
+      sinqbt = 0._SP
       DO i = 1, n
         sinqbt = MAX(sinqbt,ABS(y(i)-x(i)))
         x(i) = xh(i)
@@ -340,10 +340,10 @@ CONTAINS
         99018 FORMAT (' Test of SINQB FAILED')
       END IF
       !
-      signn = 1.0
+      signn = 1._SP
       DO i = 1, n
         arg = (i+i-1)*dt
-        y(i) = 0.5*signn*x(n)
+        y(i) = 0.5_SP*signn*x(n)
         DO k = 1, nm1
           y(i) = y(i) + x(k)*REAL( SIN((k)*arg), SP )
         END DO
@@ -351,7 +351,7 @@ CONTAINS
         signn = -signn
       END DO
       CALL SINQF(n,x,w)
-      sinqft = 0.0
+      sinqft = 0._SP
       DO i = 1, n
         sinqft = MAX(sinqft,ABS(x(i)-y(i)))
         y(i) = xh(i)
@@ -368,7 +368,7 @@ CONTAINS
       !
       CALL SINQF(n,y,w)
       CALL SINQB(n,y,w)
-      sinqfb = 0.0
+      sinqfb = 0._SP
       DO i = 1, n
         sinqfb = MAX(sinqfb,ABS(cf*y(i)-x(i)))
       END DO
@@ -387,16 +387,16 @@ CONTAINS
         y(i) = xh(i)
       END DO
       DO i = 1, n
-        x(i) = 0.0
+        x(i) = 0._SP
         arg = (i-1)*dt
         DO k = 1, n
           x(i) = x(i) + y(k)*REAL( COS((k+k-1)*arg), SP )
         END DO
-        x(i) = 4.0*x(i)
+        x(i) = 4._SP*x(i)
       END DO
       CALL COSQI(n,w)
       CALL COSQB(n,y,w)
-      cosqbt = 0.0
+      cosqbt = 0._SP
       DO i = 1, n
         cosqbt = MAX(cosqbt,ABS(x(i)-y(i)))
         x(i) = xh(i)
@@ -412,7 +412,7 @@ CONTAINS
       END IF
       !
       DO i = 1, n
-        y(i) = 0.5*x(1)
+        y(i) = 0.5_SP*x(1)
         arg = (i+i-1)*dt
         DO k = 2, n
           y(i) = y(i) + x(k)*REAL( COS((k-1)*arg), SP )
@@ -420,7 +420,7 @@ CONTAINS
         y(i) = y(i) + y(i)
       END DO
       CALL COSQF(n,x,w)
-      cosqft = 0.0
+      cosqft = 0._SP
       DO i = 1, n
         cosqft = MAX(cosqft,ABS(y(i)-x(i)))
         x(i) = xh(i)
@@ -438,7 +438,7 @@ CONTAINS
       !
       CALL COSQB(n,x,w)
       CALL COSQF(n,x,w)
-      cosqfb = 0.0
+      cosqfb = 0._SP
       DO i = 1, n
         cosqfb = MAX(cosqfb,ABS(cf*x(i)-y(i)))
       END DO
@@ -457,15 +457,15 @@ CONTAINS
       DO i = 1, n
         x(i) = xh(i)
       END DO
-      tpi = 2.0*pi
+      tpi = 2._SP*pi
       dt = tpi/n
       ns2 = (n+1)/2
-      cf = 2.0/n
+      cf = 2._SP/n
       ns2m = ns2 - 1
       IF( ns2m>0 ) THEN
         DO k = 1, ns2m
-          sum1 = 0.0D0
-          sum2 = 0.0D0
+          sum1 = 0._DP
+          sum2 = 0._DP
           arg = k*dt
           DO i = 1, n
             arg1 = (i-1)*arg
@@ -477,15 +477,15 @@ CONTAINS
         END DO
       END IF
       nm1 = n - 1
-      sum1 = 0.0D0
-      sum2 = 0.0D0
+      sum1 = 0._DP
+      sum2 = 0._DP
       DO i = 1, nm1, 2
         sum1 = sum1 + x(i)
         sum2 = sum2 + x(i+1)
       END DO
       IF( modn==1 ) sum1 = sum1 + x(n)
-      azero = REAL( 0.5*cf*(sum1+sum2), SP )
-      IF( modn==0 ) a(ns2) = REAL( 0.5*cf*(sum1-sum2), SP )
+      azero = REAL( 0.5_SP*cf*(sum1+sum2), SP )
+      IF( modn==0 ) a(ns2) = REAL( 0.5_SP*cf*(sum1-sum2), SP )
       CALL EZFFTF(n,x,azeroh,ah,bh,w)
       dezf1 = ABS(azeroh-azero)
       IF( modn==0 ) dezf1 = MAX(dezf1,ABS(a(ns2)-ah(ns2)))
@@ -504,7 +504,7 @@ CONTAINS
       END IF
       !
       ns2 = n/2
-      IF( modn==0 ) b(ns2) = 0.0
+      IF( modn==0 ) b(ns2) = 0._SP
       DO i = 1, n
         summ = azero
         arg1 = (i-1)*dt
@@ -515,7 +515,7 @@ CONTAINS
         x(i) = REAL( summ, SP )
       END DO
       CALL EZFFTB(n,y,azero,a,b,w)
-      dezb1 = 0.0
+      dezb1 = 0._SP
       DO i = 1, n
         dezb1 = MAX(dezb1,ABS(x(i)-y(i)))
         x(i) = xh(i)
@@ -531,7 +531,7 @@ CONTAINS
       !
       CALL EZFFTF(n,x,azero,a,b,w)
       CALL EZFFTB(n,y,azero,a,b,w)
-      dezfb = 0.0
+      dezfb = 0._SP
       DO i = 1, n
         dezfb = MAX(dezfb,ABS(x(i)-y(i)))
       END DO
@@ -547,12 +547,12 @@ CONTAINS
       !       Test Subroutines CFFTI, CFFTF and CFFTB
       !
       DO i = 1, n
-        cx(i) = CMPLX(COS(sqrt2*i),SIN(sqrt2*(i*i)))
+        cx(i) = CMPLX(COS(sqrt2*i),SIN(sqrt2*(i*i)),SP)
       END DO
       dt = (pi+pi)/n
       DO i = 1, n
         arg1 = -(i-1)*dt
-        cy(i) = (0.0,0.0)
+        cy(i) = (0._SP,0._SP)
         DO k = 1, n
           arg2 = (k-1)*arg1
           cy(i) = cy(i) + CMPLX(COS(arg2),SIN(arg2),SP)*cx(k)
@@ -560,7 +560,7 @@ CONTAINS
       END DO
       CALL CFFTI(n,w)
       CALL CFFTF(n,cx,w)
-      dcfftf = 0.0
+      dcfftf = 0._SP
       DO i = 1, n
         dcfftf = MAX(dcfftf,ABS(cx(i)-cy(i)))
         cx(i) = cx(i)/n
@@ -577,14 +577,14 @@ CONTAINS
       !
       DO i = 1, n
         arg1 = (i-1)*dt
-        cy(i) = (0.0,0.0)
+        cy(i) = (0._SP,0._SP)
         DO k = 1, n
           arg2 = (k-1)*arg1
           cy(i) = cy(i) + CMPLX(COS(arg2),SIN(arg2),SP)*cx(k)
         END DO
       END DO
       CALL CFFTB(n,cx,w)
-      dcfftb = 0.0
+      dcfftb = 0._SP
       DO i = 1, n
         dcfftb = MAX(dcfftb,ABS(cx(i)-cy(i)))
         cx(i) = cy(i)
@@ -598,10 +598,10 @@ CONTAINS
         99038 FORMAT (' Test of CFFTB FAILED')
       END IF
       !
-      cf = 1.0/n
+      cf = 1._SP/n
       CALL CFFTF(n,cx,w)
       CALL CFFTB(n,cx,w)
-      dcfb = 0.0
+      dcfb = 0._SP
       DO i = 1, n
         dcfb = MAX(dcfb,ABS(cf*cx(i)-cy(i)))
       END DO

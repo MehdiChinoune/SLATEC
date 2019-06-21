@@ -216,14 +216,14 @@ SUBROUTINE DQAGE(F,A,B,Epsabs,Epsrel,Key,Limit,Result,Abserr,Neval,Ier,&
   Ier = 0
   Neval = 0
   Last = 0
-  Result = 0.0D+00
-  Abserr = 0.0D+00
+  Result = 0._DP
+  Abserr = 0._DP
   Alist(1) = A
   Blist(1) = B
-  Rlist(1) = 0.0D+00
-  Elist(1) = 0.0D+00
+  Rlist(1) = 0._DP
+  Elist(1) = 0._DP
   Iord(1) = 0
-  IF( Epsabs<=0.0D+00 .AND. Epsrel<MAX(0.5D+02*epmach,0.5D-28) ) Ier = 6
+  IF( Epsabs<=0._DP .AND. Epsrel<MAX(0.5E+02_DP*epmach,0.5E-28_DP) ) Ier = 6
   IF( Ier/=6 ) THEN
     !
     !           FIRST APPROXIMATION TO THE INTEGRAL
@@ -247,10 +247,10 @@ SUBROUTINE DQAGE(F,A,B,Epsabs,Epsrel,Key,Limit,Result,Abserr,Neval,Ier,&
     !           TEST ON ACCURACY.
     !
     errbnd = MAX(Epsabs,Epsrel*ABS(Result))
-    IF( Abserr<=0.5D+02*epmach*defabs .AND. Abserr>errbnd ) Ier = 2
+    IF( Abserr<=0.5E+02_DP*epmach*defabs .AND. Abserr>errbnd ) Ier = 2
     IF( Limit==1 ) Ier = 1
     IF( .NOT. (Ier/=0 .OR. (Abserr<=errbnd .AND. Abserr/=resabs) .OR. &
-        Abserr==0.0D+00) ) THEN
+        Abserr==0._DP) ) THEN
       !
       !           INITIALIZATION
       !           --------------
@@ -272,7 +272,7 @@ SUBROUTINE DQAGE(F,A,B,Epsabs,Epsrel,Key,Limit,Result,Abserr,Neval,Ier,&
         !           BISECT THE SUBINTERVAL WITH THE LARGEST ERROR ESTIMATE.
         !
         a1 = Alist(maxerr)
-        b1 = 0.5D+00*(Alist(maxerr)+Blist(maxerr))
+        b1 = 0.5_DP*(Alist(maxerr)+Blist(maxerr))
         a2 = b1
         b2 = Blist(maxerr)
         IF( keyf==1 ) CALL DQK15(F,a1,b1,area1,error1,resabs,defab1)
@@ -298,7 +298,7 @@ SUBROUTINE DQAGE(F,A,B,Epsabs,Epsrel,Key,Limit,Result,Abserr,Neval,Ier,&
         area = area + area12 - Rlist(maxerr)
         IF( defab1/=error1 .AND. defab2/=error2 ) THEN
           IF( ABS(Rlist(maxerr)-area12)<=0.1D-04*ABS(area12) .AND. &
-            erro12>=0.99D+00*errmax ) iroff1 = iroff1 + 1
+            erro12>=0.99_DP*errmax ) iroff1 = iroff1 + 1
           IF( Last>10 .AND. erro12>errmax ) iroff2 = iroff2 + 1
         END IF
         Rlist(maxerr) = area1
@@ -318,7 +318,7 @@ SUBROUTINE DQAGE(F,A,B,Epsabs,Epsrel,Key,Limit,Result,Abserr,Neval,Ier,&
           !           SET ERROR FLAG IN THE CASE OF BAD INTEGRAND BEHAVIOUR
           !           AT A POINT OF THE INTEGRATION RANGE.
           !
-          IF( MAX(ABS(a1),ABS(b2))<=(0.1D+01+0.1D+03*epmach)&
+          IF( MAX(ABS(a1),ABS(b2))<=(1._DP+100._DP*epmach)&
             *(ABS(a2)+0.1D+04*uflow) ) Ier = 3
         END IF
         !
@@ -352,7 +352,7 @@ SUBROUTINE DQAGE(F,A,B,Epsabs,Epsrel,Key,Limit,Result,Abserr,Neval,Ier,&
       !           COMPUTE FINAL RESULT.
       !           ---------------------
       !
-      Result = 0.0D+00
+      Result = 0._DP
       DO k = 1, Last
         Result = Result + Rlist(k)
       END DO

@@ -49,13 +49,13 @@ CONTAINS
     INTEGER :: lda, n, ipvt(4), info, i, j, Nerr
     INTEGER :: ml, mu
     COMPLEX(SP), PARAMETER :: abd(6,4) = RESHAPE( [ &
-      (0.E0,0.E0), (0.E0,0.E0), (0.E0,0.E0), (0.E0,0.E0), (2.E0,0.E0), (0.E0,1.E0), &
-      (0.E0,0.E0), (0.E0,0.E0), (0.E0,0.E0), (0.E0,-1.E0), (2.E0,0.E0), (0.E0,0.E0), &
-      (0.E0,0.E0), (0.E0,0.E0), (0.E0,0.E0), (0.E0,0.E0), (3.E0,0.E0), (0.E0,1.E0), &
-      (0.E0,0.E0), (0.E0,0.E0), (0.E0,0.E0), (0.E0,-1.E0), (4.E0,0.E0), (0.E0,0.E0) ], &
+      (0._SP,0._SP), (0._SP,0._SP), (0._SP,0._SP), (0._SP,0._SP), (2._SP,0._SP), (0._SP,1._SP), &
+      (0._SP,0._SP), (0._SP,0._SP), (0._SP,0._SP), (0._SP,-1._SP), (2._SP,0._SP), (0._SP,0._SP), &
+      (0._SP,0._SP), (0._SP,0._SP), (0._SP,0._SP), (0._SP,0._SP), (3._SP,0._SP), (0._SP,1._SP), &
+      (0._SP,0._SP), (0._SP,0._SP), (0._SP,0._SP), (0._SP,-1._SP), (4._SP,0._SP), (0._SP,0._SP) ], &
       [6,4] )
-    COMPLEX(SP), PARAMETER :: b(4) = [ (3.E0,2.E0), (-1.E0,3.E0), (0.E0,-4.E0), &
-      (5.E0,0.E0) ]
+    COMPLEX(SP), PARAMETER :: b(4) = [ (3._SP,2._SP), (-1._SP,3._SP), (0._SP,-4._SP), &
+      (5._SP,0._SP) ]
     CHARACTER(19), PARAMETER :: kprog = 'GBFA GBCO GBSL GBDI'
     CHARACTER(39), PARAMETER :: kfail = 'INFO RCOND SOLUTION DETERMINANT INVERSE'
     !* FIRST EXECUTABLE STATEMENT  CGBQC
@@ -132,17 +132,17 @@ CONTAINS
     REAL(SP) :: r, rcond
     INTEGER :: lda, n, ipvt(4), info, i, j, indx, Nerr
     COMPLEX(SP), PARAMETER :: a(4,4) = RESHAPE( [ &
-      (2.E0,0.E0), (0.E0,1.E0), (0.E0,0.E0), (0.E0,0.E0), &
-      (0.E0,-1.E0), (2.E0,0.E0), (0.E0,0.E0), (0.E0,0.E0), &
-      (0.E0,0.E0), (0.E0,0.E0), (3.E0,0.E0), (0.E0,1.E0), &
-      (0.E0,0.E0), (0.E0,0.E0), (0.E0,-1.E0), (4.E0,0.E0) ], [4,4] )
-    COMPLEX(SP), PARAMETER :: b(4) = [ (3.E0,2.E0), (-1.E0,3.E0), (0.E0,-4.E0), &
-      (5.E0,0.E0) ]
-    COMPLEX(SP), PARAMETER :: c(4) = [ (1.E0,1.E0), (0.E0,1.E0), (0.E0,-1.E0), &
-      (1.E0,0.E0) ]
+      (2._SP,0._SP), (0._SP,1._SP), (0._SP,0._SP), (0._SP,0._SP), &
+      (0._SP,-1._SP), (2._SP,0._SP), (0._SP,0._SP), (0._SP,0._SP), &
+      (0._SP,0._SP), (0._SP,0._SP), (3._SP,0._SP), (0._SP,1._SP), &
+      (0._SP,0._SP), (0._SP,0._SP), (0._SP,-1._SP), (4._SP,0._SP) ], [4,4] )
+    COMPLEX(SP), PARAMETER :: b(4) = [ (3._SP,2._SP), (-1._SP,3._SP), (0._SP,-4._SP), &
+      (5._SP,0._SP) ]
+    COMPLEX(SP), PARAMETER :: c(4) = [ (1._SP,1._SP), (0._SP,1._SP), (0._SP,-1._SP), &
+      (1._SP,0._SP) ]
     CHARACTER(19), PARAMETER :: kprog = 'GEFA GECO GESL GEDI'
     CHARACTER(39), PARAMETER :: kfail = 'INFO RCOND SOLUTION DETERMINANT INVERSE'
-    REAL, PARAMETER :: rcnd = .24099E0
+    REAL(SP), PARAMETER :: rcnd = .24099_SP
     !* FIRST EXECUTABLE STATEMENT  CGECK
     lda = 5
     n = 4
@@ -258,17 +258,17 @@ CONTAINS
     REAL(SP) :: r, rcond
     INTEGER :: lda, n, info, i, j, indx, Nerr
     COMPLEX(SP), PARAMETER :: a(4,4) = RESHAPE( [ &
-      (2.E0,0.E0), (0.E0,1.E0), (0.E0,0.E0), (0.E0,0.E0), &
-      (0.E0,-1.E0), (2.E0,0.E0), (0.E0,0.E0), (0.E0,0.E0), &
-      (0.E0,0.E0), (0.E0,0.E0), (3.E0,0.E0), (0.E0,1.E0), &
-      (0.E0,0.E0), (0.E0,0.E0), (0.E0,-1.E0), (4.E0,0.E0) ], [4,4] )
-    COMPLEX(SP), PARAMETER :: b(4) = [ (3.E0,2.E0), (-1.E0,3.E0), (0.E0,-4.E0), &
-      (5.E0,0.E0) ]
-    COMPLEX(SP), PARAMETER :: c(4) = [ (1.E0,1.E0), (0.E0,1.E0), (0.E0,-1.E0), &
-      (1.E0,0.E0) ]
+      (2._SP,0._SP), (0._SP,1._SP), (0._SP,0._SP), (0._SP,0._SP), &
+      (0._SP,-1._SP), (2._SP,0._SP), (0._SP,0._SP), (0._SP,0._SP), &
+      (0._SP,0._SP), (0._SP,0._SP), (3._SP,0._SP), (0._SP,1._SP), &
+      (0._SP,0._SP), (0._SP,0._SP), (0._SP,-1._SP), (4._SP,0._SP) ], [4,4] )
+    COMPLEX(SP), PARAMETER :: b(4) = [ (3._SP,2._SP), (-1._SP,3._SP), (0._SP,-4._SP), &
+      (5._SP,0._SP) ]
+    COMPLEX(SP), PARAMETER :: c(4) = [ (1._SP,1._SP), (0._SP,1._SP), (0._SP,-1._SP), &
+      (1._SP,0._SP) ]
     CHARACTER(19), PARAMETER :: kprog = 'POFA POCO POSL PODI'
     CHARACTER(39), PARAMETER :: kfail = 'INFO RCOND SOLUTION DETERMINANT INVERSE'
-    REAL, PARAMETER :: rcnd = .24099E0
+    REAL(SP), PARAMETER :: rcnd = .24099_SP
     !* FIRST EXECUTABLE STATEMENT  CPOQC
     lda = 5
     n = 4

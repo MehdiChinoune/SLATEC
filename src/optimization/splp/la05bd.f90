@@ -50,7 +50,7 @@ SUBROUTINE LA05BD(A,Ind,Ia,N,Ip,Iw,W,G,B,Trans)
   INTEGER :: i, ii, j, k, k2, kk, kl, kll, kp, kpc, l1, n1, nz
   REAL(DP) :: am
   !* FIRST EXECUTABLE STATEMENT  LA05BD
-  IF( G<0.D0 ) THEN
+  IF( G<0._DP ) THEN
     !
     CALL XSETUN(lp_com)
     IF( lp_com>0 ) CALL XERMSG('LA05BD',&
@@ -62,12 +62,12 @@ SUBROUTINE LA05BD(A,Ind,Ia,N,Ip,Iw,W,G,B,Trans)
       !     MULTIPLY VECTOR BY INVERSE OF TRANSPOSE OF U
       DO i = 1, N
         W(i) = B(i)
-        B(i) = 0.D0
+        B(i) = 0._DP
       END DO
       DO ii = 1, N
         i = Iw(ii,4)
         am = W(i)
-        IF( am/=0.D0 ) THEN
+        IF( am/=0._DP ) THEN
           j = Iw(ii,3)
           kp = Ip(j,1)
           am = am/A(kp)
@@ -87,7 +87,7 @@ SUBROUTINE LA05BD(A,Ind,Ia,N,Ip,Iw,W,G,B,Trans)
       IF( kll>Ia ) RETURN
       DO k = kll, Ia
         j = Ind(k,2)
-        IF( B(j)/=0.D0 ) THEN
+        IF( B(j)/=0._DP ) THEN
           i = Ind(k,1)
           B(i) = B(i) + A(k)*B(j)
         END IF
@@ -100,7 +100,7 @@ SUBROUTINE LA05BD(A,Ind,Ia,N,Ip,Iw,W,G,B,Trans)
         DO kk = 1, lenl_com
           k = l1 - kk
           i = Ind(k,1)
-          IF( B(i)/=0.D0 ) THEN
+          IF( B(i)/=0._DP ) THEN
             j = Ind(k,2)
             B(j) = B(j) + A(k)*B(i)
           END IF
@@ -108,7 +108,7 @@ SUBROUTINE LA05BD(A,Ind,Ia,N,Ip,Iw,W,G,B,Trans)
       END IF
       DO i = 1, N
         W(i) = B(i)
-        B(i) = 0.D0
+        B(i) = 0._DP
       END DO
       !
       !     MULTIPLY VECTOR BY INVERSE OF U

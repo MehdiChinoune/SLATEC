@@ -20,8 +20,8 @@ SUBROUTINE DFMAT(X,Y,Yp)
   Yp(1) = Y(2)
   IF( X/=xsave_com ) THEN
     xsave_com = X
-    tanx = TAN(X/57.2957795130823D0)
-    term_com = 3.0D0/tanx + 2.0D0*tanx
+    tanx = TAN(X/57.2957795130823_DP)
+    term_com = 3._DP/tanx + 2._DP*tanx
   END IF
-  Yp(2) = -term_com*Y(2) - 0.7D0*Y(1)
+  Yp(2) = -term_com*Y(2) - 0.7_DP*Y(1)
 END SUBROUTINE DFMAT

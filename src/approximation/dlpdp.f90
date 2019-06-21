@@ -57,7 +57,7 @@ SUBROUTINE DLPDP(A,Mda,M,N1,N2,Prgopt,X,Wnorm,Mode,Ws,Is)
   REAL(DP) :: Wnorm, A(Mda,N1+N2+1), Prgopt(:), Ws((M+2)*(N1+N2+7)), X(N1+N2)
   INTEGER :: i, iw, ix, j, l, modew, n, np1
   REAL(DP) :: rnorm, sc, ynorm
-  REAL(DP), PARAMETER :: zero = 0.0D0, one = 1.0D0, fac = 0.1D0
+  REAL(DP), PARAMETER :: zero = 0._DP, one = 1._DP, fac = 0.1_DP
   !* FIRST EXECUTABLE STATEMENT  DLPDP
   n = N1 + N2
   Mode = 1

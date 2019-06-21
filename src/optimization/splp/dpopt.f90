@@ -47,11 +47,11 @@ SUBROUTINE DPOPT(Prgopt,Mrelas,Nvars,Info,Csc,Ibasis,Ropt,Intopt,Lopt)
   !
   !* FIRST EXECUTABLE STATEMENT  DPOPT
   iopt = 1
-  zero = 0.D0
-  one = 1.D0
-  asmall = 0.D0
-  abig = 0.D0
-  costsc = 0.D0
+  zero = 0._DP
+  one = 1._DP
+  asmall = 0._DP
+  abig = 0._DP
+  costsc = 0._DP
   !
   !
   !     PROCEDURE (INITIALIZE PARAMETERS AND PROCESS USER OPTIONS)

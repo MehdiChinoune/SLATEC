@@ -153,7 +153,7 @@ SUBROUTINE DPCHIM(N,X,F,D,Incfd,Ierr)
   INTEGER :: i, nless1
   REAL(DP) :: del1, del2, dmax, dmin, drat1, drat2, dsave, h1, &
     h2, hsum, hsumt3, w1, w2
-  REAL(DP), PARAMETER :: zero = 0.D0, three = 3.D0
+  REAL(DP), PARAMETER :: zero = 0._DP, three = 3._DP
   !
   !  VALIDITY-CHECK ARGUMENTS.
   !

@@ -36,19 +36,19 @@ REAL(DP) FUNCTION D9LGIT(A,X,Algap1)
   REAL(DP) :: A, X, Algap1
   INTEGER :: k
   REAL(DP) :: ax, a1x, fk, hstar, p, r, s, t
-  REAL(DP), PARAMETER :: eps = 0.5D0*D1MACH(3), sqeps = SQRT(D1MACH(4))
+  REAL(DP), PARAMETER :: eps = 0.5_DP*D1MACH(3), sqeps = SQRT(D1MACH(4))
   !* FIRST EXECUTABLE STATEMENT  D9LGIT
   !
-  IF( X<=0.D0 .OR. A<X ) CALL XERMSG('D9LGIT','X SHOULD BE GT 0.0 AND LE A',2,2)
+  IF( X<=0._DP .OR. A<X ) CALL XERMSG('D9LGIT','X SHOULD BE GT 0.0 AND LE A',2,2)
   !
   ax = A + X
-  a1x = ax + 1.0D0
-  r = 0.D0
-  p = 1.D0
+  a1x = ax + 1._DP
+  r = 0._DP
+  p = 1._DP
   s = p
   DO k = 1, 200
     fk = k
-    t = (A+fk)*X*(1.D0+r)
+    t = (A+fk)*X*(1._DP+r)
     r = t/((ax+fk)*(a1x+fk)-t)
     p = r*p
     s = s + p
@@ -57,7 +57,7 @@ REAL(DP) FUNCTION D9LGIT(A,X,Algap1)
   CALL XERMSG('D9LGIT',&
     'NO CONVERGENCE IN 200 TERMS OF CONTINUED FRACTION',3,2)
   !
-  100  hstar = 1.0D0 - X*s/a1x
+  100  hstar = 1._DP - X*s/a1x
   IF( hstar<sqeps ) CALL XERMSG('D9LGIT',&
     'RESULT LESS THAN HALF PRECISION',1,1)
   !

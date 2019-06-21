@@ -72,7 +72,7 @@ SUBROUTINE DDOGLG(N,R,Lr,Diag,Qtb,Delta,X,Wa1,Wa2)
   REAL(DP) :: Diag(N), Qtb(N), R(Lr), Wa1(N), Wa2(N), X(N)
   INTEGER :: i, j, jj, jp1, k, l
   REAL(DP) :: alpha, bnorm, epsmch, gnorm, qnorm, sgnorm, summ, temp
-  REAL(DP), PARAMETER :: one = 1.0D0, zero = 0.0D0
+  REAL(DP), PARAMETER :: one = 1._DP, zero = 0._DP
   !
   !     EPSMCH IS THE MACHINE PRECISION.
   !

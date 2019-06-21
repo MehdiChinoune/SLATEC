@@ -65,15 +65,15 @@ SUBROUTINE DEFER(COFX,COFY,Idmn,Usol,Grhs)
       !
       CALL DX(Usol,Idmn,i,j,uxxx,uxxxx)
       CALL DY(Usol,Idmn,i,j,uyyy,uyyyy)
-      tx = ai*uxxxx/12.0 + bi*uxxx/6.0
-      ty = dj*uyyyy/12.0 + ej*uyyy/6.0
+      tx = ai*uxxxx/12._SP + bi*uxxx/6._SP
+      ty = dj*uyyyy/12._SP + ej*uyyy/6._SP
       !
       !     RESET FORM OF TRUNCATION IF AT BOUNDARY WHICH IS NON-PERIODIC
       !
       IF( .NOT. (kswx_com==1 .OR. (i>1 .AND. i<k_com)) )&
-        tx = ai/3.0*(uxxxx/4.0+uxxx/dlx_com)
+        tx = ai/3._SP*(uxxxx/4._SP+uxxx/dlx_com)
       IF( .NOT. (kswy_com==1 .OR. (j>1 .AND. j<l_com)) )&
-        ty = dj/3.0*(uyyyy/4.0+uyyy/dly_com)
+        ty = dj/3._SP*(uyyyy/4._SP+uyyy/dly_com)
       Grhs(i,j) = Grhs(i,j) + dlx_com**2*tx + dly_com**2*ty
     END DO
   END DO

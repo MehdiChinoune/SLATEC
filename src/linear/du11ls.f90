@@ -69,7 +69,7 @@ SUBROUTINE DU11LS(A,Mda,M,N,Ub,Db,Mode,Np,Krank,Ksure,H,W,Eb,Ic,Ir)
   DO i = 1, N
     Eb(i) = MAX(Db(i),Ub(i)*H(i))
     Ub(i) = Eb(i)
-    Db(i) = 0.0D0
+    Db(i) = 0._DP
   END DO
   !
   !          DISCARD SELF DEPENDENT COLUMNS
@@ -125,7 +125,7 @@ SUBROUTINE DU11LS(A,Mda,M,N,Ub,Db,Mode,Np,Krank,Ksure,H,W,Eb,Ic,Ir)
   !         UB DETERMINES COLUMN PIVOT
   !
   200  imin = j
-  IF( H(j)/=0.D0 ) THEN
+  IF( H(j)/=0._DP ) THEN
     rmin = Ub(j)/H(j)
     DO i = j, kz
       IF( Ub(i)<H(i)*rmin ) THEN
@@ -136,9 +136,9 @@ SUBROUTINE DU11LS(A,Mda,M,N,Ub,Db,Mode,Np,Krank,Ksure,H,W,Eb,Ic,Ir)
     !
     !     TEST FOR RANK DEFICIENCY
     !
-    IF( rmin<1.0D0 ) GOTO 400
+    IF( rmin<1._DP ) GOTO 400
     tt = (Eb(imin)+ABS(Db(imin)))/H(imin)
-    IF( tt<1.0D0 ) THEN
+    IF( tt<1._DP ) THEN
       !     COMPUTE EXACT UB
       DO i = 1, jm1
         W(i) = A(i,imin)
@@ -152,7 +152,7 @@ SUBROUTINE DU11LS(A,Mda,M,N,Ub,Db,Mode,Np,Krank,Ksure,H,W,Eb,Ic,Ir)
             tt = tt + ABS(W(i))*Eb(i)
           END DO
           Ub(imin) = tt
-          IF( Ub(imin)/H(imin)<1.0D0 ) GOTO 400
+          IF( Ub(imin)/H(imin)<1._DP ) GOTO 400
           EXIT
         ELSE
           lm1 = l - 1
@@ -215,21 +215,21 @@ SUBROUTINE DU11LS(A,Mda,M,N,Ub,Db,Mode,Np,Krank,Ksure,H,W,Eb,Ic,Ir)
   !     APPLY HOUSEHOLDER TRANSFORMATION
   !
   tn = NORM2(A(j:M,j))
-  IF( tn==0.0D0 ) GOTO 300
-  IF( A(j,j)/=0.0D0 ) tn = SIGN(tn,A(j,j))
+  IF( tn==0._DP ) GOTO 300
+  IF( A(j,j)/=0._DP ) tn = SIGN(tn,A(j,j))
   A(j:M,j) = A(j:M,j)/tn
-  A(j,j) = A(j,j) + 1.0D0
+  A(j,j) = A(j,j) + 1._DP
   IF( j/=N ) THEN
     DO i = jp1, N
       bb = -DOT_PRODUCT(A(j:M,j),A(j:M,i))/A(j,j)
       CALL DAXPY(mm,bb,A(j,j),1,A(j,i),1)
       IF( i>Np ) THEN
-        IF( H(i)/=0.0D0 ) THEN
-          tt = 1.0D0 - (ABS(A(j,i))/H(i))**2
-          tt = MAX(tt,0.0D0)
+        IF( H(i)/=0._DP ) THEN
+          tt = 1._DP - (ABS(A(j,i))/H(i))**2
+          tt = MAX(tt,0._DP)
           t = tt
-          tt = 1.0D0 + .05D0*tt*(H(i)/W(i))**2
-          IF( tt==1.0D0 ) THEN
+          tt = 1._DP + .05_DP*tt*(H(i)/W(i))**2
+          IF( tt==1._DP ) THEN
             H(i) = NORM2(A(j+1:M,i))
             W(i) = H(i)
           ELSE
@@ -275,10 +275,10 @@ SUBROUTINE DU11LS(A,Mda,M,N,Ub,Db,Mode,Np,Krank,Ksure,H,W,Eb,Ic,Ir)
     IF( is==0 ) EXIT
   END DO
   Ksure = 0
-  summ = 0.0D0
+  summ = 0._DP
   DO i = 1, Krank
     r2 = Ub(i)*Ub(i)
-    IF( r2+summ>=1.0D0 ) EXIT
+    IF( r2+summ>=1._DP ) EXIT
     summ = summ + r2
     Ksure = Ksure + 1
   END DO
@@ -292,9 +292,9 @@ SUBROUTINE DU11LS(A,Mda,M,N,Ub,Db,Mode,Np,Krank,Ksure,H,W,Eb,Ic,Ir)
     i = Krank
     DO
       tn = NORM2(A(i,kp1:N))/A(i,i)
-      tn = A(i,i)*SQRT(1.0D0+tn*tn)
+      tn = A(i,i)*SQRT(1._DP+tn*tn)
       A(i,kp1:N) = A(i,kp1:N)/tn
-      W(i) = A(i,i)/tn + 1.0D0
+      W(i) = A(i,i)/tn + 1._DP
       A(i,i) = -tn
       IF( i==1 ) EXIT
       im1 = i - 1

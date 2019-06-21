@@ -82,12 +82,12 @@ SUBROUTINE COSQB(N,X,Wsave)
   REAL(SP) :: Wsave(3*N+15), X(N)
   REAL(SP) :: tsqrt2, x1
   !* FIRST EXECUTABLE STATEMENT  COSQB
-  tsqrt2 = 2.*SQRT(2.)
+  tsqrt2 = 2._SP*SQRT(2._SP)
   IF( N<2 ) THEN
-    X(1) = 4.*X(1)
+    X(1) = 4._SP*X(1)
     RETURN
   ELSEIF( N==2 ) THEN
-    x1 = 4.*(X(1)+X(2))
+    x1 = 4._SP*(X(1)+X(2))
     X(2) = tsqrt2*(X(1)-X(2))
     X(1) = x1
     RETURN

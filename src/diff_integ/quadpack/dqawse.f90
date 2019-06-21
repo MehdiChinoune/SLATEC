@@ -229,13 +229,13 @@ SUBROUTINE DQAWSE(F,A,B,Alfa,Beta,Integr,Epsabs,Epsrel,Limit,Result,&
   Ier = 6
   Neval = 0
   Last = 0
-  Rlist(1) = 0.0D+00
-  Elist(1) = 0.0D+00
+  Rlist(1) = 0._DP
+  Elist(1) = 0._DP
   Iord(1) = 0
-  Result = 0.0D+00
-  Abserr = 0.0D+00
-  IF( .NOT. (B<=A .OR. (Epsabs==0.0D+00 .AND. Epsrel<MAX(0.5D+02*epmach,0.5D-28)&
-      ) .OR. Alfa<=(-0.1D+01) .OR. Beta<=(-0.1D+01) .OR. Integr<1 .OR. Integr>4 .OR. &
+  Result = 0._DP
+  Abserr = 0._DP
+  IF( .NOT. (B<=A .OR. (Epsabs==0._DP .AND. Epsrel<MAX(0.5E+02_DP*epmach,0.5E-28_DP)&
+      ) .OR. Alfa<=(-1._DP) .OR. Beta<=(-1._DP) .OR. Integr<1 .OR. Integr>4 .OR. &
       Limit<2) ) THEN
     Ier = 0
     !
@@ -245,7 +245,7 @@ SUBROUTINE DQAWSE(F,A,B,Alfa,Beta,Integr,Epsabs,Epsrel,Limit,Result,&
     !
     !           INTEGRATE OVER THE INTERVALS (A,(A+B)/2) AND ((A+B)/2,B).
     !
-    centre = 0.5D+00*(B+A)
+    centre = 0.5_DP*(B+A)
     CALL DQC25S(F,A,B,A,centre,Alfa,Beta,ri,rj,rg,rh,area1,error1,resas1,&
       Integr,nev)
     Neval = nev
@@ -302,7 +302,7 @@ SUBROUTINE DQAWSE(F,A,B,Alfa,Beta,Integr,Epsabs,Epsrel,Limit,Result,&
         !           BISECT THE SUBINTERVAL WITH LARGEST ERROR ESTIMATE.
         !
         a1 = Alist(maxerr)
-        b1 = 0.5D+00*(Alist(maxerr)+Blist(maxerr))
+        b1 = 0.5_DP*(Alist(maxerr)+Blist(maxerr))
         a2 = b1
         b2 = Blist(maxerr)
         !
@@ -326,7 +326,7 @@ SUBROUTINE DQAWSE(F,A,B,Alfa,Beta,Integr,Epsabs,Epsrel,Limit,Result,&
             !           TEST FOR ROUNDOFF ERROR.
             !
             IF( ABS(Rlist(maxerr)-area12)<0.1D-04*ABS(area12) .AND. &
-              erro12>=0.99D+00*errmax ) iroff1 = iroff1 + 1
+              erro12>=0.99_DP*errmax ) iroff1 = iroff1 + 1
             IF( Last>10 .AND. erro12>errmax ) iroff2 = iroff2 + 1
           END IF
         END IF
@@ -351,7 +351,7 @@ SUBROUTINE DQAWSE(F,A,B,Alfa,Beta,Integr,Epsabs,Epsrel,Limit,Result,&
           !           SET ERROR FLAG IN THE CASE OF BAD INTEGRAND BEHAVIOUR
           !           AT INTERIOR POINTS OF INTEGRATION RANGE.
           !
-          IF( MAX(ABS(a1),ABS(b2))<=(0.1D+01+0.1D+03*epmach)&
+          IF( MAX(ABS(a1),ABS(b2))<=(1._DP+100._DP*epmach)&
             *(ABS(a2)+0.1D+04*uflow) ) Ier = 3
         END IF
         !
@@ -385,7 +385,7 @@ SUBROUTINE DQAWSE(F,A,B,Alfa,Beta,Integr,Epsabs,Epsrel,Limit,Result,&
       !           COMPUTE FINAL RESULT.
       !           ---------------------
       !
-      Result = 0.0D+00
+      Result = 0._DP
       DO k = 1, Last
         Result = Result + Rlist(k)
       END DO

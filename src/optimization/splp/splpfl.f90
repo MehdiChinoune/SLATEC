@@ -43,7 +43,7 @@ SUBROUTINE SPLPFL(Mrelas,Nvars,Ienter,Ileave,Ibasis,Ind,Theta,Dirnrm,&
   INTEGER :: i, j, n20005, n20036
   REAL(SP) ::  bound, ratio, zero
   !* FIRST EXECUTABLE STATEMENT  SPLPFL
-  zero = 0.E0
+  zero = 0._SP
   !
   !     SEE IF THE ENTERING VARIABLE IS RESTRICTING THE STEP LENGTH
   !     BECAUSE OF AN UPPER BOUND.

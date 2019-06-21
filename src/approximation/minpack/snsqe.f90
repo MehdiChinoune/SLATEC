@@ -360,7 +360,7 @@ SUBROUTINE SNSQE(FCN,JAC,Iopt,N,X,Fvec,Tol,Nprint,Info,Wa,Lwa)
   REAL(SP) :: X(N), Fvec(N), Wa(Lwa)
   INTEGER :: indexx, j, lr, maxfev, ml, mode, mu, nfev, njev
   REAL(SP) :: epsfcn, xtol
-  REAL(SP), PARAMETER :: factor = 1.0E2, one = 1.0E0, zero = 0.0E0
+  REAL(SP), PARAMETER :: factor = 1.0E2, one = 1._SP, zero = 0._SP
   !* FIRST EXECUTABLE STATEMENT  SNSQE
   Info = 0
   !

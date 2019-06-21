@@ -74,8 +74,8 @@ SUBROUTINE DDES(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Ypout,Yp,Yy,Wt,P,Phi,&
     !
     u = D1MACH(4)
     !                       -- SET ASSOCIATED MACHINE DEPENDENT PARAMETERS
-    Twou = 2.D0*u
-    Fouru = 4.D0*u
+    Twou = 2._DP*u
+    Fouru = 4._DP*u
     !                       -- SET TERMINATION FLAG
     Iquit = 0
     !                       -- SET INITIALIZATION INDICATOR
@@ -143,7 +143,7 @@ SUBROUTINE DDES(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Ypout,Yp,Yy,Wt,P,Phi,&
   nrtolp = 0
   natolp = 0
   DO k = 1, Neq
-    IF( nrtolp==0 .AND. Rtol(k)<0.D0 ) THEN
+    IF( nrtolp==0 .AND. Rtol(k)<0._DP ) THEN
       WRITE (xern1,'(I8)') k
       WRITE (xern3,'(1PE15.6)') Rtol(k)
       CALL XERMSG('DDES','IN DDEABM, THE RELATIVE ERROR TOLERANCES RTOL&
@@ -154,7 +154,7 @@ SUBROUTINE DDES(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Ypout,Yp,Yy,Wt,P,Phi,&
       nrtolp = 1
     END IF
     !
-    IF( natolp==0 .AND. Atol(k)<0.D0 ) THEN
+    IF( natolp==0 .AND. Atol(k)<0._DP ) THEN
       WRITE (xern1,'(I8)') k
       WRITE (xern3,'(1PE15.6)') Atol(k)
       CALL XERMSG('DDES','IN DDEABM, THE ABSOLUTE ERROR TOLERANCES ATOL&
@@ -170,7 +170,7 @@ SUBROUTINE DDES(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Ypout,Yp,Yy,Wt,P,Phi,&
   END DO
   !
   IF( Info(4)==1 ) THEN
-    IF( SIGN(1.D0,Tout-T)/=SIGN(1.D0,Tstop-T) .OR. ABS(Tout-T)>ABS(Tstop-T) ) THEN
+    IF( SIGN(1._DP,Tout-T)/=SIGN(1._DP,Tstop-T) .OR. ABS(Tout-T)>ABS(Tstop-T) ) THEN
       WRITE (xern3,'(1PE15.6)') Tout
       WRITE (xern4,'(1PE15.6)') Tstop
       CALL XERMSG('DDES','IN DDEABM, YOU HAVE CALLED THE CODE WITH  TOUT = '&
@@ -199,7 +199,7 @@ SUBROUTINE DDES(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Ypout,Yp,Yy,Wt,P,Phi,&
     END IF
     !
     IF( Init/=1 ) THEN
-      IF( Delsgn*(Tout-T)<0.D0 ) THEN
+      IF( Delsgn*(Tout-T)<0._DP ) THEN
         WRITE (xern3,'(1PE15.6)') Tout
         CALL XERMSG('DDES','IN DDEABM, BY CALLING THE CODE WITH TOUT = '//xern3//&
           ' YOU ARE ATTEMPTING TO CHANGE THE DIRECTION OF INTEGRATION.$$THIS IS NOT ALLOWED WITHOUT RESTARTING.',11,1)
@@ -230,7 +230,7 @@ SUBROUTINE DDES(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Ypout,Yp,Yy,Wt,P,Phi,&
   !     FOURU WHICH IS LIKELY TO BE REASONABLE FOR THIS METHOD AND MACHINE
   !
   DO k = 1, Neq
-    IF( Rtol(k)+Atol(k)<=0.D0 ) THEN
+    IF( Rtol(k)+Atol(k)<=0._DP ) THEN
       Rtol(k) = Fouru
       Idid = -2
     END IF
@@ -277,7 +277,7 @@ SUBROUTINE DDES(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Ypout,Yp,Yy,Wt,P,Phi,&
     DO l = 1, Neq
       Yy(l) = Y(l)
     END DO
-    Delsgn = SIGN(1.0D0,Tout-T)
+    Delsgn = SIGN(1._DP,Tout-T)
     H = SIGN(MAX(Fouru*ABS(X),ABS(Tout-X)),Tout-X)
   ELSE
     !                       RTOL=ATOL=0 ON INPUT, SO RTOL IS CHANGED TO A
@@ -344,12 +344,12 @@ SUBROUTINE DDES(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Ypout,Yp,Yy,Wt,P,Phi,&
       ha = ABS(H)
       IF( Info(4)==1 ) ha = MIN(ha,ABS(Tstop-X))
       H = SIGN(ha,H)
-      Eps = 1.0D0
+      Eps = 1._DP
       ltol = 1
       DO l = 1, Neq
         IF( Info(2)==1 ) ltol = l
         Wt(l) = Rtol(ltol)*ABS(Yy(l)) + Atol(ltol)
-        IF( Wt(l)<=0.0D0 ) GOTO 120
+        IF( Wt(l)<=0._DP ) GOTO 120
       END DO
       !
       CALL DSTEPS(DF,Neq,Yy,X,H,Eps,Wt,Start,Hold,Kord,Kold,crash,Phi,P,Yp,&

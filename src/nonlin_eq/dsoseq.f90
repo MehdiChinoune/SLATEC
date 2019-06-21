@@ -125,14 +125,14 @@ SUBROUTINE DSOSEQ(FNC,N,S,Rtolx,Atolx,Tolf,Iflag,Mxit,Ncjs,Nsrrc,Nsri,&
   icr = 0
   ic = 0
   itry = Ncjs
-  yn1 = 0.0D0
-  yn2 = 0.0D0
-  yn3 = 0.0D0
-  yns = 0.0D0
+  yn1 = 0._DP
+  yn2 = 0._DP
+  yn3 = 0._DP
+  yns = 0._DP
   mit = 0
-  fn1 = 0.0D0
-  fn2 = 0.0D0
-  fmxs = 0.0D0
+  fn1 = 0._DP
+  fn2 = 0._DP
+  fmxs = 0._DP
   !
   !              INITIALIZE THE INTERCHANGE (PIVOTING) VECTOR AND
   !              SAVE THE CURRENT SOLUTION APPROXIMATION FOR FUTURE USE.
@@ -159,7 +159,7 @@ SUBROUTINE DSOSEQ(FNC,N,S,Rtolx,Atolx,Tolf,Iflag,Mxit,Ncjs,Nsrrc,Nsri,&
       !
       !                          BEGIN BLOCK PERMITTING ...EXITS TO 180
       kn = 1
-      Fmax = 0.0D0
+      Fmax = 0._DP
       !
       !
       !                             ******** BEGIN SUBITERATION LOOP DEFINING
@@ -231,7 +231,7 @@ SUBROUTINE DSOSEQ(FNC,N,S,Rtolx,Atolx,Tolf,Iflag,Mxit,Ncjs,Nsrrc,Nsri,&
             X(item) = hx
             fdif = fp - f
             IF( ABS(fdif)<=uro*ABS(f) ) THEN
-              fdif = 0.0D0
+              fdif = 0._DP
               it = it + 1
             END IF
             P(j) = fdif/h
@@ -247,9 +247,9 @@ SUBROUTINE DSOSEQ(FNC,N,S,Rtolx,Atolx,Tolf,Iflag,Mxit,Ncjs,Nsrrc,Nsri,&
             !
             DO j = k, N
               isj = Is(j)
-              fact = 100.0D0*Fac(isj)
+              fact = 100._DP*Fac(isj)
               !           ..............................EXIT
-              IF( fact>1.0D10 ) GOTO 300
+              IF( fact>1.0E10_DP ) GOTO 300
               Fac(isj) = fact
             END DO
             !                          ............EXIT
@@ -262,7 +262,7 @@ SUBROUTINE DSOSEQ(FNC,N,S,Rtolx,Atolx,Tolf,Iflag,Mxit,Ncjs,Nsrrc,Nsri,&
             !                                   CHOOSING THE MAXIMAL DERIVATIVE
             !                                   ELEMENT
             !
-            pmax = 0.0D0
+            pmax = 0._DP
             DO j = k, N
               test = ABS(P(j))
               IF( test>pmax ) THEN
@@ -271,7 +271,7 @@ SUBROUTINE DSOSEQ(FNC,N,S,Rtolx,Atolx,Tolf,Iflag,Mxit,Ncjs,Nsrrc,Nsri,&
               END IF
             END DO
             !           ........................EXIT
-            IF( pmax==0.0D0 ) GOTO 300
+            IF( pmax==0._DP ) GOTO 300
             !
             !                                   SET UP THE COEFFICIENTS FOR THE K-TH
             !                                   ROW OF THE TRIANGULAR LINEAR SYSTEM
@@ -333,8 +333,8 @@ SUBROUTINE DSOSEQ(FNC,N,S,Rtolx,Atolx,Tolf,Iflag,Mxit,Ncjs,Nsrrc,Nsri,&
       kn = kn - 1
       Y(N) = B(N)
       IF( N>1 ) CALL DSOSSL(N,N,N,Y,C,B,kn)
-      xnorm = 0.0D0
-      ynorm = 0.0D0
+      xnorm = 0._DP
+      ynorm = 0._DP
       DO j = 1, N
         yj = Y(j)
         ynorm = MAX(ynorm,ABS(yj))
@@ -398,8 +398,8 @@ SUBROUTINE DSOSEQ(FNC,N,S,Rtolx,Atolx,Tolf,Iflag,Mxit,Ncjs,Nsrrc,Nsri,&
       !                          DETECTED.
       !
       IF( ynorm<=sruro*xnorm ) THEN
-        IF( Fmax>=0.2D0*fmxs .AND. Fmax<=5.0D0*fmxs ) THEN
-          IF( ynorm>=0.2D0*yns .AND. ynorm<=5.0D0*yns ) THEN
+        IF( Fmax>=0.2_DP*fmxs .AND. Fmax<=5._DP*fmxs ) THEN
+          IF( ynorm>=0.2_DP*yns .AND. ynorm<=5._DP*yns ) THEN
             icr = icr + 1
             IF( icr>=Nsrrc ) THEN
               Iflag = 4
@@ -418,7 +418,7 @@ SUBROUTINE DSOSEQ(FNC,N,S,Rtolx,Atolx,Tolf,Iflag,Mxit,Ncjs,Nsrrc,Nsri,&
       !
       !                          TEST FOR DIVERGENCE OF THE ITERATIVE SCHEME.
       !
-      IF( ynorm>2.0D0*yns .OR. Fmax>2.0D0*fmxs ) THEN
+      IF( ynorm>2._DP*yns .OR. Fmax>2._DP*fmxs ) THEN
         ic = ic + 1
         !                       ......EXIT
         IF( ic>=Nsri ) THEN
@@ -439,12 +439,12 @@ SUBROUTINE DSOSEQ(FNC,N,S,Rtolx,Atolx,Tolf,Iflag,Mxit,Ncjs,Nsrrc,Nsri,&
     150  itry = itry - 1
     IF( itry==0 ) THEN
       itry = Ncjs
-    ELSEIF( 20.0D0*ynorm>xnorm ) THEN
+    ELSEIF( 20._DP*ynorm>xnorm ) THEN
       itry = Ncjs
-    ELSEIF( ynorm>2.0D0*yns ) THEN
+    ELSEIF( ynorm>2._DP*yns ) THEN
       itry = Ncjs
       !                 ......EXIT
-    ELSEIF( Fmax>=2.0D0*fmxs ) THEN
+    ELSEIF( Fmax>=2._DP*fmxs ) THEN
       itry = Ncjs
     END IF
     !
@@ -473,10 +473,10 @@ SUBROUTINE DSOSEQ(FNC,N,S,Rtolx,Atolx,Tolf,Iflag,Mxit,Ncjs,Nsrrc,Nsri,&
   !               TOO MANY ITERATIONS, CONVERGENCE WAS NOT ACHIEVED.
   m = Mxit
   Iflag = 5
-  IF( yn1>10.0D0*yn2 .OR. yn3>10.0D0*yn1 ) Iflag = 6
-  IF( fn1>5.0D0*fmin .OR. fn2>5.0D0*fmin ) Iflag = 6
+  IF( yn1>10._DP*yn2 .OR. yn3>10._DP*yn1 ) Iflag = 6
+  IF( fn1>5._DP*fmin .OR. fn2>5._DP*fmin ) Iflag = 6
   !        ......EXIT
-  IF( Fmax>5.0D0*fmin ) Iflag = 6
+  IF( Fmax>5._DP*fmin ) Iflag = 6
   !
   !
   200 CONTINUE

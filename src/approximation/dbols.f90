@@ -495,8 +495,8 @@ SUBROUTINE DBOLS(W,Mdw,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Iw)
     !     END PROCEDURE
     !     DO(PROCESS OPTION ARRAY)
     !     PROCEDURE(PROCESS OPTION ARRAY)
-    zero = 0.D0
-    one = 1.D0
+    zero = 0._DP
+    one = 1._DP
     checkl = .FALSE.
     lenx = Ncols
     iscale = 1

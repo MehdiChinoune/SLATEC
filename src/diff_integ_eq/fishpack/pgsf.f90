@@ -22,17 +22,17 @@ REAL(SP) FUNCTION PGSF(X,Iz,C,A,Bh)
   INTEGER :: j
   REAL(SP) :: dd, fsg, hsg
   !* FIRST EXECUTABLE STATEMENT  PGSF
-  fsg = 1.
-  hsg = 1.
+  fsg = 1._SP
+  hsg = 1._SP
   DO j = 1, Iz
-    dd = 1./(X-Bh(j))
+    dd = 1._SP/(X-Bh(j))
     fsg = fsg*A(j)*dd
     hsg = hsg*C(j)*dd
   END DO
   IF( MOD(Iz,2)/=0 ) THEN
-    PGSF = 1. + fsg + hsg
+    PGSF = 1._SP + fsg + hsg
     RETURN
   END IF
-  PGSF = 1. - fsg - hsg
+  PGSF = 1._SP - fsg - hsg
   RETURN
 END FUNCTION PGSF

@@ -212,7 +212,7 @@ SUBROUTINE DSOS(FNC,Neq,X,Rtolx,Atolx,Tolf,Iflag,Rw,Lrw,Iw,Liw)
     Iflag = 9
   END IF
   !
-  IF( Rtolx<0.0D0 .OR. Atolx<0.0D0 ) THEN
+  IF( Rtolx<0._DP .OR. Atolx<0._DP ) THEN
     WRITE (xern3,'(1PE15.6)') Atolx
     WRITE (xern4,'(1PE15.6)') Rtolx
     CALL XERMSG('DSOS','THE ERROR TOLERANCES FOR THE SOLUTION ITERATES&
@@ -221,7 +221,7 @@ SUBROUTINE DSOS(FNC,Neq,X,Rtolx,Atolx,Tolf,Iflag,Rw,Lrw,Iw,Liw)
     Iflag = 9
   END IF
   !
-  IF( Tolf<0.0D0 ) THEN
+  IF( Tolf<0._DP ) THEN
     WRITE (xern3,'(1PE15.6)') Tolf
     CALL XERMSG('DSOS','THE RESIDUAL ERROR TOLERANCE MUST BE NON-NEGATIVE.&
       & YOU HAVE CALLED THE CODE WITH TOLF = '//xern3,3,1)

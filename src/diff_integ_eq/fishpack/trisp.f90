@@ -52,7 +52,7 @@ SUBROUTINE TRISP(N,A,B,C,D,U,Z)
   !
   !     SET LAST COMPONENT EQUAL TO ONE
   !
-  Z(N) = 1.0
+  Z(N) = 1._SP
   Z(N-1) = -D(N-1)
   nm1 = N - 1
   DO j = 2, nm1

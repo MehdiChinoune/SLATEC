@@ -92,7 +92,7 @@ SUBROUTINE DPFQAD(F,Ldc,C,Xi,Lxi,K,Id,X1,X2,Tol,Quad,Ierr)
   !
   !* FIRST EXECUTABLE STATEMENT  DPFQAD
   Ierr = 1
-  Quad = 0.0D0
+  Quad = 0._DP
   IF( K<1 ) THEN
     CALL XERMSG('DPFQAD','K DOES NOT SATISFY K>=1',2,1)
     RETURN
@@ -107,15 +107,15 @@ SUBROUTINE DPFQAD(F,Ldc,C,Xi,Lxi,K,Id,X1,X2,Tol,Quad,Ierr)
     RETURN
   ELSE
     wtol = D1MACH(4)
-    wtol = MAX(wtol,1.0D-18)
-    IF( Tol>=wtol .AND. Tol<=0.1D0 ) THEN
+    wtol = MAX(wtol,1.0E-18_DP)
+    IF( Tol>=wtol .AND. Tol<=0.1_DP ) THEN
       aa = MIN(X1,X2)
       bb = MAX(X1,X2)
       IF( aa==bb ) RETURN
       ilo = 1
       CALL DINTRV(Xi,Lxi,aa,ilo,il1,mf1)
       CALL DINTRV(Xi,Lxi,bb,ilo,il2,mf2)
-      q = 0.0D0
+      q = 0._DP
       inppv = 1
       DO left = il1, il2
         ta = Xi(left)

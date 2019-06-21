@@ -32,19 +32,19 @@ SUBROUTINE R9UPAK(X,Y,N)
   INTEGER :: N
   absx = ABS(X)
   N = 0
-  IF( X==0.0E0 ) THEN
+  IF( X==0._SP ) THEN
     !
     Y = SIGN(absx,X)
   ELSE
     !
-    DO WHILE( absx<0.5E0 )
+    DO WHILE( absx<0.5_SP )
       N = N - 1
-      absx = absx*2.0E0
+      absx = absx*2._SP
     END DO
     !
-    DO WHILE( absx>=1.0E0 )
+    DO WHILE( absx>=1._SP )
       N = N + 1
-      absx = absx*0.5E0
+      absx = absx*0.5_SP
     END DO
     Y = SIGN(absx,X)
   END IF

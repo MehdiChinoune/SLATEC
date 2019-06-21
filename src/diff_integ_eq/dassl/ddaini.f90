@@ -81,7 +81,7 @@ SUBROUTINE DDAINI(X,Y,Yprime,Neq,RES,JAC,H,Wt,Idid,Phi,Delta,E,&
   INTEGER, PARAMETER :: LNJE = 13
   !
   INTEGER, PARAMETER :: maxit = 10, mjac = 5
-  REAL(DP), PARAMETER :: damp = 0.75D0
+  REAL(DP), PARAMETER :: damp = 0.75_DP
   !
   !
   !---------------------------------------------------
@@ -110,7 +110,7 @@ SUBROUTINE DDAINI(X,Y,Yprime,Neq,RES,JAC,H,Wt,Idid,Phi,Delta,E,&
   !----------------------------------------------------
   !
   !     SET UP FOR START OF CORRECTOR ITERATION
-  100  cj = 1.0D0/H
+  100  cj = 1._DP/H
   X = X + H
   !
   !     PREDICT SOLUTION AND DERIVATIVE
@@ -144,7 +144,7 @@ SUBROUTINE DDAINI(X,Y,Yprime,Neq,RES,JAC,H,Wt,Idid,Phi,Delta,E,&
         CALL DDAJAC(Neq,X,Y,Yprime,Delta,cj,H,ier,Wt,E,Wm,Iwm,RES,ires,&
           Uround,JAC,Ntemp)
         !
-        s = 1000000.D0
+        s = 1000000._DP
         IF( ires<0 ) THEN
           convgd = .FALSE.
           EXIT
@@ -177,22 +177,22 @@ SUBROUTINE DDAINI(X,Y,Yprime,Neq,RES,JAC,H,Wt,Idid,Phi,Delta,E,&
       !     TEST FOR CONVERGENCE OF THE ITERATION.
       !
       delnrm = DDANRM(Neq,Delta,Wt)
-      IF( delnrm>100.D0*Uround*ynorm ) THEN
+      IF( delnrm>100._DP*Uround*ynorm ) THEN
         !
         IF( m>0 ) THEN
           !
-          rate = (delnrm/oldnrm)**(1.0D0/m)
-          IF( rate>0.90D0 ) THEN
+          rate = (delnrm/oldnrm)**(1._DP/m)
+          IF( rate>0.90_DP ) THEN
             convgd = .FALSE.
             EXIT
           ELSE
-            s = rate/(1.0D0-rate)
+            s = rate/(1._DP-rate)
           END IF
         ELSE
           oldnrm = delnrm
         END IF
         !
-        IF( s*delnrm>0.33D0 ) THEN
+        IF( s*delnrm>0.33_DP ) THEN
           !
           !
           !     THE CORRECTOR HAS NOT YET CONVERGED. UPDATE
@@ -218,11 +218,11 @@ SUBROUTINE DDAINI(X,Y,Yprime,Neq,RES,JAC,H,Wt,Idid,Phi,Delta,E,&
       !     CHECK NONNEGATIVITY CONSTRAINTS
       IF( Nonneg/=0 ) THEN
         DO i = 1, Neq
-          Delta(i) = MIN(Y(i),0.0D0)
+          Delta(i) = MIN(Y(i),0._DP)
         END DO
         !
         delnrm = DDANRM(Neq,Delta,Wt)
-        IF( delnrm>0.33D0 ) THEN
+        IF( delnrm>0.33_DP ) THEN
           convgd = .FALSE.
         ELSE
           !
@@ -250,7 +250,7 @@ SUBROUTINE DDAINI(X,Y,Yprime,Neq,RES,JAC,H,Wt,Idid,Phi,Delta,E,&
     END DO
     err = DDANRM(Neq,E,Wt)
     !
-    IF( err<=1.0D0 ) RETURN
+    IF( err<=1._DP ) RETURN
   END IF
   !
   !
@@ -272,14 +272,14 @@ SUBROUTINE DDAINI(X,Y,Yprime,Neq,RES,JAC,H,Wt,Idid,Phi,Delta,E,&
   IF( convgd ) THEN
     !
     nef = nef + 1
-    r = 0.90D0/(2.0D0*err+0.0001D0)
-    r = MAX(0.1D0,MIN(0.5D0,r))
+    r = 0.90_DP/(2._DP*err+0.0001_DP)
+    r = MAX(0.1_DP,MIN(0.5_DP,r))
     H = H*r
     IF( ABS(H)>=Hmin .AND. nef<10 ) GOTO 100
   ELSEIF( ier==0 ) THEN
     IF( ires>-2 ) THEN
       ncf = ncf + 1
-      H = H*0.25D0
+      H = H*0.25_DP
       IF( ncf<10 .AND. ABS(H)>=Hmin ) GOTO 100
       Idid = -12
       RETURN
@@ -289,7 +289,7 @@ SUBROUTINE DDAINI(X,Y,Yprime,Neq,RES,JAC,H,Wt,Idid,Phi,Delta,E,&
     END IF
   ELSE
     nsf = nsf + 1
-    H = H*0.25D0
+    H = H*0.25_DP
     IF( nsf<3 .AND. ABS(H)>=Hmin ) GOTO 100
     Idid = -12
     RETURN

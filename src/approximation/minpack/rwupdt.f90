@@ -76,7 +76,7 @@ SUBROUTINE RWUPDT(N,R,Ldr,W,B,Alpha,Coss,Sinn)
   REAL(SP) :: R(Ldr,N), W(N), B(N), Coss(N), Sinn(N)
   INTEGER :: i, j, jm1
   REAL(SP) :: cotan, rowj, tann, temp
-  REAL(SP), PARAMETER :: one = 1.0E0, p5 = 5.0E-1, p25 = 2.5E-1, zero = 0.0E0
+  REAL(SP), PARAMETER :: one = 1._SP, p5 = 5.E-1_SP, p25 = 2.5E-1, zero = 0._SP
   !* FIRST EXECUTABLE STATEMENT  RWUPDT
   DO j = 1, N
     rowj = W(j)

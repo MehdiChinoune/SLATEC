@@ -165,11 +165,11 @@ SUBROUTINE FCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Nconst,Xconst,&
   !
   prgopt(4) = 7
   prgopt(5) = 4
-  prgopt(6) = 1.E-4
+  prgopt(6) = 1.E-4_SP
   !
   prgopt(7) = 10
   prgopt(8) = 5
-  prgopt(9) = 1.E-4
+  prgopt(9) = 1.E-4_SP
   !
   prgopt(10) = 1
   !
@@ -246,7 +246,7 @@ SUBROUTINE FCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Nconst,Xconst,&
       !
       !           Scale data if uncertainty is nonzero.
       !
-      IF( Sddata(l)/=0.E0 ) G(irow,1:nordp1) = G(irow,1:nordp1)/Sddata(l)
+      IF( Sddata(l)/=0._SP ) G(irow,1:nordp1) = G(irow,1:nordp1)/Sddata(l)
       !
       !           When staging work area is exhausted, process rows.
       !
@@ -262,13 +262,13 @@ SUBROUTINE FCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Nconst,Xconst,&
     !
     !        Last call to adjust block positioning.
     !
-    G(ir,1:nordp1) = 0.E0
+    G(ir,1:nordp1) = 0._SP
     CALL BNDACC(G,Mdg,Nord,ip,ir,1,np1)
   END IF
   !
   band = band .AND. Nconst==0
   DO i = 1, n
-    band = band .AND. G(i,1)/=0.E0
+    band = band .AND. G(i,1)/=0._SP
   END DO
   !
   !     Process banded least squares equations.
@@ -314,7 +314,7 @@ SUBROUTINE FCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Nconst,Xconst,&
       END DO
       !
       CALL BSPLVD(Bkpt,Nord,xval,ileft,Bf,ideriv+1)
-      W(neqcon,1:np1) = 0.E0
+      W(neqcon,1:np1) = 0._SP
       W(neqcon,ileft-nordm1:ileft) = Bf(1:Nord,ideriv+1)
       !
       IF( itype==2 ) THEN
@@ -328,7 +328,7 @@ SUBROUTINE FCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Nconst,Xconst,&
         END DO
         !
         CALL BSPLVD(Bkpt,Nord,yval,ileft,Bf,ideriv+1)
-        CALL SAXPY(Nord,-1.E0,Bf(1,ideriv+1),1,W(neqcon,ileft-nordm1),Mdw)
+        CALL SAXPY(Nord,-1._SP,Bf(1,ideriv+1),1,W(neqcon,ileft-nordm1),Mdw)
       END IF
     END IF
   END DO
@@ -337,7 +337,7 @@ SUBROUTINE FCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Nconst,Xconst,&
   !
   DO i = 1, np1
     irow = i + neqcon
-    W(irow,1:n) = 0.E0
+    W(irow,1:n) = 0._SP
     W(irow,i:i+MIN(np1-i,Nord)-1) = G(i,1:MIN(np1-i,Nord))
     W(irow,np1) = G(i,nordp1)
   END DO
@@ -361,7 +361,7 @@ SUBROUTINE FCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Nconst,Xconst,&
       !
       CALL BSPLVD(Bkpt,Nord,xval,ileft,Bf,ideriv+1)
       irow = neqcon + np1 + nincon
-      W(irow,1:n) = 0.E0
+      W(irow,1:n) = 0._SP
       intrvl = ileft - nordm1
       W(irow,intrvl:intrvl+Nord-1) = Bf(1:Nord,ideriv+1)
       !

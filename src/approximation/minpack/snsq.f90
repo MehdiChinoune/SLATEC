@@ -447,8 +447,8 @@ SUBROUTINE SNSQ(FCN,JAC,Iopt,N,X,Fvec,Fjac,Ldfjac,Xtol,Maxfev,Ml,Mu,&
   LOGICAL :: jeval, sing
   REAL(SP) :: actred, delta, epsmch, fnorm, fnorm1, pnorm, prered, ratio, summ, &
     temp, xnorm
-  REAL(SP), PARAMETER ::one = 1.0E0, p1 = 1.0E-1, p5 = 5.0E-1, p001 = 1.0E-3, &
-    p0001 = 1.0E-4, zero = 0.0E0
+  REAL(SP), PARAMETER ::one = 1._SP, p1 = 1.E-1_SP, p5 = 5.E-1_SP, p001 = 1.E-3_SP, &
+    p0001 = 1.E-4_SP, zero = 0._SP
   !
   !* FIRST EXECUTABLE STATEMENT  SNSQ
   epsmch = R1MACH(4)

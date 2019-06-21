@@ -112,10 +112,10 @@ SUBROUTINE QC25S(F,A,B,Bl,Br,Alfa,Beta,Ri,Rj,Rg,Rh,Result,Abserr,Resasc,&
   !           K = 1, ..., 11, TO BE USED FOR THE COMPUTATION OF THE
   !           CHEBYSHEV SERIES EXPANSION OF F.
   !
-  REAL(SP), PARAMETER :: x(11) = [ 0.9914448613738104E+00, 0.9659258262890683E+00, &
-    0.9238795325112868E+00, 0.8660254037844386E+00, 0.7933533402912352E+00, &
-    0.7071067811865475E+00, 0.6087614290087206E+00, 0.5000000000000000E+00, &
-    0.3826834323650898E+00, 0.2588190451025208E+00, 0.1305261922200516E+00 ]
+  REAL(SP), PARAMETER :: x(11) = [ 0.9914448613738104_SP, 0.9659258262890683_SP, &
+    0.9238795325112868_SP, 0.8660254037844386_SP, 0.7933533402912352_SP, &
+    0.7071067811865475_SP, 0.6087614290087206_SP, 0.5000000000000000_SP, &
+    0.3826834323650898_SP, 0.2588190451025208_SP, 0.1305261922200516_SP ]
   !
   !           LIST OF MAJOR VARIABLES
   !           -----------------------
@@ -138,7 +138,7 @@ SUBROUTINE QC25S(F,A,B,Bl,Br,Alfa,Beta,Ri,Rj,Rg,Rh,Result,Abserr,Resasc,&
   !
   !* FIRST EXECUTABLE STATEMENT  QC25S
   Nev = 25
-  IF( Bl==A .AND. (Alfa/=0.0E+00 .OR. Integr==2 .OR. Integr==4) ) THEN
+  IF( Bl==A .AND. (Alfa/=0._SP .OR. Integr==2 .OR. Integr==4) ) THEN
     !
     !           THIS PART OF THE PROGRAM IS EXECUTED ONLY IF A = BL.
     !           ----------------------------------------------------
@@ -148,23 +148,23 @@ SUBROUTINE QC25S(F,A,B,Bl,Br,Alfa,Beta,Ri,Rj,Rg,Rh,Result,Abserr,Resasc,&
     !           F1 = (0.5*(B+B-BR-A)-0.5*(BR-A)*X)**BETA
     !                  *F(0.5*(BR-A)*X+0.5*(BR+A))
     !
-    hlgth = 0.5E+00*(Br-Bl)
-    centr = 0.5E+00*(Br+Bl)
+    hlgth = 0.5_SP*(Br-Bl)
+    centr = 0.5_SP*(Br+Bl)
     fix = B - centr
-    fval(1) = 0.5E+00*F(hlgth+centr)*(fix-hlgth)**Beta
+    fval(1) = 0.5_SP*F(hlgth+centr)*(fix-hlgth)**Beta
     fval(13) = F(centr)*(fix**Beta)
-    fval(25) = 0.5E+00*F(centr-hlgth)*(fix+hlgth)**Beta
+    fval(25) = 0.5_SP*F(centr-hlgth)*(fix+hlgth)**Beta
     DO i = 2, 12
       u = hlgth*x(i-1)
       isym = 26 - i
       fval(i) = F(u+centr)*(fix-u)**Beta
       fval(isym) = F(centr-u)*(fix+u)**Beta
     END DO
-    factor = hlgth**(Alfa+0.1E+01)
-    Result = 0.0E+00
-    Abserr = 0.0E+00
-    res12 = 0.0E+00
-    res24 = 0.0E+00
+    factor = hlgth**(Alfa+1._SP)
+    Result = 0._SP
+    Abserr = 0._SP
+    res12 = 0._SP
+    res24 = 0._SP
     IF( Integr>2 ) THEN
       !
       !           COMPUTE THE CHEBYSHEV SERIES EXPANSION OF THE
@@ -198,8 +198,8 @@ SUBROUTINE QC25S(F,A,B,Bl,Br,Alfa,Beta,Ri,Rj,Rg,Rh,Result,Abserr,Resasc,&
         dc = LOG(Br-Bl)
         Result = res24*dc
         Abserr = ABS((res24-res12)*dc)
-        res12 = 0.0E+00
-        res24 = 0.0E+00
+        res12 = 0._SP
+        res24 = 0._SP
         DO i = 1, 13
           res12 = res12 + cheb12(i)*Rg(i)
           res24 = res24 + cheb24(i)*Rg(i)
@@ -227,8 +227,8 @@ SUBROUTINE QC25S(F,A,B,Bl,Br,Alfa,Beta,Ri,Rj,Rg,Rh,Result,Abserr,Resasc,&
         dc = LOG(Br-Bl)
         Result = res24*dc
         Abserr = ABS((res24-res12)*dc)
-        res12 = 0.0E+00
-        res24 = 0.0E+00
+        res12 = 0._SP
+        res24 = 0._SP
         DO i = 1, 13
           res12 = res12 + cheb12(i)*Rg(i)
           res24 = res12 + cheb24(i)*Rg(i)
@@ -240,7 +240,7 @@ SUBROUTINE QC25S(F,A,B,Bl,Br,Alfa,Beta,Ri,Rj,Rg,Rh,Result,Abserr,Resasc,&
     END IF
     Result = (Result+res24)*factor
     Abserr = (Abserr+ABS(res24-res12))*factor
-  ELSEIF( Br==B .AND. (Beta/=0.0E+00 .OR. Integr==3 .OR. Integr==4) ) THEN
+  ELSEIF( Br==B .AND. (Beta/=0._SP .OR. Integr==3 .OR. Integr==4) ) THEN
     !
     !           THIS PART OF THE PROGRAM IS EXECUTED ONLY IF B = BR.
     !           ----------------------------------------------------
@@ -250,23 +250,23 @@ SUBROUTINE QC25S(F,A,B,Bl,Br,Alfa,Beta,Ri,Rj,Rg,Rh,Result,Abserr,Resasc,&
     !           F2 = (0.5*(B+BL-A-A)+0.5*(B-BL)*X)**ALFA
     !                *F(0.5*(B-BL)*X+0.5*(B+BL))
     !
-    hlgth = 0.5E+00*(Br-Bl)
-    centr = 0.5E+00*(Br+Bl)
+    hlgth = 0.5_SP*(Br-Bl)
+    centr = 0.5_SP*(Br+Bl)
     fix = centr - A
-    fval(1) = 0.5E+00*F(hlgth+centr)*(fix+hlgth)**Alfa
+    fval(1) = 0.5_SP*F(hlgth+centr)*(fix+hlgth)**Alfa
     fval(13) = F(centr)*(fix**Alfa)
-    fval(25) = 0.5E+00*F(centr-hlgth)*(fix-hlgth)**Alfa
+    fval(25) = 0.5_SP*F(centr-hlgth)*(fix-hlgth)**Alfa
     DO i = 2, 12
       u = hlgth*x(i-1)
       isym = 26 - i
       fval(i) = F(u+centr)*(fix+u)**Alfa
       fval(isym) = F(centr-u)*(fix-u)**Alfa
     END DO
-    factor = hlgth**(Beta+0.1E+01)
-    Result = 0.0E+00
-    Abserr = 0.0E+00
-    res12 = 0.0E+00
-    res24 = 0.0E+00
+    factor = hlgth**(Beta+1._SP)
+    Result = 0._SP
+    Abserr = 0._SP
+    res12 = 0._SP
+    res24 = 0._SP
     IF( Integr==2 .OR. Integr==4 ) THEN
       !
       !           COMPUTE THE CHEBYSHEV SERIES EXPANSION OF THE
@@ -297,8 +297,8 @@ SUBROUTINE QC25S(F,A,B,Bl,Br,Alfa,Beta,Ri,Rj,Rg,Rh,Result,Abserr,Resasc,&
         dc = LOG(Br-Bl)
         Result = res24*dc
         Abserr = ABS((res24-res12)*dc)
-        res12 = 0.0E+00
-        res24 = 0.0E+00
+        res12 = 0._SP
+        res24 = 0._SP
         !
         !           INTEGR = 4
         !
@@ -329,8 +329,8 @@ SUBROUTINE QC25S(F,A,B,Bl,Br,Alfa,Beta,Ri,Rj,Rg,Rh,Result,Abserr,Resasc,&
         dc = LOG(Br-Bl)
         Result = res24*dc
         Abserr = ABS((res24-res12)*dc)
-        res12 = 0.0E+00
-        res24 = 0.0E+00
+        res12 = 0._SP
+        res24 = 0._SP
         DO i = 1, 13
           res12 = res12 + cheb12(i)*Rh(i)
           res24 = res24 + cheb24(i)*Rh(i)

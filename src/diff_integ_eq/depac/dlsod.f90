@@ -106,9 +106,9 @@ SUBROUTINE DLSOD(DF,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,&
     n_com = Neq
     nst_com = 0
     nje_com = 0
-    hmxi_com = 0.0D0
+    hmxi_com = 0._DP
     nq_com = 1
-    h_com = 1.0D0
+    h_com = 1._DP
     !                          -- RESET IBEGIN FOR SUBSEQUENT CALLS
     ibegin_com = 1
   END IF
@@ -158,7 +158,7 @@ SUBROUTINE DLSOD(DF,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,&
   END DO
   !
   IF( itstop_com==1 ) THEN
-    IF( SIGN(1.0D0,Tout-T)/=SIGN(1.0D0,Tstop-T) .OR. ABS(Tout-T)>ABS(Tstop-T)&
+    IF( SIGN(1._DP,Tout-T)/=SIGN(1._DP,Tstop-T) .OR. ABS(Tout-T)>ABS(Tstop-T)&
         ) THEN
       WRITE (xern3,'(1PE15.6)') Tout
       WRITE (xern4,'(1PE15.6)') Tstop
@@ -190,7 +190,7 @@ SUBROUTINE DLSOD(DF,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,&
     END IF
     !
     IF( init_com/=1 ) THEN
-      IF( Delsgn*(Tout-T)<0.0D0 ) THEN
+      IF( Delsgn*(Tout-T)<0._DP ) THEN
         WRITE (xern3,'(1PE15.6)') Tout
         CALL XERMSG('DLSOD',&
           'IN DDEBDF, BY CALLING THE CODE WITH TOUT = '//xern3//&
@@ -222,8 +222,8 @@ SUBROUTINE DLSOD(DF,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,&
   !             THIS METHOD AND MACHINE
   !
   DO k = 1, Neq
-    IF( Rtol(k)+Atol(k)<=0.0D0 ) THEN
-      Rtol(k) = 100.0D0*uround_com
+    IF( Rtol(k)+Atol(k)<=0._DP ) THEN
+      Rtol(k) = 100._DP*uround_com
       Idid = -2
     END IF
     !     ...EXIT
@@ -280,7 +280,7 @@ SUBROUTINE DLSOD(DF,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,&
     DO l = 1, Neq
       IF( itol_com==1 ) ltol = l
       tol = Rtol(ltol)*ABS(Y(l)) + Atol(ltol)
-      IF( tol==0.0D0 ) GOTO 200
+      IF( tol==0._DP ) GOTO 200
       Ewt(l) = tol
     END DO
     !
@@ -288,7 +288,7 @@ SUBROUTINE DLSOD(DF,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,&
     CALL DHSTRT(DF,Neq,T,Tout,Y,Yh(1,2),Ewt,1,uround_com,big,Yh(1,3),Yh(1,4),Yh(1,5),&
       Yh(1,6),h_com)
     !
-    Delsgn = SIGN(1.0D0,Tout-T)
+    Delsgn = SIGN(1._DP,Tout-T)
     tn_com = T
     DO l = 1, Neq
       Yh(l,1) = Y(l)
@@ -324,7 +324,7 @@ SUBROUTINE DLSOD(DF,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,&
     !                       CLOSE, EXTRAPOLATE AND RETURN
     !
     IF( itstop_com==1 ) THEN
-      IF( ABS(Tstop-tn_com)<100.0D0*uround_com*ABS(tn_com) ) THEN
+      IF( ABS(Tstop-tn_com)<100._DP*uround_com*ABS(tn_com) ) THEN
         dt = Tout - tn_com
         DO l = 1, Neq
           Y(l) = Yh(l,1) + (dt/h_com)*Yh(l,2)
@@ -356,7 +356,7 @@ SUBROUTINE DLSOD(DF,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,&
       !
       !                             LIMIT STEP SIZE AND SET WEIGHT VECTOR
       !
-      hmin_com = 100.0D0*uround_com*ABS(tn_com)
+      hmin_com = 100._DP*uround_com*ABS(tn_com)
       ha = MAX(ABS(h_com),hmin_com)
       IF( itstop_com==1 ) ha = MIN(ha,ABS(Tstop-tn_com))
       h_com = SIGN(ha,h_com)
@@ -365,11 +365,11 @@ SUBROUTINE DLSOD(DF,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,&
         IF( itol_com==1 ) ltol = l
         Ewt(l) = Rtol(ltol)*ABS(Yh(l,1)) + Atol(ltol)
         !                    .........EXIT
-        IF( Ewt(l)<=0.0D0 ) GOTO 200
+        IF( Ewt(l)<=0._DP ) GOTO 200
       END DO
       Tolfac = uround_com*DVNRMS(Neq,Yh,Ewt)
       !                 .........EXIT
-      IF( Tolfac<=1.0D0 ) THEN
+      IF( Tolfac<=1._DP ) THEN
         !
         !                 ...................................................
         !
@@ -400,7 +400,7 @@ SUBROUTINE DLSOD(DF,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,&
         !
         !                          TOLERANCES TOO SMALL
         Idid = -2
-        Tolfac = 2.0D0*Tolfac
+        Tolfac = 2._DP*Tolfac
         Rtol(1) = Tolfac*Rtol(1)
         Atol(1) = Tolfac*Atol(1)
         IF( itol_com/=0 ) THEN

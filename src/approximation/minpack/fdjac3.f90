@@ -95,7 +95,7 @@ SUBROUTINE FDJAC3(FCN,M,N,X,Fvec,Fjac,Ldfjac,Iflag,Epsfcn,Wa)
   REAL(SP) :: X(N), Fvec(M), Fjac(Ldfjac,N), Wa(M)
   INTEGER :: i, j
   REAL(SP) :: eps, epsmch, h, temp
-  REAL(SP), PARAMETER :: zero = 0.0E0
+  REAL(SP), PARAMETER :: zero = 0._SP
   !* FIRST EXECUTABLE STATEMENT  FDJAC3
   epsmch = R1MACH(4)
   !

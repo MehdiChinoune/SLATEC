@@ -328,7 +328,7 @@ SUBROUTINE HWSCYL(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   IF( Ierror/=0 ) RETURN
   mp1 = M + 1
   deltar = (B-A)/M
-  dlrby2 = deltar/2.
+  dlrby2 = deltar/2._SP
   dlrsq = deltar**2
   np1 = N + 1
   deltht = (D-C)/N
@@ -372,13 +372,13 @@ SUBROUTINE HWSCYL(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   id5 = id4 + munk
   id6 = id5 + munk
   istart = 1
-  a1 = 2./dlrsq
+  a1 = 2._SP/dlrsq
   ij = 0
   IF( Mbdcnd==3 .OR. Mbdcnd==4 ) ij = 1
   IF( Mbdcnd>4 ) THEN
-    W(1) = 0.
-    W(id2+1) = -2.*a1
-    W(id3+1) = 2.*a1
+    W(1) = 0._SP
+    W(id2+1) = -2._SP*a1
+    W(id3+1) = 2._SP*a1
     istart = 2
     ij = 1
   END IF
@@ -387,7 +387,7 @@ SUBROUTINE HWSCYL(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
     j = id5 + i
     W(j) = r
     j = id6 + i
-    W(j) = 1./r**2
+    W(j) = 1._SP/r**2
     W(i) = (r-dlrby2)/(r*dlrsq)
     j = id3 + i
     W(j) = (r+dlrby2)/(r*dlrsq)
@@ -410,7 +410,7 @@ SUBROUTINE HWSCYL(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   !
   SELECT CASE (Mbdcnd)
     CASE (3,4)
-      a1 = 2.*deltar*W(1)
+      a1 = 2._SP*deltar*W(1)
       DO j = nstart, nstop
         F(1,j) = F(1,j) + a1*Bda(j)
       END DO
@@ -423,7 +423,7 @@ SUBROUTINE HWSCYL(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   END SELECT
   SELECT CASE (Mbdcnd)
     CASE (2,3,6)
-      a1 = 2.*deltar*W(id4)
+      a1 = 2._SP*deltar*W(id4)
       DO j = nstart, nstop
         F(mp1,j) = F(mp1,j) - a1*Bdb(j)
       END DO
@@ -436,13 +436,13 @@ SUBROUTINE HWSCYL(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   !
   !     ENTER BOUNDARY DATA FOR Z-BOUNDARIES.
   !
-  a1 = 1./dlthsq
+  a1 = 1._SP/dlthsq
   l = id5 - mstart + 1
   SELECT CASE (np)
     CASE (1)
       GOTO 100
     CASE (4,5)
-      a1 = 2./deltht
+      a1 = 2._SP/deltht
       DO i = mstart, mstop
         F(i,1) = F(i,1) + a1*Bdc(i)
       END DO
@@ -451,11 +451,11 @@ SUBROUTINE HWSCYL(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
         F(i,2) = F(i,2) - a1*F(i,1)
       END DO
   END SELECT
-  a1 = 1./dlthsq
+  a1 = 1._SP/dlthsq
   SELECT CASE (np)
     CASE (1)
     CASE (3,4)
-      a1 = 2./deltht
+      a1 = 2._SP/deltht
       DO i = mstart, mstop
         F(i,np1) = F(i,np1) - a1*Bdd(i)
       END DO
@@ -468,30 +468,30 @@ SUBROUTINE HWSCYL(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   !     ADJUST RIGHT SIDE OF SINGULAR PROBLEMS TO INSURE EXISTENCE OF A
   !     SOLUTION.
   !
-  100  Pertrb = 0.
+  100  Pertrb = 0._SP
   IF( Elmbda<0 ) THEN
   ELSEIF( Elmbda==0 ) THEN
-    W(id5+1) = .5*(W(id5+2)-dlrby2)
+    W(id5+1) = 0.5_SP*(W(id5+2)-dlrby2)
     SELECT CASE (Mbdcnd)
       CASE (1,2,4,5)
         GOTO 200
       CASE (3)
       CASE DEFAULT
-        W(id5+1) = .5*W(id5+1)
+        W(id5+1) = 0.5_SP*W(id5+1)
     END SELECT
     SELECT CASE (np)
       CASE (1)
-        a2 = 1.
+        a2 = 1._SP
       CASE (2,3,5)
         GOTO 200
       CASE DEFAULT
-        a2 = 2.
+        a2 = 2._SP
     END SELECT
     k = id5 + munk
-    W(k) = .5*(W(k-1)+dlrby2)
-    s = 0.
+    W(k) = 0.5_SP*(W(k-1)+dlrby2)
+    s = 0._SP
     DO i = mstart, mstop
-      s1 = 0.
+      s1 = 0._SP
       nsp1 = nstart + 1
       nstm1 = nstop - 1
       DO j = nsp1, nstm1
@@ -500,9 +500,9 @@ SUBROUTINE HWSCYL(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
       k = i + l
       s = s + (a2*s1+F(i,nstart)+F(i,nstop))*W(k)
     END DO
-    s2 = M*A + (.75+(M-1)*(M+1))*dlrby2
-    IF( Mbdcnd==3 ) s2 = s2 + .25*dlrby2
-    s1 = (2.+a2*(nunk-2))*s2
+    s2 = M*A + (.75_SP+(M-1)*(M+1))*dlrby2
+    IF( Mbdcnd==3 ) s2 = s2 + 0.25_SP*dlrby2
+    s1 = (2._SP+a2*(nunk-2))*s2
     Pertrb = s/s1
     DO i = mstart, mstop
       DO j = nstart, nstop
@@ -528,8 +528,8 @@ SUBROUTINE HWSCYL(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
       F(i,j) = F(i,j)*dlthsq
     END DO
   END DO
-  W(1) = 0.
-  W(id4) = 0.
+  W(1) = 0._SP
+  W(id4) = 0._SP
   !
   !     CALL GENBUN TO SOLVE THE SYSTEM OF EQUATIONS.
   !

@@ -29,41 +29,41 @@ SUBROUTINE DBKISR(X,N,Summ,Ierr)
   INTEGER :: i, Ierr, k, kk, kkn, k1, N, np
   REAL(DP) :: ak, atol, bk, fk, fn, hx, hxs, pol, pr, Summ, tkp, tol, trm, X, xln
   !
-  REAL(DP), PARAMETER :: c(2) = [ 1.57079632679489662D+00, 1.0D0 ]
+  REAL(DP), PARAMETER :: c(2) = [ 1.57079632679489662_DP, 1._DP ]
   !* FIRST EXECUTABLE STATEMENT  DBKISR
   Ierr = 0
-  tol = MAX(D1MACH(4),1.0D-18)
+  tol = MAX(D1MACH(4),1.E-18_DP)
   IF( X>=tol ) THEN
-    pr = 1.0D0
-    pol = 0.0D0
+    pr = 1._DP
+    pol = 0._DP
     IF( N/=0 ) THEN
       DO i = 1, N
         pol = -pol*X + c(i)
         pr = pr*X/i
       END DO
     END IF
-    hx = X*0.5D0
+    hx = X*0.5_DP
     hxs = hx*hx
     xln = LOG(hx)
     np = N + 1
-    tkp = 3.0D0
-    fk = 2.0D0
+    tkp = 3._DP
+    fk = 2._DP
     fn = N
-    bk = 4.0D0
-    ak = 2.0D0/((fn+1.0D0)*(fn+2.0D0))
+    bk = 4._DP
+    ak = 2._DP/((fn+1._DP)*(fn+2._DP))
     Summ = ak*(DPSIXN(N+3)-DPSIXN(3)+DPSIXN(2)-xln)
-    atol = Summ*tol*0.75D0
+    atol = Summ*tol*0.75_DP
     DO k = 2, 20
-      ak = ak*(hxs/bk)*((tkp+1.0D0)/(tkp+fn+1.0D0))*(tkp/(tkp+fn))
+      ak = ak*(hxs/bk)*((tkp+1._DP)/(tkp+fn+1._DP))*(tkp/(tkp+fn))
       k1 = k + 1
       kk = k1 + k
       kkn = kk + N
       trm = (DPSIXN(k1)+DPSIXN(kkn)-DPSIXN(kk)-xln)*ak
       Summ = Summ + trm
       IF( ABS(trm)<=atol ) GOTO 100
-      tkp = tkp + 2.0D0
+      tkp = tkp + 2._DP
       bk = bk + tkp
-      fk = fk + 1.0D0
+      fk = fk + 1._DP
     END DO
     Ierr = 2
     RETURN
@@ -74,7 +74,7 @@ SUBROUTINE DBKISR(X,N,Summ,Ierr)
     Summ = c(N)
     RETURN
   ELSE
-    hx = X*0.5D0
+    hx = X*0.5_DP
     Summ = DPSIXN(1) - LOG(hx)
     RETURN
   END IF

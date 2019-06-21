@@ -34,8 +34,8 @@ CONTAINS
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
     INTEGER :: Lun, Ipass, Kprint
-    REAL, PARAMETER :: sfac = .625E-1
-    REAL(DP), PARAMETER :: dfac = .625D-1, dqfac = 0.625D-1
+    REAL(SP), PARAMETER :: sfac = .625E-1_SP
+    REAL(DP), PARAMETER :: dfac = .625E-1_DP, dqfac = 0.625E-1_DP
     INTEGER, PARAMETER :: jtest(38) = [ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, &
       1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ]
     !* FIRST EXECUTABLE STATEMENT  BLACHK
@@ -141,29 +141,29 @@ CONTAINS
     REAL(DP) :: Dfac, Dqfac
     !
     COMPLEX(SP) :: cx(7), cy(7)
-    REAL(DP), PARAMETER :: db = .25D0
+    REAL(DP), PARAMETER :: db = .25_DP
     INTEGER, PARAMETER :: incxs(4) = [ 1, 2, -2, -1 ]
     INTEGER, PARAMETER :: incys(4) = [ 1, -2, 1, -2 ]
     INTEGER, PARAMETER :: lens(4,2) = RESHAPE( [1, 1, 2, 4, 1, 1, 3, 7], [4,2] )
     INTEGER, PARAMETER :: ns(4) = [ 0, 1, 2, 4 ]
-    REAL(DP), PARAMETER :: dx1(7) = [ .6D0, .1D0, -.5D0, .8D0, .9D0, -.3D0, -.4D0 ]
-    REAL(DP), PARAMETER :: dy1(7) = [ .5D0, -.9D0, .3D0, .7D0, -.6D0, .2D0, .8D0 ]
-    REAL(DP), PARAMETER :: dx2(7) = [ 1.D0, .01D0, .02D0, 1.D0, .06D0, 2.D0, 1.D0 ]
-    REAL(DP), PARAMETER :: dy2(7) = [ 1.D0, .04D0, -.03D0, -1.D0, .05D0, 3.D0, -1.D0 ]
+    REAL(DP), PARAMETER :: dx1(7) = [ .6_DP, .1_DP, -.5_DP, .8_DP, .9_DP, -.3_DP, -.4_DP ]
+    REAL(DP), PARAMETER :: dy1(7) = [ .5_DP, -.9_DP, .3_DP, .7_DP, -.6_DP, .2_DP, .8_DP ]
+    REAL(DP), PARAMETER :: dx2(7) = [ 1._DP, .01_DP, .02_DP, 1._DP, .06_DP, 2._DP, 1._DP ]
+    REAL(DP), PARAMETER :: dy2(7) = [ 1._DP, .04_DP, -.03_DP, -1._DP, .05_DP, 3._DP, -1._DP ]
     !            THE TERMS D11(3,2) AND D11(4,2) WILL BE SET BY
     !            COMPUTATION AT RUN TIME.
-    COMPLEX(SP), PARAMETER :: cx1(7) = [ (.7,-.8), (-.4,-.7), (-.1,-.9), (.2,-.8), &
-      (-.9,-.4), (.1,.4), (-.6,.6) ]
-    COMPLEX(SP), PARAMETER :: cy1(7) = [ (.6,-.6), (-.9,.5), (.7,-.6), (.1,-.5), &
-      (-.1,-.2), (-.5,-.3), (.8,-.7) ]
+    COMPLEX(SP), PARAMETER :: cx1(7) = [ (.7_SP,-.8_SP), (-.4_SP,-.7_SP), &
+      (-.1_SP,-.9_SP), (.2_SP,-.8_SP), (-.9_SP,-.4_SP), (.1_SP,.4_SP), (-.6_SP,.6_SP) ]
+    COMPLEX(SP), PARAMETER :: cy1(7) = [ (.6_SP,-.6_SP), (-.9_SP,.5_SP), &
+      (.7_SP,-.6_SP), (.1_SP,-.5_SP), (-.1_SP,-.2_SP), (-.5_SP,-.3_SP), (.8_SP,-.7_SP) ]
     !
     !                             FOR DQDOTI AND DQDOTA
     !
-    REAL(DP), PARAMETER :: dt2(4,4,2) = RESHAPE( [ 0.25D0, 1.25D0, 1.2504D0, 0.2498D0, &
-      0.25D0, 1.25D0, 0.24D0, 0.2492D0, 0.25D0, 1.25D0, 0.31D0, 0.2518D0, &
-      0.25D0, 1.25D0, 1.2497D0, 0.2507D0, 0.D0, 2.D0, 2.0008D0, -.0004D0, &
-      0.D0, 2.D0, -.02D0, -.0016D0, 0.D0, 2.D0, .12D0, .0036D0, &
-      0.D0, 2.D0, 1.9994D0, .0014D0 ], [4,4,2] )
+    REAL(DP), PARAMETER :: dt2(4,4,2) = RESHAPE( [ 0.25_DP, 1.25_DP, 1.2504_DP, 0.2498_DP, &
+      0.25_DP, 1.25_DP, 0.24_DP, 0.2492_DP, 0.25_DP, 1.25_DP, 0.31_DP, 0.2518_DP, &
+      0.25_DP, 1.25_DP, 1.2497_DP, 0.2507_DP, 0._DP, 2._DP, 2.0008_DP, -.0004_DP, &
+      0._DP, 2._DP, -.02_DP, -.0016_DP, 0._DP, 2._DP, .12_DP, .0036_DP, &
+      0._DP, 2._DP, 1.9994_DP, .0014_DP ], [4,4,2] )
     !* FIRST EXECUTABLE STATEMENT  CHECK2
     DO ki = 1, 4
       incx_com = incxs(ki)
@@ -326,9 +326,9 @@ CONTAINS
     USE slatec, ONLY : R1MACH
     INTEGER :: i, Leng, Kprint
     REAL(SP) :: Scomp(*), Strue(*), Ssize(*), Sfac, sd
-    REAL(SP) :: releps = 0.0E0
+    REAL(SP) :: releps = 0._SP
     !* FIRST EXECUTABLE STATEMENT  STEST
-    IF( releps==0.0E0 ) releps = R1MACH(4)
+    IF( releps==0._SP ) releps = R1MACH(4)
     DO i = 1, Leng
       sd = ABS(Scomp(i)-Strue(i))
       IF( Sfac*sd>ABS(Ssize(i))*releps ) THEN
@@ -391,9 +391,9 @@ CONTAINS
     USE slatec, ONLY : D1MACH
     INTEGER :: i, Leng, Kprint
     REAL(DP) :: Dcomp(*), Dtrue(*), Dsize(*), Dfac, dd
-    REAL(DP) :: releps = 0.0D0
+    REAL(DP) :: releps = 0._DP
     !* FIRST EXECUTABLE STATEMENT  DTEST
-    IF( releps==0.0D0 ) releps = D1MACH(4)
+    IF( releps==0._DP ) releps = D1MACH(4)
     DO i = 1, Leng
       dd = ABS(Dcomp(i)-Dtrue(i))
       IF( Dfac*dd>ABS(Dsize(i))*releps ) THEN
@@ -458,7 +458,7 @@ CONTAINS
     INTEGER :: i, Leng, Kprint
     COMPLEX(SP) :: Ccomp(*), Ctrue(*), Csize(*)
     REAL(SP) :: Cfac, dd
-    REAL(SP) :: releps = 0.0
+    REAL(SP) :: releps = 0._SP
     !* FIRST EXECUTABLE STATEMENT  DTEST
     IF( releps==0.0 ) releps = R1MACH(4)
     DO i = 1, Leng

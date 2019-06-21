@@ -140,16 +140,16 @@ SUBROUTINE DRC3JM(L1,L2,L3,M1,M2min,M2max,Thrcof,Ndim,Ier)
   REAL(DP) :: a1, a1s, c1, c1old, c2, cnorm, dv, hugee, m2, m3, newfac, &
     oldfac, ratio, sign1, sign2, srhuge, srtiny, sum1, sum2, sumbac, sumfor, &
     sumuni, thresh, tinyy, x, x1, x2, x3, y, y1, y2, y3
-  REAL(DP), PARAMETER :: zero = 0.0D0, eps = 0.01D0, one = 1.0D0, two = 2.0D0
+  REAL(DP), PARAMETER :: zero = 0._DP, eps = 0.01_DP, one = 1._DP, two = 2._DP
   !
   !* FIRST EXECUTABLE STATEMENT  DRC3JM
   Ier = 0
   !  HUGE is the square root of one twentieth of the largest floating
   !  point number, approximately.
-  hugee = SQRT(D1MACH(2)/20.0D0)
+  hugee = SQRT(D1MACH(2)/20._DP)
   srhuge = SQRT(hugee)
-  tinyy = 1.0D0/hugee
-  srtiny = 1.0D0/srhuge
+  tinyy = 1._DP/hugee
+  srtiny = 1._DP/srhuge
   !
   !     MMATCH = ZERO
   !
@@ -199,8 +199,8 @@ SUBROUTINE DRC3JM(L1,L2,L3,M1,M2min,M2max,Thrcof,Ndim,Ier)
       !
       m2 = M2min
       Thrcof(1) = srtiny
-      newfac = 0.0D0
-      c1 = 0.0D0
+      newfac = 0._DP
+      c1 = 0._DP
       sum1 = tinyy
       !
       !

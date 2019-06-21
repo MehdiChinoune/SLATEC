@@ -49,8 +49,8 @@ SUBROUTINE SPLPFE(Mrelas,Nvars,Lmx,Lbm,Ienter,Ibasis,Imat,Ibrc,Ipr,Iwr,&
   LOGICAL :: trans
   !* FIRST EXECUTABLE STATEMENT  SPLPFE
   lpg = Lmx - (Nvars+4)
-  zero = 0.E0
-  one = 1.E0
+  zero = 0._SP
+  one = 1._SP
   rmax = zero
   Found = .FALSE.
   i = Mrelas + 1

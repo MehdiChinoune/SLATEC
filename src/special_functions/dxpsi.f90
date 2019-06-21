@@ -30,10 +30,10 @@ REAL(DP) FUNCTION DXPSI(A,Ipsik,Ipsix)
   !        AND 2*I*DENOMINATOR RESPECTIVELY OF THE 2*I TH BERNOULLI
   !        NUMBER.
   !
-  REAL(DP), PARAMETER :: cnum(12) = [ 1.D0, -1.D0, 1.D0, -1.D0, 1.D0, -691.D0, 1.D0, -3617.D0, &
-    43867.D0, -174611.D0, 77683.D0, -236364091.D0 ]
-  REAL(DP), PARAMETER :: cdenom(12) = [ 12.D0, 120.D0, 252.D0, 240.D0, 132.D0, 32760.D0, &
-    12.D0, 8160.D0, 14364.D0, 6600.D0, 276.D0, 65520.D0 ]
+  REAL(DP), PARAMETER :: cnum(12) = [ 1._DP, -1._DP, 1._DP, -1._DP, 1._DP, &
+    -691._DP, 1._DP, -3617._DP, 43867._DP, -174611._DP, 77683._DP, -236364091._DP ]
+  REAL(DP), PARAMETER :: cdenom(12) = [ 12._DP, 120._DP, 252._DP, 240._DP, 132._DP, &
+    32760._DP, 12._DP, 8160._DP, 14364._DP, 6600._DP, 276._DP, 65520._DP ]
   !* FIRST EXECUTABLE STATEMENT  DXPSI
   n = MAX(0,Ipsix-INT(A))
   b = n + A
@@ -41,19 +41,19 @@ REAL(DP) FUNCTION DXPSI(A,Ipsik,Ipsix)
   !
   !        SERIES EXPANSION FOR A > IPSIX USING IPSIK-1 TERMS.
   !
-  c = 0.D0
+  c = 0._DP
   DO i = 1, k1
     k = Ipsik - i
     c = (c+cnum(k)/cdenom(k))/b**2
   END DO
-  DXPSI = LOG(b) - (c+.5D0/b)
+  DXPSI = LOG(b) - (c+.5_DP/b)
   IF( n/=0 ) THEN
-    b = 0.D0
+    b = 0._DP
     !
     !        RECURRENCE FOR A <= IPSIX.
     !
     DO m = 1, n
-      b = b + 1.D0/(n-m+A)
+      b = b + 1._DP/(n-m+A)
     END DO
     DXPSI = DXPSI - b
   END IF

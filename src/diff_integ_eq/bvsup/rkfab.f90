@@ -184,7 +184,7 @@ CONTAINS
     REAL(SP) :: Y(:), Yp(:)
     REAL(SP) :: g(SIZE(Y))
 
-    g = 0.
+    g = 0._SP
     CALL BVDER(X,Y,Yp,G)
   END SUBROUTINE BVDER_2
 END SUBROUTINE RKFAB

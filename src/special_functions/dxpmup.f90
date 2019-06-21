@@ -34,16 +34,16 @@ SUBROUTINE DXPMUP(Nu1,Nu2,Mu1,Mu2,Pqa,Ipqa,Ierror)
   nu = Nu1
   mu = Mu1
   dmu = mu
-  n = INT(Nu2-Nu1+.1D0) + (Mu2-Mu1) + 1
+  n = INT(Nu2-Nu1+.1_DP) + (Mu2-Mu1) + 1
   j = 1
-  IF( MOD(REAL(nu),1.)==0. ) THEN
-    DO WHILE( dmu>=nu+1.D0 )
-      Pqa(j) = 0.D0
+  IF( MOD(REAL(nu,SP),1._SP)==0. ) THEN
+    DO WHILE( dmu>=nu+1._DP )
+      Pqa(j) = 0._DP
       Ipqa(j) = 0
       j = j + 1
       IF( j>n ) RETURN
       !        INCREMENT EITHER MU OR NU AS APPROPRIATE.
-      IF( Nu2-Nu1>.5D0 ) nu = nu + 1.D0
+      IF( Nu2-Nu1>.5_DP ) nu = nu + 1._DP
       IF( Mu2>Mu1 ) mu = mu + 1
     END DO
   END IF
@@ -51,7 +51,7 @@ SUBROUTINE DXPMUP(Nu1,Nu2,Mu1,Mu2,Pqa,Ipqa,Ierror)
   !        TRANSFORM P(-MU,NU,X) TO P(MU,NU,X) USING
   !        P(MU,NU,X)=(NU-MU+1)*(NU-MU+2)*...*(NU+MU)*P(-MU,NU,X)*(-1)**MU
   !
-  prod = 1.D0
+  prod = 1._DP
   iprod = 0
   k = 2*mu
   IF( k/=0 ) THEN
@@ -68,17 +68,17 @@ SUBROUTINE DXPMUP(Nu1,Nu2,Mu1,Mu2,Pqa,Ipqa,Ierror)
       CALL DXADJ(Pqa(i),Ipqa(i),Ierror)
       IF( Ierror/=0 ) RETURN
     END IF
-    IF( Nu2-Nu1>.5D0 ) THEN
-      prod = prod*(-dmu-nu-1.D0)/(dmu-nu-1.D0)
+    IF( Nu2-Nu1>.5_DP ) THEN
+      prod = prod*(-dmu-nu-1._DP)/(dmu-nu-1._DP)
       CALL DXADJ(prod,iprod,Ierror)
       IF( Ierror/=0 ) RETURN
-      nu = nu + 1.D0
+      nu = nu + 1._DP
     ELSE
-      prod = (dmu-nu)*prod*(-dmu-nu-1.D0)
+      prod = (dmu-nu)*prod*(-dmu-nu-1._DP)
       CALL DXADJ(prod,iprod,Ierror)
       IF( Ierror/=0 ) RETURN
       mu = mu + 1
-      dmu = dmu + 1.D0
+      dmu = dmu + 1._DP
     END IF
   END DO
 END SUBROUTINE DXPMUP

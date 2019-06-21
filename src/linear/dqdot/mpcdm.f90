@@ -60,14 +60,14 @@ SUBROUTINE MPCDM(Dx,Z)
     dj = Dx
     ie = 0
   END IF
-  DO WHILE( dj>=1D0 )
+  DO WHILE( dj>=1_DP )
     ! INCREASE IE AND DIVIDE DJ BY 16.
     ie = ie + 1
-    dj = 0.0625D0*dj
+    dj = 0.0625_DP*dj
   END DO
-  DO WHILE( dj<0.0625D0 )
+  DO WHILE( dj<0.0625_DP )
     ie = ie - 1
-    dj = 16D0*dj
+    dj = 16_DP*dj
   END DO
   ! NOW DJ IS DY DIVIDED BY SUITABLE POWER OF 16
   ! SET EXPONENT TO 0

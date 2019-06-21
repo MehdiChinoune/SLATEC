@@ -38,38 +38,38 @@ REAL(SP) FUNCTION R9CHU(A,B,Z)
   REAL(SP) :: A, B, Z
   INTEGER:: i, j
   REAL(SP) :: aa(4), ab, anbn, bb(4), bp, c2, ct1, ct2, ct3, d1z, g1, g2, g3, sab, x2i1
-  REAL(SP), PARAMETER :: eps = 4.0*R1MACH(4), sqeps = SQRT(R1MACH(4))
+  REAL(SP), PARAMETER :: eps = 4._SP*R1MACH(4), sqeps = SQRT(R1MACH(4))
   !* FIRST EXECUTABLE STATEMENT  R9CHU
   !
-  bp = 1.0 + A - B
+  bp = 1._SP + A - B
   ab = A*bp
-  ct2 = 2.0*(Z-ab)
+  ct2 = 2._SP*(Z-ab)
   sab = A + bp
   !
-  bb(1) = 1.0
-  aa(1) = 1.0
+  bb(1) = 1._SP
+  aa(1) = 1._SP
   !
-  ct3 = sab + 1.0 + ab
-  bb(2) = 1.0 + 2.0*Z/ct3
-  aa(2) = 1.0 + ct2/ct3
+  ct3 = sab + 1._SP + ab
+  bb(2) = 1._SP + 2._SP*Z/ct3
+  aa(2) = 1._SP + ct2/ct3
   !
-  anbn = ct3 + sab + 3.0
-  ct1 = 1.0 + 2.0*Z/anbn
-  bb(3) = 1.0 + 6.0*ct1*Z/ct3
-  aa(3) = 1.0 + 6.0*ab/anbn + 3.0*ct1*ct2/ct3
+  anbn = ct3 + sab + 3._SP
+  ct1 = 1._SP + 2._SP*Z/anbn
+  bb(3) = 1._SP + 6._SP*ct1*Z/ct3
+  aa(3) = 1._SP + 6._SP*ab/anbn + 3._SP*ct1*ct2/ct3
   !
   DO i = 4, 300
     x2i1 = 2*i - 3
-    ct1 = x2i1/(x2i1-2.0)
+    ct1 = x2i1/(x2i1-2._SP)
     anbn = anbn + x2i1 + sab
-    ct2 = (x2i1-1.0)/anbn
-    c2 = x2i1*ct2 - 1.0
-    d1z = x2i1*2.0*Z/anbn
+    ct2 = (x2i1-1._SP)/anbn
+    c2 = x2i1*ct2 - 1._SP
+    d1z = x2i1*2._SP*Z/anbn
     !
     ct3 = sab*ct2
     g1 = d1z + ct1*(c2+ct3)
     g2 = d1z - c2
-    g3 = ct1*(1.0-ct3-2.0*ct2)
+    g3 = ct1*(1._SP-ct3-2._SP*ct2)
     !
     bb(4) = g1*bb(3) + g2*bb(2) + g3*bb(1)
     aa(4) = g1*aa(3) + g2*aa(2) + g3*aa(1)
@@ -88,7 +88,7 @@ REAL(SP) FUNCTION R9CHU(A,B,Z)
   !
   100  R9CHU = aa(4)/bb(4)
   !
-  IF( R9CHU<sqeps .OR. R9CHU>1.0/sqeps )&
+  IF( R9CHU<sqeps .OR. R9CHU>1._SP/sqeps )&
     CALL XERMSG('R9CHU','ANSWER LESS THAN HALF PRECISION',2,1)
   !
 END FUNCTION R9CHU

@@ -25,10 +25,10 @@ REAL(DP) FUNCTION DQWGTC(X,C,P2,P3,P4,Kp)
   !   830518  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
-  
+
   !
   REAL(DP) :: C, P2, P3, P4, X
   INTEGER :: Kp
   !* FIRST EXECUTABLE STATEMENT  DQWGTC
-  DQWGTC = 0.1D+01/(X-C)
+  DQWGTC = 1._DP/(X-C)
 END FUNCTION DQWGTC

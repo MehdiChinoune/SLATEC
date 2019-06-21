@@ -35,19 +35,19 @@ SUBROUTINE D9UPAK(X,Y,N)
   !* FIRST EXECUTABLE STATEMENT  D9UPAK
   absx = ABS(X)
   N = 0
-  IF( X==0.0D0 ) THEN
+  IF( X==0._DP ) THEN
     !
     Y = SIGN(absx,X)
   ELSE
     !
-    DO WHILE( absx<0.5D0 )
+    DO WHILE( absx<0.5_DP )
       N = N - 1
-      absx = absx*2.0D0
+      absx = absx*2._DP
     END DO
     !
-    DO WHILE( absx>=1.0D0 )
+    DO WHILE( absx>=1._DP )
       N = N + 1
-      absx = absx*0.5D0
+      absx = absx*0.5_DP
     END DO
     Y = SIGN(absx,X)
   END IF

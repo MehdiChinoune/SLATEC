@@ -24,7 +24,7 @@ SUBROUTINE ZDIV(Ar,Ai,Br,Bi,Cr,Ci)
 
   REAL(DP) :: Ar, Ai, Br, Bi, Cr, Ci, bm, ca, cb, cc, cd
   !* FIRST EXECUTABLE STATEMENT  ZDIV
-  bm = 1.0D0/ZABS(Br,Bi)
+  bm = 1._DP/ZABS(Br,Bi)
   cc = Br*bm
   cd = Bi*bm
   ca = (Ar*cc+Ai*cd)*bm

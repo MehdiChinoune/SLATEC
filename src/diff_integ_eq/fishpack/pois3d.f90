@@ -268,7 +268,7 @@ SUBROUTINE POIS3D(Lperod,L,C1,Mperod,M,C2,Nperod,N,A,B,C,Ldimf,Mdimf,F,Ierror,W)
   GOTO 300
   100  Ierror = 9
   200 CONTINUE
-  IF( Nperod==1 .AND. (A(1)/=0. .OR. C(N)/=0.) ) Ierror = 10
+  IF( Nperod==1 .AND. (A(1)/=0. .OR. C(N)/=0._SP) ) Ierror = 10
   300 CONTINUE
   IF( Ierror==0 ) THEN
     iwyrt = L + 1
@@ -293,8 +293,8 @@ SUBROUTINE POIS3D(Lperod,L,C1,Mperod,M,C2,Nperod,N,A,B,C,Ldimf,Mdimf,F,Ierror,W)
             W(k) = F(i,j,nhmk) - F(i,j,nhpk)
             W(nhpk) = F(i,j,nhmk) + F(i,j,nhpk)
           END DO
-          W(nh) = 2.*F(i,j,nh)
-          IF( nodd/=1 ) W(N) = 2.*F(i,j,N)
+          W(nh) = 2._SP*F(i,j,nh)
+          IF( nodd/=1 ) W(N) = 2._SP*F(i,j,N)
           DO k = 1, N
             F(i,j,k) = W(k)
           END DO
@@ -306,9 +306,9 @@ SUBROUTINE POIS3D(Lperod,L,C1,Mperod,M,C2,Nperod,N,A,B,C,Ldimf,Mdimf,F,Ierror,W)
       save(4) = B(nhm1)
       save(5) = B(N)
       save(6) = A(N)
-      C(nhm1) = 0.
-      A(nh) = 0.
-      C(nh) = 2.*C(nh)
+      C(nhm1) = 0._SP
+      A(nh) = 0._SP
+      C(nh) = 2._SP*C(nh)
       IF( nodd==2 ) THEN
         A(N) = C(nh)
       ELSE
@@ -324,11 +324,11 @@ SUBROUTINE POIS3D(Lperod,L,C1,Mperod,M,C2,Nperod,N,A,B,C,Ldimf,Mdimf,F,Ierror,W)
           DO k = 1, nhm1
             nhmk = nh - k
             nhpk = nh + k
-            W(nhmk) = .5*(F(i,j,nhpk)+F(i,j,k))
-            W(nhpk) = .5*(F(i,j,nhpk)-F(i,j,k))
+            W(nhmk) = 0.5_SP*(F(i,j,nhpk)+F(i,j,k))
+            W(nhpk) = 0.5_SP*(F(i,j,nhpk)-F(i,j,k))
           END DO
-          W(nh) = .5*F(i,j,nh)
-          IF( nodd/=1 ) W(N) = .5*F(i,j,N)
+          W(nh) = 0.5_SP*F(i,j,nh)
+          IF( nodd/=1 ) W(N) = 0.5_SP*F(i,j,N)
           DO k = 1, N
             F(i,j,k) = W(k)
           END DO

@@ -26,12 +26,12 @@ SUBROUTINE DDSCL(Hmax,N,Nq,Rmax,H,Rc,Rh,Yh)
   INTEGER :: i, j
   REAL(DP) :: r1
   !* FIRST EXECUTABLE STATEMENT  DDSCL
-  IF( H<1.D0 ) THEN
+  IF( H<1._DP ) THEN
     Rh = MIN(ABS(H)*Rh,ABS(H)*Rmax,Hmax)/ABS(H)
   ELSE
     Rh = MIN(Rh,Rmax,Hmax/ABS(H))
   END IF
-  r1 = 1.D0
+  r1 = 1._DP
   DO j = 1, Nq
     r1 = r1*Rh
     DO i = 1, N

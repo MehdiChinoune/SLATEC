@@ -29,10 +29,10 @@ SUBROUTINE DMACON
   uro_com = D1MACH(4)
   sru_com = SQRT(uro_com)
   dd = -LOG10(uro_com)
-  lpar_com = INT( 0.5D0*dd )
-  ke = INT( 0.5D0 + 0.75D0*dd )
-  eps_com = 10.0D0**(-2*ke)
+  lpar_com = INT( 0.5_DP*dd )
+  ke = INT( 0.5_DP + 0.75_DP*dd )
+  eps_com = 10._DP**(-2*ke)
   sqovfl_com = SQRT(D1MACH(2))
-  twou_com = 2.0D0*uro_com
-  fouru_com = 4.0D0*uro_com
+  twou_com = 2._DP*uro_com
+  fouru_com = 4._DP*uro_com
 END SUBROUTINE DMACON

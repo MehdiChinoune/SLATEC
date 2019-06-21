@@ -31,7 +31,7 @@ SUBROUTINE DXPNRM(Nu1,Nu2,Mu1,Mu2,Pqa,Ipqa,Ierror)
   REAL(DP) :: c1, dmu, nu, Nu1, Nu2, Pqa(*), prod
   !* FIRST EXECUTABLE STATEMENT  DXPNRM
   Ierror = 0
-  l = INT( (Mu2-Mu1) + (Nu2-Nu1+1.5D0) )
+  l = INT( (Mu2-Mu1) + (Nu2-Nu1+1.5_DP) )
   mu = Mu1
   dmu = Mu1
   nu = Nu1
@@ -40,15 +40,15 @@ SUBROUTINE DXPNRM(Nu1,Nu2,Mu1,Mu2,Pqa,Ipqa,Ierror)
   !
   j = 1
   DO WHILE( dmu>nu )
-    Pqa(j) = 0.D0
+    Pqa(j) = 0._DP
     Ipqa(j) = 0
     j = j + 1
     IF( j>l ) RETURN
     !
     !        INCREMENT EITHER MU OR NU AS APPROPRIATE.
     !
-    IF( Mu2>Mu1 ) dmu = dmu + 1.D0
-    IF( Nu2-Nu1>.5D0 ) nu = nu + 1.D0
+    IF( Mu2>Mu1 ) dmu = dmu + 1._DP
+    IF( Nu2-Nu1>.5_DP ) nu = nu + 1._DP
   END DO
   !
   !         TRANSFORM P(-MU,NU,X) INTO NORMALIZED P(MU,NU,X) USING
@@ -56,40 +56,40 @@ SUBROUTINE DXPNRM(Nu1,Nu2,Mu1,Mu2,Pqa,Ipqa,Ierror)
   !                 SQRT((NU+.5)*FACTORIAL(NU+MU)/FACTORIAL(NU-MU))
   !                              *P(-MU,NU,X)
   !
-  prod = 1.D0
+  prod = 1._DP
   iprod = 0
   k = 2*mu
   IF( k>0 ) THEN
     DO i = 1, k
-      prod = prod*SQRT(nu+dmu+1.D0-i)
+      prod = prod*SQRT(nu+dmu+1._DP-i)
       CALL DXADJ(prod,iprod,Ierror)
     END DO
     IF( Ierror/=0 ) RETURN
   END IF
   DO i = j, l
-    c1 = prod*SQRT(nu+.5D0)
+    c1 = prod*SQRT(nu+.5_DP)
     Pqa(i) = Pqa(i)*c1
     Ipqa(i) = Ipqa(i) + iprod
     CALL DXADJ(Pqa(i),Ipqa(i),Ierror)
     IF( Ierror/=0 ) RETURN
-    IF( Nu2-Nu1>.5D0 ) THEN
-      prod = SQRT(nu+dmu+1.D0)*prod
-      IF( nu/=dmu-1.D0 ) prod = prod/SQRT(nu-dmu+1.D0)
+    IF( Nu2-Nu1>.5_DP ) THEN
+      prod = SQRT(nu+dmu+1._DP)*prod
+      IF( nu/=dmu-1._DP ) prod = prod/SQRT(nu-dmu+1._DP)
       CALL DXADJ(prod,iprod,Ierror)
       IF( Ierror/=0 ) RETURN
-      nu = nu + 1.D0
+      nu = nu + 1._DP
     ELSEIF( dmu>=nu ) THEN
-      prod = 0.D0
+      prod = 0._DP
       iprod = 0
       mu = mu + 1
-      dmu = dmu + 1.D0
+      dmu = dmu + 1._DP
     ELSE
-      prod = SQRT(nu+dmu+1.D0)*prod
+      prod = SQRT(nu+dmu+1._DP)*prod
       IF( nu>dmu ) prod = prod*SQRT(nu-dmu)
       CALL DXADJ(prod,iprod,Ierror)
       IF( Ierror/=0 ) RETURN
       mu = mu + 1
-      dmu = dmu + 1.D0
+      dmu = dmu + 1._DP
     END IF
   END DO
 END SUBROUTINE DXPNRM

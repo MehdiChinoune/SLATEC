@@ -139,9 +139,9 @@ SUBROUTINE XLEGF(Dnu1,Nudiff,Mu1,Mu2,Theta,Id,Pqa,Ipqa,Ierror)
   !
   !* FIRST EXECUTABLE STATEMENT  XLEGF
   Ierror = 0
-  CALL XSET(0,0,0.0,0,Ierror)
+  CALL XSET(0,0,0._SP,0,Ierror)
   IF( Ierror/=0 ) RETURN
-  pi2 = 2.*ATAN(1.)
+  pi2 = 2._SP*ATAN(1._SP)
   !
   !        ZERO OUTPUT ARRAYS
   !
@@ -154,7 +154,7 @@ SUBROUTINE XLEGF(Dnu1,Nudiff,Mu1,Mu2,Theta,Id,Pqa,Ipqa,Ierror)
   !        CHECK FOR VALID INPUT VALUES
   !
   IF( Nudiff>=0 ) THEN
-    IF( Dnu1>=-.5 ) THEN
+    IF( Dnu1>=-.5_SP ) THEN
       IF( Mu2>=Mu1 ) THEN
         IF( Mu1>=0 ) THEN
           IF( Theta<=0. .OR. Theta>pi2 ) THEN
@@ -170,13 +170,13 @@ SUBROUTINE XLEGF(Dnu1,Nudiff,Mu1,Mu2,Theta,Id,Pqa,Ipqa,Ierror)
               !        NORMALIZED P(MU,NU,X) WILL BE ZERO.
               !
               dnu2 = Dnu1 + Nudiff
-              IF( (Id/=3) .OR. (MOD(Dnu1,1.)==0.) ) THEN
-                IF( (Id==4) .AND. (MOD(Dnu1,1.)/=0.) ) GOTO 100
+              IF( (Id/=3) .OR. (MOD(Dnu1,1._SP)==0._SP) ) THEN
+                IF( (Id==4) .AND. (MOD(Dnu1,1._SP)/=0._SP) ) GOTO 100
                 IF( (Id==3 .OR. Id==4) .AND. Mu1>dnu2 ) RETURN
               END IF
               !
               x = COS(Theta)
-              sx = 1./SIN(Theta)
+              sx = 1._SP/SIN(Theta)
               IF( Id/=2 ) THEN
                 IF( Mu2<=Mu1 ) THEN
                   !

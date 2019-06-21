@@ -68,7 +68,7 @@ SUBROUTINE CPROC(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Y,M,A,B,C,D,W,Yy)
     IF( ABS(den)/=0 ) THEN
       Y(1) = (Y(1)-C(1)*W(2))/den
     ELSE
-      Y(1) = (1.,0.)
+      Y(1) = (1._SP,0._SP)
     END IF
     DO j = 2, M
       Y(j) = W(j) - D(j)*Y(j-1)

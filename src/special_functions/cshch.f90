@@ -21,7 +21,7 @@ SUBROUTINE CSHCH(Z,Csh,Cch)
   !* REVISION HISTORY  (YYMMDD)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
-  
+
   COMPLEX(SP) :: Cch, Csh, Z
   REAL(SP) :: cchi, cchr, ch, cn, cshi, cshr, sh, sn, x, y
   !* FIRST EXECUTABLE STATEMENT  CSHCH
@@ -33,8 +33,8 @@ SUBROUTINE CSHCH(Z,Csh,Cch)
   cn = COS(y)
   cshr = sh*cn
   cshi = ch*sn
-  Csh = CMPLX(cshr,cshi)
+  Csh = CMPLX(cshr,cshi,SP)
   cchr = ch*cn
   cchi = sh*sn
-  Cch = CMPLX(cchr,cchi)
+  Cch = CMPLX(cchr,cchi,SP)
 END SUBROUTINE CSHCH

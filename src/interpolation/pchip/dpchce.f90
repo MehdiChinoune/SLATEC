@@ -125,7 +125,7 @@ SUBROUTINE DPCHCE(Ic,Vc,N,X,H,Slope,D,Incfd,Ierr)
   !
   !  INITIALIZE.
   !
-  REAL(DP), PARAMETER :: zero = 0.D0, half = .5D0, two = 2.D0, three = 3.D0
+  REAL(DP), PARAMETER :: zero = 0._DP, half = .5_DP, two = 2._DP, three = 3._DP
   !
   !* FIRST EXECUTABLE STATEMENT  DPCHCE
   ibeg = Ic(1)

@@ -77,11 +77,11 @@ SUBROUTINE RPQR79(Ndeg,Coeff,Root,Ierr,Work)
   END IF
   !
   IF( Ndeg==1 ) THEN
-    Root(1) = CMPLX(-Coeff(2)/Coeff(1),0.0)
+    Root(1) = CMPLX(-Coeff(2)/Coeff(1),0._SP,SP)
     RETURN
   END IF
   !
-  scalee = 1.0E0/Coeff(1)
+  scalee = 1._SP/Coeff(1)
   kh = 1
   kwr = kh + Ndeg*Ndeg
   kwi = kwr + Ndeg
@@ -104,6 +104,6 @@ SUBROUTINE RPQR79(Ndeg,Coeff,Root,Ierr,Work)
   !
   DO k = 1, Ndeg
     km1 = k - 1
-    Root(k) = CMPLX(Work(kwr+km1),Work(kwi+km1))
+    Root(k) = CMPLX(Work(kwr+km1),Work(kwi+km1),SP)
   END DO
 END SUBROUTINE RPQR79

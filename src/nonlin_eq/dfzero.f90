@@ -117,14 +117,14 @@ SUBROUTINE DFZERO(F,B,C,R,Re,Ae,Iflag)
   !   ER is two times the computer unit roundoff value which is defined
   !   here by the function D1MACH.
   !
-  er = 2.0D0*D1MACH(4)
+  er = 2._DP*D1MACH(4)
   !
   !   Initialize.
   !
   z = R
   IF( R<=MIN(B,C) .OR. R>=MAX(B,C) ) z = C
   rw = MAX(Re,er)
-  aw = MAX(Ae,0.D0)
+  aw = MAX(Ae,0._DP)
   ic = 0
   t = z
   fz = F(t)
@@ -132,13 +132,13 @@ SUBROUTINE DFZERO(F,B,C,R,Re,Ae,Iflag)
   t = B
   fb = F(t)
   kount = 2
-  IF( SIGN(1.0D0,fz)/=SIGN(1.0D0,fb) ) THEN
+  IF( SIGN(1._DP,fz)/=SIGN(1._DP,fb) ) THEN
     C = z
   ELSEIF( z/=C ) THEN
     t = C
     fc = F(t)
     kount = 3
-    IF( SIGN(1.0D0,fz)/=SIGN(1.0D0,fc) ) THEN
+    IF( SIGN(1._DP,fz)/=SIGN(1._DP,fc) ) THEN
       B = z
       fb = fz
     END IF
@@ -161,7 +161,7 @@ SUBROUTINE DFZERO(F,B,C,R,Re,Ae,Iflag)
       fc = fa
     END IF
     !
-    cmb = 0.5D0*(C-B)
+    cmb = 0.5_DP*(C-B)
     acmb = ABS(cmb)
     tol = rw*ABS(B) + aw
     !
@@ -171,7 +171,7 @@ SUBROUTINE DFZERO(F,B,C,R,Re,Ae,Iflag)
       !
       !   Finished.  Process results for proper setting of IFLAG.
       !
-      IF( SIGN(1.0D0,fb)==SIGN(1.0D0,fc) ) THEN
+      IF( SIGN(1._DP,fb)==SIGN(1._DP,fc) ) THEN
         Iflag = 4
         RETURN
       ELSEIF( ABS(fb)>fx ) THEN
@@ -181,7 +181,7 @@ SUBROUTINE DFZERO(F,B,C,R,Re,Ae,Iflag)
         Iflag = 1
         RETURN
       END IF
-    ELSEIF( fb==0.D0 ) THEN
+    ELSEIF( fb==0._DP ) THEN
       Iflag = 2
       RETURN
     ELSE
@@ -195,7 +195,7 @@ SUBROUTINE DFZERO(F,B,C,R,Re,Ae,Iflag)
         !
         p = (B-a)*fb
         q = fa - fb
-        IF( p<0.D0 ) THEN
+        IF( p<0._DP ) THEN
           p = -p
           q = -q
         END IF
@@ -207,7 +207,7 @@ SUBROUTINE DFZERO(F,B,C,R,Re,Ae,Iflag)
         fa = fb
         ic = ic + 1
         IF( ic>=4 ) THEN
-          IF( 8.0D0*acmb>=acbs ) THEN
+          IF( 8._DP*acmb>=acbs ) THEN
             !
             !   Use bisection (C+B)/2.
             !
@@ -247,7 +247,7 @@ SUBROUTINE DFZERO(F,B,C,R,Re,Ae,Iflag)
       !
       !   Decide whether next step is interpolation or extrapolation.
       !
-      IF( SIGN(1.0D0,fb)==SIGN(1.0D0,fc) ) THEN
+      IF( SIGN(1._DP,fb)==SIGN(1._DP,fc) ) THEN
         C = a
         fc = fa
       END IF

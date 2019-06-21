@@ -62,7 +62,7 @@ SUBROUTINE PPQAD(Ldc,C,Xi,Lxi,K,X1,X2,Pquad)
   REAL(SP) :: a, aa, bb, dx, flk, q, s, ss(2), ta, tb, x
   !
   !* FIRST EXECUTABLE STATEMENT  PPQAD
-  Pquad = 0.0E0
+  Pquad = 0._SP
   IF( K<1 ) THEN
     !
     !
@@ -81,7 +81,7 @@ SUBROUTINE PPQAD(Ldc,C,Xi,Lxi,K,X1,X2,Pquad)
   ilo = 1
   CALL INTRV(Xi,Lxi,aa,ilo,il1,mf1)
   CALL INTRV(Xi,Lxi,bb,ilo,il2,mf2)
-  q = 0.0E0
+  q = 0._SP
   DO left = il1, il2
     ta = Xi(left)
     a = MAX(aa,ta)
@@ -90,9 +90,9 @@ SUBROUTINE PPQAD(Ldc,C,Xi,Lxi,K,X1,X2,Pquad)
     IF( left<Lxi ) tb = Xi(left+1)
     x = MIN(bb,tb)
     DO ii = 1, 2
-      ss(ii) = 0.0E0
+      ss(ii) = 0._SP
       dx = x - Xi(left)
-      IF( dx/=0.0E0 ) THEN
+      IF( dx/=0._SP ) THEN
         s = C(K,left)
         flk = K
         im = K - 1
@@ -100,7 +100,7 @@ SUBROUTINE PPQAD(Ldc,C,Xi,Lxi,K,X1,X2,Pquad)
         DO i = 1, il
           s = s*dx/flk + C(im,left)
           im = im - 1
-          flk = flk - 1.0E0
+          flk = flk - 1._SP
         END DO
         ss(ii) = s*dx
       END IF

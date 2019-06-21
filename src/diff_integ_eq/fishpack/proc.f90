@@ -79,7 +79,7 @@ SUBROUTINE PROC(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Y,M,A,B,C,D,W,U)
       W(k+1) = (Y(k+1)-C(k+1)*W(k+2))/den
     END DO
     den = B(1) - rt - C(1)*D(2)
-    W(1) = (1.,0.)
+    W(1) = (1._SP,0._SP)
     IF( ABS(den)/=0 ) W(1) = (Y(1)-C(1)*W(2))/den
     DO j = 2, M
       W(j) = W(j) - D(j)*W(j-1)

@@ -170,13 +170,13 @@ SUBROUTINE ZBESH(Zr,Zi,Fnu,Kode,M,N,Cyr,Cyi,Nz,Ierr)
     fnul, rhpi, rl, r1m5, sgn, str, tol, ufl, Zi, zni, znr, Zr, zti, bb, ascle, &
     rtol, atol, sti, csgnr, csgni
   !
-  REAL(DP), PARAMETER :: hpi = 1.57079632679489662D0
+  REAL(DP), PARAMETER :: hpi = 1.57079632679489662_DP
   !
   !* FIRST EXECUTABLE STATEMENT  ZBESH
   Ierr = 0
   Nz = 0
-  IF( Zr==0.0D0 .AND. Zi==0.0D0 ) Ierr = 1
-  IF( Fnu<0.0D0 ) Ierr = 1
+  IF( Zr==0._DP .AND. Zi==0._DP ) Ierr = 1
+  IF( Fnu<0._DP ) Ierr = 1
   IF( M<1 .OR. M>2 ) Ierr = 1
   IF( Kode<1 .OR. Kode>2 ) Ierr = 1
   IF( N<1 ) Ierr = 1
@@ -193,19 +193,19 @@ SUBROUTINE ZBESH(Zr,Zi,Fnu,Kode,M,N,Cyr,Cyi,Nz,Ierr)
   !     DIG = NUMBER OF BASE 10 DIGITS IN TOL = 10**(-DIG).
   !     FNUL IS THE LOWER BOUNDARY OF THE ASYMPTOTIC SERIES FOR LARGE FNU
   !-----------------------------------------------------------------------
-  tol = MAX(D1MACH(4),1.0D-18)
+  tol = MAX(D1MACH(4),1.E-18_DP)
   k1 = I1MACH(15)
   k2 = I1MACH(16)
   r1m5 = D1MACH(5)
   k = MIN(ABS(k1),ABS(k2))
-  elim = 2.303D0*(k*r1m5-3.0D0)
+  elim = 2.303_DP*(k*r1m5-3._DP)
   k1 = I1MACH(14) - 1
   aa = r1m5*k1
-  dig = MIN(aa,18.0D0)
-  aa = aa*2.303D0
-  alim = elim + MAX(-aa,-41.45D0)
-  fnul = 10.0D0 + 6.0D0*(dig-3.0D0)
-  rl = 1.2D0*dig + 3.0D0
+  dig = MIN(aa,18._DP)
+  aa = aa*2.303_DP
+  alim = elim + MAX(-aa,-41.45_DP)
+  fnul = 10._DP + 6._DP*(dig-3._DP)
+  rl = 1.2_DP*dig + 3._DP
   fn = Fnu + (nn-1)
   mm = 3 - M - M
   fmm = mm
@@ -215,8 +215,8 @@ SUBROUTINE ZBESH(Zr,Zi,Fnu,Kode,M,N,Cyr,Cyi,Nz,Ierr)
   !     TEST FOR PROPER RANGE
   !-----------------------------------------------------------------------
   az = ZABS(Zr,Zi)
-  aa = 0.5D0/tol
-  bb = I1MACH(9)*0.5D0
+  aa = 0.5_DP/tol
+  bb = I1MACH(9)*0.5_DP
   aa = MIN(aa,bb)
   IF( az>aa ) GOTO 300
   IF( fn>aa ) GOTO 300
@@ -226,16 +226,16 @@ SUBROUTINE ZBESH(Zr,Zi,Fnu,Kode,M,N,Cyr,Cyi,Nz,Ierr)
   !-----------------------------------------------------------------------
   !     OVERFLOW TEST ON THE LAST MEMBER OF THE SEQUENCE
   !-----------------------------------------------------------------------
-  ufl = D1MACH(1)*1.0D+3
+  ufl = D1MACH(1)*1.E+3_DP
   IF( az>=ufl ) THEN
     IF( Fnu>fnul ) THEN
       !-----------------------------------------------------------------------
       !     UNIFORM ASYMPTOTIC EXPANSIONS FOR FNU>FNUL
       !-----------------------------------------------------------------------
       mr = 0
-      IF( .NOT. ((znr>=0.0D0) .AND. (znr/=0.0D0 .OR. zni>=0.0D0 .OR. M/=2)) ) THEN
+      IF( .NOT. ((znr>=0._DP) .AND. (znr/=0._DP .OR. zni>=0._DP .OR. M/=2)) ) THEN
         mr = -mm
-        IF( znr==0.0D0 .AND. zni<0.0D0 ) THEN
+        IF( znr==0._DP .AND. zni<0._DP ) THEN
           znr = -znr
           zni = -zni
         END IF
@@ -244,8 +244,8 @@ SUBROUTINE ZBESH(Zr,Zi,Fnu,Kode,M,N,Cyr,Cyi,Nz,Ierr)
       IF( nw<0 ) GOTO 200
       Nz = Nz + nw
     ELSE
-      IF( fn>1.0D0 ) THEN
-        IF( fn>2.0D0 ) THEN
+      IF( fn>1._DP ) THEN
+        IF( fn>2._DP ) THEN
           CALL ZUOIK(znr,zni,Fnu,Kode,2,nn,Cyr,Cyi,nuf,tol,elim,alim)
           IF( nuf<0 ) GOTO 100
           Nz = Nz + nuf
@@ -255,16 +255,16 @@ SUBROUTINE ZBESH(Zr,Zi,Fnu,Kode,M,N,Cyr,Cyi,Nz,Ierr)
           !     IF NUF=NN, THEN CY(I)=CZERO FOR ALL I
           !-----------------------------------------------------------------------
           IF( nn==0 ) THEN
-            IF( znr<0.0D0 ) GOTO 100
+            IF( znr<0._DP ) GOTO 100
             RETURN
           END IF
         ELSEIF( az<=tol ) THEN
-          arg = 0.5D0*az
+          arg = 0.5_DP*az
           aln = -fn*LOG(arg)
           IF( aln>elim ) GOTO 100
         END IF
       END IF
-      IF( (znr<0.0D0) .OR. (znr==0.0D0 .AND. zni<0.0D0 .AND. M==2) ) THEN
+      IF( (znr<0._DP) .OR. (znr==0._DP .AND. zni<0._DP .AND. M==2) ) THEN
         !-----------------------------------------------------------------------
         !     LEFT HALF PLANE COMPUTATION
         !-----------------------------------------------------------------------
@@ -274,7 +274,7 @@ SUBROUTINE ZBESH(Zr,Zi,Fnu,Kode,M,N,Cyr,Cyi,Nz,Ierr)
         Nz = nw
       ELSE
         !-----------------------------------------------------------------------
-        !     RIGHT HALF PLANE COMPUTATION, XN>=0. .AND. (XN/=0.  .OR. 
+        !     RIGHT HALF PLANE COMPUTATION, XN>=0. .AND. (XN/=0.  .OR.
         !     YN>=0. .OR. M=1)
         !-----------------------------------------------------------------------
         CALL ZBKNU(znr,zni,Fnu,Kode,nn,Cyr,Cyi,Nz,tol,elim,alim)
@@ -294,7 +294,7 @@ SUBROUTINE ZBESH(Zr,Zi,Fnu,Kode,M,N,Cyr,Cyi,Nz,Ierr)
     inuh = inu/2
     ir = inu - 2*inuh
     arg = (Fnu-(inu-ir))*sgn
-    rhpi = 1.0D0/sgn
+    rhpi = 1._DP/sgn
     !     ZNI = RHPI*COS(ARG)
     !     ZNR = -RHPI*SIN(ARG)
     csgni = rhpi*COS(arg)
@@ -306,7 +306,7 @@ SUBROUTINE ZBESH(Zr,Zi,Fnu,Kode,M,N,Cyr,Cyi,Nz,Ierr)
       csgni = -csgni
     END IF
     zti = -fmm
-    rtol = 1.0D0/tol
+    rtol = 1._DP/tol
     ascle = ufl*rtol
     DO i = 1, nn
       !       STR = CYR(I)*ZNR - CYI(I)*ZNI
@@ -317,7 +317,7 @@ SUBROUTINE ZBESH(Zr,Zi,Fnu,Kode,M,N,Cyr,Cyi,Nz,Ierr)
       !       ZNR = STR
       aa = Cyr(i)
       bb = Cyi(i)
-      atol = 1.0D0
+      atol = 1._DP
       IF( MAX(ABS(aa),ABS(bb))<=ascle ) THEN
         aa = aa*rtol
         bb = bb*rtol

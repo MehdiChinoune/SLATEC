@@ -118,8 +118,8 @@ SUBROUTINE SORTH(Vnew,V,Hes,N,Ll,Ldhes,Kmp,Snormw)
       sumdsq = sumdsq + tem**2
     END IF
   END DO
-  IF( sumdsq==0.0E0 ) RETURN
-  arg = MAX(0.0E0,Snormw**2-sumdsq)
+  IF( sumdsq==0._SP ) RETURN
+  arg = MAX(0._SP,Snormw**2-sumdsq)
   Snormw = SQRT(arg)
   !
   !------------- LAST LINE OF SORTH FOLLOWS ----------------------------

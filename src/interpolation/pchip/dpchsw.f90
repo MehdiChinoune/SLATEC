@@ -89,10 +89,10 @@ SUBROUTINE DPCHSW(Dfmax,Iextrm,D1,D2,H,Slope,Ierr)
   !
   REAL(DP) :: cp, hphi, lambda, nu, phi, radcal, rho, sigma, small, that
   !
-  REAL(DP), PARAMETER :: zero = 0.D0, one = 1.D0, two = 2.D0, three = 3.D0, &
-    fact = 100.D0
+  REAL(DP), PARAMETER :: zero = 0._DP, one = 1._DP, two = 2._DP, three = 3._DP, &
+    fact = 100._DP
   !        THIRD SHOULD BE SLIGHTLY LESS THAN 1/3.
-  REAL(DP), PARAMETER :: third = 0.33333D0
+  REAL(DP), PARAMETER :: third = 0.33333_DP
   !
   !  NOTATION AND GENERAL REMARKS.
   !

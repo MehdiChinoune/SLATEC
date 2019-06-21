@@ -200,8 +200,8 @@ SUBROUTINE DQAWS(F,A,B,Alfa,Beta,Integr,Epsabs,Epsrel,Result,Abserr,Neval,&
   Ier = 6
   Neval = 0
   Last = 0
-  Result = 0.0D+00
-  Abserr = 0.0D+00
+  Result = 0._DP
+  Abserr = 0._DP
   IF( Limit>=2 .AND. Lenw>=Limit*4 ) THEN
     !
     !         PREPARE CALL FOR DQAWSE.

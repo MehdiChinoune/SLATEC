@@ -341,7 +341,7 @@ SUBROUTINE DOMN(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Nsave,Itol,Tol,&
           Ierr = 6
           RETURN
         END IF
-        Csav(1) = 1.0D0/akden
+        Csav(1) = 1._DP/akden
         !
         !         calculate coefficient ak, new iterate x, new residual r, and
         !         new pseudo-residual z.

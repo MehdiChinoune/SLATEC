@@ -772,7 +772,7 @@ SUBROUTINE DDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
   REAL(DP), ALLOCATABLE :: a(:,:)
   CHARACTER(8) :: intgr1, intgr2
   CHARACTER(16) :: rl1, rl2
-  REAL(DP), PARAMETER :: NROUND = 20.D0
+  REAL(DP), PARAMETER :: NROUND = 20._DP
   INTEGER, PARAMETER :: IAVGH = 1, IHUSED = 2, IAVGRD = 3, IEL = 4, IH = 160, &
     IHMAX = 161, IHOLD = 162, IHSIGN = 163, IRC = 164, IRMAX = 165, IT = 166, &
     ITOUT = 167, ITQ = 168, ITREND = 204, IMACH1 = 205, IMACH4 = 206, IYH = 251, &
@@ -795,7 +795,7 @@ SUBROUTINE DDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
     RETURN
   END IF
   npar = N
-  IF( Eps<0.D0 ) THEN
+  IF( Eps<0._DP ) THEN
     WRITE (rl1,'(D16.8)') Eps
     Ierflg = 27
     CALL XERMSG('DDRIV3','Illegal input.  EPS, '//rl1//', is negative.',Ierflg,1)
@@ -985,15 +985,15 @@ SUBROUTINE DDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
       re = uround
       ae = Work(IMACH1)
     END IF
-    h = (Tout-T)*(1.D0-4.D0*uround)
+    h = (Tout-T)*(1._DP-4._DP*uround)
     h = SIGN(MIN(ABS(h),Hmax),h)
     Work(IH) = h
-    hsign = SIGN(1.D0,h)
+    hsign = SIGN(1._DP,h)
     Work(IHSIGN) = hsign
     Iwork(IJTASK) = 0
-    Work(IAVGH) = 0.D0
-    Work(IHUSED) = 0.D0
-    Work(IAVGRD) = 0.D0
+    Work(IAVGH) = 0._DP
+    Work(IHUSED) = 0._DP
+    Work(IAVGRD) = 0._DP
     Iwork(INDMXR) = 0
     Iwork(INQUSE) = 0
     Iwork(INSTEP) = 0
@@ -1151,9 +1151,9 @@ SUBROUTINE DDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
       !                                                       be overtaken.
       IF( (T+h)*hsign>Tout*hsign ) THEN
         h = Tout - T
-        IF( (T+h)*hsign>Tout*hsign ) h = h*(1.D0-4.D0*uround)
+        IF( (T+h)*hsign>Tout*hsign ) h = h*(1._DP-4._DP*uround)
         Work(IH) = h
-        IF( h==0.D0 ) GOTO 600
+        IF( h==0._DP ) GOTO 600
         Iwork(IJTASK) = -1
       END IF
     ELSEIF( Ntask==3 ) THEN
@@ -1177,9 +1177,9 @@ SUBROUTINE DDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
       END IF
       IF( (T+h)*hsign>Tout*hsign ) THEN
         h = Tout - T
-        IF( (T+h)*hsign>Tout*hsign ) h = h*(1.D0-4.D0*uround)
+        IF( (T+h)*hsign>Tout*hsign ) h = h*(1._DP-4._DP*uround)
         Work(IH) = h
-        IF( h==0.D0 ) GOTO 600
+        IF( h==0._DP ) GOTO 600
         Iwork(IJTASK) = -1
       END IF
     END IF
@@ -1213,7 +1213,7 @@ SUBROUTINE DDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
   END IF
   IF( Ierror==1 ) THEN
     DO i = 1, N
-      Work(i+iywt-1) = 1.D0
+      Work(i+iywt-1) = 1._DP
     END DO
     GOTO 300
   ELSEIF( Ierror==5 ) THEN
@@ -1226,7 +1226,7 @@ SUBROUTINE DDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
   200 CONTINUE
   IF( Ierror==2 ) THEN
     DO i = 1, N
-      IF( Y(i)==0.D0 ) GOTO 250
+      IF( Y(i)==0._DP ) GOTO 250
       Work(i+iywt-1) = ABS(Y(i))
     END DO
     GOTO 300
@@ -1274,7 +1274,7 @@ SUBROUTINE DDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
           RETURN
         END IF
         DO i = 1, ndecom
-          IF( Work(i+ia-1)==0.D0 ) GOTO 700
+          IF( Work(i+ia-1)==0._DP ) GOTO 700
           Work(i+isave2-1) = Work(i+isave2-1)/Work(i+ia-1)
         END DO
       ELSEIF( Impl==3 ) THEN
@@ -1300,14 +1300,14 @@ SUBROUTINE DDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
       END IF
     END IF
     DO j = i, N
-      IF( Y(j)/=0.D0 ) THEN
+      IF( Y(j)/=0._DP ) THEN
         Work(j+iywt-1) = ABS(Y(j))
       ELSEIF( Iwork(IJTASK)==0 ) THEN
         Work(j+iywt-1) = ABS(h*Work(j+isave2-1))
       ELSE
         Work(j+iywt-1) = ABS(Work(j+IYH+N-1))
       END IF
-      IF( Work(j+iywt-1)==0.D0 ) Work(j+iywt-1) = uround
+      IF( Work(j+iywt-1)==0._DP ) Work(j+iywt-1) = uround
     END DO
   ELSEIF( Ierror==3 ) THEN
     DO i = 1, N
@@ -1324,9 +1324,9 @@ SUBROUTINE DDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
     Work(i+isave2-1) = Y(i)/Work(i+iywt-1)
   END DO
   summ = NORM2(Work(isave2:isave2+N-1))/SQRT(REAL(N, DP))
-  summ = MAX(1.D0,summ)
+  summ = MAX(1._DP,summ)
   IF( Eps<summ*uround ) THEN
-    Eps = summ*uround*(1.D0+10.D0*uround)
+    Eps = summ*uround*(1._DP+10._DP*uround)
     WRITE (rl1,'(D16.8)') T
     WRITE (rl2,'(D16.8)') Eps
     Ierflg = 4
@@ -1417,12 +1417,12 @@ SUBROUTINE DDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
             RETURN
           END IF
           Work(i+ignow-1) = gnow
-          IF( glast*gnow>0.D0 ) THEN
+          IF( glast*gnow>0._DP ) THEN
             Work(i+itroot-1) = T + h
-          ELSEIF( gnow==0.D0 ) THEN
+          ELSEIF( gnow==0._DP ) THEN
             Work(i+itroot-1) = T
             iroot = i
-          ELSEIF( glast==0.D0 ) THEN
+          ELSEIF( glast==0._DP ) THEN
             Work(i+itroot-1) = T + h
           ELSEIF( ABS(hused)>=uround*ABS(T) ) THEN
             tlast = T - hused
@@ -1486,9 +1486,9 @@ SUBROUTINE DDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
           T = Tout
         ELSEIF( (T+h)*hsign>Tout*hsign ) THEN
           h = Tout - T
-          IF( (T+h)*hsign>Tout*hsign ) h = h*(1.D0-4.D0*uround)
+          IF( (T+h)*hsign>Tout*hsign ) h = h*(1._DP-4._DP*uround)
           Work(IH) = h
-          IF( h==0.D0 ) GOTO 600
+          IF( h==0._DP ) GOTO 600
           Iwork(IJTASK) = -1
         END IF
       ELSEIF( Ntask==3 ) THEN
@@ -1497,9 +1497,9 @@ SUBROUTINE DDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
         ELSE
           IF( (T+h)*hsign>Tout*hsign ) THEN
             h = Tout - T
-            IF( (T+h)*hsign>Tout*hsign ) h = h*(1.D0-4.D0*uround)
+            IF( (T+h)*hsign>Tout*hsign ) h = h*(1._DP-4._DP*uround)
             Work(IH) = h
-            IF( h==0.D0 ) GOTO 600
+            IF( h==0._DP ) GOTO 600
             Iwork(IJTASK) = -1
           END IF
           GOTO 200
@@ -1515,7 +1515,7 @@ SUBROUTINE DDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
   END DO
   500 CONTINUE
   IF( Iwork(IJTASK)==0 ) RETURN
-  big = 0.D0
+  big = 0._DP
   imxerr = 1
   DO i = 1, N
     !                                            SIZE = ABS(ERROR(I)/YWT(I))

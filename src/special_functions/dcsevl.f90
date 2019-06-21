@@ -47,15 +47,15 @@ REAL(DP) FUNCTION DCSEVL(X,Cs,N)
   REAL(DP) :: Cs(N), X
   INTEGER :: i, ni
   REAL(DP) :: b0, b1, b2, twox
-  REAL(DP), PARAMETER :: onepl = 1.0D0 + D1MACH(4)
+  REAL(DP), PARAMETER :: onepl = 1._DP + D1MACH(4)
   !* FIRST EXECUTABLE STATEMENT  DCSEVL
   IF( N<1 ) CALL XERMSG('DCSEVL','NUMBER OF TERMS <= 0',2,2)
   IF( N>1000 ) CALL XERMSG('DCSEVL','NUMBER OF TERMS > 1000',3,2)
   IF( ABS(X)>onepl ) CALL XERMSG('DCSEVL','X OUTSIDE THE INTERVAL (-1,+1)',1,1)
   !
-  b1 = 0.0D0
-  b0 = 0.0D0
-  twox = 2.0D0*X
+  b1 = 0._DP
+  b0 = 0._DP
+  twox = 2._DP*X
   DO i = 1, N
     b2 = b1
     b1 = b0
@@ -63,6 +63,6 @@ REAL(DP) FUNCTION DCSEVL(X,Cs,N)
     b0 = twox*b1 - b2 + Cs(ni)
   END DO
   !
-  DCSEVL = 0.5D0*(b0-b2)
+  DCSEVL = 0.5_DP*(b0-b2)
   !
 END FUNCTION DCSEVL

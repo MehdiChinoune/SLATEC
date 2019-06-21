@@ -26,7 +26,7 @@ SUBROUTINE CKSCL(Zr,Fnu,N,Y,Nz,Rz,Ascle,Tol,Elim)
   INTEGER :: i, ic, k, kk, N, nn, nw, Nz
   COMPLEX(SP) :: ck, cs, cy(2), Rz, s1, s2, Y(N), Zr, zd, celm
   REAL(SP) :: aa, Ascle, acs, as, csi, csr, Elim, fn, Fnu, Tol, xx, zri, elm, alas, helim
-  COMPLEX(SP), PARAMETER :: czero = (0.0E0,0.0E0)
+  COMPLEX(SP), PARAMETER :: czero = (0._SP,0._SP)
   !* FIRST EXECUTABLE STATEMENT  CUCHK
   Nz = 0
   ic = 0
@@ -44,7 +44,7 @@ SUBROUTINE CKSCL(Zr,Fnu,N,Y,Nz,Rz,Ascle,Tol,Elim)
       csr = REAL(cs)
       csi = AIMAG(cs)
       aa = EXP(csr)/Tol
-      cs = CMPLX(aa,0.0E0)*CMPLX(COS(csi),SIN(csi))
+      cs = CMPLX(aa,0._SP,SP)*CMPLX(COS(csi),SIN(csi),SP)
       CALL CUCHK(cs,nw,Ascle,Tol)
       IF( nw==0 ) THEN
         Y(i) = cs
@@ -60,13 +60,13 @@ SUBROUTINE CKSCL(Zr,Fnu,N,Y,Nz,Rz,Ascle,Tol,Elim)
   END IF
   IF( N==2 ) RETURN
   IF( Nz==0 ) RETURN
-  fn = Fnu + 1.0E0
-  ck = CMPLX(fn,0.0E0)*Rz
+  fn = Fnu + 1._SP
+  ck = CMPLX(fn,0._SP,SP)*Rz
   s1 = cy(1)
   s2 = cy(2)
-  helim = 0.5E0*Elim
+  helim = 0.5_SP*Elim
   elm = EXP(-Elim)
-  celm = CMPLX(elm,0.0E0)
+  celm = CMPLX(elm,0._SP,SP)
   zri = AIMAG(Zr)
   zd = Zr
   !
@@ -89,7 +89,7 @@ SUBROUTINE CKSCL(Zr,Fnu,N,Y,Nz,Rz,Ascle,Tol,Elim)
       csr = REAL(cs)
       csi = AIMAG(cs)
       aa = EXP(csr)/Tol
-      cs = CMPLX(aa,0.0E0)*CMPLX(COS(csi),SIN(csi))
+      cs = CMPLX(aa,0._SP,SP)*CMPLX(COS(csi),SIN(csi),SP)
       CALL CUCHK(cs,nw,Ascle,Tol)
       IF( nw==0 ) THEN
         Y(i) = cs
@@ -103,7 +103,7 @@ SUBROUTINE CKSCL(Zr,Fnu,N,Y,Nz,Rz,Ascle,Tol,Elim)
       xx = xx - Elim
       s1 = s1*celm
       s2 = s2*celm
-      zd = CMPLX(xx,zri)
+      zd = CMPLX(xx,zri,SP)
     END IF
   END DO
   Nz = N

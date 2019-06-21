@@ -320,18 +320,18 @@ REAL(SP) FUNCTION RD(X,Y,Z,Ier)
   REAL(SP) :: epslon, ea, eb, ec, ed, ef, lamda, mu, power4, sigma, s1, s2, xn, &
     xndev, xnroot, yn, yndev, ynroot, zn, zndev, znroot
   CHARACTER(16) :: xern3, xern4, xern5, xern6
-  REAL(SP), PARAMETER :: errtol = (R1MACH(3)/3.0E0)**(1.0E0/6.0E0), &
-    lolim = 2.0E0/(R1MACH(2))**(2.0E0/3.0E0), &
-    uplim = (0.10E0*errtol/R1MACH(1))**(2.0E0/3.0E0)
-  REAL(SP), PARAMETER :: c1 = 3.0E0/14.0E0, c2 = 1.0E0/6.0E0, c3 = 9.0E0/22.0E0, &
-    c4 = 3.0E0/26.0E0
+  REAL(SP), PARAMETER :: errtol = (R1MACH(3)/3._SP)**(1._SP/6._SP), &
+    lolim = 2._SP/(R1MACH(2))**(2._SP/3._SP), &
+    uplim = (0.10_SP*errtol/R1MACH(1))**(2._SP/3._SP)
+  REAL(SP), PARAMETER :: c1 = 3._SP/14._SP, c2 = 1._SP/6._SP, c3 = 9._SP/22._SP, &
+    c4 = 3._SP/26._SP
   !
   !* FIRST EXECUTABLE STATEMENT  RD
   !
   !         CALL ERROR HANDLER IF NECESSARY.
   !
-  RD = 0.0E0
-  IF( MIN(X,Y)<0.0E0 ) THEN
+  RD = 0._SP
+  IF( MIN(X,Y)<0._SP ) THEN
     Ier = 1
     WRITE (xern3,'(1PE15.6)') X
     WRITE (xern4,'(1PE15.6)') Y
@@ -366,11 +366,11 @@ REAL(SP) FUNCTION RD(X,Y,Z,Ier)
   xn = X
   yn = Y
   zn = Z
-  sigma = 0.0E0
-  power4 = 1.0E0
+  sigma = 0._SP
+  power4 = 1._SP
   DO
     !
-    mu = (xn+yn+3.0E0*zn)*0.20E0
+    mu = (xn+yn+3._SP*zn)*0.20_SP
     xndev = (mu-xn)/mu
     yndev = (mu-yn)/mu
     zndev = (mu-zn)/mu
@@ -380,11 +380,11 @@ REAL(SP) FUNCTION RD(X,Y,Z,Ier)
       ea = xndev*yndev
       eb = zndev*zndev
       ec = ea - eb
-      ed = ea - 6.0E0*eb
+      ed = ea - 6._SP*eb
       ef = ed + ec + ec
-      s1 = ed*(-c1+0.250E0*c3*ed-1.50E0*c4*zndev*ef)
+      s1 = ed*(-c1+0.250_SP*c3*ed-1.50_SP*c4*zndev*ef)
       s2 = zndev*(c2*ef+zndev*(-c3*ec+zndev*c4*ea))
-      RD = 3.0E0*sigma + power4*(1.0E0+s1+s2)/(mu*SQRT(mu))
+      RD = 3._SP*sigma + power4*(1._SP+s1+s2)/(mu*SQRT(mu))
       EXIT
     ELSE
       xnroot = SQRT(xn)
@@ -392,10 +392,10 @@ REAL(SP) FUNCTION RD(X,Y,Z,Ier)
       znroot = SQRT(zn)
       lamda = xnroot*(ynroot+znroot) + ynroot*znroot
       sigma = sigma + power4/(znroot*(zn+lamda))
-      power4 = power4*0.250E0
-      xn = (xn+lamda)*0.250E0
-      yn = (yn+lamda)*0.250E0
-      zn = (zn+lamda)*0.250E0
+      power4 = power4*0.250_SP
+      xn = (xn+lamda)*0.250_SP
+      yn = (yn+lamda)*0.250_SP
+      zn = (zn+lamda)*0.250_SP
     END IF
   END DO
   !

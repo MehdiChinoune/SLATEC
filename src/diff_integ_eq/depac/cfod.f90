@@ -58,8 +58,8 @@ SUBROUTINE CFOD(Meth,Elco,Tesco)
   !* FIRST EXECUTABLE STATEMENT  CFOD
   IF( Meth==2 ) THEN
     !
-    pc(1) = 1.0E0
-    rq1fac = 1.0E0
+    pc(1) = 1._SP
+    rq1fac = 1._SP
     DO nq = 1, 5
       !-----------------------------------------------------------------------
       ! THE PC ARRAY WILL CONTAIN THE COEFFICIENTS OF THE POLYNOMIAL
@@ -69,7 +69,7 @@ SUBROUTINE CFOD(Meth,Elco,Tesco)
       fnq = nq
       nqp1 = nq + 1
       ! FORM COEFFICIENTS OF P(X)*(X+NQ). ------------------------------------
-      pc(nqp1) = 0.0E0
+      pc(nqp1) = 0._SP
       DO ib = 1, nq
         i = nq + 2 - ib
         pc(i) = pc(i-1) + fnq*pc(i)
@@ -79,7 +79,7 @@ SUBROUTINE CFOD(Meth,Elco,Tesco)
       DO i = 1, nqp1
         Elco(i,nq) = pc(i)/pc(2)
       END DO
-      Elco(2,nq) = 1.0E0
+      Elco(2,nq) = 1._SP
       Tesco(1,nq) = rq1fac
       Tesco(2,nq) = nqp1/Elco(1,nq)
       Tesco(3,nq) = (nq+2)/Elco(1,nq)
@@ -88,14 +88,14 @@ SUBROUTINE CFOD(Meth,Elco,Tesco)
     RETURN
   END IF
   !
-  Elco(1,1) = 1.0E0
-  Elco(2,1) = 1.0E0
-  Tesco(1,1) = 0.0E0
-  Tesco(2,1) = 2.0E0
-  Tesco(1,2) = 1.0E0
-  Tesco(3,12) = 0.0E0
-  pc(1) = 1.0E0
-  rqfac = 1.0E0
+  Elco(1,1) = 1._SP
+  Elco(2,1) = 1._SP
+  Tesco(1,1) = 0._SP
+  Tesco(2,1) = 2._SP
+  Tesco(1,2) = 1._SP
+  Tesco(3,12) = 0._SP
+  pc(1) = 1._SP
+  rqfac = 1._SP
   DO nq = 2, 12
     !-----------------------------------------------------------------------
     ! THE PC ARRAY WILL CONTAIN THE COEFFICIENTS OF THE POLYNOMIAL
@@ -108,7 +108,7 @@ SUBROUTINE CFOD(Meth,Elco,Tesco)
     fnqm1 = nqm1
     nqp1 = nq + 1
     ! FORM COEFFICIENTS OF P(X)*(X+NQ-1). ----------------------------------
-    pc(nq) = 0.0E0
+    pc(nq) = 0._SP
     DO ib = 1, nqm1
       i = nqp1 - ib
       pc(i) = pc(i-1) + fnqm1*pc(i)
@@ -116,8 +116,8 @@ SUBROUTINE CFOD(Meth,Elco,Tesco)
     pc(1) = fnqm1*pc(1)
     ! COMPUTE INTEGRAL, -1 TO 0, OF P(X) AND X*P(X). -----------------------
     pint = pc(1)
-    xpin = pc(1)/2.0E0
-    tsign = 1.0E0
+    xpin = pc(1)/2._SP
+    tsign = 1._SP
     DO i = 2, nq
       tsign = -tsign
       pint = pint + tsign*pc(i)/i
@@ -125,12 +125,12 @@ SUBROUTINE CFOD(Meth,Elco,Tesco)
     END DO
     ! STORE COEFFICIENTS IN ELCO AND TESCO. --------------------------------
     Elco(1,nq) = pint*rq1fac
-    Elco(2,nq) = 1.0E0
+    Elco(2,nq) = 1._SP
     DO i = 2, nq
       Elco(i+1,nq) = rq1fac*pc(i)/i
     END DO
     agamq = rqfac*xpin
-    ragq = 1.0E0/agamq
+    ragq = 1._SP/agamq
     Tesco(2,nq) = ragq
     IF( nq<12 ) Tesco(1,nqp1) = ragq*rqfac/nqp1
     Tesco(3,nqm1) = ragq

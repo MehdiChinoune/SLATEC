@@ -89,7 +89,7 @@ SUBROUTINE SGEFA(A,Lda,N,Ipvt,Info)
       !
       !        ZERO PIVOT IMPLIES THIS COLUMN ALREADY TRIANGULARIZED
       !
-      IF( A(l,k)==0.0E0 ) THEN
+      IF( A(l,k)==0._SP ) THEN
         Info = k
       ELSE
         !
@@ -103,7 +103,7 @@ SUBROUTINE SGEFA(A,Lda,N,Ipvt,Info)
         !
         !           COMPUTE MULTIPLIERS
         !
-        t = -1.0E0/A(k,k)
+        t = -1._SP/A(k,k)
         A(k+1:N,k) = t*A(k+1:N,k)
         !
         !           ROW ELIMINATION WITH COLUMN INDEXING
@@ -120,5 +120,5 @@ SUBROUTINE SGEFA(A,Lda,N,Ipvt,Info)
     END DO
   END IF
   Ipvt(N) = N
-  IF( A(N,N)==0.0E0 ) Info = N
+  IF( A(N,N)==0._SP ) Info = N
 END SUBROUTINE SGEFA

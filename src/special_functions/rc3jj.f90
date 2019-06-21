@@ -138,16 +138,16 @@ SUBROUTINE RC3JJ(L2,L3,M2,M3,L1min,L1max,Thrcof,Ndim,Ier)
   REAL(SP) :: a1, a1s, a2, a2s, c1, c1old, c2, cnorm, denom, dv, hugee, l1, m1, &
     newfac, oldfac, ratio, sign1, sign2, srhuge, srtiny, sum1, sum2, sumbac, &
     sumfor, sumuni, thresh, tinyy, x, x1, x2, x3, y, y1, y2, y3
-  REAL(SP), PARAMETER :: zero = 0.0, eps = 0.01, one = 1.0, two = 2.0, three = 3.0
+  REAL(SP), PARAMETER :: zero = 0._SP, eps = 0.01_SP, one = 1._SP, two = 2._SP, three = 3._SP
   !
   !* FIRST EXECUTABLE STATEMENT  RC3JJ
   Ier = 0
   !  HUGE is the square root of one twentieth of the largest floating
   !  point number, approximately.
-  hugee = SQRT(R1MACH(2)/20.0)
+  hugee = SQRT(R1MACH(2)/20._SP)
   srhuge = SQRT(hugee)
-  tinyy = 1.0/hugee
-  srtiny = 1.0/srhuge
+  tinyy = 1._SP/hugee
+  srtiny = 1._SP/srhuge
   !
   !     LMATCH = ZERO
   m1 = -M2 - M3
@@ -196,8 +196,8 @@ SUBROUTINE RC3JJ(L2,L3,M2,M3,L1min,L1max,Thrcof,Ndim,Ier)
       !  Starting forward recursion from L1MIN taking NSTEP1 steps
       !
       l1 = L1min
-      newfac = 0.0
-      c1 = 0.0
+      newfac = 0._SP
+      c1 = 0._SP
       Thrcof(1) = srtiny
       sum1 = (l1+l1+one)*tinyy
       !

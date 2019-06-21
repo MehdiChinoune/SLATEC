@@ -70,7 +70,7 @@ SUBROUTINE XC210(K,Z,J,Ierror)
   Ierror = 0
   IF( K==0 ) THEN
     J = 0
-    Z = 1.0
+    Z = 1._SP
     RETURN
   ELSE
     m = mlg102_com
@@ -106,10 +106,10 @@ SUBROUTINE XC210(K,Z,J,Ierror)
       Z = Z/m
       IF( K>0 ) THEN
         J = ja + 1
-        Z = 10.0**(Z-1.0)
+        Z = 10._SP**(Z-1._SP)
       ELSE
         J = -ja
-        Z = 10.0**(-Z)
+        Z = 10._SP**(-Z)
       END IF
       RETURN
     END IF

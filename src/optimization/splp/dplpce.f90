@@ -51,12 +51,12 @@ SUBROUTINE DPLPCE(Mrelas,Nvars,Lmx,Lbm,Itlp,Itbrc,Ibasis,Imat,Ibrc,Ipr,&
   REAL(DP) :: factor, one, zero, ten
   LOGICAL :: trans, pagepl
   !* FIRST EXECUTABLE STATEMENT  DPLPCE
-  zero = 0.D0
-  one = 1.D0
-  ten = 10.D0
+  zero = 0._DP
+  one = 1._DP
+  ten = 10._DP
   lpg = Lmx - (Nvars+4)
   Singlr = .FALSE.
-  factor = 0.01
+  factor = 0.01_DP
   !
   !     COPY COLSUMS IN WW(*), AND SOLVE TRANSPOSED SYSTEM.
   i = 1

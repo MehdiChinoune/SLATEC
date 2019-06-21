@@ -126,7 +126,7 @@ SUBROUTINE SDASTP(X,Y,Yprime,Neq,RES,JAC,H,Wt,Jstart,Idid,Phi,&
   INTEGER, PARAMETER :: LCTF = 15
   !
   INTEGER, PARAMETER :: maxit = 4
-  REAL(SP), PARAMETER :: xrate = 0.25E0
+  REAL(SP), PARAMETER :: xrate = 0.25_SP
   !
   !
   !
@@ -154,14 +154,14 @@ SUBROUTINE SDASTP(X,Y,Yprime,Neq,RES,JAC,H,Wt,Jstart,Idid,Phi,&
     Iwm(LCTF) = 0
     K = 1
     Kold = 0
-    Hold = 0.0E0
+    Hold = 0._SP
     Jstart = 1
     Psi(1) = H
-    Cjold = 1.0E0/H
+    Cjold = 1._SP/H
     Cj = Cjold
-    S = 100.E0
+    S = 100._SP
     Jcalc = -1
-    delnrm = 1.0E0
+    delnrm = 1._SP
     Iphase = 0
     Ns = 0
   END IF
@@ -184,11 +184,11 @@ SUBROUTINE SDASTP(X,Y,Yprime,Neq,RES,JAC,H,Wt,Jstart,Idid,Phi,&
   nsp1 = Ns + 1
   IF( kp1>=Ns ) THEN
     !
-    Beta(1) = 1.0E0
-    Alpha(1) = 1.0E0
+    Beta(1) = 1._SP
+    Alpha(1) = 1._SP
     temp1 = H
-    Gama(1) = 0.0E0
-    Sigma(1) = 1.0E0
+    Gama(1) = 0._SP
+    Sigma(1) = 1._SP
     DO i = 2, kp1
       temp2 = Psi(i-1)
       Psi(i-1) = temp1
@@ -202,10 +202,10 @@ SUBROUTINE SDASTP(X,Y,Yprime,Neq,RES,JAC,H,Wt,Jstart,Idid,Phi,&
   END IF
   !
   !     COMPUTE ALPHAS, ALPHA0
-  alphas = 0.0E0
-  alpha0 = 0.0E0
+  alphas = 0._SP
+  alpha0 = 0._SP
   DO i = 1, K
-    alphas = alphas - 1.0E0/i
+    alphas = alphas - 1._SP/i
     alpha0 = alpha0 - Alpha(i)
   END DO
   !
@@ -218,10 +218,10 @@ SUBROUTINE SDASTP(X,Y,Yprime,Neq,RES,JAC,H,Wt,Jstart,Idid,Phi,&
   ck = MAX(ck,Alpha(kp1))
   !
   !     DECIDE WHETHER NEW JACOBIAN IS NEEDED
-  temp1 = (1.0E0-xrate)/(1.0E0+xrate)
-  temp2 = 1.0E0/temp1
+  temp1 = (1._SP-xrate)/(1._SP+xrate)
+  temp2 = 1._SP/temp1
   IF( Cj/Cjold<temp1 .OR. Cj/Cjold>temp2 ) Jcalc = -1
-  IF( Cj/=cjlast ) S = 100.E0
+  IF( Cj/=cjlast ) S = 100._SP
   !
   !     CHANGE PHI TO PHI STAR
   IF( kp1>=nsp1 ) THEN
@@ -249,7 +249,7 @@ SUBROUTINE SDASTP(X,Y,Yprime,Neq,RES,JAC,H,Wt,Jstart,Idid,Phi,&
     !     FIRST,PREDICT THE SOLUTION AND DERIVATIVE
     DO i = 1, Neq
       Y(i) = Phi(i,1)
-      Yprime(i) = 0.0E0
+      Yprime(i) = 0._SP
     END DO
     DO j = 2, kp1
       DO i = 1, Neq
@@ -290,7 +290,7 @@ SUBROUTINE SDASTP(X,Y,Yprime,Neq,RES,JAC,H,Wt,Jstart,Idid,Phi,&
         CALL SDAJAC(Neq,X,Y,Yprime,Delta,Cj,H,ier,Wt,E,Wm,Iwm,RES,ires,&
           Uround,JAC,Ntemp)
         Cjold = Cj
-        S = 100.E0
+        S = 100._SP
         IF( ires<0 ) THEN
           convgd = .FALSE.
           GOTO 300
@@ -305,7 +305,7 @@ SUBROUTINE SDASTP(X,Y,Yprime,Neq,RES,JAC,H,Wt,Jstart,Idid,Phi,&
       !
       !     INITIALIZE THE ERROR ACCUMULATION VECTOR E.
       DO i = 1, Neq
-        E(i) = 0.0E0
+        E(i) = 0._SP
       END DO
       DO
         !
@@ -313,7 +313,7 @@ SUBROUTINE SDASTP(X,Y,Yprime,Neq,RES,JAC,H,Wt,Jstart,Idid,Phi,&
         !     CORRECTOR LOOP.
         !
         !     MULTIPLY RESIDUAL BY TEMP1 TO ACCELERATE CONVERGENCE
-        temp1 = 2.0E0/(1.0E0+Cj/Cjold)
+        temp1 = 2._SP/(1._SP+Cj/Cjold)
         DO i = 1, Neq
           Delta(i) = Delta(i)*temp1
         END DO
@@ -331,15 +331,15 @@ SUBROUTINE SDASTP(X,Y,Yprime,Neq,RES,JAC,H,Wt,Jstart,Idid,Phi,&
         !
         !     TEST FOR CONVERGENCE OF THE ITERATION
         delnrm = SDANRM(Neq,Delta,Wt)
-        IF( delnrm<=100.E0*Uround*pnorm ) GOTO 200
+        IF( delnrm<=100._SP*Uround*pnorm ) GOTO 200
         IF( m>0 ) THEN
-          rate = (delnrm/oldnrm)**(1.0E0/m)
-          IF( rate>0.90E0 ) EXIT
-          S = rate/(1.0E0-rate)
+          rate = (delnrm/oldnrm)**(1._SP/m)
+          IF( rate>0.90_SP ) EXIT
+          S = rate/(1._SP-rate)
         ELSE
           oldnrm = delnrm
         END IF
-        IF( S*delnrm<=0.33E0 ) GOTO 200
+        IF( S*delnrm<=0.33_SP ) GOTO 200
         !
         !     THE CORRECTOR HAS NOT YET CONVERGED.
         !     UPDATE M AND TEST WHETHER THE
@@ -381,10 +381,10 @@ SUBROUTINE SDASTP(X,Y,Yprime,Neq,RES,JAC,H,Wt,Jstart,Idid,Phi,&
   200 CONTINUE
   IF( Nonneg/=0 ) THEN
     DO i = 1, Neq
-      Delta(i) = MIN(Y(i),0.0E0)
+      Delta(i) = MIN(Y(i),0._SP)
     END DO
     delnrm = SDANRM(Neq,Delta,Wt)
-    IF( delnrm>0.33E0 ) THEN
+    IF( delnrm>0.33_SP ) THEN
       convgd = .FALSE.
     ELSE
       DO i = 1, Neq
@@ -426,7 +426,7 @@ SUBROUTINE SDASTP(X,Y,Yprime,Neq,RES,JAC,H,Wt,Jstart,Idid,Phi,&
         erkm2 = Sigma(K-1)*SDANRM(Neq,Delta,Wt)
         terkm2 = (K-1)*erkm2
         IF( MAX(terkm1,terkm2)>terk ) GOTO 350
-      ELSEIF( terkm1>0.5E0*terk ) THEN
+      ELSEIF( terkm1>0.5_SP*terk ) THEN
         GOTO 350
       END IF
       !     LOWER THE ORDER
@@ -438,7 +438,7 @@ SUBROUTINE SDASTP(X,Y,Yprime,Neq,RES,JAC,H,Wt,Jstart,Idid,Phi,&
     !     CALCULATE THE LOCAL ERROR FOR THE CURRENT STEP
     !     TO SEE IF THE STEP WAS SUCCESSFUL
     350  err = ck*enorm
-    IF( err>1.0E0 ) GOTO 500
+    IF( err>1._SP ) GOTO 500
     !
     !
     !
@@ -469,7 +469,7 @@ SUBROUTINE SDASTP(X,Y,Yprime,Neq,RES,JAC,H,Wt,Jstart,Idid,Phi,&
       !     IF IPHASE = 0, INCREASE ORDER BY ONE AND MULTIPLY STEPSIZE BY
       !     FACTOR TWO
       K = kp1
-      hnew = H*2.0E0
+      hnew = H*2._SP
       H = hnew
       GOTO 450
     ELSE
@@ -479,12 +479,12 @@ SUBROUTINE SDASTP(X,Y,Yprime,Neq,RES,JAC,H,Wt,Jstart,Idid,Phi,&
             DO i = 1, Neq
               Delta(i) = E(i) - Phi(i,kp2)
             END DO
-            erkp1 = (1.0E0/(K+2))*SDANRM(Neq,Delta,Wt)
+            erkp1 = (1._SP/(K+2))*SDANRM(Neq,Delta,Wt)
             terkp1 = (K+2)*erkp1
             IF( K>1 ) THEN
               IF( terkm1<=MIN(terk,terkp1) ) GOTO 360
               IF( terkp1>=terk .OR. K==Iwm(LMXORD) ) GOTO 400
-            ELSEIF( terkp1>=0.5E0*terk ) THEN
+            ELSEIF( terkp1>=0.5_SP*terk ) THEN
               GOTO 400
             END IF
             !
@@ -506,11 +506,11 @@ SUBROUTINE SDASTP(X,Y,Yprime,Neq,RES,JAC,H,Wt,Jstart,Idid,Phi,&
     !     THE NEXT STEP.
     400  hnew = H
     temp2 = K + 1
-    r = (2.0E0*est+0.0001E0)**(-1.0E0/temp2)
-    IF( r>=2.0E0 ) THEN
-      hnew = 2.0E0*H
-    ELSEIF( r<=1.0E0 ) THEN
-      r = MAX(0.5E0,MIN(0.9E0,r))
+    r = (2._SP*est+0.0001_SP)**(-1._SP/temp2)
+    IF( r>=2._SP ) THEN
+      hnew = 2._SP*H
+    ELSEIF( r<=1._SP ) THEN
+      r = MAX(0.5_SP,MIN(0.9_SP,r))
       hnew = H*r
     END IF
     H = hnew
@@ -553,7 +553,7 @@ SUBROUTINE SDASTP(X,Y,Yprime,Neq,RES,JAC,H,Wt,Jstart,Idid,Phi,&
   X = xold
   IF( kp1>=nsp1 ) THEN
     DO j = nsp1, kp1
-      temp1 = 1.0E0/Beta(j)
+      temp1 = 1._SP/Beta(j)
       DO i = 1, Neq
         Phi(i,j) = temp1*Phi(i,j)
       END DO
@@ -581,8 +581,8 @@ SUBROUTINE SDASTP(X,Y,Yprime,Neq,RES,JAC,H,Wt,Jstart,Idid,Phi,&
       !     OF THE SOLUTION.
       K = knew
       temp2 = K + 1
-      r = 0.90E0*(2.0E0*est+0.0001E0)**(-1.0E0/temp2)
-      r = MAX(0.25E0,MIN(0.9E0,r))
+      r = 0.90_SP*(2._SP*est+0.0001_SP)**(-1._SP/temp2)
+      r = MAX(0.25_SP,MIN(0.9_SP,r))
       H = H*r
       IF( ABS(H)>=Hmin ) GOTO 100
       Idid = -6
@@ -595,12 +595,12 @@ SUBROUTINE SDASTP(X,Y,Yprime,Neq,RES,JAC,H,Wt,Jstart,Idid,Phi,&
       !     ON THIRD AND SUBSEQUENT ERROR TEST FAILURES, SET THE ORDER TO
       !     ONE AND REDUCE THE STEPSIZE BY A FACTOR OF FOUR.
       K = 1
-      H = 0.25E0*H
+      H = 0.25_SP*H
       IF( ABS(H)>=Hmin ) GOTO 100
       Idid = -6
     ELSE
       K = knew
-      H = 0.25E0*H
+      H = 0.25_SP*H
       IF( ABS(H)>=Hmin ) GOTO 100
       Idid = -6
     END IF
@@ -618,7 +618,7 @@ SUBROUTINE SDASTP(X,Y,Yprime,Neq,RES,JAC,H,Wt,Jstart,Idid,Phi,&
       !     THIS HAPPENS THREE TIMES IN A ROW ON
       !     THE SAME STEP, RETURN WITH AN ERROR FLAG
       nsf = nsf + 1
-      r = 0.25E0
+      r = 0.25_SP
       H = H*r
       IF( nsf<3 .AND. ABS(H)>=Hmin ) GOTO 100
       Idid = -8
@@ -630,7 +630,7 @@ SUBROUTINE SDASTP(X,Y,Yprime,Neq,RES,JAC,H,Wt,Jstart,Idid,Phi,&
       !     TOO MANY FAILURES HAVE OCCURRED.
     ELSEIF( ires>-2 ) THEN
       ncf = ncf + 1
-      r = 0.25E0
+      r = 0.25_SP
       H = H*r
       IF( ncf<10 .AND. ABS(H)>=Hmin ) GOTO 100
       Idid = -7

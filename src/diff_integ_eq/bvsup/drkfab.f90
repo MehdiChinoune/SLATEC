@@ -225,7 +225,7 @@ CONTAINS
     REAL(DP) :: Y(:), Yp(:)
     REAL(DP) :: g(SIZE(Y))
 
-    g = 0.
+    g = 0._SP
     CALL DBVDER(X,Y,Yp,G)
   END SUBROUTINE DBVDER_2
 END SUBROUTINE DRKFAB

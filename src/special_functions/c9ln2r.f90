@@ -61,21 +61,21 @@ COMPLEX(SP) FUNCTION C9LN2R(Z)
   cabsz = ABS(Z)
   IF( cabsz>0.8125 ) THEN
     !
-    C9LN2R = (LOG(1.0+Z)-Z*(1.0-0.5*Z))/Z**3
+    C9LN2R = (LOG(1._SP+Z)-Z*(1._SP-0.5_SP*Z))/Z**3
     RETURN
   END IF
   !
-  C9LN2R = CMPLX(1.0/3.0,0.0)
-  IF( cabsz==0.0 ) RETURN
+  C9LN2R = CMPLX(1._SP/3._SP,0._SP,SP)
+  IF( cabsz==0._SP ) RETURN
   !
   xz = x/cabsz
   yz = y/cabsz
   !
-  arg = 2.0*xz + cabsz
-  rpart = 0.5*arg**3*R9LN2R(cabsz*arg) - xz - 0.25*cabsz
-  y1x = yz/(1.0+x)
+  arg = 2._SP*xz + cabsz
+  rpart = 0.5_SP*arg**3*R9LN2R(cabsz*arg) - xz - 0.25_SP*cabsz
+  y1x = yz/(1._SP+x)
   aipart = y1x*(xz**2+y1x**2*R9ATN1(cabsz*y1x))
   !
-  C9LN2R = CMPLX(xz,-yz)**3*CMPLX(rpart,aipart)
+  C9LN2R = CMPLX(xz,-yz,SP)**3*CMPLX(rpart,aipart,SP)
   RETURN
 END FUNCTION C9LN2R

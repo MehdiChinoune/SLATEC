@@ -134,10 +134,10 @@ SUBROUTINE DQC25F(F,A,B,Omega,Integr,Nrmom,Maxp1,Ksave,Result,Abserr,&
   !           THE VECTOR X CONTAINS THE VALUES COS(K*PI/24)
   !           K = 1, ...,11, TO BE USED FOR THE CHEBYSHEV EXPANSION OF F
   !
-  REAL(DP), PARAMETER :: x(11) = [ 0.9914448613738104D+00, 0.9659258262890683D+00, &
-    0.9238795325112868D+00, 0.8660254037844386D+00, 0.7933533402912352D+00, &
-    0.7071067811865475D+00, 0.6087614290087206D+00, 0.5000000000000000D+00, &
-    0.3826834323650898D+00, 0.2588190451025208D+00, 0.1305261922200516D+00 ]
+  REAL(DP), PARAMETER :: x(11) = [ 0.9914448613738104E+00_DP, 0.9659258262890683E+00_DP, &
+    0.9238795325112868E+00_DP, 0.8660254037844386E+00_DP, 0.7933533402912352E+00_DP, &
+    0.7071067811865475E+00_DP, 0.6087614290087206E+00_DP, 0.5000000000000000E+00_DP, &
+    0.3826834323650898E+00_DP, 0.2588190451025208E+00_DP, 0.1305261922200516E+00_DP ]
   !
   !           LIST OF MAJOR VARIABLES
   !           -----------------------
@@ -170,15 +170,15 @@ SUBROUTINE DQC25F(F,A,B,Omega,Integr,Nrmom,Maxp1,Ksave,Result,Abserr,&
   !* FIRST EXECUTABLE STATEMENT  DQC25F
   oflow = D1MACH(2)
   !
-  centr = 0.5D+00*(B+A)
-  hlgth = 0.5D+00*(B-A)
+  centr = 0.5_DP*(B+A)
+  hlgth = 0.5_DP*(B-A)
   parint = Omega*hlgth
   !
   !           COMPUTE THE INTEGRAL USING THE 15-POINT GAUSS-KRONROD
   !           FORMULA IF THE VALUE OF THE PARAMETER IN THE INTEGRAND
   !           IS SMALL.
   !
-  IF( ABS(parint)>0.2D+01 ) THEN
+  IF( ABS(parint)>2._DP ) THEN
     !
     !           COMPUTE THE INTEGRAL USING THE GENERALIZED CLENSHAW-
     !           CURTIS METHOD.
@@ -197,30 +197,30 @@ SUBROUTINE DQC25F(F,A,B,Omega,Integr,Nrmom,Maxp1,Ksave,Result,Abserr,&
       !
       m = Momcom + 1
       par2 = parint*parint
-      par22 = par2 + 0.2D+01
+      par22 = par2 + 2._DP
       sinpar = SIN(parint)
       cospar = COS(parint)
       !
       !           COMPUTE THE CHEBYSHEV MOMENTS WITH RESPECT TO COSINE.
       !
-      v(1) = 0.2D+01*sinpar/parint
-      v(2) = (0.8D+01*cospar+(par2+par2-0.8D+01)*sinpar/parint)/par2
-      v(3) = (0.32D+02*(par2-0.12D+02)*cospar+(0.2D+01*((par2-0.80D+02)*par2&
-        +0.192D+03)*sinpar)/parint)/(par2*par2)
-      ac = 0.8D+01*cospar
-      as = 0.24D+02*parint*sinpar
+      v(1) = 2._DP*sinpar/parint
+      v(2) = (8._DP*cospar+(par2+par2-8._DP)*sinpar/parint)/par2
+      v(3) = (0.32E+02_DP*(par2-0.12E+02_DP)*cospar+(2._DP*((par2-0.80E+02_DP)*par2&
+        +0.192E+03_DP)*sinpar)/parint)/(par2*par2)
+      ac = 8._DP*cospar
+      as = 0.24E+02_DP*parint*sinpar
       IF( ABS(parint)>0.24D+02 ) THEN
         !
         !           COMPUTE THE CHEBYSHEV MOMENTS BY MEANS OF FORWARD
         !           RECURSION.
         !
-        an = 0.4D+01
+        an = 4._DP
         DO i = 4, 13
           an2 = an*an
-          v(i) = ((an2-0.4D+01)*(0.2D+01*(par22-an2-an2)*v(i-1)-ac)&
-            +as-par2*(an+0.1D+01)*(an+0.2D+01)*v(i-2))&
-            /(par2*(an-0.1D+01)*(an-0.2D+01))
-          an = an + 0.2D+01
+          v(i) = ((an2-4._DP)*(2._DP*(par22-an2-an2)*v(i-1)-ac)&
+            +as-par2*(an+1._DP)*(an+2._DP)*v(i-2))&
+            /(par2*(an-1._DP)*(an-2._DP))
+          an = an + 2._DP
         END DO
       ELSE
         !
@@ -230,24 +230,24 @@ SUBROUTINE DQC25F(F,A,B,Omega,Integr,Nrmom,Maxp1,Ksave,Result,Abserr,&
         !
         noequ = 25
         noeq1 = noequ - 1
-        an = 0.6D+01
+        an = 6._DP
         DO k = 1, noeq1
           an2 = an*an
-          d(k) = -0.2D+01*(an2-0.4D+01)*(par22-an2-an2)
-          d2(k) = (an-0.1D+01)*(an-0.2D+01)*par2
-          d1(k+1) = (an+0.3D+01)*(an+0.4D+01)*par2
-          v(k+3) = as - (an2-0.4D+01)*ac
-          an = an + 0.2D+01
+          d(k) = -2._DP*(an2-4._DP)*(par22-an2-an2)
+          d2(k) = (an-1._DP)*(an-2._DP)*par2
+          d1(k+1) = (an+3._DP)*(an+4._DP)*par2
+          v(k+3) = as - (an2-4._DP)*ac
+          an = an + 2._DP
         END DO
         an2 = an*an
-        d(noequ) = -0.2D+01*(an2-0.4D+01)*(par22-an2-an2)
-        v(noequ+3) = as - (an2-0.4D+01)*ac
-        v(4) = v(4) - 0.56D+02*par2*v(3)
+        d(noequ) = -2._DP*(an2-4._DP)*(par22-an2-an2)
+        v(noequ+3) = as - (an2-4._DP)*ac
+        v(4) = v(4) - 0.56E+02_DP*par2*v(3)
         ass = parint*sinpar
-        asap = (((((0.210D+03*par2-0.1D+01)*cospar-(0.105D+03*par2-0.63D+02)&
-          *ass)/an2-(0.1D+01-0.15D+02*par2)*cospar+0.15D+02*ass)&
-          /an2-cospar+0.3D+01*ass)/an2-cospar)/an2
-        v(noequ+3) = v(noequ+3) - 0.2D+01*asap*par2*(an-0.1D+01)*(an-0.2D+01)
+        asap = (((((0.210E+03_DP*par2-1._DP)*cospar-(0.105E+03_DP*par2-0.63E+02_DP)&
+          *ass)/an2-(1._DP-0.15E+02_DP*par2)*cospar+0.15E+02_DP*ass)&
+          /an2-cospar+3._DP*ass)/an2-cospar)/an2
+        v(noequ+3) = v(noequ+3) - 2._DP*asap*par2*(an-1._DP)*(an-2._DP)
         !
         !           SOLVE THE TRIDIAGONAL SYSTEM BY MEANS OF GAUSSIAN
         !           ELIMINATION WITH PARTIAL PIVOTING.
@@ -264,22 +264,22 @@ SUBROUTINE DQC25F(F,A,B,Omega,Integr,Nrmom,Maxp1,Ksave,Result,Abserr,&
       !
       !           COMPUTE THE CHEBYSHEV MOMENTS WITH RESPECT TO SINE.
       !
-      v(1) = 0.2D+01*(sinpar-parint*cospar)/par2
-      v(2) = (0.18D+02-0.48D+02/par2)*sinpar/par2 + (-0.2D+01+0.48D+02/par2)&
+      v(1) = 2._DP*(sinpar-parint*cospar)/par2
+      v(2) = (18._DP-48._DP/par2)*sinpar/par2 + (-2._DP+48._DP/par2)&
         *cospar/parint
-      ac = -0.24D+02*parint*cospar
-      as = -0.8D+01*sinpar
+      ac = -0.24E+02_DP*parint*cospar
+      as = -8._DP*sinpar
       IF( ABS(parint)>0.24D+02 ) THEN
         !
         !           COMPUTE THE CHEBYSHEV MOMENTS BY MEANS OF FORWARD RECURSION.
         !
-        an = 0.3D+01
+        an = 3._DP
         DO i = 3, 12
           an2 = an*an
-          v(i) = ((an2-0.4D+01)*(0.2D+01*(par22-an2-an2)*v(i-1)+as)&
-            +ac-par2*(an+0.1D+01)*(an+0.2D+01)*v(i-2))&
-            /(par2*(an-0.1D+01)*(an-0.2D+01))
-          an = an + 0.2D+01
+          v(i) = ((an2-4._DP)*(2._DP*(par22-an2-an2)*v(i-1)+as)&
+            +ac-par2*(an+1._DP)*(an+2._DP)*v(i-2))&
+            /(par2*(an-1._DP)*(an-2._DP))
+          an = an + 2._DP
         END DO
       ELSE
         !
@@ -287,24 +287,24 @@ SUBROUTINE DQC25F(F,A,B,Omega,Integr,Nrmom,Maxp1,Ksave,Result,Abserr,&
         !           VALUE PROBLEM WITH 1 INITIAL VALUE (V(2)) AND 1 END VALUE
         !           (COMPUTED USING AN ASYMPTOTIC FORMULA).
         !
-        an = 0.5D+01
+        an = 5._DP
         DO k = 1, noeq1
           an2 = an*an
-          d(k) = -0.2D+01*(an2-0.4D+01)*(par22-an2-an2)
-          d2(k) = (an-0.1D+01)*(an-0.2D+01)*par2
-          d1(k+1) = (an+0.3D+01)*(an+0.4D+01)*par2
-          v(k+2) = ac + (an2-0.4D+01)*as
-          an = an + 0.2D+01
+          d(k) = -2._DP*(an2-4._DP)*(par22-an2-an2)
+          d2(k) = (an-1._DP)*(an-2._DP)*par2
+          d1(k+1) = (an+3._DP)*(an+4._DP)*par2
+          v(k+2) = ac + (an2-4._DP)*as
+          an = an + 2._DP
         END DO
         an2 = an*an
-        d(noequ) = -0.2D+01*(an2-0.4D+01)*(par22-an2-an2)
-        v(noequ+2) = ac + (an2-0.4D+01)*as
-        v(3) = v(3) - 0.42D+02*par2*v(2)
+        d(noequ) = -2._DP*(an2-4._DP)*(par22-an2-an2)
+        v(noequ+2) = ac + (an2-4._DP)*as
+        v(3) = v(3) - 0.42E+02_DP*par2*v(2)
         ass = parint*cospar
-        asap = (((((0.105D+03*par2-0.63D+02)*ass+(0.210D+03*par2-0.1D+01)*&
-          sinpar)/an2+(0.15D+02*par2-0.1D+01)*sinpar-0.15D+02*ass)&
-          /an2-0.3D+01*ass-sinpar)/an2-sinpar)/an2
-        v(noequ+2) = v(noequ+2) - 0.2D+01*asap*par2*(an-0.1D+01)*(an-0.2D+01)
+        asap = (((((0.105E+03_DP*par2-0.63E+02_DP)*ass+(0.210E+03_DP*par2-1._DP)*&
+          sinpar)/an2+(0.15E+02_DP*par2-1._DP)*sinpar-0.15E+02_DP*ass)&
+          /an2-3._DP*ass-sinpar)/an2-sinpar)/an2
+        v(noequ+2) = v(noequ+2) - 2._DP*asap*par2*(an-1._DP)*(an-2._DP)
         !
         !           SOLVE THE TRIDIAGONAL SYSTEM BY MEANS OF GAUSSIAN
         !           ELIMINATION WITH PARTIAL PIVOTING.
@@ -325,9 +325,9 @@ SUBROUTINE DQC25F(F,A,B,Omega,Integr,Nrmom,Maxp1,Ksave,Result,Abserr,&
     !           COMPUTE THE COEFFICIENTS OF THE CHEBYSHEV EXPANSIONS
     !           OF DEGREES 12 AND 24 OF THE FUNCTION F.
     !
-    fval(1) = 0.5D+00*F(centr+hlgth)
+    fval(1) = 0.5_DP*F(centr+hlgth)
     fval(13) = F(centr)
-    fval(25) = 0.5D+00*F(centr-hlgth)
+    fval(25) = 0.5_DP*F(centr-hlgth)
     DO i = 2, 12
       isym = 26 - i
       fval(i) = F(hlgth*x(i-1)+centr)
@@ -338,7 +338,7 @@ SUBROUTINE DQC25F(F,A,B,Omega,Integr,Nrmom,Maxp1,Ksave,Result,Abserr,&
     !           COMPUTE THE INTEGRAL AND ERROR ESTIMATES.
     !
     resc12 = cheb12(13)*Chebmo(m,13)
-    ress12 = 0.0D+00
+    ress12 = 0._DP
     k = 11
     DO j = 1, 6
       resc12 = resc12 + cheb12(k)*Chebmo(m,k)
@@ -346,7 +346,7 @@ SUBROUTINE DQC25F(F,A,B,Omega,Integr,Nrmom,Maxp1,Ksave,Result,Abserr,&
       k = k - 2
     END DO
     resc24 = cheb24(25)*Chebmo(m,25)
-    ress24 = 0.0D+00
+    ress24 = 0._DP
     Resabs = ABS(cheb24(25))
     k = 23
     DO j = 1, 12

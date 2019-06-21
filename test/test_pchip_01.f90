@@ -126,11 +126,11 @@ CONTAINS
     !
     !  INITIALIZE.
     !
-    REAL, PARAMETER :: zero = 0.E0, one = 1.E0, four = 4.E0, ten = 10.E0
-    REAL, PARAMETER :: small = 1.0E-10
+    REAL(SP), PARAMETER :: zero = 0._SP, one = 1._SP, four = 4._SP, ten = 10._SP
+    REAL(SP), PARAMETER :: small = 1.0E-10_SP
     INTEGER, PARAMETER :: nintt = 3
-    REAL, PARAMETER :: left(3) = [ -1.5E0, 2.0E-10, 1.0E0 ]
-    REAL, PARAMETER :: right(3) = [ 2.5E0, 3.0E-10, 1.0E+8 ]
+    REAL(SP), PARAMETER :: left(3) = [ -1.5_SP, 2.0E-10_SP, 1.0_SP ]
+    REAL(SP), PARAMETER :: right(3) = [ 2.5_SP, 3.0E-10_SP, 1.0E8_SP ]
     !
     !* FIRST EXECUTABLE STATEMENT  EVCHCK
     machep = R1MACH(4)
@@ -385,7 +385,7 @@ CONTAINS
     !  DEFINE RELATIVE ERROR WITH FLOOR.
     !
     REAL(SP) FUNCTION RERR(err,value,floorr)
-      REAL, INTENT(IN) :: err, value, floorr
+      REAL(SP),INTENT(IN) :: err, value, floorr
       RERR = err/MAX(ABS(value),floorr)
     END FUNCTION RERR
   END SUBROUTINE EVCHCK
@@ -470,19 +470,19 @@ CONTAINS
     !  FIRST, TEST CHFEV AND CHFDV.
     !
     IF( Kprint>=3 ) WRITE (Lout,99005) -1
-    CALL CHFEV(0.E0,1.E0,3.E0,7.E0,3.E0,6.E0,0,dum,dum,next,ierr)
+    CALL CHFEV(0._SP,1._SP,3._SP,7._SP,3._SP,6._SP,0,dum,dum,next,ierr)
     IF( .NOT. COMP(ierr,-1,Lout,Kprint) ) nerr = nerr + 1
     !
     IF( Kprint>=3 ) WRITE (Lout,99005) -2
-    CALL CHFEV(1.E0,1.E0,3.E0,7.E0,3.E0,6.E0,1,dum,dum,next,ierr)
+    CALL CHFEV(1._SP,1._SP,3._SP,7._SP,3._SP,6._SP,1,dum,dum,next,ierr)
     IF( .NOT. COMP(ierr,-2,Lout,Kprint) ) nerr = nerr + 1
     !
     IF( Kprint>=3 ) WRITE (Lout,99005) -1
-    CALL CHFDV(0.E0,1.E0,3.E0,7.E0,3.E0,6.E0,0,dum,dum,dum,next,ierr)
+    CALL CHFDV(0._SP,1._SP,3._SP,7._SP,3._SP,6._SP,0,dum,dum,dum,next,ierr)
     IF( .NOT. COMP(ierr,-1,Lout,Kprint) ) nerr = nerr + 1
     !
     IF( Kprint>=3 ) WRITE (Lout,99005) -2
-    CALL CHFDV(1.E0,1.E0,3.E0,7.E0,3.E0,6.E0,1,dum,dum,dum,next,ierr)
+    CALL CHFDV(1._SP,1._SP,3._SP,7._SP,3._SP,6._SP,1,dum,dum,dum,next,ierr)
     IF( .NOT. COMP(ierr,-2,Lout,Kprint) ) nerr = nerr + 1
     !
     !  SET UP PCH DEFINITION.
@@ -490,7 +490,7 @@ CONTAINS
     DO i = 1, N
       x(i) = i
       f(i) = i + 2
-      d(i) = 1.E0
+      d(i) = 1._SP
     END DO
     !
     !  SWAP POINTS 4 AND 7, SO X-ARRAY IS OUT OF ORDER.
@@ -632,13 +632,13 @@ CONTAINS
     !
     INTEGER, PARAMETER :: nmax = 10, nx = 4, ny = 6
     INTEGER, PARAMETER :: ne = 51
-    REAL, PARAMETER :: zero = 0.E0
+    REAL(SP), PARAMETER :: zero = 0._SP
     !
     !  INITIALIZE.
     !
     !* FIRST EXECUTABLE STATEMENT  EVPCCK
     machep = R1MACH(4)
-    tol = 10.E0*machep
+    tol = 10._SP*machep
     !
     Fail = .FALSE.
     !
@@ -647,11 +647,11 @@ CONTAINS
     !     Y = -0.75(0.5 )1.75 .
     !
     DO i = 1, nx - 1
-      X(i) = 0.25E0*i
+      X(i) = 0.25_SP*i
     END DO
-    X(nx) = 1.E0
+    X(nx) = 1._SP
     DO j = 1, ny
-      Y(j) = 0.5E0*j - 1.25E0
+      Y(j) = 0.5_SP*j - 1.25_SP
       DO i = 1, nx
         F(i,j) = FCN(X(i),Y(j))
         Fx(i,j) = DFDX(X(i),Y(j))
@@ -663,13 +663,13 @@ CONTAINS
     !     XE =  0.(0.02)1. ;
     !     YE = -2.(0.08)2. .
     !
-    dx = 1.E0/(ne-1)
+    dx = 1._SP/(ne-1)
     DO k = 1, ne - 1
       Xe(k) = dx*(k-1)
-      Ye(k) = 4.E0*Xe(k) - 2.E0
+      Ye(k) = 4._SP*Xe(k) - 2._SP
     END DO
-    Xe(ne) = 1.E0
-    Ye(ne) = 2.E0
+    Xe(ne) = 1._SP
+    Ye(ne) = 2._SP
     !
     IF( Kprint>=3 ) WRITE (Lout,99001)
     !
@@ -881,16 +881,16 @@ CONTAINS
     !  DEFINE TEST FUNCTION AND DERIVATIVES.
     !
     REAL(SP) FUNCTION FCN(ax,ay)
-      REAL ax, ay
-      FCN = ax*(ay*ay)*(ax*ax+1.E0)
+      REAL(SP) :: ax, ay
+      FCN = ax*(ay*ay)*(ax*ax+1._SP)
     END FUNCTION FCN
     REAL(SP) FUNCTION DFDX(ax,ay)
-      REAL ax, ay
-      DFDX = (ay*ay)*(3.E0*ax*ax+1.E0)
+      REAL(SP) :: ax, ay
+      DFDX = (ay*ay)*(3._SP*ax*ax+1._SP)
     END FUNCTION DFDX
     REAL(SP) FUNCTION DFDY(ax,ay)
-      REAL ax, ay
-      DFDY = 2.E0*ax*ay*(ax*ax+1.E0)
+      REAL(SP) :: ax, ay
+      DFDY = 2._SP*ax*ay*(ax*ax+1._SP)
     END FUNCTION DFDY
   END SUBROUTINE EVPCCK
   !** PCHQK1
@@ -1098,14 +1098,14 @@ CONTAINS
     !
     !  INITIALIZE.
     !
-    REAL, PARAMETER :: thrqtr = 0.75E0, one = 1.E0, two = 2.E0, three = 3.E0
+    REAL(SP), PARAMETER :: thrqtr = 0.75_SP, one = 1._SP, two = 2._SP, three = 3._SP
     INTEGER, PARAMETER :: n = 7
-    REAL, PARAMETER :: x(7) = [ -4.E0, -2.E0, -0.9E0, 0.E0, 0.9E0, 2.E0, 4.E0 ]
+    REAL(SP), PARAMETER :: x(7) = [ -4._SP, -2._SP, -0.9_SP, 0._SP, 0.9_SP, 2._SP, 4._SP ]
     INTEGER, PARAMETER :: npairs = 17
-    REAL, PARAMETER :: a(17) =[ -3.0E0, 3.0E0, -0.5E0, -0.5E0, -0.5E0, -4.0E0, &
-      -4.0E0, 3.0E0, -5.0E0, -5.0E0, -6.0E0, 6.0E0, -1.5E0, -1.5E0, -3.0E0, 3.0E0, 0.5E0 ]
-    REAL, PARAMETER :: b(17) = [ 3.0E0, -3.0E0, 1.0E0, 2.0E0, 5.0E0, -0.5E0, &
-      4.0E0, 5.0E0, -3.0E0, 5.0E0, -5.0E0, 5.0E0, -0.5E0, -1.0E0, -2.5E0, 3.5E0, 0.5E0 ]
+    REAL(SP), PARAMETER :: a(17) =[ -3._SP, 3._SP, -0.5_SP, -0.5_SP, -0.5_SP, -4._SP, &
+      -4._SP, 3._SP, -5._SP, -5._SP, -6._SP, 6._SP, -1.5_SP, -1.5_SP, -3._SP, 3._SP, 0.5_SP ]
+    REAL(SP), PARAMETER :: b(17) = [ 3._SP, -3._SP, 1._SP, 2._SP, 5._SP, -0.5_SP, &
+      4._SP, 5._SP, -3._SP, 5._SP, -5._SP, 5._SP, -0.5_SP, -1._SP, -2.5_SP, 3.5_SP, 0.5_SP ]
     INTEGER, PARAMETER :: ierexp(17) = [ 0, 0, 0, 0, 2, 0, 0, 2, 1, 3, 3, 3, 0, &
       0, 0, 0, 0 ]
     !
@@ -1113,7 +1113,7 @@ CONTAINS
     !
     !* FIRST EXECUTABLE STATEMENT  PCHQK2
     machep = R1MACH(4)
-    tol = 100.E0*machep
+    tol = 100._SP*machep
     !
     !  SET UP PCH FUNCTION DEFINITION.
     !
@@ -1204,15 +1204,15 @@ CONTAINS
     !  DEFINE TEST FUNCTIONS.
     !
     REAL(SP) FUNCTION FCN(ax)
-      REAL, INTENT(IN) :: ax
+      REAL(SP),INTENT(IN) :: ax
       FCN = three*ax*ax*(ax-two)
     END FUNCTION FCN
     REAL(SP) FUNCTION DERIV(ax)
-      REAL, INTENT(IN) :: ax
+      REAL(SP),INTENT(IN) :: ax
       DERIV = three*ax*(two*(ax-two)+ax)
     END FUNCTION DERIV
     REAL(SP) FUNCTION ANTDER(ax)
-      REAL, INTENT(IN) :: ax
+      REAL(SP),INTENT(IN) :: ax
       ANTDER = ax**3*(thrqtr*ax-two)
     END FUNCTION ANTDER
   END SUBROUTINE PCHQK2
@@ -1307,23 +1307,24 @@ CONTAINS
     INTEGER :: i, ierr, ifail, nbad, nbadz
     INTEGER, PARAMETER :: N = 9, NWK = 2*N
     REAL(SP) :: d(N), dc(N), err, f(N), tol, told, tolz, vc(2), wk(NWK)
-    REAL, PARAMETER :: ZERO = 0.0E0, MONE = -1.0E0
+    REAL(SP), PARAMETER :: ZERO = 0._SP, MONE = -1._SP
     CHARACTER(6) :: result
     !
     !  Initialize.
     !
     !       Data.
     INTEGER, PARAMETER :: ic(2) = [ 0, 0 ]
-    REAL, PARAMETER :: x(N) = [ -2.2E0, -1.2E0, -1.0E0, -0.5E0, -0.01E0, 0.5E0, &
-      1.0E0, 2.0E0, 2.2E0 ]
+    REAL(SP), PARAMETER :: x(N) = [ -2.2_SP, -1.2_SP, -1._SP, -0.5_SP, -0.01_SP, &
+      0.5_SP, 1._SP, 2._SP, 2.2_SP ]
     !
     !       Results generated on Cray X/MP (9 sign. figs.)
-    REAL, PARAMETER :: dm(N) = [ 0., 3.80027352E-01, 7.17253009E-01, 5.82014161E-01, &
-      0., -5.68208031E-01, -5.13501618E-01, -7.77910977E-02, -2.45611117E-03 ]
-    REAL, PARAMETER :: dc5 = 1.76950158E-02, dc6 = -5.69579814E-01
-    REAL, PARAMETER :: ds(N) = [ -5.16830792E-02, 5.71455855E-01, 7.40530225E-01, &
-      7.63864934E-01, 1.92614386E-02, -7.65324380E-01, -7.28209035E-01, &
-      -7.98445427E-02, -2.85983446E-02 ]
+    REAL(SP), PARAMETER :: dm(N) = [ 0._SP, 3.80027352E-01_SP, 7.17253009E-01_SP, &
+      5.82014161E-01_SP, 0._SP, -5.68208031E-01_SP, -5.13501618E-01_SP, &
+      -7.77910977E-02_SP, -2.45611117E-03_SP ]
+    REAL(SP), PARAMETER :: dc5 = 1.76950158E-02_SP, dc6 = -5.69579814E-01_SP
+    REAL(SP), PARAMETER :: ds(N) = [ -5.16830792E-02_SP, 5.71455855E-01_SP, &
+      7.40530225E-01_SP, 7.63864934E-01_SP, 1.92614386E-02_SP, -7.65324380E-01_SP, &
+      -7.28209035E-01_SP, -7.98445427E-02_SP, -2.85983446E-02_SP ]
     !
     !* FIRST EXECUTABLE STATEMENT  PCHQK3
     ifail = 0
@@ -1645,28 +1646,28 @@ CONTAINS
     !       Define X, F, D.
     DO i = 1, MAXN
       x(i) = i
-      d(i) = 0.E0
+      d(i) = 0._SP
     END DO
     DO i = 2, MAXN, 3
-      d(i) = 2.E0
+      d(i) = 2._SP
     END DO
     DO i = 1, 3
       f(i) = x(i)
-      f(i+3) = f(i) + 1.E0
-      f(i+6) = f(i+3) + 1.E0
-      f(i+9) = f(i+6) + 1.E0
-      f(i+12) = f(i+9) + 1.E0
+      f(i+3) = f(i) + 1._SP
+      f(i+6) = f(i+3) + 1._SP
+      f(i+9) = f(i+6) + 1._SP
+      f(i+12) = f(i+9) + 1._SP
     END DO
-    f(16) = 6.E0
+    f(16) = 6._SP
     !       Define FB, DB.
-    fb(1) = 0.E0
-    fb(2) = 2.E0
-    fb(3) = 3.E0
-    fb(4) = 5.E0
-    db(1) = 1.E0
-    db(2) = 3.E0
-    db(3) = 3.E0
-    db(4) = 0.E0
+    fb(1) = 0._SP
+    fb(2) = 2._SP
+    fb(3) = 3._SP
+    fb(4) = 5._SP
+    db(1) = 1._SP
+    db(2) = 3._SP
+    db(3) = 3._SP
+    db(4) = 0._SP
     DO i = 1, 3
       fb(NB-i+1) = fb(i)
       db(NB-i+1) = -db(i)
@@ -1748,7 +1749,7 @@ CONTAINS
       END DO
     END IF
     !
-    IF( f(1)<0. ) THEN
+    IF( f(1)<0._SP ) THEN
       !
       !  PRINT SUMMARY AND TERMINATE.
       !
@@ -1868,17 +1869,17 @@ CONTAINS
     INTEGER, PARAMETER :: N = 9
     REAL(SP) :: bcoef(2*N), dcalc, derr, dermax, fcalc, ferr, &
       fermax, t(2*N+4), terr, termax, tol, tolz, tsave(2*N+4), work(16*N)
-    REAL, PARAMETER :: ZERO = 0.0E0
+    REAL(SP), PARAMETER :: ZERO = 0._SP
     LOGICAL :: fail
     !
     !  Define test data.
     !
-    REAL, PARAMETER :: x(N) = [ -2.2E0, -1.2E0, -1.0E0, -0.5E0, -0.01E0, 0.5E0, &
-      1.0E0, 2.0E0, 2.2E0 ]
-    REAL, PARAMETER :: f(N) = [ 0.0079E0, 0.2369E0, 0.3679E0, 0.7788E0, &
-      0.9999E0, 0.7788E0, 0.3679E0, 0.1083E0, 0.0079E0 ]
-    REAL, PARAMETER :: d(N) = [ 0.0000E0, 0.3800E0, 0.7173E0, 0.5820E0, 0.0177E0, &
-      -0.5696E0, -0.5135E0, -0.0778E0, -0.0025E0 ]
+    REAL(SP), PARAMETER :: x(N) = [ -2.2_SP, -1.2_SP, -1._SP, -0.5_SP, -0.01_SP, 0.5_SP, &
+      1._SP, 2._SP, 2.2_SP ]
+    REAL(SP), PARAMETER :: f(N) = [ 0.0079_SP, 0.2369_SP, 0.3679_SP, 0.7788_SP, &
+      0.9999_SP, 0.7788_SP, 0.3679_SP, 0.1083_SP, 0.0079_SP ]
+    REAL(SP), PARAMETER :: d(N) = [ 0.0000_SP, 0.3800_SP, 0.7173_SP, 0.5820_SP, 0.0177_SP, &
+      -0.5696_SP, -0.5135_SP, -0.0778_SP, -0.0025_SP ]
     !
     !  Initialize.
     !
@@ -1993,8 +1994,8 @@ CONTAINS
     !  Define relative error function.
     !
     REAL(SP) FUNCTION RELERR(err,ans)
-      REAL, INTENT(IN) :: ans, err
-      RELERR = ABS(err)/MAX(1.0E-5,ABS(ans))
+      REAL(SP),INTENT(IN) :: ans, err
+      RELERR = ABS(err)/MAX(1.0E-5_SP,ABS(ans))
     END FUNCTION RELERR
   END SUBROUTINE PCHQK5
 END MODULE TEST32_MOD

@@ -147,7 +147,7 @@ SUBROUTINE BINT4(X,Y,Ndata,Ibcl,Ibcr,Fbcl,Fbcr,Kntopt,T,Bcoef,N,K,W)
               T(np+i) = txn - X(Ndata-i)
             END DO
           ELSE
-            xl = (X(Ndata)-X(1))/3.0E0
+            xl = (X(Ndata)-X(1))/3._SP
             DO i = 1, 3
               T(4-i) = T(5-i) - xl
               T(np+i) = T(np+i-1) + xl
@@ -174,7 +174,7 @@ SUBROUTINE BINT4(X,Y,Ndata,Ibcl,Ibcr,Fbcl,Fbcr,Kntopt,T,Bcoef,N,K,W)
       !
       DO i = 1, 5
         DO j = 1, N
-          W(i,j) = 0.0E0
+          W(i,j) = 0._SP
         END DO
       END DO
       !     SET UP LEFT INTERPOLATION POINT AND LEFT BOUNDARY CONDITION FOR

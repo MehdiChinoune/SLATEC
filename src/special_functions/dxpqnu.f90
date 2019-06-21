@@ -47,15 +47,15 @@ SUBROUTINE DXPQNU(Nu1,Nu2,Mu,Theta,Id,Pqa,Ipqa,Ierror)
   ipsix = 5*ipsik
   ipq = 0
   !        FIND NU IN INTERVAL [-.5,.5) IF ID=2  ( CALCULATION OF Q )
-  nu = MOD(Nu1,1.D0)
-  IF( nu>=.5D0 ) nu = nu - 1.D0
+  nu = MOD(Nu1,1._DP)
+  IF( nu>=.5_DP ) nu = nu - 1._DP
   !        FIND NU IN INTERVAL (-1.5,-.5] IF ID=1,3, OR 4  ( CALC. OF P )
-  IF( Id/=2 .AND. nu>-.5D0 ) nu = nu - 1.D0
+  IF( Id/=2 .AND. nu>-.5_DP ) nu = nu - 1._DP
   !        CALCULATE MU FACTORIAL
   k = Mu
   dmu = Mu
   IF( Mu>0 ) THEN
-    factmu = 1.D0
+    factmu = 1._DP
     if = 0
     DO i = 1, k
       factmu = factmu*i
@@ -63,7 +63,7 @@ SUBROUTINE DXPQNU(Nu1,Nu2,Mu,Theta,Id,Pqa,Ipqa,Ierror)
     END DO
     IF( Ierror/=0 ) RETURN
   END IF
-  IF( k==0 ) factmu = 1.D0
+  IF( k==0 ) factmu = 1._DP
   IF( k==0 ) if = 0
   !
   !        X=COS(THETA)
@@ -71,13 +71,13 @@ SUBROUTINE DXPQNU(Nu1,Nu2,Mu,Theta,Id,Pqa,Ipqa,Ierror)
   !        R=TAN(THETA/2)=SQRT((1-X)/(1+X)
   !
   x = COS(Theta)
-  y = SIN(Theta/2.D0)**2
-  r = TAN(Theta/2.D0)
+  y = SIN(Theta/2._DP)**2
+  r = TAN(Theta/2._DP)
   !
   !        USE ASCENDING SERIES TO CALCULATE TWO VALUES OF P OR Q
   !        FOR USE AS STARTING VALUES IN RECURRENCE RELATION.
   !
-  pq2 = 0.0D0
+  pq2 = 0._DP
   DO j = 1, 2
     ipq1 = 0
     IF( Id==2 ) THEN
@@ -85,8 +85,8 @@ SUBROUTINE DXPQNU(Nu1,Nu2,Mu,Theta,Id,Pqa,Ipqa,Ierror)
       !        Z=-LN(R)=.5*LN((1+X)/(1-X))
       !
       z = -LOG(r)
-      w = DXPSI(nu+1.D0,ipsik,ipsix)
-      xs = 1.D0/SIN(Theta)
+      w = DXPSI(nu+1._DP,ipsik,ipsix)
+      xs = 1._DP/SIN(Theta)
       !
       !        SERIES SUMMATION FOR Q ( ID = 2 )
       !        Q(0,NU,X)=SUM(FROM 0 TO J0-1)((.5*LN((1+X)/(1-X))
@@ -99,21 +99,21 @@ SUBROUTINE DXPQNU(Nu1,Nu2,Mu,Theta,Id,Pqa,Ipqa,Ierror)
       !
       !        NOTE, IN THIS LOOP K=J+1
       !
-      pq = 0.D0
+      pq = 0._DP
       ipq = 0
       ia = 0
-      a = 1.D0
+      a = 1._DP
       DO k = 1, j0
         flok = k
         IF( k/=1 ) THEN
-          a = a*y*(flok-2.D0-nu)*(flok-1.D0+nu)&
-            /((flok-1.D0+dmu)*(flok-1.D0))
+          a = a*y*(flok-2._DP-nu)*(flok-1._DP+nu)&
+            /((flok-1._DP+dmu)*(flok-1._DP))
           CALL DXADJ(a,ia,Ierror)
           IF( Ierror/=0 ) RETURN
         END IF
         IF( Mu>=1 ) THEN
-          x1 = (nu*(nu+1.D0)*(z-w+DXPSI(flok,ipsik,ipsix))+(nu-flok+1.D0)&
-            *(nu+flok)/(2.D0*flok))*a
+          x1 = (nu*(nu+1._DP)*(z-w+DXPSI(flok,ipsik,ipsix))+(nu-flok+1._DP)&
+            *(nu+flok)/(2._DP*flok))*a
           ix1 = ia
           CALL DXADD(pq,ipq,x1,ix1,pq,ipq,Ierror)
           IF( Ierror/=0 ) RETURN
@@ -137,15 +137,15 @@ SUBROUTINE DXPQNU(Nu1,Nu2,Mu,Theta,Id,Pqa,Ipqa,Ierror)
       !                *SUM(FROM 0 TO J0-1)A(J)*(.5-.5*X)**J
       !
       ipq = 0
-      pq = 1.D0
-      a = 1.D0
+      pq = 1._DP
+      a = 1._DP
       ia = 0
       DO i = 2, j0
         di = i
-        a = a*y*(di-2.D0-nu)*(di-1.D0+nu)/((di-1.D0+dmu)*(di-1.D0))
+        a = a*y*(di-2._DP-nu)*(di-1._DP+nu)/((di-1._DP+dmu)*(di-1._DP))
         CALL DXADJ(a,ia,Ierror)
         IF( Ierror/=0 ) RETURN
-        IF( a==0.D0 ) EXIT
+        IF( a==0._DP ) EXIT
         CALL DXADD(pq,ipq,a,ia,pq,ipq,Ierror)
         IF( Ierror/=0 ) RETURN
       END DO
@@ -166,22 +166,22 @@ SUBROUTINE DXPQNU(Nu1,Nu2,Mu,Theta,Id,Pqa,Ipqa,Ierror)
     END IF
     IF( j==1 ) pq2 = pq
     IF( j==1 ) ipq2 = ipq
-    nu = nu + 1.D0
+    nu = nu + 1._DP
   END DO
   k = 0
   IF( nu-1.5D0>=Nu1 ) THEN
     k = k + 1
     Pqa(k) = pq2
     Ipqa(k) = ipq2
-    IF( nu>Nu2+.5D0 ) RETURN
+    IF( nu>Nu2+.5_DP ) RETURN
   END IF
   100  pq1 = pq
   ipq1 = ipq
-  IF( nu>=Nu1+.5D0 ) THEN
+  IF( nu>=Nu1+.5_DP ) THEN
     k = k + 1
     Pqa(k) = pq
     Ipqa(k) = ipq
-    IF( nu>Nu2+.5D0 ) RETURN
+    IF( nu>Nu2+.5_DP ) RETURN
   END IF
   !
   !        FORWARD NU-WISE RECURRENCE FOR F(MU,NU,X) FOR FIXED MU
@@ -191,13 +191,13 @@ SUBROUTINE DXPQNU(Nu1,Nu2,Mu,Theta,Id,Pqa,Ipqa,Ierror)
   !        BY -MU THEN F(MU,NU,X) MAY BE Q(MU,NU,X).
   !        NOTE, IN THIS LOOP, NU=NU+1
   !
-  x1 = (2.D0*nu-1.D0)/(nu+dmu)*x*pq1
-  x2 = (nu-1.D0-dmu)/(nu+dmu)*pq2
+  x1 = (2._DP*nu-1._DP)/(nu+dmu)*x*pq1
+  x2 = (nu-1._DP-dmu)/(nu+dmu)*pq2
   CALL DXADD(x1,ipq1,-x2,ipq2,pq,ipq,Ierror)
   IF( Ierror/=0 ) RETURN
   CALL DXADJ(pq,ipq,Ierror)
   IF( Ierror/=0 ) RETURN
-  nu = nu + 1.D0
+  nu = nu + 1._DP
   pq2 = pq1
   ipq2 = ipq1
   GOTO 100

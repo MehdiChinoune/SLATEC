@@ -52,7 +52,7 @@ SUBROUTINE EFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Mdein,Mdeout,&
   !
   !     Initially set all output coefficients to zero.
   !
-  Coeff(1:n) = 0.E0
+  Coeff(1:n) = 0._SP
   Mdeout = -1
   IF( Nord<1 .OR. Nord>20 ) THEN
     CALL XERMSG('EFCMN',&
@@ -177,7 +177,7 @@ SUBROUTINE EFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Mdein,Mdeout,&
     !
     !        Scale data if uncertainty is nonzero.
     !
-    IF( Sddata(l)/=0.E0 ) G(irow,1:nordp1) = G(irow,1:nordp1)/Sddata(l)
+    IF( Sddata(l)/=0._SP ) G(irow,1:nordp1) = G(irow,1:nordp1)/Sddata(l)
     !
     !        When staging work area is exhausted, process rows.
     !
@@ -203,7 +203,7 @@ SUBROUTINE EFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Mdein,Mdeout,&
   !
   !     Last call to adjust block positioning.
   !
-  G(ir,1:nordp1) = 0.E0
+  G(ir,1:nordp1) = 0._SP
   CALL BNDACC(G,Mdg,Nord,ip,ir,1,np1)
   !
   !     Transfer accumulated rows from G(*,*) to W(*,*) for
@@ -216,7 +216,7 @@ SUBROUTINE EFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Mdein,Mdeout,&
   !     Solve for coefficients when possible.
   !
   DO i = 1, n
-    IF( G(i,1)==0.E0 ) THEN
+    IF( G(i,1)==0._SP ) THEN
       Mdeout = 2
       RETURN
     END IF

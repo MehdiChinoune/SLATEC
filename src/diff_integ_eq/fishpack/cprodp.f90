@@ -43,7 +43,7 @@ SUBROUTINE CPRODP(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Yy,M,A,B,C,D,U,Y)
   COMPLEX(SP) :: v, den, bh, ym, am, y1, y2, yh, crt
   !* FIRST EXECUTABLE STATEMENT  CPRODP
   DO j = 1, M
-    Y(j) = CMPLX(X(j),0.)
+    Y(j) = CMPLX(X(j),0._SP,SP)
   END DO
   mm = M - 1
   mm2 = M - 2
@@ -66,7 +66,7 @@ SUBROUTINE CPRODP(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Yy,M,A,B,C,D,U,Y)
     D(1) = C(1)/den
     U(1) = A(1)/den
     Y(1) = Y(1)/den
-    v = CMPLX(C(M),0.)
+    v = CMPLX(C(M),0._SP,SP)
     IF( mm2>=2 ) THEN
       DO j = 2, mm2
         den = B(j) - crt - A(j)*D(j-1)
@@ -88,7 +88,7 @@ SUBROUTINE CPRODP(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Yy,M,A,B,C,D,U,Y)
     IF( ABS(den)/=0 ) THEN
       Y(M) = (ym-am*Y(M-1))/den
     ELSE
-      Y(M) = (1.,0.)
+      Y(M) = (1._SP,0._SP)
     END IF
     Y(M-1) = Y(M-1) - D(M-1)*Y(M)
     DO j = 2, mm

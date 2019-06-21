@@ -143,7 +143,7 @@ SUBROUTINE DXNRMP(Nu,Mu1,Mu2,Darg,Mode,Dpn,Ipn,Isig,Ierror)
   ! LISTING FOR DETAILS)
   !* FIRST EXECUTABLE STATEMENT  DXNRMP
   Ierror = 0
-  CALL DXSET(0,0,0.0D0,0,Ierror)
+  CALL DXSET(0,0,0._DP,0,Ierror)
   IF( Ierror/=0 ) RETURN
   !
   !        TEST FOR PROPER INPUT VALUES.
@@ -154,19 +154,19 @@ SUBROUTINE DXNRMP(Nu,Mu1,Mu2,Darg,Mode,Dpn,Ipn,Isig,Ierror)
   IF( Nu==0 ) GOTO 200
   IF( Mode<1 .OR. Mode>2 ) GOTO 300
   IF( Mode==2 ) THEN
-    IF( ABS(Darg)>4.0D0*ATAN(1.0D0) ) GOTO 400
-    IF( Darg==0.0D0 ) GOTO 200
+    IF( ABS(Darg)>4._DP*ATAN(1._DP) ) GOTO 400
+    IF( Darg==0._DP ) GOTO 200
     x = COS(Darg)
     sx = ABS(SIN(Darg))
     tx = x/sx
-    Isig = INT( LOG10(2.0D0*Nu*(5.0D0+ABS(Darg*tx))) )
+    Isig = INT( LOG10(2._DP*Nu*(5._DP+ABS(Darg*tx))) )
   ELSE
-    IF( ABS(Darg)>1.0D0 ) GOTO 400
-    IF( ABS(Darg)==1.0D0 ) GOTO 200
+    IF( ABS(Darg)>1._DP ) GOTO 400
+    IF( ABS(Darg)==1._DP ) GOTO 200
     x = Darg
-    sx = SQRT((1.0D0+ABS(x))*((0.5D0-ABS(x))+0.5D0))
+    sx = SQRT((1._DP+ABS(x))*((0.5_DP-ABS(x))+0.5_DP))
     tx = x/sx
-    Isig = INT( LOG10(2.0D0*Nu*(5.0D0+tx**2)) )
+    Isig = INT( LOG10(2._DP*Nu*(5._DP+tx**2)) )
   END IF
   !
   !        BEGIN CALCULATION
@@ -177,7 +177,7 @@ SUBROUTINE DXNRMP(Nu,Mu1,Mu2,Darg,Mode,Dpn,Ipn,Isig,Ierror)
   !        IF MU>NU, NORMALIZED LEGENDRE(NU,MU,X)=0.
   !
   DO WHILE( mu>Nu )
-    Dpn(i) = 0.0D0
+    Dpn(i) = 0._DP
     Ipn(i) = 0
     i = i - 1
     mu = mu - 1
@@ -190,27 +190,27 @@ SUBROUTINE DXNRMP(Nu,Mu1,Mu2,Darg,Mode,Dpn,Ipn,Isig,Ierror)
   !
   !        P1 = 0. = NORMALIZED LEGENDRE(NU,NU+1,X)
   !
-  p1 = 0.0D0
+  p1 = 0._DP
   ip1 = 0
   !
   !        CALCULATE P2 = NORMALIZED LEGENDRE(NU,NU,X)
   !
-  p2 = 1.0D0
+  p2 = 1._DP
   ip2 = 0
-  p3 = 0.5D0
-  dk = 2.0D0
+  p3 = 0.5_DP
+  dk = 2._DP
   DO j = 1, Nu
-    p3 = ((dk+1.0D0)/dk)*p3
+    p3 = ((dk+1._DP)/dk)*p3
     p2 = p2*sx
     CALL DXADJ(p2,ip2,Ierror)
     IF( Ierror/=0 ) RETURN
-    dk = dk + 2.0D0
+    dk = dk + 2._DP
   END DO
   p2 = p2*SQRT(p3)
   CALL DXADJ(p2,ip2,Ierror)
   IF( Ierror/=0 ) RETURN
-  s = 2.0D0*tx
-  t = 1.0D0/Nu
+  s = 2._DP*tx
+  t = 1._DP/Nu
   IF( Mu2>=Nu ) THEN
     Dpn(i) = p2
     Ipn(i) = ip2
@@ -221,9 +221,9 @@ SUBROUTINE DXNRMP(Nu,Mu1,Mu2,Darg,Mode,Dpn,Ipn,Isig,Ierror)
   !        RECURRENCE PROCESS
   !
   100  p = mu*t
-  c1 = 1.0D0/SQRT((1.0D0-p+t)*(1.0D0+p))
+  c1 = 1._DP/SQRT((1._DP-p+t)*(1._DP+p))
   c2 = s*p*c1*p2
-  c1 = -SQRT((1.0D0+p+t)*(1.0D0-p))*c1*p1
+  c1 = -SQRT((1._DP+p+t)*(1._DP-p))*c1*p1
   CALL DXADD(c2,ip2,c1,ip1,p,ip,Ierror)
   IF( Ierror/=0 ) RETURN
   mu = mu - 1
@@ -247,16 +247,16 @@ SUBROUTINE DXNRMP(Nu,Mu1,Mu2,Darg,Mode,Dpn,Ipn,Isig,Ierror)
   !
   200  k = Mu2 - Mu1 + 1
   DO i = 1, k
-    Dpn(i) = 0.0D0
+    Dpn(i) = 0._DP
     Ipn(i) = 0
   END DO
   Isig = 0
   IF( Mu1<=0 ) THEN
     Isig = 1
-    Dpn(1) = SQRT(Nu+0.5D0)
+    Dpn(1) = SQRT(Nu+0.5_DP)
     Ipn(1) = 0
     IF( MOD(Nu,2)/=0 ) THEN
-      IF( Mode/=1 .OR. Darg/=1.0D0 ) THEN
+      IF( Mode/=1 .OR. Darg/=1._DP ) THEN
         IF( Mode/=2 ) Dpn(1) = -Dpn(1)
       END IF
     END IF

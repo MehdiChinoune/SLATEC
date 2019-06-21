@@ -62,21 +62,21 @@ REAL(SP) FUNCTION GAMIT(A,X)
     bot = LOG(R1MACH(1))
   !* FIRST EXECUTABLE STATEMENT  GAMIT
   !
-  IF( X<0.0 ) CALL XERMSG('GAMIT','X IS NEGATIVE',2,2)
+  IF( X<0._SP ) CALL XERMSG('GAMIT','X IS NEGATIVE',2,2)
   !
-  IF( X/=0.0 ) alx = LOG(X)
-  sga = 1.0
-  IF( A/=0.0 ) sga = SIGN(1.0,A)
-  ainta = AINT(A+0.5*sga)
+  IF( X/=0._SP ) alx = LOG(X)
+  sga = 1._SP
+  IF( A/=0._SP ) sga = SIGN(1._SP,A)
+  ainta = AINT(A+0.5_SP*sga)
   aeps = A - ainta
   !
-  IF( X<=0.0 ) THEN
-    GAMIT = 0.0
-    IF( ainta>0.0 .OR. aeps/=0.0 ) GAMIT = GAMR(A+1.0)
+  IF( X<=0._SP ) THEN
+    GAMIT = 0._SP
+    IF( ainta>0._SP .OR. aeps/=0._SP ) GAMIT = GAMR(A+1._SP)
     RETURN
     !
-  ELSEIF( X<=1.0 ) THEN
-    IF( A>=(-0.5) .OR. aeps/=0.0 ) CALL ALGAMS(A+1.0,algap1,sgngam)
+  ELSEIF( X<=1._SP ) THEN
+    IF( A>=(-0.5_SP) .OR. aeps/=0._SP ) CALL ALGAMS(A+1._SP,algap1,sgngam)
     GAMIT = R9GMIT(A,X,algap1,sgngam)
     RETURN
     !
@@ -86,9 +86,9 @@ REAL(SP) FUNCTION GAMIT(A,X)
     !
     ! EVALUATE GAMIT IN TERMS OF LOG(GAMIC(A,X))
     !
-    h = 1.0
-    IF( aeps/=0.0 .OR. ainta>0.0 ) THEN
-      CALL ALGAMS(A+1.0,algap1,sgngam)
+    h = 1._SP
+    IF( aeps/=0._SP .OR. ainta>0._SP ) THEN
+      CALL ALGAMS(A+1._SP,algap1,sgngam)
       t = LOG(ABS(A)) + alng - algap1
       IF( t>alneps ) THEN
         !
@@ -97,7 +97,7 @@ REAL(SP) FUNCTION GAMIT(A,X)
         GAMIT = -sga*sgngam*EXP(t)
         RETURN
       ELSE
-        IF( t>(-alneps) ) h = 1.0 - sga*sgngam*EXP(t)
+        IF( t>(-alneps) ) h = 1._SP - sga*sgngam*EXP(t)
         IF( ABS(h)<=sqeps ) THEN
           CALL XERCLR
           CALL XERMSG('GAMIT','RESULT LT HALF PRECISION',1,1)
@@ -105,7 +105,7 @@ REAL(SP) FUNCTION GAMIT(A,X)
       END IF
     END IF
   ELSE
-    t = R9LGIT(A,X,LOG_GAMMA(A+1.0))
+    t = R9LGIT(A,X,LOG_GAMMA(A+1._SP))
     IF( t<bot ) CALL XERCLR
     GAMIT = EXP(t)
     RETURN

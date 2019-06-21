@@ -310,7 +310,7 @@ SUBROUTINE SCG(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,Iter,&
       !
       !         Calculate coefficient bk and direction vector p.
       bknum = DOT_PRODUCT(Z,R)
-      IF( bknum<=0.0E0 ) THEN
+      IF( bknum<=0._SP ) THEN
         Ierr = 5
         RETURN
       END IF
@@ -328,7 +328,7 @@ SUBROUTINE SCG(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,Iter,&
       !         and new pseudo-residual z.
       CALL MATVEC(N,P,Z,Nelt,Ia,Ja,A,Isym)
       akden = DOT_PRODUCT(P,Z)
-      IF( akden<=0.0E0 ) THEN
+      IF( akden<=0._SP ) THEN
         Ierr = 6
         RETURN
       END IF

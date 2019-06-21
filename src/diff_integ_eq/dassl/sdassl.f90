@@ -1061,7 +1061,7 @@ SUBROUTINE SDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
         !     CHECK HMAX
         IF( Info(7)/=0 ) THEN
           hmax = Rwork(LHMAX)
-          IF( hmax<=0.0E0 ) THEN
+          IF( hmax<=0._SP ) THEN
             !
             WRITE (xern3,'(1P,E15.6)') hmax
             CALL XERMSG('SDASSL','HMAX = '//xern3//' < 0.0',10,1)
@@ -1116,9 +1116,9 @@ SUBROUTINE SDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
   DO i = 1, Neq
     IF( Info(2)==1 ) rtoli = Rtol(i)
     IF( Info(2)==1 ) atoli = Atol(i)
-    IF( rtoli>0.0E0 .OR. atoli>0.0E0 ) nzflg = 1
-    IF( rtoli<0.0E0 ) GOTO 500
-    IF( atoli<0.0E0 ) GOTO 600
+    IF( rtoli>0._SP .OR. atoli>0._SP ) nzflg = 1
+    IF( rtoli<0._SP ) GOTO 500
+    IF( atoli<0._SP ) GOTO 600
   END DO
   IF( nzflg==0 ) THEN
     !
@@ -1149,17 +1149,17 @@ SUBROUTINE SDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
       h = Rwork(LH)
       IF( Info(7)/=0 ) THEN
         rh = ABS(h)/Rwork(LHMAX)
-        IF( rh>1.0E0 ) h = h/rh
+        IF( rh>1._SP ) h = h/rh
       END IF
       IF( T==Tout ) GOTO 1100
-      IF( (T-Tout)*h>0.0E0 ) GOTO 800
+      IF( (T-Tout)*h>0._SP ) GOTO 800
       IF( Info(4)==1 ) THEN
         IF( Info(3)==1 ) THEN
           tstop = Rwork(LTSTOP)
-          IF( (tn-tstop)*h>0.0E0 ) GOTO 1000
-          IF( (tstop-Tout)*h<0.0E0 ) GOTO 700
-          IF( (tn-T)*h>0.0E0 ) THEN
-            IF( (tn-Tout)*h>0.0E0 ) THEN
+          IF( (tn-tstop)*h>0._SP ) GOTO 1000
+          IF( (tstop-Tout)*h<0._SP ) GOTO 700
+          IF( (tn-T)*h>0._SP ) THEN
+            IF( (tn-Tout)*h>0._SP ) THEN
               CALL SDATRP(tn,Tout,Y,Yprime,Neq,Iwork(LKOLD),Rwork(lphi),Rwork(LPSI))
               T = Tout
               Idid = 3
@@ -1174,9 +1174,9 @@ SUBROUTINE SDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
           END IF
         ELSE
           tstop = Rwork(LTSTOP)
-          IF( (tn-tstop)*h>0.0E0 ) GOTO 1000
-          IF( (tstop-Tout)*h<0.0E0 ) GOTO 700
-          IF( (tn-Tout)*h>=0.0E0 ) THEN
+          IF( (tn-tstop)*h>0._SP ) GOTO 1000
+          IF( (tstop-Tout)*h<0._SP ) GOTO 700
+          IF( (tn-Tout)*h>=0._SP ) THEN
             CALL SDATRP(tn,Tout,Y,Yprime,Neq,Iwork(LKOLD),Rwork(lphi),Rwork(LPSI))
             T = Tout
             Idid = 3
@@ -1185,9 +1185,9 @@ SUBROUTINE SDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
           END IF
         END IF
         !     CHECK WHETHER WE ARE WITHIN ROUNDOFF OF TSTOP
-        IF( ABS(tn-tstop)>100.0E0*uround*(ABS(tn)+ABS(h)) ) THEN
+        IF( ABS(tn-tstop)>100._SP*uround*(ABS(tn)+ABS(h)) ) THEN
           tnext = tn + h
-          IF( (tnext-tstop)*h>0.0E0 ) THEN
+          IF( (tnext-tstop)*h>0._SP ) THEN
             h = tstop - tn
             Rwork(LH) = h
           END IF
@@ -1198,8 +1198,8 @@ SUBROUTINE SDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
           done = .TRUE.
         END IF
       ELSEIF( Info(3)==1 ) THEN
-        IF( (tn-T)*h>0.0E0 ) THEN
-          IF( (tn-Tout)*h>0.0E0 ) THEN
+        IF( (tn-T)*h>0._SP ) THEN
+          IF( (tn-Tout)*h>0._SP ) THEN
             CALL SDATRP(tn,Tout,Y,Yprime,Neq,Iwork(LKOLD),Rwork(lphi),Rwork(LPSI))
             T = Tout
             Idid = 3
@@ -1211,7 +1211,7 @@ SUBROUTINE SDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
             done = .TRUE.
           END IF
         END IF
-      ELSEIF( (tn-Tout)*h>=0.0E0 ) THEN
+      ELSEIF( (tn-Tout)*h>=0._SP ) THEN
         CALL SDATRP(tn,Tout,Y,Yprime,Neq,Iwork(LKOLD),Rwork(lphi),Rwork(LPSI))
         T = Tout
         Idid = 3
@@ -1234,13 +1234,13 @@ SUBROUTINE SDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
       !     SET ERROR WEIGHT VECTOR WT
       CALL SDAWTS(Neq,Info(2),Rtol,Atol,Y,Rwork(lwt))
       DO i = 1, Neq
-        IF( Rwork(lwt+i-1)<=0.0E0 ) GOTO 900
+        IF( Rwork(lwt+i-1)<=0._SP ) GOTO 900
       END DO
       !
       !     COMPUTE UNIT ROUNDOFF AND HMIN
       uround = R1MACH(4)
       Rwork(LROUND) = uround
-      hmin = 4.0E0*uround*MAX(ABS(T),ABS(Tout))
+      hmin = 4._SP*uround*MAX(ABS(T),ABS(Tout))
       !
       !     CHECK INITIAL INTERVAL TO SEE THAT IT IS LONG ENOUGH
       tdist = ABS(Tout-T)
@@ -1258,14 +1258,14 @@ SUBROUTINE SDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
           !
           !     COMPUTE INITIAL STEPSIZE, TO BE USED BY EITHER
           !     SDASTP OR SDAINI, DEPENDING ON INFO(11)
-          ho = 0.001E0*tdist
+          ho = 0.001_SP*tdist
           ypnorm = SDANRM(Neq,Yprime,Rwork(lwt))
-          IF( ypnorm>0.5E0/ho ) ho = 0.5E0/ypnorm
+          IF( ypnorm>0.5_SP/ho ) ho = 0.5_SP/ypnorm
           ho = SIGN(ho,Tout-T)
         ELSE
           ho = Rwork(LH)
-          IF( (Tout-T)*ho<0.0E0 ) GOTO 800
-          IF( ho==0.0E0 ) THEN
+          IF( (Tout-T)*ho<0._SP ) GOTO 800
+          IF( ho==0._SP ) THEN
             !
             CALL XERMSG('SDASSL','INFO(8)=1 AND H0=0.0',12,1)
             GOTO 1200
@@ -1274,14 +1274,14 @@ SUBROUTINE SDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
         !     ADJUST HO IF NECESSARY TO MEET HMAX BOUND
         IF( Info(7)/=0 ) THEN
           rh = ABS(ho)/Rwork(LHMAX)
-          IF( rh>1.0E0 ) ho = ho/rh
+          IF( rh>1._SP ) ho = ho/rh
         END IF
         !     COMPUTE TSTOP, IF APPLICABLE
         IF( Info(4)/=0 ) THEN
           tstop = Rwork(LTSTOP)
-          IF( (tstop-T)*ho<0.0E0 ) GOTO 1000
-          IF( (T+ho-tstop)*ho>0.0E0 ) ho = tstop - T
-          IF( (tstop-Tout)*ho<0.0E0 ) GOTO 700
+          IF( (tstop-T)*ho<0._SP ) GOTO 1000
+          IF( (T+ho-tstop)*ho>0._SP ) ho = tstop - T
+          IF( (tstop-Tout)*ho<0._SP ) GOTO 700
         END IF
         !
         !     COMPUTE INITIAL DERIVATIVE, UPDATING TN AND Y, IF APPLICABLE
@@ -1327,23 +1327,23 @@ SUBROUTINE SDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
       !     UPDATE WT
       CALL SDAWTS(Neq,Info(2),Rtol,Atol,Rwork(lphi),Rwork(lwt))
       DO i = 1, Neq
-        IF( Rwork(i+lwt-1)<=0.0E0 ) THEN
+        IF( Rwork(i+lwt-1)<=0._SP ) THEN
           Idid = -3
           GOTO 200
         END IF
       END DO
       !
       !     TEST FOR TOO MUCH ACCURACY REQUESTED.
-      r = SDANRM(Neq,Rwork(lphi),Rwork(lwt))*100.0E0*uround
-      IF( r<=1.0E0 ) THEN
+      r = SDANRM(Neq,Rwork(lphi),Rwork(lwt))*100._SP*uround
+      IF( r<=1._SP ) THEN
         !
         !     COMPUTE MINIMUM STEPSIZE
-        hmin = 4.0E0*uround*MAX(ABS(tn),ABS(Tout))
+        hmin = 4._SP*uround*MAX(ABS(tn),ABS(Tout))
         !
         !     TEST H VS. HMAX
         IF( Info(7)/=0 ) THEN
           rh = ABS(h)/Rwork(LHMAX)
-          IF( rh>1.0E0 ) h = h/rh
+          IF( rh>1._SP ) h = h/rh
         END IF
         !
         CALL SDASTP(tn,Y,Yprime,Neq,RES,JAC,h,Rwork(lwt:lphi-1),Info(1),Idid,&
@@ -1462,11 +1462,11 @@ SUBROUTINE SDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
     !
   ELSEIF( Info(4)/=0 ) THEN
     IF( Info(3)/=0 ) THEN
-      IF( (tn-Tout)*h>=0.0E0 ) THEN
+      IF( (tn-Tout)*h>=0._SP ) THEN
         CALL SDATRP(tn,Tout,Y,Yprime,Neq,Iwork(LKOLD),Rwork(lphi),Rwork(LPSI))
         T = Tout
         Idid = 3
-      ELSEIF( ABS(tn-tstop)<=100.0E0*uround*(ABS(tn)+ABS(h)) ) THEN
+      ELSEIF( ABS(tn-tstop)<=100._SP*uround*(ABS(tn)+ABS(h)) ) THEN
         CALL SDATRP(tn,tstop,Y,Yprime,Neq,Iwork(LKOLD),Rwork(lphi),Rwork(LPSI))
         Idid = 2
         T = tstop
@@ -1474,15 +1474,15 @@ SUBROUTINE SDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
         T = tn
         Idid = 1
       END IF
-    ELSEIF( (tn-Tout)*h<0.0E0 ) THEN
-      IF( ABS(tn-tstop)<=100.0E0*uround*(ABS(tn)+ABS(h)) ) THEN
+    ELSEIF( (tn-Tout)*h<0._SP ) THEN
+      IF( ABS(tn-tstop)<=100._SP*uround*(ABS(tn)+ABS(h)) ) THEN
         CALL SDATRP(tn,tstop,Y,Yprime,Neq,Iwork(LKOLD),Rwork(lphi),&
           Rwork(LPSI))
         Idid = 2
         T = tstop
       ELSE
         tnext = tn + h
-        IF( (tnext-tstop)*h>0.0E0 ) h = tstop - tn
+        IF( (tnext-tstop)*h>0._SP ) h = tstop - tn
         GOTO 100
       END IF
     ELSE
@@ -1491,7 +1491,7 @@ SUBROUTINE SDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
       Idid = 3
     END IF
   ELSEIF( Info(3)/=0 ) THEN
-    IF( (tn-Tout)*h>=0.0E0 ) THEN
+    IF( (tn-Tout)*h>=0._SP ) THEN
       CALL SDATRP(tn,Tout,Y,Yprime,Neq,Iwork(LKOLD),Rwork(lphi),Rwork(LPSI))
       Idid = 3
       T = Tout
@@ -1500,7 +1500,7 @@ SUBROUTINE SDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
       Idid = 1
     END IF
   ELSE
-    IF( (tn-Tout)*h<0.0E0 ) GOTO 100
+    IF( (tn-Tout)*h<0._SP ) GOTO 100
     CALL SDATRP(tn,Tout,Y,Yprime,Neq,Iwork(LKOLD),Rwork(lphi),Rwork(LPSI))
     Idid = 3
     T = Tout

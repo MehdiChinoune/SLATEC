@@ -1564,7 +1564,7 @@ SUBROUTINE DSPLP(DUSRMT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   REAL(DP) :: zero
   CHARACTER(8) :: xern1, xern2
   !* FIRST EXECUTABLE STATEMENT  DSPLP
-  zero = 0.D0
+  zero = 0._DP
   iopt = 1
   !
   !     VERIFY THAT MRELAS, NVARS > 0.

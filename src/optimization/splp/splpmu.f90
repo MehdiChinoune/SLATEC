@@ -56,7 +56,7 @@ SUBROUTINE SPLPMU(Mrelas,Nvars,Lmx,Lbm,Nredc,Info,Ienter,Ileave,Iopt,Npp,&
   INTEGER :: i, ibas, ihi, il1, ilow, ipage, iplace, iu1, j, k, key, lpg, n20002, &
     n20018, n20121, nerr, nnegrc, npr001, npr003
   REAL(SP) :: aij, alpha, gama, gq, rzj, scalr, wp, cnorm, rcost
-  REAL(SP), PARAMETER :: zero = 0.E0, one = 1.E0, two = 2.E0
+  REAL(SP), PARAMETER :: zero = 0.E0, one = 1.E0, two = 2._SP
   LOGICAL :: Singlr, Redbas, pagepl, trans, Zerolv, Stpedg
   !
   !* FIRST EXECUTABLE STATEMENT  SPLPMU

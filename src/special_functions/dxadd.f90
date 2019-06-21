@@ -62,12 +62,12 @@ SUBROUTINE DXADD(X,Ix,Y,Iy,Z,Iz,Ierror)
   !
   !* FIRST EXECUTABLE STATEMENT  DXADD
   Ierror = 0
-  IF( X==0.0D0 ) THEN
+  IF( X==0._DP ) THEN
     Z = Y
     Iz = Iy
     CALL DXADJ(Z,Iz,Ierror)
     RETURN
-  ELSEIF( Y/=0.0D0 ) THEN
+  ELSEIF( Y/=0._DP ) THEN
     IF( Ix<0 .OR. Iy<0 ) THEN
       IF( Ix>=0 .OR. Iy>=0 ) THEN
         IF( ABS(Ix)>6*l_com .OR. ABS(Iy)>6*l_com ) THEN
@@ -89,12 +89,12 @@ SUBROUTINE DXADD(X,Ix,Y,Iy,Z,Iz,Ierror)
       is = Iy
       t = X
     ELSEIF( i==0 ) THEN
-      IF( ABS(X)>1.0D0 .AND. ABS(Y)>1.0D0 ) THEN
+      IF( ABS(X)>1._DP .AND. ABS(Y)>1._DP ) THEN
         s = X/radixl_com
         t = Y/radixl_com
         Z = s + t
         Iz = Ix + l_com
-      ELSEIF( ABS(X)<1.0D0 .AND. ABS(Y)<1.0D0 ) THEN
+      ELSEIF( ABS(X)<1._DP .AND. ABS(Y)<1._DP ) THEN
         s = X*radixl_com
         t = Y*radixl_com
         Z = s + t
@@ -123,8 +123,8 @@ SUBROUTINE DXADD(X,Ix,Y,Iy,Z,Iz,Ierror)
       t = t*radixx_com**(-i2)/rad2l_com
       GOTO 300
     ELSE
-      IF( ABS(t)>=1.0D0 ) GOTO 200
-      IF( radixl_com*ABS(t)<1.0D0 ) THEN
+      IF( ABS(t)>=1._DP ) GOTO 200
+      IF( radixl_com*ABS(t)<1._DP ) THEN
         j = i1 + 1
         t = t*radixx_com**(l_com-i2)
         GOTO 300
@@ -154,7 +154,7 @@ SUBROUTINE DXADD(X,Ix,Y,Iy,Z,Iz,Ierror)
   300 CONTINUE
   IF( j/=0 ) THEN
     IF( ABS(s)<radixl_com .AND. j<=3 ) THEN
-      IF( ABS(s)>=1.0D0 ) THEN
+      IF( ABS(s)>=1._DP ) THEN
         SELECT CASE (j)
           CASE (1)
             s = s*radixl_com
@@ -164,7 +164,7 @@ SUBROUTINE DXADD(X,Ix,Y,Iy,Z,Iz,Ierror)
           CASE DEFAULT
         END SELECT
       END IF
-      IF( radixl_com*ABS(s)>=1.0D0 ) THEN
+      IF( radixl_com*ABS(s)>=1._DP ) THEN
         SELECT CASE (j)
           CASE (1)
             s = s*radixl_com
@@ -206,12 +206,12 @@ SUBROUTINE DXADD(X,Ix,Y,Iy,Z,Iz,Ierror)
   ! SUM.
   !
   400 CONTINUE
-  IF( ABS(s)>1.0D0 .AND. ABS(t)>1.0D0 ) THEN
+  IF( ABS(s)>1._DP .AND. ABS(t)>1._DP ) THEN
     s = s/radixl_com
     t = t/radixl_com
     Z = s + t
     Iz = is - j*l_com + l_com
-  ELSEIF( ABS(s)<1.0D0 .AND. ABS(t)<1.0D0 ) THEN
+  ELSEIF( ABS(s)<1._DP .AND. ABS(t)<1._DP ) THEN
     s = s*radixl_com
     t = t*radixl_com
     Z = s + t

@@ -42,7 +42,7 @@ CONTAINS
     INTRINSIC SQRT
     !* FIRST EXECUTABLE STATEMENT  DNSQQK
     infos = 1
-    fnorms = 0.0D0
+    fnorms = 0._DP
     n = 2
     lwa = 19
     nprint = -1
@@ -53,8 +53,8 @@ CONTAINS
     !     Option 1, the user provides the Jacobian.
     !
     iopt = 1
-    x(1) = -1.2D0
-    x(2) = 1.0D0
+    x(1) = -1.2_DP
+    x(2) = 1._DP
     CALL DNSQE(DQFCN2,DQJAC2,iopt,n,x,fvec,tol,nprint,info,wa,lwa)
     icnt = 1
     fnorm = DENORM(n,fvec)
@@ -71,8 +71,8 @@ CONTAINS
     !     Option 2, the code approximates the Jacobian.
     !
     iopt = 2
-    x(1) = -1.2D0
-    x(2) = 1.0D0
+    x(1) = -1.2_DP
+    x(2) = 1._DP
     CALL DNSQE(DQFCN2,DQJAC2,iopt,n,x,fvec,tol,nprint,info,wa,lwa)
     icnt = 2
     fnorm = DENORM(n,fvec)
@@ -90,8 +90,8 @@ CONTAINS
     !
     lwa = 15
     iopt = 1
-    x(1) = -1.2D0
-    x(2) = 1.0D0
+    x(1) = -1.2_DP
+    x(2) = 1._DP
     CALL DNSQE(DQFCN2,DQJAC2,iopt,n,x,fvec,tol,nprint,info,wa,lwa)
     icnt = 3
     itest(icnt) = 0
@@ -138,11 +138,11 @@ CONTAINS
     REAL(DP) :: X(:)
     !* FIRST EXECUTABLE STATEMENT  DSOSFN
     IF( K==1 ) THEN
-      DSOSFN = 1.0D0 - X(1)
+      DSOSFN = 1._DP - X(1)
     ELSEIF( K==2 ) THEN
-      DSOSFN = 1.0D1*(X(2)-X(1)**2)
+      DSOSFN = 10._DP*(X(2)-X(1)**2)
     ELSE
-      DSOSFN = 0.D0
+      DSOSFN = 0._DP
     END IF
   END FUNCTION DSOSFN
   !** DSOSQX
@@ -183,21 +183,21 @@ CONTAINS
     INTRINSIC SQRT
     !* FIRST EXECUTABLE STATEMENT  DSOSQX
     iflags = 3
-    fnorms = 0.0D0
+    fnorms = 0._DP
     n = 2
     lwa = 17
     liw = 6
     tolf = SQRT(D1MACH(4))
     rer = SQRT(D1MACH(4))
-    aer = 0.0D0
+    aer = 0._DP
     IF( Kprint>=2 ) WRITE (Lun,99001)
     99001 FORMAT ('1'/'  DSOS QUICK CHECK'/)
     !
     !     Test the code with proper input values.
     !
     iflag = 0
-    x(1) = -1.2D0
-    x(2) = 1.0D0
+    x(1) = -1.2_DP
+    x(2) = 1._DP
     CALL DSOS(DSOSFN,n,x,rer,aer,tolf,iflag,wa,lwa,iw,liw)
     icnt = 1
     fvec(1) = DSOSFN(x,1)
@@ -219,8 +219,8 @@ CONTAINS
     !
     lwa = 15
     iflag = 0
-    x(1) = -1.2D0
-    x(2) = 1.0D0
+    x(1) = -1.2_DP
+    x(2) = 1._DP
     CALL DSOS(DSOSFN,n,x,rer,aer,tolf,iflag,wa,lwa,iw,liw)
     icnt = 2
     itest(icnt) = 0
@@ -269,8 +269,8 @@ CONTAINS
     !     .. Array Arguments ..
     REAL(DP) :: Fvec(N), X(N)
     !* FIRST EXECUTABLE STATEMENT  DQFCN2
-    Fvec(1) = 1.0D0 - X(1)
-    Fvec(2) = 10.0D0*(X(2)-X(1)**2)
+    Fvec(1) = 1._DP - X(1)
+    Fvec(2) = 10._DP*(X(2)-X(1)**2)
   END SUBROUTINE DQFCN2
   !** DQJAC2
   SUBROUTINE DQJAC2(N,X,Fvec,Fjac,Ldfjac,Iflag)
@@ -297,10 +297,10 @@ CONTAINS
     INTEGER :: Iflag, Ldfjac, N
     REAL(DP) :: Fjac(Ldfjac,N), Fvec(N), X(N)
     !* FIRST EXECUTABLE STATEMENT  DQJAC2
-    Fjac(1,1) = -1.0D0
-    Fjac(1,2) = 0.0D0
-    Fjac(2,1) = -2.0D1*X(1)
-    Fjac(2,2) = 1.0D1
+    Fjac(1,1) = -1._DP
+    Fjac(1,2) = 0._DP
+    Fjac(2,1) = -20._DP*X(1)
+    Fjac(2,2) = 10._DP
   END SUBROUTINE DQJAC2
 END MODULE TEST36_MOD
 !** TEST36

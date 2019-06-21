@@ -90,8 +90,8 @@ SUBROUTINE CBLKT1(An,Cn,M,Am,Bm,Cm,Idimy,Y,B,W1,W2,W3,Wd,Ww,Wu,PRDCT,CPRDCT)
               Wd,Ww,Wu)
           ELSE
             DO j = 1, M
-              W3(j) = (0.,0.)
-              W2(j) = (0.,0.)
+              W3(j) = (0._SP,0._SP)
+              W2(j) = (0._SP,0._SP)
             END DO
           END IF
           DO j = 1, M
@@ -167,7 +167,7 @@ SUBROUTINE CBLKT1(An,Cn,M,Am,Bm,Cm,Idimy,Y,B,W1,W2,W3,Wd,Ww,Wu,PRDCT,CPRDCT)
     CALL INXCB(if/2,k_com-1,im1,nm1)
     CALL INXCB(if,k_com-1,ip,np)
     IF( ncmplx_com/=0 ) THEN
-      bc = [ ( CMPLX( B(ip+i), B(ip+i+1) ), i = 1, nm_com, 2 ) ]
+      bc = [ ( CMPLX( B(ip+i), B(ip+i+1), SP ), i = 1, nm_com, 2 ) ]
       CALL CPRDCT(nm_com+1,bc,nm1,B(im1:im1+nm1-1),0,dum,0,dum,Y(1,nm_com+1),Y(1,nm_com+1),M,&
         Am,Bm,Cm,W1,W3,Ww)
     ELSE
@@ -254,7 +254,7 @@ SUBROUTINE CBLKT1(An,Cn,M,Am,Bm,Cm,Idimy,Y,B,W1,W2,W3,Wd,Ww,Wu,PRDCT,CPRDCT)
         CALL INXCB(ipi1,irm1,ip1,np1)
         IF( i<=i2 ) THEN
           DO j = 1, M
-            W1(j) = (0.,0.)
+            W1(j) = (0._SP,0._SP)
           END DO
         ELSE
           CALL PRDCT(nm1,B(im1:im1+nm1-1),0,dum,0,dum,na,An(idxa),Y(1,imi2),W1,M,Am,&
@@ -265,7 +265,7 @@ SUBROUTINE CBLKT1(An,Cn,M,Am,Bm,Cm,Idimy,Y,B,W1,W2,W3,Wd,Ww,Wu,PRDCT,CPRDCT)
             Bm,Cm,Wd,Ww,Wu)
         ELSE
           DO j = 1, M
-            W2(j) = (0.,0.)
+            W2(j) = (0._SP,0._SP)
           END DO
         END IF
         DO j = 1, M

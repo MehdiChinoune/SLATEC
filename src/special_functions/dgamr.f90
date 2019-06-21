@@ -32,12 +32,12 @@ REAL(DP) FUNCTION DGAMR(X)
   INTEGER :: irold
   REAL(DP) :: X, alngx, sgngx
   !* FIRST EXECUTABLE STATEMENT  DGAMR
-  DGAMR = 0.0D0
-  IF( X<=0.0D0 .AND. AINT(X)==X ) RETURN
+  DGAMR = 0._DP
+  IF( X<=0._DP .AND. AINT(X)==X ) RETURN
   !
   CALL XGETF(irold)
   CALL XSETF(1)
-  IF( ABS(X)>10.0D0 ) THEN
+  IF( ABS(X)>10._DP ) THEN
     !
     CALL DLGAMS(X,alngx,sgngx)
     CALL XERCLR
@@ -45,7 +45,7 @@ REAL(DP) FUNCTION DGAMR(X)
     DGAMR = sgngx*EXP(-alngx)
     RETURN
   END IF
-  DGAMR = 1.0D0/GAMMA(X)
+  DGAMR = 1._DP/GAMMA(X)
   CALL XERCLR
   CALL XSETF(irold)
   RETURN

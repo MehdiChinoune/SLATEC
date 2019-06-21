@@ -69,7 +69,7 @@ SUBROUTINE SPOFA(A,Lda,N,Info)
   !* FIRST EXECUTABLE STATEMENT  SPOFA
   DO j = 1, N
     Info = j
-    s = 0.0E0
+    s = 0._SP
     jm1 = j - 1
     IF( jm1>=1 ) THEN
       DO k = 1, jm1
@@ -80,7 +80,7 @@ SUBROUTINE SPOFA(A,Lda,N,Info)
       END DO
     END IF
     s = A(j,j) - s
-    IF( s<=0.0E0 ) RETURN
+    IF( s<=0._SP ) RETURN
     A(j,j) = SQRT(s)
   END DO
   Info = 0

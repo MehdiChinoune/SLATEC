@@ -229,13 +229,13 @@ SUBROUTINE QAWSE(F,A,B,Alfa,Beta,Integr,Epsabs,Epsrel,Limit,Result,Abserr,&
   Ier = 6
   Neval = 0
   Last = 0
-  Rlist(1) = 0.0E+00
-  Elist(1) = 0.0E+00
+  Rlist(1) = 0._SP
+  Elist(1) = 0._SP
   Iord(1) = 0
-  Result = 0.0E+00
-  Abserr = 0.0E+00
-  IF( .NOT. (B<=A .OR. (Epsabs==0.0E+00 .AND. Epsrel<MAX(0.5E+02*epmach,0.5E-14)&
-      ) .OR. Alfa<=(-0.1E+01) .OR. Beta<=(-0.1E+01) .OR. Integr<1 .OR. Integr>4 .OR. &
+  Result = 0._SP
+  Abserr = 0._SP
+  IF( .NOT. (B<=A .OR. (Epsabs==0._SP .AND. Epsrel<MAX(50._SP*epmach,0.5E-14_SP)&
+      ) .OR. Alfa<=(-1._SP) .OR. Beta<=(-1._SP) .OR. Integr<1 .OR. Integr>4 .OR. &
       Limit<2) ) THEN
     Ier = 0
     !
@@ -246,7 +246,7 @@ SUBROUTINE QAWSE(F,A,B,Alfa,Beta,Integr,Epsabs,Epsrel,Limit,Result,Abserr,&
     !           INTEGRATE OVER THE INTERVALS (A,(A+B)/2)
     !           AND ((A+B)/2,B).
     !
-    centre = 0.5E+00*(B+A)
+    centre = 0.5_SP*(B+A)
     CALL QC25S(F,A,B,A,centre,Alfa,Beta,ri,rj,rg,rh,area1,error1,resas1,&
       Integr,nev)
     Neval = nev
@@ -303,7 +303,7 @@ SUBROUTINE QAWSE(F,A,B,Alfa,Beta,Integr,Epsabs,Epsrel,Limit,Result,Abserr,&
         !           BISECT THE SUBINTERVAL WITH LARGEST ERROR ESTIMATE.
         !
         a1 = Alist(maxerr)
-        b1 = 0.5E+00*(Alist(maxerr)+Blist(maxerr))
+        b1 = 0.5_SP*(Alist(maxerr)+Blist(maxerr))
         a2 = b1
         b2 = Blist(maxerr)
         !
@@ -352,7 +352,7 @@ SUBROUTINE QAWSE(F,A,B,Alfa,Beta,Integr,Epsabs,Epsrel,Limit,Result,Abserr,&
           !           SET ERROR FLAG IN THE CASE OF BAD INTEGRAND BEHAVIOUR
           !           AT INTERIOR POINTS OF INTEGRATION RANGE.
           !
-          IF( MAX(ABS(a1),ABS(b2))<=(0.1E+01+0.1E+03*epmach)&
+          IF( MAX(ABS(a1),ABS(b2))<=(1._SP+100._SP*epmach)&
             *(ABS(a2)+0.1E+04*uflow) ) Ier = 3
         END IF
         !
@@ -387,7 +387,7 @@ SUBROUTINE QAWSE(F,A,B,Alfa,Beta,Integr,Epsabs,Epsrel,Limit,Result,Abserr,&
       !           COMPUTE FINAL RESULT.
       !           ---------------------
       !
-      Result = 0.0E+00
+      Result = 0._SP
       DO k = 1, Last
         Result = Result + Rlist(k)
       END DO

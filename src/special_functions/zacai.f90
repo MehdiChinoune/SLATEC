@@ -35,7 +35,7 @@ SUBROUTINE ZACAI(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Rl,Tol,Elim,Alim)
   REAL(DP) :: Alim, arg, ascle, az, csgnr, csgni, cspnr, cspni, &
     c1r, c1i, c2r, c2i, cyr(2), cyi(2), dfnu, Elim, fmr, &
     Fnu, Rl, sgn, Tol, yy, Yr(N), Yi(N), Zr, Zi, znr, zni
-  REAL(DP), PARAMETER :: pi = 3.14159265358979324D0
+  REAL(DP), PARAMETER :: pi = 3.14159265358979324_DP
   !* FIRST EXECUTABLE STATEMENT  ZACAI
   Nz = 0
   znr = -Zr
@@ -43,12 +43,12 @@ SUBROUTINE ZACAI(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Rl,Tol,Elim,Alim)
   az = ZABS(Zr,Zi)
   nn = N
   dfnu = Fnu + (N-1)
-  IF( az<=2.0D0 ) THEN
+  IF( az<=2._DP ) THEN
     !-----------------------------------------------------------------------
     !     POWER SERIES FOR THE I FUNCTION
     !-----------------------------------------------------------------------
     CALL ZSERI(znr,zni,Fnu,Kode,nn,Yr,Yi,nw,Tol,Elim,Alim)
-  ELSEIF( az*az*0.25D0>dfnu+1.0D0 ) THEN
+  ELSEIF( az*az*0.25D0>dfnu+1._DP ) THEN
     IF( az<Rl ) THEN
       !-----------------------------------------------------------------------
       !     MILLER ALGORITHM NORMALIZED BY THE SERIES FOR THE I FUNCTION
@@ -72,7 +72,7 @@ SUBROUTINE ZACAI(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Rl,Tol,Elim,Alim)
   IF( nw==0 ) THEN
     fmr = Mr
     sgn = -SIGN(pi,fmr)
-    csgnr = 0.0D0
+    csgnr = 0._DP
     csgni = sgn
     IF( Kode/=1 ) THEN
       yy = -zni
@@ -97,7 +97,7 @@ SUBROUTINE ZACAI(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Rl,Tol,Elim,Alim)
     c2i = Yi(1)
     IF( Kode/=1 ) THEN
       iuf = 0
-      ascle = 1.0D+3*D1MACH(1)/Tol
+      ascle = 1.E3_DP*D1MACH(1)/Tol
       CALL ZS1S2(znr,zni,c1r,c1i,c2r,c2i,nw,ascle,Alim,iuf)
       Nz = Nz + nw
     END IF

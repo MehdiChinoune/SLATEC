@@ -108,25 +108,25 @@ CONTAINS
     !     FNUL is the lower boundary of the asymptotic series for large FNU.
     !-----------------------------------------------------------------------
     r1m4 = D1MACH(4)
-    tol = MAX(r1m4,1.0D-18)
-    atol = 100.0D0*tol
+    tol = MAX(r1m4,1.E-18_DP)
+    atol = 100._DP*tol
     aa = -LOG10(r1m4)
     k1 = I1MACH(12)
     k2 = I1MACH(13)
     r1m5 = D1MACH(5)
     k = MIN(ABS(k1),ABS(k2))
-    elim = 2.303D0*(k*r1m5-3.0D0)
-    ab = aa*2.303D0
-    alim = elim + MAX(-ab,-41.45D0)
-    dig = MIN(aa,18.0D0)
-    slak = 3.0D0 + 4.0D0*(-LOG10(tol)-7.0D0)/11.0D0
-    slak = MAX(slak,3.0D0)
-    ertol = tol*10.0D0**slak
-    rl = 1.2D0*dig + 3.0D0
-    rm = 0.5D0*(alim+elim)
-    rm = MIN(rm,200.0D0)
-    rm = MAX(rm,rl+10.0D0)
-    fnul = 10.0D0 + 6.0D0*(dig-3.0D0)
+    elim = 2.303_DP*(k*r1m5-3._DP)
+    ab = aa*2.303_DP
+    alim = elim + MAX(-ab,-41.45_DP)
+    dig = MIN(aa,18._DP)
+    slak = 3._DP + 4._DP*(-LOG10(tol)-7._DP)/11._DP
+    slak = MAX(slak,3._DP)
+    ertol = tol*10._DP**slak
+    rl = 1.2_DP*dig + 3._DP
+    rm = 0.5_DP*(alim+elim)
+    rm = MIN(rm,200._DP)
+    rm = MAX(rm,rl+10._DP)
+    fnul = 10._DP + 6._DP*(dig-3._DP)
     IF( Kprint>=2 ) THEN
       WRITE (Lun,99002)
       99002 FORMAT (' PARAMETERS'/5X,'TOL ',8X,'ELIM',8X,'ALIM',8X,'RL  ',8X,'FNUL',&
@@ -137,15 +137,15 @@ CONTAINS
     !-----------------------------------------------------------------------
     !     Generate angles for construction of complex Z to be used in tests.
     !-----------------------------------------------------------------------
-    fpi = ATAN(1.0D0)
+    fpi = ATAN(1._DP)
     hpi = fpi + fpi
     pi = hpi + hpi
     tpi = pi + pi
-    rpi = 1.0D0/pi
-    tpi3 = tpi/3.0D0
-    spi = pi/6.0D0
+    rpi = 1._DP/pi
+    tpi3 = tpi/3._DP
+    spi = pi/6._DP
     pi3 = spi + spi
-    rtpi = 1.0D0/tpi
+    rtpi = 1._DP/tpi
     a1 = rtpi*COS(spi)
     a2 = rtpi*SIN(spi)
     con1r = COS(tpi3)
@@ -153,8 +153,8 @@ CONTAINS
     con2r = a1
     con2i = -a2
     con3r = rpi
-    con3i = 0.0D0
-    c23 = 2.0D0/3.0D0
+    con3i = 0._DP
+    c23 = 2._DP/3._DP
     !-----------------------------------------------------------------------
     !     KDO(K), K = 1,IL  determines which of the IL angles in -PI to PI
     !     are used to compute values of Z.
@@ -190,7 +190,7 @@ CONTAINS
       keps(6) = 1
     END IF
     i = 2
-    eps = 0.01D0
+    eps = 0.01_DP
     film = il - 1
     t(1) = -pi + eps
     DO k = 2, il
@@ -226,11 +226,11 @@ CONTAINS
             !------------ switch (irset)
             SELECT CASE (irset)
               CASE (2)
-                r = (2.0D0*(4-ir)+rl*(ir-1))/3.0D0
+                r = (2._DP*(4-ir)+rl*(ir-1))/3._DP
               CASE (3)
-                r = (rl*(4-ir)+rm*(ir-1))/3.0D0
+                r = (rl*(4-ir)+rm*(ir-1))/3._DP
               CASE DEFAULT
-                r = 2.0D0*(ir-1)/3.0D0
+                r = 2._DP*(ir-1)/3._DP
             END SELECT
             !------------ end switch
             DO it = 1, itl
@@ -243,8 +243,8 @@ CONTAINS
               !----------------------------------------------------------------------
               ct = COS(t(it))
               st = SIN(t(it))
-              IF( ABS(ct)<atol ) ct = 0.0D0
-              IF( ABS(st)<atol ) st = 0.0D0
+              IF( ABS(ct)<atol ) ct = 0._DP
+              IF( ABS(st)<atol ) st = 0._DP
               zr = r*ct
               zi = r*st
               CALL ZSQRT(zr,zi,str,sti)
@@ -253,8 +253,8 @@ CONTAINS
               zrr = ptr
               azrr = ABS(zrr)
               !-------------- Check for possible underflow or overflow
-              IF( azrr/=0.0D0 ) THEN
-                arg = -azrr - 0.5D0*LOG(azrr) + 0.226D0
+              IF( azrr/=0._DP ) THEN
+                arg = -azrr - 0.5_DP*LOG(azrr) + 0.226_DP
                 arg = arg + arg
                 !---------------- Skip test for this case?
                 IF( arg<(-elim) ) CYCLE
@@ -497,25 +497,25 @@ CONTAINS
     !     FNUL is the lower boundary of the asymptotic series for large FNU.
     !-----------------------------------------------------------------------
     r1m4 = D1MACH(4)
-    tol = MAX(r1m4,1.0D-18)
-    atol = 100.0D0*tol
+    tol = MAX(r1m4,1.E-18_DP)
+    atol = 100._DP*tol
     aa = -LOG10(r1m4)
     k1 = I1MACH(12)
     k2 = I1MACH(13)
     r1m5 = D1MACH(5)
     k = MIN(ABS(k1),ABS(k2))
-    elim = 2.303D0*(k*r1m5-3.0D0)
-    ab = aa*2.303D0
-    alim = elim + MAX(-ab,-41.45D0)
-    dig = MIN(aa,18.0D0)
-    fnul = 10.0D0 + 6.0D0*(dig-3.0D0)
-    rl = 1.2D0*dig + 3.0D0
-    slak = 3.0D0 + 4.0D0*(-LOG10(tol)-7.0D0)/11.0D0
-    slak = MAX(slak,3.0D0)
-    ertol = tol*10.0D0**slak
-    rm = 0.5D0*(alim+elim)
-    rm = MIN(rm,200.0D0)
-    rm = MAX(rm,rl+10.0D0)
+    elim = 2.303_DP*(k*r1m5-3._DP)
+    ab = aa*2.303_DP
+    alim = elim + MAX(-ab,-41.45_DP)
+    dig = MIN(aa,18._DP)
+    fnul = 10._DP + 6._DP*(dig-3._DP)
+    rl = 1.2_DP*dig + 3._DP
+    slak = 3._DP + 4._DP*(-LOG10(tol)-7._DP)/11._DP
+    slak = MAX(slak,3._DP)
+    ertol = tol*10._DP**slak
+    rm = 0.5_DP*(alim+elim)
+    rm = MIN(rm,200._DP)
+    rm = MAX(rm,rl+10._DP)
     r2 = MIN(fnul,rm)
     IF( Kprint>=2 ) THEN
       WRITE (Lun,99002)
@@ -527,11 +527,11 @@ CONTAINS
     !-----------------------------------------------------------------------
     !     Set other constants needed in the tests.
     !-----------------------------------------------------------------------
-    fpi = ATAN(1.0D0)
+    fpi = ATAN(1._DP)
     hpi = fpi + fpi
     pi = hpi + hpi
-    rfpi = 1.0D0/fpi
-    znr = 0.0D0
+    rfpi = 1._DP/fpi
+    znr = 0._DP
     zni = -rfpi
     !-----------------------------------------------------------------------
     !     Generate angles for construction of complex Z to be used in tests.
@@ -558,11 +558,11 @@ CONTAINS
         kdo(i) = 0
       END DO
       nul = 5
-      xnu(1) = 0.0D0
-      xnu(2) = 1.0D0
-      xnu(3) = 2.0D0
-      xnu(4) = 0.5D0*fnul
-      xnu(5) = fnul + 1.1D0
+      xnu(1) = 0._DP
+      xnu(2) = 1._DP
+      xnu(3) = 2._DP
+      xnu(4) = 0.5_DP*fnul
+      xnu(5) = fnul + 1.1_DP
     ELSE
       nl = 4
       il = 13
@@ -581,15 +581,15 @@ CONTAINS
       keps(10) = 1
       keps(11) = 1
       nul = 6
-      xnu(1) = 0.0D0
-      xnu(2) = 0.6D0
-      xnu(3) = 1.3D0
-      xnu(4) = 2.0D0
-      xnu(5) = 0.5D0*fnul
-      xnu(6) = fnul + 1.1D0
+      xnu(1) = 0._DP
+      xnu(2) = 0.6_DP
+      xnu(3) = 1.3_DP
+      xnu(4) = 2._DP
+      xnu(5) = 0.5_DP*fnul
+      xnu(6) = fnul + 1.1_DP
     END IF
     i = 2
-    eps = 0.01D0
+    eps = 0.01_DP
     film = il - 1
     t(1) = -pi + eps
     DO k = 2, il
@@ -625,22 +625,22 @@ CONTAINS
               !-------------- switch (icase)
               SELECT CASE (icase)
                 CASE (2)
-                  r = (2.0D0*(3-ir)+r2*(ir-1))/2.0D0
+                  r = (2._DP*(3-ir)+r2*(ir-1))/2._DP
                 CASE (3)
                   IF( r2>=rm ) EXIT
-                  r = (r2*(3-ir)+rm*(ir-1))/2.0D0
+                  r = (r2*(3-ir)+rm*(ir-1))/2._DP
                 CASE DEFAULT
-                  r = (eps*(3-ir)+2.0D0*(ir-1))/2.0D0
+                  r = (eps*(3-ir)+2._DP*(ir-1))/2._DP
               END SELECT
               !-------------- end switch
               DO it = 1, itl
                 ct = COS(t(it))
                 st = SIN(t(it))
-                IF( ABS(ct)<atol ) ct = 0.0D0
-                IF( ABS(st)<atol ) st = 0.0D0
+                IF( ABS(ct)<atol ) ct = 0._DP
+                IF( ABS(st)<atol ) st = 0._DP
                 zr = r*ct
                 zi = r*st
-                IF( fnu>=2.0D0 ) THEN
+                IF( fnu>=2._DP ) THEN
                   !------------------ Check for possible overflow condition
                   cvr = -zi
                   cvi = zr
@@ -861,27 +861,27 @@ CONTAINS
     !     FNUL is the lower boundary of the asymptotic series for large FNU.
     !-----------------------------------------------------------------------
     r1m4 = D1MACH(4)
-    tol = MAX(r1m4,1.0D-18)
-    atol = 100.0D0*tol
+    tol = MAX(r1m4,1.E-18_DP)
+    atol = 100._DP*tol
     aa = -LOG10(r1m4)
     k1 = I1MACH(12)
     k2 = I1MACH(13)
     r1m5 = D1MACH(5)
     k = MIN(ABS(k1),ABS(k2))
-    elim = 2.303D0*(k*r1m5-3.0D0)
-    ab = aa*2.303D0
-    alim = elim + MAX(-ab,-41.45D0)
-    dig = MIN(aa,18.0D0)
-    fnul = 10.0D0 + 6.0D0*(dig-3.0D0)
-    rl = 1.2D0*dig + 3.0D0
-    slak = 3.0D0 + 4.0D0*(-LOG10(tol)-7.0D0)/11.0D0
-    slak = MAX(slak,3.0D0)
-    ertol = tol*10.0D0**slak
-    rm = 0.5D0*(alim+elim)
-    rm = MIN(rm,200.0D0)
-    rm = MAX(rm,rl+10.0D0)
+    elim = 2.303_DP*(k*r1m5-3._DP)
+    ab = aa*2.303_DP
+    alim = elim + MAX(-ab,-41.45_DP)
+    dig = MIN(aa,18._DP)
+    fnul = 10._DP + 6._DP*(dig-3._DP)
+    rl = 1.2_DP*dig + 3._DP
+    slak = 3._DP + 4._DP*(-LOG10(tol)-7._DP)/11._DP
+    slak = MAX(slak,3._DP)
+    ertol = tol*10._DP**slak
+    rm = 0.5_DP*(alim+elim)
+    rm = MIN(rm,200._DP)
+    rm = MAX(rm,rl+10._DP)
     r2 = MIN(rm,fnul)
-    r1 = 2.0D0*SQRT(fnul+1.0D0)
+    r1 = 2._DP*SQRT(fnul+1._DP)
     IF( Kprint>=2 ) THEN
       WRITE (Lun,99002)
       99002 FORMAT (' PARAMETERS'/5X,'TOL ',8X,'ELIM',8X,'ALIM',8X,'RL  ',8X,'FNUL',&
@@ -892,10 +892,10 @@ CONTAINS
     !-----------------------------------------------------------------------
     !     Set other constants needed in the tests.
     !-----------------------------------------------------------------------
-    zzr = 1.0D0/tol
-    coner = 1.0D0
-    conei = 0.0D0
-    hpi = 2.0D0*ATAN(1.0D0)
+    zzr = 1._DP/tol
+    coner = 1._DP
+    conei = 0._DP
+    hpi = 2._DP*ATAN(1._DP)
     pi = hpi + hpi
     !-----------------------------------------------------------------------
     !     Generate angles for construction of complex Z to be used in tests.
@@ -940,7 +940,7 @@ CONTAINS
       keps(11) = 1
     END IF
     i = 2
-    eps = 0.01D0
+    eps = 0.01_DP
     film = il - 1
     t(1) = -pi + eps
     DO k = 2, il
@@ -977,36 +977,36 @@ CONTAINS
             !------------ switch (icase)
             SELECT CASE (icase)
               CASE (2)
-                r = (rl*(3-ir)+r2*(ir-1))/2.0D0
-                gnu = SQRT(r+r) - 0.2D0 - (n-1)
-                fnu = MAX(0.0D0,gnu)
+                r = (rl*(3-ir)+r2*(ir-1))/2._DP
+                gnu = SQRT(r+r) - 0.2_DP - (n-1)
+                fnu = MAX(0._DP,gnu)
               CASE (3)
                 IF( r2>=rm ) GOTO 100
-                r = (r2*(3-ir)+rm*(ir-1))/2.0D0
-                gnu = SQRT(r+r) - 0.2D0 - (n-1)
-                fnu = MAX(0.0D0,gnu)
+                r = (r2*(3-ir)+rm*(ir-1))/2._DP
+                gnu = SQRT(r+r) - 0.2_DP - (n-1)
+                fnu = MAX(0._DP,gnu)
               CASE (4)
                 IF( r1>=rl ) GOTO 100
-                r = (r1*(3-ir)+rl*(ir-1))/2.0D0
-                fnu = fnul - 0.2D0 - (n-1)
+                r = (r1*(3-ir)+rl*(ir-1))/2._DP
+                fnu = fnul - 0.2_DP - (n-1)
               CASE (5)
-                r = (rl*(3-ir)+r2*(ir-1))/2.0D0
-                fnu = fnul - 0.2D0 - (n-1)
+                r = (rl*(3-ir)+r2*(ir-1))/2._DP
+                fnu = fnul - 0.2_DP - (n-1)
               CASE (6)
                 IF( r2>=rm ) GOTO 100
-                r = (r2*(3-ir)+rm*(ir-1))/2.0D0
-                fnu = fnul - 0.2D0 - (n-1)
+                r = (r2*(3-ir)+rm*(ir-1))/2._DP
+                fnu = fnul - 0.2_DP - (n-1)
               CASE DEFAULT
-                r = (2.0D0*(3-ir)+rl*(ir-1))/2.0D0
-                gnu = r*r/4.0D0 - 0.2D0 - (n-1)
-                fnu = MAX(0.0D0,gnu)
+                r = (2._DP*(3-ir)+rl*(ir-1))/2._DP
+                gnu = r*r/4._DP - 0.2_DP - (n-1)
+                fnu = MAX(0._DP,gnu)
             END SELECT
             !------------ end switch
             DO it = 1, itl
               ct = COS(t(it))
               st = SIN(t(it))
-              IF( ABS(ct)<atol ) ct = 0.0D0
-              IF( ABS(st)<atol ) st = 0.0D0
+              IF( ABS(ct)<atol ) ct = 0._DP
+              IF( ABS(st)<atol ) st = 0._DP
               zr = r*ct
               zi = r*st
               CALL ZBESI(zr,zi,fnu,kode,n1,yr,yi,nz1,ierr)
@@ -1017,7 +1017,7 @@ CONTAINS
                 !-----------------------------------------------------------------------
                 znr = zr
                 zni = zi
-                IF( zr>=0.0D0 ) THEN
+                IF( zr>=0._DP ) THEN
                   CALL ZWRSK(znr,zni,fnu,kode,n,wr,wi,nz2,ckr,cki,tol,elim,alim)
                   IF( nz2/=0 ) CYCLE
                 ELSE
@@ -1025,7 +1025,7 @@ CONTAINS
                   zni = -zi
                   inu = INT(fnu)
                   arg = (fnu-inu)*pi
-                  IF( zi<0.0D0 ) arg = -arg
+                  IF( zi<0._DP ) arg = -arg
                   carg = COS(arg)
                   sarg = SIN(arg)
                   csgnr = carg
@@ -1047,14 +1047,14 @@ CONTAINS
                 mflg = 0
                 DO i = 1, n
                   ab = fnu + i - 1
-                  aa = MAX(2.0D0,ab)
+                  aa = MAX(2._DP,ab)
                   ztr = wr(i)
                   zti = wi(i)
-                  IF( ABS(ztr)>1.0D0 .OR. ABS(zti)>1.0D0 ) THEN
+                  IF( ABS(ztr)>1._DP .OR. ABS(zti)>1._DP ) THEN
                     zscr = tol
                   ELSE
                     zscr = zzr
-                    !------------------ ZZR = 1.0D0/TOL
+                    !------------------ ZZR = 1._DP/TOL
                   END IF
                   cwr = wr(i)*zscr
                   cwi = wi(i)*zscr
@@ -1064,9 +1064,9 @@ CONTAINS
                   sti = cyi - cwi
                   er = ZABS(str,sti)
                   aw = ZABS(cwr,cwi)
-                  IF( aw==0.0D0 ) THEN
+                  IF( aw==0._DP ) THEN
                     er = ZABS(yr(i),yi(i))
-                  ELSEIF( zr/=0.0D0 ) THEN
+                  ELSEIF( zr/=0._DP ) THEN
                     er = er/aw
                   ELSEIF( ABS(zi)<aa ) THEN
                     er = er/aw
@@ -1149,22 +1149,22 @@ CONTAINS
         WRITE (Lun,99015)
         99015 FORMAT (/' CHECKS NEAR UNDERFLOW AND OVERFLOW LIMITS'/)
       END IF
-      zr = 1.4D0
-      zi = 1.4D0
+      zr = 1.4_DP
+      zi = 1.4_DP
       kode = 1
       n = 20
       DO i = 1, 2
-        fnu = 10.2D0
+        fnu = 10.2_DP
         DO
           !-----------------------------------------------------------------------
           !       Adjust FNU by repeating until 0<NZI<10
           !-----------------------------------------------------------------------
           CALL ZBESI(zr,zi,fnu,kode,n,yr,yi,nzi,ierr)
           IF( nzi==0 ) THEN
-            fnu = fnu + 5.0D0
+            fnu = fnu + 5._DP
             CYCLE
           ELSEIF( nzi>=10 ) THEN
-            fnu = fnu - 1.0D0
+            fnu = fnu - 1._DP
             CYCLE
           END IF
           !------ End repeat
@@ -1194,7 +1194,7 @@ CONTAINS
           END IF
           rlt = rl + rl
           zr = rlt
-          zi = 0.0D0
+          zi = 0._DP
           EXIT
         END DO
       END DO
@@ -1204,8 +1204,8 @@ CONTAINS
       !     report cases for which the relative error is greater than ERTOL.
       !-----------------------------------------------------------------------
       zr = elim
-      zi = 0.0D0
-      fnu = 0.0D0
+      zi = 0._DP
+      fnu = 0._DP
       DO
         !-----------------------------------------------------------------------
         !     Adjust FNU by repeating until NZK<10
@@ -1214,9 +1214,9 @@ CONTAINS
         CALL ZBESK(zr,zi,fnu,kode,n,yr,yi,nzk,ierr)
         IF( nzk>=10 ) THEN
           IF( nzk==n ) THEN
-            fnu = fnu + 3.0D0
+            fnu = fnu + 3._DP
           ELSE
-            fnu = fnu + 2.0D0
+            fnu = fnu + 2._DP
           END IF
           CYCLE
         END IF
@@ -1383,25 +1383,25 @@ CONTAINS
     !     FNUL is the lower boundary of the asymptotic series for large FNU.
     !-----------------------------------------------------------------------
     r1m4 = D1MACH(4)
-    tol = MAX(r1m4,1.0D-18)
-    atol = 100.0D0*tol
+    tol = MAX(r1m4,1.E-18_DP)
+    atol = 100._DP*tol
     aa = -LOG10(r1m4)
     k1 = I1MACH(12)
     k2 = I1MACH(13)
     r1m5 = D1MACH(5)
     k = MIN(ABS(k1),ABS(k2))
-    elim = 2.303D0*(k*r1m5-3.0D0)
-    ab = aa*2.303D0
-    alim = elim + MAX(-ab,-41.45D0)
-    dig = MIN(aa,18.0D0)
-    fnul = 10.0D0 + 6.0D0*(dig-3.0D0)
-    rl = 1.2D0*dig + 3.0D0
-    slak = 3.0D0 + 4.0D0*(-LOG10(tol)-7.0D0)/11.0D0
-    slak = MAX(slak,3.0D0)
-    ertol = tol*10.0D0**slak
-    rm = 0.5D0*(alim+elim)
-    rm = MIN(rm,200.0D0)
-    rm = MAX(rm,rl+10.0D0)
+    elim = 2.303_DP*(k*r1m5-3._DP)
+    ab = aa*2.303_DP
+    alim = elim + MAX(-ab,-41.45_DP)
+    dig = MIN(aa,18._DP)
+    fnul = 10._DP + 6._DP*(dig-3._DP)
+    rl = 1.2_DP*dig + 3._DP
+    slak = 3._DP + 4._DP*(-LOG10(tol)-7._DP)/11._DP
+    slak = MAX(slak,3._DP)
+    ertol = tol*10._DP**slak
+    rm = 0.5_DP*(alim+elim)
+    rm = MIN(rm,200._DP)
+    rm = MAX(rm,rl+10._DP)
     r2 = MIN(rm,fnul)
     IF( Kprint>=2 ) THEN
       WRITE (Lun,99002)
@@ -1413,9 +1413,9 @@ CONTAINS
     !-----------------------------------------------------------------------
     !     Set other constants needed in the tests.
     !-----------------------------------------------------------------------
-    halfr = 0.5D0
-    halfi = 0.0D0
-    hpi = 2.0D0*ATAN(1.0D0)
+    halfr = 0.5_DP
+    halfi = 0._DP
+    hpi = 2._DP*ATAN(1._DP)
     pi = hpi + hpi
     !-----------------------------------------------------------------------
     !     Generate angles for construction of complex Z to be used in tests.
@@ -1442,11 +1442,11 @@ CONTAINS
         kdo(i) = 0
       END DO
       nul = 5
-      xnu(1) = 0.0D0
-      xnu(2) = 1.0D0
-      xnu(3) = 2.0D0
-      xnu(4) = 0.5D0*fnul
-      xnu(5) = fnul + 1.1D0
+      xnu(1) = 0._DP
+      xnu(2) = 1._DP
+      xnu(3) = 2._DP
+      xnu(4) = 0.5_DP*fnul
+      xnu(5) = fnul + 1.1_DP
     ELSE
       nl = 4
       il = 13
@@ -1465,15 +1465,15 @@ CONTAINS
       keps(10) = 1
       keps(11) = 1
       nul = 6
-      xnu(1) = 0.0D0
-      xnu(2) = 0.6D0
-      xnu(3) = 1.3D0
-      xnu(4) = 2.0D0
-      xnu(5) = 0.5D0*fnul
-      xnu(6) = fnul + 1.1D0
+      xnu(1) = 0._DP
+      xnu(2) = 0.6_DP
+      xnu(3) = 1.3_DP
+      xnu(4) = 2._DP
+      xnu(5) = 0.5_DP*fnul
+      xnu(6) = fnul + 1.1_DP
     END IF
     i = 2
-    eps = 0.01D0
+    eps = 0.01_DP
     film = il - 1
     t(1) = -pi + eps
     DO k = 2, il
@@ -1508,20 +1508,20 @@ CONTAINS
               !-------------- switch (icase)
               SELECT CASE (icase)
                 CASE (2)
-                  r = (2.0D0*(4-ir)+r2*(ir-1))/3.0D0
+                  r = (2._DP*(4-ir)+r2*(ir-1))/3._DP
                 CASE (3)
                   IF( r2>=rm ) EXIT
-                  r = (r2*(4-ir)+rm*(ir-1))/3.0D0
+                  r = (r2*(4-ir)+rm*(ir-1))/3._DP
                 CASE DEFAULT
-                  r = (eps*(4-ir)+2.0D0*(ir-1))/3.0D0
+                  r = (eps*(4-ir)+2._DP*(ir-1))/3._DP
               END SELECT
               !-------------- end switch
               gnu = fnu + (n-1)
               DO it = 1, itl
                 ct = COS(t(it))
                 st = SIN(t(it))
-                IF( ABS(ct)<atol ) ct = 0.0D0
-                IF( ABS(st)<atol ) st = 0.0D0
+                IF( ABS(ct)<atol ) ct = 0._DP
+                IF( ABS(st)<atol ) st = 0._DP
                 zr = r*ct
                 zi = r*st
                 IF( r>=gnu ) THEN
@@ -1539,8 +1539,8 @@ CONTAINS
                       cwi = zr
                       CALL ZEXP(cwr,cwi,coe1r,coe1i)
                     ELSE
-                      coe1r = 0.0D0
-                      coe1i = 0.0D0
+                      coe1r = 0._DP
+                      coe1i = 0._DP
                     END IF
                     dd = zi - ABS(zi)
                     IF( dd>(-alim) ) THEN
@@ -1548,8 +1548,8 @@ CONTAINS
                       cwi = -zr
                       CALL ZEXP(cwr,cwi,coe2r,coe2i)
                     ELSE
-                      coe2r = 0.0D0
-                      coe2i = 0.0D0
+                      coe2r = 0._DP
+                      coe2i = 0._DP
                     END IF
                     DO kk = 1, n
                       str = yr(kk)*coe2r - yi(kk)*coe2i
@@ -1583,15 +1583,15 @@ CONTAINS
                 mflg = 0
                 DO i = 1, n
                   ab = fnu + i - 1
-                  aa = MAX(2.0D0,ab)
+                  aa = MAX(2._DP,ab)
                   cwr = (wr(i)+yr(i))*halfr - (wi(i)+yi(i))*halfi
                   cwi = (wr(i)+yr(i))*halfi + (wi(i)+yi(i))*halfr
                   av = ZABS(vr(i),vi(i))
                   ar = cwr - vr(i)
                   ai = cwi - vi(i)
                   er = ZABS(ar,ai)
-                  IF( av/=0.0D0 ) THEN
-                    IF( zi==0.0D0 ) THEN
+                  IF( av/=0._DP ) THEN
+                    IF( zi==0._DP ) THEN
                       IF( ABS(zr)<aa ) er = er/av
                     ELSE
                       er = er/av
@@ -1784,25 +1784,25 @@ CONTAINS
     !     FNUL is the lower boundary of the asymptotic series for large FNU.
     !-----------------------------------------------------------------------
     r1m4 = D1MACH(4)
-    tol = MAX(r1m4,1.0D-18)
-    atol = 100.0D0*tol
+    tol = MAX(r1m4,1.E-18_DP)
+    atol = 100._DP*tol
     aa = -LOG10(r1m4)
     k1 = I1MACH(12)
     k2 = I1MACH(13)
     r1m5 = D1MACH(5)
     k = MIN(ABS(k1),ABS(k2))
-    elim = 2.303D0*(k*r1m5-3.0D0)
-    ab = aa*2.303D0
-    alim = elim + MAX(-ab,-41.45D0)
-    dig = MIN(aa,18.0D0)
-    fnul = 10.0D0 + 6.0D0*(dig-3.0D0)
-    rl = 1.2D0*dig + 3.0D0
-    slak = 3.0D0 + 4.0D0*(-LOG10(tol)-7.0D0)/11.0D0
-    slak = MAX(slak,3.0D0)
-    ertol = tol*10.0D0**slak
-    rm = 0.5D0*(alim+elim)
-    rm = MIN(rm,200.0D0)
-    rm = MAX(rm,rl+10.0D0)
+    elim = 2.303_DP*(k*r1m5-3._DP)
+    ab = aa*2.303_DP
+    alim = elim + MAX(-ab,-41.45_DP)
+    dig = MIN(aa,18._DP)
+    fnul = 10._DP + 6._DP*(dig-3._DP)
+    rl = 1.2_DP*dig + 3._DP
+    slak = 3._DP + 4._DP*(-LOG10(tol)-7._DP)/11._DP
+    slak = MAX(slak,3._DP)
+    ertol = tol*10._DP**slak
+    rm = 0.5_DP*(alim+elim)
+    rm = MIN(rm,200._DP)
+    rm = MAX(rm,rl+10._DP)
     r2 = MIN(rm,fnul)
     IF( Kprint>=2 ) THEN
       WRITE (Lun,99002)
@@ -1814,9 +1814,9 @@ CONTAINS
     !-----------------------------------------------------------------------
     !     Set other constants needed in the tests.
     !-----------------------------------------------------------------------
-    coner = 1.0D0
-    conei = 0.0D0
-    hpi = 2.0D0*ATAN(1.0D0)
+    coner = 1._DP
+    conei = 0._DP
+    hpi = 2._DP*ATAN(1._DP)
     pi = hpi + hpi
     !-----------------------------------------------------------------------
     !     Generate angles for construction of complex Z to be used in tests.
@@ -1843,11 +1843,11 @@ CONTAINS
         kdo(i) = 0
       END DO
       nul = 5
-      xnu(1) = 0.0D0
-      xnu(2) = 1.0D0
-      xnu(3) = 2.0D0
-      xnu(4) = 0.5D0*fnul
-      xnu(5) = fnul + 1.1D0
+      xnu(1) = 0._DP
+      xnu(2) = 1._DP
+      xnu(3) = 2._DP
+      xnu(4) = 0.5_DP*fnul
+      xnu(5) = fnul + 1.1_DP
     ELSE
       nl = 4
       il = 13
@@ -1866,15 +1866,15 @@ CONTAINS
       keps(10) = 1
       keps(11) = 1
       nul = 6
-      xnu(1) = 0.0D0
-      xnu(2) = 0.6D0
-      xnu(3) = 1.3D0
-      xnu(4) = 2.0D0
-      xnu(5) = 0.5D0*fnul
-      xnu(6) = fnul + 1.1D0
+      xnu(1) = 0._DP
+      xnu(2) = 0.6_DP
+      xnu(3) = 1.3_DP
+      xnu(4) = 2._DP
+      xnu(5) = 0.5_DP*fnul
+      xnu(6) = fnul + 1.1_DP
     END IF
     i = 2
-    eps = 0.01D0
+    eps = 0.01_DP
     film = il - 1
     t(1) = -pi + eps
     DO k = 2, il
@@ -1919,19 +1919,19 @@ CONTAINS
               !-------------- switch (icase)
               SELECT CASE (icase)
                 CASE (2)
-                  r = (2.0D0*(4-ir)+r2*(ir-1))/3.0D0
+                  r = (2._DP*(4-ir)+r2*(ir-1))/3._DP
                 CASE (3)
                   IF( r2>=rm ) EXIT
-                  r = (r2*(4-ir)+rm*(ir-1))/3.0D0
+                  r = (r2*(4-ir)+rm*(ir-1))/3._DP
                 CASE DEFAULT
-                  r = (eps*(4-ir)+2.0D0*(ir-1))/3.0D0
+                  r = (eps*(4-ir)+2._DP*(ir-1))/3._DP
               END SELECT
               !-------------- end switch
               DO it = 1, itl
                 ct = COS(t(it))
                 st = SIN(t(it))
-                IF( ABS(ct)<atol ) ct = 0.0D0
-                IF( ABS(st)<atol ) st = 0.0D0
+                IF( ABS(ct)<atol ) ct = 0._DP
+                IF( ABS(st)<atol ) st = 0._DP
                 zr = r*ct
                 zi = r*st
                 CALL ZBESI(zr,zi,fnu,kode,n1,wr,wi,nz2,ierr)
@@ -1944,7 +1944,7 @@ CONTAINS
                   !     This cancellation can be done analytically to give a Wronskian in
                   !     terms of I in the left half plane and K in the right half plane.
                   !-----------------------------------------------------------------------
-                  IF( icase==1 .OR. ct>=0.0D0 ) THEN
+                  IF( icase==1 .OR. ct>=0._DP ) THEN
                     !------------------ Z is in the right half plane
                     CALL ZBESK(zr,zi,fnu,kode,n1,yr,yi,nz1,ierr)
                     CALL ZDIV(coner,conei,zr,zi,cvr,cvi)
@@ -1952,7 +1952,7 @@ CONTAINS
                       !-------------------- Adjust Wronskian due to scaled I and K functions
                       axx = ABS(zr)
                       znr = -axx
-                      zni = 0.0D0
+                      zni = 0._DP
                       cvr = znr + zr
                       cvi = zni + zi
                       CALL ZEXP(cvr,cvi,str,sti)
@@ -1966,7 +1966,7 @@ CONTAINS
                     znr = csgnr
                     zni = csgni
                     !------------------ CSGNR and CSGNI set near top of DO 180 loop
-                    IF( st>0.0D0 .OR. (st==0.0D0 .AND. ct<0.0D0) ) zni = -zni
+                    IF( st>0._DP .OR. (st==0._DP .AND. ct<0._DP) ) zni = -zni
                     DO kk = 1, n1
                       str = yr(kk)*znr - yi(kk)*zni
                       yi(kk) = yr(kk)*zni + yi(kk)*znr
@@ -1979,7 +1979,7 @@ CONTAINS
                       !-------------------- Adjust Wronskian due to scaled I and K functions
                       axx = ABS(zr)
                       znr = -axx
-                      zni = 0.0D0
+                      zni = 0._DP
                       cvr = znr - zr
                       cvi = zni - zi
                       CALL ZEXP(cvr,cvi,str,sti)
@@ -2154,8 +2154,8 @@ CONTAINS
       r1m5, r2, slak, st, sti, str, t(20), tol, ts, xnu(20)
     INTEGER :: i, icase, ierr, ifnu, il, ir, irb, it, itl, i4, k, &
       kdo(20), keps(20), kk, kode, k1, k2, lflg, mflg, n, nl, nu, nul, nz, nz1, nz2
-    REAL(DP), PARAMETER :: cipr(4) = [ 1.0D0, 0.0D0, -1.0D0, 0.0D0 ]
-    REAL(DP), PARAMETER :: cipi(4) = [ 0.0D0, 1.0D0, 0.0D0, -1.0D0 ]
+    REAL(DP), PARAMETER :: cipr(4) = [ 1._DP, 0._DP, -1._DP, 0._DP ]
+    REAL(DP), PARAMETER :: cipi(4) = [ 0._DP, 1._DP, 0._DP, -1._DP ]
     !
     !* FIRST EXECUTABLE STATEMENT  ZQCBY
     IF( Kprint>=2 ) THEN
@@ -2174,25 +2174,25 @@ CONTAINS
     !     FNUL is the lower boundary of the asymptotic series for large FNU.
     !-----------------------------------------------------------------------
     r1m4 = D1MACH(4)
-    tol = MAX(r1m4,1.0D-18)
-    atol = 100.0D0*tol
+    tol = MAX(r1m4,1.E-18_DP)
+    atol = 100._DP*tol
     aa = -LOG10(r1m4)
     k1 = I1MACH(12)
     k2 = I1MACH(13)
     r1m5 = D1MACH(5)
     k = MIN(ABS(k1),ABS(k2))
-    elim = 2.303D0*(k*r1m5-3.0D0)
-    ab = aa*2.303D0
-    alim = elim + MAX(-ab,-41.45D0)
-    dig = MIN(aa,18.0D0)
-    fnul = 10.0D0 + 6.0D0*(dig-3.0D0)
-    rl = 1.2D0*dig + 3.0D0
-    slak = 3.0D0 + 4.0D0*(-LOG10(tol)-7.0D0)/11.0D0
-    slak = MAX(slak,3.0D0)
-    ertol = tol*10.0D0**slak
-    rm = 0.5D0*(alim+elim)
-    rm = MIN(rm,200.0D0)
-    rm = MAX(rm,rl+10.0D0)
+    elim = 2.303_DP*(k*r1m5-3._DP)
+    ab = aa*2.303_DP
+    alim = elim + MAX(-ab,-41.45_DP)
+    dig = MIN(aa,18._DP)
+    fnul = 10._DP + 6._DP*(dig-3._DP)
+    rl = 1.2_DP*dig + 3._DP
+    slak = 3._DP + 4._DP*(-LOG10(tol)-7._DP)/11._DP
+    slak = MAX(slak,3._DP)
+    ertol = tol*10._DP**slak
+    rm = 0.5_DP*(alim+elim)
+    rm = MIN(rm,200._DP)
+    rm = MAX(rm,rl+10._DP)
     r2 = MIN(rm,fnul)
     IF( Kprint>=2 ) THEN
       WRITE (Lun,99002)
@@ -2204,8 +2204,8 @@ CONTAINS
     !-----------------------------------------------------------------------
     !     Set other constants needed in the tests.
     !-----------------------------------------------------------------------
-    hpi = 2.0D0*ATAN(1.0D0)
-    rhpi = 1.0D0/hpi
+    hpi = 2._DP*ATAN(1._DP)
+    rhpi = 1._DP/hpi
     pi = hpi + hpi
     !-----------------------------------------------------------------------
     !     Generate angles for construction of complex Z to be used in tests.
@@ -2233,11 +2233,11 @@ CONTAINS
       END DO
       kdo(5) = 1
       nul = 5
-      xnu(1) = 0.0D0
-      xnu(2) = 1.0D0
-      xnu(3) = 2.0D0
-      xnu(4) = 0.5D0*fnul
-      xnu(5) = fnul + 1.2D0
+      xnu(1) = 0._DP
+      xnu(2) = 1._DP
+      xnu(3) = 2._DP
+      xnu(4) = 0.5_DP*fnul
+      xnu(5) = fnul + 1.2_DP
     ELSE
       nl = 4
       il = 13
@@ -2256,15 +2256,15 @@ CONTAINS
       keps(5) = 1
       keps(9) = 1
       nul = 6
-      xnu(1) = 0.0D0
-      xnu(2) = 0.6D0
-      xnu(3) = 1.3D0
-      xnu(4) = 2.0D0
-      xnu(5) = 0.5D0*fnul
-      xnu(6) = fnul + 1.2D0
+      xnu(1) = 0._DP
+      xnu(2) = 0.6_DP
+      xnu(3) = 1.3_DP
+      xnu(4) = 2._DP
+      xnu(5) = 0.5_DP*fnul
+      xnu(6) = fnul + 1.2_DP
     END IF
     i = 2
-    eps = 0.01D0
+    eps = 0.01_DP
     film = il - 1
     t(1) = -pi + eps
     DO k = 2, il
@@ -2319,19 +2319,19 @@ CONTAINS
               !-------------- switch (icase)
               SELECT CASE (icase)
                 CASE (2)
-                  r = (2.0D0*(4-ir)+r2*(ir-1))/3.0D0
+                  r = (2._DP*(4-ir)+r2*(ir-1))/3._DP
                 CASE (3)
                   IF( r2>=rm ) EXIT
-                  r = (r2*(4-ir)+rm*(ir-1))/3.0D0
+                  r = (r2*(4-ir)+rm*(ir-1))/3._DP
                 CASE DEFAULT
-                  r = (eps*(4-ir)+2.0D0*(ir-1))/3.0D0
+                  r = (eps*(4-ir)+2._DP*(ir-1))/3._DP
               END SELECT
               !-------------- end switch
               DO it = 1, itl
                 ct = COS(t(it))
                 st = SIN(t(it))
-                IF( ABS(ct)<atol ) ct = 0.0D0
-                IF( ABS(st)<atol ) st = 0.0D0
+                IF( ABS(ct)<atol ) ct = 0._DP
+                IF( ABS(st)<atol ) st = 0._DP
                 zr = r*ct
                 zi = r*st
                 CALL ZBESI(zr,zi,fnu,kode,n,wr,wi,nz2,ierr)
@@ -2361,8 +2361,8 @@ CONTAINS
                           coe2r = ptr
                         ELSE
                           !-------------------- Scaling problem - skip test for this case
-                          coe2r = 0.0D0
-                          coe2i = 0.0D0
+                          coe2r = 0._DP
+                          coe2i = 0._DP
                           CYCLE
                         END IF
                       END IF
@@ -2386,19 +2386,19 @@ CONTAINS
                       mflg = 0
                       DO i = 1, n
                         ab = fnu + i - 1
-                        aa = MAX(0.5D0,ab)
+                        aa = MAX(0.5_DP,ab)
                         cwr = wr(i) - yr(i)
                         cwi = wi(i) - yi(i)
                         av = ZABS(vr(i),vi(i))
                         ar = cwr - vr(i)
                         ai = cwi - vi(i)
                         er = ZABS(ar,ai)
-                        IF( av/=0.0D0 ) THEN
-                          IF( zni/=0.0D0 ) THEN
+                        IF( av/=0._DP ) THEN
+                          IF( zni/=0._DP ) THEN
                             er = er/av
-                          ELSEIF( znr>0.0D0 ) THEN
+                          ELSEIF( znr>0._DP ) THEN
                             IF( ABS(znr)<aa ) er = er/av
-                          ELSEIF( ABS(ffnu-0.5D0)<0.125D0 ) THEN
+                          ELSEIF( ABS(ffnu-0.5_DP)<0.125_DP ) THEN
                             IF( ABS(znr)<aa ) er = er/av
                           ELSE
                             er = er/av

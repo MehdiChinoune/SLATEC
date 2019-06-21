@@ -89,10 +89,10 @@ SUBROUTINE DQC25C(F,A,B,C,Result,Abserr,Krul,Neval)
   !           K = 1, ..., 11, TO BE USED FOR THE CHEBYSHEV SERIES
   !           EXPANSION OF F
   !
-  REAL(DP), PARAMETER :: x(11) = [ 0.9914448613738104D+00, 0.9659258262890683D+00, &
-    0.9238795325112868D+00, 0.8660254037844386D+00, 0.7933533402912352D+00, &
-    0.7071067811865475D+00, 0.6087614290087206D+00, 0.5000000000000000D+00, &
-    0.3826834323650898D+00, 0.2588190451025208D+00, 0.1305261922200516D+00 ]
+  REAL(DP), PARAMETER :: x(11) = [ 0.9914448613738104E+00_DP, 0.9659258262890683E+00_DP, &
+    0.9238795325112868E+00_DP, 0.8660254037844386E+00_DP, 0.7933533402912352E+00_DP, &
+    0.7071067811865475E+00_DP, 0.6087614290087206E+00_DP, 0.5000000000000000E+00_DP, &
+    0.3826834323650898E+00_DP, 0.2588190451025208E+00_DP, 0.1305261922200516E+00_DP ]
   !
   !           LIST OF MAJOR VARIABLES
   !           ----------------------
@@ -115,17 +115,17 @@ SUBROUTINE DQC25C(F,A,B,C,Result,Abserr,Krul,Neval)
   !           CHECK THE POSITION OF C.
   !
   !* FIRST EXECUTABLE STATEMENT  DQC25C
-  cc = (0.2D+01*C-B-A)/(B-A)
+  cc = (2._DP*C-B-A)/(B-A)
   IF( ABS(cc)<0.11D+01 ) THEN
     !
     !           USE THE GENERALIZED CLENSHAW-CURTIS METHOD.
     !
-    hlgth = 0.5D+00*(B-A)
-    centr = 0.5D+00*(B+A)
+    hlgth = 0.5_DP*(B-A)
+    centr = 0.5_DP*(B+A)
     Neval = 25
-    fval(1) = 0.5D+00*F(hlgth+centr)
+    fval(1) = 0.5_DP*F(hlgth+centr)
     fval(13) = F(centr)
-    fval(25) = 0.5D+00*F(centr-hlgth)
+    fval(25) = 0.5_DP*F(centr-hlgth)
     DO i = 2, 12
       u = hlgth*x(i-1)
       isym = 26 - i
@@ -140,23 +140,23 @@ SUBROUTINE DQC25C(F,A,B,C,Result,Abserr,Krul,Neval)
     !           THE MODIFIED CHEBYSHEV MOMENTS ARE COMPUTED BY FORWARD
     !           RECURSION, USING AMOM0 AND AMOM1 AS STARTING VALUES.
     !
-    amom0 = LOG(ABS((0.1D+01-cc)/(0.1D+01+cc)))
-    amom1 = 0.2D+01 + cc*amom0
+    amom0 = LOG(ABS((1._DP-cc)/(1._DP+cc)))
+    amom1 = 2._DP + cc*amom0
     res12 = cheb12(1)*amom0 + cheb12(2)*amom1
     res24 = cheb24(1)*amom0 + cheb24(2)*amom1
     DO k = 3, 13
-      amom2 = 0.2D+01*cc*amom1 - amom0
+      amom2 = 2._DP*cc*amom1 - amom0
       ak22 = (k-2)*(k-2)
-      IF( (k/2)*2==k ) amom2 = amom2 - 0.4D+01/(ak22-0.1D+01)
+      IF( (k/2)*2==k ) amom2 = amom2 - 4._DP/(ak22-1._DP)
       res12 = res12 + cheb12(k)*amom2
       res24 = res24 + cheb24(k)*amom2
       amom0 = amom1
       amom1 = amom2
     END DO
     DO k = 14, 25
-      amom2 = 0.2D+01*cc*amom1 - amom0
+      amom2 = 2._DP*cc*amom1 - amom0
       ak22 = (k-2)*(k-2)
-      IF( (k/2)*2==k ) amom2 = amom2 - 0.4D+01/(ak22-0.1D+01)
+      IF( (k/2)*2==k ) amom2 = amom2 - 4._DP/(ak22-1._DP)
       res24 = res24 + cheb24(k)*amom2
       amom0 = amom1
       amom1 = amom2

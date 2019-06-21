@@ -29,7 +29,7 @@ SUBROUTINE RADF4(Ido,L1,Cc,Ch,Wa1,Wa2,Wa3)
   INTEGER :: i, ic, idp2, k
   REAL(SP) :: ci2, ci3, ci4, cr2, cr3, cr4, hsqt2, ti1, ti2, ti3, ti4, tr1, tr2, tr3, tr4
   !* FIRST EXECUTABLE STATEMENT  RADF4
-  hsqt2 = .5*SQRT(2.)
+  hsqt2 = 0.5_SP*SQRT(2._SP)
   DO k = 1, L1
     tr1 = Cc(1,k,2) + Cc(1,k,4)
     tr2 = Cc(1,k,1) + Cc(1,k,3)

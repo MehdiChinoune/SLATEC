@@ -273,14 +273,14 @@ REAL(DP) FUNCTION DRC(X,Y,Ier)
   REAL(DP) :: X, Y
   REAL(DP) :: mu, s, sn, xn, yn, lamda
   CHARACTER(16) :: xern3, xern4, xern5
-  REAL(DP), PARAMETER :: errtol = (D1MACH(3)/16.0D0)**(1.0D0/6.0D0), &
-    lolim = 5.0D0*D1MACH(1), uplim = D1MACH(2)/5.0D0
-  REAL(DP), PARAMETER :: c1 = 1.0D0/7.0D0, c2 = 9.0D0/22.0D0
+  REAL(DP), PARAMETER :: errtol = (D1MACH(3)/16._DP)**(1._DP/6._DP), &
+    lolim = 5._DP*D1MACH(1), uplim = D1MACH(2)/5._DP
+  REAL(DP), PARAMETER :: c1 = 1._DP/7._DP, c2 = 9._DP/22._DP
   !* FIRST EXECUTABLE STATEMENT  DRC
   !         CALL ERROR HANDLER IF NECESSARY.
   !
-  DRC = 0.0D0
-  IF( X<0.0D0 .OR. Y<=0.0D0 ) THEN
+  DRC = 0._DP
+  IF( X<0._DP .OR. Y<=0._DP ) THEN
     Ier = 1
     WRITE (xern3,'(1PE15.6)') X
     WRITE (xern4,'(1PE15.6)') Y
@@ -314,17 +314,17 @@ REAL(DP) FUNCTION DRC(X,Y,Ier)
   yn = Y
   DO
     !
-    mu = (xn+yn+yn)/3.0D0
-    sn = (yn+mu)/mu - 2.0D0
+    mu = (xn+yn+yn)/3._DP
+    sn = (yn+mu)/mu - 2._DP
     IF( ABS(sn)<errtol ) THEN
       !
-      s = sn*sn*(0.30D0+sn*(c1+sn*(0.3750D0+sn*c2)))
-      DRC = (1.0D0+s)/SQRT(mu)
+      s = sn*sn*(0.30_DP+sn*(c1+sn*(0.3750_DP+sn*c2)))
+      DRC = (1._DP+s)/SQRT(mu)
       EXIT
     ELSE
-      lamda = 2.0D0*SQRT(xn)*SQRT(yn) + yn
-      xn = (xn+lamda)*0.250D0
-      yn = (yn+lamda)*0.250D0
+      lamda = 2._DP*SQRT(xn)*SQRT(yn) + yn
+      xn = (xn+lamda)*0.250_DP
+      yn = (yn+lamda)*0.250_DP
     END IF
   END DO
 END FUNCTION DRC

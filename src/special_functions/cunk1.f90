@@ -32,8 +32,8 @@ SUBROUTINE CUNK1(Z,Fnu,Kode,Mr,N,Y,Nz,Tol,Elim,Alim)
     zeta1(2), zeta2(2), zr, phid, zeta1d, zeta2d, sumd
   REAL(SP) :: Alim, ang, aphi, asc, ascle, bry(3), cpn, c2i, c2m, c2r, &
     Elim, fmr, fn, fnf, Fnu, rs1, sgn, spn, Tol, x
-  COMPLEX(SP), PARAMETER :: czero = (0.0E0,0.0E0), cone = (1.0E0,0.0E0)
-  REAL(SP), PARAMETER :: pi = 3.14159265358979324E0
+  COMPLEX(SP), PARAMETER :: czero = (0._SP,0._SP), cone = (1._SP,0._SP)
+  REAL(SP), PARAMETER :: pi = 3.14159265358979324_SP
   !* FIRST EXECUTABLE STATEMENT  CUNK1
   kdflg = 1
   Nz = 0
@@ -41,20 +41,20 @@ SUBROUTINE CUNK1(Z,Fnu,Kode,Mr,N,Y,Nz,Tol,Elim,Alim)
   !     EXP(-ALIM)=EXP(-ELIM)/TOL=APPROX. ONE PRECISION GREATER THAN
   !     THE UNDERFLOW LIMIT
   !-----------------------------------------------------------------------
-  cscl = CMPLX(1.0E0/Tol,0.0E0)
-  crsc = CMPLX(Tol,0.0E0)
+  cscl = CMPLX(1._SP/Tol,0._SP,SP)
+  crsc = CMPLX(Tol,0._SP,SP)
   css(1) = cscl
   css(2) = cone
   css(3) = crsc
   csr(1) = crsc
   csr(2) = cone
   csr(3) = cscl
-  bry(1) = 1.0E+3*R1MACH(1)/Tol
-  bry(2) = 1.0E0/bry(1)
+  bry(1) = 1.E+3_SP*R1MACH(1)/Tol
+  bry(2) = 1._SP/bry(1)
   bry(3) = R1MACH(2)
   x = REAL(Z)
   zr = Z
-  IF( x<0.0E0 ) zr = -Z
+  IF( x<0._SP ) zr = -Z
   j = 2
   DO i = 1, N
     !-----------------------------------------------------------------------
@@ -67,7 +67,7 @@ SUBROUTINE CUNK1(Z,Fnu,Kode,Mr,N,Y,Nz,Tol,Elim,Alim)
     IF( Kode==1 ) THEN
       s1 = zeta1(j) - zeta2(j)
     ELSE
-      cfn = CMPLX(fn,0.0E0)
+      cfn = CMPLX(fn,0._SP,SP)
       s1 = zeta1(j) - cfn*(cfn/(zr+zeta2(j)))
     END IF
     !-----------------------------------------------------------------------
@@ -84,7 +84,7 @@ SUBROUTINE CUNK1(Z,Fnu,Kode,Mr,N,Y,Nz,Tol,Elim,Alim)
         rs1 = rs1 + LOG(aphi)
         IF( ABS(rs1)>Elim ) GOTO 50
         IF( kdflg==1 ) kflag = 1
-        IF( rs1>=0.0E0 ) THEN
+        IF( rs1>=0._SP ) THEN
           IF( kdflg==1 ) kflag = 3
         END IF
       END IF
@@ -96,7 +96,7 @@ SUBROUTINE CUNK1(Z,Fnu,Kode,Mr,N,Y,Nz,Tol,Elim,Alim)
       c2r = REAL(s1)
       c2i = AIMAG(s1)
       c2m = EXP(c2r)*REAL(css(kflag))
-      s1 = CMPLX(c2m,0.0E0)*CMPLX(COS(c2i),SIN(c2i))
+      s1 = CMPLX(c2m,0._SP,SP)*CMPLX(COS(c2i),SIN(c2i),SP)
       s2 = s2*s1
       IF( kflag==1 ) THEN
         CALL CUCHK(s2,nw,bry(1),Tol)
@@ -108,11 +108,11 @@ SUBROUTINE CUNK1(Z,Fnu,Kode,Mr,N,Y,Nz,Tol,Elim,Alim)
       kdflg = 2
       CYCLE
     END IF
-    50  IF( rs1>0.0E0 ) GOTO 600
+    50  IF( rs1>0._SP ) GOTO 600
     !-----------------------------------------------------------------------
     !     FOR X<0.0, THE I FUNCTION TO BE ADDED WILL OVERFLOW
     !-----------------------------------------------------------------------
-    IF( x<0.0E0 ) GOTO 600
+    IF( x<0._SP ) GOTO 600
     kdflg = 1
     Y(i) = czero
     Nz = Nz + 1
@@ -124,8 +124,8 @@ SUBROUTINE CUNK1(Z,Fnu,Kode,Mr,N,Y,Nz,Tol,Elim,Alim)
     END IF
   END DO
   i = N
-  100  rz = CMPLX(2.0E0,0.0E0)/zr
-  ck = CMPLX(fn,0.0E0)*rz
+  100  rz = CMPLX(2._SP,0._SP,SP)/zr
+  ck = CMPLX(fn,0._SP,SP)*rz
   ib = i + 1
   IF( N<ib ) GOTO 300
   !-----------------------------------------------------------------------
@@ -140,7 +140,7 @@ SUBROUTINE CUNK1(Z,Fnu,Kode,Mr,N,Y,Nz,Tol,Elim,Alim)
   IF( Kode==1 ) THEN
     s1 = zeta1d - zeta2d
   ELSE
-    cfn = CMPLX(fn,0.0E0)
+    cfn = CMPLX(fn,0._SP,SP)
     s1 = zeta1d - cfn*(cfn/(zr+zeta2d))
   END IF
   rs1 = REAL(s1)
@@ -153,11 +153,11 @@ SUBROUTINE CUNK1(Z,Fnu,Kode,Mr,N,Y,Nz,Tol,Elim,Alim)
     rs1 = rs1 + LOG(aphi)
     IF( ABS(rs1)<Elim ) GOTO 200
   END IF
-  IF( rs1>0.0E0 ) GOTO 600
+  IF( rs1>0._SP ) GOTO 600
   !-----------------------------------------------------------------------
   !     FOR X<0.0, THE I FUNCTION TO BE ADDED WILL OVERFLOW
   !-----------------------------------------------------------------------
-  IF( x<0.0E0 ) GOTO 600
+  IF( x<0._SP ) GOTO 600
   Nz = N
   DO i = 1, N
     Y(i) = czero
@@ -205,14 +205,14 @@ SUBROUTINE CUNK1(Z,Fnu,Kode,Mr,N,Y,Nz,Tol,Elim,Alim)
   !-----------------------------------------------------------------------
   !     CSPN AND CSGN ARE COEFF OF K AND I FUNCTIONS RESP.
   !-----------------------------------------------------------------------
-  csgn = CMPLX(0.0E0,sgn)
+  csgn = CMPLX(0._SP,sgn,SP)
   inu = INT( Fnu )
   fnf = Fnu - inu
   ifn = inu + N - 1
   ang = fnf*sgn
   cpn = COS(ang)
   spn = SIN(ang)
-  cspn = CMPLX(cpn,spn)
+  cspn = CMPLX(cpn,spn,SP)
   IF( MOD(ifn,2)==1 ) cspn = -cspn
   asc = bry(1)
   kk = N
@@ -245,7 +245,7 @@ SUBROUTINE CUNK1(Z,Fnu,Kode,Mr,N,Y,Nz,Tol,Elim,Alim)
     IF( Kode==1 ) THEN
       s1 = -zeta1d + zeta2d
     ELSE
-      cfn = CMPLX(fn,0.0E0)
+      cfn = CMPLX(fn,0._SP,SP)
       s1 = -zeta1d + cfn*(cfn/(zr+zeta2d))
     END IF
     !-----------------------------------------------------------------------
@@ -262,7 +262,7 @@ SUBROUTINE CUNK1(Z,Fnu,Kode,Mr,N,Y,Nz,Tol,Elim,Alim)
       rs1 = rs1 + LOG(aphi)
       IF( ABS(rs1)>Elim ) GOTO 450
       IF( kdflg==1 ) iflag = 1
-      IF( rs1>=0.0E0 ) THEN
+      IF( rs1>=0._SP ) THEN
         IF( kdflg==1 ) iflag = 3
       END IF
     END IF
@@ -270,11 +270,11 @@ SUBROUTINE CUNK1(Z,Fnu,Kode,Mr,N,Y,Nz,Tol,Elim,Alim)
     c2r = REAL(s1)
     c2i = AIMAG(s1)
     c2m = EXP(c2r)*REAL(css(iflag))
-    s1 = CMPLX(c2m,0.0E0)*CMPLX(COS(c2i),SIN(c2i))
+    s1 = CMPLX(c2m,0._SP,SP)*CMPLX(COS(c2i),SIN(c2i),SP)
     s2 = s2*s1
     IF( iflag==1 ) THEN
       CALL CUCHK(s2,nw,bry(1),Tol)
-      IF( nw/=0 ) s2 = CMPLX(0.0E0,0.0E0)
+      IF( nw/=0 ) s2 = CMPLX(0._SP,0._SP,SP)
     END IF
     400  cy(kdflg) = s2
     c2 = s2
@@ -298,7 +298,7 @@ SUBROUTINE CUNK1(Z,Fnu,Kode,Mr,N,Y,Nz,Tol,Elim,Alim)
       kdflg = 1
       CYCLE
     END IF
-    450  IF( rs1>0.0E0 ) GOTO 600
+    450  IF( rs1>0._SP ) GOTO 600
     s2 = czero
     GOTO 400
   END DO
@@ -317,9 +317,9 @@ SUBROUTINE CUNK1(Z,Fnu,Kode,Mr,N,Y,Nz,Tol,Elim,Alim)
   fn = (inu+il)
   DO i = 1, il
     c2 = s2
-    s2 = s1 + CMPLX(fn+fnf,0.0E0)*rz*s2
+    s2 = s1 + CMPLX(fn+fnf,0._SP,SP)*rz*s2
     s1 = c2
-    fn = fn - 1.0E0
+    fn = fn - 1._SP
     c2 = s2*cs
     ck = c2
     c1 = Y(kk)

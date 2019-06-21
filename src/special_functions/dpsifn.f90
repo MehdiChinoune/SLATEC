@@ -124,19 +124,19 @@ SUBROUTINE DPSIFN(X,N,Kode,M,Ans,Nz,Ierr)
   !-----------------------------------------------------------------------
   !             BERNOULLI NUMBERS
   !-----------------------------------------------------------------------
-  REAL(DP), PARAMETER :: b(22) = [ 1.00000000000000000D+00, -5.00000000000000000D-01, &
-    1.66666666666666667D-01, -3.33333333333333333D-02, 2.38095238095238095D-02, &
-    -3.33333333333333333D-02, 7.57575757575757576D-02, -2.53113553113553114D-01, &
-    1.16666666666666667D+00, -7.09215686274509804D+00, 5.49711779448621554D+01, &
-    -5.29124242424242424D+02, 6.19212318840579710D+03, -8.65802531135531136D+04, &
-    1.42551716666666667D+06, -2.72982310678160920D+07, 6.01580873900642368D+08, &
-    -1.51163157670921569D+10, 4.29614643061166667D+11, -1.37116552050883328D+13, &
-    4.88332318973593167D+14, -1.92965793419400681D+16 ]
+  REAL(DP), PARAMETER :: b(22) = [ 1.00000000000000000E+00_DP, -5.00000000000000000E-01_DP, &
+    1.66666666666666667E-01_DP, -3.33333333333333333E-02_DP, 2.38095238095238095E-02_DP, &
+    -3.33333333333333333E-02_DP, 7.57575757575757576E-02_DP, -2.53113553113553114E-01_DP, &
+    1.16666666666666667E+00_DP, -7.09215686274509804E+00_DP, 5.49711779448621554E+01_DP, &
+    -5.29124242424242424E+02_DP, 6.19212318840579710E+03_DP, -8.65802531135531136E+04_DP, &
+    1.42551716666666667E+06_DP, -2.72982310678160920E+07_DP, 6.01580873900642368E+08_DP, &
+    -1.51163157670921569E+10_DP, 4.29614643061166667E+11_DP, -1.37116552050883328E+13_DP, &
+    4.88332318973593167E+14_DP, -1.92965793419400681E+16_DP ]
   !
   !* FIRST EXECUTABLE STATEMENT  DPSIFN
   Ierr = 0
   Nz = 0
-  IF( X<=0.0D0 ) Ierr = 1
+  IF( X<=0._DP ) Ierr = 1
   IF( N<0 ) Ierr = 1
   IF( Kode<1 .OR. Kode>2 ) Ierr = 1
   IF( M<1 ) Ierr = 1
@@ -144,12 +144,12 @@ SUBROUTINE DPSIFN(X,N,Kode,M,Ans,Nz,Ierr)
   mm = M
   nx = MIN(-I1MACH(15),I1MACH(16))
   r1m5 = D1MACH(5)
-  r1m4 = D1MACH(4)*0.5D0
-  wdtol = MAX(r1m4,0.5D-18)
+  r1m4 = D1MACH(4)*0.5_DP
+  wdtol = MAX(r1m4,0.5E-18_DP)
   !-----------------------------------------------------------------------
   !     ELIM = APPROXIMATE EXPONENTIAL OVER AND UNDERFLOW LIMIT
   !-----------------------------------------------------------------------
-  elim = 2.302D0*(nx*r1m5-3.0D0)
+  elim = 2.302_DP*(nx*r1m5-3._DP)
   xln = LOG(X)
   100  nn = N + mm - 1
   fn = nn
@@ -178,23 +178,23 @@ SUBROUTINE DPSIFN(X,N,Kode,M,Ans,Nz,Ierr)
       !     COMPUTE XMIN AND THE NUMBER OF TERMS OF THE SERIES, FLN+1
       !-----------------------------------------------------------------------
       rln = r1m5*I1MACH(14)
-      rln = MIN(rln,18.06D0)
-      fln = MAX(rln,3.0D0) - 3.0D0
-      yint = 3.50D0 + 0.40D0*fln
-      slope = 0.21D0 + fln*(0.0006038D0*fln+0.008677D0)
+      rln = MIN(rln,18.06_DP)
+      fln = MAX(rln,3._DP) - 3._DP
+      yint = 3.50_DP + 0.40_DP*fln
+      slope = 0.21_DP + fln*(0.0006038_DP*fln+0.008677_DP)
       xm = yint + slope*fn
       mx = INT(xm) + 1
       xmin = mx
       IF( N/=0 ) THEN
-        xm = -2.302D0*rln - MIN(0.0D0,xln)
+        xm = -2.302_DP*rln - MIN(0._DP,xln)
         arg = xm/N
-        arg = MIN(0.0D0,arg)
+        arg = MIN(0._DP,arg)
         eps = EXP(arg)
-        xm = 1.0D0 - eps
+        xm = 1._DP - eps
         IF( ABS(arg)<1.0D-3 ) xm = -arg
         fln = X*xm/eps
         xm = xmin - X
-        IF( xm>7.0D0 .AND. fln<15.0D0 ) THEN
+        IF( xm>7._DP .AND. fln<15._DP ) THEN
           !-----------------------------------------------------------------------
           !     COMPUTE BY SERIES (X+K)**(-(N+1)), K=0,1,2,...
           !-----------------------------------------------------------------------
@@ -205,7 +205,7 @@ SUBROUTINE DPSIFN(X,N,Kode,M,Ans,Nz,Ierr)
           s = t
           den = X
           DO i = 1, nn
-            den = den + 1.0D0
+            den = den + 1._DP
             trm(i) = den**(-np)
             s = s + trm(i)
           END DO
@@ -217,14 +217,14 @@ SUBROUTINE DPSIFN(X,N,Kode,M,Ans,Nz,Ierr)
           !-----------------------------------------------------------------------
           !     GENERATE HIGHER DERIVATIVES, J>N
           !-----------------------------------------------------------------------
-          tol = wdtol/5.0D0
+          tol = wdtol/5._DP
           DO j = 2, mm
             t = t/X
             s = t
             tols = t*tol
             den = X
             DO i = 1, nn
-              den = den + 1.0D0
+              den = den + 1._DP
               trm(i) = trm(i)/den
               s = s + trm(i)
               IF( trm(i)<tols ) EXIT
@@ -236,7 +236,7 @@ SUBROUTINE DPSIFN(X,N,Kode,M,Ans,Nz,Ierr)
       END IF
       xdmy = X
       xdmln = xln
-      xinc = 0.0D0
+      xinc = 0._DP
       IF( X<xmin ) THEN
         nx = INT(X)
         xinc = xmin - nx
@@ -252,26 +252,26 @@ SUBROUTINE DPSIFN(X,N,Kode,M,Ans,Nz,Ierr)
       tk = MAX(ABS(t),ABS(t1),ABS(t2))
       IF( tk>elim ) GOTO 200
       tss = EXP(-t)
-      tt = 0.5D0/xdmy
+      tt = 0.5_DP/xdmy
       t1 = tt
       tst = wdtol*tt
-      IF( nn/=0 ) t1 = tt + 1.0D0/fn
-      rxsq = 1.0D0/(xdmy*xdmy)
-      ta = 0.5D0*rxsq
+      IF( nn/=0 ) t1 = tt + 1._DP/fn
+      rxsq = 1._DP/(xdmy*xdmy)
+      ta = 0.5_DP*rxsq
       t = (fn+1)*ta
       s = t*b(3)
       IF( ABS(s)>=tst ) THEN
-        tk = 2.0D0
+        tk = 2._DP
         DO k = 4, 22
-          t = t*((tk+fn+1)/(tk+1.0D0))*((tk+fn)/(tk+2.0D0))*rxsq
+          t = t*((tk+fn+1)/(tk+1._DP))*((tk+fn)/(tk+2._DP))*rxsq
           trm(k) = t*b(k)
           IF( ABS(trm(k))<tst ) EXIT
           s = s + trm(k)
-          tk = tk + 2.0D0
+          tk = tk + 2._DP
         END DO
       END IF
       s = (s+t1)*tss
-      IF( xinc/=0.0D0 ) THEN
+      IF( xinc/=0._DP ) THEN
         !-----------------------------------------------------------------------
         !     BACKWARD RECUR FROM XDMY TO X
         !-----------------------------------------------------------------------
@@ -283,7 +283,7 @@ SUBROUTINE DPSIFN(X,N,Kode,M,Ans,Nz,Ierr)
           RETURN
         ELSE
           IF( nn==0 ) GOTO 120
-          xm = xinc - 1.0D0
+          xm = xinc - 1._DP
           fx = X + xm
           !-----------------------------------------------------------------------
           !     THIS LOOP SHOULD NOT BE CHANGED. FX IS ACCURATE WHEN X IS SMALL
@@ -291,7 +291,7 @@ SUBROUTINE DPSIFN(X,N,Kode,M,Ans,Nz,Ierr)
           DO i = 1, nx
             trmr(i) = fx**(-np)
             s = s + trmr(i)
-            xm = xm - 1.0D0
+            xm = xm - 1._DP
             fx = X + xm
           END DO
         END IF
@@ -306,7 +306,7 @@ SUBROUTINE DPSIFN(X,N,Kode,M,Ans,Nz,Ierr)
         fn = fn - 1
         tss = tss*xdmy
         t1 = tt
-        IF( fn/=0 ) t1 = tt + 1.0D0/fn
+        IF( fn/=0 ) t1 = tt + 1._DP/fn
         t = (fn+1)*ta
         s = t*b(3)
         IF( ABS(s)>=tst ) THEN
@@ -315,18 +315,18 @@ SUBROUTINE DPSIFN(X,N,Kode,M,Ans,Nz,Ierr)
             trm(k) = trm(k)*(fn+1)/tk
             IF( ABS(trm(k))<tst ) EXIT
             s = s + trm(k)
-            tk = tk + 2.0D0
+            tk = tk + 2._DP
           END DO
         END IF
         s = (s+t1)*tss
-        IF( xinc/=0.0D0 ) THEN
+        IF( xinc/=0._DP ) THEN
           IF( fn==0 ) GOTO 120
-          xm = xinc - 1.0D0
+          xm = xinc - 1._DP
           fx = X + xm
           DO i = 1, nx
             trmr(i) = trmr(i)*fx
             s = s + trmr(i)
-            xm = xm - 1.0D0
+            xm = xm - 1._DP
             fx = X + xm
           END DO
         END IF
@@ -340,7 +340,7 @@ SUBROUTINE DPSIFN(X,N,Kode,M,Ans,Nz,Ierr)
       !-----------------------------------------------------------------------
       120 CONTINUE
       DO i = 1, nx
-        s = s + 1.0D0/(X+nx-i)
+        s = s + 1._DP/(X+nx-i)
       END DO
     END IF
     150 CONTINUE
@@ -353,13 +353,13 @@ SUBROUTINE DPSIFN(X,N,Kode,M,Ans,Nz,Ierr)
       Ans(1) = s - xdmln
       RETURN
     END IF
-  ELSEIF( t<=0.0D0 ) THEN
+  ELSEIF( t<=0._DP ) THEN
     Nz = 0
     Ierr = 2
     RETURN
   END IF
   200  Nz = Nz + 1
-  Ans(mm) = 0.0D0
+  Ans(mm) = 0._DP
   mm = mm - 1
   IF( mm==0 ) RETURN
   GOTO 100

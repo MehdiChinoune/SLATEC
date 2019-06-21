@@ -54,32 +54,32 @@ REAL(SP) FUNCTION GAMRN(X)
   INTEGER :: i, i1m11, k, mx, nx
   REAL(SP) :: fln, rln, s, tol, trm, X, xdmy, xinc, xm, xmin, xp, xsq
   !
-  REAL(SP), PARAMETER :: gr(12) = [ 1.00000000000000000E+00,-1.56250000000000000E-02, &
-    2.56347656250000000E-03,-1.27983093261718750E-03,  1.34351104497909546E-03, &
-    -2.43289663922041655E-03, 6.75423753364157164E-03,-2.66369606131178216E-02, &
-    1.41527455519564332E-01,-9.74384543032201613E-01,  8.43686251229783675E+00, &
-    -8.97258321640552515E+01 ]
+  REAL(SP), PARAMETER :: gr(12) = [ 1.00000000000000000E+00_SP,-1.56250000000000000E-02_SP, &
+    2.56347656250000000E-03_SP,-1.27983093261718750E-03_SP,  1.34351104497909546E-03_SP, &
+    -2.43289663922041655E-03_SP, 6.75423753364157164E-03_SP,-2.66369606131178216E-02_SP, &
+    1.41527455519564332E-01_SP,-9.74384543032201613E-01_SP,  8.43686251229783675E+00_SP, &
+    -8.97258321640552515E+01_SP ]
   !
   !* FIRST EXECUTABLE STATEMENT  GAMRN
   nx = INT(X)
-  tol = MAX(R1MACH(4),1.0E-18)
+  tol = MAX(R1MACH(4),1.0E-18_SP)
   i1m11 = I1MACH(11)
   rln = R1MACH(5)*i1m11
-  fln = MIN(rln,20.0E0)
-  fln = MAX(fln,3.0E0)
-  fln = fln - 3.0E0
-  xm = 2.0E0 + fln*(0.2366E0+0.01723E0*fln)
+  fln = MIN(rln,20._SP)
+  fln = MAX(fln,3._SP)
+  fln = fln - 3._SP
+  xm = 2._SP + fln*(0.2366_SP+0.01723_SP*fln)
   mx = INT(xm) + 1
   xmin = mx
-  xdmy = X - 0.25E0
-  xinc = 0.0E0
+  xdmy = X - 0.25_SP
+  xinc = 0._SP
   IF( X<xmin ) THEN
     xinc = xmin - nx
     xdmy = xdmy + xinc
   END IF
-  s = 1.0E0
-  IF( xdmy*tol<=1.0E0 ) THEN
-    xsq = 1.0E0/(xdmy*xdmy)
+  s = 1._SP
+  IF( xdmy*tol<=1._SP ) THEN
+    xsq = 1._SP/(xdmy*xdmy)
     xp = xsq
     DO k = 2, 12
       trm = gr(k)*xp
@@ -89,12 +89,12 @@ REAL(SP) FUNCTION GAMRN(X)
     END DO
   END IF
   s = s/SQRT(xdmy)
-  IF( xinc/=0.0E0 ) THEN
+  IF( xinc/=0._SP ) THEN
     nx = INT(xinc)
-    xp = 0.0E0
+    xp = 0._SP
     DO i = 1, nx
-      s = s*(1.0E0+0.5E0/(X+xp))
-      xp = xp + 1.0E0
+      s = s*(1._SP+0.5_SP/(X+xp))
+      xp = xp + 1._SP
     END DO
     GAMRN = s
     RETURN

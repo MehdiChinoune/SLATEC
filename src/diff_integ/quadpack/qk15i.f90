@@ -115,15 +115,15 @@ SUBROUTINE QK15I(F,Boun,Inf,A,B,Result,Abserr,Resabs,Resasc)
   !                    TO THE ABSCISSAE XGK(2), XGK(4), ...
   !                    WG(1), WG(3), ... ARE SET TO ZERO.
   !
-  REAL(SP), PARAMETER :: xgk(8) = [ 0.9914553711208126E+00, 0.9491079123427585E+00, &
-    0.8648644233597691E+00, 0.7415311855993944E+00, 0.5860872354676911E+00, &
-    0.4058451513773972E+00, 0.2077849550078985E+00, 0.0000000000000000E+00 ]
-  REAL(SP), PARAMETER :: wgk(8) = [ 0.2293532201052922E-01, 0.6309209262997855E-01, &
-    0.1047900103222502E+00, 0.1406532597155259E+00, 0.1690047266392679E+00, &
-    0.1903505780647854E+00, 0.2044329400752989E+00, 0.2094821410847278E+00 ]
-  REAL(SP), PARAMETER :: wg(8) = [ 0.0000000000000000E+00, 0.1294849661688697E+00, &
-    0.0000000000000000E+00, 0.2797053914892767E+00, 0.0000000000000000E+00, &
-    0.3818300505051189E+00, 0.0000000000000000E+00, 0.4179591836734694E+00 ]
+  REAL(SP), PARAMETER :: xgk(8) = [ 0.9914553711208126_SP, 0.9491079123427585_SP, &
+    0.8648644233597691_SP, 0.7415311855993944_SP, 0.5860872354676911_SP, &
+    0.4058451513773972_SP, 0.2077849550078985_SP, 0.0000000000000000_SP ]
+  REAL(SP), PARAMETER :: wgk(8) = [ 0.2293532201052922E-01_SP, 0.6309209262997855E-01_SP, &
+    0.1047900103222502_SP, 0.1406532597155259_SP, 0.1690047266392679_SP, &
+    0.1903505780647854_SP, 0.2044329400752989_SP, 0.2094821410847278_SP ]
+  REAL(SP), PARAMETER :: wg(8) = [ 0.0000000000000000_SP, 0.1294849661688697_SP, &
+    0.0000000000000000_SP, 0.2797053914892767_SP, 0.0000000000000000_SP, &
+    0.3818300505051189_SP, 0.0000000000000000_SP, 0.4179591836734694_SP ]
   !
   !
   !           LIST OF MAJOR VARIABLES
@@ -150,9 +150,9 @@ SUBROUTINE QK15I(F,Boun,Inf,A,B,Result,Abserr,Resabs,Resasc)
   uflow = R1MACH(1)
   dinf = MIN(1,Inf)
   !
-  centr = 0.5E+00*(A+B)
-  hlgth = 0.5E+00*(B-A)
-  tabsc1 = Boun + dinf*(0.1E+01-centr)/centr
+  centr = 0.5_SP*(A+B)
+  hlgth = 0.5_SP*(B-A)
+  tabsc1 = Boun + dinf*(1._SP-centr)/centr
   fval1 = F(tabsc1)
   IF( Inf==2 ) fval1 = fval1 + F(-tabsc1)
   fc = (fval1/centr)/centr
@@ -167,8 +167,8 @@ SUBROUTINE QK15I(F,Boun,Inf,A,B,Result,Abserr,Resabs,Resasc)
     absc = hlgth*xgk(j)
     absc1 = centr - absc
     absc2 = centr + absc
-    tabsc1 = Boun + dinf*(0.1E+01-absc1)/absc1
-    tabsc2 = Boun + dinf*(0.1E+01-absc2)/absc2
+    tabsc1 = Boun + dinf*(1._SP-absc1)/absc1
+    tabsc2 = Boun + dinf*(1._SP-absc2)/absc2
     fval1 = F(tabsc1)
     fval2 = F(tabsc2)
     IF( Inf==2 ) fval1 = fval1 + F(-tabsc1)
@@ -182,7 +182,7 @@ SUBROUTINE QK15I(F,Boun,Inf,A,B,Result,Abserr,Resabs,Resasc)
     resk = resk + wgk(j)*fsum
     Resabs = Resabs + wgk(j)*(ABS(fval1)+ABS(fval2))
   END DO
-  reskh = resk*0.5E+00
+  reskh = resk*0.5_SP
   Resasc = wgk(8)*ABS(fc-reskh)
   DO j = 1, 7
     Resasc = Resasc + wgk(j)*(ABS(fv1(j)-reskh)+ABS(fv2(j)-reskh))
@@ -191,8 +191,8 @@ SUBROUTINE QK15I(F,Boun,Inf,A,B,Result,Abserr,Resabs,Resasc)
   Resasc = Resasc*hlgth
   Resabs = Resabs*hlgth
   Abserr = ABS((resk-resg)*hlgth)
-  IF( Resasc/=0.0E+00 .AND. Abserr/=0.E0 )&
-    Abserr = Resasc*MIN(0.1E+01,(0.2E+03*Abserr/Resasc)**1.5E+00)
-  IF( Resabs>uflow/(0.5E+02*epmach) ) Abserr = MAX((epmach*0.5E+02)*Resabs,&
+  IF( Resasc/=0._SP .AND. Abserr/=0._SP )&
+    Abserr = Resasc*MIN(1._SP,(200._SP*Abserr/Resasc)**1.5_SP)
+  IF( Resabs>uflow/(50._SP*epmach) ) Abserr = MAX((epmach*50._SP)*Resabs,&
     Abserr)
 END SUBROUTINE QK15I

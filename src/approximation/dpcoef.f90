@@ -72,7 +72,7 @@ SUBROUTINE DPCOEF(L,C,Tc,A)
   llp1 = ll + 1
   CALL DP1VLU(ll,ll,C,Tc(1),Tc(2),A)
   IF( ll>=2 ) THEN
-    fac = 1.0D0
+    fac = 1._DP
     DO i = 3, llp1
       fac = fac*(i-1)
       Tc(i) = Tc(i)/fac

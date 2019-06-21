@@ -88,8 +88,8 @@ SUBROUTINE PJAC(Neq,Y,Yh,Nyh,Ewt,Ftem,Savf,Wm,Iwm,F,JAC)
     CASE (2)
       ! IF MITER = 2, MAKE N CALLS TO F TO APPROXIMATE J. --------------------
       fac = VNWRMS(n_com,Savf,Ewt)
-      r0 = 1000.0E0*ABS(h_com)*uround_com*n_com*fac
-      IF( r0==0.0E0 ) r0 = 1.0E0
+      r0 = 1000._SP*ABS(h_com)*uround_com*n_com*fac
+      IF( r0==0._SP ) r0 = 1._SP
       srur = Wm(1)
       j1 = 2
       DO j = 1, n_com
@@ -109,7 +109,7 @@ SUBROUTINE PJAC(Neq,Y,Yh,Nyh,Ewt,Ftem,Savf,Wm,Iwm,F,JAC)
       ! IF MITER = 3, CONSTRUCT A DIAGONAL APPROXIMATION TO J AND P. ---------
       Wm(2) = hl0
       ier_com = 0
-      r = el0_com*0.1E0
+      r = el0_com*0.1_SP
       DO i = 1, n_com
         Y(i) = Y(i) + r*(h_com*Savf(i)-Yh(i,2))
       END DO
@@ -117,11 +117,11 @@ SUBROUTINE PJAC(Neq,Y,Yh,Nyh,Ewt,Ftem,Savf,Wm,Iwm,F,JAC)
       nfe_com = nfe_com + 1
       DO i = 1, n_com
         r0 = h_com*Savf(i) - Yh(i,2)
-        di = 0.1E0*r0 - h_com*(Wm(i+2)-Savf(i))
-        Wm(i+2) = 1.0E0
+        di = 0.1_SP*r0 - h_com*(Wm(i+2)-Savf(i))
+        Wm(i+2) = 1._SP
         IF( ABS(r0)>=uround_com*Ewt(i) ) THEN
-          IF( ABS(di)==0.0E0 ) GOTO 100
-          Wm(i+2) = 0.1E0*r0/di
+          IF( ABS(di)==0._SP ) GOTO 100
+          Wm(i+2) = 0.1_SP*r0/di
         END IF
       END DO
       RETURN
@@ -133,7 +133,7 @@ SUBROUTINE PJAC(Neq,Y,Yh,Nyh,Ewt,Ftem,Savf,Wm,Iwm,F,JAC)
       mband = ml + mu + 1
       meband = 2*ml + mu + 1
       ALLOCATE( pd(meband,n_com) )
-      pd = 0.E0
+      pd = 0._SP
       CALL JAC(tn_com,Y,pd,meband)
       con = -hl0
       DO j = 1, n_com
@@ -152,8 +152,8 @@ SUBROUTINE PJAC(Neq,Y,Yh,Nyh,Ewt,Ftem,Savf,Wm,Iwm,F,JAC)
       meb1 = meband - 1
       srur = Wm(1)
       fac = VNWRMS(n_com,Savf,Ewt)
-      r0 = 1000.0E0*ABS(h_com)*uround_com*n_com*fac
-      IF( r0==0.0E0 ) r0 = 1.0E0
+      r0 = 1000._SP*ABS(h_com)*uround_com*n_com*fac
+      IF( r0==0._SP ) r0 = 1._SP
       DO j = 1, mba
         DO i = j, n_com, mband
           yi = Y(i)
@@ -179,7 +179,7 @@ SUBROUTINE PJAC(Neq,Y,Yh,Nyh,Ewt,Ftem,Savf,Wm,Iwm,F,JAC)
     CASE DEFAULT
       ! IF MITER = 1, CALL JAC AND MULTIPLY BY SCALAR. -----------------------
       ALLOCATE( pd(n_com,n_com) )
-      pd = 0.E0
+      pd = 0._SP
       CALL JAC(tn_com,Y,pd,n_com)
       con = -hl0
       DO j = 1, n_com
@@ -191,7 +191,7 @@ SUBROUTINE PJAC(Neq,Y,Yh,Nyh,Ewt,Ftem,Savf,Wm,Iwm,F,JAC)
   ! ADD IDENTITY MATRIX. -------------------------------------------------
   j = 3
   DO i = 1, n_com
-    Wm(j) = Wm(j) + 1.0E0
+    Wm(j) = Wm(j) + 1._SP
     j = j + (n_com+1)
   END DO
   ! DO LU DECOMPOSITION ON P. --------------------------------------------
@@ -202,7 +202,7 @@ SUBROUTINE PJAC(Neq,Y,Yh,Nyh,Ewt,Ftem,Savf,Wm,Iwm,F,JAC)
   ! ADD IDENTITY MATRIX. -------------------------------------------------
   200  ii = mband + 2
   DO i = 1, n_com
-    Wm(ii) = Wm(ii) + 1.0E0
+    Wm(ii) = Wm(ii) + 1._SP
     ii = ii + meband
   END DO
   ! DO LU DECOMPOSITION OF P. --------------------------------------------

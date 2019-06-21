@@ -111,23 +111,23 @@ SUBROUTINE SHEQR(A,Lda,N,Q,Info,Ijob)
     Info = 0
     t1 = A(N,N)
     t2 = A(N+1,N)
-    IF( t2==0.0E0 ) THEN
+    IF( t2==0._SP ) THEN
       c = 1
       s = 0
     ELSEIF( ABS(t2)>=ABS(t1) ) THEN
       t = t1/t2
-      s = -1.0E0/SQRT(1.0E0+t*t)
+      s = -1._SP/SQRT(1._SP+t*t)
       c = -s*t
     ELSE
       t = t2/t1
-      c = 1.0E0/SQRT(1.0E0+t*t)
+      c = 1._SP/SQRT(1._SP+t*t)
       s = -c*t
     END IF
     iq = 2*N - 1
     Q(iq) = c
     Q(iq+1) = s
     A(N,N) = c*t1 - s*t2
-    IF( A(N,N)==0.0E0 ) Info = N
+    IF( A(N,N)==0._SP ) Info = N
     RETURN
   END IF
   !   -------------------------------------------------------------------
@@ -161,22 +161,22 @@ SUBROUTINE SHEQR(A,Lda,N,Q,Info,Ijob)
     iq = 2*km1 + 1
     t1 = A(k,k)
     t2 = A(kp1,k)
-    IF( t2==0.0E0 ) THEN
+    IF( t2==0._SP ) THEN
       c = 1
       s = 0
     ELSEIF( ABS(t2)>=ABS(t1) ) THEN
       t = t1/t2
-      s = -1.0E0/SQRT(1.0E0+t*t)
+      s = -1._SP/SQRT(1._SP+t*t)
       c = -s*t
     ELSE
       t = t2/t1
-      c = 1.0E0/SQRT(1.0E0+t*t)
+      c = 1._SP/SQRT(1._SP+t*t)
       s = -c*t
     END IF
     Q(iq) = c
     Q(iq+1) = s
     A(k,k) = c*t1 - s*t2
-    IF( A(k,k)==0.0E0 ) Info = k
+    IF( A(k,k)==0._SP ) Info = k
   END DO
   RETURN
   !------------- LAST LINE OF SHEQR FOLLOWS ----------------------------

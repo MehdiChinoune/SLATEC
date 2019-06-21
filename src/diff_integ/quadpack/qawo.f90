@@ -220,8 +220,8 @@ SUBROUTINE QAWO(F,A,B,Omega,Integr,Epsabs,Epsrel,Result,Abserr,Neval,Ier,&
   Ier = 6
   Neval = 0
   Last = 0
-  Result = 0.0E+00
-  Abserr = 0.0E+00
+  Result = 0._SP
+  Abserr = 0._SP
   IF( Leniw>=2 .AND. Maxp1>=1 .AND. Lenw>=(Leniw*2+Maxp1*25) ) THEN
     !
     !         PREPARE CALL FOR QAWOE

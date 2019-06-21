@@ -110,7 +110,7 @@ SUBROUTINE DCKDER(M,N,X,Fvec,Fjac,Ldfjac,Xp,Fvecp,Mode,Err)
   REAL(DP) :: Err(M), Fjac(Ldfjac,N), Fvec(M), Fvecp(M), X(N), Xp(N)
   INTEGER :: i, j
   REAL(DP) :: eps, epsf, epslog, epsmch, temp
-  REAL(DP), PARAMETER :: factor = 1.0D2, one = 1.0D0, zero = 0.0D0
+  REAL(DP), PARAMETER :: factor = 1.0D2, one = 1._DP, zero = 0._DP
   !
   !     EPSMCH IS THE MACHINE PRECISION.
   !

@@ -35,8 +35,8 @@ SUBROUTINE ZUNK1(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Tol,Elim,Alim)
     phir(2), rast, razr, rs1, rzi, rzr, sgn, sti, str, sumdi, sumdr, sumi(2), &
     sumr(2), s1i, s1r, s2i, s2r, Tol, Yi(N), Yr(N), zeta1i(2), zeta1r(2), &
     zeta2i(2), zeta2r(2), zet1di, zet1dr, zet2di, zet2dr, Zi, Zr, zri, zrr
-  REAL(DP), PARAMETER :: zeror = 0.0D0, zeroi = 0.0D0, coner = 1.0D0
-  REAL(DP), PARAMETER :: pi = 3.14159265358979324D0
+  REAL(DP), PARAMETER :: zeror = 0._DP, zeroi = 0._DP, coner = 1._DP
+  REAL(DP), PARAMETER :: pi = 3.14159265358979324_DP
   !* FIRST EXECUTABLE STATEMENT  ZUNK1
   kdflg = 1
   Nz = 0
@@ -44,7 +44,7 @@ SUBROUTINE ZUNK1(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Tol,Elim,Alim)
   !     EXP(-ALIM)=EXP(-ELIM)/TOL=APPROX. ONE PRECISION GREATER THAN
   !     THE UNDERFLOW LIMIT
   !-----------------------------------------------------------------------
-  cscl = 1.0D0/Tol
+  cscl = 1._DP/Tol
   crsc = Tol
   cssr(1) = cscl
   cssr(2) = coner
@@ -52,12 +52,12 @@ SUBROUTINE ZUNK1(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Tol,Elim,Alim)
   csrr(1) = crsc
   csrr(2) = coner
   csrr(3) = cscl
-  bry(1) = 1.0D+3*D1MACH(1)/Tol
-  bry(2) = 1.0D0/bry(1)
+  bry(1) = 1.E3_DP*D1MACH(1)/Tol
+  bry(2) = 1._DP/bry(1)
   bry(3) = D1MACH(2)
   zrr = Zr
   zri = Zi
-  IF( Zr<0.0D0 ) THEN
+  IF( Zr<0._DP ) THEN
     zrr = -Zr
     zri = -Zi
   END IF
@@ -97,7 +97,7 @@ SUBROUTINE ZUNK1(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Tol,Elim,Alim)
         rs1 = rs1 + LOG(aphi)
         IF( ABS(rs1)>Elim ) GOTO 50
         IF( kdflg==1 ) kflag = 1
-        IF( rs1>=0.0D0 ) THEN
+        IF( rs1>=0._DP ) THEN
           IF( kdflg==1 ) kflag = 3
         END IF
       END IF
@@ -125,11 +125,11 @@ SUBROUTINE ZUNK1(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Tol,Elim,Alim)
       kdflg = 2
       CYCLE
     END IF
-    50  IF( rs1>0.0D0 ) GOTO 600
+    50  IF( rs1>0._DP ) GOTO 600
     !-----------------------------------------------------------------------
     !     FOR ZR<0.0, THE I FUNCTION TO BE ADDED WILL OVERFLOW
     !-----------------------------------------------------------------------
-    IF( Zr<0.0D0 ) GOTO 600
+    IF( Zr<0._DP ) GOTO 600
     kdflg = 1
     Yr(i) = zeror
     Yi(i) = zeroi
@@ -143,7 +143,7 @@ SUBROUTINE ZUNK1(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Tol,Elim,Alim)
     END IF
   END DO
   i = N
-  100  razr = 1.0D0/ZABS(zrr,zri)
+  100  razr = 1._DP/ZABS(zrr,zri)
   str = zrr*razr
   sti = -zri*razr
   rzr = (str+str)*razr
@@ -184,11 +184,11 @@ SUBROUTINE ZUNK1(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Tol,Elim,Alim)
     rs1 = rs1 + LOG(aphi)
     IF( ABS(rs1)<Elim ) GOTO 200
   END IF
-  IF( ABS(rs1)>0.0D0 ) GOTO 600
+  IF( ABS(rs1)>0._DP ) GOTO 600
   !-----------------------------------------------------------------------
   !     FOR ZR<0.0, THE I FUNCTION TO BE ADDED WILL OVERFLOW
   !-----------------------------------------------------------------------
-  IF( Zr<0.0D0 ) GOTO 600
+  IF( Zr<0._DP ) GOTO 600
   Nz = N
   DO i = 1, N
     Yr(i) = zeror
@@ -239,7 +239,7 @@ SUBROUTINE ZUNK1(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Tol,Elim,Alim)
   300 CONTINUE
   IF( Mr==0 ) RETURN
   !-----------------------------------------------------------------------
-  !     ANALYTIC CONTINUATION FOR RE(Z)<0.0D0
+  !     ANALYTIC CONTINUATION FOR RE(Z)<0._DP
   !-----------------------------------------------------------------------
   Nz = 0
   fmr = Mr
@@ -317,7 +317,7 @@ SUBROUTINE ZUNK1(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Tol,Elim,Alim)
       rs1 = rs1 + LOG(aphi)
       IF( ABS(rs1)>Elim ) GOTO 450
       IF( kdflg==1 ) iflag = 1
-      IF( rs1>=0.0D0 ) THEN
+      IF( rs1>=0._DP ) THEN
         IF( kdflg==1 ) iflag = 3
       END IF
     END IF
@@ -358,7 +358,7 @@ SUBROUTINE ZUNK1(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Tol,Elim,Alim)
     kk = kk - 1
     cspnr = -cspnr
     cspni = -cspni
-    IF( c2r/=0.0D0 .OR. c2i/=0.0D0 ) THEN
+    IF( c2r/=0._DP .OR. c2i/=0._DP ) THEN
       IF( kdflg==2 ) GOTO 500
       kdflg = 2
       CYCLE
@@ -366,7 +366,7 @@ SUBROUTINE ZUNK1(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Tol,Elim,Alim)
       kdflg = 1
       CYCLE
     END IF
-    450  IF( rs1>0.0D0 ) GOTO 600
+    450  IF( rs1>0._DP ) GOTO 600
     s2r = zeror
     s2i = zeroi
     GOTO 400
@@ -393,7 +393,7 @@ SUBROUTINE ZUNK1(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Tol,Elim,Alim)
     s2i = s1i + (fn+fnf)*(rzr*c2i+rzi*c2r)
     s1r = c2r
     s1i = c2i
-    fn = fn - 1.0D0
+    fn = fn - 1._DP
     c2r = s2r*csr
     c2i = s2i*csr
     ckr = c2r

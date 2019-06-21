@@ -97,15 +97,15 @@ SUBROUTINE CPOCO(A,Lda,N,Rcond,Z,Info)
   !
   !* FIRST EXECUTABLE STATEMENT  CPOCO
   DO j = 1, N
-    Z(j) = CMPLX(SCASUM(j,A(1,j),1),0.0E0)
+    Z(j) = CMPLX(SCASUM(j,A(1,j),1),0._SP,SP)
     jm1 = j - 1
     IF( jm1>=1 ) THEN
       DO i = 1, jm1
-        Z(i) = CMPLX(REAL(Z(i))+SCABS1(A(i,j)),0.0E0)
+        Z(i) = CMPLX(REAL(Z(i))+SCABS1(A(i,j)),0._SP,SP)
       END DO
     END IF
   END DO
-  anorm = 0.0E0
+  anorm = 0._SP
   DO j = 1, N
     anorm = MAX(anorm,REAL(Z(j)))
   END DO
@@ -123,16 +123,16 @@ SUBROUTINE CPOCO(A,Lda,N,Rcond,Z,Info)
     !
     !        SOLVE CTRANS(R)*W = E
     !
-    ek = (1.0E0,0.0E0)
+    ek = (1._SP,0._SP)
     DO j = 1, N
-      Z(j) = (0.0E0,0.0E0)
+      Z(j) = (0._SP,0._SP)
     END DO
     DO k = 1, N
-      IF( SCABS1(Z(k))/=0.0E0 ) ek = CSIGN1(ek,-Z(k))
+      IF( SCABS1(Z(k))/=0._SP ) ek = CSIGN1(ek,-Z(k))
       IF( SCABS1(ek-Z(k))>REAL(A(k,k)) ) THEN
         s = REAL(A(k,k))/SCABS1(ek-Z(k))
         Z = s*Z
-        ek = CMPLX(s,0.0E0)*ek
+        ek = CMPLX(s,0._SP,SP)*ek
       END IF
       wk = ek - Z(k)
       wkm = -ek - Z(k)
@@ -157,7 +157,7 @@ SUBROUTINE CPOCO(A,Lda,N,Rcond,Z,Info)
       END IF
       Z(k) = wk
     END DO
-    s = 1.0E0/SCASUM(N,Z,1)
+    s = 1._SP/SCASUM(N,Z,1)
     Z = s*Z
     !
     !        SOLVE R*Y = W
@@ -172,10 +172,10 @@ SUBROUTINE CPOCO(A,Lda,N,Rcond,Z,Info)
       t = -Z(k)
       CALL CAXPY(k-1,t,A(1,k),1,Z(1),1)
     END DO
-    s = 1.0E0/SCASUM(N,Z,1)
+    s = 1._SP/SCASUM(N,Z,1)
     Z = s*Z
     !
-    ynorm = 1.0E0
+    ynorm = 1._SP
     !
     !        SOLVE CTRANS(R)*V = Y
     !
@@ -188,7 +188,7 @@ SUBROUTINE CPOCO(A,Lda,N,Rcond,Z,Info)
       END IF
       Z(k) = Z(k)/A(k,k)
     END DO
-    s = 1.0E0/SCASUM(N,Z,1)
+    s = 1._SP/SCASUM(N,Z,1)
     Z = s*Z
     ynorm = s*ynorm
     !
@@ -206,11 +206,11 @@ SUBROUTINE CPOCO(A,Lda,N,Rcond,Z,Info)
       CALL CAXPY(k-1,t,A(1,k),1,Z(1),1)
     END DO
     !        MAKE ZNORM = 1.0
-    s = 1.0E0/SCASUM(N,Z,1)
+    s = 1._SP/SCASUM(N,Z,1)
     Z = s*Z
     ynorm = s*ynorm
     !
-    IF( anorm/=0.0E0 ) Rcond = ynorm/anorm
-    IF( anorm==0.0E0 ) Rcond = 0.0E0
+    IF( anorm/=0._SP ) Rcond = ynorm/anorm
+    IF( anorm==0._SP ) Rcond = 0._SP
   END IF
 END SUBROUTINE CPOCO

@@ -62,8 +62,8 @@ SUBROUTINE INTYD(T,K,Yh,Nyh,Dky,Iflag)
     Iflag = -1
     RETURN
   ELSE
-    tp = tn_com - hu_com*(1.0E0+100.0E0*uround_com)
-    IF( (T-tp)*(T-tn_com)>0.0E0 ) THEN
+    tp = tn_com - hu_com*(1._SP+100._SP*uround_com)
+    IF( (T-tp)*(T-tn_com)>0._SP ) THEN
       Iflag = -2
       RETURN
     ELSE

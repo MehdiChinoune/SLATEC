@@ -39,11 +39,11 @@ REAL(DP) FUNCTION D9PAK(Y,N)
   INTEGER :: N, nsum, ny
   REAL(DP) :: Y, a1n2b
   INTEGER, SAVE :: nmin, nmax
-  REAL(DP), PARAMETER :: a1n210 = 3.321928094887362347870319429489D0
+  REAL(DP), PARAMETER :: a1n210 = 3.321928094887362347870319429489_DP
   LOGICAL, SAVE :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  D9PAK
   IF( first ) THEN
-    a1n2b = 1.0D0
+    a1n2b = 1._DP
     IF( I1MACH(10)/=2 ) a1n2b = D1MACH(5)*a1n210
     nmin = INT( a1n2b*I1MACH(15) )
     nmax = INT( a1n2b*I1MACH(16) )
@@ -56,7 +56,7 @@ REAL(DP) FUNCTION D9PAK(Y,N)
   IF( nsum<nmin ) THEN
     !
     CALL XERMSG('D9PAK','PACKED NUMBER UNDERFLOWS',1,1)
-    D9PAK = 0.0D0
+    D9PAK = 0._DP
     RETURN
   ELSE
     IF( nsum>nmax ) CALL XERMSG('D9PAK','PACKED NUMBER OVERFLOWS',&
@@ -66,14 +66,14 @@ REAL(DP) FUNCTION D9PAK(Y,N)
     IF( nsum>0 ) THEN
       DO
         !
-        D9PAK = 2.0D0*D9PAK
+        D9PAK = 2._DP*D9PAK
         nsum = nsum - 1
         IF( nsum==0 ) EXIT
       END DO
     ELSE
       DO
         !
-        D9PAK = 0.5D0*D9PAK
+        D9PAK = 0.5_DP*D9PAK
         nsum = nsum + 1
         IF( nsum==0 ) RETURN
       END DO

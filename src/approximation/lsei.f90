@@ -467,7 +467,7 @@ SUBROUTINE LSEI(W,Mdw,Me,Ma,Mg,N,Prgopt,X,Rnorme,Rnorml,Mode,Ws,Ip)
   !     The nominal column scaling used in the code is
   !     the identity scaling.
   !
-  Ws(n1:n1+N-1) = 1.E0
+  Ws(n1:n1+N-1) = 1._SP
   !
   !     No covariance matrix is nominally computed.
   !
@@ -500,11 +500,11 @@ SUBROUTINE LSEI(W,Mdw,Me,Ma,Mg,N,Prgopt,X,Rnorme,Rnorml,Mode,Ws,Ip)
       !
       key = INT( Prgopt(last+1) )
       IF( key==1 ) THEN
-        cov = Prgopt(last+2)/=0.E0
-      ELSEIF( key==2 .AND. Prgopt(last+2)/=0.E0 ) THEN
+        cov = Prgopt(last+2)/=0._SP
+      ELSEIF( key==2 .AND. Prgopt(last+2)/=0._SP ) THEN
         DO j = 1, N
           t = NORM2(W(1:m,j))
-          IF( t/=0.E0 ) t = 1.E0/t
+          IF( t/=0._SP ) t = 1._SP/t
           Ws(j+n1-1) = t
         END DO
       ELSEIF( key==3 ) THEN
@@ -540,14 +540,14 @@ SUBROUTINE LSEI(W,Mdw,Me,Ma,Mg,N,Prgopt,X,Rnorme,Rnorml,Mode,Ws,Ip)
     !
     !     Compute norm of equality constraint matrix and right side.
     !
-    enorm = 0.E0
+    enorm = 0._SP
     DO j = 1, N
       enorm = MAX(enorm,SUM(ABS(W(1:Me,j))))
     END DO
     !
     fnorm = SUM(ABS(W(1:Me,np1)))
-    snmax = 0.E0
-    rnmax = 0.E0
+    snmax = 0._SP
+    rnmax = 0._SP
     DO i = 1, kranke
       !
       !        Compute maximum ratio of vector lengths. Partition is at
@@ -556,7 +556,7 @@ SUBROUTINE LSEI(W,Mdw,Me,Ma,Mg,N,Prgopt,X,Rnorme,Rnorml,Mode,Ws,Ip)
       DO k = i, Me
         sn = NORM2(W(k,i:N))**2
         rn = NORM2(W(k,1:i-1))**2
-        IF( rn==0.E0 .AND. sn>snmax ) THEN
+        IF( rn==0._SP .AND. sn>snmax ) THEN
           snmax = sn
           imax = k
         ELSEIF( k==i .OR. sn*rnmax>rn*snmax ) THEN
@@ -614,12 +614,12 @@ SUBROUTINE LSEI(W,Mdw,Me,Ma,Mg,N,Prgopt,X,Rnorme,Rnorml,Mode,Ws,Ip)
   !     Compute residuals for reduced problem.
   !
   mep1 = Me + 1
-  Rnorml = 0.E0
+  Rnorml = 0._SP
   DO i = mep1, m
     W(i,np1) = W(i,np1) - DOT_PRODUCT(W(i,1:kranke),X(1:kranke))
     sn = NORM2(W(i,1:kranke))**2
     rn = NORM2(W(i,kranke+1:N))**2
-    IF( rn<=sn*tau**2 .AND. kranke<N ) W(i,kranke+1:N) = 0.E0
+    IF( rn<=sn*tau**2 .AND. kranke<N ) W(i,kranke+1:N) = 0._SP
   END DO
   !
   !     Compute equality constraint equations residual length.
@@ -682,13 +682,13 @@ SUBROUTINE LSEI(W,Mdw,Me,Ma,Mg,N,Prgopt,X,Rnorme,Rnorml,Mode,Ws,Ip)
     IF( cov ) THEN
       DO j = MIN(kranke,N-1), 1, -1
         rb = Ws(j)*W(j,j)
-        IF( rb/=0.E0 ) rb = 1.E0/rb
+        IF( rb/=0._SP ) rb = 1._SP/rb
         jp1 = j + 1
         DO i = jp1, N
           W(i,j) = rb*DOT_PRODUCT(W(i,j+1:N),W(j,j+1:N))
         END DO
         !
-        gam = 0.5E0*rb*DOT_PRODUCT(W(j+1:N,j),W(j,j+1:N))
+        gam = 0.5_SP*rb*DOT_PRODUCT(W(j+1:N,j),W(j,j+1:N))
         CALL SAXPY(N-j,gam,W(j,jp1),Mdw,W(jp1,j),1)
         DO i = jp1, N
           DO k = i, N

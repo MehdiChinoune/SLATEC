@@ -167,7 +167,7 @@ SUBROUTINE DHSTRT(DF,Neq,A,B,Y,Yprime,Etol,Morder,Small,Big,Spy,Pv,Yp,Sf,H)
   !* FIRST EXECUTABLE STATEMENT  DHSTRT
   dx = B - A
   absdx = ABS(dx)
-  relper = Small**0.375D0
+  relper = Small**0.375_DP
   !
   !        ...............................................................
   !
@@ -177,8 +177,8 @@ SUBROUTINE DHSTRT(DF,Neq,A,B,Y,Yprime,Etol,Morder,Small,Big,Spy,Pv,Yp,Sf,H)
   !             ALSO COMPUTE A BOUND (FBND) ON THE FIRST DERIVATIVE
   !             LOCALLY.
   !
-  da = SIGN(MAX(MIN(relper*ABS(A),absdx),100.0D0*Small*ABS(A)),dx)
-  IF( da==0.0D0 ) da = relper*dx
+  da = SIGN(MAX(MIN(relper*ABS(A),absdx),100._DP*Small*ABS(A)),dx)
+  IF( da==0._DP ) da = relper*dx
   CALL DF(A+da,Y,Sf)
   DO j = 1, Neq
     Yp(j) = Sf(j) - Yprime(j)
@@ -214,15 +214,15 @@ SUBROUTINE DHSTRT(DF,Neq,A,B,Y,Yprime,Etol,Morder,Small,Big,Spy,Pv,Yp,Sf,H)
   !                                       SIZE OF THE VECTOR OF INITIAL
   !                                       VALUES.
   dely = relper*DHVNRM(Y,Neq)
-  IF( dely==0.0D0 ) dely = relper
+  IF( dely==0._DP ) dely = relper
   dely = SIGN(dely,dx)
   delf = DHVNRM(Yprime,Neq)
   fbnd = MAX(fbnd,delf)
-  IF( delf==0.0D0 ) THEN
+  IF( delf==0._DP ) THEN
     !           CANNOT HAVE A NULL PERTURBATION VECTOR
     DO j = 1, Neq
-      Spy(j) = 0.0D0
-      Yp(j) = 1.0D0
+      Spy(j) = 0._DP
+      Yp(j) = 1._DP
     END DO
     delf = DHVNRM(Yp,Neq)
   ELSE
@@ -233,7 +233,7 @@ SUBROUTINE DHSTRT(DF,Neq,A,B,Y,Yprime,Etol,Morder,Small,Big,Spy,Pv,Yp,Sf,H)
     END DO
   END IF
   !
-  dfdub = 0.0D0
+  dfdub = 0._DP
   lk = MIN(Neq+1,3)
   DO k = 1, lk
     !           DEFINE PERTURBED VECTOR OF INITIAL VALUES
@@ -265,17 +265,17 @@ SUBROUTINE DHSTRT(DF,Neq,A,B,Y,Yprime,Etol,Morder,Small,Big,Spy,Pv,Yp,Sf,H)
     !     ......EXIT
     IF( k==lk ) GOTO 100
     !           CHOOSE NEXT PERTURBATION VECTOR
-    IF( delf==0.0D0 ) delf = 1.0D0
+    IF( delf==0._DP ) delf = 1._DP
     DO j = 1, Neq
       IF( k==2 ) THEN
         dy = Y(j)
-        IF( dy==0.0D0 ) dy = dely/relper
+        IF( dy==0._DP ) dy = dely/relper
       ELSE
         dy = ABS(Pv(j))
-        IF( dy==0.0D0 ) dy = delf
+        IF( dy==0._DP ) dy = delf
       END IF
-      IF( Spy(j)==0.0D0 ) Spy(j) = Yp(j)
-      IF( Spy(j)/=0.0D0 ) dy = SIGN(dy,Spy(j))
+      IF( Spy(j)==0._DP ) Spy(j) = Yp(j)
+      IF( Spy(j)/=0._DP ) dy = SIGN(dy,Spy(j))
       Yp(j) = dy
     END DO
     delf = DHVNRM(Yp,Neq)
@@ -297,13 +297,13 @@ SUBROUTINE DHSTRT(DF,Neq,A,B,Y,Yprime,Etol,Morder,Small,Big,Spy,Pv,Yp,Sf,H)
   !          TOLERANCE RANGE IS SELECTED.
   !
   tolmin = Big
-  tolsum = 0.0D0
+  tolsum = 0._DP
   DO k = 1, Neq
     tolexp = LOG10(Etol(k))
     tolmin = MIN(tolmin,tolexp)
     tolsum = tolsum + tolexp
   END DO
-  tolp = 10.0D0**(0.5D0*(tolsum/Neq+tolmin)/(Morder+1))
+  tolp = 10._DP**(0.5_DP*(tolsum/Neq+tolmin)/(Morder+1))
   !
   !     ..................................................................
   !
@@ -315,16 +315,16 @@ SUBROUTINE DHSTRT(DF,Neq,A,B,Y,Yprime,Etol,Morder,Small,Big,Spy,Pv,Yp,Sf,H)
   !                            TO  A)
   H = absdx
   !
-  IF( ydpb==0.0D0 .AND. fbnd==0.0D0 ) THEN
+  IF( ydpb==0._DP .AND. fbnd==0._DP ) THEN
     !
     !        BOTH FIRST DERIVATIVE TERM (FBND) AND SECOND
     !                     DERIVATIVE TERM (YDPB) ARE ZERO
-    IF( tolp<1.0D0 ) H = absdx*tolp
+    IF( tolp<1._DP ) H = absdx*tolp
     !
-  ELSEIF( ydpb/=0.0D0 ) THEN
+  ELSEIF( ydpb/=0._DP ) THEN
     !
     !        SECOND DERIVATIVE TERM (YDPB) IS NON-ZERO
-    srydpb = SQRT(0.5D0*ydpb)
+    srydpb = SQRT(0.5_DP*ydpb)
     IF( tolp<srydpb*absdx ) H = tolp/srydpb
   ELSE
     !
@@ -334,15 +334,15 @@ SUBROUTINE DHSTRT(DF,Neq,A,B,Y,Yprime,Etol,Morder,Small,Big,Spy,Pv,Yp,Sf,H)
   !
   !     FURTHER RESTRICT THE STEP LENGTH TO BE NOT
   !                               BIGGER THAN  1/DFDUB
-  IF( H*dfdub>1.0D0 ) H = 1.0D0/dfdub
+  IF( H*dfdub>1._DP ) H = 1._DP/dfdub
   !
   !     FINALLY, RESTRICT THE STEP LENGTH TO BE NOT
   !     SMALLER THAN  100*SMALL*ABS(A).  HOWEVER, IF
   !     A=0. AND THE COMPUTED H UNDERFLOWED TO ZERO,
   !     THE ALGORITHM RETURNS  SMALL*ABS(B)  FOR THE
   !                                     STEP LENGTH.
-  H = MAX(H,100.0D0*Small*ABS(A))
-  IF( H==0.0D0 ) H = Small*ABS(B)
+  H = MAX(H,100._DP*Small*ABS(A))
+  IF( H==0._DP ) H = Small*ABS(B)
   !
   !     NOW SET DIRECTION OF INTEGRATION
   H = SIGN(H,dx)

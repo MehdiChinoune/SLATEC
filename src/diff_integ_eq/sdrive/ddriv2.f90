@@ -399,7 +399,7 @@ SUBROUTINE DDRIV2(N,T,Y,F,Tout,Mstate,Nroot,Eps,Ewt,Mint,Work,Lenw,Iwork,&
     ntask = 3
   END IF
   ewtcom(1) = Ewt
-  IF( Ewt/=0.D0 ) THEN
+  IF( Ewt/=0._DP ) THEN
     ierror = 3
   ELSE
     ierror = 2
@@ -414,7 +414,7 @@ SUBROUTINE DDRIV2(N,T,Y,F,Tout,Mstate,Nroot,Eps,Ewt,Mint,Work,Lenw,Iwork,&
     miter = 2
     mxord = 12
   END IF
-  hmax = 2.D0*ABS(Tout-T)
+  hmax = 2._DP*ABS(Tout-T)
   CALL DDRIV3(N,T,Y,F,nstate,Tout,ntask,Nroot,Eps,ewtcom,ierror,Mint,miter,&
     IMPL,ml,mu,mxord,hmax,Work,Lenw,Iwork,Leniw,dum_JACOBN,dum_FA,nde,MXSTEP,G,&
     dum_USERS,Ierflg)
@@ -446,7 +446,7 @@ CONTAINS
     INTEGER :: N, Matdim, Ml, Mu, Nde
     REAL(DP) :: T, Y(N), A(:,:)
     T = Matdim + Ml + Mu + Nde
-    Y = 0.D0
-    A = 0.D0
+    Y = 0._DP
+    A = 0._DP
   END SUBROUTINE dum_FA
 END SUBROUTINE DDRIV2

@@ -138,9 +138,9 @@ SUBROUTINE POLFIT(N,X,Y,W,Maxdeg,Ndeg,Eps,R,Ierr,A)
     k5, k5pi, ksig, m, mop1, nder, nfail
   REAL(DP) :: temd1, temd2
   REAL(SP), PARAMETER :: co(4,3) = RESHAPE( [ &
-    -13.086850, -2.4648165, -3.3846535, -1.2973162, &
-    -3.3381146, -1.7812271, -3.2578406, -1.6589279, &
-    -1.6282703, -1.3152745, -3.2640179, -1.9829776 ], [4,3] )
+    -13.086850_SP, -2.4648165_SP, -3.3846535_SP, -1.2973162_SP, &
+    -3.3381146_SP, -1.7812271_SP, -3.2578406_SP, -1.6589279_SP, &
+    -1.6282703_SP, -1.3152745_SP, -3.2640179_SP, -1.9829776_SP ], [4,3] )
   !* FIRST EXECUTABLE STATEMENT  POLFIT
   m = ABS(N)
   yp = 0.
@@ -210,7 +210,7 @@ SUBROUTINE POLFIT(N,X,Y,W,Maxdeg,Ndeg,Eps,R,Ierr,A)
   !
   ! COMPUTE FIT OF DEGREE ZERO
   !
-  temd1 = 0.0D0
+  temd1 = 0._DP
   DO i = 1, m
     k4pi = k4 + i
     temd1 = temd1 + REAL( W(i), DP )*REAL( Y(i), DP )*REAL( A(k4pi), DP )
@@ -250,7 +250,7 @@ SUBROUTINE POLFIT(N,X,Y,W,Maxdeg,Ndeg,Eps,R,Ierr,A)
     !
     ! COMPUTE NEW A COEFFICIENT
     !
-    temd1 = 0.0D0
+    temd1 = 0._DP
     DO i = 1, m
       k4pi = k4 + i
       temd2 = A(k4pi)
@@ -274,7 +274,7 @@ SUBROUTINE POLFIT(N,X,Y,W,Maxdeg,Ndeg,Eps,R,Ierr,A)
     ! GET NEW ORTHOGONAL POLYNOMIAL COEFFICIENT USING PARTIAL DOUBLE
     ! PRECISION
     !
-    temd1 = 0.0D0
+    temd1 = 0._DP
     DO i = 1, m
       k4pi = k4 + i
       k5pi = k5 + i
@@ -309,7 +309,7 @@ SUBROUTINE POLFIT(N,X,Y,W,Maxdeg,Ndeg,Eps,R,Ierr,A)
       !
       IF( sigj==0.0 ) GOTO 600
       degf = m - j - 1
-      den = (co(4,ksig)*degf+1.0)*degf
+      den = (co(4,ksig)*degf+1._SP)*degf
       fcrit = (((co(3,ksig)*degf)+co(2,ksig))*degf+co(1,ksig))/den
       fcrit = fcrit*fcrit
       f = (sigjm1-sigj)*degf/sigj

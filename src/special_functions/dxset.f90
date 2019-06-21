@@ -227,8 +227,8 @@ SUBROUTINE DXSET(Irad,Nradpl,Dzero,Nbits,Ierror)
   ! MACHINE-DEPENDENT VALUES.
   IF( iradx==0 ) iradx = I1MACH(10)
   IF( nrdplc==0 ) nrdplc = I1MACH(14)
-  IF( dzerox==0.0D0 ) iminex = I1MACH(15)
-  IF( dzerox==0.0D0 ) imaxex = I1MACH(16)
+  IF( dzerox==0._DP ) iminex = I1MACH(15)
+  IF( dzerox==0._DP ) imaxex = I1MACH(16)
   IF( nbitsx==0 ) nbitsx = I1MACH(8)
   IF( iradx/=2 ) THEN
     IF( iradx/=4 ) THEN
@@ -249,8 +249,8 @@ SUBROUTINE DXSET(Irad,Nradpl,Dzero,Nbits,Ierror)
   nbitsf_com = log2r*nrdplc
   radixx_com = iradx
   dlg10r_com = LOG10(radixx_com)
-  IF( dzerox/=0.0D0 ) THEN
-    lx = INT( 0.5D0*LOG10(dzerox)/dlg10r_com )
+  IF( dzerox/=0._DP ) THEN
+    lx = INT( 0.5_DP*LOG10(dzerox)/dlg10r_com )
     ! RADIX**(2*L) SHOULD NOT OVERFLOW, BUT REDUCE L BY 1 FOR FURTHER
     ! PROTECTION.
     lx = lx - 1

@@ -62,7 +62,7 @@ SUBROUTINE LA05BS(A,Ind,Ia,N,Ip,Iw,W,G,B,Trans)
       !     MULTIPLY VECTOR BY INVERSE OF TRANSPOSE OF U
       DO i = 1, N
         W(i) = B(i)
-        B(i) = 0.
+        B(i) = 0._SP
       END DO
       DO ii = 1, N
         i = Iw(ii,4)
@@ -108,7 +108,7 @@ SUBROUTINE LA05BS(A,Ind,Ia,N,Ip,Iw,W,G,B,Trans)
       END IF
       DO i = 1, N
         W(i) = B(i)
-        B(i) = 0.
+        B(i) = 0._SP
       END DO
       !
       !     MULTIPLY VECTOR BY INVERSE OF U

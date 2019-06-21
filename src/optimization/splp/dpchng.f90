@@ -62,7 +62,7 @@ SUBROUTINE DPCHNG(Ii,Xval,Iplace,Sx,Ix,Ircx)
   INTEGER :: i, iend, il, ilast, iopt, ipl, istart, ixlast, j, jj, jstart, k, &
     key, ll, lmx, lpg, n20055, nerr, np
   REAL(DP) :: sxlast, sxval
-  REAL(DP), PARAMETER :: zero = 0.D0, one = 1.D0
+  REAL(DP), PARAMETER :: zero = 0._DP, one = 1._DP
   !* FIRST EXECUTABLE STATEMENT  DPCHNG
   iopt = 1
   !

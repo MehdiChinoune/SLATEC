@@ -93,7 +93,7 @@ SUBROUTINE DQRFAC(M,N,A,Lda,Pivot,Ipvt,Lipvt,Sigma,Acnorm,Wa)
   REAL(DP) :: A(Lda,N), Sigma(N), Acnorm(N), Wa(N)
   INTEGER :: i, j, jp1, k, kmax, minmn
   REAL(DP) :: ajnorm, epsmch, summ, temp
-  REAL(DP), PARAMETER :: one = 1.0D0, p05 = 5.0D-2, zero = 0.0D0
+  REAL(DP), PARAMETER :: one = 1._DP, p05 = 5.0E-2_DP, zero = 0._DP
   !* FIRST EXECUTABLE STATEMENT  DQRFAC
   epsmch = D1MACH(4)
   !

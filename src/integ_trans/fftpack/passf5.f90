@@ -30,11 +30,11 @@ SUBROUTINE PASSF5(Ido,L1,Cc,Ch,Wa1,Wa2,Wa3,Wa4)
   REAL(SP) :: ci2, ci3, ci4, ci5, cr2, cr3, cr4, cr5, di2, di3, di4, di5, dr2, dr3, &
     dr4, dr5, pi, ti11, ti12, ti2, ti3, ti4, ti5, tr11, tr12, tr2, tr3, tr4, tr5
   !* FIRST EXECUTABLE STATEMENT  PASSF5
-  pi = 4.*ATAN(1.)
-  tr11 = SIN(.1*pi)
-  ti11 = -SIN(.4*pi)
-  tr12 = -SIN(.3*pi)
-  ti12 = -SIN(.2*pi)
+  pi = 4._SP*ATAN(1._SP)
+  tr11 = SIN(0.1_SP*pi)
+  ti11 = -SIN(0.4_SP*pi)
+  tr12 = -SIN(0.3_SP*pi)
+  ti12 = -SIN(0.2_SP*pi)
   IF( Ido==2 ) THEN
     DO k = 1, L1
       ti5 = Cc(2,2,k) - Cc(2,5,k)

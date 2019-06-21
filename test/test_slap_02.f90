@@ -128,7 +128,7 @@ CONTAINS
     !
     n = nmax
     itmax = n
-    factor = 1.2D0
+    factor = 1.2_DP
     !
     !     Set to print intermediate results if KPRINT>=3.
     !
@@ -140,7 +140,7 @@ CONTAINS
     !
     !     Set the Error tolerance to depend on the machine epsilon.
     !
-    tol = MAX(1.0D3*D1MACH(3),1.0D-6)
+    tol = MAX(1.E3_DP*D1MACH(3),1.E-6_DP)
     nfail = 0
     !
     !     Test routines using various convergence criteria.
@@ -171,9 +171,9 @@ CONTAINS
           CYCLE
         END IF
         IF( isym==0 ) THEN
-          dens = REAL(nelt)/(n*n)
+          dens = REAL(nelt,DP)/(n*n)
         ELSE
-          dens = REAL(2*nelt)/(n*n)
+          dens = REAL(2*nelt,DP)/(n*n)
         END IF
         IF( Kprint>=2 ) THEN
           WRITE (Lun,99003) n, nelt, dens
@@ -202,7 +202,7 @@ CONTAINS
         !         * * * * * *   DSJAC   * * * * * *
         !
         IF( Kprint>=3 ) WRITE (Lun,99008) 'DSJAC ', itol, isym
-        CALL DFILL(n,xiter,0.0D0)
+        CALL DFILL(n,xiter,0._DP)
         !
         CALL DSJAC(n,f,xiter,nelt,ia,ja,a,isym,itol,tol,2*itmax,iter,err,ierr,&
           iunit,rwork,lenw,iwork,leniw)
@@ -212,7 +212,7 @@ CONTAINS
         !         * * * * *  DSGS  * * * * *
         !
         IF( Kprint>=3 ) WRITE (Lun,99008) 'DSGS  ', itol, isym
-        CALL DFILL(n,xiter,0.0D0)
+        CALL DFILL(n,xiter,0._DP)
         !
         CALL DSGS(n,f,xiter,nelt,ia,ja,a,isym,itol,tol,itmax,iter,err,ierr,&
           iunit,rwork,lenw,iwork,leniw)
@@ -222,7 +222,7 @@ CONTAINS
         !         * * * * * *   DSILUR   * * * * * *
         !
         IF( Kprint>=3 ) WRITE (Lun,99008) 'DSILUR', itol, isym
-        CALL DFILL(n,xiter,0.0D0)
+        CALL DFILL(n,xiter,0._DP)
         !
         CALL DSILUR(n,f,xiter,nelt,ia,ja,a,isym,itol,tol,itmax,iter,err,ierr,&
           iunit,rwork,lenw,iwork,leniw)
@@ -233,7 +233,7 @@ CONTAINS
         !
         IF( isym==1 ) THEN
           IF( Kprint>=3 ) WRITE (Lun,99008) 'DSDCG', itol, isym
-          CALL DFILL(n,xiter,0.0D0)
+          CALL DFILL(n,xiter,0._DP)
           !
           CALL DSDCG(n,f,xiter,nelt,ia,ja,a,isym,itol,tol,itmax,iter,err,ierr,&
             iunit,rwork,lenw,iwork,leniw)
@@ -245,7 +245,7 @@ CONTAINS
         !
         IF( isym==1 ) THEN
           IF( Kprint>=3 ) WRITE (Lun,99008) 'DSICCG', itol, isym
-          CALL DFILL(n,xiter,0.0D0)
+          CALL DFILL(n,xiter,0._DP)
           !
           CALL DSICCG(n,f,xiter,nelt,ia,ja,a,isym,itol,tol,itmax,iter,err,&
             ierr,iunit,rwork,lenw,iwork,leniw)
@@ -256,7 +256,7 @@ CONTAINS
         !         * * * * * *    DSDCGN   * * * * * *
         !
         IF( Kprint>=3 ) WRITE (Lun,99008) 'DSDCGN', itol, isym
-        CALL DFILL(n,xiter,0.0D0)
+        CALL DFILL(n,xiter,0._DP)
         !
         CALL DSDCGN(n,f,xiter,nelt,ia,ja,a,isym,itol,tol,itmax,iter,err,ierr,&
           iunit,rwork,lenw,iwork,leniw)
@@ -266,7 +266,7 @@ CONTAINS
         !         * * * * * *   DSLUCN   * * * * * *
         !
         IF( Kprint>=3 ) WRITE (Lun,99008) 'DSLUCN', itol, isym
-        CALL DFILL(n,xiter,0.0D0)
+        CALL DFILL(n,xiter,0._DP)
         !
         CALL DSLUCN(n,f,xiter,nelt,ia,ja,a,isym,itol,tol,itmax,iter,err,ierr,&
           iunit,rwork,lenw,iwork,leniw)
@@ -276,7 +276,7 @@ CONTAINS
         !         * * * * * *    DSDBCG   * * * * * *
         !
         IF( Kprint>=3 ) WRITE (Lun,99008) 'DSDBCG', itol, isym
-        CALL DFILL(n,xiter,0.0D0)
+        CALL DFILL(n,xiter,0._DP)
         !
         CALL DSDBCG(n,f,xiter,nelt,ia,ja,a,isym,itol,tol,itmax,iter,err,ierr,&
           iunit,rwork,lenw,iwork,leniw)
@@ -286,7 +286,7 @@ CONTAINS
         !         * * * * * *   DSLUBC   * * * * * *
         !
         IF( Kprint>=3 ) WRITE (Lun,99008) 'DSLUBC', itol, isym
-        CALL DFILL(n,xiter,0.0D0)
+        CALL DFILL(n,xiter,0._DP)
         !
         CALL DSLUBC(n,f,xiter,nelt,ia,ja,a,isym,itol,tol,itmax,iter,err,ierr,&
           iunit,rwork,lenw,iwork,leniw)
@@ -296,7 +296,7 @@ CONTAINS
         !         * * * * * *    DSDCGS   * * * * * *
         !
         IF( Kprint>=3 ) WRITE (Lun,99008) 'DSDCGS', itol, isym
-        CALL DFILL(n,xiter,0.0D0)
+        CALL DFILL(n,xiter,0._DP)
         !
         CALL DSDCGS(n,f,xiter,nelt,ia,ja,a,isym,itol,tol,itmax,iter,err,ierr,&
           iunit,rwork,lenw,iwork,leniw)
@@ -306,7 +306,7 @@ CONTAINS
         !         * * * * * *   DSLUCS   * * * * * *
         !
         IF( Kprint>=3 ) WRITE (Lun,99008) 'DSLUCS', itol, isym
-        CALL DFILL(n,xiter,0.0D0)
+        CALL DFILL(n,xiter,0._DP)
         !
         CALL DSLUCS(n,f,xiter,nelt,ia,ja,a,isym,itol,tol,itmax,iter,err,ierr,&
           iunit,rwork,lenw,iwork,leniw)
@@ -317,7 +317,7 @@ CONTAINS
         !
         DO nsave = 0, 3
           IF( Kprint>=3 ) WRITE (Lun,99009) 'DSDOMN', itol, isym, nsave
-          CALL DFILL(n,xiter,0.0D0)
+          CALL DFILL(n,xiter,0._DP)
           !
           CALL DSDOMN(n,f,xiter,nelt,ia,ja,a,isym,nsave,itol,tol,itmax,iter,&
             err,ierr,iunit,rwork,lenw,iwork,leniw)
@@ -329,7 +329,7 @@ CONTAINS
         !
         DO nsave = 0, 3
           IF( Kprint>=3 ) WRITE (Lun,99009) 'DSLUOM', itol, isym, nsave
-          CALL DFILL(n,xiter,0.0D0)
+          CALL DFILL(n,xiter,0._DP)
           !
           CALL DSLUOM(n,f,xiter,nelt,ia,ja,a,isym,nsave,itol,tol,itmax,iter,&
             err,ierr,iunit,rwork,lenw,iwork,leniw)
@@ -341,7 +341,7 @@ CONTAINS
         !
         DO nsave = 5, 12
           IF( Kprint>=3 ) WRITE (Lun,99009) 'DSDGMR', itol, isym, nsave
-          CALL DFILL(n,xiter,0.0D0)
+          CALL DFILL(n,xiter,0._DP)
           itolgm = 0
           !
           CALL DSDGMR(n,f,xiter,nelt,ia,ja,a,isym,nsave,tol,itmax,iter,&
@@ -354,7 +354,7 @@ CONTAINS
         !
         DO nsave = 5, 12
           IF( Kprint>=3 ) WRITE (Lun,99009) 'DSLUGM', itol, isym, nsave
-          CALL DFILL(n,xiter,0.0D0)
+          CALL DFILL(n,xiter,0._DP)
           !
           CALL DSLUGM(n,f,xiter,nelt,ia,ja,a,isym,nsave,tol,itmax,iter,&
             err,ierr,iunit,rwork,lenw,iwork,leniw)
@@ -484,14 +484,14 @@ CONTAINS
     !     Note:  Double precision version did not work properly with
     !            certain compilers with literal arguments to RAND.
     !
-    dummy = 16381.0
+    dummy = 16381._SP
     iseed = INT( RAND(dummy) )
     Ierr = 0
     DO i = 1, N
       Idiag(i) = 0
-      Dsum(i) = -1.0D0
+      Dsum(i) = -1._DP
     END DO
-    dummy = 0.0
+    dummy = 0._SP
     Nelt = 0
     !
     !     Set the matrix elements.
@@ -547,7 +547,7 @@ CONTAINS
           RETURN
         END IF
         Idiag(icol) = Nelt
-        A(Nelt) = 0.0D0
+        A(Nelt) = 0._DP
         Ia(Nelt) = icol
         Ja(Nelt) = icol
       END IF
@@ -556,14 +556,14 @@ CONTAINS
     !         Clean up the diagonals.
     !
     DO i = 1, N
-      A(Idiag(i)) = -1.0001D0*Dsum(i)
+      A(Idiag(i)) = -1.0001_DP*Dsum(i)
     END DO
     !
     !         Set a random solution and determine the right-hand side.
     !
     DO i = 1, N
       SOLn(i) = RAND(dummy)
-      F(i) = 0.0D0
+      F(i) = 0._DP
     END DO
     !
     DO k = 1, Nelt

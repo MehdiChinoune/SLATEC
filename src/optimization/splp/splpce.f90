@@ -50,12 +50,12 @@ SUBROUTINE SPLPCE(Mrelas,Nvars,Lmx,Lbm,Itlp,Itbrc,Ibasis,Imat,Ibrc,Ipr,&
   REAL(SP) :: factor, one, zero, ten
   LOGICAL :: trans, pagepl
   !* FIRST EXECUTABLE STATEMENT  SPLPCE
-  zero = 0.E0
-  one = 1.E0
-  ten = 10.E0
+  zero = 0._SP
+  one = 1._SP
+  ten = 10._SP
   lpg = Lmx - (Nvars+4)
   Singlr = .FALSE.
-  factor = 0.01
+  factor = 0.01_SP
   !
   !     COPY COLSUMS IN WW(*), AND SOLVE TRANSPOSED SYSTEM.
   i = 1

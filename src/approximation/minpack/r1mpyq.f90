@@ -64,7 +64,7 @@ SUBROUTINE R1MPYQ(M,N,A,Lda,V,W)
   REAL(SP) :: A(Lda,N), V(N), W(N)
   INTEGER :: i, j, nmj, nm1
   REAL(SP) :: coss, sinn, temp
-  REAL(SP), PARAMETER :: one = 1.0E0
+  REAL(SP), PARAMETER :: one = 1._SP
   !* FIRST EXECUTABLE STATEMENT  R1MPYQ
   nm1 = N - 1
   IF( nm1>=1 ) THEN

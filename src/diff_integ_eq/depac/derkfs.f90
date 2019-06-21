@@ -80,7 +80,7 @@ SUBROUTINE DERKFS(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
   !  TOLERANCE THRESHOLD REMIN IS ASSIGNED FOR THIS METHOD. THIS VALUE
   !  SHOULD NOT BE CHANGED ACROSS DIFFERENT MACHINES.
   !
-  REAL(SP), PARAMETER :: remin = 1.E-12
+  REAL(SP), PARAMETER :: remin = 1.E-12_SP
   !
   !.......................................................................
   !
@@ -113,8 +113,8 @@ SUBROUTINE DERKFS(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
     !
     u = R1MACH(4)
     !                       -- SET ASSOCIATED MACHINE DEPENDENT PARAMETERS
-    U26 = 26.*u
-    Rer = 2.*u + remin
+    U26 = 26._SP*u
+    Rer = 2._SP*u + remin
     !                       -- SET TERMINATION FLAG
     Iquit = 0
     !                       -- SET INITIALIZATION INDICATOR
@@ -173,7 +173,7 @@ SUBROUTINE DERKFS(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
   nrtolp = 0
   natolp = 0
   DO k = 1, Neq
-    IF( nrtolp==0 .AND. Rtol(k)<0.D0 ) THEN
+    IF( nrtolp==0 .AND. Rtol(k)<0._DP ) THEN
       WRITE (xern1,'(I8)') k
       WRITE (xern3,'(1PE15.6)') Rtol(k)
       CALL XERMSG('DERKFS','IN DERKF, THE RELATIVE ERROR TOLERANCES&
@@ -184,7 +184,7 @@ SUBROUTINE DERKFS(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
       nrtolp = 1
     END IF
     !
-    IF( natolp==0 .AND. Atol(k)<0.D0 ) THEN
+    IF( natolp==0 .AND. Atol(k)<0._DP ) THEN
       WRITE (xern1,'(I8)') k
       WRITE (xern3,'(1PE15.6)') Atol(k)
       CALL XERMSG('DERKFS','IN DERKF, THE ABSOLUTE ERROR TOLERANCES ATOL&
@@ -219,7 +219,7 @@ SUBROUTINE DERKFS(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
     END IF
     !
     IF( Init/=1 ) THEN
-      IF( Dtsign*(Tout-T)<0.D0 ) THEN
+      IF( Dtsign*(Tout-T)<0._DP ) THEN
         WRITE (xern3,'(1PE15.6)') Tout
         CALL XERMSG('DERKFS','IN DERKF, BY CALLING THE CODE WITH TOUT = '&
           //xern3//' YOU ARE ATTEMPTING TO CHANGE THE DIRECTION OF INTEGRATION.&
@@ -285,10 +285,10 @@ SUBROUTINE DERKFS(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
     !                         -- ESTIMATE STARTING STEP SIZE
     !
     Init = 2
-    Dtsign = SIGN(1.,Tout-T)
+    Dtsign = SIGN(1._SP,Tout-T)
     u = R1MACH(4)
     big = SQRT(R1MACH(2))
-    ute = u**0.375
+    ute = u**0.375_SP
     dy = ute*HVNRM(Y,Neq)
     IF( dy==0. ) dy = ute
     ktol = 1
@@ -304,7 +304,7 @@ SUBROUTINE DERKFS(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
     !
     !                       RTOL=ATOL=0 ON INPUT, SO RTOL WAS CHANGED TO A
     !                                                SMALL POSITIVE VALUE
-    Tolfac = 1.
+    Tolfac = 1._SP
     GOTO 300
   END IF
   !
@@ -320,7 +320,7 @@ SUBROUTINE DERKFS(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
   !     TEST TO SEE IF DERKF IS BEING SEVERELY IMPACTED BY TOO MANY
   !     OUTPUT POINTS
   !
-  IF( ABS(H)>=2.*ABS(dt) ) Kop = Kop + 1
+  IF( ABS(H)>=2._SP*ABS(dt) ) Kop = Kop + 1
   IF( Kop>mxkop ) THEN
     !
     !                       UNNECESSARY FREQUENCY OF OUTPUT IS RESTRICTING
@@ -342,7 +342,7 @@ SUBROUTINE DERKFS(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
       !     TOLERANCE FACTOR BASED ON THE REQUESTED ERROR TOLERANCE AND A
       !     LEVEL OF ACCURACY ACHIEVABLE AT LIMITING PRECISION
       !
-      Tolfac = 0.
+      Tolfac = 0._SP
       ktol = 1
       DO k = 1, Neq
         IF( Info(2)==1 ) ktol = k
@@ -366,10 +366,10 @@ SUBROUTINE DERKFS(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
         !     SAFETY FACTOR OF 9/10.
         !
         dt = Tout - T
-        IF( ABS(dt)<2.*ABS(H) ) THEN
+        IF( ABS(dt)<2._SP*ABS(H) ) THEN
           IF( ABS(dt)>ABS(H)/0.9 ) THEN
             !
-            H = 0.5*dt
+            H = 0.5_SP*dt
           ELSE
             !
             !     THE NEXT STEP, IF SUCCESSFUL, WILL COMPLETE THE INTEGRATION TO
@@ -424,20 +424,20 @@ SUBROUTINE DERKFS(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
           !     LOCAL ERROR ESTIMATES FOR A SPECIAL FIRST ORDER METHOD ARE
           !     CALCULATED ONLY WHEN THE STIFFNESS DETECTION IS TURNED ON.
           !
-          eeoet = 0.
-          estiff = 0.
+          eeoet = 0._SP
+          estiff = 0._SP
           ktol = 1
           DO k = 1, Neq
-            yavg = 0.5*(ABS(Y(k))+ABS(Ys(k)))
+            yavg = 0.5_SP*(ABS(Y(k))+ABS(Ys(k)))
             IF( Info(2)==1 ) ktol = k
             et = Rtol(ktol)*yavg + Atol(ktol)
             IF( et>0. ) THEN
               !
-              ee = ABS((-2090.*Yp(k)+(21970.*F3(k)-15048.*F4(k)))&
-                +(22528.*F2(k)-27360.*F5(k)))
+              ee = ABS((-2090._SP*Yp(k)+(21970._SP*F3(k)-15048._SP*F4(k)))&
+                +(22528._SP*F2(k)-27360._SP*F5(k)))
               IF( .NOT. (Stiff .OR. Nonstf) ) THEN
-                es = ABS(H*(0.055455*Yp(k)-0.035493*F1(k)-0.036571*F2(k)&
-                  +0.023107*F3(k)-0.009515*F4(k)+0.003017*F5(k)))
+                es = ABS(H*(0.055455_SP*Yp(k)-0.035493_SP*F1(k)-0.036571_SP*F2(k)&
+                  +0.023107_SP*F3(k)-0.009515_SP*F4(k)+0.003017_SP*F5(k)))
                 estiff = MAX(estiff,es/et)
               END IF
               eeoet = MAX(eeoet,ee/et)
@@ -450,7 +450,7 @@ SUBROUTINE DERKFS(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
             END IF
           END DO
           !
-          esttol = ABS(H)*eeoet/752400.
+          esttol = ABS(H)*eeoet/752400._SP
           !
           IF( esttol<=1. ) THEN
             !
@@ -472,9 +472,9 @@ SUBROUTINE DERKFS(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
             !                       IF STEP FAILURE HAS JUST OCCURRED, NEXT
             !                          STEP SIZE IS NOT ALLOWED TO INCREASE
             !
-            s = 5.
-            IF( esttol>1.889568E-4 ) s = 0.9/esttol**0.2
-            IF( hfaild ) s = MIN(s,1.)
+            s = 5._SP
+            IF( esttol>1.889568E-4_SP ) s = 0.9_SP/esttol**0.2_SP
+            IF( hfaild ) s = MIN(s,1._SP)
             H = SIGN(MAX(s*ABS(H),hmin),H)
             !
             !.......................................................................
@@ -540,14 +540,14 @@ SUBROUTINE DERKFS(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
             !
             hfaild = .TRUE.
             output = .FALSE.
-            s = 0.1
-            IF( esttol<59049. ) s = 0.9/esttol**0.2
+            s = 0.1_SP
+            IF( esttol<59049._SP ) s = 0.9_SP/esttol**0.2_SP
             H = SIGN(MAX(s*ABS(H),hmin),H)
           ELSE
             !
             !                       REQUESTED ERROR UNATTAINABLE AT SMALLEST
             !                                            ALLOWABLE STEP SIZE
-            Tolfac = 1.69*esttol
+            Tolfac = 1.69_SP*esttol
             Idid = -2
             GOTO 300
           END IF
@@ -570,7 +570,7 @@ SUBROUTINE DERKFS(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
         !
         !                       REQUESTED ERROR UNATTAINABLE DUE TO LIMITED
         !                                               PRECISION AVAILABLE
-        Tolfac = 2.*Tolfac
+        Tolfac = 2._SP*Tolfac
         Idid = -2
         GOTO 300
       END IF

@@ -62,7 +62,7 @@ SUBROUTINE PCHNGS(Ii,Xval,Iplace,Sx,Ix,Ircx)
   INTEGER :: i, iend, il, ilast, iopt, ipl, istart, ixlast, j, jj, jstart, k, &
     key, ll, lmx, lpg, n20055, nerr, np
   REAL(SP) :: sxlast, sxval
-  REAL(SP), PARAMETER :: zero = 0.E0, one = 1.E0
+  REAL(SP), PARAMETER :: zero = 0.E0, one = 1._SP
   !* FIRST EXECUTABLE STATEMENT  PCHNGS
   iopt = 1
   !

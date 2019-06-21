@@ -132,8 +132,8 @@ SUBROUTINE DGLSS(A,Mda,M,N,B,Mdb,Nb,Rnorm,Work,Lw,Iwork,Liw,Info)
   REAL(DP) :: ae(1), re(1)
   !
   !* FIRST EXECUTABLE STATEMENT  DGLSS
-  re = 0.D0
-  ae = 0.D0
+  re = 0._DP
+  ae = 0._DP
   key = 0
   mode = 2
   np = 0

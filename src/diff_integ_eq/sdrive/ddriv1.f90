@@ -311,7 +311,7 @@ SUBROUTINE DDRIV1(N,T,Y,F,Tout,Mstate,Eps,Work,Lenw,Ierflg)
   INTEGER :: iwork(IDLIW+MXN)
   INTEGER, PARAMETER :: NROOT = 0, IERROR = 2, MINT = 2, MITER = 2, IMPL = 0, &
     MXORD = 5, MXSTEP = 1000
-  REAL(DP), PARAMETER :: ewtcom(1)  = 1.D0
+  REAL(DP), PARAMETER :: ewtcom(1)  = 1._DP
   !* FIRST EXECUTABLE STATEMENT  DDRIV1
   IF( ABS(Mstate)==0 .OR. ABS(Mstate)>7 ) THEN
     WRITE (intgr1,'(I8)') Mstate
@@ -340,7 +340,7 @@ SUBROUTINE DDRIV1(N,T,Y,F,Tout,Mstate,Eps,Work,Lenw,Ierflg)
     nstate = -Mstate
     ntask = 3
   END IF
-  hmax = 2.D0*ABS(Tout-T)
+  hmax = 2._DP*ABS(Tout-T)
   leniw = N + IDLIW
   lenwcm = Lenw - leniw
   IF( lenwcm<(N*N+10*N+250) ) THEN
@@ -400,7 +400,7 @@ CONTAINS
     INTEGER :: N, Matdim, Ml, Mu, Nde
     REAL(DP) :: T, Y(N), A(:,:)
     T = Matdim + Ml + Mu + Nde
-    Y = 0.D0
-    A = 0.D0
+    Y = 0._DP
+    A = 0._DP
   END SUBROUTINE dum_FA
 END SUBROUTINE DDRIV1

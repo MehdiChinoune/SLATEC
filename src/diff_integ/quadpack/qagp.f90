@@ -219,8 +219,8 @@ SUBROUTINE QAGP(F,A,B,Npts2,Points,Epsabs,Epsrel,Result,Abserr,Neval,Ier,&
   Ier = 6
   Neval = 0
   Last = 0
-  Result = 0.0E+00
-  Abserr = 0.0E+00
+  Result = 0._SP
+  Abserr = 0._SP
   IF( Leniw>=(3*Npts2-2) .AND. Lenw>=(Leniw*2-Npts2) .AND. Npts2>=2 ) THEN
     !
     !         PREPARE CALL FOR QAGPE.

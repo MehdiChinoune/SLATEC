@@ -641,8 +641,8 @@ SUBROUTINE DBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,&
     !     END PROCEDURE
     !     DO(PROCESS OPTION ARRAY)
     !     PROCEDURE(PROCESS OPTION ARRAY)
-    zero = 0.D0
-    one = 1.D0
+    zero = 0._DP
+    one = 1._DP
     drelpr = D1MACH(4)
     checkl = .FALSE.
     filter = .TRUE.

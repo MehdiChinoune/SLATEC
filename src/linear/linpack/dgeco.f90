@@ -93,7 +93,7 @@ SUBROUTINE DGECO(A,Lda,N,Ipvt,Rcond,Z)
   !     COMPUTE 1-NORM OF A
   !
   !* FIRST EXECUTABLE STATEMENT  DGECO
-  anorm = 0.0D0
+  anorm = 0._DP
   DO j = 1, N
     anorm = MAX(anorm, SUM( ABS(A(1:N,j)) ) )
   END DO
@@ -111,12 +111,12 @@ SUBROUTINE DGECO(A,Lda,N,Ipvt,Rcond,Z)
   !
   !     SOLVE TRANS(U)*W = E
   !
-  ek = 1.0D0
+  ek = 1._DP
   DO j = 1, N
-    Z(j) = 0.0D0
+    Z(j) = 0._DP
   END DO
   DO k = 1, N
-    IF( Z(k)/=0.0D0 ) ek = SIGN(ek,-Z(k))
+    IF( Z(k)/=0._DP ) ek = SIGN(ek,-Z(k))
     IF( ABS(ek-Z(k))>ABS(A(k,k)) ) THEN
       s = ABS(A(k,k))/ABS(ek-Z(k))
       Z = s*Z
@@ -126,9 +126,9 @@ SUBROUTINE DGECO(A,Lda,N,Ipvt,Rcond,Z)
     wkm = -ek - Z(k)
     s = ABS(wk)
     sm = ABS(wkm)
-    IF( A(k,k)==0.0D0 ) THEN
-      wk = 1.0D0
-      wkm = 1.0D0
+    IF( A(k,k)==0._DP ) THEN
+      wk = 1._DP
+      wkm = 1._DP
     ELSE
       wk = wk/A(k,k)
       wkm = wkm/A(k,k)
@@ -150,7 +150,7 @@ SUBROUTINE DGECO(A,Lda,N,Ipvt,Rcond,Z)
     END IF
     Z(k) = wk
   END DO
-  s = 1.0D0/SUM( ABS(Z) )
+  s = 1._DP/SUM( ABS(Z) )
   Z = s*Z
   !
   !     SOLVE TRANS(L)*Y = W
@@ -158,8 +158,8 @@ SUBROUTINE DGECO(A,Lda,N,Ipvt,Rcond,Z)
   DO kb = 1, N
     k = N + 1 - kb
     IF( k<N ) Z(k) = Z(k) + DOT_PRODUCT(A(k+1:N,k),Z(k+1:N))
-    IF( ABS(Z(k))>1.0D0 ) THEN
-      s = 1.0D0/ABS(Z(k))
+    IF( ABS(Z(k))>1._DP ) THEN
+      s = 1._DP/ABS(Z(k))
       Z = s*Z
     END IF
     l = Ipvt(k)
@@ -167,10 +167,10 @@ SUBROUTINE DGECO(A,Lda,N,Ipvt,Rcond,Z)
     Z(l) = Z(k)
     Z(k) = t
   END DO
-  s = 1.0D0/SUM( ABS(Z) )
+  s = 1._DP/SUM( ABS(Z) )
   Z = s*Z
   !
-  ynorm = 1.0D0
+  ynorm = 1._DP
   !
   !     SOLVE L*V = Y
   !
@@ -180,13 +180,13 @@ SUBROUTINE DGECO(A,Lda,N,Ipvt,Rcond,Z)
     Z(l) = Z(k)
     Z(k) = t
     IF( k<N ) CALL DAXPY(N-k,t,A(k+1,k),1,Z(k+1),1)
-    IF( ABS(Z(k))>1.0D0 ) THEN
-      s = 1.0D0/ABS(Z(k))
+    IF( ABS(Z(k))>1._DP ) THEN
+      s = 1._DP/ABS(Z(k))
       Z = s*Z
       ynorm = s*ynorm
     END IF
   END DO
-  s = 1.0D0/SUM( ABS(Z) )
+  s = 1._DP/SUM( ABS(Z) )
   Z = s*Z
   ynorm = s*ynorm
   !
@@ -199,16 +199,16 @@ SUBROUTINE DGECO(A,Lda,N,Ipvt,Rcond,Z)
       Z = s*Z
       ynorm = s*ynorm
     END IF
-    IF( A(k,k)/=0.0D0 ) Z(k) = Z(k)/A(k,k)
-    IF( A(k,k)==0.0D0 ) Z(k) = 1.0D0
+    IF( A(k,k)/=0._DP ) Z(k) = Z(k)/A(k,k)
+    IF( A(k,k)==0._DP ) Z(k) = 1._DP
     t = -Z(k)
     CALL DAXPY(k-1,t,A(1,k),1,Z(1),1)
   END DO
   !     MAKE ZNORM = 1.0
-  s = 1.0D0/SUM( ABS(Z) )
+  s = 1._DP/SUM( ABS(Z) )
   Z = s*Z
   ynorm = s*ynorm
   !
-  IF( anorm/=0.0D0 ) Rcond = ynorm/anorm
-  IF( anorm==0.0D0 ) Rcond = 0.0D0
+  IF( anorm/=0._DP ) Rcond = ynorm/anorm
+  IF( anorm==0._DP ) Rcond = 0._DP
 END SUBROUTINE DGECO

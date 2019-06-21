@@ -198,10 +198,11 @@ SUBROUTINE STEPS(F,Neqn,Y,X,H,Eps,Wt,Start,Hold,K,Kold,Crash,Phi,P,Yp,Psi,&
   REAL(SP) :: absh, big, erk, erkm1, erkm2, erkp1, err, hnew, p5eps, r, reali, realns, &
     rho, round, tau, temp1, temp2, temp3, temp4, temp5, temp6, u
   !
-  REAL(SP), PARAMETER :: two(13) = [ 2.0, 4.0, 8.0, 16.0, 32.0, 64.0, 128.0, 256.0, &
-    512.0, 1024.0, 2048.0, 4096.0, 8192.0 ]
-  REAL(SP), PARAMETER :: gstr(13) = [ 0.500, 0.0833, 0.0417, 0.0264, 0.0188, 0.0143, &
-    0.0114, 0.00936, 0.00789, 0.00679, 0.00592, 0.00524, 0.00468 ]
+  REAL(SP), PARAMETER :: two(13) = [ 2._SP, 4._SP, 8._SP, 16._SP, 32._SP, 64._SP, &
+    128._SP, 256._SP, 512._SP, 1024._SP, 2048._SP, 4096._SP, 8192._SP ]
+  REAL(SP), PARAMETER :: gstr(13) = [ 0.500_SP, 0.0833_SP, 0.0417_SP, 0.0264_SP, &
+    0.0188_SP, 0.0143_SP, 0.0114_SP, 0.00936_SP, 0.00789_SP, 0.00679_SP, 0.00592_SP, &
+    0.00524_SP, 0.00468_SP ]
   !
   !
   !       ***     BEGIN BLOCK 0     ***
@@ -215,20 +216,20 @@ SUBROUTINE STEPS(F,Neqn,Y,X,H,Eps,Wt,Start,Hold,K,Kold,Crash,Phi,P,Yp,Psi,&
   !* FIRST EXECUTABLE STATEMENT  STEPS
   Crash = .TRUE.
   IF( ABS(H)>=Fouru*ABS(X) ) THEN
-    p5eps = 0.5*Eps
+    p5eps = 0.5_SP*Eps
     !
     !   IF ERROR TOLERANCE IS TOO SMALL, INCREASE IT TO AN ACCEPTABLE VALUE
     !
-    round = 0.0
+    round = 0._SP
     DO l = 1, Neqn
       round = round + (Y(l)/Wt(l))**2
     END DO
     round = Twou*SQRT(round)
     IF( p5eps>=round ) THEN
       Crash = .FALSE.
-      G(1) = 1.0
+      G(1) = 1._SP
       G(2) = 0.5
-      Sig(1) = 1.0
+      Sig(1) = 1._SP
       IF( Start ) THEN
         !
         !   INITIALIZE.  COMPUTE APPROPRIATE STEP SIZE FOR FIRST STEP
@@ -237,7 +238,7 @@ SUBROUTINE STEPS(F,Neqn,Y,X,H,Eps,Wt,Start,Hold,K,Kold,Crash,Phi,P,Yp,Psi,&
         !     SUM = 0.0
         DO l = 1, Neqn
           Phi(l,1) = Yp(l)
-          Phi(l,2) = 0.0
+          Phi(l,2) = 0._SP
         END DO
         !20     SUM = SUM + (YP(L)/WT(L))**2
         !     SUM = SQRT(SUM)
@@ -250,23 +251,23 @@ SUBROUTINE STEPS(F,Neqn,Y,X,H,Eps,Wt,Start,Hold,K,Kold,Crash,Phi,P,Yp,Psi,&
         CALL HSTART(F,Neqn,X,X+H,Y,Yp,Wt,1,u,big,Phi(1,3),Phi(1,4),Phi(1,5),&
           Phi(1,6),H)
         !
-        Hold = 0.0
+        Hold = 0._SP
         K = 1
         Kold = 0
         Kprev = 0
         Start = .FALSE.
         Phase1 = .TRUE.
         Nornd = .TRUE.
-        IF( p5eps<=100.0*round ) THEN
+        IF( p5eps<=100._SP*round ) THEN
           Nornd = .FALSE.
           DO l = 1, Neqn
-            Phi(l,15) = 0.0
+            Phi(l,15) = 0._SP
           END DO
         END IF
       END IF
       ifail = 0
     ELSE
-      Eps = 2.0*round*(1.0+Fouru)
+      Eps = 2._SP*round*(1._SP+Fouru)
       RETURN
     END IF
   ELSE
@@ -296,11 +297,11 @@ SUBROUTINE STEPS(F,Neqn,Y,X,H,Eps,Wt,Start,Hold,K,Kold,Crash,Phi,P,Yp,Psi,&
     !   COMPUTE THOSE COMPONENTS OF ALPHA(*),BETA(*),PSI(*),SIG(*) WHICH
     !   ARE CHANGED
     !
-    Beta(Ns) = 1.0
+    Beta(Ns) = 1._SP
     realns = Ns
-    Alpha(Ns) = 1.0/realns
+    Alpha(Ns) = 1._SP/realns
     temp1 = H*realns
-    Sig(nsp1) = 1.0
+    Sig(nsp1) = 1._SP
     IF( K>=nsp1 ) THEN
       DO i = nsp1, K
         im1 = i - 1
@@ -327,7 +328,7 @@ SUBROUTINE STEPS(F,Neqn,Y,X,H,Eps,Wt,Start,Hold,K,Kold,Crash,Phi,P,Yp,Psi,&
         IF( Ivc==0 ) THEN
           jv = 1
           temp4 = K*kp1
-          V(K) = 1.0/temp4
+          V(K) = 1._SP/temp4
           W(K) = V(K)
           IF( K==2 ) THEN
             Kgi = 1
@@ -372,7 +373,7 @@ SUBROUTINE STEPS(F,Neqn,Y,X,H,Eps,Wt,Start,Hold,K,Kold,Crash,Phi,P,Yp,Psi,&
     ELSE
       DO iq = 1, K
         temp3 = iq*(iq+1)
-        V(iq) = 1.0/temp3
+        V(iq) = 1._SP/temp3
         W(iq) = V(iq)
       END DO
       Ivc = 0
@@ -425,8 +426,8 @@ SUBROUTINE STEPS(F,Neqn,Y,X,H,Eps,Wt,Start,Hold,K,Kold,Crash,Phi,P,Yp,Psi,&
   !
   DO l = 1, Neqn
     Phi(l,kp2) = Phi(l,kp1)
-    Phi(l,kp1) = 0.0
-    P(l) = 0.0
+    Phi(l,kp1) = 0._SP
+    P(l) = 0._SP
   END DO
   DO j = 1, K
     i = kp1 - j
@@ -455,11 +456,11 @@ SUBROUTINE STEPS(F,Neqn,Y,X,H,Eps,Wt,Start,Hold,K,Kold,Crash,Phi,P,Yp,Psi,&
   !
   !   ESTIMATE ERRORS AT ORDERS K,K-1,K-2
   !
-  erkm2 = 0.0
-  erkm1 = 0.0
-  erk = 0.0
+  erkm2 = 0._SP
+  erkm1 = 0._SP
+  erk = 0._SP
   DO l = 1, Neqn
-    temp3 = 1.0/Wt(l)
+    temp3 = 1._SP/Wt(l)
     temp4 = Yp(l) - Phi(l,1)
     IF( km2<0 ) GOTO 150
     IF( km2/=0 ) erkm2 = erkm2 + ((Phi(l,km1)+temp4)*temp3)**2
@@ -478,7 +479,7 @@ SUBROUTINE STEPS(F,Neqn,Y,X,H,Eps,Wt,Start,Hold,K,Kold,Crash,Phi,P,Yp,Psi,&
   !
   IF( km2<0 ) THEN
   ELSEIF( km2==0 ) THEN
-    IF( erkm1<=0.5*erk ) knew = km1
+    IF( erkm1<=0.5_SP*erk ) knew = km1
   ELSE
     IF( MAX(erkm1,erkm2)<=erk ) knew = km1
   END IF
@@ -533,7 +534,7 @@ SUBROUTINE STEPS(F,Neqn,Y,X,H,Eps,Wt,Start,Hold,K,Kold,Crash,Phi,P,Yp,Psi,&
     !     ALREADY DECIDED TO LOWER ORDER,
     !     STEP SIZE NOT CONSTANT SO ESTIMATE UNRELIABLE
     !
-    erkp1 = 0.0
+    erkp1 = 0._SP
     IF( knew==km1 .OR. K==12 ) Phase1 = .FALSE.
     IF( .NOT. (Phase1) ) THEN
       IF( knew==km1 ) GOTO 300
@@ -549,7 +550,7 @@ SUBROUTINE STEPS(F,Neqn,Y,X,H,Eps,Wt,Start,Hold,K,Kold,Crash,Phi,P,Yp,Psi,&
       IF( K>1 ) THEN
         IF( erkm1<=MIN(erk,erkp1) ) GOTO 300
         IF( erkp1>=erk .OR. K==12 ) GOTO 400
-      ELSEIF( erkp1>=0.5*erk ) THEN
+      ELSEIF( erkp1>=0.5_SP*erk ) THEN
         GOTO 400
       END IF
     END IF
@@ -578,7 +579,7 @@ SUBROUTINE STEPS(F,Neqn,Y,X,H,Eps,Wt,Start,Hold,K,Kold,Crash,Phi,P,Yp,Psi,&
     Phase1 = .FALSE.
     X = Xold
     DO i = 1, K
-      temp1 = 1.0/Beta(i)
+      temp1 = 1._SP/Beta(i)
       ip1 = i + 1
       DO l = 1, Neqn
         Phi(l,i) = temp1*(Phi(l,i)-Phi(l,ip1))
@@ -597,7 +598,7 @@ SUBROUTINE STEPS(F,Neqn,Y,X,H,Eps,Wt,Start,Hold,K,Kold,Crash,Phi,P,Yp,Psi,&
     temp2 = 0.5
     IF( ifail<3 ) GOTO 250
     IF( ifail/=3 ) THEN
-      IF( p5eps<0.25*erk ) temp2 = SQRT(p5eps/erk)
+      IF( p5eps<0.25_SP*erk ) temp2 = SQRT(p5eps/erk)
     END IF
     knew = 1
     250  H = temp2*H
@@ -623,8 +624,8 @@ SUBROUTINE STEPS(F,Neqn,Y,X,H,Eps,Wt,Start,Hold,K,Kold,Crash,Phi,P,Yp,Psi,&
       hnew = H
       IF( p5eps<erk ) THEN
         temp2 = K + 1
-        r = (p5eps/erk)**(1.0/temp2)
-        hnew = absh*MAX(0.5,MIN(0.9,r))
+        r = (p5eps/erk)**(1._SP/temp2)
+        hnew = absh*MAX(0.5_SP,MIN(0.9_SP,r))
         hnew = SIGN(MAX(hnew,Fouru*ABS(X)),H)
       END IF
     END IF

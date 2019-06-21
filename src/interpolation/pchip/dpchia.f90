@@ -133,7 +133,7 @@ REAL(DP) FUNCTION DPCHIA(N,X,F,D,Incfd,Skip,A,B,Ierr)
   !
   !  INITIALIZE.
   !
-  REAL(DP), PARAMETER :: zero = 0.D0
+  REAL(DP), PARAMETER :: zero = 0._DP
   !* FIRST EXECUTABLE STATEMENT  DPCHIA
   value = zero
   !

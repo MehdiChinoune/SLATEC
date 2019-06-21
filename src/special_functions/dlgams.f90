@@ -36,10 +36,10 @@ SUBROUTINE DLGAMS(X,Dlgam,Sgngam)
   REAL(DP) :: X, Dlgam, Sgngam
   !* FIRST EXECUTABLE STATEMENT  DLGAMS
   Dlgam = LOG_GAMMA(X)
-  Sgngam = 1.0D0
-  IF( X>0.D0 ) RETURN
+  Sgngam = 1._DP
+  IF( X>0._DP ) RETURN
   !
-  i = INT( MOD(-AINT(X),2.0D0) + 0.1D0 )
-  IF( i==0 ) Sgngam = -1.0D0
+  i = INT( MOD(-AINT(X),2._DP) + 0.1_DP )
+  IF( i==0 ) Sgngam = -1._DP
   !
 END SUBROUTINE DLGAMS

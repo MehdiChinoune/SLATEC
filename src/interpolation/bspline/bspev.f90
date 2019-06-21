@@ -121,7 +121,7 @@ SUBROUTINE BSPEV(T,Ad,N,K,Nderiv,X,Inev,Svalue,Work)
         !     ADIF(LEFTPL,ID) = AD(LEFTPL-ID+1 + (2*N-ID+2)*(ID-1)/2)
         !     LEFTPL = LEFT + L
         left = i - kp1mn
-        summ = 0.0E0
+        summ = 0._SP
         ll = left + jj + 2 - id
         DO l = 1, kp1mn
           summ = summ + Work(l)*Ad(ll)

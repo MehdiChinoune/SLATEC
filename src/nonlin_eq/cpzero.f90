@@ -77,7 +77,7 @@ SUBROUTINE CPZERO(In,A,R,T,Iflg,S)
         n1 = n + 1
         IF( n<=1 ) THEN
           R(1) = -A(2)/A(1)
-          S(1) = 0.0
+          S(1) = 0._SP
           RETURN
         ELSEIF( ABS(A(n1))/=0.0 ) THEN
           !
@@ -91,22 +91,22 @@ SUBROUTINE CPZERO(In,A,R,T,Iflg,S)
             T(n+i) = -ABS(T(n+2-i))
             IF( REAL(T(n+i))<REAL(T(imax)) ) imax = n + i
           END DO
-          x = (-REAL(T(imax))/REAL(T(n1)))**(1./(imax-n1))
+          x = (-REAL(T(imax))/REAL(T(n1)))**(1._SP/(imax-n1))
           DO
-            x = 2.*x
-            CALL CPEVL(n,0,T(n1),CMPLX(x,0.0),pn,pn,.FALSE.)
+            x = 2._SP*x
+            CALL CPEVL(n,0,T(n1),CMPLX(x,0._SP,SP),pn,pn,.FALSE.)
             IF( REAL(pn(1))>=0. ) THEN
-              u = .5*x
+              u = 0.5_SP*x
               v = x
               DO
-                x = .5*(u+v)
-                CALL CPEVL(n,0,T(n1),CMPLX(x,0.0),pn,pn,.FALSE.)
+                x = 0.5_SP*(u+v)
+                CALL CPEVL(n,0,T(n1),CMPLX(x,0._SP,SP),pn,pn,.FALSE.)
                 IF( REAL(pn(1))>0. ) v = x
                 IF( REAL(pn(1))<=0. ) u = x
                 IF( (v-u)<=.001*(1.+v) ) THEN
                   DO i = 1, n
-                    u = (3.14159265/n)*(2*i-1.5)
-                    R(i) = MAX(x,.001*ABS(temp(1)))*CMPLX(COS(u),SIN(u)) + temp(1)
+                    u = (3.14159265_SP/n)*(2*i-1.5_SP)
+                    R(i) = MAX(x,.001_SP*ABS(temp(1)))*CMPLX(COS(u),SIN(u),SP) + temp(1)
                   END DO
                   GOTO 50
                 END IF
@@ -114,8 +114,8 @@ SUBROUTINE CPZERO(In,A,R,T,Iflg,S)
             END IF
           END DO
         ELSE
-          R(n) = 0.0
-          S(n) = 0.0
+          R(n) = 0._SP
+          S(n) = 0._SP
           n = n - 1
         END IF
       END DO
@@ -136,7 +136,7 @@ SUBROUTINE CPZERO(In,A,R,T,Iflg,S)
             END DO
             T(i) = pn(1)/temp(1)
           ELSE
-            T(i) = 0.0
+            T(i) = 0._SP
             nr = nr + 1
           END IF
         END IF
@@ -154,15 +154,15 @@ SUBROUTINE CPZERO(In,A,R,T,Iflg,S)
   100 CONTINUE
   DO nr = 1, n
     CALL CPEVL(n,n,A,R(nr),T,T(n+2),.TRUE.)
-    x = ABS(CMPLX(ABS(REAL(T(1))),ABS(AIMAG(T(1))))+T(n+2))
-    S(nr) = 0.0
+    x = ABS(CMPLX(ABS(REAL(T(1))),ABS(AIMAG(T(1))),SP)+T(n+2))
+    S(nr) = 0._SP
     DO i = 1, n
-      x = x*REAL(n1-i)/i
-      temp = CMPLX(MAX(ABS(REAL(T(i+1)))-REAL(T(n1+i)),0.0),&
-        MAX(ABS(AIMAG(T(i+1)))-AIMAG(T(n1+i)),0.0))
-      S(nr) = MAX(S(nr),(ABS(temp(1))/x)**(1./i))
+      x = x*REAL(n1-i,SP)/i
+      temp = CMPLX( MAX( ABS(REAL(T(i+1)))-REAL(T(n1+i)), 0._SP ), &
+        MAX( ABS(AIMAG(T(i+1)))-AIMAG(T(n1+i)), 0._SP ), SP )
+      S(nr) = MAX(S(nr),(ABS(temp(1))/x)**(1._SP/i))
     END DO
-    S(nr) = 1./S(nr)
+    S(nr) = 1._SP/S(nr)
   END DO
   RETURN
   !        ERROR EXITS

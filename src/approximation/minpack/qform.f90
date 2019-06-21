@@ -53,7 +53,7 @@ SUBROUTINE QFORM(M,N,Q,Ldq,Wa)
   REAL(SP) :: Q(Ldq,M), Wa(M)
   INTEGER :: i, j, jm1, k, l, minmn, np1
   REAL(SP) :: summ, temp
-  REAL(SP), PARAMETER :: one = 1.0E0, zero = 0.0E0
+  REAL(SP), PARAMETER :: one = 1._SP, zero = 0._SP
   !* FIRST EXECUTABLE STATEMENT  QFORM
   minmn = MIN(M,N)
   IF( minmn>=2 ) THEN

@@ -438,7 +438,7 @@ SUBROUTINE DBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
   CHARACTER(8) :: xern1, xern2
   CHARACTER(16) :: xern3, xern4
   !
-  REAL(DP), PARAMETER :: ZERO = 0.0D0, ONE = 1.0D0, TWO = 2.0D0
+  REAL(DP), PARAMETER :: ZERO = 0._DP, ONE = 1._DP, TWO = 2._DP
   !
   !* FIRST EXECUTABLE STATEMENT  DBOLSM
   !
@@ -522,7 +522,7 @@ SUBROUTINE DBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
   !
   !     Process the option array.
   !
-  fac = 0.75D0
+  fac = 0.75_DP
   tolind = SQRT(D1MACH(4))
   tolsze = SQRT(D1MACH(4))
   itmax = 5*MAX(Minput,Ncols)

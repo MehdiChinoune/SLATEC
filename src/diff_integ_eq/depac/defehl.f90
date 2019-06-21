@@ -65,43 +65,43 @@ SUBROUTINE DEFEHL(F,Neq,T,Y,H,Yp,F1,F2,F3,F4,F5,Ys)
   REAL(SP) :: ch
   !
   !* FIRST EXECUTABLE STATEMENT  DEFEHL
-  ch = H/4.
+  ch = H/4._SP
   DO k = 1, Neq
     Ys(k) = Y(k) + ch*Yp(k)
   END DO
   CALL F(T+ch,Ys,F1)
   !
-  ch = 3.*H/32.
+  ch = 3._SP*H/32._SP
   DO k = 1, Neq
-    Ys(k) = Y(k) + ch*(Yp(k)+3.*F1(k))
+    Ys(k) = Y(k) + ch*(Yp(k)+3._SP*F1(k))
   END DO
-  CALL F(T+3.*H/8.,Ys,F2)
+  CALL F(T+3._SP*H/8._SP,Ys,F2)
   !
-  ch = H/2197.
+  ch = H/2197._SP
   DO k = 1, Neq
-    Ys(k) = Y(k) + ch*(1932.*Yp(k)+(7296.*F2(k)-7200.*F1(k)))
+    Ys(k) = Y(k) + ch*(1932._SP*Yp(k)+(7296._SP*F2(k)-7200._SP*F1(k)))
   END DO
-  CALL F(T+12.*H/13.,Ys,F3)
+  CALL F(T+12._SP*H/13._SP,Ys,F3)
   !
-  ch = H/4104.
+  ch = H/4104._SP
   DO k = 1, Neq
-    Ys(k) = Y(k) + ch*((8341.*Yp(k)-845.*F3(k))+(29440.*F2(k)-32832.*F1(k)))
+    Ys(k) = Y(k) + ch*((8341._SP*Yp(k)-845._SP*F3(k))+(29440._SP*F2(k)-32832._SP*F1(k)))
   END DO
   CALL F(T+H,Ys,F4)
   !
-  ch = H/20520.
+  ch = H/20520._SP
   DO k = 1, Neq
-    Ys(k) = Y(k) + ch*((-6080.*Yp(k)+(9295.*F3(k)-5643.*F4(k)))&
-      +(41040.*F1(k)-28352.*F2(k)))
+    Ys(k) = Y(k) + ch*((-6080._SP*Yp(k)+(9295._SP*F3(k)-5643._SP*F4(k)))&
+      +(41040._SP*F1(k)-28352._SP*F2(k)))
   END DO
-  CALL F(T+H/2.,Ys,F5)
+  CALL F(T+H/2._SP,Ys,F5)
   !
   !     COMPUTE APPROXIMATE SOLUTION AT T+H
   !
-  ch = H/7618050.
+  ch = H/7618050._SP
   DO k = 1, Neq
-    Ys(k) = Y(k) + ch*((902880.*Yp(k)+(3855735.*F3(k)-1371249.*F4(k)))&
-      +(3953664.*F2(k)+277020.*F5(k)))
+    Ys(k) = Y(k) + ch*((902880._SP*Yp(k)+(3855735._SP*F3(k)-1371249._SP*F4(k)))&
+      +(3953664._SP*F2(k)+277020._SP*F5(k)))
   END DO
   !
 END SUBROUTINE DEFEHL

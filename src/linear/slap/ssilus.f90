@@ -390,7 +390,7 @@ SUBROUTINE SSILUS(N,Nelt,Ia,Ja,A,Isym,Nl,Il,Jl,L,Dinv,Nu,Iu,Ju,U,Nrow,Ncol)
   !
   !         Replace diagonal elements by their inverses.
   DO i = 1, N
-    Dinv(i) = 1.0E0/Dinv(i)
+    Dinv(i) = 1._SP/Dinv(i)
   END DO
   !
   !------------- LAST LINE OF SSILUS FOLLOWS ----------------------------

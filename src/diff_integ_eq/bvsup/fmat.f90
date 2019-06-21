@@ -20,8 +20,8 @@ SUBROUTINE FMAT(X,Y,Yp)
   Yp(1) = Y(2)
   IF( X/=xsave_com ) THEN
     xsave_com = X
-    tanx = TAN(X/57.2957795130823)
-    term_com = 3.0/tanx + 2.0*tanx
+    tanx = TAN(X/57.2957795130823_SP)
+    term_com = 3._SP/tanx + 2._SP*tanx
   END IF
-  Yp(2) = -term_com*Y(2) - 0.7*Y(1)
+  Yp(2) = -term_com*Y(2) - 0.7_SP*Y(1)
 END SUBROUTINE FMAT

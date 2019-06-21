@@ -97,7 +97,7 @@ SUBROUTINE DFDJC3(FCN,M,N,X,Fvec,Fjac,Ldfjac,Iflag,Epsfcn,Wa)
   REAL(DP) :: X(N), Fvec(M), Fjac(Ldfjac,N), Wa(M)
   INTEGER :: i, j
   REAL(DP) :: eps, epsmch, h, temp
-  REAL(DP), PARAMETER :: zero = 0.0D0
+  REAL(DP), PARAMETER :: zero = 0._DP
   !* FIRST EXECUTABLE STATEMENT  DFDJC3
   epsmch = D1MACH(4)
   !

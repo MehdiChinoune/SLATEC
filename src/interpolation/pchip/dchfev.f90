@@ -105,7 +105,7 @@ SUBROUTINE DCHFEV(X1,X2,F1,F2,D1,D2,Ne,Xe,Fe,Next,Ierr)
   !
   INTEGER :: i
   REAL(DP) :: c2, c3, del1, del2, delta, h, x, xmi, xma
-  REAL(DP), PARAMETER :: zero = 0.D0
+  REAL(DP), PARAMETER :: zero = 0._DP
   !
   !  VALIDITY-CHECK ARGUMENTS.
   !

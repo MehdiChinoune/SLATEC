@@ -80,7 +80,7 @@ SUBROUTINE DRKFS(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
   !       TOLERANCE THRESHOLD REMIN IS ASSIGNED FOR THIS METHOD. THIS
   !       VALUE SHOULD NOT BE CHANGED ACROSS DIFFERENT MACHINES.
   !
-  REAL(DP), PARAMETER :: remin = 1.0D-12
+  REAL(DP), PARAMETER :: remin = 1.E-12_DP
   !
   !     ..................................................................
   !
@@ -113,8 +113,8 @@ SUBROUTINE DRKFS(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
     !
     u = D1MACH(4)
     !                       -- SET ASSOCIATED MACHINE DEPENDENT PARAMETERS
-    U26 = 26.0D0*u
-    Rer = 2.0D0*u + remin
+    U26 = 26._DP*u
+    Rer = 2._DP*u + remin
     !                       -- SET TERMINATION FLAG
     Iquit = 0
     !                       -- SET INITIALIZATION INDICATOR
@@ -172,7 +172,7 @@ SUBROUTINE DRKFS(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
   nrtolp = 0
   natolp = 0
   DO k = 1, Neq
-    IF( nrtolp==0 .AND. Rtol(k)<0.D0 ) THEN
+    IF( nrtolp==0 .AND. Rtol(k)<0._DP ) THEN
       WRITE (xern1,'(I8)') k
       WRITE (xern3,'(1PE15.6)') Rtol(k)
       CALL XERMSG('DRKFS','IN DDERKF, THE RELATIVE ERROR TOLERANCES&
@@ -183,7 +183,7 @@ SUBROUTINE DRKFS(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
       nrtolp = 1
     END IF
     !
-    IF( natolp==0 .AND. Atol(k)<0.D0 ) THEN
+    IF( natolp==0 .AND. Atol(k)<0._DP ) THEN
       WRITE (xern1,'(I8)') k
       WRITE (xern3,'(1PE15.6)') Atol(k)
       CALL XERMSG('DRKFS','IN DDERKF, THE ABSOLUTE ERROR TOLERANCES&
@@ -218,7 +218,7 @@ SUBROUTINE DRKFS(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
     END IF
     !
     IF( Init/=1 ) THEN
-      IF( Dtsign*(Tout-T)<0.D0 ) THEN
+      IF( Dtsign*(Tout-T)<0._DP ) THEN
         WRITE (xern3,'(1PE15.6)') Tout
         CALL XERMSG('DRKFS',&
           'IN DDERKF, BY CALLING THE CODE WITH TOUT = '//xern3//&
@@ -251,7 +251,7 @@ SUBROUTINE DRKFS(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
   !                TO BE REASONABLE FOR THIS METHOD AND MACHINE.
   !
   DO k = 1, Neq
-    IF( Rtol(k)+Atol(k)<=0.0D0 ) THEN
+    IF( Rtol(k)+Atol(k)<=0._DP ) THEN
       Rtol(k) = Rer
       Idid = -2
     END IF
@@ -299,17 +299,17 @@ SUBROUTINE DRKFS(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
     !                    -- ESTIMATE STARTING STEP SIZE
     !
     Init = 2
-    Dtsign = SIGN(1.0D0,Tout-T)
+    Dtsign = SIGN(1._DP,Tout-T)
     u = D1MACH(4)
     big = SQRT(D1MACH(2))
-    ute = u**0.375D0
+    ute = u**0.375_DP
     dy = ute*DHVNRM(Y,Neq)
-    IF( dy==0.0D0 ) dy = ute
+    IF( dy==0._DP ) dy = ute
     ktol = 1
     DO k = 1, Neq
       IF( Info(2)==1 ) ktol = k
       tol = Rtol(ktol)*ABS(Y(k)) + Atol(ktol)
-      IF( tol==0.0D0 ) tol = dy*Rtol(ktol)
+      IF( tol==0._DP ) tol = dy*Rtol(ktol)
       F1(k) = tol
     END DO
     !
@@ -318,7 +318,7 @@ SUBROUTINE DRKFS(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
     !
     !              RTOL=ATOL=0 ON INPUT, SO RTOL WAS CHANGED TO A
     !                                       SMALL POSITIVE VALUE
-    Tolfac = 1.0D0
+    Tolfac = 1._DP
     GOTO 200
   END IF
   !
@@ -334,7 +334,7 @@ SUBROUTINE DRKFS(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
   !                 TEST TO SEE IF DDERKF IS BEING SEVERELY IMPACTED BY
   !                 TOO MANY OUTPUT POINTS
   !
-  IF( ABS(H)>=2.0D0*ABS(dt) ) Kop = Kop + 1
+  IF( ABS(H)>=2._DP*ABS(dt) ) Kop = Kop + 1
   IF( Kop<=mxkop ) THEN
     !
     IF( ABS(dt)>U26*ABS(T) ) THEN
@@ -354,18 +354,18 @@ SUBROUTINE DRKFS(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
         !                                AND A LEVEL OF ACCURACY ACHIEVABLE AT
         !                                LIMITING PRECISION
         !
-        Tolfac = 0.0D0
+        Tolfac = 0._DP
         ktol = 1
         DO k = 1, Neq
           IF( Info(2)==1 ) ktol = k
           et = Rtol(ktol)*ABS(Y(k)) + Atol(ktol)
-          IF( et>0.0D0 ) THEN
+          IF( et>0._DP ) THEN
             Tolfac = MAX(Tolfac,ABS(Y(k))*(Rer/et))
           ELSE
             Tolfac = MAX(Tolfac,Rer/Rtol(ktol))
           END IF
         END DO
-        IF( Tolfac<=1.0D0 ) THEN
+        IF( Tolfac<=1._DP ) THEN
           !
           !                                SET SMALLEST ALLOWABLE STEP SIZE
           !
@@ -380,10 +380,10 @@ SUBROUTINE DRKFS(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
           !                                TO THE SAFETY FACTOR OF 9/10.
           !
           dt = Tout - T
-          IF( ABS(dt)<2.0D0*ABS(H) ) THEN
-            IF( ABS(dt)>ABS(H)/0.9D0 ) THEN
+          IF( ABS(dt)<2._DP*ABS(H) ) THEN
+            IF( ABS(dt)>ABS(H)/0.9_DP ) THEN
               !
-              H = 0.5D0*dt
+              H = 0.5_DP*dt
             ELSE
               !
               !                                      THE NEXT STEP, IF SUCCESSFUL,
@@ -461,21 +461,21 @@ SUBROUTINE DRKFS(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
             !                                        THE STIFFNESS DETECTION IS
             !                                        TURNED ON.
             !
-            eeoet = 0.0D0
-            estiff = 0.0D0
+            eeoet = 0._DP
+            estiff = 0._DP
             ktol = 1
             DO k = 1, Neq
-              yavg = 0.5D0*(ABS(Y(k))+ABS(Ys(k)))
+              yavg = 0.5_DP*(ABS(Y(k))+ABS(Ys(k)))
               IF( Info(2)==1 ) ktol = k
               et = Rtol(ktol)*yavg + Atol(ktol)
-              IF( et>0.0D0 ) THEN
+              IF( et>0._DP ) THEN
                 !
-                ee = ABS((-2090.0D0*Yp(k)+(21970.0D0*F3(k)-15048.0D0*F4(k)))&
-                  +(22528.0D0*F2(k)-27360.0D0*F5(k)))
+                ee = ABS((-2090._DP*Yp(k)+(21970._DP*F3(k)-15048._DP*F4(k)))&
+                  +(22528._DP*F2(k)-27360._DP*F5(k)))
                 IF( .NOT. (Stiff .OR. Nonstf) ) THEN
                   es = ABS&
-                    (H*(0.055455D0*Yp(k)-0.035493D0*F1(k)-0.036571D0*F2&
-                    (k)+0.023107D0*F3(k)-0.009515D0*F4(k)+0.003017D0*F5(k)))
+                    (H*(0.055455_DP*Yp(k)-0.035493_DP*F1(k)-0.036571_DP*F2&
+                    (k)+0.023107_DP*F3(k)-0.009515_DP*F4(k)+0.003017_DP*F5(k)))
                   estiff = MAX(estiff,es/et)
                 END IF
                 eeoet = MAX(eeoet,ee/et)
@@ -489,10 +489,10 @@ SUBROUTINE DRKFS(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
               END IF
             END DO
             !
-            esttol = ABS(H)*eeoet/752400.0D0
+            esttol = ABS(H)*eeoet/752400._DP
             !
             !                                ...EXIT
-            IF( esttol<=1.0D0 ) THEN
+            IF( esttol<=1._DP ) THEN
               !
               !                                .......................................
               !
@@ -514,9 +514,9 @@ SUBROUTINE DRKFS(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
               !                                NEXT
               !                                   STEP SIZE IS NOT ALLOWED TO INCREASE
               !
-              s = 5.0D0
-              IF( esttol>1.889568D-4 ) s = 0.9D0/esttol**0.2D0
-              IF( hfaild ) s = MIN(s,1.0D0)
+              s = 5._DP
+              IF( esttol>1.889568D-4 ) s = 0.9_DP/esttol**0.2_DP
+              IF( hfaild ) s = MIN(s,1._DP)
               H = SIGN(MAX(s*ABS(H),hmin),H)
               !
               !                                .......................................
@@ -540,7 +540,7 @@ SUBROUTINE DRKFS(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
                 IF( Ntstep==1 ) Nonstf = .FALSE.
                 !                             ...EXIT
                 IF( .NOT. (Nonstf) ) THEN
-                  IF( estiff<=1.0D0 ) THEN
+                  IF( estiff<=1._DP ) THEN
                     !
                     !                                   SUCCESSFUL STEP WITH FIRST ORDER
                     !                                   METHOD
@@ -595,14 +595,14 @@ SUBROUTINE DRKFS(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
               !
               hfaild = .TRUE.
               output = .FALSE.
-              s = 0.1D0
-              IF( esttol<59049.0D0 ) s = 0.9D0/esttol**0.2D0
+              s = 0.1_DP
+              IF( esttol<59049._DP ) s = 0.9_DP/esttol**0.2_DP
               H = SIGN(MAX(s*ABS(H),hmin),H)
             ELSE
               !
               !                             REQUESTED ERROR UNATTAINABLE AT SMALLEST
               !                                                  ALLOWABLE STEP SIZE
-              Tolfac = 1.69D0*esttol
+              Tolfac = 1.69_DP*esttol
               Idid = -2
               !              ........................EXIT
               GOTO 200
@@ -629,7 +629,7 @@ SUBROUTINE DRKFS(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
           !
           !                          REQUESTED ERROR UNATTAINABLE DUE TO LIMITED
           !                                                  PRECISION AVAILABLE
-          Tolfac = 2.0D0*Tolfac
+          Tolfac = 2._DP*Tolfac
           Idid = -2
           !              .....................EXIT
           GOTO 200

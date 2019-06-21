@@ -639,8 +639,8 @@ SUBROUTINE SBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,&
     !     END PROCEDURE
     !     DO(PROCESS OPTION ARRAY)
     !     PROCEDURE(PROCESS OPTION ARRAY)
-    zero = 0.E0
-    one = 1.E0
+    zero = 0._SP
+    one = 1._SP
     srelpr = R1MACH(4)
     checkl = .FALSE.
     filter = .TRUE.

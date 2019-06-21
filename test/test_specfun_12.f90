@@ -43,7 +43,7 @@ CONTAINS
     !
     IF( Kprint>=3 ) WRITE (Lun,99001)
     99001 FORMAT (' RC - FORCE ERROR 1 TO OCCUR')
-    trc = RC(-1.0E0,-1.0E0,ier)
+    trc = RC(-1._SP,-1._SP,ier)
     ier = NUMXER(ier)
     IF( ier==1 ) THEN
       ipass1 = 1
@@ -80,11 +80,11 @@ CONTAINS
     !
     !  ARGUMENTS IN RANGE
     !
-    pi = 3.1415926535897932E0
-    trc = RC(0.0E0,0.25E0,ier)
+    pi = 3.1415926535897932_SP
+    trc = RC(0._SP,0.25_SP,ier)
     CALL XERCLR
     dif = trc - pi
-    IF( (ABS(dif/pi)<1000.0E0*R1MACH(4)) .AND. (ier==0) ) THEN
+    IF( (ABS(dif/pi)<1000._SP*R1MACH(4)) .AND. (ier==0) ) THEN
       ipass4 = 1
     ELSE
       ipass4 = 0
@@ -145,7 +145,7 @@ CONTAINS
     !
     IF( Kprint>=3 ) WRITE (Lun,99001)
     99001 FORMAT (' RD - FORCE ERROR 1 TO OCCUR')
-    trd = RD(-1.0E0,-1.0E0,-1.0E0,ier)
+    trd = RD(-1._SP,-1._SP,-1._SP,ier)
     ier = NUMXER(ier)
     IF( ier==1 ) THEN
       ipass1 = 1
@@ -158,7 +158,7 @@ CONTAINS
     !
     IF( Kprint>=3 ) WRITE (Lun,99002)
     99002 FORMAT (' RD - FORCE ERROR 2 TO OCCUR')
-    trd = RD(1.0E0,1.0E0,-1.0E0,ier)
+    trd = RD(1._SP,1._SP,-1._SP,ier)
     ier = NUMXER(ier)
     IF( ier==2 ) THEN
       ipass2 = 1
@@ -183,11 +183,11 @@ CONTAINS
     !  ARGUMENTS IN RANGE
     !  BLEM=3 * LEMNISCATE CONSTANT B
     !
-    blem = 1.79721035210338831E0
-    trd = RD(0.0E0,2.0E0,1.0E0,ier)
+    blem = 1.79721035210338831_SP
+    trd = RD(0._SP,2._SP,1._SP,ier)
     CALL XERCLR
     dif = trd - blem
-    IF( (ABS(dif/blem)<1000.0E0*R1MACH(4)) .AND. (ier==0) ) THEN
+    IF( (ABS(dif/blem)<1000._SP*R1MACH(4)) .AND. (ier==0) ) THEN
       ipass4 = 1
     ELSE
       Ipass = 0
@@ -248,7 +248,7 @@ CONTAINS
     !
     IF( Kprint>=3 ) WRITE (Lun,99001)
     99001 FORMAT (' RF - FORCE ERROR 1 TO OCCUR')
-    trf = RF(-1.0E0,-1.0E0,-1.0E0,ier)
+    trf = RF(-1._SP,-1._SP,-1._SP,ier)
     ier = NUMXER(ier)
     IF( ier==1 ) THEN
       ipass1 = 1
@@ -286,11 +286,11 @@ CONTAINS
     !  ARGUMENTS IN RANGE
     !  ALEM=LEMNISCATE CONSTANT A
     !
-    alem = 1.311028777146059905E0
-    trf = RF(0.0E0,1.0E0,2.0E0,ier)
+    alem = 1.311028777146059905_SP
+    trf = RF(0._SP,1._SP,2._SP,ier)
     CALL XERCLR
     dif = trf - alem
-    IF( (ABS(dif/alem)<1000.0E0*R1MACH(4)) .AND. (ier==0) ) THEN
+    IF( (ABS(dif/alem)<1000._SP*R1MACH(4)) .AND. (ier==0) ) THEN
       ipass4 = 1
     ELSE
       ipass4 = 0
@@ -351,7 +351,7 @@ CONTAINS
     !
     IF( Kprint>=3 ) WRITE (Lun,99001)
     99001 FORMAT (' RJ - FORCE ERROR 1 TO OCCUR')
-    trj = RJ(-1.0E0,-1.0E0,-1.0E0,-1.0E0,ier)
+    trj = RJ(-1._SP,-1._SP,-1._SP,-1._SP,ier)
     ier = NUMXER(ier)
     IF( ier==1 ) THEN
       ipass1 = 1
@@ -388,11 +388,11 @@ CONTAINS
     !
     !  ARGUMENTS IN RANGE
     !
-    consj = 0.142975796671567538E0
-    trj = RJ(2.0E0,3.0E0,4.0E0,5.0E0,ier)
+    consj = 0.142975796671567538_SP
+    trj = RJ(2._SP,3._SP,4._SP,5._SP,ier)
     CALL XERCLR
     dif = trj - consj
-    IF( (ABS(dif/consj)<1000.0E0*R1MACH(4)) .AND. (ier==0) ) THEN
+    IF( (ABS(dif/consj)<1000._SP*R1MACH(4)) .AND. (ier==0) ) THEN
       ipass4 = 1
     ELSE
       ipass4 = 0

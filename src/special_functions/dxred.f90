@@ -53,7 +53,7 @@ SUBROUTINE DXRED(X,Ix,Ierror)
   !
   !* FIRST EXECUTABLE STATEMENT  DXRED
   Ierror = 0
-  IF( X==0.0D0 ) THEN
+  IF( X==0._DP ) THEN
     Ix = 0
   ELSE
     xa = ABS(X)
@@ -63,36 +63,36 @@ SUBROUTINE DXRED(X,Ix,Ierror)
       ixa2 = MOD(ixa,l2_com)
       IF( Ix>0 ) THEN
         !
-        DO WHILE( xa>=1.0D0 )
+        DO WHILE( xa>=1._DP )
           xa = xa/rad2l_com
           ixa1 = ixa1 + 1
         END DO
         xa = xa*radixx_com**ixa2
         IF( ixa1/=0 ) THEN
           DO i = 1, ixa1
-            IF( xa>1.0D0 ) RETURN
+            IF( xa>1._DP ) RETURN
             xa = xa*rad2l_com
           END DO
         END IF
       ELSE
-        DO WHILE( xa<=1.0D0 )
+        DO WHILE( xa<=1._DP )
           xa = xa*rad2l_com
           ixa1 = ixa1 + 1
         END DO
         xa = xa/radixx_com**ixa2
         IF( ixa1/=0 ) THEN
           DO i = 1, ixa1
-            IF( xa<1.0D0 ) RETURN
+            IF( xa<1._DP ) RETURN
             xa = xa/rad2l_com
           END DO
         END IF
       END IF
     END IF
     IF( xa<=rad2l_com ) THEN
-      IF( xa>1.0D0 ) THEN
+      IF( xa>1._DP ) THEN
         X = SIGN(xa,X)
         Ix = 0
-      ELSEIF( rad2l_com*xa>=1.0D0 ) THEN
+      ELSEIF( rad2l_com*xa>=1._DP ) THEN
         X = SIGN(xa,X)
         Ix = 0
       END IF

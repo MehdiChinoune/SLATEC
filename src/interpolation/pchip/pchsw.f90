@@ -85,9 +85,10 @@ SUBROUTINE PCHSW(Dfmax,Iextrm,D1,D2,H,Slope,Ierr)
   !
   REAL(SP) :: cp, hphi, lambda, nu, phi, radcal, rho, sigma, small, that
   !
-  REAL(SP), PARAMETER :: zero = 0., one = 1., two = 2., three = 3., fact = 100.
+  REAL(SP), PARAMETER :: zero = 0._SP, one = 1._SP, two = 2._SP, three = 3._SP, &
+    fact = 100._SP
   !        THIRD SHOULD BE SLIGHTLY LESS THAN 1/3.
-  REAL(SP), PARAMETER :: third = 0.33333
+  REAL(SP), PARAMETER :: third = 0.33333_SP
   !
   !  NOTATION AND GENERAL REMARKS.
   !

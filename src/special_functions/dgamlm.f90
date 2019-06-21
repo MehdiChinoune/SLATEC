@@ -46,23 +46,23 @@ SUBROUTINE DGAMLM(Xmin,Xmax)
   DO i = 1, 10
     xold = Xmin
     xln = LOG(Xmin)
-    Xmin = Xmin - Xmin*((Xmin+0.5D0)*xln-Xmin-0.2258D0+alnsml)/(Xmin*xln+0.5D0)
-    IF( ABS(Xmin-xold)<0.005D0 ) GOTO 100
+    Xmin = Xmin - Xmin*((Xmin+0.5_DP)*xln-Xmin-0.2258_DP+alnsml)/(Xmin*xln+0.5_DP)
+    IF( ABS(Xmin-xold)<0.005_DP ) GOTO 100
   END DO
   CALL XERMSG('DGAMLM','UNABLE TO FIND XMIN',1,2)
   !
-  100  Xmin = -Xmin + 0.01D0
+  100  Xmin = -Xmin + 0.01_DP
   !
   Xmax = alnbig
   DO i = 1, 10
     xold = Xmax
     xln = LOG(Xmax)
-    Xmax = Xmax - Xmax*((Xmax-0.5D0)*xln-Xmax+0.9189D0-alnbig)/(Xmax*xln-0.5D0)
-    IF( ABS(Xmax-xold)<0.005D0 ) GOTO 200
+    Xmax = Xmax - Xmax*((Xmax-0.5_DP)*xln-Xmax+0.9189_DP-alnbig)/(Xmax*xln-0.5_DP)
+    IF( ABS(Xmax-xold)<0.005_DP ) GOTO 200
   END DO
   CALL XERMSG('DGAMLM','UNABLE TO FIND XMAX',2,2)
   !
-  200  Xmax = Xmax - 0.01D0
-  Xmin = MAX(Xmin,-Xmax+1.D0)
+  200  Xmax = Xmax - 0.01_DP
+  Xmin = MAX(Xmin,-Xmax+1._DP)
   !
 END SUBROUTINE DGAMLM

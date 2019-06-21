@@ -42,24 +42,24 @@ SUBROUTINE CUOIK(Z,Fnu,Kode,Ikflg,N,Y,Nuf,Tol,Elim,Alim)
   INTEGER :: i, iform, Ikflg, init, Kode, N, nn, Nuf, nw
   COMPLEX(SP) :: arg, asum, bsum, cwrk(16), cz, phi, summ, Y(N), Z, zb, zeta1, zeta2, zn, zr
   REAL(SP) :: aarg, Alim, aphi, ascle, ax, ay, Elim, fnn, Fnu, gnn, gnu, rcz, Tol, x, yy
-  COMPLEX(SP), PARAMETER :: czero = (0.0E0,0.0E0)
-  REAL(SP), PARAMETER :: aic = 1.265512123484645396E+00
+  COMPLEX(SP), PARAMETER :: czero = (0._SP,0._SP)
+  REAL(SP), PARAMETER :: aic = 1.265512123484645396_SP
   !* FIRST EXECUTABLE STATEMENT  CUOIK
   Nuf = 0
   nn = N
   x = REAL(Z)
   zr = Z
-  IF( x<0.0E0 ) zr = -Z
+  IF( x<0._SP ) zr = -Z
   zb = zr
   yy = AIMAG(zr)
-  ax = ABS(x)*1.7321E0
+  ax = ABS(x)*1.7321_SP
   ay = ABS(yy)
   iform = 1
   IF( ay>ax ) iform = 2
-  gnu = MAX(Fnu,1.0E0)
+  gnu = MAX(Fnu,1._SP)
   IF( Ikflg/=1 ) THEN
     fnn = nn
-    gnn = Fnu + fnn - 1.0E0
+    gnn = Fnu + fnn - 1._SP
     gnu = MAX(gnn,fnn)
   END IF
   !-----------------------------------------------------------------------
@@ -68,8 +68,8 @@ SUBROUTINE CUOIK(Z,Fnu,Kode,Ikflg,N,Y,Nuf,Tol,Elim,Alim)
   !     THE SIGN OF THE IMAGINARY PART CORRECT.
   !-----------------------------------------------------------------------
   IF( iform==2 ) THEN
-    zn = -zr*CMPLX(0.0E0,1.0E0)
-    IF( yy<=0.0E0 ) zn = CONJG(-zn)
+    zn = -zr*CMPLX(0._SP,1._SP,SP)
+    IF( yy<=0._SP ) zn = CONJG(-zn)
     CALL CUNHJ(zn,gnu,1,Tol,phi,arg,zeta1,zeta2,asum,bsum)
     cz = -zeta1 + zeta2
     aarg = ABS(arg)
@@ -96,14 +96,14 @@ SUBROUTINE CUOIK(Z,Fnu,Kode,Ikflg,N,Y,Nuf,Tol,Elim,Alim)
       IF( rcz>=(-Elim) ) THEN
         IF( rcz>(-Alim) ) GOTO 50
         rcz = rcz + LOG(aphi)
-        IF( iform==2 ) rcz = rcz - 0.25E0*LOG(aarg) - aic
+        IF( iform==2 ) rcz = rcz - 0.25_SP*LOG(aarg) - aic
         IF( rcz>(-Elim) ) THEN
-          ascle = 1.0E+3*R1MACH(1)/Tol
+          ascle = 1.E+3_SP*R1MACH(1)/Tol
           cz = cz + LOG(phi)
-          IF( iform/=1 ) cz = cz - CMPLX(0.25E0,0.0E0)*LOG(arg)- CMPLX(aic,0.0E0)
+          IF( iform/=1 ) cz = cz - CMPLX(0.25_SP,0._SP,SP)*LOG(arg)- CMPLX(aic,0._SP,SP)
           ax = EXP(rcz)/Tol
           ay = AIMAG(cz)
-          cz = CMPLX(ax,0.0E0)*CMPLX(COS(ay),SIN(ay))
+          cz = CMPLX(ax,0._SP,SP)*CMPLX(COS(ay),SIN(ay),SP)
           CALL CUCHK(cz,nw,ascle,Tol)
           IF( nw/=1 ) GOTO 50
         END IF
@@ -115,7 +115,7 @@ SUBROUTINE CUOIK(Z,Fnu,Kode,Ikflg,N,Y,Nuf,Tol,Elim,Alim)
       RETURN
     ELSE
       rcz = rcz + LOG(aphi)
-      IF( iform==2 ) rcz = rcz - 0.25E0*LOG(aarg) - aic
+      IF( iform==2 ) rcz = rcz - 0.25_SP*LOG(aarg) - aic
       IF( rcz>Elim ) THEN
         Nuf = -1
         RETURN
@@ -143,14 +143,14 @@ SUBROUTINE CUOIK(Z,Fnu,Kode,Ikflg,N,Y,Nuf,Tol,Elim,Alim)
   IF( rcz>=(-Elim) ) THEN
     IF( rcz>(-Alim) ) RETURN
     rcz = rcz + LOG(aphi)
-    IF( iform==2 ) rcz = rcz - 0.25E0*LOG(aarg) - aic
+    IF( iform==2 ) rcz = rcz - 0.25_SP*LOG(aarg) - aic
     IF( rcz>(-Elim) ) THEN
-      ascle = 1.0E+3*R1MACH(1)/Tol
+      ascle = 1.E+3_SP*R1MACH(1)/Tol
       cz = cz + LOG(phi)
-      IF( iform/=1 ) cz = cz - CMPLX(0.25E0,0.0E0)*LOG(arg)- CMPLX(aic,0.0E0)
+      IF( iform/=1 ) cz = cz - CMPLX(0.25_SP,0._SP,SP)*LOG(arg)- CMPLX(aic,0._SP,SP)
       ax = EXP(rcz)/Tol
       ay = AIMAG(cz)
-      cz = CMPLX(ax,0.0E0)*CMPLX(COS(ay),SIN(ay))
+      cz = CMPLX(ax,0._SP,SP)*CMPLX(COS(ay),SIN(ay),SP)
       CALL CUCHK(cz,nw,ascle,Tol)
       IF( nw/=1 ) RETURN
     END IF

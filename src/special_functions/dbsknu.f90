@@ -96,22 +96,22 @@ SUBROUTINE DBSKNU(X,Fnu,Kode,N,Y,Nz)
   REAL(DP) :: a(160), ak, a1, a2, b(160), bk, ck, coef, cx, dk, dnu, dnu2, elim, &
     etest, ex, f, fc, fhs, fk, fks, flrx, fmu, g1, g2, p, pt, p1, p2, q, &
     rx, s, smu, sqk, st, s1, s2, tm, tol, t1, t2
-  REAL(DP), PARAMETER ::  x1 = 2.0D0, x2 = 17.0D0
-  REAL(DP), PARAMETER ::  pi = 3.14159265358979D+00, rthpi = 1.25331413731550D+00
-  REAL(DP), PARAMETER :: cc(8) = [ 5.77215664901533D-01, -4.20026350340952D-02, &
-    -4.21977345555443D-02, 7.21894324666300D-03, -2.15241674114900D-04, &
-    -2.01348547807000D-05, 1.13302723200000D-06, 6.11609500000000D-09 ]
+  REAL(DP), PARAMETER ::  x1 = 2._DP, x2 = 17._DP
+  REAL(DP), PARAMETER ::  pi = 3.14159265358979E+00_DP, rthpi = 1.25331413731550_DP
+  REAL(DP), PARAMETER :: cc(8) = [ 5.77215664901533E-01_DP, -4.20026350340952E-02_DP, &
+    -4.21977345555443E-02_DP, 7.21894324666300E-03_DP, -2.15241674114900E-04_DP, &
+    -2.01348547807000E-05_DP, 1.13302723200000E-06_DP, 6.11609500000000E-09_DP ]
   !* FIRST EXECUTABLE STATEMENT  DBSKNU
   kk = -I1MACH(15)
-  elim = 2.303D0*(kk*D1MACH(5)-3.0D0)
+  elim = 2.303_DP*(kk*D1MACH(5)-3._DP)
   ak = D1MACH(3)
-  tol = MAX(ak,1.0D-15)
-  IF( X<=0.0D0 ) THEN
+  tol = MAX(ak,1.E-15_DP)
+  IF( X<=0._DP ) THEN
     !
     !
     CALL XERMSG('DBSKNU','X NOT GREATER THAN ZERO',2,1)
     RETURN
-  ELSEIF( Fnu<0.0D0 ) THEN
+  ELSEIF( Fnu<0._DP ) THEN
     CALL XERMSG('DBSKNU','FNU NOT ZERO OR POSITIVE',2,1)
     RETURN
   ELSE
@@ -126,26 +126,26 @@ SUBROUTINE DBSKNU(X,Fnu,Kode,N,Y,Nz)
         Nz = 0
         iflag = 0
         koded = Kode
-        rx = 2.0D0/X
-        inu = INT(Fnu+0.5D0)
+        rx = 2._DP/X
+        inu = INT(Fnu+0.5_DP)
         dnu = Fnu - inu
-        IF( ABS(dnu)/=0.5D0 ) THEN
-          dnu2 = 0.0D0
+        IF( ABS(dnu)/=0.5_DP ) THEN
+          dnu2 = 0._DP
           IF( ABS(dnu)>=tol ) dnu2 = dnu*dnu
           IF( X<=x1 ) THEN
             !
             !     SERIES FOR X<=X1
             !
-            a1 = 1.0D0 - dnu
-            a2 = 1.0D0 + dnu
-            t1 = 1.0D0/GAMMA(a1)
-            t2 = 1.0D0/GAMMA(a2)
-            IF( ABS(dnu)>0.1D0 ) THEN
+            a1 = 1._DP - dnu
+            a2 = 1._DP + dnu
+            t1 = 1._DP/GAMMA(a1)
+            t2 = 1._DP/GAMMA(a2)
+            IF( ABS(dnu)>0.1_DP ) THEN
               g1 = (t1-t2)/(dnu+dnu)
             ELSE
               !     SERIES FOR F0 TO RESOLVE INDETERMINACY FOR SMALL ABS(DNU)
               s = cc(1)
-              ak = 1.0D0
+              ak = 1._DP
               DO k = 2, 8
                 ak = ak*dnu2
                 tm = cc(k)*ak
@@ -154,28 +154,28 @@ SUBROUTINE DBSKNU(X,Fnu,Kode,N,Y,Nz)
               END DO
               g1 = -s
             END IF
-            g2 = (t1+t2)*0.5D0
-            smu = 1.0D0
-            fc = 1.0D0
+            g2 = (t1+t2)*0.5_DP
+            smu = 1._DP
+            fc = 1._DP
             flrx = LOG(rx)
             fmu = dnu*flrx
-            IF( dnu/=0.0D0 ) THEN
+            IF( dnu/=0._DP ) THEN
               fc = dnu*pi
               fc = fc/SIN(fc)
-              IF( fmu/=0.0D0 ) smu = SINH(fmu)/fmu
+              IF( fmu/=0._DP ) smu = SINH(fmu)/fmu
             END IF
             f = fc*(g1*COSH(fmu)+g2*flrx*smu)
             fc = EXP(fmu)
-            p = 0.5D0*fc/t2
-            q = 0.5D0/(fc*t1)
-            ak = 1.0D0
-            ck = 1.0D0
-            bk = 1.0D0
+            p = 0.5_DP*fc/t2
+            q = 0.5_DP/(fc*t1)
+            ak = 1._DP
+            ck = 1._DP
+            bk = 1._DP
             s1 = f
             s2 = p
             IF( inu>0 .OR. N>1 ) THEN
               IF( X>=tol ) THEN
-                cx = X*X*0.25D0
+                cx = X*X*0.25_DP
                 DO
                   f = (ak*f+p+q)/(bk-dnu2)
                   p = p/(ak-dnu)
@@ -185,9 +185,9 @@ SUBROUTINE DBSKNU(X,Fnu,Kode,N,Y,Nz)
                   s1 = s1 + t1
                   t2 = ck*(p-ak*f)
                   s2 = s2 + t2
-                  bk = bk + ak + ak + 1.0D0
-                  ak = ak + 1.0D0
-                  s = ABS(t1)/(1.0D0+ABS(s1)) + ABS(t2)/(1.0D0+ABS(s2))
+                  bk = bk + ak + ak + 1._DP
+                  ak = ak + 1._DP
+                  s = ABS(t1)/(1._DP+ABS(s1)) + ABS(t2)/(1._DP+ABS(s2))
                   IF( s<=tol ) EXIT
                 END DO
               END IF
@@ -200,7 +200,7 @@ SUBROUTINE DBSKNU(X,Fnu,Kode,N,Y,Nz)
               GOTO 20
             ELSE
               IF( X>=tol ) THEN
-                cx = X*X*0.25D0
+                cx = X*X*0.25_DP
                 DO
                   f = (ak*f+p+q)/(bk-dnu2)
                   p = p/(ak-dnu)
@@ -208,9 +208,9 @@ SUBROUTINE DBSKNU(X,Fnu,Kode,N,Y,Nz)
                   ck = ck*cx/ak
                   t1 = ck*f
                   s1 = s1 + t1
-                  bk = bk + ak + ak + 1.0D0
-                  ak = ak + 1.0D0
-                  s = ABS(t1)/(1.0D0+ABS(s1))
+                  bk = bk + ak + ak + 1._DP
+                  ak = ak + 1._DP
+                  s = ABS(t1)/(1._DP+ABS(s1))
                   IF( s<=tol ) EXIT
                 END DO
               END IF
@@ -232,7 +232,7 @@ SUBROUTINE DBSKNU(X,Fnu,Kode,N,Y,Nz)
             EXIT
           END IF
         END DO
-        IF( ABS(dnu)==0.5D0 ) THEN
+        IF( ABS(dnu)==0.5_DP ) THEN
           !
           !     FNU=HALF ODD INTEGER CASE
           !
@@ -249,27 +249,27 @@ SUBROUTINE DBSKNU(X,Fnu,Kode,N,Y,Nz)
           nn = 2
           IF( inu==0 .AND. N==1 ) nn = 1
           dnu2 = dnu + dnu
-          fmu = 0.0D0
+          fmu = 0._DP
           IF( ABS(dnu2)>=tol ) fmu = dnu2*dnu2
-          ex = X*8.0D0
-          s2 = 0.0D0
+          ex = X*8._DP
+          s2 = 0._DP
           DO k = 1, nn
             s1 = s2
-            s = 1.0D0
-            ak = 0.0D0
-            ck = 1.0D0
-            sqk = 1.0D0
+            s = 1._DP
+            ak = 0._DP
+            ck = 1._DP
+            sqk = 1._DP
             dk = ex
             DO j = 1, 30
               ck = ck*(fmu-sqk)/dk
               s = s + ck
               dk = dk + ex
-              ak = ak + 8.0D0
+              ak = ak + 8._DP
               sqk = sqk + ak
               IF( ABS(ck)<tol ) EXIT
             END DO
             s2 = s*coef
-            fmu = fmu + 8.0D0*dnu + 4.0D0
+            fmu = fmu + 8._DP*dnu + 4._DP
           END DO
           IF( nn<=1 ) THEN
             s1 = s2
@@ -280,31 +280,31 @@ SUBROUTINE DBSKNU(X,Fnu,Kode,N,Y,Nz)
           !     MILLER ALGORITHM FOR X1<X<=X2
           !
           etest = COS(pi*dnu)/(pi*X*tol)
-          fks = 1.0D0
-          fhs = 0.25D0
-          fk = 0.0D0
-          ck = X + X + 2.0D0
-          p1 = 0.0D0
-          p2 = 1.0D0
+          fks = 1._DP
+          fhs = 0.25_DP
+          fk = 0._DP
+          ck = X + X + 2._DP
+          p1 = 0._DP
+          p2 = 1._DP
           k = 0
           DO
             k = k + 1
-            fk = fk + 1.0D0
+            fk = fk + 1._DP
             ak = (fhs-dnu2)/(fks+fk)
-            bk = ck/(fk+1.0D0)
+            bk = ck/(fk+1._DP)
             pt = p2
             p2 = bk*p2 - ak*p1
             p1 = pt
             a(k) = ak
             b(k) = bk
-            ck = ck + 2.0D0
-            fks = fks + fk + fk + 1.0D0
+            ck = ck + 2._DP
+            fks = fks + fk + fk + 1._DP
             fhs = fhs + fk + fk
             IF( etest<=fk*p1 ) THEN
               kk = k
-              s = 1.0D0
-              p1 = 0.0D0
-              p2 = 1.0D0
+              s = 1._DP
+              p1 = 0._DP
+              p2 = 1._DP
               DO i = 1, k
                 pt = p2
                 p2 = (b(kk)*p2-p1)/a(kk)
@@ -314,7 +314,7 @@ SUBROUTINE DBSKNU(X,Fnu,Kode,N,Y,Nz)
               END DO
               s1 = coef*(p2/s)
               IF( inu<=0 .AND. N<=1 ) GOTO 50
-              s2 = s1*(X+dnu+0.5D0-p1/p2)/X
+              s2 = s1*(X+dnu+0.5_DP-p1/p2)/X
               EXIT
             END IF
           END DO
@@ -323,7 +323,7 @@ SUBROUTINE DBSKNU(X,Fnu,Kode,N,Y,Nz)
       !
       !     FORWARD RECURSION ON THE THREE TERM RECURSION RELATION
       !
-      20  ck = (dnu+dnu+2.0D0)/X
+      20  ck = (dnu+dnu+2._DP)/X
       IF( N==1 ) inu = inu - 1
       IF( inu>0 ) THEN
         DO i = 1, inu
@@ -341,7 +341,7 @@ SUBROUTINE DBSKNU(X,Fnu,Kode,N,Y,Nz)
     IF( iflag==1 ) THEN
       !     IFLAG=1 CASES
       s = -X + LOG(s1)
-      Y(1) = 0.0D0
+      Y(1) = 0._DP
       Nz = 1
       IF( s>=-elim ) THEN
         Y(1) = EXP(s)
@@ -349,7 +349,7 @@ SUBROUTINE DBSKNU(X,Fnu,Kode,N,Y,Nz)
       END IF
       IF( N==1 ) RETURN
       s = -X + LOG(s2)
-      Y(2) = 0.0D0
+      Y(2) = 0._DP
       Nz = Nz + 1
       IF( s>=-elim ) THEN
         Nz = Nz - 1
@@ -366,7 +366,7 @@ SUBROUTINE DBSKNU(X,Fnu,Kode,N,Y,Nz)
           ck = ck + rx
           s = -X + LOG(s2)
           Nz = Nz + 1
-          Y(i) = 0.0D0
+          Y(i) = 0._DP
           IF( s>=-elim ) THEN
             Y(i) = EXP(s)
             Nz = Nz - 1

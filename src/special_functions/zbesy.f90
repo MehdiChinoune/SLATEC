@@ -171,12 +171,12 @@ SUBROUTINE ZBESY(Zr,Zi,Fnu,Kode,N,Cyr,Cyi,Nz,Cwrkr,Cwrki,Ierr)
   !* FIRST EXECUTABLE STATEMENT  ZBESY
   Ierr = 0
   Nz = 0
-  IF( Zr==0.0D0 .AND. Zi==0.0D0 ) Ierr = 1
-  IF( Fnu<0.0D0 ) Ierr = 1
+  IF( Zr==0._DP .AND. Zi==0._DP ) Ierr = 1
+  IF( Fnu<0._DP ) Ierr = 1
   IF( Kode<1 .OR. Kode>2 ) Ierr = 1
   IF( N<1 ) Ierr = 1
   IF( Ierr/=0 ) RETURN
-  hcii = 0.5D0
+  hcii = 0.5_DP
   CALL ZBESH(Zr,Zi,Fnu,Kode,1,N,Cyr,Cyi,nz1,Ierr)
   IF( Ierr/=0 .AND. Ierr/=3 ) THEN
     Nz = 0
@@ -187,7 +187,7 @@ SUBROUTINE ZBESY(Zr,Zi,Fnu,Kode,N,Cyr,Cyi,Nz,Cwrkr,Cwrki,Ierr)
     ELSE
       Nz = MIN(nz1,nz2)
       IF( Kode==2 ) THEN
-        tol = MAX(D1MACH(4),1.0D-18)
+        tol = MAX(D1MACH(4),1.E-18_DP)
         k1 = I1MACH(15)
         k2 = I1MACH(16)
         k = MIN(ABS(k1),ABS(k2))
@@ -195,13 +195,13 @@ SUBROUTINE ZBESY(Zr,Zi,Fnu,Kode,N,Cyr,Cyi,Nz,Cwrkr,Cwrki,Ierr)
         !-----------------------------------------------------------------------
         !     ELIM IS THE APPROXIMATE EXPONENTIAL UNDER- AND OVERFLOW LIMIT
         !-----------------------------------------------------------------------
-        elim = 2.303D0*(k*r1m5-3.0D0)
+        elim = 2.303_DP*(k*r1m5-3._DP)
         exr = COS(Zr)
         exi = SIN(Zr)
-        ey = 0.0D0
+        ey = 0._DP
         tay = ABS(Zi+Zi)
         IF( tay<elim ) ey = EXP(-tay)
-        IF( Zi<0.0D0 ) THEN
+        IF( Zi<0._DP ) THEN
           c1r = exr
           c1i = exi
           c2r = exr*ey
@@ -213,8 +213,8 @@ SUBROUTINE ZBESY(Zr,Zi,Fnu,Kode,N,Cyr,Cyi,Nz,Cwrkr,Cwrki,Ierr)
           c2i = -exi
         END IF
         Nz = 0
-        rtol = 1.0D0/tol
-        ascle = D1MACH(1)*rtol*1.0D+3
+        rtol = 1._DP/tol
+        ascle = D1MACH(1)*rtol*1.E+3_DP
         DO i = 1, N
           !       STR = C1R*CYR(I) - C1I*CYI(I)
           !       STI = C1R*CYI(I) + C1I*CYR(I)
@@ -224,7 +224,7 @@ SUBROUTINE ZBESY(Zr,Zi,Fnu,Kode,N,Cyr,Cyi,Nz,Cwrkr,Cwrki,Ierr)
           !       CYI(I) = STR*HCII
           aa = Cwrkr(i)
           bb = Cwrki(i)
-          atol = 1.0D0
+          atol = 1._DP
           IF( MAX(ABS(aa),ABS(bb))<=ascle ) THEN
             aa = aa*rtol
             bb = bb*rtol
@@ -234,7 +234,7 @@ SUBROUTINE ZBESY(Zr,Zi,Fnu,Kode,N,Cyr,Cyi,Nz,Cwrkr,Cwrki,Ierr)
           sti = (aa*c2i+bb*c2r)*atol
           aa = Cyr(i)
           bb = Cyi(i)
-          atol = 1.0D0
+          atol = 1._DP
           IF( MAX(ABS(aa),ABS(bb))<=ascle ) THEN
             aa = aa*rtol
             bb = bb*rtol
@@ -244,7 +244,7 @@ SUBROUTINE ZBESY(Zr,Zi,Fnu,Kode,N,Cyr,Cyi,Nz,Cwrkr,Cwrki,Ierr)
           sti = sti - (aa*c1i+bb*c1r)*atol
           Cyr(i) = -sti*hcii
           Cyi(i) = str*hcii
-          IF( str==0.0D0 .AND. sti==0.0D0 .AND. ey==0.0D0 ) Nz = Nz + 1
+          IF( str==0._DP .AND. sti==0._DP .AND. ey==0._DP ) Nz = Nz + 1
         END DO
         RETURN
       ELSE

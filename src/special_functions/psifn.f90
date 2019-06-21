@@ -122,19 +122,19 @@ SUBROUTINE PSIFN(X,N,Kode,M,Ans,Nz,Ierr)
   !-----------------------------------------------------------------------
   !             BERNOULLI NUMBERS
   !-----------------------------------------------------------------------
-  REAL(SP), PARAMETER :: b(22) = [ 1.00000000000000000E+00, -5.00000000000000000E-01, &
-    1.66666666666666667E-01, -3.33333333333333333E-02, 2.38095238095238095E-02, &
-    -3.33333333333333333E-02, 7.57575757575757576E-02,-2.53113553113553114E-01, &
-    1.16666666666666667E+00, -7.09215686274509804E+00, 5.49711779448621554E+01, &
-    -5.29124242424242424E+02, 6.19212318840579710E+03,-8.65802531135531136E+04, &
-    1.42551716666666667E+06, -2.72982310678160920E+07, 6.01580873900642368E+08, &
-    -1.51163157670921569E+10, 4.29614643061166667E+11,-1.37116552050883328E+13, &
-    4.88332318973593167E+14, -1.92965793419400681E+16 ]
+  REAL(SP), PARAMETER :: b(22) = [ 1.00000000000000000E+00_SP, -5.00000000000000000E-01_SP, &
+    1.66666666666666667E-01_SP, -3.33333333333333333E-02_SP, 2.38095238095238095E-02_SP, &
+    -3.33333333333333333E-02_SP, 7.57575757575757576E-02_SP,-2.53113553113553114E-01_SP, &
+    1.16666666666666667E+00_SP, -7.09215686274509804E+00_SP, 5.49711779448621554E+01_SP, &
+    -5.29124242424242424E+02_SP, 6.19212318840579710E+03_SP,-8.65802531135531136E+04_SP, &
+    1.42551716666666667E+06_SP, -2.72982310678160920E+07_SP, 6.01580873900642368E+08_SP, &
+    -1.51163157670921569E+10_SP, 4.29614643061166667E+11_SP,-1.37116552050883328E+13_SP, &
+    4.88332318973593167E+14_SP, -1.92965793419400681E+16_SP ]
   !
   !* FIRST EXECUTABLE STATEMENT  PSIFN
   Ierr = 0
   Nz = 0
-  IF( X<=0.0E0 ) Ierr = 1
+  IF( X<=0._SP ) Ierr = 1
   IF( N<0 ) Ierr = 1
   IF( Kode<1 .OR. Kode>2 ) Ierr = 1
   IF( M<1 ) Ierr = 1
@@ -142,16 +142,16 @@ SUBROUTINE PSIFN(X,N,Kode,M,Ans,Nz,Ierr)
   mm = M
   nx = MIN(-I1MACH(12),I1MACH(13))
   r1m5 = R1MACH(5)
-  r1m4 = R1MACH(4)*0.5E0
-  wdtol = MAX(r1m4,0.5E-18)
+  r1m4 = R1MACH(4)*0.5_SP
+  wdtol = MAX(r1m4,0.5E-18_SP)
   !-----------------------------------------------------------------------
   !     ELIM = APPROXIMATE EXPONENTIAL OVER AND UNDERFLOW LIMIT
   !-----------------------------------------------------------------------
-  elim = 2.302E0*(nx*r1m5-3.0E0)
+  elim = 2.302_SP*(nx*r1m5-3._SP)
   xln = LOG(X)
   100  nn = N + mm - 1
   fn = nn
-  fnp = fn + 1.0E0
+  fnp = fn + 1._SP
   t = fnp*xln
   !-----------------------------------------------------------------------
   !     OVERFLOW AND UNDERFLOW TEST FOR SMALL AND LARGE X
@@ -177,35 +177,35 @@ SUBROUTINE PSIFN(X,N,Kode,M,Ans,Nz,Ierr)
       !     COMPUTE XMIN AND THE NUMBER OF TERMS OF THE SERIES, FLN+1
       !-----------------------------------------------------------------------
       rln = r1m5*I1MACH(11)
-      rln = MIN(rln,18.06E0)
-      fln = MAX(rln,3.0E0) - 3.0E0
-      yint = 3.50E0 + 0.40E0*fln
-      slope = 0.21E0 + fln*(0.0006038E0*fln+0.008677E0)
+      rln = MIN(rln,18.06E0_SP)
+      fln = MAX(rln,3._SP) - 3._SP
+      yint = 3.50_SP + 0.40_SP*fln
+      slope = 0.21_SP + fln*(0.0006038_SP*fln+0.008677E0_SP)
       xm = yint + slope*fn
       mx = INT(xm) + 1
       xmin = mx
       IF( N/=0 ) THEN
-        xm = -2.302E0*rln - MIN(0.0E0,xln)
+        xm = -2.302_SP*rln - MIN(0._SP,xln)
         fns = N
         arg = xm/fns
-        arg = MIN(0.0E0,arg)
+        arg = MIN(0._SP,arg)
         eps = EXP(arg)
-        xm = 1.0E0 - eps
+        xm = 1._SP - eps
         IF( ABS(arg)<1.0E-3 ) xm = -arg
         fln = X*xm/eps
         xm = xmin - X
-        IF( xm>7.0E0 .AND. fln<15.0E0 ) THEN
+        IF( xm>7._SP .AND. fln<15._SP ) THEN
           !-----------------------------------------------------------------------
           !     COMPUTE BY SERIES (X+K)**(-(N+1)), K=0,1,2,...
           !-----------------------------------------------------------------------
           nn = INT(fln) + 1
           np = N + 1
-          t1 = (fns+1.0E0)*xln
+          t1 = (fns+1._SP)*xln
           t = EXP(-t1)
           s = t
           den = X
           DO i = 1, nn
-            den = den + 1.0E0
+            den = den + 1._SP
             trm(i) = den**(-np)
             s = s + trm(i)
           END DO
@@ -217,14 +217,14 @@ SUBROUTINE PSIFN(X,N,Kode,M,Ans,Nz,Ierr)
           !-----------------------------------------------------------------------
           !     GENERATE HIGHER DERIVATIVES, J>N
           !-----------------------------------------------------------------------
-          tol = wdtol/5.0E0
+          tol = wdtol/5._SP
           DO j = 2, mm
             t = t/X
             s = t
             tols = t*tol
             den = X
             DO i = 1, nn
-              den = den + 1.0E0
+              den = den + 1._SP
               trm(i) = trm(i)/den
               s = s + trm(i)
               IF( trm(i)<tols ) EXIT
@@ -236,7 +236,7 @@ SUBROUTINE PSIFN(X,N,Kode,M,Ans,Nz,Ierr)
       END IF
       xdmy = X
       xdmln = xln
-      xinc = 0.0E0
+      xinc = 0._SP
       IF( X<xmin ) THEN
         nx = INT(X)
         xinc = xmin - nx
@@ -252,26 +252,26 @@ SUBROUTINE PSIFN(X,N,Kode,M,Ans,Nz,Ierr)
       tk = MAX(ABS(t),ABS(t1),ABS(t2))
       IF( tk>elim ) GOTO 200
       tss = EXP(-t)
-      tt = 0.5E0/xdmy
+      tt = 0.5_SP/xdmy
       t1 = tt
       tst = wdtol*tt
-      IF( nn/=0 ) t1 = tt + 1.0E0/fn
-      rxsq = 1.0E0/(xdmy*xdmy)
-      ta = 0.5E0*rxsq
+      IF( nn/=0 ) t1 = tt + 1._SP/fn
+      rxsq = 1._SP/(xdmy*xdmy)
+      ta = 0.5_SP*rxsq
       t = fnp*ta
       s = t*b(3)
       IF( ABS(s)>=tst ) THEN
-        tk = 2.0E0
+        tk = 2._SP
         DO k = 4, 22
-          t = t*((tk+fn+1.0E0)/(tk+1.0E0))*((tk+fn)/(tk+2.0E0))*rxsq
+          t = t*((tk+fn+1._SP)/(tk+1._SP))*((tk+fn)/(tk+2._SP))*rxsq
           trm(k) = t*b(k)
           IF( ABS(trm(k))<tst ) EXIT
           s = s + trm(k)
-          tk = tk + 2.0E0
+          tk = tk + 2._SP
         END DO
       END IF
       s = (s+t1)*tss
-      IF( xinc/=0.0E0 ) THEN
+      IF( xinc/=0._SP ) THEN
         !-----------------------------------------------------------------------
         !     BACKWARD RECUR FROM XDMY TO X
         !-----------------------------------------------------------------------
@@ -283,7 +283,7 @@ SUBROUTINE PSIFN(X,N,Kode,M,Ans,Nz,Ierr)
           RETURN
         ELSE
           IF( nn==0 ) GOTO 120
-          xm = xinc - 1.0E0
+          xm = xinc - 1._SP
           fx = X + xm
           !-----------------------------------------------------------------------
           !     THIS LOOP SHOULD NOT BE CHANGED. FX IS ACCURATE WHEN X IS SMALL
@@ -291,49 +291,49 @@ SUBROUTINE PSIFN(X,N,Kode,M,Ans,Nz,Ierr)
           DO i = 1, nx
             trmr(i) = fx**(-np)
             s = s + trmr(i)
-            xm = xm - 1.0E0
+            xm = xm - 1._SP
             fx = X + xm
           END DO
         END IF
       END IF
       Ans(mm) = s
-      IF( fn==0.0E0 ) GOTO 150
+      IF( fn==0._SP ) GOTO 150
       !-----------------------------------------------------------------------
       !     GENERATE LOWER DERIVATIVES, J<N+MM-1
       !-----------------------------------------------------------------------
       IF( mm==1 ) RETURN
       DO j = 2, mm
         fnp = fn
-        fn = fn - 1.0E0
+        fn = fn - 1._SP
         tss = tss*xdmy
         t1 = tt
-        IF( fn/=0.0E0 ) t1 = tt + 1.0E0/fn
+        IF( fn/=0._SP ) t1 = tt + 1._SP/fn
         t = fnp*ta
         s = t*b(3)
         IF( ABS(s)>=tst ) THEN
-          tk = 3.0E0 + fnp
+          tk = 3._SP + fnp
           DO k = 4, 22
             trm(k) = trm(k)*fnp/tk
             IF( ABS(trm(k))<tst ) EXIT
             s = s + trm(k)
-            tk = tk + 2.0E0
+            tk = tk + 2._SP
           END DO
         END IF
         s = (s+t1)*tss
-        IF( xinc/=0.0E0 ) THEN
-          IF( fn==0.0E0 ) GOTO 120
-          xm = xinc - 1.0E0
+        IF( xinc/=0._SP ) THEN
+          IF( fn==0._SP ) GOTO 120
+          xm = xinc - 1._SP
           fx = X + xm
           DO i = 1, nx
             trmr(i) = trmr(i)*fx
             s = s + trmr(i)
-            xm = xm - 1.0E0
+            xm = xm - 1._SP
             fx = X + xm
           END DO
         END IF
         mx = mm - j + 1
         Ans(mx) = s
-        IF( fn==0.0E0 ) GOTO 150
+        IF( fn==0._SP ) GOTO 150
       END DO
       RETURN
       !-----------------------------------------------------------------------
@@ -341,7 +341,7 @@ SUBROUTINE PSIFN(X,N,Kode,M,Ans,Nz,Ierr)
       !-----------------------------------------------------------------------
       120 CONTINUE
       DO i = 1, nx
-        s = s + 1.0E0/(X+nx-i)
+        s = s + 1._SP/(X+nx-i)
       END DO
     END IF
     150 CONTINUE
@@ -354,13 +354,13 @@ SUBROUTINE PSIFN(X,N,Kode,M,Ans,Nz,Ierr)
       Ans(1) = s - xdmln
       RETURN
     END IF
-  ELSEIF( t<=0.0E0 ) THEN
+  ELSEIF( t<=0._SP ) THEN
     Nz = 0
     Ierr = 2
     RETURN
   END IF
   200  Nz = Nz + 1
-  Ans(mm) = 0.0E0
+  Ans(mm) = 0._SP
   mm = mm - 1
   IF( mm==0 ) RETURN
   GOTO 100

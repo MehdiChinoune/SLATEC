@@ -106,7 +106,7 @@ SUBROUTINE DFDJC1(FCN,N,X,Fvec,Fjac,Ldfjac,Iflag,Ml,Mu,Epsfcn,Wa1,Wa2)
   REAL(DP) :: Fjac(Ldfjac,N), Fvec(N), Wa1(N), Wa2(N), X(N)
   INTEGER :: i, j, k, msum
   REAL(DP) :: eps, epsmch, h, temp
-  REAL(DP), PARAMETER :: zero = 0.0D0
+  REAL(DP), PARAMETER :: zero = 0._DP
   !
   !     EPSMCH IS THE MACHINE PRECISION.
   !

@@ -88,7 +88,7 @@ SUBROUTINE PFQAD(F,Ldc,C,Xi,Lxi,K,Id,X1,X2,Tol,Quad,Ierr)
   !
   !* FIRST EXECUTABLE STATEMENT  PFQAD
   Ierr = 1
-  Quad = 0.0E0
+  Quad = 0._SP
   IF( K<1 ) THEN
     CALL XERMSG('PFQAD','K DOES NOT SATISFY K>=1',2,1)
     RETURN
@@ -103,14 +103,14 @@ SUBROUTINE PFQAD(F,Ldc,C,Xi,Lxi,K,Id,X1,X2,Tol,Quad,Ierr)
     RETURN
   ELSE
     wtol = R1MACH(4)
-    IF( Tol>=wtol .AND. Tol<=0.1E0 ) THEN
+    IF( Tol>=wtol .AND. Tol<=0.1_SP ) THEN
       aa = MIN(X1,X2)
       bb = MAX(X1,X2)
       IF( aa==bb ) RETURN
       ilo = 1
       CALL INTRV(Xi,Lxi,aa,ilo,il1,mf1)
       CALL INTRV(Xi,Lxi,bb,ilo,il2,mf2)
-      q = 0.0E0
+      q = 0._SP
       inppv = 1
       DO left = il1, il2
         ta = Xi(left)

@@ -71,7 +71,7 @@ SUBROUTINE DPOFA(A,Lda,N,Info)
   !* FIRST EXECUTABLE STATEMENT  DPOFA
   DO j = 1, N
     Info = j
-    s = 0.0D0
+    s = 0._DP
     jm1 = j - 1
     IF( jm1>=1 ) THEN
       DO k = 1, jm1
@@ -82,7 +82,7 @@ SUBROUTINE DPOFA(A,Lda,N,Info)
       END DO
     END IF
     s = A(j,j) - s
-    IF( s<=0.0D0 ) RETURN
+    IF( s<=0._DP ) RETURN
     A(j,j) = SQRT(s)
   END DO
   Info = 0

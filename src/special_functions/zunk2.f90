@@ -41,12 +41,12 @@ SUBROUTINE ZUNK2(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Tol,Elim,Alim)
     rs1, rzi, rzr, sar, sgn, sti, str, s1i, s1r, s2i, s2r, Tol, Yi(N), Yr(N), yy, &
     zbi, zbr, zeta1i(2), zeta1r(2), zeta2i(2), zeta2r(2), zet1di, zet1dr, zet2di, &
     zet2dr, Zi, zni, znr, Zr, zri, zrr
-  REAL(DP), PARAMETER :: zeror = 0.0D0, zeroi = 0.0D0, coner = 1.0D0, cr1r = 1.0D0, &
-    cr1i = 1.73205080756887729D0, cr2r = -0.5D0, cr2i = -8.66025403784438647D-01
-  REAL(DP), PARAMETER :: hpi = 1.57079632679489662D+00, pi = 3.14159265358979324D+00, &
-    aic = 1.26551212348464539D+00
-  REAL(DP), PARAMETER :: cipr(4) = [ 1.0D0, 0.0D0, -1.0D0, 0.0D0 ]
-  REAL(DP), PARAMETER :: cipi(4) = [ 0.0D0, -1.0D0, 0.0D0, 1.0D0 ]
+  REAL(DP), PARAMETER :: zeror = 0._DP, zeroi = 0._DP, coner = 1._DP, cr1r = 1._DP, &
+    cr1i = 1.73205080756887729_DP, cr2r = -0.5_DP, cr2i = -8.66025403784438647E-01_DP
+  REAL(DP), PARAMETER :: hpi = 1.57079632679489662E+00_DP, pi = 3.14159265358979324E+00_DP, &
+    aic = 1.26551212348464539_DP
+  REAL(DP), PARAMETER :: cipr(4) = [ 1._DP, 0._DP, -1._DP, 0._DP ]
+  REAL(DP), PARAMETER :: cipi(4) = [ 0._DP, -1._DP, 0._DP, 1._DP ]
   !* FIRST EXECUTABLE STATEMENT  ZUNK2
   kdflg = 1
   Nz = 0
@@ -54,7 +54,7 @@ SUBROUTINE ZUNK2(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Tol,Elim,Alim)
   !     EXP(-ALIM)=EXP(-ELIM)/TOL=APPROX. ONE PRECISION GREATER THAN
   !     THE UNDERFLOW LIMIT
   !-----------------------------------------------------------------------
-  cscl = 1.0D0/Tol
+  cscl = 1._DP/Tol
   crsc = Tol
   cssr(1) = cscl
   cssr(2) = coner
@@ -62,12 +62,12 @@ SUBROUTINE ZUNK2(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Tol,Elim,Alim)
   csrr(1) = crsc
   csrr(2) = coner
   csrr(3) = cscl
-  bry(1) = 1.0D+3*D1MACH(1)/Tol
-  bry(2) = 1.0D0/bry(1)
+  bry(1) = 1.E3_DP*D1MACH(1)/Tol
+  bry(2) = 1._DP/bry(1)
   bry(3) = D1MACH(2)
   zrr = Zr
   zri = Zi
-  IF( Zr<0.0D0 ) THEN
+  IF( Zr<0._DP ) THEN
     zrr = -Zr
     zri = -Zi
   END IF
@@ -88,7 +88,7 @@ SUBROUTINE ZUNK2(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Tol,Elim,Alim)
   sti = c2r*cipi(kk) + c2i*cipr(kk)
   csr = cr1r*str - cr1i*sti
   csi = cr1r*sti + cr1i*str
-  IF( yy<=0.0D0 ) THEN
+  IF( yy<=0._DP ) THEN
     znr = -znr
     zbi = -zbi
   END IF
@@ -130,10 +130,10 @@ SUBROUTINE ZUNK2(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Tol,Elim,Alim)
         !-----------------------------------------------------------------------
         aphi = ZABS(phir(j),phii(j))
         aarg = ZABS(argr(j),argi(j))
-        rs1 = rs1 + LOG(aphi) - 0.25D0*LOG(aarg) - aic
+        rs1 = rs1 + LOG(aphi) - 0.25_DP*LOG(aarg) - aic
         IF( ABS(rs1)>Elim ) GOTO 50
         IF( kdflg==1 ) kflag = 1
-        IF( rs1>=0.0D0 ) THEN
+        IF( rs1>=0._DP ) THEN
           IF( kdflg==1 ) kflag = 3
         END IF
       END IF
@@ -165,7 +165,7 @@ SUBROUTINE ZUNK2(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Tol,Elim,Alim)
         CALL ZUCHK(s2r,s2i,nw,bry(1),Tol)
         IF( nw/=0 ) GOTO 50
       END IF
-      IF( yy<=0.0D0 ) s2i = -s2i
+      IF( yy<=0._DP ) s2i = -s2i
       cyr(kdflg) = s2r
       cyi(kdflg) = s2i
       Yr(i) = s2r*csrr(kflag)
@@ -177,11 +177,11 @@ SUBROUTINE ZUNK2(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Tol,Elim,Alim)
       kdflg = 2
       CYCLE
     END IF
-    50  IF( rs1>0.0D0 ) GOTO 600
+    50  IF( rs1>0._DP ) GOTO 600
     !-----------------------------------------------------------------------
     !     FOR ZR<0.0, THE I FUNCTION TO BE ADDED WILL OVERFLOW
     !-----------------------------------------------------------------------
-    IF( Zr<0.0D0 ) GOTO 600
+    IF( Zr<0._DP ) GOTO 600
     kdflg = 1
     Yr(i) = zeror
     Yi(i) = zeroi
@@ -198,7 +198,7 @@ SUBROUTINE ZUNK2(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Tol,Elim,Alim)
     END IF
   END DO
   i = N
-  100  razr = 1.0D0/ZABS(zrr,zri)
+  100  razr = 1._DP/ZABS(zrr,zri)
   str = zrr*razr
   sti = -zri*razr
   rzr = (str+str)*razr
@@ -238,11 +238,11 @@ SUBROUTINE ZUNK2(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Tol,Elim,Alim)
     rs1 = rs1 + LOG(aphi)
     IF( ABS(rs1)<Elim ) GOTO 200
   END IF
-  IF( rs1>0.0D0 ) GOTO 600
+  IF( rs1>0._DP ) GOTO 600
   !-----------------------------------------------------------------------
   !     FOR ZR<0.0, THE I FUNCTION TO BE ADDED WILL OVERFLOW
   !-----------------------------------------------------------------------
-  IF( Zr<0.0D0 ) GOTO 600
+  IF( Zr<0._DP ) GOTO 600
   Nz = N
   DO i = 1, N
     Yr(i) = zeror
@@ -299,7 +299,7 @@ SUBROUTINE ZUNK2(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Tol,Elim,Alim)
   !     CSPN AND CSGN ARE COEFF OF K AND I FUNCTIONS RESP.
   !-----------------------------------------------------------------------
   csgni = sgn
-  IF( yy<=0.0D0 ) csgni = -csgni
+  IF( yy<=0._DP ) csgni = -csgni
   ifn = inu + N - 1
   ang = fnf*sgn
   cspnr = COS(ang)
@@ -380,10 +380,10 @@ SUBROUTINE ZUNK2(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Tol,Elim,Alim)
       !-----------------------------------------------------------------------
       aphi = ZABS(phidr,phidi)
       aarg = ZABS(argdr,argdi)
-      rs1 = rs1 + LOG(aphi) - 0.25D0*LOG(aarg) - aic
+      rs1 = rs1 + LOG(aphi) - 0.25_DP*LOG(aarg) - aic
       IF( ABS(rs1)>Elim ) GOTO 450
       IF( kdflg==1 ) iflag = 1
-      IF( rs1>=0.0D0 ) THEN
+      IF( rs1>=0._DP ) THEN
         IF( kdflg==1 ) iflag = 3
       END IF
     END IF
@@ -410,7 +410,7 @@ SUBROUTINE ZUNK2(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Tol,Elim,Alim)
         s2i = zeroi
       END IF
     END IF
-    400  IF( yy<=0.0D0 ) s2i = -s2i
+    400  IF( yy<=0._DP ) s2i = -s2i
     cyr(kdflg) = s2r
     cyi(kdflg) = s2i
     c2r = s2r
@@ -434,7 +434,7 @@ SUBROUTINE ZUNK2(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Tol,Elim,Alim)
     str = csi
     csi = -csr
     csr = str
-    IF( c2r/=0.0D0 .OR. c2i/=0.0D0 ) THEN
+    IF( c2r/=0._DP .OR. c2i/=0._DP ) THEN
       IF( kdflg==2 ) GOTO 500
       kdflg = 2
       CYCLE
@@ -442,7 +442,7 @@ SUBROUTINE ZUNK2(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Tol,Elim,Alim)
       kdflg = 1
       CYCLE
     END IF
-    450  IF( rs1>0.0D0 ) GOTO 600
+    450  IF( rs1>0._DP ) GOTO 600
     s2r = zeror
     s2i = zeroi
     GOTO 400
@@ -469,7 +469,7 @@ SUBROUTINE ZUNK2(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Tol,Elim,Alim)
     s2i = s1i + (fn+fnf)*(rzr*c2i+rzi*c2r)
     s1r = c2r
     s1i = c2i
-    fn = fn - 1.0D0
+    fn = fn - 1._DP
     c2r = s2r*csr
     c2i = s2i*csr
     ckr = c2r

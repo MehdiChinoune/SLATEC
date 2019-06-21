@@ -30,7 +30,7 @@ SUBROUTINE CBUNK(Z,Fnu,Kode,Mr,N,Y,Nz,Tol,Elim,Alim)
   Nz = 0
   xx = REAL(Z)
   yy = AIMAG(Z)
-  ax = ABS(xx)*1.7321E0
+  ax = ABS(xx)*1.7321_SP
   ay = ABS(yy)
   IF( ay>ax ) THEN
     !-----------------------------------------------------------------------

@@ -149,9 +149,9 @@ SUBROUTINE DHFTI(A,Mda,M,N,B,Mdb,Nb,Tau,Krank,Rnorm,H,G,Ip)
   REAL(DP), PARAMETER :: releps = D1MACH(4)
   !     BEGIN BLOCK PERMITTING ...EXITS TO 360
   !* FIRST EXECUTABLE STATEMENT  DHFTI
-  szero = 0.0D0
-  dzero = 0.0D0
-  factor = 0.001D0
+  szero = 0._DP
+  dzero = 0._DP
+  factor = 0.001_DP
   !
   k = 0
   ldiag = MIN(M,N)
@@ -181,7 +181,7 @@ SUBROUTINE DHFTI(A,Mda,M,N,B,Mdb,Nb,Tau,Krank,Rnorm,H,G,Ip)
           !                       ..
           lmax = j
           DO l = j, N
-            H(l) = 0.0D0
+            H(l) = 0._DP
             DO i = j, M
               H(l) = H(l) + A(i,l)**2
             END DO

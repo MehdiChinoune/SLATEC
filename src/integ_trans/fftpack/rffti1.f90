@@ -92,7 +92,7 @@ SUBROUTINE RFFTI1(N,Wa,Ifac)
     IF( nl==1 ) THEN
       Ifac(1) = N
       Ifac(2) = nf
-      tpi = 8.*ATAN(1.)
+      tpi = 8._SP*ATAN(1._SP)
       argh = tpi/N
       is = 0
       nfm1 = nf - 1
@@ -108,10 +108,10 @@ SUBROUTINE RFFTI1(N,Wa,Ifac)
           ld = ld + l1
           i = is
           argld = ld*argh
-          fi = 0.
+          fi = 0._SP
           DO ii = 3, ido, 2
             i = i + 2
-            fi = fi + 1.
+            fi = fi + 1._SP
             arg = fi*argld
             Wa(i-1) = COS(arg)
             Wa(i) = SIN(arg)

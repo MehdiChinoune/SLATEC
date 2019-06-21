@@ -432,10 +432,10 @@ SUBROUTINE SEPX4(Iorder,A,B,M,Mbdcnd,Bda,Alpha,Bdb,Beta,C,D,N,Nbdcnd,Bdc,&
   k = M + 1
   l = N + 1
   !     ESTIMATE LOG BASE 2 OF N
-  log2n = INT(LOG(REAL(N+1))/LOG(2.0)+0.5)
+  log2n = INT(LOG(REAL(N+1))/LOG(2._SP)+0.5_SP)
   length = 4*(N+1) + (10+log2n)*(M+1)
   Ierror = 11
-  linput = INT(W(1)+0.5)
+  linput = INT(W(1)+0.5_SP)
   loutpt = length + 6*(k+l) + 1
   W(1) = loutpt
   IF( loutpt>linput ) RETURN

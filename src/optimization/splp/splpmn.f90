@@ -193,9 +193,9 @@ SUBROUTINE SPLPMN(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   lp_com = 0
   !
   !     THE VALUES ZERO AND ONE.
-  zero = 0.E0
-  one = 1.E0
-  factor = 0.01E0
+  zero = 0._SP
+  one = 1._SP
+  factor = 0.01_SP
   lpg = Lmx - (Nvars+4)
   iopt = 1
   Info = 0
@@ -647,7 +647,7 @@ SUBROUTINE SPLPMN(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   !++  END
   !
   !     SET RELATIVE PIVOTING FACTOR FOR USE IN LA05 () PACKAGE.
-  uu = 0.1
+  uu = 0.1_SP
   CALL SPLPDM(Mrelas,Nvars,Lbm,nredc,Info,iopt,Ibasis,Imat,Ibrc,Ipr,Iwr,&
     Ind,anorm,eps,uu,gg,Amat,Basmat,Csc,Wr,singlr,redbas)
   IF( Info<0 ) GOTO 4600

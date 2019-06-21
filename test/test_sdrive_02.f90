@@ -40,23 +40,23 @@ CONTAINS
     REAL(DP) :: eps, t, tout
     INTEGER :: ierflg, Ipass, Kprint, leniw, leniwx, lenw, lenwx, Lun, mint, &
       mstate, nde, nfe, nje, nstate, nstep, nx
-    REAL(DP), PARAMETER :: ALFA = 1.D0, HMAX = 15.D0
+    REAL(DP), PARAMETER :: ALFA = 1._DP, HMAX = 15._DP
     INTEGER, PARAMETER :: IERROR = 3, IMPL = 0, LENWMX = 342, LIWMX = 53, &
       MITER = 5, ML = 2, MU = 2, MXORD = 5, MXSTEP = 1000, N = 3, NROOT = 0, NTASK = 1
     REAL(DP) :: work(LENWMX), y(N+1)
     INTEGER :: iwork(LIWMX)
-    REAL(DP), PARAMETER :: ewt(1) = .00001D0
+    REAL(DP), PARAMETER :: ewt(1) = .00001_DP
     !* FIRST EXECUTABLE STATEMENT  DDQCK
-    eps = D1MACH(4)**(1.D0/3.D0)
+    eps = D1MACH(4)**(1._DP/3._DP)
     Ipass = 1
     !                                            Exercise DDRIV1 for problem
     !                                            with known solution.
     y(4) = ALFA
-    t = 0.D0
-    y(1) = 10.D0
-    y(2) = 0.D0
-    y(3) = 10.D0
-    tout = 10.D0
+    t = 0._DP
+    y(1) = 10._DP
+    y(2) = 0._DP
+    y(3) = 10._DP
+    tout = 10._DP
     mstate = 1
     lenw = 342
     CALL DDRIV1(N,t,y,DDF,tout,mstate,eps,work,lenw,ierflg)
@@ -84,8 +84,8 @@ CONTAINS
         WRITE (Lun,'(//)')
       END IF
       Ipass = 0
-    ELSEIF( ABS(1.D0-y(1)*1.5D0)>eps**(2.D0/3.D0) .OR. ABS(1.D0-y(2)*3.D0)&
-        >eps**(2.D0/3.D0) .OR. ABS(1.D0-y(3))>eps**(2.D0/3.D0) ) THEN
+    ELSEIF( ABS(1._DP-y(1)*1.5_DP)>eps**(2._DP/3._DP) .OR. ABS(1._DP-y(2)*3._DP)&
+        >eps**(2._DP/3._DP) .OR. ABS(1._DP-y(3))>eps**(2._DP/3._DP) ) THEN
       IF( Kprint==1 ) THEN
         WRITE (Lun,&
           '('' DDRIV1:The solution determined is not  accurate enough.'' //)')
@@ -121,12 +121,12 @@ CONTAINS
     CALL XERCLR
     !                                         Run DDRIV1 with invalid input.
     nx = 201
-    t = 0.D0
-    y(1) = 10.D0
-    y(2) = 0.D0
-    y(3) = 10.D0
+    t = 0._DP
+    y(1) = 10._DP
+    y(2) = 0._DP
+    y(3) = 10._DP
     y(4) = ALFA
-    tout = 10.D0
+    tout = 10._DP
     mstate = 1
     lenw = 342
     CALL DDRIV1(nx,t,y,DDF,tout,mstate,eps,work,lenw,ierflg)
@@ -165,13 +165,13 @@ CONTAINS
     CALL XERCLR
     !                                            Exercise DDRIV2 for problem
     !                                            with known solution.
-    t = 0.D0
-    y(1) = 10.D0
-    y(2) = 0.D0
-    y(3) = 10.D0
+    t = 0._DP
+    y(1) = 10._DP
+    y(2) = 0._DP
+    y(3) = 10._DP
     y(4) = ALFA
     mstate = 1
-    tout = 10.D0
+    tout = 10._DP
     mint = 1
     lenw = 298
     leniw = 50
@@ -203,8 +203,8 @@ CONTAINS
         WRITE (Lun,'(//)')
       END IF
       Ipass = 0
-    ELSEIF( ABS(1.D0-y(1)*1.5D0)>eps**(2.D0/3.D0) .OR. ABS(1.D0-y(2)*3.D0)&
-        >eps**(2.D0/3.D0) .OR. ABS(1.D0-y(3))>eps**(2.D0/3.D0) ) THEN
+    ELSEIF( ABS(1._DP-y(1)*1.5_DP)>eps**(2._DP/3._DP) .OR. ABS(1._DP-y(2)*3._DP)&
+        >eps**(2._DP/3._DP) .OR. ABS(1._DP-y(3))>eps**(2._DP/3._DP) ) THEN
       IF( Kprint==1 ) THEN
         WRITE (Lun,&
           '('' DDRIV2:The solution determined is not accurate enough.'' //)')
@@ -239,12 +239,12 @@ CONTAINS
     END IF
     CALL XERCLR
     !                                         Run DDRIV2 with invalid input.
-    t = 0.D0
-    y(1) = 10.D0
-    y(2) = 0.D0
-    y(3) = 10.D0
+    t = 0._DP
+    y(1) = 10._DP
+    y(2) = 0._DP
+    y(3) = 10._DP
     y(4) = ALFA
-    tout = 10.D0
+    tout = 10._DP
     mstate = 1
     mint = 1
     lenwx = 1
@@ -287,13 +287,13 @@ CONTAINS
     CALL XERCLR
     !                                            Exercise DDRIV3 for problem
     !                                            with known solution.
-    t = 0.D0
-    y(1) = 10.D0
-    y(2) = 0.D0
-    y(3) = 10.D0
+    t = 0._DP
+    y(1) = 10._DP
+    y(2) = 0._DP
+    y(3) = 10._DP
     y(4) = ALFA
     nstate = 1
-    tout = 10.D0
+    tout = 10._DP
     mint = 2
     lenw = 301
     leniw = 53
@@ -325,8 +325,8 @@ CONTAINS
         WRITE (Lun,'(//)')
       END IF
       Ipass = 0
-    ELSEIF( ABS(1.D0-y(1)*1.5D0)>eps**(2.D0/3.D0) .OR. ABS(1.D0-y(2)*3.D0)&
-        >eps**(2.D0/3.D0) .OR. ABS(1.D0-y(3))>eps**(2.D0/3.D0) ) THEN
+    ELSEIF( ABS(1._DP-y(1)*1.5_DP)>eps**(2._DP/3._DP) .OR. ABS(1._DP-y(2)*3._DP)&
+        >eps**(2._DP/3._DP) .OR. ABS(1._DP-y(3))>eps**(2._DP/3._DP) ) THEN
       IF( Kprint==1 ) THEN
         WRITE (Lun,&
           '('' DDRIV3:The solution determined is not accurate enough.'' //)')
@@ -362,13 +362,13 @@ CONTAINS
     END IF
     CALL XERCLR
     !                                         Run DDRIV3 with invalid input.
-    t = 0.D0
-    y(1) = 10.D0
-    y(2) = 0.D0
-    y(3) = 10.D0
+    t = 0._DP
+    y(1) = 10._DP
+    y(2) = 0._DP
+    y(3) = 10._DP
     y(4) = ALFA
     nstate = 1
-    tout = 10.D0
+    tout = 10._DP
     mint = 2
     lenw = 301
     leniwx = 1
@@ -413,31 +413,31 @@ CONTAINS
   CONTAINS
     REAL(DP) FUNCTION dum_G(N,T,Y,Iroot)
       INTEGER :: N, Iroot
-      REAL(8) :: T
-      REAL(8) :: Y(N)
+      REAL(DP) :: T
+      REAL(DP) :: Y(N)
       dum_G = SUM(Y) + T
     END FUNCTION dum_G
     SUBROUTINE dum_JACOBN(N,T,Y,Dfdy,Matdim,Ml,Mu)
       INTEGER :: N, Matdim, Ml, Mu
-      REAL(8) :: T
-      REAL(8) :: Y(N), Dfdy(Matdim,N)
+      REAL(DP) :: T
+      REAL(DP) :: Y(N), Dfdy(Matdim,N)
       Dfdy = T
       Y = Ml + Mu
     END SUBROUTINE dum_JACOBN
     SUBROUTINE dum_USERS(Y,Yh,Ywt,Save1,Save2,T,H,El,Impl,N,Nde,Iflag)
       INTEGER :: Impl, N, Nde, Iflag
-      REAL(8) :: T, H, El
-      REAL(8) :: Y(N), Yh(N,13), Ywt(N), Save1(N), Save2(N)
+      REAL(DP) :: T, H, El
+      REAL(DP) :: Y(N), Yh(N,13), Ywt(N), Save1(N), Save2(N)
       Y = Ywt + Save1 + Save2
       Yh = T + H + El
       Impl = Nde + Iflag
     END SUBROUTINE dum_USERS
     SUBROUTINE dum_FA(N,T,Y,A,Matdim,Ml,Mu,Nde)
       INTEGER :: N, Matdim, Ml, Mu, Nde
-      REAL(8) :: T, Y(N), A(:,:)
+      REAL(DP) :: T, Y(N), A(:,:)
       T = Matdim + Ml + Mu + Nde
-      Y = 0.D0
-      A = 0.D0
+      Y = 0._DP
+      A = 0._DP
     END SUBROUTINE dum_FA
   END SUBROUTINE DDQCK
   !** DDF
@@ -473,9 +473,9 @@ CONTAINS
     REAL(DP) :: alfa
     !* FIRST EXECUTABLE STATEMENT  DDF
     alfa = Y(N+1)
-    Yp(1) = 1.D0 + alfa*(Y(2)-Y(1)) - Y(1)*Y(3)
+    Yp(1) = 1._DP + alfa*(Y(2)-Y(1)) - Y(1)*Y(3)
     Yp(2) = alfa*(Y(1)-Y(2)) - Y(2)*Y(3)
-    Yp(3) = 1.D0 - Y(3)*(Y(1)+Y(2))
+    Yp(3) = 1._DP - Y(3)*(Y(1)+Y(2))
   END SUBROUTINE DDF
 END MODULE TEST46_MOD
 !** TEST46

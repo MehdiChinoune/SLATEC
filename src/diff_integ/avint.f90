@@ -87,7 +87,7 @@ SUBROUTINE AVINT(X,Y,N,Xlo,Xup,Ans,Ierr)
     x1, x2, x3, x12, x13, x23, term1, term2, term3, a, b, c, ca, cb, cc
   !* FIRST EXECUTABLE STATEMENT  AVINT
   Ierr = 1
-  Ans = 0.0
+  Ans = 0._SP
   IF( Xlo<Xup ) THEN
     IF( N<2 ) THEN
       Ierr = 5
@@ -118,9 +118,9 @@ SUBROUTINE AVINT(X,Y,N,Xlo,Xup,Ans,Ierr)
         istop = inrt
         IF( inrt==N ) istop = N - 1
         !
-        r3 = 3.0D0
-        rp5 = 0.5D0
-        summ = 0.0
+        r3 = 3._DP
+        rp5 = 0.5_DP
+        summ = 0._SP
         syl = Xlo
         syl2 = syl*syl
         syl3 = syl2*syl
@@ -143,9 +143,9 @@ SUBROUTINE AVINT(X,Y,N,Xlo,Xup,Ans,Ierr)
             cb = b
             cc = c
           ELSE
-            ca = 0.5*(a+ca)
-            cb = 0.5*(b+cb)
-            cc = 0.5*(c+cc)
+            ca = 0.5_DP*(a+ca)
+            cb = 0.5_DP*(b+cb)
+            cc = 0.5_DP*(c+cc)
           END IF
           syu = x2
           syu2 = syu*syu
@@ -167,7 +167,7 @@ SUBROUTINE AVINT(X,Y,N,Xlo,Xup,Ans,Ierr)
         slope = (Y(2)-Y(1))/(X(2)-X(1))
         fl = Y(1) + slope*(Xlo-X(1))
         fr = Y(2) + slope*(Xup-X(2))
-        Ans = 0.5*(fl+fr)*(Xup-Xlo)
+        Ans = 0.5_SP*(fl+fr)*(Xup-Xlo)
         RETURN
       END IF
     END IF

@@ -84,7 +84,7 @@ SUBROUTINE BFQAD(F,T,Bcoef,N,K,Id,X1,X2,Tol,Quad,Ierr,Work)
   REAL(SP) :: a, aa, ans, b, bb, q, ta, tb, wtol
   !* FIRST EXECUTABLE STATEMENT  BFQAD
   Ierr = 1
-  Quad = 0.0E0
+  Quad = 0._SP
   IF( K<1 ) THEN
     CALL XERMSG('BFQAD','K DOES NOT SATISFY K>=1',2,1)
     RETURN
@@ -96,7 +96,7 @@ SUBROUTINE BFQAD(F,T,Bcoef,N,K,Id,X1,X2,Tol,Quad,Ierr,Work)
     RETURN
   ELSE
     wtol = R1MACH(4)
-    IF( Tol>=wtol .AND. Tol<=0.1E0 ) THEN
+    IF( Tol>=wtol .AND. Tol<=0.1_SP ) THEN
       aa = MIN(X1,X2)
       bb = MAX(X1,X2)
       IF( aa>=T(K) ) THEN
@@ -110,7 +110,7 @@ SUBROUTINE BFQAD(F,T,Bcoef,N,K,Id,X1,X2,Tol,Quad,Ierr,Work)
           CALL INTRV(T,npk,bb,ilo,il2,mflag)
           IF( il2>=np1 ) il2 = N
           inbv = 1
-          q = 0.0E0
+          q = 0._SP
           DO left = il1, il2
             ta = T(left)
             tb = T(left+1)

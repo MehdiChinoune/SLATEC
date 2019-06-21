@@ -31,7 +31,7 @@ REAL(SP) FUNCTION HVNRM(V,Ncomp)
   REAL(SP) :: V(Ncomp)
   INTEGER :: k
   !* FIRST EXECUTABLE STATEMENT  HVNRM
-  HVNRM = 0.
+  HVNRM = 0._SP
   DO k = 1, Ncomp
     HVNRM = MAX(HVNRM,ABS(V(k)))
   END DO

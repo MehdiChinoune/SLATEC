@@ -36,26 +36,26 @@ COMPLEX(SP) FUNCTION CPSI(Zin)
   COMPLEX(SP) :: z, z2inv, corr
   INTEGER, PARAMETER :: nterm = INT( -0.30*LOG(R1MACH(3)) )
   ! MAYBE BOUND = N*(0.1*EPS)**(-1/(2*N-1)) / (PI*EXP(1))
-  REAL(SP), PARAMETER ::  bound = 0.1171*nterm*(0.1*R1MACH(3))**(-1.0/(2*nterm-1)), &
-    dxrel = SQRT(R1MACH(4)), rmin = EXP(MAX(LOG(R1MACH(1)),-LOG(R1MACH(2)))+0.011), &
-    rbig = 1.0/R1MACH(3)
-  REAL(SP), PARAMETER :: bern(13) = [ .83333333333333333E-1,-.83333333333333333E-2, &
-    .39682539682539683E-2, -.41666666666666667E-2, .75757575757575758E-2, &
-    -.21092796092796093E-1, .83333333333333333E-1, -.44325980392156863E0, &
-    .30539543302701197E1,  -.26456212121212121E2,  .28146014492753623E3, &
-    -.34548853937728938E4,  .54827583333333333E5 ]
-  REAL(SP), PARAMETER :: pi = 3.141592653589793E0
+  REAL(SP), PARAMETER ::  bound = 0.1171_SP*nterm*(0.1_SP*R1MACH(3))**(-1._SP/(2*nterm-1)), &
+    dxrel = SQRT(R1MACH(4)), rmin = EXP(MAX(LOG(R1MACH(1)),-LOG(R1MACH(2)))+0.011_SP), &
+    rbig = 1._SP/R1MACH(3)
+  REAL(SP), PARAMETER :: bern(13) = [ .83333333333333333E-1_SP, -.83333333333333333E-2_SP, &
+    .39682539682539683E-2_SP, -.41666666666666667E-2_SP, .75757575757575758E-2_SP, &
+    -.21092796092796093E-1_SP, .83333333333333333E-1_SP, -.44325980392156863E0_SP, &
+    .30539543302701197E1_SP,  -.26456212121212121E2_SP,  .28146014492753623E3_SP, &
+    -.34548853937728938E4_SP,  .54827583333333333_SP ]
+  REAL(SP), PARAMETER :: pi = 3.141592653589793_SP
   !* FIRST EXECUTABLE STATEMENT  CPSI
   !
   z = Zin
   x = REAL(z)
   y = AIMAG(z)
-  IF( y<0.0 ) z = CONJG(z)
+  IF( y<0._SP ) z = CONJG(z)
   !
-  corr = (0.0,0.0)
+  corr = (0._SP,0._SP)
   cabsz = ABS(z)
-  IF( x<0.0 .OR. cabsz<=bound ) THEN
-    IF( x>=0.0 .OR. ABS(y)<=bound ) THEN
+  IF( x<0._SP .OR. cabsz<=bound ) THEN
+    IF( x>=0._SP .OR. ABS(y)<=bound ) THEN
       !
       IF( cabsz<bound ) THEN
         !
@@ -64,17 +64,17 @@ COMPLEX(SP) FUNCTION CPSI(Zin)
         IF( cabsz<rmin ) CALL XERMSG('CPSI',&
           'CPSI CALLED WITH Z SO NEAR 0 THAT CPSI OVERFLOWS',2,2)
         !
-        IF( x<(-0.5) .AND. ABS(y)<=dxrel ) THEN
-          IF( ABS((z-AINT(x-0.5))/x)<dxrel ) CALL XERMSG('CPSI',&
+        IF( x<(-0.5_SP) .AND. ABS(y)<=dxrel ) THEN
+          IF( ABS((z-AINT(x-0.5_SP))/x)<dxrel ) CALL XERMSG('CPSI',&
             'ANSWER LT HALF PRECISION BECAUSE Z TOO NEAR NEGATIVE INTEGER',1,1)
-          IF( y==0.0 .AND. x==AINT(x) )&
+          IF( y==0._SP .AND. x==AINT(x) )&
             CALL XERMSG('CPSI','Z IS A NEGATIVE INTEGER',3,2)
         END IF
         !
         n = INT( SQRT(bound**2-y**2) - x ) + 1
         DO i = 1, n
-          corr = corr - 1.0/z
-          z = z + 1.0
+          corr = corr - 1._SP/z
+          z = z + 1._SP
         END DO
       ELSE
         !
@@ -82,7 +82,7 @@ COMPLEX(SP) FUNCTION CPSI(Zin)
         ! ABS(AIMAG(Y)) SMALL.
         !
         corr = -pi*CCOT(pi*z)
-        z = 1.0 - z
+        z = 1._SP - z
       END IF
     END IF
   END IF
@@ -92,15 +92,15 @@ COMPLEX(SP) FUNCTION CPSI(Zin)
   IF( cabsz>rbig ) CPSI = LOG(z) + corr
   IF( cabsz<=rbig ) THEN
     !
-    CPSI = (0.0,0.0)
-    z2inv = 1.0/z**2
+    CPSI = (0._SP,0._SP)
+    z2inv = 1._SP/z**2
     DO i = 1, nterm
       ndx = nterm + 1 - i
       CPSI = bern(ndx) + z2inv*CPSI
     END DO
-    CPSI = LOG(z) - 0.5/z - CPSI*z2inv + corr
+    CPSI = LOG(z) - 0.5_SP/z - CPSI*z2inv + corr
   END IF
   !
-  IF( y<0.0 ) CPSI = CONJG(CPSI)
+  IF( y<0._SP ) CPSI = CONJG(CPSI)
   !
 END FUNCTION CPSI

@@ -93,7 +93,7 @@ SUBROUTINE CFFTI1(N,Wa,Ifac)
     IF( nl==1 ) THEN
       Ifac(1) = N
       Ifac(2) = nf
-      tpi = 8.*ATAN(1.)
+      tpi = 8._SP*ATAN(1._SP)
       argh = tpi/N
       i = 2
       l1 = 1
@@ -106,14 +106,14 @@ SUBROUTINE CFFTI1(N,Wa,Ifac)
         ipm = ip - 1
         DO j = 1, ipm
           i1 = i
-          Wa(i-1) = 1.
-          Wa(i) = 0.
+          Wa(i-1) = 1._SP
+          Wa(i) = 0._SP
           ld = ld + l1
-          fi = 0.
+          fi = 0._SP
           argld = ld*argh
           DO ii = 4, idot, 2
             i = i + 2
-            fi = fi + 1.
+            fi = fi + 1._SP
             arg = fi*argld
             Wa(i-1) = COS(arg)
             Wa(i) = SIN(arg)

@@ -57,10 +57,10 @@ SUBROUTINE CPEVL(N,M,A,Z,C,B,Kbd)
   !* FIRST EXECUTABLE STATEMENT  CPEVL
   np1 = N + 1
   DO j = 1, np1
-    ci = 0.0
+    ci = 0._SP
     cim1 = A(j)
-    bi = 0.0
-    bim1 = 0.0
+    bi = 0._SP
+    bim1 = 0._SP
     mini = MIN(M+1,N+2-j)
     DO i = 1, mini
       IF( j/=1 ) ci = C(i)
@@ -69,17 +69,17 @@ SUBROUTINE CPEVL(N,M,A,Z,C,B,Kbd)
       IF( Kbd ) THEN
         IF( j/=1 ) bi = B(i)
         IF( i/=1 ) bim1 = B(i-1)
-        t = bi + (3.*d1+4.*d1*d1)*ZA(ci)
-        r = REAL(ZA(Z)*CMPLX(REAL(t),-AIMAG(t)))
+        t = bi + (3._SP*d1+4._SP*d1*d1)*ZA(ci)
+        r = REAL(ZA(Z)*CMPLX(REAL(t),-AIMAG(t),SP))
         s = AIMAG(ZA(Z)*t)
-        B(i) = (1.+8.*d1)*(bim1+d1*ZA(cim1)+CMPLX(r,s))
-        IF( j==1 ) B(i) = 0.0
+        B(i) = (1._SP+8._SP*d1)*(bim1+d1*ZA(cim1)+CMPLX(r,s,SP))
+        IF( j==1 ) B(i) = 0._SP
       END IF
     END DO
   END DO
 CONTAINS
   COMPLEX(SP) FUNCTION ZA(q)
     COMPLEX(SP), INTENT(IN) :: q
-    ZA = CMPLX(ABS(REAL(q)),ABS(AIMAG(q)))
+    ZA = CMPLX(ABS(REAL(q)),ABS(AIMAG(q)),SP)
   END FUNCTION ZA
 END SUBROUTINE CPEVL

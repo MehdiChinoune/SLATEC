@@ -47,8 +47,8 @@ SUBROUTINE DPINCW(Mrelas,Nvars,Lmx,Lbm,Npp,Jstrt,Imat,Ibrc,Ipr,Iwr,&
   LOGICAL :: pagepl, trans
   !* FIRST EXECUTABLE STATEMENT  DPINCW
   lpg = Lmx - (Nvars+4)
-  zero = 0.D0
-  one = 1.D0
+  zero = 0._DP
+  one = 1._DP
   !
   !     FORM REDUCED COSTS, RZ(*), AND STEEPEST EDGE WEIGHTS, RG(*).
   pagepl = .TRUE.

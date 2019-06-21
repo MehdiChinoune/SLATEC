@@ -75,7 +75,7 @@ SUBROUTINE DREORT(Ncomp,Y,Yp,Yhp,Niv,W,S,P,Ip,Stowa,Iflag)
     !        ...EXIT
     IF( knswot_com<nswot_com ) THEN
       !     ......EXIT
-      IF( (xend_com-x_com)*(x_com-xot_com)<0.0D0 ) RETURN
+      IF( (xend_com-x_com)*(x_com-xot_com)<0._DP ) RETURN
     END IF
   END IF
   CALL DSTOR1(Y(:,1),Yhp(:,1),Yp,Yhp(:,nfcp),1,0,0)
@@ -104,7 +104,7 @@ SUBROUTINE DREORT(Ncomp,Y,Yp,Yhp,Niv,W,S,P,Ip,Stowa,Iflag)
       !                 TEST FOR ORTHONORMALIZATION
       !
       !              ...EXIT
-      IF( wcnd>=50.0D0*tol_com ) THEN
+      IF( wcnd>=50._DP*tol_com ) THEN
         DO ijk = 1, nfcp
           !              ......EXIT
           IF( S(ijk)>1.0D20 ) GOTO 50
@@ -119,7 +119,7 @@ SUBROUTINE DREORT(Ncomp,Y,Yp,Yhp,Niv,W,S,P,Ip,Stowa,Iflag)
         knswot_com = 0
         lotjp_com = 0
         wcnd = LOG10(wcnd)
-        IF( wcnd>tnd_com+3.0D0 ) nswot_com = 2*nswot_com
+        IF( wcnd>tnd_com+3._DP ) nswot_com = 2*nswot_com
         IF( wcnd<pwcnd_com ) THEN
           dx = x_com - px_com
           dnd = pwcnd_com - wcnd
@@ -161,7 +161,7 @@ SUBROUTINE DREORT(Ncomp,Y,Yp,Yhp,Niv,W,S,P,Ip,Stowa,Iflag)
       !                 BEGIN BLOCK PERMITTING ...EXITS TO 140
       srp = SQRT(P(kk))
       IF( inhomo_com==1 ) W(k) = srp*W(k)
-      vnorm = 1.0D0/srp
+      vnorm = 1._DP/srp
       P(kk) = vnorm
       kk = kk + nfcc_com + 1 - k
       IF( nfc_com/=nfcc_com ) THEN
@@ -179,7 +179,7 @@ SUBROUTINE DREORT(Ncomp,Y,Yp,Yhp,Niv,W,S,P,Ip,Stowa,Iflag)
       !                 NORMALIZE THE PARTICULAR SOLUTION
       !
       ypnm = NORM2(Yp(1:Ncomp))**2
-      IF( ypnm==0.0D0 ) ypnm = 1.0D0
+      IF( ypnm==0._DP ) ypnm = 1._DP
       ypnm = SQRT(ypnm)
       S(nfcp) = ypnm
       DO j = 1, Ncomp
@@ -207,7 +207,7 @@ SUBROUTINE DREORT(Ncomp,Y,Yp,Yhp,Niv,W,S,P,Ip,Stowa,Iflag)
     nswot_com = 1
     knswot_com = 0
     mnswot_com = mnswot_com/2
-    tnd_com = tnd_com + 1.0D0
+    tnd_com = tnd_com + 1._DP
     !           .........EXIT
     Iflag = 10
   END IF

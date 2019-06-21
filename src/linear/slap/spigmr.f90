@@ -277,7 +277,7 @@ SUBROUTINE SPIGMR(N,R0,Sr,Sz,Jscal,Maxl,Maxlp1,Kmp,Nrsts,Jpre,MATVEC,&
   !
   IF( ISSGMR(N,X,Xl,MSOLVE,Nmsl,Itol,Tol,iter,Err,Iunit,V(1,1),Wk,Rpar,Ipar,r0nrm, &
     Bnrm,Sz,Jscal,Kmp,Lgmr,Maxl,Maxlp1,V,Q,snormw,prod,r0nrm,Hes,Jpre)/=0 ) RETURN
-  tem = 1.0E0/r0nrm
+  tem = 1._SP/r0nrm
   V(1:N,1) = tem*V(1:N,1)
   !
   !         Zero out the HES array.
@@ -373,7 +373,7 @@ SUBROUTINE SPIGMR(N,R0,Sr,Sz,Jscal,Maxl,Maxlp1,Kmp,Nrsts,Jpre,MATVEC,&
     !   -------------------------------------------------------------------
     !         Rescale so that the norm of V(1,LL+1) is one.
     !   -------------------------------------------------------------------
-    tem = 1.0E0/snormw
+    tem = 1._SP/snormw
     V(1:N,ll+1) = tem*V(1:N,ll+1)
   END DO
   IF( rho<r0nrm ) THEN

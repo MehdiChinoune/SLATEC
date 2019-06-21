@@ -87,38 +87,38 @@ SUBROUTINE GAUS8(FUN,A,B,Err,Ans,Ierr)
   INTEGER :: Ierr, k, l, lmn, lmx, lr(30), mxl, nbits, nib, nlmx
   REAL(SP) :: A, aa(30), ae, anib, Ans, area, B, c, ce, ee, ef, eps, Err, &
     est, gl, glr, gr(30), hh(30), tol, vl(30), vr
-  REAL(SP), PARAMETER :: x1 = 1.83434642495649805E-01, x2 = 5.25532409916328986E-01, &
-    x3 =7.96666477413626740E-01 , x4 = 9.60289856497536232E-01
-  REAL(SP), PARAMETER ::  w1 =3.62683783378361983E-01 , w2 = 3.13706645877887287E-01, &
-    w3 = 2.22381034453374471E-01, w4 = 1.01228536290376259E-01
-  REAL(SP), PARAMETER :: sq2 = 1.41421356E0
+  REAL(SP), PARAMETER :: x1 = 1.83434642495649805E-01_SP, x2 = 5.25532409916328986E-01_SP, &
+    x3 =7.96666477413626740E-01_SP, x4 = 9.60289856497536232E-01_SP
+  REAL(SP), PARAMETER ::  w1 =3.62683783378361983E-01_SP, w2 = 3.13706645877887287E-01_SP, &
+    w3 = 2.22381034453374471E-01_SP, w4 = 1.01228536290376259E-01_SP
+  REAL(SP), PARAMETER :: sq2 = 1.41421356_SP
   INTEGER, PARAMETER :: nlmn = 1, kmx = 5000, kml = 6
   !* FIRST EXECUTABLE STATEMENT  GAUS8
   !
   !     Initialize
   !
   k = I1MACH(11)
-  anib = R1MACH(5)*k/0.30102000E0
+  anib = R1MACH(5)*k/0.30102000_SP
   nbits = INT( anib )
   nlmx = MIN(30,(nbits*5)/8)
-  Ans = 0.0E0
+  Ans = 0._SP
   Ierr = 1
-  ce = 0.0E0
+  ce = 0._SP
   IF( A==B ) THEN
-    IF( Err<0.0E0 ) Err = ce
+    IF( Err<0._SP ) Err = ce
     RETURN
   ELSE
     lmx = nlmx
     lmn = nlmn
-    IF( B/=0.0E0 ) THEN
-      IF( SIGN(1.0E0,B)*A>0.0E0 ) THEN
-        c = ABS(1.0E0-A/B)
-        IF( c<=0.1E0 ) THEN
-          IF( c<=0.0E0 ) THEN
-            IF( Err<0.0E0 ) Err = ce
+    IF( B/=0._SP ) THEN
+      IF( SIGN(1._SP,B)*A>0._SP ) THEN
+        c = ABS(1._SP-A/B)
+        IF( c<=0.1_SP ) THEN
+          IF( c<=0._SP ) THEN
+            IF( Err<0._SP ) Err = ce
             RETURN
           ELSE
-            anib = 0.5E0 - LOG(c)/0.69314718E0
+            anib = 0.5_SP - LOG(c)/0.69314718_SP
             nib = INT( anib )
             lmx = MIN(nlmx,nbits-nib-7)
             IF( lmx<1 ) THEN
@@ -126,7 +126,7 @@ SUBROUTINE GAUS8(FUN,A,B,Err,Ans,Ierr)
               CALL XERMSG('GAUS8',&
                 'A and B are too nearly equal to allow normal integration.&
                 & $$ANS is set to zero and IERR to -1.',1,-1)
-              IF( Err<0.0E0 ) Err = ce
+              IF( Err<0._SP ) Err = ce
               RETURN
             ELSE
               lmn = MIN(lmn,lmx)
@@ -135,17 +135,17 @@ SUBROUTINE GAUS8(FUN,A,B,Err,Ans,Ierr)
         END IF
       END IF
     END IF
-    tol = MAX(ABS(Err),2.0E0**(5-nbits))/2.0E0
-    IF( Err==0.0E0 ) tol = SQRT(R1MACH(4))
+    tol = MAX(ABS(Err),2._SP**(5-nbits))/2._SP
+    IF( Err==0._SP ) tol = SQRT(R1MACH(4))
     eps = tol
-    hh(1) = (B-A)/4.0E0
+    hh(1) = (B-A)/4._SP
     aa(1) = A
     lr(1) = 1
     l = 1
-    est = G8(aa(l)+2.0E0*hh(l),2.0E0*hh(l))
+    est = G8(aa(l)+2._SP*hh(l),2._SP*hh(l))
     k = 8
     area = ABS(est)
-    ef = 0.5E0
+    ef = 0.5_SP
     mxl = 0
   END IF
   100 CONTINUE
@@ -154,7 +154,7 @@ SUBROUTINE GAUS8(FUN,A,B,Err,Ans,Ierr)
     !     Compute refined estimates, estimate the error, etc.
     !
     gl = G8(aa(l)+hh(l),hh(l))
-    gr(l) = G8(aa(l)+3.0E0*hh(l),hh(l))
+    gr(l) = G8(aa(l)+3._SP*hh(l),hh(l))
     k = k + 16
     area = area + (ABS(gl)+ABS(gr(l))-ABS(est))
     !     IF(L < LMN) GO TO 11
@@ -171,9 +171,9 @@ SUBROUTINE GAUS8(FUN,A,B,Err,Ans,Ierr)
       EXIT
     ELSE
       l = l + 1
-      eps = eps*0.5E0
+      eps = eps*0.5_SP
       ef = ef/sq2
-      hh(l) = hh(l-1)*0.5E0
+      hh(l) = hh(l-1)*0.5_SP
       lr(l) = -1
       aa(l) = aa(l-1)
       est = gl
@@ -192,7 +192,7 @@ SUBROUTINE GAUS8(FUN,A,B,Err,Ans,Ierr)
     vr = glr
     DO WHILE( l>1 )
       l = l - 1
-      eps = eps*2.0E0
+      eps = eps*2._SP
       ef = ef*sq2
       IF( lr(l)<=0 ) THEN
         vl(l) = vl(l+1) + vr
@@ -205,17 +205,17 @@ SUBROUTINE GAUS8(FUN,A,B,Err,Ans,Ierr)
     !     Exit
     !
     Ans = vr
-    IF( (mxl/=0) .AND. (ABS(ce)>2.0E0*tol*area) ) THEN
+    IF( (mxl/=0) .AND. (ABS(ce)>2._SP*tol*area) ) THEN
       Ierr = 2
       CALL XERMSG('GAUS8',&
         'ANS is probably insufficiently accurate.',3,1)
     END IF
-    IF( Err<0.0E0 ) Err = ce
+    IF( Err<0._SP ) Err = ce
     RETURN
   END IF
   200  est = gr(l-1)
   lr(l) = 1
-  aa(l) = aa(l) + 4.0E0*hh(l)
+  aa(l) = aa(l) + 4._SP*hh(l)
   GOTO 100
   RETURN
 CONTAINS

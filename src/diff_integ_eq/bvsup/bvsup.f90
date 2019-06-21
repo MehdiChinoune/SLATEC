@@ -437,9 +437,9 @@ SUBROUTINE BVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
             IF( Nfc>0 ) THEN
               IF( Nrowb>=Nfc ) THEN
                 IF( Igofx>=0 .AND. Igofx<=1 ) THEN
-                  IF( Re>=0.0 ) THEN
-                    IF( Ae>=0.0 ) THEN
-                      IF( Re/=0.0 .OR. Ae/=0.0 ) THEN
+                  IF( Re>=0._SP ) THEN
+                    IF( Ae>=0._SP ) THEN
+                      IF( Re/=0._SP .OR. Ae/=0._SP ) THEN
                         is = 1
                         IF( Xpts(Nxpts)<Xpts(1) ) is = 2
                         nxptsm = Nxpts - 1
@@ -473,10 +473,10 @@ SUBROUTINE BVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
                         !
                         IF( Igofx==1 ) GOTO 300
                         DO j = 1, Nic
-                          IF( Alpha(j)/=0.0 ) GOTO 300
+                          IF( Alpha(j)/=0._SP ) GOTO 300
                         END DO
                         DO j = 1, Nfc
-                          IF( Beta(j)/=0.0 ) GOTO 200
+                          IF( Beta(j)/=0._SP ) GOTO 200
                         END DO
                         inhomo_com = 3
                         GOTO 400
@@ -586,7 +586,7 @@ SUBROUTINE BVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
       IF( mxnon_com>=Iwork(1) ) THEN
         nopg_com = 1
         mxnon_com = Iwork(1)
-        Work(mxnon_com+1) = 2.*Xpts(Nxpts) - Xpts(1)
+        Work(mxnon_com+1) = 2._SP*Xpts(Nxpts) - Xpts(1)
         GOTO 500
       END IF
     END IF

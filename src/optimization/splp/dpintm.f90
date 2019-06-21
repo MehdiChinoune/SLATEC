@@ -52,7 +52,7 @@ SUBROUTINE DPINTM(M,N,Sx,Ix,Lmx,Ipagef)
   INTEGER :: Ipagef, Lmx, Ix(Lmx), M, N
   REAL(DP) :: Sx(Lmx)
   INTEGER :: i, iopt, lp4, n20008, n20012, nerr
-  REAL(DP), PARAMETER :: zero = 0.D0, one = 1.D0
+  REAL(DP), PARAMETER :: zero = 0._DP, one = 1._DP
   !* FIRST EXECUTABLE STATEMENT  DPINTM
   iopt = 1
   !

@@ -30,12 +30,12 @@ CONTAINS
     rsq = u1sq + u2sq
     r = SQRT(rsq)
     r5 = rsq*rsq*r
-    Pd(3,1) = (3.E0*u1sq-rsq)/r5
-    Pd(4,1) = 3.E0*u1u2/r5
+    Pd(3,1) = (3._SP*u1sq-rsq)/r5
+    Pd(4,1) = 3._SP*u1u2/r5
     Pd(3,2) = Pd(4,1)
-    Pd(4,2) = (3.E0*u2sq-rsq)/r5
-    Pd(1,3) = 1.E0
-    Pd(2,4) = 1.E0
+    Pd(4,2) = (3._SP*u2sq-rsq)/r5
+    Pd(1,3) = 1._SP
+    Pd(2,4) = 1._SP
   END SUBROUTINE JAC
   !** FDEQC
   SUBROUTINE FDEQC(T,U,Uprime)
@@ -143,27 +143,27 @@ CONTAINS
     n = 4
     lrw = 214
     liw = 51
-    t = 0.0E0
-    tout = 8.0E0*ATAN(1.0E0)
-    u(1) = 1.0E0
-    u(2) = 0.0E0
-    u(3) = 0.0E0
-    u(4) = 1.0E0
+    t = 0._SP
+    tout = 8._SP*ATAN(1._SP)
+    u(1) = 1._SP
+    u(2) = 0._SP
+    u(3) = 0._SP
+    u(4) = 1._SP
     Ipass = 1
     reltol = SQRT(R1MACH(4))
-    relerr = 0.1E0*reltol
-    abserr = relerr**1.5E0
+    relerr = 0.1_SP*reltol
+    abserr = relerr**1.5_SP
     info(1) = 0
     info(2) = 0
     info(3) = 1
     info(4) = 0
-    IF( Kprint>2 ) WRITE (Lun,99002) relerr, abserr, t, (1.0E0)
+    IF( Kprint>2 ) WRITE (Lun,99002) relerr, abserr, t, (1._SP)
     99002 FORMAT (/' RELERR = ',E16.8,'   ABSERR =',E16.8/12X,'T',19X,'R'/2E20.8)
     DO
       !
       CALL DEABM(FDEQC,n,t,u,tout,info,relerr,abserr,idid,rwork,lrw,iwork,liw)
       r = SQRT(u(1)*u(1)+u(2)*u(2))
-      IF( ABS(r-1.0E0)>reltol ) Ipass = 0
+      IF( ABS(r-1._SP)>reltol ) Ipass = 0
       IF( Kprint>2 ) WRITE (Lun,99003) t, r
       99003 FORMAT (2E20.8)
       info(1) = 1
@@ -254,29 +254,29 @@ CONTAINS
     n = 4
     lrw = 306
     liw = 60
-    t = 0.0E0
-    tout = 8.0E0*ATAN(1.0E0)
-    u(1) = 1.0E0
-    u(2) = 0.0E0
-    u(3) = 0.0E0
-    u(4) = 1.0E0
+    t = 0._SP
+    tout = 8._SP*ATAN(1._SP)
+    u(1) = 1._SP
+    u(2) = 0._SP
+    u(3) = 0._SP
+    u(4) = 1._SP
     Ipass = 1
     reltol = SQRT(R1MACH(4))
-    relerr = 0.001E0*reltol
-    abserr = relerr**1.5E0
+    relerr = 0.001_SP*reltol
+    abserr = relerr**1.5_SP
     info(1) = 0
     info(2) = 0
     info(3) = 1
     info(4) = 0
     info(5) = 1
     info(6) = 0
-    IF( Kprint>2 ) WRITE (Lun,99002) relerr, abserr, t, (1.0E0)
+    IF( Kprint>2 ) WRITE (Lun,99002) relerr, abserr, t, (1._SP)
     99002 FORMAT (/' RELERR = ',E16.8,'   ABSERR =',E16.8/12X,'T',19X,'R'/2E20.8)
     DO
       !
       CALL DEBDF(FDEQC,n,t,u,tout,info,relerr,abserr,idid,rwork,lrw,iwork,liw,JAC)
       r = SQRT(u(1)*u(1)+u(2)*u(2))
-      IF( ABS(r-1.0E0)>reltol ) Ipass = 0
+      IF( ABS(r-1._SP)>reltol ) Ipass = 0
       IF( Kprint>2 ) WRITE (Lun,99003) t, r
       99003 FORMAT (2E20.8)
       info(1) = 1
@@ -367,27 +367,27 @@ CONTAINS
     n = 4
     lrw = 61
     liw = 34
-    t = 0.0E0
-    tout = 8.0E0*ATAN(1.0E0)
-    u(1) = 1.0E0
-    u(2) = 0.0E0
-    u(3) = 0.0E0
-    u(4) = 1.0E0
+    t = 0._SP
+    tout = 8._SP*ATAN(1._SP)
+    u(1) = 1._SP
+    u(2) = 0._SP
+    u(3) = 0._SP
+    u(4) = 1._SP
     Ipass = 1
     reltol = SQRT(R1MACH(4))
-    relerr = 0.1E0*reltol
-    abserr = relerr**1.5E0
+    relerr = 0.1_SP*reltol
+    abserr = relerr**1.5_SP
     info(1) = 0
     info(2) = 0
     info(3) = 1
     info(4) = 0
-    IF( Kprint>2 ) WRITE (Lun,99002) relerr, abserr, t, (1.0E0)
+    IF( Kprint>2 ) WRITE (Lun,99002) relerr, abserr, t, (1._SP)
     99002 FORMAT (/' RELERR = ',E16.8,'   ABSERR =',E16.8/12X,'T',19X,'R'/2E20.8)
     DO
       !
       CALL DERKF(FDEQC,n,t,u,tout,info,relerr,abserr,idid,rwork,lrw,iwork,liw)
       r = SQRT(u(1)*u(1)+u(2)*u(2))
-      IF( ABS(r-1.0E0)>reltol ) Ipass = 0
+      IF( ABS(r-1._SP)>reltol ) Ipass = 0
       IF( Kprint>2 ) WRITE (Lun,99003) t, r
       99003 FORMAT (2E20.8)
       info(1) = 1
@@ -436,16 +436,17 @@ CONTAINS
       Lun, ncomp, ndiw, ndw, neqivp, nfc, nic, nrowa, nrowb, nrowy
     INTEGER :: itmp(9), iwork(100)
     CHARACTER(4) :: msg
-    REAL, PARAMETER :: yans(2,15) = RESHAPE( [ 5.000000000E+00, -6.888880126E-01, &
-      8.609248635E+00, -1.083092311E+00, 1.674923836E+01, -2.072210073E+00, &
-      3.351098494E+01, -4.479263780E+00, 6.601103894E+01, -8.909222513E+00, &
-      8.579580988E+01, -1.098742758E+01, 1.106536877E+02, -1.402469444E+01, &
-      1.421228220E+02, -1.742236546E+01, 1.803383474E+02, -2.086465851E+01, &
-      2.017054332E+02, -1.990879843E+01, 2.051622475E+02, -1.324886978E+01, &
-      2.059197452E+02, 1.051529813E+01, 1.972191446E+02, 9.320592785E+01, &
-      1.556894846E+02, 3.801682434E+02, 1.818989404E-12, 1.379853993E+03 ], [2,15] )
-    REAL(SP) :: xpts(15) = [ 60., 55., 50., 45., 40., 38., 36., 34., &
-      32., 31., 30.8, 30.6, 30.4, 30.2, 30. ]
+    REAL(SP), PARAMETER :: yans(2,15) = RESHAPE( [ 5.000000000E+00_SP, -6.888880126E-01_SP, &
+      8.609248635E+00_SP, -1.083092311E+00_SP, 1.674923836E+01_SP, -2.072210073E+00_SP, &
+      3.351098494E+01_SP, -4.479263780E+00_SP, 6.601103894E+01_SP, -8.909222513E+00_SP, &
+      8.579580988E+01_SP, -1.098742758E+01_SP, 1.106536877E+02_SP, -1.402469444E+01_SP, &
+      1.421228220E+02_SP, -1.742236546E+01_SP, 1.803383474E+02_SP, -2.086465851E+01_SP, &
+      2.017054332E+02_SP, -1.990879843E+01_SP, 2.051622475E+02_SP, -1.324886978E+01_SP, &
+      2.059197452E+02_SP, 1.051529813E+01_SP, 1.972191446E+02_SP, 9.320592785E+01_SP, &
+      1.556894846E+02_SP, 3.801682434E+02_SP, 1.818989404E-12_SP, 1.379853993E+03_SP ], &
+      [2,15] )
+    REAL(SP) :: xpts(15) = [ 60._SP, 55._SP, 50._SP, 45._SP, 40._SP, 38._SP, 36._SP, &
+      34._SP, 32._SP, 31._SP, 30.8_SP, 30.6_SP, 30.4_SP, 30.2_SP, 30._SP ]
     !* FIRST EXECUTABLE STATEMENT  QXBVSP
     IF( Kprint>=2 ) THEN
       WRITE (Lun,99001)
@@ -461,24 +462,24 @@ CONTAINS
       itmp(i) = 0
     END DO
     !
-    tol = 1.0E-03
-    xsave_com = 0.
+    tol = 1.0E-03_SP
+    xsave_com = 0._SP
     nrowy = 4
     ncomp = 2
     nxpts = 15
-    a(1,1) = 1.0
-    a(1,2) = 0.0
+    a(1,1) = 1._SP
+    a(1,2) = 0._SP
     nrowa = 2
-    alpha(1) = 5.0
+    alpha(1) = 5._SP
     nic = 1
-    b(1,1) = 1.0
-    b(1,2) = 0.0
+    b(1,1) = 1._SP
+    b(1,2) = 0._SP
     nrowb = 2
-    beta(1) = 0.0
+    beta(1) = 0._SP
     nfc = 1
     igofx = 1
-    re = 1.0E-05
-    ae = 1.0E-05
+    re = 1.0E-05_SP
+    ae = 1.0E-05_SP
     ndw = 1000
     ndiw = 100
     neqivp = 0
@@ -574,8 +575,8 @@ CONTAINS
           !
           kount = 3
           igofx = 1
-          re = -1.
-          ae = -2.
+          re = -1._SP
+          ae = -2._SP
         CASE (3)
           !
           WRITE (Lun,99013) iflag
@@ -585,8 +586,8 @@ CONTAINS
           !-----NROWA LESS THAN NIC
           !
           kount = 4
-          re = 1.0E-05
-          ae = 1.0E-05
+          re = 1.0E-05_SP
+          ae = 1.0E-05_SP
           nrowa = 0
           EXIT
         CASE (4)

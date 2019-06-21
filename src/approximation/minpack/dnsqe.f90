@@ -357,7 +357,7 @@ SUBROUTINE DNSQE(FCN,JAC,Iopt,N,X,Fvec,Tol,Nprint,Info,Wa,Lwa)
   REAL(DP) :: Fvec(N), Wa(Lwa), X(N)
   INTEGER :: indexx, j, lr, maxfev, ml, mode, mu, nfev, njev
   REAL(DP) :: epsfcn, xtol
-  REAL(DP), PARAMETER :: factor = 1.0D2, one = 1.0D0, zero = 0.0D0
+  REAL(DP), PARAMETER :: factor = 1.0D2, one = 1._DP, zero = 0._DP
   !     BEGIN BLOCK PERMITTING ...EXITS TO 20
   !* FIRST EXECUTABLE STATEMENT  DNSQE
   Info = 0

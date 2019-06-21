@@ -49,66 +49,66 @@ REAL(SP) FUNCTION SPENC(X)
   REAL(SP) :: X
   REAL(SP) :: aln
   INTEGER, SAVE :: nspenc
-  REAL(SP), PARAMETER :: xbig = 1.0/R1MACH(3)
-  REAL(SP), PARAMETER :: spencs(19) = [ .1527365598892406E0, .08169658058051014E0, &
-    .00581415714077873E0, .00053716198145415E0, .00005724704675185E0, &
-    .00000667454612164E0, .00000082764673397E0, .00000010733156730E0, &
-    .00000001440077294E0, .00000000198444202E0, .00000000027940058E0, &
-    .00000000004003991E0, .00000000000582346E0, .00000000000085767E0, &
-    .00000000000012768E0, .00000000000001918E0, .00000000000000290E0, &
-    .00000000000000044E0, .00000000000000006E0 ]
-  REAL(SP), PARAMETER ::  pi26 = 1.644934066848226E0
+  REAL(SP), PARAMETER :: xbig = 1._SP/R1MACH(3)
+  REAL(SP), PARAMETER :: spencs(19) = [ .1527365598892406_SP, .08169658058051014_SP, &
+    .00581415714077873_SP, .00053716198145415_SP, .00005724704675185_SP, &
+    .00000667454612164_SP, .00000082764673397_SP, .00000010733156730_SP, &
+    .00000001440077294_SP, .00000000198444202_SP, .00000000027940058_SP, &
+    .00000000004003991_SP, .00000000000582346_SP, .00000000000085767_SP, &
+    .00000000000012768_SP, .00000000000001918_SP, .00000000000000290_SP, &
+    .00000000000000044_SP, .00000000000000006_SP ]
+  REAL(SP), PARAMETER ::  pi26 = 1.644934066848226_SP
   LOGICAL, SAVE :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  SPENC
   IF( first ) THEN
-    nspenc = INITS(spencs,19,0.1*R1MACH(3))
+    nspenc = INITS(spencs,19,0.1_SP*R1MACH(3))
     first = .FALSE.
   END IF
   !
-  IF( X>2.0 ) THEN
+  IF( X>2._SP ) THEN
     !
     ! X > 2.0
     !
-    SPENC = 2.0*pi26 - 0.5*LOG(X)**2
-    IF( X<xbig ) SPENC = SPENC - (1.0+CSEVL(4.0/X-1.0,spencs,nspenc))/X
+    SPENC = 2._SP*pi26 - 0.5_SP*LOG(X)**2
+    IF( X<xbig ) SPENC = SPENC - (1._SP+CSEVL(4._SP/X-1._SP,spencs,nspenc))/X
     RETURN
-  ELSEIF( X<=1.0 ) THEN
-    IF( X>0.5 ) THEN
+  ELSEIF( X<=1._SP ) THEN
+    IF( X>0.5_SP ) THEN
       !
       ! 0.5 < X <= 1.0
       !
       SPENC = pi26
-      IF( X/=1.0 ) SPENC = pi26 - LOG(X)*LOG(1.0-X) - (1.0-X)&
-        *(1.0+CSEVL(4.0*(1.0-X)-1.0,spencs,nspenc))
+      IF( X/=1._SP ) SPENC = pi26 - LOG(X)*LOG(1._SP-X) - (1._SP-X)&
+        *(1._SP+CSEVL(4._SP*(1._SP-X)-1._SP,spencs,nspenc))
       RETURN
-    ELSEIF( X>=0.0 ) THEN
+    ELSEIF( X>=0._SP ) THEN
       !
       ! 0.0 <= X <= 0.5
       !
-      SPENC = X*(1.0+CSEVL(4.0*X-1.0,spencs,nspenc))
+      SPENC = X*(1._SP+CSEVL(4._SP*X-1._SP,spencs,nspenc))
       RETURN
-    ELSEIF( X>(-1.) ) THEN
+    ELSEIF( X>(-1._SP) ) THEN
       !
       ! -1.0 < X < 0.0
       !
-      SPENC = -0.5*LOG(1.0-X)&
-        **2 - X*(1.0+CSEVL(4.0*X/(X-1.0)-1.0,spencs,nspenc))/(X-1.0)
+      SPENC = -0.5_SP*LOG(1._SP-X)&
+        **2 - X*(1._SP+CSEVL(4._SP*X/(X-1._SP)-1._SP,spencs,nspenc))/(X-1._SP)
       RETURN
     ELSE
       !
       ! HERE IF X <= -1.0
       !
-      aln = LOG(1.0-X)
-      SPENC = -pi26 - 0.5*aln*(2.0*LOG(-X)-aln)
+      aln = LOG(1._SP-X)
+      SPENC = -pi26 - 0.5_SP*aln*(2._SP*LOG(-X)-aln)
       IF( X>(-xbig) ) SPENC = SPENC + &
-        (1.0+CSEVL(4.0/(1.0-X)-1.0,spencs,nspenc))/(1.0-X)
+        (1._SP+CSEVL(4._SP/(1._SP-X)-1._SP,spencs,nspenc))/(1._SP-X)
       RETURN
     END IF
   END IF
   !
   ! 1.0 < X <= 2.0
   !
-  SPENC = pi26 - 0.5*LOG(X)*LOG((X-1.0)**2/X) + (X-1.)&
-    *(1.0+CSEVL(4.0*(X-1.)/X-1.0,spencs,nspenc))/X
+  SPENC = pi26 - 0.5_SP*LOG(X)*LOG((X-1._SP)**2/X) + (X-1._SP)&
+    *(1._SP+CSEVL(4._SP*(X-1._SP)/X-1._SP,spencs,nspenc))/X
   RETURN
 END FUNCTION SPENC

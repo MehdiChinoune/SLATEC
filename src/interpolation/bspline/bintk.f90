@@ -124,7 +124,7 @@ SUBROUTINE BINTK(X,Y,T,N,K,Bcoef,Q,Work)
       !                ZERO OUT ALL ENTRIES OF Q
       lenq = N*(K+km1)
       DO i = 1, lenq
-        Q(i) = 0.0E0
+        Q(i) = 0._SP
       END DO
       !
       !  ***   LOOP OVER I TO CONSTRUCT THE  N  INTERPOLATION EQUATIONS

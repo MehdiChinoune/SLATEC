@@ -308,18 +308,18 @@ REAL(DP) FUNCTION DRJ(X,Y,Z,P,Ier)
   REAL(DP) :: alfa, beta, ea, eb, ec, e2, e3, epslon, lamda, mu, pn, pndev, power4, &
     sigma, s1, s2, s3, xn, xndev,xnroot, yn, yndev, ynroot, zn, zndev, znroot
   CHARACTER(16) :: xern3, xern4, xern5, xern6, xern7
-  REAL(DP), PARAMETER :: errtol = (D1MACH(3)/3.0D0)**(1.0D0/6.0D0), &
-    lolim = (5.0D0*D1MACH(1))**(1.0D0/3.0D0), &
-    uplim = 0.30D0*(D1MACH(2)/5.0D0)**(1.0D0/3.0D0)
-  REAL(DP), PARAMETER :: c1 = 3.0D0/14.0D0, c2 = 1.0D0/3.0D0, c3 = 3.0D0/22.0D0, &
-    c4 = 3.0D0/26.0D0
+  REAL(DP), PARAMETER :: errtol = (D1MACH(3)/3._DP)**(1._DP/6._DP), &
+    lolim = (5._DP*D1MACH(1))**(1._DP/3._DP), &
+    uplim = 0.30_DP*(D1MACH(2)/5._DP)**(1._DP/3._DP)
+  REAL(DP), PARAMETER :: c1 = 3._DP/14._DP, c2 = 1._DP/3._DP, c3 = 3._DP/22._DP, &
+    c4 = 3._DP/26._DP
   !
   !* FIRST EXECUTABLE STATEMENT  DRJ
   !
   !         CALL ERROR HANDLER IF NECESSARY.
   !
-  DRJ = 0.0D0
-  IF( MIN(X,Y,Z)<0.0D0 ) THEN
+  DRJ = 0._DP
+  IF( MIN(X,Y,Z)<0._DP ) THEN
     Ier = 1
     WRITE (xern3,'(1PE15.6)') X
     WRITE (xern4,'(1PE15.6)') Y
@@ -359,11 +359,11 @@ REAL(DP) FUNCTION DRJ(X,Y,Z,P,Ier)
   yn = Y
   zn = Z
   pn = P
-  sigma = 0.0D0
-  power4 = 1.0D0
+  sigma = 0._DP
+  power4 = 1._DP
   DO
     !
-    mu = (xn+yn+zn+pn+pn)*0.20D0
+    mu = (xn+yn+zn+pn+pn)*0.20_DP
     xndev = (mu-xn)/mu
     yndev = (mu-yn)/mu
     zndev = (mu-zn)/mu
@@ -374,12 +374,12 @@ REAL(DP) FUNCTION DRJ(X,Y,Z,P,Ier)
       ea = xndev*(yndev+zndev) + yndev*zndev
       eb = xndev*yndev*zndev
       ec = pndev*pndev
-      e2 = ea - 3.0D0*ec
-      e3 = eb + 2.0D0*pndev*(ea-ec)
-      s1 = 1.0D0 + e2*(-c1+0.750D0*c3*e2-1.50D0*c4*e3)
-      s2 = eb*(0.50D0*c2+pndev*(-c3-c3+pndev*c4))
+      e2 = ea - 3._DP*ec
+      e3 = eb + 2._DP*pndev*(ea-ec)
+      s1 = 1._DP + e2*(-c1+0.750_DP*c3*e2-1.50_DP*c4*e3)
+      s2 = eb*(0.50_DP*c2+pndev*(-c3-c3+pndev*c4))
       s3 = pndev*ea*(c2-pndev*c3) - c2*pndev*ec
-      DRJ = 3.0D0*sigma + power4*(s1+s2+s3)/(mu*SQRT(mu))
+      DRJ = 3._DP*sigma + power4*(s1+s2+s3)/(mu*SQRT(mu))
       EXIT
     ELSE
       xnroot = SQRT(xn)
@@ -390,11 +390,11 @@ REAL(DP) FUNCTION DRJ(X,Y,Z,P,Ier)
       alfa = alfa*alfa
       beta = pn*(pn+lamda)*(pn+lamda)
       sigma = sigma + power4*DRC(alfa,beta,Ier)
-      power4 = power4*0.250D0
-      xn = (xn+lamda)*0.250D0
-      yn = (yn+lamda)*0.250D0
-      zn = (zn+lamda)*0.250D0
-      pn = (pn+lamda)*0.250D0
+      power4 = power4*0.250_DP
+      xn = (xn+lamda)*0.250_DP
+      yn = (yn+lamda)*0.250_DP
+      zn = (zn+lamda)*0.250_DP
+      pn = (pn+lamda)*0.250_DP
     END IF
   END DO
 END FUNCTION DRJ

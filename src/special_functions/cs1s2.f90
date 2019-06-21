@@ -30,20 +30,20 @@ SUBROUTINE CS1S2(Zr,S1,S2,Nz,Ascle,Alim,Iuf)
   COMPLEX(SP) :: c1, S1, s1d, S2, Zr
   REAL(SP) :: aa, Alim, aln, Ascle, as1, as2, xx
   INTEGER :: Iuf, Nz
-  COMPLEX(SP), PARAMETER :: czero  = (0.0E0,0.0E0)
+  COMPLEX(SP), PARAMETER :: czero  = (0._SP,0._SP)
   !* FIRST EXECUTABLE STATEMENT  CS1S2
   Nz = 0
   as1 = ABS(S1)
   as2 = ABS(S2)
   aa = REAL(S1)
   aln = AIMAG(S1)
-  IF( aa/=0.0E0 .OR. aln/=0.0E0 ) THEN
-    IF( as1/=0.0E0 ) THEN
+  IF( aa/=0._SP .OR. aln/=0._SP ) THEN
+    IF( as1/=0._SP ) THEN
       xx = REAL(Zr)
       aln = -xx - xx + LOG(as1)
       s1d = S1
       S1 = czero
-      as1 = 0.0E0
+      as1 = 0._SP
       IF( aln>=(-Alim) ) THEN
         c1 = LOG(s1d) - Zr - Zr
         S1 = EXP(c1)

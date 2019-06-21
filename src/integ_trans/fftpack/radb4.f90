@@ -29,7 +29,7 @@ SUBROUTINE RADB4(Ido,L1,Cc,Ch,Wa1,Wa2,Wa3)
   INTEGER :: i, ic, idp2, k
   REAL(SP) :: ci2, ci3, ci4, cr2, cr3, cr4, sqrt2, ti1, ti2, ti3, ti4, tr1, tr2, tr3, tr4
   !* FIRST EXECUTABLE STATEMENT  RADB4
-  sqrt2 = SQRT(2.)
+  sqrt2 = SQRT(2._SP)
   DO k = 1, L1
     tr1 = Cc(1,1,k) - Cc(Ido,4,k)
     tr2 = Cc(1,1,k) + Cc(Ido,4,k)

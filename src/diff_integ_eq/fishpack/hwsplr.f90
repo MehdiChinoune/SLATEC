@@ -338,7 +338,7 @@ SUBROUTINE HWSPLR(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   IF( Ierror/=0 ) RETURN
   mp1 = M + 1
   deltar = (B-A)/M
-  dlrby2 = deltar/2.
+  dlrby2 = deltar/2._SP
   dlrsq = deltar**2
   np1 = N + 1
   deltht = (D-C)/N
@@ -383,7 +383,7 @@ SUBROUTINE HWSPLR(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   id4 = id3 + munk
   id5 = id4 + munk
   id6 = id5 + munk
-  a1 = 2./dlrsq
+  a1 = 2._SP/dlrsq
   ij = 0
   IF( Mbdcnd==3 .OR. Mbdcnd==4 ) ij = 1
   DO i = 1, munk
@@ -391,7 +391,7 @@ SUBROUTINE HWSPLR(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
     j = id5 + i
     W(j) = r
     j = id6 + i
-    W(j) = 1./r**2
+    W(j) = 1._SP/r**2
     W(i) = (r-dlrby2)/(r*dlrsq)
     j = id3 + i
     W(j) = (r+dlrby2)/(r*dlrsq)
@@ -413,7 +413,7 @@ SUBROUTINE HWSPLR(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   !
   SELECT CASE (Mbdcnd)
     CASE (3,4)
-      a1 = 2.*deltar*W(1)
+      a1 = 2._SP*deltar*W(1)
       DO j = nstart, nstop
         F(1,j) = F(1,j) + a1*Bda(j)
       END DO
@@ -426,7 +426,7 @@ SUBROUTINE HWSPLR(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   END SELECT
   SELECT CASE (Mbdcnd)
     CASE (2,3,6)
-      a1 = 2.*deltar*W(id4)
+      a1 = 2._SP*deltar*W(id4)
       DO j = nstart, nstop
         F(mp1,j) = F(mp1,j) - a1*Bdb(j)
       END DO
@@ -439,14 +439,14 @@ SUBROUTINE HWSPLR(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   !
   !     ENTER BOUNDARY DATA FOR THETA-BOUNDARIES.
   !
-  a1 = 1./dlthsq
+  a1 = 1._SP/dlthsq
   l = id5 - mstart + 1
   lp = id6 - mstart + 1
   SELECT CASE (np)
     CASE (1)
       GOTO 100
     CASE (4,5)
-      a1 = 2./deltht
+      a1 = 2._SP/deltht
       DO i = mstart, mstop
         j = i + lp
         F(i,1) = F(i,1) + a1*W(j)*Bdc(i)
@@ -457,11 +457,11 @@ SUBROUTINE HWSPLR(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
         F(i,2) = F(i,2) - a1*W(j)*F(i,1)
       END DO
   END SELECT
-  a1 = 1./dlthsq
+  a1 = 1._SP/dlthsq
   SELECT CASE (np)
     CASE (1)
     CASE (3,4)
-      a1 = 2./deltht
+      a1 = 2._SP/deltht
       DO i = mstart, mstop
         j = i + lp
         F(i,np1) = F(i,np1) - a1*W(j)*Bdd(i)
@@ -478,31 +478,31 @@ SUBROUTINE HWSPLR(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   !
   100 CONTINUE
   IF( Mbdcnd>=5 .AND. Nbdcnd==3 ) F(1,1) = F(1,1) - (Bdd(2)-Bdc(2))&
-    *4./(N*deltht*dlrsq)
+    *4._SP/(N*deltht*dlrsq)
   !
   !     ADJUST RIGHT SIDE OF SINGULAR PROBLEMS TO INSURE EXISTENCE OF A
   !     SOLUTION.
   !
-  Pertrb = 0.
+  Pertrb = 0._SP
   IF( Elmbda<0 ) THEN
   ELSEIF( Elmbda==0 ) THEN
     IF( Nbdcnd==0 .OR. Nbdcnd==3 ) THEN
-      s2 = 0.
+      s2 = 0._SP
       SELECT CASE (Mbdcnd)
         CASE (1,2,4,5)
           GOTO 200
         CASE (6)
         CASE DEFAULT
-          W(id5+1) = .5*(W(id5+2)-dlrby2)
-          s2 = .25*deltar
+          W(id5+1) = 0.5_SP*(W(id5+2)-dlrby2)
+          s2 = 0.25_SP*deltar
       END SELECT
-      a2 = 2.
-      IF( Nbdcnd==0 ) a2 = 1.
+      a2 = 2._SP
+      IF( Nbdcnd==0 ) a2 = 1._SP
       j = id5 + munk
-      W(j) = .5*(W(j-1)+dlrby2)
-      s = 0.
+      W(j) = 0.5_SP*(W(j-1)+dlrby2)
+      s = 0._SP
       DO i = mstart, mstop
-        s1 = 0.
+        s1 = 0._SP
         ij = nstart + 1
         k = nstop - 1
         DO j = ij, k
@@ -511,10 +511,10 @@ SUBROUTINE HWSPLR(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
         j = i + l
         s = s + (a2*s1+F(i,nstart)+F(i,nstop))*W(j)
       END DO
-      s2 = M*A + deltar*((M-1)*(M+1)*.5+.25) + s2
-      s1 = (2.+a2*(nunk-2))*s2
+      s2 = M*A + deltar*((M-1)*(M+1)*.5_SP+.25_SP) + s2
+      s1 = (2._SP+a2*(nunk-2))*s2
       IF( Mbdcnd/=3 ) THEN
-        s2 = N*a2*deltar/8.
+        s2 = N*a2*deltar/8._SP
         s = s + F(1,1)*s2
         s1 = s1 + s2
       END IF
@@ -545,8 +545,8 @@ SUBROUTINE HWSPLR(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
       F(i,j) = a1*F(i,j)
     END DO
   END DO
-  W(1) = 0.
-  W(id4) = 0.
+  W(1) = 0._SP
+  W(id4) = 0._SP
   !
   !     CALL GENBUN TO SOLVE THE SYSTEM OF EQUATIONS.
   !
@@ -562,7 +562,7 @@ SUBROUTINE HWSPLR(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
       !     ADJUST THE SOLUTION AS NECESSARY FOR THE PROBLEMS WHERE A = 0.
       !
       IF( Elmbda==0. ) THEN
-        ypole = 0.
+        ypole = 0._SP
         GOTO 300
       END IF
   END SELECT
@@ -575,21 +575,21 @@ SUBROUTINE HWSPLR(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
     k = id3 + i
     W(j) = W(i)/(W(lp)-W(k)*W(j+1))
   END DO
-  W(id5+1) = -.5*dlthsq/(W(id2+1)-W(id3+1)*W(id5+2))
+  W(id5+1) = -.5_SP*dlthsq/(W(id2+1)-W(id3+1)*W(id5+2))
   DO i = 2, munk
     j = id5 + i
     W(j) = -W(j)*W(j-1)
   END DO
-  s = 0.
+  s = 0._SP
   DO j = nstart, nstop
     s = s + F(2,j)
   END DO
   a2 = nunk
   IF( Nbdcnd/=0 ) THEN
-    s = s - .5*(F(2,nstart)+F(2,nstop))
-    a2 = a2 - 1.
+    s = s - 0.5_SP*(F(2,nstart)+F(2,nstop))
+    a2 = a2 - 1._SP
   END IF
-  ypole = (.25*dlrsq*F(1,1)-s/a2)/(W(id5+1)-1.+Elmbda*dlrsq*.25)
+  ypole = (.25_SP*dlrsq*F(1,1)-s/a2)/(W(id5+1)-1._SP+Elmbda*dlrsq*.25_SP)
   DO i = mstart, mstop
     k = l + i
     DO j = nstart, nstop

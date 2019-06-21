@@ -340,7 +340,7 @@ SUBROUTINE SCGN(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MTTVEC,MSOLVE,Itol,Tol,&
       !
       !         Calculate coefficient BK and direction vector P.
       bknum = DOT_PRODUCT(Z,R)
-      IF( bknum<=0.0E0 ) THEN
+      IF( bknum<=0._SP ) THEN
         Ierr = 6
         RETURN
       END IF
@@ -359,7 +359,7 @@ SUBROUTINE SCGN(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MTTVEC,MSOLVE,Itol,Tol,&
       IF( Iter/=1 ) CALL SAXPY(N,bk,Atp,1,Atz,1)
       Atp = Atz
       akden = DOT_PRODUCT(Atp,Atp)
-      IF( akden<=0.0E0 ) THEN
+      IF( akden<=0._SP ) THEN
         Ierr = 6
         RETURN
       END IF

@@ -105,25 +105,25 @@ CONTAINS
     !     FNUL is the lower boundary of the asymptotic series for large FNU.
     !-----------------------------------------------------------------------
     r1m4 = R1MACH(4)
-    tol = MAX(r1m4,1.0E-18)
-    atol = 100.0E0*tol
+    tol = MAX(r1m4,1.E-18_SP)
+    atol = 100._SP*tol
     aa = -LOG10(r1m4)
     k1 = I1MACH(12)
     k2 = I1MACH(13)
     r1m5 = R1MACH(5)
     k = MIN(ABS(k1),ABS(k2))
-    elim = 2.303E0*(k*r1m5-3.0E0)
-    ab = aa*2.303E0
-    alim = elim + MAX(-ab,-41.45E0)
-    dig = MIN(aa,18.0E0)
-    slak = 3.0E0 + 4.0E0*(-LOG10(tol)-7.0E0)/11.0E0
-    slak = MAX(slak,3.0E0)
-    ertol = tol*10.0E0**slak
-    rl = 1.2E0*dig + 3.0E0
-    rm = 0.5E0*(alim+elim)
-    rm = MIN(rm,200.0E0)
-    rm = MAX(rm,rl+10.0E0)
-    fnul = 10.0E0 + 6.0E0*(dig-3.0E0)
+    elim = 2.303_SP*(k*r1m5-3._SP)
+    ab = aa*2.303_SP
+    alim = elim + MAX(-ab,-41.45_SP)
+    dig = MIN(aa,18._SP)
+    slak = 3._SP + 4._SP*(-LOG10(tol)-7._SP)/11._SP
+    slak = MAX(slak,3._SP)
+    ertol = tol*10._SP**slak
+    rl = 1.2_SP*dig + 3._SP
+    rm = 0.5_SP*(alim+elim)
+    rm = MIN(rm,200._SP)
+    rm = MAX(rm,rl+10._SP)
+    fnul = 10._SP + 6._SP*(dig-3._SP)
     IF( Kprint>=2 ) THEN
       WRITE (Lun,99002)
       99002 FORMAT (' PARAMETERS'/5X,'TOL ',8X,'ELIM',8X,'ALIM',8X,'RL  ',8X,'FNUL',&
@@ -134,21 +134,21 @@ CONTAINS
     !-----------------------------------------------------------------------
     !     Generate angles for construction of complex Z to be used in tests.
     !-----------------------------------------------------------------------
-    fpi = ATAN(1.0E0)
+    fpi = ATAN(1._SP)
     hpi = fpi + fpi
     pi = hpi + hpi
     tpi = pi + pi
-    rpi = 1.0E0/pi
-    tpi3 = tpi/3.0E0
-    spi = pi/6.0E0
+    rpi = 1._SP/pi
+    tpi3 = tpi/3._SP
+    spi = pi/6._SP
     pi3 = spi + spi
-    rtpi = 1.0E0/tpi
+    rtpi = 1._SP/tpi
     a1 = rtpi*COS(spi)
     a2 = rtpi*SIN(spi)
-    con1 = CMPLX(COS(tpi3),SIN(tpi3))
-    con2 = CMPLX(a1,-a2)
-    con3 = CMPLX(rpi,0.0E0)
-    c23 = 2.0E0/3.0E0
+    con1 = CMPLX(COS(tpi3),SIN(tpi3),SP)
+    con2 = CMPLX(a1,-a2,SP)
+    con3 = CMPLX(rpi,0._SP,SP)
+    c23 = 2._SP/3._SP
     !-----------------------------------------------------------------------
     !     KDO(K), K = 1,IL  determines which of the IL angles in -PI to PI
     !     are used to compute values of Z.
@@ -184,7 +184,7 @@ CONTAINS
       keps(6) = 1
     END IF
     i = 2
-    eps = 0.01E0
+    eps = 0.01_SP
     film = il - 1
     t(1) = -pi + eps
     DO k = 2, il
@@ -220,11 +220,11 @@ CONTAINS
             !------------ switch (irset)
             SELECT CASE (irset)
               CASE (2)
-                r = (2.0E0*(4-ir)+rl*(ir-1))/3.0E0
+                r = (2._SP*(4-ir)+rl*(ir-1))/3._SP
               CASE (3)
-                r = (rl*(4-ir)+rm*(ir-1))/3.0E0
+                r = (rl*(4-ir)+rm*(ir-1))/3._SP
               CASE DEFAULT
-                r = 2.0E0*(ir-1)/3.0E0
+                r = 2._SP*(ir-1)/3._SP
             END SELECT
             !------------ end switch
             DO it = 1, itl
@@ -237,15 +237,15 @@ CONTAINS
               !----------------------------------------------------------------------
               ct = COS(t(it))
               st = SIN(t(it))
-              IF( ABS(ct)<atol ) ct = 0.0E0
-              IF( ABS(st)<atol ) st = 0.0E0
-              z = CMPLX(r*ct,r*st)
-              zr = CMPLX(c23,0.0E0)*z*SQRT(z)
+              IF( ABS(ct)<atol ) ct = 0._SP
+              IF( ABS(st)<atol ) st = 0._SP
+              z = CMPLX(r*ct,r*st,SP)
+              zr = CMPLX(c23,0._SP,SP)*z*SQRT(z)
               rzr = REAL(zr)
               arzr = ABS(rzr)
               !-------------- Check for possible underflow or overflow
-              IF( arzr/=0.0E0 ) THEN
-                arg = -arzr - 0.5E0*LOG(arzr) + 0.226E0
+              IF( arzr/=0._SP ) THEN
+                arg = -arzr - 0.5_SP*LOG(arzr) + 0.226_SP
                 arg = arg + arg
                 !---------------- Skip test for this case?
                 IF( arg<(-elim) ) CYCLE
@@ -265,7 +265,7 @@ CONTAINS
                   !     square root.
                   !-----------------------------------------------------------------------
                   !------------------ Adjust scaling factor.
-                  cv = CMPLX(arzr,0.0E0) - zr
+                  cv = CMPLX(arzr,0._SP,SP) - zr
                   cv = EXP(cv)
                   w(1) = w(1)*cv
                   w(2) = w(2)*cv
@@ -468,25 +468,25 @@ CONTAINS
     !     FNUL is the lower boundary of the asymptotic series for large FNU.
     !-----------------------------------------------------------------------
     r1m4 = R1MACH(4)
-    tol = MAX(r1m4,1.0E-18)
-    atol = 100.0E0*tol
+    tol = MAX(r1m4,1.E-18_SP)
+    atol = 100._SP*tol
     aa = -LOG10(r1m4)
     k1 = I1MACH(12)
     k2 = I1MACH(13)
     r1m5 = R1MACH(5)
     k = MIN(ABS(k1),ABS(k2))
-    elim = 2.303E0*(k*r1m5-3.0E0)
-    ab = aa*2.303E0
-    alim = elim + MAX(-ab,-41.45E0)
-    dig = MIN(aa,18.0E0)
-    fnul = 10.0E0 + 6.0E0*(dig-3.0E0)
-    rl = 1.2E0*dig + 3.0E0
-    slak = 3.0E0 + 4.0E0*(-LOG10(tol)-7.0E0)/11.0E0
-    slak = MAX(slak,3.0E0)
-    ertol = tol*10.0E0**slak
-    rm = 0.5E0*(alim+elim)
-    rm = MIN(rm,200.0E0)
-    rm = MAX(rm,rl+10.0E0)
+    elim = 2.303_SP*(k*r1m5-3._SP)
+    ab = aa*2.303_SP
+    alim = elim + MAX(-ab,-41.45_SP)
+    dig = MIN(aa,18._SP)
+    fnul = 10._SP + 6._SP*(dig-3._SP)
+    rl = 1.2_SP*dig + 3._SP
+    slak = 3._SP + 4._SP*(-LOG10(tol)-7._SP)/11._SP
+    slak = MAX(slak,3._SP)
+    ertol = tol*10._SP**slak
+    rm = 0.5_SP*(alim+elim)
+    rm = MIN(rm,200._SP)
+    rm = MAX(rm,rl+10._SP)
     r2 = MIN(fnul,rm)
     IF( Kprint>=2 ) THEN
       WRITE (Lun,99002)
@@ -498,11 +498,11 @@ CONTAINS
     !-----------------------------------------------------------------------
     !     Set other constants needed in the tests.
     !-----------------------------------------------------------------------
-    fpi = ATAN(1.0E0)
+    fpi = ATAN(1._SP)
     hpi = fpi + fpi
     pi = hpi + hpi
-    rfpi = 1.0E0/fpi
-    zn = CMPLX(0.0E0,-rfpi)
+    rfpi = 1._SP/fpi
+    zn = CMPLX(0._SP,-rfpi,SP)
     !-----------------------------------------------------------------------
     !     Generate angles for construction of complex Z to be used in tests.
     !-----------------------------------------------------------------------
@@ -528,11 +528,11 @@ CONTAINS
         kdo(i) = 0
       END DO
       nul = 5
-      xnu(1) = 0.0E0
-      xnu(2) = 1.0E0
-      xnu(3) = 2.0E0
-      xnu(4) = 0.5E0*fnul
-      xnu(5) = fnul + 1.1E0
+      xnu(1) = 0._SP
+      xnu(2) = 1._SP
+      xnu(3) = 2._SP
+      xnu(4) = 0.5_SP*fnul
+      xnu(5) = fnul + 1.1_SP
     ELSE
       nl = 4
       il = 13
@@ -551,15 +551,15 @@ CONTAINS
       keps(10) = 1
       keps(11) = 1
       nul = 6
-      xnu(1) = 0.0E0
-      xnu(2) = 0.6E0
-      xnu(3) = 1.3E0
-      xnu(4) = 2.0E0
-      xnu(5) = 0.5E0*fnul
-      xnu(6) = fnul + 1.1E0
+      xnu(1) = 0._SP
+      xnu(2) = 0.6_SP
+      xnu(3) = 1.3_SP
+      xnu(4) = 2._SP
+      xnu(5) = 0.5_SP*fnul
+      xnu(6) = fnul + 1.1_SP
     END IF
     i = 2
-    eps = 0.01E0
+    eps = 0.01_SP
     film = il - 1
     t(1) = -pi + eps
     DO k = 2, il
@@ -595,23 +595,23 @@ CONTAINS
               !-------------- switch (icase)
               SELECT CASE (icase)
                 CASE (2)
-                  r = (2.0E0*(3-ir)+r2*(ir-1))/2.0E0
+                  r = (2._SP*(3-ir)+r2*(ir-1))/2._SP
                 CASE (3)
                   IF( r2>=rm ) EXIT
-                  r = (r2*(3-ir)+rm*(ir-1))/2.0E0
+                  r = (r2*(3-ir)+rm*(ir-1))/2._SP
                 CASE DEFAULT
-                  r = (eps*(3-ir)+2.0E0*(ir-1))/2.0E0
+                  r = (eps*(3-ir)+2._SP*(ir-1))/2._SP
               END SELECT
               !-------------- end switch
               DO it = 1, itl
                 ct = COS(t(it))
                 st = SIN(t(it))
-                IF( ABS(ct)<atol ) ct = 0.0E0
-                IF( ABS(st)<atol ) st = 0.0E0
-                z = CMPLX(r*ct,r*st)
-                IF( fnu>=2.0E0 ) THEN
+                IF( ABS(ct)<atol ) ct = 0._SP
+                IF( ABS(st)<atol ) st = 0._SP
+                z = CMPLX(r*ct,r*st,SP)
+                IF( fnu>=2._SP ) THEN
                   !------------------ Check for possible overflow condition
-                  cv = z*(0.0E0,1.0E0)
+                  cv = z*(0._SP,1._SP)
                   CALL CUOIK(cv,fnu,kode,2,n1,w,nz2,tol,elim,alim)
                   !------------------ Overflow detected? - skip test for this case
                   IF( nz2==(-1) ) CYCLE
@@ -822,27 +822,27 @@ CONTAINS
     !     FNUL is the lower boundary of the asymptotic series for large FNU.
     !-----------------------------------------------------------------------
     r1m4 = R1MACH(4)
-    tol = MAX(r1m4,1.0E-18)
-    atol = 100.0E0*tol
+    tol = MAX(r1m4,1.E-18_SP)
+    atol = 100._SP*tol
     aa = -LOG10(r1m4)
     k1 = I1MACH(12)
     k2 = I1MACH(13)
     r1m5 = R1MACH(5)
     k = MIN(ABS(k1),ABS(k2))
-    elim = 2.303E0*(k*r1m5-3.0E0)
-    ab = aa*2.303E0
-    alim = elim + MAX(-ab,-41.45E0)
-    dig = MIN(aa,18.0E0)
-    fnul = 10.0E0 + 6.0E0*(dig-3.0E0)
-    rl = 1.2E0*dig + 3.0E0
-    slak = 3.0E0 + 4.0E0*(-LOG10(tol)-7.0E0)/11.0E0
-    slak = MAX(slak,3.0E0)
-    ertol = tol*10.0E0**slak
-    rm = 0.5E0*(alim+elim)
-    rm = MIN(rm,200.0E0)
-    rm = MAX(rm,rl+10.0E0)
+    elim = 2.303_SP*(k*r1m5-3._SP)
+    ab = aa*2.303_SP
+    alim = elim + MAX(-ab,-41.45_SP)
+    dig = MIN(aa,18._SP)
+    fnul = 10._SP + 6._SP*(dig-3._SP)
+    rl = 1.2_SP*dig + 3._SP
+    slak = 3._SP + 4._SP*(-LOG10(tol)-7._SP)/11._SP
+    slak = MAX(slak,3._SP)
+    ertol = tol*10._SP**slak
+    rm = 0.5_SP*(alim+elim)
+    rm = MIN(rm,200._SP)
+    rm = MAX(rm,rl+10._SP)
     r2 = MIN(rm,fnul)
-    r1 = 2.0E0*SQRT(fnul+1.0E0)
+    r1 = 2._SP*SQRT(fnul+1._SP)
     IF( Kprint>=2 ) THEN
       WRITE (Lun,99002)
       99002 FORMAT (' PARAMETERS'/5X,'TOL ',8X,'ELIM',8X,'ALIM',8X,'RL  ',8X,'FNUL',&
@@ -853,9 +853,9 @@ CONTAINS
     !-----------------------------------------------------------------------
     !     Set other constants needed in the tests.
     !-----------------------------------------------------------------------
-    zz = CMPLX(1.0E0/tol,0.0E0)
-    cone = CMPLX(1.0E0,0.0E0)
-    hpi = 2.0E0*ATAN(1.0E0)
+    zz = CMPLX(1._SP/tol,0._SP,SP)
+    cone = CMPLX(1._SP,0._SP,SP)
+    hpi = 2._SP*ATAN(1._SP)
     pi = hpi + hpi
     !-----------------------------------------------------------------------
     !     Generate angles for construction of complex Z to be used in tests.
@@ -900,7 +900,7 @@ CONTAINS
       keps(11) = 1
     END IF
     i = 2
-    eps = 0.01E0
+    eps = 0.01_SP
     film = il - 1
     t(1) = -pi + eps
     DO k = 2, il
@@ -937,37 +937,37 @@ CONTAINS
             !------------ switch (icase)
             SELECT CASE (icase)
               CASE (2)
-                r = (rl*(3-ir)+r2*(ir-1))/2.0E0
-                gnu = SQRT(r+r) - 0.2E0 - (n-1)
-                fnu = MAX(0.0E0,gnu)
+                r = (rl*(3-ir)+r2*(ir-1))/2._SP
+                gnu = SQRT(r+r) - 0.2_SP - (n-1)
+                fnu = MAX(0._SP,gnu)
               CASE (3)
                 IF( r2>=rm ) GOTO 100
-                r = (r2*(3-ir)+rm*(ir-1))/2.0E0
-                gnu = SQRT(r+r) - 0.2E0 - (n-1)
-                fnu = MAX(0.0E0,gnu)
+                r = (r2*(3-ir)+rm*(ir-1))/2._SP
+                gnu = SQRT(r+r) - 0.2_SP - (n-1)
+                fnu = MAX(0._SP,gnu)
               CASE (4)
                 IF( r1>=rl ) GOTO 100
-                r = (r1*(3-ir)+rl*(ir-1))/2.0E0
-                fnu = fnul - 0.2E0 - (n-1)
+                r = (r1*(3-ir)+rl*(ir-1))/2._SP
+                fnu = fnul - 0.2_SP - (n-1)
               CASE (5)
-                r = (rl*(3-ir)+r2*(ir-1))/2.0E0
-                fnu = fnul - 0.2E0 - (n-1)
+                r = (rl*(3-ir)+r2*(ir-1))/2._SP
+                fnu = fnul - 0.2_SP - (n-1)
               CASE (6)
                 IF( r2>=rm ) GOTO 100
-                r = (r2*(3-ir)+rm*(ir-1))/2.0E0
-                fnu = fnul - 0.2E0 - (n-1)
+                r = (r2*(3-ir)+rm*(ir-1))/2._SP
+                fnu = fnul - 0.2_SP - (n-1)
               CASE DEFAULT
-                r = (2.0E0*(3-ir)+rl*(ir-1))/2.0E0
-                gnu = r*r/4.0E0 - 0.2E0 - (n-1)
-                fnu = MAX(0.0E0,gnu)
+                r = (2._SP*(3-ir)+rl*(ir-1))/2._SP
+                gnu = r*r/4._SP - 0.2_SP - (n-1)
+                fnu = MAX(0._SP,gnu)
             END SELECT
             !------------ end switch
             DO it = 1, itl
               ct = COS(t(it))
               st = SIN(t(it))
-              IF( ABS(ct)<atol ) ct = 0.0E0
-              IF( ABS(st)<atol ) st = 0.0E0
-              z = CMPLX(r*ct,r*st)
+              IF( ABS(ct)<atol ) ct = 0._SP
+              IF( ABS(st)<atol ) st = 0._SP
+              z = CMPLX(r*ct,r*st,SP)
               xx = REAL(z)
               yy = AIMAG(z)
               CALL CBESI(z,fnu,kode,n1,y,nz1,ierr)
@@ -977,17 +977,17 @@ CONTAINS
                 !     method for calculating the complex Bessel I function.
                 !-----------------------------------------------------------------------
                 zn = z
-                IF( xx>=0.0E0 ) THEN
+                IF( xx>=0._SP ) THEN
                   CALL CWRSK(zn,fnu,kode,n,w,nz2,ck,tol,elim,alim)
                   IF( nz2/=0 ) CYCLE
                 ELSE
                   zn = -z
                   inu = INT(fnu)
                   arg = (fnu-inu)*pi
-                  IF( yy<0.0E0 ) arg = -arg
+                  IF( yy<0._SP ) arg = -arg
                   carg = COS(arg)
                   sarg = SIN(arg)
-                  csgn = CMPLX(carg,sarg)
+                  csgn = CMPLX(carg,sarg,SP)
                   IF( MOD(inu,2)==1 ) csgn = -csgn
                   CALL CWRSK(zn,fnu,kode,n,w,nz2,ck,tol,elim,alim)
                   IF( nz2/=0 ) CYCLE
@@ -999,10 +999,10 @@ CONTAINS
                 mflg = 0
                 DO i = 1, n
                   ab = fnu + i - 1
-                  aa = MAX(2.0E0,ab)
+                  aa = MAX(2._SP,ab)
                   zt = w(i)
-                  IF( ABS(zt)>1.0E0 ) THEN
-                    zsc = CMPLX(tol,0.0E0)
+                  IF( ABS(zt)>1._SP ) THEN
+                    zsc = CMPLX(tol,0._SP,SP)
                   ELSE
                     zsc = zz
                     !------------------ ZZ = CMPLX(1.0/TOL,0.0)
@@ -1011,9 +1011,9 @@ CONTAINS
                   cy = y(i)*zsc
                   er = ABS(cy-cw)
                   aw = ABS(cw)
-                  IF( aw==0.0E0 ) THEN
+                  IF( aw==0._SP ) THEN
                     er = ABS(y(i))
-                  ELSEIF( xx/=0.0E0 ) THEN
+                  ELSEIF( xx/=0._SP ) THEN
                     er = er/aw
                   ELSEIF( ABS(yy)<aa ) THEN
                     er = er/aw
@@ -1094,21 +1094,21 @@ CONTAINS
         WRITE (Lun,99015)
         99015 FORMAT (/' CHECKS NEAR UNDERFLOW AND OVERFLOW LIMITS'/)
       END IF
-      z = (1.4E0,1.4E0)
+      z = (1.4_SP,1.4_SP)
       kode = 1
       n = 20
       DO i = 1, 2
-        fnu = 10.2E0
+        fnu = 10.2_SP
         DO
           !-----------------------------------------------------------------------
           !       Adjust FNU by repeating until 0<NZI<10
           !-----------------------------------------------------------------------
           CALL CBESI(z,fnu,kode,n,y,nzi,ierr)
           IF( nzi==0 ) THEN
-            fnu = fnu + 5.0E0
+            fnu = fnu + 5._SP
             CYCLE
           ELSEIF( nzi>=10 ) THEN
-            fnu = fnu - 1.0E0
+            fnu = fnu - 1._SP
             CYCLE
           END IF
           !------ End repeat
@@ -1134,7 +1134,7 @@ CONTAINS
             END IF
           END IF
           rlt = rl + rl
-          z = CMPLX(rlt,0.0E0)
+          z = CMPLX(rlt,0._SP,SP)
           EXIT
         END DO
       END DO
@@ -1143,8 +1143,8 @@ CONTAINS
       !     Compare 1/Z with I(Z,FNU)*K(Z,FNU+1) + I(Z,FNU+1)*K(Z,FNU) and
       !     report cases for which the relative error is greater than ERTOL.
       !-----------------------------------------------------------------------
-      z = CMPLX(elim,0.0E0)
-      fnu = 0.0E0
+      z = CMPLX(elim,0._SP,SP)
+      fnu = 0._SP
       DO
         !-----------------------------------------------------------------------
         !     Adjust FNU by repeating until NZK<10
@@ -1153,9 +1153,9 @@ CONTAINS
         CALL CBESK(z,fnu,kode,n,y,nzk,ierr)
         IF( nzk>=10 ) THEN
           IF( nzk==n ) THEN
-            fnu = fnu + 3.0E0
+            fnu = fnu + 3._SP
           ELSE
-            fnu = fnu + 2.0E0
+            fnu = fnu + 2._SP
           END IF
           CYCLE
         END IF
@@ -1316,25 +1316,25 @@ CONTAINS
     !     FNUL is the lower boundary of the asymptotic series for large FNU.
     !-----------------------------------------------------------------------
     r1m4 = R1MACH(4)
-    tol = MAX(r1m4,1.0E-18)
-    atol = 100.0E0*tol
+    tol = MAX(r1m4,1.E-18_SP)
+    atol = 100._SP*tol
     aa = -LOG10(r1m4)
     k1 = I1MACH(12)
     k2 = I1MACH(13)
     r1m5 = R1MACH(5)
     k = MIN(ABS(k1),ABS(k2))
-    elim = 2.303E0*(k*r1m5-3.0E0)
-    ab = aa*2.303E0
-    alim = elim + MAX(-ab,-41.45E0)
-    dig = MIN(aa,18.0E0)
-    fnul = 10.0E0 + 6.0E0*(dig-3.0E0)
-    rl = 1.2E0*dig + 3.0E0
-    slak = 3.0E0 + 4.0E0*(-LOG10(tol)-7.0E0)/11.0E0
-    slak = MAX(slak,3.0E0)
-    ertol = tol*10.0E0**slak
-    rm = 0.5E0*(alim+elim)
-    rm = MIN(rm,200.0E0)
-    rm = MAX(rm,rl+10.0E0)
+    elim = 2.303_SP*(k*r1m5-3._SP)
+    ab = aa*2.303_SP
+    alim = elim + MAX(-ab,-41.45_SP)
+    dig = MIN(aa,18._SP)
+    fnul = 10._SP + 6._SP*(dig-3._SP)
+    rl = 1.2_SP*dig + 3._SP
+    slak = 3._SP + 4._SP*(-LOG10(tol)-7._SP)/11._SP
+    slak = MAX(slak,3._SP)
+    ertol = tol*10._SP**slak
+    rm = 0.5_SP*(alim+elim)
+    rm = MIN(rm,200._SP)
+    rm = MAX(rm,rl+10._SP)
     r2 = MIN(rm,fnul)
     IF( Kprint>=2 ) THEN
       WRITE (Lun,99002)
@@ -1346,8 +1346,8 @@ CONTAINS
     !-----------------------------------------------------------------------
     !     Set other constants needed in the tests.
     !-----------------------------------------------------------------------
-    chalf = (0.5E0,0.0E0)
-    hpi = 2.0E0*ATAN(1.0E0)
+    chalf = (0.5_SP,0._SP)
+    hpi = 2._SP*ATAN(1._SP)
     pi = hpi + hpi
     !-----------------------------------------------------------------------
     !     Generate angles for construction of complex Z to be used in tests.
@@ -1374,11 +1374,11 @@ CONTAINS
         kdo(i) = 0
       END DO
       nul = 5
-      xnu(1) = 0.0E0
-      xnu(2) = 1.0E0
-      xnu(3) = 2.0E0
-      xnu(4) = 0.5E0*fnul
-      xnu(5) = fnul + 1.1E0
+      xnu(1) = 0._SP
+      xnu(2) = 1._SP
+      xnu(3) = 2._SP
+      xnu(4) = 0.5_SP*fnul
+      xnu(5) = fnul + 1.1_SP
     ELSE
       nl = 4
       il = 13
@@ -1397,15 +1397,15 @@ CONTAINS
       keps(10) = 1
       keps(11) = 1
       nul = 6
-      xnu(1) = 0.0E0
-      xnu(2) = 0.6E0
-      xnu(3) = 1.3E0
-      xnu(4) = 2.0E0
-      xnu(5) = 0.5E0*fnul
-      xnu(6) = fnul + 1.1E0
+      xnu(1) = 0._SP
+      xnu(2) = 0.6_SP
+      xnu(3) = 1.3_SP
+      xnu(4) = 2._SP
+      xnu(5) = 0.5_SP*fnul
+      xnu(6) = fnul + 1.1_SP
     END IF
     i = 2
-    eps = 0.01E0
+    eps = 0.01_SP
     film = il - 1
     t(1) = -pi + eps
     DO k = 2, il
@@ -1440,21 +1440,21 @@ CONTAINS
               !-------------- switch (icase)
               SELECT CASE (icase)
                 CASE (2)
-                  r = (2.0E0*(4-ir)+r2*(ir-1))/3.0E0
+                  r = (2._SP*(4-ir)+r2*(ir-1))/3._SP
                 CASE (3)
                   IF( r2>=rm ) EXIT
-                  r = (r2*(4-ir)+rm*(ir-1))/3.0E0
+                  r = (r2*(4-ir)+rm*(ir-1))/3._SP
                 CASE DEFAULT
-                  r = (eps*(4-ir)+2.0E0*(ir-1))/3.0E0
+                  r = (eps*(4-ir)+2._SP*(ir-1))/3._SP
               END SELECT
               !-------------- end switch
               gnu = fnu + (n-1)
               DO it = 1, itl
                 ct = COS(t(it))
                 st = SIN(t(it))
-                IF( ABS(ct)<atol ) ct = 0.0E0
-                IF( ABS(st)<atol ) st = 0.0E0
-                z = CMPLX(r*ct,r*st)
+                IF( ABS(ct)<atol ) ct = 0._SP
+                IF( ABS(st)<atol ) st = 0._SP
+                z = CMPLX(r*ct,r*st,SP)
                 xx = REAL(z)
                 yy = AIMAG(z)
                 IF( r>=gnu ) THEN
@@ -1468,17 +1468,17 @@ CONTAINS
                     !-------------------- Adjust scaling of H functions.
                     cc = -yy - ABS(yy)
                     IF( cc>(-alim) ) THEN
-                      cw = CMPLX(cc,xx)
+                      cw = CMPLX(cc,xx,SP)
                       coe1 = EXP(cw)
                     ELSE
-                      coe1 = CMPLX(0.0E0,0.0E0)
+                      coe1 = CMPLX(0._SP,0._SP,SP)
                     END IF
                     dd = yy - ABS(yy)
                     IF( dd>(-alim) ) THEN
-                      cw = CMPLX(dd,-xx)
+                      cw = CMPLX(dd,-xx,SP)
                       coe2 = EXP(cw)
                     ELSE
-                      coe2 = CMPLX(0.0E0,0.0E0)
+                      coe2 = CMPLX(0._SP,0._SP,SP)
                     END IF
                     DO kk = 1, n
                       y(kk) = y(kk)*coe2
@@ -1507,12 +1507,12 @@ CONTAINS
                 mflg = 0
                 DO i = 1, n
                   ab = fnu + i - 1
-                  aa = MAX(2.0E0,ab)
+                  aa = MAX(2._SP,ab)
                   cw = (w(i)+y(i))*chalf
                   av = ABS(v(i))
                   er = ABS(cw-v(i))
-                  IF( av/=0.0E0 ) THEN
-                    IF( yy==0.0E0 ) THEN
+                  IF( av/=0._SP ) THEN
+                    IF( yy==0._SP ) THEN
                       IF( ABS(xx)<aa ) er = er/av
                     ELSE
                       er = er/av
@@ -1702,25 +1702,25 @@ CONTAINS
     !     FNUL is the lower boundary of the asymptotic series for large FNU.
     !-----------------------------------------------------------------------
     r1m4 = R1MACH(4)
-    tol = MAX(r1m4,1.0E-18)
-    atol = 100.0E0*tol
+    tol = MAX(r1m4,1.E-18_SP)
+    atol = 100._SP*tol
     aa = -LOG10(r1m4)
     k1 = I1MACH(12)
     k2 = I1MACH(13)
     r1m5 = R1MACH(5)
     k = MIN(ABS(k1),ABS(k2))
-    elim = 2.303E0*(k*r1m5-3.0E0)
-    ab = aa*2.303E0
-    alim = elim + MAX(-ab,-41.45E0)
-    dig = MIN(aa,18.0E0)
-    fnul = 10.0E0 + 6.0E0*(dig-3.0E0)
-    rl = 1.2E0*dig + 3.0E0
-    slak = 3.0E0 + 4.0E0*(-LOG10(tol)-7.0E0)/11.0E0
-    slak = MAX(slak,3.0E0)
-    ertol = tol*10.0E0**slak
-    rm = 0.5E0*(alim+elim)
-    rm = MIN(rm,200.0E0)
-    rm = MAX(rm,rl+10.0E0)
+    elim = 2.303_SP*(k*r1m5-3._SP)
+    ab = aa*2.303_SP
+    alim = elim + MAX(-ab,-41.45_SP)
+    dig = MIN(aa,18._SP)
+    fnul = 10._SP + 6._SP*(dig-3._SP)
+    rl = 1.2_SP*dig + 3._SP
+    slak = 3._SP + 4._SP*(-LOG10(tol)-7._SP)/11._SP
+    slak = MAX(slak,3._SP)
+    ertol = tol*10._SP**slak
+    rm = 0.5_SP*(alim+elim)
+    rm = MIN(rm,200._SP)
+    rm = MAX(rm,rl+10._SP)
     r2 = MIN(rm,fnul)
     IF( Kprint>=2 ) THEN
       WRITE (Lun,99002)
@@ -1732,8 +1732,8 @@ CONTAINS
     !-----------------------------------------------------------------------
     !     Set other constants needed in the tests.
     !-----------------------------------------------------------------------
-    cone = (1.0E0,0.0E0)
-    hpi = 2.0E0*ATAN(1.0E0)
+    cone = (1._SP,0._SP)
+    hpi = 2._SP*ATAN(1._SP)
     pi = hpi + hpi
     !-----------------------------------------------------------------------
     !     Generate angles for construction of complex Z to be used in tests.
@@ -1760,11 +1760,11 @@ CONTAINS
         kdo(i) = 0
       END DO
       nul = 5
-      xnu(1) = 0.0E0
-      xnu(2) = 1.0E0
-      xnu(3) = 2.0E0
-      xnu(4) = 0.5E0*fnul
-      xnu(5) = fnul + 1.1E0
+      xnu(1) = 0._SP
+      xnu(2) = 1._SP
+      xnu(3) = 2._SP
+      xnu(4) = 0.5_SP*fnul
+      xnu(5) = fnul + 1.1_SP
     ELSE
       nl = 4
       il = 13
@@ -1783,15 +1783,15 @@ CONTAINS
       keps(10) = 1
       keps(11) = 1
       nul = 6
-      xnu(1) = 0.0E0
-      xnu(2) = 0.6E0
-      xnu(3) = 1.3E0
-      xnu(4) = 2.0E0
-      xnu(5) = 0.5E0*fnul
-      xnu(6) = fnul + 1.1E0
+      xnu(1) = 0._SP
+      xnu(2) = 0.6_SP
+      xnu(3) = 1.3_SP
+      xnu(4) = 2._SP
+      xnu(5) = 0.5_SP*fnul
+      xnu(6) = fnul + 1.1_SP
     END IF
     i = 2
-    eps = 0.01E0
+    eps = 0.01_SP
     film = il - 1
     t(1) = -pi + eps
     DO k = 2, il
@@ -1824,7 +1824,7 @@ CONTAINS
           ifnu = INT(fnu)
           ffnu = fnu - ifnu
           arg = pi*ffnu
-          csgn = CMPLX(COS(arg),SIN(arg))
+          csgn = CMPLX(COS(arg),SIN(arg),SP)
           IF( MOD(ifnu,2)==1 ) csgn = -csgn
           DO icase = 1, 3
             irb = MIN(2,icase)
@@ -1832,20 +1832,20 @@ CONTAINS
               !-------------- switch (icase)
               SELECT CASE (icase)
                 CASE (2)
-                  r = (2.0E0*(4-ir)+r2*(ir-1))/3.0E0
+                  r = (2._SP*(4-ir)+r2*(ir-1))/3._SP
                 CASE (3)
                   IF( r2>=rm ) EXIT
-                  r = (r2*(4-ir)+rm*(ir-1))/3.0E0
+                  r = (r2*(4-ir)+rm*(ir-1))/3._SP
                 CASE DEFAULT
-                  r = (eps*(4-ir)+2.0E0*(ir-1))/3.0E0
+                  r = (eps*(4-ir)+2._SP*(ir-1))/3._SP
               END SELECT
               !-------------- end switch
               DO it = 1, itl
                 ct = COS(t(it))
                 st = SIN(t(it))
-                IF( ABS(ct)<atol ) ct = 0.0E0
-                IF( ABS(st)<atol ) st = 0.0E0
-                z = CMPLX(r*ct,r*st)
+                IF( ABS(ct)<atol ) ct = 0._SP
+                IF( ABS(st)<atol ) st = 0._SP
+                z = CMPLX(r*ct,r*st,SP)
                 CALL CBESI(z,fnu,kode,n1,w,nz2,ierr)
                 !---------------- Underflow? - skip test for this case.
                 IF( nz2==0 ) THEN
@@ -1856,7 +1856,7 @@ CONTAINS
                   !     This cancellation can be done analytically to give a Wronskian in
                   !     terms of I in the left half plane and K in the right half plane.
                   !-----------------------------------------------------------------------
-                  IF( icase==1 .OR. ct>=0.0E0 ) THEN
+                  IF( icase==1 .OR. ct>=0._SP ) THEN
                     !------------------ Z is in the right half plane
                     CALL CBESK(z,fnu,kode,n1,y,nz1,ierr)
                     cv = cone/z
@@ -1864,7 +1864,7 @@ CONTAINS
                       !-------------------- Adjust Wronskian due to scaled I and K functions
                       xx = REAL(z)
                       axx = ABS(xx)
-                      zn = CMPLX(-axx,0.0E0)
+                      zn = CMPLX(-axx,0._SP,SP)
                       cv = zn + z
                       cv = EXP(cv)/z
                     END IF
@@ -1874,7 +1874,7 @@ CONTAINS
                     CALL CBESK(zn,fnu,kode,n1,y,nz1,ierr)
                     zn = csgn
                     !------------------ CSGN set near top of DO 180 loop
-                    IF( st>0.0E0 .OR. (st==0.0E0 .AND. ct<0.0E0) ) zn = CONJG(zn)
+                    IF( st>0._SP .OR. (st==0._SP .AND. ct<0._SP) ) zn = CONJG(zn)
                     DO kk = 1, n1
                       y(kk) = y(kk)*zn
                       zn = -zn
@@ -1884,7 +1884,7 @@ CONTAINS
                       !-------------------- Adjust Wronskian due to scaled I and K functions
                       xx = REAL(z)
                       axx = ABS(xx)
-                      zn = CMPLX(-axx,0.0E0)
+                      zn = CMPLX(-axx,0._SP,SP)
                       cv = zn - z
                       cv = EXP(cv)/z
                     END IF
@@ -2050,8 +2050,8 @@ CONTAINS
       rm, r1m4, r1m5, r2, slak, st, t(20), tol, ts, xn, xnu(20), xx, yn, yy
     INTEGER :: i, icase, ierr, ifnu, il, ir, irb, it, itl, i4, k, &
       kdo(20), keps(20), kk, kode, k1, k2, lflg, mflg, n, nl, nu, nul, nz, nz1, nz2
-    COMPLEX(SP), PARAMETER :: cip(4) = [ (1.0E0,0.0E0), (0.0E0,1.0E0), &
-      (-1.0E0,0.0E0), (0.0E0,-1.0E0) ]
+    COMPLEX(SP), PARAMETER :: cip(4) = [ (1._SP,0._SP), (0._SP,1._SP), &
+      (-1._SP,0._SP), (0._SP,-1._SP) ]
     !
     !* FIRST EXECUTABLE STATEMENT  CQCBY
     IF( Kprint>=2 ) THEN
@@ -2070,25 +2070,25 @@ CONTAINS
     !     FNUL is the lower boundary of the asymptotic series for large FNU.
     !-----------------------------------------------------------------------
     r1m4 = R1MACH(4)
-    tol = MAX(r1m4,1.0E-18)
-    atol = 100.0E0*tol
+    tol = MAX(r1m4,1.E-18_SP)
+    atol = 100._SP*tol
     aa = -LOG10(r1m4)
     k1 = I1MACH(12)
     k2 = I1MACH(13)
     r1m5 = R1MACH(5)
     k = MIN(ABS(k1),ABS(k2))
-    elim = 2.303E0*(k*r1m5-3.0E0)
-    ab = aa*2.303E0
-    alim = elim + MAX(-ab,-41.45E0)
-    dig = MIN(aa,18.0E0)
-    fnul = 10.0E0 + 6.0E0*(dig-3.0E0)
-    rl = 1.2E0*dig + 3.0E0
-    slak = 3.0E0 + 4.0E0*(-LOG10(tol)-7.0E0)/11.0E0
-    slak = MAX(slak,3.0E0)
-    ertol = tol*10.0E0**slak
-    rm = 0.5E0*(alim+elim)
-    rm = MIN(rm,200.0E0)
-    rm = MAX(rm,rl+10.0E0)
+    elim = 2.303_SP*(k*r1m5-3._SP)
+    ab = aa*2.303_SP
+    alim = elim + MAX(-ab,-41.45_SP)
+    dig = MIN(aa,18._SP)
+    fnul = 10._SP + 6._SP*(dig-3._SP)
+    rl = 1.2_SP*dig + 3._SP
+    slak = 3._SP + 4._SP*(-LOG10(tol)-7._SP)/11._SP
+    slak = MAX(slak,3._SP)
+    ertol = tol*10._SP**slak
+    rm = 0.5_SP*(alim+elim)
+    rm = MIN(rm,200._SP)
+    rm = MAX(rm,rl+10._SP)
     r2 = MIN(rm,fnul)
     IF( Kprint>=2 ) THEN
       WRITE (Lun,99002)
@@ -2100,9 +2100,9 @@ CONTAINS
     !-----------------------------------------------------------------------
     !     Set other constants needed in the tests.
     !-----------------------------------------------------------------------
-    ci = (0.0E0,1.0E0)
-    hpi = 2.0E0*ATAN(1.0E0)
-    rhpi = 1.0E0/hpi
+    ci = (0._SP,1._SP)
+    hpi = 2._SP*ATAN(1._SP)
+    rhpi = 1._SP/hpi
     pi = hpi + hpi
     !-----------------------------------------------------------------------
     !     Generate angles for construction of complex Z to be used in tests.
@@ -2130,11 +2130,11 @@ CONTAINS
       END DO
       kdo(5) = 1
       nul = 5
-      xnu(1) = 0.0E0
-      xnu(2) = 1.0E0
-      xnu(3) = 2.0E0
-      xnu(4) = 0.5E0*fnul
-      xnu(5) = fnul + 1.2E0
+      xnu(1) = 0._SP
+      xnu(2) = 1._SP
+      xnu(3) = 2._SP
+      xnu(4) = 0.5_SP*fnul
+      xnu(5) = fnul + 1.2_SP
     ELSE
       nl = 4
       il = 13
@@ -2153,15 +2153,15 @@ CONTAINS
       keps(5) = 1
       keps(9) = 1
       nul = 6
-      xnu(1) = 0.0E0
-      xnu(2) = 0.6E0
-      xnu(3) = 1.3E0
-      xnu(4) = 2.0E0
-      xnu(5) = 0.5E0*fnul
-      xnu(6) = fnul + 1.2E0
+      xnu(1) = 0._SP
+      xnu(2) = 0.6_SP
+      xnu(3) = 1.3_SP
+      xnu(4) = 2._SP
+      xnu(5) = 0.5_SP*fnul
+      xnu(6) = fnul + 1.2_SP
     END IF
     i = 2
-    eps = 0.01E0
+    eps = 0.01_SP
     film = il - 1
     t(1) = -pi + eps
     DO k = 2, il
@@ -2198,10 +2198,10 @@ CONTAINS
           ifnu = INT(fnu)
           ffnu = fnu - ifnu
           arg = hpi*ffnu
-          csgn = CMPLX(COS(arg),SIN(arg))
+          csgn = CMPLX(COS(arg),SIN(arg),SP)
           i4 = MOD(ifnu,4) + 1
           csgn = csgn*cip(i4)
-          cspn = CONJG(csgn)*CMPLX(rhpi,0.0E0)
+          cspn = CONJG(csgn)*CMPLX(rhpi,0._SP,SP)
           csgn = csgn*ci
           DO icase = 1, 3
             irb = MIN(2,icase)
@@ -2209,20 +2209,20 @@ CONTAINS
               !-------------- switch (icase)
               SELECT CASE (icase)
                 CASE (2)
-                  r = (2.0E0*(4-ir)+r2*(ir-1))/3.0E0
+                  r = (2._SP*(4-ir)+r2*(ir-1))/3._SP
                 CASE (3)
                   IF( r2>=rm ) EXIT
-                  r = (r2*(4-ir)+rm*(ir-1))/3.0E0
+                  r = (r2*(4-ir)+rm*(ir-1))/3._SP
                 CASE DEFAULT
-                  r = (eps*(4-ir)+2.0E0*(ir-1))/3.0E0
+                  r = (eps*(4-ir)+2._SP*(ir-1))/3._SP
               END SELECT
               !-------------- end switch
               DO it = 1, itl
                 ct = COS(t(it))
                 st = SIN(t(it))
-                IF( ABS(ct)<atol ) ct = 0.0E0
-                IF( ABS(st)<atol ) st = 0.0E0
-                z = CMPLX(r*ct,r*st)
+                IF( ABS(ct)<atol ) ct = 0._SP
+                IF( ABS(st)<atol ) st = 0._SP
+                z = CMPLX(r*ct,r*st,SP)
                 xx = REAL(z)
                 yy = AIMAG(z)
                 CALL CBESI(z,fnu,kode,n,w,nz2,ierr)
@@ -2243,11 +2243,11 @@ CONTAINS
                         !------------------ Adjust scale for I and K functions.
                         cc = -xx - ABS(xx)
                         IF( cc>(-alim) ) THEN
-                          cw = CMPLX(cc,-yy)
+                          cw = CMPLX(cc,-yy,SP)
                           coe2 = coe2*EXP(cw)
                         ELSE
                           !-------------------- Scaling problem - skip test for this case
-                          coe2 = CMPLX(0.0E0,0.0E0)
+                          coe2 = CMPLX(0._SP,0._SP,SP)
                           CYCLE
                         END IF
                       END IF
@@ -2263,16 +2263,16 @@ CONTAINS
                       mflg = 0
                       DO i = 1, n
                         ab = fnu + i - 1
-                        aa = MAX(0.5E0,ab)
+                        aa = MAX(0.5_SP,ab)
                         cw = w(i) - y(i)
                         av = ABS(v(i))
                         er = ABS(cw-v(i))
-                        IF( av/=0.0E0 ) THEN
-                          IF( yn/=0.0E0 ) THEN
+                        IF( av/=0._SP ) THEN
+                          IF( yn/=0._SP ) THEN
                             er = er/av
-                          ELSEIF( xn>0.0E0 ) THEN
+                          ELSEIF( xn>0._SP ) THEN
                             IF( ABS(xn)<aa ) er = er/av
-                          ELSEIF( ABS(ffnu-0.5E0)<0.125E0 ) THEN
+                          ELSEIF( ABS(ffnu-0.5_SP)<0.125_SP ) THEN
                             IF( ABS(xn)<aa ) er = er/av
                           ELSE
                             er = er/av

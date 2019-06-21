@@ -58,8 +58,8 @@ SUBROUTINE DCFOD(Meth,Elco,Tesco)
   !* FIRST EXECUTABLE STATEMENT  DCFOD
   IF( Meth==2 ) THEN
     !
-    pc(1) = 1.0D0
-    rq1fac = 1.0D0
+    pc(1) = 1._DP
+    rq1fac = 1._DP
     DO nq = 1, 5
       !           ------------------------------------------------------------
       !            THE PC ARRAY WILL CONTAIN THE COEFFICIENTS OF THE
@@ -70,7 +70,7 @@ SUBROUTINE DCFOD(Meth,Elco,Tesco)
       nqp1 = nq + 1
       !           FORM COEFFICIENTS OF P(X)*(X+NQ).
       !           ------------------------------------
-      pc(nqp1) = 0.0D0
+      pc(nqp1) = 0._DP
       DO ib = 1, nq
         i = nq + 2 - ib
         pc(i) = pc(i-1) + fnq*pc(i)
@@ -81,7 +81,7 @@ SUBROUTINE DCFOD(Meth,Elco,Tesco)
       DO i = 1, nqp1
         Elco(i,nq) = pc(i)/pc(2)
       END DO
-      Elco(2,nq) = 1.0D0
+      Elco(2,nq) = 1._DP
       Tesco(1,nq) = rq1fac
       Tesco(2,nq) = nqp1/Elco(1,nq)
       Tesco(3,nq) = (nq+2)/Elco(1,nq)
@@ -89,14 +89,14 @@ SUBROUTINE DCFOD(Meth,Elco,Tesco)
     END DO
   ELSE
     !
-    Elco(1,1) = 1.0D0
-    Elco(2,1) = 1.0D0
-    Tesco(1,1) = 0.0D0
-    Tesco(2,1) = 2.0D0
-    Tesco(1,2) = 1.0D0
-    Tesco(3,12) = 0.0D0
-    pc(1) = 1.0D0
-    rqfac = 1.0D0
+    Elco(1,1) = 1._DP
+    Elco(2,1) = 1._DP
+    Tesco(1,1) = 0._DP
+    Tesco(2,1) = 2._DP
+    Tesco(1,2) = 1._DP
+    Tesco(3,12) = 0._DP
+    pc(1) = 1._DP
+    rqfac = 1._DP
     DO nq = 2, 12
       !           ------------------------------------------------------------
       !            THE PC ARRAY WILL CONTAIN THE COEFFICIENTS OF THE
@@ -110,7 +110,7 @@ SUBROUTINE DCFOD(Meth,Elco,Tesco)
       nqp1 = nq + 1
       !           FORM COEFFICIENTS OF P(X)*(X+NQ-1).
       !           ----------------------------------
-      pc(nq) = 0.0D0
+      pc(nq) = 0._DP
       DO ib = 1, nqm1
         i = nqp1 - ib
         pc(i) = pc(i-1) + fnqm1*pc(i)
@@ -119,8 +119,8 @@ SUBROUTINE DCFOD(Meth,Elco,Tesco)
       !           COMPUTE INTEGRAL, -1 TO 0, OF P(X) AND X*P(X).
       !           -----------------------
       pint = pc(1)
-      xpin = pc(1)/2.0D0
-      tsign = 1.0D0
+      xpin = pc(1)/2._DP
+      tsign = 1._DP
       DO i = 2, nq
         tsign = -tsign
         pint = pint + tsign*pc(i)/i
@@ -129,12 +129,12 @@ SUBROUTINE DCFOD(Meth,Elco,Tesco)
       !           STORE COEFFICIENTS IN ELCO AND TESCO.
       !           --------------------------------
       Elco(1,nq) = pint*rq1fac
-      Elco(2,nq) = 1.0D0
+      Elco(2,nq) = 1._DP
       DO i = 2, nq
         Elco(i+1,nq) = rq1fac*pc(i)/i
       END DO
       agamq = rqfac*xpin
-      ragq = 1.0D0/agamq
+      ragq = 1._DP/agamq
       Tesco(2,nq) = ragq
       IF( nq<12 ) Tesco(1,nqp1) = ragq*rqfac/nqp1
       Tesco(3,nqm1) = ragq

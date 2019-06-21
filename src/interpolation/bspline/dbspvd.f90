@@ -120,14 +120,14 @@ SUBROUTINE DBSPVD(T,K,Nderiv,X,Ileft,Ldvnik,Vnikx,Work)
       !
       jm = kp1*(kp1+1)/2
       DO l = 1, jm
-        Work(l) = 0.0D0
+        Work(l) = 0._DP
       END DO
       !     A(I,I) = WORK(I*(I+3)/2) = 1.0       I = 1,K
       l = 2
       j = 0
       DO i = 1, K
         j = j + l
-        Work(j) = 1.0D0
+        Work(j) = 1._DP
         l = l + 1
       END DO
       kmd = K
@@ -151,7 +151,7 @@ SUBROUTINE DBSPVD(T,K,Nderiv,X,Ileft,Ldvnik,Vnikx,Work)
         END DO
         !
         DO i = 1, K
-          v = 0.0D0
+          v = 0._DP
           jlow = MAX(i,m)
           jj = jlow*(jlow+1)/2
           DO j = jlow, K

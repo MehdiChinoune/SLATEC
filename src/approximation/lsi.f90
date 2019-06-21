@@ -78,7 +78,7 @@ SUBROUTINE LSI(W,Mdw,Ma,Mg,N,Prgopt,X,Rnorm,Mode,Ws,Ip)
   tol = SQRT(srelpr)
   !
   Mode = 0
-  Rnorm = 0.E0
+  Rnorm = 0._SP
   m = Ma + Mg
   np1 = N + 1
   krank = 0
@@ -94,8 +94,8 @@ SUBROUTINE LSI(W,Mdw,Ma,Mg,N,Prgopt,X,Rnorm,Mode,Ws,Ip)
       !
       IF( link>1 ) THEN
         key = INT( Prgopt(last+1) )
-        IF( key==1 ) cov = Prgopt(last+2)/=0.E0
-        IF( key==10 ) sclcov = Prgopt(last+2)==0.E0
+        IF( key==1 ) cov = Prgopt(last+2)/=0._SP
+        IF( key==10 ) sclcov = Prgopt(last+2)==0._SP
         IF( key==5 ) tol = MAX(srelpr,Prgopt(last+2))
         next = INT( Prgopt(link) )
         last = link
@@ -105,7 +105,7 @@ SUBROUTINE LSI(W,Mdw,Ma,Mg,N,Prgopt,X,Rnorm,Mode,Ws,Ip)
       !
       !     Compute matrix norm of least squares equations.
       !
-      anorm = 0.E0
+      anorm = 0._SP
       DO j = 1, N
         anorm = MAX(anorm,SUM(ABS(W(1:Ma,j))))
       END DO
@@ -116,7 +116,7 @@ SUBROUTINE LSI(W,Mdw,Ma,Mg,N,Prgopt,X,Rnorm,Mode,Ws,Ip)
       !
       !     Compute Householder orthogonal decomposition of matrix.
       !
-      Ws(1:N) = 0.E0
+      Ws(1:N) = 0._SP
       Ws(1:Ma) = W(1:Ma,np1)
       k = MAX(m,N)
       minman = MIN(Ma,N)
@@ -124,7 +124,7 @@ SUBROUTINE LSI(W,Mdw,Ma,Mg,N,Prgopt,X,Rnorm,Mode,Ws,Ip)
       n2 = n1 + N
       CALL HFTI(W,Mdw,Ma,N,Ws,Ma,1,tau,krank,temp,Ws(n2),Ws(n1),Ip)
       Rnorm = temp(1)
-      fac = 1.E0
+      fac = 1._SP
       gam = Ma - krank
       IF( krank<Ma .AND. sclcov ) fac = Rnorm**2/gam
       !
@@ -225,7 +225,7 @@ SUBROUTINE LSI(W,Mdw,Ma,Mg,N,Prgopt,X,Rnorm,Mode,Ws,Ip)
         !     Reciprocate diagonal terms.
         !
         DO j = 1, krank
-          W(j,j) = 1.E0/W(j,j)
+          W(j,j) = 1._SP/W(j,j)
         END DO
         !
         !     Invert the upper triangular QR factor on itself.
@@ -255,7 +255,7 @@ SUBROUTINE LSI(W,Mdw,Ma,Mg,N,Prgopt,X,Rnorm,Mode,Ws,Ip)
           END DO
           !
           DO i = krp1, N
-            W(i,1:i) = 0.E0
+            W(i,1:i) = 0._SP
           END DO
           !
           !        Apply right side transformations to lower triangle.
@@ -268,12 +268,12 @@ SUBROUTINE LSI(W,Mdw,Ma,Mg,N,Prgopt,X,Rnorm,Mode,Ws,Ip)
             !
             !           If RB>=0.E0, transformation can be regarded as zero.
             !
-            IF( rb<0.E0 ) THEN
-              rb = 1.E0/rb
+            IF( rb<0._SP ) THEN
+              rb = 1._SP/rb
               !
               !              Store unscaled rank one Householder update in work array.
               !
-              Ws(n3:n3+N-1) = 0.E0
+              Ws(n3:n3+N-1) = 0._SP
               l = n1 + i
               k = n3 + i
               Ws(k-1) = Ws(l-1)
@@ -288,7 +288,7 @@ SUBROUTINE LSI(W,Mdw,Ma,Mg,N,Prgopt,X,Rnorm,Mode,Ws,Ip)
               END DO
               !
               l = n3 + i
-              gam = 0.5E0*rb*DOT_PRODUCT(Ws(l-1:l+N-i-1),Ws(i:N))
+              gam = 0.5_SP*rb*DOT_PRODUCT(Ws(l-1:l+N-i-1),Ws(i:N))
               CALL SAXPY(N-i+1,gam,Ws(l-1:l+N-i-1),1,Ws(i:N),1)
               DO j = i, N
                 DO l = 1, i - 1

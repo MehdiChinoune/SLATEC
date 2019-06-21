@@ -224,8 +224,8 @@ SUBROUTINE DQAWF(F,A,Omega,Integr,Epsabs,Result,Abserr,Neval,Ier,Limlst,&
   !* FIRST EXECUTABLE STATEMENT  DQAWF
   Ier = 6
   Neval = 0
-  Result = 0.0D+00
-  Abserr = 0.0D+00
+  Result = 0._DP
+  Abserr = 0._DP
   IF( Limlst>=3 .AND. Leniw>=(Limlst+2) .AND. Maxp1>=1 .AND. &
       Lenw>=(Leniw*2+Maxp1*25) ) THEN
     !

@@ -242,13 +242,13 @@ SUBROUTINE DQAGSE(F,A,B,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,Alist,&
   Ier = 0
   Neval = 0
   Last = 0
-  Result = 0.0D+00
-  Abserr = 0.0D+00
+  Result = 0._DP
+  Abserr = 0._DP
   Alist(1) = A
   Blist(1) = B
-  Rlist(1) = 0.0D+00
-  Elist(1) = 0.0D+00
-  IF( Epsabs<=0.0D+00 .AND. Epsrel<MAX(0.5D+02*epmach,0.5D-28) ) Ier = 6
+  Rlist(1) = 0._DP
+  Elist(1) = 0._DP
+  IF( Epsabs<=0._DP .AND. Epsrel<MAX(0.5E+02_DP*epmach,0.5E-28_DP) ) Ier = 6
   IF( Ier/=6 ) THEN
     !
     !           FIRST APPROXIMATION TO THE INTEGRAL
@@ -267,9 +267,9 @@ SUBROUTINE DQAGSE(F,A,B,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,Alist,&
     Rlist(1) = Result
     Elist(1) = Abserr
     Iord(1) = 1
-    IF( Abserr<=1.0D+02*epmach*defabs .AND. Abserr>errbnd ) Ier = 2
+    IF( Abserr<=100._DP*epmach*defabs .AND. Abserr>errbnd ) Ier = 2
     IF( Limit==1 ) Ier = 1
-    IF( Ier/=0 .OR. (Abserr<=errbnd .AND. Abserr/=resabs) .OR. Abserr==0.0D+00 )&
+    IF( Ier/=0 .OR. (Abserr<=errbnd .AND. Abserr/=resabs) .OR. Abserr==0._DP )&
         THEN
       Neval = 42*Last - 21
       RETURN
@@ -294,7 +294,7 @@ SUBROUTINE DQAGSE(F,A,B,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,Alist,&
       iroff2 = 0
       iroff3 = 0
       ksgn = -1
-      IF( dres>=(0.1D+01-0.5D+02*epmach)*defabs ) ksgn = 1
+      IF( dres>=(1._DP-0.5E+02_DP*epmach)*defabs ) ksgn = 1
       !
       !           MAIN DO-LOOP
       !           ------------
@@ -305,7 +305,7 @@ SUBROUTINE DQAGSE(F,A,B,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,Alist,&
         !           ESTIMATE.
         !
         a1 = Alist(maxerr)
-        b1 = 0.5D+00*(Alist(maxerr)+Blist(maxerr))
+        b1 = 0.5_DP*(Alist(maxerr)+Blist(maxerr))
         a2 = b1
         b2 = Blist(maxerr)
         erlast = errmax
@@ -321,7 +321,7 @@ SUBROUTINE DQAGSE(F,A,B,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,Alist,&
         area = area + area12 - Rlist(maxerr)
         IF( defab1/=error1 .AND. defab2/=error2 ) THEN
           IF( ABS(Rlist(maxerr)-area12)<=0.1D-04*ABS(area12) .AND. &
-              erro12>=0.99D+00*errmax ) THEN
+              erro12>=0.99_DP*errmax ) THEN
             IF( extrap ) iroff2 = iroff2 + 1
             IF( .NOT. extrap ) iroff1 = iroff1 + 1
           END IF
@@ -344,7 +344,7 @@ SUBROUTINE DQAGSE(F,A,B,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,Alist,&
         !           SET ERROR FLAG IN THE CASE OF BAD INTEGRAND BEHAVIOUR
         !           AT A POINT OF THE INTEGRATION RANGE.
         !
-        IF( MAX(ABS(a1),ABS(b2))<=(0.1D+01+0.1D+03*epmach)&
+        IF( MAX(ABS(a1),ABS(b2))<=(1._DP+100._DP*epmach)&
           *(ABS(a2)+0.1D+04*uflow) ) Ier = 4
         !
         !           APPEND THE NEWLY-CREATED INTERVALS TO THE LIST.
@@ -375,7 +375,7 @@ SUBROUTINE DQAGSE(F,A,B,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,Alist,&
         !- **JUMP OUT OF DO-LOOP
         IF( Ier/=0 ) EXIT
         IF( Last==2 ) THEN
-          small = ABS(B-A)*0.375D+00
+          small = ABS(B-A)*0.375_DP
           erlarg = errsum
           ertest = errbnd
           rlist2(2) = area
@@ -434,7 +434,7 @@ SUBROUTINE DQAGSE(F,A,B,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,Alist,&
           errmax = Elist(maxerr)
           nrmax = 1
           extrap = .FALSE.
-          small = small*0.5D+00
+          small = small*0.5_DP
           erlarg = errsum
         END IF
         20 CONTINUE
@@ -447,9 +447,9 @@ SUBROUTINE DQAGSE(F,A,B,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,Alist,&
         IF( Ier+ierro/=0 ) THEN
           IF( ierro==3 ) Abserr = Abserr + correc
           IF( Ier==0 ) Ier = 3
-          IF( Result==0.0D+00 .OR. area==0.0D+00 ) THEN
+          IF( Result==0._DP .OR. area==0._DP ) THEN
             IF( Abserr>errsum ) GOTO 50
-            IF( area==0.0D+00 ) THEN
+            IF( area==0._DP ) THEN
               IF( Ier>2 ) Ier = Ier - 1
               Neval = 42*Last - 21
               RETURN
@@ -473,7 +473,7 @@ SUBROUTINE DQAGSE(F,A,B,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,Alist,&
     !
     !           COMPUTE GLOBAL INTEGRAL SUM.
     !
-    50  Result = 0.0D+00
+    50  Result = 0._DP
     DO k = 1, Last
       Result = Result + Rlist(k)
     END DO

@@ -146,7 +146,7 @@ SUBROUTINE DGEFS(A,Lda,N,V,Itask,Ind,Work,Iwork)
     !
     !        CHECK FOR COMPUTATIONALLY SINGULAR MATRIX
     !
-    IF( rcond==0.0D0 ) THEN
+    IF( rcond==0._DP ) THEN
       Ind = -4
       CALL XERMSG('DGEFS','SINGULAR MATRIX A - NO SOLUTION',-4,1)
       RETURN

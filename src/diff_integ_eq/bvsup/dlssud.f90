@@ -235,7 +235,7 @@ SUBROUTINE DLSSUD(A,X,B,N,M,Nrda,U,Nrdu,Iflag,Mlso,Irank,Iscale,Q,Diag,&
       END DO
       res = NORM2(S(irp:irp+nmir-1))**2
       !           ...EXIT
-      IF( res>ss*(10.0D0*MAX(10.0D0**Isflg,10.0D0*uro))**2 ) THEN
+      IF( res>ss*(10._DP*MAX(10._DP**Isflg,10._DP*uro))**2 ) THEN
         !
         !              INCONSISTENT SYSTEM
         Iflag = 4
@@ -255,7 +255,7 @@ SUBROUTINE DLSSUD(A,X,B,N,M,Nrda,U,Nrdu,Iflag,Mlso,Irank,Iscale,Q,Diag,&
     !           INITIALIZE X VECTOR AND THEN APPLY ORTHOGONAL TRANSFORMATION
     !
     DO k = 1, M
-      X(k) = 0.0D0
+      X(k) = 0._DP
       IF( k<=Irank ) X(k) = S(k)
     END DO
     !
@@ -281,8 +281,8 @@ SUBROUTINE DLSSUD(A,X,B,N,M,Nrda,U,Nrdu,Iflag,Mlso,Irank,Iscale,Q,Diag,&
       l = M - Irank
       DO k = 1, l
         DO i = 1, M
-          U(i,k) = 0.0D0
-          IF( i==Irank+k ) U(i,k) = 1.0D0
+          U(i,k) = 0._DP
+          IF( i==Irank+k ) U(i,k) = 1._DP
         END DO
         !
         DO jr = 1, Irank
@@ -298,16 +298,16 @@ SUBROUTINE DLSSUD(A,X,B,N,M,Nrda,U,Nrdu,Iflag,Mlso,Irank,Iscale,Q,Diag,&
     !
     !           SPECIAL CASE FOR THE NULL MATRIX
     DO k = 1, M
-      X(k) = 0.0D0
+      X(k) = 0._DP
       IF( Mlso/=0 ) THEN
-        U(k,k) = 1.0D0
+        U(k,k) = 1._DP
         DO j = 1, M
-          IF( j/=k ) U(j,k) = 0.0D0
+          IF( j/=k ) U(j,k) = 0._DP
         END DO
       END IF
     END DO
     DO k = 1, N
-      IF( B(k)>0.0D0 ) Iflag = 4
+      IF( B(k)>0._DP ) Iflag = 4
     END DO
   END IF
   !

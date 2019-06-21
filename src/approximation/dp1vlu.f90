@@ -79,16 +79,16 @@ SUBROUTINE DP1VLU(L,Nder,X,Yfit,Yp,A)
   ELSE
     ndo = MAX(Nder,0)
     ndo = MIN(ndo,L)
-    maxord = INT( A(1) + 0.5D0 )
+    maxord = INT( A(1) + 0.5_DP )
     k1 = maxord + 1
     k2 = k1 + maxord
     k3 = k2 + maxord + 2
-    nord = INT( A(k3) + 0.5D0 )
+    nord = INT( A(k3) + 0.5_DP )
     IF( L<=nord ) THEN
       k4 = k3 + L + 1
       IF( Nder>=1 ) THEN
         DO i = 1, Nder
-          Yp(i) = 0.0D0
+          Yp(i) = 0._DP
         END DO
       END IF
       IF( L>=2 ) THEN
@@ -103,7 +103,7 @@ SUBROUTINE DP1VLU(L,Nder,X,Yfit,Yp,A)
         ilo = k3 + 3
         iup = k4 + ndp1
         DO i = ilo, iup
-          A(i) = 0.0D0
+          A(i) = 0._DP
         END DO
         dif = X - A(lp1)
         kc = k2 + lp1

@@ -138,7 +138,7 @@ SUBROUTINE CNBFA(Abe,Lda,N,Ml,Mu,Ipvt,Info)
   !
   IF( N>1 ) THEN
     IF( Ml>0 ) THEN
-      Abe(1:N,m+1:m+Ml) = CMPLX( 0._SP ,0._SP )
+      Abe(1:N,m+1:m+Ml) = CMPLX( 0._SP ,0._SP, SP )
     END IF
     !
     !     GAUSSIAN ELIMINATION WITH PARTIAL ELIMINATION
@@ -160,13 +160,13 @@ SUBROUTINE CNBFA(Abe,Lda,N,Ml,Mu,Ipvt,Info)
       !
       !     SKIP COLUMN REDUCTION IF PIVOT IS ZERO
       !
-      IF( SCABS1(Abe(k,ml1))==0.0E0 ) THEN
+      IF( SCABS1(Abe(k,ml1))==0._SP ) THEN
         Info = k
       ELSE
         !
         !     COMPUTE MULTIPLIERS
         !
-        t = -(1.0E0,0.0E0)/Abe(k,ml1)
+        t = -(1._SP,0._SP)/Abe(k,ml1)
         DO i = 0, lm-1
           Abe(lm+k-i,lm2+i) = t*Abe(lm+k-i,lm2+i)
         END DO
@@ -180,5 +180,5 @@ SUBROUTINE CNBFA(Abe,Lda,N,Ml,Mu,Ipvt,Info)
     END DO
   END IF
   Ipvt(N) = N
-  IF( SCABS1(Abe(N,ml1))==0.0E0 ) Info = N
+  IF( SCABS1(Abe(N,ml1))==0._SP ) Info = N
 END SUBROUTINE CNBFA

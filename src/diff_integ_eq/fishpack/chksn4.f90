@@ -48,7 +48,7 @@ SUBROUTINE CHKSN4(Mbdcnd,Nbdcnd,Alpha,Beta,COFX,Singlr)
   !     CHECK THAT MIXED CONDITIONS ARE PURE NEUMAN
   !
   IF( Mbdcnd==3 ) THEN
-    IF( Alpha/=0.0 .OR. Beta/=0.0 ) RETURN
+    IF( Alpha/=0._SP .OR. Beta/=0._SP ) RETURN
   END IF
   !
   !     CHECK THAT NON-DERIVATIVE COEFFICIENT FUNCTIONS
@@ -57,7 +57,7 @@ SUBROUTINE CHKSN4(Mbdcnd,Nbdcnd,Alpha,Beta,COFX,Singlr)
   DO i = is_com, ms_com
     xi = ait_com + (i-1)*dlx_com
     CALL COFX(xi,ai,bi,ci)
-    IF( ci/=0.0 ) RETURN
+    IF( ci/=0._SP ) RETURN
   END DO
   !
   !     THE OPERATOR MUST BE SINGULAR IF THIS POINT IS REACHED

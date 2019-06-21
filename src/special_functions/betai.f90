@@ -49,7 +49,7 @@ REAL(SP) FUNCTION BETAI(X,Pin,Qin)
     alnsml = LOG(sml)
   !* FIRST EXECUTABLE STATEMENT  BETAI
   !
-  IF( X<0. .OR. X>1.0 ) CALL XERMSG('BETAI',&
+  IF( X<0. .OR. X>1._SP ) CALL XERMSG('BETAI',&
     'X IS NOT IN THE RANGE (0,1)',1,2)
   IF( Pin<=0. .OR. Qin<=0. )&
     CALL XERMSG('BETAI','P AND/OR Q IS LE ZERO',2,2)
@@ -59,18 +59,18 @@ REAL(SP) FUNCTION BETAI(X,Pin,Qin)
   q = Qin
   IF( q>p .OR. X>=0.8 ) THEN
     IF( X>=0.2 ) THEN
-      y = 1.0 - y
+      y = 1._SP - y
       p = Qin
       q = Pin
     END IF
   END IF
   !
-  IF( (p+q)*y/(p+1.)<eps ) THEN
+  IF( (p+q)*y/(p+1._SP)<eps ) THEN
     !
-    BETAI = 0.0
+    BETAI = 0._SP
     xb = p*LOG(MAX(y,sml)) - LOG(p) - ALBETA(p,q)
     IF( xb>alnsml .AND. y/=0. ) BETAI = EXP(xb)
-    IF( y/=X .OR. p/=Pin ) BETAI = 1.0 - BETAI
+    IF( y/=X .OR. p/=Pin ) BETAI = 1._SP - BETAI
     RETURN
   ELSE
     !
@@ -78,16 +78,16 @@ REAL(SP) FUNCTION BETAI(X,Pin,Qin)
     ! TERM WILL EQUAL Y**P/BETA(PS,P) * (1.-PS)I * Y**I / FAC(I)
     !
     ps = q - AINT(q)
-    IF( ps==0. ) ps = 1.0
+    IF( ps==0. ) ps = 1._SP
     xb = p*LOG(y) - ALBETA(ps,p) - LOG(p)
-    BETAI = 0.0
+    BETAI = 0._SP
     IF( xb>=alnsml ) THEN
       !
       BETAI = EXP(xb)
       term = BETAI*p
-      IF( ps/=1.0 ) THEN
+      IF( ps/=1._SP ) THEN
         !
-        n = INT( MAX(alneps/LOG(y),4.0E0) )
+        n = INT( MAX(alneps/LOG(y),4._SP) )
         DO i = 1, n
           term = term*(i-ps)*y/i
           BETAI = BETAI + term/(p+i)
@@ -97,23 +97,23 @@ REAL(SP) FUNCTION BETAI(X,Pin,Qin)
     !
     ! NOW EVALUATE THE FINITE SUM, MAYBE.
     !
-    IF( q>1.0 ) THEN
+    IF( q>1._SP ) THEN
       !
-      xb = p*LOG(y) + q*LOG(1.0-y) - ALBETA(p,q) - LOG(q)
-      ib = INT( MAX(xb/alnsml,0.0E0) )
+      xb = p*LOG(y) + q*LOG(1._SP-y) - ALBETA(p,q) - LOG(q)
+      ib = INT( MAX(xb/alnsml,0._SP) )
       term = EXP(xb-ib*alnsml)
-      c = 1.0/(1.0-y)
-      p1 = q*c/(p+q-1.)
+      c = 1._SP/(1._SP-y)
+      p1 = q*c/(p+q-1._SP)
       !
-      finsum = 0.0
+      finsum = 0._SP
       n = INT( q )
       IF( q==REAL(n) ) n = n - 1
       DO i = 1, n
-        IF( p1<=1.0 .AND. term/eps<=finsum ) EXIT
+        IF( p1<=1._SP .AND. term/eps<=finsum ) EXIT
         term = (q-i+1)*c*term/(p+q-i)
         !
-        IF( term>1.0 ) ib = ib - 1
-        IF( term>1.0 ) term = term*sml
+        IF( term>1._SP ) ib = ib - 1
+        IF( term>1._SP ) term = term*sml
         !
         IF( ib==0 ) finsum = finsum + term
       END DO
@@ -121,7 +121,7 @@ REAL(SP) FUNCTION BETAI(X,Pin,Qin)
       BETAI = BETAI + finsum
     END IF
   END IF
-  IF( y/=X .OR. p/=Pin ) BETAI = 1.0 - BETAI
-  BETAI = MAX(MIN(BETAI,1.0),0.0)
+  IF( y/=X .OR. p/=Pin ) BETAI = 1._SP - BETAI
+  BETAI = MAX(MIN(BETAI,1._SP),0._SP)
   RETURN
 END FUNCTION BETAI

@@ -31,7 +31,7 @@ REAL(DP) FUNCTION DVNRMS(N,V,W)
   INTEGER :: i
   REAL(DP) :: summ
   !* FIRST EXECUTABLE STATEMENT  DVNRMS
-  summ = 0.0D0
+  summ = 0._DP
   DO i = 1, N
     summ = summ + (V(i)/W(i))**2
   END DO

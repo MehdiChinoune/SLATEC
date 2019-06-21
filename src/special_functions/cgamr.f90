@@ -31,9 +31,9 @@ COMPLEX(SP) FUNCTION CGAMR(Z)
   REAL(SP) :: x
   COMPLEX(SP) :: Z
   !* FIRST EXECUTABLE STATEMENT  CGAMR
-  CGAMR = (0.0,0.0)
+  CGAMR = (0._SP,0._SP)
   x = REAL(Z)
-  IF( x<=0.0 .AND. AINT(x)==x .AND. AIMAG(Z)==0.0 ) RETURN
+  IF( x<=0._SP .AND. AINT(x)==x .AND. AIMAG(Z)==0._SP ) RETURN
   !
   CALL XGETF(irold)
   CALL XSETF(1)

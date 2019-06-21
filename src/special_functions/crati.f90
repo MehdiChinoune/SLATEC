@@ -30,7 +30,7 @@ SUBROUTINE CRATI(Z,Fnu,N,Cy,Tol)
   COMPLEX(SP) :: cdfnu, Cy(N), pt, p1, p2, rz, t1, Z
   REAL(SP) :: ak, amagz, ap1, ap2, arg, az, dfnu, fdnu, flam, Fnu, fnup, &
     rap1, rho, test, test1, Tol
-  COMPLEX(SP), PARAMETER :: czero = (0.0E0,0.0E0), cone = (1.0E0,0.0E0)
+  COMPLEX(SP), PARAMETER :: czero = (0._SP,0._SP), cone = (1._SP,0._SP)
   !* FIRST EXECUTABLE STATEMENT  CRATI
   az = ABS(Z)
   inu = INT( Fnu )
@@ -43,7 +43,7 @@ SUBROUTINE CRATI(Z,Fnu,N,Cy,Tol)
   itime = 1
   k = 1
   rz = (cone+cone)/Z
-  t1 = CMPLX(fnup,0.0E0)*rz
+  t1 = CMPLX(fnup,0._SP,SP)*rz
   p2 = -t1
   p1 = cone
   t1 = t1 + rz
@@ -59,9 +59,9 @@ SUBROUTINE CRATI(Z,Fnu,N,Cy,Tol)
   arg = (ap2+ap2)/(ap1*Tol)
   test1 = SQRT(arg)
   test = test1
-  rap1 = 1.0E0/ap1
-  p1 = p1*CMPLX(rap1,0.0E0)
-  p2 = p2*CMPLX(rap1,0.0E0)
+  rap1 = 1._SP/ap1
+  p1 = p1*CMPLX(rap1,0._SP,SP)
+  p2 = p2*CMPLX(rap1,0._SP,SP)
   ap2 = ap2*rap1
   DO
     k = k + 1
@@ -76,9 +76,9 @@ SUBROUTINE CRATI(Z,Fnu,N,Cy,Tol)
         kk = k + 1 - id
         ak = kk
         dfnu = Fnu + (N-1)
-        cdfnu = CMPLX(dfnu,0.0E0)
-        t1 = CMPLX(ak,0.0E0)
-        p1 = CMPLX(1.0E0/ap2,0.0E0)
+        cdfnu = CMPLX(dfnu,0._SP,SP)
+        t1 = CMPLX(ak,0._SP,SP)
+        p1 = CMPLX(1._SP/ap2,0._SP,SP)
         p2 = czero
         DO i = 1, kk
           pt = p1
@@ -86,26 +86,26 @@ SUBROUTINE CRATI(Z,Fnu,N,Cy,Tol)
           p2 = pt
           t1 = t1 - cone
         END DO
-        IF( REAL(p1)==0.0E0 .AND. AIMAG(p1)==0.0E0 ) p1 = CMPLX(Tol,Tol)
+        IF( REAL(p1)==0._SP .AND. AIMAG(p1)==0._SP ) p1 = CMPLX(Tol,Tol,SP)
         Cy(N) = p2/p1
         IF( N==1 ) RETURN
         k = N - 1
         ak = k
-        t1 = CMPLX(ak,0.0E0)
-        cdfnu = CMPLX(Fnu,0.0E0)*rz
+        t1 = CMPLX(ak,0._SP,SP)
+        cdfnu = CMPLX(Fnu,0._SP,SP)*rz
         DO i = 2, N
           pt = cdfnu + t1*rz + Cy(k+1)
-          IF( REAL(pt)==0.0E0 .AND. AIMAG(pt)==0.0E0 ) pt = CMPLX(Tol,Tol)
+          IF( REAL(pt)==0._SP .AND. AIMAG(pt)==0._SP ) pt = CMPLX(Tol,Tol,SP)
           Cy(k) = cone/pt
           t1 = t1 - cone
           k = k - 1
         END DO
         EXIT
       ELSE
-        ak = ABS(t1)*0.5E0
-        flam = ak + SQRT(ak*ak-1.0E0)
+        ak = ABS(t1)*0.5_SP
+        flam = ak + SQRT(ak*ak-1._SP)
         rho = MIN(ap2/ap1,flam)
-        test = test1*SQRT(rho/(rho*rho-1.0E0))
+        test = test1*SQRT(rho/(rho*rho-1._SP))
         itime = 2
       END IF
     END IF

@@ -34,22 +34,22 @@ SUBROUTINE ZSERI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol,Elim,Alim)
     coefi, coefr, crscr, czi, czr, dfnu, Elim, Fnu, fnup, hzi, hzr, raz, rs, &
     rtr1, rzi, rzr, s, ss, sti, str, s1i, s1r, s2i, s2r, Tol, Yi(N), Yr(N), &
     wi(2), wr(2), Zi, Zr
-  REAL(DP), PARAMETER :: zeror = 0.0D0, zeroi = 0.0D0, coner = 1.0D0, conei = 0.0D0
+  REAL(DP), PARAMETER :: zeror = 0._DP, zeroi = 0._DP, coner = 1._DP, conei = 0._DP
   !* FIRST EXECUTABLE STATEMENT  ZSERI
   Nz = 0
   az = ZABS(Zr,Zi)
-  IF( az==0.0D0 ) GOTO 500
-  arm = 1.0D+3*D1MACH(1)
+  IF( az==0._DP ) GOTO 500
+  arm = 1.E3_DP*D1MACH(1)
   rtr1 = SQRT(arm)
-  crscr = 1.0D0
+  crscr = 1._DP
   iflag = 0
   IF( az<arm ) THEN
     Nz = N
-    IF( Fnu==0.0D0 ) Nz = Nz - 1
+    IF( Fnu==0._DP ) Nz = Nz - 1
     GOTO 500
   ELSE
-    hzr = 0.5D0*Zr
-    hzi = 0.5D0*Zi
+    hzr = 0.5_DP*Zr
+    hzi = 0.5_DP*Zi
     czr = zeror
     czi = zeroi
     IF( az>rtr1 ) CALL ZMLT(hzr,hzi,hzr,hzi,czr,czi)
@@ -58,7 +58,7 @@ SUBROUTINE ZSERI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol,Elim,Alim)
     CALL ZLOG(hzr,hzi,ckr,cki,idum)
   END IF
   100  dfnu = Fnu + (nn-1)
-  fnup = dfnu + 1.0D0
+  fnup = dfnu + 1._DP
   !-----------------------------------------------------------------------
   !     UNDERFLOW TEST
   !-----------------------------------------------------------------------
@@ -70,7 +70,7 @@ SUBROUTINE ZSERI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol,Elim,Alim)
   IF( ak1r>(-Elim) ) THEN
     IF( ak1r<=(-Alim) ) THEN
       iflag = 1
-      ss = 1.0D0/Tol
+      ss = 1._DP/Tol
       crscr = Tol
       ascle = arm*ss
     END IF
@@ -82,17 +82,17 @@ SUBROUTINE ZSERI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol,Elim,Alim)
     il = MIN(2,nn)
     DO i = 1, il
       dfnu = Fnu + (nn-i)
-      fnup = dfnu + 1.0D0
+      fnup = dfnu + 1._DP
       s1r = coner
       s1i = conei
       IF( acz>=Tol*fnup ) THEN
         ak1r = coner
         ak1i = conei
-        ak = fnup + 2.0D0
+        ak = fnup + 2._DP
         s = fnup
-        aa = 2.0D0
+        aa = 2._DP
         DO
-          rs = 1.0D0/s
+          rs = 1._DP/s
           str = ak1r*czr - ak1i*czi
           sti = ak1r*czi + ak1i*czr
           ak1r = str*rs
@@ -100,7 +100,7 @@ SUBROUTINE ZSERI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol,Elim,Alim)
           s1r = s1r + ak1r
           s1i = s1i + ak1i
           s = s + ak
-          ak = ak + 2.0D0
+          ak = ak + 2._DP
           aa = aa*acz*rs
           IF( aa<=atol ) EXIT
         END DO
@@ -125,7 +125,7 @@ SUBROUTINE ZSERI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol,Elim,Alim)
     IF( nn<=2 ) RETURN
     k = nn - 2
     ak = k
-    raz = 1.0D0/az
+    raz = 1._DP/az
     str = Zr*raz
     sti = -Zi*raz
     rzr = (str+str)*raz
@@ -153,7 +153,7 @@ SUBROUTINE ZSERI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol,Elim,Alim)
         cki = s2i*crscr
         Yr(k) = ckr
         Yi(k) = cki
-        ak = ak - 1.0D0
+        ak = ak - 1._DP
         k = k - 1
         IF( ZABS(ckr,cki)>ascle ) GOTO 400
       END DO
@@ -182,7 +182,7 @@ SUBROUTINE ZSERI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol,Elim,Alim)
   DO i = ib, nn
     Yr(k) = (ak+Fnu)*(rzr*Yr(k+1)-rzi*Yi(k+1)) + Yr(k+2)
     Yi(k) = (ak+Fnu)*(rzr*Yi(k+1)+rzi*Yr(k+1)) + Yi(k+2)
-    ak = ak - 1.0D0
+    ak = ak - 1._DP
     k = k - 1
   END DO
   RETURN
@@ -191,7 +191,7 @@ SUBROUTINE ZSERI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol,Elim,Alim)
   GOTO 300
   500  Yr(1) = zeror
   Yi(1) = zeroi
-  IF( Fnu==0.0D0 ) THEN
+  IF( Fnu==0._DP ) THEN
     Yr(1) = coner
     Yi(1) = conei
   END IF

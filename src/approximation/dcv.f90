@@ -113,7 +113,7 @@ REAL(DP) FUNCTION DCV(Xval,Ndata,Nconst,Nord,Nbkpt,Bkpt,W)
   INTEGER :: i, ileft, ip, is, last, mdg, mdw, n
   REAL(DP) :: zero, v(40)
   !* FIRST EXECUTABLE STATEMENT  DCV
-  zero = 0.0D0
+  zero = 0._DP
   mdg = Nbkpt - Nord + 3
   mdw = Nbkpt - Nord + 1 + Nconst
   is = mdg*(Nord+1) + 2*MAX(Ndata,Nbkpt) + Nbkpt + Nord**2

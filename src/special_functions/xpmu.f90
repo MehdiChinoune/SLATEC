@@ -61,8 +61,8 @@ SUBROUTINE XPMU(Nu1,Nu2,Mu1,Mu2,Theta,X,Sx,Id,Pqa,Ipqa,Ierror)
         !              (NU-MU)*(NU+MU+1.)*P(-(MU+1),NU,X)=
         !                2.*MU*X*SQRT((1./(1.-X**2))*P(-MU,NU,X)-P(-(MU-1),NU,X)
         !
-        x1 = 2.*mu*X*Sx*Pqa(j+1)
-        x2 = -(Nu1-mu)*(Nu1+mu+1.)*Pqa(j+2)
+        x1 = 2._SP*mu*X*Sx*Pqa(j+1)
+        x2 = -(Nu1-mu)*(Nu1+mu+1._SP)*Pqa(j+2)
         CALL XADD(x1,Ipqa(j+1),x2,Ipqa(j+2),Pqa(j),Ipqa(j),Ierror)
         IF( Ierror/=0 ) RETURN
         CALL XADJ(Pqa(j),Ipqa(j),Ierror)

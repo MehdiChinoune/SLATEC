@@ -143,7 +143,7 @@ SUBROUTINE XNRMP(Nu,Mu1,Mu2,Sarg,Mode,Spn,Ipn,Isig,Ierror)
   ! LISTING FOR DETAILS)
   !* FIRST EXECUTABLE STATEMENT  XNRMP
   Ierror = 0
-  CALL XSET(0,0,0.0,0,Ierror)
+  CALL XSET(0,0,0._SP,0,Ierror)
   IF( Ierror/=0 ) RETURN
   !
   !        TEST FOR PROPER INPUT VALUES.
@@ -154,19 +154,19 @@ SUBROUTINE XNRMP(Nu,Mu1,Mu2,Sarg,Mode,Spn,Ipn,Isig,Ierror)
   IF( Nu==0 ) GOTO 200
   IF( Mode<1 .OR. Mode>2 ) GOTO 300
   IF( Mode==2 ) THEN
-    IF( ABS(Sarg)>4.0*ATAN(1.0) ) GOTO 400
-    IF( Sarg==0.0 ) GOTO 200
+    IF( ABS(Sarg)>4._SP*ATAN(1._SP) ) GOTO 400
+    IF( Sarg==0._SP ) GOTO 200
     x = COS(Sarg)
     sx = ABS(SIN(Sarg))
     tx = x/sx
-    Isig = INT( LOG10(2.0*Nu*(5.0+ABS(Sarg*tx))) )
+    Isig = INT( LOG10(2._SP*Nu*(5._SP+ABS(Sarg*tx))) )
   ELSE
-    IF( ABS(Sarg)>1.0 ) GOTO 400
-    IF( ABS(Sarg)==1.0 ) GOTO 200
+    IF( ABS(Sarg)>1._SP ) GOTO 400
+    IF( ABS(Sarg)==1._SP ) GOTO 200
     x = Sarg
-    sx = SQRT((1.0+ABS(x))*((0.5-ABS(x))+0.5))
+    sx = SQRT((1._SP+ABS(x))*((0.5_SP-ABS(x))+0.5_SP))
     tx = x/sx
-    Isig = INT( LOG10(2.0*Nu*(5.0+tx**2)) )
+    Isig = INT( LOG10(2._SP*Nu*(5._SP+tx**2)) )
   END IF
   !
   !        BEGIN CALCULATION
@@ -177,7 +177,7 @@ SUBROUTINE XNRMP(Nu,Mu1,Mu2,Sarg,Mode,Spn,Ipn,Isig,Ierror)
   !        IF MU>NU, NORMALIZED LEGENDRE(NU,MU,X)=0.
   !
   DO WHILE( mu>Nu )
-    Spn(i) = 0.0
+    Spn(i) = 0._SP
     Ipn(i) = 0
     i = i - 1
     mu = mu - 1
@@ -190,27 +190,27 @@ SUBROUTINE XNRMP(Nu,Mu1,Mu2,Sarg,Mode,Spn,Ipn,Isig,Ierror)
   !
   !        P1 = 0. = NORMALIZED LEGENDRE(NU,NU+1,X)
   !
-  p1 = 0.0
+  p1 = 0._SP
   ip1 = 0
   !
   !        CALCULATE P2 = NORMALIZED LEGENDRE(NU,NU,X)
   !
-  p2 = 1.0
+  p2 = 1._SP
   ip2 = 0
   p3 = 0.5
-  rk = 2.0
+  rk = 2._SP
   DO j = 1, Nu
-    p3 = ((rk+1.0)/rk)*p3
+    p3 = ((rk+1._SP)/rk)*p3
     p2 = p2*sx
     CALL XADJ(p2,ip2,Ierror)
     IF( Ierror/=0 ) RETURN
-    rk = rk + 2.0
+    rk = rk + 2._SP
   END DO
   p2 = p2*SQRT(p3)
   CALL XADJ(p2,ip2,Ierror)
   IF( Ierror/=0 ) RETURN
-  s = 2.0*tx
-  t = 1.0/Nu
+  s = 2._SP*tx
+  t = 1._SP/Nu
   IF( Mu2>=Nu ) THEN
     Spn(i) = p2
     Ipn(i) = ip2
@@ -221,9 +221,9 @@ SUBROUTINE XNRMP(Nu,Mu1,Mu2,Sarg,Mode,Spn,Ipn,Isig,Ierror)
   !        RECURRENCE PROCESS
   !
   100  p = mu*t
-  c1 = 1.0/SQRT((1.0-p+t)*(1.0+p))
+  c1 = 1._SP/SQRT((1._SP-p+t)*(1._SP+p))
   c2 = s*p*c1*p2
-  c1 = -SQRT((1.0+p+t)*(1.0-p))*c1*p1
+  c1 = -SQRT((1._SP+p+t)*(1._SP-p))*c1*p1
   CALL XADD(c2,ip2,c1,ip1,p,ip,Ierror)
   IF( Ierror/=0 ) RETURN
   mu = mu - 1
@@ -247,16 +247,16 @@ SUBROUTINE XNRMP(Nu,Mu1,Mu2,Sarg,Mode,Spn,Ipn,Isig,Ierror)
   !
   200  k = Mu2 - Mu1 + 1
   DO i = 1, k
-    Spn(i) = 0.0
+    Spn(i) = 0._SP
     Ipn(i) = 0
   END DO
   Isig = 0
   IF( Mu1<=0 ) THEN
     Isig = 1
-    Spn(1) = SQRT(Nu+0.5)
+    Spn(1) = SQRT(Nu+0.5_SP)
     Ipn(1) = 0
     IF( MOD(Nu,2)/=0 ) THEN
-      IF( Mode/=1 .OR. Sarg/=1.0 ) THEN
+      IF( Mode/=1 .OR. Sarg/=1._SP ) THEN
         IF( Mode/=2 ) Spn(1) = -Spn(1)
       END IF
     END IF

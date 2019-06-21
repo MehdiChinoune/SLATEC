@@ -108,18 +108,18 @@ SUBROUTINE DORTH(Vnew,V,Hes,N,Ll,Ldhes,Kmp,Snormw)
   !         the dot products involved.
   !   -------------------------------------------------------------------
   Snormw = NORM2(Vnew(1:N))
-  IF( vnrm+0.001D0*Snormw/=vnrm ) RETURN
+  IF( vnrm+0.001_DP*Snormw/=vnrm ) RETURN
   sumdsq = 0
   DO i = i0, Ll
     tem = -DOT_PRODUCT(V(1:N,i),Vnew)
-    IF( Hes(i,Ll)+0.001D0*tem/=Hes(i,Ll) ) THEN
+    IF( Hes(i,Ll)+0.001_DP*tem/=Hes(i,Ll) ) THEN
       Hes(i,Ll) = Hes(i,Ll) - tem
       CALL DAXPY(N,tem,V(1,i),1,Vnew,1)
       sumdsq = sumdsq + tem**2
     END IF
   END DO
-  IF( sumdsq==0.0D0 ) RETURN
-  arg = MAX(0.0D0,Snormw**2-sumdsq)
+  IF( sumdsq==0._DP ) RETURN
+  arg = MAX(0._DP,Snormw**2-sumdsq)
   Snormw = SQRT(arg)
   !
   !------------- LAST LINE OF DORTH FOLLOWS ----------------------------

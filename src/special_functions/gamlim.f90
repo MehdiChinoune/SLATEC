@@ -46,23 +46,23 @@ SUBROUTINE GAMLIM(Xmin,Xmax)
   DO i = 1, 10
     xold = Xmin
     xln = LOG(Xmin)
-    Xmin = Xmin - Xmin*((Xmin+0.5)*xln-Xmin-0.2258+alnsml)/(Xmin*xln+0.5)
-    IF( ABS(Xmin-xold)<0.005 ) GOTO 100
+    Xmin = Xmin - Xmin*((Xmin+0.5_SP)*xln-Xmin-0.2258_SP+alnsml)/(Xmin*xln+0.5_SP)
+    IF( ABS(Xmin-xold)<0.005_SP ) GOTO 100
   END DO
   CALL XERMSG('GAMLIM','UNABLE TO FIND XMIN',1,2)
   !
-  100  Xmin = -Xmin + 0.01
+  100  Xmin = -Xmin + 0.01_SP
   !
   Xmax = alnbig
   DO i = 1, 10
     xold = Xmax
     xln = LOG(Xmax)
-    Xmax = Xmax - Xmax*((Xmax-0.5)*xln-Xmax+0.9189-alnbig)/(Xmax*xln-0.5)
+    Xmax = Xmax - Xmax*((Xmax-0.5_SP)*xln-Xmax+0.9189_SP-alnbig)/(Xmax*xln-0.5_SP)
     IF( ABS(Xmax-xold)<0.005 ) GOTO 200
   END DO
   CALL XERMSG('GAMLIM','UNABLE TO FIND XMAX',2,2)
   !
-  200  Xmax = Xmax - 0.01
-  Xmin = MAX(Xmin,-Xmax+1.)
+  200  Xmax = Xmax - 0.01_SP
+  Xmin = MAX(Xmin,-Xmax+1._SP)
   !
 END SUBROUTINE GAMLIM

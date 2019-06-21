@@ -129,7 +129,7 @@ CONTAINS
     !
     n = nmax
     itmax = n
-    factor = 1.2E0
+    factor = 1.2_SP
     !
     !     Set to print intermediate results if KPRINT>=3.
     !
@@ -141,7 +141,7 @@ CONTAINS
     !
     !     Set the Error tolerance to depend on the machine epsilon.
     !
-    tol = MAX(1.0E3*R1MACH(3),1.0E-6)
+    tol = MAX(1.0E3_SP*R1MACH(3),1.0E-6_SP)
     nfail = 0
     !
     !     Test routines using various convergence criteria.
@@ -172,9 +172,9 @@ CONTAINS
           CYCLE
         END IF
         IF( isym==0 ) THEN
-          dens = REAL(nelt)/(n*n)
+          dens = REAL(nelt,SP)/(n*n)
         ELSE
-          dens = REAL(2*nelt)/(n*n)
+          dens = REAL(2*nelt,SP)/(n*n)
         END IF
         IF( Kprint>=2 ) THEN
           WRITE (Lun,99003) n, nelt, dens
@@ -203,7 +203,7 @@ CONTAINS
         !         * * * * * *   SSJAC   * * * * * *
         !
         IF( Kprint>=3 ) WRITE (Lun,99008) 'SSJAC ', itol, isym
-        CALL VFILL(n,xiter,0.0E0)
+        CALL VFILL(n,xiter,0._SP)
         !
         CALL SSJAC(n,f,xiter,nelt,ia,ja,a,isym,itol,tol,2*itmax,iter,err,ierr,&
           iunit,rwork,lenw,iwork,leniw)
@@ -213,7 +213,7 @@ CONTAINS
         !         * * * * *  SSGS  * * * * *
         !
         IF( Kprint>=3 ) WRITE (Lun,99008) 'SSGS  ', itol, isym
-        CALL VFILL(n,xiter,0.0E0)
+        CALL VFILL(n,xiter,0._SP)
         !
         CALL SSGS(n,f,xiter,nelt,ia,ja,a,isym,itol,tol,itmax,iter,err,ierr,&
           iunit,rwork,lenw,iwork,leniw)
@@ -223,7 +223,7 @@ CONTAINS
         !         * * * * * *   SSILUR   * * * * * *
         !
         IF( Kprint>=3 ) WRITE (Lun,99008) 'SSILUR', itol, isym
-        CALL VFILL(n,xiter,0.0E0)
+        CALL VFILL(n,xiter,0._SP)
         !
         CALL SSILUR(n,f,xiter,nelt,ia,ja,a,isym,itol,tol,itmax,iter,err,ierr,&
           iunit,rwork,lenw,iwork,leniw)
@@ -234,7 +234,7 @@ CONTAINS
         !
         IF( isym==1 ) THEN
           IF( Kprint>=3 ) WRITE (Lun,99008) 'SSDCG', itol, isym
-          CALL VFILL(n,xiter,0.0E0)
+          CALL VFILL(n,xiter,0._SP)
           !
           CALL SSDCG(n,f,xiter,nelt,ia,ja,a,isym,itol,tol,itmax,iter,err,ierr,&
             iunit,rwork,lenw,iwork,leniw)
@@ -246,7 +246,7 @@ CONTAINS
         !
         IF( isym==1 ) THEN
           IF( Kprint>=3 ) WRITE (Lun,99008) 'SSICCG', itol, isym
-          CALL VFILL(n,xiter,0.0E0)
+          CALL VFILL(n,xiter,0._SP)
           !
           CALL SSICCG(n,f,xiter,nelt,ia,ja,a,isym,itol,tol,itmax,iter,err,&
             ierr,iunit,rwork,lenw,iwork,leniw)
@@ -257,7 +257,7 @@ CONTAINS
         !         * * * * * *    SSDCGN   * * * * * *
         !
         IF( Kprint>=3 ) WRITE (Lun,99008) 'SSDCGN', itol, isym
-        CALL VFILL(n,xiter,0.0E0)
+        CALL VFILL(n,xiter,0._SP)
         !
         CALL SSDCGN(n,f,xiter,nelt,ia,ja,a,isym,itol,tol,itmax,iter,err,ierr,&
           iunit,rwork,lenw,iwork,leniw)
@@ -267,7 +267,7 @@ CONTAINS
         !         * * * * * *   SSLUCN   * * * * * *
         !
         IF( Kprint>=3 ) WRITE (Lun,99008) 'SSLUCN', itol, isym
-        CALL VFILL(n,xiter,0.0E0)
+        CALL VFILL(n,xiter,0._SP)
         !
         CALL SSLUCN(n,f,xiter,nelt,ia,ja,a,isym,itol,tol,itmax,iter,err,ierr,&
           iunit,rwork,lenw,iwork,leniw)
@@ -277,7 +277,7 @@ CONTAINS
         !         * * * * * *    SSDBCG   * * * * * *
         !
         IF( Kprint>=3 ) WRITE (Lun,99008) 'SSDBCG', itol, isym
-        CALL VFILL(n,xiter,0.0E0)
+        CALL VFILL(n,xiter,0._SP)
         !
         CALL SSDBCG(n,f,xiter,nelt,ia,ja,a,isym,itol,tol,itmax,iter,err,ierr,&
           iunit,rwork,lenw,iwork,leniw)
@@ -287,7 +287,7 @@ CONTAINS
         !         * * * * * *   SSLUBC   * * * * * *
         !
         IF( Kprint>=3 ) WRITE (Lun,99008) 'SSLUBC', itol, isym
-        CALL VFILL(n,xiter,0.0E0)
+        CALL VFILL(n,xiter,0._SP)
         !
         CALL SSLUBC(n,f,xiter,nelt,ia,ja,a,isym,itol,tol,itmax,iter,err,ierr,&
           iunit,rwork,lenw,iwork,leniw)
@@ -297,7 +297,7 @@ CONTAINS
         !         * * * * * *    SSDCGS   * * * * * *
         !
         IF( Kprint>=3 ) WRITE (Lun,99008) 'SSDCGS', itol, isym
-        CALL VFILL(n,xiter,0.0E0)
+        CALL VFILL(n,xiter,0._SP)
         !
         CALL SSDCGS(n,f,xiter,nelt,ia,ja,a,isym,itol,tol,itmax,iter,err,ierr,&
           iunit,rwork,lenw,iwork,leniw)
@@ -307,7 +307,7 @@ CONTAINS
         !         * * * * * *   SSLUCS   * * * * * *
         !
         IF( Kprint>=3 ) WRITE (Lun,99008) 'SSLUCS', itol, isym
-        CALL VFILL(n,xiter,0.0E0)
+        CALL VFILL(n,xiter,0._SP)
         !
         CALL SSLUCS(n,f,xiter,nelt,ia,ja,a,isym,itol,tol,itmax,iter,err,ierr,&
           iunit,rwork,lenw,iwork,leniw)
@@ -318,7 +318,7 @@ CONTAINS
         !
         DO nsave = 0, 3
           IF( Kprint>=3 ) WRITE (Lun,99009) 'SSDOMN', itol, isym, nsave
-          CALL VFILL(n,xiter,0.0E0)
+          CALL VFILL(n,xiter,0._SP)
           !
           CALL SSDOMN(n,f,xiter,nelt,ia,ja,a,isym,nsave,itol,tol,itmax,iter,&
             err,ierr,iunit,rwork,lenw,iwork,leniw)
@@ -330,7 +330,7 @@ CONTAINS
         !
         DO nsave = 0, 3
           IF( Kprint>=3 ) WRITE (Lun,99009) 'SSLUOM', itol, isym, nsave
-          CALL VFILL(n,xiter,0.0E0)
+          CALL VFILL(n,xiter,0._SP)
           !
           CALL SSLUOM(n,f,xiter,nelt,ia,ja,a,isym,nsave,itol,tol,itmax,iter,&
             err,ierr,iunit,rwork,lenw,iwork,leniw)
@@ -342,7 +342,7 @@ CONTAINS
         !
         DO nsave = 5, 12
           IF( Kprint>=3 ) WRITE (Lun,99009) 'SSDGMR', itol, isym, nsave
-          CALL VFILL(n,xiter,0.0E0)
+          CALL VFILL(n,xiter,0._SP)
           itolgm = 0
           !
           CALL SSDGMR(n,f,xiter,nelt,ia,ja,a,isym,nsave,tol,itmax,iter,&
@@ -355,7 +355,7 @@ CONTAINS
         !
         DO nsave = 5, 12
           IF( Kprint>=3 ) WRITE (Lun,99009) 'SSLUGM', itol, isym, nsave
-          CALL VFILL(n,xiter,0.0E0)
+          CALL VFILL(n,xiter,0._SP)
           !
           CALL SSLUGM(n,f,xiter,nelt,ia,ja,a,isym,nsave,tol,itmax,iter,&
             err,ierr,iunit,rwork,lenw,iwork,leniw)
@@ -485,14 +485,14 @@ CONTAINS
     !     Note:  Double precision version did not work properly with
     !            certain compilers with literal arguments to RAND.
     !
-    dummy = 16381.0
+    dummy = 16381._SP
     iseed = INT( RAND(dummy) )
     Ierr = 0
     DO i = 1, N
       Idiag(i) = 0
-      Dsum(i) = -1.0E0
+      Dsum(i) = -1._SP
     END DO
-    dummy = 0.0
+    dummy = 0._SP
     Nelt = 0
     !
     !     Set the matrix elements.
@@ -548,7 +548,7 @@ CONTAINS
           RETURN
         END IF
         Idiag(icol) = Nelt
-        A(Nelt) = 0.0E0
+        A(Nelt) = 0._SP
         Ia(Nelt) = icol
         Ja(Nelt) = icol
       END IF
@@ -557,14 +557,14 @@ CONTAINS
     !         Clean up the diagonals.
     !
     DO i = 1, N
-      A(Idiag(i)) = -1.0001E0*Dsum(i)
+      A(Idiag(i)) = -1.0001_SP*Dsum(i)
     END DO
     !
     !         Set a random solution and determine the right-hand side.
     !
     DO i = 1, N
       SOLn(i) = RAND(dummy)
-      F(i) = 0.0E0
+      F(i) = 0._SP
     END DO
     !
     DO k = 1, Nelt

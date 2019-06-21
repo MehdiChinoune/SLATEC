@@ -81,7 +81,7 @@ REAL(DP) FUNCTION DBVALU(T,A,N,K,Ideriv,X,Inbv,Work)
     ipj, ip1, ip1mj, j, jj, j1, j2, kmider, kmj, km1, kpk, mflag
   REAL(DP) :: fkmj
   !* FIRST EXECUTABLE STATEMENT  DBVALU
-  DBVALU = 0.0D0
+  DBVALU = 0._DP
   IF( K<1 ) THEN
     CALL XERMSG('DBVALU','K DOES NOT SATISFY K>=1',2,1)
     RETURN

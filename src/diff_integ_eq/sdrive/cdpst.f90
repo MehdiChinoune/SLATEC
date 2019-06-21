@@ -65,7 +65,7 @@ SUBROUTINE CDPST(El,F,FA,H,Impl,JACOBN,Matdim,Miter,Ml,Mu,N,Nde,Nq,Save2,&
   INTEGER :: i, iflag, imax, j, j2, k, mw
   REAL(SP) :: bl, bp, br, dfdymx, diff, facmin, factor, scalee, zmax, zmin
   COMPLEX(SP) :: cfctr, dy, yj, ys
-  REAL(SP), PARAMETER :: FACMAX = 0.5E0, BU = 0.5E0
+  REAL(SP), PARAMETER :: FACMAX = 0.5_SP, BU = 0.5_SP
   !* FIRST EXECUTABLE STATEMENT  CDPST
   Nje = Nje + 1
   Ier = .FALSE.
@@ -84,10 +84,10 @@ SUBROUTINE CDPST(El,F,FA,H,Impl,JACOBN,Matdim,Miter,Ml,Mu,N,Nde,Nq,Save2,&
         END DO
       END DO
     ELSEIF( Miter==2 ) THEN
-      br = Uround**(.875E0)
-      bl = Uround**(.75E0)
-      bp = Uround**(-.15E0)
-      facmin = Uround**(.78E0)
+      br = Uround**(.875_SP)
+      bl = Uround**(.75_SP)
+      bp = Uround**(-.15_SP)
+      facmin = Uround**(.78_SP)
       DO j = 1, N
         IF( ABS(Y(j))>ABS(Ywt(j)) ) THEN
           ys = Y(j)
@@ -96,9 +96,9 @@ SUBROUTINE CDPST(El,F,FA,H,Impl,JACOBN,Matdim,Miter,Ml,Mu,N,Nde,Nq,Save2,&
         END IF
         DO
           dy = Fac(j)*ys
-          IF( dy==0.E0 ) THEN
+          IF( dy==0._SP ) THEN
             IF( REAL(Fac(j))<FACMAX ) THEN
-              Fac(j) = MIN(100.E0*REAL(Fac(j)),FACMAX)
+              Fac(j) = MIN(100._SP*REAL(Fac(j)),FACMAX)
               CYCLE
             ELSE
               dy = ys
@@ -127,13 +127,13 @@ SUBROUTINE CDPST(El,F,FA,H,Impl,JACOBN,Matdim,Miter,Ml,Mu,N,Nde,Nq,Save2,&
             END IF
           END DO
           !                                                                 Step 2
-          IF( MIN(ABS(Save2(imax)),ABS(Save1(imax)))>0.E0 ) THEN
+          IF( MIN(ABS(Save2(imax)),ABS(Save1(imax)))>0._SP ) THEN
             scalee = MAX(ABS(Save2(imax)),ABS(Save1(imax)))
             !                                                                 Step 3
             IF( diff>BU*scalee ) THEN
-              Fac(j) = MAX(facmin,REAL(Fac(j))*.5E0)
+              Fac(j) = MAX(facmin,REAL(Fac(j))*.5_SP)
             ELSEIF( br*scalee<=diff .AND. diff<=bl*scalee ) THEN
-              Fac(j) = MIN(REAL(Fac(j))*2.E0,FACMAX)
+              Fac(j) = MIN(REAL(Fac(j))*2._SP,FACMAX)
               !                                                                 Step 4
             ELSEIF( diff<br*scalee ) THEN
               Fac(j) = MIN(bp*REAL(Fac(j)),FACMAX)
@@ -147,7 +147,7 @@ SUBROUTINE CDPST(El,F,FA,H,Impl,JACOBN,Matdim,Miter,Ml,Mu,N,Nde,Nq,Save2,&
     END IF
     IF( Impl==0 ) THEN
       DO i = 1, N
-        Dfdy(i,i) = Dfdy(i,i) + 1.E0
+        Dfdy(i,i) = Dfdy(i,i) + 1._SP
       END DO
     ELSEIF( Impl==1 ) THEN
       CALL FA(N,T,Y,A,Matdim,Ml,Mu,Nde)
@@ -198,10 +198,10 @@ SUBROUTINE CDPST(El,F,FA,H,Impl,JACOBN,Matdim,Miter,Ml,Mu,N,Nde,Nq,Save2,&
         END DO
       END DO
     ELSEIF( Miter==5 ) THEN
-      br = Uround**(.875E0)
-      bl = Uround**(.75E0)
-      bp = Uround**(-.15E0)
-      facmin = Uround**(.78E0)
+      br = Uround**(.875_SP)
+      bl = Uround**(.75_SP)
+      bp = Uround**(-.15_SP)
+      facmin = Uround**(.78_SP)
       mw = Ml + Mu + 1
       j2 = MIN(mw,N)
       DO j = 1, j2
@@ -213,9 +213,9 @@ SUBROUTINE CDPST(El,F,FA,H,Impl,JACOBN,Matdim,Miter,Ml,Mu,N,Nde,Nq,Save2,&
           END IF
           DO
             dy = Fac(k)*ys
-            IF( dy==0.E0 ) THEN
+            IF( dy==0._SP ) THEN
               IF( REAL(Fac(k))<FACMAX ) THEN
-                Fac(k) = MIN(100.E0*REAL(Fac(k)),FACMAX)
+                Fac(k) = MIN(100._SP*REAL(Fac(k)),FACMAX)
                 CYCLE
               ELSE
                 dy = ys
@@ -249,13 +249,13 @@ SUBROUTINE CDPST(El,F,FA,H,Impl,JACOBN,Matdim,Miter,Ml,Mu,N,Nde,Nq,Save2,&
             END IF
           END DO
           !                                                                 Step 2
-          IF( MIN(ABS(Save2(imax)),ABS(Save1(imax)))>0.E0 ) THEN
+          IF( MIN(ABS(Save2(imax)),ABS(Save1(imax)))>0._SP ) THEN
             scalee = MAX(ABS(Save2(imax)),ABS(Save1(imax)))
             !                                                                 Step 3
             IF( diff>BU*scalee ) THEN
-              Fac(j) = MAX(facmin,REAL(Fac(j))*.5E0)
+              Fac(j) = MAX(facmin,REAL(Fac(j))*.5_SP)
             ELSEIF( br*scalee<=diff .AND. diff<=bl*scalee ) THEN
-              Fac(j) = MIN(REAL(Fac(j))*2.E0,FACMAX)
+              Fac(j) = MIN(REAL(Fac(j))*2._SP,FACMAX)
               !                                                                 Step 4
             ELSEIF( diff<br*scalee ) THEN
               Fac(k) = MIN(bp*REAL(Fac(k)),FACMAX)
@@ -266,17 +266,17 @@ SUBROUTINE CDPST(El,F,FA,H,Impl,JACOBN,Matdim,Miter,Ml,Mu,N,Nde,Nq,Save2,&
       Nfe = Nfe + j2
     END IF
     IF( Iswflg==3 ) THEN
-      dfdymx = 0.E0
+      dfdymx = 0._SP
       DO j = 1, N
         DO i = MAX(Ml+1,mw+1-j), MIN(mw+N-j,mw+Ml)
           zmax = MAX(ABS(REAL(Dfdy(i,j))),ABS(AIMAG(Dfdy(i,j))))
           zmin = MIN(ABS(REAL(Dfdy(i,j))),ABS(AIMAG(Dfdy(i,j))))
-          IF( zmax/=0.E0 )&
-            dfdymx = MAX(dfdymx,zmax*SQRT(1.E0+(zmin/zmax)**2))
+          IF( zmax/=0._SP )&
+            dfdymx = MAX(dfdymx,zmax*SQRT(1._SP+(zmin/zmax)**2))
         END DO
       END DO
-      Bnd = 0.E0
-      IF( dfdymx/=0.E0 ) THEN
+      Bnd = 0._SP
+      IF( dfdymx/=0._SP ) THEN
         DO j = 1, N
           DO i = MAX(Ml+1,mw+1-j), MIN(mw+N-j,mw+Ml)
             Bnd = Bnd + (REAL(Dfdy(i,j))/dfdymx)&
@@ -288,7 +288,7 @@ SUBROUTINE CDPST(El,F,FA,H,Impl,JACOBN,Matdim,Miter,Ml,Mu,N,Nde,Nq,Save2,&
     END IF
     IF( Impl==0 ) THEN
       DO j = 1, N
-        Dfdy(mw,j) = Dfdy(mw,j) + 1.E0
+        Dfdy(mw,j) = Dfdy(mw,j) + 1._SP
       END DO
     ELSEIF( Impl==1 ) THEN
       CALL FA(N,T,Y,A(Ml+1:,:),Matdim,Ml,Mu,Nde)

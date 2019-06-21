@@ -68,9 +68,9 @@ SUBROUTINE SLVS(Wm,Iwm,X)
       IF( hl0/=phl0 ) THEN
         r = hl0/phl0
         DO i = 1, n_com
-          di = 1.0E0 - r*(1.0E0-1.0E0/Wm(i+2))
-          IF( ABS(di)==0.0E0 ) GOTO 100
-          Wm(i+2) = 1.0E0/di
+          di = 1._SP - r*(1._SP-1._SP/Wm(i+2))
+          IF( ABS(di)==0._SP ) GOTO 100
+          Wm(i+2) = 1._SP/di
         END DO
       END IF
       DO i = 1, n_com

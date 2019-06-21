@@ -55,13 +55,13 @@ SUBROUTINE WNLIT(W,Mdw,M,N,L,Ipivot,Itype,H,Scalee,Rnorm,Idope,Dope,Done)
   !
   lb = MIN(M-1,L)
   recalc = .TRUE.
-  Rnorm = 0.E0
+  Rnorm = 0._SP
   krank = 0
   !
   !     We set FACTOR=1.0 so that the heavy weight ALAMDA will be
   !     included in the test for column independence.
   !
-  factor = 1.E0
+  factor = 1._SP
   lend = L
   DO i = 1, lb
     !
@@ -102,9 +102,9 @@ SUBROUTINE WNLIT(W,Mdw,M,N,L,Ipivot,Itype,H,Scalee,Rnorm,Idope,Dope,Done)
             jp = imax
           END IF
           !
-          IF( W(j,i)/=0.E0 ) THEN
+          IF( W(j,i)/=0._SP ) THEN
             CALL SROTMG(Scalee(jp),Scalee(j),W(jp,i),W(j,i),sparam)
-            W(j,i) = 0.E0
+            W(j,i) = 0._SP
             CALL SROTM(N+1-i,W(jp,i+1),Mdw,W(j,i+1),Mdw,sparam)
           END IF
         END DO
@@ -132,7 +132,7 @@ SUBROUTINE WNLIT(W,Mdw,M,N,L,Ipivot,Itype,H,Scalee,Rnorm,Idope,Dope,Done)
   IF( krank<me ) THEN
     factor = alsq
     DO i = krank + 1, me
-      W(i,1:L) = 0.E0
+      W(i,1:L) = 0._SP
     END DO
     !
     !        Determine the rank of the remaining equality constraint
@@ -155,9 +155,9 @@ SUBROUTINE WNLIT(W,Mdw,M,N,L,Ipivot,Itype,H,Scalee,Rnorm,Idope,Dope,Done)
       !           Eliminate elements in the I-th col.
       !
       DO j = me, ir + 1, -1
-        IF( W(j,i)/=0.E0 ) THEN
+        IF( W(j,i)/=0._SP ) THEN
           CALL SROTMG(Scalee(j-1),Scalee(j),W(j-1,i),W(j,i),sparam)
-          W(j,i) = 0.E0
+          W(j,i) = 0._SP
           CALL SROTM(N+1-i,W(j-1,i+1),Mdw,W(j,i+1),Mdw,sparam)
         END IF
       END DO
@@ -169,10 +169,10 @@ SUBROUTINE WNLIT(W,Mdw,M,N,L,Ipivot,Itype,H,Scalee,Rnorm,Idope,Dope,Done)
       IF( .NOT. WNLT2(me,mend,ir,factor,tau,Scalee,W(:,i)) ) THEN
         jj = ir
         DO ir = jj, me
-          W(ir,1:N) = 0.E0
+          W(ir,1:N) = 0._SP
           Rnorm = Rnorm + (Scalee(ir)*W(ir,N+1)/alsq)*W(ir,N+1)
-          W(ir,N+1) = 0.E0
-          Scalee(ir) = 1.E0
+          W(ir,N+1) = 0._SP
+          Scalee(ir) = 1._SP
           !
           !                 Reclassify the zeroed row as a least squares equation.
           !
@@ -216,9 +216,9 @@ SUBROUTINE WNLIT(W,Mdw,M,N,L,Ipivot,Itype,H,Scalee,Rnorm,Idope,Dope,Done)
       !           Eliminate I-th column below the IR-th element.
       !
       DO j = M, ir + 1, -1
-        IF( W(j,i)/=0.E0 ) THEN
+        IF( W(j,i)/=0._SP ) THEN
           CALL SROTMG(Scalee(j-1),Scalee(j),W(j-1,i),W(j,i),sparam)
-          W(j,i) = 0.E0
+          W(j,i) = 0._SP
           CALL SROTM(N+1-i,W(j-1,i+1),Mdw,W(j,i+1),Mdw,sparam)
         END IF
       END DO
@@ -230,7 +230,7 @@ SUBROUTINE WNLIT(W,Mdw,M,N,L,Ipivot,Itype,H,Scalee,Rnorm,Idope,Dope,Done)
       t = Scalee(ir)*W(ir,i)**2
       indep = t>(tau*eanorm)**2
       IF( indep ) THEN
-        rn = 0.E0
+        rn = 0._SP
         DO i1 = ir, M
           DO j1 = i + 1, N
             rn = MAX(rn,Scalee(i1)*W(i1,j1)**2)

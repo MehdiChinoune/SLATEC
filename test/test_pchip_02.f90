@@ -130,11 +130,11 @@ CONTAINS
     !
     !  INITIALIZE.
     !
-    REAL(DP), PARAMETER :: zero = 0.D0, one = 1.D0, four = 4.D0, ten = 10.D0
-    REAL(DP), PARAMETER :: small = 1.0D-10
+    REAL(DP), PARAMETER :: zero = 0._DP, one = 1._DP, four = 4._DP, ten = 10._DP
+    REAL(DP), PARAMETER :: small = 1.E-10_DP
     INTEGER, PARAMETER :: nintt = 3
-    REAL(DP), PARAMETER :: left(3) = [ -1.5D0, 2.0D-10, 1.0D0 ]
-    REAL(DP), PARAMETER :: right(3) = [ 2.5D0, 3.0D-10, 1.0D+8 ]
+    REAL(DP), PARAMETER :: left(3) = [ -1.5_DP, 2.E-10_DP, 1._DP ]
+    REAL(DP), PARAMETER :: right(3) = [ 2.5_DP, 3.E-10_DP, 1.E8_DP ]
     !
     !* FIRST EXECUTABLE STATEMENT  DEVCHK
     machep = D1MACH(4)
@@ -228,7 +228,7 @@ CONTAINS
       !
       dx = (x2-x1)/(Npts-10)
       DO i = 1, Npts
-        Xev(i) = (x1+(i-5)*dx) + dx*RAND(0.0E0)
+        Xev(i) = (x1+(i-5)*dx) + dx*RAND(0._SP)
       END DO
       !     --------------------------------------------------------
       CALL DCHFDV(x1,x2,f1,f2,d1,d2,Npts,Xev,Fev,Dev,next,ierr)
@@ -389,7 +389,7 @@ CONTAINS
     !  DEFINE RELATIVE ERROR WITH FLOOR.
     !
     REAL(DP) FUNCTION RERR(err,value,floorr)
-      REAL(8), INTENT(IN) :: err, value, floorr
+      REAL(DP), INTENT(IN) :: err, value, floorr
       RERR = err/MAX(ABS(value),floorr)
     END FUNCTION RERR
   END SUBROUTINE DEVCHK
@@ -471,19 +471,19 @@ CONTAINS
     !  FIRST, TEST DCHFEV AND DCHFDV.
     !
     IF( Kprint>=3 ) WRITE (Lout,99005) -1
-    CALL DCHFEV(0.D0,1.D0,3.D0,7.D0,3.D0,6.D0,0,dum,dum,next,ierr)
+    CALL DCHFEV(0._DP,1._DP,3._DP,7._DP,3._DP,6._DP,0,dum,dum,next,ierr)
     IF( .NOT. COMP(ierr,-1,Lout,Kprint) ) nerr = nerr + 1
     !
     IF( Kprint>=3 ) WRITE (Lout,99005) -2
-    CALL DCHFEV(1.D0,1.D0,3.D0,7.D0,3.D0,6.D0,1,dum,dum,next,ierr)
+    CALL DCHFEV(1._DP,1._DP,3._DP,7._DP,3._DP,6._DP,1,dum,dum,next,ierr)
     IF( .NOT. COMP(ierr,-2,Lout,Kprint) ) nerr = nerr + 1
     !
     IF( Kprint>=3 ) WRITE (Lout,99005) -1
-    CALL DCHFDV(0.D0,1.D0,3.D0,7.D0,3.D0,6.D0,0,dum,dum,dum,next,ierr)
+    CALL DCHFDV(0._DP,1._DP,3._DP,7._DP,3._DP,6._DP,0,dum,dum,dum,next,ierr)
     IF( .NOT. COMP(ierr,-1,Lout,Kprint) ) nerr = nerr + 1
     !
     IF( Kprint>=3 ) WRITE (Lout,99005) -2
-    CALL DCHFDV(1.D0,1.D0,3.D0,7.D0,3.D0,6.D0,1,dum,dum,dum,next,ierr)
+    CALL DCHFDV(1._DP,1._DP,3._DP,7._DP,3._DP,6._DP,1,dum,dum,dum,next,ierr)
     IF( .NOT. COMP(ierr,-2,Lout,Kprint) ) nerr = nerr + 1
     !
     !  SET UP PCH DEFINITION.
@@ -491,7 +491,7 @@ CONTAINS
     DO i = 1, N
       x(i) = i
       f(i) = i + 2
-      d(i) = 1.D0
+      d(i) = 1._DP
     END DO
     !
     !  SWAP POINTS 4 AND 7, SO X-ARRAY IS OUT OF ORDER.
@@ -633,7 +633,7 @@ CONTAINS
     !
     INTEGER, PARAMETER :: nmax = 10, nx = 4, ny = 6
     INTEGER, PARAMETER :: ne = 51
-    REAL(DP), PARAMETER :: zero = 0.D0
+    REAL(DP), PARAMETER :: zero = 0._DP
     !
     !  INITIALIZE.
     !
@@ -641,7 +641,7 @@ CONTAINS
     machep = D1MACH(4)
     !       Following tolerance is looser than S.P. version to avoid
     !       spurious failures on some systems.
-    tol = 25.D0*machep
+    tol = 25._DP*machep
     !
     Fail = .FALSE.
     !
@@ -650,11 +650,11 @@ CONTAINS
     !     Y = -0.75(0.5 )1.75 .
     !
     DO i = 1, nx - 1
-      X(i) = 0.25D0*i
+      X(i) = 0.25_DP*i
     END DO
-    X(nx) = 1.D0
+    X(nx) = 1._DP
     DO j = 1, ny
-      Y(j) = 0.5D0*j - 1.25D0
+      Y(j) = 0.5_DP*j - 1.25_DP
       DO i = 1, nx
         F(i,j) = FCN(X(i),Y(j))
         Fx(i,j) = DFDX(X(i),Y(j))
@@ -666,13 +666,13 @@ CONTAINS
     !     XE =  0.(0.02)1. ;
     !     YE = -2.(0.08)2. .
     !
-    dx = 1.D0/(ne-1)
+    dx = 1._DP/(ne-1)
     DO k = 1, ne - 1
       Xe(k) = dx*(k-1)
-      Ye(k) = 4.D0*Xe(k) - 2.D0
+      Ye(k) = 4._DP*Xe(k) - 2._DP
     END DO
-    Xe(ne) = 1.D0
-    Ye(ne) = 2.D0
+    Xe(ne) = 1._DP
+    Ye(ne) = 2._DP
     !
     IF( Kprint>=3 ) WRITE (Lout,99001)
     !
@@ -884,16 +884,16 @@ CONTAINS
     !  DEFINE TEST FUNCTION AND DERIVATIVES.
     !
     REAL(DP) FUNCTION FCN(ax,ay)
-      REAL(8) ax, ay
-      FCN = ax*(ay*ay)*(ax*ax+1.E0)
+      REAL(DP) ax, ay
+      FCN = ax*(ay*ay)*(ax*ax+1._SP)
     END FUNCTION FCN
     REAL(DP) FUNCTION DFDX(ax,ay)
-      REAL(8) ax, ay
-      DFDX = (ay*ay)*(3.E0*ax*ax+1.E0)
+      REAL(DP) ax, ay
+      DFDX = (ay*ay)*(3._SP*ax*ax+1._SP)
     END FUNCTION DFDX
     REAL(DP) FUNCTION DFDY(ax,ay)
-      REAL(8) ax, ay
-      DFDY = 2.E0*ax*ay*(ax*ax+1.E0)
+      REAL(DP) ax, ay
+      DFDY = 2._SP*ax*ay*(ax*ax+1._SP)
     END FUNCTION DFDY
   END SUBROUTINE DEVPCK
   !** DPCHQ1
@@ -1102,14 +1102,14 @@ CONTAINS
     !
     !  INITIALIZE.
     !
-    REAL(DP), PARAMETER :: thrqtr = 0.75D0, one = 1.D0, two = 2.D0, three = 3.D0
+    REAL(DP), PARAMETER :: thrqtr = 0.75_DP, one = 1._DP, two = 2._DP, three = 3._DP
     INTEGER, PARAMETER :: n = 7
-    REAL(DP), PARAMETER :: x(7) = [ -4.D0, -2.D0, -0.9D0, 0.D0, 0.9D0, 2.D0, 4.D0 ]
+    REAL(DP), PARAMETER :: x(7) = [ -4._DP, -2._DP, -0.9_DP, 0._DP, 0.9_DP, 2._DP, 4._DP ]
     INTEGER, PARAMETER :: npairs = 17
-    REAL(DP), PARAMETER :: a(17) = [ -3.0D0, 3.0D0, -0.5D0, -0.5D0, -0.5D0, -4.0D0, &
-      -4.0D0, 3.0D0, -5.0D0, -5.0D0, -6.0D0, 6.0D0, -1.5D0, -1.5D0, -3.0D0, 3.0D0, 0.5D0 ]
-    REAL(DP), PARAMETER :: b(17) =  [ 3.0D0, -3.0D0, 1.0D0, 2.0D0, 5.0D0, -0.5D0, &
-      4.0D0, 5.0D0, -3.0D0, 5.0D0, -5.0D0, 5.0D0, -0.5D0, -1.0D0, -2.5D0, 3.5D0, 0.5D0 ]
+    REAL(DP), PARAMETER :: a(17) = [ -3._DP, 3._DP, -0.5_DP, -0.5_DP, -0.5_DP, -4._DP, &
+      -4._DP, 3._DP, -5._DP, -5._DP, -6._DP, 6._DP, -1.5_DP, -1.5_DP, -3._DP, 3._DP, 0.5_DP ]
+    REAL(DP), PARAMETER :: b(17) =  [ 3._DP, -3._DP, 1._DP, 2._DP, 5._DP, -0.5_DP, &
+      4._DP, 5._DP, -3._DP, 5._DP, -5._DP, 5._DP, -0.5_DP, -1._DP, -2.5_DP, 3.5_DP, 0.5_DP ]
     INTEGER, PARAMETER :: ierexp(17) = [ 0, 0, 0, 0, 2, 0, 0, 2, 1, 3, 3, 3, 0, &
       0, 0, 0, 0 ]
     !
@@ -1117,7 +1117,7 @@ CONTAINS
     !
     !* FIRST EXECUTABLE STATEMENT  DPCHQ2
     machep = D1MACH(4)
-    tol = 100.D0*machep
+    tol = 100._DP*machep
     !
     !  SET UP PCH FUNCTION DEFINITION.
     !
@@ -1208,15 +1208,15 @@ CONTAINS
     !  DEFINE TEST FUNCTIONS.
     !
     REAL(DP) FUNCTION FCN(ax)
-      REAL(8), INTENT(IN) :: ax
+      REAL(DP), INTENT(IN) :: ax
       FCN = three*ax*ax*(ax-two)
     END FUNCTION FCN
     REAL(DP) FUNCTION DERIV(ax)
-      REAL(8), INTENT(IN) :: ax
+      REAL(DP), INTENT(IN) :: ax
       DERIV = three*ax*(two*(ax-two)+ax)
     END FUNCTION DERIV
     REAL(DP) FUNCTION ANTDER(ax)
-      REAL(8), INTENT(IN) :: ax
+      REAL(DP), INTENT(IN) :: ax
       ANTDER = ax**3*(thrqtr*ax-two)
     END FUNCTION ANTDER
   END SUBROUTINE DPCHQ2
@@ -1312,24 +1312,24 @@ CONTAINS
     INTEGER :: i, ierr, ifail, nbad, nbadz
     INTEGER, PARAMETER :: N = 9, NWK = 2*N
     REAL(DP) :: d(N), dc(N), err, f(N), tol, told, tolz, vc(2), wk(NWK)
-    REAL(DP), PARAMETER :: ZERO = 0.0D0, MONE = -1.0D0
+    REAL(DP), PARAMETER :: ZERO = 0._DP, MONE = -1._DP
     CHARACTER(6) :: result
     !
     !  Initialize.
     !
     !       Data.
     INTEGER, PARAMETER :: ic(2) = [ 0, 0 ]
-    REAL(DP), PARAMETER :: x(N) = [ -2.2D0, -1.2D0, -1.0D0, -0.5D0, -0.01D0, 0.5D0, &
-      1.0D0, 2.0D0, 2.2D0 ]
+    REAL(DP), PARAMETER :: x(N) = [ -2.2_DP, -1.2_DP, -1._DP, -0.5_DP, -0.01_DP, 0.5_DP, &
+      1._DP, 2._DP, 2.2_DP ]
     !
     !       Results generated on Cray X/MP (9 sign. figs.)
-    REAL(DP), PARAMETER :: dm(N) = [ 0.D0, 3.80027352D-01, 7.17253009D-01, &
-      5.82014161D-01, 0.D0, -5.68208031D-01, -5.13501618D-01, -7.77910977D-02, &
-      -2.45611117D-03 ]
-    REAL(DP), PARAMETER :: dc5 = 1.76950158D-02, dc6 = -5.69579814D-01
-    REAL(DP), PARAMETER :: ds(N) = [ -5.16830792D-02, 5.71455855D-01, 7.40530225D-01, &
-      7.63864934D-01, 1.92614386D-02, -7.65324380D-01, -7.28209035D-01, &
-      -7.98445427D-02, -2.85983446D-02 ]
+    REAL(DP), PARAMETER :: dm(N) = [ 0._DP, 3.80027352E-01_DP, 7.17253009E-01_DP, &
+      5.82014161E-01_DP, 0._DP, -5.68208031E-01_DP, -5.13501618E-01_DP, -7.77910977E-02_DP, &
+      -2.45611117E-03_DP ]
+    REAL(DP), PARAMETER :: dc5 = 1.76950158E-02_DP, dc6 = -5.69579814E-01_DP
+    REAL(DP), PARAMETER :: ds(N) = [ -5.16830792E-02_DP, 5.71455855E-01_DP, &
+      7.40530225E-01_DP, 7.63864934E-01_DP, 1.92614386E-02_DP, -7.65324380E-01_DP, &
+      -7.28209035E-01_DP, -7.98445427E-02_DP, -2.85983446E-02_DP ]
     !
     !* FIRST EXECUTABLE STATEMENT  DPCHQ3
     ifail = 0
@@ -1652,28 +1652,28 @@ CONTAINS
     !       Define X, F, D.
     DO i = 1, MAXN
       x(i) = i
-      d(i) = 0.D0
+      d(i) = 0._DP
     END DO
     DO i = 2, MAXN, 3
-      d(i) = 2.D0
+      d(i) = 2._DP
     END DO
     DO i = 1, 3
       f(i) = x(i)
-      f(i+3) = f(i) + 1.D0
-      f(i+6) = f(i+3) + 1.D0
-      f(i+9) = f(i+6) + 1.D0
-      f(i+12) = f(i+9) + 1.D0
+      f(i+3) = f(i) + 1._DP
+      f(i+6) = f(i+3) + 1._DP
+      f(i+9) = f(i+6) + 1._DP
+      f(i+12) = f(i+9) + 1._DP
     END DO
-    f(16) = 6.D0
+    f(16) = 6._DP
     !       Define FB, DB.
-    fb(1) = 0.D0
-    fb(2) = 2.D0
-    fb(3) = 3.D0
-    fb(4) = 5.D0
-    db(1) = 1.D0
-    db(2) = 3.D0
-    db(3) = 3.D0
-    db(4) = 0.D0
+    fb(1) = 0._DP
+    fb(2) = 2._DP
+    fb(3) = 3._DP
+    fb(4) = 5._DP
+    db(1) = 1._DP
+    db(2) = 3._DP
+    db(3) = 3._DP
+    db(4) = 0._DP
     DO i = 1, 3
       fb(NB-i+1) = fb(i)
       db(NB-i+1) = -db(i)
@@ -1755,7 +1755,7 @@ CONTAINS
       END DO
     END IF
     !
-    IF( f(1)<0. ) THEN
+    IF( f(1)<0._SP ) THEN
       !
       !  PRINT SUMMARY AND TERMINATE.
       !
@@ -1875,17 +1875,17 @@ CONTAINS
     INTEGER, PARAMETER :: N = 9
     REAL(DP) :: bcoef(2*N), dcalc, derr, dermax, fcalc, ferr, fermax, t(2*N+4), &
       terr, termax, tol, tolz, tsave(2*N+4), work(16*N)
-    REAL(DP), PARAMETER :: ZERO = 0.0D0
+    REAL(DP), PARAMETER :: ZERO = 0._DP
     LOGICAL :: fail
     !
     !  Define test data.
     !
-    REAL(DP), PARAMETER :: x(N) = [ -2.2D0, -1.2D0, -1.0D0, -0.5D0, -0.01D0, 0.5D0, &
-      1.0D0, 2.0D0, 2.2D0 ]
-    REAL(DP), PARAMETER :: f(N) = [ 0.0079D0, 0.2369D0, 0.3679D0, 0.7788D0, 0.9999D0, &
-      0.7788D0, 0.3679D0, 0.1083D0, 0.0079D0 ]
-    REAL(DP), PARAMETER :: d(N) = [ 0.0000D0, 0.3800D0, 0.7173D0, 0.5820D0, 0.0177D0, &
-      -0.5696D0, -0.5135D0, -0.0778D0, -0.0025D0 ]
+    REAL(DP), PARAMETER :: x(N) = [ -2.2_DP, -1.2_DP, -1._DP, -0.5_DP, -0.01_DP, 0.5_DP, &
+      1._DP, 2._DP, 2.2_DP ]
+    REAL(DP), PARAMETER :: f(N) = [ 0.0079_DP, 0.2369_DP, 0.3679_DP, 0.7788_DP, 0.9999_DP, &
+      0.7788_DP, 0.3679_DP, 0.1083_DP, 0.0079_DP ]
+    REAL(DP), PARAMETER :: d(N) = [ 0.0000_DP, 0.3800_DP, 0.7173_DP, 0.5820_DP, 0.0177_DP, &
+      -0.5696_DP, -0.5135_DP, -0.0778_DP, -0.0025_DP ]
     !
     !  Initialize.
     !
@@ -2000,8 +2000,8 @@ CONTAINS
     !  Define relative error function.
     !
     REAL(DP) FUNCTION RELERR(err,ans)
-      REAL(8), INTENT(IN) :: ans, err
-      RELERR = ABS(err)/MAX(1.0D-5,ABS(ans))
+      REAL(DP), INTENT(IN) :: ans, err
+      RELERR = ABS(err)/MAX(1.E-5_DP,ABS(ans))
     END FUNCTION RELERR
   END SUBROUTINE DPCHQ5
 END MODULE TEST33_MOD

@@ -47,15 +47,15 @@ REAL(SP) FUNCTION CSEVL(X,Cs,N)
   REAL(SP) :: Cs(N), X
   INTEGER :: i, ni
   REAL(SP) :: b0, b1, b2, twox
-  REAL(SP), PARAMETER :: onepl = 1.0E0 + R1MACH(4)
+  REAL(SP), PARAMETER :: onepl = 1._SP + R1MACH(4)
   !* FIRST EXECUTABLE STATEMENT  CSEVL
   IF( N<1 ) CALL XERMSG('CSEVL','NUMBER OF TERMS <= 0',2,2)
   IF( N>1000 ) CALL XERMSG('CSEVL','NUMBER OF TERMS > 1000',3,2)
   IF( ABS(X)>onepl ) CALL XERMSG('CSEVL','X OUTSIDE THE INTERVAL (-1,+1)',1,1)
   !
-  b1 = 0.0E0
-  b0 = 0.0E0
-  twox = 2.0*X
+  b1 = 0._SP
+  b0 = 0._SP
+  twox = 2._SP*X
   DO i = 1, N
     b2 = b1
     b1 = b0
@@ -63,6 +63,6 @@ REAL(SP) FUNCTION CSEVL(X,Cs,N)
     b0 = twox*b1 - b2 + Cs(ni)
   END DO
   !
-  CSEVL = 0.5E0*(b0-b2)
+  CSEVL = 0.5_SP*(b0-b2)
   !
 END FUNCTION CSEVL

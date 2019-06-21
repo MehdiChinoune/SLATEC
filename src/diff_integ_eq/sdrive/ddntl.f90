@@ -70,7 +70,7 @@ SUBROUTINE DDNTL(Eps,F,FA,Hmax,Hold,Impl,Jtask,Matdim,Maxord,Mint,Miter,&
   LOGICAL :: Convrg, Ier
   INTEGER :: i, iflag, info
   REAL(DP) :: oldl0, summ
-  REAL(DP), PARAMETER :: RMINIT = 10000.D0
+  REAL(DP), PARAMETER :: RMINIT = 10000._DP
   !* FIRST EXECUTABLE STATEMENT  DDNTL
   Ier = .FALSE.
   IF( Jtask>=0 ) THEN
@@ -78,9 +78,9 @@ SUBROUTINE DDNTL(Eps,F,FA,Hmax,Hold,Impl,Jtask,Matdim,Maxord,Mint,Miter,&
       CALL DDCST(Maxord,Mint,Iswflg,El,Tq)
       Rmax = RMINIT
     END IF
-    Rc = 0.D0
+    Rc = 0._DP
     Convrg = .FALSE.
-    Trend = 1.D0
+    Trend = 1._DP
     Nq = 1
     Nwait = 3
     CALL F(N,T,Y,Save2)
@@ -134,7 +134,7 @@ SUBROUTINE DDNTL(Eps,F,FA,Hmax,Hold,Impl,Jtask,Matdim,Maxord,Mint,Miter,&
           RETURN
         END IF
         DO i = 1, Nde
-          IF( A(i,1)==0.D0 ) THEN
+          IF( A(i,1)==0._DP ) THEN
             Ier = .TRUE.
             RETURN
           ELSE
@@ -142,7 +142,7 @@ SUBROUTINE DDNTL(Eps,F,FA,Hmax,Hold,Impl,Jtask,Matdim,Maxord,Mint,Miter,&
           END IF
         END DO
         DO i = Nde + 1, N
-          A(i,1) = 0.D0
+          A(i,1) = 0._DP
         END DO
       ELSEIF( Impl==3 ) THEN
         IF( Miter==1 .OR. Miter==2 ) THEN
@@ -173,7 +173,7 @@ SUBROUTINE DDNTL(Eps,F,FA,Hmax,Hold,Impl,Jtask,Matdim,Maxord,Mint,Miter,&
       END IF
     END IF
     DO i = 1, Nde
-      Save1(i) = Save2(i)/MAX(1.D0,Ywt(i))
+      Save1(i) = Save2(i)/MAX(1._DP,Ywt(i))
     END DO
     summ = NORM2(Save1(1:Nde))/SQRT(REAL(Nde, DP))
     IF( summ>Eps/ABS(H) ) H = SIGN(Eps/summ,H)
@@ -188,7 +188,7 @@ SUBROUTINE DDNTL(Eps,F,FA,Hmax,Hold,Impl,Jtask,Matdim,Maxord,Mint,Miter,&
   ELSE
     IF( Miter/=Mtrold ) THEN
       Mtrold = Miter
-      Rc = 0.D0
+      Rc = 0._DP
       Convrg = .FALSE.
     END IF
     IF( Mint/=Mntold ) THEN

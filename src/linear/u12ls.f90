@@ -87,7 +87,7 @@ SUBROUTINE U12LS(A,Mda,M,N,B,Mdb,Nb,Mode,Krank,Rnorm,H,W,Ic,Ir)
             IF( k/=N ) THEN
               DO jb = 1, Nb
                 DO i = kp1, N
-                  B(i,jb) = 0.0
+                  B(i,jb) = 0._SP
                 END DO
               END DO
               IF( Mode/=1 ) THEN
@@ -174,7 +174,7 @@ SUBROUTINE U12LS(A,Mda,M,N,B,Mdb,Nb,Mode,Krank,Rnorm,H,W,Ic,Ir)
     END DO
     DO jb = 1, Nb
       DO i = 1, N
-        B(i,jb) = 0.0
+        B(i,jb) = 0._SP
       END DO
     END DO
     RETURN

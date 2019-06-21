@@ -159,7 +159,7 @@ SUBROUTINE HSTART(F,Neq,A,B,Y,Yprime,Etol,Morder,Small,Big,Spy,Pv,Yp,Sf,H)
   !* FIRST EXECUTABLE STATEMENT  HSTART
   dx = B - A
   absdx = ABS(dx)
-  relper = Small**0.375
+  relper = Small**0.375_SP
   ynorm = HVNRM(Y,Neq)
   !
   !.......................................................................
@@ -169,7 +169,7 @@ SUBROUTINE HSTART(F,Neq,A,B,Y,Yprime,Etol,Morder,Small,Big,Spy,Pv,Yp,Sf,H)
   !     INDEPENDENT VARIABLE. PROTECT AGAINST AN OVERFLOW. ALSO
   !     COMPUTE A WEIGHTED BOUND (FBND) ON THE FIRST DERIVATIVE LOCALLY.
   !
-  da = SIGN(MAX(MIN(relper*ABS(A),absdx),100.*Small*ABS(A)),dx)
+  da = SIGN(MAX(MIN(relper*ABS(A),absdx),100._SP*Small*ABS(A)),dx)
   IF( da==0. ) da = relper*dx
   CALL F(A+da,Y,Sf)
   !
@@ -181,7 +181,7 @@ SUBROUTINE HSTART(F,Neq,A,B,Y,Yprime,Etol,Morder,Small,Big,Spy,Pv,Yp,Sf,H)
       Pv(j) = Spy(j) - Yp(j)
     END DO
   ELSE
-    power = 2./(Morder+1)
+    power = 2._SP/(Morder+1)
     DO j = 1, Neq
       wtj = Etol(j)**power
       Spy(j) = Sf(j)/wtj
@@ -231,7 +231,7 @@ SUBROUTINE HSTART(F,Neq,A,B,Y,Yprime,Etol,Morder,Small,Big,Spy,Pv,Yp,Sf,H)
     END DO
   END IF
   !
-  dfdub = 0.
+  dfdub = 0._SP
   lk = MIN(Neq+1,3)
   DO k = 1, lk
     !                       SET YPNORM AND DELX
@@ -248,7 +248,7 @@ SUBROUTINE HSTART(F,Neq,A,B,Y,Yprime,Etol,Morder,Small,Big,Spy,Pv,Yp,Sf,H)
         IF( ABS(delx*Yp(j))>Etol(j) ) delx = SIGN(Etol(j)/Yp(j),dx)
       END DO
     ELSE
-      delx = SIGN(1.0,dx)
+      delx = SIGN(1._SP,dx)
     END IF
     !                       DEFINE PERTURBED VECTOR OF INITIAL VALUES
     DO j = 1, Neq
@@ -329,12 +329,12 @@ SUBROUTINE HSTART(F,Neq,A,B,Y,Yprime,Etol,Morder,Small,Big,Spy,Pv,Yp,Sf,H)
     IF( ydpb/=0. ) THEN
       !
       !                       SECOND DERIVATIVE TERM (YDPB) IS NON-ZERO
-      srydpb = SQRT(0.5*ydpb)
-      IF( 1.0<srydpb*absdx ) H = 1./srydpb
+      srydpb = SQRT(0.5_SP*ydpb)
+      IF( 1.0<srydpb*absdx ) H = 1._SP/srydpb
     ELSE
       !
       !                       ONLY SECOND DERIVATIVE TERM (YDPB) IS ZERO
-      IF( 1.0<fbnd*absdx ) H = 1./fbnd
+      IF( 1.0<fbnd*absdx ) H = 1._SP/fbnd
     END IF
     !
     !                       BOTH FIRST DERIVATIVE TERM (FBND) AND SECOND
@@ -343,14 +343,14 @@ SUBROUTINE HSTART(F,Neq,A,B,Y,Yprime,Etol,Morder,Small,Big,Spy,Pv,Yp,Sf,H)
   !
   !                       FURTHER RESTRICT THE STEP LENGTH TO BE NOT
   !                                                 BIGGER THAN  1/DFDUB
-  IF( H*dfdub>1. ) H = 1./dfdub
+  IF( H*dfdub>1. ) H = 1._SP/dfdub
   !
   !                       FINALLY, RESTRICT THE STEP LENGTH TO BE NOT
   !                       SMALLER THAN  100*SMALL*ABS(A).  HOWEVER, IF
   !                       A=0. AND THE COMPUTED H UNDERFLOWED TO ZERO,
   !                       THE ALGORITHM RETURNS  SMALL*ABS(B)  FOR THE
   !                                                       STEP LENGTH.
-  H = MAX(H,100.*Small*ABS(A))
+  H = MAX(H,100._SP*Small*ABS(A))
   IF( H==0. ) H = Small*ABS(B)
   !
   !                       NOW SET DIRECTION OF INTEGRATION

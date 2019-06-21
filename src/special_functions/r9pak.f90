@@ -38,11 +38,11 @@ REAL(SP) FUNCTION R9PAK(Y,N)
   REAL(SP) :: a1n2b, Y
   INTEGER :: N, nsum, ny
   INTEGER, SAVE :: nmin, nmax
-  REAL(SP), PARAMETER :: a1n210 = 3.321928094887362E0
+  REAL(SP), PARAMETER :: a1n210 = 3.321928094887362_SP
   LOGICAL, SAVE :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  R9PAK
   IF( first ) THEN
-    a1n2b = 1.0
+    a1n2b = 1._SP
     IF( I1MACH(10)/=2 ) a1n2b = R1MACH(5)*a1n210
     nmin = INT( a1n2b*I1MACH(12) )
     nmax = INT( a1n2b*I1MACH(13) )
@@ -55,7 +55,7 @@ REAL(SP) FUNCTION R9PAK(Y,N)
   IF( nsum<nmin ) THEN
     !
     CALL XERMSG('R9PAK','PACKED NUMBER UNDERFLOWS',1,1)
-    R9PAK = 0.0
+    R9PAK = 0._SP
     RETURN
   ELSE
     IF( nsum>nmax ) CALL XERMSG('R9PAK','PACKED NUMBER OVERFLOWS',2,2)
@@ -64,14 +64,14 @@ REAL(SP) FUNCTION R9PAK(Y,N)
     IF( nsum>0 ) THEN
       DO
         !
-        R9PAK = 2.0*R9PAK
+        R9PAK = 2._SP*R9PAK
         nsum = nsum - 1
         IF( nsum==0 ) EXIT
       END DO
     ELSE
       DO
         !
-        R9PAK = 0.5*R9PAK
+        R9PAK = 0.5_SP*R9PAK
         nsum = nsum + 1
         IF( nsum==0 ) RETURN
       END DO

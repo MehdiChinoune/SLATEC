@@ -59,7 +59,7 @@ SUBROUTINE DQCHEB(X,Fval,Cheb12,Cheb24)
   !   830518  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
-  
+
   !
   REAL(DP) :: alam, alam1, alam2, Cheb12(13), Cheb24(25), Fval(25), part1, &
     part2, part3, v(12), X(11)
@@ -144,16 +144,16 @@ SUBROUTINE DQCHEB(X,Fval,Cheb12,Cheb24)
   Cheb24(25) = Cheb12(1) - alam
   Cheb12(13) = v(1) - v(3)
   Cheb24(13) = Cheb12(13)
-  alam = 0.1D+01/0.6D+01
+  alam = 1._DP/6._DP
   DO i = 2, 12
     Cheb12(i) = Cheb12(i)*alam
   END DO
-  alam = 0.5D+00*alam
+  alam = 0.5_DP*alam
   Cheb12(1) = Cheb12(1)*alam
   Cheb12(13) = Cheb12(13)*alam
   DO i = 2, 24
     Cheb24(i) = Cheb24(i)*alam
   END DO
-  Cheb24(1) = 0.5D+00*alam*Cheb24(1)
-  Cheb24(25) = 0.5D+00*alam*Cheb24(25)
+  Cheb24(1) = 0.5_DP*alam*Cheb24(1)
+  Cheb24(25) = 0.5_DP*alam*Cheb24(25)
 END SUBROUTINE DQCHEB

@@ -110,23 +110,23 @@ SUBROUTINE DEXINT(X,N,Kode,M,Tol,En,Nz,Ierr)
   REAL(DP) :: a(99), aa, aams, ah, ak, at, b(99), bk, bt, cc, cnorm, ct, em, emx, &
     etol, fnm, fx, pt, p1, p2, s, tx, xlim, xtol, y(2), yt, y1, y2
   INTEGER :: i, ic, icase, ict, ik, ind, ix, i1m, jset, k, kk, kn, ks, ml, mu, nd, nm
-  REAL(DP), PARAMETER :: xcut = 2.0D0
+  REAL(DP), PARAMETER :: xcut = 2._DP
   !* FIRST EXECUTABLE STATEMENT  DEXINT
   Ierr = 0
   Nz = 0
-  etol = MAX(D1MACH(4),0.5D-18)
-  IF( X<0.0D0 ) Ierr = 1
+  etol = MAX(D1MACH(4),0.5E-18_DP)
+  IF( X<0._DP ) Ierr = 1
   IF( N<1 ) Ierr = 1
   IF( Kode<1 .OR. Kode>2 ) Ierr = 1
   IF( M<1 ) Ierr = 1
-  IF( Tol<etol .OR. Tol>0.1D0 ) Ierr = 1
-  IF( X==0.0D0 .AND. N==1 ) Ierr = 1
+  IF( Tol<etol .OR. Tol>0.1_DP ) Ierr = 1
+  IF( X==0._DP .AND. N==1 ) Ierr = 1
   IF( Ierr/=0 ) RETURN
   i1m = -I1MACH(15)
-  pt = 2.3026D0*i1m*D1MACH(5)
-  xlim = pt - 6.907755D0
+  pt = 2.3026_DP*i1m*D1MACH(5)
+  xlim = pt - 6.907755_DP
   bt = pt + (N+M-1)
-  IF( bt>1000.0D0 ) xlim = pt - LOG(bt)
+  IF( bt>1000._DP ) xlim = pt - LOG(bt)
   !
   IF( X>xcut ) THEN
     !-----------------------------------------------------------------------
@@ -135,19 +135,19 @@ SUBROUTINE DEXINT(X,N,Kode,M,Tol,En,Nz,Ierr)
     !     WITH RECURSION AWAY FROM N=INTEGER CLOSEST TO X.
     !     U(A,B,X) IS THE SECOND CONFLUENT HYPERGEOMETRIC FUNCTION
     !-----------------------------------------------------------------------
-    emx = 1.0D0
+    emx = 1._DP
     IF( Kode/=2 ) THEN
       IF( X<=xlim ) THEN
         emx = EXP(-X)
       ELSE
         Nz = M
         DO i = 1, M
-          En(i) = 0.0D0
+          En(i) = 0._DP
         END DO
         RETURN
       END IF
     END IF
-    tx = X + 0.5D0
+    tx = X + 0.5_DP
     ix = INT( tx )
     kn = N + M - 1
     IF( kn<=ix ) THEN
@@ -177,16 +177,16 @@ SUBROUTINE DEXINT(X,N,Kode,M,Tol,En,Nz,Ierr)
     ks = 2
     icase = 3
     GOTO 200
-  ELSEIF( X==0.0D0 .AND. N>1 ) THEN
+  ELSEIF( X==0._DP .AND. N>1 ) THEN
     DO i = 1, M
-      En(i) = 1.0D0/(N+i-2)
+      En(i) = 1._DP/(N+i-2)
     END DO
     RETURN
   ELSE
     !-----------------------------------------------------------------------
     !     SERIES FOR E(N,X) FOR X<=XCUT
     !-----------------------------------------------------------------------
-    tx = X + 0.5D0
+    tx = X + 0.5_DP
     ix = INT( tx )
     !-----------------------------------------------------------------------
     !     ICASE=1 MEANS INTEGER CLOSEST TO X IS 2 AND N=1
@@ -201,33 +201,33 @@ SUBROUTINE DEXINT(X,N,Kode,M,Tol,En,Nz,Ierr)
     ml = 1
     ks = nd
     fnm = nm
-    s = 0.0D0
-    xtol = 3.0D0*Tol
+    s = 0._DP
+    xtol = 3._DP*Tol
     IF( nd/=1 ) THEN
-      xtol = 0.3333D0*Tol
-      s = 1.0D0/fnm
+      xtol = 0.3333_DP*Tol
+      s = 1._DP/fnm
     END IF
-    aa = 1.0D0
-    ak = 1.0D0
+    aa = 1._DP
+    ak = 1._DP
     ic = 35
     IF( X<etol ) ic = 1
     DO i = 1, ic
       aa = -aa*X/ak
       IF( i==nm ) THEN
         s = s + aa*(-LOG(X)+DPSIXN(nd))
-        xtol = 3.0D0*Tol
+        xtol = 3._DP*Tol
       ELSE
         s = s - aa/(ak-fnm)
         IF( ABS(aa)>xtol*ABS(s) ) THEN
-          ak = ak + 1.0D0
+          ak = ak + 1._DP
           CYCLE
         ELSEIF( i>=2 ) THEN
           IF( nd-2>i .OR. i>nd-1 ) GOTO 50
-          ak = ak + 1.0D0
+          ak = ak + 1._DP
           CYCLE
         END IF
       END IF
-      ak = ak + 1.0D0
+      ak = ak + 1._DP
     END DO
     IF( ic/=1 ) THEN
       Ierr = 2
@@ -236,7 +236,7 @@ SUBROUTINE DEXINT(X,N,Kode,M,Tol,En,Nz,Ierr)
     50  IF( nd==1 ) s = s + (-LOG(X)+DPSIXN(1))
     IF( Kode==2 ) s = s*EXP(X)
     En(1) = s
-    emx = 1.0D0
+    emx = 1._DP
     IF( M/=1 ) THEN
       En(ind) = s
       aa = ks
@@ -265,42 +265,42 @@ SUBROUTINE DEXINT(X,N,Kode,M,Tol,En,Nz,Ierr)
   !-----------------------------------------------------------------------
   ic = 0
   aa = ah + ah
-  aams = aa - 1.0D0
+  aams = aa - 1._DP
   aams = aams*aams
   tx = X + X
   fx = tx + tx
   ak = ah
   xtol = Tol
-  IF( Tol<=1.0D-3 ) xtol = 20.0D0*Tol
+  IF( Tol<=1.0D-3 ) xtol = 20._DP*Tol
   ct = aams + fx*ah
-  em = (ah+1.0D0)/((X+aa)*xtol*SQRT(ct))
+  em = (ah+1._DP)/((X+aa)*xtol*SQRT(ct))
   bk = aa
   cc = ah*ah
   !-----------------------------------------------------------------------
   !     FORWARD RECURSION FOR P(IC),P(IC+1) AND INDEX IC FOR BACKWARD
   !     RECURSION
   !-----------------------------------------------------------------------
-  p1 = 0.0D0
-  p2 = 1.0D0
+  p1 = 0._DP
+  p2 = 1._DP
   DO WHILE( ic/=99 )
     ic = ic + 1
-    ak = ak + 1.0D0
+    ak = ak + 1._DP
     at = bk/(bk+ak+cc+ic)
     bk = bk + ak + ak
     a(ic) = at
-    bt = (ak+ak+X)/(ak+1.0D0)
+    bt = (ak+ak+X)/(ak+1._DP)
     b(ic) = bt
     pt = p2
     p2 = bt*p2 - at*p1
     p1 = pt
     ct = ct + fx
-    em = em*at*(1.0D0-tx/ct)
-    IF( em*(ak+1.0D0)<=p1*p1 ) THEN
+    em = em*at*(1._DP-tx/ct)
+    IF( em*(ak+1._DP)<=p1*p1 ) THEN
       ict = ic
       kk = ic + 1
       bt = tx/(ct+fx)
-      y2 = (bk/(bk+cc+kk))*(p1/p2)*(1.0D0-bt+0.375D0*bt*bt)
-      y1 = 1.0D0
+      y2 = (bk/(bk+cc+kk))*(p1/p2)*(1._DP-bt+0.375_DP*bt*bt)
+      y1 = 1._DP
       !-----------------------------------------------------------------------
       !     BACKWARD RECURRENCE FOR
       !              Y1=             C*U( A ,A,X)
@@ -320,8 +320,8 @@ SUBROUTINE DEXINT(X,N,Kode,M,Tol,En,Nz,Ierr)
       !     X IS INCORPORATED INTO THE NORMALIZING RELATION
       !-----------------------------------------------------------------------
       pt = y2/y1
-      cnorm = 1.0E0 - pt*(ah+1.0E0)/aa
-      y(1) = 1.0E0/(cnorm*aa+X)
+      cnorm = 1._SP - pt*(ah+1._SP)/aa
+      y(1) = 1._SP/(cnorm*aa+X)
       y(2) = cnorm*y(1)
       IF( icase/=3 ) THEN
         En(ind) = emx*y(jset)
@@ -333,7 +333,7 @@ SUBROUTINE DEXINT(X,N,Kode,M,Tol,En,Nz,Ierr)
       !-----------------------------------------------------------------------
       !     RECURSION SECTION  N*E(N+1,X) + X*E(N,X)=EMX
       !-----------------------------------------------------------------------
-      En(1) = emx*(1.0E0-y(1))/X
+      En(1) = emx*(1._SP-y(1))/X
       RETURN
     END IF
   END DO
@@ -341,7 +341,7 @@ SUBROUTINE DEXINT(X,N,Kode,M,Tol,En,Nz,Ierr)
   RETURN
   300  k = ind - 1
   DO i = 1, ml
-    aa = aa - 1.0D0
+    aa = aa - 1._DP
     En(k) = (emx-aa*En(k+1))/X
     k = k - 1
   END DO
@@ -350,7 +350,7 @@ SUBROUTINE DEXINT(X,N,Kode,M,Tol,En,Nz,Ierr)
   400  k = ind
   DO i = 1, mu
     En(k+1) = (emx-X*En(k))/aa
-    aa = aa + 1.0D0
+    aa = aa + 1._DP
     k = k + 1
   END DO
   RETURN

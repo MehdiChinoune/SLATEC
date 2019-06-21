@@ -308,11 +308,11 @@ SUBROUTINE HWSCRT(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   mperod = 0
   IF( Mbdcnd>0 ) mperod = 1
   deltax = (B-A)/M
-  twdelx = 2./deltax
-  delxsq = 1./deltax**2
+  twdelx = 2._SP/deltax
+  delxsq = 1._SP/deltax**2
   deltay = (D-C)/N
-  twdely = 2./deltay
-  delysq = 1./deltay**2
+  twdely = 2._SP/deltay
+  delysq = 1._SP/deltay**2
   np = Nbdcnd + 1
   np1 = N + 1
   mp = Mbdcnd + 1
@@ -415,7 +415,7 @@ SUBROUTINE HWSCRT(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   id3 = id2 + munk
   id4 = id3 + munk
   s = delysq*delxsq
-  st2 = 2.*s
+  st2 = 2._SP*s
   DO i = 1, munk
     W(i) = s
     j = id2 + i
@@ -424,8 +424,8 @@ SUBROUTINE HWSCRT(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
     W(j) = s
   END DO
   IF( mp/=1 ) THEN
-    W(1) = 0.
-    W(id4) = 0.
+    W(1) = 0._SP
+    W(id4) = 0._SP
   END IF
   SELECT CASE (mp)
     CASE (1,2)
@@ -437,7 +437,7 @@ SUBROUTINE HWSCRT(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
     CASE DEFAULT
       W(id2) = st2
   END SELECT
-  Pertrb = 0.
+  Pertrb = 0._SP
   IF( Elmbda<0 ) THEN
   ELSEIF( Elmbda==0 ) THEN
     IF( (Nbdcnd==0 .OR. Nbdcnd==3) .AND. (Mbdcnd==0 .OR. Mbdcnd==3) ) THEN
@@ -445,30 +445,30 @@ SUBROUTINE HWSCRT(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
       !     FOR SINGULAR PROBLEMS MUST ADJUST DATA TO INSURE THAT A SOLUTION
       !     WILL EXIST.
       !
-      a1 = 1.
-      a2 = 1.
-      IF( Nbdcnd==3 ) a2 = 2.
-      IF( Mbdcnd==3 ) a1 = 2.
-      s1 = 0.
+      a1 = 1._SP
+      a2 = 1._SP
+      IF( Nbdcnd==3 ) a2 = 2._SP
+      IF( Mbdcnd==3 ) a1 = 2._SP
+      s1 = 0._SP
       msp1 = mstart + 1
       mstm1 = mstop - 1
       nsp1 = nstart + 1
       nstm1 = nstop - 1
       DO j = nsp1, nstm1
-        s = 0.
+        s = 0._SP
         DO i = msp1, mstm1
           s = s + F(i,j)
         END DO
         s1 = s1 + s*a1 + F(mstart,j) + F(mstop,j)
       END DO
       s1 = a2*s1
-      s = 0.
+      s = 0._SP
       DO i = msp1, mstm1
         s = s + F(i,nstart) + F(i,nstop)
       END DO
       s1 = s1 + s*a1 + F(mstart,nstart) + F(mstart,nstop) + F(mstop,nstart)&
         + F(mstop,nstop)
-      s = (2.+(nunk-2)*a2)*(2.+(munk-2)*a1)
+      s = (2._SP+(nunk-2)*a2)*(2._SP+(munk-2)*a1)
       Pertrb = s1/s
       DO j = nstart, nstop
         DO i = mstart, mstop

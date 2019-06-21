@@ -39,37 +39,37 @@ REAL(DP) FUNCTION D9CHU(A,B,Z)
   REAL(DP) :: A, B, Z
   INTEGER :: i, j
   REAL(DP) :: aa(4), bb(4), ab, anbn, bp, ct1, ct2, ct3, c2, d1z, g1, g2, g3, sab, x2i1
-  REAL(DP), PARAMETER :: eps = 4.0D0*D1MACH(4), sqeps = SQRT(D1MACH(4))
+  REAL(DP), PARAMETER :: eps = 4._DP*D1MACH(4), sqeps = SQRT(D1MACH(4))
   !* FIRST EXECUTABLE STATEMENT  D9CHU
-  bp = 1.0D0 + A - B
+  bp = 1._DP + A - B
   ab = A*bp
-  ct2 = 2.0D0*(Z-ab)
+  ct2 = 2._DP*(Z-ab)
   sab = A + bp
   !
-  bb(1) = 1.0D0
-  aa(1) = 1.0D0
+  bb(1) = 1._DP
+  aa(1) = 1._DP
   !
-  ct3 = sab + 1.0D0 + ab
-  bb(2) = 1.0D0 + 2.0D0*Z/ct3
-  aa(2) = 1.0D0 + ct2/ct3
+  ct3 = sab + 1._DP + ab
+  bb(2) = 1._DP + 2._DP*Z/ct3
+  aa(2) = 1._DP + ct2/ct3
   !
-  anbn = ct3 + sab + 3.0D0
-  ct1 = 1.0D0 + 2.0D0*Z/anbn
-  bb(3) = 1.0D0 + 6.0D0*ct1*Z/ct3
-  aa(3) = 1.0D0 + 6.0D0*ab/anbn + 3.0D0*ct1*ct2/ct3
+  anbn = ct3 + sab + 3._DP
+  ct1 = 1._DP + 2._DP*Z/anbn
+  bb(3) = 1._DP + 6._DP*ct1*Z/ct3
+  aa(3) = 1._DP + 6._DP*ab/anbn + 3._DP*ct1*ct2/ct3
   !
   DO i = 4, 300
     x2i1 = 2*i - 3
-    ct1 = x2i1/(x2i1-2.0D0)
+    ct1 = x2i1/(x2i1-2._DP)
     anbn = anbn + x2i1 + sab
-    ct2 = (x2i1-1.0D0)/anbn
-    c2 = x2i1*ct2 - 1.0D0
-    d1z = x2i1*2.0D0*Z/anbn
+    ct2 = (x2i1-1._DP)/anbn
+    c2 = x2i1*ct2 - 1._DP
+    d1z = x2i1*2._DP*Z/anbn
     !
     ct3 = sab*ct2
     g1 = d1z + ct1*(c2+ct3)
     g2 = d1z - c2
-    g3 = ct1*(1.0D0-ct3-2.0D0*ct2)
+    g3 = ct1*(1._DP-ct3-2._DP*ct2)
     !
     bb(4) = g1*bb(3) + g2*bb(2) + g3*bb(1)
     aa(4) = g1*aa(3) + g2*aa(2) + g3*aa(1)
@@ -88,7 +88,7 @@ REAL(DP) FUNCTION D9CHU(A,B,Z)
   !
   100  D9CHU = aa(4)/bb(4)
   !
-  IF( D9CHU<sqeps .OR. D9CHU>1.0D0/sqeps )&
+  IF( D9CHU<sqeps .OR. D9CHU>1._DP/sqeps )&
     CALL XERMSG('D9CHU','ANSWER LT HALF PRECISION',2,1)
   !
 END FUNCTION D9CHU

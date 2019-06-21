@@ -133,7 +133,7 @@ SUBROUTINE DQELG(N,Epstab,Result,Abserr,Res3la,Nres)
         !           A PART OF THE TABLE BY ADJUSTING THE VALUE OF N
         !
         IF( err1>tol1 .AND. err2>tol2 .AND. err3>tol3 ) THEN
-          ss = 0.1D+01/delta1 + 0.1D+01/delta2 - 0.1D+01/delta3
+          ss = 1._DP/delta1 + 1._DP/delta2 - 1._DP/delta3
           epsinf = ABS(ss*e1)
           !
           !           TEST TO DETECT IRREGULAR BEHAVIOUR IN THE TABLE, AND
@@ -145,7 +145,7 @@ SUBROUTINE DQELG(N,Epstab,Result,Abserr,Res3la,Nres)
             !           COMPUTE A NEW ELEMENT AND EVENTUALLY ADJUST
             !           THE VALUE OF RESULT.
             !
-            res = e1 + 0.1D+01/ss
+            res = e1 + 1._DP/ss
             Epstab(k1) = res
             k1 = k1 - 2
             error = err2 + ABS(res-e2) + err3
@@ -204,5 +204,5 @@ SUBROUTINE DQELG(N,Epstab,Result,Abserr,Res3la,Nres)
       Abserr = oflow
     END IF
   END IF
-  100  Abserr = MAX(Abserr,0.5D+01*epmach*ABS(Result))
+  100  Abserr = MAX(Abserr,5._DP*epmach*ABS(Result))
 END SUBROUTINE DQELG

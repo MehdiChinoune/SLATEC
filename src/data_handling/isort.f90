@@ -95,7 +95,7 @@ SUBROUTINE ISORT(Ix,Iy,N,Kflag)
     m = 1
     i = 1
     j = nn
-    r = 0.375E0
+    r = 0.375_SP
     GOTO 500
   ELSE
     !
@@ -104,15 +104,15 @@ SUBROUTINE ISORT(Ix,Iy,N,Kflag)
     m = 1
     i = 1
     j = nn
-    r = 0.375E0
+    r = 0.375_SP
   END IF
   !
   100 CONTINUE
   IF( i==j ) GOTO 300
-  IF( r<=0.5898437E0 ) THEN
-    r = r + 3.90625E-2
+  IF( r<=0.5898437_SP ) THEN
+    r = r + 3.90625E-2_SP
   ELSE
-    r = r - 0.21875E0
+    r = r - 0.21875_SP
   END IF
   !
   200  k = i
@@ -221,10 +221,10 @@ SUBROUTINE ISORT(Ix,Iy,N,Kflag)
   !
   500 CONTINUE
   IF( i==j ) GOTO 700
-  IF( r<=0.5898437E0 ) THEN
-    r = r + 3.90625E-2
+  IF( r<=0.5898437_SP ) THEN
+    r = r + 3.90625E-2_SP
   ELSE
-    r = r - 0.21875E0
+    r = r - 0.21875_SP
   END IF
   !
   600  k = i

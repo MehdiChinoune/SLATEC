@@ -109,7 +109,7 @@ REAL(SP) FUNCTION RAND(R)
   IF( R>=0. ) THEN
     IF( R>0. ) THEN
       !
-      ix1 = INT( MOD(R,1.)*4194304. + 0.5 )
+      ix1 = INT( MOD(R,1._SP)*4194304. + 0.5_SP )
       ix0 = MOD(ix1,2048)
       ix1 = (ix1-ix0)/2048
     ELSE
@@ -127,7 +127,7 @@ REAL(SP) FUNCTION RAND(R)
   END IF
   !
   RAND = ix1*2048 + ix0
-  RAND = RAND/4194304.
+  RAND = RAND/4194304._SP
   RETURN
   !
 END FUNCTION RAND

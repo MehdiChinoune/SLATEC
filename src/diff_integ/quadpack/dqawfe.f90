@@ -253,21 +253,21 @@ SUBROUTINE DQAWFE(F,A,Omega,Integr,Epsabs,Limlst,Limit,Maxp1,Result,&
   !           CHEBMO    - ARRAY CONTAINING THE MODIFIED CHEBYSHEV
   !                       MOMENTS (SEE ALSO ROUTINE DQC25F)
   !
-  REAL(DP), PARAMETER :: p = 0.9D+00
-  REAL(DP), PARAMETER :: pi = 3.14159265358979323846264338327950D0
+  REAL(DP), PARAMETER :: p = 0.9_DP
+  REAL(DP), PARAMETER :: pi = 3.14159265358979323846264338327950_DP
   !
   !           TEST ON VALIDITY OF PARAMETERS
   !           ------------------------------
   !
   !* FIRST EXECUTABLE STATEMENT  DQAWFE
-  Result = 0.0D+00
-  Abserr = 0.0D+00
+  Result = 0._DP
+  Abserr = 0._DP
   Neval = 0
   Lst = 0
   Ier = 0
-  IF( (Integr/=1 .AND. Integr/=2) .OR. Epsabs<=0.0D+00 .OR. Limlst<3 ) Ier = 6
+  IF( (Integr/=1 .AND. Integr/=2) .OR. Epsabs<=0._DP .OR. Limlst<3 ) Ier = 6
   IF( Ier/=6 ) THEN
-    IF( Omega/=0.0D+00 ) THEN
+    IF( Omega/=0._DP ) THEN
       !
       !           INITIALIZATIONS
       !           ---------------
@@ -282,15 +282,15 @@ SUBROUTINE DQAWFE(F,A,Omega,Integr,Epsabs,Limlst,Limit,Maxp1,Result,&
       nres = 0
       c1 = A
       c2 = cycle + A
-      p1 = 0.1D+01 - p
+      p1 = 1._DP - p
       uflow = D1MACH(1)
       eps = Epsabs
       IF( Epsabs>uflow/p1 ) eps = Epsabs*p1
       ep = eps
-      fact = 0.1D+01
-      correc = 0.0D+00
-      Abserr = 0.0D+00
-      errsum = 0.0D+00
+      fact = 1._DP
+      correc = 0._DP
+      Abserr = 0._DP
+      errsum = 0._DP
       !
       !           MAIN DO-LOOP
       !           ------------
@@ -300,13 +300,13 @@ SUBROUTINE DQAWFE(F,A,Omega,Integr,Epsabs,Limlst,Limit,Maxp1,Result,&
         !           INTEGRATE OVER CURRENT SUBINTERVAL.
         !
         epsa = eps*fact
-        CALL DQAWOE(F,c1,c2,Omega,Integr,epsa,0.0D+00,Limit,Lst,Maxp1,&
+        CALL DQAWOE(F,c1,c2,Omega,Integr,epsa,0._DP,Limit,Lst,Maxp1,&
           Rslst(Lst),Erlst(Lst),nev,Ierlst(Lst),last,Alist,Blist,&
           Rlist,Elist,Iord,Nnlog,momcom,Chebmo)
         Neval = Neval + nev
         fact = fact*p
         errsum = errsum + Erlst(Lst)
-        drl = 0.5D+02*ABS(Rslst(Lst))
+        drl = 0.5E+02_DP*ABS(Rslst(Lst))
         !
         !           TEST ON ACCURACY WITH PARTIAL SUM
         !
@@ -341,8 +341,8 @@ SUBROUTINE DQAWFE(F,A,Omega,Integr,Epsabs,Limlst,Limit,Maxp1,Result,&
               !           OR EXTRAPOLATED RESULT YIELDS THE BEST INTEGRAL
               !           APPROXIMATION
               !
-              IF( (Abserr+0.1D+02*correc)<=Epsabs .OR. &
-                (Abserr<=Epsabs .AND. 0.1D+02*correc>=Epsabs) ) EXIT
+              IF( (Abserr+10._DP*correc)<=Epsabs .OR. &
+                (Abserr<=Epsabs .AND. 10._DP*correc>=Epsabs) ) EXIT
             END IF
             IF( Ier/=0 .AND. Ier/=7 ) EXIT
           END IF
@@ -357,11 +357,11 @@ SUBROUTINE DQAWFE(F,A,Omega,Integr,Epsabs,Limlst,Limit,Maxp1,Result,&
       !         SET FINAL RESULT AND ERROR ESTIMATE
       !         -----------------------------------
       !
-      Abserr = Abserr + 0.1D+02*correc
+      Abserr = Abserr + 10._DP*correc
       IF( Ier==0 ) RETURN
-      IF( Result==0.0D+00 .OR. psum(numrl2)==0.0D+00 ) THEN
+      IF( Result==0._DP .OR. psum(numrl2)==0._DP ) THEN
         IF( Abserr>errsum ) GOTO 50
-        IF( psum(numrl2)==0.0D+00 ) RETURN
+        IF( psum(numrl2)==0._DP ) RETURN
       END IF
       IF( Abserr/ABS(Result)<=(errsum+drl)/ABS(psum(numrl2)) ) THEN
         IF( Ier>=1 .AND. Ier/=7 ) Abserr = Abserr + drl
@@ -372,7 +372,7 @@ SUBROUTINE DQAWFE(F,A,Omega,Integr,Epsabs,Limlst,Limit,Maxp1,Result,&
       !           INTEGRATION BY DQAGIE IF OMEGA IS ZERO
       !           --------------------------------------
       !
-      IF( Integr==1 ) CALL DQAGIE(F,A,1,Epsabs,0.0D+00,Limit,Result,Abserr,&
+      IF( Integr==1 ) CALL DQAGIE(F,A,1,Epsabs,0._DP,Limit,Result,Abserr,&
         Neval,Ier,Alist,Blist,Rlist,Elist,Iord,last)
       Rslst(1) = Result
       Erlst(1) = Abserr

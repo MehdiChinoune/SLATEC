@@ -48,26 +48,26 @@ REAL(DP) FUNCTION DBETAI(X,Pin,Qin)
     alnsml = LOG(sml)
   !* FIRST EXECUTABLE STATEMENT  DBETAI
   !
-  IF( X<0.D0 .OR. X>1.D0 ) CALL XERMSG('DBETAI','X IS NOT IN THE RANGE (0,1)',1,2)
-  IF( Pin<=0.D0 .OR. Qin<=0.D0 ) CALL XERMSG('DBETAI','P AND/OR Q IS LE ZERO',2,2)
+  IF( X<0._DP .OR. X>1._DP ) CALL XERMSG('DBETAI','X IS NOT IN THE RANGE (0,1)',1,2)
+  IF( Pin<=0._DP .OR. Qin<=0._DP ) CALL XERMSG('DBETAI','P AND/OR Q IS LE ZERO',2,2)
   !
   y = X
   p = Pin
   q = Qin
-  IF( q>p .OR. X>=0.8D0 ) THEN
-    IF( X>=0.2D0 ) THEN
-      y = 1.0D0 - y
+  IF( q>p .OR. X>=0.8_DP ) THEN
+    IF( X>=0.2_DP ) THEN
+      y = 1._DP - y
       p = Qin
       q = Pin
     END IF
   END IF
   !
-  IF( (p+q)*y/(p+1.D0)<eps ) THEN
+  IF( (p+q)*y/(p+1._DP)<eps ) THEN
     !
-    DBETAI = 0.0D0
+    DBETAI = 0._DP
     xb = p*LOG(MAX(y,sml)) - LOG(p) - DLBETA(p,q)
-    IF( xb>alnsml .AND. y/=0.0D0 ) DBETAI = EXP(xb)
-    IF( y/=X .OR. p/=Pin ) DBETAI = 1.0D0 - DBETAI
+    IF( xb>alnsml .AND. y/=0._DP ) DBETAI = EXP(xb)
+    IF( y/=X .OR. p/=Pin ) DBETAI = 1._DP - DBETAI
     RETURN
   ELSE
     !
@@ -75,15 +75,15 @@ REAL(DP) FUNCTION DBETAI(X,Pin,Qin)
     ! Y**P/BETA(PS,P) * (1.-PS)-SUB-I * Y**I / FAC(I) .
     !
     ps = q - AINT(q)
-    IF( ps==0.D0 ) ps = 1.0D0
+    IF( ps==0._DP ) ps = 1._DP
     xb = p*LOG(y) - DLBETA(ps,p) - LOG(p)
-    DBETAI = 0.0D0
+    DBETAI = 0._DP
     IF( xb>=alnsml ) THEN
       !
       DBETAI = EXP(xb)
       term = DBETAI*p
-      IF( ps/=1.0D0 ) THEN
-        n = INT( MAX(alneps/LOG(y),4.0D0) )
+      IF( ps/=1._DP ) THEN
+        n = INT( MAX(alneps/LOG(y),4._DP) )
         DO i = 1, n
           xi = i
           term = term*(xi-ps)*y/xi
@@ -94,24 +94,24 @@ REAL(DP) FUNCTION DBETAI(X,Pin,Qin)
     !
     ! NOW EVALUATE THE FINITE SUM, MAYBE.
     !
-    IF( q>1.0D0 ) THEN
+    IF( q>1._DP ) THEN
       !
-      xb = p*LOG(y) + q*LOG(1.0D0-y) - DLBETA(p,q) - LOG(q)
-      ib = INT( MAX(xb/alnsml,0.0D0) )
+      xb = p*LOG(y) + q*LOG(1._DP-y) - DLBETA(p,q) - LOG(q)
+      ib = INT( MAX(xb/alnsml,0._DP) )
       term = EXP(xb-ib*alnsml)
-      c = 1.0D0/(1.D0-y)
-      p1 = q*c/(p+q-1.D0)
+      c = 1._DP/(1._DP-y)
+      p1 = q*c/(p+q-1._DP)
       !
-      finsum = 0.0D0
+      finsum = 0._DP
       n = INT( q )
       IF( q==REAL( n, DP ) ) n = n - 1
       DO i = 1, n
-        IF( p1<=1.0D0 .AND. term/eps<=finsum ) EXIT
+        IF( p1<=1._DP .AND. term/eps<=finsum ) EXIT
         xi = i
-        term = (q-xi+1.0D0)*c*term/(p+q-xi)
+        term = (q-xi+1._DP)*c*term/(p+q-xi)
         !
-        IF( term>1.0D0 ) ib = ib - 1
-        IF( term>1.0D0 ) term = term*sml
+        IF( term>1._DP ) ib = ib - 1
+        IF( term>1._DP ) term = term*sml
         !
         IF( ib==0 ) finsum = finsum + term
       END DO
@@ -119,7 +119,7 @@ REAL(DP) FUNCTION DBETAI(X,Pin,Qin)
       DBETAI = DBETAI + finsum
     END IF
   END IF
-  IF( y/=X .OR. p/=Pin ) DBETAI = 1.0D0 - DBETAI
-  DBETAI = MAX(MIN(DBETAI,1.0D0),0.0D0)
+  IF( y/=X .OR. p/=Pin ) DBETAI = 1._DP - DBETAI
+  DBETAI = MAX(MIN(DBETAI,1._DP),0._DP)
   RETURN
 END FUNCTION DBETAI

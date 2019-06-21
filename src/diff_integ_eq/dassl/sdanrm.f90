@@ -34,13 +34,13 @@ REAL(SP) FUNCTION SDANRM(Neq,V,Wt)
   REAL(SP) :: summ, vmax
   !
   !* FIRST EXECUTABLE STATEMENT  SDANRM
-  SDANRM = 0.0E0
-  vmax = 0.0E0
+  SDANRM = 0._SP
+  vmax = 0._SP
   DO i = 1, Neq
     IF( ABS(V(i)/Wt(i))>vmax ) vmax = ABS(V(i)/Wt(i))
   END DO
-  IF( vmax>0.0E0 ) THEN
-    summ = 0.0E0
+  IF( vmax>0._SP ) THEN
+    summ = 0._SP
     DO i = 1, Neq
       summ = summ + ((V(i)/Wt(i))/vmax)**2
     END DO

@@ -48,17 +48,17 @@ SUBROUTINE DBSKES(Xnu,X,Nin,Bke)
   v = ABS(Xnu)
   n = ABS(Nin)
   !
-  IF( v>=1.D0 ) CALL XERMSG('DBSKES','ABS(XNU) MUST BE LT 1',2,2)
-  IF( X<=0.D0 ) CALL XERMSG('DBSKES','X IS LE 0',3,2)
+  IF( v>=1._DP ) CALL XERMSG('DBSKES','ABS(XNU) MUST BE LT 1',2,2)
+  IF( X<=0._DP ) CALL XERMSG('DBSKES','X IS LE 0',3,2)
   IF( n==0 ) CALL XERMSG('DBSKES',&
     'N THE NUMBER IN THE SEQUENCE IS 0',4,2)
   !
   CALL D9KNUS(v,X,Bke(1),bknu1,iswtch)
   IF( n==1 ) RETURN
   !
-  vincr = SIGN(1.0,REAL(Nin))
+  vincr = SIGN(1._SP,REAL(Nin,SP))
   direct = vincr
-  IF( Xnu/=0.D0 ) direct = vincr*SIGN(1.D0,Xnu)
+  IF( Xnu/=0._DP ) direct = vincr*SIGN(1._DP,Xnu)
   IF( iswtch==1 .AND. direct>0. ) CALL XERMSG('DBSKES',&
     'X SO SMALL BESSEL K-SUB-XNU+1 OVERFLOWS',5,2)
   Bke(2) = bknu1
@@ -66,15 +66,15 @@ SUBROUTINE DBSKES(Xnu,X,Nin,Bke)
   IF( direct<0. ) CALL D9KNUS(ABS(Xnu+vincr),X,Bke(2),bknu1,iswtch)
   IF( n==2 ) RETURN
   !
-  vend = ABS(Xnu+Nin) - 1.0D0
-  IF( (vend-.5D0)*LOG(vend)+0.27D0-vend*(LOG(X)-.694D0)>alnbig )&
+  vend = ABS(Xnu+Nin) - 1._DP
+  IF( (vend-.5_DP)*LOG(vend)+0.27_DP-vend*(LOG(X)-.694_DP)>alnbig )&
     CALL XERMSG('DBSKES',&
     'X SO SMALL OR ABS(NU) SO BIG THAT BESSEL K-SUB-NU OVERFLOWS',5,2)
   !
   v = Xnu
   DO i = 3, n
     v = v + vincr
-    Bke(i) = 2.0D0*v*Bke(i-1)/X + Bke(i-2)
+    Bke(i) = 2._DP*v*Bke(i-1)/X + Bke(i-2)
   END DO
   !
 END SUBROUTINE DBSKES

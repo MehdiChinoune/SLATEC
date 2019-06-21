@@ -90,18 +90,18 @@ SUBROUTINE BESK(X,Fnu,Kode,N,Y,Nz)
   INTEGER, PARAMETER :: nulim(2) = [ 35, 70 ]
   !* FIRST EXECUTABLE STATEMENT  BESK
   nn = -I1MACH(12)
-  elim = 2.303E0*(nn*R1MACH(5)-3.0E0)
-  xlim = R1MACH(1)*1.0E+3
+  elim = 2.303_SP*(nn*R1MACH(5)-3._SP)
+  xlim = R1MACH(1)*1.E+3_SP
   IF( Kode<1 .OR. Kode>2 ) THEN
     !
     !
     !
     CALL XERMSG('BESK','SCALING OPTION, KODE, NOT 1 OR 2',2,1)
     RETURN
-  ELSEIF( Fnu<0.0E0 ) THEN
+  ELSEIF( Fnu<0._SP ) THEN
     CALL XERMSG('BESK','ORDER, FNU, LESS THAN ZERO',2,1)
     RETURN
-  ELSEIF( X<=0.0E0 ) THEN
+  ELSEIF( X<=0._SP ) THEN
     CALL XERMSG('BESK','X LESS THAN OR EQUAL TO ZERO',2,1)
     RETURN
   ELSEIF( X<xlim ) THEN
@@ -126,7 +126,7 @@ SUBROUTINE BESK(X,Fnu,Kode,N,Y,Nz)
     nn = MIN(2,nd)
     fn = Fnu + N - 1
     fnn = fn
-    IF( fn<2.0E0 ) THEN
+    IF( fn<2._SP ) THEN
       !
       !     UNDERFLOW TEST FOR KODE=1
       IF( Kode==2 ) GOTO 600
@@ -138,14 +138,14 @@ SUBROUTINE BESK(X,Fnu,Kode,N,Y,Nz)
       !     FOR THE LAST ORDER, FNU+N-1>=NULIM
       !
       zn = X/fn
-      IF( zn==0.0E0 ) THEN
+      IF( zn==0._SP ) THEN
         CALL XERMSG('BESK',&
           'OVERFLOW, FNU OR N TOO LARGE OR X TOO SMALL',6,1)
         RETURN
       ELSE
-        rtz = SQRT(1.0E0+zn*zn)
-        gln = LOG((1.0E0+rtz)/zn)
-        t = rtz*(1.0E0-etx) + etx/(zn+rtz)
+        rtz = SQRT(1._SP+zn*zn)
+        gln = LOG((1._SP+rtz)/zn)
+        t = rtz*(1._SP-etx) + etx/(zn+rtz)
         cn = -fn*(t-gln)
         IF( cn>elim ) THEN
           CALL XERMSG('BESK',&
@@ -172,23 +172,23 @@ SUBROUTINE BESK(X,Fnu,Kode,N,Y,Nz)
   !
   100  fn = gnu
   zn = X/fn
-  rtz = SQRT(1.0E0+zn*zn)
-  gln = LOG((1.0E0+rtz)/zn)
-  t = rtz*(1.0E0-etx) + etx/(zn+rtz)
+  rtz = SQRT(1._SP+zn*zn)
+  gln = LOG((1._SP+rtz)/zn)
+  t = rtz*(1._SP-etx) + etx/(zn+rtz)
   cn = -fn*(t-gln)
   200 CONTINUE
   IF( cn<-elim ) GOTO 700
   !
   !     ASYMPTOTIC EXPANSION FOR ORDERS FNU AND FNU+1>=NULIM
   !
-  flgik = -1.0E0
+  flgik = -1._SP
   CALL ASYIK(X,gnu,Kode,flgik,rtz,cn,nn,Y)
   IF( nn==1 ) GOTO 800
-  trx = 2.0E0/X
-  tm = (gnu+gnu+2.0E0)/X
+  trx = 2._SP/X
+  tm = (gnu+gnu+2._SP)/X
   GOTO 500
   300 CONTINUE
-  IF( dnu/=0.0E0 ) THEN
+  IF( dnu/=0._SP ) THEN
     nb = 2
     IF( nud==0 .AND. nd==1 ) nb = 1
     CALL BESKNU(X,dnu,Kode,nb,w,Nz)
@@ -208,8 +208,8 @@ SUBROUTINE BESK(X,Fnu,Kode,N,Y,Nz)
       s2 = BESK1(X)
     END IF
   END IF
-  trx = 2.0E0/X
-  tm = (dnu+dnu+2.0E0)/X
+  trx = 2._SP/X
+  tm = (dnu+dnu+2._SP)/X
   !     FORWARD RECUR FROM DNU TO FNU+1 TO GET Y(1) AND Y(2)
   IF( nd==1 ) nud = nud - 1
   IF( nud>0 ) THEN
@@ -237,14 +237,14 @@ SUBROUTINE BESK(X,Fnu,Kode,N,Y,Nz)
   GOTO 800
   !     OVERFLOW TEST
   600 CONTINUE
-  IF( fn>1.0E0 ) THEN
-    IF( -fn*(LOG(X)-0.693E0)>elim ) THEN
+  IF( fn>1._SP ) THEN
+    IF( -fn*(LOG(X)-0.693E0_SP)>elim ) THEN
       CALL XERMSG('BESK',&
         'OVERFLOW, FNU OR N TOO LARGE OR X TOO SMALL',6,1)
       RETURN
     END IF
   END IF
-  IF( dnu==0.0E0 ) THEN
+  IF( dnu==0._SP ) THEN
     j = nud
     IF( j/=1 ) THEN
       j = j + 1
@@ -274,8 +274,8 @@ SUBROUTINE BESK(X,Fnu,Kode,N,Y,Nz)
     nd = nd - 1
     IF( nd==0 ) EXIT
     nn = MIN(2,nd)
-    gnu = gnu + 1.0E0
-    IF( fnn>=2.0E0 ) THEN
+    gnu = gnu + 1._SP
+    IF( fnn>=2._SP ) THEN
       IF( nud>=nulim(nn) ) GOTO 100
     END IF
   END DO
@@ -289,7 +289,7 @@ SUBROUTINE BESK(X,Fnu,Kode,N,Y,Nz)
     END DO
   END IF
   DO i = 1, Nz
-    Y(i) = 0.0E0
+    Y(i) = 0._SP
   END DO
   RETURN
 END SUBROUTINE BESK

@@ -74,7 +74,7 @@ SUBROUTINE SINTRP(X,Y,Xout,Yout,Ypout,Neqn,Kold,Phi,Ivc,Iv,Kgi,Gi,Alpha,&
   hi = Xout - Ox
   h = X - Ox
   xi = hi/h
-  xim1 = xi - 1.
+  xim1 = xi - 1._SP
   !
   !   INITIALIZE W(*) FOR COMPUTING G(*)
   !
@@ -95,7 +95,7 @@ SUBROUTINE SINTRP(X,Y,Xout,Yout,Ypout,Neqn,Kold,Phi,Ivc,Iv,Kgi,Gi,Alpha,&
       gdi = Ow(iw)
       m = Kold - iw + 3
     ELSE
-      gdi = 1.0/temp1
+      gdi = 1._SP/temp1
       m = 2
     END IF
     IF( m<=Kold ) THEN
@@ -108,13 +108,13 @@ SUBROUTINE SINTRP(X,Y,Xout,Yout,Ypout,Neqn,Kold,Phi,Ivc,Iv,Kgi,Gi,Alpha,&
   !   COMPUTE G(*) AND C(*)
   !
   g(1) = xi
-  g(2) = 0.5*xi*xi
-  c(1) = 1.0
+  g(2) = 0.5_SP*xi*xi
+  c(1) = 1._SP
   c(2) = xi
   IF( Kold>=2 ) THEN
     DO i = 2, Kold
       alp = Alpha(i)
-      gama = 1.0 + xim1*alp
+      gama = 1._SP + xim1*alp
       l = kp2 - i
       DO jq = 1, l
         w(jq) = gama*w(jq) - alp*w(jq+1)
@@ -134,8 +134,8 @@ SUBROUTINE SINTRP(X,Y,Xout,Yout,Ypout,Neqn,Kold,Phi,Ivc,Iv,Kgi,Gi,Alpha,&
   !   AND FOR THE DERIVATIVE OF THE SOLUTION -- YPOUT
   !
   DO l = 1, Neqn
-    Yout(l) = 0.0
-    Ypout(l) = 0.0
+    Yout(l) = 0._SP
+    Ypout(l) = 0._SP
   END DO
   DO j = 1, Kold
     i = kp2 - j
@@ -148,7 +148,7 @@ SUBROUTINE SINTRP(X,Y,Xout,Yout,Ypout,Neqn,Kold,Phi,Ivc,Iv,Kgi,Gi,Alpha,&
     END DO
   END DO
   DO l = 1, Neqn
-    Yout(l) = ((1.0-sigma)*Oy(l)+sigma*Y(l))&
+    Yout(l) = ((1._SP-sigma)*Oy(l)+sigma*Y(l))&
       + h*(Yout(l)+(g(1)-sigma*Og(1))*Phi(l,1))
     Ypout(l) = hmu*(Oy(l)-Y(l)) + (Ypout(l)+(c(1)+rmu*Og(1))*Phi(l,1))
   END DO

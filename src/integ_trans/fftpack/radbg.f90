@@ -32,7 +32,7 @@ SUBROUTINE RADBG(Ido,Ip,L1,Idl1,Cc,C1,C2,Ch,Ch2,Wa)
   INTEGER :: i, ic, idij, idp2, ik, ipp2, ipph, is, j, j2, jc, k, l, lc, nbd
   REAL(SP) :: ai1, ai2, ar1, ar1h, ar2, ar2h, arg, dc2, dcp, ds2, dsp, tpi
   !* FIRST EXECUTABLE STATEMENT  RADBG
-  tpi = 8.*ATAN(1.)
+  tpi = 8._SP*ATAN(1._SP)
   arg = tpi/Ip
   dcp = COS(arg)
   dsp = SIN(arg)
@@ -90,8 +90,8 @@ SUBROUTINE RADBG(Ido,Ip,L1,Idl1,Cc,C1,C2,Ch,Ch2,Wa)
       END DO
     END IF
   END IF
-  ar1 = 1.
-  ai1 = 0.
+  ar1 = 1._SP
+  ai1 = 0._SP
   DO l = 2, ipph
     lc = ipp2 - l
     ar1h = dcp*ar1 - dsp*ai1

@@ -276,16 +276,16 @@ REAL(SP) FUNCTION RC(X,Y,Ier)
   REAL(SP) :: X, Y
   REAL(SP) :: lamda, mu, s, sn, xn, yn
   CHARACTER(16) :: xern3, xern4, xern5
-  REAL(SP), PARAMETER :: errtol = (R1MACH(3)/16.0E0)**(1.0E0/6.0E0), &
-    lolim = 5.0E0*R1MACH(1), uplim = R1MACH(2)/5.0E0
-  REAL(SP), PARAMETER ::  c1 = 1.0E0/7.0E0, c2 = 9.0E0/22.0E0
+  REAL(SP), PARAMETER :: errtol = (R1MACH(3)/16._SP)**(1._SP/6._SP), &
+    lolim = 5._SP*R1MACH(1), uplim = R1MACH(2)/5._SP
+  REAL(SP), PARAMETER ::  c1 = 1._SP/7._SP, c2 = 9._SP/22._SP
   !
   !* FIRST EXECUTABLE STATEMENT  RC
   !
   !         CALL ERROR HANDLER IF NECESSARY.
   !
-  RC = 0.0E0
-  IF( X<0.0E0 .OR. Y<=0.0E0 ) THEN
+  RC = 0._SP
+  IF( X<0._SP .OR. Y<=0._SP ) THEN
     Ier = 1
     WRITE (xern3,'(1PE15.6)') X
     WRITE (xern4,'(1PE15.6)') Y
@@ -319,17 +319,17 @@ REAL(SP) FUNCTION RC(X,Y,Ier)
   yn = Y
   DO
     !
-    mu = (xn+yn+yn)/3.0E0
-    sn = (yn+mu)/mu - 2.0E0
+    mu = (xn+yn+yn)/3._SP
+    sn = (yn+mu)/mu - 2._SP
     IF( ABS(sn)<errtol ) THEN
       !
-      s = sn*sn*(0.30E0+sn*(c1+sn*(0.3750E0+sn*c2)))
-      RC = (1.0E0+s)/SQRT(mu)
+      s = sn*sn*(0.30_SP+sn*(c1+sn*(0.3750_SP+sn*c2)))
+      RC = (1._SP+s)/SQRT(mu)
       EXIT
     ELSE
-      lamda = 2.0E0*SQRT(xn)*SQRT(yn) + yn
-      xn = (xn+lamda)*0.250E0
-      yn = (yn+lamda)*0.250E0
+      lamda = 2._SP*SQRT(xn)*SQRT(yn) + yn
+      xn = (xn+lamda)*0.250_SP
+      yn = (yn+lamda)*0.250_SP
     END IF
   END DO
 END FUNCTION RC

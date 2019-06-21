@@ -30,8 +30,8 @@ SUBROUTINE ZRATI(Zr,Zi,Fnu,N,Cyr,Cyi,Tol)
   REAL(DP) :: ak, amagz, ap1, ap2, arg, az, cdfnui, cdfnur, Cyi(N), Cyr(N), dfnu, &
     fdnu, flam, Fnu, fnup, pti, ptr, p1i, p1r, p2i, p2r, rak, rap1, rho, rzi, &
     rzr, test, test1, Tol, tti, ttr, t1i, t1r, Zi, Zr
-  REAL(DP), PARAMETER :: czeror = 0.0D0, czeroi = 0.0D0, coner = 1.0D0, conei = 0.0D0, &
-    rt2 = 1.41421356237309505D0
+  REAL(DP), PARAMETER :: czeror = 0._DP, czeroi = 0._DP, coner = 1._DP, conei = 0._DP, &
+    rt2 = 1.41421356237309505_DP
   !* FIRST EXECUTABLE STATEMENT  ZRATI
   az = ZABS(Zr,Zi)
   inu = INT( Fnu )
@@ -43,7 +43,7 @@ SUBROUTINE ZRATI(Zr,Zi,Fnu,N,Cyr,Cyi,Tol)
   id = idnu - magz - 1
   itime = 1
   k = 1
-  ptr = 1.0D0/az
+  ptr = 1._DP/az
   rzr = ptr*(Zr+Zr)*ptr
   rzi = -ptr*(Zi+Zi)*ptr
   t1r = rzr*fnup
@@ -66,7 +66,7 @@ SUBROUTINE ZRATI(Zr,Zi,Fnu,N,Cyr,Cyi,Tol)
   arg = (ap2+ap2)/(ap1*Tol)
   test1 = SQRT(arg)
   test = test1
-  rap1 = 1.0D0/ap1
+  rap1 = 1._DP/ap1
   p1r = p1r*rap1
   p1i = p1i*rap1
   p2r = p2r*rap1
@@ -91,7 +91,7 @@ SUBROUTINE ZRATI(Zr,Zi,Fnu,N,Cyr,Cyi,Tol)
         t1r = ak
         t1i = czeroi
         dfnu = Fnu + (N-1)
-        p1r = 1.0D0/ap2
+        p1r = 1._DP/ap2
         p1i = czeroi
         p2r = czeror
         p2i = czeroi
@@ -136,10 +136,10 @@ SUBROUTINE ZRATI(Zr,Zi,Fnu,N,Cyr,Cyi,Tol)
         END DO
         EXIT
       ELSE
-        ak = ZABS(t1r,t1i)*0.5D0
-        flam = ak + SQRT(ak*ak-1.0D0)
+        ak = ZABS(t1r,t1i)*0.5_DP
+        flam = ak + SQRT(ak*ak-1._DP)
         rho = MIN(ap2/ap1,flam)
-        test = test1*SQRT(rho/(rho*rho-1.0D0))
+        test = test1*SQRT(rho/(rho*rho-1._DP))
         itime = 2
       END IF
     END IF

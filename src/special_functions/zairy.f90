@@ -150,9 +150,9 @@ SUBROUTINE ZAIRY(Zr,Zi,Id,Kode,Air,Aii,Nz,Ierr)
     str, s1i, s1r, s2i, s2r, tol, trm1i, trm1r, trm2i, trm2r, Zi, Zr, ztai, &
     ztar, z3i, z3r, alaz, bb
   INTEGER :: Id, Ierr, iflag, k, Kode, k1, k2, mr, nn, Nz
-  REAL(DP), PARAMETER :: tth = 6.66666666666666667D-01, c1 = 3.55028053887817240D-01, &
-    c2 = 2.58819403792806799D-01, coef = 1.83776298473930683D-01
-  REAL(DP), PARAMETER :: zeror = 0.0D0, zeroi = 0.0D0, coner = 1.0D0, conei = 0.0D0
+  REAL(DP), PARAMETER :: tth = 6.66666666666666667E-01_DP, c1 = 3.55028053887817240E-01_DP, &
+    c2 = 2.58819403792806799E-01_DP, coef = 1.83776298473930683E-01_DP
+  REAL(DP), PARAMETER :: zeror = 0._DP, zeroi = 0._DP, coner = 1._DP, conei = 0._DP
   !* FIRST EXECUTABLE STATEMENT  ZAIRY
   Ierr = 0
   Nz = 0
@@ -160,13 +160,13 @@ SUBROUTINE ZAIRY(Zr,Zi,Id,Kode,Air,Aii,Nz,Ierr)
   IF( Kode<1 .OR. Kode>2 ) Ierr = 1
   IF( Ierr/=0 ) RETURN
   az = ZABS(Zr,Zi)
-  tol = MAX(D1MACH(4),1.0D-18)
+  tol = MAX(D1MACH(4),1.E-18_DP)
   fid = Id
-  IF( az>1.0D0 ) THEN
+  IF( az>1._DP ) THEN
     !-----------------------------------------------------------------------
     !     CASE FOR ABS(Z)>1.0
     !-----------------------------------------------------------------------
-    fnu = (1.0D0+fid)/3.0D0
+    fnu = (1._DP+fid)/3._DP
     !-----------------------------------------------------------------------
     !     SET PARAMETERS RELATED TO MACHINE CONSTANTS.
     !     TOL IS THE APPROXIMATE UNIT ROUNDOFF LIMITED TO 1.0D-18.
@@ -181,19 +181,19 @@ SUBROUTINE ZAIRY(Zr,Zi,Id,Kode,Air,Aii,Nz,Ierr)
     k2 = I1MACH(16)
     r1m5 = D1MACH(5)
     k = MIN(ABS(k1),ABS(k2))
-    elim = 2.303D0*(k*r1m5-3.0D0)
+    elim = 2.303_DP*(k*r1m5-3._DP)
     k1 = I1MACH(14) - 1
     aa = r1m5*k1
-    dig = MIN(aa,18.0D0)
-    aa = aa*2.303D0
-    alim = elim + MAX(-aa,-41.45D0)
-    rl = 1.2D0*dig + 3.0D0
+    dig = MIN(aa,18._DP)
+    aa = aa*2.303_DP
+    alim = elim + MAX(-aa,-41.45_DP)
+    rl = 1.2_DP*dig + 3._DP
     alaz = LOG(az)
     !-----------------------------------------------------------------------
     !     TEST FOR PROPER RANGE
     !-----------------------------------------------------------------------
-    aa = 0.5D0/tol
-    bb = I1MACH(9)*0.5D0
+    aa = 0.5_DP/tol
+    bb = I1MACH(9)*0.5_DP
     aa = MIN(aa,bb)
     aa = aa**tth
     IF( az>aa ) THEN
@@ -210,28 +210,28 @@ SUBROUTINE ZAIRY(Zr,Zi,Id,Kode,Air,Aii,Nz,Ierr)
       !     RE(ZTA)<=0 WHEN RE(Z)<0, ESPECIALLY WHEN IM(Z) IS SMALL
       !-----------------------------------------------------------------------
       iflag = 0
-      sfac = 1.0D0
+      sfac = 1._DP
       ak = ztai
-      IF( Zr<0.0D0 ) THEN
+      IF( Zr<0._DP ) THEN
         bk = ztar
         ck = -ABS(bk)
         ztar = ck
         ztai = ak
       END IF
-      IF( Zi==0.0D0 ) THEN
-        IF( Zr<=0.0D0 ) THEN
-          ztar = 0.0D0
+      IF( Zi==0._DP ) THEN
+        IF( Zr<=0._DP ) THEN
+          ztar = 0._DP
           ztai = ak
         END IF
       END IF
       aa = ztar
-      IF( aa<0.0D0 .OR. Zr<=0.0D0 ) THEN
+      IF( aa<0._DP .OR. Zr<=0._DP ) THEN
         IF( Kode/=2 ) THEN
           !-----------------------------------------------------------------------
           !     OVERFLOW TEST
           !-----------------------------------------------------------------------
           IF( aa<=(-alim) ) THEN
-            aa = -aa + 0.25D0*alaz
+            aa = -aa + 0.25_DP*alaz
             iflag = 1
             sfac = tol
             IF( aa>elim ) GOTO 50
@@ -241,7 +241,7 @@ SUBROUTINE ZAIRY(Zr,Zi,Id,Kode,Air,Aii,Nz,Ierr)
         !     CBKNU AND CACON RETURN EXP(ZTA)*K(FNU,ZTA) ON KODE=2
         !-----------------------------------------------------------------------
         mr = 1
-        IF( Zi<0.0D0 ) mr = -1
+        IF( Zi<0._DP ) mr = -1
         CALL ZACAI(ztar,ztai,fnu,Kode,mr,1,cyr,cyi,nn,rl,tol,elim,alim)
         IF( nn<0 ) THEN
           IF( nn/=(-1) ) GOTO 100
@@ -257,9 +257,9 @@ SUBROUTINE ZAIRY(Zr,Zi,Id,Kode,Air,Aii,Nz,Ierr)
       ELSEIF( aa<alim ) THEN
         CALL ZBKNU(ztar,ztai,fnu,Kode,1,cyr,cyi,Nz,tol,elim,alim)
       ELSE
-        aa = -aa - 0.25D0*alaz
+        aa = -aa - 0.25_DP*alaz
         iflag = 2
-        sfac = 1.0D0/tol
+        sfac = 1._DP/tol
         IF( aa<(-elim) ) THEN
           Nz = 1
           Air = zeror
@@ -311,15 +311,15 @@ SUBROUTINE ZAIRY(Zr,Zi,Id,Kode,Air,Aii,Nz,Ierr)
     s2r = coner
     s2i = conei
     IF( az<tol ) THEN
-      aa = 1.0D+3*D1MACH(1)
+      aa = 1.E3_DP*D1MACH(1)
       s1r = zeror
       s1i = zeroi
       IF( Id==1 ) THEN
         Air = -c2
-        Aii = 0.0D0
+        Aii = 0._DP
         aa = SQRT(aa)
         IF( az>aa ) THEN
-          s1r = 0.5D0*(Zr*Zr-Zi*Zi)
+          s1r = 0.5_DP*(Zr*Zr-Zi*Zi)
           s1i = Zr*Zi
         END IF
         Air = Air + c1*s1r
@@ -341,21 +341,21 @@ SUBROUTINE ZAIRY(Zr,Zi,Id,Kode,Air,Aii,Nz,Ierr)
         trm1i = conei
         trm2r = coner
         trm2i = conei
-        atrm = 1.0D0
+        atrm = 1._DP
         str = Zr*Zr - Zi*Zi
         sti = Zr*Zi + Zi*Zr
         z3r = str*Zr - sti*Zi
         z3i = str*Zi + sti*Zr
         az3 = az*aa
-        ak = 2.0D0 + fid
-        bk = 3.0D0 - fid - fid
-        ck = 4.0D0 - fid
-        dk = 3.0D0 + fid + fid
+        ak = 2._DP + fid
+        bk = 3._DP - fid - fid
+        ck = 4._DP - fid
+        dk = 3._DP + fid + fid
         d1 = ak*dk
         d2 = bk*ck
         ad = MIN(d1,d2)
-        ak = 24.0D0 + 9.0D0*fid
-        bk = 30.0D0 - 9.0D0*fid
+        ak = 24._DP + 9._DP*fid
+        bk = 30._DP - 9._DP*fid
         DO k = 1, 25
           str = (trm1r*z3r-trm1i*z3i)/d1
           trm1i = (trm1r*z3i+trm1i*z3r)/d1
@@ -372,8 +372,8 @@ SUBROUTINE ZAIRY(Zr,Zi,Id,Kode,Air,Aii,Nz,Ierr)
           d2 = d2 + bk
           ad = MIN(d1,d2)
           IF( atrm<tol*ad ) EXIT
-          ak = ak + 18.0D0
-          bk = bk + 18.0D0
+          ak = ak + 18._DP
+          bk = bk + 18._DP
         END DO
       END IF
       IF( Id==1 ) THEN
@@ -382,7 +382,7 @@ SUBROUTINE ZAIRY(Zr,Zi,Id,Kode,Air,Aii,Nz,Ierr)
         IF( az>tol ) THEN
           str = Zr*s1r - Zi*s1i
           sti = Zr*s1i + Zi*s1r
-          cc = c1/(1.0D0+fid)
+          cc = c1/(1._DP+fid)
           Air = Air + cc*(str*Zr-sti*Zi)
           Aii = Aii + cc*(str*Zi+sti*Zr)
         END IF

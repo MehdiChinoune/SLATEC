@@ -33,7 +33,7 @@ SUBROUTINE EZFFT1(N,Wa,Ifac)
   REAL(SP) :: arg1, argh, ch1, ch1h, dch1, dsh1, sh1, tpi
   INTEGER, PARAMETER :: ntryh(4) = [ 4, 2, 3, 5 ]
   !* FIRST EXECUTABLE STATEMENT  EZFFT1
-  tpi = 8.*ATAN(1.)
+  tpi = 8._SP*ATAN(1._SP)
   nl = N
   nf = 0
   j = 0
@@ -73,8 +73,8 @@ SUBROUTINE EZFFT1(N,Wa,Ifac)
         ido = N/l2
         ipm = ip - 1
         arg1 = l1*argh
-        ch1 = 1.
-        sh1 = 0.
+        ch1 = 1._SP
+        sh1 = 0._SP
         dch1 = COS(arg1)
         dsh1 = SIN(arg1)
         DO j = 1, ipm

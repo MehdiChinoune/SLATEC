@@ -54,38 +54,38 @@ REAL(DP) FUNCTION DGAMIC(A,X)
   REAL(DP) :: A, X
   INTEGER :: izero
   REAL(DP) :: aeps, ainta, algap1, alngs, alx, e, gstar, h, sga, sgng, sgngam, sgngs, t
-  REAL(DP), PARAMETER :: eps = 0.5D0*D1MACH(3), sqeps = SQRT(D1MACH(4)), &
+  REAL(DP), PARAMETER :: eps = 0.5_DP*D1MACH(3), sqeps = SQRT(D1MACH(4)), &
     alneps = -LOG(D1MACH(3)), bot = LOG(D1MACH(1))
   !* FIRST EXECUTABLE STATEMENT  DGAMIC
   !
-  IF( X<0.D0 ) CALL XERMSG('DGAMIC','X IS NEGATIVE',2,2)
+  IF( X<0._DP ) CALL XERMSG('DGAMIC','X IS NEGATIVE',2,2)
   !
-  IF( X>0.D0 ) THEN
+  IF( X>0._DP ) THEN
     !
     alx = LOG(X)
-    sga = 1.0D0
-    IF( A/=0.D0 ) sga = SIGN(1.0D0,A)
-    ainta = AINT(A+0.5D0*sga)
+    sga = 1._DP
+    IF( A/=0._DP ) sga = SIGN(1._DP,A)
+    ainta = AINT(A+0.5_DP*sga)
     aeps = A - ainta
     !
     izero = 0
-    IF( X>=1.0D0 ) THEN
+    IF( X>=1._DP ) THEN
       !
       IF( A<X ) THEN
         DGAMIC = EXP(D9LGIC(A,X,alx))
         RETURN
       END IF
       !
-      sgngam = 1.0D0
-      algap1 = LOG_GAMMA(A+1.0D0)
-      sgngs = 1.0D0
+      sgngam = 1._DP
+      algap1 = LOG_GAMMA(A+1._DP)
+      sgngs = 1._DP
       alngs = D9LGIT(A,X,algap1)
     ELSE
       !
-      IF( A<=0.5D0 .AND. ABS(aeps)<=0.001D0 ) THEN
-        e = 2.0D0
-        IF( -ainta>1.D0 ) e = 2.D0*(-ainta+2.D0)/(ainta*ainta-1.0D0)
-        e = e - alx*X**(-0.001D0)
+      IF( A<=0.5_DP .AND. ABS(aeps)<=0.001_DP ) THEN
+        e = 2._DP
+        IF( -ainta>1._DP ) e = 2._DP*(-ainta+2._DP)/(ainta*ainta-1._DP)
+        e = e - alx*X**(-0.001_DP)
         IF( e*ABS(aeps)<=eps ) THEN
           !
           DGAMIC = D9GMIC(A,X,alx)
@@ -93,16 +93,16 @@ REAL(DP) FUNCTION DGAMIC(A,X)
         END IF
       END IF
       !
-      CALL DLGAMS(A+1.0D0,algap1,sgngam)
+      CALL DLGAMS(A+1._DP,algap1,sgngam)
       gstar = D9GMIT(A,X,algap1,sgngam)
-      IF( gstar==0.D0 ) izero = 1
-      IF( gstar/=0.D0 ) alngs = LOG(ABS(gstar))
-      IF( gstar/=0.D0 ) sgngs = SIGN(1.0D0,gstar)
+      IF( gstar==0._DP ) izero = 1
+      IF( gstar/=0._DP ) alngs = LOG(ABS(gstar))
+      IF( gstar/=0._DP ) sgngs = SIGN(1._DP,gstar)
     END IF
     !
     ! EVALUATION OF DGAMIC(A,X) IN TERMS OF TRICOMI-S INCOMPLETE GAMMA FN.
     !
-    h = 1.D0
+    h = 1._DP
     IF( izero/=1 ) THEN
       !
       t = A*alx + alngs
@@ -114,7 +114,7 @@ REAL(DP) FUNCTION DGAMIC(A,X)
         DGAMIC = sgng*EXP(t)
         RETURN
       ELSE
-        IF( t>(-alneps) ) h = 1.0D0 - sgngs*EXP(t)
+        IF( t>(-alneps) ) h = 1._DP - sgngs*EXP(t)
         !
         IF( ABS(h)<sqeps ) CALL XERCLR
         IF( ABS(h)<sqeps )&
@@ -122,13 +122,13 @@ REAL(DP) FUNCTION DGAMIC(A,X)
       END IF
     END IF
   ELSE
-    IF( A<=0.D0 ) CALL XERMSG('DGAMIC','X = 0 AND A LE 0 SO DGAMIC IS UNDEFINED',3,2)
+    IF( A<=0._DP ) CALL XERMSG('DGAMIC','X = 0 AND A LE 0 SO DGAMIC IS UNDEFINED',3,2)
     !
-    DGAMIC = EXP(LOG_GAMMA(A+1.D0)-LOG(A))
+    DGAMIC = EXP(LOG_GAMMA(A+1._DP)-LOG(A))
     RETURN
   END IF
   !
-  sgng = SIGN(1.0D0,h)*sga*sgngam
+  sgng = SIGN(1._DP,h)*sga*sgngam
   t = LOG(ABS(h)) + algap1 - LOG(ABS(A))
   IF( t<bot ) CALL XERCLR
   DGAMIC = sgng*EXP(t)

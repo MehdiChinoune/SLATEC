@@ -29,11 +29,11 @@ SUBROUTINE HSTCS1(Intl,A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   dth = (B-A)/M
   dthsq = dth*dth
   DO i = 1, M
-    Snth(i) = SIN(A+(i-0.5)*dth)
+    Snth(i) = SIN(A+(i-0.5_SP)*dth)
   END DO
   dr = (D-C)/N
   DO j = 1, N
-    Rsq(j) = (C+(j-0.5)*dr)**2
+    Rsq(j) = (C+(j-0.5_SP)*dr)**2
   END DO
   !
   !     MULTIPLY RIGHT SIDE BY R(J)**2
@@ -47,7 +47,7 @@ SUBROUTINE HSTCS1(Intl,A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   !
   !      DEFINE COEFFICIENTS AM,BM,CM
   !
-  x = 1./(2.*COS(dth/2.))
+  x = 1._SP/(2._SP*COS(dth/2._SP))
   DO i = 2, M
     Am(i) = (Snth(i-1)+Snth(i))*x
     Cm(i-1) = Am(i)
@@ -55,7 +55,7 @@ SUBROUTINE HSTCS1(Intl,A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   Am(1) = SIN(A)
   Cm(M) = SIN(B)
   DO i = 1, M
-    x = 1./Snth(i)
+    x = 1._SP/Snth(i)
     y = x/dthsq
     Am(i) = Am(i)*y
     Cm(i) = Cm(i)*y
@@ -86,7 +86,7 @@ SUBROUTINE HSTCS1(Intl,A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
     CASE (5,6,9)
     CASE DEFAULT
       Bm(1) = Bm(1) - Am(1)
-      x = 2.*Am(1)
+      x = 2._SP*Am(1)
       DO j = 1, N
         F(1,j) = F(1,j) - x*Bda(j)
       END DO
@@ -101,7 +101,7 @@ SUBROUTINE HSTCS1(Intl,A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
     CASE (7,8,9)
     CASE DEFAULT
       Bm(M) = Bm(M) - Cm(M)
-      x = 2.*Cm(M)
+      x = 2._SP*Cm(M)
       DO j = 1, N
         F(M,j) = F(M,j) - x*Bdb(j)
       END DO
@@ -119,7 +119,7 @@ SUBROUTINE HSTCS1(Intl,A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
     CASE (5,6)
     CASE DEFAULT
       Bn(1) = Bn(1) - An(1)
-      x = 2.*An(1)
+      x = 2._SP*An(1)
       DO i = 1, M
         F(i,1) = F(i,1) - x*Bdc(i)
       END DO
@@ -133,7 +133,7 @@ SUBROUTINE HSTCS1(Intl,A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
       END DO
     CASE DEFAULT
       Bn(N) = Bn(N) - Cn(N)
-      x = 2.*Cn(N)
+      x = 2._SP*Cn(N)
       DO i = 1, M
         F(i,N) = F(i,N) - x*Bdd(i)
       END DO
@@ -141,7 +141,7 @@ SUBROUTINE HSTCS1(Intl,A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   !
   !     CHECK FOR SINGULAR PROBLEM.  IF SINGULAR, PERTURB F.
   !
-  Pertrb = 0.
+  Pertrb = 0._SP
   SELECT CASE (Mbdcnd)
     CASE (1,2,4,5,7)
     CASE DEFAULT
@@ -152,17 +152,17 @@ SUBROUTINE HSTCS1(Intl,A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
           ELSEIF( Elmbda==0 ) THEN
             isw = 2
             DO i = 1, M
-              x = 0.
+              x = 0._SP
               DO j = 1, N
                 x = x + F(i,j)
               END DO
               Pertrb = Pertrb + x*Snth(i)
             END DO
-            x = 0.
+            x = 0._SP
             DO j = 1, N
               x = x + Rsq(j)
             END DO
-            Pertrb = 2.*(Pertrb*SIN(dth/2.))/(x*(COS(A)-COS(B)))
+            Pertrb = 2._SP*(Pertrb*SIN(dth/2._SP))/(x*(COS(A)-COS(B)))
             DO j = 1, N
               x = Rsq(j)*Pertrb
               DO i = 1, M
@@ -174,7 +174,7 @@ SUBROUTINE HSTCS1(Intl,A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
           END IF
       END SELECT
   END SELECT
-  a2 = 0.
+  a2 = 0._SP
   DO i = 1, M
     a2 = a2 + F(i,1)
   END DO
@@ -188,14 +188,14 @@ SUBROUTINE HSTCS1(Intl,A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   !
   CALL BLKTRI(1,1,N,An,Bn,Cn,1,M,Am,Bm,Cm,Idimf,F,Ierr1,Wrk)
   IF( isw==2 .AND. C==0. .AND. Nbdcnd==2 ) THEN
-    a1 = 0.
-    a3 = 0.
+    a1 = 0._SP
+    a3 = 0._SP
     DO i = 1, M
       a1 = a1 + Snth(i)*F(i,1)
       a3 = a3 + Snth(i)
     END DO
-    a1 = a1 + Rsq(1)*a2/2.
-    IF( Mbdcnd==3 ) a1 = a1 + (SIN(B)*Bdb(1)-SIN(A)*Bda(1))/(2.*(B-A))
+    a1 = a1 + Rsq(1)*a2/2._SP
+    IF( Mbdcnd==3 ) a1 = a1 + (SIN(B)*Bdb(1)-SIN(A)*Bda(1))/(2._SP*(B-A))
     a1 = a1/a3
     a1 = Bdc(1) - a1
     DO i = 1, M

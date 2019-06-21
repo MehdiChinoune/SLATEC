@@ -50,15 +50,15 @@ CONTAINS
     99001 FORMAT (/' QUICK CHECKS FOR DBESI AND DBESK'//)
     !
     Ipass = 1
-    xx(1) = 0.49D0
-    xx(2) = 1.3D0
-    xx(3) = 5.3D0
-    xx(4) = 13.3D0
-    xx(5) = 21.3D0
-    fn(1) = 0.095D0
-    fn(2) = 0.70D0
-    fn(3) = 0.0D0
-    tol = MAX(500.0D0*D1MACH(4),7.1D-12)
+    xx(1) = 0.49_DP
+    xx(2) = 1.3_DP
+    xx(3) = 5.3_DP
+    xx(4) = 13.3_DP
+    xx(5) = 21.3_DP
+    fn(1) = 0.095_DP
+    fn(2) = 0.70_DP
+    fn(3) = 0._DP
+    tol = MAX(500._DP*D1MACH(4),7.1E-12_DP)
     DO kode = 1, 2
       DO m = 1, 3
         DO n = 1, 4
@@ -67,7 +67,7 @@ CONTAINS
             DO ix = 1, 5
               IF( ix>=2 .OR. nu<=3 ) THEN
                 x = xx(ix)
-                rx = 1.0D0/x
+                rx = 1._DP/x
                 CALL DBESI(x,fnu,kode,n,y,ny)
                 IF( ny==0 ) THEN
                   CALL DBESK(x,fnu,kode,n,w,nw)
@@ -107,13 +107,13 @@ CONTAINS
     !     Check small values of X and order
     !
     n = 2
-    fnu = 1.0D0
+    fnu = 1._DP
     x = D1MACH(4)
     DO i = 1, 3
       DO kode = 1, 2
         CALL DBESI(x,fnu,kode,n,y,ny)
         CALL DBESK(x,fnu,kode,n,w,nw)
-        er = y(2)*w(1) + w(2)*y(1) - 1.0D0/x
+        er = y(2)*w(1) + w(2)*y(1) - 1._DP/x
         er = ABS(er)*x
         IF( er>tol ) THEN
           Ipass = 0
@@ -127,7 +127,7 @@ CONTAINS
         END IF
       END DO
       !
-      fnu = D1MACH(4)/100.0D0
+      fnu = D1MACH(4)/100._DP
       x = xx(2*i-1)
     END DO
     !
@@ -136,17 +136,17 @@ CONTAINS
     kode = 2
     DO k = 1, 2
       del = 30*(k-1)
-      fnu = 45.0D0 + del
+      fnu = 45._DP + del
       DO n = 1, 2
-        x = 20.0D0 + del
+        x = 20._DP + del
         DO i = 1, 5
-          rx = 1.0D0/x
+          rx = 1._DP/x
           CALL DBESI(x,fnu,kode,n,y,ny)
           IF( ny==0 ) THEN
             CALL DBESK(x,fnu,kode,n,w,nw)
             IF( nw==0 ) THEN
               IF( n==1 ) THEN
-                fnup = fnu + 1.0D0
+                fnup = fnu + 1._DP
                 CALL DBESI(x,fnup,kode,1,y(2),ny)
                 IF( ny/=0 ) CYCLE
                 CALL DBESK(x,fnup,kode,1,w(2),nw)
@@ -165,7 +165,7 @@ CONTAINS
                   E14.7,', W(2) = ',E14.7)
                 GOTO 100
               END IF
-              x = x + 10.0D0
+              x = x + 10._DP
             END IF
           END IF
         END DO
@@ -174,8 +174,8 @@ CONTAINS
     !
     !     Check underflow flags
     !
-    100  x = D1MACH(1)*10.0D0
-    alp = 12.3D0
+    100  x = D1MACH(1)*10._DP
+    alp = 12.3_DP
     n = 3
     CALL DBESI(x,alp,1,n,y,ny)
     IF( ny/=3 ) THEN
@@ -184,8 +184,8 @@ CONTAINS
       99005 FORMAT (/' ERROR IN DBESI UNDERFLOW TEST'/)
     END IF
     !
-    x = LOG(D1MACH(2)/10.0D0) + 20.0D0
-    alp = 1.3D0
+    x = LOG(D1MACH(2)/10._DP) + 20._DP
+    alp = 1.3_DP
     n = 3
     CALL DBESK(x,alp,1,n,w,nw)
     IF( nw/=3 ) THEN
@@ -207,10 +207,10 @@ CONTAINS
     !
     IF( Kprint>=3 ) WRITE (Lun,99007)
     99007 FORMAT (//' TRIGGER 10 ERROR CONDITIONS'//)
-    xx(1) = 1.0D0
-    xx(2) = 1.0D0
-    xx(3) = 1.0D0
-    xx(4) = 1.0D0
+    xx(1) = 1._DP
+    xx(2) = 1._DP
+    xx(3) = 1._DP
+    xx(4) = 1._DP
     !
     !     Illegal arguments
     !
@@ -235,9 +235,9 @@ CONTAINS
     !
     !     Trigger overflow
     !
-    x = LOG(D1MACH(2)/10.0D0) + 20.0D0
+    x = LOG(D1MACH(2)/10._DP) + 20._DP
     n = 3
-    alp = 2.3D0
+    alp = 2.3_DP
     CALL DBESI(x,alp,1,n,y,ny)
     IF( NUMXER(nerr)/=6 ) THEN
       Ipass = 0
@@ -245,7 +245,7 @@ CONTAINS
     END IF
     CALL XERCLR
     !
-    x = D1MACH(1)*10.0D0
+    x = D1MACH(1)*10._DP
     CALL DBESK(x,alp,1,n,w,nw)
     IF( NUMXER(nerr)/=6 ) THEN
       Ipass = 0
@@ -316,16 +316,16 @@ CONTAINS
     99001 FORMAT (/' QUICK CHECKS FOR DBESJ AND DBESY'//)
     !
     Ipass = 1
-    rhpi = 0.5D0/ATAN(1.0D0)
-    xx(1) = 0.49D0
-    xx(2) = 1.3D0
-    xx(3) = 5.3D0
-    xx(4) = 13.3D0
-    xx(5) = 21.3D0
-    fn(1) = 0.095D0
-    fn(2) = 0.70D0
-    fn(3) = 0.0D0
-    tol = MAX(500.0D0*D1MACH(4),7.1D-12)
+    rhpi = 0.5_DP/ATAN(1._DP)
+    xx(1) = 0.49_DP
+    xx(2) = 1.3_DP
+    xx(3) = 5.3_DP
+    xx(4) = 13.3_DP
+    xx(5) = 21.3_DP
+    fn(1) = 0.095_DP
+    fn(2) = 0.70_DP
+    fn(3) = 0._DP
+    tol = MAX(500._DP*D1MACH(4),7.1E-12_DP)
     DO m = 1, 3
       DO n = 1, 4
         DO nu = 1, 4
@@ -367,8 +367,8 @@ CONTAINS
     !     Check small values of X and order
     !
     n = 2
-    fnu = 1.0D0
-    x = D1MACH(4)/5.0D0
+    fnu = 1._DP
+    x = D1MACH(4)/5._DP
     rx = rhpi/x
     DO i = 1, 3
       CALL DBESJ(x,fnu,n,y,ny)
@@ -384,7 +384,7 @@ CONTAINS
           E14.7/' Y(1) = ',E14.7,', Y(2) = ',E14.7/' W(1) = ',E14.7,', W(2) = ',E14.7)
         EXIT
       END IF
-      fnu = D1MACH(4)/100.0D0
+      fnu = D1MACH(4)/100._DP
       x = xx(2*i-1)
       rx = rhpi/x
     END DO
@@ -393,16 +393,16 @@ CONTAINS
     !
     DO k = 1, 2
       del = 30*(k-1)
-      fnu = 70.0D0 + del
+      fnu = 70._DP + del
       DO n = 1, 2
-        x = 50.0D0 + del
+        x = 50._DP + del
         DO i = 1, 5
           rx = rhpi/x
           CALL DBESJ(x,fnu,n,y,ny)
           IF( ny==0 ) THEN
             CALL DBESY(x,fnu,n,w)
             IF( n==1 ) THEN
-              fnup = fnu + 1.0D0
+              fnup = fnu + 1._DP
               CALL DBESJ(x,fnup,1,y(2),ny)
               IF( ny/=0 ) CYCLE
               CALL DBESY(x,fnup,1,w(2))
@@ -419,7 +419,7 @@ CONTAINS
                 ', Y(2) = ',E14.7/' W(1) = ',E14.7,', W(2) = ',E14.7)
               GOTO 100
             END IF
-            x = x + 10.0D0
+            x = x + 10._DP
           END IF
         END DO
       END DO
@@ -427,8 +427,8 @@ CONTAINS
     !
     !     Check underflow flags
     !
-    100  x = D1MACH(1)*10.0D0
-    alp = 12.3D0
+    100  x = D1MACH(1)*10._DP
+    alp = 12.3_DP
     n = 3
     CALL DBESJ(x,alp,n,y,ny)
     IF( ny/=3 ) THEN
@@ -450,9 +450,9 @@ CONTAINS
     !
     IF( Kprint>=3 ) WRITE (Lun,99006)
     99006 FORMAT (//' TRIGGER 7 ERROR CONDITIONS'//)
-    xx(1) = 1.0D0
-    xx(2) = 1.0D0
-    xx(3) = 1.0D0
+    xx(1) = 1._DP
+    xx(2) = 1._DP
+    xx(3) = 1._DP
     !
     !     Illegal arguments
     !
@@ -476,9 +476,9 @@ CONTAINS
     !
     !     Trigger overflow
     !
-    x = D1MACH(1)*10.0D0
+    x = D1MACH(1)*10._DP
     n = 3
-    alp = 2.3D0
+    alp = 2.3_DP
     CALL DBESY(x,alp,n,w)
     IF( NUMXER(nerr)/=6 ) THEN
       Ipass = 0
@@ -543,7 +543,7 @@ CONTAINS
     !
     99001 FORMAT ('1'/' QUICK CHECK FOR DEXINT AND DGAUS8'/)
     Ipass = 1
-    tol = SQRT(MAX(D1MACH(4),1.0D-18))
+    tol = SQRT(MAX(D1MACH(4),1.E-18_DP))
     DO kode = 1, 2
       ik = kode - 1
       FKM = ik
@@ -551,9 +551,9 @@ CONTAINS
         DO m = 1, 4
           nm = n + m - 1
           DO ix = 1, 25, 8
-            X = ix - 0.20D0
+            X = ix - 0.20_DP
             CALL DEXINT(X,n,kode,m,tol,en,nz,ierr)
-            kx = INT( X + 0.5D0 )
+            kx = INT( X + 0.5_DP )
             IF( kx==0 ) kx = 1
             icase = 1
             A = n
@@ -565,9 +565,9 @@ CONTAINS
                 A = kx
               END IF
             END IF
-            sig = 3.0D0/X
-            t2 = 1.0D0
-            summ = 0.0D0
+            sig = 3._DP/X
+            t2 = 1._DP
+            summ = 0._DP
             DO
               t1 = t2
               t2 = t2 + sig
@@ -575,7 +575,7 @@ CONTAINS
               CALL DGAUS8(DFEIN,t1,t2,atol,ans,ierr)
               summ = summ + ans
               IF( ABS(ans)<ABS(summ)*tol ) THEN
-                ex = 1.0D0
+                ex = 1._DP
                 IF( kode==1 ) ex = EXP(-X)
                 bb = A
                 IF( icase==3 ) THEN
@@ -602,20 +602,20 @@ CONTAINS
                 !
                 DO k = 1, ke
                   y(kk+1) = (ex-X*y(kk))/bb
-                  bb = bb + 1.0D0
+                  bb = bb + 1._DP
                   kk = kk + 1
                 END DO
                 IF( icase==3 ) EXIT
                 GOTO 5
               END IF
             END DO
-            bb = A - 1.0D0
+            bb = A - 1._DP
             !
             !             Backward recur
             !
             DO i = 1, ie
               y(ii-1) = (ex-bb*y(ii))/X
-              bb = bb - 1.0D0
+              bb = bb - 1._DP
               ii = ii - 1
             END DO
             5 CONTINUE
@@ -639,11 +639,11 @@ CONTAINS
     !
     IF( Kprint>=3 ) WRITE (Lun,99003)
     99003 FORMAT (/' TRIGGER 6 ERROR CONDITIONS'/)
-    xx(1) = 1.0D0
-    xx(2) = 1.0D0
-    xx(3) = 1.0D0
-    xx(4) = 1.0D0
-    xx(5) = 0.01D0
+    xx(1) = 1._DP
+    xx(2) = 1._DP
+    xx(3) = 1._DP
+    xx(4) = 1._DP
+    xx(5) = 0.01_DP
     DO i = 1, 5
       xx(i) = -xx(i)
       k = INT( xx(2) )
@@ -658,8 +658,8 @@ CONTAINS
       END IF
       xx(i) = -xx(i)
     END DO
-    X = 0.0D0
-    tol = 1.0D-2
+    X = 0._DP
+    tol = 1.E-2_DP
     CALL DEXINT(X,1,1,1,tol,en,nz,ierr)
     IF( ierr/=1 ) THEN
       Ipass = 0

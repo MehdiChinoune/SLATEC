@@ -67,7 +67,7 @@ SUBROUTINE DSTOR1(U,Yh,V,Yp,Ntemp,Ndisk,Ntape)
     !     ......EXIT
   ELSEIF( Ntemp/=1 ) THEN
     DO j = 1, ncomp_com
-      V(j) = 0.0D0
+      V(j) = 0._DP
     END DO
     IF( Ndisk==1 ) WRITE (Ntape) (V(j),j=1,ncomp_com), (U(j),j=1,nctnf)
   END IF

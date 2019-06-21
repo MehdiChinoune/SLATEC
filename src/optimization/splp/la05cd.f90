@@ -50,11 +50,11 @@ SUBROUTINE LA05CD(A,Ind,Ia,N,Ip,Iw,W,G,U,Mm)
   CHARACTER(8) :: xern1
   !* FIRST EXECUTABLE STATEMENT  LA05CD
   CALL XSETUN(lp_com)
-  IF( G<0.0D0 ) THEN
+  IF( G<0._DP ) THEN
     !
     IF( lp_com>0 ) CALL XERMSG('LA05CD',&
       'EARLIER ENTRY GAVE ERROR RETURN.',-8,2)
-    G = -8.0D0
+    G = -8._DP
     RETURN
   ELSE
     jm = Mm
@@ -126,7 +126,7 @@ SUBROUTINE LA05CD(A,Ind,Ia,N,Ip,Iw,W,G,U,Mm)
       20  Iw(i,1) = nz + 1
       A(kpl) = W(i)
       Ind(kpl,2) = jm
-      40  W(i) = 0.0D0
+      40  W(i) = 0._DP
     END DO
     IF( Iw(im,1)==0 .OR. Iw(jm,2)==0 .OR. m>last ) GOTO 200
     !
@@ -135,7 +135,7 @@ SUBROUTINE LA05CD(A,Ind,Ia,N,Ip,Iw,W,G,U,Mm)
     !     FOR WORKSPACE.
     ins = m
     m1 = m
-    W(jm) = 1.0D0
+    W(jm) = 1._DP
     DO ii = m, last
       i = Iw(ii,3)
       j = Iw(ii,4)
@@ -148,7 +148,7 @@ SUBROUTINE LA05CD(A,Ind,Ia,N,Ip,Iw,W,G,U,Mm)
         kl = kp + Iw(i,1) - 1
         DO k = kp, kl
           j = Ind(k,2)
-          W(j) = 1.0D0
+          W(j) = 1._DP
         END DO
         Iw(ins,4) = i
         ins = ins + 1
@@ -168,12 +168,12 @@ SUBROUTINE LA05CD(A,Ind,Ia,N,Ip,Iw,W,G,U,Mm)
     !     FOR WORKSPACE.
     last1 = last
     jns = last
-    W(im) = 2.0D0
+    W(im) = 2._DP
     j = jm
     DO ij = m1, last
       ii = last + m1 - ij
       i = Iw(ii,3)
-      IF( W(i)/=2.0D0 ) THEN
+      IF( W(i)/=2._DP ) THEN
         Iw(last1,3) = i
         last1 = last1 - 1
       ELSE
@@ -185,14 +185,14 @@ SUBROUTINE LA05CD(A,Ind,Ia,N,Ip,Iw,W,G,U,Mm)
         jns = jns - 1
         DO k = kp, kl
           i = Ind(k,1)
-          W(i) = 2.0D0
+          W(i) = 2._DP
         END DO
       END IF
     END DO
     DO ii = m1, last1
       jns = jns + 1
       i = Iw(jns,4)
-      W(i) = 3.0D0
+      W(i) = 3._DP
       Iw(ii,3) = i
     END DO
     !
@@ -204,7 +204,7 @@ SUBROUTINE LA05CD(A,Ind,Ia,N,Ip,Iw,W,G,U,Mm)
       is = 0
       DO k = kp, kl
         l = Ind(k,1)
-        IF( W(l)==3.0D0 ) THEN
+        IF( W(l)==3._DP ) THEN
           IF( is/=0 ) GOTO 50
           i = l
           knp = k
@@ -226,7 +226,7 @@ SUBROUTINE LA05CD(A,Ind,Ia,N,Ip,Iw,W,G,U,Mm)
       Ind(kp,2) = jm
       jm = Ind(k,2)
       Iw(ii,4) = i
-      W(i) = 2.0D0
+      W(i) = 2._DP
     END DO
     ii = last1
     GOTO 100
@@ -246,7 +246,7 @@ SUBROUTINE LA05CD(A,Ind,Ia,N,Ip,Iw,W,G,U,Mm)
       !
       ! CLEAR W
       DO i = 1, N
-        W(i) = 0.0D0
+        W(i) = 0._DP
       END DO
       !
       ! PERFORM ELIMINATION
@@ -291,7 +291,7 @@ SUBROUTINE LA05CD(A,Ind,Ia,N,Ip,Iw,W,G,U,Mm)
         END DO
         Ind(k,1) = Ind(kj,1)
         Ind(kj,1) = ipp
-        120  IF( A(kp)==0.0D0 ) GOTO 200
+        120  IF( A(kp)==0._DP ) GOTO 200
         IF( ii/=last1 ) THEN
           am = -A(kr)/A(kp)
           ! COMPRESS ROW FILE UNLESS IT IS CERTAIN THAT THERE IS ROOM FOR NEW ROW.
@@ -339,7 +339,7 @@ SUBROUTINE LA05CD(A,Ind,Ia,N,Ip,Iw,W,G,U,Mm)
                 A(lrow_com) = au
                 Ind(lrow_com,2) = j
               END IF
-              W(j) = 0.0D0
+              W(j) = 0._DP
             END DO
           END IF
           !
@@ -389,7 +389,7 @@ SUBROUTINE LA05CD(A,Ind,Ia,N,Ip,Iw,W,G,U,Mm)
               Ind(lcol_com,1) = ir
               122  G = MAX(G,ABS(au))
               Iw(j,2) = nz + 1
-              124  W(j) = 0.0D0
+              124  W(j) = 0._DP
             END DO
           END IF
           Iw(ir,1) = lrow_com + 1 - Ip(ir,1)
@@ -437,12 +437,12 @@ SUBROUTINE LA05CD(A,Ind,Ia,N,Ip,Iw,W,G,U,Mm)
     WRITE (xern1,'(I8)') Mm
     CALL XERMSG('LA05CD','SINGULAR MATRIX AFTER REPLACEMENT OF COLUMN.  INDEX = '//xern1,-6,1)
   END IF
-  G = -6.0D0
+  G = -6._DP
   RETURN
   !
   300 CONTINUE
   IF( lp_com>0 ) CALL XERMSG('LA05CD',&
     'LENGTHS OF ARRAYS A(*) AND IND(*,2) ARE TOO SMALL.',-7,1)
-  G = -7.0D0
+  G = -7._DP
   RETURN
 END SUBROUTINE LA05CD

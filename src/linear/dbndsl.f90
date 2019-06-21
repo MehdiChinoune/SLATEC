@@ -200,7 +200,7 @@ SUBROUTINE DBNDSL(Mode,G,Mdg,Nb,Ip,Ir,X,N,Rnorm)
   INTEGER :: i, i1, i2, ie, ii, iopt, irm1, ix, j, jg, l, nerr, np1
   REAL(DP) :: rsq, s, zero
   !* FIRST EXECUTABLE STATEMENT  DBNDSL
-  zero = 0.D0
+  zero = 0._DP
   !
   Rnorm = zero
   SELECT CASE (Mode)

@@ -81,38 +81,38 @@ SUBROUTINE DBSGQ8(FUN,Xt,Bc,N,Kk,Id,A,B,Inbv,Err,Ans,Ierr,Work)
   INTEGER :: k, l, lmn, lmx, lr(60), mxl, nbits, nib, nlmx
   REAL(DP) :: aa(60), ae, anib, area, c, ce, ee, ef, eps, est, gl, glr, gr(60), &
     hh(60), tol, vl(60), vr
-  REAL(DP), PARAMETER :: x1 = 1.83434642495649805D-01, x2 = 5.25532409916328986D-01, &
-    x3 =7.96666477413626740D-01 , x4 = 9.60289856497536232D-01
-  REAL(DP), PARAMETER :: w1 = 3.62683783378361983D-01, w2 = 3.13706645877887287D-01, &
-    w3 = 2.22381034453374471D-01, w4 = 1.01228536290376259D-01
-  REAL(DP), PARAMETER :: sq2 = 1.41421356D0
+  REAL(DP), PARAMETER :: x1 = 1.83434642495649805E-01_DP, x2 = 5.25532409916328986E-01_DP, &
+    x3 =7.96666477413626740E-01_DP , x4 = 9.60289856497536232E-01_DP
+  REAL(DP), PARAMETER :: w1 = 3.62683783378361983E-01_DP, w2 = 3.13706645877887287E-01_DP, &
+    w3 = 2.22381034453374471E-01_DP, w4 = 1.01228536290376259E-01_DP
+  REAL(DP), PARAMETER :: sq2 = 1.41421356_DP
   INTEGER, PARAMETER :: nlmn = 1, kmx = 5000, kml = 6
   !
   !     INITIALIZE
   !
   !* FIRST EXECUTABLE STATEMENT  DBSGQ8
   k = I1MACH(14)
-  anib = D1MACH(5)*k/0.30102000D0
+  anib = D1MACH(5)*k/0.30102000_DP
   nbits = INT(anib)
   nlmx = MIN((nbits*5)/8,60)
-  Ans = 0.0D0
+  Ans = 0._DP
   Ierr = 1
-  ce = 0.0D0
+  ce = 0._DP
   IF( A==B ) THEN
-    IF( Err<0.0D0 ) Err = ce
+    IF( Err<0._DP ) Err = ce
     RETURN
   ELSE
     lmx = nlmx
     lmn = nlmn
-    IF( B/=0.0D0 ) THEN
-      IF( SIGN(1.0D0,B)*A>0.0D0 ) THEN
-        c = ABS(1.0D0-A/B)
-        IF( c<=0.1D0 ) THEN
-          IF( c<=0.0D0 ) THEN
-            IF( Err<0.0D0 ) Err = ce
+    IF( B/=0._DP ) THEN
+      IF( SIGN(1._DP,B)*A>0._DP ) THEN
+        c = ABS(1._DP-A/B)
+        IF( c<=0.1_DP ) THEN
+          IF( c<=0._DP ) THEN
+            IF( Err<0._DP ) Err = ce
             RETURN
           ELSE
-            anib = 0.5D0 - LOG(c)/0.69314718D0
+            anib = 0.5_DP - LOG(c)/0.69314718_DP
             nib = INT(anib)
             lmx = MIN(nlmx,nbits-nib-7)
             IF( lmx<1 ) THEN
@@ -120,7 +120,7 @@ SUBROUTINE DBSGQ8(FUN,Xt,Bc,N,Kk,Id,A,B,Inbv,Err,Ans,Ierr,Work)
               CALL XERMSG('DBSGQ8',&
                 'A AND B ARE TOO NEARLY EQUAL TO ALLOW NORMAL INTEGRATION.&
                 & ANS IS SET TO ZERO AND IERR TO -1.',1,-1)
-              IF( Err<0.0D0 ) Err = ce
+              IF( Err<0._DP ) Err = ce
               RETURN
             ELSE
               lmn = MIN(lmn,lmx)
@@ -129,17 +129,17 @@ SUBROUTINE DBSGQ8(FUN,Xt,Bc,N,Kk,Id,A,B,Inbv,Err,Ans,Ierr,Work)
         END IF
       END IF
     END IF
-    tol = MAX(ABS(Err),2.0D0**(5-nbits))/2.0D0
-    IF( Err==0.0D0 ) tol = SQRT(D1MACH(4))
+    tol = MAX(ABS(Err),2._DP**(5-nbits))/2._DP
+    IF( Err==0._DP ) tol = SQRT(D1MACH(4))
     eps = tol
-    hh(1) = (B-A)/4.0D0
+    hh(1) = (B-A)/4._DP
     aa(1) = A
     lr(1) = 1
     l = 1
-    est = G8(aa(l)+2.0D0*hh(l),2.0D0*hh(l))
+    est = G8(aa(l)+2._DP*hh(l),2._DP*hh(l))
     k = 8
     area = ABS(est)
-    ef = 0.5D0
+    ef = 0.5_DP
     mxl = 0
   END IF
   100 CONTINUE
@@ -148,7 +148,7 @@ SUBROUTINE DBSGQ8(FUN,Xt,Bc,N,Kk,Id,A,B,Inbv,Err,Ans,Ierr,Work)
     !     COMPUTE REFINED ESTIMATES, ESTIMATE THE ERROR, ETC.
     !
     gl = G8(aa(l)+hh(l),hh(l))
-    gr(l) = G8(aa(l)+3.0D0*hh(l),hh(l))
+    gr(l) = G8(aa(l)+3._DP*hh(l),hh(l))
     k = k + 16
     area = area + (ABS(gl)+ABS(gr(l))-ABS(est))
     glr = gl + gr(l)
@@ -164,9 +164,9 @@ SUBROUTINE DBSGQ8(FUN,Xt,Bc,N,Kk,Id,A,B,Inbv,Err,Ans,Ierr,Work)
       EXIT
     ELSE
       l = l + 1
-      eps = eps*0.5D0
+      eps = eps*0.5_DP
       ef = ef/sq2
-      hh(l) = hh(l-1)*0.5D0
+      hh(l) = hh(l-1)*0.5_DP
       lr(l) = -1
       aa(l) = aa(l-1)
       est = gl
@@ -185,7 +185,7 @@ SUBROUTINE DBSGQ8(FUN,Xt,Bc,N,Kk,Id,A,B,Inbv,Err,Ans,Ierr,Work)
     vr = glr
     DO WHILE( l>1 )
       l = l - 1
-      eps = eps*2.0D0
+      eps = eps*2._DP
       ef = ef*sq2
       IF( lr(l)<=0 ) THEN
         vl(l) = vl(l+1) + vr
@@ -198,17 +198,17 @@ SUBROUTINE DBSGQ8(FUN,Xt,Bc,N,Kk,Id,A,B,Inbv,Err,Ans,Ierr,Work)
     !      EXIT
     !
     Ans = vr
-    IF( (mxl/=0) .AND. (ABS(ce)>2.0D0*tol*area) ) THEN
+    IF( (mxl/=0) .AND. (ABS(ce)>2._DP*tol*area) ) THEN
       Ierr = 2
       CALL XERMSG('DBSGQ8',&
         'ANS IS PROBABLY INSUFFICIENTLY ACCURATE.',3,1)
     END IF
-    IF( Err<0.0D0 ) Err = ce
+    IF( Err<0._DP ) Err = ce
     RETURN
   END IF
   200  est = gr(l-1)
   lr(l) = 1
-  aa(l) = aa(l) + 4.0D0*hh(l)
+  aa(l) = aa(l) + 4._DP*hh(l)
   GOTO 100
   RETURN
 CONTAINS

@@ -60,8 +60,8 @@ CONTAINS
     99001 FORMAT ('1 QUICK CHECK FOR SPLINE ROUTINES',//)
     !
     Ipass = 1
-    pi = 3.14159265358979324E0
-    tol = 1000.0E0*R1MACH(4)
+    pi = 3.14159265358979324_SP
+    tol = 1000._SP*R1MACH(4)
     !
     !     Generate data.
     !
@@ -71,7 +71,7 @@ CONTAINS
       x(i) = (i-1)/den
       y(i) = SIN(pi*x(i))
     END DO
-    x(3) = 2.0E0/den
+    x(3) = 2._SP/den
     y(3) = SIN(pi*x(3))
     !
     !     Compute splines for two knot arrays.
@@ -81,7 +81,7 @@ CONTAINS
       ibcl = 1
       ibcr = 2
       fbcl = pi
-      fbcr = 0.0E0
+      fbcr = 0._SP
       CALL BINT4(x,y,ndata,ibcl,ibcr,fbcl,fbcr,knt,t,bc,n,k,w)
       !
       !       Error test on BINT4.
@@ -160,26 +160,26 @@ CONTAINS
         spv = BVALU(t,bc,n,k,j-1,xx,inbv,w)
         er = ABS(spv-sv(j))
         x2 = ABS(sv(j))
-        IF( x2>1.0E0 ) er = er/x2
+        IF( x2>1._SP ) er = er/x2
         IF( er>atol ) THEN
           Ipass = 0
           IF( Kprint>=2 ) WRITE (Lun,99007)
           99007 FORMAT (' COMPARISONS FROM BSPEV AND BVALU DO NOT AGREE')
         END IF
-        atol = 10.0E0*atol
+        atol = 10._SP*atol
       END DO
       atol = tol
       DO j = 1, k
         spv = PPVAL(ldc,c,xi,lxi,k,j-1,xx,inppv)
         er = ABS(spv-sv(j))
         x2 = ABS(sv(j))
-        IF( x2>1.0E0 ) er = er/x2
+        IF( x2>1._SP ) er = er/x2
         IF( er>atol ) THEN
           Ipass = 0
           IF( Kprint>=2 ) WRITE (Lun,99008)
           99008 FORMAT (' COMPARISONS FROM BSPEV AND PPVAL DO NOT AGREE')
         END IF
-        atol = 10.0E0*atol
+        atol = 10._SP*atol
       END DO
       atol = tol
       ldcc = 4
@@ -189,19 +189,19 @@ CONTAINS
       CALL INTRV(t,nn,x1,ilo,ileft,mflag)
       DO j = 1, k
         CALL BSPVD(t,k,j,xx,ileft,ldcc,cc,w)
-        er = 0.0E0
+        er = 0._SP
         DO jj = 1, k
           er = er + bc(ileft-k+jj)*cc(jj,j)
         END DO
         er = ABS(er-sv(j))
         x2 = ABS(sv(j))
-        IF( x2>1.0E0 ) er = er/x2
+        IF( x2>1._SP ) er = er/x2
         IF( er>atol ) THEN
           Ipass = 0
           IF( Kprint>=2 ) WRITE (Lun,99009)
           99009 FORMAT (' COMPARISONS FROM BSPEV AND BSPVD DO NOT AGREE')
         END IF
-        atol = 10.0E0*atol
+        atol = 10._SP*atol
       END DO
     END DO
     DO k = 2, 4
@@ -247,11 +247,11 @@ CONTAINS
     IF( Kprint>=3 ) WRITE (Lun,99011)
     99011 FORMAT (/' TRIGGER 52 ERROR CONDITIONS',/)
     !
-    w(1) = 11.0E0
-    w(2) = 4.0E0
-    w(3) = 2.0E0
-    w(4) = 0.5E0
-    w(5) = 4.0E0
+    w(1) = 11._SP
+    w(2) = 4._SP
+    w(3) = 2._SP
+    w(4) = 0.5_SP
+    w(5) = 4._SP
     ilo = 1
     inev = 1
     inbv = 1
@@ -352,7 +352,7 @@ CONTAINS
       w(i) = -w(i)
     END DO
     kntopt = 1
-    x(1) = 1.0E0
+    x(1) = 1._SP
     CALL BINT4(x,y,n,ibcl,ibcr,fbcl,fbcr,kntopt,t,bc,n,k,qq)
     IF( NUMXER(nerr)/=2 ) THEN
       Ipass = 0
@@ -367,14 +367,14 @@ CONTAINS
     END IF
     CALL XERCLR
     !
-    x(1) = 0.0E0
-    atol = 1.0E0
+    x(1) = 0._SP
+    atol = 1._SP
     kntopt = 3
     DO i = 1, 3
-      qq(i) = -0.30E0 + 0.10E0*(i-1)
-      qq(i+3) = 1.1E0 + 0.10E0*(i-1)
+      qq(i) = -0.30_SP + 0.10_SP*(i-1)
+      qq(i+3) = 1.1_SP + 0.10_SP*(i-1)
     END DO
-    qq(1) = 1.0E0
+    qq(1) = 1._SP
     CALL BINT4(x,y,ndata,1,1,fbcl,fbcr,3,t,bc,n,k,qq)
     IF( NUMXER(nerr)/=2 ) THEN
       Ipass = 0
@@ -469,9 +469,9 @@ CONTAINS
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   930214  Added TYPE statement.  (WRB)
 
-    REAL, INTENT(IN) :: X
+    REAL(SP),INTENT(IN) :: X
     !* FIRST EXECUTABLE STATEMENT  FB
-    FB = 1.0E0
+    FB = 1._SP
   END FUNCTION FB
 END MODULE TEST30_MOD
 !** TEST30

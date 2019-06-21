@@ -229,7 +229,7 @@ SUBROUTINE DPCHIC(Ic,Vc,Switch,N,X,F,D,Incfd,Wk,Nwk,Ierr)
   !  DECLARE LOCAL VARIABLES.
   !
   INTEGER :: i, ibeg, iend, nless1
-  REAL(DP), PARAMETER :: zero = 0.D0
+  REAL(DP), PARAMETER :: zero = 0._DP
   !
   !  VALIDITY-CHECK ARGUMENTS.
   !

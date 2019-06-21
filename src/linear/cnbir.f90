@@ -251,7 +251,7 @@ SUBROUTINE CNBIR(Abe,Lda,N,Ml,Mu,V,Itask,Ind,Work,Iwork)
   !     FORM NORM OF X0
   !
   xnorm = SCASUM(N,V(1),1)
-  IF( xnorm==0.0 ) THEN
+  IF( xnorm==0._SP ) THEN
     Ind = 75
     RETURN
   END IF

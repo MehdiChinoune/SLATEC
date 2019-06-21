@@ -162,13 +162,13 @@ SUBROUTINE SNBFA(Abe,Lda,N,Ml,Mu,Ipvt,Info)
       !
       !     SKIP COLUMN REDUCTION IF PIVOT IS ZERO
       !
-      IF( Abe(k,ml1)==0.0E0 ) THEN
+      IF( Abe(k,ml1)==0._SP ) THEN
         Info = k
       ELSE
         !
         !     COMPUTE MULTIPLIERS
         !
-        t = -1.0/Abe(k,ml1)
+        t = -1._SP/Abe(k,ml1)
         DO i = 0, lm-1
           Abe(lm+k-i,lm2+i) = t*Abe(lm+k-i,lm2+i)
         END DO
@@ -182,5 +182,5 @@ SUBROUTINE SNBFA(Abe,Lda,N,Ml,Mu,Ipvt,Info)
     END DO
   END IF
   Ipvt(N) = N
-  IF( Abe(N,ml1)==0.0E0 ) Info = N
+  IF( Abe(N,ml1)==0._SP ) Info = N
 END SUBROUTINE SNBFA

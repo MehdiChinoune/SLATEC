@@ -33,7 +33,7 @@ SUBROUTINE CUNI1(Z,Fnu,Kode,N,Y,Nz,Nlast,Fnul,Tol,Elim,Alim)
     phi, rz, summ, s1, s2, Y(N), Z, zeta1, zeta2, cy(2)
   REAL(SP) :: Alim, aphi, ascle, bry(3), c2i, c2m, c2r, Elim, fn, Fnu, &
     Fnul, rs1, Tol, yy
-  COMPLEX(SP), PARAMETER :: czero = (0.0E0,0.0E0), cone = (1.0E0,0.0E0)
+  COMPLEX(SP), PARAMETER :: czero = (0._SP,0._SP), cone = (1._SP,0._SP)
   !* FIRST EXECUTABLE STATEMENT  CUNI1
   Nz = 0
   nd = N
@@ -43,30 +43,30 @@ SUBROUTINE CUNI1(Z,Fnu,Kode,N,Y,Nz,Nlast,Fnul,Tol,Elim,Alim)
   !     NITUDE ARE SCALED TO KEEP INTERMEDIATE ARITHMETIC ON SCALE,
   !     EXP(ALIM)=EXP(ELIM)*TOL
   !-----------------------------------------------------------------------
-  cscl = CMPLX(1.0E0/Tol,0.0E0)
-  crsc = CMPLX(Tol,0.0E0)
+  cscl = CMPLX(1._SP/Tol,0._SP,SP)
+  crsc = CMPLX(Tol,0._SP,SP)
   css(1) = cscl
   css(2) = cone
   css(3) = crsc
   csr(1) = crsc
   csr(2) = cone
   csr(3) = cscl
-  bry(1) = 1.0E+3*R1MACH(1)/Tol
+  bry(1) = 1.E+3_SP*R1MACH(1)/Tol
   !-----------------------------------------------------------------------
   !     CHECK FOR UNDERFLOW AND OVERFLOW ON FIRST MEMBER
   !-----------------------------------------------------------------------
-  fn = MAX(Fnu,1.0E0)
+  fn = MAX(Fnu,1._SP)
   init = 0
   CALL CUNIK(Z,fn,1,1,Tol,init,phi,zeta1,zeta2,summ,cwrk)
   IF( Kode==1 ) THEN
     s1 = -zeta1 + zeta2
   ELSE
-    cfn = CMPLX(fn,0.0E0)
+    cfn = CMPLX(fn,0._SP,SP)
     s1 = -zeta1 + cfn*(cfn/(Z+zeta2))
   END IF
   rs1 = REAL(s1)
   IF( ABS(rs1)>Elim ) THEN
-    IF( rs1>0.0E0 ) GOTO 400
+    IF( rs1>0._SP ) GOTO 400
     Nz = N
     DO i = 1, N
       Y(i) = czero
@@ -81,9 +81,9 @@ SUBROUTINE CUNI1(Z,Fnu,Kode,N,Y,Nz,Nlast,Fnul,Tol,Elim,Alim)
     IF( Kode==1 ) THEN
       s1 = -zeta1 + zeta2
     ELSE
-      cfn = CMPLX(fn,0.0E0)
+      cfn = CMPLX(fn,0._SP,SP)
       yy = AIMAG(Z)
-      s1 = -zeta1 + cfn*(cfn/(Z+zeta2)) + CMPLX(0.0E0,yy)
+      s1 = -zeta1 + cfn*(cfn/(Z+zeta2)) + CMPLX(0._SP,yy,SP)
     END IF
     !-----------------------------------------------------------------------
     !     TEST FOR UNDERFLOW AND OVERFLOW
@@ -99,7 +99,7 @@ SUBROUTINE CUNI1(Z,Fnu,Kode,N,Y,Nz,Nlast,Fnul,Tol,Elim,Alim)
       rs1 = rs1 + LOG(aphi)
       IF( ABS(rs1)>Elim ) GOTO 300
       IF( i==1 ) iflag = 1
-      IF( rs1>=0.0E0 ) THEN
+      IF( rs1>=0._SP ) THEN
         IF( i==1 ) iflag = 3
       END IF
     END IF
@@ -110,7 +110,7 @@ SUBROUTINE CUNI1(Z,Fnu,Kode,N,Y,Nz,Nlast,Fnul,Tol,Elim,Alim)
     c2r = REAL(s1)
     c2i = AIMAG(s1)
     c2m = EXP(c2r)*REAL(css(iflag))
-    s1 = CMPLX(c2m,0.0E0)*CMPLX(COS(c2i),SIN(c2i))
+    s1 = CMPLX(c2m,0._SP,SP)*CMPLX(COS(c2i),SIN(c2i),SP)
     s2 = s2*s1
     IF( iflag==1 ) THEN
       CALL CUCHK(s2,nw,bry(1),Tol)
@@ -121,8 +121,8 @@ SUBROUTINE CUNI1(Z,Fnu,Kode,N,Y,Nz,Nlast,Fnul,Tol,Elim,Alim)
     Y(m) = s2*csr(iflag)
   END DO
   IF( nd>2 ) THEN
-    rz = CMPLX(2.0E0,0.0E0)/Z
-    bry(2) = 1.0E0/bry(1)
+    rz = CMPLX(2._SP,0._SP,SP)/Z
+    bry(2) = 1._SP/bry(1)
     bry(3) = R1MACH(2)
     s1 = cy(1)
     s2 = cy(2)
@@ -132,12 +132,12 @@ SUBROUTINE CUNI1(Z,Fnu,Kode,N,Y,Nz,Nlast,Fnul,Tol,Elim,Alim)
     fn = k
     DO i = 3, nd
       c2 = s2
-      s2 = s1 + CMPLX(Fnu+fn,0.0E0)*rz*s2
+      s2 = s1 + CMPLX(Fnu+fn,0._SP,SP)*rz*s2
       s1 = c2
       c2 = s2*c1
       Y(k) = c2
       k = k - 1
-      fn = fn - 1.0E0
+      fn = fn - 1._SP
       IF( iflag<3 ) THEN
         c2r = REAL(c2)
         c2i = AIMAG(c2)
@@ -161,7 +161,7 @@ SUBROUTINE CUNI1(Z,Fnu,Kode,N,Y,Nz,Nlast,Fnul,Tol,Elim,Alim)
   !     SET UNDERFLOW AND UPDATE PARAMETERS
   !-----------------------------------------------------------------------
   300 CONTINUE
-  IF( rs1<=0.0E0 ) THEN
+  IF( rs1<=0._SP ) THEN
     Y(nd) = czero
     Nz = Nz + 1
     nd = nd - 1
