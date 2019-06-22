@@ -34,14 +34,14 @@ CONTAINS
     !   920722  Initialized IP(1) and IP(2) for CALL to LSEI.  (BKS, WRB)
     !   930214  Declarations sections added, code revised to test error
     !           returns for all values of KPRINT and code polished.  (WRB)
-    USE slatec, ONLY : LSEI, R1MACH, SVOUT, XGETF, XSETF, XERCLR, NUMXER
+    USE slatec, ONLY : LSEI, R1MACH, SVOUT, control_xer, num_xer
     USE blas, ONLY :  SAXPY
     !     .. Scalar Arguments ..
     INTEGER :: Ipass, Kprint, Lun
     !     .. Local Scalars ..
     REAL(SP) :: cnorm, relerr(1), relnrm(1), resnrm(1), rnorme, rnorml(1), tnorm
     INTEGER :: i, idigit, jdigit, kontrl, ma, mdd, me, meap1, mep1, mg, &
-      mode, n, nerr, np1
+      mode, n, np1
     LOGICAL :: fatal
     !     .. Local Arrays ..
     REAL(SP) :: d(11,6), err(5), prgopt(4), work(105), x(5)
@@ -185,37 +185,37 @@ CONTAINS
     !
     !     Check calls to error processor.
     !
-    CALL XGETF(kontrl)
+    kontrl = control_xer
     IF( Kprint<=2 ) THEN
-      CALL XSETF(0)
+      control_xer = 0
     ELSE
-      CALL XSETF(1)
+      control_xer = 1
     END IF
     fatal = .FALSE.
-    CALL XERCLR
+    num_xer = 0
     !
     IF( Kprint>=3 ) WRITE (Lun,99004)
     99004 FORMAT (/' 2 ERROR MESSAGES EXPECTED')
     !
     CALL LSEI(d,0,me,ma,mg,n,prgopt,x,rnorme,rnorml(1),mode,work,ip)
-    IF( NUMXER(nerr)/=2 ) THEN
+    IF( num_xer/=2 ) THEN
       Ipass = 0
       fatal = .TRUE.
     END IF
-    CALL XERCLR
+    num_xer = 0
     !
     prgopt(1) = -1
     CALL LSEI(d,mdd,me,ma,mg,n,prgopt,x,rnorme,rnorml(1),mode,work,ip)
-    IF( NUMXER(nerr)/=2 ) THEN
+    IF( num_xer/=2 ) THEN
       Ipass = 0
       fatal = .TRUE.
     END IF
-    CALL XERCLR
+    num_xer = 0
     !
     !     Restore KONTRL and check to see if the tests of error detection
     !     passed.
     !
-    CALL XSETF(kontrl)
+    control_xer = kontrl
     IF( fatal ) THEN
       IF( Kprint>=2 ) THEN
         WRITE (Lun,99005)
@@ -381,7 +381,7 @@ END MODULE TEST27_MOD
 !** TEST27
 PROGRAM TEST27
   USE TEST27_MOD, ONLY : LSEIQX, QCGLSS
-  USE slatec, ONLY : I1MACH, XSETF, XSETUN, XERMAX
+  USE slatec, ONLY : I1MACH, control_xer, max_xer
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !> Driver for testing SLATEC subprograms
@@ -423,7 +423,7 @@ PROGRAM TEST27
   !                 and Lee Walton, Guide to the SLATEC Common Mathema-
   !                 tical Library, April 10, 1990.
   !***
-  ! **Routines called:**  I1MACH, LSEIQX, QCGLSS, XERMAX, XSETF, XSETUN
+  ! **Routines called:**  I1MACH, LSEIQX, QCGLSS, XERMAX, XSETF
 
   !* REVISION HISTORY  (YYMMDD)
   !   890618  DATE WRITTEN
@@ -439,12 +439,11 @@ PROGRAM TEST27
   !     Read KPRINT parameter
   !
   CALL GET_ARGUMENT(kprint)
-  CALL XERMAX(1000)
-  CALL XSETUN(lun)
+  max_xer = 1000
   IF( kprint<=1 ) THEN
-    CALL XSETF(0)
+    control_xer = 0
   ELSE
-    CALL XSETF(1)
+    control_xer = 1
   END IF
   !
   !     Test LSEI

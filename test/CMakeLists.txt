@@ -5,7 +5,7 @@ INCLUDE_DIRECTORIES(${CMAKE_BINARY_DIR}/modules )
 add_library( common_mod SHARED common.f90 )
 target_link_libraries( common_mod slatec )
 
-set( common_files chkxer.f90 comp.f90 get_argument.f90 ismpl.f90 pass.f90 )
+set( common_files get_argument.f90 ismpl.f90 pass.f90 )
 set_source_files_properties( ${common_files} PROPERTIES HEADER_FILE_ONLY TRUE )
 target_sources( common_mod PRIVATE ${common_files} )
 

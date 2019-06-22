@@ -25,12 +25,12 @@ CONTAINS
     !   910708  Minor modifications in use of KPRINT.  (WRB)
     !   920212  Code completely restructured to test errors for all values
     !           of KPRINT.  (WRB)
-    USE slatec, ONLY : NUMXER, POLCOF, POLINT, POLYVL, R1MACH, XERCLR, XGETF, XSETF
+    USE slatec, ONLY : POLCOF, POLINT, POLYVL, R1MACH, num_xer, control_xer
     !     .. Scalar Arguments ..
     INTEGER :: Ipass, Kprint, Lun
     !     .. Local Scalars ..
     REAL(SP) :: tol, yf
-    INTEGER :: i, ierr, kontrl, n, nerr
+    INTEGER :: i, ierr, kontrl, n
     LOGICAL :: fatal
     !     .. Local Arrays ..
     REAL(SP) :: c(6), d(6), w(12)
@@ -92,33 +92,33 @@ CONTAINS
     !
     !     Trigger 2 error conditions
     !
-    CALL XGETF(kontrl)
+    kontrl = control_xer
     IF( Kprint<=2 ) THEN
-      CALL XSETF(0)
+      control_xer = 0
     ELSE
-      CALL XSETF(1)
+      control_xer = 1
     END IF
     fatal = .FALSE.
-    CALL XERCLR
+    num_xer = 0
     !
     IF( Kprint>=3 ) WRITE (Lun,99002)
     99002 FORMAT (/' 2 Error messages expected')
     CALL POLINT(0,x,y,c)
-    IF( NUMXER(nerr)/=2 ) THEN
+    IF( num_xer/=2 ) THEN
       Ipass = 0
       fatal = .TRUE.
     END IF
-    CALL XERCLR
+    num_xer = 0
     !
     x(1) = -1._SP
     CALL POLINT(n,x,y,c)
-    IF( NUMXER(nerr)/=2 ) THEN
+    IF( num_xer/=2 ) THEN
       Ipass = 0
       fatal = .TRUE.
     END IF
-    CALL XERCLR
+    num_xer = 0
     !
-    CALL XSETF(kontrl)
+    control_xer = kontrl
     IF( fatal ) THEN
       IF( Kprint>=2 ) THEN
         WRITE (Lun,99003)
@@ -159,12 +159,12 @@ CONTAINS
 
     !* REVISION HISTORY  (YYMMDD)
     !   920212  DATE WRITTEN
-    USE slatec, ONLY : D1MACH, DPLINT, DPOLCF, DPOLVL, NUMXER, XERCLR, XGETF, XSETF
+    USE slatec, ONLY : D1MACH, DPLINT, DPOLCF, DPOLVL, num_xer, control_xer
     !     .. Scalar Arguments ..
     INTEGER :: Ipass, Kprint, Lun
     !     .. Local Scalars ..
     REAL(DP) :: tol, yf
-    INTEGER :: i, ierr, kontrl, n, nerr
+    INTEGER :: i, ierr, kontrl, n
     LOGICAL :: fatal
     !     .. Local Arrays ..
     REAL(DP) :: c(6), d(6), w(12)
@@ -226,33 +226,33 @@ CONTAINS
     !
     !     Trigger 2 error conditions
     !
-    CALL XGETF(kontrl)
+    kontrl = control_xer
     IF( Kprint<=2 ) THEN
-      CALL XSETF(0)
+      control_xer = 0
     ELSE
-      CALL XSETF(1)
+      control_xer = 1
     END IF
     fatal = .FALSE.
-    CALL XERCLR
+    num_xer = 0
     !
     IF( Kprint>=3 ) WRITE (Lun,99002)
     99002 FORMAT (/' 2 Error messages expected')
     CALL DPLINT(0,x,y,c)
-    IF( NUMXER(nerr)/=2 ) THEN
+    IF( num_xer/=2 ) THEN
       Ipass = 0
       fatal = .TRUE.
     END IF
-    CALL XERCLR
+    num_xer = 0
     !
     x(1) = -1._DP
     CALL DPLINT(n,x,y,c)
-    IF( NUMXER(nerr)/=2 ) THEN
+    IF( num_xer/=2 ) THEN
       Ipass = 0
       fatal = .TRUE.
     END IF
-    CALL XERCLR
+    num_xer = 0
     !
-    CALL XSETF(kontrl)
+    control_xer = kontrl
     IF( fatal ) THEN
       IF( Kprint>=2 ) THEN
         WRITE (Lun,99003)
@@ -280,7 +280,7 @@ END MODULE TEST29_MOD
 !** TEST29
 PROGRAM TEST29
   USE TEST29_MOD, ONLY : DPNTCK, PNTCHK
-  USE slatec, ONLY : I1MACH, XSETF, XSETUN, XERMAX
+  USE slatec, ONLY : I1MACH, control_xer, max_xer
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !> Driver for testing SLATEC subprograms
@@ -323,7 +323,7 @@ PROGRAM TEST29
   !                 and Lee Walton, Guide to the SLATEC Common Mathema-
   !                 tical Library, April 10, 1990.
   !***
-  ! **Routines called:**  DPNTCK, I1MACH, PNTCHK, XERMAX, XSETF, XSETUN
+  ! **Routines called:**  DPNTCK, I1MACH, PNTCHK, XERMAX, XSETF
 
   !* REVISION HISTORY  (YYMMDD)
   !   890618  DATE WRITTEN
@@ -340,12 +340,11 @@ PROGRAM TEST29
   !     Read KPRINT parameter
   !
   CALL GET_ARGUMENT(kprint)
-  CALL XERMAX(1000)
-  CALL XSETUN(lun)
+  max_xer = 1000
   IF( kprint<=1 ) THEN
-    CALL XSETF(0)
+    control_xer = 0
   ELSE
-    CALL XSETF(1)
+    control_xer = 1
   END IF
   !
   !     Test POLINT, POLCOF and POLYVL.

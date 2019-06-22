@@ -36,7 +36,7 @@ CONTAINS
     !* REVISION HISTORY  (YYMMDD)
     !   890405  DATE WRITTEN
     !   890405  Revised to meet SLATEC standards.
-    USE slatec, ONLY : CDRIV1, CDRIV2, CDRIV3, R1MACH, XERCLR
+    USE slatec, ONLY : CDRIV1, CDRIV2, CDRIV3, R1MACH, num_xer
     REAL(SP) :: eps, t, tout
     INTEGER :: ierflg, Ipass, Kprint, leniw, leniwx, lenw, lenwx, Lun, mint, &
       mstate, nde, nfe, nje, nstate, nstep, nx
@@ -120,7 +120,7 @@ CONTAINS
       WRITE (Lun,*) ' Y(3) ', y(3)
       WRITE (Lun,'(/)')
     END IF
-    CALL XERCLR
+    num_xer = 0
     !                                         Run CDRIV1 with invalid input.
     nx = 201
     t = 0._SP
@@ -164,7 +164,7 @@ CONTAINS
       WRITE (Lun,*) ' MSTATE = ', mstate, ', Error number = ', ierflg
       WRITE (Lun,'(/)')
     END IF
-    CALL XERCLR
+    num_xer = 0
     !                                            Exercise CDRIV2 for problem
     !                                            with known solution.
     t = 0._SP
@@ -239,7 +239,7 @@ CONTAINS
       WRITE (Lun,*) ' Y(3) ', y(3)
       WRITE (Lun,'(/)')
     END IF
-    CALL XERCLR
+    num_xer = 0
     !                                         Run CDRIV2 with invalid input.
     t = 0._SP
     y(1) = 10._SP
@@ -286,7 +286,7 @@ CONTAINS
       WRITE (Lun,*) ' MSTATE = ', mstate, ', Error number = ', ierflg
       WRITE (Lun,'(/)')
     END IF
-    CALL XERCLR
+    num_xer = 0
     !                                            Exercise CDRIV3 for problem
     !                                            with known solution.
     t = 0._SP
@@ -363,7 +363,7 @@ CONTAINS
       WRITE (Lun,*) ' Y(3) ', y(3)
       WRITE (Lun,'(/)')
     END IF
-    CALL XERCLR
+    num_xer = 0
     !                                         Run CDRIV3 with invalid input.
     t = 0._SP
     y(1) = 10._SP
@@ -411,7 +411,7 @@ CONTAINS
       WRITE (Lun,*) ' NSTATE = ', nstate, ', Error number = ', ierflg
       WRITE (Lun,'(/)')
     END IF
-    CALL XERCLR
+    num_xer = 0
 
   CONTAINS
     REAL(SP) FUNCTION dum_G(N,T,Y,Iroot)
@@ -486,7 +486,7 @@ END MODULE TEST47_MOD
 !** TEST47
 PROGRAM TEST47
   USE TEST47_MOD, ONLY : CDQCK
-  USE slatec, ONLY : I1MACH, XSETF, XSETUN, XERMAX
+  USE slatec, ONLY : I1MACH, control_xer, max_xer
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !> Driver for testing SLATEC subprograms
@@ -529,7 +529,7 @@ PROGRAM TEST47
   !                 and Lee Walton, Guide to the SLATEC Common Mathema-
   !                 tical Library, April 10, 1990.
   !***
-  ! **Routines called:**  CDQCK, I1MACH, XERMAX, XSETF, XSETUN
+  ! **Routines called:**  CDQCK, I1MACH, XERMAX, XSETF
 
   !* REVISION HISTORY  (YYMMDD)
   !   920801  DATE WRITTEN
@@ -542,12 +542,11 @@ PROGRAM TEST47
   !     Read KPRINT parameter
   !
   CALL GET_ARGUMENT(kprint)
-  CALL XERMAX(1000)
-  CALL XSETUN(lun)
+  max_xer = 1000
   IF( kprint<=1 ) THEN
-    CALL XSETF(0)
+    control_xer = 0
   ELSE
-    CALL XSETF(1)
+    control_xer = 1
   END IF
   !
   !     Test complex SDRIVE

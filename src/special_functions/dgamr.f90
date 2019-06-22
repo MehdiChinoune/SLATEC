@@ -28,25 +28,25 @@ REAL(DP) FUNCTION DGAMR(X)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900727  Added EXTERNAL statement.  (WRB)
-  USE service, ONLY : XGETF, XSETF, XERCLR
+  USE service, ONLY : control_xer, num_xer
   INTEGER :: irold
   REAL(DP) :: X, alngx, sgngx
   !* FIRST EXECUTABLE STATEMENT  DGAMR
   DGAMR = 0._DP
   IF( X<=0._DP .AND. AINT(X)==X ) RETURN
   !
-  CALL XGETF(irold)
-  CALL XSETF(1)
+  irold = control_xer
+  control_xer = 1
   IF( ABS(X)>10._DP ) THEN
     !
     CALL DLGAMS(X,alngx,sgngx)
-    CALL XERCLR
-    CALL XSETF(irold)
+    num_xer = 0
+    control_xer = irold
     DGAMR = sgngx*EXP(-alngx)
     RETURN
   END IF
   DGAMR = 1._DP/GAMMA(X)
-  CALL XERCLR
-  CALL XSETF(irold)
+  num_xer = 0
+  control_xer = irold
   RETURN
 END FUNCTION DGAMR

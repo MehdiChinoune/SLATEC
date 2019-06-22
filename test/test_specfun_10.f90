@@ -31,10 +31,10 @@ CONTAINS
     !   901019  Revisions to prologue.  (DWL and WRB)
     !   901106  Changed all specific intrinsics to generic.  (WRB)
     !   910104  Changed to print variable number of decimals. (DWL and JMS)
-    USE slatec, ONLY : XCON, XERCLR, XLEGF, XNRMP, XSET, XSETF, I1MACH, NUMXER
+    USE slatec, ONLY : XCON, num_xer, XLEGF, XNRMP, XSET, control_xer, I1MACH
     INTEGER :: i, ic1(10), ic2(10), id, ierr, ierror, ip(10), ipn(10), &
       iq(10), ir(10), irad, isig, isum, ix11, ix12, ix13, ix21, ix22, ix23
-    INTEGER :: mu, mu1, mu2, n, nbits, ndec, nerr, nradpl, nu1, nudiff
+    INTEGER :: mu, mu1, mu2, n, nbits, ndec, nradpl, nu1, nudiff
     CHARACTER(34) :: fmt, fmtf, fmti
     INTEGER :: Lun, Kprint, Ipass
     REAL(SP) :: p(10), q(10), r(10), c1(10), c2(10), pn(10)
@@ -304,29 +304,29 @@ CONTAINS
     ! IERROR should equal the error number as returned by the error
     ! handling package XERROR (which includes XSETF, XERCLR, and NUMXER).
     !
-    600  CALL XSETF(-1)
-    IF( Kprint<=2 ) CALL XSETF(0)
+    600  control_xer = -1
+    IF( Kprint<=2 ) control_xer = 0
     IF( Kprint>2 ) WRITE (Lun,99016)
     99016 FORMAT (/' TEST 5, TEST OF ERROR HANDLING. 3 ERROR MESSAGES',&
       ' SHOULD BE PRINTED.')
     nudiff = 0
     mu2 = mu1
     id = 5
-    CALL XERCLR
+    num_xer = 0
     CALL XLEGF(dnu1,nudiff,mu1,mu2,theta,id,p,ip,ierror)
-    n = NUMXER(nerr)
+    n = num_xer
     IF( n==ierror ) THEN
       mu2 = mu1 + 5
       nudiff = 5
-      CALL XERCLR
+      num_xer = 0
       CALL XLEGF(dnu1,nudiff,mu1,mu2,theta,1,p,ip,ierror)
-      n = NUMXER(nerr)
+      n = num_xer
       IF( n==ierror ) THEN
         nudiff = 0
         theta = 2._SP
-        CALL XERCLR
+        num_xer = 0
         CALL XLEGF(dnu1,nudiff,mu1,mu2,theta,1,p,ip,ierror)
-        n = NUMXER(nerr)
+        n = num_xer
         IF( n==ierror ) THEN
           IF( Kprint>=2 ) WRITE (Lun,99017)
           99017 FORMAT (' ***** TEST 5 (SINGLE PRECISION) PASSED *****')
@@ -546,7 +546,7 @@ END MODULE TEST11_MOD
 !** TEST11
 PROGRAM TEST11
   USE TEST11_MOD, ONLY : FCNQX1
-  USE slatec, ONLY : I1MACH, XSETF, XSETUN, XERMAX
+  USE slatec, ONLY : I1MACH, control_xer, max_xer
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !> Driver for testing SLATEC subprograms
@@ -588,7 +588,7 @@ PROGRAM TEST11
   !                 Tokihiko, Walton, Lee, Guidelines to the SLATEC Common
   !                 Mathematical Library, March 21, 1989.
   !***
-  ! **Routines called:**  FCNQX1, I1MACH, XERMAX, XSETF, XSETUN
+  ! **Routines called:**  FCNQX1, I1MACH, XERMAX, XSETF
 
   !* REVISION HISTORY  (YYMMDD)
   !   901204  DATE WRITTEN
@@ -601,12 +601,11 @@ PROGRAM TEST11
   !     Read KPRINT parameter
   !
   CALL GET_ARGUMENT(kprint)
-  CALL XERMAX(1000)
-  CALL XSETUN(lun)
+  max_xer = 1000
   IF( kprint<=1 ) THEN
-    CALL XSETF(0)
+    control_xer = 0
   ELSE
-    CALL XSETF(1)
+    control_xer = 1
   END IF
   !
   !     Test XLEGF and XNRMP

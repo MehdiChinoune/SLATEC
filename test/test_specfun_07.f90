@@ -263,7 +263,7 @@ END MODULE TEST08_MOD
 !** TEST08
 PROGRAM TEST08
   USE TEST08_MOD, ONLY : DQCKIN, DQCPSI
-  USE slatec, ONLY : I1MACH, XSETF, XSETUN, XERMAX
+  USE slatec, ONLY : I1MACH, control_xer, max_xer
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !> Driver for testing SLATEC subprograms
@@ -305,7 +305,7 @@ PROGRAM TEST08
   !                 and Lee Walton, Guide to the SLATEC Common Mathema-
   !                 tical Library, April 10, 1990.
   !***
-  ! **Routines called:**  DQCKIN, DQCPSI, I1MACH, XERMAX, XSETF, XSETUN
+  ! **Routines called:**  DQCKIN, DQCPSI, I1MACH, XERMAX, XSETF
 
   !* REVISION HISTORY  (YYMMDD)
   !   890618  DATE WRITTEN
@@ -321,12 +321,11 @@ PROGRAM TEST08
   !     Read KPRINT parameter
   !
   CALL GET_ARGUMENT(kprint)
-  CALL XERMAX(1000)
-  CALL XSETUN(lun)
+  max_xer = 1000
   IF( kprint<=1 ) THEN
-    CALL XSETF(0)
+    control_xer = 0
   ELSE
-    CALL XSETF(1)
+    control_xer = 1
   END IF
   !
   !     Test double precision special function routines

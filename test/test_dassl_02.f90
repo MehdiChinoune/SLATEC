@@ -390,7 +390,7 @@ END MODULE TEST49_MOD
 !** TEST49
 PROGRAM TEST49
   USE TEST49_MOD, ONLY : DDASQC
-  USE slatec, ONLY : I1MACH, XSETF, XSETUN, XERMAX
+  USE slatec, ONLY : I1MACH, control_xer, max_xer
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !> Driver for testing SLATEC subprograms
@@ -432,7 +432,7 @@ PROGRAM TEST49
   !                 Tokihiko, Walton, Lee, Guidelines to the SLATEC Common
   !                 Mathematical Library, March 21, 1989.
   !***
-  ! **Routines called:**  DDASQC, I1MACH, XERMAX, XSETF, XSETUN
+  ! **Routines called:**  DDASQC, I1MACH, XERMAX, XSETF
 
   !* REVISION HISTORY  (YYMMDD)
   !   891013  DATE WRITTEN
@@ -448,13 +448,12 @@ PROGRAM TEST49
   !     Read KPRINT parameter
   !
   CALL GET_ARGUMENT(kprint)
-  CALL XSETUN(lun)
   IF( kprint<=1 ) THEN
-    CALL XSETF(0)
+    control_xer = 0
   ELSE
-    CALL XSETF(1)
+    control_xer = 1
   END IF
-  CALL XERMAX(1000)
+  max_xer = 1000
   !
   !     Test DDASSL
   !

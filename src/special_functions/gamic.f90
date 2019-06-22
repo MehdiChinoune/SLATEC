@@ -50,7 +50,7 @@ REAL(SP) FUNCTION GAMIC(A,X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920528  DESCRIPTION and REFERENCES sections revised.  (WRB)
-  USE service, ONLY : XERMSG, XERCLR, R1MACH
+  USE service, ONLY : XERMSG, num_xer, R1MACH
   REAL(SP) :: A, X
   INTEGER :: izero, ma
   REAL(SP) :: aeps, algap1, alngs, alx, e, fm, gstar, h, sga, sgng,  sgngam, sgngs, t
@@ -111,13 +111,13 @@ REAL(SP) FUNCTION GAMIC(A,X)
         !
         sgng = -sgngs*sga*sgngam
         t = t + algap1 - LOG(ABS(A))
-        IF( t<bot ) CALL XERCLR
+        IF( t<bot ) num_xer = 0
         GAMIC = sgng*EXP(t)
         RETURN
       ELSE
         IF( t>(-alneps) ) h = 1._SP - sgngs*EXP(t)
         !
-        IF( ABS(h)<sqeps ) CALL XERCLR
+        IF( ABS(h)<sqeps ) num_xer = 0
         IF( ABS(h)<sqeps )&
           CALL XERMSG('GAMIC','RESULT LT HALF PRECISION',1,1)
       END IF
@@ -132,7 +132,7 @@ REAL(SP) FUNCTION GAMIC(A,X)
   !
   sgng = SIGN(1._SP,h)*sga*sgngam
   t = LOG(ABS(h)) + algap1 - LOG(ABS(A))
-  IF( t<bot ) CALL XERCLR
+  IF( t<bot ) num_xer = 0
   GAMIC = sgng*EXP(t)
   RETURN
 END FUNCTION GAMIC

@@ -61,8 +61,8 @@ MODULE service
   !
   !   where 0 <= X(I) < B for I=1,...,T, 0 < X(1), and
   !   EMIN <= E <= EMAX.
-  REAL(SP), PARAMETER :: R1MACH(5) = [ TINY(1._SP), HUGE(1._SP), SPACING(0.5_SP), &
-    SPACING(1._SP), LOG10( REAL( RADIX(1._SP), SP ) ) ]
+  REAL(SP), PARAMETER :: R1MACH(5) = [ TINY(1._SP), HUGE(1._SP), &
+    EPSILON(1._SP)/RADIX(1._SP), EPSILON(1._SP), LOG10( REAL( RADIX(1._SP), SP ) ) ]
   !   D1MACH( 1) = B**(EMIN-1), the smallest positive magnitude.
   !   D1MACH( 2) = B**EMAX*(1 - B**(-T)), the largest magnitude.
   !   D1MACH( 3) = B**(-T), the smallest relative spacing.
@@ -76,24 +76,16 @@ MODULE service
   !
   !   where 0 <= X(I) < B for I=1,...,T, 0 < X(1), and
   !   EMIN <= E <= EMAX.
-  REAL(DP), PARAMETER :: D1MACH(5) = [ TINY(1._DP), HUGE(1._DP), SPACING(0.5_DP), &
-    SPACING(1._DP), LOG10( REAL( RADIX(1._DP), DP ) ) ]
+  REAL(DP), PARAMETER :: D1MACH(5) = [ TINY(1._DP), HUGE(1._DP), &
+    EPSILON(1._DP)/RADIX(1._DP), EPSILON(1._DP), LOG10( REAL( RADIX(1._DP), DP ) ) ]
+  !
+  INTEGER :: num_xer     = 0  !! The most recent error number
+  INTEGER :: control_xer = 2  !! Error control flag.
+  INTEGER :: unit_xer    = 0  !! Output file to which error messages are to be sent.
+  INTEGER :: max_xer     = 10 !! Maximum number of times any error message is to be printed
 
 CONTAINS
-  include"fdump.f90"
-  include"j4save.f90"
-  include"numxer.f90"
-  include"xerbla.f90"
-  include"xerclr.f90"
-  include"xerdmp.f90"
-  include"xermax.f90"
   include"xermsg.f90"
   include"xerprn.f90"
   include"xersve.f90"
-  include"xgetf.f90"
-  include"xgetua.f90"
-  include"xgetun.f90"
-  include"xsetf.f90"
-  include"xsetua.f90"
-  include"xsetun.f90"
 END MODULE service

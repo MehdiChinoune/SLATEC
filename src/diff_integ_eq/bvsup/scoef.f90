@@ -76,7 +76,7 @@ SUBROUTINE SCOEF(Yh,Yp,Ncomp,Nrowb,Nfc,B,Beta,Coef,Inhomo,Re,Ae,By,&
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
   USE ML, ONLY : eps_com
-  USE service, ONLY : XGETF, XSETF
+  USE service, ONLY : control_xer
   INTEGER :: Iflag, Inhomo, Ncomp, Nfc, Nfcc, Nrowb, Iwork(*)
   REAL(SP) :: Ae, Re
   REAL(SP) :: B(Nrowb,Ncomp), Beta(Nrowb), By(Nfcc,Ncomp), Coef(Nfcc), Cvec(Nrowb), &
@@ -124,13 +124,13 @@ SUBROUTINE SCOEF(Yh,Yp,Ncomp,Nrowb,Nfc,B,Beta,Coef,Inhomo,Re,Ae,By,&
   mlso = 0
   IF( Inhomo==3 ) mlso = 1
   kflag = INT( 0.5_SP*LOG10(eps_com) )
-  CALL XGETF(nf)
-  CALL XSETF(0)
+  nf = control_xer
+  control_xer = 0
   DO
     CALL SUDS(By,Coef,Cvec,Nfcc,Nfcc,Nfcc,kflag,mlso,Work,Iwork)
     IF( kflag/=3 ) THEN
       IF( kflag==4 ) Iflag = 2
-      CALL XSETF(nf)
+      control_xer = nf
       IF( Nfcc==1 ) THEN
         !
         !- *********************************************************************

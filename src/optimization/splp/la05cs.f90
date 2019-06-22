@@ -41,7 +41,7 @@ SUBROUTINE LA05CS(A,Ind,Ia,N,Ip,Iw,W,G,U,Mm)
   !   920410  Corrected second dimension on IW declaration.  (WRB)
   !   920422  Changed upper limit on DO from LAST to LAST-1.  (WRB)
   USE LA05DS, ONLY : lp_com, lcol_com, lenl_com, lenu_com, lrow_com, ncp_com, small_com
-  USE service, ONLY : XERMSG, XSETUN
+  USE service, ONLY : XERMSG
   INTEGER :: Ia, Mm, N
   INTEGER :: Ind(Ia,2), Iw(N,8), Ip(N,2)
   REAL(SP) :: G, U, A(:), W(:)
@@ -50,7 +50,6 @@ SUBROUTINE LA05CS(A,Ind,Ia,N,Ip,Iw,W,G,U,Mm)
   REAL(SP) :: am, au
   CHARACTER(8) :: xern1
   !* FIRST EXECUTABLE STATEMENT  LA05CS
-  CALL XSETUN(lp_com)
   IF( G<0.0E0 ) THEN
     !
     IF( lp_com>0 ) CALL XERMSG('LA05CS',&

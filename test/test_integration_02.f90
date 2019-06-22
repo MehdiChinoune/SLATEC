@@ -24,7 +24,7 @@ CONTAINS
     !   910708  Minor modifications in use of KPRINT.  (WRB)
     !   920210  Code restructured and revised to test error returns for all
     !           values of KPRINT.  (WRB)
-    USE slatec, ONLY : D1MACH, DAVINT, XERCLR, XGETF, XSETF
+    USE slatec, ONLY : D1MACH, DAVINT, num_xer, control_xer
     INTEGER :: kontrl
     INTEGER :: i, ierr, Ipass, Kprint, Lun, n
     REAL(DP) :: a, ans, b, del, rn1, sqb, tol, tol1, x(501), xint, y(501)
@@ -90,14 +90,14 @@ CONTAINS
     !
     !     Test error returns.
     !
-    CALL XGETF(kontrl)
+    kontrl = control_xer
     IF( Kprint<=2 ) THEN
-      CALL XSETF(0)
+      control_xer = 0
     ELSE
-      CALL XSETF(1)
+      control_xer = 1
     END IF
     fatal = .FALSE.
-    CALL XERCLR
+    num_xer = 0
     !
     IF( Kprint>=3 ) THEN
       WRITE (Lun,99004)
@@ -117,7 +117,7 @@ CONTAINS
       fatal = .TRUE.
       IF( Kprint>=3 ) WRITE (Lun,99010) ierr, 1
     END IF
-    CALL XERCLR
+    num_xer = 0
     !
     !     Test IERR = 2 error return.
     !
@@ -132,7 +132,7 @@ CONTAINS
       fatal = .TRUE.
       IF( Kprint>=3 ) WRITE (Lun,99011)
     END IF
-    CALL XERCLR
+    num_xer = 0
     !
     !     Test IERR = 5 error return.
     !
@@ -147,7 +147,7 @@ CONTAINS
       fatal = .TRUE.
       IF( Kprint>=3 ) WRITE (Lun,99011)
     END IF
-    CALL XERCLR
+    num_xer = 0
     !
     !     Test IERR = 4 error return.
     !
@@ -164,7 +164,7 @@ CONTAINS
       fatal = .TRUE.
       IF( Kprint>=3 ) WRITE (Lun,99011)
     END IF
-    CALL XERCLR
+    num_xer = 0
     !
     !     Test IERR = 3 error return.
     !
@@ -181,11 +181,11 @@ CONTAINS
       fatal = .TRUE.
       IF( Kprint>=3 ) WRITE (Lun,99011)
     END IF
-    CALL XERCLR
+    num_xer = 0
     !
     !     Reset XERMSG control variables and write summary.
     !
-    CALL XSETF(kontrl)
+    control_xer = kontrl
     IF( fatal ) THEN
       IF( Kprint>=2 ) THEN
         WRITE (Lun,99005)
@@ -229,7 +229,7 @@ CONTAINS
     !   920213  Code restructured to test DGAUS8 for all values of KPRINT,
     !           second accuracy test added and testing of error returns
     !           revised.  (WRB)
-    USE slatec, ONLY : D1MACH, DGAUS8, XGETF, XSETF
+    USE slatec, ONLY : D1MACH, DGAUS8, control_xer
     !     .. Scalar Arguments ..
     INTEGER :: Ipass, Kprint, Lun
     !     .. Local Scalars ..
@@ -276,11 +276,11 @@ CONTAINS
     !
     !     Test error returns.
     !
-    CALL XGETF(kontrl)
+    kontrl = control_xer
     IF( Kprint<=2 ) THEN
-      CALL XSETF(0)
+      control_xer = 0
     ELSE
-      CALL XSETF(1)
+      control_xer = 1
     END IF
     fatal = .FALSE.
     !
@@ -324,7 +324,7 @@ CONTAINS
       IF( Kprint>=2 ) WRITE (Lun,99007) 'FAILED'
     END IF
     !
-    CALL XSETF(kontrl)
+    control_xer = kontrl
     IF( fatal ) THEN
       IF( Kprint>=2 ) THEN
         WRITE (Lun,99001)
@@ -371,7 +371,7 @@ CONTAINS
     !   920213  Code restructured to test DQNC79 for all values of KPRINT,
     !           second accuracy test added and testing of error returns
     !           revised.  (WRB)
-    USE slatec, ONLY : D1MACH, DQNC79, XGETF, XSETF
+    USE slatec, ONLY : D1MACH, DQNC79, control_xer
     !     .. Scalar Arguments ..
     INTEGER :: Ipass, Kprint, Lun
     !     .. Local Scalars ..
@@ -418,11 +418,11 @@ CONTAINS
     !
     !     Test error returns.
     !
-    CALL XGETF(kontrl)
+    kontrl = control_xer
     IF( Kprint<=2 ) THEN
-      CALL XSETF(0)
+      control_xer = 0
     ELSE
-      CALL XSETF(1)
+      control_xer = 1
     END IF
     fatal = .FALSE.
     !
@@ -466,7 +466,7 @@ CONTAINS
       IF( Kprint>=2 ) WRITE (Lun,99007) 'FAILED'
     END IF
     !
-    CALL XSETF(kontrl)
+    control_xer = kontrl
     IF( fatal ) THEN
       IF( Kprint>=2 ) THEN
         WRITE (Lun,99001)
@@ -546,7 +546,7 @@ END MODULE TEST42_MOD
 !** TEST42
 PROGRAM TEST42
   USE TEST42_MOD, ONLY : DAVNTS, DQG8TS, DQN79Q
-  USE slatec, ONLY : I1MACH, XSETF, XSETUN, XERMAX
+  USE slatec, ONLY : I1MACH, control_xer, max_xer
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !> Driver for testing SLATEC subprograms
@@ -605,12 +605,11 @@ PROGRAM TEST42
   !     Read KPRINT parameter
   !
   CALL GET_ARGUMENT(kprint)
-  CALL XERMAX(1000)
-  CALL XSETUN(lun)
+  max_xer = 1000
   IF( kprint<=1 ) THEN
-    CALL XSETF(0)
+    control_xer = 0
   ELSE
-    CALL XSETF(1)
+    control_xer = 1
   END IF
   !
   !     Test DAVINT

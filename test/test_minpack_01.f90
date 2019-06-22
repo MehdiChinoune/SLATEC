@@ -308,7 +308,7 @@ END MODULE TEST35_MOD
 !** TEST35
 PROGRAM TEST35
   USE TEST35_MOD, ONLY : SNSQQK, SOSNQX
-  USE slatec, ONLY : I1MACH, XSETF, XSETUN, XERMAX
+  USE slatec, ONLY : I1MACH, control_xer, max_xer
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !> Driver for testing SLATEC subprograms
@@ -350,7 +350,7 @@ PROGRAM TEST35
   !                 and Lee Walton, Guide to the SLATEC Common Mathema-
   !                 tical Library, April 10, 1990.
   !***
-  ! **Routines called:**  I1MACH, SNSQQK, SOSNQX, XERMAX, XSETF, XSETUN
+  ! **Routines called:**  I1MACH, SNSQQK, SOSNQX, XERMAX, XSETF
 
   !* REVISION HISTORY  (YYMMDD)
   !   890618  DATE WRITTEN
@@ -366,12 +366,11 @@ PROGRAM TEST35
   !     Read KPRINT parameter
   !
   CALL GET_ARGUMENT(kprint)
-  CALL XERMAX(1000)
-  CALL XSETUN(lun)
+  max_xer = 1000
   IF( kprint<=1 ) THEN
-    CALL XSETF(0)
+    control_xer = 0
   ELSE
-    CALL XSETF(1)
+    control_xer = 1
   END IF
   !
   !     Test SNSQE and SNSQ

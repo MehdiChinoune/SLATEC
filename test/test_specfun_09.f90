@@ -2488,7 +2488,7 @@ END MODULE TEST10_MOD
 !** TEST10
 PROGRAM TEST10
   USE TEST10_MOD, ONLY : ZQCAI, ZQCBH, ZQCBI, ZQCBJ, ZQCBK, ZQCBY
-  USE slatec, ONLY : I1MACH, XSETF, XSETUN, XERMAX
+  USE slatec, ONLY : I1MACH, control_xer, max_xer
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !> Driver for testing SLATEC subprograms.
@@ -2531,7 +2531,7 @@ PROGRAM TEST10
   !                 Tokihiko, Walton, Lee, Guidelines to the SLATEC Common
   !                 Mathematical Library, March 21, 1989.
   !***
-  ! **Routines called:**  I1MACH, XERMAX, XSETF, XSETUN, ZQCAI, ZQCBH, ZQCBI,
+  ! **Routines called:**  I1MACH, XERMAX, XSETF, ZQCAI, ZQCBH, ZQCBI,
   !                    ZQCBJ, ZQCBK, ZQCBY
 
   !* REVISION HISTORY  (YYMMDD)
@@ -2547,12 +2547,11 @@ PROGRAM TEST10
   !     Read KPRINT parameter
   !
   CALL GET_ARGUMENT(kprint)
-  CALL XERMAX(1000)
-  CALL XSETUN(lun)
+  max_xer = 1000
   IF( kprint<=1 ) THEN
-    CALL XSETF(0)
+    control_xer = 0
   ELSE
-    CALL XSETF(1)
+    control_xer = 1
   END IF
   !
   !     Test Double Precision Complex Bessel Functions.

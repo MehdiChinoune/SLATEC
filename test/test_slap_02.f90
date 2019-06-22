@@ -65,7 +65,7 @@ CONTAINS
     ! **Routines called:**  D1MACH, DCPPLT, DFILL, DRMGEN, DS2Y, DSDBCG, DSDCG,
     !                    DSDCGN, DSDCGS, DSDGMR, DSDOMN, DSGS, DSICCG,
     !                    DSILUR, DSJAC, DSLUBC, DSLUCN, DSLUCS, DSLUGM,
-    !                    DSLUOM, DUTERR, XERMAX, XSETF, XSETUN
+    !                    DSLUOM, DUTERR, XERMAX, XSETF
     !***
     ! COMMON BLOCKS    DSLBLK
 
@@ -86,8 +86,7 @@ CONTAINS
     !   921021  Changed E's to 1P,D's in output formats.  (FNF)
     USE DSLBLK, ONLY : soln_com
     USE slatec, ONLY : D1MACH, DCPPLT, DS2Y, DSDBCG, DSDCG, DSDCGN, DSDCGS, DSDGMR, &
-      DSDOMN, DSGS, DSICCG, DSILUR, DSJAC, DSLUBC, DSLUCN, DSLUCS, DSLUGM, DSLUOM, &
-      XERMAX, XSETF, XSETUN
+      DSDOMN, DSGS, DSICCG, DSILUR, DSJAC, DSLUBC, DSLUCN, DSLUCS, DSLUGM, DSLUOM
     !
     !     The problem size, MAXN, should be large enough that the
     !     iterative methods do 10-15 iterations, just to be sure that
@@ -467,7 +466,7 @@ CONTAINS
     REAL(DP) :: Factor
     INTEGER :: Ierr, Isym, N, Nelt, Neltmx
     !     .. Array Arguments ..
-    REAL(DP) :: A(Neltmx), Dsum(N), F(N), SOLn(N)
+    REAL(DP) :: A(Neltmx), Dsum(N), F(N), Soln(N)
     INTEGER :: Ia(Neltmx), Idiag(N), Itmp(N), Ja(Neltmx)
     !     .. Local Scalars ..
     REAL(SP) :: dummy
@@ -712,7 +711,7 @@ END MODULE TEST26_MOD
 !** TEST26
 PROGRAM TEST26
   USE TEST26_MOD, ONLY : DLAPQC
-  USE slatec, ONLY : I1MACH, XSETF, XSETUN, XERMAX
+  USE slatec, ONLY : I1MACH, control_xer, max_xer
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !> Driver for testing SLATEC subprograms.
@@ -754,7 +753,7 @@ PROGRAM TEST26
   !                 Tokihiko, Walton, Lee, Guidelines to the SLATEC Common
   !                 Mathematical Library, March 21, 1989.
   !***
-  ! **Routines called:**  DLAPQC, I1MACH, XERMAX, XSETF, XSETUN
+  ! **Routines called:**  DLAPQC, I1MACH, XERMAX, XSETF
 
   !* REVISION HISTORY  (YYMMDD)
   !   920401  DATE WRITTEN
@@ -770,13 +769,12 @@ PROGRAM TEST26
   !     Read KPRINT parameter
   !
   CALL GET_ARGUMENT(kprint)
-  CALL XSETUN(lun)
   IF( kprint<=1 ) THEN
-    CALL XSETF(0)
+    control_xer = 0
   ELSE
-    CALL XSETF(1)
+    control_xer = 1
   END IF
-  CALL XERMAX(1000)
+  max_xer = 1000
   !
   !     Test SLAP (double precision)
   !

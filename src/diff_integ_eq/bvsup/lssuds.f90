@@ -117,7 +117,7 @@ SUBROUTINE LSSUDS(A,X,B,N,M,Nrda,U,Nrdu,Iflag,Mlso,Irank,Iscale,Q,Diag,&
   !   900510  Fixed an error message.  (RWC)
   !   910408  Updated the AUTHOR and REFERENCES sections.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  USE service, ONLY : XERMSG, XGETF, XSETF, XERMAX, J4SAVE, R1MACH
+  USE service, ONLY : XERMSG, control_xer, max_xer, R1MACH
   INTEGER :: Iflag, Irank, Iscale, Isflg, M, Mlso, N, Nrda, Nrdu, Kpivot(N)
   REAL(SP) :: A(Nrda,M), B(N), Diag(N), Div(N), Q(Nrda,M), S(N), Scales(M), Td(N), &
     U(Nrdu,M), X(M)
@@ -138,15 +138,15 @@ SUBROUTINE LSSUDS(A,X,B,N,M,Nrda,U,Nrdu,Iflag,Mlso,Irank,Iscale,Q,Diag,&
     IF( Nrdu==0 .OR. Nrdu>=M ) THEN
       IF( Iflag<=0 ) THEN
         !
-        CALL XGETF(nfatal)
-        maxmes = J4SAVE(4,0,.FALSE.)
+        nfatal = control_xer
+        maxmes = max_xer
         Isflg = -15
         IF( Iflag/=0 ) THEN
           Isflg = Iflag
           nfat = -1
           IF( nfatal==0 ) nfat = 0
-          CALL XSETF(nfat)
-          CALL XERMAX(1)
+          control_xer = nfat
+          max_xer = 1
         END IF
         !
         !     COPY MATRIX A INTO MATRIX Q
@@ -162,8 +162,8 @@ SUBROUTINE LSSUDS(A,X,B,N,M,Nrda,U,Nrdu,Iflag,Mlso,Irank,Iscale,Q,Diag,&
         !
         CALL ORTHOR(Q,N,M,Nrda,Iflag,Irank,Iscale,Diag,Kpivot,Scales,Div,Td)
         !
-        CALL XSETF(nfatal)
-        CALL XERMAX(maxmes)
+        control_xer = nfatal
+        max_xer = maxmes
         IF( Irank==N ) THEN
           !
           !     STORE DIVISORS FOR THE TRIANGULAR SOLUTION

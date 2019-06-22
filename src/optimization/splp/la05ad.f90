@@ -57,7 +57,7 @@ SUBROUTINE LA05AD(A,Ind,Nz,Ia,N,Ip,Iw,W,G,U)
   !   900402  Added TYPE section.  (WRB)
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
   USE LA05DD, ONLY : lp_com, lcol_com, lenl_com, lenu_com, lrow_com, ncp_com, small_com
-  USE service, ONLY : XERMSG, XSETUN, D1MACH
+  USE service, ONLY : XERMSG, D1MACH
   INTEGER :: Ia, N, Nz
   INTEGER :: Ip(N,2), Ind(Ia,2), Iw(N,8)
   REAL(DP) :: G, U, W(:), A(:)
@@ -72,7 +72,6 @@ SUBROUTINE LA05AD(A,Ind,Nz,Ia,N,Ip,Iw,W,G,U)
   !     SET THE OUTPUT UNIT NUMBER FOR THE ERROR PROCESSOR.
   !     THE USAGE OF THIS ERROR PROCESSOR IS DOCUMENTED IN THE
   !     SANDIA LABS. TECH. REPT. SAND78-1189, BY R E JONES.
-  CALL XSETUN(lp_com)
   IF( U>1._DP ) U = 1._DP
   IF( U<eps ) U = eps
   IF( N<1 ) THEN

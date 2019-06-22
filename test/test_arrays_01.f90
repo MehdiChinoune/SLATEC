@@ -25,13 +25,13 @@ CONTAINS
     !   890620  DATE WRITTEN
     !   901005  Included test of IPPERM.  (MAM)
     !   920511  Added error message tests.  (MAM)
-    USE slatec, ONLY : IPPERM, IPSORT, ISORT, NUMXER, XSETF, XERCLR
+    USE slatec, ONLY : IPPERM, IPSORT, ISORT, control_xer, num_xer
     !
     INTEGER, PARAMETER :: N = 9, NTEST = 4
     !
     LOGICAL :: fail
     INTEGER :: y(N), yc(N), iy(N)
-    INTEGER :: Kprint, Lun, Ipass, j, i, kabs, ier, nerr, nn, kkflag
+    INTEGER :: Kprint, Lun, Ipass, j, i, kabs, ier, nn, kkflag
     !
     !     ---------
     !     TEST DATA
@@ -178,24 +178,24 @@ CONTAINS
     !     ... TEST ERROR MESSAGES
     !
     IF( Kprint<=2 ) THEN
-      CALL XSETF(0)
+      control_xer = 0
     ELSE
-      CALL XSETF(-1)
+      control_xer = -1
     END IF
     !
     nn = -1
     kkflag = 1
     IF( Kprint>=3 ) WRITE (Lun,*)
-    CALL XERCLR
+    num_xer = 0
     CALL IPSORT(y,nn,iy,kkflag,ier)
-    IF( NUMXER(nerr)/=ier ) Ipass = 0
+    IF( num_xer/=ier ) Ipass = 0
     !
     nn = 1
     kkflag = 0
     IF( Kprint>=3 ) WRITE (Lun,*)
-    CALL XERCLR
+    num_xer = 0
     CALL IPSORT(y,nn,iy,kkflag,ier)
-    IF( NUMXER(nerr)/=ier ) Ipass = 0
+    IF( num_xer/=ier ) Ipass = 0
     !
     IF( (Kprint>=2) .AND. (Ipass==1) ) THEN
       WRITE (Lun,*)
@@ -270,23 +270,23 @@ CONTAINS
     !     ... TEST ERROR MESSAGES
     !
     IF( Kprint<=2 ) THEN
-      CALL XSETF(0)
+      control_xer = 0
     ELSE
-      CALL XSETF(-1)
+      control_xer = -1
     END IF
     !
     nn = -1
     IF( Kprint>=3 ) WRITE (Lun,*)
-    CALL XERCLR
+    num_xer = 0
     CALL IPPERM(y,nn,iy,ier)
-    IF( NUMXER(nerr)/=ier ) Ipass = 0
+    IF( num_xer/=ier ) Ipass = 0
     !
     nn = 1
     iy(1) = 5
     IF( Kprint>=3 ) WRITE (Lun,*)
-    CALL XERCLR
+    num_xer = 0
     CALL IPPERM(y,nn,iy,ier)
-    IF( NUMXER(nerr)/=ier ) Ipass = 0
+    IF( num_xer/=ier ) Ipass = 0
     !
     IF( (Kprint>=2) .AND. (Ipass==1) ) THEN
       WRITE (Lun,*)
@@ -325,14 +325,14 @@ CONTAINS
     !   890620  DATE WRITTEN
     !   901005  Included test of HPPERM.  (MAM)
     !   920511  Added error message tests.  (MAM)
-    USE slatec, ONLY : HPPERM, HPSORT, NUMXER, XSETF, XERCLR
+    USE slatec, ONLY : HPPERM, HPSORT, control_xer, num_xer
     !
     INTEGER, PARAMETER :: N = 9, NTEST = 4
     !
     LOGICAL :: fail
     CHARACTER :: short
     CHARACTER(2) :: y(N), work
-    INTEGER :: iy(N), Kprint, Lun, Ipass, j, i, kabs, ier, nerr, nn, &
+    INTEGER :: iy(N), Kprint, Lun, Ipass, j, i, kabs, ier, nn, &
       kkflag, strbeg, strend
     !
     !     ---------
@@ -426,9 +426,9 @@ CONTAINS
     !     ... TEST ERROR MESSAGES
     !
     IF( Kprint<=2 ) THEN
-      CALL XSETF(0)
+      control_xer = 0
     ELSE
-      CALL XSETF(-1)
+      control_xer = -1
     END IF
     !
     nn = -1
@@ -436,54 +436,54 @@ CONTAINS
     strend = 2
     kkflag = 1
     IF( Kprint>=3 ) WRITE (Lun,*)
-    CALL XERCLR
+    num_xer = 0
     CALL HPSORT(y,nn,strbeg,strend,iy,kkflag,work,ier)
-    IF( NUMXER(nerr)/=ier ) Ipass = 0
+    IF( num_xer/=ier ) Ipass = 0
     !
     nn = 1
     strbeg = 1
     strend = 2
     kkflag = 0
     IF( Kprint>=3 ) WRITE (Lun,*)
-    CALL XERCLR
+    num_xer = 0
     CALL HPSORT(y,nn,strbeg,strend,iy,kkflag,work,ier)
-    IF( NUMXER(nerr)/=ier ) Ipass = 0
+    IF( num_xer/=ier ) Ipass = 0
     !
     nn = 1
     strbeg = 1
     strend = 2
     kkflag = 1
     IF( Kprint>=3 ) WRITE (Lun,*)
-    CALL XERCLR
+    num_xer = 0
     CALL HPSORT(y,nn,strbeg,strend,iy,kkflag,short,ier)
-    IF( NUMXER(nerr)/=ier ) Ipass = 0
+    IF( num_xer/=ier ) Ipass = 0
     !
     nn = 1
     strbeg = 2
     strend = 1
     kkflag = 1
     IF( Kprint>=3 ) WRITE (Lun,*)
-    CALL XERCLR
+    num_xer = 0
     CALL HPSORT(y,nn,strbeg,strend,iy,kkflag,work,ier)
-    IF( NUMXER(nerr)/=ier ) Ipass = 0
+    IF( num_xer/=ier ) Ipass = 0
     !
     nn = 1
     strbeg = -1
     strend = 2
     kkflag = 1
     IF( Kprint>=3 ) WRITE (Lun,*)
-    CALL XERCLR
+    num_xer = 0
     CALL HPSORT(y,nn,strbeg,strend,iy,kkflag,work,ier)
-    IF( NUMXER(nerr)/=ier ) Ipass = 0
+    IF( num_xer/=ier ) Ipass = 0
     !
     nn = 1
     strbeg = 1
     strend = 3
     kkflag = 1
     IF( Kprint>=3 ) WRITE (Lun,*)
-    CALL XERCLR
+    num_xer = 0
     CALL HPSORT(y,nn,strbeg,strend,iy,kkflag,work,ier)
-    IF( NUMXER(nerr)/=ier ) Ipass = 0
+    IF( num_xer/=ier ) Ipass = 0
     !
     IF( (Kprint>=2) .AND. (Ipass==1) ) THEN
       WRITE (Lun,*)
@@ -558,23 +558,23 @@ CONTAINS
     !     ... TEST ERROR MESSAGES
     !
     IF( Kprint<=2 ) THEN
-      CALL XSETF(0)
+      control_xer = 0
     ELSE
-      CALL XSETF(-1)
+      control_xer = -1
     END IF
     !
     nn = -1
     IF( Kprint>=3 ) WRITE (Lun,*)
-    CALL XERCLR
+    num_xer = 0
     CALL HPPERM(y,nn,iy,work,ier)
-    IF( NUMXER(nerr)/=ier ) Ipass = 0
+    IF( num_xer/=ier ) Ipass = 0
     !
     nn = 1
     iy(1) = 5
     IF( Kprint>=3 ) WRITE (Lun,*)
-    CALL XERCLR
+    num_xer = 0
     CALL HPPERM(y,nn,iy,work,ier)
-    IF( NUMXER(nerr)/=ier ) Ipass = 0
+    IF( num_xer/=ier ) Ipass = 0
     !
     IF( (Kprint>=2) .AND. (Ipass==1) ) THEN
       WRITE (Lun,*)
@@ -613,13 +613,13 @@ CONTAINS
     !   890620  DATE WRITTEN
     !   901005  Included test of SPPERM.  (MAM)
     !   920511  Added error message tests.  (MAM)
-    USE slatec, ONLY : SPPERM, SPSORT, SSORT, NUMXER, XSETF, XERCLR
+    USE slatec, ONLY : SPPERM, SPSORT, SSORT, control_xer, num_xer
     !
     INTEGER, PARAMETER :: N = 9, NTEST = 4
     !
     LOGICAL :: fail
     REAL(SP) :: y(N), yc(N)
-    INTEGER :: iy(N), Kprint, Lun, Ipass, j, i, kabs, ier, nerr, nn, kkflag
+    INTEGER :: iy(N), Kprint, Lun, Ipass, j, i, kabs, ier, nn, kkflag
     !
     !     ---------
     !     TEST DATA
@@ -769,24 +769,24 @@ CONTAINS
     !     ... TEST ERROR MESSAGES
     !
     IF( Kprint<=2 ) THEN
-      CALL XSETF(0)
+      control_xer = 0
     ELSE
-      CALL XSETF(-1)
+      control_xer = -1
     END IF
     !
     nn = -1
     kkflag = 1
     IF( Kprint>=3 ) WRITE (Lun,*)
-    CALL XERCLR
+    num_xer = 0
     CALL SPSORT(y,nn,iy,kkflag,ier)
-    IF( NUMXER(nerr)/=ier ) Ipass = 0
+    IF( num_xer/=ier ) Ipass = 0
     !
     nn = 1
     kkflag = 0
     IF( Kprint>=3 ) WRITE (Lun,*)
-    CALL XERCLR
+    num_xer = 0
     CALL SPSORT(y,nn,iy,kkflag,ier)
-    IF( NUMXER(nerr)/=ier ) Ipass = 0
+    IF( num_xer/=ier ) Ipass = 0
     !
     IF( (Kprint>=2) .AND. (Ipass==1) ) THEN
       WRITE (Lun,*)
@@ -861,23 +861,23 @@ CONTAINS
     !     ... TEST ERROR MESSAGES
     !
     IF( Kprint<=2 ) THEN
-      CALL XSETF(0)
+      control_xer = 0
     ELSE
-      CALL XSETF(-1)
+      control_xer = -1
     END IF
     !
     nn = -1
     IF( Kprint>=3 ) WRITE (Lun,*)
-    CALL XERCLR
+    num_xer = 0
     CALL SPPERM(y,nn,iy,ier)
-    IF( NUMXER(nerr)/=ier ) Ipass = 0
+    IF( num_xer/=ier ) Ipass = 0
     !
     nn = 1
     iy(1) = 5
     IF( Kprint>=3 ) WRITE (Lun,*)
-    CALL XERCLR
+    num_xer = 0
     CALL SPPERM(y,nn,iy,ier)
-    IF( NUMXER(nerr)/=ier ) Ipass = 0
+    IF( num_xer/=ier ) Ipass = 0
     !
     IF( (Kprint>=2) .AND. (Ipass==1) ) THEN
       WRITE (Lun,*)
@@ -916,13 +916,13 @@ CONTAINS
     !   890620  DATE WRITTEN
     !   901005  Included test of DPPERM.  (MAM)
     !   920511  Added error message tests.  (MAM)
-    USE slatec, ONLY : DPPERM, DPSORT, DSORT, NUMXER, XSETF, XERCLR
+    USE slatec, ONLY : DPPERM, DPSORT, DSORT, control_xer, num_xer
     !
     INTEGER, PARAMETER :: N = 9, NTEST = 4
     !
     LOGICAL :: fail
     REAL(DP) :: y(N), yc(N)
-    INTEGER :: iy(N), Kprint, Lun, Ipass, j, i, kabs, ier, nerr, nn, kkflag
+    INTEGER :: iy(N), Kprint, Lun, Ipass, j, i, kabs, ier, nn, kkflag
     !
     !     ---------
     !     TEST DATA
@@ -1072,24 +1072,24 @@ CONTAINS
     !     ... TEST ERROR MESSAGES
     !
     IF( Kprint<=2 ) THEN
-      CALL XSETF(0)
+      control_xer = 0
     ELSE
-      CALL XSETF(-1)
+      control_xer = -1
     END IF
     !
     nn = -1
     kkflag = 1
     IF( Kprint>=3 ) WRITE (Lun,*)
-    CALL XERCLR
+    num_xer = 0
     CALL DPSORT(y,nn,iy,kkflag,ier)
-    IF( NUMXER(nerr)/=ier ) Ipass = 0
+    IF( num_xer/=ier ) Ipass = 0
     !
     nn = 1
     kkflag = 0
     IF( Kprint>=3 ) WRITE (Lun,*)
-    CALL XERCLR
+    num_xer = 0
     CALL DPSORT(y,nn,iy,kkflag,ier)
-    IF( NUMXER(nerr)/=ier ) Ipass = 0
+    IF( num_xer/=ier ) Ipass = 0
     !
     IF( (Kprint>=2) .AND. (Ipass==1) ) THEN
       WRITE (Lun,*)
@@ -1164,23 +1164,23 @@ CONTAINS
     !     ... TEST ERROR MESSAGES
     !
     IF( Kprint<=2 ) THEN
-      CALL XSETF(0)
+      control_xer = 0
     ELSE
-      CALL XSETF(-1)
+      control_xer = -1
     END IF
     !
     nn = -1
     IF( Kprint>=3 ) WRITE (Lun,*)
-    CALL XERCLR
+    num_xer = 0
     CALL DPPERM(y,nn,iy,ier)
-    IF( NUMXER(nerr)/=ier ) Ipass = 0
+    IF( num_xer/=ier ) Ipass = 0
     !
     nn = 1
     iy(1) = 5
     IF( Kprint>=3 ) WRITE (Lun,*)
-    CALL XERCLR
+    num_xer = 0
     CALL DPPERM(y,nn,iy,ier)
-    IF( NUMXER(nerr)/=ier ) Ipass = 0
+    IF( num_xer/=ier ) Ipass = 0
     !
     IF( (Kprint>=2) .AND. (Ipass==1) ) THEN
       WRITE (Lun,*)
@@ -1201,7 +1201,7 @@ END MODULE TEST54_MOD
 !** TEST54
 PROGRAM TEST54
   USE TEST54_MOD, ONLY : DSRTQC, HSRTQC, ISRTQC, SSRTQC
-  USE slatec, ONLY : I1MACH, XSETF, XSETUN, XERMAX
+  USE slatec, ONLY : I1MACH, control_xer, max_xer
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !> Driver for testing SLATEC subprograms
@@ -1246,7 +1246,7 @@ PROGRAM TEST54
   !                 tical Library, April 10, 1990.
   !***
   ! **Routines called:**  DSRTQC, HSRTQC, I1MACH, ISRTQC, SSRTQC, XERMAX,
-  !                    XSETF, XSETUN
+  !                    XSETF
 
   !* REVISION HISTORY  (YYMMDD)
   !   890620  DATE WRITTEN
@@ -1260,12 +1260,11 @@ PROGRAM TEST54
   !     Read KPRINT parameter
   !
   CALL GET_ARGUMENT(kprint)
-  CALL XERMAX(1000)
-  CALL XSETUN(lun)
+  max_xer = 1000
   IF( kprint<=1 ) THEN
-    CALL XSETF(0)
+    control_xer = 0
   ELSE
-    CALL XSETF(1)
+    control_xer = 1
   END IF
   !
   !     Test ISORT, IPSORT and IPPERM

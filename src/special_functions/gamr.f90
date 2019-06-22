@@ -27,25 +27,25 @@ REAL(SP) FUNCTION GAMR(X)
   !   861211  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900727  Added EXTERNAL statement.  (WRB)
-  USE service, ONLY : XGETF, XSETF, XERCLR
+  USE service, ONLY : control_xer, num_xer
   REAL(SP) :: alngx, sgngx, X
   INTEGER :: irold
   !* FIRST EXECUTABLE STATEMENT  GAMR
   GAMR = 0._SP
   IF( X<=0._SP .AND. AINT(X)==X ) RETURN
   !
-  CALL XGETF(irold)
-  CALL XSETF(1)
+  irold = control_xer
+  control_xer = 1
   IF( ABS(X)>10._SP ) THEN
     !
     CALL ALGAMS(X,alngx,sgngx)
-    CALL XERCLR
-    CALL XSETF(irold)
+    num_xer = 0
+    control_xer = irold
     GAMR = sgngx*EXP(-alngx)
     RETURN
   END IF
   GAMR = 1._SP/GAMMA(X)
-  CALL XERCLR
-  CALL XSETF(irold)
+  num_xer = 0
+  control_xer = irold
   RETURN
 END FUNCTION GAMR

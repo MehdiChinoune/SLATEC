@@ -333,7 +333,7 @@ END MODULE TEST23_MOD
 !** TEST23
 PROGRAM TEST23
   USE TEST23_MOD, ONLY : CGBQC, CGECK, CPOQC
-  USE slatec, ONLY : I1MACH, XSETF, XSETUN, XERMAX
+  USE slatec, ONLY : I1MACH, control_xer, max_xer
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !> Driver for testing SLATEC subprograms
@@ -391,7 +391,7 @@ PROGRAM TEST23
   !***
   ! **Routines called:**  CCHQC, CGBQC, CGECK, CGTQC, CHIQC, CHPQC, CPBQC,
   !                    CPOQC, CPPQC, CPTQC, CQRQC, CSIQC, CSPQC, CSVQC,
-  !                    CTRQC, I1MACH, XERMAX, XSETF, XSETUN
+  !                    CTRQC, I1MACH, XERMAX, XSETF
 
   !* REVISION HISTORY  (YYMMDD)
   !   890618  DATE WRITTEN
@@ -407,12 +407,11 @@ PROGRAM TEST23
   !     Read KPRINT parameter
   !
   CALL GET_ARGUMENT(kprint)
-  CALL XERMAX(1000)
-  CALL XSETUN(lun)
+  max_xer = 1000
   IF( kprint<=1 ) THEN
-    CALL XSETF(0)
+    control_xer = 0
   ELSE
-    CALL XSETF(1)
+    control_xer = 1
   END IF
   !
   !     Test LINPACK routines

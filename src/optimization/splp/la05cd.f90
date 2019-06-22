@@ -40,7 +40,7 @@ SUBROUTINE LA05CD(A,Ind,Ia,N,Ip,Iw,W,G,U,Mm)
   !   920410  Corrected second dimension on IW declaration.  (WRB)
   !   920422  Changed upper limit on DO from LAST to LAST-1.  (WRB)
   USE LA05DD, ONLY : lp_com, lcol_com, lenl_com, lenu_com, ncp_com, lrow_com, small_com
-  USE service, ONLY : XERMSG, XSETUN
+  USE service, ONLY : XERMSG
   INTEGER :: Ia, Mm, N
   INTEGER :: Ind(Ia,2), Iw(N,8), Ip(N,2)
   REAL(DP) :: G, U, A(:), W(:)
@@ -49,11 +49,9 @@ SUBROUTINE LA05CD(A,Ind,Ia,N,Ip,Iw,W,G,U,Mm)
   REAL(DP) :: am, au
   CHARACTER(8) :: xern1
   !* FIRST EXECUTABLE STATEMENT  LA05CD
-  CALL XSETUN(lp_com)
   IF( G<0._DP ) THEN
     !
-    IF( lp_com>0 ) CALL XERMSG('LA05CD',&
-      'EARLIER ENTRY GAVE ERROR RETURN.',-8,2)
+    IF( lp_com>0 ) CALL XERMSG('LA05CD','EARLIER ENTRY GAVE ERROR RETURN.',-8,2)
     G = -8._DP
     RETURN
   ELSE

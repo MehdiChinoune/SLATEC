@@ -89,7 +89,7 @@ CONTAINS
     !   900911  Test problem changed and cosmetic changes to code.  (WRB)
     !   920214  Code restructured to test for all values of KPRINT and to
     !           provide more PASS/FAIL information.  (WRB)
-    USE slatec, ONLY : D1MACH, DP1VLU, DPCOEF, DPOLFT, XERCLR, XGETF, XSETF
+    USE slatec, ONLY : D1MACH, DP1VLU, DPCOEF, DPOLFT, num_xer, control_xer
     USE common_mod, ONLY : PASS
     INTEGER :: kontrl
     !     .. Scalar Arguments ..
@@ -244,13 +244,13 @@ CONTAINS
     !
     !     Check for suppression of printing.
     !
-    CALL XGETF(kontrl)
+    kontrl = control_xer
     IF( Kprint<=2 ) THEN
-      CALL XSETF(0)
+      control_xer = 0
     ELSE
-      CALL XSETF(1)
+      control_xer = 1
     END IF
-    CALL XERCLR
+    num_xer = 0
     !
     IF( Kprint>=3 ) WRITE (Lun,99001)
     99001 FORMAT (/' Invalid input')
@@ -277,8 +277,8 @@ CONTAINS
         !
         CALL PASS(Lun,icnt,itest(icnt))
         !
-        CALL XERCLR
-        CALL XSETF(kontrl)
+        num_xer = 0
+        control_xer = kontrl
       END IF
     END IF
     !
@@ -465,14 +465,14 @@ CONTAINS
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   930214  Declarations sections added, code revised to test error
     !           returns for all values of KPRINT and code polished.  (WRB)
-    USE slatec, ONLY : DENORM, DFDJC3, D1MACH, DCOV, DNLS1E, XGETF, XSETF, &
-      XERCLR, NUMXER
+    USE slatec, ONLY : DENORM, DFDJC3, D1MACH, DCOV, DNLS1E, control_xer, &
+      num_xer
     USE common_mod, ONLY : PASS
     !     .. Scalar Arguments ..
     INTEGER :: Ipass, Kprint, Lun
     !     .. Local Scalars ..
     REAL(DP) :: fnorm, fnorms, one, sigma, temp1, temp2, temp3, tol, tol2, zero
-    INTEGER :: i, iflag, info, infos, iopt, kontrl, ldfjac, lwa, m, n, nerr, nprint
+    INTEGER :: i, iflag, info, infos, iopt, kontrl, ldfjac, lwa, m, n, nprint
     LOGICAL :: fatal
     !     .. Local Arrays ..
     REAL(DP) :: fjac(10,2), fjrow(2,1), fjtj(3), fvec(10), wa(40), x(2)
@@ -666,14 +666,14 @@ CONTAINS
     !
     !     Test improper input parameters.
     !
-    CALL XGETF(kontrl)
+    kontrl = control_xer
     IF( Kprint<=2 ) THEN
-      CALL XSETF(0)
+      control_xer = 0
     ELSE
-      CALL XSETF(1)
+      control_xer = 1
     END IF
     fatal = .FALSE.
-    CALL XERCLR
+    num_xer = 0
     !
     IF( Kprint>=3 ) WRITE (Lun,99002)
     99002 FORMAT (/' TRIGGER 2 ERROR MESSAGES',/)
@@ -683,17 +683,17 @@ CONTAINS
     x(1) = 3.0E-1_DP
     x(2) = 4.0E-1_DP
     CALL DNLS1E(DFCN2,iopt,m,n,x,fvec,tol,nprint,info,iw,wa,lwa)
-    IF( info/=0 .OR. NUMXER(nerr)/=2 ) fatal = .TRUE.
+    IF( info/=0 .OR. num_xer/=2 ) fatal = .TRUE.
     !
     m = 0
     CALL DCOV(DFCN2,iopt,m,n,x,fvec,fjac,ldfjac,info,wa(1),wa(n+1),wa(2*n+1),&
       wa(3*n+1))
-    IF( info/=0 .OR. NUMXER(nerr)/=2 ) fatal = .TRUE.
+    IF( info/=0 .OR. num_xer/=2 ) fatal = .TRUE.
     !
     !     Restore KONTRL and check to see if the tests of error detection
     !     passed.
     !
-    CALL XSETF(kontrl)
+    control_xer = kontrl
     IF( fatal ) THEN
       Ipass = 0
       IF( Kprint>=2 ) THEN
@@ -766,12 +766,12 @@ CONTAINS
     !   930214  Declarations sections added, code revised to test error
     !           returns for all values of KPRINT and code polished.  (WRB)
     USE slatec, ONLY : D1MACH, DBVALU, DCV, DFC, DMOUT, DVOUT, IVOUT, &
-      XGETF, XSETF, XERCLR, NUMXER
+      control_xer, num_xer
     !     .. Scalar Arguments ..
     INTEGER :: Ipass, Kprint, Lun
     !     .. Local Scalars ..
     REAL(DP) :: diff, one, t, tol, xval, zero
-    INTEGER :: kontrl, i, idigit, ii, j, l, mode, n, nconst, ndeg, nerr, nval
+    INTEGER :: kontrl, i, idigit, ii, j, l, mode, n, nconst, ndeg, nval
     LOGICAL :: fatal
     !     .. Local Arrays ..
     REAL(DP) :: coeff(9), v(51,5), w(529), work(12), xconst(11), yconst(11)
@@ -977,56 +977,56 @@ CONTAINS
     !
     !     Trigger error conditions.
     !
-    CALL XGETF(kontrl)
+    kontrl = control_xer
     IF( Kprint<=2 ) THEN
-      CALL XSETF(0)
+      control_xer = 0
     ELSE
-      CALL XSETF(1)
+      control_xer = 1
     END IF
     fatal = .FALSE.
-    CALL XERCLR
+    num_xer = 0
     !
     IF( Kprint>=3 ) WRITE (Lun,99007)
     99007 FORMAT (/' TRIGGER 6 ERROR MESSAGES',/)
     !
     CALL DFC(ndata,xdata,ydata,sddata,0,nbkpt,bkpt,nconst,xconst,yconst,&
       nderiv,mode,coeff,w,iw)
-    IF( NUMXER(nerr)/=2 ) fatal = .TRUE.
-    CALL XERCLR
+    IF( num_xer/=2 ) fatal = .TRUE.
+    num_xer = 0
     !
     CALL DFC(ndata,xdata,ydata,sddata,nord,0,bkpt,nconst,xconst,yconst,nderiv,&
       mode,coeff,w,iw)
-    IF( NUMXER(nerr)/=2 ) fatal = .TRUE.
-    CALL XERCLR
+    IF( num_xer/=2 ) fatal = .TRUE.
+    num_xer = 0
     !
     CALL DFC(-1,xdata,ydata,sddata,nord,nbkpt,bkpt,nconst,xconst,yconst,&
       nderiv,mode,coeff,w,iw)
-    IF( NUMXER(nerr)/=2 ) fatal = .TRUE.
-    CALL XERCLR
+    IF( num_xer/=2 ) fatal = .TRUE.
+    num_xer = 0
     !
     mode = 0
     CALL DFC(ndata,xdata,ydata,sddata,nord,nbkpt,bkpt,nconst,xconst,yconst,&
       nderiv,mode,coeff,w,iw)
-    IF( NUMXER(nerr)/=2 ) fatal = .TRUE.
-    CALL XERCLR
+    IF( num_xer/=2 ) fatal = .TRUE.
+    num_xer = 0
     !
     iw(1) = 10
     CALL DFC(ndata,xdata,ydata,sddata,nord,nbkpt,bkpt,nconst,xconst,yconst,&
       nderiv,mode,coeff,w,iw)
-    IF( NUMXER(nerr)/=2 ) fatal = .TRUE.
-    CALL XERCLR
+    IF( num_xer/=2 ) fatal = .TRUE.
+    num_xer = 0
     !
     iw(1) = 529
     iw(2) = 2
     CALL DFC(ndata,xdata,ydata,sddata,nord,nbkpt,bkpt,nconst,xconst,yconst,&
       nderiv,mode,coeff,w,iw)
-    IF( NUMXER(nerr)/=2 ) fatal = .TRUE.
-    CALL XERCLR
+    IF( num_xer/=2 ) fatal = .TRUE.
+    num_xer = 0
     !
     !     Restore KONTRL and check to see if the tests of error detection
     !     passed.
     !
-    CALL XSETF(kontrl)
+    control_xer = kontrl
     IF( fatal ) THEN
       Ipass = 0
       IF( Kprint>=2 ) THEN
@@ -1223,7 +1223,7 @@ END MODULE TEST53_MOD
 !** TEST53
 PROGRAM TEST53
   USE TEST53_MOD, ONLY : DFCQX, DNLS1Q, DPFITT
-  USE slatec, ONLY : I1MACH, XSETF, XSETUN, XERMAX
+  USE slatec, ONLY : I1MACH, control_xer, max_xer
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !> Driver for testing SLATEC subprograms
@@ -1284,12 +1284,11 @@ PROGRAM TEST53
   !     Read KPRINT parameter
   !
   CALL GET_ARGUMENT(kprint)
-  CALL XERMAX(1000)
-  CALL XSETUN(lun)
+  max_xer = 1000
   IF( kprint<=1 ) THEN
-    CALL XSETF(0)
+    control_xer = 0
   ELSE
-    CALL XSETF(1)
+    control_xer = 1
   END IF
   !
   !     Test DNLS1E and DNLS1

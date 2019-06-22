@@ -42,7 +42,7 @@ SUBROUTINE LA05BS(A,Ind,Ia,N,Ip,Iw,W,G,B,Trans)
   !   900402  Added TYPE section.  (WRB)
   !   920410  Corrected second dimension on IW declaration.  (WRB)
   USE LA05DS, ONLY : lp_com, lenl_com
-  USE service, ONLY : XERMSG, XSETUN
+  USE service, ONLY : XERMSG
   INTEGER :: Ia, N
   LOGICAL :: Trans
   INTEGER :: Ind(Ia,2), Iw(N,8), Ip(N,2)
@@ -52,9 +52,7 @@ SUBROUTINE LA05BS(A,Ind,Ia,N,Ip,Iw,W,G,B,Trans)
   !* FIRST EXECUTABLE STATEMENT  LA05BS
   IF( G<0. ) THEN
     !
-    CALL XSETUN(lp_com)
-    IF( lp_com>0 ) CALL XERMSG('LA05BS',&
-      'EARLIER ENTRY GAVE ERROR RETURN.',-8,2)
+    IF( lp_com>0 ) CALL XERMSG('LA05BS','EARLIER ENTRY GAVE ERROR RETURN.',-8,2)
   ELSE
     kll = Ia - lenl_com + 1
     IF( Trans ) THEN

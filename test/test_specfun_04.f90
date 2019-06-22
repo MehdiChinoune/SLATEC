@@ -37,9 +37,9 @@ CONTAINS
     !   910501  Added PURPOSE and TYPE records.  (WRB)
     !   910708  Code revised to test error returns for all values of
     !           KPRINT.  (WRB)
-    USE slatec, ONLY : BESI, BESK, NUMXER, R1MACH, XERCLR, XGETF, XSETF
+    USE slatec, ONLY : BESI, BESK, R1MACH, num_xer, control_xer
     INTEGER :: Ipass, Kprint
-    INTEGER :: i, ix, k, kontrl, kode, Lun, m, n, nerr, nu, nw, ny
+    INTEGER :: i, ix, k, kontrl, kode, Lun, m, n, nu, nw, ny
     REAL(SP) :: alp, del, er, fnu, fnup, rx, tol, x
     REAL(SP) :: fn(3), w(5), xx(5), y(5)
     LOGICAL :: fatal
@@ -195,14 +195,14 @@ CONTAINS
     !
     !     Trigger 10 error conditions
     !
-    CALL XGETF(kontrl)
+    kontrl = control_xer
     IF( Kprint<=2 ) THEN
-      CALL XSETF(0)
+      control_xer = 0
     ELSE
-      CALL XSETF(1)
+      control_xer = 1
     END IF
     fatal = .FALSE.
-    CALL XERCLR
+    num_xer = 0
     !
     IF( Kprint>=3 ) WRITE (Lun,99007)
     99007 FORMAT (//' TRIGGER 10 ERROR CONDITIONS'//)
@@ -218,17 +218,17 @@ CONTAINS
       k = INT(xx(3))
       n = INT(xx(4))
       CALL BESI(xx(1),xx(2),k,n,y,ny)
-      IF( NUMXER(nerr)/=2 ) THEN
+      IF( num_xer/=2 ) THEN
         Ipass = 0
         fatal = .TRUE.
       END IF
-      CALL XERCLR
+      num_xer = 0
       CALL BESK(xx(1),xx(2),k,n,w,nw)
-      IF( NUMXER(nerr)/=2 ) THEN
+      IF( num_xer/=2 ) THEN
         Ipass = 0
         fatal = .TRUE.
       END IF
-      CALL XERCLR
+      num_xer = 0
       xx(i) = -xx(i)
     END DO
     !
@@ -238,21 +238,21 @@ CONTAINS
     n = 3
     alp = 2.3_SP
     CALL BESI(x,alp,1,n,y,ny)
-    IF( NUMXER(nerr)/=6 ) THEN
+    IF( num_xer/=6 ) THEN
       Ipass = 0
       fatal = .TRUE.
     END IF
-    CALL XERCLR
+    num_xer = 0
     !
     x = R1MACH(1)*10._SP
     CALL BESK(x,alp,1,n,w,nw)
-    IF( NUMXER(nerr)/=6 ) THEN
+    IF( num_xer/=6 ) THEN
       Ipass = 0
       fatal = .TRUE.
     END IF
-    CALL XERCLR
+    num_xer = 0
     !
-    CALL XSETF(kontrl)
+    control_xer = kontrl
     IF( fatal ) THEN
       IF( Kprint>=2 ) THEN
         WRITE (Lun,99008)
@@ -302,9 +302,9 @@ CONTAINS
     !   910501  Added PURPOSE and TYPE records.  (WRB)
     !   910708  Code revised to test error returns for all values of
     !           KPRINT.  (WRB)
-    USE slatec, ONLY : BESJ, BESY, NUMXER, R1MACH, XERCLR, XGETF, XSETF
+    USE slatec, ONLY : BESJ, BESY, R1MACH, num_xer, control_xer
     INTEGER :: Ipass, Kprint
-    INTEGER :: i, ix, k, kontrl, Lun, m, n, nerr, nu, ny
+    INTEGER :: i, ix, k, kontrl, Lun, m, n, nu, ny
     REAL(SP) :: alp, del, er, fnu, fnup, rhpi, rx, tol, x
     REAL(SP) :: fn(3), w(5), xx(5), y(5)
     LOGICAL :: fatal
@@ -439,14 +439,14 @@ CONTAINS
     !
     !     Trigger 7 error conditions
     !
-    CALL XGETF(kontrl)
+    kontrl = control_xer
     IF( Kprint<=2 ) THEN
-      CALL XSETF(0)
+      control_xer = 0
     ELSE
-      CALL XSETF(1)
+      control_xer = 1
     END IF
     fatal = .FALSE.
-    CALL XERCLR
+    num_xer = 0
     !
     IF( Kprint>=3 ) WRITE (Lun,99006)
     99006 FORMAT (//' TRIGGER 7 ERROR CONDITIONS'//)
@@ -460,17 +460,17 @@ CONTAINS
       xx(i) = -xx(i)
       n = INT(xx(3))
       CALL BESJ(xx(1),xx(2),n,y,ny)
-      IF( NUMXER(nerr)/=2 ) THEN
+      IF( num_xer/=2 ) THEN
         Ipass = 0
         fatal = .TRUE.
       END IF
-      CALL XERCLR
+      num_xer = 0
       CALL BESY(xx(1),xx(2),n,w)
-      IF( NUMXER(nerr)/=2 ) THEN
+      IF( num_xer/=2 ) THEN
         Ipass = 0
         fatal = .TRUE.
       END IF
-      CALL XERCLR
+      num_xer = 0
       xx(i) = -xx(i)
     END DO
     !
@@ -480,12 +480,12 @@ CONTAINS
     n = 3
     alp = 2.3_SP
     CALL BESY(x,alp,n,w)
-    IF( NUMXER(nerr)/=6 ) THEN
+    IF( num_xer/=6 ) THEN
       Ipass = 0
       fatal = .TRUE.
     END IF
-    CALL XERCLR
-    CALL XSETF(kontrl)
+    num_xer = 0
+    control_xer = kontrl
     IF( fatal ) THEN
       IF( Kprint>=2 ) THEN
         WRITE (Lun,99007)
@@ -709,7 +709,7 @@ END MODULE TEST05_MOD
 !** TEST05
 PROGRAM TEST05
   USE TEST05_MOD, ONLY : BIKCK, BJYCK, EG8CK
-  USE slatec, ONLY : I1MACH, XSETF, XSETUN, XERMAX
+  USE slatec, ONLY : I1MACH, control_xer, max_xer
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !> Driver for testing SLATEC subprograms
@@ -753,7 +753,7 @@ PROGRAM TEST05
   !                 and Lee Walton, Guide to the SLATEC Common Mathema-
   !                 tical Library, April 10, 1990.
   !***
-  ! **Routines called:**  BIKCK, BJYCK, EG8CK, I1MACH, XERMAX, XSETF, XSETUN
+  ! **Routines called:**  BIKCK, BJYCK, EG8CK, I1MACH, XERMAX, XSETF
 
   !* REVISION HISTORY  (YYMMDD)
   !   890618  DATE WRITTEN
@@ -769,12 +769,11 @@ PROGRAM TEST05
   !     Read KPRINT parameter
   !
   CALL GET_ARGUMENT(kprint)
-  CALL XERMAX(1000)
-  CALL XSETUN(lun)
+  max_xer = 1000
   IF( kprint<=1 ) THEN
-    CALL XSETF(0)
+    control_xer = 0
   ELSE
-    CALL XSETF(1)
+    control_xer = 1
   END IF
   !
   !     Test EXINT and GAUS8

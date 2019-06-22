@@ -64,8 +64,7 @@ SUBROUTINE XERSVE(Subrou,Messg,Kflag,Nerr,Level,Icount)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER, PARAMETER :: LENTAB = 10
-  INTEGER :: i, Icount, iunit, Kflag, kunit, Level, Nerr, nunit
-  INTEGER :: lun(5)
+  INTEGER :: i, Icount, iunit, Kflag, Level, Nerr
   CHARACTER(*) :: Subrou, Messg
   CHARACTER(8) :: sub
   CHARACTER(60) :: mes
@@ -80,39 +79,31 @@ SUBROUTINE XERSVE(Subrou,Messg,Kflag,Nerr,Level,Icount)
     !        Dump the table.
     !
     IF( nmsg==0 ) RETURN
+    iunit = I1MACH(4)
     !
-    !        Print to each unit.
+    !           Print the table header.
     !
-    CALL XGETUA(lun,nunit)
-    DO kunit = 1, nunit
-      iunit = lun(kunit)
-      IF( iunit==0 ) iunit = I1MACH(4)
-      !
-      !           Print the table header.
-      !
-      WRITE (iunit,99001)
-      !
-      ! FORMATs.
-      !
-      99001 FORMAT ('0          ERROR MESSAGE SUMMARY'/&
-        ' SUBROUTINE MESSAGE START                                             &
-        &  NERR      LEVEL     COUNT')
-      !
-      !           Print body of table.
-      !
-      DO i = 1, nmsg
-        WRITE (iunit,99002) subtab(i), mestab(i), nertab(i), &
-          levtab(i), kount(i)
-        99002 FORMAT (1X,A,3X,A,3I10)
-      END DO
-      !
-      !           Print number of other errors.
-      !
-      IF( kountx/=0 ) WRITE (iunit,99003) kountx
-      99003 FORMAT ('0OTHER ERRORS NOT INDIVIDUALLY TABULATED = ',I10)
-      WRITE (iunit,99004)
-      99004 FORMAT (1X)
+    WRITE (iunit,99001)
+    !
+    ! FORMATs.
+    !
+    99001 FORMAT ('0          ERROR MESSAGE SUMMARY'/&
+      ' SUBROUTINE MESSAGE START                                             &
+      &  NERR      LEVEL     COUNT')
+    !
+    !           Print body of table.
+    !
+    DO i = 1, nmsg
+      WRITE (iunit,99002) subtab(i), mestab(i), nertab(i), levtab(i), kount(i)
+      99002 FORMAT (1X,A,3X,A,3I10)
     END DO
+    !
+    !           Print number of other errors.
+    !
+    IF( kountx/=0 ) WRITE (iunit,99003) kountx
+    99003 FORMAT ('0OTHER ERRORS NOT INDIVIDUALLY TABULATED = ',I10)
+    WRITE (iunit,99004)
+    99004 FORMAT (1X)
     !
     !        Clear the error tables.
     !

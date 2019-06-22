@@ -25,64 +25,64 @@ CONTAINS
     !   890618  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   910708  Minor modifications in use of KPRINT.  (WRB)
-    USE slatec, ONLY : NUMXER, R1MACH, RC, XERCLR, XGETF, XSETF
+    USE slatec, ONLY : R1MACH, RC, num_xer, control_xer
     INTEGER :: Kprint, Ipass, contrl, kontrl, Lun, ier
     INTEGER :: ipass1, ipass2, ipass3, ipass4
     REAL(SP) :: pi, trc, dif
     !* FIRST EXECUTABLE STATEMENT  QCRC
-    CALL XERCLR
-    CALL XGETF(contrl)
+    num_xer = 0
+    contrl = control_xer
     IF( Kprint>=3 ) THEN
       kontrl = +1
     ELSE
       kontrl = 0
     END IF
-    CALL XSETF(kontrl)
+    control_xer = kontrl
     !
     !  FORCE ERROR 1
     !
     IF( Kprint>=3 ) WRITE (Lun,99001)
     99001 FORMAT (' RC - FORCE ERROR 1 TO OCCUR')
     trc = RC(-1._SP,-1._SP,ier)
-    ier = NUMXER(ier)
+    ier = num_xer
     IF( ier==1 ) THEN
       ipass1 = 1
     ELSE
       ipass1 = 0
     END IF
-    CALL XERCLR
+    num_xer = 0
     !
     !  FORCE ERROR 2
     !
     IF( Kprint>=3 ) WRITE (Lun,99002)
     99002 FORMAT (' RC - FORCE ERROR 2 TO OCCUR')
     trc = RC(R1MACH(1),R1MACH(1),ier)
-    ier = NUMXER(ier)
+    ier = num_xer
     IF( ier==2 ) THEN
       ipass2 = 1
     ELSE
       ipass2 = 0
     END IF
-    CALL XERCLR
+    num_xer = 0
     !
     !  FORCE ERROR 3
     !
     IF( Kprint>=3 ) WRITE (Lun,99003)
     99003 FORMAT (' RC - FORCE ERROR 3 TO OCCUR')
     trc = RC(R1MACH(2),R1MACH(2),ier)
-    ier = NUMXER(ier)
+    ier = num_xer
     IF( ier==3 ) THEN
       ipass3 = 1
     ELSE
       ipass3 = 0
     END IF
-    CALL XERCLR
+    num_xer = 0
     !
     !  ARGUMENTS IN RANGE
     !
     pi = 3.1415926535897932_SP
     trc = RC(0._SP,0.25_SP,ier)
-    CALL XERCLR
+    num_xer = 0
     dif = trc - pi
     IF( (ABS(dif/pi)<1000._SP*R1MACH(4)) .AND. (ier==0) ) THEN
       ipass4 = 1
@@ -102,7 +102,7 @@ CONTAINS
       99005 FORMAT (' CORRECT ANSWER =',1PE14.6/'COMPUTED ANSWER =',&
         E14.6/'     DIFFERENCE =',E14.6)
     END IF
-    CALL XSETF(contrl)
+    control_xer = contrl
     99006 FORMAT (' RC - FAILED')
   END SUBROUTINE QCRC
   !** QCRD
@@ -127,65 +127,65 @@ CONTAINS
     !   890618  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   910708  Minor modifications in use of KPRINT.  (WRB)
-    USE slatec, ONLY : NUMXER, R1MACH, RD, XERCLR, XGETF, XSETF
+    USE slatec, ONLY : R1MACH, RD, num_xer, control_xer
     INTEGER :: Kprint, Ipass, contrl, kontrl, Lun, ier
     INTEGER :: ipass1, ipass2, ipass3, ipass4
     REAL(SP) :: blem, trd, dif
     !* FIRST EXECUTABLE STATEMENT  QCRD
-    CALL XERCLR
-    CALL XGETF(contrl)
+    num_xer = 0
+    contrl = control_xer
     IF( Kprint>=3 ) THEN
       kontrl = +1
     ELSE
       kontrl = 0
     END IF
-    CALL XSETF(kontrl)
+    control_xer = kontrl
     !
     !  FORCE ERROR 1
     !
     IF( Kprint>=3 ) WRITE (Lun,99001)
     99001 FORMAT (' RD - FORCE ERROR 1 TO OCCUR')
     trd = RD(-1._SP,-1._SP,-1._SP,ier)
-    ier = NUMXER(ier)
+    ier = num_xer
     IF( ier==1 ) THEN
       ipass1 = 1
     ELSE
       ipass1 = 0
     END IF
-    CALL XERCLR
+    num_xer = 0
     !
     !  FORCE ERROR 2
     !
     IF( Kprint>=3 ) WRITE (Lun,99002)
     99002 FORMAT (' RD - FORCE ERROR 2 TO OCCUR')
     trd = RD(1._SP,1._SP,-1._SP,ier)
-    ier = NUMXER(ier)
+    ier = num_xer
     IF( ier==2 ) THEN
       ipass2 = 1
     ELSE
       ipass2 = 0
     END IF
-    CALL XERCLR
+    num_xer = 0
     !
     !  FORCE ERROR 3
     !
     IF( Kprint>=3 ) WRITE (Lun,99003)
     99003 FORMAT (' RD - FORCE ERROR 3 TO OCCUR')
     trd = RD(R1MACH(2),R1MACH(2),R1MACH(2),ier)
-    ier = NUMXER(ier)
+    ier = num_xer
     IF( ier==3 ) THEN
       ipass3 = 1
     ELSE
       ipass3 = 0
     END IF
-    CALL XERCLR
+    num_xer = 0
     !
     !  ARGUMENTS IN RANGE
     !  BLEM=3 * LEMNISCATE CONSTANT B
     !
     blem = 1.79721035210338831_SP
     trd = RD(0._SP,2._SP,1._SP,ier)
-    CALL XERCLR
+    num_xer = 0
     dif = trd - blem
     IF( (ABS(dif/blem)<1000._SP*R1MACH(4)) .AND. (ier==0) ) THEN
       ipass4 = 1
@@ -205,7 +205,7 @@ CONTAINS
       99005 FORMAT (' CORRECT ANSWER =',1PE14.6/'COMPUTED ANSWER =',&
         E14.6/'     DIFFERENCE =',E14.6)
     END IF
-    CALL XSETF(contrl)
+    control_xer = contrl
     99006 FORMAT (' RD - FAILED')
   END SUBROUTINE QCRD
   !** QCRF
@@ -230,65 +230,65 @@ CONTAINS
     !   890618  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   910708  Minor modifications in use of KPRINT.  (WRB)
-    USE slatec, ONLY : NUMXER, R1MACH, RF, XERCLR, XGETF, XSETF
+    USE slatec, ONLY : R1MACH, RF, num_xer, control_xer
     INTEGER :: Kprint, Ipass, contrl, kontrl, Lun, ier
     INTEGER :: ipass1, ipass2, ipass3, ipass4
     REAL(SP) :: alem, trf, dif
     !* FIRST EXECUTABLE STATEMENT  QCRF
-    CALL XERCLR
-    CALL XGETF(contrl)
+    num_xer = 0
+    contrl = control_xer
     IF( Kprint>=3 ) THEN
       kontrl = +1
     ELSE
       kontrl = 0
     END IF
-    CALL XSETF(kontrl)
+    control_xer = kontrl
     !
     !  FORCE ERROR 1
     !
     IF( Kprint>=3 ) WRITE (Lun,99001)
     99001 FORMAT (' RF - FORCE ERROR 1 TO OCCUR')
     trf = RF(-1._SP,-1._SP,-1._SP,ier)
-    ier = NUMXER(ier)
+    ier = num_xer
     IF( ier==1 ) THEN
       ipass1 = 1
     ELSE
       ipass1 = 0
     END IF
-    CALL XERCLR
+    num_xer = 0
     !
     !  FORCE ERROR 2
     !
     IF( Kprint>=3 ) WRITE (Lun,99002)
     99002 FORMAT (' RF - FORCE ERROR 2 TO OCCUR')
     trf = RF(R1MACH(1),R1MACH(1),R1MACH(1),ier)
-    ier = NUMXER(ier)
+    ier = num_xer
     IF( ier==2 ) THEN
       ipass2 = 1
     ELSE
       ipass2 = 0
     END IF
-    CALL XERCLR
+    num_xer = 0
     !
     !  FORCE ERROR 3
     !
     IF( Kprint>=3 ) WRITE (Lun,99003)
     99003 FORMAT (' RF - FORCE ERROR 3 TO OCCUR')
     trf = RF(R1MACH(2),R1MACH(2),R1MACH(2),ier)
-    ier = NUMXER(ier)
+    ier = num_xer
     IF( ier==3 ) THEN
       ipass3 = 1
     ELSE
       ipass3 = 0
     END IF
-    CALL XERCLR
+    num_xer = 0
     !
     !  ARGUMENTS IN RANGE
     !  ALEM=LEMNISCATE CONSTANT A
     !
     alem = 1.311028777146059905_SP
     trf = RF(0._SP,1._SP,2._SP,ier)
-    CALL XERCLR
+    num_xer = 0
     dif = trf - alem
     IF( (ABS(dif/alem)<1000._SP*R1MACH(4)) .AND. (ier==0) ) THEN
       ipass4 = 1
@@ -308,7 +308,7 @@ CONTAINS
       99005 FORMAT (' CORRECT ANSWER =',1PE14.6/'COMPUTED ANSWER =',&
         E14.6/'     DIFFERENCE =',E14.6)
     END IF
-    CALL XSETF(contrl)
+    control_xer = contrl
     99006 FORMAT (' RF - FAILED')
   END SUBROUTINE QCRF
   !** QCRJ
@@ -333,64 +333,64 @@ CONTAINS
     !   890618  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   910708  Minor modifications in use of KPRINT.  (WRB)
-    USE slatec, ONLY : NUMXER, R1MACH, RJ, XERCLR, XGETF, XSETF
+    USE slatec, ONLY : R1MACH, RJ, num_xer, control_xer
     INTEGER :: Kprint, Ipass, contrl, kontrl, Lun, ier
     INTEGER :: ipass1, ipass2, ipass3, ipass4
     REAL(SP) :: consj, trj, dif
     !* FIRST EXECUTABLE STATEMENT  QCRJ
-    CALL XERCLR
-    CALL XGETF(contrl)
+    num_xer = 0
+    contrl = control_xer
     IF( Kprint>=3 ) THEN
       kontrl = +1
     ELSE
       kontrl = 0
     END IF
-    CALL XSETF(kontrl)
+    control_xer = kontrl
     !
     !  FORCE ERROR 1
     !
     IF( Kprint>=3 ) WRITE (Lun,99001)
     99001 FORMAT (' RJ - FORCE ERROR 1 TO OCCUR')
     trj = RJ(-1._SP,-1._SP,-1._SP,-1._SP,ier)
-    ier = NUMXER(ier)
+    ier = num_xer
     IF( ier==1 ) THEN
       ipass1 = 1
     ELSE
       ipass1 = 0
     END IF
-    CALL XERCLR
+    num_xer = 0
     !
     !  FORCE ERROR 2
     !
     IF( Kprint>=3 ) WRITE (Lun,99002)
     99002 FORMAT (' RJ - FORCE ERROR 2 TO OCCUR')
     trj = RJ(R1MACH(1),R1MACH(1),R1MACH(1),R1MACH(1),ier)
-    ier = NUMXER(ier)
+    ier = num_xer
     IF( ier==2 ) THEN
       ipass2 = 1
     ELSE
       ipass2 = 0
     END IF
-    CALL XERCLR
+    num_xer = 0
     !
     !  FORCE ERROR 3
     !
     IF( Kprint>=3 ) WRITE (Lun,99003)
     99003 FORMAT (' RJ - FORCE ERROR 3 TO OCCUR')
     trj = RJ(R1MACH(2),R1MACH(2),R1MACH(2),R1MACH(2),ier)
-    ier = NUMXER(ier)
+    ier = num_xer
     IF( ier==3 ) THEN
       ipass3 = 1
     ELSE
       ipass3 = 0
     END IF
-    CALL XERCLR
+    num_xer = 0
     !
     !  ARGUMENTS IN RANGE
     !
     consj = 0.142975796671567538_SP
     trj = RJ(2._SP,3._SP,4._SP,5._SP,ier)
-    CALL XERCLR
+    num_xer = 0
     dif = trj - consj
     IF( (ABS(dif/consj)<1000._SP*R1MACH(4)) .AND. (ier==0) ) THEN
       ipass4 = 1
@@ -410,14 +410,14 @@ CONTAINS
       99005 FORMAT (' CORRECT ANSWER =',1PE14.6/'COMPUTED ANSWER =',&
         E14.6/'     DIFFERENCE =',E14.6)
     END IF
-    CALL XSETF(contrl)
+    control_xer = contrl
     99006 FORMAT (' RJ - FAILED')
   END SUBROUTINE QCRJ
 END MODULE TEST13_MOD
 !** TEST13
 PROGRAM TEST13
   USE TEST13_MOD, ONLY : QCRC, QCRD, QCRF, QCRJ
-  USE slatec, ONLY : I1MACH, XSETF, XSETUN, XERMAX
+  USE slatec, ONLY : I1MACH, control_xer, max_xer
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !> Driver for testing SLATEC subprograms
@@ -476,12 +476,11 @@ PROGRAM TEST13
   !     Read KPRINT parameter
   !
   CALL GET_ARGUMENT(kprint)
-  CALL XERMAX(1000)
-  CALL XSETUN(lun)
+  max_xer = 1000
   IF( kprint<=1 ) THEN
-    CALL XSETF(0)
+    control_xer = 0
   ELSE
-    CALL XSETF(1)
+    control_xer = 1
   END IF
   !
   !     Test single precision Carlson elliptic routines

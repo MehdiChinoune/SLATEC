@@ -26,7 +26,7 @@ COMPLEX(SP) FUNCTION CGAMR(Z)
   !   770701  DATE WRITTEN
   !   861211  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
-  USE service, ONLY : XGETF, XSETF, XERCLR
+  USE service, ONLY : control_xer, num_xer
   INTEGER :: irold
   REAL(SP) :: x
   COMPLEX(SP) :: Z
@@ -35,11 +35,11 @@ COMPLEX(SP) FUNCTION CGAMR(Z)
   x = REAL(Z)
   IF( x<=0._SP .AND. AINT(x)==x .AND. AIMAG(Z)==0._SP ) RETURN
   !
-  CALL XGETF(irold)
-  CALL XSETF(1)
+  irold = control_xer
+  control_xer = 1
   CGAMR = CLNGAM(Z)
-  CALL XERCLR
-  CALL XSETF(irold)
+  num_xer = 0
+  control_xer = irold
   CGAMR = EXP(-CGAMR)
   !
 END FUNCTION CGAMR

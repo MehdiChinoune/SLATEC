@@ -55,7 +55,7 @@ REAL(DP) FUNCTION DGAMIT(A,X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920528  DESCRIPTION and REFERENCES sections revised.  (WRB)
-  USE service, ONLY : XERMSG, XERCLR, D1MACH
+  USE service, ONLY : XERMSG, num_xer, D1MACH
   REAL(DP) :: A, X
   REAL(DP) :: aeps, ainta, algap1, alng, alx, h, sga, sgngam, t
   REAL(DP), PARAMETER :: alneps = -LOG(D1MACH(3)), sqeps = SQRT(D1MACH(4)), &
@@ -93,7 +93,7 @@ REAL(DP) FUNCTION DGAMIT(A,X)
       IF( t>alneps ) THEN
         !
         t = t - A*alx
-        IF( t<bot ) CALL XERCLR
+        IF( t<bot ) num_xer = 0
         DGAMIT = -sga*sgngam*EXP(t)
         RETURN
       ELSE
@@ -101,20 +101,20 @@ REAL(DP) FUNCTION DGAMIT(A,X)
         IF( t>(-alneps) ) h = 1._DP - sga*sgngam*EXP(t)
         IF( ABS(h)<=sqeps ) THEN
           !
-          CALL XERCLR
+          num_xer = 0
           CALL XERMSG('DGAMIT','RESULT LT HALF PRECISION',1,1)
         END IF
       END IF
     END IF
   ELSE
     t = D9LGIT(A,X,LOG_GAMMA(A+1._DP))
-    IF( t<bot ) CALL XERCLR
+    IF( t<bot ) num_xer = 0
     DGAMIT = EXP(t)
     RETURN
   END IF
   !
   t = -A*alx + LOG(ABS(h))
-  IF( t<bot ) CALL XERCLR
+  IF( t<bot ) num_xer = 0
   DGAMIT = SIGN(EXP(t),h)
   RETURN
 END FUNCTION DGAMIT

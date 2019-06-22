@@ -2361,7 +2361,7 @@ END MODULE TEST09_MOD
 !** TEST09
 PROGRAM TEST09
   USE TEST09_MOD, ONLY : CQCAI, CQCBH, CQCBI, CQCBJ, CQCBK, CQCBY
-  USE slatec, ONLY : I1MACH, XSETF, XSETUN, XERMAX
+  USE slatec, ONLY : I1MACH, control_xer, max_xer
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !> Driver for testing SLATEC subprograms.
@@ -2404,7 +2404,7 @@ PROGRAM TEST09
   !                 Mathematical Library, March 21, 1989.
   !***
   ! **Routines called:**  CQCAI, CQCBH, CQCBI, CQCBJ, CQCBK, CQCBY, I1MACH,
-  !                    XERMAX, XSETF, XSETUN
+  !                    XERMAX, XSETF
 
   !* REVISION HISTORY  (YYMMDD)
   !   910411  DATE WRITTEN
@@ -2418,12 +2418,11 @@ PROGRAM TEST09
   !     Read KPRINT parameter
   !
   CALL GET_ARGUMENT(kprint)
-  CALL XERMAX(1000)
-  CALL XSETUN(lun)
+  max_xer = 1000
   IF( kprint<=1 ) THEN
-    CALL XSETF(0)
+    control_xer = 0
   ELSE
-    CALL XSETF(1)
+    control_xer = 1
   END IF
   !
   !     Test Single Precision Complex Bessel Functions.

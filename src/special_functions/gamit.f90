@@ -55,7 +55,7 @@ REAL(SP) FUNCTION GAMIT(A,X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920528  DESCRIPTION and REFERENCES sections revised.  (WRB)
-  USE service, ONLY : XERMSG, XERCLR, R1MACH
+  USE service, ONLY : XERMSG, num_xer, R1MACH
   REAL(SP) :: A, X
   REAL(SP) :: aeps, ainta, algap1, alng, alx, h, sga, sgngam, t
   REAL(SP), PARAMETER :: alneps = -LOG(R1MACH(3)), sqeps = SQRT(R1MACH(4)), &
@@ -93,26 +93,26 @@ REAL(SP) FUNCTION GAMIT(A,X)
       IF( t>alneps ) THEN
         !
         t = t - A*alx
-        IF( t<bot ) CALL XERCLR
+        IF( t<bot ) num_xer = 0
         GAMIT = -sga*sgngam*EXP(t)
         RETURN
       ELSE
         IF( t>(-alneps) ) h = 1._SP - sga*sgngam*EXP(t)
         IF( ABS(h)<=sqeps ) THEN
-          CALL XERCLR
+          num_xer = 0
           CALL XERMSG('GAMIT','RESULT LT HALF PRECISION',1,1)
         END IF
       END IF
     END IF
   ELSE
     t = R9LGIT(A,X,LOG_GAMMA(A+1._SP))
-    IF( t<bot ) CALL XERCLR
+    IF( t<bot ) num_xer = 0
     GAMIT = EXP(t)
     RETURN
   END IF
   !
   t = -A*alx + LOG(ABS(h))
-  IF( t<bot ) CALL XERCLR
+  IF( t<bot ) num_xer = 0
   GAMIT = SIGN(EXP(t),h)
   RETURN
 END FUNCTION GAMIT

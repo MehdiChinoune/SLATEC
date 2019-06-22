@@ -113,7 +113,7 @@ CONTAINS
     !   910708  Minor modifications in use of KPRINT.  (WRB)
     !   920212  Code completely restructured to test IFLAG for all values
     !           of KPRINT.  (WRB)
-    USE slatec, ONLY : FZERO, R1MACH, XERCLR, XGETF, XSETF
+    USE slatec, ONLY : FZERO, R1MACH, num_xer, control_xer
     !     .. Scalar Arguments ..
     INTEGER :: Ipass, Kprint, Lun
     !     .. Local Scalars ..
@@ -149,14 +149,14 @@ CONTAINS
     !
     !     Trigger 2 error conditions
     !
-    CALL XGETF(kontrl)
+    kontrl = control_xer
     IF( Kprint<=2 ) THEN
-      CALL XSETF(0)
+      control_xer = 0
     ELSE
-      CALL XSETF(1)
+      control_xer = 1
     END IF
     fatal = .FALSE.
-    CALL XERCLR
+    num_xer = 0
     !
     IF( Kprint>=3 ) WRITE (Lun,99002)
     99002 FORMAT (/' IFLAG 3 and 4 tests')
@@ -185,9 +185,9 @@ CONTAINS
       IF( Kprint>=2 ) WRITE (Lun,99008) iflag, 4
     END IF
     !
-    CALL XERCLR
+    num_xer = 0
     !
-    CALL XSETF(kontrl)
+    control_xer = kontrl
     IF( fatal ) THEN
       IF( Kprint>=2 ) THEN
         WRITE (Lun,99003)
@@ -232,7 +232,7 @@ CONTAINS
 
     !* REVISION HISTORY  (YYMMDD)
     !   920212  DATE WRITTEN
-    USE slatec, ONLY : D1MACH, DFZERO, XERCLR, XGETF, XSETF
+    USE slatec, ONLY : D1MACH, DFZERO, num_xer, control_xer
     !     .. Scalar Arguments ..
     INTEGER :: Ipass, Kprint, Lun
     !     .. Local Scalars ..
@@ -268,14 +268,14 @@ CONTAINS
     !
     !     Trigger 2 error conditions
     !
-    CALL XGETF(kontrl)
+    kontrl = control_xer
     IF( Kprint<=2 ) THEN
-      CALL XSETF(0)
+      control_xer = 0
     ELSE
-      CALL XSETF(1)
+      control_xer = 1
     END IF
     fatal = .FALSE.
-    CALL XERCLR
+    num_xer = 0
     !
     IF( Kprint>=3 ) WRITE (Lun,99002)
     99002 FORMAT (/' IFLAG 3 and 4 tests')
@@ -304,9 +304,9 @@ CONTAINS
       IF( Kprint>=2 ) WRITE (Lun,99008) iflag, 4
     END IF
     !
-    CALL XERCLR
+    num_xer = 0
     !
-    CALL XSETF(kontrl)
+    control_xer = kontrl
     IF( fatal ) THEN
       IF( Kprint>=2 ) THEN
         WRITE (Lun,99003)
@@ -356,10 +356,10 @@ CONTAINS
     !           and changed TOL from sqrt R1MACH(3) to sqrt R1MACH(4) for
     !           the IBM 370 mainframes.  (RWC)
     !   911010  Code reworked and simplified.  (RWC and WRB)
-    USE slatec, ONLY : NUMXER, R1MACH, RPQR79, XERCLR, XGETF, XSETF
+    USE slatec, ONLY : R1MACH, RPQR79, num_xer, control_xer
     USE common_mod, ONLY : PASS
     REAL(SP) :: beta, tol, work(63)
-    INTEGER :: i, ierr, Ipass, j, kontrl, Kprint, Lun, nerr
+    INTEGER :: i, ierr, Ipass, j, kontrl, Kprint, Lun
     INTEGER :: itmp(7)
     COMPLEX(SP) :: root(7)
     REAL(SP) :: coef(8)
@@ -427,31 +427,31 @@ CONTAINS
     !
     !     Trigger 2 error conditions
     !
-    CALL XGETF(kontrl)
+    kontrl = control_xer
     IF( Kprint<=2 ) THEN
-      CALL XSETF(0)
+      control_xer = 0
     ELSE
-      CALL XSETF(1)
+      control_xer = 1
     END IF
     fatal = .FALSE.
-    CALL XERCLR
+    num_xer = 0
     IF( Kprint>=3 ) WRITE (Lun,99006)
     99006 FORMAT (//' TRIGGER 2 ERROR CONDITIONS'//)
     !
     !     CALL RPQR79 with 0 degree polynomial.
     !
     CALL RPQR79(0,coef,root,ierr,work)
-    IF( NUMXER(nerr)/=3 ) fatal = .TRUE.
-    CALL XERCLR
+    IF( num_xer/=3 ) fatal = .TRUE.
+    num_xer = 0
     !
     !     CALL RPQR79 with zero leading coefficient.
     !
     coef(1) = 0._SP
     CALL RPQR79(2,coef,root,ierr,work)
-    IF( NUMXER(nerr)/=2 ) fatal = .TRUE.
-    CALL XERCLR
+    IF( num_xer/=2 ) fatal = .TRUE.
+    num_xer = 0
     !
-    CALL XSETF(kontrl)
+    control_xer = kontrl
     IF( fatal ) THEN
       Ipass = 0
       IF( Kprint>=2 ) THEN
@@ -486,9 +486,9 @@ CONTAINS
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   901205  Changed usage of R1MACH(3) to R1MACH(4).  (RWC)
     !   911010  Code reworked and simplified.  (RWC and WRB)
-    USE slatec, ONLY : CPQR79, NUMXER, R1MACH, XERCLR, XGETF, XSETF
+    USE slatec, ONLY : CPQR79, R1MACH, num_xer, control_xer
     USE common_mod, ONLY : PASS
-    INTEGER :: i, ierr, Ipass, j, kontrl, Kprint, Lun, nerr
+    INTEGER :: i, ierr, Ipass, j, kontrl, Kprint, Lun
     REAL(SP) :: tol
     INTEGER :: itest(2), itmp(7)
     REAL(SP) :: work(144)
@@ -570,30 +570,30 @@ CONTAINS
     !
     !     Trigger 2 error conditions
     !
-    CALL XGETF(kontrl)
+    kontrl = control_xer
     IF( Kprint<=2 ) THEN
-      CALL XSETF(0)
+      control_xer = 0
     ELSE
-      CALL XSETF(1)
+      control_xer = 1
     END IF
     fatal = .FALSE.
-    CALL XERCLR
+    num_xer = 0
     IF( Kprint>=3 ) WRITE (Lun,99003)
     99003 FORMAT (//' TRIGGER 2 ERROR CONDITIONS'//)
     !
     !     CALL CPQR79 with 0 degree polynomial.
     !
     CALL CPQR79(0,coeff2,root,ierr,work)
-    IF( NUMXER(nerr)/=3 ) fatal = .TRUE.
-    CALL XERCLR
+    IF( num_xer/=3 ) fatal = .TRUE.
+    num_xer = 0
     !
     !     CALL CPQR79 with zero leading coefficient.
     !
     CALL CPQR79(2,coeff3,root,ierr,work)
-    IF( NUMXER(nerr)/=2 ) fatal = .TRUE.
-    CALL XERCLR
+    IF( num_xer/=2 ) fatal = .TRUE.
+    num_xer = 0
     !
-    CALL XSETF(kontrl)
+    control_xer = kontrl
     IF( fatal ) THEN
       Ipass = 0
       IF( Kprint>=2 ) THEN
@@ -624,7 +624,7 @@ END MODULE TEST34_MOD
 !** TEST34
 PROGRAM TEST34
   USE TEST34_MOD, ONLY : CPRPQX, CQRTST, DFZTST, FZTEST, RQRTST
-  USE slatec, ONLY : I1MACH, XSETF, XSETUN, XERMAX
+  USE slatec, ONLY : I1MACH, control_xer, max_xer
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !> Driver for testing SLATEC subprograms
@@ -669,7 +669,7 @@ PROGRAM TEST34
   !                 tical Library, April 10, 1990.
   !***
   ! **Routines called:**  CPRPQX, CQRTST, DFZTST, FZTEST, I1MACH, RQRTST,
-  !                    XERMAX, XSETF, XSETUN
+  !                    XERMAX, XSETF
 
   !* REVISION HISTORY  (YYMMDD)
   !   890618  DATE WRITTEN
@@ -685,12 +685,11 @@ PROGRAM TEST34
   !     Read KPRINT parameter
   !
   CALL GET_ARGUMENT(kprint)
-  CALL XERMAX(1000)
-  CALL XSETUN(lun)
+  max_xer = 1000
   IF( kprint<=1 ) THEN
-    CALL XSETF(0)
+    control_xer = 0
   ELSE
-    CALL XSETF(1)
+    control_xer = 1
   END IF
   !
   !     Test CPZERO and RPZERO

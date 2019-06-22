@@ -42,13 +42,13 @@ CONTAINS
     !           and 4 with values stored in data statements.  This involved
     !           removing all calls to subroutine DRACAH.  These changes were
     !           made by M. McClain.
-    USE slatec, ONLY : D1MACH, DRC3JJ, DRC3JM, DRC6J, NUMXER, XERCLR, XSETF
+    USE slatec, ONLY : D1MACH, DRC3JJ, DRC3JM, DRC6J, num_xer, control_xer
     !
     INTEGER :: Lun, Kprint, Ipass
     !
     CHARACTER string*36, fmt*30, fmt2*13
     INTEGER :: ipass1, ipass2, ipass3, ipass4, ipass5, ier, indexx, &
-      i, first, last, nsig, nerr, ierjj, ierjm
+      i, first, last, nsig, ierjj, ierjm
     INTEGER, PARAMETER :: NDIM = 15
     REAL(DP) :: tol, l1, l2, l3, m1, m2, m3, l1min, l1max, m2min, m2max, &
       diff(NDIM), x, jjval, jmval, thrcof(NDIM), sixcof(NDIM)
@@ -320,9 +320,9 @@ CONTAINS
     ! --- TEST 5: CHECK INVALID INPUT
     ipass5 = 1
     IF( Kprint<=2 ) THEN
-      CALL XSETF(0)
+      control_xer = 0
     ELSE
-      CALL XSETF(-1)
+      control_xer = -1
     END IF
     IF( Kprint>=3 ) WRITE (Lun,*) ' TEST 5, CHECK FOR PROPER HANDLING ', &
       'OF INVALID INPUT'
@@ -333,9 +333,9 @@ CONTAINS
     m2 = -4._DP
     m3 = 10._DP
     IF( Kprint>=3 ) WRITE (Lun,*)
-    CALL XERCLR
+    num_xer = 0
     CALL DRC3JJ(l2,l3,m2,m3,l1min,l1max,thrcof,NDIM,ier)
-    IF( NUMXER(nerr)/=ier ) ipass5 = 0
+    IF( num_xer/=ier ) ipass5 = 0
     ! --- DRC3JJ: L2+ABS(M2) OR L3+ABS(M3) NOT INTEGER (IER=2)
     l2 = 2._DP
     l3 = 99.5_DP
@@ -343,9 +343,9 @@ CONTAINS
     m2 = 0._DP
     m3 = 10._DP
     IF( Kprint>=3 ) WRITE (Lun,*)
-    CALL XERCLR
+    num_xer = 0
     CALL DRC3JJ(l2,l3,m2,m3,l1min,l1max,thrcof,NDIM,ier)
-    IF( NUMXER(nerr)/=ier ) ipass5 = 0
+    IF( num_xer/=ier ) ipass5 = 0
     ! --- DRC3JJ: L1MAX-L1MIN NOT INTEGER (IER=3)
     l2 = 3.2_DP
     l3 = 4.5_DP
@@ -353,9 +353,9 @@ CONTAINS
     m2 = 0.8_DP
     m3 = 0.5_DP
     IF( Kprint>=3 ) WRITE (Lun,*)
-    CALL XERCLR
+    num_xer = 0
     CALL DRC3JJ(l2,l3,m2,m3,l1min,l1max,thrcof,NDIM,ier)
-    IF( NUMXER(nerr)/=ier ) ipass5 = 0
+    IF( num_xer/=ier ) ipass5 = 0
     ! --- DRC3JJ: L1MIN GREATER THAN L1MAX (IER=4)
     !             (NO TEST -- THIS ERROR SHOULD NEVER OCCUR)
     ! --- DRC3JJ: DIMENSION OF THRCOF TOO SMALL (IER=5)
@@ -365,45 +365,45 @@ CONTAINS
     m2 = 0._DP
     m3 = 10._DP
     IF( Kprint>=3 ) WRITE (Lun,*)
-    CALL XERCLR
+    num_xer = 0
     CALL DRC3JJ(l2,l3,m2,m3,l1min,l1max,thrcof,NDIM,ier)
-    IF( NUMXER(nerr)/=ier ) ipass5 = 0
+    IF( num_xer/=ier ) ipass5 = 0
     ! --- DRC3JM: L1-ABS(M1) < ZERO OR L1+ABS(M1) NOT INTEGER (IER=1)
     l1 = 100._DP
     l2 = 2._DP
     l3 = 100._DP
     m1 = 150._DP
     IF( Kprint>=3 ) WRITE (Lun,*)
-    CALL XERCLR
+    num_xer = 0
     CALL DRC3JM(l1,l2,l3,m1,m2min,m2max,thrcof,NDIM,ier)
-    IF( NUMXER(nerr)/=ier ) ipass5 = 0
+    IF( num_xer/=ier ) ipass5 = 0
     ! --- DRC3JM: L1, L2, L3 DO NOT SATISFY TRIANGULAR CONDITION (IER=2)
     l1 = 20._DP
     l2 = 5._DP
     l3 = 10._DP
     m1 = -10._DP
     IF( Kprint>=3 ) WRITE (Lun,*)
-    CALL XERCLR
+    num_xer = 0
     CALL DRC3JM(l1,l2,l3,m1,m2min,m2max,thrcof,NDIM,ier)
-    IF( NUMXER(nerr)/=ier ) ipass5 = 0
+    IF( num_xer/=ier ) ipass5 = 0
     ! --- DRC3JM: L1+L2+L3 NOT INTEGER (IER=3)
     l1 = 1._DP
     l2 = 1.3_DP
     l3 = 1.5_DP
     m1 = 0._DP
     IF( Kprint>=3 ) WRITE (Lun,*)
-    CALL XERCLR
+    num_xer = 0
     CALL DRC3JM(l1,l2,l3,m1,m2min,m2max,thrcof,NDIM,ier)
-    IF( NUMXER(nerr)/=ier ) ipass5 = 0
+    IF( num_xer/=ier ) ipass5 = 0
     ! --- DRC3JM: M2MAX-M2MIN NOT INTEGER (IER=4)
     l1 = 1._DP
     l2 = 1.3_DP
     l3 = 1.7_DP
     m1 = 0._DP
     IF( Kprint>=3 ) WRITE (Lun,*)
-    CALL XERCLR
+    num_xer = 0
     CALL DRC3JM(l1,l2,l3,m1,m2min,m2max,thrcof,NDIM,ier)
-    IF( NUMXER(nerr)/=ier ) ipass5 = 0
+    IF( num_xer/=ier ) ipass5 = 0
     ! --- DRC3JM: M2MIN GREATER THAN M2MAX (IER=5)
     !             (NO TEST -- THIS ERROR SHOULD NEVER OCCUR)
     ! --- DRC3JM: DIMENSION OF THRCOF TOO SMALL (IER=6)
@@ -412,9 +412,9 @@ CONTAINS
     l3 = 110._DP
     m1 = -10._DP
     IF( Kprint>=3 ) WRITE (Lun,*)
-    CALL XERCLR
+    num_xer = 0
     CALL DRC3JM(l1,l2,l3,m1,m2min,m2max,thrcof,NDIM,ier)
-    IF( NUMXER(nerr)/=ier ) ipass5 = 0
+    IF( num_xer/=ier ) ipass5 = 0
     ! --- DRC6J: L2+L3+L5+L6 OR L4+L2+L6 NOT INTEGER (IER=1)
     l2 = 0.5_DP
     l3 = 1._DP
@@ -422,9 +422,9 @@ CONTAINS
     m2 = 2._DP
     m3 = 3._DP
     IF( Kprint>=3 ) WRITE (Lun,*)
-    CALL XERCLR
+    num_xer = 0
     CALL DRC6J(l2,l3,m1,m2,m3,l1min,l1max,sixcof,NDIM,ier)
-    IF( NUMXER(nerr)/=ier ) ipass5 = 0
+    IF( num_xer/=ier ) ipass5 = 0
     ! --- DRC6J: L4, L2, L6 TRIANGULAR CONDITION NOT SATISFIED (IER=2)
     l2 = 1._DP
     l3 = 3._DP
@@ -432,9 +432,9 @@ CONTAINS
     m2 = 6._DP
     m3 = 2._DP
     IF( Kprint>=3 ) WRITE (Lun,*)
-    CALL XERCLR
+    num_xer = 0
     CALL DRC6J(l2,l3,m1,m2,m3,l1min,l1max,sixcof,NDIM,ier)
-    IF( NUMXER(nerr)/=ier ) ipass5 = 0
+    IF( num_xer/=ier ) ipass5 = 0
     ! --- DRC6J: L4, L5, L3 TRIANGULAR CONDITION NOT SATISFIED (IER=3)
     l2 = 4._DP
     l3 = 1._DP
@@ -442,9 +442,9 @@ CONTAINS
     m2 = 3._DP
     m3 = 2._DP
     IF( Kprint>=3 ) WRITE (Lun,*)
-    CALL XERCLR
+    num_xer = 0
     CALL DRC6J(l2,l3,m1,m2,m3,l1min,l1max,sixcof,NDIM,ier)
-    IF( NUMXER(nerr)/=ier ) ipass5 = 0
+    IF( num_xer/=ier ) ipass5 = 0
     ! --- DRC6J: L1MAX-L1MIN NOT INTEGER (IER=4)
     l2 = 0.9_DP
     l3 = 0.5_DP
@@ -452,9 +452,9 @@ CONTAINS
     m2 = 0.4_DP
     m3 = 0.2_DP
     IF( Kprint>=3 ) WRITE (Lun,*)
-    CALL XERCLR
+    num_xer = 0
     CALL DRC6J(l2,l3,m1,m2,m3,l1min,l1max,sixcof,NDIM,ier)
-    IF( NUMXER(nerr)/=ier ) ipass5 = 0
+    IF( num_xer/=ier ) ipass5 = 0
     ! --- DRC6J: L1MIN GREATER THAN L1MAX (IER=5)
     !            (NO TEST -- THIS ERROR SHOULD NEVER OCCUR)
     ! --- DRC6J: DIMENSION OF SIXCOF TOO SMALL (IER=6)
@@ -464,9 +464,9 @@ CONTAINS
     m2 = 30._DP
     m3 = 40._DP
     IF( Kprint>=3 ) WRITE (Lun,*)
-    CALL XERCLR
+    num_xer = 0
     CALL DRC6J(l2,l3,m1,m2,m3,l1min,l1max,sixcof,NDIM,ier)
-    IF( NUMXER(nerr)/=ier ) ipass5 = 0
+    IF( num_xer/=ier ) ipass5 = 0
     IF( ipass5==0 ) THEN
       IF( Kprint>=1 ) THEN
         WRITE (Lun,*) ' ***** ***** TEST 5 FAILED ***** *****'
@@ -496,7 +496,7 @@ END MODULE TEST16_MOD
 !** TEST16
 PROGRAM TEST16
   USE TEST16_MOD, ONLY : DQC36J
-  USE slatec, ONLY : I1MACH, XSETF, XSETUN, XERMAX
+  USE slatec, ONLY : I1MACH, control_xer, max_xer
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !> Driver for testing SLATEC subprograms
@@ -542,7 +542,7 @@ PROGRAM TEST16
   !                 and Lee Walton, Guide to the SLATEC Common Mathema-
   !                 tical Library, April 10, 1990.
   !***
-  ! **Routines called:**  DQC36J, I1MACH, XERMAX, XSETF, XSETUN
+  ! **Routines called:**  DQC36J, I1MACH, XERMAX, XSETF
 
   !* REVISION HISTORY  (YYMMDD)
   !   891130  DATE WRITTEN
@@ -555,12 +555,11 @@ PROGRAM TEST16
   !     Read KPRINT parameter
   !
   CALL GET_ARGUMENT(kprint)
-  CALL XERMAX(1000)
-  CALL XSETUN(lun)
+  max_xer = 1000
   IF( kprint<=1 ) THEN
-    CALL XSETF(0)
+    control_xer = 0
   ELSE
-    CALL XSETF(1)
+    control_xer = 1
   END IF
   !
   !     Test double precision 3J6J routines

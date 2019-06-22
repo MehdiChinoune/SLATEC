@@ -432,8 +432,7 @@ CONTAINS
     !   900322  Made miscellaneous cosmetic changes.  (FNF)
     !   910708  Minor modifications in use of KPRINT.  (WRB)
     !   930504  Removed parens from constants in WRITE statements.  (FNF)
-    USE slatec, ONLY : CHFDV, CHFEV, PCHFD, PCHFE, XERDMP, XGETF, XSETF
-    USE common_mod, ONLY : COMP
+    USE slatec, ONLY : CHFDV, CHFEV, PCHFD, PCHFE, XERSVE, control_xer
     !
     !  Declare arguments.
     !
@@ -452,11 +451,11 @@ CONTAINS
     !* FIRST EXECUTABLE STATEMENT  EVERCK
     nerr = 0
     !
-    CALL XGETF(kontrl)
+    kontrl = control_xer
     IF( Kprint<=2 ) THEN
-      CALL XSETF(0)
+      control_xer = 0
     ELSE
-      CALL XSETF(1)
+      control_xer = 1
     END IF
     !
     IF( Kprint>=3 ) WRITE (Lout,99001)
@@ -471,19 +470,19 @@ CONTAINS
     !
     IF( Kprint>=3 ) WRITE (Lout,99005) -1
     CALL CHFEV(0._SP,1._SP,3._SP,7._SP,3._SP,6._SP,0,dum,dum,next,ierr)
-    IF( .NOT. COMP(ierr,-1,Lout,Kprint) ) nerr = nerr + 1
+    IF( ierr /= -1 ) nerr = nerr + 1
     !
     IF( Kprint>=3 ) WRITE (Lout,99005) -2
     CALL CHFEV(1._SP,1._SP,3._SP,7._SP,3._SP,6._SP,1,dum,dum,next,ierr)
-    IF( .NOT. COMP(ierr,-2,Lout,Kprint) ) nerr = nerr + 1
+    IF( ierr /= -2 ) nerr = nerr + 1
     !
     IF( Kprint>=3 ) WRITE (Lout,99005) -1
     CALL CHFDV(0._SP,1._SP,3._SP,7._SP,3._SP,6._SP,0,dum,dum,dum,next,ierr)
-    IF( .NOT. COMP(ierr,-1,Lout,Kprint) ) nerr = nerr + 1
+    IF( ierr /= -1 ) nerr = nerr + 1
     !
     IF( Kprint>=3 ) WRITE (Lout,99005) -2
     CALL CHFDV(1._SP,1._SP,3._SP,7._SP,3._SP,6._SP,1,dum,dum,dum,next,ierr)
-    IF( .NOT. COMP(ierr,-2,Lout,Kprint) ) nerr = nerr + 1
+    IF( ierr /= -2 ) nerr = nerr + 1
     !
     !  SET UP PCH DEFINITION.
     !
@@ -504,36 +503,36 @@ CONTAINS
     IF( Kprint>=3 ) WRITE (Lout,99005) -1
     skip = .FALSE.
     CALL PCHFE(1,x,f,d,1,skip,0,dum,dum,ierr)
-    IF( .NOT. COMP(ierr,-1,Lout,Kprint) ) nerr = nerr + 1
+    IF( ierr /= -1 ) nerr = nerr + 1
     !
     IF( Kprint>=3 ) WRITE (Lout,99005) -3
     skip = .FALSE.
     CALL PCHFE(N,x,f,d,1,skip,0,dum,dum,ierr)
-    IF( .NOT. COMP(ierr,-3,Lout,Kprint) ) nerr = nerr + 1
+    IF( ierr /= -3 ) nerr = nerr + 1
     !
     IF( Kprint>=3 ) WRITE (Lout,99005) -4
     skip = .TRUE.
     CALL PCHFE(N,x,f,d,1,skip,0,dum,dum,ierr)
-    IF( .NOT. COMP(ierr,-4,Lout,Kprint) ) nerr = nerr + 1
+    IF( ierr /= -4 ) nerr = nerr + 1
     !
     IF( Kprint>=3 ) WRITE (Lout,99005) -1
     skip = .FALSE.
     CALL PCHFD(1,x,f,d,1,skip,0,dum,dum,dum,ierr)
-    IF( .NOT. COMP(ierr,-1,Lout,Kprint) ) nerr = nerr + 1
+    IF( ierr /= -1 ) nerr = nerr + 1
     !
     IF( Kprint>=3 ) WRITE (Lout,99005) -3
     skip = .FALSE.
     CALL PCHFD(N,x,f,d,1,skip,0,dum,dum,dum,ierr)
-    IF( .NOT. COMP(ierr,-3,Lout,Kprint) ) nerr = nerr + 1
+    IF( ierr /= -3 ) nerr = nerr + 1
     !
     IF( Kprint>=3 ) WRITE (Lout,99005) -4
     skip = .TRUE.
     CALL PCHFD(N,x,f,d,1,skip,0,dum,dum,dum,ierr)
-    IF( .NOT. COMP(ierr,-4,Lout,Kprint) ) nerr = nerr + 1
+    IF( ierr /= -4 ) nerr = nerr + 1
     !
     !  SUMMARIZE RESULTS.
     !
-    IF( Kprint>2 ) CALL XERDMP
+    IF( Kprint>2 ) CALL XERSVE(' ',' ',0,0,0,i)
     IF( nerr==0 ) THEN
       Fail = .FALSE.
       IF( Kprint>=2 ) WRITE (Lout,99003)
@@ -547,7 +546,7 @@ CONTAINS
     !
     !  TERMINATE.
     !
-    CALL XSETF(kontrl)
+    control_xer = kontrl
     RETURN
     99005 FORMAT (/' THIS CALL SHOULD RETURN IERR =',I3)
     !------------- LAST LINE OF EVERCK FOLLOWS -----------------------------
@@ -1287,7 +1286,6 @@ CONTAINS
     !   910708  Minor modifications in use of KPRINT.  (WRB)
     !   930317  Improved output formats.  (FNF)
     USE slatec, ONLY : PCHIC, PCHIM, PCHSP, R1MACH
-    USE common_mod, ONLY : COMP
     !
     !*Internal Notes:
     !
@@ -1370,7 +1368,7 @@ CONTAINS
     !     --------------------------------
     !        Expect IERR=1 (one monotonicity switch).
     IF( Kprint>=3 ) WRITE (Lun,99012) 1
-    IF( .NOT. COMP(ierr,1,Lun,Kprint) ) THEN
+    IF( ierr /= 1 ) THEN
       ifail = ifail + 1
     ELSE
       IF( Kprint>=3 ) WRITE (Lun,99013)
@@ -1413,7 +1411,7 @@ CONTAINS
     !     --------------------------------------------------------
     !        Expect IERR=0 .
     IF( Kprint>=3 ) WRITE (Lun,99012) 0
-    IF( .NOT. COMP(ierr,0,Lun,Kprint) ) THEN
+    IF( ierr /= 0 ) THEN
       ifail = ifail + 1
     ELSE
       IF( Kprint>=3 ) WRITE (Lun,99013)
@@ -1445,7 +1443,7 @@ CONTAINS
     !     -------------------------------------------------------
     !        Expect IERR=0 .
     IF( Kprint>=3 ) WRITE (Lun,99012) 0
-    IF( .NOT. COMP(ierr,0,Lun,Kprint) ) THEN
+    IF( ierr /= 0 ) THEN
       ifail = ifail + 1
     ELSE
       IF( Kprint>=3 ) WRITE (Lun,99013)
@@ -1493,7 +1491,7 @@ CONTAINS
     !     -------------------------------------------------
     !        Expect IERR=0 .
     IF( Kprint>=3 ) WRITE (Lun,99012) 0
-    IF( .NOT. COMP(ierr,0,Lun,Kprint) ) THEN
+    IF( ierr /= 0 ) THEN
       ifail = ifail + 1
     ELSE
       IF( Kprint>=3 ) WRITE (Lun,99013)
@@ -2002,7 +2000,7 @@ END MODULE TEST32_MOD
 !** TEST32
 PROGRAM TEST32
   USE TEST32_MOD, ONLY : PCHQK1, PCHQK2, PCHQK3, PCHQK4, PCHQK5
-  USE slatec, ONLY : I1MACH, XSETF, XSETUN, XERMAX
+  USE slatec, ONLY : I1MACH, control_xer, max_xer
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !> Driver for testing SLATEC subprograms
@@ -2045,7 +2043,7 @@ PROGRAM TEST32
   !                 tical Library, April 10, 1990.
   !***
   ! **Routines called:**  I1MACH, PCHQK1, PCHQK2, PCHQK3, PCHQK4, PCHQK5,
-  !                    XERMAX, XSETF, XSETUN
+  !                    XERMAX, XSETF
 
   !* REVISION HISTORY  (YYMMDD)
   !   890618  DATE WRITTEN
@@ -2064,12 +2062,11 @@ PROGRAM TEST32
   !     Read KPRINT parameter
   !
   CALL GET_ARGUMENT(kprint)
-  CALL XERMAX(1000)
-  CALL XSETUN(lun)
+  max_xer = 1000
   IF( kprint<=1 ) THEN
-    CALL XSETF(0)
+    control_xer = 0
   ELSE
-    CALL XSETF(1)
+    control_xer = 1
   END IF
   !
   !     Test PCHIP evaluators

@@ -156,7 +156,7 @@ SUBROUTINE XERMSG(Subrou,Messg,Nerr,Level)
   !                 Error-handling Package, SAND82-0800, Sandia
   !                 Laboratories, 1982.
   !***
-  ! **Routines called:**  FDUMP, XERCNT, XERHLT, XERPRN, XERSVE
+  ! **Routines called:**  XERPRN, XERSVE
 
   !* REVISION HISTORY  (YYMMDD)
   !   880101  DATE WRITTEN
@@ -199,8 +199,8 @@ SUBROUTINE XERMSG(Subrou,Messg,Nerr,Level)
   CHARACTER(72) :: temp
   CHARACTER(20) :: lfirst
   !* FIRST EXECUTABLE STATEMENT  XERMSG
-  lkntrl = J4SAVE(2,0,.FALSE.)
-  maxmes = J4SAVE(4,0,.FALSE.)
+  lkntrl = control_xer
+  maxmes = max_xer
   !
   !       LKNTRL IS A LOCAL COPY OF THE CONTROL FLAG KONTRL.
   !       MAXMES IS THE MAXIMUM NUMBER OF TIMES ANY PARTICULAR MESSAGE
@@ -219,7 +219,7 @@ SUBROUTINE XERMSG(Subrou,Messg,Nerr,Level)
   !
   !       RECORD THE MESSAGE.
   !
-  i = J4SAVE(1,Nerr,.TRUE.)
+  num_xer = Nerr
   CALL XERSVE(Subrou,Messg,1,Nerr,Level,kount)
   !
   !       HANDLE PRINT-ONCE WARNING MESSAGES.
@@ -329,7 +329,6 @@ SUBROUTINE XERMSG(Subrou,Messg,Nerr,Level)
             END DO
             !
             CALL XERPRN(' *  ',-1,temp(1:15)//temp(i:23),72)
-            CALL FDUMP
           END IF
           !
           !       IF LKNTRL IS NOT ZERO, PRINT A BLANK LINE AND AN END OF MESSAGE.

@@ -119,7 +119,7 @@ SUBROUTINE LSSODS(A,X,B,M,N,Nrda,Iflag,Irank,Iscale,Q,Diag,Kpivot,Iter,&
   !   900402  Added TYPE section.  (WRB)
   !   910408  Updated the REFERENCES section.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  USE service, ONLY : XERMSG, XGETF, XSETF, XERMAX, J4SAVE, R1MACH
+  USE service, ONLY : XERMSG, control_xer, max_xer, R1MACH
   INTEGER :: Iflag, Irank, Iter, M, N, Nrda, Kpivot(N)
   REAL(SP) :: Resnrm, Xnorm
   REAL(SP) :: A(Nrda,N), B(M), Diag(N), Div(N), Q(Nrda,N), R(M), Scales(N), Td(N), &
@@ -142,13 +142,13 @@ SUBROUTINE LSSODS(A,X,B,M,N,Nrda,Iflag,Irank,Iscale,Q,Diag,Kpivot,Iter,&
     IF( Iter>=0 ) THEN
       IF( Iflag<=0 ) THEN
         !
-        CALL XGETF(nfatal)
-        maxmes = J4SAVE(4,0,.FALSE.)
+        nfatal = control_xer
+        maxmes = max_xer
         IF( Iflag/=0 ) THEN
           nfat = -1
           IF( nfatal==0 ) nfat = 0
-          CALL XSETF(nfat)
-          CALL XERMAX(1)
+          control_xer = nfat
+          max_xer = 1
         END IF
         !
         !     COPY MATRIX A INTO MATRIX Q
@@ -164,8 +164,8 @@ SUBROUTINE LSSODS(A,X,B,M,N,Nrda,Iflag,Irank,Iscale,Q,Diag,Kpivot,Iter,&
         !
         CALL ORTHOL(Q,M,N,Nrda,Iflag,Irank,Iscale,Diag,Kpivot,Scales,Z,Td)
         !
-        CALL XSETF(nfatal)
-        CALL XERMAX(maxmes)
+        control_xer = nfatal
+        max_xer = maxmes
         IF( Irank==N ) THEN
           !
           !     STORE DIVISORS FOR THE TRIANGULAR SOLUTION

@@ -39,9 +39,9 @@ CONTAINS
     !   910801  Editorial changes, some restructing and modifications to
     !           obtain more information when there is failure of the
     !           Wronskian.  (WRB)
-    USE slatec, ONLY : D1MACH, DBESI, DBESK, NUMXER, XERCLR, XGETF, XSETF
+    USE slatec, ONLY : D1MACH, DBESI, DBESK, num_xer, control_xer
     INTEGER :: Kprint
-    INTEGER :: i, Ipass, ix, k, kode, kontrl, Lun, m, n, nerr, nu, nw, ny
+    INTEGER :: i, Ipass, ix, k, kode, kontrl, Lun, m, n, nu, nw, ny
     REAL(DP) :: alp, del, er, fnu, fnup, rx, tol, x
     REAL(DP) :: fn(3), w(5), xx(5), y(5)
     LOGICAL :: fatal
@@ -196,14 +196,14 @@ CONTAINS
     !
     !     Trigger 10 error conditions
     !
-    CALL XGETF(kontrl)
+    kontrl = control_xer
     IF( Kprint<=2 ) THEN
-      CALL XSETF(0)
+      control_xer = 0
     ELSE
-      CALL XSETF(1)
+      control_xer = 1
     END IF
     fatal = .FALSE.
-    CALL XERCLR
+    num_xer = 0
     !
     IF( Kprint>=3 ) WRITE (Lun,99007)
     99007 FORMAT (//' TRIGGER 10 ERROR CONDITIONS'//)
@@ -219,17 +219,17 @@ CONTAINS
       k = INT(xx(3))
       n = INT(xx(4))
       CALL DBESI(xx(1),xx(2),k,n,y,ny)
-      IF( NUMXER(nerr)/=2 ) THEN
+      IF( num_xer/=2 ) THEN
         Ipass = 0
         fatal = .TRUE.
       END IF
-      CALL XERCLR
+      num_xer = 0
       CALL DBESK(xx(1),xx(2),k,n,w,nw)
-      IF( NUMXER(nerr)/=2 ) THEN
+      IF( num_xer/=2 ) THEN
         Ipass = 0
         fatal = .TRUE.
       END IF
-      CALL XERCLR
+      num_xer = 0
       xx(i) = -xx(i)
     END DO
     !
@@ -239,21 +239,21 @@ CONTAINS
     n = 3
     alp = 2.3_DP
     CALL DBESI(x,alp,1,n,y,ny)
-    IF( NUMXER(nerr)/=6 ) THEN
+    IF( num_xer/=6 ) THEN
       Ipass = 0
       fatal = .TRUE.
     END IF
-    CALL XERCLR
+    num_xer = 0
     !
     x = D1MACH(1)*10._DP
     CALL DBESK(x,alp,1,n,w,nw)
-    IF( NUMXER(nerr)/=6 ) THEN
+    IF( num_xer/=6 ) THEN
       Ipass = 0
       fatal = .TRUE.
     END IF
-    CALL XERCLR
+    num_xer = 0
     !
-    CALL XSETF(kontrl)
+    control_xer = kontrl
     IF( fatal ) THEN
       IF( Kprint>=2 ) THEN
         WRITE (Lun,99008)
@@ -305,9 +305,9 @@ CONTAINS
     !   910801  Editorial changes, some restructing and modifications to
     !           obtain more information when there is failure of the
     !           Wronskian.  (WRB)
-    USE slatec, ONLY : D1MACH, DBESJ, DBESY, NUMXER, XERCLR, XGETF, XSETF
+    USE slatec, ONLY : D1MACH, DBESJ, DBESY, num_xer, control_xer
     INTEGER :: Kprint
-    INTEGER :: i, Ipass, ix, k, kontrl, Lun, m, n, nerr, nu, ny
+    INTEGER :: i, Ipass, ix, k, kontrl, Lun, m, n, nu, ny
     REAL(DP) :: alp, del, er, fnu, fnup, rhpi, rx, tol, x
     REAL(DP) :: fn(3), w(5), xx(5), y(5)
     LOGICAL :: fatal
@@ -439,14 +439,14 @@ CONTAINS
     !
     !     Trigger 7 error conditions
     !
-    CALL XGETF(kontrl)
+    kontrl = control_xer
     IF( Kprint<=2 ) THEN
-      CALL XSETF(0)
+      control_xer = 0
     ELSE
-      CALL XSETF(1)
+      control_xer = 1
     END IF
     fatal = .FALSE.
-    CALL XERCLR
+    num_xer = 0
     !
     IF( Kprint>=3 ) WRITE (Lun,99006)
     99006 FORMAT (//' TRIGGER 7 ERROR CONDITIONS'//)
@@ -460,17 +460,17 @@ CONTAINS
       xx(i) = -xx(i)
       n = INT(xx(3))
       CALL DBESJ(xx(1),xx(2),n,y,ny)
-      IF( NUMXER(nerr)/=2 ) THEN
+      IF( num_xer/=2 ) THEN
         Ipass = 0
         fatal = .TRUE.
       END IF
-      CALL XERCLR
+      num_xer = 0
       CALL DBESY(xx(1),xx(2),n,w)
-      IF( NUMXER(nerr)/=2 ) THEN
+      IF( num_xer/=2 ) THEN
         Ipass = 0
         fatal = .TRUE.
       END IF
-      CALL XERCLR
+      num_xer = 0
       xx(i) = -xx(i)
     END DO
     !
@@ -480,12 +480,12 @@ CONTAINS
     n = 3
     alp = 2.3_DP
     CALL DBESY(x,alp,n,w)
-    IF( NUMXER(nerr)/=6 ) THEN
+    IF( num_xer/=6 ) THEN
       Ipass = 0
       fatal = .TRUE.
     END IF
-    CALL XERCLR
-    CALL XSETF(kontrl)
+    num_xer = 0
+    control_xer = kontrl
     IF( fatal ) THEN
       IF( Kprint>=2 ) THEN
         WRITE (Lun,99007)
@@ -709,7 +709,7 @@ END MODULE TEST06_MOD
 !** TEST06
 PROGRAM TEST06
   USE TEST06_MOD, ONLY : DBIKCK, DBJYCK, DEG8CK
-  USE slatec, ONLY : I1MACH, XSETF, XSETUN, XERMAX
+  USE slatec, ONLY : I1MACH, control_xer, max_xer
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !> Driver for testing SLATEC subprograms
@@ -770,12 +770,11 @@ PROGRAM TEST06
   !     Read KPRINT parameter
   !
   CALL GET_ARGUMENT(kprint)
-  CALL XERMAX(1000)
-  CALL XSETUN(lun)
+  max_xer = 1000
   IF( kprint<=1 ) THEN
-    CALL XSETF(0)
+    control_xer = 0
   ELSE
-    CALL XSETF(1)
+    control_xer = 1
   END IF
   !
   !     Test DEXINT and DQAUS8

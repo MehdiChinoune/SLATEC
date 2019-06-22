@@ -85,19 +85,9 @@ SUBROUTINE XERPRN(Prefix,Npref,Messg,Nwrap)
   CHARACTER(*) Prefix, Messg
   INTEGER :: Npref, Nwrap
   CHARACTER(148) :: cbuff
-  INTEGER :: iu(5), nunit
   CHARACTER(2), PARAMETER :: NEWLIN = '$$'
   !* FIRST EXECUTABLE STATEMENT  XERPRN
-  CALL XGETUA(iu,nunit)
-  !
-  !       A ZERO VALUE FOR A LOGICAL UNIT NUMBER MEANS TO USE THE STANDARD
-  !       ERROR MESSAGE UNIT INSTEAD.  I1MACH(4) RETRIEVES THE STANDARD
-  !       ERROR MESSAGE UNIT.
-  !
-  n = I1MACH(4)
-  DO i = 1, nunit
-    IF( iu(i)==0 ) iu(i) = n
-  END DO
+
   !
   !       LPREF IS THE LENGTH OF THE PREFIX.  THE PREFIX IS PLACED AT THE
   !       BEGINNING OF CBUFF, THE CHARACTER BUFFER, AND KEPT THERE DURING
@@ -129,9 +119,7 @@ SUBROUTINE XERPRN(Prefix,Npref,Messg,Nwrap)
   !
   IF( lenmsg==0 ) THEN
     cbuff(lpref+1:lpref+1) = ' '
-    DO i = 1, nunit
-      WRITE (iu(i),'(A)') cbuff(1:lpref+1)
-    END DO
+    WRITE (I1MACH(4),'(A)') cbuff(1:lpref+1)
     RETURN
   END IF
   !
@@ -226,9 +214,7 @@ SUBROUTINE XERPRN(Prefix,Npref,Messg,Nwrap)
     !
     !       PRINT
     !
-    DO i = 1, nunit
-      WRITE (iu(i),'(A)') cbuff(1:lpref+lpiece)
-    END DO
+    WRITE (I1MACH(4),'(A)') cbuff(1:lpref+lpiece)
     !
     IF( nextc>lenmsg ) EXIT
   END DO
