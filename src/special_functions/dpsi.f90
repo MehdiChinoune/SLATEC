@@ -1,5 +1,5 @@
 !** DPSI
-REAL(DP) FUNCTION DPSI(X)
+REAL(DP) ELEMENTAL FUNCTION DPSI(X)
   !> Compute the Psi (or Digamma) function.
   !***
   ! **Library:**   SLATEC (FNLIB)
@@ -45,11 +45,11 @@ REAL(DP) FUNCTION DPSI(X)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900727  Added EXTERNAL statement.  (WRB)
   !   920618  Removed space from variable name.  (RWC, WRB)
-  USE service, ONLY : XERMSG, D1MACH
-  REAL(DP) :: X
+  USE service, ONLY : D1MACH
+  REAL(DP), INTENT(IN) :: X
   INTEGER :: i, n
   REAL(DP) :: aux, y
-  INTEGER, SAVE :: ntpsi, ntapsi
+  INTEGER, PARAMETER :: ntpsi = 23, ntapsi = 6
   REAL(DP), PARAMETER :: xbig = 1._DP/SQRT(D1MACH(3)), dxrel = SQRT(D1MACH(4))
   REAL(DP), PARAMETER :: psics(42) = [ -.38057080835217921520437677667039E-1_DP, &
     +.49141539302938712748204699654277E+0_DP, -.56815747821244730242892064734081E-1_DP, &
@@ -83,13 +83,9 @@ REAL(DP) FUNCTION DPSI(X)
     -.556901618245983607466666666666E-29_DP, +.195867922607736251733333333333E-30_DP, &
     -.775195892523335680000000000000E-32_DP ]
   REAL(DP), PARAMETER :: pi = 3.14159265358979323846264338327950_DP
-  LOGICAL, SAVE :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  DPSI
-  IF( first ) THEN
-    ntpsi = INITDS(psics,42,0.1_SP*D1MACH(3))
-    ntapsi = INITDS(apsics,16,0.1_SP*D1MACH(3))
-    first = .FALSE.
-  END IF
+  ! ntpsi = INITDS(psics,0.1_SP*D1MACH(3))
+  ! ntapsi = INITDS(apsics,0.1_SP*D1MACH(3))
   !
   y = ABS(X)
   !
@@ -98,7 +94,7 @@ REAL(DP) FUNCTION DPSI(X)
     ! DPSI(X) FOR ABS(X) > 10.0
     !
     aux = 0._DP
-    IF( y<xbig ) aux = DCSEVL(2._DP*(10._DP/y)**2-1._DP,apsics,ntapsi)
+    IF( y<xbig ) aux = DCSEVL(2._DP*(10._DP/y)**2-1._DP,apsics(1:ntapsi))
     !
     IF( X<0._DP ) THEN
       DPSI = LOG(ABS(X)) - 0.5_DP/X + aux - pi*DCOT(pi*X)
@@ -114,18 +110,16 @@ REAL(DP) FUNCTION DPSI(X)
     IF( X<0._DP ) n = n - 1
     y = X - n
     n = n - 1
-    DPSI = DCSEVL(2._DP*y-1._DP,psics,ntpsi)
+    DPSI = DCSEVL(2._DP*y-1._DP,psics(1:ntpsi))
     IF( n==0 ) RETURN
     !
     IF( n<=0 ) THEN
       !
       n = -n
-      IF( X==0._DP ) CALL XERMSG('DPSI','X IS 0',2,2)
-      IF( X<0._DP .AND. X+n-2==0._DP )&
-        CALL XERMSG('DPSI','X IS A NEGATIVE INTEGER',3,2)
-      IF( X<(-0.5_DP) .AND. ABS((X-AINT(X-0.5_DP))/X)<dxrel )&
-        CALL XERMSG('DPSI',&
-        'ANSWER LT HALF PRECISION BECAUSE X TOO NEAR NEGATIVE INTEGER',1,1)
+      IF( X==0._DP ) ERROR STOP 'DPSI : X IS 0'
+      IF( X<0._DP .AND. X+n-2==0._DP ) ERROR STOP 'DPSI : X IS A NEGATIVE INTEGER'
+      ! IF( X<(-0.5_DP) .AND. ABS((X-AINT(X-0.5_DP))/X)<dxrel )&
+        ! CALL XERMSG('DPSI','ANSWER LT HALF PRECISION BECAUSE X TOO NEAR NEGATIVE INTEGER'
       !
       DO i = 1, n
         DPSI = DPSI - 1._DP/(X+i-1)
@@ -139,5 +133,6 @@ REAL(DP) FUNCTION DPSI(X)
   DO i = 1, n
     DPSI = DPSI + 1._DP/(y+i)
   END DO
+
   RETURN
 END FUNCTION DPSI

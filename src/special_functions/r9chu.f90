@@ -1,7 +1,7 @@
 !** R9CHU
-REAL(SP) FUNCTION R9CHU(A,B,Z)
-  !> Evaluate for large Z  Z**A * U(A,B,Z) where U is the
-  !            logarithmic confluent hypergeometric function.
+REAL(SP) ELEMENTAL FUNCTION R9CHU(A,B,Z)
+  !> Evaluate for large Z  Z**A * U(A,B,Z) where U is the logarithmic confluent
+  !  hypergeometric function.
   !***
   ! **Library:**   SLATEC (FNLIB)
   !***
@@ -34,8 +34,8 @@ REAL(SP) FUNCTION R9CHU(A,B,Z)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
-  USE service, ONLY : XERMSG, R1MACH
-  REAL(SP) :: A, B, Z
+  USE service, ONLY : R1MACH
+  REAL(SP), INTENT(IN) :: A, B, Z
   INTEGER:: i, j
   REAL(SP) :: aa(4), ab, anbn, bb(4), bp, c2, ct1, ct2, ct3, d1z, g1, g2, g3, sab, x2i1
   REAL(SP), PARAMETER :: eps = 4._SP*R1MACH(4), sqeps = SQRT(R1MACH(4))
@@ -84,11 +84,10 @@ REAL(SP) FUNCTION R9CHU(A,B,Z)
       aa(j) = aa(j+1)
     END DO
   END DO
-  CALL XERMSG('R9CHU','NO CONVERGENCE IN 300 TERMS',1,2)
+  ERROR STOP 'R9CHU : NO CONVERGENCE IN 300 TERMS'
   !
   100  R9CHU = aa(4)/bb(4)
   !
-  IF( R9CHU<sqeps .OR. R9CHU>1._SP/sqeps )&
-    CALL XERMSG('R9CHU','ANSWER LESS THAN HALF PRECISION',2,1)
+  !IF( R9CHU<sqeps .OR. R9CHU>1._SP/sqeps ) 'R9CHU : ANSWER LESS THAN HALF PRECISION',2,1)
   !
 END FUNCTION R9CHU

@@ -1,7 +1,6 @@
 !** D9B1MP
-SUBROUTINE D9B1MP(X,Ampl,Theta)
-  !> Evaluate the modulus and phase for the J1 and Y1 Bessel
-  !            functions.
+ELEMENTAL SUBROUTINE D9B1MP(X,Ampl,Theta)
+  !> Evaluate the modulus and phase for the J1 and Y1 Bessel functions.
   !***
   ! **Library:**   SLATEC (FNLIB)
   !***
@@ -57,10 +56,11 @@ SUBROUTINE D9B1MP(X,Ampl,Theta)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
   !   920618  Removed space from variable name and code restructured to
   !           use IF-THEN-ELSE.  (RWC, WRB)
-  USE service, ONLY : XERMSG, D1MACH
-  REAL(DP) :: X, Ampl, Theta
+  USE service, ONLY : D1MACH
+  REAL(DP), INTENT(IN) :: X
+  REAL(DP), INTENT(OUT) :: Ampl, Theta
   REAL(DP) :: z
-  INTEGER, SAVE :: nbm1, nbt12, nbm12, nbth1
+  INTEGER, PARAMETER :: nbm1 = 15, nbt12 = 16, nbm12 = 13, nbth1 = 14
   REAL(DP), PARAMETER :: eta = 0.1_DP*D1MACH(3), xmax = 1._DP/D1MACH(4)
   REAL(DP), PARAMETER :: bm1cs(37) = [ +.1069845452618063014969985308538E+0_DP, &
     +.3274915039715964900729055143445E-2_DP, -.2987783266831698592030445777938E-4_DP, &
@@ -146,30 +146,24 @@ SUBROUTINE D9B1MP(X,Ampl,Theta)
     -.16771639203643714856501347882887E-30_DP, +.68361997776664389173535928028528E-31_DP, &
     -.28172247861233641166739574622810E-31_DP ]
   REAL(DP), PARAMETER ::  pi4 = 0.785398163397448309615660845819876_DP
-  LOGICAL, SAVE :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  D9B1MP
-  IF( first ) THEN
-    nbm1 = INITDS(bm1cs,37,eta)
-    nbt12 = INITDS(bt12cs,39,eta)
-    nbm12 = INITDS(bm12cs,40,eta)
-    nbth1 = INITDS(bth1cs,44,eta)
-    first = .FALSE.
-  END IF
+  ! nbm1 = INITDS(bm1cs,eta)
+  ! nbt12 = INITDS(bt12cs,eta)
+  ! nbm12 = INITDS(bm12cs,eta)
+  ! nbth1 = INITDS(bth1cs,eta)
   !
   IF( X<4._DP ) THEN
-    CALL XERMSG('D9B1MP','X must be >= 4',1,2)
-    Ampl = 0._DP
-    Theta = 0._DP
+    ERROR STOP 'D9B1MP : X must be >= 4'
   ELSEIF( X<=8._DP ) THEN
     z = (128._DP/(X*X)-5._DP)/3._DP
-    Ampl = (0.75_DP+DCSEVL(z,bm1cs,nbm1))/SQRT(X)
-    Theta = X - 3._DP*pi4 + DCSEVL(z,bt12cs,nbt12)/X
-  ELSE
-    IF( X>xmax ) CALL XERMSG('D9B1MP',&
-      'No precision because X is too big',2,2)
-    !
+    Ampl = (0.75_DP+DCSEVL(z,bm1cs(1:nbm1)))/SQRT(X)
+    Theta = X - 3._DP*pi4 + DCSEVL(z,bt12cs(1:nbt12))/X
+  ELSEIF( X<=xmax ) THEN
     z = 128._DP/(X*X) - 1._DP
-    Ampl = (0.75_DP+DCSEVL(z,bm12cs,nbm12))/SQRT(X)
-    Theta = X - 3._DP*pi4 + DCSEVL(z,bth1cs,nbth1)/X
+    Ampl = (0.75_DP+DCSEVL(z,bm12cs(1:nbm12)))/SQRT(X)
+    Theta = X - 3._DP*pi4 + DCSEVL(z,bth1cs(1:nbth1))/X
+  ELSE
+    ERROR STOP 'D9B1MP : No precision because X is too big'
   END IF
+
 END SUBROUTINE D9B1MP

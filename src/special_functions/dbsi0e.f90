@@ -1,7 +1,7 @@
 !** DBSI0E
-REAL(DP) FUNCTION DBSI0E(X)
+REAL(DP) ELEMENTAL FUNCTION DBSI0E(X)
   !> Compute the exponentially scaled modified (hyperbolic)
-  !            Bessel function of the first kind of order zero.
+  !  Bessel function of the first kind of order zero.
   !***
   ! **Library:**   SLATEC (FNLIB)
   !***
@@ -51,9 +51,9 @@ REAL(DP) FUNCTION DBSI0E(X)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   USE service, ONLY : D1MACH
-  REAL(DP) :: X
+  REAL(DP), INTENT(IN) :: X
   REAL(DP) :: y
-  INTEGER, SAVE :: nti0, ntai0, ntai02
+  INTEGER, PARAMETER :: nti0 = 11, ntai0 = 22, ntai02 = 24
   REAL(DP), PARAMETER :: eta = 0.1_DP*D1MACH(3), xsml = SQRT(4.5_DP*D1MACH(3))
   REAL(DP), PARAMETER :: bi0cs(18) = [ -.7660547252839144951081894976243285E-1_DP, &
     +.1927337953993808269952408750881196E+1_DP, +.2282644586920301338937029292330415E+0_DP, &
@@ -124,24 +124,21 @@ REAL(DP) FUNCTION DBSI0E(X)
     +.1237585142281395724899271545541E-29_DP, -.1102259120409223803217794787792E-29_DP, &
     +.1886287118039704490077874479431E-30_DP, +.2160196872243658913149031414060E-30_DP, &
     -.1605454124919743200584465949655E-30_DP, +.1965352984594290603938848073318E-31_DP ]
-  LOGICAL, SAVE :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  DBSI0E
-  IF( first ) THEN
-    nti0 = INITDS(bi0cs,18,eta)
-    ntai0 = INITDS(ai0cs,46,eta)
-    ntai02 = INITDS(ai02cs,69,eta)
-    first = .FALSE.
-  END IF
+  ! nti0 = INITDS(bi0cs,eta)
+  ! ntai0 = INITDS(ai0cs,eta)
+  ! ntai02 = INITDS(ai02cs,eta)
   !
   y = ABS(X)
-  IF( y>3._DP ) THEN
-    !
-    IF( y<=8._DP ) DBSI0E = (0.375_DP+DCSEVL((48._DP/y-11._DP)/5._DP,ai0cs,ntai0))/SQRT(y)
-    IF( y>8._DP ) DBSI0E = (0.375_DP+DCSEVL(16._DP/y-1._DP,ai02cs,ntai02))/SQRT(y)
-    RETURN
+  IF( y>8._DP ) THEN
+    DBSI0E = (0.375_DP+DCSEVL(16._DP/y-1._DP,ai02cs(1:ntai02)))/SQRT(y)
+  ELSEIF( y>3._DP ) THEN
+    DBSI0E = (0.375_DP+DCSEVL((48._DP/y-11._DP)/5._DP,ai0cs(1:ntai0)))/SQRT(y)
+  ELSEIF( y>xsml ) THEN
+    DBSI0E = EXP(-y)*(2.75_DP+DCSEVL(y*y/4.5_DP-1._DP,bi0cs(1:nti0)))
+  ELSE
+    DBSI0E = 1._DP - X
   END IF
-  !
-  DBSI0E = 1._DP - X
-  IF( y>xsml ) DBSI0E = EXP(-y)*(2.75_DP+DCSEVL(y*y/4.5_DP-1._DP,bi0cs,nti0))
+
   RETURN
 END FUNCTION DBSI0E

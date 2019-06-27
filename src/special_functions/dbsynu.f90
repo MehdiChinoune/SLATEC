@@ -1,5 +1,5 @@
 !** DBSYNU
-SUBROUTINE DBSYNU(X,Fnu,N,Y)
+PURE SUBROUTINE DBSYNU(X,Fnu,N,Y)
   !> Subsidiary to DBESY
   !***
   ! **Library:**   SLATEC
@@ -12,9 +12,9 @@ SUBROUTINE DBSYNU(X,Fnu,N,Y)
   !
   !     Abstract  **** A DOUBLE PRECISION routine ****
   !         DBSYNU computes N member sequences of Y Bessel functions
-  !         Y/SUB(FNU+I-1)/(X), I=1,N for non-negative orders FNU and
+  !         Y_{FNU+I-1}(X), I=1,N for non-negative orders FNU and
   !         positive X. Equations of the references are implemented on
-  !         small orders DNU for Y/SUB(DNU)/(X) and Y/SUB(DNU+1)/(X).
+  !         small orders DNU for Y_{DNU}(X) and Y_{DNU+1}(X).
   !         Forward recursion with the three term recursion relation
   !         generates higher orders FNU+I-1, I=1,...,N.
   !
@@ -44,7 +44,7 @@ SUBROUTINE DBSYNU(X,Fnu,N,Y)
   !
   !         OUTPUT
   !           Y      - A vector whose first N components contain values
-  !                    for the sequence Y(I)=Y/SUB(FNU+I-1), I=1,N.
+  !                    for the sequence Y(I)=Y_{FNU+I-1}, I=1,N.
   !
   !     Error Conditions
   !         Improper input arguments - a fatal error
@@ -74,10 +74,11 @@ SUBROUTINE DBSYNU(X,Fnu,N,Y)
   !   900727  Added EXTERNAL statement.  (WRB)
   !   910408  Updated the AUTHOR and REFERENCES sections.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  USE service, ONLY : XERMSG, D1MACH
+  USE service, ONLY : D1MACH
   !
-  INTEGER :: N
-  REAL(DP) :: Fnu, X, Y(N)
+  INTEGER, INTENT(IN) :: N
+  REAL(DP), INTENT(IN) :: Fnu, X
+  REAL(DP), INTENT(OUT) :: Y(N)
   INTEGER :: i, inu, j, k, kk, nn
   REAL(DP) :: a(120), ak, arg, a1, a2, bk, cb(120), cbk, cck, ck, coef, cpt, cp1, cp2, &
     cs, cs1, cs2, cx, dnu, dnu2, etest, etx, f, fc, fhs, fk, fks, flrx, fmu, fn, &
@@ -94,16 +95,11 @@ SUBROUTINE DBSYNU(X,Fnu,N,Y)
   tol = MAX(ak,1.E-15_DP)
   s2 = 0._DP
   IF( X<=0._DP ) THEN
-    !
-    !
-    CALL XERMSG('DBSYNU','X NOT GREATER THAN ZERO',2,1)
-    RETURN
+    ERROR STOP 'DBSYNU : X < 0'
   ELSEIF( Fnu<0._DP ) THEN
-    CALL XERMSG('DBSYNU','FNU NOT ZERO OR POSITIVE',2,1)
-    RETURN
+    ERROR STOP 'DBSYNU : FNU < 0'
   ELSEIF( N<1 ) THEN
-    CALL XERMSG('DBSYNU','N NOT GREATER THAN 0',2,1)
-    RETURN
+    ERROR STOP 'DBSYNU : N < 1'
   ELSE
     rx = 2._DP/X
     inu = INT(Fnu+0.5_DP)
@@ -359,5 +355,6 @@ SUBROUTINE DBSYNU(X,Fnu,N,Y)
     Y(i) = ck*Y(i-1) - Y(i-2)
     ck = ck + rx
   END DO
+
   RETURN
 END SUBROUTINE DBSYNU

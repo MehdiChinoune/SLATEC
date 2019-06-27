@@ -38,50 +38,54 @@ CONTAINS
       kontrl = 0
     END IF
     control_xer = kontrl
+    ier = 0
+    ipass1 = 1
+    ipass2 = 1
+    ipass3 = 1
     !
     !  FORCE ERROR 1
     !
-    IF( Kprint>=3 ) WRITE (Lun,99001)
-    99001 FORMAT (' RC - FORCE ERROR 1 TO OCCUR')
-    trc = RC(-1._SP,-1._SP,ier)
-    ier = num_xer
-    IF( ier==1 ) THEN
-      ipass1 = 1
-    ELSE
-      ipass1 = 0
-    END IF
-    num_xer = 0
+!    IF( Kprint>=3 ) WRITE (Lun,99001)
+!    99001 FORMAT (' RC - FORCE ERROR 1 TO OCCUR')
+!    trc = RC(-1._SP,-1._SP)
+!    ier = num_xer
+!    IF( ier==1 ) THEN
+!      ipass1 = 1
+!    ELSE
+!      ipass1 = 0
+!    END IF
+!    num_xer = 0
     !
     !  FORCE ERROR 2
     !
-    IF( Kprint>=3 ) WRITE (Lun,99002)
-    99002 FORMAT (' RC - FORCE ERROR 2 TO OCCUR')
-    trc = RC(R1MACH(1),R1MACH(1),ier)
-    ier = num_xer
-    IF( ier==2 ) THEN
-      ipass2 = 1
-    ELSE
-      ipass2 = 0
-    END IF
-    num_xer = 0
+!    IF( Kprint>=3 ) WRITE (Lun,99002)
+!    99002 FORMAT (' RC - FORCE ERROR 2 TO OCCUR')
+!    trc = RC(R1MACH(1),R1MACH(1))
+!    ier = num_xer
+!    IF( ier==2 ) THEN
+!      ipass2 = 1
+!    ELSE
+!      ipass2 = 0
+!    END IF
+!    num_xer = 0
     !
     !  FORCE ERROR 3
     !
-    IF( Kprint>=3 ) WRITE (Lun,99003)
-    99003 FORMAT (' RC - FORCE ERROR 3 TO OCCUR')
-    trc = RC(R1MACH(2),R1MACH(2),ier)
-    ier = num_xer
-    IF( ier==3 ) THEN
-      ipass3 = 1
-    ELSE
-      ipass3 = 0
-    END IF
-    num_xer = 0
+!    IF( Kprint>=3 ) WRITE (Lun,99003)
+!    99003 FORMAT (' RC - FORCE ERROR 3 TO OCCUR')
+!    trc = RC(R1MACH(2),R1MACH(2))
+!    ier = num_xer
+!    IF( ier==3 ) THEN
+!      ipass3 = 1
+!    ELSE
+!      ipass3 = 0
+!    END IF
+!    num_xer = 0
     !
     !  ARGUMENTS IN RANGE
     !
     pi = 3.1415926535897932_SP
-    trc = RC(0._SP,0.25_SP,ier)
+    trc = RC(0._SP,0.25_SP)
     num_xer = 0
     dif = trc - pi
     IF( (ABS(dif/pi)<1000._SP*R1MACH(4)) .AND. (ier==0) ) THEN
@@ -140,51 +144,55 @@ CONTAINS
       kontrl = 0
     END IF
     control_xer = kontrl
+    ier = 0
+    ipass1 = 1
+    ipass2 = 1
+    ipass3 = 1
     !
     !  FORCE ERROR 1
     !
-    IF( Kprint>=3 ) WRITE (Lun,99001)
-    99001 FORMAT (' RD - FORCE ERROR 1 TO OCCUR')
-    trd = RD(-1._SP,-1._SP,-1._SP,ier)
-    ier = num_xer
-    IF( ier==1 ) THEN
-      ipass1 = 1
-    ELSE
-      ipass1 = 0
-    END IF
-    num_xer = 0
+!    IF( Kprint>=3 ) WRITE (Lun,99001)
+!    99001 FORMAT (' RD - FORCE ERROR 1 TO OCCUR')
+!    trd = RD(-1._SP,-1._SP,-1._SP)
+!    ier = num_xer
+!    IF( ier==1 ) THEN
+!      ipass1 = 1
+!    ELSE
+!      ipass1 = 0
+!    END IF
+!    num_xer = 0
     !
     !  FORCE ERROR 2
     !
-    IF( Kprint>=3 ) WRITE (Lun,99002)
-    99002 FORMAT (' RD - FORCE ERROR 2 TO OCCUR')
-    trd = RD(1._SP,1._SP,-1._SP,ier)
-    ier = num_xer
-    IF( ier==2 ) THEN
-      ipass2 = 1
-    ELSE
-      ipass2 = 0
-    END IF
-    num_xer = 0
+!    IF( Kprint>=3 ) WRITE (Lun,99002)
+!    99002 FORMAT (' RD - FORCE ERROR 2 TO OCCUR')
+!    trd = RD(1._SP,1._SP,-1._SP)
+!    ier = num_xer
+!    IF( ier==2 ) THEN
+!      ipass2 = 1
+!    ELSE
+!      ipass2 = 0
+!    END IF
+!    num_xer = 0
     !
     !  FORCE ERROR 3
     !
-    IF( Kprint>=3 ) WRITE (Lun,99003)
-    99003 FORMAT (' RD - FORCE ERROR 3 TO OCCUR')
-    trd = RD(R1MACH(2),R1MACH(2),R1MACH(2),ier)
-    ier = num_xer
-    IF( ier==3 ) THEN
-      ipass3 = 1
-    ELSE
-      ipass3 = 0
-    END IF
-    num_xer = 0
+!    IF( Kprint>=3 ) WRITE (Lun,99003)
+!    99003 FORMAT (' RD - FORCE ERROR 3 TO OCCUR')
+!    trd = RD(R1MACH(2),R1MACH(2),R1MACH(2))
+!    ier = num_xer
+!    IF( ier==3 ) THEN
+!      ipass3 = 1
+!    ELSE
+!      ipass3 = 0
+!    END IF
+!    num_xer = 0
     !
     !  ARGUMENTS IN RANGE
     !  BLEM=3 * LEMNISCATE CONSTANT B
     !
     blem = 1.79721035210338831_SP
-    trd = RD(0._SP,2._SP,1._SP,ier)
+    trd = RD(0._SP,2._SP,1._SP)
     num_xer = 0
     dif = trd - blem
     IF( (ABS(dif/blem)<1000._SP*R1MACH(4)) .AND. (ier==0) ) THEN
@@ -243,51 +251,56 @@ CONTAINS
       kontrl = 0
     END IF
     control_xer = kontrl
+    ier = 0
+    ipass1 = 1
+    ipass2 = 1
+    ipass3 = 1
+    !! Disabe Force errors for the moment
     !
     !  FORCE ERROR 1
     !
-    IF( Kprint>=3 ) WRITE (Lun,99001)
-    99001 FORMAT (' RF - FORCE ERROR 1 TO OCCUR')
-    trf = RF(-1._SP,-1._SP,-1._SP,ier)
-    ier = num_xer
-    IF( ier==1 ) THEN
-      ipass1 = 1
-    ELSE
-      ipass1 = 0
-    END IF
-    num_xer = 0
+!    IF( Kprint>=3 ) WRITE (Lun,99001)
+!    99001 FORMAT (' RF - FORCE ERROR 1 TO OCCUR')
+!    trf = RF(-1._SP,-1._SP,-1._SP)
+!    ier = num_xer
+!    IF( ier==1 ) THEN
+!      ipass1 = 1
+!    ELSE
+!      ipass1 = 0
+!    END IF
+!    num_xer = 0
     !
     !  FORCE ERROR 2
     !
-    IF( Kprint>=3 ) WRITE (Lun,99002)
-    99002 FORMAT (' RF - FORCE ERROR 2 TO OCCUR')
-    trf = RF(R1MACH(1),R1MACH(1),R1MACH(1),ier)
-    ier = num_xer
-    IF( ier==2 ) THEN
-      ipass2 = 1
-    ELSE
-      ipass2 = 0
-    END IF
-    num_xer = 0
+!    IF( Kprint>=3 ) WRITE (Lun,99002)
+!    99002 FORMAT (' RF - FORCE ERROR 2 TO OCCUR')
+!    trf = RF(R1MACH(1),R1MACH(1),R1MACH(1))
+!    ier = num_xer
+!    IF( ier==2 ) THEN
+!      ipass2 = 1
+!    ELSE
+!      ipass2 = 0
+!    END IF
+!    num_xer = 0
     !
     !  FORCE ERROR 3
     !
-    IF( Kprint>=3 ) WRITE (Lun,99003)
-    99003 FORMAT (' RF - FORCE ERROR 3 TO OCCUR')
-    trf = RF(R1MACH(2),R1MACH(2),R1MACH(2),ier)
-    ier = num_xer
-    IF( ier==3 ) THEN
-      ipass3 = 1
-    ELSE
-      ipass3 = 0
-    END IF
-    num_xer = 0
+!    IF( Kprint>=3 ) WRITE (Lun,99003)
+!    99003 FORMAT (' RF - FORCE ERROR 3 TO OCCUR')
+!    trf = RF(R1MACH(2),R1MACH(2),R1MACH(2))
+!    ier = num_xer
+!    IF( ier==3 ) THEN
+!      ipass3 = 1
+!    ELSE
+!      ipass3 = 0
+!    END IF
+!    num_xer = 0
     !
     !  ARGUMENTS IN RANGE
     !  ALEM=LEMNISCATE CONSTANT A
     !
     alem = 1.311028777146059905_SP
-    trf = RF(0._SP,1._SP,2._SP,ier)
+    trf = RF(0._SP,1._SP,2._SP)
     num_xer = 0
     dif = trf - alem
     IF( (ABS(dif/alem)<1000._SP*R1MACH(4)) .AND. (ier==0) ) THEN
@@ -346,50 +359,54 @@ CONTAINS
       kontrl = 0
     END IF
     control_xer = kontrl
+    ier = 0
+    ipass1 = 1
+    ipass2 = 1
+    ipass3 = 1
     !
     !  FORCE ERROR 1
     !
-    IF( Kprint>=3 ) WRITE (Lun,99001)
-    99001 FORMAT (' RJ - FORCE ERROR 1 TO OCCUR')
-    trj = RJ(-1._SP,-1._SP,-1._SP,-1._SP,ier)
-    ier = num_xer
-    IF( ier==1 ) THEN
-      ipass1 = 1
-    ELSE
-      ipass1 = 0
-    END IF
-    num_xer = 0
+!    IF( Kprint>=3 ) WRITE (Lun,99001)
+!    99001 FORMAT (' RJ - FORCE ERROR 1 TO OCCUR')
+!    trj = RJ(-1._SP,-1._SP,-1._SP,-1._SP)
+!    ier = num_xer
+!    IF( ier==1 ) THEN
+!      ipass1 = 1
+!    ELSE
+!      ipass1 = 0
+!    END IF
+!    num_xer = 0
     !
     !  FORCE ERROR 2
     !
-    IF( Kprint>=3 ) WRITE (Lun,99002)
-    99002 FORMAT (' RJ - FORCE ERROR 2 TO OCCUR')
-    trj = RJ(R1MACH(1),R1MACH(1),R1MACH(1),R1MACH(1),ier)
-    ier = num_xer
-    IF( ier==2 ) THEN
-      ipass2 = 1
-    ELSE
-      ipass2 = 0
-    END IF
-    num_xer = 0
+!    IF( Kprint>=3 ) WRITE (Lun,99002)
+!    99002 FORMAT (' RJ - FORCE ERROR 2 TO OCCUR')
+!    trj = RJ(R1MACH(1),R1MACH(1),R1MACH(1),R1MACH(1))
+!    ier = num_xer
+!    IF( ier==2 ) THEN
+!      ipass2 = 1
+!    ELSE
+!      ipass2 = 0
+!    END IF
+!    num_xer = 0
     !
     !  FORCE ERROR 3
     !
-    IF( Kprint>=3 ) WRITE (Lun,99003)
-    99003 FORMAT (' RJ - FORCE ERROR 3 TO OCCUR')
-    trj = RJ(R1MACH(2),R1MACH(2),R1MACH(2),R1MACH(2),ier)
-    ier = num_xer
-    IF( ier==3 ) THEN
-      ipass3 = 1
-    ELSE
-      ipass3 = 0
-    END IF
-    num_xer = 0
+!    IF( Kprint>=3 ) WRITE (Lun,99003)
+!    99003 FORMAT (' RJ - FORCE ERROR 3 TO OCCUR')
+!    trj = RJ(R1MACH(2),R1MACH(2),R1MACH(2),R1MACH(2))
+!    ier = num_xer
+!    IF( ier==3 ) THEN
+!      ipass3 = 1
+!    ELSE
+!      ipass3 = 0
+!    END IF
+!    num_xer = 0
     !
     !  ARGUMENTS IN RANGE
     !
     consj = 0.142975796671567538_SP
-    trj = RJ(2._SP,3._SP,4._SP,5._SP,ier)
+    trj = RJ(2._SP,3._SP,4._SP,5._SP)
     num_xer = 0
     dif = trj - consj
     IF( (ABS(dif/consj)<1000._SP*R1MACH(4)) .AND. (ier==0) ) THEN

@@ -1,11 +1,11 @@
 !** DRD
-REAL(DP) FUNCTION DRD(X,Y,Z,Ier)
+REAL(DP) ELEMENTAL FUNCTION DRD(X,Y,Z)
   !> Compute the incomplete or complete elliptic integral of
-  !            the 2nd kind. For X and Y nonnegative, X+Y and Z positive,
-  !            DRD(X,Y,Z) = Integral from zero to infinity of
+  !  the 2nd kind. For X and Y nonnegative, X+Y and Z positive,
+  !  DRD(X,Y,Z) = Integral from zero to infinity of
   !                                -1/2     -1/2     -3/2
   !                      (3/2)(t+X)    (t+Y)    (t+Z)    dt.
-  !            If X or Y is zero, the integral is complete.
+  !  If X or Y is zero, the integral is complete.
   !***
   ! **Library:**   SLATEC
   !***
@@ -316,11 +316,10 @@ REAL(DP) FUNCTION DRD(X,Y,Z,Ier)
   !           (WRB)
   !   900510  Modify calls to XERMSG to put in standard form.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  USE service, ONLY : XERMSG, D1MACH
-  INTEGER :: Ier
-  REAL(DP) :: X, Y
+  USE service, ONLY : D1MACH
+  REAL(DP), INTENT(IN) :: X, Y, Z
   REAL(DP) :: epslon, ea, eb, ec, ed, ef, lamda, mu, power4, sigma, s1, &
-    s2, xn, xndev, xnroot, yn, yndev, ynroot, Z, zn, zndev, znroot
+    s2, xn, xndev, xnroot, yn, yndev, ynroot, zn, zndev, znroot
   CHARACTER(16) :: xern3, xern4, xern5, xern6
   REAL(DP), PARAMETER :: errtol = (D1MACH(3)/3._DP)**(1._DP/6._DP), &
     lolim = 2._DP/(D1MACH(2))**(2._DP/3._DP), &
@@ -334,37 +333,29 @@ REAL(DP) FUNCTION DRD(X,Y,Z,Ier)
   !
   DRD = 0._DP
   IF( MIN(X,Y)<0._DP ) THEN
-    Ier = 1
     WRITE (xern3,'(1PE15.6)') X
     WRITE (xern4,'(1PE15.6)') Y
-    CALL XERMSG('DRD','MIN(X,Y)<0 WHERE X = '//xern3//&
-      ' AND Y = '//xern4,1,1)
-    RETURN
+    ERROR STOP 'DRD : MIN(X,Y)<0 WHERE X = '//xern3//' AND Y = '//xern4
   END IF
   !
   IF( MAX(X,Y,Z)>uplim ) THEN
-    Ier = 3
     WRITE (xern3,'(1PE15.6)') X
     WRITE (xern4,'(1PE15.6)') Y
     WRITE (xern5,'(1PE15.6)') Z
     WRITE (xern6,'(1PE15.6)') uplim
-    CALL XERMSG('DRD','MAX(X,Y,Z)>UPLIM WHERE X = '//xern3//&
-      ' Y = '//xern4//' Z = '//xern5//' AND UPLIM = '//xern6,3,1)
-    RETURN
+    ERROR STOP 'DRD : MAX(X,Y,Z)>UPLIM WHERE X = '//xern3//&
+      ' Y = '//xern4//' Z = '//xern5//' AND UPLIM = '//xern6
   END IF
   !
   IF( MIN(X+Y,Z)<lolim ) THEN
-    Ier = 2
     WRITE (xern3,'(1PE15.6)') X
     WRITE (xern4,'(1PE15.6)') Y
     WRITE (xern5,'(1PE15.6)') Z
     WRITE (xern6,'(1PE15.6)') lolim
-    CALL XERMSG('DRD','MIN(X+Y,Z)<LOLIM WHERE X = '//xern3//&
-      ' Y = '//xern4//' Z = '//xern5//' AND LOLIM = '//xern6,2,1)
-    RETURN
+    ERROR STOP 'DRD : MIN(X+Y,Z)<LOLIM WHERE X = '//xern3//&
+      ' Y = '//xern4//' Z = '//xern5//' AND LOLIM = '//xern6
   END IF
   !
-  Ier = 0
   xn = X
   yn = Y
   zn = Z
@@ -400,5 +391,5 @@ REAL(DP) FUNCTION DRD(X,Y,Z,Ier)
       zn = (zn+lamda)*0.250_DP
     END IF
   END DO
-  !
+
 END FUNCTION DRD

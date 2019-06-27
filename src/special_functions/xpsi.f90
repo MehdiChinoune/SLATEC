@@ -1,5 +1,5 @@
 !** XPSI
-REAL(SP) FUNCTION XPSI(A,Ipsik,Ipsix)
+REAL(SP) ELEMENTAL FUNCTION XPSI(A,Ipsik,Ipsix)
   !> To compute values of the Psi function for XLEGF.
   !***
   ! **Library:**   SLATEC
@@ -19,12 +19,13 @@ REAL(SP) FUNCTION XPSI(A,Ipsik,Ipsix)
   !   890126  Revised to meet SLATEC CML recommendations.  (DWL and JMS)
   !   901019  Revisions to prologue.  (DWL and WRB)
   !   901106  Changed all specific intrinsics to generic.  (WRB)
-  !           Corrected order of sections in prologue and added TYPE
-  !           section.  (WRB)
+  !           Corrected order of sections in prologue and added TYPE section.  (WRB)
   !   920127  Revised PURPOSE section of prologue.  (DWL)
 
-  INTEGER :: i, Ipsik, Ipsix, k, k1, m, n
-  REAL(SP) :: A, b, c
+  INTEGER, INTENT(IN) :: Ipsik, Ipsix
+  REAL(SP), INTENT(IN) :: A
+  INTEGER :: i, k, k1, m, n
+  REAL(SP) :: b, c
   !
   !        CNUM(I) AND CDENOM(I) ARE THE ( REDUCED ) NUMERATOR
   !        AND 2*I*DENOMINATOR RESPECTIVELY OF THE 2*I TH BERNOULLI
@@ -57,4 +58,5 @@ REAL(SP) FUNCTION XPSI(A,Ipsik,Ipsix)
     END DO
     XPSI = XPSI - b
   END IF
+
 END FUNCTION XPSI

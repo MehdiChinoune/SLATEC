@@ -41,7 +41,7 @@ SUBROUTINE ZUNIK(Zrr,Zri,Fnu,Ikflg,Ipmtr,Tol,Init,Phir,Phii,Zeta1r,Zeta1i,&
   REAL(DP) :: ac, crfni, crfnr, Cwrki(16), Cwrkr(16), Fnu, Phii, Phir, rfn, si, sr, &
     sri, srr, sti, str, Sumi, Sumr, test, ti, Tol, tr, t2i, t2r, Zeta1i, Zeta1r, &
     Zeta2i, Zeta2r, zni, znr, Zri, Zrr
-  INTEGER :: i, idum, Ikflg, Init, Ipmtr, j, k, l
+  INTEGER :: i, Ikflg, Init, Ipmtr, j, k, l
   REAL(DP), PARAMETER :: zeror = 0._DP, zeroi = 0._DP, coner = 1._DP, conei = 0._DP
   REAL(DP), PARAMETER :: con(2) = [ 3.98942280401432678E-01_DP, 1.25331413731550025E+00_DP ]
   REAL(DP), PARAMETER :: c(120) = [ 1.00000000000000000E+00_DP, -2.08333333333333333E-01_DP, &
@@ -105,7 +105,7 @@ SUBROUTINE ZUNIK(Zrr,Zri,Fnu,Ikflg,Ipmtr,Tol,Init,Phir,Phii,Zeta1r,Zeta1i,&
       str = coner + srr
       sti = conei + sri
       CALL ZDIV(str,sti,tr,ti,znr,zni)
-      CALL ZLOG(znr,zni,str,sti,idum)
+      CALL ZLOG(znr,zni,str,sti)
       Zeta1r = Fnu*str
       Zeta1i = Fnu*sti
       Zeta2r = Fnu*srr

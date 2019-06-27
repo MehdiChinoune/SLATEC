@@ -1,7 +1,6 @@
 !** DBESK1
-REAL(DP) FUNCTION DBESK1(X)
-  !> Compute the modified (hyperbolic) Bessel function of the
-  !            third kind of order one.
+REAL(DP) ELEMENTAL FUNCTION DBESK1(X)
+  !> Compute the modified (hyperbolic) Bessel function of the third kind of order one.
   !***
   ! **Library:**   SLATEC (FNLIB)
   !***
@@ -39,10 +38,10 @@ REAL(DP) FUNCTION DBESK1(X)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-  USE service, ONLY : XERMSG, D1MACH
-  REAL(DP) :: X
+  USE service, ONLY : D1MACH
+  REAL(DP), INTENT(IN) :: X
   REAL(DP) :: y
-  INTEGER, SAVE :: ntk1
+  INTEGER, PARAMETER :: ntk1 = 10
   REAL(DP), PARAMETER :: xmin = EXP(MAX(LOG(D1MACH(1)),-LOG(D1MACH(2)))+0.01_DP), &
     xsml = SQRT(4._DP*D1MACH(3)), xmaxt = -LOG(D1MACH(1)), &
     xmax = xmaxt - 0.5_DP*xmaxt*LOG(xmaxt)/(xmaxt+0.5_DP)
@@ -55,27 +54,23 @@ REAL(DP) FUNCTION DBESK1(X)
     -.16543275155100994675491029333333E-19_DP,-.32338347459944491991893333333333E-22_DP, &
     -.53312750529265274999466666666666E-25_DP,-.75130407162157226666666666666666E-28_DP, &
     -.91550857176541866666666666666666E-31_DP ]
-  LOGICAL, SAVE :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  DBESK1
-  IF( first ) THEN
-    ntk1 = INITDS(bk1cs,16,0.1_SP*D1MACH(3))
-    first = .FALSE.
-  END IF
+  ! ntk1 = INITDS(bk1cs,0.1_SP*D1MACH(3))
   !
-  IF( X<=0._DP ) CALL XERMSG('DBESK1','X IS ZERO OR NEGATIVE',2,2)
-  IF( X>2._DP ) THEN
-    !
-    DBESK1 = 0._DP
-    IF( X>xmax ) CALL XERMSG('DBESK1','X SO BIG K1 UNDERFLOWS',1,1)
-    IF( X>xmax ) RETURN
-    !
+  IF( X<=0._DP ) THEN
+    ERROR STOP 'DBESK1 : X IS ZERO OR NEGATIVE'
+  ELSEIF( X<xmin ) THEN
+    ERROR STOP 'DBESK1 : X SO SMALL K1 OVERFLOWS'
+  ELSEIF( X<=2._DP ) THEN
+    y = 0._DP
+    IF( X>xsml ) y = X*X
+    DBESK1 = LOG(0.5_DP*X)*DBESI1(X) + (0.75_DP+DCSEVL(.5_DP*y-1._DP,bk1cs(1:ntk1)))/X
+  ELSEIF( X<=xmax ) THEN
     DBESK1 = EXP(-X)*DBSK1E(X)
-    RETURN
+  ELSE
+    DBESK1 = 0._DP
+    ! IF( X>xmax ) CALL XERMSG('DBESK1','X SO BIG K1 UNDERFLOWS',1,1)
   END IF
-  !
-  IF( X<xmin ) CALL XERMSG('DBESK1','X SO SMALL K1 OVERFLOWS',3,2)
-  y = 0._DP
-  IF( X>xsml ) y = X*X
-  DBESK1 = LOG(0.5_DP*X)*DBESI1(X) + (0.75_DP+DCSEVL(.5_DP*y-1._DP,bk1cs,ntk1))/X
+
   RETURN
 END FUNCTION DBESK1

@@ -1,7 +1,6 @@
 !** CUCHK
-SUBROUTINE CUCHK(Y,Nz,Ascle,Tol)
-  !> Subsidiary to SERI, CUOIK, CUNK1, CUNK2, CUNI1, CUNI2 and
-  !            CKSCL
+ELEMENTAL SUBROUTINE CUCHK(Y,Nz,Ascle,Tol)
+  !> Subsidiary to SERI, CUOIK, CUNK1, CUNK2, CUNI1, CUNI2 and CKSCL
   !***
   ! **Library:**   SLATEC
   !***
@@ -27,11 +26,11 @@ SUBROUTINE CUCHK(Y,Nz,Ascle,Tol)
   !* REVISION HISTORY  (YYMMDD)
   !   ??????  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
-  
-  !
-  COMPLEX(SP) :: Y
-  REAL(SP) :: Ascle, ss, st, Tol, yr, yi
-  INTEGER :: Nz
+
+  INTEGER, INTENT(OUT) :: Nz
+  REAL(SP), INTENT(IN) :: Ascle, Tol
+  COMPLEX(SP), INTENT(IN) :: Y
+  REAL(SP) :: ss, st, yr, yi
   !* FIRST EXECUTABLE STATEMENT  CUCHK
   Nz = 0
   yr = REAL(Y)

@@ -1,5 +1,5 @@
 !** CGAMMA
-COMPLEX(SP) FUNCTION CGAMMA(Z)
+COMPLEX(SP) ELEMENTAL FUNCTION CGAMMA(Z)
   !> Compute the complete Gamma function.
   !***
   ! **Library:**   SLATEC (FNLIB)
@@ -28,7 +28,7 @@ COMPLEX(SP) FUNCTION CGAMMA(Z)
   !   861211  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-  COMPLEX(SP) :: Z
+  COMPLEX(SP), INTENT(IN) :: Z
   !* FIRST EXECUTABLE STATEMENT  CGAMMA
   CGAMMA = EXP(CLNGAM(Z))
   !

@@ -1,8 +1,7 @@
 !** C9LGMC
-COMPLEX(SP) FUNCTION C9LGMC(Zin)
+COMPLEX(SP) ELEMENTAL FUNCTION C9LGMC(Zin)
   !> Compute the log gamma correction factor so that
-  !            LOG(CGAMMA(Z)) = 0.5*LOG(2.*PI) + (Z-0.5)*LOG(Z) - Z
-  !            + C9LGMC(Z).
+  !    LOG(CGAMMA(Z)) = 0.5*LOG(2.*PI) + (Z-0.5)*LOG(Z) - Z + C9LGMC(Z).
   !***
   ! **Library:**   SLATEC (FNLIB)
   !***
@@ -17,9 +16,8 @@ COMPLEX(SP) FUNCTION C9LGMC(Zin)
   !***
   ! **Description:**
   !
-  ! Compute the LOG GAMMA correction term for large ABS(Z) when REAL(Z)
-  ! >= 0.0 and for large ABS(AIMAG(Y)) when REAL(Z) < 0.0.  We find
-  ! C9LGMC so that
+  ! Compute the LOG GAMMA correction term for large ABS(Z) when REAL(Z) >= 0.0
+  ! and for large ABS(AIMAG(Y)) when REAL(Z) < 0.0.  We find C9LGMC so that
   !   LOG(Z) = 0.5*LOG(2.*PI) + (Z-0.5)*LOG(Z) - Z + C9LGMC(Z)
   !
   !***
@@ -36,52 +34,44 @@ COMPLEX(SP) FUNCTION C9LGMC(Zin)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
-  USE service, ONLY : XERMSG, R1MACH
-  COMPLEX(SP) :: Zin
+  USE service, ONLY : R1MACH
+  COMPLEX(SP), INTENT(IN) :: Zin
   INTEGER :: i, ndx
   REAL(SP) :: cabsz, x, y
   COMPLEX(SP) :: z, z2inv
   INTEGER, PARAMETER :: nterm = INT( -0.30*LOG(R1MACH(3)) )
   REAL(SP), PARAMETER :: bound = 0.117_SP*nterm*(0.1_SP*R1MACH(3))**(-1._SP/(2*nterm-1)), &
-    xbig = 1._SP/SQRT(R1MACH(3)), xmax = EXP(MIN(LOG(R1MACH(2)/12._SP),-LOG(12._SP*R1MACH(1))))
+    xbig = 1._SP/SQRT(R1MACH(3)), &
+    xmax = EXP(MIN(LOG(R1MACH(2)/12._SP),-LOG(12._SP*R1MACH(1))))
   REAL(SP), PARAMETER :: bern(11) = [ .083333333333333333_SP,-.0027777777777777778_SP, &
     .00079365079365079365_SP, -.00059523809523809524_SP, .00084175084175084175_SP, &
     -.0019175269175269175_SP,  .0064102564102564103_SP, -.029550653594771242_SP, &
     .17964437236883057_SP, -1.3924322169059011_SP,   13.402864044168392_SP ]
-  LOGICAL, SAVE :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  C9LGMC
-  IF( first ) THEN
-
-    first = .FALSE.
-  END IF
   !
   z = Zin
   x = REAL(z)
   y = AIMAG(z)
   cabsz = ABS(z)
   !
-  IF( x<0._SP .AND. ABS(y)<bound ) CALL XERMSG('C9LGMC',&
-    'NOT VALID FOR NEGATIVE REAL(Z) AND SMALL ABS(AIMAG(Z))',2,2)
-  IF( cabsz<bound ) CALL XERMSG('C9LGMC',&
-    'NOT VALID FOR SMALL ABS(Z)',3,2)
-  !
-  IF( cabsz>=xmax ) THEN
-    !
+  IF( x<0._SP .AND. ABS(y)<bound ) THEN
+    ERROR STOP 'C9LGMC : &NOT VALID FOR NEGATIVE REAL(Z) AND SMALL ABS(AIMAG(Z))'
+  ELSEIF( cabsz<bound ) THEN
+    ERROR STOP 'C9LGMC : NOT VALID FOR SMALL ABS(Z)'
+  ELSEIF( cabsz>=xmax ) THEN
     C9LGMC = (0._SP,0._SP)
-    CALL XERMSG('C9LGMC','Z SO BIG C9LGMC UNDERFLOWS',1,1)
-    RETURN
+    ! CALL XERMSG('C9LGMC : Z SO BIG C9LGMC UNDERFLOWS',1,1)
+  ELSEIF( cabsz>=xbig ) THEN
+    C9LGMC = 1._SP/(12._SP*z)
+  ELSE
+    z2inv = 1._SP/z**2
+    C9LGMC = (0._SP,0._SP)
+    DO i = 1, nterm
+      ndx = nterm + 1 - i
+      C9LGMC = bern(ndx) + C9LGMC*z2inv
+    END DO
+    C9LGMC = C9LGMC/z
   END IF
-  !
-  IF( cabsz>=xbig ) C9LGMC = 1._SP/(12._SP*z)
-  IF( cabsz>=xbig ) RETURN
-  !
-  z2inv = 1._SP/z**2
-  C9LGMC = (0._SP,0._SP)
-  DO i = 1, nterm
-    ndx = nterm + 1 - i
-    C9LGMC = bern(ndx) + C9LGMC*z2inv
-  END DO
-  !
-  C9LGMC = C9LGMC/z
+
   RETURN
 END FUNCTION C9LGMC

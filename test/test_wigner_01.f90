@@ -41,7 +41,7 @@ CONTAINS
     !           and 4 with values stored in data statements.  This involved
     !           removing all calls to subroutine RACAH.  These changes were
     !           made by M. McClain.
-    USE slatec, ONLY : R1MACH, RC3JJ, RC3JM, RC6J, num_xer, control_xer
+    USE slatec, ONLY : R1MACH, RC3JJ, RC3JM, RC6J
     !
     INTEGER :: Lun, Kprint, Ipass
     !
@@ -302,154 +302,154 @@ CONTAINS
     !
     ! --- TEST 5: CHECK INVALID INPUT
     ipass5 = 1
-    IF( Kprint<=2 ) THEN
-      control_xer = 0
-    ELSE
-      control_xer = -1
-    END IF
-    IF( Kprint>=3 ) WRITE (Lun,*) ' TEST 5, CHECK FOR PROPER HANDLING ', &
-      'OF INVALID INPUT'
+!    IF( Kprint<=2 ) THEN
+!      control_xer = 0
+!    ELSE
+!      control_xer = -1
+!    END IF
+!    IF( Kprint>=3 ) WRITE (Lun,*) ' TEST 5, CHECK FOR PROPER HANDLING ', &
+!      'OF INVALID INPUT'
     ! --- RC3JJ: L2-ABS(M2) OR L3-ABS(M3) LESS THAN ZERO (IER=1)
-    l2 = 2._SP
-    l3 = 100._SP
-    m1 = -6._SP
-    m2 = -4._SP
-    m3 = 10._SP
-    IF( Kprint>=3 ) WRITE (Lun,*)
-    num_xer = 0
-    CALL RC3JJ(l2,l3,m2,m3,l1min,l1max,thrcof,NDIM,ier)
-    IF( num_xer/=ier ) ipass5 = 0
+!    l2 = 2._SP
+!    l3 = 100._SP
+!    m1 = -6._SP
+!    m2 = -4._SP
+!    m3 = 10._SP
+!    IF( Kprint>=3 ) WRITE (Lun,*)
+!    num_xer = 0
+!    CALL RC3JJ(l2,l3,m2,m3,l1min,l1max,thrcof,NDIM,ier)
+!    IF( num_xer/=ier ) ipass5 = 0
     ! --- RC3JJ: L2+ABS(M2) OR L3+ABS(M3) NOT INTEGER (IER=2)
-    l2 = 2._SP
-    l3 = 99.5_SP
-    m1 = -10._SP
-    m2 = 0._SP
-    m3 = 10._SP
-    IF( Kprint>=3 ) WRITE (Lun,*)
-    num_xer = 0
-    CALL RC3JJ(l2,l3,m2,m3,l1min,l1max,thrcof,NDIM,ier)
-    IF( num_xer/=ier ) ipass5 = 0
+!    l2 = 2._SP
+!    l3 = 99.5_SP
+!    m1 = -10._SP
+!    m2 = 0._SP
+!    m3 = 10._SP
+!    IF( Kprint>=3 ) WRITE (Lun,*)
+!    num_xer = 0
+!    CALL RC3JJ(l2,l3,m2,m3,l1min,l1max,thrcof,NDIM,ier)
+!    IF( num_xer/=ier ) ipass5 = 0
     ! --- RC3JJ: L1MAX-L1MIN NOT INTEGER (IER=3)
-    l2 = 3.2_SP
-    l3 = 4.5_SP
-    m1 = -1.3_SP
-    m2 = 0.8_SP
-    m3 = 0.5_SP
-    IF( Kprint>=3 ) WRITE (Lun,*)
-    num_xer = 0
-    CALL RC3JJ(l2,l3,m2,m3,l1min,l1max,thrcof,NDIM,ier)
-    IF( num_xer/=ier ) ipass5 = 0
+!    l2 = 3.2_SP
+!    l3 = 4.5_SP
+!    m1 = -1.3_SP
+!    m2 = 0.8_SP
+!    m3 = 0.5_SP
+!    IF( Kprint>=3 ) WRITE (Lun,*)
+!    num_xer = 0
+!    CALL RC3JJ(l2,l3,m2,m3,l1min,l1max,thrcof,NDIM,ier)
+!    IF( num_xer/=ier ) ipass5 = 0
     ! --- RC3JJ: L1MIN GREATER THAN L1MAX (IER=4)
     !            (NO TEST -- THIS ERROR SHOULD NEVER OCCUR)
     ! --- RC3JJ: DIMENSION OF THRCOF TOO SMALL (IER=5)
-    l2 = 10._SP
-    l3 = 150._SP
-    m1 = -10._SP
-    m2 = 0._SP
-    m3 = 10._SP
-    IF( Kprint>=3 ) WRITE (Lun,*)
-    num_xer = 0
-    CALL RC3JJ(l2,l3,m2,m3,l1min,l1max,thrcof,NDIM,ier)
-    IF( num_xer/=ier ) ipass5 = 0
+!    l2 = 10._SP
+!    l3 = 150._SP
+!    m1 = -10._SP
+!    m2 = 0._SP
+!    m3 = 10._SP
+!    IF( Kprint>=3 ) WRITE (Lun,*)
+!    num_xer = 0
+!    CALL RC3JJ(l2,l3,m2,m3,l1min,l1max,thrcof,NDIM,ier)
+!    IF( num_xer/=ier ) ipass5 = 0
     ! --- RC3JM: L1-ABS(M1) LESS THAN ZERO OR L1+ABS(M1) NOT INTEGER (IER=1)
-    l1 = 100._SP
-    l2 = 2._SP
-    l3 = 100._SP
-    m1 = 150._SP
-    IF( Kprint>=3 ) WRITE (Lun,*)
-    num_xer = 0
-    CALL RC3JM(l1,l2,l3,m1,m2min,m2max,thrcof,NDIM,ier)
-    IF( num_xer/=ier ) ipass5 = 0
+!    l1 = 100._SP
+!    l2 = 2._SP
+!    l3 = 100._SP
+!    m1 = 150._SP
+!    IF( Kprint>=3 ) WRITE (Lun,*)
+!    num_xer = 0
+!    CALL RC3JM(l1,l2,l3,m1,m2min,m2max,thrcof,NDIM,ier)
+!    IF( num_xer/=ier ) ipass5 = 0
     ! --- RC3JM: L1, L2, L3 DO NOT SATISFY TRIANGULAR CONDITION (IER=2)
-    l1 = 20._SP
-    l2 = 5._SP
-    l3 = 10._SP
-    m1 = -10._SP
-    IF( Kprint>=3 ) WRITE (Lun,*)
-    num_xer = 0
-    CALL RC3JM(l1,l2,l3,m1,m2min,m2max,thrcof,NDIM,ier)
-    IF( num_xer/=ier ) ipass5 = 0
+!    l1 = 20._SP
+!    l2 = 5._SP
+!    l3 = 10._SP
+!    m1 = -10._SP
+!    IF( Kprint>=3 ) WRITE (Lun,*)
+!    num_xer = 0
+!    CALL RC3JM(l1,l2,l3,m1,m2min,m2max,thrcof,NDIM,ier)
+!    IF( num_xer/=ier ) ipass5 = 0
     ! --- RC3JM: L1+L2+L3 NOT INTEGER (IER=3)
-    l1 = 1._SP
-    l2 = 1.3_SP
-    l3 = 1.5_SP
-    m1 = 0._SP
-    IF( Kprint>=3 ) WRITE (Lun,*)
-    num_xer = 0
-    CALL RC3JM(l1,l2,l3,m1,m2min,m2max,thrcof,NDIM,ier)
-    IF( num_xer/=ier ) ipass5 = 0
+!    l1 = 1._SP
+!    l2 = 1.3_SP
+!    l3 = 1.5_SP
+!    m1 = 0._SP
+!    IF( Kprint>=3 ) WRITE (Lun,*)
+!    num_xer = 0
+!    CALL RC3JM(l1,l2,l3,m1,m2min,m2max,thrcof,NDIM,ier)
+!    IF( num_xer/=ier ) ipass5 = 0
     ! --- RC3JM: M2MAX-M2MIN NOT INTEGER (IER=4)
-    l1 = 1._SP
-    l2 = 1.3_SP
-    l3 = 1.7_SP
-    m1 = 0._SP
-    IF( Kprint>=3 ) WRITE (Lun,*)
-    num_xer = 0
-    CALL RC3JM(l1,l2,l3,m1,m2min,m2max,thrcof,NDIM,ier)
-    IF( num_xer/=ier ) ipass5 = 0
+!    l1 = 1._SP
+!    l2 = 1.3_SP
+!    l3 = 1.7_SP
+!    m1 = 0._SP
+!    IF( Kprint>=3 ) WRITE (Lun,*)
+!    num_xer = 0
+!    CALL RC3JM(l1,l2,l3,m1,m2min,m2max,thrcof,NDIM,ier)
+!    IF( num_xer/=ier ) ipass5 = 0
     ! --- RC3JM: M2MIN GREATER THAN M2MAX (IER=5)
     !            (NO TEST -- THIS ERROR SHOULD NEVER OCCUR)
     ! --- RC3JM: DIMENSION OF THRCOF TOO SMALL (IER=6)
-    l1 = 100._SP
-    l2 = 10._SP
-    l3 = 110._SP
-    m1 = -10._SP
-    IF( Kprint>=3 ) WRITE (Lun,*)
-    num_xer = 0
-    CALL RC3JM(l1,l2,l3,m1,m2min,m2max,thrcof,NDIM,ier)
-    IF( num_xer/=ier ) ipass5 = 0
+!    l1 = 100._SP
+!    l2 = 10._SP
+!    l3 = 110._SP
+!    m1 = -10._SP
+!    IF( Kprint>=3 ) WRITE (Lun,*)
+!    num_xer = 0
+!    CALL RC3JM(l1,l2,l3,m1,m2min,m2max,thrcof,NDIM,ier)
+!    IF( num_xer/=ier ) ipass5 = 0
     ! --- RC6J: L2+L3+L5+L6 OR L4+L2+L6 NOT INTEGER (IER=1)
-    l2 = 0.5_SP
-    l3 = 1._SP
-    m1 = 0.5_SP
-    m2 = 2._SP
-    m3 = 3._SP
-    IF( Kprint>=3 ) WRITE (Lun,*)
-    num_xer = 0
-    CALL RC6J(l2,l3,m1,m2,m3,l1min,l1max,sixcof,NDIM,ier)
-    IF( num_xer/=ier ) ipass5 = 0
+!    l2 = 0.5_SP
+!    l3 = 1._SP
+!    m1 = 0.5_SP
+!    m2 = 2._SP
+!    m3 = 3._SP
+!    IF( Kprint>=3 ) WRITE (Lun,*)
+!    num_xer = 0
+!    CALL RC6J(l2,l3,m1,m2,m3,l1min,l1max,sixcof,NDIM,ier)
+!    IF( num_xer/=ier ) ipass5 = 0
     ! --- RC6J: L4, L2, L6 TRIANGULAR CONDITION NOT SATISFIED (IER=2)
-    l2 = 1._SP
-    l3 = 3._SP
-    m1 = 5._SP
-    m2 = 6._SP
-    m3 = 2._SP
-    IF( Kprint>=3 ) WRITE (Lun,*)
-    num_xer = 0
-    CALL RC6J(l2,l3,m1,m2,m3,l1min,l1max,sixcof,NDIM,ier)
-    IF( num_xer/=ier ) ipass5 = 0
+!    l2 = 1._SP
+!    l3 = 3._SP
+!    m1 = 5._SP
+!    m2 = 6._SP
+!    m3 = 2._SP
+!    IF( Kprint>=3 ) WRITE (Lun,*)
+!    num_xer = 0
+!    CALL RC6J(l2,l3,m1,m2,m3,l1min,l1max,sixcof,NDIM,ier)
+!    IF( num_xer/=ier ) ipass5 = 0
     ! --- RC6J: L4, L5, L3 TRIANGULAR CONDITION NOT SATISFIED (IER=3)
-    l2 = 4._SP
-    l3 = 1._SP
-    m1 = 5._SP
-    m2 = 3._SP
-    m3 = 2._SP
-    IF( Kprint>=3 ) WRITE (Lun,*)
-    num_xer = 0
-    CALL RC6J(l2,l3,m1,m2,m3,l1min,l1max,sixcof,NDIM,ier)
-    IF( num_xer/=ier ) ipass5 = 0
+!    l2 = 4._SP
+!    l3 = 1._SP
+!    m1 = 5._SP
+!    m2 = 3._SP
+!    m3 = 2._SP
+!    IF( Kprint>=3 ) WRITE (Lun,*)
+!    num_xer = 0
+!    CALL RC6J(l2,l3,m1,m2,m3,l1min,l1max,sixcof,NDIM,ier)
+!    IF( num_xer/=ier ) ipass5 = 0
     ! --- RC6J: L1MAX-L1MIN NOT INTEGER (IER=4)
-    l2 = 0.9_SP
-    l3 = 0.5_SP
-    m1 = 0.9_SP
-    m2 = 0.4_SP
-    m3 = 0.2_SP
-    IF( Kprint>=3 ) WRITE (Lun,*)
-    num_xer = 0
-    CALL RC6J(l2,l3,m1,m2,m3,l1min,l1max,sixcof,NDIM,ier)
-    IF( num_xer/=ier ) ipass5 = 0
+!    l2 = 0.9_SP
+!    l3 = 0.5_SP
+!    m1 = 0.9_SP
+!    m2 = 0.4_SP
+!    m3 = 0.2_SP
+!    IF( Kprint>=3 ) WRITE (Lun,*)
+!    num_xer = 0
+!    CALL RC6J(l2,l3,m1,m2,m3,l1min,l1max,sixcof,NDIM,ier)
+!    IF( num_xer/=ier ) ipass5 = 0
     ! --- RC6J: L1MIN GREATER THAN L1MAX (IER=5)
     !           (NO TEST -- THIS ERROR SHOULD NEVER OCCUR)
     ! --- RC6J: DIMENSION OF SIXCOF TOO SMALL (IER=6)
-    l2 = 50._SP
-    l3 = 25._SP
-    m1 = 15._SP
-    m2 = 30._SP
-    m3 = 40._SP
-    IF( Kprint>=3 ) WRITE (Lun,*)
-    num_xer = 0
-    CALL RC6J(l2,l3,m1,m2,m3,l1min,l1max,sixcof,NDIM,ier)
-    IF( num_xer/=ier ) ipass5 = 0
+!    l2 = 50._SP
+!    l3 = 25._SP
+!    m1 = 15._SP
+!    m2 = 30._SP
+!    m3 = 40._SP
+!    IF( Kprint>=3 ) WRITE (Lun,*)
+!    num_xer = 0
+!    CALL RC6J(l2,l3,m1,m2,m3,l1min,l1max,sixcof,NDIM,ier)
+!    IF( num_xer/=ier ) ipass5 = 0
     IF( ipass5==0 ) THEN
       IF( Kprint>=1 ) THEN
         WRITE (Lun,*) ' ***** ***** TEST 5 FAILED ***** *****'

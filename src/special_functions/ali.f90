@@ -1,5 +1,5 @@
 !** ALI
-REAL(SP) FUNCTION ALI(X)
+REAL(SP) ELEMENTAL FUNCTION ALI(X)
   !> Compute the logarithmic integral.
   !***
   ! **Library:**   SLATEC (FNLIB)
@@ -28,14 +28,16 @@ REAL(SP) FUNCTION ALI(X)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-  !   900326  Removed duplicate information from DESCRIPTION section.
-  !           (WRB)
-  USE service, ONLY : XERMSG
-  REAL(SP) :: X
+  !   900326  Removed duplicate information from DESCRIPTION section. (WRB)
+  REAL(SP), INTENT(IN) :: X
   !* FIRST EXECUTABLE STATEMENT  ALI
-  IF( X<=0._SP ) CALL XERMSG('ALI', 'LOG INTEGRAL UNDEFINED FOR X LE 0',1,2)
-  IF( X==1._SP ) CALL XERMSG('ALI', 'LOG INTEGRAL UNDEFINED FOR X = 1',2,2)
-  !
-  ALI = EI(LOG(X))
-  !
+  IF( X<=0._SP ) THEN
+    ERROR STOP 'ALI : LOG INTEGRAL UNDEFINED FOR X <= 0'
+  ELSEIF( X==1._SP ) THEN
+    ERROR STOP 'ALI : LOG INTEGRAL UNDEFINED FOR X = 1'
+  ELSE
+    ALI = EI(LOG(X))
+  END IF
+
+  RETURN
 END FUNCTION ALI

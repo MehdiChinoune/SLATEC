@@ -1,8 +1,7 @@
 !** BESJ
-SUBROUTINE BESJ(X,Alpha,N,Y,Nz)
+PURE SUBROUTINE BESJ(X,Alpha,N,Y,Nz)
   !> Compute an N member sequence of J Bessel functions
-  !            J/SUB(ALPHA+K-1)/(X), K=1,...,N for non-negative ALPHA
-  !            and X.
+  !   J_{ALPHA+K-1}(X), K=1,...,N for non-negative ALPH and X.
   !***
   ! **Library:**   SLATEC
   !***
@@ -20,7 +19,7 @@ SUBROUTINE BESJ(X,Alpha,N,Y,Nz)
   !
   !     Abstract
   !         BESJ computes an N member sequence of J Bessel functions
-  !         J/sub(ALPHA+K-1)/(X), K=1,...,N for non-negative ALPHA and X.
+  !         J_{ALPHA+K-1}(X), K=1,...,N for non-negative ALPHA and X.
   !         A combination of the power series, the asymptotic expansion
   !         for X to infinity and the uniform asymptotic expansion for
   !         NU to infinity are applied over subdivisions of the (NU,X)
@@ -48,7 +47,7 @@ SUBROUTINE BESJ(X,Alpha,N,Y,Nz)
   !
   !         Output
   !           Y      - a vector whose first  N components contain
-  !                    values for J/sub(ALPHA+K-1)/(X), K=1,...,N
+  !                    values for J_{ALPHA+K-1}(X), K=1,...,N
   !           NZ     - number of components of Y set to zero due to
   !                    underflow,
   !                    NZ=0  , normal return, computation completed
@@ -77,12 +76,13 @@ SUBROUTINE BESJ(X,Alpha,N,Y,Nz)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-  !   900326  Removed duplicate information from DESCRIPTION section.
-  !           (WRB)
+  !   900326  Removed duplicate information from DESCRIPTION section.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  USE service, ONLY : XERMSG, R1MACH, I1MACH
-  INTEGER :: N, Nz
-  REAL(SP) :: Alpha, X, Y(N)
+  USE service, ONLY : R1MACH, I1MACH
+  INTEGER, INTENT(IN) :: N
+  INTEGER, INTENT(OUT) :: Nz
+  REAL(SP), INTENT(IN) :: Alpha, X
+  REAL(SP), INTENT(OUT) :: Y(N)
   INTEGER :: i, ialp, idalp, iflw, in, is, i1, i2, k, kk, km, kt, nn, ns
   REAL(SP) :: ak, akm, ans, ap, arg, coef, dalpha, dfn, dtm, earg, elim1, etx, fidal, &
     flgjy, fn, fnf, fni, fnp1, fnu, gln, rden, relb, rtx, rzden, s, sa, sb, sxo2, &
@@ -112,17 +112,16 @@ SUBROUTINE BESJ(X,Alpha,N,Y,Nz)
   tolln = 2.303_SP*tb*i1
   tolln = MIN(tolln,34.5388E0_SP)
   IF( N<1 ) THEN
-    CALL XERMSG('BESJ','N LESS THAN ONE.',2,1)
-    RETURN
+    ERROR STOP 'BESJ : N < 1'
   ELSEIF( N==1 ) THEN
     kt = 2
   END IF
   nn = N
-  IF( X<0 ) THEN
-    CALL XERMSG('BESJ','X LESS THAN ZERO.',2,1)
-    RETURN
+  IF( Alpha<0._SP ) THEN
+    ERROR STOP 'BESJ : ORDER, ALPHA < 0'
+  ELSEIF( X<0 ) THEN
+    ERROR STOP 'BESJ : X < 0'
   ELSEIF( X==0 ) THEN
-    IF( Alpha<0 ) GOTO 1200
     IF( Alpha==0 ) THEN
       Y(1) = 1._SP
       IF( N==1 ) RETURN
@@ -135,8 +134,6 @@ SUBROUTINE BESJ(X,Alpha,N,Y,Nz)
     END DO
     RETURN
   ELSE
-    IF( Alpha<0._SP ) GOTO 1200
-    !
     ialp = INT(Alpha)
     fni = ialp + N - 1
     fnf = Alpha - ialp
@@ -250,8 +247,7 @@ SUBROUTINE BESJ(X,Alpha,N,Y,Nz)
             ta = 0.5_SP*tolln/wk(4)
             ta = ((0.0493827160_SP*ta-0.1111111111E0_SP)*ta+0.6666666667E0_SP)*ta*wk(6)
             IF( wk(1)<0.10_SP ) THEN
-              tb = (1.259921049_SP+(0.1679894730_SP+0.0887944358_SP*wk(1))*wk(1))&
-                /wk(7)
+              tb = (1.259921049_SP+(0.1679894730_SP+0.0887944358_SP*wk(1))*wk(1))/wk(7)
             ELSE
               tb = gln/wk(5)
             END IF
@@ -260,8 +256,7 @@ SUBROUTINE BESJ(X,Alpha,N,Y,Nz)
             rzden = pp(1) + pp(2)*wk(6)
             ta = rzden/rden
             IF( wk(1)<0.10_SP ) THEN
-              tb = (1.259921049_SP+(0.1679894730_SP+0.0887944358_SP*wk(1))*wk(1))&
-                /wk(7)
+              tb = (1.259921049_SP+(0.1679894730_SP+0.0887944358_SP*wk(1))*wk(1))/wk(7)
             ELSE
               tb = gln/wk(5)
             END IF
@@ -527,10 +522,6 @@ SUBROUTINE BESJ(X,Alpha,N,Y,Nz)
     tm = (dtm+fnf)*trx
     k = k - 1
   END DO
-  RETURN
-  !
-  !
-  !
-  1200 CALL XERMSG('BESJ','ORDER, ALPHA, LESS THAN ZERO.',2,1)
+
   RETURN
 END SUBROUTINE BESJ

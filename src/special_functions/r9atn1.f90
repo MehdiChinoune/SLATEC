@@ -1,5 +1,5 @@
 !** R9ATN1
-REAL(SP) FUNCTION R9ATN1(X)
+REAL(SP) ELEMENTAL FUNCTION R9ATN1(X)
   !> Evaluate ATAN(X) from first order relative accuracy so that
   !            ATAN(X) = X + X**3*R9ATN1(X).
   !***
@@ -9,8 +9,7 @@ REAL(SP) FUNCTION R9ATN1(X)
   !***
   ! **Type:**      SINGLE PRECISION (R9ATN1-S, D9ATN1-D)
   !***
-  ! **Keywords:**  ARC TANGENT, ELEMENTARY FUNCTIONS, FIRST ORDER, FNLIB,
-  !             TRIGONOMETRIC
+  ! **Keywords:**  ARC TANGENT, ELEMENTARY FUNCTIONS, FIRST ORDER, FNLIB, TRIGONOMETRIC
   !***
   ! **Author:**  Fullerton, W., (LANL)
   !***
@@ -37,9 +36,10 @@ REAL(SP) FUNCTION R9ATN1(X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
-  USE service, ONLY : XERMSG, R1MACH
-  REAL(SP) :: X, y
-  INTEGER, SAVE :: ntatn1
+  USE service, ONLY : R1MACH
+  REAL(SP), INTENT(IN) :: X
+  REAL(SP) :: y
+  INTEGER, PARAMETER :: ntatn1 = 10
   REAL(SP), PARAMETER :: eps = R1MACH(3), xsml = SQRT(0.1_SP*eps), &
     xbig = 1.571_SP/SQRT(eps), xmax = 1.571_SP/eps
   REAL(SP), PARAMETER :: atn1cs(21) = [ -.03283997535355202_SP, .05833432343172412_SP, &
@@ -50,28 +50,20 @@ REAL(SP) FUNCTION R9ATN1(X)
     -.00000000000119135_SP, .00000000000019240_SP,-.00000000000003118_SP, &
     .00000000000000506_SP, -.00000000000000082_SP, .00000000000000013_SP, &
     -.00000000000000002_SP ]
-  LOGICAL, SAVE :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  R9ATN1
-  IF( first ) THEN
-    ntatn1 = INITS(atn1cs,21,0.1_SP*eps)
-    first = .FALSE.
-  END IF
+  ! ntatn1 = INITS(atn1cs,0.1_SP*eps)
   !
   y = ABS(X)
-  IF( y>1._SP ) THEN
-    !
-    IF( y>xmax ) CALL XERMSG('R9ATN1',&
-      'NO PRECISION IN ANSWER BECAUSE X IS TOO BIG',2,2)
-    IF( y>xbig ) CALL XERMSG('R9ATN1',&
-      'ANSWER LT HALF PRECISION BECAUSE X IS TOO BIG',1,1)
-    !
+  IF( y>xmax ) THEN
+    ERROR STOP 'R9ATN1 : NO PRECISION IN ANSWER BECAUSE X IS TOO BIG'
+  ELSEIF( y>1._SP ) THEN
+    ! IF( y>xbig ) 'R9ATN1 : ANSWER LT HALF PRECISION BECAUSE X IS TOO BIG'
     R9ATN1 = (ATAN(X)-X)/X**3
-    RETURN
+  ELSEIF( y>xsml ) THEN
+    R9ATN1 = -0.25_SP + CSEVL(2._SP*y*y-1._SP,atn1cs(1:ntatn1))
+  ELSE
+    R9ATN1 = -1._SP/3._SP
   END IF
-  !
-  IF( y<=xsml ) R9ATN1 = -1._SP/3._SP
-  IF( y<=xsml ) RETURN
-  !
-  R9ATN1 = -0.25_SP + CSEVL(2._SP*y*y-1._SP,atn1cs,ntatn1)
+
   RETURN
 END FUNCTION R9ATN1

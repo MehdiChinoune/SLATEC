@@ -1,9 +1,8 @@
 !** DBESI
-SUBROUTINE DBESI(X,Alpha,Kode,N,Y,Nz)
+PURE SUBROUTINE DBESI(X,Alpha,Kode,N,Y,Nz)
   !> Compute an N member sequence of I Bessel functions
-  !            I/SUB(ALPHA+K-1)/(X), K=1,...,N or scaled Bessel functions
-  !            EXP(-X)*I/SUB(ALPHA+K-1)/(X), K=1,...,N for nonnegative
-  !            ALPHA and X.
+  !  I_{ALPHA+K-1}(X), K=1,...,N or scaled Bessel functions
+  !  EXP(-X)*I_{ALPHA+K-1}(X), K=1,...,N for nonnegative ALPHA and X.
   !***
   ! **Library:**   SLATEC
   !***
@@ -20,8 +19,8 @@ SUBROUTINE DBESI(X,Alpha,Kode,N,Y,Nz)
   !
   !     Abstract  **** a double precision routine ****
   !         DBESI computes an N member sequence of I Bessel functions
-  !         I/sub(ALPHA+K-1)/(X), K=1,...,N or scaled Bessel functions
-  !         EXP(-X)*I/sub(ALPHA+K-1)/(X), K=1,...,N for nonnegative ALPHA
+  !         I_{ALPHA+K-1}(X), K=1,...,N or scaled Bessel functions
+  !         EXP(-X)*I_{ALPHA+K-1}(X), K=1,...,N for nonnegative ALPHA
   !         and X.  A combination of the power series, the asymptotic
   !         expansion for X to infinity, and the uniform asymptotic
   !         expansion for NU to infinity are applied over subdivisions of
@@ -50,17 +49,17 @@ SUBROUTINE DBESI(X,Alpha,Kode,N,Y,Nz)
   !                    ALPHA >= 0.0D0
   !           KODE   - a parameter to indicate the scaling option
   !                    KODE=1 returns
-  !                           Y(K)=        I/sub(ALPHA+K-1)/(X),
+  !                           Y(K)=        I_{ALPHA+K-1}(X),
   !                                K=1,...,N
   !                    KODE=2 returns
-  !                           Y(K)=EXP(-X)*I/sub(ALPHA+K-1)/(X),
+  !                           Y(K)=EXP(-X)*I_{ALPHA+K-1}(X),
   !                                K=1,...,N
   !           N      - number of members in the sequence, N >= 1
   !
   !         Output     Y is double precision
   !           Y      - a vector whose first N components contain
-  !                    values for I/sub(ALPHA+K-1)/(X) or scaled
-  !                    values for EXP(-X)*I/sub(ALPHA+K-1)/(X),
+  !                    values for I_{ALPHA+K-1}(X) or scaled
+  !                    values for EXP(-X)*I_{ALPHA+K-1}(X),
   !                    K=1,...,N depending on KODE
   !           NZ     - number of components of Y set to zero due to
   !                    underflow,
@@ -95,10 +94,12 @@ SUBROUTINE DBESI(X,Alpha,Kode,N,Y,Nz)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  USE service, ONLY : XERMSG, D1MACH, I1MACH
+  USE service, ONLY : D1MACH, I1MACH
   !
-  INTEGER :: Kode, N, Nz
-  REAL(DP) :: Alpha, X, Y(N)
+  INTEGER, INTENT(IN) :: Kode, N
+  INTEGER, INTENT(OUT) :: Nz
+  REAL(DP), INTENT(IN) :: Alpha, X
+  REAL(DP), INTENT(OUT) :: Y(N)
   INTEGER :: i, ialp, in, is, i1, k, kk, km, kt, nn, ns
   REAL(DP) :: ain, ak, akm, ans, ap, arg, atol, tolln, dfn, dtm, dx, earg, &
     elim, etx, flgik, fn, fnf, fni, fnp1, fnu, gln, ra, s, sx, sxo2, s1, s2, t, &
@@ -120,23 +121,19 @@ SUBROUTINE DBESI(X,Alpha,Kode,N,Y,Nz)
   tolln = 2.303_DP*gln*i1
   tolln = MIN(tolln,34.5388_DP)
   IF( N<1 ) THEN
-    CALL XERMSG('DBESI','N LESS THAN ONE.',2,1)
+    ERROR STOP 'DBESI : N LESS THAN ONE.'
     RETURN
   ELSEIF( N==1 ) THEN
     kt = 2
   END IF
   nn = N
   IF( Kode<1 .OR. Kode>2 ) THEN
-    !
-    !
-    !
-    CALL XERMSG('DBESI','SCALING OPTION, KODE, NOT 1 OR 2.',2,1)
-    RETURN
+    ERROR STOP 'DBESI : SCALING OPTION, KODE, NOT 1 OR 2.'
   ELSEIF( X<0 ) THEN
-    CALL XERMSG('DBESI','X LESS THAN ZERO.',2,1)
-    RETURN
+    ERROR STOP 'DBESI : X LESS THAN ZERO.'
+  ELSEIF( Alpha<0._DP ) THEN
+    ERROR STOP 'DBESI : ORDER, ALPHA, LESS THAN ZERO.'
   ELSEIF( X==0 ) THEN
-    IF( Alpha<0 ) GOTO 1300
     IF( Alpha==0 ) THEN
       Y(1) = 1._DP
       IF( N==1 ) RETURN
@@ -149,7 +146,6 @@ SUBROUTINE DBESI(X,Alpha,Kode,N,Y,Nz)
     END DO
     RETURN
   ELSE
-    IF( Alpha<0._DP ) GOTO 1300
     !
     ialp = INT(Alpha)
     fni = ialp + N - 1
@@ -186,9 +182,7 @@ SUBROUTINE DBESI(X,Alpha,Kode,N,Y,Nz)
         earg = rttpi/SQRT(X)
         IF( Kode==2 ) GOTO 1000
         IF( X>elim ) THEN
-          CALL XERMSG('DBESI',&
-            'OVERFLOW, X TOO LARGE FOR KODE = 1.',6,1)
-          RETURN
+          ERROR STOP 'DBESI : OVERFLOW, X TOO LARGE FOR KODE = 1.'
         ELSE
           earg = earg*EXP(X)
           GOTO 1000
@@ -208,9 +202,7 @@ SUBROUTINE DBESI(X,Alpha,Kode,N,Y,Nz)
         IF( Kode==2 ) GOTO 100
         IF( Alpha<1._DP ) THEN
           IF( X<=elim ) GOTO 100
-          CALL XERMSG('DBESI',&
-            'OVERFLOW, X TOO LARGE FOR KODE = 1.',6,1)
-          RETURN
+          ERROR STOP 'DBESI : OVERFLOW, X TOO LARGE FOR KODE = 1.'
         ELSE
           z = X/Alpha
           ra = SQRT(1._DP+z*z)
@@ -218,9 +210,7 @@ SUBROUTINE DBESI(X,Alpha,Kode,N,Y,Nz)
           t = ra*(1._DP-etx) + etx/(z+ra)
           arg = Alpha*(t-gln)
           IF( arg>elim ) THEN
-            CALL XERMSG('DBESI',&
-              'OVERFLOW, X TOO LARGE FOR KODE = 1.',6,1)
-            RETURN
+            ERROR STOP 'DBESI : OVERFLOW, X TOO LARGE FOR KODE = 1.'
           ELSE
             IF( km/=0 ) GOTO 100
             GOTO 200
@@ -306,7 +296,6 @@ SUBROUTINE DBESI(X,Alpha,Kode,N,Y,Nz)
         Y(1) = temp(3)
         RETURN
       END IF
-    CASE DEFAULT
   END SELECT
   !
   !     SERIES FOR (X/2)**2<=NU+1
@@ -492,7 +481,6 @@ SUBROUTINE DBESI(X,Alpha,Kode,N,Y,Nz)
     tm = (dtm+fnf)*trx
     k = k - 1
   END DO
-  RETURN
-  1300 CALL XERMSG('DBESI','ORDER, ALPHA, LESS THAN ZERO.',2,1)
+
   RETURN
 END SUBROUTINE DBESI

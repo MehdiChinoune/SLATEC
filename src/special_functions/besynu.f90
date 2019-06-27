@@ -1,5 +1,5 @@
 !** BESYNU
-SUBROUTINE BESYNU(X,Fnu,N,Y)
+PURE SUBROUTINE BESYNU(X,Fnu,N,Y)
   !> Subsidiary to BESY
   !***
   ! **Library:**   SLATEC
@@ -12,9 +12,9 @@ SUBROUTINE BESYNU(X,Fnu,N,Y)
   !
   !     Abstract
   !         BESYNU computes N member sequences of Y Bessel functions
-  !         Y/SUB(FNU+I-1)/(X), I=1,N for non-negative orders FNU and
+  !         Y_{FNU+I-1}(X), I=1,N for non-negative orders FNU and
   !         positive X. Equations of the references are implemented on
-  !         small orders DNU for Y/SUB(DNU)/(X) and Y/SUB(DNU+1)/(X).
+  !         small orders DNU for Y_{DNU}(X) and Y_{DNU+1}(X).
   !         Forward recursion with the three term recursion relation
   !         generates higher orders FNU+I-1, I=1,...,N.
   !
@@ -40,7 +40,7 @@ SUBROUTINE BESYNU(X,Fnu,N,Y)
   !
   !         Output
   !           Y      - A vector whose first N components contain values
-  !                    for the sequence Y(I)=Y/SUB(FNU+I-1), I=1,N.
+  !                    for the sequence Y(I)=Y_{FNU+I-1}, I=1,N.
   !
   !     Error Conditions
   !         Improper input arguments - a fatal error
@@ -63,16 +63,16 @@ SUBROUTINE BESYNU(X,Fnu,N,Y)
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-  !   900326  Removed duplicate information from DESCRIPTION section.
-  !           (WRB)
+  !   900326  Removed duplicate information from DESCRIPTION section.  (WRB)
   !   900328  Added TYPE section.  (WRB)
   !   900727  Added EXTERNAL statement.  (WRB)
   !   910408  Updated the AUTHOR and REFERENCES sections.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  USE service, ONLY : XERMSG, R1MACH
+  USE service, ONLY : R1MACH
   !
-  INTEGER :: N
-  REAL(SP) :: Fnu, X, Y(N)
+  INTEGER, INTENT(IN) :: N
+  REAL(SP), INTENT(IN) :: Fnu, X
+  REAL(SP), INTENT(OUT) :: Y(N)
   INTEGER :: i, inu, j, k, kk, nn
   REAL(SP) :: a(120), ak, arg, a1, a2, bk, cb(120), cbk, cck, ck, coef, cpt, cp1, cp2, &
     cs, cs1, cs2, cx, dnu, dnu2, etest, etx, f, fc, fhs, fk, fks, flrx, fmu, fn, &
@@ -89,24 +89,17 @@ SUBROUTINE BESYNU(X,Fnu,N,Y)
   tol = MAX(ak,1.0E-15_SP)
   s2 = 0.
   IF( X<=0._SP ) THEN
-    !
-    !
-    CALL XERMSG('BESYNU','X NOT GREATER THAN ZERO',2,1)
-    RETURN
+    ERROR STOP 'BESYNU : X <= 0'
   ELSEIF( Fnu<0._SP ) THEN
-    CALL XERMSG('BESYNU','FNU NOT ZERO OR POSITIVE',2,1)
-    RETURN
+    ERROR STOP 'BESYNU : FNU < 0'
   ELSEIF( N<1 ) THEN
-    CALL XERMSG('BESYNU','N NOT GREATER THAN 0',2,1)
-    RETURN
+    ERROR STOP 'BESYNU : N < 1'
   ELSE
     rx = 2._SP/X
-    inu = INT(Fnu+0.5E0_SP)
+    inu = INT(Fnu+0.5_SP)
     dnu = Fnu - inu
     IF( ABS(dnu)==0.5_SP ) THEN
-      !
       !     FNU=HALF ODD INTEGER CASE
-      !
       coef = rthpi/SQRT(X)
       s1 = coef*SIN(X)
       s2 = -coef*COS(X)
@@ -355,4 +348,5 @@ SUBROUTINE BESYNU(X,Fnu,N,Y)
     ck = ck + rx
   END DO
   RETURN
+
 END SUBROUTINE BESYNU

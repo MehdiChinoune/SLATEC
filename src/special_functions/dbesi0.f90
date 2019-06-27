@@ -1,7 +1,6 @@
 !** DBESI0
-REAL(DP) FUNCTION DBESI0(X)
-  !> Compute the hyperbolic Bessel function of the first kind
-  !            of order zero.
+REAL(DP) ELEMENTAL FUNCTION DBESI0(X)
+  !> Compute the hyperbolic Bessel function of the first kind of order zero.
   !***
   ! **Library:**   SLATEC (FNLIB)
   !***
@@ -17,8 +16,7 @@ REAL(DP) FUNCTION DBESI0(X)
   ! **Description:**
   !
   ! DBESI0(X) calculates the double precision modified (hyperbolic)
-  ! Bessel function of the first kind of order zero and double
-  ! precision argument X.
+  ! Bessel function of the first kind of order zero and double precision argument X.
   !
   ! Series for BI0        on the interval  0.          to  9.00000E+00
   !                                        with weighted error   9.51E-34
@@ -37,10 +35,10 @@ REAL(DP) FUNCTION DBESI0(X)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-  USE service, ONLY : XERMSG, D1MACH
-  REAL(DP) :: X
+  USE service, ONLY : D1MACH
+  REAL(DP), INTENT(IN) :: X
   REAL(DP) :: y
-  INTEGER, SAVE :: nti0
+  INTEGER, PARAMETER :: nti0 = 11
   REAL(DP), PARAMETER :: xsml = SQRT(4.5_DP*D1MACH(3)), xmax = LOG(D1MACH(2))
   REAL(DP), PARAMETER :: bi0cs(18) = [ -.7660547252839144951081894976243285E-1_DP, &
     +.1927337953993808269952408750881196E+1_DP, +.2282644586920301338937029292330415E+0_DP, &
@@ -52,23 +50,19 @@ REAL(DP) FUNCTION DBESI0(X)
     +.3154382039721427336789333333333333E-22_DP, +.9004564101094637431466666666666666E-25_DP, &
     +.2240647369123670016000000000000000E-27_DP, +.4903034603242837333333333333333333E-30_DP, &
     +.9508172606122666666666666666666666E-33_DP ]
-  LOGICAL, SAVE :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  DBESI0
-  IF( first ) THEN
-    nti0 = INITDS(bi0cs,18,0.1_SP*D1MACH(3))
-    first = .FALSE.
-  END IF
+  ! nti0 = INITDS(bi0cs,0.1_SP*D1MACH(3))
   !
   y = ABS(X)
-  IF( y>3._DP ) THEN
-    !
-    IF( y>xmax ) CALL XERMSG('DBESI0','ABS(X) SO BIG I0 OVERFLOWS',2,2)
-    !
+  IF( y>xmax ) THEN
+    ERROR STOP 'DBESI0 : ABS(X) SO BIG I0 OVERFLOWS'
+  ELSEIF( y>3._DP ) THEN
     DBESI0 = EXP(y)*DBSI0E(X)
-    RETURN
+  ELSEIF( y>xsml ) THEN
+    DBESI0 = 2.75_DP + DCSEVL(y*y/4.5_DP-1._DP,bi0cs(1:nti0))
+  ELSE
+    DBESI0 = 1._DP
   END IF
-  !
-  DBESI0 = 1._DP
-  IF( y>xsml ) DBESI0 = 2.75_DP + DCSEVL(y*y/4.5_DP-1._DP,bi0cs,nti0)
+
   RETURN
 END FUNCTION DBESI0

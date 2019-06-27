@@ -1,5 +1,5 @@
 !** ASYIK
-SUBROUTINE ASYIK(X,Fnu,Kode,Flgik,Ra,Arg,In,Y)
+PURE SUBROUTINE ASYIK(X,Fnu,Kode,Flgik,Ra,Arg,In,Y)
   !> Subsidiary to BESI and BESK
   !***
   ! **Library:**   SLATEC
@@ -10,20 +10,20 @@ SUBROUTINE ASYIK(X,Fnu,Kode,Flgik,Ra,Arg,In,Y)
   !***
   ! **Description:**
   !
-  !                    ASYIK computes Bessel functions I and K
-  !                  for arguments X>0.0 and orders FNU>=35
-  !                  on FLGIK = 1 and FLGIK = -1 respectively.
+  !      ASYIK computes Bessel functions I and K
+  !      for arguments X>0.0 and orders FNU>=35
+  !      on FLGIK = 1 and FLGIK = -1 respectively.
   !
   !                                    INPUT
   !
   !      X    - argument, X>0.0E0
   !      FNU  - order of first Bessel function
   !      KODE - a parameter to indicate the scaling option
-  !             KODE=1 returns Y(I)=        I/SUB(FNU+I-1)/(X), I=1,IN
-  !                    or      Y(I)=        K/SUB(FNU+I-1)/(X), I=1,IN
+  !             KODE=1 returns Y(I)=        I_{FNU+I-1}(X), I=1,IN
+  !                    or      Y(I)=        K_{FNU+I-1}(X), I=1,IN
   !                    on FLGIK = 1.0E0 or FLGIK = -1.0E0
-  !             KODE=2 returns Y(I)=EXP(-X)*I/SUB(FNU+I-1)/(X), I=1,IN
-  !                    or      Y(I)=EXP( X)*K/SUB(FNU+I-1)/(X), I=1,IN
+  !             KODE=2 returns Y(I)=EXP(-X)*I_{FNU+I-1}(X), I=1,IN
+  !                    or      Y(I)=EXP( X)*K_{FNU+I-1}(X), I=1,IN
   !                    on FLGIK = 1.0E0 or FLGIK = -1.0E0
   !     FLGIK - selection parameter for I or K function
   !             FLGIK =  1.0E0 gives the I function
@@ -56,8 +56,9 @@ SUBROUTINE ASYIK(X,Fnu,Kode,Flgik,Ra,Arg,In,Y)
   !   910408  Updated the AUTHOR section.  (WRB)
   USE service, ONLY : R1MACH
   !
-  INTEGER :: In, Kode
-  REAL(SP) :: Arg, Flgik, Fnu, Ra, X, Y(In)
+  INTEGER, INTENT(IN) :: In, Kode
+  REAL(SP), INTENT(IN) :: Flgik, Fnu, X
+  REAL(SP), INTENT(OUT) :: Arg, Ra, Y(In)
   INTEGER :: j, jn, k, kk, l
   REAL(SP) :: ak, ap, coef, etx, fn, gln, s1, s2, t, tol, t2, z
   REAL(SP), PARAMETER :: con(2) = [ 3.98942280401432678E-01_SP, 1.25331413731550025E+00_SP ]
@@ -122,4 +123,6 @@ SUBROUTINE ASYIK(X,Fnu,Kode,Flgik,Ra,Arg,In,Y)
     t = ABS(t)
     Y(jn) = s2*coef*SQRT(t)*con(kk)
   END DO
+
+  RETURN
 END SUBROUTINE ASYIK

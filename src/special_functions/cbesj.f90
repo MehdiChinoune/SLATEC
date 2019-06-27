@@ -1,9 +1,8 @@
 !** CBESJ
-SUBROUTINE CBESJ(Z,Fnu,Kode,N,Cy,Nz,Ierr)
+PURE SUBROUTINE CBESJ(Z,Fnu,Kode,N,Cy,Nz,Ierr)
   !> Compute a sequence of the Bessel functions J(a,z) for
-  !            complex argument z and real nonnegative orders a=b,b+1,
-  !            b+2,... where b>0.  A scaling option is available to
-  !            help avoid overflow.
+  !  complex argument z and real nonnegative orders a=b,b+1,
+  !  b+2,... where b>0.  A scaling option is available to help avoid overflow.
   !***
   ! **Library:**   SLATEC
   !***
@@ -156,19 +155,24 @@ SUBROUTINE CBESJ(Z,Fnu,Kode,N,Cy,Nz,Ierr)
   !   920811  Prologue revised.  (DWL)
   USE service, ONLY : R1MACH, I1MACH
   !
-  INTEGER :: i, Ierr, inu, inuh, ir, Kode, k1, k2, N, nl, Nz, k
-  COMPLEX(SP) :: ci, csgn, Cy(N), Z, zn
-  REAL(SP) :: aa, alim, arg, dig, elim, Fnu, fnul, rl, r1, r1m5, &
+  INTEGER, INTENT(IN) :: Kode, N
+  INTEGER, INTENT(OUT) :: Ierr, Nz
+  REAL(SP), INTENT(IN) :: Fnu
+  COMPLEX(SP), INTENT(IN) :: Z
+  COMPLEX(SP), INTENT(OUT) :: Cy(N)
+  INTEGER :: i, inu, inuh, ir, k1, k2, nl, k
+  COMPLEX(SP) :: ci, csgn, zn
+  REAL(SP) :: aa, alim, arg, dig, elim, fnul, rl, r1, r1m5, &
     r2, tol, yy, az, fn, bb, ascle, rtol, atol
   REAL(SP), PARAMETER :: hpi = 1.57079632679489662_SP
   !
   !* FIRST EXECUTABLE STATEMENT  CBESJ
   Ierr = 0
   Nz = 0
-  IF( Fnu<0._SP ) Ierr = 1
-  IF( Kode<1 .OR. Kode>2 ) Ierr = 1
-  IF( N<1 ) Ierr = 1
-  IF( Ierr/=0 ) RETURN
+  IF( Fnu<0._SP .OR. Kode<1 .OR. Kode>2 .OR. N<1 ) THEN
+    Ierr = 1
+    RETURN
+  END IF
   !-----------------------------------------------------------------------
   !     SET PARAMETERS RELATED TO MACHINE CONSTANTS.
   !     TOL IS THE APPROXIMATE UNIT ROUNDOFF LIMITED TO 1.0E-18.
@@ -263,4 +267,5 @@ SUBROUTINE CBESJ(Z,Fnu,Kode,N,Cy,Nz,Ierr)
   END IF
   Nz = 0
   Ierr = 4
+
 END SUBROUTINE CBESJ

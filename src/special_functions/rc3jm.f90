@@ -1,9 +1,8 @@
 !** RC3JM
-SUBROUTINE RC3JM(L1,L2,L3,M1,M2min,M2max,Thrcof,Ndim,Ier)
+PURE SUBROUTINE RC3JM(L1,L2,L3,M1,M2min,M2max,Thrcof,Ndim,Ier)
   !> Evaluate the 3j symbol g(M2) = (L1 L2   L3  )
-  !                                           (M1 M2 -M1-M2)
-  !            for all allowed values of M2, the other parameters
-  !            being held fixed.
+  !                                 (M1 M2 -M1-M2)
+  !  for all allowed values of M2, the other parameters being held fixed.
   !***
   ! **Library:**   SLATEC
   !***
@@ -131,10 +130,12 @@ SUBROUTINE RC3JM(L1,L2,L3,M1,M2min,M2max,Thrcof,Ndim,Ier)
   !   910415  Mixed type expressions eliminated; variable C1 initialized;
   !           description of THRCOF expanded. These changes were done by
   !           D. W. Lozier.
-  USE service, ONLY : XERMSG, R1MACH
+  USE service, ONLY : R1MACH
   !
-  INTEGER :: Ndim, Ier
-  REAL(SP) :: L1, L2, L3, M1, M2min, M2max, Thrcof(Ndim)
+  INTEGER, INTENT(IN) :: Ndim
+  INTEGER, INTENT(OUT) :: Ier
+  REAL(SP), INTENT(IN) :: L1, L2, L3, M1
+  REAL(SP), INTENT(OUT) :: M2min, M2max, Thrcof(Ndim)
   !
   INTEGER :: i, indexx, lstep, n, nfin, nfinp1, nfinp2, nfinp3, nlim, nstep2
   REAL(SP) :: a1, a1s, c1, c1old, c2, cnorm, dv, hugee, m2, m3, newfac, oldfac, &
@@ -157,16 +158,13 @@ SUBROUTINE RC3JM(L1,L2,L3,M1,M2min,M2max,Thrcof,Ndim,Ier)
   !  Check error conditions 1, 2, and 3.
   IF( (L1-ABS(M1)+eps<zero) .OR. (MOD(L1+ABS(M1)+eps,one)>=eps+eps) ) THEN
     Ier = 1
-    CALL XERMSG('RC3JM','L1-ABS(M1) less than zero or L1+ABS(M1) not integer.',Ier,1)
-    RETURN
+    ERROR STOP 'RC3JM : L1-ABS(M1) less than zero or L1+ABS(M1) not integer.'
   ELSEIF( (L1+L2-L3<-eps) .OR. (L1-L2+L3<-eps) .OR. (-L1+L2+L3<-eps) ) THEN
     Ier = 2
-    CALL XERMSG('RC3JM','L1, L2, L3 do not satisfy triangular condition.',Ier,1)
-    RETURN
+    ERROR STOP 'RC3JM : L1, L2, L3 do not satisfy triangular condition.'
   ELSEIF( MOD(L1+L2+L3+eps,one)>=eps+eps ) THEN
     Ier = 3
-    CALL XERMSG('RC3JM','L1+L2+L3 not integer.',Ier,1)
-    RETURN
+    ERROR STOP 'RC3JM : L1+L2+L3 not integer.'
   END IF
   !
   !
@@ -177,8 +175,7 @@ SUBROUTINE RC3JM(L1,L2,L3,M1,M2min,M2max,Thrcof,Ndim,Ier)
   !  Check error condition 4.
   IF( MOD(M2max-M2min+eps,one)>=eps+eps ) THEN
     Ier = 4
-    CALL XERMSG('RC3JM','M2MAX-M2MIN not integer.',Ier,1)
-    RETURN
+    ERROR STOP 'RC3JM : M2MAX-M2MIN not integer.'
   END IF
   IF( M2min<M2max-eps ) THEN
     !
@@ -189,8 +186,7 @@ SUBROUTINE RC3JM(L1,L2,L3,M1,M2min,M2max,Thrcof,Ndim,Ier)
       !
       !  Check error condition 6.
       Ier = 6
-      CALL XERMSG('RC3JM','Dimension of result array for 3j coefficients too small.',Ier,1)
-      RETURN
+      ERROR STOP 'RC3JM : Dimension of result array for 3j coefficients too small.'
     ELSE
       !
       !
@@ -217,8 +213,7 @@ SUBROUTINE RC3JM(L1,L2,L3,M1,M2min,M2max,Thrcof,Ndim,Ier)
     !
     !  Check error condition 5.
     Ier = 5
-    CALL XERMSG('RC3JM','M2MIN greater than M2MAX.',Ier,1)
-    RETURN
+    ERROR STOP 'RC3JM : M2MIN greater than M2MAX.'
   END IF
   DO
     lstep = lstep + 1
@@ -429,9 +424,6 @@ SUBROUTINE RC3JM(L1,L2,L3,M1,M2min,M2max,Thrcof,Ndim,Ier)
   DO n = 1, nfin
     Thrcof(n) = cnorm*Thrcof(n)
   END DO
-  RETURN
-  !
-  !
-  !
+
   RETURN
 END SUBROUTINE RC3JM

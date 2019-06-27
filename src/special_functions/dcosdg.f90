@@ -1,5 +1,5 @@
 !** DCOSDG
-REAL(DP) FUNCTION DCOSDG(X)
+REAL(DP) ELEMENTAL FUNCTION DCOSDG(X)
   !> Compute the cosine of an argument in degrees.
   !***
   ! **Library:**   SLATEC (FNLIB)
@@ -8,8 +8,7 @@ REAL(DP) FUNCTION DCOSDG(X)
   !***
   ! **Type:**      DOUBLE PRECISION (COSDG-S, DCOSDG-D)
   !***
-  ! **Keywords:**  COSINE, DEGREES, ELEMENTARY FUNCTIONS, FNLIB,
-  !             TRIGONOMETRIC
+  ! **Keywords:**  COSINE, DEGREES, ELEMENTARY FUNCTIONS, FNLIB, TRIGONOMETRIC
   !***
   ! **Author:**  Fullerton, W., (LANL)
   !***
@@ -29,8 +28,8 @@ REAL(DP) FUNCTION DCOSDG(X)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
+  REAL(DP), INTENT(IN) :: X
   INTEGER :: n
-  REAL(DP) :: X
   REAL(DP), PARAMETER :: raddeg = 0.017453292519943295769236907684886_DP
   !* FIRST EXECUTABLE STATEMENT  DCOSDG
   DCOSDG = COS(raddeg*X)

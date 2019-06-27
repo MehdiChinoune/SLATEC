@@ -1,5 +1,5 @@
 !** ZLOG
-SUBROUTINE ZLOG(Ar,Ai,Br,Bi,Ierr)
+SUBROUTINE ZLOG(Ar,Ai,Br,Bi)
   !> Subsidiary to ZBESH, ZBESI, ZBESJ, ZBESK, ZBESY, ZAIRY and
   !            ZBIRY
   !***
@@ -22,42 +22,13 @@ SUBROUTINE ZLOG(Ar,Ai,Br,Bi,Ierr)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
 
-  REAL(DP) :: Ar, Ai, Br, Bi, zm, dtheta
-  INTEGER :: Ierr
-  REAL(DP), PARAMETER :: dpi = 3.141592653589793238462643383E+0_DP, &
-    dhpi = 1.570796326794896619231321696_DP
+  COMPLEX(DP) :: B
+  REAL(DP) :: Ar, Ai, Br, Bi
   !* FIRST EXECUTABLE STATEMENT  ZLOG
-  Ierr = 0
-  IF( Ar==0._DP ) THEN
-    IF( Ai==0._DP ) THEN
-      Ierr = 1
-      RETURN
-    ELSE
-      Bi = dhpi
-      Br = LOG(ABS(Ai))
-      IF( Ai<0._DP ) Bi = -Bi
-      RETURN
-    END IF
-  ELSEIF( Ai==0._DP ) THEN
-    IF( Ar>0._DP ) THEN
-      Br = LOG(Ar)
-      Bi = 0._DP
-      RETURN
-    ELSE
-      Br = LOG(ABS(Ar))
-      Bi = dpi
-      RETURN
-    END IF
-  ELSE
-    dtheta = ATAN(Ai/Ar)
-    IF( dtheta<=0._DP ) THEN
-      IF( Ar<0._DP ) dtheta = dtheta + dpi
-    ELSE
-      IF( Ar<0._DP ) dtheta = dtheta - dpi
-    END IF
-  END IF
-  zm = ZABS(Ar,Ai)
-  Br = LOG(zm)
-  Bi = dtheta
+
+  B = LOG( CMPLX( Ar, Ai, DP ) )
+  Br = REAL( B, DP )
+  Bi = AIMAG( B )
+
   RETURN
 END SUBROUTINE ZLOG

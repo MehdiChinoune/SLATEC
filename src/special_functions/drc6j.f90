@@ -1,9 +1,8 @@
 !** DRC6J
-SUBROUTINE DRC6J(L2,L3,L4,L5,L6,L1min,L1max,Sixcof,Ndim,Ier)
+PURE SUBROUTINE DRC6J(L2,L3,L4,L5,L6,L1min,L1max,Sixcof,Ndim,Ier)
   !> Evaluate the 6j symbol h(L1) = {L1 L2 L3}
-  !                                           {L4 L5 L6}
-  !            for all allowed values of L1, the other parameters
-  !            being held fixed.
+  !                                 {L4 L5 L6}
+  !  for all allowed values of L1, the other parameters being held fixed.
   !***
   ! **Library:**   SLATEC
   !***
@@ -12,8 +11,7 @@ SUBROUTINE DRC6J(L2,L3,L4,L5,L6,L1min,L1max,Sixcof,Ndim,Ier)
   ! **Type:**      DOUBLE PRECISION (RC6J-S, DRC6J-D)
   !***
   ! **Keywords:**  6J COEFFICIENTS, 6J SYMBOLS, CLEBSCH-GORDAN COEFFICIENTS,
-  !             RACAH COEFFICIENTS, VECTOR ADDITION COEFFICIENTS,
-  !             WIGNER COEFFICIENTS
+  !             RACAH COEFFICIENTS, VECTOR ADDITION COEFFICIENTS, WIGNER COEFFICIENTS
   !***
   ! **Author:**  Gordon, R. G., Harvard University
   !           Schulten, K., Max Planck Institute
@@ -131,10 +129,12 @@ SUBROUTINE DRC6J(L2,L3,L4,L5,L6,L1min,L1max,Sixcof,Ndim,Ier)
   !   910415  Mixed type expressions eliminated; variable C1 initialized;
   !           description of SIXCOF expanded. These changes were done by
   !           D. W. Lozier.
-  USE service, ONLY : XERMSG, D1MACH
+  USE service, ONLY : D1MACH
   !
-  INTEGER :: Ndim, Ier
-  REAL(DP) :: L2, L3, L4, L5, L6, L1min, L1max, Sixcof(Ndim)
+  INTEGER, INTENT(IN) :: Ndim
+  INTEGER, INTENT(OUT) :: Ier
+  REAL(DP), INTENT(IN) :: L2, L3, L4, L5, L6
+  REAL(DP), INTENT(OUT) :: L1min, L1max, Sixcof(Ndim)
   !
   INTEGER :: i, indexx, lstep, n, nfin, nfinp1, nfinp2, nfinp3, nlim, nstep2
   REAL(DP) :: a1, a1s, a2, a2s, c1, c1old, c2, cnorm, denom, dv, hugee, &
@@ -158,16 +158,13 @@ SUBROUTINE DRC6J(L2,L3,L4,L5,L6,L1min,L1max,Sixcof,Ndim,Ier)
   IF( (MOD(L2+L3+L5+L6+eps,one)>=eps+eps) .OR. &
       (MOD(L4+L2+L6+eps,one)>=eps+eps) ) THEN
     Ier = 1
-    CALL XERMSG('DRC6J','L2+L3+L5+L6 or L4+L2+L6 not integer.',Ier,1)
-    RETURN
+    ERROR STOP 'DRC6J : L2+L3+L5+L6 or L4+L2+L6 not integer.'
   ELSEIF( (L4+L2-L6<zero) .OR. (L4-L2+L6<zero) .OR. (-L4+L2+L6<zero) ) THEN
     Ier = 2
-    CALL XERMSG('DRC6J','L4, L2, L6 triangular condition not satisfied.',Ier,1)
-    RETURN
+    ERROR STOP 'DRC6J : L4, L2, L6 triangular condition not satisfied.'
   ELSEIF( (L4-L5+L3<zero) .OR. (L4+L5-L3<zero) .OR. (-L4+L5+L3<zero) ) THEN
     Ier = 3
-    CALL XERMSG('DRC6J','L4, L5, L3 triangular condition not satisfied.',Ier,1)
-    RETURN
+    ERROR STOP 'DRC6J : L4, L5, L3 triangular condition not satisfied.'
   END IF
   !
   !  Limits for L1
@@ -178,11 +175,9 @@ SUBROUTINE DRC6J(L2,L3,L4,L5,L6,L1min,L1max,Sixcof,Ndim,Ier)
   !  Check error condition 4.
   IF( MOD(L1max-L1min+eps,one)>=eps+eps ) THEN
     Ier = 4
-    CALL XERMSG('DRC6J','L1MAX-L1MIN not integer.',Ier,1)
-    RETURN
+    ERROR STOP 'DRC6J : L1MAX-L1MIN not integer.'
   END IF
   IF( L1min<L1max-eps ) THEN
-    !
     !
     !  This is reached in case that L1 can take more than one value.
     !
@@ -192,8 +187,7 @@ SUBROUTINE DRC6J(L2,L3,L4,L5,L6,L1min,L1max,Sixcof,Ndim,Ier)
       !
       !  Check error condition 6.
       Ier = 6
-      CALL XERMSG('DRC6J','Dimension of result array for 6j coefficients too small.',Ier,1)
-      RETURN
+      ERROR STOP 'DRC6J : Dimension of result array for 6j coefficients too small.'
     ELSE
       !
       !
@@ -220,7 +214,7 @@ SUBROUTINE DRC6J(L2,L3,L4,L5,L6,L1min,L1max,Sixcof,Ndim,Ier)
     !
     !  Check error condition 5.
     Ier = 5
-    CALL XERMSG('DRC6J','L1MIN greater than L1MAX.',Ier,1)
+    ERROR STOP 'DRC6J : L1MIN > L1MAX.'
     RETURN
   END IF
   100  lstep = lstep + 1
@@ -442,5 +436,6 @@ SUBROUTINE DRC6J(L2,L3,L4,L5,L6,L1min,L1max,Sixcof,Ndim,Ier)
   DO n = 1, nfin
     Sixcof(n) = cnorm*Sixcof(n)
   END DO
+
   RETURN
 END SUBROUTINE DRC6J

@@ -1,8 +1,7 @@
 !** CBIRY
-SUBROUTINE CBIRY(Z,Id,Kode,Bi,Ierr)
-  !> Compute the Airy function Bi(z) or its derivative dBi/dz
-  !            for complex argument z.  A scaling option is available
-  !            to help avoid overflow.
+ELEMENTAL SUBROUTINE CBIRY(Z,Id,Kode,Bi,Ierr)
+  !> Compute the Airy function Bi(z) or its derivative dBi/dz for complex argument z.
+  !  A scaling option is available to help avoid overflow.
   !***
   ! **Library:**   SLATEC
   !***
@@ -135,8 +134,10 @@ SUBROUTINE CBIRY(Z,Id,Kode,Bi,Ierr)
   !   920128  Category corrected.  (WRB)
   !   920811  Prologue revised.  (DWL)
   USE service, ONLY : R1MACH, I1MACH
-  INTEGER :: Id, Ierr, Kode
-  COMPLEX(SP) :: Bi, Z
+  INTEGER, INTENT(IN) :: Id, Kode
+  INTEGER, INTENT(OUT) :: Ierr
+  COMPLEX(SP), INTENT(IN) :: Z
+  COMPLEX(SP), INTENT(OUT) :: Bi
   INTEGER :: k, k1, k2, nz
   REAL(SP) :: aa, ad, ak, alim, atrm, az, az3, bb, bk, ck, dig, dk, d1, d2, elim, fid, &
     fmr, fnu, fnul, rl, r1m5, sfac, tol, zi, zr, z3i, z3r
@@ -148,9 +149,10 @@ SUBROUTINE CBIRY(Z,Id,Kode,Bi,Ierr)
   !* FIRST EXECUTABLE STATEMENT  CBIRY
   Ierr = 0
   nz = 0
-  IF( Id<0 .OR. Id>1 ) Ierr = 1
-  IF( Kode<1 .OR. Kode>2 ) Ierr = 1
-  IF( Ierr/=0 ) RETURN
+  IF( Id<0 .OR. Id>1 .OR. Kode<1 .OR. Kode>2 ) THEN
+    Ierr = 1
+    RETURN
+  END IF
   az = ABS(Z)
   tol = MAX(R1MACH(4),1.0E-18_SP)
   fid = Id
@@ -329,5 +331,6 @@ SUBROUTINE CBIRY(Z,Id,Kode,Bi,Ierr)
   END IF
   100  nz = 0
   Ierr = 5
+
   RETURN
 END SUBROUTINE CBIRY

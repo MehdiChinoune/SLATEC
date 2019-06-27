@@ -1,5 +1,5 @@
 !** CUNHJ
-SUBROUTINE CUNHJ(Z,Fnu,Ipmtr,Tol,Phi,Arg,Zeta1,Zeta2,Asum,Bsum)
+PURE SUBROUTINE CUNHJ(Z,Fnu,Ipmtr,Tol,Phi,Arg,Zeta1,Zeta2,Asum,Bsum)
   !> Subsidiary to CBESI and CBESK
   !***
   ! **Library:**   SLATEC
@@ -45,14 +45,16 @@ SUBROUTINE CUNHJ(Z,Fnu,Ipmtr,Tol,Phi,Arg,Zeta1,Zeta2,Asum,Bsum)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
   USE service, ONLY : R1MACH
-  COMPLEX(SP) :: Arg, Asum, Bsum, cfnu, cr(14), dr(14), p(30), Phi, &
-    przth, ptfn, rfn13, rtzta, rzth, suma, sumb, tfn, t2, &
-    up(14), w, w2, Z, za, zb, zc, zeta, Zeta1, Zeta2, zth
-  REAL(SP) :: ang, ap(30), atol, aw2, azth, btol, Fnu, fn13, fn23, pp, rfnu, rfnu2, Tol, &
+  INTEGER, INTENT(IN) :: Ipmtr
+  REAL(SP), INTENT(IN) :: Fnu, Tol
+  COMPLEX(SP), INTENT(IN) :: Z
+  COMPLEX(SP), INTENT(OUT) :: Arg, Asum, Bsum, Phi, Zeta1, Zeta2
+  INTEGER :: ias, ibs, is, j, jr, ju, k, kmax, kp1, ks, l, lr, lrp1, l1, l2, m
+  COMPLEX(SP) :: cfnu, cr(14), dr(14), p(30), przth, ptfn, rfn13, rtzta, rzth, &
+    suma, sumb, tfn, t2, up(14), w, w2, za, zb, zc, zeta, zth
+  REAL(SP) :: ang, ap(30), atol, aw2, azth, btol, fn13, fn23, pp, rfnu, rfnu2, &
     wi, wr, zci, zcr, zetai, zetar, zthi, zthr, asumr, asumi, bsumr, bsumi, test, &
     tstr, tsti, ac
-  INTEGER :: ias, ibs, Ipmtr, is, j, jr, ju, k, kmax, kp1, ks, l, &
-    lr, lrp1, l1, l2, m
   REAL(SP), PARAMETER :: ar(14) = [ 1.00000000000000000E+00_SP, 1.04166666666666667E-01_SP, &
     8.35503472222222222E-02_SP, 1.28226574556327160E-01_SP, 2.91849026464140464E-01_SP, &
     8.81627267443757652E-01_SP, 3.32140828186276754E+00_SP, 1.49957629868625547E+01_SP, &

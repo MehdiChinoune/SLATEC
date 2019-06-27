@@ -1,5 +1,5 @@
 !** PSIXN
-REAL(SP) FUNCTION PSIXN(N)
+REAL(SP) ELEMENTAL FUNCTION PSIXN(N)
   !> Subsidiary to EXINT
   !***
   ! **Library:**   SLATEC
@@ -27,7 +27,8 @@ REAL(SP) FUNCTION PSIXN(N)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
   USE service, ONLY : R1MACH
-  INTEGER :: N, k
+  INTEGER, INTENT(IN) :: N
+  INTEGER :: k
   REAL(SP) :: ax, fn, rfn2, trm, s, wdtol
   !-----------------------------------------------------------------------
   !             PSIXN(N), N = 1,100
@@ -91,6 +92,6 @@ REAL(SP) FUNCTION PSIXN(N)
     PSIXN = s + LOG(fn)
   ELSE
     PSIXN = c(N)
-    RETURN
   END IF
+
 END FUNCTION PSIXN

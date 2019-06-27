@@ -1,5 +1,5 @@
 !** DASYIK
-SUBROUTINE DASYIK(X,Fnu,Kode,Flgik,Ra,Arg,In,Y)
+PURE SUBROUTINE DASYIK(X,Fnu,Kode,Flgik,Ra,Arg,In,Y)
   !> Subsidiary to DBESI and DBESK
   !***
   ! **Library:**   SLATEC
@@ -10,20 +10,19 @@ SUBROUTINE DASYIK(X,Fnu,Kode,Flgik,Ra,Arg,In,Y)
   !***
   ! **Description:**
   !
-  !                    DASYIK computes Bessel functions I and K
-  !                  for arguments X>0.0 and orders FNU>=35
-  !                  on FLGIK = 1 and FLGIK = -1 respectively.
+  !    DASYIK computes Bessel functions I and K for arguments X>0.0 and orders
+  !    FNU>=35 on FLGIK = 1 and FLGIK = -1 respectively.
   !
   !                                    INPUT
   !
   !      X    - Argument, X>0.0D0
   !      FNU  - Order of first Bessel function
   !      KODE - A parameter to indicate the scaling option
-  !             KODE=1 returns Y(I)=        I/SUB(FNU+I-1)/(X), I=1,IN
-  !                    or      Y(I)=        K/SUB(FNU+I-1)/(X), I=1,IN
+  !             KODE=1 returns Y(I)=        I_{FNU+I-1}(X), I=1,IN
+  !                    or      Y(I)=        K_{FNU+I-1}(X), I=1,IN
   !                    on FLGIK = 1.0D0 or FLGIK = -1.0D0
-  !             KODE=2 returns Y(I)=EXP(-X)*I/SUB(FNU+I-1)/(X), I=1,IN
-  !                    or      Y(I)=EXP( X)*K/SUB(FNU+I-1)/(X), I=1,IN
+  !             KODE=2 returns Y(I)=EXP(-X)*I_{FNU+I-1}(X), I=1,IN
+  !                    or      Y(I)=EXP( X)*K_{FNU+I-1}(X), I=1,IN
   !                    on FLGIK = 1.0D0 or FLGIK = -1.0D0
   !     FLGIK - Selection parameter for I or K FUNCTION
   !             FLGIK =  1.0D0 gives the I function
@@ -57,8 +56,9 @@ SUBROUTINE DASYIK(X,Fnu,Kode,Flgik,Ra,Arg,In,Y)
   !   910408  Updated the AUTHOR section.  (WRB)
   USE service, ONLY : D1MACH
   !
-  INTEGER :: In, Kode
-  REAL(DP) :: Arg, Flgik, Fnu, X, Y(In), Ra
+  INTEGER, INTENT(IN) :: In, Kode
+  REAL(DP), INTENT(IN) :: Flgik, Fnu, X
+  REAL(DP), INTENT(OUT) :: Arg, Ra, Y(In)
   INTEGER :: j, jn, k, kk, l
   REAL(DP) :: ak, ap, coef, etx, fn, gln, s1, s2, t, tol, t2, z
   REAL(DP), PARAMETER :: con(2) = [ 3.98942280401432678E-01_DP, 1.25331413731550025E+00_DP ]
@@ -123,4 +123,5 @@ SUBROUTINE DASYIK(X,Fnu,Kode,Flgik,Ra,Arg,In,Y)
     t = ABS(t)
     Y(jn) = s2*coef*SQRT(t)*con(kk)
   END DO
+
 END SUBROUTINE DASYIK

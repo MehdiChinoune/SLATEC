@@ -1,7 +1,7 @@
 !** DBSKES
-SUBROUTINE DBSKES(Xnu,X,Nin,Bke)
+PURE SUBROUTINE DBSKES(Xnu,X,Nin,Bke)
   !> Compute a sequence of exponentially scaled modified Bessel
-  !            functions of the third kind of fractional order.
+  !  functions of the third kind of fractional order.
   !***
   ! **Library:**   SLATEC (FNLIB)
   !***
@@ -37,9 +37,10 @@ SUBROUTINE DBSKES(Xnu,X,Nin,Bke)
   !   890911  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-  USE service, ONLY : XERMSG, D1MACH
-  INTEGER :: Nin
-  REAL(DP) :: Xnu, X, Bke(Nin)
+  USE service, ONLY : D1MACH
+  INTEGER, INTENT(IN) :: Nin
+  REAL(DP), INTENT(IN) :: Xnu, X
+  REAL(DP), INTENT(OUT) :: Bke(Nin)
   INTEGER :: i, iswtch, n
   REAL(DP) :: bknu1, v, vincr, vend, direct
   REAL(DP), PARAMETER :: alnbig = LOG(D1MACH(2))
@@ -48,10 +49,13 @@ SUBROUTINE DBSKES(Xnu,X,Nin,Bke)
   v = ABS(Xnu)
   n = ABS(Nin)
   !
-  IF( v>=1._DP ) CALL XERMSG('DBSKES','ABS(XNU) MUST BE LT 1',2,2)
-  IF( X<=0._DP ) CALL XERMSG('DBSKES','X IS LE 0',3,2)
-  IF( n==0 ) CALL XERMSG('DBSKES',&
-    'N THE NUMBER IN THE SEQUENCE IS 0',4,2)
+  IF( v>=1._DP ) THEN
+    ERROR STOP 'DBSKES : ABS(XNU) MUST BE LT 1'
+  ELSEIF( X<=0._DP ) THEN
+    ERROR STOP 'DBSKES : X IS LE 0'
+  ELSEIF( n==0 ) THEN
+    ERROR STOP 'DBSKES : N THE NUMBER IN THE SEQUENCE IS 0'
+  END IF
   !
   CALL D9KNUS(v,X,Bke(1),bknu1,iswtch)
   IF( n==1 ) RETURN
@@ -59,17 +63,18 @@ SUBROUTINE DBSKES(Xnu,X,Nin,Bke)
   vincr = SIGN(1._SP,REAL(Nin,SP))
   direct = vincr
   IF( Xnu/=0._DP ) direct = vincr*SIGN(1._DP,Xnu)
-  IF( iswtch==1 .AND. direct>0. ) CALL XERMSG('DBSKES',&
-    'X SO SMALL BESSEL K-SUB-XNU+1 OVERFLOWS',5,2)
+  IF( iswtch==1 .AND. direct>0. ) THEN
+    ERROR STOP 'DBSKES : X SO SMALL BESSEL K-SUB-XNU+1 OVERFLOWS'
+  END IF
   Bke(2) = bknu1
   !
   IF( direct<0. ) CALL D9KNUS(ABS(Xnu+vincr),X,Bke(2),bknu1,iswtch)
   IF( n==2 ) RETURN
   !
   vend = ABS(Xnu+Nin) - 1._DP
-  IF( (vend-.5_DP)*LOG(vend)+0.27_DP-vend*(LOG(X)-.694_DP)>alnbig )&
-    CALL XERMSG('DBSKES',&
-    'X SO SMALL OR ABS(NU) SO BIG THAT BESSEL K-SUB-NU OVERFLOWS',5,2)
+  IF( (vend-.5_DP)*LOG(vend)+0.27_DP-vend*(LOG(X)-.694_DP)>alnbig ) THEN
+    ERROR STOP 'DBSKES : X SO SMALL OR ABS(NU) SO BIG THAT BESSEL K-SUB-NU OVERFLOWS'
+  END IF
   !
   v = Xnu
   DO i = 3, n

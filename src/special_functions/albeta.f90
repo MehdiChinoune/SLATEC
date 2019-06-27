@@ -1,7 +1,6 @@
 !** ALBETA
-REAL(SP) FUNCTION ALBETA(A,B)
-  !> Compute the natural logarithm of the complete Beta
-  !            function.
+REAL(SP) ELEMENTAL FUNCTION ALBETA(A,B)
+  !> Compute the natural logarithm of the complete Beta function.
   !***
   ! **Library:**   SLATEC (FNLIB)
   !***
@@ -9,8 +8,7 @@ REAL(SP) FUNCTION ALBETA(A,B)
   !***
   ! **Type:**      SINGLE PRECISION (ALBETA-S, DLBETA-D, CLBETA-C)
   !***
-  ! **Keywords:**  FNLIB, LOGARITHM OF THE COMPLETE BETA FUNCTION,
-  !             SPECIAL FUNCTIONS
+  ! **Keywords:**  FNLIB, LOGARITHM OF THE COMPLETE BETA FUNCTION, SPECIAL FUNCTIONS
   !***
   ! **Author:**  Fullerton, W., (LANL)
   !***
@@ -36,33 +34,27 @@ REAL(SP) FUNCTION ALBETA(A,B)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   900727  Added EXTERNAL statement.  (WRB)
-  USE service, ONLY : XERMSG
-  REAL(SP) :: A, B, corr, p, q
+  REAL(SP), INTENT(IN) :: A, B
+  REAL(SP) :: corr, p, q
   REAL(SP), PARAMETER :: sq2pil = 0.91893853320467274_SP
   !* FIRST EXECUTABLE STATEMENT  ALBETA
   p = MIN(A,B)
   q = MAX(A,B)
   !
-  IF( p<=0._SP ) CALL XERMSG('ALBETA',&
-    'BOTH ARGUMENTS MUST BE GT ZERO',1,2)
-  IF( p>=10._SP ) THEN
-    !
+  IF( p<=0._SP ) THEN
+    ERROR STOP 'ALBETA : BOTH ARGUMENTS MUST BE > 0'
+  ELSEIF( p>=10._SP ) THEN
     ! P AND Q ARE BIG.
-    !
     corr = R9LGMC(p) + R9LGMC(q) - R9LGMC(p+q)
     ALBETA = -0.5_SP*LOG(q) + sq2pil + corr + (p-0.5_SP)*LOG(p/(p+q))+ q*ALNREL(-p/(p+q))
-    RETURN
   ELSEIF( q<10._SP ) THEN
-    !
     ! P AND Q ARE SMALL.
-    !
     ALBETA = LOG(GAMMA(p)*(GAMMA(q)/GAMMA(p+q)))
-    RETURN
+  ELSE
+    ! P IS SMALL, BUT Q IS BIG.
+    corr = R9LGMC(q) - R9LGMC(p+q)
+    ALBETA = LOG_GAMMA(p) + corr + p - p*LOG(p+q) + (q-0.5_SP)*ALNREL(-p/(p+q))
   END IF
-  !
-  ! P IS SMALL, BUT Q IS BIG.
-  !
-  corr = R9LGMC(q) - R9LGMC(p+q)
-  ALBETA = LOG_GAMMA(p) + corr + p - p*LOG(p+q) + (q-0.5_SP)*ALNREL(-p/(p+q))
+
   RETURN
 END FUNCTION ALBETA

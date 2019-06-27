@@ -1,5 +1,5 @@
 !** CBINU
-SUBROUTINE CBINU(Z,Fnu,Kode,N,Cy,Nz,Rl,Fnul,Tol,Elim,Alim)
+PURE SUBROUTINE CBINU(Z,Fnu,Kode,N,Cy,Nz,Rl,Fnul,Tol,Elim,Alim)
   !> Subsidiary to CAIRY, CBESH, CBESI, CBESJ, CBESK and CBIRY
   !***
   ! **Library:**   SLATEC
@@ -21,9 +21,14 @@ SUBROUTINE CBINU(Z,Fnu,Kode,N,Cy,Nz,Rl,Fnul,Tol,Elim,Alim)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
 
-  INTEGER :: i, inw, Kode, N, nlast, nn, nui, nw, Nz
-  COMPLEX(SP) :: cw(2), Cy(N), Z
-  REAL(SP) :: Alim, az, dfnu, Elim, Fnu, Fnul, Rl, Tol
+  INTEGER, INTENT(IN) :: Kode, N
+  INTEGER, INTENT(OUT) :: Nz
+  REAL(SP), INTENT(IN) :: Alim, Elim, Fnu, Fnul, Rl, Tol
+  COMPLEX(SP), INTENT(IN) :: Z
+  COMPLEX(SP), INTENT(OUT) :: Cy(N)
+  INTEGER :: i, inw, nlast, nn, nui, nw
+  REAL(SP) :: az, dfnu
+  COMPLEX(SP) :: cw(2)
   COMPLEX(SP), PARAMETER :: czero = (0._SP,0._SP)
   !* FIRST EXECUTABLE STATEMENT  CBINU
   Nz = 0
@@ -111,4 +116,5 @@ SUBROUTINE CBINU(Z,Fnu,Kode,N,Cy,Nz,Rl,Fnul,Tol,Elim,Alim)
   600  RETURN
   700  Nz = -1
   IF( nw==(-2) ) Nz = -2
+
 END SUBROUTINE CBINU

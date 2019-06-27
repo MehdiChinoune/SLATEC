@@ -1,5 +1,5 @@
 !** CS1S2
-SUBROUTINE CS1S2(Zr,S1,S2,Nz,Ascle,Alim,Iuf)
+ELEMENTAL SUBROUTINE CS1S2(Zr,S1,S2,Nz,Ascle,Alim,Iuf)
   !> Subsidiary to CAIRY and CBESK
   !***
   ! **Library:**   SLATEC
@@ -27,9 +27,13 @@ SUBROUTINE CS1S2(Zr,S1,S2,Nz,Ascle,Alim,Iuf)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
 
-  COMPLEX(SP) :: c1, S1, s1d, S2, Zr
-  REAL(SP) :: aa, Alim, aln, Ascle, as1, as2, xx
-  INTEGER :: Iuf, Nz
+  INTEGER, INTENT(INOUT) :: Iuf
+  INTEGER, INTENT(OUT) :: Nz
+  REAL(SP), INTENT(IN) :: Alim, Ascle
+  COMPLEX(SP), INTENT(IN) :: Zr
+  COMPLEX(SP), INTENT(INOUT) :: S1, S2
+  COMPLEX(SP) :: c1, s1d
+  REAL(SP) :: aa, aln, as1, as2, xx
   COMPLEX(SP), PARAMETER :: czero  = (0._SP,0._SP)
   !* FIRST EXECUTABLE STATEMENT  CS1S2
   Nz = 0
@@ -58,4 +62,5 @@ SUBROUTINE CS1S2(Zr,S1,S2,Nz,Ascle,Alim,Iuf)
   S2 = czero
   Nz = 1
   Iuf = 0
+
 END SUBROUTINE CS1S2

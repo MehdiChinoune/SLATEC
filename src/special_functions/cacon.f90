@@ -1,5 +1,5 @@
 !** CACON
-SUBROUTINE CACON(Z,Fnu,Kode,Mr,N,Y,Nz,Rl,Fnul,Tol,Elim,Alim)
+PURE SUBROUTINE CACON(Z,Fnu,Kode,Mr,N,Y,Nz,Rl,Fnul,Tol,Elim,Alim)
   !> Subsidiary to CBESH and CBESK
   !***
   ! **Library:**   SLATEC
@@ -27,11 +27,16 @@ SUBROUTINE CACON(Z,Fnu,Kode,Mr,N,Y,Nz,Rl,Fnul,Tol,Elim,Alim)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
   USE service, ONLY : R1MACH
-  INTEGER :: i, inu, iuf, kflag, Kode, Mr, N, nn, nw, Nz
+  INTEGER, INTENT(IN) :: Kode, Mr, N
+  INTEGER, INTENT(OUT) :: Nz
+  REAL(SP), INTENT(IN) :: Alim, Elim, Fnu, Fnul, Rl, Tol
+  COMPLEX(SP), INTENT(IN) :: Z
+  COMPLEX(SP), INTENT(OUT) :: Y(N)
+  INTEGER :: i, inu, iuf, kflag, nn, nw
   COMPLEX(SP) :: ck, cs, cscl, cscr, csgn, cspn, css(3), csr(3), c1, c2, &
-    rz, sc1, sc2, st, s1, s2, Y(N), Z, zn, cy(2)
-  REAL(SP) :: Alim, arg, ascle, as2, bscle, bry(3), cpn, c1i, c1m, c1r, &
-    Elim, fmr, Fnu, Fnul, Rl, sgn, spn, Tol, yy
+    rz, sc1, sc2, st, s1, s2, zn, cy(2)
+  REAL(SP) :: arg, ascle, as2, bscle, bry(3), cpn, c1i, c1m, c1r, &
+    fmr, sgn, spn, yy
   REAL(SP), PARAMETER :: pi = 3.14159265358979324_SP
   COMPLEX(SP), PARAMETER :: cone = (1._SP,0._SP)
   !* FIRST EXECUTABLE STATEMENT  CACON

@@ -1,5 +1,5 @@
 !** HKSEQ
-SUBROUTINE HKSEQ(X,M,H,Ierr)
+PURE SUBROUTINE HKSEQ(X,M,H,Ierr)
   !> Subsidiary to BSKIN
   !***
   ! **Library:**   SLATEC
@@ -33,8 +33,10 @@ SUBROUTINE HKSEQ(X,M,H,Ierr)
   !   910722  Updated AUTHOR section.  (ALS)
   !   920528  DESCRIPTION and REFERENCES sections revised.  (WRB)
   USE service, ONLY : R1MACH, I1MACH
-  INTEGER :: Ierr, M
-  REAL(SP) :: H(M), X
+  INTEGER, INTENT(IN) :: M
+  INTEGER, INTENT(OUT) :: Ierr
+  REAL(SP), INTENT(IN) :: X
+  REAL(SP), INTENT(OUT) :: H(M)
   INTEGER :: i, j, k, mx, nx
   REAL(SP) :: fk, fln, fn, fnp, hrx, rln, rxsq, r1m5, s, slope, t, tk, trm(22), &
     trmh(25), trmr(25), tst, u(25), v(25), wdtol, xdmy, xh, xinc, xm, xmin, yint

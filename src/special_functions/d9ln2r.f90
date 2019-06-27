@@ -1,7 +1,7 @@
 !** D9LN2R
-REAL(DP) FUNCTION D9LN2R(X)
-  !> Evaluate LOG(1+X) from second order relative accuracy so
-  !            that LOG(1+X) = X - X**2/2 + X**3*D9LN2R(X)
+REAL(DP) ELEMENTAL FUNCTION D9LN2R(X)
+  !> Evaluate LOG(1+X) from second order relative accuracy so that
+  !            LOG(1+X) = X - X**2/2 + X**3*D9LN2R(X)
   !***
   ! **Library:**   SLATEC (FNLIB)
   !***
@@ -43,9 +43,9 @@ REAL(DP) FUNCTION D9LN2R(X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
-  USE service, ONLY : XERMSG, D1MACH
-  REAL(DP) :: X
-  INTEGER, SAVE :: ntln21, ntln22
+  USE service, ONLY : D1MACH
+  REAL(DP), INTENT(IN) :: X
+  INTEGER, PARAMETER :: ntln21 = 26, ntln22 = 20
   REAL(DP), PARAMETER :: eps = D1MACH(3), sqeps = SQRT(eps), txmax = 8._SP/sqeps, &
     txbig = 6._SP/SQRT(sqeps), xmin = -1._DP + SQRT(D1MACH(4)), &
     xmax = txmax - (eps*txmax**2-2._DP*LOG(txmax))/(2._DP*eps*txmax), &
@@ -95,31 +95,21 @@ REAL(DP) FUNCTION D9LN2R(X)
     -.9948142607031436571923797333333E-27_DP, +.1427440611211698610634752000000E-27_DP, &
     -.2049794721898234911566506666666E-28_DP, +.2945648756401362222885546666666E-29_DP, &
     -.4235973185184957027669333333333E-30_DP, +.6095532614003832040106666666666E-31_DP ]
-  LOGICAL, SAVE :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  D9LN2R
-  IF( first ) THEN
-    ntln21 = INITDS(ln21cs,50,0.1_SP*eps)
-    ntln22 = INITDS(ln22cs,37,0.1_SP*eps)
-    first = .FALSE.
-  END IF
+  ! ntln21 = INITDS(ln21cs,0.1_SP*eps)
+  ! ntln22 = INITDS(ln22cs,0.1_SP*eps)
   !
-  IF( X<(-.625_DP) .OR. X>0.8125_DP ) THEN
-    !
-    IF( X<xmin ) CALL XERMSG('D9LN2R',&
-      'ANSWER LT HALF PRECISION BECAUSE X IS TOO NEAR -1',1,1)
-    IF( X>xmax ) CALL XERMSG('D9LN2R',&
-      'NO PRECISION IN ANSWER BECAUSE X IS TOO BIG',3,2)
-    IF( X>xbig ) CALL XERMSG('D9LN2R',&
-      'ANSWER LT HALF PRECISION BECAUSE X IS TOO BIG',2,1)
-    !
+  IF( X>xmax ) THEN
+    ERROR STOP 'D9LN2R : NO PRECISION IN ANSWER BECAUSE X IS TOO BIG'
+  ELSEIF( X<(-.625_DP) .OR. X>0.8125_DP ) THEN
+    ! IF( X<xmin ) 'D9LN2R','ANSWER LT HALF PRECISION BECAUSE X IS TOO NEAR -1'
+    ! IF( X>xbig ) CALL XERMSG('D9LN2R','ANSWER LT HALF PRECISION BECAUSE X IS TOO BIG',2,1)
     D9LN2R = (LOG(1._DP+X)-X*(1._DP-0.5_DP*X))/X**3
-    RETURN
-  END IF
-  !
-  IF( X<0._DP ) THEN
-    D9LN2R = 0.375_DP + DCSEVL(16._DP*X/5._DP+1._DP,ln21cs,ntln21)
+  ELSEIF( X<0._DP ) THEN
+    D9LN2R = 0.375_DP + DCSEVL(16._DP*X/5._DP+1._DP,ln21cs(1:ntln21))
   ELSE
-    D9LN2R = 0.375_DP + DCSEVL(32._DP*X/13._DP-1._DP,ln22cs,ntln22)
+    D9LN2R = 0.375_DP + DCSEVL(32._DP*X/13._DP-1._DP,ln22cs(1:ntln22))
   END IF
+
   RETURN
 END FUNCTION D9LN2R

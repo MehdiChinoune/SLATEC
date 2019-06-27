@@ -1,5 +1,5 @@
 !** CRATI
-SUBROUTINE CRATI(Z,Fnu,N,Cy,Tol)
+PURE SUBROUTINE CRATI(Z,Fnu,N,Cy,Tol)
   !> Subsidiary to CBESH, CBESI and CBESK
   !***
   ! **Library:**   SLATEC
@@ -26,10 +26,14 @@ SUBROUTINE CRATI(Z,Fnu,N,Cy,Tol)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
 
-  INTEGER :: i, id, idnu, inu, itime, k, kk, magz, N
-  COMPLEX(SP) :: cdfnu, Cy(N), pt, p1, p2, rz, t1, Z
-  REAL(SP) :: ak, amagz, ap1, ap2, arg, az, dfnu, fdnu, flam, Fnu, fnup, &
-    rap1, rho, test, test1, Tol
+  INTEGER, INTENT(IN) :: N
+  REAL(SP), INTENT(IN) :: Fnu, Tol
+  COMPLEX(SP), INTENT(IN) :: Z
+  COMPLEX(SP), INTENT(OUT) :: Cy(N)
+  INTEGER :: i, id, idnu, inu, itime, k, kk, magz
+  COMPLEX(SP) :: cdfnu, pt, p1, p2, rz, t1
+  REAL(SP) :: ak, amagz, ap1, ap2, arg, az, dfnu, fdnu, flam, fnup, &
+    rap1, rho, test, test1
   COMPLEX(SP), PARAMETER :: czero = (0._SP,0._SP), cone = (1._SP,0._SP)
   !* FIRST EXECUTABLE STATEMENT  CRATI
   az = ABS(Z)
@@ -110,4 +114,5 @@ SUBROUTINE CRATI(Z,Fnu,N,Cy,Tol)
       END IF
     END IF
   END DO
+
 END SUBROUTINE CRATI

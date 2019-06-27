@@ -1,5 +1,5 @@
 !** BDIFF
-SUBROUTINE BDIFF(L,V)
+PURE SUBROUTINE BDIFF(L,V)
   !> Subsidiary to BSKIN
   !***
   ! **Library:**   SLATEC
@@ -25,8 +25,8 @@ SUBROUTINE BDIFF(L,V)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
 
-  INTEGER :: L
-  REAL(SP) :: V(L)
+  INTEGER, INTENT(IN) :: L
+  REAL(SP), INTENT(INOUT) :: V(L)
   INTEGER :: i, j, k
   !* FIRST EXECUTABLE STATEMENT  BDIFF
   IF( L==1 ) RETURN
@@ -37,4 +37,5 @@ SUBROUTINE BDIFF(L,V)
       k = k - 1
     END DO
   END DO
+
 END SUBROUTINE BDIFF

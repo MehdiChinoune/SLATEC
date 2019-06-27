@@ -1,5 +1,5 @@
 !** R9PAK
-REAL(SP) FUNCTION R9PAK(Y,N)
+REAL(SP) ELEMENTAL FUNCTION R9PAK(Y,N)
   !> Pack a base 2 exponent into a floating point number.
   !***
   ! **Library:**   SLATEC (FNLIB)
@@ -32,50 +32,38 @@ REAL(SP) FUNCTION R9PAK(Y,N)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-  !   901009  Routine used I1MACH(7) where it should use I1MACH(10),
-  !           Corrected (RWC)
+  !   901009  Routine used I1MACH(7) where it should use I1MACH(10), Corrected (RWC)
   USE service, ONLY : XERMSG, R1MACH, I1MACH
-  REAL(SP) :: a1n2b, Y
-  INTEGER :: N, nsum, ny
-  INTEGER, SAVE :: nmin, nmax
-  REAL(SP), PARAMETER :: a1n210 = 3.321928094887362_SP
-  LOGICAL, SAVE :: first = .TRUE.
+  INTEGER, INTENT(IN) :: N
+  REAL(SP), INTENT(IN) :: Y
+  INTEGER :: nsum, ny
+  REAL(SP), PARAMETER :: a1n2b = R1MACH(5)/LOG(2._SP)
+  INTEGER, PARAMETER :: nmin = INT( a1n2b*I1MACH(12) ), nmax = INT( a1n2b*I1MACH(13) )
   !* FIRST EXECUTABLE STATEMENT  R9PAK
-  IF( first ) THEN
-    a1n2b = 1._SP
-    IF( I1MACH(10)/=2 ) a1n2b = R1MACH(5)*a1n210
-    nmin = INT( a1n2b*I1MACH(12) )
-    nmax = INT( a1n2b*I1MACH(13) )
-    first = .FALSE.
-  END IF
   !
   CALL R9UPAK(Y,R9PAK,ny)
   !
   nsum = N + ny
   IF( nsum<nmin ) THEN
-    !
-    CALL XERMSG('R9PAK','PACKED NUMBER UNDERFLOWS',1,1)
+    ! CALL XERMSG('R9PAK : PACKED NUMBER UNDERFLOWS',1,1)
     R9PAK = 0._SP
+  ELSEIF( nsum>nmax ) THEN
+    ERROR STOP 'R9PAK : PACKED NUMBER OVERFLOWS'
+  ELSEIF( nsum==0 ) THEN
     RETURN
+  ELSEIF( nsum>0 ) THEN
+    DO
+      R9PAK = 2._SP*R9PAK
+      nsum = nsum - 1
+      IF( nsum==0 ) EXIT
+    END DO
   ELSE
-    IF( nsum>nmax ) CALL XERMSG('R9PAK','PACKED NUMBER OVERFLOWS',2,2)
-    !
-    IF( nsum==0 ) RETURN
-    IF( nsum>0 ) THEN
-      DO
-        !
-        R9PAK = 2._SP*R9PAK
-        nsum = nsum - 1
-        IF( nsum==0 ) EXIT
-      END DO
-    ELSE
-      DO
-        !
-        R9PAK = 0.5_SP*R9PAK
-        nsum = nsum + 1
-        IF( nsum==0 ) RETURN
-      END DO
-    END IF
+    DO
+      R9PAK = 0.5_SP*R9PAK
+      nsum = nsum + 1
+      IF( nsum==0 ) RETURN
+    END DO
   END IF
+
   RETURN
 END FUNCTION R9PAK

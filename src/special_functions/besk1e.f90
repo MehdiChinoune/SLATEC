@@ -1,7 +1,7 @@
 !** BESK1E
-REAL(SP) FUNCTION BESK1E(X)
-  !> Compute the exponentially scaled modified (hyperbolic)
-  !            Bessel function of the third kind of order one.
+REAL(SP) ELEMENTAL FUNCTION BESK1E(X)
+  !> Compute the exponentially scaled modified (hyperbolic) Bessel function
+  !  of the third kind of order one.
   !***
   ! **Library:**   SLATEC (FNLIB)
   !***
@@ -10,8 +10,7 @@ REAL(SP) FUNCTION BESK1E(X)
   ! **Type:**      SINGLE PRECISION (BESK1E-S, DBSK1E-D)
   !***
   ! **Keywords:**  EXPONENTIALLY SCALED, FNLIB, HYPERBOLIC BESSEL FUNCTION,
-  !             MODIFIED BESSEL FUNCTION, ORDER ONE, SPECIAL FUNCTIONS,
-  !             THIRD KIND
+  !             MODIFIED BESSEL FUNCTION, ORDER ONE, SPECIAL FUNCTIONS, THIRD KIND
   !***
   ! **Author:**  Fullerton, W., (LANL)
   !***
@@ -50,12 +49,11 @@ REAL(SP) FUNCTION BESK1E(X)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-  !   900326  Removed duplicate information from DESCRIPTION section.
-  !           (WRB)
-  USE service, ONLY : XERMSG, R1MACH
-  REAL(SP) :: X
+  !   900326  Removed duplicate information from DESCRIPTION section.  (WRB)
+  USE service, ONLY : R1MACH
+  REAL(SP), INTENT(IN) :: X
   REAL(SP) :: y
-  INTEGER, SAVE :: ntk1, ntak1, ntak12
+  INTEGER, PARAMETER :: ntk1 = 7, ntak1 = 7, ntak12 = 6
   REAL(SP), PARAMETER :: xmin = EXP(MAX(LOG(R1MACH(1)),-LOG(R1MACH(2)))+.01_SP), &
     xsml = SQRT(4._SP*R1MACH(3))
   REAL(SP), PARAMETER :: bk1cs(11) = [ .0253002273389477705_SP,-.353155960776544876_SP, &
@@ -73,29 +71,24 @@ REAL(SP) FUNCTION BESK1E(X)
     .00000000973998344_SP, -.00000000055853361_SP, .00000000003732996_SP, &
     -.00000000000282505_SP, .00000000000023720_SP, -.00000000000002176_SP, &
     .00000000000000215_SP, -.00000000000000022_SP, .00000000000000002_SP ]
-  LOGICAL, SAVE :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  BESK1E
-  IF( first ) THEN
-    ntk1 = INITS(bk1cs,11,0.1_SP*R1MACH(3))
-    ntak1 = INITS(ak1cs,17,0.1_SP*R1MACH(3))
-    ntak12 = INITS(ak12cs,14,0.1_SP*R1MACH(3))
-    first = .FALSE.
-  END IF
+  ! ntk1 = INITS(bk1cs,0.1_SP*R1MACH(3))
+  ! ntak1 = INITS(ak1cs,0.1_SP*R1MACH(3))
+  ! ntak12 = INITS(ak12cs,0.1_SP*R1MACH(3))
   !
-  IF( X<=0. ) CALL XERMSG('BESK1E','X IS ZERO OR NEGATIVE',2,2)
-  IF( X>2._SP ) THEN
-    !
-    IF( X<=8. ) THEN
-      BESK1E = (1.25_SP+CSEVL((16._SP/X-5._SP)/3._SP,ak1cs,ntak1))/SQRT(X)
-    ELSE
-      BESK1E = (1.25_SP+CSEVL(16._SP/X-1._SP,ak12cs,ntak12))/SQRT(X)
-    END IF
-    RETURN
+  IF( X<=0. ) THEN
+    ERROR STOP 'BESK1E : X <= 0'
+  ELSEIF( X<xmin ) THEN
+    ERROR STOP 'BESK1E : X SO SMALL K1 OVERFLOWS'
+  ELSEIF( X<=2._SP ) THEN
+    y = 0.
+    IF( X>xsml ) y = X*X
+    BESK1E = EXP(X)*(LOG(0.5_SP*X)*BESI1(X)+(0.75_SP+CSEVL(.5_SP*y-1._SP,bk1cs(1:ntk1)))/X)
+  ELSEIF( X<=8. ) THEN
+    BESK1E = (1.25_SP+CSEVL((16._SP/X-5._SP)/3._SP,ak1cs(1:ntak1)))/SQRT(X)
+  ELSE
+    BESK1E = (1.25_SP+CSEVL(16._SP/X-1._SP,ak12cs(1:ntak12)))/SQRT(X)
   END IF
-  !
-  IF( X<xmin ) CALL XERMSG('BESK1E','X SO SMALL K1 OVERFLOWS',3,2)
-  y = 0.
-  IF( X>xsml ) y = X*X
-  BESK1E = EXP(X)*(LOG(0.5_SP*X)*BESI1(X)+(0.75_SP+CSEVL(.5_SP*y-1._SP,bk1cs,ntk1))/X)
+
   RETURN
 END FUNCTION BESK1E

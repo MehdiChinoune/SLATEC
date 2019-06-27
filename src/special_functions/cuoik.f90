@@ -1,5 +1,5 @@
 !** CUOIK
-SUBROUTINE CUOIK(Z,Fnu,Kode,Ikflg,N,Y,Nuf,Tol,Elim,Alim)
+PURE SUBROUTINE CUOIK(Z,Fnu,Kode,Ikflg,N,Y,Nuf,Tol,Elim,Alim)
   !> Subsidiary to CBESH, CBESI and CBESK
   !***
   ! **Library:**   SLATEC
@@ -39,9 +39,14 @@ SUBROUTINE CUOIK(Z,Fnu,Kode,Ikflg,N,Y,Nuf,Tol,Elim,Alim)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
   USE service, ONLY : R1MACH
-  INTEGER :: i, iform, Ikflg, init, Kode, N, nn, Nuf, nw
-  COMPLEX(SP) :: arg, asum, bsum, cwrk(16), cz, phi, summ, Y(N), Z, zb, zeta1, zeta2, zn, zr
-  REAL(SP) :: aarg, Alim, aphi, ascle, ax, ay, Elim, fnn, Fnu, gnn, gnu, rcz, Tol, x, yy
+  INTEGER, INTENT(IN) :: Ikflg, Kode, N
+  INTEGER, INTENT(OUT) :: Nuf
+  REAL(SP), INTENT(IN) :: Alim, Elim, Fnu, Tol
+  COMPLEX(SP), INTENT(IN) :: Z
+  COMPLEX(SP), INTENT(OUT) :: Y(N)
+  INTEGER :: i, iform, init, nn, nw
+  COMPLEX(SP) :: arg, asum, bsum, cwrk(16), cz, phi, summ, zb, zeta1, zeta2, zn, zr
+  REAL(SP) :: aarg, aphi, ascle, ax, ay, fnn, gnn, gnu, rcz, x, yy
   COMPLEX(SP), PARAMETER :: czero = (0._SP,0._SP)
   REAL(SP), PARAMETER :: aic = 1.265512123484645396_SP
   !* FIRST EXECUTABLE STATEMENT  CUOIK
@@ -160,5 +165,6 @@ SUBROUTINE CUOIK(Z,Fnu,Kode,Ikflg,N,Y,Nuf,Tol,Elim,Alim)
   Nuf = Nuf + 1
   IF( nn==0 ) RETURN
   GOTO 100
+
   RETURN
 END SUBROUTINE CUOIK

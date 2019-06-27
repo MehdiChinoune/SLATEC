@@ -1,5 +1,5 @@
 !** EXPREL
-REAL(SP) FUNCTION EXPREL(X)
+REAL(SP) ELEMENTAL FUNCTION EXPREL(X)
   !> Calculate the relative error exponential (EXP(X)-1)/X.
   !***
   ! **Library:**   SLATEC (FNLIB)
@@ -32,7 +32,7 @@ REAL(SP) FUNCTION EXPREL(X)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   USE service, ONLY : R1MACH
-  REAL(SP) :: X
+  REAL(SP), INTENT(IN) :: X
   INTEGER :: i
   REAL(SP) :: absx
   REAL(SP), PARAMETER :: alneps = LOG(R1MACH(3)), xn = 3.72_SP - 0.3_SP*alneps, &
@@ -41,15 +41,15 @@ REAL(SP) FUNCTION EXPREL(X)
   !* FIRST EXECUTABLE STATEMENT  EXPREL
   !
   absx = ABS(X)
-  IF( absx>0.5_SP ) EXPREL = (EXP(X)-1._SP)/X
-  IF( absx>0.5_SP ) RETURN
-  !
-  EXPREL = 1._SP
-  IF( absx<xbnd ) RETURN
-  !
-  EXPREL = 0._SP
-  DO i = 1, nterms
-    EXPREL = 1._SP + EXPREL*X/(nterms+2-i)
-  END DO
-  !
+  IF( absx>0.5_SP ) THEN
+    EXPREL = (EXP(X)-1._SP)/X
+  ELSEIF( absx<xbnd ) THEN
+    EXPREL = 1._SP
+  ELSE
+    EXPREL = 0._SP
+    DO i = 1, nterms
+      EXPREL = 1._SP + EXPREL*X/(nterms+2-i)
+    END DO
+  END IF
+
 END FUNCTION EXPREL

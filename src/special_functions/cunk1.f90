@@ -1,5 +1,5 @@
 !** CUNK1
-SUBROUTINE CUNK1(Z,Fnu,Kode,Mr,N,Y,Nz,Tol,Elim,Alim)
+PURE SUBROUTINE CUNK1(Z,Fnu,Kode,Mr,N,Y,Nz,Tol,Elim,Alim)
   !> Subsidiary to CBESK
   !***
   ! **Library:**   SLATEC
@@ -25,13 +25,18 @@ SUBROUTINE CUNK1(Z,Fnu,Kode,Mr,N,Y,Nz,Tol,Elim,Alim)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
   USE service, ONLY : R1MACH
+  INTEGER, INTENT(IN) :: Kode, Mr, N
+  INTEGER, INTENT(OUT) :: Nz
+  REAL(SP), INTENT(IN) :: Alim, Elim, Fnu, Tol
+  COMPLEX(SP), INTENT(IN) :: Z
+  COMPLEX(SP), INTENT(OUT) :: Y(N)
   INTEGER :: i, ib, iflag, ifn, il, init(2), inu, iuf, k, kdflg, kflag, &
-    kk, Kode, Mr, N, nw, Nz, j, ipard, initd, ic, m
+    kk, nw, j, ipard, initd, ic, m
+  REAL(SP) :: ang, aphi, asc, ascle, bry(3), cpn, c2i, c2m, c2r, &
+    fmr, fn, fnf, rs1, sgn, spn, x
   COMPLEX(SP) :: cfn, ck, crsc, cs, cscl, csgn, cspn, csr(3), css(3), &
-    cwrk(16,3), cy(2), c1, c2, phi(2), rz, summ(2), s1, s2, Y(N), Z, &
+    cwrk(16,3), cy(2), c1, c2, phi(2), rz, summ(2), s1, s2, &
     zeta1(2), zeta2(2), zr, phid, zeta1d, zeta2d, sumd
-  REAL(SP) :: Alim, ang, aphi, asc, ascle, bry(3), cpn, c2i, c2m, c2r, &
-    Elim, fmr, fn, fnf, Fnu, rs1, sgn, spn, Tol, x
   COMPLEX(SP), PARAMETER :: czero = (0._SP,0._SP), cone = (1._SP,0._SP)
   REAL(SP), PARAMETER :: pi = 3.14159265358979324_SP
   !* FIRST EXECUTABLE STATEMENT  CUNK1
@@ -349,4 +354,5 @@ SUBROUTINE CUNK1(Z,Fnu,Kode,Mr,N,Y,Nz,Tol,Elim,Alim)
   END DO
   RETURN
   600  Nz = -1
+
 END SUBROUTINE CUNK1

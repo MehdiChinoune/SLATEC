@@ -1,7 +1,6 @@
 !** POCH1
-REAL(SP) FUNCTION POCH1(A,X)
-  !> Calculate a generalization of Pochhammer's symbol starting
-  !            from first order.
+REAL(SP) ELEMENTAL FUNCTION POCH1(A,X)
+  !> Calculate a generalization of Pochhammer's symbol starting from first order.
   !***
   ! **Library:**   SLATEC (FNLIB)
   !***
@@ -53,8 +52,8 @@ REAL(SP) FUNCTION POCH1(A,X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900727  Added EXTERNAL statement.  (WRB)
-  USE service, ONLY : XERMSG, R1MACH
-  REAL(SP) :: A, X
+  USE service, ONLY : R1MACH
+  REAL(SP), INTENT(IN) :: A, X
   INTEGER :: i, ii, incr, j, k, ndx, nterms
   REAL(SP) :: absa, absx, alnvar, b, binv, bp, gbern(10), gbk, poly1, &
     q, rho, sinpx2, sinpxx, term, trig, var, var2
@@ -101,8 +100,7 @@ REAL(SP) FUNCTION POCH1(A,X)
       poly1 = gbern(2)*term
       !
       nterms = INT( -0.5_SP*alneps/alnvar ) + 1
-      IF( nterms>9 ) CALL XERMSG('POCH1',&
-        'NTERMS IS TOO BIG, MAYBE R1MACH(3) IS BAD',1,2)
+      IF( nterms>9 ) ERROR STOP 'POCH1 : NTERMS IS TOO BIG, MAYBE R1MACH(3) IS BAD'
       IF( nterms>=2 ) THEN
         !
         DO k = 2, nterms

@@ -1,5 +1,5 @@
 !** BETAI
-REAL(SP) FUNCTION BETAI(X,Pin,Qin)
+REAL(SP) ELEMENTAL FUNCTION BETAI(X,Pin,Qin)
   !> Calculate the incomplete Beta function.
   !***
   ! **Library:**   SLATEC (FNLIB)
@@ -38,31 +38,29 @@ REAL(SP) FUNCTION BETAI(X,Pin,Qin)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-  !   900326  Removed duplicate information from DESCRIPTION section.
-  !           (WRB)
+  !   900326  Removed duplicate information from DESCRIPTION section.  (WRB)
   !   920528  DESCRIPTION and REFERENCES sections revised.  (WRB)
-  USE service, ONLY : XERMSG, R1MACH
-  REAL(SP) :: X, Pin, Qin
+  USE service, ONLY : R1MACH
+  REAL(SP), INTENT(IN) :: X, Pin, Qin
   INTEGER :: i, ib, n
   REAL(SP) :: c, finsum, p, p1, ps, q, term, xb, y
   REAL(SP), PARAMETER :: eps = R1MACH(3), alneps = LOG(eps), sml = R1MACH(1), &
     alnsml = LOG(sml)
   !* FIRST EXECUTABLE STATEMENT  BETAI
   !
-  IF( X<0. .OR. X>1._SP ) CALL XERMSG('BETAI',&
-    'X IS NOT IN THE RANGE (0,1)',1,2)
-  IF( Pin<=0. .OR. Qin<=0. )&
-    CALL XERMSG('BETAI','P AND/OR Q IS LE ZERO',2,2)
+  IF( X<0. .OR. X>1._SP ) THEN
+    ERROR STOP 'BETAI : X IS NOT IN THE RANGE (0,1)'
+  ELSEIF( Pin<=0. .OR. Qin<=0. ) THEN
+    ERROR STOP 'BETAI : P AND/OR Q IS <= 0'
+  END IF
   !
   y = X
   p = Pin
   q = Qin
-  IF( q>p .OR. X>=0.8 ) THEN
-    IF( X>=0.2 ) THEN
-      y = 1._SP - y
-      p = Qin
-      q = Pin
-    END IF
+  IF( ( q>p .AND. X>=0.2 ) .OR. X>=0.8 ) THEN
+    y = 1._SP - y
+    p = Qin
+    q = Pin
   END IF
   !
   IF( (p+q)*y/(p+1._SP)<eps ) THEN
@@ -71,7 +69,6 @@ REAL(SP) FUNCTION BETAI(X,Pin,Qin)
     xb = p*LOG(MAX(y,sml)) - LOG(p) - ALBETA(p,q)
     IF( xb>alnsml .AND. y/=0. ) BETAI = EXP(xb)
     IF( y/=X .OR. p/=Pin ) BETAI = 1._SP - BETAI
-    RETURN
   ELSE
     !
     ! EVALUATE THE INFINITE SUM FIRST.
@@ -120,8 +117,9 @@ REAL(SP) FUNCTION BETAI(X,Pin,Qin)
       !
       BETAI = BETAI + finsum
     END IF
+    IF( y/=X .OR. p/=Pin ) BETAI = 1._SP - BETAI
+    BETAI = MAX(MIN(BETAI,1._SP),0._SP)
   END IF
-  IF( y/=X .OR. p/=Pin ) BETAI = 1._SP - BETAI
-  BETAI = MAX(MIN(BETAI,1._SP),0._SP)
+
   RETURN
 END FUNCTION BETAI

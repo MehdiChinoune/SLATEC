@@ -1,10 +1,10 @@
 !** DRC
-REAL(DP) FUNCTION DRC(X,Y,Ier)
+REAL(DP) ELEMENTAL FUNCTION DRC(X,Y)
   !> Calculate a double precision approximation to
-  !             DRC(X,Y) = Integral from zero to infinity of
+  !  DRC(X,Y) = Integral from zero to infinity of
   !                              -1/2     -1
   !                    (1/2)(t+X)    (t+Y)  dt,
-  !            where X is nonnegative and Y is positive.
+  !  where X is nonnegative and Y is positive.
   !***
   ! **Library:**   SLATEC
   !***
@@ -268,9 +268,8 @@ REAL(DP) FUNCTION DRC(X,Y,Ier)
   !   900510  Changed calls to XERMSG to standard form, and some
   !           editorial changes.  (RWC))
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  USE service, ONLY : XERMSG, D1MACH
-  INTEGER :: Ier
-  REAL(DP) :: X, Y
+  USE service, ONLY : D1MACH
+  REAL(DP), INTENT(IN) :: X, Y
   REAL(DP) :: mu, s, sn, xn, yn, lamda
   CHARACTER(16) :: xern3, xern4, xern5
   REAL(DP), PARAMETER :: errtol = (D1MACH(3)/16._DP)**(1._DP/6._DP), &
@@ -281,35 +280,27 @@ REAL(DP) FUNCTION DRC(X,Y,Ier)
   !
   DRC = 0._DP
   IF( X<0._DP .OR. Y<=0._DP ) THEN
-    Ier = 1
     WRITE (xern3,'(1PE15.6)') X
     WRITE (xern4,'(1PE15.6)') Y
-    CALL XERMSG('DRC','X<0 .OR. Y<=0 WHERE X = '//xern3//&
-      ' AND Y = '//xern4,1,1)
-    RETURN
+    ERROR STOP 'DRC : X<0 .OR. Y<=0 WHERE X = '//xern3//' AND Y = '//xern4
   END IF
   !
   IF( MAX(X,Y)>uplim ) THEN
-    Ier = 3
     WRITE (xern3,'(1PE15.6)') X
     WRITE (xern4,'(1PE15.6)') Y
     WRITE (xern5,'(1PE15.6)') uplim
-    CALL XERMSG('DRC','MAX(X,Y)>UPLIM WHERE X = '//xern3//&
-      ' Y = '//xern4//' AND UPLIM = '//xern5,3,1)
-    RETURN
+    ERROR STOP 'DRC : MAX(X,Y)>UPLIM WHERE X = '//xern3//&
+      ' Y = '//xern4//' AND UPLIM = '//xern5
   END IF
   !
   IF( X+Y<lolim ) THEN
-    Ier = 2
     WRITE (xern3,'(1PE15.6)') X
     WRITE (xern4,'(1PE15.6)') Y
     WRITE (xern5,'(1PE15.6)') lolim
-    CALL XERMSG('DRC','X+Y<LOLIM WHERE X = '//xern3//' Y = '//&
-      xern4//' AND LOLIM = '//xern5,2,1)
-    RETURN
+    ERROR STOP 'DRC : X+Y<LOLIM WHERE X = '//xern3//' Y = '//&
+      xern4//' AND LOLIM = '//xern5
   END IF
   !
-  Ier = 0
   xn = X
   yn = Y
   DO
@@ -327,4 +318,5 @@ REAL(DP) FUNCTION DRC(X,Y,Ier)
       yn = (yn+lamda)*0.250_DP
     END IF
   END DO
+
 END FUNCTION DRC

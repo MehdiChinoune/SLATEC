@@ -1,5 +1,5 @@
 !** DBETA
-REAL(DP) FUNCTION DBETA(A,B)
+REAL(DP) ELEMENTAL FUNCTION DBETA(A,B)
   !> Compute the complete Beta function.
   !***
   ! **Library:**   SLATEC (FNLIB)
@@ -29,31 +29,25 @@ REAL(DP) FUNCTION DBETA(A,B)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900727  Added EXTERNAL statement.  (WRB)
-  USE service, ONLY : XERMSG, D1MACH
-  REAL(DP) :: A, B, xmin
-  REAL(DP), SAVE :: xmax
+  USE service, ONLY : D1MACH
+  REAL(DP), INTENT(IN) :: A, B
+  REAL(DP), PARAMETER :: xmax = 171.61447887182297_DP
   REAL(DP), PARAMETER :: alnsml = LOG(D1MACH(1))
-  LOGICAL, SAVE :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  DBETA
-  IF( first ) THEN
-    CALL DGAMLM(xmin,xmax)
-    first = .FALSE.
-  END IF
   !
-  IF( A<=0._DP .OR. B<=0._DP ) CALL XERMSG('DBETA','BOTH ARGUMENTS MUST BE GT 0',2,2)
+  IF( A<=0._DP .OR. B<=0._DP ) ERROR STOP 'DBETA : BOTH ARGUMENTS MUST BE > 0'
   !
   IF( A+B<xmax ) THEN
     DBETA = GAMMA(A)*GAMMA(B)/GAMMA(A+B)
-    RETURN
+  ELSE
+    DBETA = DLBETA(A,B)
+    IF( DBETA<alnsml ) THEN
+      DBETA = 0._DP
+      ! CALL XERMSG('DBETA : A AND/OR B SO BIG BETA UNDERFLOWS',1,1)
+    ELSE
+      DBETA = EXP(DBETA)
+    END IF
   END IF
-  !
-  DBETA = DLBETA(A,B)
-  IF( DBETA<alnsml ) THEN
-    !
-    DBETA = 0._DP
-    CALL XERMSG('DBETA','A AND/OR B SO BIG BETA UNDERFLOWS',1,1)
-    RETURN
-  END IF
-  DBETA = EXP(DBETA)
+
   RETURN
 END FUNCTION DBETA

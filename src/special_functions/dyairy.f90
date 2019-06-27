@@ -1,5 +1,5 @@
 !** DYAIRY
-SUBROUTINE DYAIRY(X,Rx,C,Bi,Dbi)
+PURE SUBROUTINE DYAIRY(X,Rx,C,Bi,Dbi)
   !> Subsidiary to DBESJ and DBESY
   !***
   ! **Library:**   SLATEC
@@ -11,8 +11,7 @@ SUBROUTINE DYAIRY(X,Rx,C,Bi,Dbi)
   !***
   ! **Description:**
   !
-  !                  DYAIRY computes the Airy function BI(X)
-  !                   and its derivative DBI(X) for DASYJY
+  !    DYAIRY computes the Airy function BI(X) and its derivative DBI(X) for DASYJY
   !
   !                                     INPUT
   !
@@ -37,9 +36,11 @@ SUBROUTINE DYAIRY(X,Rx,C,Bi,Dbi)
   !   910408  Updated the AUTHOR section.  (WRB)
 
   !
+  REAL(DP), INTENT(IN) :: X
+  REAL(DP), INTENT(INOUT) :: C, Rx
+  REAL(DP), INTENT(OUT) :: Bi, Dbi
   INTEGER :: i, j
-  REAL(DP) :: ax, Bi, C, cv, Dbi, d1, d2, ex, e1, e2, f1, f2, rtrx, Rx, s1, s2, &
-    t, tc, temp1, temp2, tt, X
+  REAL(DP) :: ax, cv, d1, d2, ex, e1, e2, f1, f2, rtrx, s1, s2, t, tc, temp1, temp2, tt
   INTEGER, PARAMETER :: n1 = 20, n2 = 19, n3 = 14
   INTEGER, PARAMETER :: m1 = 18, m2 = 17, m3 = 12
   INTEGER, PARAMETER :: n1d = 21, n2d = 20, n3d = 19, n4d = 14
@@ -342,5 +343,6 @@ SUBROUTINE DYAIRY(X,Rx,C,Bi,Dbi)
     e2 = temp2
   END DO
   Dbi = X*X*(t*f1-f2+dbjp(1)) + (t*e1-e2+dbjn(1))
+
   RETURN
 END SUBROUTINE DYAIRY

@@ -58,7 +58,7 @@ SUBROUTINE ZUNHJ(Zr,Zi,Fnu,Ipmtr,Tol,Phir,Phii,Argr,Argi,Zeta1r,Zeta1i,&
     t2r, upi(14), upr(14), wi, wr, w2i, w2r, zai, zar, zbi, zbr, zci, zcr, &
     zetai, zetar, Zeta1i, Zeta1r, Zeta2i, Zeta2r, Zi, Zr, zthi, zthr, ac
   INTEGER :: ias, ibs, Ipmtr, is, j, jr, ju, k, kmax, kp1, ks, l, &
-    lr, lrp1, l1, l2, m, idum
+    lr, lrp1, l1, l2, m
   REAL(DP), PARAMETER :: ar(14) = [ 1.00000000000000000E+00_DP, 1.04166666666666667E-01_DP, &
     8.35503472222222222E-02_DP, 1.28226574556327160E-01_DP, 2.91849026464140464E-01_DP, &
     8.81627267443757652E-01_DP, 3.32140828186276754E+00_DP, 1.49957629868625547E+01_DP, &
@@ -282,7 +282,7 @@ SUBROUTINE ZUNHJ(Zr,Zi,Fnu,Ipmtr,Tol,Phir,Phii,Argr,Argi,Zeta1r,Zeta1i,&
       str = coner + wr
       sti = wi
       CALL ZDIV(str,sti,zbr,zbi,zar,zai)
-      CALL ZLOG(zar,zai,zcr,zci,idum)
+      CALL ZLOG(zar,zai,zcr,zci)
       IF( zci<0._DP ) zci = 0._DP
       IF( zci>hpi ) zci = hpi
       IF( zcr<0._DP ) zcr = 0._DP

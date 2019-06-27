@@ -1,5 +1,5 @@
 !** CBUNK
-SUBROUTINE CBUNK(Z,Fnu,Kode,Mr,N,Y,Nz,Tol,Elim,Alim)
+PURE SUBROUTINE CBUNK(Z,Fnu,Kode,Mr,N,Y,Nz,Tol,Elim,Alim)
   !> Subsidiary to CBESH and CBESK
   !***
   ! **Library:**   SLATEC
@@ -23,9 +23,12 @@ SUBROUTINE CBUNK(Z,Fnu,Kode,Mr,N,Y,Nz,Tol,Elim,Alim)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
 
-  INTEGER :: Kode, Mr, N, Nz
-  COMPLEX(SP) :: Y(N), Z
-  REAL(SP) :: Alim, ax, ay, Elim, Fnu, Tol, xx, yy
+  INTEGER, INTENT(IN) :: Kode, Mr, N
+  INTEGER, INTENT(OUT) :: Nz
+  REAL(SP), INTENT(IN) :: Alim, Elim, Fnu, Tol
+  COMPLEX(SP), INTENT(IN) :: Z
+  COMPLEX(SP), INTENT(OUT) :: Y(N)
+  REAL(SP) :: ax, ay, xx, yy
   !* FIRST EXECUTABLE STATEMENT  CBUNK
   Nz = 0
   xx = REAL(Z)

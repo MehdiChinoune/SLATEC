@@ -1,5 +1,5 @@
 !** CBKNU
-SUBROUTINE CBKNU(Z,Fnu,Kode,N,Y,Nz,Tol,Elim,Alim)
+PURE SUBROUTINE CBKNU(Z,Fnu,Kode,N,Y,Nz,Tol,Elim,Alim)
   !> Subsidiary to CAIRY, CBESH, CBESI and CBESK
   !***
   ! **Library:**   SLATEC
@@ -22,12 +22,17 @@ SUBROUTINE CBKNU(Z,Fnu,Kode,N,Y,Nz,Tol,Elim,Alim)
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
   USE service, ONLY : R1MACH, I1MACH
   !
-  INTEGER :: i, idum, iflag, inu, k, kflag, kk, Kode, koded, N, Nz, nw, j, ic, inub
+  INTEGER, INTENT(IN) :: Kode, N
+  INTEGER, INTENT(OUT) :: Nz
+  REAL(SP), INTENT(IN) :: Alim, Elim, Fnu, Tol
+  COMPLEX(SP), INTENT(IN) :: Z
+  COMPLEX(SP), INTENT(OUT) :: Y(N)
+  INTEGER :: i, iflag, inu, k, kflag, kk, koded, nw, j, ic, inub
   COMPLEX(SP) :: cch, ck, coef, crsc, cs, cscl, csh, csr(3), css(3), cz, f, fmu, p, &
-    pt, p1, p2, q, rz, smu, st, s1, s2, Y(N), Z, zd, celm, cy(2)
-  REAL(SP) :: aa, ak, Alim, ascle, a1, a2, bb, bk, bry(3), caz, dnu, dnu2, Elim, &
-    etest, fc, fhs, fk, fks, Fnu, g1, g2, p2i, p2m, p2r, rk, s, tm, Tol, &
-    t1, t2, xx, yy, helim, elm, xd, yd, alas, as
+    pt, p1, p2, q, rz, smu, st, s1, s2, zd, celm, cy(2)
+  REAL(SP) :: aa, ak, ascle, a1, a2, bb, bk, bry(3), caz, dnu, dnu2, etest, fc, &
+    fhs, fk, fks, g1, g2, p2i, p2m, p2r, rk, s, tm, t1, t2, xx, yy, helim, elm, &
+    xd, yd, alas, as
   !
   INTEGER, PARAMETER :: kmax = 30
   REAL(SP), PARAMETER ::  r1 = 2._SP
@@ -83,7 +88,7 @@ SUBROUTINE CBKNU(Z,Fnu,Kode,N,Y,Nz,Tol,Elim,Alim)
       !-----------------------------------------------------------------------
       !     GAM(1-Z)*GAM(1+Z)=PI*Z/SIN(PI*Z), T1=1/GAM(1-DNU), T2=1/GAM(1+DNU)
       !-----------------------------------------------------------------------
-      t2 = EXP(-GAMLN(a2,idum))
+      t2 = EXP(-LOG_GAMMA(a2))
       t1 = 1._SP/(t2*fc)
       IF( ABS(dnu)>0.1_SP ) THEN
         g1 = (t1-t2)/(dnu+dnu)

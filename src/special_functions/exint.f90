@@ -1,5 +1,5 @@
 !** EXINT
-SUBROUTINE EXINT(X,N,Kode,M,Tol,En,Nz,Ierr)
+PURE SUBROUTINE EXINT(X,N,Kode,M,Tol,En,Nz,Ierr)
   !> Compute an M member sequence of exponential integrals
   !            E(N+K,X), K=0,1,...,M-1 for N >= 1 and X >= 0.
   !***
@@ -93,15 +93,16 @@ SUBROUTINE EXINT(X,N,Kode,M,Tol,En,Nz,Ierr)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-  !   900326  Removed duplicate information from DESCRIPTION section.
-  !           (WRB)
+  !   900326  Removed duplicate information from DESCRIPTION section.  (WRB)
   !   910408  Updated the REFERENCES section.  (WRB)
   !   920207  Updated with code with a revision date of 880811 from
   !           D. Amos.  Included correction of argument list.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   USE service, ONLY : R1MACH, I1MACH
-  INTEGER :: Kode, M, N, Nz, Ierr
-  REAL(SP) :: En(M), X, Tol
+  INTEGER, INTENT(IN) :: Kode, M, N
+  INTEGER, INTENT(OUT) :: Nz, Ierr
+  REAL(SP), INTENT(IN) :: X, Tol
+  REAL(SP), INTENT(OUT) :: En(M)
   REAL(SP) :: a(99), aa, aams, ah, ak, at, b(99), bk, bt, cc, cnorm, ct, em, emx, &
     etol, fnm, fx, pt, p1, p2, s, tx, xcut, xlim, xtol, y(2), yt, y1, y2
   INTEGER :: i, ic, icase, ict, ik, ind, ix, i1m, jset, k, kk, kn, ks, ml, mu, nd, nm
@@ -348,5 +349,6 @@ SUBROUTINE EXINT(X,N,Kode,M,Tol,En,Nz,Ierr)
     aa = aa + 1._SP
     k = k + 1
   END DO
+
   RETURN
 END SUBROUTINE EXINT

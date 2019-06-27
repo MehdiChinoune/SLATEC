@@ -1,7 +1,7 @@
 !** C9LN2R
-COMPLEX(SP) FUNCTION C9LN2R(Z)
-  !> Evaluate LOG(1+Z) from second order relative accuracy so
-  !            that  LOG(1+Z) = Z - Z**2/2 + Z**3*C9LN2R(Z).
+COMPLEX(SP) ELEMENTAL FUNCTION C9LN2R(Z)
+  !> Evaluate LOG(1+Z) from second order relative accuracy so that
+  !             LOG(1+Z) = Z - Z**2/2 + Z**3*C9LN2R(Z).
   !***
   ! **Library:**   SLATEC (FNLIB)
   !***
@@ -52,30 +52,28 @@ COMPLEX(SP) FUNCTION C9LN2R(Z)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
 
+  COMPLEX(SP), INTENT(IN) :: Z
   REAL(SP) :: aipart, arg, cabsz, rpart, x, xz, y, y1x, yz
-  COMPLEX(SP) :: Z
   !* FIRST EXECUTABLE STATEMENT  C9LN2R
   x = REAL(Z)
   y = AIMAG(Z)
   !
   cabsz = ABS(Z)
   IF( cabsz>0.8125 ) THEN
-    !
     C9LN2R = (LOG(1._SP+Z)-Z*(1._SP-0.5_SP*Z))/Z**3
-    RETURN
+  ELSEIF( cabsz==0._SP ) THEN
+    C9LN2R = CMPLX(1._SP/3._SP,0._SP,SP)
+  ELSE
+    xz = x/cabsz
+    yz = y/cabsz
+    !
+    arg = 2._SP*xz + cabsz
+    rpart = 0.5_SP*arg**3*R9LN2R(cabsz*arg) - xz - 0.25_SP*cabsz
+    y1x = yz/(1._SP+x)
+    aipart = y1x*(xz**2+y1x**2*R9ATN1(cabsz*y1x))
+    !
+    C9LN2R = CMPLX(xz,-yz,SP)**3*CMPLX(rpart,aipart,SP)
   END IF
-  !
-  C9LN2R = CMPLX(1._SP/3._SP,0._SP,SP)
-  IF( cabsz==0._SP ) RETURN
-  !
-  xz = x/cabsz
-  yz = y/cabsz
-  !
-  arg = 2._SP*xz + cabsz
-  rpart = 0.5_SP*arg**3*R9LN2R(cabsz*arg) - xz - 0.25_SP*cabsz
-  y1x = yz/(1._SP+x)
-  aipart = y1x*(xz**2+y1x**2*R9ATN1(cabsz*y1x))
-  !
-  C9LN2R = CMPLX(xz,-yz,SP)**3*CMPLX(rpart,aipart,SP)
+
   RETURN
 END FUNCTION C9LN2R

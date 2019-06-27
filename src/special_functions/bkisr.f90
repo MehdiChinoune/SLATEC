@@ -1,5 +1,5 @@
 !** BKISR
-SUBROUTINE BKISR(X,N,Summ,Ierr)
+ELEMENTAL SUBROUTINE BKISR(X,N,Summ,Ierr)
   !> Subsidiary to BSKIN
   !***
   ! **Library:**   SLATEC
@@ -25,8 +25,12 @@ SUBROUTINE BKISR(X,N,Summ,Ierr)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
   USE service, ONLY : R1MACH
-  INTEGER :: i, Ierr, k, kk, kkn, k1, N, np
-  REAL(SP) :: ak, atol, bk, fk, fn, hx, hxs, pol, pr, Summ, tkp, tol, trm, X, xln
+  INTEGER, INTENT(IN) :: N
+  INTEGER, INTENT(OUT) :: Ierr
+  REAL(SP), INTENT(IN) :: X
+  REAL(SP), INTENT(OUT) :: Summ
+  INTEGER :: i, k, kk, kkn, k1, np
+  REAL(SP) :: ak, atol, bk, fk, fn, hx, hxs, pol, pr, tkp, tol, trm, xln
   !
   REAL(SP), PARAMETER :: c(2) = [ 1.57079632679489662_SP, 1._SP ]
   !* FIRST EXECUTABLE STATEMENT  BKISR
@@ -80,5 +84,6 @@ SUBROUTINE BKISR(X,N,Summ,Ierr)
   100  Summ = (Summ*hxs+PSIXN(np)-xln)*pr
   IF( N==1 ) Summ = -Summ
   Summ = pol + Summ
+
   RETURN
 END SUBROUTINE BKISR

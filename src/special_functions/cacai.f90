@@ -1,5 +1,5 @@
 !** CACAI
-SUBROUTINE CACAI(Z,Fnu,Kode,Mr,N,Y,Nz,Rl,Tol,Elim,Alim)
+PURE SUBROUTINE CACAI(Z,Fnu,Kode,Mr,N,Y,Nz,Rl,Tol,Elim,Alim)
   !> Subsidiary to CAIRY
   !***
   ! **Library:**   SLATEC
@@ -30,10 +30,14 @@ SUBROUTINE CACAI(Z,Fnu,Kode,Mr,N,Y,Nz,Rl,Tol,Elim,Alim)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
   USE service, ONLY : R1MACH
-  INTEGER :: inu, iuf, Kode, Mr, N, nn, nw, Nz
-  COMPLEX(SP) :: csgn, cspn, c1, c2, Y(N), Z, zn, cy(2)
-  REAL(SP) :: Alim, arg, ascle, az, cpn, dfnu, Elim, fmr, Fnu, Rl, &
-    sgn, spn, Tol, yy
+  INTEGER, INTENT(IN) :: Kode, Mr, N
+  INTEGER, INTENT(OUT) :: Nz
+  REAL(SP), INTENT(IN) :: Alim, Elim, Fnu, Rl, Tol
+  COMPLEX(SP), INTENT(IN) :: Z
+  COMPLEX(SP), INTENT(OUT) :: Y(N)
+  INTEGER :: inu, iuf, nn, nw
+  COMPLEX(SP) :: csgn, cspn, c1, c2, zn, cy(2)
+  REAL(SP) :: arg, ascle, az, cpn, dfnu, fmr, sgn, spn, yy
   REAL(SP), PARAMETER :: pi = 3.14159265358979324_SP
   !* FIRST EXECUTABLE STATEMENT  CACAI
   Nz = 0
@@ -100,4 +104,5 @@ SUBROUTINE CACAI(Z,Fnu,Kode,Mr,N,Y,Nz,Rl,Tol,Elim,Alim)
   END IF
   100  Nz = -1
   IF( nw==(-2) ) Nz = -2
+
 END SUBROUTINE CACAI

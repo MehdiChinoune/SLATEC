@@ -1,5 +1,5 @@
 !** DASYJY
-SUBROUTINE DASYJY(FUNJY,X,Fnu,Flgjy,In,Y,Wk,Iflw)
+PURE SUBROUTINE DASYJY(FUNJY,X,Fnu,Flgjy,In,Y,Wk,Iflw)
   !> Subsidiary to DBESJ and DBESY
   !***
   ! **Library:**   SLATEC
@@ -10,9 +10,8 @@ SUBROUTINE DASYJY(FUNJY,X,Fnu,Flgjy,In,Y,Wk,Iflw)
   !***
   ! **Description:**
   !
-  !                 DASYJY computes Bessel functions J and Y
-  !               for arguments X>0.0 and orders FNU >= 35.0
-  !               on FLGJY = 1 and FLGJY = -1 respectively
+  !     DASYJY computes Bessel functions J and Y for arguments X>0.0 and orders
+  !     FNU >= 35.0 on FLGJY = 1 and FLGJY = -1 respectively
   !
   !                                  INPUT
   !
@@ -27,8 +26,7 @@ SUBROUTINE DASYJY(FUNJY,X,Fnu,Flgjy,In,Y,Wk,Iflw)
   !                                  OUTPUT
   !
   !         Y  - A vector whose first IN components contain the sequence
-  !       IFLW - A flag indicating underflow or overflow
-  !                    return variables for BESJ only
+  !       IFLW - A flag indicating underflow or overflow return variables for BESJ only
   !      WK(1) = 1 - (X/FNU)**2 = W**2
   !      WK(2) = SQRT(ABS(WK(1)))
   !      WK(3) = ABS(WK(2) - ATAN(WK(2)))  or
@@ -66,13 +64,17 @@ SUBROUTINE DASYJY(FUNJY,X,Fnu,Flgjy,In,Y,Wk,Iflw)
   !   910408  Updated the AUTHOR section.  (WRB)
   USE service, ONLY : D1MACH, I1MACH
   INTERFACE
-    SUBROUTINE FUNJY(A,B,C,D,E)
+    PURE SUBROUTINE FUNJY(A,B,C,D,E)
       IMPORT DP
-      REAL(DP) :: A, B, C, D, E
-    END SUBROUTINE
+      REAL(DP), INTENT(IN) :: A
+      REAL(DP), INTENT(INOUT) :: B, C
+      REAL(DP), INTENT(OUT) :: D, E
+    END SUBROUTINE FUNJY
   END INTERFACE
-  INTEGER :: Iflw, In
-  REAL(DP) :: Flgjy, Fnu, Wk(7), X, Y(In)
+  INTEGER , INTENT(IN) :: In
+  INTEGER , INTENT(OUT) :: Iflw
+  REAL(DP), INTENT(IN) :: Flgjy, Fnu, X
+  REAL(DP), INTENT(OUT) :: Wk(7), Y(In)
   INTEGER :: i, j, jn, jr, ju, k, kb, klast, kmax(5), kp1, ks, ksp1, kstemp, l, lr, &
     lrp1, iseta, isetb
   REAL(DP) :: abw2, akm, ap, asum, az, bsum, cr(10), crz32, dfi, elim, dr(10), fi, &
@@ -416,4 +418,5 @@ SUBROUTINE DASYJY(FUNJY,X,Fnu,Flgjy,In,Y,Wk,Iflw)
     Y(jn) = Flgjy*phi*(fi*asum+dfi*bsum)/Wk(7)
     fn = fn - Flgjy
   END DO
+
 END SUBROUTINE DASYJY

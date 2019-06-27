@@ -1,5 +1,5 @@
 !** DHKSEQ
-SUBROUTINE DHKSEQ(X,M,H,Ierr)
+PURE SUBROUTINE DHKSEQ(X,M,H,Ierr)
   !> Subsidiary to DBSKIN
   !***
   ! **Library:**   SLATEC
@@ -12,8 +12,7 @@ SUBROUTINE DHKSEQ(X,M,H,Ierr)
   !
   !   DHKSEQ is an adaptation of subroutine DPSIFN described in the
   !   reference below.  DHKSEQ generates the sequence
-  !   H(K,X) = (-X)**(K+1)*(PSI(K,X) PSI(K,X+0.5))/GAMMA(K+1), for
-  !            K=0,...,M.
+  !   H(K,X) = (-X)**(K+1)*(PSI(K,X) PSI(K,X+0.5))/GAMMA(K+1), for K=0,...,M.
   !
   !***
   ! **See also:**  DBSKIN
@@ -34,8 +33,10 @@ SUBROUTINE DHKSEQ(X,M,H,Ierr)
   !   910722  Updated AUTHOR section.  (ALS)
   !   920528  DESCRIPTION and REFERENCES sections revised.  (WRB)
   USE service, ONLY : D1MACH, I1MACH
-  INTEGER :: Ierr, M
-  REAL(DP) :: H(M), X
+  INTEGER, INTENT(IN) :: M
+  INTEGER, INTENT(OUT) :: Ierr
+  REAL(DP), INTENT(IN) :: X
+  REAL(DP), INTENT(OUT) :: H(M)
   INTEGER :: i, j, k, mx, nx
   REAL(DP) :: fk, fln, fn, fnp, hrx, rln, rxsq, r1m5, s, slope, t, tk, trm(22), &
     trmh(25), trmr(25), tst, u(25), v(25), wdtol, xdmy, xh, xinc, xm, xmin, yint
@@ -151,4 +152,5 @@ SUBROUTINE DHKSEQ(X,M,H,Ierr)
   END DO
   RETURN
   200  Ierr = 2
+
 END SUBROUTINE DHKSEQ

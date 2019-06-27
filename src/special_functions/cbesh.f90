@@ -1,9 +1,9 @@
 !** CBESH
-SUBROUTINE CBESH(Z,Fnu,Kode,M,N,Cy,Nz,Ierr)
+PURE SUBROUTINE CBESH(Z,Fnu,Kode,M,N,Cy,Nz,Ierr)
   !> Compute a sequence of the Hankel functions H(m,a,z)
-  !            for superscript m=1 or 2, real nonnegative orders a=b,
-  !            b+1,... where b>0, and nonzero complex argument z.  A
-  !            scaling option is available to help avoid overflow.
+  !  for superscript m=1 or 2, real nonnegative orders a=b,
+  !  b+1,... where b>0, and nonzero complex argument z.  A
+  !  scaling option is available to help avoid overflow.
   !***
   ! **Library:**   SLATEC
   !***
@@ -160,9 +160,11 @@ SUBROUTINE CBESH(Z,Fnu,Kode,M,N,Cy,Nz,Ierr)
   !   920811  Prologue revised.  (DWL)
   USE service, ONLY : R1MACH, I1MACH
   !
-  INTEGER :: Ierr, Kode, M, N, Nz
-  REAL(SP) :: Fnu
-  COMPLEX(SP) :: Cy(N), Z
+  INTEGER, INTENT(IN) :: Kode, M, N
+  INTEGER, INTENT(OUT) :: Ierr, Nz
+  REAL(SP), INTENT(IN) :: Fnu
+  COMPLEX(SP), INTENT(IN) :: Z
+  COMPLEX(SP), INTENT(OUT) :: Cy(N)
   INTEGER :: i, inu, inuh, ir, k, k1, k2, mm, mr, nn, nuf, nw
   COMPLEX(SP) :: zn, zt, csgn
   REAL(SP) :: aa, alim, aln, arg, az, cpn, dig, elim, fmm, fn, fnul, rhpi, rl, &
@@ -174,12 +176,11 @@ SUBROUTINE CBESH(Z,Fnu,Kode,M,N,Cy,Nz,Ierr)
   xx = REAL(Z)
   yy = AIMAG(Z)
   Ierr = 0
-  IF( xx==0._SP .AND. yy==0._SP ) Ierr = 1
-  IF( Fnu<0._SP ) Ierr = 1
-  IF( M<1 .OR. M>2 ) Ierr = 1
-  IF( Kode<1 .OR. Kode>2 ) Ierr = 1
-  IF( N<1 ) Ierr = 1
-  IF( Ierr/=0 ) RETURN
+  IF( Z==(0._SP,0._SP) .OR. Fnu<0._SP .OR. M<1 .OR. M>2 .OR. Kode<1 .OR. Kode>2 &
+    .OR. N<1 ) THEN
+    Ierr = 1
+    RETURN
+  END IF
   nn = N
   !-----------------------------------------------------------------------
   !     SET PARAMETERS RELATED TO MACHINE CONSTANTS.
@@ -328,4 +329,5 @@ SUBROUTINE CBESH(Z,Fnu,Kode,M,N,Cy,Nz,Ierr)
   RETURN
   300  Nz = 0
   Ierr = 4
+
 END SUBROUTINE CBESH

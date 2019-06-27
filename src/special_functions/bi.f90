@@ -1,7 +1,6 @@
 !** BI
-REAL(SP) FUNCTION BI(X)
-  !> Evaluate the Bairy function (the Airy function of the
-  !            second kind).
+REAL(SP) ELEMENTAL FUNCTION BI(X)
+  !> Evaluate the Bairy function (the Airy function of the second kind).
   !***
   ! **Library:**   SLATEC (FNLIB)
   !***
@@ -15,8 +14,7 @@ REAL(SP) FUNCTION BI(X)
   !***
   ! **Description:**
   !
-  ! BI(X) calculates the Airy function of the second kind for real
-  ! argument X.
+  ! BI(X) calculates the Airy function of the second kind for real argument X.
   !
   ! Series for BIF        on the interval -1.00000D+00 to  1.00000D+00
   !                                        with weighted error   1.88E-19
@@ -53,12 +51,11 @@ REAL(SP) FUNCTION BI(X)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-  !   900326  Removed duplicate information from DESCRIPTION section.
-  !           (WRB)
-  USE service, ONLY : XERMSG, R1MACH
-  REAL(SP) :: X
+  !   900326  Removed duplicate information from DESCRIPTION section.  (WRB)
+  USE service, ONLY : R1MACH
+  REAL(SP), INTENT(IN) :: X
   REAL(SP) :: theta, xm, z
-  INTEGER, SAVE :: nbif, nbig, nbif2, nbig2
+  INTEGER, PARAMETER :: nbif = 5, nbig = 5, nbif2 = 6, nbig2 = 6
   REAL(SP), PARAMETER :: eta = 0.1_SP*R1MACH(3), x3sml = eta**0.3333_SP, &
     xmax = (1.5_SP*LOG(R1MACH(2)))**0.6666_SP
   REAL(SP), PARAMETER :: bifcs(9) = [ -.01673021647198664948_SP, .1025233583424944561_SP, &
@@ -76,35 +73,27 @@ REAL(SP) FUNCTION BI(X)
     .0063190073096134286_SP, .0001187904568162517_SP, .0000013045345886200_SP, &
     .0000000093741259955_SP, .0000000000474580188_SP, .0000000000001783107_SP, &
     .0000000000000005167_SP, .0000000000000000011_SP ]
-  LOGICAL, SAVE :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  BI
-  IF( first ) THEN
-    nbif = INITS(bifcs,9,eta)
-    nbig = INITS(bigcs,8,eta)
-    nbif2 = INITS(bif2cs,10,eta)
-    nbig2 = INITS(big2cs,10,eta)
-    first = .FALSE.
-  END IF
+  ! nbif = INITS(bifcs,eta)
+  ! nbig = INITS(bigcs,eta)
+  ! nbif2 = INITS(bif2cs,eta)
+  ! nbig2 = INITS(big2cs,eta)
   !
   IF( X<(-1._SP) ) THEN
     CALL R9AIMP(X,xm,theta)
     BI = xm*SIN(theta)
-    RETURN
-    !
   ELSEIF( X<=1._SP ) THEN
     z = 0._SP
     IF( ABS(X)>x3sml ) z = X**3
-    BI = 0.625_SP + CSEVL(z,bifcs,nbif) + X*(0.4375_SP+CSEVL(z,bigcs,nbig))
-    RETURN
-    !
-  ELSEIF( X>2._SP ) THEN
-    !
-    IF( X>xmax ) CALL XERMSG('BI','X SO BIG THAT BI OVERFLOWS',1,2)
-    !
+    BI = 0.625_SP + CSEVL(z,bifcs(1:nbif)) + X*(0.4375_SP+CSEVL(z,bigcs(1:nbig)))
+  ELSEIF( x<=2._SP ) THEN
+    z = (2._SP*X**3-9._SP)/7._SP
+    BI = 1.125_SP + CSEVL(z,bif2cs(1:nbif2)) + X*(0.625_SP+CSEVL(z,big2cs(1:nbig2)))
+  ELSEIF( X<=xmax ) THEN
     BI = BIE(X)*EXP(2._SP*X*SQRT(X)/3._SP)
-    RETURN
+  ELSE
+    ERROR STOP 'BI : X SO BIG THAT BI OVERFLOWS'
   END IF
-  z = (2._SP*X**3-9._SP)/7._SP
-  BI = 1.125_SP + CSEVL(z,bif2cs,nbif2) + X*(0.625_SP+CSEVL(z,big2cs,nbig2))
+
   RETURN
 END FUNCTION BI

@@ -1,7 +1,7 @@
 !** DBSK0E
-REAL(DP) FUNCTION DBSK0E(X)
+REAL(DP) ELEMENTAL FUNCTION DBSK0E(X)
   !> Compute the exponentially scaled modified (hyperbolic)
-  !            Bessel function of the third kind of order zero.
+  !  Bessel function of the third kind of order zero.
   !***
   ! **Library:**   SLATEC (FNLIB)
   !***
@@ -50,10 +50,10 @@ REAL(DP) FUNCTION DBSK0E(X)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-  USE service, ONLY : XERMSG, D1MACH
-  REAL(DP) :: X
+  USE service, ONLY : D1MACH
+  REAL(DP), INTENT(IN) :: X
   REAL(DP) :: y
-  INTEGER, SAVE :: ntk0, ntak0, ntak02
+  INTEGER, PARAMETER :: ntk0 = 10, ntak0 = 17, ntak02 = 14
   REAL(DP), PARAMETER :: eta = 0.1_DP*D1MACH(3), xsml = SQRT(4._DP*D1MACH(3))
   REAL(DP), PARAMETER :: bk0cs(16) = [ -.353273932339027687201140060063153E-1_DP, &
     +.344289899924628486886344927529213E+0_DP, +.359799365153615016265721303687231E-1_DP, &
@@ -101,29 +101,22 @@ REAL(DP) FUNCTION DBSK0E(X)
     -.8411555324201093737130666666666E-28_DP, +.1569806306635368939301546666666E-28_DP, &
     -.2988226453005757788979199999999E-29_DP, +.5796831375216836520618666666666E-30_DP, &
     -.1145035994347681332155733333333E-30_DP, +.2301266594249682802005333333333E-31_DP ]
-  LOGICAL, SAVE :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  DBSK0E
-  IF( first ) THEN
-    ntk0 = INITDS(bk0cs,16,eta)
-    ntak0 = INITDS(ak0cs,38,eta)
-    ntak02 = INITDS(ak02cs,33,eta)
-    first = .FALSE.
-  END IF
+  ! ntk0 = INITDS(bk0cs,eta)
+  ! ntak0 = INITDS(ak0cs,eta)
+  ! ntak02 = INITDS(ak02cs,eta)
   !
-  IF( X<=0._DP ) CALL XERMSG('DBSK0E','X IS ZERO OR NEGATIVE',2,2)
-  IF( X>2._DP ) THEN
-    !
-    IF( X<=8._DP ) THEN
-      DBSK0E = (1.25_DP+DCSEVL((16._DP/X-5._DP)/3._DP,ak0cs,ntak0))/SQRT(X)
-    ELSE
-      DBSK0E = (1.25_DP+DCSEVL(16._DP/X-1._DP,ak02cs,ntak02))/SQRT(X)
-    END IF
-    RETURN
+  IF( X<=0._DP ) THEN
+    ERROR STOP 'DBSK0E : X <= 0'
+  ELSEIF( X<=2._DP ) THEN
+    y = 0._DP
+    IF( X>xsml ) y = X*X
+    DBSK0E = EXP(X)*(-LOG(0.5_DP*X)*DBESI0(X)-0.25_DP+DCSEVL(.5_DP*y-1._DP,bk0cs(1:ntk0)))
+  ELSEIF( X<=8._DP ) THEN
+    DBSK0E = (1.25_DP+DCSEVL((16._DP/X-5._DP)/3._DP,ak0cs(1:ntak0)))/SQRT(X)
+  ELSE
+    DBSK0E = (1.25_DP+DCSEVL(16._DP/X-1._DP,ak02cs(1:ntak02)))/SQRT(X)
   END IF
-  !
-  y = 0._DP
-  IF( X>xsml ) y = X*X
-  DBSK0E = EXP(X)&
-    *(-LOG(0.5_DP*X)*DBESI0(X)-0.25_DP+DCSEVL(.5_DP*y-1._DP,bk0cs,ntk0))
+
   RETURN
 END FUNCTION DBSK0E

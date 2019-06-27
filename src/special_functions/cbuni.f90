@@ -1,5 +1,5 @@
 !** CBUNI
-SUBROUTINE CBUNI(Z,Fnu,Kode,N,Y,Nz,Nui,Nlast,Fnul,Tol,Elim,Alim)
+PURE SUBROUTINE CBUNI(Z,Fnu,Kode,N,Y,Nz,Nui,Nlast,Fnul,Tol,Elim,Alim)
   !> Subsidiary to CBESI and CBESK
   !***
   ! **Library:**   SLATEC
@@ -25,10 +25,14 @@ SUBROUTINE CBUNI(Z,Fnu,Kode,N,Y,Nz,Nui,Nlast,Fnul,Tol,Elim,Alim)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
   USE service, ONLY : R1MACH
-  INTEGER :: i, iflag, iform, k, Kode, N, nl, Nlast, Nui, nw, Nz
-  COMPLEX(SP) :: cscl, cscr, cy(2), rz, st, s1, s2, Y(N), Z
-  REAL(SP) :: Alim, ax, ay, dfnu, Elim, Fnu, fnui, Fnul, gnu, Tol, xx, &
-    yy, ascle, bry(3), str, sti, stm
+  INTEGER, INTENT(IN) :: Kode, N, Nui
+  INTEGER, INTENT(OUT) :: Nlast, Nz
+  REAL(SP), INTENT(IN) :: Alim, Elim, Fnu, Fnul, Tol
+  COMPLEX(SP), INTENT(IN) :: Z
+  COMPLEX(SP), INTENT(OUT) :: Y(N)
+  INTEGER :: i, iflag, iform, k, nl, nw
+  COMPLEX(SP) :: cscl, cscr, cy(2), rz, st, s1, s2
+  REAL(SP) :: ax, ay, dfnu, fnui, gnu, xx, yy, ascle, bry(3), str, sti, stm
   !* FIRST EXECUTABLE STATEMENT  CBUNI
   Nz = 0
   xx = REAL(Z)

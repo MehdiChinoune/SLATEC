@@ -1,5 +1,5 @@
 !** DGAMR
-REAL(DP) FUNCTION DGAMR(X)
+REAL(DP) ELEMENTAL FUNCTION DGAMR(X)
   !> Compute the reciprocal of the Gamma function.
   !***
   ! **Library:**   SLATEC (FNLIB)
@@ -28,25 +28,18 @@ REAL(DP) FUNCTION DGAMR(X)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900727  Added EXTERNAL statement.  (WRB)
-  USE service, ONLY : control_xer, num_xer
-  INTEGER :: irold
-  REAL(DP) :: X, alngx, sgngx
+  REAL(DP), INTENT(IN) :: X
+  REAL(DP) :: alngx, sgngx
   !* FIRST EXECUTABLE STATEMENT  DGAMR
-  DGAMR = 0._DP
-  IF( X<=0._DP .AND. AINT(X)==X ) RETURN
-  !
-  irold = control_xer
-  control_xer = 1
-  IF( ABS(X)>10._DP ) THEN
-    !
+
+  IF( X<=0._DP .AND. AINT(X)==X ) THEN
+    DGAMR = 0._DP
+  ELSEIF( ABS(X)>10._DP ) THEN
     CALL DLGAMS(X,alngx,sgngx)
-    num_xer = 0
-    control_xer = irold
     DGAMR = sgngx*EXP(-alngx)
-    RETURN
+  ELSE
+    DGAMR = 1._DP/GAMMA(X)
   END IF
-  DGAMR = 1._DP/GAMMA(X)
-  num_xer = 0
-  control_xer = irold
+
   RETURN
 END FUNCTION DGAMR

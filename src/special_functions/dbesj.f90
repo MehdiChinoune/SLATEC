@@ -1,8 +1,7 @@
 !** DBESJ
-SUBROUTINE DBESJ(X,Alpha,N,Y,Nz)
+PURE SUBROUTINE DBESJ(X,Alpha,N,Y,Nz)
   !> Compute an N member sequence of J Bessel functions
-  !            J/SUB(ALPHA+K-1)/(X), K=1,...,N for non-negative ALPHA
-  !            and X.
+  !  J_{ALPHA+K-1}(X), K=1,...,N for non-negative ALPHA and X.
   !***
   ! **Library:**   SLATEC
   !***
@@ -20,7 +19,7 @@ SUBROUTINE DBESJ(X,Alpha,N,Y,Nz)
   !
   !     Abstract  **** a double precision routine ****
   !         DBESJ computes an N member sequence of J Bessel functions
-  !         J/sub(ALPHA+K-1)/(X), K=1,...,N for non-negative ALPHA and X.
+  !         J_{ALPHA+K-1}(X), K=1,...,N for non-negative ALPHA and X.
   !         A combination of the power series, the asymptotic expansion
   !         for X to infinity and the uniform asymptotic expansion for
   !         NU to infinity are applied over subdivisions of the (NU,X)
@@ -52,7 +51,7 @@ SUBROUTINE DBESJ(X,Alpha,N,Y,Nz)
   !
   !         Output     Y is double precision
   !           Y      - a vector whose first N components contain
-  !                    values for J/sub(ALPHA+K-1)/(X), K=1,...,N
+  !                    values for J_{ALPHA+K-1}(X), K=1,...,N
   !           NZ     - number of components of Y set to zero due to
   !                    underflow,
   !                    NZ=0  , normal return, computation completed
@@ -82,12 +81,13 @@ SUBROUTINE DBESJ(X,Alpha,N,Y,Nz)
   !   890911  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-  !   900326  Removed duplicate information from DESCRIPTION section.
-  !           (WRB)
+  !   900326  Removed duplicate information from DESCRIPTION section.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  USE service, ONLY : XERMSG, D1MACH, I1MACH
-  INTEGER ::  N, Nz
-  REAL(DP) :: Alpha, X, Y(N)
+  USE service, ONLY : D1MACH, I1MACH
+  INTEGER, INTENT(IN) ::  N
+  INTEGER, INTENT(OUT) ::  Nz
+  REAL(DP), INTENT(IN) :: Alpha, X
+  REAL(DP), INTENT(OUT) :: Y(N)
   INTEGER :: i, ialp, idalp, iflw, in, is, i1, i2, k, kk, km, kt,nn, ns
   REAL(DP) :: ak, akm, ans, ap, arg, coef, dalpha, dfn, dtm, earg, elim1, &
     etx, fidal, flgjy, fn, fnf, fni, fnp1, fnu, gln, rden, relb, &
@@ -117,17 +117,16 @@ SUBROUTINE DBESJ(X,Alpha,N,Y,Nz)
   tolln = 2.303_DP*tb*i1
   tolln = MIN(tolln,34.5388_DP)
   IF( N<1 ) THEN
-    CALL XERMSG('DBESJ','N LESS THAN ONE.',2,1)
-    RETURN
+    ERROR STOP 'DBESJ : N < 1'
   ELSEIF( N==1 ) THEN
     kt = 2
   END IF
   nn = N
   IF( X<0 ) THEN
-    CALL XERMSG('DBESJ','X LESS THAN ZERO.',2,1)
-    RETURN
+    ERROR STOP 'DBESJ : X < 0'
+  ELSEIF( Alpha<0._DP ) THEN
+    ERROR STOP 'DBESJ : ORDER, ALPHA, < 0'
   ELSEIF( X==0 ) THEN
-    IF( Alpha<0 ) GOTO 1200
     IF( Alpha==0 ) THEN
       Y(1) = 1._DP
       IF( N==1 ) RETURN
@@ -140,7 +139,6 @@ SUBROUTINE DBESJ(X,Alpha,N,Y,Nz)
     END DO
     RETURN
   ELSE
-    IF( Alpha<0._DP ) GOTO 1200
     !
     ialp = INT(Alpha)
     fni = ialp + N - 1
@@ -529,10 +527,6 @@ SUBROUTINE DBESJ(X,Alpha,N,Y,Nz)
     tm = (dtm+fnf)*trx
     k = k - 1
   END DO
-  RETURN
-  !
-  !
-  !
-  1200 CALL XERMSG('DBESJ','ORDER, ALPHA, LESS THAN ZERO.',2,1)
+
   RETURN
 END SUBROUTINE DBESJ

@@ -1,8 +1,7 @@
 !** DAIE
-REAL(DP) FUNCTION DAIE(X)
+REAL(DP) ELEMENTAL FUNCTION DAIE(X)
   !> Calculate the Airy function for a negative argument and an
-  !            exponentially scaled Airy function for a non-negative
-  !            argument.
+  !  exponentially scaled Airy function for a non-negative argument.
   !***
   ! **Library:**   SLATEC (FNLIB)
   !***
@@ -10,8 +9,7 @@ REAL(DP) FUNCTION DAIE(X)
   !***
   ! **Type:**      DOUBLE PRECISION (AIE-S, DAIE-D)
   !***
-  ! **Keywords:**  EXPONENTIALLY SCALED AIRY FUNCTION, FNLIB,
-  !             SPECIAL FUNCTIONS
+  ! **Keywords:**  EXPONENTIALLY SCALED AIRY FUNCTION, FNLIB, SPECIAL FUNCTIONS
   !***
   ! **Author:**  Fullerton, W., (LANL)
   !***
@@ -60,9 +58,9 @@ REAL(DP) FUNCTION DAIE(X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920618  Removed space from variable names.  (RWC, WRB)
   USE service, ONLY : D1MACH
-  REAL(DP) :: X
+  REAL(DP), INTENT(IN) :: X
   REAL(DP) :: sqrtx, theta, xm, z
-  INTEGER, SAVE :: naif, naig, naip1, naip2
+  INTEGER, PARAMETER :: naif = 8, naig = 8, naip1 = 26, naip2 = 15
   REAL(DP), PARAMETER :: eta = 0.1_DP*D1MACH(3), x3sml = eta**0.3333_SP, &
     x32sml = 1.3104_DP*x3sml**2, xbig = D1MACH(2)**0.6666_DP
   REAL(DP), PARAMETER :: aifcs(13) = [ -.37971358496669997496197089469414E-1_DP, &
@@ -127,38 +125,30 @@ REAL(DP) FUNCTION DAIE(X)
     -.345147757060899986280721066666E-28_DP, +.843875190213646740427025066666E-29_DP, &
     -.209396142298188169434453333333E-29_DP, +.527008873478945503182848000000E-30_DP, &
     -.134457433014553385789030399999E-30_DP, +.347570964526601147340117333333E-31_DP ]
-  LOGICAL, SAVE :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  DAIE
-  IF( first ) THEN
-    naif = INITDS(aifcs,13,eta)
-    naig = INITDS(aigcs,13,eta)
-    naip1 = INITDS(aip1cs,57,eta)
-    naip2 = INITDS(aip2cs,37,eta)
-    first = .FALSE.
-  END IF
+  ! naif = INITDS(aifcs,eta)
+  ! naig = INITDS(aigcs,eta)
+  ! naip1 = INITDS(aip1cs,eta)
+  ! naip2 = INITDS(aip2cs,eta)
   !
   IF( X<(-1._DP) ) THEN
     CALL D9AIMP(X,xm,theta)
     DAIE = xm*COS(theta)
-    RETURN
-    !
   ELSEIF( X<=1._DP ) THEN
     z = 0._DP
     IF( ABS(X)>x3sml ) z = X**3
-    DAIE = 0.375_DP + (DCSEVL(z,aifcs,naif)-X*(0.25_DP+DCSEVL(z,aigcs,naig)))
+    DAIE = 0.375_DP + (DCSEVL(z,aifcs(1:naif))-X*(0.25_DP+DCSEVL(z,aigcs(1:naig))))
     IF( X>x32sml ) DAIE = DAIE*EXP(2._DP*X*SQRT(X)/3._DP)
-    RETURN
-    !
-  ELSEIF( X>4._DP ) THEN
-    !
+  ELSEIF( X<=4._DP ) THEN
+    sqrtx = SQRT(X)
+    z = (16._DP/(X*sqrtx)-9._DP)/7._DP
+    DAIE = (0.28125_DP+DCSEVL(z,aip1cs(1:naip1)))/SQRT(sqrtx)
+  ELSE
     sqrtx = SQRT(X)
     z = -1._DP
     IF( X<xbig ) z = 16._DP/(X*sqrtx) - 1._DP
-    DAIE = (0.28125_DP+DCSEVL(z,aip2cs,naip2))/SQRT(sqrtx)
-    RETURN
+    DAIE = (0.28125_DP+DCSEVL(z,aip2cs(1:naip2)))/SQRT(sqrtx)
   END IF
-  sqrtx = SQRT(X)
-  z = (16._DP/(X*sqrtx)-9._DP)/7._DP
-  DAIE = (0.28125_DP+DCSEVL(z,aip1cs,naip1))/SQRT(sqrtx)
+
   RETURN
 END FUNCTION DAIE

@@ -1,7 +1,7 @@
 !** D9ATN1
-REAL(DP) FUNCTION D9ATN1(X)
-  !> Evaluate ATAN(X) from first order relative accuracy so
-  !            that ATAN(X) = X + X**3*D9ATN1(X).
+REAL(DP) ELEMENTAL FUNCTION D9ATN1(X)
+  !> Evaluate ATAN(X) from first order relative accuracy so that
+  !            ATAN(X) = X + X**3*D9ATN1(X).
   !***
   ! **Library:**   SLATEC (FNLIB)
   !***
@@ -39,10 +39,10 @@ REAL(DP) FUNCTION D9ATN1(X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
-  USE service, ONLY : XERMSG, D1MACH
-  REAL(DP) :: X
+  USE service, ONLY : D1MACH
+  REAL(DP), INTENT(IN) :: X
   REAL(DP) :: y
-  INTEGER, SAVE :: ntatn1
+  INTEGER, PARAMETER :: ntatn1 = 21
   REAL(DP), PARAMETER :: eps = D1MACH(3), xsml = SQRT(0.1_DP*eps), &
     xbig = 1.571_DP/SQRT(eps), xmax = 1.571_DP/eps
   REAL(DP), PARAMETER :: atn1cs(40) = [ -.3283997535355202356907939922990E-1_DP, &
@@ -66,28 +66,20 @@ REAL(DP) FUNCTION D9ATN1(X)
     +.4328193466245734685037909333333E-28_DP, -.7231013125595437471192405333333E-29_DP, &
     +.1208902859830494772942165333333E-29_DP, -.2022404543449897579315199999999E-30_DP, &
     +.3385428713046493843073706666666E-31_DP ]
-  LOGICAL, SAVE :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  D9ATN1
-  IF( first ) THEN
-    ntatn1 = INITDS(atn1cs,40,0.1_DP*eps)
-    first = .FALSE.
-  END IF
+  ! ntatn1 = INITDS(atn1cs,0.1_DP*eps)
   !
   y = ABS(X)
-  IF( y>1._DP ) THEN
-    !
-    IF( y>xmax ) CALL XERMSG('D9ATN1',&
-      'NO PRECISION IN ANSWER BECAUSE X IS TOO BIG',2,2)
-    IF( y>xbig ) CALL XERMSG('D9ATN1',&
-      'ANSWER LT HALF PRECISION BECAUSE X IS TOO BIG',1,1)
-    !
+  IF( y>xmax ) THEN
+    ERROR STOP 'D9ATN1 : NO PRECISION IN ANSWER BECAUSE X IS TOO BIG'
+  ELSEIF( y>1._DP ) THEN
+    ! IF( y>xbig ) CALL XERMSG('D9ATN1','ANSWER LT HALF PRECISION BECAUSE X IS TOO BIG',1,1)
     D9ATN1 = (ATAN(X)-X)/X**3
-    RETURN
+  ELSEIF( y>xsml ) THEN
+    D9ATN1 = -0.25_DP + DCSEVL(2._DP*y*y-1._DP,atn1cs(1:ntatn1))
+  ELSE
+    D9ATN1 = -1._DP/3._DP
   END IF
-  !
-  IF( y<=xsml ) D9ATN1 = -1._DP/3._DP
-  IF( y<=xsml ) RETURN
-  !
-  D9ATN1 = -0.25_DP + DCSEVL(2._DP*y*y-1._DP,atn1cs,ntatn1)
+
   RETURN
 END FUNCTION D9ATN1

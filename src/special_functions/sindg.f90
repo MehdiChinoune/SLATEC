@@ -1,5 +1,5 @@
 !** SINDG
-REAL(SP) FUNCTION SINDG(X)
+REAL(SP) ELEMENTAL FUNCTION SINDG(X)
   !> Compute the sine of an argument in degrees.
   !***
   ! **Library:**   SLATEC (FNLIB)
@@ -29,8 +29,8 @@ REAL(SP) FUNCTION SINDG(X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
   ! JUNE 1977 EDITION.   W. FULLERTON, C3, LOS ALAMOS SCIENTIFIC LAB.
+  REAL(SP), INTENT(IN) :: X
   INTEGER :: n
-  REAL(SP) :: X
   REAL(SP), PARAMETER :: raddeg = .017453292519943296_SP
   !
   !* FIRST EXECUTABLE STATEMENT  SINDG

@@ -1,8 +1,7 @@
 !** CAIRY
-SUBROUTINE CAIRY(Z,Id,Kode,Ai,Nz,Ierr)
-  !> Compute the Airy function Ai(z) or its derivative dAi/dz
-  !            for complex argument z.  A scaling option is available
-  !            to help avoid underflow and overflow.
+ELEMENTAL SUBROUTINE CAIRY(Z,Id,Kode,Ai,Nz,Ierr)
+  !> Compute the Airy function Ai(z) or its derivative dAi/dz for complex argument z.
+  !  A scaling option is available to help avoid underflow and overflow.
   !***
   ! **Library:**   SLATEC
   !***
@@ -139,12 +138,14 @@ SUBROUTINE CAIRY(Z,Id,Kode,Ai,Nz,Ierr)
   !   920128  Category corrected.  (WRB)
   !   920811  Prologue revised.  (DWL)
   USE service, ONLY : R1MACH, I1MACH
-  INTEGER :: Id, Ierr, Kode, Nz
-  COMPLEX(SP) :: Ai
+  INTEGER, INTENT(IN) :: Id, Kode
+  INTEGER, INTENT(OUT) :: Ierr, Nz
+  COMPLEX(SP), INTENT(IN) :: Z
+  COMPLEX(SP), INTENT(OUT) :: Ai
   INTEGER :: iflag, k, k1, k2, mr, nn
   REAL(SP) :: aa, ad, ak, alim, atrm, az, az3, bk, ck, dig, dk, d1, d2, elim, fid, fnu, &
   rl, r1m5, sfac, tol, zi, zr, z3i, z3r, bb, alaz
-  COMPLEX(SP) :: csq, cy(1), s1, s2, trm1, trm2, Z, zta, z3
+  COMPLEX(SP) :: csq, cy(1), s1, s2, trm1, trm2, zta, z3
   REAL(SP), PARAMETER :: tth = 6.66666666666666667E-01_SP, c1 = 3.55028053887817240E-01_SP, &
     c2 = 2.58819403792806799E-01_SP, coef = 1.83776298473930683E-01_SP
   COMPLEX(SP), PARAMETER :: cone = (1._SP,0._SP)
@@ -354,5 +355,6 @@ SUBROUTINE CAIRY(Z,Id,Kode,Ai,Nz,Ierr)
   END IF
   100  Nz = 0
   Ierr = 5
+
   RETURN
 END SUBROUTINE CAIRY

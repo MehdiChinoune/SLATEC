@@ -1,7 +1,7 @@
 !** BESK0E
-REAL(SP) FUNCTION BESK0E(X)
-  !> Compute the exponentially scaled modified (hyperbolic)
-  !            Bessel function of the third kind of order zero.
+REAL(SP) ELEMENTAL FUNCTION BESK0E(X)
+  !> Compute the exponentially scaled modified (hyperbolic)  Bessel function
+  !  of the third kind of order zero.
   !***
   ! **Library:**   SLATEC (FNLIB)
   !***
@@ -10,8 +10,7 @@ REAL(SP) FUNCTION BESK0E(X)
   ! **Type:**      SINGLE PRECISION (BESK0E-S, DBSK0E-D)
   !***
   ! **Keywords:**  EXPONENTIALLY SCALED, FNLIB, HYPERBOLIC BESSEL FUNCTION,
-  !             MODIFIED BESSEL FUNCTION, ORDER ZERO, SPECIAL FUNCTIONS,
-  !             THIRD KIND
+  !             MODIFIED BESSEL FUNCTION, ORDER ZERO, SPECIAL FUNCTIONS, THIRD KIND
   !***
   ! **Author:**  Fullerton, W., (LANL)
   !***
@@ -50,12 +49,11 @@ REAL(SP) FUNCTION BESK0E(X)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-  !   900326  Removed duplicate information from DESCRIPTION section.
-  !           (WRB)
-  USE service, ONLY : XERMSG, R1MACH
-  REAL(SP) :: X
+  !   900326  Removed duplicate information from DESCRIPTION section.  (WRB)
+  USE service, ONLY : R1MACH
+  REAL(SP), INTENT(IN) :: X
   REAL(SP) :: y
-  INTEGER, SAVE :: ntk0, ntak0, ntak02
+  INTEGER, PARAMETER :: ntk0 = 6, ntak0 = 7, ntak02 = 6
   REAL(SP), PARAMETER :: xsml = SQRT(4._SP*R1MACH(3))
   REAL(SP), PARAMETER :: bk0cs(11) = [ -.03532739323390276872_SP, .3442898999246284869_SP, &
     .03597993651536150163_SP, .00126461541144692592_SP, .00002286212103119451_SP, &
@@ -72,28 +70,22 @@ REAL(SP) FUNCTION BESK0E(X)
     -.00000000777011043_SP, .00000000046111825_SP, -.00000000003158592_SP, &
     .00000000000243501_SP, -.00000000000020743_SP, .00000000000001925_SP, &
     -.00000000000000192_SP, .00000000000000020_SP, -.00000000000000002_SP ]
-  LOGICAL, SAVE :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  BESK0E
-  IF( first ) THEN
-    ntk0 = INITS(bk0cs,11,0.1_SP*R1MACH(3))
-    ntak0 = INITS(ak0cs,17,0.1_SP*R1MACH(3))
-    ntak02 = INITS(ak02cs,14,0.1_SP*R1MACH(3))
-    first = .FALSE.
-  END IF
+  ! ntk0 = INITS(bk0cs,0.1_SP*R1MACH(3))
+  ! ntak0 = INITS(ak0cs,0.1_SP*R1MACH(3))
+  ! ntak02 = INITS(ak02cs,0.1_SP*R1MACH(3))
   !
-  IF( X<=0. ) CALL XERMSG('BESK0E','X IS ZERO OR NEGATIVE',2,2)
-  IF( X>2. ) THEN
-    !
-    IF( X<=8._SP ) THEN
-      BESK0E = (1.25_SP+CSEVL((16._SP/X-5._SP)/3._SP,ak0cs,ntak0))/SQRT(X)
-    ELSE
-      BESK0E = (1.25_SP+CSEVL(16._SP/X-1._SP,ak02cs,ntak02))/SQRT(X)
-    END IF
-    RETURN
+  IF( X<=0. ) THEN
+    ERROR STOP 'BESK0E : X <= 0'
+  ELSEIF( X<=2._SP ) THEN
+    y = 0.
+    IF( X>xsml ) y = X*X
+    BESK0E = EXP(X)*(-LOG(0.5_SP*X)*BESI0(X)-.25_SP+CSEVL(.5_SP*y-1._SP,bk0cs(1:ntk0)))
+  ELSEIF( X<=8._SP ) THEN
+    BESK0E = (1.25_SP+CSEVL((16._SP/X-5._SP)/3._SP,ak0cs(1:ntak0)))/SQRT(X)
+  ELSE
+    BESK0E = (1.25_SP+CSEVL(16._SP/X-1._SP,ak02cs(1:ntak02)))/SQRT(X)
   END IF
-  !
-  y = 0.
-  IF( X>xsml ) y = X*X
-  BESK0E = EXP(X)*(-LOG(0.5_SP*X)*BESI0(X)-.25_SP+CSEVL(.5_SP*y-1._SP,bk0cs,ntk0))
+
   RETURN
 END FUNCTION BESK0E

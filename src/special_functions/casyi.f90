@@ -1,5 +1,5 @@
 !** CASYI
-SUBROUTINE CASYI(Z,Fnu,Kode,N,Y,Nz,Rl,Tol,Elim,Alim)
+PURE SUBROUTINE CASYI(Z,Fnu,Kode,N,Y,Nz,Rl,Tol,Elim,Alim)
   !> Subsidiary to CBESI and CBESK
   !***
   ! **Library:**   SLATEC
@@ -24,10 +24,15 @@ SUBROUTINE CASYI(Z,Fnu,Kode,N,Y,Nz,Rl,Tol,Elim,Alim)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
   USE service, ONLY : R1MACH
-  INTEGER :: i, ib, il, inu, j, jl, k, Kode, koded, m, N, nn, Nz
-  COMPLEX(SP) :: ak1, ck, cs1, cs2, cz, dk, ez, p1, rz, s2, Y(N), Z
-  REAL(SP) :: aa, acz, aez, ak, Alim, arg, arm, atol, az, bb, bk, dfnu, &
-    dnu2, Elim, fdn, Fnu, Rl, rtr1, s, sgn, sqk, Tol, x, yy
+  INTEGER, INTENT(IN) :: Kode, N
+  INTEGER, INTENT(OUT) :: Nz
+  REAL(SP), INTENT(IN) :: Alim, Elim, Fnu, Rl, Tol
+  COMPLEX(SP), INTENT(IN) :: Z
+  COMPLEX(SP), INTENT(OUT) :: Y(N)
+  INTEGER :: i, ib, il, inu, j, jl, k, koded, m, nn
+  COMPLEX(SP) :: ak1, ck, cs1, cs2, cz, dk, ez, p1, rz, s2
+  REAL(SP) :: aa, acz, aez, ak, arg, arm, atol, az, bb, bk, dfnu, &
+    dnu2, fdn, rtr1, s, sgn, sqk, x, yy
   REAL(SP), PARAMETER ::  pi = 3.14159265358979324_SP, rtpi = 0.159154943091895336_SP
   COMPLEX(SP), PARAMETER ::  czero = (0._SP,0._SP), cone = (1._SP,0._SP)
   !* FIRST EXECUTABLE STATEMENT  CASYI
@@ -133,4 +138,5 @@ SUBROUTINE CASYI(Z,Fnu,Kode,N,Y,Nz,Rl,Tol,Elim,Alim)
     RETURN
   END IF
   100  Nz = -2
+
 END SUBROUTINE CASYI

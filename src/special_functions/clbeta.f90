@@ -1,7 +1,6 @@
 !** CLBETA
-COMPLEX(SP) FUNCTION CLBETA(A,B)
-  !> Compute the natural logarithm of the complete Beta
-  !            function.
+COMPLEX(SP) ELEMENTAL FUNCTION CLBETA(A,B)
+  !> Compute the natural logarithm of the complete Beta function.
   !***
   ! **Library:**   SLATEC (FNLIB)
   !***
@@ -9,8 +8,7 @@ COMPLEX(SP) FUNCTION CLBETA(A,B)
   !***
   ! **Type:**      COMPLEX (ALBETA-S, DLBETA-D, CLBETA-C)
   !***
-  ! **Keywords:**  FNLIB, LOGARITHM OF THE COMPLETE BETA FUNCTION,
-  !             SPECIAL FUNCTIONS
+  ! **Keywords:**  FNLIB, LOGARITHM OF THE COMPLETE BETA FUNCTION, SPECIAL FUNCTIONS
   !***
   ! **Author:**  Fullerton, W., (LANL)
   !***
@@ -34,11 +32,11 @@ COMPLEX(SP) FUNCTION CLBETA(A,B)
   !   861211  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-  USE service, ONLY : XERMSG
-  COMPLEX(SP) :: A, B
+  COMPLEX(SP), INTENT(IN) :: A, B
   !* FIRST EXECUTABLE STATEMENT  CLBETA
-  IF( REAL(A)<=0._SP .OR. REAL(B)<=0._SP ) CALL XERMSG('CLBETA',&
-    'REAL PART OF BOTH ARGUMENTS MUST BE GT 0',1,2)
+  IF( REAL(A)<=0._SP .OR. REAL(B)<=0._SP ) THEN
+    ERROR STOP 'CLBETA : REAL PART OF BOTH ARGUMENTS MUST BE GT 0'
+  END IF
   !
   CLBETA = CLNGAM(A) + CLNGAM(B) - CLNGAM(A+B)
   !

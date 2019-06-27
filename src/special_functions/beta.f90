@@ -1,5 +1,5 @@
 !** BETA
-REAL(SP) FUNCTION BETA(A,B)
+REAL(SP) ELEMENTAL FUNCTION BETA(A,B)
   !> Compute the complete Beta function.
   !***
   ! **Library:**   SLATEC (FNLIB)
@@ -34,28 +34,24 @@ REAL(SP) FUNCTION BETA(A,B)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   900727  Added EXTERNAL statement.  (WRB)
-  USE service, ONLY : XERMSG, R1MACH
-  REAL(SP) :: A, B
-  REAL(SP) :: xmin
-  REAL(SP), SAVE :: xmax = 0.
+  USE service, ONLY : R1MACH
+  REAL(SP), INTENT(IN) :: A, B
+  REAL(SP), PARAMETER :: xmax = 35.0307808_SP
   REAL(SP), PARAMETER :: alnsml = LOG(R1MACH(1))
-  !* FIRST EXECUTABLE STATEMENT  BETA
-  IF( xmax==0._SP ) THEN
-    CALL GAMLIM(xmin,xmax)
-  END IF
+  !* FIRST EXECUTABLE STATEMENT
   !
-  IF( A<=0. .OR. B<=0. ) CALL XERMSG('BETA',&
-    'BOTH ARGUMENTS MUST BE GT 0',2,2)
+  IF( A<=0. .OR. B<=0. ) ERROR STOP 'BETA : BOTH ARGUMENTS MUST BE > 0'
   !
   IF( A+B<xmax ) THEN
     BETA = GAMMA(A)*GAMMA(B)/GAMMA(A+B)
-    RETURN
+  ELSE
+    BETA = ALBETA(A,B)
+    IF( BETA<alnsml ) THEN
+      BETA = 0._SP
+      ! CALL XERMSG('BETA : A AND/OR B SO BIG BETA UNDERFLOWS'
+    ELSE
+      BETA = EXP(BETA)
+    END IF
   END IF
-  !
-  BETA = ALBETA(A,B)
-  IF( BETA<alnsml ) CALL XERMSG('BETA',&
-    'A AND/OR B SO BIG BETA UNDERFLOWS',1,2)
-  !
-  BETA = EXP(BETA)
   !
 END FUNCTION BETA

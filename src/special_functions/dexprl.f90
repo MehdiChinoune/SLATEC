@@ -1,5 +1,5 @@
 !** DEXPRL
-REAL(DP) FUNCTION DEXPRL(X)
+REAL(DP) ELEMENTAL FUNCTION DEXPRL(X)
   !> Calculate the relative error exponential (EXP(X)-1)/X.
   !***
   ! **Library:**   SLATEC (FNLIB)
@@ -33,7 +33,7 @@ REAL(DP) FUNCTION DEXPRL(X)
   !   890911  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   USE service, ONLY : D1MACH
-  REAL(DP) :: X
+  REAL(DP), INTENT(IN) :: X
   INTEGER :: i
   REAL(DP) :: absx
   REAL(DP), PARAMETER :: alneps = LOG(D1MACH(3)), xn = 3.72_DP - 0.3_DP*alneps, &
@@ -42,15 +42,15 @@ REAL(DP) FUNCTION DEXPRL(X)
   !* FIRST EXECUTABLE STATEMENT  DEXPRL
   !
   absx = ABS(X)
-  IF( absx>0.5_DP ) DEXPRL = (EXP(X)-1._DP)/X
-  IF( absx>0.5_DP ) RETURN
-  !
-  DEXPRL = 1._DP
-  IF( absx<xbnd ) RETURN
-  !
-  DEXPRL = 0._DP
-  DO i = 1, nterms
-    DEXPRL = 1._DP + DEXPRL*X/(nterms+2-i)
-  END DO
+  IF( absx>0.5_DP ) THEN
+    DEXPRL = (EXP(X)-1._DP)/X
+  ELSEIF( absx<xbnd ) THEN
+    DEXPRL = 1._DP
+  ELSE
+    DEXPRL = 0._DP
+    DO i = 1, nterms
+      DEXPRL = 1._DP + DEXPRL*X/(nterms+2-i)
+    END DO
+  END IF
   !
 END FUNCTION DEXPRL

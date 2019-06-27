@@ -1,7 +1,6 @@
 !** DBESK0
-REAL(DP) FUNCTION DBESK0(X)
-  !> Compute the modified (hyperbolic) Bessel function of the
-  !            third kind of order zero.
+REAL(DP) ELEMENTAL FUNCTION DBESK0(X)
+  !> Compute the modified (hyperbolic) Bessel function of the third kind of order zero.
   !***
   ! **Library:**   SLATEC (FNLIB)
   !***
@@ -9,9 +8,8 @@ REAL(DP) FUNCTION DBESK0(X)
   !***
   ! **Type:**      DOUBLE PRECISION (BESK0-S, DBESK0-D)
   !***
-  ! **Keywords:**  FNLIB, HYPERBOLIC BESSEL FUNCTION,
-  !             MODIFIED BESSEL FUNCTION, ORDER ZERO, SPECIAL FUNCTIONS,
-  !             THIRD KIND
+  ! **Keywords:**  FNLIB, HYPERBOLIC BESSEL FUNCTION, MODIFIED BESSEL FUNCTION,
+  !                ORDER ZERO, SPECIAL FUNCTIONS, THIRD KIND
   !***
   ! **Author:**  Fullerton, W., (LANL)
   !***
@@ -39,10 +37,10 @@ REAL(DP) FUNCTION DBESK0(X)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-  USE service, ONLY : XERMSG, D1MACH
-  REAL(DP) :: X
+  USE service, ONLY : D1MACH
+  REAL(DP), INTENT(IN) :: X
   REAL(DP) :: y
-  INTEGER, SAVE :: ntk0
+  INTEGER, PARAMETER :: ntk0 = 10
   REAL(DP), PARAMETER :: xsml = SQRT(4._DP*D1MACH(3)), xmaxt = -LOG(D1MACH(1)), &
     xmax = xmaxt - 0.5_DP*xmaxt*LOG(xmaxt)/(xmaxt+0.5_DP)
   REAL(DP), PARAMETER :: bk0cs(16) = [ -.353273932339027687201140060063153E-1_DP, &
@@ -54,26 +52,21 @@ REAL(DP) FUNCTION DBESK0(X)
     +.763164366011643737667498666666666E-21_DP, +.136542498844078185908053333333333E-23_DP, &
     +.207527526690666808319999999999999E-26_DP, +.271281421807298560000000000000000E-29_DP, &
     +.308259388791466666666666666666666E-32_DP ]
-  LOGICAL, SAVE :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  DBESK0
-  IF( first ) THEN
-    ntk0 = INITDS(bk0cs,16,0.1_SP*D1MACH(3))
-    first = .FALSE.
-  END IF
+  ! ntk0 = INITDS(bk0cs,0.1_SP*D1MACH(3))
   !
-  IF( X<=0._DP ) CALL XERMSG('DBESK0','X IS ZERO OR NEGATIVE',2,2)
-  IF( X>2._DP ) THEN
-    !
-    DBESK0 = 0._DP
-    IF( X>xmax ) CALL XERMSG('DBESK0','X SO BIG K0 UNDERFLOWS',1,1)
-    IF( X>xmax ) RETURN
-    !
+  IF( X<=0._DP ) THEN
+    ERROR STOP 'DBESK0 : X IS ZERO OR NEGATIVE'
+  ELSEIF( X<=2._DP ) THEN
+    y = 0._DP
+    IF( X>xsml ) y = X*X
+    DBESK0 = -LOG(0.5_DP*X)*DBESI0(X) - 0.25_DP + DCSEVL(.5_DP*y-1._DP,bk0cs(1:ntk0))
+  ELSEIF( X<=xmax ) THEN
     DBESK0 = EXP(-X)*DBSK0E(X)
-    RETURN
+  ELSE
+    DBESK0 = 0._DP
+    ! IF( X>xmax ) CALL XERMSG('DBESK0','X SO BIG K0 UNDERFLOWS',1,1)
   END IF
-  !
-  y = 0._DP
-  IF( X>xsml ) y = X*X
-  DBESK0 = -LOG(0.5_DP*X)*DBESI0(X) - 0.25_DP + DCSEVL(.5_DP*y-1._DP,bk0cs,ntk0)
+
   RETURN
 END FUNCTION DBESK0

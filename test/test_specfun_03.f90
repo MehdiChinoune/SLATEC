@@ -43,7 +43,7 @@ CONTAINS
     !   900330  Prologue converted to Version 4.0 format.  (BAB)
     !   900727  Added EXTERNAL statement.  (WRB)
     USE slatec, ONLY : C0LGMC, CATAN2, CBETA, CCBRT, CCOT, CEXPRL, CGAMMA, CGAMR, &
-      CLBETA, CLNGAM, CLNREL, CLOG10, CPSI, R1MACH
+      CLBETA, CLNGAM, CLNREL, CPSI, R1MACH
     INTEGER :: i, Lun, Kprint, Ipass
     REAL(SP) :: errmax, errtol, abserr, relerr
     COMPLEX(SP) :: w(48)
@@ -57,7 +57,7 @@ CONTAINS
     !
     !     Complex values through different calculations are stored in C(*)
     !
-    COMPLEX(SP), PARAMETER :: c(28) = [ (.121699028117870E1_SP,.326091563038355_SP), &
+    COMPLEX(SP), PARAMETER :: c(26) = [ (.121699028117870E1_SP,.326091563038355_SP), &
       (.866025403784438_SP,.500000000000000_SP), &
       (-.785398163397449_SP,-.658478948462413_SP), &
       (.785398163397449_SP,-.658478948462413_SP), &
@@ -65,8 +65,6 @@ CONTAINS
       (-.313314753080534E-1_SP,.541264220944095E-1_SP), &
       (.183048772171245E1_SP,.000000000000000_SP), &
       (-.757236713834364E-1_SP,-.961745759068982_SP), &
-      (.150514997831990_SP,-.341094088460459_SP), &
-      (.301029995663980_SP,.227396058973639_SP), &
       (.000000000000000_SP,.636619772367581_SP), &
       (.137802461354738E1_SP,.909330673631480_SP), &
       (.303123109082158E-1_SP,-.244978663126864_SP), &
@@ -105,41 +103,39 @@ CONTAINS
     !
     !     Exercise routines in Category C4B.
     !
-    w(9) = CLOG10(1._SP-ci)
-    w(10) = CLOG10(sqrt3+ci)
-    w(11) = CEXPRL(pi*ci)
-    w(12) = CEXPRL(1._SP+ci)
-    w(13) = CLNREL(-.25_SP*ci)
-    w(14) = CLNREL(sqrt3-1._SP+ci)
+    w(9) = CEXPRL(pi*ci)
+    w(10) = CEXPRL(1._SP+ci)
+    w(11) = CLNREL(-.25_SP*ci)
+    w(12) = CLNREL(sqrt3-1._SP+ci)
     !
     !     Exercise routines in Category C7A.
     !
-    w(15) = C0LGMC(.5_SP+.5_SP*ci)
-    w(16) = C0LGMC(1._SP-1._SP*ci)
-    w(17) = CGAMMA(.5_SP+0._SP*ci)
-    w(18) = CGAMMA(.5_SP+ci)
-    w(19) = CGAMR(.5_SP-ci)
-    w(20) = CGAMR(1._SP+ci)
-    w(21) = CLNGAM(1.1_SP+3.2_SP*ci)
-    w(22) = CLNGAM(1.9_SP+2.4_SP*ci)
+    w(13) = C0LGMC(.5_SP+.5_SP*ci)
+    w(14) = C0LGMC(1._SP-1._SP*ci)
+    w(15) = CGAMMA(.5_SP+0._SP*ci)
+    w(16) = CGAMMA(.5_SP+ci)
+    w(17) = CGAMR(.5_SP-ci)
+    w(18) = CGAMR(1._SP+ci)
+    w(19) = CLNGAM(1.1_SP+3.2_SP*ci)
+    w(20) = CLNGAM(1.9_SP+2.4_SP*ci)
     !
     !     Exercise routines in Category C7B.
     !
-    w(23) = CBETA(1._SP+ci,1._SP+ci)
-    w(24) = CBETA(2._SP-ci,.5_SP+ci)
-    w(25) = CLBETA(2._SP+ci,1._SP-2._SP*ci)
-    w(26) = CLBETA(1._SP-ci,2._SP+ci)
+    w(21) = CBETA(1._SP+ci,1._SP+ci)
+    w(22) = CBETA(2._SP-ci,.5_SP+ci)
+    w(23) = CLBETA(2._SP+ci,1._SP-2._SP*ci)
+    w(24) = CLBETA(1._SP-ci,2._SP+ci)
     !
     !     Exercise routines in Category C7C.
     !
-    w(27) = CPSI(.5_SP+0._SP*ci)
-    w(28) = CPSI(1._SP+5._SP*ci)
+    w(25) = CPSI(.5_SP+0._SP*ci)
+    w(26) = CPSI(1._SP+5._SP*ci)
     !
     !     Check for possible errors
     !
     errmax = R1MACH(4)
     errtol = SQRT(errmax)
-    DO i = 1, 28
+    DO i = 1, 26
       abserr = ABS(c(i)-w(i))
       relerr = abserr/ABS(c(i))
       errmax = MAX(relerr,errmax)

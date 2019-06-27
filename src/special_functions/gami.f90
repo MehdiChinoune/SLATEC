@@ -1,5 +1,5 @@
 !** GAMI
-REAL(SP) FUNCTION GAMI(A,X)
+REAL(SP) ELEMENTAL FUNCTION GAMI(A,X)
   !> Evaluate the incomplete Gamma function.
   !***
   ! **Library:**   SLATEC (FNLIB)
@@ -34,18 +34,19 @@ REAL(SP) FUNCTION GAMI(A,X)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-  USE service, ONLY : XERMSG
-  REAL(SP) :: A, factor, X
+  REAL(SP), INTENT(IN) :: A, X
+  REAL(SP) :: factor
   !* FIRST EXECUTABLE STATEMENT  GAMI
-  IF( A<=0._SP ) CALL XERMSG('GAMI','A MUST BE GT ZERO',1,2)
-  IF( X<0._SP ) CALL XERMSG('GAMI','X MUST BE GE ZERO',2,2)
-  !
-  GAMI = 0._SP
-  IF( X==0._SP ) RETURN
-  !
-  ! THE ONLY ERROR POSSIBLE IN THE EXPRESSION BELOW IS A FATAL OVERFLOW.
-  factor = EXP(LOG_GAMMA(A)+A*LOG(X))
-  !
-  GAMI = factor*GAMIT(A,X)
-  !
+  IF( A<=0._SP ) ERROR STOP 'GAMI : A MUST BE >= 0'
+
+  IF( X<0._SP ) THEN
+    ERROR STOP 'GAMI : X MUST BE >= 0'
+  ELSEIF( X==0._SP ) THEN
+    GAMI = 0._SP
+  ELSE
+    ! THE ONLY ERROR POSSIBLE IN THE EXPRESSION BELOW IS A FATAL OVERFLOW.
+    factor = EXP(LOG_GAMMA(A)+A*LOG(X))
+    GAMI = factor*GAMIT(A,X)
+  END IF
+
 END FUNCTION GAMI

@@ -1,5 +1,5 @@
 !** DCHU
-REAL(DP) FUNCTION DCHU(A,B,X)
+REAL(DP) ELEMENTAL FUNCTION DCHU(A,B,X)
   !> Compute the logarithmic confluent hypergeometric function.
   !***
   ! **Library:**   SLATEC (FNLIB)
@@ -16,8 +16,7 @@ REAL(DP) FUNCTION DCHU(A,B,X)
   ! **Description:**
   !
   ! DCHU(A,B,X) calculates the double precision logarithmic confluent
-  ! hypergeometric function U(A,B,X) for double precision arguments
-  ! A, B, and X.
+  ! hypergeometric function U(A,B,X) for double precision arguments A, B, and X.
   !
   ! This routine is not valid when 1+A-B is close to zero if X is small.
   !
@@ -34,8 +33,8 @@ REAL(DP) FUNCTION DCHU(A,B,X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900727  Added EXTERNAL statement.  (WRB)
-  USE service, ONLY : XERMSG, D1MACH
-  REAL(DP) :: A, B, X
+  USE service, ONLY : D1MACH
+  REAL(DP), INTENT(IN) :: A, B, X
   INTEGER :: i, istrt, m, n
   REAL(DP) :: aintb, alnx, a0, beps, b0, c0, factor, gamri1, gamrni, &
     pch1ai, pch1i, pochai, summ, t, xeps1, xi, xi1, xn, xtoeps
@@ -43,16 +42,16 @@ REAL(DP) FUNCTION DCHU(A,B,X)
   REAL(DP), PARAMETER :: eps = D1MACH(3)
   !* FIRST EXECUTABLE STATEMENT  DCHU
   !
-  IF( X==0._DP ) CALL XERMSG('DCHU','X IS ZERO SO DCHU IS INFINITE',1,2)
-  IF( X<0._DP ) CALL XERMSG('DCHU','X IS NEGATIVE, USE CCHU',2,2)
+  IF( X==0._DP ) ERROR STOP 'DCHU : X IS ZERO SO DCHU IS INFINITE'
+  IF( X<0._DP ) ERROR STOP 'DCHU : X IS NEGATIVE, USE CCHU'
   !
   IF( MAX(ABS(A),1._DP)*MAX(ABS(1._DP+A-B),1._DP)>=0.99_DP*ABS(X) ) THEN
     !
     ! THE ASCENDING SERIES WILL BE USED, BECAUSE THE DESCENDING RATIONAL
     ! APPROXIMATION (WHICH IS BASED ON THE ASYMPTOTIC SERIES) IS UNSTABLE.
     !
-    IF( ABS(1._DP+A-B)<SQRT(eps) ) CALL XERMSG('DCHU',&
-      'ALGORITHMIS BAD WHEN 1+A-B IS NEAR ZERO FOR SMALL X',10,2)
+    IF( ABS(1._DP+A-B)<SQRT(eps) ) &
+      ERROR STOP 'DCHU : ALGORITHMIS BAD WHEN 1+A-B IS NEAR ZERO FOR SMALL X'
     !
     IF( B>=0._DP ) aintb = AINT(B+0.5_DP)
     IF( B<0._DP ) aintb = AINT(B-0.5_DP)
@@ -143,8 +142,7 @@ REAL(DP) FUNCTION DCHU(A,B,X)
         DCHU = DCHU + t
         IF( ABS(t)<eps*ABS(DCHU) ) RETURN
       END DO
-      CALL XERMSG('DCHU',&
-        'NO CONVERGENCE IN 1000 TERMS OF THE ASCENDING SERIES',3,2)
+      ERROR STOP 'DCHU : NO CONVERGENCE IN 1000 TERMS OF THE ASCENDING SERIES'
     END IF
     !
     ! X**(-BEPS) IS VERY DIFFERENT FROM 1.0, SO THE STRAIGHTFORWARD
@@ -163,8 +161,7 @@ REAL(DP) FUNCTION DCHU(A,B,X)
       DCHU = DCHU + t
       IF( ABS(t)<eps*ABS(DCHU) ) RETURN
     END DO
-    CALL XERMSG('DCHU',&
-      'NO CONVERGENCE IN 1000 TERMS OF THE ASCENDING SERIES',3,2)
+    ERROR STOP 'DCHU : NO CONVERGENCE IN 1000 TERMS OF THE ASCENDING SERIES'
   END IF
   !
   ! USE LUKE-S RATIONAL APPROXIMATION IN THE ASYMPTOTIC REGION.

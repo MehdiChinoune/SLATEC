@@ -1,9 +1,8 @@
 !** RC6J
-SUBROUTINE RC6J(L2,L3,L4,L5,L6,L1min,L1max,Sixcof,Ndim,Ier)
+PURE SUBROUTINE RC6J(L2,L3,L4,L5,L6,L1min,L1max,Sixcof,Ndim,Ier)
   !> Evaluate the 6j symbol h(L1) = {L1 L2 L3}
-  !                                           {L4 L5 L6}
-  !            for all allowed values of L1, the other parameters
-  !            being held fixed.
+  !                                 {L4 L5 L6}
+  !  for all allowed values of L1, the other parameters being held fixed.
   !***
   ! **Library:**   SLATEC
   !***
@@ -131,10 +130,12 @@ SUBROUTINE RC6J(L2,L3,L4,L5,L6,L1min,L1max,Sixcof,Ndim,Ier)
   !   910415  Mixed type expressions eliminated; variable C1 initialized;
   !           description of SIXCOF expanded. These changes were done by
   !           D. W. Lozier.
-  USE service, ONLY : XERMSG, R1MACH
+  USE service, ONLY : R1MACH
   !
-  INTEGER :: Ndim, Ier
-  REAL(SP) :: L2, L3, L4, L5, L6, L1min, L1max, Sixcof(Ndim)
+  INTEGER, INTENT(IN) :: Ndim
+  INTEGER, INTENT(OUT) :: Ier
+  REAL(SP), INTENT(IN) :: L2, L3, L4, L5, L6
+  REAL(SP), INTENT(OUT) :: L1min, L1max, Sixcof(Ndim)
   !
   INTEGER :: i, indexx, lstep, n, nfin, nfinp1, nfinp2, nfinp3, nlim, nstep2
   REAL(SP) :: a1, a1s, a2, a2s, c1, c1old, c2, cnorm, denom, dv, hugee, l1, &
@@ -157,16 +158,13 @@ SUBROUTINE RC6J(L2,L3,L4,L5,L6,L1min,L1max,Sixcof,Ndim,Ier)
   IF( (MOD(L2+L3+L5+L6+eps,one)>=eps+eps) .OR. &
       (MOD(L4+L2+L6+eps,one)>=eps+eps) ) THEN
     Ier = 1
-    CALL XERMSG('RC6J','L2+L3+L5+L6 or L4+L2+L6 not integer.',Ier,1)
-    RETURN
+    ERROR STOP 'RC6J : L2+L3+L5+L6 or L4+L2+L6 not integer.'
   ELSEIF( (L4+L2-L6<zero) .OR. (L4-L2+L6<zero) .OR. (-L4+L2+L6<zero) ) THEN
     Ier = 2
-    CALL XERMSG('RC6J','L4, L2, L6 triangular condition not satisfied.',Ier,1)
-    RETURN
+    ERROR STOP 'RC6J : L4, L2, L6 triangular condition not satisfied.'
   ELSEIF( (L4-L5+L3<zero) .OR. (L4+L5-L3<zero) .OR. (-L4+L5+L3<zero) ) THEN
     Ier = 3
-    CALL XERMSG('RC6J','L4, L5, L3 triangular condition not satisfied.',Ier,1)
-    RETURN
+    ERROR STOP 'RC6J : L4, L5, L3 triangular condition not satisfied.'
   END IF
   !
   !  Limits for L1
@@ -177,8 +175,7 @@ SUBROUTINE RC6J(L2,L3,L4,L5,L6,L1min,L1max,Sixcof,Ndim,Ier)
   !  Check error condition 4.
   IF( MOD(L1max-L1min+eps,one)>=eps+eps ) THEN
     Ier = 4
-    CALL XERMSG('RC6J','L1MAX-L1MIN not integer.',Ier,1)
-    RETURN
+    ERROR STOP 'RC6J : L1MAX-L1MIN not integer.'
   END IF
   IF( L1min<L1max-eps ) THEN
     !
@@ -191,8 +188,7 @@ SUBROUTINE RC6J(L2,L3,L4,L5,L6,L1min,L1max,Sixcof,Ndim,Ier)
       !
       !  Check error condition 6.
       Ier = 6
-      CALL XERMSG('RC6J','Dimension of result array for 6j coefficients too small.',Ier,1)
-      RETURN
+      ERROR STOP 'RC6J : Dimension of result array for 6j coefficients too small.'
     ELSE
       !
       !
@@ -219,7 +215,7 @@ SUBROUTINE RC6J(L2,L3,L4,L5,L6,L1min,L1max,Sixcof,Ndim,Ier)
     !
     !  Check error condition 5.
     Ier = 5
-    CALL XERMSG('RC6J','L1MIN greater than L1MAX.',Ier,1)
+    ERROR STOP 'RC6J : L1MIN greater than L1MAX.'
     RETURN
   END IF
   100  lstep = lstep + 1
@@ -441,5 +437,6 @@ SUBROUTINE RC6J(L2,L3,L4,L5,L6,L1min,L1max,Sixcof,Ndim,Ier)
   DO n = 1, nfin
     Sixcof(n) = cnorm*Sixcof(n)
   END DO
+
   RETURN
 END SUBROUTINE RC6J

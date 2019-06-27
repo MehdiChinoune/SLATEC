@@ -1,7 +1,7 @@
 !** D9CHU
-REAL(DP) FUNCTION D9CHU(A,B,Z)
-  !> Evaluate for large Z  Z**A * U(A,B,Z) where U is the
-  !            logarithmic confluent hypergeometric function.
+REAL(DP) ELEMENTAL FUNCTION D9CHU(A,B,Z)
+  !> Evaluate for large Z  Z**A * U(A,B,Z) where U is the logarithmic confluent
+  !  hypergeometric function.
   !***
   ! **Library:**   SLATEC (FNLIB)
   !***
@@ -35,8 +35,8 @@ REAL(DP) FUNCTION D9CHU(A,B,Z)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
-  USE service, ONLY : XERMSG, D1MACH
-  REAL(DP) :: A, B, Z
+  USE service, ONLY : D1MACH
+  REAL(DP), INTENT(IN) :: A, B, Z
   INTEGER :: i, j
   REAL(DP) :: aa(4), bb(4), ab, anbn, bp, ct1, ct2, ct3, c2, d1z, g1, g2, g3, sab, x2i1
   REAL(DP), PARAMETER :: eps = 4._DP*D1MACH(4), sqeps = SQRT(D1MACH(4))
@@ -84,11 +84,10 @@ REAL(DP) FUNCTION D9CHU(A,B,Z)
       bb(j) = bb(j+1)
     END DO
   END DO
-  CALL XERMSG('D9CHU','NO CONVERGENCE IN 300 TERMS',2,2)
+  ERROR STOP 'D9CHU : NO CONVERGENCE IN 300 TERMS'
   !
   100  D9CHU = aa(4)/bb(4)
   !
-  IF( D9CHU<sqeps .OR. D9CHU>1._DP/sqeps )&
-    CALL XERMSG('D9CHU','ANSWER LT HALF PRECISION',2,1)
+  ! IF( D9CHU<sqeps .OR. D9CHU>1._DP/sqeps ) CALL XERMSG('D9CHU','ANSWER LT HALF PRECISION',2,1)
   !
 END FUNCTION D9CHU

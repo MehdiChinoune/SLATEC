@@ -1,7 +1,6 @@
 !** DLBETA
-REAL(DP) FUNCTION DLBETA(A,B)
-  !> Compute the natural logarithm of the complete Beta
-  !            function.
+REAL(DP) ELEMENTAL FUNCTION DLBETA(A,B)
+  !> Compute the natural logarithm of the complete Beta function.
   !***
   ! **Library:**   SLATEC (FNLIB)
   !***
@@ -9,16 +8,14 @@ REAL(DP) FUNCTION DLBETA(A,B)
   !***
   ! **Type:**      DOUBLE PRECISION (ALBETA-S, DLBETA-D, CLBETA-C)
   !***
-  ! **Keywords:**  FNLIB, LOGARITHM OF THE COMPLETE BETA FUNCTION,
-  !             SPECIAL FUNCTIONS
+  ! **Keywords:**  FNLIB, LOGARITHM OF THE COMPLETE BETA FUNCTION, SPECIAL FUNCTIONS
   !***
   ! **Author:**  Fullerton, W., (LANL)
   !***
   ! **Description:**
   !
   ! DLBETA(A,B) calculates the double precision natural logarithm of
-  ! the complete beta function for double precision arguments
-  ! A and B.
+  ! the complete beta function for double precision arguments A and B.
   !
   !***
   ! **References:**  (NONE)
@@ -32,35 +29,28 @@ REAL(DP) FUNCTION DLBETA(A,B)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900727  Added EXTERNAL statement.  (WRB)
-  USE service, ONLY : XERMSG
-  REAL(DP) :: A, B, p, q, corr
+  REAL(DP), INTENT(IN) :: A, B
+  REAL(DP) :: p, q, corr
   REAL(DP), PARAMETER :: sq2pil = 0.91893853320467274178032973640562_DP
   !* FIRST EXECUTABLE STATEMENT  DLBETA
   p = MIN(A,B)
   q = MAX(A,B)
   !
-  IF( p<=0._DP ) CALL XERMSG('DLBETA',&
-    'BOTH ARGUMENTS MUST BE GT ZERO',1,2)
-  !
-  IF( p>=10._DP ) THEN
-    !
+  IF( p<=0._DP ) THEN
+    ERROR STOP 'DLBETA : BOTH ARGUMENTS MUST BE > 0'
+  ELSEIF( p>=10._DP ) THEN
     ! P AND Q ARE BIG.
-    !
     corr = D9LGMC(p) + D9LGMC(q) - D9LGMC(p+q)
     DLBETA = -0.5_DP*LOG(q) + sq2pil + corr + (p-0.5_DP)*LOG(p/(p+q))&
       + q*DLNREL(-p/(p+q))
-    RETURN
   ELSEIF( q<10._DP ) THEN
-    !
     ! P AND Q ARE SMALL.
-    !
     DLBETA = LOG(GAMMA(p)*(GAMMA(q)/GAMMA(p+q)))
-    RETURN
+  ELSE
+    ! P IS SMALL, BUT Q IS BIG.
+    corr = D9LGMC(q) - D9LGMC(p+q)
+    DLBETA = LOG_GAMMA(p) + corr + p - p*LOG(p+q) + (q-0.5_DP)*DLNREL(-p/(p+q))
   END IF
-  !
-  ! P IS SMALL, BUT Q IS BIG.
-  !
-  corr = D9LGMC(q) - D9LGMC(p+q)
-  DLBETA = LOG_GAMMA(p) + corr + p - p*LOG(p+q) + (q-0.5_DP)*DLNREL(-p/(p+q))
+
   RETURN
 END FUNCTION DLBETA

@@ -42,7 +42,7 @@ SUBROUTINE ZUOIK(Zr,Zi,Fnu,Kode,Ikflg,N,Yr,Yi,Nuf,Tol,Elim,Alim)
   USE service, ONLY : D1MACH
   !     COMPLEX ARG,ASUM,BSUM,CWRK,CZ,CZERO,PHI,SUM,Y,Z,ZB,ZETA1,ZETA2,ZN,
   !    *ZR
-  INTEGER :: i, idum, iform, Ikflg, init, Kode, N, nn, Nuf, nw
+  INTEGER :: i, iform, Ikflg, init, Kode, N, nn, Nuf, nw
   REAL(DP) :: aarg, Alim, aphi, argi, argr, asumi, asumr, ascle, ax, ay, bsumi, &
     bsumr, cwrki(16), cwrkr(16), czi, czr, Elim, fnn, Fnu, gnn, gnu, phii, phir, &
     rcz, str, sti, sumi, sumr, Tol, Yi(N), Yr(N), zbi, zbr, zeta1i, zeta1r, &
@@ -118,11 +118,11 @@ SUBROUTINE ZUOIK(Zr,Zi,Fnu,Kode,Ikflg,N,Yr,Yi,Nuf,Tol,Elim,Alim)
         IF( iform==2 ) rcz = rcz - 0.25_DP*LOG(aarg) - aic
         IF( rcz>(-Elim) ) THEN
           ascle = 1.E3_DP*D1MACH(1)/Tol
-          CALL ZLOG(phir,phii,str,sti,idum)
+          CALL ZLOG(phir,phii,str,sti)
           czr = czr + str
           czi = czi + sti
           IF( iform/=1 ) THEN
-            CALL ZLOG(argr,argi,str,sti,idum)
+            CALL ZLOG(argr,argi,str,sti)
             czr = czr - 0.25_DP*str - aic
             czi = czi - 0.25_DP*sti
           END IF
@@ -180,11 +180,11 @@ SUBROUTINE ZUOIK(Zr,Zi,Fnu,Kode,Ikflg,N,Yr,Yi,Nuf,Tol,Elim,Alim)
     IF( iform==2 ) rcz = rcz - 0.25_DP*LOG(aarg) - aic
     IF( rcz>(-Elim) ) THEN
       ascle = 1.E3_DP*D1MACH(1)/Tol
-      CALL ZLOG(phir,phii,str,sti,idum)
+      CALL ZLOG(phir,phii,str,sti)
       czr = czr + str
       czi = czi + sti
       IF( iform/=1 ) THEN
-        CALL ZLOG(argr,argi,str,sti,idum)
+        CALL ZLOG(argr,argi,str,sti)
         czr = czr - 0.25_DP*str - aic
         czi = czi - 0.25_DP*sti
       END IF

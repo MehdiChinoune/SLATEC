@@ -1,5 +1,5 @@
 !** D9UPAK
-SUBROUTINE D9UPAK(X,Y,N)
+ELEMENTAL SUBROUTINE D9UPAK(X,Y,N)
   !> Unpack a floating point number X so that X = Y*2**N.
   !***
   ! **Library:**   SLATEC (FNLIB)
@@ -30,8 +30,10 @@ SUBROUTINE D9UPAK(X,Y,N)
   !   900820  Corrected code to find Y between 0.5 and 1.0 rather than
   !           between 0.05 and 1.0.  (WRB)
 
-  INTEGER :: N
-  REAL(DP) :: X, Y, absx
+  INTEGER , INTENT(OUT) :: N
+  REAL(DP), INTENT(IN) :: X
+  REAL(DP), INTENT(OUT) :: Y
+  REAL(DP) :: absx
   !* FIRST EXECUTABLE STATEMENT  D9UPAK
   absx = ABS(X)
   N = 0

@@ -1,5 +1,5 @@
 !** DAWS
-REAL(SP) FUNCTION DAWS(X)
+REAL(SP) ELEMENTAL FUNCTION DAWS(X)
   !> Compute Dawson's function.
   !***
   ! **Library:**   SLATEC (FNLIB)
@@ -46,10 +46,10 @@ REAL(SP) FUNCTION DAWS(X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920618  Removed space from variable names.  (RWC, WRB)
-  USE service, ONLY : XERMSG, R1MACH
-  REAL(SP) :: X
+  USE service, ONLY : R1MACH
+  REAL(SP), INTENT(IN) :: X
   REAL(SP) :: y
-  INTEGER, SAVE :: ntdaw, ntdaw2, ntdawa
+  INTEGER, PARAMETER :: ntdaw = 7, ntdaw2 = 18, ntdawa = 7
   REAL(SP), PARAMETER :: eps = R1MACH(3), xsml = SQRT(1.5_SP*eps), xbig = SQRT(0.5_SP/eps), &
     xmax = EXP(MIN(-LOG(2._SP*R1MACH(1)),LOG(R1MACH(2)))-1._SP)
   REAL(SP), PARAMETER :: dawcs(13) = [ -.006351734375145949_SP,-.22940714796773869_SP, &
@@ -76,37 +76,26 @@ REAL(SP) FUNCTION DAWS(X)
     .00000000000004911_SP,  .00000000000001235_SP,-.00000000000000578_SP, &
     -.00000000000000228_SP, .00000000000000076_SP, .00000000000000038_SP, &
     -.00000000000000011_SP,-.00000000000000006_SP, .00000000000000002_SP ]
-  LOGICAL, SAVE :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  DAWS
-  IF( first ) THEN
-    ntdaw = INITS(dawcs,13,0.1_SP*eps)
-    ntdaw2 = INITS(daw2cs,29,0.1_SP*eps)
-    ntdawa = INITS(dawacs,26,0.1_SP*eps)
-    first = .FALSE.
-  END IF
+  ! ntdaw = INITS(dawcs,0.1_SP*eps)
+  ! ntdaw2 = INITS(daw2cs,0.1_SP*eps)
+  ! ntdawa = INITS(dawacs,0.1_SP*eps)
   !
   y = ABS(X)
-  IF( y<=1._SP ) THEN
-    !
+  IF( y<=xsml ) THEN
     DAWS = X
-    IF( y<=xsml ) RETURN
-    !
-    DAWS = X*(0.75_SP+CSEVL(2._SP*y*y-1._SP,dawcs,ntdaw))
-    RETURN
-    !
+  ELSEIF( y<=1._SP ) THEN
+    DAWS = X*(0.75_SP+CSEVL(2._SP*y*y-1._SP,dawcs(1:ntdaw)))
   ELSEIF( y<=4._SP ) THEN
-    DAWS = X*(0.25_SP+CSEVL(0.125_SP*y*y-1._SP,daw2cs,ntdaw2))
-    RETURN
-    !
-  ELSEIF( y>xmax ) THEN
-    !
-    CALL XERMSG('DAWS','ABS(X) SO LARGE DAWS UNDERFLOWS',1,1)
+    DAWS = X*(0.25_SP+CSEVL(0.125_SP*y*y-1._SP,daw2cs(1:ntdaw2)))
+  ELSEIF( y<=xbig ) THEN
+    DAWS = (0.5_SP+CSEVL(32._SP/y**2-1._SP,dawacs(1:ntdawa)))/X
+  ELSEIF( y<=xmax ) THEN
+    DAWS = 0.5_SP/X
+  ELSE
+    ! CALL XERMSG('DAWS','ABS(X) SO LARGE DAWS UNDERFLOWS',1,1)
     DAWS = 0._SP
-    RETURN
   END IF
-  DAWS = 0.5_SP/X
-  IF( y>xbig ) RETURN
-  !
-  DAWS = (0.5_SP+CSEVL(32._SP/y**2-1._SP,dawacs,ntdawa))/X
+
   RETURN
 END FUNCTION DAWS

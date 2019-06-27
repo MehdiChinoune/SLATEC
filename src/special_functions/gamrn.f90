@@ -1,5 +1,5 @@
 !** GAMRN
-REAL(SP) FUNCTION GAMRN(X)
+REAL(SP) ELEMENTAL FUNCTION GAMRN(X)
   !> Subsidiary to BSKIN
   !***
   ! **Library:**   SLATEC
@@ -51,8 +51,9 @@ REAL(SP) FUNCTION GAMRN(X)
   !   910722  Updated AUTHOR section.  (ALS)
   !   920520  Added REFERENCES section.  (WRB)
   USE service, ONLY : R1MACH, I1MACH
+  REAL(SP), INTENT(IN) :: X
   INTEGER :: i, i1m11, k, mx, nx
-  REAL(SP) :: fln, rln, s, tol, trm, X, xdmy, xinc, xm, xmin, xp, xsq
+  REAL(SP) :: fln, rln, s, tol, trm, xdmy, xinc, xm, xmin, xp, xsq
   !
   REAL(SP), PARAMETER :: gr(12) = [ 1.00000000000000000E+00_SP,-1.56250000000000000E-02_SP, &
     2.56347656250000000E-03_SP,-1.27983093261718750E-03_SP,  1.34351104497909546E-03_SP, &
@@ -100,5 +101,6 @@ REAL(SP) FUNCTION GAMRN(X)
     RETURN
   END IF
   GAMRN = s
+
   RETURN
 END FUNCTION GAMRN

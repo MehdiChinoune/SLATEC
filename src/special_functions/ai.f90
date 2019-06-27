@@ -1,5 +1,5 @@
 !** AI
-REAL(SP) FUNCTION AI(X)
+REAL(SP) ELEMENTAL FUNCTION AI(X)
   !> Evaluate the Airy function.
   !***
   ! **Library:**   SLATEC (FNLIB)
@@ -41,10 +41,10 @@ REAL(SP) FUNCTION AI(X)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920618  Removed space from variable names.  (RWC, WRB)
-  USE service, ONLY : XERMSG, R1MACH
-  REAL(SP) :: X
+  USE service, ONLY : R1MACH
+  REAL(SP), INTENT(IN) :: X
   REAL(SP) :: theta, xm, z
-  INTEGER, SAVE :: naif, naig
+  INTEGER, PARAMETER :: naif = 5, naig = 4
   REAL(SP), PARAMETER :: x3sml = R1MACH(3)**0.3334_SP, &
     xmaxt = (-1.5_SP*LOG(R1MACH(1)))**0.6667_SP, &
     xmax = xmaxt - xmaxt*LOG(xmaxt)/(4._SP*SQRT(xmaxt)+1._SP) - 0.01_SP
@@ -55,31 +55,23 @@ REAL(SP) FUNCTION AI(X)
   REAL(SP), PARAMETER :: aigcs(8) = [ .01815236558116127_SP, .02157256316601076_SP, &
     .00025678356987483_SP, .00000142652141197_SP, .00000000457211492_SP, &
     .00000000000952517_SP, .00000000000001392_SP, .00000000000000001_SP ]
-  LOGICAL, SAVE :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  AI
-  IF( first ) THEN
-    naif = INITS(aifcs,9,0.1_SP*R1MACH(3))
-    naig = INITS(aigcs,8,0.1_SP*R1MACH(3))
-    first = .FALSE.
-  END IF
+  ! naif = INITS(aifcs,0.1_SP*R1MACH(3))
+  ! naig = INITS(aigcs,0.1_SP*R1MACH(3))
   !
   IF( X<(-1._SP) ) THEN
     CALL R9AIMP(X,xm,theta)
     AI = xm*COS(theta)
-    RETURN
-    !
   ELSEIF( X<=1._SP ) THEN
     z = 0._SP
     IF( ABS(X)>x3sml ) z = X**3
-    AI = 0.375_SP + (CSEVL(z,aifcs,naif)-X*(0.25_SP+CSEVL(z,aigcs,naig)))
-    RETURN
-    !
+    AI = 0.375_SP + ( CSEVL(z,aifcs(1:naif)) - X*( 0.25_SP + CSEVL(z,aigcs(1:naig) ) ) )
   ELSEIF( X>xmax ) THEN
-    !
     AI = 0._SP
-    CALL XERMSG('AI','X SO BIG AI UNDERFLOWS',1,1)
-    RETURN
+    !CALL XERMSG('AI : X SO BIG AI UNDERFLOWS',1,1)
+  ELSE
+    AI = AIE(X)*EXP(-2._SP*X*SQRT(X)/3._SP)
   END IF
-  AI = AIE(X)*EXP(-2._SP*X*SQRT(X)/3._SP)
+
   RETURN
 END FUNCTION AI

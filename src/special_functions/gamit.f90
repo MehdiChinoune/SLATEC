@@ -1,5 +1,5 @@
 !** GAMIT
-REAL(SP) FUNCTION GAMIT(A,X)
+REAL(SP) ELEMENTAL FUNCTION GAMIT(A,X)
   !> Calculate Tricomi's form of the incomplete Gamma function.
   !***
   ! **Library:**   SLATEC (FNLIB)
@@ -55,14 +55,14 @@ REAL(SP) FUNCTION GAMIT(A,X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920528  DESCRIPTION and REFERENCES sections revised.  (WRB)
-  USE service, ONLY : XERMSG, num_xer, R1MACH
-  REAL(SP) :: A, X
+  USE service, ONLY : R1MACH
+  REAL(SP), INTENT(IN) :: A, X
   REAL(SP) :: aeps, ainta, algap1, alng, alx, h, sga, sgngam, t
   REAL(SP), PARAMETER :: alneps = -LOG(R1MACH(3)), sqeps = SQRT(R1MACH(4)), &
     bot = LOG(R1MACH(1))
   !* FIRST EXECUTABLE STATEMENT  GAMIT
   !
-  IF( X<0._SP ) CALL XERMSG('GAMIT','X IS NEGATIVE',2,2)
+  IF( X<0._SP ) ERROR STOP 'GAMIT : X IS NEGATIVE'
   !
   IF( X/=0._SP ) alx = LOG(X)
   sga = 1._SP
@@ -70,16 +70,13 @@ REAL(SP) FUNCTION GAMIT(A,X)
   ainta = AINT(A+0.5_SP*sga)
   aeps = A - ainta
   !
-  IF( X<=0._SP ) THEN
+  IF( ( ainta>0._SP .OR. aeps/=0._SP ) .AND. X<=0._SP ) THEN
+    GAMIT = GAMR(A+1._SP)
+  ELSEIF( X<=0._SP ) THEN
     GAMIT = 0._SP
-    IF( ainta>0._SP .OR. aeps/=0._SP ) GAMIT = GAMR(A+1._SP)
-    RETURN
-    !
   ELSEIF( X<=1._SP ) THEN
     IF( A>=(-0.5_SP) .OR. aeps/=0._SP ) CALL ALGAMS(A+1._SP,algap1,sgngam)
     GAMIT = R9GMIT(A,X,algap1,sgngam)
-    RETURN
-    !
   ELSEIF( A<X ) THEN
     !
     alng = R9LGIC(A,X,alx)
@@ -93,26 +90,21 @@ REAL(SP) FUNCTION GAMIT(A,X)
       IF( t>alneps ) THEN
         !
         t = t - A*alx
-        IF( t<bot ) num_xer = 0
         GAMIT = -sga*sgngam*EXP(t)
         RETURN
       ELSE
         IF( t>(-alneps) ) h = 1._SP - sga*sgngam*EXP(t)
-        IF( ABS(h)<=sqeps ) THEN
-          num_xer = 0
-          CALL XERMSG('GAMIT','RESULT LT HALF PRECISION',1,1)
-        END IF
+        ! IF( ABS(h)<=sqeps ) THEN
+        !   CALL XERMSG('GAMIT','RESULT LT HALF PRECISION',1,1)
+        ! END IF
       END IF
     END IF
+    t = -A*alx + LOG(ABS(h))
+    GAMIT = SIGN(EXP(t),h)
   ELSE
     t = R9LGIT(A,X,LOG_GAMMA(A+1._SP))
-    IF( t<bot ) num_xer = 0
     GAMIT = EXP(t)
-    RETURN
   END IF
-  !
-  t = -A*alx + LOG(ABS(h))
-  IF( t<bot ) num_xer = 0
-  GAMIT = SIGN(EXP(t),h)
+
   RETURN
 END FUNCTION GAMIT

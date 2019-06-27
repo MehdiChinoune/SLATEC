@@ -1,7 +1,7 @@
 !** BESKES
-SUBROUTINE BESKES(Xnu,X,Nin,Bke)
-  !> Compute a sequence of exponentially scaled modified Bessel
-  !            functions of the third kind of fractional order.
+PURE SUBROUTINE BESKES(Xnu,X,Nin,Bke)
+  !> Compute a sequence of exponentially scaled modified Bessel functions of
+  !  the third kind of fractional order.
   !***
   ! **Library:**   SLATEC (FNLIB)
   !***
@@ -36,11 +36,11 @@ SUBROUTINE BESKES(Xnu,X,Nin,Bke)
   !   890911  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-  !   900326  Removed duplicate information from DESCRIPTION section.
-  !           (WRB)
-  USE service, ONLY : XERMSG, R1MACH
-  INTEGER :: Nin
-  REAL(SP) :: Bke(Nin), X, Xnu
+  !   900326  Removed duplicate information from DESCRIPTION section.  (WRB)
+  USE service, ONLY : R1MACH
+  INTEGER, INTENT(IN) :: Nin
+  REAL(SP), INTENT(IN) :: X, Xnu
+  REAL(SP), INTENT(OUT) :: Bke(Nin)
   INTEGER :: i, iswtch, n
   REAL(SP) :: bknu1, direct, v, vend, vincr
   REAL(SP), PARAMETER :: alnbig = LOG(R1MACH(2))
@@ -49,10 +49,13 @@ SUBROUTINE BESKES(Xnu,X,Nin,Bke)
   v = ABS(Xnu)
   n = ABS(Nin)
   !
-  IF( v>=1. ) CALL XERMSG('BESKES','ABS(XNU) MUST BE LT 1',2,2)
-  IF( X<=0. ) CALL XERMSG('BESKES','X IS LE 0',3,2)
-  IF( n==0 ) CALL XERMSG('BESKES',&
-    'N THE NUMBER IN THE SEQUENCE IS 0',4,2)
+  IF( v>=1. ) THEN
+    ERROR STOP 'BESKES : ABS(XNU) MUST BE < 1'
+  ELSEIF( X<=0. ) THEN
+    ERROR STOP 'BESKES : X <= 0'
+  ELSEIF( n==0 ) THEN
+    ERROR STOP 'BESKES : N THE NUMBER IN THE SEQUENCE IS 0'
+  END IF
   !
   CALL R9KNUS(v,X,Bke(1),bknu1,iswtch)
   IF( n==1 ) RETURN
@@ -60,17 +63,18 @@ SUBROUTINE BESKES(Xnu,X,Nin,Bke)
   vincr = SIGN(1._SP,REAL(Nin,SP))
   direct = vincr
   IF( Xnu/=0. ) direct = vincr*SIGN(1._SP,Xnu)
-  IF( iswtch==1 .AND. direct>0. ) CALL XERMSG('BESKES',&
-    'X SO SMALL BESSEL K-SUB-XNU+1 OVERFLOWS',5,2)
+  IF( iswtch==1 .AND. direct>0. ) THEN
+    ERROR STOP 'BESKES : X SO SMALL BESSEL K-SUB-XNU+1 OVERFLOWS'
+  END IF
   Bke(2) = bknu1
   !
   IF( direct<0. ) CALL R9KNUS(ABS(Xnu+vincr),X,Bke(2),bknu1,iswtch)
   IF( n==2 ) RETURN
   !
   vend = ABS(Xnu+Nin) - 1._SP
-  IF( (vend-0.5_SP)*LOG(vend)+0.27-vend*(LOG(X)-.694)>alnbig )&
-    CALL XERMSG('BESKES',&
-    'X SO SMALL OR ABS(NU) SO BIG THAT BESSEL K-SUB-NU OVERFLOWS',5,2)
+  IF( (vend-0.5_SP)*LOG(vend)+0.27-vend*(LOG(X)-.694)>alnbig ) THEN
+    ERROR STOP 'BESKES : X SO SMALL OR ABS(NU) SO BIG THAT BESSEL K-SUB-NU OVERFLOWS'
+  END IF
   !
   v = Xnu
   DO i = 3, n

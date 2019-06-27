@@ -1,9 +1,8 @@
 !** CBESY
-SUBROUTINE CBESY(Z,Fnu,Kode,N,Cy,Nz,Cwrk,Ierr)
+PURE SUBROUTINE CBESY(Z,Fnu,Kode,N,Cy,Nz,Cwrk,Ierr)
   !> Compute a sequence of the Bessel functions Y(a,z) for
-  !            complex argument z and real nonnegative orders a=b,b+1,
-  !            b+2,... where b>0.  A scaling option is available to
-  !            help avoid overflow.
+  !  complex argument z and real nonnegative orders a=b,b+1,
+  !  b+2,... where b>0.  A scaling option is available to help avoid overflow.
   !***
   ! **Library:**   SLATEC
   !***
@@ -159,20 +158,24 @@ SUBROUTINE CBESY(Z,Fnu,Kode,N,Cy,Nz,Cwrk,Ierr)
   !   920811  Prologue revised.  (DWL)
   USE service, ONLY : R1MACH, I1MACH
   !
-  INTEGER :: i, Ierr, k, Kode, k1, k2, N, Nz, nz1, nz2
-  COMPLEX(SP) :: Cwrk(N), Cy(N), c1, c2, ex, hci, Z, zu, zv
-  REAL(SP) :: elim, ey, Fnu, r1, r2, tay, xx, yy, r1m5, ascle, &
+  INTEGER, INTENT(IN) :: Kode, N
+  INTEGER, INTENT(OUT) :: Ierr, Nz
+  REAL(SP), INTENT(IN) :: Fnu
+  COMPLEX(SP), INTENT(IN) :: Z
+  COMPLEX(SP), INTENT(OUT) :: Cwrk(N), Cy(N)
+  INTEGER :: i, k, k1, k2, nz1, nz2
+  COMPLEX(SP) :: c1, c2, ex, hci, zu, zv
+  REAL(SP) :: elim, ey, r1, r2, tay, xx, yy, r1m5, ascle, &
     rtol, atol, tol, aa, bb
   !* FIRST EXECUTABLE STATEMENT  CBESY
   xx = REAL(Z)
   yy = AIMAG(Z)
   Ierr = 0
   Nz = 0
-  IF( xx==0._SP .AND. yy==0._SP ) Ierr = 1
-  IF( Fnu<0._SP ) Ierr = 1
-  IF( Kode<1 .OR. Kode>2 ) Ierr = 1
-  IF( N<1 ) Ierr = 1
-  IF( Ierr/=0 ) RETURN
+  IF( Z==(0._SP,0._SP)  .OR. Fnu<0._SP .OR. Kode<1 .OR. Kode>2 .OR. N<1 ) THEN
+    Ierr = 1
+    RETURN
+  END IF
   hci = CMPLX(0._SP,0.5_SP,SP)
   CALL CBESH(Z,Fnu,Kode,1,N,Cy,nz1,Ierr)
   IF( Ierr/=0 .AND. Ierr/=3 ) THEN
@@ -243,4 +246,5 @@ SUBROUTINE CBESY(Z,Fnu,Kode,N,Cy,Nz,Cwrk,Ierr)
       END IF
     END IF
   END IF
+
 END SUBROUTINE CBESY

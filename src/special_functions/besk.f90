@@ -1,10 +1,9 @@
 !** BESK
-SUBROUTINE BESK(X,Fnu,Kode,N,Y,Nz)
-  !> Implement forward recursion on the three term recursion
-  !            relation for a sequence of non-negative order Bessel
-  !            functions K/SUB(FNU+I-1)/(X), or scaled Bessel functions
-  !            EXP(X)*K/SUB(FNU+I-1)/(X), I=1,...,N for REAL(SP), positive
-  !            X and non-negative orders FNU.
+PURE SUBROUTINE BESK(X,Fnu,Kode,N,Y,Nz)
+  !> Implement forward recursion on the three term recursion relation for
+  !  a sequence of non-negative order Bessel functions K_{FNU+I-1}(X),
+  !  or scaled Bessel functions
+  !  EXP(X)*K_{FNU+I-1}(X), I=1,...,N for REAL(SP), positive X and non-negative orders FNU.
   !***
   ! **Library:**   SLATEC
   !***
@@ -21,8 +20,8 @@ SUBROUTINE BESK(X,Fnu,Kode,N,Y,Nz)
   !     Abstract
   !         BESK implements forward recursion on the three term
   !         recursion relation for a sequence of non-negative order Bessel
-  !         functions K/sub(FNU+I-1)/(X), or scaled Bessel functions
-  !         EXP(X)*K/sub(FNU+I-1)/(X), I=1,...,N for real X > 0.0E0 and
+  !         functions K_{FNU+I-1}(X), or scaled Bessel functions
+  !         EXP(X)*K_{FNU+I-1}(X), I=1,...,N for real X > 0.0E0 and
   !         non-negative orders FNU.  If FNU < NULIM, orders FNU and
   !         FNU+1 are obtained from BESKNU to start the recursion.  If
   !         FNU >= NULIM, the uniform asymptotic expansion is used for
@@ -37,17 +36,17 @@ SUBROUTINE BESK(X,Fnu,Kode,N,Y,Nz)
   !           X      - X > 0.0E0
   !           FNU    - order of the initial K function, FNU >= 0.0E0
   !           KODE   - a parameter to indicate the scaling option
-  !                    KODE=1 returns Y(I)=       K/sub(FNU+I-1)/(X),
+  !                    KODE=1 returns Y(I)=       K_{FNU+I-1}(X),
   !                                        I=1,...,N
-  !                    KODE=2 returns Y(I)=EXP(X)*K/sub(FNU+I-1)/(X),
+  !                    KODE=2 returns Y(I)=EXP(X)*K_{FNU+I-1}(X),
   !                                        I=1,...,N
   !           N      - number of members in the sequence, N >= 1
   !
   !         Output
   !           y      - a vector whose first n components contain values
   !                    for the sequence
-  !                    Y(I)=       K/sub(FNU+I-1)/(X), I=1,...,N  or
-  !                    Y(I)=EXP(X)*K/sub(FNU+I-1)/(X), I=1,...,N
+  !                    Y(I)=       K_{FNU+I-1}(X), I=1,...,N  or
+  !                    Y(I)=EXP(X)*K_{FNU+I-1}(X), I=1,...,N
   !                    depending on KODE
   !           NZ     - number of components of Y set to zero due to
   !                    underflow with KODE=1,
@@ -77,13 +76,14 @@ SUBROUTINE BESK(X,Fnu,Kode,N,Y,Nz)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-  !   900326  Removed duplicate information from DESCRIPTION section.
-  !           (WRB)
+  !   900326  Removed duplicate information from DESCRIPTION section.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  USE service, ONLY : XERMSG, R1MACH, I1MACH
+  USE service, ONLY : R1MACH, I1MACH
   !
-  INTEGER :: Kode, N, Nz
-  REAL(SP) :: Fnu, X, Y(N)
+  INTEGER, INTENT(IN) :: Kode, N
+  INTEGER, INTENT(OUT) :: Nz
+  REAL(SP), INTENT(IN) :: Fnu, X
+  REAL(SP), INTENT(OUT) :: Y(N)
   INTEGER :: i, j, k, mz, nb, nd, nn, nud
   REAL(SP) :: cn, dnu, elim, etx, flgik, fn, fnn, gln, gnu, rtz, &
     s, s1, s2, t, tm, trx, w(2), xlim, zn
@@ -93,24 +93,15 @@ SUBROUTINE BESK(X,Fnu,Kode,N,Y,Nz)
   elim = 2.303_SP*(nn*R1MACH(5)-3._SP)
   xlim = R1MACH(1)*1.E+3_SP
   IF( Kode<1 .OR. Kode>2 ) THEN
-    !
-    !
-    !
-    CALL XERMSG('BESK','SCALING OPTION, KODE, NOT 1 OR 2',2,1)
-    RETURN
+    ERROR STOP 'BESK : SCALING OPTION, KODE, NOT 1 OR 2'
   ELSEIF( Fnu<0._SP ) THEN
-    CALL XERMSG('BESK','ORDER, FNU, LESS THAN ZERO',2,1)
-    RETURN
+    ERROR STOP 'BESK : ORDER, FNU < 0'
   ELSEIF( X<=0._SP ) THEN
-    CALL XERMSG('BESK','X LESS THAN OR EQUAL TO ZERO',2,1)
-    RETURN
+    ERROR STOP 'BESK : X <= 0'
   ELSEIF( X<xlim ) THEN
-    CALL XERMSG('BESK',&
-      'OVERFLOW, FNU OR N TOO LARGE OR X TOO SMALL',6,1)
-    RETURN
+    ERROR STOP 'BESK : OVERFLOW, FNU OR N TOO LARGE OR X TOO SMALL'
   ELSEIF( N<1 ) THEN
-    CALL XERMSG('BESK','N LESS THAN ONE',2,1)
-    RETURN
+    ERROR STOP 'BESK : N < 1'
   ELSE
     etx = Kode - 1
     !
@@ -139,18 +130,14 @@ SUBROUTINE BESK(X,Fnu,Kode,N,Y,Nz)
       !
       zn = X/fn
       IF( zn==0._SP ) THEN
-        CALL XERMSG('BESK',&
-          'OVERFLOW, FNU OR N TOO LARGE OR X TOO SMALL',6,1)
-        RETURN
+        ERROR STOP 'BESK : OVERFLOW, FNU OR N TOO LARGE OR X TOO SMALL'
       ELSE
         rtz = SQRT(1._SP+zn*zn)
         gln = LOG((1._SP+rtz)/zn)
         t = rtz*(1._SP-etx) + etx/(zn+rtz)
         cn = -fn*(t-gln)
         IF( cn>elim ) THEN
-          CALL XERMSG('BESK',&
-            'OVERFLOW, FNU OR N TOO LARGE OR X TOO SMALL',6,1)
-          RETURN
+          ERROR STOP 'BESK : OVERFLOW, FNU OR N TOO LARGE OR X TOO SMALL'
         ELSEIF( nud<nulim(nn) ) THEN
           !
           IF( Kode==2 ) GOTO 300
@@ -239,9 +226,7 @@ SUBROUTINE BESK(X,Fnu,Kode,N,Y,Nz)
   600 CONTINUE
   IF( fn>1._SP ) THEN
     IF( -fn*(LOG(X)-0.693E0_SP)>elim ) THEN
-      CALL XERMSG('BESK',&
-        'OVERFLOW, FNU OR N TOO LARGE OR X TOO SMALL',6,1)
-      RETURN
+      ERROR STOP 'BESK : OVERFLOW, FNU OR N TOO LARGE OR X TOO SMALL'
     END IF
   END IF
   IF( dnu==0._SP ) THEN
@@ -291,5 +276,6 @@ SUBROUTINE BESK(X,Fnu,Kode,N,Y,Nz)
   DO i = 1, Nz
     Y(i) = 0._SP
   END DO
+
   RETURN
 END SUBROUTINE BESK

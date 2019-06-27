@@ -1,7 +1,6 @@
 !** DBESI1
-REAL(DP) FUNCTION DBESI1(X)
-  !> Compute the modified (hyperbolic) Bessel function of the
-  !            first kind of order one.
+REAL(DP) ELEMENTAL FUNCTION DBESI1(X)
+  !> Compute the modified (hyperbolic) Bessel function of the first kind of order one.
   !***
   ! **Library:**   SLATEC (FNLIB)
   !***
@@ -37,10 +36,10 @@ REAL(DP) FUNCTION DBESI1(X)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-  USE service, ONLY : XERMSG, D1MACH
-  REAL(DP) :: X
+  USE service, ONLY : D1MACH
+  REAL(DP), INTENT(IN) :: X
   REAL(DP) :: y
-  INTEGER, SAVE :: nti1
+  INTEGER, PARAMETER :: nti1 = 11
   REAL(DP), PARAMETER :: xmin = 2._DP*D1MACH(1), xsml = SQRT(4.5_DP*D1MACH(3)), &
     xmax = LOG(D1MACH(2))
   REAL(DP), PARAMETER :: bi1cs(17) = [ -.19717132610998597316138503218149E-2_DP, &
@@ -52,28 +51,22 @@ REAL(DP) FUNCTION DBESI1(X)
     +.10171505007093713649121100799999E-18_DP, +.36450935657866949458491733333333E-21_DP, &
     +.11205749502562039344810666666666E-23_DP, +.29875441934468088832000000000000E-26_DP, &
     +.69732310939194709333333333333333E-29_DP, +.14367948220620800000000000000000E-31_DP ]
-  LOGICAL, SAVE :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  DBESI1
-  IF( first ) THEN
-    nti1 = INITDS(bi1cs,17,0.1_SP*D1MACH(3))
-    first = .FALSE.
-  END IF
+  ! nti1 = INITDS(bi1cs,0.1_SP*D1MACH(3))
   !
   y = ABS(X)
-  IF( y>3._DP ) THEN
-    !
-    IF( y>xmax ) CALL XERMSG('DBESI1','ABS(X) SO BIG I1 OVERFLOWS',2,2)
-    !
+  IF( y>xmax ) THEN
+    ERROR STOP 'DBESI1 : ABS(X) SO BIG I1 OVERFLOWS'
+  ELSEIF( y>3._DP ) THEN
     DBESI1 = EXP(y)*DBSI1E(X)
-    RETURN
+  ELSEIF( y>xsml ) THEN
+    DBESI1 = X*(0.875_DP+DCSEVL(y*y/4.5_DP-1._DP,bi1cs(1:nti1)))
+  ELSEIF( y>xmin ) THEN
+    DBESI1 = 0.5_DP*X
+  ELSE
+    ! IF( y<=xmin ) CALL XERMSG('DBESI1','ABS(X) SO SMALL I1 UNDERFLOWS',1,1)
+    DBESI1 = 0._DP
   END IF
-  !
-  DBESI1 = 0._DP
-  IF( y==0._DP ) RETURN
-  !
-  IF( y<=xmin ) CALL XERMSG('DBESI1',&
-    'ABS(X) SO SMALL I1 UNDERFLOWS',1,1)
-  IF( y>xmin ) DBESI1 = 0.5_DP*X
-  IF( y>xsml ) DBESI1 = X*(0.875_DP+DCSEVL(y*y/4.5_DP-1._DP,bi1cs,nti1))
+
   RETURN
 END FUNCTION DBESI1

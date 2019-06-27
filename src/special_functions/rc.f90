@@ -1,7 +1,7 @@
 !** RC
-REAL(SP) FUNCTION RC(X,Y,Ier)
+REAL(SP) ELEMENTAL FUNCTION RC(X,Y)
   !> Calculate an approximation to
-  !             RC(X,Y) = Integral from zero to infinity of
+  !           RC(X,Y) = Integral from zero to infinity of
   !                              -1/2     -1
   !                    (1/2)(t+X)    (t+Y)  dt,
   !            where X is nonnegative and Y is positive.
@@ -271,9 +271,8 @@ REAL(SP) FUNCTION RC(X,Y,Ier)
   !   900510  Changed calls to XERMSG to standard form, and some
   !           editorial changes.  (RWC))
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  USE service, ONLY : XERMSG, R1MACH
-  INTEGER :: Ier
-  REAL(SP) :: X, Y
+  USE service, ONLY : R1MACH
+  REAL(SP), INTENT(IN) :: X, Y
   REAL(SP) :: lamda, mu, s, sn, xn, yn
   CHARACTER(16) :: xern3, xern4, xern5
   REAL(SP), PARAMETER :: errtol = (R1MACH(3)/16._SP)**(1._SP/6._SP), &
@@ -286,35 +285,27 @@ REAL(SP) FUNCTION RC(X,Y,Ier)
   !
   RC = 0._SP
   IF( X<0._SP .OR. Y<=0._SP ) THEN
-    Ier = 1
     WRITE (xern3,'(1PE15.6)') X
     WRITE (xern4,'(1PE15.6)') Y
-    CALL XERMSG('RC','X<0 .OR. Y<=0 WHERE X = '//xern3//&
-      ' AND Y = '//xern4,1,1)
-    RETURN
+    ERROR STOP 'RC : X<0 .OR. Y<=0 WHERE X = '//xern3//' AND Y = '//xern4
   END IF
   !
   IF( MAX(X,Y)>uplim ) THEN
-    Ier = 3
     WRITE (xern3,'(1PE15.6)') X
     WRITE (xern4,'(1PE15.6)') Y
     WRITE (xern5,'(1PE15.6)') uplim
-    CALL XERMSG('RC','MAX(X,Y)>UPLIM WHERE X = '//xern3//&
-      ' Y = '//xern4//' AND UPLIM = '//xern5,3,1)
-    RETURN
+    ERROR STOP 'RC : MAX(X,Y)>UPLIM WHERE X = '//xern3//' Y = '//xern4//&
+      ' AND UPLIM = '//xern5
   END IF
   !
   IF( X+Y<lolim ) THEN
-    Ier = 2
     WRITE (xern3,'(1PE15.6)') X
     WRITE (xern4,'(1PE15.6)') Y
     WRITE (xern5,'(1PE15.6)') lolim
-    CALL XERMSG('RC','X+Y<LOLIM WHERE X = '//xern3//' Y = '//&
-      xern4//' AND LOLIM = '//xern5,2,1)
-    RETURN
+    ERROR STOP 'RC : X+Y<LOLIM WHERE X = '//xern3//' Y = '//xern4//&
+      ' AND LOLIM = '//xern5
   END IF
   !
-  Ier = 0
   xn = X
   yn = Y
   DO
@@ -332,4 +323,5 @@ REAL(SP) FUNCTION RC(X,Y,Ier)
       yn = (yn+lamda)*0.250_SP
     END IF
   END DO
+
 END FUNCTION RC

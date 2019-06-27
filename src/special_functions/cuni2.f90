@@ -1,5 +1,5 @@
 !** CUNI2
-SUBROUTINE CUNI2(Z,Fnu,Kode,N,Y,Nz,Nlast,Fnul,Tol,Elim,Alim)
+PURE SUBROUTINE CUNI2(Z,Fnu,Kode,N,Y,Nz,Nlast,Fnul,Tol,Elim,Alim)
   !> Subsidiary to CBESI and CBESK
   !***
   ! **Library:**   SLATEC
@@ -29,11 +29,16 @@ SUBROUTINE CUNI2(Z,Fnu,Kode,N,Y,Nz,Nlast,Fnul,Tol,Elim,Alim)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
   USE service, ONLY : R1MACH
-  INTEGER :: i, iflag, in, inu, j, k, Kode, N, nai, nd, ndai, Nlast, nn, nuf, nw, Nz, idum
+  INTEGER, INTENT(IN) :: Kode, N
+  INTEGER, INTENT(OUT) :: Nlast, Nz
+  REAL(SP), INTENT(IN) :: Alim, Elim, Fnu, Fnul, Tol
+  COMPLEX(SP), INTENT(IN) :: Z
+  COMPLEX(SP), INTENT(OUT) :: Y(N)
+  INTEGER :: i, iflag, in, inu, j, k, nai, nd, ndai, nn, nuf, nw, idum
   COMPLEX(SP) :: ai, arg, asum, bsum, cfn, cid, crsc, cscl, csr(3), css(3), cy(2), c1, &
-    c2, dai, phi, rz, s1, s2, Y(N), Z, zb, zeta1, zeta2, zn, zar
-  REAL(SP) :: aarg, Alim, ang, aphi, ascle, ay, bry(3), car, c2i, c2m, c2r, Elim, fn, &
-    Fnu, Fnul, rs1, sar, Tol, yy
+    c2, dai, phi, rz, s1, s2, zb, zeta1, zeta2, zn, zar
+  REAL(SP) :: aarg, ang, aphi, ascle, ay, bry(3), car, c2i, c2m, c2r, fn, &
+    rs1, sar, yy
   COMPLEX(SP), PARAMETER :: czero = (0._SP,0._SP), cone = (1._SP,0._SP), ci= (0._SP,1._SP)
   COMPLEX(SP), PARAMETER :: cip(4) = [ (1._SP,0._SP), (0._SP,1._SP), &
     (-1._SP,0._SP), (0._SP,-1._SP) ]

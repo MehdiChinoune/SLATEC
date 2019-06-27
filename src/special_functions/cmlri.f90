@@ -1,5 +1,5 @@
 !** CMLRI
-SUBROUTINE CMLRI(Z,Fnu,Kode,N,Y,Nz,Tol)
+PURE SUBROUTINE CMLRI(Z,Fnu,Kode,N,Y,Nz,Tol)
   !> Subsidiary to CBESI and CBESK
   !***
   ! **Library:**   SLATEC
@@ -22,13 +22,18 @@ SUBROUTINE CMLRI(Z,Fnu,Kode,N,Y,Nz,Tol)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
   USE service, ONLY : R1MACH
-  INTEGER :: i, iaz, idum, ifnu, inu, itime, k, kk, km, Kode, m, N, Nz
-  COMPLEX(SP) :: ck, cnorm, pt, p1, p2, rz, summ, Y(N), Z
-  REAL(SP) :: ack, ak, ap, at, az, bk, fkap, fkk, flam, fnf, Fnu, rho, &
-    rho2, scle, tfnf, Tol, tst, x
+  INTEGER, INTENT(IN) :: Kode, N
+  INTEGER, INTENT(OUT) :: Nz
+  REAL(SP), INTENT(IN) :: Fnu, Tol
+  COMPLEX(SP), INTENT(IN) :: Z
+  COMPLEX(SP), INTENT(OUT) :: Y(N)
+  INTEGER :: i, iaz, ifnu, inu, itime, k, kk, km, m
+  COMPLEX(SP) :: ck, cnorm, pt, p1, p2, rz, summ
+  REAL(SP) :: ack, ak, ap, at, az, bk, fkap, fkk, flam, fnf, rho, &
+    rho2, scle, tfnf, tst, x
   COMPLEX(SP), PARAMETER :: czero = (0._SP,0._SP), cone = (1._SP,0._SP), ctwo = (2._SP,0._SP)
-  scle = 1.E+3_SP*R1MACH(1)/Tol
   !* FIRST EXECUTABLE STATEMENT  CMLRI
+  scle = 1.E+3_SP*R1MACH(1)/Tol
   Nz = 0
   az = ABS(Z)
   x = REAL(Z)
@@ -105,7 +110,7 @@ SUBROUTINE CMLRI(Z,Fnu,Kode,N,Y,Nz,Tol)
   p2 = CMPLX(scle,0._SP,SP)
   fnf = Fnu - ifnu
   tfnf = fnf + fnf
-  bk = GAMLN(fkk+tfnf+1._SP,idum) - GAMLN(fkk+1._SP,idum)- GAMLN(tfnf+1._SP,idum)
+  bk = LOG_GAMMA(fkk+tfnf+1._SP) - LOG_GAMMA(fkk+1._SP)- LOG_GAMMA(tfnf+1._SP)
   bk = EXP(bk)
   summ = czero
   km = kk - inu
@@ -149,7 +154,7 @@ SUBROUTINE CMLRI(Z,Fnu,Kode,N,Y,Nz,Tol)
   pt = Z
   IF( Kode==2 ) pt = pt - CMPLX(x,0._SP,SP)
   p1 = -CMPLX(fnf,0._SP,SP)*LOG(rz) + pt
-  ap = GAMLN(1._SP+fnf,idum)
+  ap = LOG_GAMMA(1._SP+fnf)
   pt = p1 - CMPLX(ap,0._SP,SP)
   !-----------------------------------------------------------------------
   !     THE DIVISION EXP(PT)/(SUM+P2) IS ALTERED TO AVOID OVERFLOW
@@ -161,8 +166,7 @@ SUBROUTINE CMLRI(Z,Fnu,Kode,N,Y,Nz,Tol)
   ck = EXP(pt)*p1
   pt = CONJG(p2)*p1
   cnorm = ck*pt
-  DO i = 1, N
-    Y(i) = Y(i)*cnorm
-  END DO
+  Y = Y*cnorm
+
   RETURN
 END SUBROUTINE CMLRI

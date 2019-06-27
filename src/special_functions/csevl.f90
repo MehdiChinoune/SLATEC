@@ -1,5 +1,5 @@
 !** CSEVL
-REAL(SP) FUNCTION CSEVL(X,Cs,N)
+REAL(SP) PURE FUNCTION CSEVL(X,Cs)
   !> Evaluate a Chebyshev series.
   !***
   ! **Library:**   SLATEC (FNLIB)
@@ -42,24 +42,22 @@ REAL(SP) FUNCTION CSEVL(X,Cs,N)
   !   900329  Prologued revised extensively and code rewritten to allow
   !           X to be slightly outside interval (-1,+1).  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  USE service, ONLY : XERMSG, R1MACH
-  INTEGER :: N
-  REAL(SP) :: Cs(N), X
-  INTEGER :: i, ni
+  USE service, ONLY : R1MACH
+  REAL(SP), INTENT(IN) :: X
+  REAL(SP), INTENT(IN) :: Cs(:)
+  INTEGER :: i, ni, n
   REAL(SP) :: b0, b1, b2, twox
-  REAL(SP), PARAMETER :: onepl = 1._SP + R1MACH(4)
   !* FIRST EXECUTABLE STATEMENT  CSEVL
-  IF( N<1 ) CALL XERMSG('CSEVL','NUMBER OF TERMS <= 0',2,2)
-  IF( N>1000 ) CALL XERMSG('CSEVL','NUMBER OF TERMS > 1000',3,2)
-  IF( ABS(X)>onepl ) CALL XERMSG('CSEVL','X OUTSIDE THE INTERVAL (-1,+1)',1,1)
+  IF( ABS(X)>1._SP ) ERROR STOP 'CSEVL : X OUTSIDE THE INTERVAL (-1,+1)'
+  n = SIZE( Cs )
   !
   b1 = 0._SP
   b0 = 0._SP
   twox = 2._SP*X
-  DO i = 1, N
+  DO i = 1, n
     b2 = b1
     b1 = b0
-    ni = N + 1 - i
+    ni = n + 1 - i
     b0 = twox*b1 - b2 + Cs(ni)
   END DO
   !

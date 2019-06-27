@@ -1,7 +1,6 @@
 !** DGAMLM
-SUBROUTINE DGAMLM(Xmin,Xmax)
-  !> Compute the minimum and maximum bounds for the argument in
-  !            the Gamma function.
+ELEMENTAL SUBROUTINE DGAMLM(Xmin,Xmax)
+  !> Compute the minimum and maximum bounds for the argument in the Gamma function.
   !***
   ! **Library:**   SLATEC (FNLIB)
   !***
@@ -36,7 +35,7 @@ SUBROUTINE DGAMLM(Xmin,Xmax)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-  USE service, ONLY : XERMSG, D1MACH
+  USE service, ONLY : D1MACH
   REAL(DP), INTENT(OUT) :: Xmin, Xmax
   INTEGER :: i
   REAL(DP) :: xln, xold
@@ -49,7 +48,7 @@ SUBROUTINE DGAMLM(Xmin,Xmax)
     Xmin = Xmin - Xmin*((Xmin+0.5_DP)*xln-Xmin-0.2258_DP+alnsml)/(Xmin*xln+0.5_DP)
     IF( ABS(Xmin-xold)<0.005_DP ) GOTO 100
   END DO
-  CALL XERMSG('DGAMLM','UNABLE TO FIND XMIN',1,2)
+  ERROR STOP 'DGAMLM : UNABLE TO FIND XMIN'
   !
   100  Xmin = -Xmin + 0.01_DP
   !
@@ -60,7 +59,7 @@ SUBROUTINE DGAMLM(Xmin,Xmax)
     Xmax = Xmax - Xmax*((Xmax-0.5_DP)*xln-Xmax+0.9189_DP-alnbig)/(Xmax*xln-0.5_DP)
     IF( ABS(Xmax-xold)<0.005_DP ) GOTO 200
   END DO
-  CALL XERMSG('DGAMLM','UNABLE TO FIND XMAX',2,2)
+  ERROR STOP 'DGAMLM : UNABLE TO FIND XMAX'
   !
   200  Xmax = Xmax - 0.01_DP
   Xmin = MAX(Xmin,-Xmax+1._DP)

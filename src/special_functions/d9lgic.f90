@@ -1,7 +1,6 @@
 !** D9LGIC
-REAL(DP) FUNCTION D9LGIC(A,X,Alx)
-  !> Compute the log complementary incomplete Gamma function
-  !            for large X and for A <= X.
+REAL(DP) ELEMENTAL FUNCTION D9LGIC(A,X,Alx)
+  !> Compute the log complementary incomplete Gamma function for large X and for A <= X.
   !***
   ! **Library:**   SLATEC (FNLIB)
   !***
@@ -31,11 +30,11 @@ REAL(DP) FUNCTION D9LGIC(A,X,Alx)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
-  USE service, ONLY : XERMSG, D1MACH
-  REAL(DP) :: A, X, Alx
+  USE service, ONLY : D1MACH
+  REAL(DP), INTENT(IN) :: A, X, Alx
   INTEGER :: k
   REAL(DP) :: fk, p, r, s, t, xma, xpa
-  REAL(DP) :: eps = 0.5_DP*D1MACH(3)
+  REAL(DP), PARAMETER :: eps = 0.5_DP*D1MACH(3)
   !* FIRST EXECUTABLE STATEMENT  D9LGIC
   !
   xpa = X + 1._DP - A
@@ -52,8 +51,7 @@ REAL(DP) FUNCTION D9LGIC(A,X,Alx)
     s = s + p
     IF( ABS(p)<eps*s ) GOTO 100
   END DO
-  CALL XERMSG('D9LGIC',&
-    'NO CONVERGENCE IN 300 TERMS OF CONTINUED FRACTION',1,2)
+  ERROR STOP 'D9LGIC : NO CONVERGENCE IN 300 TERMS OF CONTINUED FRACTION'
   !
   100  D9LGIC = A*Alx - X + LOG(s/xpa)
   !

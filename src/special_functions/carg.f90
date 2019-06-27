@@ -1,5 +1,5 @@
 !** CARG
-REAL(SP) FUNCTION CARG(Z)
+REAL(SP) ELEMENTAL FUNCTION CARG(Z)
   !> Compute the argument of a complex number.
   !***
   ! **Library:**   SLATEC (FNLIB)
@@ -29,7 +29,7 @@ REAL(SP) FUNCTION CARG(Z)
   !   861211  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-  COMPLEX(SP) :: Z
+  COMPLEX(SP), INTENT(IN) :: Z
   !* FIRST EXECUTABLE STATEMENT  CARG
   CARG = 0._SP
   IF( REAL(Z)/=0. .OR. AIMAG(Z)/=0. ) CARG = ATAN2(AIMAG(Z),REAL(Z))

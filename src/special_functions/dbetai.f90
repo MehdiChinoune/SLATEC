@@ -1,5 +1,5 @@
 !** DBETAI
-REAL(DP) FUNCTION DBETAI(X,Pin,Qin)
+REAL(DP) ELEMENTAL FUNCTION DBETAI(X,Pin,Qin)
   !> Calculate the incomplete Beta function.
   !***
   ! **Library:**   SLATEC (FNLIB)
@@ -27,8 +27,7 @@ REAL(DP) FUNCTION DBETAI(X,Pin,Qin)
   !
   !***
   ! **References:**  Nancy E. Bosten and E. L. Battiste, Remark on Algorithm
-  !                 179, Communications of the ACM 17, 3 (March 1974),
-  !                 pp. 156.
+  !                 179, Communications of the ACM 17, 3 (March 1974), pp. 156.
   !***
   ! **Routines called:**  D1MACH, DLBETA, XERMSG
 
@@ -40,16 +39,19 @@ REAL(DP) FUNCTION DBETAI(X,Pin,Qin)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920528  DESCRIPTION and REFERENCES sections revised.  (WRB)
-  USE service, ONLY : XERMSG, D1MACH
-  REAL(DP) :: X, Pin, Qin
+  USE service, ONLY : D1MACH
+  REAL(DP), INTENT(IN) :: X, Pin, Qin
   INTEGER :: i, ib, n
   REAL(DP) :: c, finsum, p, ps, q, term, xb, xi, y, p1
   REAL(DP), PARAMETER :: eps = D1MACH(3), alneps = LOG(eps), sml = D1MACH(1), &
     alnsml = LOG(sml)
   !* FIRST EXECUTABLE STATEMENT  DBETAI
   !
-  IF( X<0._DP .OR. X>1._DP ) CALL XERMSG('DBETAI','X IS NOT IN THE RANGE (0,1)',1,2)
-  IF( Pin<=0._DP .OR. Qin<=0._DP ) CALL XERMSG('DBETAI','P AND/OR Q IS LE ZERO',2,2)
+  IF( X<0._DP .OR. X>1._DP ) THEN
+    ERROR STOP 'DBETAI : X IS NOT IN THE RANGE (0,1)'
+  ELSEIF( Pin<=0._DP .OR. Qin<=0._DP ) THEN
+    ERROR STOP 'DBETAI : P AND/OR Q IS <= 0'
+  END IF
   !
   y = X
   p = Pin
@@ -68,7 +70,6 @@ REAL(DP) FUNCTION DBETAI(X,Pin,Qin)
     xb = p*LOG(MAX(y,sml)) - LOG(p) - DLBETA(p,q)
     IF( xb>alnsml .AND. y/=0._DP ) DBETAI = EXP(xb)
     IF( y/=X .OR. p/=Pin ) DBETAI = 1._DP - DBETAI
-    RETURN
   ELSE
     !
     ! EVALUATE THE INFINITE SUM FIRST.  TERM WILL EQUAL
@@ -118,8 +119,9 @@ REAL(DP) FUNCTION DBETAI(X,Pin,Qin)
       !
       DBETAI = DBETAI + finsum
     END IF
+    IF( y/=X .OR. p/=Pin ) DBETAI = 1._DP - DBETAI
+    DBETAI = MAX(MIN(DBETAI,1._DP),0._DP)
   END IF
-  IF( y/=X .OR. p/=Pin ) DBETAI = 1._DP - DBETAI
-  DBETAI = MAX(MIN(DBETAI,1._DP),0._DP)
+
   RETURN
 END FUNCTION DBETAI

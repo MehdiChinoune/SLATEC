@@ -1,7 +1,6 @@
 !** R9LGIC
-REAL(SP) FUNCTION R9LGIC(A,X,Alx)
-  !> Compute the log complementary incomplete Gamma function
-  !            for large X and for A <= X.
+REAL(SP) ELEMENTAL FUNCTION R9LGIC(A,X,Alx)
+  !> Compute the log complementary incomplete Gamma function for large X and for A <= X.
   !***
   ! **Library:**   SLATEC (FNLIB)
   !***
@@ -31,8 +30,8 @@ REAL(SP) FUNCTION R9LGIC(A,X,Alx)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
-  USE service, ONLY : XERMSG, R1MACH
-  REAL(SP) :: A, Alx, X
+  USE service, ONLY : R1MACH
+  REAL(SP), INTENT(IN) :: A, Alx, X
   INTEGER :: k
   REAL(SP) :: fk, p, r, s, t, xma, xpa
   REAL(SP), PARAMETER :: eps = 0.5_SP*R1MACH(3)
@@ -52,9 +51,8 @@ REAL(SP) FUNCTION R9LGIC(A,X,Alx)
     s = s + p
     IF( ABS(p)<eps*s ) GOTO 100
   END DO
-  CALL XERMSG('R9LGIC',&
-    'NO CONVERGENCE IN 200 TERMS OF CONTINUED FRACTION',1,2)
+  ERROR STOP 'R9LGIC : NO CONVERGENCE IN 200 TERMS OF CONTINUED FRACTION'
   !
   100  R9LGIC = A*Alx - X + LOG(s/xpa)
-  !
+
 END FUNCTION R9LGIC

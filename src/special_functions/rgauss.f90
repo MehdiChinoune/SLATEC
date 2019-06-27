@@ -35,11 +35,10 @@ REAL(SP) FUNCTION RGAUSS(Xmean,Sd)
   !   770401  DATE WRITTEN
   !   861211  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
-  !   910819  Added EXTERNAL statement for RAND due to problem on IBM
-  !           RS 6000.  (WRB)
+  !   910819  Added EXTERNAL statement for RAND due to problem on IBM RS 6000.  (WRB)
 
+  REAL(SP), INTENT(IN) :: Sd, Xmean
   INTEGER :: i
-  REAL(SP) :: Sd, Xmean
   !* FIRST EXECUTABLE STATEMENT  RGAUSS
   RGAUSS = -6._SP
   DO i = 1, 12

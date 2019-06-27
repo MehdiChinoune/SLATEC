@@ -1,8 +1,7 @@
 !** D9LGIT
-REAL(DP) FUNCTION D9LGIT(A,X,Algap1)
-  !> Compute the logarithm of Tricomi's incomplete Gamma
-  !            function with Perron's continued fraction for large X and
-  !            A >= X.
+REAL(DP) ELEMENTAL FUNCTION D9LGIT(A,X,Algap1)
+  !> Compute the logarithm of Tricomi's incomplete Gamma function with Perron's
+  !  continued fraction for large X and A >= X.
   !***
   ! **Library:**   SLATEC (FNLIB)
   !***
@@ -32,14 +31,14 @@ REAL(DP) FUNCTION D9LGIT(A,X,Algap1)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
-  USE service, ONLY : XERMSG, D1MACH
-  REAL(DP) :: A, X, Algap1
+  USE service, ONLY : D1MACH
+  REAL(DP), INTENT(IN) :: A, X, Algap1
   INTEGER :: k
   REAL(DP) :: ax, a1x, fk, hstar, p, r, s, t
   REAL(DP), PARAMETER :: eps = 0.5_DP*D1MACH(3), sqeps = SQRT(D1MACH(4))
   !* FIRST EXECUTABLE STATEMENT  D9LGIT
   !
-  IF( X<=0._DP .OR. A<X ) CALL XERMSG('D9LGIT','X SHOULD BE GT 0.0 AND LE A',2,2)
+  IF( X<=0._DP .OR. A<X ) ERROR STOP 'D9LGIT : X SHOULD BE > 0.0 AND <= A'
   !
   ax = A + X
   a1x = ax + 1._DP
@@ -54,12 +53,10 @@ REAL(DP) FUNCTION D9LGIT(A,X,Algap1)
     s = s + p
     IF( ABS(p)<eps*s ) GOTO 100
   END DO
-  CALL XERMSG('D9LGIT',&
-    'NO CONVERGENCE IN 200 TERMS OF CONTINUED FRACTION',3,2)
+  ERROR STOP 'D9LGIT : NO CONVERGENCE IN 200 TERMS OF CONTINUED FRACTION'
   !
   100  hstar = 1._DP - X*s/a1x
-  IF( hstar<sqeps ) CALL XERMSG('D9LGIT',&
-    'RESULT LESS THAN HALF PRECISION',1,1)
+  !IF( hstar<sqeps ) CALL XERMSG('D9LGIT','RESULT LESS THAN HALF PRECISION',1,1)
   !
   D9LGIT = -X - Algap1 - LOG(hstar)
   !

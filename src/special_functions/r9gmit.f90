@@ -1,7 +1,6 @@
 !** R9GMIT
-REAL(SP) FUNCTION R9GMIT(A,X,Algap1,Sgngam)
-  !> Compute Tricomi's incomplete Gamma function for small
-  !            arguments.
+REAL(SP) ELEMENTAL FUNCTION R9GMIT(A,X,Algap1,Sgngam)
+  !> Compute Tricomi's incomplete Gamma function for small arguments.
   !***
   ! **Library:**   SLATEC (FNLIB)
   !***
@@ -30,14 +29,14 @@ REAL(SP) FUNCTION R9GMIT(A,X,Algap1,Sgngam)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
-  USE service, ONLY : XERMSG, R1MACH
-  REAL(SP) :: A, Algap1, Sgngam, X
+  USE service, ONLY : R1MACH
+  REAL(SP), INTENT(IN) :: A, Algap1, Sgngam, X
   INTEGER :: k, m, ma
   REAL(SP) :: ae, aeps, alg2, algs, fk, s, sgng2, t, te
   REAL(SP), PARAMETER :: eps = 0.5_SP*R1MACH(3), bot = LOG(R1MACH(1))
   !* FIRST EXECUTABLE STATEMENT  R9GMIT
   !
-  IF( X<=0._SP ) CALL XERMSG('R9GMIT','X SHOULD BE GT 0',1,2)
+  IF( X<=0._SP ) ERROR STOP 'R9GMIT : X SHOULD BE > 0'
   !
   ma = INT( A + 0.5_SP )
   IF( A<0._SP ) ma = INT( A - 0.5_SP )
@@ -56,16 +55,13 @@ REAL(SP) FUNCTION R9GMIT(A,X,Algap1,Sgngam)
     s = s + t
     IF( ABS(t)<eps*ABS(s) ) GOTO 100
   END DO
-  CALL XERMSG('R9GMIT',&
-    'NO CONVERGENCE IN 200 TERMS OF TAYLOR-S SERIES',2,2)
+  ERROR STOP 'R9GMIT : NO CONVERGENCE IN 200 TERMS OF TAYLOR-S SERIES'
   !
   100 CONTINUE
-  IF( A>=(-0.5_SP) ) algs = -Algap1 + LOG(s)
   IF( A>=(-0.5_SP) ) THEN
-    !
+    algs = -Algap1 + LOG(s)
     R9GMIT = EXP(algs)
   ELSE
-    !
     algs = -LOG_GAMMA(1._SP+aeps) + LOG(s)
     s = 1._SP
     m = -ma - 1
@@ -87,9 +83,10 @@ REAL(SP) FUNCTION R9GMIT(A,X,Algap1,Sgngam)
       sgng2 = Sgngam*SIGN(1._SP,s)
       alg2 = -X - Algap1 + LOG(ABS(s))
       !
-      IF( alg2>bot ) R9GMIT = sgng2*EXP(alg2)
-      IF( algs>bot ) R9GMIT = R9GMIT + EXP(algs)
-      RETURN
+      IF( alg2>bot ) THEN
+        R9GMIT = sgng2*EXP(alg2)
+        R9GMIT = R9GMIT + EXP(algs)
+      END IF
     END IF
   END IF
   !

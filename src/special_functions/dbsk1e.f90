@@ -1,7 +1,7 @@
 !** DBSK1E
-REAL(DP) FUNCTION DBSK1E(X)
+REAL(DP) ELEMENTAL FUNCTION DBSK1E(X)
   !> Compute the exponentially scaled modified (hyperbolic)
-  !            Bessel function of the third kind of order one.
+  !  Bessel function of the third kind of order one.
   !***
   ! **Library:**   SLATEC (FNLIB)
   !***
@@ -10,8 +10,7 @@ REAL(DP) FUNCTION DBSK1E(X)
   ! **Type:**      DOUBLE PRECISION (BESK1E-S, DBSK1E-D)
   !***
   ! **Keywords:**  EXPONENTIALLY SCALED, FNLIB, HYPERBOLIC BESSEL FUNCTION,
-  !             MODIFIED BESSEL FUNCTION, ORDER ONE, SPECIAL FUNCTIONS,
-  !             THIRD KIND
+  !             MODIFIED BESSEL FUNCTION, ORDER ONE, SPECIAL FUNCTIONS, THIRD KIND
   !***
   ! **Author:**  Fullerton, W., (LANL)
   !***
@@ -50,10 +49,10 @@ REAL(DP) FUNCTION DBSK1E(X)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-  USE service, ONLY : XERMSG, D1MACH
-  REAL(DP) :: X
+  USE service, ONLY : D1MACH
+  REAL(DP), INTENT(IN) :: X
   REAL(DP) :: y
-  INTEGER, SAVE :: ntk1, ntak1, ntak12
+  INTEGER, PARAMETER :: ntk1 = 10, ntak1 = 18, ntak12 = 14
   REAL(DP), PARAMETER :: eta = 0.1_DP*D1MACH(3), xsml = SQRT(4._DP*D1MACH(3)), &
     xmin = EXP(MAX(LOG(D1MACH(1)),-LOG(D1MACH(2)))+0.01_DP)
   REAL(DP), PARAMETER :: bk1cs(16) = [ +.25300227338947770532531120868533E-1_DP, &
@@ -102,30 +101,25 @@ REAL(DP) FUNCTION DBSK1E(X)
     +.8879388552723502587357866666666E-28_DP, -.1654585918039257548936533333333E-28_DP, &
     +.3145111321357848674303999999999E-29_DP, -.6092998312193127612416000000000E-30_DP, &
     +.1202021939369815834623999999999E-30_DP, -.2412930801459408841386666666666E-31_DP ]
-  LOGICAL, SAVE :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  DBSK1E
-  IF( first ) THEN
-    ntk1 = INITDS(bk1cs,16,eta)
-    ntak1 = INITDS(ak1cs,38,eta)
-    ntak12 = INITDS(ak12cs,33,eta)
-    first = .FALSE.
-  END IF
+  ! ntk1 = INITDS(bk1cs,eta)
+  ! ntak1 = INITDS(ak1cs,eta)
+  ! ntak12 = INITDS(ak12cs,eta)
   !
-  IF( X<=0._DP ) CALL XERMSG('DBSK1E','X IS ZERO OR NEGATIVE',2,2)
-  IF( X>2._DP ) THEN
-    !
-    IF( X<=8._DP ) THEN
-      DBSK1E = (1.25_DP+DCSEVL((16._DP/X-5._DP)/3._DP,ak1cs,ntak1))/SQRT(X)
-    ELSE
-      DBSK1E = (1.25_DP+DCSEVL(16._DP/X-1._DP,ak12cs,ntak12))/SQRT(X)
-    END IF
-    RETURN
+  IF( X<=0._DP ) THEN
+    ERROR STOP 'DBSK1E : X IS ZERO OR NEGATIVE'
+  ELSEIF( X<xmin ) THEN
+    ERROR STOP 'DBSK1E : X SO SMALL K1 OVERFLOWS'
+  ELSEIF( X<=2._DP ) THEN
+    y = 0._DP
+    IF( X>xsml ) y = X*X
+    DBSK1E = EXP(X) * ( LOG(0.5_DP*X)*DBESI1(X) &
+      + (0.75_DP+DCSEVL(0.5_DP*y-1._DP,bk1cs(1:ntk1)))/X )
+  ELSEIF( X<=8._DP ) THEN
+    DBSK1E = (1.25_DP+DCSEVL((16._DP/X-5._DP)/3._DP,ak1cs(1:ntak1)))/SQRT(X)
+  ELSE
+    DBSK1E = (1.25_DP+DCSEVL(16._DP/X-1._DP,ak12cs(1:ntak12)))/SQRT(X)
   END IF
-  !
-  IF( X<xmin ) CALL XERMSG('DBSK1E','X SO SMALL K1 OVERFLOWS',3,2)
-  y = 0._DP
-  IF( X>xsml ) y = X*X
-  DBSK1E = EXP(X)&
-    *(LOG(0.5_DP*X)*DBESI1(X)+(0.75_DP+DCSEVL(0.5_DP*y-1._DP,bk1cs,ntk1))/X)
+
   RETURN
 END FUNCTION DBSK1E

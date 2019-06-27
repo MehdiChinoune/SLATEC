@@ -1,5 +1,5 @@
 !** R9AIMP
-SUBROUTINE R9AIMP(X,Ampl,Theta)
+ELEMENTAL SUBROUTINE R9AIMP(X,Ampl,Theta)
   !> Evaluate the Airy modulus and phase.
   !***
   ! **Library:**   SLATEC (FNLIB)
@@ -51,10 +51,11 @@ SUBROUTINE R9AIMP(X,Ampl,Theta)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
-  USE service, ONLY : XERMSG, R1MACH
-  REAL(SP) :: Ampl, Theta, X
+  USE service, ONLY : R1MACH
+  REAL(SP), INTENT(IN) :: X
+  REAL(SP), INTENT(OUT) :: Ampl, Theta
   REAL(SP) :: sqrtx, z
-  INTEGER, SAVE :: nam21, nath1, nam22, nath2
+  INTEGER, PARAMETER :: nam21 = 10, nath1 = 9, nam22 = 12, nath2 = 12
   REAL(SP), PARAMETER :: eta = 0.1_SP*R1MACH(3), xsml = -1._SP/R1MACH(3)**0.3333_SP
   REAL(SP), PARAMETER :: am21cs(40) = [ .0065809191761485_SP, .0023675984685722_SP, &
     .0001324741670371_SP, .0000157600904043_SP, .0000027529702663_SP, &
@@ -107,28 +108,23 @@ SUBROUTINE R9AIMP(X,Ampl,Theta)
     -.00000000000000233_SP,-.00000000000000093_SP,-.00000000000000037_SP, &
     -.00000000000000015_SP,-.00000000000000006_SP,-.00000000000000002_SP ]
   REAL(SP), PARAMETER ::  pi4 = 0.78539816339744831_SP
-  LOGICAL, SAVE :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  R9AIMP
-  IF( first ) THEN
-    nam21 = INITS(am21cs,40,eta)
-    nath1 = INITS(ath1cs,36,eta)
-    nam22 = INITS(am22cs,33,eta)
-    nath2 = INITS(ath2cs,32,eta)
-    first = .FALSE.
-  END IF
+  ! nam21 = INITS(am21cs,eta)
+  ! nath1 = INITS(ath1cs,eta)
+  ! nam22 = INITS(am22cs,eta)
+  ! nath2 = INITS(ath2cs,eta)
   !
-  IF( X>=(-2._SP) ) THEN
-    !
-    IF( X>(-1._SP) ) CALL XERMSG('R9AIMP','X MUST BE LE -1.0',1,2)
-    !
+  IF( X>(-1._SP) ) THEN
+    ERROR STOP 'R9AIMP : X MUST BE <= -1.0'
+  ELSEIF( X>=(-2._SP) ) THEN
     z = (16._SP/X**3+9._SP)/7._SP
-    Ampl = 0.3125_SP + CSEVL(z,am22cs,nam22)
-    Theta = -0.625_SP + CSEVL(z,ath2cs,nath2)
+    Ampl = 0.3125_SP + CSEVL(z,am22cs(1:nam22))
+    Theta = -0.625_SP + CSEVL(z,ath2cs(1:nath2))
   ELSE
     z = 1._SP
     IF( X>xsml ) z = 16._SP/X**3 + 1._SP
-    Ampl = 0.3125_SP + CSEVL(z,am21cs,nam21)
-    Theta = -0.625_SP + CSEVL(z,ath1cs,nath1)
+    Ampl = 0.3125_SP + CSEVL(z,am21cs(1:nam21))
+    Theta = -0.625_SP + CSEVL(z,ath1cs(1:nath1))
   END IF
   !
   sqrtx = SQRT(-X)

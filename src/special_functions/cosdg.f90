@@ -1,5 +1,5 @@
 !** COSDG
-REAL(SP) FUNCTION COSDG(X)
+REAL(SP) ELEMENTAL FUNCTION COSDG(X)
   !> Compute the cosine of an argument in degrees.
   !***
   ! **Library:**   SLATEC (FNLIB)
@@ -29,7 +29,7 @@ REAL(SP) FUNCTION COSDG(X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
   ! JUNE 1977 EDITION.   W. FULLERTON, C3, LOS ALAMOS SCIENTIFIC LAB.
-  REAL(SP) :: X
+  REAL(SP), INTENT(IN) :: X
   INTEGER :: n
   REAL(SP), PARAMETER :: raddeg = .017453292519943296_SP
   !

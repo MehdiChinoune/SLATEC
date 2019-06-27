@@ -1,5 +1,5 @@
 !** BSKIN
-SUBROUTINE BSKIN(X,N,Kode,M,Y,Nz,Ierr)
+PURE SUBROUTINE BSKIN(X,N,Kode,M,Y,Nz,Ierr)
   !> Compute repeated integrals of the K-zero Bessel function.
   !***
   ! **Library:**   SLATEC
@@ -99,8 +99,10 @@ SUBROUTINE BSKIN(X,N,Kode,M,Y,Nz,Ierr)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   USE service, ONLY : R1MACH, I1MACH
-  INTEGER :: Ierr, Kode, M, N, Nz
-  REAL(SP) :: X, Y(M)
+  INTEGER, INTENT(IN) :: Kode, M, N
+  INTEGER, INTENT(OUT) :: Ierr, Nz
+  REAL(SP), INTENT(IN) :: X
+  REAL(SP), INTENT(OUT) :: Y(M)
   INTEGER :: i, icase, il, i1m, k, kk, ktrms, m3, ne, nflg, nl, nlim, nn, np, ns, nt
   REAL(SP) :: enlim, exi(102), fn, gr, h(31), hn, ss, tol, t1, t2, w, &
     xlim, xnlim, xp, ys(3), yss(3)
@@ -333,7 +335,7 @@ SUBROUTINE BSKIN(X,N,Kode,M,Y,Nz,Ierr)
   !     UNDERFLOW ON KODE=1, X>XLIM
   !-----------------------------------------------------------------------
   400  Nz = M
-  DO i = 1, M
-    Y(i) = 0._SP
-  END DO
+  Y = 0._SP
+
+  RETURN
 END SUBROUTINE BSKIN

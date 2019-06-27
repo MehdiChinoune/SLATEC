@@ -1,5 +1,5 @@
 !** DBKIAS
-SUBROUTINE DBKIAS(X,N,Ktrms,T,Ans,Ind,Ms,Gmrn,H,Ierr)
+PURE SUBROUTINE DBKIAS(X,N,Ktrms,T,Ans,Ind,Ms,Gmrn,H,Ierr)
   !> Subsidiary to DBSKIN
   !***
   ! **Library:**   SLATEC
@@ -26,11 +26,14 @@ SUBROUTINE DBKIAS(X,N,Ktrms,T,Ans,Ind,Ms,Gmrn,H,Ierr)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
   USE service, ONLY : D1MACH
-  INTEGER :: Ind, Ktrms, Ms, N, Ierr
-  REAL(DP) :: Ans, Gmrn, H(30), T(50)
+  INTEGER, INTENT(IN) :: Ind, Ktrms, N
+  INTEGER, INTENT(OUT) :: Ms, Ierr
+  REAL(DP), INTENT(IN) :: T(Ktrms), X
+  REAL(DP), INTENT(INOUT) :: H(30)
+  REAL(DP), INTENT(OUT) :: Ans, Gmrn
   INTEGER :: i, ii, j, jmi, jn, k, kk, km, mm, mp
   REAL(DP) :: den1, den2, den3, er, err, fj, fk, fln, fm1, g1, gs, hn, rat, rg1, &
-    rxp, rz, rzx, s(31), ss, sumi, sumj, tol, v(52), w(52), X, xp(16), z
+    rxp, rz, rzx, s(31), ss, sumi, sumj, tol, v(52), w(52), xp(16), z
   !-----------------------------------------------------------------------
   !             COEFFICIENTS OF POLYNOMIAL P(J-1,X), J=1,15
   !-----------------------------------------------------------------------
@@ -212,5 +215,6 @@ SUBROUTINE DBKIAS(X,N,Ktrms,T,Ans,Ind,Ms,Gmrn,H,Ierr)
     sumj = sumj + sumi*rxp
   END DO
   Ans = gs*(s(1)-sumj)
+
   RETURN
 END SUBROUTINE DBKIAS

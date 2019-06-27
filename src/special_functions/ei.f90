@@ -1,5 +1,5 @@
 !** EI
-REAL(SP) FUNCTION EI(X)
+REAL(SP) ELEMENTAL FUNCTION EI(X)
   !> Compute the exponential integral Ei(X).
   !***
   ! **Library:**   SLATEC (FNLIB)
@@ -35,7 +35,7 @@ REAL(SP) FUNCTION EI(X)
   !   891115  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-  REAL(SP) :: X
+  REAL(SP), INTENT(IN) :: X
   !* FIRST EXECUTABLE STATEMENT  EI
   EI = -E1(-X)
   !

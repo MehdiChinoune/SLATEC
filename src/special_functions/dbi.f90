@@ -1,7 +1,6 @@
 !** DBI
-REAL(DP) FUNCTION DBI(X)
-  !> Evaluate the Bairy function (the Airy function of the
-  !            second kind).
+REAL(DP) ELEMENTAL FUNCTION DBI(X)
+  !> Evaluate the Bairy function (the Airy function of the second kind).
   !***
   ! **Library:**   SLATEC (FNLIB)
   !***
@@ -53,10 +52,10 @@ REAL(DP) FUNCTION DBI(X)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-  USE service, ONLY : XERMSG, D1MACH
-  REAL(DP) :: X
+  USE service, ONLY : D1MACH
+  REAL(DP), INTENT(IN) :: X
   REAL(DP) :: theta, xm, z
-  INTEGER, SAVE :: nbif, nbig, nbif2, nbig2
+  INTEGER, PARAMETER :: nbif = 8, nbig = 8, nbif2 = 10, nbig2 = 9
   REAL(DP), PARAMETER :: eta = 0.1_DP*D1MACH(3), x3sml = eta**0.3333_DP, &
     xmax = (1.5_SP*LOG(D1MACH(2)))**0.6666_DP
   REAL(DP), PARAMETER :: bifcs(13) = [ -.16730216471986649483537423928176E-1_DP, &
@@ -89,36 +88,27 @@ REAL(DP) FUNCTION DBI(X)
     +.119004508386827125129496251733333E-17_DP, +.222982880666403517277063466666666E-20_DP, &
     +.346551923027689419722666666666666E-23_DP, +.453926336320504514133333333333333E-26_DP, &
     +.507884996513522346666666666666666E-29_DP, +.491020674696533333333333333333333E-32_DP ]
-  LOGICAL, SAVE :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  DBI
-  IF( first ) THEN
-    nbif = INITDS(bifcs,13,eta)
-    nbig = INITDS(bigcs,13,eta)
-    nbif2 = INITDS(bif2cs,15,eta)
-    nbig2 = INITDS(big2cs,15,eta)
-    first = .FALSE.
-  END IF
+  ! nbif = INITDS(bifcs,eta)
+  ! nbig = INITDS(bigcs,eta)
+  ! nbif2 = INITDS(bif2cs,eta)
+  ! nbig2 = INITDS(big2cs,eta)
   !
   IF( X<(-1._DP) ) THEN
     CALL D9AIMP(X,xm,theta)
     DBI = xm*SIN(theta)
-    RETURN
-    !
   ELSEIF( X<=1._DP ) THEN
     z = 0._DP
     IF( ABS(X)>x3sml ) z = X**3
-    DBI = 0.625_DP + DCSEVL(z,bifcs,nbif) + X*(0.4375_DP+DCSEVL(z,bigcs,nbig))
-    RETURN
-    !
-  ELSEIF( X>2._DP ) THEN
-    !
-    IF( X>xmax ) CALL XERMSG('DBI','X SO BIG THAT BI OVERFLOWS',1,2)
-    !
+    DBI = 0.625_DP + DCSEVL(z,bifcs(1:nbif)) + X*(0.4375_DP+DCSEVL(z,bigcs(1:nbig)))
+  ELSEIF( X<=2._DP ) THEN
+    z = (2._DP*X**3-9._DP)/7._DP
+    DBI = 1.125_DP + DCSEVL(z,bif2cs(1:nbif2)) + X*(0.625_DP+DCSEVL(z,big2cs(1:nbig2)))
+  ELSEIF( X<=xmax ) THEN
     DBI = DBIE(X)*EXP(2._DP*X*SQRT(X)/3._DP)
-    RETURN
+  ELSE
+    ERROR STOP 'DBI : X SO BIG THAT BI OVERFLOWS'
   END IF
-  z = (2._DP*X**3-9._DP)/7._DP
-  DBI = 1.125_DP + DCSEVL(z,bif2cs,nbif2)&
-    + X*(0.625_DP+DCSEVL(z,big2cs,nbig2))
+
   RETURN
 END FUNCTION DBI

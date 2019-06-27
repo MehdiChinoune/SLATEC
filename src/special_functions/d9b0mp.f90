@@ -1,7 +1,6 @@
 !** D9B0MP
-SUBROUTINE D9B0MP(X,Ampl,Theta)
-  !> Evaluate the modulus and phase for the J0 and Y0 Bessel
-  !            functions.
+ELEMENTAL SUBROUTINE D9B0MP(X,Ampl,Theta)
+  !> Evaluate the modulus and phase for the J0 and Y0 Bessel functions.
   !***
   ! **Library:**   SLATEC (FNLIB)
   !***
@@ -54,10 +53,11 @@ SUBROUTINE D9B0MP(X,Ampl,Theta)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
   !   920618  Removed space from variable names.  (RWC, WRB)
-  USE service, ONLY : XERMSG, D1MACH
-  REAL(DP) :: X, Ampl, Theta
+  USE service, ONLY : D1MACH
+  REAL(DP), INTENT(IN) :: X
+  REAL(DP), INTENT(OUT) :: Ampl, Theta
   REAL(DP) :: z
-  INTEGER, SAVE :: nbm0, nbt02, nbm02, nbth0
+  INTEGER, PARAMETER :: nbm0 = 15, nbt02 = 16, nbm02 = 13, nbth0 = 14
   REAL(DP), PARAMETER :: eta = 0.1_DP*D1MACH(3), xmax = 1._DP/D1MACH(4)
   REAL(DP), PARAMETER :: bm0cs(37) = [ +.9211656246827742712573767730182E-1_DP, &
     -.1050590997271905102480716371755E-2_DP, +.1470159840768759754056392850952E-4_DP, &
@@ -143,30 +143,25 @@ SUBROUTINE D9B0MP(X,Ampl,Theta)
     +.20779909972536284571238399999999E-29_DP, -.50211170221417221674325333333333E-30_DP, &
     +.12208360279441714184191999999999E-30_DP, -.29860056267039913454250666666666E-31_DP ]
   REAL(DP), PARAMETER ::  pi4 = 0.785398163397448309615660845819876_DP
-  LOGICAL, SAVE :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  D9B0MP
-  IF( first ) THEN
-    nbm0 = INITDS(bm0cs,37,eta)
-    nbt02 = INITDS(bt02cs,39,eta)
-    nbm02 = INITDS(bm02cs,40,eta)
-    nbth0 = INITDS(bth0cs,44,eta)
-    first = .FALSE.
-  END IF
+  ! nbm0 = INITDS(bm0cs,eta)
+  ! nbt02 = INITDS(bt02cs,eta)
+  ! nbm02 = INITDS(bm02cs,eta)
+  ! nbth0 = INITDS(bth0cs,eta)
   !
-  IF( X<4._DP ) CALL XERMSG('D9B0MP','X MUST BE GE 4',1,2)
-  !
-  IF( X>8._DP ) THEN
-    !
-    IF( X>xmax ) CALL XERMSG('D9B0MP',&
-      'NO PRECISION BECAUSE X IS BIG',2,2)
-    !
+  IF( X<4._DP ) THEN
+    ERROR STOP 'D9B0MP : X MUST BE >= 4'
+  ELSEIF( X<=8._DP ) THEN
+    z = (128._DP/(X*X)-5._DP)/3._DP
+    Ampl = (.75_DP+DCSEVL(z,bm0cs(1:nbm0)))/SQRT(X)
+    Theta = X - pi4 + DCSEVL(z,bt02cs(1:nbt02))/X
+  ELSEIF( X<=xmax ) THEN
     z = 128._DP/(X*X) - 1._DP
-    Ampl = (.75_DP+DCSEVL(z,bm02cs,nbm02))/SQRT(X)
-    Theta = X - pi4 + DCSEVL(z,bth0cs,nbth0)/X
-    RETURN
+    Ampl = (.75_DP+DCSEVL(z,bm02cs(1:nbm02)))/SQRT(X)
+    Theta = X - pi4 + DCSEVL(z,bth0cs(1:nbth0))/X
+  ELSE
+    ERROR STOP 'D9B0MP : NO PRECISION BECAUSE X IS BIG'
   END IF
-  z = (128._DP/(X*X)-5._DP)/3._DP
-  Ampl = (.75_DP+DCSEVL(z,bm0cs,nbm0))/SQRT(X)
-  Theta = X - pi4 + DCSEVL(z,bt02cs,nbt02)/X
+
   RETURN
 END SUBROUTINE D9B0MP

@@ -1,5 +1,5 @@
 !** DCBRT
-REAL(DP) FUNCTION DCBRT(X)
+REAL(DP) ELEMENTAL FUNCTION DCBRT(X)
   !> Compute the cube root.
   !***
   ! **Library:**   SLATEC (FNLIB)
@@ -28,7 +28,7 @@ REAL(DP) FUNCTION DCBRT(X)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   USE service, ONLY : D1MACH
-  REAL(DP) :: X
+  REAL(DP), INTENT(IN) :: X
   INTEGER :: irem, iter, ixpnt, n
   REAL(DP) :: y, cbrtsq
   REAL(SP) :: z

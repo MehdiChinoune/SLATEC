@@ -1,8 +1,7 @@
 !** AIE
-REAL(SP) FUNCTION AIE(X)
+REAL(SP) ELEMENTAL FUNCTION AIE(X)
   !> Calculate the Airy function for a negative argument and an
-  !            exponentially scaled Airy function for a non-negative
-  !            argument.
+  !  exponentially scaled Airy function for a non-negative argument.
   !***
   ! **Library:**   SLATEC (FNLIB)
   !***
@@ -10,8 +9,7 @@ REAL(SP) FUNCTION AIE(X)
   !***
   ! **Type:**      SINGLE PRECISION (AIE-S, DAIE-D)
   !***
-  ! **Keywords:**  EXPONENTIALLY SCALED AIRY FUNCTION, FNLIB,
-  !             SPECIAL FUNCTIONS
+  ! **Keywords:**  EXPONENTIALLY SCALED AIRY FUNCTION, FNLIB, SPECIAL FUNCTIONS
   !***
   ! **Author:**  Fullerton, W., (LANL)
   !***
@@ -50,9 +48,9 @@ REAL(SP) FUNCTION AIE(X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920618  Removed space from variable names.  (RWC, WRB)
   USE service, ONLY : R1MACH
-  REAL(SP) :: X
+  REAL(SP), INTENT(IN) :: X
   REAL(SP) :: sqrtx, theta, xm, z
-  INTEGER, SAVE :: naif, naig, naip
+  INTEGER, PARAMETER :: naif = 5, naig = 4, naip = 12
   REAL(SP), PARAMETER :: eta = 0.1_SP*R1MACH(3), x3sml = eta**0.3333_SP, &
     x32sml = 1.3104_SP*x3sml**2, xbig = R1MACH(2)**0.6666_SP
   REAL(SP), PARAMETER :: aifcs(9) = [ -.03797135849666999750_SP, .05919188853726363857_SP, &
@@ -74,31 +72,25 @@ REAL(SP) FUNCTION AIE(X)
     .0000000000000087_SP, -.0000000000000040_SP, .0000000000000019_SP, &
     -.0000000000000009_SP, .0000000000000004_SP,-.0000000000000002_SP, &
     .0000000000000001_SP, -.0000000000000000_SP ]
-  LOGICAL, SAVE :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  AIE
-  IF( first ) THEN
-    naif = INITS(aifcs,9,eta)
-    naig = INITS(aigcs,8,eta)
-    naip = INITS(aipcs,34,eta)
-    first = .FALSE.
-  END IF
+  ! naif = INITS(aifcs,eta)
+  ! naig = INITS(aigcs,eta)
+  ! naip = INITS(aipcs,eta)
   !
   IF( X<(-1._SP) ) THEN
     CALL R9AIMP(X,xm,theta)
     AIE = xm*COS(theta)
-    RETURN
-    !
   ELSEIF( X>1._SP ) THEN
-    !
     sqrtx = SQRT(X)
     z = -1._SP
     IF( X<xbig ) z = 2._SP/(X*sqrtx) - 1._SP
-    AIE = (.28125_SP+CSEVL(z,aipcs,naip))/SQRT(sqrtx)
-    RETURN
+    AIE = (.28125_SP+CSEVL(z,aipcs(1:naip)))/SQRT(sqrtx)
+  ELSE
+    z = 0._SP
+    IF( ABS(X)>x3sml ) z = X**3
+    AIE = 0.375_SP + ( CSEVL(z,aifcs(1:naif)) - X*( 0.25_SP + CSEVL(z,aigcs(1:naig) ) ) )
+    IF( X>x32sml ) AIE = AIE*EXP( 2._SP*X*SQRT(X)/3._SP )
   END IF
-  z = 0._SP
-  IF( ABS(X)>x3sml ) z = X**3
-  AIE = 0.375_SP + (CSEVL(z,aifcs,naif)-X*(0.25_SP+CSEVL(z,aigcs,naig)))
-  IF( X>x32sml ) AIE = AIE*EXP(2._SP*X*SQRT(X)/3._SP)
+
   RETURN
 END FUNCTION AIE

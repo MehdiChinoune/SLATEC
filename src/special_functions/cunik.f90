@@ -1,5 +1,5 @@
 !** CUNIK
-SUBROUTINE CUNIK(Zr,Fnu,Ikflg,Ipmtr,Tol,Init,Phi,Zeta1,Zeta2,Summ,Cwrk)
+PURE SUBROUTINE CUNIK(Zr,Fnu,Ikflg,Ipmtr,Tol,Init,Phi,Zeta1,Zeta2,Summ,Cwrk)
   !> Subsidiary to CBESI and CBESK
   !***
   ! **Library:**   SLATEC
@@ -34,9 +34,14 @@ SUBROUTINE CUNIK(Zr,Fnu,Ikflg,Ipmtr,Tol,Init,Phi,Zeta1,Zeta2,Summ,Cwrk)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
   USE service, ONLY : R1MACH
-  COMPLEX(SP) :: cfn, crfn, Cwrk(16), Phi, s, sr, Summ, t, t2, Zeta1, Zeta2, zn, Zr
-  REAL(SP) :: ac, Fnu, rfn, test, Tol, tstr, tsti
-  INTEGER :: i, Ikflg, Init, Ipmtr, j, k, l
+  INTEGER, INTENT(IN) :: Ikflg, Ipmtr
+  INTEGER, INTENT(INOUT) :: Init
+  REAL(SP), INTENT(IN) :: Fnu, Tol
+  COMPLEX(SP), INTENT(IN) :: Zr
+  COMPLEX(SP), INTENT(OUT) :: Phi, Summ, Zeta1, Zeta2, Cwrk(16)
+  INTEGER :: i, j, k, l
+  REAL(SP) :: ac, rfn, test, tstr, tsti
+  COMPLEX(SP) :: cfn, crfn, s, sr, t, t2, zn
   COMPLEX(SP), PARAMETER :: czero = (0._SP,0._SP), cone = (1._SP,0._SP)
   COMPLEX(SP), PARAMETER :: con(2) = [ (3.98942280401432678E-01_SP,0._SP), &
     (1.25331413731550025E+00_SP,0._SP) ]
@@ -161,5 +166,6 @@ SUBROUTINE CUNIK(Zr,Fnu,Ikflg,Ipmtr,Tol,Init,Phi,Zeta1,Zeta2,Summ,Cwrk)
   END DO
   Summ = s
   Phi = Cwrk(16)*con(1)
+
   RETURN
 END SUBROUTINE CUNIK

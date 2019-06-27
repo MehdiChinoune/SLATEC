@@ -1,5 +1,5 @@
 !** D9AIMP
-SUBROUTINE D9AIMP(X,Ampl,Theta)
+ELEMENTAL SUBROUTINE D9AIMP(X,Ampl,Theta)
   !> Evaluate the Airy modulus and phase.
   !***
   ! **Library:**   SLATEC (FNLIB)
@@ -64,10 +64,12 @@ SUBROUTINE D9AIMP(X,Ampl,Theta)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
-  USE service, ONLY : XERMSG, D1MACH
-  REAL(DP) :: X, Ampl, Theta
+  USE service, ONLY : D1MACH
+  REAL(DP), INTENT(IN) :: X
+  REAL(DP), INTENT(OUT) :: Ampl, Theta
   REAL(DP) :: sqrtx, z
-  INTEGER, SAVE :: nam20, nath0, nam21, nath1, nam22, nath2
+  INTEGER, PARAMETER :: nam20 = 17, nath0 = 15, nam21 = 25, nath1 = 23, &
+    nam22 = 34, nath2 = 33
   REAL(DP), PARAMETER :: eta = 0.1_DP*D1MACH(3), xsml = -1._DP/D1MACH(3)**0.3333_DP
   REAL(DP), PARAMETER :: am20cs(57) = [ +.108716749086561856615730588125E-1_DP, &
     +.369489228982663555091728665146E-3_DP, +.440680100484689563667507001327E-5_DP, &
@@ -262,35 +264,29 @@ SUBROUTINE D9AIMP(X,Ampl,Theta)
     -.2567488423238302631121274357678E-30_DP, -.1129232322268882185791505819151E-30_DP, &
     -.4970947029753336916550570105023E-31_DP ]
   REAL(DP), PARAMETER ::  pi4 = 0.78539816339744830961566084581988_DP
-  LOGICAL, SAVE :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  D9AIMP
-  IF( first ) THEN
-    nam20 = INITDS(am20cs,57,eta)
-    nath0 = INITDS(ath0cs,53,eta)
-    nam21 = INITDS(am21cs,60,eta)
-    nath1 = INITDS(ath1cs,58,eta)
-    nam22 = INITDS(am22cs,74,eta)
-    nath2 = INITDS(ath2cs,72,eta)
-    first = .FALSE.
-  END IF
+  ! nam20 = INITDS(am20cs,eta)
+  ! nath0 = INITDS(ath0cs,eta)
+  ! nam21 = INITDS(am21cs,eta)
+  ! nath1 = INITDS(ath1cs,eta)
+  ! nam22 = INITDS(am22cs,eta)
+  ! nath2 = INITDS(ath2cs,eta)
   !
-  IF( X<(-4._DP) ) THEN
+  IF( X>=(-1._DP) ) THEN
+    ERROR STOP 'D9AIMP : X MUST BE < -1.'
+  ELSEIF( X>=(-2._DP) ) THEN
+    z = (16._DP/X**3+9._DP)/7._DP
+    Ampl = 0.3125_DP + DCSEVL(z,am22cs(1:nam22))
+    Theta = -0.625_DP + DCSEVL(z,ath2cs(1:nath2))
+  ELSEIF( X>=(-4._DP) ) THEN
+    z = (128._DP/X**3+9._DP)/7._DP
+    Ampl = 0.3125_DP + DCSEVL(z,am21cs(1:nam21))
+    Theta = -0.625_DP + DCSEVL(z,ath1cs(1:nath1))
+  ELSE
     z = 1._DP
     IF( X>xsml ) z = 128._DP/X**3 + 1._DP
-    Ampl = 0.3125_DP + DCSEVL(z,am20cs,nam20)
-    Theta = -0.625_DP + DCSEVL(z,ath0cs,nath0)
-    !
-  ELSEIF( X>=(-2._DP) ) THEN
-    !
-    IF( X>=(-1._DP) ) CALL XERMSG('D9AIMP','X MUST BE LE -1.0',1,2)
-    !
-    z = (16._DP/X**3+9._DP)/7._DP
-    Ampl = 0.3125_DP + DCSEVL(z,am22cs,nam22)
-    Theta = -0.625_DP + DCSEVL(z,ath2cs,nath2)
-  ELSE
-    z = (128._DP/X**3+9._DP)/7._DP
-    Ampl = 0.3125_DP + DCSEVL(z,am21cs,nam21)
-    Theta = -0.625_DP + DCSEVL(z,ath1cs,nath1)
+    Ampl = 0.3125_DP + DCSEVL(z,am20cs(1:nam20))
+    Theta = -0.625_DP + DCSEVL(z,ath0cs(1:nath0))
   END IF
   !
   sqrtx = SQRT(-X)

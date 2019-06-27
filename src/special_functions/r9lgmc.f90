@@ -1,8 +1,7 @@
 !** R9LGMC
-REAL(SP) FUNCTION R9LGMC(X)
+REAL(SP) ELEMENTAL FUNCTION R9LGMC(X)
   !> Compute the log Gamma correction factor so that
-  !            LOG(GAMMA(X)) = LOG(SQRT(2*PI)) + (X-.5)*LOG(X) - X
-  !            + R9LGMC(X).
+  !    LOG(GAMMA(X)) = LOG(SQRT(2*PI)) + (X-.5)*LOG(X) - X + R9LGMC(X).
   !***
   ! **Library:**   SLATEC (FNLIB)
   !***
@@ -38,30 +37,27 @@ REAL(SP) FUNCTION R9LGMC(X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
-  USE service, ONLY : XERMSG, R1MACH
-  REAL(SP) :: X
-  INTEGER, SAVE :: nalgm
+  USE service, ONLY : R1MACH
+  REAL(SP), INTENT(IN) :: X
+  INTEGER, PARAMETER :: nalgm = 2
   REAL(SP), PARAMETER :: xmax = EXP(MIN(LOG(R1MACH(2)/12._SP),-LOG(12._SP*R1MACH(1)))), &
     xbig = 1._SP/SQRT(R1MACH(3))
   REAL(SP), PARAMETER :: algmcs(6) = [ .166638948045186_SP,-.0000138494817606_SP, &
     .0000000098108256_SP,-.0000000000180912_SP, .0000000000000622_SP, &
     -.0000000000000003_SP ]
-  LOGICAL, SAVE :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  R9LGMC
-  IF( first ) THEN
-    nalgm = INITS(algmcs,6,R1MACH(3))
-    first = .FALSE.
-  END IF
+  ! nalgm = INITS(algmcs,R1MACH(3))
   !
-  IF( X<10._SP ) CALL XERMSG('R9LGMC','X MUST BE GE 10',1,2)
-  IF( X>=xmax ) THEN
-    !
+  IF( X<10._SP ) THEN
+    ERROR STOP 'R9LGMC : X MUST BE >= 10'
+  ELSEIF( X>=xmax ) THEN
     R9LGMC = 0._SP
-    CALL XERMSG('R9LGMC','X SO BIG R9LGMC UNDERFLOWS',2,1)
-    RETURN
+    ! CALL XERMSG('R9LGMC : X SO BIG R9LGMC UNDERFLOWS',2,1)
+  ELSEIF( X<xbig ) THEN
+    R9LGMC = CSEVL(2._SP*(10._SP/X)**2-1._SP,algmcs(1:nalgm))/X
+  ELSE
+    R9LGMC = 1._SP/(12._SP*X)
   END IF
-  !
-  R9LGMC = 1._SP/(12._SP*X)
-  IF( X<xbig ) R9LGMC = CSEVL(2._SP*(10._SP/X)**2-1._SP,algmcs,nalgm)/X
+
   RETURN
 END FUNCTION R9LGMC

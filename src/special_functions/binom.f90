@@ -1,5 +1,5 @@
 !** BINOM
-REAL(SP) FUNCTION BINOM(N,M)
+REAL(SP) ELEMENTAL FUNCTION BINOM(N,M)
   !> Compute the binomial coefficients.
   !***
   ! **Library:**   SLATEC (FNLIB)
@@ -27,18 +27,20 @@ REAL(SP) FUNCTION BINOM(N,M)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-  !   900326  Removed duplicate information from DESCRIPTION section.
-  !           (WRB)
-  USE service, ONLY : XERMSG, R1MACH
-  INTEGER :: M, N
+  !   900326  Removed duplicate information from DESCRIPTION section.  (WRB)
+  USE service, ONLY : R1MACH
+  INTEGER, INTENT(IN) :: M, N
   INTEGER :: i, k
   REAL(SP) :: corr, xk, xn, xnk
   REAL(SP), PARAMETER :: bilnmx = LOG(R1MACH(2)), fintmx = 0.9_SP/R1MACH(3)
   REAL(SP), PARAMETER :: sq2pil = 0.91893853320467274_SP
   !* FIRST EXECUTABLE STATEMENT  BINOM
   !
-  IF( N<0 .OR. M<0 ) CALL XERMSG('BINOM','N OR M LT ZERO',1,2)
-  IF( N<M ) CALL XERMSG('BINOM','N LT M',2,2)
+  IF( N<0 .OR. M<0 ) THEN
+    ERROR STOP 'BINOM : N OR M < 0'
+  ELSEIF( N<M ) THEN
+    ERROR STOP 'BINOM : N < M'
+  END IF
   !
   k = MIN(M,N-M)
   IF( k<=20 ) THEN
@@ -57,8 +59,7 @@ REAL(SP) FUNCTION BINOM(N,M)
   END IF
   !
   ! IF K<9, APPROX IS NOT VALID AND ANSWER IS CLOSE TO THE OVERFLOW LIM
-  IF( k<9 ) CALL XERMSG('BINOM',&
-    'RESULT OVERFLOWS BECAUSE N AND/OR M TOO BIG',3,2)
+  IF( k<9 ) ERROR STOP 'BINOM : RESULT OVERFLOWS BECAUSE N AND/OR M TOO BIG'
   !
   xn = N + 1
   xk = k + 1
@@ -68,8 +69,7 @@ REAL(SP) FUNCTION BINOM(N,M)
   BINOM = xk*LOG(xnk/xk) - xn*ALNREL(-(xk-1._SP)/xn) - 0.5_SP*LOG(xn*xnk/xk)&
     + 1._SP - sq2pil + corr
   !
-  IF( BINOM>bilnmx ) CALL XERMSG('BINOM',&
-    'RESULT OVERFLOWS BECAUSE N AND/OR M TOO BIG',3,2)
+  IF( BINOM>bilnmx ) ERROR STOP 'BINOM : RESULT OVERFLOWS BECAUSE N AND/OR M TOO BIG'
   !
   BINOM = EXP(BINOM)
   IF( BINOM<fintmx ) BINOM = AINT(BINOM+0.5_SP)

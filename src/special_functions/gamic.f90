@@ -1,5 +1,5 @@
 !** GAMIC
-REAL(SP) FUNCTION GAMIC(A,X)
+REAL(SP) ELEMENTAL FUNCTION GAMIC(A,X)
   !> Calculate the complementary incomplete Gamma function.
   !***
   ! **Library:**   SLATEC (FNLIB)
@@ -50,17 +50,17 @@ REAL(SP) FUNCTION GAMIC(A,X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920528  DESCRIPTION and REFERENCES sections revised.  (WRB)
-  USE service, ONLY : XERMSG, num_xer, R1MACH
-  REAL(SP) :: A, X
+  USE service, ONLY : R1MACH
+  REAL(SP), INTENT(IN) :: A, X
   INTEGER :: izero, ma
   REAL(SP) :: aeps, algap1, alngs, alx, e, fm, gstar, h, sga, sgng,  sgngam, sgngs, t
   REAL(SP), PARAMETER :: eps = 0.5_SP*R1MACH(3), sqeps = SQRT(R1MACH(4)), &
     alneps = -LOG(R1MACH(3)), bot = LOG(R1MACH(1))
   !* FIRST EXECUTABLE STATEMENT  GAMIC
   !
-  IF( X<0._SP ) CALL XERMSG('GAMIC','X IS NEGATIVE',2,2)
-  !
-  IF( X>0._SP ) THEN
+  IF( X<0._SP ) THEN
+    ERROR STOP 'GAMIC : X IS NEGATIVE'
+  ELSEIF( X>0._SP ) THEN
     !
     alx = LOG(X)
     sga = 1._SP
@@ -111,20 +111,15 @@ REAL(SP) FUNCTION GAMIC(A,X)
         !
         sgng = -sgngs*sga*sgngam
         t = t + algap1 - LOG(ABS(A))
-        IF( t<bot ) num_xer = 0
         GAMIC = sgng*EXP(t)
         RETURN
-      ELSE
-        IF( t>(-alneps) ) h = 1._SP - sgngs*EXP(t)
-        !
-        IF( ABS(h)<sqeps ) num_xer = 0
-        IF( ABS(h)<sqeps )&
-          CALL XERMSG('GAMIC','RESULT LT HALF PRECISION',1,1)
+      ELSEIF( t>(-alneps) ) THEN
+        h = 1._SP - sgngs*EXP(t)
+        ! IF( ABS(h)<sqeps ) CALL XERMSG('GAMIC','RESULT LT HALF PRECISION',1,1)
       END IF
     END IF
   ELSE
-    IF( A<=0._SP ) CALL XERMSG('GAMIC',&
-      'X = 0 AND A LE 0 SO GAMIC IS UNDEFINED',3,2)
+    IF( A<=0._SP ) ERROR STOP 'GAMIC : X = 0 AND A LE 0 SO GAMIC IS UNDEFINED'
     !
     GAMIC = EXP(LOG_GAMMA(A+1._SP)-LOG(A))
     RETURN
@@ -132,7 +127,7 @@ REAL(SP) FUNCTION GAMIC(A,X)
   !
   sgng = SIGN(1._SP,h)*sga*sgngam
   t = LOG(ABS(h)) + algap1 - LOG(ABS(A))
-  IF( t<bot ) num_xer = 0
   GAMIC = sgng*EXP(t)
+
   RETURN
 END FUNCTION GAMIC

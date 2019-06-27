@@ -1,5 +1,5 @@
 !** CWRSK
-SUBROUTINE CWRSK(Zr,Fnu,Kode,N,Y,Nz,Cw,Tol,Elim,Alim)
+PURE SUBROUTINE CWRSK(Zr,Fnu,Kode,N,Y,Nz,Cw,Tol,Elim,Alim)
   !> Subsidiary to CBESI and CBESK
   !***
   ! **Library:**   SLATEC
@@ -22,9 +22,14 @@ SUBROUTINE CWRSK(Zr,Fnu,Kode,N,Y,Nz,Cw,Tol,Elim,Alim)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
   USE service, ONLY : R1MACH
-  INTEGER :: i, Kode, N, nw, Nz
-  COMPLEX(SP) :: cinu, cscl, ct, Cw(2), c1, c2, rct, st, Y(N), Zr
-  REAL(SP) :: act, acw, Alim, ascle, Elim, Fnu, s1, s2, Tol, yy
+  INTEGER, INTENT(IN) :: Kode, N
+  INTEGER, INTENT(OUT) :: Nz
+  REAL(SP), INTENT(IN) :: Alim, Elim, Fnu, Tol
+  COMPLEX(SP), INTENT(IN) :: Zr
+  COMPLEX(SP), INTENT(OUT) :: Cw(2), Y(N)
+  INTEGER :: i, nw
+  COMPLEX(SP) :: cinu, cscl, ct, c1, c2, rct, st
+  REAL(SP) :: act, acw, ascle, s1, s2, yy
   !* FIRST EXECUTABLE STATEMENT  CWRSK
   !-----------------------------------------------------------------------
   !     I(FNU+I-1,Z) BY BACKWARD RECURRENCE FOR RATIOS

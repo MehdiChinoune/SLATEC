@@ -1,7 +1,7 @@
 !** BESI1E
-REAL(SP) FUNCTION BESI1E(X)
-  !> Compute the exponentially scaled modified (hyperbolic)
-  !            Bessel function of the first kind of order one.
+REAL(SP) ELEMENTAL FUNCTION BESI1E(X)
+  !> Compute the exponentially scaled modified (hyperbolic) Bessel function of
+  !  the first kind of order one.
   !***
   ! **Library:**   SLATEC (FNLIB)
   !***
@@ -49,13 +49,12 @@ REAL(SP) FUNCTION BESI1E(X)
   !   890210  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-  !   900326  Removed duplicate information from DESCRIPTION section.
-  !           (WRB)
+  !   900326  Removed duplicate information from DESCRIPTION section.  (WRB)
   !   920618  Removed space from variable names.  (RWC, WRB)
-  USE service, ONLY : XERMSG, R1MACH
-  REAL(SP) :: X
+  USE service, ONLY : R1MACH
+  REAL(SP), INTENT(IN) :: X
   REAL(SP) :: y
-  INTEGER, SAVE :: nti1, ntai1, ntai12
+  INTEGER, PARAMETER :: nti1 = 7, ntai1 = 9, ntai12 = 6
   REAL(SP), PARAMETER :: xmin = 2._SP*R1MACH(1), xsml = SQRT(4.5_SP*R1MACH(3))
   REAL(SP), PARAMETER :: bi1cs(11) = [ -.001971713261099859_SP, .40734887667546481_SP, &
     .034838994299959456_SP, .001545394556300123_SP, .000041888521098377_SP, &
@@ -77,31 +76,30 @@ REAL(SP) FUNCTION BESI1E(X)
     -.00000000000002101_SP, .00000000000004273_SP, .00000000000001041_SP, &
     -.00000000000000382_SP,-.00000000000000186_SP, .00000000000000033_SP, &
     .00000000000000028_SP, -.00000000000000003_SP ]
-  LOGICAL, SAVE :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  BESI1E
-  IF( first ) THEN
-    nti1 = INITS(bi1cs,11,0.1_SP*R1MACH(3))
-    ntai1 = INITS(ai1cs,21,0.1_SP*R1MACH(3))
-    ntai12 = INITS(ai12cs,22,0.1_SP*R1MACH(3))
-    first = .FALSE.
-  END IF
+  ! nti1 = INITS(bi1cs,0.1_SP*R1MACH(3))
+  ! ntai1 = INITS(ai1cs,0.1_SP*R1MACH(3))
+  ! ntai12 = INITS(ai12cs,0.1_SP*R1MACH(3))
   !
   y = ABS(X)
   IF( y>3._SP ) THEN
-    !
-    IF( y<=8. ) BESI1E = (0.375_SP+CSEVL((48._SP/y-11._SP)/5._SP,ai1cs,ntai1))/SQRT(y)
-    IF( y>8. ) BESI1E = (0.375_SP+CSEVL(16._SP/y-1._SP,ai12cs,ntai12))/SQRT(y)
+    IF( y<=8. ) THEN
+      BESI1E = (0.375_SP+CSEVL((48._SP/y-11._SP)/5._SP,ai1cs(1:ntai1)))/SQRT(y)
+    ELSE
+      BESI1E = (0.375_SP+CSEVL(16._SP/y-1._SP,ai12cs(1:ntai12)))/SQRT(y)
+    END IF
     BESI1E = SIGN(BESI1E,X)
-    RETURN
+  ELSEIF( y>xmin ) THEN
+    IF( y<=xsml ) THEN
+      BESI1E = 0.5_SP*X
+    ELSE
+      BESI1E = X*(0.875_SP+CSEVL(y*y/4.5_SP-1._SP,bi1cs(1:nti1)))
+    END IF
+    BESI1E = EXP(-y)*BESI1E
+  ELSE
+    !CALL XERMSG('BESI1E : ABS(X) SO SMALL I1 UNDERFLOWS',1,1)
+    BESI1E = 0._SP
   END IF
-  !
-  BESI1E = 0._SP
-  IF( y==0._SP ) RETURN
-  !
-  IF( y<=xmin ) CALL XERMSG('BESI1E',&
-    'ABS(X) SO SMALL I1 UNDERFLOWS',1,1)
-  IF( y>xmin ) BESI1E = 0.5_SP*X
-  IF( y>xsml ) BESI1E = X*(0.875_SP+CSEVL(y*y/4.5_SP-1._SP,bi1cs,nti1))
-  BESI1E = EXP(-y)*BESI1E
+
   RETURN
 END FUNCTION BESI1E

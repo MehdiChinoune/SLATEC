@@ -1,7 +1,7 @@
 !** R9LN2R
-REAL(SP) FUNCTION R9LN2R(X)
-  !> Evaluate LOG(1+X) from second order relative accuracy so
-  !            that LOG(1+X) = X - X**2/2 + X**3*R9LN2R(X).
+REAL(SP) ELEMENTAL FUNCTION R9LN2R(X)
+  !> Evaluate LOG(1+X) from second order relative accuracy so that
+  !            LOG(1+X) = X - X**2/2 + X**3*R9LN2R(X).
   !***
   ! **Library:**   SLATEC (FNLIB)
   !***
@@ -42,9 +42,9 @@ REAL(SP) FUNCTION R9LN2R(X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
-  USE service, ONLY : XERMSG, R1MACH
-  REAL(SP) :: X
-  INTEGER, SAVE :: ntln21, ntln22
+  USE service, ONLY : R1MACH
+  REAL(SP), INTENT(IN) :: X
+  INTEGER, PARAMETER :: ntln21 = 12, ntln22 = 9
   REAL(SP), PARAMETER :: eps = R1MACH(3), sqeps = SQRT(eps), txbig = 4._SP/SQRT(sqeps), &
     xbig = txbig - (sqeps*txbig**2-2._SP*LOG(txbig))/(2._SP*sqeps*txbig), &
     txmax = 6._SP/sqeps, xmin = -1._SP + SQRT(R1MACH(4)), &
@@ -65,31 +65,21 @@ REAL(SP) FUNCTION R9LN2R(X)
     -.000000000096748595_SP, .000000000013381046_SP,-.000000000001858102_SP, &
     .000000000000258929_SP, -.000000000000036195_SP, .000000000000005074_SP, &
     -.000000000000000713_SP, .000000000000000100_SP,-.000000000000000014_SP ]
-  LOGICAL, SAVE :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  R9LN2R
-  IF( first ) THEN
-    ntln21 = INITS(ln21cs,26,0.1_SP*eps)
-    ntln22 = INITS(ln22cs,20,0.1_SP*eps)
-    first = .FALSE.
-  END IF
+  ! ntln21 = INITS(ln21cs,0.1_SP*eps)
+  ! ntln22 = INITS(ln22cs,0.1_SP*eps)
   !
-  IF( X<(-0.625) .OR. X>0.8125 ) THEN
-    !
-    IF( X<xmin ) CALL XERMSG('R9LN2R',&
-      'ANSWER LT HALF PRECISION BECAUSE X IS TOO NEAR -1',1,1)
-    IF( X>xmax ) CALL XERMSG('R9LN2R',&
-      'NO PRECISION IN ANSWER BECAUSE X IS TOO BIG',3,2)
-    IF( X>xbig ) CALL XERMSG('R9LN2R',&
-      'ANSWER LT HALF PRECISION BECAUSE X IS TOO BIG',2,1)
-    !
+  IF( X>xmax ) THEN
+    ERROR STOP 'R9LN2R : NO PRECISION IN ANSWER BECAUSE X IS TOO BIG'
+  ELSEIF( X<(-0.625) .OR. X>0.8125 ) THEN
+    ! IF( X<xmin ) 'R9LN2R : ANSWER LT HALF PRECISION BECAUSE X IS TOO NEAR -1'
+    ! IF( X>xbig ) 'R9LN2R : ANSWER LT HALF PRECISION BECAUSE X IS TOO BIG'
     R9LN2R = (LOG(1._SP+X)-X*(1._SP-0.5_SP*X))/X**3
-    RETURN
-  END IF
-  !
-  IF( X<0._SP ) THEN
-    R9LN2R = 0.375_SP + CSEVL(16._SP*X/5._SP+1._SP,ln21cs,ntln21)
+  ELSEIF( X<0._SP ) THEN
+    R9LN2R = 0.375_SP + CSEVL(16._SP*X/5._SP+1._SP,ln21cs(1:ntln21))
   ELSE
-    R9LN2R = 0.375_SP + CSEVL(32._SP*X/13._SP-1._SP,ln22cs,ntln22)
+    R9LN2R = 0.375_SP + CSEVL(32._SP*X/13._SP-1._SP,ln22cs(1:ntln22))
   END IF
+
   RETURN
 END FUNCTION R9LN2R

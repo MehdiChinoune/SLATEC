@@ -1,5 +1,5 @@
 !** DPSIXN
-REAL(DP) FUNCTION DPSIXN(N)
+REAL(DP) ELEMENTAL FUNCTION DPSIXN(N)
   !> Subsidiary to DEXINT
   !***
   ! **Library:**   SLATEC
@@ -29,7 +29,8 @@ REAL(DP) FUNCTION DPSIXN(N)
   !   910722  Updated AUTHOR section.  (ALS)
   USE service, ONLY : D1MACH
   !
-  INTEGER :: N, k
+  INTEGER, INTENT(IN) :: N
+  INTEGER :: k
   REAL(DP) :: ax, fn, rfn2, trm, s, wdtol
   !
   !             DPSIXN(N), N = 1,100
@@ -90,6 +91,6 @@ REAL(DP) FUNCTION DPSIXN(N)
     DPSIXN = s + LOG(fn)
   ELSE
     DPSIXN = c(N)
-    RETURN
   END IF
+
 END FUNCTION DPSIXN

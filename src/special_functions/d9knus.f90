@@ -1,7 +1,7 @@
 !** D9KNUS
-SUBROUTINE D9KNUS(Xnu,X,Bknu,Bknu1,Iswtch)
-  !> Compute Bessel functions EXP(X)*K-SUB-XNU(X) and EXP(X)*
-  !            K-SUB-XNU+1(X) for 0.0 <= XNU < 1.0.
+ELEMENTAL SUBROUTINE D9KNUS(Xnu,X,Bknu,Bknu1,Iswtch)
+  !> Compute Bessel functions EXP(X)*K-SUB-XNU(X) and EXP(X)*K-SUB-XNU+1(X)
+  !  for 0.0 <= XNU < 1.0.
   !***
   ! **Library:**   SLATEC (FNLIB)
   !***
@@ -45,13 +45,14 @@ SUBROUTINE D9KNUS(Xnu,X,Bknu,Bknu1,Iswtch)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
   !   900727  Added EXTERNAL statement.  (WRB)
   !   920618  Removed space from variable names.  (RWC, WRB)
-  USE service, ONLY : XERMSG, D1MACH
-  INTEGER :: Iswtch
-  REAL(DP) :: Xnu, X, Bknu, Bknu1
+  USE service, ONLY : D1MACH
+  INTEGER, INTENT(OUT) :: Iswtch
+  REAL(DP), INTENT(IN) :: Xnu, X
+  REAL(DP), INTENT(OUT) :: Bknu, Bknu1
   INTEGER :: i, ii, inu, n, nterms
   REAL(DP) :: alpha(32), beta(32), a(32), alnz, a0, bknud, bknu0, b0, c0, expx, &
     p1, p2, p3, qq, result, sqrtx, v, vlnz, xi, xmu, x2n, x2tov, z, ztov, an, bn
-  INTEGER, SAVE :: ntc0k, ntznu1
+  INTEGER, PARAMETER :: ntc0k = 16, ntznu1 = 12
   REAL(DP), PARAMETER :: eta = 0.1_DP*D1MACH(3), xnusml = SQRT(D1MACH(3)/8._DP), &
     xsml = 0.1_DP*D1MACH(3), alnsml = LOG(D1MACH(1)), alnbig = LOG(D1MACH(2)), &
     alneps = LOG(0.1_DP*D1MACH(3))
@@ -84,17 +85,12 @@ SUBROUTINE D9KNUS(Xnu,X,Bknu,Bknu1,Iswtch)
   REAL(DP), PARAMETER :: euler = 0.57721566490153286060651209008240_DP
   REAL(DP), PARAMETER :: sqpi2 = +1.2533141373155002512078826424055_DP
   REAL(DP), PARAMETER :: aln2 = 0.69314718055994530941723212145818_DP
-  LOGICAL, SAVE :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  D9KNUS
-  IF( first ) THEN
-    ntc0k = INITDS(c0kcs,29,eta)
-    ntznu1 = INITDS(znu1cs,20,eta)
-    first = .FALSE.
-  END IF
+  ! ntc0k = INITDS(c0kcs,eta)
+  ! ntznu1 = INITDS(znu1cs,eta)
   !
-  IF( Xnu<0._DP .OR. Xnu>=1._DP )&
-    CALL XERMSG('D9KNUS','XNU MUST BE GE 0 AND LT 1',1,2)
-  IF( X<=0. ) CALL XERMSG('D9KNUS','X MUST BE GT 0',2,2)
+  IF( Xnu<0._DP .OR. Xnu>=1._DP ) ERROR STOP 'D9KNUS : XNU MUST BE >= 0 AND < 1'
+  IF( X<=0. ) ERROR STOP 'D9KNUS : X MUST BE > 0'
   !
   Iswtch = 0
   IF( X>2._DP ) THEN
@@ -122,10 +118,8 @@ SUBROUTINE D9KNUS(Xnu,X,Bknu,Bknu1,Iswtch)
     ! CAREFULLY FIND (X/2)**XNU AND Z**XNU WHERE Z = X*X/4.
     alnz = 2._DP*(LOG(X)-aln2)
     !
-    IF( X<=Xnu ) THEN
-      IF( -0.5_DP*Xnu*alnz-aln2-LOG(Xnu)>alnbig )&
-        CALL XERMSG('D9KNUS',&
-        'X SO SMALL BESSEL K-SUB-XNU OVERFLOWS',3,2)
+    IF( X<=Xnu .AND. -0.5_DP*Xnu*alnz-aln2-LOG(Xnu)>alnbig ) THEN
+      ERROR STOP 'D9KNUS : X SO SMALL BESSEL K-SUB-XNU OVERFLOWS'
     END IF
     !
     vlnz = v*alnz
@@ -136,11 +130,11 @@ SUBROUTINE D9KNUS(Xnu,X,Bknu,Bknu1,Iswtch)
     a0 = 0.5_DP*GAMMA(1._DP+v)
     b0 = 0.5_DP*GAMMA(1._DP-v)
     c0 = -euler
-    IF( ztov>0.5_DP .AND. v>xnusml ) c0 = -0.75_DP + DCSEVL((8._DP*v)*v-1._DP,c0kcs,ntc0k)
+    IF( ztov>0.5_DP .AND. v>xnusml ) c0 = -0.75_DP + DCSEVL((8._DP*v)*v-1._DP,c0kcs(1:ntc0k))
     !
     IF( ztov<=0.5_DP ) alpha(1) = (a0-ztov*b0)/v
     IF( ztov>0.5_DP ) alpha(1) = c0 - alnz*(0.75_DP+DCSEVL(vlnz/0.35_DP+1._DP,&
-      znu1cs,ntznu1))*b0
+      znu1cs(1:ntznu1)))*b0
     beta(1) = -0.5_DP*(a0+ztov*b0)
     !
     z = 0._DP
@@ -223,5 +217,6 @@ SUBROUTINE D9KNUS(Xnu,X,Bknu,Bknu1,Iswtch)
     IF( inu==1 ) Bknu = result
     IF( inu==2 ) Bknu1 = result
   END DO
+
   RETURN
 END SUBROUTINE D9KNUS

@@ -1,5 +1,5 @@
 !** CKSCL
-SUBROUTINE CKSCL(Zr,Fnu,N,Y,Nz,Rz,Ascle,Tol,Elim)
+PURE SUBROUTINE CKSCL(Zr,Fnu,N,Y,Nz,Rz,Ascle,Tol,Elim)
   !> Subsidiary to CBKNU, CUNK1 and CUNK2
   !***
   ! **Library:**   SLATEC
@@ -23,9 +23,14 @@ SUBROUTINE CKSCL(Zr,Fnu,N,Y,Nz,Rz,Ascle,Tol,Elim)
   !   ??????  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
 
-  INTEGER :: i, ic, k, kk, N, nn, nw, Nz
-  COMPLEX(SP) :: ck, cs, cy(2), Rz, s1, s2, Y(N), Zr, zd, celm
-  REAL(SP) :: aa, Ascle, acs, as, csi, csr, Elim, fn, Fnu, Tol, xx, zri, elm, alas, helim
+  INTEGER, INTENT(IN) :: N
+  INTEGER, INTENT(OUT) :: Nz
+  REAL(SP), INTENT(IN) :: Ascle, Elim, Fnu, Tol
+  COMPLEX(SP), INTENT(IN) :: Rz, Zr
+  COMPLEX(SP), INTENT(OUT) :: Y(N)
+  INTEGER :: i, ic, k, kk, nn, nw
+  COMPLEX(SP) :: ck, cs, cy(2), s1, s2, zd, celm
+  REAL(SP) :: aa, acs, as, csi, csr, fn, xx, zri, elm, alas, helim
   COMPLEX(SP), PARAMETER :: czero = (0._SP,0._SP)
   !* FIRST EXECUTABLE STATEMENT  CUCHK
   Nz = 0
@@ -114,4 +119,5 @@ SUBROUTINE CKSCL(Zr,Fnu,N,Y,Nz,Rz,Ascle,Tol,Elim)
   DO k = 1, Nz
     Y(k) = czero
   END DO
+
 END SUBROUTINE CKSCL

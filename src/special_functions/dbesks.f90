@@ -1,7 +1,6 @@
 !** DBESKS
-SUBROUTINE DBESKS(Xnu,X,Nin,Bk)
-  !> Compute a sequence of modified Bessel functions of the
-  !            third kind of fractional order.
+PURE SUBROUTINE DBESKS(Xnu,X,Nin,Bk)
+  !> Compute a sequence of modified Bessel functions of the third kind of fractional order.
   !***
   ! **Library:**   SLATEC (FNLIB)
   !***
@@ -10,8 +9,7 @@ SUBROUTINE DBESKS(Xnu,X,Nin,Bk)
   ! **Type:**      DOUBLE PRECISION (BESKS-S, DBESKS-D)
   !***
   ! **Keywords:**  FNLIB, FRACTIONAL ORDER, MODIFIED BESSEL FUNCTION,
-  !             SEQUENCE OF BESSEL FUNCTIONS, SPECIAL FUNCTIONS,
-  !             THIRD KIND
+  !             SEQUENCE OF BESSEL FUNCTIONS, SPECIAL FUNCTIONS, THIRD KIND
   !***
   ! **Author:**  Fullerton, W., (LANL)
   !***
@@ -36,15 +34,16 @@ SUBROUTINE DBESKS(Xnu,X,Nin,Bk)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-  USE service, ONLY : XERMSG, D1MACH
-  INTEGER :: Nin
-  REAL(DP) :: Xnu, X, Bk(Nin)
+  USE service, ONLY : D1MACH
+  INTEGER, INTENT(IN) :: Nin
+  REAL(DP), INTENT(IN) :: Xnu, X
+  REAL(DP), INTENT(OUT) :: Bk(Nin)
   INTEGER :: i, n
   REAL(DP) :: expxi
   REAL(DP), PARAMETER :: xmax = -LOG(D1MACH(1))
   !* FIRST EXECUTABLE STATEMENT  DBESKS
   !
-  IF( X>xmax ) CALL XERMSG('DBESKS','X SO BIG BESSEL K UNDERFLOWS',1,2)
+  IF( X>xmax ) ERROR STOP 'DBESKS : X SO BIG BESSEL K UNDERFLOWS'
   !
   CALL DBSKES(Xnu,X,Nin,Bk)
   !

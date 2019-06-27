@@ -1,5 +1,5 @@
 !** DAI
-REAL(DP) FUNCTION DAI(X)
+REAL(DP) ELEMENTAL FUNCTION DAI(X)
   !> Evaluate the Airy function.
   !***
   ! **Library:**   SLATEC (FNLIB)
@@ -41,10 +41,10 @@ REAL(DP) FUNCTION DAI(X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920618  Removed space from variable names.  (RWC, WRB)
-  USE service, ONLY : XERMSG, D1MACH
-  REAL(DP) :: X
+  USE service, ONLY : D1MACH
+  REAL(DP), INTENT(IN) :: X
   REAL(DP) :: theta, xm, z
-  INTEGER, SAVE :: naif, naig
+  INTEGER, PARAMETER :: naif = 8, naig = 8
   REAL(DP), PARAMETER :: x3sml = D1MACH(3)**0.3334_DP, &
     xmaxt = (-1.5_DP*LOG(D1MACH(1)))**0.6667_DP, &
     xmax = xmaxt - xmaxt*LOG(xmaxt)/(4._DP*SQRT(xmaxt)+1._DP) - 0.01_DP
@@ -62,31 +62,23 @@ REAL(DP) FUNCTION DAI(X)
     +.15070999142762379592306991138666E-16_DP, +.12559148312567778822703205333333E-19_DP, &
     +.83063073770821340343829333333333E-23_DP, +.44657538493718567445333333333333E-26_DP, &
     +.19900855034518869333333333333333E-29_DP, +.74702885256533333333333333333333E-33_DP ]
-  LOGICAL, SAVE :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  DAI
-  IF( first ) THEN
-    naif = INITDS(aifcs,13,0.1_SP*D1MACH(3))
-    naig = INITDS(aigcs,13,0.1_SP*D1MACH(3))
-    first = .FALSE.
-  END IF
+  ! naif = INITDS(aifcs,0.1_SP*D1MACH(3))
+  ! naig = INITDS(aigcs,0.1_SP*D1MACH(3))
   !
   IF( X<(-1._DP) ) THEN
     CALL D9AIMP(X,xm,theta)
     DAI = xm*COS(theta)
-    RETURN
-    !
   ELSEIF( X<=1._DP ) THEN
     z = 0._DP
     IF( ABS(X)>x3sml ) z = X**3
-    DAI = 0.375_DP + (DCSEVL(z,aifcs,naif)-X*(0.25_DP+DCSEVL(z,aigcs,naig)))
-    RETURN
-    !
-  ELSEIF( X>xmax ) THEN
-    !
+    DAI = 0.375_DP + (DCSEVL(z,aifcs(1:naif))-X*(0.25_DP+DCSEVL(z,aigcs(1:naig))))
+  ELSEIF( X<=xmax ) THEN
+    DAI = DAIE(X)*EXP(-2._DP*X*SQRT(X)/3._DP)
+  ELSE
     DAI = 0._DP
-    CALL XERMSG('DAI','X SO BIG AI UNDERFLOWS',1,1)
-    RETURN
+    !CALL XERMSG('DAI','X SO BIG AI UNDERFLOWS',1,1)
   END IF
-  DAI = DAIE(X)*EXP(-2._DP*X*SQRT(X)/3._DP)
+
   RETURN
 END FUNCTION DAI

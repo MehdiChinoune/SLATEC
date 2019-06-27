@@ -25,7 +25,7 @@ SUBROUTINE ZKSCL(Zrr,Zri,Fnu,N,Yr,Yi,Nz,Rzr,Rzi,Ascle,Tol,Elim)
   !   930122  Added ZLOG to EXTERNAL statement.  (RWC)
 
   !     COMPLEX CK,CS,CY,CZERO,RZ,S1,S2,Y,ZR,ZD,CELM
-  INTEGER :: i, ic, idum, kk, N, nn, nw, Nz
+  INTEGER :: i, ic, kk, N, nn, nw, Nz
   REAL(DP) :: acs, as, Ascle, cki, ckr, csi, csr, cyi(2), cyr(2), Elim, fn, Fnu, &
     Rzi, Rzr, str, s1i, s1r, s2i, s2r, Tol, Yi(N), Yr(N), Zri, Zrr, zdr, zdi, &
     celmr, elm, helim, alas
@@ -45,7 +45,7 @@ SUBROUTINE ZKSCL(Zrr,Zri,Fnu,N,Yr,Yi,Nz,Rzr,Rzi,Ascle,Tol,Elim)
     Yr(i) = zeror
     Yi(i) = zeroi
     IF( acs>=(-Elim) ) THEN
-      CALL ZLOG(s1r,s1i,csr,csi,idum)
+      CALL ZLOG(s1r,s1i,csr,csi)
       csr = csr - Zrr
       csi = csi - Zri
       str = EXP(csr)/Tol
@@ -101,7 +101,7 @@ SUBROUTINE ZKSCL(Zrr,Zri,Fnu,N,Yr,Yi,Nz,Rzr,Rzi,Ascle,Tol,Elim)
     Yr(i) = zeror
     Yi(i) = zeroi
     IF( acs>=(-Elim) ) THEN
-      CALL ZLOG(s2r,s2i,csr,csi,idum)
+      CALL ZLOG(s2r,s2i,csr,csi)
       csr = csr - zdr
       csi = csi - zdi
       str = EXP(csr)/Tol

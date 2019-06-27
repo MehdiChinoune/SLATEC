@@ -1,7 +1,6 @@
 !** BESKS
-SUBROUTINE BESKS(Xnu,X,Nin,Bk)
-  !> Compute a sequence of modified Bessel functions of the
-  !            third kind of fractional order.
+PURE SUBROUTINE BESKS(Xnu,X,Nin,Bk)
+  !> Compute a sequence of modified Bessel functions of the third kind of fractional order.
   !***
   ! **Library:**   SLATEC (FNLIB)
   !***
@@ -10,8 +9,7 @@ SUBROUTINE BESKS(Xnu,X,Nin,Bk)
   ! **Type:**      SINGLE PRECISION (BESKS-S, DBESKS-D)
   !***
   ! **Keywords:**  FNLIB, FRACTIONAL ORDER, MODIFIED BESSEL FUNCTION,
-  !             SEQUENCE OF BESSEL FUNCTIONS, SPECIAL FUNCTIONS,
-  !             THIRD KIND
+  !             SEQUENCE OF BESSEL FUNCTIONS, SPECIAL FUNCTIONS, THIRD KIND
   !***
   ! **Author:**  Fullerton, W., (LANL)
   !***
@@ -34,17 +32,19 @@ SUBROUTINE BESKS(Xnu,X,Nin,Bk)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-  !   900326  Removed duplicate information from DESCRIPTION section.
-  !           (WRB)
-  USE service, ONLY : XERMSG, R1MACH
-  INTEGER :: Nin
-  REAL(SP) :: Bk(Nin), X, Xnu
+  !   900326  Removed duplicate information from DESCRIPTION section.  (WRB)
+  USE service, ONLY : R1MACH
+  INTEGER, INTENT(IN) :: Nin
+  REAL(SP), INTENT(IN) :: X, Xnu
+  REAL(SP), INTENT(OUT) :: Bk(Nin)
   REAL(SP) :: expxi
   INTEGER :: i, n
   REAL(SP), PARAMETER :: xmax = -LOG(R1MACH(1))
   !* FIRST EXECUTABLE STATEMENT  BESKS
   !
-  IF( X>xmax ) CALL XERMSG('BESKS','X SO BIG BESSEL K UNDERFLOWS',1,2)
+  IF( X>xmax ) THEN
+    ERROR STOP 'BESKS : X SO BIG BESSEL K UNDERFLOWS'
+  END IF
   !
   CALL BESKES(Xnu,X,Nin,Bk)
   !

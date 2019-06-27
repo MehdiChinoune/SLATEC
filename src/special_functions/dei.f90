@@ -1,5 +1,5 @@
 !** DEI
-REAL(DP) FUNCTION DEI(X)
+REAL(DP) ELEMENTAL FUNCTION DEI(X)
   !> Compute the exponential integral Ei(X).
   !***
   ! **Library:**   SLATEC (FNLIB)
@@ -35,7 +35,7 @@ REAL(DP) FUNCTION DEI(X)
   !   891115  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-  REAL(DP) :: X
+  REAL(DP), INTENT(IN) :: X
   !* FIRST EXECUTABLE STATEMENT  DEI
   DEI = -DE1(-X)
   !

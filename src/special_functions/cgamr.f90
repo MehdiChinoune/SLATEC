@@ -1,5 +1,5 @@
 !** CGAMR
-COMPLEX(SP) FUNCTION CGAMR(Z)
+COMPLEX(SP) ELEMENTAL FUNCTION CGAMR(Z)
   !> Compute the reciprocal of the Gamma function.
   !***
   ! **Library:**   SLATEC (FNLIB)
@@ -26,20 +26,15 @@ COMPLEX(SP) FUNCTION CGAMR(Z)
   !   770701  DATE WRITTEN
   !   861211  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
-  USE service, ONLY : control_xer, num_xer
-  INTEGER :: irold
+  COMPLEX(SP), INTENT(IN) :: Z
   REAL(SP) :: x
-  COMPLEX(SP) :: Z
   !* FIRST EXECUTABLE STATEMENT  CGAMR
-  CGAMR = (0._SP,0._SP)
+
   x = REAL(Z)
-  IF( x<=0._SP .AND. AINT(x)==x .AND. AIMAG(Z)==0._SP ) RETURN
-  !
-  irold = control_xer
-  control_xer = 1
-  CGAMR = CLNGAM(Z)
-  num_xer = 0
-  control_xer = irold
-  CGAMR = EXP(-CGAMR)
-  !
+  IF( x<=0._SP .AND. AINT(x)==x .AND. AIMAG(Z)==0._SP ) THEN
+    CGAMR = (0._SP,0._SP)
+  ELSE
+    CGAMR = EXP(-CLNGAM(Z))
+  END IF
+
 END FUNCTION CGAMR

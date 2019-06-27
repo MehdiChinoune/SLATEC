@@ -1,9 +1,9 @@
 !** DRJ
-REAL(DP) FUNCTION DRJ(X,Y,Z,P,Ier)
+REAL(DP) ELEMENTAL FUNCTION DRJ(X,Y,Z,P)
   !> Compute the incomplete or complete (X or Y or Z is zero)
-  !            elliptic integral of the 3rd kind.  For X, Y, and Z non-
-  !            negative, at most one of them zero, and P positive,
-  !             RJ(X,Y,Z,P) = Integral from zero to infinity of
+  !  elliptic integral of the 3rd kind.  For X, Y, and Z non-negative,
+  !  at most one of them zero, and P positive,
+  !  RJ(X,Y,Z,P) = Integral from zero to infinity of
   !                              -1/2     -1/2     -1/2     -1
   !                    (3/2)(t+X)    (t+Y)    (t+Z)    (t+P)  dt.
   !***
@@ -302,9 +302,8 @@ REAL(DP) FUNCTION DRJ(X,Y,Z,P,Ier)
   !   900510  Changed calls to XERMSG to standard form, and some
   !           editorial changes.  (RWC)).
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  USE service, ONLY : XERMSG, D1MACH
-  INTEGER :: Ier
-  REAL(DP) :: P, X, Y, Z
+  USE service, ONLY : D1MACH
+  REAL(DP), INTENT(IN) :: P, X, Y, Z
   REAL(DP) :: alfa, beta, ea, eb, ec, e2, e3, epslon, lamda, mu, pn, pndev, power4, &
     sigma, s1, s2, s3, xn, xndev,xnroot, yn, yndev, ynroot, zn, zndev, znroot
   CHARACTER(16) :: xern3, xern4, xern5, xern6, xern7
@@ -320,41 +319,33 @@ REAL(DP) FUNCTION DRJ(X,Y,Z,P,Ier)
   !
   DRJ = 0._DP
   IF( MIN(X,Y,Z)<0._DP ) THEN
-    Ier = 1
     WRITE (xern3,'(1PE15.6)') X
     WRITE (xern4,'(1PE15.6)') Y
     WRITE (xern5,'(1PE15.6)') Z
-    CALL XERMSG('DRJ','MIN(X,Y,Z)<0 WHERE X = '//xern3//&
-      ' Y = '//xern4//' AND Z = '//xern5,1,1)
-    RETURN
+    ERROR STOP 'DRJ : MIN(X,Y,Z)<0 WHERE X = '//xern3//&
+      ' Y = '//xern4//' AND Z = '//xern5
   END IF
   !
   IF( MAX(X,Y,Z,P)>uplim ) THEN
-    Ier = 3
     WRITE (xern3,'(1PE15.6)') X
     WRITE (xern4,'(1PE15.6)') Y
     WRITE (xern5,'(1PE15.6)') Z
     WRITE (xern6,'(1PE15.6)') P
     WRITE (xern7,'(1PE15.6)') uplim
-    CALL XERMSG('DRJ','MAX(X,Y,Z,P)>UPLIM WHERE X = '//xern3//&
-      ' Y = '//xern4//' Z = '//xern5//' P = '//xern6//&
-      ' AND UPLIM = '//xern7,3,1)
-    RETURN
+    ERROR STOP 'DRJ : MAX(X,Y,Z,P)>UPLIM WHERE X = '//xern3//&
+      ' Y = '//xern4//' Z = '//xern5//' P = '//xern6//' AND UPLIM = '//xern7
   END IF
   !
   IF( MIN(X+Y,X+Z,Y+Z,P)<lolim ) THEN
-    Ier = 2
     WRITE (xern3,'(1PE15.6)') X
     WRITE (xern4,'(1PE15.6)') Y
     WRITE (xern5,'(1PE15.6)') Z
     WRITE (xern6,'(1PE15.6)') P
     WRITE (xern7,'(1PE15.6)') lolim
-    CALL XERMSG('RJ','MIN(X+Y,X+Z,Y+Z,P)<LOLIM WHERE X = '//&
-      xern3//' Y = '//xern4//' Z = '//xern5//' P = '//xern6//' AND LOLIM = ',2,1)
-    RETURN
+    ERROR STOP 'RJ : MIN(X+Y,X+Z,Y+Z,P)<LOLIM WHERE X = '//&
+      xern3//' Y = '//xern4//' Z = '//xern5//' P = '//xern6//' AND LOLIM = '//xern7
   END IF
   !
-  Ier = 0
   xn = X
   yn = Y
   zn = Z
@@ -389,7 +380,7 @@ REAL(DP) FUNCTION DRJ(X,Y,Z,P,Ier)
       alfa = pn*(xnroot+ynroot+znroot) + xnroot*ynroot*znroot
       alfa = alfa*alfa
       beta = pn*(pn+lamda)*(pn+lamda)
-      sigma = sigma + power4*DRC(alfa,beta,Ier)
+      sigma = sigma + power4*DRC(alfa,beta)
       power4 = power4*0.250_DP
       xn = (xn+lamda)*0.250_DP
       yn = (yn+lamda)*0.250_DP
@@ -397,4 +388,5 @@ REAL(DP) FUNCTION DRJ(X,Y,Z,P,Ier)
       pn = (pn+lamda)*0.250_DP
     END IF
   END DO
+
 END FUNCTION DRJ

@@ -1,5 +1,5 @@
 !** DGAMIT
-REAL(DP) FUNCTION DGAMIT(A,X)
+REAL(DP) ELEMENTAL FUNCTION DGAMIT(A,X)
   !> Calculate Tricomi's form of the incomplete Gamma function.
   !***
   ! **Library:**   SLATEC (FNLIB)
@@ -55,13 +55,13 @@ REAL(DP) FUNCTION DGAMIT(A,X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920528  DESCRIPTION and REFERENCES sections revised.  (WRB)
-  USE service, ONLY : XERMSG, num_xer, D1MACH
-  REAL(DP) :: A, X
+  USE service, ONLY : D1MACH
+  REAL(DP), INTENT(IN) :: A, X
   REAL(DP) :: aeps, ainta, algap1, alng, alx, h, sga, sgngam, t
   REAL(DP), PARAMETER :: alneps = -LOG(D1MACH(3)), sqeps = SQRT(D1MACH(4)), &
     bot = LOG(D1MACH(1))
   !* FIRST EXECUTABLE STATEMENT  DGAMIT
-  IF( X<0._DP ) CALL XERMSG('DGAMIT','X IS NEGATIVE',2,2)
+  IF( X<0._DP ) ERROR STOP 'DGAMIT : X IS NEGATIVE'
   !
   IF( X/=0._DP ) alx = LOG(X)
   sga = 1._DP
@@ -69,52 +69,37 @@ REAL(DP) FUNCTION DGAMIT(A,X)
   ainta = AINT(A+0.5_DP*sga)
   aeps = A - ainta
   !
-  IF( X<=0._DP ) THEN
+  IF( X==0._DP ) THEN
     DGAMIT = 0._DP
     IF( ainta>0._DP .OR. aeps/=0._DP ) DGAMIT = DGAMR(A+1._DP)
-    RETURN
-    !
   ELSEIF( X<=1._DP ) THEN
     IF( A>=(-0.5_DP) .OR. aeps/=0._DP ) CALL DLGAMS(A+1._DP,algap1,sgngam)
     DGAMIT = D9GMIT(A,X,algap1,sgngam)
-    RETURN
-    !
   ELSEIF( A<X ) THEN
-    !
     alng = D9LGIC(A,X,alx)
-    !
     ! EVALUATE DGAMIT IN TERMS OF LOG (DGAMIC (A, X))
-    !
     h = 1._DP
     IF( aeps/=0._DP .OR. ainta>0._DP ) THEN
-      !
       CALL DLGAMS(A+1._DP,algap1,sgngam)
       t = LOG(ABS(A)) + alng - algap1
       IF( t>alneps ) THEN
-        !
         t = t - A*alx
-        IF( t<bot ) num_xer = 0
         DGAMIT = -sga*sgngam*EXP(t)
         RETURN
       ELSE
         !
         IF( t>(-alneps) ) h = 1._DP - sga*sgngam*EXP(t)
-        IF( ABS(h)<=sqeps ) THEN
-          !
-          num_xer = 0
-          CALL XERMSG('DGAMIT','RESULT LT HALF PRECISION',1,1)
-        END IF
+        ! IF( ABS(h)<=sqeps ) THEN
+          ! CALL XERMSG('DGAMIT','RESULT LT HALF PRECISION',1,1)
+        ! END IF
       END IF
     END IF
+    t = -A*alx + LOG(ABS(h))
+    DGAMIT = SIGN(EXP(t),h)
   ELSE
     t = D9LGIT(A,X,LOG_GAMMA(A+1._DP))
-    IF( t<bot ) num_xer = 0
     DGAMIT = EXP(t)
-    RETURN
   END IF
-  !
-  t = -A*alx + LOG(ABS(h))
-  IF( t<bot ) num_xer = 0
-  DGAMIT = SIGN(EXP(t),h)
+
   RETURN
 END FUNCTION DGAMIT

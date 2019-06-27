@@ -1,5 +1,5 @@
 !** CBETA
-COMPLEX(SP) FUNCTION CBETA(A,B)
+COMPLEX(SP) ELEMENTAL FUNCTION CBETA(A,B)
   !> Compute the complete Beta function.
   !***
   ! **Library:**   SLATEC (FNLIB)
@@ -14,8 +14,7 @@ COMPLEX(SP) FUNCTION CBETA(A,B)
   !***
   ! **Description:**
   !
-  ! CBETA computes the complete beta function of complex parameters A
-  ! and B.
+  ! CBETA computes the complete beta function of complex parameters A and B.
   ! Input Parameters:
   !       A   complex and the real part of A positive
   !       B   complex and the real part of B positive
@@ -30,26 +29,22 @@ COMPLEX(SP) FUNCTION CBETA(A,B)
   !   890206  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-  !   900326  Removed duplicate information from DESCRIPTION section.
-  !           (WRB)
+  !   900326  Removed duplicate information from DESCRIPTION section. (WRB)
   !   900727  Added EXTERNAL statement.  (WRB)
   USE service, ONLY : XERMSG
-  COMPLEX(SP) :: A, B
-  REAL(SP) :: xmin
-  REAL(SP), SAVE :: xmax = 0._SP
+  COMPLEX(SP), INTENT(IN) :: A, B
+  REAL(SP), PARAMETER :: xmax = 35.0307808_SP
   !* FIRST EXECUTABLE STATEMENT  CBETA
-  IF( xmax==0._SP ) THEN
-    CALL GAMLIM(xmin,xmax)
-  END IF
   !
-  IF( REAL(A)<=0._SP .OR. REAL(B)<=0._SP ) CALL XERMSG('CBETA',&
-    'REAL PART OF BOTH ARGUMENTS MUST BE GT 0',1,2)
+  IF( REAL(A)<=0._SP .OR. REAL(B)<=0._SP ) THEN
+    ERROR STOP 'CBETA : REAL PART OF BOTH ARGUMENTS MUST BE > 0'
+  END IF
   !
   IF( REAL(A)+REAL(B)<xmax ) THEN
     CBETA = CGAMMA(A)*(CGAMMA(B)/CGAMMA(A+B))
-    RETURN
+  ELSE
+    CBETA = EXP(CLBETA(A,B))
   END IF
-  !
-  CBETA = EXP(CLBETA(A,B))
-  !
+
+  RETURN
 END FUNCTION CBETA

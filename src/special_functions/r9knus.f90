@@ -1,7 +1,7 @@
 !** R9KNUS
-SUBROUTINE R9KNUS(Xnu,X,Bknu,Bknu1,Iswtch)
-  !> Compute Bessel functions EXP(X)*K-SUB-XNU(X) and EXP(X)*
-  !            K-SUB-XNU+1(X) for 0.0 <= XNU < 1.0.
+ELEMENTAL SUBROUTINE R9KNUS(Xnu,X,Bknu,Bknu1,Iswtch)
+  !> Compute Bessel functions EXP(X)*K_{XNU}(X) and EXP(X)*K_{XNU+1}(X)
+  !  for 0.0 <= XNU < 1.0.
   !***
   ! **Library:**   SLATEC (FNLIB)
   !***
@@ -15,8 +15,8 @@ SUBROUTINE R9KNUS(Xnu,X,Bknu,Bknu1,Iswtch)
   !***
   ! **Description:**
   !
-  ! Compute Bessel functions EXP(X) * K-sub-XNU (X)  and
-  ! EXP(X) * K-sub-XNU+1 (X) for 0.0 <= XNU < 1.0 .
+  ! Compute Bessel functions EXP(X) * K{XNU} (X)  and
+  ! EXP(X) * K_{XNU+1} (X) for 0.0 <= XNU < 1.0 .
   !
   ! Series for C0K        on the interval  0.          to  2.50000D-01
   !                                        with weighted error   1.60E-17
@@ -44,13 +44,14 @@ SUBROUTINE R9KNUS(Xnu,X,Bknu,Bknu1,Iswtch)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
   !   900727  Added EXTERNAL statement.  (WRB)
   !   920618  Removed space from variable names.  (RWC, WRB)
-  USE service, ONLY : XERMSG, R1MACH
-  INTEGER :: Iswtch
-  REAL(SP) :: Bknu, Bknu1, X, Xnu
+  USE service, ONLY : R1MACH
+  INTEGER, INTENT(OUT) :: Iswtch
+  REAL(SP), INTENT(IN) :: X, Xnu
+  REAL(SP), INTENT(OUT) :: Bknu, Bknu1
   INTEGER :: i, ii, inu, n, nterms
   REAL(SP) :: a(15), a0, alnz, alpha(15), an, b0, beta(15), bknu0, bknud, bn, c0, &
     expx, p1, p2, p3, qq, result, sqrtx, v, vlnz, x2n, x2tov, xi, xmu, z, ztov
-  INTEGER, SAVE :: ntc0k, ntznu1
+  INTEGER, PARAMETER :: ntc0k = 8, ntznu1 = 7
   REAL(SP), PARAMETER :: xnusml = SQRT(R1MACH(3)/8._SP), xsml = 0.1_SP*R1MACH(3), &
     alnsml = LOG(R1MACH(1)), alnbig = LOG(R1MACH(2)), alneps = LOG(0.1_SP*R1MACH(3))
   REAL(SP), PARAMETER :: c0kcs(16) = [ .060183057242626108_SP,-.15364871433017286_SP, &
@@ -67,22 +68,20 @@ SUBROUTINE R9KNUS(Xnu,X,Bknu,Bknu1,Iswtch)
   REAL(SP), PARAMETER :: euler = 0.57721566490153286_SP
   REAL(SP), PARAMETER :: sqpi2 = 1.2533141373155003_SP
   REAL(SP), PARAMETER :: aln2 = 0.69314718055994531_SP
-  LOGICAL, SAVE :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  R9KNUS
-  IF( first ) THEN
-    ntc0k = INITS(c0kcs,16,0.1_SP*R1MACH(3))
-    ntznu1 = INITS(znu1cs,12,0.1_SP*R1MACH(3))
-    first = .FALSE.
-  END IF
+  ! ntc0k = INITS(c0kcs,0.1_SP*R1MACH(3))
+  ! ntznu1 = INITS(znu1cs,0.1_SP*R1MACH(3))
   !
-  IF( Xnu<0. .OR. Xnu>=1._SP )&
-    CALL XERMSG('R9KNUS','XNU MUST BE GE 0 AND LT 1',1,2)
-  IF( X<=0. ) CALL XERMSG('R9KNUS','X MUST BE GT 0',2,2)
+  IF( Xnu<0._SP .OR. Xnu>=1._SP ) THEN
+    ERROR STOP 'R9KNUS : XNU MUST 0 <= XNU < 1'
+  ELSEIF( X<=0. ) THEN
+    ERROR STOP 'R9KNUS : X MUST BE > 0'
+  END IF
   !
   Iswtch = 0
   IF( X>2._SP ) THEN
     !
-    ! X IS LARGE.  FIND K-SUB-XNU (X) AND K-SUB-XNU+1 (X) WITH Y. L. LUKE-S
+    ! X IS LARGE.  FIND K_{XNU} (X) AND K_{XNU+1} (X) WITH Y. L. LUKE-S
     ! RATIONAL EXPANSION.
     !
     sqrtx = SQRT(X)
@@ -94,8 +93,8 @@ SUBROUTINE R9KNUS(Xnu,X,Bknu,Bknu1,Iswtch)
     END IF
   ELSE
     !
-    ! X IS SMALL.  COMPUTE K-SUB-XNU (X) AND THE DERIVATIVE OF K-SUB-XNU (X)
-    ! THEN FIND K-SUB-XNU+1 (X).  XNU IS REDUCED TO THE INTERVAL (-.5,+.5)
+    ! X IS SMALL.  COMPUTE K_{XNU} (X) AND THE DERIVATIVE OF K_{XNU} (X)
+    ! THEN FIND K_{XNU+1} (X).  XNU IS REDUCED TO THE INTERVAL (-.5,+.5)
     ! THEN TO (0., .5), BECAUSE K OF NEGATIVE ORDER (-NU) = K OF POSITIVE
     ! ORDER (+NU).
     !
@@ -105,10 +104,8 @@ SUBROUTINE R9KNUS(Xnu,X,Bknu,Bknu1,Iswtch)
     ! CAREFULLY FIND (X/2)**XNU AND Z**XNU WHERE Z = X*X/4.
     alnz = 2._SP*(LOG(X)-aln2)
     !
-    IF( X<=Xnu ) THEN
-      IF( -0.5_SP*Xnu*alnz-aln2-LOG(Xnu)>alnbig )&
-        CALL XERMSG('R9KNUS',&
-        'X SO SMALL BESSEL K-SUB-XNU OVERFLOWS',3,2)
+    IF( X<=Xnu .AND. -0.5_SP*Xnu*alnz-aln2-LOG(Xnu)>alnbig ) THEN
+      ERROR STOP 'R9KNUS : X SO SMALL BESSEL K_{XNU} OVERFLOWS'
     END IF
     !
     vlnz = v*alnz
@@ -120,11 +117,11 @@ SUBROUTINE R9KNUS(Xnu,X,Bknu,Bknu1,Iswtch)
     b0 = 0.5_SP*GAMMA(1._SP-v)
     c0 = -euler
     IF( ztov>0.5_SP .AND. v>xnusml ) c0 = -0.75_SP + &
-      CSEVL((8._SP*v)*v-1._SP,c0kcs,ntc0k)
+      CSEVL((8._SP*v)*v-1._SP,c0kcs(1:ntc0k))
     !
     IF( ztov<=0.5_SP ) alpha(1) = (a0-ztov*b0)/v
-    IF( ztov>0.5_SP ) alpha(1) = c0 - alnz*(0.75_SP+CSEVL(vlnz/0.35_SP+1._SP,znu1cs,&
-      ntznu1))*b0
+    IF( ztov>0.5_SP ) alpha(1) = c0 - alnz*(0.75_SP+CSEVL(vlnz/0.35_SP+1._SP,&
+      znu1cs(1:ntznu1)))*b0
     beta(1) = -0.5_SP*(a0+ztov*b0)
     !
     z = 0._SP
@@ -206,5 +203,6 @@ SUBROUTINE R9KNUS(Xnu,X,Bknu,Bknu1,Iswtch)
     IF( inu==1 ) Bknu = result
     IF( inu==2 ) Bknu1 = result
   END DO
+
   RETURN
 END SUBROUTINE R9KNUS

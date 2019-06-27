@@ -1,5 +1,5 @@
 !** DPSIFN
-SUBROUTINE DPSIFN(X,N,Kode,M,Ans,Nz,Ierr)
+PURE SUBROUTINE DPSIFN(X,N,Kode,M,Ans,Nz,Ierr)
   !> Compute derivatives of the Psi function.
   !***
   ! **Library:**   SLATEC
@@ -8,8 +8,7 @@ SUBROUTINE DPSIFN(X,N,Kode,M,Ans,Nz,Ierr)
   !***
   ! **Type:**      DOUBLE PRECISION (PSIFN-S, DPSIFN-D)
   !***
-  ! **Keywords:**  DERIVATIVES OF THE GAMMA FUNCTION, POLYGAMMA FUNCTION,
-  !             PSI FUNCTION
+  ! **Keywords:**  DERIVATIVES OF THE GAMMA FUNCTION, POLYGAMMA FUNCTION, PSI FUNCTION
   !***
   ! **Author:**  Amos, D. E., (SNLA)
   !***
@@ -114,8 +113,10 @@ SUBROUTINE DPSIFN(X,N,Kode,M,Ans,Nz,Ierr)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   USE service, ONLY : D1MACH, I1MACH
-  INTEGER :: Ierr, Kode, M, N, Nz
-  REAL(DP) :: X, Ans(M)
+  INTEGER, INTENT(IN) :: Kode, M, N
+  INTEGER, INTENT(OUT) :: Ierr, Nz
+  REAL(DP), INTENT(IN) :: X
+  REAL(DP), INTENT(OUT) :: Ans(M)
   INTEGER :: i, j, k, mm, mx, nn, np, nx, fn
   REAL(DP) :: arg, den, elim, eps, fln, fx, rln, rxsq, r1m4, r1m5, s, slope, t, ta, &
     tk, tol, tols, trm(22), trmr(100), tss, tst, tt, t1, t2, wdtol, xdmln, xdmy, &
@@ -136,11 +137,10 @@ SUBROUTINE DPSIFN(X,N,Kode,M,Ans,Nz,Ierr)
   !* FIRST EXECUTABLE STATEMENT  DPSIFN
   Ierr = 0
   Nz = 0
-  IF( X<=0._DP ) Ierr = 1
-  IF( N<0 ) Ierr = 1
-  IF( Kode<1 .OR. Kode>2 ) Ierr = 1
-  IF( M<1 ) Ierr = 1
-  IF( Ierr/=0 ) RETURN
+  IF( X<=0._DP .OR. N<0 .OR. Kode<1 .OR. Kode>2 .OR. M<1 ) THEN
+    Ierr = 1
+    RETURN
+  END IF
   mm = M
   nx = MIN(-I1MACH(15),I1MACH(16))
   r1m5 = D1MACH(5)
@@ -363,5 +363,6 @@ SUBROUTINE DPSIFN(X,N,Kode,M,Ans,Nz,Ierr)
   mm = mm - 1
   IF( mm==0 ) RETURN
   GOTO 100
+
   RETURN
 END SUBROUTINE DPSIFN

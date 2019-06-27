@@ -1,7 +1,7 @@
 !** R9GMIC
-REAL(SP) FUNCTION R9GMIC(A,X,Alx)
+REAL(SP) ELEMENTAL FUNCTION R9GMIC(A,X,Alx)
   !> Compute the complementary incomplete Gamma function for A
-  !            near a negative integer and for small X.
+  !  near a negative integer and for small X.
   !***
   ! **Library:**   SLATEC (FNLIB)
   !***
@@ -31,16 +31,16 @@ REAL(SP) FUNCTION R9GMIC(A,X,Alx)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
-  USE service, ONLY : XERMSG, R1MACH
-  REAL(SP) :: A, Alx, X
+  USE service, ONLY : R1MACH
+  REAL(SP), INTENT(IN) :: A, Alx, X
   INTEGER :: k, m, ma, mm1
   REAL(SP) :: alng, fk, fkp1, fm, s, sgng, t, te
   REAL(SP), PARAMETER :: euler = .5772156649015329_SP
   REAL(SP), PARAMETER :: eps = 0.5_SP*R1MACH(3), bot = LOG(R1MACH(1))
   !* FIRST EXECUTABLE STATEMENT  R9GMIC
   !
-  IF( A>0._SP ) CALL XERMSG('R9GMIC','A MUST BE NEAR A NEGATIVE INTEGER',2,2)
-  IF( X<=0._SP ) CALL XERMSG('R9GMIC','X MUST BE GT ZERO',3,2)
+  IF( A>0._SP ) ERROR STOP 'R9GMIC : A MUST BE NEAR A NEGATIVE INTEGER'
+  IF( X<=0._SP ) ERROR STOP 'R9GMIC : X MUST BE GT ZERO'
   !
   ma = INT( A - 0.5_SP )
   fm = -ma
@@ -56,14 +56,15 @@ REAL(SP) FUNCTION R9GMIC(A,X,Alx)
     s = s + t
     IF( ABS(t)<eps*s ) GOTO 100
   END DO
-  CALL XERMSG('R9GMIC',&
-    'NO CONVERGENCE IN 200 TERMS OF CONTINUED FRACTION',4,2)
+  ERROR STOP 'R9GMIC : NO CONVERGENCE IN 200 TERMS OF CONTINUED FRACTION'
   !
   100  R9GMIC = -Alx - euler + X*s/(fm+1._SP)
   IF( m==0 ) RETURN
   !
-  IF( m==1 ) R9GMIC = -R9GMIC - 1._SP + 1._SP/X
-  IF( m==1 ) RETURN
+  IF( m==1 ) THEN
+    R9GMIC = -R9GMIC - 1._SP + 1._SP/X
+    RETURN
+  END IF
   !
   te = fm
   t = 1._SP
@@ -89,7 +90,6 @@ REAL(SP) FUNCTION R9GMIC(A,X,Alx)
   IF( alng>bot ) R9GMIC = sgng*EXP(alng)
   IF( s/=0._SP ) R9GMIC = R9GMIC + SIGN(EXP(-fm*Alx+LOG(ABS(s)/fm)),s)
   !
-  IF( R9GMIC==0._SP .AND. s==0._SP )&
-    CALL XERMSG('R9GMIC','RESULT UNDERFLOWS',1,1)
-  !
+  !IF( R9GMIC==0._SP .AND. s==0._SP ) CALL XERMSG('R9GMIC','RESULT UNDERFLOWS',1,1)
+
 END FUNCTION R9GMIC

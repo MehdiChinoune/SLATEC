@@ -1,5 +1,5 @@
 !** CSERI
-SUBROUTINE CSERI(Z,Fnu,Kode,N,Y,Nz,Tol,Elim,Alim)
+PURE SUBROUTINE CSERI(Z,Fnu,Kode,N,Y,Nz,Tol,Elim,Alim)
   !> Subsidiary to CBESI and CBESK
   !***
   ! **Library:**   SLATEC
@@ -27,10 +27,15 @@ SUBROUTINE CSERI(Z,Fnu,Kode,N,Y,Nz,Tol,Elim,Alim)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
   USE service, ONLY : R1MACH
-  INTEGER :: i, ib, idum, iflag, il, k, Kode, l, m, N, nn, nw, Nz
-  COMPLEX(SP) :: ak1, ck, coef, crsc, cz, hz, rz, s1, s2, w(2), Y(N), Z
-  REAL(SP) :: aa, acz, ak, Alim, arm, ascle, atol, az, dfnu, Elim, Fnu, &
-    fnup, rak1, rs, rtr1, s, ss, Tol, x
+  INTEGER, INTENT(IN) :: Kode, N
+  INTEGER, INTENT(OUT) :: Nz
+  REAL(SP), INTENT(IN) :: Alim, Elim, Fnu, Tol
+  COMPLEX(SP), INTENT(IN) :: Z
+  COMPLEX(SP), INTENT(OUT) :: Y(N)
+  INTEGER :: i, ib, iflag, il, k, l, m, nn, nw
+  COMPLEX(SP) :: ak1, ck, coef, crsc, cz, hz, rz, s1, s2, w(2)
+  REAL(SP) :: aa, acz, ak, arm, ascle, atol, az, dfnu, &
+    fnup, rak1, rs, rtr1, s, ss, x
   COMPLEX(SP), PARAMETER :: czero = (0._SP,0._SP), cone = (1._SP,0._SP)
   !* FIRST EXECUTABLE STATEMENT  CSERI
   Nz = 0
@@ -59,7 +64,7 @@ SUBROUTINE CSERI(Z,Fnu,Kode,N,Y,Nz,Tol,Elim,Alim)
   !     UNDERFLOW TEST
   !-----------------------------------------------------------------------
   ak1 = ck*CMPLX(dfnu,0._SP,SP)
-  ak = GAMLN(fnup,idum)
+  ak = LOG_GAMMA(fnup)
   ak1 = ak1 - CMPLX(ak,0._SP,SP)
   IF( Kode==2 ) ak1 = ak1 - CMPLX(x,0._SP,SP)
   rak1 = REAL(ak1)
@@ -162,8 +167,7 @@ SUBROUTINE CSERI(Z,Fnu,Kode,N,Y,Nz,Tol,Elim,Alim)
   500  Y(1) = czero
   IF( Fnu==0._SP ) Y(1) = cone
   IF( N==1 ) RETURN
-  DO i = 2, N
-    Y(i) = czero
-  END DO
+  Y = czero
+
   RETURN
 END SUBROUTINE CSERI

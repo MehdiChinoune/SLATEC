@@ -31,7 +31,7 @@ SUBROUTINE ZS1S2(Zrr,Zri,S1r,S1i,S2r,S2i,Nz,Ascle,Alim,Iuf)
   !     COMPLEX CZERO,C1,S1,S1D,S2,ZR
   REAL(DP) :: aa, Alim, aln, Ascle, as1, as2, c1i, c1r, s1di, s1dr, S1i, S1r, &
     S2i, S2r, Zri, Zrr
-  INTEGER :: Iuf, idum, Nz
+  INTEGER :: Iuf, Nz
   REAL(DP), PARAMETER :: zeror = 0._DP, zeroi = 0._DP
   !* FIRST EXECUTABLE STATEMENT  ZS1S2
   Nz = 0
@@ -46,7 +46,7 @@ SUBROUTINE ZS1S2(Zrr,Zri,S1r,S1i,S2r,S2i,Nz,Ascle,Alim,Iuf)
       S1i = zeroi
       as1 = zeror
       IF( aln>=(-Alim) ) THEN
-        CALL ZLOG(s1dr,s1di,c1r,c1i,idum)
+        CALL ZLOG(s1dr,s1di,c1r,c1i)
         c1r = c1r - Zrr - Zrr
         c1i = c1i - Zri - Zri
         CALL ZEXP(c1r,c1i,S1r,S1i)

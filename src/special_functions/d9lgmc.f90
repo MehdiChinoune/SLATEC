@@ -1,8 +1,7 @@
 !** D9LGMC
-REAL(DP) FUNCTION D9LGMC(X)
+REAL(DP) ELEMENTAL FUNCTION D9LGMC(X)
   !> Compute the log Gamma correction factor so that
-  !            LOG(GAMMA(X)) = LOG(SQRT(2*PI)) + (X-5.)*LOG(X) - X
-  !            + D9LGMC(X).
+  !   LOG(GAMMA(X)) = LOG(SQRT(2*PI)) + (X-5.)*LOG(X) - X + D9LGMC(X).
   !***
   ! **Library:**   SLATEC (FNLIB)
   !***
@@ -38,9 +37,9 @@ REAL(DP) FUNCTION D9LGMC(X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
-  USE service, ONLY : XERMSG, D1MACH
-  REAL(DP) :: X
-  INTEGER, SAVE :: nalgm
+  USE service, ONLY : D1MACH
+  REAL(DP), INTENT(IN) :: X
+  INTEGER, PARAMETER :: nalgm = 6
   REAL(DP), PARAMETER :: xbig = 1._DP/SQRT(D1MACH(3)), &
     xmax = EXP(MIN(LOG(D1MACH(2)/12._DP),-LOG(12._DP*D1MACH(1))))
   REAL(DP), PARAMETER :: algmcs(15) = [ +.1666389480451863247205729650822E+0_DP, &
@@ -51,22 +50,19 @@ REAL(DP) FUNCTION D9LGMC(X)
     -.6831888753985766870111999999999E-23_DP, +.1429227355942498147573333333333E-24_DP, &
     -.3547598158101070547199999999999E-26_DP, +.1025680058010470912000000000000E-27_DP, &
     -.3401102254316748799999999999999E-29_DP, +.1276642195630062933333333333333E-30_DP ]
-  LOGICAL, SAVE :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  D9LGMC
-  IF( first ) THEN
-    nalgm = INITDS(algmcs,15,D1MACH(3))
-    first = .FALSE.
-  END IF
+  ! nalgm = INITDS(algmcs,D1MACH(3))
   !
-  IF( X<10._DP ) CALL XERMSG('D9LGMC','X MUST BE GE 10',1,2)
-  IF( X>=xmax ) THEN
-    !
+  IF( X<10._DP ) THEN
+    ERROR STOP 'D9LGMC : X MUST BE >= 10'
+  ELSEIF( X<xbig ) THEN
+    D9LGMC = DCSEVL(2._DP*(10._DP/X)**2-1._DP,algmcs(1:nalgm))/X
+  ELSEIF( X<xmax ) THEN
+    D9LGMC = 1._DP/(12._DP*X)
+  ELSEIF( X>=xmax ) THEN
     D9LGMC = 0._DP
-    CALL XERMSG('D9LGMC','X SO BIG D9LGMC UNDERFLOWS',2,1)
-    RETURN
+    ! CALL XERMSG('D9LGMC : X SO BIG D9LGMC UNDERFLOWS',2,1)
   END IF
-  !
-  D9LGMC = 1._DP/(12._DP*X)
-  IF( X<xbig ) D9LGMC = DCSEVL(2._DP*(10._DP/X)**2-1._DP,algmcs,nalgm)/X
+
   RETURN
 END FUNCTION D9LGMC

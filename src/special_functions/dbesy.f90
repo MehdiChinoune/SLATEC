@@ -1,9 +1,9 @@
 !** DBESY
-SUBROUTINE DBESY(X,Fnu,N,Y)
+PURE SUBROUTINE DBESY(X,Fnu,N,Y)
   !> Implement forward recursion on the three term recursion
-  !            relation for a sequence of non-negative order Bessel
-  !            functions Y/SUB(FNU+I-1)/(X), I=1,...,N for REAL(SP), positive
-  !            X and non-negative orders FNU.
+  !  relation for a sequence of non-negative order Bessel
+  !  functions Y_{FNU+I-1}(X), I=1,...,N for REAL(SP), positive
+  !  X and non-negative orders FNU.
   !***
   ! **Library:**   SLATEC
   !***
@@ -20,7 +20,7 @@ SUBROUTINE DBESY(X,Fnu,N,Y)
   !     Abstract  **** a double precision routine ****
   !         DBESY implements forward recursion on the three term
   !         recursion relation for a sequence of non-negative order Bessel
-  !         functions Y/sub(FNU+I-1)/(X), I=1,N for real X > 0.0D0 and
+  !         functions Y_{FNU+I-1}(X), I=1,N for real X > 0.0D0 and
   !         non-negative orders FNU.  If FNU < NULIM, orders FNU and
   !         FNU+1 are obtained from DBSYNU which computes by a power
   !         series for X <= 2, the K Bessel function of an imaginary
@@ -46,7 +46,7 @@ SUBROUTINE DBESY(X,Fnu,N,Y)
   !
   !         Output
   !           Y      - a vector whose first N components contain values
-  !                    for the sequence Y(I)=Y/sub(FNU+I-1)/(X), I=1,N.
+  !                    for the sequence Y(I)=Y_{FNU+I-1}(X), I=1,N.
   !
   !     Error Conditions
   !         Improper input arguments - a fatal error
@@ -74,10 +74,11 @@ SUBROUTINE DBESY(X,Fnu,N,Y)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  USE service, ONLY : XERMSG, D1MACH, I1MACH
+  USE service, ONLY : D1MACH, I1MACH
   !
-  INTEGER :: N
-  REAL(DP) :: Fnu, X, Y(N)
+  INTEGER, INTENT(IN) :: N
+  REAL(DP), INTENT(IN) :: Fnu, X
+  REAL(DP), INTENT(OUT) :: Y(N)
   INTEGER :: i, iflw, j, nb, nd, nn, nud
   REAL(DP) :: azn, cn, dnu, elim, flgjy, fn, rann, s, s1, s2, tm, trx, w(2), &
     wk(7), w2n, xlim, xxn
@@ -87,21 +88,13 @@ SUBROUTINE DBESY(X,Fnu,N,Y)
   elim = 2.303_DP*(nn*D1MACH(5)-3._DP)
   xlim = D1MACH(1)*1.E+3_DP
   IF( Fnu<0._DP ) THEN
-    !
-    !
-    !
-    CALL XERMSG('DBESY','ORDER, FNU, LESS THAN ZERO',2,1)
-    RETURN
+    ERROR STOP 'DBESY : ORDER, FNU, < 0'
   ELSEIF( X<=0._DP ) THEN
-    CALL XERMSG('DBESY','X LESS THAN OR EQUAL TO ZERO',2,1)
-    RETURN
+    ERROR STOP 'DBESY : X <= 0'
   ELSEIF( X<xlim ) THEN
-    CALL XERMSG('DBESY',&
-      'OVERFLOW, FNU OR N TOO LARGE OR X TOO SMALL',6,1)
-    RETURN
+    ERROR STOP 'DBESY : OVERFLOW, FNU OR N TOO LARGE OR X TOO SMALL'
   ELSEIF( N<1 ) THEN
-    CALL XERMSG('DBESY','N LESS THAN ONE',2,1)
-    RETURN
+    ERROR STOP 'DBESY : N < 1'
   ELSE
     !
     !     ND IS A DUMMY VARIABLE FOR N
@@ -116,9 +109,7 @@ SUBROUTINE DBESY(X,Fnu,N,Y)
       !     OVERFLOW TEST
       IF( fn<=1._DP ) GOTO 200
       IF( -fn*(LOG(X)-0.693_DP)<=elim ) GOTO 200
-      CALL XERMSG('DBESY',&
-        'OVERFLOW, FNU OR N TOO LARGE OR X TOO SMALL',6,1)
-      RETURN
+      ERROR STOP 'DBESY : OVERFLOW, FNU OR N TOO LARGE OR X TOO SMALL'
     ELSE
       !
       !     OVERFLOW TEST  (LEADING EXPONENTIAL OF ASYMPTOTIC EXPANSION)
@@ -131,9 +122,7 @@ SUBROUTINE DBESY(X,Fnu,N,Y)
         azn = LOG((1._DP+rann)/xxn) - rann
         cn = fn*azn
         IF( cn>elim ) THEN
-          CALL XERMSG('DBESY',&
-            'OVERFLOW, FNU OR N TOO LARGE OR X TOO SMALL',6,1)
-          RETURN
+          ERROR STOP 'DBESY : OVERFLOW, FNU OR N TOO LARGE OR X TOO SMALL'
         END IF
       END IF
       IF( nud<nulim(nn) ) THEN
@@ -172,9 +161,7 @@ SUBROUTINE DBESY(X,Fnu,N,Y)
         flgjy = -1._DP
         CALL DASYJY(DYAIRY,X,Fnu,flgjy,nn,Y,wk,iflw)
         IF( iflw/=0 ) THEN
-          CALL XERMSG('DBESY',&
-            'OVERFLOW, FNU OR N TOO LARGE OR X TOO SMALL',6,1)
-          RETURN
+          ERROR STOP 'DBESY : OVERFLOW, FNU OR N TOO LARGE OR X TOO SMALL'
         ELSE
           IF( nn==1 ) RETURN
           trx = 2._DP/X
@@ -213,5 +200,6 @@ SUBROUTINE DBESY(X,Fnu,N,Y)
     CALL DBSYNU(X,Fnu,nd,Y)
     RETURN
   END IF
+
   RETURN
 END SUBROUTINE DBESY

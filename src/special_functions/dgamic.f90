@@ -1,5 +1,5 @@
 !** DGAMIC
-REAL(DP) FUNCTION DGAMIC(A,X)
+REAL(DP) ELEMENTAL FUNCTION DGAMIC(A,X)
   !> Calculate the complementary incomplete Gamma function.
   !***
   ! **Library:**   SLATEC (FNLIB)
@@ -8,8 +8,7 @@ REAL(DP) FUNCTION DGAMIC(A,X)
   !***
   ! **Type:**      DOUBLE PRECISION (GAMIC-S, DGAMIC-D)
   !***
-  ! **Keywords:**  COMPLEMENTARY INCOMPLETE GAMMA FUNCTION, FNLIB,
-  !             SPECIAL FUNCTIONS
+  ! **Keywords:**  COMPLEMENTARY INCOMPLETE GAMMA FUNCTION, FNLIB, SPECIAL FUNCTIONS
   !***
   ! **Author:**  Fullerton, W., (LANL)
   !***
@@ -50,15 +49,15 @@ REAL(DP) FUNCTION DGAMIC(A,X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920528  DESCRIPTION and REFERENCES sections revised.  (WRB)
-  USE service, ONLY : XERMSG, num_xer, D1MACH
-  REAL(DP) :: A, X
+  USE service, ONLY : D1MACH
+  REAL(DP), INTENT(IN) :: A, X
   INTEGER :: izero
   REAL(DP) :: aeps, ainta, algap1, alngs, alx, e, gstar, h, sga, sgng, sgngam, sgngs, t
   REAL(DP), PARAMETER :: eps = 0.5_DP*D1MACH(3), sqeps = SQRT(D1MACH(4)), &
     alneps = -LOG(D1MACH(3)), bot = LOG(D1MACH(1))
   !* FIRST EXECUTABLE STATEMENT  DGAMIC
   !
-  IF( X<0._DP ) CALL XERMSG('DGAMIC','X IS NEGATIVE',2,2)
+  IF( X<0._DP ) ERROR STOP 'DGAMIC : X IS NEGATIVE'
   !
   IF( X>0._DP ) THEN
     !
@@ -104,33 +103,25 @@ REAL(DP) FUNCTION DGAMIC(A,X)
     !
     h = 1._DP
     IF( izero/=1 ) THEN
-      !
       t = A*alx + alngs
       IF( t>alneps ) THEN
-        !
         sgng = -sgngs*sga*sgngam
         t = t + algap1 - LOG(ABS(A))
-        IF( t<bot ) num_xer = 0
         DGAMIC = sgng*EXP(t)
         RETURN
       ELSE
         IF( t>(-alneps) ) h = 1._DP - sgngs*EXP(t)
-        !
-        IF( ABS(h)<sqeps ) num_xer = 0
-        IF( ABS(h)<sqeps )&
-          CALL XERMSG('DGAMIC','RESULT LT HALF PRECISION',1,1)
+        ! IF( ABS(h)<sqeps ) CALL XERMSG('DGAMIC','RESULT LT HALF PRECISION',1,1)
       END IF
     END IF
+    sgng = SIGN(1._DP,h)*sga*sgngam
+    t = LOG(ABS(h)) + algap1 - LOG(ABS(A))
+    DGAMIC = sgng*EXP(t)
+  ELSEIF( A<=0._DP ) THEN
+    ERROR STOP 'DGAMIC : X = 0 AND A <= 0 SO DGAMIC IS UNDEFINED'
   ELSE
-    IF( A<=0._DP ) CALL XERMSG('DGAMIC','X = 0 AND A LE 0 SO DGAMIC IS UNDEFINED',3,2)
-    !
     DGAMIC = EXP(LOG_GAMMA(A+1._DP)-LOG(A))
-    RETURN
   END IF
-  !
-  sgng = SIGN(1._DP,h)*sga*sgngam
-  t = LOG(ABS(h)) + algap1 - LOG(ABS(A))
-  IF( t<bot ) num_xer = 0
-  DGAMIC = sgng*EXP(t)
+
   RETURN
 END FUNCTION DGAMIC

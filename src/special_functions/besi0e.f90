@@ -1,7 +1,7 @@
 !** BESI0E
-REAL(SP) FUNCTION BESI0E(X)
-  !> Compute the exponentially scaled modified (hyperbolic)
-  !            Bessel function of the first kind of order zero.
+REAL(SP) ELEMENTAL FUNCTION BESI0E(X)
+  !> Compute the exponentially scaled modified (hyperbolic) Bessel function of
+  !  the first kind of order zero.
   !***
   ! **Library:**   SLATEC (FNLIB)
   !***
@@ -52,9 +52,9 @@ REAL(SP) FUNCTION BESI0E(X)
   !   890313  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   USE service, ONLY : R1MACH
-  REAL(SP) :: X
+  REAL(SP), INTENT(IN) :: X
   REAL(SP) :: y
-  INTEGER, SAVE :: nti0, ntai0, ntai02
+  INTEGER, PARAMETER :: nti0 = 7, ntai0 = 9, ntai02 = 6
   REAL(SP), PARAMETER :: xsml = SQRT(4.5_SP*R1MACH(3))
   REAL(SP), PARAMETER :: bi0cs(12) = [ -.07660547252839144951_SP, 1.927337953993808270_SP, &
     .2282644586920301339_SP, .01304891466707290428_SP, .00043442709008164874_SP, &
@@ -77,24 +77,21 @@ REAL(SP) FUNCTION BESI0E(X)
     .00000000000001539_SP, -.00000000000004151_SP,-.00000000000000954_SP, &
     .00000000000000382_SP, .00000000000000176_SP, -.00000000000000034_SP, &
     -.00000000000000027_SP, .00000000000000003_SP ]
-  LOGICAL, SAVE :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  BESI0E
-  IF( first ) THEN
-    nti0 = INITS(bi0cs,12,0.1_SP*R1MACH(3))
-    ntai0 = INITS(ai0cs,21,0.1_SP*R1MACH(3))
-    ntai02 = INITS(ai02cs,22,0.1_SP*R1MACH(3))
-    first = .FALSE.
-  END IF
+  ! nti0 = INITS(bi0cs,0.1_SP*R1MACH(3))
+  ! ntai0 = INITS(ai0cs,0.1_SP*R1MACH(3))
+  ! ntai02 = INITS(ai02cs,0.1_SP*R1MACH(3))
   !
   y = ABS(X)
-  IF( y>3._SP ) THEN
-    !
-    IF( y<=8. ) BESI0E = (0.375_SP+CSEVL((48._SP/y-11._SP)/5._SP,ai0cs,ntai0))/SQRT(y)
-    IF( y>8. ) BESI0E = (0.375_SP+CSEVL(16._SP/y-1._SP,ai02cs,ntai02))/SQRT(y)
-    RETURN
+  IF( y<=xsml ) THEN
+    BESI0E = 1._SP - X
+  ELSEIF( y<=3._SP ) THEN
+    BESI0E = EXP(-y)*(2.75_SP+CSEVL(y*y/4.5_SP-1._SP,bi0cs(1:nti0)))
+  ELSEIF( y<=8. ) THEN
+    BESI0E = (0.375_SP+CSEVL((48._SP/y-11._SP)/5._SP,ai0cs(1:ntai0)))/SQRT(y)
+  ELSE
+    BESI0E = (0.375_SP+CSEVL(16._SP/y-1._SP,ai02cs(1:ntai02)))/SQRT(y)
   END IF
-  !
-  BESI0E = 1._SP - X
-  IF( y>xsml ) BESI0E = EXP(-y)*(2.75_SP+CSEVL(y*y/4.5_SP-1._SP,bi0cs,nti0))
+
   RETURN
 END FUNCTION BESI0E

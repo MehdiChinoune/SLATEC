@@ -1,5 +1,5 @@
 !** DBKISR
-SUBROUTINE DBKISR(X,N,Summ,Ierr)
+ELEMENTAL SUBROUTINE DBKISR(X,N,Summ,Ierr)
   !> Subsidiary to DBSKIN
   !***
   ! **Library:**   SLATEC
@@ -26,8 +26,12 @@ SUBROUTINE DBKISR(X,N,Summ,Ierr)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
   USE service, ONLY : D1MACH
-  INTEGER :: i, Ierr, k, kk, kkn, k1, N, np
-  REAL(DP) :: ak, atol, bk, fk, fn, hx, hxs, pol, pr, Summ, tkp, tol, trm, X, xln
+  INTEGER, INTENT(IN) :: N
+  INTEGER, INTENT(OUT) :: Ierr
+  REAL(DP), INTENT(IN) :: X
+  REAL(DP), INTENT(OUT) :: Summ
+  INTEGER :: i, k, kk, kkn, k1, np
+  REAL(DP) :: ak, atol, bk, fk, fn, hx, hxs, pol, pr, tkp, tol, trm, xln
   !
   REAL(DP), PARAMETER :: c(2) = [ 1.57079632679489662_DP, 1._DP ]
   !* FIRST EXECUTABLE STATEMENT  DBKISR
@@ -81,5 +85,6 @@ SUBROUTINE DBKISR(X,N,Summ,Ierr)
   100  Summ = (Summ*hxs+DPSIXN(np)-xln)*pr
   IF( N==1 ) Summ = -Summ
   Summ = pol + Summ
+
   RETURN
 END SUBROUTINE DBKISR

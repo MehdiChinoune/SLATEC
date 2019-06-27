@@ -1,5 +1,5 @@
 !** JAIRY
-SUBROUTINE JAIRY(X,Rx,C,Ai,Dai)
+PURE SUBROUTINE JAIRY(X,Rx,C,Ai,Dai)
   !> Subsidiary to BESJ and BESY
   !***
   ! **Library:**   SLATEC
@@ -12,8 +12,7 @@ SUBROUTINE JAIRY(X,Rx,C,Ai,Dai)
   !***
   ! **Description:**
   !
-  !                  JAIRY computes the Airy function AI(X)
-  !                   and its derivative DAI(X) for ASYJY
+  !    JAIRY computes the Airy function AI(X) and its derivative DAI(X) for ASYJY
   !
   !                                   INPUT
   !
@@ -39,7 +38,9 @@ SUBROUTINE JAIRY(X,Rx,C,Ai,Dai)
   !   910408  Updated the AUTHOR section.  (WRB)
 
   !
-  REAL(SP) :: Ai, C, Dai, Rx, X
+  REAL(SP), INTENT(IN) :: X
+  REAL(SP), INTENT(INOUT) :: C, Rx
+  REAL(SP), INTENT(OUT) :: Ai, Dai
   INTEGER :: i, j
   REAL(SP) :: ccv, cv, ec, e1, e2, f1, f2, rtrx, scv, t, temp1, temp2, tt
   INTEGER, PARAMETER :: n1 = 14, n2 = 23, n3 = 19, n4 = 15

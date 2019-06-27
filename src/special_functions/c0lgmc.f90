@@ -1,7 +1,6 @@
 !** C0LGMC
-COMPLEX(SP) FUNCTION C0LGMC(Z)
-  !> Evaluate (Z+0.5)*LOG((Z+1.)/Z) - 1.0 with relative
-  !            accuracy.
+COMPLEX(SP) ELEMENTAL FUNCTION C0LGMC(Z)
+  !> Evaluate (Z+0.5)*LOG((Z+1.)/Z) - 1.0 with relative accuracy.
   !***
   ! **Library:**   SLATEC (FNLIB)
   !***
@@ -32,18 +31,23 @@ COMPLEX(SP) FUNCTION C0LGMC(Z)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   USE service, ONLY : R1MACH
-  COMPLEX(SP) :: Z
+  COMPLEX(SP), INTENT(IN) :: Z
   REAL(SP) :: cabsz
   COMPLEX(SP) :: q
   REAL(SP), PARAMETER :: rbig = 1._SP/R1MACH(3)
   !* FIRST EXECUTABLE STATEMENT  C0LGMC
   !
   cabsz = ABS(Z)
-  IF( cabsz>rbig ) C0LGMC = -(Z+0.5_SP)*LOG(Z) - Z
-  IF( cabsz>rbig ) RETURN
-  !
-  q = 1._SP/Z
-  IF( cabsz<=1.23 ) C0LGMC = (Z+0.5_SP)*LOG(1._SP+q) - 1._SP
-  IF( cabsz>1.23 ) C0LGMC = ((1._SP+.5_SP*q)*C9LN2R(q)-.25_SP)*q**2
-  !
+  IF( cabsz>rbig ) THEN
+     C0LGMC = -(Z+0.5_SP)*LOG(Z) - Z
+  ELSE
+    q = 1._SP/Z
+    IF( cabsz<=1.23 ) THEN
+      C0LGMC = (Z+0.5_SP)*LOG(1._SP+q) - 1._SP
+    ELSE
+      C0LGMC = ((1._SP+.5_SP*q)*C9LN2R(q)-.25_SP)*q**2
+    END IF
+  END IF
+
+  RETURN
 END FUNCTION C0LGMC

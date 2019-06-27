@@ -24,7 +24,7 @@ SUBROUTINE ZMLRI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol)
   !   930122  Added ZEXP and ZLOG to EXTERNAL statement.  (RWC)
   USE service, ONLY : D1MACH
   !     COMPLEX CK,CNORM,CONE,CTWO,CZERO,PT,P1,P2,RZ,SUM,Y,Z
-  INTEGER :: i, iaz, idum, ifnu, inu, itime, k, kk, km, Kode, m, N, Nz
+  INTEGER :: i, iaz, ifnu, inu, itime, k, kk, km, Kode, m, N, Nz
   REAL(DP) :: ack, ak, ap, at, az, bk, cki, ckr, cnormi, cnormr, fkap, fkk, flam, &
     fnf, Fnu, pti, ptr, p1i, p1r, p2i, p2r, raz, rho, rho2, rzi, rzr, scle, sti, &
     str, sumi, sumr, tfnf, Tol, tst, Yi(N), Yr(N), Zi, Zr
@@ -128,7 +128,7 @@ SUBROUTINE ZMLRI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol)
   p2i = zeroi
   fnf = Fnu - ifnu
   tfnf = fnf + fnf
-  bk = DGAMLN(fkk+tfnf+1._DP,idum) - DGAMLN(fkk+1._DP,idum) - DGAMLN(tfnf+1._DP,idum)
+  bk = LOG_GAMMA(fkk+tfnf+1._DP) - LOG_GAMMA(fkk+1._DP) - LOG_GAMMA(tfnf+1._DP)
   bk = EXP(bk)
   sumr = zeror
   sumi = zeroi
@@ -187,10 +187,10 @@ SUBROUTINE ZMLRI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol)
   ptr = Zr
   pti = Zi
   IF( Kode==2 ) ptr = zeror
-  CALL ZLOG(rzr,rzi,str,sti,idum)
+  CALL ZLOG(rzr,rzi,str,sti)
   p1r = -fnf*str + ptr
   p1i = -fnf*sti + pti
-  ap = DGAMLN(1._DP+fnf,idum)
+  ap = LOG_GAMMA(1._DP+fnf)
   ptr = p1r - ap
   pti = p1i
   !-----------------------------------------------------------------------

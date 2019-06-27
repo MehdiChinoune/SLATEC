@@ -1,7 +1,6 @@
 !** BESK1
-REAL(SP) FUNCTION BESK1(X)
-  !> Compute the modified (hyperbolic) Bessel function of the
-  !            third kind of order one.
+REAL(SP) ELEMENTAL FUNCTION BESK1(X)
+  !> Compute the modified (hyperbolic) Bessel function of the third kind of order one.
   !***
   ! **Library:**   SLATEC (FNLIB)
   !***
@@ -10,8 +9,7 @@ REAL(SP) FUNCTION BESK1(X)
   ! **Type:**      SINGLE PRECISION (BESK1-S, DBESK1-D)
   !***
   ! **Keywords:**  FNLIB, HYPERBOLIC BESSEL FUNCTION,
-  !             MODIFIED BESSEL FUNCTION, ORDER ONE, SPECIAL FUNCTIONS,
-  !             THIRD KIND
+  !             MODIFIED BESSEL FUNCTION, ORDER ONE, SPECIAL FUNCTIONS, THIRD KIND
   !***
   ! **Author:**  Fullerton, W., (LANL)
   !***
@@ -39,10 +37,10 @@ REAL(SP) FUNCTION BESK1(X)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
-  USE service, ONLY : XERMSG, R1MACH
-  REAL(SP) :: X
+  USE service, ONLY : R1MACH
+  REAL(SP), INTENT(IN) :: X
   REAL(SP) :: y
-  INTEGER, SAVE :: ntk1
+  INTEGER, PARAMETER :: ntk1 = 7
   REAL(SP), PARAMETER :: xmin = EXP(MAX(LOG(R1MACH(1)),-LOG(R1MACH(2)))+.01_SP), &
     xsml = SQRT(4._SP*R1MACH(3)), xmaxt = -LOG(R1MACH(1)), &
     xmax = xmaxt - 0.5_SP*xmaxt*LOG(xmaxt)/(xmaxt+0.5_SP)
@@ -50,27 +48,23 @@ REAL(SP) FUNCTION BESK1(X)
     -.122611180822657148_SP, -.0069757238596398643_SP,-.0001730288957513052_SP, &
     -.0000024334061415659_SP, -.0000000221338763073_SP,-.0000000001411488392_SP, &
     -.0000000000006666901_SP, -.0000000000000024274_SP,-.0000000000000000070_SP ]
-  LOGICAL, SAVE :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  BESK1
-  IF( first ) THEN
-    ntk1 = INITS(bk1cs,11,0.1_SP*R1MACH(3))
-    first = .FALSE.
-  END IF
+  ! ntk1 = INITS(bk1cs,0.1_SP*R1MACH(3))
   !
-  IF( X<=0. ) CALL XERMSG('BESK1','X IS ZERO OR NEGATIVE',2,2)
-  IF( X>2._SP ) THEN
-    !
-    BESK1 = 0.
-    IF( X>xmax ) CALL XERMSG('BESK1','X SO BIG K1 UNDERFLOWS',1,1)
-    IF( X>xmax ) RETURN
-    !
+  IF( X<=0. ) THEN
+    ERROR STOP 'BESK1 : X <= 0'
+  ELSEIF( X<xmin ) THEN
+    ERROR STOP 'BESK1 : X SO SMALL K1 OVERFLOWS'
+  ELSEIF( X<=2._SP ) THEN
+    y = 0.
+    IF( X>xsml ) y = X*X
+    BESK1 = LOG(0.5_SP*X)*BESI1(X) + (0.75_SP+CSEVL(.5_SP*y-1._SP,bk1cs(1:ntk1)))/X
+  ELSEIF( X<=xmax ) THEN
     BESK1 = EXP(-X)*BESK1E(X)
-    RETURN
+  ELSE
+    BESK1 = 0.
+    ! CALL XERMSG('BESK1 : X SO BIG K1 UNDERFLOWS',1,1)
   END IF
-  !
-  IF( X<xmin ) CALL XERMSG('BESK1','X SO SMALL K1 OVERFLOWS',3,2)
-  y = 0.
-  IF( X>xsml ) y = X*X
-  BESK1 = LOG(0.5_SP*X)*BESI1(X) + (0.75_SP+CSEVL(.5_SP*y-1._SP,bk1cs,ntk1))/X
+
   RETURN
 END FUNCTION BESK1

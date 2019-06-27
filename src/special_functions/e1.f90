@@ -1,5 +1,5 @@
 !** E1
-REAL(SP) FUNCTION E1(X)
+REAL(SP) ELEMENTAL FUNCTION E1(X)
   !> Compute the exponential integral E1(X).
   !***
   ! **Library:**   SLATEC (FNLIB)
@@ -8,8 +8,7 @@ REAL(SP) FUNCTION E1(X)
   !***
   ! **Type:**      SINGLE PRECISION (E1-S, DE1-D)
   !***
-  ! **Keywords:**  E1 FUNCTION, EXPONENTIAL INTEGRAL, FNLIB,
-  !             SPECIAL FUNCTIONS
+  ! **Keywords:**  E1 FUNCTION, EXPONENTIAL INTEGRAL, FNLIB, SPECIAL FUNCTIONS
   !***
   ! **Author:**  Fullerton, W., (LANL)
   !***
@@ -79,9 +78,10 @@ REAL(SP) FUNCTION E1(X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920618  Removed space from variable names.  (RWC, WRB)
-  USE service, ONLY : XERMSG, R1MACH
-  REAL(SP) :: X
-  INTEGER, SAVE :: ntae11, ntae12, nte11, nte12, ntae13, ntae14
+  USE service, ONLY : R1MACH
+  REAL(SP), INTENT(IN) :: X
+  INTEGER, PARAMETER :: ntae11 = 14, ntae12 = 11, nte11 = 11, nte12 = 9, &
+    ntae13 = 11, ntae14 = 11
   REAL(SP), PARAMETER :: eta = 0.1_SP*R1MACH(3), xmaxt = -LOG(R1MACH(1)), &
     xmax = xmaxt - LOG(xmaxt)
   REAL(SP), PARAMETER :: ae11cs(39) = [ .12150323971606579_SP, -.065088778513550150_SP, &
@@ -138,65 +138,39 @@ REAL(SP) FUNCTION E1(X)
     -.00000000000052538_SP, .00000000000015592_SP,-.00000000000004729_SP, &
     .00000000000001463_SP, -.00000000000000461_SP, .00000000000000148_SP, &
     -.00000000000000048_SP, .00000000000000016_SP,-.00000000000000005_SP ]
-  LOGICAL, SAVE :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  E1
-  IF( first ) THEN
-    ntae11 = INITS(ae11cs,39,eta)
-    ntae12 = INITS(ae12cs,25,eta)
-    nte11 = INITS(e11cs,19,eta)
-    nte12 = INITS(e12cs,16,eta)
-    ntae13 = INITS(ae13cs,25,eta)
-    ntae14 = INITS(ae14cs,26,eta)
-    first = .FALSE.
-  END IF
+  ! ntae11 = INITS(ae11cs,eta)
+  ! ntae12 = INITS(ae12cs,eta)
+  ! nte11 = INITS(e11cs,eta)
+  ! nte12 = INITS(e12cs,eta)
+  ! ntae13 = INITS(ae13cs,eta)
+  ! ntae14 = INITS(ae14cs,eta)
   !
+  IF( X==0. ) ERROR STOP 'E1 : X IS 0'
+
   IF( X<=(-10._SP) ) THEN
-    !
     ! E1(X) = -EI(-X) FOR X <= -10.
-    !
-    E1 = EXP(-X)/X*(1._SP+CSEVL(20._SP/X+1._SP,ae11cs,ntae11))
-    RETURN
-    !
+    E1 = EXP(-X)/X*(1._SP+CSEVL(20._SP/X+1._SP,ae11cs(1:ntae11)))
   ELSEIF( X<=(-4._SP) ) THEN
-    !
     ! E1(X) = -EI(-X) FOR -10. < X <= -4.
-    !
-    E1 = EXP(-X)/X*(1._SP+CSEVL((40._SP/X+7._SP)/3._SP,ae12cs,ntae12))
-    RETURN
-    !
+    E1 = EXP(-X)/X*(1._SP+CSEVL((40._SP/X+7._SP)/3._SP,ae12cs(1:ntae12)))
   ELSEIF( X<=(-1._SP) ) THEN
-    !
     ! E1(X) = -EI(-X) FOR -4. < X <= -1.
-    !
-    E1 = -LOG(ABS(X)) + CSEVL((2._SP*X+5._SP)/3._SP,e11cs,nte11)
-    RETURN
-    !
+    E1 = -LOG(ABS(X)) + CSEVL((2._SP*X+5._SP)/3._SP,e11cs(1:nte11))
   ELSEIF( X<=1. ) THEN
-    IF( X==0. ) CALL XERMSG('E1','X IS 0',2,2)
-    !
     ! E1(X) = -EI(-X) FOR -1. < X <= 1.,  X /= 0.
-    !
-    E1 = (-LOG(ABS(X))-0.6875_SP+X) + CSEVL(X,e12cs,nte12)
-    RETURN
-    !
+    E1 = (-LOG(ABS(X))-0.6875_SP+X) + CSEVL(X,e12cs(1:nte12))
   ELSEIF( X<=4. ) THEN
-    !
     ! E1(X) = -EI(-X) FOR 1. < X <= 4.
-    !
-    E1 = EXP(-X)/X*(1._SP+CSEVL((8._SP/X-5._SP)/3._SP,ae13cs,ntae13))
-    RETURN
-    !
-  ELSEIF( X>xmax ) THEN
-    !
+    E1 = EXP(-X)/X*(1._SP+CSEVL((8._SP/X-5._SP)/3._SP,ae13cs(1:ntae13)))
+  ELSEIF( X<=xmax ) THEN
+    ! E1(X) = -EI(-X) FOR 4. < X <= XMAX
+    E1 = EXP(-X)/X*(1._SP+CSEVL(8._SP/X-1._SP,ae14cs(1:ntae14)))
+  ELSE
     ! E1(X) = -EI(-X) FOR X > XMAX
-    !
-    CALL XERMSG('E1','X SO BIG E1 UNDERFLOWS',1,1)
+    ! CALL XERMSG('E1 : X SO BIG E1 UNDERFLOWS',1,1)
     E1 = 0.
-    RETURN
   END IF
-  !
-  ! E1(X) = -EI(-X) FOR 4. < X <= XMAX
-  !
-  E1 = EXP(-X)/X*(1._SP+CSEVL(8._SP/X-1._SP,ae14cs,ntae14))
+
   RETURN
 END FUNCTION E1

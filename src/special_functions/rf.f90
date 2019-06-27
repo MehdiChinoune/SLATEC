@@ -1,8 +1,8 @@
 !** RF
-REAL(SP) FUNCTION RF(X,Y,Z,Ier)
+REAL(SP) ELEMENTAL FUNCTION RF(X,Y,Z)
   !> Compute the incomplete or complete elliptic integral of the
-  !            1st kind.  For X, Y, and Z non-negative and at most one of
-  !            them zero, RF(X,Y,Z) = Integral from zero to infinity of
+  !  1st kind.  For X, Y, and Z non-negative and at most one of
+  !  them zero, RF(X,Y,Z) = Integral from zero to infinity of
   !                                -1/2     -1/2     -1/2
   !                      (1/2)(t+X)    (t+Y)    (t+Z)    dt.
   !            If X, Y or Z is zero, the integral is complete.
@@ -250,9 +250,8 @@ REAL(SP) FUNCTION RF(X,Y,Z,Ier)
   !   900510  Changed calls to XERMSG to standard form, and some
   !           editorial changes.  (RWC))
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  USE service, ONLY : XERMSG, R1MACH
-  INTEGER :: Ier
-  REAL(SP) :: X, Y, Z
+  USE service, ONLY : R1MACH
+  REAL(SP), INTENT(IN) :: X, Y, Z
   REAL(SP) :: epslon, e2, e3, lamda, mu, s, xn, xndev, xnroot, yn, yndev, ynroot, &
     zn, zndev, znroot
   CHARACTER(16) :: xern3, xern4, xern5, xern6
@@ -266,38 +265,31 @@ REAL(SP) FUNCTION RF(X,Y,Z,Ier)
   !
   RF = 0._SP
   IF( MIN(X,Y,Z)<0._SP ) THEN
-    Ier = 1
     WRITE (xern3,'(1PE15.6)') X
     WRITE (xern4,'(1PE15.6)') Y
     WRITE (xern5,'(1PE15.6)') Z
-    CALL XERMSG('RF','MIN(X,Y,Z)<0 WHERE X = '//xern3//' Y = '//&
-      xern4//' AND Z = '//xern5,1,1)
-    RETURN
+    ERROR STOP 'RF : MIN(X,Y,Z)<0 WHERE X = '//xern3//' Y = '//&
+      xern4//' AND Z = '//xern5
   END IF
   !
   IF( MAX(X,Y,Z)>uplim ) THEN
-    Ier = 3
     WRITE (xern3,'(1PE15.6)') X
     WRITE (xern4,'(1PE15.6)') Y
     WRITE (xern5,'(1PE15.6)') Z
     WRITE (xern6,'(1PE15.6)') uplim
-    CALL XERMSG('RF','MAX(X,Y,Z)>UPLIM WHERE X = '//xern3//&
-      ' Y = '//xern4//' Z = '//xern5//' AND UPLIM = '//xern6,3,1)
-    RETURN
+    ERROR STOP 'RF : MAX(X,Y,Z)>UPLIM WHERE X = '//xern3//&
+      ' Y = '//xern4//' Z = '//xern5//' AND UPLIM = '//xern6
   END IF
   !
   IF( MIN(X+Y,X+Z,Y+Z)<lolim ) THEN
-    Ier = 2
     WRITE (xern3,'(1PE15.6)') X
     WRITE (xern4,'(1PE15.6)') Y
     WRITE (xern5,'(1PE15.6)') Z
     WRITE (xern6,'(1PE15.6)') lolim
-    CALL XERMSG('RF','MIN(X+Y,X+Z,Y+Z)<LOLIM WHERE X = '//&
-      xern3//' Y = '//xern4//' Z = '//xern5//' AND LOLIM = '//xern6,2,1)
-    RETURN
+    ERROR STOP 'RF : MIN(X+Y,X+Z,Y+Z)<LOLIM WHERE X = '//&
+      xern3//' Y = '//xern4//' Z = '//xern5//' AND LOLIM = '//xern6
   END IF
   !
-  Ier = 0
   xn = X
   yn = Y
   zn = Z

@@ -1,5 +1,5 @@
 !** PSI
-REAL(SP) FUNCTION PSI(X)
+REAL(SP) ELEMENTAL FUNCTION PSI(X)
   !> Compute the Psi (or Digamma) function.
   !***
   ! **Library:**   SLATEC (FNLIB)
@@ -42,11 +42,11 @@ REAL(SP) FUNCTION PSI(X)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900727  Added EXTERNAL statement.  (WRB)
   !   920618  Removed space from variable names.  (RWC, WRB)
-  USE service, ONLY : XERMSG, R1MACH
-  REAL(SP) :: X
+  USE service, ONLY : R1MACH
+  REAL(SP), INTENT(IN) :: X
   INTEGER :: i, n
   REAL(SP) :: aux, y
-  INTEGER, SAVE :: ntpsi, ntapsi
+  INTEGER, PARAMETER :: ntpsi = 12, ntapsi = 5
   REAL(SP), PARAMETER :: xbig = 1._SP/SQRT(R1MACH(3)), dxrel = SQRT(R1MACH(4))
   REAL(SP), PARAMETER :: psics(23) = [ -.038057080835217922_SP, .49141539302938713_SP, &
     -.056815747821244730_SP, .008357821225914313_SP,-.001333232857994342_SP, &
@@ -63,13 +63,9 @@ REAL(SP) FUNCTION PSI(X)
     -.0000000000000228_SP, .0000000000000045_SP,-.0000000000000009_SP, &
     .0000000000000002_SP, -.0000000000000000_SP ]
   REAL(SP), PARAMETER :: pi = 3.14159265358979324_SP
-  LOGICAL, SAVE :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  PSI
-  IF( first ) THEN
-    ntpsi = INITS(psics,23,0.1_SP*R1MACH(3))
-    ntapsi = INITS(apsics,16,0.1_SP*R1MACH(3))
-    first = .FALSE.
-  END IF
+  ! ntpsi = INITS(psics,0.1_SP*R1MACH(3))
+  ! ntapsi = INITS(apsics,0.1_SP*R1MACH(3))
   !
   y = ABS(X)
   IF( y>=2._SP ) THEN
@@ -77,7 +73,7 @@ REAL(SP) FUNCTION PSI(X)
     ! PSI(X) FOR ABS(X) >= 2.
     !
     aux = 0.
-    IF( y<xbig ) aux = CSEVL(8._SP/y**2-1._SP,apsics,ntapsi)
+    IF( y<xbig ) aux = CSEVL(8._SP/y**2-1._SP,apsics(1:ntapsi))
     IF( X<0. ) THEN
       PSI = LOG(ABS(X)) - 0.5_SP/X + aux - pi*COT(pi*X)
     ELSE
@@ -92,19 +88,19 @@ REAL(SP) FUNCTION PSI(X)
   IF( X<0. ) n = n - 1
   y = X - n
   n = n - 1
-  PSI = CSEVL(2._SP*y-1._SP,psics,ntpsi)
+  PSI = CSEVL(2._SP*y-1._SP,psics(1:ntpsi))
   IF( n==0 ) RETURN
   !
   n = -n
-  IF( X==0. ) CALL XERMSG('PSI','X IS 0',2,2)
-  IF( X<0. .AND. X+n-2==0. )&
-    CALL XERMSG('PSI','X IS A NEGATIVE INTEGER',3,2)
-  IF( X<(-0.5_SP) .AND. ABS((X-AINT(X-0.5_SP))/X)<dxrel )&
-    CALL XERMSG('PSI',&
-    'ANSWER LT HALF PRECISION BECAUSE X TOO NEAR NEGATIVE INTEGER',1,1)
+  IF( X==0. ) ERROR STOP 'PSI : X IS 0'
+  IF( X<0. .AND. X+n-2==0. ) ERROR STOP 'PSI : X IS A NEGATIVE INTEGER'
+  ! IF( X<(-0.5_SP) .AND. ABS((X-AINT(X-0.5_SP))/X)<dxrel ) THEN
+    ! 'PSI : ANSWER LT HALF PRECISION BECAUSE X TOO NEAR NEGATIVE INTEGER',1,1)
+  ! END IF
   !
   DO i = 1, n
     PSI = PSI - 1._SP/(X+i-1)
   END DO
+
   RETURN
 END FUNCTION PSI

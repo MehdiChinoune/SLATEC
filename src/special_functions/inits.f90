@@ -1,7 +1,7 @@
 !** INITS
-INTEGER FUNCTION INITS(Os,Nos,Eta)
+INTEGER PURE FUNCTION INITS(Os,Eta)
   !> Determine the number of terms needed in an orthogonal
-  !            polynomial series so that it meets a specified accuracy.
+  !  polynomial series so that it meets a specified accuracy.
   !***
   ! **Library:**   SLATEC (FNLIB)
   !***
@@ -40,24 +40,21 @@ INTEGER FUNCTION INITS(Os,Nos,Eta)
   !   891115  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-  USE service, ONLY : XERMSG
-  INTEGER :: Nos
-  REAL(SP) :: Os(Nos), Eta
-  INTEGER :: i, ii
+  REAL(SP), INTENT(IN) :: Eta
+  REAL(SP), INTENT(IN) :: Os(:)
+  INTEGER :: i, ii, nos
   REAL(SP) :: err
   !* FIRST EXECUTABLE STATEMENT  INITS
-  IF( Nos<1 ) CALL XERMSG('INITS',&
-    'Number of coefficients is less than 1',2,1)
+  nos = SIZE( Os )
   !
-  err = 0.
-  DO ii = 1, Nos
-    i = Nos + 1 - ii
+  err = 0._SP
+  DO ii = 1, nos
+    i = nos + 1 - ii
     err = err + ABS(Os(i))
     IF( err>Eta ) EXIT
   END DO
   !
-  IF( i==Nos ) CALL XERMSG('INITS',&
-    'Chebyshev series too short for specified accuracy',1,1)
+  !IF( i==nos ) CALL XERMSG('INITS : Chebyshev series too short for specified accuracy',1,1)
   INITS = i
   !
 END FUNCTION INITS

@@ -21,12 +21,12 @@ SUBROUTINE ZEXP(Ar,Ai,Br,Bi)
   !* REVISION HISTORY  (YYMMDD)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
-  
-  REAL(DP) :: Ar, Ai, Br, Bi, zm, ca, cb
+
+  COMPLEX(DP) :: B
+  REAL(DP) :: Ar, Ai, Br, Bi
   !* FIRST EXECUTABLE STATEMENT  ZEXP
-  zm = EXP(Ar)
-  ca = zm*COS(Ai)
-  cb = zm*SIN(Ai)
-  Br = ca
-  Bi = cb
+  B = EXP( CMPLX( Ar, Ai, DP ) )
+  Br = REAL(B,DP)
+  Bi = AIMAG(B)
+
 END SUBROUTINE ZEXP

@@ -1,7 +1,7 @@
 !** DBSI1E
-REAL(DP) FUNCTION DBSI1E(X)
+REAL(DP) ELEMENTAL FUNCTION DBSI1E(X)
   !> Compute the exponentially scaled modified (hyperbolic)
-  !            Bessel function of the first kind of order one.
+  !  Bessel function of the first kind of order one.
   !***
   ! **Library:**   SLATEC (FNLIB)
   !***
@@ -51,10 +51,10 @@ REAL(DP) FUNCTION DBSI1E(X)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-  USE service, ONLY : XERMSG, D1MACH
-  REAL(DP) :: X
+  USE service, ONLY : D1MACH
+  REAL(DP), INTENT(IN) :: X
   REAL(DP) :: y
-  INTEGER, SAVE :: nti1, ntai1, ntai12
+  INTEGER, PARAMETER :: nti1 = 11, ntai1 = 22, ntai12 = 24
   REAL(DP), PARAMETER :: eta = 0.1_DP*D1MACH(3), xmin = 2._DP*D1MACH(1), &
     xsml = SQRT(4.5_DP*D1MACH(3))
   REAL(DP), PARAMETER :: bi1cs(17) = [ -.19717132610998597316138503218149E-2_DP, &
@@ -125,31 +125,31 @@ REAL(DP) FUNCTION DBSI1E(X)
     -.1287704952660084820376875598959E-29_DP, +.1114548172988164547413709273694E-29_DP, &
     -.1808343145039336939159368876687E-30_DP, -.2231677718203771952232448228939E-30_DP, &
     +.1619029596080341510617909803614E-30_DP, -.1834079908804941413901308439210E-31_DP ]
-  LOGICAL, SAVE :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  DBSI1E
-  IF( first ) THEN
-    nti1 = INITDS(bi1cs,17,eta)
-    ntai1 = INITDS(ai1cs,46,eta)
-    ntai12 = INITDS(ai12cs,69,eta)
-    first = .FALSE.
-  END IF
+  ! nti1 = INITDS(bi1cs,eta)
+  ! ntai1 = INITDS(ai1cs,eta)
+  ! ntai12 = INITDS(ai12cs,eta)
   !
   y = ABS(X)
+
   IF( y>3._DP ) THEN
-    !
-    IF( y<=8._DP ) DBSI1E = (0.375_DP+DCSEVL((48._DP/y-11._DP)/5._DP,ai1cs,ntai1))/SQRT(y)
-    IF( y>8._DP ) DBSI1E = (0.375_DP+DCSEVL(16._DP/y-1._DP,ai12cs,ntai12))/SQRT(y)
+    IF( y<=8._DP ) THEN
+      DBSI1E = (0.375_DP+DCSEVL((48._DP/y-11._DP)/5._DP,ai1cs(1:ntai1)))/SQRT(y)
+    ELSE
+      DBSI1E = (0.375_DP+DCSEVL(16._DP/y-1._DP,ai12cs(1:ntai12)))/SQRT(y)
+    END IF
     DBSI1E = SIGN(DBSI1E,X)
-    RETURN
+  ELSEIF( X>xmin ) THEN
+    IF( y>xsml ) THEN
+      DBSI1E = X*(0.875_DP+DCSEVL(y*y/4.5_DP-1._DP,bi1cs(1:nti1)))
+    ELSE
+      DBSI1E = 0.5_DP*X
+    END IF
+    DBSI1E = EXP(-y)*DBSI1E
+  ELSE
+    DBSI1E = 0._DP
+    ! IF( y<=xmin ) CALL XERMSG('DBSI1E','ABS(X) SO SMALL I1 UNDERFLOWS',1,1)
   END IF
-  !
-  DBSI1E = 0._DP
-  IF( y==0._DP ) RETURN
-  !
-  IF( y<=xmin ) CALL XERMSG('DBSI1E',&
-    'ABS(X) SO SMALL I1 UNDERFLOWS',1,1)
-  IF( y>xmin ) DBSI1E = 0.5_DP*X
-  IF( y>xsml ) DBSI1E = X*(0.875_DP+DCSEVL(y*y/4.5_DP-1._DP,bi1cs,nti1))
-  DBSI1E = EXP(-y)*DBSI1E
+
   RETURN
 END FUNCTION DBSI1E

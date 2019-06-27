@@ -1,5 +1,5 @@
 !** D9GMIT
-REAL(DP) FUNCTION D9GMIT(A,X,Algap1,Sgngam)
+REAL(DP) ELEMENTAL FUNCTION D9GMIT(A,X,Algap1,Sgngam)
   !> Compute Tricomi's incomplete Gamma function for small
   !            arguments.
   !***
@@ -31,14 +31,14 @@ REAL(DP) FUNCTION D9GMIT(A,X,Algap1,Sgngam)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
-  USE service, ONLY : XERMSG, D1MACH
+  USE service, ONLY : D1MACH
+  REAL(DP), INTENT(IN) :: A, X, Algap1, Sgngam
   INTEGER :: k, m, ma
-  REAL(DP) :: A, X, Algap1, Sgngam
   REAL(DP) :: ae, aeps, algs, alg2, fk, s, sgng2, t, te
   REAL(DP), PARAMETER :: eps = 0.5_DP*D1MACH(3), bot = LOG(D1MACH(1))
   !* FIRST EXECUTABLE STATEMENT  D9GMIT
   !
-  IF( X<=0._DP ) CALL XERMSG('D9GMIT','X SHOULD BE GT 0',1,2)
+  IF( X<=0._DP ) ERROR STOP 'D9GMIT : X SHOULD BE > 0'
   !
   ma = INT( A + 0.5_DP )
   IF( A<0._DP ) ma = INT( A - 0.5_DP )
@@ -57,13 +57,11 @@ REAL(DP) FUNCTION D9GMIT(A,X,Algap1,Sgngam)
     s = s + t
     IF( ABS(t)<eps*ABS(s) ) GOTO 100
   END DO
-  CALL XERMSG('D9GMIT',&
-    'NO CONVERGENCE IN 200 TERMS OF TAYLOR-S SERIES',2,2)
+  ERROR STOP 'D9GMIT : NO CONVERGENCE IN 200 TERMS OF TAYLOR-S SERIES'
   !
   100 CONTINUE
-  IF( A>=(-0.5_DP) ) algs = -Algap1 + LOG(s)
   IF( A>=(-0.5_DP) ) THEN
-    !
+    algs = -Algap1 + LOG(s)
     D9GMIT = EXP(algs)
   ELSE
     !
@@ -88,8 +86,10 @@ REAL(DP) FUNCTION D9GMIT(A,X,Algap1,Sgngam)
       sgng2 = Sgngam*SIGN(1._DP,s)
       alg2 = -X - Algap1 + LOG(ABS(s))
       !
-      IF( alg2>bot ) D9GMIT = sgng2*EXP(alg2)
-      IF( algs>bot ) D9GMIT = D9GMIT + EXP(algs)
+      IF( alg2>bot ) THEN
+        D9GMIT = sgng2*EXP(alg2)
+        D9GMIT = D9GMIT + EXP(algs)
+      END IF
       RETURN
     END IF
   END IF

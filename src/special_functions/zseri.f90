@@ -29,7 +29,7 @@ SUBROUTINE ZSERI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol,Elim,Alim)
   !   930122  Added ZLOG to EXTERNAL statement.  (RWC)
   USE service, ONLY : D1MACH
   !     COMPLEX AK1,CK,COEF,CONE,CRSC,CSCL,CZ,CZERO,HZ,RZ,S1,S2,Y,Z
-  INTEGER :: i, ib, idum, iflag, il, k, Kode, l, m, N, nn, Nz, nw
+  INTEGER :: i, ib, iflag, il, k, Kode, l, m, N, nn, Nz, nw
   REAL(DP) :: aa, acz, ak, ak1i, ak1r, Alim, arm, ascle, atol, az, cki, ckr, &
     coefi, coefr, crscr, czi, czr, dfnu, Elim, Fnu, fnup, hzi, hzr, raz, rs, &
     rtr1, rzi, rzr, s, ss, sti, str, s1i, s1r, s2i, s2r, Tol, Yi(N), Yr(N), &
@@ -55,7 +55,7 @@ SUBROUTINE ZSERI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol,Elim,Alim)
     IF( az>rtr1 ) CALL ZMLT(hzr,hzi,hzr,hzi,czr,czi)
     acz = ZABS(czr,czi)
     nn = N
-    CALL ZLOG(hzr,hzi,ckr,cki,idum)
+    CALL ZLOG(hzr,hzi,ckr,cki)
   END IF
   100  dfnu = Fnu + (nn-1)
   fnup = dfnu + 1._DP
@@ -64,7 +64,7 @@ SUBROUTINE ZSERI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol,Elim,Alim)
   !-----------------------------------------------------------------------
   ak1r = ckr*dfnu
   ak1i = cki*dfnu
-  ak = DGAMLN(fnup,idum)
+  ak = LOG_GAMMA(fnup)
   ak1r = ak1r - ak
   IF( Kode==2 ) ak1r = ak1r - Zr
   IF( ak1r>(-Elim) ) THEN

@@ -1,5 +1,5 @@
 !** DCSEVL
-REAL(DP) FUNCTION DCSEVL(X,Cs,N)
+REAL(DP) PURE FUNCTION DCSEVL(X,Cs)
   !> Evaluate a Chebyshev series.
   !***
   ! **Library:**   SLATEC (FNLIB)
@@ -43,23 +43,22 @@ REAL(DP) FUNCTION DCSEVL(X,Cs,N)
   !           X to be slightly outside interval (-1,+1).  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   USE service, ONLY : XERMSG, D1MACH
-  INTEGER :: N
-  REAL(DP) :: Cs(N), X
-  INTEGER :: i, ni
+  REAL(DP), INTENT(IN) :: X
+  REAL(DP), INTENT(IN) :: Cs(:)
+  INTEGER :: i, ni, n
   REAL(DP) :: b0, b1, b2, twox
   REAL(DP), PARAMETER :: onepl = 1._DP + D1MACH(4)
   !* FIRST EXECUTABLE STATEMENT  DCSEVL
-  IF( N<1 ) CALL XERMSG('DCSEVL','NUMBER OF TERMS <= 0',2,2)
-  IF( N>1000 ) CALL XERMSG('DCSEVL','NUMBER OF TERMS > 1000',3,2)
-  IF( ABS(X)>onepl ) CALL XERMSG('DCSEVL','X OUTSIDE THE INTERVAL (-1,+1)',1,1)
+  IF( ABS(X)>1._DP ) ERROR STOP 'DCSEVL : X OUTSIDE THE INTERVAL (-1,+1)'
+  n = SIZE( Cs )
   !
   b1 = 0._DP
   b0 = 0._DP
   twox = 2._DP*X
-  DO i = 1, N
+  DO i = 1, n
     b2 = b1
     b1 = b0
-    ni = N + 1 - i
+    ni = n + 1 - i
     b0 = twox*b1 - b2 + Cs(ni)
   END DO
   !

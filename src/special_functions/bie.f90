@@ -1,8 +1,7 @@
 !** BIE
-REAL(SP) FUNCTION BIE(X)
+REAL(SP) ELEMENTAL FUNCTION BIE(X)
   !> Calculate the Bairy function for a negative argument and an
-  !            exponentially scaled Bairy function for a non-negative
-  !            argument.
+  !  exponentially scaled Bairy function for a non-negative argument.
   !***
   ! **Library:**   SLATEC (FNLIB)
   !***
@@ -10,8 +9,7 @@ REAL(SP) FUNCTION BIE(X)
   !***
   ! **Type:**      SINGLE PRECISION (BIE-S, DBIE-D)
   !***
-  ! **Keywords:**  BAIRY FUNCTION, EXPONENTIALLY SCALED, FNLIB,
-  !             SPECIAL FUNCTIONS
+  ! **Keywords:**  BAIRY FUNCTION, EXPONENTIALLY SCALED, FNLIB, SPECIAL FUNCTIONS
   !***
   ! **Author:**  Fullerton, W., (LANL)
   !***
@@ -66,9 +64,9 @@ REAL(SP) FUNCTION BIE(X)
   !   890206  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   USE service, ONLY : R1MACH
-  REAL(SP) :: X
+  REAL(SP), INTENT(IN) :: X
   REAL(SP) :: sqrtx, theta, xm, z
-  INTEGER, SAVE :: nbif, nbig, nbif2, nbig2, nbip, nbip2
+  INTEGER, PARAMETER :: nbif = 5, nbig = 5, nbif2 = 6, nbig2 = 6, nbip = 10, nbip2 = 8
   REAL(SP), PARAMETER :: eta = 0.1_SP*R1MACH(3), x3sml = eta**0.3333_SP, &
     x32sml = 1.3104_SP*x3sml**2, xbig = R1MACH(2)**0.6666_SP
   REAL(SP), PARAMETER :: bifcs(9) = [ -.01673021647198664948_SP, .1025233583424944561_SP, &
@@ -107,46 +105,36 @@ REAL(SP) FUNCTION BIE(X)
     .0000000000000002175_SP, -.0000000000000001737_SP,-.0000000000000000010_SP ]
   REAL(SP), PARAMETER :: atr = 8.7506905708484345_SP
   REAL(SP), PARAMETER :: btr = -2.093836321356054_SP
-  LOGICAL, SAVE :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  BIE
-  IF( first ) THEN
-    nbif = INITS(bifcs,9,eta)
-    nbig = INITS(bigcs,8,eta)
-    nbif2 = INITS(bif2cs,10,eta)
-    nbig2 = INITS(big2cs,10,eta)
-    nbip = INITS(bipcs,24,eta)
-    nbip2 = INITS(bip2cs,29,eta)
-    first = .FALSE.
-  END IF
+  ! nbif = INITS(bifcs,eta)
+  ! nbig = INITS(bigcs,eta)
+  ! nbif2 = INITS(bif2cs,eta)
+  ! nbig2 = INITS(big2cs,eta)
+  ! nbip = INITS(bipcs,eta)
+  ! nbip2 = INITS(bip2cs,eta)
   !
   IF( X<(-1._SP) ) THEN
     CALL R9AIMP(X,xm,theta)
     BIE = xm*SIN(theta)
-    RETURN
-    !
   ELSEIF( X<=1._SP ) THEN
     z = 0._SP
     IF( ABS(X)>x3sml ) z = X**3
-    BIE = 0.625_SP + CSEVL(z,bifcs,nbif) + X*(0.4375_SP+CSEVL(z,bigcs,nbig))
+    BIE = 0.625_SP + CSEVL(z,bifcs(1:nbif)) + X*(0.4375_SP+CSEVL(z,bigcs(1:nbig)))
     IF( X>x32sml ) BIE = BIE*EXP(-2._SP*X*SQRT(X)/3._SP)
-    RETURN
-    !
   ELSEIF( X<=2._SP ) THEN
     z = (2._SP*X**3-9._SP)/7._SP
     BIE = EXP(-2._SP*X*SQRT(X)/3._SP)&
-      *(1.125_SP+CSEVL(z,bif2cs,nbif2)+X*(0.625_SP+CSEVL(z,big2cs,nbig2)))
-    RETURN
-    !
-  ELSEIF( X>4._SP ) THEN
-    !
+      *(1.125_SP+CSEVL(z,bif2cs(1:nbif2))+X*(0.625_SP+CSEVL(z,big2cs(1:nbig2))))
+  ELSEIF( X<=4._SP ) THEN
+    sqrtx = SQRT(X)
+    z = atr/(X*sqrtx) + btr
+    BIE = (0.625_SP+CSEVL(z,bipcs(1:nbip)))/SQRT(sqrtx)
+  ELSE
     sqrtx = SQRT(X)
     z = -1._SP
     IF( X<xbig ) z = 16._SP/(X*sqrtx) - 1._SP
-    BIE = (0.625_SP+CSEVL(z,bip2cs,nbip2))/SQRT(sqrtx)
-    RETURN
+    BIE = (0.625_SP+CSEVL(z,bip2cs(1:nbip2)))/SQRT(sqrtx)
   END IF
-  sqrtx = SQRT(X)
-  z = atr/(X*sqrtx) + btr
-  BIE = (0.625_SP+CSEVL(z,bipcs,nbip))/SQRT(sqrtx)
+
   RETURN
 END FUNCTION BIE

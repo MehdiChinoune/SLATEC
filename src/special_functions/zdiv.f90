@@ -22,13 +22,11 @@ SUBROUTINE ZDIV(Ar,Ai,Br,Bi,Cr,Ci)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
 
-  REAL(DP) :: Ar, Ai, Br, Bi, Cr, Ci, bm, ca, cb, cc, cd
+  COMPLEX(DP) :: C
+  REAL(DP) :: Ar, Ai, Br, Bi, Cr, Ci
   !* FIRST EXECUTABLE STATEMENT  ZDIV
-  bm = 1._DP/ZABS(Br,Bi)
-  cc = Br*bm
-  cd = Bi*bm
-  ca = (Ar*cc+Ai*cd)*bm
-  cb = (Ai*cc-Ar*cd)*bm
-  Cr = ca
-  Ci = cb
+  C = CMPLX(Ar,Ai,DP)/CMPLX(Br,Bi,DP)
+  Cr = REAL(C,DP)
+  Ci = AIMAG(C)
+
 END SUBROUTINE ZDIV

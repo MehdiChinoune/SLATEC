@@ -1,5 +1,5 @@
 !** DE1
-REAL(DP) FUNCTION DE1(X)
+REAL(DP) ELEMENTAL FUNCTION DE1(X)
   !> Compute the exponential integral E1(X).
   !***
   ! **Library:**   SLATEC (FNLIB)
@@ -8,8 +8,7 @@ REAL(DP) FUNCTION DE1(X)
   !***
   ! **Type:**      DOUBLE PRECISION (E1-S, DE1-D)
   !***
-  ! **Keywords:**  E1 FUNCTION, EXPONENTIAL INTEGRAL, FNLIB,
-  !             SPECIAL FUNCTIONS
+  ! **Keywords:**  E1 FUNCTION, EXPONENTIAL INTEGRAL, FNLIB, SPECIAL FUNCTIONS
   !***
   ! **Author:**  Fullerton, W., (LANL)
   !***
@@ -86,9 +85,10 @@ REAL(DP) FUNCTION DE1(X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920618  Removed space from variable names.  (RWC, WRB)
-  USE service, ONLY : XERMSG, D1MACH
-  REAL(DP) :: X
-  INTEGER, SAVE :: ntae10, ntae11, ntae12, nte11, nte12, ntae13, ntae14
+  USE service, ONLY : D1MACH
+  REAL(DP), INTENT(IN) :: X
+  INTEGER, PARAMETER :: ntae10 = 17, ntae11 = 30, ntae12 = 22, nte11 = 18, &
+    nte12 = 15, ntae13 = 25, ntae14 = 27
   REAL(DP), PARAMETER :: eta = 0.1_DP*D1MACH(3), xmaxt = -LOG(D1MACH(1)), &
     xmax = xmaxt - LOG(xmaxt)
   REAL(DP), PARAMETER :: ae10cs(50)  = [ +.3284394579616699087873844201881E-1_DP, &
@@ -256,54 +256,35 @@ REAL(DP) FUNCTION DE1(X)
     -.1271557211796024711027981200042E-29_DP, +.5644615555648722522388044622506E-30_DP, &
     -.2516994994284095106080616830293E-30_DP, +.1127259818927510206370368804181E-30_DP, &
     -.5069814875800460855562584719360E-31_DP ]
-  LOGICAL, SAVE :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  DE1
-  IF( first ) THEN
-    ntae10 = INITDS(ae10cs,50,eta)
-    ntae11 = INITDS(ae11cs,60,eta)
-    ntae12 = INITDS(ae12cs,41,eta)
-    nte11 = INITDS(e11cs,29,eta)
-    nte12 = INITDS(e12cs,25,eta)
-    ntae13 = INITDS(ae13cs,50,eta)
-    ntae14 = INITDS(ae14cs,64,eta)
-    first = .FALSE.
-  END IF
+  ! ntae10 = INITDS(ae10cs,eta)
+  ! ntae11 = INITDS(ae11cs,eta)
+  ! ntae12 = INITDS(ae12cs,eta)
+  ! nte11 = INITDS(e11cs,eta)
+  ! nte12 = INITDS(e12cs,eta)
+  ! ntae13 = INITDS(ae13cs,eta)
+  ! ntae14 = INITDS(ae14cs,eta)
   !
-  IF( X>(-1._DP) ) THEN
-    !
-    IF( X<=1._DP ) THEN
-      IF( X==0._DP ) CALL XERMSG('DE1','X IS 0',2,2)
-      DE1 = (-LOG(ABS(X))-0.6875_DP+X) + DCSEVL(X,e12cs,nte12)
-      RETURN
-      !
-    ELSEIF( X<=4._DP ) THEN
-      DE1 = EXP(-X)/X*(1._DP+DCSEVL((8._DP/X-5._DP)/3._DP,ae13cs,ntae13))
-      RETURN
-      !
-    ELSEIF( X>xmax ) THEN
-      !
-      CALL XERMSG('DE1','X SO BIG E1 UNDERFLOWS',1,1)
-      DE1 = 0._DP
-      RETURN
-    END IF
+  IF( X==0._DP ) ERROR STOP 'DE1 : X IS 0'
+
+  IF( X>xmax ) THEN
+    ! CALL XERMSG('DE1','X SO BIG E1 UNDERFLOWS',1,1)
+    DE1 = 0._DP
+  ELSEIF( X>4._DP ) THEN
+    DE1 = EXP(-X)/X*(1._DP+DCSEVL(8._DP/X-1._DP,ae14cs(1:ntae14)))
+  ELSEIF( X>1._DP ) THEN
+    DE1 = EXP(-X)/X*(1._DP+DCSEVL((8._DP/X-5._DP)/3._DP,ae13cs(1:ntae13)))
+  ELSEIF( X>(-1._DP) ) THEN
+    DE1 = (-LOG(ABS(X))-0.6875_DP+X) + DCSEVL(X,e12cs(1:nte12))
+  ELSEIF( X>(-4._DP) ) THEN
+    DE1 = -LOG(-X) + DCSEVL((2._DP*X+5._DP)/3._DP,e11cs(1:nte11))
+  ELSEIF( X>(-8._DP) ) THEN
+    DE1 = EXP(-X)/X*(1._DP+DCSEVL(16._DP/X+3._DP,ae12cs(1:ntae12)))
   ELSEIF( X>(-32._DP) ) THEN
-    !
-    IF( X<=(-8._DP) ) THEN
-      DE1 = EXP(-X)/X*(1._DP+DCSEVL((64._DP/X+5._DP)/3._DP,ae11cs,ntae11))
-      RETURN
-      !
-    ELSEIF( X>(-4._DP) ) THEN
-      !
-      DE1 = -LOG(-X) + DCSEVL((2._DP*X+5._DP)/3._DP,e11cs,nte11)
-      RETURN
-    ELSE
-      DE1 = EXP(-X)/X*(1._DP+DCSEVL(16._DP/X+3._DP,ae12cs,ntae12))
-      RETURN
-    END IF
+    DE1 = EXP(-X)/X*(1._DP+DCSEVL((64._DP/X+5._DP)/3._DP,ae11cs(1:ntae11)))
   ELSE
-    DE1 = EXP(-X)/X*(1._DP+DCSEVL(64._DP/X+1._DP,ae10cs,ntae10))
-    RETURN
+    DE1 = EXP(-X)/X*(1._DP+DCSEVL(64._DP/X+1._DP,ae10cs(1:ntae10)))
   END IF
-  DE1 = EXP(-X)/X*(1._DP+DCSEVL(8._DP/X-1._DP,ae14cs,ntae14))
+
   RETURN
 END FUNCTION DE1

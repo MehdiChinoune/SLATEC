@@ -1,5 +1,5 @@
 !** CPSI
-COMPLEX(SP) FUNCTION CPSI(Zin)
+COMPLEX(SP) ELEMENTAL FUNCTION CPSI(Zin)
   !> Compute the Psi (or Digamma) function.
   !***
   ! **Library:**   SLATEC (FNLIB)
@@ -29,8 +29,8 @@ COMPLEX(SP) FUNCTION CPSI(Zin)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900727  Added EXTERNAL statement.  (WRB)
-  USE service, ONLY : XERMSG, R1MACH
-  COMPLEX(SP) :: Zin
+  USE service, ONLY : R1MACH
+  COMPLEX(SP), INTENT(IN) :: Zin
   INTEGER :: i, n, ndx
   REAL(SP) :: cabsz, x, y
   COMPLEX(SP) :: z, z2inv, corr
@@ -61,15 +61,12 @@ COMPLEX(SP) FUNCTION CPSI(Zin)
         !
         ! USE THE RECURSION RELATION FOR ABS(Z) SMALL.
         !
-        IF( cabsz<rmin ) CALL XERMSG('CPSI',&
-          'CPSI CALLED WITH Z SO NEAR 0 THAT CPSI OVERFLOWS',2,2)
+        IF( cabsz<rmin ) ERROR STOP 'CPSI : CPSI CALLED WITH Z SO NEAR 0 THAT CPSI OVERFLOWS'
+        IF( y==0._SP .AND. x==AINT(x) ) ERROR STOP 'CPSI : Z IS A NEGATIVE INTEGER'
         !
-        IF( x<(-0.5_SP) .AND. ABS(y)<=dxrel ) THEN
-          IF( ABS((z-AINT(x-0.5_SP))/x)<dxrel ) CALL XERMSG('CPSI',&
-            'ANSWER LT HALF PRECISION BECAUSE Z TOO NEAR NEGATIVE INTEGER',1,1)
-          IF( y==0._SP .AND. x==AINT(x) )&
-            CALL XERMSG('CPSI','Z IS A NEGATIVE INTEGER',3,2)
-        END IF
+        ! IF( x<(-0.5_SP) .AND. ABS(y)<=dxrel .AND. ABS((z-AINT(x-0.5_SP))/x)<dxrel ) THEN
+          ! CALL XERMSG('CPSI : ANSWER LT HALF PRECISION BECAUSE Z TOO NEAR NEGATIVE INTEGER'
+        ! END IF
         !
         n = INT( SQRT(bound**2-y**2) - x ) + 1
         DO i = 1, n

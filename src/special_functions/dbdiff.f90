@@ -1,5 +1,5 @@
 !** DBDIFF
-SUBROUTINE DBDIFF(L,V)
+PURE SUBROUTINE DBDIFF(L,V)
   !> Subsidiary to DBSKIN
   !***
   ! **Library:**   SLATEC
@@ -26,8 +26,8 @@ SUBROUTINE DBDIFF(L,V)
   !   900328  Added TYPE section.  (WRB)
 
   !
-  INTEGER :: L
-  REAL(DP) :: V(L)
+  INTEGER, INTENT(IN) :: L
+  REAL(DP), INTENT(OUT) :: V(L)
   INTEGER :: i, j, k
   !* FIRST EXECUTABLE STATEMENT  DBDIFF
   IF( L==1 ) RETURN
@@ -38,4 +38,5 @@ SUBROUTINE DBDIFF(L,V)
       k = k - 1
     END DO
   END DO
+
 END SUBROUTINE DBDIFF

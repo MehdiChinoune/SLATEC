@@ -1,5 +1,5 @@
 !** DFAC
-REAL(DP) FUNCTION DFAC(N)
+REAL(DP) ELEMENTAL FUNCTION DFAC(N)
   !> Compute the factorial function.
   !***
   ! **Library:**   SLATEC (FNLIB)
@@ -14,8 +14,7 @@ REAL(DP) FUNCTION DFAC(N)
   !***
   ! **Description:**
   !
-  ! DFAC(N) calculates the double precision factorial for integer
-  ! argument N.
+  ! DFAC(N) calculates the double precision factorial for integer argument N.
   !
   !***
   ! **References:**  (NONE)
@@ -28,9 +27,9 @@ REAL(DP) FUNCTION DFAC(N)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-  USE service, ONLY : XERMSG
-  INTEGER :: N
-  REAL(DP) :: x, xmax, xmin
+  INTEGER, INTENT(IN) :: N
+  REAL(DP) :: x
+  INTEGER, PARAMETER :: nmax = 170
   REAL(DP), PARAMETER :: facn(31) = [ +.100000000000000000000000000000000E+1_DP, &
     +.100000000000000000000000000000000E+1_DP, +.200000000000000000000000000000000E+1_DP, &
     +.600000000000000000000000000000000E+1_DP, +.240000000000000000000000000000000E+2_DP, &
@@ -48,21 +47,18 @@ REAL(DP) FUNCTION DFAC(N)
     +.108888694504183521607680000000000E+29_DP, +.304888344611713860501504000000000E+30_DP, &
     +.884176199373970195454361600000000E+31_DP, +.265252859812191058636308480000000E+33_DP ]
   REAL(DP), PARAMETER :: sq2pil = 0.91893853320467274178032973640562_DP
-  INTEGER, SAVE :: nmax = 0
   !* FIRST EXECUTABLE STATEMENT  DFAC
-  IF( nmax==0 ) THEN
-    CALL DGAMLM(xmin,xmax)
-    nmax = INT( xmax ) - 1
+  !
+  IF( N<0 ) THEN
+    ERROR STOP 'DFAC : FACTORIAL OF NEGATIVE INTEGER UNDEFINED'
+  ELSEIF( N<=30 ) THEN
+    DFAC = facn(N+1)
+  ELSEIF( N<=nmax ) THEN
+    x = N + 1
+    DFAC = EXP((x-0.5_DP)*LOG(x)-x+sq2pil+D9LGMC(x))
+  ELSE
+    ERROR STOP 'DFAC : N SO BIG FACTORIAL(N) OVERFLOWS'
   END IF
-  !
-  IF( N<0 ) CALL XERMSG('DFAC','FACTORIAL OF NEGATIVE INTEGER UNDEFINED',1,2)
-  !
-  IF( N<=30 ) DFAC = facn(N+1)
-  IF( N<=30 ) RETURN
-  !
-  IF( N>nmax ) CALL XERMSG('DFAC','N SO BIG FACTORIAL(N) OVERFLOWS',2,2)
-  !
-  x = N + 1
-  DFAC = EXP((x-0.5_DP)*LOG(x)-x+sq2pil+D9LGMC(x))
-  !
+
+  RETURN
 END FUNCTION DFAC

@@ -1,7 +1,6 @@
 !** CLNGAM
-COMPLEX(SP) FUNCTION CLNGAM(Zin)
-  !> Compute the logarithm of the absolute value of the Gamma
-  !            function.
+COMPLEX(SP) ELEMENTAL FUNCTION CLNGAM(Zin)
+  !> Compute the logarithm of the absolute value of the Gamma function.
   !***
   ! **Library:**   SLATEC (FNLIB)
   !***
@@ -31,8 +30,8 @@ COMPLEX(SP) FUNCTION CLNGAM(Zin)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-  USE service, ONLY : XERMSG, R1MACH
-  COMPLEX(SP) :: Zin
+  USE service, ONLY : R1MACH
+  COMPLEX(SP), INTENT(IN) :: Zin
   INTEGER :: i, n
   REAL(SP) :: argsum, cabsz, x, y
   COMPLEX(SP) :: z, corr
@@ -57,10 +56,10 @@ COMPLEX(SP) FUNCTION CLNGAM(Zin)
         !
         ! USE THE RECURSION RELATION FOR ABS(Z) SMALL.
         !
-        IF( x<(-0.5_SP) .AND. ABS(y)<=dxrel ) THEN
-          IF( ABS((z-AINT(x-0.5_SP))/x)<dxrel ) CALL XERMSG('CLNGAM',&
-            'ANSWER LT HALF PRECISION BECAUSE Z TOO NEAR NEGATIVE INTEGER',1,1)
-        END IF
+        ! IF( x<(-0.5_SP) .AND. ABS(y)<=dxrel ) THEN
+        !   IF( ABS((z-AINT(x-0.5_SP))/x)<dxrel ) CALL XERMSG('CLNGAM',&
+        !     'ANSWER LT HALF PRECISION BECAUSE Z TOO NEAR NEGATIVE INTEGER',1,1)
+        ! END IF
         !
         n = INT( SQRT(bound**2-y**2) - x ) + 1
         argsum = 0._SP
@@ -71,8 +70,9 @@ COMPLEX(SP) FUNCTION CLNGAM(Zin)
           z = 1._SP + z
         END DO
         !
-        IF( REAL(corr)==0._SP .AND. AIMAG(corr)==0._SP )&
-          CALL XERMSG('CLNGAM','Z IS A NEGATIVE INTEGER',3,2)
+        IF( REAL(corr)==0._SP .AND. AIMAG(corr)==0._SP ) THEN
+          ERROR STOP 'CLNGAM : Z IS A NEGATIVE INTEGER'
+        END IF
         corr = -CMPLX(LOG(ABS(corr)),argsum,SP)
       ELSE
         !
@@ -81,8 +81,9 @@ COMPLEX(SP) FUNCTION CLNGAM(Zin)
         !
         IF( y>0._SP ) z = CONJG(z)
         corr = EXP(-CMPLX(0._SP,2._SP*pi,SP)*z)
-        IF( REAL(corr)==1._SP .AND. AIMAG(corr)==0._SP )&
-          CALL XERMSG('CLNGAM','Z IS A NEGATIVE INTEGER',3,2)
+        IF( REAL(corr)==1._SP .AND. AIMAG(corr)==0._SP ) THEN
+          ERROR STOP 'CLNGAM : Z IS A NEGATIVE INTEGER'
+        END IF
         !
         CLNGAM = sq2pil + 1._SP - CMPLX(0._SP,pi,SP)*(z-0.5_SP) - CLNREL(-corr)&
           + (z-0.5_SP)*LOG(1._SP-z) - z - C9LGMC(1._SP-z)

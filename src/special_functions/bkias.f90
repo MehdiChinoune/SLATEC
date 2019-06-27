@@ -1,5 +1,5 @@
 !** BKIAS
-SUBROUTINE BKIAS(X,N,Ktrms,T,Ans,Ind,Ms,Gmrn,H,Ierr)
+PURE SUBROUTINE BKIAS(X,N,Ktrms,T,Ans,Ind,Ms,Gmrn,H,Ierr)
   !> Subsidiary to BSKIN
   !***
   ! **Library:**   SLATEC
@@ -25,8 +25,11 @@ SUBROUTINE BKIAS(X,N,Ktrms,T,Ans,Ind,Ms,Gmrn,H,Ierr)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
   USE service, ONLY : R1MACH
-  INTEGER :: Ind, Ktrms, Ms, N, Ierr
-  REAL(SP) :: Ans, Gmrn, H(30), T(50), X
+  INTEGER, INTENT(IN) :: Ind, Ktrms, N
+  INTEGER, INTENT(OUT) :: Ms, Ierr
+  REAL(SP), INTENT(IN) :: T(Ktrms), X
+  REAL(SP), INTENT(INOUT) :: H(30)
+  REAL(SP), INTENT(OUT) :: Ans, Gmrn
   INTEGER :: i, ii, j, jmi, jn, k, kk, km, mm, mp
   REAL(SP) :: den1, den2, den3, er, err, fj, fk, fln, fm1, g1, gs, hn, rat, rg1, rxp, &
     rz, rzx, s(31), ss, sumi, sumj, tol, v(52), w(52), xp(16), z

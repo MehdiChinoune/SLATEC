@@ -1,5 +1,5 @@
 !** CUNI1
-SUBROUTINE CUNI1(Z,Fnu,Kode,N,Y,Nz,Nlast,Fnul,Tol,Elim,Alim)
+PURE SUBROUTINE CUNI1(Z,Fnu,Kode,N,Y,Nz,Nlast,Fnul,Tol,Elim,Alim)
   !> Subsidiary to CBESI and CBESK
   !***
   ! **Library:**   SLATEC
@@ -28,11 +28,15 @@ SUBROUTINE CUNI1(Z,Fnu,Kode,N,Y,Nz,Nlast,Fnul,Tol,Elim,Alim)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
   USE service, ONLY : R1MACH
-  INTEGER :: i, iflag, init, k, Kode, m, N, nd, Nlast, nn, nuf, nw, Nz
+  INTEGER, INTENT(IN) :: Kode, N
+  INTEGER, INTENT(OUT) :: Nlast, Nz
+  REAL(SP), INTENT(IN) :: Alim, Elim, Fnu, Fnul, Tol
+  COMPLEX(SP), INTENT(IN) :: Z
+  COMPLEX(SP), INTENT(OUT) :: Y(N)
+  INTEGER :: i, iflag, init, k, m, nd, nn, nuf, nw
   COMPLEX(SP) :: cfn, crsc, cscl, csr(3), css(3), cwrk(16), c1, c2, &
-    phi, rz, summ, s1, s2, Y(N), Z, zeta1, zeta2, cy(2)
-  REAL(SP) :: Alim, aphi, ascle, bry(3), c2i, c2m, c2r, Elim, fn, Fnu, &
-    Fnul, rs1, Tol, yy
+    phi, rz, summ, s1, s2, zeta1, zeta2, cy(2)
+  REAL(SP) :: aphi, ascle, bry(3), c2i, c2m, c2r, fn, rs1, yy
   COMPLEX(SP), PARAMETER :: czero = (0._SP,0._SP), cone = (1._SP,0._SP)
   !* FIRST EXECUTABLE STATEMENT  CUNI1
   Nz = 0

@@ -1,5 +1,5 @@
 !** DBSKNU
-SUBROUTINE DBSKNU(X,Fnu,Kode,N,Y,Nz)
+PURE SUBROUTINE DBSKNU(X,Fnu,Kode,N,Y,Nz)
   !> Subsidiary to DBESK
   !***
   ! **Library:**   SLATEC
@@ -12,13 +12,13 @@ SUBROUTINE DBSKNU(X,Fnu,Kode,N,Y,Nz)
   !
   !     Abstract  **** A DOUBLE PRECISION routine ****
   !         DBSKNU computes N member sequences of K Bessel functions
-  !         K/SUB(FNU+I-1)/(X), I=1,N for non-negative orders FNU and
+  !         K_{FNU+I-1}(X), I=1,N for non-negative orders FNU and
   !         positive X. Equations of the references are implemented on
-  !         small orders DNU for K/SUB(DNU)/(X) and K/SUB(DNU+1)/(X).
+  !         small orders DNU for K_{DNU}(X) and K_{DNU+1}(X).
   !         Forward recursion with the three term recursion relation
   !         generates higher orders FNU+I-1, I=1,...,N. The parameter
-  !         KODE permits K/SUB(FNU+I-1)/(X) values or scaled values
-  !         EXP(X)*K/SUB(FNU+I-1)/(X), I=1,N to be returned.
+  !         KODE permits K_{FNU+I-1}(X) values or scaled values
+  !         EXP(X)*K_{FNU+I-1}(X), I=1,N to be returned.
   !
   !         To start the recursion FNU is normalized to the interval
   !         -0.5<=DNU<0.5. A special form of the power series is
@@ -44,17 +44,17 @@ SUBROUTINE DBSKNU(X,Fnu,Kode,N,Y,Nz)
   !           N      - Number of members of the sequence, N>=1
   !           KODE   - A parameter to indicate the scaling option
   !                    KODE= 1  returns
-  !                             Y(I)=       K/SUB(FNU+I-1)/(X)
+  !                             Y(I)=       K_{FNU+I-1}(X)
   !                                  I=1,...,N
   !                        = 2  returns
-  !                             Y(I)=EXP(X)*K/SUB(FNU+I-1)/(X)
+  !                             Y(I)=EXP(X)*K_{FNU+I-1}(X)
   !                                  I=1,...,N
   !
   !         OUTPUT     Y is DOUBLE PRECISION
   !           Y      - A vector whose first N components contain values
   !                    for the sequence
-  !                    Y(I)=       K/SUB(FNU+I-1)/(X), I=1,...,N or
-  !                    Y(I)=EXP(X)*K/SUB(FNU+I-1)/(X), I=1,...,N
+  !                    Y(I)=       K_{FNU+I-1}(X), I=1,...,N or
+  !                    Y(I)=EXP(X)*K_{FNU+I-1}(X), I=1,...,N
   !                    depending on KODE
   !           NZ     - Number of components set to zero due to
   !                    underflow,
@@ -88,10 +88,12 @@ SUBROUTINE DBSKNU(X,Fnu,Kode,N,Y,Nz)
   !   900727  Added EXTERNAL statement.  (WRB)
   !   910408  Updated the AUTHOR and REFERENCES sections.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  USE service, ONLY : XERMSG, D1MACH, I1MACH
+  USE service, ONLY : D1MACH, I1MACH
   !
-  INTEGER :: Kode, N, Nz
-  REAL(DP) :: Fnu, X, Y(N)
+  INTEGER, INTENT(IN) :: Kode, N
+  INTEGER, INTENT(OUT) :: Nz
+  REAL(DP), INTENT(IN) :: Fnu, X
+  REAL(DP), INTENT(OUT) :: Y(N)
   INTEGER :: i, iflag, inu, j, k, kk, koded, nn
   REAL(DP) :: a(160), ak, a1, a2, b(160), bk, ck, coef, cx, dk, dnu, dnu2, elim, &
     etest, ex, f, fc, fhs, fk, fks, flrx, fmu, g1, g2, p, pt, p1, p2, q, &
@@ -107,235 +109,225 @@ SUBROUTINE DBSKNU(X,Fnu,Kode,N,Y,Nz)
   ak = D1MACH(3)
   tol = MAX(ak,1.E-15_DP)
   IF( X<=0._DP ) THEN
-    !
-    !
-    CALL XERMSG('DBSKNU','X NOT GREATER THAN ZERO',2,1)
-    RETURN
+    ERROR STOP 'DBSKNU : X <= 0'
   ELSEIF( Fnu<0._DP ) THEN
-    CALL XERMSG('DBSKNU','FNU NOT ZERO OR POSITIVE',2,1)
-    RETURN
+    ERROR STOP 'DBSKNU : FNU < 0'
+  ELSEIF( Kode<1 .OR. Kode>2 ) THEN
+    ERROR STOP 'DBSKNU : KODE NOT 1 OR 2'
+  ELSEIF( N<1 ) THEN
+    ERROR STOP 'DBSKNU : N NOT GREATER THAN 0'
   ELSE
-    IF( Kode<1 .OR. Kode>2 ) THEN
-      CALL XERMSG('DBSKNU','KODE NOT 1 OR 2',2,1)
-      RETURN
-    ELSE
-      IF( N<1 ) THEN
-        CALL XERMSG('DBSKNU','N NOT GREATER THAN 0',2,1)
-        RETURN
-      ELSE
-        Nz = 0
-        iflag = 0
-        koded = Kode
-        rx = 2._DP/X
-        inu = INT(Fnu+0.5_DP)
-        dnu = Fnu - inu
-        IF( ABS(dnu)/=0.5_DP ) THEN
-          dnu2 = 0._DP
-          IF( ABS(dnu)>=tol ) dnu2 = dnu*dnu
-          IF( X<=x1 ) THEN
-            !
-            !     SERIES FOR X<=X1
-            !
-            a1 = 1._DP - dnu
-            a2 = 1._DP + dnu
-            t1 = 1._DP/GAMMA(a1)
-            t2 = 1._DP/GAMMA(a2)
-            IF( ABS(dnu)>0.1_DP ) THEN
-              g1 = (t1-t2)/(dnu+dnu)
-            ELSE
-              !     SERIES FOR F0 TO RESOLVE INDETERMINACY FOR SMALL ABS(DNU)
-              s = cc(1)
-              ak = 1._DP
-              DO k = 2, 8
-                ak = ak*dnu2
-                tm = cc(k)*ak
-                s = s + tm
-                IF( ABS(tm)<tol ) EXIT
-              END DO
-              g1 = -s
-            END IF
-            g2 = (t1+t2)*0.5_DP
-            smu = 1._DP
-            fc = 1._DP
-            flrx = LOG(rx)
-            fmu = dnu*flrx
-            IF( dnu/=0._DP ) THEN
-              fc = dnu*pi
-              fc = fc/SIN(fc)
-              IF( fmu/=0._DP ) smu = SINH(fmu)/fmu
-            END IF
-            f = fc*(g1*COSH(fmu)+g2*flrx*smu)
-            fc = EXP(fmu)
-            p = 0.5_DP*fc/t2
-            q = 0.5_DP/(fc*t1)
-            ak = 1._DP
-            ck = 1._DP
-            bk = 1._DP
-            s1 = f
-            s2 = p
-            IF( inu>0 .OR. N>1 ) THEN
-              IF( X>=tol ) THEN
-                cx = X*X*0.25_DP
-                DO
-                  f = (ak*f+p+q)/(bk-dnu2)
-                  p = p/(ak-dnu)
-                  q = q/(ak+dnu)
-                  ck = ck*cx/ak
-                  t1 = ck*f
-                  s1 = s1 + t1
-                  t2 = ck*(p-ak*f)
-                  s2 = s2 + t2
-                  bk = bk + ak + ak + 1._DP
-                  ak = ak + 1._DP
-                  s = ABS(t1)/(1._DP+ABS(s1)) + ABS(t2)/(1._DP+ABS(s2))
-                  IF( s<=tol ) EXIT
-                END DO
-              END IF
-              s2 = s2*rx
-              IF( koded/=1 ) THEN
-                f = EXP(X)
-                s1 = s1*f
-                s2 = s2*f
-              END IF
-              GOTO 20
-            ELSE
-              IF( X>=tol ) THEN
-                cx = X*X*0.25_DP
-                DO
-                  f = (ak*f+p+q)/(bk-dnu2)
-                  p = p/(ak-dnu)
-                  q = q/(ak+dnu)
-                  ck = ck*cx/ak
-                  t1 = ck*f
-                  s1 = s1 + t1
-                  bk = bk + ak + ak + 1._DP
-                  ak = ak + 1._DP
-                  s = ABS(t1)/(1._DP+ABS(s1))
-                  IF( s<=tol ) EXIT
-                END DO
-              END IF
-              Y(1) = s1
-              IF( koded==1 ) RETURN
-              Y(1) = s1*EXP(X)
-              RETURN
-            END IF
-          END IF
-        END IF
-        DO
-          coef = rthpi/SQRT(X)
-          IF( koded==2 ) EXIT
-          IF( X>elim ) THEN
-            koded = 2
-            iflag = 1
-          ELSE
-            coef = coef*EXP(-X)
-            EXIT
-          END IF
-        END DO
-        IF( ABS(dnu)==0.5_DP ) THEN
-          !
-          !     FNU=HALF ODD INTEGER CASE
-          !
-          s1 = coef
-          s2 = coef
-        ELSEIF( X>x2 ) THEN
-          !
-          !     ASYMPTOTIC EXPANSION FOR LARGE X, X>X2
-          !
-          !     IFLAG=0 MEANS NO UNDERFLOW OCCURRED
-          !     IFLAG=1 MEANS AN UNDERFLOW OCCURRED- COMPUTATION PROCEEDS WITH
-          !     KODED=2 AND A TEST FOR ON SCALE VALUES IS MADE DURING FORWARD
-          !     RECURSION
-          nn = 2
-          IF( inu==0 .AND. N==1 ) nn = 1
-          dnu2 = dnu + dnu
-          fmu = 0._DP
-          IF( ABS(dnu2)>=tol ) fmu = dnu2*dnu2
-          ex = X*8._DP
-          s2 = 0._DP
-          DO k = 1, nn
-            s1 = s2
-            s = 1._DP
-            ak = 0._DP
-            ck = 1._DP
-            sqk = 1._DP
-            dk = ex
-            DO j = 1, 30
-              ck = ck*(fmu-sqk)/dk
-              s = s + ck
-              dk = dk + ex
-              ak = ak + 8._DP
-              sqk = sqk + ak
-              IF( ABS(ck)<tol ) EXIT
-            END DO
-            s2 = s*coef
-            fmu = fmu + 8._DP*dnu + 4._DP
-          END DO
-          IF( nn<=1 ) THEN
-            s1 = s2
-            GOTO 50
-          END IF
+    Nz = 0
+    iflag = 0
+    koded = Kode
+    rx = 2._DP/X
+    inu = INT(Fnu+0.5_DP)
+    dnu = Fnu - inu
+    IF( ABS(dnu)/=0.5_DP ) THEN
+      dnu2 = 0._DP
+      IF( ABS(dnu)>=tol ) dnu2 = dnu*dnu
+      IF( X<=x1 ) THEN
+        !
+        !     SERIES FOR X<=X1
+        !
+        a1 = 1._DP - dnu
+        a2 = 1._DP + dnu
+        t1 = 1._DP/GAMMA(a1)
+        t2 = 1._DP/GAMMA(a2)
+        IF( ABS(dnu)>0.1_DP ) THEN
+          g1 = (t1-t2)/(dnu+dnu)
         ELSE
-          !
-          !     MILLER ALGORITHM FOR X1<X<=X2
-          !
-          etest = COS(pi*dnu)/(pi*X*tol)
-          fks = 1._DP
-          fhs = 0.25_DP
-          fk = 0._DP
-          ck = X + X + 2._DP
+          !     SERIES FOR F0 TO RESOLVE INDETERMINACY FOR SMALL ABS(DNU)
+          s = cc(1)
+          ak = 1._DP
+          DO k = 2, 8
+            ak = ak*dnu2
+            tm = cc(k)*ak
+            s = s + tm
+            IF( ABS(tm)<tol ) EXIT
+          END DO
+          g1 = -s
+        END IF
+        g2 = (t1+t2)*0.5_DP
+        smu = 1._DP
+        fc = 1._DP
+        flrx = LOG(rx)
+        fmu = dnu*flrx
+        IF( dnu/=0._DP ) THEN
+          fc = dnu*pi
+          fc = fc/SIN(fc)
+          IF( fmu/=0._DP ) smu = SINH(fmu)/fmu
+        END IF
+        f = fc*(g1*COSH(fmu)+g2*flrx*smu)
+        fc = EXP(fmu)
+        p = 0.5_DP*fc/t2
+        q = 0.5_DP/(fc*t1)
+        ak = 1._DP
+        ck = 1._DP
+        bk = 1._DP
+        s1 = f
+        s2 = p
+        IF( inu>0 .OR. N>1 ) THEN
+          IF( X>=tol ) THEN
+            cx = X*X*0.25_DP
+            DO
+              f = (ak*f+p+q)/(bk-dnu2)
+              p = p/(ak-dnu)
+              q = q/(ak+dnu)
+              ck = ck*cx/ak
+              t1 = ck*f
+              s1 = s1 + t1
+              t2 = ck*(p-ak*f)
+              s2 = s2 + t2
+              bk = bk + ak + ak + 1._DP
+              ak = ak + 1._DP
+              s = ABS(t1)/(1._DP+ABS(s1)) + ABS(t2)/(1._DP+ABS(s2))
+              IF( s<=tol ) EXIT
+            END DO
+          END IF
+          s2 = s2*rx
+          IF( koded/=1 ) THEN
+            f = EXP(X)
+            s1 = s1*f
+            s2 = s2*f
+          END IF
+          GOTO 20
+        ELSE
+          IF( X>=tol ) THEN
+            cx = X*X*0.25_DP
+            DO
+              f = (ak*f+p+q)/(bk-dnu2)
+              p = p/(ak-dnu)
+              q = q/(ak+dnu)
+              ck = ck*cx/ak
+              t1 = ck*f
+              s1 = s1 + t1
+              bk = bk + ak + ak + 1._DP
+              ak = ak + 1._DP
+              s = ABS(t1)/(1._DP+ABS(s1))
+              IF( s<=tol ) EXIT
+            END DO
+          END IF
+          Y(1) = s1
+          IF( koded==1 ) RETURN
+          Y(1) = s1*EXP(X)
+          RETURN
+        END IF
+      END IF
+    END IF
+    DO
+      coef = rthpi/SQRT(X)
+      IF( koded==2 ) EXIT
+      IF( X>elim ) THEN
+        koded = 2
+        iflag = 1
+      ELSE
+        coef = coef*EXP(-X)
+        EXIT
+      END IF
+    END DO
+    IF( ABS(dnu)==0.5_DP ) THEN
+      !
+      !     FNU=HALF ODD INTEGER CASE
+      !
+      s1 = coef
+      s2 = coef
+    ELSEIF( X>x2 ) THEN
+      !
+      !     ASYMPTOTIC EXPANSION FOR LARGE X, X>X2
+      !
+      !     IFLAG=0 MEANS NO UNDERFLOW OCCURRED
+      !     IFLAG=1 MEANS AN UNDERFLOW OCCURRED- COMPUTATION PROCEEDS WITH
+      !     KODED=2 AND A TEST FOR ON SCALE VALUES IS MADE DURING FORWARD
+      !     RECURSION
+      nn = 2
+      IF( inu==0 .AND. N==1 ) nn = 1
+      dnu2 = dnu + dnu
+      fmu = 0._DP
+      IF( ABS(dnu2)>=tol ) fmu = dnu2*dnu2
+      ex = X*8._DP
+      s2 = 0._DP
+      DO k = 1, nn
+        s1 = s2
+        s = 1._DP
+        ak = 0._DP
+        ck = 1._DP
+        sqk = 1._DP
+        dk = ex
+        DO j = 1, 30
+          ck = ck*(fmu-sqk)/dk
+          s = s + ck
+          dk = dk + ex
+          ak = ak + 8._DP
+          sqk = sqk + ak
+          IF( ABS(ck)<tol ) EXIT
+        END DO
+        s2 = s*coef
+        fmu = fmu + 8._DP*dnu + 4._DP
+      END DO
+      IF( nn<=1 ) THEN
+        s1 = s2
+        GOTO 50
+      END IF
+    ELSE
+      !
+      !     MILLER ALGORITHM FOR X1<X<=X2
+      !
+      etest = COS(pi*dnu)/(pi*X*tol)
+      fks = 1._DP
+      fhs = 0.25_DP
+      fk = 0._DP
+      ck = X + X + 2._DP
+      p1 = 0._DP
+      p2 = 1._DP
+      k = 0
+      DO
+        k = k + 1
+        fk = fk + 1._DP
+        ak = (fhs-dnu2)/(fks+fk)
+        bk = ck/(fk+1._DP)
+        pt = p2
+        p2 = bk*p2 - ak*p1
+        p1 = pt
+        a(k) = ak
+        b(k) = bk
+        ck = ck + 2._DP
+        fks = fks + fk + fk + 1._DP
+        fhs = fhs + fk + fk
+        IF( etest<=fk*p1 ) THEN
+          kk = k
+          s = 1._DP
           p1 = 0._DP
           p2 = 1._DP
-          k = 0
-          DO
-            k = k + 1
-            fk = fk + 1._DP
-            ak = (fhs-dnu2)/(fks+fk)
-            bk = ck/(fk+1._DP)
+          DO i = 1, k
             pt = p2
-            p2 = bk*p2 - ak*p1
+            p2 = (b(kk)*p2-p1)/a(kk)
             p1 = pt
-            a(k) = ak
-            b(k) = bk
-            ck = ck + 2._DP
-            fks = fks + fk + fk + 1._DP
-            fhs = fhs + fk + fk
-            IF( etest<=fk*p1 ) THEN
-              kk = k
-              s = 1._DP
-              p1 = 0._DP
-              p2 = 1._DP
-              DO i = 1, k
-                pt = p2
-                p2 = (b(kk)*p2-p1)/a(kk)
-                p1 = pt
-                s = s + p2
-                kk = kk - 1
-              END DO
-              s1 = coef*(p2/s)
-              IF( inu<=0 .AND. N<=1 ) GOTO 50
-              s2 = s1*(X+dnu+0.5_DP-p1/p2)/X
-              EXIT
-            END IF
+            s = s + p2
+            kk = kk - 1
           END DO
+          s1 = coef*(p2/s)
+          IF( inu<=0 .AND. N<=1 ) GOTO 50
+          s2 = s1*(X+dnu+0.5_DP-p1/p2)/X
+          EXIT
         END IF
-      END IF
-      !
-      !     FORWARD RECURSION ON THE THREE TERM RECURSION RELATION
-      !
-      20  ck = (dnu+dnu+2._DP)/X
-      IF( N==1 ) inu = inu - 1
-      IF( inu>0 ) THEN
-        DO i = 1, inu
-          st = s2
-          s2 = ck*s2 + s1
-          s1 = st
-          ck = ck + rx
-        END DO
-        IF( N==1 ) s1 = s2
-      ELSEIF( N<=1 ) THEN
-        s1 = s2
-      END IF
+      END DO
+    END IF
+    !
+    !     FORWARD RECURSION ON THE THREE TERM RECURSION RELATION
+    !
+    20  ck = (dnu+dnu+2._DP)/X
+    IF( N==1 ) inu = inu - 1
+    IF( inu>0 ) THEN
+      DO i = 1, inu
+        st = s2
+        s2 = ck*s2 + s1
+        s1 = st
+        ck = ck + rx
+      END DO
+      IF( N==1 ) s1 = s2
+    ELSEIF( N<=1 ) THEN
+      s1 = s2
     END IF
     50 CONTINUE
     IF( iflag==1 ) THEN
@@ -399,5 +391,6 @@ SUBROUTINE DBSKNU(X,Fnu,Kode,N,Y,Nz)
     Y(i) = ck*Y(i-1) + Y(i-2)
     ck = ck + rx
   END DO
+
   RETURN
 END SUBROUTINE DBSKNU

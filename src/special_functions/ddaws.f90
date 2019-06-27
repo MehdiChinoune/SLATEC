@@ -1,5 +1,5 @@
 !** DDAWS
-REAL(DP) FUNCTION DDAWS(X)
+REAL(DP) ELEMENTAL FUNCTION DDAWS(X)
   !> Compute Dawson's function.
   !***
   ! **Library:**   SLATEC (FNLIB)
@@ -47,10 +47,10 @@ REAL(DP) FUNCTION DDAWS(X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920618  Removed space from variable names.  (RWC, WRB)
-  USE service, ONLY : XERMSG, D1MACH
-  REAL(DP) :: X
+  USE service, ONLY : D1MACH
+  REAL(DP), INTENT(IN) :: X
   REAL(DP) :: y
-  INTEGER, SAVE :: ntdaw, ntdaw2, ntdawa
+  INTEGER, PARAMETER :: ntdaw = 13, ntdaw2 = 29, ntdawa = 27
   REAL(DP), PARAMETER :: eps = D1MACH(3), xsml = SQRT(1.5_SP*eps), xbig = SQRT(0.5_SP/eps), &
     xmax = EXP(MIN(-LOG(2._DP*D1MACH(1)),LOG(D1MACH(2)))-0.001_DP)
   REAL(DP), PARAMETER :: dawcs(21) = [ -.6351734375145949201065127736293E-2_DP, &
@@ -125,37 +125,26 @@ REAL(DP) FUNCTION DDAWS(X)
     +.2665413042788979165838319401566E-30_DP, -.3811653692354890336935691003712E-30_DP, &
     +.1230054721884951464371706872585E-30_DP, +.4622506399041493508805536929983E-31_DP, &
     -.6120087296881677722911435593001E-31_DP, +.1966024640193164686956230217896E-31_DP ]
-  LOGICAL, SAVE :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  DDAWS
-  IF( first ) THEN
-    ntdaw = INITDS(dawcs,21,0.1_DP*eps)
-    ntdaw2 = INITDS(daw2cs,45,0.1_DP*eps)
-    ntdawa = INITDS(dawacs,75,0.1_DP*eps)
-    first = .FALSE.
-  END IF
+  ! ntdaw = INITDS(dawcs,0.1_DP*eps)
+  ! ntdaw2 = INITDS(daw2cs,0.1_DP*eps)
+  ! ntdawa = INITDS(dawacs,0.1_DP*eps)
   !
   y = ABS(X)
-  IF( y<=1._DP ) THEN
-    !
+  IF( y<=xsml ) THEN
     DDAWS = X
-    IF( y<=xsml ) RETURN
-    !
-    DDAWS = X*(.75_DP+DCSEVL(2._DP*y*y-1._DP,dawcs,ntdaw))
-    RETURN
-    !
+  ELSEIF( y<=1._DP ) THEN
+    DDAWS = X*(.75_DP+DCSEVL(2._DP*y*y-1._DP,dawcs(1:ntdaw)))
   ELSEIF( y<=4._DP ) THEN
-    DDAWS = X*(.25_DP+DCSEVL(.125_DP*y*y-1._DP,daw2cs,ntdaw2))
-    RETURN
-    !
+    DDAWS = X*(.25_DP+DCSEVL(.125_DP*y*y-1._DP,daw2cs(1:ntdaw2)))
+  ELSEIF( y<=xbig ) THEN
+    DDAWS = (0.5_DP+DCSEVL(32._DP/y**2-1._DP,dawacs(1:ntdawa)))/X
+  ELSEIF( y<=xmax ) THEN
+    DDAWS = 0.5_DP/X
   ELSEIF( y>xmax ) THEN
-    !
-    CALL XERMSG('DDAWS','ABS(X) SO LARGE DAWS UNDERFLOWS',1,1)
+    ! CALL XERMSG('DDAWS','ABS(X) SO LARGE DAWS UNDERFLOWS',1,1)
     DDAWS = 0._DP
-    RETURN
   END IF
-  DDAWS = 0.5_DP/X
-  IF( y>xbig ) RETURN
-  !
-  DDAWS = (0.5_DP+DCSEVL(32._DP/y**2-1._DP,dawacs,ntdawa))/X
+
   RETURN
 END FUNCTION DDAWS

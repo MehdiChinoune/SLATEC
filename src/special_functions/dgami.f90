@@ -1,5 +1,5 @@
 !** DGAMI
-REAL(DP) FUNCTION DGAMI(A,X)
+REAL(DP) ELEMENTAL FUNCTION DGAMI(A,X)
   !> Evaluate the incomplete Gamma function.
   !***
   ! **Library:**   SLATEC (FNLIB)
@@ -34,18 +34,19 @@ REAL(DP) FUNCTION DGAMI(A,X)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-  USE service, ONLY : XERMSG
-  REAL(DP) :: A, X, factor
+  REAL(DP), INTENT(IN) :: A, X
+  REAL(DP) :: factor
   !* FIRST EXECUTABLE STATEMENT  DGAMI
-  IF( A<=0._DP ) CALL XERMSG('DGAMI','A MUST BE GT ZERO',1,2)
-  IF( X<0._DP ) CALL XERMSG('DGAMI','X MUST BE GE ZERO',2,2)
-  !
-  DGAMI = 0._DP
-  IF( X==0._DP ) RETURN
-  !
-  ! THE ONLY ERROR POSSIBLE IN THE EXPRESSION BELOW IS A FATAL OVERFLOW.
-  factor = EXP(LOG_GAMMA(A)+A*LOG(X))
-  !
-  DGAMI = factor*DGAMIT(A,X)
-  !
+  IF( A<=0._DP ) ERROR STOP 'DGAMI : A MUST BE GT ZERO'
+
+  IF( X<0._DP ) THEN
+    ERROR STOP 'DGAMI : X MUST BE GE ZERO'
+  ELSEIF( X==0._DP ) THEN
+    DGAMI = 0._DP
+  ELSE
+    ! THE ONLY ERROR POSSIBLE IN THE EXPRESSION BELOW IS A FATAL OVERFLOW.
+    factor = EXP(LOG_GAMMA(A)+A*LOG(X))
+    DGAMI = factor*DGAMIT(A,X)
+  END IF
+
 END FUNCTION DGAMI

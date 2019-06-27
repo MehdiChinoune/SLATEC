@@ -1,5 +1,5 @@
 !** YAIRY
-SUBROUTINE YAIRY(X,Rx,C,Bi,Dbi)
+PURE SUBROUTINE YAIRY(X,Rx,C,Bi,Dbi)
   !> Subsidiary to BESJ and BESY
   !***
   ! **Library:**   SLATEC
@@ -11,8 +11,7 @@ SUBROUTINE YAIRY(X,Rx,C,Bi,Dbi)
   !***
   ! **Description:**
   !
-  !                  YAIRY computes the Airy function BI(X)
-  !                   and its derivative DBI(X) for ASYJY
+  !    YAIRY computes the Airy function BI(X) and its derivative DBI(X) for ASYJY
   !
   !                                     INPUT
   !
@@ -36,7 +35,9 @@ SUBROUTINE YAIRY(X,Rx,C,Bi,Dbi)
   !   910408  Updated the AUTHOR section.  (WRB)
 
   !
-  REAL(SP) :: Bi, C, Dbi, Rx, X
+  REAL(SP), INTENT(IN) :: X
+  REAL(SP), INTENT(INOUT) :: C, Rx
+  REAL(SP), INTENT(OUT) :: Bi, Dbi
   INTEGER :: i, j
   REAL(SP) :: ax, cv, d1, d2, ex, e1, e2, f1, f2, rtrx, s1, s2, t, tc, temp1, temp2, tt
   INTEGER, PARAMETER :: n1 = 20, n2 = 19, n3 = 14

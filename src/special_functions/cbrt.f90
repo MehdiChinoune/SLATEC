@@ -1,5 +1,5 @@
 !** CBRT
-REAL(SP) FUNCTION CBRT(X)
+REAL(SP) ELEMENTAL FUNCTION CBRT(X)
   !> Compute the cube root.
   !***
   ! **Library:**   SLATEC (FNLIB)
@@ -27,7 +27,7 @@ REAL(SP) FUNCTION CBRT(X)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   USE service, ONLY : R1MACH
-  REAL(SP) :: X
+  REAL(SP), INTENT(IN) :: X
   INTEGER :: irem, iter, ixpnt, n
   REAL(SP) :: cbrtsq, y
   REAL(SP), PARAMETER :: cbrt2(5) = [ 0.62996052494743658_SP,  0.79370052598409974_SP, &
@@ -35,8 +35,10 @@ REAL(SP) FUNCTION CBRT(X)
   INTEGER, PARAMETER :: niter = INT( 1.443*LOG(-.106*LOG(0.1_SP*R1MACH(3))) ) + 1
   !* FIRST EXECUTABLE STATEMENT  CBRT
   !
-  CBRT = 0._SP
-  IF( X==0. ) RETURN
+  IF( X==0._SP ) THEN
+    CBRT = 0._SP
+    RETURN
+  END IF
   !
   CALL R9UPAK(ABS(X),y,n)
   ixpnt = n/3

@@ -1,9 +1,9 @@
 !** BESY
-SUBROUTINE BESY(X,Fnu,N,Y)
+PURE SUBROUTINE BESY(X,Fnu,N,Y)
   !> Implement forward recursion on the three term recursion
-  !            relation for a sequence of non-negative order Bessel
-  !            functions Y/SUB(FNU+I-1)/(X), I=1,...,N for REAL(SP), positive
-  !            X and non-negative orders FNU.
+  !  relation for a sequence of non-negative order Bessel
+  !  functions Y_{FNU+I-1}(X), I=1,...,N for REAL(SP), positive
+  !  X and non-negative orders FNU.
   !***
   ! **Library:**   SLATEC
   !***
@@ -20,7 +20,7 @@ SUBROUTINE BESY(X,Fnu,N,Y)
   !     Abstract
   !         BESY implements forward recursion on the three term
   !         recursion relation for a sequence of non-negative order Bessel
-  !         functions Y/sub(FNU+I-1)/(X), I=1,N for real X > 0.0E0 and
+  !         functions Y_{FNU+I-1}(X), I=1,N for real X > 0.0E0 and
   !         non-negative orders FNU.  If FNU < NULIM, orders FNU and
   !         FNU+1 are obtained from BESYNU which computes by a power
   !         series for X <= 2, the K Bessel function of an imaginary
@@ -42,7 +42,7 @@ SUBROUTINE BESY(X,Fnu,N,Y)
   !
   !         Output
   !           Y      - a vector whose first N components contain values
-  !                    for the sequence Y(I)=Y/sub(FNU+I-1)/(X), I=1,N.
+  !                    for the sequence Y(I)=Y_{FNU+I-1}(X), I=1,N.
   !
   !     Error Conditions
   !         Improper input arguments - a fatal error
@@ -68,13 +68,13 @@ SUBROUTINE BESY(X,Fnu,N,Y)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-  !   900326  Removed duplicate information from DESCRIPTION section.
-  !           (WRB)
+  !   900326  Removed duplicate information from DESCRIPTION section.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  USE service, ONLY : XERMSG, R1MACH, I1MACH
+  USE service, ONLY : R1MACH, I1MACH
   !
-  INTEGER :: N
-  REAL(SP) :: Fnu, X, Y(N)
+  INTEGER, INTENT(IN) :: N
+  REAL(SP), INTENT(IN) :: Fnu, X
+  REAL(SP), INTENT(OUT) :: Y(N)
   INTEGER :: i, iflw, j, nb, nd, nn, nud
   REAL(SP) :: azn, cn, dnu, elim, flgjy, fn, rann, s, s1, s2, tm, &
     trx, w(2), wk(7), w2n, xlim, xxn
@@ -84,43 +84,28 @@ SUBROUTINE BESY(X,Fnu,N,Y)
   elim = 2.303_SP*(nn*R1MACH(5)-3._SP)
   xlim = R1MACH(1)*1.E+3_SP
   IF( Fnu<0._SP ) THEN
-    !
-    !
-    !
-    CALL XERMSG('BESY','ORDER, FNU, LESS THAN ZERO',2,1)
-    RETURN
+    ERROR STOP 'BESY : ORDER, FNU < 0'
   ELSEIF( X<=0._SP ) THEN
-    CALL XERMSG('BESY','X LESS THAN OR EQUAL TO ZERO',2,1)
-    RETURN
+    ERROR STOP 'BESY : X <= 0'
   ELSEIF( X<xlim ) THEN
-    CALL XERMSG('BESY',&
-      'OVERFLOW, FNU OR N TOO LARGE OR X TOO SMALL',6,1)
-    RETURN
+    ERROR STOP 'BESY : OVERFLOW, FNU OR N TOO LARGE OR X TOO SMALL'
   ELSEIF( N<1 ) THEN
-    CALL XERMSG('BESY','N LESS THAN ONE',2,1)
-    RETURN
+    ERROR STOP 'BESY : N < 1'
   ELSE
-    !
     !     ND IS A DUMMY VARIABLE FOR N
-    !
     nd = N
     nud = INT(Fnu)
     dnu = Fnu - nud
     nn = MIN(2,nd)
     fn = Fnu + N - 1
     IF( fn<2._SP ) THEN
-      !
       !     OVERFLOW TEST
       IF( fn<=1._SP ) GOTO 200
       IF( -fn*(LOG(X)-0.693E0_SP)<=elim ) GOTO 200
-      CALL XERMSG('BESY',&
-        'OVERFLOW, FNU OR N TOO LARGE OR X TOO SMALL',6,1)
-      RETURN
+      ERROR STOP 'BESY : OVERFLOW, FNU OR N TOO LARGE OR X TOO SMALL'
     ELSE
-      !
       !     OVERFLOW TEST  (LEADING EXPONENTIAL OF ASYMPTOTIC EXPANSION)
       !     FOR THE LAST ORDER, FNU+N-1>=NULIM
-      !
       xxn = X/fn
       w2n = 1._SP - xxn*xxn
       IF( w2n>0._SP ) THEN
@@ -128,9 +113,7 @@ SUBROUTINE BESY(X,Fnu,N,Y)
         azn = LOG((1._SP+rann)/xxn) - rann
         cn = fn*azn
         IF( cn>elim ) THEN
-          CALL XERMSG('BESY',&
-            'OVERFLOW, FNU OR N TOO LARGE OR X TOO SMALL',6,1)
-          RETURN
+          ERROR STOP 'BESY : OVERFLOW, FNU OR N TOO LARGE OR X TOO SMALL'
         END IF
       END IF
       IF( nud<nulim(nn) ) THEN
@@ -169,9 +152,7 @@ SUBROUTINE BESY(X,Fnu,N,Y)
         flgjy = -1._SP
         CALL ASYJY(YAIRY,X,Fnu,flgjy,nn,Y,wk,iflw)
         IF( iflw/=0 ) THEN
-          CALL XERMSG('BESY',&
-            'OVERFLOW, FNU OR N TOO LARGE OR X TOO SMALL',6,1)
-          RETURN
+          ERROR STOP 'BESY : OVERFLOW, FNU OR N TOO LARGE OR X TOO SMALL'
         ELSE
           IF( nn==1 ) RETURN
           trx = 2._SP/X
@@ -210,5 +191,6 @@ SUBROUTINE BESY(X,Fnu,N,Y)
     CALL BESYNU(X,Fnu,nd,Y)
     RETURN
   END IF
+
   RETURN
 END SUBROUTINE BESY

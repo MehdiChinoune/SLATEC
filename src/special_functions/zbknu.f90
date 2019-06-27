@@ -24,7 +24,7 @@ SUBROUTINE ZBKNU(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol,Elim,Alim)
   !   930122  Added ZEXP, ZLOG and ZSQRT to EXTERNAL statement.  (RWC)
   USE service, ONLY : D1MACH, I1MACH
   !
-  INTEGER :: i, iflag, inu, k, kflag, kk, Kode, koded, N, Nz, idum, j, ic, inub, nw
+  INTEGER :: i, iflag, inu, k, kflag, kk, Kode, koded, N, Nz, j, ic, inub, nw
   REAL(DP) :: aa, ak, Alim, ascle, a1, a2, bb, bk, bry(3), caz, cbi, cbr, cchi, &
     cchr, cki, ckr, coefi, coefr, crscr, csclr, cshi, cshr, csi, csr, csrr(3), &
     cssr(3), czi, czr, dnu, dnu2, Elim, etest, fc, fhs, fi, fk, fks, fmui, fmur, &
@@ -74,7 +74,7 @@ SUBROUTINE ZBKNU(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol,Elim,Alim)
       !     SERIES FOR ABS(Z)<=R1
       !-----------------------------------------------------------------------
       fc = 1._DP
-      CALL ZLOG(rzr,rzi,smur,smui,idum)
+      CALL ZLOG(rzr,rzi,smur,smui)
       fmur = smur*dnu
       fmui = smui*dnu
       CALL ZSHCH(fmur,fmui,cshr,cshi,cchr,cchi)
@@ -88,7 +88,7 @@ SUBROUTINE ZBKNU(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol,Elim,Alim)
       !-----------------------------------------------------------------------
       !     GAM(1-Z)*GAM(1+Z)=PI*Z/SIN(PI*Z), T1=1/GAM(1-DNU), T2=1/GAM(1+DNU)
       !-----------------------------------------------------------------------
-      t2 = EXP(-DGAMLN(a2,idum))
+      t2 = EXP(-LOG_GAMMA(a2))
       t1 = 1._DP/(t2*fc)
       IF( ABS(dnu)>0.1_DP ) THEN
         g1 = (t1-t2)/(dnu+dnu)
@@ -403,7 +403,7 @@ SUBROUTINE ZBKNU(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol,Elim,Alim)
         alas = LOG(as)
         p2r = -zdr + alas
         IF( p2r>=(-Elim) ) THEN
-          CALL ZLOG(s2r,s2i,str,sti,idum)
+          CALL ZLOG(s2r,s2i,str,sti)
           p2r = -zdr + str
           p2i = -zdi + sti
           p2m = EXP(p2r)/Tol

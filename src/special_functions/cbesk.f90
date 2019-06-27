@@ -1,9 +1,8 @@
 !** CBESK
-SUBROUTINE CBESK(Z,Fnu,Kode,N,Cy,Nz,Ierr)
+PURE SUBROUTINE CBESK(Z,Fnu,Kode,N,Cy,Nz,Ierr)
   !> Compute a sequence of the Bessel functions K(a,z) for
-  !            complex argument z and real nonnegative orders a=b,b+1,
-  !            b+2,... where b>0.  A scaling option is available to
-  !            help avoid overflow.
+  !  complex argument z and real nonnegative orders a=b,b+1,
+  !  b+2,... where b>0.  A scaling option is available to help avoid overflow.
   !***
   ! **Library:**   SLATEC
   !***
@@ -158,20 +157,23 @@ SUBROUTINE CBESK(Z,Fnu,Kode,N,Cy,Nz,Ierr)
   !   920811  Prologue revised.  (DWL)
   USE service, ONLY : R1MACH, I1MACH
   !
-  INTEGER :: Ierr, k, Kode, k1, k2, mr, N, nn, nuf, nw, Nz
-  COMPLEX(SP) :: Cy(N), Z
-  REAL(SP) :: aa, alim, aln, arg, az, dig, elim, fn, Fnu, fnul, rl, &
+  INTEGER, INTENT(IN) :: Kode, N
+  INTEGER, INTENT(OUT) :: Ierr, Nz
+  REAL(SP), INTENT(IN) :: Fnu
+  COMPLEX(SP), INTENT(IN) :: Z
+  COMPLEX(SP), INTENT(OUT) :: Cy(N)
+  INTEGER :: k, k1, k2, mr, nn, nuf, nw
+  REAL(SP) :: aa, alim, aln, arg, az, dig, elim, fn, fnul, rl, &
     r1m5, tol, ufl, xx, yy, bb
   !* FIRST EXECUTABLE STATEMENT  CBESK
   Ierr = 0
   Nz = 0
   xx = REAL(Z)
   yy = AIMAG(Z)
-  IF( yy==0._SP .AND. xx==0._SP ) Ierr = 1
-  IF( Fnu<0._SP ) Ierr = 1
-  IF( Kode<1 .OR. Kode>2 ) Ierr = 1
-  IF( N<1 ) Ierr = 1
-  IF( Ierr/=0 ) RETURN
+  IF( Z==(0._SP,0._SP) .OR. Fnu<0._SP .OR. Kode<1 .OR. Kode>2 .OR. N<1 ) THEN
+    Ierr = 1
+    RETURN
+  END IF
   nn = N
   !-----------------------------------------------------------------------
   !     SET PARAMETERS RELATED TO MACHINE CONSTANTS.
@@ -282,4 +284,5 @@ SUBROUTINE CBESK(Z,Fnu,Kode,N,Cy,Nz,Ierr)
   RETURN
   300  Nz = 0
   Ierr = 4
+
 END SUBROUTINE CBESK

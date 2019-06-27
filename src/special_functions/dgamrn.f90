@@ -1,5 +1,5 @@
 !** DGAMRN
-REAL(DP) FUNCTION DGAMRN(X)
+REAL(DP) ELEMENTAL FUNCTION DGAMRN(X)
   !> Subsidiary to DBSKIN
   !***
   ! **Library:**   SLATEC
@@ -52,8 +52,9 @@ REAL(DP) FUNCTION DGAMRN(X)
   !   910722  Updated AUTHOR section.  (ALS)
   !   920520  Added REFERENCES section.  (WRB)
   USE service, ONLY : D1MACH, I1MACH
+  REAL(DP), INTENT(IN) :: X
   INTEGER :: i, i1m11, k, mx, nx
-  REAL(DP) :: fln, rln, s, tol, trm, X, xdmy, xinc, xm, xmin, xp, xsq
+  REAL(DP) :: fln, rln, s, tol, trm, xdmy, xinc, xm, xmin, xp, xsq
   !
   REAL(DP), PARAMETER :: gr(12) = [ 1.00000000000000000E+00_DP, -1.56250000000000000E-02_DP, &
     2.56347656250000000E-03_DP, -1.27983093261718750E-03_DP, 1.34351104497909546E-03_DP, &
@@ -101,5 +102,6 @@ REAL(DP) FUNCTION DGAMRN(X)
     RETURN
   END IF
   DGAMRN = s
+
   RETURN
 END FUNCTION DGAMRN

@@ -1,9 +1,8 @@
 !** CBESI
-SUBROUTINE CBESI(Z,Fnu,Kode,N,Cy,Nz,Ierr)
+PURE SUBROUTINE CBESI(Z,Fnu,Kode,N,Cy,Nz,Ierr)
   !> Compute a sequence of the Bessel functions I(a,z) for
-  !            complex argument z and real nonnegative orders a=b,b+1,
-  !            b+2,... where b>0.  A scaling option is available to
-  !            help avoid overflow.
+  !  complex argument z and real nonnegative orders a=b,b+1,
+  !  b+2,... where b>0.  A scaling option is available to help avoid overflow.
   !***
   ! **Library:**   SLATEC
   !***
@@ -158,9 +157,14 @@ SUBROUTINE CBESI(Z,Fnu,Kode,N,Cy,Nz,Ierr)
   !   920128  Category corrected.  (WRB)
   !   920811  Prologue revised.  (DWL)
   USE service, ONLY : R1MACH, I1MACH
-  INTEGER :: i, Ierr, inu, k, Kode, k1, k2, N, nn, Nz
-  COMPLEX(SP) :: csgn, Cy(N), Z, zn
-  REAL(SP) :: aa, alim, arg, dig, elim, Fnu, fnul, rl, r1m5, s1, &
+  INTEGER, INTENT(IN) :: Kode, N
+  INTEGER, INTENT(OUT) :: Ierr, Nz
+  REAL(SP), INTENT(IN) :: Fnu
+  COMPLEX(SP), INTENT(IN) :: Z
+  COMPLEX(SP), INTENT(OUT) :: Cy(N)
+  INTEGER :: i, inu, k, k1, k2, nn
+  COMPLEX(SP) :: csgn, zn
+  REAL(SP) :: aa, alim, arg, dig, elim, fnul, rl, r1m5, s1, &
     s2, tol, xx, yy, az, fn, bb, ascle, rtol, atol
   REAL(SP), PARAMETER :: pi = 3.14159265358979324_SP
   COMPLEX(SP), PARAMETER :: cone = (1._SP,0._SP)
@@ -168,10 +172,10 @@ SUBROUTINE CBESI(Z,Fnu,Kode,N,Cy,Nz,Ierr)
   !* FIRST EXECUTABLE STATEMENT  CBESI
   Ierr = 0
   Nz = 0
-  IF( Fnu<0._SP ) Ierr = 1
-  IF( Kode<1 .OR. Kode>2 ) Ierr = 1
-  IF( N<1 ) Ierr = 1
-  IF( Ierr/=0 ) RETURN
+  IF( Fnu<0._SP .OR. Kode<1 .OR. Kode>2 .OR. N<1 ) THEN
+    Ierr = 1
+    RETURN
+  END IF
   xx = REAL(Z)
   yy = AIMAG(Z)
   !-----------------------------------------------------------------------
@@ -265,4 +269,5 @@ SUBROUTINE CBESI(Z,Fnu,Kode,N,Cy,Nz,Ierr)
   END IF
   Nz = 0
   Ierr = 4
+
 END SUBROUTINE CBESI

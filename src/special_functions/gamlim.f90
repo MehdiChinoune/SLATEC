@@ -1,7 +1,6 @@
 !** GAMLIM
-SUBROUTINE GAMLIM(Xmin,Xmax)
-  !> Compute the minimum and maximum bounds for the argument in
-  !            the Gamma function.
+ELEMENTAL SUBROUTINE GAMLIM(Xmin,Xmax)
+  !> Compute the minimum and maximum bounds for the argument the Gamma function.
   !***
   ! **Library:**   SLATEC (FNLIB)
   !***
@@ -36,7 +35,7 @@ SUBROUTINE GAMLIM(Xmin,Xmax)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-  USE service, ONLY : XERMSG, R1MACH
+  USE service, ONLY : R1MACH
   REAL(SP), INTENT(OUT) :: Xmax, Xmin
   INTEGER :: i
   REAL(SP) :: xln, xold
@@ -49,7 +48,7 @@ SUBROUTINE GAMLIM(Xmin,Xmax)
     Xmin = Xmin - Xmin*((Xmin+0.5_SP)*xln-Xmin-0.2258_SP+alnsml)/(Xmin*xln+0.5_SP)
     IF( ABS(Xmin-xold)<0.005_SP ) GOTO 100
   END DO
-  CALL XERMSG('GAMLIM','UNABLE TO FIND XMIN',1,2)
+  ERROR STOP 'GAMLIM : UNABLE TO FIND XMIN'
   !
   100  Xmin = -Xmin + 0.01_SP
   !
@@ -60,7 +59,7 @@ SUBROUTINE GAMLIM(Xmin,Xmax)
     Xmax = Xmax - Xmax*((Xmax-0.5_SP)*xln-Xmax+0.9189_SP-alnbig)/(Xmax*xln-0.5_SP)
     IF( ABS(Xmax-xold)<0.005 ) GOTO 200
   END DO
-  CALL XERMSG('GAMLIM','UNABLE TO FIND XMAX',2,2)
+  ERROR STOP 'GAMLIM : UNABLE TO FIND XMAX'
   !
   200  Xmax = Xmax - 0.01_SP
   Xmin = MAX(Xmin,-Xmax+1._SP)

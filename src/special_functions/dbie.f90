@@ -1,8 +1,7 @@
 !** DBIE
-REAL(DP) FUNCTION DBIE(X)
+REAL(DP) ELEMENTAL FUNCTION DBIE(X)
   !> Calculate the Bairy function for a negative argument and an
-  !            exponentially scaled Bairy function for a non-negative
-  !            argument.
+  !  exponentially scaled Bairy function for a non-negative argument.
   !***
   ! **Library:**   SLATEC (FNLIB)
   !***
@@ -10,8 +9,7 @@ REAL(DP) FUNCTION DBIE(X)
   !***
   ! **Type:**      DOUBLE PRECISION (BIE-S, DBIE-D)
   !***
-  ! **Keywords:**  BAIRY FUNCTION, EXPONENTIALLY SCALED, FNLIB,
-  !             SPECIAL FUNCTIONS
+  ! **Keywords:**  BAIRY FUNCTION, EXPONENTIALLY SCALED, FNLIB, SPECIAL FUNCTIONS
   !***
   ! **Author:**  Fullerton, W., (LANL)
   !***
@@ -78,9 +76,9 @@ REAL(DP) FUNCTION DBIE(X)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   USE service, ONLY : D1MACH
-  REAL(DP) :: X
+  REAL(DP), INTENT(IN) :: X
   REAL(DP) :: sqrtx, theta, xm, z
-  INTEGER, SAVE :: nbif, nbig, nbif2, nbig2, nbip1, nbip2
+  INTEGER, PARAMETER :: nbif = 8, nbig = 8, nbif2 = 10, nbig2 = 9, nbip1 = 24, nbip2 = 32
   REAL(DP), PARAMETER :: eta = 0.1_DP*D1MACH(3), x3sml = eta**0.3333_DP, &
     x32sml = 1.3104_DP*x3sml**2, xbig = D1MACH(2)**0.6666_DP
   REAL(DP), PARAMETER :: bifcs(13) = [ -.16730216471986649483537423928176E-1_DP, &
@@ -184,47 +182,36 @@ REAL(DP) FUNCTION DBIE(X)
     -.40391653875428313641045327529856E-32_DP ]
   REAL(DP), PARAMETER :: atr = 8.75069057084843450880771988210148_DP
   REAL(DP), PARAMETER :: btr = -2.09383632135605431360096498526268_DP
-  LOGICAL, SAVE :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  DBIE
-  IF( first ) THEN
-    nbif = INITDS(bifcs,13,eta)
-    nbig = INITDS(bigcs,13,eta)
-    nbif2 = INITDS(bif2cs,15,eta)
-    nbig2 = INITDS(big2cs,15,eta)
-    nbip1 = INITDS(bip1cs,47,eta)
-    nbip2 = INITDS(bip2cs,88,eta)
-    first = .FALSE.
-  END IF
+  ! nbif = INITDS(bifcs,eta)
+  ! nbig = INITDS(bigcs,eta)
+  ! nbif2 = INITDS(bif2cs,eta)
+  ! nbig2 = INITDS(big2cs,eta)
+  ! nbip1 = INITDS(bip1cs,eta)
+  ! nbip2 = INITDS(bip2cs,eta)
   !
   IF( X<(-1._DP) ) THEN
     CALL D9AIMP(X,xm,theta)
     DBIE = xm*SIN(theta)
-    RETURN
-    !
   ELSEIF( X<=1._DP ) THEN
     z = 0._DP
     IF( ABS(X)>x3sml ) z = X**3
-    DBIE = 0.625_DP + DCSEVL(z,bifcs,nbif)&
-      + X*(0.4375_DP+DCSEVL(z,bigcs,nbig))
+    DBIE = 0.625_DP + DCSEVL(z,bifcs(1:nbif)) + X*(0.4375_DP+DCSEVL(z,bigcs(1:nbig)))
     IF( X>x32sml ) DBIE = DBIE*EXP(-2._DP*X*SQRT(X)/3._DP)
-    RETURN
-    !
   ELSEIF( X<=2._DP ) THEN
     z = (2._DP*X**3-9._DP)/7._DP
     DBIE = EXP(-2._DP*X*SQRT(X)/3._DP)&
-      *(1.125_DP+DCSEVL(z,bif2cs,nbif2)+X*(0.625_DP+DCSEVL(z,big2cs,nbig2)))
-    RETURN
-    !
-  ELSEIF( X>4._DP ) THEN
-    !
+      *(1.125_DP+DCSEVL(z,bif2cs(1:nbif2))+X*(0.625_DP+DCSEVL(z,big2cs(1:nbig2))))
+  ELSEIF( X<=4._DP ) THEN
+    sqrtx = SQRT(X)
+    z = atr/(X*sqrtx) + btr
+    DBIE = (0.625_DP+DCSEVL(z,bip1cs(1:nbip1)))/SQRT(sqrtx)
+  ELSE
     sqrtx = SQRT(X)
     z = -1._DP
     IF( X<xbig ) z = 16._DP/(X*sqrtx) - 1._DP
-    DBIE = (0.625_DP+DCSEVL(z,bip2cs,nbip2))/SQRT(sqrtx)
-    RETURN
+    DBIE = (0.625_DP+DCSEVL(z,bip2cs(1:nbip2)))/SQRT(sqrtx)
   END IF
-  sqrtx = SQRT(X)
-  z = atr/(X*sqrtx) + btr
-  DBIE = (0.625_DP+DCSEVL(z,bip1cs,nbip1))/SQRT(sqrtx)
+
   RETURN
 END FUNCTION DBIE

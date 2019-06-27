@@ -1,5 +1,5 @@
 !** FAC
-REAL(SP) FUNCTION FAC(N)
+REAL(SP) ELEMENTAL FUNCTION FAC(N)
   !> Compute the factorial function.
   !***
   ! **Library:**   SLATEC (FNLIB)
@@ -28,9 +28,9 @@ REAL(SP) FUNCTION FAC(N)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-  USE service, ONLY : XERMSG
-  REAL(SP) :: x, xmax, xmin
-  INTEGER :: N
+  INTEGER, INTENT(IN) :: N
+  REAL(SP) :: x
+  INTEGER, PARAMETER :: nmax = 34
   REAL(SP), PARAMETER :: facn(26) = [ 1._SP, 1._SP, 2._SP, 6._SP, 24._SP, 120._SP, &
     720._SP, 5040._SP, 40320._SP, 362880._SP, 3628800._SP, 39916800._SP, &
     479001600._SP, 6227020800._SP, 87178291200._SP, 1307674368000._SP, &
@@ -39,22 +39,18 @@ REAL(SP) FUNCTION FAC(N)
     .11240007277776077E22_SP, .25852016738884977E23_SP, .62044840173323944E24_SP, &
     .15511210043330986E26_SP ]
   REAL(SP), PARAMETER :: sq2pil = 0.91893853320467274_SP
-  INTEGER, SAVE :: nmax = 0
   !* FIRST EXECUTABLE STATEMENT  FAC
-  IF( nmax==0 ) THEN
-    CALL GAMLIM(xmin,xmax)
-    nmax = INT( xmax ) - 1
+  !
+  IF( N<0 ) THEN
+    ERROR STOP 'FAC : FACTORIAL OF NEGATIVE INTEGER UNDEFINED'
+  ELSEIF( N<=25 ) THEN
+    FAC = facn(N+1)
+  ELSEIF( N<=nmax ) THEN
+    x = N + 1
+    FAC = EXP((x-0.5_SP)*LOG(x)-x+sq2pil+R9LGMC(x))
+  ELSE
+    ERROR STOP 'FAC : N SO BIG FACTORIAL(N) OVERFLOWS'
   END IF
-  !
-  IF( N<0 ) CALL XERMSG('FAC',&
-    'FACTORIAL OF NEGATIVE INTEGER UNDEFINED',1,2)
-  !
-  IF( N<=25 ) FAC = facn(N+1)
-  IF( N<=25 ) RETURN
-  !
-  IF( N>nmax ) CALL XERMSG('FAC','N SO BIG FACTORIAL(N) OVERFLOWS',2,2)
-  !
-  x = N + 1
-  FAC = EXP((x-0.5_SP)*LOG(x)-x+sq2pil+R9LGMC(x))
-  !
+
+  RETURN
 END FUNCTION FAC

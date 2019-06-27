@@ -1,5 +1,5 @@
 !** CCBRT
-COMPLEX(SP) FUNCTION CCBRT(Z)
+COMPLEX(SP) ELEMENTAL FUNCTION CCBRT(Z)
   !> Compute the cube root.
   !***
   ! **Library:**   SLATEC (FNLIB)
@@ -28,8 +28,8 @@ COMPLEX(SP) FUNCTION CCBRT(Z)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
+  COMPLEX(SP), INTENT(IN) :: Z
   REAL(SP) :: r, theta
-  COMPLEX(SP) :: Z
   !* FIRST EXECUTABLE STATEMENT  CCBRT
   theta = CARG(Z)/3._SP
   r = CBRT(ABS(Z))

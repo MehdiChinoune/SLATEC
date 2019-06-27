@@ -1,5 +1,5 @@
 !** DSPENC
-REAL(DP) FUNCTION DSPENC(X)
+REAL(DP) ELEMENTAL FUNCTION DSPENC(X)
   !> Compute a form of Spence's integral due to K. Mitchell.
   !***
   ! **Library:**   SLATEC (FNLIB)
@@ -50,9 +50,9 @@ REAL(DP) FUNCTION DSPENC(X)
   !   891115  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   USE service, ONLY : D1MACH
-  REAL(DP) :: X
+  REAL(DP), INTENT(IN) :: X
   REAL(DP) :: aln
-  INTEGER, SAVE :: nspenc
+  INTEGER, PARAMETER :: nspenc = 20
   REAL(DP), PARAMETER :: xbig = 1._DP/D1MACH(3)
   REAL(DP), PARAMETER :: spencs(38) = [ +.1527365598892405872946684910028E+0_DP, &
     +.8169658058051014403501838185271E-1_DP, +.5814157140778730872977350641182E-2_DP, &
@@ -75,57 +75,37 @@ REAL(DP) FUNCTION DSPENC(X)
     +.1797431304999891457365333333333E-29_DP, +.2917505845976095173290666666666E-30_DP, &
     +.4742646808928671061333333333333E-31_DP ]
   REAL(DP), PARAMETER :: pi26 = +1.644934066848226436472415166646025189219_DP
-  LOGICAL, SAVE :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  DSPENC
-  IF( first ) THEN
-    nspenc = INITDS(spencs,38,0.1_SP*D1MACH(3))
-    first = .FALSE.
-  END IF
+  ! nspenc = INITDS(spencs,0.1_SP*D1MACH(3))
   !
   IF( X>2._DP ) THEN
-    !
     ! X > 2.0
-    !
     DSPENC = 2._DP*pi26 - 0.5_DP*LOG(X)**2
-    IF( X<xbig ) DSPENC = DSPENC - (1._DP+DCSEVL(4._DP/X-1._DP,spencs,nspenc))/X
+    IF( X<xbig ) DSPENC = DSPENC - (1._DP+DCSEVL(4._DP/X-1._DP,spencs(1:nspenc)))/X
+  ELSEIF( X>1._DP ) THEN
+    ! 1.0 < X <= 2.0
+    DSPENC = pi26 - 0.5_DP*LOG(X)*LOG((X-1._DP)**2/X) + (X-1._DP)&
+      *(1._DP+DCSEVL(4._DP*(X-1._DP)/X-1._DP,spencs(1:nspenc)))/X
+  ELSEIF( X>0.5_DP ) THEN
+    ! 0.5 < X <= 1.0
+    DSPENC = pi26
+    IF( X/=1._DP ) DSPENC = pi26 - LOG(X)*LOG(1._DP-X) - (1._DP-X)&
+      *(1._DP+DCSEVL(4._DP*(1._DP-X)-1._DP,spencs(1:nspenc)))
+  ELSEIF( X>=0._DP ) THEN
+    ! 0.0 <= X <= 0.5
+    DSPENC = X*(1._DP+DCSEVL(4._DP*X-1._DP,spencs(1:nspenc)))
     RETURN
-  ELSEIF( X<=1._DP ) THEN
-    IF( X>0.5_DP ) THEN
-      !
-      ! 0.5 < X <= 1.0
-      !
-      DSPENC = pi26
-      IF( X/=1._DP ) DSPENC = pi26 - LOG(X)*LOG(1._DP-X) - (1._DP-X)&
-        *(1._DP+DCSEVL(4._DP*(1._DP-X)-1._DP,spencs,nspenc))
-      RETURN
-    ELSEIF( X>=0._DP ) THEN
-      !
-      ! 0.0 <= X <= 0.5
-      !
-      DSPENC = X*(1._DP+DCSEVL(4._DP*X-1._DP,spencs,nspenc))
-      RETURN
-    ELSEIF( X>(-1._DP) ) THEN
-      !
-      ! -1.0 < X < 0.0
-      !
-      DSPENC = -0.5_DP*LOG(1._DP-X)**2 &
-        - X*(1._DP+DCSEVL(4._DP*X/(X-1._DP)-1._DP,spencs,nspenc))/(X-1._DP)
-      RETURN
-    ELSE
-      !
-      ! HERE IF X <= -1.0
-      !
-      aln = LOG(1._DP-X)
-      DSPENC = -pi26 - 0.5_DP*aln*(2._DP*LOG(-X)-aln)
-      IF( X>(-xbig) ) DSPENC = DSPENC + &
-        (1._DP+DCSEVL(4._DP/(1._DP-X)-1._DP,spencs,nspenc))/(1._DP-X)
-      RETURN
-    END IF
+  ELSEIF( X>(-1._DP) ) THEN
+    ! -1.0 < X < 0.0
+    DSPENC = -0.5_DP*LOG(1._DP-X)**2 &
+      - X*(1._DP+DCSEVL(4._DP*X/(X-1._DP)-1._DP,spencs(1:nspenc)))/(X-1._DP)
+  ELSE
+    ! HERE IF X <= -1.0
+    aln = LOG(1._DP-X)
+    DSPENC = -pi26 - 0.5_DP*aln*(2._DP*LOG(-X)-aln)
+    IF( X>(-xbig) ) DSPENC = DSPENC + &
+      (1._DP+DCSEVL(4._DP/(1._DP-X)-1._DP,spencs(1:nspenc)))/(1._DP-X)
   END IF
-  !
-  ! 1.0 < X <= 2.0
-  !
-  DSPENC = pi26 - 0.5_DP*LOG(X)*LOG((X-1._DP)**2/X) + (X-1._DP)&
-    *(1._DP+DCSEVL(4._DP*(X-1._DP)/X-1._DP,spencs,nspenc))/X
+
   RETURN
 END FUNCTION DSPENC
