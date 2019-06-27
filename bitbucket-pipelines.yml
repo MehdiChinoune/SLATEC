@@ -1,0 +1,43 @@
+image: rhub/debian-gcc
+
+pipelines:
+  default:
+    - parallel:
+      - step:
+          name: Debug
+          script:
+           - apt update
+           - apt install -y cmake libopenblas-dev
+           - mkdir build && cd build
+           - cmake .. -DCMAKE_Fortran_COMPILER=gfortran -DCMAKE_BUILD_TYPE=Debug
+           - make -j
+           - make test
+      - step:
+          name: Release
+          script:
+           - apt update
+           - apt install -y cmake libopenblas-dev
+           - mkdir build && cd build
+           - cmake .. -DCMAKE_Fortran_COMPILER=gfortran -DCMAKE_BUILD_TYPE=Release
+           - make -j
+           - make test
+      - step:
+          name: gcc-trunk Debug
+          image: zbeekman/nightly-gcc-trunk-docker-image
+          script:
+           - apt update
+           - apt install -y cmake libopenblas-dev
+           - mkdir build && cd build
+           - cmake .. -DCMAKE_Fortran_COMPILER=gfortran -DCMAKE_BUILD_TYPE=Debug
+           - make -j
+           - make test
+      - step:
+          name: gcc-trunk Release
+          image: zbeekman/nightly-gcc-trunk-docker-image
+          script:
+           - apt update
+           - apt install -y cmake libopenblas-dev
+           - mkdir build && cd build
+           - cmake .. -DCMAKE_Fortran_COMPILER=gfortran -DCMAKE_BUILD_TYPE=Release
+           - make -j
+           - make test
