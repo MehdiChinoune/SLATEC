@@ -5,12 +5,15 @@ trigger:
 pool:
   vmImage: 'Ubuntu-16.04'
 
-container: alpine:edge
+container: 
+  image: debian:testing
+  options: "--name ci-container -v /usr/bin/docker:/tmp/docker:ro"
 
 steps:
 - script: |
-    apk update
-    apk add openblas-dev cmake
+    /tmp/docker exec -t -u 0 ci-container \
+      sh -c "apt-get update && DEBIAN_FRONTEND=noninteractive apt-get -o Dpkg::Options::="--force-confold" -y install sudo"
+    sudo apt install -y gfortran libopenblas-dev cmake
   displayName: 'Installing required packages'
 - script: |
     mkdir build && cd build
